@@ -64,7 +64,7 @@ func (c JDCloudClient) Send(request RequestInterface, serviceName string) ([]byt
 		return err
 	}
 
-	return c.doSend(method, reqUrl, body, request.GetHeader(), c.Config.Timeout, sign)
+	return c.doSend(method, reqUrl, body, request.GetHeaders(), c.Config.Timeout, sign)
 }
 
 func (c JDCloudClient) doSend(method, url, data string, header map[string]string, timeout time.Duration, sign SignFunc) ([]byte, error) {
