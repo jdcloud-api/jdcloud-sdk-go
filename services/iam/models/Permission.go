@@ -17,11 +17,29 @@
 package models
 
 
-type Bucket struct {
+type Permission struct {
 
-    /*   */
+    /* 权限id (Optional) */
+    Id int `json:"id"`
+
+    /* 主账号pin (Optional) */
+    Account string `json:"account"`
+
+    /* 权限名称 (Optional) */
     Name string `json:"name"`
 
-    /*  (Optional) */
-    CreationDate string `json:"creationDate"`
+    /* 描述 (Optional) */
+    Description string `json:"description"`
+
+    /* 权限类型 (Optional) */
+    PermissionType string `json:"permissionType"`
+
+    /* 权限版本号 (Optional) */
+    Version string `json:"version"`
+
+    /* 权限内容 (Optional) */
+    Content string `json:"content"`
+
+    /* 权限详细信息 (Optional) */
+    PermissionDetailList []PermissionDetail `json:"permissionDetailList"`
 }

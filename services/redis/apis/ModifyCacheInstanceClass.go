@@ -31,14 +31,14 @@ type ModifyCacheInstanceClassRequest struct {
     /* 缓存Redis实例ID  */
     CacheInstanceId string `json:"cacheInstanceId"`
 
-    /* 变更后的缓存Redis实例规格代码，参考https://www.jdcloud.com/help/detail/2414/isCatalog/1  */
+    /* 变更后的缓存Redis<a href="https://www.jdcloud.com/help/detail/411/isCatalog/1">实例规格代码</a>  */
     CacheInstanceClass string `json:"cacheInstanceClass"`
 }
 
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2 
  * param cacheInstanceId: 缓存Redis实例ID 
- * param cacheInstanceClass: 变更后的缓存Redis实例规格代码，参考https://www.jdcloud.com/help/detail/2414/isCatalog/1 
+ * param cacheInstanceClass: 变更后的缓存Redis<a href="https://www.jdcloud.com/help/detail/411/isCatalog/1">实例规格代码</a> 
  */
 func NewModifyCacheInstanceClassRequest(
     regionId string,

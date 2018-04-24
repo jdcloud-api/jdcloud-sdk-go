@@ -19,70 +19,72 @@ package apis
 import (
     . "github.com/jdcloud-api/jdcloud-sdk-go/core"
     "reflect"
-    nc "github.com/jdcloud-api/jdcloud-sdk-go/services/nc/models"
+    iam "github.com/jdcloud-api/jdcloud-sdk-go/services/iam/models"
 )
 
-type CreateSecretRequest struct {
+type DescribeSubUserPermissionsRequest struct {
 
     JDCloudRequest
 
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 机密数据名称，不能重复  */
-    Name string `json:"name"`
+    /* 子用户用户名  */
+    SubUser string `json:"subUser"`
 
-    /* 私密数据的类型，目前仅支持如下类型：docker-registry：用来和docker registry认证的类型  */
-    SecretType string `json:"secretType"`
+    /* 页码  */
+    PageNumber int `json:"pageNumber"`
 
-    /* 机密的数据 (Optional) */
-    Data *nc.DockerRegistryData `json:"data"`
+    /* 每页显示数目  */
+    PageSize int `json:"pageSize"`
 }
 
 /*
  * param regionId: Region ID 
- * param name: 机密数据名称，不能重复 
- * param secretType: 私密数据的类型，目前仅支持如下类型：docker-registry：用来和docker registry认证的类型 
- * param data: 机密的数据 (Optional)
+ * param subUser: 子用户用户名 
+ * param pageNumber: 页码 
+ * param pageSize: 每页显示数目 
  */
-func NewCreateSecretRequest(
+func NewDescribeSubUserPermissionsRequest(
     regionId string,
-    name string,
-    secretType string,
-) *CreateSecretRequest {
+    subUser string,
+    pageNumber int,
+    pageSize int,
+) *DescribeSubUserPermissionsRequest {
 
-	return &CreateSecretRequest{
+	return &DescribeSubUserPermissionsRequest{
         JDCloudRequest: JDCloudRequest{
-			URL:     "/regions/{regionId}/secrets",
-			Method:  "POST",
+			URL:     "/regions/{regionId}/subUser/{subUser}/permisssions",
+			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        Name: name,
-        SecretType: secretType,
+        SubUser: subUser,
+        PageNumber: pageNumber,
+        PageSize: pageSize,
 	}
 }
 
-func (r *CreateSecretRequest) SetRegionId(regionId string) {
+func (r *DescribeSubUserPermissionsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-func (r *CreateSecretRequest) SetName(name string) {
-    r.Name = name
+func (r *DescribeSubUserPermissionsRequest) SetSubUser(subUser string) {
+    r.SubUser = subUser
 }
 
-func (r *CreateSecretRequest) SetSecretType(secretType string) {
-    r.SecretType = secretType
+func (r *DescribeSubUserPermissionsRequest) SetPageNumber(pageNumber int) {
+    r.PageNumber = pageNumber
 }
 
-func (r *CreateSecretRequest) SetData(data *nc.DockerRegistryData) {
-    r.Data = data
+func (r *DescribeSubUserPermissionsRequest) SetPageSize(pageSize int) {
+    r.PageSize = pageSize
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r CreateSecretRequest) GetRegionId() string {
+func (r DescribeSubUserPermissionsRequest) GetRegionId() string {
     fieldName := "RegionId"
     reqType := reflect.TypeOf(r)
     value := reflect.ValueOf(r)
@@ -94,12 +96,13 @@ func (r CreateSecretRequest) GetRegionId() string {
     return ""
 }
 
-type CreateSecretResponse struct {
+type DescribeSubUserPermissionsResponse struct {
     RequestID string `json:"requestId"`
     Error ErrorResponse `json:"error"`
-    Result CreateSecretResult `json:"result"`
+    Result DescribeSubUserPermissionsResult `json:"result"`
 }
 
-type CreateSecretResult struct {
-    SecretName string `json:"secretName"`
+type DescribeSubUserPermissionsResult struct {
+    Total int `json:"total"`
+    Permissions []iam.Permission `json:"permissions"`
 }

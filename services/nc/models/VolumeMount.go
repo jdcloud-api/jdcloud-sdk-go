@@ -22,7 +22,7 @@ type VolumeMount struct {
     /* 环境变量名称 (Optional) */
     Category string `json:"category"`
 
-    /* 自动删除，删除主机时自动删除此volume (Optional) */
+    /* 自动删除，删除容器时自动删除此volume (Optional) */
     AutoDelete bool `json:"autoDelete"`
 
     /* 容器内的挂载目录 (Optional) */

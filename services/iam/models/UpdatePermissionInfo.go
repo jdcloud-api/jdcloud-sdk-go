@@ -17,11 +17,14 @@
 package models
 
 
-type Bucket struct {
+type UpdatePermissionInfo struct {
 
-    /*   */
+    /* 权限名称，1~32位数字、字符、中文、中划线、下划线  */
     Name string `json:"name"`
 
-    /*  (Optional) */
-    CreationDate string `json:"creationDate"`
+    /* 描述，0~256个字符 (Optional) */
+    Description *string `json:"description"`
+
+    /* 权限详细信息  */
+    Content []PermissionDetail `json:"content"`
 }

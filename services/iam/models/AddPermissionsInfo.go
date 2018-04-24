@@ -17,11 +17,8 @@
 package models
 
 
-type Bucket struct {
+type AddPermissionsInfo struct {
 
-    /*   */
-    Name string `json:"name"`
-
-    /*  (Optional) */
-    CreationDate string `json:"creationDate"`
+    /* 权限id集合  */
+    PermissionIds []int `json:"permissionIds"`
 }

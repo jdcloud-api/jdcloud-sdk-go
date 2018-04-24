@@ -40,7 +40,7 @@ type DescribeContainersRequest struct {
 privateIpAddress - 主网卡IP地址，模糊匹配，支持单个
 az - 可用区，精确匹配，支持多个
 vpcId - 私有网络ID，精确匹配，支持多个
-status - 云容器状态，精确匹配，支持多个
+status - 容器状态，精确匹配，支持多个
 name - 实例名称，模糊匹配，支持单个
 subnetId - 镜像ID，模糊匹配，支持单个
  (Optional) */
@@ -55,7 +55,7 @@ subnetId - 镜像ID，模糊匹配，支持单个
 privateIpAddress - 主网卡IP地址，模糊匹配，支持单个
 az - 可用区，精确匹配，支持多个
 vpcId - 私有网络ID，精确匹配，支持多个
-status - 云容器状态，精确匹配，支持多个
+status - 容器状态，精确匹配，支持多个
 name - 实例名称，模糊匹配，支持单个
 subnetId - 镜像ID，模糊匹配，支持单个
  (Optional)

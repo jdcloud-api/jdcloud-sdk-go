@@ -59,7 +59,7 @@ type UpdateAlarmRequest struct {
     ServiceCode string `json:"serviceCode"`
 
     /* 阈值  */
-    Threshold int `json:"threshold"`
+    Threshold float64 `json:"threshold"`
 
     /* 连续多少次后报警，可选值:1,2,3,5  */
     Times int `json:"times"`
@@ -88,7 +88,7 @@ func NewUpdateAlarmRequest(
     operation string,
     period int,
     serviceCode string,
-    threshold int,
+    threshold float64,
     times int,
 ) *UpdateAlarmRequest {
 
@@ -155,7 +155,7 @@ func (r *UpdateAlarmRequest) SetServiceCode(serviceCode string) {
     r.ServiceCode = serviceCode
 }
 
-func (r *UpdateAlarmRequest) SetThreshold(threshold int) {
+func (r *UpdateAlarmRequest) SetThreshold(threshold float64) {
     r.Threshold = threshold
 }
 

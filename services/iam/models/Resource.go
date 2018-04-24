@@ -17,11 +17,11 @@
 package models
 
 
-type Bucket struct {
+type Resource struct {
 
-    /*   */
-    Name string `json:"name"`
+    /* 资源id集合，传*表示对所有id生效  */
+    Ids []string `json:"ids"`
 
-    /*  (Optional) */
-    CreationDate string `json:"creationDate"`
+    /* 资源类型，云主机-server、镜像-image、云硬盘-volume、vpc-vpc、公网Ip-floatingIp、负载均衡-loadbalance、云数据库(mysql)-database、云缓存-cache  */
+    Type string `json:"type"`
 }

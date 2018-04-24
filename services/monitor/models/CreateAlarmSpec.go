@@ -31,7 +31,7 @@ type CreateAlarmSpec struct {
     /* 取样频次 (Optional) */
     DownSample *string `json:"downSample"`
 
-    /* 根据产品线查询可用监控项列表 接口 返回的Metric字段  */
+    /* 取值请查看 <a href="https://www.jdcloud.com/help/detail/2791/isCatalog/1">查询可用创建监控规则的指标列表]</a> 接口 的metric字段  */
     Metric string `json:"metric"`
 
     /* 通知周期 单位：小时 (Optional) */
@@ -46,7 +46,7 @@ type CreateAlarmSpec struct {
     /* 报警规则对应实例列表，每次最多100个，例如"['resourceId1','resourceId2']"  */
     ResourceIds []string `json:"resourceIds"`
 
-    /* 产品名称  */
+    /* 产品名称，取值请查看 <a href="https://www.jdcloud.com/help/detail/2791/isCatalog/1">查询可用创建监控规则的指标列表]</a> 接口 的serviceCode字段  */
     ServiceCode string `json:"serviceCode"`
 
     /* 报警阈值，目前只开放数值类型功能  */

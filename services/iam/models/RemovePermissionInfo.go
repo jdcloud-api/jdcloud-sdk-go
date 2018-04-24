@@ -17,11 +17,8 @@
 package models
 
 
-type Bucket struct {
+type RemovePermissionInfo struct {
 
-    /*   */
-    Name string `json:"name"`
-
-    /*  (Optional) */
-    CreationDate string `json:"creationDate"`
+    /* 权限id  */
+    PermissionId int `json:"permissionId"`
 }

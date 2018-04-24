@@ -40,7 +40,7 @@ func NewOssClient(credential *Credential) *OssClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "oss",
-            Revision:    "0.2.1",
+            Revision:    "0.2.2",
             Logger:      NewDefaultLogger(LOG_INFO),
         }}
 }

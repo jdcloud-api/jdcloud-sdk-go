@@ -40,7 +40,7 @@ func NewDiskClient(credential *Credential) *DiskClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "disk",
-            Revision:    "0.3.0",
+            Revision:    "0.4.0",
             Logger:      NewDefaultLogger(LOG_INFO),
         }}
 }
@@ -53,7 +53,7 @@ func (c *DiskClient) SetLogger(logger Logger) {
     c.Logger = logger
 }
 
-/* 为指定云硬盘创建快照调用成功返回后，新生成的快照的状态为 creating */
+/* 为指定云硬盘创建快照,新生成的快照的状态为creating */
 func (c *DiskClient) CreateSnapshot(request *CreateSnapshotRequest) (*CreateSnapshotResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -113,7 +113,7 @@ func (c *DiskClient) DescribeSnapshots(request *DescribeSnapshotsRequest) (*Desc
     return jdResp, err
 }
 
-/* 云硬盘信息详情 */
+/* 查询云硬盘信息详情 */
 func (c *DiskClient) DescribeDisk(request *DescribeDiskRequest) (*DescribeDiskResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -128,7 +128,7 @@ func (c *DiskClient) DescribeDisk(request *DescribeDiskRequest) (*DescribeDiskRe
     return jdResp, err
 }
 
-/* 云硬盘快照信息详情 */
+/* 查询云硬盘快照信息详情 */
 func (c *DiskClient) DescribeSnapshot(request *DescribeSnapshotRequest) (*DescribeSnapshotResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -139,6 +139,51 @@ func (c *DiskClient) DescribeSnapshot(request *DescribeSnapshotRequest) (*Descri
     }
 
     jdResp := &DescribeSnapshotResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    return jdResp, err
+}
+
+/* 删除单个云硬盘快照:快照状态必须为 available 或 error 状态 */
+func (c *DiskClient) DeleteSnapshot(request *DeleteSnapshotRequest) (*DeleteSnapshotResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &DeleteSnapshotResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    return jdResp, err
+}
+
+/* 修改快照的名字或描述信息 */
+func (c *DiskClient) ModifySnpAttribute(request *ModifySnpAttributeRequest) (*ModifySnpAttributeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ModifySnpAttributeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    return jdResp, err
+}
+
+/* 修改云硬盘的名字或描述信息 */
+func (c *DiskClient) ModifyDiskAttribute(request *ModifyDiskAttributeRequest) (*ModifyDiskAttributeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ModifyDiskAttributeResponse{}
     err = json.Unmarshal(resp, jdResp)
     return jdResp, err
 }
