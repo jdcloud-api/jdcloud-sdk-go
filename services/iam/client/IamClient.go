@@ -18,43 +18,43 @@ package client
 
 import (
     . "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    . "github.com/jdcloud-api/jdcloud-sdk-go/services/nc/apis"
+    . "github.com/jdcloud-api/jdcloud-sdk-go/services/iam/apis"
     "encoding/json"
     "errors"
 )
 
-type NcClient struct {
+type IamClient struct {
     JDCloudClient
 }
 
-func NewNcClient(credential *Credential) *NcClient {
+func NewIamClient(credential *Credential) *IamClient {
     if credential == nil {
         return nil
     }
 
     config := NewConfig()
-    config.SetEndpoint("nc.jdcloud-api.com")
+    config.SetEndpoint("iam.jdcloud-api.com")
 
-    return &NcClient{
+    return &IamClient{
         JDCloudClient{
             Credential:  *credential,
             Config:      *config,
-            ServiceName: "nc",
-            Revision:    "0.2.1",
+            ServiceName: "iam",
+            Revision:    "0.1.0",
             Logger:      NewDefaultLogger(LOG_INFO),
         }}
 }
 
-func (c *NcClient) SetConfig(config *Config) {
+func (c *IamClient) SetConfig(config *Config) {
     c.Config = *config
 }
 
-func (c *NcClient) SetLogger(logger Logger) {
+func (c *IamClient) SetLogger(logger Logger) {
     c.Logger = logger
 }
 
-/* 查询容器列表 */
-func (c *NcClient) DescribeContainers(request *DescribeContainersRequest) (*DescribeContainersResponse, error) {
+/* 为子用户绑定策略 */
+func (c *IamClient) AddPermissionsToSubUser(request *AddPermissionsToSubUserRequest) (*AddPermissionsToSubUserResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -63,13 +63,13 @@ func (c *NcClient) DescribeContainers(request *DescribeContainersRequest) (*Desc
         return nil, err
     }
 
-    jdResp := &DescribeContainersResponse{}
+    jdResp := &AddPermissionsToSubUserResponse{}
     err = json.Unmarshal(resp, jdResp)
     return jdResp, err
 }
 
-/* 创建一台或多台指定配置的实例 */
-func (c *NcClient) CreateContainers(request *CreateContainersRequest) (*CreateContainersResponse, error) {
+/* 修改策略 */
+func (c *IamClient) UpdatePermission(request *UpdatePermissionRequest) (*UpdatePermissionResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -78,13 +78,13 @@ func (c *NcClient) CreateContainers(request *CreateContainersRequest) (*CreateCo
         return nil, err
     }
 
-    jdResp := &CreateContainersResponse{}
+    jdResp := &UpdatePermissionResponse{}
     err = json.Unmarshal(resp, jdResp)
     return jdResp, err
 }
 
-/* 查询容器日志 */
-func (c *NcClient) GetLogs(request *GetLogsRequest) (*GetLogsResponse, error) {
+/* 创建策略 */
+func (c *IamClient) CreatePermission(request *CreatePermissionRequest) (*CreatePermissionResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -93,13 +93,13 @@ func (c *NcClient) GetLogs(request *GetLogsRequest) (*GetLogsResponse, error) {
         return nil, err
     }
 
-    jdResp := &GetLogsResponse{}
+    jdResp := &CreatePermissionResponse{}
     err = json.Unmarshal(resp, jdResp)
     return jdResp, err
 }
 
-/* 查询 secret 详情 */
-func (c *NcClient) DescribeSecret(request *DescribeSecretRequest) (*DescribeSecretResponse, error) {
+/* 启用AccessKey */
+func (c *IamClient) EnabledUserAccessKey(request *EnabledUserAccessKeyRequest) (*EnabledUserAccessKeyResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -108,13 +108,13 @@ func (c *NcClient) DescribeSecret(request *DescribeSecretRequest) (*DescribeSecr
         return nil, err
     }
 
-    jdResp := &DescribeSecretResponse{}
+    jdResp := &EnabledUserAccessKeyResponse{}
     err = json.Unmarshal(resp, jdResp)
     return jdResp, err
 }
 
-/* 修改容器属性 */
-func (c *NcClient) ModifyContainerAttribute(request *ModifyContainerAttributeRequest) (*ModifyContainerAttributeResponse, error) {
+/* 创建AccessKey */
+func (c *IamClient) CreateUserAccessKey(request *CreateUserAccessKeyRequest) (*CreateUserAccessKeyResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -123,13 +123,13 @@ func (c *NcClient) ModifyContainerAttribute(request *ModifyContainerAttributeReq
         return nil, err
     }
 
-    jdResp := &ModifyContainerAttributeResponse{}
+    jdResp := &CreateUserAccessKeyResponse{}
     err = json.Unmarshal(resp, jdResp)
     return jdResp, err
 }
 
-/* 删除单个实例 */
-func (c *NcClient) DeleteContainer(request *DeleteContainerRequest) (*DeleteContainerResponse, error) {
+/* 查询策略列表 */
+func (c *IamClient) DescribePermissions(request *DescribePermissionsRequest) (*DescribePermissionsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -138,13 +138,13 @@ func (c *NcClient) DeleteContainer(request *DeleteContainerRequest) (*DeleteCont
         return nil, err
     }
 
-    jdResp := &DeleteContainerResponse{}
+    jdResp := &DescribePermissionsResponse{}
     err = json.Unmarshal(resp, jdResp)
     return jdResp, err
 }
 
-/* 停止单个实例 */
-func (c *NcClient) StopContainer(request *StopContainerRequest) (*StopContainerResponse, error) {
+/* 查询策略详情 */
+func (c *IamClient) DescribePermissionDetail(request *DescribePermissionDetailRequest) (*DescribePermissionDetailResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -153,13 +153,13 @@ func (c *NcClient) StopContainer(request *StopContainerRequest) (*StopContainerR
         return nil, err
     }
 
-    jdResp := &StopContainerResponse{}
+    jdResp := &DescribePermissionDetailResponse{}
     err = json.Unmarshal(resp, jdResp)
     return jdResp, err
 }
 
-/* 启动单个实例 */
-func (c *NcClient) StartContainer(request *StartContainerRequest) (*StartContainerResponse, error) {
+/* 创建子账号 */
+func (c *IamClient) CreateSubuser(request *CreateSubuserRequest) (*CreateSubuserResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -168,13 +168,13 @@ func (c *NcClient) StartContainer(request *StartContainerRequest) (*StartContain
         return nil, err
     }
 
-    jdResp := &StartContainerResponse{}
+    jdResp := &CreateSubuserResponse{}
     err = json.Unmarshal(resp, jdResp)
     return jdResp, err
 }
 
-/* 容器解绑公网IP 解绑的是主网卡、主内网IP对应的弹性IP */
-func (c *NcClient) DisassociateElasticIp(request *DisassociateElasticIpRequest) (*DisassociateElasticIpResponse, error) {
+/* 为子用户解绑策略 */
+func (c *IamClient) RemovePermissionOfSubUser(request *RemovePermissionOfSubUserRequest) (*RemovePermissionOfSubUserResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -183,13 +183,13 @@ func (c *NcClient) DisassociateElasticIp(request *DisassociateElasticIpRequest) 
         return nil, err
     }
 
-    jdResp := &DisassociateElasticIpResponse{}
+    jdResp := &RemovePermissionOfSubUserResponse{}
     err = json.Unmarshal(resp, jdResp)
     return jdResp, err
 }
 
-/* 查询secret列表 */
-func (c *NcClient) DescribeSecrets(request *DescribeSecretsRequest) (*DescribeSecretsResponse, error) {
+/* 禁用AccessKey */
+func (c *IamClient) DisabledUserAccessKey(request *DisabledUserAccessKeyRequest) (*DisabledUserAccessKeyResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -198,13 +198,13 @@ func (c *NcClient) DescribeSecrets(request *DescribeSecretsRequest) (*DescribeSe
         return nil, err
     }
 
-    jdResp := &DescribeSecretsResponse{}
+    jdResp := &DisabledUserAccessKeyResponse{}
     err = json.Unmarshal(resp, jdResp)
     return jdResp, err
 }
 
-/* 查询资源的配额 */
-func (c *NcClient) DescribeQuota(request *DescribeQuotaRequest) (*DescribeQuotaResponse, error) {
+/* 查询子用户策略列表 */
+func (c *IamClient) DescribeSubUserPermissions(request *DescribeSubUserPermissionsRequest) (*DescribeSubUserPermissionsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -213,13 +213,13 @@ func (c *NcClient) DescribeQuota(request *DescribeQuotaRequest) (*DescribeQuotaR
         return nil, err
     }
 
-    jdResp := &DescribeQuotaResponse{}
+    jdResp := &DescribeSubUserPermissionsResponse{}
     err = json.Unmarshal(resp, jdResp)
     return jdResp, err
 }
 
-/* 查询容器详情 */
-func (c *NcClient) DescribeContainer(request *DescribeContainerRequest) (*DescribeContainerResponse, error) {
+/* 删除AccessKey */
+func (c *IamClient) DeleteUserAccessKey(request *DeleteUserAccessKeyRequest) (*DeleteUserAccessKeyResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -228,13 +228,13 @@ func (c *NcClient) DescribeContainer(request *DescribeContainerRequest) (*Descri
         return nil, err
     }
 
-    jdResp := &DescribeContainerResponse{}
+    jdResp := &DeleteUserAccessKeyResponse{}
     err = json.Unmarshal(resp, jdResp)
     return jdResp, err
 }
 
-/* 删除 secret */
-func (c *NcClient) DeleteSecret(request *DeleteSecretRequest) (*DeleteSecretResponse, error) {
+/* 查询AccessKey列表 */
+func (c *IamClient) DescribeUserAccessKeys(request *DescribeUserAccessKeysRequest) (*DescribeUserAccessKeysResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -243,37 +243,7 @@ func (c *NcClient) DeleteSecret(request *DeleteSecretRequest) (*DeleteSecretResp
         return nil, err
     }
 
-    jdResp := &DeleteSecretResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    return jdResp, err
-}
-
-/* 创建 secret */
-func (c *NcClient) CreateSecret(request *CreateSecretRequest) (*CreateSecretResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &CreateSecretResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    return jdResp, err
-}
-
-/* 容器绑定公网IP 绑定的是主网卡、主内网IP对应的弹性IP */
-func (c *NcClient) AssociateElasticIp(request *AssociateElasticIpRequest) (*AssociateElasticIpResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &AssociateElasticIpResponse{}
+    jdResp := &DescribeUserAccessKeysResponse{}
     err = json.Unmarshal(resp, jdResp)
     return jdResp, err
 }

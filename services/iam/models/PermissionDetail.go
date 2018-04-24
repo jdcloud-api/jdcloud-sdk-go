@@ -17,11 +17,11 @@
 package models
 
 
-type Bucket struct {
+type PermissionDetail struct {
 
-    /*   */
-    Name string `json:"name"`
+    /* 权限类型，只读-R、删除-D、修改-M  */
+    Permission string `json:"permission"`
 
-    /*  (Optional) */
-    CreationDate string `json:"creationDate"`
+    /* 资源信息  */
+    Resource []Resource `json:"resource"`
 }

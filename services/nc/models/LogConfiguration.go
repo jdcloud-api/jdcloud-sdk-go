@@ -19,7 +19,7 @@ package models
 
 type LogConfiguration struct {
 
-    /* 日志Driver名称  default：默认在本地分配10MB的存储空间，自动rotate  ^ jcslogs：可以指定将日志保存到云监控日志系统  ^ splunk (Optional) */
+    /* 日志Driver名称  default：默认在本地分配10MB的存储空间，自动rotate (Optional) */
     LogDriver *string `json:"logDriver"`
 
     /* 日志Driver的配置选项 (Optional) */

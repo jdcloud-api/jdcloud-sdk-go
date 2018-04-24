@@ -19,70 +19,42 @@ package apis
 import (
     . "github.com/jdcloud-api/jdcloud-sdk-go/core"
     "reflect"
-    nc "github.com/jdcloud-api/jdcloud-sdk-go/services/nc/models"
+    iam "github.com/jdcloud-api/jdcloud-sdk-go/services/iam/models"
 )
 
-type CreateSecretRequest struct {
+type DescribeUserAccessKeysRequest struct {
 
     JDCloudRequest
 
     /* Region ID  */
     RegionId string `json:"regionId"`
-
-    /* 机密数据名称，不能重复  */
-    Name string `json:"name"`
-
-    /* 私密数据的类型，目前仅支持如下类型：docker-registry：用来和docker registry认证的类型  */
-    SecretType string `json:"secretType"`
-
-    /* 机密的数据 (Optional) */
-    Data *nc.DockerRegistryData `json:"data"`
 }
 
 /*
  * param regionId: Region ID 
- * param name: 机密数据名称，不能重复 
- * param secretType: 私密数据的类型，目前仅支持如下类型：docker-registry：用来和docker registry认证的类型 
- * param data: 机密的数据 (Optional)
  */
-func NewCreateSecretRequest(
+func NewDescribeUserAccessKeysRequest(
     regionId string,
-    name string,
-    secretType string,
-) *CreateSecretRequest {
+) *DescribeUserAccessKeysRequest {
 
-	return &CreateSecretRequest{
+	return &DescribeUserAccessKeysRequest{
         JDCloudRequest: JDCloudRequest{
-			URL:     "/regions/{regionId}/secrets",
-			Method:  "POST",
+			URL:     "/regions/{regionId}/userAccessKeys",
+			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        Name: name,
-        SecretType: secretType,
 	}
 }
 
-func (r *CreateSecretRequest) SetRegionId(regionId string) {
+func (r *DescribeUserAccessKeysRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
-}
-
-func (r *CreateSecretRequest) SetName(name string) {
-    r.Name = name
-}
-
-func (r *CreateSecretRequest) SetSecretType(secretType string) {
-    r.SecretType = secretType
-}
-
-func (r *CreateSecretRequest) SetData(data *nc.DockerRegistryData) {
-    r.Data = data
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r CreateSecretRequest) GetRegionId() string {
+func (r DescribeUserAccessKeysRequest) GetRegionId() string {
     fieldName := "RegionId"
     reqType := reflect.TypeOf(r)
     value := reflect.ValueOf(r)
@@ -94,12 +66,12 @@ func (r CreateSecretRequest) GetRegionId() string {
     return ""
 }
 
-type CreateSecretResponse struct {
+type DescribeUserAccessKeysResponse struct {
     RequestID string `json:"requestId"`
     Error ErrorResponse `json:"error"`
-    Result CreateSecretResult `json:"result"`
+    Result DescribeUserAccessKeysResult `json:"result"`
 }
 
-type CreateSecretResult struct {
-    SecretName string `json:"secretName"`
+type DescribeUserAccessKeysResult struct {
+    UserAccessKeys []iam.UserAccessKey `json:"userAccessKeys"`
 }

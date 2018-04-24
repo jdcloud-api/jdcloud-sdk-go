@@ -23,7 +23,7 @@ type VolumeMountSpec struct {
     /* 磁盘分类 cloud： 基于云硬盘的卷 root volume只能是cloud类型  */
     Category string `json:"category"`
 
-    /* 自动删除，删除主机时自动删除此volume，默认为True；只支持磁盘是云硬盘的场景 (Optional) */
+    /* 自动删除，删除容器时自动删除此volume，默认为True；只支持磁盘是云硬盘的场景 (Optional) */
     AutoDelete *bool `json:"autoDelete"`
 
     /* 容器内的挂载目录；root volume不需要指定，挂载目录是（/）；data volume必须指定；必须是绝对路径，不能包含(:) (Optional) */

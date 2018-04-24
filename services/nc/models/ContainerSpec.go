@@ -20,13 +20,13 @@ import . "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
 
 type ContainerSpec struct {
 
-    /* 实例类型；参考[文档](http://git.jd.com/jcloud-product/PRD/blob/master/云主机类型.md)  */
+    /* 实例类型；参考[文档](https://www.jdcloud.com/help/detail/1992/isCatalog/1)  */
     InstanceType string `json:"instanceType"`
 
     /* 容器所属可用区  */
     Az string `json:"az"`
 
-    /* 容器名称；命名规范请参考[文档](http://git.jd.com/jcloud-product/open-api-doc/blob/master/公共部分/API规则.md)  */
+    /* 容器名称  */
     Name string `json:"name"`
 
     /* 域名和IP映射的信息；</br> 最大10个alias (Optional) */
@@ -44,7 +44,7 @@ type ContainerSpec struct {
     /* 容器执行的环境变量；如果和镜像中的环境变量Key相同，会覆盖镜像中的值；</br> 最大10对 (Optional) */
     Envs []EnvVar `json:"envs"`
 
-    /* 镜像名称 </br> 1. Docker Hub官方镜像通过类似nginx, mysql/mysql-server的名字指定 </br> ^ 2. 其它私有仓储的镜像名称需要包含server地址：container-registry/image:tag </br> </br> repository长度最大256个字符，tag最大128个字符，registry最大255个字符 </br> 下载镜像超时时间：10分钟 (Optional) */
+    /* 镜像名称 </br> 1. Docker Hub官方镜像通过类似nginx, mysql/mysql-server的名字指定 </br> </br> repository长度最大256个字符，tag最大128个字符，registry最大255个字符 </br> 下载镜像超时时间：10分钟 (Optional) */
     Image *string `json:"image"`
 
     /* secret引用名称；使用Docker Hub和京东云CR的镜像不需要secret (Optional) */
@@ -71,7 +71,7 @@ type ContainerSpec struct {
     /* 容器日志配置信息；默认会在本地分配10MB的存储空间 (Optional) */
     LogConfiguration *LogConfiguration `json:"logConfiguration"`
 
-    /* 容器描述；命名规范请参考[文档](http://git.jd.com/jcloud-product/open-api-doc/blob/master/公共部分/API规则.md) (Optional) */
+    /* 容器描述 (Optional) */
     Description *string `json:"description"`
 
     /* 计费配置；如不指定，默认计费类型是后付费-按使用时常付费 (Optional) */

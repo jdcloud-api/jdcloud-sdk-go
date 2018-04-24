@@ -83,7 +83,7 @@ func (c *MonitorClient) DescribeMetricData(request *DescribeMetricDataRequest) (
     return jdResp, err
 }
 
-/* 修改已创建的报警规则，修改之后返回新的规则id */
+/* 修改已创建的报警规则 */
 func (c *MonitorClient) UpdateAlarm(request *UpdateAlarmRequest) (*UpdateAlarmResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")

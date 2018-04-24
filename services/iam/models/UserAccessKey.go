@@ -17,11 +17,20 @@
 package models
 
 
-type Bucket struct {
+type UserAccessKey struct {
 
-    /*   */
-    Name string `json:"name"`
+    /* accessKey (Optional) */
+    AccessKey string `json:"accessKey"`
 
-    /*  (Optional) */
-    CreationDate string `json:"creationDate"`
+    /* accessKeySecret (Optional) */
+    AccessKeySecret string `json:"accessKeySecret"`
+
+    /* 创建时间 (Optional) */
+    CreateTime string `json:"createTime"`
+
+    /* 禁用/启用状态[0-禁用,1-启用] (Optional) */
+    State int `json:"state"`
+
+    /* 删除/有效状态[0-删除,1-有效] (Optional) */
+    Yn int `json:"yn"`
 }
