@@ -19,66 +19,51 @@ package apis
 import (
     . "github.com/jdcloud-api/jdcloud-sdk-go/core"
     "reflect"
-    monitor "github.com/jdcloud-api/jdcloud-sdk-go/services/monitor/models"
 )
 
-type DescribeMetricsRequest struct {
+type DeleteDiskRequest struct {
 
     JDCloudRequest
 
-    /* 资源的类型 ： 
-vm-->云主机
-disk-->云硬盘
-ip-->公网ip
-balance-->负载均衡
-database-->云数据库mysql版本
-cdn-->京东CDN
-redis-->redis云缓存
-mongodb-->mongoDB云缓存
-storage-->云存储
-sqlserver-->云数据库sqlserver版 
-nativecontainer-->容器
-  */
-    ServiceCode string `json:"serviceCode"`
+    /* 地域ID  */
+    RegionId string `json:"regionId"`
+
+    /* 云硬盘ID  */
+    DiskId string `json:"diskId"`
 }
 
 /*
- * param serviceCode: 资源的类型 ： 
-vm-->云主机
-disk-->云硬盘
-ip-->公网ip
-balance-->负载均衡
-database-->云数据库mysql版本
-cdn-->京东CDN
-redis-->redis云缓存
-mongodb-->mongoDB云缓存
-storage-->云存储
-sqlserver-->云数据库sqlserver版 
-nativecontainer-->容器
- 
+ * param regionId: 地域ID 
+ * param diskId: 云硬盘ID 
  */
-func NewDescribeMetricsRequest(
-    serviceCode string,
-) *DescribeMetricsRequest {
+func NewDeleteDiskRequest(
+    regionId string,
+    diskId string,
+) *DeleteDiskRequest {
 
-	return &DescribeMetricsRequest{
+	return &DeleteDiskRequest{
         JDCloudRequest: JDCloudRequest{
-			URL:     "/metrics",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/disks/{diskId}",
+			Method:  "DELETE",
 			Header:  nil,
 			Version: "v1",
 		},
-        ServiceCode: serviceCode,
+        RegionId: regionId,
+        DiskId: diskId,
 	}
 }
 
-func (r *DescribeMetricsRequest) SetServiceCode(serviceCode string) {
-    r.ServiceCode = serviceCode
+func (r *DeleteDiskRequest) SetRegionId(regionId string) {
+    r.RegionId = regionId
+}
+
+func (r *DeleteDiskRequest) SetDiskId(diskId string) {
+    r.DiskId = diskId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeMetricsRequest) GetRegionId() string {
+func (r DeleteDiskRequest) GetRegionId() string {
     fieldName := "RegionId"
     reqType := reflect.TypeOf(r)
     value := reflect.ValueOf(r)
@@ -90,12 +75,11 @@ func (r DescribeMetricsRequest) GetRegionId() string {
     return ""
 }
 
-type DescribeMetricsResponse struct {
+type DeleteDiskResponse struct {
     RequestID string `json:"requestId"`
     Error ErrorResponse `json:"error"`
-    Result DescribeMetricsResult `json:"result"`
+    Result DeleteDiskResult `json:"result"`
 }
 
-type DescribeMetricsResult struct {
-    Metrics []monitor.MetricDetail `json:"metrics"`
+type DeleteDiskResult struct {
 }

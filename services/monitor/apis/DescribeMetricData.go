@@ -46,6 +46,9 @@ type DescribeMetricDataRequest struct {
 
     /* 时间间隔：1h，6h，12h，1d，3d，7d，14d，固定时间间隔，timeInterval 与 endTime 至少填一项 (Optional) */
     TimeInterval *string `json:"timeInterval"`
+
+    /* 自定义标签 (Optional) */
+    Tags []monitor.Tags `json:"tags"`
 }
 
 /*
@@ -56,6 +59,7 @@ type DescribeMetricDataRequest struct {
  * param startTime: 查询时间范围的开始时间， UTC时间，格式：yyyy-MM-dd'T'HH:mm:ssZ（默认为当前时间，早于30d时，将被重置为30d） (Optional)
  * param endTime: 查询时间范围的结束时间， UTC时间，格式：2016-12- yyyy-MM-dd'T'HH:mm:ssZ（为空时，将由startTime与timeInterval计算得出） (Optional)
  * param timeInterval: 时间间隔：1h，6h，12h，1d，3d，7d，14d，固定时间间隔，timeInterval 与 endTime 至少填一项 (Optional)
+ * param tags: 自定义标签 (Optional)
  */
 func NewDescribeMetricDataRequest(
     regionId string,
@@ -104,6 +108,10 @@ func (r *DescribeMetricDataRequest) SetEndTime(endTime string) {
 
 func (r *DescribeMetricDataRequest) SetTimeInterval(timeInterval string) {
     r.TimeInterval = &timeInterval
+}
+
+func (r *DescribeMetricDataRequest) SetTags(tags []monitor.Tags) {
+    r.Tags = tags
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

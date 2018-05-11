@@ -19,7 +19,7 @@ package models
 
 type ThumbnailStatus struct {
 
-    /* 状态  */
+    /* 状态 (SUCESS, ERROR, PENDDING, RUNNING)  */
     Status string `json:"status"`
 
     /* 错误码 (Optional) */

@@ -40,7 +40,7 @@ func NewDiskClient(credential *Credential) *DiskClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "disk",
-            Revision:    "0.4.0",
+            Revision:    "0.5.0",
             Logger:      NewDefaultLogger(LOG_INFO),
         }}
 }
@@ -124,6 +124,51 @@ func (c *DiskClient) DescribeDisk(request *DescribeDiskRequest) (*DescribeDiskRe
     }
 
     jdResp := &DescribeDiskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    return jdResp, err
+}
+
+/* 创建一块或多块云硬盘 */
+func (c *DiskClient) CreateDisks(request *CreateDisksRequest) (*CreateDisksResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &CreateDisksResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    return jdResp, err
+}
+
+/* 扩容云硬盘到指定大小 */
+func (c *DiskClient) ExtendDisk(request *ExtendDiskRequest) (*ExtendDiskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ExtendDiskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    return jdResp, err
+}
+
+/* 删除单个云硬盘 */
+func (c *DiskClient) DeleteDisk(request *DeleteDiskRequest) (*DeleteDiskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &DeleteDiskResponse{}
     err = json.Unmarshal(resp, jdResp)
     return jdResp, err
 }

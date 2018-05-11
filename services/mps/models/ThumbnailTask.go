@@ -19,25 +19,25 @@ package models
 
 type ThumbnailTask struct {
 
-    /* 任务ID (Optional) */
+    /* 任务ID (readonly) (Optional) */
     TaskID string `json:"taskID"`
 
-    /* 状态 (Optional) */
+    /* 状态 (SUCCESS, ERROR, PENDDING, RUNNING) (readonly) (Optional) */
     Status string `json:"status"`
 
-    /* 错误码 (Optional) */
+    /* 错误码 (readonly) (Optional) */
     ErrorCode int `json:"errorCode"`
 
-    /* 任务创建时间 (Optional) */
+    /* 任务创建时间 时间格式(GMT): yyyy-MM-dd’T’HH:mm:ss.SSS’Z’  (readonly) (Optional) */
     CreatedTime string `json:"createdTime"`
 
-    /* 任务创建时间 (Optional) */
+    /* 任务创建时间 时间格式(GMT): yyyy-MM-dd’T’HH:mm:ss.SSS’Z’  (readonly) (Optional) */
     LastUpdatedTime string `json:"lastUpdatedTime"`
 
-    /*  (Optional) */
+    /*   */
     Source ThumbnailTaskSource `json:"source"`
 
-    /*  (Optional) */
+    /*   */
     Target ThumbnailTaskTarget `json:"target"`
 
     /*  (Optional) */

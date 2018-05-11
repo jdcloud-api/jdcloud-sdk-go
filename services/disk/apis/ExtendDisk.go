@@ -19,66 +19,61 @@ package apis
 import (
     . "github.com/jdcloud-api/jdcloud-sdk-go/core"
     "reflect"
-    monitor "github.com/jdcloud-api/jdcloud-sdk-go/services/monitor/models"
 )
 
-type DescribeMetricsRequest struct {
+type ExtendDiskRequest struct {
 
     JDCloudRequest
 
-    /* 资源的类型 ： 
-vm-->云主机
-disk-->云硬盘
-ip-->公网ip
-balance-->负载均衡
-database-->云数据库mysql版本
-cdn-->京东CDN
-redis-->redis云缓存
-mongodb-->mongoDB云缓存
-storage-->云存储
-sqlserver-->云数据库sqlserver版 
-nativecontainer-->容器
-  */
-    ServiceCode string `json:"serviceCode"`
+    /* 地域ID  */
+    RegionId string `json:"regionId"`
+
+    /* 云硬盘ID  */
+    DiskId string `json:"diskId"`
+
+    /* 扩容后的云硬盘大小，单位为GiB  */
+    DiskSizeGB int `json:"diskSizeGB"`
 }
 
 /*
- * param serviceCode: 资源的类型 ： 
-vm-->云主机
-disk-->云硬盘
-ip-->公网ip
-balance-->负载均衡
-database-->云数据库mysql版本
-cdn-->京东CDN
-redis-->redis云缓存
-mongodb-->mongoDB云缓存
-storage-->云存储
-sqlserver-->云数据库sqlserver版 
-nativecontainer-->容器
- 
+ * param regionId: 地域ID 
+ * param diskId: 云硬盘ID 
+ * param diskSizeGB: 扩容后的云硬盘大小，单位为GiB 
  */
-func NewDescribeMetricsRequest(
-    serviceCode string,
-) *DescribeMetricsRequest {
+func NewExtendDiskRequest(
+    regionId string,
+    diskId string,
+    diskSizeGB int,
+) *ExtendDiskRequest {
 
-	return &DescribeMetricsRequest{
+	return &ExtendDiskRequest{
         JDCloudRequest: JDCloudRequest{
-			URL:     "/metrics",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/disks/{diskId}:extend",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
-        ServiceCode: serviceCode,
+        RegionId: regionId,
+        DiskId: diskId,
+        DiskSizeGB: diskSizeGB,
 	}
 }
 
-func (r *DescribeMetricsRequest) SetServiceCode(serviceCode string) {
-    r.ServiceCode = serviceCode
+func (r *ExtendDiskRequest) SetRegionId(regionId string) {
+    r.RegionId = regionId
+}
+
+func (r *ExtendDiskRequest) SetDiskId(diskId string) {
+    r.DiskId = diskId
+}
+
+func (r *ExtendDiskRequest) SetDiskSizeGB(diskSizeGB int) {
+    r.DiskSizeGB = diskSizeGB
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeMetricsRequest) GetRegionId() string {
+func (r ExtendDiskRequest) GetRegionId() string {
     fieldName := "RegionId"
     reqType := reflect.TypeOf(r)
     value := reflect.ValueOf(r)
@@ -90,12 +85,11 @@ func (r DescribeMetricsRequest) GetRegionId() string {
     return ""
 }
 
-type DescribeMetricsResponse struct {
+type ExtendDiskResponse struct {
     RequestID string `json:"requestId"`
     Error ErrorResponse `json:"error"`
-    Result DescribeMetricsResult `json:"result"`
+    Result ExtendDiskResult `json:"result"`
 }
 
-type DescribeMetricsResult struct {
-    Metrics []monitor.MetricDetail `json:"metrics"`
+type ExtendDiskResult struct {
 }

@@ -17,14 +17,11 @@
 package models
 
 
-type TranscodeStatus struct {
+type Tags struct {
 
-    /* 状态 (SUCESS, ERROR, PENDDING, RUNNING)  */
-    Status string `json:"status"`
+    /* 标签名  */
+    Name string `json:"name"`
 
-    /* 错误码 (Optional) */
-    ErrorCode int `json:"errorCode"`
-
-    /* 通知消息, 由work调用, 暂时方案 (Optional) */
-    NotifyMessage string `json:"notifyMessage"`
+    /* 标签值  */
+    Value string `json:"value"`
 }

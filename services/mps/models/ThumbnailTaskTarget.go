@@ -19,21 +19,21 @@ package models
 
 type ThumbnailTaskTarget struct {
 
-    /*  (Optional) */
-    DestBucket *string `json:"destBucket"`
+    /* 输入存放目标文件的 bucket  */
+    DestBucket string `json:"destBucket"`
 
-    /*  (Optional) */
+    /* 目标截图的Key的前缀, '前缀-taskID-%04d(num).(format)', 默认: sourceKey (Optional) */
     DestKeyPrefix *string `json:"destKeyPrefix"`
 
-    /*  (Optional) */
+    /* 目标截图的格式 default: jpg (Optional) */
     Format *string `json:"format"`
 
-    /*  (Optional) */
+    /* 目标截图的宽, 如果视频实际分辨率低于目标分辨率则按照实际分辨率输出 default: 0 代表源视频高 其他[8, 4096] (Optional) */
     WidthInPixel *int `json:"widthInPixel"`
 
-    /*  (Optional) */
+    /* 目标截图的高, 如果视频实际分辨率低于目标分辨率则按照实际分辨率输出 default: 0 代表源视频高 其他[8, 4096] (Optional) */
     HeightInPixel *int `json:"heightInPixel"`
 
-    /*  (Optional) */
+    /* 目标截图的Key的集合 (readonly) (Optional) */
     Keys []string `json:"keys"`
 }
