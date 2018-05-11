@@ -19,27 +19,27 @@ package models
 
 type ThumbnailQuery struct {
 
-    /*  (Optional) */
+    /* 状态 (SUCCESS, ERROR, PENDDING, RUNNING) (Optional) */
     Status string `json:"status"`
 
-    /*  (Optional) */
+    /* 查询开始时间 时间格式(GMT): yyyy-MM-dd’T’HH:mm:ss.SSS’Z’ (Optional) */
     Begin string `json:"begin"`
 
-    /*  (Optional) */
+    /* 查询结束时间 时间格式(GMT): yyyy-MM-dd’T’HH:mm:ss.SSS’Z’ (Optional) */
     End string `json:"end"`
 
-    /*  (Optional) */
+    /* 本次请求的marker, 标记查询的起始位置, 此处为taskID (Optional) */
     Marker string `json:"marker"`
 
-    /*  (Optional) */
+    /* 本次请求返回的任务列表的最大元素个数, 有效值: [1-1000]，默认值: 1000 (Optional) */
     Limit int `json:"limit"`
 
-    /*  (Optional) */
+    /* 获取下一页所需要传递的marker值(此处为taskID), 仅当isTruncated为true时(数据未全部返回)出现 (readonly) (Optional) */
     NextMarker string `json:"nextMarker"`
 
-    /*  (Optional) */
+    /* 指明返回数据是否被截断. true表示本页后面还有数据, 即数据未全部返回; false表示已是最后一页, 即数据已全部返回 (readonly) (Optional) */
     Truncated bool `json:"truncated"`
 
-    /*  (Optional) */
+    /* 返回的task列表 (readonly) (Optional) */
     TaskList []ThumbnailTask `json:"taskList"`
 }

@@ -40,7 +40,7 @@ func NewMonitorClient(credential *Credential) *MonitorClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "monitor",
-            Revision:    "0.3.0",
+            Revision:    "0.3.2",
             Logger:      NewDefaultLogger(LOG_INFO),
         }}
 }

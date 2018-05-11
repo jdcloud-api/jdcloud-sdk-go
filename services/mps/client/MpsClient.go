@@ -40,7 +40,7 @@ func NewMpsClient(credential *Credential) *MpsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "mps",
-            Revision:    "0.3.2",
+            Revision:    "0.3.6",
             Logger:      NewDefaultLogger(LOG_INFO),
         }}
 }
@@ -53,7 +53,7 @@ func (c *MpsClient) SetLogger(logger Logger) {
     c.Logger = logger
 }
 
-/* 设置媒体处理通知, 在设置Notification时会对endpoint进行校验，设置时会对endpoint发一条SubscriptionConfirmation(x-jdcloud-message-type头)的通知，要求把Message内容进行base64编码返回给系统(body)进行校验 */
+/* 设置媒体处理通知, 在设置Notification时会对endpoint进行校验, 设置时会对endpoint发一条SubscriptionConfirmation(x-jdcloud-message-type头)的通知, 要求把Message内容进行base64编码返回给系统(body)进行校验 */
 func (c *MpsClient) SetNotification(request *SetNotificationRequest) (*SetNotificationResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")

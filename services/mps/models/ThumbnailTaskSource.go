@@ -19,9 +19,9 @@ package models
 
 type ThumbnailTaskSource struct {
 
-    /*  (Optional) */
-    Bucket *string `json:"bucket"`
+    /* 输入视频信息的 bucket  */
+    Bucket string `json:"bucket"`
 
-    /*  (Optional) */
-    Key *string `json:"key"`
+    /* 输入视频信息的 Key  */
+    Key string `json:"key"`
 }

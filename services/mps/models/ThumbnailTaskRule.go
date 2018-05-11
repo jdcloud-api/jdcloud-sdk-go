@@ -19,18 +19,18 @@ package models
 
 type ThumbnailTaskRule struct {
 
-    /*  (Optional) */
+    /* 截图模式 单张: single 多张: multi 平均: average default: single (Optional) */
     Mode *string `json:"mode"`
 
-    /*  (Optional) */
+    /* 是否开启关键帧截图 default: true (Optional) */
     KeyFrame *bool `json:"keyFrame"`
 
-    /*  (Optional) */
+    /* 生成截图的开始时间, mode=average 时不可选. default:0 (Optional) */
     StartTimeInSecond *int `json:"startTimeInSecond"`
 
-    /*  (Optional) */
+    /* 生成截图的结束时间, mode=single/average时不可选, 且不得小于startTimeInSecond. default:-1(代表视频时长) (Optional) */
     EndTimeInSecond *int `json:"endTimeInSecond"`
 
-    /*  (Optional) */
+    /* 截图数量, mode=single时不可选. default:1 (Optional) */
     Count *int `json:"count"`
 }

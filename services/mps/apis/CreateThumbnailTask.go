@@ -29,25 +29,25 @@ type CreateThumbnailTaskRequest struct {
     /* region id  */
     RegionId string `json:"regionId"`
 
-    /* 任务ID (Optional) */
+    /* 任务ID (readonly) (Optional) */
     TaskID *string `json:"taskID"`
 
-    /* 状态 (Optional) */
+    /* 状态 (SUCCESS, ERROR, PENDDING, RUNNING) (readonly) (Optional) */
     Status *string `json:"status"`
 
-    /* 错误码 (Optional) */
+    /* 错误码 (readonly) (Optional) */
     ErrorCode *int `json:"errorCode"`
 
-    /* 任务创建时间 (Optional) */
+    /* 任务创建时间 时间格式(GMT): yyyy-MM-dd’T’HH:mm:ss.SSS’Z’  (readonly) (Optional) */
     CreatedTime *string `json:"createdTime"`
 
-    /* 任务创建时间 (Optional) */
+    /* 任务创建时间 时间格式(GMT): yyyy-MM-dd’T’HH:mm:ss.SSS’Z’  (readonly) (Optional) */
     LastUpdatedTime *string `json:"lastUpdatedTime"`
 
-    /*  (Optional) */
+    /*   */
     Source *mps.ThumbnailTaskSource `json:"source"`
 
-    /*  (Optional) */
+    /*   */
     Target *mps.ThumbnailTaskTarget `json:"target"`
 
     /*  (Optional) */
@@ -56,17 +56,19 @@ type CreateThumbnailTaskRequest struct {
 
 /*
  * param regionId: region id 
- * param taskID: 任务ID (Optional)
- * param status: 状态 (Optional)
- * param errorCode: 错误码 (Optional)
- * param createdTime: 任务创建时间 (Optional)
- * param lastUpdatedTime: 任务创建时间 (Optional)
- * param source:  (Optional)
- * param target:  (Optional)
+ * param taskID: 任务ID (readonly) (Optional)
+ * param status: 状态 (SUCCESS, ERROR, PENDDING, RUNNING) (readonly) (Optional)
+ * param errorCode: 错误码 (readonly) (Optional)
+ * param createdTime: 任务创建时间 时间格式(GMT): yyyy-MM-dd’T’HH:mm:ss.SSS’Z’  (readonly) (Optional)
+ * param lastUpdatedTime: 任务创建时间 时间格式(GMT): yyyy-MM-dd’T’HH:mm:ss.SSS’Z’  (readonly) (Optional)
+ * param source:  
+ * param target:  
  * param rule:  (Optional)
  */
 func NewCreateThumbnailTaskRequest(
     regionId string,
+    source *mps.ThumbnailTaskSource,
+    target *mps.ThumbnailTaskTarget,
 ) *CreateThumbnailTaskRequest {
 
 	return &CreateThumbnailTaskRequest{
@@ -77,6 +79,8 @@ func NewCreateThumbnailTaskRequest(
 			Version: "v1",
 		},
         RegionId: regionId,
+        Source: source,
+        Target: target,
 	}
 }
 

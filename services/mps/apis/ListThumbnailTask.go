@@ -29,7 +29,7 @@ type ListThumbnailTaskRequest struct {
     /* region id  */
     RegionId string `json:"regionId"`
 
-    /* task 状态 [PENDING, RUNNING, SUCCESS, FAILED] (Optional) */
+    /* task 状态 (PENDING, RUNNING, SUCCESS, FAILED) (Optional) */
     Status *string `json:"status"`
 
     /* 开始时间 时间格式(GMT): yyyy-MM-dd'T'HH:mm:ss.SSS'Z' (Optional) */
@@ -41,17 +41,17 @@ type ListThumbnailTaskRequest struct {
     /* 查询标记 (Optional) */
     Marker *string `json:"marker"`
 
-    /* 查询记录数 (Optional) */
+    /* 查询记录数 [1, 1000] (Optional) */
     Limit *int `json:"limit"`
 }
 
 /*
  * param regionId: region id 
- * param status: task 状态 [PENDING, RUNNING, SUCCESS, FAILED] (Optional)
+ * param status: task 状态 (PENDING, RUNNING, SUCCESS, FAILED) (Optional)
  * param begin: 开始时间 时间格式(GMT): yyyy-MM-dd'T'HH:mm:ss.SSS'Z' (Optional)
  * param end: 结束时间 时间格式(GMT): yyyy-MM-dd'T'HH:mm:ss.SSS'Z' (Optional)
  * param marker: 查询标记 (Optional)
- * param limit: 查询记录数 (Optional)
+ * param limit: 查询记录数 [1, 1000] (Optional)
  */
 func NewListThumbnailTaskRequest(
     regionId string,
