@@ -24,15 +24,29 @@
 
 ### 大致代码如下：
 ``` go
-accessKey := "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-secretKey := "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-credentials := NewCredentials(accessKey, secretKey)
-client := NewVmClient(credentials)
+package main
 
-req := NewDescribeInstancesRequest("cn-north-1")
-resp, err := client.DescribeInstances(req)
-fmt.Println(resp.Result.Instances)
-fmt.Println(resp.Result.TotalCount)
-fmt.Println(len(resp.Result.Instances))
+import (
+	"fmt"
+  	. "github.com/jdcloud-api/jdcloud-sdk-go/services/vm/apis"
+	. "github.com/jdcloud-api/jdcloud-sdk-go/services/vm/client"
+	. "github.com/jdcloud-api/jdcloud-sdk-go/core"
+)
+
+func main() {
+	accessKey := "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+	secretKey := "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+	credentials := NewCredentials(accessKey, secretKey)
+	client := NewVmClient(credentials)
+
+	req := NewDescribeInstancesRequest("cn-north-1")
+	resp, err := client.DescribeInstances(req)
+	if err != nil {
+		return
+	}
+	fmt.Println(resp.Result.Instances)
+	fmt.Println(resp.Result.TotalCount)
+	fmt.Println(len(resp.Result.Instances))
+}
 ```
 请参考demo中的测试用例，访问京东云各业务线接口。
