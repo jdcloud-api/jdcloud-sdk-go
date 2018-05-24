@@ -12,7 +12,7 @@ type ResponseProcessor interface {
 }
 
 func GetResponseProcessor(method string) ResponseProcessor {
-	if method == METHOD_HEAD {
+	if method == MethodHead {
 		return &WithoutBodyResponseProcessor{}
 	} else {
 		return &WithBodyResponseProcessor{}
@@ -31,7 +31,7 @@ type WithoutBodyResponseProcessor struct {
 }
 
 func (p WithoutBodyResponseProcessor) Process(response *http.Response) ([]byte, error) {
-	requestId := response.Header.Get(HEADER_JDCLOUD_REQUESTID)
+	requestId := response.Header.Get(HeaderJdcloudRequestId)
 	if requestId != "" {
 		return []byte(fmt.Sprintf(`{"requestId":"%s"}`, requestId)), nil
 	}

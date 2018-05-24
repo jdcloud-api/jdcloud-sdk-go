@@ -15,18 +15,18 @@
 package core
 
 const (
-	SCHEME_HTTP  = "http"
-	SCHEME_HTTPS = "https"
+	SchemeHttp  = "http"
+	SchemeHttps = "https"
 
-	METHOD_GET    = "GET"
-	METHOD_PUT    = "PUT"
-	METHOD_POST   = "POST"
-	METHOD_DELETE = "DELETE"
-	METHOD_PATCH  = "PATCH"
-	METHOD_HEAD   = "HEAD"
+	MethodGet    = "GET"
+	MethodPut    = "PUT"
+	MethodPost   = "POST"
+	MethodDelete = "DELETE"
+	MethodPatch  = "PATCH"
+	MethodHead   = "HEAD"
 
-	HEADER_JCLOUD_PREFIX = "x-jcloud"
-	HEADER_JDCLOUD_PREFIX = "x-jdcloud"
-	HEADER_JDCLOUD_REQUESTID = "x-jdcloud-request-id"
+	HeaderJcloudPrefix     = "x-jcloud"
+	HeaderJdcloudPrefix    = "x-jdcloud"
+	HeaderJdcloudRequestId = "x-jdcloud-request-id"
 )
 

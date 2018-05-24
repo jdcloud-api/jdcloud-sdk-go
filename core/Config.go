@@ -28,7 +28,7 @@ type Config struct {
 //
 // endpoint is the host to access, the connection could not be created if it's error
 func NewConfig() *Config {
-	return &Config{SCHEME_HTTPS, "www.jdcloud-api.com", 10 * time.Second}
+	return &Config{SchemeHttps, "www.jdcloud-api.com", 10 * time.Second}
 }
 
 func (c *Config) SetScheme(scheme string) {
