@@ -1,4 +1,4 @@
-// Copyright 2018-2025 JDCLOUD.COM
+// Copyright 2018 JDCLOUD.COM
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,4 +30,7 @@ type Charge struct {
 
     /* 过期时间，预付费资源的到期时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ，后付费资源此字段内容为空 (Optional) */
     ChargeExpiredTime string `json:"chargeExpiredTime"`
+
+    /* 预期释放时间，资源的预期释放时间，预付费/后付费资源均有此值，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
+    ChargeRetireTime string `json:"chargeRetireTime"`
 }

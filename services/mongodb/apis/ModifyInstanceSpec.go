@@ -1,4 +1,4 @@
-// Copyright 2018-2025 JDCLOUD.COM
+// Copyright 2018 JDCLOUD.COM
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,13 +17,13 @@
 package apis
 
 import (
-    . "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    "github.com/jdcloud-api/jdcloud-sdk-go/core"
     "reflect"
 )
 
 type ModifyInstanceSpecRequest struct {
 
-    JDCloudRequest
+    core.JDCloudRequest
 
     /* Region ID  */
     RegionId string `json:"regionId"`
@@ -32,10 +32,10 @@ type ModifyInstanceSpecRequest struct {
     InstanceId string `json:"instanceId"`
 
     /* 实例规格，包年包月不允许小于当前规格。  */
-    InstanceClass string `json:"instanceClass"`
+    InstanceClass string `json:""`
 
     /* 存储空间，包年包月不允许小于当前规格。  */
-    InstanceStorageGB int `json:"instanceStorageGB"`
+    InstanceStorageGB int `json:""`
 }
 
 /*
@@ -52,7 +52,7 @@ func NewModifyInstanceSpecRequest(
 ) *ModifyInstanceSpecRequest {
 
 	return &ModifyInstanceSpecRequest{
-        JDCloudRequest: JDCloudRequest{
+        JDCloudRequest: core.JDCloudRequest{
 			URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstanceSpec",
 			Method:  "POST",
 			Header:  nil,
@@ -97,7 +97,7 @@ func (r ModifyInstanceSpecRequest) GetRegionId() string {
 
 type ModifyInstanceSpecResponse struct {
     RequestID string `json:"requestId"`
-    Error ErrorResponse `json:"error"`
+    Error core.ErrorResponse `json:"error"`
     Result ModifyInstanceSpecResult `json:"result"`
 }
 

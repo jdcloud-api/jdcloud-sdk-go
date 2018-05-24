@@ -1,4 +1,4 @@
-// Copyright 2018-2025 JDCLOUD.COM
+// Copyright 2018 JDCLOUD.COM
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,13 +17,13 @@
 package apis
 
 import (
-    . "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    "github.com/jdcloud-api/jdcloud-sdk-go/core"
     "reflect"
 )
 
 type AttachDiskRequest struct {
 
-    JDCloudRequest
+    core.JDCloudRequest
 
     /* Region ID  */
     RegionId string `json:"regionId"`
@@ -37,7 +37,7 @@ type AttachDiskRequest struct {
     /* 逻辑挂载点[vdb,vdc,vdd,vde,vdf,vdg,vdh]  */
     DeviceName string `json:"deviceName"`
 
-    /* 当删除主机时，是否自动关联删除此硬盘，默认False，此对按配置计费生效 (Optional) */
+    /* 当删除主机时，是否自动关联删除此硬盘，默认False，只支持按配置计费 (Optional) */
     AutoDelete *bool `json:"autoDelete"`
 }
 
@@ -46,7 +46,7 @@ type AttachDiskRequest struct {
  * param instanceId: Instance ID 
  * param diskId: 云硬盘ID 
  * param deviceName: 逻辑挂载点[vdb,vdc,vdd,vde,vdf,vdg,vdh] 
- * param autoDelete: 当删除主机时，是否自动关联删除此硬盘，默认False，此对按配置计费生效 (Optional)
+ * param autoDelete: 当删除主机时，是否自动关联删除此硬盘，默认False，只支持按配置计费 (Optional)
  */
 func NewAttachDiskRequest(
     regionId string,
@@ -56,7 +56,7 @@ func NewAttachDiskRequest(
 ) *AttachDiskRequest {
 
 	return &AttachDiskRequest{
-        JDCloudRequest: JDCloudRequest{
+        JDCloudRequest: core.JDCloudRequest{
 			URL:     "/regions/{regionId}/instances/{instanceId}:attachDisk",
 			Method:  "POST",
 			Header:  nil,
@@ -105,7 +105,7 @@ func (r AttachDiskRequest) GetRegionId() string {
 
 type AttachDiskResponse struct {
     RequestID string `json:"requestId"`
-    Error ErrorResponse `json:"error"`
+    Error core.ErrorResponse `json:"error"`
     Result AttachDiskResult `json:"result"`
 }
 

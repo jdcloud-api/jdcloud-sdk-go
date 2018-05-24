@@ -1,4 +1,4 @@
-// Copyright 2018-2025 JDCLOUD.COM
+// Copyright 2018 JDCLOUD.COM
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,13 +17,13 @@
 package apis
 
 import (
-    . "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    "github.com/jdcloud-api/jdcloud-sdk-go/core"
     "reflect"
 )
 
 type DisableInstanceIpBlackListRequest struct {
 
-    JDCloudRequest
+    core.JDCloudRequest
 
     /* Region ID  */
     RegionId string `json:"regionId"`
@@ -42,7 +42,7 @@ func NewDisableInstanceIpBlackListRequest(
 ) *DisableInstanceIpBlackListRequest {
 
 	return &DisableInstanceIpBlackListRequest{
-        JDCloudRequest: JDCloudRequest{
+        JDCloudRequest: core.JDCloudRequest{
 			URL:     "/regions/{regionId}/instances/{instanceId}/disableIpBlackList",
 			Method:  "POST",
 			Header:  nil,
@@ -77,7 +77,7 @@ func (r DisableInstanceIpBlackListRequest) GetRegionId() string {
 
 type DisableInstanceIpBlackListResponse struct {
     RequestID string `json:"requestId"`
-    Error ErrorResponse `json:"error"`
+    Error core.ErrorResponse `json:"error"`
     Result DisableInstanceIpBlackListResult `json:"result"`
 }
 

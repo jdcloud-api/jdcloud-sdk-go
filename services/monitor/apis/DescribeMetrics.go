@@ -1,4 +1,4 @@
-// Copyright 2018-2025 JDCLOUD.COM
+// Copyright 2018 JDCLOUD.COM
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,14 +17,14 @@
 package apis
 
 import (
-    . "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    "github.com/jdcloud-api/jdcloud-sdk-go/core"
     "reflect"
     monitor "github.com/jdcloud-api/jdcloud-sdk-go/services/monitor/models"
 )
 
 type DescribeMetricsRequest struct {
 
-    JDCloudRequest
+    core.JDCloudRequest
 
     /* 资源的类型 ： 
 vm-->云主机
@@ -62,7 +62,7 @@ func NewDescribeMetricsRequest(
 ) *DescribeMetricsRequest {
 
 	return &DescribeMetricsRequest{
-        JDCloudRequest: JDCloudRequest{
+        JDCloudRequest: core.JDCloudRequest{
 			URL:     "/metrics",
 			Method:  "GET",
 			Header:  nil,
@@ -92,7 +92,7 @@ func (r DescribeMetricsRequest) GetRegionId() string {
 
 type DescribeMetricsResponse struct {
     RequestID string `json:"requestId"`
-    Error ErrorResponse `json:"error"`
+    Error core.ErrorResponse `json:"error"`
     Result DescribeMetricsResult `json:"result"`
 }
 

@@ -1,4 +1,4 @@
-// Copyright 2018-2025 JDCLOUD.COM
+// Copyright 2018 JDCLOUD.COM
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,45 +17,45 @@
 package client
 
 import (
-    . "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    . "github.com/jdcloud-api/jdcloud-sdk-go/services/oss/apis"
+    "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    oss "github.com/jdcloud-api/jdcloud-sdk-go/services/oss/apis"
     "encoding/json"
     "errors"
 )
 
 type OssClient struct {
-    JDCloudClient
+    core.JDCloudClient
 }
 
-func NewOssClient(credential *Credential) *OssClient {
+func NewOssClient(credential *core.Credential) *OssClient {
     if credential == nil {
         return nil
     }
 
-    config := NewConfig()
+    config := core.NewConfig()
     config.SetEndpoint("oss.jdcloud-api.com")
 
     return &OssClient{
-        JDCloudClient{
+        core.JDCloudClient{
             Credential:  *credential,
             Config:      *config,
             ServiceName: "oss",
             Revision:    "0.2.2",
-            Logger:      NewDefaultLogger(LOG_INFO),
+            Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
 
-func (c *OssClient) SetConfig(config *Config) {
+func (c *OssClient) SetConfig(config *core.Config) {
     c.Config = *config
 }
 
-func (c *OssClient) SetLogger(logger Logger) {
+func (c *OssClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
 /* 创建bucket
  */
-func (c *OssClient) PutBucket(request *PutBucketRequest) (*PutBucketResponse, error) {
+func (c *OssClient) PutBucket(request *oss.PutBucketRequest) (*oss.PutBucketResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -64,14 +64,18 @@ func (c *OssClient) PutBucket(request *PutBucketRequest) (*PutBucketResponse, er
         return nil, err
     }
 
-    jdResp := &PutBucketResponse{}
+    jdResp := &oss.PutBucketResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 删除一个bucket
  */
-func (c *OssClient) DeleteBucket(request *DeleteBucketRequest) (*DeleteBucketResponse, error) {
+func (c *OssClient) DeleteBucket(request *oss.DeleteBucketRequest) (*oss.DeleteBucketResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -80,14 +84,18 @@ func (c *OssClient) DeleteBucket(request *DeleteBucketRequest) (*DeleteBucketRes
         return nil, err
     }
 
-    jdResp := &DeleteBucketResponse{}
+    jdResp := &oss.DeleteBucketResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 查询bucket是否存在
  */
-func (c *OssClient) HeadBucket(request *HeadBucketRequest) (*HeadBucketResponse, error) {
+func (c *OssClient) HeadBucket(request *oss.HeadBucketRequest) (*oss.HeadBucketResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -96,14 +104,18 @@ func (c *OssClient) HeadBucket(request *HeadBucketRequest) (*HeadBucketResponse,
         return nil, err
     }
 
-    jdResp := &HeadBucketResponse{}
+    jdResp := &oss.HeadBucketResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 列出当前用户的所有bucket
  */
-func (c *OssClient) ListBuckets(request *ListBucketsRequest) (*ListBucketsResponse, error) {
+func (c *OssClient) ListBuckets(request *oss.ListBucketsRequest) (*oss.ListBucketsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -112,8 +124,12 @@ func (c *OssClient) ListBuckets(request *ListBucketsRequest) (*ListBucketsRespon
         return nil, err
     }
 
-    jdResp := &ListBucketsResponse{}
+    jdResp := &oss.ListBucketsResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 

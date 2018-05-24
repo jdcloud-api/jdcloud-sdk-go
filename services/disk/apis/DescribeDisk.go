@@ -1,4 +1,4 @@
-// Copyright 2018-2025 JDCLOUD.COM
+// Copyright 2018 JDCLOUD.COM
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,14 +17,14 @@
 package apis
 
 import (
-    . "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    "github.com/jdcloud-api/jdcloud-sdk-go/core"
     "reflect"
     disk "github.com/jdcloud-api/jdcloud-sdk-go/services/disk/models"
 )
 
 type DescribeDiskRequest struct {
 
-    JDCloudRequest
+    core.JDCloudRequest
 
     /* 地域ID  */
     RegionId string `json:"regionId"`
@@ -43,7 +43,7 @@ func NewDescribeDiskRequest(
 ) *DescribeDiskRequest {
 
 	return &DescribeDiskRequest{
-        JDCloudRequest: JDCloudRequest{
+        JDCloudRequest: core.JDCloudRequest{
 			URL:     "/regions/{regionId}/disks/{diskId}",
 			Method:  "GET",
 			Header:  nil,
@@ -78,7 +78,7 @@ func (r DescribeDiskRequest) GetRegionId() string {
 
 type DescribeDiskResponse struct {
     RequestID string `json:"requestId"`
-    Error ErrorResponse `json:"error"`
+    Error core.ErrorResponse `json:"error"`
     Result DescribeDiskResult `json:"result"`
 }
 

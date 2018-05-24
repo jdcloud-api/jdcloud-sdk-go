@@ -1,4 +1,4 @@
-// Copyright 2018-2025 JDCLOUD.COM
+// Copyright 2018 JDCLOUD.COM
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 package apis
 
 import (
-    . "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    "github.com/jdcloud-api/jdcloud-sdk-go/core"
     "reflect"
     redis "github.com/jdcloud-api/jdcloud-sdk-go/services/redis/models"
     common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
@@ -25,7 +25,7 @@ import (
 
 type DescribeCacheInstancesRequest struct {
 
-    JDCloudRequest
+    core.JDCloudRequest
 
     /* 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2  */
     RegionId string `json:"regionId"`
@@ -63,7 +63,7 @@ func NewDescribeCacheInstancesRequest(
 ) *DescribeCacheInstancesRequest {
 
 	return &DescribeCacheInstancesRequest{
-        JDCloudRequest: JDCloudRequest{
+        JDCloudRequest: core.JDCloudRequest{
 			URL:     "/regions/{regionId}/cacheInstance",
 			Method:  "GET",
 			Header:  nil,
@@ -109,7 +109,7 @@ func (r DescribeCacheInstancesRequest) GetRegionId() string {
 
 type DescribeCacheInstancesResponse struct {
     RequestID string `json:"requestId"`
-    Error ErrorResponse `json:"error"`
+    Error core.ErrorResponse `json:"error"`
     Result DescribeCacheInstancesResult `json:"result"`
 }
 

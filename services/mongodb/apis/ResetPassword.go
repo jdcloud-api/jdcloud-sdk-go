@@ -1,4 +1,4 @@
-// Copyright 2018-2025 JDCLOUD.COM
+// Copyright 2018 JDCLOUD.COM
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,13 +17,13 @@
 package apis
 
 import (
-    . "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    "github.com/jdcloud-api/jdcloud-sdk-go/core"
     "reflect"
 )
 
 type ResetPasswordRequest struct {
 
-    JDCloudRequest
+    core.JDCloudRequest
 
     /* Region ID  */
     RegionId string `json:"regionId"`
@@ -32,7 +32,7 @@ type ResetPasswordRequest struct {
     InstanceId string `json:"instanceId"`
 
     /* 新密码，必须包含且只支持字母及数字，不少于8字符不超过16字符。  */
-    AccountPassword string `json:"accountPassword"`
+    AccountPassword string `json:""`
 }
 
 /*
@@ -47,7 +47,7 @@ func NewResetPasswordRequest(
 ) *ResetPasswordRequest {
 
 	return &ResetPasswordRequest{
-        JDCloudRequest: JDCloudRequest{
+        JDCloudRequest: core.JDCloudRequest{
 			URL:     "/regions/{regionId}/instances/{instanceId}:resetPassword",
 			Method:  "POST",
 			Header:  nil,
@@ -87,7 +87,7 @@ func (r ResetPasswordRequest) GetRegionId() string {
 
 type ResetPasswordResponse struct {
     RequestID string `json:"requestId"`
-    Error ErrorResponse `json:"error"`
+    Error core.ErrorResponse `json:"error"`
     Result ResetPasswordResult `json:"result"`
 }
 

@@ -1,4 +1,4 @@
-// Copyright 2018-2025 JDCLOUD.COM
+// Copyright 2018 JDCLOUD.COM
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,44 +17,44 @@
 package client
 
 import (
-    . "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    . "github.com/jdcloud-api/jdcloud-sdk-go/services/redis/apis"
+    "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    redis "github.com/jdcloud-api/jdcloud-sdk-go/services/redis/apis"
     "encoding/json"
     "errors"
 )
 
 type RedisClient struct {
-    JDCloudClient
+    core.JDCloudClient
 }
 
-func NewRedisClient(credential *Credential) *RedisClient {
+func NewRedisClient(credential *core.Credential) *RedisClient {
     if credential == nil {
         return nil
     }
 
-    config := NewConfig()
+    config := core.NewConfig()
     config.SetEndpoint("redis.jdcloud-api.com")
 
     return &RedisClient{
-        JDCloudClient{
+        core.JDCloudClient{
             Credential:  *credential,
             Config:      *config,
             ServiceName: "redis",
             Revision:    "1.0.0",
-            Logger:      NewDefaultLogger(LOG_INFO),
+            Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
 
-func (c *RedisClient) SetConfig(config *Config) {
+func (c *RedisClient) SetConfig(config *core.Config) {
     c.Config = *config
 }
 
-func (c *RedisClient) SetLogger(logger Logger) {
+func (c *RedisClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
 /* 查询缓存Redis实例详情 */
-func (c *RedisClient) DescribeCacheInstance(request *DescribeCacheInstanceRequest) (*DescribeCacheInstanceResponse, error) {
+func (c *RedisClient) DescribeCacheInstance(request *redis.DescribeCacheInstanceRequest) (*redis.DescribeCacheInstanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -63,13 +63,17 @@ func (c *RedisClient) DescribeCacheInstance(request *DescribeCacheInstanceReques
         return nil, err
     }
 
-    jdResp := &DescribeCacheInstanceResponse{}
+    jdResp := &redis.DescribeCacheInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 查询缓存Redis实例列表 */
-func (c *RedisClient) DescribeCacheInstances(request *DescribeCacheInstancesRequest) (*DescribeCacheInstancesResponse, error) {
+func (c *RedisClient) DescribeCacheInstances(request *redis.DescribeCacheInstancesRequest) (*redis.DescribeCacheInstancesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -78,13 +82,17 @@ func (c *RedisClient) DescribeCacheInstances(request *DescribeCacheInstancesRequ
         return nil, err
     }
 
-    jdResp := &DescribeCacheInstancesResponse{}
+    jdResp := &redis.DescribeCacheInstancesResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 查询某区域下的实例规格列表 */
-func (c *RedisClient) DescribeInstanceClass(request *DescribeInstanceClassRequest) (*DescribeInstanceClassResponse, error) {
+func (c *RedisClient) DescribeInstanceClass(request *redis.DescribeInstanceClassRequest) (*redis.DescribeInstanceClassResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -93,13 +101,17 @@ func (c *RedisClient) DescribeInstanceClass(request *DescribeInstanceClassReques
         return nil, err
     }
 
-    jdResp := &DescribeInstanceClassResponse{}
+    jdResp := &redis.DescribeInstanceClassResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 修改缓存Redis实例的资源名称、描述，二者至少选一 */
-func (c *RedisClient) ModifyCacheInstanceAttribute(request *ModifyCacheInstanceAttributeRequest) (*ModifyCacheInstanceAttributeResponse, error) {
+func (c *RedisClient) ModifyCacheInstanceAttribute(request *redis.ModifyCacheInstanceAttributeRequest) (*redis.ModifyCacheInstanceAttributeResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -108,13 +120,17 @@ func (c *RedisClient) ModifyCacheInstanceAttribute(request *ModifyCacheInstanceA
         return nil, err
     }
 
-    jdResp := &ModifyCacheInstanceAttributeResponse{}
+    jdResp := &redis.ModifyCacheInstanceAttributeResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 查询账户配额信息 */
-func (c *RedisClient) DescribeUserQuota(request *DescribeUserQuotaRequest) (*DescribeUserQuotaResponse, error) {
+func (c *RedisClient) DescribeUserQuota(request *redis.DescribeUserQuotaRequest) (*redis.DescribeUserQuotaResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -123,13 +139,17 @@ func (c *RedisClient) DescribeUserQuota(request *DescribeUserQuotaRequest) (*Des
         return nil, err
     }
 
-    jdResp := &DescribeUserQuotaResponse{}
+    jdResp := &redis.DescribeUserQuotaResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 重置缓存Redis实例密码 */
-func (c *RedisClient) ResetCacheInstancePassword(request *ResetCacheInstancePasswordRequest) (*ResetCacheInstancePasswordResponse, error) {
+func (c *RedisClient) ResetCacheInstancePassword(request *redis.ResetCacheInstancePasswordRequest) (*redis.ResetCacheInstancePasswordResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -138,13 +158,17 @@ func (c *RedisClient) ResetCacheInstancePassword(request *ResetCacheInstancePass
         return nil, err
     }
 
-    jdResp := &ResetCacheInstancePasswordResponse{}
+    jdResp := &redis.ResetCacheInstancePasswordResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 删除单个缓存Redis实例 */
-func (c *RedisClient) DeleteCacheInstance(request *DeleteCacheInstanceRequest) (*DeleteCacheInstanceResponse, error) {
+func (c *RedisClient) DeleteCacheInstance(request *redis.DeleteCacheInstanceRequest) (*redis.DeleteCacheInstanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -153,13 +177,17 @@ func (c *RedisClient) DeleteCacheInstance(request *DeleteCacheInstanceRequest) (
         return nil, err
     }
 
-    jdResp := &DeleteCacheInstanceResponse{}
+    jdResp := &redis.DeleteCacheInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 创建一个指定配置的缓存Redis实例 */
-func (c *RedisClient) CreateCacheInstance(request *CreateCacheInstanceRequest) (*CreateCacheInstanceResponse, error) {
+func (c *RedisClient) CreateCacheInstance(request *redis.CreateCacheInstanceRequest) (*redis.CreateCacheInstanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -168,13 +196,17 @@ func (c *RedisClient) CreateCacheInstance(request *CreateCacheInstanceRequest) (
         return nil, err
     }
 
-    jdResp := &CreateCacheInstanceResponse{}
+    jdResp := &redis.CreateCacheInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 变更缓存Redis实例配置 */
-func (c *RedisClient) ModifyCacheInstanceClass(request *ModifyCacheInstanceClassRequest) (*ModifyCacheInstanceClassResponse, error) {
+func (c *RedisClient) ModifyCacheInstanceClass(request *redis.ModifyCacheInstanceClassRequest) (*redis.ModifyCacheInstanceClassResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -183,8 +215,12 @@ func (c *RedisClient) ModifyCacheInstanceClass(request *ModifyCacheInstanceClass
         return nil, err
     }
 
-    jdResp := &ModifyCacheInstanceClassResponse{}
+    jdResp := &redis.ModifyCacheInstanceClassResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 

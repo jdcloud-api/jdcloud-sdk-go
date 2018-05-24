@@ -1,4 +1,4 @@
-// Copyright 2018-2025 JDCLOUD.COM
+// Copyright 2018 JDCLOUD.COM
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,14 +17,14 @@
 package apis
 
 import (
-    . "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    "github.com/jdcloud-api/jdcloud-sdk-go/core"
     "reflect"
     monitor "github.com/jdcloud-api/jdcloud-sdk-go/services/monitor/models"
 )
 
 type DescribeMetricsForCreateAlarmRequest struct {
 
-    JDCloudRequest
+    core.JDCloudRequest
 
     /* 资源的类型，默认为空，展示所有项目
 vm-->云主机
@@ -61,7 +61,7 @@ func NewDescribeMetricsForCreateAlarmRequest(
 ) *DescribeMetricsForCreateAlarmRequest {
 
 	return &DescribeMetricsForCreateAlarmRequest{
-        JDCloudRequest: JDCloudRequest{
+        JDCloudRequest: core.JDCloudRequest{
 			URL:     "/metricsForCreateAlarm",
 			Method:  "GET",
 			Header:  nil,
@@ -90,7 +90,7 @@ func (r DescribeMetricsForCreateAlarmRequest) GetRegionId() string {
 
 type DescribeMetricsForCreateAlarmResponse struct {
     RequestID string `json:"requestId"`
-    Error ErrorResponse `json:"error"`
+    Error core.ErrorResponse `json:"error"`
     Result DescribeMetricsForCreateAlarmResult `json:"result"`
 }
 

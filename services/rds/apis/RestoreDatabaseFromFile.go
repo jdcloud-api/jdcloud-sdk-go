@@ -1,4 +1,4 @@
-// Copyright 2018-2025 JDCLOUD.COM
+// Copyright 2018 JDCLOUD.COM
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,13 +17,13 @@
 package apis
 
 import (
-    . "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    "github.com/jdcloud-api/jdcloud-sdk-go/core"
     "reflect"
 )
 
 type RestoreDatabaseFromFileRequest struct {
 
-    JDCloudRequest
+    core.JDCloudRequest
 
     /* 区域代码  */
     RegionId string `json:"regionId"`
@@ -35,10 +35,10 @@ type RestoreDatabaseFromFileRequest struct {
     DbName string `json:"dbName"`
 
     /* 共享文件的全局ID，可从上传文件查询接口describeImportFiles获取；如果该文件不是共享文件，则全局ID为空 (Optional) */
-    SharedFileGid *string `json:"sharedFileGid"`
+    SharedFileGid *string `json:""`
 
     /* 用户在单库上云中上传的文件名称  */
-    FileName string `json:"fileName"`
+    FileName string `json:""`
 }
 
 /*
@@ -56,7 +56,7 @@ func NewRestoreDatabaseFromFileRequest(
 ) *RestoreDatabaseFromFileRequest {
 
 	return &RestoreDatabaseFromFileRequest{
-        JDCloudRequest: JDCloudRequest{
+        JDCloudRequest: core.JDCloudRequest{
 			URL:     "/regions/{regionId}/instances/{instanceId}/databases/{dbName}:restoreDatabaseFromFile",
 			Method:  "POST",
 			Header:  nil,
@@ -105,7 +105,7 @@ func (r RestoreDatabaseFromFileRequest) GetRegionId() string {
 
 type RestoreDatabaseFromFileResponse struct {
     RequestID string `json:"requestId"`
-    Error ErrorResponse `json:"error"`
+    Error core.ErrorResponse `json:"error"`
     Result RestoreDatabaseFromFileResult `json:"result"`
 }
 

@@ -1,4 +1,4 @@
-// Copyright 2018-2025 JDCLOUD.COM
+// Copyright 2018 JDCLOUD.COM
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,44 +17,44 @@
 package client
 
 import (
-    . "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    . "github.com/jdcloud-api/jdcloud-sdk-go/services/iam/apis"
+    "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    iam "github.com/jdcloud-api/jdcloud-sdk-go/services/iam/apis"
     "encoding/json"
     "errors"
 )
 
 type IamClient struct {
-    JDCloudClient
+    core.JDCloudClient
 }
 
-func NewIamClient(credential *Credential) *IamClient {
+func NewIamClient(credential *core.Credential) *IamClient {
     if credential == nil {
         return nil
     }
 
-    config := NewConfig()
+    config := core.NewConfig()
     config.SetEndpoint("iam.jdcloud-api.com")
 
     return &IamClient{
-        JDCloudClient{
+        core.JDCloudClient{
             Credential:  *credential,
             Config:      *config,
             ServiceName: "iam",
-            Revision:    "0.1.0",
-            Logger:      NewDefaultLogger(LOG_INFO),
+            Revision:    "0.1.1",
+            Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
 
-func (c *IamClient) SetConfig(config *Config) {
+func (c *IamClient) SetConfig(config *core.Config) {
     c.Config = *config
 }
 
-func (c *IamClient) SetLogger(logger Logger) {
+func (c *IamClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
 /* 为子用户绑定策略 */
-func (c *IamClient) AddPermissionsToSubUser(request *AddPermissionsToSubUserRequest) (*AddPermissionsToSubUserResponse, error) {
+func (c *IamClient) AddPermissionsToSubUser(request *iam.AddPermissionsToSubUserRequest) (*iam.AddPermissionsToSubUserResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -63,13 +63,17 @@ func (c *IamClient) AddPermissionsToSubUser(request *AddPermissionsToSubUserRequ
         return nil, err
     }
 
-    jdResp := &AddPermissionsToSubUserResponse{}
+    jdResp := &iam.AddPermissionsToSubUserResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 修改策略 */
-func (c *IamClient) UpdatePermission(request *UpdatePermissionRequest) (*UpdatePermissionResponse, error) {
+func (c *IamClient) UpdatePermission(request *iam.UpdatePermissionRequest) (*iam.UpdatePermissionResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -78,13 +82,17 @@ func (c *IamClient) UpdatePermission(request *UpdatePermissionRequest) (*UpdateP
         return nil, err
     }
 
-    jdResp := &UpdatePermissionResponse{}
+    jdResp := &iam.UpdatePermissionResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 创建策略 */
-func (c *IamClient) CreatePermission(request *CreatePermissionRequest) (*CreatePermissionResponse, error) {
+func (c *IamClient) CreatePermission(request *iam.CreatePermissionRequest) (*iam.CreatePermissionResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -93,13 +101,17 @@ func (c *IamClient) CreatePermission(request *CreatePermissionRequest) (*CreateP
         return nil, err
     }
 
-    jdResp := &CreatePermissionResponse{}
+    jdResp := &iam.CreatePermissionResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 启用AccessKey */
-func (c *IamClient) EnabledUserAccessKey(request *EnabledUserAccessKeyRequest) (*EnabledUserAccessKeyResponse, error) {
+func (c *IamClient) EnabledUserAccessKey(request *iam.EnabledUserAccessKeyRequest) (*iam.EnabledUserAccessKeyResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -108,13 +120,17 @@ func (c *IamClient) EnabledUserAccessKey(request *EnabledUserAccessKeyRequest) (
         return nil, err
     }
 
-    jdResp := &EnabledUserAccessKeyResponse{}
+    jdResp := &iam.EnabledUserAccessKeyResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 创建AccessKey */
-func (c *IamClient) CreateUserAccessKey(request *CreateUserAccessKeyRequest) (*CreateUserAccessKeyResponse, error) {
+func (c *IamClient) CreateUserAccessKey(request *iam.CreateUserAccessKeyRequest) (*iam.CreateUserAccessKeyResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -123,13 +139,17 @@ func (c *IamClient) CreateUserAccessKey(request *CreateUserAccessKeyRequest) (*C
         return nil, err
     }
 
-    jdResp := &CreateUserAccessKeyResponse{}
+    jdResp := &iam.CreateUserAccessKeyResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 查询策略列表 */
-func (c *IamClient) DescribePermissions(request *DescribePermissionsRequest) (*DescribePermissionsResponse, error) {
+func (c *IamClient) DescribePermissions(request *iam.DescribePermissionsRequest) (*iam.DescribePermissionsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -138,13 +158,17 @@ func (c *IamClient) DescribePermissions(request *DescribePermissionsRequest) (*D
         return nil, err
     }
 
-    jdResp := &DescribePermissionsResponse{}
+    jdResp := &iam.DescribePermissionsResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 查询策略详情 */
-func (c *IamClient) DescribePermissionDetail(request *DescribePermissionDetailRequest) (*DescribePermissionDetailResponse, error) {
+func (c *IamClient) DescribePermissionDetail(request *iam.DescribePermissionDetailRequest) (*iam.DescribePermissionDetailResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -153,13 +177,17 @@ func (c *IamClient) DescribePermissionDetail(request *DescribePermissionDetailRe
         return nil, err
     }
 
-    jdResp := &DescribePermissionDetailResponse{}
+    jdResp := &iam.DescribePermissionDetailResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 创建子账号 */
-func (c *IamClient) CreateSubuser(request *CreateSubuserRequest) (*CreateSubuserResponse, error) {
+func (c *IamClient) CreateSubuser(request *iam.CreateSubuserRequest) (*iam.CreateSubuserResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -168,13 +196,17 @@ func (c *IamClient) CreateSubuser(request *CreateSubuserRequest) (*CreateSubuser
         return nil, err
     }
 
-    jdResp := &CreateSubuserResponse{}
+    jdResp := &iam.CreateSubuserResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 为子用户解绑策略 */
-func (c *IamClient) RemovePermissionOfSubUser(request *RemovePermissionOfSubUserRequest) (*RemovePermissionOfSubUserResponse, error) {
+func (c *IamClient) RemovePermissionOfSubUser(request *iam.RemovePermissionOfSubUserRequest) (*iam.RemovePermissionOfSubUserResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -183,13 +215,17 @@ func (c *IamClient) RemovePermissionOfSubUser(request *RemovePermissionOfSubUser
         return nil, err
     }
 
-    jdResp := &RemovePermissionOfSubUserResponse{}
+    jdResp := &iam.RemovePermissionOfSubUserResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 禁用AccessKey */
-func (c *IamClient) DisabledUserAccessKey(request *DisabledUserAccessKeyRequest) (*DisabledUserAccessKeyResponse, error) {
+func (c *IamClient) DisabledUserAccessKey(request *iam.DisabledUserAccessKeyRequest) (*iam.DisabledUserAccessKeyResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -198,13 +234,17 @@ func (c *IamClient) DisabledUserAccessKey(request *DisabledUserAccessKeyRequest)
         return nil, err
     }
 
-    jdResp := &DisabledUserAccessKeyResponse{}
+    jdResp := &iam.DisabledUserAccessKeyResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 查询子用户策略列表 */
-func (c *IamClient) DescribeSubUserPermissions(request *DescribeSubUserPermissionsRequest) (*DescribeSubUserPermissionsResponse, error) {
+func (c *IamClient) DescribeSubUserPermissions(request *iam.DescribeSubUserPermissionsRequest) (*iam.DescribeSubUserPermissionsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -213,13 +253,17 @@ func (c *IamClient) DescribeSubUserPermissions(request *DescribeSubUserPermissio
         return nil, err
     }
 
-    jdResp := &DescribeSubUserPermissionsResponse{}
+    jdResp := &iam.DescribeSubUserPermissionsResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 删除AccessKey */
-func (c *IamClient) DeleteUserAccessKey(request *DeleteUserAccessKeyRequest) (*DeleteUserAccessKeyResponse, error) {
+func (c *IamClient) DeleteUserAccessKey(request *iam.DeleteUserAccessKeyRequest) (*iam.DeleteUserAccessKeyResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -228,13 +272,17 @@ func (c *IamClient) DeleteUserAccessKey(request *DeleteUserAccessKeyRequest) (*D
         return nil, err
     }
 
-    jdResp := &DeleteUserAccessKeyResponse{}
+    jdResp := &iam.DeleteUserAccessKeyResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 查询AccessKey列表 */
-func (c *IamClient) DescribeUserAccessKeys(request *DescribeUserAccessKeysRequest) (*DescribeUserAccessKeysResponse, error) {
+func (c *IamClient) DescribeUserAccessKeys(request *iam.DescribeUserAccessKeysRequest) (*iam.DescribeUserAccessKeysResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -243,8 +291,12 @@ func (c *IamClient) DescribeUserAccessKeys(request *DescribeUserAccessKeysReques
         return nil, err
     }
 
-    jdResp := &DescribeUserAccessKeysResponse{}
+    jdResp := &iam.DescribeUserAccessKeysResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 

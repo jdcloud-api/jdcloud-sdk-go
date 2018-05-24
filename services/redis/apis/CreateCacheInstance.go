@@ -1,4 +1,4 @@
-// Copyright 2018-2025 JDCLOUD.COM
+// Copyright 2018 JDCLOUD.COM
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 package apis
 
 import (
-    . "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    "github.com/jdcloud-api/jdcloud-sdk-go/core"
     "reflect"
     redis "github.com/jdcloud-api/jdcloud-sdk-go/services/redis/models"
     charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
@@ -25,7 +25,7 @@ import (
 
 type CreateCacheInstanceRequest struct {
 
-    JDCloudRequest
+    core.JDCloudRequest
 
     /* 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2  */
     RegionId string `json:"regionId"`
@@ -48,7 +48,7 @@ func NewCreateCacheInstanceRequest(
 ) *CreateCacheInstanceRequest {
 
 	return &CreateCacheInstanceRequest{
-        JDCloudRequest: JDCloudRequest{
+        JDCloudRequest: core.JDCloudRequest{
 			URL:     "/regions/{regionId}/cacheInstance",
 			Method:  "POST",
 			Header:  nil,
@@ -87,7 +87,7 @@ func (r CreateCacheInstanceRequest) GetRegionId() string {
 
 type CreateCacheInstanceResponse struct {
     RequestID string `json:"requestId"`
-    Error ErrorResponse `json:"error"`
+    Error core.ErrorResponse `json:"error"`
     Result CreateCacheInstanceResult `json:"result"`
 }
 

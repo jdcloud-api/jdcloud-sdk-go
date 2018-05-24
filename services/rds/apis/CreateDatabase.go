@@ -1,4 +1,4 @@
-// Copyright 2018-2025 JDCLOUD.COM
+// Copyright 2018 JDCLOUD.COM
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,13 +17,13 @@
 package apis
 
 import (
-    . "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    "github.com/jdcloud-api/jdcloud-sdk-go/core"
     "reflect"
 )
 
 type CreateDatabaseRequest struct {
 
-    JDCloudRequest
+    core.JDCloudRequest
 
     /* 区域代码  */
     RegionId string `json:"regionId"`
@@ -32,10 +32,10 @@ type CreateDatabaseRequest struct {
     InstanceId string `json:"instanceId"`
 
     /* 数据库名称  */
-    DbName string `json:"dbName"`
+    DbName string `json:""`
 
     /* 字符集名称,mysql字符集包括：utf8；SQL Server字符集包括：Chinese_PRC_CI_AS、Chinese_PRC_CS_AS、SQL_Latin1_General_CP1_CI_AS、SQL_Latin1_General_CP1_CS_AS、Chinese_PRC_BIN  */
-    CharacterSetName string `json:"characterSetName"`
+    CharacterSetName string `json:""`
 }
 
 /*
@@ -52,7 +52,7 @@ func NewCreateDatabaseRequest(
 ) *CreateDatabaseRequest {
 
 	return &CreateDatabaseRequest{
-        JDCloudRequest: JDCloudRequest{
+        JDCloudRequest: core.JDCloudRequest{
 			URL:     "/regions/{regionId}/instances/{instanceId}/databases",
 			Method:  "POST",
 			Header:  nil,
@@ -97,7 +97,7 @@ func (r CreateDatabaseRequest) GetRegionId() string {
 
 type CreateDatabaseResponse struct {
     RequestID string `json:"requestId"`
-    Error ErrorResponse `json:"error"`
+    Error core.ErrorResponse `json:"error"`
     Result CreateDatabaseResult `json:"result"`
 }
 

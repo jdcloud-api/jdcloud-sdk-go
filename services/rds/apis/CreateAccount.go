@@ -1,4 +1,4 @@
-// Copyright 2018-2025 JDCLOUD.COM
+// Copyright 2018 JDCLOUD.COM
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,13 +17,13 @@
 package apis
 
 import (
-    . "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    "github.com/jdcloud-api/jdcloud-sdk-go/core"
     "reflect"
 )
 
 type CreateAccountRequest struct {
 
-    JDCloudRequest
+    core.JDCloudRequest
 
     /* 地域代码  */
     RegionId string `json:"regionId"`
@@ -32,10 +32,10 @@ type CreateAccountRequest struct {
     InstanceId string `json:"instanceId"`
 
     /* 用户名  */
-    AccountName string `json:"accountName"`
+    AccountName string `json:""`
 
     /* 用户密码  */
-    AccountPassword string `json:"accountPassword"`
+    AccountPassword string `json:""`
 }
 
 /*
@@ -52,7 +52,7 @@ func NewCreateAccountRequest(
 ) *CreateAccountRequest {
 
 	return &CreateAccountRequest{
-        JDCloudRequest: JDCloudRequest{
+        JDCloudRequest: core.JDCloudRequest{
 			URL:     "/regions/{regionId}/instances/{instanceId}/accounts",
 			Method:  "POST",
 			Header:  nil,
@@ -97,7 +97,7 @@ func (r CreateAccountRequest) GetRegionId() string {
 
 type CreateAccountResponse struct {
     RequestID string `json:"requestId"`
-    Error ErrorResponse `json:"error"`
+    Error core.ErrorResponse `json:"error"`
     Result CreateAccountResult `json:"result"`
 }
 

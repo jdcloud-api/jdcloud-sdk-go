@@ -1,4 +1,4 @@
-// Copyright 2018-2025 JDCLOUD.COM
+// Copyright 2018 JDCLOUD.COM
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,44 +17,44 @@
 package client
 
 import (
-    . "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    . "github.com/jdcloud-api/jdcloud-sdk-go/services/nc/apis"
+    "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    nc "github.com/jdcloud-api/jdcloud-sdk-go/services/nc/apis"
     "encoding/json"
     "errors"
 )
 
 type NcClient struct {
-    JDCloudClient
+    core.JDCloudClient
 }
 
-func NewNcClient(credential *Credential) *NcClient {
+func NewNcClient(credential *core.Credential) *NcClient {
     if credential == nil {
         return nil
     }
 
-    config := NewConfig()
+    config := core.NewConfig()
     config.SetEndpoint("nc.jdcloud-api.com")
 
     return &NcClient{
-        JDCloudClient{
+        core.JDCloudClient{
             Credential:  *credential,
             Config:      *config,
             ServiceName: "nc",
             Revision:    "0.2.1",
-            Logger:      NewDefaultLogger(LOG_INFO),
+            Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
 
-func (c *NcClient) SetConfig(config *Config) {
+func (c *NcClient) SetConfig(config *core.Config) {
     c.Config = *config
 }
 
-func (c *NcClient) SetLogger(logger Logger) {
+func (c *NcClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
 /* 查询容器列表 */
-func (c *NcClient) DescribeContainers(request *DescribeContainersRequest) (*DescribeContainersResponse, error) {
+func (c *NcClient) DescribeContainers(request *nc.DescribeContainersRequest) (*nc.DescribeContainersResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -63,13 +63,17 @@ func (c *NcClient) DescribeContainers(request *DescribeContainersRequest) (*Desc
         return nil, err
     }
 
-    jdResp := &DescribeContainersResponse{}
+    jdResp := &nc.DescribeContainersResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 创建一台或多台指定配置的实例 */
-func (c *NcClient) CreateContainers(request *CreateContainersRequest) (*CreateContainersResponse, error) {
+func (c *NcClient) CreateContainers(request *nc.CreateContainersRequest) (*nc.CreateContainersResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -78,13 +82,17 @@ func (c *NcClient) CreateContainers(request *CreateContainersRequest) (*CreateCo
         return nil, err
     }
 
-    jdResp := &CreateContainersResponse{}
+    jdResp := &nc.CreateContainersResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 查询容器日志 */
-func (c *NcClient) GetLogs(request *GetLogsRequest) (*GetLogsResponse, error) {
+func (c *NcClient) GetLogs(request *nc.GetLogsRequest) (*nc.GetLogsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -93,13 +101,17 @@ func (c *NcClient) GetLogs(request *GetLogsRequest) (*GetLogsResponse, error) {
         return nil, err
     }
 
-    jdResp := &GetLogsResponse{}
+    jdResp := &nc.GetLogsResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 查询 secret 详情 */
-func (c *NcClient) DescribeSecret(request *DescribeSecretRequest) (*DescribeSecretResponse, error) {
+func (c *NcClient) DescribeSecret(request *nc.DescribeSecretRequest) (*nc.DescribeSecretResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -108,13 +120,17 @@ func (c *NcClient) DescribeSecret(request *DescribeSecretRequest) (*DescribeSecr
         return nil, err
     }
 
-    jdResp := &DescribeSecretResponse{}
+    jdResp := &nc.DescribeSecretResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 修改容器属性 */
-func (c *NcClient) ModifyContainerAttribute(request *ModifyContainerAttributeRequest) (*ModifyContainerAttributeResponse, error) {
+func (c *NcClient) ModifyContainerAttribute(request *nc.ModifyContainerAttributeRequest) (*nc.ModifyContainerAttributeResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -123,13 +139,17 @@ func (c *NcClient) ModifyContainerAttribute(request *ModifyContainerAttributeReq
         return nil, err
     }
 
-    jdResp := &ModifyContainerAttributeResponse{}
+    jdResp := &nc.ModifyContainerAttributeResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 删除单个实例 */
-func (c *NcClient) DeleteContainer(request *DeleteContainerRequest) (*DeleteContainerResponse, error) {
+func (c *NcClient) DeleteContainer(request *nc.DeleteContainerRequest) (*nc.DeleteContainerResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -138,13 +158,17 @@ func (c *NcClient) DeleteContainer(request *DeleteContainerRequest) (*DeleteCont
         return nil, err
     }
 
-    jdResp := &DeleteContainerResponse{}
+    jdResp := &nc.DeleteContainerResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 停止单个实例 */
-func (c *NcClient) StopContainer(request *StopContainerRequest) (*StopContainerResponse, error) {
+func (c *NcClient) StopContainer(request *nc.StopContainerRequest) (*nc.StopContainerResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -153,13 +177,17 @@ func (c *NcClient) StopContainer(request *StopContainerRequest) (*StopContainerR
         return nil, err
     }
 
-    jdResp := &StopContainerResponse{}
+    jdResp := &nc.StopContainerResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 启动单个实例 */
-func (c *NcClient) StartContainer(request *StartContainerRequest) (*StartContainerResponse, error) {
+func (c *NcClient) StartContainer(request *nc.StartContainerRequest) (*nc.StartContainerResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -168,13 +196,17 @@ func (c *NcClient) StartContainer(request *StartContainerRequest) (*StartContain
         return nil, err
     }
 
-    jdResp := &StartContainerResponse{}
+    jdResp := &nc.StartContainerResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 容器解绑公网IP 解绑的是主网卡、主内网IP对应的弹性IP */
-func (c *NcClient) DisassociateElasticIp(request *DisassociateElasticIpRequest) (*DisassociateElasticIpResponse, error) {
+func (c *NcClient) DisassociateElasticIp(request *nc.DisassociateElasticIpRequest) (*nc.DisassociateElasticIpResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -183,13 +215,17 @@ func (c *NcClient) DisassociateElasticIp(request *DisassociateElasticIpRequest) 
         return nil, err
     }
 
-    jdResp := &DisassociateElasticIpResponse{}
+    jdResp := &nc.DisassociateElasticIpResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 查询secret列表 */
-func (c *NcClient) DescribeSecrets(request *DescribeSecretsRequest) (*DescribeSecretsResponse, error) {
+func (c *NcClient) DescribeSecrets(request *nc.DescribeSecretsRequest) (*nc.DescribeSecretsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -198,13 +234,17 @@ func (c *NcClient) DescribeSecrets(request *DescribeSecretsRequest) (*DescribeSe
         return nil, err
     }
 
-    jdResp := &DescribeSecretsResponse{}
+    jdResp := &nc.DescribeSecretsResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 查询资源的配额 */
-func (c *NcClient) DescribeQuota(request *DescribeQuotaRequest) (*DescribeQuotaResponse, error) {
+func (c *NcClient) DescribeQuota(request *nc.DescribeQuotaRequest) (*nc.DescribeQuotaResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -213,13 +253,17 @@ func (c *NcClient) DescribeQuota(request *DescribeQuotaRequest) (*DescribeQuotaR
         return nil, err
     }
 
-    jdResp := &DescribeQuotaResponse{}
+    jdResp := &nc.DescribeQuotaResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 查询容器详情 */
-func (c *NcClient) DescribeContainer(request *DescribeContainerRequest) (*DescribeContainerResponse, error) {
+func (c *NcClient) DescribeContainer(request *nc.DescribeContainerRequest) (*nc.DescribeContainerResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -228,13 +272,17 @@ func (c *NcClient) DescribeContainer(request *DescribeContainerRequest) (*Descri
         return nil, err
     }
 
-    jdResp := &DescribeContainerResponse{}
+    jdResp := &nc.DescribeContainerResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 删除 secret */
-func (c *NcClient) DeleteSecret(request *DeleteSecretRequest) (*DeleteSecretResponse, error) {
+func (c *NcClient) DeleteSecret(request *nc.DeleteSecretRequest) (*nc.DeleteSecretResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -243,13 +291,17 @@ func (c *NcClient) DeleteSecret(request *DeleteSecretRequest) (*DeleteSecretResp
         return nil, err
     }
 
-    jdResp := &DeleteSecretResponse{}
+    jdResp := &nc.DeleteSecretResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 创建 secret */
-func (c *NcClient) CreateSecret(request *CreateSecretRequest) (*CreateSecretResponse, error) {
+func (c *NcClient) CreateSecret(request *nc.CreateSecretRequest) (*nc.CreateSecretResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -258,13 +310,17 @@ func (c *NcClient) CreateSecret(request *CreateSecretRequest) (*CreateSecretResp
         return nil, err
     }
 
-    jdResp := &CreateSecretResponse{}
+    jdResp := &nc.CreateSecretResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 容器绑定公网IP 绑定的是主网卡、主内网IP对应的弹性IP */
-func (c *NcClient) AssociateElasticIp(request *AssociateElasticIpRequest) (*AssociateElasticIpResponse, error) {
+func (c *NcClient) AssociateElasticIp(request *nc.AssociateElasticIpRequest) (*nc.AssociateElasticIpResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -273,8 +329,12 @@ func (c *NcClient) AssociateElasticIp(request *AssociateElasticIpRequest) (*Asso
         return nil, err
     }
 
-    jdResp := &AssociateElasticIpResponse{}
+    jdResp := &nc.AssociateElasticIpResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 

@@ -1,4 +1,4 @@
-// Copyright 2018-2025 JDCLOUD.COM
+// Copyright 2018 JDCLOUD.COM
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 package apis
 
 import (
-    . "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    "github.com/jdcloud-api/jdcloud-sdk-go/core"
     "reflect"
     vm "github.com/jdcloud-api/jdcloud-sdk-go/services/vm/models"
     common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
@@ -25,7 +25,7 @@ import (
 
 type DescribeInstancesRequest struct {
 
-    JDCloudRequest
+    core.JDCloudRequest
 
     /* Region ID  */
     RegionId string `json:"regionId"`
@@ -35,6 +35,9 @@ type DescribeInstancesRequest struct {
 
     /* 分页大小；默认为20；取值范围[10, 100] (Optional) */
     PageSize *int `json:"pageSize"`
+
+    /* Tag筛选条件 (Optional) */
+    Tags []vm.TagFilter `json:"tags"`
 
     /* instanceId - 实例ID，精确匹配，支持多个
 privateIpAddress - 主网卡IP地址，模糊匹配，支持单个
@@ -51,6 +54,7 @@ imageId - 镜像ID，模糊匹配，支持单个
  * param regionId: Region ID 
  * param pageNumber: 页码；默认为1 (Optional)
  * param pageSize: 分页大小；默认为20；取值范围[10, 100] (Optional)
+ * param tags: Tag筛选条件 (Optional)
  * param filters: instanceId - 实例ID，精确匹配，支持多个
 privateIpAddress - 主网卡IP地址，模糊匹配，支持单个
 az - 可用区，精确匹配，支持多个
@@ -65,7 +69,7 @@ func NewDescribeInstancesRequest(
 ) *DescribeInstancesRequest {
 
 	return &DescribeInstancesRequest{
-        JDCloudRequest: JDCloudRequest{
+        JDCloudRequest: core.JDCloudRequest{
 			URL:     "/regions/{regionId}/instances",
 			Method:  "GET",
 			Header:  nil,
@@ -85,6 +89,10 @@ func (r *DescribeInstancesRequest) SetPageNumber(pageNumber int) {
 
 func (r *DescribeInstancesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
+}
+
+func (r *DescribeInstancesRequest) SetTags(tags []vm.TagFilter) {
+    r.Tags = tags
 }
 
 func (r *DescribeInstancesRequest) SetFilters(filters []common.Filter) {
@@ -107,7 +115,7 @@ func (r DescribeInstancesRequest) GetRegionId() string {
 
 type DescribeInstancesResponse struct {
     RequestID string `json:"requestId"`
-    Error ErrorResponse `json:"error"`
+    Error core.ErrorResponse `json:"error"`
     Result DescribeInstancesResult `json:"result"`
 }
 

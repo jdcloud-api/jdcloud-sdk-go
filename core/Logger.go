@@ -17,10 +17,10 @@ package core
 import "fmt"
 
 const (
-	LOG_FATAL = iota
-	LOG_ERROR
-	LOG_WARN
-	LOG_INFO
+	LogFatal = iota
+	LogError
+	LogWarn
+	LogInfo  
 )
 
 type Logger interface {

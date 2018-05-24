@@ -1,4 +1,4 @@
-// Copyright 2018-2025 JDCLOUD.COM
+// Copyright 2018 JDCLOUD.COM
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,44 +17,44 @@
 package client
 
 import (
-    . "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    . "github.com/jdcloud-api/jdcloud-sdk-go/services/disk/apis"
+    "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    disk "github.com/jdcloud-api/jdcloud-sdk-go/services/disk/apis"
     "encoding/json"
     "errors"
 )
 
 type DiskClient struct {
-    JDCloudClient
+    core.JDCloudClient
 }
 
-func NewDiskClient(credential *Credential) *DiskClient {
+func NewDiskClient(credential *core.Credential) *DiskClient {
     if credential == nil {
         return nil
     }
 
-    config := NewConfig()
+    config := core.NewConfig()
     config.SetEndpoint("disk.jdcloud-api.com")
 
     return &DiskClient{
-        JDCloudClient{
+        core.JDCloudClient{
             Credential:  *credential,
             Config:      *config,
             ServiceName: "disk",
             Revision:    "0.5.0",
-            Logger:      NewDefaultLogger(LOG_INFO),
+            Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
 
-func (c *DiskClient) SetConfig(config *Config) {
+func (c *DiskClient) SetConfig(config *core.Config) {
     c.Config = *config
 }
 
-func (c *DiskClient) SetLogger(logger Logger) {
+func (c *DiskClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
 /* 为指定云硬盘创建快照,新生成的快照的状态为creating */
-func (c *DiskClient) CreateSnapshot(request *CreateSnapshotRequest) (*CreateSnapshotResponse, error) {
+func (c *DiskClient) CreateSnapshot(request *disk.CreateSnapshotRequest) (*disk.CreateSnapshotResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -63,13 +63,17 @@ func (c *DiskClient) CreateSnapshot(request *CreateSnapshotRequest) (*CreateSnap
         return nil, err
     }
 
-    jdResp := &CreateSnapshotResponse{}
+    jdResp := &disk.CreateSnapshotResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 从已有快照恢复一块云硬盘 */
-func (c *DiskClient) RestoreDisk(request *RestoreDiskRequest) (*RestoreDiskResponse, error) {
+func (c *DiskClient) RestoreDisk(request *disk.RestoreDiskRequest) (*disk.RestoreDiskResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -78,13 +82,17 @@ func (c *DiskClient) RestoreDisk(request *RestoreDiskRequest) (*RestoreDiskRespo
         return nil, err
     }
 
-    jdResp := &RestoreDiskResponse{}
+    jdResp := &disk.RestoreDiskResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 查询云硬盘列表 */
-func (c *DiskClient) DescribeDisks(request *DescribeDisksRequest) (*DescribeDisksResponse, error) {
+func (c *DiskClient) DescribeDisks(request *disk.DescribeDisksRequest) (*disk.DescribeDisksResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -93,13 +101,17 @@ func (c *DiskClient) DescribeDisks(request *DescribeDisksRequest) (*DescribeDisk
         return nil, err
     }
 
-    jdResp := &DescribeDisksResponse{}
+    jdResp := &disk.DescribeDisksResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 查询云硬盘快照列表 */
-func (c *DiskClient) DescribeSnapshots(request *DescribeSnapshotsRequest) (*DescribeSnapshotsResponse, error) {
+func (c *DiskClient) DescribeSnapshots(request *disk.DescribeSnapshotsRequest) (*disk.DescribeSnapshotsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -108,13 +120,17 @@ func (c *DiskClient) DescribeSnapshots(request *DescribeSnapshotsRequest) (*Desc
         return nil, err
     }
 
-    jdResp := &DescribeSnapshotsResponse{}
+    jdResp := &disk.DescribeSnapshotsResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 查询云硬盘信息详情 */
-func (c *DiskClient) DescribeDisk(request *DescribeDiskRequest) (*DescribeDiskResponse, error) {
+func (c *DiskClient) DescribeDisk(request *disk.DescribeDiskRequest) (*disk.DescribeDiskResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -123,13 +139,17 @@ func (c *DiskClient) DescribeDisk(request *DescribeDiskRequest) (*DescribeDiskRe
         return nil, err
     }
 
-    jdResp := &DescribeDiskResponse{}
+    jdResp := &disk.DescribeDiskResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 创建一块或多块云硬盘 */
-func (c *DiskClient) CreateDisks(request *CreateDisksRequest) (*CreateDisksResponse, error) {
+func (c *DiskClient) CreateDisks(request *disk.CreateDisksRequest) (*disk.CreateDisksResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -138,13 +158,17 @@ func (c *DiskClient) CreateDisks(request *CreateDisksRequest) (*CreateDisksRespo
         return nil, err
     }
 
-    jdResp := &CreateDisksResponse{}
+    jdResp := &disk.CreateDisksResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 扩容云硬盘到指定大小 */
-func (c *DiskClient) ExtendDisk(request *ExtendDiskRequest) (*ExtendDiskResponse, error) {
+func (c *DiskClient) ExtendDisk(request *disk.ExtendDiskRequest) (*disk.ExtendDiskResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -153,13 +177,17 @@ func (c *DiskClient) ExtendDisk(request *ExtendDiskRequest) (*ExtendDiskResponse
         return nil, err
     }
 
-    jdResp := &ExtendDiskResponse{}
+    jdResp := &disk.ExtendDiskResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 删除单个云硬盘 */
-func (c *DiskClient) DeleteDisk(request *DeleteDiskRequest) (*DeleteDiskResponse, error) {
+func (c *DiskClient) DeleteDisk(request *disk.DeleteDiskRequest) (*disk.DeleteDiskResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -168,13 +196,17 @@ func (c *DiskClient) DeleteDisk(request *DeleteDiskRequest) (*DeleteDiskResponse
         return nil, err
     }
 
-    jdResp := &DeleteDiskResponse{}
+    jdResp := &disk.DeleteDiskResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 查询云硬盘快照信息详情 */
-func (c *DiskClient) DescribeSnapshot(request *DescribeSnapshotRequest) (*DescribeSnapshotResponse, error) {
+func (c *DiskClient) DescribeSnapshot(request *disk.DescribeSnapshotRequest) (*disk.DescribeSnapshotResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -183,13 +215,17 @@ func (c *DiskClient) DescribeSnapshot(request *DescribeSnapshotRequest) (*Descri
         return nil, err
     }
 
-    jdResp := &DescribeSnapshotResponse{}
+    jdResp := &disk.DescribeSnapshotResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 删除单个云硬盘快照:快照状态必须为 available 或 error 状态 */
-func (c *DiskClient) DeleteSnapshot(request *DeleteSnapshotRequest) (*DeleteSnapshotResponse, error) {
+func (c *DiskClient) DeleteSnapshot(request *disk.DeleteSnapshotRequest) (*disk.DeleteSnapshotResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -198,13 +234,17 @@ func (c *DiskClient) DeleteSnapshot(request *DeleteSnapshotRequest) (*DeleteSnap
         return nil, err
     }
 
-    jdResp := &DeleteSnapshotResponse{}
+    jdResp := &disk.DeleteSnapshotResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 修改快照的名字或描述信息 */
-func (c *DiskClient) ModifySnpAttribute(request *ModifySnpAttributeRequest) (*ModifySnpAttributeResponse, error) {
+func (c *DiskClient) ModifySnpAttribute(request *disk.ModifySnpAttributeRequest) (*disk.ModifySnpAttributeResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -213,13 +253,17 @@ func (c *DiskClient) ModifySnpAttribute(request *ModifySnpAttributeRequest) (*Mo
         return nil, err
     }
 
-    jdResp := &ModifySnpAttributeResponse{}
+    jdResp := &disk.ModifySnpAttributeResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 修改云硬盘的名字或描述信息 */
-func (c *DiskClient) ModifyDiskAttribute(request *ModifyDiskAttributeRequest) (*ModifyDiskAttributeResponse, error) {
+func (c *DiskClient) ModifyDiskAttribute(request *disk.ModifyDiskAttributeRequest) (*disk.ModifyDiskAttributeResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -228,8 +272,12 @@ func (c *DiskClient) ModifyDiskAttribute(request *ModifyDiskAttributeRequest) (*
         return nil, err
     }
 
-    jdResp := &ModifyDiskAttributeResponse{}
+    jdResp := &disk.ModifyDiskAttributeResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
