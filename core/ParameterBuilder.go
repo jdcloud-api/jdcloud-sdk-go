@@ -40,7 +40,7 @@ type ParameterBuilder interface {
 }
 
 func GetParameterBuilder(method string, logger Logger) ParameterBuilder {
-	if method == METHOD_GET || method == METHOD_DELETE || method == METHOD_HEAD {
+	if method == MethodGet || method == MethodDelete || method == MethodHead {
 		return &WithoutBodyBuilder{logger}
 	} else {
 		return &WithBodyBuilder{logger}
@@ -57,13 +57,13 @@ func (b WithBodyBuilder) BuildURL(url string, paramJson []byte) (string, error) 
 	paramMap := make(map[string]interface{})
 	err := json.Unmarshal(paramJson, &paramMap)
 	if err != nil {
-		b.Logger.Log(LOG_ERROR, err.Error())
+		b.Logger.Log(LogError, err.Error())
 		return "", err
 	}
 
 	replacedUrl, err := replaceUrlWithPathParam(url, paramMap)
 	if err != nil {
-		b.Logger.Log(LOG_ERROR, err.Error())
+		b.Logger.Log(LogError, err.Error())
 		return "", err
 	}
 
@@ -72,7 +72,7 @@ func (b WithBodyBuilder) BuildURL(url string, paramJson []byte) (string, error) 
 		return "", err
 	}
 
-	b.Logger.Log(LOG_INFO, "URL=" + encodedUrl)
+	b.Logger.Log(LogInfo, "URL=" + encodedUrl)
 	return encodedUrl, nil
 }
 
@@ -80,7 +80,7 @@ func (b WithBodyBuilder) BuildBody(paramJson []byte) (string, error) {
 	paramMap := make(map[string]interface{})
 	err := json.Unmarshal(paramJson, &paramMap)
 	if err != nil {
-		b.Logger.Log(LOG_ERROR, err.Error())
+		b.Logger.Log(LogError, err.Error())
 		return "", err
 	}
 
@@ -92,7 +92,7 @@ func (b WithBodyBuilder) BuildBody(paramJson []byte) (string, error) {
 	}
 
 	body, _ := json.Marshal(paramMap)
-	b.Logger.Log(LOG_INFO, "Body=", string(body))
+	b.Logger.Log(LogInfo, "Body=", string(body))
 	return string(body), nil
 }
 
@@ -106,13 +106,13 @@ func (b WithoutBodyBuilder) BuildURL(url string, paramJson []byte) (string, erro
 	paramMap := make(map[string]interface{})
 	err := json.Unmarshal(paramJson, &paramMap)
 	if err != nil {
-		b.Logger.Log(LOG_ERROR, err.Error())
+		b.Logger.Log(LogError, err.Error())
 		return "", err
 	}
 
 	resultUrl, err := replaceUrlWithPathParam(url, paramMap)
 	if err != nil {
-		b.Logger.Log(LOG_ERROR, err.Error())
+		b.Logger.Log(LogError, err.Error())
 		return "", err
 	}
 
@@ -126,8 +126,8 @@ func (b WithoutBodyBuilder) BuildURL(url string, paramJson []byte) (string, erro
 		return "", err
 	}
 
-	b.Logger.Log(LOG_INFO, string(paramJson))
-	b.Logger.Log(LOG_INFO, "URL=" + encodedUrl)
+	b.Logger.Log(LogInfo, string(paramJson))
+	b.Logger.Log(LogInfo, "URL=" + encodedUrl)
 	return encodedUrl, nil
 }
 
@@ -146,7 +146,8 @@ func replaceUrlWithPathParam(url string, paramMap map[string]interface{}) (strin
 			return "", errors.New("Can not find path parameter: " + field)
 		}
 
-		url = strings.Replace(url, match, value.(string), -1)
+		valueStr := fmt.Sprintf("%v", value)
+		url = strings.Replace(url, match, valueStr, -1)
 	}
 
 	return url, nil

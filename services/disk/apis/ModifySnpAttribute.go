@@ -1,4 +1,4 @@
-// Copyright 2018-2025 JDCLOUD.COM
+// Copyright 2018 JDCLOUD.COM
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,13 +17,13 @@
 package apis
 
 import (
-    . "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    "github.com/jdcloud-api/jdcloud-sdk-go/core"
     "reflect"
 )
 
 type ModifySnpAttributeRequest struct {
 
-    JDCloudRequest
+    core.JDCloudRequest
 
     /* 地域ID  */
     RegionId string `json:"regionId"`
@@ -50,7 +50,7 @@ func NewModifySnpAttributeRequest(
 ) *ModifySnpAttributeRequest {
 
 	return &ModifySnpAttributeRequest{
-        JDCloudRequest: JDCloudRequest{
+        JDCloudRequest: core.JDCloudRequest{
 			URL:     "/regions/{regionId}/snapshots/{snapshotId}",
 			Method:  "PATCH",
 			Header:  nil,
@@ -93,7 +93,7 @@ func (r ModifySnpAttributeRequest) GetRegionId() string {
 
 type ModifySnpAttributeResponse struct {
     RequestID string `json:"requestId"`
-    Error ErrorResponse `json:"error"`
+    Error core.ErrorResponse `json:"error"`
     Result ModifySnpAttributeResult `json:"result"`
 }
 

@@ -1,4 +1,4 @@
-// Copyright 2018-2025 JDCLOUD.COM
+// Copyright 2018 JDCLOUD.COM
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,44 +17,44 @@
 package client
 
 import (
-    . "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    . "github.com/jdcloud-api/jdcloud-sdk-go/services/xdata/apis"
+    "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    xdata "github.com/jdcloud-api/jdcloud-sdk-go/services/xdata/apis"
     "encoding/json"
     "errors"
 )
 
 type XdataClient struct {
-    JDCloudClient
+    core.JDCloudClient
 }
 
-func NewXdataClient(credential *Credential) *XdataClient {
+func NewXdataClient(credential *core.Credential) *XdataClient {
     if credential == nil {
         return nil
     }
 
-    config := NewConfig()
+    config := core.NewConfig()
     config.SetEndpoint("xdata.jdcloud-api.com")
 
     return &XdataClient{
-        JDCloudClient{
+        core.JDCloudClient{
             Credential:  *credential,
             Config:      *config,
             ServiceName: "xdata",
             Revision:    "0.1.0",
-            Logger:      NewDefaultLogger(LOG_INFO),
+            Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
 
-func (c *XdataClient) SetConfig(config *Config) {
+func (c *XdataClient) SetConfig(config *core.Config) {
     c.Config = *config
 }
 
-func (c *XdataClient) SetLogger(logger Logger) {
+func (c *XdataClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
 /* 删除数据表 */
-func (c *XdataClient) DeleteTable(request *DeleteTableRequest) (*DeleteTableResponse, error) {
+func (c *XdataClient) DeleteTable(request *xdata.DeleteTableRequest) (*xdata.DeleteTableResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -63,13 +63,17 @@ func (c *XdataClient) DeleteTable(request *DeleteTableRequest) (*DeleteTableResp
         return nil, err
     }
 
-    jdResp := &DeleteTableResponse{}
+    jdResp := &xdata.DeleteTableResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 查询指定数据库下所有数据表 */
-func (c *XdataClient) ListTableInfo(request *ListTableInfoRequest) (*ListTableInfoResponse, error) {
+func (c *XdataClient) ListTableInfo(request *xdata.ListTableInfoRequest) (*xdata.ListTableInfoResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -78,13 +82,17 @@ func (c *XdataClient) ListTableInfo(request *ListTableInfoRequest) (*ListTableIn
         return nil, err
     }
 
-    jdResp := &ListTableInfoResponse{}
+    jdResp := &xdata.ListTableInfoResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 查询实例列表 */
-func (c *XdataClient) ListDatabaseInfo(request *ListDatabaseInfoRequest) (*ListDatabaseInfoResponse, error) {
+func (c *XdataClient) ListDatabaseInfo(request *xdata.ListDatabaseInfoRequest) (*xdata.ListDatabaseInfoResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -93,13 +101,17 @@ func (c *XdataClient) ListDatabaseInfo(request *ListDatabaseInfoRequest) (*ListD
         return nil, err
     }
 
-    jdResp := &ListDatabaseInfoResponse{}
+    jdResp := &xdata.ListDatabaseInfoResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 删除数据库 */
-func (c *XdataClient) DeleteDatabase(request *DeleteDatabaseRequest) (*DeleteDatabaseResponse, error) {
+func (c *XdataClient) DeleteDatabase(request *xdata.DeleteDatabaseRequest) (*xdata.DeleteDatabaseResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -108,13 +120,17 @@ func (c *XdataClient) DeleteDatabase(request *DeleteDatabaseRequest) (*DeleteDat
         return nil, err
     }
 
-    jdResp := &DeleteDatabaseResponse{}
+    jdResp := &xdata.DeleteDatabaseResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 创建数据库 */
-func (c *XdataClient) CreateDatabase(request *CreateDatabaseRequest) (*CreateDatabaseResponse, error) {
+func (c *XdataClient) CreateDatabase(request *xdata.CreateDatabaseRequest) (*xdata.CreateDatabaseResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -123,13 +139,17 @@ func (c *XdataClient) CreateDatabase(request *CreateDatabaseRequest) (*CreateDat
         return nil, err
     }
 
-    jdResp := &CreateDatabaseResponse{}
+    jdResp := &xdata.CreateDatabaseResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 查询实例列表 */
-func (c *XdataClient) ListInstanceInfo(request *ListInstanceInfoRequest) (*ListInstanceInfoResponse, error) {
+func (c *XdataClient) ListInstanceInfo(request *xdata.ListInstanceInfoRequest) (*xdata.ListInstanceInfoResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -138,13 +158,17 @@ func (c *XdataClient) ListInstanceInfo(request *ListInstanceInfoRequest) (*ListI
         return nil, err
     }
 
-    jdResp := &ListInstanceInfoResponse{}
+    jdResp := &xdata.ListInstanceInfoResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 查询数据库详情 */
-func (c *XdataClient) GetDatabaseInfo(request *GetDatabaseInfoRequest) (*GetDatabaseInfoResponse, error) {
+func (c *XdataClient) GetDatabaseInfo(request *xdata.GetDatabaseInfoRequest) (*xdata.GetDatabaseInfoResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -153,13 +177,17 @@ func (c *XdataClient) GetDatabaseInfo(request *GetDatabaseInfoRequest) (*GetData
         return nil, err
     }
 
-    jdResp := &GetDatabaseInfoResponse{}
+    jdResp := &xdata.GetDatabaseInfoResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 查询数据表信息 */
-func (c *XdataClient) GetTableInfo(request *GetTableInfoRequest) (*GetTableInfoResponse, error) {
+func (c *XdataClient) GetTableInfo(request *xdata.GetTableInfoRequest) (*xdata.GetTableInfoResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -168,13 +196,17 @@ func (c *XdataClient) GetTableInfo(request *GetTableInfoRequest) (*GetTableInfoR
         return nil, err
     }
 
-    jdResp := &GetTableInfoResponse{}
+    jdResp := &xdata.GetTableInfoResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 创建数据表 */
-func (c *XdataClient) CreateTable(request *CreateTableRequest) (*CreateTableResponse, error) {
+func (c *XdataClient) CreateTable(request *xdata.CreateTableRequest) (*xdata.CreateTableResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -183,8 +215,12 @@ func (c *XdataClient) CreateTable(request *CreateTableRequest) (*CreateTableResp
         return nil, err
     }
 
-    jdResp := &CreateTableResponse{}
+    jdResp := &xdata.CreateTableResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 

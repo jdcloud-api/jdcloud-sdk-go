@@ -1,4 +1,4 @@
-// Copyright 2018-2025 JDCLOUD.COM
+// Copyright 2018 JDCLOUD.COM
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,44 +17,44 @@
 package client
 
 import (
-    . "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    . "github.com/jdcloud-api/jdcloud-sdk-go/services/ipanti/apis"
+    "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    ipanti "github.com/jdcloud-api/jdcloud-sdk-go/services/ipanti/apis"
     "encoding/json"
     "errors"
 )
 
 type IpantiClient struct {
-    JDCloudClient
+    core.JDCloudClient
 }
 
-func NewIpantiClient(credential *Credential) *IpantiClient {
+func NewIpantiClient(credential *core.Credential) *IpantiClient {
     if credential == nil {
         return nil
     }
 
-    config := NewConfig()
+    config := core.NewConfig()
     config.SetEndpoint("ipanti.jdcloud-api.com")
 
     return &IpantiClient{
-        JDCloudClient{
+        core.JDCloudClient{
             Credential:  *credential,
             Config:      *config,
             ServiceName: "ipanti",
             Revision:    "0.2.0",
-            Logger:      NewDefaultLogger(LOG_INFO),
+            Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
 
-func (c *IpantiClient) SetConfig(config *Config) {
+func (c *IpantiClient) SetConfig(config *core.Config) {
     c.Config = *config
 }
 
-func (c *IpantiClient) SetLogger(logger Logger) {
+func (c *IpantiClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
 /* 删除某条网站规则 */
-func (c *IpantiClient) DeleteWebRule(request *DeleteWebRuleRequest) (*DeleteWebRuleResponse, error) {
+func (c *IpantiClient) DeleteWebRule(request *ipanti.DeleteWebRuleRequest) (*ipanti.DeleteWebRuleResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -63,13 +63,17 @@ func (c *IpantiClient) DeleteWebRule(request *DeleteWebRuleRequest) (*DeleteWebR
         return nil, err
     }
 
-    jdResp := &DeleteWebRuleResponse{}
+    jdResp := &ipanti.DeleteWebRuleResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 设置实例url白名单 */
-func (c *IpantiClient) ModifyInstanceUrlWhiteList(request *ModifyInstanceUrlWhiteListRequest) (*ModifyInstanceUrlWhiteListResponse, error) {
+func (c *IpantiClient) ModifyInstanceUrlWhiteList(request *ipanti.ModifyInstanceUrlWhiteListRequest) (*ipanti.ModifyInstanceUrlWhiteListResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -78,13 +82,17 @@ func (c *IpantiClient) ModifyInstanceUrlWhiteList(request *ModifyInstanceUrlWhit
         return nil, err
     }
 
-    jdResp := &ModifyInstanceUrlWhiteListResponse{}
+    jdResp := &ipanti.ModifyInstanceUrlWhiteListResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 创建实例 */
-func (c *IpantiClient) CreateInstance(request *CreateInstanceRequest) (*CreateInstanceResponse, error) {
+func (c *IpantiClient) CreateInstance(request *ipanti.CreateInstanceRequest) (*ipanti.CreateInstanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -93,13 +101,17 @@ func (c *IpantiClient) CreateInstance(request *CreateInstanceRequest) (*CreateIn
         return nil, err
     }
 
-    jdResp := &CreateInstanceResponse{}
+    jdResp := &ipanti.CreateInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 添加网站类规则 */
-func (c *IpantiClient) CreateWebRule(request *CreateWebRuleRequest) (*CreateWebRuleResponse, error) {
+func (c *IpantiClient) CreateWebRule(request *ipanti.CreateWebRuleRequest) (*ipanti.CreateWebRuleResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -108,13 +120,17 @@ func (c *IpantiClient) CreateWebRule(request *CreateWebRuleRequest) (*CreateWebR
         return nil, err
     }
 
-    jdResp := &CreateWebRuleResponse{}
+    jdResp := &ipanti.CreateWebRuleResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 关闭实例CC防护 */
-func (c *IpantiClient) DisableInstanceCC(request *DisableInstanceCCRequest) (*DisableInstanceCCResponse, error) {
+func (c *IpantiClient) DisableInstanceCC(request *ipanti.DisableInstanceCCRequest) (*ipanti.DisableInstanceCCResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -123,13 +139,17 @@ func (c *IpantiClient) DisableInstanceCC(request *DisableInstanceCCRequest) (*Di
         return nil, err
     }
 
-    jdResp := &DisableInstanceCCResponse{}
+    jdResp := &ipanti.DisableInstanceCCResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 查询某条网站类规则 */
-func (c *IpantiClient) DescribeWebRule(request *DescribeWebRuleRequest) (*DescribeWebRuleResponse, error) {
+func (c *IpantiClient) DescribeWebRule(request *ipanti.DescribeWebRuleRequest) (*ipanti.DescribeWebRuleResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -138,13 +158,17 @@ func (c *IpantiClient) DescribeWebRule(request *DescribeWebRuleRequest) (*Descri
         return nil, err
     }
 
-    jdResp := &DescribeWebRuleResponse{}
+    jdResp := &ipanti.DescribeWebRuleResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 查询某条非网站类规则 */
-func (c *IpantiClient) DescribeForwardRule(request *DescribeForwardRuleRequest) (*DescribeForwardRuleResponse, error) {
+func (c *IpantiClient) DescribeForwardRule(request *ipanti.DescribeForwardRuleRequest) (*ipanti.DescribeForwardRuleResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -153,13 +177,17 @@ func (c *IpantiClient) DescribeForwardRule(request *DescribeForwardRuleRequest) 
         return nil, err
     }
 
-    jdResp := &DescribeForwardRuleResponse{}
+    jdResp := &ipanti.DescribeForwardRuleResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 修改实例名称 */
-func (c *IpantiClient) ModifyInstanceName(request *ModifyInstanceNameRequest) (*ModifyInstanceNameResponse, error) {
+func (c *IpantiClient) ModifyInstanceName(request *ipanti.ModifyInstanceNameRequest) (*ipanti.ModifyInstanceNameResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -168,13 +196,17 @@ func (c *IpantiClient) ModifyInstanceName(request *ModifyInstanceNameRequest) (*
         return nil, err
     }
 
-    jdResp := &ModifyInstanceNameResponse{}
+    jdResp := &ipanti.ModifyInstanceNameResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 添加非网站类规则 */
-func (c *IpantiClient) CreateForwardRule(request *CreateForwardRuleRequest) (*CreateForwardRuleResponse, error) {
+func (c *IpantiClient) CreateForwardRule(request *ipanti.CreateForwardRuleRequest) (*ipanti.CreateForwardRuleResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -183,13 +215,17 @@ func (c *IpantiClient) CreateForwardRule(request *CreateForwardRuleRequest) (*Cr
         return nil, err
     }
 
-    jdResp := &CreateForwardRuleResponse{}
+    jdResp := &ipanti.CreateForwardRuleResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 设置实例ip白名单 */
-func (c *IpantiClient) ModifyInstanceIpWhiteList(request *ModifyInstanceIpWhiteListRequest) (*ModifyInstanceIpWhiteListResponse, error) {
+func (c *IpantiClient) ModifyInstanceIpWhiteList(request *ipanti.ModifyInstanceIpWhiteListRequest) (*ipanti.ModifyInstanceIpWhiteListResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -198,13 +234,17 @@ func (c *IpantiClient) ModifyInstanceIpWhiteList(request *ModifyInstanceIpWhiteL
         return nil, err
     }
 
-    jdResp := &ModifyInstanceIpWhiteListResponse{}
+    jdResp := &ipanti.ModifyInstanceIpWhiteListResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 设置实例ip黑名单 */
-func (c *IpantiClient) ModifyInstanceIpBlackList(request *ModifyInstanceIpBlackListRequest) (*ModifyInstanceIpBlackListResponse, error) {
+func (c *IpantiClient) ModifyInstanceIpBlackList(request *ipanti.ModifyInstanceIpBlackListRequest) (*ipanti.ModifyInstanceIpBlackListResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -213,13 +253,17 @@ func (c *IpantiClient) ModifyInstanceIpBlackList(request *ModifyInstanceIpBlackL
         return nil, err
     }
 
-    jdResp := &ModifyInstanceIpBlackListResponse{}
+    jdResp := &ipanti.ModifyInstanceIpBlackListResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 启用实例url白名单 */
-func (c *IpantiClient) EnableInstanceUrlWhiteList(request *EnableInstanceUrlWhiteListRequest) (*EnableInstanceUrlWhiteListResponse, error) {
+func (c *IpantiClient) EnableInstanceUrlWhiteList(request *ipanti.EnableInstanceUrlWhiteListRequest) (*ipanti.EnableInstanceUrlWhiteListResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -228,13 +272,17 @@ func (c *IpantiClient) EnableInstanceUrlWhiteList(request *EnableInstanceUrlWhit
         return nil, err
     }
 
-    jdResp := &EnableInstanceUrlWhiteListResponse{}
+    jdResp := &ipanti.EnableInstanceUrlWhiteListResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 禁用实例ip白名单 */
-func (c *IpantiClient) DisableInstanceIpWhiteList(request *DisableInstanceIpWhiteListRequest) (*DisableInstanceIpWhiteListResponse, error) {
+func (c *IpantiClient) DisableInstanceIpWhiteList(request *ipanti.DisableInstanceIpWhiteListRequest) (*ipanti.DisableInstanceIpWhiteListResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -243,13 +291,17 @@ func (c *IpantiClient) DisableInstanceIpWhiteList(request *DisableInstanceIpWhit
         return nil, err
     }
 
-    jdResp := &DisableInstanceIpWhiteListResponse{}
+    jdResp := &ipanti.DisableInstanceIpWhiteListResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 查询实例 */
-func (c *IpantiClient) DescribeInstance(request *DescribeInstanceRequest) (*DescribeInstanceResponse, error) {
+func (c *IpantiClient) DescribeInstance(request *ipanti.DescribeInstanceRequest) (*ipanti.DescribeInstanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -258,13 +310,17 @@ func (c *IpantiClient) DescribeInstance(request *DescribeInstanceRequest) (*Desc
         return nil, err
     }
 
-    jdResp := &DescribeInstanceResponse{}
+    jdResp := &ipanti.DescribeInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 禁用实例url白名单 */
-func (c *IpantiClient) DisableInstanceUrlWhiteList(request *DisableInstanceUrlWhiteListRequest) (*DisableInstanceUrlWhiteListResponse, error) {
+func (c *IpantiClient) DisableInstanceUrlWhiteList(request *ipanti.DisableInstanceUrlWhiteListRequest) (*ipanti.DisableInstanceUrlWhiteListResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -273,13 +329,17 @@ func (c *IpantiClient) DisableInstanceUrlWhiteList(request *DisableInstanceUrlWh
         return nil, err
     }
 
-    jdResp := &DisableInstanceUrlWhiteListResponse{}
+    jdResp := &ipanti.DisableInstanceUrlWhiteListResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 启用实例ip白名单 */
-func (c *IpantiClient) EnableInstanceIpWhiteList(request *EnableInstanceIpWhiteListRequest) (*EnableInstanceIpWhiteListResponse, error) {
+func (c *IpantiClient) EnableInstanceIpWhiteList(request *ipanti.EnableInstanceIpWhiteListRequest) (*ipanti.EnableInstanceIpWhiteListResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -288,13 +348,17 @@ func (c *IpantiClient) EnableInstanceIpWhiteList(request *EnableInstanceIpWhiteL
         return nil, err
     }
 
-    jdResp := &EnableInstanceIpWhiteListResponse{}
+    jdResp := &ipanti.EnableInstanceIpWhiteListResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 设置实例CC防护 */
-func (c *IpantiClient) ModifyInstanceCC(request *ModifyInstanceCCRequest) (*ModifyInstanceCCResponse, error) {
+func (c *IpantiClient) ModifyInstanceCC(request *ipanti.ModifyInstanceCCRequest) (*ipanti.ModifyInstanceCCResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -303,13 +367,17 @@ func (c *IpantiClient) ModifyInstanceCC(request *ModifyInstanceCCRequest) (*Modi
         return nil, err
     }
 
-    jdResp := &ModifyInstanceCCResponse{}
+    jdResp := &ipanti.ModifyInstanceCCResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 查询某个实例下的非网站转发配置 */
-func (c *IpantiClient) DescribeForwardRules(request *DescribeForwardRulesRequest) (*DescribeForwardRulesResponse, error) {
+func (c *IpantiClient) DescribeForwardRules(request *ipanti.DescribeForwardRulesRequest) (*ipanti.DescribeForwardRulesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -318,13 +386,17 @@ func (c *IpantiClient) DescribeForwardRules(request *DescribeForwardRulesRequest
         return nil, err
     }
 
-    jdResp := &DescribeForwardRulesResponse{}
+    jdResp := &ipanti.DescribeForwardRulesResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 删除某条非网站规则 */
-func (c *IpantiClient) DeleteForwardRule(request *DeleteForwardRuleRequest) (*DeleteForwardRuleResponse, error) {
+func (c *IpantiClient) DeleteForwardRule(request *ipanti.DeleteForwardRuleRequest) (*ipanti.DeleteForwardRuleResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -333,13 +405,17 @@ func (c *IpantiClient) DeleteForwardRule(request *DeleteForwardRuleRequest) (*De
         return nil, err
     }
 
-    jdResp := &DeleteForwardRuleResponse{}
+    jdResp := &ipanti.DeleteForwardRuleResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 更新某条网站类规则 */
-func (c *IpantiClient) ModifyWebRule(request *ModifyWebRuleRequest) (*ModifyWebRuleResponse, error) {
+func (c *IpantiClient) ModifyWebRule(request *ipanti.ModifyWebRuleRequest) (*ipanti.ModifyWebRuleResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -348,13 +424,17 @@ func (c *IpantiClient) ModifyWebRule(request *ModifyWebRuleRequest) (*ModifyWebR
         return nil, err
     }
 
-    jdResp := &ModifyWebRuleResponse{}
+    jdResp := &ipanti.ModifyWebRuleResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 查询某个实例下的网站类规则 */
-func (c *IpantiClient) DescribeWebRules(request *DescribeWebRulesRequest) (*DescribeWebRulesResponse, error) {
+func (c *IpantiClient) DescribeWebRules(request *ipanti.DescribeWebRulesRequest) (*ipanti.DescribeWebRulesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -363,13 +443,17 @@ func (c *IpantiClient) DescribeWebRules(request *DescribeWebRulesRequest) (*Desc
         return nil, err
     }
 
-    jdResp := &DescribeWebRulesResponse{}
+    jdResp := &ipanti.DescribeWebRulesResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 启用实例ip黑名单 */
-func (c *IpantiClient) EnableInstanceIpBlackList(request *EnableInstanceIpBlackListRequest) (*EnableInstanceIpBlackListResponse, error) {
+func (c *IpantiClient) EnableInstanceIpBlackList(request *ipanti.EnableInstanceIpBlackListRequest) (*ipanti.EnableInstanceIpBlackListResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -378,13 +462,17 @@ func (c *IpantiClient) EnableInstanceIpBlackList(request *EnableInstanceIpBlackL
         return nil, err
     }
 
-    jdResp := &EnableInstanceIpBlackListResponse{}
+    jdResp := &ipanti.EnableInstanceIpBlackListResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 查询实例列表 */
-func (c *IpantiClient) DescribeInstances(request *DescribeInstancesRequest) (*DescribeInstancesResponse, error) {
+func (c *IpantiClient) DescribeInstances(request *ipanti.DescribeInstancesRequest) (*ipanti.DescribeInstancesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -393,13 +481,17 @@ func (c *IpantiClient) DescribeInstances(request *DescribeInstancesRequest) (*De
         return nil, err
     }
 
-    jdResp := &DescribeInstancesResponse{}
+    jdResp := &ipanti.DescribeInstancesResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 开启实例CC防护 */
-func (c *IpantiClient) EnableInstanceCC(request *EnableInstanceCCRequest) (*EnableInstanceCCResponse, error) {
+func (c *IpantiClient) EnableInstanceCC(request *ipanti.EnableInstanceCCRequest) (*ipanti.EnableInstanceCCResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -408,13 +500,17 @@ func (c *IpantiClient) EnableInstanceCC(request *EnableInstanceCCRequest) (*Enab
         return nil, err
     }
 
-    jdResp := &EnableInstanceCCResponse{}
+    jdResp := &ipanti.EnableInstanceCCResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 禁用实例ip黑名单 */
-func (c *IpantiClient) DisableInstanceIpBlackList(request *DisableInstanceIpBlackListRequest) (*DisableInstanceIpBlackListResponse, error) {
+func (c *IpantiClient) DisableInstanceIpBlackList(request *ipanti.DisableInstanceIpBlackListRequest) (*ipanti.DisableInstanceIpBlackListResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -423,13 +519,17 @@ func (c *IpantiClient) DisableInstanceIpBlackList(request *DisableInstanceIpBlac
         return nil, err
     }
 
-    jdResp := &DisableInstanceIpBlackListResponse{}
+    jdResp := &ipanti.DisableInstanceIpBlackListResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 更新某条非网站类规则 */
-func (c *IpantiClient) ModifyForwardRule(request *ModifyForwardRuleRequest) (*ModifyForwardRuleResponse, error) {
+func (c *IpantiClient) ModifyForwardRule(request *ipanti.ModifyForwardRuleRequest) (*ipanti.ModifyForwardRuleResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -438,8 +538,12 @@ func (c *IpantiClient) ModifyForwardRule(request *ModifyForwardRuleRequest) (*Mo
         return nil, err
     }
 
-    jdResp := &ModifyForwardRuleResponse{}
+    jdResp := &ipanti.ModifyForwardRuleResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 

@@ -136,7 +136,7 @@ const logSignInfoMsg = `DEBUG: Request Signature:
 func (v4 *Signer) logSigningInfo(ctx *signingCtx) {
 	signedURLMsg := ""
 	msg := fmt.Sprintf(logSignInfoMsg, ctx.canonicalString, ctx.stringToSign, signedURLMsg)
-	v4.Logger.Log(LOG_INFO, msg)
+	v4.Logger.Log(LogInfo, msg)
 }
 
 func (ctx *signingCtx) build() {

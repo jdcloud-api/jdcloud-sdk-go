@@ -1,4 +1,4 @@
-// Copyright 2018-2025 JDCLOUD.COM
+// Copyright 2018 JDCLOUD.COM
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,14 +17,14 @@
 package apis
 
 import (
-    . "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    "github.com/jdcloud-api/jdcloud-sdk-go/core"
     "reflect"
     monitor "github.com/jdcloud-api/jdcloud-sdk-go/services/monitor/models"
 )
 
 type CreateAlarmRequest struct {
 
-    JDCloudRequest
+    core.JDCloudRequest
 
     /* 地域 Id  */
     RegionId string `json:"regionId"`
@@ -48,7 +48,7 @@ func NewCreateAlarmRequest(
 ) *CreateAlarmRequest {
 
 	return &CreateAlarmRequest{
-        JDCloudRequest: JDCloudRequest{
+        JDCloudRequest: core.JDCloudRequest{
 			URL:     "/regions/{regionId}/alarms",
 			Method:  "POST",
 			Header:  nil,
@@ -88,7 +88,7 @@ func (r CreateAlarmRequest) GetRegionId() string {
 
 type CreateAlarmResponse struct {
     RequestID string `json:"requestId"`
-    Error ErrorResponse `json:"error"`
+    Error core.ErrorResponse `json:"error"`
     Result CreateAlarmResult `json:"result"`
 }
 

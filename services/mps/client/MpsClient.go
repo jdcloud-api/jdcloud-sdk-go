@@ -1,4 +1,4 @@
-// Copyright 2018-2025 JDCLOUD.COM
+// Copyright 2018 JDCLOUD.COM
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,44 +17,44 @@
 package client
 
 import (
-    . "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    . "github.com/jdcloud-api/jdcloud-sdk-go/services/mps/apis"
+    "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    mps "github.com/jdcloud-api/jdcloud-sdk-go/services/mps/apis"
     "encoding/json"
     "errors"
 )
 
 type MpsClient struct {
-    JDCloudClient
+    core.JDCloudClient
 }
 
-func NewMpsClient(credential *Credential) *MpsClient {
+func NewMpsClient(credential *core.Credential) *MpsClient {
     if credential == nil {
         return nil
     }
 
-    config := NewConfig()
+    config := core.NewConfig()
     config.SetEndpoint("mps.jdcloud-api.com")
 
     return &MpsClient{
-        JDCloudClient{
+        core.JDCloudClient{
             Credential:  *credential,
             Config:      *config,
             ServiceName: "mps",
             Revision:    "0.3.6",
-            Logger:      NewDefaultLogger(LOG_INFO),
+            Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
 
-func (c *MpsClient) SetConfig(config *Config) {
+func (c *MpsClient) SetConfig(config *core.Config) {
     c.Config = *config
 }
 
-func (c *MpsClient) SetLogger(logger Logger) {
+func (c *MpsClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
 /* 设置媒体处理通知, 在设置Notification时会对endpoint进行校验, 设置时会对endpoint发一条SubscriptionConfirmation(x-jdcloud-message-type头)的通知, 要求把Message内容进行base64编码返回给系统(body)进行校验 */
-func (c *MpsClient) SetNotification(request *SetNotificationRequest) (*SetNotificationResponse, error) {
+func (c *MpsClient) SetNotification(request *mps.SetNotificationRequest) (*mps.SetNotificationResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -63,13 +63,17 @@ func (c *MpsClient) SetNotification(request *SetNotificationRequest) (*SetNotifi
         return nil, err
     }
 
-    jdResp := &SetNotificationResponse{}
+    jdResp := &mps.SetNotificationResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 获取截图通知 */
-func (c *MpsClient) GetNotification(request *GetNotificationRequest) (*GetNotificationResponse, error) {
+func (c *MpsClient) GetNotification(request *mps.GetNotificationRequest) (*mps.GetNotificationResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -78,13 +82,17 @@ func (c *MpsClient) GetNotification(request *GetNotificationRequest) (*GetNotifi
         return nil, err
     }
 
-    jdResp := &GetNotificationResponse{}
+    jdResp := &mps.GetNotificationResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 创建截图任务 */
-func (c *MpsClient) CreateThumbnailTask(request *CreateThumbnailTaskRequest) (*CreateThumbnailTaskResponse, error) {
+func (c *MpsClient) CreateThumbnailTask(request *mps.CreateThumbnailTaskRequest) (*mps.CreateThumbnailTaskResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -93,13 +101,17 @@ func (c *MpsClient) CreateThumbnailTask(request *CreateThumbnailTaskRequest) (*C
         return nil, err
     }
 
-    jdResp := &CreateThumbnailTaskResponse{}
+    jdResp := &mps.CreateThumbnailTaskResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 获取截图任务 */
-func (c *MpsClient) GetThumbnailTask(request *GetThumbnailTaskRequest) (*GetThumbnailTaskResponse, error) {
+func (c *MpsClient) GetThumbnailTask(request *mps.GetThumbnailTaskRequest) (*mps.GetThumbnailTaskResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -108,13 +120,17 @@ func (c *MpsClient) GetThumbnailTask(request *GetThumbnailTaskRequest) (*GetThum
         return nil, err
     }
 
-    jdResp := &GetThumbnailTaskResponse{}
+    jdResp := &mps.GetThumbnailTaskResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 查询截图任务 */
-func (c *MpsClient) ListThumbnailTask(request *ListThumbnailTaskRequest) (*ListThumbnailTaskResponse, error) {
+func (c *MpsClient) ListThumbnailTask(request *mps.ListThumbnailTaskRequest) (*mps.ListThumbnailTaskResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -123,8 +139,12 @@ func (c *MpsClient) ListThumbnailTask(request *ListThumbnailTaskRequest) (*ListT
         return nil, err
     }
 
-    jdResp := &ListThumbnailTaskResponse{}
+    jdResp := &mps.ListThumbnailTaskResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 

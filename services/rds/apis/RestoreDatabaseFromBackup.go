@@ -1,4 +1,4 @@
-// Copyright 2018-2025 JDCLOUD.COM
+// Copyright 2018 JDCLOUD.COM
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,13 +17,13 @@
 package apis
 
 import (
-    . "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    "github.com/jdcloud-api/jdcloud-sdk-go/core"
     "reflect"
 )
 
 type RestoreDatabaseFromBackupRequest struct {
 
-    JDCloudRequest
+    core.JDCloudRequest
 
     /* 区域代码  */
     RegionId string `json:"regionId"`
@@ -35,10 +35,10 @@ type RestoreDatabaseFromBackupRequest struct {
     DbName string `json:"dbName"`
 
     /* 备份ID  */
-    BackupId string `json:"backupId"`
+    BackupId string `json:""`
 
     /* 指定该备份中用于恢复数据库的文件名称  */
-    BackupFileName string `json:"backupFileName"`
+    BackupFileName string `json:""`
 }
 
 /*
@@ -57,7 +57,7 @@ func NewRestoreDatabaseFromBackupRequest(
 ) *RestoreDatabaseFromBackupRequest {
 
 	return &RestoreDatabaseFromBackupRequest{
-        JDCloudRequest: JDCloudRequest{
+        JDCloudRequest: core.JDCloudRequest{
 			URL:     "/regions/{regionId}/instances/{instanceId}/databases/{dbName}:restoreDatabaseFromBackup",
 			Method:  "POST",
 			Header:  nil,
@@ -107,7 +107,7 @@ func (r RestoreDatabaseFromBackupRequest) GetRegionId() string {
 
 type RestoreDatabaseFromBackupResponse struct {
     RequestID string `json:"requestId"`
-    Error ErrorResponse `json:"error"`
+    Error core.ErrorResponse `json:"error"`
     Result RestoreDatabaseFromBackupResult `json:"result"`
 }
 

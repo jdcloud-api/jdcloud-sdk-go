@@ -1,4 +1,4 @@
-// Copyright 2018-2025 JDCLOUD.COM
+// Copyright 2018 JDCLOUD.COM
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,14 +17,14 @@
 package apis
 
 import (
-    . "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    "github.com/jdcloud-api/jdcloud-sdk-go/core"
     "reflect"
     rds "github.com/jdcloud-api/jdcloud-sdk-go/services/rds/models"
 )
 
 type DescribeBackupsRequest struct {
 
-    JDCloudRequest
+    core.JDCloudRequest
 
     /* 地域代码  */
     RegionId string `json:"regionId"`
@@ -73,7 +73,7 @@ func NewDescribeBackupsRequest(
 ) *DescribeBackupsRequest {
 
 	return &DescribeBackupsRequest{
-        JDCloudRequest: JDCloudRequest{
+        JDCloudRequest: core.JDCloudRequest{
 			URL:     "/regions/{regionId}/backups",
 			Method:  "GET",
 			Header:  nil,
@@ -138,7 +138,7 @@ func (r DescribeBackupsRequest) GetRegionId() string {
 
 type DescribeBackupsResponse struct {
     RequestID string `json:"requestId"`
-    Error ErrorResponse `json:"error"`
+    Error core.ErrorResponse `json:"error"`
     Result DescribeBackupsResult `json:"result"`
 }
 

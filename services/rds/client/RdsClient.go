@@ -1,4 +1,4 @@
-// Copyright 2018-2025 JDCLOUD.COM
+// Copyright 2018 JDCLOUD.COM
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,44 +17,44 @@
 package client
 
 import (
-    . "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    . "github.com/jdcloud-api/jdcloud-sdk-go/services/rds/apis"
+    "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    rds "github.com/jdcloud-api/jdcloud-sdk-go/services/rds/apis"
     "encoding/json"
     "errors"
 )
 
 type RdsClient struct {
-    JDCloudClient
+    core.JDCloudClient
 }
 
-func NewRdsClient(credential *Credential) *RdsClient {
+func NewRdsClient(credential *core.Credential) *RdsClient {
     if credential == nil {
         return nil
     }
 
-    config := NewConfig()
+    config := core.NewConfig()
     config.SetEndpoint("rds.jdcloud-api.com")
 
     return &RdsClient{
-        JDCloudClient{
+        core.JDCloudClient{
             Credential:  *credential,
             Config:      *config,
             ServiceName: "rds",
             Revision:    "0.2.3",
-            Logger:      NewDefaultLogger(LOG_INFO),
+            Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
 
-func (c *RdsClient) SetConfig(config *Config) {
+func (c *RdsClient) SetConfig(config *core.Config) {
     c.Config = *config
 }
 
-func (c *RdsClient) SetLogger(logger Logger) {
+func (c *RdsClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
 /* 创建数据库账户 */
-func (c *RdsClient) CreateAccount(request *CreateAccountRequest) (*CreateAccountResponse, error) {
+func (c *RdsClient) CreateAccount(request *rds.CreateAccountRequest) (*rds.CreateAccountResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -63,13 +63,17 @@ func (c *RdsClient) CreateAccount(request *CreateAccountRequest) (*CreateAccount
         return nil, err
     }
 
-    jdResp := &CreateAccountResponse{}
+    jdResp := &rds.CreateAccountResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 数据库账号授权 */
-func (c *RdsClient) GrantPrivilege(request *GrantPrivilegeRequest) (*GrantPrivilegeResponse, error) {
+func (c *RdsClient) GrantPrivilege(request *rds.GrantPrivilegeRequest) (*rds.GrantPrivilegeResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -78,13 +82,17 @@ func (c *RdsClient) GrantPrivilege(request *GrantPrivilegeRequest) (*GrantPrivil
         return nil, err
     }
 
-    jdResp := &GrantPrivilegeResponse{}
+    jdResp := &rds.GrantPrivilegeResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 创建数据库 */
-func (c *RdsClient) CreateDatabase(request *CreateDatabaseRequest) (*CreateDatabaseResponse, error) {
+func (c *RdsClient) CreateDatabase(request *rds.CreateDatabaseRequest) (*rds.CreateDatabaseResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -93,13 +101,17 @@ func (c *RdsClient) CreateDatabase(request *CreateDatabaseRequest) (*CreateDatab
         return nil, err
     }
 
-    jdResp := &CreateDatabaseResponse{}
+    jdResp := &rds.CreateDatabaseResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 获取单库上云文件列表 */
-func (c *RdsClient) DescribeImportFiles(request *DescribeImportFilesRequest) (*DescribeImportFilesResponse, error) {
+func (c *RdsClient) DescribeImportFiles(request *rds.DescribeImportFilesRequest) (*rds.DescribeImportFilesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -108,13 +120,17 @@ func (c *RdsClient) DescribeImportFiles(request *DescribeImportFilesRequest) (*D
         return nil, err
     }
 
-    jdResp := &DescribeImportFilesResponse{}
+    jdResp := &rds.DescribeImportFilesResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 创建备份 */
-func (c *RdsClient) CreateBackup(request *CreateBackupRequest) (*CreateBackupResponse, error) {
+func (c *RdsClient) CreateBackup(request *rds.CreateBackupRequest) (*rds.CreateBackupResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -123,13 +139,17 @@ func (c *RdsClient) CreateBackup(request *CreateBackupRequest) (*CreateBackupRes
         return nil, err
     }
 
-    jdResp := &CreateBackupResponse{}
+    jdResp := &rds.CreateBackupResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 获取备份信息 */
-func (c *RdsClient) DescribeBackups(request *DescribeBackupsRequest) (*DescribeBackupsResponse, error) {
+func (c *RdsClient) DescribeBackups(request *rds.DescribeBackupsRequest) (*rds.DescribeBackupsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -138,13 +158,17 @@ func (c *RdsClient) DescribeBackups(request *DescribeBackupsRequest) (*DescribeB
         return nil, err
     }
 
-    jdResp := &DescribeBackupsResponse{}
+    jdResp := &rds.DescribeBackupsResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 从用户上传的备份文件中恢复SQL Server数据库 */
-func (c *RdsClient) RestoreDatabaseFromFile(request *RestoreDatabaseFromFileRequest) (*RestoreDatabaseFromFileResponse, error) {
+func (c *RdsClient) RestoreDatabaseFromFile(request *rds.RestoreDatabaseFromFileRequest) (*rds.RestoreDatabaseFromFileResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -153,13 +177,17 @@ func (c *RdsClient) RestoreDatabaseFromFile(request *RestoreDatabaseFromFileRequ
         return nil, err
     }
 
-    jdResp := &RestoreDatabaseFromFileResponse{}
+    jdResp := &rds.RestoreDatabaseFromFileResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 删除数据库 */
-func (c *RdsClient) DeleteDatabase(request *DeleteDatabaseRequest) (*DeleteDatabaseResponse, error) {
+func (c *RdsClient) DeleteDatabase(request *rds.DeleteDatabaseRequest) (*rds.DeleteDatabaseResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -168,13 +196,17 @@ func (c *RdsClient) DeleteDatabase(request *DeleteDatabaseRequest) (*DeleteDatab
         return nil, err
     }
 
-    jdResp := &DeleteDatabaseResponse{}
+    jdResp := &rds.DeleteDatabaseResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 数据库账号重置密码 */
-func (c *RdsClient) ResetPassword(request *ResetPasswordRequest) (*ResetPasswordResponse, error) {
+func (c *RdsClient) ResetPassword(request *rds.ResetPasswordRequest) (*rds.ResetPasswordResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -183,13 +215,17 @@ func (c *RdsClient) ResetPassword(request *ResetPasswordRequest) (*ResetPassword
         return nil, err
     }
 
-    jdResp := &ResetPasswordResponse{}
+    jdResp := &rds.ResetPasswordResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 删除数据库账户 */
-func (c *RdsClient) DeleteAccount(request *DeleteAccountRequest) (*DeleteAccountResponse, error) {
+func (c *RdsClient) DeleteAccount(request *rds.DeleteAccountRequest) (*rds.DeleteAccountResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -198,13 +234,17 @@ func (c *RdsClient) DeleteAccount(request *DeleteAccountRequest) (*DeleteAccount
         return nil, err
     }
 
-    jdResp := &DeleteAccountResponse{}
+    jdResp := &rds.DeleteAccountResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 从云数据库SQL Server备份中恢复单个数据库 */
-func (c *RdsClient) RestoreDatabaseFromBackup(request *RestoreDatabaseFromBackupRequest) (*RestoreDatabaseFromBackupResponse, error) {
+func (c *RdsClient) RestoreDatabaseFromBackup(request *rds.RestoreDatabaseFromBackupRequest) (*rds.RestoreDatabaseFromBackupResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -213,13 +253,17 @@ func (c *RdsClient) RestoreDatabaseFromBackup(request *RestoreDatabaseFromBackup
         return nil, err
     }
 
-    jdResp := &RestoreDatabaseFromBackupResponse{}
+    jdResp := &rds.RestoreDatabaseFromBackupResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 获取备份下载链接 */
-func (c *RdsClient) DescribeBackupDownloadURL(request *DescribeBackupDownloadURLRequest) (*DescribeBackupDownloadURLResponse, error) {
+func (c *RdsClient) DescribeBackupDownloadURL(request *rds.DescribeBackupDownloadURLRequest) (*rds.DescribeBackupDownloadURLResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -228,8 +272,12 @@ func (c *RdsClient) DescribeBackupDownloadURL(request *DescribeBackupDownloadURL
         return nil, err
     }
 
-    jdResp := &DescribeBackupDownloadURLResponse{}
+    jdResp := &rds.DescribeBackupDownloadURLResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 

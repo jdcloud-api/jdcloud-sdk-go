@@ -1,4 +1,4 @@
-// Copyright 2018-2025 JDCLOUD.COM
+// Copyright 2018 JDCLOUD.COM
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,14 +17,14 @@
 package apis
 
 import (
-    . "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    "github.com/jdcloud-api/jdcloud-sdk-go/core"
     "reflect"
     nc "github.com/jdcloud-api/jdcloud-sdk-go/services/nc/models"
 )
 
 type DescribeSecretRequest struct {
 
-    JDCloudRequest
+    core.JDCloudRequest
 
     /* Region ID  */
     RegionId string `json:"regionId"`
@@ -43,7 +43,7 @@ func NewDescribeSecretRequest(
 ) *DescribeSecretRequest {
 
 	return &DescribeSecretRequest{
-        JDCloudRequest: JDCloudRequest{
+        JDCloudRequest: core.JDCloudRequest{
 			URL:     "/regions/{regionId}/secrets/{name}",
 			Method:  "GET",
 			Header:  nil,
@@ -78,7 +78,7 @@ func (r DescribeSecretRequest) GetRegionId() string {
 
 type DescribeSecretResponse struct {
     RequestID string `json:"requestId"`
-    Error ErrorResponse `json:"error"`
+    Error core.ErrorResponse `json:"error"`
     Result DescribeSecretResult `json:"result"`
 }
 

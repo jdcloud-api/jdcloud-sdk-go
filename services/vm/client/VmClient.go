@@ -1,4 +1,4 @@
-// Copyright 2018-2025 JDCLOUD.COM
+// Copyright 2018 JDCLOUD.COM
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,59 +17,44 @@
 package client
 
 import (
-    . "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    . "github.com/jdcloud-api/jdcloud-sdk-go/services/vm/apis"
+    "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    vm "github.com/jdcloud-api/jdcloud-sdk-go/services/vm/apis"
     "encoding/json"
     "errors"
 )
 
 type VmClient struct {
-    JDCloudClient
+    core.JDCloudClient
 }
 
-func NewVmClient(credential *Credential) *VmClient {
+func NewVmClient(credential *core.Credential) *VmClient {
     if credential == nil {
         return nil
     }
 
-    config := NewConfig()
+    config := core.NewConfig()
     config.SetEndpoint("vm.jdcloud-api.com")
 
     return &VmClient{
-        JDCloudClient{
+        core.JDCloudClient{
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vm",
-            Revision:    "0.6.1",
-            Logger:      NewDefaultLogger(LOG_INFO),
+            Revision:    "0.7.1",
+            Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
 
-func (c *VmClient) SetConfig(config *Config) {
+func (c *VmClient) SetConfig(config *core.Config) {
     c.Config = *config
 }
 
-func (c *VmClient) SetLogger(logger Logger) {
+func (c *VmClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-/* 查询（虚机、镜像、密钥、模板）配额 */
-func (c *VmClient) DescribeQuotas(request *DescribeQuotasRequest) (*DescribeQuotasResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &DescribeQuotasResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    return jdResp, err
-}
-
 /* 云主机挂载硬盘，主机和云盘没有未完成的任务时才可挂载，一个主机上最多可挂载4块数据盘 */
-func (c *VmClient) AttachDisk(request *AttachDiskRequest) (*AttachDiskResponse, error) {
+func (c *VmClient) AttachDisk(request *vm.AttachDiskRequest) (*vm.AttachDiskResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -78,77 +63,17 @@ func (c *VmClient) AttachDisk(request *AttachDiskRequest) (*AttachDiskResponse, 
         return nil, err
     }
 
-    jdResp := &AttachDiskResponse{}
+    jdResp := &vm.AttachDiskResponse{}
     err = json.Unmarshal(resp, jdResp)
-    return jdResp, err
-}
-
-/* "虚机创建私有镜像"
-"虚机状态必须为stopped"
-"如果虚机上有挂载数据盘，默认会将数据盘创建快照，生成打包镜像"
-"主机没有未完成的任务才可制作镜像"
- */
-func (c *VmClient) CreateImage(request *CreateImageRequest) (*CreateImageResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
     if err != nil {
         return nil, err
     }
 
-    jdResp := &CreateImageResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    return jdResp, err
-}
-
-/* 查询云主机列表 */
-func (c *VmClient) DescribeInstances(request *DescribeInstancesRequest) (*DescribeInstancesResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &DescribeInstancesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    return jdResp, err
-}
-
-/* 创建一台或多台指定配置的实例 */
-func (c *VmClient) CreateInstances(request *CreateInstancesRequest) (*CreateInstancesResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &CreateInstancesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    return jdResp, err
-}
-
-/* 查询镜像信息 */
-func (c *VmClient) DescribeImage(request *DescribeImageRequest) (*DescribeImageResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &DescribeImageResponse{}
-    err = json.Unmarshal(resp, jdResp)
     return jdResp, err
 }
 
 /* 查询镜像共享帐户列表，不能操作非私有镜像 */
-func (c *VmClient) DescribeImageMembers(request *DescribeImageMembersRequest) (*DescribeImageMembersResponse, error) {
+func (c *VmClient) DescribeImageMembers(request *vm.DescribeImageMembersRequest) (*vm.DescribeImageMembersResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -157,13 +82,17 @@ func (c *VmClient) DescribeImageMembers(request *DescribeImageMembersRequest) (*
         return nil, err
     }
 
-    jdResp := &DescribeImageMembersResponse{}
+    jdResp := &vm.DescribeImageMembersResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
-/* 修改主机密码，主机没有未完成的任务时才可操作 */
-func (c *VmClient) ModifyInstancePassword(request *ModifyInstancePasswordRequest) (*ModifyInstancePasswordResponse, error) {
+/* 查询镜像信息 */
+func (c *VmClient) DescribeImage(request *vm.DescribeImageRequest) (*vm.DescribeImageResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -172,13 +101,17 @@ func (c *VmClient) ModifyInstancePassword(request *ModifyInstancePasswordRequest
         return nil, err
     }
 
-    jdResp := &ModifyInstancePasswordResponse{}
+    jdResp := &vm.DescribeImageResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
-/* 取消共享镜像，不能操作非私有镜像 */
-func (c *VmClient) UnShareImage(request *UnShareImageRequest) (*UnShareImageResponse, error) {
+/* 云主机使用指定镜像重置实例镜像，需要关机操作， */
+func (c *VmClient) RebuildInstance(request *vm.RebuildInstanceRequest) (*vm.RebuildInstanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -187,28 +120,17 @@ func (c *VmClient) UnShareImage(request *UnShareImageRequest) (*UnShareImageResp
         return nil, err
     }
 
-    jdResp := &UnShareImageResponse{}
+    jdResp := &vm.RebuildInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
-    return jdResp, err
-}
-
-/* 修改主机信息 */
-func (c *VmClient) ModifyInstanceAttribute(request *ModifyInstanceAttributeRequest) (*ModifyInstanceAttributeResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
     if err != nil {
         return nil, err
     }
 
-    jdResp := &ModifyInstanceAttributeResponse{}
-    err = json.Unmarshal(resp, jdResp)
     return jdResp, err
 }
 
 /* 重启单个实例，只能重启running状态的实例，主机没有未完成的任务才可重启 */
-func (c *VmClient) RebootInstance(request *RebootInstanceRequest) (*RebootInstanceResponse, error) {
+func (c *VmClient) RebootInstance(request *vm.RebootInstanceRequest) (*vm.RebootInstanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -217,8 +139,12 @@ func (c *VmClient) RebootInstance(request *RebootInstanceRequest) (*RebootInstan
         return nil, err
     }
 
-    jdResp := &RebootInstanceResponse{}
+    jdResp := &vm.RebootInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
@@ -227,7 +153,7 @@ func (c *VmClient) RebootInstance(request *RebootInstanceRequest) (*RebootInstan
 "不能操作非私有镜像"
 "不能共享给自己"
  */
-func (c *VmClient) ShareImage(request *ShareImageRequest) (*ShareImageResponse, error) {
+func (c *VmClient) ShareImage(request *vm.ShareImageRequest) (*vm.ShareImageResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -236,13 +162,17 @@ func (c *VmClient) ShareImage(request *ShareImageRequest) (*ShareImageResponse, 
         return nil, err
     }
 
-    jdResp := &ShareImageResponse{}
+    jdResp := &vm.ShareImageResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 查询镜像资源信息列表 */
-func (c *VmClient) DescribeImages(request *DescribeImagesRequest) (*DescribeImagesResponse, error) {
+func (c *VmClient) DescribeImages(request *vm.DescribeImagesRequest) (*vm.DescribeImagesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -251,28 +181,17 @@ func (c *VmClient) DescribeImages(request *DescribeImagesRequest) (*DescribeImag
         return nil, err
     }
 
-    jdResp := &DescribeImagesResponse{}
+    jdResp := &vm.DescribeImagesResponse{}
     err = json.Unmarshal(resp, jdResp)
-    return jdResp, err
-}
-
-/* 云主机解绑公网IP 解绑的是主网卡、主内网IP对应的弹性IP */
-func (c *VmClient) DisassociateElasticIp(request *DisassociateElasticIpRequest) (*DisassociateElasticIpResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
     if err != nil {
         return nil, err
     }
 
-    jdResp := &DisassociateElasticIpResponse{}
-    err = json.Unmarshal(resp, jdResp)
     return jdResp, err
 }
 
 /* 停止单个实例，只能停止running状态的实例，主机没有未完成的任务才可停止 */
-func (c *VmClient) StopInstance(request *StopInstanceRequest) (*StopInstanceResponse, error) {
+func (c *VmClient) StopInstance(request *vm.StopInstanceRequest) (*vm.StopInstanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -281,28 +200,17 @@ func (c *VmClient) StopInstance(request *StopInstanceRequest) (*StopInstanceResp
         return nil, err
     }
 
-    jdResp := &StopInstanceResponse{}
+    jdResp := &vm.StopInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
-    return jdResp, err
-}
-
-/* 查询镜像限制 */
-func (c *VmClient) DescribeImageConstraints(request *DescribeImageConstraintsRequest) (*DescribeImageConstraintsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
     if err != nil {
         return nil, err
     }
 
-    jdResp := &DescribeImageConstraintsResponse{}
-    err = json.Unmarshal(resp, jdResp)
     return jdResp, err
 }
 
 /* 查询主机vnc */
-func (c *VmClient) DescribeInstanceVncUrl(request *DescribeInstanceVncUrlRequest) (*DescribeInstanceVncUrlResponse, error) {
+func (c *VmClient) DescribeInstanceVncUrl(request *vm.DescribeInstanceVncUrlRequest) (*vm.DescribeInstanceVncUrlResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -311,28 +219,17 @@ func (c *VmClient) DescribeInstanceVncUrl(request *DescribeInstanceVncUrlRequest
         return nil, err
     }
 
-    jdResp := &DescribeInstanceVncUrlResponse{}
+    jdResp := &vm.DescribeInstanceVncUrlResponse{}
     err = json.Unmarshal(resp, jdResp)
-    return jdResp, err
-}
-
-/* 启动单个实例，只能启动stopped状态的实例，主机没有未完成的任务才可启动 */
-func (c *VmClient) StartInstance(request *StartInstanceRequest) (*StartInstanceResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
     if err != nil {
         return nil, err
     }
 
-    jdResp := &StartInstanceResponse{}
-    err = json.Unmarshal(resp, jdResp)
     return jdResp, err
 }
 
 /* 删除私有镜像 */
-func (c *VmClient) DeleteImage(request *DeleteImageRequest) (*DeleteImageResponse, error) {
+func (c *VmClient) DeleteImage(request *vm.DeleteImageRequest) (*vm.DeleteImageResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -341,13 +238,17 @@ func (c *VmClient) DeleteImage(request *DeleteImageRequest) (*DeleteImageRespons
         return nil, err
     }
 
-    jdResp := &DeleteImageResponse{}
+    jdResp := &vm.DeleteImageResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
-/* 云主机绑定公网IP 绑定的是主网卡、主内网IP对应的弹性IP */
-func (c *VmClient) AssociateElasticIp(request *AssociateElasticIpRequest) (*AssociateElasticIpResponse, error) {
+/* 查询云主机详情 */
+func (c *VmClient) DescribeInstance(request *vm.DescribeInstanceRequest) (*vm.DescribeInstanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -356,8 +257,230 @@ func (c *VmClient) AssociateElasticIp(request *AssociateElasticIpRequest) (*Asso
         return nil, err
     }
 
-    jdResp := &AssociateElasticIpResponse{}
+    jdResp := &vm.DescribeInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* "云主机变更实例规格，需要关机操作"
+"16年创建的云盘做系统盘的主机，一代与二代实例类型不允许相互调整"
+"本地盘做系统盘的主机，一代与二代实例类型不允许相互调整"
+"ag中的主机，一代与二代实例类型不允许相互调整"
+"变更后实例规格的网卡数量限制，要支持当前主机的网卡数量，如不支持，需要缷载网卡后再变更实例规格"
+ */
+func (c *VmClient) ResizeInstance(request *vm.ResizeInstanceRequest) (*vm.ResizeInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.ResizeInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询（虚机、镜像、密钥、模板）配额 */
+func (c *VmClient) DescribeQuotas(request *vm.DescribeQuotasRequest) (*vm.DescribeQuotasResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.DescribeQuotasResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* "虚机创建私有镜像"
+"虚机状态必须为stopped"
+"如果虚机上有挂载数据盘，默认会将数据盘创建快照，生成打包镜像"
+"主机没有未完成的任务才可制作镜像"
+ */
+func (c *VmClient) CreateImage(request *vm.CreateImageRequest) (*vm.CreateImageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.CreateImageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询云主机列表 */
+func (c *VmClient) DescribeInstances(request *vm.DescribeInstancesRequest) (*vm.DescribeInstancesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.DescribeInstancesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建一台或多台指定配置的实例 */
+func (c *VmClient) CreateInstances(request *vm.CreateInstancesRequest) (*vm.CreateInstancesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.CreateInstancesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 取消共享镜像，不能操作非私有镜像 */
+func (c *VmClient) UnShareImage(request *vm.UnShareImageRequest) (*vm.UnShareImageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.UnShareImageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改主机密码，主机没有未完成的任务时才可操作 */
+func (c *VmClient) ModifyInstancePassword(request *vm.ModifyInstancePasswordRequest) (*vm.ModifyInstancePasswordResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.ModifyInstancePasswordResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改主机信息 */
+func (c *VmClient) ModifyInstanceAttribute(request *vm.ModifyInstanceAttributeRequest) (*vm.ModifyInstanceAttributeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.ModifyInstanceAttributeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 云主机解绑公网IP 解绑的是主网卡、主内网IP对应的弹性IP */
+func (c *VmClient) DisassociateElasticIp(request *vm.DisassociateElasticIpRequest) (*vm.DisassociateElasticIpResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.DisassociateElasticIpResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询镜像限制 */
+func (c *VmClient) DescribeImageConstraints(request *vm.DescribeImageConstraintsRequest) (*vm.DescribeImageConstraintsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.DescribeImageConstraintsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 启动单个实例，只能启动stopped状态的实例，主机没有未完成的任务才可启动 */
+func (c *VmClient) StartInstance(request *vm.StartInstanceRequest) (*vm.StartInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.StartInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
@@ -366,7 +489,7 @@ func (c *VmClient) AssociateElasticIp(request *AssociateElasticIpRequest) (*Asso
 "包年包月未到期的主机不能删除"
 "如果主机中挂载了数据盘，并且设置了AutoDelete属性为True，那么数据盘会随主机一起删除"
  */
-func (c *VmClient) DeleteInstance(request *DeleteInstanceRequest) (*DeleteInstanceResponse, error) {
+func (c *VmClient) DeleteInstance(request *vm.DeleteInstanceRequest) (*vm.DeleteInstanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -375,13 +498,17 @@ func (c *VmClient) DeleteInstance(request *DeleteInstanceRequest) (*DeleteInstan
         return nil, err
     }
 
-    jdResp := &DeleteInstanceResponse{}
+    jdResp := &vm.DeleteInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
-/* 查询云主机详情 */
-func (c *VmClient) DescribeInstance(request *DescribeInstanceRequest) (*DescribeInstanceResponse, error) {
+/* 云主机绑定公网IP 绑定的是主网卡、主内网IP对应的弹性IP */
+func (c *VmClient) AssociateElasticIp(request *vm.AssociateElasticIpRequest) (*vm.AssociateElasticIpResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -390,13 +517,17 @@ func (c *VmClient) DescribeInstance(request *DescribeInstanceRequest) (*Describe
         return nil, err
     }
 
-    jdResp := &DescribeInstanceResponse{}
+    jdResp := &vm.AssociateElasticIpResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 云主机缷载硬盘，主机和云盘没有未完成的任务时才可缷载 */
-func (c *VmClient) DetachDisk(request *DetachDiskRequest) (*DetachDiskResponse, error) {
+func (c *VmClient) DetachDisk(request *vm.DetachDiskRequest) (*vm.DetachDiskResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -405,13 +536,17 @@ func (c *VmClient) DetachDisk(request *DetachDiskRequest) (*DetachDiskResponse, 
         return nil, err
     }
 
-    jdResp := &DetachDiskResponse{}
+    jdResp := &vm.DetachDiskResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 查询实例类型资源信息列表 */
-func (c *VmClient) DescribeInstanceTypes(request *DescribeInstanceTypesRequest) (*DescribeInstanceTypesResponse, error) {
+func (c *VmClient) DescribeInstanceTypes(request *vm.DescribeInstanceTypesRequest) (*vm.DescribeInstanceTypesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -420,8 +555,12 @@ func (c *VmClient) DescribeInstanceTypes(request *DescribeInstanceTypesRequest) 
         return nil, err
     }
 
-    jdResp := &DescribeInstanceTypesResponse{}
+    jdResp := &vm.DescribeInstanceTypesResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 

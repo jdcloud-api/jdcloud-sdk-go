@@ -1,4 +1,4 @@
-// Copyright 2018-2025 JDCLOUD.COM
+// Copyright 2018 JDCLOUD.COM
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 package apis
 
 import (
-    . "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    "github.com/jdcloud-api/jdcloud-sdk-go/core"
     "reflect"
     vm "github.com/jdcloud-api/jdcloud-sdk-go/services/vm/models"
     common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
@@ -25,7 +25,7 @@ import (
 
 type DescribeInstanceTypesRequest struct {
 
-    JDCloudRequest
+    core.JDCloudRequest
 
     /* Region ID  */
     RegionId string `json:"regionId"`
@@ -45,7 +45,7 @@ func NewDescribeInstanceTypesRequest(
 ) *DescribeInstanceTypesRequest {
 
 	return &DescribeInstanceTypesRequest{
-        JDCloudRequest: JDCloudRequest{
+        JDCloudRequest: core.JDCloudRequest{
 			URL:     "/regions/{regionId}/instanceTypes",
 			Method:  "GET",
 			Header:  nil,
@@ -79,7 +79,7 @@ func (r DescribeInstanceTypesRequest) GetRegionId() string {
 
 type DescribeInstanceTypesResponse struct {
     RequestID string `json:"requestId"`
-    Error ErrorResponse `json:"error"`
+    Error core.ErrorResponse `json:"error"`
     Result DescribeInstanceTypesResult `json:"result"`
 }
 

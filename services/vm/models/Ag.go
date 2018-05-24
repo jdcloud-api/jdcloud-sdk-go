@@ -1,4 +1,4 @@
-// Copyright 2018-2025 JDCLOUD.COM
+// Copyright 2018 JDCLOUD.COM
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,9 +19,9 @@ package models
 
 type Ag struct {
 
-    /* 可用组name (Optional) */
+    /* 高可用组名称 (Optional) */
     Name string `json:"name"`
 
-    /* 可用组id (Optional) */
+    /* 高可用组id (Optional) */
     Id string `json:"id"`
 }

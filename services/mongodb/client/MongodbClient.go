@@ -1,4 +1,4 @@
-// Copyright 2018-2025 JDCLOUD.COM
+// Copyright 2018 JDCLOUD.COM
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,44 +17,44 @@
 package client
 
 import (
-    . "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    . "github.com/jdcloud-api/jdcloud-sdk-go/services/mongodb/apis"
+    "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    mongodb "github.com/jdcloud-api/jdcloud-sdk-go/services/mongodb/apis"
     "encoding/json"
     "errors"
 )
 
 type MongodbClient struct {
-    JDCloudClient
+    core.JDCloudClient
 }
 
-func NewMongodbClient(credential *Credential) *MongodbClient {
+func NewMongodbClient(credential *core.Credential) *MongodbClient {
     if credential == nil {
         return nil
     }
 
-    config := NewConfig()
+    config := core.NewConfig()
     config.SetEndpoint("mongodb.jdcloud-api.com")
 
     return &MongodbClient{
-        JDCloudClient{
+        core.JDCloudClient{
             Credential:  *credential,
             Config:      *config,
             ServiceName: "mongodb",
             Revision:    "1.0.0",
-            Logger:      NewDefaultLogger(LOG_INFO),
+            Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
 
-func (c *MongodbClient) SetConfig(config *Config) {
+func (c *MongodbClient) SetConfig(config *core.Config) {
     c.Config = *config
 }
 
-func (c *MongodbClient) SetLogger(logger Logger) {
+func (c *MongodbClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
 /* 查看备份 */
-func (c *MongodbClient) DescribeBackups(request *DescribeBackupsRequest) (*DescribeBackupsResponse, error) {
+func (c *MongodbClient) DescribeBackups(request *mongodb.DescribeBackupsRequest) (*mongodb.DescribeBackupsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -63,13 +63,17 @@ func (c *MongodbClient) DescribeBackups(request *DescribeBackupsRequest) (*Descr
         return nil, err
     }
 
-    jdResp := &DescribeBackupsResponse{}
+    jdResp := &mongodb.DescribeBackupsResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 查询实例信息 */
-func (c *MongodbClient) DescribeInstances(request *DescribeInstancesRequest) (*DescribeInstancesResponse, error) {
+func (c *MongodbClient) DescribeInstances(request *mongodb.DescribeInstancesRequest) (*mongodb.DescribeInstancesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -78,13 +82,17 @@ func (c *MongodbClient) DescribeInstances(request *DescribeInstancesRequest) (*D
         return nil, err
     }
 
-    jdResp := &DescribeInstancesResponse{}
+    jdResp := &mongodb.DescribeInstancesResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 变更实例规格 */
-func (c *MongodbClient) ModifyInstanceSpec(request *ModifyInstanceSpecRequest) (*ModifyInstanceSpecResponse, error) {
+func (c *MongodbClient) ModifyInstanceSpec(request *mongodb.ModifyInstanceSpecRequest) (*mongodb.ModifyInstanceSpecResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -93,13 +101,17 @@ func (c *MongodbClient) ModifyInstanceSpec(request *ModifyInstanceSpecRequest) (
         return nil, err
     }
 
-    jdResp := &ModifyInstanceSpecResponse{}
+    jdResp := &mongodb.ModifyInstanceSpecResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 修改实例名称 */
-func (c *MongodbClient) ModifyInstanceName(request *ModifyInstanceNameRequest) (*ModifyInstanceNameResponse, error) {
+func (c *MongodbClient) ModifyInstanceName(request *mongodb.ModifyInstanceNameRequest) (*mongodb.ModifyInstanceNameResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -108,13 +120,17 @@ func (c *MongodbClient) ModifyInstanceName(request *ModifyInstanceNameRequest) (
         return nil, err
     }
 
-    jdResp := &ModifyInstanceNameResponse{}
+    jdResp := &mongodb.ModifyInstanceNameResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 创建备份 */
-func (c *MongodbClient) CreateBackup(request *CreateBackupRequest) (*CreateBackupResponse, error) {
+func (c *MongodbClient) CreateBackup(request *mongodb.CreateBackupRequest) (*mongodb.CreateBackupResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -123,13 +139,17 @@ func (c *MongodbClient) CreateBackup(request *CreateBackupRequest) (*CreateBacku
         return nil, err
     }
 
-    jdResp := &CreateBackupResponse{}
+    jdResp := &mongodb.CreateBackupResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 修改备份策略 */
-func (c *MongodbClient) ModifyBackupPolicy(request *ModifyBackupPolicyRequest) (*ModifyBackupPolicyResponse, error) {
+func (c *MongodbClient) ModifyBackupPolicy(request *mongodb.ModifyBackupPolicyRequest) (*mongodb.ModifyBackupPolicyResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -138,13 +158,17 @@ func (c *MongodbClient) ModifyBackupPolicy(request *ModifyBackupPolicyRequest) (
         return nil, err
     }
 
-    jdResp := &ModifyBackupPolicyResponse{}
+    jdResp := &mongodb.ModifyBackupPolicyResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 创建实例 */
-func (c *MongodbClient) CreateInstance(request *CreateInstanceRequest) (*CreateInstanceResponse, error) {
+func (c *MongodbClient) CreateInstance(request *mongodb.CreateInstanceRequest) (*mongodb.CreateInstanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -153,13 +177,17 @@ func (c *MongodbClient) CreateInstance(request *CreateInstanceRequest) (*CreateI
         return nil, err
     }
 
-    jdResp := &CreateInstanceResponse{}
+    jdResp := &mongodb.CreateInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 删除备份 */
-func (c *MongodbClient) DeleteBackup(request *DeleteBackupRequest) (*DeleteBackupResponse, error) {
+func (c *MongodbClient) DeleteBackup(request *mongodb.DeleteBackupRequest) (*mongodb.DeleteBackupResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -168,13 +196,17 @@ func (c *MongodbClient) DeleteBackup(request *DeleteBackupRequest) (*DeleteBacku
         return nil, err
     }
 
-    jdResp := &DeleteBackupResponse{}
+    jdResp := &mongodb.DeleteBackupResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 数据恢复 */
-func (c *MongodbClient) RestoreInstance(request *RestoreInstanceRequest) (*RestoreInstanceResponse, error) {
+func (c *MongodbClient) RestoreInstance(request *mongodb.RestoreInstanceRequest) (*mongodb.RestoreInstanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -183,13 +215,17 @@ func (c *MongodbClient) RestoreInstance(request *RestoreInstanceRequest) (*Resto
         return nil, err
     }
 
-    jdResp := &RestoreInstanceResponse{}
+    jdResp := &mongodb.RestoreInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 重置密码 */
-func (c *MongodbClient) ResetPassword(request *ResetPasswordRequest) (*ResetPasswordResponse, error) {
+func (c *MongodbClient) ResetPassword(request *mongodb.ResetPasswordRequest) (*mongodb.ResetPasswordResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -198,13 +234,17 @@ func (c *MongodbClient) ResetPassword(request *ResetPasswordRequest) (*ResetPass
         return nil, err
     }
 
-    jdResp := &ResetPasswordResponse{}
+    jdResp := &mongodb.ResetPasswordResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 获取备份策略 */
-func (c *MongodbClient) DescribeBackupPolicy(request *DescribeBackupPolicyRequest) (*DescribeBackupPolicyResponse, error) {
+func (c *MongodbClient) DescribeBackupPolicy(request *mongodb.DescribeBackupPolicyRequest) (*mongodb.DescribeBackupPolicyResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -213,13 +253,17 @@ func (c *MongodbClient) DescribeBackupPolicy(request *DescribeBackupPolicyReques
         return nil, err
     }
 
-    jdResp := &DescribeBackupPolicyResponse{}
+    jdResp := &mongodb.DescribeBackupPolicyResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 删除实例 */
-func (c *MongodbClient) DeleteInstance(request *DeleteInstanceRequest) (*DeleteInstanceResponse, error) {
+func (c *MongodbClient) DeleteInstance(request *mongodb.DeleteInstanceRequest) (*mongodb.DeleteInstanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -228,13 +272,17 @@ func (c *MongodbClient) DeleteInstance(request *DeleteInstanceRequest) (*DeleteI
         return nil, err
     }
 
-    jdResp := &DeleteInstanceResponse{}
+    jdResp := &mongodb.DeleteInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
 /* 获取备份下载链接 */
-func (c *MongodbClient) BackupDownloadURL(request *BackupDownloadURLRequest) (*BackupDownloadURLResponse, error) {
+func (c *MongodbClient) BackupDownloadURL(request *mongodb.BackupDownloadURLRequest) (*mongodb.BackupDownloadURLResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -243,8 +291,12 @@ func (c *MongodbClient) BackupDownloadURL(request *BackupDownloadURLRequest) (*B
         return nil, err
     }
 
-    jdResp := &BackupDownloadURLResponse{}
+    jdResp := &mongodb.BackupDownloadURLResponse{}
     err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
     return jdResp, err
 }
 
