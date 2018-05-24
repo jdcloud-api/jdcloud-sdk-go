@@ -64,7 +64,7 @@ func (c JDCloudClient) Send(request RequestInterface, serviceName string) ([]byt
 		return err
 	}
 
-	return c.doSend(method, reqUrl, body, request.GetHeaders(), c.Config.Timeout, sign)
+	return c.doSend(method, reqUrl, body, request.GetHeader(), c.Config.Timeout, sign)
 }
 
 func (c JDCloudClient) doSend(method, url, data string, header map[string]string, timeout time.Duration, sign SignFunc) ([]byte, error) {
@@ -72,7 +72,7 @@ func (c JDCloudClient) doSend(method, url, data string, header map[string]string
 
 	req, err := http.NewRequest(method, url, strings.NewReader(data))
 	if err != nil {
-		c.Logger.Log(LOG_FATAL, err.Error())
+		c.Logger.Log(LogFatal, err.Error())
 		return nil, err
 	}
 
@@ -85,14 +85,14 @@ func (c JDCloudClient) doSend(method, url, data string, header map[string]string
 
 	resp, err := client.Do(req)
 	if err != nil {
-		c.Logger.Log(LOG_ERROR, err.Error())
+		c.Logger.Log(LogError, err.Error())
 		return nil, err
 	}
 
 	processor := GetResponseProcessor(req.Method)
 	result, err := processor.Process(resp)
 	if err != nil {
-		c.Logger.Log(LOG_ERROR, err.Error())
+		c.Logger.Log(LogError, err.Error())
 		return nil, err
 	}
 	return result, nil
@@ -104,8 +104,8 @@ func (c JDCloudClient) setHeader(req *http.Request, header map[string]string) {
 	req.Header.Set("User-Agent", fmt.Sprintf("JdcloudSdkGo/%s %s/%s", Version, c.ServiceName, c.Revision))
 
 	for k, v := range header {
-		if strings.HasPrefix(strings.ToLower(k), HEADER_JDCLOUD_PREFIX) ||
-			strings.HasPrefix(strings.ToLower(k), HEADER_JCLOUD_PREFIX) {
+		if strings.HasPrefix(strings.ToLower(k), HeaderJdcloudPrefix) ||
+			strings.HasPrefix(strings.ToLower(k), HeaderJcloudPrefix) {
 			v = base64.StdEncoding.EncodeToString([]byte(v))
 		}
 
@@ -113,6 +113,6 @@ func (c JDCloudClient) setHeader(req *http.Request, header map[string]string) {
 	}
 
 	for k, v := range req.Header {
-		c.Logger.Log(LOG_INFO, k, v)
+		c.Logger.Log(LogInfo, k, v)
 	}
 }

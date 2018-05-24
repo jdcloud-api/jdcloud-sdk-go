@@ -18,7 +18,7 @@ type RequestInterface interface {
 	GetURL() string
 	GetMethod() string
 	GetVersion() string
-	GetHeaders() map[string]string
+	GetHeader() map[string]string
 	GetRegionId() string
 }
 
@@ -42,7 +42,7 @@ func (r JDCloudRequest) GetVersion() string {
 	return r.Version
 }
 
-func (r JDCloudRequest) GetHeaders() map[string]string {
+func (r JDCloudRequest) GetHeader() map[string]string {
 	return r.Header
 }
 
