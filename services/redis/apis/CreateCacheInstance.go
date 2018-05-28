@@ -18,7 +18,6 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    "reflect"
     redis "github.com/jdcloud-api/jdcloud-sdk-go/services/redis/models"
     charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
 )
@@ -74,15 +73,7 @@ func (r *CreateCacheInstanceRequest) SetCharge(charge *charge.ChargeSpec) {
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r CreateCacheInstanceRequest) GetRegionId() string {
-    fieldName := "RegionId"
-    reqType := reflect.TypeOf(r)
-    value := reflect.ValueOf(r)
-    _, ok := reqType.FieldByName(fieldName)
-    if ok {
-        return value.FieldByName(fieldName).String()
-    }
-
-    return ""
+    return r.RegionId
 }
 
 type CreateCacheInstanceResponse struct {

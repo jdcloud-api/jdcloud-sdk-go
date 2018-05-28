@@ -18,7 +18,6 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    "reflect"
 )
 
 type ResizeInstanceRequest struct {
@@ -74,15 +73,7 @@ func (r *ResizeInstanceRequest) SetInstanceType(instanceType string) {
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r ResizeInstanceRequest) GetRegionId() string {
-    fieldName := "RegionId"
-    reqType := reflect.TypeOf(r)
-    value := reflect.ValueOf(r)
-    _, ok := reqType.FieldByName(fieldName)
-    if ok {
-        return value.FieldByName(fieldName).String()
-    }
-
-    return ""
+    return r.RegionId
 }
 
 type ResizeInstanceResponse struct {

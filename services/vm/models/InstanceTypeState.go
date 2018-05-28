@@ -17,23 +17,11 @@
 package models
 
 
-type InstanceType struct {
+type InstanceTypeState struct {
 
-    /* 实例族 (Optional) */
-    Family string `json:"family"`
+    /* 可用区 (Optional) */
+    Az string `json:"az"`
 
-    /* 实例类型，比如g.b1.2xlarge (Optional) */
-    InstanceType string `json:"instanceType"`
-
-    /* cpu个数 (Optional) */
-    Cpu int `json:"cpu"`
-
-    /* 内存 (Optional) */
-    MemoryMB int `json:"memoryMB"`
-
-    /* 描述 (Optional) */
-    Desc string `json:"desc"`
-
-    /* 状态 (Optional) */
-    State []InstanceTypeState `json:"state"`
+    /* true:可用、false:已售罄不可用 (Optional) */
+    InStock bool `json:"inStock"`
 }

@@ -18,7 +18,6 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    "reflect"
     streambus "github.com/jdcloud-api/jdcloud-sdk-go/services/streambus/models"
 )
 
@@ -63,15 +62,7 @@ func (r *GetTopicListRequest) SetKeyword(keyword string) {
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r GetTopicListRequest) GetRegionId() string {
-    fieldName := "RegionId"
-    reqType := reflect.TypeOf(r)
-    value := reflect.ValueOf(r)
-    _, ok := reqType.FieldByName(fieldName)
-    if ok {
-        return value.FieldByName(fieldName).String()
-    }
-
-    return ""
+    return r.RegionId
 }
 
 type GetTopicListResponse struct {
