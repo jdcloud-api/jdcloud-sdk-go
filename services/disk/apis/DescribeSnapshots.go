@@ -18,7 +18,6 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    "reflect"
     disk "github.com/jdcloud-api/jdcloud-sdk-go/services/disk/models"
     common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
@@ -88,15 +87,7 @@ func (r *DescribeSnapshotsRequest) SetFilters(filters []common.Filter) {
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r DescribeSnapshotsRequest) GetRegionId() string {
-    fieldName := "RegionId"
-    reqType := reflect.TypeOf(r)
-    value := reflect.ValueOf(r)
-    _, ok := reqType.FieldByName(fieldName)
-    if ok {
-        return value.FieldByName(fieldName).String()
-    }
-
-    return ""
+    return r.RegionId
 }
 
 type DescribeSnapshotsResponse struct {

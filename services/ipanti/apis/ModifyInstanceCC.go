@@ -18,7 +18,6 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    "reflect"
     ipanti "github.com/jdcloud-api/jdcloud-sdk-go/services/ipanti/models"
 )
 
@@ -75,15 +74,7 @@ func (r *ModifyInstanceCCRequest) SetCCSpec(cCSpec *ipanti.CCSpec) {
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r ModifyInstanceCCRequest) GetRegionId() string {
-    fieldName := "RegionId"
-    reqType := reflect.TypeOf(r)
-    value := reflect.ValueOf(r)
-    _, ok := reqType.FieldByName(fieldName)
-    if ok {
-        return value.FieldByName(fieldName).String()
-    }
-
-    return ""
+    return r.RegionId
 }
 
 type ModifyInstanceCCResponse struct {

@@ -18,7 +18,6 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    "reflect"
     iam "github.com/jdcloud-api/jdcloud-sdk-go/services/iam/models"
 )
 
@@ -93,15 +92,7 @@ func (r *DescribePermissionsRequest) SetQueryType(queryType int) {
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r DescribePermissionsRequest) GetRegionId() string {
-    fieldName := "RegionId"
-    reqType := reflect.TypeOf(r)
-    value := reflect.ValueOf(r)
-    _, ok := reqType.FieldByName(fieldName)
-    if ok {
-        return value.FieldByName(fieldName).String()
-    }
-
-    return ""
+    return r.RegionId
 }
 
 type DescribePermissionsResponse struct {

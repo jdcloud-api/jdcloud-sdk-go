@@ -18,7 +18,6 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    "reflect"
     monitor "github.com/jdcloud-api/jdcloud-sdk-go/services/monitor/models"
 )
 
@@ -111,15 +110,7 @@ func (r *DescribeAlarmsRequest) SetPageSize(pageSize int) {
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r DescribeAlarmsRequest) GetRegionId() string {
-    fieldName := "RegionId"
-    reqType := reflect.TypeOf(r)
-    value := reflect.ValueOf(r)
-    _, ok := reqType.FieldByName(fieldName)
-    if ok {
-        return value.FieldByName(fieldName).String()
-    }
-
-    return ""
+    return r.RegionId
 }
 
 type DescribeAlarmsResponse struct {
