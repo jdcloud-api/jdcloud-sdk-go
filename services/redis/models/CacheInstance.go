@@ -16,7 +16,7 @@
 
 package models
 
-import . "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
+import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
 
 type CacheInstance struct {
 
@@ -57,5 +57,5 @@ type CacheInstance struct {
     Port int `json:"port"`
 
     /* 计费信息 (Optional) */
-    Charge Charge `json:"charge"`
+    Charge charge.Charge `json:"charge"`
 }

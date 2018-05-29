@@ -16,7 +16,7 @@
 
 package models
 
-import . "github.com/jdcloud-api/jdcloud-sdk-go/services/disk/models"
+import disk "github.com/jdcloud-api/jdcloud-sdk-go/services/disk/models"
 
 type VolumeMountSpec struct {
 
@@ -33,7 +33,7 @@ type VolumeMountSpec struct {
     ReadOnly *bool `json:"readOnly"`
 
     /* 云硬盘规格；随容器自动创建的云硬盘，不会对磁盘分区，只会格式化文件系统 (Optional) */
-    CloudDiskSpec *DiskSpec `json:"cloudDiskSpec"`
+    CloudDiskSpec *disk.DiskSpec `json:"cloudDiskSpec"`
 
     /* 云硬盘ID；如果使用已有的云硬盘，必须指定partion和fsType (Optional) */
     CloudDiskId *string `json:"cloudDiskId"`

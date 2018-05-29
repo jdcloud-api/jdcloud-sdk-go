@@ -16,7 +16,7 @@
 
 package models
 
-import . "github.com/jdcloud-api/jdcloud-sdk-go/services/disk/models"
+import disk "github.com/jdcloud-api/jdcloud-sdk-go/services/disk/models"
 
 type InstanceDiskAttachmentSpec struct {
 
@@ -27,7 +27,7 @@ type InstanceDiskAttachmentSpec struct {
     AutoDelete *bool `json:"autoDelete"`
 
     /* 云硬盘规格 (Optional) */
-    CloudDiskSpec *DiskSpec `json:"cloudDiskSpec"`
+    CloudDiskSpec *disk.DiskSpec `json:"cloudDiskSpec"`
 
     /* 数据盘逻辑挂载点vdb,vdc,vdd,vde,vdf,vdg,vdh (Optional) */
     DeviceName *string `json:"deviceName"`

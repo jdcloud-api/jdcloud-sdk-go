@@ -16,7 +16,7 @@
 
 package models
 
-import . "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
+import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
 
 type ElasticIp struct {
 
@@ -45,7 +45,7 @@ type ElasticIp struct {
     InstanceType string `json:"instanceType"`
 
     /* 计费配置 (Optional) */
-    Charge Charge `json:"charge"`
+    Charge charge.Charge `json:"charge"`
 
     /* 弹性ip创建时间 (Optional) */
     CreatedTime string `json:"createdTime"`
