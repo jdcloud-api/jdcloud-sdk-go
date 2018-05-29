@@ -16,7 +16,7 @@
 
 package models
 
-import . "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
+import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
 
 type Instance struct {
 
@@ -72,7 +72,7 @@ type Instance struct {
     KeyNames []string `json:"keyNames"`
 
     /* 计费信息 (Optional) */
-    Charge Charge `json:"charge"`
+    Charge charge.Charge `json:"charge"`
 
     /* Tag信息 (Optional) */
     Tags []Tag `json:"tags"`
