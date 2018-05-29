@@ -16,7 +16,7 @@
 
 package models
 
-import . "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
+import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
 
 type Container struct {
 
@@ -93,7 +93,7 @@ type Container struct {
     LogConfiguration LogConfiguration `json:"logConfiguration"`
 
     /* 计费配置信息 (Optional) */
-    Charge Charge `json:"charge"`
+    Charge charge.Charge `json:"charge"`
 
     /* 创建时间 (Optional) */
     LaunchTime string `json:"launchTime"`

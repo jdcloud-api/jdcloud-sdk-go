@@ -16,7 +16,7 @@
 
 package models
 
-import . "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
+import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
 
 type ElasticIpSpec struct {
 
@@ -27,5 +27,5 @@ type ElasticIpSpec struct {
     Provider *string `json:"provider"`
 
     /* 计费配置 (Optional) */
-    ChargeSpec *ChargeSpec `json:"chargeSpec"`
+    ChargeSpec *charge.ChargeSpec `json:"chargeSpec"`
 }

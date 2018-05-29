@@ -16,7 +16,7 @@
 
 package models
 
-import . "github.com/jdcloud-api/jdcloud-sdk-go/services/disk/models"
+import disk "github.com/jdcloud-api/jdcloud-sdk-go/services/disk/models"
 
 type InstanceDiskAttachment struct {
 
@@ -30,7 +30,7 @@ type InstanceDiskAttachment struct {
     LocalDisk LocalDisk `json:"localDisk"`
 
     /* 云硬盘 (Optional) */
-    CloudDisk Disk `json:"cloudDisk"`
+    CloudDisk disk.Disk `json:"cloudDisk"`
 
     /* 数据盘逻辑挂载点vdb,vdc,vdd,vde,vdf,vdg,vdh (Optional) */
     DeviceName string `json:"deviceName"`

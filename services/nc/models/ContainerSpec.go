@@ -16,7 +16,7 @@
 
 package models
 
-import . "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
+import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
 
 type ContainerSpec struct {
 
@@ -75,5 +75,5 @@ type ContainerSpec struct {
     Description *string `json:"description"`
 
     /* 计费配置；如不指定，默认计费类型是后付费-按使用时常付费 (Optional) */
-    Charge *ChargeSpec `json:"charge"`
+    Charge *charge.ChargeSpec `json:"charge"`
 }

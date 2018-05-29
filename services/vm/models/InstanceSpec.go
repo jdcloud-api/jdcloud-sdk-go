@@ -16,8 +16,8 @@
 
 package models
 
-import . "github.com/jdcloud-api/jdcloud-sdk-go/services/vpc/models"
-import . "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
+import vpc "github.com/jdcloud-api/jdcloud-sdk-go/services/vpc/models"
+import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
 
 type InstanceSpec struct {
 
@@ -47,7 +47,7 @@ type InstanceSpec struct {
     KeyNames []string `json:"keyNames"`
 
     /* 主网卡主IP关联的弹性IP规格 (Optional) */
-    ElasticIp *ElasticIpSpec `json:"elasticIp"`
+    ElasticIp *vpc.ElasticIpSpec `json:"elasticIp"`
 
     /* 主网卡配置信息  */
     PrimaryNetworkInterface *InstanceNetworkInterfaceAttachmentSpec `json:"primaryNetworkInterface"`
@@ -59,7 +59,7 @@ type InstanceSpec struct {
     DataDisks []InstanceDiskAttachmentSpec `json:"dataDisks"`
 
     /* 计费配置 (Optional) */
-    Charge *ChargeSpec `json:"charge"`
+    Charge *charge.ChargeSpec `json:"charge"`
 
     /* 主机描述，长度不超过256字符  */
     Description string `json:"description"`
