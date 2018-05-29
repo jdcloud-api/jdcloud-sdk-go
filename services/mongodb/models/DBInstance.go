@@ -16,7 +16,7 @@
 
 package models
 
-import . "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
+import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
 
 type DBInstance struct {
 
@@ -84,5 +84,5 @@ type DBInstance struct {
     PreferredmaintenanceWindow string `json:"preferredmaintenanceWindow"`
 
     /* 计费信息 (Optional) */
-    Charge Charge `json:"charge"`
+    Charge charge.Charge `json:"charge"`
 }
