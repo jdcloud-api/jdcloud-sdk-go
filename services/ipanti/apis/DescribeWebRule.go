@@ -36,9 +36,11 @@ type DescribeWebRuleRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: 实例id 
- * param webRuleId: 网站规则id 
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param webRuleId: 网站规则id (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeWebRuleRequest(
     regionId string,
@@ -59,14 +61,54 @@ func NewDescribeWebRuleRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param webRuleId: 网站规则id (Required)
+ */
+func NewDescribeWebRuleRequestWithAllParams(
+    regionId string,
+    instanceId string,
+    webRuleId string,
+) *DescribeWebRuleRequest {
+
+    return &DescribeWebRuleRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}/webRules/{webRuleId}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+        WebRuleId: webRuleId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeWebRuleRequestWithoutParam() *DescribeWebRuleRequest {
+
+    return &DescribeWebRuleRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}/webRules/{webRuleId}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DescribeWebRuleRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: 实例id(Required) */
 func (r *DescribeWebRuleRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
+/* param webRuleId: 网站规则id(Required) */
 func (r *DescribeWebRuleRequest) SetWebRuleId(webRuleId string) {
     r.WebRuleId = webRuleId
 }
@@ -84,5 +126,5 @@ type DescribeWebRuleResponse struct {
 }
 
 type DescribeWebRuleResult struct {
-    WebRule ipanti.WebRule `json:"webRule"`
+    Data ipanti.WebRule `json:"data"`
 }

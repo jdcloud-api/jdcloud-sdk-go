@@ -38,10 +38,11 @@ type CreateDatabaseRequest struct {
 }
 
 /*
- * param regionId: 地域ID 
- * param databaseName: 数据库名 
- * param instanceName: 实例名称 
- * param description: 描述信息 (Optional)
+ * param regionId: 地域ID (Required)
+ * param databaseName: 数据库名 (Required)
+ * param instanceName: 实例名称 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateDatabaseRequest(
     regionId string,
@@ -62,18 +63,62 @@ func NewCreateDatabaseRequest(
 	}
 }
 
+/*
+ * param regionId: 地域ID (Required)
+ * param databaseName: 数据库名 (Required)
+ * param instanceName: 实例名称 (Required)
+ * param description: 描述信息 (Optional)
+ */
+func NewCreateDatabaseRequestWithAllParams(
+    regionId string,
+    databaseName string,
+    instanceName string,
+    description *string,
+) *CreateDatabaseRequest {
+
+    return &CreateDatabaseRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/dwDatabase/{databaseName}",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        DatabaseName: databaseName,
+        InstanceName: instanceName,
+        Description: description,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewCreateDatabaseRequestWithoutParam() *CreateDatabaseRequest {
+
+    return &CreateDatabaseRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/dwDatabase/{databaseName}",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 地域ID(Required) */
 func (r *CreateDatabaseRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param databaseName: 数据库名(Required) */
 func (r *CreateDatabaseRequest) SetDatabaseName(databaseName string) {
     r.DatabaseName = databaseName
 }
 
+/* param instanceName: 实例名称(Required) */
 func (r *CreateDatabaseRequest) SetInstanceName(instanceName string) {
     r.InstanceName = instanceName
 }
 
+/* param description: 描述信息(Optional) */
 func (r *CreateDatabaseRequest) SetDescription(description string) {
     r.Description = &description
 }

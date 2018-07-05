@@ -20,7 +20,10 @@ package models
 type WebRule struct {
 
     /* 规则id (Optional) */
-    WebRuleId int64 `json:"webRuleId"`
+    Id int64 `json:"id"`
+
+    /* 实例id (Optional) */
+    InstanceId int64 `json:"instanceId"`
 
     /* 子域名 (Optional) */
     Domain string `json:"domain"`
@@ -31,14 +34,23 @@ type WebRule struct {
     /* 协议：HTTP、HTTPS、HTTP_HTTPS (Optional) */
     Protocol string `json:"protocol"`
 
-    /* 端口号，80,443 (Optional) */
+    /* HTTP协议的端口号，如80,81，多个端口号使用逗号分隔 (Optional) */
     Port string `json:"port"`
 
-    /* 回源类型：ip或者domain (Optional) */
+    /* HTTPS协议的端口号，如443,8443，多个端口号使用逗号分隔 (Optional) */
+    HttpsPort string `json:"httpsPort"`
+
+    /* 回源类型：A或者CNAME (Optional) */
     OriginType string `json:"originType"`
 
-    /* 回源地址：originType为ip时为多个填多个ip，originType为domain时填一个域名 (Optional) */
-    OriginAddr []string `json:"originAddr"`
+    /*  (Optional) */
+    OriginAddr []OriginAddrItem `json:"originAddr"`
+
+    /*  (Optional) */
+    OnlineAddr []string `json:"onlineAddr"`
+
+    /* 回源域名,originType为CNAME时返回该字段 (Optional) */
+    OriginDomain string `json:"originDomain"`
 
     /* 证书内容 (Optional) */
     HttpsCertContent string `json:"httpsCertContent"`
@@ -52,6 +64,18 @@ type WebRule struct {
     /* 0防御状态，1回源状态 (Optional) */
     Status int `json:"status"`
 
-    /* 0CC关闭 1CC开启 (Optional) */
+    /* 0 CC关闭 1 CC开启 (Optional) */
     CcStatus int `json:"ccStatus"`
+
+    /* 转发规则：wrr->带权重的轮询，rr->不带权重的轮询 (Optional) */
+    Algorithm string `json:"algorithm"`
+
+    /* 是否开启https强制跳转，当protocol为HTTP_HTTPS时可以配置该属性 0为不强跳 1为开启强跳 (Optional) */
+    ForceJump int `json:"forceJump"`
+
+    /* 是否为自定义端口号，0为默认 1为自定义 (Optional) */
+    CustomPortStatus int `json:"customPortStatus"`
+
+    /* 是否开启http回源，0为不开启 1为开启，当勾选HTTPS时可以配置该属性 (Optional) */
+    HttpOrigin int `json:"httpOrigin"`
 }

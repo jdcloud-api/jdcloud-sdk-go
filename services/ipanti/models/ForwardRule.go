@@ -20,7 +20,10 @@ package models
 type ForwardRule struct {
 
     /* 规则id (Optional) */
-    ForwardRuleId int64 `json:"forwardRuleId"`
+    Id int64 `json:"id"`
+
+    /* 实例id (Optional) */
+    InstanceId int64 `json:"instanceId"`
 
     /* TCP或UDP (Optional) */
     Protocol string `json:"protocol"`
@@ -37,8 +40,11 @@ type ForwardRule struct {
     /* 转发规则：wrr->带权重的轮询，wlc->加权最小连接，rr->不带权重的轮询，sh->源地址hash (Optional) */
     Algorithm string `json:"algorithm"`
 
-    /* 回源地址：originType为ip时为多个填多个ip，originType为domain时填一个域名 (Optional) */
-    OriginAddr []string `json:"originAddr"`
+    /*  (Optional) */
+    OriginAddr []OriginAddrItem `json:"originAddr"`
+
+    /*  (Optional) */
+    OnlineAddr []string `json:"onlineAddr"`
 
     /* 回源域名 (Optional) */
     OriginDomain string `json:"originDomain"`

@@ -31,8 +31,11 @@ type ForwardRuleSpec struct {
     /* 回源类型，ip或者domain (Optional) */
     OriginType *string `json:"originType"`
 
-    /* 回源地址：originType为ip时为多个填多个ip，originType为domain时填一个域名 (Optional) */
-    OriginAddr []string `json:"originAddr"`
+    /*  (Optional) */
+    OriginAddr []OriginAddrItem `json:"originAddr"`
+
+    /*  (Optional) */
+    OnlineAddr []string `json:"onlineAddr"`
 
     /* 回源域名 (Optional) */
     OriginDomain *string `json:"originDomain"`

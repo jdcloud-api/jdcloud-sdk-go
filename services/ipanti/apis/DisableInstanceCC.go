@@ -32,8 +32,10 @@ type DisableInstanceCCRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: 实例id 
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDisableInstanceCCRequest(
     regionId string,
@@ -42,7 +44,7 @@ func NewDisableInstanceCCRequest(
 
 	return &DisableInstanceCCRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/disableCC",
+			URL:     "/regions/{regionId}/instances/{instanceId}:disableCC",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -52,10 +54,46 @@ func NewDisableInstanceCCRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ */
+func NewDisableInstanceCCRequestWithAllParams(
+    regionId string,
+    instanceId string,
+) *DisableInstanceCCRequest {
+
+    return &DisableInstanceCCRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:disableCC",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDisableInstanceCCRequestWithoutParam() *DisableInstanceCCRequest {
+
+    return &DisableInstanceCCRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:disableCC",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DisableInstanceCCRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: 实例id(Required) */
 func (r *DisableInstanceCCRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }

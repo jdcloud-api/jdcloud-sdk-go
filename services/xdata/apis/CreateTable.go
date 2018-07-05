@@ -36,9 +36,11 @@ type CreateTableRequest struct {
 }
 
 /*
- * param regionId: 地域ID 
- * param instanceName: 实例名称 
- * param dbModelDBTable: 数据表描述 
+ * param regionId: 地域ID (Required)
+ * param instanceName: 实例名称 (Required)
+ * param dbModelDBTable: 数据表描述 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateTableRequest(
     regionId string,
@@ -59,14 +61,54 @@ func NewCreateTableRequest(
 	}
 }
 
+/*
+ * param regionId: 地域ID (Required)
+ * param instanceName: 实例名称 (Required)
+ * param dbModelDBTable: 数据表描述 (Required)
+ */
+func NewCreateTableRequestWithAllParams(
+    regionId string,
+    instanceName string,
+    dbModelDBTable *xdata.DwTableDesc,
+) *CreateTableRequest {
+
+    return &CreateTableRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/dwTable",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceName: instanceName,
+        DbModelDBTable: dbModelDBTable,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewCreateTableRequestWithoutParam() *CreateTableRequest {
+
+    return &CreateTableRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/dwTable",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 地域ID(Required) */
 func (r *CreateTableRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceName: 实例名称(Required) */
 func (r *CreateTableRequest) SetInstanceName(instanceName string) {
     r.InstanceName = instanceName
 }
 
+/* param dbModelDBTable: 数据表描述(Required) */
 func (r *CreateTableRequest) SetDbModelDBTable(dbModelDBTable *xdata.DwTableDesc) {
     r.DbModelDBTable = dbModelDBTable
 }

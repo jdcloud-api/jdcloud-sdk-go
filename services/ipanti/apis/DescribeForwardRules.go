@@ -39,10 +39,10 @@ type DescribeForwardRulesRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: 实例id 
- * param pageNumber: 页码；默认为1 (Optional)
- * param pageSize: 分页大小；默认为20；取值范围[10, 100] (Optional)
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeForwardRulesRequest(
     regionId string,
@@ -61,18 +61,62 @@ func NewDescribeForwardRulesRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param pageNumber: 页码；默认为1 (Optional)
+ * param pageSize: 分页大小；默认为20；取值范围[10, 100] (Optional)
+ */
+func NewDescribeForwardRulesRequestWithAllParams(
+    regionId string,
+    instanceId string,
+    pageNumber *int,
+    pageSize *int,
+) *DescribeForwardRulesRequest {
+
+    return &DescribeForwardRulesRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}/forwardRules",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+        PageNumber: pageNumber,
+        PageSize: pageSize,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeForwardRulesRequestWithoutParam() *DescribeForwardRulesRequest {
+
+    return &DescribeForwardRulesRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}/forwardRules",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DescribeForwardRulesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: 实例id(Required) */
 func (r *DescribeForwardRulesRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
+/* param pageNumber: 页码；默认为1(Optional) */
 func (r *DescribeForwardRulesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
+/* param pageSize: 分页大小；默认为20；取值范围[10, 100](Optional) */
 func (r *DescribeForwardRulesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
@@ -90,6 +134,6 @@ type DescribeForwardRulesResponse struct {
 }
 
 type DescribeForwardRulesResult struct {
-    ForwardRules []ipanti.ForwardRule `json:"forwardRules"`
+    DataList []ipanti.ForwardRule `json:"dataList"`
     TotalCount int `json:"totalCount"`
 }

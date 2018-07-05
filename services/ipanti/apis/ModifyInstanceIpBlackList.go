@@ -35,9 +35,11 @@ type ModifyInstanceIpBlackListRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: 实例id 
- * param ipBlackList: ip黑名单列表 
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param ipBlackList: ip黑名单列表 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewModifyInstanceIpBlackListRequest(
     regionId string,
@@ -47,7 +49,7 @@ func NewModifyInstanceIpBlackListRequest(
 
 	return &ModifyInstanceIpBlackListRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/setIpBlackList",
+			URL:     "/regions/{regionId}/instances/{instanceId}:setIpBlackList",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -58,14 +60,54 @@ func NewModifyInstanceIpBlackListRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param ipBlackList: ip黑名单列表 (Required)
+ */
+func NewModifyInstanceIpBlackListRequestWithAllParams(
+    regionId string,
+    instanceId string,
+    ipBlackList []string,
+) *ModifyInstanceIpBlackListRequest {
+
+    return &ModifyInstanceIpBlackListRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:setIpBlackList",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+        IpBlackList: ipBlackList,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewModifyInstanceIpBlackListRequestWithoutParam() *ModifyInstanceIpBlackListRequest {
+
+    return &ModifyInstanceIpBlackListRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:setIpBlackList",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *ModifyInstanceIpBlackListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: 实例id(Required) */
 func (r *ModifyInstanceIpBlackListRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
+/* param ipBlackList: ip黑名单列表(Required) */
 func (r *ModifyInstanceIpBlackListRequest) SetIpBlackList(ipBlackList []string) {
     r.IpBlackList = ipBlackList
 }

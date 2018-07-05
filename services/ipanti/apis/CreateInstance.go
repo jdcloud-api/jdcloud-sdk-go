@@ -33,8 +33,10 @@ type CreateInstanceRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceSpec: 实例规格参数 
+ * param regionId: Region ID (Required)
+ * param instanceSpec: 实例规格参数 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateInstanceRequest(
     regionId string,
@@ -53,10 +55,46 @@ func NewCreateInstanceRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceSpec: 实例规格参数 (Required)
+ */
+func NewCreateInstanceRequestWithAllParams(
+    regionId string,
+    instanceSpec *ipanti.InstanceSpec,
+) *CreateInstanceRequest {
+
+    return &CreateInstanceRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceSpec: instanceSpec,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewCreateInstanceRequestWithoutParam() *CreateInstanceRequest {
+
+    return &CreateInstanceRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *CreateInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceSpec: 实例规格参数(Required) */
 func (r *CreateInstanceRequest) SetInstanceSpec(instanceSpec *ipanti.InstanceSpec) {
     r.InstanceSpec = instanceSpec
 }

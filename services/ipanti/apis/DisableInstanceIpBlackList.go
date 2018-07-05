@@ -32,8 +32,10 @@ type DisableInstanceIpBlackListRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: 实例id 
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDisableInstanceIpBlackListRequest(
     regionId string,
@@ -42,7 +44,7 @@ func NewDisableInstanceIpBlackListRequest(
 
 	return &DisableInstanceIpBlackListRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/disableIpBlackList",
+			URL:     "/regions/{regionId}/instances/{instanceId}:disableIpBlackList",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -52,10 +54,46 @@ func NewDisableInstanceIpBlackListRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ */
+func NewDisableInstanceIpBlackListRequestWithAllParams(
+    regionId string,
+    instanceId string,
+) *DisableInstanceIpBlackListRequest {
+
+    return &DisableInstanceIpBlackListRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:disableIpBlackList",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDisableInstanceIpBlackListRequestWithoutParam() *DisableInstanceIpBlackListRequest {
+
+    return &DisableInstanceIpBlackListRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:disableIpBlackList",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DisableInstanceIpBlackListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: 实例id(Required) */
 func (r *DisableInstanceIpBlackListRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }

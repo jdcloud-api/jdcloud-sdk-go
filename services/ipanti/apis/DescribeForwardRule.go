@@ -36,9 +36,11 @@ type DescribeForwardRuleRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: 实例id 
- * param forwardRuleId: 转发规则id 
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param forwardRuleId: 转发规则id (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeForwardRuleRequest(
     regionId string,
@@ -59,14 +61,54 @@ func NewDescribeForwardRuleRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param forwardRuleId: 转发规则id (Required)
+ */
+func NewDescribeForwardRuleRequestWithAllParams(
+    regionId string,
+    instanceId string,
+    forwardRuleId string,
+) *DescribeForwardRuleRequest {
+
+    return &DescribeForwardRuleRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}/forwardRules/{forwardRuleId}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+        ForwardRuleId: forwardRuleId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeForwardRuleRequestWithoutParam() *DescribeForwardRuleRequest {
+
+    return &DescribeForwardRuleRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}/forwardRules/{forwardRuleId}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DescribeForwardRuleRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: 实例id(Required) */
 func (r *DescribeForwardRuleRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
+/* param forwardRuleId: 转发规则id(Required) */
 func (r *DescribeForwardRuleRequest) SetForwardRuleId(forwardRuleId string) {
     r.ForwardRuleId = forwardRuleId
 }
@@ -84,5 +126,5 @@ type DescribeForwardRuleResponse struct {
 }
 
 type DescribeForwardRuleResult struct {
-    ForwardRule ipanti.ForwardRule `json:"forwardRule"`
+    Data ipanti.ForwardRule `json:"data"`
 }

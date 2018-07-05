@@ -35,9 +35,11 @@ type DeleteDatabaseRequest struct {
 }
 
 /*
- * param regionId: 地域ID 
- * param databaseName: 数据库名 
- * param instanceName: 实例名称 
+ * param regionId: 地域ID (Required)
+ * param databaseName: 数据库名 (Required)
+ * param instanceName: 实例名称 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDeleteDatabaseRequest(
     regionId string,
@@ -58,14 +60,54 @@ func NewDeleteDatabaseRequest(
 	}
 }
 
+/*
+ * param regionId: 地域ID (Required)
+ * param databaseName: 数据库名 (Required)
+ * param instanceName: 实例名称 (Required)
+ */
+func NewDeleteDatabaseRequestWithAllParams(
+    regionId string,
+    databaseName string,
+    instanceName string,
+) *DeleteDatabaseRequest {
+
+    return &DeleteDatabaseRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/dwDatabase/{databaseName}",
+            Method:  "DELETE",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        DatabaseName: databaseName,
+        InstanceName: instanceName,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDeleteDatabaseRequestWithoutParam() *DeleteDatabaseRequest {
+
+    return &DeleteDatabaseRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/dwDatabase/{databaseName}",
+            Method:  "DELETE",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 地域ID(Required) */
 func (r *DeleteDatabaseRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param databaseName: 数据库名(Required) */
 func (r *DeleteDatabaseRequest) SetDatabaseName(databaseName string) {
     r.DatabaseName = databaseName
 }
 
+/* param instanceName: 实例名称(Required) */
 func (r *DeleteDatabaseRequest) SetInstanceName(instanceName string) {
     r.InstanceName = instanceName
 }

@@ -32,8 +32,10 @@ type EnableInstanceUrlWhiteListRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: 实例id 
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewEnableInstanceUrlWhiteListRequest(
     regionId string,
@@ -42,7 +44,7 @@ func NewEnableInstanceUrlWhiteListRequest(
 
 	return &EnableInstanceUrlWhiteListRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/enableUrlWhiteList",
+			URL:     "/regions/{regionId}/instances/{instanceId}:enableUrlWhiteList",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -52,10 +54,46 @@ func NewEnableInstanceUrlWhiteListRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ */
+func NewEnableInstanceUrlWhiteListRequestWithAllParams(
+    regionId string,
+    instanceId string,
+) *EnableInstanceUrlWhiteListRequest {
+
+    return &EnableInstanceUrlWhiteListRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:enableUrlWhiteList",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewEnableInstanceUrlWhiteListRequestWithoutParam() *EnableInstanceUrlWhiteListRequest {
+
+    return &EnableInstanceUrlWhiteListRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:enableUrlWhiteList",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *EnableInstanceUrlWhiteListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: 实例id(Required) */
 func (r *EnableInstanceUrlWhiteListRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }

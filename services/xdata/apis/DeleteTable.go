@@ -38,10 +38,12 @@ type DeleteTableRequest struct {
 }
 
 /*
- * param regionId: 地域ID 
- * param tableName: 数据表名 
- * param instanceName: 实例名称 
- * param databaseName: 数据库名称 
+ * param regionId: 地域ID (Required)
+ * param tableName: 数据表名 (Required)
+ * param instanceName: 实例名称 (Required)
+ * param databaseName: 数据库名称 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDeleteTableRequest(
     regionId string,
@@ -64,18 +66,62 @@ func NewDeleteTableRequest(
 	}
 }
 
+/*
+ * param regionId: 地域ID (Required)
+ * param tableName: 数据表名 (Required)
+ * param instanceName: 实例名称 (Required)
+ * param databaseName: 数据库名称 (Required)
+ */
+func NewDeleteTableRequestWithAllParams(
+    regionId string,
+    tableName string,
+    instanceName string,
+    databaseName string,
+) *DeleteTableRequest {
+
+    return &DeleteTableRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/dwTable/{tableName}",
+            Method:  "DELETE",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        TableName: tableName,
+        InstanceName: instanceName,
+        DatabaseName: databaseName,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDeleteTableRequestWithoutParam() *DeleteTableRequest {
+
+    return &DeleteTableRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/dwTable/{tableName}",
+            Method:  "DELETE",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 地域ID(Required) */
 func (r *DeleteTableRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param tableName: 数据表名(Required) */
 func (r *DeleteTableRequest) SetTableName(tableName string) {
     r.TableName = tableName
 }
 
+/* param instanceName: 实例名称(Required) */
 func (r *DeleteTableRequest) SetInstanceName(instanceName string) {
     r.InstanceName = instanceName
 }
 
+/* param databaseName: 数据库名称(Required) */
 func (r *DeleteTableRequest) SetDatabaseName(databaseName string) {
     r.DatabaseName = databaseName
 }

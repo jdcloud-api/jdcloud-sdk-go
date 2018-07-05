@@ -36,9 +36,11 @@ type ListTableInfoRequest struct {
 }
 
 /*
- * param regionId: 地域ID 
- * param instanceName: 实例名称 
- * param databaseName: 数据库名称 
+ * param regionId: 地域ID (Required)
+ * param instanceName: 实例名称 (Required)
+ * param databaseName: 数据库名称 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewListTableInfoRequest(
     regionId string,
@@ -59,14 +61,54 @@ func NewListTableInfoRequest(
 	}
 }
 
+/*
+ * param regionId: 地域ID (Required)
+ * param instanceName: 实例名称 (Required)
+ * param databaseName: 数据库名称 (Required)
+ */
+func NewListTableInfoRequestWithAllParams(
+    regionId string,
+    instanceName string,
+    databaseName string,
+) *ListTableInfoRequest {
+
+    return &ListTableInfoRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/dwTable",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceName: instanceName,
+        DatabaseName: databaseName,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewListTableInfoRequestWithoutParam() *ListTableInfoRequest {
+
+    return &ListTableInfoRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/dwTable",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 地域ID(Required) */
 func (r *ListTableInfoRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceName: 实例名称(Required) */
 func (r *ListTableInfoRequest) SetInstanceName(instanceName string) {
     r.InstanceName = instanceName
 }
 
+/* param databaseName: 数据库名称(Required) */
 func (r *ListTableInfoRequest) SetDatabaseName(databaseName string) {
     r.DatabaseName = databaseName
 }

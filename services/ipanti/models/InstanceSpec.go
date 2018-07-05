@@ -31,7 +31,7 @@ type InstanceSpec struct {
     /* 购买时长跨度 (Optional) */
     TimeSpan *int `json:"timeSpan"`
 
-    /* 线路：UNICOM、TELECOM (Optional) */
+    /* 线路：TELECOM为电信线路，UNICOM为联通线路，CMCC为移动线路 (Optional) */
     Carrier *string `json:"carrier"`
 
     /* 保底带宽：单位Gbps (Optional) */
@@ -42,4 +42,7 @@ type InstanceSpec struct {
 
     /* 业务带宽：单位Mbps (Optional) */
     Bw *int `json:"bw"`
+
+    /* 支付成功后跳转的页面，控制台交互模式传该字段 (Optional) */
+    ReturnUrl *string `json:"returnUrl"`
 }

@@ -32,8 +32,10 @@ type EnableInstanceIpBlackListRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: 实例id 
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewEnableInstanceIpBlackListRequest(
     regionId string,
@@ -42,7 +44,7 @@ func NewEnableInstanceIpBlackListRequest(
 
 	return &EnableInstanceIpBlackListRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/enableIpBlackList",
+			URL:     "/regions/{regionId}/instances/{instanceId}:enableIpBlackList",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -52,10 +54,46 @@ func NewEnableInstanceIpBlackListRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ */
+func NewEnableInstanceIpBlackListRequestWithAllParams(
+    regionId string,
+    instanceId string,
+) *EnableInstanceIpBlackListRequest {
+
+    return &EnableInstanceIpBlackListRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:enableIpBlackList",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewEnableInstanceIpBlackListRequestWithoutParam() *EnableInstanceIpBlackListRequest {
+
+    return &EnableInstanceIpBlackListRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:enableIpBlackList",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *EnableInstanceIpBlackListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: 实例id(Required) */
 func (r *EnableInstanceIpBlackListRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }

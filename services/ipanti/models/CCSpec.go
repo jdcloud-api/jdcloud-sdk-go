@@ -25,6 +25,15 @@ type CCSpec struct {
     /* cc阈值大小 (Optional) */
     CcThreshold *int `json:"ccThreshold"`
 
-    /* cc限速大小，ccProtectMode为自定义时才需要指定，统计周期为1分钟 (Optional) */
-    CcSpeedLimit *int `json:"ccSpeedLimit"`
+    /* ccProtectMode为自定义模式时，指定每个Host的防护阈值 (Optional) */
+    HostQps *int `json:"hostQps"`
+
+    /* ccProtectMode为自定义模式时，指定每个Host+URI的防护阈值 (Optional) */
+    HostUrlQps *int `json:"hostUrlQps"`
+
+    /* ccProtectMode为自定义模式时，指定每个源IP对Host的防护阈值 (Optional) */
+    IpHostQps *int `json:"ipHostQps"`
+
+    /* ccProtectMode为自定义模式时，指定每个源IP对Host+URI的防护阈值 (Optional) */
+    IpHostUrlQps *int `json:"ipHostUrlQps"`
 }

@@ -35,9 +35,11 @@ type ModifyInstanceIpWhiteListRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: 实例id 
- * param ipWhiteList: ip白名单列表 
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param ipWhiteList: ip白名单列表 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewModifyInstanceIpWhiteListRequest(
     regionId string,
@@ -47,7 +49,7 @@ func NewModifyInstanceIpWhiteListRequest(
 
 	return &ModifyInstanceIpWhiteListRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/setIpWhiteList",
+			URL:     "/regions/{regionId}/instances/{instanceId}:setIpWhiteList",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -58,14 +60,54 @@ func NewModifyInstanceIpWhiteListRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param ipWhiteList: ip白名单列表 (Required)
+ */
+func NewModifyInstanceIpWhiteListRequestWithAllParams(
+    regionId string,
+    instanceId string,
+    ipWhiteList []string,
+) *ModifyInstanceIpWhiteListRequest {
+
+    return &ModifyInstanceIpWhiteListRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:setIpWhiteList",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+        IpWhiteList: ipWhiteList,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewModifyInstanceIpWhiteListRequestWithoutParam() *ModifyInstanceIpWhiteListRequest {
+
+    return &ModifyInstanceIpWhiteListRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:setIpWhiteList",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *ModifyInstanceIpWhiteListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: 实例id(Required) */
 func (r *ModifyInstanceIpWhiteListRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
+/* param ipWhiteList: ip白名单列表(Required) */
 func (r *ModifyInstanceIpWhiteListRequest) SetIpWhiteList(ipWhiteList []string) {
     r.IpWhiteList = ipWhiteList
 }

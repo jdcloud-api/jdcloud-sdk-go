@@ -40,7 +40,7 @@ func NewXdataClient(credential *core.Credential) *XdataClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "xdata",
-            Revision:    "0.1.0",
+            Revision:    "1.0.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -53,8 +53,8 @@ func (c *XdataClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-/* 删除数据表 */
-func (c *XdataClient) DeleteTable(request *xdata.DeleteTableRequest) (*xdata.DeleteTableResponse, error) {
+/* 执行PySpark脚本 */
+func (c *XdataClient) ExecutePySparkQuery(request *xdata.ExecutePySparkQueryRequest) (*xdata.ExecutePySparkQueryResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -63,7 +63,7 @@ func (c *XdataClient) DeleteTable(request *xdata.DeleteTableRequest) (*xdata.Del
         return nil, err
     }
 
-    jdResp := &xdata.DeleteTableResponse{}
+    jdResp := &xdata.ExecutePySparkQueryResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -91,7 +91,7 @@ func (c *XdataClient) ListTableInfo(request *xdata.ListTableInfoRequest) (*xdata
     return jdResp, err
 }
 
-/* 查询实例列表 */
+/* 查询数据库列表 */
 func (c *XdataClient) ListDatabaseInfo(request *xdata.ListDatabaseInfoRequest) (*xdata.ListDatabaseInfoResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -148,6 +148,25 @@ func (c *XdataClient) CreateDatabase(request *xdata.CreateDatabaseRequest) (*xda
     return jdResp, err
 }
 
+/* 获取PySpark执行的结果 */
+func (c *XdataClient) GetPySparkExecuteResult(request *xdata.GetPySparkExecuteResultRequest) (*xdata.GetPySparkExecuteResultResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &xdata.GetPySparkExecuteResultResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询实例列表 */
 func (c *XdataClient) ListInstanceInfo(request *xdata.ListInstanceInfoRequest) (*xdata.ListInstanceInfoResponse, error) {
     if request == nil {
@@ -167,8 +186,8 @@ func (c *XdataClient) ListInstanceInfo(request *xdata.ListInstanceInfoRequest) (
     return jdResp, err
 }
 
-/* 查询数据库详情 */
-func (c *XdataClient) GetDatabaseInfo(request *xdata.GetDatabaseInfoRequest) (*xdata.GetDatabaseInfoResponse, error) {
+/* 获取查询日志 */
+func (c *XdataClient) GetRasQueryLog(request *xdata.GetRasQueryLogRequest) (*xdata.GetRasQueryLogResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -177,7 +196,26 @@ func (c *XdataClient) GetDatabaseInfo(request *xdata.GetDatabaseInfoRequest) (*x
         return nil, err
     }
 
-    jdResp := &xdata.GetDatabaseInfoResponse{}
+    jdResp := &xdata.GetRasQueryLogResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 执行Spark SQL */
+func (c *XdataClient) ExecuteRasQuery(request *xdata.ExecuteRasQueryRequest) (*xdata.ExecuteRasQueryResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &xdata.ExecuteRasQueryResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -205,6 +243,120 @@ func (c *XdataClient) GetTableInfo(request *xdata.GetTableInfoRequest) (*xdata.G
     return jdResp, err
 }
 
+/* 删除数据表 */
+func (c *XdataClient) DeleteTable(request *xdata.DeleteTableRequest) (*xdata.DeleteTableResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &xdata.DeleteTableResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取查询的结果 */
+func (c *XdataClient) GetRasQueryResult(request *xdata.GetRasQueryResultRequest) (*xdata.GetRasQueryResultResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &xdata.GetRasQueryResultResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 终止PySpark任务 */
+func (c *XdataClient) CancelPySparkJob(request *xdata.CancelPySparkJobRequest) (*xdata.CancelPySparkJobResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &xdata.CancelPySparkJobResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 终止查询 */
+func (c *XdataClient) CancelRasQuery(request *xdata.CancelRasQueryRequest) (*xdata.CancelRasQueryResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &xdata.CancelRasQueryResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取PySpark脚本的执行状态 */
+func (c *XdataClient) GetPySparkExecuteState(request *xdata.GetPySparkExecuteStateRequest) (*xdata.GetPySparkExecuteStateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &xdata.GetPySparkExecuteStateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询数据库详情 */
+func (c *XdataClient) GetDatabaseInfo(request *xdata.GetDatabaseInfoRequest) (*xdata.GetDatabaseInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &xdata.GetDatabaseInfoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 创建数据表 */
 func (c *XdataClient) CreateTable(request *xdata.CreateTableRequest) (*xdata.CreateTableResponse, error) {
     if request == nil {
@@ -216,6 +368,25 @@ func (c *XdataClient) CreateTable(request *xdata.CreateTableRequest) (*xdata.Cre
     }
 
     jdResp := &xdata.CreateTableResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取查询状态 */
+func (c *XdataClient) GetRasQueryState(request *xdata.GetRasQueryStateRequest) (*xdata.GetRasQueryStateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &xdata.GetRasQueryStateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err

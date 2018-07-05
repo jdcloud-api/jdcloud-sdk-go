@@ -35,9 +35,11 @@ type ModifyInstanceUrlWhiteListRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: 实例id 
- * param urlWhiteList: 网站类规则参数 
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param urlWhiteList: 网站类规则参数 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewModifyInstanceUrlWhiteListRequest(
     regionId string,
@@ -47,7 +49,7 @@ func NewModifyInstanceUrlWhiteListRequest(
 
 	return &ModifyInstanceUrlWhiteListRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/setUrlWhiteList",
+			URL:     "/regions/{regionId}/instances/{instanceId}:setUrlWhiteList",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -58,14 +60,54 @@ func NewModifyInstanceUrlWhiteListRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param urlWhiteList: 网站类规则参数 (Required)
+ */
+func NewModifyInstanceUrlWhiteListRequestWithAllParams(
+    regionId string,
+    instanceId string,
+    urlWhiteList []string,
+) *ModifyInstanceUrlWhiteListRequest {
+
+    return &ModifyInstanceUrlWhiteListRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:setUrlWhiteList",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+        UrlWhiteList: urlWhiteList,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewModifyInstanceUrlWhiteListRequestWithoutParam() *ModifyInstanceUrlWhiteListRequest {
+
+    return &ModifyInstanceUrlWhiteListRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:setUrlWhiteList",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *ModifyInstanceUrlWhiteListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: 实例id(Required) */
 func (r *ModifyInstanceUrlWhiteListRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
+/* param urlWhiteList: 网站类规则参数(Required) */
 func (r *ModifyInstanceUrlWhiteListRequest) SetUrlWhiteList(urlWhiteList []string) {
     r.UrlWhiteList = urlWhiteList
 }

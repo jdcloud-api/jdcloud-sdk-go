@@ -30,7 +30,9 @@ type ListInstanceInfoRequest struct {
 }
 
 /*
- * param regionId: 地域ID 
+ * param regionId: 地域ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewListInstanceInfoRequest(
     regionId string,
@@ -47,6 +49,38 @@ func NewListInstanceInfoRequest(
 	}
 }
 
+/*
+ * param regionId: 地域ID (Required)
+ */
+func NewListInstanceInfoRequestWithAllParams(
+    regionId string,
+) *ListInstanceInfoRequest {
+
+    return &ListInstanceInfoRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/dwInstance",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewListInstanceInfoRequestWithoutParam() *ListInstanceInfoRequest {
+
+    return &ListInstanceInfoRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/dwInstance",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 地域ID(Required) */
 func (r *ListInstanceInfoRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

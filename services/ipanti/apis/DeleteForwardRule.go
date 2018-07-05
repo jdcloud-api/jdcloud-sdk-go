@@ -35,9 +35,11 @@ type DeleteForwardRuleRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: 实例id 
- * param forwardRuleId: 转发规则id 
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param forwardRuleId: 转发规则id (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDeleteForwardRuleRequest(
     regionId string,
@@ -58,14 +60,54 @@ func NewDeleteForwardRuleRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param forwardRuleId: 转发规则id (Required)
+ */
+func NewDeleteForwardRuleRequestWithAllParams(
+    regionId string,
+    instanceId string,
+    forwardRuleId string,
+) *DeleteForwardRuleRequest {
+
+    return &DeleteForwardRuleRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}/forwardRules/{forwardRuleId}",
+            Method:  "DELETE",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+        ForwardRuleId: forwardRuleId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDeleteForwardRuleRequestWithoutParam() *DeleteForwardRuleRequest {
+
+    return &DeleteForwardRuleRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}/forwardRules/{forwardRuleId}",
+            Method:  "DELETE",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DeleteForwardRuleRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: 实例id(Required) */
 func (r *DeleteForwardRuleRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
+/* param forwardRuleId: 转发规则id(Required) */
 func (r *DeleteForwardRuleRequest) SetForwardRuleId(forwardRuleId string) {
     r.ForwardRuleId = forwardRuleId
 }
