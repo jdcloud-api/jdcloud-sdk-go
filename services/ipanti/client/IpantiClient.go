@@ -186,7 +186,7 @@ func (c *IpantiClient) EnableInstanceUrlWhiteList(request *ipanti.EnableInstance
     return jdResp, err
 }
 
-/* 关闭CC防护每ip的限速 */
+/* 关闭实例CC防护的观察者模式 */
 func (c *IpantiClient) DisableCcObserverMode(request *ipanti.DisableCcObserverModeRequest) (*ipanti.DisableCcObserverModeResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -205,7 +205,7 @@ func (c *IpantiClient) DisableCcObserverMode(request *ipanti.DisableCcObserverMo
     return jdResp, err
 }
 
-/* 开启CC防护每ip的限速 */
+/* 开启实例CC防护的观察者模式 */
 func (c *IpantiClient) EnableCcObserverMode(request *ipanti.EnableCcObserverModeRequest) (*ipanti.EnableCcObserverModeResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -387,6 +387,25 @@ func (c *IpantiClient) ModifyForwardRule(request *ipanti.ModifyForwardRuleReques
     }
 
     jdResp := &ipanti.ModifyForwardRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 关闭CC防护每ip的限速 */
+func (c *IpantiClient) DisableCcIpLimit(request *ipanti.DisableCcIpLimitRequest) (*ipanti.DisableCcIpLimitResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DisableCcIpLimitResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -824,6 +843,25 @@ func (c *IpantiClient) DescribeCcAttackLogDetails(request *ipanti.DescribeCcAtta
     }
 
     jdResp := &ipanti.DescribeCcAttackLogDetailsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 开启CC防护每ip的限速 */
+func (c *IpantiClient) EnableCcIpLimit(request *ipanti.EnableCcIpLimitRequest) (*ipanti.EnableCcIpLimitResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.EnableCcIpLimitResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
