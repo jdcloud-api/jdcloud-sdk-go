@@ -39,10 +39,9 @@ type DescribeInstancesRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param pageNumber: 页码；默认为1 (Optional)
- * param pageSize: 分页大小；默认为20；取值范围[10, 100] (Optional)
- * param name: 实例名称，可模糊匹配 (Optional)
+ * param regionId: Region ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeInstancesRequest(
     regionId string,
@@ -59,18 +58,62 @@ func NewDescribeInstancesRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param pageNumber: 页码；默认为1 (Optional)
+ * param pageSize: 分页大小；默认为20；取值范围[10, 100] (Optional)
+ * param name: 实例名称，可模糊匹配 (Optional)
+ */
+func NewDescribeInstancesRequestWithAllParams(
+    regionId string,
+    pageNumber *int,
+    pageSize *int,
+    name *string,
+) *DescribeInstancesRequest {
+
+    return &DescribeInstancesRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        PageNumber: pageNumber,
+        PageSize: pageSize,
+        Name: name,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeInstancesRequestWithoutParam() *DescribeInstancesRequest {
+
+    return &DescribeInstancesRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DescribeInstancesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param pageNumber: 页码；默认为1(Optional) */
 func (r *DescribeInstancesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
+/* param pageSize: 分页大小；默认为20；取值范围[10, 100](Optional) */
 func (r *DescribeInstancesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
+/* param name: 实例名称，可模糊匹配(Optional) */
 func (r *DescribeInstancesRequest) SetName(name string) {
     r.Name = &name
 }
@@ -88,6 +131,6 @@ type DescribeInstancesResponse struct {
 }
 
 type DescribeInstancesResult struct {
-    Instances []ipanti.Instance `json:"instances"`
+    DataList []ipanti.Instance `json:"dataList"`
     TotalCount int `json:"totalCount"`
 }

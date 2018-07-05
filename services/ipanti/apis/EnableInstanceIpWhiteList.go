@@ -32,8 +32,10 @@ type EnableInstanceIpWhiteListRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: 实例id 
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewEnableInstanceIpWhiteListRequest(
     regionId string,
@@ -42,7 +44,7 @@ func NewEnableInstanceIpWhiteListRequest(
 
 	return &EnableInstanceIpWhiteListRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/enableIpWhiteList",
+			URL:     "/regions/{regionId}/instances/{instanceId}:enableIpWhiteList",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -52,10 +54,46 @@ func NewEnableInstanceIpWhiteListRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ */
+func NewEnableInstanceIpWhiteListRequestWithAllParams(
+    regionId string,
+    instanceId string,
+) *EnableInstanceIpWhiteListRequest {
+
+    return &EnableInstanceIpWhiteListRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:enableIpWhiteList",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewEnableInstanceIpWhiteListRequestWithoutParam() *EnableInstanceIpWhiteListRequest {
+
+    return &EnableInstanceIpWhiteListRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:enableIpWhiteList",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *EnableInstanceIpWhiteListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: 实例id(Required) */
 func (r *EnableInstanceIpWhiteListRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }

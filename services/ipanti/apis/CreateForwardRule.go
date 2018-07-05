@@ -36,9 +36,11 @@ type CreateForwardRuleRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: 实例id 
- * param forwardRuleSpec: 非网站类规则参数 
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param forwardRuleSpec: 非网站类规则参数 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateForwardRuleRequest(
     regionId string,
@@ -59,14 +61,54 @@ func NewCreateForwardRuleRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param forwardRuleSpec: 非网站类规则参数 (Required)
+ */
+func NewCreateForwardRuleRequestWithAllParams(
+    regionId string,
+    instanceId string,
+    forwardRuleSpec *ipanti.ForwardRuleSpec,
+) *CreateForwardRuleRequest {
+
+    return &CreateForwardRuleRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}/forwardRules",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+        ForwardRuleSpec: forwardRuleSpec,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewCreateForwardRuleRequestWithoutParam() *CreateForwardRuleRequest {
+
+    return &CreateForwardRuleRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}/forwardRules",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *CreateForwardRuleRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: 实例id(Required) */
 func (r *CreateForwardRuleRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
+/* param forwardRuleSpec: 非网站类规则参数(Required) */
 func (r *CreateForwardRuleRequest) SetForwardRuleSpec(forwardRuleSpec *ipanti.ForwardRuleSpec) {
     r.ForwardRuleSpec = forwardRuleSpec
 }

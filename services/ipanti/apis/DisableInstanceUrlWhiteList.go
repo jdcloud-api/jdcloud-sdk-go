@@ -32,8 +32,10 @@ type DisableInstanceUrlWhiteListRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: 实例id 
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDisableInstanceUrlWhiteListRequest(
     regionId string,
@@ -42,7 +44,7 @@ func NewDisableInstanceUrlWhiteListRequest(
 
 	return &DisableInstanceUrlWhiteListRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/disableUrlWhiteList",
+			URL:     "/regions/{regionId}/instances/{instanceId}:disableUrlWhiteList",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -52,10 +54,46 @@ func NewDisableInstanceUrlWhiteListRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ */
+func NewDisableInstanceUrlWhiteListRequestWithAllParams(
+    regionId string,
+    instanceId string,
+) *DisableInstanceUrlWhiteListRequest {
+
+    return &DisableInstanceUrlWhiteListRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:disableUrlWhiteList",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDisableInstanceUrlWhiteListRequestWithoutParam() *DisableInstanceUrlWhiteListRequest {
+
+    return &DisableInstanceUrlWhiteListRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:disableUrlWhiteList",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DisableInstanceUrlWhiteListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: 实例id(Required) */
 func (r *DisableInstanceUrlWhiteListRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }

@@ -35,9 +35,11 @@ type ModifyInstanceNameRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: 实例id 
- * param name: 新的实例名称 
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param name: 新的实例名称 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewModifyInstanceNameRequest(
     regionId string,
@@ -47,7 +49,7 @@ func NewModifyInstanceNameRequest(
 
 	return &ModifyInstanceNameRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/rename",
+			URL:     "/regions/{regionId}/instances/{instanceId}:rename",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -58,14 +60,54 @@ func NewModifyInstanceNameRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param name: 新的实例名称 (Required)
+ */
+func NewModifyInstanceNameRequestWithAllParams(
+    regionId string,
+    instanceId string,
+    name string,
+) *ModifyInstanceNameRequest {
+
+    return &ModifyInstanceNameRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:rename",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+        Name: name,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewModifyInstanceNameRequestWithoutParam() *ModifyInstanceNameRequest {
+
+    return &ModifyInstanceNameRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:rename",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *ModifyInstanceNameRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: 实例id(Required) */
 func (r *ModifyInstanceNameRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
+/* param name: 新的实例名称(Required) */
 func (r *ModifyInstanceNameRequest) SetName(name string) {
     r.Name = name
 }

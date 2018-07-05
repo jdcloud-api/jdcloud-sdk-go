@@ -32,8 +32,10 @@ type DisableInstanceIpWhiteListRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: 实例id 
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDisableInstanceIpWhiteListRequest(
     regionId string,
@@ -42,7 +44,7 @@ func NewDisableInstanceIpWhiteListRequest(
 
 	return &DisableInstanceIpWhiteListRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/disableIpWhiteList",
+			URL:     "/regions/{regionId}/instances/{instanceId}:disableIpWhiteList",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -52,10 +54,46 @@ func NewDisableInstanceIpWhiteListRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ */
+func NewDisableInstanceIpWhiteListRequestWithAllParams(
+    regionId string,
+    instanceId string,
+) *DisableInstanceIpWhiteListRequest {
+
+    return &DisableInstanceIpWhiteListRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:disableIpWhiteList",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDisableInstanceIpWhiteListRequestWithoutParam() *DisableInstanceIpWhiteListRequest {
+
+    return &DisableInstanceIpWhiteListRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:disableIpWhiteList",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DisableInstanceIpWhiteListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: 实例id(Required) */
 func (r *DisableInstanceIpWhiteListRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }

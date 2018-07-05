@@ -33,8 +33,10 @@ type ListDatabaseInfoRequest struct {
 }
 
 /*
- * param regionId: 地域ID 
- * param instanceName: 实例名称 
+ * param regionId: 地域ID (Required)
+ * param instanceName: 实例名称 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewListDatabaseInfoRequest(
     regionId string,
@@ -53,10 +55,46 @@ func NewListDatabaseInfoRequest(
 	}
 }
 
+/*
+ * param regionId: 地域ID (Required)
+ * param instanceName: 实例名称 (Required)
+ */
+func NewListDatabaseInfoRequestWithAllParams(
+    regionId string,
+    instanceName string,
+) *ListDatabaseInfoRequest {
+
+    return &ListDatabaseInfoRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/dwDatabase",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceName: instanceName,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewListDatabaseInfoRequestWithoutParam() *ListDatabaseInfoRequest {
+
+    return &ListDatabaseInfoRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/dwDatabase",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 地域ID(Required) */
 func (r *ListDatabaseInfoRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceName: 实例名称(Required) */
 func (r *ListDatabaseInfoRequest) SetInstanceName(instanceName string) {
     r.InstanceName = instanceName
 }

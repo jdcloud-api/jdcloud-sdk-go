@@ -35,9 +35,11 @@ type DeleteWebRuleRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: 实例id 
- * param webRuleId: 网站规则id 
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param webRuleId: 网站规则id (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDeleteWebRuleRequest(
     regionId string,
@@ -58,14 +60,54 @@ func NewDeleteWebRuleRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param webRuleId: 网站规则id (Required)
+ */
+func NewDeleteWebRuleRequestWithAllParams(
+    regionId string,
+    instanceId string,
+    webRuleId string,
+) *DeleteWebRuleRequest {
+
+    return &DeleteWebRuleRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}/webRules/{webRuleId}",
+            Method:  "DELETE",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+        WebRuleId: webRuleId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDeleteWebRuleRequestWithoutParam() *DeleteWebRuleRequest {
+
+    return &DeleteWebRuleRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}/webRules/{webRuleId}",
+            Method:  "DELETE",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DeleteWebRuleRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: 实例id(Required) */
 func (r *DeleteWebRuleRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
+/* param webRuleId: 网站规则id(Required) */
 func (r *DeleteWebRuleRequest) SetWebRuleId(webRuleId string) {
     r.WebRuleId = webRuleId
 }

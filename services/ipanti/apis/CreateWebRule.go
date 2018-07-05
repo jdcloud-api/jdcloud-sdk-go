@@ -36,9 +36,11 @@ type CreateWebRuleRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: 实例id 
- * param webRuleSpec: 网站类规则参数 
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param webRuleSpec: 网站类规则参数 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateWebRuleRequest(
     regionId string,
@@ -59,14 +61,54 @@ func NewCreateWebRuleRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param webRuleSpec: 网站类规则参数 (Required)
+ */
+func NewCreateWebRuleRequestWithAllParams(
+    regionId string,
+    instanceId string,
+    webRuleSpec *ipanti.WebRuleSpec,
+) *CreateWebRuleRequest {
+
+    return &CreateWebRuleRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}/webRules",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+        WebRuleSpec: webRuleSpec,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewCreateWebRuleRequestWithoutParam() *CreateWebRuleRequest {
+
+    return &CreateWebRuleRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}/webRules",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *CreateWebRuleRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: 实例id(Required) */
 func (r *CreateWebRuleRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
+/* param webRuleSpec: 网站类规则参数(Required) */
 func (r *CreateWebRuleRequest) SetWebRuleSpec(webRuleSpec *ipanti.WebRuleSpec) {
     r.WebRuleSpec = webRuleSpec
 }

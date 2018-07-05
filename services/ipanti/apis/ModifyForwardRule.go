@@ -39,10 +39,12 @@ type ModifyForwardRuleRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: 实例id 
- * param forwardRuleId: 转发规则id 
- * param forwardRuleSpec: 非网站类规则参数 
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param forwardRuleId: 转发规则id (Required)
+ * param forwardRuleSpec: 非网站类规则参数 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewModifyForwardRuleRequest(
     regionId string,
@@ -65,18 +67,62 @@ func NewModifyForwardRuleRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param forwardRuleId: 转发规则id (Required)
+ * param forwardRuleSpec: 非网站类规则参数 (Required)
+ */
+func NewModifyForwardRuleRequestWithAllParams(
+    regionId string,
+    instanceId string,
+    forwardRuleId string,
+    forwardRuleSpec *ipanti.ForwardRuleSpec,
+) *ModifyForwardRuleRequest {
+
+    return &ModifyForwardRuleRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}/forwardRules/{forwardRuleId}",
+            Method:  "PATCH",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+        ForwardRuleId: forwardRuleId,
+        ForwardRuleSpec: forwardRuleSpec,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewModifyForwardRuleRequestWithoutParam() *ModifyForwardRuleRequest {
+
+    return &ModifyForwardRuleRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}/forwardRules/{forwardRuleId}",
+            Method:  "PATCH",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *ModifyForwardRuleRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: 实例id(Required) */
 func (r *ModifyForwardRuleRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
+/* param forwardRuleId: 转发规则id(Required) */
 func (r *ModifyForwardRuleRequest) SetForwardRuleId(forwardRuleId string) {
     r.ForwardRuleId = forwardRuleId
 }
 
+/* param forwardRuleSpec: 非网站类规则参数(Required) */
 func (r *ModifyForwardRuleRequest) SetForwardRuleSpec(forwardRuleSpec *ipanti.ForwardRuleSpec) {
     r.ForwardRuleSpec = forwardRuleSpec
 }

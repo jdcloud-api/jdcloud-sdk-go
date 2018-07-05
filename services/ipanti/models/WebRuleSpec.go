@@ -25,18 +25,39 @@ type WebRuleSpec struct {
     /* 协议：HTTP、HTTPS、HTTP_HTTPS (Optional) */
     Protocol *string `json:"protocol"`
 
-    /* 端口号，80,443 (Optional) */
+    /* HTTP协议的端口号，如80,81，多个端口号使用逗号分隔 (Optional) */
     Port *string `json:"port"`
 
-    /* 回源类型：ip或者domain (Optional) */
+    /* HTTPS协议的端口号，如443,8443，多个端口号使用逗号分隔 (Optional) */
+    HttpsPort *string `json:"httpsPort"`
+
+    /* 回源类型：A或者CNAME (Optional) */
     OriginType *string `json:"originType"`
 
-    /* 回源地址：originType为ip时为多个填多个ip，originType为domain时填一个域名 (Optional) */
-    OriginAddr []string `json:"originAddr"`
+    /*  (Optional) */
+    OriginAddr []OriginAddrItem `json:"originAddr"`
+
+    /*  (Optional) */
+    OnlineAddr []string `json:"onlineAddr"`
+
+    /* 回源域名,originType为CNAME时需要指定该字段 (Optional) */
+    OriginDomain *string `json:"originDomain"`
 
     /* 证书内容 (Optional) */
     HttpsCertContent *string `json:"httpsCertContent"`
 
     /* 证书私钥 (Optional) */
     HttpsRsaKey *string `json:"httpsRsaKey"`
+
+    /* 转发规则：wrr->带权重的轮询，rr->不带权重的轮询 (Optional) */
+    Algorithm *string `json:"algorithm"`
+
+    /* 是否开启https强制跳转，当protocol为HTTP_HTTPS时可以配置该属性 0为不强跳 1为开启强跳 (Optional) */
+    ForceJump *int `json:"forceJump"`
+
+    /* 是否为自定义端口号，0为默认 1为自定义 (Optional) */
+    CustomPortStatus *int `json:"customPortStatus"`
+
+    /* 是否开启http回源，0为不开启 1为开启，当勾选HTTPS时可以配置该属性 (Optional) */
+    HttpOrigin *int `json:"httpOrigin"`
 }

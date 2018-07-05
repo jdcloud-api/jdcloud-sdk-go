@@ -35,13 +35,13 @@ type Instance struct {
     AbovePeakCount int `json:"abovePeakCount"`
 
     /* 保底带宽 (Optional) */
-    Bp int `json:"bp"`
+    InBitslimit int `json:"inBitslimit"`
 
     /* 弹性带宽 (Optional) */
-    Ep int `json:"ep"`
+    ResilientBitslimit int `json:"resilientBitslimit"`
 
     /* 业务带宽大小 (Optional) */
-    Bw int `json:"bw"`
+    BusinessBitslimit int `json:"businessBitslimit"`
 
     /* cc阈值大小 (Optional) */
     CcThreshold int `json:"ccThreshold"`
@@ -99,4 +99,16 @@ type Instance struct {
 
     /* url白名单状态，0关闭，1开启 (Optional) */
     UrlWhitelistStatus int `json:"urlWhitelistStatus"`
+
+    /* ccProtectMode为自定义模式时，每个Host的防护阈值 (Optional) */
+    HostQps int `json:"hostQps"`
+
+    /* ccProtectMode为自定义模式时，每个Host+URI的防护阈值 (Optional) */
+    HostUrlQps int `json:"hostUrlQps"`
+
+    /* ccProtectMode为自定义模式时，每个源IP对Host的防护阈值 (Optional) */
+    IpHostQps int `json:"ipHostQps"`
+
+    /* ccProtectMode为自定义模式时，每个源IP对Host+URI的防护阈值 (Optional) */
+    IpHostUrlQps int `json:"ipHostUrlQps"`
 }

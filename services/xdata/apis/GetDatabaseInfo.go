@@ -36,9 +36,11 @@ type GetDatabaseInfoRequest struct {
 }
 
 /*
- * param regionId: 地域ID 
- * param databaseName: 数据库名 
- * param instanceName: 实例名称 
+ * param regionId: 地域ID (Required)
+ * param databaseName: 数据库名 (Required)
+ * param instanceName: 实例名称 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewGetDatabaseInfoRequest(
     regionId string,
@@ -59,14 +61,54 @@ func NewGetDatabaseInfoRequest(
 	}
 }
 
+/*
+ * param regionId: 地域ID (Required)
+ * param databaseName: 数据库名 (Required)
+ * param instanceName: 实例名称 (Required)
+ */
+func NewGetDatabaseInfoRequestWithAllParams(
+    regionId string,
+    databaseName string,
+    instanceName string,
+) *GetDatabaseInfoRequest {
+
+    return &GetDatabaseInfoRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/dwDatabase/{databaseName}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        DatabaseName: databaseName,
+        InstanceName: instanceName,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewGetDatabaseInfoRequestWithoutParam() *GetDatabaseInfoRequest {
+
+    return &GetDatabaseInfoRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/dwDatabase/{databaseName}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 地域ID(Required) */
 func (r *GetDatabaseInfoRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param databaseName: 数据库名(Required) */
 func (r *GetDatabaseInfoRequest) SetDatabaseName(databaseName string) {
     r.DatabaseName = databaseName
 }
 
+/* param instanceName: 实例名称(Required) */
 func (r *GetDatabaseInfoRequest) SetInstanceName(instanceName string) {
     r.InstanceName = instanceName
 }

@@ -39,10 +39,12 @@ type ModifyWebRuleRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: 实例id 
- * param webRuleId: 网站规则id 
- * param webRuleSpec: 网站类规则参数 
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param webRuleId: 网站规则id (Required)
+ * param webRuleSpec: 网站类规则参数 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewModifyWebRuleRequest(
     regionId string,
@@ -65,18 +67,62 @@ func NewModifyWebRuleRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param webRuleId: 网站规则id (Required)
+ * param webRuleSpec: 网站类规则参数 (Required)
+ */
+func NewModifyWebRuleRequestWithAllParams(
+    regionId string,
+    instanceId string,
+    webRuleId string,
+    webRuleSpec *ipanti.WebRuleSpec,
+) *ModifyWebRuleRequest {
+
+    return &ModifyWebRuleRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}/webRules/{webRuleId}",
+            Method:  "PATCH",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+        WebRuleId: webRuleId,
+        WebRuleSpec: webRuleSpec,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewModifyWebRuleRequestWithoutParam() *ModifyWebRuleRequest {
+
+    return &ModifyWebRuleRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}/webRules/{webRuleId}",
+            Method:  "PATCH",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *ModifyWebRuleRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: 实例id(Required) */
 func (r *ModifyWebRuleRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
+/* param webRuleId: 网站规则id(Required) */
 func (r *ModifyWebRuleRequest) SetWebRuleId(webRuleId string) {
     r.WebRuleId = webRuleId
 }
 
+/* param webRuleSpec: 网站类规则参数(Required) */
 func (r *ModifyWebRuleRequest) SetWebRuleSpec(webRuleSpec *ipanti.WebRuleSpec) {
     r.WebRuleSpec = webRuleSpec
 }

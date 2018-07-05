@@ -39,10 +39,12 @@ type GetTableInfoRequest struct {
 }
 
 /*
- * param regionId: 地域ID 
- * param tableName: 数据表名 
- * param instanceName: 实例名称 
- * param databaseName: 数据库名称 
+ * param regionId: 地域ID (Required)
+ * param tableName: 数据表名 (Required)
+ * param instanceName: 实例名称 (Required)
+ * param databaseName: 数据库名称 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewGetTableInfoRequest(
     regionId string,
@@ -65,18 +67,62 @@ func NewGetTableInfoRequest(
 	}
 }
 
+/*
+ * param regionId: 地域ID (Required)
+ * param tableName: 数据表名 (Required)
+ * param instanceName: 实例名称 (Required)
+ * param databaseName: 数据库名称 (Required)
+ */
+func NewGetTableInfoRequestWithAllParams(
+    regionId string,
+    tableName string,
+    instanceName string,
+    databaseName string,
+) *GetTableInfoRequest {
+
+    return &GetTableInfoRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/dwTable/{tableName}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        TableName: tableName,
+        InstanceName: instanceName,
+        DatabaseName: databaseName,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewGetTableInfoRequestWithoutParam() *GetTableInfoRequest {
+
+    return &GetTableInfoRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/dwTable/{tableName}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 地域ID(Required) */
 func (r *GetTableInfoRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param tableName: 数据表名(Required) */
 func (r *GetTableInfoRequest) SetTableName(tableName string) {
     r.TableName = tableName
 }
 
+/* param instanceName: 实例名称(Required) */
 func (r *GetTableInfoRequest) SetInstanceName(instanceName string) {
     r.InstanceName = instanceName
 }
 
+/* param databaseName: 数据库名称(Required) */
 func (r *GetTableInfoRequest) SetDatabaseName(databaseName string) {
     r.DatabaseName = databaseName
 }

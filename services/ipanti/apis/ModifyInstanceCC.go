@@ -36,9 +36,11 @@ type ModifyInstanceCCRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: 实例id 
- * param cCSpec: cc参数 
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param cCSpec: cc参数 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewModifyInstanceCCRequest(
     regionId string,
@@ -48,7 +50,7 @@ func NewModifyInstanceCCRequest(
 
 	return &ModifyInstanceCCRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/setCC",
+			URL:     "/regions/{regionId}/instances/{instanceId}:setCC",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -59,14 +61,54 @@ func NewModifyInstanceCCRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param cCSpec: cc参数 (Required)
+ */
+func NewModifyInstanceCCRequestWithAllParams(
+    regionId string,
+    instanceId string,
+    cCSpec *ipanti.CCSpec,
+) *ModifyInstanceCCRequest {
+
+    return &ModifyInstanceCCRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:setCC",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+        CCSpec: cCSpec,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewModifyInstanceCCRequestWithoutParam() *ModifyInstanceCCRequest {
+
+    return &ModifyInstanceCCRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:setCC",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *ModifyInstanceCCRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: 实例id(Required) */
 func (r *ModifyInstanceCCRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
+/* param cCSpec: cc参数(Required) */
 func (r *ModifyInstanceCCRequest) SetCCSpec(cCSpec *ipanti.CCSpec) {
     r.CCSpec = cCSpec
 }
