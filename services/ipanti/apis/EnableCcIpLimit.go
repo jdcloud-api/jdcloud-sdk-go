@@ -20,7 +20,7 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type EnableCcObserverModeRequest struct {
+type EnableCcIpLimitRequest struct {
 
     core.JDCloudRequest
 
@@ -37,14 +37,14 @@ type EnableCcObserverModeRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewEnableCcObserverModeRequest(
+func NewEnableCcIpLimitRequest(
     regionId string,
     instanceId string,
-) *EnableCcObserverModeRequest {
+) *EnableCcIpLimitRequest {
 
-	return &EnableCcObserverModeRequest{
+	return &EnableCcIpLimitRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}:enableCcObserverMode",
+			URL:     "/regions/{regionId}/instances/{instanceId}:enableCcIpLimit",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -58,14 +58,14 @@ func NewEnableCcObserverModeRequest(
  * param regionId: Region ID (Required)
  * param instanceId: 实例id (Required)
  */
-func NewEnableCcObserverModeRequestWithAllParams(
+func NewEnableCcIpLimitRequestWithAllParams(
     regionId string,
     instanceId string,
-) *EnableCcObserverModeRequest {
+) *EnableCcIpLimitRequest {
 
-    return &EnableCcObserverModeRequest{
+    return &EnableCcIpLimitRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:enableCcObserverMode",
+            URL:     "/regions/{regionId}/instances/{instanceId}:enableCcIpLimit",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -76,11 +76,11 @@ func NewEnableCcObserverModeRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewEnableCcObserverModeRequestWithoutParam() *EnableCcObserverModeRequest {
+func NewEnableCcIpLimitRequestWithoutParam() *EnableCcIpLimitRequest {
 
-    return &EnableCcObserverModeRequest{
+    return &EnableCcIpLimitRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:enableCcObserverMode",
+            URL:     "/regions/{regionId}/instances/{instanceId}:enableCcIpLimit",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -89,26 +89,26 @@ func NewEnableCcObserverModeRequestWithoutParam() *EnableCcObserverModeRequest {
 }
 
 /* param regionId: Region ID(Required) */
-func (r *EnableCcObserverModeRequest) SetRegionId(regionId string) {
+func (r *EnableCcIpLimitRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 实例id(Required) */
-func (r *EnableCcObserverModeRequest) SetInstanceId(instanceId string) {
+func (r *EnableCcIpLimitRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r EnableCcObserverModeRequest) GetRegionId() string {
+func (r EnableCcIpLimitRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type EnableCcObserverModeResponse struct {
+type EnableCcIpLimitResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result EnableCcObserverModeResult `json:"result"`
+    Result EnableCcIpLimitResult `json:"result"`
 }
 
-type EnableCcObserverModeResult struct {
+type EnableCcIpLimitResult struct {
 }

@@ -44,7 +44,7 @@ func NewDisableCcObserverModeRequest(
 
 	return &DisableCcObserverModeRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}:disableCcIpLimit",
+			URL:     "/regions/{regionId}/instances/{instanceId}:disableCcObserverMode",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -65,7 +65,7 @@ func NewDisableCcObserverModeRequestWithAllParams(
 
     return &DisableCcObserverModeRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:disableCcIpLimit",
+            URL:     "/regions/{regionId}/instances/{instanceId}:disableCcObserverMode",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -80,7 +80,7 @@ func NewDisableCcObserverModeRequestWithoutParam() *DisableCcObserverModeRequest
 
     return &DisableCcObserverModeRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:disableCcIpLimit",
+            URL:     "/regions/{regionId}/instances/{instanceId}:disableCcObserverMode",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
