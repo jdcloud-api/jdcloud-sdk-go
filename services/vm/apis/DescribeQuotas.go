@@ -35,9 +35,9 @@ type DescribeQuotasRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param filters: resourceTypes - 资源类型，支持多个[instance，keypair，image，instanceTemplate]
- (Optional)
+ * param regionId: Region ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeQuotasRequest(
     regionId string,
@@ -45,7 +45,7 @@ func NewDescribeQuotasRequest(
 
 	return &DescribeQuotasRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/regions/{regionId}/quotas",
+			URL:     "/regions/{regionId}/quotas",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -54,10 +54,48 @@ func NewDescribeQuotasRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param filters: resourceTypes - 资源类型，支持多个[instance，keypair，image，instanceTemplate]
+ (Optional)
+ */
+func NewDescribeQuotasRequestWithAllParams(
+    regionId string,
+    filters []common.Filter,
+) *DescribeQuotasRequest {
+
+    return &DescribeQuotasRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/quotas",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        Filters: filters,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeQuotasRequestWithoutParam() *DescribeQuotasRequest {
+
+    return &DescribeQuotasRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/quotas",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DescribeQuotasRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param filters: resourceTypes - 资源类型，支持多个[instance，keypair，image，instanceTemplate]
+(Optional) */
 func (r *DescribeQuotasRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }

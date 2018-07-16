@@ -35,9 +35,11 @@ type AssociateElasticIpRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: Instance ID 
- * param elasticIpId: 弹性IP ID 
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
+ * param elasticIpId: 弹性IP ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewAssociateElasticIpRequest(
     regionId string,
@@ -58,14 +60,54 @@ func NewAssociateElasticIpRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
+ * param elasticIpId: 弹性IP ID (Required)
+ */
+func NewAssociateElasticIpRequestWithAllParams(
+    regionId string,
+    instanceId string,
+    elasticIpId string,
+) *AssociateElasticIpRequest {
+
+    return &AssociateElasticIpRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:associateElasticIp",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+        ElasticIpId: elasticIpId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewAssociateElasticIpRequestWithoutParam() *AssociateElasticIpRequest {
+
+    return &AssociateElasticIpRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:associateElasticIp",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *AssociateElasticIpRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: Instance ID(Required) */
 func (r *AssociateElasticIpRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
+/* param elasticIpId: 弹性IP ID(Required) */
 func (r *AssociateElasticIpRequest) SetElasticIpId(elasticIpId string) {
     r.ElasticIpId = elasticIpId
 }

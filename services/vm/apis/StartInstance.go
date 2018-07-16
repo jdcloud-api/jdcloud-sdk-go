@@ -32,8 +32,10 @@ type StartInstanceRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: Instance ID 
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewStartInstanceRequest(
     regionId string,
@@ -52,10 +54,46 @@ func NewStartInstanceRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
+ */
+func NewStartInstanceRequestWithAllParams(
+    regionId string,
+    instanceId string,
+) *StartInstanceRequest {
+
+    return &StartInstanceRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:startInstance",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewStartInstanceRequestWithoutParam() *StartInstanceRequest {
+
+    return &StartInstanceRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:startInstance",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *StartInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: Instance ID(Required) */
 func (r *StartInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }

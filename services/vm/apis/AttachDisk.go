@@ -33,25 +33,24 @@ type AttachDiskRequest struct {
     /* 云硬盘ID  */
     DiskId string `json:"diskId"`
 
-    /* 逻辑挂载点[vdb,vdc,vdd,vde,vdf,vdg,vdh]  */
-    DeviceName string `json:"deviceName"`
+    /* 逻辑挂载点[vdb,vdc,vdd,vde,vdf,vdg,vdh] (Optional) */
+    DeviceName *string `json:"deviceName"`
 
     /* 当删除主机时，是否自动关联删除此硬盘，默认False，只支持按配置计费 (Optional) */
     AutoDelete *bool `json:"autoDelete"`
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: Instance ID 
- * param diskId: 云硬盘ID 
- * param deviceName: 逻辑挂载点[vdb,vdc,vdd,vde,vdf,vdg,vdh] 
- * param autoDelete: 当删除主机时，是否自动关联删除此硬盘，默认False，只支持按配置计费 (Optional)
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
+ * param diskId: 云硬盘ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewAttachDiskRequest(
     regionId string,
     instanceId string,
     diskId string,
-    deviceName string,
 ) *AttachDiskRequest {
 
 	return &AttachDiskRequest{
@@ -64,26 +63,73 @@ func NewAttachDiskRequest(
         RegionId: regionId,
         InstanceId: instanceId,
         DiskId: diskId,
-        DeviceName: deviceName,
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
+ * param diskId: 云硬盘ID (Required)
+ * param deviceName: 逻辑挂载点[vdb,vdc,vdd,vde,vdf,vdg,vdh] (Optional)
+ * param autoDelete: 当删除主机时，是否自动关联删除此硬盘，默认False，只支持按配置计费 (Optional)
+ */
+func NewAttachDiskRequestWithAllParams(
+    regionId string,
+    instanceId string,
+    diskId string,
+    deviceName *string,
+    autoDelete *bool,
+) *AttachDiskRequest {
+
+    return &AttachDiskRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:attachDisk",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+        DiskId: diskId,
+        DeviceName: deviceName,
+        AutoDelete: autoDelete,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewAttachDiskRequestWithoutParam() *AttachDiskRequest {
+
+    return &AttachDiskRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:attachDisk",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *AttachDiskRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: Instance ID(Required) */
 func (r *AttachDiskRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
+/* param diskId: 云硬盘ID(Required) */
 func (r *AttachDiskRequest) SetDiskId(diskId string) {
     r.DiskId = diskId
 }
 
+/* param deviceName: 逻辑挂载点[vdb,vdc,vdd,vde,vdf,vdg,vdh](Optional) */
 func (r *AttachDiskRequest) SetDeviceName(deviceName string) {
-    r.DeviceName = deviceName
+    r.DeviceName = &deviceName
 }
 
+/* param autoDelete: 当删除主机时，是否自动关联删除此硬盘，默认False，只支持按配置计费(Optional) */
 func (r *AttachDiskRequest) SetAutoDelete(autoDelete bool) {
     r.AutoDelete = &autoDelete
 }

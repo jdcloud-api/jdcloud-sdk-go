@@ -35,9 +35,10 @@ type ShareImageRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param imageId: Image ID 
- * param pins: 需要共享的帐户 (Optional)
+ * param regionId: Region ID (Required)
+ * param imageId: Image ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewShareImageRequest(
     regionId string,
@@ -56,14 +57,54 @@ func NewShareImageRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param imageId: Image ID (Required)
+ * param pins: 需要共享的帐户 (Optional)
+ */
+func NewShareImageRequestWithAllParams(
+    regionId string,
+    imageId string,
+    pins []string,
+) *ShareImageRequest {
+
+    return &ShareImageRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/images/{imageId}:share",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        ImageId: imageId,
+        Pins: pins,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewShareImageRequestWithoutParam() *ShareImageRequest {
+
+    return &ShareImageRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/images/{imageId}:share",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *ShareImageRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param imageId: Image ID(Required) */
 func (r *ShareImageRequest) SetImageId(imageId string) {
     r.ImageId = imageId
 }
 
+/* param pins: 需要共享的帐户(Optional) */
 func (r *ShareImageRequest) SetPins(pins []string) {
     r.Pins = pins
 }

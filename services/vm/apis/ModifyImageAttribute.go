@@ -20,15 +20,15 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type ModifyInstanceAttributeRequest struct {
+type ModifyImageAttributeRequest struct {
 
     core.JDCloudRequest
 
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* Instance ID  */
-    InstanceId string `json:"instanceId"`
+    /* Image ID  */
+    ImageId string `json:"imageId"`
 
     /* 名称；名称和描述必传其中一个；不为空且只允许中文、数字、大小写字母、英文下划线“_”及中划线“-”，长度不超过32字符 (Optional) */
     Name *string `json:"name"`
@@ -39,60 +39,60 @@ type ModifyInstanceAttributeRequest struct {
 
 /*
  * param regionId: Region ID (Required)
- * param instanceId: Instance ID (Required)
+ * param imageId: Image ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewModifyInstanceAttributeRequest(
+func NewModifyImageAttributeRequest(
     regionId string,
-    instanceId string,
-) *ModifyInstanceAttributeRequest {
+    imageId string,
+) *ModifyImageAttributeRequest {
 
-	return &ModifyInstanceAttributeRequest{
+	return &ModifyImageAttributeRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstanceAttribute",
+			URL:     "/regions/{regionId}/images/{imageId}:modifyImageAttribute",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        InstanceId: instanceId,
+        ImageId: imageId,
 	}
 }
 
 /*
  * param regionId: Region ID (Required)
- * param instanceId: Instance ID (Required)
+ * param imageId: Image ID (Required)
  * param name: 名称；名称和描述必传其中一个；不为空且只允许中文、数字、大小写字母、英文下划线“_”及中划线“-”，长度不超过32字符 (Optional)
  * param description: 描述；名称和描述必传其中一个；长度不超过256个字符 (Optional)
  */
-func NewModifyInstanceAttributeRequestWithAllParams(
+func NewModifyImageAttributeRequestWithAllParams(
     regionId string,
-    instanceId string,
+    imageId string,
     name *string,
     description *string,
-) *ModifyInstanceAttributeRequest {
+) *ModifyImageAttributeRequest {
 
-    return &ModifyInstanceAttributeRequest{
+    return &ModifyImageAttributeRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstanceAttribute",
+            URL:     "/regions/{regionId}/images/{imageId}:modifyImageAttribute",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        InstanceId: instanceId,
+        ImageId: imageId,
         Name: name,
         Description: description,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewModifyInstanceAttributeRequestWithoutParam() *ModifyInstanceAttributeRequest {
+func NewModifyImageAttributeRequestWithoutParam() *ModifyImageAttributeRequest {
 
-    return &ModifyInstanceAttributeRequest{
+    return &ModifyImageAttributeRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstanceAttribute",
+            URL:     "/regions/{regionId}/images/{imageId}:modifyImageAttribute",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -101,36 +101,36 @@ func NewModifyInstanceAttributeRequestWithoutParam() *ModifyInstanceAttributeReq
 }
 
 /* param regionId: Region ID(Required) */
-func (r *ModifyInstanceAttributeRequest) SetRegionId(regionId string) {
+func (r *ModifyImageAttributeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: Instance ID(Required) */
-func (r *ModifyInstanceAttributeRequest) SetInstanceId(instanceId string) {
-    r.InstanceId = instanceId
+/* param imageId: Image ID(Required) */
+func (r *ModifyImageAttributeRequest) SetImageId(imageId string) {
+    r.ImageId = imageId
 }
 
 /* param name: 名称；名称和描述必传其中一个；不为空且只允许中文、数字、大小写字母、英文下划线“_”及中划线“-”，长度不超过32字符(Optional) */
-func (r *ModifyInstanceAttributeRequest) SetName(name string) {
+func (r *ModifyImageAttributeRequest) SetName(name string) {
     r.Name = &name
 }
 
 /* param description: 描述；名称和描述必传其中一个；长度不超过256个字符(Optional) */
-func (r *ModifyInstanceAttributeRequest) SetDescription(description string) {
+func (r *ModifyImageAttributeRequest) SetDescription(description string) {
     r.Description = &description
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r ModifyInstanceAttributeRequest) GetRegionId() string {
+func (r ModifyImageAttributeRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type ModifyInstanceAttributeResponse struct {
+type ModifyImageAttributeResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result ModifyInstanceAttributeResult `json:"result"`
+    Result ModifyImageAttributeResult `json:"result"`
 }
 
-type ModifyInstanceAttributeResult struct {
+type ModifyImageAttributeResult struct {
 }

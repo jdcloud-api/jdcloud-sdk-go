@@ -39,10 +39,9 @@ type DescribeImagesRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param imageSource: 镜像来源：public、shared、thirdparty、private，如果没有指定ids参数，此参数必传 (Optional)
- * param platform: 操作系统平台: Windows Server、CentOS、Ubuntu (Optional)
- * param ids: 镜像ID列表，如果指定了此参数，其它参数可为空 (Optional)
+ * param regionId: Region ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeImagesRequest(
     regionId string,
@@ -59,18 +58,62 @@ func NewDescribeImagesRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param imageSource: 镜像来源：public、shared、thirdparty、private，如果没有指定ids参数，此参数必传 (Optional)
+ * param platform: 操作系统平台: Windows Server、CentOS、Ubuntu (Optional)
+ * param ids: 镜像ID列表，如果指定了此参数，其它参数可为空 (Optional)
+ */
+func NewDescribeImagesRequestWithAllParams(
+    regionId string,
+    imageSource *string,
+    platform *string,
+    ids []string,
+) *DescribeImagesRequest {
+
+    return &DescribeImagesRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/images",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        ImageSource: imageSource,
+        Platform: platform,
+        Ids: ids,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeImagesRequestWithoutParam() *DescribeImagesRequest {
+
+    return &DescribeImagesRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/images",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DescribeImagesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param imageSource: 镜像来源：public、shared、thirdparty、private，如果没有指定ids参数，此参数必传(Optional) */
 func (r *DescribeImagesRequest) SetImageSource(imageSource string) {
     r.ImageSource = &imageSource
 }
 
+/* param platform: 操作系统平台: Windows Server、CentOS、Ubuntu(Optional) */
 func (r *DescribeImagesRequest) SetPlatform(platform string) {
     r.Platform = &platform
 }
 
+/* param ids: 镜像ID列表，如果指定了此参数，其它参数可为空(Optional) */
 func (r *DescribeImagesRequest) SetIds(ids []string) {
     r.Ids = ids
 }

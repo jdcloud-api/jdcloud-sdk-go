@@ -17,14 +17,11 @@
 package models
 
 
-type InstanceNetworkInterfaceAttachment struct {
+type InstanceStatus struct {
 
-    /* 设备Index (Optional) */
-    DeviceIndex int `json:"deviceIndex"`
+    /* 云主机ID (Optional) */
+    InstanceId string `json:"instanceId"`
 
-    /* 指明删除实例时是否删除网卡，默认true；当前只能是true (Optional) */
-    AutoDelete bool `json:"autoDelete"`
-
-    /* 网卡接口规范 (Optional) */
-    NetworkInterface InstanceNetworkInterface `json:"networkInterface"`
+    /* 云主机状态 (Optional) */
+    Status string `json:"status"`
 }

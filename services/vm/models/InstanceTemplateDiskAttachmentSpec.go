@@ -22,7 +22,7 @@ type InstanceTemplateDiskAttachmentSpec struct {
     /* 磁盘分类，local或者cloud；系统盘仅支持local；数据盘仅支持cloud (Optional) */
     DiskCategory string `json:"diskCategory"`
 
-    /* 自动删除，删除主机时自动删除此磁盘，默认为True，本地盘不能更改此值 (Optional) */
+    /* 自动删除，删除主机时自动删除此磁盘，默认为true，本地盘不能更改此值 (Optional) */
     AutoDelete bool `json:"autoDelete"`
 
     /* 云硬盘规格 (Optional) */
