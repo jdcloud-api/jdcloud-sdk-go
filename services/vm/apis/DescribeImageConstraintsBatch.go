@@ -18,69 +18,67 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    vm "github.com/jdcloud-api/jdcloud-sdk-go/services/vm/models"
 )
 
-type DescribeInstanceVncUrlRequest struct {
+type DescribeImageConstraintsBatchRequest struct {
 
     core.JDCloudRequest
 
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* Instance ID  */
-    InstanceId string `json:"instanceId"`
+    /* 镜像ID列表 (Optional) */
+    Ids []string `json:"ids"`
 }
 
 /*
  * param regionId: Region ID (Required)
- * param instanceId: Instance ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeInstanceVncUrlRequest(
+func NewDescribeImageConstraintsBatchRequest(
     regionId string,
-    instanceId string,
-) *DescribeInstanceVncUrlRequest {
+) *DescribeImageConstraintsBatchRequest {
 
-	return &DescribeInstanceVncUrlRequest{
+	return &DescribeImageConstraintsBatchRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/vnc",
+			URL:     "/regions/{regionId}/imageConstraints",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        InstanceId: instanceId,
 	}
 }
 
 /*
  * param regionId: Region ID (Required)
- * param instanceId: Instance ID (Required)
+ * param ids: 镜像ID列表 (Optional)
  */
-func NewDescribeInstanceVncUrlRequestWithAllParams(
+func NewDescribeImageConstraintsBatchRequestWithAllParams(
     regionId string,
-    instanceId string,
-) *DescribeInstanceVncUrlRequest {
+    ids []string,
+) *DescribeImageConstraintsBatchRequest {
 
-    return &DescribeInstanceVncUrlRequest{
+    return &DescribeImageConstraintsBatchRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/vnc",
+            URL:     "/regions/{regionId}/imageConstraints",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        InstanceId: instanceId,
+        Ids: ids,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeInstanceVncUrlRequestWithoutParam() *DescribeInstanceVncUrlRequest {
+func NewDescribeImageConstraintsBatchRequestWithoutParam() *DescribeImageConstraintsBatchRequest {
 
-    return &DescribeInstanceVncUrlRequest{
+    return &DescribeImageConstraintsBatchRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/vnc",
+            URL:     "/regions/{regionId}/imageConstraints",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -89,27 +87,27 @@ func NewDescribeInstanceVncUrlRequestWithoutParam() *DescribeInstanceVncUrlReque
 }
 
 /* param regionId: Region ID(Required) */
-func (r *DescribeInstanceVncUrlRequest) SetRegionId(regionId string) {
+func (r *DescribeImageConstraintsBatchRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: Instance ID(Required) */
-func (r *DescribeInstanceVncUrlRequest) SetInstanceId(instanceId string) {
-    r.InstanceId = instanceId
+/* param ids: 镜像ID列表(Optional) */
+func (r *DescribeImageConstraintsBatchRequest) SetIds(ids []string) {
+    r.Ids = ids
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeInstanceVncUrlRequest) GetRegionId() string {
+func (r DescribeImageConstraintsBatchRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeInstanceVncUrlResponse struct {
+type DescribeImageConstraintsBatchResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeInstanceVncUrlResult `json:"result"`
+    Result DescribeImageConstraintsBatchResult `json:"result"`
 }
 
-type DescribeInstanceVncUrlResult struct {
-    VncUrl string `json:"vncUrl"`
+type DescribeImageConstraintsBatchResult struct {
+    ImageConstraints []vm.ImageConstraint `json:"imageConstraints"`
 }

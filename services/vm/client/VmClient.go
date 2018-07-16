@@ -40,7 +40,7 @@ func NewVmClient(credential *core.Credential) *VmClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vm",
-            Revision:    "0.7.2",
+            Revision:    "0.7.4",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -209,6 +209,63 @@ func (c *VmClient) StopInstance(request *vm.StopInstanceRequest) (*vm.StopInstan
     return jdResp, err
 }
 
+/* 修改镜像信息 */
+func (c *VmClient) ModifyImageAttribute(request *vm.ModifyImageAttributeRequest) (*vm.ModifyImageAttributeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.ModifyImageAttributeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 批量查询镜像限制 */
+func (c *VmClient) DescribeImageConstraintsBatch(request *vm.DescribeImageConstraintsBatchRequest) (*vm.DescribeImageConstraintsBatchResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.DescribeImageConstraintsBatchResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 批量查询云主机状态 */
+func (c *VmClient) DescribeInstanceStatus(request *vm.DescribeInstanceStatusRequest) (*vm.DescribeInstanceStatusResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.DescribeInstanceStatusResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询主机vnc */
 func (c *VmClient) DescribeInstanceVncUrl(request *vm.DescribeInstanceVncUrlRequest) (*vm.DescribeInstanceVncUrlResponse, error) {
     if request == nil {
@@ -351,7 +408,7 @@ func (c *VmClient) DescribeInstances(request *vm.DescribeInstancesRequest) (*vm.
     return jdResp, err
 }
 
-/* 创建一台或多台指定配置的实例 */
+/* 创建一台或多台指定配置的实例<a href="https://www.jdcloud.com/help/detail/3383/isCatalog/1">参数详细说明</a> */
 func (c *VmClient) CreateInstances(request *vm.CreateInstancesRequest) (*vm.CreateInstancesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -485,9 +542,10 @@ func (c *VmClient) StartInstance(request *vm.StartInstanceRequest) (*vm.StartIns
 }
 
 /* "删除单个实例"
-"主机状态必须为停止状态、同时主机没有未完成的任务才可删除"
+"主机状态必须为运行(running)、停止(stopped)、错误(error)，同时云主机没有未完成的任务才可删除"
 "包年包月未到期的主机不能删除"
-"如果主机中挂载了数据盘，并且设置了AutoDelete属性为True，那么数据盘会随主机一起删除"
+"白名单用户不能删除包年包月已到期的云主机"
+"如果主机中挂载的数据盘为按配置计费，并且设置了AutoDelete属性为true，那么数据盘会随主机一起删除"
  */
 func (c *VmClient) DeleteInstance(request *vm.DeleteInstanceRequest) (*vm.DeleteInstanceResponse, error) {
     if request == nil {

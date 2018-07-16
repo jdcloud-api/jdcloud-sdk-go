@@ -42,11 +42,12 @@ type CreateImageRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: Instance ID 
- * param name: 名称 
- * param description: 描述 
- * param dataDisks: 数据盘列表，如果指定，则随镜像一起打包创建快照，实际最多不能超过4个 (Optional)
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
+ * param name: 名称 (Required)
+ * param description: 描述 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateImageRequest(
     regionId string,
@@ -69,22 +70,70 @@ func NewCreateImageRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
+ * param name: 名称 (Required)
+ * param description: 描述 (Required)
+ * param dataDisks: 数据盘列表，如果指定，则随镜像一起打包创建快照，实际最多不能超过4个 (Optional)
+ */
+func NewCreateImageRequestWithAllParams(
+    regionId string,
+    instanceId string,
+    name string,
+    description string,
+    dataDisks []vm.InstanceDiskAttachmentSpec,
+) *CreateImageRequest {
+
+    return &CreateImageRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:createImage",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+        Name: name,
+        Description: description,
+        DataDisks: dataDisks,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewCreateImageRequestWithoutParam() *CreateImageRequest {
+
+    return &CreateImageRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:createImage",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *CreateImageRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: Instance ID(Required) */
 func (r *CreateImageRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
+/* param name: 名称(Required) */
 func (r *CreateImageRequest) SetName(name string) {
     r.Name = name
 }
 
+/* param description: 描述(Required) */
 func (r *CreateImageRequest) SetDescription(description string) {
     r.Description = description
 }
 
+/* param dataDisks: 数据盘列表，如果指定，则随镜像一起打包创建快照，实际最多不能超过4个(Optional) */
 func (r *CreateImageRequest) SetDataDisks(dataDisks []vm.InstanceDiskAttachmentSpec) {
     r.DataDisks = dataDisks
 }

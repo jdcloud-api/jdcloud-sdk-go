@@ -28,20 +28,22 @@ type CreateInstancesRequest struct {
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 创建主机规格 (Optional) */
+    /* 创建主机规格  */
     InstanceSpec *vm.InstanceSpec `json:"instanceSpec"`
 
-    /* 购买实例数量；取值范围：[1,100] (Optional) */
+    /* 购买实例数量；取值范围：[1,100]，默认为1 (Optional) */
     MaxCount *int `json:"maxCount"`
 }
 
 /*
- * param regionId: Region ID 
- * param instanceSpec: 创建主机规格 (Optional)
- * param maxCount: 购买实例数量；取值范围：[1,100] (Optional)
+ * param regionId: Region ID (Required)
+ * param instanceSpec: 创建主机规格 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateInstancesRequest(
     regionId string,
+    instanceSpec *vm.InstanceSpec,
 ) *CreateInstancesRequest {
 
 	return &CreateInstancesRequest{
@@ -52,17 +54,58 @@ func NewCreateInstancesRequest(
 			Version: "v1",
 		},
         RegionId: regionId,
+        InstanceSpec: instanceSpec,
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceSpec: 创建主机规格 (Required)
+ * param maxCount: 购买实例数量；取值范围：[1,100]，默认为1 (Optional)
+ */
+func NewCreateInstancesRequestWithAllParams(
+    regionId string,
+    instanceSpec *vm.InstanceSpec,
+    maxCount *int,
+) *CreateInstancesRequest {
+
+    return &CreateInstancesRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceSpec: instanceSpec,
+        MaxCount: maxCount,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewCreateInstancesRequestWithoutParam() *CreateInstancesRequest {
+
+    return &CreateInstancesRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *CreateInstancesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceSpec: 创建主机规格(Required) */
 func (r *CreateInstancesRequest) SetInstanceSpec(instanceSpec *vm.InstanceSpec) {
     r.InstanceSpec = instanceSpec
 }
 
+/* param maxCount: 购买实例数量；取值范围：[1,100]，默认为1(Optional) */
 func (r *CreateInstancesRequest) SetMaxCount(maxCount int) {
     r.MaxCount = &maxCount
 }
