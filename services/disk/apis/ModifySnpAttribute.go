@@ -38,10 +38,10 @@ type ModifySnpAttributeRequest struct {
 }
 
 /*
- * param regionId: 地域ID 
- * param snapshotId: 快照ID 
- * param name: 快照名称 (Optional)
- * param description: 快照描述，name和description必须要指定一个 (Optional)
+ * param regionId: 地域ID (Required)
+ * param snapshotId: 快照ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewModifySnpAttributeRequest(
     regionId string,
@@ -60,18 +60,62 @@ func NewModifySnpAttributeRequest(
 	}
 }
 
+/*
+ * param regionId: 地域ID (Required)
+ * param snapshotId: 快照ID (Required)
+ * param name: 快照名称 (Optional)
+ * param description: 快照描述，name和description必须要指定一个 (Optional)
+ */
+func NewModifySnpAttributeRequestWithAllParams(
+    regionId string,
+    snapshotId string,
+    name *string,
+    description *string,
+) *ModifySnpAttributeRequest {
+
+    return &ModifySnpAttributeRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/snapshots/{snapshotId}",
+            Method:  "PATCH",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        SnapshotId: snapshotId,
+        Name: name,
+        Description: description,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewModifySnpAttributeRequestWithoutParam() *ModifySnpAttributeRequest {
+
+    return &ModifySnpAttributeRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/snapshots/{snapshotId}",
+            Method:  "PATCH",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 地域ID(Required) */
 func (r *ModifySnpAttributeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param snapshotId: 快照ID(Required) */
 func (r *ModifySnpAttributeRequest) SetSnapshotId(snapshotId string) {
     r.SnapshotId = snapshotId
 }
 
+/* param name: 快照名称(Optional) */
 func (r *ModifySnpAttributeRequest) SetName(name string) {
     r.Name = &name
 }
 
+/* param description: 快照描述，name和description必须要指定一个(Optional) */
 func (r *ModifySnpAttributeRequest) SetDescription(description string) {
     r.Description = &description
 }

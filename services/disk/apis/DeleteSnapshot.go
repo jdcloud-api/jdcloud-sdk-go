@@ -32,8 +32,10 @@ type DeleteSnapshotRequest struct {
 }
 
 /*
- * param regionId: 地域ID 
- * param snapshotId: 快照ID 
+ * param regionId: 地域ID (Required)
+ * param snapshotId: 快照ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDeleteSnapshotRequest(
     regionId string,
@@ -52,10 +54,46 @@ func NewDeleteSnapshotRequest(
 	}
 }
 
+/*
+ * param regionId: 地域ID (Required)
+ * param snapshotId: 快照ID (Required)
+ */
+func NewDeleteSnapshotRequestWithAllParams(
+    regionId string,
+    snapshotId string,
+) *DeleteSnapshotRequest {
+
+    return &DeleteSnapshotRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/snapshots/{snapshotId}",
+            Method:  "DELETE",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        SnapshotId: snapshotId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDeleteSnapshotRequestWithoutParam() *DeleteSnapshotRequest {
+
+    return &DeleteSnapshotRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/snapshots/{snapshotId}",
+            Method:  "DELETE",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 地域ID(Required) */
 func (r *DeleteSnapshotRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param snapshotId: 快照ID(Required) */
 func (r *DeleteSnapshotRequest) SetSnapshotId(snapshotId string) {
     r.SnapshotId = snapshotId
 }

@@ -33,8 +33,10 @@ type DescribeSnapshotRequest struct {
 }
 
 /*
- * param regionId: 地域ID 
- * param snapshotId: 快照ID 
+ * param regionId: 地域ID (Required)
+ * param snapshotId: 快照ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeSnapshotRequest(
     regionId string,
@@ -53,10 +55,46 @@ func NewDescribeSnapshotRequest(
 	}
 }
 
+/*
+ * param regionId: 地域ID (Required)
+ * param snapshotId: 快照ID (Required)
+ */
+func NewDescribeSnapshotRequestWithAllParams(
+    regionId string,
+    snapshotId string,
+) *DescribeSnapshotRequest {
+
+    return &DescribeSnapshotRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/snapshots/{snapshotId}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        SnapshotId: snapshotId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeSnapshotRequestWithoutParam() *DescribeSnapshotRequest {
+
+    return &DescribeSnapshotRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/snapshots/{snapshotId}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 地域ID(Required) */
 func (r *DescribeSnapshotRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param snapshotId: 快照ID(Required) */
 func (r *DescribeSnapshotRequest) SetSnapshotId(snapshotId string) {
     r.SnapshotId = snapshotId
 }

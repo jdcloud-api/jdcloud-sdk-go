@@ -33,8 +33,10 @@ type DescribeDiskRequest struct {
 }
 
 /*
- * param regionId: 地域ID 
- * param diskId: 云硬盘ID 
+ * param regionId: 地域ID (Required)
+ * param diskId: 云硬盘ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeDiskRequest(
     regionId string,
@@ -53,10 +55,46 @@ func NewDescribeDiskRequest(
 	}
 }
 
+/*
+ * param regionId: 地域ID (Required)
+ * param diskId: 云硬盘ID (Required)
+ */
+func NewDescribeDiskRequestWithAllParams(
+    regionId string,
+    diskId string,
+) *DescribeDiskRequest {
+
+    return &DescribeDiskRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/disks/{diskId}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        DiskId: diskId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeDiskRequestWithoutParam() *DescribeDiskRequest {
+
+    return &DescribeDiskRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/disks/{diskId}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 地域ID(Required) */
 func (r *DescribeDiskRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param diskId: 云硬盘ID(Required) */
 func (r *DescribeDiskRequest) SetDiskId(diskId string) {
     r.DiskId = diskId
 }

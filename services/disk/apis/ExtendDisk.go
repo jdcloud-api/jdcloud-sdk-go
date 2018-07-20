@@ -35,9 +35,11 @@ type ExtendDiskRequest struct {
 }
 
 /*
- * param regionId: 地域ID 
- * param diskId: 云硬盘ID 
- * param diskSizeGB: 扩容后的云硬盘大小，单位为GiB 
+ * param regionId: 地域ID (Required)
+ * param diskId: 云硬盘ID (Required)
+ * param diskSizeGB: 扩容后的云硬盘大小，单位为GiB (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewExtendDiskRequest(
     regionId string,
@@ -58,14 +60,54 @@ func NewExtendDiskRequest(
 	}
 }
 
+/*
+ * param regionId: 地域ID (Required)
+ * param diskId: 云硬盘ID (Required)
+ * param diskSizeGB: 扩容后的云硬盘大小，单位为GiB (Required)
+ */
+func NewExtendDiskRequestWithAllParams(
+    regionId string,
+    diskId string,
+    diskSizeGB int,
+) *ExtendDiskRequest {
+
+    return &ExtendDiskRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/disks/{diskId}:extend",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        DiskId: diskId,
+        DiskSizeGB: diskSizeGB,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewExtendDiskRequestWithoutParam() *ExtendDiskRequest {
+
+    return &ExtendDiskRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/disks/{diskId}:extend",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 地域ID(Required) */
 func (r *ExtendDiskRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param diskId: 云硬盘ID(Required) */
 func (r *ExtendDiskRequest) SetDiskId(diskId string) {
     r.DiskId = diskId
 }
 
+/* param diskSizeGB: 扩容后的云硬盘大小，单位为GiB(Required) */
 func (r *ExtendDiskRequest) SetDiskSizeGB(diskSizeGB int) {
     r.DiskSizeGB = diskSizeGB
 }

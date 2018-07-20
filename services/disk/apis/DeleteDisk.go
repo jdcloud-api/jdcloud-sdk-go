@@ -32,8 +32,10 @@ type DeleteDiskRequest struct {
 }
 
 /*
- * param regionId: 地域ID 
- * param diskId: 云硬盘ID 
+ * param regionId: 地域ID (Required)
+ * param diskId: 云硬盘ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDeleteDiskRequest(
     regionId string,
@@ -52,10 +54,46 @@ func NewDeleteDiskRequest(
 	}
 }
 
+/*
+ * param regionId: 地域ID (Required)
+ * param diskId: 云硬盘ID (Required)
+ */
+func NewDeleteDiskRequestWithAllParams(
+    regionId string,
+    diskId string,
+) *DeleteDiskRequest {
+
+    return &DeleteDiskRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/disks/{diskId}",
+            Method:  "DELETE",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        DiskId: diskId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDeleteDiskRequestWithoutParam() *DeleteDiskRequest {
+
+    return &DeleteDiskRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/disks/{diskId}",
+            Method:  "DELETE",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 地域ID(Required) */
 func (r *DeleteDiskRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param diskId: 云硬盘ID(Required) */
 func (r *DeleteDiskRequest) SetDiskId(diskId string) {
     r.DiskId = diskId
 }
