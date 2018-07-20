@@ -32,8 +32,10 @@ type DescribeInstanceVncUrlRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: Instance ID 
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeInstanceVncUrlRequest(
     regionId string,
@@ -52,10 +54,46 @@ func NewDescribeInstanceVncUrlRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
+ */
+func NewDescribeInstanceVncUrlRequestWithAllParams(
+    regionId string,
+    instanceId string,
+) *DescribeInstanceVncUrlRequest {
+
+    return &DescribeInstanceVncUrlRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}/vnc",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeInstanceVncUrlRequestWithoutParam() *DescribeInstanceVncUrlRequest {
+
+    return &DescribeInstanceVncUrlRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}/vnc",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DescribeInstanceVncUrlRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: Instance ID(Required) */
 func (r *DescribeInstanceVncUrlRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }

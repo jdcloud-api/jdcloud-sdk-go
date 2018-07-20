@@ -36,10 +36,9 @@ az - 可用区，精确匹配，支持多个
 }
 
 /*
- * param regionId: Region ID 
- * param filters: instanceTypes - 实例类型，精确匹配，支持多个
-az - 可用区，精确匹配，支持多个
- (Optional)
+ * param regionId: Region ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeInstanceTypesRequest(
     regionId string,
@@ -56,10 +55,50 @@ func NewDescribeInstanceTypesRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param filters: instanceTypes - 实例类型，精确匹配，支持多个
+az - 可用区，精确匹配，支持多个
+ (Optional)
+ */
+func NewDescribeInstanceTypesRequestWithAllParams(
+    regionId string,
+    filters []common.Filter,
+) *DescribeInstanceTypesRequest {
+
+    return &DescribeInstanceTypesRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instanceTypes",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        Filters: filters,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeInstanceTypesRequestWithoutParam() *DescribeInstanceTypesRequest {
+
+    return &DescribeInstanceTypesRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instanceTypes",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DescribeInstanceTypesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param filters: instanceTypes - 实例类型，精确匹配，支持多个
+az - 可用区，精确匹配，支持多个
+(Optional) */
 func (r *DescribeInstanceTypesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }

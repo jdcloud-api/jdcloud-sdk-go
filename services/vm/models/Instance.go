@@ -17,6 +17,7 @@
 package models
 
 import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
+import disk "github.com/jdcloud-api/jdcloud-sdk-go/services/disk/models"
 
 type Instance struct {
 
@@ -44,7 +45,7 @@ type Instance struct {
     /* 主网卡主IP绑定弹性IP的地址 (Optional) */
     ElasticIpAddress string `json:"elasticIpAddress"`
 
-    /* 实例状态 (Optional) */
+    /* 实例状态，[pending,starting,running,stopping,stopped,rebooting,rebuilding,resizing,deleting,error] (Optional) */
     Status string `json:"status"`
 
     /* 实例描述 (Optional) */
@@ -75,5 +76,5 @@ type Instance struct {
     Charge charge.Charge `json:"charge"`
 
     /* Tag信息 (Optional) */
-    Tags []Tag `json:"tags"`
+    Tags []disk.Tag `json:"tags"`
 }

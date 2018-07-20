@@ -41,11 +41,11 @@ type RebuildInstanceRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: Instance ID 
- * param password: 云主机密码 
- * param imageId: 镜像ID (Optional)
- * param keyNames: 密钥对名称；当前只支持一个 (Optional)
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
+ * param password: 云主机密码 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewRebuildInstanceRequest(
     regionId string,
@@ -66,22 +66,70 @@ func NewRebuildInstanceRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
+ * param password: 云主机密码 (Required)
+ * param imageId: 镜像ID (Optional)
+ * param keyNames: 密钥对名称；当前只支持一个 (Optional)
+ */
+func NewRebuildInstanceRequestWithAllParams(
+    regionId string,
+    instanceId string,
+    password string,
+    imageId *string,
+    keyNames []string,
+) *RebuildInstanceRequest {
+
+    return &RebuildInstanceRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:rebuildInstance",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+        Password: password,
+        ImageId: imageId,
+        KeyNames: keyNames,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewRebuildInstanceRequestWithoutParam() *RebuildInstanceRequest {
+
+    return &RebuildInstanceRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:rebuildInstance",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *RebuildInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: Instance ID(Required) */
 func (r *RebuildInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
+/* param password: 云主机密码(Required) */
 func (r *RebuildInstanceRequest) SetPassword(password string) {
     r.Password = password
 }
 
+/* param imageId: 镜像ID(Optional) */
 func (r *RebuildInstanceRequest) SetImageId(imageId string) {
     r.ImageId = &imageId
 }
 
+/* param keyNames: 密钥对名称；当前只支持一个(Optional) */
 func (r *RebuildInstanceRequest) SetKeyNames(keyNames []string) {
     r.KeyNames = keyNames
 }

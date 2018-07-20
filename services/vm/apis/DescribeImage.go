@@ -33,8 +33,10 @@ type DescribeImageRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param imageId: Image ID 
+ * param regionId: Region ID (Required)
+ * param imageId: Image ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeImageRequest(
     regionId string,
@@ -53,10 +55,46 @@ func NewDescribeImageRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param imageId: Image ID (Required)
+ */
+func NewDescribeImageRequestWithAllParams(
+    regionId string,
+    imageId string,
+) *DescribeImageRequest {
+
+    return &DescribeImageRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/images/{imageId}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        ImageId: imageId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeImageRequestWithoutParam() *DescribeImageRequest {
+
+    return &DescribeImageRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/images/{imageId}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DescribeImageRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param imageId: Image ID(Required) */
 func (r *DescribeImageRequest) SetImageId(imageId string) {
     r.ImageId = imageId
 }

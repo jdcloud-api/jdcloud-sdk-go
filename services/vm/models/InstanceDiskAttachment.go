@@ -23,7 +23,7 @@ type InstanceDiskAttachment struct {
     /* 磁盘分类，取值范围{local, cloud} (Optional) */
     DiskCategory string `json:"diskCategory"`
 
-    /* 自动删除，删除主机时自动删除此磁盘，默认为True (Optional) */
+    /* 自动删除，删除主机时自动删除此磁盘，默认为true (Optional) */
     AutoDelete bool `json:"autoDelete"`
 
     /* 本地磁盘 (Optional) */

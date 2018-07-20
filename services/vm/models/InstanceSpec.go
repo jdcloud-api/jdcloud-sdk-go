@@ -43,7 +43,7 @@ type InstanceSpec struct {
  (Optional) */
     Password *string `json:"password"`
 
-    /* 密钥对名称  */
+    /* 密钥对名称 (Optional) */
     KeyNames []string `json:"keyNames"`
 
     /* 主网卡主IP关联的弹性IP规格 (Optional) */
@@ -55,12 +55,12 @@ type InstanceSpec struct {
     /* 系统盘配置信息  */
     SystemDisk *InstanceDiskAttachmentSpec `json:"systemDisk"`
 
-    /* 数据盘配置信息  */
+    /* 数据盘配置信息 (Optional) */
     DataDisks []InstanceDiskAttachmentSpec `json:"dataDisks"`
 
     /* 计费配置 (Optional) */
     Charge *charge.ChargeSpec `json:"charge"`
 
-    /* 主机描述，长度不超过256字符  */
-    Description string `json:"description"`
+    /* 主机描述，长度不超过256字符 (Optional) */
+    Description *string `json:"description"`
 }
