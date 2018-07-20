@@ -36,9 +36,11 @@ type CreateSnapshotRequest struct {
 }
 
 /*
- * param regionId: 地域ID 
- * param snapshotSpec: 创建快照规格 
- * param clientToken: 幂等性校验参数 
+ * param regionId: 地域ID (Required)
+ * param snapshotSpec: 创建快照规格 (Required)
+ * param clientToken: 幂等性校验参数 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateSnapshotRequest(
     regionId string,
@@ -59,14 +61,54 @@ func NewCreateSnapshotRequest(
 	}
 }
 
+/*
+ * param regionId: 地域ID (Required)
+ * param snapshotSpec: 创建快照规格 (Required)
+ * param clientToken: 幂等性校验参数 (Required)
+ */
+func NewCreateSnapshotRequestWithAllParams(
+    regionId string,
+    snapshotSpec *disk.SnapshotSpec,
+    clientToken string,
+) *CreateSnapshotRequest {
+
+    return &CreateSnapshotRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/snapshots",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        SnapshotSpec: snapshotSpec,
+        ClientToken: clientToken,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewCreateSnapshotRequestWithoutParam() *CreateSnapshotRequest {
+
+    return &CreateSnapshotRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/snapshots",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 地域ID(Required) */
 func (r *CreateSnapshotRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param snapshotSpec: 创建快照规格(Required) */
 func (r *CreateSnapshotRequest) SetSnapshotSpec(snapshotSpec *disk.SnapshotSpec) {
     r.SnapshotSpec = snapshotSpec
 }
 
+/* param clientToken: 幂等性校验参数(Required) */
 func (r *CreateSnapshotRequest) SetClientToken(clientToken string) {
     r.ClientToken = clientToken
 }

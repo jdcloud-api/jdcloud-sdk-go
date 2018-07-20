@@ -39,10 +39,12 @@ type CreateDisksRequest struct {
 }
 
 /*
- * param regionId: 地域ID 
- * param diskSpec: 创建云硬盘规格 
- * param maxCount: 购买实例数量；取值范围：[1,100] 
- * param clientToken: 幂等性校验参数 
+ * param regionId: 地域ID (Required)
+ * param diskSpec: 创建云硬盘规格 (Required)
+ * param maxCount: 购买实例数量；取值范围：[1,100] (Required)
+ * param clientToken: 幂等性校验参数 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateDisksRequest(
     regionId string,
@@ -65,18 +67,62 @@ func NewCreateDisksRequest(
 	}
 }
 
+/*
+ * param regionId: 地域ID (Required)
+ * param diskSpec: 创建云硬盘规格 (Required)
+ * param maxCount: 购买实例数量；取值范围：[1,100] (Required)
+ * param clientToken: 幂等性校验参数 (Required)
+ */
+func NewCreateDisksRequestWithAllParams(
+    regionId string,
+    diskSpec *disk.DiskSpec,
+    maxCount int,
+    clientToken string,
+) *CreateDisksRequest {
+
+    return &CreateDisksRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/disks",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        DiskSpec: diskSpec,
+        MaxCount: maxCount,
+        ClientToken: clientToken,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewCreateDisksRequestWithoutParam() *CreateDisksRequest {
+
+    return &CreateDisksRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/disks",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 地域ID(Required) */
 func (r *CreateDisksRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param diskSpec: 创建云硬盘规格(Required) */
 func (r *CreateDisksRequest) SetDiskSpec(diskSpec *disk.DiskSpec) {
     r.DiskSpec = diskSpec
 }
 
+/* param maxCount: 购买实例数量；取值范围：[1,100](Required) */
 func (r *CreateDisksRequest) SetMaxCount(maxCount int) {
     r.MaxCount = maxCount
 }
 
+/* param clientToken: 幂等性校验参数(Required) */
 func (r *CreateDisksRequest) SetClientToken(clientToken string) {
     r.ClientToken = clientToken
 }

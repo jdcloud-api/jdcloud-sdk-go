@@ -44,14 +44,9 @@ name - 快照名称，模糊匹配，支持单个
 }
 
 /*
- * param regionId: 地域ID 
- * param pageNumber: 页码, 默认为1, 取值范围：[1,∞) (Optional)
- * param pageSize: 分页大小，默认为20，取值范围：[10,100] (Optional)
- * param filters: snapshotId - 云硬盘快照ID，支持多个
-diskId - 生成快照的云硬盘ID，支持多个
-status - 快照状态，精确匹配，支持多个,取值为 creating、available、in-use、deleting、error_create、error_delete
-name - 快照名称，模糊匹配，支持单个
- (Optional)
+ * param regionId: 地域ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeSnapshotsRequest(
     regionId string,
@@ -68,18 +63,70 @@ func NewDescribeSnapshotsRequest(
 	}
 }
 
+/*
+ * param regionId: 地域ID (Required)
+ * param pageNumber: 页码, 默认为1, 取值范围：[1,∞) (Optional)
+ * param pageSize: 分页大小，默认为20，取值范围：[10,100] (Optional)
+ * param filters: snapshotId - 云硬盘快照ID，支持多个
+diskId - 生成快照的云硬盘ID，支持多个
+status - 快照状态，精确匹配，支持多个,取值为 creating、available、in-use、deleting、error_create、error_delete
+name - 快照名称，模糊匹配，支持单个
+ (Optional)
+ */
+func NewDescribeSnapshotsRequestWithAllParams(
+    regionId string,
+    pageNumber *int,
+    pageSize *int,
+    filters []common.Filter,
+) *DescribeSnapshotsRequest {
+
+    return &DescribeSnapshotsRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/snapshots",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        PageNumber: pageNumber,
+        PageSize: pageSize,
+        Filters: filters,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeSnapshotsRequestWithoutParam() *DescribeSnapshotsRequest {
+
+    return &DescribeSnapshotsRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/snapshots",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 地域ID(Required) */
 func (r *DescribeSnapshotsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param pageNumber: 页码, 默认为1, 取值范围：[1,∞)(Optional) */
 func (r *DescribeSnapshotsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
+/* param pageSize: 分页大小，默认为20，取值范围：[10,100](Optional) */
 func (r *DescribeSnapshotsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
+/* param filters: snapshotId - 云硬盘快照ID，支持多个
+diskId - 生成快照的云硬盘ID，支持多个
+status - 快照状态，精确匹配，支持多个,取值为 creating、available、in-use、deleting、error_create、error_delete
+name - 快照名称，模糊匹配，支持单个
+(Optional) */
 func (r *DescribeSnapshotsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }

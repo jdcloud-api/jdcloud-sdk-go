@@ -35,9 +35,11 @@ type RestoreDiskRequest struct {
 }
 
 /*
- * param regionId: 地域ID 
- * param diskId: 云硬盘ID 
- * param snapshotId: 用于恢复云盘的快照ID 
+ * param regionId: 地域ID (Required)
+ * param diskId: 云硬盘ID (Required)
+ * param snapshotId: 用于恢复云盘的快照ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewRestoreDiskRequest(
     regionId string,
@@ -58,14 +60,54 @@ func NewRestoreDiskRequest(
 	}
 }
 
+/*
+ * param regionId: 地域ID (Required)
+ * param diskId: 云硬盘ID (Required)
+ * param snapshotId: 用于恢复云盘的快照ID (Required)
+ */
+func NewRestoreDiskRequestWithAllParams(
+    regionId string,
+    diskId string,
+    snapshotId string,
+) *RestoreDiskRequest {
+
+    return &RestoreDiskRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/disks/{diskId}:restore",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        DiskId: diskId,
+        SnapshotId: snapshotId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewRestoreDiskRequestWithoutParam() *RestoreDiskRequest {
+
+    return &RestoreDiskRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/disks/{diskId}:restore",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 地域ID(Required) */
 func (r *RestoreDiskRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param diskId: 云硬盘ID(Required) */
 func (r *RestoreDiskRequest) SetDiskId(diskId string) {
     r.DiskId = diskId
 }
 
+/* param snapshotId: 用于恢复云盘的快照ID(Required) */
 func (r *RestoreDiskRequest) SetSnapshotId(snapshotId string) {
     r.SnapshotId = snapshotId
 }

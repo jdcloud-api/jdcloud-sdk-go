@@ -38,10 +38,10 @@ type ModifyDiskAttributeRequest struct {
 }
 
 /*
- * param regionId: 地域ID 
- * param diskId: 云硬盘ID 
- * param name: 云硬盘名称 (Optional)
- * param description: 云硬盘描述，name和description必须要指定一个 (Optional)
+ * param regionId: 地域ID (Required)
+ * param diskId: 云硬盘ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewModifyDiskAttributeRequest(
     regionId string,
@@ -60,18 +60,62 @@ func NewModifyDiskAttributeRequest(
 	}
 }
 
+/*
+ * param regionId: 地域ID (Required)
+ * param diskId: 云硬盘ID (Required)
+ * param name: 云硬盘名称 (Optional)
+ * param description: 云硬盘描述，name和description必须要指定一个 (Optional)
+ */
+func NewModifyDiskAttributeRequestWithAllParams(
+    regionId string,
+    diskId string,
+    name *string,
+    description *string,
+) *ModifyDiskAttributeRequest {
+
+    return &ModifyDiskAttributeRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/disks/{diskId}",
+            Method:  "PATCH",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        DiskId: diskId,
+        Name: name,
+        Description: description,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewModifyDiskAttributeRequestWithoutParam() *ModifyDiskAttributeRequest {
+
+    return &ModifyDiskAttributeRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/disks/{diskId}",
+            Method:  "PATCH",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 地域ID(Required) */
 func (r *ModifyDiskAttributeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param diskId: 云硬盘ID(Required) */
 func (r *ModifyDiskAttributeRequest) SetDiskId(diskId string) {
     r.DiskId = diskId
 }
 
+/* param name: 云硬盘名称(Optional) */
 func (r *ModifyDiskAttributeRequest) SetName(name string) {
     r.Name = &name
 }
 
+/* param description: 云硬盘描述，name和description必须要指定一个(Optional) */
 func (r *ModifyDiskAttributeRequest) SetDescription(description string) {
     r.Description = &description
 }

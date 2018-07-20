@@ -35,6 +35,9 @@ type DescribeDisksRequest struct {
     /* 分页大小，默认为20，取值范围：[10,100] (Optional) */
     PageSize *int `json:"pageSize"`
 
+    /* Tag筛选条件 (Optional) */
+    Tags []disk.TagFilter `json:"tags"`
+
     /* diskId - 云硬盘ID，精确匹配，支持多个
 diskType - 云硬盘类型，精确匹配，支持多个，取值为 ssd 或 premium-hdd
 instanceId - 云硬盘所挂载主机的ID，精确匹配，支持多个
@@ -47,17 +50,9 @@ name - 云硬盘名称，模糊匹配，支持单个
 }
 
 /*
- * param regionId: 地域ID 
- * param pageNumber: 页码, 默认为1, 取值范围：[1,∞) (Optional)
- * param pageSize: 分页大小，默认为20，取值范围：[10,100] (Optional)
- * param filters: diskId - 云硬盘ID，精确匹配，支持多个
-diskType - 云硬盘类型，精确匹配，支持多个，取值为 ssd 或 premium-hdd
-instanceId - 云硬盘所挂载主机的ID，精确匹配，支持多个
-instanceType - 云硬盘所挂载主机的类型，精确匹配，支持多个
-status - 可用区，精确匹配，支持多个
-az - 云硬盘状态，精确匹配，支持多个
-name - 云硬盘名称，模糊匹配，支持单个
- (Optional)
+ * param regionId: 地域ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeDisksRequest(
     regionId string,
@@ -74,18 +69,84 @@ func NewDescribeDisksRequest(
 	}
 }
 
+/*
+ * param regionId: 地域ID (Required)
+ * param pageNumber: 页码, 默认为1, 取值范围：[1,∞) (Optional)
+ * param pageSize: 分页大小，默认为20，取值范围：[10,100] (Optional)
+ * param tags: Tag筛选条件 (Optional)
+ * param filters: diskId - 云硬盘ID，精确匹配，支持多个
+diskType - 云硬盘类型，精确匹配，支持多个，取值为 ssd 或 premium-hdd
+instanceId - 云硬盘所挂载主机的ID，精确匹配，支持多个
+instanceType - 云硬盘所挂载主机的类型，精确匹配，支持多个
+status - 可用区，精确匹配，支持多个
+az - 云硬盘状态，精确匹配，支持多个
+name - 云硬盘名称，模糊匹配，支持单个
+ (Optional)
+ */
+func NewDescribeDisksRequestWithAllParams(
+    regionId string,
+    pageNumber *int,
+    pageSize *int,
+    tags []disk.TagFilter,
+    filters []common.Filter,
+) *DescribeDisksRequest {
+
+    return &DescribeDisksRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/disks",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        PageNumber: pageNumber,
+        PageSize: pageSize,
+        Tags: tags,
+        Filters: filters,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeDisksRequestWithoutParam() *DescribeDisksRequest {
+
+    return &DescribeDisksRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/disks",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 地域ID(Required) */
 func (r *DescribeDisksRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param pageNumber: 页码, 默认为1, 取值范围：[1,∞)(Optional) */
 func (r *DescribeDisksRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
+/* param pageSize: 分页大小，默认为20，取值范围：[10,100](Optional) */
 func (r *DescribeDisksRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
+/* param tags: Tag筛选条件(Optional) */
+func (r *DescribeDisksRequest) SetTags(tags []disk.TagFilter) {
+    r.Tags = tags
+}
+
+/* param filters: diskId - 云硬盘ID，精确匹配，支持多个
+diskType - 云硬盘类型，精确匹配，支持多个，取值为 ssd 或 premium-hdd
+instanceId - 云硬盘所挂载主机的ID，精确匹配，支持多个
+instanceType - 云硬盘所挂载主机的类型，精确匹配，支持多个
+status - 可用区，精确匹配，支持多个
+az - 云硬盘状态，精确匹配，支持多个
+name - 云硬盘名称，模糊匹配，支持单个
+(Optional) */
 func (r *DescribeDisksRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
