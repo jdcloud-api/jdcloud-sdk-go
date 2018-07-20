@@ -35,9 +35,11 @@ type ResizeInstanceRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: Instance ID 
- * param instanceType: 实例规格 
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
+ * param instanceType: 实例规格 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewResizeInstanceRequest(
     regionId string,
@@ -58,14 +60,54 @@ func NewResizeInstanceRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
+ * param instanceType: 实例规格 (Required)
+ */
+func NewResizeInstanceRequestWithAllParams(
+    regionId string,
+    instanceId string,
+    instanceType string,
+) *ResizeInstanceRequest {
+
+    return &ResizeInstanceRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:resizeInstance",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+        InstanceType: instanceType,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewResizeInstanceRequestWithoutParam() *ResizeInstanceRequest {
+
+    return &ResizeInstanceRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:resizeInstance",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *ResizeInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: Instance ID(Required) */
 func (r *ResizeInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
+/* param instanceType: 实例规格(Required) */
 func (r *ResizeInstanceRequest) SetInstanceType(instanceType string) {
     r.InstanceType = instanceType
 }

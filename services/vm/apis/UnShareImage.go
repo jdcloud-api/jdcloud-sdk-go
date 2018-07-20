@@ -35,9 +35,10 @@ type UnShareImageRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param imageId: Image ID 
- * param pins: 需要取消的帐户 (Optional)
+ * param regionId: Region ID (Required)
+ * param imageId: Image ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewUnShareImageRequest(
     regionId string,
@@ -56,14 +57,54 @@ func NewUnShareImageRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param imageId: Image ID (Required)
+ * param pins: 需要取消的帐户 (Optional)
+ */
+func NewUnShareImageRequestWithAllParams(
+    regionId string,
+    imageId string,
+    pins []string,
+) *UnShareImageRequest {
+
+    return &UnShareImageRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/images/{imageId}:unshare",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        ImageId: imageId,
+        Pins: pins,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewUnShareImageRequestWithoutParam() *UnShareImageRequest {
+
+    return &UnShareImageRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/images/{imageId}:unshare",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *UnShareImageRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param imageId: Image ID(Required) */
 func (r *UnShareImageRequest) SetImageId(imageId string) {
     r.ImageId = imageId
 }
 
+/* param pins: 需要取消的帐户(Optional) */
 func (r *UnShareImageRequest) SetPins(pins []string) {
     r.Pins = pins
 }

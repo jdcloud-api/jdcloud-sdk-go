@@ -33,8 +33,10 @@ type DescribeImageConstraintsRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param imageId: Image ID 
+ * param regionId: Region ID (Required)
+ * param imageId: Image ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeImageConstraintsRequest(
     regionId string,
@@ -53,10 +55,46 @@ func NewDescribeImageConstraintsRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param imageId: Image ID (Required)
+ */
+func NewDescribeImageConstraintsRequestWithAllParams(
+    regionId string,
+    imageId string,
+) *DescribeImageConstraintsRequest {
+
+    return &DescribeImageConstraintsRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/images/{imageId}/constraints",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        ImageId: imageId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeImageConstraintsRequestWithoutParam() *DescribeImageConstraintsRequest {
+
+    return &DescribeImageConstraintsRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/images/{imageId}/constraints",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DescribeImageConstraintsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param imageId: Image ID(Required) */
 func (r *DescribeImageConstraintsRequest) SetImageId(imageId string) {
     r.ImageId = imageId
 }

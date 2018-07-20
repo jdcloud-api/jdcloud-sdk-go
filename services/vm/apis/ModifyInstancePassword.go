@@ -42,8 +42,8 @@ type ModifyInstancePasswordRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: Instance ID 
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
  * param password: "密码，长度8-30个字符"
 "a)不能出现的字符或完整单词，如下：jd、JD、360、bug、BUG、com、COM、cloud、CLOUD、password、PASSWORD"
 "b)不能出现连续三位及三位以上数字，例：123、987"
@@ -51,7 +51,9 @@ type ModifyInstancePasswordRequest struct {
 "d)不能出现三位及三位以上键位顺序（仅包括字母），例：qaz、tfc、wsx、xsw、qwert、trewq"
 "e)密码中不能出现自己的用户名"
 "g)至少同时包含三类（大写字母，小写字母，数字和特殊字符，特殊字符为 ** ()`~!@#$%&_-+={}[]:\";'<>,.?/）*|"
- 
+ (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewModifyInstancePasswordRequest(
     regionId string,
@@ -72,14 +74,68 @@ func NewModifyInstancePasswordRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
+ * param password: "密码，长度8-30个字符"
+"a)不能出现的字符或完整单词，如下：jd、JD、360、bug、BUG、com、COM、cloud、CLOUD、password、PASSWORD"
+"b)不能出现连续三位及三位以上数字，例：123、987"
+"c)不能出现连续三位及三位以上的字母，例：abc、CBA、bcde、cdef"
+"d)不能出现三位及三位以上键位顺序（仅包括字母），例：qaz、tfc、wsx、xsw、qwert、trewq"
+"e)密码中不能出现自己的用户名"
+"g)至少同时包含三类（大写字母，小写字母，数字和特殊字符，特殊字符为 ** ()`~!@#$%&_-+={}[]:\";'<>,.?/）*|"
+ (Required)
+ */
+func NewModifyInstancePasswordRequestWithAllParams(
+    regionId string,
+    instanceId string,
+    password string,
+) *ModifyInstancePasswordRequest {
+
+    return &ModifyInstancePasswordRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstancePassword",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+        Password: password,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewModifyInstancePasswordRequestWithoutParam() *ModifyInstancePasswordRequest {
+
+    return &ModifyInstancePasswordRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstancePassword",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *ModifyInstancePasswordRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: Instance ID(Required) */
 func (r *ModifyInstancePasswordRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
+/* param password: "密码，长度8-30个字符"
+"a)不能出现的字符或完整单词，如下：jd、JD、360、bug、BUG、com、COM、cloud、CLOUD、password、PASSWORD"
+"b)不能出现连续三位及三位以上数字，例：123、987"
+"c)不能出现连续三位及三位以上的字母，例：abc、CBA、bcde、cdef"
+"d)不能出现三位及三位以上键位顺序（仅包括字母），例：qaz、tfc、wsx、xsw、qwert、trewq"
+"e)密码中不能出现自己的用户名"
+"g)至少同时包含三类（大写字母，小写字母，数字和特殊字符，特殊字符为 ** ()`~!@#$%&_-+={}[]:\";'<>,.?/）*|"
+(Required) */
 func (r *ModifyInstancePasswordRequest) SetPassword(password string) {
     r.Password = password
 }

@@ -38,10 +38,10 @@ type ModifyInstanceAttributeRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: Instance ID 
- * param name: 名称；名称和描述必传其中一个；不为空且只允许中文、数字、大小写字母、英文下划线“_”及中划线“-”，长度不超过32字符 (Optional)
- * param description: 描述；名称和描述必传其中一个；长度不超过256个字符 (Optional)
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewModifyInstanceAttributeRequest(
     regionId string,
@@ -60,18 +60,62 @@ func NewModifyInstanceAttributeRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
+ * param name: 名称；名称和描述必传其中一个；不为空且只允许中文、数字、大小写字母、英文下划线“_”及中划线“-”，长度不超过32字符 (Optional)
+ * param description: 描述；名称和描述必传其中一个；长度不超过256个字符 (Optional)
+ */
+func NewModifyInstanceAttributeRequestWithAllParams(
+    regionId string,
+    instanceId string,
+    name *string,
+    description *string,
+) *ModifyInstanceAttributeRequest {
+
+    return &ModifyInstanceAttributeRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstanceAttribute",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+        Name: name,
+        Description: description,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewModifyInstanceAttributeRequestWithoutParam() *ModifyInstanceAttributeRequest {
+
+    return &ModifyInstanceAttributeRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstanceAttribute",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *ModifyInstanceAttributeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: Instance ID(Required) */
 func (r *ModifyInstanceAttributeRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
+/* param name: 名称；名称和描述必传其中一个；不为空且只允许中文、数字、大小写字母、英文下划线“_”及中划线“-”，长度不超过32字符(Optional) */
 func (r *ModifyInstanceAttributeRequest) SetName(name string) {
     r.Name = &name
 }
 
+/* param description: 描述；名称和描述必传其中一个；长度不超过256个字符(Optional) */
 func (r *ModifyInstanceAttributeRequest) SetDescription(description string) {
     r.Description = &description
 }

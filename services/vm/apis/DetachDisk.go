@@ -38,10 +38,11 @@ type DetachDiskRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: Instance ID 
- * param diskId: 云硬盘ID 
- * param force: 强制缷载，默认False (Optional)
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
+ * param diskId: 云硬盘ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDetachDiskRequest(
     regionId string,
@@ -62,18 +63,62 @@ func NewDetachDiskRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
+ * param diskId: 云硬盘ID (Required)
+ * param force: 强制缷载，默认False (Optional)
+ */
+func NewDetachDiskRequestWithAllParams(
+    regionId string,
+    instanceId string,
+    diskId string,
+    force *bool,
+) *DetachDiskRequest {
+
+    return &DetachDiskRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:detachDisk",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+        DiskId: diskId,
+        Force: force,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDetachDiskRequestWithoutParam() *DetachDiskRequest {
+
+    return &DetachDiskRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:detachDisk",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DetachDiskRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: Instance ID(Required) */
 func (r *DetachDiskRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
+/* param diskId: 云硬盘ID(Required) */
 func (r *DetachDiskRequest) SetDiskId(diskId string) {
     r.DiskId = diskId
 }
 
+/* param force: 强制缷载，默认False(Optional) */
 func (r *DetachDiskRequest) SetForce(force bool) {
     r.Force = &force
 }
