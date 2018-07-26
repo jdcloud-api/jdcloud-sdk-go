@@ -21,46 +21,49 @@ import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
 
 type InstanceSpec struct {
 
-    /* 实例所属的可用区  */
-    Az string `json:"az"`
+    /* 高可用组Id。指定了此参数后，只能通过高可用组关联的实例模板创建虚机，并且实例模板中的参数不可覆盖替换。实例模板以外的参数还可以指定。 (Optional) */
+    AgId *string `json:"agId"`
 
-    /* 实例类型  */
-    InstanceType string `json:"instanceType"`
+    /* 实例模板id，如果没有使用高可用组，那么对于实例模板中没有的信息，需要使用创建虚机的参数进行补充，或者选择覆盖启动模板中的参数。 (Optional) */
+    InstanceTemplateId *string `json:"instanceTemplateId"`
 
-    /* 镜像ID  */
-    ImageId string `json:"imageId"`
+    /* 云主机所属的可用区。 (Optional) */
+    Az *string `json:"az"`
 
-    /* 主机名称，不为空且只允许中文、数字、大小写字母、英文下划线“_”及中划线“-”，不超过32字符  */
+    /* 规格类型。可查询<a href="https://www.jdcloud.com/help/detail/2901/isCatalog/1">DescribeInstanceTypes</a>接口获得指定地域或可用区的规格信息。 (Optional) */
+    InstanceType *string `json:"instanceType"`
+
+    /* 镜像ID。可查询<a href="https://www.jdcloud.com/help/detail/2874/isCatalog/1">DescribeImages</a>接口获得指定地域的镜像信息。 (Optional) */
+    ImageId *string `json:"imageId"`
+
+    /* 云主机名称，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。  */
     Name string `json:"name"`
 
-    /* "密码，长度8-30个字符"
-"a)不能出现的字符或完整单词，如下：jd、JD、360、bug、BUG、com、COM、cloud、CLOUD、password、PASSWORD"
-"b)不能出现连续三位及三位以上数字，例：123、987"
-"c)不能出现连续三位及三位以上的字母，例：abc、CBA、bcde、cdef"
-"d)不能出现三位及三位以上键位顺序（仅包括字母），例：qaz、tfc、wsx、xsw、qwert、trewq"
-"e)密码中不能出现自己的用户名"
-"g)至少同时包含三类（大写字母，小写字母，数字和特殊字符，特殊字符为 ** ()`~!@#$%&_-+={}[]:\";'<>,.?/）*|"
- (Optional) */
+    /* 密码，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。 (Optional) */
     Password *string `json:"password"`
 
-    /* 密钥对名称 (Optional) */
+    /* 密钥对名称，当前只支持传入一个。 (Optional) */
     KeyNames []string `json:"keyNames"`
 
     /* 主网卡主IP关联的弹性IP规格 (Optional) */
     ElasticIp *vpc.ElasticIpSpec `json:"elasticIp"`
 
-    /* 主网卡配置信息  */
+    /* 主网卡配置信息 (Optional) */
     PrimaryNetworkInterface *InstanceNetworkInterfaceAttachmentSpec `json:"primaryNetworkInterface"`
 
-    /* 系统盘配置信息  */
+    /* 系统盘配置信息 (Optional) */
     SystemDisk *InstanceDiskAttachmentSpec `json:"systemDisk"`
 
-    /* 数据盘配置信息 (Optional) */
+    /* 数据盘配置信息，本地盘(local类型)做系统盘的云主机可挂载8块数据盘，云硬盘(cloud类型)做系统盘的云主机可挂载7块数据盘。 (Optional) */
     DataDisks []InstanceDiskAttachmentSpec `json:"dataDisks"`
 
-    /* 计费配置 (Optional) */
+    /* 计费配置
+云主机不支持按用量方式计费，默认为按配置计费。
+打包创建数据盘的情况下，数据盘的计费方式只能与云主机保持一致。
+打包创建弹性公网IP的情况下，若公网IP的计费方式没有指定为按用量计费，那么公网IP计费方式只能与云主机保持一致。
+ (Optional) */
     Charge *charge.ChargeSpec `json:"charge"`
 
-    /* 主机描述，长度不超过256字符 (Optional) */
+    /* 主机描述，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。 (Optional) */
     Description *string `json:"description"`
 }

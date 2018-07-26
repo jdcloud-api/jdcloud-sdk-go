@@ -19,7 +19,7 @@ package models
 
 type Quota struct {
 
-    /* 资源类型[instance，keypair，image] (Optional) */
+    /* 资源类型[instance，keypair，image，instanceTemplate] (Optional) */
     ResourceType string `json:"resourceType"`
 
     /* 配额上限 (Optional) */

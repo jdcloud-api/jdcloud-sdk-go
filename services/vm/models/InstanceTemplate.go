@@ -28,10 +28,10 @@ type InstanceTemplate struct {
     /* 启动模板描述 (Optional) */
     Description string `json:"description"`
 
-    /* 模板的数据 (Optional) */
+    /* 启动模板的数据 (Optional) */
     InstanceTemplateData InstanceTemplateData `json:"instanceTemplateData"`
 
-    /* ag信息 (Optional) */
+    /* 关联的高可用组(ag)信息 (Optional) */
     Ags []Ag `json:"ags"`
 
     /* 创建时间 (Optional) */

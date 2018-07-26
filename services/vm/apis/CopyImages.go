@@ -18,75 +18,79 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    vm "github.com/jdcloud-api/jdcloud-sdk-go/services/vm/models"
 )
 
-type UnShareImageRequest struct {
+type CopyImagesRequest struct {
 
     core.JDCloudRequest
 
     /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /* 镜像ID  */
-    ImageId string `json:"imageId"`
+    /* 源镜像ID  */
+    SourceImageIds []string `json:"sourceImageIds"`
 
-    /* 需要取消的帐户 (Optional) */
-    Pins []string `json:"pins"`
+    /* 目标区域  */
+    DestinationRegion string `json:"destinationRegion"`
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param imageId: 镜像ID (Required)
+ * param sourceImageIds: 源镜像ID (Required)
+ * param destinationRegion: 目标区域 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewUnShareImageRequest(
+func NewCopyImagesRequest(
     regionId string,
-    imageId string,
-) *UnShareImageRequest {
+    sourceImageIds []string,
+    destinationRegion string,
+) *CopyImagesRequest {
 
-	return &UnShareImageRequest{
+	return &CopyImagesRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/images/{imageId}:unshare",
+			URL:     "/regions/{regionId}/images:copyImages",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        ImageId: imageId,
+        SourceImageIds: sourceImageIds,
+        DestinationRegion: destinationRegion,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param imageId: 镜像ID (Required)
- * param pins: 需要取消的帐户 (Optional)
+ * param sourceImageIds: 源镜像ID (Required)
+ * param destinationRegion: 目标区域 (Required)
  */
-func NewUnShareImageRequestWithAllParams(
+func NewCopyImagesRequestWithAllParams(
     regionId string,
-    imageId string,
-    pins []string,
-) *UnShareImageRequest {
+    sourceImageIds []string,
+    destinationRegion string,
+) *CopyImagesRequest {
 
-    return &UnShareImageRequest{
+    return &CopyImagesRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/images/{imageId}:unshare",
+            URL:     "/regions/{regionId}/images:copyImages",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        ImageId: imageId,
-        Pins: pins,
+        SourceImageIds: sourceImageIds,
+        DestinationRegion: destinationRegion,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewUnShareImageRequestWithoutParam() *UnShareImageRequest {
+func NewCopyImagesRequestWithoutParam() *CopyImagesRequest {
 
-    return &UnShareImageRequest{
+    return &CopyImagesRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/images/{imageId}:unshare",
+            URL:     "/regions/{regionId}/images:copyImages",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -95,31 +99,32 @@ func NewUnShareImageRequestWithoutParam() *UnShareImageRequest {
 }
 
 /* param regionId: 地域ID(Required) */
-func (r *UnShareImageRequest) SetRegionId(regionId string) {
+func (r *CopyImagesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param imageId: 镜像ID(Required) */
-func (r *UnShareImageRequest) SetImageId(imageId string) {
-    r.ImageId = imageId
+/* param sourceImageIds: 源镜像ID(Required) */
+func (r *CopyImagesRequest) SetSourceImageIds(sourceImageIds []string) {
+    r.SourceImageIds = sourceImageIds
 }
 
-/* param pins: 需要取消的帐户(Optional) */
-func (r *UnShareImageRequest) SetPins(pins []string) {
-    r.Pins = pins
+/* param destinationRegion: 目标区域(Required) */
+func (r *CopyImagesRequest) SetDestinationRegion(destinationRegion string) {
+    r.DestinationRegion = destinationRegion
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r UnShareImageRequest) GetRegionId() string {
+func (r CopyImagesRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type UnShareImageResponse struct {
+type CopyImagesResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result UnShareImageResult `json:"result"`
+    Result CopyImagesResult `json:"result"`
 }
 
-type UnShareImageResult struct {
+type CopyImagesResult struct {
+    CopyImages []vm.CopyImage `json:"copyImages"`
 }

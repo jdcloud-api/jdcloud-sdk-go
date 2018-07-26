@@ -20,7 +20,7 @@ import vpc "github.com/jdcloud-api/jdcloud-sdk-go/services/vpc/models"
 
 type InstanceNetworkInterfaceAttachmentSpec struct {
 
-    /* 设备Index，主网卡只能是1 (Optional) */
+    /* 网卡设备Index，主网卡只能是1 (Optional) */
     DeviceIndex *int `json:"deviceIndex"`
 
     /* 网卡接口规范 (Optional) */

@@ -20,7 +20,7 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type DescribeInstanceVncUrlRequest struct {
+type DetachNetworkInterfaceRequest struct {
 
     core.JDCloudRequest
 
@@ -29,59 +29,68 @@ type DescribeInstanceVncUrlRequest struct {
 
     /* 云主机ID  */
     InstanceId string `json:"instanceId"`
+
+    /* 弹性网卡ID  */
+    NetworkInterfaceId string `json:"networkInterfaceId"`
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param instanceId: 云主机ID (Required)
+ * param networkInterfaceId: 弹性网卡ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeInstanceVncUrlRequest(
+func NewDetachNetworkInterfaceRequest(
     regionId string,
     instanceId string,
-) *DescribeInstanceVncUrlRequest {
+    networkInterfaceId string,
+) *DetachNetworkInterfaceRequest {
 
-	return &DescribeInstanceVncUrlRequest{
+	return &DetachNetworkInterfaceRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/vnc",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/instances/{instanceId}:detachNetworkInterface",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         InstanceId: instanceId,
+        NetworkInterfaceId: networkInterfaceId,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param instanceId: 云主机ID (Required)
+ * param networkInterfaceId: 弹性网卡ID (Required)
  */
-func NewDescribeInstanceVncUrlRequestWithAllParams(
+func NewDetachNetworkInterfaceRequestWithAllParams(
     regionId string,
     instanceId string,
-) *DescribeInstanceVncUrlRequest {
+    networkInterfaceId string,
+) *DetachNetworkInterfaceRequest {
 
-    return &DescribeInstanceVncUrlRequest{
+    return &DetachNetworkInterfaceRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/vnc",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/instances/{instanceId}:detachNetworkInterface",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         InstanceId: instanceId,
+        NetworkInterfaceId: networkInterfaceId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeInstanceVncUrlRequestWithoutParam() *DescribeInstanceVncUrlRequest {
+func NewDetachNetworkInterfaceRequestWithoutParam() *DetachNetworkInterfaceRequest {
 
-    return &DescribeInstanceVncUrlRequest{
+    return &DetachNetworkInterfaceRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/vnc",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/instances/{instanceId}:detachNetworkInterface",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
@@ -89,27 +98,31 @@ func NewDescribeInstanceVncUrlRequestWithoutParam() *DescribeInstanceVncUrlReque
 }
 
 /* param regionId: 地域ID(Required) */
-func (r *DescribeInstanceVncUrlRequest) SetRegionId(regionId string) {
+func (r *DetachNetworkInterfaceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 云主机ID(Required) */
-func (r *DescribeInstanceVncUrlRequest) SetInstanceId(instanceId string) {
+func (r *DetachNetworkInterfaceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
+}
+
+/* param networkInterfaceId: 弹性网卡ID(Required) */
+func (r *DetachNetworkInterfaceRequest) SetNetworkInterfaceId(networkInterfaceId string) {
+    r.NetworkInterfaceId = networkInterfaceId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeInstanceVncUrlRequest) GetRegionId() string {
+func (r DetachNetworkInterfaceRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeInstanceVncUrlResponse struct {
+type DetachNetworkInterfaceResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeInstanceVncUrlResult `json:"result"`
+    Result DetachNetworkInterfaceResult `json:"result"`
 }
 
-type DescribeInstanceVncUrlResult struct {
-    VncUrl string `json:"vncUrl"`
+type DetachNetworkInterfaceResult struct {
 }

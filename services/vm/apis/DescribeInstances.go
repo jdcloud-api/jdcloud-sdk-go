@@ -26,7 +26,7 @@ type DescribeInstancesRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域ID  */
     RegionId string `json:"regionId"`
 
     /* 页码；默认为1 (Optional) */
@@ -35,23 +35,22 @@ type DescribeInstancesRequest struct {
     /* 分页大小；默认为20；取值范围[10, 100] (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* Tag筛选条件 (Optional) */
-    Tags []vm.TagFilter `json:"tags"`
-
-    /* instanceId - 实例ID，精确匹配，支持多个
+    /* instanceId - 云主机ID，精确匹配，支持多个
 privateIpAddress - 主网卡IP地址，模糊匹配，支持单个
 az - 可用区，精确匹配，支持多个
 vpcId - 私有网络ID，精确匹配，支持多个
-status - 云主机状态，精确匹配，支持多个
-name - 实例名称，模糊匹配，支持单个
+status - 云主机状态，精确匹配，支持多个，<a href="https://www.jdcloud.com/help/detail/3869/isCatalog/1">参考云主机状态</a>
+name - 云主机名称，模糊匹配，支持单个
 imageId - 镜像ID，模糊匹配，支持单个
 networkInterfaceId - 弹性网卡ID，精确匹配，支持多个
+agId - 使用可用组id，支持单个
+faultDomain - 错误域，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 地域ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -71,25 +70,25 @@ func NewDescribeInstancesRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 地域ID (Required)
  * param pageNumber: 页码；默认为1 (Optional)
  * param pageSize: 分页大小；默认为20；取值范围[10, 100] (Optional)
- * param tags: Tag筛选条件 (Optional)
- * param filters: instanceId - 实例ID，精确匹配，支持多个
+ * param filters: instanceId - 云主机ID，精确匹配，支持多个
 privateIpAddress - 主网卡IP地址，模糊匹配，支持单个
 az - 可用区，精确匹配，支持多个
 vpcId - 私有网络ID，精确匹配，支持多个
-status - 云主机状态，精确匹配，支持多个
-name - 实例名称，模糊匹配，支持单个
+status - 云主机状态，精确匹配，支持多个，<a href="https://www.jdcloud.com/help/detail/3869/isCatalog/1">参考云主机状态</a>
+name - 云主机名称，模糊匹配，支持单个
 imageId - 镜像ID，模糊匹配，支持单个
 networkInterfaceId - 弹性网卡ID，精确匹配，支持多个
+agId - 使用可用组id，支持单个
+faultDomain - 错误域，支持多个
  (Optional)
  */
 func NewDescribeInstancesRequestWithAllParams(
     regionId string,
     pageNumber *int,
     pageSize *int,
-    tags []vm.TagFilter,
     filters []common.Filter,
 ) *DescribeInstancesRequest {
 
@@ -103,7 +102,6 @@ func NewDescribeInstancesRequestWithAllParams(
         RegionId: regionId,
         PageNumber: pageNumber,
         PageSize: pageSize,
-        Tags: tags,
         Filters: filters,
     }
 }
@@ -121,7 +119,7 @@ func NewDescribeInstancesRequestWithoutParam() *DescribeInstancesRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 地域ID(Required) */
 func (r *DescribeInstancesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
@@ -136,19 +134,16 @@ func (r *DescribeInstancesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
-/* param tags: Tag筛选条件(Optional) */
-func (r *DescribeInstancesRequest) SetTags(tags []vm.TagFilter) {
-    r.Tags = tags
-}
-
-/* param filters: instanceId - 实例ID，精确匹配，支持多个
+/* param filters: instanceId - 云主机ID，精确匹配，支持多个
 privateIpAddress - 主网卡IP地址，模糊匹配，支持单个
 az - 可用区，精确匹配，支持多个
 vpcId - 私有网络ID，精确匹配，支持多个
-status - 云主机状态，精确匹配，支持多个
-name - 实例名称，模糊匹配，支持单个
+status - 云主机状态，精确匹配，支持多个，<a href="https://www.jdcloud.com/help/detail/3869/isCatalog/1">参考云主机状态</a>
+name - 云主机名称，模糊匹配，支持单个
 imageId - 镜像ID，模糊匹配，支持单个
 networkInterfaceId - 弹性网卡ID，精确匹配，支持多个
+agId - 使用可用组id，支持单个
+faultDomain - 错误域，支持多个
 (Optional) */
 func (r *DescribeInstancesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters

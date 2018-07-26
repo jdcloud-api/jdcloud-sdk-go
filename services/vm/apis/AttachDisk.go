@@ -24,25 +24,25 @@ type AttachDiskRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /* Instance ID  */
+    /* 云主机ID  */
     InstanceId string `json:"instanceId"`
 
     /* 云硬盘ID  */
     DiskId string `json:"diskId"`
 
-    /* 逻辑挂载点[vdb,vdc,vdd,vde,vdf,vdg,vdh] (Optional) */
+    /* 数据盘的逻辑挂载点[vda,vdb,vdc,vdd,vde,vdf,vdg,vdh,vdi]，挂载系统盘时vda必传 (Optional) */
     DeviceName *string `json:"deviceName"`
 
-    /* 当删除主机时，是否自动关联删除此硬盘，默认False，只支持按配置计费 (Optional) */
+    /* 自动随主机删除此云硬盘，默认为False，只支持按配置计费的云硬盘。如果是共享型云硬盘，此参数无效。 (Optional) */
     AutoDelete *bool `json:"autoDelete"`
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: Instance ID (Required)
+ * param regionId: 地域ID (Required)
+ * param instanceId: 云主机ID (Required)
  * param diskId: 云硬盘ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -67,11 +67,11 @@ func NewAttachDiskRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: Instance ID (Required)
+ * param regionId: 地域ID (Required)
+ * param instanceId: 云主机ID (Required)
  * param diskId: 云硬盘ID (Required)
- * param deviceName: 逻辑挂载点[vdb,vdc,vdd,vde,vdf,vdg,vdh] (Optional)
- * param autoDelete: 当删除主机时，是否自动关联删除此硬盘，默认False，只支持按配置计费 (Optional)
+ * param deviceName: 数据盘的逻辑挂载点[vda,vdb,vdc,vdd,vde,vdf,vdg,vdh,vdi]，挂载系统盘时vda必传 (Optional)
+ * param autoDelete: 自动随主机删除此云硬盘，默认为False，只支持按配置计费的云硬盘。如果是共享型云硬盘，此参数无效。 (Optional)
  */
 func NewAttachDiskRequestWithAllParams(
     regionId string,
@@ -109,12 +109,12 @@ func NewAttachDiskRequestWithoutParam() *AttachDiskRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 地域ID(Required) */
 func (r *AttachDiskRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: Instance ID(Required) */
+/* param instanceId: 云主机ID(Required) */
 func (r *AttachDiskRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
@@ -124,12 +124,12 @@ func (r *AttachDiskRequest) SetDiskId(diskId string) {
     r.DiskId = diskId
 }
 
-/* param deviceName: 逻辑挂载点[vdb,vdc,vdd,vde,vdf,vdg,vdh](Optional) */
+/* param deviceName: 数据盘的逻辑挂载点[vda,vdb,vdc,vdd,vde,vdf,vdg,vdh,vdi]，挂载系统盘时vda必传(Optional) */
 func (r *AttachDiskRequest) SetDeviceName(deviceName string) {
     r.DeviceName = &deviceName
 }
 
-/* param autoDelete: 当删除主机时，是否自动关联删除此硬盘，默认False，只支持按配置计费(Optional) */
+/* param autoDelete: 自动随主机删除此云硬盘，默认为False，只支持按配置计费的云硬盘。如果是共享型云硬盘，此参数无效。(Optional) */
 func (r *AttachDiskRequest) SetAutoDelete(autoDelete bool) {
     r.AutoDelete = &autoDelete
 }

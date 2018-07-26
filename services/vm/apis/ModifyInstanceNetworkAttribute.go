@@ -18,9 +18,10 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    vm "github.com/jdcloud-api/jdcloud-sdk-go/services/vm/models"
 )
 
-type DescribeInstanceVncUrlRequest struct {
+type ModifyInstanceNetworkAttributeRequest struct {
 
     core.JDCloudRequest
 
@@ -29,6 +30,9 @@ type DescribeInstanceVncUrlRequest struct {
 
     /* 云主机ID  */
     InstanceId string `json:"instanceId"`
+
+    /* 弹性网卡列表 (Optional) */
+    Networks []vm.InstanceNetworkAttribute `json:"networks"`
 }
 
 /*
@@ -37,15 +41,15 @@ type DescribeInstanceVncUrlRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeInstanceVncUrlRequest(
+func NewModifyInstanceNetworkAttributeRequest(
     regionId string,
     instanceId string,
-) *DescribeInstanceVncUrlRequest {
+) *ModifyInstanceNetworkAttributeRequest {
 
-	return &DescribeInstanceVncUrlRequest{
+	return &ModifyInstanceNetworkAttributeRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/vnc",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstanceNetworkAttribute",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
@@ -57,31 +61,34 @@ func NewDescribeInstanceVncUrlRequest(
 /*
  * param regionId: 地域ID (Required)
  * param instanceId: 云主机ID (Required)
+ * param networks: 弹性网卡列表 (Optional)
  */
-func NewDescribeInstanceVncUrlRequestWithAllParams(
+func NewModifyInstanceNetworkAttributeRequestWithAllParams(
     regionId string,
     instanceId string,
-) *DescribeInstanceVncUrlRequest {
+    networks []vm.InstanceNetworkAttribute,
+) *ModifyInstanceNetworkAttributeRequest {
 
-    return &DescribeInstanceVncUrlRequest{
+    return &ModifyInstanceNetworkAttributeRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/vnc",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstanceNetworkAttribute",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         InstanceId: instanceId,
+        Networks: networks,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeInstanceVncUrlRequestWithoutParam() *DescribeInstanceVncUrlRequest {
+func NewModifyInstanceNetworkAttributeRequestWithoutParam() *ModifyInstanceNetworkAttributeRequest {
 
-    return &DescribeInstanceVncUrlRequest{
+    return &ModifyInstanceNetworkAttributeRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/vnc",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstanceNetworkAttribute",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
@@ -89,27 +96,31 @@ func NewDescribeInstanceVncUrlRequestWithoutParam() *DescribeInstanceVncUrlReque
 }
 
 /* param regionId: 地域ID(Required) */
-func (r *DescribeInstanceVncUrlRequest) SetRegionId(regionId string) {
+func (r *ModifyInstanceNetworkAttributeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 云主机ID(Required) */
-func (r *DescribeInstanceVncUrlRequest) SetInstanceId(instanceId string) {
+func (r *ModifyInstanceNetworkAttributeRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
+}
+
+/* param networks: 弹性网卡列表(Optional) */
+func (r *ModifyInstanceNetworkAttributeRequest) SetNetworks(networks []vm.InstanceNetworkAttribute) {
+    r.Networks = networks
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeInstanceVncUrlRequest) GetRegionId() string {
+func (r ModifyInstanceNetworkAttributeRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeInstanceVncUrlResponse struct {
+type ModifyInstanceNetworkAttributeResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeInstanceVncUrlResult `json:"result"`
+    Result ModifyInstanceNetworkAttributeResult `json:"result"`
 }
 
-type DescribeInstanceVncUrlResult struct {
-    VncUrl string `json:"vncUrl"`
+type ModifyInstanceNetworkAttributeResult struct {
 }

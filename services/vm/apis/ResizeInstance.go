@@ -24,20 +24,20 @@ type ResizeInstanceRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /* Instance ID  */
+    /* 云主机ID  */
     InstanceId string `json:"instanceId"`
 
-    /* 实例规格  */
+    /* 规格类型，可查询<a href="https://www.jdcloud.com/help/detail/2901/isCatalog/1">DescribeInstanceTypes</a>接口获得指定地域或可用区的规格信息。  */
     InstanceType string `json:"instanceType"`
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: Instance ID (Required)
- * param instanceType: 实例规格 (Required)
+ * param regionId: 地域ID (Required)
+ * param instanceId: 云主机ID (Required)
+ * param instanceType: 规格类型，可查询<a href="https://www.jdcloud.com/help/detail/2901/isCatalog/1">DescribeInstanceTypes</a>接口获得指定地域或可用区的规格信息。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -61,9 +61,9 @@ func NewResizeInstanceRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: Instance ID (Required)
- * param instanceType: 实例规格 (Required)
+ * param regionId: 地域ID (Required)
+ * param instanceId: 云主机ID (Required)
+ * param instanceType: 规格类型，可查询<a href="https://www.jdcloud.com/help/detail/2901/isCatalog/1">DescribeInstanceTypes</a>接口获得指定地域或可用区的规格信息。 (Required)
  */
 func NewResizeInstanceRequestWithAllParams(
     regionId string,
@@ -97,17 +97,17 @@ func NewResizeInstanceRequestWithoutParam() *ResizeInstanceRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 地域ID(Required) */
 func (r *ResizeInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: Instance ID(Required) */
+/* param instanceId: 云主机ID(Required) */
 func (r *ResizeInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param instanceType: 实例规格(Required) */
+/* param instanceType: 规格类型，可查询<a href="https://www.jdcloud.com/help/detail/2901/isCatalog/1">DescribeInstanceTypes</a>接口获得指定地域或可用区的规格信息。(Required) */
 func (r *ResizeInstanceRequest) SetInstanceType(instanceType string) {
     r.InstanceType = instanceType
 }

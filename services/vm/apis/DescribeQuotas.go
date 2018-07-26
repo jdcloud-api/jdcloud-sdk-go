@@ -26,7 +26,7 @@ type DescribeQuotasRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域ID  */
     RegionId string `json:"regionId"`
 
     /* resourceTypes - 资源类型，支持多个[instance，keypair，image，instanceTemplate]
@@ -35,7 +35,7 @@ type DescribeQuotasRequest struct {
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 地域ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -55,7 +55,7 @@ func NewDescribeQuotasRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 地域ID (Required)
  * param filters: resourceTypes - 资源类型，支持多个[instance，keypair，image，instanceTemplate]
  (Optional)
  */
@@ -89,7 +89,7 @@ func NewDescribeQuotasRequestWithoutParam() *DescribeQuotasRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 地域ID(Required) */
 func (r *DescribeQuotasRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

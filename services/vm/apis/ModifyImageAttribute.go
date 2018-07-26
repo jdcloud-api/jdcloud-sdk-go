@@ -24,22 +24,22 @@ type ModifyImageAttributeRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /* Image ID  */
+    /* 镜像ID  */
     ImageId string `json:"imageId"`
 
-    /* 名称；名称和描述必传其中一个；不为空且只允许中文、数字、大小写字母、英文下划线“_”及中划线“-”，长度不超过32字符 (Optional) */
+    /* 名称，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。 (Optional) */
     Name *string `json:"name"`
 
-    /* 描述；名称和描述必传其中一个；长度不超过256个字符 (Optional) */
+    /* 描述，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。 (Optional) */
     Description *string `json:"description"`
 }
 
 /*
- * param regionId: Region ID (Required)
- * param imageId: Image ID (Required)
+ * param regionId: 地域ID (Required)
+ * param imageId: 镜像ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -61,10 +61,10 @@ func NewModifyImageAttributeRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
- * param imageId: Image ID (Required)
- * param name: 名称；名称和描述必传其中一个；不为空且只允许中文、数字、大小写字母、英文下划线“_”及中划线“-”，长度不超过32字符 (Optional)
- * param description: 描述；名称和描述必传其中一个；长度不超过256个字符 (Optional)
+ * param regionId: 地域ID (Required)
+ * param imageId: 镜像ID (Required)
+ * param name: 名称，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。 (Optional)
+ * param description: 描述，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。 (Optional)
  */
 func NewModifyImageAttributeRequestWithAllParams(
     regionId string,
@@ -100,22 +100,22 @@ func NewModifyImageAttributeRequestWithoutParam() *ModifyImageAttributeRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 地域ID(Required) */
 func (r *ModifyImageAttributeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param imageId: Image ID(Required) */
+/* param imageId: 镜像ID(Required) */
 func (r *ModifyImageAttributeRequest) SetImageId(imageId string) {
     r.ImageId = imageId
 }
 
-/* param name: 名称；名称和描述必传其中一个；不为空且只允许中文、数字、大小写字母、英文下划线“_”及中划线“-”，长度不超过32字符(Optional) */
+/* param name: 名称，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。(Optional) */
 func (r *ModifyImageAttributeRequest) SetName(name string) {
     r.Name = &name
 }
 
-/* param description: 描述；名称和描述必传其中一个；长度不超过256个字符(Optional) */
+/* param description: 描述，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。(Optional) */
 func (r *ModifyImageAttributeRequest) SetDescription(description string) {
     r.Description = &description
 }

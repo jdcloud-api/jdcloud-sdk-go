@@ -43,7 +43,7 @@ type Image struct {
     /* 镜像的操作系统类型，[windows, linux] (Optional) */
     OsType string `json:"osType"`
 
-    /* 镜像状态, [pending, ready, deleting, error] (Optional) */
+    /* <a href="https://www.jdcloud.com/help/detail/3871/isCatalog/1">参考镜像状态</a> (Optional) */
     Status string `json:"status"`
 
     /* 创建时间 (Optional) */
@@ -55,6 +55,18 @@ type Image struct {
     /* 镜像描述 (Optional) */
     Desc string `json:"desc"`
 
+    /* 系统盘配置 (Optional) */
+    SystemDisk InstanceDiskAttachment `json:"systemDisk"`
+
     /* 打包镜像数据盘映射信息 (Optional) */
     DataDisks []InstanceDiskAttachment `json:"dataDisks"`
+
+    /* 云硬盘做系统盘的快照id，创建云主机时，默认使用此快照创建系统盘 (Optional) */
+    SnapshotId string `json:"snapshotId"`
+
+    /* 镜像支持的系统盘类型。localDisk：支持本地盘系统盘。cloudDisk：支持云盘系统盘 (Optional) */
+    RootDeviceType string `json:"rootDeviceType"`
+
+    /* 镜像复制时的进度，单位为百分比，例如：80 (Optional) */
+    Progress string `json:"progress"`
 }

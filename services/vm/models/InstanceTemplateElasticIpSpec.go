@@ -25,6 +25,6 @@ type InstanceTemplateElasticIpSpec struct {
     /* IP服务商，取值为BGP,nonBGP (Optional) */
     Provider string `json:"provider"`
 
-    /* 计费类型，bandwith，flow  */
+    /* 计费类型，支持按带宽计费(bandwith)，按流量计费(flow)  */
     ChargeMode string `json:"chargeMode"`
 }

@@ -19,7 +19,7 @@ package models
 
 type InstanceTemplateData struct {
 
-    /* 实例类型 (Optional) */
+    /* 规格类型 (Optional) */
     InstanceType string `json:"instanceType"`
 
     /* 主网卡所属VPC的ID (Optional) */
@@ -28,17 +28,17 @@ type InstanceTemplateData struct {
     /* 镜像ID (Optional) */
     ImageId string `json:"imageId"`
 
-    /* 密码不会返回，true：为包含密码，false：为不包含密码 (Optional) */
+    /* 启动模板中是否包含自定义密码，true：包含密码，false：不包含密码 (Optional) */
     IncludePassword bool `json:"includePassword"`
 
     /* 系统盘信息 (Optional) */
     SystemDisk InstanceTemplateDiskAttachment `json:"systemDisk"`
 
-    /* 数据盘信息 (Optional) */
+    /* 数据盘信息，本地盘(local类型)做系统盘的云主机可挂载8块数据盘，云硬盘(cloud类型)做系统盘的云主机可挂载7块数据盘。 (Optional) */
     DataDisks []InstanceTemplateDiskAttachment `json:"dataDisks"`
 
     /* 主网卡信息 (Optional) */
-    PrimaryNetworkInterface InstanceNetworkInterfaceAttachment `json:"primaryNetworkInterface"`
+    PrimaryNetworkInterface InstanceTemplateNetworkInterfaceAttachmentSpec `json:"primaryNetworkInterface"`
 
     /* 主网卡主IP关联的弹性IP规格 (Optional) */
     ElasticIp InstanceTemplateElasticIp `json:"elasticIp"`

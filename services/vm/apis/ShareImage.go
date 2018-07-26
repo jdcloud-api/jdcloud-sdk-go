@@ -24,10 +24,10 @@ type ShareImageRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /* Image ID  */
+    /* 镜像ID  */
     ImageId string `json:"imageId"`
 
     /* 需要共享的帐户 (Optional) */
@@ -35,8 +35,8 @@ type ShareImageRequest struct {
 }
 
 /*
- * param regionId: Region ID (Required)
- * param imageId: Image ID (Required)
+ * param regionId: 地域ID (Required)
+ * param imageId: 镜像ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -58,8 +58,8 @@ func NewShareImageRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
- * param imageId: Image ID (Required)
+ * param regionId: 地域ID (Required)
+ * param imageId: 镜像ID (Required)
  * param pins: 需要共享的帐户 (Optional)
  */
 func NewShareImageRequestWithAllParams(
@@ -94,12 +94,12 @@ func NewShareImageRequestWithoutParam() *ShareImageRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 地域ID(Required) */
 func (r *ShareImageRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param imageId: Image ID(Required) */
+/* param imageId: 镜像ID(Required) */
 func (r *ShareImageRequest) SetImageId(imageId string) {
     r.ImageId = imageId
 }

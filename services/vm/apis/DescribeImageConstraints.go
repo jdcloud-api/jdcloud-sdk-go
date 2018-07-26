@@ -25,16 +25,16 @@ type DescribeImageConstraintsRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /* Image ID  */
+    /* 镜像ID  */
     ImageId string `json:"imageId"`
 }
 
 /*
- * param regionId: Region ID (Required)
- * param imageId: Image ID (Required)
+ * param regionId: 地域ID (Required)
+ * param imageId: 镜像ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -56,8 +56,8 @@ func NewDescribeImageConstraintsRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
- * param imageId: Image ID (Required)
+ * param regionId: 地域ID (Required)
+ * param imageId: 镜像ID (Required)
  */
 func NewDescribeImageConstraintsRequestWithAllParams(
     regionId string,
@@ -89,12 +89,12 @@ func NewDescribeImageConstraintsRequestWithoutParam() *DescribeImageConstraintsR
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 地域ID(Required) */
 func (r *DescribeImageConstraintsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param imageId: Image ID(Required) */
+/* param imageId: 镜像ID(Required) */
 func (r *DescribeImageConstraintsRequest) SetImageId(imageId string) {
     r.ImageId = imageId
 }

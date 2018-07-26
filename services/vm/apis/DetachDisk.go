@@ -24,22 +24,22 @@ type DetachDiskRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /* Instance ID  */
+    /* 云主机ID  */
     InstanceId string `json:"instanceId"`
 
     /* 云硬盘ID  */
     DiskId string `json:"diskId"`
 
-    /* 强制缷载，默认False (Optional) */
+    /* 强制缷载，默认False。如果此参数传值为True，代表数据盘的IO会被强制断掉。 (Optional) */
     Force *bool `json:"force"`
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: Instance ID (Required)
+ * param regionId: 地域ID (Required)
+ * param instanceId: 云主机ID (Required)
  * param diskId: 云硬盘ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -64,10 +64,10 @@ func NewDetachDiskRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: Instance ID (Required)
+ * param regionId: 地域ID (Required)
+ * param instanceId: 云主机ID (Required)
  * param diskId: 云硬盘ID (Required)
- * param force: 强制缷载，默认False (Optional)
+ * param force: 强制缷载，默认False。如果此参数传值为True，代表数据盘的IO会被强制断掉。 (Optional)
  */
 func NewDetachDiskRequestWithAllParams(
     regionId string,
@@ -103,12 +103,12 @@ func NewDetachDiskRequestWithoutParam() *DetachDiskRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 地域ID(Required) */
 func (r *DetachDiskRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: Instance ID(Required) */
+/* param instanceId: 云主机ID(Required) */
 func (r *DetachDiskRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
@@ -118,7 +118,7 @@ func (r *DetachDiskRequest) SetDiskId(diskId string) {
     r.DiskId = diskId
 }
 
-/* param force: 强制缷载，默认False(Optional) */
+/* param force: 强制缷载，默认False。如果此参数传值为True，代表数据盘的IO会被强制断掉。(Optional) */
 func (r *DetachDiskRequest) SetForce(force bool) {
     r.Force = &force
 }

@@ -22,6 +22,6 @@ type InstanceTypeState struct {
     /* 可用区 (Optional) */
     Az string `json:"az"`
 
-    /* true:可用、false:已售罄不可用 (Optional) */
+    /* 可售卖情况，true:可售卖、false:已售罄不可用 (Optional) */
     InStock bool `json:"inStock"`
 }

@@ -22,6 +22,6 @@ type InstanceStatus struct {
     /* 云主机ID (Optional) */
     InstanceId string `json:"instanceId"`
 
-    /* 云主机状态 (Optional) */
+    /* <a href="https://www.jdcloud.com/help/detail/3869/isCatalog/1">参考云主机状态</a> (Optional) */
     Status string `json:"status"`
 }
