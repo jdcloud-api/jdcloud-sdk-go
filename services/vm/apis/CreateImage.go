@@ -25,27 +25,27 @@ type CreateImageRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /* Instance ID  */
+    /* 云主机ID  */
     InstanceId string `json:"instanceId"`
 
-    /* 名称  */
+    /* 镜像名称，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。  */
     Name string `json:"name"`
 
-    /* 描述  */
+    /* 镜像描述，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。  */
     Description string `json:"description"`
 
-    /* 数据盘列表，如果指定，则随镜像一起打包创建快照，实际最多不能超过4个 (Optional) */
+    /* 数据盘列表，可以在打包镜像的基础上，额外增加新的快照、空盘、或排除云主机中的数据盘。 (Optional) */
     DataDisks []vm.InstanceDiskAttachmentSpec `json:"dataDisks"`
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: Instance ID (Required)
- * param name: 名称 (Required)
- * param description: 描述 (Required)
+ * param regionId: 地域ID (Required)
+ * param instanceId: 云主机ID (Required)
+ * param name: 镜像名称，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。 (Required)
+ * param description: 镜像描述，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -71,11 +71,11 @@ func NewCreateImageRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: Instance ID (Required)
- * param name: 名称 (Required)
- * param description: 描述 (Required)
- * param dataDisks: 数据盘列表，如果指定，则随镜像一起打包创建快照，实际最多不能超过4个 (Optional)
+ * param regionId: 地域ID (Required)
+ * param instanceId: 云主机ID (Required)
+ * param name: 镜像名称，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。 (Required)
+ * param description: 镜像描述，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。 (Required)
+ * param dataDisks: 数据盘列表，可以在打包镜像的基础上，额外增加新的快照、空盘、或排除云主机中的数据盘。 (Optional)
  */
 func NewCreateImageRequestWithAllParams(
     regionId string,
@@ -113,27 +113,27 @@ func NewCreateImageRequestWithoutParam() *CreateImageRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 地域ID(Required) */
 func (r *CreateImageRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: Instance ID(Required) */
+/* param instanceId: 云主机ID(Required) */
 func (r *CreateImageRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param name: 名称(Required) */
+/* param name: 镜像名称，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。(Required) */
 func (r *CreateImageRequest) SetName(name string) {
     r.Name = name
 }
 
-/* param description: 描述(Required) */
+/* param description: 镜像描述，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。(Required) */
 func (r *CreateImageRequest) SetDescription(description string) {
     r.Description = description
 }
 
-/* param dataDisks: 数据盘列表，如果指定，则随镜像一起打包创建快照，实际最多不能超过4个(Optional) */
+/* param dataDisks: 数据盘列表，可以在打包镜像的基础上，额外增加新的快照、空盘、或排除云主机中的数据盘。(Optional) */
 func (r *CreateImageRequest) SetDataDisks(dataDisks []vm.InstanceDiskAttachmentSpec) {
     r.DataDisks = dataDisks
 }

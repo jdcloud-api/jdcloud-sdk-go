@@ -17,11 +17,11 @@
 package models
 
 
-type TagFilter struct {
+type InstanceNetworkAttribute struct {
 
-    /* Tag键 (Optional) */
-    Key string `json:"key"`
+    /* 弹性网卡ID (Optional) */
+    NetworkInterfaceId *string `json:"networkInterfaceId"`
 
-    /* Tag值 (Optional) */
-    Values []string `json:"values"`
+    /* 随主机自动删除，默认为False (Optional) */
+    AutoDelete *bool `json:"autoDelete"`
 }

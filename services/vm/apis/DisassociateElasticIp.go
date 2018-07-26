@@ -24,20 +24,20 @@ type DisassociateElasticIpRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /* Instance ID  */
+    /* 云主机ID  */
     InstanceId string `json:"instanceId"`
 
-    /* 弹性IP ID  */
+    /* 弹性公网IP的ID  */
     ElasticIpId string `json:"elasticIpId"`
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: Instance ID (Required)
- * param elasticIpId: 弹性IP ID (Required)
+ * param regionId: 地域ID (Required)
+ * param instanceId: 云主机ID (Required)
+ * param elasticIpId: 弹性公网IP的ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -61,9 +61,9 @@ func NewDisassociateElasticIpRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: Instance ID (Required)
- * param elasticIpId: 弹性IP ID (Required)
+ * param regionId: 地域ID (Required)
+ * param instanceId: 云主机ID (Required)
+ * param elasticIpId: 弹性公网IP的ID (Required)
  */
 func NewDisassociateElasticIpRequestWithAllParams(
     regionId string,
@@ -97,17 +97,17 @@ func NewDisassociateElasticIpRequestWithoutParam() *DisassociateElasticIpRequest
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 地域ID(Required) */
 func (r *DisassociateElasticIpRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: Instance ID(Required) */
+/* param instanceId: 云主机ID(Required) */
 func (r *DisassociateElasticIpRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param elasticIpId: 弹性IP ID(Required) */
+/* param elasticIpId: 弹性公网IP的ID(Required) */
 func (r *DisassociateElasticIpRequest) SetElasticIpId(elasticIpId string) {
     r.ElasticIpId = elasticIpId
 }

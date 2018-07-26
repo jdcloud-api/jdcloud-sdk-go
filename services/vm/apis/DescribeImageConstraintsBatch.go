@@ -25,7 +25,7 @@ type DescribeImageConstraintsBatchRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域ID  */
     RegionId string `json:"regionId"`
 
     /* 镜像ID列表 (Optional) */
@@ -33,7 +33,7 @@ type DescribeImageConstraintsBatchRequest struct {
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 地域ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -53,7 +53,7 @@ func NewDescribeImageConstraintsBatchRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 地域ID (Required)
  * param ids: 镜像ID列表 (Optional)
  */
 func NewDescribeImageConstraintsBatchRequestWithAllParams(
@@ -86,7 +86,7 @@ func NewDescribeImageConstraintsBatchRequestWithoutParam() *DescribeImageConstra
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 地域ID(Required) */
 func (r *DescribeImageConstraintsBatchRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

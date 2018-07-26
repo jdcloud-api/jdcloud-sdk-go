@@ -26,17 +26,17 @@ type DescribeInstanceTypesRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /* instanceTypes - 实例类型，精确匹配，支持多个
+    /* instanceTypes - 规格类型，精确匹配，支持多个
 az - 可用区，精确匹配，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 地域ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -56,8 +56,8 @@ func NewDescribeInstanceTypesRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
- * param filters: instanceTypes - 实例类型，精确匹配，支持多个
+ * param regionId: 地域ID (Required)
+ * param filters: instanceTypes - 规格类型，精确匹配，支持多个
 az - 可用区，精确匹配，支持多个
  (Optional)
  */
@@ -91,12 +91,12 @@ func NewDescribeInstanceTypesRequestWithoutParam() *DescribeInstanceTypesRequest
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 地域ID(Required) */
 func (r *DescribeInstanceTypesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param filters: instanceTypes - 实例类型，精确匹配，支持多个
+/* param filters: instanceTypes - 规格类型，精确匹配，支持多个
 az - 可用区，精确匹配，支持多个
 (Optional) */
 func (r *DescribeInstanceTypesRequest) SetFilters(filters []common.Filter) {

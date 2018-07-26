@@ -22,18 +22,21 @@ type InstanceType struct {
     /* 实例族 (Optional) */
     Family string `json:"family"`
 
-    /* 实例类型，比如g.b1.2xlarge (Optional) */
+    /* 规格类型，比如g.b1.2xlarge (Optional) */
     InstanceType string `json:"instanceType"`
 
     /* cpu个数 (Optional) */
     Cpu int `json:"cpu"`
 
-    /* 内存 (Optional) */
+    /* 内存大小 (Optional) */
     MemoryMB int `json:"memoryMB"`
+
+    /* 支持弹性网卡的数量 (Optional) */
+    NicLimit int `json:"nicLimit"`
 
     /* 描述 (Optional) */
     Desc string `json:"desc"`
 
-    /* 状态 (Optional) */
+    /* 规格状态 (Optional) */
     State []InstanceTypeState `json:"state"`
 }

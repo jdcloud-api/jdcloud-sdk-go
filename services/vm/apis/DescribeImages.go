@@ -25,21 +25,33 @@ type DescribeImagesRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /* 镜像来源：public、shared、thirdparty、private，如果没有指定ids参数，此参数必传 (Optional) */
+    /* 镜像来源，如果没有指定ids参数，此参数必传；取值范围：public、shared、thirdparty、private (Optional) */
     ImageSource *string `json:"imageSource"`
 
-    /* 操作系统平台: Windows Server、CentOS、Ubuntu (Optional) */
+    /* 操作系统平台，取值范围：Windows Server、CentOS、Ubuntu (Optional) */
     Platform *string `json:"platform"`
 
     /* 镜像ID列表，如果指定了此参数，其它参数可为空 (Optional) */
     Ids []string `json:"ids"`
+
+    /* 镜像支持的系统盘类型，[localDisk,cloudDisk] (Optional) */
+    RootDeviceType *string `json:"rootDeviceType"`
+
+    /* <a href="https://www.jdcloud.com/help/detail/3871/isCatalog/1">参考镜像状态</a> (Optional) */
+    Status *string `json:"status"`
+
+    /* 页码；默认为1 (Optional) */
+    PageNumber *int `json:"pageNumber"`
+
+    /* 分页大小；默认为20；取值范围[10, 100] (Optional) */
+    PageSize *int `json:"pageSize"`
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 地域ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -59,16 +71,24 @@ func NewDescribeImagesRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
- * param imageSource: 镜像来源：public、shared、thirdparty、private，如果没有指定ids参数，此参数必传 (Optional)
- * param platform: 操作系统平台: Windows Server、CentOS、Ubuntu (Optional)
+ * param regionId: 地域ID (Required)
+ * param imageSource: 镜像来源，如果没有指定ids参数，此参数必传；取值范围：public、shared、thirdparty、private (Optional)
+ * param platform: 操作系统平台，取值范围：Windows Server、CentOS、Ubuntu (Optional)
  * param ids: 镜像ID列表，如果指定了此参数，其它参数可为空 (Optional)
+ * param rootDeviceType: 镜像支持的系统盘类型，[localDisk,cloudDisk] (Optional)
+ * param status: <a href="https://www.jdcloud.com/help/detail/3871/isCatalog/1">参考镜像状态</a> (Optional)
+ * param pageNumber: 页码；默认为1 (Optional)
+ * param pageSize: 分页大小；默认为20；取值范围[10, 100] (Optional)
  */
 func NewDescribeImagesRequestWithAllParams(
     regionId string,
     imageSource *string,
     platform *string,
     ids []string,
+    rootDeviceType *string,
+    status *string,
+    pageNumber *int,
+    pageSize *int,
 ) *DescribeImagesRequest {
 
     return &DescribeImagesRequest{
@@ -82,6 +102,10 @@ func NewDescribeImagesRequestWithAllParams(
         ImageSource: imageSource,
         Platform: platform,
         Ids: ids,
+        RootDeviceType: rootDeviceType,
+        Status: status,
+        PageNumber: pageNumber,
+        PageSize: pageSize,
     }
 }
 
@@ -98,17 +122,17 @@ func NewDescribeImagesRequestWithoutParam() *DescribeImagesRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 地域ID(Required) */
 func (r *DescribeImagesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param imageSource: 镜像来源：public、shared、thirdparty、private，如果没有指定ids参数，此参数必传(Optional) */
+/* param imageSource: 镜像来源，如果没有指定ids参数，此参数必传；取值范围：public、shared、thirdparty、private(Optional) */
 func (r *DescribeImagesRequest) SetImageSource(imageSource string) {
     r.ImageSource = &imageSource
 }
 
-/* param platform: 操作系统平台: Windows Server、CentOS、Ubuntu(Optional) */
+/* param platform: 操作系统平台，取值范围：Windows Server、CentOS、Ubuntu(Optional) */
 func (r *DescribeImagesRequest) SetPlatform(platform string) {
     r.Platform = &platform
 }
@@ -116,6 +140,26 @@ func (r *DescribeImagesRequest) SetPlatform(platform string) {
 /* param ids: 镜像ID列表，如果指定了此参数，其它参数可为空(Optional) */
 func (r *DescribeImagesRequest) SetIds(ids []string) {
     r.Ids = ids
+}
+
+/* param rootDeviceType: 镜像支持的系统盘类型，[localDisk,cloudDisk](Optional) */
+func (r *DescribeImagesRequest) SetRootDeviceType(rootDeviceType string) {
+    r.RootDeviceType = &rootDeviceType
+}
+
+/* param status: <a href="https://www.jdcloud.com/help/detail/3871/isCatalog/1">参考镜像状态</a>(Optional) */
+func (r *DescribeImagesRequest) SetStatus(status string) {
+    r.Status = &status
+}
+
+/* param pageNumber: 页码；默认为1(Optional) */
+func (r *DescribeImagesRequest) SetPageNumber(pageNumber int) {
+    r.PageNumber = &pageNumber
+}
+
+/* param pageSize: 分页大小；默认为20；取值范围[10, 100](Optional) */
+func (r *DescribeImagesRequest) SetPageSize(pageSize int) {
+    r.PageSize = &pageSize
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

@@ -17,11 +17,11 @@
 package models
 
 
-type TagFilter struct {
+type CopyImage struct {
 
-    /* Tag键 (Optional) */
-    Key string `json:"key"`
+    /* 复制后的目标镜像ID (Optional) */
+    DestinationImageId string `json:"destinationImageId"`
 
-    /* Tag值 (Optional) */
-    Values []string `json:"values"`
+    /* 源镜像ID (Optional) */
+    SourceImageId string `json:"sourceImageId"`
 }

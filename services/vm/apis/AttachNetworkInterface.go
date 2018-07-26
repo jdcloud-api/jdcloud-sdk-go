@@ -20,7 +20,7 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type DescribeInstanceVncUrlRequest struct {
+type AttachNetworkInterfaceRequest struct {
 
     core.JDCloudRequest
 
@@ -29,59 +29,74 @@ type DescribeInstanceVncUrlRequest struct {
 
     /* 云主机ID  */
     InstanceId string `json:"instanceId"`
+
+    /* 弹性网卡ID  */
+    NetworkInterfaceId string `json:"networkInterfaceId"`
+
+    /* 随主机自动删除，默认为False (Optional) */
+    AutoDelete *bool `json:"autoDelete"`
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param instanceId: 云主机ID (Required)
+ * param networkInterfaceId: 弹性网卡ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeInstanceVncUrlRequest(
+func NewAttachNetworkInterfaceRequest(
     regionId string,
     instanceId string,
-) *DescribeInstanceVncUrlRequest {
+    networkInterfaceId string,
+) *AttachNetworkInterfaceRequest {
 
-	return &DescribeInstanceVncUrlRequest{
+	return &AttachNetworkInterfaceRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/vnc",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/instances/{instanceId}:attachNetworkInterface",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         InstanceId: instanceId,
+        NetworkInterfaceId: networkInterfaceId,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param instanceId: 云主机ID (Required)
+ * param networkInterfaceId: 弹性网卡ID (Required)
+ * param autoDelete: 随主机自动删除，默认为False (Optional)
  */
-func NewDescribeInstanceVncUrlRequestWithAllParams(
+func NewAttachNetworkInterfaceRequestWithAllParams(
     regionId string,
     instanceId string,
-) *DescribeInstanceVncUrlRequest {
+    networkInterfaceId string,
+    autoDelete *bool,
+) *AttachNetworkInterfaceRequest {
 
-    return &DescribeInstanceVncUrlRequest{
+    return &AttachNetworkInterfaceRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/vnc",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/instances/{instanceId}:attachNetworkInterface",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         InstanceId: instanceId,
+        NetworkInterfaceId: networkInterfaceId,
+        AutoDelete: autoDelete,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeInstanceVncUrlRequestWithoutParam() *DescribeInstanceVncUrlRequest {
+func NewAttachNetworkInterfaceRequestWithoutParam() *AttachNetworkInterfaceRequest {
 
-    return &DescribeInstanceVncUrlRequest{
+    return &AttachNetworkInterfaceRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/vnc",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/instances/{instanceId}:attachNetworkInterface",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
@@ -89,27 +104,36 @@ func NewDescribeInstanceVncUrlRequestWithoutParam() *DescribeInstanceVncUrlReque
 }
 
 /* param regionId: 地域ID(Required) */
-func (r *DescribeInstanceVncUrlRequest) SetRegionId(regionId string) {
+func (r *AttachNetworkInterfaceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 云主机ID(Required) */
-func (r *DescribeInstanceVncUrlRequest) SetInstanceId(instanceId string) {
+func (r *AttachNetworkInterfaceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
+}
+
+/* param networkInterfaceId: 弹性网卡ID(Required) */
+func (r *AttachNetworkInterfaceRequest) SetNetworkInterfaceId(networkInterfaceId string) {
+    r.NetworkInterfaceId = networkInterfaceId
+}
+
+/* param autoDelete: 随主机自动删除，默认为False(Optional) */
+func (r *AttachNetworkInterfaceRequest) SetAutoDelete(autoDelete bool) {
+    r.AutoDelete = &autoDelete
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeInstanceVncUrlRequest) GetRegionId() string {
+func (r AttachNetworkInterfaceRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeInstanceVncUrlResponse struct {
+type AttachNetworkInterfaceResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeInstanceVncUrlResult `json:"result"`
+    Result AttachNetworkInterfaceResult `json:"result"`
 }
 
-type DescribeInstanceVncUrlResult struct {
-    VncUrl string `json:"vncUrl"`
+type AttachNetworkInterfaceResult struct {
 }

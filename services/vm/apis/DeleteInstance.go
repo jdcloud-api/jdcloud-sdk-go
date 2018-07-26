@@ -24,16 +24,16 @@ type DeleteInstanceRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /* Instance ID  */
+    /* 云主机ID  */
     InstanceId string `json:"instanceId"`
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: Instance ID (Required)
+ * param regionId: 地域ID (Required)
+ * param instanceId: 云主机ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -55,8 +55,8 @@ func NewDeleteInstanceRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: Instance ID (Required)
+ * param regionId: 地域ID (Required)
+ * param instanceId: 云主机ID (Required)
  */
 func NewDeleteInstanceRequestWithAllParams(
     regionId string,
@@ -88,12 +88,12 @@ func NewDeleteInstanceRequestWithoutParam() *DeleteInstanceRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 地域ID(Required) */
 func (r *DeleteInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: Instance ID(Required) */
+/* param instanceId: 云主机ID(Required) */
 func (r *DeleteInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }

@@ -17,11 +17,14 @@
 package models
 
 
-type TagFilter struct {
+type InstanceDiskAttribute struct {
 
-    /* Tag键 (Optional) */
-    Key string `json:"key"`
+    /* 云硬盘ID (Optional) */
+    DiskId *string `json:"diskId"`
 
-    /* Tag值 (Optional) */
-    Values []string `json:"values"`
+    /* 随云主机一起删除，删除主机时自动删除此磁盘，默认为false，本地盘(local)不能更改此值。
+如果云主机中的数据盘(cloud)是包年包月计费方式，此参数不生效。
+如果云主机中的数据盘(cloud)是共享型数据盘，此参数不生效。
+ (Optional) */
+    AutoDelete *bool `json:"autoDelete"`
 }
