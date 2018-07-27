@@ -18,10 +18,9 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    rds "github.com/jdcloud-api/jdcloud-sdk-go/services/rds/models"
 )
 
-type DescribeImportFilesRequest struct {
+type GetUploadKeyRequest struct {
 
     core.JDCloudRequest
 
@@ -38,15 +37,15 @@ type DescribeImportFilesRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeImportFilesRequest(
+func NewGetUploadKeyRequest(
     regionId string,
     instanceId string,
-) *DescribeImportFilesRequest {
+) *GetUploadKeyRequest {
 
-	return &DescribeImportFilesRequest{
+	return &GetUploadKeyRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/importFiles",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/instances/{instanceId}/importFiles:getUploadKey",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
@@ -59,15 +58,15 @@ func NewDescribeImportFilesRequest(
  * param regionId: 区域编码 (Required)
  * param instanceId: 实例ID (Required)
  */
-func NewDescribeImportFilesRequestWithAllParams(
+func NewGetUploadKeyRequestWithAllParams(
     regionId string,
     instanceId string,
-) *DescribeImportFilesRequest {
+) *GetUploadKeyRequest {
 
-    return &DescribeImportFilesRequest{
+    return &GetUploadKeyRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/importFiles",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/instances/{instanceId}/importFiles:getUploadKey",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
@@ -77,12 +76,12 @@ func NewDescribeImportFilesRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeImportFilesRequestWithoutParam() *DescribeImportFilesRequest {
+func NewGetUploadKeyRequestWithoutParam() *GetUploadKeyRequest {
 
-    return &DescribeImportFilesRequest{
+    return &GetUploadKeyRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/importFiles",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/instances/{instanceId}/importFiles:getUploadKey",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
@@ -90,27 +89,27 @@ func NewDescribeImportFilesRequestWithoutParam() *DescribeImportFilesRequest {
 }
 
 /* param regionId: 区域编码(Required) */
-func (r *DescribeImportFilesRequest) SetRegionId(regionId string) {
+func (r *GetUploadKeyRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 实例ID(Required) */
-func (r *DescribeImportFilesRequest) SetInstanceId(instanceId string) {
+func (r *GetUploadKeyRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeImportFilesRequest) GetRegionId() string {
+func (r GetUploadKeyRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeImportFilesResponse struct {
+type GetUploadKeyResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeImportFilesResult `json:"result"`
+    Result GetUploadKeyResult `json:"result"`
 }
 
-type DescribeImportFilesResult struct {
-    ImportFiles []rds.ImportFile `json:"importFiles"`
+type GetUploadKeyResult struct {
+    Key string `json:"key"`
 }

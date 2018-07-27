@@ -41,11 +41,12 @@ type RestoreDatabaseFromFileRequest struct {
 }
 
 /*
- * param regionId: 区域代码 
- * param instanceId: 实例ID 
- * param dbName: 库名称 
- * param sharedFileGid: 共享文件的全局ID，可从上传文件查询接口describeImportFiles获取；如果该文件不是共享文件，则全局ID为空 (Optional)
- * param fileName: 用户在单库上云中上传的文件名称 
+ * param regionId: 区域代码 (Required)
+ * param instanceId: 实例ID (Required)
+ * param dbName: 库名称 (Required)
+ * param fileName: 用户在单库上云中上传的文件名称 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewRestoreDatabaseFromFileRequest(
     regionId string,
@@ -68,22 +69,70 @@ func NewRestoreDatabaseFromFileRequest(
 	}
 }
 
+/*
+ * param regionId: 区域代码 (Required)
+ * param instanceId: 实例ID (Required)
+ * param dbName: 库名称 (Required)
+ * param sharedFileGid: 共享文件的全局ID，可从上传文件查询接口describeImportFiles获取；如果该文件不是共享文件，则全局ID为空 (Optional)
+ * param fileName: 用户在单库上云中上传的文件名称 (Required)
+ */
+func NewRestoreDatabaseFromFileRequestWithAllParams(
+    regionId string,
+    instanceId string,
+    dbName string,
+    sharedFileGid *string,
+    fileName string,
+) *RestoreDatabaseFromFileRequest {
+
+    return &RestoreDatabaseFromFileRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}/databases/{dbName}:restoreDatabaseFromFile",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+        DbName: dbName,
+        SharedFileGid: sharedFileGid,
+        FileName: fileName,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewRestoreDatabaseFromFileRequestWithoutParam() *RestoreDatabaseFromFileRequest {
+
+    return &RestoreDatabaseFromFileRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}/databases/{dbName}:restoreDatabaseFromFile",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 区域代码(Required) */
 func (r *RestoreDatabaseFromFileRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: 实例ID(Required) */
 func (r *RestoreDatabaseFromFileRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
+/* param dbName: 库名称(Required) */
 func (r *RestoreDatabaseFromFileRequest) SetDbName(dbName string) {
     r.DbName = dbName
 }
 
+/* param sharedFileGid: 共享文件的全局ID，可从上传文件查询接口describeImportFiles获取；如果该文件不是共享文件，则全局ID为空(Optional) */
 func (r *RestoreDatabaseFromFileRequest) SetSharedFileGid(sharedFileGid string) {
     r.SharedFileGid = &sharedFileGid
 }
 
+/* param fileName: 用户在单库上云中上传的文件名称(Required) */
 func (r *RestoreDatabaseFromFileRequest) SetFileName(fileName string) {
     r.FileName = fileName
 }

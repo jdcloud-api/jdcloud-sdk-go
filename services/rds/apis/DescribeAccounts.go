@@ -21,7 +21,7 @@ import (
     rds "github.com/jdcloud-api/jdcloud-sdk-go/services/rds/models"
 )
 
-type GrantPrivilegeRequest struct {
+type DescribeAccountsRequest struct {
 
     core.JDCloudRequest
 
@@ -30,77 +30,59 @@ type GrantPrivilegeRequest struct {
 
     /* 实例ID  */
     InstanceId string `json:"instanceId"`
-
-    /* 账户名  */
-    AccountName string `json:"accountName"`
-
-    /* 账号的访问权限  */
-    AccountPrivileges []rds.AccountPrivilege `json:"accountPrivileges"`
 }
 
 /*
  * param regionId: 地域代码 (Required)
  * param instanceId: 实例ID (Required)
- * param accountName: 账户名 (Required)
- * param accountPrivileges: 账号的访问权限 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewGrantPrivilegeRequest(
+func NewDescribeAccountsRequest(
     regionId string,
     instanceId string,
-    accountName string,
-    accountPrivileges []rds.AccountPrivilege,
-) *GrantPrivilegeRequest {
+) *DescribeAccountsRequest {
 
-	return &GrantPrivilegeRequest{
+	return &DescribeAccountsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/accounts/{accountName}:grantPrivilege",
-			Method:  "POST",
+			URL:     "/regions/{regionId}/instances/{instanceId}/accounts",
+			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         InstanceId: instanceId,
-        AccountName: accountName,
-        AccountPrivileges: accountPrivileges,
 	}
 }
 
 /*
  * param regionId: 地域代码 (Required)
  * param instanceId: 实例ID (Required)
- * param accountName: 账户名 (Required)
- * param accountPrivileges: 账号的访问权限 (Required)
  */
-func NewGrantPrivilegeRequestWithAllParams(
+func NewDescribeAccountsRequestWithAllParams(
     regionId string,
     instanceId string,
-    accountName string,
-    accountPrivileges []rds.AccountPrivilege,
-) *GrantPrivilegeRequest {
+) *DescribeAccountsRequest {
 
-    return &GrantPrivilegeRequest{
+    return &DescribeAccountsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/accounts/{accountName}:grantPrivilege",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/instances/{instanceId}/accounts",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         InstanceId: instanceId,
-        AccountName: accountName,
-        AccountPrivileges: accountPrivileges,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewGrantPrivilegeRequestWithoutParam() *GrantPrivilegeRequest {
+func NewDescribeAccountsRequestWithoutParam() *DescribeAccountsRequest {
 
-    return &GrantPrivilegeRequest{
+    return &DescribeAccountsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/accounts/{accountName}:grantPrivilege",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/instances/{instanceId}/accounts",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
@@ -108,36 +90,27 @@ func NewGrantPrivilegeRequestWithoutParam() *GrantPrivilegeRequest {
 }
 
 /* param regionId: 地域代码(Required) */
-func (r *GrantPrivilegeRequest) SetRegionId(regionId string) {
+func (r *DescribeAccountsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 实例ID(Required) */
-func (r *GrantPrivilegeRequest) SetInstanceId(instanceId string) {
+func (r *DescribeAccountsRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
-}
-
-/* param accountName: 账户名(Required) */
-func (r *GrantPrivilegeRequest) SetAccountName(accountName string) {
-    r.AccountName = accountName
-}
-
-/* param accountPrivileges: 账号的访问权限(Required) */
-func (r *GrantPrivilegeRequest) SetAccountPrivileges(accountPrivileges []rds.AccountPrivilege) {
-    r.AccountPrivileges = accountPrivileges
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r GrantPrivilegeRequest) GetRegionId() string {
+func (r DescribeAccountsRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type GrantPrivilegeResponse struct {
+type DescribeAccountsResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result GrantPrivilegeResult `json:"result"`
+    Result DescribeAccountsResult `json:"result"`
 }
 
-type GrantPrivilegeResult struct {
+type DescribeAccountsResult struct {
+    Accounts []rds.Account `json:"accounts"`
 }

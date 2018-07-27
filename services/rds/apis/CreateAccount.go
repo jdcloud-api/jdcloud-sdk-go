@@ -38,10 +38,12 @@ type CreateAccountRequest struct {
 }
 
 /*
- * param regionId: 地域代码 
- * param instanceId: 实例ID 
- * param accountName: 用户名 
- * param accountPassword: 用户密码 
+ * param regionId: 地域代码 (Required)
+ * param instanceId: 实例ID (Required)
+ * param accountName: 用户名 (Required)
+ * param accountPassword: 用户密码 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateAccountRequest(
     regionId string,
@@ -64,18 +66,62 @@ func NewCreateAccountRequest(
 	}
 }
 
+/*
+ * param regionId: 地域代码 (Required)
+ * param instanceId: 实例ID (Required)
+ * param accountName: 用户名 (Required)
+ * param accountPassword: 用户密码 (Required)
+ */
+func NewCreateAccountRequestWithAllParams(
+    regionId string,
+    instanceId string,
+    accountName string,
+    accountPassword string,
+) *CreateAccountRequest {
+
+    return &CreateAccountRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}/accounts",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+        AccountName: accountName,
+        AccountPassword: accountPassword,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewCreateAccountRequestWithoutParam() *CreateAccountRequest {
+
+    return &CreateAccountRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}/accounts",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 地域代码(Required) */
 func (r *CreateAccountRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: 实例ID(Required) */
 func (r *CreateAccountRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
+/* param accountName: 用户名(Required) */
 func (r *CreateAccountRequest) SetAccountName(accountName string) {
     r.AccountName = accountName
 }
 
+/* param accountPassword: 用户密码(Required) */
 func (r *CreateAccountRequest) SetAccountPassword(accountPassword string) {
     r.AccountPassword = accountPassword
 }

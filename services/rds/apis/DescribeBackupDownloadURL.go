@@ -30,7 +30,7 @@ type DescribeBackupDownloadURLRequest struct {
     /* 备份ID  */
     BackupId string `json:"backupId"`
 
-    /* MySQL：无需此参数；SQL Server：指定该备份中需要获取下载链接的文件名称，SQL Server必须输入该参数 (Optional) */
+    /* SQL Server：指定该备份中需要获取下载链接的文件名称，SQL Server必须输入该参数</br>MySQL：无需此参数； (Optional) */
     FileName *string `json:"fileName"`
 
     /* 指定下载链接的有效时间，单位秒,缺省为86400秒（即24小时） 取值范围：1-864000 (Optional) */
@@ -38,10 +38,10 @@ type DescribeBackupDownloadURLRequest struct {
 }
 
 /*
- * param regionId: 地域代码 
- * param backupId: 备份ID 
- * param fileName: MySQL：无需此参数；SQL Server：指定该备份中需要获取下载链接的文件名称，SQL Server必须输入该参数 (Optional)
- * param urlExpirationSecond: 指定下载链接的有效时间，单位秒,缺省为86400秒（即24小时） 取值范围：1-864000 (Optional)
+ * param regionId: 地域代码 (Required)
+ * param backupId: 备份ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeBackupDownloadURLRequest(
     regionId string,
@@ -60,18 +60,62 @@ func NewDescribeBackupDownloadURLRequest(
 	}
 }
 
+/*
+ * param regionId: 地域代码 (Required)
+ * param backupId: 备份ID (Required)
+ * param fileName: SQL Server：指定该备份中需要获取下载链接的文件名称，SQL Server必须输入该参数</br>MySQL：无需此参数； (Optional)
+ * param urlExpirationSecond: 指定下载链接的有效时间，单位秒,缺省为86400秒（即24小时） 取值范围：1-864000 (Optional)
+ */
+func NewDescribeBackupDownloadURLRequestWithAllParams(
+    regionId string,
+    backupId string,
+    fileName *string,
+    urlExpirationSecond *string,
+) *DescribeBackupDownloadURLRequest {
+
+    return &DescribeBackupDownloadURLRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/backups/{backupId}/downloadURLs",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        BackupId: backupId,
+        FileName: fileName,
+        UrlExpirationSecond: urlExpirationSecond,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeBackupDownloadURLRequestWithoutParam() *DescribeBackupDownloadURLRequest {
+
+    return &DescribeBackupDownloadURLRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/backups/{backupId}/downloadURLs",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 地域代码(Required) */
 func (r *DescribeBackupDownloadURLRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param backupId: 备份ID(Required) */
 func (r *DescribeBackupDownloadURLRequest) SetBackupId(backupId string) {
     r.BackupId = backupId
 }
 
+/* param fileName: SQL Server：指定该备份中需要获取下载链接的文件名称，SQL Server必须输入该参数</br>MySQL：无需此参数；(Optional) */
 func (r *DescribeBackupDownloadURLRequest) SetFileName(fileName string) {
     r.FileName = &fileName
 }
 
+/* param urlExpirationSecond: 指定下载链接的有效时间，单位秒,缺省为86400秒（即24小时） 取值范围：1-864000(Optional) */
 func (r *DescribeBackupDownloadURLRequest) SetUrlExpirationSecond(urlExpirationSecond string) {
     r.UrlExpirationSecond = &urlExpirationSecond
 }

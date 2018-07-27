@@ -36,9 +36,9 @@ type CreateBackupRequest struct {
 }
 
 /*
- * param regionId: 地域代码 
- * param instanceId: 集群ID (Optional)
- * param backupSpec: 备份规格 (Optional)
+ * param regionId: 地域代码 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateBackupRequest(
     regionId string,
@@ -55,14 +55,54 @@ func NewCreateBackupRequest(
 	}
 }
 
+/*
+ * param regionId: 地域代码 (Required)
+ * param instanceId: 集群ID (Optional)
+ * param backupSpec: 备份规格 (Optional)
+ */
+func NewCreateBackupRequestWithAllParams(
+    regionId string,
+    instanceId *string,
+    backupSpec *rds.BackupSpec,
+) *CreateBackupRequest {
+
+    return &CreateBackupRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/backups",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+        BackupSpec: backupSpec,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewCreateBackupRequestWithoutParam() *CreateBackupRequest {
+
+    return &CreateBackupRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/backups",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 地域代码(Required) */
 func (r *CreateBackupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: 集群ID(Optional) */
 func (r *CreateBackupRequest) SetInstanceId(instanceId string) {
     r.InstanceId = &instanceId
 }
 
+/* param backupSpec: 备份规格(Optional) */
 func (r *CreateBackupRequest) SetBackupSpec(backupSpec *rds.BackupSpec) {
     r.BackupSpec = backupSpec
 }
@@ -80,4 +120,5 @@ type CreateBackupResponse struct {
 }
 
 type CreateBackupResult struct {
+    BackupId string `json:"backupId"`
 }

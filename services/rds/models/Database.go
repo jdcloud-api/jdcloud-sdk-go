@@ -17,11 +17,17 @@
 package models
 
 
-type BackupSpec struct {
+type Database struct {
 
-    /* 备份名称，缺省系统将分配一个随机名称 (Optional) */
-    BackupName *string `json:"backupName"`
+    /* 数据库名称 (Optional) */
+    DbName string `json:"dbName"`
 
-    /* 需要备份的数据库名称列表。如不填，则备份整个实例。</br>SQL Server支持该参数</br><strong>MySQL不支持该参数</strong> (Optional) */
-    DbNames []string `json:"dbNames"`
+    /* 数据库状态 building：创建中， running：运行中 (Optional) */
+    DbStatus string `json:"dbStatus"`
+
+    /* 字符集名称,mysql字符集包括：utf8；SQL Server字符集包括：Chinese_PRC_CI_AS、Chinese_PRC_CS_AS、SQL_Latin1_General_CP1_CI_AS、SQL_Latin1_General_CP1_CS_AS、Chinese_PRC_BIN (Optional) */
+    CharacterSetName string `json:"characterSetName"`
+
+    /* 该数据库相关账户权限列表 (Optional) */
+    AccessPrivilege []DBAccessPrivilege `json:"accessPrivilege"`
 }

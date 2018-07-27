@@ -18,10 +18,9 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    rds "github.com/jdcloud-api/jdcloud-sdk-go/services/rds/models"
 )
 
-type DescribeImportFilesRequest struct {
+type SetImportFileSharedRequest struct {
 
     core.JDCloudRequest
 
@@ -30,59 +29,77 @@ type DescribeImportFilesRequest struct {
 
     /* 实例ID  */
     InstanceId string `json:"instanceId"`
+
+    /* 单库上云文件名  */
+    FileName string `json:"fileName"`
+
+    /* 文件是否共享，不区分大小写，true:共享;false:不共享  */
+    Shared string `json:""`
 }
 
 /*
  * param regionId: 区域编码 (Required)
  * param instanceId: 实例ID (Required)
+ * param fileName: 单库上云文件名 (Required)
+ * param shared: 文件是否共享，不区分大小写，true:共享;false:不共享 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeImportFilesRequest(
+func NewSetImportFileSharedRequest(
     regionId string,
     instanceId string,
-) *DescribeImportFilesRequest {
+    fileName string,
+    shared string,
+) *SetImportFileSharedRequest {
 
-	return &DescribeImportFilesRequest{
+	return &SetImportFileSharedRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/importFiles",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/instances/{instanceId}/importFiles/{fileName}:setShared",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         InstanceId: instanceId,
+        FileName: fileName,
+        Shared: shared,
 	}
 }
 
 /*
  * param regionId: 区域编码 (Required)
  * param instanceId: 实例ID (Required)
+ * param fileName: 单库上云文件名 (Required)
+ * param shared: 文件是否共享，不区分大小写，true:共享;false:不共享 (Required)
  */
-func NewDescribeImportFilesRequestWithAllParams(
+func NewSetImportFileSharedRequestWithAllParams(
     regionId string,
     instanceId string,
-) *DescribeImportFilesRequest {
+    fileName string,
+    shared string,
+) *SetImportFileSharedRequest {
 
-    return &DescribeImportFilesRequest{
+    return &SetImportFileSharedRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/importFiles",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/instances/{instanceId}/importFiles/{fileName}:setShared",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         InstanceId: instanceId,
+        FileName: fileName,
+        Shared: shared,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeImportFilesRequestWithoutParam() *DescribeImportFilesRequest {
+func NewSetImportFileSharedRequestWithoutParam() *SetImportFileSharedRequest {
 
-    return &DescribeImportFilesRequest{
+    return &SetImportFileSharedRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/importFiles",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/instances/{instanceId}/importFiles/{fileName}:setShared",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
@@ -90,27 +107,36 @@ func NewDescribeImportFilesRequestWithoutParam() *DescribeImportFilesRequest {
 }
 
 /* param regionId: 区域编码(Required) */
-func (r *DescribeImportFilesRequest) SetRegionId(regionId string) {
+func (r *SetImportFileSharedRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 实例ID(Required) */
-func (r *DescribeImportFilesRequest) SetInstanceId(instanceId string) {
+func (r *SetImportFileSharedRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
+}
+
+/* param fileName: 单库上云文件名(Required) */
+func (r *SetImportFileSharedRequest) SetFileName(fileName string) {
+    r.FileName = fileName
+}
+
+/* param shared: 文件是否共享，不区分大小写，true:共享;false:不共享(Required) */
+func (r *SetImportFileSharedRequest) SetShared(shared string) {
+    r.Shared = shared
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeImportFilesRequest) GetRegionId() string {
+func (r SetImportFileSharedRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeImportFilesResponse struct {
+type SetImportFileSharedResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeImportFilesResult `json:"result"`
+    Result SetImportFileSharedResult `json:"result"`
 }
 
-type DescribeImportFilesResult struct {
-    ImportFiles []rds.ImportFile `json:"importFiles"`
+type SetImportFileSharedResult struct {
 }

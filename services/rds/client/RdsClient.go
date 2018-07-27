@@ -40,7 +40,7 @@ func NewRdsClient(credential *core.Credential) *RdsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "rds",
-            Revision:    "0.2.3",
+            Revision:    "0.2.5",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -53,8 +53,8 @@ func (c *RdsClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-/* 创建数据库账户 */
-func (c *RdsClient) CreateAccount(request *rds.CreateAccountRequest) (*rds.CreateAccountResponse, error) {
+/* 获取某个审计文件的下载链接</br>- SQL Server：支持</br>- MySQL：暂不支持 */
+func (c *RdsClient) GetAuditDownloadURL(request *rds.GetAuditDownloadURLRequest) (*rds.GetAuditDownloadURLResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -63,7 +63,7 @@ func (c *RdsClient) CreateAccount(request *rds.CreateAccountRequest) (*rds.Creat
         return nil, err
     }
 
-    jdResp := &rds.CreateAccountResponse{}
+    jdResp := &rds.GetAuditDownloadURLResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -72,8 +72,8 @@ func (c *RdsClient) CreateAccount(request *rds.CreateAccountRequest) (*rds.Creat
     return jdResp, err
 }
 
-/* 数据库账号授权 */
-func (c *RdsClient) GrantPrivilege(request *rds.GrantPrivilegeRequest) (*rds.GrantPrivilegeResponse, error) {
+/* RDS实例主备切换</br>- SQL Server：支持</br>- MySQL：暂不支持 */
+func (c *RdsClient) FailoverInstance(request *rds.FailoverInstanceRequest) (*rds.FailoverInstanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -82,7 +82,7 @@ func (c *RdsClient) GrantPrivilege(request *rds.GrantPrivilegeRequest) (*rds.Gra
         return nil, err
     }
 
-    jdResp := &rds.GrantPrivilegeResponse{}
+    jdResp := &rds.FailoverInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -91,7 +91,159 @@ func (c *RdsClient) GrantPrivilege(request *rds.GrantPrivilegeRequest) (*rds.Gra
     return jdResp, err
 }
 
-/* 创建数据库 */
+/* 删除数据库集群实例及Mysql只读实例</br>- SQL Server：支持</br>- MySQL：支持 [MFA enabled] */
+func (c *RdsClient) DeleteInstance(request *rds.DeleteInstanceRequest) (*rds.DeleteInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DeleteInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取上传导入文件的需要的Key</br>- SQL Server：支持</br>- MySQL：暂不支持 */
+func (c *RdsClient) GetUploadKey(request *rds.GetUploadKeyRequest) (*rds.GetUploadKeyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.GetUploadKeyResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 清除/关闭 数据库审计</br>- SQL Server：支持</br>- MySQL：暂不支持 */
+func (c *RdsClient) DeleteAudit(request *rds.DeleteAuditRequest) (*rds.DeleteAuditResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DeleteAuditResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 开启数据库审计</br>- SQL Server：支持</br>- MySQL：暂不支持 */
+func (c *RdsClient) CreateAudit(request *rds.CreateAuditRequest) (*rds.CreateAuditResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.CreateAuditResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除备份</br>- SQL Server：支持</br>- MySQL：暂不支持 */
+func (c *RdsClient) DeleteBackup(request *rds.DeleteBackupRequest) (*rds.DeleteBackupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DeleteBackupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改RDS实例名称</br>- SQL Server：支持</br>- MySQL：暂不支持 */
+func (c *RdsClient) SetInstanceName(request *rds.SetInstanceNameRequest) (*rds.SetInstanceNameResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.SetInstanceNameResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取备份下载链接</br>- SQL Server：支持</br>- MySQL：暂不支持 */
+func (c *RdsClient) DescribeBackupDownloadURL(request *rds.DescribeBackupDownloadURLRequest) (*rds.DescribeBackupDownloadURLResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DescribeBackupDownloadURLResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询RDS实例列表</br>- SQL Server：支持</br>- MySQL：支持 */
+func (c *RdsClient) DescribeInstances(request *rds.DescribeInstancesRequest) (*rds.DescribeInstancesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DescribeInstancesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建数据库</br>- SQL Server：支持</br>- MySQL：暂不支持 */
 func (c *RdsClient) CreateDatabase(request *rds.CreateDatabaseRequest) (*rds.CreateDatabaseResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -110,7 +262,7 @@ func (c *RdsClient) CreateDatabase(request *rds.CreateDatabaseRequest) (*rds.Cre
     return jdResp, err
 }
 
-/* 获取单库上云文件列表 */
+/* 获取单库上云文件列表</br>- SQL Server：支持</br>- MySQL：暂不支持 */
 func (c *RdsClient) DescribeImportFiles(request *rds.DescribeImportFilesRequest) (*rds.DescribeImportFilesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -129,7 +281,7 @@ func (c *RdsClient) DescribeImportFiles(request *rds.DescribeImportFilesRequest)
     return jdResp, err
 }
 
-/* 创建备份 */
+/* 创建备份</br>- SQL Server：支持</br>- MySQL：暂不支持 */
 func (c *RdsClient) CreateBackup(request *rds.CreateBackupRequest) (*rds.CreateBackupResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -148,8 +300,8 @@ func (c *RdsClient) CreateBackup(request *rds.CreateBackupRequest) (*rds.CreateB
     return jdResp, err
 }
 
-/* 获取备份信息 */
-func (c *RdsClient) DescribeBackups(request *rds.DescribeBackupsRequest) (*rds.DescribeBackupsResponse, error) {
+/* 查询性能统计</br>- SQL Server：支持</br>- MySQL：暂不支持 */
+func (c *RdsClient) DescribeQueryPerformance(request *rds.DescribeQueryPerformanceRequest) (*rds.DescribeQueryPerformanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -158,7 +310,7 @@ func (c *RdsClient) DescribeBackups(request *rds.DescribeBackupsRequest) (*rds.D
         return nil, err
     }
 
-    jdResp := &rds.DescribeBackupsResponse{}
+    jdResp := &rds.DescribeQueryPerformanceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -167,8 +319,8 @@ func (c *RdsClient) DescribeBackups(request *rds.DescribeBackupsRequest) (*rds.D
     return jdResp, err
 }
 
-/* 从用户上传的备份文件中恢复SQL Server数据库 */
-func (c *RdsClient) RestoreDatabaseFromFile(request *rds.RestoreDatabaseFromFileRequest) (*rds.RestoreDatabaseFromFileResponse, error) {
+/* 查看审计文件列表</br>- SQL Server：支持</br>- MySQL：暂不支持 */
+func (c *RdsClient) GetAuditFiles(request *rds.GetAuditFilesRequest) (*rds.GetAuditFilesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -177,7 +329,7 @@ func (c *RdsClient) RestoreDatabaseFromFile(request *rds.RestoreDatabaseFromFile
         return nil, err
     }
 
-    jdResp := &rds.RestoreDatabaseFromFileResponse{}
+    jdResp := &rds.GetAuditFilesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -186,26 +338,7 @@ func (c *RdsClient) RestoreDatabaseFromFile(request *rds.RestoreDatabaseFromFile
     return jdResp, err
 }
 
-/* 删除数据库 */
-func (c *RdsClient) DeleteDatabase(request *rds.DeleteDatabaseRequest) (*rds.DeleteDatabaseResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &rds.DeleteDatabaseResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 数据库账号重置密码 */
+/* 数据库账号重置密码</br>- SQL Server：支持</br>- MySQL：暂不支持 */
 func (c *RdsClient) ResetPassword(request *rds.ResetPasswordRequest) (*rds.ResetPasswordResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -224,7 +357,178 @@ func (c *RdsClient) ResetPassword(request *rds.ResetPasswordRequest) (*rds.Reset
     return jdResp, err
 }
 
-/* 删除数据库账户 */
+/* 删除数据库 [MFA enabled] */
+func (c *RdsClient) DeleteDatabase(request *rds.DeleteDatabaseRequest) (*rds.DeleteDatabaseResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DeleteDatabaseResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取SQL Server 错误日志及下载信息</br>- SQL Server：支持</br>- MySQL：暂不支持 */
+func (c *RdsClient) DescribeErrorLogs(request *rds.DescribeErrorLogsRequest) (*rds.DescribeErrorLogsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DescribeErrorLogsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 数据库账号授权</br>- SQL Server：支持</br>- MySQL：暂不支持 */
+func (c *RdsClient) GrantPrivilege(request *rds.GrantPrivilegeRequest) (*rds.GrantPrivilegeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.GrantPrivilegeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查看数据库列表</br>- SQL Server：支持</br>- MySQL：暂不支持 */
+func (c *RdsClient) DescribeDatabases(request *rds.DescribeDatabasesRequest) (*rds.DescribeDatabasesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DescribeDatabasesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查看开启的审计选项</br>- SQL Server：支持</br>- MySQL：暂不支持 */
+func (c *RdsClient) DescribeAudit(request *rds.DescribeAuditRequest) (*rds.DescribeAuditResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DescribeAuditResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取审计所有选项及推荐的选项</br>- SQL Server：支持</br>- MySQL：暂不支持 */
+func (c *RdsClient) GetAuditOptions(request *rds.GetAuditOptionsRequest) (*rds.GetAuditOptionsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.GetAuditOptionsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 从用户上传的备份文件中恢复SQL Server数据库</br>- SQL Server：支持</br>- MySQL：暂不支持 */
+func (c *RdsClient) RestoreDatabaseFromFile(request *rds.RestoreDatabaseFromFileRequest) (*rds.RestoreDatabaseFromFileResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.RestoreDatabaseFromFileResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设置上传文件是否共享给该用户的其他实例</br>- SQL Server：支持</br>- MySQL：暂不支持 */
+func (c *RdsClient) SetImportFileShared(request *rds.SetImportFileSharedRequest) (*rds.SetImportFileSharedResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.SetImportFileSharedResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 索引性能统计</br>- SQL Server：支持</br>- MySQL：暂不支持 */
+func (c *RdsClient) DescribeIndexPerformance(request *rds.DescribeIndexPerformanceRequest) (*rds.DescribeIndexPerformanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DescribeIndexPerformanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除数据库账户</br>- SQL Server：支持</br>- MySQL：暂不支持 */
 func (c *RdsClient) DeleteAccount(request *rds.DeleteAccountRequest) (*rds.DeleteAccountResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -243,7 +547,7 @@ func (c *RdsClient) DeleteAccount(request *rds.DeleteAccountRequest) (*rds.Delet
     return jdResp, err
 }
 
-/* 从云数据库SQL Server备份中恢复单个数据库 */
+/* 从云数据库SQL Server备份中恢复单个数据库</br>- SQL Server：支持</br>- MySQL：暂不支持 */
 func (c *RdsClient) RestoreDatabaseFromBackup(request *rds.RestoreDatabaseFromBackupRequest) (*rds.RestoreDatabaseFromBackupResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -262,8 +566,8 @@ func (c *RdsClient) RestoreDatabaseFromBackup(request *rds.RestoreDatabaseFromBa
     return jdResp, err
 }
 
-/* 获取备份下载链接 */
-func (c *RdsClient) DescribeBackupDownloadURL(request *rds.DescribeBackupDownloadURLRequest) (*rds.DescribeBackupDownloadURLResponse, error) {
+/* 查看实例下所有账号信息</br>- SQL Server：支持</br>- MySQL：暂不支持 */
+func (c *RdsClient) DescribeAccounts(request *rds.DescribeAccountsRequest) (*rds.DescribeAccountsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -272,7 +576,140 @@ func (c *RdsClient) DescribeBackupDownloadURL(request *rds.DescribeBackupDownloa
         return nil, err
     }
 
-    jdResp := &rds.DescribeBackupDownloadURLResponse{}
+    jdResp := &rds.DescribeAccountsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建数据库账户</br>- SQL Server：支持</br>- MySQL：暂不支持 */
+func (c *RdsClient) CreateAccount(request *rds.CreateAccountRequest) (*rds.CreateAccountResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.CreateAccountResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建数据库集群实例</br>- SQL Server：支持</br>- MySQL：支持 */
+func (c *RdsClient) CreateInstance(request *rds.CreateInstanceRequest) (*rds.CreateInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.CreateInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取备份信息</br>- SQL Server：支持</br>- MySQL：暂不支持 */
+func (c *RdsClient) DescribeBackups(request *rds.DescribeBackupsRequest) (*rds.DescribeBackupsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DescribeBackupsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改当前审计选项</br>- SQL Server：支持</br>- MySQL：暂不支持 */
+func (c *RdsClient) ModifyAudit(request *rds.ModifyAuditRequest) (*rds.ModifyAuditResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.ModifyAuditResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 重启RDS实例</br>- SQL Server：支持</br>- MySQL：暂不支持 */
+func (c *RdsClient) RebootInstance(request *rds.RebootInstanceRequest) (*rds.RebootInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.RebootInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询RDS实例详细信息</br>- SQL Server：支持</br>- MySQL：支持 */
+func (c *RdsClient) DescribeInstanceAttributes(request *rds.DescribeInstanceAttributesRequest) (*rds.DescribeInstanceAttributesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DescribeInstanceAttributesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 从OSS恢复SQL Server数据库</br>- SQL Server：支持</br>- MySQL：暂不支持 */
+func (c *RdsClient) RestoreDatabaseFromOSS(request *rds.RestoreDatabaseFromOSSRequest) (*rds.RestoreDatabaseFromOSSResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.RestoreDatabaseFromOSSResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err

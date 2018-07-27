@@ -18,99 +18,113 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    rds "github.com/jdcloud-api/jdcloud-sdk-go/services/rds/models"
 )
 
-type DescribeImportFilesRequest struct {
+type GetAuditOptionsRequest struct {
 
     core.JDCloudRequest
 
-    /* 区域编码  */
+    /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 实例ID  */
+    /* Instance ID  */
     InstanceId string `json:"instanceId"`
+
+    /* 审计选项类别，大小写敏感  */
+    Name string `json:""`
 }
 
 /*
- * param regionId: 区域编码 (Required)
- * param instanceId: 实例ID (Required)
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
+ * param name: 审计选项类别，大小写敏感 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeImportFilesRequest(
+func NewGetAuditOptionsRequest(
     regionId string,
     instanceId string,
-) *DescribeImportFilesRequest {
+    name string,
+) *GetAuditOptionsRequest {
 
-	return &DescribeImportFilesRequest{
+	return &GetAuditOptionsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/importFiles",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/instances/{instanceId}/audit:getOptions",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         InstanceId: instanceId,
+        Name: name,
 	}
 }
 
 /*
- * param regionId: 区域编码 (Required)
- * param instanceId: 实例ID (Required)
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
+ * param name: 审计选项类别，大小写敏感 (Required)
  */
-func NewDescribeImportFilesRequestWithAllParams(
+func NewGetAuditOptionsRequestWithAllParams(
     regionId string,
     instanceId string,
-) *DescribeImportFilesRequest {
+    name string,
+) *GetAuditOptionsRequest {
 
-    return &DescribeImportFilesRequest{
+    return &GetAuditOptionsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/importFiles",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/instances/{instanceId}/audit:getOptions",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         InstanceId: instanceId,
+        Name: name,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeImportFilesRequestWithoutParam() *DescribeImportFilesRequest {
+func NewGetAuditOptionsRequestWithoutParam() *GetAuditOptionsRequest {
 
-    return &DescribeImportFilesRequest{
+    return &GetAuditOptionsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/importFiles",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/instances/{instanceId}/audit:getOptions",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
     }
 }
 
-/* param regionId: 区域编码(Required) */
-func (r *DescribeImportFilesRequest) SetRegionId(regionId string) {
+/* param regionId: Region ID(Required) */
+func (r *GetAuditOptionsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 实例ID(Required) */
-func (r *DescribeImportFilesRequest) SetInstanceId(instanceId string) {
+/* param instanceId: Instance ID(Required) */
+func (r *GetAuditOptionsRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
+}
+
+/* param name: 审计选项类别，大小写敏感(Required) */
+func (r *GetAuditOptionsRequest) SetName(name string) {
+    r.Name = name
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeImportFilesRequest) GetRegionId() string {
+func (r GetAuditOptionsRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeImportFilesResponse struct {
+type GetAuditOptionsResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeImportFilesResult `json:"result"`
+    Result GetAuditOptionsResult `json:"result"`
 }
 
-type DescribeImportFilesResult struct {
-    ImportFiles []rds.ImportFile `json:"importFiles"`
+type GetAuditOptionsResult struct {
+    Enabled []string `json:"enabled"`
+    Disabled []string `json:"disabled"`
 }

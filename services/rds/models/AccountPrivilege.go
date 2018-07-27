@@ -22,6 +22,6 @@ type AccountPrivilege struct {
     /* 数据库名称 (Optional) */
     DbName *string `json:"dbName"`
 
-    /* 对数据库具有的权限,ro:只读  rw:读写 (Optional) */
+    /* 对数据库具有的权限</br>ro:只读</br>rw:读写 (Optional) */
     Privilege *string `json:"privilege"`
 }

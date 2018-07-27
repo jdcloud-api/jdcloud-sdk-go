@@ -38,10 +38,12 @@ type ResetPasswordRequest struct {
 }
 
 /*
- * param regionId: 地域代码 
- * param instanceId: 实例ID 
- * param accountName: 账户名 
- * param accountPassword: 新密码 
+ * param regionId: 地域代码 (Required)
+ * param instanceId: 实例ID (Required)
+ * param accountName: 账户名 (Required)
+ * param accountPassword: 新密码 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewResetPasswordRequest(
     regionId string,
@@ -64,18 +66,62 @@ func NewResetPasswordRequest(
 	}
 }
 
+/*
+ * param regionId: 地域代码 (Required)
+ * param instanceId: 实例ID (Required)
+ * param accountName: 账户名 (Required)
+ * param accountPassword: 新密码 (Required)
+ */
+func NewResetPasswordRequestWithAllParams(
+    regionId string,
+    instanceId string,
+    accountName string,
+    accountPassword string,
+) *ResetPasswordRequest {
+
+    return &ResetPasswordRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}/accounts/{accountName}:resetPassword",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+        AccountName: accountName,
+        AccountPassword: accountPassword,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewResetPasswordRequestWithoutParam() *ResetPasswordRequest {
+
+    return &ResetPasswordRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}/accounts/{accountName}:resetPassword",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 地域代码(Required) */
 func (r *ResetPasswordRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: 实例ID(Required) */
 func (r *ResetPasswordRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
+/* param accountName: 账户名(Required) */
 func (r *ResetPasswordRequest) SetAccountName(accountName string) {
     r.AccountName = accountName
 }
 
+/* param accountPassword: 新密码(Required) */
 func (r *ResetPasswordRequest) SetAccountPassword(accountPassword string) {
     r.AccountPassword = accountPassword
 }

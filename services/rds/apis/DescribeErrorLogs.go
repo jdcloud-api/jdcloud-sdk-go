@@ -21,31 +21,31 @@ import (
     rds "github.com/jdcloud-api/jdcloud-sdk-go/services/rds/models"
 )
 
-type DescribeImportFilesRequest struct {
+type DescribeErrorLogsRequest struct {
 
     core.JDCloudRequest
 
-    /* 区域编码  */
+    /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 实例ID  */
+    /* Instance ID  */
     InstanceId string `json:"instanceId"`
 }
 
 /*
- * param regionId: 区域编码 (Required)
- * param instanceId: 实例ID (Required)
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeImportFilesRequest(
+func NewDescribeErrorLogsRequest(
     regionId string,
     instanceId string,
-) *DescribeImportFilesRequest {
+) *DescribeErrorLogsRequest {
 
-	return &DescribeImportFilesRequest{
+	return &DescribeErrorLogsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/importFiles",
+			URL:     "/regions/{regionId}/instances/{instanceId}/errorLogs",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -56,17 +56,17 @@ func NewDescribeImportFilesRequest(
 }
 
 /*
- * param regionId: 区域编码 (Required)
- * param instanceId: 实例ID (Required)
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
  */
-func NewDescribeImportFilesRequestWithAllParams(
+func NewDescribeErrorLogsRequestWithAllParams(
     regionId string,
     instanceId string,
-) *DescribeImportFilesRequest {
+) *DescribeErrorLogsRequest {
 
-    return &DescribeImportFilesRequest{
+    return &DescribeErrorLogsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/importFiles",
+            URL:     "/regions/{regionId}/instances/{instanceId}/errorLogs",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -77,11 +77,11 @@ func NewDescribeImportFilesRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeImportFilesRequestWithoutParam() *DescribeImportFilesRequest {
+func NewDescribeErrorLogsRequestWithoutParam() *DescribeErrorLogsRequest {
 
-    return &DescribeImportFilesRequest{
+    return &DescribeErrorLogsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/importFiles",
+            URL:     "/regions/{regionId}/instances/{instanceId}/errorLogs",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -89,28 +89,28 @@ func NewDescribeImportFilesRequestWithoutParam() *DescribeImportFilesRequest {
     }
 }
 
-/* param regionId: 区域编码(Required) */
-func (r *DescribeImportFilesRequest) SetRegionId(regionId string) {
+/* param regionId: Region ID(Required) */
+func (r *DescribeErrorLogsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 实例ID(Required) */
-func (r *DescribeImportFilesRequest) SetInstanceId(instanceId string) {
+/* param instanceId: Instance ID(Required) */
+func (r *DescribeErrorLogsRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeImportFilesRequest) GetRegionId() string {
+func (r DescribeErrorLogsRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeImportFilesResponse struct {
+type DescribeErrorLogsResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeImportFilesResult `json:"result"`
+    Result DescribeErrorLogsResult `json:"result"`
 }
 
-type DescribeImportFilesResult struct {
-    ImportFiles []rds.ImportFile `json:"importFiles"`
+type DescribeErrorLogsResult struct {
+    ErrorLogs []rds.ErrorLog `json:"errorLogs"`
 }

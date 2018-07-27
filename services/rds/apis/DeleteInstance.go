@@ -18,35 +18,34 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    rds "github.com/jdcloud-api/jdcloud-sdk-go/services/rds/models"
 )
 
-type DescribeImportFilesRequest struct {
+type DeleteInstanceRequest struct {
 
     core.JDCloudRequest
 
-    /* 区域编码  */
+    /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 实例ID  */
+    /* Instance ID  */
     InstanceId string `json:"instanceId"`
 }
 
 /*
- * param regionId: 区域编码 (Required)
- * param instanceId: 实例ID (Required)
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeImportFilesRequest(
+func NewDeleteInstanceRequest(
     regionId string,
     instanceId string,
-) *DescribeImportFilesRequest {
+) *DeleteInstanceRequest {
 
-	return &DescribeImportFilesRequest{
+	return &DeleteInstanceRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/importFiles",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/instances/{instanceId}",
+			Method:  "DELETE",
 			Header:  nil,
 			Version: "v1",
 		},
@@ -56,18 +55,18 @@ func NewDescribeImportFilesRequest(
 }
 
 /*
- * param regionId: 区域编码 (Required)
- * param instanceId: 实例ID (Required)
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
  */
-func NewDescribeImportFilesRequestWithAllParams(
+func NewDeleteInstanceRequestWithAllParams(
     regionId string,
     instanceId string,
-) *DescribeImportFilesRequest {
+) *DeleteInstanceRequest {
 
-    return &DescribeImportFilesRequest{
+    return &DeleteInstanceRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/importFiles",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/instances/{instanceId}",
+            Method:  "DELETE",
             Header:  nil,
             Version: "v1",
         },
@@ -77,40 +76,39 @@ func NewDescribeImportFilesRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeImportFilesRequestWithoutParam() *DescribeImportFilesRequest {
+func NewDeleteInstanceRequestWithoutParam() *DeleteInstanceRequest {
 
-    return &DescribeImportFilesRequest{
+    return &DeleteInstanceRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/importFiles",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/instances/{instanceId}",
+            Method:  "DELETE",
             Header:  nil,
             Version: "v1",
         },
     }
 }
 
-/* param regionId: 区域编码(Required) */
-func (r *DescribeImportFilesRequest) SetRegionId(regionId string) {
+/* param regionId: Region ID(Required) */
+func (r *DeleteInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 实例ID(Required) */
-func (r *DescribeImportFilesRequest) SetInstanceId(instanceId string) {
+/* param instanceId: Instance ID(Required) */
+func (r *DeleteInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeImportFilesRequest) GetRegionId() string {
+func (r DeleteInstanceRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeImportFilesResponse struct {
+type DeleteInstanceResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeImportFilesResult `json:"result"`
+    Result DeleteInstanceResult `json:"result"`
 }
 
-type DescribeImportFilesResult struct {
-    ImportFiles []rds.ImportFile `json:"importFiles"`
+type DeleteInstanceResult struct {
 }
