@@ -17,11 +17,23 @@
 package models
 
 
-type BackupSpec struct {
+type ErrorLog struct {
 
-    /* 备份名称，缺省系统将分配一个随机名称 (Optional) */
-    BackupName *string `json:"backupName"`
+    /* 错误日志名称 (Optional) */
+    Name string `json:"name"`
 
-    /* 需要备份的数据库名称列表。如不填，则备份整个实例。</br>SQL Server支持该参数</br><strong>MySQL不支持该参数</strong> (Optional) */
-    DbNames []string `json:"dbNames"`
+    /* 错误日志大小，单位Byte (Optional) */
+    SizeByte int64 `json:"sizeByte"`
+
+    /* 错误日志最后更新时间，格式为：YYYY-MM-DD HH:mm:ss (Optional) */
+    LastUpdateTime string `json:"lastUpdateTime"`
+
+    /* 错误日志上传时间，格式为：YYYY-MM-DD HH:mm:ss (Optional) */
+    UploadTime string `json:"uploadTime"`
+
+    /* 公网下载链接 (Optional) */
+    PublicURL string `json:"publicURL"`
+
+    /* 内网下载链接 (Optional) */
+    InternalURL string `json:"internalURL"`
 }

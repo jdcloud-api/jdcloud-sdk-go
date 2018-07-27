@@ -35,9 +35,11 @@ type DeleteAccountRequest struct {
 }
 
 /*
- * param regionId: 地域代码 
- * param instanceId: 实例ID 
- * param accountName: 账户名 
+ * param regionId: 地域代码 (Required)
+ * param instanceId: 实例ID (Required)
+ * param accountName: 账户名 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDeleteAccountRequest(
     regionId string,
@@ -58,14 +60,54 @@ func NewDeleteAccountRequest(
 	}
 }
 
+/*
+ * param regionId: 地域代码 (Required)
+ * param instanceId: 实例ID (Required)
+ * param accountName: 账户名 (Required)
+ */
+func NewDeleteAccountRequestWithAllParams(
+    regionId string,
+    instanceId string,
+    accountName string,
+) *DeleteAccountRequest {
+
+    return &DeleteAccountRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}/accounts/{accountName}",
+            Method:  "DELETE",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+        AccountName: accountName,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDeleteAccountRequestWithoutParam() *DeleteAccountRequest {
+
+    return &DeleteAccountRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}/accounts/{accountName}",
+            Method:  "DELETE",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 地域代码(Required) */
 func (r *DeleteAccountRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: 实例ID(Required) */
 func (r *DeleteAccountRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
+/* param accountName: 账户名(Required) */
 func (r *DeleteAccountRequest) SetAccountName(accountName string) {
     r.AccountName = accountName
 }

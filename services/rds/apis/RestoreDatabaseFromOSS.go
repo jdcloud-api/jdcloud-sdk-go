@@ -20,7 +20,7 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type RestoreDatabaseFromBackupRequest struct {
+type RestoreDatabaseFromOSSRequest struct {
 
     core.JDCloudRequest
 
@@ -33,33 +33,28 @@ type RestoreDatabaseFromBackupRequest struct {
     /* 库名称  */
     DbName string `json:"dbName"`
 
-    /* 备份ID  */
-    BackupId string `json:""`
-
-    /* 指定该备份中用于恢复数据库的文件名称  */
-    BackupFileName string `json:""`
+    /* 用户在单库上云中上传的文件地址  */
+    OssURL string `json:""`
 }
 
 /*
  * param regionId: 区域代码 (Required)
  * param instanceId: 实例ID (Required)
  * param dbName: 库名称 (Required)
- * param backupId: 备份ID (Required)
- * param backupFileName: 指定该备份中用于恢复数据库的文件名称 (Required)
+ * param ossURL: 用户在单库上云中上传的文件地址 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewRestoreDatabaseFromBackupRequest(
+func NewRestoreDatabaseFromOSSRequest(
     regionId string,
     instanceId string,
     dbName string,
-    backupId string,
-    backupFileName string,
-) *RestoreDatabaseFromBackupRequest {
+    ossURL string,
+) *RestoreDatabaseFromOSSRequest {
 
-	return &RestoreDatabaseFromBackupRequest{
+	return &RestoreDatabaseFromOSSRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/databases/{dbName}:restoreDatabaseFromBackup",
+			URL:     "/regions/{regionId}/instances/{instanceId}/databases/{dbName}:restoreDatabaseFromOSS",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -67,8 +62,7 @@ func NewRestoreDatabaseFromBackupRequest(
         RegionId: regionId,
         InstanceId: instanceId,
         DbName: dbName,
-        BackupId: backupId,
-        BackupFileName: backupFileName,
+        OssURL: ossURL,
 	}
 }
 
@@ -76,20 +70,18 @@ func NewRestoreDatabaseFromBackupRequest(
  * param regionId: 区域代码 (Required)
  * param instanceId: 实例ID (Required)
  * param dbName: 库名称 (Required)
- * param backupId: 备份ID (Required)
- * param backupFileName: 指定该备份中用于恢复数据库的文件名称 (Required)
+ * param ossURL: 用户在单库上云中上传的文件地址 (Required)
  */
-func NewRestoreDatabaseFromBackupRequestWithAllParams(
+func NewRestoreDatabaseFromOSSRequestWithAllParams(
     regionId string,
     instanceId string,
     dbName string,
-    backupId string,
-    backupFileName string,
-) *RestoreDatabaseFromBackupRequest {
+    ossURL string,
+) *RestoreDatabaseFromOSSRequest {
 
-    return &RestoreDatabaseFromBackupRequest{
+    return &RestoreDatabaseFromOSSRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/databases/{dbName}:restoreDatabaseFromBackup",
+            URL:     "/regions/{regionId}/instances/{instanceId}/databases/{dbName}:restoreDatabaseFromOSS",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -97,17 +89,16 @@ func NewRestoreDatabaseFromBackupRequestWithAllParams(
         RegionId: regionId,
         InstanceId: instanceId,
         DbName: dbName,
-        BackupId: backupId,
-        BackupFileName: backupFileName,
+        OssURL: ossURL,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewRestoreDatabaseFromBackupRequestWithoutParam() *RestoreDatabaseFromBackupRequest {
+func NewRestoreDatabaseFromOSSRequestWithoutParam() *RestoreDatabaseFromOSSRequest {
 
-    return &RestoreDatabaseFromBackupRequest{
+    return &RestoreDatabaseFromOSSRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/databases/{dbName}:restoreDatabaseFromBackup",
+            URL:     "/regions/{regionId}/instances/{instanceId}/databases/{dbName}:restoreDatabaseFromOSS",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -116,41 +107,36 @@ func NewRestoreDatabaseFromBackupRequestWithoutParam() *RestoreDatabaseFromBacku
 }
 
 /* param regionId: 区域代码(Required) */
-func (r *RestoreDatabaseFromBackupRequest) SetRegionId(regionId string) {
+func (r *RestoreDatabaseFromOSSRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 实例ID(Required) */
-func (r *RestoreDatabaseFromBackupRequest) SetInstanceId(instanceId string) {
+func (r *RestoreDatabaseFromOSSRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
 /* param dbName: 库名称(Required) */
-func (r *RestoreDatabaseFromBackupRequest) SetDbName(dbName string) {
+func (r *RestoreDatabaseFromOSSRequest) SetDbName(dbName string) {
     r.DbName = dbName
 }
 
-/* param backupId: 备份ID(Required) */
-func (r *RestoreDatabaseFromBackupRequest) SetBackupId(backupId string) {
-    r.BackupId = backupId
-}
-
-/* param backupFileName: 指定该备份中用于恢复数据库的文件名称(Required) */
-func (r *RestoreDatabaseFromBackupRequest) SetBackupFileName(backupFileName string) {
-    r.BackupFileName = backupFileName
+/* param ossURL: 用户在单库上云中上传的文件地址(Required) */
+func (r *RestoreDatabaseFromOSSRequest) SetOssURL(ossURL string) {
+    r.OssURL = ossURL
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r RestoreDatabaseFromBackupRequest) GetRegionId() string {
+func (r RestoreDatabaseFromOSSRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type RestoreDatabaseFromBackupResponse struct {
+type RestoreDatabaseFromOSSResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result RestoreDatabaseFromBackupResult `json:"result"`
+    Result RestoreDatabaseFromOSSResult `json:"result"`
 }
 
-type RestoreDatabaseFromBackupResult struct {
+type RestoreDatabaseFromOSSResult struct {
 }

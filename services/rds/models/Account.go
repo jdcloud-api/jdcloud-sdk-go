@@ -17,11 +17,14 @@
 package models
 
 
-type BackupSpec struct {
+type Account struct {
 
-    /* 备份名称，缺省系统将分配一个随机名称 (Optional) */
-    BackupName *string `json:"backupName"`
+    /* 账号名称 (Optional) */
+    AccountName string `json:"accountName"`
 
-    /* 需要备份的数据库名称列表。如不填，则备份整个实例。</br>SQL Server支持该参数</br><strong>MySQL不支持该参数</strong> (Optional) */
-    DbNames []string `json:"dbNames"`
+    /* 账号状态，building：创建中，running：运行中 (Optional) */
+    AccountStatus string `json:"accountStatus"`
+
+    /* 账户权限列表 (Optional) */
+    AccountPrivileges []AccountPrivilege `json:"accountPrivileges"`
 }

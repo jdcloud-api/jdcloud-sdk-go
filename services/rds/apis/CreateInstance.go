@@ -21,96 +21,96 @@ import (
     rds "github.com/jdcloud-api/jdcloud-sdk-go/services/rds/models"
 )
 
-type DescribeImportFilesRequest struct {
+type CreateInstanceRequest struct {
 
     core.JDCloudRequest
 
-    /* 区域编码  */
+    /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 实例ID  */
-    InstanceId string `json:"instanceId"`
+    /* 新建实例规格  */
+    InstanceSpec *rds.DBInstanceSpec `json:"instanceSpec"`
 }
 
 /*
- * param regionId: 区域编码 (Required)
- * param instanceId: 实例ID (Required)
+ * param regionId: Region ID (Required)
+ * param instanceSpec: 新建实例规格 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeImportFilesRequest(
+func NewCreateInstanceRequest(
     regionId string,
-    instanceId string,
-) *DescribeImportFilesRequest {
+    instanceSpec *rds.DBInstanceSpec,
+) *CreateInstanceRequest {
 
-	return &DescribeImportFilesRequest{
+	return &CreateInstanceRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/importFiles",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/instances",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        InstanceId: instanceId,
+        InstanceSpec: instanceSpec,
 	}
 }
 
 /*
- * param regionId: 区域编码 (Required)
- * param instanceId: 实例ID (Required)
+ * param regionId: Region ID (Required)
+ * param instanceSpec: 新建实例规格 (Required)
  */
-func NewDescribeImportFilesRequestWithAllParams(
+func NewCreateInstanceRequestWithAllParams(
     regionId string,
-    instanceId string,
-) *DescribeImportFilesRequest {
+    instanceSpec *rds.DBInstanceSpec,
+) *CreateInstanceRequest {
 
-    return &DescribeImportFilesRequest{
+    return &CreateInstanceRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/importFiles",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/instances",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        InstanceId: instanceId,
+        InstanceSpec: instanceSpec,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeImportFilesRequestWithoutParam() *DescribeImportFilesRequest {
+func NewCreateInstanceRequestWithoutParam() *CreateInstanceRequest {
 
-    return &DescribeImportFilesRequest{
+    return &CreateInstanceRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/importFiles",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/instances",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
     }
 }
 
-/* param regionId: 区域编码(Required) */
-func (r *DescribeImportFilesRequest) SetRegionId(regionId string) {
+/* param regionId: Region ID(Required) */
+func (r *CreateInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 实例ID(Required) */
-func (r *DescribeImportFilesRequest) SetInstanceId(instanceId string) {
-    r.InstanceId = instanceId
+/* param instanceSpec: 新建实例规格(Required) */
+func (r *CreateInstanceRequest) SetInstanceSpec(instanceSpec *rds.DBInstanceSpec) {
+    r.InstanceSpec = instanceSpec
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeImportFilesRequest) GetRegionId() string {
+func (r CreateInstanceRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeImportFilesResponse struct {
+type CreateInstanceResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeImportFilesResult `json:"result"`
+    Result CreateInstanceResult `json:"result"`
 }
 
-type DescribeImportFilesResult struct {
-    ImportFiles []rds.ImportFile `json:"importFiles"`
+type CreateInstanceResult struct {
+    InstanceId string `json:"instanceId"`
 }

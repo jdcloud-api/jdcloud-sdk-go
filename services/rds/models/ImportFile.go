@@ -19,16 +19,16 @@ package models
 
 type ImportFile struct {
 
-    /* 文件名称 (Optional) */
+    /* 上传的备份文件名称 (Optional) */
     Name string `json:"name"`
 
     /* 如果该文件是共享文件，则有全局ID，如不是共享文件，则为空 (Optional) */
     SharedFileGid string `json:"sharedFileGid"`
 
-    /* 文件大小 (Optional) */
+    /* 文件大小，单位Byte (Optional) */
     SizeByte int `json:"sizeByte"`
 
-    /* 文件上传完成时间 (Optional) */
+    /* 文件上传完成时间，格式为：YYYY-MM-DD HH:mm:ss (Optional) */
     UploadTime string `json:"uploadTime"`
 
     /* 是否所属当前实例. “true”或者“false” (Optional) */

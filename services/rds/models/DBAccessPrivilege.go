@@ -17,11 +17,11 @@
 package models
 
 
-type BackupSpec struct {
+type DBAccessPrivilege struct {
 
-    /* 备份名称，缺省系统将分配一个随机名称 (Optional) */
-    BackupName *string `json:"backupName"`
+    /* 账号名称 (Optional) */
+    AccountName string `json:"accountName"`
 
-    /* 需要备份的数据库名称列表。如不填，则备份整个实例。</br>SQL Server支持该参数</br><strong>MySQL不支持该参数</strong> (Optional) */
-    DbNames []string `json:"dbNames"`
+    /* 对数据库具有的权限,ro:只读  rw:读写 (Optional) */
+    Privilege string `json:"privilege"`
 }

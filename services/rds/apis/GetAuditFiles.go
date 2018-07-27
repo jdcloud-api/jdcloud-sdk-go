@@ -21,32 +21,32 @@ import (
     rds "github.com/jdcloud-api/jdcloud-sdk-go/services/rds/models"
 )
 
-type DescribeImportFilesRequest struct {
+type GetAuditFilesRequest struct {
 
     core.JDCloudRequest
 
-    /* 区域编码  */
+    /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 实例ID  */
+    /* Instance ID  */
     InstanceId string `json:"instanceId"`
 }
 
 /*
- * param regionId: 区域编码 (Required)
- * param instanceId: 实例ID (Required)
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeImportFilesRequest(
+func NewGetAuditFilesRequest(
     regionId string,
     instanceId string,
-) *DescribeImportFilesRequest {
+) *GetAuditFilesRequest {
 
-	return &DescribeImportFilesRequest{
+	return &GetAuditFilesRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/importFiles",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/instances/{instanceId}/audit:getAuditFiles",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
@@ -56,18 +56,18 @@ func NewDescribeImportFilesRequest(
 }
 
 /*
- * param regionId: 区域编码 (Required)
- * param instanceId: 实例ID (Required)
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
  */
-func NewDescribeImportFilesRequestWithAllParams(
+func NewGetAuditFilesRequestWithAllParams(
     regionId string,
     instanceId string,
-) *DescribeImportFilesRequest {
+) *GetAuditFilesRequest {
 
-    return &DescribeImportFilesRequest{
+    return &GetAuditFilesRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/importFiles",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/instances/{instanceId}/audit:getAuditFiles",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
@@ -77,40 +77,40 @@ func NewDescribeImportFilesRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeImportFilesRequestWithoutParam() *DescribeImportFilesRequest {
+func NewGetAuditFilesRequestWithoutParam() *GetAuditFilesRequest {
 
-    return &DescribeImportFilesRequest{
+    return &GetAuditFilesRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/importFiles",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/instances/{instanceId}/audit:getAuditFiles",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
     }
 }
 
-/* param regionId: 区域编码(Required) */
-func (r *DescribeImportFilesRequest) SetRegionId(regionId string) {
+/* param regionId: Region ID(Required) */
+func (r *GetAuditFilesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 实例ID(Required) */
-func (r *DescribeImportFilesRequest) SetInstanceId(instanceId string) {
+/* param instanceId: Instance ID(Required) */
+func (r *GetAuditFilesRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeImportFilesRequest) GetRegionId() string {
+func (r GetAuditFilesRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeImportFilesResponse struct {
+type GetAuditFilesResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeImportFilesResult `json:"result"`
+    Result GetAuditFilesResult `json:"result"`
 }
 
-type DescribeImportFilesResult struct {
-    ImportFiles []rds.ImportFile `json:"importFiles"`
+type GetAuditFilesResult struct {
+    AuditFiles []rds.AuditFile `json:"auditFiles"`
 }

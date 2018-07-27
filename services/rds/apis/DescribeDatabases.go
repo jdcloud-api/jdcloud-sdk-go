@@ -21,31 +21,34 @@ import (
     rds "github.com/jdcloud-api/jdcloud-sdk-go/services/rds/models"
 )
 
-type DescribeImportFilesRequest struct {
+type DescribeDatabasesRequest struct {
 
     core.JDCloudRequest
 
-    /* 区域编码  */
+    /* 区域代码  */
     RegionId string `json:"regionId"`
 
     /* 实例ID  */
     InstanceId string `json:"instanceId"`
+
+    /* 数据库名称 (Optional) */
+    DbName *string `json:"dbName"`
 }
 
 /*
- * param regionId: 区域编码 (Required)
+ * param regionId: 区域代码 (Required)
  * param instanceId: 实例ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeImportFilesRequest(
+func NewDescribeDatabasesRequest(
     regionId string,
     instanceId string,
-) *DescribeImportFilesRequest {
+) *DescribeDatabasesRequest {
 
-	return &DescribeImportFilesRequest{
+	return &DescribeDatabasesRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/importFiles",
+			URL:     "/regions/{regionId}/instances/{instanceId}/databases",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -56,32 +59,35 @@ func NewDescribeImportFilesRequest(
 }
 
 /*
- * param regionId: 区域编码 (Required)
+ * param regionId: 区域代码 (Required)
  * param instanceId: 实例ID (Required)
+ * param dbName: 数据库名称 (Optional)
  */
-func NewDescribeImportFilesRequestWithAllParams(
+func NewDescribeDatabasesRequestWithAllParams(
     regionId string,
     instanceId string,
-) *DescribeImportFilesRequest {
+    dbName *string,
+) *DescribeDatabasesRequest {
 
-    return &DescribeImportFilesRequest{
+    return &DescribeDatabasesRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/importFiles",
+            URL:     "/regions/{regionId}/instances/{instanceId}/databases",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         InstanceId: instanceId,
+        DbName: dbName,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeImportFilesRequestWithoutParam() *DescribeImportFilesRequest {
+func NewDescribeDatabasesRequestWithoutParam() *DescribeDatabasesRequest {
 
-    return &DescribeImportFilesRequest{
+    return &DescribeDatabasesRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/importFiles",
+            URL:     "/regions/{regionId}/instances/{instanceId}/databases",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -89,28 +95,33 @@ func NewDescribeImportFilesRequestWithoutParam() *DescribeImportFilesRequest {
     }
 }
 
-/* param regionId: 区域编码(Required) */
-func (r *DescribeImportFilesRequest) SetRegionId(regionId string) {
+/* param regionId: 区域代码(Required) */
+func (r *DescribeDatabasesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 实例ID(Required) */
-func (r *DescribeImportFilesRequest) SetInstanceId(instanceId string) {
+func (r *DescribeDatabasesRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
+}
+
+/* param dbName: 数据库名称(Optional) */
+func (r *DescribeDatabasesRequest) SetDbName(dbName string) {
+    r.DbName = &dbName
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeImportFilesRequest) GetRegionId() string {
+func (r DescribeDatabasesRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeImportFilesResponse struct {
+type DescribeDatabasesResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeImportFilesResult `json:"result"`
+    Result DescribeDatabasesResult `json:"result"`
 }
 
-type DescribeImportFilesResult struct {
-    ImportFiles []rds.ImportFile `json:"importFiles"`
+type DescribeDatabasesResult struct {
+    Databases []rds.Database `json:"databases"`
 }

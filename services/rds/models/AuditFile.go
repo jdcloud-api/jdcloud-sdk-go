@@ -17,11 +17,17 @@
 package models
 
 
-type BackupSpec struct {
+type AuditFile struct {
 
-    /* 备份名称，缺省系统将分配一个随机名称 (Optional) */
-    BackupName *string `json:"backupName"`
+    /* 审计日志名称 (Optional) */
+    Name string `json:"name"`
 
-    /* 需要备份的数据库名称列表。如不填，则备份整个实例。</br>SQL Server支持该参数</br><strong>MySQL不支持该参数</strong> (Optional) */
-    DbNames []string `json:"dbNames"`
+    /* 审计日志大小，单位Byte (Optional) */
+    SizeByte int64 `json:"sizeByte"`
+
+    /* 审计日志最后更新时间 (Optional) */
+    LastUpdateTime string `json:"lastUpdateTime"`
+
+    /* 审计日志上传时间 (Optional) */
+    UploadTime string `json:"uploadTime"`
 }
