@@ -32,7 +32,7 @@ type DescribeVpcsRequest struct {
     /* 页码, 默认为1, 取值范围：[1,∞), 页码超过总页数时, 显示最后一页 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* 分页大小，默认为20，取值范围：[10,500] (Optional) */
+    /* 分页大小，默认为20，取值范围：[10,100] (Optional) */
     PageSize *int `json:"pageSize"`
 
     /* vpcIds - vpc ID列表，支持多个
@@ -42,12 +42,9 @@ vpcNames - vpc名称列表,支持多个
 }
 
 /*
- * param regionId: Region ID 
- * param pageNumber: 页码, 默认为1, 取值范围：[1,∞), 页码超过总页数时, 显示最后一页 (Optional)
- * param pageSize: 分页大小，默认为20，取值范围：[10,500] (Optional)
- * param filters: vpcIds - vpc ID列表，支持多个
-vpcNames - vpc名称列表,支持多个
- (Optional)
+ * param regionId: Region ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeVpcsRequest(
     regionId string,
@@ -64,18 +61,66 @@ func NewDescribeVpcsRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param pageNumber: 页码, 默认为1, 取值范围：[1,∞), 页码超过总页数时, 显示最后一页 (Optional)
+ * param pageSize: 分页大小，默认为20，取值范围：[10,100] (Optional)
+ * param filters: vpcIds - vpc ID列表，支持多个
+vpcNames - vpc名称列表,支持多个
+ (Optional)
+ */
+func NewDescribeVpcsRequestWithAllParams(
+    regionId string,
+    pageNumber *int,
+    pageSize *int,
+    filters []common.Filter,
+) *DescribeVpcsRequest {
+
+    return &DescribeVpcsRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/vpcs/",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        PageNumber: pageNumber,
+        PageSize: pageSize,
+        Filters: filters,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeVpcsRequestWithoutParam() *DescribeVpcsRequest {
+
+    return &DescribeVpcsRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/vpcs/",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DescribeVpcsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param pageNumber: 页码, 默认为1, 取值范围：[1,∞), 页码超过总页数时, 显示最后一页(Optional) */
 func (r *DescribeVpcsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
+/* param pageSize: 分页大小，默认为20，取值范围：[10,100](Optional) */
 func (r *DescribeVpcsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
+/* param filters: vpcIds - vpc ID列表，支持多个
+vpcNames - vpc名称列表,支持多个
+(Optional) */
 func (r *DescribeVpcsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }

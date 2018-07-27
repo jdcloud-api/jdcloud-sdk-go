@@ -33,8 +33,10 @@ type DescribeVpcRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param vpcId: Vpc ID 
+ * param regionId: Region ID (Required)
+ * param vpcId: Vpc ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeVpcRequest(
     regionId string,
@@ -53,10 +55,46 @@ func NewDescribeVpcRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param vpcId: Vpc ID (Required)
+ */
+func NewDescribeVpcRequestWithAllParams(
+    regionId string,
+    vpcId string,
+) *DescribeVpcRequest {
+
+    return &DescribeVpcRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/vpcs/{vpcId}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        VpcId: vpcId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeVpcRequestWithoutParam() *DescribeVpcRequest {
+
+    return &DescribeVpcRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/vpcs/{vpcId}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DescribeVpcRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param vpcId: Vpc ID(Required) */
 func (r *DescribeVpcRequest) SetVpcId(vpcId string) {
     r.VpcId = vpcId
 }

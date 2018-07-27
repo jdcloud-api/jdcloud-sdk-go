@@ -26,7 +26,7 @@ type ElasticIp struct {
     /* 弹性IP地址 (Optional) */
     ElasticIpAddress string `json:"elasticIpAddress"`
 
-    /* 弹性ip的限速（单位：Mb) (Optional) */
+    /* 弹性ip的限速（单位：Mbps) (Optional) */
     BandwidthMbps int `json:"bandwidthMbps"`
 
     /* IP服务商，取值为bgp或no_bgp (Optional) */

@@ -41,11 +41,10 @@ type AssociateElasticIpRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param networkInterfaceId: networkInterface ID 
- * param elasticIpId: 绑定的弹性Ip Id (Optional)
- * param privateIpAddress: 绑定弹性Ip到指定的privateIp (Optional)
- * param elasticIpAddress: 绑定的弹性Ip地址 (Optional)
+ * param regionId: Region ID (Required)
+ * param networkInterfaceId: networkInterface ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewAssociateElasticIpRequest(
     regionId string,
@@ -64,22 +63,70 @@ func NewAssociateElasticIpRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param networkInterfaceId: networkInterface ID (Required)
+ * param elasticIpId: 绑定的弹性Ip Id (Optional)
+ * param privateIpAddress: 绑定弹性Ip到指定的privateIp (Optional)
+ * param elasticIpAddress: 绑定的弹性Ip地址 (Optional)
+ */
+func NewAssociateElasticIpRequestWithAllParams(
+    regionId string,
+    networkInterfaceId string,
+    elasticIpId *string,
+    privateIpAddress *string,
+    elasticIpAddress *string,
+) *AssociateElasticIpRequest {
+
+    return &AssociateElasticIpRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/networkInterfaces/{networkInterfaceId}:associateElasticIp",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        NetworkInterfaceId: networkInterfaceId,
+        ElasticIpId: elasticIpId,
+        PrivateIpAddress: privateIpAddress,
+        ElasticIpAddress: elasticIpAddress,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewAssociateElasticIpRequestWithoutParam() *AssociateElasticIpRequest {
+
+    return &AssociateElasticIpRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/networkInterfaces/{networkInterfaceId}:associateElasticIp",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *AssociateElasticIpRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param networkInterfaceId: networkInterface ID(Required) */
 func (r *AssociateElasticIpRequest) SetNetworkInterfaceId(networkInterfaceId string) {
     r.NetworkInterfaceId = networkInterfaceId
 }
 
+/* param elasticIpId: 绑定的弹性Ip Id(Optional) */
 func (r *AssociateElasticIpRequest) SetElasticIpId(elasticIpId string) {
     r.ElasticIpId = &elasticIpId
 }
 
+/* param privateIpAddress: 绑定弹性Ip到指定的privateIp(Optional) */
 func (r *AssociateElasticIpRequest) SetPrivateIpAddress(privateIpAddress string) {
     r.PrivateIpAddress = &privateIpAddress
 }
 
+/* param elasticIpAddress: 绑定的弹性Ip地址(Optional) */
 func (r *AssociateElasticIpRequest) SetElasticIpAddress(elasticIpAddress string) {
     r.ElasticIpAddress = &elasticIpAddress
 }

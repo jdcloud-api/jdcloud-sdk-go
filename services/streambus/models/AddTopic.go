@@ -20,11 +20,11 @@ package models
 type AddTopic struct {
 
     /*  (Optional) */
-    Topic *interface{} `json:"topic"`
+    Topic *Topic `json:"topic"`
 
     /*  (Optional) */
-    Target *interface{} `json:"target"`
+    Target *Target `json:"target"`
 
     /* 归档相关的具体参数 (Optional) */
-    ParameterList []interface{} `json:"parameterList"`
+    ParameterList []ParameterList `json:"parameterList"`
 }

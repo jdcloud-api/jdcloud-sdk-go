@@ -32,24 +32,20 @@ type DescribeElasticIpsRequest struct {
     /* 页码, 默认为1, 取值范围：[1,∞), 页码超过总页数时, 显示最后一页 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* 分页大小，默认为20，取值范围：[10,500] (Optional) */
+    /* 分页大小，默认为20，取值范围：[10,100] (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* elasticIpIds - elasticip id数组条件
-elasticIpAddress - eip的IP地址 
-chargeStatus	- eip的费用支付状态,normal(正常状态) or overdue(预付费已到期) or arrear(欠费状态)
+    /* elasticIpIds - elasticip id数组条件，支持多个
+elasticIpAddress - eip的IP地址，支持单个
+chargeStatus	- eip的费用支付状态,normal(正常状态) or overdue(预付费已到期) or arrear(欠费状态)，支持单个
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
 
 /*
- * param regionId: Region ID 
- * param pageNumber: 页码, 默认为1, 取值范围：[1,∞), 页码超过总页数时, 显示最后一页 (Optional)
- * param pageSize: 分页大小，默认为20，取值范围：[10,500] (Optional)
- * param filters: elasticIpIds - elasticip id数组条件
-elasticIpAddress - eip的IP地址 
-chargeStatus	- eip的费用支付状态,normal(正常状态) or overdue(预付费已到期) or arrear(欠费状态)
- (Optional)
+ * param regionId: Region ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeElasticIpsRequest(
     regionId string,
@@ -66,18 +62,68 @@ func NewDescribeElasticIpsRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param pageNumber: 页码, 默认为1, 取值范围：[1,∞), 页码超过总页数时, 显示最后一页 (Optional)
+ * param pageSize: 分页大小，默认为20，取值范围：[10,100] (Optional)
+ * param filters: elasticIpIds - elasticip id数组条件，支持多个
+elasticIpAddress - eip的IP地址，支持单个
+chargeStatus	- eip的费用支付状态,normal(正常状态) or overdue(预付费已到期) or arrear(欠费状态)，支持单个
+ (Optional)
+ */
+func NewDescribeElasticIpsRequestWithAllParams(
+    regionId string,
+    pageNumber *int,
+    pageSize *int,
+    filters []common.Filter,
+) *DescribeElasticIpsRequest {
+
+    return &DescribeElasticIpsRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/elasticIps/",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        PageNumber: pageNumber,
+        PageSize: pageSize,
+        Filters: filters,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeElasticIpsRequestWithoutParam() *DescribeElasticIpsRequest {
+
+    return &DescribeElasticIpsRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/elasticIps/",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DescribeElasticIpsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param pageNumber: 页码, 默认为1, 取值范围：[1,∞), 页码超过总页数时, 显示最后一页(Optional) */
 func (r *DescribeElasticIpsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
+/* param pageSize: 分页大小，默认为20，取值范围：[10,100](Optional) */
 func (r *DescribeElasticIpsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
+/* param filters: elasticIpIds - elasticip id数组条件，支持多个
+elasticIpAddress - eip的IP地址，支持单个
+chargeStatus	- eip的费用支付状态,normal(正常状态) or overdue(预付费已到期) or arrear(欠费状态)，支持单个
+(Optional) */
 func (r *DescribeElasticIpsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }

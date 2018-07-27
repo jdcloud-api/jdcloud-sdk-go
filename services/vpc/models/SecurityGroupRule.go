@@ -31,7 +31,7 @@ type SecurityGroupRule struct {
     /* 匹配地址前缀 (Optional) */
     AddressPrefix string `json:"addressPrefix"`
 
-    /* 匹配地址协议版本。4：IPv4；6：IPv6 (Optional) */
+    /* 匹配地址协议版本。4：IPv4 (Optional) */
     IpVersion int `json:"ipVersion"`
 
     /* 规则限定起始传输层端口, 默认1 ，若protocal不是传输层协议，恒为0 (Optional) */
@@ -42,4 +42,7 @@ type SecurityGroupRule struct {
 
     /* 安全组规则创建时间 (Optional) */
     CreatedTime string `json:"createdTime"`
+
+    /* 描述,​ 允许输入UTF-8编码下的全部字符，不超过256字符 (Optional) */
+    Description string `json:"description"`
 }

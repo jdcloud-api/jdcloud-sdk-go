@@ -33,8 +33,10 @@ type DescribeSubnetRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param subnetId: Subnet ID 
+ * param regionId: Region ID (Required)
+ * param subnetId: Subnet ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeSubnetRequest(
     regionId string,
@@ -53,10 +55,46 @@ func NewDescribeSubnetRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param subnetId: Subnet ID (Required)
+ */
+func NewDescribeSubnetRequestWithAllParams(
+    regionId string,
+    subnetId string,
+) *DescribeSubnetRequest {
+
+    return &DescribeSubnetRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/subnets/{subnetId}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        SubnetId: subnetId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeSubnetRequestWithoutParam() *DescribeSubnetRequest {
+
+    return &DescribeSubnetRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/subnets/{subnetId}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DescribeSubnetRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param subnetId: Subnet ID(Required) */
 func (r *DescribeSubnetRequest) SetSubnetId(subnetId string) {
     r.SubnetId = subnetId
 }

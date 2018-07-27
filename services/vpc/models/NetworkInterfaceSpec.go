@@ -25,7 +25,10 @@ type NetworkInterfaceSpec struct {
     /* 可用区，用户的默认可用区 (Optional) */
     Az *string `json:"az"`
 
-    /* 网卡主私IP (Optional) */
+    /* 网卡名称，只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符。 (Optional) */
+    NetworkInterfaceName *string `json:"networkInterfaceName"`
+
+    /* 网卡主IP，如果不指定，会自动从子网中分配 (Optional) */
     PrimaryIpAddress *string `json:"primaryIpAddress"`
 
     /* SecondaryIp列表 (Optional) */
@@ -34,12 +37,12 @@ type NetworkInterfaceSpec struct {
     /* 自动分配的SecondaryIp数量 (Optional) */
     SecondaryIpCount *int `json:"secondaryIpCount"`
 
-    /* 安全组ID列表 (Optional) */
+    /* 要绑定的安全组ID列表，最多指定5个安全组 (Optional) */
     SecurityGroups []string `json:"securityGroups"`
 
-    /* 源和目标IP地址校验，取值为0或者1，默认为1 (Optional) */
+    /* 源和目标IP地址校验，取值为0或者1,默认为1 (Optional) */
     SanityCheck *int `json:"sanityCheck"`
 
-    /* 描述 (Optional) */
+    /* 描述,​ 允许输入UTF-8编码下的全部字符，不超过256字符 (Optional) */
     Description *string `json:"description"`
 }

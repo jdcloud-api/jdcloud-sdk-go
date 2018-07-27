@@ -33,8 +33,10 @@ type AddTopicRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param topicModel:  
+ * param regionId: Region ID (Required)
+ * param topicModel:  (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewAddTopicRequest(
     regionId string,
@@ -53,10 +55,46 @@ func NewAddTopicRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param topicModel:  (Required)
+ */
+func NewAddTopicRequestWithAllParams(
+    regionId string,
+    topicModel *streambus.AddTopic,
+) *AddTopicRequest {
+
+    return &AddTopicRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/topic",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        TopicModel: topicModel,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewAddTopicRequestWithoutParam() *AddTopicRequest {
+
+    return &AddTopicRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/topic",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *AddTopicRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param topicModel: (Required) */
 func (r *AddTopicRequest) SetTopicModel(topicModel *streambus.AddTopic) {
     r.TopicModel = topicModel
 }

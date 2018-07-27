@@ -41,11 +41,10 @@ type AssignSecondaryIpsRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param networkInterfaceId: networkInterface ID 
- * param force: secondary ip被其他接口占用时，是否抢占。false：非抢占重分配，true：抢占重分配，默认抢占重分配。默认值：true (Optional)
- * param secondaryIps: 指定分配的secondaryIp地址 (Optional)
- * param secondaryIpCount: 指定自动分配的secondaryIp个数 (Optional)
+ * param regionId: Region ID (Required)
+ * param networkInterfaceId: networkInterface ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewAssignSecondaryIpsRequest(
     regionId string,
@@ -64,22 +63,70 @@ func NewAssignSecondaryIpsRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param networkInterfaceId: networkInterface ID (Required)
+ * param force: secondary ip被其他接口占用时，是否抢占。false：非抢占重分配，true：抢占重分配，默认抢占重分配。默认值：true (Optional)
+ * param secondaryIps: 指定分配的secondaryIp地址 (Optional)
+ * param secondaryIpCount: 指定自动分配的secondaryIp个数 (Optional)
+ */
+func NewAssignSecondaryIpsRequestWithAllParams(
+    regionId string,
+    networkInterfaceId string,
+    force *bool,
+    secondaryIps []string,
+    secondaryIpCount *int,
+) *AssignSecondaryIpsRequest {
+
+    return &AssignSecondaryIpsRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/networkInterfaces/{networkInterfaceId}:assignSecondaryIps",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        NetworkInterfaceId: networkInterfaceId,
+        Force: force,
+        SecondaryIps: secondaryIps,
+        SecondaryIpCount: secondaryIpCount,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewAssignSecondaryIpsRequestWithoutParam() *AssignSecondaryIpsRequest {
+
+    return &AssignSecondaryIpsRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/networkInterfaces/{networkInterfaceId}:assignSecondaryIps",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *AssignSecondaryIpsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param networkInterfaceId: networkInterface ID(Required) */
 func (r *AssignSecondaryIpsRequest) SetNetworkInterfaceId(networkInterfaceId string) {
     r.NetworkInterfaceId = networkInterfaceId
 }
 
+/* param force: secondary ip被其他接口占用时，是否抢占。false：非抢占重分配，true：抢占重分配，默认抢占重分配。默认值：true(Optional) */
 func (r *AssignSecondaryIpsRequest) SetForce(force bool) {
     r.Force = &force
 }
 
+/* param secondaryIps: 指定分配的secondaryIp地址(Optional) */
 func (r *AssignSecondaryIpsRequest) SetSecondaryIps(secondaryIps []string) {
     r.SecondaryIps = secondaryIps
 }
 
+/* param secondaryIpCount: 指定自动分配的secondaryIp个数(Optional) */
 func (r *AssignSecondaryIpsRequest) SetSecondaryIpCount(secondaryIpCount int) {
     r.SecondaryIpCount = &secondaryIpCount
 }

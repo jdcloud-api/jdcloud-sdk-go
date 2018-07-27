@@ -32,26 +32,21 @@ type DescribeVpcPeeringsRequest struct {
     /* 页码, 默认为1, 取值范围：[1,∞), 页码超过总页数时, 显示最后一页 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* 分页大小，默认为20，取值范围：[10,500] (Optional) */
+    /* 分页大小，默认为20，取值范围：[10,100] (Optional) */
     PageSize *int `json:"pageSize"`
 
     /* vpcPeeringIds - vpcPeering ID，支持多个
 vpcPeeringNames - vpcPeering名称列表，支持多个
-vpcId	- vpcPeering本端Vpc Id
-remoteVpcId - vpcPeering对端Vpc Id
+vpcId	- vpcPeering本端Vpc Id，支持单个
+remoteVpcId - vpcPeering对端Vpc Id，支持单个
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
 
 /*
- * param regionId: Region ID 
- * param pageNumber: 页码, 默认为1, 取值范围：[1,∞), 页码超过总页数时, 显示最后一页 (Optional)
- * param pageSize: 分页大小，默认为20，取值范围：[10,500] (Optional)
- * param filters: vpcPeeringIds - vpcPeering ID，支持多个
-vpcPeeringNames - vpcPeering名称列表，支持多个
-vpcId	- vpcPeering本端Vpc Id
-remoteVpcId - vpcPeering对端Vpc Id
- (Optional)
+ * param regionId: Region ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeVpcPeeringsRequest(
     regionId string,
@@ -68,18 +63,70 @@ func NewDescribeVpcPeeringsRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param pageNumber: 页码, 默认为1, 取值范围：[1,∞), 页码超过总页数时, 显示最后一页 (Optional)
+ * param pageSize: 分页大小，默认为20，取值范围：[10,100] (Optional)
+ * param filters: vpcPeeringIds - vpcPeering ID，支持多个
+vpcPeeringNames - vpcPeering名称列表，支持多个
+vpcId	- vpcPeering本端Vpc Id，支持单个
+remoteVpcId - vpcPeering对端Vpc Id，支持单个
+ (Optional)
+ */
+func NewDescribeVpcPeeringsRequestWithAllParams(
+    regionId string,
+    pageNumber *int,
+    pageSize *int,
+    filters []common.Filter,
+) *DescribeVpcPeeringsRequest {
+
+    return &DescribeVpcPeeringsRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/vpcPeerings/",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        PageNumber: pageNumber,
+        PageSize: pageSize,
+        Filters: filters,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeVpcPeeringsRequestWithoutParam() *DescribeVpcPeeringsRequest {
+
+    return &DescribeVpcPeeringsRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/vpcPeerings/",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DescribeVpcPeeringsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param pageNumber: 页码, 默认为1, 取值范围：[1,∞), 页码超过总页数时, 显示最后一页(Optional) */
 func (r *DescribeVpcPeeringsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
+/* param pageSize: 分页大小，默认为20，取值范围：[10,100](Optional) */
 func (r *DescribeVpcPeeringsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
+/* param filters: vpcPeeringIds - vpcPeering ID，支持多个
+vpcPeeringNames - vpcPeering名称列表，支持多个
+vpcId	- vpcPeering本端Vpc Id，支持单个
+remoteVpcId - vpcPeering对端Vpc Id，支持单个
+(Optional) */
 func (r *DescribeVpcPeeringsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
