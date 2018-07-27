@@ -35,9 +35,10 @@ type UnassignSecondaryIpsRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param networkInterfaceId: networkInterface ID 
- * param secondaryIps: 指定删除的secondaryIp地址 (Optional)
+ * param regionId: Region ID (Required)
+ * param networkInterfaceId: networkInterface ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewUnassignSecondaryIpsRequest(
     regionId string,
@@ -56,14 +57,54 @@ func NewUnassignSecondaryIpsRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param networkInterfaceId: networkInterface ID (Required)
+ * param secondaryIps: 指定删除的secondaryIp地址 (Optional)
+ */
+func NewUnassignSecondaryIpsRequestWithAllParams(
+    regionId string,
+    networkInterfaceId string,
+    secondaryIps []string,
+) *UnassignSecondaryIpsRequest {
+
+    return &UnassignSecondaryIpsRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/networkInterfaces/{networkInterfaceId}:unassignSecondaryIps",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        NetworkInterfaceId: networkInterfaceId,
+        SecondaryIps: secondaryIps,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewUnassignSecondaryIpsRequestWithoutParam() *UnassignSecondaryIpsRequest {
+
+    return &UnassignSecondaryIpsRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/networkInterfaces/{networkInterfaceId}:unassignSecondaryIps",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *UnassignSecondaryIpsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param networkInterfaceId: networkInterface ID(Required) */
 func (r *UnassignSecondaryIpsRequest) SetNetworkInterfaceId(networkInterfaceId string) {
     r.NetworkInterfaceId = networkInterfaceId
 }
 
+/* param secondaryIps: 指定删除的secondaryIp地址(Optional) */
 func (r *UnassignSecondaryIpsRequest) SetSecondaryIps(secondaryIps []string) {
     r.SecondaryIps = secondaryIps
 }

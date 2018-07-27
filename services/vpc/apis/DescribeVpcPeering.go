@@ -33,8 +33,10 @@ type DescribeVpcPeeringRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param vpcPeeringId: vpcPeeringId ID 
+ * param regionId: Region ID (Required)
+ * param vpcPeeringId: vpcPeeringId ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeVpcPeeringRequest(
     regionId string,
@@ -53,10 +55,46 @@ func NewDescribeVpcPeeringRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param vpcPeeringId: vpcPeeringId ID (Required)
+ */
+func NewDescribeVpcPeeringRequestWithAllParams(
+    regionId string,
+    vpcPeeringId string,
+) *DescribeVpcPeeringRequest {
+
+    return &DescribeVpcPeeringRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/vpcPeerings/{vpcPeeringId}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        VpcPeeringId: vpcPeeringId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeVpcPeeringRequestWithoutParam() *DescribeVpcPeeringRequest {
+
+    return &DescribeVpcPeeringRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/vpcPeerings/{vpcPeeringId}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DescribeVpcPeeringRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param vpcPeeringId: vpcPeeringId ID(Required) */
 func (r *DescribeVpcPeeringRequest) SetVpcPeeringId(vpcPeeringId string) {
     r.VpcPeeringId = vpcPeeringId
 }

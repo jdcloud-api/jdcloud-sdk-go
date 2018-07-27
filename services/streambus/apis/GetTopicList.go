@@ -33,8 +33,9 @@ type GetTopicListRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param keyword:  (Optional)
+ * param regionId: Region ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewGetTopicListRequest(
     regionId string,
@@ -51,10 +52,46 @@ func NewGetTopicListRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param keyword:  (Optional)
+ */
+func NewGetTopicListRequestWithAllParams(
+    regionId string,
+    keyword *string,
+) *GetTopicListRequest {
+
+    return &GetTopicListRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/topicList",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        Keyword: keyword,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewGetTopicListRequestWithoutParam() *GetTopicListRequest {
+
+    return &GetTopicListRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/topicList",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *GetTopicListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param keyword: (Optional) */
 func (r *GetTopicListRequest) SetKeyword(keyword string) {
     r.Keyword = &keyword
 }

@@ -38,10 +38,10 @@ type ModifyVpcPeeringRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param vpcPeeringId: vpcPeeringId ID 
- * param vpcPeeringName: VpcPeering的名字,不为空。名称取值范围：1-32个中文、英文大小写的字母、数字和下划线分隔符 (Optional)
- * param description: VpcPeering 描述，取值范围：0-256个中文、英文大小写的字母、数字和下划线分隔符 (Optional)
+ * param regionId: Region ID (Required)
+ * param vpcPeeringId: vpcPeeringId ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewModifyVpcPeeringRequest(
     regionId string,
@@ -60,18 +60,62 @@ func NewModifyVpcPeeringRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param vpcPeeringId: vpcPeeringId ID (Required)
+ * param vpcPeeringName: VpcPeering的名字,不为空。名称取值范围：1-32个中文、英文大小写的字母、数字和下划线分隔符 (Optional)
+ * param description: VpcPeering 描述，取值范围：0-256个中文、英文大小写的字母、数字和下划线分隔符 (Optional)
+ */
+func NewModifyVpcPeeringRequestWithAllParams(
+    regionId string,
+    vpcPeeringId string,
+    vpcPeeringName *string,
+    description *string,
+) *ModifyVpcPeeringRequest {
+
+    return &ModifyVpcPeeringRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/vpcPeerings/{vpcPeeringId}",
+            Method:  "PUT",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        VpcPeeringId: vpcPeeringId,
+        VpcPeeringName: vpcPeeringName,
+        Description: description,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewModifyVpcPeeringRequestWithoutParam() *ModifyVpcPeeringRequest {
+
+    return &ModifyVpcPeeringRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/vpcPeerings/{vpcPeeringId}",
+            Method:  "PUT",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *ModifyVpcPeeringRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param vpcPeeringId: vpcPeeringId ID(Required) */
 func (r *ModifyVpcPeeringRequest) SetVpcPeeringId(vpcPeeringId string) {
     r.VpcPeeringId = vpcPeeringId
 }
 
+/* param vpcPeeringName: VpcPeering的名字,不为空。名称取值范围：1-32个中文、英文大小写的字母、数字和下划线分隔符(Optional) */
 func (r *ModifyVpcPeeringRequest) SetVpcPeeringName(vpcPeeringName string) {
     r.VpcPeeringName = &vpcPeeringName
 }
 
+/* param description: VpcPeering 描述，取值范围：0-256个中文、英文大小写的字母、数字和下划线分隔符(Optional) */
 func (r *ModifyVpcPeeringRequest) SetDescription(description string) {
     r.Description = &description
 }

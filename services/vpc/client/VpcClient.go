@@ -40,7 +40,7 @@ func NewVpcClient(credential *core.Credential) *VpcClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vpc",
-            Revision:    "0.2.0",
+            Revision:    "0.3.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -53,8 +53,8 @@ func (c *VpcClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-/* 查询弹性ip列表 */
-func (c *VpcClient) DescribeElasticIps(request *vpc.DescribeElasticIpsRequest) (*vpc.DescribeElasticIpsResponse, error) {
+/* 修改安全组规则 */
+func (c *VpcClient) ModifyNetworkSecurityGroupRules(request *vpc.ModifyNetworkSecurityGroupRulesRequest) (*vpc.ModifyNetworkSecurityGroupRulesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -63,26 +63,7 @@ func (c *VpcClient) DescribeElasticIps(request *vpc.DescribeElasticIpsRequest) (
         return nil, err
     }
 
-    jdResp := &vpc.DescribeElasticIpsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 给网卡分配secondaryIp接口 */
-func (c *VpcClient) AssignSecondaryIps(request *vpc.AssignSecondaryIpsRequest) (*vpc.AssignSecondaryIpsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &vpc.AssignSecondaryIpsResponse{}
+    jdResp := &vpc.ModifyNetworkSecurityGroupRulesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -129,6 +110,215 @@ func (c *VpcClient) DisassociateElasticIp(request *vpc.DisassociateElasticIpRequ
     return jdResp, err
 }
 
+/* 添加安全组规则 */
+func (c *VpcClient) AddNetworkSecurityGroupRules(request *vpc.AddNetworkSecurityGroupRulesRequest) (*vpc.AddNetworkSecurityGroupRulesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.AddNetworkSecurityGroupRulesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 给网卡绑定弹性Ip接口 */
+func (c *VpcClient) AssociateElasticIp(request *vpc.AssociateElasticIpRequest) (*vpc.AssociateElasticIpResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.AssociateElasticIpResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 移除安全组规则 */
+func (c *VpcClient) RemoveNetworkSecurityGroupRules(request *vpc.RemoveNetworkSecurityGroupRulesRequest) (*vpc.RemoveNetworkSecurityGroupRulesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.RemoveNetworkSecurityGroupRulesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* ElasticIp资源信息详情 */
+func (c *VpcClient) DescribeElasticIp(request *vpc.DescribeElasticIpRequest) (*vpc.DescribeElasticIpResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.DescribeElasticIpResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改弹性网卡接口 */
+func (c *VpcClient) ModifyNetworkInterface(request *vpc.ModifyNetworkInterfaceRequest) (*vpc.ModifyNetworkInterfaceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.ModifyNetworkInterfaceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除弹性网卡接口 */
+func (c *VpcClient) DeleteNetworkInterface(request *vpc.DeleteNetworkInterfaceRequest) (*vpc.DeleteNetworkInterfaceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.DeleteNetworkInterfaceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询弹性ip列表 */
+func (c *VpcClient) DescribeElasticIps(request *vpc.DescribeElasticIpsRequest) (*vpc.DescribeElasticIpsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.DescribeElasticIpsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 给网卡分配secondaryIp接口 */
+func (c *VpcClient) AssignSecondaryIps(request *vpc.AssignSecondaryIpsRequest) (*vpc.AssignSecondaryIpsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.AssignSecondaryIpsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建安全组 */
+func (c *VpcClient) CreateNetworkSecurityGroup(request *vpc.CreateNetworkSecurityGroupRequest) (*vpc.CreateNetworkSecurityGroupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.CreateNetworkSecurityGroupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除安全组 */
+func (c *VpcClient) DeleteNetworkSecurityGroup(request *vpc.DeleteNetworkSecurityGroupRequest) (*vpc.DeleteNetworkSecurityGroupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.DeleteNetworkSecurityGroupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建网卡接口，只能创建辅助网卡 */
+func (c *VpcClient) CreateNetworkInterface(request *vpc.CreateNetworkInterfaceRequest) (*vpc.CreateNetworkInterfaceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.CreateNetworkInterfaceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 删除弹性Ip */
 func (c *VpcClient) DeleteElasticIp(request *vpc.DeleteElasticIpRequest) (*vpc.DeleteElasticIpResponse, error) {
     if request == nil {
@@ -159,6 +349,25 @@ func (c *VpcClient) CreateElasticIps(request *vpc.CreateElasticIpsRequest) (*vpc
     }
 
     jdResp := &vpc.CreateElasticIpsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询弹性网卡信息详情 */
+func (c *VpcClient) DescribeNetworkInterface(request *vpc.DescribeNetworkInterfaceRequest) (*vpc.DescribeNetworkInterfaceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.DescribeNetworkInterfaceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -216,6 +425,25 @@ func (c *VpcClient) DescribeVpcPeerings(request *vpc.DescribeVpcPeeringsRequest)
     }
 
     jdResp := &vpc.DescribeVpcPeeringsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改安全组属性 */
+func (c *VpcClient) ModifyNetworkSecurityGroup(request *vpc.ModifyNetworkSecurityGroupRequest) (*vpc.ModifyNetworkSecurityGroupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.ModifyNetworkSecurityGroupResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -338,25 +566,6 @@ func (c *VpcClient) ModifyVpcPeering(request *vpc.ModifyVpcPeeringRequest) (*vpc
     return jdResp, err
 }
 
-/* 给网卡绑定弹性Ip接口 */
-func (c *VpcClient) AssociateElasticIp(request *vpc.AssociateElasticIpRequest) (*vpc.AssociateElasticIpResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &vpc.AssociateElasticIpResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 删除VpcPeering接口 */
 func (c *VpcClient) DeleteVpcPeering(request *vpc.DeleteVpcPeeringRequest) (*vpc.DeleteVpcPeeringResponse, error) {
     if request == nil {
@@ -376,8 +585,8 @@ func (c *VpcClient) DeleteVpcPeering(request *vpc.DeleteVpcPeeringRequest) (*vpc
     return jdResp, err
 }
 
-/* ElasticIp资源信息详情 */
-func (c *VpcClient) DescribeElasticIp(request *vpc.DescribeElasticIpRequest) (*vpc.DescribeElasticIpResponse, error) {
+/* 查询弹性网卡列表 */
+func (c *VpcClient) DescribeNetworkInterfaces(request *vpc.DescribeNetworkInterfacesRequest) (*vpc.DescribeNetworkInterfacesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -386,7 +595,7 @@ func (c *VpcClient) DescribeElasticIp(request *vpc.DescribeElasticIpRequest) (*v
         return nil, err
     }
 
-    jdResp := &vpc.DescribeElasticIpResponse{}
+    jdResp := &vpc.DescribeNetworkInterfacesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err

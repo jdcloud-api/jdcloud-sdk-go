@@ -39,10 +39,11 @@ type CreateElasticIpsRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param maxCount: 购买弹性ip数量；取值范围：[1,100] 
- * param elasticIpAddress: 指定弹性ip地址进行创建，当申请创建多个弹性ip时，必须为空 (Optional)
- * param elasticIpSpec: 弹性ip规格 
+ * param regionId: Region ID (Required)
+ * param maxCount: 购买弹性ip数量；取值范围：[1,100] (Required)
+ * param elasticIpSpec: 弹性ip规格 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateElasticIpsRequest(
     regionId string,
@@ -63,18 +64,62 @@ func NewCreateElasticIpsRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param maxCount: 购买弹性ip数量；取值范围：[1,100] (Required)
+ * param elasticIpAddress: 指定弹性ip地址进行创建，当申请创建多个弹性ip时，必须为空 (Optional)
+ * param elasticIpSpec: 弹性ip规格 (Required)
+ */
+func NewCreateElasticIpsRequestWithAllParams(
+    regionId string,
+    maxCount int,
+    elasticIpAddress *string,
+    elasticIpSpec *vpc.ElasticIpSpec,
+) *CreateElasticIpsRequest {
+
+    return &CreateElasticIpsRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/elasticIps/",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        MaxCount: maxCount,
+        ElasticIpAddress: elasticIpAddress,
+        ElasticIpSpec: elasticIpSpec,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewCreateElasticIpsRequestWithoutParam() *CreateElasticIpsRequest {
+
+    return &CreateElasticIpsRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/elasticIps/",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *CreateElasticIpsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param maxCount: 购买弹性ip数量；取值范围：[1,100](Required) */
 func (r *CreateElasticIpsRequest) SetMaxCount(maxCount int) {
     r.MaxCount = maxCount
 }
 
+/* param elasticIpAddress: 指定弹性ip地址进行创建，当申请创建多个弹性ip时，必须为空(Optional) */
 func (r *CreateElasticIpsRequest) SetElasticIpAddress(elasticIpAddress string) {
     r.ElasticIpAddress = &elasticIpAddress
 }
 
+/* param elasticIpSpec: 弹性ip规格(Required) */
 func (r *CreateElasticIpsRequest) SetElasticIpSpec(elasticIpSpec *vpc.ElasticIpSpec) {
     r.ElasticIpSpec = elasticIpSpec
 }

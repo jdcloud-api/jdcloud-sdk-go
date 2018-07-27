@@ -33,8 +33,10 @@ type DescribeElasticIpRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param elasticIpId: ElasticIp ID 
+ * param regionId: Region ID (Required)
+ * param elasticIpId: ElasticIp ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeElasticIpRequest(
     regionId string,
@@ -53,10 +55,46 @@ func NewDescribeElasticIpRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param elasticIpId: ElasticIp ID (Required)
+ */
+func NewDescribeElasticIpRequestWithAllParams(
+    regionId string,
+    elasticIpId string,
+) *DescribeElasticIpRequest {
+
+    return &DescribeElasticIpRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/elasticIps/{elasticIpId}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        ElasticIpId: elasticIpId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeElasticIpRequestWithoutParam() *DescribeElasticIpRequest {
+
+    return &DescribeElasticIpRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/elasticIps/{elasticIpId}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DescribeElasticIpRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param elasticIpId: ElasticIp ID(Required) */
 func (r *DescribeElasticIpRequest) SetElasticIpId(elasticIpId string) {
     r.ElasticIpId = elasticIpId
 }

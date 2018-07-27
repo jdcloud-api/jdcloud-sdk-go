@@ -23,7 +23,7 @@ type TopicListInfo struct {
     Archived int `json:"archived"`
 
     /* 创建topic的时间戳 (Optional) */
-    CreatedTime int `json:"createdTime"`
+    CreatedTime string `json:"createdTime"`
 
     /* topic是否已删除（0：未删除，1：删除） (Optional) */
     Deleted int `json:"deleted"`
@@ -56,8 +56,11 @@ type TopicListInfo struct {
     Uid string `json:"uid"`
 
     /* 更新topic的时间戳 (Optional) */
-    UpdatedTime int `json:"updatedTime"`
+    UpdatedTime string `json:"updatedTime"`
 
     /* 用户的userPin (Optional) */
     UserPin string `json:"userPin"`
+
+    /*  (Optional) */
+    DataSize string `json:"dataSize"`
 }

@@ -33,8 +33,10 @@ type DescribeNetworkSecurityGroupRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param networkSecurityGroupId: NetworkSecurityGroup ID 
+ * param regionId: Region ID (Required)
+ * param networkSecurityGroupId: NetworkSecurityGroup ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeNetworkSecurityGroupRequest(
     regionId string,
@@ -53,10 +55,46 @@ func NewDescribeNetworkSecurityGroupRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param networkSecurityGroupId: NetworkSecurityGroup ID (Required)
+ */
+func NewDescribeNetworkSecurityGroupRequestWithAllParams(
+    regionId string,
+    networkSecurityGroupId string,
+) *DescribeNetworkSecurityGroupRequest {
+
+    return &DescribeNetworkSecurityGroupRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/networkSecurityGroups/{networkSecurityGroupId}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        NetworkSecurityGroupId: networkSecurityGroupId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeNetworkSecurityGroupRequestWithoutParam() *DescribeNetworkSecurityGroupRequest {
+
+    return &DescribeNetworkSecurityGroupRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/networkSecurityGroups/{networkSecurityGroupId}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DescribeNetworkSecurityGroupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param networkSecurityGroupId: NetworkSecurityGroup ID(Required) */
 func (r *DescribeNetworkSecurityGroupRequest) SetNetworkSecurityGroupId(networkSecurityGroupId string) {
     r.NetworkSecurityGroupId = networkSecurityGroupId
 }
