@@ -33,8 +33,10 @@ type DescribeAlarmsByIDRequest struct {
 }
 
 /*
- * param regionId: 地域 Id 
- * param alarmId: 规则id 
+ * param regionId: 地域 Id (Required)
+ * param alarmId: 规则id (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeAlarmsByIDRequest(
     regionId string,
@@ -53,10 +55,46 @@ func NewDescribeAlarmsByIDRequest(
 	}
 }
 
+/*
+ * param regionId: 地域 Id (Required)
+ * param alarmId: 规则id (Required)
+ */
+func NewDescribeAlarmsByIDRequestWithAllParams(
+    regionId string,
+    alarmId string,
+) *DescribeAlarmsByIDRequest {
+
+    return &DescribeAlarmsByIDRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/alarms/{alarmId}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        AlarmId: alarmId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeAlarmsByIDRequestWithoutParam() *DescribeAlarmsByIDRequest {
+
+    return &DescribeAlarmsByIDRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/alarms/{alarmId}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 地域 Id(Required) */
 func (r *DescribeAlarmsByIDRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param alarmId: 规则id(Required) */
 func (r *DescribeAlarmsByIDRequest) SetAlarmId(alarmId string) {
     r.AlarmId = alarmId
 }

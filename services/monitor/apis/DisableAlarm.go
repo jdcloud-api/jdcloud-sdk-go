@@ -32,8 +32,10 @@ type DisableAlarmRequest struct {
 }
 
 /*
- * param regionId: 地域 Id 
- * param alarmId: 规则id 
+ * param regionId: 地域 Id (Required)
+ * param alarmId: 规则id (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDisableAlarmRequest(
     regionId string,
@@ -52,10 +54,46 @@ func NewDisableAlarmRequest(
 	}
 }
 
+/*
+ * param regionId: 地域 Id (Required)
+ * param alarmId: 规则id (Required)
+ */
+func NewDisableAlarmRequestWithAllParams(
+    regionId string,
+    alarmId string,
+) *DisableAlarmRequest {
+
+    return &DisableAlarmRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/alarms/{alarmId}:disable",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        AlarmId: alarmId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDisableAlarmRequestWithoutParam() *DisableAlarmRequest {
+
+    return &DisableAlarmRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/alarms/{alarmId}:disable",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 地域 Id(Required) */
 func (r *DisableAlarmRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param alarmId: 规则id(Required) */
 func (r *DisableAlarmRequest) SetAlarmId(alarmId string) {
     r.AlarmId = alarmId
 }

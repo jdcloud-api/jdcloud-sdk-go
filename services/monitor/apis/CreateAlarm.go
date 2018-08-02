@@ -36,9 +36,11 @@ type CreateAlarmRequest struct {
 }
 
 /*
- * param regionId: 地域 Id 
- * param clientToken: 幂等性校验参数，最长32位，值不变则返回值不会变 
- * param createAlarmSpec:  
+ * param regionId: 地域 Id (Required)
+ * param clientToken: 幂等性校验参数，最长32位，值不变则返回值不会变 (Required)
+ * param createAlarmSpec:  (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateAlarmRequest(
     regionId string,
@@ -59,14 +61,54 @@ func NewCreateAlarmRequest(
 	}
 }
 
+/*
+ * param regionId: 地域 Id (Required)
+ * param clientToken: 幂等性校验参数，最长32位，值不变则返回值不会变 (Required)
+ * param createAlarmSpec:  (Required)
+ */
+func NewCreateAlarmRequestWithAllParams(
+    regionId string,
+    clientToken string,
+    createAlarmSpec *monitor.CreateAlarmSpec,
+) *CreateAlarmRequest {
+
+    return &CreateAlarmRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/alarms",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        ClientToken: clientToken,
+        CreateAlarmSpec: createAlarmSpec,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewCreateAlarmRequestWithoutParam() *CreateAlarmRequest {
+
+    return &CreateAlarmRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/alarms",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 地域 Id(Required) */
 func (r *CreateAlarmRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param clientToken: 幂等性校验参数，最长32位，值不变则返回值不会变(Required) */
 func (r *CreateAlarmRequest) SetClientToken(clientToken string) {
     r.ClientToken = clientToken
 }
 
+/* param createAlarmSpec: (Required) */
 func (r *CreateAlarmRequest) SetCreateAlarmSpec(createAlarmSpec *monitor.CreateAlarmSpec) {
     r.CreateAlarmSpec = createAlarmSpec
 }

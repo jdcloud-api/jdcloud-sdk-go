@@ -18,69 +18,58 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    monitor "github.com/jdcloud-api/jdcloud-sdk-go/services/monitor/models"
 )
 
-type EnableAlarmRequest struct {
+type PutMetricDataRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域 Id  */
-    RegionId string `json:"regionId"`
-
-    /* 规则id  */
-    AlarmId string `json:"alarmId"`
+    /* 数据参数 (Optional) */
+    MetricDataList []monitor.MetricDataCm `json:"metricDataList"`
 }
 
 /*
- * param regionId: 地域 Id (Required)
- * param alarmId: 规则id (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewEnableAlarmRequest(
-    regionId string,
-    alarmId string,
-) *EnableAlarmRequest {
+func NewPutMetricDataRequest(
+) *PutMetricDataRequest {
 
-	return &EnableAlarmRequest{
+	return &PutMetricDataRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/alarms/{alarmId}:enable",
+			URL:     "/customMetrics",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
-        RegionId: regionId,
-        AlarmId: alarmId,
 	}
 }
 
 /*
- * param regionId: 地域 Id (Required)
- * param alarmId: 规则id (Required)
+ * param metricDataList: 数据参数 (Optional)
  */
-func NewEnableAlarmRequestWithAllParams(
-    regionId string,
-    alarmId string,
-) *EnableAlarmRequest {
+func NewPutMetricDataRequestWithAllParams(
+    metricDataList []monitor.MetricDataCm,
+) *PutMetricDataRequest {
 
-    return &EnableAlarmRequest{
+    return &PutMetricDataRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/alarms/{alarmId}:enable",
+            URL:     "/customMetrics",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
-        RegionId: regionId,
-        AlarmId: alarmId,
+        MetricDataList: metricDataList,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewEnableAlarmRequestWithoutParam() *EnableAlarmRequest {
+func NewPutMetricDataRequestWithoutParam() *PutMetricDataRequest {
 
-    return &EnableAlarmRequest{
+    return &PutMetricDataRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/alarms/{alarmId}:enable",
+            URL:     "/customMetrics",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -88,27 +77,24 @@ func NewEnableAlarmRequestWithoutParam() *EnableAlarmRequest {
     }
 }
 
-/* param regionId: 地域 Id(Required) */
-func (r *EnableAlarmRequest) SetRegionId(regionId string) {
-    r.RegionId = regionId
-}
-
-/* param alarmId: 规则id(Required) */
-func (r *EnableAlarmRequest) SetAlarmId(alarmId string) {
-    r.AlarmId = alarmId
+/* param metricDataList: 数据参数(Optional) */
+func (r *PutMetricDataRequest) SetMetricDataList(metricDataList []monitor.MetricDataCm) {
+    r.MetricDataList = metricDataList
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r EnableAlarmRequest) GetRegionId() string {
-    return r.RegionId
+func (r PutMetricDataRequest) GetRegionId() string {
+    return ""
 }
 
-type EnableAlarmResponse struct {
+type PutMetricDataResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result EnableAlarmResult `json:"result"`
+    Result PutMetricDataResult `json:"result"`
 }
 
-type EnableAlarmResult struct {
+type PutMetricDataResult struct {
+    Success bool `json:"success"`
+    ErrMetricDataList []monitor.MetricDataList `json:"errMetricDataList"`
 }

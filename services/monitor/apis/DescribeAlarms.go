@@ -43,22 +43,17 @@ type DescribeAlarmsRequest struct {
     /* 规则状态：1为启用，0为禁用 (Optional) */
     Enabled *int `json:"enabled"`
 
-    /* 当前所在页，默认为1 (Optional) */
+    /* 页码, 默认为1, 取值范围：[1,∞) (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* ，默认为20；取值范围[1, 100] (Optional) */
+    /* 分页大小，默认为20，取值范围：[10,100] (Optional) */
     PageSize *int `json:"pageSize"`
 }
 
 /*
- * param regionId: 地域 Id 
- * param serviceCode: 产品名称 (Optional)
- * param resourceId: 资源Id (Optional)
- * param status: 规则报警状态, 1：正常, 2：报警，4：数据不足 (Optional)
- * param isAlarming: 是否为正在报警的规则，0为忽略，1为是，与 status 同时只能生效一个,isAlarming 优先生效 (Optional)
- * param enabled: 规则状态：1为启用，0为禁用 (Optional)
- * param pageNumber: 当前所在页，默认为1 (Optional)
- * param pageSize: ，默认为20；取值范围[1, 100] (Optional)
+ * param regionId: 地域 Id (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeAlarmsRequest(
     regionId string,
@@ -75,34 +70,94 @@ func NewDescribeAlarmsRequest(
 	}
 }
 
+/*
+ * param regionId: 地域 Id (Required)
+ * param serviceCode: 产品名称 (Optional)
+ * param resourceId: 资源Id (Optional)
+ * param status: 规则报警状态, 1：正常, 2：报警，4：数据不足 (Optional)
+ * param isAlarming: 是否为正在报警的规则，0为忽略，1为是，与 status 同时只能生效一个,isAlarming 优先生效 (Optional)
+ * param enabled: 规则状态：1为启用，0为禁用 (Optional)
+ * param pageNumber: 页码, 默认为1, 取值范围：[1,∞) (Optional)
+ * param pageSize: 分页大小，默认为20，取值范围：[10,100] (Optional)
+ */
+func NewDescribeAlarmsRequestWithAllParams(
+    regionId string,
+    serviceCode *string,
+    resourceId *string,
+    status *int,
+    isAlarming *int,
+    enabled *int,
+    pageNumber *int,
+    pageSize *int,
+) *DescribeAlarmsRequest {
+
+    return &DescribeAlarmsRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/alarms",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        ServiceCode: serviceCode,
+        ResourceId: resourceId,
+        Status: status,
+        IsAlarming: isAlarming,
+        Enabled: enabled,
+        PageNumber: pageNumber,
+        PageSize: pageSize,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeAlarmsRequestWithoutParam() *DescribeAlarmsRequest {
+
+    return &DescribeAlarmsRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/alarms",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 地域 Id(Required) */
 func (r *DescribeAlarmsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param serviceCode: 产品名称(Optional) */
 func (r *DescribeAlarmsRequest) SetServiceCode(serviceCode string) {
     r.ServiceCode = &serviceCode
 }
 
+/* param resourceId: 资源Id(Optional) */
 func (r *DescribeAlarmsRequest) SetResourceId(resourceId string) {
     r.ResourceId = &resourceId
 }
 
+/* param status: 规则报警状态, 1：正常, 2：报警，4：数据不足(Optional) */
 func (r *DescribeAlarmsRequest) SetStatus(status int) {
     r.Status = &status
 }
 
+/* param isAlarming: 是否为正在报警的规则，0为忽略，1为是，与 status 同时只能生效一个,isAlarming 优先生效(Optional) */
 func (r *DescribeAlarmsRequest) SetIsAlarming(isAlarming int) {
     r.IsAlarming = &isAlarming
 }
 
+/* param enabled: 规则状态：1为启用，0为禁用(Optional) */
 func (r *DescribeAlarmsRequest) SetEnabled(enabled int) {
     r.Enabled = &enabled
 }
 
+/* param pageNumber: 页码, 默认为1, 取值范围：[1,∞)(Optional) */
 func (r *DescribeAlarmsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
+/* param pageSize: 分页大小，默认为20，取值范围：[10,100](Optional) */
 func (r *DescribeAlarmsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
