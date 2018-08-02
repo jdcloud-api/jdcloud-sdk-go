@@ -125,4 +125,5 @@ type GetTargetsResponse struct {
 }
 
 type GetTargetsResult struct {
+    Data []string `json:"data"`
 }

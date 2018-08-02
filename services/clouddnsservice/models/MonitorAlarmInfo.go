@@ -19,7 +19,7 @@ package models
 
 type MonitorAlarmInfo struct {
 
-    /* 域名ID? (Optional) */
+    /* 域名ID (Optional) */
     DomainId int `json:"domainId"`
 
     /* 子域名 (Optional) */

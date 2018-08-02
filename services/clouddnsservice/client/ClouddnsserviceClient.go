@@ -40,7 +40,7 @@ func NewClouddnsserviceClient(credential *core.Credential) *ClouddnsserviceClien
             Credential:  *credential,
             Config:      *config,
             ServiceName: "clouddnsservice",
-            Revision:    "1.0.0",
+            Revision:    "1.0.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -186,6 +186,25 @@ func (c *ClouddnsserviceClient) AddDomain(request *clouddnsservice.AddDomainRequ
     return jdResp, err
 }
 
+/* 查看域名的查询流量 */
+func (c *ClouddnsserviceClient) GetDomainQueryTraffic(request *clouddnsservice.GetDomainQueryTrafficRequest) (*clouddnsservice.GetDomainQueryTrafficResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &clouddnsservice.GetDomainQueryTrafficResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询子域名的可用监控对象 */
 func (c *ClouddnsserviceClient) GetTargets(request *clouddnsservice.GetTargetsRequest) (*clouddnsservice.GetTargetsResponse, error) {
     if request == nil {
@@ -205,8 +224,8 @@ func (c *ClouddnsserviceClient) GetTargets(request *clouddnsservice.GetTargetsRe
     return jdResp, err
 }
 
-/* 查询DNS所有解析线路 */
-func (c *ClouddnsserviceClient) GetViewTree(request *clouddnsservice.GetViewTreeRequest) (*clouddnsservice.GetViewTreeResponse, error) {
+/* 查看域名的解析次数 */
+func (c *ClouddnsserviceClient) GetDomainQueryCount(request *clouddnsservice.GetDomainQueryCountRequest) (*clouddnsservice.GetDomainQueryCountResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -215,7 +234,7 @@ func (c *ClouddnsserviceClient) GetViewTree(request *clouddnsservice.GetViewTree
         return nil, err
     }
 
-    jdResp := &clouddnsservice.GetViewTreeResponse{}
+    jdResp := &clouddnsservice.GetDomainQueryCountResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -235,6 +254,25 @@ func (c *ClouddnsserviceClient) AddMonitor(request *clouddnsservice.AddMonitorRe
     }
 
     jdResp := &clouddnsservice.AddMonitorResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询DNS所有解析线路 */
+func (c *ClouddnsserviceClient) GetViewTree(request *clouddnsservice.GetViewTreeRequest) (*clouddnsservice.GetViewTreeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &clouddnsservice.GetViewTreeResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -311,25 +349,6 @@ func (c *ClouddnsserviceClient) UpdateDomain(request *clouddnsservice.UpdateDoma
     }
 
     jdResp := &clouddnsservice.UpdateDomainResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查看域名的查询流量 */
-func (c *ClouddnsserviceClient) GetDomainStatistics(request *clouddnsservice.GetDomainStatisticsRequest) (*clouddnsservice.GetDomainStatisticsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &clouddnsservice.GetDomainStatisticsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
