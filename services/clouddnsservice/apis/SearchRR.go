@@ -30,6 +30,12 @@ type SearchRRRequest struct {
 
     /* 域名ID  */
     DomainId string `json:"domainId"`
+
+    /* 当前页数，起始值为1，默认为1 (Optional) */
+    PageNumber *int `json:"pageNumber"`
+
+    /* 分页查询时设置的每页行数, 默认为10 (Optional) */
+    PageSize *int `json:"pageSize"`
 }
 
 /*
@@ -58,10 +64,14 @@ func NewSearchRRRequest(
 /*
  * param regionId: Region ID (Required)
  * param domainId: 域名ID (Required)
+ * param pageNumber: 当前页数，起始值为1，默认为1 (Optional)
+ * param pageSize: 分页查询时设置的每页行数, 默认为10 (Optional)
  */
 func NewSearchRRRequestWithAllParams(
     regionId string,
     domainId string,
+    pageNumber *int,
+    pageSize *int,
 ) *SearchRRRequest {
 
     return &SearchRRRequest{
@@ -73,6 +83,8 @@ func NewSearchRRRequestWithAllParams(
         },
         RegionId: regionId,
         DomainId: domainId,
+        PageNumber: pageNumber,
+        PageSize: pageSize,
     }
 }
 
@@ -97,6 +109,16 @@ func (r *SearchRRRequest) SetRegionId(regionId string) {
 /* param domainId: 域名ID(Required) */
 func (r *SearchRRRequest) SetDomainId(domainId string) {
     r.DomainId = domainId
+}
+
+/* param pageNumber: 当前页数，起始值为1，默认为1(Optional) */
+func (r *SearchRRRequest) SetPageNumber(pageNumber int) {
+    r.PageNumber = &pageNumber
+}
+
+/* param pageSize: 分页查询时设置的每页行数, 默认为10(Optional) */
+func (r *SearchRRRequest) SetPageSize(pageSize int) {
+    r.PageSize = &pageSize
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
