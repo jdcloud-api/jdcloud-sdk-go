@@ -17,20 +17,14 @@
 package models
 
 
-type MonitorAlarmInfo struct {
+type LastDownsampleRespItem struct {
 
-    /* 域名ID (Optional) */
-    DomainId int `json:"domainId"`
+    /*  (Optional) */
+    Metric string `json:"metric"`
 
-    /* 子域名 (Optional) */
-    SubDomainName string `json:"subDomainName"`
+    /*  (Optional) */
+    Name string `json:"name"`
 
-    /* 故障IP/域名 (Optional) */
-    Host string `json:"host"`
-
-    /* null (Optional) */
-    Id int `json:"id"`
-
-    /* 故障开始时间 (Optional) */
-    StartTime int `json:"startTime"`
+    /*  (Optional) */
+    Value interface{} `json:"value"`
 }

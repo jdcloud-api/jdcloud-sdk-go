@@ -32,8 +32,10 @@ type DeleteAlarmsRequest struct {
 }
 
 /*
- * param regionId: 地域 Id 
- * param ids: 待删除的规则id，用"|"间隔 
+ * param regionId: 地域 Id (Required)
+ * param ids: 待删除的规则id，用"|"间隔 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDeleteAlarmsRequest(
     regionId string,
@@ -52,10 +54,46 @@ func NewDeleteAlarmsRequest(
 	}
 }
 
+/*
+ * param regionId: 地域 Id (Required)
+ * param ids: 待删除的规则id，用"|"间隔 (Required)
+ */
+func NewDeleteAlarmsRequestWithAllParams(
+    regionId string,
+    ids string,
+) *DeleteAlarmsRequest {
+
+    return &DeleteAlarmsRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/alarms",
+            Method:  "DELETE",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        Ids: ids,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDeleteAlarmsRequestWithoutParam() *DeleteAlarmsRequest {
+
+    return &DeleteAlarmsRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/alarms",
+            Method:  "DELETE",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 地域 Id(Required) */
 func (r *DeleteAlarmsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param ids: 待删除的规则id，用"|"间隔(Required) */
 func (r *DeleteAlarmsRequest) SetIds(ids string) {
     r.Ids = ids
 }

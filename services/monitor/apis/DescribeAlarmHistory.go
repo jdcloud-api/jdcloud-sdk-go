@@ -43,22 +43,19 @@ type DescribeAlarmHistoryRequest struct {
     /* 查询数据结束时间，默认当前时间，可以输入long型时间，也可以输入yyyy-MM-dd'T'HH:mm:ssZ类型时间  */
     EndTime string `json:"endTime"`
 
-    /* 当前所在页，默认为1 (Optional) */
+    /* 页码, 默认为1, 取值范围：[1,∞) (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* ，默认为20；取值范围[1, 100] (Optional) */
+    /* 分页大小，默认为20，取值范围：[10,100] (Optional) */
     PageSize *int `json:"pageSize"`
 }
 
 /*
- * param regionId: 地域 Id 
- * param id: 报警规则的Id (Optional)
- * param serviceCode: 产品名称 (Optional)
- * param resourceId: 资源Id (Optional)
- * param startTime: 查询数据开始时间，默认24小时前，可以输入long型时间，也可以输入yyyy-MM-dd'T'HH:mm:ssZ类型时间 
- * param endTime: 查询数据结束时间，默认当前时间，可以输入long型时间，也可以输入yyyy-MM-dd'T'HH:mm:ssZ类型时间 
- * param pageNumber: 当前所在页，默认为1 (Optional)
- * param pageSize: ，默认为20；取值范围[1, 100] (Optional)
+ * param regionId: 地域 Id (Required)
+ * param startTime: 查询数据开始时间，默认24小时前，可以输入long型时间，也可以输入yyyy-MM-dd'T'HH:mm:ssZ类型时间 (Required)
+ * param endTime: 查询数据结束时间，默认当前时间，可以输入long型时间，也可以输入yyyy-MM-dd'T'HH:mm:ssZ类型时间 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeAlarmHistoryRequest(
     regionId string,
@@ -79,34 +76,94 @@ func NewDescribeAlarmHistoryRequest(
 	}
 }
 
+/*
+ * param regionId: 地域 Id (Required)
+ * param id: 报警规则的Id (Optional)
+ * param serviceCode: 产品名称 (Optional)
+ * param resourceId: 资源Id (Optional)
+ * param startTime: 查询数据开始时间，默认24小时前，可以输入long型时间，也可以输入yyyy-MM-dd'T'HH:mm:ssZ类型时间 (Required)
+ * param endTime: 查询数据结束时间，默认当前时间，可以输入long型时间，也可以输入yyyy-MM-dd'T'HH:mm:ssZ类型时间 (Required)
+ * param pageNumber: 页码, 默认为1, 取值范围：[1,∞) (Optional)
+ * param pageSize: 分页大小，默认为20，取值范围：[10,100] (Optional)
+ */
+func NewDescribeAlarmHistoryRequestWithAllParams(
+    regionId string,
+    id *string,
+    serviceCode *string,
+    resourceId *string,
+    startTime string,
+    endTime string,
+    pageNumber *int,
+    pageSize *int,
+) *DescribeAlarmHistoryRequest {
+
+    return &DescribeAlarmHistoryRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/alarmHistory",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        Id: id,
+        ServiceCode: serviceCode,
+        ResourceId: resourceId,
+        StartTime: startTime,
+        EndTime: endTime,
+        PageNumber: pageNumber,
+        PageSize: pageSize,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeAlarmHistoryRequestWithoutParam() *DescribeAlarmHistoryRequest {
+
+    return &DescribeAlarmHistoryRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/alarmHistory",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 地域 Id(Required) */
 func (r *DescribeAlarmHistoryRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param id: 报警规则的Id(Optional) */
 func (r *DescribeAlarmHistoryRequest) SetId(id string) {
     r.Id = &id
 }
 
+/* param serviceCode: 产品名称(Optional) */
 func (r *DescribeAlarmHistoryRequest) SetServiceCode(serviceCode string) {
     r.ServiceCode = &serviceCode
 }
 
+/* param resourceId: 资源Id(Optional) */
 func (r *DescribeAlarmHistoryRequest) SetResourceId(resourceId string) {
     r.ResourceId = &resourceId
 }
 
+/* param startTime: 查询数据开始时间，默认24小时前，可以输入long型时间，也可以输入yyyy-MM-dd'T'HH:mm:ssZ类型时间(Required) */
 func (r *DescribeAlarmHistoryRequest) SetStartTime(startTime string) {
     r.StartTime = startTime
 }
 
+/* param endTime: 查询数据结束时间，默认当前时间，可以输入long型时间，也可以输入yyyy-MM-dd'T'HH:mm:ssZ类型时间(Required) */
 func (r *DescribeAlarmHistoryRequest) SetEndTime(endTime string) {
     r.EndTime = endTime
 }
 
+/* param pageNumber: 页码, 默认为1, 取值范围：[1,∞)(Optional) */
 func (r *DescribeAlarmHistoryRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
+/* param pageSize: 分页大小，默认为20，取值范围：[10,100](Optional) */
 func (r *DescribeAlarmHistoryRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }

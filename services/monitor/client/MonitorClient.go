@@ -40,7 +40,7 @@ func NewMonitorClient(credential *core.Credential) *MonitorClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "monitor",
-            Revision:    "0.3.2",
+            Revision:    "1.1.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -53,7 +53,7 @@ func (c *MonitorClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-/* 批量删除规则 */
+/* 批量删除已创建的报警规则 */
 func (c *MonitorClient) DeleteAlarms(request *monitor.DeleteAlarmsRequest) (*monitor.DeleteAlarmsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -83,6 +83,25 @@ func (c *MonitorClient) DescribeMetricData(request *monitor.DescribeMetricDataRe
     }
 
     jdResp := &monitor.DescribeMetricDataResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 自定义监控数据上报接口 */
+func (c *MonitorClient) PutMetricData(request *monitor.PutMetricDataRequest) (*monitor.PutMetricDataResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &monitor.PutMetricDataResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err

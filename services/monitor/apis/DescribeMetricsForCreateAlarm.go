@@ -42,19 +42,8 @@ nativecontainer-->容器
 }
 
 /*
- * param serviceCode: 资源的类型，默认为空，展示所有项目
-vm-->云主机
-disk-->云硬盘
-ip-->公网ip
-balance-->负载均衡
-database-->云数据库mysql版本
-cdn-->京东CDN
-redis-->redis云缓存
-mongodb-->mongoDB云缓存
-storage-->云存储
-sqlserver-->云数据库sqlserver版 
-nativecontainer-->容器
- (Optional)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeMetricsForCreateAlarmRequest(
 ) *DescribeMetricsForCreateAlarmRequest {
@@ -69,6 +58,62 @@ func NewDescribeMetricsForCreateAlarmRequest(
 	}
 }
 
+/*
+ * param serviceCode: 资源的类型，默认为空，展示所有项目
+vm-->云主机
+disk-->云硬盘
+ip-->公网ip
+balance-->负载均衡
+database-->云数据库mysql版本
+cdn-->京东CDN
+redis-->redis云缓存
+mongodb-->mongoDB云缓存
+storage-->云存储
+sqlserver-->云数据库sqlserver版 
+nativecontainer-->容器
+ (Optional)
+ */
+func NewDescribeMetricsForCreateAlarmRequestWithAllParams(
+    serviceCode *string,
+) *DescribeMetricsForCreateAlarmRequest {
+
+    return &DescribeMetricsForCreateAlarmRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/metricsForCreateAlarm",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        ServiceCode: serviceCode,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeMetricsForCreateAlarmRequestWithoutParam() *DescribeMetricsForCreateAlarmRequest {
+
+    return &DescribeMetricsForCreateAlarmRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/metricsForCreateAlarm",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param serviceCode: 资源的类型，默认为空，展示所有项目
+vm-->云主机
+disk-->云硬盘
+ip-->公网ip
+balance-->负载均衡
+database-->云数据库mysql版本
+cdn-->京东CDN
+redis-->redis云缓存
+mongodb-->mongoDB云缓存
+storage-->云存储
+sqlserver-->云数据库sqlserver版 
+nativecontainer-->容器
+(Optional) */
 func (r *DescribeMetricsForCreateAlarmRequest) SetServiceCode(serviceCode string) {
     r.ServiceCode = &serviceCode
 }

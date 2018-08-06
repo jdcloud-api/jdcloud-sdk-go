@@ -17,20 +17,11 @@
 package models
 
 
-type MonitorAlarmInfo struct {
+type MetricDataList struct {
 
-    /* 域名ID (Optional) */
-    DomainId int `json:"domainId"`
+    /* 错误数据 (Optional) */
+    ErrMetricData string `json:"errMetricData"`
 
-    /* 子域名 (Optional) */
-    SubDomainName string `json:"subDomainName"`
-
-    /* 故障IP/域名 (Optional) */
-    Host string `json:"host"`
-
-    /* null (Optional) */
-    Id int `json:"id"`
-
-    /* 故障开始时间 (Optional) */
-    StartTime int `json:"startTime"`
+    /* 错误数据描述 (Optional) */
+    ErrDetail string `json:"errDetail"`
 }
