@@ -25,7 +25,7 @@ type DescribeTopicRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域ID  */
     RegionId string `json:"regionId"`
 
     /*   */
@@ -33,7 +33,7 @@ type DescribeTopicRequest struct {
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 地域ID (Required)
  * param name:  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -56,7 +56,7 @@ func NewDescribeTopicRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 地域ID (Required)
  * param name:  (Required)
  */
 func NewDescribeTopicRequestWithAllParams(
@@ -89,7 +89,7 @@ func NewDescribeTopicRequestWithoutParam() *DescribeTopicRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 地域ID(Required) */
 func (r *DescribeTopicRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
@@ -112,5 +112,5 @@ type DescribeTopicResponse struct {
 }
 
 type DescribeTopicResult struct {
-    Topic streambus.AddTopic `json:"topic"`
+    Topic streambus.TopicModel `json:"topic"`
 }

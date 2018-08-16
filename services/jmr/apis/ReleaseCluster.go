@@ -44,7 +44,7 @@ func NewReleaseClusterRequest(
 
 	return &ReleaseClusterRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/v1/regions/{regionId}/release",
+			URL:     "/regions/{regionId}/cluster/{id}:release",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -65,7 +65,7 @@ func NewReleaseClusterRequestWithAllParams(
 
     return &ReleaseClusterRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/v1/regions/{regionId}/release",
+            URL:     "/regions/{regionId}/cluster/{id}:release",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -80,7 +80,7 @@ func NewReleaseClusterRequestWithoutParam() *ReleaseClusterRequest {
 
     return &ReleaseClusterRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/v1/regions/{regionId}/release",
+            URL:     "/regions/{regionId}/cluster/{id}:release",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -111,6 +111,6 @@ type ReleaseClusterResponse struct {
 }
 
 type ReleaseClusterResult struct {
-    Status bool `json:"status"`
+    Status string `json:"status"`
     Message string `json:"message"`
 }

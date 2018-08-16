@@ -40,7 +40,7 @@ func NewStreamcomputerClient(credential *core.Credential) *StreamcomputerClient 
             Credential:  *credential,
             Config:      *config,
             ServiceName: "streamcomputer",
-            Revision:    "1.0.0",
+            Revision:    "1.0.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -53,7 +53,7 @@ func (c *StreamcomputerClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-/* 删除namespace */
+/* 删除namespace,如果旗下关联有其他资源，不允许删除 */
 func (c *StreamcomputerClient) DeleteNamespace(request *streamcomputer.DeleteNamespaceRequest) (*streamcomputer.DeleteNamespaceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -300,7 +300,7 @@ func (c *StreamcomputerClient) UpdateNamespace(request *streamcomputer.UpdateNam
     return jdResp, err
 }
 
-/* 删除job */
+/* 删除作业 */
 func (c *StreamcomputerClient) DeleteJob(request *streamcomputer.DeleteJobRequest) (*streamcomputer.DeleteJobResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")

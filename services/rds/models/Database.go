@@ -22,7 +22,7 @@ type Database struct {
     /* 数据库名称 (Optional) */
     DbName string `json:"dbName"`
 
-    /* 数据库状态 building：创建中， running：运行中 (Optional) */
+    /* 数据库状态 building：创建中， running：运行中</br>- SQL Server：支持</br>- MySQL：暂不支持 (Optional) */
     DbStatus string `json:"dbStatus"`
 
     /* 字符集名称,mysql字符集包括：utf8；SQL Server字符集包括：Chinese_PRC_CI_AS、Chinese_PRC_CS_AS、SQL_Latin1_General_CP1_CI_AS、SQL_Latin1_General_CP1_CS_AS、Chinese_PRC_BIN (Optional) */

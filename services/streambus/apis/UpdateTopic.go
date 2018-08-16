@@ -25,22 +25,22 @@ type UpdateTopicRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /*   */
-    TopicModel *streambus.AddTopic `json:"topicModel"`
+    /* 当更新主题时只需要修改topicModel中的topic中的属性即可；创建归档需要指定target以及归档的目的地(mysql,京东云 Elasticsearch,对象存储,数据计算服务)参数  */
+    TopicModel *streambus.TopicModel `json:"topicModel"`
 }
 
 /*
- * param regionId: Region ID (Required)
- * param topicModel:  (Required)
+ * param regionId: 地域ID (Required)
+ * param topicModel: 当更新主题时只需要修改topicModel中的topic中的属性即可；创建归档需要指定target以及归档的目的地(mysql,京东云 Elasticsearch,对象存储,数据计算服务)参数 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewUpdateTopicRequest(
     regionId string,
-    topicModel *streambus.AddTopic,
+    topicModel *streambus.TopicModel,
 ) *UpdateTopicRequest {
 
 	return &UpdateTopicRequest{
@@ -56,12 +56,12 @@ func NewUpdateTopicRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
- * param topicModel:  (Required)
+ * param regionId: 地域ID (Required)
+ * param topicModel: 当更新主题时只需要修改topicModel中的topic中的属性即可；创建归档需要指定target以及归档的目的地(mysql,京东云 Elasticsearch,对象存储,数据计算服务)参数 (Required)
  */
 func NewUpdateTopicRequestWithAllParams(
     regionId string,
-    topicModel *streambus.AddTopic,
+    topicModel *streambus.TopicModel,
 ) *UpdateTopicRequest {
 
     return &UpdateTopicRequest{
@@ -89,13 +89,13 @@ func NewUpdateTopicRequestWithoutParam() *UpdateTopicRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 地域ID(Required) */
 func (r *UpdateTopicRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param topicModel: (Required) */
-func (r *UpdateTopicRequest) SetTopicModel(topicModel *streambus.AddTopic) {
+/* param topicModel: 当更新主题时只需要修改topicModel中的topic中的属性即可；创建归档需要指定target以及归档的目的地(mysql,京东云 Elasticsearch,对象存储,数据计算服务)参数(Required) */
+func (r *UpdateTopicRequest) SetTopicModel(topicModel *streambus.TopicModel) {
     r.TopicModel = topicModel
 }
 

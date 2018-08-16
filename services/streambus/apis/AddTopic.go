@@ -25,22 +25,22 @@ type AddTopicRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /*   */
-    TopicModel *streambus.AddTopic `json:"topicModel"`
+    /* 示例：{"topicModel":{"topic":{"archived":0,"id":"","name":"create","remark":"备注","shardNum":1,"partitionNum":2,"lifecycle":3}}}  */
+    TopicModel *streambus.TopicModel `json:"topicModel"`
 }
 
 /*
- * param regionId: Region ID (Required)
- * param topicModel:  (Required)
+ * param regionId: 地域ID (Required)
+ * param topicModel: 示例：{"topicModel":{"topic":{"archived":0,"id":"","name":"create","remark":"备注","shardNum":1,"partitionNum":2,"lifecycle":3}}} (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewAddTopicRequest(
     regionId string,
-    topicModel *streambus.AddTopic,
+    topicModel *streambus.TopicModel,
 ) *AddTopicRequest {
 
 	return &AddTopicRequest{
@@ -56,12 +56,12 @@ func NewAddTopicRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
- * param topicModel:  (Required)
+ * param regionId: 地域ID (Required)
+ * param topicModel: 示例：{"topicModel":{"topic":{"archived":0,"id":"","name":"create","remark":"备注","shardNum":1,"partitionNum":2,"lifecycle":3}}} (Required)
  */
 func NewAddTopicRequestWithAllParams(
     regionId string,
-    topicModel *streambus.AddTopic,
+    topicModel *streambus.TopicModel,
 ) *AddTopicRequest {
 
     return &AddTopicRequest{
@@ -89,13 +89,13 @@ func NewAddTopicRequestWithoutParam() *AddTopicRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 地域ID(Required) */
 func (r *AddTopicRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param topicModel: (Required) */
-func (r *AddTopicRequest) SetTopicModel(topicModel *streambus.AddTopic) {
+/* param topicModel: 示例：{"topicModel":{"topic":{"archived":0,"id":"","name":"create","remark":"备注","shardNum":1,"partitionNum":2,"lifecycle":3}}}(Required) */
+func (r *AddTopicRequest) SetTopicModel(topicModel *streambus.TopicModel) {
     r.TopicModel = topicModel
 }
 

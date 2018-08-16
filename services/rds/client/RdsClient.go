@@ -40,7 +40,7 @@ func NewRdsClient(credential *core.Credential) *RdsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "rds",
-            Revision:    "0.2.5",
+            Revision:    "0.2.7",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -148,6 +148,25 @@ func (c *RdsClient) DeleteAudit(request *rds.DeleteAuditRequest) (*rds.DeleteAud
     return jdResp, err
 }
 
+/* 使用实例的全量备份覆盖恢复当前实例</br>- SQL Server：不支持</br>- MySQL：支持 */
+func (c *RdsClient) RestoreInstance(request *rds.RestoreInstanceRequest) (*rds.RestoreInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.RestoreInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 开启数据库审计</br>- SQL Server：支持</br>- MySQL：暂不支持 */
 func (c *RdsClient) CreateAudit(request *rds.CreateAuditRequest) (*rds.CreateAuditResponse, error) {
     if request == nil {
@@ -167,7 +186,7 @@ func (c *RdsClient) CreateAudit(request *rds.CreateAuditRequest) (*rds.CreateAud
     return jdResp, err
 }
 
-/* 删除备份</br>- SQL Server：支持</br>- MySQL：暂不支持 */
+/* 删除备份</br>- SQL Server：支持</br>- MySQL：支持 */
 func (c *RdsClient) DeleteBackup(request *rds.DeleteBackupRequest) (*rds.DeleteBackupResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -224,6 +243,25 @@ func (c *RdsClient) DescribeBackupDownloadURL(request *rds.DescribeBackupDownloa
     return jdResp, err
 }
 
+/* 开启RDS实例的外网访问，用户可以通过internet访问RDS实例</br>- SQL Server：支持</br>- MySQL：支持 */
+func (c *RdsClient) EnableInternetAccess(request *rds.EnableInternetAccessRequest) (*rds.EnableInternetAccessResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.EnableInternetAccessResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询RDS实例列表</br>- SQL Server：支持</br>- MySQL：支持 */
 func (c *RdsClient) DescribeInstances(request *rds.DescribeInstancesRequest) (*rds.DescribeInstancesResponse, error) {
     if request == nil {
@@ -243,7 +281,7 @@ func (c *RdsClient) DescribeInstances(request *rds.DescribeInstancesRequest) (*r
     return jdResp, err
 }
 
-/* 创建数据库</br>- SQL Server：支持</br>- MySQL：暂不支持 */
+/* 创建数据库</br>- SQL Server：支持</br>- MySQL：支持 */
 func (c *RdsClient) CreateDatabase(request *rds.CreateDatabaseRequest) (*rds.CreateDatabaseResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -254,6 +292,25 @@ func (c *RdsClient) CreateDatabase(request *rds.CreateDatabaseRequest) (*rds.Cre
     }
 
     jdResp := &rds.CreateDatabaseResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查看RDS实例备份策略</br>- SQL Server：支持</br>- MySQL：暂不支持 */
+func (c *RdsClient) GetBackupPolicy(request *rds.GetBackupPolicyRequest) (*rds.GetBackupPolicyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.GetBackupPolicyResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -338,7 +395,7 @@ func (c *RdsClient) GetAuditFiles(request *rds.GetAuditFilesRequest) (*rds.GetAu
     return jdResp, err
 }
 
-/* 数据库账号重置密码</br>- SQL Server：支持</br>- MySQL：暂不支持 */
+/* 数据库账号重置密码</br>- SQL Server：支持</br>- MySQL：支持 */
 func (c *RdsClient) ResetPassword(request *rds.ResetPasswordRequest) (*rds.ResetPasswordResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -357,7 +414,7 @@ func (c *RdsClient) ResetPassword(request *rds.ResetPasswordRequest) (*rds.Reset
     return jdResp, err
 }
 
-/* 删除数据库 [MFA enabled] */
+/* 删除数据库</br>- SQL Server：支持</br>- MySQL：支持 [MFA enabled] */
 func (c *RdsClient) DeleteDatabase(request *rds.DeleteDatabaseRequest) (*rds.DeleteDatabaseResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -395,6 +452,44 @@ func (c *RdsClient) DescribeErrorLogs(request *rds.DescribeErrorLogsRequest) (*r
     return jdResp, err
 }
 
+/* 查看RDS实例当前白名单</br>- SQL Server：支持</br>- MySQL：支持 */
+func (c *RdsClient) DescribeWhiteList(request *rds.DescribeWhiteListRequest) (*rds.DescribeWhiteListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DescribeWhiteListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 关闭RDS实例的外网访问，用户无法通过Internet访问RDS，但可以通过内网域名访问</br>- SQL Server：支持</br>- MySQL：支持 */
+func (c *RdsClient) DisableInternetAccess(request *rds.DisableInternetAccessRequest) (*rds.DisableInternetAccessResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DisableInternetAccessResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 数据库账号授权</br>- SQL Server：支持</br>- MySQL：暂不支持 */
 func (c *RdsClient) GrantPrivilege(request *rds.GrantPrivilegeRequest) (*rds.GrantPrivilegeResponse, error) {
     if request == nil {
@@ -414,7 +509,7 @@ func (c *RdsClient) GrantPrivilege(request *rds.GrantPrivilegeRequest) (*rds.Gra
     return jdResp, err
 }
 
-/* 查看数据库列表</br>- SQL Server：支持</br>- MySQL：暂不支持 */
+/* 查看数据库列表</br>- SQL Server：支持</br>- MySQL：支持 */
 func (c *RdsClient) DescribeDatabases(request *rds.DescribeDatabasesRequest) (*rds.DescribeDatabasesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -528,7 +623,7 @@ func (c *RdsClient) DescribeIndexPerformance(request *rds.DescribeIndexPerforman
     return jdResp, err
 }
 
-/* 删除数据库账户</br>- SQL Server：支持</br>- MySQL：暂不支持 */
+/* 删除数据库账户</br>- SQL Server：支持</br>- MySQL：支持 */
 func (c *RdsClient) DeleteAccount(request *rds.DeleteAccountRequest) (*rds.DeleteAccountResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -566,7 +661,7 @@ func (c *RdsClient) RestoreDatabaseFromBackup(request *rds.RestoreDatabaseFromBa
     return jdResp, err
 }
 
-/* 查看实例下所有账号信息</br>- SQL Server：支持</br>- MySQL：暂不支持 */
+/* 查看实例下所有账号信息</br>- SQL Server：支持</br>- MySQL：支持 */
 func (c *RdsClient) DescribeAccounts(request *rds.DescribeAccountsRequest) (*rds.DescribeAccountsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -585,7 +680,7 @@ func (c *RdsClient) DescribeAccounts(request *rds.DescribeAccountsRequest) (*rds
     return jdResp, err
 }
 
-/* 创建数据库账户</br>- SQL Server：支持</br>- MySQL：暂不支持 */
+/* 创建数据库账户</br>- SQL Server：支持</br>- MySQL：支持 */
 func (c *RdsClient) CreateAccount(request *rds.CreateAccountRequest) (*rds.CreateAccountResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -661,7 +756,7 @@ func (c *RdsClient) ModifyAudit(request *rds.ModifyAuditRequest) (*rds.ModifyAud
     return jdResp, err
 }
 
-/* 重启RDS实例</br>- SQL Server：支持</br>- MySQL：暂不支持 */
+/* 重启RDS实例</br>- SQL Server：支持</br>- MySQL：支持 */
 func (c *RdsClient) RebootInstance(request *rds.RebootInstanceRequest) (*rds.RebootInstanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")

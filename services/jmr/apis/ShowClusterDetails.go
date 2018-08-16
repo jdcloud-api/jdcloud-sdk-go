@@ -45,7 +45,7 @@ func NewShowClusterDetailsRequest(
 
 	return &ShowClusterDetailsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/v1/regions/{regionId}/detail",
+			URL:     "/regions/{regionId}/detail",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -66,7 +66,7 @@ func NewShowClusterDetailsRequestWithAllParams(
 
     return &ShowClusterDetailsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/v1/regions/{regionId}/detail",
+            URL:     "/regions/{regionId}/detail",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -81,7 +81,7 @@ func NewShowClusterDetailsRequestWithoutParam() *ShowClusterDetailsRequest {
 
     return &ShowClusterDetailsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/v1/regions/{regionId}/detail",
+            URL:     "/regions/{regionId}/detail",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -112,7 +112,7 @@ type ShowClusterDetailsResponse struct {
 }
 
 type ShowClusterDetailsResult struct {
-    Status bool `json:"status"`
+    Status string `json:"status"`
     Message string `json:"message"`
     Data jmr.ClusterDetailModel `json:"data"`
 }

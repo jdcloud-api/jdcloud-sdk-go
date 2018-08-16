@@ -25,7 +25,7 @@ type GetTopicListRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域ID  */
     RegionId string `json:"regionId"`
 
     /*  (Optional) */
@@ -33,7 +33,7 @@ type GetTopicListRequest struct {
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 地域ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -53,7 +53,7 @@ func NewGetTopicListRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 地域ID (Required)
  * param keyword:  (Optional)
  */
 func NewGetTopicListRequestWithAllParams(
@@ -86,7 +86,7 @@ func NewGetTopicListRequestWithoutParam() *GetTopicListRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 地域ID(Required) */
 func (r *GetTopicListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

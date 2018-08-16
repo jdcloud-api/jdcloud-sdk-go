@@ -45,7 +45,7 @@ func NewCreateClusterInNewNetworkRequest(
 
 	return &CreateClusterInNewNetworkRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/v1/regions/{regionId}/create",
+			URL:     "/regions/{regionId}/cluster:create",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -66,7 +66,7 @@ func NewCreateClusterInNewNetworkRequestWithAllParams(
 
     return &CreateClusterInNewNetworkRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/v1/regions/{regionId}/create",
+            URL:     "/regions/{regionId}/cluster:create",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -81,7 +81,7 @@ func NewCreateClusterInNewNetworkRequestWithoutParam() *CreateClusterInNewNetwor
 
     return &CreateClusterInNewNetworkRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/v1/regions/{regionId}/create",
+            URL:     "/regions/{regionId}/cluster:create",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -112,6 +112,6 @@ type CreateClusterInNewNetworkResponse struct {
 }
 
 type CreateClusterInNewNetworkResult struct {
-    Status bool `json:"status"`
+    Status string `json:"status"`
     Message string `json:"message"`
 }
