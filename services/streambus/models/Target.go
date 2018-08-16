@@ -19,7 +19,7 @@ package models
 
 type Target struct {
 
-    /* 需要归档的目的 (Optional) */
+    /* 需要归档的目的地 (Optional) */
     Name *string `json:"name"`
 
     /* 当达到这个数据量时开始归档 (Optional) */

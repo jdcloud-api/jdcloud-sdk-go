@@ -57,4 +57,10 @@ type JobStr struct {
 
     /*  (Optional) */
     UserName *string `json:"userName"`
+
+    /*  (Optional) */
+    SqlStatement *string `json:"sqlStatement"`
+
+    /*  (Optional) */
+    JobType *string `json:"jobType"`
 }

@@ -40,7 +40,7 @@ func NewVpcClient(credential *core.Credential) *VpcClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vpc",
-            Revision:    "0.3.0",
+            Revision:    "0.4.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -91,6 +91,25 @@ func (c *VpcClient) DescribeVpcPeering(request *vpc.DescribeVpcPeeringRequest) (
     return jdResp, err
 }
 
+/* 给路由表解绑子网接口 */
+func (c *VpcClient) DisassociateRouteTable(request *vpc.DisassociateRouteTableRequest) (*vpc.DisassociateRouteTableResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.DisassociateRouteTableResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 给网卡解绑弹性Ip接口 */
 func (c *VpcClient) DisassociateElasticIp(request *vpc.DisassociateElasticIpRequest) (*vpc.DisassociateElasticIpResponse, error) {
     if request == nil {
@@ -102,6 +121,25 @@ func (c *VpcClient) DisassociateElasticIp(request *vpc.DisassociateElasticIpRequ
     }
 
     jdResp := &vpc.DisassociateElasticIpResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建私有网络 */
+func (c *VpcClient) CreateVpc(request *vpc.CreateVpcRequest) (*vpc.CreateVpcResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.CreateVpcResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -387,6 +425,25 @@ func (c *VpcClient) UnassignSecondaryIps(request *vpc.UnassignSecondaryIpsReques
     }
 
     jdResp := &vpc.UnassignSecondaryIpsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除私有网络 */
+func (c *VpcClient) DeleteVpc(request *vpc.DeleteVpcRequest) (*vpc.DeleteVpcResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.DeleteVpcResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err

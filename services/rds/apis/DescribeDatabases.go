@@ -31,7 +31,7 @@ type DescribeDatabasesRequest struct {
     /* 实例ID  */
     InstanceId string `json:"instanceId"`
 
-    /* 数据库名称 (Optional) */
+    /* 数据库名称</br>- SQL Server：支持</br>- MySQL：暂不支持 (Optional) */
     DbName *string `json:"dbName"`
 }
 
@@ -61,7 +61,7 @@ func NewDescribeDatabasesRequest(
 /*
  * param regionId: 区域代码 (Required)
  * param instanceId: 实例ID (Required)
- * param dbName: 数据库名称 (Optional)
+ * param dbName: 数据库名称</br>- SQL Server：支持</br>- MySQL：暂不支持 (Optional)
  */
 func NewDescribeDatabasesRequestWithAllParams(
     regionId string,
@@ -105,7 +105,7 @@ func (r *DescribeDatabasesRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param dbName: 数据库名称(Optional) */
+/* param dbName: 数据库名称</br>- SQL Server：支持</br>- MySQL：暂不支持(Optional) */
 func (r *DescribeDatabasesRequest) SetDbName(dbName string) {
     r.DbName = &dbName
 }

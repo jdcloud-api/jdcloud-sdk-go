@@ -24,7 +24,7 @@ type DeleteTopicRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域ID  */
     RegionId string `json:"regionId"`
 
     /*   */
@@ -32,7 +32,7 @@ type DeleteTopicRequest struct {
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 地域ID (Required)
  * param name:  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -55,7 +55,7 @@ func NewDeleteTopicRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 地域ID (Required)
  * param name:  (Required)
  */
 func NewDeleteTopicRequestWithAllParams(
@@ -88,7 +88,7 @@ func NewDeleteTopicRequestWithoutParam() *DeleteTopicRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 地域ID(Required) */
 func (r *DeleteTopicRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

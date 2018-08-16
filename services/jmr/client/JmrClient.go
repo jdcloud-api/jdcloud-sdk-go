@@ -40,7 +40,7 @@ func NewJmrClient(credential *core.Credential) *JmrClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "jmr",
-            Revision:    "1.0.0",
+            Revision:    "1.1.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -53,8 +53,8 @@ func (c *JmrClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-/* 释放集群 */
-func (c *JmrClient) ReleaseCluster(request *jmr.ReleaseClusterRequest) (*jmr.ReleaseClusterResponse, error) {
+/* 删除作业 */
+func (c *JmrClient) DeleteJob(request *jmr.DeleteJobRequest) (*jmr.DeleteJobResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -63,7 +63,292 @@ func (c *JmrClient) ReleaseCluster(request *jmr.ReleaseClusterRequest) (*jmr.Rel
         return nil, err
     }
 
-    jdResp := &jmr.ReleaseClusterResponse{}
+    jdResp := &jmr.DeleteJobResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据userpin获取accessKey和accessKeySecret */
+func (c *JmrClient) GetAccessKeys(request *jmr.GetAccessKeysRequest) (*jmr.GetAccessKeysResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.GetAccessKeysResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取定时任务详情 */
+func (c *JmrClient) GetCronJobDetail(request *jmr.GetCronJobDetailRequest) (*jmr.GetCronJobDetailResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.GetCronJobDetailResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取定时任务的某个作业的最后一次运行记录 */
+func (c *JmrClient) GetLastCronJobTask(request *jmr.GetLastCronJobTaskRequest) (*jmr.GetLastCronJobTaskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.GetLastCronJobTaskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建作业并执行 */
+func (c *JmrClient) CreateAndExcuteJob(request *jmr.CreateAndExcuteJobRequest) (*jmr.CreateAndExcuteJobResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.CreateAndExcuteJobResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 硬件配置信息列表 */
+func (c *JmrClient) GetHardwareStack(request *jmr.GetHardwareStackRequest) (*jmr.GetHardwareStackResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.GetHardwareStackResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取vpc集合 */
+func (c *JmrClient) QueryVpcs(request *jmr.QueryVpcsRequest) (*jmr.QueryVpcsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.QueryVpcsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取作业类型列表 */
+func (c *JmrClient) GetJobTypeList(request *jmr.GetJobTypeListRequest) (*jmr.GetJobTypeListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.GetJobTypeListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询某一执行计划的某一个job的运行记录 */
+func (c *JmrClient) GetCronJobTaskListByJobId(request *jmr.GetCronJobTaskListByJobIdRequest) (*jmr.GetCronJobTaskListByJobIdResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.GetCronJobTaskListByJobIdResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 集群扩容 */
+func (c *JmrClient) ClusterExpansion(request *jmr.ClusterExpansionRequest) (*jmr.ClusterExpansionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.ClusterExpansionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除定时任务 */
+func (c *JmrClient) DeleteCronJob(request *jmr.DeleteCronJobRequest) (*jmr.DeleteCronJobResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.DeleteCronJobResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除集群的hdfs文件 */
+func (c *JmrClient) DeleteHdfsFile(request *jmr.DeleteHdfsFileRequest) (*jmr.DeleteHdfsFileResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.DeleteHdfsFileResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查看作业明细 */
+func (c *JmrClient) ShowJobDetails(request *jmr.ShowJobDetailsRequest) (*jmr.ShowJobDetailsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.ShowJobDetailsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取集群的部署作业数 */
+func (c *JmrClient) GetClusterCronJobCount(request *jmr.GetClusterCronJobCountRequest) (*jmr.GetClusterCronJobCountResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.GetClusterCronJobCountResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 立即执行 */
+func (c *JmrClient) RunCronJobOnce(request *jmr.RunCronJobOnceRequest) (*jmr.RunCronJobOnceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.RunCronJobOnceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 集群扩容时，显示集群details */
+func (c *JmrClient) GetClusterDetailInfo(request *jmr.GetClusterDetailInfoRequest) (*jmr.GetClusterDetailInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.GetClusterDetailInfoResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -91,6 +376,291 @@ func (c *JmrClient) CreateClusterInNewNetwork(request *jmr.CreateClusterInNewNet
     return jdResp, err
 }
 
+/* 通过clusterId得到远程连接集群主节点的VNC URL */
+func (c *JmrClient) GetFirstServerVncUrl(request *jmr.GetFirstServerVncUrlRequest) (*jmr.GetFirstServerVncUrlResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.GetFirstServerVncUrlResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 恢复定时任务 */
+func (c *JmrClient) ResumeCronJob(request *jmr.ResumeCronJobRequest) (*jmr.ResumeCronJobResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.ResumeCronJobResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 返回jmr版本列表 */
+func (c *JmrClient) GetJmrVersionList(request *jmr.GetJmrVersionListRequest) (*jmr.GetJmrVersionListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.GetJmrVersionListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 校验执行计划名称是否可用 */
+func (c *JmrClient) IsValidPlanName(request *jmr.IsValidPlanNameRequest) (*jmr.IsValidPlanNameResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.IsValidPlanNameResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询集群随机码 */
+func (c *JmrClient) QueryFloatingIp(request *jmr.QueryFloatingIpRequest) (*jmr.QueryFloatingIpResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.QueryFloatingIpResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 暂停定时任务 */
+func (c *JmrClient) PauseCronJob(request *jmr.PauseCronJobRequest) (*jmr.PauseCronJobResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.PauseCronJobResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取某一作业的运行记录 */
+func (c *JmrClient) GetTaskList(request *jmr.GetTaskListRequest) (*jmr.GetTaskListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.GetTaskListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 计算集群扩容的价格 */
+func (c *JmrClient) CalculateExpansionPrice(request *jmr.CalculateExpansionPriceRequest) (*jmr.CalculateExpansionPriceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.CalculateExpansionPriceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取用户appKey和secretKey */
+func (c *JmrClient) GetKey(request *jmr.GetKeyRequest) (*jmr.GetKeyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.GetKeyResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 新建或更新调度配置 */
+func (c *JmrClient) CreateCronJob(request *jmr.CreateCronJobRequest) (*jmr.CreateCronJobResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.CreateCronJobResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取计划中的任务(已经添加到quartz调度器的任务) */
+func (c *JmrClient) QueryExecutingJobList(request *jmr.QueryExecutingJobListRequest) (*jmr.QueryExecutingJobListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.QueryExecutingJobListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取作业列表 */
+func (c *JmrClient) GetJobList(request *jmr.GetJobListRequest) (*jmr.GetJobListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.GetJobListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取工作流运行记录列表 */
+func (c *JmrClient) GetWorkFlowTrackerList(request *jmr.GetWorkFlowTrackerListRequest) (*jmr.GetWorkFlowTrackerListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.GetWorkFlowTrackerListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 校验作业名称是否有效 */
+func (c *JmrClient) IsValidJobName(request *jmr.IsValidJobNameRequest) (*jmr.IsValidJobNameResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.IsValidJobNameResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 逻辑删除 */
+func (c *JmrClient) DeleteCluster(request *jmr.DeleteClusterRequest) (*jmr.DeleteClusterResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.DeleteClusterResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询集群详情 */
 func (c *JmrClient) ShowClusterDetails(request *jmr.ShowClusterDetailsRequest) (*jmr.ShowClusterDetailsResponse, error) {
     if request == nil {
@@ -102,6 +672,538 @@ func (c *JmrClient) ShowClusterDetails(request *jmr.ShowClusterDetailsRequest) (
     }
 
     jdResp := &jmr.ShowClusterDetailsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取主机规格列表(过滤掉低内存的规格, 低于4核全部去掉。) */
+func (c *JmrClient) GetInstanceList(request *jmr.GetInstanceListRequest) (*jmr.GetInstanceListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.GetInstanceListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询用户集群列表及相关服务的一些信息 */
+func (c *JmrClient) IdataCluster(request *jmr.IdataClusterRequest) (*jmr.IdataClusterResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.IdataClusterResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改作业信息 */
+func (c *JmrClient) ModifyJob(request *jmr.ModifyJobRequest) (*jmr.ModifyJobResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.ModifyJobResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询VpcSubnet集合 */
+func (c *JmrClient) QueryVpcSubnets(request *jmr.QueryVpcSubnetsRequest) (*jmr.QueryVpcSubnetsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.QueryVpcSubnetsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 计算集群价格 */
+func (c *JmrClient) CalculateClusterPrice(request *jmr.CalculateClusterPriceRequest) (*jmr.CalculateClusterPriceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.CalculateClusterPriceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取软件清单信息 */
+func (c *JmrClient) GetSoftwareAndVersionInfo(request *jmr.GetSoftwareAndVersionInfoRequest) (*jmr.GetSoftwareAndVersionInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.GetSoftwareAndVersionInfoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除运行记录 */
+func (c *JmrClient) DeleteWorkFlowTracker(request *jmr.DeleteWorkFlowTrackerRequest) (*jmr.DeleteWorkFlowTrackerResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.DeleteWorkFlowTrackerResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 释放集群 */
+func (c *JmrClient) ReleaseCluster(request *jmr.ReleaseClusterRequest) (*jmr.ReleaseClusterResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.ReleaseClusterResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 软件配置信息列表 */
+func (c *JmrClient) GetPropertyValue(request *jmr.GetPropertyValueRequest) (*jmr.GetPropertyValueResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.GetPropertyValueResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 用户名校验 */
+func (c *JmrClient) ValidateUser(request *jmr.ValidateUserRequest) (*jmr.ValidateUserResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.ValidateUserResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除工作流 */
+func (c *JmrClient) DeleteWorkFlow(request *jmr.DeleteWorkFlowRequest) (*jmr.DeleteWorkFlowResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.DeleteWorkFlowResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取剩余可创建资源数 */
+func (c *JmrClient) GetAvaliableNum(request *jmr.GetAvaliableNumRequest) (*jmr.GetAvaliableNumResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.GetAvaliableNumResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 续费 */
+func (c *JmrClient) RenewBillingOrder(request *jmr.RenewBillingOrderRequest) (*jmr.RenewBillingOrderResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.RenewBillingOrderResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 验证输入的集群名称是否重复 */
+func (c *JmrClient) ValidateName(request *jmr.ValidateNameRequest) (*jmr.ValidateNameResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.ValidateNameResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 服务存活状态监控明细数据 */
+func (c *JmrClient) MonitorDetails(request *jmr.MonitorDetailsRequest) (*jmr.MonitorDetailsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.MonitorDetailsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取软件清单信息 */
+func (c *JmrClient) GetSoftwareInfo(request *jmr.GetSoftwareInfoRequest) (*jmr.GetSoftwareInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.GetSoftwareInfoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查看工作流详情 */
+func (c *JmrClient) WfInstanceDetail(request *jmr.WfInstanceDetailRequest) (*jmr.WfInstanceDetailResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.WfInstanceDetailResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取集群的作业数 */
+func (c *JmrClient) GetClusterJobCount(request *jmr.GetClusterJobCountRequest) (*jmr.GetClusterJobCountResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.GetClusterJobCountResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询server的剩余配额 */
+func (c *JmrClient) QueryServerQuota(request *jmr.QueryServerQuotaRequest) (*jmr.QueryServerQuotaResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.QueryServerQuotaResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 当前监控的服务列表 */
+func (c *JmrClient) MonitorServiceList(request *jmr.MonitorServiceListRequest) (*jmr.MonitorServiceListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.MonitorServiceListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 运行工作流 */
+func (c *JmrClient) RunWorkFlow(request *jmr.RunWorkFlowRequest) (*jmr.RunWorkFlowResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.RunWorkFlowResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建作业 */
+func (c *JmrClient) CreateJob(request *jmr.CreateJobRequest) (*jmr.CreateJobResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.CreateJobResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 保存工作流 */
+func (c *JmrClient) SaveWorkFlow(request *jmr.SaveWorkFlowRequest) (*jmr.SaveWorkFlowResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.SaveWorkFlowResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取工作流列表 */
+func (c *JmrClient) GetWorkFlowList(request *jmr.GetWorkFlowListRequest) (*jmr.GetWorkFlowListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.GetWorkFlowListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取定时任务的运行记录 */
+func (c *JmrClient) GetCronJobTaskList(request *jmr.GetCronJobTaskListRequest) (*jmr.GetCronJobTaskListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.GetCronJobTaskListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取执行计划列表 */
+func (c *JmrClient) GetCronJobList(request *jmr.GetCronJobListRequest) (*jmr.GetCronJobListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.GetCronJobListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改执行计划 */
+func (c *JmrClient) ModifyCronJob(request *jmr.ModifyCronJobRequest) (*jmr.ModifyCronJobResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.ModifyCronJobResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 执行task */
+func (c *JmrClient) ExecuteJob(request *jmr.ExecuteJobRequest) (*jmr.ExecuteJobResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.ExecuteJobResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err

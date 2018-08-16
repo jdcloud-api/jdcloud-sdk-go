@@ -31,7 +31,7 @@ type Storage struct {
     /*  (Optional) */
     Type *string `json:"type"`
 
-    /*  (Optional) */
+    /* 这个参数有input和ouput两个可选值，取决于创建输入还是输出 (Optional) */
     StorageType *string `json:"storageType"`
 
     /*  (Optional) */
@@ -49,6 +49,6 @@ type Storage struct {
     /*  (Optional) */
     Deleted *string `json:"deleted"`
 
-    /*  (Optional) */
+    /* Storage的具体参数。<br>1、创建源类型为流式数据输入时，则需要传输source，topicName，duration，format，delimiter，schema 。<br> 2、创建输出如果输出位置为流数据总线，需要传topicName，format，delimiter，ossFlag，bucketName，directory，objectName。<br>3、创建输出如果输出位置为数据计算服务，则需要传输database，table，ossFlag，bucketName，directory，objectName。 (Optional) */
     StorageParameterList []StorageParameter `json:"storageParameterList"`
 }

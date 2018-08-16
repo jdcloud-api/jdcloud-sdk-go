@@ -19,11 +19,17 @@ package models
 
 type Topic struct {
 
+    /* 主题id (Optional) */
+    Id *int `json:"id"`
+
     /* 是否归档（0：未归档，1：已归档） (Optional) */
     Archived *int `json:"archived"`
 
     /* 数据写入后的保留时间 (Optional) */
     Lifecycle *int `json:"lifecycle"`
+
+    /* 分区 (Optional) */
+    PartitionNum *int `json:"partitionNum"`
 
     /* 流数据总线中topic的名字 (Optional) */
     Name *string `json:"name"`
