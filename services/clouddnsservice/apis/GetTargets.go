@@ -24,7 +24,7 @@ type GetTargetsRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 实例所属的地域ID  */
     RegionId string `json:"regionId"`
 
     /* 域名ID  */
@@ -35,7 +35,7 @@ type GetTargetsRequest struct {
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 实例所属的地域ID (Required)
  * param domainId: 域名ID (Required)
  * param subDomainName: 子域名 (Required)
  *
@@ -61,7 +61,7 @@ func NewGetTargetsRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 实例所属的地域ID (Required)
  * param domainId: 域名ID (Required)
  * param subDomainName: 子域名 (Required)
  */
@@ -97,7 +97,7 @@ func NewGetTargetsRequestWithoutParam() *GetTargetsRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 实例所属的地域ID(Required) */
 func (r *GetTargetsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

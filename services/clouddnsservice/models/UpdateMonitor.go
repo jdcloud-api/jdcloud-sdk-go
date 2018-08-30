@@ -34,7 +34,7 @@ type UpdateMonitor struct {
     /* 监控状况 开启监控 2，暂停监控 4 (Optional) */
     MonitorEnable *int `json:"monitorEnable"`
 
-    /* 监控频率，单位s (Optional) */
+    /* 监控频率，单位秒 (Optional) */
     MonitorFreq *int `json:"monitorFreq"`
 
     /* 监控端口 (Optional) */

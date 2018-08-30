@@ -31,6 +31,6 @@ type Domain struct {
     /* 过期时间，格式Unix timestamp (Optional) */
     ExpirationDate int `json:"expirationDate"`
 
-    /* 套餐类型，0-免费 1-企业版 2-高级版 (Optional) */
+    /* 套餐类型，0->免费 1->企业版 2->高级版 (Optional) */
     PackId int `json:"packId"`
 }

@@ -53,7 +53,7 @@ func (c *XdataClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-/* 执行PySpark脚本 */
+/* 执行用户编写的PySpark脚本 */
 func (c *XdataClient) ExecutePySparkQuery(request *xdata.ExecutePySparkQueryRequest) (*xdata.ExecutePySparkQueryResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -72,7 +72,7 @@ func (c *XdataClient) ExecutePySparkQuery(request *xdata.ExecutePySparkQueryRequ
     return jdResp, err
 }
 
-/* 查询指定数据库下所有数据表 */
+/* 查询用户实例指定数据库下的所有数据表信息 */
 func (c *XdataClient) ListTableInfo(request *xdata.ListTableInfoRequest) (*xdata.ListTableInfoResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -91,7 +91,7 @@ func (c *XdataClient) ListTableInfo(request *xdata.ListTableInfoRequest) (*xdata
     return jdResp, err
 }
 
-/* 查询数据库列表 */
+/* 查询用户实例的所有数据库信息 */
 func (c *XdataClient) ListDatabaseInfo(request *xdata.ListDatabaseInfoRequest) (*xdata.ListDatabaseInfoResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -110,7 +110,7 @@ func (c *XdataClient) ListDatabaseInfo(request *xdata.ListDatabaseInfoRequest) (
     return jdResp, err
 }
 
-/* 删除数据库 */
+/* 删除用户实例的指定数据库 */
 func (c *XdataClient) DeleteDatabase(request *xdata.DeleteDatabaseRequest) (*xdata.DeleteDatabaseResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -129,7 +129,7 @@ func (c *XdataClient) DeleteDatabase(request *xdata.DeleteDatabaseRequest) (*xda
     return jdResp, err
 }
 
-/* 创建数据库 */
+/* 创建属于用户实例的数据库 */
 func (c *XdataClient) CreateDatabase(request *xdata.CreateDatabaseRequest) (*xdata.CreateDatabaseResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -148,7 +148,7 @@ func (c *XdataClient) CreateDatabase(request *xdata.CreateDatabaseRequest) (*xda
     return jdResp, err
 }
 
-/* 获取PySpark执行的结果 */
+/* 获取用户PySpark脚本的执行结果 */
 func (c *XdataClient) GetPySparkExecuteResult(request *xdata.GetPySparkExecuteResultRequest) (*xdata.GetPySparkExecuteResultResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -167,7 +167,7 @@ func (c *XdataClient) GetPySparkExecuteResult(request *xdata.GetPySparkExecuteRe
     return jdResp, err
 }
 
-/* 查询实例列表 */
+/* 查询用户所属的实例信息 */
 func (c *XdataClient) ListInstanceInfo(request *xdata.ListInstanceInfoRequest) (*xdata.ListInstanceInfoResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -186,7 +186,7 @@ func (c *XdataClient) ListInstanceInfo(request *xdata.ListInstanceInfoRequest) (
     return jdResp, err
 }
 
-/* 获取查询日志 */
+/* 获取用户Spark SQL脚本的查询日志 */
 func (c *XdataClient) GetRasQueryLog(request *xdata.GetRasQueryLogRequest) (*xdata.GetRasQueryLogResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -205,7 +205,7 @@ func (c *XdataClient) GetRasQueryLog(request *xdata.GetRasQueryLogRequest) (*xda
     return jdResp, err
 }
 
-/* 执行Spark SQL */
+/* 执行用户编写的Spark SQL脚本 */
 func (c *XdataClient) ExecuteRasQuery(request *xdata.ExecuteRasQueryRequest) (*xdata.ExecuteRasQueryResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -224,7 +224,7 @@ func (c *XdataClient) ExecuteRasQuery(request *xdata.ExecuteRasQueryRequest) (*x
     return jdResp, err
 }
 
-/* 查询数据表信息 */
+/* 查询用户实例的指定数据表信息 */
 func (c *XdataClient) GetTableInfo(request *xdata.GetTableInfoRequest) (*xdata.GetTableInfoResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -243,7 +243,7 @@ func (c *XdataClient) GetTableInfo(request *xdata.GetTableInfoRequest) (*xdata.G
     return jdResp, err
 }
 
-/* 删除数据表 */
+/* 删除用户实例的指定数据表 */
 func (c *XdataClient) DeleteTable(request *xdata.DeleteTableRequest) (*xdata.DeleteTableResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -262,7 +262,7 @@ func (c *XdataClient) DeleteTable(request *xdata.DeleteTableRequest) (*xdata.Del
     return jdResp, err
 }
 
-/* 获取查询的结果 */
+/* 获取用户Spark SQL脚本的查询结果 */
 func (c *XdataClient) GetRasQueryResult(request *xdata.GetRasQueryResultRequest) (*xdata.GetRasQueryResultResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -281,7 +281,7 @@ func (c *XdataClient) GetRasQueryResult(request *xdata.GetRasQueryResultRequest)
     return jdResp, err
 }
 
-/* 终止PySpark任务 */
+/* 终止用户PySpark脚本任务 */
 func (c *XdataClient) CancelPySparkJob(request *xdata.CancelPySparkJobRequest) (*xdata.CancelPySparkJobResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -300,7 +300,7 @@ func (c *XdataClient) CancelPySparkJob(request *xdata.CancelPySparkJobRequest) (
     return jdResp, err
 }
 
-/* 终止查询 */
+/* 终止用户Spark SQL脚本查询 */
 func (c *XdataClient) CancelRasQuery(request *xdata.CancelRasQueryRequest) (*xdata.CancelRasQueryResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -319,7 +319,7 @@ func (c *XdataClient) CancelRasQuery(request *xdata.CancelRasQueryRequest) (*xda
     return jdResp, err
 }
 
-/* 获取PySpark脚本的执行状态 */
+/* 获取用户PySpark脚本的执行状态 */
 func (c *XdataClient) GetPySparkExecuteState(request *xdata.GetPySparkExecuteStateRequest) (*xdata.GetPySparkExecuteStateResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -338,7 +338,7 @@ func (c *XdataClient) GetPySparkExecuteState(request *xdata.GetPySparkExecuteSta
     return jdResp, err
 }
 
-/* 查询数据库详情 */
+/* 查询用户实例的指定数据库信息 */
 func (c *XdataClient) GetDatabaseInfo(request *xdata.GetDatabaseInfoRequest) (*xdata.GetDatabaseInfoResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -357,7 +357,7 @@ func (c *XdataClient) GetDatabaseInfo(request *xdata.GetDatabaseInfoRequest) (*x
     return jdResp, err
 }
 
-/* 创建数据表 */
+/* 创建用户实例的数据表 */
 func (c *XdataClient) CreateTable(request *xdata.CreateTableRequest) (*xdata.CreateTableResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -376,7 +376,7 @@ func (c *XdataClient) CreateTable(request *xdata.CreateTableRequest) (*xdata.Cre
     return jdResp, err
 }
 
-/* 获取查询状态 */
+/* 获取用户Spark SQL脚本的查询状态 */
 func (c *XdataClient) GetRasQueryState(request *xdata.GetRasQueryStateRequest) (*xdata.GetRasQueryStateResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")

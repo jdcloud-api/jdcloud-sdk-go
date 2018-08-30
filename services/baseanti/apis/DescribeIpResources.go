@@ -27,6 +27,9 @@ type DescribeIpResourcesRequest struct {
 
     /* Region ID  */
     RegionId string `json:"regionId"`
+
+    /* IP模糊匹配 (Optional) */
+    Ip *string `json:"ip"`
 }
 
 /*
@@ -51,9 +54,11 @@ func NewDescribeIpResourcesRequest(
 
 /*
  * param regionId: Region ID (Required)
+ * param ip: IP模糊匹配 (Optional)
  */
 func NewDescribeIpResourcesRequestWithAllParams(
     regionId string,
+    ip *string,
 ) *DescribeIpResourcesRequest {
 
     return &DescribeIpResourcesRequest{
@@ -64,6 +69,7 @@ func NewDescribeIpResourcesRequestWithAllParams(
             Version: "v1",
         },
         RegionId: regionId,
+        Ip: ip,
     }
 }
 
@@ -83,6 +89,11 @@ func NewDescribeIpResourcesRequestWithoutParam() *DescribeIpResourcesRequest {
 /* param regionId: Region ID(Required) */
 func (r *DescribeIpResourcesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
+}
+
+/* param ip: IP模糊匹配(Optional) */
+func (r *DescribeIpResourcesRequest) SetIp(ip string) {
+    r.Ip = &ip
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

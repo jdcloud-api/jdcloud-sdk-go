@@ -42,12 +42,9 @@ backupId - 备份ID, 精确匹配
 }
 
 /*
- * param regionId: Region ID 
- * param pageNumber: 页码；默认为1，取值范围：[1,∞) (Optional)
- * param pageSize: 分页大小；默认为10；取值范围[1, 100] (Optional)
- * param filters: instanceId - 实例ID, 精确匹配
-backupId - 备份ID, 精确匹配
- (Optional)
+ * param regionId: Region ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeBackupsRequest(
     regionId string,
@@ -64,18 +61,66 @@ func NewDescribeBackupsRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param pageNumber: 页码；默认为1，取值范围：[1,∞) (Optional)
+ * param pageSize: 分页大小；默认为10；取值范围[1, 100] (Optional)
+ * param filters: instanceId - 实例ID, 精确匹配
+backupId - 备份ID, 精确匹配
+ (Optional)
+ */
+func NewDescribeBackupsRequestWithAllParams(
+    regionId string,
+    pageNumber *int,
+    pageSize *int,
+    filters []common.Filter,
+) *DescribeBackupsRequest {
+
+    return &DescribeBackupsRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/backups",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        PageNumber: pageNumber,
+        PageSize: pageSize,
+        Filters: filters,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeBackupsRequestWithoutParam() *DescribeBackupsRequest {
+
+    return &DescribeBackupsRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/backups",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DescribeBackupsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param pageNumber: 页码；默认为1，取值范围：[1,∞)(Optional) */
 func (r *DescribeBackupsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
+/* param pageSize: 分页大小；默认为10；取值范围[1, 100](Optional) */
 func (r *DescribeBackupsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
+/* param filters: instanceId - 实例ID, 精确匹配
+backupId - 备份ID, 精确匹配
+(Optional) */
 func (r *DescribeBackupsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }

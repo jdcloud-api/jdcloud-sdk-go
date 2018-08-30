@@ -17,11 +17,11 @@
 package models
 
 
-type IpResourceFlowDetail struct {
+type MongodbInfos struct {
 
-    /*  (Optional) */
-    Used []int64 `json:"used"`
+    /* 实例ID (Optional) */
+    SpaceId string `json:"spaceId"`
 
-    /*  (Optional) */
-    Times []string `json:"times"`
+    /* 状态描述 (Optional) */
+    Status string `json:"status"`
 }

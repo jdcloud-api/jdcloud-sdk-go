@@ -38,10 +38,12 @@ type ModifyInstanceSpecRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: Instance ID 
- * param instanceClass: 实例规格，包年包月不允许小于当前规格。 
- * param instanceStorageGB: 存储空间，包年包月不允许小于当前规格。 
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
+ * param instanceClass: 实例规格，包年包月不允许小于当前规格。 (Required)
+ * param instanceStorageGB: 存储空间，包年包月不允许小于当前规格。 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewModifyInstanceSpecRequest(
     regionId string,
@@ -64,18 +66,62 @@ func NewModifyInstanceSpecRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
+ * param instanceClass: 实例规格，包年包月不允许小于当前规格。 (Required)
+ * param instanceStorageGB: 存储空间，包年包月不允许小于当前规格。 (Required)
+ */
+func NewModifyInstanceSpecRequestWithAllParams(
+    regionId string,
+    instanceId string,
+    instanceClass string,
+    instanceStorageGB int,
+) *ModifyInstanceSpecRequest {
+
+    return &ModifyInstanceSpecRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstanceSpec",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+        InstanceClass: instanceClass,
+        InstanceStorageGB: instanceStorageGB,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewModifyInstanceSpecRequestWithoutParam() *ModifyInstanceSpecRequest {
+
+    return &ModifyInstanceSpecRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstanceSpec",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *ModifyInstanceSpecRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: Instance ID(Required) */
 func (r *ModifyInstanceSpecRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
+/* param instanceClass: 实例规格，包年包月不允许小于当前规格。(Required) */
 func (r *ModifyInstanceSpecRequest) SetInstanceClass(instanceClass string) {
     r.InstanceClass = instanceClass
 }
 
+/* param instanceStorageGB: 存储空间，包年包月不允许小于当前规格。(Required) */
 func (r *ModifyInstanceSpecRequest) SetInstanceStorageGB(instanceStorageGB int) {
     r.InstanceStorageGB = instanceStorageGB
 }

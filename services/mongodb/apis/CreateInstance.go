@@ -37,9 +37,10 @@ type CreateInstanceRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceSpec: 实例规格 
- * param chargeSpec: 付费方式 (Optional)
+ * param regionId: Region ID (Required)
+ * param instanceSpec: 实例规格 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateInstanceRequest(
     regionId string,
@@ -58,14 +59,54 @@ func NewCreateInstanceRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceSpec: 实例规格 (Required)
+ * param chargeSpec: 付费方式 (Optional)
+ */
+func NewCreateInstanceRequestWithAllParams(
+    regionId string,
+    instanceSpec *mongodb.DBInstanceSpec,
+    chargeSpec *charge.ChargeSpec,
+) *CreateInstanceRequest {
+
+    return &CreateInstanceRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceSpec: instanceSpec,
+        ChargeSpec: chargeSpec,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewCreateInstanceRequestWithoutParam() *CreateInstanceRequest {
+
+    return &CreateInstanceRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *CreateInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceSpec: 实例规格(Required) */
 func (r *CreateInstanceRequest) SetInstanceSpec(instanceSpec *mongodb.DBInstanceSpec) {
     r.InstanceSpec = instanceSpec
 }
 
+/* param chargeSpec: 付费方式(Optional) */
 func (r *CreateInstanceRequest) SetChargeSpec(chargeSpec *charge.ChargeSpec) {
     r.ChargeSpec = chargeSpec
 }

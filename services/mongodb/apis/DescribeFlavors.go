@@ -18,79 +18,62 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    mongodb "github.com/jdcloud-api/jdcloud-sdk-go/services/mongodb/models"
 )
 
-type RestoreInstanceRequest struct {
+type DescribeFlavorsRequest struct {
 
     core.JDCloudRequest
 
     /* Region ID  */
     RegionId string `json:"regionId"`
-
-    /* Instance ID  */
-    InstanceId string `json:"instanceId"`
-
-    /* 备份ID  */
-    BackupId string `json:""`
 }
 
 /*
  * param regionId: Region ID (Required)
- * param instanceId: Instance ID (Required)
- * param backupId: 备份ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewRestoreInstanceRequest(
+func NewDescribeFlavorsRequest(
     regionId string,
-    instanceId string,
-    backupId string,
-) *RestoreInstanceRequest {
+) *DescribeFlavorsRequest {
 
-	return &RestoreInstanceRequest{
+	return &DescribeFlavorsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/restoreInstance",
-			Method:  "POST",
+			URL:     "/regions/{regionId}/flavors",
+			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        InstanceId: instanceId,
-        BackupId: backupId,
 	}
 }
 
 /*
  * param regionId: Region ID (Required)
- * param instanceId: Instance ID (Required)
- * param backupId: 备份ID (Required)
  */
-func NewRestoreInstanceRequestWithAllParams(
+func NewDescribeFlavorsRequestWithAllParams(
     regionId string,
-    instanceId string,
-    backupId string,
-) *RestoreInstanceRequest {
+) *DescribeFlavorsRequest {
 
-    return &RestoreInstanceRequest{
+    return &DescribeFlavorsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/restoreInstance",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/flavors",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        InstanceId: instanceId,
-        BackupId: backupId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewRestoreInstanceRequestWithoutParam() *RestoreInstanceRequest {
+func NewDescribeFlavorsRequestWithoutParam() *DescribeFlavorsRequest {
 
-    return &RestoreInstanceRequest{
+    return &DescribeFlavorsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/restoreInstance",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/flavors",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
@@ -98,31 +81,22 @@ func NewRestoreInstanceRequestWithoutParam() *RestoreInstanceRequest {
 }
 
 /* param regionId: Region ID(Required) */
-func (r *RestoreInstanceRequest) SetRegionId(regionId string) {
+func (r *DescribeFlavorsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
-}
-
-/* param instanceId: Instance ID(Required) */
-func (r *RestoreInstanceRequest) SetInstanceId(instanceId string) {
-    r.InstanceId = instanceId
-}
-
-/* param backupId: 备份ID(Required) */
-func (r *RestoreInstanceRequest) SetBackupId(backupId string) {
-    r.BackupId = backupId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r RestoreInstanceRequest) GetRegionId() string {
+func (r DescribeFlavorsRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type RestoreInstanceResponse struct {
+type DescribeFlavorsResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result RestoreInstanceResult `json:"result"`
+    Result DescribeFlavorsResult `json:"result"`
 }
 
-type RestoreInstanceResult struct {
+type DescribeFlavorsResult struct {
+    Flavors []mongodb.Flavor `json:"flavors"`
 }

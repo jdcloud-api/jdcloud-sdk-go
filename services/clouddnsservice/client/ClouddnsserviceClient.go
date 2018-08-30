@@ -40,7 +40,7 @@ func NewClouddnsserviceClient(credential *core.Credential) *ClouddnsserviceClien
             Credential:  *credential,
             Config:      *config,
             ServiceName: "clouddnsservice",
-            Revision:    "1.0.2",
+            Revision:    "1.0.3",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -91,7 +91,7 @@ func (c *ClouddnsserviceClient) UpdateMonitor(request *clouddnsservice.UpdateMon
     return jdResp, err
 }
 
-/* 添加域名解析 */
+/* 添加域名的解析记录 */
 func (c *ClouddnsserviceClient) AddRR(request *clouddnsservice.AddRRRequest) (*clouddnsservice.AddRRResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -243,7 +243,7 @@ func (c *ClouddnsserviceClient) GetDomainQueryCount(request *clouddnsservice.Get
     return jdResp, err
 }
 
-/* 添加子域名的监控项，采用默认配置 */
+/* 添加子域名的监控项，默认把子域名的所有监控项都添加上监控 */
 func (c *ClouddnsserviceClient) AddMonitor(request *clouddnsservice.AddMonitorRequest) (*clouddnsservice.AddMonitorResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -262,7 +262,7 @@ func (c *ClouddnsserviceClient) AddMonitor(request *clouddnsservice.AddMonitorRe
     return jdResp, err
 }
 
-/* 查询DNS所有解析线路 */
+/* 查询云解析所有的基础解析线路 */
 func (c *ClouddnsserviceClient) GetViewTree(request *clouddnsservice.GetViewTreeRequest) (*clouddnsservice.GetViewTreeResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -319,7 +319,7 @@ func (c *ClouddnsserviceClient) GetMonitor(request *clouddnsservice.GetMonitorRe
     return jdResp, err
 }
 
-/* 监控项的操作，包括：删除，暂停，启动, 手动恢复, 手动切换 */
+/* 监控项的操作集合，包括：删除，暂停，启动, 手动恢复, 手动切换 */
 func (c *ClouddnsserviceClient) OperateMonitor(request *clouddnsservice.OperateMonitorRequest) (*clouddnsservice.OperateMonitorResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -357,7 +357,7 @@ func (c *ClouddnsserviceClient) UpdateDomain(request *clouddnsservice.UpdateDoma
     return jdResp, err
 }
 
-/* 查询某个主域名的解析记录 */
+/* 查询主域名的解析记录 */
 func (c *ClouddnsserviceClient) SearchRR(request *clouddnsservice.SearchRRRequest) (*clouddnsservice.SearchRRResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")

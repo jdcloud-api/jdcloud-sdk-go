@@ -17,11 +17,26 @@
 package models
 
 
-type IpResourceFlowDetail struct {
+type Flavor struct {
 
-    /*  (Optional) */
-    Used []int64 `json:"used"`
+    /* CPU核数 (Optional) */
+    Cpu int `json:"cpu"`
 
-    /*  (Optional) */
-    Times []string `json:"times"`
+    /* 内存 ,单位GB (Optional) */
+    Memory int `json:"memory"`
+
+    /* iops (Optional) */
+    Iops int `json:"iops"`
+
+    /* 最大连接数 (Optional) */
+    MaxLink int `json:"maxLink"`
+
+    /* 最大磁盘数,单位GB (Optional) */
+    MaxDisk int `json:"maxDisk"`
+
+    /* 最下磁盘数,单位GB (Optional) */
+    MinDisk int `json:"minDisk"`
+
+    /* 磁盘步长 (Optional) */
+    DiskStep int `json:"diskStep"`
 }

@@ -25,7 +25,7 @@ type GetViewTreeRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 实例所属的地域ID  */
     RegionId string `json:"regionId"`
 
     /* 域名ID  */
@@ -42,7 +42,7 @@ type GetViewTreeRequest struct {
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 实例所属的地域ID (Required)
  * param domainId: 域名ID (Required)
  * param packId: 套餐ID (Required)
  * param viewId: view ID，默认为0 (Required)
@@ -71,7 +71,7 @@ func NewGetViewTreeRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 实例所属的地域ID (Required)
  * param domainId: 域名ID (Required)
  * param loadMode: 展示方式 (Optional)
  * param packId: 套餐ID (Required)
@@ -113,7 +113,7 @@ func NewGetViewTreeRequestWithoutParam() *GetViewTreeRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 实例所属的地域ID(Required) */
 func (r *GetViewTreeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

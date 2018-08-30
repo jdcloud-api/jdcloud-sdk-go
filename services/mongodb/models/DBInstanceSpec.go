@@ -51,4 +51,10 @@ type DBInstanceSpec struct {
 
     /* 按备份创建使用的具体备份ID (Optional) */
     BackupId *string `json:"backupId"`
+
+    /* 基于一个实例的备份创建新实例，如填写则restoreTime也需要填写。 (Optional) */
+    OriginDBInstanceId *string `json:"originDBInstanceId"`
+
+    /* 用户指定备份保留周期内的任意时间点，如2011-06-11T16:00:00Z，非必填，与backupId互斥。 (Optional) */
+    RestoreTime *string `json:"restoreTime"`
 }

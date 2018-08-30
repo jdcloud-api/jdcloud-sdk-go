@@ -17,11 +17,11 @@
 package models
 
 
-type IpResourceFlowDetail struct {
+type AvailableZones struct {
 
-    /*  (Optional) */
-    Used []int64 `json:"used"`
+    /* 可用区 (Optional) */
+    Az string `json:"az"`
 
-    /*  (Optional) */
-    Times []string `json:"times"`
+    /* 是否可售 (Optional) */
+    CanSale bool `json:"canSale"`
 }

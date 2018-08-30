@@ -24,7 +24,7 @@ type OperateMonitorRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 实例所属的地域ID  */
     RegionId string `json:"regionId"`
 
     /* 域名ID  */
@@ -41,7 +41,7 @@ type OperateMonitorRequest struct {
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 实例所属的地域ID (Required)
  * param domainId: 域名ID (Required)
  * param action: 删除del, 暂停stop, 开启start, 手动恢复recover，手动切换switch (Required)
  * param ids: 监控项ID (Required)
@@ -70,7 +70,7 @@ func NewOperateMonitorRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 实例所属的地域ID (Required)
  * param domainId: 域名ID (Required)
  * param action: 删除del, 暂停stop, 开启start, 手动恢复recover，手动切换switch (Required)
  * param ids: 监控项ID (Required)
@@ -112,7 +112,7 @@ func NewOperateMonitorRequestWithoutParam() *OperateMonitorRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 实例所属的地域ID(Required) */
 func (r *OperateMonitorRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

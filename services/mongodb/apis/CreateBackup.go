@@ -35,9 +35,10 @@ type CreateBackupRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: 实例ID 
- * param backupName: 备份名称 (Optional)
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateBackupRequest(
     regionId string,
@@ -56,14 +57,54 @@ func NewCreateBackupRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例ID (Required)
+ * param backupName: 备份名称 (Optional)
+ */
+func NewCreateBackupRequestWithAllParams(
+    regionId string,
+    instanceId string,
+    backupName *string,
+) *CreateBackupRequest {
+
+    return &CreateBackupRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/backups",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+        BackupName: backupName,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewCreateBackupRequestWithoutParam() *CreateBackupRequest {
+
+    return &CreateBackupRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/backups",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *CreateBackupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: 实例ID(Required) */
 func (r *CreateBackupRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
+/* param backupName: 备份名称(Optional) */
 func (r *CreateBackupRequest) SetBackupName(backupName string) {
     r.BackupName = &backupName
 }

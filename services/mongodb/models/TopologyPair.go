@@ -17,11 +17,14 @@
 package models
 
 
-type IpResourceFlowDetail struct {
+type TopologyPair struct {
 
-    /*  (Optional) */
-    Used []int64 `json:"used"`
+    /* 域名 (Optional) */
+    Domain string `json:"domain"`
 
-    /*  (Optional) */
-    Times []string `json:"times"`
+    /* ip地址 (Optional) */
+    Ip string `json:"ip"`
+
+    /* 端口 (Optional) */
+    Port string `json:"port"`
 }

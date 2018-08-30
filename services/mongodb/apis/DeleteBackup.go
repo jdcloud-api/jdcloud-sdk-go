@@ -32,8 +32,10 @@ type DeleteBackupRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param backupId: backup ID 
+ * param regionId: Region ID (Required)
+ * param backupId: backup ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDeleteBackupRequest(
     regionId string,
@@ -52,10 +54,46 @@ func NewDeleteBackupRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param backupId: backup ID (Required)
+ */
+func NewDeleteBackupRequestWithAllParams(
+    regionId string,
+    backupId string,
+) *DeleteBackupRequest {
+
+    return &DeleteBackupRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/backups/{backupId}",
+            Method:  "DELETE",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        BackupId: backupId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDeleteBackupRequestWithoutParam() *DeleteBackupRequest {
+
+    return &DeleteBackupRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/backups/{backupId}",
+            Method:  "DELETE",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DeleteBackupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param backupId: backup ID(Required) */
 func (r *DeleteBackupRequest) SetBackupId(backupId string) {
     r.BackupId = backupId
 }

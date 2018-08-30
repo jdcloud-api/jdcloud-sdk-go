@@ -24,7 +24,7 @@ type OperateRRRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 实例所属的地域ID  */
     RegionId string `json:"regionId"`
 
     /* 域名ID  */
@@ -33,15 +33,15 @@ type OperateRRRequest struct {
     /* 需要操作的解析记录ID  */
     Ids []int `json:"ids"`
 
-    /* 操作类型，on/off/del，分别是启用、停用、删除解析记录  */
+    /* 操作类型，on->启用 off->停用 del->删除  */
     Action string `json:"action"`
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 实例所属的地域ID (Required)
  * param domainId: 域名ID (Required)
  * param ids: 需要操作的解析记录ID (Required)
- * param action: 操作类型，on/off/del，分别是启用、停用、删除解析记录 (Required)
+ * param action: 操作类型，on->启用 off->停用 del->删除 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -67,10 +67,10 @@ func NewOperateRRRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 实例所属的地域ID (Required)
  * param domainId: 域名ID (Required)
  * param ids: 需要操作的解析记录ID (Required)
- * param action: 操作类型，on/off/del，分别是启用、停用、删除解析记录 (Required)
+ * param action: 操作类型，on->启用 off->停用 del->删除 (Required)
  */
 func NewOperateRRRequestWithAllParams(
     regionId string,
@@ -106,7 +106,7 @@ func NewOperateRRRequestWithoutParam() *OperateRRRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 实例所属的地域ID(Required) */
 func (r *OperateRRRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
@@ -121,7 +121,7 @@ func (r *OperateRRRequest) SetIds(ids []int) {
     r.Ids = ids
 }
 
-/* param action: 操作类型，on/off/del，分别是启用、停用、删除解析记录(Required) */
+/* param action: 操作类型，on->启用 off->停用 del->删除(Required) */
 func (r *OperateRRRequest) SetAction(action string) {
     r.Action = action
 }

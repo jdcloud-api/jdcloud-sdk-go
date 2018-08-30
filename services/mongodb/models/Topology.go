@@ -17,11 +17,14 @@
 package models
 
 
-type IpResourceFlowDetail struct {
+type Topology struct {
 
-    /*  (Optional) */
-    Used []int64 `json:"used"`
+    /* 主 (Optional) */
+    Primary TopologyPair `json:"primary"`
 
-    /*  (Optional) */
-    Times []string `json:"times"`
+    /* 备 (Optional) */
+    Secondary []TopologyPair `json:"secondary"`
+
+    /* 隐藏 (Optional) */
+    Hidden []TopologyPair `json:"hidden"`
 }

@@ -25,7 +25,7 @@ type UpdateMonitorRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 实例所属的地域ID  */
     RegionId string `json:"regionId"`
 
     /* 域名ID  */
@@ -36,7 +36,7 @@ type UpdateMonitorRequest struct {
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 实例所属的地域ID (Required)
  * param domainId: 域名ID (Required)
  * param updateMonitor: 监控项设置信息 (Required)
  *
@@ -62,7 +62,7 @@ func NewUpdateMonitorRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 实例所属的地域ID (Required)
  * param domainId: 域名ID (Required)
  * param updateMonitor: 监控项设置信息 (Required)
  */
@@ -98,7 +98,7 @@ func NewUpdateMonitorRequestWithoutParam() *UpdateMonitorRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 实例所属的地域ID(Required) */
 func (r *UpdateMonitorRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

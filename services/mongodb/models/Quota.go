@@ -17,11 +17,11 @@
 package models
 
 
-type IpResourceFlowDetail struct {
+type Quota struct {
 
-    /*  (Optional) */
-    Used []int64 `json:"used"`
+    /* 总配额 (Optional) */
+    Total int `json:"total"`
 
-    /*  (Optional) */
-    Times []string `json:"times"`
+    /* 已用 (Optional) */
+    Use int `json:"use"`
 }

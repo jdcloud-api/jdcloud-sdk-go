@@ -24,13 +24,13 @@ type GetDomainQueryCountRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 实例所属的地域ID  */
     RegionId string `json:"regionId"`
 
     /* 域名ID  */
     DomainId string `json:"domainId"`
 
-    /* 域名  */
+    /* 查询的域名  */
     DomainName string `json:"domainName"`
 
     /* 起始时间, UTC时间例如2017-11-10T23:00:00Z  */
@@ -41,9 +41,9 @@ type GetDomainQueryCountRequest struct {
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 实例所属的地域ID (Required)
  * param domainId: 域名ID (Required)
- * param domainName: 域名 (Required)
+ * param domainName: 查询的域名 (Required)
  * param start: 起始时间, UTC时间例如2017-11-10T23:00:00Z (Required)
  * param end: 终止时间, UTC时间例如2017-11-10T23:00:00Z (Required)
  *
@@ -73,9 +73,9 @@ func NewGetDomainQueryCountRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 实例所属的地域ID (Required)
  * param domainId: 域名ID (Required)
- * param domainName: 域名 (Required)
+ * param domainName: 查询的域名 (Required)
  * param start: 起始时间, UTC时间例如2017-11-10T23:00:00Z (Required)
  * param end: 终止时间, UTC时间例如2017-11-10T23:00:00Z (Required)
  */
@@ -115,7 +115,7 @@ func NewGetDomainQueryCountRequestWithoutParam() *GetDomainQueryCountRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 实例所属的地域ID(Required) */
 func (r *GetDomainQueryCountRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
@@ -125,7 +125,7 @@ func (r *GetDomainQueryCountRequest) SetDomainId(domainId string) {
     r.DomainId = domainId
 }
 
-/* param domainName: 域名(Required) */
+/* param domainName: 查询的域名(Required) */
 func (r *GetDomainQueryCountRequest) SetDomainName(domainName string) {
     r.DomainName = domainName
 }

@@ -25,35 +25,35 @@ type AddDomainRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 实例所属的地域ID  */
     RegionId string `json:"regionId"`
 
-    /* 套餐类型, 0免费 ,1企业版, 2高级版  */
+    /* 域名的套餐类型, 0->免费 ,1->企业版, 2->高级版  */
     PackId int `json:"packId"`
 
-    /* 域名  */
+    /* 要添加的域名  */
     DomainName string `json:"domainName"`
 
     /* 域名ID，升级高级版必填 (Optional) */
     DomainId *int `json:"domainId"`
 
-    /* 1新购买、2升级，高级版必填 (Optional) */
+    /* 1->新购买、2->升级，收费套餐的域名必填 (Optional) */
     BuyType *int `json:"buyType"`
 
-    /* 1-3 ，时长，高级版必填 (Optional) */
+    /* 1，2，3 ，时长，收费套餐的域名必填 (Optional) */
     TimeSpan *int `json:"timeSpan"`
 
-    /* 时间单位，高级版必填 (Optional) */
+    /* 时间单位，收费套餐的域名必填 (Optional) */
     TimeUnit *int `json:"timeUnit"`
 
-    /* 计费类型，高级版必填 (Optional) */
+    /* 计费类型，收费套餐的域名必填 (Optional) */
     BillingType *int `json:"billingType"`
 }
 
 /*
- * param regionId: Region ID (Required)
- * param packId: 套餐类型, 0免费 ,1企业版, 2高级版 (Required)
- * param domainName: 域名 (Required)
+ * param regionId: 实例所属的地域ID (Required)
+ * param packId: 域名的套餐类型, 0->免费 ,1->企业版, 2->高级版 (Required)
+ * param domainName: 要添加的域名 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -77,14 +77,14 @@ func NewAddDomainRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
- * param packId: 套餐类型, 0免费 ,1企业版, 2高级版 (Required)
- * param domainName: 域名 (Required)
+ * param regionId: 实例所属的地域ID (Required)
+ * param packId: 域名的套餐类型, 0->免费 ,1->企业版, 2->高级版 (Required)
+ * param domainName: 要添加的域名 (Required)
  * param domainId: 域名ID，升级高级版必填 (Optional)
- * param buyType: 1新购买、2升级，高级版必填 (Optional)
- * param timeSpan: 1-3 ，时长，高级版必填 (Optional)
- * param timeUnit: 时间单位，高级版必填 (Optional)
- * param billingType: 计费类型，高级版必填 (Optional)
+ * param buyType: 1->新购买、2->升级，收费套餐的域名必填 (Optional)
+ * param timeSpan: 1，2，3 ，时长，收费套餐的域名必填 (Optional)
+ * param timeUnit: 时间单位，收费套餐的域名必填 (Optional)
+ * param billingType: 计费类型，收费套餐的域名必填 (Optional)
  */
 func NewAddDomainRequestWithAllParams(
     regionId string,
@@ -128,17 +128,17 @@ func NewAddDomainRequestWithoutParam() *AddDomainRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 实例所属的地域ID(Required) */
 func (r *AddDomainRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param packId: 套餐类型, 0免费 ,1企业版, 2高级版(Required) */
+/* param packId: 域名的套餐类型, 0->免费 ,1->企业版, 2->高级版(Required) */
 func (r *AddDomainRequest) SetPackId(packId int) {
     r.PackId = packId
 }
 
-/* param domainName: 域名(Required) */
+/* param domainName: 要添加的域名(Required) */
 func (r *AddDomainRequest) SetDomainName(domainName string) {
     r.DomainName = domainName
 }
@@ -148,22 +148,22 @@ func (r *AddDomainRequest) SetDomainId(domainId int) {
     r.DomainId = &domainId
 }
 
-/* param buyType: 1新购买、2升级，高级版必填(Optional) */
+/* param buyType: 1->新购买、2->升级，收费套餐的域名必填(Optional) */
 func (r *AddDomainRequest) SetBuyType(buyType int) {
     r.BuyType = &buyType
 }
 
-/* param timeSpan: 1-3 ，时长，高级版必填(Optional) */
+/* param timeSpan: 1，2，3 ，时长，收费套餐的域名必填(Optional) */
 func (r *AddDomainRequest) SetTimeSpan(timeSpan int) {
     r.TimeSpan = &timeSpan
 }
 
-/* param timeUnit: 时间单位，高级版必填(Optional) */
+/* param timeUnit: 时间单位，收费套餐的域名必填(Optional) */
 func (r *AddDomainRequest) SetTimeUnit(timeUnit int) {
     r.TimeUnit = &timeUnit
 }
 
-/* param billingType: 计费类型，高级版必填(Optional) */
+/* param billingType: 计费类型，收费套餐的域名必填(Optional) */
 func (r *AddDomainRequest) SetBillingType(billingType int) {
     r.BillingType = &billingType
 }

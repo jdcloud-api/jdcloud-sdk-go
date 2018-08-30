@@ -20,7 +20,7 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type ModifyInstanceNameRequest struct {
+type DescribeSecurityIpsRequest struct {
 
     core.JDCloudRequest
 
@@ -29,68 +29,59 @@ type ModifyInstanceNameRequest struct {
 
     /* Instance ID  */
     InstanceId string `json:"instanceId"`
-
-    /* 新的实例名称，只支持数字、字母、英文下划线、中文，且不少于2字符不超过32字符。  */
-    InstanceName string `json:""`
 }
 
 /*
  * param regionId: Region ID (Required)
  * param instanceId: Instance ID (Required)
- * param instanceName: 新的实例名称，只支持数字、字母、英文下划线、中文，且不少于2字符不超过32字符。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewModifyInstanceNameRequest(
+func NewDescribeSecurityIpsRequest(
     regionId string,
     instanceId string,
-    instanceName string,
-) *ModifyInstanceNameRequest {
+) *DescribeSecurityIpsRequest {
 
-	return &ModifyInstanceNameRequest{
+	return &DescribeSecurityIpsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstanceName",
-			Method:  "POST",
+			URL:     "/regions/{regionId}/instances/{instanceId}/securityIps",
+			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         InstanceId: instanceId,
-        InstanceName: instanceName,
 	}
 }
 
 /*
  * param regionId: Region ID (Required)
  * param instanceId: Instance ID (Required)
- * param instanceName: 新的实例名称，只支持数字、字母、英文下划线、中文，且不少于2字符不超过32字符。 (Required)
  */
-func NewModifyInstanceNameRequestWithAllParams(
+func NewDescribeSecurityIpsRequestWithAllParams(
     regionId string,
     instanceId string,
-    instanceName string,
-) *ModifyInstanceNameRequest {
+) *DescribeSecurityIpsRequest {
 
-    return &ModifyInstanceNameRequest{
+    return &DescribeSecurityIpsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstanceName",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/instances/{instanceId}/securityIps",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         InstanceId: instanceId,
-        InstanceName: instanceName,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewModifyInstanceNameRequestWithoutParam() *ModifyInstanceNameRequest {
+func NewDescribeSecurityIpsRequestWithoutParam() *DescribeSecurityIpsRequest {
 
-    return &ModifyInstanceNameRequest{
+    return &DescribeSecurityIpsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstanceName",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/instances/{instanceId}/securityIps",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
@@ -98,31 +89,27 @@ func NewModifyInstanceNameRequestWithoutParam() *ModifyInstanceNameRequest {
 }
 
 /* param regionId: Region ID(Required) */
-func (r *ModifyInstanceNameRequest) SetRegionId(regionId string) {
+func (r *DescribeSecurityIpsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: Instance ID(Required) */
-func (r *ModifyInstanceNameRequest) SetInstanceId(instanceId string) {
+func (r *DescribeSecurityIpsRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
-}
-
-/* param instanceName: 新的实例名称，只支持数字、字母、英文下划线、中文，且不少于2字符不超过32字符。(Required) */
-func (r *ModifyInstanceNameRequest) SetInstanceName(instanceName string) {
-    r.InstanceName = instanceName
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r ModifyInstanceNameRequest) GetRegionId() string {
+func (r DescribeSecurityIpsRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type ModifyInstanceNameResponse struct {
+type DescribeSecurityIpsResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result ModifyInstanceNameResult `json:"result"`
+    Result DescribeSecurityIpsResult `json:"result"`
 }
 
-type ModifyInstanceNameResult struct {
+type DescribeSecurityIpsResult struct {
+    SecurityIps string `json:"securityIps"`
 }

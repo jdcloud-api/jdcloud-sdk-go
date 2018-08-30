@@ -85,4 +85,7 @@ type DBInstance struct {
 
     /* 计费信息 (Optional) */
     Charge charge.Charge `json:"charge"`
+
+    /* 是否设置白名单，true：已设置，false：未设置 (Optional) */
+    IsSetSecurityIps bool `json:"isSetSecurityIps"`
 }
