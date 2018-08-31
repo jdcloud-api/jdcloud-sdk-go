@@ -25,7 +25,7 @@ type UpdateRRRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 实例所属的地域ID  */
     RegionId string `json:"regionId"`
 
     /* 域名ID  */
@@ -36,7 +36,7 @@ type UpdateRRRequest struct {
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 实例所属的地域ID (Required)
  * param domainId: 域名ID (Required)
  * param req: updateRR参数 (Required)
  *
@@ -62,7 +62,7 @@ func NewUpdateRRRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 实例所属的地域ID (Required)
  * param domainId: 域名ID (Required)
  * param req: updateRR参数 (Required)
  */
@@ -98,7 +98,7 @@ func NewUpdateRRRequestWithoutParam() *UpdateRRRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 实例所属的地域ID(Required) */
 func (r *UpdateRRRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

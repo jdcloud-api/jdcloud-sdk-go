@@ -35,9 +35,11 @@ type ModifyBackupPolicyRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: Instance ID 
- * param preferredBackupTime: 备份时间，格式：HH:mmZ- HH:mmZ，只允许间隔时间为1小时的整点. 
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
+ * param preferredBackupTime: 备份时间，格式：HH:mmZ- HH:mmZ，只允许间隔时间为1小时的整点. (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewModifyBackupPolicyRequest(
     regionId string,
@@ -58,14 +60,54 @@ func NewModifyBackupPolicyRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
+ * param preferredBackupTime: 备份时间，格式：HH:mmZ- HH:mmZ，只允许间隔时间为1小时的整点. (Required)
+ */
+func NewModifyBackupPolicyRequestWithAllParams(
+    regionId string,
+    instanceId string,
+    preferredBackupTime string,
+) *ModifyBackupPolicyRequest {
+
+    return &ModifyBackupPolicyRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}/backupPolicy",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+        PreferredBackupTime: preferredBackupTime,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewModifyBackupPolicyRequestWithoutParam() *ModifyBackupPolicyRequest {
+
+    return &ModifyBackupPolicyRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}/backupPolicy",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *ModifyBackupPolicyRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: Instance ID(Required) */
 func (r *ModifyBackupPolicyRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
+/* param preferredBackupTime: 备份时间，格式：HH:mmZ- HH:mmZ，只允许间隔时间为1小时的整点.(Required) */
 func (r *ModifyBackupPolicyRequest) SetPreferredBackupTime(preferredBackupTime string) {
     r.PreferredBackupTime = preferredBackupTime
 }

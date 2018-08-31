@@ -32,8 +32,10 @@ type DescribeBackupPolicyRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: Instance ID 
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeBackupPolicyRequest(
     regionId string,
@@ -52,10 +54,46 @@ func NewDescribeBackupPolicyRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
+ */
+func NewDescribeBackupPolicyRequestWithAllParams(
+    regionId string,
+    instanceId string,
+) *DescribeBackupPolicyRequest {
+
+    return &DescribeBackupPolicyRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}/backupPolicy",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeBackupPolicyRequestWithoutParam() *DescribeBackupPolicyRequest {
+
+    return &DescribeBackupPolicyRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}/backupPolicy",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DescribeBackupPolicyRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: Instance ID(Required) */
 func (r *DescribeBackupPolicyRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }

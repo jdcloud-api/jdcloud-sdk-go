@@ -38,6 +38,7 @@ type DescribeInstancesRequest struct {
     /* instanceId - 实例ID, 精确匹配
 instanceName - 实例名称, 模糊匹配
 instanceStatus - mongodb状态，精确匹配，支持多个.RUNNING：运行, ERROR：错误 ,BUILDING：创建中, DELETING：删除中, RESTORING：恢复中, RESIZING：变配中
+chargeMode - 计费类型，精确匹配
  (Optional) */
     Filters []common.Filter `json:"filters"`
 
@@ -47,15 +48,9 @@ instanceStatus - mongodb状态，精确匹配，支持多个.RUNNING：运行, E
 }
 
 /*
- * param regionId: Region ID 
- * param pageNumber: 页码；默认为1，取值范围：[1,∞) (Optional)
- * param pageSize: 分页大小；默认为10；取值范围[1, 100] (Optional)
- * param filters: instanceId - 实例ID, 精确匹配
-instanceName - 实例名称, 模糊匹配
-instanceStatus - mongodb状态，精确匹配，支持多个.RUNNING：运行, ERROR：错误 ,BUILDING：创建中, DELETING：删除中, RESTORING：恢复中, RESIZING：变配中
- (Optional)
- * param sorts: createTime - 创建时间,asc（正序），desc（倒序）
- (Optional)
+ * param regionId: Region ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeInstancesRequest(
     regionId string,
@@ -72,22 +67,80 @@ func NewDescribeInstancesRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param pageNumber: 页码；默认为1，取值范围：[1,∞) (Optional)
+ * param pageSize: 分页大小；默认为10；取值范围[1, 100] (Optional)
+ * param filters: instanceId - 实例ID, 精确匹配
+instanceName - 实例名称, 模糊匹配
+instanceStatus - mongodb状态，精确匹配，支持多个.RUNNING：运行, ERROR：错误 ,BUILDING：创建中, DELETING：删除中, RESTORING：恢复中, RESIZING：变配中
+chargeMode - 计费类型，精确匹配
+ (Optional)
+ * param sorts: createTime - 创建时间,asc（正序），desc（倒序）
+ (Optional)
+ */
+func NewDescribeInstancesRequestWithAllParams(
+    regionId string,
+    pageNumber *int,
+    pageSize *int,
+    filters []common.Filter,
+    sorts []common.Sort,
+) *DescribeInstancesRequest {
+
+    return &DescribeInstancesRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        PageNumber: pageNumber,
+        PageSize: pageSize,
+        Filters: filters,
+        Sorts: sorts,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeInstancesRequestWithoutParam() *DescribeInstancesRequest {
+
+    return &DescribeInstancesRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DescribeInstancesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param pageNumber: 页码；默认为1，取值范围：[1,∞)(Optional) */
 func (r *DescribeInstancesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
+/* param pageSize: 分页大小；默认为10；取值范围[1, 100](Optional) */
 func (r *DescribeInstancesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
+/* param filters: instanceId - 实例ID, 精确匹配
+instanceName - 实例名称, 模糊匹配
+instanceStatus - mongodb状态，精确匹配，支持多个.RUNNING：运行, ERROR：错误 ,BUILDING：创建中, DELETING：删除中, RESTORING：恢复中, RESIZING：变配中
+chargeMode - 计费类型，精确匹配
+(Optional) */
 func (r *DescribeInstancesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
 
+/* param sorts: createTime - 创建时间,asc（正序），desc（倒序）
+(Optional) */
 func (r *DescribeInstancesRequest) SetSorts(sorts []common.Sort) {
     r.Sorts = sorts
 }

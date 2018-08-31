@@ -24,16 +24,16 @@ type DelDomainRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 实例所属的地域ID  */
     RegionId string `json:"regionId"`
 
-    /* 域名ID  */
+    /* 需要删除的域名ID  */
     DomainId int `json:"domainId"`
 }
 
 /*
- * param regionId: Region ID (Required)
- * param domainId: 域名ID (Required)
+ * param regionId: 实例所属的地域ID (Required)
+ * param domainId: 需要删除的域名ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -55,8 +55,8 @@ func NewDelDomainRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
- * param domainId: 域名ID (Required)
+ * param regionId: 实例所属的地域ID (Required)
+ * param domainId: 需要删除的域名ID (Required)
  */
 func NewDelDomainRequestWithAllParams(
     regionId string,
@@ -88,12 +88,12 @@ func NewDelDomainRequestWithoutParam() *DelDomainRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 实例所属的地域ID(Required) */
 func (r *DelDomainRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param domainId: 域名ID(Required) */
+/* param domainId: 需要删除的域名ID(Required) */
 func (r *DelDomainRequest) SetDomainId(domainId int) {
     r.DomainId = domainId
 }

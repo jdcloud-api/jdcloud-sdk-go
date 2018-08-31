@@ -25,23 +25,23 @@ type GetDomainsRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 实例所属的地域ID  */
     RegionId string `json:"regionId"`
 
-    /* 当前页数，起始值为1，默认为1  */
+    /* 分页查询时查询的每页的序号，起始值为1，默认为1  */
     PageNumber int `json:"pageNumber"`
 
-    /* 分页查询时设置的每页行数  */
+    /* 分页查询时设置的每页行数，默认为10  */
     PageSize int `json:"pageSize"`
 
-    /* 关键字，按照”%domainName%”模式搜索主域名 (Optional) */
+    /* 关键字，按照”%domainName%”模式匹配主域名 (Optional) */
     DomainName *string `json:"domainName"`
 }
 
 /*
- * param regionId: Region ID (Required)
- * param pageNumber: 当前页数，起始值为1，默认为1 (Required)
- * param pageSize: 分页查询时设置的每页行数 (Required)
+ * param regionId: 实例所属的地域ID (Required)
+ * param pageNumber: 分页查询时查询的每页的序号，起始值为1，默认为1 (Required)
+ * param pageSize: 分页查询时设置的每页行数，默认为10 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -65,10 +65,10 @@ func NewGetDomainsRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
- * param pageNumber: 当前页数，起始值为1，默认为1 (Required)
- * param pageSize: 分页查询时设置的每页行数 (Required)
- * param domainName: 关键字，按照”%domainName%”模式搜索主域名 (Optional)
+ * param regionId: 实例所属的地域ID (Required)
+ * param pageNumber: 分页查询时查询的每页的序号，起始值为1，默认为1 (Required)
+ * param pageSize: 分页查询时设置的每页行数，默认为10 (Required)
+ * param domainName: 关键字，按照”%domainName%”模式匹配主域名 (Optional)
  */
 func NewGetDomainsRequestWithAllParams(
     regionId string,
@@ -104,22 +104,22 @@ func NewGetDomainsRequestWithoutParam() *GetDomainsRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 实例所属的地域ID(Required) */
 func (r *GetDomainsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param pageNumber: 当前页数，起始值为1，默认为1(Required) */
+/* param pageNumber: 分页查询时查询的每页的序号，起始值为1，默认为1(Required) */
 func (r *GetDomainsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = pageNumber
 }
 
-/* param pageSize: 分页查询时设置的每页行数(Required) */
+/* param pageSize: 分页查询时设置的每页行数，默认为10(Required) */
 func (r *GetDomainsRequest) SetPageSize(pageSize int) {
     r.PageSize = pageSize
 }
 
-/* param domainName: 关键字，按照”%domainName%”模式搜索主域名(Optional) */
+/* param domainName: 关键字，按照”%domainName%”模式匹配主域名(Optional) */
 func (r *GetDomainsRequest) SetDomainName(domainName string) {
     r.DomainName = &domainName
 }
@@ -140,4 +140,5 @@ type GetDomainsResult struct {
     DataList []clouddnsservice.Domain `json:"dataList"`
     CurrentCount int `json:"currentCount"`
     TotalCount int `json:"totalCount"`
+    TotalPage int `json:"totalPage"`
 }

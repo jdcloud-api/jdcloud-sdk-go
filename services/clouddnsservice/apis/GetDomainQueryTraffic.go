@@ -24,7 +24,7 @@ type GetDomainQueryTrafficRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 实例所属的地域ID  */
     RegionId string `json:"regionId"`
 
     /* 域名ID  */
@@ -41,7 +41,7 @@ type GetDomainQueryTrafficRequest struct {
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 实例所属的地域ID (Required)
  * param domainId: 域名ID (Required)
  * param domainName: 域名 (Required)
  * param start: 起始时间, UTC时间例如2017-11-10T23:00:00Z (Required)
@@ -73,7 +73,7 @@ func NewGetDomainQueryTrafficRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 实例所属的地域ID (Required)
  * param domainId: 域名ID (Required)
  * param domainName: 域名 (Required)
  * param start: 起始时间, UTC时间例如2017-11-10T23:00:00Z (Required)
@@ -115,7 +115,7 @@ func NewGetDomainQueryTrafficRequestWithoutParam() *GetDomainQueryTrafficRequest
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 实例所属的地域ID(Required) */
 func (r *GetDomainQueryTrafficRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

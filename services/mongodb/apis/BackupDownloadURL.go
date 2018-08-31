@@ -33,8 +33,10 @@ type BackupDownloadURLRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param backupId: backup ID 
+ * param regionId: Region ID (Required)
+ * param backupId: backup ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewBackupDownloadURLRequest(
     regionId string,
@@ -53,10 +55,46 @@ func NewBackupDownloadURLRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param backupId: backup ID (Required)
+ */
+func NewBackupDownloadURLRequestWithAllParams(
+    regionId string,
+    backupId string,
+) *BackupDownloadURLRequest {
+
+    return &BackupDownloadURLRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/backups/{backupId}/downloadURL",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        BackupId: backupId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewBackupDownloadURLRequestWithoutParam() *BackupDownloadURLRequest {
+
+    return &BackupDownloadURLRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/backups/{backupId}/downloadURL",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *BackupDownloadURLRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param backupId: backup ID(Required) */
 func (r *BackupDownloadURLRequest) SetBackupId(backupId string) {
     r.BackupId = backupId
 }

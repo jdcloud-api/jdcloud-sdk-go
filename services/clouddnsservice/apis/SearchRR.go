@@ -25,7 +25,7 @@ type SearchRRRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 实例所属的地域ID  */
     RegionId string `json:"regionId"`
 
     /* 域名ID  */
@@ -39,7 +39,7 @@ type SearchRRRequest struct {
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 实例所属的地域ID (Required)
  * param domainId: 域名ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -62,7 +62,7 @@ func NewSearchRRRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 实例所属的地域ID (Required)
  * param domainId: 域名ID (Required)
  * param pageNumber: 当前页数，起始值为1，默认为1 (Optional)
  * param pageSize: 分页查询时设置的每页行数, 默认为10 (Optional)
@@ -101,7 +101,7 @@ func NewSearchRRRequestWithoutParam() *SearchRRRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 实例所属的地域ID(Required) */
 func (r *SearchRRRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

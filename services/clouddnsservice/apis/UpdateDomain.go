@@ -25,20 +25,20 @@ type UpdateDomainRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 实例所属的地域ID  */
     RegionId string `json:"regionId"`
 
-    /* 域名  */
+    /* 需要修改的域名  */
     DomainName string `json:"domainName"`
 
-    /* 域名ID  */
+    /* 需要修改的域名ID  */
     Id int `json:"id"`
 }
 
 /*
- * param regionId: Region ID (Required)
- * param domainName: 域名 (Required)
- * param id: 域名ID (Required)
+ * param regionId: 实例所属的地域ID (Required)
+ * param domainName: 需要修改的域名 (Required)
+ * param id: 需要修改的域名ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -62,9 +62,9 @@ func NewUpdateDomainRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
- * param domainName: 域名 (Required)
- * param id: 域名ID (Required)
+ * param regionId: 实例所属的地域ID (Required)
+ * param domainName: 需要修改的域名 (Required)
+ * param id: 需要修改的域名ID (Required)
  */
 func NewUpdateDomainRequestWithAllParams(
     regionId string,
@@ -98,17 +98,17 @@ func NewUpdateDomainRequestWithoutParam() *UpdateDomainRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 实例所属的地域ID(Required) */
 func (r *UpdateDomainRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param domainName: 域名(Required) */
+/* param domainName: 需要修改的域名(Required) */
 func (r *UpdateDomainRequest) SetDomainName(domainName string) {
     r.DomainName = domainName
 }
 
-/* param id: 域名ID(Required) */
+/* param id: 需要修改的域名ID(Required) */
 func (r *UpdateDomainRequest) SetId(id int) {
     r.Id = id
 }

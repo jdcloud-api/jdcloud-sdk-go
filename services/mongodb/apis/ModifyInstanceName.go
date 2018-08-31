@@ -35,9 +35,11 @@ type ModifyInstanceNameRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: Instance ID 
- * param instanceName: 新的实例名称，只支持数字、字母、英文下划线、中文，且不少于2字符不超过32字符。 
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
+ * param instanceName: 新的实例名称，只支持数字、字母、英文下划线、中文，且不少于2字符不超过32字符。 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewModifyInstanceNameRequest(
     regionId string,
@@ -58,14 +60,54 @@ func NewModifyInstanceNameRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
+ * param instanceName: 新的实例名称，只支持数字、字母、英文下划线、中文，且不少于2字符不超过32字符。 (Required)
+ */
+func NewModifyInstanceNameRequestWithAllParams(
+    regionId string,
+    instanceId string,
+    instanceName string,
+) *ModifyInstanceNameRequest {
+
+    return &ModifyInstanceNameRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstanceName",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+        InstanceName: instanceName,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewModifyInstanceNameRequestWithoutParam() *ModifyInstanceNameRequest {
+
+    return &ModifyInstanceNameRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstanceName",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *ModifyInstanceNameRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: Instance ID(Required) */
 func (r *ModifyInstanceNameRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
+/* param instanceName: 新的实例名称，只支持数字、字母、英文下划线、中文，且不少于2字符不超过32字符。(Required) */
 func (r *ModifyInstanceNameRequest) SetInstanceName(instanceName string) {
     r.InstanceName = instanceName
 }

@@ -35,9 +35,11 @@ type RestoreInstanceRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: Instance ID 
- * param backupId: 备份ID 
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
+ * param backupId: 备份ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewRestoreInstanceRequest(
     regionId string,
@@ -58,14 +60,54 @@ func NewRestoreInstanceRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
+ * param backupId: 备份ID (Required)
+ */
+func NewRestoreInstanceRequestWithAllParams(
+    regionId string,
+    instanceId string,
+    backupId string,
+) *RestoreInstanceRequest {
+
+    return &RestoreInstanceRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}/restoreInstance",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+        BackupId: backupId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewRestoreInstanceRequestWithoutParam() *RestoreInstanceRequest {
+
+    return &RestoreInstanceRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}/restoreInstance",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *RestoreInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: Instance ID(Required) */
 func (r *RestoreInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
+/* param backupId: 备份ID(Required) */
 func (r *RestoreInstanceRequest) SetBackupId(backupId string) {
     r.BackupId = backupId
 }

@@ -35,9 +35,11 @@ type ResetPasswordRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param instanceId: Instance ID 
- * param accountPassword: 新密码，必须包含且只支持字母及数字，不少于8字符不超过16字符。 
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
+ * param accountPassword: 新密码，必须包含且只支持字母及数字，不少于8字符不超过16字符。 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewResetPasswordRequest(
     regionId string,
@@ -58,14 +60,54 @@ func NewResetPasswordRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
+ * param accountPassword: 新密码，必须包含且只支持字母及数字，不少于8字符不超过16字符。 (Required)
+ */
+func NewResetPasswordRequestWithAllParams(
+    regionId string,
+    instanceId string,
+    accountPassword string,
+) *ResetPasswordRequest {
+
+    return &ResetPasswordRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:resetPassword",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        InstanceId: instanceId,
+        AccountPassword: accountPassword,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewResetPasswordRequestWithoutParam() *ResetPasswordRequest {
+
+    return &ResetPasswordRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instances/{instanceId}:resetPassword",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *ResetPasswordRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param instanceId: Instance ID(Required) */
 func (r *ResetPasswordRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
+/* param accountPassword: 新密码，必须包含且只支持字母及数字，不少于8字符不超过16字符。(Required) */
 func (r *ResetPasswordRequest) SetAccountPassword(accountPassword string) {
     r.AccountPassword = accountPassword
 }

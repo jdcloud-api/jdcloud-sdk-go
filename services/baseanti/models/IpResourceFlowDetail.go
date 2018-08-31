@@ -20,7 +20,7 @@ package models
 type IpResourceFlowDetail struct {
 
     /*  (Optional) */
-    Used []int `json:"used"`
+    Used []int64 `json:"used"`
 
     /*  (Optional) */
     Times []string `json:"times"`

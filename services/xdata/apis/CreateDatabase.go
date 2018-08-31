@@ -33,7 +33,7 @@ type CreateDatabaseRequest struct {
     /* 实例名称  */
     InstanceName string `json:"instanceName"`
 
-    /* 描述信息 (Optional) */
+    /* 数据库描述信息 (Optional) */
     Description *string `json:"description"`
 }
 
@@ -67,7 +67,7 @@ func NewCreateDatabaseRequest(
  * param regionId: 地域ID (Required)
  * param databaseName: 数据库名 (Required)
  * param instanceName: 实例名称 (Required)
- * param description: 描述信息 (Optional)
+ * param description: 数据库描述信息 (Optional)
  */
 func NewCreateDatabaseRequestWithAllParams(
     regionId string,
@@ -118,7 +118,7 @@ func (r *CreateDatabaseRequest) SetInstanceName(instanceName string) {
     r.InstanceName = instanceName
 }
 
-/* param description: 描述信息(Optional) */
+/* param description: 数据库描述信息(Optional) */
 func (r *CreateDatabaseRequest) SetDescription(description string) {
     r.Description = &description
 }

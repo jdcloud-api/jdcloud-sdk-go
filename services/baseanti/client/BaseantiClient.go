@@ -40,7 +40,7 @@ func NewBaseantiClient(credential *core.Credential) *BaseantiClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "baseanti",
-            Revision:    "1.0.0",
+            Revision:    "1.0.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }

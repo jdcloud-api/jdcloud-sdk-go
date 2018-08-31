@@ -31,14 +31,14 @@ type CreateTableRequest struct {
     /* 实例名称  */
     InstanceName string `json:"instanceName"`
 
-    /* 数据表描述  */
+    /* 数据表描述信息  */
     DbModelDBTable *xdata.DwTableDesc `json:"dbModelDBTable"`
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param instanceName: 实例名称 (Required)
- * param dbModelDBTable: 数据表描述 (Required)
+ * param dbModelDBTable: 数据表描述信息 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -64,7 +64,7 @@ func NewCreateTableRequest(
 /*
  * param regionId: 地域ID (Required)
  * param instanceName: 实例名称 (Required)
- * param dbModelDBTable: 数据表描述 (Required)
+ * param dbModelDBTable: 数据表描述信息 (Required)
  */
 func NewCreateTableRequestWithAllParams(
     regionId string,
@@ -108,7 +108,7 @@ func (r *CreateTableRequest) SetInstanceName(instanceName string) {
     r.InstanceName = instanceName
 }
 
-/* param dbModelDBTable: 数据表描述(Required) */
+/* param dbModelDBTable: 数据表描述信息(Required) */
 func (r *CreateTableRequest) SetDbModelDBTable(dbModelDBTable *xdata.DwTableDesc) {
     r.DbModelDBTable = dbModelDBTable
 }

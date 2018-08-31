@@ -24,7 +24,7 @@ type AddMonitorTargetRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 实例所属的地域ID  */
     RegionId string `json:"regionId"`
 
     /* 域名ID  */
@@ -38,7 +38,7 @@ type AddMonitorTargetRequest struct {
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 实例所属的地域ID (Required)
  * param domainId: 域名ID (Required)
  * param subDomainName: 子域名 (Required)
  * param targets: 子域名可用监控对象的数组 (Required)
@@ -67,7 +67,7 @@ func NewAddMonitorTargetRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 实例所属的地域ID (Required)
  * param domainId: 域名ID (Required)
  * param subDomainName: 子域名 (Required)
  * param targets: 子域名可用监控对象的数组 (Required)
@@ -106,7 +106,7 @@ func NewAddMonitorTargetRequestWithoutParam() *AddMonitorTargetRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 实例所属的地域ID(Required) */
 func (r *AddMonitorTargetRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

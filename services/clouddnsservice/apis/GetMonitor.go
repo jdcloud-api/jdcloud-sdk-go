@@ -25,7 +25,7 @@ type GetMonitorRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 实例所属的地域ID  */
     RegionId string `json:"regionId"`
 
     /* 域名ID  */
@@ -42,7 +42,7 @@ type GetMonitorRequest struct {
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 实例所属的地域ID (Required)
  * param domainId: 域名ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -65,7 +65,7 @@ func NewGetMonitorRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 实例所属的地域ID (Required)
  * param domainId: 域名ID (Required)
  * param pageIndex: 当前页数，起始值为1，默认为1 (Optional)
  * param pageSize: 分页查询时设置的每页行数 (Optional)
@@ -107,7 +107,7 @@ func NewGetMonitorRequestWithoutParam() *GetMonitorRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 实例所属的地域ID(Required) */
 func (r *GetMonitorRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
