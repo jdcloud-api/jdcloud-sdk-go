@@ -27,13 +27,13 @@ type GetPackageIdRequest struct {
     /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /* dmp根据deviceIds批量查询最大packageId入参  */
+    /* MD5（deviceId），多个MD5（deviceId）用英文逗号进行分割，注：MD5结果小写  */
     DeviceIds string `json:"deviceIds"`
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param deviceIds: dmp根据deviceIds批量查询最大packageId入参 (Required)
+ * param deviceIds: MD5（deviceId），多个MD5（deviceId）用英文逗号进行分割，注：MD5结果小写 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -56,7 +56,7 @@ func NewGetPackageIdRequest(
 
 /*
  * param regionId: 地域ID (Required)
- * param deviceIds: dmp根据deviceIds批量查询最大packageId入参 (Required)
+ * param deviceIds: MD5（deviceId），多个MD5（deviceId）用英文逗号进行分割，注：MD5结果小写 (Required)
  */
 func NewGetPackageIdRequestWithAllParams(
     regionId string,
@@ -93,7 +93,7 @@ func (r *GetPackageIdRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param deviceIds: dmp根据deviceIds批量查询最大packageId入参(Required) */
+/* param deviceIds: MD5（deviceId），多个MD5（deviceId）用英文逗号进行分割，注：MD5结果小写(Required) */
 func (r *GetPackageIdRequest) SetDeviceIds(deviceIds string) {
     r.DeviceIds = deviceIds
 }

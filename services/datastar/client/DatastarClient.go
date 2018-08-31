@@ -53,26 +53,7 @@ func (c *DatastarClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-/* null */
-func (c *DatastarClient) TestWelcome(request *datastar.TestWelcomeRequest) (*datastar.TestWelcomeResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &datastar.TestWelcomeResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* null */
+/* 根据设备ID查询人群包ID */
 func (c *DatastarClient) GetPackageId(request *datastar.GetPackageIdRequest) (*datastar.GetPackageIdResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")

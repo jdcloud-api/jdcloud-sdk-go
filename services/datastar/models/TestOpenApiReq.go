@@ -20,5 +20,5 @@ package models
 type TestOpenApiReq struct {
 
     /* 名字 (Optional) */
-    Name *string `json:"name"`
+    Name string `json:"name"`
 }
