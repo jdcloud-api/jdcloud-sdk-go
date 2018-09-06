@@ -24,22 +24,22 @@ type ModifyAuditRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)  */
     RegionId string `json:"regionId"`
 
-    /* Instance ID  */
+    /* RDS 实例ID，唯一标识一个RDS实例  */
     InstanceId string `json:"instanceId"`
 
-    /* 增加审计项，多个审计项之间用英文逗号，分号或空格分隔，例如DATABASE_OBJECT_ACCESS_GROUP,ACKUP_RESTORE_GROUP (Optional) */
+    /* 在原有审计项基础上，增加新的审计项，多个审计项之间用英文逗号，分号或空格分隔，例如DATABASE_OBJECT_ACCESS_GROUP,ACKUP_RESTORE_GROUP (Optional) */
     Add *string `json:""`
 
-    /* 删除审计项，多个审计项之间用英文逗号，分号或空格分隔，例如DATABASE_OBJECT_ACCESS_GROUP,ACKUP_RESTORE_GROUP如删除了所有审计项，则审计自动关闭 (Optional) */
+    /* 删除审计项，多个审计项之间用英文逗号，分号或空格分隔，例如DATABASE_OBJECT_ACCESS_GROUP,ACKUP_RESTORE_GROUP<br>如删除了所有审计项，则审计自动关闭 (Optional) */
     Drop *string `json:""`
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: Instance ID (Required)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
+ * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -61,10 +61,10 @@ func NewModifyAuditRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: Instance ID (Required)
- * param add: 增加审计项，多个审计项之间用英文逗号，分号或空格分隔，例如DATABASE_OBJECT_ACCESS_GROUP,ACKUP_RESTORE_GROUP (Optional)
- * param drop: 删除审计项，多个审计项之间用英文逗号，分号或空格分隔，例如DATABASE_OBJECT_ACCESS_GROUP,ACKUP_RESTORE_GROUP如删除了所有审计项，则审计自动关闭 (Optional)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
+ * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
+ * param add: 在原有审计项基础上，增加新的审计项，多个审计项之间用英文逗号，分号或空格分隔，例如DATABASE_OBJECT_ACCESS_GROUP,ACKUP_RESTORE_GROUP (Optional)
+ * param drop: 删除审计项，多个审计项之间用英文逗号，分号或空格分隔，例如DATABASE_OBJECT_ACCESS_GROUP,ACKUP_RESTORE_GROUP<br>如删除了所有审计项，则审计自动关闭 (Optional)
  */
 func NewModifyAuditRequestWithAllParams(
     regionId string,
@@ -100,22 +100,22 @@ func NewModifyAuditRequestWithoutParam() *ModifyAuditRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
 func (r *ModifyAuditRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: Instance ID(Required) */
+/* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *ModifyAuditRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param add: 增加审计项，多个审计项之间用英文逗号，分号或空格分隔，例如DATABASE_OBJECT_ACCESS_GROUP,ACKUP_RESTORE_GROUP(Optional) */
+/* param add: 在原有审计项基础上，增加新的审计项，多个审计项之间用英文逗号，分号或空格分隔，例如DATABASE_OBJECT_ACCESS_GROUP,ACKUP_RESTORE_GROUP(Optional) */
 func (r *ModifyAuditRequest) SetAdd(add string) {
     r.Add = &add
 }
 
-/* param drop: 删除审计项，多个审计项之间用英文逗号，分号或空格分隔，例如DATABASE_OBJECT_ACCESS_GROUP,ACKUP_RESTORE_GROUP如删除了所有审计项，则审计自动关闭(Optional) */
+/* param drop: 删除审计项，多个审计项之间用英文逗号，分号或空格分隔，例如DATABASE_OBJECT_ACCESS_GROUP,ACKUP_RESTORE_GROUP<br>如删除了所有审计项，则审计自动关闭(Optional) */
 func (r *ModifyAuditRequest) SetDrop(drop string) {
     r.Drop = &drop
 }

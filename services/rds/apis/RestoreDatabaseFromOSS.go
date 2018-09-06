@@ -24,24 +24,24 @@ type RestoreDatabaseFromOSSRequest struct {
 
     core.JDCloudRequest
 
-    /* 区域代码  */
+    /* 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)  */
     RegionId string `json:"regionId"`
 
-    /* 实例ID  */
+    /* RDS 实例ID，唯一标识一个RDS实例  */
     InstanceId string `json:"instanceId"`
 
     /* 库名称  */
     DbName string `json:"dbName"`
 
-    /* 用户在单库上云中上传的文件地址  */
+    /* 用户上传到对象存储OSS上的备份文件的内链  */
     OssURL string `json:""`
 }
 
 /*
- * param regionId: 区域代码 (Required)
- * param instanceId: 实例ID (Required)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
+ * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
  * param dbName: 库名称 (Required)
- * param ossURL: 用户在单库上云中上传的文件地址 (Required)
+ * param ossURL: 用户上传到对象存储OSS上的备份文件的内链 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -67,10 +67,10 @@ func NewRestoreDatabaseFromOSSRequest(
 }
 
 /*
- * param regionId: 区域代码 (Required)
- * param instanceId: 实例ID (Required)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
+ * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
  * param dbName: 库名称 (Required)
- * param ossURL: 用户在单库上云中上传的文件地址 (Required)
+ * param ossURL: 用户上传到对象存储OSS上的备份文件的内链 (Required)
  */
 func NewRestoreDatabaseFromOSSRequestWithAllParams(
     regionId string,
@@ -106,12 +106,12 @@ func NewRestoreDatabaseFromOSSRequestWithoutParam() *RestoreDatabaseFromOSSReque
     }
 }
 
-/* param regionId: 区域代码(Required) */
+/* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
 func (r *RestoreDatabaseFromOSSRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 实例ID(Required) */
+/* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *RestoreDatabaseFromOSSRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
@@ -121,7 +121,7 @@ func (r *RestoreDatabaseFromOSSRequest) SetDbName(dbName string) {
     r.DbName = dbName
 }
 
-/* param ossURL: 用户在单库上云中上传的文件地址(Required) */
+/* param ossURL: 用户上传到对象存储OSS上的备份文件的内链(Required) */
 func (r *RestoreDatabaseFromOSSRequest) SetOssURL(ossURL string) {
     r.OssURL = ossURL
 }

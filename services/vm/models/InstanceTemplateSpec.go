@@ -19,7 +19,7 @@ package models
 
 type InstanceTemplateSpec struct {
 
-    /* 规格类型，可查询<a href="https://www.jdcloud.com/help/detail/2901/isCatalog/1">DescribeInstanceTypes</a>接口获得指定地域或可用区的规格信息。  */
+    /* 实例规格，可查询<a href="https://www.jdcloud.com/help/detail/2901/isCatalog/1">DescribeInstanceTypes</a>接口获得指定地域或可用区的规格信息。  */
     InstanceType string `json:"instanceType"`
 
     /* 镜像ID，可查询<a href="https://www.jdcloud.com/help/detail/2874/isCatalog/1">DescribeImages</a>接口获得指定地域的镜像信息。  */

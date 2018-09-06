@@ -24,22 +24,22 @@ type RebootInstanceRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)  */
     RegionId string `json:"regionId"`
 
-    /* Instance ID  */
+    /* RDS 实例ID，唯一标识一个RDS实例  */
     InstanceId string `json:"instanceId"`
 
-    /* 是否重启主节点。</br>- SQL Server：支持</br>- MySQL：暂不支持 (Optional) */
+    /* 是否重启主节点。<br> - 仅SQL Server 支持该参数 (Optional) */
     RebootMaster *bool `json:""`
 
-    /* 是否重启从节点。</br>- SQL Server：支持</br>- MySQL：暂不支持 (Optional) */
+    /* 是否重启备节点。<br> - 仅SQL Server 支持该参数 (Optional) */
     RebootSlave *bool `json:""`
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: Instance ID (Required)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
+ * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -61,10 +61,10 @@ func NewRebootInstanceRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: Instance ID (Required)
- * param rebootMaster: 是否重启主节点。</br>- SQL Server：支持</br>- MySQL：暂不支持 (Optional)
- * param rebootSlave: 是否重启从节点。</br>- SQL Server：支持</br>- MySQL：暂不支持 (Optional)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
+ * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
+ * param rebootMaster: 是否重启主节点。<br> - 仅SQL Server 支持该参数 (Optional)
+ * param rebootSlave: 是否重启备节点。<br> - 仅SQL Server 支持该参数 (Optional)
  */
 func NewRebootInstanceRequestWithAllParams(
     regionId string,
@@ -100,22 +100,22 @@ func NewRebootInstanceRequestWithoutParam() *RebootInstanceRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
 func (r *RebootInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: Instance ID(Required) */
+/* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *RebootInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param rebootMaster: 是否重启主节点。</br>- SQL Server：支持</br>- MySQL：暂不支持(Optional) */
+/* param rebootMaster: 是否重启主节点。<br> - 仅SQL Server 支持该参数(Optional) */
 func (r *RebootInstanceRequest) SetRebootMaster(rebootMaster bool) {
     r.RebootMaster = &rebootMaster
 }
 
-/* param rebootSlave: 是否重启从节点。</br>- SQL Server：支持</br>- MySQL：暂不支持(Optional) */
+/* param rebootSlave: 是否重启备节点。<br> - 仅SQL Server 支持该参数(Optional) */
 func (r *RebootInstanceRequest) SetRebootSlave(rebootSlave bool) {
     r.RebootSlave = &rebootSlave
 }

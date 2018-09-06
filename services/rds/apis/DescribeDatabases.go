@@ -25,19 +25,19 @@ type DescribeDatabasesRequest struct {
 
     core.JDCloudRequest
 
-    /* 区域代码  */
+    /* 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)  */
     RegionId string `json:"regionId"`
 
-    /* 实例ID  */
+    /* RDS 实例ID，唯一标识一个RDS实例  */
     InstanceId string `json:"instanceId"`
 
-    /* 数据库名称</br>- SQL Server：支持</br>- MySQL：暂不支持 (Optional) */
+    /* 数据库名。如果不指定数据库名，则返回所有数据库列表<br>- **MySQL：不支持该字段**<br>- **SQL Server：支持该字段** (Optional) */
     DbName *string `json:"dbName"`
 }
 
 /*
- * param regionId: 区域代码 (Required)
- * param instanceId: 实例ID (Required)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
+ * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -59,9 +59,9 @@ func NewDescribeDatabasesRequest(
 }
 
 /*
- * param regionId: 区域代码 (Required)
- * param instanceId: 实例ID (Required)
- * param dbName: 数据库名称</br>- SQL Server：支持</br>- MySQL：暂不支持 (Optional)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
+ * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
+ * param dbName: 数据库名。如果不指定数据库名，则返回所有数据库列表<br>- **MySQL：不支持该字段**<br>- **SQL Server：支持该字段** (Optional)
  */
 func NewDescribeDatabasesRequestWithAllParams(
     regionId string,
@@ -95,17 +95,17 @@ func NewDescribeDatabasesRequestWithoutParam() *DescribeDatabasesRequest {
     }
 }
 
-/* param regionId: 区域代码(Required) */
+/* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
 func (r *DescribeDatabasesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 实例ID(Required) */
+/* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *DescribeDatabasesRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param dbName: 数据库名称</br>- SQL Server：支持</br>- MySQL：暂不支持(Optional) */
+/* param dbName: 数据库名。如果不指定数据库名，则返回所有数据库列表<br>- **MySQL：不支持该字段**<br>- **SQL Server：支持该字段**(Optional) */
 func (r *DescribeDatabasesRequest) SetDbName(dbName string) {
     r.DbName = &dbName
 }

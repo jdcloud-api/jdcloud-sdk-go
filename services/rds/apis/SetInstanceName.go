@@ -24,20 +24,20 @@ type SetInstanceNameRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)  */
     RegionId string `json:"regionId"`
 
-    /* Instance ID  */
+    /* RDS 实例ID，唯一标识一个RDS实例  */
     InstanceId string `json:"instanceId"`
 
-    /* 实例名称，名称支持中文、数字、小写字母及英文下划线“_”，且不少于2字符不超过32字符  */
+    /* 实例名称，名称支持中文，实例名的具体规则可参见帮助中心文档:[名称及密码限制](../../../documentation/Cloud-Database-and-Cache/RDS/Introduction/Restrictions/SQLServer-Restrictions.md)  */
     InstanceName string `json:""`
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: Instance ID (Required)
- * param instanceName: 实例名称，名称支持中文、数字、小写字母及英文下划线“_”，且不少于2字符不超过32字符 (Required)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
+ * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
+ * param instanceName: 实例名称，名称支持中文，实例名的具体规则可参见帮助中心文档:[名称及密码限制](../../../documentation/Cloud-Database-and-Cache/RDS/Introduction/Restrictions/SQLServer-Restrictions.md) (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -61,9 +61,9 @@ func NewSetInstanceNameRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: Instance ID (Required)
- * param instanceName: 实例名称，名称支持中文、数字、小写字母及英文下划线“_”，且不少于2字符不超过32字符 (Required)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
+ * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
+ * param instanceName: 实例名称，名称支持中文，实例名的具体规则可参见帮助中心文档:[名称及密码限制](../../../documentation/Cloud-Database-and-Cache/RDS/Introduction/Restrictions/SQLServer-Restrictions.md) (Required)
  */
 func NewSetInstanceNameRequestWithAllParams(
     regionId string,
@@ -97,17 +97,17 @@ func NewSetInstanceNameRequestWithoutParam() *SetInstanceNameRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
 func (r *SetInstanceNameRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: Instance ID(Required) */
+/* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *SetInstanceNameRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param instanceName: 实例名称，名称支持中文、数字、小写字母及英文下划线“_”，且不少于2字符不超过32字符(Required) */
+/* param instanceName: 实例名称，名称支持中文，实例名的具体规则可参见帮助中心文档:[名称及密码限制](../../../documentation/Cloud-Database-and-Cache/RDS/Introduction/Restrictions/SQLServer-Restrictions.md)(Required) */
 func (r *SetInstanceNameRequest) SetInstanceName(instanceName string) {
     r.InstanceName = instanceName
 }

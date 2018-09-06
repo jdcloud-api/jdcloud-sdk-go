@@ -24,10 +24,10 @@ type DeleteDatabaseRequest struct {
 
     core.JDCloudRequest
 
-    /* 区域代码  */
+    /* 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)  */
     RegionId string `json:"regionId"`
 
-    /* 实例ID  */
+    /* RDS 实例ID，唯一标识一个RDS实例  */
     InstanceId string `json:"instanceId"`
 
     /* 库名称  */
@@ -35,8 +35,8 @@ type DeleteDatabaseRequest struct {
 }
 
 /*
- * param regionId: 区域代码 (Required)
- * param instanceId: 实例ID (Required)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
+ * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
  * param dbName: 库名称 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -61,8 +61,8 @@ func NewDeleteDatabaseRequest(
 }
 
 /*
- * param regionId: 区域代码 (Required)
- * param instanceId: 实例ID (Required)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
+ * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
  * param dbName: 库名称 (Required)
  */
 func NewDeleteDatabaseRequestWithAllParams(
@@ -97,12 +97,12 @@ func NewDeleteDatabaseRequestWithoutParam() *DeleteDatabaseRequest {
     }
 }
 
-/* param regionId: 区域代码(Required) */
+/* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
 func (r *DeleteDatabaseRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 实例ID(Required) */
+/* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *DeleteDatabaseRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }

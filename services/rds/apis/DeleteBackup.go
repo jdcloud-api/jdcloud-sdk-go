@@ -24,7 +24,7 @@ type DeleteBackupRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域代码  */
+    /* 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)  */
     RegionId string `json:"regionId"`
 
     /* 备份ID  */
@@ -32,7 +32,7 @@ type DeleteBackupRequest struct {
 }
 
 /*
- * param regionId: 地域代码 (Required)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param backupId: 备份ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -55,7 +55,7 @@ func NewDeleteBackupRequest(
 }
 
 /*
- * param regionId: 地域代码 (Required)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param backupId: 备份ID (Required)
  */
 func NewDeleteBackupRequestWithAllParams(
@@ -88,7 +88,7 @@ func NewDeleteBackupRequestWithoutParam() *DeleteBackupRequest {
     }
 }
 
-/* param regionId: 地域代码(Required) */
+/* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
 func (r *DeleteBackupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

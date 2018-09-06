@@ -30,7 +30,7 @@ type InstanceSpec struct {
     /* 云主机所属的可用区。 (Optional) */
     Az *string `json:"az"`
 
-    /* 规格类型。可查询<a href="https://www.jdcloud.com/help/detail/2901/isCatalog/1">DescribeInstanceTypes</a>接口获得指定地域或可用区的规格信息。 (Optional) */
+    /* 实例规格。可查询<a href="https://www.jdcloud.com/help/detail/2901/isCatalog/1">DescribeInstanceTypes</a>接口获得指定地域或可用区的规格信息。 (Optional) */
     InstanceType *string `json:"instanceType"`
 
     /* 镜像ID。可查询<a href="https://www.jdcloud.com/help/detail/2874/isCatalog/1">DescribeImages</a>接口获得指定地域的镜像信息。 (Optional) */

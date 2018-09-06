@@ -22,6 +22,6 @@ type ImageConstraint struct {
     /* 镜像ID (Optional) */
     ImageId string `json:"imageId"`
 
-    /* 镜像规格类型限制 (Optional) */
+    /* 使用镜像创建实例的规格限制 (Optional) */
     ImageInstanceTypeConstraint ImageInstanceTypeConstraint `json:"imageInstanceTypeConstraint"`
 }

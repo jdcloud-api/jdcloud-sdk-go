@@ -37,7 +37,7 @@ type CreateImageRequest struct {
     /* 镜像描述，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。  */
     Description string `json:"description"`
 
-    /* 数据盘列表，可以在打包镜像的基础上，额外增加新的快照、空盘、或排除云主机中的数据盘。 (Optional) */
+    /* 数据盘列表，可以在实例已挂载数据盘的基础上，额外增加新的快照、空盘、或排除云主机中的数据盘。 (Optional) */
     DataDisks []vm.InstanceDiskAttachmentSpec `json:"dataDisks"`
 }
 
@@ -75,7 +75,7 @@ func NewCreateImageRequest(
  * param instanceId: 云主机ID (Required)
  * param name: 镜像名称，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。 (Required)
  * param description: 镜像描述，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。 (Required)
- * param dataDisks: 数据盘列表，可以在打包镜像的基础上，额外增加新的快照、空盘、或排除云主机中的数据盘。 (Optional)
+ * param dataDisks: 数据盘列表，可以在实例已挂载数据盘的基础上，额外增加新的快照、空盘、或排除云主机中的数据盘。 (Optional)
  */
 func NewCreateImageRequestWithAllParams(
     regionId string,
@@ -133,7 +133,7 @@ func (r *CreateImageRequest) SetDescription(description string) {
     r.Description = description
 }
 
-/* param dataDisks: 数据盘列表，可以在打包镜像的基础上，额外增加新的快照、空盘、或排除云主机中的数据盘。(Optional) */
+/* param dataDisks: 数据盘列表，可以在实例已挂载数据盘的基础上，额外增加新的快照、空盘、或排除云主机中的数据盘。(Optional) */
 func (r *CreateImageRequest) SetDataDisks(dataDisks []vm.InstanceDiskAttachmentSpec) {
     r.DataDisks = dataDisks
 }

@@ -20,16 +20,16 @@ import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
 
 type DBInstanceSpec struct {
 
-    /* 数据库实例名，如不填则缺省为instanceId (Optional) */
+    /* 实例名，具体规则可参见帮助中心文档:[名称及密码限制](../../../documentation/Cloud-Database-and-Cache/RDS/Introduction/Restrictions/SQLServer-Restrictions.md) (Optional) */
     InstanceName *string `json:"instanceName"`
 
-    /* 数据库类型 MySQL|SQL Server  */
+    /* 实例引擎类型，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md)  */
     Engine string `json:"engine"`
 
-    /* 数据库版本 MySQL支持5.6、5.7  SQL Server支持2008 R2、2012 EE、2014 EE、2016 EE  */
+    /* 实例引擎版本，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md)  */
     EngineVersion string `json:"engineVersion"`
 
-    /* 实例规格代码  */
+    /* 实例规格代码，可以通过[describeInstanceClasses](../instance/describeInstanceClasses.md)接口获取  */
     InstanceClass string `json:"instanceClass"`
 
     /* 磁盘大小，单位GB  */
@@ -44,6 +44,6 @@ type DBInstanceSpec struct {
     /* 子网ID  */
     SubnetId string `json:"subnetId"`
 
-    /* 计费配置  */
+    /* 计费规格，包括计费类型，计费周期等  */
     ChargeSpec *charge.ChargeSpec `json:"chargeSpec"`
 }

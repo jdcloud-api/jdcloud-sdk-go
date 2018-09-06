@@ -25,18 +25,18 @@ type DescribeInstancesRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)  */
     RegionId string `json:"regionId"`
 
-    /* 显示数据的页码，取值范围：[1,1000)，页码超过总页数时，显示最后一页，用于查询列表的接口 (Optional) */
+    /* 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页; (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* 每页显示的数据条数，取值范围：10/20/30/50/100 (Optional) */
+    /* 每页显示的数据条数，默认为100，取值范围：[10,100]，用于查询列表的接口 (Optional) */
     PageSize *int `json:"pageSize"`
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -56,9 +56,9 @@ func NewDescribeInstancesRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
- * param pageNumber: 显示数据的页码，取值范围：[1,1000)，页码超过总页数时，显示最后一页，用于查询列表的接口 (Optional)
- * param pageSize: 每页显示的数据条数，取值范围：10/20/30/50/100 (Optional)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
+ * param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页; (Optional)
+ * param pageSize: 每页显示的数据条数，默认为100，取值范围：[10,100]，用于查询列表的接口 (Optional)
  */
 func NewDescribeInstancesRequestWithAllParams(
     regionId string,
@@ -92,17 +92,17 @@ func NewDescribeInstancesRequestWithoutParam() *DescribeInstancesRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
 func (r *DescribeInstancesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param pageNumber: 显示数据的页码，取值范围：[1,1000)，页码超过总页数时，显示最后一页，用于查询列表的接口(Optional) */
+/* param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页;(Optional) */
 func (r *DescribeInstancesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
-/* param pageSize: 每页显示的数据条数，取值范围：10/20/30/50/100(Optional) */
+/* param pageSize: 每页显示的数据条数，默认为100，取值范围：[10,100]，用于查询列表的接口(Optional) */
 func (r *DescribeInstancesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }

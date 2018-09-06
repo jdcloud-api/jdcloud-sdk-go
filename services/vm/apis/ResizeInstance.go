@@ -30,14 +30,14 @@ type ResizeInstanceRequest struct {
     /* 云主机ID  */
     InstanceId string `json:"instanceId"`
 
-    /* 规格类型，可查询<a href="https://www.jdcloud.com/help/detail/2901/isCatalog/1">DescribeInstanceTypes</a>接口获得指定地域或可用区的规格信息。  */
+    /* 实例规格，可查询<a href="https://www.jdcloud.com/help/detail/2901/isCatalog/1">DescribeInstanceTypes</a>接口获得指定地域或可用区的规格信息。  */
     InstanceType string `json:"instanceType"`
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param instanceId: 云主机ID (Required)
- * param instanceType: 规格类型，可查询<a href="https://www.jdcloud.com/help/detail/2901/isCatalog/1">DescribeInstanceTypes</a>接口获得指定地域或可用区的规格信息。 (Required)
+ * param instanceType: 实例规格，可查询<a href="https://www.jdcloud.com/help/detail/2901/isCatalog/1">DescribeInstanceTypes</a>接口获得指定地域或可用区的规格信息。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -63,7 +63,7 @@ func NewResizeInstanceRequest(
 /*
  * param regionId: 地域ID (Required)
  * param instanceId: 云主机ID (Required)
- * param instanceType: 规格类型，可查询<a href="https://www.jdcloud.com/help/detail/2901/isCatalog/1">DescribeInstanceTypes</a>接口获得指定地域或可用区的规格信息。 (Required)
+ * param instanceType: 实例规格，可查询<a href="https://www.jdcloud.com/help/detail/2901/isCatalog/1">DescribeInstanceTypes</a>接口获得指定地域或可用区的规格信息。 (Required)
  */
 func NewResizeInstanceRequestWithAllParams(
     regionId string,
@@ -107,7 +107,7 @@ func (r *ResizeInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param instanceType: 规格类型，可查询<a href="https://www.jdcloud.com/help/detail/2901/isCatalog/1">DescribeInstanceTypes</a>接口获得指定地域或可用区的规格信息。(Required) */
+/* param instanceType: 实例规格，可查询<a href="https://www.jdcloud.com/help/detail/2901/isCatalog/1">DescribeInstanceTypes</a>接口获得指定地域或可用区的规格信息。(Required) */
 func (r *ResizeInstanceRequest) SetInstanceType(instanceType string) {
     r.InstanceType = instanceType
 }

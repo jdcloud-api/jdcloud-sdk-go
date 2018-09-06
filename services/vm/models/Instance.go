@@ -27,7 +27,7 @@ type Instance struct {
     /* 云主机名称 (Optional) */
     InstanceName string `json:"instanceName"`
 
-    /* 云主机类型 (Optional) */
+    /* 实例规格 (Optional) */
     InstanceType string `json:"instanceType"`
 
     /* 主网卡所属VPC的ID (Optional) */

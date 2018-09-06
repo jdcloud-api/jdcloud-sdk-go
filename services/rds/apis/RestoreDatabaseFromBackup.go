@@ -24,28 +24,28 @@ type RestoreDatabaseFromBackupRequest struct {
 
     core.JDCloudRequest
 
-    /* 区域代码  */
+    /* 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)  */
     RegionId string `json:"regionId"`
 
-    /* 实例ID  */
+    /* RDS 实例ID，唯一标识一个RDS实例  */
     InstanceId string `json:"instanceId"`
 
     /* 库名称  */
     DbName string `json:"dbName"`
 
-    /* 备份ID  */
+    /* 备份ID，可从备份查询接口describeBackups获取  */
     BackupId string `json:""`
 
-    /* 指定该备份中用于恢复数据库的文件名称  */
+    /* 指定该备份中用于恢复数据库的文件名称。通常情况下文件名（不包括后缀）即为备份的数据库名。例如文件名为my_test_db.bak，表示该文件是my_test_db数据库的备份  */
     BackupFileName string `json:""`
 }
 
 /*
- * param regionId: 区域代码 (Required)
- * param instanceId: 实例ID (Required)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
+ * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
  * param dbName: 库名称 (Required)
- * param backupId: 备份ID (Required)
- * param backupFileName: 指定该备份中用于恢复数据库的文件名称 (Required)
+ * param backupId: 备份ID，可从备份查询接口describeBackups获取 (Required)
+ * param backupFileName: 指定该备份中用于恢复数据库的文件名称。通常情况下文件名（不包括后缀）即为备份的数据库名。例如文件名为my_test_db.bak，表示该文件是my_test_db数据库的备份 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -73,11 +73,11 @@ func NewRestoreDatabaseFromBackupRequest(
 }
 
 /*
- * param regionId: 区域代码 (Required)
- * param instanceId: 实例ID (Required)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
+ * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
  * param dbName: 库名称 (Required)
- * param backupId: 备份ID (Required)
- * param backupFileName: 指定该备份中用于恢复数据库的文件名称 (Required)
+ * param backupId: 备份ID，可从备份查询接口describeBackups获取 (Required)
+ * param backupFileName: 指定该备份中用于恢复数据库的文件名称。通常情况下文件名（不包括后缀）即为备份的数据库名。例如文件名为my_test_db.bak，表示该文件是my_test_db数据库的备份 (Required)
  */
 func NewRestoreDatabaseFromBackupRequestWithAllParams(
     regionId string,
@@ -115,12 +115,12 @@ func NewRestoreDatabaseFromBackupRequestWithoutParam() *RestoreDatabaseFromBacku
     }
 }
 
-/* param regionId: 区域代码(Required) */
+/* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
 func (r *RestoreDatabaseFromBackupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 实例ID(Required) */
+/* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *RestoreDatabaseFromBackupRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
@@ -130,12 +130,12 @@ func (r *RestoreDatabaseFromBackupRequest) SetDbName(dbName string) {
     r.DbName = dbName
 }
 
-/* param backupId: 备份ID(Required) */
+/* param backupId: 备份ID，可从备份查询接口describeBackups获取(Required) */
 func (r *RestoreDatabaseFromBackupRequest) SetBackupId(backupId string) {
     r.BackupId = backupId
 }
 
-/* param backupFileName: 指定该备份中用于恢复数据库的文件名称(Required) */
+/* param backupFileName: 指定该备份中用于恢复数据库的文件名称。通常情况下文件名（不包括后缀）即为备份的数据库名。例如文件名为my_test_db.bak，表示该文件是my_test_db数据库的备份(Required) */
 func (r *RestoreDatabaseFromBackupRequest) SetBackupFileName(backupFileName string) {
     r.BackupFileName = backupFileName
 }

@@ -25,17 +25,17 @@ type MissingIndexResult struct {
     /* 表名 (Optional) */
     Table string `json:"table"`
 
-    /* 构成相等谓词的列的逗号分隔列表，谓词的形式如下：table.column =constant_value (Optional) */
+    /* 构成相等谓词的列的逗号分隔列表，谓词的形式如下：<br>table.column =constant_value (Optional) */
     EqualityColumns string `json:"equalityColumns"`
 
     /* 用于查询的涵盖列的逗号分隔列表,即创建索引的SQL语句中，Include后的字段 (Optional) */
     InequalityColumns string `json:"inequalityColumns"`
 
-    /* 构成不等谓词的列的逗号分隔列表，例如以下形式的谓词：table.column > constant_value“=”之外的任何比较运算符都表示不相等。 (Optional) */
+    /* 构成不等谓词的列的逗号分隔列表，例如以下形式的谓词：<br>table.column > constant_value<br>“=”之外的任何比较运算符都表示不相等。 (Optional) */
     IncludedColumns string `json:"includedColumns"`
 
     /* 实现此缺失索引后，用户查询可能获得的平均百分比收益。 该值表示如果实现此缺失索引，则查询成本将按此百分比平均下降。 (Optional) */
-    AvgUserImpact int `json:"avgUserImpact"`
+    AvgUserImpact float32 `json:"avgUserImpact"`
 
     /* 由可能使用了组中建议索引的用户查询所导致的扫描次数。 (Optional) */
     UserScans int `json:"userScans"`

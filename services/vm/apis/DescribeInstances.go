@@ -36,13 +36,14 @@ type DescribeInstancesRequest struct {
     PageSize *int `json:"pageSize"`
 
     /* instanceId - 云主机ID，精确匹配，支持多个
-privateIpAddress - 主网卡IP地址，模糊匹配，支持单个
+privateIpAddress - 主网卡内网主IP地址，模糊匹配，支持多个
 az - 可用区，精确匹配，支持多个
 vpcId - 私有网络ID，精确匹配，支持多个
 status - 云主机状态，精确匹配，支持多个，<a href="https://www.jdcloud.com/help/detail/3869/isCatalog/1">参考云主机状态</a>
 name - 云主机名称，模糊匹配，支持单个
-imageId - 镜像ID，模糊匹配，支持单个
+imageId - 镜像ID，精确匹配，支持多个
 networkInterfaceId - 弹性网卡ID，精确匹配，支持多个
+subnetId - 子网ID，精确匹配，支持多个
 agId - 使用可用组id，支持单个
 faultDomain - 错误域，支持多个
  (Optional) */
@@ -74,13 +75,14 @@ func NewDescribeInstancesRequest(
  * param pageNumber: 页码；默认为1 (Optional)
  * param pageSize: 分页大小；默认为20；取值范围[10, 100] (Optional)
  * param filters: instanceId - 云主机ID，精确匹配，支持多个
-privateIpAddress - 主网卡IP地址，模糊匹配，支持单个
+privateIpAddress - 主网卡内网主IP地址，模糊匹配，支持多个
 az - 可用区，精确匹配，支持多个
 vpcId - 私有网络ID，精确匹配，支持多个
 status - 云主机状态，精确匹配，支持多个，<a href="https://www.jdcloud.com/help/detail/3869/isCatalog/1">参考云主机状态</a>
 name - 云主机名称，模糊匹配，支持单个
-imageId - 镜像ID，模糊匹配，支持单个
+imageId - 镜像ID，精确匹配，支持多个
 networkInterfaceId - 弹性网卡ID，精确匹配，支持多个
+subnetId - 子网ID，精确匹配，支持多个
 agId - 使用可用组id，支持单个
 faultDomain - 错误域，支持多个
  (Optional)
@@ -135,13 +137,14 @@ func (r *DescribeInstancesRequest) SetPageSize(pageSize int) {
 }
 
 /* param filters: instanceId - 云主机ID，精确匹配，支持多个
-privateIpAddress - 主网卡IP地址，模糊匹配，支持单个
+privateIpAddress - 主网卡内网主IP地址，模糊匹配，支持多个
 az - 可用区，精确匹配，支持多个
 vpcId - 私有网络ID，精确匹配，支持多个
 status - 云主机状态，精确匹配，支持多个，<a href="https://www.jdcloud.com/help/detail/3869/isCatalog/1">参考云主机状态</a>
 name - 云主机名称，模糊匹配，支持单个
-imageId - 镜像ID，模糊匹配，支持单个
+imageId - 镜像ID，精确匹配，支持多个
 networkInterfaceId - 弹性网卡ID，精确匹配，支持多个
+subnetId - 子网ID，精确匹配，支持多个
 agId - 使用可用组id，支持单个
 faultDomain - 错误域，支持多个
 (Optional) */

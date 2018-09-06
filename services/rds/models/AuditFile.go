@@ -19,15 +19,15 @@ package models
 
 type AuditFile struct {
 
-    /* 审计日志名称 (Optional) */
+    /* 审计日志文件名称 (Optional) */
     Name string `json:"name"`
 
-    /* 审计日志大小，单位Byte (Optional) */
+    /* 审计日志文件大小，单位Byte (Optional) */
     SizeByte int64 `json:"sizeByte"`
 
-    /* 审计日志最后更新时间 (Optional) */
+    /* 审计日志文件最后更新时间 (Optional) */
     LastUpdateTime string `json:"lastUpdateTime"`
 
-    /* 审计日志上传时间 (Optional) */
+    /* 审计日志文件上传时间 (Optional) */
     UploadTime string `json:"uploadTime"`
 }

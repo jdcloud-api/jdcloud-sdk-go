@@ -25,7 +25,7 @@ type CreateInstanceRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)  */
     RegionId string `json:"regionId"`
 
     /* 新建实例规格  */
@@ -33,7 +33,7 @@ type CreateInstanceRequest struct {
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param instanceSpec: 新建实例规格 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -56,7 +56,7 @@ func NewCreateInstanceRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param instanceSpec: 新建实例规格 (Required)
  */
 func NewCreateInstanceRequestWithAllParams(
@@ -89,7 +89,7 @@ func NewCreateInstanceRequestWithoutParam() *CreateInstanceRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
 func (r *CreateInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

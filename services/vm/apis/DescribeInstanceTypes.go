@@ -29,7 +29,7 @@ type DescribeInstanceTypesRequest struct {
     /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /* instanceTypes - 规格类型，精确匹配，支持多个
+    /* instanceTypes - 实例规格，精确匹配，支持多个
 az - 可用区，精确匹配，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
@@ -57,7 +57,7 @@ func NewDescribeInstanceTypesRequest(
 
 /*
  * param regionId: 地域ID (Required)
- * param filters: instanceTypes - 规格类型，精确匹配，支持多个
+ * param filters: instanceTypes - 实例规格，精确匹配，支持多个
 az - 可用区，精确匹配，支持多个
  (Optional)
  */
@@ -96,7 +96,7 @@ func (r *DescribeInstanceTypesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param filters: instanceTypes - 规格类型，精确匹配，支持多个
+/* param filters: instanceTypes - 实例规格，精确匹配，支持多个
 az - 可用区，精确匹配，支持多个
 (Optional) */
 func (r *DescribeInstanceTypesRequest) SetFilters(filters []common.Filter) {
