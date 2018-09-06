@@ -24,10 +24,10 @@ type GetAuditDownloadURLRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)  */
     RegionId string `json:"regionId"`
 
-    /* Instance ID  */
+    /* RDS 实例ID，唯一标识一个RDS实例  */
     InstanceId string `json:"instanceId"`
 
     /* 审计文件名  */
@@ -35,8 +35,8 @@ type GetAuditDownloadURLRequest struct {
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: Instance ID (Required)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
+ * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
  * param fileName: 审计文件名 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -61,8 +61,8 @@ func NewGetAuditDownloadURLRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: Instance ID (Required)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
+ * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
  * param fileName: 审计文件名 (Required)
  */
 func NewGetAuditDownloadURLRequestWithAllParams(
@@ -97,12 +97,12 @@ func NewGetAuditDownloadURLRequestWithoutParam() *GetAuditDownloadURLRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
 func (r *GetAuditDownloadURLRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: Instance ID(Required) */
+/* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *GetAuditDownloadURLRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }

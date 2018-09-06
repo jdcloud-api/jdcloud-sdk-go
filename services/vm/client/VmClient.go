@@ -40,7 +40,7 @@ func NewVmClient(credential *core.Credential) *VmClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vm",
-            Revision:    "1.0.0",
+            Revision:    "1.0.3",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -115,11 +115,11 @@ func (c *VmClient) DescribeImage(request *vm.DescribeImageRequest) (*vm.Describe
     return jdResp, err
 }
 
-/* 云主机使用指定镜像重置云主机镜像<br>
+/* 云主机使用指定镜像重置云主机系统<br>
 云主机的状态必须为<b>stopped</b>状态。<br>
 若当前云主机的系统盘类型为local类型，那么更换的镜像必须为localDisk类型的镜像；同理若当前云主机的系统盘为cloud类型，那么更换的镜像必须为cloudDisk类型的镜像。可查询<a href="https://www.jdcloud.com/help/detail/2874/isCatalog/1">DescribeImages</a>接口获得指定地域的镜像信息。<br>
 若不指定镜像ID，默认使用当前主机的原镜像重置系统。<br>
-指定的镜像必须能够支持当前主机的规格类型(instanceType)，否则会返回错误。可查询<a href="https://www.jdcloud.com/help/detail/2872/isCatalog/1">DescribeImageConstraints</a>接口获得指定镜像的规格类型限制信息。
+指定的镜像必须能够支持当前主机的实例规格(instanceType)，否则会返回错误。可查询<a href="https://www.jdcloud.com/help/detail/2872/isCatalog/1">DescribeImageConstraints</a>接口获得指定镜像支持的系统盘类型信息。
  */
 func (c *VmClient) RebuildInstance(request *vm.RebuildInstanceRequest) (*vm.RebuildInstanceResponse, error) {
     if request == nil {
@@ -160,7 +160,7 @@ func (c *VmClient) RebootInstance(request *vm.RebootInstanceRequest) (*vm.Reboot
 }
 
 /* 共享镜像，只允许操作您的个人私有镜像，单个镜像最多可共享给20个京东云帐户。<br>
-打包镜像目前不支持共享。
+整机镜像目前不支持共享。
  */
 func (c *VmClient) ShareImage(request *vm.ShareImageRequest) (*vm.ShareImageResponse, error) {
     if request == nil {
@@ -172,6 +172,25 @@ func (c *VmClient) ShareImage(request *vm.ShareImageRequest) (*vm.ShareImageResp
     }
 
     jdResp := &vm.ShareImageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 批量查询云主机内网IP地址，查询的是主网卡内网主IP地址。 */
+func (c *VmClient) DescribeInstancePrivateIpAddress(request *vm.DescribeInstancePrivateIpAddressRequest) (*vm.DescribeInstancePrivateIpAddressResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.DescribeInstancePrivateIpAddressResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -205,7 +224,7 @@ func (c *VmClient) DescribeImages(request *vm.DescribeImagesRequest) (*vm.Descri
 /* 云主机挂载一块弹性网卡。<br>
 云主机状态必须为<b>running</b>或<b>stopped</b>状态，并且没有正在进行中的任务才可操作。<br>
 弹性网卡上如果绑定了公网IP，那么公网IP所在az需要与云主机的az保持一致，或者公网IP属于全可用区，才可挂载。<br>
-云主机挂载弹性网卡的数量，不能超过实例规格的限制。可查询<a href="https://www.jdcloud.com/help/detail/2901/isCatalog/1">DescribeInstanceTypes</a>接口获得指定地域或可用区的规格信息。<br>
+云主机挂载弹性网卡的数量，不能超过实例规格的限制。可查询<a href="https://www.jdcloud.com/help/detail/2901/isCatalog/1">DescribeInstanceTypes</a>接口获得指定规格可挂载弹性网卡的数量上限。<br>
 弹性网卡与云主机必须在相同vpc下。
  */
 func (c *VmClient) AttachNetworkInterface(request *vm.AttachNetworkInterfaceRequest) (*vm.AttachNetworkInterfaceResponse, error) {
@@ -266,8 +285,8 @@ func (c *VmClient) ModifyImageAttribute(request *vm.ModifyImageAttributeRequest)
     return jdResp, err
 }
 
-/* 批量查询镜像的规格类型限制。<br>
-通过此接口可以查看镜像不支持的规格类型。只有官方镜像、第三方镜像有规格类型的限制，个人的私有镜像没有此限制。
+/* 批量查询镜像的实例规格限制。<br>
+通过此接口可以查看镜像不支持的实例规格。只有官方镜像、第三方镜像有实例规格的限制，个人的私有镜像没有此限制。
  */
 func (c *VmClient) DescribeImageConstraintsBatch(request *vm.DescribeImageConstraintsBatchRequest) (*vm.DescribeImageConstraintsBatchResponse, error) {
     if request == nil {
@@ -327,7 +346,8 @@ func (c *VmClient) DescribeInstanceVncUrl(request *vm.DescribeInstanceVncUrlRequ
     return jdResp, err
 }
 
-/* 删除一个私有镜像，只允许操作您的个人私有镜像。
+/* 删除一个私有镜像，只允许操作您的个人私有镜像。<br>
+若镜像已共享给其他用户，需先取消共享才可删除。
  */
 func (c *VmClient) DeleteImage(request *vm.DeleteImageRequest) (*vm.DeleteImageResponse, error) {
     if request == nil {
@@ -388,15 +408,15 @@ func (c *VmClient) DescribeInstance(request *vm.DescribeInstanceRequest) (*vm.De
     return jdResp, err
 }
 
-/* 云主机变更规格类型<br>
+/* 云主机变更实例规格<br>
 云主机的状态必须为<b>stopped</b>状态。<br>
-16年创建的云硬盘做系统盘的主机，一代与二代规格类型不允许相互调整。<br>
-本地盘(local类型)做系统盘的主机，一代与二代规格类型不允许相互调整。<br>
-使用高可用组(Ag)创建的主机，一代与二代规格类型不允许相互调整。<br>
-云硬盘(cloud类型)做系统盘的主机，一代与二代规格类型允许相互调整。<br>
-如果当前主机中的弹性网卡数量，大于规格类型允许的弹性网卡数量，会返回错误。可查询<a href="https://www.jdcloud.com/help/detail/2901/isCatalog/1">DescribeInstanceTypes</a>接口获得指定地域或可用区的规格信息。<br>
-当前主机所使用的镜像，需要支持要变更的目标规格类型，否则返回错误。可查询<a href="https://www.jdcloud.com/help/detail/2872/isCatalog/1">DescribeImageConstraints</a>接口获得指定镜像的规格类型限制信息。<br>
-云主机欠费时，无法更改规格类型。
+16年创建的云硬盘做系统盘的主机，一代与二代实例规格不允许相互调整。<br>
+本地盘(local类型)做系统盘的主机，一代与二代实例规格不允许相互调整。<br>
+使用高可用组(Ag)创建的主机，一代与二代实例规格不允许相互调整。<br>
+云硬盘(cloud类型)做系统盘的主机，一代与二代实例规格允许相互调整。<br>
+如果当前主机中的弹性网卡数量，大于新实例规格允许的弹性网卡数量，会返回错误。可查询<a href="https://www.jdcloud.com/help/detail/2901/isCatalog/1">DescribeInstanceTypes</a>接口获得指定地域及可用区下的实例规格信息。<br>
+当前主机所使用的镜像，需要支持要变更的目标实例规格，否则返回错误。可查询<a href="https://www.jdcloud.com/help/detail/2872/isCatalog/1">DescribeImageConstraints</a>接口获得指定镜像的实例规格限制信息。<br>
+云主机欠费或到期时，无法更改实例规格。
  */
 func (c *VmClient) ResizeInstance(request *vm.ResizeInstanceRequest) (*vm.ResizeInstanceResponse, error) {
     if request == nil {
@@ -458,7 +478,7 @@ func (c *VmClient) DescribeQuotas(request *vm.DescribeQuotasRequest) (*vm.Descri
 
 /* 为云主机创建私有镜像。云主机状态必须为<b>stopped</b>。<br>
 云主机没有正在进行中的任务才可制作镜像。<br>
-如果云主机中挂载了数据盘，默认会将数据盘创建快照，生成打包镜像。<br>
+制作镜像以备份系统盘为基础，在此之上可选择全部或部分挂载数据盘制作整机镜像（如不做任何更改将默认制作整机镜像），制作镜像过程会为所挂载云硬盘创建快照并与镜像关联。<br>
 调用接口后，需要等待镜像状态变为<b>ready</b>后，才能正常使用镜像。
  */
 func (c *VmClient) CreateImage(request *vm.CreateImageRequest) (*vm.CreateImageResponse, error) {
@@ -500,16 +520,16 @@ func (c *VmClient) DescribeInstances(request *vm.DescribeInstancesRequest) (*vm.
     return jdResp, err
 }
 
-/* 创建一台或多台指定配置的云主机<a href="https://www.jdcloud.com/help/detail/3383/isCatalog/1">参数详细说明</a><br>
+/* 创建一台或多台指定配置的云主机，创建模式分为三种：1.普通方式、2.使用高可用组、3.使用启动模板。三种方式创建云主机时参数的必传与非必传是不同的，具体请参考<a href="https://www.jdcloud.com/help/detail/3383/isCatalog/1">参数详细说明</a><br>
 - 创建云主机需要通过实名认证
-- 规格类型
+- 实例规格
     - 可查询<a href="https://www.jdcloud.com/help/detail/2901/isCatalog/1">DescribeInstanceTypes</a>接口获得指定地域或可用区的规格信息。
     - 不能使用已下线、或已售馨的规格ID
 - 镜像
     - Windows Server 2012 R2标准版 64位 中文版 SQL Server 2014 标准版 SP2内存需大于1GB；
     - Windows Server所有镜像CPU不可选超过64核CPU。
     - 可查询<a href="https://www.jdcloud.com/help/detail/2874/isCatalog/1">DescribeImages</a>接口获得指定地域的镜像信息。
-    - 选择的镜像必须支持选择的规格类型。可查询<a href="https://www.jdcloud.com/help/detail/2872/isCatalog/1">DescribeImageConstraints</a>接口获得指定镜像的规格类型限制信息。<br>
+    - 选择的镜像必须支持选择的实例规格。可查询<a href="https://www.jdcloud.com/help/detail/2872/isCatalog/1">DescribeImageConstraints</a>接口获得指定镜像的实例规格限制信息。<br>
 - 网络配置
     - 指定主网卡配置信息
         - 必须指定subnetId
@@ -650,7 +670,7 @@ func (c *VmClient) DisassociateElasticIp(request *vm.DisassociateElasticIpReques
 }
 
 /* 镜像跨区复制，将私有镜像复制到其它地域下，只允许操作您的个人私有镜像。<br>
-只支持cloudDisk云盘系统盘类型的镜像。
+只支持rootDeviceType为cloudDisk的云硬盘系统盘镜像操作。
  */
 func (c *VmClient) CopyImages(request *vm.CopyImagesRequest) (*vm.CopyImagesResponse, error) {
     if request == nil {
@@ -692,8 +712,8 @@ func (c *VmClient) DetachNetworkInterface(request *vm.DetachNetworkInterfaceRequ
     return jdResp, err
 }
 
-/* 查询镜像的规格类型限制。<br>
-通过此接口可以查看镜像不支持的规格类型。只有官方镜像、第三方镜像有规格类型的限制，个人的私有镜像没有此限制。
+/* 查询镜像的实例规格限制。<br>
+通过此接口可以查看镜像不支持的实例规格。只有官方镜像、第三方镜像有实例规格的限制，个人的私有镜像没有此限制。
  */
 func (c *VmClient) DescribeImageConstraints(request *vm.DescribeImageConstraintsRequest) (*vm.DescribeImageConstraintsResponse, error) {
     if request == nil {
@@ -736,7 +756,7 @@ func (c *VmClient) StartInstance(request *vm.StartInstanceRequest) (*vm.StartIns
 
 /* 删除按配置计费、或包年包月已到期的单个云主机。不能删除没有计费信息的云主机。<br>
 云主机状态必须为运行<b>running</b>、停止<b>stopped</b>、错误<b>error</b>，同时云主机没有正在进行中的任务才可删除。<br>
-包年包月未到期的云主机不能删除。白名单用户不能删除包年包月已到期的云主机。<br>
+包年包月未到期的云主机不能删除。<br>
 如果主机中挂载的数据盘为按配置计费的云硬盘，并且不是共享型云硬盘，并且AutoDelete属性为true，那么数据盘会随主机一起删除。
  [MFA enabled] */
 func (c *VmClient) DeleteInstance(request *vm.DeleteInstanceRequest) (*vm.DeleteInstanceResponse, error) {
@@ -757,9 +777,8 @@ func (c *VmClient) DeleteInstance(request *vm.DeleteInstanceRequest) (*vm.Delete
     return jdResp, err
 }
 
-/* 云主机绑定弹性公网IP，绑定的是主网卡、内网主IP对应的弹性公网IP。<br>
+/* 为云主机主网卡下的主内网IP绑定弹性公网IP。<br>
 一台云主机只能绑定一个弹性公网IP(主网卡)，若主网卡已存在弹性公网IP，会返回错误。<br>
-如果是黑名单中的用户，会返回错误。
  */
 func (c *VmClient) AssociateElasticIp(request *vm.AssociateElasticIpRequest) (*vm.AssociateElasticIpResponse, error) {
     if request == nil {
@@ -799,7 +818,7 @@ func (c *VmClient) DetachDisk(request *vm.DetachDiskRequest) (*vm.DetachDiskResp
     return jdResp, err
 }
 
-/* 查询规格类型信息列表
+/* 查询实例规格信息列表
  */
 func (c *VmClient) DescribeInstanceTypes(request *vm.DescribeInstanceTypesRequest) (*vm.DescribeInstanceTypesResponse, error) {
     if request == nil {

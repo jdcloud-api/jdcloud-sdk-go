@@ -25,13 +25,13 @@ type GrantPrivilegeRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域代码  */
+    /* 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)  */
     RegionId string `json:"regionId"`
 
-    /* 实例ID  */
+    /* RDS 实例ID，唯一标识一个RDS实例  */
     InstanceId string `json:"instanceId"`
 
-    /* 账户名  */
+    /* 账号名，在同一个实例中账号名不能重复  */
     AccountName string `json:"accountName"`
 
     /* 账号的访问权限  */
@@ -39,9 +39,9 @@ type GrantPrivilegeRequest struct {
 }
 
 /*
- * param regionId: 地域代码 (Required)
- * param instanceId: 实例ID (Required)
- * param accountName: 账户名 (Required)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
+ * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
+ * param accountName: 账号名，在同一个实例中账号名不能重复 (Required)
  * param accountPrivileges: 账号的访问权限 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -68,9 +68,9 @@ func NewGrantPrivilegeRequest(
 }
 
 /*
- * param regionId: 地域代码 (Required)
- * param instanceId: 实例ID (Required)
- * param accountName: 账户名 (Required)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
+ * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
+ * param accountName: 账号名，在同一个实例中账号名不能重复 (Required)
  * param accountPrivileges: 账号的访问权限 (Required)
  */
 func NewGrantPrivilegeRequestWithAllParams(
@@ -107,17 +107,17 @@ func NewGrantPrivilegeRequestWithoutParam() *GrantPrivilegeRequest {
     }
 }
 
-/* param regionId: 地域代码(Required) */
+/* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
 func (r *GrantPrivilegeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 实例ID(Required) */
+/* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *GrantPrivilegeRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param accountName: 账户名(Required) */
+/* param accountName: 账号名，在同一个实例中账号名不能重复(Required) */
 func (r *GrantPrivilegeRequest) SetAccountName(accountName string) {
     r.AccountName = accountName
 }

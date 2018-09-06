@@ -25,29 +25,29 @@ type DescribeIndexPerformanceRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)  */
     RegionId string `json:"regionId"`
 
-    /* Instance ID  */
+    /* RDS 实例ID，唯一标识一个RDS实例  */
     InstanceId string `json:"instanceId"`
 
-    /* 查询类型，不同的查询类型按照相应的字段从高到低返回结果。支持如下类型：Missing：缺失索引Size：索引大小，单位KBUpdates：索引更新次数Scans：表扫描次数Used：最少使用  */
+    /* 查询类型，不同的查询类型按照相应的字段从高到低返回结果。<br>支持如下类型：<br>Missing：缺失索引<br>Size：索引大小，单位KB<br>Updates：索引更新次数<br>Scans：表扫描次数<br>Used：最少使用<br>  */
     QueryType string `json:"queryType"`
 
     /* 需要查询的数据库名，多个数据库名之间用英文逗号分隔，默认所有数据库 (Optional) */
     Db *string `json:"db"`
 
-    /* 显示数据的页码，取值范围：[1,1000)，页码超过总页数时，显示最后一页，用于查询列表的接口 (Optional) */
+    /* 显示数据的页码，默认为1，取值范围：[-1,1000)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页。 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* 每页显示的数据条数，默认为50，取值范围：[1,100]，只能为10的倍数 (Optional) */
+    /* 每页显示的数据条数，默认为50，取值范围：[1,100]，只能为10的倍数，用于查询列表的接口 (Optional) */
     PageSize *int `json:"pageSize"`
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: Instance ID (Required)
- * param queryType: 查询类型，不同的查询类型按照相应的字段从高到低返回结果。支持如下类型：Missing：缺失索引Size：索引大小，单位KBUpdates：索引更新次数Scans：表扫描次数Used：最少使用 (Required)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
+ * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
+ * param queryType: 查询类型，不同的查询类型按照相应的字段从高到低返回结果。<br>支持如下类型：<br>Missing：缺失索引<br>Size：索引大小，单位KB<br>Updates：索引更新次数<br>Scans：表扫描次数<br>Used：最少使用<br> (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -71,12 +71,12 @@ func NewDescribeIndexPerformanceRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: Instance ID (Required)
- * param queryType: 查询类型，不同的查询类型按照相应的字段从高到低返回结果。支持如下类型：Missing：缺失索引Size：索引大小，单位KBUpdates：索引更新次数Scans：表扫描次数Used：最少使用 (Required)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
+ * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
+ * param queryType: 查询类型，不同的查询类型按照相应的字段从高到低返回结果。<br>支持如下类型：<br>Missing：缺失索引<br>Size：索引大小，单位KB<br>Updates：索引更新次数<br>Scans：表扫描次数<br>Used：最少使用<br> (Required)
  * param db: 需要查询的数据库名，多个数据库名之间用英文逗号分隔，默认所有数据库 (Optional)
- * param pageNumber: 显示数据的页码，取值范围：[1,1000)，页码超过总页数时，显示最后一页，用于查询列表的接口 (Optional)
- * param pageSize: 每页显示的数据条数，默认为50，取值范围：[1,100]，只能为10的倍数 (Optional)
+ * param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,1000)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页。 (Optional)
+ * param pageSize: 每页显示的数据条数，默认为50，取值范围：[1,100]，只能为10的倍数，用于查询列表的接口 (Optional)
  */
 func NewDescribeIndexPerformanceRequestWithAllParams(
     regionId string,
@@ -116,17 +116,17 @@ func NewDescribeIndexPerformanceRequestWithoutParam() *DescribeIndexPerformanceR
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
 func (r *DescribeIndexPerformanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: Instance ID(Required) */
+/* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *DescribeIndexPerformanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param queryType: 查询类型，不同的查询类型按照相应的字段从高到低返回结果。支持如下类型：Missing：缺失索引Size：索引大小，单位KBUpdates：索引更新次数Scans：表扫描次数Used：最少使用(Required) */
+/* param queryType: 查询类型，不同的查询类型按照相应的字段从高到低返回结果。<br>支持如下类型：<br>Missing：缺失索引<br>Size：索引大小，单位KB<br>Updates：索引更新次数<br>Scans：表扫描次数<br>Used：最少使用<br>(Required) */
 func (r *DescribeIndexPerformanceRequest) SetQueryType(queryType string) {
     r.QueryType = queryType
 }
@@ -136,12 +136,12 @@ func (r *DescribeIndexPerformanceRequest) SetDb(db string) {
     r.Db = &db
 }
 
-/* param pageNumber: 显示数据的页码，取值范围：[1,1000)，页码超过总页数时，显示最后一页，用于查询列表的接口(Optional) */
+/* param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,1000)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页。(Optional) */
 func (r *DescribeIndexPerformanceRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
-/* param pageSize: 每页显示的数据条数，默认为50，取值范围：[1,100]，只能为10的倍数(Optional) */
+/* param pageSize: 每页显示的数据条数，默认为50，取值范围：[1,100]，只能为10的倍数，用于查询列表的接口(Optional) */
 func (r *DescribeIndexPerformanceRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }

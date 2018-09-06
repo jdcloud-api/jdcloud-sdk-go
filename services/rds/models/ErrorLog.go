@@ -19,10 +19,10 @@ package models
 
 type ErrorLog struct {
 
-    /* 错误日志名称 (Optional) */
+    /* 错误日志文件名称 (Optional) */
     Name string `json:"name"`
 
-    /* 错误日志大小，单位Byte (Optional) */
+    /* 错误日志文件大小，单位Byte (Optional) */
     SizeByte int64 `json:"sizeByte"`
 
     /* 错误日志最后更新时间，格式为：YYYY-MM-DD HH:mm:ss (Optional) */

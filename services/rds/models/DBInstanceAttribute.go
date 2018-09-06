@@ -20,19 +20,19 @@ import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
 
 type DBInstanceAttribute struct {
 
-    /* 数据库实例ID (Optional) */
+    /* 实例ID (Optional) */
     InstanceId string `json:"instanceId"`
 
-    /* 数据库实例名称 (Optional) */
+    /* 实例名称，具体规则可参见帮助中心文档:[名称及密码限制](../../../documentation/Cloud-Database-and-Cache/RDS/Introduction/Restrictions/SQLServer-Restrictions.md) (Optional) */
     InstanceName string `json:"instanceName"`
 
-    /* 实例类别，目前仅支持主实例，对应值为master (Optional) */
+    /* 实例类型，例如主实例，只读实例等，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Optional) */
     InstanceType string `json:"instanceType"`
 
-    /* 数据库类型 MySQL|SQL Server (Optional) */
+    /* 实例引擎类型，如MySQL或SQL Server等，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Optional) */
     Engine string `json:"engine"`
 
-    /* 数据库版本 MySQL支持5.6、5.7  SQL Server支持2008 R2、2012 EE、2014 EE、2016 EE (Optional) */
+    /* 实例引擎版本，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Optional) */
     EngineVersion string `json:"engineVersion"`
 
     /* 实例规格代码 (Optional) */
@@ -47,10 +47,10 @@ type DBInstanceAttribute struct {
     /* 内存大小，单位MB (Optional) */
     InstanceMemoryMB int `json:"instanceMemoryMB"`
 
-    /* 地域ID (Optional) */
+    /* 地域ID，参见[地域及可用区对照表](../Enum-Definitions/Regions-AZ.md) (Optional) */
     RegionId string `json:"regionId"`
 
-    /* 可用区ID， 第一个ID必须为主实例所在的可用区 (Optional) */
+    /* 可用区ID，第一个为主实例在的可用区，参见[地域及可用区对照表](../Enum-Definitions/Regions-AZ.md) (Optional) */
     AzId []string `json:"azId"`
 
     /* VPC的ID (Optional) */
@@ -59,22 +59,22 @@ type DBInstanceAttribute struct {
     /* 子网的ID (Optional) */
     SubnetId string `json:"subnetId"`
 
-    /* 实例提供给应用访问的实例内网域名 (Optional) */
+    /* 实例公网域名 (Optional) */
     InternalDomainName string `json:"internalDomainName"`
 
-    /* 实例提供给应用访问的实例公网域名 (Optional) */
+    /* 实例内网域名 (Optional) */
     PublicDomainName string `json:"publicDomainName"`
 
     /* 应用访问端口 (Optional) */
     InstancePort string `json:"instancePort"`
 
-    /* 访问模式 (Optional) */
+    /* 访问模式，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Optional) */
     ConnectionMode string `json:"connectionMode"`
 
-    /* 审计状态 (Optional) */
+    /* 审计状态，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Optional) */
     AuditStatus string `json:"auditStatus"`
 
-    /* 实例状态 (Optional) */
+    /* 实例状态，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Optional) */
     InstanceStatus string `json:"instanceStatus"`
 
     /* 实例创建时间 (Optional) */

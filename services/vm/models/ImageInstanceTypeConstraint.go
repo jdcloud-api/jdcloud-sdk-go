@@ -19,9 +19,9 @@ package models
 
 type ImageInstanceTypeConstraint struct {
 
-    /* 受限制的规格类型。excludes：排除指定的实例类型；includes：只包含指定的实例类型，暂不支持includes (Optional) */
+    /* 限制类型。取值：excludes：不支持的实例类型；includes：支持的实例类型。 (Optional) */
     ConstraintsType string `json:"constraintsType"`
 
-    /* 规格类型列表 (Optional) */
+    /* 实例规格列表 (Optional) */
     InstanceTypes []string `json:"instanceTypes"`
 }

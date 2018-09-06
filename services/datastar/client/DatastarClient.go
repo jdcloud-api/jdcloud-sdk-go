@@ -40,7 +40,7 @@ func NewDatastarClient(credential *core.Credential) *DatastarClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "datastar",
-            Revision:    "1.0.0",
+            Revision:    "1.0.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,6 +51,25 @@ func (c *DatastarClient) SetConfig(config *core.Config) {
 
 func (c *DatastarClient) SetLogger(logger core.Logger) {
     c.Logger = logger
+}
+
+/* 根据deviceId查询对应用户的画像信息 */
+func (c *DatastarClient) GetProfile(request *datastar.GetProfileRequest) (*datastar.GetProfileResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &datastar.GetProfileResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
 }
 
 /* 根据设备ID查询人群包ID */

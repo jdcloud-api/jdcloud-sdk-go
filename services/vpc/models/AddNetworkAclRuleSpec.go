@@ -23,10 +23,10 @@ type AddNetworkAclRuleSpec struct {
     Protocol string `json:"protocol"`
 
     /* 规则限定起始传输层端口, 取值范围:1-65535, 若protocol为传输层协议，默认值为1，若protocol不是传输层协议，设置无效，恒为0。如果规则只限定一个端口号，fromPort和toPort填写同一个值 (Optional) */
-    FromPort int `json:"fromPort"`
+    FromPort *int `json:"fromPort"`
 
     /* 规则限定终止传输层端口, 取值范围:1-65535, 若protocol为传输层协议，默认值为65535，若protocol不是传输层协议，设置无效，恒为0。如果规则只限定一个端口号，fromPort和toPort填写同一个值 (Optional) */
-    ToPort int `json:"toPort"`
+    ToPort *int `json:"toPort"`
 
     /* networkAcl规则方向。ingress：入规则; egress：出规则  */
     Direction string `json:"direction"`
@@ -41,5 +41,5 @@ type AddNetworkAclRuleSpec struct {
     Priority int `json:"priority"`
 
     /* 描述,允许输入UTF-8编码下的全部字符，不超过256字符 (Optional) */
-    Description string `json:"description"`
+    Description *string `json:"description"`
 }

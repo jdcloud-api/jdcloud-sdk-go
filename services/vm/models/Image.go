@@ -25,22 +25,22 @@ type Image struct {
     /* 镜像名称 (Optional) */
     Name string `json:"name"`
 
-    /* 操作系统发行版，[suse, debian, ubuntu, centos, windows-server] (Optional) */
+    /* 镜像的操作系统发行版。取值：Ubuntu,CentOS,Windows Server (Optional) */
     Platform string `json:"platform"`
 
-    /* 操作系统版本号 (Optional) */
+    /* 镜像的操作系统版本。 (Optional) */
     OsVersion string `json:"osVersion"`
 
-    /* 镜像架构 i386, x86_64 (Optional) */
+    /* 镜像架构。取值：i386,x86_64 (Optional) */
     Architecture string `json:"architecture"`
 
     /* 镜像系统盘大小 (Optional) */
     SystemDiskSizeGB int `json:"systemDiskSizeGB"`
 
-    /* 镜像来源 jcloud：官方镜像 marketplace：镜像市场镜像 self：用户自己的镜像 shared：其他用户分享的镜像 (Optional) */
+    /* 镜像来源。取值：jcloud：官方镜像；marketplace：镜像市场镜像；self：用户自己的镜像；shared：其他用户分享的镜像 (Optional) */
     ImageSource string `json:"imageSource"`
 
-    /* 镜像的操作系统类型，[windows, linux] (Optional) */
+    /* 镜像的操作系统类型。取值：windows,linux (Optional) */
     OsType string `json:"osType"`
 
     /* <a href="https://www.jdcloud.com/help/detail/3871/isCatalog/1">参考镜像状态</a> (Optional) */
@@ -49,24 +49,24 @@ type Image struct {
     /* 创建时间 (Optional) */
     CreateTime string `json:"createTime"`
 
-    /* 镜像本身大小 (Optional) */
+    /* 镜像文件实际大小 (Optional) */
     SizeMB int `json:"sizeMB"`
 
     /* 镜像描述 (Optional) */
     Desc string `json:"desc"`
 
-    /* 系统盘配置 (Optional) */
+    /* 镜像系统盘配置 (Optional) */
     SystemDisk InstanceDiskAttachment `json:"systemDisk"`
 
-    /* 打包镜像数据盘映射信息 (Optional) */
+    /* 镜像数据盘映射信息 (Optional) */
     DataDisks []InstanceDiskAttachment `json:"dataDisks"`
 
-    /* 云硬盘做系统盘的快照id，创建云主机时，默认使用此快照创建系统盘 (Optional) */
+    /* 创建云盘系统盘所使用的云硬盘快照ID。系统盘类型为本地盘的镜像，此参数为空。 (Optional) */
     SnapshotId string `json:"snapshotId"`
 
-    /* 镜像支持的系统盘类型。localDisk：支持本地盘系统盘。cloudDisk：支持云盘系统盘 (Optional) */
+    /* 镜像支持的系统盘类型。取值：localDisk：本地盘系统盘；cloudDisk：云盘系统盘。 (Optional) */
     RootDeviceType string `json:"rootDeviceType"`
 
-    /* 镜像复制时的进度，单位为百分比，例如：80 (Optional) */
+    /* 镜像复制和转换时的进度，仅显示数值，单位为百分比 (Optional) */
     Progress string `json:"progress"`
 }

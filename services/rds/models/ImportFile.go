@@ -19,10 +19,10 @@ package models
 
 type ImportFile struct {
 
-    /* 上传的备份文件名称 (Optional) */
+    /* 文件名称 (Optional) */
     Name string `json:"name"`
 
-    /* 如果该文件是共享文件，则有全局ID，如不是共享文件，则为空 (Optional) */
+    /* 如果该文件是共享文件，则有全局ID，如不是共享文件，则为空。该全局ID在文件删除时，需要用到 (Optional) */
     SharedFileGid string `json:"sharedFileGid"`
 
     /* 文件大小，单位Byte (Optional) */
@@ -31,6 +31,6 @@ type ImportFile struct {
     /* 文件上传完成时间，格式为：YYYY-MM-DD HH:mm:ss (Optional) */
     UploadTime string `json:"uploadTime"`
 
-    /* 是否所属当前实例. “true”或者“false” (Optional) */
+    /* 是否所属当前实例.<br> 1：当前实例；<br>0：不是当前实例，为共享文件 (Optional) */
     IsLocal string `json:"isLocal"`
 }

@@ -25,10 +25,10 @@ type CreateBackupRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域代码  */
+    /* 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)  */
     RegionId string `json:"regionId"`
 
-    /* 集群ID (Optional) */
+    /* RDS实例ID，唯一标识一个实例 (Optional) */
     InstanceId *string `json:"instanceId"`
 
     /* 备份规格 (Optional) */
@@ -36,7 +36,7 @@ type CreateBackupRequest struct {
 }
 
 /*
- * param regionId: 地域代码 (Required)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -56,8 +56,8 @@ func NewCreateBackupRequest(
 }
 
 /*
- * param regionId: 地域代码 (Required)
- * param instanceId: 集群ID (Optional)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
+ * param instanceId: RDS实例ID，唯一标识一个实例 (Optional)
  * param backupSpec: 备份规格 (Optional)
  */
 func NewCreateBackupRequestWithAllParams(
@@ -92,12 +92,12 @@ func NewCreateBackupRequestWithoutParam() *CreateBackupRequest {
     }
 }
 
-/* param regionId: 地域代码(Required) */
+/* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
 func (r *CreateBackupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 集群ID(Optional) */
+/* param instanceId: RDS实例ID，唯一标识一个实例(Optional) */
 func (r *CreateBackupRequest) SetInstanceId(instanceId string) {
     r.InstanceId = &instanceId
 }

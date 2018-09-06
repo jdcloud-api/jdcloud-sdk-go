@@ -24,24 +24,24 @@ type SetImportFileSharedRequest struct {
 
     core.JDCloudRequest
 
-    /* 区域编码  */
+    /* 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)  */
     RegionId string `json:"regionId"`
 
-    /* 实例ID  */
+    /* RDS 实例ID，唯一标识一个RDS实例  */
     InstanceId string `json:"instanceId"`
 
     /* 单库上云文件名  */
     FileName string `json:"fileName"`
 
-    /* 文件是否共享，不区分大小写，true:共享;false:不共享  */
+    /* 文件是否共享<br>true:共享<br>false:不共享  */
     Shared string `json:""`
 }
 
 /*
- * param regionId: 区域编码 (Required)
- * param instanceId: 实例ID (Required)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
+ * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
  * param fileName: 单库上云文件名 (Required)
- * param shared: 文件是否共享，不区分大小写，true:共享;false:不共享 (Required)
+ * param shared: 文件是否共享<br>true:共享<br>false:不共享 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -67,10 +67,10 @@ func NewSetImportFileSharedRequest(
 }
 
 /*
- * param regionId: 区域编码 (Required)
- * param instanceId: 实例ID (Required)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
+ * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
  * param fileName: 单库上云文件名 (Required)
- * param shared: 文件是否共享，不区分大小写，true:共享;false:不共享 (Required)
+ * param shared: 文件是否共享<br>true:共享<br>false:不共享 (Required)
  */
 func NewSetImportFileSharedRequestWithAllParams(
     regionId string,
@@ -106,12 +106,12 @@ func NewSetImportFileSharedRequestWithoutParam() *SetImportFileSharedRequest {
     }
 }
 
-/* param regionId: 区域编码(Required) */
+/* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
 func (r *SetImportFileSharedRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 实例ID(Required) */
+/* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *SetImportFileSharedRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
@@ -121,7 +121,7 @@ func (r *SetImportFileSharedRequest) SetFileName(fileName string) {
     r.FileName = fileName
 }
 
-/* param shared: 文件是否共享，不区分大小写，true:共享;false:不共享(Required) */
+/* param shared: 文件是否共享<br>true:共享<br>false:不共享(Required) */
 func (r *SetImportFileSharedRequest) SetShared(shared string) {
     r.Shared = shared
 }

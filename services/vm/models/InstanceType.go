@@ -19,10 +19,10 @@ package models
 
 type InstanceType struct {
 
-    /* 实例族 (Optional) */
+    /* 实例规格类型 (Optional) */
     Family string `json:"family"`
 
-    /* 规格类型，比如g.b1.2xlarge (Optional) */
+    /* 实例规格，比如g.b1.2xlarge (Optional) */
     InstanceType string `json:"instanceType"`
 
     /* cpu个数 (Optional) */

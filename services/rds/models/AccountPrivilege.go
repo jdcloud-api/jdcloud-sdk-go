@@ -19,9 +19,9 @@ package models
 
 type AccountPrivilege struct {
 
-    /* 数据库名称 (Optional) */
+    /* 数据库名称，具体规则可参见帮助中心文档:[名称及密码限制](../../../documentation/Cloud-Database-and-Cache/RDS/Introduction/Restrictions/SQLServer-Restrictions.md) (Optional) */
     DbName *string `json:"dbName"`
 
-    /* 对数据库具有的权限</br>ro:只读</br>rw:读写 (Optional) */
+    /* 账号对数据库所具有的权限，权限的具体定义可以参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Optional) */
     Privilege *string `json:"privilege"`
 }

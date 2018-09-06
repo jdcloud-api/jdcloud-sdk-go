@@ -22,31 +22,31 @@ type Backup struct {
     /* 备份ID (Optional) */
     BackupId string `json:"backupId"`
 
-    /* 备份名称 (Optional) */
+    /* 备份名称，最长支持64个英文字符或等长的中文字符 (Optional) */
     BackupName string `json:"backupName"`
 
     /* 备份所属实例ID (Optional) */
     InstanceId string `json:"instanceId"`
 
-    /* 备份状态 </br> COMPLETED：备份完成</br>FAILED：备份失败</br>BUILDING：备份中</br>DELETING：删除中 (Optional) */
+    /* 备份状态，请查看[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Optional) */
     BackupStatus string `json:"backupStatus"`
 
     /* 备份开始时间，格式为：YYYY-MM-DD HH:mm:ss (Optional) */
     BackupStartTime string `json:"backupStartTime"`
 
-    /* 备份结束时间，格式为：YYYY-MM-DD HH:mm:ss (Optional) */
+    /* 备份结束时间，格式为：YYYY-MM-DD HH:mm:ss<br>- **SQL Server支持**<br>- **MySQL不支持** (Optional) */
     BackupEndTime string `json:"backupEndTime"`
 
-    /* 备份类型，全量备份或增量备份</br>full：全量</br>diff：增量 (Optional) */
+    /* 备份类型，全量备份或增量备份，请查看[枚举参数定义](../Enum-Definitions/Enum-Definitions.md)<br>- **SQL Server支持**<br>- **MySQL不支持** (Optional) */
     BackupType string `json:"backupType"`
 
-    /* 备份模式，系统自动备份或手动备份</br>Automated：自动备份</br>Manual：手工备份 (Optional) */
+    /* 备份模式，系统自动备份或手动备份，请查看[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Optional) */
     BackupMode string `json:"backupMode"`
 
-    /* 备份粒度，实例备份或者多库备份</br>instance：实例备份</br>dbs：数据库备份 (Optional) */
+    /* 备份粒度，实例备份或者多库备份，请查看[枚举参数定义](../Enum-Definitions/Enum-Definitions.md)<br>- **SQL Server支持**<br>- **MySQL不支持** (Optional) */
     BackupUnit string `json:"backupUnit"`
 
-    /* 备份文件列表，仅SQL Server支持该参数，文件名的命名规则为:</br>全备:数据库名+.bak; </br>增量:数据库名+.diff (Optional) */
+    /* 备份文件列表<br>- **SQL Server支持**,备份可以有多个文件，文件名的命名规则为:<br>（1）全备：数据库名+.bak<br>（2）增量：数据库名+.diff<br>- **MySQL不支持** (Optional) */
     BackupFiles []string `json:"backupFiles"`
 
     /* 整个备份集大小，单位：Byte (Optional) */

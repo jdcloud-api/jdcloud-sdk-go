@@ -19,7 +19,7 @@ package models
 
 type InstanceTemplateData struct {
 
-    /* 规格类型 (Optional) */
+    /* 实例规格 (Optional) */
     InstanceType string `json:"instanceType"`
 
     /* 主网卡所属VPC的ID (Optional) */

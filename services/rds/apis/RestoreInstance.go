@@ -24,10 +24,10 @@ type RestoreInstanceRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)  */
     RegionId string `json:"regionId"`
 
-    /* Instance ID  */
+    /* RDS 实例ID，唯一标识一个RDS实例  */
     InstanceId string `json:"instanceId"`
 
     /* 用于恢复的备份Id，仅限于本实例生成的备份 (Optional) */
@@ -35,8 +35,8 @@ type RestoreInstanceRequest struct {
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: Instance ID (Required)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
+ * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -58,8 +58,8 @@ func NewRestoreInstanceRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: Instance ID (Required)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
+ * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
  * param backupId: 用于恢复的备份Id，仅限于本实例生成的备份 (Optional)
  */
 func NewRestoreInstanceRequestWithAllParams(
@@ -94,12 +94,12 @@ func NewRestoreInstanceRequestWithoutParam() *RestoreInstanceRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
 func (r *RestoreInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: Instance ID(Required) */
+/* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *RestoreInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
