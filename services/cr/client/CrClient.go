@@ -40,7 +40,7 @@ func NewCrClient(credential *core.Credential) *CrClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "cr",
-            Revision:    "0.1.0",
+            Revision:    "0.1.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,6 +51,26 @@ func (c *CrClient) SetConfig(config *core.Config) {
 
 func (c *CrClient) SetLogger(logger core.Logger) {
     c.Logger = logger
+}
+
+/* 查询指定注册表名称是否已经存在以及是否符合命名规范。
+ */
+func (c *CrClient) CheckRegistryName(request *cr.CheckRegistryNameRequest) (*cr.CheckRegistryNameResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cr.CheckRegistryNameResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
 }
 
 /* <p>申请12小时有效期的令牌。 使用<code>docker</code> CLI push和pull镜像。</p>

@@ -29,15 +29,15 @@ type DescribeCacheInstancesRequest struct {
     /* 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2  */
     RegionId string `json:"regionId"`
 
-    /* 页码；默认为1 (Optional) */
+    /* 请求查询缓存实例的页码；默认为1 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* 分页大小；默认为20；取值范围[10, 100] (Optional) */
+    /* 请求查询缓存实例的分页大小；默认为20；取值范围[10, 100] (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* cacheInstanceId -实例Id，精确匹配，支持多个
-cacheInstanceName - 实例名称，模糊匹配，支持单个
-cacheInstanceStatus - redis状态，精确匹配，支持多个(running：运行，error：错误，creating：创建中，changing：变配中，deleting：删除中)
+    /* cacheInstanceId -缓存实例Id，精确匹配，支持多个
+cacheInstanceName - 缓存实例名称，模糊匹配，支持单个
+cacheInstanceStatus - 缓存你实例状态，精确匹配，支持多个(running：运行，error：错误，creating：创建中，changing：变配中，deleting：删除中)
  (Optional) */
     Filters []common.Filter `json:"filters"`
 
@@ -47,15 +47,9 @@ cacheInstanceStatus - redis状态，精确匹配，支持多个(running：运行
 }
 
 /*
- * param regionId: 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2 
- * param pageNumber: 页码；默认为1 (Optional)
- * param pageSize: 分页大小；默认为20；取值范围[10, 100] (Optional)
- * param filters: cacheInstanceId -实例Id，精确匹配，支持多个
-cacheInstanceName - 实例名称，模糊匹配，支持单个
-cacheInstanceStatus - redis状态，精确匹配，支持多个(running：运行，error：错误，creating：创建中，changing：变配中，deleting：删除中)
- (Optional)
- * param sorts: createTime - 创建时间(asc：正序，desc：倒序)
- (Optional)
+ * param regionId: 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeCacheInstancesRequest(
     regionId string,
@@ -72,22 +66,78 @@ func NewDescribeCacheInstancesRequest(
 	}
 }
 
+/*
+ * param regionId: 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2 (Required)
+ * param pageNumber: 请求查询缓存实例的页码；默认为1 (Optional)
+ * param pageSize: 请求查询缓存实例的分页大小；默认为20；取值范围[10, 100] (Optional)
+ * param filters: cacheInstanceId -缓存实例Id，精确匹配，支持多个
+cacheInstanceName - 缓存实例名称，模糊匹配，支持单个
+cacheInstanceStatus - 缓存你实例状态，精确匹配，支持多个(running：运行，error：错误，creating：创建中，changing：变配中，deleting：删除中)
+ (Optional)
+ * param sorts: createTime - 创建时间(asc：正序，desc：倒序)
+ (Optional)
+ */
+func NewDescribeCacheInstancesRequestWithAllParams(
+    regionId string,
+    pageNumber *int,
+    pageSize *int,
+    filters []common.Filter,
+    sorts []common.Sort,
+) *DescribeCacheInstancesRequest {
+
+    return &DescribeCacheInstancesRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/cacheInstance",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        PageNumber: pageNumber,
+        PageSize: pageSize,
+        Filters: filters,
+        Sorts: sorts,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeCacheInstancesRequestWithoutParam() *DescribeCacheInstancesRequest {
+
+    return &DescribeCacheInstancesRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/cacheInstance",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2(Required) */
 func (r *DescribeCacheInstancesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param pageNumber: 请求查询缓存实例的页码；默认为1(Optional) */
 func (r *DescribeCacheInstancesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
+/* param pageSize: 请求查询缓存实例的分页大小；默认为20；取值范围[10, 100](Optional) */
 func (r *DescribeCacheInstancesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
+/* param filters: cacheInstanceId -缓存实例Id，精确匹配，支持多个
+cacheInstanceName - 缓存实例名称，模糊匹配，支持单个
+cacheInstanceStatus - 缓存你实例状态，精确匹配，支持多个(running：运行，error：错误，creating：创建中，changing：变配中，deleting：删除中)
+(Optional) */
 func (r *DescribeCacheInstancesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
 
+/* param sorts: createTime - 创建时间(asc：正序，desc：倒序)
+(Optional) */
 func (r *DescribeCacheInstancesRequest) SetSorts(sorts []common.Sort) {
     r.Sorts = sorts
 }

@@ -27,17 +27,19 @@ type ModifyCacheInstanceClassRequest struct {
     /* 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2  */
     RegionId string `json:"regionId"`
 
-    /* 缓存Redis实例ID  */
+    /* 缓存Redis实例ID，是访问实例的唯一标识。  */
     CacheInstanceId string `json:"cacheInstanceId"`
 
-    /* 变更后的缓存Redis<a href="https://www.jdcloud.com/help/detail/411/isCatalog/1">实例规格代码</a>  */
+    /* 变更后的缓存Redis规格，详细参见：<a href="https://www.jdcloud.com/help/detail/411/isCatalog/1">实例规格代码</a>  */
     CacheInstanceClass string `json:"cacheInstanceClass"`
 }
 
 /*
- * param regionId: 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2 
- * param cacheInstanceId: 缓存Redis实例ID 
- * param cacheInstanceClass: 变更后的缓存Redis<a href="https://www.jdcloud.com/help/detail/411/isCatalog/1">实例规格代码</a> 
+ * param regionId: 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2 (Required)
+ * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识。 (Required)
+ * param cacheInstanceClass: 变更后的缓存Redis规格，详细参见：<a href="https://www.jdcloud.com/help/detail/411/isCatalog/1">实例规格代码</a> (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewModifyCacheInstanceClassRequest(
     regionId string,
@@ -58,14 +60,54 @@ func NewModifyCacheInstanceClassRequest(
 	}
 }
 
+/*
+ * param regionId: 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2 (Required)
+ * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识。 (Required)
+ * param cacheInstanceClass: 变更后的缓存Redis规格，详细参见：<a href="https://www.jdcloud.com/help/detail/411/isCatalog/1">实例规格代码</a> (Required)
+ */
+func NewModifyCacheInstanceClassRequestWithAllParams(
+    regionId string,
+    cacheInstanceId string,
+    cacheInstanceClass string,
+) *ModifyCacheInstanceClassRequest {
+
+    return &ModifyCacheInstanceClassRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}:modifyCacheInstanceClass",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        CacheInstanceId: cacheInstanceId,
+        CacheInstanceClass: cacheInstanceClass,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewModifyCacheInstanceClassRequestWithoutParam() *ModifyCacheInstanceClassRequest {
+
+    return &ModifyCacheInstanceClassRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}:modifyCacheInstanceClass",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2(Required) */
 func (r *ModifyCacheInstanceClassRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识。(Required) */
 func (r *ModifyCacheInstanceClassRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
 
+/* param cacheInstanceClass: 变更后的缓存Redis规格，详细参见：<a href="https://www.jdcloud.com/help/detail/411/isCatalog/1">实例规格代码</a>(Required) */
 func (r *ModifyCacheInstanceClassRequest) SetCacheInstanceClass(cacheInstanceClass string) {
     r.CacheInstanceClass = cacheInstanceClass
 }

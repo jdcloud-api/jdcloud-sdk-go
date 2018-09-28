@@ -30,10 +30,10 @@ type ModifyInstanceAttributeRequest struct {
     /* 云主机ID  */
     InstanceId string `json:"instanceId"`
 
-    /* 名称，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。 (Optional) */
+    /* 名称，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional) */
     Name *string `json:"name"`
 
-    /* 描述，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。 (Optional) */
+    /* 描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional) */
     Description *string `json:"description"`
 }
 
@@ -63,8 +63,8 @@ func NewModifyInstanceAttributeRequest(
 /*
  * param regionId: 地域ID (Required)
  * param instanceId: 云主机ID (Required)
- * param name: 名称，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。 (Optional)
- * param description: 描述，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。 (Optional)
+ * param name: 名称，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional)
+ * param description: 描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional)
  */
 func NewModifyInstanceAttributeRequestWithAllParams(
     regionId string,
@@ -110,12 +110,12 @@ func (r *ModifyInstanceAttributeRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param name: 名称，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。(Optional) */
+/* param name: 名称，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。(Optional) */
 func (r *ModifyInstanceAttributeRequest) SetName(name string) {
     r.Name = &name
 }
 
-/* param description: 描述，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。(Optional) */
+/* param description: 描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。(Optional) */
 func (r *ModifyInstanceAttributeRequest) SetDescription(description string) {
     r.Description = &description
 }

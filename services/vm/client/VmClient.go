@@ -40,7 +40,7 @@ func NewVmClient(credential *core.Credential) *VmClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vm",
-            Revision:    "1.0.3",
+            Revision:    "1.0.8",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -117,9 +117,9 @@ func (c *VmClient) DescribeImage(request *vm.DescribeImageRequest) (*vm.Describe
 
 /* 云主机使用指定镜像重置云主机系统<br>
 云主机的状态必须为<b>stopped</b>状态。<br>
-若当前云主机的系统盘类型为local类型，那么更换的镜像必须为localDisk类型的镜像；同理若当前云主机的系统盘为cloud类型，那么更换的镜像必须为cloudDisk类型的镜像。可查询<a href="https://www.jdcloud.com/help/detail/2874/isCatalog/1">DescribeImages</a>接口获得指定地域的镜像信息。<br>
+若当前云主机的系统盘类型为local类型，那么更换的镜像必须为localDisk类型的镜像；同理若当前云主机的系统盘为cloud类型，那么更换的镜像必须为cloudDisk类型的镜像。可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeimages">DescribeImages</a>接口获得指定地域的镜像信息。<br>
 若不指定镜像ID，默认使用当前主机的原镜像重置系统。<br>
-指定的镜像必须能够支持当前主机的实例规格(instanceType)，否则会返回错误。可查询<a href="https://www.jdcloud.com/help/detail/2872/isCatalog/1">DescribeImageConstraints</a>接口获得指定镜像支持的系统盘类型信息。
+指定的镜像必须能够支持当前主机的实例规格(instanceType)，否则会返回错误。可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeimageconstraints">DescribeImageConstraints</a>接口获得指定镜像支持的系统盘类型信息。
  */
 func (c *VmClient) RebuildInstance(request *vm.RebuildInstanceRequest) (*vm.RebuildInstanceResponse, error) {
     if request == nil {
@@ -131,6 +131,27 @@ func (c *VmClient) RebuildInstance(request *vm.RebuildInstanceRequest) (*vm.Rebu
     }
 
     jdResp := &vm.RebuildInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建ssh密钥对。公钥部分存储在京东云，并返回未加密的 PEM 编码的 PKCS#8 格式私钥，您只有一次机会保存您的私钥。请妥善保管。<br>
+若传入已存在的密钥名称，会返回错误。
+ */
+func (c *VmClient) CreateKeypair(request *vm.CreateKeypairRequest) (*vm.CreateKeypairResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.CreateKeypairResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -224,7 +245,7 @@ func (c *VmClient) DescribeImages(request *vm.DescribeImagesRequest) (*vm.Descri
 /* 云主机挂载一块弹性网卡。<br>
 云主机状态必须为<b>running</b>或<b>stopped</b>状态，并且没有正在进行中的任务才可操作。<br>
 弹性网卡上如果绑定了公网IP，那么公网IP所在az需要与云主机的az保持一致，或者公网IP属于全可用区，才可挂载。<br>
-云主机挂载弹性网卡的数量，不能超过实例规格的限制。可查询<a href="https://www.jdcloud.com/help/detail/2901/isCatalog/1">DescribeInstanceTypes</a>接口获得指定规格可挂载弹性网卡的数量上限。<br>
+云主机挂载弹性网卡的数量，不能超过实例规格的限制。可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeinstancetypes">DescribeInstanceTypes</a>接口获得指定规格可挂载弹性网卡的数量上限。<br>
 弹性网卡与云主机必须在相同vpc下。
  */
 func (c *VmClient) AttachNetworkInterface(request *vm.AttachNetworkInterfaceRequest) (*vm.AttachNetworkInterfaceResponse, error) {
@@ -237,6 +258,27 @@ func (c *VmClient) AttachNetworkInterface(request *vm.AttachNetworkInterfaceRequ
     }
 
     jdResp := &vm.AttachNetworkInterfaceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 导入由其他工具生成的密钥对的公钥部分。<br>
+若传入已存在的密钥名称，会返回错误。
+ */
+func (c *VmClient) ImportKeypair(request *vm.ImportKeypairRequest) (*vm.ImportKeypairResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.ImportKeypairResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -414,8 +456,8 @@ func (c *VmClient) DescribeInstance(request *vm.DescribeInstanceRequest) (*vm.De
 本地盘(local类型)做系统盘的主机，一代与二代实例规格不允许相互调整。<br>
 使用高可用组(Ag)创建的主机，一代与二代实例规格不允许相互调整。<br>
 云硬盘(cloud类型)做系统盘的主机，一代与二代实例规格允许相互调整。<br>
-如果当前主机中的弹性网卡数量，大于新实例规格允许的弹性网卡数量，会返回错误。可查询<a href="https://www.jdcloud.com/help/detail/2901/isCatalog/1">DescribeInstanceTypes</a>接口获得指定地域及可用区下的实例规格信息。<br>
-当前主机所使用的镜像，需要支持要变更的目标实例规格，否则返回错误。可查询<a href="https://www.jdcloud.com/help/detail/2872/isCatalog/1">DescribeImageConstraints</a>接口获得指定镜像的实例规格限制信息。<br>
+如果当前主机中的弹性网卡数量，大于新实例规格允许的弹性网卡数量，会返回错误。可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeinstancetypes">DescribeInstanceTypes</a>接口获得指定地域及可用区下的实例规格信息。<br>
+当前主机所使用的镜像，需要支持要变更的目标实例规格，否则返回错误。可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeimageconstraints">DescribeImageConstraints</a>接口获得指定镜像的实例规格限制信息。<br>
 云主机欠费或到期时，无法更改实例规格。
  */
 func (c *VmClient) ResizeInstance(request *vm.ResizeInstanceRequest) (*vm.ResizeInstanceResponse, error) {
@@ -456,7 +498,7 @@ func (c *VmClient) ModifyInstanceDiskAttribute(request *vm.ModifyInstanceDiskAtt
     return jdResp, err
 }
 
-/* 查询配额，支持：云主机、镜像、密钥、模板
+/* 查询配额，支持：云主机、镜像、密钥、模板、镜像共享
  */
 func (c *VmClient) DescribeQuotas(request *vm.DescribeQuotasRequest) (*vm.DescribeQuotasResponse, error) {
     if request == nil {
@@ -468,6 +510,26 @@ func (c *VmClient) DescribeQuotas(request *vm.DescribeQuotasRequest) (*vm.Descri
     }
 
     jdResp := &vm.DescribeQuotasResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除ssh密钥对。
+ */
+func (c *VmClient) DeleteKeypair(request *vm.DeleteKeypairRequest) (*vm.DeleteKeypairResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.DeleteKeypairResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -520,16 +582,16 @@ func (c *VmClient) DescribeInstances(request *vm.DescribeInstancesRequest) (*vm.
     return jdResp, err
 }
 
-/* 创建一台或多台指定配置的云主机，创建模式分为三种：1.普通方式、2.使用高可用组、3.使用启动模板。三种方式创建云主机时参数的必传与非必传是不同的，具体请参考<a href="https://www.jdcloud.com/help/detail/3383/isCatalog/1">参数详细说明</a><br>
+/* 创建一台或多台指定配置的云主机，创建模式分为三种：1.普通方式、2.使用高可用组、3.使用启动模板。三种方式创建云主机时参数的必传与非必传是不同的，具体请参考<a href="http://docs.jdcloud.com/virtual-machines/api/create_vm_sample">参数详细说明</a><br>
 - 创建云主机需要通过实名认证
 - 实例规格
-    - 可查询<a href="https://www.jdcloud.com/help/detail/2901/isCatalog/1">DescribeInstanceTypes</a>接口获得指定地域或可用区的规格信息。
+    - 可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeinstancetypes">DescribeInstanceTypes</a>接口获得指定地域或可用区的规格信息。
     - 不能使用已下线、或已售馨的规格ID
 - 镜像
     - Windows Server 2012 R2标准版 64位 中文版 SQL Server 2014 标准版 SP2内存需大于1GB；
     - Windows Server所有镜像CPU不可选超过64核CPU。
-    - 可查询<a href="https://www.jdcloud.com/help/detail/2874/isCatalog/1">DescribeImages</a>接口获得指定地域的镜像信息。
-    - 选择的镜像必须支持选择的实例规格。可查询<a href="https://www.jdcloud.com/help/detail/2872/isCatalog/1">DescribeImageConstraints</a>接口获得指定镜像的实例规格限制信息。<br>
+    - 可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeimages">DescribeImages</a>接口获得指定地域的镜像信息。
+    - 选择的镜像必须支持选择的实例规格。可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeimageconstraints">DescribeImageConstraints</a>接口获得指定镜像的实例规格限制信息。<br>
 - 网络配置
     - 指定主网卡配置信息
         - 必须指定subnetId
@@ -568,7 +630,7 @@ func (c *VmClient) DescribeInstances(request *vm.DescribeInstancesRequest) (*vm.
     - maxCount为最大努力，不保证一定能达到maxCount
     - 虚机的az会覆盖磁盘的az属性
 - 密码
-    - <a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>
+    - <a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>
  */
 func (c *VmClient) CreateInstances(request *vm.CreateInstancesRequest) (*vm.CreateInstancesResponse, error) {
     if request == nil {
@@ -790,6 +852,27 @@ func (c *VmClient) AssociateElasticIp(request *vm.AssociateElasticIpRequest) (*v
     }
 
     jdResp := &vm.AssociateElasticIpResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 批量查询密钥对。<br>
+此接口支持分页查询，默认每页20条。
+ */
+func (c *VmClient) DescribeKeypairs(request *vm.DescribeKeypairsRequest) (*vm.DescribeKeypairsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.DescribeKeypairsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err

@@ -26,14 +26,14 @@ type CacheInstance struct {
     /* 实例名称 (Optional) */
     CacheInstanceName string `json:"cacheInstanceName"`
 
-    /* 实例规格代码，参见实例规格代码表 (Optional) */
+    /* 实例规格代码，参见<a href="https://www.jdcloud.com/help/detail/411/isCatalog/1">实例规格代码</a> (Optional) */
     CacheInstanceClass string `json:"cacheInstanceClass"`
 
     /* 容量，单位MB (Optional) */
     CacheInstanceMemoryMB int `json:"cacheInstanceMemoryMB"`
 
     /* 实例状态，running：运行，error：错误，creating：创建中，changing：变配中，deleting：删除中 (Optional) */
-    CacheInstancStatus string `json:"cacheInstancStatus"`
+    CacheInstanceStatus string `json:"cacheInstanceStatus"`
 
     /* 实例描述 (Optional) */
     CacheInstanceDescription string `json:"cacheInstanceDescription"`
@@ -58,4 +58,10 @@ type CacheInstance struct {
 
     /* 计费信息 (Optional) */
     Charge charge.Charge `json:"charge"`
+
+    /* 实例版本 (Optional) */
+    InstanceVersion string `json:"instanceVersion"`
+
+    /* 是否免密 (Optional) */
+    Auth bool `json:"auth"`
 }

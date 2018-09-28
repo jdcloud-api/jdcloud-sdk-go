@@ -28,13 +28,15 @@ type DescribeCacheInstanceRequest struct {
     /* 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2  */
     RegionId string `json:"regionId"`
 
-    /* 缓存Redis实例ID  */
+    /* 缓存Redis实例ID，是访问实例的唯一标识。  */
     CacheInstanceId string `json:"cacheInstanceId"`
 }
 
 /*
- * param regionId: 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2 
- * param cacheInstanceId: 缓存Redis实例ID 
+ * param regionId: 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2 (Required)
+ * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识。 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeCacheInstanceRequest(
     regionId string,
@@ -53,10 +55,46 @@ func NewDescribeCacheInstanceRequest(
 	}
 }
 
+/*
+ * param regionId: 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2 (Required)
+ * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识。 (Required)
+ */
+func NewDescribeCacheInstanceRequestWithAllParams(
+    regionId string,
+    cacheInstanceId string,
+) *DescribeCacheInstanceRequest {
+
+    return &DescribeCacheInstanceRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        CacheInstanceId: cacheInstanceId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeCacheInstanceRequestWithoutParam() *DescribeCacheInstanceRequest {
+
+    return &DescribeCacheInstanceRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2(Required) */
 func (r *DescribeCacheInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识。(Required) */
 func (r *DescribeCacheInstanceRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }

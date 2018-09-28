@@ -30,10 +30,10 @@ type RebuildInstanceRequest struct {
     /* 云主机ID  */
     InstanceId string `json:"instanceId"`
 
-    /* 云主机密码，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。  */
+    /* 云主机密码，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。  */
     Password string `json:"password"`
 
-    /* 镜像ID。可查询<a href="https://www.jdcloud.com/help/detail/2874/isCatalog/1">DescribeImages</a>接口获得指定地域的镜像信息。 (Optional) */
+    /* 镜像ID。可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeimages">DescribeImages</a>接口获得指定地域的镜像信息。 (Optional) */
     ImageId *string `json:"imageId"`
 
     /* 密钥对名称；当前只支持一个。仅Linux系统支持指定。 (Optional) */
@@ -43,7 +43,7 @@ type RebuildInstanceRequest struct {
 /*
  * param regionId: 地域ID (Required)
  * param instanceId: 云主机ID (Required)
- * param password: 云主机密码，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。 (Required)
+ * param password: 云主机密码，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -69,8 +69,8 @@ func NewRebuildInstanceRequest(
 /*
  * param regionId: 地域ID (Required)
  * param instanceId: 云主机ID (Required)
- * param password: 云主机密码，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。 (Required)
- * param imageId: 镜像ID。可查询<a href="https://www.jdcloud.com/help/detail/2874/isCatalog/1">DescribeImages</a>接口获得指定地域的镜像信息。 (Optional)
+ * param password: 云主机密码，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Required)
+ * param imageId: 镜像ID。可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeimages">DescribeImages</a>接口获得指定地域的镜像信息。 (Optional)
  * param keyNames: 密钥对名称；当前只支持一个。仅Linux系统支持指定。 (Optional)
  */
 func NewRebuildInstanceRequestWithAllParams(
@@ -119,12 +119,12 @@ func (r *RebuildInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param password: 云主机密码，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。(Required) */
+/* param password: 云主机密码，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。(Required) */
 func (r *RebuildInstanceRequest) SetPassword(password string) {
     r.Password = password
 }
 
-/* param imageId: 镜像ID。可查询<a href="https://www.jdcloud.com/help/detail/2874/isCatalog/1">DescribeImages</a>接口获得指定地域的镜像信息。(Optional) */
+/* param imageId: 镜像ID。可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeimages">DescribeImages</a>接口获得指定地域的镜像信息。(Optional) */
 func (r *RebuildInstanceRequest) SetImageId(imageId string) {
     r.ImageId = &imageId
 }

@@ -30,14 +30,14 @@ type ModifyInstancePasswordRequest struct {
     /* 云主机ID  */
     InstanceId string `json:"instanceId"`
 
-    /* 密码，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。  */
+    /* 密码，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。  */
     Password string `json:"password"`
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param instanceId: 云主机ID (Required)
- * param password: 密码，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。 (Required)
+ * param password: 密码，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -63,7 +63,7 @@ func NewModifyInstancePasswordRequest(
 /*
  * param regionId: 地域ID (Required)
  * param instanceId: 云主机ID (Required)
- * param password: 密码，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。 (Required)
+ * param password: 密码，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Required)
  */
 func NewModifyInstancePasswordRequestWithAllParams(
     regionId string,
@@ -107,7 +107,7 @@ func (r *ModifyInstancePasswordRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param password: 密码，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。(Required) */
+/* param password: 密码，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。(Required) */
 func (r *ModifyInstancePasswordRequest) SetPassword(password string) {
     r.Password = password
 }

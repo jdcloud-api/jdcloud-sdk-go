@@ -43,7 +43,7 @@ type Image struct {
     /* 镜像的操作系统类型。取值：windows,linux (Optional) */
     OsType string `json:"osType"`
 
-    /* <a href="https://www.jdcloud.com/help/detail/3871/isCatalog/1">参考镜像状态</a> (Optional) */
+    /* <a href="http://docs.jdcloud.com/virtual-machines/api/image_status">参考镜像状态</a> (Optional) */
     Status string `json:"status"`
 
     /* 创建时间 (Optional) */

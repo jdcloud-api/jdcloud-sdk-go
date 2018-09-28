@@ -40,7 +40,7 @@ const (
 	emptyStringSHA256 = `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
 )
 
-var ignoredHeaders = []string {"Authorization", "User-Agent"}
+var ignoredHeaders = []string {"Authorization", "User-Agent", "X-Jdcloud-Request-Id"}
 var noEscape [256]bool
 
 func init() {
@@ -146,7 +146,7 @@ func (ctx *signingCtx) build() {
 	ctx.buildBodyDigest()
 
 	unsignedHeaders := ctx.Request.Header
-	ctx.buildCanonicalHeaders(ignoredHeaders, unsignedHeaders)
+	ctx.buildCanonicalHeaders(unsignedHeaders)
 	ctx.buildCanonicalString() // depends on canon headers / signed headers
 	ctx.buildStringToSign()    // depends on canon string
 	ctx.buildSignature()       // depends on string to sign
@@ -180,7 +180,7 @@ func (ctx *signingCtx) buildCredentialString() {
 	}, "/")
 }
 
-func (ctx *signingCtx) buildCanonicalHeaders(ignoreList []string, header http.Header) {
+func (ctx *signingCtx) buildCanonicalHeaders(header http.Header) {
 	var headers []string
 	headers = append(headers, "host")
 	for k, v := range header {

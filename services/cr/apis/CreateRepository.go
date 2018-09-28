@@ -33,8 +33,8 @@ type CreateRepositoryRequest struct {
 
     /* 镜像仓库名称。
 可以专有模式如默认命名空间nginx-web-app；或者和命名空间一起将多个仓库聚集在一起如 project-a/nginx-web-app。
- (Optional) */
-    RepositoryName *string `json:"repositoryName"`
+  */
+    RepositoryName string `json:"repositoryName"`
 
     /* 注册表描述，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。
  (Optional) */
@@ -44,12 +44,16 @@ type CreateRepositoryRequest struct {
 /*
  * param regionId: Region ID (Required)
  * param registryName: 注册表名称 (Required)
+ * param repositoryName: 镜像仓库名称。
+可以专有模式如默认命名空间nginx-web-app；或者和命名空间一起将多个仓库聚集在一起如 project-a/nginx-web-app。
+ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateRepositoryRequest(
     regionId string,
     registryName string,
+    repositoryName string,
 ) *CreateRepositoryRequest {
 
 	return &CreateRepositoryRequest{
@@ -61,6 +65,7 @@ func NewCreateRepositoryRequest(
 		},
         RegionId: regionId,
         RegistryName: registryName,
+        RepositoryName: repositoryName,
 	}
 }
 
@@ -69,14 +74,14 @@ func NewCreateRepositoryRequest(
  * param registryName: 注册表名称 (Required)
  * param repositoryName: 镜像仓库名称。
 可以专有模式如默认命名空间nginx-web-app；或者和命名空间一起将多个仓库聚集在一起如 project-a/nginx-web-app。
- (Optional)
+ (Required)
  * param description: 注册表描述，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。
  (Optional)
  */
 func NewCreateRepositoryRequestWithAllParams(
     regionId string,
     registryName string,
-    repositoryName *string,
+    repositoryName string,
     description *string,
 ) *CreateRepositoryRequest {
 
@@ -119,9 +124,9 @@ func (r *CreateRepositoryRequest) SetRegistryName(registryName string) {
 
 /* param repositoryName: 镜像仓库名称。
 可以专有模式如默认命名空间nginx-web-app；或者和命名空间一起将多个仓库聚集在一起如 project-a/nginx-web-app。
-(Optional) */
+(Required) */
 func (r *CreateRepositoryRequest) SetRepositoryName(repositoryName string) {
-    r.RepositoryName = &repositoryName
+    r.RepositoryName = repositoryName
 }
 
 /* param description: 注册表描述，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。

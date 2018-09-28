@@ -103,9 +103,11 @@ func (c JDCloudClient) setHeader(req *http.Request, header map[string]string) {
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("User-Agent", fmt.Sprintf("JdcloudSdkGo/%s %s/%s", Version, c.ServiceName, c.Revision))
 
+	base64Headers := []string{HeaderJdcloudPrefix + "-pin", HeaderJdcloudPrefix + "-erp", HeaderJdcloudPrefix + "-security-token",
+		HeaderJcloudPrefix + "-pin", HeaderJcloudPrefix + "-erp", HeaderJcloudPrefix + "-security-token"}
+
 	for k, v := range header {
-		if strings.HasPrefix(strings.ToLower(k), HeaderJdcloudPrefix) ||
-			strings.HasPrefix(strings.ToLower(k), HeaderJcloudPrefix) {
+		if includes(base64Headers, strings.ToLower(k)) {
 			v = base64.StdEncoding.EncodeToString([]byte(v))
 		}
 
