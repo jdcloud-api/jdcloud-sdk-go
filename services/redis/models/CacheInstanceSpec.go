@@ -19,24 +19,24 @@ package models
 
 type CacheInstanceSpec struct {
 
-    /* 所属VPC的ID  */
+    /* 缓存redis实例所属的私有网络ID  */
     VpcId string `json:"vpcId"`
 
-    /* 所属子网的ID  */
+    /* 缓存redis实例在私有网络下所属的子网ID  */
     SubnetId string `json:"subnetId"`
 
-    /* 实例名称，只支持数字、字母、英文下划线、中文，且不少于2字符不超过32字符  */
+    /* 缓存redis实例名称，只支持数字、字母、英文下划线、中文，且不少于2字符不超过32字符  */
     CacheInstanceName string `json:"cacheInstanceName"`
 
-    /* 实例规格代码，参见实例规格代码表。  */
+    /* 缓存redis实例规格代码，参见实例规格代码表<a href="https://www.jdcloud.com/help/detail/411/isCatalog/1">实例规格代码</a>。  */
     CacheInstanceClass string `json:"cacheInstanceClass"`
 
-    /* 密码，必须包含且只支持字母及数字，不少于8字符不超过16字符  */
-    Password string `json:"password"`
+    /* 密码，为空即为免密，包含且只支持字母及数字，不少于8字符不超过16字符 (Optional) */
+    Password *string `json:"password"`
 
     /* 缓存Redis实例所在区域可用区ID信息  */
     AzId *AzIdSpec `json:"azId"`
 
-    /* 缓存Redis实例描述 (Optional) */
+    /* 缓存Redis实例描述，不能超过256个字符 (Optional) */
     CacheInstanceDescription *string `json:"cacheInstanceDescription"`
 }

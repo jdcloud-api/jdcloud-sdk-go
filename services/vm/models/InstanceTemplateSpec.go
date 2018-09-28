@@ -19,13 +19,13 @@ package models
 
 type InstanceTemplateSpec struct {
 
-    /* 实例规格，可查询<a href="https://www.jdcloud.com/help/detail/2901/isCatalog/1">DescribeInstanceTypes</a>接口获得指定地域或可用区的规格信息。  */
+    /* 实例规格，可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeinstancetypes">DescribeInstanceTypes</a>接口获得指定地域或可用区的规格信息。  */
     InstanceType string `json:"instanceType"`
 
-    /* 镜像ID，可查询<a href="https://www.jdcloud.com/help/detail/2874/isCatalog/1">DescribeImages</a>接口获得指定地域的镜像信息。  */
+    /* 镜像ID，可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeimages">DescribeImages</a>接口获得指定地域的镜像信息。  */
     ImageId string `json:"imageId"`
 
-    /* 密码，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。 (Optional) */
+    /* 密码，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional) */
     Password string `json:"password"`
 
     /* 密钥对名称；当前只支持一个 (Optional) */

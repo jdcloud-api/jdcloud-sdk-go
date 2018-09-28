@@ -27,22 +27,22 @@ type ResetCacheInstancePasswordRequest struct {
     /* 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2  */
     RegionId string `json:"regionId"`
 
-    /* 缓存Redis实例ID  */
+    /* 缓存Redis实例ID，是访问实例的唯一标识。  */
     CacheInstanceId string `json:"cacheInstanceId"`
 
-    /* 密码，必须包含且只支持字母及数字，不少于8字符不超过16字符  */
-    Password string `json:"password"`
+    /* 密码，为空即为免密，包含且只支持字母及数字，不少于8字符不超过16字符 (Optional) */
+    Password *string `json:"password"`
 }
 
 /*
- * param regionId: 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2 
- * param cacheInstanceId: 缓存Redis实例ID 
- * param password: 密码，必须包含且只支持字母及数字，不少于8字符不超过16字符 
+ * param regionId: 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2 (Required)
+ * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识。 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewResetCacheInstancePasswordRequest(
     regionId string,
     cacheInstanceId string,
-    password string,
 ) *ResetCacheInstancePasswordRequest {
 
 	return &ResetCacheInstancePasswordRequest{
@@ -54,20 +54,59 @@ func NewResetCacheInstancePasswordRequest(
 		},
         RegionId: regionId,
         CacheInstanceId: cacheInstanceId,
-        Password: password,
 	}
 }
 
+/*
+ * param regionId: 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2 (Required)
+ * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识。 (Required)
+ * param password: 密码，为空即为免密，包含且只支持字母及数字，不少于8字符不超过16字符 (Optional)
+ */
+func NewResetCacheInstancePasswordRequestWithAllParams(
+    regionId string,
+    cacheInstanceId string,
+    password *string,
+) *ResetCacheInstancePasswordRequest {
+
+    return &ResetCacheInstancePasswordRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}:resetCacheInstancePassword",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        CacheInstanceId: cacheInstanceId,
+        Password: password,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewResetCacheInstancePasswordRequestWithoutParam() *ResetCacheInstancePasswordRequest {
+
+    return &ResetCacheInstancePasswordRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}:resetCacheInstancePassword",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2(Required) */
 func (r *ResetCacheInstancePasswordRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识。(Required) */
 func (r *ResetCacheInstancePasswordRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
 
+/* param password: 密码，为空即为免密，包含且只支持字母及数字，不少于8字符不超过16字符(Optional) */
 func (r *ResetCacheInstancePasswordRequest) SetPassword(password string) {
-    r.Password = password
+    r.Password = &password
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

@@ -30,10 +30,10 @@ type ModifyImageAttributeRequest struct {
     /* 镜像ID  */
     ImageId string `json:"imageId"`
 
-    /* 名称，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。 (Optional) */
+    /* 名称，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional) */
     Name *string `json:"name"`
 
-    /* 描述，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。 (Optional) */
+    /* 描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional) */
     Description *string `json:"description"`
 }
 
@@ -63,8 +63,8 @@ func NewModifyImageAttributeRequest(
 /*
  * param regionId: 地域ID (Required)
  * param imageId: 镜像ID (Required)
- * param name: 名称，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。 (Optional)
- * param description: 描述，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。 (Optional)
+ * param name: 名称，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional)
+ * param description: 描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional)
  */
 func NewModifyImageAttributeRequestWithAllParams(
     regionId string,
@@ -110,12 +110,12 @@ func (r *ModifyImageAttributeRequest) SetImageId(imageId string) {
     r.ImageId = imageId
 }
 
-/* param name: 名称，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。(Optional) */
+/* param name: 名称，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。(Optional) */
 func (r *ModifyImageAttributeRequest) SetName(name string) {
     r.Name = &name
 }
 
-/* param description: 描述，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。(Optional) */
+/* param description: 描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。(Optional) */
 func (r *ModifyImageAttributeRequest) SetDescription(description string) {
     r.Description = &description
 }

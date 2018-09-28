@@ -40,7 +40,7 @@ type DescribeImagesRequest struct {
     /* 镜像支持的系统盘类型，[localDisk,cloudDisk] (Optional) */
     RootDeviceType *string `json:"rootDeviceType"`
 
-    /* <a href="https://www.jdcloud.com/help/detail/3871/isCatalog/1">参考镜像状态</a> (Optional) */
+    /* <a href="http://docs.jdcloud.com/virtual-machines/api/image_status">参考镜像状态</a> (Optional) */
     Status *string `json:"status"`
 
     /* 页码；默认为1 (Optional) */
@@ -76,7 +76,7 @@ func NewDescribeImagesRequest(
  * param platform: 操作系统平台，取值范围：Windows Server、CentOS、Ubuntu (Optional)
  * param ids: 镜像ID列表，如果指定了此参数，其它参数可为空 (Optional)
  * param rootDeviceType: 镜像支持的系统盘类型，[localDisk,cloudDisk] (Optional)
- * param status: <a href="https://www.jdcloud.com/help/detail/3871/isCatalog/1">参考镜像状态</a> (Optional)
+ * param status: <a href="http://docs.jdcloud.com/virtual-machines/api/image_status">参考镜像状态</a> (Optional)
  * param pageNumber: 页码；默认为1 (Optional)
  * param pageSize: 分页大小；默认为20；取值范围[10, 100] (Optional)
  */
@@ -147,7 +147,7 @@ func (r *DescribeImagesRequest) SetRootDeviceType(rootDeviceType string) {
     r.RootDeviceType = &rootDeviceType
 }
 
-/* param status: <a href="https://www.jdcloud.com/help/detail/3871/isCatalog/1">参考镜像状态</a>(Optional) */
+/* param status: <a href="http://docs.jdcloud.com/virtual-machines/api/image_status">参考镜像状态</a>(Optional) */
 func (r *DescribeImagesRequest) SetStatus(status string) {
     r.Status = &status
 }

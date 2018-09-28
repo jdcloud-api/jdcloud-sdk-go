@@ -30,7 +30,9 @@ type DescribeInstanceClassRequest struct {
 }
 
 /*
- * param regionId: Region ID 
+ * param regionId: Region ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeInstanceClassRequest(
     regionId string,
@@ -47,6 +49,38 @@ func NewDescribeInstanceClassRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ */
+func NewDescribeInstanceClassRequestWithAllParams(
+    regionId string,
+) *DescribeInstanceClassRequest {
+
+    return &DescribeInstanceClassRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instanceClass",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeInstanceClassRequestWithoutParam() *DescribeInstanceClassRequest {
+
+    return &DescribeInstanceClassRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/instanceClass",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DescribeInstanceClassRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

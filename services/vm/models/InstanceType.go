@@ -39,4 +39,10 @@ type InstanceType struct {
 
     /* 规格状态 (Optional) */
     State []InstanceTypeState `json:"state"`
+
+    /* Gpu配置 (Optional) */
+    Gpu Gpu `json:"gpu"`
+
+    /* 本地缓存盘配置，目前只有Gpu规格上才有 (Optional) */
+    LocalDisks []LocalDisk `json:"localDisks"`
 }

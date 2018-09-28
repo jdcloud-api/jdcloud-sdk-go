@@ -29,9 +29,12 @@ type DescribeQuotasRequest struct {
     /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /* resourceTypes - 资源类型，支持多个[instance，keypair，image，instanceTemplate]
+    /* resourceTypes - 资源类型，支持多个[instance，keypair，image，instanceTemplate，imageShare]
  (Optional) */
     Filters []common.Filter `json:"filters"`
+
+    /* 私有镜像Id，查询镜像共享(imageShare)配额时，此参数必传 (Optional) */
+    ImageId *string `json:"imageId"`
 }
 
 /*
@@ -56,12 +59,14 @@ func NewDescribeQuotasRequest(
 
 /*
  * param regionId: 地域ID (Required)
- * param filters: resourceTypes - 资源类型，支持多个[instance，keypair，image，instanceTemplate]
+ * param filters: resourceTypes - 资源类型，支持多个[instance，keypair，image，instanceTemplate，imageShare]
  (Optional)
+ * param imageId: 私有镜像Id，查询镜像共享(imageShare)配额时，此参数必传 (Optional)
  */
 func NewDescribeQuotasRequestWithAllParams(
     regionId string,
     filters []common.Filter,
+    imageId *string,
 ) *DescribeQuotasRequest {
 
     return &DescribeQuotasRequest{
@@ -73,6 +78,7 @@ func NewDescribeQuotasRequestWithAllParams(
         },
         RegionId: regionId,
         Filters: filters,
+        ImageId: imageId,
     }
 }
 
@@ -94,10 +100,15 @@ func (r *DescribeQuotasRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param filters: resourceTypes - 资源类型，支持多个[instance，keypair，image，instanceTemplate]
+/* param filters: resourceTypes - 资源类型，支持多个[instance，keypair，image，instanceTemplate，imageShare]
 (Optional) */
 func (r *DescribeQuotasRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
+}
+
+/* param imageId: 私有镜像Id，查询镜像共享(imageShare)配额时，此参数必传(Optional) */
+func (r *DescribeQuotasRequest) SetImageId(imageId string) {
+    r.ImageId = &imageId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

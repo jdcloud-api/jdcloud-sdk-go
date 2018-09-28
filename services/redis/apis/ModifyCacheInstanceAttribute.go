@@ -27,21 +27,21 @@ type ModifyCacheInstanceAttributeRequest struct {
     /* 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2  */
     RegionId string `json:"regionId"`
 
-    /* 缓存Redis实例ID  */
+    /* 缓存Redis实例ID，是访问实例的唯一标识。  */
     CacheInstanceId string `json:"cacheInstanceId"`
 
-    /* 缓存Redis实例资源名称 (Optional) */
+    /* 缓存Redis实例资源名称，名称只支持数字、字母、英文下划线、中文，且不少于2字符不超过32字符 (Optional) */
     CacheInstanceName *string `json:"cacheInstanceName"`
 
-    /* 缓存Redis实例资源描述 (Optional) */
+    /* 缓存Redis实例资源描述，不能超过256个字符 (Optional) */
     CacheInstanceDescription *string `json:"cacheInstanceDescription"`
 }
 
 /*
- * param regionId: 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2 
- * param cacheInstanceId: 缓存Redis实例ID 
- * param cacheInstanceName: 缓存Redis实例资源名称 (Optional)
- * param cacheInstanceDescription: 缓存Redis实例资源描述 (Optional)
+ * param regionId: 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2 (Required)
+ * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识。 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewModifyCacheInstanceAttributeRequest(
     regionId string,
@@ -60,18 +60,62 @@ func NewModifyCacheInstanceAttributeRequest(
 	}
 }
 
+/*
+ * param regionId: 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2 (Required)
+ * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识。 (Required)
+ * param cacheInstanceName: 缓存Redis实例资源名称，名称只支持数字、字母、英文下划线、中文，且不少于2字符不超过32字符 (Optional)
+ * param cacheInstanceDescription: 缓存Redis实例资源描述，不能超过256个字符 (Optional)
+ */
+func NewModifyCacheInstanceAttributeRequestWithAllParams(
+    regionId string,
+    cacheInstanceId string,
+    cacheInstanceName *string,
+    cacheInstanceDescription *string,
+) *ModifyCacheInstanceAttributeRequest {
+
+    return &ModifyCacheInstanceAttributeRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}",
+            Method:  "PATCH",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        CacheInstanceId: cacheInstanceId,
+        CacheInstanceName: cacheInstanceName,
+        CacheInstanceDescription: cacheInstanceDescription,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewModifyCacheInstanceAttributeRequestWithoutParam() *ModifyCacheInstanceAttributeRequest {
+
+    return &ModifyCacheInstanceAttributeRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}",
+            Method:  "PATCH",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2(Required) */
 func (r *ModifyCacheInstanceAttributeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识。(Required) */
 func (r *ModifyCacheInstanceAttributeRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
 
+/* param cacheInstanceName: 缓存Redis实例资源名称，名称只支持数字、字母、英文下划线、中文，且不少于2字符不超过32字符(Optional) */
 func (r *ModifyCacheInstanceAttributeRequest) SetCacheInstanceName(cacheInstanceName string) {
     r.CacheInstanceName = &cacheInstanceName
 }
 
+/* param cacheInstanceDescription: 缓存Redis实例资源描述，不能超过256个字符(Optional) */
 func (r *ModifyCacheInstanceAttributeRequest) SetCacheInstanceDescription(cacheInstanceDescription string) {
     r.CacheInstanceDescription = &cacheInstanceDescription
 }

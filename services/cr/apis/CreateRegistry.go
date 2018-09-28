@@ -30,8 +30,8 @@ type CreateRegistryRequest struct {
 
     /* 用户定义的registry名称。<br> DNS兼容registry名称规则如下：
  <br> 不可为空，且不能超过32字符 <br> 以小写字母开始和结尾，支持使用小写字母、数字、中划线(-)
- (Optional) */
-    RegistryName *string `json:"registryName"`
+  */
+    RegistryName string `json:"registryName"`
 
     /* 注册表描述，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。
  (Optional) */
@@ -40,11 +40,15 @@ type CreateRegistryRequest struct {
 
 /*
  * param regionId: Region ID (Required)
+ * param registryName: 用户定义的registry名称。<br> DNS兼容registry名称规则如下：
+ <br> 不可为空，且不能超过32字符 <br> 以小写字母开始和结尾，支持使用小写字母、数字、中划线(-)
+ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateRegistryRequest(
     regionId string,
+    registryName string,
 ) *CreateRegistryRequest {
 
 	return &CreateRegistryRequest{
@@ -55,6 +59,7 @@ func NewCreateRegistryRequest(
 			Version: "v1",
 		},
         RegionId: regionId,
+        RegistryName: registryName,
 	}
 }
 
@@ -62,13 +67,13 @@ func NewCreateRegistryRequest(
  * param regionId: Region ID (Required)
  * param registryName: 用户定义的registry名称。<br> DNS兼容registry名称规则如下：
  <br> 不可为空，且不能超过32字符 <br> 以小写字母开始和结尾，支持使用小写字母、数字、中划线(-)
- (Optional)
+ (Required)
  * param description: 注册表描述，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。
  (Optional)
  */
 func NewCreateRegistryRequestWithAllParams(
     regionId string,
-    registryName *string,
+    registryName string,
     description *string,
 ) *CreateRegistryRequest {
 
@@ -105,9 +110,9 @@ func (r *CreateRegistryRequest) SetRegionId(regionId string) {
 
 /* param registryName: 用户定义的registry名称。<br> DNS兼容registry名称规则如下：
  <br> 不可为空，且不能超过32字符 <br> 以小写字母开始和结尾，支持使用小写字母、数字、中划线(-)
-(Optional) */
+(Required) */
 func (r *CreateRegistryRequest) SetRegistryName(registryName string) {
-    r.RegistryName = &registryName
+    r.RegistryName = registryName
 }
 
 /* param description: 注册表描述，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。

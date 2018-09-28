@@ -200,17 +200,6 @@ func shouldIgnoreField(url, field string) bool {
 	return false
 }
 
-func includes(fields []string, field string) bool {
-	for _, v := range fields {
-		if v == field {
-			return true
-		}
-	}
-
-	return false
-}
-
-
 func encodeUrl(requestUrl string) (string, error) {
 	urlObj, err := url.Parse(requestUrl)
 	if err != nil {

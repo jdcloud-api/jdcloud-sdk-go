@@ -30,16 +30,16 @@ type InstanceSpec struct {
     /* 云主机所属的可用区。 (Optional) */
     Az *string `json:"az"`
 
-    /* 实例规格。可查询<a href="https://www.jdcloud.com/help/detail/2901/isCatalog/1">DescribeInstanceTypes</a>接口获得指定地域或可用区的规格信息。 (Optional) */
+    /* 实例规格。可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeinstancetypes">DescribeInstanceTypes</a>接口获得指定地域或可用区的规格信息。 (Optional) */
     InstanceType *string `json:"instanceType"`
 
-    /* 镜像ID。可查询<a href="https://www.jdcloud.com/help/detail/2874/isCatalog/1">DescribeImages</a>接口获得指定地域的镜像信息。 (Optional) */
+    /* 镜像ID。可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeimages">DescribeImages</a>接口获得指定地域的镜像信息。 (Optional) */
     ImageId *string `json:"imageId"`
 
-    /* 云主机名称，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。  */
+    /* 云主机名称，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。  */
     Name string `json:"name"`
 
-    /* 密码，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。 (Optional) */
+    /* 密码，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional) */
     Password *string `json:"password"`
 
     /* 密钥对名称，当前只支持传入一个。 (Optional) */
@@ -64,6 +64,6 @@ type InstanceSpec struct {
  (Optional) */
     Charge *charge.ChargeSpec `json:"charge"`
 
-    /* 主机描述，<a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">参考公共参数规范</a>。 (Optional) */
+    /* 主机描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional) */
     Description *string `json:"description"`
 }

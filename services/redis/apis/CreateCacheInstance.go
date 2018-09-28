@@ -29,17 +29,18 @@ type CreateCacheInstanceRequest struct {
     /* 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2  */
     RegionId string `json:"regionId"`
 
-    /*   */
+    /* 创建缓存实例的具体属性，包括所属私有网络ID(vpcId)、子网ID(subnetId)、缓存实例名称、缓存实例规格、缓存实例密码、缓存实例所在区域可用区ID信息和缓存实例描述。  */
     CacheInstance *redis.CacheInstanceSpec `json:"cacheInstance"`
 
-    /*  (Optional) */
+    /* 计费信息的相关配置。 (Optional) */
     Charge *charge.ChargeSpec `json:"charge"`
 }
 
 /*
- * param regionId: 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2 
- * param cacheInstance:  
- * param charge:  (Optional)
+ * param regionId: 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2 (Required)
+ * param cacheInstance: 创建缓存实例的具体属性，包括所属私有网络ID(vpcId)、子网ID(subnetId)、缓存实例名称、缓存实例规格、缓存实例密码、缓存实例所在区域可用区ID信息和缓存实例描述。 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateCacheInstanceRequest(
     regionId string,
@@ -58,14 +59,54 @@ func NewCreateCacheInstanceRequest(
 	}
 }
 
+/*
+ * param regionId: 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2 (Required)
+ * param cacheInstance: 创建缓存实例的具体属性，包括所属私有网络ID(vpcId)、子网ID(subnetId)、缓存实例名称、缓存实例规格、缓存实例密码、缓存实例所在区域可用区ID信息和缓存实例描述。 (Required)
+ * param charge: 计费信息的相关配置。 (Optional)
+ */
+func NewCreateCacheInstanceRequestWithAllParams(
+    regionId string,
+    cacheInstance *redis.CacheInstanceSpec,
+    charge *charge.ChargeSpec,
+) *CreateCacheInstanceRequest {
+
+    return &CreateCacheInstanceRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/cacheInstance",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        CacheInstance: cacheInstance,
+        Charge: charge,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewCreateCacheInstanceRequestWithoutParam() *CreateCacheInstanceRequest {
+
+    return &CreateCacheInstanceRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/cacheInstance",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2(Required) */
 func (r *CreateCacheInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param cacheInstance: 创建缓存实例的具体属性，包括所属私有网络ID(vpcId)、子网ID(subnetId)、缓存实例名称、缓存实例规格、缓存实例密码、缓存实例所在区域可用区ID信息和缓存实例描述。(Required) */
 func (r *CreateCacheInstanceRequest) SetCacheInstance(cacheInstance *redis.CacheInstanceSpec) {
     r.CacheInstance = cacheInstance
 }
 
+/* param charge: 计费信息的相关配置。(Optional) */
 func (r *CreateCacheInstanceRequest) SetCharge(charge *charge.ChargeSpec) {
     r.Charge = charge
 }

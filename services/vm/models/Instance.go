@@ -45,7 +45,7 @@ type Instance struct {
     /* 主网卡主IP绑定弹性IP的地址 (Optional) */
     ElasticIpAddress string `json:"elasticIpAddress"`
 
-    /* 云主机状态，<a href="https://www.jdcloud.com/help/detail/3869/isCatalog/1">参考云主机状态</a> (Optional) */
+    /* 云主机状态，<a href="http://docs.jdcloud.com/virtual-machines/api/vm_status">参考云主机状态</a> (Optional) */
     Status string `json:"status"`
 
     /* 云主机描述 (Optional) */
