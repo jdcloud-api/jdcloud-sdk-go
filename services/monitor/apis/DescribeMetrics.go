@@ -25,36 +25,12 @@ type DescribeMetricsRequest struct {
 
     core.JDCloudRequest
 
-    /* 资源的类型 ： 
-vm-->云主机
-disk-->云硬盘
-ip-->公网ip
-balance-->负载均衡
-database-->云数据库mysql版本
-cdn-->京东CDN
-redis-->redis云缓存
-mongodb-->mongoDB云缓存
-storage-->云存储
-sqlserver-->云数据库sqlserver版 
-nativecontainer-->容器
-  */
+    /* 资源的类型，取值vm, lb, ip, database 等  */
     ServiceCode string `json:"serviceCode"`
 }
 
 /*
- * param serviceCode: 资源的类型 ： 
-vm-->云主机
-disk-->云硬盘
-ip-->公网ip
-balance-->负载均衡
-database-->云数据库mysql版本
-cdn-->京东CDN
-redis-->redis云缓存
-mongodb-->mongoDB云缓存
-storage-->云存储
-sqlserver-->云数据库sqlserver版 
-nativecontainer-->容器
- (Required)
+ * param serviceCode: 资源的类型，取值vm, lb, ip, database 等 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -74,19 +50,7 @@ func NewDescribeMetricsRequest(
 }
 
 /*
- * param serviceCode: 资源的类型 ： 
-vm-->云主机
-disk-->云硬盘
-ip-->公网ip
-balance-->负载均衡
-database-->云数据库mysql版本
-cdn-->京东CDN
-redis-->redis云缓存
-mongodb-->mongoDB云缓存
-storage-->云存储
-sqlserver-->云数据库sqlserver版 
-nativecontainer-->容器
- (Required)
+ * param serviceCode: 资源的类型，取值vm, lb, ip, database 等 (Required)
  */
 func NewDescribeMetricsRequestWithAllParams(
     serviceCode string,
@@ -116,19 +80,7 @@ func NewDescribeMetricsRequestWithoutParam() *DescribeMetricsRequest {
     }
 }
 
-/* param serviceCode: 资源的类型 ： 
-vm-->云主机
-disk-->云硬盘
-ip-->公网ip
-balance-->负载均衡
-database-->云数据库mysql版本
-cdn-->京东CDN
-redis-->redis云缓存
-mongodb-->mongoDB云缓存
-storage-->云存储
-sqlserver-->云数据库sqlserver版 
-nativecontainer-->容器
-(Required) */
+/* param serviceCode: 资源的类型，取值vm, lb, ip, database 等(Required) */
 func (r *DescribeMetricsRequest) SetServiceCode(serviceCode string) {
     r.ServiceCode = serviceCode
 }

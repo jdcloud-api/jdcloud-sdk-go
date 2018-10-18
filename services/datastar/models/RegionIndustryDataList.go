@@ -17,11 +17,8 @@
 package models
 
 
-type CreateAlarmSpec struct {
+type RegionIndustryDataList struct {
 
-    /* 幂等性校验参数,最长36位  */
-    ClientToken string `json:"clientToken"`
-
-    /*   */
-    CreateAlarmSpec *CreateAlarmSpec `json:"createAlarmSpec"`
+    /* 区域 (Optional) */
+    DataList []RegionIndustryData `json:"dataList"`
 }

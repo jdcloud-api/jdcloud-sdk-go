@@ -24,4 +24,7 @@ type MetricData struct {
 
     /*  (Optional) */
     Metric Metric `json:"metric"`
+
+    /*  (Optional) */
+    Tags []Tag `json:"tags"`
 }

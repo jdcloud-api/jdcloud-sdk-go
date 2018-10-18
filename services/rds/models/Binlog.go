@@ -26,7 +26,7 @@ type Binlog struct {
     BinlogName string `json:"binlogName"`
 
     /* binlog日志大小，单位KB (Optional) */
-    BinlogSizeKB int `json:"binlogSizeKB"`
+    BinlogSizeKB int64 `json:"binlogSizeKB"`
 
     /* binlog开始时间,格式为：YYYY-MM-DD HH:mm:ss (Optional) */
     BinlogStartTime string `json:"binlogStartTime"`

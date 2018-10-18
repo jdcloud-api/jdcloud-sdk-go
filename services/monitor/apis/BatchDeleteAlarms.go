@@ -21,77 +21,68 @@ import (
     monitor "github.com/jdcloud-api/jdcloud-sdk-go/services/monitor/models"
 )
 
-type CreateAlarmRequest struct {
+type BatchDeleteAlarmsRequest struct {
 
     core.JDCloudRequest
 
     /* 地域 Id  */
     RegionId string `json:"regionId"`
 
-    /* 幂等性校验参数,最长36位  */
-    ClientToken string `json:"clientToken"`
-
-    /*   */
-    CreateAlarmSpec *monitor.CreateAlarmSpec `json:"createAlarmSpec"`
+    /* filter name为'ids'为要删除的告警id  */
+    Filter []monitor.Filter `json:"filter"`
 }
 
 /*
  * param regionId: 地域 Id (Required)
- * param clientToken: 幂等性校验参数,最长36位 (Required)
- * param createAlarmSpec:  (Required)
+ * param filter: filter name为'ids'为要删除的告警id (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewCreateAlarmRequest(
+func NewBatchDeleteAlarmsRequest(
     regionId string,
-    clientToken string,
-    createAlarmSpec *monitor.CreateAlarmSpec,
-) *CreateAlarmRequest {
+    filter []monitor.Filter,
+) *BatchDeleteAlarmsRequest {
 
-	return &CreateAlarmRequest{
+	return &BatchDeleteAlarmsRequest{
         JDCloudRequest: core.JDCloudRequest{
 			URL:     "/regions/{regionId}/alarms",
-			Method:  "POST",
+			Method:  "DELETE",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        ClientToken: clientToken,
-        CreateAlarmSpec: createAlarmSpec,
+        Filter: filter,
 	}
 }
 
 /*
  * param regionId: 地域 Id (Required)
- * param clientToken: 幂等性校验参数,最长36位 (Required)
- * param createAlarmSpec:  (Required)
+ * param filter: filter name为'ids'为要删除的告警id (Required)
  */
-func NewCreateAlarmRequestWithAllParams(
+func NewBatchDeleteAlarmsRequestWithAllParams(
     regionId string,
-    clientToken string,
-    createAlarmSpec *monitor.CreateAlarmSpec,
-) *CreateAlarmRequest {
+    filter []monitor.Filter,
+) *BatchDeleteAlarmsRequest {
 
-    return &CreateAlarmRequest{
+    return &BatchDeleteAlarmsRequest{
         JDCloudRequest: core.JDCloudRequest{
             URL:     "/regions/{regionId}/alarms",
-            Method:  "POST",
+            Method:  "DELETE",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        ClientToken: clientToken,
-        CreateAlarmSpec: createAlarmSpec,
+        Filter: filter,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewCreateAlarmRequestWithoutParam() *CreateAlarmRequest {
+func NewBatchDeleteAlarmsRequestWithoutParam() *BatchDeleteAlarmsRequest {
 
-    return &CreateAlarmRequest{
+    return &BatchDeleteAlarmsRequest{
             JDCloudRequest: core.JDCloudRequest{
             URL:     "/regions/{regionId}/alarms",
-            Method:  "POST",
+            Method:  "DELETE",
             Header:  nil,
             Version: "v1",
         },
@@ -99,32 +90,26 @@ func NewCreateAlarmRequestWithoutParam() *CreateAlarmRequest {
 }
 
 /* param regionId: 地域 Id(Required) */
-func (r *CreateAlarmRequest) SetRegionId(regionId string) {
+func (r *BatchDeleteAlarmsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param clientToken: 幂等性校验参数,最长36位(Required) */
-func (r *CreateAlarmRequest) SetClientToken(clientToken string) {
-    r.ClientToken = clientToken
-}
-
-/* param createAlarmSpec: (Required) */
-func (r *CreateAlarmRequest) SetCreateAlarmSpec(createAlarmSpec *monitor.CreateAlarmSpec) {
-    r.CreateAlarmSpec = createAlarmSpec
+/* param filter: filter name为'ids'为要删除的告警id(Required) */
+func (r *BatchDeleteAlarmsRequest) SetFilter(filter []monitor.Filter) {
+    r.Filter = filter
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r CreateAlarmRequest) GetRegionId() string {
+func (r BatchDeleteAlarmsRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type CreateAlarmResponse struct {
+type BatchDeleteAlarmsResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result CreateAlarmResult `json:"result"`
+    Result BatchDeleteAlarmsResult `json:"result"`
 }
 
-type CreateAlarmResult struct {
-    AlarmIdList []string `json:"alarmIdList"`
+type BatchDeleteAlarmsResult struct {
 }

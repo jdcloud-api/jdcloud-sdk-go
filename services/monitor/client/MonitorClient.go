@@ -40,7 +40,7 @@ func NewMonitorClient(credential *core.Credential) *MonitorClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "monitor",
-            Revision:    "1.1.1",
+            Revision:    "1.2.2",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,25 +51,6 @@ func (c *MonitorClient) SetConfig(config *core.Config) {
 
 func (c *MonitorClient) SetLogger(logger core.Logger) {
     c.Logger = logger
-}
-
-/* 批量删除已创建的报警规则 */
-func (c *MonitorClient) DeleteAlarms(request *monitor.DeleteAlarmsRequest) (*monitor.DeleteAlarmsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DeleteAlarmsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
 }
 
 /* 查看某资源的监控数据 */
@@ -91,8 +72,8 @@ func (c *MonitorClient) DescribeMetricData(request *monitor.DescribeMetricDataRe
     return jdResp, err
 }
 
-/* 自定义监控数据上报接口 */
-func (c *MonitorClient) PutMetricData(request *monitor.PutMetricDataRequest) (*monitor.PutMetricDataResponse, error) {
+/* 查看某资源的最后一个点 */
+func (c *MonitorClient) LastDownsample(request *monitor.LastDownsampleRequest) (*monitor.LastDownsampleResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -101,7 +82,26 @@ func (c *MonitorClient) PutMetricData(request *monitor.PutMetricDataRequest) (*m
         return nil, err
     }
 
-    jdResp := &monitor.PutMetricDataResponse{}
+    jdResp := &monitor.LastDownsampleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 批量删除规则 */
+func (c *MonitorClient) BatchDeleteAlarms(request *monitor.BatchDeleteAlarmsRequest) (*monitor.BatchDeleteAlarmsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &monitor.BatchDeleteAlarmsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -129,7 +129,13 @@ func (c *MonitorClient) UpdateAlarm(request *monitor.UpdateAlarmRequest) (*monit
     return jdResp, err
 }
 
-/* 查询报警历史 */
+/* 查询报警历史
+检索条件组合优先级从高到低为
+1. serviceCode
+1.1 serviceCode + resourceId
+1.2 serviceCode + resourceIds
+2. serviceCodes
+3. 用户所有规则 */
 func (c *MonitorClient) DescribeAlarmHistory(request *monitor.DescribeAlarmHistoryRequest) (*monitor.DescribeAlarmHistoryResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -140,6 +146,25 @@ func (c *MonitorClient) DescribeAlarmHistory(request *monitor.DescribeAlarmHisto
     }
 
     jdResp := &monitor.DescribeAlarmHistoryResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 批量创建报警规则，可以为多个实例创建多个报警规则。 */
+func (c *MonitorClient) BatchCreateAlarms(request *monitor.BatchCreateAlarmsRequest) (*monitor.BatchCreateAlarmsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &monitor.BatchCreateAlarmsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -167,25 +192,6 @@ func (c *MonitorClient) DescribeMetrics(request *monitor.DescribeMetricsRequest)
     return jdResp, err
 }
 
-/* 禁用报警规则。报警规则禁用后，将停止探测实例的监控项数据。 */
-func (c *MonitorClient) DisableAlarm(request *monitor.DisableAlarmRequest) (*monitor.DisableAlarmResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DisableAlarmResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 创建报警规则，可以为某一个实例创建报警规则，也可以为多个实例同时创建报警规则。 */
 func (c *MonitorClient) CreateAlarm(request *monitor.CreateAlarmRequest) (*monitor.CreateAlarmResponse, error) {
     if request == nil {
@@ -205,7 +211,145 @@ func (c *MonitorClient) CreateAlarm(request *monitor.CreateAlarmRequest) (*monit
     return jdResp, err
 }
 
-/* 查询监控规则 */
+/* 查看某资源多个监控项数据 */
+func (c *MonitorClient) BatchDescribeMetricData(request *monitor.BatchDescribeMetricDataRequest) (*monitor.BatchDescribeMetricDataResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &monitor.BatchDescribeMetricDataResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询可用创建监控规则的指标列表 */
+func (c *MonitorClient) DescribeMetricsForCreateAlarm(request *monitor.DescribeMetricsForCreateAlarmRequest) (*monitor.DescribeMetricsForCreateAlarmResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &monitor.DescribeMetricsForCreateAlarmResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询规则的报警联系人 */
+func (c *MonitorClient) DescribeAlarmContacts(request *monitor.DescribeAlarmContactsRequest) (*monitor.DescribeAlarmContactsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &monitor.DescribeAlarmContactsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 批量启用规则 */
+func (c *MonitorClient) BatchEnableAlarms(request *monitor.BatchEnableAlarmsRequest) (*monitor.BatchEnableAlarmsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &monitor.BatchEnableAlarmsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 该接口为自定义监控数据上报的接口，方便您将自己采集的时序数据上报到云监控。可上报原始数据和已聚合的统计数据。支持批量上报方式。单次请求最多包含 50 个数据点；数据大小不超过 256k。 */
+func (c *MonitorClient) PutMetricData(request *monitor.PutMetricDataRequest) (*monitor.PutMetricDataResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &monitor.PutMetricDataResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 批量禁用规则 */
+func (c *MonitorClient) BatchDisableAlarms(request *monitor.BatchDisableAlarmsRequest) (*monitor.BatchDisableAlarmsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &monitor.BatchDisableAlarmsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 禁用报警规则。报警规则禁用后，将停止探测实例的监控项数据。 */
+func (c *MonitorClient) DisableAlarm(request *monitor.DisableAlarmRequest) (*monitor.DisableAlarmResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &monitor.DisableAlarmResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询规则, 查询参数组合及优先级从高到低为：
+1：serviceCode不为空
+1.1：serviceCode + resourceId
+1.2: serviceCode + resourceIds
+2：serviceCodes不为空
+3: 所有规则 */
 func (c *MonitorClient) DescribeAlarms(request *monitor.DescribeAlarmsRequest) (*monitor.DescribeAlarmsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -235,25 +379,6 @@ func (c *MonitorClient) DescribeAlarmsByID(request *monitor.DescribeAlarmsByIDRe
     }
 
     jdResp := &monitor.DescribeAlarmsByIDResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询可用创建监控规则的指标列表 */
-func (c *MonitorClient) DescribeMetricsForCreateAlarm(request *monitor.DescribeMetricsForCreateAlarmRequest) (*monitor.DescribeMetricsForCreateAlarmResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DescribeMetricsForCreateAlarmResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err

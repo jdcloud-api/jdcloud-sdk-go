@@ -17,11 +17,11 @@
 package models
 
 
-type CreateAlarmSpec struct {
+type Filter struct {
 
-    /* 幂等性校验参数,最长36位  */
-    ClientToken string `json:"clientToken"`
+    /*  (Optional) */
+    Name *string `json:"name"`
 
-    /*   */
-    CreateAlarmSpec *CreateAlarmSpec `json:"createAlarmSpec"`
+    /*  (Optional) */
+    Values []string `json:"values"`
 }

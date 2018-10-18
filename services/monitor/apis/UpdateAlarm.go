@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    monitor "github.com/jdcloud-api/jdcloud-sdk-go/services/monitor/models"
 )
 
 type UpdateAlarmRequest struct {
@@ -30,63 +31,36 @@ type UpdateAlarmRequest struct {
     /* 规则id  */
     AlarmId string `json:"alarmId"`
 
-    /* 统计方法：平均值=avg、最大值=max、最小值=min、总和=sum  */
-    Calculation string `json:"calculation"`
+    /* 通知联系人 (Optional) */
+    Contacts []monitor.BaseContact `json:"contacts"`
 
-    /* 通知的联系组，如 [“联系组1”,”联系组2”] (Optional) */
-    ContactGroups []string `json:"contactGroups"`
+    /*   */
+    Rule *monitor.BaseRule `json:"rule"`
 
-    /* 通知的联系人，如 [“联系人1”,”联系人2”] (Optional) */
-    ContactPersons []string `json:"contactPersons"`
+    /* 回调content 注：仅webHookUrl和webHookContent均不为空时，才会创建webHook (Optional) */
+    WebHookContent *string `json:"webHookContent"`
 
-    /* 取样频次 (Optional) */
-    DownSample *string `json:"downSample"`
+    /* webHook协议 (Optional) */
+    WebHookProtocol *string `json:"webHookProtocol"`
 
-    /* 根据产品线查询可用监控项列表 接口 返回的Metric字段  */
-    Metric string `json:"metric"`
+    /* 回调secret，用户请求签名，防伪造 (Optional) */
+    WebHookSecret *string `json:"webHookSecret"`
 
-    /* 通知周期 单位：小时 (Optional) */
-    NoticePeriod *int `json:"noticePeriod"`
-
-    /* >=、>、<、<=、==、!=  */
-    Operation string `json:"operation"`
-
-    /* 统计周期（单位：分钟），可选值：2,5,15,30,60  */
-    Period int `json:"period"`
-
-    /* 产品名称  */
-    ServiceCode string `json:"serviceCode"`
-
-    /* 阈值  */
-    Threshold float64 `json:"threshold"`
-
-    /* 连续多少次后报警，可选值:1,2,3,5  */
-    Times int `json:"times"`
+    /* 回调url (Optional) */
+    WebHookUrl *string `json:"webHookUrl"`
 }
 
 /*
  * param regionId: 地域 Id (Required)
  * param alarmId: 规则id (Required)
- * param calculation: 统计方法：平均值=avg、最大值=max、最小值=min、总和=sum (Required)
- * param metric: 根据产品线查询可用监控项列表 接口 返回的Metric字段 (Required)
- * param operation: >=、>、<、<=、==、!= (Required)
- * param period: 统计周期（单位：分钟），可选值：2,5,15,30,60 (Required)
- * param serviceCode: 产品名称 (Required)
- * param threshold: 阈值 (Required)
- * param times: 连续多少次后报警，可选值:1,2,3,5 (Required)
+ * param rule:  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewUpdateAlarmRequest(
     regionId string,
     alarmId string,
-    calculation string,
-    metric string,
-    operation string,
-    period int,
-    serviceCode string,
-    threshold float64,
-    times int,
+    rule *monitor.BaseRule,
 ) *UpdateAlarmRequest {
 
 	return &UpdateAlarmRequest{
@@ -98,45 +72,29 @@ func NewUpdateAlarmRequest(
 		},
         RegionId: regionId,
         AlarmId: alarmId,
-        Calculation: calculation,
-        Metric: metric,
-        Operation: operation,
-        Period: period,
-        ServiceCode: serviceCode,
-        Threshold: threshold,
-        Times: times,
+        Rule: rule,
 	}
 }
 
 /*
  * param regionId: 地域 Id (Required)
  * param alarmId: 规则id (Required)
- * param calculation: 统计方法：平均值=avg、最大值=max、最小值=min、总和=sum (Required)
- * param contactGroups: 通知的联系组，如 [“联系组1”,”联系组2”] (Optional)
- * param contactPersons: 通知的联系人，如 [“联系人1”,”联系人2”] (Optional)
- * param downSample: 取样频次 (Optional)
- * param metric: 根据产品线查询可用监控项列表 接口 返回的Metric字段 (Required)
- * param noticePeriod: 通知周期 单位：小时 (Optional)
- * param operation: >=、>、<、<=、==、!= (Required)
- * param period: 统计周期（单位：分钟），可选值：2,5,15,30,60 (Required)
- * param serviceCode: 产品名称 (Required)
- * param threshold: 阈值 (Required)
- * param times: 连续多少次后报警，可选值:1,2,3,5 (Required)
+ * param contacts: 通知联系人 (Optional)
+ * param rule:  (Required)
+ * param webHookContent: 回调content 注：仅webHookUrl和webHookContent均不为空时，才会创建webHook (Optional)
+ * param webHookProtocol: webHook协议 (Optional)
+ * param webHookSecret: 回调secret，用户请求签名，防伪造 (Optional)
+ * param webHookUrl: 回调url (Optional)
  */
 func NewUpdateAlarmRequestWithAllParams(
     regionId string,
     alarmId string,
-    calculation string,
-    contactGroups []string,
-    contactPersons []string,
-    downSample *string,
-    metric string,
-    noticePeriod *int,
-    operation string,
-    period int,
-    serviceCode string,
-    threshold float64,
-    times int,
+    contacts []monitor.BaseContact,
+    rule *monitor.BaseRule,
+    webHookContent *string,
+    webHookProtocol *string,
+    webHookSecret *string,
+    webHookUrl *string,
 ) *UpdateAlarmRequest {
 
     return &UpdateAlarmRequest{
@@ -148,17 +106,12 @@ func NewUpdateAlarmRequestWithAllParams(
         },
         RegionId: regionId,
         AlarmId: alarmId,
-        Calculation: calculation,
-        ContactGroups: contactGroups,
-        ContactPersons: contactPersons,
-        DownSample: downSample,
-        Metric: metric,
-        NoticePeriod: noticePeriod,
-        Operation: operation,
-        Period: period,
-        ServiceCode: serviceCode,
-        Threshold: threshold,
-        Times: times,
+        Contacts: contacts,
+        Rule: rule,
+        WebHookContent: webHookContent,
+        WebHookProtocol: webHookProtocol,
+        WebHookSecret: webHookSecret,
+        WebHookUrl: webHookUrl,
     }
 }
 
@@ -185,59 +138,34 @@ func (r *UpdateAlarmRequest) SetAlarmId(alarmId string) {
     r.AlarmId = alarmId
 }
 
-/* param calculation: 统计方法：平均值=avg、最大值=max、最小值=min、总和=sum(Required) */
-func (r *UpdateAlarmRequest) SetCalculation(calculation string) {
-    r.Calculation = calculation
+/* param contacts: 通知联系人(Optional) */
+func (r *UpdateAlarmRequest) SetContacts(contacts []monitor.BaseContact) {
+    r.Contacts = contacts
 }
 
-/* param contactGroups: 通知的联系组，如 [“联系组1”,”联系组2”](Optional) */
-func (r *UpdateAlarmRequest) SetContactGroups(contactGroups []string) {
-    r.ContactGroups = contactGroups
+/* param rule: (Required) */
+func (r *UpdateAlarmRequest) SetRule(rule *monitor.BaseRule) {
+    r.Rule = rule
 }
 
-/* param contactPersons: 通知的联系人，如 [“联系人1”,”联系人2”](Optional) */
-func (r *UpdateAlarmRequest) SetContactPersons(contactPersons []string) {
-    r.ContactPersons = contactPersons
+/* param webHookContent: 回调content 注：仅webHookUrl和webHookContent均不为空时，才会创建webHook(Optional) */
+func (r *UpdateAlarmRequest) SetWebHookContent(webHookContent string) {
+    r.WebHookContent = &webHookContent
 }
 
-/* param downSample: 取样频次(Optional) */
-func (r *UpdateAlarmRequest) SetDownSample(downSample string) {
-    r.DownSample = &downSample
+/* param webHookProtocol: webHook协议(Optional) */
+func (r *UpdateAlarmRequest) SetWebHookProtocol(webHookProtocol string) {
+    r.WebHookProtocol = &webHookProtocol
 }
 
-/* param metric: 根据产品线查询可用监控项列表 接口 返回的Metric字段(Required) */
-func (r *UpdateAlarmRequest) SetMetric(metric string) {
-    r.Metric = metric
+/* param webHookSecret: 回调secret，用户请求签名，防伪造(Optional) */
+func (r *UpdateAlarmRequest) SetWebHookSecret(webHookSecret string) {
+    r.WebHookSecret = &webHookSecret
 }
 
-/* param noticePeriod: 通知周期 单位：小时(Optional) */
-func (r *UpdateAlarmRequest) SetNoticePeriod(noticePeriod int) {
-    r.NoticePeriod = &noticePeriod
-}
-
-/* param operation: >=、>、<、<=、==、!=(Required) */
-func (r *UpdateAlarmRequest) SetOperation(operation string) {
-    r.Operation = operation
-}
-
-/* param period: 统计周期（单位：分钟），可选值：2,5,15,30,60(Required) */
-func (r *UpdateAlarmRequest) SetPeriod(period int) {
-    r.Period = period
-}
-
-/* param serviceCode: 产品名称(Required) */
-func (r *UpdateAlarmRequest) SetServiceCode(serviceCode string) {
-    r.ServiceCode = serviceCode
-}
-
-/* param threshold: 阈值(Required) */
-func (r *UpdateAlarmRequest) SetThreshold(threshold float64) {
-    r.Threshold = threshold
-}
-
-/* param times: 连续多少次后报警，可选值:1,2,3,5(Required) */
-func (r *UpdateAlarmRequest) SetTimes(times int) {
-    r.Times = times
+/* param webHookUrl: 回调url(Optional) */
+func (r *UpdateAlarmRequest) SetWebHookUrl(webHookUrl string) {
+    r.WebHookUrl = &webHookUrl
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
@@ -253,5 +181,4 @@ type UpdateAlarmResponse struct {
 }
 
 type UpdateAlarmResult struct {
-    AlarmId string `json:"alarmId"`
 }

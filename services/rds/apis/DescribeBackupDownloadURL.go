@@ -50,7 +50,7 @@ func NewDescribeBackupDownloadURLRequest(
 
 	return &DescribeBackupDownloadURLRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/backups/{backupId}/downloadURLs",
+			URL:     "/regions/{regionId}/backups/{backupId}:describeBackupDownloadURL",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -75,7 +75,7 @@ func NewDescribeBackupDownloadURLRequestWithAllParams(
 
     return &DescribeBackupDownloadURLRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/backups/{backupId}/downloadURLs",
+            URL:     "/regions/{regionId}/backups/{backupId}:describeBackupDownloadURL",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -92,7 +92,7 @@ func NewDescribeBackupDownloadURLRequestWithoutParam() *DescribeBackupDownloadUR
 
     return &DescribeBackupDownloadURLRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/backups/{backupId}/downloadURLs",
+            URL:     "/regions/{regionId}/backups/{backupId}:describeBackupDownloadURL",
             Method:  "GET",
             Header:  nil,
             Version: "v1",

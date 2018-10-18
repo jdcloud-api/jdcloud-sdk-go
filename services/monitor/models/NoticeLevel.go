@@ -17,11 +17,11 @@
 package models
 
 
-type CreateAlarmSpec struct {
+type NoticeLevel struct {
 
-    /* 幂等性校验参数,最长36位  */
-    ClientToken string `json:"clientToken"`
+    /* 是否为用户自己定义的级别，自定义(true) or 固定(false)  */
+    Custom bool `json:"custom"`
 
-    /*   */
-    CreateAlarmSpec *CreateAlarmSpec `json:"createAlarmSpec"`
+    /* 报警级别以及对应的指标，common：一般 critial： 严重 fatal：紧急  */
+    Levels interface{} `json:"levels"`
 }

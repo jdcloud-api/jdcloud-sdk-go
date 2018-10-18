@@ -17,11 +17,8 @@
 package models
 
 
-type CreateAlarmSpec struct {
+type UpdateAlarmResponseEnd struct {
 
-    /* 幂等性校验参数,最长36位  */
-    ClientToken string `json:"clientToken"`
-
-    /*   */
-    CreateAlarmSpec *CreateAlarmSpec `json:"createAlarmSpec"`
+    /* 更新之后的规则id (Optional) */
+    AlarmId string `json:"alarmId"`
 }

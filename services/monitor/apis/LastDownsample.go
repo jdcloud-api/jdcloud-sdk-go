@@ -21,7 +21,7 @@ import (
     monitor "github.com/jdcloud-api/jdcloud-sdk-go/services/monitor/models"
 )
 
-type DescribeMetricDataRequest struct {
+type LastDownsampleRequest struct {
 
     core.JDCloudRequest
 
@@ -37,20 +37,20 @@ type DescribeMetricDataRequest struct {
     /* 资源的uuid  */
     ResourceId string `json:"resourceId"`
 
+    /* 自定义标签 (Optional) */
+    Tags []monitor.TagFilter `json:"tags"`
+
     /* 查询时间范围的开始时间， UTC时间，格式：yyyy-MM-dd'T'HH:mm:ssZ（默认为当前时间，早于30d时，将被重置为30d） (Optional) */
     StartTime *string `json:"startTime"`
 
     /* 查询时间范围的结束时间， UTC时间，格式：2016-12- yyyy-MM-dd'T'HH:mm:ssZ（为空时，将由startTime与timeInterval计算得出） (Optional) */
     EndTime *string `json:"endTime"`
 
-    /* 时间间隔：1h，6h，12h，1d，3d，7d，14d，固定时间间隔，timeInterval 与 endTime 至少填一项 (Optional) */
+    /* 查询的时间间隔，仅支持分钟级别，例如：1m (Optional) */
     TimeInterval *string `json:"timeInterval"`
 
-    /* 自定义标签 (Optional) */
-    Tags []monitor.TagFilter `json:"tags"`
-
-    /* 是否对查询的tags分组 (Optional) */
-    GroupBy *bool `json:"groupBy"`
+    /* 聚合方式：max avg min等 (Optional) */
+    AggrType *string `json:"aggrType"`
 }
 
 /*
@@ -61,16 +61,16 @@ type DescribeMetricDataRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeMetricDataRequest(
+func NewLastDownsampleRequest(
     regionId string,
     metric string,
     serviceCode string,
     resourceId string,
-) *DescribeMetricDataRequest {
+) *LastDownsampleRequest {
 
-	return &DescribeMetricDataRequest{
+	return &LastDownsampleRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/metrics/{metric}/metricData",
+			URL:     "/regions/{regionId}/metrics/{metric}/lastDownsample",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -87,27 +87,27 @@ func NewDescribeMetricDataRequest(
  * param metric: 监控项英文标识(id) (Required)
  * param serviceCode: 资源的类型，取值vm, lb, ip, database 等 (Required)
  * param resourceId: 资源的uuid (Required)
+ * param tags: 自定义标签 (Optional)
  * param startTime: 查询时间范围的开始时间， UTC时间，格式：yyyy-MM-dd'T'HH:mm:ssZ（默认为当前时间，早于30d时，将被重置为30d） (Optional)
  * param endTime: 查询时间范围的结束时间， UTC时间，格式：2016-12- yyyy-MM-dd'T'HH:mm:ssZ（为空时，将由startTime与timeInterval计算得出） (Optional)
- * param timeInterval: 时间间隔：1h，6h，12h，1d，3d，7d，14d，固定时间间隔，timeInterval 与 endTime 至少填一项 (Optional)
- * param tags: 自定义标签 (Optional)
- * param groupBy: 是否对查询的tags分组 (Optional)
+ * param timeInterval: 查询的时间间隔，仅支持分钟级别，例如：1m (Optional)
+ * param aggrType: 聚合方式：max avg min等 (Optional)
  */
-func NewDescribeMetricDataRequestWithAllParams(
+func NewLastDownsampleRequestWithAllParams(
     regionId string,
     metric string,
     serviceCode string,
     resourceId string,
+    tags []monitor.TagFilter,
     startTime *string,
     endTime *string,
     timeInterval *string,
-    tags []monitor.TagFilter,
-    groupBy *bool,
-) *DescribeMetricDataRequest {
+    aggrType *string,
+) *LastDownsampleRequest {
 
-    return &DescribeMetricDataRequest{
+    return &LastDownsampleRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/metrics/{metric}/metricData",
+            URL:     "/regions/{regionId}/metrics/{metric}/lastDownsample",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -116,20 +116,20 @@ func NewDescribeMetricDataRequestWithAllParams(
         Metric: metric,
         ServiceCode: serviceCode,
         ResourceId: resourceId,
+        Tags: tags,
         StartTime: startTime,
         EndTime: endTime,
         TimeInterval: timeInterval,
-        Tags: tags,
-        GroupBy: groupBy,
+        AggrType: aggrType,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeMetricDataRequestWithoutParam() *DescribeMetricDataRequest {
+func NewLastDownsampleRequestWithoutParam() *LastDownsampleRequest {
 
-    return &DescribeMetricDataRequest{
+    return &LastDownsampleRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/metrics/{metric}/metricData",
+            URL:     "/regions/{regionId}/metrics/{metric}/lastDownsample",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -138,62 +138,62 @@ func NewDescribeMetricDataRequestWithoutParam() *DescribeMetricDataRequest {
 }
 
 /* param regionId: 地域 Id(Required) */
-func (r *DescribeMetricDataRequest) SetRegionId(regionId string) {
+func (r *LastDownsampleRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param metric: 监控项英文标识(id)(Required) */
-func (r *DescribeMetricDataRequest) SetMetric(metric string) {
+func (r *LastDownsampleRequest) SetMetric(metric string) {
     r.Metric = metric
 }
 
 /* param serviceCode: 资源的类型，取值vm, lb, ip, database 等(Required) */
-func (r *DescribeMetricDataRequest) SetServiceCode(serviceCode string) {
+func (r *LastDownsampleRequest) SetServiceCode(serviceCode string) {
     r.ServiceCode = serviceCode
 }
 
 /* param resourceId: 资源的uuid(Required) */
-func (r *DescribeMetricDataRequest) SetResourceId(resourceId string) {
+func (r *LastDownsampleRequest) SetResourceId(resourceId string) {
     r.ResourceId = resourceId
 }
 
+/* param tags: 自定义标签(Optional) */
+func (r *LastDownsampleRequest) SetTags(tags []monitor.TagFilter) {
+    r.Tags = tags
+}
+
 /* param startTime: 查询时间范围的开始时间， UTC时间，格式：yyyy-MM-dd'T'HH:mm:ssZ（默认为当前时间，早于30d时，将被重置为30d）(Optional) */
-func (r *DescribeMetricDataRequest) SetStartTime(startTime string) {
+func (r *LastDownsampleRequest) SetStartTime(startTime string) {
     r.StartTime = &startTime
 }
 
 /* param endTime: 查询时间范围的结束时间， UTC时间，格式：2016-12- yyyy-MM-dd'T'HH:mm:ssZ（为空时，将由startTime与timeInterval计算得出）(Optional) */
-func (r *DescribeMetricDataRequest) SetEndTime(endTime string) {
+func (r *LastDownsampleRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
 
-/* param timeInterval: 时间间隔：1h，6h，12h，1d，3d，7d，14d，固定时间间隔，timeInterval 与 endTime 至少填一项(Optional) */
-func (r *DescribeMetricDataRequest) SetTimeInterval(timeInterval string) {
+/* param timeInterval: 查询的时间间隔，仅支持分钟级别，例如：1m(Optional) */
+func (r *LastDownsampleRequest) SetTimeInterval(timeInterval string) {
     r.TimeInterval = &timeInterval
 }
 
-/* param tags: 自定义标签(Optional) */
-func (r *DescribeMetricDataRequest) SetTags(tags []monitor.TagFilter) {
-    r.Tags = tags
-}
-
-/* param groupBy: 是否对查询的tags分组(Optional) */
-func (r *DescribeMetricDataRequest) SetGroupBy(groupBy bool) {
-    r.GroupBy = &groupBy
+/* param aggrType: 聚合方式：max avg min等(Optional) */
+func (r *LastDownsampleRequest) SetAggrType(aggrType string) {
+    r.AggrType = &aggrType
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeMetricDataRequest) GetRegionId() string {
+func (r LastDownsampleRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeMetricDataResponse struct {
+type LastDownsampleResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeMetricDataResult `json:"result"`
+    Result LastDownsampleResult `json:"result"`
 }
 
-type DescribeMetricDataResult struct {
-    MetricDatas []monitor.MetricData `json:"metricDatas"`
+type LastDownsampleResult struct {
+    Items []monitor.LastDownsampleRespItem `json:"items"`
 }

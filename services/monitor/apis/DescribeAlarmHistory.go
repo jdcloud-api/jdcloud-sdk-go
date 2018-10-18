@@ -28,39 +28,43 @@ type DescribeAlarmHistoryRequest struct {
     /* 地域 Id  */
     RegionId string `json:"regionId"`
 
-    /* 报警规则的Id (Optional) */
-    Id *string `json:"id"`
+    /* 当前所在页，默认为1 (Optional) */
+    PageNumber *int `json:"pageNumber"`
 
-    /* 产品名称 (Optional) */
+    /* 页面大小，默认为20；取值范围[1, 100] (Optional) */
+    PageSize *int `json:"pageSize"`
+
+    /* 产品线 (Optional) */
     ServiceCode *string `json:"serviceCode"`
 
     /* 资源Id (Optional) */
     ResourceId *string `json:"resourceId"`
 
-    /* 查询数据开始时间，默认24小时前，可以输入long型时间，也可以输入yyyy-MM-dd'T'HH:mm:ssZ类型时间  */
-    StartTime string `json:"startTime"`
+    /* 规则Id (Optional) */
+    AlarmId *string `json:"alarmId"`
 
-    /* 查询数据结束时间，默认当前时间，可以输入long型时间，也可以输入yyyy-MM-dd'T'HH:mm:ssZ类型时间  */
-    EndTime string `json:"endTime"`
+    /* 正在报警, 取值为1 (Optional) */
+    Alarming *int `json:"alarming"`
 
-    /* 页码, 默认为1, 取值范围：[1,∞) (Optional) */
-    PageNumber *int `json:"pageNumber"`
+    /* 开始时间 (Optional) */
+    StartTime *string `json:"startTime"`
 
-    /* 分页大小，默认为20，取值范围：[10,100] (Optional) */
-    PageSize *int `json:"pageSize"`
+    /* 结束时间 (Optional) */
+    EndTime *string `json:"endTime"`
+
+    /* 服务码或资源Id列表
+filter name 为serviceCodes表示查询多个产品线的规则
+filter name 为resourceIds表示查询多个资源的规则 (Optional) */
+    Filters []monitor.Filter `json:"filters"`
 }
 
 /*
  * param regionId: 地域 Id (Required)
- * param startTime: 查询数据开始时间，默认24小时前，可以输入long型时间，也可以输入yyyy-MM-dd'T'HH:mm:ssZ类型时间 (Required)
- * param endTime: 查询数据结束时间，默认当前时间，可以输入long型时间，也可以输入yyyy-MM-dd'T'HH:mm:ssZ类型时间 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeAlarmHistoryRequest(
     regionId string,
-    startTime string,
-    endTime string,
 ) *DescribeAlarmHistoryRequest {
 
 	return &DescribeAlarmHistoryRequest{
@@ -71,30 +75,34 @@ func NewDescribeAlarmHistoryRequest(
 			Version: "v1",
 		},
         RegionId: regionId,
-        StartTime: startTime,
-        EndTime: endTime,
 	}
 }
 
 /*
  * param regionId: 地域 Id (Required)
- * param id: 报警规则的Id (Optional)
- * param serviceCode: 产品名称 (Optional)
+ * param pageNumber: 当前所在页，默认为1 (Optional)
+ * param pageSize: 页面大小，默认为20；取值范围[1, 100] (Optional)
+ * param serviceCode: 产品线 (Optional)
  * param resourceId: 资源Id (Optional)
- * param startTime: 查询数据开始时间，默认24小时前，可以输入long型时间，也可以输入yyyy-MM-dd'T'HH:mm:ssZ类型时间 (Required)
- * param endTime: 查询数据结束时间，默认当前时间，可以输入long型时间，也可以输入yyyy-MM-dd'T'HH:mm:ssZ类型时间 (Required)
- * param pageNumber: 页码, 默认为1, 取值范围：[1,∞) (Optional)
- * param pageSize: 分页大小，默认为20，取值范围：[10,100] (Optional)
+ * param alarmId: 规则Id (Optional)
+ * param alarming: 正在报警, 取值为1 (Optional)
+ * param startTime: 开始时间 (Optional)
+ * param endTime: 结束时间 (Optional)
+ * param filters: 服务码或资源Id列表
+filter name 为serviceCodes表示查询多个产品线的规则
+filter name 为resourceIds表示查询多个资源的规则 (Optional)
  */
 func NewDescribeAlarmHistoryRequestWithAllParams(
     regionId string,
-    id *string,
-    serviceCode *string,
-    resourceId *string,
-    startTime string,
-    endTime string,
     pageNumber *int,
     pageSize *int,
+    serviceCode *string,
+    resourceId *string,
+    alarmId *string,
+    alarming *int,
+    startTime *string,
+    endTime *string,
+    filters []monitor.Filter,
 ) *DescribeAlarmHistoryRequest {
 
     return &DescribeAlarmHistoryRequest{
@@ -105,13 +113,15 @@ func NewDescribeAlarmHistoryRequestWithAllParams(
             Version: "v1",
         },
         RegionId: regionId,
-        Id: id,
-        ServiceCode: serviceCode,
-        ResourceId: resourceId,
-        StartTime: startTime,
-        EndTime: endTime,
         PageNumber: pageNumber,
         PageSize: pageSize,
+        ServiceCode: serviceCode,
+        ResourceId: resourceId,
+        AlarmId: alarmId,
+        Alarming: alarming,
+        StartTime: startTime,
+        EndTime: endTime,
+        Filters: filters,
     }
 }
 
@@ -133,12 +143,17 @@ func (r *DescribeAlarmHistoryRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param id: 报警规则的Id(Optional) */
-func (r *DescribeAlarmHistoryRequest) SetId(id string) {
-    r.Id = &id
+/* param pageNumber: 当前所在页，默认为1(Optional) */
+func (r *DescribeAlarmHistoryRequest) SetPageNumber(pageNumber int) {
+    r.PageNumber = &pageNumber
 }
 
-/* param serviceCode: 产品名称(Optional) */
+/* param pageSize: 页面大小，默认为20；取值范围[1, 100](Optional) */
+func (r *DescribeAlarmHistoryRequest) SetPageSize(pageSize int) {
+    r.PageSize = &pageSize
+}
+
+/* param serviceCode: 产品线(Optional) */
 func (r *DescribeAlarmHistoryRequest) SetServiceCode(serviceCode string) {
     r.ServiceCode = &serviceCode
 }
@@ -148,24 +163,31 @@ func (r *DescribeAlarmHistoryRequest) SetResourceId(resourceId string) {
     r.ResourceId = &resourceId
 }
 
-/* param startTime: 查询数据开始时间，默认24小时前，可以输入long型时间，也可以输入yyyy-MM-dd'T'HH:mm:ssZ类型时间(Required) */
+/* param alarmId: 规则Id(Optional) */
+func (r *DescribeAlarmHistoryRequest) SetAlarmId(alarmId string) {
+    r.AlarmId = &alarmId
+}
+
+/* param alarming: 正在报警, 取值为1(Optional) */
+func (r *DescribeAlarmHistoryRequest) SetAlarming(alarming int) {
+    r.Alarming = &alarming
+}
+
+/* param startTime: 开始时间(Optional) */
 func (r *DescribeAlarmHistoryRequest) SetStartTime(startTime string) {
-    r.StartTime = startTime
+    r.StartTime = &startTime
 }
 
-/* param endTime: 查询数据结束时间，默认当前时间，可以输入long型时间，也可以输入yyyy-MM-dd'T'HH:mm:ssZ类型时间(Required) */
+/* param endTime: 结束时间(Optional) */
 func (r *DescribeAlarmHistoryRequest) SetEndTime(endTime string) {
-    r.EndTime = endTime
+    r.EndTime = &endTime
 }
 
-/* param pageNumber: 页码, 默认为1, 取值范围：[1,∞)(Optional) */
-func (r *DescribeAlarmHistoryRequest) SetPageNumber(pageNumber int) {
-    r.PageNumber = &pageNumber
-}
-
-/* param pageSize: 分页大小，默认为20，取值范围：[10,100](Optional) */
-func (r *DescribeAlarmHistoryRequest) SetPageSize(pageSize int) {
-    r.PageSize = &pageSize
+/* param filters: 服务码或资源Id列表
+filter name 为serviceCodes表示查询多个产品线的规则
+filter name 为resourceIds表示查询多个资源的规则(Optional) */
+func (r *DescribeAlarmHistoryRequest) SetFilters(filters []monitor.Filter) {
+    r.Filters = filters
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
@@ -181,9 +203,6 @@ type DescribeAlarmHistoryResponse struct {
 }
 
 type DescribeAlarmHistoryResult struct {
-    AlarmHistoryList []monitor.AlarmHistory `json:"alarmHistoryList"`
-    PageNumber int `json:"pageNumber"`
-    NumberPages int `json:"numberPages"`
-    NumberRecords int `json:"numberRecords"`
-    PageSize int `json:"pageSize"`
+    AlarmHistoryList []monitor.DescribedAlarmHistory `json:"alarmHistoryList"`
+    Total int64 `json:"total"`
 }
