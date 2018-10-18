@@ -17,11 +17,20 @@
 package models
 
 
-type CreateAlarmSpec struct {
+type PutBody struct {
 
-    /* 幂等性校验参数,最长36位  */
-    ClientToken string `json:"clientToken"`
+    /* 目前统一用jcloud  */
+    AppCode string `json:"appCode"`
 
-    /*   */
-    CreateAlarmSpec *CreateAlarmSpec `json:"createAlarmSpec"`
+    /* 资源的类型，取值vm,ip,database,storage,disk,cdn,redis,balance,nat_gw,db_ro,vpn,ddos等,新接入的产品要求与opentapi命名的产品线名称一致  */
+    ServiceCode string `json:"serviceCode"`
+
+    /* 地域信息，如 cn-north-1 等  */
+    Region string `json:"region"`
+
+    /* 资源的唯一表示，一般为uuid  */
+    ResourceId string `json:"resourceId"`
+
+    /* 监控数据点  */
+    DataPoints []DataPointX `json:"dataPoints"`
 }

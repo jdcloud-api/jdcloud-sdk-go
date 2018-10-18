@@ -19,12 +19,18 @@ package models
 
 type Metric struct {
 
-    /* 指标的计算单位，比如bit/s、%、k等 (Optional) */
+    /*  (Optional) */
+    Aggregator string `json:"aggregator"`
+
+    /*  (Optional) */
     CalculateUnit string `json:"calculateUnit"`
 
-    /* 监控项英文标识 (Optional) */
+    /*  (Optional) */
     Metric string `json:"metric"`
 
-    /* 监控项名称 (Optional) */
+    /*  (Optional) */
     MetricName string `json:"metricName"`
+
+    /*  (Optional) */
+    Period string `json:"period"`
 }

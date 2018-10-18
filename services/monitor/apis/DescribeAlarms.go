@@ -28,26 +28,37 @@ type DescribeAlarmsRequest struct {
     /* 地域 Id  */
     RegionId string `json:"regionId"`
 
+    /* 当前所在页，默认为1 (Optional) */
+    PageNumber *int `json:"pageNumber"`
+
+    /* 页面大小，默认为20；取值范围[1, 100] (Optional) */
+    PageSize *int `json:"pageSize"`
+
     /* 产品名称 (Optional) */
     ServiceCode *string `json:"serviceCode"`
 
-    /* 资源Id (Optional) */
-    ResourceId *string `json:"resourceId"`
+    /* 资源ID (Optional) */
+    ResourceID *string `json:"resourceID"`
+
+    /* 规则类型, 1表示资源监控，6表示站点监控 (Optional) */
+    RuleType *int `json:"ruleType"`
 
     /* 规则报警状态, 1：正常, 2：报警，4：数据不足 (Optional) */
     Status *int `json:"status"`
 
-    /* 是否为正在报警的规则，0为忽略，1为是，与 status 同时只能生效一个,isAlarming 优先生效 (Optional) */
-    IsAlarming *int `json:"isAlarming"`
-
     /* 规则状态：1为启用，0为禁用 (Optional) */
     Enabled *int `json:"enabled"`
 
-    /* 页码, 默认为1, 取值范围：[1,∞) (Optional) */
-    PageNumber *int `json:"pageNumber"`
+    /* 是否为正在报警的规则，0为忽略，1为是，与 status 同时只能生效一个,isAlarming 优先生效 (Optional) */
+    IsAlarming *int `json:"isAlarming"`
 
-    /* 分页大小，默认为20，取值范围：[10,100] (Optional) */
-    PageSize *int `json:"pageSize"`
+    /* 规则的id (Optional) */
+    AlarmId *string `json:"alarmId"`
+
+    /* 服务码或资源Id列表
+filter name 为serviceCodes表示查询多个产品线的规则
+filter name 为resourceIds表示查询多个资源的规则 (Optional) */
+    Filters []monitor.Filter `json:"filters"`
 }
 
 /*
@@ -72,23 +83,31 @@ func NewDescribeAlarmsRequest(
 
 /*
  * param regionId: 地域 Id (Required)
+ * param pageNumber: 当前所在页，默认为1 (Optional)
+ * param pageSize: 页面大小，默认为20；取值范围[1, 100] (Optional)
  * param serviceCode: 产品名称 (Optional)
- * param resourceId: 资源Id (Optional)
+ * param resourceID: 资源ID (Optional)
+ * param ruleType: 规则类型, 1表示资源监控，6表示站点监控 (Optional)
  * param status: 规则报警状态, 1：正常, 2：报警，4：数据不足 (Optional)
- * param isAlarming: 是否为正在报警的规则，0为忽略，1为是，与 status 同时只能生效一个,isAlarming 优先生效 (Optional)
  * param enabled: 规则状态：1为启用，0为禁用 (Optional)
- * param pageNumber: 页码, 默认为1, 取值范围：[1,∞) (Optional)
- * param pageSize: 分页大小，默认为20，取值范围：[10,100] (Optional)
+ * param isAlarming: 是否为正在报警的规则，0为忽略，1为是，与 status 同时只能生效一个,isAlarming 优先生效 (Optional)
+ * param alarmId: 规则的id (Optional)
+ * param filters: 服务码或资源Id列表
+filter name 为serviceCodes表示查询多个产品线的规则
+filter name 为resourceIds表示查询多个资源的规则 (Optional)
  */
 func NewDescribeAlarmsRequestWithAllParams(
     regionId string,
-    serviceCode *string,
-    resourceId *string,
-    status *int,
-    isAlarming *int,
-    enabled *int,
     pageNumber *int,
     pageSize *int,
+    serviceCode *string,
+    resourceID *string,
+    ruleType *int,
+    status *int,
+    enabled *int,
+    isAlarming *int,
+    alarmId *string,
+    filters []monitor.Filter,
 ) *DescribeAlarmsRequest {
 
     return &DescribeAlarmsRequest{
@@ -99,13 +118,16 @@ func NewDescribeAlarmsRequestWithAllParams(
             Version: "v1",
         },
         RegionId: regionId,
-        ServiceCode: serviceCode,
-        ResourceId: resourceId,
-        Status: status,
-        IsAlarming: isAlarming,
-        Enabled: enabled,
         PageNumber: pageNumber,
         PageSize: pageSize,
+        ServiceCode: serviceCode,
+        ResourceID: resourceID,
+        RuleType: ruleType,
+        Status: status,
+        Enabled: enabled,
+        IsAlarming: isAlarming,
+        AlarmId: alarmId,
+        Filters: filters,
     }
 }
 
@@ -127,14 +149,29 @@ func (r *DescribeAlarmsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param pageNumber: 当前所在页，默认为1(Optional) */
+func (r *DescribeAlarmsRequest) SetPageNumber(pageNumber int) {
+    r.PageNumber = &pageNumber
+}
+
+/* param pageSize: 页面大小，默认为20；取值范围[1, 100](Optional) */
+func (r *DescribeAlarmsRequest) SetPageSize(pageSize int) {
+    r.PageSize = &pageSize
+}
+
 /* param serviceCode: 产品名称(Optional) */
 func (r *DescribeAlarmsRequest) SetServiceCode(serviceCode string) {
     r.ServiceCode = &serviceCode
 }
 
-/* param resourceId: 资源Id(Optional) */
-func (r *DescribeAlarmsRequest) SetResourceId(resourceId string) {
-    r.ResourceId = &resourceId
+/* param resourceID: 资源ID(Optional) */
+func (r *DescribeAlarmsRequest) SetResourceID(resourceID string) {
+    r.ResourceID = &resourceID
+}
+
+/* param ruleType: 规则类型, 1表示资源监控，6表示站点监控(Optional) */
+func (r *DescribeAlarmsRequest) SetRuleType(ruleType int) {
+    r.RuleType = &ruleType
 }
 
 /* param status: 规则报警状态, 1：正常, 2：报警，4：数据不足(Optional) */
@@ -142,24 +179,26 @@ func (r *DescribeAlarmsRequest) SetStatus(status int) {
     r.Status = &status
 }
 
-/* param isAlarming: 是否为正在报警的规则，0为忽略，1为是，与 status 同时只能生效一个,isAlarming 优先生效(Optional) */
-func (r *DescribeAlarmsRequest) SetIsAlarming(isAlarming int) {
-    r.IsAlarming = &isAlarming
-}
-
 /* param enabled: 规则状态：1为启用，0为禁用(Optional) */
 func (r *DescribeAlarmsRequest) SetEnabled(enabled int) {
     r.Enabled = &enabled
 }
 
-/* param pageNumber: 页码, 默认为1, 取值范围：[1,∞)(Optional) */
-func (r *DescribeAlarmsRequest) SetPageNumber(pageNumber int) {
-    r.PageNumber = &pageNumber
+/* param isAlarming: 是否为正在报警的规则，0为忽略，1为是，与 status 同时只能生效一个,isAlarming 优先生效(Optional) */
+func (r *DescribeAlarmsRequest) SetIsAlarming(isAlarming int) {
+    r.IsAlarming = &isAlarming
 }
 
-/* param pageSize: 分页大小，默认为20，取值范围：[10,100](Optional) */
-func (r *DescribeAlarmsRequest) SetPageSize(pageSize int) {
-    r.PageSize = &pageSize
+/* param alarmId: 规则的id(Optional) */
+func (r *DescribeAlarmsRequest) SetAlarmId(alarmId string) {
+    r.AlarmId = &alarmId
+}
+
+/* param filters: 服务码或资源Id列表
+filter name 为serviceCodes表示查询多个产品线的规则
+filter name 为resourceIds表示查询多个资源的规则(Optional) */
+func (r *DescribeAlarmsRequest) SetFilters(filters []monitor.Filter) {
+    r.Filters = filters
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
@@ -175,9 +214,6 @@ type DescribeAlarmsResponse struct {
 }
 
 type DescribeAlarmsResult struct {
-    AlarmList []monitor.Alarm `json:"alarmList"`
-    PageNumber int `json:"pageNumber"`
-    NumberPages int `json:"numberPages"`
-    NumberRecords int `json:"numberRecords"`
-    PageSize int `json:"pageSize"`
+    AlarmList []monitor.DescribedAlarm `json:"alarmList"`
+    Total int64 `json:"total"`
 }

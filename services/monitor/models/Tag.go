@@ -17,11 +17,11 @@
 package models
 
 
-type CreateAlarmSpec struct {
+type Tag struct {
 
-    /* 幂等性校验参数,最长36位  */
-    ClientToken string `json:"clientToken"`
+    /*  (Optional) */
+    TagKey string `json:"tagKey"`
 
-    /*   */
-    CreateAlarmSpec *CreateAlarmSpec `json:"createAlarmSpec"`
+    /*  (Optional) */
+    TagValue string `json:"tagValue"`
 }

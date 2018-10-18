@@ -60,7 +60,7 @@ func NewDescribeIndexPerformanceRequest(
 	return &DescribeIndexPerformanceRequest{
         JDCloudRequest: core.JDCloudRequest{
 			URL:     "/regions/{regionId}/instances/{instanceId}/performance:describeIndexPerformance",
-			Method:  "POST",
+			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
@@ -90,7 +90,7 @@ func NewDescribeIndexPerformanceRequestWithAllParams(
     return &DescribeIndexPerformanceRequest{
         JDCloudRequest: core.JDCloudRequest{
             URL:     "/regions/{regionId}/instances/{instanceId}/performance:describeIndexPerformance",
-            Method:  "POST",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
@@ -109,7 +109,7 @@ func NewDescribeIndexPerformanceRequestWithoutParam() *DescribeIndexPerformanceR
     return &DescribeIndexPerformanceRequest{
             JDCloudRequest: core.JDCloudRequest{
             URL:     "/regions/{regionId}/instances/{instanceId}/performance:describeIndexPerformance",
-            Method:  "POST",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },

@@ -17,39 +17,39 @@
 package models
 
 
-type Alarm struct {
+type DescribedAlarm struct {
+
+    /* 计算单位 (Optional) */
+    CalculateUnit string `json:"calculateUnit"`
 
     /* 统计方法：平均值=avg、最大值=max、最小值=min (Optional) */
     Calculation string `json:"calculation"`
 
-    /*  (Optional) */
-    ContactGroups []string `json:"contactGroups"`
-
-    /*  (Optional) */
-    ContactPersons []string `json:"contactPersons"`
-
-    /*  (Optional) */
+    /* 创建时间 (Optional) */
     CreateTime string `json:"createTime"`
 
-    /* 启用禁用 1启用，0禁用 (Optional) */
+    /* 降采样方法 (Optional) */
+    DownSample string `json:"downSample"`
+
+    /* 是否启用 (Optional) */
     Enabled int64 `json:"enabled"`
 
-    /* 规则id (Optional) */
+    /* 报警规则ID (Optional) */
     Id string `json:"id"`
 
     /* 监控项 (Optional) */
     Metric string `json:"metric"`
 
-    /* 规则id监控项名称 (Optional) */
+    /* 监控项名称 (Optional) */
     MetricName string `json:"metricName"`
 
-    /* 通知周期 单位：小时 (Optional) */
+    /*  (Optional) */
+    NoticeLevel NoticeLevel `json:"noticeLevel"`
+
+    /* 告警周期 (Optional) */
     NoticePeriod int64 `json:"noticePeriod"`
 
-    /*  (Optional) */
-    NoticeTime string `json:"noticeTime"`
-
-    /* >=、>、<、<=、=、！= (Optional) */
+    /* gt, gte, lt, lte, eq, ne (Optional) */
     Operation string `json:"operation"`
 
     /* 统计周期（单位：分钟） (Optional) */
@@ -58,24 +58,21 @@ type Alarm struct {
     /* 地域信息 (Optional) */
     Region string `json:"region"`
 
-    /* 此规则所应用的资源id (Optional) */
+    /* 资源id (Optional) */
     ResourceId string `json:"resourceId"`
 
-    /* 报警规则对应的产品 (Optional) */
+    /* 产品线编码 (Optional) */
     ServiceCode string `json:"serviceCode"`
 
-    /* 监控项状态:1正常，2告警，4数据不足 (Optional) */
+    /* 监控项状态：1正常，2告警，4数据不足 (Optional) */
     Status int64 `json:"status"`
 
-    /* 监控项附属信息 (Optional) */
-    Tag string `json:"tag"`
+    /* 标签 (Optional) */
+    Tags interface{} `json:"tags"`
 
-    /* 阈值 (Optional) */
+    /* 告警阈值 (Optional) */
     Threshold float64 `json:"threshold"`
 
-    /* 连续多少次后报警 (Optional) */
+    /* 告警次数 (Optional) */
     Times int64 `json:"times"`
-
-    /* 报警值 (Optional) */
-    Value float64 `json:"value"`
 }

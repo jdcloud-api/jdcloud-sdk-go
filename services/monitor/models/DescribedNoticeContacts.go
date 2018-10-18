@@ -17,11 +17,11 @@
 package models
 
 
-type CreateAlarmSpec struct {
+type DescribedNoticeContacts struct {
 
-    /* 幂等性校验参数,最长36位  */
-    ClientToken string `json:"clientToken"`
+    /* 联系人ID (Optional) */
+    ReferenceId int64 `json:"referenceId"`
 
-    /*   */
-    CreateAlarmSpec *CreateAlarmSpec `json:"createAlarmSpec"`
+    /* 联系人类型。 0 - 联系人分组id， 1 - 联系人id (Optional) */
+    ReferenceType int64 `json:"referenceType"`
 }

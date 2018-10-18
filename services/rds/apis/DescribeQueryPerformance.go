@@ -60,7 +60,7 @@ func NewDescribeQueryPerformanceRequest(
 	return &DescribeQueryPerformanceRequest{
         JDCloudRequest: core.JDCloudRequest{
 			URL:     "/regions/{regionId}/instances/{instanceId}/performance:describeQueryPerformance",
-			Method:  "POST",
+			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
@@ -90,7 +90,7 @@ func NewDescribeQueryPerformanceRequestWithAllParams(
     return &DescribeQueryPerformanceRequest{
         JDCloudRequest: core.JDCloudRequest{
             URL:     "/regions/{regionId}/instances/{instanceId}/performance:describeQueryPerformance",
-            Method:  "POST",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
@@ -109,7 +109,7 @@ func NewDescribeQueryPerformanceRequestWithoutParam() *DescribeQueryPerformanceR
     return &DescribeQueryPerformanceRequest{
             JDCloudRequest: core.JDCloudRequest{
             URL:     "/regions/{regionId}/instances/{instanceId}/performance:describeQueryPerformance",
-            Method:  "POST",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },

@@ -21,15 +21,12 @@ import (
     monitor "github.com/jdcloud-api/jdcloud-sdk-go/services/monitor/models"
 )
 
-type DescribeMetricDataRequest struct {
+type BatchDescribeMetricDataRequest struct {
 
     core.JDCloudRequest
 
     /* 地域 Id  */
     RegionId string `json:"regionId"`
-
-    /* 监控项英文标识(id)  */
-    Metric string `json:"metric"`
 
     /* 资源的类型，取值vm, lb, ip, database 等  */
     ServiceCode string `json:"serviceCode"`
@@ -51,32 +48,32 @@ type DescribeMetricDataRequest struct {
 
     /* 是否对查询的tags分组 (Optional) */
     GroupBy *bool `json:"groupBy"`
+
+    /* 自定义标签 (Optional) */
+    Filters []monitor.Filter `json:"filters"`
 }
 
 /*
  * param regionId: 地域 Id (Required)
- * param metric: 监控项英文标识(id) (Required)
  * param serviceCode: 资源的类型，取值vm, lb, ip, database 等 (Required)
  * param resourceId: 资源的uuid (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeMetricDataRequest(
+func NewBatchDescribeMetricDataRequest(
     regionId string,
-    metric string,
     serviceCode string,
     resourceId string,
-) *DescribeMetricDataRequest {
+) *BatchDescribeMetricDataRequest {
 
-	return &DescribeMetricDataRequest{
+	return &BatchDescribeMetricDataRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/metrics/{metric}/metricData",
+			URL:     "/regions/{regionId}/metricsData",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        Metric: metric,
         ServiceCode: serviceCode,
         ResourceId: resourceId,
 	}
@@ -84,7 +81,6 @@ func NewDescribeMetricDataRequest(
 
 /*
  * param regionId: 地域 Id (Required)
- * param metric: 监控项英文标识(id) (Required)
  * param serviceCode: 资源的类型，取值vm, lb, ip, database 等 (Required)
  * param resourceId: 资源的uuid (Required)
  * param startTime: 查询时间范围的开始时间， UTC时间，格式：yyyy-MM-dd'T'HH:mm:ssZ（默认为当前时间，早于30d时，将被重置为30d） (Optional)
@@ -92,10 +88,10 @@ func NewDescribeMetricDataRequest(
  * param timeInterval: 时间间隔：1h，6h，12h，1d，3d，7d，14d，固定时间间隔，timeInterval 与 endTime 至少填一项 (Optional)
  * param tags: 自定义标签 (Optional)
  * param groupBy: 是否对查询的tags分组 (Optional)
+ * param filters: 自定义标签 (Optional)
  */
-func NewDescribeMetricDataRequestWithAllParams(
+func NewBatchDescribeMetricDataRequestWithAllParams(
     regionId string,
-    metric string,
     serviceCode string,
     resourceId string,
     startTime *string,
@@ -103,17 +99,17 @@ func NewDescribeMetricDataRequestWithAllParams(
     timeInterval *string,
     tags []monitor.TagFilter,
     groupBy *bool,
-) *DescribeMetricDataRequest {
+    filters []monitor.Filter,
+) *BatchDescribeMetricDataRequest {
 
-    return &DescribeMetricDataRequest{
+    return &BatchDescribeMetricDataRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/metrics/{metric}/metricData",
+            URL:     "/regions/{regionId}/metricsData",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        Metric: metric,
         ServiceCode: serviceCode,
         ResourceId: resourceId,
         StartTime: startTime,
@@ -121,15 +117,16 @@ func NewDescribeMetricDataRequestWithAllParams(
         TimeInterval: timeInterval,
         Tags: tags,
         GroupBy: groupBy,
+        Filters: filters,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeMetricDataRequestWithoutParam() *DescribeMetricDataRequest {
+func NewBatchDescribeMetricDataRequestWithoutParam() *BatchDescribeMetricDataRequest {
 
-    return &DescribeMetricDataRequest{
+    return &BatchDescribeMetricDataRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/metrics/{metric}/metricData",
+            URL:     "/regions/{regionId}/metricsData",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -138,62 +135,62 @@ func NewDescribeMetricDataRequestWithoutParam() *DescribeMetricDataRequest {
 }
 
 /* param regionId: 地域 Id(Required) */
-func (r *DescribeMetricDataRequest) SetRegionId(regionId string) {
+func (r *BatchDescribeMetricDataRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param metric: 监控项英文标识(id)(Required) */
-func (r *DescribeMetricDataRequest) SetMetric(metric string) {
-    r.Metric = metric
-}
-
 /* param serviceCode: 资源的类型，取值vm, lb, ip, database 等(Required) */
-func (r *DescribeMetricDataRequest) SetServiceCode(serviceCode string) {
+func (r *BatchDescribeMetricDataRequest) SetServiceCode(serviceCode string) {
     r.ServiceCode = serviceCode
 }
 
 /* param resourceId: 资源的uuid(Required) */
-func (r *DescribeMetricDataRequest) SetResourceId(resourceId string) {
+func (r *BatchDescribeMetricDataRequest) SetResourceId(resourceId string) {
     r.ResourceId = resourceId
 }
 
 /* param startTime: 查询时间范围的开始时间， UTC时间，格式：yyyy-MM-dd'T'HH:mm:ssZ（默认为当前时间，早于30d时，将被重置为30d）(Optional) */
-func (r *DescribeMetricDataRequest) SetStartTime(startTime string) {
+func (r *BatchDescribeMetricDataRequest) SetStartTime(startTime string) {
     r.StartTime = &startTime
 }
 
 /* param endTime: 查询时间范围的结束时间， UTC时间，格式：2016-12- yyyy-MM-dd'T'HH:mm:ssZ（为空时，将由startTime与timeInterval计算得出）(Optional) */
-func (r *DescribeMetricDataRequest) SetEndTime(endTime string) {
+func (r *BatchDescribeMetricDataRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
 
 /* param timeInterval: 时间间隔：1h，6h，12h，1d，3d，7d，14d，固定时间间隔，timeInterval 与 endTime 至少填一项(Optional) */
-func (r *DescribeMetricDataRequest) SetTimeInterval(timeInterval string) {
+func (r *BatchDescribeMetricDataRequest) SetTimeInterval(timeInterval string) {
     r.TimeInterval = &timeInterval
 }
 
 /* param tags: 自定义标签(Optional) */
-func (r *DescribeMetricDataRequest) SetTags(tags []monitor.TagFilter) {
+func (r *BatchDescribeMetricDataRequest) SetTags(tags []monitor.TagFilter) {
     r.Tags = tags
 }
 
 /* param groupBy: 是否对查询的tags分组(Optional) */
-func (r *DescribeMetricDataRequest) SetGroupBy(groupBy bool) {
+func (r *BatchDescribeMetricDataRequest) SetGroupBy(groupBy bool) {
     r.GroupBy = &groupBy
+}
+
+/* param filters: 自定义标签(Optional) */
+func (r *BatchDescribeMetricDataRequest) SetFilters(filters []monitor.Filter) {
+    r.Filters = filters
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeMetricDataRequest) GetRegionId() string {
+func (r BatchDescribeMetricDataRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeMetricDataResponse struct {
+type BatchDescribeMetricDataResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeMetricDataResult `json:"result"`
+    Result BatchDescribeMetricDataResult `json:"result"`
 }
 
-type DescribeMetricDataResult struct {
+type BatchDescribeMetricDataResult struct {
     MetricDatas []monitor.MetricData `json:"metricDatas"`
 }

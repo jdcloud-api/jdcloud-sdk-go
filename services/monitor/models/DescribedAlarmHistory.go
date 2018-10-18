@@ -17,11 +17,20 @@
 package models
 
 
-type CreateAlarmSpec struct {
+type DescribedAlarmHistory struct {
 
-    /* 幂等性校验参数,最长36位  */
-    ClientToken string `json:"clientToken"`
+    /*  (Optional) */
+    Alarm DescribedAlarm `json:"alarm"`
 
-    /*   */
-    CreateAlarmSpec *CreateAlarmSpec `json:"createAlarmSpec"`
+    /* 告警联系人 (Optional) */
+    Contacts []DescribedNoticeContacts `json:"contacts"`
+
+    /* 触发的告警级别。从低到高分别为‘common’, ‘critical’, ‘fatal’ (Optional) */
+    NoticeLevelTriggered string `json:"noticeLevelTriggered"`
+
+    /* 告警时间 (Optional) */
+    NoticeTime string `json:"noticeTime"`
+
+    /* 告警值 (Optional) */
+    Value float64 `json:"value"`
 }

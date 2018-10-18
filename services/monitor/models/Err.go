@@ -17,11 +17,17 @@
 package models
 
 
-type CreateAlarmSpec struct {
+type Err struct {
 
-    /* 幂等性校验参数,最长36位  */
-    ClientToken string `json:"clientToken"`
+    /*  (Optional) */
+    Code int64 `json:"code"`
 
-    /*   */
-    CreateAlarmSpec *CreateAlarmSpec `json:"createAlarmSpec"`
+    /*  (Optional) */
+    Details interface{} `json:"details"`
+
+    /*  (Optional) */
+    Message string `json:"message"`
+
+    /*  (Optional) */
+    Status string `json:"status"`
 }

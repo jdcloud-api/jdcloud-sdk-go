@@ -18,79 +18,69 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    monitor "github.com/jdcloud-api/jdcloud-sdk-go/services/monitor/models"
 )
 
-type CreateAlarmRequest struct {
+type BatchDisableAlarmsRequest struct {
 
     core.JDCloudRequest
 
     /* 地域 Id  */
     RegionId string `json:"regionId"`
 
-    /* 幂等性校验参数,最长36位  */
-    ClientToken string `json:"clientToken"`
-
-    /*   */
-    CreateAlarmSpec *monitor.CreateAlarmSpec `json:"createAlarmSpec"`
+    /* 告警规则的ID列表  */
+    Ids []string `json:"ids"`
 }
 
 /*
  * param regionId: 地域 Id (Required)
- * param clientToken: 幂等性校验参数,最长36位 (Required)
- * param createAlarmSpec:  (Required)
+ * param ids: 告警规则的ID列表 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewCreateAlarmRequest(
+func NewBatchDisableAlarmsRequest(
     regionId string,
-    clientToken string,
-    createAlarmSpec *monitor.CreateAlarmSpec,
-) *CreateAlarmRequest {
+    ids []string,
+) *BatchDisableAlarmsRequest {
 
-	return &CreateAlarmRequest{
+	return &BatchDisableAlarmsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/alarms",
+			URL:     "/regions/{regionId}/alarms:disable",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        ClientToken: clientToken,
-        CreateAlarmSpec: createAlarmSpec,
+        Ids: ids,
 	}
 }
 
 /*
  * param regionId: 地域 Id (Required)
- * param clientToken: 幂等性校验参数,最长36位 (Required)
- * param createAlarmSpec:  (Required)
+ * param ids: 告警规则的ID列表 (Required)
  */
-func NewCreateAlarmRequestWithAllParams(
+func NewBatchDisableAlarmsRequestWithAllParams(
     regionId string,
-    clientToken string,
-    createAlarmSpec *monitor.CreateAlarmSpec,
-) *CreateAlarmRequest {
+    ids []string,
+) *BatchDisableAlarmsRequest {
 
-    return &CreateAlarmRequest{
+    return &BatchDisableAlarmsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/alarms",
+            URL:     "/regions/{regionId}/alarms:disable",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        ClientToken: clientToken,
-        CreateAlarmSpec: createAlarmSpec,
+        Ids: ids,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewCreateAlarmRequestWithoutParam() *CreateAlarmRequest {
+func NewBatchDisableAlarmsRequestWithoutParam() *BatchDisableAlarmsRequest {
 
-    return &CreateAlarmRequest{
+    return &BatchDisableAlarmsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/alarms",
+            URL:     "/regions/{regionId}/alarms:disable",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -99,32 +89,26 @@ func NewCreateAlarmRequestWithoutParam() *CreateAlarmRequest {
 }
 
 /* param regionId: 地域 Id(Required) */
-func (r *CreateAlarmRequest) SetRegionId(regionId string) {
+func (r *BatchDisableAlarmsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param clientToken: 幂等性校验参数,最长36位(Required) */
-func (r *CreateAlarmRequest) SetClientToken(clientToken string) {
-    r.ClientToken = clientToken
-}
-
-/* param createAlarmSpec: (Required) */
-func (r *CreateAlarmRequest) SetCreateAlarmSpec(createAlarmSpec *monitor.CreateAlarmSpec) {
-    r.CreateAlarmSpec = createAlarmSpec
+/* param ids: 告警规则的ID列表(Required) */
+func (r *BatchDisableAlarmsRequest) SetIds(ids []string) {
+    r.Ids = ids
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r CreateAlarmRequest) GetRegionId() string {
+func (r BatchDisableAlarmsRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type CreateAlarmResponse struct {
+type BatchDisableAlarmsResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result CreateAlarmResult `json:"result"`
+    Result BatchDisableAlarmsResult `json:"result"`
 }
 
-type CreateAlarmResult struct {
-    AlarmIdList []string `json:"alarmIdList"`
+type BatchDisableAlarmsResult struct {
 }

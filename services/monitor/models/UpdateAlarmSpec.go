@@ -17,11 +17,23 @@
 package models
 
 
-type CreateAlarmSpec struct {
+type UpdateAlarmSpec struct {
 
-    /* 幂等性校验参数,最长36位  */
-    ClientToken string `json:"clientToken"`
+    /* 通知联系人 (Optional) */
+    Contacts []BaseContact `json:"contacts"`
 
     /*   */
-    CreateAlarmSpec *CreateAlarmSpec `json:"createAlarmSpec"`
+    Rule BaseRule `json:"rule"`
+
+    /* 回调content 注：仅webHookUrl和webHookContent均不为空时，才会创建webHook (Optional) */
+    WebHookContent string `json:"webHookContent"`
+
+    /* webHook协议 (Optional) */
+    WebHookProtocol string `json:"webHookProtocol"`
+
+    /* 回调secret，用户请求签名，防伪造 (Optional) */
+    WebHookSecret string `json:"webHookSecret"`
+
+    /* 回调url (Optional) */
+    WebHookUrl string `json:"webHookUrl"`
 }

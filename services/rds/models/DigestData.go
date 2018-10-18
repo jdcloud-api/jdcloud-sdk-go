@@ -17,11 +17,20 @@
 package models
 
 
-type CreateAlarmSpec struct {
+type DigestData struct {
 
-    /* 幂等性校验参数,最长36位  */
-    ClientToken string `json:"clientToken"`
+    /* 表示执行结果中95% 数据小于或等于此数值 (Optional) */
+    Pct95 float32 `json:"pct95"`
 
-    /*   */
-    CreateAlarmSpec *CreateAlarmSpec `json:"createAlarmSpec"`
+    /* 执行结果的最大值 (Optional) */
+    Max float32 `json:"max"`
+
+    /* 执行结果的平均值 (Optional) */
+    Avg float32 `json:"avg"`
+
+    /* 执行结果的最小值 (Optional) */
+    Min float32 `json:"min"`
+
+    /* 执行结果的合计值 (Optional) */
+    Total float64 `json:"total"`
 }
