@@ -33,8 +33,10 @@ type DescribeContainerRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param containerId: Container ID 
+ * param regionId: Region ID (Required)
+ * param containerId: Container ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeContainerRequest(
     regionId string,
@@ -53,10 +55,46 @@ func NewDescribeContainerRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param containerId: Container ID (Required)
+ */
+func NewDescribeContainerRequestWithAllParams(
+    regionId string,
+    containerId string,
+) *DescribeContainerRequest {
+
+    return &DescribeContainerRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/containers/{containerId}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        ContainerId: containerId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeContainerRequestWithoutParam() *DescribeContainerRequest {
+
+    return &DescribeContainerRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/containers/{containerId}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DescribeContainerRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param containerId: Container ID(Required) */
 func (r *DescribeContainerRequest) SetContainerId(containerId string) {
     r.ContainerId = containerId
 }

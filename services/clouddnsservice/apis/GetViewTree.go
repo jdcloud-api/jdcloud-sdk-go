@@ -28,13 +28,13 @@ type GetViewTreeRequest struct {
     /* 实例所属的地域ID  */
     RegionId string `json:"regionId"`
 
-    /* 域名ID  */
+    /* 域名ID，请使用getDomains接口获取。  */
     DomainId string `json:"domainId"`
 
-    /* 展示方式 (Optional) */
+    /* 展示方式，暂时不使用 (Optional) */
     LoadMode *int `json:"loadMode"`
 
-    /* 套餐ID  */
+    /* 套餐ID，0->免费版 1->企业版 2->企业高级版  */
     PackId int `json:"packId"`
 
     /* view ID，默认为0  */
@@ -43,8 +43,8 @@ type GetViewTreeRequest struct {
 
 /*
  * param regionId: 实例所属的地域ID (Required)
- * param domainId: 域名ID (Required)
- * param packId: 套餐ID (Required)
+ * param domainId: 域名ID，请使用getDomains接口获取。 (Required)
+ * param packId: 套餐ID，0->免费版 1->企业版 2->企业高级版 (Required)
  * param viewId: view ID，默认为0 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -72,9 +72,9 @@ func NewGetViewTreeRequest(
 
 /*
  * param regionId: 实例所属的地域ID (Required)
- * param domainId: 域名ID (Required)
- * param loadMode: 展示方式 (Optional)
- * param packId: 套餐ID (Required)
+ * param domainId: 域名ID，请使用getDomains接口获取。 (Required)
+ * param loadMode: 展示方式，暂时不使用 (Optional)
+ * param packId: 套餐ID，0->免费版 1->企业版 2->企业高级版 (Required)
  * param viewId: view ID，默认为0 (Required)
  */
 func NewGetViewTreeRequestWithAllParams(
@@ -118,17 +118,17 @@ func (r *GetViewTreeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param domainId: 域名ID(Required) */
+/* param domainId: 域名ID，请使用getDomains接口获取。(Required) */
 func (r *GetViewTreeRequest) SetDomainId(domainId string) {
     r.DomainId = domainId
 }
 
-/* param loadMode: 展示方式(Optional) */
+/* param loadMode: 展示方式，暂时不使用(Optional) */
 func (r *GetViewTreeRequest) SetLoadMode(loadMode int) {
     r.LoadMode = &loadMode
 }
 
-/* param packId: 套餐ID(Required) */
+/* param packId: 套餐ID，0->免费版 1->企业版 2->企业高级版(Required) */
 func (r *GetViewTreeRequest) SetPackId(packId int) {
     r.PackId = packId
 }

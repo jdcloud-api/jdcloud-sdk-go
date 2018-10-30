@@ -41,11 +41,9 @@ type DescribeSecretsRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param pageNumber: 页码；默认为1 (Optional)
- * param pageSize: 分页大小；默认为20；取值范围[10, 100] (Optional)
- * param filters: name - secret名称，支持模糊搜索
- (Optional)
+ * param regionId: Region ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeSecretsRequest(
     regionId string,
@@ -62,18 +60,64 @@ func NewDescribeSecretsRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param pageNumber: 页码；默认为1 (Optional)
+ * param pageSize: 分页大小；默认为20；取值范围[10, 100] (Optional)
+ * param filters: name - secret名称，支持模糊搜索
+ (Optional)
+ */
+func NewDescribeSecretsRequestWithAllParams(
+    regionId string,
+    pageNumber *int,
+    pageSize *int,
+    filters []common.Filter,
+) *DescribeSecretsRequest {
+
+    return &DescribeSecretsRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/secrets",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        PageNumber: pageNumber,
+        PageSize: pageSize,
+        Filters: filters,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeSecretsRequestWithoutParam() *DescribeSecretsRequest {
+
+    return &DescribeSecretsRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/secrets",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DescribeSecretsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param pageNumber: 页码；默认为1(Optional) */
 func (r *DescribeSecretsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
+/* param pageSize: 分页大小；默认为20；取值范围[10, 100](Optional) */
 func (r *DescribeSecretsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
+/* param filters: name - secret名称，支持模糊搜索
+(Optional) */
 func (r *DescribeSecretsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }

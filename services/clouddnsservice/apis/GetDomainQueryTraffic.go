@@ -27,7 +27,7 @@ type GetDomainQueryTrafficRequest struct {
     /* 实例所属的地域ID  */
     RegionId string `json:"regionId"`
 
-    /* 域名ID  */
+    /* 域名ID，请使用getDomains接口获取。  */
     DomainId string `json:"domainId"`
 
     /* 域名  */
@@ -42,7 +42,7 @@ type GetDomainQueryTrafficRequest struct {
 
 /*
  * param regionId: 实例所属的地域ID (Required)
- * param domainId: 域名ID (Required)
+ * param domainId: 域名ID，请使用getDomains接口获取。 (Required)
  * param domainName: 域名 (Required)
  * param start: 起始时间, UTC时间例如2017-11-10T23:00:00Z (Required)
  * param end: 终止时间, UTC时间例如2017-11-10T23:00:00Z (Required)
@@ -74,7 +74,7 @@ func NewGetDomainQueryTrafficRequest(
 
 /*
  * param regionId: 实例所属的地域ID (Required)
- * param domainId: 域名ID (Required)
+ * param domainId: 域名ID，请使用getDomains接口获取。 (Required)
  * param domainName: 域名 (Required)
  * param start: 起始时间, UTC时间例如2017-11-10T23:00:00Z (Required)
  * param end: 终止时间, UTC时间例如2017-11-10T23:00:00Z (Required)
@@ -120,7 +120,7 @@ func (r *GetDomainQueryTrafficRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param domainId: 域名ID(Required) */
+/* param domainId: 域名ID，请使用getDomains接口获取。(Required) */
 func (r *GetDomainQueryTrafficRequest) SetDomainId(domainId string) {
     r.DomainId = domainId
 }

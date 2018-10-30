@@ -37,7 +37,7 @@ type ImageDetail struct {
     /* image在repository中的大小。从Docker 1.9之后的版本, Docker client会压缩镜像层数据再push到V2版本的Docker registry。
 docker image命令显示的是解压后的镜像大小，因此会比DescribeImages接口返回的镜像大小会大很多。      
  (Optional) */
-    ImageSizeMB int `json:"imageSizeMB"`
+    ImageSizeMB float64 `json:"imageSizeMB"`
 
     /* 镜像关联的所有Tag (Optional) */
     ImageTags []string `json:"imageTags"`

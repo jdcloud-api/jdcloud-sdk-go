@@ -18,7 +18,6 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    cr "github.com/jdcloud-api/jdcloud-sdk-go/services/cr/models"
 )
 
 type GetAuthorizationTokenRequest struct {
@@ -126,5 +125,7 @@ type GetAuthorizationTokenResponse struct {
 }
 
 type GetAuthorizationTokenResult struct {
-    AuthorizationData cr.AuthorizationData `json:"authorizationData"`
+    AuthorizationToken string `json:"authorizationToken"`
+    LoginCmdLine string `json:"loginCmdLine"`
+    ExpiresAt string `json:"expiresAt"`
 }

@@ -36,9 +36,9 @@ type CreateContainersRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param containerSpec: 创建容器规格 (Optional)
- * param maxCount: 购买实例数量；取值范围：[1,100] (Optional)
+ * param regionId: Region ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateContainersRequest(
     regionId string,
@@ -55,14 +55,54 @@ func NewCreateContainersRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param containerSpec: 创建容器规格 (Optional)
+ * param maxCount: 购买实例数量；取值范围：[1,100] (Optional)
+ */
+func NewCreateContainersRequestWithAllParams(
+    regionId string,
+    containerSpec *nc.ContainerSpec,
+    maxCount *int,
+) *CreateContainersRequest {
+
+    return &CreateContainersRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/containers",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        ContainerSpec: containerSpec,
+        MaxCount: maxCount,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewCreateContainersRequestWithoutParam() *CreateContainersRequest {
+
+    return &CreateContainersRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/containers",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *CreateContainersRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param containerSpec: 创建容器规格(Optional) */
 func (r *CreateContainersRequest) SetContainerSpec(containerSpec *nc.ContainerSpec) {
     r.ContainerSpec = containerSpec
 }
 
+/* param maxCount: 购买实例数量；取值范围：[1,100](Optional) */
 func (r *CreateContainersRequest) SetMaxCount(maxCount int) {
     r.MaxCount = &maxCount
 }

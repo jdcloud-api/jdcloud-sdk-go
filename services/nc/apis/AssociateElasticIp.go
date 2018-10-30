@@ -35,9 +35,11 @@ type AssociateElasticIpRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param containerId: Container ID 
- * param elasticIpId: 弹性IP ID 
+ * param regionId: Region ID (Required)
+ * param containerId: Container ID (Required)
+ * param elasticIpId: 弹性IP ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewAssociateElasticIpRequest(
     regionId string,
@@ -58,14 +60,54 @@ func NewAssociateElasticIpRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param containerId: Container ID (Required)
+ * param elasticIpId: 弹性IP ID (Required)
+ */
+func NewAssociateElasticIpRequestWithAllParams(
+    regionId string,
+    containerId string,
+    elasticIpId string,
+) *AssociateElasticIpRequest {
+
+    return &AssociateElasticIpRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/containers/{containerId}:associateElasticIp",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        ContainerId: containerId,
+        ElasticIpId: elasticIpId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewAssociateElasticIpRequestWithoutParam() *AssociateElasticIpRequest {
+
+    return &AssociateElasticIpRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/containers/{containerId}:associateElasticIp",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *AssociateElasticIpRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param containerId: Container ID(Required) */
 func (r *AssociateElasticIpRequest) SetContainerId(containerId string) {
     r.ContainerId = containerId
 }
 
+/* param elasticIpId: 弹性IP ID(Required) */
 func (r *AssociateElasticIpRequest) SetElasticIpId(elasticIpId string) {
     r.ElasticIpId = elasticIpId
 }

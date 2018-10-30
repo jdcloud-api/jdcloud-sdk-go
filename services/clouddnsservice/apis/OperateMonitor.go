@@ -27,7 +27,7 @@ type OperateMonitorRequest struct {
     /* 实例所属的地域ID  */
     RegionId string `json:"regionId"`
 
-    /* 域名ID  */
+    /* 域名ID，请使用getDomains接口获取。  */
     DomainId string `json:"domainId"`
 
     /* 删除del, 暂停stop, 开启start, 手动恢复recover，手动切换switch  */
@@ -42,7 +42,7 @@ type OperateMonitorRequest struct {
 
 /*
  * param regionId: 实例所属的地域ID (Required)
- * param domainId: 域名ID (Required)
+ * param domainId: 域名ID，请使用getDomains接口获取。 (Required)
  * param action: 删除del, 暂停stop, 开启start, 手动恢复recover，手动切换switch (Required)
  * param ids: 监控项ID (Required)
  *
@@ -71,7 +71,7 @@ func NewOperateMonitorRequest(
 
 /*
  * param regionId: 实例所属的地域ID (Required)
- * param domainId: 域名ID (Required)
+ * param domainId: 域名ID，请使用getDomains接口获取。 (Required)
  * param action: 删除del, 暂停stop, 开启start, 手动恢复recover，手动切换switch (Required)
  * param ids: 监控项ID (Required)
  * param switchTarget: 监控项的主机值, 手动切换时必填 (Optional)
@@ -117,7 +117,7 @@ func (r *OperateMonitorRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param domainId: 域名ID(Required) */
+/* param domainId: 域名ID，请使用getDomains接口获取。(Required) */
 func (r *OperateMonitorRequest) SetDomainId(domainId string) {
     r.DomainId = domainId
 }

@@ -32,8 +32,10 @@ type DeleteContainerRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param containerId: Container ID 
+ * param regionId: Region ID (Required)
+ * param containerId: Container ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDeleteContainerRequest(
     regionId string,
@@ -52,10 +54,46 @@ func NewDeleteContainerRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param containerId: Container ID (Required)
+ */
+func NewDeleteContainerRequestWithAllParams(
+    regionId string,
+    containerId string,
+) *DeleteContainerRequest {
+
+    return &DeleteContainerRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/containers/{containerId}",
+            Method:  "DELETE",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        ContainerId: containerId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDeleteContainerRequestWithoutParam() *DeleteContainerRequest {
+
+    return &DeleteContainerRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/containers/{containerId}",
+            Method:  "DELETE",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DeleteContainerRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param containerId: Container ID(Required) */
 func (r *DeleteContainerRequest) SetContainerId(containerId string) {
     r.ContainerId = containerId
 }

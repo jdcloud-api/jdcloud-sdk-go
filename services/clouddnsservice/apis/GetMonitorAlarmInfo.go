@@ -28,7 +28,7 @@ type GetMonitorAlarmInfoRequest struct {
     /* 实例所属的地域ID  */
     RegionId string `json:"regionId"`
 
-    /* 域名ID  */
+    /* 域名ID，请使用getDomains接口获取。  */
     DomainId string `json:"domainId"`
 
     /* 当前页数，起始值为1，默认为1 (Optional) */
@@ -43,7 +43,7 @@ type GetMonitorAlarmInfoRequest struct {
 
 /*
  * param regionId: 实例所属的地域ID (Required)
- * param domainId: 域名ID (Required)
+ * param domainId: 域名ID，请使用getDomains接口获取。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -66,7 +66,7 @@ func NewGetMonitorAlarmInfoRequest(
 
 /*
  * param regionId: 实例所属的地域ID (Required)
- * param domainId: 域名ID (Required)
+ * param domainId: 域名ID，请使用getDomains接口获取。 (Required)
  * param pageIndex: 当前页数，起始值为1，默认为1 (Optional)
  * param pageSize: 分页查询时设置的每页行数 (Optional)
  * param searchValue: 关键字 (Optional)
@@ -112,7 +112,7 @@ func (r *GetMonitorAlarmInfoRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param domainId: 域名ID(Required) */
+/* param domainId: 域名ID，请使用getDomains接口获取。(Required) */
 func (r *GetMonitorAlarmInfoRequest) SetDomainId(domainId string) {
     r.DomainId = domainId
 }

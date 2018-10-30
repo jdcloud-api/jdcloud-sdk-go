@@ -19,6 +19,9 @@ package models
 
 type Quota struct {
 
+    /* 类型 (Optional) */
+    ResourceType string `json:"resourceType"`
+
     /* 配额 (Optional) */
     Limit int `json:"limit"`
 

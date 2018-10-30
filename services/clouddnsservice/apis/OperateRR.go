@@ -27,7 +27,7 @@ type OperateRRRequest struct {
     /* 实例所属的地域ID  */
     RegionId string `json:"regionId"`
 
-    /* 域名ID  */
+    /* 域名ID，请使用getDomains接口获取。  */
     DomainId string `json:"domainId"`
 
     /* 需要操作的解析记录ID  */
@@ -39,7 +39,7 @@ type OperateRRRequest struct {
 
 /*
  * param regionId: 实例所属的地域ID (Required)
- * param domainId: 域名ID (Required)
+ * param domainId: 域名ID，请使用getDomains接口获取。 (Required)
  * param ids: 需要操作的解析记录ID (Required)
  * param action: 操作类型，on->启用 off->停用 del->删除 (Required)
  *
@@ -68,7 +68,7 @@ func NewOperateRRRequest(
 
 /*
  * param regionId: 实例所属的地域ID (Required)
- * param domainId: 域名ID (Required)
+ * param domainId: 域名ID，请使用getDomains接口获取。 (Required)
  * param ids: 需要操作的解析记录ID (Required)
  * param action: 操作类型，on->启用 off->停用 del->删除 (Required)
  */
@@ -111,7 +111,7 @@ func (r *OperateRRRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param domainId: 域名ID(Required) */
+/* param domainId: 域名ID，请使用getDomains接口获取。(Required) */
 func (r *OperateRRRequest) SetDomainId(domainId string) {
     r.DomainId = domainId
 }

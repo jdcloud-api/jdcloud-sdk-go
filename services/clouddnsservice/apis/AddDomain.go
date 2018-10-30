@@ -37,7 +37,7 @@ type AddDomainRequest struct {
     /* 域名ID，升级高级版必填 (Optional) */
     DomainId *int `json:"domainId"`
 
-    /* 1->新购买、2->升级，收费套餐的域名必填 (Optional) */
+    /* 1->新购买、3->升级，收费套餐的域名必填 (Optional) */
     BuyType *int `json:"buyType"`
 
     /* 1，2，3 ，时长，收费套餐的域名必填 (Optional) */
@@ -81,7 +81,7 @@ func NewAddDomainRequest(
  * param packId: 域名的套餐类型, 0->免费 ,1->企业版, 2->高级版 (Required)
  * param domainName: 要添加的域名 (Required)
  * param domainId: 域名ID，升级高级版必填 (Optional)
- * param buyType: 1->新购买、2->升级，收费套餐的域名必填 (Optional)
+ * param buyType: 1->新购买、3->升级，收费套餐的域名必填 (Optional)
  * param timeSpan: 1，2，3 ，时长，收费套餐的域名必填 (Optional)
  * param timeUnit: 时间单位，收费套餐的域名必填 (Optional)
  * param billingType: 计费类型，收费套餐的域名必填 (Optional)
@@ -148,7 +148,7 @@ func (r *AddDomainRequest) SetDomainId(domainId int) {
     r.DomainId = &domainId
 }
 
-/* param buyType: 1->新购买、2->升级，收费套餐的域名必填(Optional) */
+/* param buyType: 1->新购买、3->升级，收费套餐的域名必填(Optional) */
 func (r *AddDomainRequest) SetBuyType(buyType int) {
     r.BuyType = &buyType
 }
