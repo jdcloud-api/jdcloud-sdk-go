@@ -40,7 +40,7 @@ func NewCrClient(credential *core.Credential) *CrClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "cr",
-            Revision:    "0.1.1",
+            Revision:    "0.2.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -53,9 +53,13 @@ func (c *CrClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-/* 查询指定注册表名称是否已经存在以及是否符合命名规范。
+/* 删除镜像
+imageDigest imageTag imageTagStatus 三者只能且必须传一个。
+可根据Tag状态删除Image，例如删除所有tagged的镜像。
+digest和tag唯一表征单个镜像，其中imageDigest为sha256哈希，image manifest的digest。
+例如 sha256:examplee6d1e504117a17000003d3753086354a38375961f2e665416ef4b1b2f；image使用的tag, 如  "precise" 
  */
-func (c *CrClient) CheckRegistryName(request *cr.CheckRegistryNameRequest) (*cr.CheckRegistryNameResponse, error) {
+func (c *CrClient) DeleteImage(request *cr.DeleteImageRequest) (*cr.DeleteImageResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -64,7 +68,7 @@ func (c *CrClient) CheckRegistryName(request *cr.CheckRegistryNameRequest) (*cr.
         return nil, err
     }
 
-    jdResp := &cr.CheckRegistryNameResponse{}
+    jdResp := &cr.DeleteImageResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -73,11 +77,10 @@ func (c *CrClient) CheckRegistryName(request *cr.CheckRegistryNameRequest) (*cr.
     return jdResp, err
 }
 
-/* <p>申请12小时有效期的令牌。 使用<code>docker</code> CLI push和pull镜像。</p>
-<p><code>authorizationToken</code>为每个registry返回一个base64编码的字符串，解码后<code>docker login</code>命令
-可完成指定registry的鉴权。JCR CLI提供<code>jcr get-login</code>进行认证处理。</p>
+/* 批量查询指定用户下所有 registry 详情。
+暂不支持 filter.
  */
-func (c *CrClient) GetAuthorizationToken(request *cr.GetAuthorizationTokenRequest) (*cr.GetAuthorizationTokenResponse, error) {
+func (c *CrClient) DescribeRegistries(request *cr.DescribeRegistriesRequest) (*cr.DescribeRegistriesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -86,27 +89,7 @@ func (c *CrClient) GetAuthorizationToken(request *cr.GetAuthorizationTokenReques
         return nil, err
     }
 
-    jdResp := &cr.GetAuthorizationTokenResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 返回指定repository中images的元数据，包括image size, image tags和creation date。
- */
-func (c *CrClient) DescribeImages(request *cr.DescribeImagesRequest) (*cr.DescribeImagesResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &cr.DescribeImagesResponse{}
+    jdResp := &cr.DescribeRegistriesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -127,6 +110,86 @@ func (c *CrClient) CreateRegistry(request *cr.CreateRegistryRequest) (*cr.Create
     }
 
     jdResp := &cr.CreateRegistryResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除指定用户下某个镜像仓库.
+ */
+func (c *CrClient) DeleteRepository(request *cr.DeleteRepositoryRequest) (*cr.DeleteRepositoryResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cr.DeleteRepositoryResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 描述用户指定 registry 下的 repository.
+ */
+func (c *CrClient) DescribeRepositories(request *cr.DescribeRepositoriesRequest) (*cr.DescribeRepositoriesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cr.DescribeRepositoriesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询指定镜像仓库名称是否已经存在以及是否符合命名规范。
+ */
+func (c *CrClient) CheckRepositoryName(request *cr.CheckRepositoryNameRequest) (*cr.CheckRepositoryNameResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cr.CheckRepositoryNameResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 释放用户 registry 的 token。
+ */
+func (c *CrClient) ReleaseAuthorizationToken(request *cr.ReleaseAuthorizationTokenRequest) (*cr.ReleaseAuthorizationTokenResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cr.ReleaseAuthorizationTokenResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -168,6 +231,129 @@ func (c *CrClient) CreateRepository(request *cr.CreateRepositoryRequest) (*cr.Cr
     }
 
     jdResp := &cr.CreateRepositoryResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* <p>申请12小时有效期的令牌。 使用<code>docker</code> CLI push和pull镜像。</p>
+<p><code>authorizationToken</code>为每个registry返回一个base64编码的字符串，解码后<code>docker login</code>命令
+可完成指定registry的鉴权。JCR CLI提供<code>jcr get-login</code>进行认证处理。</p>
+ */
+func (c *CrClient) GetAuthorizationToken(request *cr.GetAuthorizationTokenRequest) (*cr.GetAuthorizationTokenResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cr.GetAuthorizationTokenResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询指定注册表名称是否已经存在以及是否符合命名规范。
+ */
+func (c *CrClient) CheckRegistryName(request *cr.CheckRegistryNameRequest) (*cr.CheckRegistryNameResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cr.CheckRegistryNameResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* <p>批量查询令牌。</p> 
+<p>暂时不支持分页和过滤条件。</p>
+ */
+func (c *CrClient) DescribeAuthorizationTokens(request *cr.DescribeAuthorizationTokensRequest) (*cr.DescribeAuthorizationTokensResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cr.DescribeAuthorizationTokensResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 返回指定repository中images的元数据，包括image size, image tags和creation date。
+ */
+func (c *CrClient) DescribeImages(request *cr.DescribeImagesRequest) (*cr.DescribeImagesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cr.DescribeImagesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询指定用户下某个 registry 详情。
+ */
+func (c *CrClient) DescribeRegistry(request *cr.DescribeRegistryRequest) (*cr.DescribeRegistryResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cr.DescribeRegistryResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除指定用户下某个 registry.
+ */
+func (c *CrClient) DeleteRegistry(request *cr.DeleteRegistryRequest) (*cr.DeleteRegistryResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cr.DeleteRegistryResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err

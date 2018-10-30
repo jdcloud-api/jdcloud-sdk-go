@@ -28,7 +28,7 @@ type UpdateMonitorRequest struct {
     /* 实例所属的地域ID  */
     RegionId string `json:"regionId"`
 
-    /* 域名ID  */
+    /* 域名ID，请使用getDomains接口获取。  */
     DomainId string `json:"domainId"`
 
     /* 监控项设置信息  */
@@ -37,7 +37,7 @@ type UpdateMonitorRequest struct {
 
 /*
  * param regionId: 实例所属的地域ID (Required)
- * param domainId: 域名ID (Required)
+ * param domainId: 域名ID，请使用getDomains接口获取。 (Required)
  * param updateMonitor: 监控项设置信息 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -63,7 +63,7 @@ func NewUpdateMonitorRequest(
 
 /*
  * param regionId: 实例所属的地域ID (Required)
- * param domainId: 域名ID (Required)
+ * param domainId: 域名ID，请使用getDomains接口获取。 (Required)
  * param updateMonitor: 监控项设置信息 (Required)
  */
 func NewUpdateMonitorRequestWithAllParams(
@@ -103,7 +103,7 @@ func (r *UpdateMonitorRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param domainId: 域名ID(Required) */
+/* param domainId: 域名ID，请使用getDomains接口获取。(Required) */
 func (r *UpdateMonitorRequest) SetDomainId(domainId string) {
     r.DomainId = domainId
 }

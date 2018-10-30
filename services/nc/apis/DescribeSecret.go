@@ -33,8 +33,10 @@ type DescribeSecretRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param name: Secret Name 
+ * param regionId: Region ID (Required)
+ * param name: Secret Name (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeSecretRequest(
     regionId string,
@@ -53,10 +55,46 @@ func NewDescribeSecretRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param name: Secret Name (Required)
+ */
+func NewDescribeSecretRequestWithAllParams(
+    regionId string,
+    name string,
+) *DescribeSecretRequest {
+
+    return &DescribeSecretRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/secrets/{name}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        Name: name,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeSecretRequestWithoutParam() *DescribeSecretRequest {
+
+    return &DescribeSecretRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/secrets/{name}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DescribeSecretRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param name: Secret Name(Required) */
 func (r *DescribeSecretRequest) SetName(name string) {
     r.Name = name
 }

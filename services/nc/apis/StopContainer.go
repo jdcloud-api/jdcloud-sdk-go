@@ -32,8 +32,10 @@ type StopContainerRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param containerId: Container ID 
+ * param regionId: Region ID (Required)
+ * param containerId: Container ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewStopContainerRequest(
     regionId string,
@@ -52,10 +54,46 @@ func NewStopContainerRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param containerId: Container ID (Required)
+ */
+func NewStopContainerRequestWithAllParams(
+    regionId string,
+    containerId string,
+) *StopContainerRequest {
+
+    return &StopContainerRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/containers/{containerId}:stopContainer",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        ContainerId: containerId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewStopContainerRequestWithoutParam() *StopContainerRequest {
+
+    return &StopContainerRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/containers/{containerId}:stopContainer",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *StopContainerRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param containerId: Container ID(Required) */
 func (r *StopContainerRequest) SetContainerId(containerId string) {
     r.ContainerId = containerId
 }

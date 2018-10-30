@@ -29,7 +29,7 @@ type Registry struct {
     Description string `json:"description"`
 
     /* regsitry 使用的总存储空间 单位 (MB) (Optional) */
-    TotalSpaceUsedMB int `json:"totalSpaceUsedMB"`
+    TotalSpaceUsedMB float64 `json:"totalSpaceUsedMB"`
 
     /* registry 的创建时间 (Optional) */
     CreateTime string `json:"createTime"`

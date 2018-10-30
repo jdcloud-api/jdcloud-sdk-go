@@ -30,22 +30,24 @@ type GetLogsRequest struct {
     /* Container ID  */
     ContainerId string `json:"containerId"`
 
-    /*  (Optional) */
+    /* 返回日志文件中倒数 tailLines 行，如不指定，默认从容器启动时或 sinceSeconds 指定的时间读取。
+ (Optional) */
     TailLines *int `json:"tailLines"`
 
-    /*  (Optional) */
+    /* 返回相对于当前时间之前sinceSeconds之内的日志。
+ (Optional) */
     SinceSeconds *int `json:"sinceSeconds"`
 
-    /*  (Optional) */
+    /* 限制返回的日志文件内容字节数，取值范围 [1-4]KB，最大 4KB.
+ (Optional) */
     LimitBytes *int `json:"limitBytes"`
 }
 
 /*
- * param regionId: Region ID 
- * param containerId: Container ID 
- * param tailLines:  (Optional)
- * param sinceSeconds:  (Optional)
- * param limitBytes:  (Optional)
+ * param regionId: Region ID (Required)
+ * param containerId: Container ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewGetLogsRequest(
     regionId string,
@@ -64,22 +66,76 @@ func NewGetLogsRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param containerId: Container ID (Required)
+ * param tailLines: 返回日志文件中倒数 tailLines 行，如不指定，默认从容器启动时或 sinceSeconds 指定的时间读取。
+ (Optional)
+ * param sinceSeconds: 返回相对于当前时间之前sinceSeconds之内的日志。
+ (Optional)
+ * param limitBytes: 限制返回的日志文件内容字节数，取值范围 [1-4]KB，最大 4KB.
+ (Optional)
+ */
+func NewGetLogsRequestWithAllParams(
+    regionId string,
+    containerId string,
+    tailLines *int,
+    sinceSeconds *int,
+    limitBytes *int,
+) *GetLogsRequest {
+
+    return &GetLogsRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/containers/{containerId}:getLogs",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        ContainerId: containerId,
+        TailLines: tailLines,
+        SinceSeconds: sinceSeconds,
+        LimitBytes: limitBytes,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewGetLogsRequestWithoutParam() *GetLogsRequest {
+
+    return &GetLogsRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/containers/{containerId}:getLogs",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *GetLogsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param containerId: Container ID(Required) */
 func (r *GetLogsRequest) SetContainerId(containerId string) {
     r.ContainerId = containerId
 }
 
+/* param tailLines: 返回日志文件中倒数 tailLines 行，如不指定，默认从容器启动时或 sinceSeconds 指定的时间读取。
+(Optional) */
 func (r *GetLogsRequest) SetTailLines(tailLines int) {
     r.TailLines = &tailLines
 }
 
+/* param sinceSeconds: 返回相对于当前时间之前sinceSeconds之内的日志。
+(Optional) */
 func (r *GetLogsRequest) SetSinceSeconds(sinceSeconds int) {
     r.SinceSeconds = &sinceSeconds
 }
 
+/* param limitBytes: 限制返回的日志文件内容字节数，取值范围 [1-4]KB，最大 4KB.
+(Optional) */
 func (r *GetLogsRequest) SetLimitBytes(limitBytes int) {
     r.LimitBytes = &limitBytes
 }

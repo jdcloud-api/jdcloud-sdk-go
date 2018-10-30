@@ -28,13 +28,17 @@ type DescribeQuotaRequest struct {
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 资源类型  container：用户能创建的容器的配额  secret：用户能创建的secret的配额  */
+    /* resourceType - 资源类型，支持 [container, pod, secret]
+  */
     ResourceType string `json:"resourceType"`
 }
 
 /*
- * param regionId: Region ID 
- * param resourceType: 资源类型  container：用户能创建的容器的配额  secret：用户能创建的secret的配额 
+ * param regionId: Region ID (Required)
+ * param resourceType: resourceType - 资源类型，支持 [container, pod, secret]
+ (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeQuotaRequest(
     regionId string,
@@ -53,10 +57,48 @@ func NewDescribeQuotaRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param resourceType: resourceType - 资源类型，支持 [container, pod, secret]
+ (Required)
+ */
+func NewDescribeQuotaRequestWithAllParams(
+    regionId string,
+    resourceType string,
+) *DescribeQuotaRequest {
+
+    return &DescribeQuotaRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/quotas",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        ResourceType: resourceType,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeQuotaRequestWithoutParam() *DescribeQuotaRequest {
+
+    return &DescribeQuotaRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/quotas",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DescribeQuotaRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param resourceType: resourceType - 资源类型，支持 [container, pod, secret]
+(Required) */
 func (r *DescribeQuotaRequest) SetResourceType(resourceType string) {
     r.ResourceType = resourceType
 }

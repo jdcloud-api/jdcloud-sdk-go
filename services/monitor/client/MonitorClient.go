@@ -40,7 +40,7 @@ func NewMonitorClient(credential *core.Credential) *MonitorClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "monitor",
-            Revision:    "1.2.2",
+            Revision:    "1.2.3",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -53,7 +53,7 @@ func (c *MonitorClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-/* 查看某资源的监控数据 */
+/* 查看某资源的监控数据，metric介绍：<a href="https://docs.jdcloud.com/cn/monitoring/metrics">Metrics</a> */
 func (c *MonitorClient) DescribeMetricData(request *monitor.DescribeMetricDataRequest) (*monitor.DescribeMetricDataResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -83,25 +83,6 @@ func (c *MonitorClient) LastDownsample(request *monitor.LastDownsampleRequest) (
     }
 
     jdResp := &monitor.LastDownsampleResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 批量删除规则 */
-func (c *MonitorClient) BatchDeleteAlarms(request *monitor.BatchDeleteAlarmsRequest) (*monitor.BatchDeleteAlarmsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.BatchDeleteAlarmsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -154,26 +135,7 @@ func (c *MonitorClient) DescribeAlarmHistory(request *monitor.DescribeAlarmHisto
     return jdResp, err
 }
 
-/* 批量创建报警规则，可以为多个实例创建多个报警规则。 */
-func (c *MonitorClient) BatchCreateAlarms(request *monitor.BatchCreateAlarmsRequest) (*monitor.BatchCreateAlarmsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.BatchCreateAlarmsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 根据产品线查询可用监控项列表 */
+/* 根据产品线查询可用监控项列表,metric介绍：<a href="https://docs.jdcloud.com/cn/monitoring/metrics">Metrics</a> */
 func (c *MonitorClient) DescribeMetrics(request *monitor.DescribeMetricsRequest) (*monitor.DescribeMetricsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -211,8 +173,8 @@ func (c *MonitorClient) CreateAlarm(request *monitor.CreateAlarmRequest) (*monit
     return jdResp, err
 }
 
-/* 查看某资源多个监控项数据 */
-func (c *MonitorClient) BatchDescribeMetricData(request *monitor.BatchDescribeMetricDataRequest) (*monitor.BatchDescribeMetricDataResponse, error) {
+/* 查询规则的报警联系人 */
+func (c *MonitorClient) DescribeAlarmContacts(request *monitor.DescribeAlarmContactsRequest) (*monitor.DescribeAlarmContactsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -221,7 +183,7 @@ func (c *MonitorClient) BatchDescribeMetricData(request *monitor.BatchDescribeMe
         return nil, err
     }
 
-    jdResp := &monitor.BatchDescribeMetricDataResponse{}
+    jdResp := &monitor.DescribeAlarmContactsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -249,45 +211,7 @@ func (c *MonitorClient) DescribeMetricsForCreateAlarm(request *monitor.DescribeM
     return jdResp, err
 }
 
-/* 查询规则的报警联系人 */
-func (c *MonitorClient) DescribeAlarmContacts(request *monitor.DescribeAlarmContactsRequest) (*monitor.DescribeAlarmContactsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DescribeAlarmContactsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 批量启用规则 */
-func (c *MonitorClient) BatchEnableAlarms(request *monitor.BatchEnableAlarmsRequest) (*monitor.BatchEnableAlarmsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.BatchEnableAlarmsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 该接口为自定义监控数据上报的接口，方便您将自己采集的时序数据上报到云监控。可上报原始数据和已聚合的统计数据。支持批量上报方式。单次请求最多包含 50 个数据点；数据大小不超过 256k。 */
+/* 该接口为自定义监控数据上报的接口，方便您将自己采集的时序数据上报到云监控。不同region域名上报不同region的数据，参考：<a href="https://docs.jdcloud.com/cn/monitoring/reporting-monitoring-data">调用说明</a>可上报原始数据和已聚合的统计数据。支持批量上报方式。单次请求最多包含 50 个数据点；数据大小不超过 256k。 */
 func (c *MonitorClient) PutMetricData(request *monitor.PutMetricDataRequest) (*monitor.PutMetricDataResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -298,25 +222,6 @@ func (c *MonitorClient) PutMetricData(request *monitor.PutMetricDataRequest) (*m
     }
 
     jdResp := &monitor.PutMetricDataResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 批量禁用规则 */
-func (c *MonitorClient) BatchDisableAlarms(request *monitor.BatchDisableAlarmsRequest) (*monitor.BatchDisableAlarmsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.BatchDisableAlarmsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err

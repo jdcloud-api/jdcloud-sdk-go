@@ -38,10 +38,10 @@ type ModifyContainerAttributeRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param containerId: Container ID 
- * param name: 容器名称 (Optional)
- * param description: 容器描述；和description必须要指定一个 (Optional)
+ * param regionId: Region ID (Required)
+ * param containerId: Container ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewModifyContainerAttributeRequest(
     regionId string,
@@ -60,18 +60,62 @@ func NewModifyContainerAttributeRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param containerId: Container ID (Required)
+ * param name: 容器名称 (Optional)
+ * param description: 容器描述；和description必须要指定一个 (Optional)
+ */
+func NewModifyContainerAttributeRequestWithAllParams(
+    regionId string,
+    containerId string,
+    name *string,
+    description *string,
+) *ModifyContainerAttributeRequest {
+
+    return &ModifyContainerAttributeRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/containers/{containerId}:modifyContainerAttribute",
+            Method:  "PATCH",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        ContainerId: containerId,
+        Name: name,
+        Description: description,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewModifyContainerAttributeRequestWithoutParam() *ModifyContainerAttributeRequest {
+
+    return &ModifyContainerAttributeRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/containers/{containerId}:modifyContainerAttribute",
+            Method:  "PATCH",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *ModifyContainerAttributeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param containerId: Container ID(Required) */
 func (r *ModifyContainerAttributeRequest) SetContainerId(containerId string) {
     r.ContainerId = containerId
 }
 
+/* param name: 容器名称(Optional) */
 func (r *ModifyContainerAttributeRequest) SetName(name string) {
     r.Name = &name
 }
 
+/* param description: 容器描述；和description必须要指定一个(Optional) */
 func (r *ModifyContainerAttributeRequest) SetDescription(description string) {
     r.Description = &description
 }

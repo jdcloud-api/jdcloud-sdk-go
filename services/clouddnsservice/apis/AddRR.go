@@ -28,7 +28,7 @@ type AddRRRequest struct {
     /* 实例所属的地域ID  */
     RegionId string `json:"regionId"`
 
-    /* 域名ID  */
+    /* 域名ID，请使用getDomains接口获取。  */
     DomainId string `json:"domainId"`
 
     /* RR参数  */
@@ -37,7 +37,7 @@ type AddRRRequest struct {
 
 /*
  * param regionId: 实例所属的地域ID (Required)
- * param domainId: 域名ID (Required)
+ * param domainId: 域名ID，请使用getDomains接口获取。 (Required)
  * param req: RR参数 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -63,7 +63,7 @@ func NewAddRRRequest(
 
 /*
  * param regionId: 实例所属的地域ID (Required)
- * param domainId: 域名ID (Required)
+ * param domainId: 域名ID，请使用getDomains接口获取。 (Required)
  * param req: RR参数 (Required)
  */
 func NewAddRRRequestWithAllParams(
@@ -103,7 +103,7 @@ func (r *AddRRRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param domainId: 域名ID(Required) */
+/* param domainId: 域名ID，请使用getDomains接口获取。(Required) */
 func (r *AddRRRequest) SetDomainId(domainId string) {
     r.DomainId = domainId
 }

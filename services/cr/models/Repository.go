@@ -35,7 +35,7 @@ type Repository struct {
     RepositoryUri string `json:"repositoryUri"`
 
     /* 镜像仓库大小。 (Optional) */
-    TotalSpaceUsedMB int `json:"totalSpaceUsedMB"`
+    TotalSpaceUsedMB float64 `json:"totalSpaceUsedMB"`
 
     /* 镜像仓库描述。 (Optional) */
     Description string `json:"description"`

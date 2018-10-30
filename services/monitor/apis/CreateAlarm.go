@@ -18,7 +18,6 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    monitor "github.com/jdcloud-api/jdcloud-sdk-go/services/monitor/models"
 )
 
 type CreateAlarmRequest struct {
@@ -28,24 +27,51 @@ type CreateAlarmRequest struct {
     /* 地域 Id  */
     RegionId string `json:"regionId"`
 
-    /* 幂等性校验参数,最长36位  */
-    ClientToken string `json:"clientToken"`
+    /* 报警规则通知的联系组，必须在控制台上已创建，例如" ['联系组1','联系组2']" (Optional) */
+    ContactGroups []string `json:"contactGroups"`
 
-    /*   */
-    CreateAlarmSpec *monitor.CreateAlarmSpec `json:"createAlarmSpec"`
+    /* 报警规则通知的联系人，必须在控制台上已创建，例如 [“联系人1”,”联系人2”] (Optional) */
+    ContactPersons []string `json:"contactPersons"`
+
+    /* 取样频次 (Optional) */
+    DownSample *string `json:"downSample"`
+
+    /* 根据产品线查询可用监控项列表 接口 返回的Metric字段  */
+    Metric string `json:"metric"`
+
+    /* 通知周期 单位：小时 (Optional) */
+    NoticePeriod *int64 `json:"noticePeriod"`
+
+    /* 报警规则对应实例列表，每次最多100个，例如"['resourceId1','resourceId2']"  */
+    ResourceIds []string `json:"resourceIds"`
+
+    /* 产品名称  */
+    ServiceCode string `json:"serviceCode"`
+
+    /* 查询指标的周期，单位为分钟,目前支持的取值：2，5，15，30，60  */
+    Threshold float64 `json:"threshold"`
+
+    /* 连续探测几次都满足阈值条件时报警，可选值:1,2,3,5  */
+    Times int64 `json:"times"`
 }
 
 /*
  * param regionId: 地域 Id (Required)
- * param clientToken: 幂等性校验参数,最长36位 (Required)
- * param createAlarmSpec:  (Required)
+ * param metric: 根据产品线查询可用监控项列表 接口 返回的Metric字段 (Required)
+ * param resourceIds: 报警规则对应实例列表，每次最多100个，例如"['resourceId1','resourceId2']" (Required)
+ * param serviceCode: 产品名称 (Required)
+ * param threshold: 查询指标的周期，单位为分钟,目前支持的取值：2，5，15，30，60 (Required)
+ * param times: 连续探测几次都满足阈值条件时报警，可选值:1,2,3,5 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateAlarmRequest(
     regionId string,
-    clientToken string,
-    createAlarmSpec *monitor.CreateAlarmSpec,
+    metric string,
+    resourceIds []string,
+    serviceCode string,
+    threshold float64,
+    times int64,
 ) *CreateAlarmRequest {
 
 	return &CreateAlarmRequest{
@@ -56,20 +82,37 @@ func NewCreateAlarmRequest(
 			Version: "v1",
 		},
         RegionId: regionId,
-        ClientToken: clientToken,
-        CreateAlarmSpec: createAlarmSpec,
+        Metric: metric,
+        ResourceIds: resourceIds,
+        ServiceCode: serviceCode,
+        Threshold: threshold,
+        Times: times,
 	}
 }
 
 /*
  * param regionId: 地域 Id (Required)
- * param clientToken: 幂等性校验参数,最长36位 (Required)
- * param createAlarmSpec:  (Required)
+ * param contactGroups: 报警规则通知的联系组，必须在控制台上已创建，例如" ['联系组1','联系组2']" (Optional)
+ * param contactPersons: 报警规则通知的联系人，必须在控制台上已创建，例如 [“联系人1”,”联系人2”] (Optional)
+ * param downSample: 取样频次 (Optional)
+ * param metric: 根据产品线查询可用监控项列表 接口 返回的Metric字段 (Required)
+ * param noticePeriod: 通知周期 单位：小时 (Optional)
+ * param resourceIds: 报警规则对应实例列表，每次最多100个，例如"['resourceId1','resourceId2']" (Required)
+ * param serviceCode: 产品名称 (Required)
+ * param threshold: 查询指标的周期，单位为分钟,目前支持的取值：2，5，15，30，60 (Required)
+ * param times: 连续探测几次都满足阈值条件时报警，可选值:1,2,3,5 (Required)
  */
 func NewCreateAlarmRequestWithAllParams(
     regionId string,
-    clientToken string,
-    createAlarmSpec *monitor.CreateAlarmSpec,
+    contactGroups []string,
+    contactPersons []string,
+    downSample *string,
+    metric string,
+    noticePeriod *int64,
+    resourceIds []string,
+    serviceCode string,
+    threshold float64,
+    times int64,
 ) *CreateAlarmRequest {
 
     return &CreateAlarmRequest{
@@ -80,8 +123,15 @@ func NewCreateAlarmRequestWithAllParams(
             Version: "v1",
         },
         RegionId: regionId,
-        ClientToken: clientToken,
-        CreateAlarmSpec: createAlarmSpec,
+        ContactGroups: contactGroups,
+        ContactPersons: contactPersons,
+        DownSample: downSample,
+        Metric: metric,
+        NoticePeriod: noticePeriod,
+        ResourceIds: resourceIds,
+        ServiceCode: serviceCode,
+        Threshold: threshold,
+        Times: times,
     }
 }
 
@@ -103,14 +153,49 @@ func (r *CreateAlarmRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param clientToken: 幂等性校验参数,最长36位(Required) */
-func (r *CreateAlarmRequest) SetClientToken(clientToken string) {
-    r.ClientToken = clientToken
+/* param contactGroups: 报警规则通知的联系组，必须在控制台上已创建，例如" ['联系组1','联系组2']"(Optional) */
+func (r *CreateAlarmRequest) SetContactGroups(contactGroups []string) {
+    r.ContactGroups = contactGroups
 }
 
-/* param createAlarmSpec: (Required) */
-func (r *CreateAlarmRequest) SetCreateAlarmSpec(createAlarmSpec *monitor.CreateAlarmSpec) {
-    r.CreateAlarmSpec = createAlarmSpec
+/* param contactPersons: 报警规则通知的联系人，必须在控制台上已创建，例如 [“联系人1”,”联系人2”](Optional) */
+func (r *CreateAlarmRequest) SetContactPersons(contactPersons []string) {
+    r.ContactPersons = contactPersons
+}
+
+/* param downSample: 取样频次(Optional) */
+func (r *CreateAlarmRequest) SetDownSample(downSample string) {
+    r.DownSample = &downSample
+}
+
+/* param metric: 根据产品线查询可用监控项列表 接口 返回的Metric字段(Required) */
+func (r *CreateAlarmRequest) SetMetric(metric string) {
+    r.Metric = metric
+}
+
+/* param noticePeriod: 通知周期 单位：小时(Optional) */
+func (r *CreateAlarmRequest) SetNoticePeriod(noticePeriod int64) {
+    r.NoticePeriod = &noticePeriod
+}
+
+/* param resourceIds: 报警规则对应实例列表，每次最多100个，例如"['resourceId1','resourceId2']"(Required) */
+func (r *CreateAlarmRequest) SetResourceIds(resourceIds []string) {
+    r.ResourceIds = resourceIds
+}
+
+/* param serviceCode: 产品名称(Required) */
+func (r *CreateAlarmRequest) SetServiceCode(serviceCode string) {
+    r.ServiceCode = serviceCode
+}
+
+/* param threshold: 查询指标的周期，单位为分钟,目前支持的取值：2，5，15，30，60(Required) */
+func (r *CreateAlarmRequest) SetThreshold(threshold float64) {
+    r.Threshold = threshold
+}
+
+/* param times: 连续探测几次都满足阈值条件时报警，可选值:1,2,3,5(Required) */
+func (r *CreateAlarmRequest) SetTimes(times int64) {
+    r.Times = times
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

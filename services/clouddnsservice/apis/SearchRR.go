@@ -28,7 +28,7 @@ type SearchRRRequest struct {
     /* 实例所属的地域ID  */
     RegionId string `json:"regionId"`
 
-    /* 域名ID  */
+    /* 域名ID，请使用getDomains接口获取。  */
     DomainId string `json:"domainId"`
 
     /* 当前页数，起始值为1，默认为1 (Optional) */
@@ -40,7 +40,7 @@ type SearchRRRequest struct {
 
 /*
  * param regionId: 实例所属的地域ID (Required)
- * param domainId: 域名ID (Required)
+ * param domainId: 域名ID，请使用getDomains接口获取。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -63,7 +63,7 @@ func NewSearchRRRequest(
 
 /*
  * param regionId: 实例所属的地域ID (Required)
- * param domainId: 域名ID (Required)
+ * param domainId: 域名ID，请使用getDomains接口获取。 (Required)
  * param pageNumber: 当前页数，起始值为1，默认为1 (Optional)
  * param pageSize: 分页查询时设置的每页行数, 默认为10 (Optional)
  */
@@ -106,7 +106,7 @@ func (r *SearchRRRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param domainId: 域名ID(Required) */
+/* param domainId: 域名ID，请使用getDomains接口获取。(Required) */
 func (r *SearchRRRequest) SetDomainId(domainId string) {
     r.DomainId = domainId
 }

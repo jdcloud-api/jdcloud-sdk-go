@@ -44,8 +44,8 @@ type ContainerSpec struct {
     /* 容器执行的环境变量；如果和镜像中的环境变量Key相同，会覆盖镜像中的值；</br> 最大10对 (Optional) */
     Envs []EnvVar `json:"envs"`
 
-    /* 镜像名称 </br> 1. Docker Hub官方镜像通过类似nginx, mysql/mysql-server的名字指定 </br> </br> repository长度最大256个字符，tag最大128个字符，registry最大255个字符 </br> 下载镜像超时时间：10分钟 (Optional) */
-    Image *string `json:"image"`
+    /* 镜像名称 </br> 1. Docker Hub官方镜像通过类似nginx, mysql/mysql-server的名字指定 </br> </br> repository长度最大256个字符，tag最大128个字符，registry最大255个字符 </br> 下载镜像超时时间：10分钟  */
+    Image string `json:"image"`
 
     /* secret引用名称；使用Docker Hub和京东云CR的镜像不需要secret (Optional) */
     Secret *string `json:"secret"`

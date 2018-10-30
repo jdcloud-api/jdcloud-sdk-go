@@ -32,8 +32,10 @@ type DeleteSecretRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param name: Secret Name 
+ * param regionId: Region ID (Required)
+ * param name: Secret Name (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDeleteSecretRequest(
     regionId string,
@@ -52,10 +54,46 @@ func NewDeleteSecretRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param name: Secret Name (Required)
+ */
+func NewDeleteSecretRequestWithAllParams(
+    regionId string,
+    name string,
+) *DeleteSecretRequest {
+
+    return &DeleteSecretRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/secrets/{name}",
+            Method:  "DELETE",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        Name: name,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDeleteSecretRequestWithoutParam() *DeleteSecretRequest {
+
+    return &DeleteSecretRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/secrets/{name}",
+            Method:  "DELETE",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DeleteSecretRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param name: Secret Name(Required) */
 func (r *DeleteSecretRequest) SetName(name string) {
     r.Name = name
 }
