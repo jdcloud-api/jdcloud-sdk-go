@@ -33,4 +33,10 @@ type ImportFile struct {
 
     /* 是否所属当前实例.<br> 1：当前实例；<br>0：不是当前实例，为共享文件 (Optional) */
     IsLocal string `json:"isLocal"`
+
+    /* 文件状态<br>- 仅支持SQL Server (Optional) */
+    Status string `json:"status"`
+
+    /* 导入完成时间,格式为：YYYY-MM-DD HH:mm:ss<br>- 仅支持SQL Server (Optional) */
+    ImportTime string `json:"importTime"`
 }

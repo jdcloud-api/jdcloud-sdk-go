@@ -59,5 +59,5 @@ type RRInfo struct {
     ResolvingStatus string `json:"resolvingStatus"`
 
     /* 解析记录更新的时间 (Optional) */
-    UpdateTime int `json:"updateTime"`
+    UpdateTime int64 `json:"updateTime"`
 }

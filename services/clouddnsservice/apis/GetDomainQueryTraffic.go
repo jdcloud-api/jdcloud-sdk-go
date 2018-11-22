@@ -153,7 +153,7 @@ type GetDomainQueryTrafficResponse struct {
 }
 
 type GetDomainQueryTrafficResult struct {
-    Time []int `json:"time"`
+    Time []int64 `json:"time"`
     Unit string `json:"unit"`
     Traffic []float64 `json:"traffic"`
 }

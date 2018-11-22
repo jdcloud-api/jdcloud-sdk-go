@@ -153,6 +153,6 @@ type GetDomainQueryCountResponse struct {
 }
 
 type GetDomainQueryCountResult struct {
-    Time []int `json:"time"`
-    Traffic []int `json:"traffic"`
+    Time []int64 `json:"time"`
+    Traffic []int64 `json:"traffic"`
 }

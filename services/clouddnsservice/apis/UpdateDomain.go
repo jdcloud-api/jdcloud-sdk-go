@@ -18,7 +18,6 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    clouddnsservice "github.com/jdcloud-api/jdcloud-sdk-go/services/clouddnsservice/models"
 )
 
 type UpdateDomainRequest struct {
@@ -126,5 +125,4 @@ type UpdateDomainResponse struct {
 }
 
 type UpdateDomainResult struct {
-    UpdateDomain clouddnsservice.Domain `json:"updateDomain"`
 }

@@ -24,16 +24,16 @@ type GetAppRequest struct {
 
     core.JDCloudRequest
 
-    /*   */
+    /* 地域编码，参考OpenAPI公共说明  */
     RegionId string `json:"regionId"`
 
-    /*   */
+    /* 应用ID，应用创建时由京东云分配的16位数字ID  */
     ClientId string `json:"clientId"`
 }
 
 /*
- * param regionId:  (Required)
- * param clientId:  (Required)
+ * param regionId: 地域编码，参考OpenAPI公共说明 (Required)
+ * param clientId: 应用ID，应用创建时由京东云分配的16位数字ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -55,8 +55,8 @@ func NewGetAppRequest(
 }
 
 /*
- * param regionId:  (Required)
- * param clientId:  (Required)
+ * param regionId: 地域编码，参考OpenAPI公共说明 (Required)
+ * param clientId: 应用ID，应用创建时由京东云分配的16位数字ID (Required)
  */
 func NewGetAppRequestWithAllParams(
     regionId string,
@@ -88,12 +88,12 @@ func NewGetAppRequestWithoutParam() *GetAppRequest {
     }
 }
 
-/* param regionId: (Required) */
+/* param regionId: 地域编码，参考OpenAPI公共说明(Required) */
 func (r *GetAppRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param clientId: (Required) */
+/* param clientId: 应用ID，应用创建时由京东云分配的16位数字ID(Required) */
 func (r *GetAppRequest) SetClientId(clientId string) {
     r.ClientId = clientId
 }

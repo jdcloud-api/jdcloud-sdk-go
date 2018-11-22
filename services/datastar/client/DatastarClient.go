@@ -40,7 +40,7 @@ func NewDatastarClient(credential *core.Credential) *DatastarClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "datastar",
-            Revision:    "1.0.2",
+            Revision:    "1.0.4",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -53,7 +53,45 @@ func (c *DatastarClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-/* 根据设备ID查询人群包ID */
+/* 创建多级筛选 */
+func (c *DatastarClient) Create(request *datastar.CreateRequest) (*datastar.CreateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &datastar.CreateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 多级筛选结果查询接口 */
+func (c *DatastarClient) GetResult(request *datastar.GetResultRequest) (*datastar.GetResultResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &datastar.GetResultResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据设备ID获取是否有匹配的人群包 */
 func (c *DatastarClient) GetPackageId(request *datastar.GetPackageIdRequest) (*datastar.GetPackageIdResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
