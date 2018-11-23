@@ -19,6 +19,6 @@ package models
 
 type RegionIndustryDataList struct {
 
-    /* 区域 (Optional) */
+    /* 查询结果的数组类型 (Optional) */
     DataList []RegionIndustryData `json:"dataList"`
 }

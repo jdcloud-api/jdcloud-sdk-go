@@ -40,7 +40,7 @@ func NewRdsClient(credential *core.Credential) *RdsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "rds",
-            Revision:    "0.3.3",
+            Revision:    "0.3.6",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -300,25 +300,6 @@ func (c *RdsClient) CreateBackup(request *rds.CreateBackupRequest) (*rds.CreateB
     return jdResp, err
 }
 
-/* 从RDS实例中删除数据库。为便于管理和数据恢复，RDS对用户权限进行了控制，用户仅能通过控制台或本接口删除数据库 [MFA enabled] */
-func (c *RdsClient) DeleteDatabase(request *rds.DeleteDatabaseRequest) (*rds.DeleteDatabaseResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &rds.DeleteDatabaseResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 根据用户定义的查询条件，获取SQL执行的性能统计信息，例如慢SQL等。用户可以根据这些信息查找与SQL执行相关的性能瓶颈，并进行优化。<br>- 仅支持SQL Server */
 func (c *RdsClient) DescribeQueryPerformance(request *rds.DescribeQueryPerformanceRequest) (*rds.DescribeQueryPerformanceResponse, error) {
     if request == nil {
@@ -330,6 +311,25 @@ func (c *RdsClient) DescribeQueryPerformance(request *rds.DescribeQueryPerforman
     }
 
     jdResp := &rds.DescribeQueryPerformanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 从RDS实例中删除数据库。为便于管理和数据恢复，RDS对用户权限进行了控制，用户仅能通过控制台或本接口删除数据库 [MFA enabled] */
+func (c *RdsClient) DeleteDatabase(request *rds.DeleteDatabaseRequest) (*rds.DeleteDatabaseResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DeleteDatabaseResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -490,6 +490,25 @@ func (c *RdsClient) DeleteAccount(request *rds.DeleteAccountRequest) (*rds.Delet
     return jdResp, err
 }
 
+/* 创建一个跨地域备份同步服务。 */
+func (c *RdsClient) CreateBackupSynchronicity(request *rds.CreateBackupSynchronicityRequest) (*rds.CreateBackupSynchronicityResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.CreateBackupSynchronicityResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 获取MySQL实例的binlog的下载链接<br>- 仅支持MySQL */
 func (c *RdsClient) DescribeBinlogDownloadURL(request *rds.DescribeBinlogDownloadURLRequest) (*rds.DescribeBinlogDownloadURLResponse, error) {
     if request == nil {
@@ -509,25 +528,6 @@ func (c *RdsClient) DescribeBinlogDownloadURL(request *rds.DescribeBinlogDownloa
     return jdResp, err
 }
 
-/* 查看该RDS实例下所有备份的详细信息，返回的备份列表按照备份开始时间（backupStartTime）降序排列。 */
-func (c *RdsClient) DescribeBackups(request *rds.DescribeBackupsRequest) (*rds.DescribeBackupsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &rds.DescribeBackupsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 实例扩容，支持升级实例的CPU，内存及磁盘。目前暂不支持实例降配<br>- 仅支持MySQL */
 func (c *RdsClient) ModifyInstanceSpec(request *rds.ModifyInstanceSpecRequest) (*rds.ModifyInstanceSpecResponse, error) {
     if request == nil {
@@ -539,6 +539,25 @@ func (c *RdsClient) ModifyInstanceSpec(request *rds.ModifyInstanceSpecRequest) (
     }
 
     jdResp := &rds.ModifyInstanceSpecResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查看该RDS实例下所有备份的详细信息，返回的备份列表按照备份开始时间（backupStartTime）降序排列。 */
+func (c *RdsClient) DescribeBackups(request *rds.DescribeBackupsRequest) (*rds.DescribeBackupsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DescribeBackupsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -604,6 +623,25 @@ func (c *RdsClient) RestoreDatabaseFromOSS(request *rds.RestoreDatabaseFromOSSRe
     return jdResp, err
 }
 
+/* 查询跨地域备份同步服务列表。 */
+func (c *RdsClient) DescribeBackupSynchronicities(request *rds.DescribeBackupSynchronicitiesRequest) (*rds.DescribeBackupSynchronicitiesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DescribeBackupSynchronicitiesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 对RDS实例进行主备切换。<br>注意：如果实例正在进行备份，那么主备切换将会终止备份操作。可以查看备份策略中的备份开始时间确认是否有备份正在运行。如果确实需要在实例备份时进行主备切换，建议切换完成 后，手工进行一次实例的全备<br>对于SQL Server，主备切换后30分钟内，不支持按时间点恢复/创建，例如在10:05分用户进行了主备切换，那么10:05 ~ 10:35这个时间段不能进行按时间点恢复/创建。<br>- 仅支持SQL Server */
 func (c *RdsClient) FailoverInstance(request *rds.FailoverInstanceRequest) (*rds.FailoverInstanceResponse, error) {
     if request == nil {
@@ -615,6 +653,25 @@ func (c *RdsClient) FailoverInstance(request *rds.FailoverInstanceRequest) (*rds
     }
 
     jdResp := &rds.FailoverInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除一个跨地域备份同步服务。 */
+func (c *RdsClient) DeleteBackupSynchronicity(request *rds.DeleteBackupSynchronicityRequest) (*rds.DeleteBackupSynchronicityResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DeleteBackupSynchronicityResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -710,6 +767,25 @@ func (c *RdsClient) DescribeInstances(request *rds.DescribeInstancesRequest) (*r
     }
 
     jdResp := &rds.DescribeInstancesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 仅支持MySQL实例开启数据库审计 */
+func (c *RdsClient) EnableAudit(request *rds.EnableAuditRequest) (*rds.EnableAuditResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.EnableAuditResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -870,6 +946,25 @@ func (c *RdsClient) DescribeSlowLogs(request *rds.DescribeSlowLogsRequest) (*rds
     return jdResp, err
 }
 
+/* 仅支持MySQL实例关闭数据库审计 */
+func (c *RdsClient) DisableAudit(request *rds.DisableAuditRequest) (*rds.DisableAuditResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DisableAuditResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 从备份中恢复单个数据库，支持从其他实例（但必须是同一个账号下的实例）备份中恢复。例如可以从生产环境的数据库实例的备份恢复到测试环境的数据库中。<br>- 仅支持SQL Server */
 func (c *RdsClient) RestoreDatabaseFromBackup(request *rds.RestoreDatabaseFromBackupRequest) (*rds.RestoreDatabaseFromBackupResponse, error) {
     if request == nil {
@@ -919,6 +1014,25 @@ func (c *RdsClient) CreateAccount(request *rds.CreateAccountRequest) (*rds.Creat
     }
 
     jdResp := &rds.CreateAccountResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 仅支持查看MySQL实例的审计内容 */
+func (c *RdsClient) DescribeAuditResult(request *rds.DescribeAuditResultRequest) (*rds.DescribeAuditResultResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DescribeAuditResultResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err

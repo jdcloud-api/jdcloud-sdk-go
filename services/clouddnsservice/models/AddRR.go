@@ -19,11 +19,11 @@ package models
 
 type AddRR struct {
 
-    /* 主机记录 (Optional) */
-    HostRecord *string `json:"hostRecord"`
+    /* 主机记录  */
+    HostRecord string `json:"hostRecord"`
 
-    /* 解析记录的值 (Optional) */
-    HostValue *string `json:"hostValue"`
+    /* 解析记录的值  */
+    HostValue string `json:"hostValue"`
 
     /* 是否是京东云资源 (Optional) */
     JcloudRes *bool `json:"jcloudRes"`
@@ -34,15 +34,15 @@ type AddRR struct {
     /* 端口，只存在于SRV解析记录类型 (Optional) */
     Port *int `json:"port"`
 
-    /* 解析记录的生存时间 (Optional) */
-    Ttl *int `json:"ttl"`
+    /* 解析记录的生存时间  */
+    Ttl int `json:"ttl"`
 
-    /* 解析的类型 (Optional) */
-    Type *string `json:"type"`
+    /* 解析的类型  */
+    Type string `json:"type"`
 
     /* 解析记录的权重 (Optional) */
     Weight *int `json:"weight"`
 
-    /* 解析线路的ID (Optional) */
-    ViewValue *int `json:"viewValue"`
+    /* 解析线路的ID  */
+    ViewValue int `json:"viewValue"`
 }

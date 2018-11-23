@@ -31,6 +31,9 @@ type MonitorAlarmInfo struct {
     /* null (Optional) */
     Id int `json:"id"`
 
-    /* 故障开始时间 (Optional) */
-    StartTime int `json:"startTime"`
+    /* 故障开始时间，格式Unix timestamp，时间单位：毫秒 (Optional) */
+    StartTime int64 `json:"startTime"`
+
+    /* 故障结束时间，格式Unix timestamp，时间单位：毫秒 (Optional) */
+    EndTime int64 `json:"endTime"`
 }

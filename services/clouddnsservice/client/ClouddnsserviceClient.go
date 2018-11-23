@@ -40,7 +40,7 @@ func NewClouddnsserviceClient(credential *core.Credential) *ClouddnsserviceClien
             Credential:  *credential,
             Config:      *config,
             ServiceName: "clouddnsservice",
-            Revision:    "1.0.6",
+            Revision:    "1.0.7",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }

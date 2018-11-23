@@ -19,13 +19,13 @@ package models
 
 type ImportDNS struct {
 
-    /* 解析记录对应的域名的ID (Optional) */
+    /* 解析记录对应的域名的ID  */
     DomainId int `json:"domainId"`
 
-    /* 主机记录 (Optional) */
+    /* 主机记录  */
     HostRecord string `json:"hostRecord"`
 
-    /* 解析记录的值 (Optional) */
+    /* 解析记录的值  */
     HostValue string `json:"hostValue"`
 
     /* 解析记录的ID (Optional) */
@@ -40,15 +40,15 @@ type ImportDNS struct {
     /* 端口，只存在于SRV解析记录类型 (Optional) */
     Port int `json:"port"`
 
-    /* 解析记录的生存时间 (Optional) */
+    /* 解析记录的生存时间  */
     Ttl int `json:"ttl"`
 
-    /* 解析的类型 (Optional) */
+    /* 解析的类型  */
     Type string `json:"type"`
 
     /* 解析记录的权重 (Optional) */
     Weight int `json:"weight"`
 
-    /* 解析线路的ID (Optional) */
+    /* 解析线路的ID  */
     ViewValue int `json:"viewValue"`
 }

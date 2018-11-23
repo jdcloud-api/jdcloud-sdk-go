@@ -40,7 +40,7 @@ func NewIasClient(credential *core.Credential) *IasClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "ias",
-            Revision:    "0.2.0",
+            Revision:    "0.2.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -53,7 +53,7 @@ func (c *IasClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-/* 创建app */
+/* 创建应用 */
 func (c *IasClient) CreateApp(request *ias.CreateAppRequest) (*ias.CreateAppResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -72,7 +72,26 @@ func (c *IasClient) CreateApp(request *ias.CreateAppRequest) (*ias.CreateAppResp
     return jdResp, err
 }
 
-/* 更新app */
+/* 运营后台获取应用详情 */
+func (c *IasClient) AppDetail(request *ias.AppDetailRequest) (*ias.AppDetailResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ias.AppDetailResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新应用（只传需要变更的参数，不传的参数不会更新） */
 func (c *IasClient) UpdateApp(request *ias.UpdateAppRequest) (*ias.UpdateAppResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -91,7 +110,7 @@ func (c *IasClient) UpdateApp(request *ias.UpdateAppRequest) (*ias.UpdateAppResp
     return jdResp, err
 }
 
-/* 获取主账号下所有应用 */
+/* 获取账户下所有应用 */
 func (c *IasClient) GetApps(request *ias.GetAppsRequest) (*ias.GetAppsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -102,6 +121,44 @@ func (c *IasClient) GetApps(request *ias.GetAppsRequest) (*ias.GetAppsResponse, 
     }
 
     jdResp := &ias.GetAppsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 运营后台查询app */
+func (c *IasClient) Apps(request *ias.AppsRequest) (*ias.AppsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ias.AppsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 运营后台获取应用状态 */
+func (c *IasClient) State(request *ias.StateRequest) (*ias.StateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ias.StateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err

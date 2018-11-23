@@ -82,4 +82,10 @@ type DBInstanceAttribute struct {
 
     /* 计费配置 (Optional) */
     Charge charge.Charge `json:"charge"`
+
+    /* 高可用集群中主节点的信息<br>- 仅支持SQL Server (Optional) */
+    PrimaryNode DBInstanceNode `json:"primaryNode"`
+
+    /* 高可用集群中从节点的信息<br>- 仅支持SQL Server (Optional) */
+    SecondaryNode DBInstanceNode `json:"secondaryNode"`
 }

@@ -19,48 +19,48 @@ package models
 
 type UpdateMonitor struct {
 
-    /* 连续几次触发报警 (Optional) */
-    AlarmLimit *int `json:"alarmLimit"`
+    /* 连续几次触发报警  */
+    AlarmLimit int `json:"alarmLimit"`
 
-    /* 监控项ID (Optional) */
-    Id *int `json:"id"`
+    /* 监控项ID  */
+    Id int `json:"id"`
 
-    /* 备用地址1 (Optional) */
-    IpBackup01 *string `json:"ipBackup01"`
+    /* 备用地址1  */
+    IpBackup01 string `json:"ipBackup01"`
 
-    /* 备用地址2 (Optional) */
-    IpBackup02 *string `json:"ipBackup02"`
+    /* 备用地址2  */
+    IpBackup02 string `json:"ipBackup02"`
 
-    /* 监控状况 开启监控 2，暂停监控 4 (Optional) */
-    MonitorEnable *int `json:"monitorEnable"`
+    /* 监控状况 开启监控 2，暂停监控 4  */
+    MonitorEnable int `json:"monitorEnable"`
 
-    /* 监控频率，单位秒 (Optional) */
-    MonitorFreq *int `json:"monitorFreq"`
+    /* 监控频率，单位秒  */
+    MonitorFreq int `json:"monitorFreq"`
 
-    /* 监控端口 (Optional) */
-    MonitorPort *int `json:"monitorPort"`
+    /* 监控端口  */
+    MonitorPort int `json:"monitorPort"`
 
-    /* 不做任何修改0，强制暂停解析记录1，自动切换到备用地址2 (Optional) */
-    MonitorRule *int `json:"monitorRule"`
+    /* 不做任何修改0，强制暂停解析记录1，自动切换到备用地址2  */
+    MonitorRule int `json:"monitorRule"`
 
-    /* 监控路径 (Optional) */
-    MonitorUri *string `json:"monitorUri"`
+    /* 监控路径  */
+    MonitorUri string `json:"monitorUri"`
 
-    /* 不发送邮件0， 发送邮件1 (Optional) */
-    NotifyEmailEnable *int `json:"notifyEmailEnable"`
+    /* 不发送邮件0， 发送邮件1  */
+    NotifyEmailEnable int `json:"notifyEmailEnable"`
 
-    /* 不发送通知栏 0， 发送通知栏 1 (Optional) */
-    NotifyMsgBarEnable *int `json:"notifyMsgBarEnable"`
+    /* 不发送通知栏 0， 发送通知栏 1  */
+    NotifyMsgBarEnable int `json:"notifyMsgBarEnable"`
 
     /* 不发送短信 0， 发送短信 1 (Optional) */
     NotifySmsEnable *int `json:"notifySmsEnable"`
 
-    /* https 0，https 1 (Optional) */
-    Protocol *int `json:"protocol"`
+    /* https 0，https 1  */
+    Protocol int `json:"protocol"`
 
-    /* 0自动恢复 1手动恢复 (Optional) */
-    StopRecoverRule *int `json:"stopRecoverRule"`
+    /* 0自动恢复 1手动恢复  */
+    StopRecoverRule int `json:"stopRecoverRule"`
 
-    /* 0自动恢复至主host 1手动恢复至主host (Optional) */
-    SwitchRecoverRule *int `json:"switchRecoverRule"`
+    /* 0自动恢复至主host 1手动恢复至主host  */
+    SwitchRecoverRule int `json:"switchRecoverRule"`
 }

@@ -19,72 +19,72 @@ package models
 
 type ApplicationRes struct {
 
-    /* 应用  */
+    /* 应用ID，由京东云分配的16位数字ID  */
     ClientId string `json:"clientId"`
 
     /* 应用名  */
     ClientName string `json:"clientName"`
 
-    /* tokenEndpointAuthMethod  */
+    /* 客户端认证方式  */
     TokenEndpointAuthMethod string `json:"tokenEndpointAuthMethod"`
 
-    /* grantTypes  */
+    /* 支持的OAuth类型  */
     GrantTypes string `json:"grantTypes"`
 
-    /* responseTypes  */
+    /* 当grantTypes为authorization_code时，responseTypes为code；当grantTypes为implicit时，responseTypes为token  */
     ResponseTypes string `json:"responseTypes"`
 
-    /* redirectUris  */
+    /* 回调地址  */
     RedirectUris string `json:"redirectUris"`
 
-    /* clientUri  */
+    /* 应用介绍地址  */
     ClientUri string `json:"clientUri"`
 
-    /* logoUri  */
+    /* 应用logo地址  */
     LogoUri string `json:"logoUri"`
 
-    /* tosUri  */
+    /* 应用服务协议地址  */
     TosUri string `json:"tosUri"`
 
-    /* policyUri  */
+    /* 应用隐私条款地址  */
     PolicyUri string `json:"policyUri"`
 
-    /* scope  */
+    /* OAuth scope授权范围  */
     Scope string `json:"scope"`
 
-    /* jwksUri  */
+    /* JWKS地址  */
     JwksUri string `json:"jwksUri"`
 
-    /* jwks  */
+    /* JWKS  */
     Jwks string `json:"jwks"`
 
-    /* contacts  */
+    /* 应用联系信息  */
     Contacts string `json:"contacts"`
 
-    /* extension  */
+    /* 应用扩展信息  */
     Extension string `json:"extension"`
 
-    /* accessTokenValiditySeconds  */
+    /* 访问令牌有效期  */
     AccessTokenValiditySeconds int `json:"accessTokenValiditySeconds"`
 
-    /* refreshTokenValiditySeconds  */
+    /* 刷新令牌有效期  */
     RefreshTokenValiditySeconds int `json:"refreshTokenValiditySeconds"`
 
-    /* multiTenant  */
+    /* 是否为多租户应用  */
     MultiTenant bool `json:"multiTenant"`
 
-    /* secretUpdateTime  */
+    /* 应用密码更新时间  */
     SecretUpdateTime int64 `json:"secretUpdateTime"`
 
-    /* updateTime  */
+    /* 应用更新时间  */
     UpdateTime int64 `json:"updateTime"`
 
-    /* createTime  */
+    /* 应用创建时间  */
     CreateTime int64 `json:"createTime"`
 
-    /* account  */
+    /* 创建应用的账户用户名  */
     Account string `json:"account"`
 
-    /* userType  */
+    /* 允许登录应用的账号类型  */
     UserType string `json:"userType"`
 }

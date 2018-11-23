@@ -25,11 +25,11 @@ type Domain struct {
     /* 域名字符串 (Optional) */
     DomainName string `json:"domainName"`
 
-    /* 创建时间，格式Unix timestamp (Optional) */
-    CreateTime int `json:"createTime"`
+    /* 创建时间，格式Unix timestamp，时间单位：毫秒 (Optional) */
+    CreateTime int64 `json:"createTime"`
 
-    /* 过期时间，格式Unix timestamp (Optional) */
-    ExpirationDate int `json:"expirationDate"`
+    /* 过期时间，格式Unix timestamp，时间单位：毫秒 (Optional) */
+    ExpirationDate int64 `json:"expirationDate"`
 
     /* 套餐类型，0->免费 1->企业版 2->企业高级版 (Optional) */
     PackId int `json:"packId"`

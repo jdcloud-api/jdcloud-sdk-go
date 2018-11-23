@@ -19,17 +19,17 @@ package models
 
 type DelViewIP struct {
 
-    /* 域名ID (Optional) */
-    DomainId *int `json:"domainId"`
+    /* 域名ID  */
+    DomainId int `json:"domainId"`
 
-    /* 自定义线路ID (Optional) */
-    ViewId *int `json:"viewId"`
+    /* 自定义线路ID  */
+    ViewId int `json:"viewId"`
 
-    /* 自定义线路名称, 最多64个字符 (Optional) */
-    ViewName *string `json:"viewName"`
+    /* 自定义线路名称, 最多64个字符  */
+    ViewName string `json:"viewName"`
 
     /* 此线路需要删除的ip段。<br>
 ip段支持1.2.3.4-5.6.7.8和1.2.3.4/16两种格式。    
- (Optional) */
+  */
     IpRanges []string `json:"ipRanges"`
 }

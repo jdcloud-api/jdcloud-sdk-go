@@ -24,16 +24,16 @@ type DeleteAppRequest struct {
 
     core.JDCloudRequest
 
-    /*   */
+    /* 地域编码，参考OpenAPI公共说明  */
     RegionId string `json:"regionId"`
 
-    /*   */
+    /* 应用ID，应用创建时由京东云分配的16位数字ID  */
     ClientId string `json:"clientId"`
 }
 
 /*
- * param regionId:  (Required)
- * param clientId:  (Required)
+ * param regionId: 地域编码，参考OpenAPI公共说明 (Required)
+ * param clientId: 应用ID，应用创建时由京东云分配的16位数字ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -55,8 +55,8 @@ func NewDeleteAppRequest(
 }
 
 /*
- * param regionId:  (Required)
- * param clientId:  (Required)
+ * param regionId: 地域编码，参考OpenAPI公共说明 (Required)
+ * param clientId: 应用ID，应用创建时由京东云分配的16位数字ID (Required)
  */
 func NewDeleteAppRequestWithAllParams(
     regionId string,
@@ -88,12 +88,12 @@ func NewDeleteAppRequestWithoutParam() *DeleteAppRequest {
     }
 }
 
-/* param regionId: (Required) */
+/* param regionId: 地域编码，参考OpenAPI公共说明(Required) */
 func (r *DeleteAppRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param clientId: (Required) */
+/* param clientId: 应用ID，应用创建时由京东云分配的16位数字ID(Required) */
 func (r *DeleteAppRequest) SetClientId(clientId string) {
     r.ClientId = clientId
 }

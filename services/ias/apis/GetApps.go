@@ -25,12 +25,12 @@ type GetAppsRequest struct {
 
     core.JDCloudRequest
 
-    /*   */
+    /* 地域编码，参考OpenAPI公共说明  */
     RegionId string `json:"regionId"`
 }
 
 /*
- * param regionId:  (Required)
+ * param regionId: 地域编码，参考OpenAPI公共说明 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -50,7 +50,7 @@ func NewGetAppsRequest(
 }
 
 /*
- * param regionId:  (Required)
+ * param regionId: 地域编码，参考OpenAPI公共说明 (Required)
  */
 func NewGetAppsRequestWithAllParams(
     regionId string,
@@ -80,7 +80,7 @@ func NewGetAppsRequestWithoutParam() *GetAppsRequest {
     }
 }
 
-/* param regionId: (Required) */
+/* param regionId: 地域编码，参考OpenAPI公共说明(Required) */
 func (r *GetAppsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

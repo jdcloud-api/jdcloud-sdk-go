@@ -28,6 +28,9 @@ type Database struct {
     /* 字符集，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Optional) */
     CharacterSetName string `json:"characterSetName"`
 
+    /* 数据库创建时间，格式YYYY-MM-DD HH:mm:ss<br>- 仅支持SQL Server (Optional) */
+    CreateTime string `json:"createTime"`
+
     /* 该数据库相关账户权限列表 (Optional) */
     AccessPrivilege []DBAccessPrivilege `json:"accessPrivilege"`
 }

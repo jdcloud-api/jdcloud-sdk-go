@@ -38,6 +38,9 @@ type RestoredNewDBInstanceSpec struct {
     /* 子网ID  */
     SubnetId string `json:"subnetId"`
 
+    /* 参数组ID, 缺省系统会创建一个默认参数组<br>- 仅支持MySQL (Optional) */
+    ParameterGroup *string `json:"parameterGroup"`
+
     /* 计费规格，包括计费类型，计费周期等  */
     ChargeSpec *charge.ChargeSpec `json:"chargeSpec"`
 }

@@ -19,15 +19,15 @@ package models
 
 type DelView struct {
 
-    /* 域名ID (Optional) */
-    DomainId *int `json:"domainId"`
+    /* 域名ID  */
+    DomainId int `json:"domainId"`
 
-    /* 主域名 (Optional) */
-    DomainName *string `json:"domainName"`
+    /* 主域名  */
+    DomainName string `json:"domainName"`
 
-    /* 自定义线路名称, 最多64个字符 (Optional) */
-    ViewName *string `json:"viewName"`
+    /* 自定义线路名称, 最多64个字符  */
+    ViewName string `json:"viewName"`
 
-    /* 自定义线路ID (Optional) */
-    ViewId *string `json:"viewId"`
+    /* 自定义线路ID  */
+    ViewId string `json:"viewId"`
 }

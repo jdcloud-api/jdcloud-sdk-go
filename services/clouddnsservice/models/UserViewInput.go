@@ -37,12 +37,12 @@ type UserViewInput struct {
     /* 创建者 (Optional) */
     Creator string `json:"creator"`
 
-    /* 创建时间 (Optional) */
+    /* 创建时间，格式Unix timestamp，时间单位：秒 (Optional) */
     CreateTime int `json:"createTime"`
 
     /* 更新者 (Optional) */
     Updator string `json:"updator"`
 
-    /* 更新时间 (Optional) */
+    /* 更新时间，格式Unix timestamp，时间单位：秒 (Optional) */
     UpdateTime int `json:"updateTime"`
 }

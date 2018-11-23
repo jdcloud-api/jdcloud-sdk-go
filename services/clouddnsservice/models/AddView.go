@@ -19,17 +19,17 @@ package models
 
 type AddView struct {
 
-    /* 域名ID (Optional) */
-    DomainId *int `json:"domainId"`
+    /* 域名ID  */
+    DomainId int `json:"domainId"`
 
-    /* 主域名 (Optional) */
-    DomainName *string `json:"domainName"`
+    /* 主域名  */
+    DomainName string `json:"domainName"`
 
-    /* 自定义线路名称, 最多64个字符 (Optional) */
-    ViewName *string `json:"viewName"`
+    /* 自定义线路名称, 最多64个字符  */
+    ViewName string `json:"viewName"`
 
     /* 用户输入的此线路的ip段。<br>
 ip段支持1.2.3.4-5.6.7.8和1.2.3.4/16两种格式。
- (Optional) */
+  */
     IpRanges []string `json:"ipRanges"`
 }
