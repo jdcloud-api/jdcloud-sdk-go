@@ -40,7 +40,7 @@ func NewVpcClient(credential *core.Credential) *VpcClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vpc",
-            Revision:    "0.5.0",
+            Revision:    "0.5.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -900,6 +900,25 @@ func (c *VpcClient) CreateNetworkSecurityGroup(request *vpc.CreateNetworkSecurit
     }
 
     jdResp := &vpc.CreateNetworkSecurityGroupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改弹性IP */
+func (c *VpcClient) ModifyElasticIp(request *vpc.ModifyElasticIpRequest) (*vpc.ModifyElasticIpResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.ModifyElasticIpResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err

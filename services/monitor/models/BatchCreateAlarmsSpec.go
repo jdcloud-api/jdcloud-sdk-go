@@ -28,6 +28,9 @@ type BatchCreateAlarmsSpec struct {
     /* 地域 (Optional) */
     Datacenter string `json:"datacenter"`
 
+    /* 是否启用, 1表示启用规则，0表示禁用规则，默认为1 (Optional) */
+    Enabled int64 `json:"enabled"`
+
     /* 报警规则对应实例列表，每次最多100个，例如"['resourceId1','resourceId2']"  */
     ResourceIds []string `json:"resourceIds"`
 

@@ -31,7 +31,7 @@ type Vpc struct {
     /* 私有网络名称，取值范围：1-60个中文、英文大小写的字母、数字和下划线分隔符 (Optional) */
     VpcName string `json:"vpcName"`
 
-    /*  (Optional) */
+    /* 同一vpc下的acl id 列表 (Optional) */
     AclIds []string `json:"aclIds"`
 
     /*  (Optional) */

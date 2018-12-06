@@ -44,7 +44,7 @@ func NewBatchDisableAlarmsRequest(
 
 	return &BatchDisableAlarmsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/alarms:disable",
+			URL:     "/regions/{regionId}/alarms/disable",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -65,7 +65,7 @@ func NewBatchDisableAlarmsRequestWithAllParams(
 
     return &BatchDisableAlarmsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/alarms:disable",
+            URL:     "/regions/{regionId}/alarms/disable",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -80,7 +80,7 @@ func NewBatchDisableAlarmsRequestWithoutParam() *BatchDisableAlarmsRequest {
 
     return &BatchDisableAlarmsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/alarms:disable",
+            URL:     "/regions/{regionId}/alarms/disable",
             Method:  "POST",
             Header:  nil,
             Version: "v1",

@@ -37,6 +37,9 @@ type BatchCreateAlarmsRequest struct {
     /* 地域 (Optional) */
     Datacenter *string `json:"datacenter"`
 
+    /* 是否启用, 1表示启用规则，0表示禁用规则，默认为1 (Optional) */
+    Enabled *int64 `json:"enabled"`
+
     /* 报警规则对应实例列表，每次最多100个，例如"['resourceId1','resourceId2']"  */
     ResourceIds []string `json:"resourceIds"`
 
@@ -108,6 +111,7 @@ func NewBatchCreateAlarmsRequest(
  * param clientToken: 幂等性校验参数，最长36位 (Required)
  * param contacts: 通知的联系人 (Optional)
  * param datacenter: 地域 (Optional)
+ * param enabled: 是否启用, 1表示启用规则，0表示禁用规则，默认为1 (Optional)
  * param resourceIds: 报警规则对应实例列表，每次最多100个，例如"['resourceId1','resourceId2']" (Required)
  * param ruleType: 规则类型, 1表示资源监控，6表示站点监控，默认为1 (Optional)
  * param rules: 要批量创建的规则列表 (Required)
@@ -125,6 +129,7 @@ func NewBatchCreateAlarmsRequestWithAllParams(
     clientToken string,
     contacts []monitor.BaseContact,
     datacenter *string,
+    enabled *int64,
     resourceIds []string,
     ruleType *int64,
     rules []monitor.BaseRule,
@@ -149,6 +154,7 @@ func NewBatchCreateAlarmsRequestWithAllParams(
         ClientToken: clientToken,
         Contacts: contacts,
         Datacenter: datacenter,
+        Enabled: enabled,
         ResourceIds: resourceIds,
         RuleType: ruleType,
         Rules: rules,
@@ -194,6 +200,11 @@ func (r *BatchCreateAlarmsRequest) SetContacts(contacts []monitor.BaseContact) {
 /* param datacenter: 地域(Optional) */
 func (r *BatchCreateAlarmsRequest) SetDatacenter(datacenter string) {
     r.Datacenter = &datacenter
+}
+
+/* param enabled: 是否启用, 1表示启用规则，0表示禁用规则，默认为1(Optional) */
+func (r *BatchCreateAlarmsRequest) SetEnabled(enabled int64) {
+    r.Enabled = &enabled
 }
 
 /* param resourceIds: 报警规则对应实例列表，每次最多100个，例如"['resourceId1','resourceId2']"(Required) */

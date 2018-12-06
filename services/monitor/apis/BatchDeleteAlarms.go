@@ -29,18 +29,18 @@ type BatchDeleteAlarmsRequest struct {
     RegionId string `json:"regionId"`
 
     /* filter name为'ids'为要删除的告警id  */
-    Filter []monitor.Filter `json:"filter"`
+    Filters []monitor.Filter `json:"filters"`
 }
 
 /*
  * param regionId: 地域 Id (Required)
- * param filter: filter name为'ids'为要删除的告警id (Required)
+ * param filters: filter name为'ids'为要删除的告警id (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewBatchDeleteAlarmsRequest(
     regionId string,
-    filter []monitor.Filter,
+    filters []monitor.Filter,
 ) *BatchDeleteAlarmsRequest {
 
 	return &BatchDeleteAlarmsRequest{
@@ -51,17 +51,17 @@ func NewBatchDeleteAlarmsRequest(
 			Version: "v1",
 		},
         RegionId: regionId,
-        Filter: filter,
+        Filters: filters,
 	}
 }
 
 /*
  * param regionId: 地域 Id (Required)
- * param filter: filter name为'ids'为要删除的告警id (Required)
+ * param filters: filter name为'ids'为要删除的告警id (Required)
  */
 func NewBatchDeleteAlarmsRequestWithAllParams(
     regionId string,
-    filter []monitor.Filter,
+    filters []monitor.Filter,
 ) *BatchDeleteAlarmsRequest {
 
     return &BatchDeleteAlarmsRequest{
@@ -72,7 +72,7 @@ func NewBatchDeleteAlarmsRequestWithAllParams(
             Version: "v1",
         },
         RegionId: regionId,
-        Filter: filter,
+        Filters: filters,
     }
 }
 
@@ -94,9 +94,9 @@ func (r *BatchDeleteAlarmsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param filter: filter name为'ids'为要删除的告警id(Required) */
-func (r *BatchDeleteAlarmsRequest) SetFilter(filter []monitor.Filter) {
-    r.Filter = filter
+/* param filters: filter name为'ids'为要删除的告警id(Required) */
+func (r *BatchDeleteAlarmsRequest) SetFilters(filters []monitor.Filter) {
+    r.Filters = filters
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

@@ -37,6 +37,9 @@ type DescribeMetricDataRequest struct {
     /* 资源的uuid  */
     ResourceId string `json:"resourceId"`
 
+    /* 指标聚合方式，每个指标都有默认的聚合方式， 可选值包括：sum,avg.max.min (Optional) */
+    AggrType *string `json:"aggrType"`
+
     /* 查询时间范围的开始时间， UTC时间，格式：yyyy-MM-dd'T'HH:mm:ssZ（默认为当前时间，早于30d时，将被重置为30d） (Optional) */
     StartTime *string `json:"startTime"`
 
@@ -87,6 +90,7 @@ func NewDescribeMetricDataRequest(
  * param metric: 监控项英文标识(id) (Required)
  * param serviceCode: 资源的类型，取值vm, lb, ip, database 等 (Required)
  * param resourceId: 资源的uuid (Required)
+ * param aggrType: 指标聚合方式，每个指标都有默认的聚合方式， 可选值包括：sum,avg.max.min (Optional)
  * param startTime: 查询时间范围的开始时间， UTC时间，格式：yyyy-MM-dd'T'HH:mm:ssZ（默认为当前时间，早于30d时，将被重置为30d） (Optional)
  * param endTime: 查询时间范围的结束时间， UTC时间，格式：2016-12- yyyy-MM-dd'T'HH:mm:ssZ（为空时，将由startTime与timeInterval计算得出） (Optional)
  * param timeInterval: 时间间隔：1h，6h，12h，1d，3d，7d，14d，固定时间间隔，timeInterval 与 endTime 至少填一项 (Optional)
@@ -98,6 +102,7 @@ func NewDescribeMetricDataRequestWithAllParams(
     metric string,
     serviceCode string,
     resourceId string,
+    aggrType *string,
     startTime *string,
     endTime *string,
     timeInterval *string,
@@ -116,6 +121,7 @@ func NewDescribeMetricDataRequestWithAllParams(
         Metric: metric,
         ServiceCode: serviceCode,
         ResourceId: resourceId,
+        AggrType: aggrType,
         StartTime: startTime,
         EndTime: endTime,
         TimeInterval: timeInterval,
@@ -155,6 +161,11 @@ func (r *DescribeMetricDataRequest) SetServiceCode(serviceCode string) {
 /* param resourceId: 资源的uuid(Required) */
 func (r *DescribeMetricDataRequest) SetResourceId(resourceId string) {
     r.ResourceId = resourceId
+}
+
+/* param aggrType: 指标聚合方式，每个指标都有默认的聚合方式， 可选值包括：sum,avg.max.min(Optional) */
+func (r *DescribeMetricDataRequest) SetAggrType(aggrType string) {
+    r.AggrType = &aggrType
 }
 
 /* param startTime: 查询时间范围的开始时间， UTC时间，格式：yyyy-MM-dd'T'HH:mm:ssZ（默认为当前时间，早于30d时，将被重置为30d）(Optional) */

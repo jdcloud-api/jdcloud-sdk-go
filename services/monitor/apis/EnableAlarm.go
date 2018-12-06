@@ -44,7 +44,7 @@ func NewEnableAlarmRequest(
 
 	return &EnableAlarmRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/alarms/{alarmId}:enable",
+			URL:     "/regions/{regionId}/alarms/{alarmId}/enable",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -65,7 +65,7 @@ func NewEnableAlarmRequestWithAllParams(
 
     return &EnableAlarmRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/alarms/{alarmId}:enable",
+            URL:     "/regions/{regionId}/alarms/{alarmId}/enable",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -80,7 +80,7 @@ func NewEnableAlarmRequestWithoutParam() *EnableAlarmRequest {
 
     return &EnableAlarmRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/alarms/{alarmId}:enable",
+            URL:     "/regions/{regionId}/alarms/{alarmId}/enable",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
