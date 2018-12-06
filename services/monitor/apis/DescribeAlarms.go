@@ -40,7 +40,7 @@ type DescribeAlarmsRequest struct {
     /* 资源ID (Optional) */
     ResourceID *string `json:"resourceID"`
 
-    /* 规则类型, 1表示资源监控，6表示站点监控 (Optional) */
+    /* 规则类型, 1表示资源监控，6表示站点监控,7表示可用性监控 (Optional) */
     RuleType *int `json:"ruleType"`
 
     /* 规则报警状态, 1：正常, 2：报警，4：数据不足 (Optional) */
@@ -87,7 +87,7 @@ func NewDescribeAlarmsRequest(
  * param pageSize: 页面大小，默认为20；取值范围[1, 100] (Optional)
  * param serviceCode: 产品名称 (Optional)
  * param resourceID: 资源ID (Optional)
- * param ruleType: 规则类型, 1表示资源监控，6表示站点监控 (Optional)
+ * param ruleType: 规则类型, 1表示资源监控，6表示站点监控,7表示可用性监控 (Optional)
  * param status: 规则报警状态, 1：正常, 2：报警，4：数据不足 (Optional)
  * param enabled: 规则状态：1为启用，0为禁用 (Optional)
  * param isAlarming: 是否为正在报警的规则，0为忽略，1为是，与 status 同时只能生效一个,isAlarming 优先生效 (Optional)
@@ -169,7 +169,7 @@ func (r *DescribeAlarmsRequest) SetResourceID(resourceID string) {
     r.ResourceID = &resourceID
 }
 
-/* param ruleType: 规则类型, 1表示资源监控，6表示站点监控(Optional) */
+/* param ruleType: 规则类型, 1表示资源监控，6表示站点监控,7表示可用性监控(Optional) */
 func (r *DescribeAlarmsRequest) SetRuleType(ruleType int) {
     r.RuleType = &ruleType
 }

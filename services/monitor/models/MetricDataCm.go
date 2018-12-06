@@ -36,4 +36,7 @@ type MetricDataCm struct {
 
     /* 指标值集合，数据类型必须为map类型，key为数据类型，value为数据值，当type=1时，key只能为”value”，上报的是原始值，当type=2时，K的值可以为"avg","sum","last","max","min","count"，只支持以上类型，否则会报错，value内容为整型或浮点型数字，最大值为9223372036854775807，count只支持>=0的数  */
     Values interface{} `json:"values"`
+
+    /* 数据的单位，长度不超过64字节，只允许英文、数字、下划线_、点., [0-9][a-z] [A-Z] [. _ ]，  其它会返回err (Optional) */
+    Unit *string `json:"unit"`
 }

@@ -49,4 +49,7 @@ type ElasticIp struct {
 
     /* 弹性ip创建时间 (Optional) */
     CreatedTime string `json:"createdTime"`
+
+    /* 弹性ip可用区属性，如果为空，表示全可用区 (Optional) */
+    Az string `json:"az"`
 }

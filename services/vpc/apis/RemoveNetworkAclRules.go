@@ -30,14 +30,14 @@ type RemoveNetworkAclRulesRequest struct {
     /* networkAclId ID  */
     NetworkAclId string `json:"networkAclId"`
 
-    /* 修改networkAcl属性  */
+    /* networkAcl规则ID列表  */
     RuleIds []string `json:"ruleIds"`
 }
 
 /*
  * param regionId: Region ID (Required)
  * param networkAclId: networkAclId ID (Required)
- * param ruleIds: 修改networkAcl属性 (Required)
+ * param ruleIds: networkAcl规则ID列表 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -63,7 +63,7 @@ func NewRemoveNetworkAclRulesRequest(
 /*
  * param regionId: Region ID (Required)
  * param networkAclId: networkAclId ID (Required)
- * param ruleIds: 修改networkAcl属性 (Required)
+ * param ruleIds: networkAcl规则ID列表 (Required)
  */
 func NewRemoveNetworkAclRulesRequestWithAllParams(
     regionId string,
@@ -107,7 +107,7 @@ func (r *RemoveNetworkAclRulesRequest) SetNetworkAclId(networkAclId string) {
     r.NetworkAclId = networkAclId
 }
 
-/* param ruleIds: 修改networkAcl属性(Required) */
+/* param ruleIds: networkAcl规则ID列表(Required) */
 func (r *RemoveNetworkAclRulesRequest) SetRuleIds(ruleIds []string) {
     r.RuleIds = ruleIds
 }

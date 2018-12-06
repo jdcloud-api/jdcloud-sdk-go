@@ -30,14 +30,14 @@ type AssociateNetworkAclRequest struct {
     /* networkAclId ID  */
     NetworkAclId string `json:"networkAclId"`
 
-    /* 修改networkAcl属性  */
+    /* networkAcl要绑定的子网ID列表, subnet已被其他networkAcl绑定时，自动解绑  */
     SubnetIds []string `json:"subnetIds"`
 }
 
 /*
  * param regionId: Region ID (Required)
  * param networkAclId: networkAclId ID (Required)
- * param subnetIds: 修改networkAcl属性 (Required)
+ * param subnetIds: networkAcl要绑定的子网ID列表, subnet已被其他networkAcl绑定时，自动解绑 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -63,7 +63,7 @@ func NewAssociateNetworkAclRequest(
 /*
  * param regionId: Region ID (Required)
  * param networkAclId: networkAclId ID (Required)
- * param subnetIds: 修改networkAcl属性 (Required)
+ * param subnetIds: networkAcl要绑定的子网ID列表, subnet已被其他networkAcl绑定时，自动解绑 (Required)
  */
 func NewAssociateNetworkAclRequestWithAllParams(
     regionId string,
@@ -107,7 +107,7 @@ func (r *AssociateNetworkAclRequest) SetNetworkAclId(networkAclId string) {
     r.NetworkAclId = networkAclId
 }
 
-/* param subnetIds: 修改networkAcl属性(Required) */
+/* param subnetIds: networkAcl要绑定的子网ID列表, subnet已被其他networkAcl绑定时，自动解绑(Required) */
 func (r *AssociateNetworkAclRequest) SetSubnetIds(subnetIds []string) {
     r.SubnetIds = subnetIds
 }

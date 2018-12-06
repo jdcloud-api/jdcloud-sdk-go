@@ -24,16 +24,16 @@ type DisableAlarmRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域 Id  */
+    /* region  */
     RegionId string `json:"regionId"`
 
-    /* 规则id  */
+    /* 规则 id  */
     AlarmId string `json:"alarmId"`
 }
 
 /*
- * param regionId: 地域 Id (Required)
- * param alarmId: 规则id (Required)
+ * param regionId: region (Required)
+ * param alarmId: 规则 id (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -44,7 +44,7 @@ func NewDisableAlarmRequest(
 
 	return &DisableAlarmRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/alarms/{alarmId}:disable",
+			URL:     "/regions/{regionId}/alarms/{alarmId}/disable",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -55,8 +55,8 @@ func NewDisableAlarmRequest(
 }
 
 /*
- * param regionId: 地域 Id (Required)
- * param alarmId: 规则id (Required)
+ * param regionId: region (Required)
+ * param alarmId: 规则 id (Required)
  */
 func NewDisableAlarmRequestWithAllParams(
     regionId string,
@@ -65,7 +65,7 @@ func NewDisableAlarmRequestWithAllParams(
 
     return &DisableAlarmRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/alarms/{alarmId}:disable",
+            URL:     "/regions/{regionId}/alarms/{alarmId}/disable",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -80,7 +80,7 @@ func NewDisableAlarmRequestWithoutParam() *DisableAlarmRequest {
 
     return &DisableAlarmRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/alarms/{alarmId}:disable",
+            URL:     "/regions/{regionId}/alarms/{alarmId}/disable",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -88,12 +88,12 @@ func NewDisableAlarmRequestWithoutParam() *DisableAlarmRequest {
     }
 }
 
-/* param regionId: 地域 Id(Required) */
+/* param regionId: region(Required) */
 func (r *DisableAlarmRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param alarmId: 规则id(Required) */
+/* param alarmId: 规则 id(Required) */
 func (r *DisableAlarmRequest) SetAlarmId(alarmId string) {
     r.AlarmId = alarmId
 }

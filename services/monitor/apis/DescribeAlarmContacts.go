@@ -54,7 +54,7 @@ func NewDescribeAlarmContactsRequest(
 
 	return &DescribeAlarmContactsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/:regionId/alarms/:alarmId/contacts",
+			URL:     "/regions/{regionId}/alarms/{alarmId}/contacts",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -81,7 +81,7 @@ func NewDescribeAlarmContactsRequestWithAllParams(
 
     return &DescribeAlarmContactsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/:regionId/alarms/:alarmId/contacts",
+            URL:     "/regions/{regionId}/alarms/{alarmId}/contacts",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -99,7 +99,7 @@ func NewDescribeAlarmContactsRequestWithoutParam() *DescribeAlarmContactsRequest
 
     return &DescribeAlarmContactsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/:regionId/alarms/:alarmId/contacts",
+            URL:     "/regions/{regionId}/alarms/{alarmId}/contacts",
             Method:  "GET",
             Header:  nil,
             Version: "v1",

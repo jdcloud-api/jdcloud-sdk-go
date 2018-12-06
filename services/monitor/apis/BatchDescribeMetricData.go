@@ -34,6 +34,9 @@ type BatchDescribeMetricDataRequest struct {
     /* 资源的uuid  */
     ResourceId string `json:"resourceId"`
 
+    /* 指标聚合方式，每个指标都有默认的聚合方式， 可选值包括：sum,avg.max.min (Optional) */
+    AggrType *string `json:"aggrType"`
+
     /* 查询时间范围的开始时间， UTC时间，格式：yyyy-MM-dd'T'HH:mm:ssZ（默认为当前时间，早于30d时，将被重置为30d） (Optional) */
     StartTime *string `json:"startTime"`
 
@@ -49,7 +52,10 @@ type BatchDescribeMetricDataRequest struct {
     /* 是否对查询的tags分组 (Optional) */
     GroupBy *bool `json:"groupBy"`
 
-    /* 自定义标签 (Optional) */
+    /* 是否跨资源查询，默认为false。当该字段为false时，取resourceId字段进行查询；当该子弹为true时，忽略resourceId字段，从tags中取resourceId作为实际的多资源id处理。 (Optional) */
+    MultiResources *bool `json:"multiResources"`
+
+    /* 自定义过滤标签，查询时必须在filters中指定要查询的metric，支持多个metric。如：  name='metric',values=["metric1","metric2"] (Optional) */
     Filters []monitor.Filter `json:"filters"`
 }
 
@@ -83,22 +89,26 @@ func NewBatchDescribeMetricDataRequest(
  * param regionId: 地域 Id (Required)
  * param serviceCode: 资源的类型，取值vm, lb, ip, database 等 (Required)
  * param resourceId: 资源的uuid (Required)
+ * param aggrType: 指标聚合方式，每个指标都有默认的聚合方式， 可选值包括：sum,avg.max.min (Optional)
  * param startTime: 查询时间范围的开始时间， UTC时间，格式：yyyy-MM-dd'T'HH:mm:ssZ（默认为当前时间，早于30d时，将被重置为30d） (Optional)
  * param endTime: 查询时间范围的结束时间， UTC时间，格式：2016-12- yyyy-MM-dd'T'HH:mm:ssZ（为空时，将由startTime与timeInterval计算得出） (Optional)
  * param timeInterval: 时间间隔：1h，6h，12h，1d，3d，7d，14d，固定时间间隔，timeInterval 与 endTime 至少填一项 (Optional)
  * param tags: 自定义标签 (Optional)
  * param groupBy: 是否对查询的tags分组 (Optional)
- * param filters: 自定义标签 (Optional)
+ * param multiResources: 是否跨资源查询，默认为false。当该字段为false时，取resourceId字段进行查询；当该子弹为true时，忽略resourceId字段，从tags中取resourceId作为实际的多资源id处理。 (Optional)
+ * param filters: 自定义过滤标签，查询时必须在filters中指定要查询的metric，支持多个metric。如：  name='metric',values=["metric1","metric2"] (Optional)
  */
 func NewBatchDescribeMetricDataRequestWithAllParams(
     regionId string,
     serviceCode string,
     resourceId string,
+    aggrType *string,
     startTime *string,
     endTime *string,
     timeInterval *string,
     tags []monitor.TagFilter,
     groupBy *bool,
+    multiResources *bool,
     filters []monitor.Filter,
 ) *BatchDescribeMetricDataRequest {
 
@@ -112,11 +122,13 @@ func NewBatchDescribeMetricDataRequestWithAllParams(
         RegionId: regionId,
         ServiceCode: serviceCode,
         ResourceId: resourceId,
+        AggrType: aggrType,
         StartTime: startTime,
         EndTime: endTime,
         TimeInterval: timeInterval,
         Tags: tags,
         GroupBy: groupBy,
+        MultiResources: multiResources,
         Filters: filters,
     }
 }
@@ -149,6 +161,11 @@ func (r *BatchDescribeMetricDataRequest) SetResourceId(resourceId string) {
     r.ResourceId = resourceId
 }
 
+/* param aggrType: 指标聚合方式，每个指标都有默认的聚合方式， 可选值包括：sum,avg.max.min(Optional) */
+func (r *BatchDescribeMetricDataRequest) SetAggrType(aggrType string) {
+    r.AggrType = &aggrType
+}
+
 /* param startTime: 查询时间范围的开始时间， UTC时间，格式：yyyy-MM-dd'T'HH:mm:ssZ（默认为当前时间，早于30d时，将被重置为30d）(Optional) */
 func (r *BatchDescribeMetricDataRequest) SetStartTime(startTime string) {
     r.StartTime = &startTime
@@ -174,7 +191,12 @@ func (r *BatchDescribeMetricDataRequest) SetGroupBy(groupBy bool) {
     r.GroupBy = &groupBy
 }
 
-/* param filters: 自定义标签(Optional) */
+/* param multiResources: 是否跨资源查询，默认为false。当该字段为false时，取resourceId字段进行查询；当该子弹为true时，忽略resourceId字段，从tags中取resourceId作为实际的多资源id处理。(Optional) */
+func (r *BatchDescribeMetricDataRequest) SetMultiResources(multiResources bool) {
+    r.MultiResources = &multiResources
+}
+
+/* param filters: 自定义过滤标签，查询时必须在filters中指定要查询的metric，支持多个metric。如：  name='metric',values=["metric1","metric2"](Optional) */
 func (r *BatchDescribeMetricDataRequest) SetFilters(filters []monitor.Filter) {
     r.Filters = filters
 }
