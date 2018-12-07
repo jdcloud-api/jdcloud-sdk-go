@@ -23,7 +23,7 @@ type Probe struct {
     PrivateIp string `json:"privateIp"`
 
     /* 探测源所在云主机公网ip (Optional) */
-    PublicIp *string `json:"publicIp"`
+    PublicIp string `json:"publicIp"`
 
     /* 探测源所在region  */
     Region string `json:"region"`
