@@ -23,11 +23,11 @@ type CreateProbeTaskParam struct {
     Address string `json:"address"`
 
     /* 探测间隔（单位：秒）：默认值：300，取值范围[60,1200] (Optional) */
-    Frequency *int64 `json:"frequency"`
+    Frequency int64 `json:"frequency"`
 
     /* http body：选择探测类型为1=http时有效，最长不超过1024字节
 in: query (Optional) */
-    HttpBody *string `json:"httpBody"`
+    HttpBody string `json:"httpBody"`
 
     /* http cookie：选择探测类型为1=http时有效，最大允许20个key、value对，最长不超过1024字节 (Optional) */
     HttpCookie []KeyValue `json:"httpCookie"`
@@ -36,14 +36,14 @@ in: query (Optional) */
     HttpHeader []KeyValue `json:"httpHeader"`
 
     /* http探测方法：选择探测类型为1=http时有效，默认值为1=get，可选值：1:get、2:post、3:head (Optional) */
-    HttpType *int64 `json:"httpType"`
+    HttpType int64 `json:"httpType"`
 
     /* task名称，不允许重复，长度不超过32字符，只允许中英文、数字、下划线_、中划线-, [0-9][a-z] [A-Z] [- _ ]  */
     Name string `json:"name"`
 
     /* 探测端口，探测类型为telnet时必填，取值范围 [1-65535]，http类型忽略该参数
 in: query (Optional) */
-    Port *int64 `json:"port"`
+    Port int64 `json:"port"`
 
     /* 探测类型：1=http、2=telnet  */
     ProbeType int64 `json:"probeType"`
@@ -52,15 +52,15 @@ in: query (Optional) */
     Probes []Probe `json:"probes"`
 
     /* 探测目标id：该探测对象的uuid，任务类型为2：rds、3：redis时必填， (Optional) */
-    TargetId *string `json:"targetId"`
+    TargetId string `json:"targetId"`
 
     /* 探测目标region：该探测对象所在region，任务类型为2：rds、3：redis时必填
 in: query (Optional) */
-    TargetRegion *string `json:"targetRegion"`
+    TargetRegion string `json:"targetRegion"`
 
     /* task类型：1=url/ip、2=RDS、3=redis  */
     TaskType int64 `json:"taskType"`
 
     /* 探测超时时间（单位：秒）：默认值:5，取值范围 [1,300] (Optional) */
-    Timeout *int64 `json:"timeout"`
+    Timeout int64 `json:"timeout"`
 }

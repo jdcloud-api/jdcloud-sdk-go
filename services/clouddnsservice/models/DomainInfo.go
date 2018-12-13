@@ -45,4 +45,7 @@ type DomainInfo struct {
 
     /* 是否是京东云资源 (Optional) */
     JcloudNs bool `json:"jcloudNs"`
+
+    /* 域名的锁定状态，0:未锁定， 1:已锁定 (Optional) */
+    LockStatus int `json:"lockStatus"`
 }

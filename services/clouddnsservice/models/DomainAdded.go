@@ -17,26 +17,20 @@
 package models
 
 
-type Getalb struct {
+type DomainAdded struct {
 
-    /* 负载均衡的解析记录的列表中解析记录是否是相同的权重<br>
-true: 按权重分配负载<br>
-false: 均等负载
- (Optional) */
-    IsBalance bool `json:"isBalance"`
+    /* 域名的唯一ID (Optional) */
+    Id int `json:"id"`
 
-    /* 主机记录 (Optional) */
-    Record string `json:"record"`
+    /* 域名字符串 (Optional) */
+    DomainName string `json:"domainName"`
 
-    /* 解析的类型 (Optional) */
-    Type string `json:"type"`
+    /* 创建时间，格式Unix timestamp，时间单位：毫秒 (Optional) */
+    CreateTime int64 `json:"createTime"`
 
-    /* 解析线路的名称 (Optional) */
-    ViewName string `json:"viewName"`
+    /* 过期时间，格式Unix timestamp，时间单位：毫秒 (Optional) */
+    ExpirationDate int64 `json:"expirationDate"`
 
-    /* 解析线路的ID (Optional) */
-    ViewValue int `json:"viewValue"`
-
-    /* 负载均衡的解析记录的列表 (Optional) */
-    Items []HostRRlb `json:"items"`
+    /* 套餐类型，0->免费 1->企业版 2->企业高级版 (Optional) */
+    PackId int `json:"packId"`
 }

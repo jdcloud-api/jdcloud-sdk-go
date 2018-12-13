@@ -181,6 +181,6 @@ type AddDomainResponse struct {
 }
 
 type AddDomainResult struct {
-    Data clouddnsservice.Domain `json:"data"`
+    Data clouddnsservice.DomainAdded `json:"data"`
     Order string `json:"order"`
 }

@@ -32,13 +32,13 @@ type BatchSetDNS struct {
     Id int `json:"id"`
 
     /* 是否是京东云资源 (Optional) */
-    JcloudRes bool `json:"jcloudRes"`
+    JcloudRes *bool `json:"jcloudRes"`
 
     /* 优先级，只存在于MX, SRV解析记录类型 (Optional) */
-    MxPriority int `json:"mxPriority"`
+    MxPriority *int `json:"mxPriority"`
 
     /* 端口，只存在于SRV解析记录类型 (Optional) */
-    Port int `json:"port"`
+    Port *int `json:"port"`
 
     /* 解析记录的生存时间  */
     Ttl int `json:"ttl"`
@@ -47,7 +47,7 @@ type BatchSetDNS struct {
     Type string `json:"type"`
 
     /* 解析记录的权重 (Optional) */
-    Weight int `json:"weight"`
+    Weight *int `json:"weight"`
 
     /* 解析线路的ID  */
     ViewValue int `json:"viewValue"`

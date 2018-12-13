@@ -29,7 +29,7 @@ type CreateCmAlarmParam struct {
     ContactPersons []string `json:"contactPersons"`
 
     /* 取样频次 (Optional) */
-    DownSample *string `json:"downSample"`
+    DownSample string `json:"downSample"`
 
     /* 根据产品线查询可用监控项列表 接口 返回的Metric字段  */
     MetricUID string `json:"metricUID"`
@@ -38,7 +38,7 @@ type CreateCmAlarmParam struct {
     NamespaceUID string `json:"namespaceUID"`
 
     /* 通知周期 单位：小时 (Optional) */
-    NoticePeriod *int64 `json:"noticePeriod"`
+    NoticePeriod int64 `json:"noticePeriod"`
 
     /* 报警规则对应实例列表，每次最多100个，例如"['resourceId1','resourceId2']"  */
     ObjUIDs []string `json:"objUIDs"`

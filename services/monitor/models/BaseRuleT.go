@@ -20,22 +20,22 @@ package models
 type BaseRuleT struct {
 
     /* 弹性伸缩组ID (Optional) */
-    AutoScalingPolicyId *string `json:"autoScalingPolicyId"`
+    AutoScalingPolicyId string `json:"autoScalingPolicyId"`
 
     /* 监控项单位 (Optional) */
-    CalculateUnit *string `json:"calculateUnit"`
+    CalculateUnit string `json:"calculateUnit"`
 
     /* 统计方法，必须与定义的metric一致，可选值列表：avg,sum,max,min  */
     Calculation string `json:"calculation"`
 
     /* 降采样函数 (Optional) */
-    DownSample *string `json:"downSample"`
+    DownSample string `json:"downSample"`
 
     /* 监控项ID  */
     MetricId int64 `json:"metricId"`
 
     /*  (Optional) */
-    NoticeLevel *NoticeLevel `json:"noticeLevel"`
+    NoticeLevel NoticeLevel `json:"noticeLevel"`
 
     /* 通知周期，单位：小时  */
     NoticePeriod int64 `json:"noticePeriod"`
@@ -50,7 +50,7 @@ type BaseRuleT struct {
     RuleType int64 `json:"ruleType"`
 
     /* 多值标签 (Optional) */
-    Tags *interface{} `json:"tags"`
+    Tags interface{} `json:"tags"`
 
     /* 报警阈值，目前只开放数值类型功能  */
     Threshold float64 `json:"threshold"`

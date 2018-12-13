@@ -27,4 +27,7 @@ type HostRRlb struct {
 
     /* 解析记录的权重 (Optional) */
     Weight int `json:"weight"`
+
+    /* 此条记录在总均衡中的比率的100倍 (Optional) */
+    Rate float64 `json:"rate"`
 }

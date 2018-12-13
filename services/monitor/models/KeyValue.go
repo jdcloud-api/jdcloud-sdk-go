@@ -20,8 +20,8 @@ package models
 type KeyValue struct {
 
     /* key (Optional) */
-    Key *string `json:"key"`
+    Key string `json:"key"`
 
     /* value (Optional) */
-    Value *string `json:"value"`
+    Value string `json:"value"`
 }

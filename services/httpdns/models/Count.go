@@ -17,26 +17,13 @@
 package models
 
 
-type Getalb struct {
+type Count struct {
 
-    /* 负载均衡的解析记录的列表中解析记录是否是相同的权重<br>
-true: 按权重分配负载<br>
-false: 均等负载
+    /* 类型，"http_auth","http_non_auth","https_auth","https_non_auth","all"5种 (Optional) */
+    Name string `json:"name"`
+
+    /* 此类型的数据。<br>
+"all"类型的data是"http_auth","http_noauth","https_auth","https_noauth"四个类型的data之和。
  (Optional) */
-    IsBalance bool `json:"isBalance"`
-
-    /* 主机记录 (Optional) */
-    Record string `json:"record"`
-
-    /* 解析的类型 (Optional) */
-    Type string `json:"type"`
-
-    /* 解析线路的名称 (Optional) */
-    ViewName string `json:"viewName"`
-
-    /* 解析线路的ID (Optional) */
-    ViewValue int `json:"viewValue"`
-
-    /* 负载均衡的解析记录的列表 (Optional) */
-    Items []HostRRlb `json:"items"`
+    Data []int64 `json:"data"`
 }

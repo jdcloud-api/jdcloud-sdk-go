@@ -40,7 +40,7 @@ func NewMonitorClient(credential *core.Credential) *MonitorClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "monitor",
-            Revision:    "1.2.4",
+            Revision:    "1.2.5",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -53,8 +53,8 @@ func (c *MonitorClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-/* 查询报警模板 */
-func (c *MonitorClient) DescribeTemplates(request *monitor.DescribeTemplatesRequest) (*monitor.DescribeTemplatesResponse, error) {
+/* 查看某资源多个监控项数据，metric介绍1：<a href="https://docs.jdcloud.com/cn/monitoring/metrics">Metrics</a> */
+func (c *MonitorClient) DescribeMetricData(request *monitor.DescribeMetricDataRequest) (*monitor.DescribeMetricDataResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -63,449 +63,7 @@ func (c *MonitorClient) DescribeTemplates(request *monitor.DescribeTemplatesRequ
         return nil, err
     }
 
-    jdResp := &monitor.DescribeTemplatesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询obj */
-func (c *MonitorClient) DescribeObj(request *monitor.DescribeObjRequest) (*monitor.DescribeObjResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DescribeObjResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 创建可用性监控任务 */
-func (c *MonitorClient) CreateProbeTask(request *monitor.CreateProbeTaskRequest) (*monitor.CreateProbeTaskResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.CreateProbeTaskResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 创建报警规则，可以为某一个实例创建报警规则，也可以为多个实例同时创建报警规则。 */
-func (c *MonitorClient) CreateAlarm(request *monitor.CreateAlarmRequest) (*monitor.CreateAlarmResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.CreateAlarmResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询自定义监控的metric列表 */
-func (c *MonitorClient) DescribeMetricsCm(request *monitor.DescribeMetricsCmRequest) (*monitor.DescribeMetricsCmResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DescribeMetricsCmResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 创建自定义监控规则 */
-func (c *MonitorClient) CreateAlarmCm(request *monitor.CreateAlarmCmRequest) (*monitor.CreateAlarmCmResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.CreateAlarmCmResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 更新自定义监控规则 */
-func (c *MonitorClient) UpdateAlarmCm(request *monitor.UpdateAlarmCmRequest) (*monitor.UpdateAlarmCmResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.UpdateAlarmCmResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询obj列表 */
-func (c *MonitorClient) DescribeObjsByNsUID(request *monitor.DescribeObjsByNsUIDRequest) (*monitor.DescribeObjsByNsUIDResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DescribeObjsByNsUIDResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 修改可用性监控任务 */
-func (c *MonitorClient) UpdateProbeTask(request *monitor.UpdateProbeTaskRequest) (*monitor.UpdateProbeTaskResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.UpdateProbeTaskResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询可用性监控任务列表 */
-func (c *MonitorClient) DescribeProbeTasks(request *monitor.DescribeProbeTasksRequest) (*monitor.DescribeProbeTasksResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DescribeProbeTasksResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 删除可用性监控任务 */
-func (c *MonitorClient) DeleteProbeTask(request *monitor.DeleteProbeTaskRequest) (*monitor.DeleteProbeTaskResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DeleteProbeTaskResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询规则, 查询参数组合及优先级从高到低为：
-1：serviceCode不为空
-1.1：serviceCode + resourceId
-1.2: serviceCode + resourceIds
-2：serviceCodes不为空
-3: 所有规则 */
-func (c *MonitorClient) DescribeAlarms(request *monitor.DescribeAlarmsRequest) (*monitor.DescribeAlarmsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DescribeAlarmsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 启用报警规则，当客户的报警规则处于停止状态时，可以使用此接口启用报警规则。 */
-func (c *MonitorClient) EnableAlarm(request *monitor.EnableAlarmRequest) (*monitor.EnableAlarmResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.EnableAlarmResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询自定义监控的metric数据 */
-func (c *MonitorClient) DescribeMetricDataCm(request *monitor.DescribeMetricDataCmRequest) (*monitor.DescribeMetricDataCmResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DescribeMetricDataCmResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 删除自定义监控命名空间 */
-func (c *MonitorClient) DeleteNamespace(request *monitor.DeleteNamespaceRequest) (*monitor.DeleteNamespaceResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DeleteNamespaceResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 修改已创建的报警规则 */
-func (c *MonitorClient) UpdateAlarm(request *monitor.UpdateAlarmRequest) (*monitor.UpdateAlarmResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.UpdateAlarmResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询是否是新用户 */
-func (c *MonitorClient) DescribeIsUserNew(request *monitor.DescribeIsUserNewRequest) (*monitor.DescribeIsUserNewResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DescribeIsUserNewResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询规则的报警联系人 */
-func (c *MonitorClient) DescribeAlarmContacts(request *monitor.DescribeAlarmContactsRequest) (*monitor.DescribeAlarmContactsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DescribeAlarmContactsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询 可用性监控任务的探测源列表 */
-func (c *MonitorClient) DiscribeProbes(request *monitor.DiscribeProbesRequest) (*monitor.DiscribeProbesResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DiscribeProbesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询自定义监控项数据 */
-func (c *MonitorClient) DescribeCmMetricDataByTagSpec(request *monitor.DescribeCmMetricDataByTagSpecRequest) (*monitor.DescribeCmMetricDataByTagSpecResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DescribeCmMetricDataByTagSpecResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 更新自定义报警模板 */
-func (c *MonitorClient) UpdateTemplate(request *monitor.UpdateTemplateRequest) (*monitor.UpdateTemplateResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.UpdateTemplateResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 启用、禁用可用性监控任务 */
-func (c *MonitorClient) ProbeTaskEnable(request *monitor.ProbeTaskEnableRequest) (*monitor.ProbeTaskEnableResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.ProbeTaskEnableResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询所有region的自定义监控规则 */
-func (c *MonitorClient) DescribeAllRegionAlarmsCm(request *monitor.DescribeAllRegionAlarmsCmRequest) (*monitor.DescribeAllRegionAlarmsCmResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DescribeAllRegionAlarmsCmResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查看sqlserver数据库某资源一段时间内的topN慢sql数据 */
-func (c *MonitorClient) DescribeTopNSlowSql(request *monitor.DescribeTopNSlowSqlRequest) (*monitor.DescribeTopNSlowSqlResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DescribeTopNSlowSqlResponse{}
+    jdResp := &monitor.DescribeMetricDataResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -533,8 +91,8 @@ func (c *MonitorClient) LastDownsample(request *monitor.LastDownsampleRequest) (
     return jdResp, err
 }
 
-/* 批量创建报警规则，可以为多个实例创建多个报警规则。 */
-func (c *MonitorClient) BatchCreateAlarms(request *monitor.BatchCreateAlarmsRequest) (*monitor.BatchCreateAlarmsResponse, error) {
+/* 修改已创建的报警规则 */
+func (c *MonitorClient) UpdateAlarm(request *monitor.UpdateAlarmRequest) (*monitor.UpdateAlarmResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -543,330 +101,7 @@ func (c *MonitorClient) BatchCreateAlarms(request *monitor.BatchCreateAlarmsRequ
         return nil, err
     }
 
-    jdResp := &monitor.BatchCreateAlarmsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 创建自定义报警模板 */
-func (c *MonitorClient) CreateTemplate(request *monitor.CreateTemplateRequest) (*monitor.CreateTemplateResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.CreateTemplateResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 根据模板ID查询报警模板 */
-func (c *MonitorClient) DescribeTemplatesByTemplateID(request *monitor.DescribeTemplatesByTemplateIDRequest) (*monitor.DescribeTemplatesByTemplateIDResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DescribeTemplatesByTemplateIDResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询可用创建监控规则的指标列表,metric介绍：<a href="https://docs.jdcloud.com/cn/monitoring/metrics">Metrics</a> */
-func (c *MonitorClient) DescribeMetricsForCreateAlarm(request *monitor.DescribeMetricsForCreateAlarmRequest) (*monitor.DescribeMetricsForCreateAlarmResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DescribeMetricsForCreateAlarmResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询自定义监控命名空间列表 */
-func (c *MonitorClient) DescribeNamespaces(request *monitor.DescribeNamespacesRequest) (*monitor.DescribeNamespacesResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DescribeNamespacesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 删除obj */
-func (c *MonitorClient) DeleteObj(request *monitor.DeleteObjRequest) (*monitor.DeleteObjResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DeleteObjResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 根据产品线查询查询可以创建模板的metric */
-func (c *MonitorClient) DescribeMetricsForCreateTemplate(request *monitor.DescribeMetricsForCreateTemplateRequest) (*monitor.DescribeMetricsForCreateTemplateResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DescribeMetricsForCreateTemplateResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询可用性监控任务的指定探测源的异常探测历史 */
-func (c *MonitorClient) DescribeProbeHistory(request *monitor.DescribeProbeHistoryRequest) (*monitor.DescribeProbeHistoryResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DescribeProbeHistoryResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 批量启用规则 */
-func (c *MonitorClient) BatchEnableAlarms(request *monitor.BatchEnableAlarmsRequest) (*monitor.BatchEnableAlarmsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.BatchEnableAlarmsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查看某资源的监控数据 */
-func (c *MonitorClient) DescribeMetricDataAm(request *monitor.DescribeMetricDataAmRequest) (*monitor.DescribeMetricDataAmResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DescribeMetricDataAmResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 禁用报警规则。报警规则禁用后，将停止探测实例的监控项数据。 */
-func (c *MonitorClient) DisableAlarm(request *monitor.DisableAlarmRequest) (*monitor.DisableAlarmResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DisableAlarmResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询自定义监控规则 */
-func (c *MonitorClient) DescribeAlarmsByID(request *monitor.DescribeAlarmsByIDRequest) (*monitor.DescribeAlarmsByIDResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DescribeAlarmsByIDResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询自定义监控所有region规则告警历史 */
-func (c *MonitorClient) DescribeAlarmHistoryAllRegionCm(request *monitor.DescribeAlarmHistoryAllRegionCmRequest) (*monitor.DescribeAlarmHistoryAllRegionCmResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DescribeAlarmHistoryAllRegionCmResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询自定义监控规则 */
-func (c *MonitorClient) DescribeAlarmsCm(request *monitor.DescribeAlarmsCmRequest) (*monitor.DescribeAlarmsCmResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DescribeAlarmsCmResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询自定义监控规则告警历史 */
-func (c *MonitorClient) DescribeAlarmHistoryCm(request *monitor.DescribeAlarmHistoryCmRequest) (*monitor.DescribeAlarmHistoryCmResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DescribeAlarmHistoryCmResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查看某资源多个监控项数据，metric介绍1：<a href="https://docs.jdcloud.com/cn/monitoring/metrics">Metrics</a> */
-func (c *MonitorClient) DescribeMetricData(request *monitor.DescribeMetricDataRequest) (*monitor.DescribeMetricDataResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DescribeMetricDataResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 概览页规则统计接口 */
-func (c *MonitorClient) DescribeRuleCounting(request *monitor.DescribeRuleCountingRequest) (*monitor.DescribeRuleCountingResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DescribeRuleCountingResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 批量删除规则 */
-func (c *MonitorClient) BatchDeleteAlarms(request *monitor.BatchDeleteAlarmsRequest) (*monitor.BatchDeleteAlarmsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.BatchDeleteAlarmsResponse{}
+    jdResp := &monitor.UpdateAlarmResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -919,8 +154,8 @@ func (c *MonitorClient) DescribeMetrics(request *monitor.DescribeMetricsRequest)
     return jdResp, err
 }
 
-/* 查询可用性监控任务 */
-func (c *MonitorClient) DescribeProbeTask(request *monitor.DescribeProbeTaskRequest) (*monitor.DescribeProbeTaskResponse, error) {
+/* 创建报警规则，可以为某一个实例创建报警规则，也可以为多个实例同时创建报警规则。 */
+func (c *MonitorClient) CreateAlarm(request *monitor.CreateAlarmRequest) (*monitor.CreateAlarmResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -929,7 +164,7 @@ func (c *MonitorClient) DescribeProbeTask(request *monitor.DescribeProbeTaskRequ
         return nil, err
     }
 
-    jdResp := &monitor.DescribeProbeTaskResponse{}
+    jdResp := &monitor.CreateAlarmResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -938,8 +173,8 @@ func (c *MonitorClient) DescribeProbeTask(request *monitor.DescribeProbeTaskRequ
     return jdResp, err
 }
 
-/* 查看某资源多个监控项数据，metric介绍：<a href="https://docs.jdcloud.com/cn/monitoring/metrics">Metrics</a> */
-func (c *MonitorClient) BatchDescribeMetricData(request *monitor.BatchDescribeMetricDataRequest) (*monitor.BatchDescribeMetricDataResponse, error) {
+/* 查询可用创建监控规则的指标列表,metric介绍：<a href="https://docs.jdcloud.com/cn/monitoring/metrics">Metrics</a> */
+func (c *MonitorClient) DescribeMetricsForCreateAlarm(request *monitor.DescribeMetricsForCreateAlarmRequest) (*monitor.DescribeMetricsForCreateAlarmResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -948,7 +183,7 @@ func (c *MonitorClient) BatchDescribeMetricData(request *monitor.BatchDescribeMe
         return nil, err
     }
 
-    jdResp := &monitor.BatchDescribeMetricDataResponse{}
+    jdResp := &monitor.DescribeMetricsForCreateAlarmResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -957,8 +192,8 @@ func (c *MonitorClient) BatchDescribeMetricData(request *monitor.BatchDescribeMe
     return jdResp, err
 }
 
-/* 应用报警模板到资源 */
-func (c *MonitorClient) ApplyTemplate(request *monitor.ApplyTemplateRequest) (*monitor.ApplyTemplateResponse, error) {
+/* 查询规则的报警联系人 */
+func (c *MonitorClient) DescribeAlarmContacts(request *monitor.DescribeAlarmContactsRequest) (*monitor.DescribeAlarmContactsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -967,7 +202,7 @@ func (c *MonitorClient) ApplyTemplate(request *monitor.ApplyTemplateRequest) (*m
         return nil, err
     }
 
-    jdResp := &monitor.ApplyTemplateResponse{}
+    jdResp := &monitor.DescribeAlarmContactsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -976,8 +211,8 @@ func (c *MonitorClient) ApplyTemplate(request *monitor.ApplyTemplateRequest) (*m
     return jdResp, err
 }
 
-/* 批量删除自定义报警模板 */
-func (c *MonitorClient) DeleteTemplates(request *monitor.DeleteTemplatesRequest) (*monitor.DeleteTemplatesResponse, error) {
+/* 查询自定义监控项数据 */
+func (c *MonitorClient) DescribeCmMetricDataByTagSpec(request *monitor.DescribeCmMetricDataByTagSpecRequest) (*monitor.DescribeCmMetricDataByTagSpecResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -986,26 +221,7 @@ func (c *MonitorClient) DeleteTemplates(request *monitor.DeleteTemplatesRequest)
         return nil, err
     }
 
-    jdResp := &monitor.DeleteTemplatesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 尚未恢复的告警查询接口 */
-func (c *MonitorClient) DescribeAlarmingRules(request *monitor.DescribeAlarmingRulesRequest) (*monitor.DescribeAlarmingRulesResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DescribeAlarmingRulesResponse{}
+    jdResp := &monitor.DescribeCmMetricDataByTagSpecResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -1033,25 +249,6 @@ func (c *MonitorClient) DeleteAlarmsCm(request *monitor.DeleteAlarmsCmRequest) (
     return jdResp, err
 }
 
-/* 为阻塞进程数提供的特殊接口 */
-func (c *MonitorClient) DescribeSqlserverBlockProcess(request *monitor.DescribeSqlserverBlockProcessRequest) (*monitor.DescribeSqlserverBlockProcessResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DescribeSqlserverBlockProcessResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 该接口为自定义监控数据上报的接口，方便您将自己采集的时序数据上报到云监控。不同region域名上报不同region的数据，参考：<a href="https://docs.jdcloud.com/cn/monitoring/reporting-monitoring-data">调用说明</a>可上报原始数据和已聚合的统计数据。支持批量上报方式。单次请求最多包含 50 个数据点；数据大小不超过 256k。 */
 func (c *MonitorClient) PutMetricData(request *monitor.PutMetricDataRequest) (*monitor.PutMetricDataResponse, error) {
     if request == nil {
@@ -1071,8 +268,8 @@ func (c *MonitorClient) PutMetricData(request *monitor.PutMetricDataRequest) (*m
     return jdResp, err
 }
 
-/* 批量禁用规则 */
-func (c *MonitorClient) BatchDisableAlarms(request *monitor.BatchDisableAlarmsRequest) (*monitor.BatchDisableAlarmsResponse, error) {
+/* 禁用报警规则。报警规则禁用后，将停止探测实例的监控项数据。 */
+func (c *MonitorClient) DisableAlarm(request *monitor.DisableAlarmRequest) (*monitor.DisableAlarmResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -1081,7 +278,31 @@ func (c *MonitorClient) BatchDisableAlarms(request *monitor.BatchDisableAlarmsRe
         return nil, err
     }
 
-    jdResp := &monitor.BatchDisableAlarmsResponse{}
+    jdResp := &monitor.DisableAlarmResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询规则, 查询参数组合及优先级从高到低为：
+1：serviceCode不为空
+1.1：serviceCode + resourceId
+1.2: serviceCode + resourceIds
+2：serviceCodes不为空
+3: 所有规则 */
+func (c *MonitorClient) DescribeAlarms(request *monitor.DescribeAlarmsRequest) (*monitor.DescribeAlarmsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &monitor.DescribeAlarmsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -1107,6 +328,44 @@ func (c *MonitorClient) DescribeAlarmHistoryAllRegion(request *monitor.DescribeA
     }
 
     jdResp := &monitor.DescribeAlarmHistoryAllRegionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询规则详情 */
+func (c *MonitorClient) DescribeAlarmsByID(request *monitor.DescribeAlarmsByIDRequest) (*monitor.DescribeAlarmsByIDResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &monitor.DescribeAlarmsByIDResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 启用报警规则，当客户的报警规则处于停止状态时，可以使用此接口启用报警规则。 */
+func (c *MonitorClient) EnableAlarm(request *monitor.EnableAlarmRequest) (*monitor.EnableAlarmResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &monitor.EnableAlarmResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
