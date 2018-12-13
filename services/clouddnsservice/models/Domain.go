@@ -33,4 +33,7 @@ type Domain struct {
 
     /* 套餐类型，0->免费 1->企业版 2->企业高级版 (Optional) */
     PackId int `json:"packId"`
+
+    /* 域名的锁定状态，0:未锁定， 1:已锁定 (Optional) */
+    LockStatus int `json:"lockStatus"`
 }

@@ -17,7 +17,7 @@
 package models
 
 
-type Getalb struct {
+type Getlb struct {
 
     /* 负载均衡的解析记录的列表中解析记录是否是相同的权重<br>
 true: 按权重分配负载<br>

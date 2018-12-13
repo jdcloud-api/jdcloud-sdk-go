@@ -17,26 +17,17 @@
 package models
 
 
-type Getalb struct {
+type TotalcountData struct {
 
-    /* 负载均衡的解析记录的列表中解析记录是否是相同的权重<br>
-true: 按权重分配负载<br>
-false: 均等负载
- (Optional) */
-    IsBalance bool `json:"isBalance"`
+    /* 域名查询次数数组 (Optional) */
+    DataList []Totalcount `json:"dataList"`
 
-    /* 主机记录 (Optional) */
-    Record string `json:"record"`
+    /* 当前页的个数 (Optional) */
+    CurrentCount int `json:"currentCount"`
 
-    /* 解析的类型 (Optional) */
-    Type string `json:"type"`
+    /* 总数 (Optional) */
+    TotalCount int `json:"totalCount"`
 
-    /* 解析线路的名称 (Optional) */
-    ViewName string `json:"viewName"`
-
-    /* 解析线路的ID (Optional) */
-    ViewValue int `json:"viewValue"`
-
-    /* 负载均衡的解析记录的列表 (Optional) */
-    Items []HostRRlb `json:"items"`
+    /* 总页数 (Optional) */
+    TotalPage int `json:"totalPage"`
 }

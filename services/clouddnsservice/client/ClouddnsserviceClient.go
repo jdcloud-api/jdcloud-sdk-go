@@ -40,7 +40,7 @@ func NewClouddnsserviceClient(credential *core.Credential) *ClouddnsserviceClien
             Credential:  *credential,
             Config:      *config,
             ServiceName: "clouddnsservice",
-            Revision:    "1.0.7",
+            Revision:    "1.0.9",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -64,44 +64,6 @@ func (c *ClouddnsserviceClient) DelDomain(request *clouddnsservice.DelDomainRequ
     }
 
     jdResp := &clouddnsservice.DelDomainResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 域名的监控项修改 */
-func (c *ClouddnsserviceClient) UpdateMonitor(request *clouddnsservice.UpdateMonitorRequest) (*clouddnsservice.UpdateMonitorResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &clouddnsservice.UpdateMonitorResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 删除域名的自定义解析线路的IP段 */
-func (c *ClouddnsserviceClient) DelUserViewIP(request *clouddnsservice.DelUserViewIPRequest) (*clouddnsservice.DelUserViewIPResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &clouddnsservice.DelUserViewIPResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -140,27 +102,6 @@ func (c *ClouddnsserviceClient) AddRR(request *clouddnsservice.AddRRRequest) (*c
     }
 
     jdResp := &clouddnsservice.AddRRResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询用户名下的主域名列表。<br>    
-请在调用域名相关的API之前，调用此API获取相关的domainId和domainName。
- */
-func (c *ClouddnsserviceClient) GetDomains(request *clouddnsservice.GetDomainsRequest) (*clouddnsservice.GetDomainsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &clouddnsservice.GetDomainsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -226,25 +167,6 @@ func (c *ClouddnsserviceClient) AddDomain(request *clouddnsservice.AddDomainRequ
     return jdResp, err
 }
 
-/* 查询域名的自定义解析线路的IP段 */
-func (c *ClouddnsserviceClient) GetUserViewIP(request *clouddnsservice.GetUserViewIPRequest) (*clouddnsservice.GetUserViewIPResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &clouddnsservice.GetUserViewIPResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 添加域名的自定义解析线路 */
 func (c *ClouddnsserviceClient) AddUserView(request *clouddnsservice.AddUserViewRequest) (*clouddnsservice.AddUserViewResponse, error) {
     if request == nil {
@@ -256,6 +178,25 @@ func (c *ClouddnsserviceClient) AddUserView(request *clouddnsservice.AddUserView
     }
 
     jdResp := &clouddnsservice.AddUserViewResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询域名的自定义解析线路的IP段 */
+func (c *ClouddnsserviceClient) GetUserViewIP(request *clouddnsservice.GetUserViewIPRequest) (*clouddnsservice.GetUserViewIPResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &clouddnsservice.GetUserViewIPResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -283,44 +224,6 @@ func (c *ClouddnsserviceClient) GetDomainQueryTraffic(request *clouddnsservice.G
     return jdResp, err
 }
 
-/* 查询子域名的可用监控对象 */
-func (c *ClouddnsserviceClient) GetTargets(request *clouddnsservice.GetTargetsRequest) (*clouddnsservice.GetTargetsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &clouddnsservice.GetTargetsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询域名的自定义解析线路 */
-func (c *ClouddnsserviceClient) GetUserView(request *clouddnsservice.GetUserViewRequest) (*clouddnsservice.GetUserViewResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &clouddnsservice.GetUserViewResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 添加域名的自定义解析线路的IP段 */
 func (c *ClouddnsserviceClient) AddUserViewIP(request *clouddnsservice.AddUserViewIPRequest) (*clouddnsservice.AddUserViewIPResponse, error) {
     if request == nil {
@@ -340,25 +243,6 @@ func (c *ClouddnsserviceClient) AddUserViewIP(request *clouddnsservice.AddUserVi
     return jdResp, err
 }
 
-/* 查看域名的解析次数 */
-func (c *ClouddnsserviceClient) GetDomainQueryCount(request *clouddnsservice.GetDomainQueryCountRequest) (*clouddnsservice.GetDomainQueryCountResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &clouddnsservice.GetDomainQueryCountResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 删除域名的自定义解析线路 */
 func (c *ClouddnsserviceClient) DelUserView(request *clouddnsservice.DelUserViewRequest) (*clouddnsservice.DelUserViewResponse, error) {
     if request == nil {
@@ -370,25 +254,6 @@ func (c *ClouddnsserviceClient) DelUserView(request *clouddnsservice.DelUserView
     }
 
     jdResp := &clouddnsservice.DelUserViewResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 添加子域名的监控项，默认把子域名的所有监控项都添加上监控 */
-func (c *ClouddnsserviceClient) AddMonitor(request *clouddnsservice.AddMonitorRequest) (*clouddnsservice.AddMonitorResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &clouddnsservice.AddMonitorResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
@@ -475,6 +340,221 @@ func (c *ClouddnsserviceClient) OperateMonitor(request *clouddnsservice.OperateM
     return jdResp, err
 }
 
+/* 启用、停用、删除主域名下的解析记录 */
+func (c *ClouddnsserviceClient) OperateRR(request *clouddnsservice.OperateRRRequest) (*clouddnsservice.OperateRRResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &clouddnsservice.OperateRRResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 域名的监控项修改 */
+func (c *ClouddnsserviceClient) UpdateMonitor(request *clouddnsservice.UpdateMonitorRequest) (*clouddnsservice.UpdateMonitorResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &clouddnsservice.UpdateMonitorResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除域名的自定义解析线路的IP段 */
+func (c *ClouddnsserviceClient) DelUserViewIP(request *clouddnsservice.DelUserViewIPRequest) (*clouddnsservice.DelUserViewIPResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &clouddnsservice.DelUserViewIPResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询用户名下的主域名列表。<br>    
+请在调用域名相关的API之前，调用此API获取相关的domainId和domainName。
+ */
+func (c *ClouddnsserviceClient) GetDomains(request *clouddnsservice.GetDomainsRequest) (*clouddnsservice.GetDomainsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &clouddnsservice.GetDomainsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查看当前域名所有的有负载均衡的解析记录<br>
+这些解析记录分页展示的列表
+ */
+func (c *ClouddnsserviceClient) GetLB(request *clouddnsservice.GetLBRequest) (*clouddnsservice.GetLBResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &clouddnsservice.GetLBResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询子域名的可用监控对象 */
+func (c *ClouddnsserviceClient) GetTargets(request *clouddnsservice.GetTargetsRequest) (*clouddnsservice.GetTargetsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &clouddnsservice.GetTargetsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询域名的自定义解析线路 */
+func (c *ClouddnsserviceClient) GetUserView(request *clouddnsservice.GetUserViewRequest) (*clouddnsservice.GetUserViewResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &clouddnsservice.GetUserViewResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查看域名的解析次数 */
+func (c *ClouddnsserviceClient) GetDomainQueryCount(request *clouddnsservice.GetDomainQueryCountRequest) (*clouddnsservice.GetDomainQueryCountResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &clouddnsservice.GetDomainQueryCountResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设置域名解析记录的负载均衡 */
+func (c *ClouddnsserviceClient) SetLB(request *clouddnsservice.SetLBRequest) (*clouddnsservice.SetLBResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &clouddnsservice.SetLBResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 同一个主域名下，批量新增、更新导入解析记录<br>
+如果解析记录的ID为0，是新增解析记录，如果不为0，则是更新解析记录。
+ */
+func (c *ClouddnsserviceClient) BatchSetDnsResolve(request *clouddnsservice.BatchSetDnsResolveRequest) (*clouddnsservice.BatchSetDnsResolveResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &clouddnsservice.BatchSetDnsResolveResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 添加子域名的监控项，默认把子域名的所有监控项都添加上监控 */
+func (c *ClouddnsserviceClient) AddMonitor(request *clouddnsservice.AddMonitorRequest) (*clouddnsservice.AddMonitorResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &clouddnsservice.AddMonitorResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 修改主域名 */
 func (c *ClouddnsserviceClient) UpdateDomain(request *clouddnsservice.UpdateDomainRequest) (*clouddnsservice.UpdateDomainResponse, error) {
     if request == nil {
@@ -507,25 +587,6 @@ func (c *ClouddnsserviceClient) SearchRR(request *clouddnsservice.SearchRRReques
     }
 
     jdResp := &clouddnsservice.SearchRRResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 启用、停用、删除主域名下的解析记录 */
-func (c *ClouddnsserviceClient) OperateRR(request *clouddnsservice.OperateRRRequest) (*clouddnsservice.OperateRRResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &clouddnsservice.OperateRRResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         return nil, err
