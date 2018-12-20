@@ -40,7 +40,7 @@ func NewDatastarClient(credential *core.Credential) *DatastarClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "datastar",
-            Revision:    "1.0.4",
+            Revision:    "1.0.5",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
