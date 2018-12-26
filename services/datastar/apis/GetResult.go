@@ -44,7 +44,7 @@ func NewGetResultRequest(
 
 	return &GetResultRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/v1/regions/{regionId}/profileMultiLevel/getResult",
+			URL:     "/regions/{regionId}/profileMultiLevel:getResult",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -65,7 +65,7 @@ func NewGetResultRequestWithAllParams(
 
     return &GetResultRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/v1/regions/{regionId}/profileMultiLevel/getResult",
+            URL:     "/regions/{regionId}/profileMultiLevel:getResult",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -80,7 +80,7 @@ func NewGetResultRequestWithoutParam() *GetResultRequest {
 
     return &GetResultRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/v1/regions/{regionId}/profileMultiLevel/getResult",
+            URL:     "/regions/{regionId}/profileMultiLevel:getResult",
             Method:  "GET",
             Header:  nil,
             Version: "v1",

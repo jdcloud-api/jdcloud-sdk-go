@@ -54,7 +54,7 @@ func NewCreateRequest(
 
 	return &CreateRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/v1/regions/{regionId}/profileMultiLevel/create",
+			URL:     "/regions/{regionId}/profileMultiLevel:create",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -81,7 +81,7 @@ func NewCreateRequestWithAllParams(
 
     return &CreateRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/v1/regions/{regionId}/profileMultiLevel/create",
+            URL:     "/regions/{regionId}/profileMultiLevel:create",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -98,7 +98,7 @@ func NewCreateRequestWithoutParam() *CreateRequest {
 
     return &CreateRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/v1/regions/{regionId}/profileMultiLevel/create",
+            URL:     "/regions/{regionId}/profileMultiLevel:create",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
