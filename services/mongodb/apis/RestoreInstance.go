@@ -31,7 +31,7 @@ type RestoreInstanceRequest struct {
     InstanceId string `json:"instanceId"`
 
     /* 备份ID  */
-    BackupId string `json:""`
+    BackupId string `json:"backupId"`
 }
 
 /*

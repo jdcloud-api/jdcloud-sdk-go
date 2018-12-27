@@ -34,7 +34,7 @@ type ResetPasswordRequest struct {
     AccountName string `json:"accountName"`
 
     /* 新密码，密码的具体规则可参见帮助中心文档:[名称及密码限制](../../../documentation/Cloud-Database-and-Cache/RDS/Introduction/Restrictions/SQLServer-Restrictions.md)  */
-    AccountPassword string `json:""`
+    AccountPassword string `json:"accountPassword"`
 }
 
 /*

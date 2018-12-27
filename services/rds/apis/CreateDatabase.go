@@ -31,10 +31,10 @@ type CreateDatabaseRequest struct {
     InstanceId string `json:"instanceId"`
 
     /* 数据库名，数据库名称的限制请参考[帮助中心文档](../../../documentation/Cloud-Database-and-Cache/RDS/Introduction/Restrictions/SQLServer-Restrictions.md)  */
-    DbName string `json:""`
+    DbName string `json:"dbName"`
 
     /* 数据库的字符集名，当前支持的字符集请查看[枚举参数定义](../Enum-Definitions/Enum-Definitions.md)  */
-    CharacterSetName string `json:""`
+    CharacterSetName string `json:"characterSetName"`
 }
 
 /*

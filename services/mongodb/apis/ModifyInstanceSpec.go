@@ -31,10 +31,10 @@ type ModifyInstanceSpecRequest struct {
     InstanceId string `json:"instanceId"`
 
     /* 实例规格，包年包月不允许小于当前规格。  */
-    InstanceClass string `json:""`
+    InstanceClass string `json:"instanceClass"`
 
     /* 存储空间，包年包月不允许小于当前规格。  */
-    InstanceStorageGB int `json:""`
+    InstanceStorageGB int `json:"instanceStorageGB"`
 }
 
 /*

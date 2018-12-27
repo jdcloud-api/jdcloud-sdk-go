@@ -28,17 +28,21 @@ type GetTriggerRequest struct {
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /*   */
+    /* 函数名称  */
     FunctionName string `json:"functionName"`
 
-    /*   */
+    /* 版本名称  */
     VersionName string `json:"versionName"`
+
+    /* 触发器Id  */
+    TriggerId string `json:"triggerId"`
 }
 
 /*
  * param regionId: Region ID (Required)
- * param functionName:  (Required)
- * param versionName:  (Required)
+ * param functionName: 函数名称 (Required)
+ * param versionName: 版本名称 (Required)
+ * param triggerId: 触发器Id (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -46,6 +50,7 @@ func NewGetTriggerRequest(
     regionId string,
     functionName string,
     versionName string,
+    triggerId string,
 ) *GetTriggerRequest {
 
 	return &GetTriggerRequest{
@@ -58,18 +63,21 @@ func NewGetTriggerRequest(
         RegionId: regionId,
         FunctionName: functionName,
         VersionName: versionName,
+        TriggerId: triggerId,
 	}
 }
 
 /*
  * param regionId: Region ID (Required)
- * param functionName:  (Required)
- * param versionName:  (Required)
+ * param functionName: 函数名称 (Required)
+ * param versionName: 版本名称 (Required)
+ * param triggerId: 触发器Id (Required)
  */
 func NewGetTriggerRequestWithAllParams(
     regionId string,
     functionName string,
     versionName string,
+    triggerId string,
 ) *GetTriggerRequest {
 
     return &GetTriggerRequest{
@@ -82,6 +90,7 @@ func NewGetTriggerRequestWithAllParams(
         RegionId: regionId,
         FunctionName: functionName,
         VersionName: versionName,
+        TriggerId: triggerId,
     }
 }
 
@@ -103,14 +112,19 @@ func (r *GetTriggerRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param functionName: (Required) */
+/* param functionName: 函数名称(Required) */
 func (r *GetTriggerRequest) SetFunctionName(functionName string) {
     r.FunctionName = functionName
 }
 
-/* param versionName: (Required) */
+/* param versionName: 版本名称(Required) */
 func (r *GetTriggerRequest) SetVersionName(versionName string) {
     r.VersionName = versionName
+}
+
+/* param triggerId: 触发器Id(Required) */
+func (r *GetTriggerRequest) SetTriggerId(triggerId string) {
+    r.TriggerId = triggerId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

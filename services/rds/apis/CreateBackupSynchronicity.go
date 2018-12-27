@@ -28,10 +28,10 @@ type CreateBackupSynchronicityRequest struct {
     RegionId string `json:"regionId"`
 
     /* 源实例ID  */
-    InstanceId string `json:""`
+    InstanceId string `json:"instanceId"`
 
     /* 备份同步的目标地域  */
-    DestRegion string `json:""`
+    DestRegion string `json:"destRegion"`
 }
 
 /*

@@ -34,10 +34,10 @@ type RestoreDatabaseFromFileRequest struct {
     DbName string `json:"dbName"`
 
     /* 共享文件的全局ID，可从上传文件查询接口[describeImportFiles](../import/describeImportFiles.md)获取；如果该文件不是共享文件，则不用输入该参数 (Optional) */
-    SharedFileGid *string `json:""`
+    SharedFileGid *string `json:"sharedFileGid"`
 
     /* 用户上传的备份文件名称（包括文件后缀名），例如mydb1.bak  */
-    FileName string `json:""`
+    FileName string `json:"fileName"`
 }
 
 /*

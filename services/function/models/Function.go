@@ -19,48 +19,60 @@ package models
 
 type Function struct {
 
-    /*  (Optional) */
+    /* 函数Id (Optional) */
     FunctionId string `json:"functionId"`
 
-    /*  (Optional) */
+    /* 函数名称 (Optional) */
     Name string `json:"name"`
 
-    /*  (Optional) */
+    /* 函数描述 (Optional) */
     Description string `json:"description"`
 
-    /*  (Optional) */
+    /* 函数入口，格式为入口文件.入口函数名 (Optional) */
     Entrance string `json:"entrance"`
 
-    /*  (Optional) */
+    /* 函数运行最大内存 (Optional) */
     Memory int `json:"memory"`
 
-    /*  (Optional) */
+    /* 函数运行环境，目前有python3.6 (Optional) */
     RunTime string `json:"runTime"`
 
-    /*  (Optional) */
+    /* 函数超时时间 (Optional) */
     OverTime int `json:"overTime"`
 
-    /*  (Optional) */
+    /* 函数版本名称 (Optional) */
     Version string `json:"version"`
 
-    /*  (Optional) */
+    /* 函数代码 (Optional) */
     Code Code `json:"code"`
 
-    /*  (Optional) */
+    /* 函数环境变量 (Optional) */
     Environment Env `json:"environment"`
 
-    /*  (Optional) */
+    /* 函数指定的日志集id (Optional) */
     LogSetId string `json:"logSetId"`
 
-    /*  (Optional) */
+    /* 函数指定的日志主题id (Optional) */
     LogTopicId string `json:"logTopicId"`
 
-    /*  (Optional) */
+    /* 代码包校验和 (Optional) */
     CodeCheckSum string `json:"codeCheckSum"`
 
-    /*  (Optional) */
+    /* 代码包大小，单位为字节 (Optional) */
     CodeSize int `json:"codeSize"`
 
-    /*  (Optional) */
+    /* 代码包下载的url地址 (Optional) */
     DownloadUrl string `json:"downloadUrl"`
+
+    /* 函数配置的VPCid (Optional) */
+    VpcId string `json:"vpcId"`
+
+    /* 函数配置的子网id (Optional) */
+    SubnetId string `json:"subnetId"`
+
+    /* 函数创建时间 (Optional) */
+    CreateTime string `json:"createTime"`
+
+    /* 函数最后更新时间 (Optional) */
+    UpdateTime string `json:"updateTime"`
 }

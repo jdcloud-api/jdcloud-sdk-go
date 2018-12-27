@@ -19,18 +19,18 @@ package models
 
 type Alias struct {
 
-    /*  (Optional) */
+    /* 别名Id (Optional) */
     AliasId string `json:"aliasId"`
 
-    /*  (Optional) */
+    /* 别名名称 (Optional) */
     AliasName string `json:"aliasName"`
 
-    /*  (Optional) */
+    /* 别名对应的函数名称 (Optional) */
     FunctionName string `json:"functionName"`
 
-    /*  (Optional) */
+    /* 别名描述信息 (Optional) */
     Description string `json:"description"`
 
-    /*  (Optional) */
+    /* 别名对应的版本名称 (Optional) */
     Version string `json:"version"`
 }

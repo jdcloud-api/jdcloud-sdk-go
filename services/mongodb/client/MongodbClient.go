@@ -40,7 +40,7 @@ func NewMongodbClient(credential *core.Credential) *MongodbClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "mongodb",
-            Revision:    "1.0.2",
+            Revision:    "1.0.5",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -66,6 +66,7 @@ func (c *MongodbClient) DescribeSecurityIps(request *mongodb.DescribeSecurityIps
     jdResp := &mongodb.DescribeSecurityIpsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -85,6 +86,7 @@ func (c *MongodbClient) ModifyInstanceName(request *mongodb.ModifyInstanceNameRe
     jdResp := &mongodb.ModifyInstanceNameResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -104,6 +106,7 @@ func (c *MongodbClient) ModifySecurityIps(request *mongodb.ModifySecurityIpsRequ
     jdResp := &mongodb.ModifySecurityIpsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -123,6 +126,7 @@ func (c *MongodbClient) ResetPassword(request *mongodb.ResetPasswordRequest) (*m
     jdResp := &mongodb.ResetPasswordResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -142,6 +146,7 @@ func (c *MongodbClient) RestoreInstance(request *mongodb.RestoreInstanceRequest)
     jdResp := &mongodb.RestoreInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -161,6 +166,7 @@ func (c *MongodbClient) DeleteInstance(request *mongodb.DeleteInstanceRequest) (
     jdResp := &mongodb.DeleteInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -180,6 +186,7 @@ func (c *MongodbClient) DescribeBackupPolicy(request *mongodb.DescribeBackupPoli
     jdResp := &mongodb.DescribeBackupPolicyResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -199,6 +206,7 @@ func (c *MongodbClient) DescribeFlavors(request *mongodb.DescribeFlavorsRequest)
     jdResp := &mongodb.DescribeFlavorsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -218,6 +226,7 @@ func (c *MongodbClient) BackupDownloadURL(request *mongodb.BackupDownloadURLRequ
     jdResp := &mongodb.BackupDownloadURLResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -237,6 +246,7 @@ func (c *MongodbClient) DescribeInstances(request *mongodb.DescribeInstancesRequ
     jdResp := &mongodb.DescribeInstancesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -256,6 +266,7 @@ func (c *MongodbClient) DescribeBackups(request *mongodb.DescribeBackupsRequest)
     jdResp := &mongodb.DescribeBackupsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -275,6 +286,7 @@ func (c *MongodbClient) ModifyInstanceSpec(request *mongodb.ModifyInstanceSpecRe
     jdResp := &mongodb.ModifyInstanceSpecResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -294,6 +306,7 @@ func (c *MongodbClient) CreateBackup(request *mongodb.CreateBackupRequest) (*mon
     jdResp := &mongodb.CreateBackupResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -313,6 +326,7 @@ func (c *MongodbClient) ModifyBackupPolicy(request *mongodb.ModifyBackupPolicyRe
     jdResp := &mongodb.ModifyBackupPolicyResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -332,6 +346,7 @@ func (c *MongodbClient) CreateInstance(request *mongodb.CreateInstanceRequest) (
     jdResp := &mongodb.CreateInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -351,6 +366,7 @@ func (c *MongodbClient) DeleteBackup(request *mongodb.DeleteBackupRequest) (*mon
     jdResp := &mongodb.DeleteBackupResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -370,6 +386,7 @@ func (c *MongodbClient) DescribeAvailableZones(request *mongodb.DescribeAvailabl
     jdResp := &mongodb.DescribeAvailableZonesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 

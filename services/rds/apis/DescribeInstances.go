@@ -19,6 +19,7 @@ package apis
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
     rds "github.com/jdcloud-api/jdcloud-sdk-go/services/rds/models"
+    common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
 
 type DescribeInstancesRequest struct {
@@ -33,6 +34,20 @@ type DescribeInstancesRequest struct {
 
     /* 每页显示的数据条数，默认为100，取值范围：[10,100]，用于查询列表的接口 (Optional) */
     PageSize *int `json:"pageSize"`
+
+    /* 过滤参数，多个过滤参数之间的关系为“与”(and)
+支持以下属性的过滤：
+instanceId, 支持operator选项：eq
+instanceName, 支持operator选项：eq
+engine, 支持operator选项：eq
+engineVersion, 支持operator选项：eq
+instanceStatus, 支持operator选项：eq
+chargeMode, 支持operator选项：eq
+ (Optional) */
+    Filters []common.Filter `json:"filters"`
+
+    /* 资源标签 (Optional) */
+    TagFilters []common.TagFilter `json:"tagFilters"`
 }
 
 /*
@@ -59,11 +74,23 @@ func NewDescribeInstancesRequest(
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页; (Optional)
  * param pageSize: 每页显示的数据条数，默认为100，取值范围：[10,100]，用于查询列表的接口 (Optional)
+ * param filters: 过滤参数，多个过滤参数之间的关系为“与”(and)
+支持以下属性的过滤：
+instanceId, 支持operator选项：eq
+instanceName, 支持operator选项：eq
+engine, 支持operator选项：eq
+engineVersion, 支持operator选项：eq
+instanceStatus, 支持operator选项：eq
+chargeMode, 支持operator选项：eq
+ (Optional)
+ * param tagFilters: 资源标签 (Optional)
  */
 func NewDescribeInstancesRequestWithAllParams(
     regionId string,
     pageNumber *int,
     pageSize *int,
+    filters []common.Filter,
+    tagFilters []common.TagFilter,
 ) *DescribeInstancesRequest {
 
     return &DescribeInstancesRequest{
@@ -76,6 +103,8 @@ func NewDescribeInstancesRequestWithAllParams(
         RegionId: regionId,
         PageNumber: pageNumber,
         PageSize: pageSize,
+        Filters: filters,
+        TagFilters: tagFilters,
     }
 }
 
@@ -105,6 +134,24 @@ func (r *DescribeInstancesRequest) SetPageNumber(pageNumber int) {
 /* param pageSize: 每页显示的数据条数，默认为100，取值范围：[10,100]，用于查询列表的接口(Optional) */
 func (r *DescribeInstancesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
+}
+
+/* param filters: 过滤参数，多个过滤参数之间的关系为“与”(and)
+支持以下属性的过滤：
+instanceId, 支持operator选项：eq
+instanceName, 支持operator选项：eq
+engine, 支持operator选项：eq
+engineVersion, 支持operator选项：eq
+instanceStatus, 支持operator选项：eq
+chargeMode, 支持operator选项：eq
+(Optional) */
+func (r *DescribeInstancesRequest) SetFilters(filters []common.Filter) {
+    r.Filters = filters
+}
+
+/* param tagFilters: 资源标签(Optional) */
+func (r *DescribeInstancesRequest) SetTagFilters(tagFilters []common.TagFilter) {
+    r.TagFilters = tagFilters
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

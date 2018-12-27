@@ -31,10 +31,10 @@ type ModifyAuditRequest struct {
     InstanceId string `json:"instanceId"`
 
     /* 在原有审计项基础上，增加新的审计项，多个审计项之间用英文逗号，分号或空格分隔，例如DATABASE_OBJECT_ACCESS_GROUP,ACKUP_RESTORE_GROUP (Optional) */
-    Add *string `json:""`
+    Add *string `json:"add"`
 
     /* 删除审计项，多个审计项之间用英文逗号，分号或空格分隔，例如DATABASE_OBJECT_ACCESS_GROUP,ACKUP_RESTORE_GROUP<br>如删除了所有审计项，则审计自动关闭 (Optional) */
-    Drop *string `json:""`
+    Drop *string `json:"drop"`
 }
 
 /*

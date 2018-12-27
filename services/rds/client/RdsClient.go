@@ -40,7 +40,7 @@ func NewRdsClient(credential *core.Credential) *RdsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "rds",
-            Revision:    "0.3.6",
+            Revision:    "0.4.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -66,6 +66,7 @@ func (c *RdsClient) DescribeBackupPolicy(request *rds.DescribeBackupPolicyReques
     jdResp := &rds.DescribeBackupPolicyResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -85,13 +86,14 @@ func (c *RdsClient) DeleteInstance(request *rds.DeleteInstanceRequest) (*rds.Del
     jdResp := &rds.DeleteInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
     return jdResp, err
 }
 
-/* 修改实例名称，可支持中文，实例名的具体规则可参见帮助中心文档:[名称及密码限制](../../../documentation/Cloud-Database-and-Cache/RDS/Introduction/Restrictions/SQLServer-Restrictions.md)<br>- 仅支持SQL Server */
+/* 修改实例名称，可支持中文，实例名的具体规则可参见帮助中心文档:[名称及密码限制](../../../documentation/Cloud-Database-and-Cache/RDS/Introduction/Restrictions/SQLServer-Restrictions.md) */
 func (c *RdsClient) ModifyInstanceName(request *rds.ModifyInstanceNameRequest) (*rds.ModifyInstanceNameResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -104,6 +106,7 @@ func (c *RdsClient) ModifyInstanceName(request *rds.ModifyInstanceNameRequest) (
     jdResp := &rds.ModifyInstanceNameResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -123,6 +126,7 @@ func (c *RdsClient) DeleteAudit(request *rds.DeleteAuditRequest) (*rds.DeleteAud
     jdResp := &rds.DeleteAuditResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -142,6 +146,7 @@ func (c *RdsClient) DescribeAuditFiles(request *rds.DescribeAuditFilesRequest) (
     jdResp := &rds.DescribeAuditFilesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -161,6 +166,7 @@ func (c *RdsClient) CreateAudit(request *rds.CreateAuditRequest) (*rds.CreateAud
     jdResp := &rds.CreateAuditResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -180,6 +186,7 @@ func (c *RdsClient) DeleteBackup(request *rds.DeleteBackupRequest) (*rds.DeleteB
     jdResp := &rds.DeleteBackupResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -199,6 +206,7 @@ func (c *RdsClient) DescribeBackupDownloadURL(request *rds.DescribeBackupDownloa
     jdResp := &rds.DescribeBackupDownloadURLResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -218,6 +226,7 @@ func (c *RdsClient) EnableInternetAccess(request *rds.EnableInternetAccessReques
     jdResp := &rds.EnableInternetAccessResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -237,6 +246,27 @@ func (c *RdsClient) CreateDatabase(request *rds.CreateDatabaseRequest) (*rds.Cre
     jdResp := &rds.CreateDatabaseResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据源实例全量备份创建一个新实例，新实例的数据跟源实例在创建备份时的数据状态一样。<br>例如根据源实例A的一个全量备份“mybak”新建一个实例B，该备份是在“‘2018-8-18 03:23:54”创建的。那么新建实例B的数据状态跟实例A‘2018-8-18 03:23:54’的状态一致 */
+func (c *RdsClient) CreateInstanceFromBackup(request *rds.CreateInstanceFromBackupRequest) (*rds.CreateInstanceFromBackupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.CreateInstanceFromBackupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -256,25 +286,7 @@ func (c *RdsClient) DescribeImportFiles(request *rds.DescribeImportFilesRequest)
     jdResp := &rds.DescribeImportFilesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 根据源实例全量备份创建一个新实例，新实例的数据跟源实例在创建备份时的数据状态一样。<br>例如根据源实例A的一个全量备份“mybak”新建一个实例B，该备份是在“‘2018-8-18 03:23:54”创建的。那么新建实例B的数据状态跟实例A‘2018-8-18 03:23:54’的状态一致<br>- 仅支持MySQL */
-func (c *RdsClient) CreateInstanceFromBackup(request *rds.CreateInstanceFromBackupRequest) (*rds.CreateInstanceFromBackupResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &rds.CreateInstanceFromBackupResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -294,6 +306,7 @@ func (c *RdsClient) CreateBackup(request *rds.CreateBackupRequest) (*rds.CreateB
     jdResp := &rds.CreateBackupResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -313,6 +326,7 @@ func (c *RdsClient) DescribeQueryPerformance(request *rds.DescribeQueryPerforman
     jdResp := &rds.DescribeQueryPerformanceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -332,6 +346,7 @@ func (c *RdsClient) DeleteDatabase(request *rds.DeleteDatabaseRequest) (*rds.Del
     jdResp := &rds.DeleteDatabaseResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -351,6 +366,7 @@ func (c *RdsClient) DescribeBinlogs(request *rds.DescribeBinlogsRequest) (*rds.D
     jdResp := &rds.DescribeBinlogsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -370,6 +386,7 @@ func (c *RdsClient) ModifyConnectionMode(request *rds.ModifyConnectionModeReques
     jdResp := &rds.ModifyConnectionModeResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -389,6 +406,7 @@ func (c *RdsClient) DisableInternetAccess(request *rds.DisableInternetAccessRequ
     jdResp := &rds.DisableInternetAccessResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -408,6 +426,47 @@ func (c *RdsClient) GrantPrivilege(request *rds.GrantPrivilegeRequest) (*rds.Gra
     jdResp := &rds.GrantPrivilegeResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查看指定地域下各种RDS数据库支持的可用区，不同类型的RDS支持的可用区不一样 */
+func (c *RdsClient) DescribeAzs(request *rds.DescribeAzsRequest) (*rds.DescribeAzsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DescribeAzsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 关闭数据库的高安全模式<br>- 仅支持MySQL */
+func (c *RdsClient) DisableIntercept(request *rds.DisableInterceptRequest) (*rds.DisableInterceptResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DisableInterceptResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -427,6 +486,7 @@ func (c *RdsClient) RestoreDatabaseFromFile(request *rds.RestoreDatabaseFromFile
     jdResp := &rds.RestoreDatabaseFromFileResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -446,6 +506,7 @@ func (c *RdsClient) SetImportFileShared(request *rds.SetImportFileSharedRequest)
     jdResp := &rds.SetImportFileSharedResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -465,6 +526,7 @@ func (c *RdsClient) DescribeIndexPerformance(request *rds.DescribeIndexPerforman
     jdResp := &rds.DescribeIndexPerformanceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -484,6 +546,7 @@ func (c *RdsClient) DeleteAccount(request *rds.DeleteAccountRequest) (*rds.Delet
     jdResp := &rds.DeleteAccountResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -503,6 +566,7 @@ func (c *RdsClient) CreateBackupSynchronicity(request *rds.CreateBackupSynchroni
     jdResp := &rds.CreateBackupSynchronicityResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -522,6 +586,47 @@ func (c *RdsClient) DescribeBinlogDownloadURL(request *rds.DescribeBinlogDownloa
     jdResp := &rds.DescribeBinlogDownloadURLResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据用户定义的查询条件，获取正在执行中的SQL执行的性能信息。用户可以根据这些信息查找与SQL执行相关的性能瓶颈，并进行优化。<br>- 仅支持SQL Server */
+func (c *RdsClient) DescribeActiveQueryPerformance(request *rds.DescribeActiveQueryPerformanceRequest) (*rds.DescribeActiveQueryPerformanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DescribeActiveQueryPerformanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除用户通过单库上云工具上传的数据库备份文件<br>- 仅支持SQL Server */
+func (c *RdsClient) DeleteImportFile(request *rds.DeleteImportFileRequest) (*rds.DeleteImportFileResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DeleteImportFileResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -541,6 +646,7 @@ func (c *RdsClient) ModifyInstanceSpec(request *rds.ModifyInstanceSpecRequest) (
     jdResp := &rds.ModifyInstanceSpecResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -560,6 +666,27 @@ func (c *RdsClient) DescribeBackups(request *rds.DescribeBackupsRequest) (*rds.D
     jdResp := &rds.DescribeBackupsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 开启数据库的高安全模式<br>- 仅支持MySQL */
+func (c *RdsClient) EnableIntercept(request *rds.EnableInterceptRequest) (*rds.EnableInterceptResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.EnableInterceptResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -579,13 +706,14 @@ func (c *RdsClient) RebootInstance(request *rds.RebootInstanceRequest) (*rds.Reb
     jdResp := &rds.RebootInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
     return jdResp, err
 }
 
-/* 取消该账号对某个数据库的所有权限。权限取消后，该账号将不能访问此数据库。取消账号对某个数据库的访问权限，不影响该账号对其他数据库的访问权限<br>- 仅支持MySQL */
+/* 取消该账号对某个数据库的所有权限。权限取消后，该账号将不能访问此数据库。取消账号对某个数据库的访问权限，不影响该账号对其他数据库的访问权限 */
 func (c *RdsClient) RevokePrivilege(request *rds.RevokePrivilegeRequest) (*rds.RevokePrivilegeResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -598,6 +726,7 @@ func (c *RdsClient) RevokePrivilege(request *rds.RevokePrivilegeRequest) (*rds.R
     jdResp := &rds.RevokePrivilegeResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -617,6 +746,7 @@ func (c *RdsClient) RestoreDatabaseFromOSS(request *rds.RestoreDatabaseFromOSSRe
     jdResp := &rds.RestoreDatabaseFromOSSResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -636,6 +766,7 @@ func (c *RdsClient) DescribeBackupSynchronicities(request *rds.DescribeBackupSyn
     jdResp := &rds.DescribeBackupSynchronicitiesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -655,6 +786,7 @@ func (c *RdsClient) FailoverInstance(request *rds.FailoverInstanceRequest) (*rds
     jdResp := &rds.FailoverInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -674,6 +806,7 @@ func (c *RdsClient) DeleteBackupSynchronicity(request *rds.DeleteBackupSynchroni
     jdResp := &rds.DeleteBackupSynchronicityResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -693,13 +826,14 @@ func (c *RdsClient) GetUploadKey(request *rds.GetUploadKeyRequest) (*rds.GetUplo
     jdResp := &rds.GetUploadKeyResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
     return jdResp, err
 }
 
-/* 根据源实例备份创建一个新实例，并通过追加日志的方式，将新实例的数据恢复到跟源实例指定时间点的数据状态一样。<br>例如根据实例A在“2018-06-18 23:00:00”时间点创建一个实例B，就是新建一个实例B，该实例B的数据跟实例A在“2018-06-18 23:00:00”这个时间点的数据完全一致。<br>对于SQL Server，主备切换后30分钟内，不支持按时间点恢复/创建，例如在10:05分用户进行了主备切换，那么10:05 ~ 10:35这个时间段不能进行按时间点恢复/创建。<br>- 仅支持MySQL */
+/* 根据源实例备份创建一个新实例，并通过追加日志的方式，将新实例的数据恢复到跟源实例指定时间点的数据状态一样。<br>例如根据实例A在“2018-06-18 23:00:00”时间点创建一个实例B，就是新建一个实例B，该实例B的数据跟实例A在“2018-06-18 23:00:00”这个时间点的数据完全一致。<br>对于SQL Server，主备切换后30分钟内，不支持按时间点恢复/创建，例如在10:05分用户进行了主备切换，那么10:05 ~ 10:35这个时间段不能进行按时间点恢复/创建。 */
 func (c *RdsClient) CreateInstanceByTime(request *rds.CreateInstanceByTimeRequest) (*rds.CreateInstanceByTimeResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -712,6 +846,7 @@ func (c *RdsClient) CreateInstanceByTime(request *rds.CreateInstanceByTimeReques
     jdResp := &rds.CreateInstanceByTimeResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -731,6 +866,7 @@ func (c *RdsClient) ModifyBackupPolicy(request *rds.ModifyBackupPolicyRequest) (
     jdResp := &rds.ModifyBackupPolicyResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -750,6 +886,27 @@ func (c *RdsClient) RestoreInstance(request *rds.RestoreInstanceRequest) (*rds.R
     jdResp := &rds.RestoreInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改SQL Server数实例的配置参数。 部分参数修改后，需要重启才能生效，具体可以参考微软的相关文档<br>- 仅支持SQL Server */
+func (c *RdsClient) ModifyParameters(request *rds.ModifyParametersRequest) (*rds.ModifyParametersResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.ModifyParametersResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -769,6 +926,7 @@ func (c *RdsClient) DescribeInstances(request *rds.DescribeInstancesRequest) (*r
     jdResp := &rds.DescribeInstancesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -788,6 +946,7 @@ func (c *RdsClient) EnableAudit(request *rds.EnableAuditRequest) (*rds.EnableAud
     jdResp := &rds.EnableAuditResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -807,6 +966,27 @@ func (c *RdsClient) ResetPassword(request *rds.ResetPasswordRequest) (*rds.Reset
     jdResp := &rds.ResetPasswordResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 清理本地的binlog并释放空间。 系统只会清理已经备份到存储的binlog，不会影响MySQL实例的备份恢复<br>- 仅支持MySQL */
+func (c *RdsClient) ClearBinlogs(request *rds.ClearBinlogsRequest) (*rds.ClearBinlogsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.ClearBinlogsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -826,6 +1006,7 @@ func (c *RdsClient) DescribeErrorLogs(request *rds.DescribeErrorLogsRequest) (*r
     jdResp := &rds.DescribeErrorLogsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -845,6 +1026,7 @@ func (c *RdsClient) DescribeWhiteList(request *rds.DescribeWhiteListRequest) (*r
     jdResp := &rds.DescribeWhiteListResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -864,6 +1046,7 @@ func (c *RdsClient) DescribeAuditOptions(request *rds.DescribeAuditOptionsReques
     jdResp := &rds.DescribeAuditOptionsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -883,6 +1066,7 @@ func (c *RdsClient) DescribeAuditDownloadURL(request *rds.DescribeAuditDownloadU
     jdResp := &rds.DescribeAuditDownloadURLResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -902,6 +1086,7 @@ func (c *RdsClient) DescribeDatabases(request *rds.DescribeDatabasesRequest) (*r
     jdResp := &rds.DescribeDatabasesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -921,13 +1106,34 @@ func (c *RdsClient) DescribeAudit(request *rds.DescribeAuditRequest) (*rds.Descr
     jdResp := &rds.DescribeAuditResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
     return jdResp, err
 }
 
-/* 查询MySQL实例的慢日志的概要信息。<br>- 仅支持SQL Server */
+/* 删除参数组<br>- 仅支持MySQL */
+func (c *RdsClient) DeleteParameterGroup(request *rds.DeleteParameterGroupRequest) (*rds.DeleteParameterGroupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DeleteParameterGroupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询MySQL实例的慢日志的概要信息。<br>- 仅支持MySQL */
 func (c *RdsClient) DescribeSlowLogs(request *rds.DescribeSlowLogsRequest) (*rds.DescribeSlowLogsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -940,6 +1146,7 @@ func (c *RdsClient) DescribeSlowLogs(request *rds.DescribeSlowLogsRequest) (*rds
     jdResp := &rds.DescribeSlowLogsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -959,6 +1166,7 @@ func (c *RdsClient) DisableAudit(request *rds.DisableAuditRequest) (*rds.Disable
     jdResp := &rds.DisableAuditResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -978,6 +1186,7 @@ func (c *RdsClient) RestoreDatabaseFromBackup(request *rds.RestoreDatabaseFromBa
     jdResp := &rds.RestoreDatabaseFromBackupResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -997,6 +1206,7 @@ func (c *RdsClient) DescribeAccounts(request *rds.DescribeAccountsRequest) (*rds
     jdResp := &rds.DescribeAccountsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -1016,6 +1226,7 @@ func (c *RdsClient) CreateAccount(request *rds.CreateAccountRequest) (*rds.Creat
     jdResp := &rds.CreateAccountResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -1035,6 +1246,7 @@ func (c *RdsClient) DescribeAuditResult(request *rds.DescribeAuditResultRequest)
     jdResp := &rds.DescribeAuditResultResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -1054,6 +1266,7 @@ func (c *RdsClient) CreateInstance(request *rds.CreateInstanceRequest) (*rds.Cre
     jdResp := &rds.CreateInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -1073,13 +1286,34 @@ func (c *RdsClient) ModifyWhiteList(request *rds.ModifyWhiteListRequest) (*rds.M
     jdResp := &rds.ModifyWhiteListResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
     return jdResp, err
 }
 
-/* 查询MySQL实例的慢日志的详细信息。<br>- 仅支持SQL Server */
+/* 修改参数组名称，描述<br>- 仅支持MySQL */
+func (c *RdsClient) ModifyParameterGroupAttribute(request *rds.ModifyParameterGroupAttributeRequest) (*rds.ModifyParameterGroupAttributeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.ModifyParameterGroupAttributeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询MySQL实例的慢日志的详细信息。<br>- 仅支持MySQL */
 func (c *RdsClient) DescribeSlowLogAttributes(request *rds.DescribeSlowLogAttributesRequest) (*rds.DescribeSlowLogAttributesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1092,6 +1326,7 @@ func (c *RdsClient) DescribeSlowLogAttributes(request *rds.DescribeSlowLogAttrib
     jdResp := &rds.DescribeSlowLogAttributesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -1111,6 +1346,27 @@ func (c *RdsClient) ModifyAudit(request *rds.ModifyAuditRequest) (*rds.ModifyAud
     jdResp := &rds.ModifyAuditResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取SQL Server实例按时间点恢复/创建时，可恢复到的最后的一个时间点<br>- 仅支持SQL Server */
+func (c *RdsClient) DescribeLatestRestoreTime(request *rds.DescribeLatestRestoreTimeRequest) (*rds.DescribeLatestRestoreTimeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DescribeLatestRestoreTimeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -1130,6 +1386,27 @@ func (c *RdsClient) DescribeInstanceAttributes(request *rds.DescribeInstanceAttr
     jdResp := &rds.DescribeInstanceAttributesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查看SQL Server实例的配置参数<br>- 仅支持SQL Server */
+func (c *RdsClient) DescribeParameters(request *rds.DescribeParametersRequest) (*rds.DescribeParametersResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DescribeParametersResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 

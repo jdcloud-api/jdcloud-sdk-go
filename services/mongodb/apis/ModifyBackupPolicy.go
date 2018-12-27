@@ -31,7 +31,7 @@ type ModifyBackupPolicyRequest struct {
     InstanceId string `json:"instanceId"`
 
     /* 备份时间，格式：HH:mmZ- HH:mmZ，只允许间隔时间为1小时的整点.  */
-    PreferredBackupTime string `json:""`
+    PreferredBackupTime string `json:"preferredBackupTime"`
 }
 
 /*

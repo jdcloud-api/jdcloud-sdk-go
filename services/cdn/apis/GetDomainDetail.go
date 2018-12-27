@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    cdn "github.com/jdcloud-api/jdcloud-sdk-go/services/cdn/models"
 )
 
 type GetDomainDetailRequest struct {
@@ -97,6 +98,17 @@ type GetDomainDetailResponse struct {
 }
 
 type GetDomainDetailResult struct {
+    AllStatus string `json:"allStatus"`
+    AllowNoReferHeader string `json:"allowNoReferHeader"`
+    AllowNullReferHeader string `json:"allowNullReferHeader"`
+    DailyBandWidth int `json:"dailyBandWidth"`
+    ForbiddenType string `json:"forbiddenType"`
+    MaxFileSize int64 `json:"maxFileSize"`
+    MinFileSize int64 `json:"minFileSize"`
+    SumFileSize int64 `json:"sumFileSize"`
+    AvgFileSize int64 `json:"avgFileSize"`
+    ReferList []string `json:"referList"`
+    ReferType string `json:"referType"`
     Domain string `json:"domain"`
     Cname string `json:"cname"`
     ArchiveNo string `json:"archiveNo"`
@@ -105,8 +117,9 @@ type GetDomainDetailResult struct {
     Modified string `json:"modified"`
     Status string `json:"status"`
     AuditStatus string `json:"auditStatus"`
-    Source string `json:"source"`
+    Source cdn.BackSourceInfo `json:"source"`
     SourceType string `json:"sourceType"`
+    DefaultSourceHost string `json:"defaultSourceHost"`
     BackSourceType string `json:"backSourceType"`
     HttpType string `json:"httpType"`
     Certificate string `json:"certificate"`

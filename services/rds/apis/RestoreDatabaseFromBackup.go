@@ -34,10 +34,10 @@ type RestoreDatabaseFromBackupRequest struct {
     DbName string `json:"dbName"`
 
     /* 备份ID，可从备份查询接口describeBackups获取  */
-    BackupId string `json:""`
+    BackupId string `json:"backupId"`
 
     /* 指定该备份中用于恢复数据库的文件名称。通常情况下文件名（不包括后缀）即为备份的数据库名。例如文件名为my_test_db.bak，表示该文件是my_test_db数据库的备份  */
-    BackupFileName string `json:""`
+    BackupFileName string `json:"backupFileName"`
 }
 
 /*

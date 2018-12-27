@@ -31,10 +31,10 @@ type RebootInstanceRequest struct {
     InstanceId string `json:"instanceId"`
 
     /* 是否重启主节点。<br> - 仅SQL Server 支持该参数 (Optional) */
-    RebootMaster *bool `json:""`
+    RebootMaster *bool `json:"rebootMaster"`
 
     /* 是否重启备节点。<br> - 仅SQL Server 支持该参数 (Optional) */
-    RebootSlave *bool `json:""`
+    RebootSlave *bool `json:"rebootSlave"`
 }
 
 /*

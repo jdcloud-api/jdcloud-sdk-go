@@ -19,12 +19,27 @@ package models
 
 type FunctionSpec struct {
 
-    /*  (Optional) */
+    /* 函数Id (Optional) */
     FunctionId string `json:"functionId"`
 
-    /*  (Optional) */
+    /* 函数名称 (Optional) */
     Name string `json:"name"`
 
-    /*  (Optional) */
+    /* 函数描述 (Optional) */
     Description string `json:"description"`
+
+    /* 函数运行环境，目前有python3 (Optional) */
+    Runtime string `json:"runtime"`
+
+    /* 函数创建时间 (Optional) */
+    CreateTime string `json:"createTime"`
+
+    /* 函数最后更新时间 (Optional) */
+    UpdateTime string `json:"updateTime"`
+
+    /* 函数版本名称 (Optional) */
+    Version string `json:"version"`
+
+    /* 代码包下载的url地址 (Optional) */
+    DownloadUrl string `json:"downloadUrl"`
 }

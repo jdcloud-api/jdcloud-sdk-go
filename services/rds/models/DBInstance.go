@@ -49,4 +49,7 @@ type DBInstance struct {
 
     /* 计费配置 (Optional) */
     Charge charge.Charge `json:"charge"`
+
+    /* 标签信息 (Optional) */
+    Tags []Tag `json:"tags"`
 }
