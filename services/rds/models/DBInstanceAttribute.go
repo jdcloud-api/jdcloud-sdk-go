@@ -88,4 +88,7 @@ type DBInstanceAttribute struct {
 
     /* 高可用集群中从节点的信息<br>- 仅支持SQL Server (Optional) */
     SecondaryNode DBInstanceNode `json:"secondaryNode"`
+
+    /* 标签信息 (Optional) */
+    Tags []Tag `json:"tags"`
 }

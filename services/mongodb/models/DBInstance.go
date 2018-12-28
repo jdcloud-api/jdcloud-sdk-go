@@ -88,4 +88,7 @@ type DBInstance struct {
 
     /* 是否设置白名单，true：已设置，false：未设置 (Optional) */
     IsSetSecurityIps bool `json:"isSetSecurityIps"`
+
+    /* 标签 (Optional) */
+    Tags []Tag `json:"tags"`
 }

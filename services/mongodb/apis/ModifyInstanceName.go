@@ -31,7 +31,7 @@ type ModifyInstanceNameRequest struct {
     InstanceId string `json:"instanceId"`
 
     /* 新的实例名称，只支持数字、字母、英文下划线、中文，且不少于2字符不超过32字符。  */
-    InstanceName string `json:""`
+    InstanceName string `json:"instanceName"`
 }
 
 /*

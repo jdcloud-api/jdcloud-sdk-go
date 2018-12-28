@@ -34,7 +34,7 @@ type SetImportFileSharedRequest struct {
     FileName string `json:"fileName"`
 
     /* 文件是否共享<br>true:共享<br>false:不共享  */
-    Shared string `json:""`
+    Shared string `json:"shared"`
 }
 
 /*

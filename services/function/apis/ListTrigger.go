@@ -28,17 +28,17 @@ type ListTriggerRequest struct {
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /*   */
+    /* 函数名称  */
     FunctionName string `json:"functionName"`
 
-    /*   */
+    /* 版本名称  */
     VersionName string `json:"versionName"`
 }
 
 /*
  * param regionId: Region ID (Required)
- * param functionName:  (Required)
- * param versionName:  (Required)
+ * param functionName: 函数名称 (Required)
+ * param versionName: 版本名称 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -63,8 +63,8 @@ func NewListTriggerRequest(
 
 /*
  * param regionId: Region ID (Required)
- * param functionName:  (Required)
- * param versionName:  (Required)
+ * param functionName: 函数名称 (Required)
+ * param versionName: 版本名称 (Required)
  */
 func NewListTriggerRequestWithAllParams(
     regionId string,
@@ -103,12 +103,12 @@ func (r *ListTriggerRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param functionName: (Required) */
+/* param functionName: 函数名称(Required) */
 func (r *ListTriggerRequest) SetFunctionName(functionName string) {
     r.FunctionName = functionName
 }
 
-/* param versionName: (Required) */
+/* param versionName: 版本名称(Required) */
 func (r *ListTriggerRequest) SetVersionName(versionName string) {
     r.VersionName = versionName
 }

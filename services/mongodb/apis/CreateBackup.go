@@ -28,10 +28,10 @@ type CreateBackupRequest struct {
     RegionId string `json:"regionId"`
 
     /* 实例ID  */
-    InstanceId string `json:""`
+    InstanceId string `json:"instanceId"`
 
     /* 备份名称 (Optional) */
-    BackupName *string `json:""`
+    BackupName *string `json:"backupName"`
 }
 
 /*

@@ -19,21 +19,24 @@ package models
 
 type Trigger struct {
 
-    /*  (Optional) */
+    /* 触发器Id (Optional) */
     TriggerId string `json:"triggerId"`
 
-    /*  (Optional) */
-    TriggerName string `json:"triggerName"`
-
-    /*  (Optional) */
+    /* 触发器所属的函数名称 (Optional) */
     FunctionName string `json:"functionName"`
 
-    /*  (Optional) */
+    /* 触发器所属的函数版本名称 (Optional) */
     VersionName string `json:"versionName"`
 
-    /*  (Optional) */
+    /* 触发器对应的事件源类型，目前有oss和apigateway (Optional) */
     EventSource string `json:"eventSource"`
 
-    /*  (Optional) */
+    /* 触发器对应的事件源Id (Optional) */
     EventSourceId string `json:"eventSourceId"`
+
+    /* 触发器创建时间 (Optional) */
+    CreateTime string `json:"createTime"`
+
+    /* 触发器最后修改时间 (Optional) */
+    UpdateTime string `json:"updateTime"`
 }

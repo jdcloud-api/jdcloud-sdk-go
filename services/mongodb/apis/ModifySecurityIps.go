@@ -31,10 +31,10 @@ type ModifySecurityIpsRequest struct {
     InstanceId string `json:"instanceId"`
 
     /* 修改方式,Add 增加白名单,Delete 删除白名单.  */
-    ModifyMode string `json:""`
+    ModifyMode string `json:"modifyMode"`
 
     /* IP白名单分组下的IP列表，最多45个以逗号隔开，格式如下：0.0.0.0/0，10.23.12.24（IP），或者10.23.12.24/24（CIDR模式，无类域间路由，/24表示了地址中前缀的长度，范围[1，32]）。  */
-    SecurityIps string `json:""`
+    SecurityIps string `json:"securityIps"`
 }
 
 /*

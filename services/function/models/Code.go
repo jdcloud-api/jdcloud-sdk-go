@@ -19,15 +19,15 @@ package models
 
 type Code struct {
 
-    /*  (Optional) */
-    ZipFile string `json:"zipFile"`
+    /* 代码压缩文件，base64编码 (Optional) */
+    ZipFile *string `json:"zipFile"`
 
-    /*  (Optional) */
-    OnlineCode string `json:"onlineCode"`
+    /* 在线编辑代码 (Optional) */
+    OnlineCode *string `json:"onlineCode"`
 
-    /*  (Optional) */
-    BucketName string `json:"bucketName"`
+    /* 代码所在对象存储的bucket名称 (Optional) */
+    BucketName *string `json:"bucketName"`
 
-    /*  (Optional) */
-    ObjectName string `json:"objectName"`
+    /* 代码所在对象存储的object名称 (Optional) */
+    ObjectName *string `json:"objectName"`
 }

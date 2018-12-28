@@ -31,7 +31,7 @@ type ResetPasswordRequest struct {
     InstanceId string `json:"instanceId"`
 
     /* 新密码，必须包含且只支持字母及数字，不少于8字符不超过16字符。  */
-    AccountPassword string `json:""`
+    AccountPassword string `json:"accountPassword"`
 }
 
 /*

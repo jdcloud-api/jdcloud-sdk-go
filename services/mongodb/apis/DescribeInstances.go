@@ -42,6 +42,9 @@ chargeMode - 计费类型，精确匹配
  (Optional) */
     Filters []common.Filter `json:"filters"`
 
+    /* Tag筛选条件 (Optional) */
+    TagFilters []common.TagFilter `json:"tagFilters"`
+
     /* createTime - 创建时间,asc（正序），desc（倒序）
  (Optional) */
     Sorts []common.Sort `json:"sorts"`
@@ -76,6 +79,7 @@ instanceName - 实例名称, 模糊匹配
 instanceStatus - mongodb状态，精确匹配，支持多个.RUNNING：运行, ERROR：错误 ,BUILDING：创建中, DELETING：删除中, RESTORING：恢复中, RESIZING：变配中
 chargeMode - 计费类型，精确匹配
  (Optional)
+ * param tagFilters: Tag筛选条件 (Optional)
  * param sorts: createTime - 创建时间,asc（正序），desc（倒序）
  (Optional)
  */
@@ -84,6 +88,7 @@ func NewDescribeInstancesRequestWithAllParams(
     pageNumber *int,
     pageSize *int,
     filters []common.Filter,
+    tagFilters []common.TagFilter,
     sorts []common.Sort,
 ) *DescribeInstancesRequest {
 
@@ -98,6 +103,7 @@ func NewDescribeInstancesRequestWithAllParams(
         PageNumber: pageNumber,
         PageSize: pageSize,
         Filters: filters,
+        TagFilters: tagFilters,
         Sorts: sorts,
     }
 }
@@ -137,6 +143,11 @@ chargeMode - 计费类型，精确匹配
 (Optional) */
 func (r *DescribeInstancesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
+}
+
+/* param tagFilters: Tag筛选条件(Optional) */
+func (r *DescribeInstancesRequest) SetTagFilters(tagFilters []common.TagFilter) {
+    r.TagFilters = tagFilters
 }
 
 /* param sorts: createTime - 创建时间,asc（正序），desc（倒序）

@@ -31,7 +31,7 @@ type ModifyBackupPolicyRequest struct {
     InstanceId string `json:"instanceId"`
 
     /* 自动备份开始时间窗口,例如：00:00-01:00，表示0点到1点开始进行数据库自动备份，备份完成时间则跟实例大小有关，不一定在这个时间范围中<br>SQL Server:范围00:00-23:59，时间范围差不得小于30分钟。<br>MySQL,只能是以下取值:<br>00:00-01:00<br>01:00-02:00<br>......<br>23:00-24:00 (Optional) */
-    StartWindow *string `json:""`
+    StartWindow *string `json:"startWindow"`
 }
 
 /*

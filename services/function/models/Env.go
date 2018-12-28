@@ -20,5 +20,5 @@ package models
 type Env struct {
 
     /*  (Optional) */
-    Data interface{} `json:"data"`
+    Data *interface{} `json:"data"`
 }

@@ -31,7 +31,7 @@ type ModifyInstanceNameRequest struct {
     InstanceId string `json:"instanceId"`
 
     /* 实例名称，名称支持中文，实例名的具体规则可参见帮助中心文档:[名称及密码限制](../../../documentation/Cloud-Database-and-Cache/RDS/Introduction/Restrictions/SQLServer-Restrictions.md)  */
-    InstanceName string `json:""`
+    InstanceName string `json:"instanceName"`
 }
 
 /*
