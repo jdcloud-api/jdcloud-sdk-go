@@ -153,5 +153,4 @@ type AddCustomLiveStreamRecordTemplateResponse struct {
 }
 
 type AddCustomLiveStreamRecordTemplateResult struct {
-    Feedback bool `json:"feedback"`
 }

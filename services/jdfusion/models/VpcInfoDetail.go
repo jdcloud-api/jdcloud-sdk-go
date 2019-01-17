@@ -26,7 +26,7 @@ type VpcInfoDetail struct {
     Name string `json:"name"`
 
     /* 地址范围 (Optional) */
-    AddressPrefix string `json:"addressPrefix"`
+    CidrBlock string `json:"cidrBlock"`
 
     /* VPC 描述 (Optional) */
     Description string `json:"description"`

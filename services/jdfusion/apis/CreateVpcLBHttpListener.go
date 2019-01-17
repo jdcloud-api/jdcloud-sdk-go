@@ -29,18 +29,18 @@ type CreateVpcLBHttpListenerRequest struct {
     RegionId string `json:"regionId"`
 
     /* 创建HTTP监听器  */
-    Body *jdfusion.CreateLoadBalancerHTTPListenerReq `json:"body"`
+    HttpListener *jdfusion.CreateLoadBalancerHTTPListener `json:"httpListener"`
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param body: 创建HTTP监听器 (Required)
+ * param httpListener: 创建HTTP监听器 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateVpcLBHttpListenerRequest(
     regionId string,
-    body *jdfusion.CreateLoadBalancerHTTPListenerReq,
+    httpListener *jdfusion.CreateLoadBalancerHTTPListener,
 ) *CreateVpcLBHttpListenerRequest {
 
 	return &CreateVpcLBHttpListenerRequest{
@@ -51,17 +51,17 @@ func NewCreateVpcLBHttpListenerRequest(
 			Version: "v1",
 		},
         RegionId: regionId,
-        Body: body,
+        HttpListener: httpListener,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param body: 创建HTTP监听器 (Required)
+ * param httpListener: 创建HTTP监听器 (Required)
  */
 func NewCreateVpcLBHttpListenerRequestWithAllParams(
     regionId string,
-    body *jdfusion.CreateLoadBalancerHTTPListenerReq,
+    httpListener *jdfusion.CreateLoadBalancerHTTPListener,
 ) *CreateVpcLBHttpListenerRequest {
 
     return &CreateVpcLBHttpListenerRequest{
@@ -72,7 +72,7 @@ func NewCreateVpcLBHttpListenerRequestWithAllParams(
             Version: "v1",
         },
         RegionId: regionId,
-        Body: body,
+        HttpListener: httpListener,
     }
 }
 
@@ -94,9 +94,9 @@ func (r *CreateVpcLBHttpListenerRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param body: 创建HTTP监听器(Required) */
-func (r *CreateVpcLBHttpListenerRequest) SetBody(body *jdfusion.CreateLoadBalancerHTTPListenerReq) {
-    r.Body = body
+/* param httpListener: 创建HTTP监听器(Required) */
+func (r *CreateVpcLBHttpListenerRequest) SetHttpListener(httpListener *jdfusion.CreateLoadBalancerHTTPListener) {
+    r.HttpListener = httpListener
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

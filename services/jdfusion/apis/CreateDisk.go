@@ -29,18 +29,18 @@ type CreateDiskRequest struct {
     RegionId string `json:"regionId"`
 
     /* 创建云硬盘  */
-    Body *jdfusion.CreateDataDiskReq `json:"body"`
+    Disk *jdfusion.CreateDataDisk `json:"disk"`
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param body: 创建云硬盘 (Required)
+ * param disk: 创建云硬盘 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateDiskRequest(
     regionId string,
-    body *jdfusion.CreateDataDiskReq,
+    disk *jdfusion.CreateDataDisk,
 ) *CreateDiskRequest {
 
 	return &CreateDiskRequest{
@@ -51,17 +51,17 @@ func NewCreateDiskRequest(
 			Version: "v1",
 		},
         RegionId: regionId,
-        Body: body,
+        Disk: disk,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param body: 创建云硬盘 (Required)
+ * param disk: 创建云硬盘 (Required)
  */
 func NewCreateDiskRequestWithAllParams(
     regionId string,
-    body *jdfusion.CreateDataDiskReq,
+    disk *jdfusion.CreateDataDisk,
 ) *CreateDiskRequest {
 
     return &CreateDiskRequest{
@@ -72,7 +72,7 @@ func NewCreateDiskRequestWithAllParams(
             Version: "v1",
         },
         RegionId: regionId,
-        Body: body,
+        Disk: disk,
     }
 }
 
@@ -94,9 +94,9 @@ func (r *CreateDiskRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param body: 创建云硬盘(Required) */
-func (r *CreateDiskRequest) SetBody(body *jdfusion.CreateDataDiskReq) {
-    r.Body = body
+/* param disk: 创建云硬盘(Required) */
+func (r *CreateDiskRequest) SetDisk(disk *jdfusion.CreateDataDisk) {
+    r.Disk = disk
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

@@ -29,18 +29,18 @@ type CreateVpcSubnetRequest struct {
     RegionId string `json:"regionId"`
 
     /* 创建subnet  */
-    Body *jdfusion.CreateSubnetReq `json:"body"`
+    Subnet *jdfusion.CreateSubnet `json:"subnet"`
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param body: 创建subnet (Required)
+ * param subnet: 创建subnet (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateVpcSubnetRequest(
     regionId string,
-    body *jdfusion.CreateSubnetReq,
+    subnet *jdfusion.CreateSubnet,
 ) *CreateVpcSubnetRequest {
 
 	return &CreateVpcSubnetRequest{
@@ -51,17 +51,17 @@ func NewCreateVpcSubnetRequest(
 			Version: "v1",
 		},
         RegionId: regionId,
-        Body: body,
+        Subnet: subnet,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param body: 创建subnet (Required)
+ * param subnet: 创建subnet (Required)
  */
 func NewCreateVpcSubnetRequestWithAllParams(
     regionId string,
-    body *jdfusion.CreateSubnetReq,
+    subnet *jdfusion.CreateSubnet,
 ) *CreateVpcSubnetRequest {
 
     return &CreateVpcSubnetRequest{
@@ -72,7 +72,7 @@ func NewCreateVpcSubnetRequestWithAllParams(
             Version: "v1",
         },
         RegionId: regionId,
-        Body: body,
+        Subnet: subnet,
     }
 }
 
@@ -94,9 +94,9 @@ func (r *CreateVpcSubnetRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param body: 创建subnet(Required) */
-func (r *CreateVpcSubnetRequest) SetBody(body *jdfusion.CreateSubnetReq) {
-    r.Body = body
+/* param subnet: 创建subnet(Required) */
+func (r *CreateVpcSubnetRequest) SetSubnet(subnet *jdfusion.CreateSubnet) {
+    r.Subnet = subnet
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

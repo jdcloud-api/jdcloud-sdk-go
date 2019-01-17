@@ -38,7 +38,7 @@ type DescribeAlarmsRequest struct {
     ServiceCode *string `json:"serviceCode"`
 
     /* 资源ID (Optional) */
-    ResourceID *string `json:"resourceID"`
+    ResourceId *string `json:"resourceId"`
 
     /* 规则类型, 1表示资源监控，6表示站点监控,7表示可用性监控 (Optional) */
     RuleType *int `json:"ruleType"`
@@ -86,7 +86,7 @@ func NewDescribeAlarmsRequest(
  * param pageNumber: 当前所在页，默认为1 (Optional)
  * param pageSize: 页面大小，默认为20；取值范围[1, 100] (Optional)
  * param serviceCode: 产品名称 (Optional)
- * param resourceID: 资源ID (Optional)
+ * param resourceId: 资源ID (Optional)
  * param ruleType: 规则类型, 1表示资源监控，6表示站点监控,7表示可用性监控 (Optional)
  * param status: 规则报警状态, 1：正常, 2：报警，4：数据不足 (Optional)
  * param enabled: 规则状态：1为启用，0为禁用 (Optional)
@@ -101,7 +101,7 @@ func NewDescribeAlarmsRequestWithAllParams(
     pageNumber *int,
     pageSize *int,
     serviceCode *string,
-    resourceID *string,
+    resourceId *string,
     ruleType *int,
     status *int,
     enabled *int,
@@ -121,7 +121,7 @@ func NewDescribeAlarmsRequestWithAllParams(
         PageNumber: pageNumber,
         PageSize: pageSize,
         ServiceCode: serviceCode,
-        ResourceID: resourceID,
+        ResourceId: resourceId,
         RuleType: ruleType,
         Status: status,
         Enabled: enabled,
@@ -164,9 +164,9 @@ func (r *DescribeAlarmsRequest) SetServiceCode(serviceCode string) {
     r.ServiceCode = &serviceCode
 }
 
-/* param resourceID: 资源ID(Optional) */
-func (r *DescribeAlarmsRequest) SetResourceID(resourceID string) {
-    r.ResourceID = &resourceID
+/* param resourceId: 资源ID(Optional) */
+func (r *DescribeAlarmsRequest) SetResourceId(resourceId string) {
+    r.ResourceId = &resourceId
 }
 
 /* param ruleType: 规则类型, 1表示资源监控，6表示站点监控,7表示可用性监控(Optional) */

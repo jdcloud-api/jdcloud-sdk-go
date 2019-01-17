@@ -29,22 +29,17 @@ type AddLiveDomainRequest struct {
 
     /* 直播的播放域名  */
     PlayDomain string `json:"playDomain"`
-
-    /* 区域ID  */
-    Region string `json:"region"`
 }
 
 /*
  * param publishDomain: 直播的推流域名 (Required)
  * param playDomain: 直播的播放域名 (Required)
- * param region: 区域ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewAddLiveDomainRequest(
     publishDomain string,
     playDomain string,
-    region string,
 ) *AddLiveDomainRequest {
 
 	return &AddLiveDomainRequest{
@@ -56,19 +51,16 @@ func NewAddLiveDomainRequest(
 		},
         PublishDomain: publishDomain,
         PlayDomain: playDomain,
-        Region: region,
 	}
 }
 
 /*
  * param publishDomain: 直播的推流域名 (Required)
  * param playDomain: 直播的播放域名 (Required)
- * param region: 区域ID (Required)
  */
 func NewAddLiveDomainRequestWithAllParams(
     publishDomain string,
     playDomain string,
-    region string,
 ) *AddLiveDomainRequest {
 
     return &AddLiveDomainRequest{
@@ -80,7 +72,6 @@ func NewAddLiveDomainRequestWithAllParams(
         },
         PublishDomain: publishDomain,
         PlayDomain: playDomain,
-        Region: region,
     }
 }
 
@@ -107,11 +98,6 @@ func (r *AddLiveDomainRequest) SetPlayDomain(playDomain string) {
     r.PlayDomain = playDomain
 }
 
-/* param region: 区域ID(Required) */
-func (r *AddLiveDomainRequest) SetRegion(region string) {
-    r.Region = region
-}
-
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r AddLiveDomainRequest) GetRegionId() string {
@@ -125,5 +111,4 @@ type AddLiveDomainResponse struct {
 }
 
 type AddLiveDomainResult struct {
-    PublishDomain string `json:"publishDomain"`
 }

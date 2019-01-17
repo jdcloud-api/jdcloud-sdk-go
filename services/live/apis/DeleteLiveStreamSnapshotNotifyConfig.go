@@ -97,5 +97,4 @@ type DeleteLiveStreamSnapshotNotifyConfigResponse struct {
 }
 
 type DeleteLiveStreamSnapshotNotifyConfigResult struct {
-    Feedback bool `json:"feedback"`
 }

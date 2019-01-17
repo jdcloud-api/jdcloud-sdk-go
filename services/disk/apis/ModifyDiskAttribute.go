@@ -30,10 +30,10 @@ type ModifyDiskAttributeRequest struct {
     /* 云硬盘ID  */
     DiskId string `json:"diskId"`
 
-    /* 云硬盘名称 (Optional) */
+    /* 云硬盘名称，只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符。 (Optional) */
     Name *string `json:"name"`
 
-    /* 云硬盘描述，name和description必须要指定一个 (Optional) */
+    /* 云硬盘描述，允许输入UTF-8编码下的全部字符，不超过256字符。 (Optional) */
     Description *string `json:"description"`
 }
 
@@ -63,8 +63,8 @@ func NewModifyDiskAttributeRequest(
 /*
  * param regionId: 地域ID (Required)
  * param diskId: 云硬盘ID (Required)
- * param name: 云硬盘名称 (Optional)
- * param description: 云硬盘描述，name和description必须要指定一个 (Optional)
+ * param name: 云硬盘名称，只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符。 (Optional)
+ * param description: 云硬盘描述，允许输入UTF-8编码下的全部字符，不超过256字符。 (Optional)
  */
 func NewModifyDiskAttributeRequestWithAllParams(
     regionId string,
@@ -110,12 +110,12 @@ func (r *ModifyDiskAttributeRequest) SetDiskId(diskId string) {
     r.DiskId = diskId
 }
 
-/* param name: 云硬盘名称(Optional) */
+/* param name: 云硬盘名称，只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符。(Optional) */
 func (r *ModifyDiskAttributeRequest) SetName(name string) {
     r.Name = &name
 }
 
-/* param description: 云硬盘描述，name和description必须要指定一个(Optional) */
+/* param description: 云硬盘描述，允许输入UTF-8编码下的全部字符，不超过256字符。(Optional) */
 func (r *ModifyDiskAttributeRequest) SetDescription(description string) {
     r.Description = &description
 }

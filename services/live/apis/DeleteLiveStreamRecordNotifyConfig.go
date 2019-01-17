@@ -97,5 +97,4 @@ type DeleteLiveStreamRecordNotifyConfigResponse struct {
 }
 
 type DeleteLiveStreamRecordNotifyConfigResult struct {
-    PublishDomain string `json:"publishDomain"`
 }

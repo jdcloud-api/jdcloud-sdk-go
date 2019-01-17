@@ -29,18 +29,18 @@ type CreateVpcEipRequest struct {
     RegionId string `json:"regionId"`
 
     /* 分配弹性公网ip  */
-    Body *jdfusion.AllocateEipAddressReq `json:"body"`
+    Allocate *jdfusion.AllocateEipAddress `json:"allocate"`
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param body: 分配弹性公网ip (Required)
+ * param allocate: 分配弹性公网ip (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateVpcEipRequest(
     regionId string,
-    body *jdfusion.AllocateEipAddressReq,
+    allocate *jdfusion.AllocateEipAddress,
 ) *CreateVpcEipRequest {
 
 	return &CreateVpcEipRequest{
@@ -51,17 +51,17 @@ func NewCreateVpcEipRequest(
 			Version: "v1",
 		},
         RegionId: regionId,
-        Body: body,
+        Allocate: allocate,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param body: 分配弹性公网ip (Required)
+ * param allocate: 分配弹性公网ip (Required)
  */
 func NewCreateVpcEipRequestWithAllParams(
     regionId string,
-    body *jdfusion.AllocateEipAddressReq,
+    allocate *jdfusion.AllocateEipAddress,
 ) *CreateVpcEipRequest {
 
     return &CreateVpcEipRequest{
@@ -72,7 +72,7 @@ func NewCreateVpcEipRequestWithAllParams(
             Version: "v1",
         },
         RegionId: regionId,
-        Body: body,
+        Allocate: allocate,
     }
 }
 
@@ -94,9 +94,9 @@ func (r *CreateVpcEipRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param body: 分配弹性公网ip(Required) */
-func (r *CreateVpcEipRequest) SetBody(body *jdfusion.AllocateEipAddressReq) {
-    r.Body = body
+/* param allocate: 分配弹性公网ip(Required) */
+func (r *CreateVpcEipRequest) SetAllocate(allocate *jdfusion.AllocateEipAddress) {
+    r.Allocate = allocate
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

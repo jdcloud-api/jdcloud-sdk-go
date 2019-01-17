@@ -49,6 +49,6 @@ type ImportDNS struct {
     /* 解析记录的权重 (Optional) */
     Weight int `json:"weight"`
 
-    /* 解析线路的ID  */
+    /* 解析线路的ID，请调用getViewTree接口获取解析线路的ID。  */
     ViewValue int `json:"viewValue"`
 }

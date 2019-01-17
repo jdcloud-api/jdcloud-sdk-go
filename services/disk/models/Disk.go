@@ -26,17 +26,23 @@ type Disk struct {
     /* 云硬盘所属AZ (Optional) */
     Az string `json:"az"`
 
-    /* 云硬盘名称 (Optional) */
+    /* 云硬盘名称，只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符。 (Optional) */
     Name string `json:"name"`
 
-    /* 云硬盘描述 (Optional) */
+    /* 云硬盘描述，允许输入UTF-8编码下的全部字符，不超过256字符。 (Optional) */
     Description string `json:"description"`
 
-    /* 磁盘类型，取值为 ssd 或 premium-hdd (Optional) */
+    /* 云硬盘类型，取值为 ssd,premium-hdd,ssd.gp1,ssd.io1,hdd.std1 (Optional) */
     DiskType string `json:"diskType"`
 
-    /* 磁盘大小，单位为 GiB (Optional) */
+    /* 云硬盘大小，单位为 GiB (Optional) */
     DiskSizeGB int `json:"diskSizeGB"`
+
+    /* 该云硬盘实际应用的iops值 (Optional) */
+    Iops int `json:"iops"`
+
+    /* 该云硬盘实际应用的吞吐量的数值 (Optional) */
+    Throughput int `json:"throughput"`
 
     /* 云硬盘状态，取值为 creating、available、in-use、extending、restoring、deleting、deleted、error_create、error_delete、error_restore、error_extend 之一 (Optional) */
     Status string `json:"status"`
@@ -46,6 +52,15 @@ type Disk struct {
 
     /* 创建该云硬盘的快照ID (Optional) */
     SnapshotId string `json:"snapshotId"`
+
+    /* 云盘是否支持多挂载 (Optional) */
+    MultiAttachable bool `json:"multiAttachable"`
+
+    /* 云盘是否为加密盘 (Optional) */
+    Encrypted bool `json:"encrypted"`
+
+    /* 云盘是否被暂停（IOPS限制为极低） (Optional) */
+    Enable bool `json:"enable"`
 
     /* 创建云硬盘时间 (Optional) */
     CreateTime string `json:"createTime"`

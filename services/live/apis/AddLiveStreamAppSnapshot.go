@@ -125,5 +125,4 @@ type AddLiveStreamAppSnapshotResponse struct {
 }
 
 type AddLiveStreamAppSnapshotResult struct {
-    Feedback bool `json:"feedback"`
 }

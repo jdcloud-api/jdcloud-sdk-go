@@ -26,10 +26,10 @@ type DescribeLiveStreamTranscodeConfigRequest struct {
 
     core.JDCloudRequest
 
-    /* 页码, 默认为1, 取值范围：[1,∞) (Optional) */
+    /* 页码；默认为1；取值范围[1, 100000] (Optional) */
     PageNum *int `json:"pageNum"`
 
-    /* 分页大小，默认为20，取值范围：[10,100] (Optional) */
+    /* 分页大小；默认为10；取值范围[10, 100] (Optional) */
     PageSize *int `json:"pageSize"`
 
     /* 转码模板查询过滤条件, 不传递分页参数时默认返回10条 (Optional) */
@@ -54,8 +54,8 @@ func NewDescribeLiveStreamTranscodeConfigRequest(
 }
 
 /*
- * param pageNum: 页码, 默认为1, 取值范围：[1,∞) (Optional)
- * param pageSize: 分页大小，默认为20，取值范围：[10,100] (Optional)
+ * param pageNum: 页码；默认为1；取值范围[1, 100000] (Optional)
+ * param pageSize: 分页大小；默认为10；取值范围[10, 100] (Optional)
  * param filters: 转码模板查询过滤条件, 不传递分页参数时默认返回10条 (Optional)
  */
 func NewDescribeLiveStreamTranscodeConfigRequestWithAllParams(
@@ -90,12 +90,12 @@ func NewDescribeLiveStreamTranscodeConfigRequestWithoutParam() *DescribeLiveStre
     }
 }
 
-/* param pageNum: 页码, 默认为1, 取值范围：[1,∞)(Optional) */
+/* param pageNum: 页码；默认为1；取值范围[1, 100000](Optional) */
 func (r *DescribeLiveStreamTranscodeConfigRequest) SetPageNum(pageNum int) {
     r.PageNum = &pageNum
 }
 
-/* param pageSize: 分页大小，默认为20，取值范围：[10,100](Optional) */
+/* param pageSize: 分页大小；默认为10；取值范围[10, 100](Optional) */
 func (r *DescribeLiveStreamTranscodeConfigRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }

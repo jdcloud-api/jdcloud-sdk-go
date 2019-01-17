@@ -97,5 +97,4 @@ type DeleteLiveDomainResponse struct {
 }
 
 type DeleteLiveDomainResult struct {
-    PublishDomain string `json:"publishDomain"`
 }

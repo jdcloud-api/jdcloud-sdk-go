@@ -167,5 +167,4 @@ type AddCustomLiveStreamWatermarkTemplateResponse struct {
 }
 
 type AddCustomLiveStreamWatermarkTemplateResult struct {
-    Feedback bool `json:"feedback"`
 }

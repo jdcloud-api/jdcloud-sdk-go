@@ -20,7 +20,7 @@ package models
 type NotifyInfo struct {
 
     /* 您的加速域名 (Optional) */
-    PublishDoamin string `json:"publishDoamin"`
+    PublishDomain string `json:"publishDomain"`
 
     /* 回调地址 (Optional) */
     NotifyUrl string `json:"notifyUrl"`

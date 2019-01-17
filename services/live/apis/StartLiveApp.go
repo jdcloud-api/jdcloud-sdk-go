@@ -111,5 +111,4 @@ type StartLiveAppResponse struct {
 }
 
 type StartLiveAppResult struct {
-    PublishDomain string `json:"publishDomain"`
 }

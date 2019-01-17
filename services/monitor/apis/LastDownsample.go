@@ -34,7 +34,7 @@ type LastDownsampleRequest struct {
     /* 资源的类型，取值vm, lb, ip, database 等  */
     ServiceCode string `json:"serviceCode"`
 
-    /* 资源的uuid，支持多个resourceId批量查询，每个id用|分隔。 如：id1|id2|id3|id4  */
+    /* 资源的uuid，支持多个resourceId批量查询，每个id用竖线'|'分隔。 如：id1|id2|id3|id4  */
     ResourceId string `json:"resourceId"`
 
     /* 自定义标签 (Optional) */
@@ -60,7 +60,7 @@ type LastDownsampleRequest struct {
  * param regionId: 地域 Id (Required)
  * param metric: 监控项英文标识(id) (Required)
  * param serviceCode: 资源的类型，取值vm, lb, ip, database 等 (Required)
- * param resourceId: 资源的uuid，支持多个resourceId批量查询，每个id用|分隔。 如：id1|id2|id3|id4 (Required)
+ * param resourceId: 资源的uuid，支持多个resourceId批量查询，每个id用竖线'|'分隔。 如：id1|id2|id3|id4 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -89,7 +89,7 @@ func NewLastDownsampleRequest(
  * param regionId: 地域 Id (Required)
  * param metric: 监控项英文标识(id) (Required)
  * param serviceCode: 资源的类型，取值vm, lb, ip, database 等 (Required)
- * param resourceId: 资源的uuid，支持多个resourceId批量查询，每个id用|分隔。 如：id1|id2|id3|id4 (Required)
+ * param resourceId: 资源的uuid，支持多个resourceId批量查询，每个id用竖线'|'分隔。 如：id1|id2|id3|id4 (Required)
  * param tags: 自定义标签 (Optional)
  * param startTime: 查询时间范围的开始时间， UTC时间，格式：yyyy-MM-dd'T'HH:mm:ssZ（默认为当前时间，早于30d时，将被重置为30d） (Optional)
  * param endTime: 查询时间范围的结束时间， UTC时间，格式：2016-12- yyyy-MM-dd'T'HH:mm:ssZ（为空时，将由startTime与timeInterval计算得出） (Optional)
@@ -158,7 +158,7 @@ func (r *LastDownsampleRequest) SetServiceCode(serviceCode string) {
     r.ServiceCode = serviceCode
 }
 
-/* param resourceId: 资源的uuid，支持多个resourceId批量查询，每个id用|分隔。 如：id1|id2|id3|id4(Required) */
+/* param resourceId: 资源的uuid，支持多个resourceId批量查询，每个id用竖线'|'分隔。 如：id1|id2|id3|id4(Required) */
 func (r *LastDownsampleRequest) SetResourceId(resourceId string) {
     r.ResourceId = resourceId
 }

@@ -29,18 +29,18 @@ type CreateVpcVServerGroupRequest struct {
     RegionId string `json:"regionId"`
 
     /* 创建虚拟服务器组  */
-    Body *jdfusion.CreateVserverGroupReq `json:"body"`
+    VserverGroup *jdfusion.CreateVserverGroup `json:"vserverGroup"`
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param body: 创建虚拟服务器组 (Required)
+ * param vserverGroup: 创建虚拟服务器组 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateVpcVServerGroupRequest(
     regionId string,
-    body *jdfusion.CreateVserverGroupReq,
+    vserverGroup *jdfusion.CreateVserverGroup,
 ) *CreateVpcVServerGroupRequest {
 
 	return &CreateVpcVServerGroupRequest{
@@ -51,17 +51,17 @@ func NewCreateVpcVServerGroupRequest(
 			Version: "v1",
 		},
         RegionId: regionId,
-        Body: body,
+        VserverGroup: vserverGroup,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param body: 创建虚拟服务器组 (Required)
+ * param vserverGroup: 创建虚拟服务器组 (Required)
  */
 func NewCreateVpcVServerGroupRequestWithAllParams(
     regionId string,
-    body *jdfusion.CreateVserverGroupReq,
+    vserverGroup *jdfusion.CreateVserverGroup,
 ) *CreateVpcVServerGroupRequest {
 
     return &CreateVpcVServerGroupRequest{
@@ -72,7 +72,7 @@ func NewCreateVpcVServerGroupRequestWithAllParams(
             Version: "v1",
         },
         RegionId: regionId,
-        Body: body,
+        VserverGroup: vserverGroup,
     }
 }
 
@@ -94,9 +94,9 @@ func (r *CreateVpcVServerGroupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param body: 创建虚拟服务器组(Required) */
-func (r *CreateVpcVServerGroupRequest) SetBody(body *jdfusion.CreateVserverGroupReq) {
-    r.Body = body
+/* param vserverGroup: 创建虚拟服务器组(Required) */
+func (r *CreateVpcVServerGroupRequest) SetVserverGroup(vserverGroup *jdfusion.CreateVserverGroup) {
+    r.VserverGroup = vserverGroup
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

@@ -32,20 +32,20 @@ type DisassociateVpcEipByIdRequest struct {
     Id string `json:"id"`
 
     /* 解绑公网IP  */
-    Body *jdfusion.UnassociateEipAddressReq `json:"body"`
+    Unassociate *jdfusion.UnassociateEipAddress `json:"unassociate"`
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param id: 公网IP ID (Required)
- * param body: 解绑公网IP (Required)
+ * param unassociate: 解绑公网IP (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDisassociateVpcEipByIdRequest(
     regionId string,
     id string,
-    body *jdfusion.UnassociateEipAddressReq,
+    unassociate *jdfusion.UnassociateEipAddress,
 ) *DisassociateVpcEipByIdRequest {
 
 	return &DisassociateVpcEipByIdRequest{
@@ -57,19 +57,19 @@ func NewDisassociateVpcEipByIdRequest(
 		},
         RegionId: regionId,
         Id: id,
-        Body: body,
+        Unassociate: unassociate,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param id: 公网IP ID (Required)
- * param body: 解绑公网IP (Required)
+ * param unassociate: 解绑公网IP (Required)
  */
 func NewDisassociateVpcEipByIdRequestWithAllParams(
     regionId string,
     id string,
-    body *jdfusion.UnassociateEipAddressReq,
+    unassociate *jdfusion.UnassociateEipAddress,
 ) *DisassociateVpcEipByIdRequest {
 
     return &DisassociateVpcEipByIdRequest{
@@ -81,7 +81,7 @@ func NewDisassociateVpcEipByIdRequestWithAllParams(
         },
         RegionId: regionId,
         Id: id,
-        Body: body,
+        Unassociate: unassociate,
     }
 }
 
@@ -108,9 +108,9 @@ func (r *DisassociateVpcEipByIdRequest) SetId(id string) {
     r.Id = id
 }
 
-/* param body: 解绑公网IP(Required) */
-func (r *DisassociateVpcEipByIdRequest) SetBody(body *jdfusion.UnassociateEipAddressReq) {
-    r.Body = body
+/* param unassociate: 解绑公网IP(Required) */
+func (r *DisassociateVpcEipByIdRequest) SetUnassociate(unassociate *jdfusion.UnassociateEipAddress) {
+    r.Unassociate = unassociate
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

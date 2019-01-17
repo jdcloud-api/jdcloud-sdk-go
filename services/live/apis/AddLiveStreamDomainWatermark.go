@@ -111,5 +111,4 @@ type AddLiveStreamDomainWatermarkResponse struct {
 }
 
 type AddLiveStreamDomainWatermarkResult struct {
-    Feedback bool `json:"feedback"`
 }

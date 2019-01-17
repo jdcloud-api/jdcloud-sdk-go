@@ -22,11 +22,17 @@ type Snapshot struct {
     /* 云硬盘快照ID (Optional) */
     SnapshotId string `json:"snapshotId"`
 
-    /* 创建快照的云硬盘ID (Optional) */
+    /* 快照来源 可以有self，others两种来源 (Optional) */
+    SnapshotSource string `json:"snapshotSource"`
+
+    /* 创建快照的云硬盘ID(snapshotSource为others时不展示) (Optional) */
     DiskId string `json:"diskId"`
 
     /* 快照大小，单位为GiB (Optional) */
     SnapshotSizeGB int `json:"snapshotSizeGB"`
+
+    /* 快照关联的所有镜像ID(snapshotSource为others时不展示) (Optional) */
+    Images []string `json:"images"`
 
     /* 快照名称 (Optional) */
     Name string `json:"name"`
@@ -39,4 +45,10 @@ type Snapshot struct {
 
     /* 创建时间 (Optional) */
     CreateTime string `json:"createTime"`
+
+    /* 共享信息 (Optional) */
+    SharInfo []ShareInfo `json:"sharInfo"`
+
+    /* 快照是否为加密盘的快照 (Optional) */
+    Encrypted bool `json:"encrypted"`
 }

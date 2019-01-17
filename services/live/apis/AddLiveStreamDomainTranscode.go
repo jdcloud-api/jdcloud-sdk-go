@@ -111,5 +111,4 @@ type AddLiveStreamDomainTranscodeResponse struct {
 }
 
 type AddLiveStreamDomainTranscodeResult struct {
-    PublishDomain string `json:"publishDomain"`
 }

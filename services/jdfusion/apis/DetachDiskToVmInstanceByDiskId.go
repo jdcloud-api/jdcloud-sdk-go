@@ -32,20 +32,20 @@ type DetachDiskToVmInstanceByDiskIdRequest struct {
     Id string `json:"id"`
 
     /* 从虚拟机卸载云硬盘  */
-    Body *jdfusion.DetachDataDiskReq `json:"body"`
+    Detach *jdfusion.DetachDataDisk `json:"detach"`
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param id: 云硬盘 ID (Required)
- * param body: 从虚拟机卸载云硬盘 (Required)
+ * param detach: 从虚拟机卸载云硬盘 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDetachDiskToVmInstanceByDiskIdRequest(
     regionId string,
     id string,
-    body *jdfusion.DetachDataDiskReq,
+    detach *jdfusion.DetachDataDisk,
 ) *DetachDiskToVmInstanceByDiskIdRequest {
 
 	return &DetachDiskToVmInstanceByDiskIdRequest{
@@ -57,19 +57,19 @@ func NewDetachDiskToVmInstanceByDiskIdRequest(
 		},
         RegionId: regionId,
         Id: id,
-        Body: body,
+        Detach: detach,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param id: 云硬盘 ID (Required)
- * param body: 从虚拟机卸载云硬盘 (Required)
+ * param detach: 从虚拟机卸载云硬盘 (Required)
  */
 func NewDetachDiskToVmInstanceByDiskIdRequestWithAllParams(
     regionId string,
     id string,
-    body *jdfusion.DetachDataDiskReq,
+    detach *jdfusion.DetachDataDisk,
 ) *DetachDiskToVmInstanceByDiskIdRequest {
 
     return &DetachDiskToVmInstanceByDiskIdRequest{
@@ -81,7 +81,7 @@ func NewDetachDiskToVmInstanceByDiskIdRequestWithAllParams(
         },
         RegionId: regionId,
         Id: id,
-        Body: body,
+        Detach: detach,
     }
 }
 
@@ -108,9 +108,9 @@ func (r *DetachDiskToVmInstanceByDiskIdRequest) SetId(id string) {
     r.Id = id
 }
 
-/* param body: 从虚拟机卸载云硬盘(Required) */
-func (r *DetachDiskToVmInstanceByDiskIdRequest) SetBody(body *jdfusion.DetachDataDiskReq) {
-    r.Body = body
+/* param detach: 从虚拟机卸载云硬盘(Required) */
+func (r *DetachDiskToVmInstanceByDiskIdRequest) SetDetach(detach *jdfusion.DetachDataDisk) {
+    r.Detach = detach
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

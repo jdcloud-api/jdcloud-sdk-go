@@ -32,20 +32,20 @@ type AttachDiskToVmInstanceByDiskIdRequest struct {
     Id string `json:"id"`
 
     /* 云硬盘挂载至虚拟机  */
-    Body *jdfusion.AttachDataDiskReq `json:"body"`
+    Attach *jdfusion.AttachDataDisk `json:"attach"`
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param id: 云硬盘 ID (Required)
- * param body: 云硬盘挂载至虚拟机 (Required)
+ * param attach: 云硬盘挂载至虚拟机 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewAttachDiskToVmInstanceByDiskIdRequest(
     regionId string,
     id string,
-    body *jdfusion.AttachDataDiskReq,
+    attach *jdfusion.AttachDataDisk,
 ) *AttachDiskToVmInstanceByDiskIdRequest {
 
 	return &AttachDiskToVmInstanceByDiskIdRequest{
@@ -57,19 +57,19 @@ func NewAttachDiskToVmInstanceByDiskIdRequest(
 		},
         RegionId: regionId,
         Id: id,
-        Body: body,
+        Attach: attach,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param id: 云硬盘 ID (Required)
- * param body: 云硬盘挂载至虚拟机 (Required)
+ * param attach: 云硬盘挂载至虚拟机 (Required)
  */
 func NewAttachDiskToVmInstanceByDiskIdRequestWithAllParams(
     regionId string,
     id string,
-    body *jdfusion.AttachDataDiskReq,
+    attach *jdfusion.AttachDataDisk,
 ) *AttachDiskToVmInstanceByDiskIdRequest {
 
     return &AttachDiskToVmInstanceByDiskIdRequest{
@@ -81,7 +81,7 @@ func NewAttachDiskToVmInstanceByDiskIdRequestWithAllParams(
         },
         RegionId: regionId,
         Id: id,
-        Body: body,
+        Attach: attach,
     }
 }
 
@@ -108,9 +108,9 @@ func (r *AttachDiskToVmInstanceByDiskIdRequest) SetId(id string) {
     r.Id = id
 }
 
-/* param body: 云硬盘挂载至虚拟机(Required) */
-func (r *AttachDiskToVmInstanceByDiskIdRequest) SetBody(body *jdfusion.AttachDataDiskReq) {
-    r.Body = body
+/* param attach: 云硬盘挂载至虚拟机(Required) */
+func (r *AttachDiskToVmInstanceByDiskIdRequest) SetAttach(attach *jdfusion.AttachDataDisk) {
+    r.Attach = attach
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

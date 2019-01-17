@@ -29,7 +29,7 @@ type SubnetInfo struct {
     SubnetName string `json:"subnetName"`
 
     /* 子网网段 (Optional) */
-    AddressPrefix string `json:"addressPrefix"`
+    CidrBlock string `json:"cidrBlock"`
 
     /* 子网可用ip数量 (Optional) */
     AvailableIpCount int `json:"availableIpCount"`
