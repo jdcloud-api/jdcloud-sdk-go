@@ -20,6 +20,6 @@ package models
 type DescribeTemplateByIDSpec struct {
 
     /* 模板类型，区分默认模板和用户自定义模板：1表示默认模板，2表示用户自定义模板
-in: query (Optional) */
+in: query  */
     TemplateType int64 `json:"templateType"`
 }

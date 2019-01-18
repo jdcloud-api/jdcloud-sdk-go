@@ -111,5 +111,4 @@ type StopLiveAppResponse struct {
 }
 
 type StopLiveAppResult struct {
-    PublishDomain string `json:"publishDomain"`
 }

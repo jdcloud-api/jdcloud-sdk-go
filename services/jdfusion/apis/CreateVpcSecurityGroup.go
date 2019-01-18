@@ -29,18 +29,18 @@ type CreateVpcSecurityGroupRequest struct {
     RegionId string `json:"regionId"`
 
     /* 创建securityGroup  */
-    Body *jdfusion.CreateSecurityGroupReq `json:"body"`
+    SecurityGroup *jdfusion.CreateSecurityGroup `json:"securityGroup"`
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param body: 创建securityGroup (Required)
+ * param securityGroup: 创建securityGroup (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateVpcSecurityGroupRequest(
     regionId string,
-    body *jdfusion.CreateSecurityGroupReq,
+    securityGroup *jdfusion.CreateSecurityGroup,
 ) *CreateVpcSecurityGroupRequest {
 
 	return &CreateVpcSecurityGroupRequest{
@@ -51,17 +51,17 @@ func NewCreateVpcSecurityGroupRequest(
 			Version: "v1",
 		},
         RegionId: regionId,
-        Body: body,
+        SecurityGroup: securityGroup,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param body: 创建securityGroup (Required)
+ * param securityGroup: 创建securityGroup (Required)
  */
 func NewCreateVpcSecurityGroupRequestWithAllParams(
     regionId string,
-    body *jdfusion.CreateSecurityGroupReq,
+    securityGroup *jdfusion.CreateSecurityGroup,
 ) *CreateVpcSecurityGroupRequest {
 
     return &CreateVpcSecurityGroupRequest{
@@ -72,7 +72,7 @@ func NewCreateVpcSecurityGroupRequestWithAllParams(
             Version: "v1",
         },
         RegionId: regionId,
-        Body: body,
+        SecurityGroup: securityGroup,
     }
 }
 
@@ -94,9 +94,9 @@ func (r *CreateVpcSecurityGroupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param body: 创建securityGroup(Required) */
-func (r *CreateVpcSecurityGroupRequest) SetBody(body *jdfusion.CreateSecurityGroupReq) {
-    r.Body = body
+/* param securityGroup: 创建securityGroup(Required) */
+func (r *CreateVpcSecurityGroupRequest) SetSecurityGroup(securityGroup *jdfusion.CreateSecurityGroup) {
+    r.SecurityGroup = securityGroup
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

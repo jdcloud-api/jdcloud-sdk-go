@@ -29,18 +29,18 @@ type CreateVpcRequest struct {
     RegionId string `json:"regionId"`
 
     /* 创建VPC  */
-    Body *jdfusion.CreateVpcReq `json:"body"`
+    Vpc *jdfusion.VpcInfo `json:"vpc"`
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param body: 创建VPC (Required)
+ * param vpc: 创建VPC (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateVpcRequest(
     regionId string,
-    body *jdfusion.CreateVpcReq,
+    vpc *jdfusion.VpcInfo,
 ) *CreateVpcRequest {
 
 	return &CreateVpcRequest{
@@ -51,17 +51,17 @@ func NewCreateVpcRequest(
 			Version: "v1",
 		},
         RegionId: regionId,
-        Body: body,
+        Vpc: vpc,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param body: 创建VPC (Required)
+ * param vpc: 创建VPC (Required)
  */
 func NewCreateVpcRequestWithAllParams(
     regionId string,
-    body *jdfusion.CreateVpcReq,
+    vpc *jdfusion.VpcInfo,
 ) *CreateVpcRequest {
 
     return &CreateVpcRequest{
@@ -72,7 +72,7 @@ func NewCreateVpcRequestWithAllParams(
             Version: "v1",
         },
         RegionId: regionId,
-        Body: body,
+        Vpc: vpc,
     }
 }
 
@@ -94,9 +94,9 @@ func (r *CreateVpcRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param body: 创建VPC(Required) */
-func (r *CreateVpcRequest) SetBody(body *jdfusion.CreateVpcReq) {
-    r.Body = body
+/* param vpc: 创建VPC(Required) */
+func (r *CreateVpcRequest) SetVpc(vpc *jdfusion.VpcInfo) {
+    r.Vpc = vpc
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

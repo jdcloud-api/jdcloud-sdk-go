@@ -32,20 +32,20 @@ type AttachVpcNetworkInterfaceByIdRequest struct {
     Id string `json:"id"`
 
     /* 网卡挂载虚拟机  */
-    Body *jdfusion.AttachNetInterfaceReq `json:"body"`
+    Attach *jdfusion.AttachNetInterface `json:"attach"`
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param id: 网卡 ID (Required)
- * param body: 网卡挂载虚拟机 (Required)
+ * param attach: 网卡挂载虚拟机 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewAttachVpcNetworkInterfaceByIdRequest(
     regionId string,
     id string,
-    body *jdfusion.AttachNetInterfaceReq,
+    attach *jdfusion.AttachNetInterface,
 ) *AttachVpcNetworkInterfaceByIdRequest {
 
 	return &AttachVpcNetworkInterfaceByIdRequest{
@@ -57,19 +57,19 @@ func NewAttachVpcNetworkInterfaceByIdRequest(
 		},
         RegionId: regionId,
         Id: id,
-        Body: body,
+        Attach: attach,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param id: 网卡 ID (Required)
- * param body: 网卡挂载虚拟机 (Required)
+ * param attach: 网卡挂载虚拟机 (Required)
  */
 func NewAttachVpcNetworkInterfaceByIdRequestWithAllParams(
     regionId string,
     id string,
-    body *jdfusion.AttachNetInterfaceReq,
+    attach *jdfusion.AttachNetInterface,
 ) *AttachVpcNetworkInterfaceByIdRequest {
 
     return &AttachVpcNetworkInterfaceByIdRequest{
@@ -81,7 +81,7 @@ func NewAttachVpcNetworkInterfaceByIdRequestWithAllParams(
         },
         RegionId: regionId,
         Id: id,
-        Body: body,
+        Attach: attach,
     }
 }
 
@@ -108,9 +108,9 @@ func (r *AttachVpcNetworkInterfaceByIdRequest) SetId(id string) {
     r.Id = id
 }
 
-/* param body: 网卡挂载虚拟机(Required) */
-func (r *AttachVpcNetworkInterfaceByIdRequest) SetBody(body *jdfusion.AttachNetInterfaceReq) {
-    r.Body = body
+/* param attach: 网卡挂载虚拟机(Required) */
+func (r *AttachVpcNetworkInterfaceByIdRequest) SetAttach(attach *jdfusion.AttachNetInterface) {
+    r.Attach = attach
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

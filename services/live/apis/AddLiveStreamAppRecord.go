@@ -125,5 +125,4 @@ type AddLiveStreamAppRecordResponse struct {
 }
 
 type AddLiveStreamAppRecordResult struct {
-    PublishDomain string `json:"publishDomain"`
 }

@@ -19,9 +19,15 @@ package models
 
 type App struct {
 
-    /* 推流域名 (Optional) */
-    PublishDomain string `json:"publishDomain"`
+    /* 应用名 (Optional) */
+    AppName string `json:"appName"`
 
-    /* config (Optional) */
-    TranscodeConfig []Config `json:"transcodeConfig"`
+    /* 应用状态 (Optional) */
+    AppStatus string `json:"appStatus"`
+
+    /* 创建时间 (Optional) */
+    CreateTime string `json:"createTime"`
+
+    /* 更新时间 (Optional) */
+    UpdateTime string `json:"updateTime"`
 }

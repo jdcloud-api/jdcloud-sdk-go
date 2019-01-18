@@ -97,5 +97,4 @@ type DeleteCustomLiveStreamSnapshotTemplateResponse struct {
 }
 
 type DeleteCustomLiveStreamSnapshotTemplateResult struct {
-    Feedback bool `json:"feedback"`
 }

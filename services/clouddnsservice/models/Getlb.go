@@ -20,10 +20,10 @@ package models
 type Getlb struct {
 
     /* 负载均衡的解析记录的列表中解析记录是否是相同的权重<br>
-true: 按权重分配负载<br>
-false: 均等负载
+true: 均等负载<br>
+false: 按权重分配负载
  (Optional) */
-    IsBalance bool `json:"isBalance"`
+    Balance bool `json:"balance"`
 
     /* 主机记录 (Optional) */
     Record string `json:"record"`

@@ -20,14 +20,26 @@ package models
 type MetricCm struct {
 
     /*  (Optional) */
-    AggrPeriod int64 `json:"aggrPeriod"`
+    AggrPeriod string `json:"aggrPeriod"`
 
     /*  (Optional) */
     AggrType string `json:"aggrType"`
+
+    /*  (Optional) */
+    CalculateUnit string `json:"calculateUnit"`
+
+    /*  (Optional) */
+    DownSampleType string `json:"downSampleType"`
+
+    /*  (Optional) */
+    Metric string `json:"metric"`
 
     /*  (Optional) */
     MetricName string `json:"metricName"`
 
     /*  (Optional) */
     MetricUID string `json:"metricUID"`
+
+    /*  (Optional) */
+    Tags interface{} `json:"tags"`
 }

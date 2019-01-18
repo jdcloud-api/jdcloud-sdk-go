@@ -20,38 +20,35 @@ package models
 type SlbInfo struct {
 
     /* 所属云ID (Optional) */
-    CloudID string `json:"cloudID"`
+    CloudID *string `json:"cloudID"`
 
     /* 负载均衡实例ID。 (Optional) */
-    Id string `json:"id"`
+    Id *string `json:"id"`
 
     /* 负载均衡实例的名称。 (Optional) */
-    Name string `json:"name"`
+    Name *string `json:"name"`
 
     /* 负载均衡实例状态 (Optional) */
-    Status string `json:"status"`
+    Status *string `json:"status"`
 
     /* 负载均衡实例的服务地址。 (Optional) */
-    IpAddress string `json:"ipAddress"`
+    IpAddress *string `json:"ipAddress"`
 
     /* 负载均衡实例的网络类型。 (Optional) */
-    AddressType string `json:"addressType"`
+    AddressType *string `json:"addressType"`
 
     /* 私网负载均衡实例的交换机ID。 (Optional) */
-    SubnetId string `json:"subnetId"`
+    SubnetId *string `json:"subnetId"`
 
     /* 私网负载均衡实例的专有网络ID。 (Optional) */
-    Vpc string `json:"vpc"`
+    Vpc *string `json:"vpc"`
 
     /* 私网负载均衡实例的网络类型 (Optional) */
-    NetworkType string `json:"networkType"`
+    NetworkType *string `json:"networkType"`
 
-    /* 实例的主可用区ID。 (Optional) */
-    MasterAz string `json:"masterAz"`
-
-    /* 实例的备可用区ID。 (Optional) */
-    SlaveAz string `json:"slaveAz"`
+    /* 可用区域。 (Optional) */
+    Azs []string `json:"azs"`
 
     /* 创建时间 (Optional) */
-    CreatedTime string `json:"createdTime"`
+    CreatedTime *string `json:"createdTime"`
 }

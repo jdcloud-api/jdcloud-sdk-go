@@ -44,7 +44,7 @@ func NewDeleteAlarmsCmRequest(
 
 	return &DeleteAlarmsCmRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/cm/alarms",
+			URL:     "/regions/{regionId}/cmAlarms",
 			Method:  "DELETE",
 			Header:  nil,
 			Version: "v1",
@@ -65,7 +65,7 @@ func NewDeleteAlarmsCmRequestWithAllParams(
 
     return &DeleteAlarmsCmRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cm/alarms",
+            URL:     "/regions/{regionId}/cmAlarms",
             Method:  "DELETE",
             Header:  nil,
             Version: "v1",
@@ -80,7 +80,7 @@ func NewDeleteAlarmsCmRequestWithoutParam() *DeleteAlarmsCmRequest {
 
     return &DeleteAlarmsCmRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cm/alarms",
+            URL:     "/regions/{regionId}/cmAlarms",
             Method:  "DELETE",
             Header:  nil,
             Version: "v1",

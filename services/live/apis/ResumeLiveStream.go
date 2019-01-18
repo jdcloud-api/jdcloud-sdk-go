@@ -125,5 +125,4 @@ type ResumeLiveStreamResponse struct {
 }
 
 type ResumeLiveStreamResult struct {
-    PublishDomain string `json:"publishDomain"`
 }

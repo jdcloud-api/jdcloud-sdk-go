@@ -26,7 +26,7 @@ type DescribeCustomLiveStreamRecordConfigRequest struct {
 
     core.JDCloudRequest
 
-    /* 页码；默认为1 (Optional) */
+    /* 页码；默认为1；取值范围[1, 100000] (Optional) */
     PageNum *int `json:"pageNum"`
 
     /* 分页大小；默认为10；取值范围[10, 100] (Optional) */
@@ -54,7 +54,7 @@ func NewDescribeCustomLiveStreamRecordConfigRequest(
 }
 
 /*
- * param pageNum: 页码；默认为1 (Optional)
+ * param pageNum: 页码；默认为1；取值范围[1, 100000] (Optional)
  * param pageSize: 分页大小；默认为10；取值范围[10, 100] (Optional)
  * param filters: 转码模板查询过滤条件, 不传递分页参数时默认返回10条 (Optional)
  */
@@ -90,7 +90,7 @@ func NewDescribeCustomLiveStreamRecordConfigRequestWithoutParam() *DescribeCusto
     }
 }
 
-/* param pageNum: 页码；默认为1(Optional) */
+/* param pageNum: 页码；默认为1；取值范围[1, 100000](Optional) */
 func (r *DescribeCustomLiveStreamRecordConfigRequest) SetPageNum(pageNum int) {
     r.PageNum = &pageNum
 }

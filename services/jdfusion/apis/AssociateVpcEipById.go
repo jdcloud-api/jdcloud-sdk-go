@@ -32,20 +32,20 @@ type AssociateVpcEipByIdRequest struct {
     Id string `json:"id"`
 
     /* 弹性公网IP绑定到虚拟机  */
-    Body *jdfusion.AssociateEipAddressReq `json:"body"`
+    Associate *jdfusion.AssociateEipAddress `json:"associate"`
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param id: 公网IP ID (Required)
- * param body: 弹性公网IP绑定到虚拟机 (Required)
+ * param associate: 弹性公网IP绑定到虚拟机 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewAssociateVpcEipByIdRequest(
     regionId string,
     id string,
-    body *jdfusion.AssociateEipAddressReq,
+    associate *jdfusion.AssociateEipAddress,
 ) *AssociateVpcEipByIdRequest {
 
 	return &AssociateVpcEipByIdRequest{
@@ -57,19 +57,19 @@ func NewAssociateVpcEipByIdRequest(
 		},
         RegionId: regionId,
         Id: id,
-        Body: body,
+        Associate: associate,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param id: 公网IP ID (Required)
- * param body: 弹性公网IP绑定到虚拟机 (Required)
+ * param associate: 弹性公网IP绑定到虚拟机 (Required)
  */
 func NewAssociateVpcEipByIdRequestWithAllParams(
     regionId string,
     id string,
-    body *jdfusion.AssociateEipAddressReq,
+    associate *jdfusion.AssociateEipAddress,
 ) *AssociateVpcEipByIdRequest {
 
     return &AssociateVpcEipByIdRequest{
@@ -81,7 +81,7 @@ func NewAssociateVpcEipByIdRequestWithAllParams(
         },
         RegionId: regionId,
         Id: id,
-        Body: body,
+        Associate: associate,
     }
 }
 
@@ -108,9 +108,9 @@ func (r *AssociateVpcEipByIdRequest) SetId(id string) {
     r.Id = id
 }
 
-/* param body: 弹性公网IP绑定到虚拟机(Required) */
-func (r *AssociateVpcEipByIdRequest) SetBody(body *jdfusion.AssociateEipAddressReq) {
-    r.Body = body
+/* param associate: 弹性公网IP绑定到虚拟机(Required) */
+func (r *AssociateVpcEipByIdRequest) SetAssociate(associate *jdfusion.AssociateEipAddress) {
+    r.Associate = associate
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

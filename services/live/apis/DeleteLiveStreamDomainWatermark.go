@@ -111,5 +111,4 @@ type DeleteLiveStreamDomainWatermarkResponse struct {
 }
 
 type DeleteLiveStreamDomainWatermarkResult struct {
-    Feedback bool `json:"feedback"`
 }

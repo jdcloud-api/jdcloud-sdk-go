@@ -97,5 +97,4 @@ type DeleteCustomLiveStreamRecordTemplateResponse struct {
 }
 
 type DeleteCustomLiveStreamRecordTemplateResult struct {
-    Template string `json:"template"`
 }

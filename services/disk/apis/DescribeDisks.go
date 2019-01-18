@@ -39,12 +39,14 @@ type DescribeDisksRequest struct {
     Tags []disk.TagFilter `json:"tags"`
 
     /* diskId - 云硬盘ID，精确匹配，支持多个
-diskType - 云硬盘类型，精确匹配，支持多个，取值为 ssd 或 premium-hdd
+diskType - 云硬盘类型，精确匹配，支持多个，取值为 ssd,premium-hdd,ssd.io1,ssd.gp1,hdd.std1
 instanceId - 云硬盘所挂载主机的ID，精确匹配，支持多个
 instanceType - 云硬盘所挂载主机的类型，精确匹配，支持多个
 status - 可用区，精确匹配，支持多个
 az - 云硬盘状态，精确匹配，支持多个
 name - 云硬盘名称，模糊匹配，支持单个
+multiAttach - 云硬盘是否多点挂载，精确匹配，支持单个
+encrypted - 云硬盘是否加密，精确匹配，支持单个
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
@@ -75,12 +77,14 @@ func NewDescribeDisksRequest(
  * param pageSize: 分页大小，默认为20，取值范围：[10,100] (Optional)
  * param tags: Tag筛选条件 (Optional)
  * param filters: diskId - 云硬盘ID，精确匹配，支持多个
-diskType - 云硬盘类型，精确匹配，支持多个，取值为 ssd 或 premium-hdd
+diskType - 云硬盘类型，精确匹配，支持多个，取值为 ssd,premium-hdd,ssd.io1,ssd.gp1,hdd.std1
 instanceId - 云硬盘所挂载主机的ID，精确匹配，支持多个
 instanceType - 云硬盘所挂载主机的类型，精确匹配，支持多个
 status - 可用区，精确匹配，支持多个
 az - 云硬盘状态，精确匹配，支持多个
 name - 云硬盘名称，模糊匹配，支持单个
+multiAttach - 云硬盘是否多点挂载，精确匹配，支持单个
+encrypted - 云硬盘是否加密，精确匹配，支持单个
  (Optional)
  */
 func NewDescribeDisksRequestWithAllParams(
@@ -140,12 +144,14 @@ func (r *DescribeDisksRequest) SetTags(tags []disk.TagFilter) {
 }
 
 /* param filters: diskId - 云硬盘ID，精确匹配，支持多个
-diskType - 云硬盘类型，精确匹配，支持多个，取值为 ssd 或 premium-hdd
+diskType - 云硬盘类型，精确匹配，支持多个，取值为 ssd,premium-hdd,ssd.io1,ssd.gp1,hdd.std1
 instanceId - 云硬盘所挂载主机的ID，精确匹配，支持多个
 instanceType - 云硬盘所挂载主机的类型，精确匹配，支持多个
 status - 可用区，精确匹配，支持多个
 az - 云硬盘状态，精确匹配，支持多个
 name - 云硬盘名称，模糊匹配，支持单个
+multiAttach - 云硬盘是否多点挂载，精确匹配，支持单个
+encrypted - 云硬盘是否加密，精确匹配，支持单个
 (Optional) */
 func (r *DescribeDisksRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters

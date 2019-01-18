@@ -97,5 +97,4 @@ type StartLiveDomainResponse struct {
 }
 
 type StartLiveDomainResult struct {
-    PublishDomain string `json:"publishDomain"`
 }

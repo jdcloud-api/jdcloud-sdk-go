@@ -29,18 +29,18 @@ type CreateVpcSlbRequest struct {
     RegionId string `json:"regionId"`
 
     /* 创建SLB  */
-    Body *jdfusion.CreateSlbReq `json:"body"`
+    Slb *jdfusion.SlbInfo `json:"slb"`
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param body: 创建SLB (Required)
+ * param slb: 创建SLB (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateVpcSlbRequest(
     regionId string,
-    body *jdfusion.CreateSlbReq,
+    slb *jdfusion.SlbInfo,
 ) *CreateVpcSlbRequest {
 
 	return &CreateVpcSlbRequest{
@@ -51,17 +51,17 @@ func NewCreateVpcSlbRequest(
 			Version: "v1",
 		},
         RegionId: regionId,
-        Body: body,
+        Slb: slb,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param body: 创建SLB (Required)
+ * param slb: 创建SLB (Required)
  */
 func NewCreateVpcSlbRequestWithAllParams(
     regionId string,
-    body *jdfusion.CreateSlbReq,
+    slb *jdfusion.SlbInfo,
 ) *CreateVpcSlbRequest {
 
     return &CreateVpcSlbRequest{
@@ -72,7 +72,7 @@ func NewCreateVpcSlbRequestWithAllParams(
             Version: "v1",
         },
         RegionId: regionId,
-        Body: body,
+        Slb: slb,
     }
 }
 
@@ -94,9 +94,9 @@ func (r *CreateVpcSlbRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param body: 创建SLB(Required) */
-func (r *CreateVpcSlbRequest) SetBody(body *jdfusion.CreateSlbReq) {
-    r.Body = body
+/* param slb: 创建SLB(Required) */
+func (r *CreateVpcSlbRequest) SetSlb(slb *jdfusion.SlbInfo) {
+    r.Slb = slb
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

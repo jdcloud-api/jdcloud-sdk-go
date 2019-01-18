@@ -20,20 +20,20 @@ package models
 type VpcInfo struct {
 
     /* Vpc的Id (Optional) */
-    Id string `json:"id"`
+    Id *string `json:"id"`
 
     /* 私有网络名称 (Optional) */
-    Name string `json:"name"`
+    Name *string `json:"name"`
 
     /* 地址范围 (Optional) */
-    AddressPrefix string `json:"addressPrefix"`
+    CidrBlock *string `json:"cidrBlock"`
 
     /* VPC 描述 (Optional) */
-    Description string `json:"description"`
+    Description *string `json:"description"`
 
     /* 创建时间 (Optional) */
-    CreatedTime string `json:"createdTime"`
+    CreatedTime *string `json:"createdTime"`
 
     /* 所属云提供商ID (Optional) */
-    CloudID string `json:"cloudID"`
+    CloudID *string `json:"cloudID"`
 }

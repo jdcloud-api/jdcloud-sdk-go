@@ -111,5 +111,4 @@ type DeleteLiveStreamDomainTranscodeResponse struct {
 }
 
 type DeleteLiveStreamDomainTranscodeResult struct {
-    PublishDomain string `json:"publishDomain"`
 }

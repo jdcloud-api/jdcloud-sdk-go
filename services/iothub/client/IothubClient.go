@@ -40,7 +40,7 @@ func NewIothubClient(credential *core.Credential) *IothubClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "iothub",
-            Revision:    "0.1.0",
+            Revision:    "0.2.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,48 +51,6 @@ func (c *IothubClient) SetConfig(config *core.Config) {
 
 func (c *IothubClient) SetLogger(logger core.Logger) {
     c.Logger = logger
-}
-
-/* 客户用该接口可以登记模块
- */
-func (c *IothubClient) ModuleEnroll(request *iothub.ModuleEnrollRequest) (*iothub.ModuleEnrollResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &iothub.ModuleEnrollResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 客户用该接口可以修改模块预期状态
- */
-func (c *IothubClient) ModuleState(request *iothub.ModuleStateRequest) (*iothub.ModuleStateResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &iothub.ModuleStateResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
 }
 
 /* 客户用该接口可以批量登记设备
@@ -107,27 +65,6 @@ func (c *IothubClient) DevicesEnroll(request *iothub.DevicesEnrollRequest) (*iot
     }
 
     jdResp := &iothub.DevicesEnrollResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 客户用该接口可以修改设备预期状态
- */
-func (c *IothubClient) DeviceState(request *iothub.DeviceStateRequest) (*iothub.DeviceStateResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &iothub.DeviceStateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -158,6 +95,27 @@ func (c *IothubClient) DeviceCommand(request *iothub.DeviceCommandRequest) (*iot
     return jdResp, err
 }
 
+/* 物模型注册接口
+ */
+func (c *IothubClient) OmEnroll(request *iothub.OmEnrollRequest) (*iothub.OmEnrollResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iothub.OmEnrollResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 激活一个设备，包括Edge、Dragon和普通设备
  */
 func (c *IothubClient) DeviceActivate(request *iothub.DeviceActivateRequest) (*iothub.DeviceActivateResponse, error) {
@@ -179,9 +137,9 @@ func (c *IothubClient) DeviceActivate(request *iothub.DeviceActivateRequest) (*i
     return jdResp, err
 }
 
-/* 物模型注册接口
+/* 客户用该接口可以修改模块预期状态
  */
-func (c *IothubClient) OmEnroll(request *iothub.OmEnrollRequest) (*iothub.OmEnrollResponse, error) {
+func (c *IothubClient) ModuleState(request *iothub.ModuleStateRequest) (*iothub.ModuleStateResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -190,7 +148,49 @@ func (c *IothubClient) OmEnroll(request *iothub.OmEnrollRequest) (*iothub.OmEnro
         return nil, err
     }
 
-    jdResp := &iothub.OmEnrollResponse{}
+    jdResp := &iothub.ModuleStateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 客户用该接口可以登记模块
+ */
+func (c *IothubClient) ModuleEnroll(request *iothub.ModuleEnrollRequest) (*iothub.ModuleEnrollResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iothub.ModuleEnrollResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 客户用该接口可以修改设备预期状态
+ */
+func (c *IothubClient) DeviceState(request *iothub.DeviceStateRequest) (*iothub.DeviceStateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iothub.DeviceStateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

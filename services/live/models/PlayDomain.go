@@ -33,7 +33,4 @@ type PlayDomain struct {
 
     /* 更新时间 (Optional) */
     UpdateTime string `json:"updateTime"`
-
-    /* 地域编码 (Optional) */
-    RegionId string `json:"regionId"`
 }

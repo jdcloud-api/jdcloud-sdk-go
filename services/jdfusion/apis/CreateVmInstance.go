@@ -29,18 +29,18 @@ type CreateVmInstanceRequest struct {
     RegionId string `json:"regionId"`
 
     /* 创建VM  */
-    Body *jdfusion.CreateVmReq `json:"body"`
+    Vm *jdfusion.CreateVm `json:"vm"`
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param body: 创建VM (Required)
+ * param vm: 创建VM (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateVmInstanceRequest(
     regionId string,
-    body *jdfusion.CreateVmReq,
+    vm *jdfusion.CreateVm,
 ) *CreateVmInstanceRequest {
 
 	return &CreateVmInstanceRequest{
@@ -51,17 +51,17 @@ func NewCreateVmInstanceRequest(
 			Version: "v1",
 		},
         RegionId: regionId,
-        Body: body,
+        Vm: vm,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param body: 创建VM (Required)
+ * param vm: 创建VM (Required)
  */
 func NewCreateVmInstanceRequestWithAllParams(
     regionId string,
-    body *jdfusion.CreateVmReq,
+    vm *jdfusion.CreateVm,
 ) *CreateVmInstanceRequest {
 
     return &CreateVmInstanceRequest{
@@ -72,7 +72,7 @@ func NewCreateVmInstanceRequestWithAllParams(
             Version: "v1",
         },
         RegionId: regionId,
-        Body: body,
+        Vm: vm,
     }
 }
 
@@ -94,9 +94,9 @@ func (r *CreateVmInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param body: 创建VM(Required) */
-func (r *CreateVmInstanceRequest) SetBody(body *jdfusion.CreateVmReq) {
-    r.Body = body
+/* param vm: 创建VM(Required) */
+func (r *CreateVmInstanceRequest) SetVm(vm *jdfusion.CreateVm) {
+    r.Vm = vm
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

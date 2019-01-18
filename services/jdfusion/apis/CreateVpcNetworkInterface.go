@@ -29,18 +29,18 @@ type CreateVpcNetworkInterfaceRequest struct {
     RegionId string `json:"regionId"`
 
     /* 创建网卡  */
-    Body *jdfusion.CreateNetInterfaceReq `json:"body"`
+    NetInterface *jdfusion.CreateNetInterface `json:"netInterface"`
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param body: 创建网卡 (Required)
+ * param netInterface: 创建网卡 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateVpcNetworkInterfaceRequest(
     regionId string,
-    body *jdfusion.CreateNetInterfaceReq,
+    netInterface *jdfusion.CreateNetInterface,
 ) *CreateVpcNetworkInterfaceRequest {
 
 	return &CreateVpcNetworkInterfaceRequest{
@@ -51,17 +51,17 @@ func NewCreateVpcNetworkInterfaceRequest(
 			Version: "v1",
 		},
         RegionId: regionId,
-        Body: body,
+        NetInterface: netInterface,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param body: 创建网卡 (Required)
+ * param netInterface: 创建网卡 (Required)
  */
 func NewCreateVpcNetworkInterfaceRequestWithAllParams(
     regionId string,
-    body *jdfusion.CreateNetInterfaceReq,
+    netInterface *jdfusion.CreateNetInterface,
 ) *CreateVpcNetworkInterfaceRequest {
 
     return &CreateVpcNetworkInterfaceRequest{
@@ -72,7 +72,7 @@ func NewCreateVpcNetworkInterfaceRequestWithAllParams(
             Version: "v1",
         },
         RegionId: regionId,
-        Body: body,
+        NetInterface: netInterface,
     }
 }
 
@@ -94,9 +94,9 @@ func (r *CreateVpcNetworkInterfaceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param body: 创建网卡(Required) */
-func (r *CreateVpcNetworkInterfaceRequest) SetBody(body *jdfusion.CreateNetInterfaceReq) {
-    r.Body = body
+/* param netInterface: 创建网卡(Required) */
+func (r *CreateVpcNetworkInterfaceRequest) SetNetInterface(netInterface *jdfusion.CreateNetInterface) {
+    r.NetInterface = netInterface
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

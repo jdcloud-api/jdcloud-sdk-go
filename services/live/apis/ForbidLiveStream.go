@@ -125,5 +125,4 @@ type ForbidLiveStreamResponse struct {
 }
 
 type ForbidLiveStreamResult struct {
-    PublishDomain string `json:"publishDomain"`
 }

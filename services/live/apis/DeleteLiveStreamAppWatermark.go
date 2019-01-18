@@ -125,5 +125,4 @@ type DeleteLiveStreamAppWatermarkResponse struct {
 }
 
 type DeleteLiveStreamAppWatermarkResult struct {
-    Feedback bool `json:"feedback"`
 }

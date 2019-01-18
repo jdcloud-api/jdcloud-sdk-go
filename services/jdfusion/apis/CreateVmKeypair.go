@@ -29,18 +29,18 @@ type CreateVmKeypairRequest struct {
     RegionId string `json:"regionId"`
 
     /* 创建keypair  */
-    Body *jdfusion.CreateKeypairReq `json:"body"`
+    Keypair *jdfusion.CreateKeypair `json:"keypair"`
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param body: 创建keypair (Required)
+ * param keypair: 创建keypair (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateVmKeypairRequest(
     regionId string,
-    body *jdfusion.CreateKeypairReq,
+    keypair *jdfusion.CreateKeypair,
 ) *CreateVmKeypairRequest {
 
 	return &CreateVmKeypairRequest{
@@ -51,17 +51,17 @@ func NewCreateVmKeypairRequest(
 			Version: "v1",
 		},
         RegionId: regionId,
-        Body: body,
+        Keypair: keypair,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param body: 创建keypair (Required)
+ * param keypair: 创建keypair (Required)
  */
 func NewCreateVmKeypairRequestWithAllParams(
     regionId string,
-    body *jdfusion.CreateKeypairReq,
+    keypair *jdfusion.CreateKeypair,
 ) *CreateVmKeypairRequest {
 
     return &CreateVmKeypairRequest{
@@ -72,7 +72,7 @@ func NewCreateVmKeypairRequestWithAllParams(
             Version: "v1",
         },
         RegionId: regionId,
-        Body: body,
+        Keypair: keypair,
     }
 }
 
@@ -94,9 +94,9 @@ func (r *CreateVmKeypairRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param body: 创建keypair(Required) */
-func (r *CreateVmKeypairRequest) SetBody(body *jdfusion.CreateKeypairReq) {
-    r.Body = body
+/* param keypair: 创建keypair(Required) */
+func (r *CreateVmKeypairRequest) SetKeypair(keypair *jdfusion.CreateKeypair) {
+    r.Keypair = keypair
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

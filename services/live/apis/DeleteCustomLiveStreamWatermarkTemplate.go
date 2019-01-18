@@ -97,5 +97,4 @@ type DeleteCustomLiveStreamWatermarkTemplateResponse struct {
 }
 
 type DeleteCustomLiveStreamWatermarkTemplateResult struct {
-    Template string `json:"template"`
 }

@@ -29,18 +29,18 @@ type RegistCloudInfoRequest struct {
     RegionId string `json:"regionId"`
 
     /*   */
-    Body *jdfusion.CreateCloudInfoReq `json:"body"`
+    Cloud *jdfusion.CloudInfo `json:"cloud"`
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param body:  (Required)
+ * param cloud:  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewRegistCloudInfoRequest(
     regionId string,
-    body *jdfusion.CreateCloudInfoReq,
+    cloud *jdfusion.CloudInfo,
 ) *RegistCloudInfoRequest {
 
 	return &RegistCloudInfoRequest{
@@ -51,17 +51,17 @@ func NewRegistCloudInfoRequest(
 			Version: "v1",
 		},
         RegionId: regionId,
-        Body: body,
+        Cloud: cloud,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param body:  (Required)
+ * param cloud:  (Required)
  */
 func NewRegistCloudInfoRequestWithAllParams(
     regionId string,
-    body *jdfusion.CreateCloudInfoReq,
+    cloud *jdfusion.CloudInfo,
 ) *RegistCloudInfoRequest {
 
     return &RegistCloudInfoRequest{
@@ -72,7 +72,7 @@ func NewRegistCloudInfoRequestWithAllParams(
             Version: "v1",
         },
         RegionId: regionId,
-        Body: body,
+        Cloud: cloud,
     }
 }
 
@@ -94,9 +94,9 @@ func (r *RegistCloudInfoRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param body: (Required) */
-func (r *RegistCloudInfoRequest) SetBody(body *jdfusion.CreateCloudInfoReq) {
-    r.Body = body
+/* param cloud: (Required) */
+func (r *RegistCloudInfoRequest) SetCloud(cloud *jdfusion.CloudInfo) {
+    r.Cloud = cloud
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

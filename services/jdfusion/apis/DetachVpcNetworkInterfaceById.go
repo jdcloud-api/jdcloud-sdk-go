@@ -32,20 +32,20 @@ type DetachVpcNetworkInterfaceByIdRequest struct {
     Id string `json:"id"`
 
     /* 卸载网卡  */
-    Body *jdfusion.DetachNetInterfaceReq `json:"body"`
+    Detach *jdfusion.DetachNetInterface `json:"detach"`
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param id: 网卡 ID (Required)
- * param body: 卸载网卡 (Required)
+ * param detach: 卸载网卡 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDetachVpcNetworkInterfaceByIdRequest(
     regionId string,
     id string,
-    body *jdfusion.DetachNetInterfaceReq,
+    detach *jdfusion.DetachNetInterface,
 ) *DetachVpcNetworkInterfaceByIdRequest {
 
 	return &DetachVpcNetworkInterfaceByIdRequest{
@@ -57,19 +57,19 @@ func NewDetachVpcNetworkInterfaceByIdRequest(
 		},
         RegionId: regionId,
         Id: id,
-        Body: body,
+        Detach: detach,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param id: 网卡 ID (Required)
- * param body: 卸载网卡 (Required)
+ * param detach: 卸载网卡 (Required)
  */
 func NewDetachVpcNetworkInterfaceByIdRequestWithAllParams(
     regionId string,
     id string,
-    body *jdfusion.DetachNetInterfaceReq,
+    detach *jdfusion.DetachNetInterface,
 ) *DetachVpcNetworkInterfaceByIdRequest {
 
     return &DetachVpcNetworkInterfaceByIdRequest{
@@ -81,7 +81,7 @@ func NewDetachVpcNetworkInterfaceByIdRequestWithAllParams(
         },
         RegionId: regionId,
         Id: id,
-        Body: body,
+        Detach: detach,
     }
 }
 
@@ -108,9 +108,9 @@ func (r *DetachVpcNetworkInterfaceByIdRequest) SetId(id string) {
     r.Id = id
 }
 
-/* param body: 卸载网卡(Required) */
-func (r *DetachVpcNetworkInterfaceByIdRequest) SetBody(body *jdfusion.DetachNetInterfaceReq) {
-    r.Body = body
+/* param detach: 卸载网卡(Required) */
+func (r *DetachVpcNetworkInterfaceByIdRequest) SetDetach(detach *jdfusion.DetachNetInterface) {
+    r.Detach = detach
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

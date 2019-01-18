@@ -98,6 +98,6 @@ type DescribeLiveDomainDetailResponse struct {
 }
 
 type DescribeLiveDomainDetailResult struct {
-    PublishDomain []live.PublishDomain `json:"publishDomain"`
-    PlayDomain []live.PlayDomain `json:"playDomain"`
+    PublishDomains []live.PublishDomain `json:"publishDomains"`
+    PlayDomains []live.PlayDomain `json:"playDomains"`
 }

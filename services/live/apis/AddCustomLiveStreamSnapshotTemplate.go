@@ -209,5 +209,4 @@ type AddCustomLiveStreamSnapshotTemplateResponse struct {
 }
 
 type AddCustomLiveStreamSnapshotTemplateResult struct {
-    Feedback bool `json:"feedback"`
 }

@@ -19,14 +19,17 @@ package models
 
 type AddTagsSpec struct {
 
-    /* 校验码。调用此API前需找云监控提供  */
+    /* 应用码。调用此API前需找云监控提供  */
     AppCode string `json:"appCode"`
 
     /* 组id。须确保在一个APP范围内全局唯一  */
     GroupCode string `json:"groupCode"`
 
-    /* 资源列表。总资源数不能超过上限500  */
+    /* 资源列表。总资源不能超过100个  */
     ResourceIds []string `json:"resourceIds"`
+
+    /* 资源的产品线  */
+    ServiceCode string `json:"serviceCode"`
 
     /* 标签名称。调用此API前需要与云监控确认可以使用的标签名称  */
     TagK string `json:"tagK"`

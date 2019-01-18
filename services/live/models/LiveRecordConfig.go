@@ -22,9 +22,12 @@ type LiveRecordConfig struct {
     /* 推流域名 (Optional) */
     PublishDomain string `json:"publishDomain"`
 
-    /* 录制模板配置 (Optional) */
-    RecordConfig string `json:"recordConfig"`
-
     /* 推流域名 (Optional) */
-    App []RecordApp `json:"app"`
+    AppName string `json:"appName"`
+
+    /* 直播流名称 (Optional) */
+    StreamName string `json:"streamName"`
+
+    /*  (Optional) */
+    RecordConfig string `json:"recordConfig"`
 }

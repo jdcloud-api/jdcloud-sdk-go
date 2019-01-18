@@ -34,8 +34,14 @@ type AlarmVo struct {
     /* 是否删除 1正常，0删除 (Optional) */
     Deleted int64 `json:"deleted"`
 
+    /* downSample (Optional) */
+    DownSample string `json:"downSample"`
+
     /* 规则ID (Optional) */
     Id int64 `json:"id"`
+
+    /* 监控项 (Optional) */
+    Metric string `json:"metric"`
 
     /* 监控项ID (Optional) */
     MetricId int64 `json:"metricId"`

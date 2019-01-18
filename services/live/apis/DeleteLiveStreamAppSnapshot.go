@@ -125,5 +125,4 @@ type DeleteLiveStreamAppSnapshotResponse struct {
 }
 
 type DeleteLiveStreamAppSnapshotResult struct {
-    Feedback bool `json:"feedback"`
 }
