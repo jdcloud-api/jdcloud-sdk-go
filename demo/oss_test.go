@@ -16,7 +16,7 @@ func initOssClient() *client.OssClient {
 	client := client.NewOssClient(credentials)
 	config := NewConfig()
 	config.SetEndpoint("192.168.180.18")
-	config.SetScheme(SCHEME_HTTP)
+	config.SetScheme(SchemeHttp)
 	client.SetConfig(config)
 	return client
 }

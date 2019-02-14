@@ -71,17 +71,20 @@ func createInstance(t *testing.T) string {
 	client := initVmClient()
 
 	az := "cn-north-1a"
+	instancetype := "g.s1.micro"
+	imageid := "98d44a0f-88c1-451a-8971-f1f769073b6c"
+	description := "golang-sdk"
 	diskCategory := "local"
 	spec := vm.InstanceSpec{
-		Az:           az,
-		InstanceType: "g.s1.micro",
-		ImageId:      "98d44a0f-88c1-451a-8971-f1f769073b6c",
+		Az:           &az,
+		InstanceType: &instancetype,
+		ImageId:      &imageid,
 		Name:         "golang-sdk-test",
 		PrimaryNetworkInterface: &vm.InstanceNetworkInterfaceAttachmentSpec{
 			NetworkInterface: &vpc.NetworkInterfaceSpec{SubnetId: "subnet-3dm13k30gh", Az: &az},
 		},
 		SystemDisk:  &vm.InstanceDiskAttachmentSpec{DiskCategory: &diskCategory},
-		Description: "golang-sdk",
+		Description: &description,
 	}
 	req := NewCreateInstancesRequest("cn-north-1")
 	req.SetInstanceSpec(&spec)
