@@ -17,23 +17,23 @@
 package models
 
 
-type Raid struct {
+type InterceptResult struct {
 
-    /* 磁盘类型, 如 system/data (Optional) */
-    VolumeType string `json:"volumeType"`
+    /* SQL开始执行时间 (Optional) */
+    StartTime string `json:"startTime"`
 
-    /* 设备详情 (Optional) */
-    VolumeDetail string `json:"volumeDetail"`
+    /* 源IP (Optional) */
+    Ip string `json:"ip"`
 
-    /* RAID类型ID (Optional) */
-    RaidTypeId string `json:"raidTypeId"`
+    /* 账号名 (Optional) */
+    AccountName string `json:"accountName"`
 
-    /* RAID类型, 如 NORAID, RAID0, RAID1 (Optional) */
-    RaidType string `json:"raidType"`
+    /* 线程ID (Optional) */
+    ThreadId string `json:"threadId"`
 
-    /* 云物理服务器类型, 如 cps.c.normal (Optional) */
-    DeviceType string `json:"deviceType"`
+    /* 数据库名 (Optional) */
+    DbName string `json:"dbName"`
 
-    /* RAID类型描述 (Optional) */
-    Description string `json:"description"`
+    /* sql语句 (Optional) */
+    Sql string `json:"sql"`
 }

@@ -17,23 +17,11 @@
 package models
 
 
-type Raid struct {
+type ConfirmDeliveryInfo struct {
 
-    /* 磁盘类型, 如 system/data (Optional) */
-    VolumeType string `json:"volumeType"`
+    /* 交付单号 (Optional) */
+    DeliverNumber *string `json:"deliverNumber"`
 
-    /* 设备详情 (Optional) */
-    VolumeDetail string `json:"volumeDetail"`
-
-    /* RAID类型ID (Optional) */
-    RaidTypeId string `json:"raidTypeId"`
-
-    /* RAID类型, 如 NORAID, RAID0, RAID1 (Optional) */
-    RaidType string `json:"raidType"`
-
-    /* 云物理服务器类型, 如 cps.c.normal (Optional) */
-    DeviceType string `json:"deviceType"`
-
-    /* RAID类型描述 (Optional) */
-    Description string `json:"description"`
+    /* 交付单备注，填写交付时的信息，比如网址，账号等 (Optional) */
+    Remark *string `json:"remark"`
 }

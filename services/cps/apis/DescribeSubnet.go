@@ -25,16 +25,16 @@ type DescribeSubnetRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的区域  */
+    /* 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域  */
     RegionId string `json:"regionId"`
 
-    /* 可用区, 如cn-east-1a；可调用接口（describeRegiones）获取云物理服务器支持的可用区  */
+    /* 可用区, 如cn-east-1a；可调用接口（describeRegiones）获取云物理服务器在该地域支持的可用区  */
     Az string `json:"az"`
 }
 
 /*
- * param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的区域 (Required)
- * param az: 可用区, 如cn-east-1a；可调用接口（describeRegiones）获取云物理服务器支持的可用区 (Required)
+ * param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域 (Required)
+ * param az: 可用区, 如cn-east-1a；可调用接口（describeRegiones）获取云物理服务器在该地域支持的可用区 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -56,8 +56,8 @@ func NewDescribeSubnetRequest(
 }
 
 /*
- * param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的区域 (Required)
- * param az: 可用区, 如cn-east-1a；可调用接口（describeRegiones）获取云物理服务器支持的可用区 (Required)
+ * param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域 (Required)
+ * param az: 可用区, 如cn-east-1a；可调用接口（describeRegiones）获取云物理服务器在该地域支持的可用区 (Required)
  */
 func NewDescribeSubnetRequestWithAllParams(
     regionId string,
@@ -89,12 +89,12 @@ func NewDescribeSubnetRequestWithoutParam() *DescribeSubnetRequest {
     }
 }
 
-/* param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的区域(Required) */
+/* param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域(Required) */
 func (r *DescribeSubnetRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param az: 可用区, 如cn-east-1a；可调用接口（describeRegiones）获取云物理服务器支持的可用区(Required) */
+/* param az: 可用区, 如cn-east-1a；可调用接口（describeRegiones）获取云物理服务器在该地域支持的可用区(Required) */
 func (r *DescribeSubnetRequest) SetAz(az string) {
     r.Az = az
 }

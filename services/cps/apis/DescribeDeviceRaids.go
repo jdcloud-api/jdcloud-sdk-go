@@ -28,7 +28,7 @@ type DescribeDeviceRaidsRequest struct {
     /* 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域  */
     RegionId string `json:"regionId"`
 
-    /* 云物理服务器类型，可查询describeDeviceTypes接口获取指定地域的服务器类型，例如：cps.s.normal,cps.c.normal  */
+    /* 实例类型，可调用（describeDeviceTypes）接口获取指定地域的实例类型，例如：cps.c.normal  */
     DeviceType string `json:"deviceType"`
 
     /* 磁盘类型，取值范围：system、data (Optional) */
@@ -37,7 +37,7 @@ type DescribeDeviceRaidsRequest struct {
 
 /*
  * param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域 (Required)
- * param deviceType: 云物理服务器类型，可查询describeDeviceTypes接口获取指定地域的服务器类型，例如：cps.s.normal,cps.c.normal (Required)
+ * param deviceType: 实例类型，可调用（describeDeviceTypes）接口获取指定地域的实例类型，例如：cps.c.normal (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -60,7 +60,7 @@ func NewDescribeDeviceRaidsRequest(
 
 /*
  * param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域 (Required)
- * param deviceType: 云物理服务器类型，可查询describeDeviceTypes接口获取指定地域的服务器类型，例如：cps.s.normal,cps.c.normal (Required)
+ * param deviceType: 实例类型，可调用（describeDeviceTypes）接口获取指定地域的实例类型，例如：cps.c.normal (Required)
  * param volumeType: 磁盘类型，取值范围：system、data (Optional)
  */
 func NewDescribeDeviceRaidsRequestWithAllParams(
@@ -100,7 +100,7 @@ func (r *DescribeDeviceRaidsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param deviceType: 云物理服务器类型，可查询describeDeviceTypes接口获取指定地域的服务器类型，例如：cps.s.normal,cps.c.normal(Required) */
+/* param deviceType: 实例类型，可调用（describeDeviceTypes）接口获取指定地域的实例类型，例如：cps.c.normal(Required) */
 func (r *DescribeDeviceRaidsRequest) SetDeviceType(deviceType string) {
     r.DeviceType = deviceType
 }

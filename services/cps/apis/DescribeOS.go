@@ -28,13 +28,13 @@ type DescribeOSRequest struct {
     /* 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域  */
     RegionId string `json:"regionId"`
 
-    /* 云物理服务器类型，可调用接口（describeDeviceTypes）获取指定地域的服务器类型，例如：cps.s.normal,cps.c.normal  */
+    /* 实例类型，可调用接口（describeDeviceTypes）获取指定地域的实例类型，例如：cps.c.normal  */
     DeviceType string `json:"deviceType"`
 }
 
 /*
  * param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域 (Required)
- * param deviceType: 云物理服务器类型，可调用接口（describeDeviceTypes）获取指定地域的服务器类型，例如：cps.s.normal,cps.c.normal (Required)
+ * param deviceType: 实例类型，可调用接口（describeDeviceTypes）获取指定地域的实例类型，例如：cps.c.normal (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -57,7 +57,7 @@ func NewDescribeOSRequest(
 
 /*
  * param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域 (Required)
- * param deviceType: 云物理服务器类型，可调用接口（describeDeviceTypes）获取指定地域的服务器类型，例如：cps.s.normal,cps.c.normal (Required)
+ * param deviceType: 实例类型，可调用接口（describeDeviceTypes）获取指定地域的实例类型，例如：cps.c.normal (Required)
  */
 func NewDescribeOSRequestWithAllParams(
     regionId string,
@@ -94,7 +94,7 @@ func (r *DescribeOSRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param deviceType: 云物理服务器类型，可调用接口（describeDeviceTypes）获取指定地域的服务器类型，例如：cps.s.normal,cps.c.normal(Required) */
+/* param deviceType: 实例类型，可调用接口（describeDeviceTypes）获取指定地域的实例类型，例如：cps.c.normal(Required) */
 func (r *DescribeOSRequest) SetDeviceType(deviceType string) {
     r.DeviceType = deviceType
 }

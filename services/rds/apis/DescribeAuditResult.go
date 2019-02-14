@@ -19,6 +19,7 @@ package apis
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
     rds "github.com/jdcloud-api/jdcloud-sdk-go/services/rds/models"
+    common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
 
 type DescribeAuditResultRequest struct {
@@ -48,6 +49,12 @@ type DescribeAuditResultRequest struct {
 
     /* 每页显示的数据条数，默认为10，取值范围：10、20、50 (Optional) */
     PageSize *int `json:"pageSize"`
+
+    /* 过滤参数，多个过滤参数之间的关系为“与”(and)
+支持以下属性的过滤：
+operation
+ (Optional) */
+    Filters []common.Filter `json:"filters"`
 }
 
 /*
@@ -88,6 +95,10 @@ func NewDescribeAuditResultRequest(
  * param accountName: 账号名 (Optional)
  * param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞) (Optional)
  * param pageSize: 每页显示的数据条数，默认为10，取值范围：10、20、50 (Optional)
+ * param filters: 过滤参数，多个过滤参数之间的关系为“与”(and)
+支持以下属性的过滤：
+operation
+ (Optional)
  */
 func NewDescribeAuditResultRequestWithAllParams(
     regionId string,
@@ -98,6 +109,7 @@ func NewDescribeAuditResultRequestWithAllParams(
     accountName *string,
     pageNumber *int,
     pageSize *int,
+    filters []common.Filter,
 ) *DescribeAuditResultRequest {
 
     return &DescribeAuditResultRequest{
@@ -115,6 +127,7 @@ func NewDescribeAuditResultRequestWithAllParams(
         AccountName: accountName,
         PageNumber: pageNumber,
         PageSize: pageSize,
+        Filters: filters,
     }
 }
 
@@ -169,6 +182,14 @@ func (r *DescribeAuditResultRequest) SetPageNumber(pageNumber int) {
 /* param pageSize: 每页显示的数据条数，默认为10，取值范围：10、20、50(Optional) */
 func (r *DescribeAuditResultRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
+}
+
+/* param filters: 过滤参数，多个过滤参数之间的关系为“与”(and)
+支持以下属性的过滤：
+operation
+(Optional) */
+func (r *DescribeAuditResultRequest) SetFilters(filters []common.Filter) {
+    r.Filters = filters
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
