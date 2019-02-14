@@ -18,67 +18,69 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    cps "github.com/jdcloud-api/jdcloud-sdk-go/services/cps/models"
 )
 
-type DescribeDeviceTypesRequest struct {
+type DescribeInterceptRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域  */
+    /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 可用区，精确匹配 (Optional) */
-    Az *string `json:"az"`
+    /* Instance ID  */
+    InstanceId string `json:"instanceId"`
 }
 
 /*
- * param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域 (Required)
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeDeviceTypesRequest(
+func NewDescribeInterceptRequest(
     regionId string,
-) *DescribeDeviceTypesRequest {
+    instanceId string,
+) *DescribeInterceptRequest {
 
-	return &DescribeDeviceTypesRequest{
+	return &DescribeInterceptRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/deviceTypes",
+			URL:     "/regions/{regionId}/instances/{instanceId}/intercept",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
+        InstanceId: instanceId,
 	}
 }
 
 /*
- * param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域 (Required)
- * param az: 可用区，精确匹配 (Optional)
+ * param regionId: Region ID (Required)
+ * param instanceId: Instance ID (Required)
  */
-func NewDescribeDeviceTypesRequestWithAllParams(
+func NewDescribeInterceptRequestWithAllParams(
     regionId string,
-    az *string,
-) *DescribeDeviceTypesRequest {
+    instanceId string,
+) *DescribeInterceptRequest {
 
-    return &DescribeDeviceTypesRequest{
+    return &DescribeInterceptRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/deviceTypes",
+            URL:     "/regions/{regionId}/instances/{instanceId}/intercept",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        Az: az,
+        InstanceId: instanceId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeDeviceTypesRequestWithoutParam() *DescribeDeviceTypesRequest {
+func NewDescribeInterceptRequestWithoutParam() *DescribeInterceptRequest {
 
-    return &DescribeDeviceTypesRequest{
+    return &DescribeInterceptRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/deviceTypes",
+            URL:     "/regions/{regionId}/instances/{instanceId}/intercept",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -86,28 +88,28 @@ func NewDescribeDeviceTypesRequestWithoutParam() *DescribeDeviceTypesRequest {
     }
 }
 
-/* param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域(Required) */
-func (r *DescribeDeviceTypesRequest) SetRegionId(regionId string) {
+/* param regionId: Region ID(Required) */
+func (r *DescribeInterceptRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param az: 可用区，精确匹配(Optional) */
-func (r *DescribeDeviceTypesRequest) SetAz(az string) {
-    r.Az = &az
+/* param instanceId: Instance ID(Required) */
+func (r *DescribeInterceptRequest) SetInstanceId(instanceId string) {
+    r.InstanceId = instanceId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeDeviceTypesRequest) GetRegionId() string {
+func (r DescribeInterceptRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeDeviceTypesResponse struct {
+type DescribeInterceptResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeDeviceTypesResult `json:"result"`
+    Result DescribeInterceptResult `json:"result"`
 }
 
-type DescribeDeviceTypesResult struct {
-    DeviceTypes []cps.DeviceType `json:"deviceTypes"`
+type DescribeInterceptResult struct {
+    Available bool `json:"available"`
 }

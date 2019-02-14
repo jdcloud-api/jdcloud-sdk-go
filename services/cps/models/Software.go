@@ -25,7 +25,7 @@ type Software struct {
     /* 软件包版本 (Optional) */
     Version *string `json:"version"`
 
-    /* OS类型ID (Optional) */
+    /* 操作系统系统类型ID (Optional) */
     OsTypeId *string `json:"osTypeId"`
 
     /* 软件包描述 (Optional) */

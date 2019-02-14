@@ -17,23 +17,20 @@
 package models
 
 
-type Raid struct {
+type ProductServiceVoListData struct {
 
-    /* 磁盘类型, 如 system/data (Optional) */
-    VolumeType string `json:"volumeType"`
+    /* 页码 (Optional) */
+    PageNo int `json:"pageNo"`
 
-    /* 设备详情 (Optional) */
-    VolumeDetail string `json:"volumeDetail"`
+    /* 每页记录数 (Optional) */
+    PageSize int `json:"pageSize"`
 
-    /* RAID类型ID (Optional) */
-    RaidTypeId string `json:"raidTypeId"`
+    /* 总记录数 (Optional) */
+    TotalRecord int `json:"totalRecord"`
 
-    /* RAID类型, 如 NORAID, RAID0, RAID1 (Optional) */
-    RaidType string `json:"raidType"`
+    /* 总页数 (Optional) */
+    TotalPage int `json:"totalPage"`
 
-    /* 云物理服务器类型, 如 cps.c.normal (Optional) */
-    DeviceType string `json:"deviceType"`
-
-    /* RAID类型描述 (Optional) */
-    Description string `json:"description"`
+    /* 交付单信息列表 (Optional) */
+    DataList []ProductServiceVo `json:"dataList"`
 }

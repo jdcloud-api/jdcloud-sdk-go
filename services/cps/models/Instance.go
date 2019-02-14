@@ -29,7 +29,7 @@ type Instance struct {
     /* 可用区, 如 cn-east-1a (Optional) */
     Az string `json:"az"`
 
-    /* 设备类型, 如 cps.c.normal (Optional) */
+    /* 实例类型, 如 cps.c.normal (Optional) */
     DeviceType string `json:"deviceType"`
 
     /* 云物理服务器名称 (Optional) */
@@ -43,6 +43,9 @@ type Instance struct {
 
     /* 是否启用外网, 如 yes/no (Optional) */
     EnableInternet string `json:"enableInternet"`
+
+    /* 是否启用IPv6, 如 yes/no (Optional) */
+    EnableIpv6 string `json:"enableIpv6"`
 
     /* 带宽, 单位Mbps (Optional) */
     Bandwidth int `json:"bandwidth"`
@@ -62,16 +65,16 @@ type Instance struct {
     /* 操作系统版本, 如 16.04 (Optional) */
     OsVersion string `json:"osVersion"`
 
-    /* 系统盘raid类型Id (Optional) */
+    /* 系统盘RAID类型ID (Optional) */
     SysRaidTypeId string `json:"sysRaidTypeId"`
 
-    /* 系统盘raid类型, 如 NORAID, RAID0, RAID1 (Optional) */
+    /* 系统盘RAID类型, 如 NORAID, RAID0, RAID1 (Optional) */
     SysRaidType string `json:"sysRaidType"`
 
-    /* 数据盘raid类型Id (Optional) */
+    /* 数据盘RAID类型ID (Optional) */
     DataRaidTypeId string `json:"dataRaidTypeId"`
 
-    /* 数据盘raid类型, 如 NORAID, RAID0, RAID1 (Optional) */
+    /* 数据盘RAID类型, 如 NORAID, RAID0, RAID1 (Optional) */
     DataRaidType string `json:"dataRaidType"`
 
     /* 网络类型, 如 basic (Optional) */
@@ -88,6 +91,9 @@ type Instance struct {
 
     /* 公网IP (Optional) */
     PublicIp string `json:"publicIp"`
+
+    /* 公网IPv6 (Optional) */
+    PublicIpv6 string `json:"publicIpv6"`
 
     /* 计费信息 (Optional) */
     Charge charge.Charge `json:"charge"`

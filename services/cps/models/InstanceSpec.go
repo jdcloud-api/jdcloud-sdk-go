@@ -23,8 +23,11 @@ type InstanceSpec struct {
     /* 可用区, 如 cn-east-1  */
     Az string `json:"az"`
 
-    /* 设备类型, 如 cps.c.normal  */
+    /* 实例类型, 如 cps.c.normal  */
     DeviceType string `json:"deviceType"`
+
+    /* 主机名 (Optional) */
+    Hostname *string `json:"hostname"`
 
     /* 镜像类型, 取值范围：standard、standard_app  */
     ImageType string `json:"imageType"`
@@ -32,10 +35,10 @@ type InstanceSpec struct {
     /* 操作系统类型ID  */
     OsTypeId string `json:"osTypeId"`
 
-    /* 系统盘raid类型Id  */
+    /* 系统盘RAID类型ID  */
     SysRaidTypeId string `json:"sysRaidTypeId"`
 
-    /* 数据盘raid类型Id  */
+    /* 数据盘RAID类型ID  */
     DataRaidTypeId string `json:"dataRaidTypeId"`
 
     /* 子网编号 (Optional) */
@@ -43,6 +46,9 @@ type InstanceSpec struct {
 
     /* 是否启用外网，取值范围：yes、no (Optional) */
     EnableInternet *string `json:"enableInternet"`
+
+    /* 是否启用IPv6，取值范围：yes、no (Optional) */
+    EnableIpv6 *string `json:"enableIpv6"`
 
     /* 网络类型，目前只支持basic  */
     NetworkType string `json:"networkType"`

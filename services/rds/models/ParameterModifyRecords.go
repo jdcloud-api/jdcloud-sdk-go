@@ -17,23 +17,17 @@
 package models
 
 
-type Raid struct {
+type ParameterModifyRecords struct {
 
-    /* 磁盘类型, 如 system/data (Optional) */
-    VolumeType string `json:"volumeType"`
+    /* 参数名称 (Optional) */
+    Name string `json:"name"`
 
-    /* 设备详情 (Optional) */
-    VolumeDetail string `json:"volumeDetail"`
+    /* 修改前的参数值 (Optional) */
+    PreModify string `json:"preModify"`
 
-    /* RAID类型ID (Optional) */
-    RaidTypeId string `json:"raidTypeId"`
+    /* 修改后的参数值 (Optional) */
+    PostModify string `json:"postModify"`
 
-    /* RAID类型, 如 NORAID, RAID0, RAID1 (Optional) */
-    RaidType string `json:"raidType"`
-
-    /* 云物理服务器类型, 如 cps.c.normal (Optional) */
-    DeviceType string `json:"deviceType"`
-
-    /* RAID类型描述 (Optional) */
-    Description string `json:"description"`
+    /* 修改时间 (Optional) */
+    UpdateTime string `json:"updateTime"`
 }

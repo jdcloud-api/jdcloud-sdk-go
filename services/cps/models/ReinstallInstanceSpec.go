@@ -25,20 +25,23 @@ type ReinstallInstanceSpec struct {
     /* 镜像类型, 取值范围：standard、standard_app  */
     ImageType string `json:"imageType"`
 
-    /* OS类型Id  */
+    /* 操作系统类型ID  */
     OsTypeId string `json:"osTypeId"`
 
-    /* 系统盘raid类型Id  */
+    /* 系统盘RAID类型ID  */
     SysRaidTypeId string `json:"sysRaidTypeId"`
 
     /* 是否保留数据盘数据, 取值为：yes、no  */
     KeepData string `json:"keepData"`
 
-    /* 数据盘raid类型Id  */
+    /* 数据盘RAID类型ID  */
     DataRaidTypeId string `json:"dataRaidTypeId"`
 
     /* 密码  */
     Password string `json:"password"`
+
+    /* 主机名 (Optional) */
+    Hostname *string `json:"hostname"`
 
     /*  (Optional) */
     Softwares []Software `json:"softwares"`

@@ -59,10 +59,10 @@ type DBInstanceAttribute struct {
     /* 子网的ID (Optional) */
     SubnetId string `json:"subnetId"`
 
-    /* 实例公网域名 (Optional) */
+    /* 实例内网域名 (Optional) */
     InternalDomainName string `json:"internalDomainName"`
 
-    /* 实例内网域名 (Optional) */
+    /* 实例公网域名 (Optional) */
     PublicDomainName string `json:"publicDomainName"`
 
     /* 应用访问端口 (Optional) */

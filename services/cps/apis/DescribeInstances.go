@@ -44,7 +44,7 @@ type DescribeInstancesRequest struct {
     /* 网络类型，精确匹配，目前只支持basic (Optional) */
     NetworkType *string `json:"networkType"`
 
-    /* 服务器类型，精确匹配，调用接口（describeDeviceTypes）获取物理服务器类型列表 (Optional) */
+    /* 实例类型，精确匹配，调用接口（describeDeviceTypes）获取实例类型 (Optional) */
     DeviceType *string `json:"deviceType"`
 
     /* 云物理服务器状态，参考云物理服务器状态 (Optional) */
@@ -82,7 +82,7 @@ func NewDescribeInstancesRequest(
  * param az: 可用区，精确匹配 (Optional)
  * param name: 云物理服务器名称，支持模糊匹配 (Optional)
  * param networkType: 网络类型，精确匹配，目前只支持basic (Optional)
- * param deviceType: 服务器类型，精确匹配，调用接口（describeDeviceTypes）获取物理服务器类型列表 (Optional)
+ * param deviceType: 实例类型，精确匹配，调用接口（describeDeviceTypes）获取实例类型 (Optional)
  * param status: 云物理服务器状态，参考云物理服务器状态 (Optional)
  * param filters: instanceId - 云物理服务器ID，精确匹配，支持多个
  (Optional)
@@ -161,7 +161,7 @@ func (r *DescribeInstancesRequest) SetNetworkType(networkType string) {
     r.NetworkType = &networkType
 }
 
-/* param deviceType: 服务器类型，精确匹配，调用接口（describeDeviceTypes）获取物理服务器类型列表(Optional) */
+/* param deviceType: 实例类型，精确匹配，调用接口（describeDeviceTypes）获取实例类型(Optional) */
 func (r *DescribeInstancesRequest) SetDeviceType(deviceType string) {
     r.DeviceType = &deviceType
 }

@@ -19,16 +19,19 @@ package models
 
 type DeviceType struct {
 
-    /* 服务器类型英文名称, 如 cps.c.normal (Optional) */
+    /* 实例类型英文名称, 如 cps.c.normal (Optional) */
     NameEN string `json:"nameEN"`
 
-    /* 服务器类型中文名称, 如 计算型 (Optional) */
+    /* 实例类型中文名称, 如 计算型 (Optional) */
     NameZH string `json:"nameZH"`
 
-    /* 使用场景类型英文描述, 如 standard (Optional) */
+    /* 实例所属规格系列，如 计算、存储、GPU (Optional) */
+    Family string `json:"family"`
+
+    /* 镜像类型英文描述, 如 standard (Optional) */
     UseTypeEN string `json:"useTypeEN"`
 
-    /* 使用场景类型中文描述, 如 标准型 (Optional) */
+    /* 镜像类型中文描述, 如 标准型 (Optional) */
     UseTypeZH string `json:"useTypeZH"`
 
     /* 区域代码, 如 cn-east-1 (Optional) */
@@ -58,10 +61,10 @@ type DeviceType struct {
     /* 系统磁盘详细信息 (Optional) */
     SystemDiskDetail string `json:"systemDiskDetail"`
 
-    /* 系统磁盘概要信息 (Optional) */
+    /* 数据磁盘概要信息 (Optional) */
     DataDiskConcise string `json:"dataDiskConcise"`
 
-    /* 系统磁盘详细信息 (Optional) */
+    /* 数据磁盘详细信息 (Optional) */
     DataDiskDetail string `json:"dataDiskDetail"`
 
     /* GPU概要信息 (Optional) */
@@ -69,4 +72,7 @@ type DeviceType struct {
 
     /* GPU详细信息 (Optional) */
     GpuDetail string `json:"gpuDetail"`
+
+    /* 售罄状态 (Optional) */
+    IsSoldOut bool `json:"isSoldOut"`
 }
