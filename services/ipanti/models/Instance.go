@@ -19,20 +19,14 @@ package models
 
 type Instance struct {
 
-    /* 实例 Id (Optional) */
-    Id int64 `json:"id"`
+    /* 实例id (Optional) */
+    InstanceId int64 `json:"instanceId"`
 
     /* 实例名称 (Optional) */
     Name string `json:"name"`
 
-    /* 链路类型, 1: 电信, 2: 电信、联通, 3: 电信、联通和移动 (Optional) */
-    Carrier int `json:"carrier"`
-
-    /* 可防护 ip 类型, 目前仅电信线路支持 IPV6 线路:
-- 0: IPV4,
-- 1: IPV4/IPV6
- (Optional) */
-    IpType int `json:"ipType"`
+    /* 线路，UNICOM、TELECOM (Optional) */
+    Carrier string `json:"carrier"`
 
     /* 触发弹性带宽的次数 (Optional) */
     ElasticTriggerCount int `json:"elasticTriggerCount"`
@@ -65,10 +59,10 @@ type Instance struct {
     SecurityStatus string `json:"securityStatus"`
 
     /* 实例的创建的时间 (Optional) */
-    CreateTime string `json:"createTime"`
+    CreateTime int64 `json:"createTime"`
 
     /* 实例的过期时间 (Optional) */
-    ExpireTime string `json:"expireTime"`
+    ExpireTime int64 `json:"expireTime"`
 
     /* 资源id，升级和续费时使用 (Optional) */
     ResourceId string `json:"resourceId"`
@@ -96,6 +90,9 @@ type Instance struct {
 
     /* ip白名单状态，0关闭，1开启 (Optional) */
     IpWhiteStatus int `json:"ipWhiteStatus"`
+
+    /* 用户pin (Optional) */
+    Pin string `json:"pin"`
 
     /* url白名单列表 (Optional) */
     UrlWhitelist []string `json:"urlWhitelist"`

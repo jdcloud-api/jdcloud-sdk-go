@@ -24,27 +24,27 @@ type SwitchWebRuleOriginRequest struct {
 
     core.JDCloudRequest
 
-    /* 区域 Id  */
+    /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 高防实例 Id  */
-    InstanceId int `json:"instanceId"`
+    /* 实例id  */
+    InstanceId string `json:"instanceId"`
 
-    /* 网站规则 Id  */
-    WebRuleId int `json:"webRuleId"`
+    /* 网站规则id  */
+    WebRuleId string `json:"webRuleId"`
 }
 
 /*
- * param regionId: 区域 Id (Required)
- * param instanceId: 高防实例 Id (Required)
- * param webRuleId: 网站规则 Id (Required)
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param webRuleId: 网站规则id (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewSwitchWebRuleOriginRequest(
     regionId string,
-    instanceId int,
-    webRuleId int,
+    instanceId string,
+    webRuleId string,
 ) *SwitchWebRuleOriginRequest {
 
 	return &SwitchWebRuleOriginRequest{
@@ -61,14 +61,14 @@ func NewSwitchWebRuleOriginRequest(
 }
 
 /*
- * param regionId: 区域 Id (Required)
- * param instanceId: 高防实例 Id (Required)
- * param webRuleId: 网站规则 Id (Required)
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param webRuleId: 网站规则id (Required)
  */
 func NewSwitchWebRuleOriginRequestWithAllParams(
     regionId string,
-    instanceId int,
-    webRuleId int,
+    instanceId string,
+    webRuleId string,
 ) *SwitchWebRuleOriginRequest {
 
     return &SwitchWebRuleOriginRequest{
@@ -97,18 +97,18 @@ func NewSwitchWebRuleOriginRequestWithoutParam() *SwitchWebRuleOriginRequest {
     }
 }
 
-/* param regionId: 区域 Id(Required) */
+/* param regionId: Region ID(Required) */
 func (r *SwitchWebRuleOriginRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 高防实例 Id(Required) */
-func (r *SwitchWebRuleOriginRequest) SetInstanceId(instanceId int) {
+/* param instanceId: 实例id(Required) */
+func (r *SwitchWebRuleOriginRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param webRuleId: 网站规则 Id(Required) */
-func (r *SwitchWebRuleOriginRequest) SetWebRuleId(webRuleId int) {
+/* param webRuleId: 网站规则id(Required) */
+func (r *SwitchWebRuleOriginRequest) SetWebRuleId(webRuleId string) {
     r.WebRuleId = webRuleId
 }
 
@@ -125,6 +125,4 @@ type SwitchWebRuleOriginResponse struct {
 }
 
 type SwitchWebRuleOriginResult struct {
-    Code int `json:"code"`
-    Message string `json:"message"`
 }

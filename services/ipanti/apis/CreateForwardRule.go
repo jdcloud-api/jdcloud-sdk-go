@@ -25,26 +25,26 @@ type CreateForwardRuleRequest struct {
 
     core.JDCloudRequest
 
-    /* 区域 Id  */
+    /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 高防实例 Id  */
-    InstanceId int `json:"instanceId"`
+    /* 实例id  */
+    InstanceId string `json:"instanceId"`
 
-    /* 添加非网站类规则请求参数  */
+    /* 非网站类规则参数  */
     ForwardRuleSpec *ipanti.ForwardRuleSpec `json:"forwardRuleSpec"`
 }
 
 /*
- * param regionId: 区域 Id (Required)
- * param instanceId: 高防实例 Id (Required)
- * param forwardRuleSpec: 添加非网站类规则请求参数 (Required)
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param forwardRuleSpec: 非网站类规则参数 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateForwardRuleRequest(
     regionId string,
-    instanceId int,
+    instanceId string,
     forwardRuleSpec *ipanti.ForwardRuleSpec,
 ) *CreateForwardRuleRequest {
 
@@ -62,13 +62,13 @@ func NewCreateForwardRuleRequest(
 }
 
 /*
- * param regionId: 区域 Id (Required)
- * param instanceId: 高防实例 Id (Required)
- * param forwardRuleSpec: 添加非网站类规则请求参数 (Required)
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param forwardRuleSpec: 非网站类规则参数 (Required)
  */
 func NewCreateForwardRuleRequestWithAllParams(
     regionId string,
-    instanceId int,
+    instanceId string,
     forwardRuleSpec *ipanti.ForwardRuleSpec,
 ) *CreateForwardRuleRequest {
 
@@ -98,17 +98,17 @@ func NewCreateForwardRuleRequestWithoutParam() *CreateForwardRuleRequest {
     }
 }
 
-/* param regionId: 区域 Id(Required) */
+/* param regionId: Region ID(Required) */
 func (r *CreateForwardRuleRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 高防实例 Id(Required) */
-func (r *CreateForwardRuleRequest) SetInstanceId(instanceId int) {
+/* param instanceId: 实例id(Required) */
+func (r *CreateForwardRuleRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param forwardRuleSpec: 添加非网站类规则请求参数(Required) */
+/* param forwardRuleSpec: 非网站类规则参数(Required) */
 func (r *CreateForwardRuleRequest) SetForwardRuleSpec(forwardRuleSpec *ipanti.ForwardRuleSpec) {
     r.ForwardRuleSpec = forwardRuleSpec
 }
@@ -126,6 +126,4 @@ type CreateForwardRuleResponse struct {
 }
 
 type CreateForwardRuleResult struct {
-    Code int `json:"code"`
-    Message string `json:"message"`
 }

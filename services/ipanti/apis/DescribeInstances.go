@@ -28,10 +28,10 @@ type DescribeInstancesRequest struct {
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 页码, 默认为 1 (Optional) */
+    /* 页码；默认为1 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* 分页大小, 默认为 10, 取值范围[10, 100], 0 表示全量 (Optional) */
+    /* 分页大小；默认为20；取值范围[10, 100] (Optional) */
     PageSize *int `json:"pageSize"`
 
     /* 实例名称，可模糊匹配 (Optional) */
@@ -60,8 +60,8 @@ func NewDescribeInstancesRequest(
 
 /*
  * param regionId: Region ID (Required)
- * param pageNumber: 页码, 默认为 1 (Optional)
- * param pageSize: 分页大小, 默认为 10, 取值范围[10, 100], 0 表示全量 (Optional)
+ * param pageNumber: 页码；默认为1 (Optional)
+ * param pageSize: 分页大小；默认为20；取值范围[10, 100] (Optional)
  * param name: 实例名称，可模糊匹配 (Optional)
  */
 func NewDescribeInstancesRequestWithAllParams(
@@ -103,12 +103,12 @@ func (r *DescribeInstancesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param pageNumber: 页码, 默认为 1(Optional) */
+/* param pageNumber: 页码；默认为1(Optional) */
 func (r *DescribeInstancesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
-/* param pageSize: 分页大小, 默认为 10, 取值范围[10, 100], 0 表示全量(Optional) */
+/* param pageSize: 分页大小；默认为20；取值范围[10, 100](Optional) */
 func (r *DescribeInstancesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
@@ -132,7 +132,5 @@ type DescribeInstancesResponse struct {
 
 type DescribeInstancesResult struct {
     DataList []ipanti.Instance `json:"dataList"`
-    CurrentCount int `json:"currentCount"`
     TotalCount int `json:"totalCount"`
-    TotalPage int `json:"totalPage"`
 }

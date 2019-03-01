@@ -19,50 +19,29 @@ package models
 
 type WebRuleSpec struct {
 
-    /* 子域名  */
-    Domain string `json:"domain"`
+    /* 子域名 (Optional) */
+    Domain *string `json:"domain"`
 
-    /* 协议: http, https 至少一个为 true  */
-    Protocol *WebRuleProtocol `json:"protocol"`
+    /* 协议：HTTP、HTTPS、HTTP_HTTPS (Optional) */
+    Protocol *string `json:"protocol"`
 
-    /* HTTP协议的端口号, 如80, 81; 如果 protocol.http 为 true, 至少配置一个端口, 最多添加 5 个 (Optional) */
-    Port []int `json:"port"`
+    /* HTTP协议的端口号，如80,81，多个端口号使用逗号分隔 (Optional) */
+    Port *string `json:"port"`
 
-    /* HTTPS协议的端口号，如443, 8443; 如果 protocol.https 为 true, 至少配置一个端口, 最多添加 5 个 (Optional) */
-    HttpsPort []int `json:"httpsPort"`
+    /* HTTPS协议的端口号，如443,8443，多个端口号使用逗号分隔 (Optional) */
+    HttpsPort *string `json:"httpsPort"`
 
-    /* 回源类型：A或者CNAME  */
-    OriginType string `json:"originType"`
+    /* 回源类型：A或者CNAME (Optional) */
+    OriginType *string `json:"originType"`
 
-    /* originType 为 A 时，需要设置该字段 (Optional) */
+    /*  (Optional) */
     OriginAddr []OriginAddrItem `json:"originAddr"`
 
-    /* 备用的回源地址列表，可以配置为一个域名或者多个 ip 地址 (Optional) */
+    /*  (Optional) */
     OnlineAddr []string `json:"onlineAddr"`
 
     /* 回源域名,originType为CNAME时需要指定该字段 (Optional) */
     OriginDomain *string `json:"originDomain"`
-
-    /* 转发规则：wrr->带权重的轮询，rr->不带权重的轮询  */
-    Algorithm string `json:"algorithm"`
-
-    /* 是否开启 https 强制跳转，当 protocol 为 HTTP_HTTPS 时可以配置该属性
-  - 0 不开启强制跳转
-  - 1 开启强制跳转
- (Optional) */
-    ForceJump *int `json:"forceJump"`
-
-    /* 是否为自定义端口号，0为默认 1为自定义 (Optional) */
-    CustomPortStatus *int `json:"customPortStatus"`
-
-    /* 是否开启http回源, 当勾选HTTPS时可以配置该属性
-  - 0 不开启
-  - 1 开启
- (Optional) */
-    HttpOrigin *int `json:"httpOrigin"`
-
-    /* 是否开启 WebSocket, 0 为不开启, 1 为开启  */
-    WebSocketStatus int `json:"webSocketStatus"`
 
     /* 证书内容 (Optional) */
     HttpsCertContent *string `json:"httpsCertContent"`
@@ -70,8 +49,15 @@ type WebRuleSpec struct {
     /* 证书私钥 (Optional) */
     HttpsRsaKey *string `json:"httpsRsaKey"`
 
-    /* 证书 Id
-  - 如果传 certId, 请确认已经上传了相应的证书
-  - certId 缺省时网站规则将使用 httpsCertContent, httpsRsaKey 对应的证书 (Optional) */
-    CertId *int64 `json:"certId"`
+    /* 转发规则：wrr->带权重的轮询，rr->不带权重的轮询 (Optional) */
+    Algorithm *string `json:"algorithm"`
+
+    /* 是否开启https强制跳转，当protocol为HTTP_HTTPS时可以配置该属性 0为不强跳 1为开启强跳 (Optional) */
+    ForceJump *int `json:"forceJump"`
+
+    /* 是否为自定义端口号，0为默认 1为自定义 (Optional) */
+    CustomPortStatus *int `json:"customPortStatus"`
+
+    /* 是否开启http回源，0为不开启 1为开启，当勾选HTTPS时可以配置该属性 (Optional) */
+    HttpOrigin *int `json:"httpOrigin"`
 }

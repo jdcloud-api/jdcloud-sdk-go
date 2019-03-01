@@ -18,7 +18,6 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    ipanti "github.com/jdcloud-api/jdcloud-sdk-go/services/ipanti/models"
 )
 
 type ModifyInstanceIpWhiteListRequest struct {
@@ -28,24 +27,24 @@ type ModifyInstanceIpWhiteListRequest struct {
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 实例 ID  */
-    InstanceId int `json:"instanceId"`
+    /* 实例id  */
+    InstanceId string `json:"instanceId"`
 
-    /* 设置 IP 白名单请求参数  */
-    IpBwListSpec *ipanti.IpBwListSpec `json:"ipBwListSpec"`
+    /* ip白名单列表  */
+    IpWhiteList []string `json:"ipWhiteList"`
 }
 
 /*
  * param regionId: Region ID (Required)
- * param instanceId: 实例 ID (Required)
- * param ipBwListSpec: 设置 IP 白名单请求参数 (Required)
+ * param instanceId: 实例id (Required)
+ * param ipWhiteList: ip白名单列表 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewModifyInstanceIpWhiteListRequest(
     regionId string,
-    instanceId int,
-    ipBwListSpec *ipanti.IpBwListSpec,
+    instanceId string,
+    ipWhiteList []string,
 ) *ModifyInstanceIpWhiteListRequest {
 
 	return &ModifyInstanceIpWhiteListRequest{
@@ -57,19 +56,19 @@ func NewModifyInstanceIpWhiteListRequest(
 		},
         RegionId: regionId,
         InstanceId: instanceId,
-        IpBwListSpec: ipBwListSpec,
+        IpWhiteList: ipWhiteList,
 	}
 }
 
 /*
  * param regionId: Region ID (Required)
- * param instanceId: 实例 ID (Required)
- * param ipBwListSpec: 设置 IP 白名单请求参数 (Required)
+ * param instanceId: 实例id (Required)
+ * param ipWhiteList: ip白名单列表 (Required)
  */
 func NewModifyInstanceIpWhiteListRequestWithAllParams(
     regionId string,
-    instanceId int,
-    ipBwListSpec *ipanti.IpBwListSpec,
+    instanceId string,
+    ipWhiteList []string,
 ) *ModifyInstanceIpWhiteListRequest {
 
     return &ModifyInstanceIpWhiteListRequest{
@@ -81,7 +80,7 @@ func NewModifyInstanceIpWhiteListRequestWithAllParams(
         },
         RegionId: regionId,
         InstanceId: instanceId,
-        IpBwListSpec: ipBwListSpec,
+        IpWhiteList: ipWhiteList,
     }
 }
 
@@ -103,14 +102,14 @@ func (r *ModifyInstanceIpWhiteListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 实例 ID(Required) */
-func (r *ModifyInstanceIpWhiteListRequest) SetInstanceId(instanceId int) {
+/* param instanceId: 实例id(Required) */
+func (r *ModifyInstanceIpWhiteListRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param ipBwListSpec: 设置 IP 白名单请求参数(Required) */
-func (r *ModifyInstanceIpWhiteListRequest) SetIpBwListSpec(ipBwListSpec *ipanti.IpBwListSpec) {
-    r.IpBwListSpec = ipBwListSpec
+/* param ipWhiteList: ip白名单列表(Required) */
+func (r *ModifyInstanceIpWhiteListRequest) SetIpWhiteList(ipWhiteList []string) {
+    r.IpWhiteList = ipWhiteList
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
@@ -126,6 +125,4 @@ type ModifyInstanceIpWhiteListResponse struct {
 }
 
 type ModifyInstanceIpWhiteListResult struct {
-    Code int `json:"code"`
-    Message string `json:"message"`
 }

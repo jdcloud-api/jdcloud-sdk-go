@@ -27,13 +27,13 @@ type DeleteAlarmsRequest struct {
     /* 地域 Id  */
     RegionId string `json:"regionId"`
 
-    /* 待删除的规则id，用竖线分隔  */
+    /* 待删除的规则id，用"|"间隔  */
     Ids string `json:"ids"`
 }
 
 /*
  * param regionId: 地域 Id (Required)
- * param ids: 待删除的规则id，用竖线分隔 (Required)
+ * param ids: 待删除的规则id，用"|"间隔 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -56,7 +56,7 @@ func NewDeleteAlarmsRequest(
 
 /*
  * param regionId: 地域 Id (Required)
- * param ids: 待删除的规则id，用竖线分隔 (Required)
+ * param ids: 待删除的规则id，用"|"间隔 (Required)
  */
 func NewDeleteAlarmsRequestWithAllParams(
     regionId string,
@@ -93,7 +93,7 @@ func (r *DeleteAlarmsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param ids: 待删除的规则id，用竖线分隔(Required) */
+/* param ids: 待删除的规则id，用"|"间隔(Required) */
 func (r *DeleteAlarmsRequest) SetIds(ids string) {
     r.Ids = ids
 }

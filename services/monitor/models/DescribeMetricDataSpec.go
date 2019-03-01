@@ -19,10 +19,10 @@ package models
 
 type DescribeMetricDataSpec struct {
 
-    /* 聚合方式，默认等于downSampleType或avg，可选值参考:sum、avg、last、min、max (Optional) */
+    /* 聚合方式，默认等于downSampleType或avg，可选值参考http://opentsdb.net/docs/build/html/user_guide/query/aggregators.html?highlight=zimsum#available-aggregators (Optional) */
     AggrType string `json:"aggrType"`
 
-    /* 采样方式，默认等于aggrType或avg，可选值参考：sum、avg、last、min、max (Optional) */
+    /* 采样方式，默认等于aggrType或avg，可选值参考http://opentsdb.net/docs/build/html/user_guide/query/aggregators.html?highlight=avg#available-aggregators (Optional) */
     DownSampleType string `json:"downSampleType"`
 
     /* 查询时间范围的结束时间， UTC时间，格式：2016-12- yyyy-MM-dd'T'HH:mm:ssZ（为空时，将由startTime与timeInterval计算得出）

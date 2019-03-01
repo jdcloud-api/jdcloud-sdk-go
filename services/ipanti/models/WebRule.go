@@ -19,56 +19,38 @@ package models
 
 type WebRule struct {
 
-    /* 规则 Id (Optional) */
+    /* 规则id (Optional) */
     Id int64 `json:"id"`
 
-    /* 实例 Id (Optional) */
+    /* 实例id (Optional) */
     InstanceId int64 `json:"instanceId"`
 
     /* 子域名 (Optional) */
     Domain string `json:"domain"`
 
-    /* 规则的 cname (Optional) */
+    /* 规则的cname (Optional) */
     Cname string `json:"cname"`
 
-    /*  (Optional) */
-    Protocol WebRuleProtocol `json:"protocol"`
+    /* 协议：HTTP、HTTPS、HTTP_HTTPS (Optional) */
+    Protocol string `json:"protocol"`
 
-    /* 是否为自定义端口号, 0: 为默认, 1: 为自定义 (Optional) */
-    CustomPortStatus int `json:"customPortStatus"`
+    /* HTTP协议的端口号，如80,81，多个端口号使用逗号分隔 (Optional) */
+    Port string `json:"port"`
 
-    /* HTTP 协议的端口号, 如 80,81 (Optional) */
-    Port []int `json:"port"`
+    /* HTTPS协议的端口号，如443,8443，多个端口号使用逗号分隔 (Optional) */
+    HttpsPort string `json:"httpsPort"`
 
-    /* HTTPS 协议的端口号, 如 443,8443 (Optional) */
-    HttpsPort []int `json:"httpsPort"`
-
-    /* 是否开启 http 回源, 0: 为不开启, 1: 为开启, 当勾选 HTTPS 时可以配置该属性 (Optional) */
-    HttpOrigin int `json:"httpOrigin"`
-
-    /* 0: 防御状态, 1: 回源状态 (Optional) */
-    Status int `json:"status"`
-
-    /* 回源类型: A 或者 CNAME (Optional) */
+    /* 回源类型：A或者CNAME (Optional) */
     OriginType string `json:"originType"`
 
     /*  (Optional) */
     OriginAddr []OriginAddrItem `json:"originAddr"`
 
-    /* 回源域名, originType 为 CNAME 时返回该字段 (Optional) */
-    OriginDomain string `json:"originDomain"`
-
     /*  (Optional) */
     OnlineAddr []string `json:"onlineAddr"`
 
-    /* 证书状态, 0: 异常, 1: 正常, 2: 证书未上传 (Optional) */
-    HttpCertStatus int `json:"httpCertStatus"`
-
-    /* 证书 Id (Optional) */
-    CertId int64 `json:"certId"`
-
-    /* 证书名称 (Optional) */
-    CertName string `json:"certName"`
+    /* 回源域名,originType为CNAME时返回该字段 (Optional) */
+    OriginDomain string `json:"originDomain"`
 
     /* 证书内容 (Optional) */
     HttpsCertContent string `json:"httpsCertContent"`
@@ -76,18 +58,24 @@ type WebRule struct {
     /* 证书私钥 (Optional) */
     HttpsRsaKey string `json:"httpsRsaKey"`
 
-    /* 是否开启https强制跳转, 当 protocol 为 HTTP_HTTPS 时可以配置该属性
-  - 0 不强跳
-  - 1 开启强跳
- (Optional) */
-    ForceJump int `json:"forceJump"`
+    /* 证书状态：0异常，1正常 (Optional) */
+    HttpCertStatus int `json:"httpCertStatus"`
 
-    /* 转发规则,  wrr: 带权重的轮询, rr: 不带权重的轮询 (Optional) */
-    Algorithm string `json:"algorithm"`
+    /* 0防御状态，1回源状态 (Optional) */
+    Status int `json:"status"`
 
-    /* CC 状态, 0: CC 关闭, 1: CC 开启 (Optional) */
+    /* 0 CC关闭 1 CC开启 (Optional) */
     CcStatus int `json:"ccStatus"`
 
-    /* webSocketStatus, 0: 关闭, 1: 开启 (Optional) */
-    WebSocketStatus int `json:"webSocketStatus"`
+    /* 转发规则：wrr->带权重的轮询，rr->不带权重的轮询 (Optional) */
+    Algorithm string `json:"algorithm"`
+
+    /* 是否开启https强制跳转，当protocol为HTTP_HTTPS时可以配置该属性 0为不强跳 1为开启强跳 (Optional) */
+    ForceJump int `json:"forceJump"`
+
+    /* 是否为自定义端口号，0为默认 1为自定义 (Optional) */
+    CustomPortStatus int `json:"customPortStatus"`
+
+    /* 是否开启http回源，0为不开启 1为开启，当勾选HTTPS时可以配置该属性 (Optional) */
+    HttpOrigin int `json:"httpOrigin"`
 }

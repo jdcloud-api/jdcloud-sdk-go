@@ -28,19 +28,19 @@ type CreateInstanceRequest struct {
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 新购或升级实例请求参数  */
-    CreateInstanceSpec *ipanti.CreateInstanceSpec `json:"createInstanceSpec"`
+    /* 实例规格参数  */
+    InstanceSpec *ipanti.InstanceSpec `json:"instanceSpec"`
 }
 
 /*
  * param regionId: Region ID (Required)
- * param createInstanceSpec: 新购或升级实例请求参数 (Required)
+ * param instanceSpec: 实例规格参数 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateInstanceRequest(
     regionId string,
-    createInstanceSpec *ipanti.CreateInstanceSpec,
+    instanceSpec *ipanti.InstanceSpec,
 ) *CreateInstanceRequest {
 
 	return &CreateInstanceRequest{
@@ -51,17 +51,17 @@ func NewCreateInstanceRequest(
 			Version: "v1",
 		},
         RegionId: regionId,
-        CreateInstanceSpec: createInstanceSpec,
+        InstanceSpec: instanceSpec,
 	}
 }
 
 /*
  * param regionId: Region ID (Required)
- * param createInstanceSpec: 新购或升级实例请求参数 (Required)
+ * param instanceSpec: 实例规格参数 (Required)
  */
 func NewCreateInstanceRequestWithAllParams(
     regionId string,
-    createInstanceSpec *ipanti.CreateInstanceSpec,
+    instanceSpec *ipanti.InstanceSpec,
 ) *CreateInstanceRequest {
 
     return &CreateInstanceRequest{
@@ -72,7 +72,7 @@ func NewCreateInstanceRequestWithAllParams(
             Version: "v1",
         },
         RegionId: regionId,
-        CreateInstanceSpec: createInstanceSpec,
+        InstanceSpec: instanceSpec,
     }
 }
 
@@ -94,9 +94,9 @@ func (r *CreateInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param createInstanceSpec: 新购或升级实例请求参数(Required) */
-func (r *CreateInstanceRequest) SetCreateInstanceSpec(createInstanceSpec *ipanti.CreateInstanceSpec) {
-    r.CreateInstanceSpec = createInstanceSpec
+/* param instanceSpec: 实例规格参数(Required) */
+func (r *CreateInstanceRequest) SetInstanceSpec(instanceSpec *ipanti.InstanceSpec) {
+    r.InstanceSpec = instanceSpec
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
@@ -112,6 +112,5 @@ type CreateInstanceResponse struct {
 }
 
 type CreateInstanceResult struct {
-    Code int `json:"code"`
-    Message string `json:"message"`
+    OrderId string `json:"orderId"`
 }

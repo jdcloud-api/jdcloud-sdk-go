@@ -25,34 +25,28 @@ type DescribeWebRulesRequest struct {
 
     core.JDCloudRequest
 
-    /* 区域 Id  */
+    /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 高防实例 Id  */
-    InstanceId int `json:"instanceId"`
+    /* 实例id  */
+    InstanceId string `json:"instanceId"`
 
-    /* 页码, 默认为1 (Optional) */
+    /* 页码；默认为1 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* 分页大小, 默认为10, 取值范围[10, 100] (Optional) */
+    /* 分页大小；默认为20；取值范围[10, 100] (Optional) */
     PageSize *int `json:"pageSize"`
-
-    /* 查询类型名称, domain:源站域名, ip:源站 IP, rawDomain: 域名 (Optional) */
-    SearchType *string `json:"searchType"`
-
-    /* 查询类型值 (Optional) */
-    SearchValue *string `json:"searchValue"`
 }
 
 /*
- * param regionId: 区域 Id (Required)
- * param instanceId: 高防实例 Id (Required)
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeWebRulesRequest(
     regionId string,
-    instanceId int,
+    instanceId string,
 ) *DescribeWebRulesRequest {
 
 	return &DescribeWebRulesRequest{
@@ -68,20 +62,16 @@ func NewDescribeWebRulesRequest(
 }
 
 /*
- * param regionId: 区域 Id (Required)
- * param instanceId: 高防实例 Id (Required)
- * param pageNumber: 页码, 默认为1 (Optional)
- * param pageSize: 分页大小, 默认为10, 取值范围[10, 100] (Optional)
- * param searchType: 查询类型名称, domain:源站域名, ip:源站 IP, rawDomain: 域名 (Optional)
- * param searchValue: 查询类型值 (Optional)
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param pageNumber: 页码；默认为1 (Optional)
+ * param pageSize: 分页大小；默认为20；取值范围[10, 100] (Optional)
  */
 func NewDescribeWebRulesRequestWithAllParams(
     regionId string,
-    instanceId int,
+    instanceId string,
     pageNumber *int,
     pageSize *int,
-    searchType *string,
-    searchValue *string,
 ) *DescribeWebRulesRequest {
 
     return &DescribeWebRulesRequest{
@@ -95,8 +85,6 @@ func NewDescribeWebRulesRequestWithAllParams(
         InstanceId: instanceId,
         PageNumber: pageNumber,
         PageSize: pageSize,
-        SearchType: searchType,
-        SearchValue: searchValue,
     }
 }
 
@@ -113,34 +101,24 @@ func NewDescribeWebRulesRequestWithoutParam() *DescribeWebRulesRequest {
     }
 }
 
-/* param regionId: 区域 Id(Required) */
+/* param regionId: Region ID(Required) */
 func (r *DescribeWebRulesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 高防实例 Id(Required) */
-func (r *DescribeWebRulesRequest) SetInstanceId(instanceId int) {
+/* param instanceId: 实例id(Required) */
+func (r *DescribeWebRulesRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param pageNumber: 页码, 默认为1(Optional) */
+/* param pageNumber: 页码；默认为1(Optional) */
 func (r *DescribeWebRulesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
-/* param pageSize: 分页大小, 默认为10, 取值范围[10, 100](Optional) */
+/* param pageSize: 分页大小；默认为20；取值范围[10, 100](Optional) */
 func (r *DescribeWebRulesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
-}
-
-/* param searchType: 查询类型名称, domain:源站域名, ip:源站 IP, rawDomain: 域名(Optional) */
-func (r *DescribeWebRulesRequest) SetSearchType(searchType string) {
-    r.SearchType = &searchType
-}
-
-/* param searchValue: 查询类型值(Optional) */
-func (r *DescribeWebRulesRequest) SetSearchValue(searchValue string) {
-    r.SearchValue = &searchValue
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
@@ -157,7 +135,5 @@ type DescribeWebRulesResponse struct {
 
 type DescribeWebRulesResult struct {
     DataList []ipanti.WebRule `json:"dataList"`
-    CurrentCount int `json:"currentCount"`
     TotalCount int `json:"totalCount"`
-    TotalPage int `json:"totalPage"`
 }
