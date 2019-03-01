@@ -28,23 +28,23 @@ type ModifyInstanceCCRequest struct {
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 实例 ID  */
-    InstanceId int `json:"instanceId"`
+    /* 实例id  */
+    InstanceId string `json:"instanceId"`
 
-    /* CC 参数  */
+    /* cc参数  */
     CCSpec *ipanti.CCSpec `json:"cCSpec"`
 }
 
 /*
  * param regionId: Region ID (Required)
- * param instanceId: 实例 ID (Required)
- * param cCSpec: CC 参数 (Required)
+ * param instanceId: 实例id (Required)
+ * param cCSpec: cc参数 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewModifyInstanceCCRequest(
     regionId string,
-    instanceId int,
+    instanceId string,
     cCSpec *ipanti.CCSpec,
 ) *ModifyInstanceCCRequest {
 
@@ -63,12 +63,12 @@ func NewModifyInstanceCCRequest(
 
 /*
  * param regionId: Region ID (Required)
- * param instanceId: 实例 ID (Required)
- * param cCSpec: CC 参数 (Required)
+ * param instanceId: 实例id (Required)
+ * param cCSpec: cc参数 (Required)
  */
 func NewModifyInstanceCCRequestWithAllParams(
     regionId string,
-    instanceId int,
+    instanceId string,
     cCSpec *ipanti.CCSpec,
 ) *ModifyInstanceCCRequest {
 
@@ -103,12 +103,12 @@ func (r *ModifyInstanceCCRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 实例 ID(Required) */
-func (r *ModifyInstanceCCRequest) SetInstanceId(instanceId int) {
+/* param instanceId: 实例id(Required) */
+func (r *ModifyInstanceCCRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param cCSpec: CC 参数(Required) */
+/* param cCSpec: cc参数(Required) */
 func (r *ModifyInstanceCCRequest) SetCCSpec(cCSpec *ipanti.CCSpec) {
     r.CCSpec = cCSpec
 }
@@ -126,6 +126,4 @@ type ModifyInstanceCCResponse struct {
 }
 
 type ModifyInstanceCCResult struct {
-    Code int `json:"code"`
-    Message string `json:"message"`
 }

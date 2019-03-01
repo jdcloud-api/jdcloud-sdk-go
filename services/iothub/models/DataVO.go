@@ -19,42 +19,39 @@ package models
 
 type DataVO struct {
 
-    /* 系统流水号 (Optional) */
+    /*  (Optional) */
     Id string `json:"id"`
 
-    /* 实例名称 (Optional) */
+    /*  (Optional) */
     Name string `json:"name"`
 
-    /* 子网编号 (Optional) */
+    /*  (Optional) */
     SubNetId string `json:"subNetId"`
 
-    /* 子网名称 (Optional) */
+    /*  (Optional) */
     SubNetName string `json:"subNetName"`
 
-    /* VPC编号 (Optional) */
+    /*  (Optional) */
     VpcId string `json:"vpcId"`
 
-    /* VPC名称 (Optional) */
+    /*  (Optional) */
     VpcName string `json:"vpcName"`
 
-    /* 可用区名称 (Optional) */
+    /*  (Optional) */
     AzName string `json:"azName"`
 
-    /* 公网域名 (Optional) */
+    /*  (Optional) */
     PubDomain string `json:"pubDomain"`
 
-    /* 内网域名 (Optional) */
+    /*  (Optional) */
     PriDomain string `json:"priDomain"`
 
-    /* 实例状态 (Optional) */
+    /*  (Optional) */
     Status string `json:"status"`
 
-    /* 资费形式 (Optional) */
+    /*  (Optional) */
     Feetype string `json:"feetype"`
 
-    /* 创建时间 (Optional) */
+    /*  (Optional) */
     CreateTime string `json:"createTime"`
-
-    /* 实例编号 (Optional) */
-    InstanceId string `json:"instanceId"`
 }

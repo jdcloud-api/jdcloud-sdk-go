@@ -32,9 +32,6 @@ type DeleteRepositoryRequest struct {
 
     /* 镜像仓库名称  */
     RepositoryName string `json:"repositoryName"`
-
-    /* 是否强制删除有镜像的镜像仓库 (Optional) */
-    Force *bool `json:"force"`
 }
 
 /*
@@ -67,13 +64,11 @@ func NewDeleteRepositoryRequest(
  * param regionId: Region ID (Required)
  * param registryName: 注册表名称 (Required)
  * param repositoryName: 镜像仓库名称 (Required)
- * param force: 是否强制删除有镜像的镜像仓库 (Optional)
  */
 func NewDeleteRepositoryRequestWithAllParams(
     regionId string,
     registryName string,
     repositoryName string,
-    force *bool,
 ) *DeleteRepositoryRequest {
 
     return &DeleteRepositoryRequest{
@@ -86,7 +81,6 @@ func NewDeleteRepositoryRequestWithAllParams(
         RegionId: regionId,
         RegistryName: registryName,
         RepositoryName: repositoryName,
-        Force: force,
     }
 }
 
@@ -116,11 +110,6 @@ func (r *DeleteRepositoryRequest) SetRegistryName(registryName string) {
 /* param repositoryName: 镜像仓库名称(Required) */
 func (r *DeleteRepositoryRequest) SetRepositoryName(repositoryName string) {
     r.RepositoryName = repositoryName
-}
-
-/* param force: 是否强制删除有镜像的镜像仓库(Optional) */
-func (r *DeleteRepositoryRequest) SetForce(force bool) {
-    r.Force = &force
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

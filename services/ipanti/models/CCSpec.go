@@ -23,17 +23,17 @@ type CCSpec struct {
     CcProtectMode *int `json:"ccProtectMode"`
 
     /* cc阈值大小 (Optional) */
-    CcThreshold *int64 `json:"ccThreshold"`
+    CcThreshold *int `json:"ccThreshold"`
 
     /* ccProtectMode为自定义模式时，指定每个Host的防护阈值 (Optional) */
-    HostQps *int64 `json:"hostQps"`
+    HostQps *int `json:"hostQps"`
 
     /* ccProtectMode为自定义模式时，指定每个Host+URI的防护阈值 (Optional) */
-    HostUrlQps *int64 `json:"hostUrlQps"`
+    HostUrlQps *int `json:"hostUrlQps"`
 
     /* ccProtectMode为自定义模式时，指定每个源IP对Host的防护阈值 (Optional) */
-    IpHostQps *int64 `json:"ipHostQps"`
+    IpHostQps *int `json:"ipHostQps"`
 
     /* ccProtectMode为自定义模式时，指定每个源IP对Host+URI的防护阈值 (Optional) */
-    IpHostUrlQps *int64 `json:"ipHostUrlQps"`
+    IpHostUrlQps *int `json:"ipHostUrlQps"`
 }

@@ -20,7 +20,7 @@ package models
 type DDosAttackLog struct {
 
     /* 攻击流量大小 (Optional) */
-    AttackTraffic float64 `json:"attackTraffic"`
+    AttackTraffic int `json:"attackTraffic"`
 
     /* 是否触发黑洞，0否 1是 (Optional) */
     BlackHole int `json:"blackHole"`

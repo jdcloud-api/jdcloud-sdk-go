@@ -27,19 +27,19 @@ type EnableInstanceUrlWhiteListRequest struct {
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 实例 ID  */
-    InstanceId int `json:"instanceId"`
+    /* 实例id  */
+    InstanceId string `json:"instanceId"`
 }
 
 /*
  * param regionId: Region ID (Required)
- * param instanceId: 实例 ID (Required)
+ * param instanceId: 实例id (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewEnableInstanceUrlWhiteListRequest(
     regionId string,
-    instanceId int,
+    instanceId string,
 ) *EnableInstanceUrlWhiteListRequest {
 
 	return &EnableInstanceUrlWhiteListRequest{
@@ -56,11 +56,11 @@ func NewEnableInstanceUrlWhiteListRequest(
 
 /*
  * param regionId: Region ID (Required)
- * param instanceId: 实例 ID (Required)
+ * param instanceId: 实例id (Required)
  */
 func NewEnableInstanceUrlWhiteListRequestWithAllParams(
     regionId string,
-    instanceId int,
+    instanceId string,
 ) *EnableInstanceUrlWhiteListRequest {
 
     return &EnableInstanceUrlWhiteListRequest{
@@ -93,8 +93,8 @@ func (r *EnableInstanceUrlWhiteListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 实例 ID(Required) */
-func (r *EnableInstanceUrlWhiteListRequest) SetInstanceId(instanceId int) {
+/* param instanceId: 实例id(Required) */
+func (r *EnableInstanceUrlWhiteListRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
@@ -111,6 +111,4 @@ type EnableInstanceUrlWhiteListResponse struct {
 }
 
 type EnableInstanceUrlWhiteListResult struct {
-    Code int `json:"code"`
-    Message string `json:"message"`
 }

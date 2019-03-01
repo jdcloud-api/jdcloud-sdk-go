@@ -33,9 +33,6 @@ type DescribeRepositoriesRequest struct {
  (Optional) */
     Filters []common.Filter `json:"filters"`
 
-    /* 注册表名 (Optional) */
-    RegistryName *string `json:"registryName"`
-
     /* 页码；默认为1 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
@@ -67,14 +64,12 @@ func NewDescribeRepositoriesRequest(
  * param regionId: Region ID (Required)
  * param filters: name - 仓库名称，模糊匹配，支持单个
  (Optional)
- * param registryName: 注册表名 (Optional)
  * param pageNumber: 页码；默认为1 (Optional)
  * param pageSize: 分页大小；默认为20；取值范围[10, 100] (Optional)
  */
 func NewDescribeRepositoriesRequestWithAllParams(
     regionId string,
     filters []common.Filter,
-    registryName *string,
     pageNumber *int,
     pageSize *int,
 ) *DescribeRepositoriesRequest {
@@ -88,7 +83,6 @@ func NewDescribeRepositoriesRequestWithAllParams(
         },
         RegionId: regionId,
         Filters: filters,
-        RegistryName: registryName,
         PageNumber: pageNumber,
         PageSize: pageSize,
     }
@@ -116,11 +110,6 @@ func (r *DescribeRepositoriesRequest) SetRegionId(regionId string) {
 (Optional) */
 func (r *DescribeRepositoriesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
-}
-
-/* param registryName: 注册表名(Optional) */
-func (r *DescribeRepositoriesRequest) SetRegistryName(registryName string) {
-    r.RegistryName = &registryName
 }
 
 /* param pageNumber: 页码；默认为1(Optional) */

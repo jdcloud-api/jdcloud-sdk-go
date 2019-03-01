@@ -19,32 +19,27 @@ package models
 
 type ForwardRuleSpec struct {
 
-    /* 协议: TCP或者UDP  */
-    Protocol string `json:"protocol"`
+    /* 协议：TCP或者UDP (Optional) */
+    Protocol *string `json:"protocol"`
 
-    /* 端口号, 取值范围[1, 65535]  */
-    Port int `json:"port"`
+    /* 端口号 (Optional) */
+    Port *int `json:"port"`
 
-    /* 转发规则
-- wrr 带权重的轮询
-- wlc 加权最小连接
-- rr  不带权重的轮询
-- sh  源地址hash
-  */
-    Algorithm string `json:"algorithm"`
+    /* 转发规则：wrr->带权重的轮询，wlc->加权最小连接，rr->不带权重的轮询，sh->源地址hash (Optional) */
+    Algorithm *string `json:"algorithm"`
 
-    /* 回源类型: A 或者 CNAME  */
-    OriginType string `json:"originType"`
+    /* 回源类型，ip或者domain (Optional) */
+    OriginType *string `json:"originType"`
 
     /*  (Optional) */
     OriginAddr []OriginAddrItem `json:"originAddr"`
 
-    /* 备用的回源地址列表, 可以配置为一个域名或者多个 ip 地址 (Optional) */
+    /*  (Optional) */
     OnlineAddr []string `json:"onlineAddr"`
 
     /* 回源域名 (Optional) */
     OriginDomain *string `json:"originDomain"`
 
-    /* 回源端口号, 取值范围[1, 65535]  */
-    OriginPort int `json:"originPort"`
+    /* 回源端口号 (Optional) */
+    OriginPort *int `json:"originPort"`
 }

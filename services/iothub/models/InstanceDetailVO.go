@@ -71,9 +71,6 @@ type InstanceDetailVO struct {
     RdsUserName string `json:"rdsUserName"`
 
     /*  (Optional) */
-    JcqId string `json:"jcqId"`
-
-    /*  (Optional) */
     JcqAccessPoint string `json:"jcqAccessPoint"`
 
     /*  (Optional) */
@@ -84,10 +81,4 @@ type InstanceDetailVO struct {
 
     /*  (Optional) */
     JcqRegion string `json:"jcqRegion"`
-
-    /* ak (Optional) */
-    Ak string `json:"ak"`
-
-    /* sk (Optional) */
-    Sk string `json:"sk"`
 }

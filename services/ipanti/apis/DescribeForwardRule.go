@@ -25,27 +25,27 @@ type DescribeForwardRuleRequest struct {
 
     core.JDCloudRequest
 
-    /* 区域 Id  */
+    /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 高防实例 Id  */
-    InstanceId int `json:"instanceId"`
+    /* 实例id  */
+    InstanceId string `json:"instanceId"`
 
-    /* 转发规则 Id  */
-    ForwardRuleId int `json:"forwardRuleId"`
+    /* 转发规则id  */
+    ForwardRuleId string `json:"forwardRuleId"`
 }
 
 /*
- * param regionId: 区域 Id (Required)
- * param instanceId: 高防实例 Id (Required)
- * param forwardRuleId: 转发规则 Id (Required)
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param forwardRuleId: 转发规则id (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeForwardRuleRequest(
     regionId string,
-    instanceId int,
-    forwardRuleId int,
+    instanceId string,
+    forwardRuleId string,
 ) *DescribeForwardRuleRequest {
 
 	return &DescribeForwardRuleRequest{
@@ -62,14 +62,14 @@ func NewDescribeForwardRuleRequest(
 }
 
 /*
- * param regionId: 区域 Id (Required)
- * param instanceId: 高防实例 Id (Required)
- * param forwardRuleId: 转发规则 Id (Required)
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param forwardRuleId: 转发规则id (Required)
  */
 func NewDescribeForwardRuleRequestWithAllParams(
     regionId string,
-    instanceId int,
-    forwardRuleId int,
+    instanceId string,
+    forwardRuleId string,
 ) *DescribeForwardRuleRequest {
 
     return &DescribeForwardRuleRequest{
@@ -98,18 +98,18 @@ func NewDescribeForwardRuleRequestWithoutParam() *DescribeForwardRuleRequest {
     }
 }
 
-/* param regionId: 区域 Id(Required) */
+/* param regionId: Region ID(Required) */
 func (r *DescribeForwardRuleRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 高防实例 Id(Required) */
-func (r *DescribeForwardRuleRequest) SetInstanceId(instanceId int) {
+/* param instanceId: 实例id(Required) */
+func (r *DescribeForwardRuleRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param forwardRuleId: 转发规则 Id(Required) */
-func (r *DescribeForwardRuleRequest) SetForwardRuleId(forwardRuleId int) {
+/* param forwardRuleId: 转发规则id(Required) */
+func (r *DescribeForwardRuleRequest) SetForwardRuleId(forwardRuleId string) {
     r.ForwardRuleId = forwardRuleId
 }
 

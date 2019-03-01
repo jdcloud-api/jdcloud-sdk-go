@@ -24,27 +24,27 @@ type SwitchForwardRuleOriginRequest struct {
 
     core.JDCloudRequest
 
-    /* 区域 Id  */
+    /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 高防实例 Id  */
-    InstanceId int `json:"instanceId"`
+    /* 实例id  */
+    InstanceId string `json:"instanceId"`
 
-    /* 转发规则 Id  */
-    ForwardRuleId int `json:"forwardRuleId"`
+    /* 转发规则id  */
+    ForwardRuleId string `json:"forwardRuleId"`
 }
 
 /*
- * param regionId: 区域 Id (Required)
- * param instanceId: 高防实例 Id (Required)
- * param forwardRuleId: 转发规则 Id (Required)
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param forwardRuleId: 转发规则id (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewSwitchForwardRuleOriginRequest(
     regionId string,
-    instanceId int,
-    forwardRuleId int,
+    instanceId string,
+    forwardRuleId string,
 ) *SwitchForwardRuleOriginRequest {
 
 	return &SwitchForwardRuleOriginRequest{
@@ -61,14 +61,14 @@ func NewSwitchForwardRuleOriginRequest(
 }
 
 /*
- * param regionId: 区域 Id (Required)
- * param instanceId: 高防实例 Id (Required)
- * param forwardRuleId: 转发规则 Id (Required)
+ * param regionId: Region ID (Required)
+ * param instanceId: 实例id (Required)
+ * param forwardRuleId: 转发规则id (Required)
  */
 func NewSwitchForwardRuleOriginRequestWithAllParams(
     regionId string,
-    instanceId int,
-    forwardRuleId int,
+    instanceId string,
+    forwardRuleId string,
 ) *SwitchForwardRuleOriginRequest {
 
     return &SwitchForwardRuleOriginRequest{
@@ -97,18 +97,18 @@ func NewSwitchForwardRuleOriginRequestWithoutParam() *SwitchForwardRuleOriginReq
     }
 }
 
-/* param regionId: 区域 Id(Required) */
+/* param regionId: Region ID(Required) */
 func (r *SwitchForwardRuleOriginRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 高防实例 Id(Required) */
-func (r *SwitchForwardRuleOriginRequest) SetInstanceId(instanceId int) {
+/* param instanceId: 实例id(Required) */
+func (r *SwitchForwardRuleOriginRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param forwardRuleId: 转发规则 Id(Required) */
-func (r *SwitchForwardRuleOriginRequest) SetForwardRuleId(forwardRuleId int) {
+/* param forwardRuleId: 转发规则id(Required) */
+func (r *SwitchForwardRuleOriginRequest) SetForwardRuleId(forwardRuleId string) {
     r.ForwardRuleId = forwardRuleId
 }
 
@@ -125,6 +125,4 @@ type SwitchForwardRuleOriginResponse struct {
 }
 
 type SwitchForwardRuleOriginResult struct {
-    Code int `json:"code"`
-    Message string `json:"message"`
 }

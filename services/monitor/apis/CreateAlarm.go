@@ -28,7 +28,7 @@ type CreateAlarmRequest struct {
     /* 地域 Id  */
     RegionId string `json:"regionId"`
 
-    /* 幂等性校验参数,最长36位,若两个请求clientToken相等，则返回第一次创建的规则id，只创建一次规则  */
+    /* 幂等性校验参数,最长36位  */
     ClientToken string `json:"clientToken"`
 
     /*   */
@@ -37,7 +37,7 @@ type CreateAlarmRequest struct {
 
 /*
  * param regionId: 地域 Id (Required)
- * param clientToken: 幂等性校验参数,最长36位,若两个请求clientToken相等，则返回第一次创建的规则id，只创建一次规则 (Required)
+ * param clientToken: 幂等性校验参数,最长36位 (Required)
  * param createAlarmSpec:  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -63,7 +63,7 @@ func NewCreateAlarmRequest(
 
 /*
  * param regionId: 地域 Id (Required)
- * param clientToken: 幂等性校验参数,最长36位,若两个请求clientToken相等，则返回第一次创建的规则id，只创建一次规则 (Required)
+ * param clientToken: 幂等性校验参数,最长36位 (Required)
  * param createAlarmSpec:  (Required)
  */
 func NewCreateAlarmRequestWithAllParams(
@@ -103,7 +103,7 @@ func (r *CreateAlarmRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param clientToken: 幂等性校验参数,最长36位,若两个请求clientToken相等，则返回第一次创建的规则id，只创建一次规则(Required) */
+/* param clientToken: 幂等性校验参数,最长36位(Required) */
 func (r *CreateAlarmRequest) SetClientToken(clientToken string) {
     r.ClientToken = clientToken
 }
