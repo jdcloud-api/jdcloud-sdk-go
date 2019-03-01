@@ -18,97 +18,98 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    monitor "github.com/jdcloud-api/jdcloud-sdk-go/services/monitor/models"
 )
 
-type EnableCcIpLimitRequest struct {
+type BatchDeleteAlarmsRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域 Id  */
     RegionId string `json:"regionId"`
 
-    /* 实例id  */
-    InstanceId string `json:"instanceId"`
+    /* filter name为'ids'为要删除的告警id  */
+    Filters []monitor.Filter `json:"filters"`
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: 实例id (Required)
+ * param regionId: 地域 Id (Required)
+ * param filters: filter name为'ids'为要删除的告警id (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewEnableCcIpLimitRequest(
+func NewBatchDeleteAlarmsRequest(
     regionId string,
-    instanceId string,
-) *EnableCcIpLimitRequest {
+    filters []monitor.Filter,
+) *BatchDeleteAlarmsRequest {
 
-	return &EnableCcIpLimitRequest{
+	return &BatchDeleteAlarmsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}:enableCcIpLimit",
-			Method:  "POST",
+			URL:     "/regions/{regionId}/alarms",
+			Method:  "DELETE",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        InstanceId: instanceId,
+        Filters: filters,
 	}
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: 实例id (Required)
+ * param regionId: 地域 Id (Required)
+ * param filters: filter name为'ids'为要删除的告警id (Required)
  */
-func NewEnableCcIpLimitRequestWithAllParams(
+func NewBatchDeleteAlarmsRequestWithAllParams(
     regionId string,
-    instanceId string,
-) *EnableCcIpLimitRequest {
+    filters []monitor.Filter,
+) *BatchDeleteAlarmsRequest {
 
-    return &EnableCcIpLimitRequest{
+    return &BatchDeleteAlarmsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:enableCcIpLimit",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/alarms",
+            Method:  "DELETE",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        InstanceId: instanceId,
+        Filters: filters,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewEnableCcIpLimitRequestWithoutParam() *EnableCcIpLimitRequest {
+func NewBatchDeleteAlarmsRequestWithoutParam() *BatchDeleteAlarmsRequest {
 
-    return &EnableCcIpLimitRequest{
+    return &BatchDeleteAlarmsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:enableCcIpLimit",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/alarms",
+            Method:  "DELETE",
             Header:  nil,
             Version: "v1",
         },
     }
 }
 
-/* param regionId: Region ID(Required) */
-func (r *EnableCcIpLimitRequest) SetRegionId(regionId string) {
+/* param regionId: 地域 Id(Required) */
+func (r *BatchDeleteAlarmsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 实例id(Required) */
-func (r *EnableCcIpLimitRequest) SetInstanceId(instanceId string) {
-    r.InstanceId = instanceId
+/* param filters: filter name为'ids'为要删除的告警id(Required) */
+func (r *BatchDeleteAlarmsRequest) SetFilters(filters []monitor.Filter) {
+    r.Filters = filters
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r EnableCcIpLimitRequest) GetRegionId() string {
+func (r BatchDeleteAlarmsRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type EnableCcIpLimitResponse struct {
+type BatchDeleteAlarmsResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result EnableCcIpLimitResult `json:"result"`
+    Result BatchDeleteAlarmsResult `json:"result"`
 }
 
-type EnableCcIpLimitResult struct {
+type BatchDeleteAlarmsResult struct {
 }

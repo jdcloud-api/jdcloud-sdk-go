@@ -18,21 +18,14 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    ipanti "github.com/jdcloud-api/jdcloud-sdk-go/services/ipanti/models"
 )
 
-type DescribeCcAttackLogsRequest struct {
+type DdosGraphRequest struct {
 
     core.JDCloudRequest
 
     /* Region ID  */
     RegionId string `json:"regionId"`
-
-    /* 页码；默认为1 (Optional) */
-    PageNumber *int `json:"pageNumber"`
-
-    /* 分页大小；默认为10；取值范围[10, 100] (Optional) */
-    PageSize *int `json:"pageSize"`
 
     /* 开始时间，最多查最近30天，UTC时间，格式：yyyy-MM-dd'T'HH:mm:ssZ  */
     StartTime string `json:"startTime"`
@@ -40,7 +33,7 @@ type DescribeCcAttackLogsRequest struct {
     /* 查询的结束时间，UTC时间，格式：yyyy-MM-dd'T'HH:mm:ssZ  */
     EndTime string `json:"endTime"`
 
-    /* 高防实例id (Optional) */
+    /* 高防实例id，可以传0个或多个 (Optional) */
     InstanceId []string `json:"instanceId"`
 }
 
@@ -51,15 +44,15 @@ type DescribeCcAttackLogsRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeCcAttackLogsRequest(
+func NewDdosGraphRequest(
     regionId string,
     startTime string,
     endTime string,
-) *DescribeCcAttackLogsRequest {
+) *DdosGraphRequest {
 
-	return &DescribeCcAttackLogsRequest{
+	return &DdosGraphRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/attacklog:cc",
+			URL:     "/regions/{regionId}/charts:ddosGraph",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -72,31 +65,25 @@ func NewDescribeCcAttackLogsRequest(
 
 /*
  * param regionId: Region ID (Required)
- * param pageNumber: 页码；默认为1 (Optional)
- * param pageSize: 分页大小；默认为10；取值范围[10, 100] (Optional)
  * param startTime: 开始时间，最多查最近30天，UTC时间，格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
  * param endTime: 查询的结束时间，UTC时间，格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
- * param instanceId: 高防实例id (Optional)
+ * param instanceId: 高防实例id，可以传0个或多个 (Optional)
  */
-func NewDescribeCcAttackLogsRequestWithAllParams(
+func NewDdosGraphRequestWithAllParams(
     regionId string,
-    pageNumber *int,
-    pageSize *int,
     startTime string,
     endTime string,
     instanceId []string,
-) *DescribeCcAttackLogsRequest {
+) *DdosGraphRequest {
 
-    return &DescribeCcAttackLogsRequest{
+    return &DdosGraphRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/attacklog:cc",
+            URL:     "/regions/{regionId}/charts:ddosGraph",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        PageNumber: pageNumber,
-        PageSize: pageSize,
         StartTime: startTime,
         EndTime: endTime,
         InstanceId: instanceId,
@@ -104,11 +91,11 @@ func NewDescribeCcAttackLogsRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeCcAttackLogsRequestWithoutParam() *DescribeCcAttackLogsRequest {
+func NewDdosGraphRequestWithoutParam() *DdosGraphRequest {
 
-    return &DescribeCcAttackLogsRequest{
+    return &DdosGraphRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/attacklog:cc",
+            URL:     "/regions/{regionId}/charts:ddosGraph",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -117,48 +104,40 @@ func NewDescribeCcAttackLogsRequestWithoutParam() *DescribeCcAttackLogsRequest {
 }
 
 /* param regionId: Region ID(Required) */
-func (r *DescribeCcAttackLogsRequest) SetRegionId(regionId string) {
+func (r *DdosGraphRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param pageNumber: 页码；默认为1(Optional) */
-func (r *DescribeCcAttackLogsRequest) SetPageNumber(pageNumber int) {
-    r.PageNumber = &pageNumber
-}
-
-/* param pageSize: 分页大小；默认为10；取值范围[10, 100](Optional) */
-func (r *DescribeCcAttackLogsRequest) SetPageSize(pageSize int) {
-    r.PageSize = &pageSize
-}
-
 /* param startTime: 开始时间，最多查最近30天，UTC时间，格式：yyyy-MM-dd'T'HH:mm:ssZ(Required) */
-func (r *DescribeCcAttackLogsRequest) SetStartTime(startTime string) {
+func (r *DdosGraphRequest) SetStartTime(startTime string) {
     r.StartTime = startTime
 }
 
 /* param endTime: 查询的结束时间，UTC时间，格式：yyyy-MM-dd'T'HH:mm:ssZ(Required) */
-func (r *DescribeCcAttackLogsRequest) SetEndTime(endTime string) {
+func (r *DdosGraphRequest) SetEndTime(endTime string) {
     r.EndTime = endTime
 }
 
-/* param instanceId: 高防实例id(Optional) */
-func (r *DescribeCcAttackLogsRequest) SetInstanceId(instanceId []string) {
+/* param instanceId: 高防实例id，可以传0个或多个(Optional) */
+func (r *DdosGraphRequest) SetInstanceId(instanceId []string) {
     r.InstanceId = instanceId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeCcAttackLogsRequest) GetRegionId() string {
+func (r DdosGraphRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeCcAttackLogsResponse struct {
+type DdosGraphResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeCcAttackLogsResult `json:"result"`
+    Result DdosGraphResult `json:"result"`
 }
 
-type DescribeCcAttackLogsResult struct {
-    DataList []ipanti.DDosAttackLog `json:"dataList"`
-    TotalCount int `json:"totalCount"`
+type DdosGraphResult struct {
+    PostProtect []int `json:"postProtect"`
+    PreProtect []int `json:"preProtect"`
+    Time []int64 `json:"time"`
+    Unit string `json:"unit"`
 }

@@ -20,31 +20,31 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type EnableCCObserverModeRequest struct {
+type EnableCcObserverModeRequest struct {
 
     core.JDCloudRequest
 
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 实例 ID  */
-    InstanceId int `json:"instanceId"`
+    /* 实例id  */
+    InstanceId string `json:"instanceId"`
 }
 
 /*
  * param regionId: Region ID (Required)
- * param instanceId: 实例 ID (Required)
+ * param instanceId: 实例id (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewEnableCCObserverModeRequest(
+func NewEnableCcObserverModeRequest(
     regionId string,
-    instanceId int,
-) *EnableCCObserverModeRequest {
+    instanceId string,
+) *EnableCcObserverModeRequest {
 
-	return &EnableCCObserverModeRequest{
+	return &EnableCcObserverModeRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}:enableCCObserverMode",
+			URL:     "/regions/{regionId}/instances/{instanceId}:enableCcObserverMode",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -56,16 +56,16 @@ func NewEnableCCObserverModeRequest(
 
 /*
  * param regionId: Region ID (Required)
- * param instanceId: 实例 ID (Required)
+ * param instanceId: 实例id (Required)
  */
-func NewEnableCCObserverModeRequestWithAllParams(
+func NewEnableCcObserverModeRequestWithAllParams(
     regionId string,
-    instanceId int,
-) *EnableCCObserverModeRequest {
+    instanceId string,
+) *EnableCcObserverModeRequest {
 
-    return &EnableCCObserverModeRequest{
+    return &EnableCcObserverModeRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:enableCCObserverMode",
+            URL:     "/regions/{regionId}/instances/{instanceId}:enableCcObserverMode",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -76,11 +76,11 @@ func NewEnableCCObserverModeRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewEnableCCObserverModeRequestWithoutParam() *EnableCCObserverModeRequest {
+func NewEnableCcObserverModeRequestWithoutParam() *EnableCcObserverModeRequest {
 
-    return &EnableCCObserverModeRequest{
+    return &EnableCcObserverModeRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:enableCCObserverMode",
+            URL:     "/regions/{regionId}/instances/{instanceId}:enableCcObserverMode",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -89,28 +89,26 @@ func NewEnableCCObserverModeRequestWithoutParam() *EnableCCObserverModeRequest {
 }
 
 /* param regionId: Region ID(Required) */
-func (r *EnableCCObserverModeRequest) SetRegionId(regionId string) {
+func (r *EnableCcObserverModeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 实例 ID(Required) */
-func (r *EnableCCObserverModeRequest) SetInstanceId(instanceId int) {
+/* param instanceId: 实例id(Required) */
+func (r *EnableCcObserverModeRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r EnableCCObserverModeRequest) GetRegionId() string {
+func (r EnableCcObserverModeRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type EnableCCObserverModeResponse struct {
+type EnableCcObserverModeResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result EnableCCObserverModeResult `json:"result"`
+    Result EnableCcObserverModeResult `json:"result"`
 }
 
-type EnableCCObserverModeResult struct {
-    Code int `json:"code"`
-    Message string `json:"message"`
+type EnableCcObserverModeResult struct {
 }

@@ -20,95 +20,96 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type EnableCcIpLimitRequest struct {
+type DeleteNamespaceRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* region  */
     RegionId string `json:"regionId"`
 
-    /* 实例id  */
-    InstanceId string `json:"instanceId"`
+    /* namespaceUID  */
+    NamespaceUID string `json:"namespaceUID"`
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: 实例id (Required)
+ * param regionId: region (Required)
+ * param namespaceUID: namespaceUID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewEnableCcIpLimitRequest(
+func NewDeleteNamespaceRequest(
     regionId string,
-    instanceId string,
-) *EnableCcIpLimitRequest {
+    namespaceUID string,
+) *DeleteNamespaceRequest {
 
-	return &EnableCcIpLimitRequest{
+	return &DeleteNamespaceRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}:enableCcIpLimit",
-			Method:  "POST",
+			URL:     "/regions/{regionId}/cm/namespaces/{namespaceUID}",
+			Method:  "DELETE",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        InstanceId: instanceId,
+        NamespaceUID: namespaceUID,
 	}
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: 实例id (Required)
+ * param regionId: region (Required)
+ * param namespaceUID: namespaceUID (Required)
  */
-func NewEnableCcIpLimitRequestWithAllParams(
+func NewDeleteNamespaceRequestWithAllParams(
     regionId string,
-    instanceId string,
-) *EnableCcIpLimitRequest {
+    namespaceUID string,
+) *DeleteNamespaceRequest {
 
-    return &EnableCcIpLimitRequest{
+    return &DeleteNamespaceRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:enableCcIpLimit",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/cm/namespaces/{namespaceUID}",
+            Method:  "DELETE",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        InstanceId: instanceId,
+        NamespaceUID: namespaceUID,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewEnableCcIpLimitRequestWithoutParam() *EnableCcIpLimitRequest {
+func NewDeleteNamespaceRequestWithoutParam() *DeleteNamespaceRequest {
 
-    return &EnableCcIpLimitRequest{
+    return &DeleteNamespaceRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:enableCcIpLimit",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/cm/namespaces/{namespaceUID}",
+            Method:  "DELETE",
             Header:  nil,
             Version: "v1",
         },
     }
 }
 
-/* param regionId: Region ID(Required) */
-func (r *EnableCcIpLimitRequest) SetRegionId(regionId string) {
+/* param regionId: region(Required) */
+func (r *DeleteNamespaceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 实例id(Required) */
-func (r *EnableCcIpLimitRequest) SetInstanceId(instanceId string) {
-    r.InstanceId = instanceId
+/* param namespaceUID: namespaceUID(Required) */
+func (r *DeleteNamespaceRequest) SetNamespaceUID(namespaceUID string) {
+    r.NamespaceUID = namespaceUID
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r EnableCcIpLimitRequest) GetRegionId() string {
+func (r DeleteNamespaceRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type EnableCcIpLimitResponse struct {
+type DeleteNamespaceResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result EnableCcIpLimitResult `json:"result"`
+    Result DeleteNamespaceResult `json:"result"`
 }
 
-type EnableCcIpLimitResult struct {
+type DeleteNamespaceResult struct {
+    Result bool `json:"result"`
 }
