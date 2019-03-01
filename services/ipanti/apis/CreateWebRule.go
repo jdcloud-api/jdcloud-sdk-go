@@ -25,26 +25,26 @@ type CreateWebRuleRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 区域 Id  */
     RegionId string `json:"regionId"`
 
-    /* 实例id  */
-    InstanceId string `json:"instanceId"`
+    /* 高防实例 Id  */
+    InstanceId int `json:"instanceId"`
 
-    /* 网站类规则参数  */
+    /* 添加网站类规则请求参数  */
     WebRuleSpec *ipanti.WebRuleSpec `json:"webRuleSpec"`
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: 实例id (Required)
- * param webRuleSpec: 网站类规则参数 (Required)
+ * param regionId: 区域 Id (Required)
+ * param instanceId: 高防实例 Id (Required)
+ * param webRuleSpec: 添加网站类规则请求参数 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateWebRuleRequest(
     regionId string,
-    instanceId string,
+    instanceId int,
     webRuleSpec *ipanti.WebRuleSpec,
 ) *CreateWebRuleRequest {
 
@@ -62,13 +62,13 @@ func NewCreateWebRuleRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: 实例id (Required)
- * param webRuleSpec: 网站类规则参数 (Required)
+ * param regionId: 区域 Id (Required)
+ * param instanceId: 高防实例 Id (Required)
+ * param webRuleSpec: 添加网站类规则请求参数 (Required)
  */
 func NewCreateWebRuleRequestWithAllParams(
     regionId string,
-    instanceId string,
+    instanceId int,
     webRuleSpec *ipanti.WebRuleSpec,
 ) *CreateWebRuleRequest {
 
@@ -98,17 +98,17 @@ func NewCreateWebRuleRequestWithoutParam() *CreateWebRuleRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 区域 Id(Required) */
 func (r *CreateWebRuleRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 实例id(Required) */
-func (r *CreateWebRuleRequest) SetInstanceId(instanceId string) {
+/* param instanceId: 高防实例 Id(Required) */
+func (r *CreateWebRuleRequest) SetInstanceId(instanceId int) {
     r.InstanceId = instanceId
 }
 
-/* param webRuleSpec: 网站类规则参数(Required) */
+/* param webRuleSpec: 添加网站类规则请求参数(Required) */
 func (r *CreateWebRuleRequest) SetWebRuleSpec(webRuleSpec *ipanti.WebRuleSpec) {
     r.WebRuleSpec = webRuleSpec
 }
@@ -126,4 +126,6 @@ type CreateWebRuleResponse struct {
 }
 
 type CreateWebRuleResult struct {
+    Code int `json:"code"`
+    Message string `json:"message"`
 }

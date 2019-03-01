@@ -27,19 +27,19 @@ type EnableInstanceIpBlackListRequest struct {
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 实例id  */
-    InstanceId string `json:"instanceId"`
+    /* 实例 ID  */
+    InstanceId int `json:"instanceId"`
 }
 
 /*
  * param regionId: Region ID (Required)
- * param instanceId: 实例id (Required)
+ * param instanceId: 实例 ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewEnableInstanceIpBlackListRequest(
     regionId string,
-    instanceId string,
+    instanceId int,
 ) *EnableInstanceIpBlackListRequest {
 
 	return &EnableInstanceIpBlackListRequest{
@@ -56,11 +56,11 @@ func NewEnableInstanceIpBlackListRequest(
 
 /*
  * param regionId: Region ID (Required)
- * param instanceId: 实例id (Required)
+ * param instanceId: 实例 ID (Required)
  */
 func NewEnableInstanceIpBlackListRequestWithAllParams(
     regionId string,
-    instanceId string,
+    instanceId int,
 ) *EnableInstanceIpBlackListRequest {
 
     return &EnableInstanceIpBlackListRequest{
@@ -93,8 +93,8 @@ func (r *EnableInstanceIpBlackListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 实例id(Required) */
-func (r *EnableInstanceIpBlackListRequest) SetInstanceId(instanceId string) {
+/* param instanceId: 实例 ID(Required) */
+func (r *EnableInstanceIpBlackListRequest) SetInstanceId(instanceId int) {
     r.InstanceId = instanceId
 }
 
@@ -111,4 +111,6 @@ type EnableInstanceIpBlackListResponse struct {
 }
 
 type EnableInstanceIpBlackListResult struct {
+    Code int `json:"code"`
+    Message string `json:"message"`
 }

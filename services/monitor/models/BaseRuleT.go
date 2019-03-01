@@ -31,7 +31,10 @@ type BaseRuleT struct {
     /* 降采样函数 (Optional) */
     DownSample string `json:"downSample"`
 
-    /* 监控项ID  */
+    /* 监控项 (Optional) */
+    Metric string `json:"metric"`
+
+    /* 监控项ID (Optional) */
     MetricId int64 `json:"metricId"`
 
     /*  (Optional) */

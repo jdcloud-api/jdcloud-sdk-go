@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    ipanti "github.com/jdcloud-api/jdcloud-sdk-go/services/ipanti/models"
 )
 
 type ModifyInstanceNameRequest struct {
@@ -27,24 +28,24 @@ type ModifyInstanceNameRequest struct {
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 实例id  */
-    InstanceId string `json:"instanceId"`
+    /* 实例 ID  */
+    InstanceId int `json:"instanceId"`
 
-    /* 新的实例名称  */
-    Name string `json:"name"`
+    /* 修改实例名称请求参数  */
+    RenameInstanceSpec *ipanti.RenameInstanceSpec `json:"renameInstanceSpec"`
 }
 
 /*
  * param regionId: Region ID (Required)
- * param instanceId: 实例id (Required)
- * param name: 新的实例名称 (Required)
+ * param instanceId: 实例 ID (Required)
+ * param renameInstanceSpec: 修改实例名称请求参数 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewModifyInstanceNameRequest(
     regionId string,
-    instanceId string,
-    name string,
+    instanceId int,
+    renameInstanceSpec *ipanti.RenameInstanceSpec,
 ) *ModifyInstanceNameRequest {
 
 	return &ModifyInstanceNameRequest{
@@ -56,19 +57,19 @@ func NewModifyInstanceNameRequest(
 		},
         RegionId: regionId,
         InstanceId: instanceId,
-        Name: name,
+        RenameInstanceSpec: renameInstanceSpec,
 	}
 }
 
 /*
  * param regionId: Region ID (Required)
- * param instanceId: 实例id (Required)
- * param name: 新的实例名称 (Required)
+ * param instanceId: 实例 ID (Required)
+ * param renameInstanceSpec: 修改实例名称请求参数 (Required)
  */
 func NewModifyInstanceNameRequestWithAllParams(
     regionId string,
-    instanceId string,
-    name string,
+    instanceId int,
+    renameInstanceSpec *ipanti.RenameInstanceSpec,
 ) *ModifyInstanceNameRequest {
 
     return &ModifyInstanceNameRequest{
@@ -80,7 +81,7 @@ func NewModifyInstanceNameRequestWithAllParams(
         },
         RegionId: regionId,
         InstanceId: instanceId,
-        Name: name,
+        RenameInstanceSpec: renameInstanceSpec,
     }
 }
 
@@ -102,14 +103,14 @@ func (r *ModifyInstanceNameRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 实例id(Required) */
-func (r *ModifyInstanceNameRequest) SetInstanceId(instanceId string) {
+/* param instanceId: 实例 ID(Required) */
+func (r *ModifyInstanceNameRequest) SetInstanceId(instanceId int) {
     r.InstanceId = instanceId
 }
 
-/* param name: 新的实例名称(Required) */
-func (r *ModifyInstanceNameRequest) SetName(name string) {
-    r.Name = name
+/* param renameInstanceSpec: 修改实例名称请求参数(Required) */
+func (r *ModifyInstanceNameRequest) SetRenameInstanceSpec(renameInstanceSpec *ipanti.RenameInstanceSpec) {
+    r.RenameInstanceSpec = renameInstanceSpec
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
@@ -125,4 +126,6 @@ type ModifyInstanceNameResponse struct {
 }
 
 type ModifyInstanceNameResult struct {
+    Code int `json:"code"`
+    Message string `json:"message"`
 }

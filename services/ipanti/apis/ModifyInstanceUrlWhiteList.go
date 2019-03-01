@@ -27,8 +27,8 @@ type ModifyInstanceUrlWhiteListRequest struct {
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 实例id  */
-    InstanceId string `json:"instanceId"`
+    /* 实例 ID  */
+    InstanceId int `json:"instanceId"`
 
     /* 网站类规则参数  */
     UrlWhiteList []string `json:"urlWhiteList"`
@@ -36,14 +36,14 @@ type ModifyInstanceUrlWhiteListRequest struct {
 
 /*
  * param regionId: Region ID (Required)
- * param instanceId: 实例id (Required)
+ * param instanceId: 实例 ID (Required)
  * param urlWhiteList: 网站类规则参数 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewModifyInstanceUrlWhiteListRequest(
     regionId string,
-    instanceId string,
+    instanceId int,
     urlWhiteList []string,
 ) *ModifyInstanceUrlWhiteListRequest {
 
@@ -62,12 +62,12 @@ func NewModifyInstanceUrlWhiteListRequest(
 
 /*
  * param regionId: Region ID (Required)
- * param instanceId: 实例id (Required)
+ * param instanceId: 实例 ID (Required)
  * param urlWhiteList: 网站类规则参数 (Required)
  */
 func NewModifyInstanceUrlWhiteListRequestWithAllParams(
     regionId string,
-    instanceId string,
+    instanceId int,
     urlWhiteList []string,
 ) *ModifyInstanceUrlWhiteListRequest {
 
@@ -102,8 +102,8 @@ func (r *ModifyInstanceUrlWhiteListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 实例id(Required) */
-func (r *ModifyInstanceUrlWhiteListRequest) SetInstanceId(instanceId string) {
+/* param instanceId: 实例 ID(Required) */
+func (r *ModifyInstanceUrlWhiteListRequest) SetInstanceId(instanceId int) {
     r.InstanceId = instanceId
 }
 
@@ -125,4 +125,6 @@ type ModifyInstanceUrlWhiteListResponse struct {
 }
 
 type ModifyInstanceUrlWhiteListResult struct {
+    Code int `json:"code"`
+    Message string `json:"message"`
 }

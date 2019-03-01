@@ -31,19 +31,24 @@ type ForwardRule struct {
     /* 规则的cname (Optional) */
     Cname string `json:"cname"`
 
-    /* 回源类型：ip或者domain (Optional) */
+    /* 回源类型: ip或者domain (Optional) */
     OriginType string `json:"originType"`
 
     /* 端口号 (Optional) */
     Port int `json:"port"`
 
-    /* 转发规则：wrr->带权重的轮询，wlc->加权最小连接，rr->不带权重的轮询，sh->源地址hash (Optional) */
+    /* 转发规则
+- wrr 带权重的轮询
+- wlc 加权最小连接
+- rr  不带权重的轮询
+- sh  源地址hash
+ (Optional) */
     Algorithm string `json:"algorithm"`
 
     /*  (Optional) */
     OriginAddr []OriginAddrItem `json:"originAddr"`
 
-    /*  (Optional) */
+    /* 备用的回源地址列表 (Optional) */
     OnlineAddr []string `json:"onlineAddr"`
 
     /* 回源域名 (Optional) */
