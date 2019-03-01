@@ -21,45 +21,45 @@ import (
     ipanti "github.com/jdcloud-api/jdcloud-sdk-go/services/ipanti/models"
 )
 
-type DescribeDDosAttackLogsRequest struct {
+type DescribeDDoSAttackLogsRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 区域 Id  */
     RegionId string `json:"regionId"`
 
-    /* 页码；默认为1 (Optional) */
+    /* 页码, 默认为1 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* 分页大小；默认为10；取值范围[10, 100] (Optional) */
+    /* 分页大小, 默认为10, 取值范围[10, 100] (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* 开始时间，最多查最近30天，UTC时间，格式：yyyy-MM-dd'T'HH:mm:ssZ  */
+    /* 开始时间, 只能查询最近 60 天以内的数据, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ  */
     StartTime string `json:"startTime"`
 
-    /* 查询的结束时间，UTC时间，格式：yyyy-MM-dd'T'HH:mm:ssZ  */
+    /* 查询的结束时间, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ  */
     EndTime string `json:"endTime"`
 
-    /* 高防实例id (Optional) */
-    InstanceId []string `json:"instanceId"`
+    /* 高防实例 ID (Optional) */
+    InstanceId []int64 `json:"instanceId"`
 }
 
 /*
- * param regionId: Region ID (Required)
- * param startTime: 开始时间，最多查最近30天，UTC时间，格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
- * param endTime: 查询的结束时间，UTC时间，格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
+ * param regionId: 区域 Id (Required)
+ * param startTime: 开始时间, 只能查询最近 60 天以内的数据, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
+ * param endTime: 查询的结束时间, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeDDosAttackLogsRequest(
+func NewDescribeDDoSAttackLogsRequest(
     regionId string,
     startTime string,
     endTime string,
-) *DescribeDDosAttackLogsRequest {
+) *DescribeDDoSAttackLogsRequest {
 
-	return &DescribeDDosAttackLogsRequest{
+	return &DescribeDDoSAttackLogsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/attacklog:ddos",
+			URL:     "/regions/{regionId}/attacklog:DDoS",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -71,25 +71,25 @@ func NewDescribeDDosAttackLogsRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
- * param pageNumber: 页码；默认为1 (Optional)
- * param pageSize: 分页大小；默认为10；取值范围[10, 100] (Optional)
- * param startTime: 开始时间，最多查最近30天，UTC时间，格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
- * param endTime: 查询的结束时间，UTC时间，格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
- * param instanceId: 高防实例id (Optional)
+ * param regionId: 区域 Id (Required)
+ * param pageNumber: 页码, 默认为1 (Optional)
+ * param pageSize: 分页大小, 默认为10, 取值范围[10, 100] (Optional)
+ * param startTime: 开始时间, 只能查询最近 60 天以内的数据, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
+ * param endTime: 查询的结束时间, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
+ * param instanceId: 高防实例 ID (Optional)
  */
-func NewDescribeDDosAttackLogsRequestWithAllParams(
+func NewDescribeDDoSAttackLogsRequestWithAllParams(
     regionId string,
     pageNumber *int,
     pageSize *int,
     startTime string,
     endTime string,
-    instanceId []string,
-) *DescribeDDosAttackLogsRequest {
+    instanceId []int64,
+) *DescribeDDoSAttackLogsRequest {
 
-    return &DescribeDDosAttackLogsRequest{
+    return &DescribeDDoSAttackLogsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/attacklog:ddos",
+            URL:     "/regions/{regionId}/attacklog:DDoS",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -104,11 +104,11 @@ func NewDescribeDDosAttackLogsRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeDDosAttackLogsRequestWithoutParam() *DescribeDDosAttackLogsRequest {
+func NewDescribeDDoSAttackLogsRequestWithoutParam() *DescribeDDoSAttackLogsRequest {
 
-    return &DescribeDDosAttackLogsRequest{
+    return &DescribeDDoSAttackLogsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/attacklog:ddos",
+            URL:     "/regions/{regionId}/attacklog:DDoS",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -116,49 +116,51 @@ func NewDescribeDDosAttackLogsRequestWithoutParam() *DescribeDDosAttackLogsReque
     }
 }
 
-/* param regionId: Region ID(Required) */
-func (r *DescribeDDosAttackLogsRequest) SetRegionId(regionId string) {
+/* param regionId: 区域 Id(Required) */
+func (r *DescribeDDoSAttackLogsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param pageNumber: 页码；默认为1(Optional) */
-func (r *DescribeDDosAttackLogsRequest) SetPageNumber(pageNumber int) {
+/* param pageNumber: 页码, 默认为1(Optional) */
+func (r *DescribeDDoSAttackLogsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
-/* param pageSize: 分页大小；默认为10；取值范围[10, 100](Optional) */
-func (r *DescribeDDosAttackLogsRequest) SetPageSize(pageSize int) {
+/* param pageSize: 分页大小, 默认为10, 取值范围[10, 100](Optional) */
+func (r *DescribeDDoSAttackLogsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
-/* param startTime: 开始时间，最多查最近30天，UTC时间，格式：yyyy-MM-dd'T'HH:mm:ssZ(Required) */
-func (r *DescribeDDosAttackLogsRequest) SetStartTime(startTime string) {
+/* param startTime: 开始时间, 只能查询最近 60 天以内的数据, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ(Required) */
+func (r *DescribeDDoSAttackLogsRequest) SetStartTime(startTime string) {
     r.StartTime = startTime
 }
 
-/* param endTime: 查询的结束时间，UTC时间，格式：yyyy-MM-dd'T'HH:mm:ssZ(Required) */
-func (r *DescribeDDosAttackLogsRequest) SetEndTime(endTime string) {
+/* param endTime: 查询的结束时间, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ(Required) */
+func (r *DescribeDDoSAttackLogsRequest) SetEndTime(endTime string) {
     r.EndTime = endTime
 }
 
-/* param instanceId: 高防实例id(Optional) */
-func (r *DescribeDDosAttackLogsRequest) SetInstanceId(instanceId []string) {
+/* param instanceId: 高防实例 ID(Optional) */
+func (r *DescribeDDoSAttackLogsRequest) SetInstanceId(instanceId []int64) {
     r.InstanceId = instanceId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeDDosAttackLogsRequest) GetRegionId() string {
+func (r DescribeDDoSAttackLogsRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeDDosAttackLogsResponse struct {
+type DescribeDDoSAttackLogsResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeDDosAttackLogsResult `json:"result"`
+    Result DescribeDDoSAttackLogsResult `json:"result"`
 }
 
-type DescribeDDosAttackLogsResult struct {
+type DescribeDDoSAttackLogsResult struct {
     DataList []ipanti.DDosAttackLog `json:"dataList"`
+    CurrentCount int `json:"currentCount"`
     TotalCount int `json:"totalCount"`
+    TotalPage int `json:"totalPage"`
 }

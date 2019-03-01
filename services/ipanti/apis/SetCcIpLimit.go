@@ -21,36 +21,36 @@ import (
     ipanti "github.com/jdcloud-api/jdcloud-sdk-go/services/ipanti/models"
 )
 
-type SetCcIpLimitRequest struct {
+type SetCCIpLimitRequest struct {
 
     core.JDCloudRequest
 
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 实例id  */
-    InstanceId string `json:"instanceId"`
+    /* 实例 ID  */
+    InstanceId int `json:"instanceId"`
 
-    /* cc参数  */
+    /* CC 参数  */
     CCSpec *ipanti.CcIpLimitSpec `json:"cCSpec"`
 }
 
 /*
  * param regionId: Region ID (Required)
- * param instanceId: 实例id (Required)
- * param cCSpec: cc参数 (Required)
+ * param instanceId: 实例 ID (Required)
+ * param cCSpec: CC 参数 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewSetCcIpLimitRequest(
+func NewSetCCIpLimitRequest(
     regionId string,
-    instanceId string,
+    instanceId int,
     cCSpec *ipanti.CcIpLimitSpec,
-) *SetCcIpLimitRequest {
+) *SetCCIpLimitRequest {
 
-	return &SetCcIpLimitRequest{
+	return &SetCCIpLimitRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}:setCcIpLimit",
+			URL:     "/regions/{regionId}/instances/{instanceId}:setCCIpLimit",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -63,18 +63,18 @@ func NewSetCcIpLimitRequest(
 
 /*
  * param regionId: Region ID (Required)
- * param instanceId: 实例id (Required)
- * param cCSpec: cc参数 (Required)
+ * param instanceId: 实例 ID (Required)
+ * param cCSpec: CC 参数 (Required)
  */
-func NewSetCcIpLimitRequestWithAllParams(
+func NewSetCCIpLimitRequestWithAllParams(
     regionId string,
-    instanceId string,
+    instanceId int,
     cCSpec *ipanti.CcIpLimitSpec,
-) *SetCcIpLimitRequest {
+) *SetCCIpLimitRequest {
 
-    return &SetCcIpLimitRequest{
+    return &SetCCIpLimitRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:setCcIpLimit",
+            URL:     "/regions/{regionId}/instances/{instanceId}:setCCIpLimit",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -86,11 +86,11 @@ func NewSetCcIpLimitRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewSetCcIpLimitRequestWithoutParam() *SetCcIpLimitRequest {
+func NewSetCCIpLimitRequestWithoutParam() *SetCCIpLimitRequest {
 
-    return &SetCcIpLimitRequest{
+    return &SetCCIpLimitRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:setCcIpLimit",
+            URL:     "/regions/{regionId}/instances/{instanceId}:setCCIpLimit",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -99,31 +99,33 @@ func NewSetCcIpLimitRequestWithoutParam() *SetCcIpLimitRequest {
 }
 
 /* param regionId: Region ID(Required) */
-func (r *SetCcIpLimitRequest) SetRegionId(regionId string) {
+func (r *SetCCIpLimitRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 实例id(Required) */
-func (r *SetCcIpLimitRequest) SetInstanceId(instanceId string) {
+/* param instanceId: 实例 ID(Required) */
+func (r *SetCCIpLimitRequest) SetInstanceId(instanceId int) {
     r.InstanceId = instanceId
 }
 
-/* param cCSpec: cc参数(Required) */
-func (r *SetCcIpLimitRequest) SetCCSpec(cCSpec *ipanti.CcIpLimitSpec) {
+/* param cCSpec: CC 参数(Required) */
+func (r *SetCCIpLimitRequest) SetCCSpec(cCSpec *ipanti.CcIpLimitSpec) {
     r.CCSpec = cCSpec
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r SetCcIpLimitRequest) GetRegionId() string {
+func (r SetCCIpLimitRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type SetCcIpLimitResponse struct {
+type SetCCIpLimitResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result SetCcIpLimitResult `json:"result"`
+    Result SetCCIpLimitResult `json:"result"`
 }
 
-type SetCcIpLimitResult struct {
+type SetCCIpLimitResult struct {
+    Code int `json:"code"`
+    Message string `json:"message"`
 }

@@ -20,31 +20,31 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type EnableCcIpLimitRequest struct {
+type EnableCCIpLimitRequest struct {
 
     core.JDCloudRequest
 
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 实例id  */
-    InstanceId string `json:"instanceId"`
+    /* 实例 ID  */
+    InstanceId int `json:"instanceId"`
 }
 
 /*
  * param regionId: Region ID (Required)
- * param instanceId: 实例id (Required)
+ * param instanceId: 实例 ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewEnableCcIpLimitRequest(
+func NewEnableCCIpLimitRequest(
     regionId string,
-    instanceId string,
-) *EnableCcIpLimitRequest {
+    instanceId int,
+) *EnableCCIpLimitRequest {
 
-	return &EnableCcIpLimitRequest{
+	return &EnableCCIpLimitRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}:enableCcIpLimit",
+			URL:     "/regions/{regionId}/instances/{instanceId}:enableCCIpLimit",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -56,16 +56,16 @@ func NewEnableCcIpLimitRequest(
 
 /*
  * param regionId: Region ID (Required)
- * param instanceId: 实例id (Required)
+ * param instanceId: 实例 ID (Required)
  */
-func NewEnableCcIpLimitRequestWithAllParams(
+func NewEnableCCIpLimitRequestWithAllParams(
     regionId string,
-    instanceId string,
-) *EnableCcIpLimitRequest {
+    instanceId int,
+) *EnableCCIpLimitRequest {
 
-    return &EnableCcIpLimitRequest{
+    return &EnableCCIpLimitRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:enableCcIpLimit",
+            URL:     "/regions/{regionId}/instances/{instanceId}:enableCCIpLimit",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -76,11 +76,11 @@ func NewEnableCcIpLimitRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewEnableCcIpLimitRequestWithoutParam() *EnableCcIpLimitRequest {
+func NewEnableCCIpLimitRequestWithoutParam() *EnableCCIpLimitRequest {
 
-    return &EnableCcIpLimitRequest{
+    return &EnableCCIpLimitRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:enableCcIpLimit",
+            URL:     "/regions/{regionId}/instances/{instanceId}:enableCCIpLimit",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -89,26 +89,28 @@ func NewEnableCcIpLimitRequestWithoutParam() *EnableCcIpLimitRequest {
 }
 
 /* param regionId: Region ID(Required) */
-func (r *EnableCcIpLimitRequest) SetRegionId(regionId string) {
+func (r *EnableCCIpLimitRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 实例id(Required) */
-func (r *EnableCcIpLimitRequest) SetInstanceId(instanceId string) {
+/* param instanceId: 实例 ID(Required) */
+func (r *EnableCCIpLimitRequest) SetInstanceId(instanceId int) {
     r.InstanceId = instanceId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r EnableCcIpLimitRequest) GetRegionId() string {
+func (r EnableCCIpLimitRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type EnableCcIpLimitResponse struct {
+type EnableCCIpLimitResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result EnableCcIpLimitResult `json:"result"`
+    Result EnableCCIpLimitResult `json:"result"`
 }
 
-type EnableCcIpLimitResult struct {
+type EnableCCIpLimitResult struct {
+    Code int `json:"code"`
+    Message string `json:"message"`
 }
