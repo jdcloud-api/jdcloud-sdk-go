@@ -18,97 +18,85 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    monitor "github.com/jdcloud-api/jdcloud-sdk-go/services/monitor/models"
 )
 
-type EnableCcIpLimitRequest struct {
+type DescribeNamespacesRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* region  */
     RegionId string `json:"regionId"`
-
-    /* 实例id  */
-    InstanceId string `json:"instanceId"`
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: 实例id (Required)
+ * param regionId: region (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewEnableCcIpLimitRequest(
+func NewDescribeNamespacesRequest(
     regionId string,
-    instanceId string,
-) *EnableCcIpLimitRequest {
+) *DescribeNamespacesRequest {
 
-	return &EnableCcIpLimitRequest{
+	return &DescribeNamespacesRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}:enableCcIpLimit",
-			Method:  "POST",
+			URL:     "/regions/{regionId}/cm/namespaces",
+			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        InstanceId: instanceId,
 	}
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: 实例id (Required)
+ * param regionId: region (Required)
  */
-func NewEnableCcIpLimitRequestWithAllParams(
+func NewDescribeNamespacesRequestWithAllParams(
     regionId string,
-    instanceId string,
-) *EnableCcIpLimitRequest {
+) *DescribeNamespacesRequest {
 
-    return &EnableCcIpLimitRequest{
+    return &DescribeNamespacesRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:enableCcIpLimit",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/cm/namespaces",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        InstanceId: instanceId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewEnableCcIpLimitRequestWithoutParam() *EnableCcIpLimitRequest {
+func NewDescribeNamespacesRequestWithoutParam() *DescribeNamespacesRequest {
 
-    return &EnableCcIpLimitRequest{
+    return &DescribeNamespacesRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:enableCcIpLimit",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/cm/namespaces",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
     }
 }
 
-/* param regionId: Region ID(Required) */
-func (r *EnableCcIpLimitRequest) SetRegionId(regionId string) {
+/* param regionId: region(Required) */
+func (r *DescribeNamespacesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
-}
-
-/* param instanceId: 实例id(Required) */
-func (r *EnableCcIpLimitRequest) SetInstanceId(instanceId string) {
-    r.InstanceId = instanceId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r EnableCcIpLimitRequest) GetRegionId() string {
+func (r DescribeNamespacesRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type EnableCcIpLimitResponse struct {
+type DescribeNamespacesResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result EnableCcIpLimitResult `json:"result"`
+    Result DescribeNamespacesResult `json:"result"`
 }
 
-type EnableCcIpLimitResult struct {
+type DescribeNamespacesResult struct {
+    NamespaceList []monitor.NsInfo `json:"namespaceList"`
 }

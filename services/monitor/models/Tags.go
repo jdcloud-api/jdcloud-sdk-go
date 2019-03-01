@@ -17,14 +17,11 @@
 package models
 
 
-type OnlineInfo struct {
+type Tags struct {
 
-    /*  (Optional) */
-    DeviceId string `json:"deviceId"`
+    /* 标签名  */
+    Name string `json:"name"`
 
-    /*  (Optional) */
-    Online int `json:"online"`
-
-    /*  (Optional) */
-    LastConnectTime string `json:"lastConnectTime"`
+    /* 标签值  */
+    Value string `json:"value"`
 }

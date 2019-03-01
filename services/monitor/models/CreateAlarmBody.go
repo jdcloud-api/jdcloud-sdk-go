@@ -17,14 +17,11 @@
 package models
 
 
-type OnlineInfo struct {
+type CreateAlarmBody struct {
 
-    /*  (Optional) */
-    DeviceId string `json:"deviceId"`
+    /* 幂等性校验参数，最长32位，值不变则返回值不会变  */
+    ClientToken string `json:"clientToken"`
 
-    /*  (Optional) */
-    Online int `json:"online"`
-
-    /*  (Optional) */
-    LastConnectTime string `json:"lastConnectTime"`
+    /*   */
+    CreateAlarmSpec CreateAlarmSpec `json:"createAlarmSpec"`
 }

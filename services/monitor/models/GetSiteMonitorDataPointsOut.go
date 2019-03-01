@@ -17,14 +17,5 @@
 package models
 
 
-type OnlineInfo struct {
-
-    /*  (Optional) */
-    DeviceId string `json:"deviceId"`
-
-    /*  (Optional) */
-    Online int `json:"online"`
-
-    /*  (Optional) */
-    LastConnectTime string `json:"lastConnectTime"`
+type GetSiteMonitorDataPointsOut struct {
 }

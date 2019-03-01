@@ -21,36 +21,36 @@ import (
     ipanti "github.com/jdcloud-api/jdcloud-sdk-go/services/ipanti/models"
 )
 
-type SetCCIpLimitRequest struct {
+type SetCcIpLimitRequest struct {
 
     core.JDCloudRequest
 
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 实例 ID  */
-    InstanceId int `json:"instanceId"`
+    /* 实例id  */
+    InstanceId string `json:"instanceId"`
 
-    /* CC 参数  */
+    /* cc参数  */
     CCSpec *ipanti.CcIpLimitSpec `json:"cCSpec"`
 }
 
 /*
  * param regionId: Region ID (Required)
- * param instanceId: 实例 ID (Required)
- * param cCSpec: CC 参数 (Required)
+ * param instanceId: 实例id (Required)
+ * param cCSpec: cc参数 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewSetCCIpLimitRequest(
+func NewSetCcIpLimitRequest(
     regionId string,
-    instanceId int,
+    instanceId string,
     cCSpec *ipanti.CcIpLimitSpec,
-) *SetCCIpLimitRequest {
+) *SetCcIpLimitRequest {
 
-	return &SetCCIpLimitRequest{
+	return &SetCcIpLimitRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}:setCCIpLimit",
+			URL:     "/regions/{regionId}/instances/{instanceId}:setCcIpLimit",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -63,18 +63,18 @@ func NewSetCCIpLimitRequest(
 
 /*
  * param regionId: Region ID (Required)
- * param instanceId: 实例 ID (Required)
- * param cCSpec: CC 参数 (Required)
+ * param instanceId: 实例id (Required)
+ * param cCSpec: cc参数 (Required)
  */
-func NewSetCCIpLimitRequestWithAllParams(
+func NewSetCcIpLimitRequestWithAllParams(
     regionId string,
-    instanceId int,
+    instanceId string,
     cCSpec *ipanti.CcIpLimitSpec,
-) *SetCCIpLimitRequest {
+) *SetCcIpLimitRequest {
 
-    return &SetCCIpLimitRequest{
+    return &SetCcIpLimitRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:setCCIpLimit",
+            URL:     "/regions/{regionId}/instances/{instanceId}:setCcIpLimit",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -86,11 +86,11 @@ func NewSetCCIpLimitRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewSetCCIpLimitRequestWithoutParam() *SetCCIpLimitRequest {
+func NewSetCcIpLimitRequestWithoutParam() *SetCcIpLimitRequest {
 
-    return &SetCCIpLimitRequest{
+    return &SetCcIpLimitRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:setCCIpLimit",
+            URL:     "/regions/{regionId}/instances/{instanceId}:setCcIpLimit",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -99,33 +99,31 @@ func NewSetCCIpLimitRequestWithoutParam() *SetCCIpLimitRequest {
 }
 
 /* param regionId: Region ID(Required) */
-func (r *SetCCIpLimitRequest) SetRegionId(regionId string) {
+func (r *SetCcIpLimitRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 实例 ID(Required) */
-func (r *SetCCIpLimitRequest) SetInstanceId(instanceId int) {
+/* param instanceId: 实例id(Required) */
+func (r *SetCcIpLimitRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param cCSpec: CC 参数(Required) */
-func (r *SetCCIpLimitRequest) SetCCSpec(cCSpec *ipanti.CcIpLimitSpec) {
+/* param cCSpec: cc参数(Required) */
+func (r *SetCcIpLimitRequest) SetCCSpec(cCSpec *ipanti.CcIpLimitSpec) {
     r.CCSpec = cCSpec
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r SetCCIpLimitRequest) GetRegionId() string {
+func (r SetCcIpLimitRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type SetCCIpLimitResponse struct {
+type SetCcIpLimitResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result SetCCIpLimitResult `json:"result"`
+    Result SetCcIpLimitResult `json:"result"`
 }
 
-type SetCCIpLimitResult struct {
-    Code int `json:"code"`
-    Message string `json:"message"`
+type SetCcIpLimitResult struct {
 }

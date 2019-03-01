@@ -20,67 +20,67 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type EnableCcIpLimitRequest struct {
+type BatchEnableAlarmsRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域 Id  */
     RegionId string `json:"regionId"`
 
-    /* 实例id  */
-    InstanceId string `json:"instanceId"`
+    /* 告警规则的ID列表  */
+    Ids []string `json:"ids"`
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: 实例id (Required)
+ * param regionId: 地域 Id (Required)
+ * param ids: 告警规则的ID列表 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewEnableCcIpLimitRequest(
+func NewBatchEnableAlarmsRequest(
     regionId string,
-    instanceId string,
-) *EnableCcIpLimitRequest {
+    ids []string,
+) *BatchEnableAlarmsRequest {
 
-	return &EnableCcIpLimitRequest{
+	return &BatchEnableAlarmsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}:enableCcIpLimit",
+			URL:     "/regions/{regionId}/alarms/enable",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        InstanceId: instanceId,
+        Ids: ids,
 	}
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: 实例id (Required)
+ * param regionId: 地域 Id (Required)
+ * param ids: 告警规则的ID列表 (Required)
  */
-func NewEnableCcIpLimitRequestWithAllParams(
+func NewBatchEnableAlarmsRequestWithAllParams(
     regionId string,
-    instanceId string,
-) *EnableCcIpLimitRequest {
+    ids []string,
+) *BatchEnableAlarmsRequest {
 
-    return &EnableCcIpLimitRequest{
+    return &BatchEnableAlarmsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:enableCcIpLimit",
+            URL:     "/regions/{regionId}/alarms/enable",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        InstanceId: instanceId,
+        Ids: ids,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewEnableCcIpLimitRequestWithoutParam() *EnableCcIpLimitRequest {
+func NewBatchEnableAlarmsRequestWithoutParam() *BatchEnableAlarmsRequest {
 
-    return &EnableCcIpLimitRequest{
+    return &BatchEnableAlarmsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:enableCcIpLimit",
+            URL:     "/regions/{regionId}/alarms/enable",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -88,27 +88,27 @@ func NewEnableCcIpLimitRequestWithoutParam() *EnableCcIpLimitRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
-func (r *EnableCcIpLimitRequest) SetRegionId(regionId string) {
+/* param regionId: 地域 Id(Required) */
+func (r *BatchEnableAlarmsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 实例id(Required) */
-func (r *EnableCcIpLimitRequest) SetInstanceId(instanceId string) {
-    r.InstanceId = instanceId
+/* param ids: 告警规则的ID列表(Required) */
+func (r *BatchEnableAlarmsRequest) SetIds(ids []string) {
+    r.Ids = ids
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r EnableCcIpLimitRequest) GetRegionId() string {
+func (r BatchEnableAlarmsRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type EnableCcIpLimitResponse struct {
+type BatchEnableAlarmsResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result EnableCcIpLimitResult `json:"result"`
+    Result BatchEnableAlarmsResult `json:"result"`
 }
 
-type EnableCcIpLimitResult struct {
+type BatchEnableAlarmsResult struct {
 }
