@@ -31,10 +31,10 @@ type DescribeMetricDataRequest struct {
     /* 监控项英文标识(id)  */
     Metric string `json:"metric"`
 
-    /* 聚合方式，默认等于downSampleType或avg，可选值参考http://opentsdb.net/docs/build/html/user_guide/query/aggregators.html?highlight=zimsum#available-aggregators (Optional) */
+    /* 聚合方式，默认等于downSampleType或avg，可选值参考:sum、avg、last、min、max (Optional) */
     AggrType *string `json:"aggrType"`
 
-    /* 采样方式，默认等于aggrType或avg，可选值参考http://opentsdb.net/docs/build/html/user_guide/query/aggregators.html?highlight=avg#available-aggregators (Optional) */
+    /* 采样方式，默认等于aggrType或avg，可选值参考：sum、avg、last、min、max (Optional) */
     DownSampleType *string `json:"downSampleType"`
 
     /* 查询时间范围的开始时间， UTC时间，格式：yyyy-MM-dd'T'HH:mm:ssZ (Optional) */
@@ -94,8 +94,8 @@ func NewDescribeMetricDataRequest(
 /*
  * param regionId: 地域 Id (Required)
  * param metric: 监控项英文标识(id) (Required)
- * param aggrType: 聚合方式，默认等于downSampleType或avg，可选值参考http://opentsdb.net/docs/build/html/user_guide/query/aggregators.html?highlight=zimsum#available-aggregators (Optional)
- * param downSampleType: 采样方式，默认等于aggrType或avg，可选值参考http://opentsdb.net/docs/build/html/user_guide/query/aggregators.html?highlight=avg#available-aggregators (Optional)
+ * param aggrType: 聚合方式，默认等于downSampleType或avg，可选值参考:sum、avg、last、min、max (Optional)
+ * param downSampleType: 采样方式，默认等于aggrType或avg，可选值参考：sum、avg、last、min、max (Optional)
  * param startTime: 查询时间范围的开始时间， UTC时间，格式：yyyy-MM-dd'T'HH:mm:ssZ (Optional)
  * param endTime: 查询时间范围的结束时间， UTC时间，格式：2016-12- yyyy-MM-dd'T'HH:mm:ssZ（为空时，将由startTime与timeInterval计算得出） (Optional)
  * param timeInterval: 时间间隔：1h，6h，12h，1d，3d，7d，14d，固定时间间隔，timeInterval默认为1h，当前时间往 前1h (Optional)
@@ -165,12 +165,12 @@ func (r *DescribeMetricDataRequest) SetMetric(metric string) {
     r.Metric = metric
 }
 
-/* param aggrType: 聚合方式，默认等于downSampleType或avg，可选值参考http://opentsdb.net/docs/build/html/user_guide/query/aggregators.html?highlight=zimsum#available-aggregators(Optional) */
+/* param aggrType: 聚合方式，默认等于downSampleType或avg，可选值参考:sum、avg、last、min、max(Optional) */
 func (r *DescribeMetricDataRequest) SetAggrType(aggrType string) {
     r.AggrType = &aggrType
 }
 
-/* param downSampleType: 采样方式，默认等于aggrType或avg，可选值参考http://opentsdb.net/docs/build/html/user_guide/query/aggregators.html?highlight=avg#available-aggregators(Optional) */
+/* param downSampleType: 采样方式，默认等于aggrType或avg，可选值参考：sum、avg、last、min、max(Optional) */
 func (r *DescribeMetricDataRequest) SetDownSampleType(downSampleType string) {
     r.DownSampleType = &downSampleType
 }

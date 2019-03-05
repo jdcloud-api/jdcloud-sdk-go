@@ -19,9 +19,9 @@ package models
 
 type CcIpLimitSpec struct {
 
-    /* cc防护每ip的限速大小 (Optional) */
-    CcSpeedLimit *int `json:"ccSpeedLimit"`
+    /* cc防护每ip的限速大小  */
+    CcSpeedLimit int64 `json:"ccSpeedLimit"`
 
-    /* cc防护每ip的限速大小的统计周期 (Optional) */
-    CcSpeedPeriod *int `json:"ccSpeedPeriod"`
+    /* cc防护每ip的限速大小的统计周期  */
+    CcSpeedPeriod int64 `json:"ccSpeedPeriod"`
 }
