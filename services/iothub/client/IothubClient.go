@@ -40,7 +40,7 @@ func NewIothubClient(credential *core.Credential) *IothubClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "iothub",
-            Revision:    "0.4.0",
+            Revision:    "0.4.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }

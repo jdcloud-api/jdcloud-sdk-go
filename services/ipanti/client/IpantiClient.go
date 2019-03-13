@@ -293,7 +293,7 @@ func (c *IpantiClient) ModifyInstanceIpBlackList(request *ipanti.ModifyInstanceI
     return jdResp, err
 }
 
-/* 新购或升级高防实例, 新购或升级成功时, 需根据订单 id 完成支付流程, 新购或升级实例才会生效 */
+/* 新购或升级高防实例 */
 func (c *IpantiClient) CreateInstance(request *ipanti.CreateInstanceRequest) (*ipanti.CreateInstanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -464,26 +464,6 @@ func (c *IpantiClient) ModifyInstanceCC(request *ipanti.ModifyInstanceCCRequest)
     }
 
     jdResp := &ipanti.ModifyInstanceCCResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 删除网站规则的 CC 防护规则 */
-func (c *IpantiClient) DeleteCCProtectionRuleOfWebRule(request *ipanti.DeleteCCProtectionRuleOfWebRuleRequest) (*ipanti.DeleteCCProtectionRuleOfWebRuleResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.DeleteCCProtectionRuleOfWebRuleResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

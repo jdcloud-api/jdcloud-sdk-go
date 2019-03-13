@@ -26,5 +26,5 @@ type OnlineInfo struct {
     Online int `json:"online"`
 
     /*  (Optional) */
-    LastConnectTime int `json:"lastConnectTime"`
+    LastConnectTime string `json:"lastConnectTime"`
 }

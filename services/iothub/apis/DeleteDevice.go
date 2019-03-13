@@ -27,7 +27,7 @@ type DeleteDeviceRequest struct {
     /* 设备Id (Optional) */
     DeviceId *string `json:"deviceId"`
 
-    /* 设备目标实例的instanceId (Optional) */
+    /* hub实例instanceId (Optional) */
     InstanceId *string `json:"instanceId"`
 }
 
@@ -50,7 +50,7 @@ func NewDeleteDeviceRequest(
 
 /*
  * param deviceId: 设备Id (Optional)
- * param instanceId: 设备目标实例的instanceId (Optional)
+ * param instanceId: hub实例instanceId (Optional)
  */
 func NewDeleteDeviceRequestWithAllParams(
     deviceId *string,
@@ -87,7 +87,7 @@ func (r *DeleteDeviceRequest) SetDeviceId(deviceId string) {
     r.DeviceId = &deviceId
 }
 
-/* param instanceId: 设备目标实例的instanceId(Optional) */
+/* param instanceId: hub实例instanceId(Optional) */
 func (r *DeleteDeviceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = &instanceId
 }

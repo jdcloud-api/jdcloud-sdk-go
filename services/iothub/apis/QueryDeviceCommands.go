@@ -26,19 +26,14 @@ type QueryDeviceCommandsRequest struct {
 
     /* Device 唯一标识  */
     DeviceId string `json:"deviceId"`
-
-    /*   */
-    DeviceId string `json:"deviceId"`
 }
 
 /*
  * param deviceId: Device 唯一标识 (Required)
- * param deviceId:  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewQueryDeviceCommandsRequest(
-    deviceId string,
     deviceId string,
 ) *QueryDeviceCommandsRequest {
 
@@ -50,16 +45,13 @@ func NewQueryDeviceCommandsRequest(
 			Version: "v1",
 		},
         DeviceId: deviceId,
-        DeviceId: deviceId,
 	}
 }
 
 /*
  * param deviceId: Device 唯一标识 (Required)
- * param deviceId:  (Required)
  */
 func NewQueryDeviceCommandsRequestWithAllParams(
-    deviceId string,
     deviceId string,
 ) *QueryDeviceCommandsRequest {
 
@@ -70,7 +62,6 @@ func NewQueryDeviceCommandsRequestWithAllParams(
             Header:  nil,
             Version: "v1",
         },
-        DeviceId: deviceId,
         DeviceId: deviceId,
     }
 }
@@ -89,11 +80,6 @@ func NewQueryDeviceCommandsRequestWithoutParam() *QueryDeviceCommandsRequest {
 }
 
 /* param deviceId: Device 唯一标识(Required) */
-func (r *QueryDeviceCommandsRequest) SetDeviceId(deviceId string) {
-    r.DeviceId = deviceId
-}
-
-/* param deviceId: (Required) */
 func (r *QueryDeviceCommandsRequest) SetDeviceId(deviceId string) {
     r.DeviceId = deviceId
 }
