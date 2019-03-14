@@ -40,7 +40,7 @@ func NewRdsClient(credential *core.Credential) *RdsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "rds",
-            Revision:    "0.4.3",
+            Revision:    "0.4.6",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -933,7 +933,7 @@ func (c *RdsClient) DescribeParameters(request *rds.DescribeParametersRequest) (
     return jdResp, err
 }
 
-/* 修改SQL Server数实例的配置参数。 部分参数修改后，需要重启才能生效，具体可以参考微软的相关文档<br>- 仅支持SQL Server */
+/* 修改SQL Server实例的配置参数，目前支持以下参数:max_worker_threads,max_degree_of_parallelism,max_server_memory_(MB)。 部分参数修改后，需要重启才能生效，具体可以参考微软的相关文档。<br>- 仅支持SQL Server */
 func (c *RdsClient) ModifyParameters(request *rds.ModifyParametersRequest) (*rds.ModifyParametersResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -984,6 +984,26 @@ func (c *RdsClient) ModifyWhiteList(request *rds.ModifyWhiteListRequest) (*rds.M
     }
 
     jdResp := &rds.ModifyWhiteListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 交换两个实例的域名，包括内网域名和外网域名。如果一个实例有外网域名，一个没有，则不允许交换。<br>- 仅支持SQL Server */
+func (c *RdsClient) ExchangeInstanceDns(request *rds.ExchangeInstanceDnsRequest) (*rds.ExchangeInstanceDnsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.ExchangeInstanceDnsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

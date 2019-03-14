@@ -33,8 +33,10 @@ type CreatePermissionRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param createPermissionInfo: 权限信息 
+ * param regionId: Region ID (Required)
+ * param createPermissionInfo: 权限信息 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreatePermissionRequest(
     regionId string,
@@ -53,10 +55,46 @@ func NewCreatePermissionRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param createPermissionInfo: 权限信息 (Required)
+ */
+func NewCreatePermissionRequestWithAllParams(
+    regionId string,
+    createPermissionInfo *iam.CreatePermissionInfo,
+) *CreatePermissionRequest {
+
+    return &CreatePermissionRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/permission",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        CreatePermissionInfo: createPermissionInfo,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewCreatePermissionRequestWithoutParam() *CreatePermissionRequest {
+
+    return &CreatePermissionRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/permission",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *CreatePermissionRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param createPermissionInfo: 权限信息(Required) */
 func (r *CreatePermissionRequest) SetCreatePermissionInfo(createPermissionInfo *iam.CreatePermissionInfo) {
     r.CreatePermissionInfo = createPermissionInfo
 }

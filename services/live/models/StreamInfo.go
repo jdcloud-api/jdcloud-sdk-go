@@ -20,16 +20,16 @@ package models
 type StreamInfo struct {
 
     /* 直播流的音频帧率 (Optional) */
-    AudioFrameRate int `json:"audioFrameRate"`
+    AudioFrameRate int64 `json:"audioFrameRate"`
 
     /* 直播流的 URL (Optional) */
     StreamUrl string `json:"streamUrl"`
 
     /* 直播流的码率 (Optional) */
-    BitRate int `json:"bitRate"`
+    BitRate int64 `json:"bitRate"`
 
     /* 直播流的视频帧率 (Optional) */
-    VideoFrameRate int `json:"videoFrameRate"`
+    VideoFrameRate int64 `json:"videoFrameRate"`
 
     /* 统计时刻 (Optional) */
     Time string `json:"time"`

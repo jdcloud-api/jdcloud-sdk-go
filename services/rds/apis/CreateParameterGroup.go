@@ -27,10 +27,10 @@ type CreateParameterGroupRequest struct {
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 实例引擎类型  */
+    /* 实例引擎类型，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md)  */
     Engine string `json:"engine"`
 
-    /* 实例引擎版本  */
+    /* 实例引擎版本，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md)  */
     EngineVersion string `json:"engineVersion"`
 
     /* 参数组的名字  */
@@ -42,8 +42,8 @@ type CreateParameterGroupRequest struct {
 
 /*
  * param regionId: Region ID (Required)
- * param engine: 实例引擎类型 (Required)
- * param engineVersion: 实例引擎版本 (Required)
+ * param engine: 实例引擎类型，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Required)
+ * param engineVersion: 实例引擎版本，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Required)
  * param parameterGroupName: 参数组的名字 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -71,8 +71,8 @@ func NewCreateParameterGroupRequest(
 
 /*
  * param regionId: Region ID (Required)
- * param engine: 实例引擎类型 (Required)
- * param engineVersion: 实例引擎版本 (Required)
+ * param engine: 实例引擎类型，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Required)
+ * param engineVersion: 实例引擎版本，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Required)
  * param parameterGroupName: 参数组的名字 (Required)
  * param description: 参数组的描述 (Optional)
  */
@@ -117,12 +117,12 @@ func (r *CreateParameterGroupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param engine: 实例引擎类型(Required) */
+/* param engine: 实例引擎类型，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md)(Required) */
 func (r *CreateParameterGroupRequest) SetEngine(engine string) {
     r.Engine = engine
 }
 
-/* param engineVersion: 实例引擎版本(Required) */
+/* param engineVersion: 实例引擎版本，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md)(Required) */
 func (r *CreateParameterGroupRequest) SetEngineVersion(engineVersion string) {
     r.EngineVersion = engineVersion
 }

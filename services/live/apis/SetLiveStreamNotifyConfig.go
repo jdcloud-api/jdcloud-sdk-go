@@ -27,13 +27,19 @@ type SetLiveStreamNotifyConfigRequest struct {
     /* 您的加速域名  */
     PublishDomain string `json:"publishDomain"`
 
-    /* 设置直播流信息推送到的 URL 地址  */
+    /* 设置直播流信息推送到的 URL 地址:
+  - 必须以 http:// 开头
+  - 正则校验格式
+  */
     NotifyUrl string `json:"notifyUrl"`
 }
 
 /*
  * param publishDomain: 您的加速域名 (Required)
- * param notifyUrl: 设置直播流信息推送到的 URL 地址 (Required)
+ * param notifyUrl: 设置直播流信息推送到的 URL 地址:
+  - 必须以 http:// 开头
+  - 正则校验格式
+ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -56,7 +62,10 @@ func NewSetLiveStreamNotifyConfigRequest(
 
 /*
  * param publishDomain: 您的加速域名 (Required)
- * param notifyUrl: 设置直播流信息推送到的 URL 地址 (Required)
+ * param notifyUrl: 设置直播流信息推送到的 URL 地址:
+  - 必须以 http:// 开头
+  - 正则校验格式
+ (Required)
  */
 func NewSetLiveStreamNotifyConfigRequestWithAllParams(
     publishDomain string,
@@ -93,7 +102,10 @@ func (r *SetLiveStreamNotifyConfigRequest) SetPublishDomain(publishDomain string
     r.PublishDomain = publishDomain
 }
 
-/* param notifyUrl: 设置直播流信息推送到的 URL 地址(Required) */
+/* param notifyUrl: 设置直播流信息推送到的 URL 地址:
+  - 必须以 http:// 开头
+  - 正则校验格式
+(Required) */
 func (r *SetLiveStreamNotifyConfigRequest) SetNotifyUrl(notifyUrl string) {
     r.NotifyUrl = notifyUrl
 }

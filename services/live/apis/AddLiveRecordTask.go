@@ -34,7 +34,7 @@ type AddLiveRecordTaskRequest struct {
     /* 直播流名称  */
     StreamName string `json:"streamName"`
 
-    /* 您的推流加速域名  */
+    /* 录制时间集合  */
     RecordTimes []live.RecordTime `json:"recordTimes"`
 
     /* 存储桶  */
@@ -43,10 +43,15 @@ type AddLiveRecordTaskRequest struct {
     /* 存储地址  */
     SaveEndpoint string `json:"saveEndpoint"`
 
-    /* 录制文件类型  */
+    /* 录制文件类型:
+  - 取值: ts,flv,mp4 (多种类型之前用;隔开)
+  - 不区分大小写
+  */
     RecordFileType string `json:"recordFileType"`
 
-    /* 录制文件存储路径 (Optional) */
+    /* 录制文件存储路径:
+  - 默认地址: record/{Date}/{ServerId}/{AppName}/{StreamName}/{StartTime}_{EndTime}.{format}
+ (Optional) */
     SaveObject *string `json:"saveObject"`
 }
 
@@ -54,10 +59,13 @@ type AddLiveRecordTaskRequest struct {
  * param publishDomain: 推流加速域名 (Required)
  * param appName: 直播流所属应用名称 (Required)
  * param streamName: 直播流名称 (Required)
- * param recordTimes: 您的推流加速域名 (Required)
+ * param recordTimes: 录制时间集合 (Required)
  * param saveBucket: 存储桶 (Required)
  * param saveEndpoint: 存储地址 (Required)
- * param recordFileType: 录制文件类型 (Required)
+ * param recordFileType: 录制文件类型:
+  - 取值: ts,flv,mp4 (多种类型之前用;隔开)
+  - 不区分大小写
+ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -92,11 +100,16 @@ func NewAddLiveRecordTaskRequest(
  * param publishDomain: 推流加速域名 (Required)
  * param appName: 直播流所属应用名称 (Required)
  * param streamName: 直播流名称 (Required)
- * param recordTimes: 您的推流加速域名 (Required)
+ * param recordTimes: 录制时间集合 (Required)
  * param saveBucket: 存储桶 (Required)
  * param saveEndpoint: 存储地址 (Required)
- * param recordFileType: 录制文件类型 (Required)
- * param saveObject: 录制文件存储路径 (Optional)
+ * param recordFileType: 录制文件类型:
+  - 取值: ts,flv,mp4 (多种类型之前用;隔开)
+  - 不区分大小写
+ (Required)
+ * param saveObject: 录制文件存储路径:
+  - 默认地址: record/{Date}/{ServerId}/{AppName}/{StreamName}/{StartTime}_{EndTime}.{format}
+ (Optional)
  */
 func NewAddLiveRecordTaskRequestWithAllParams(
     publishDomain string,
@@ -155,7 +168,7 @@ func (r *AddLiveRecordTaskRequest) SetStreamName(streamName string) {
     r.StreamName = streamName
 }
 
-/* param recordTimes: 您的推流加速域名(Required) */
+/* param recordTimes: 录制时间集合(Required) */
 func (r *AddLiveRecordTaskRequest) SetRecordTimes(recordTimes []live.RecordTime) {
     r.RecordTimes = recordTimes
 }
@@ -170,12 +183,17 @@ func (r *AddLiveRecordTaskRequest) SetSaveEndpoint(saveEndpoint string) {
     r.SaveEndpoint = saveEndpoint
 }
 
-/* param recordFileType: 录制文件类型(Required) */
+/* param recordFileType: 录制文件类型:
+  - 取值: ts,flv,mp4 (多种类型之前用;隔开)
+  - 不区分大小写
+(Required) */
 func (r *AddLiveRecordTaskRequest) SetRecordFileType(recordFileType string) {
     r.RecordFileType = recordFileType
 }
 
-/* param saveObject: 录制文件存储路径(Optional) */
+/* param saveObject: 录制文件存储路径:
+  - 默认地址: record/{Date}/{ServerId}/{AppName}/{StreamName}/{StartTime}_{EndTime}.{format}
+(Optional) */
 func (r *AddLiveRecordTaskRequest) SetSaveObject(saveObject string) {
     r.SaveObject = &saveObject
 }

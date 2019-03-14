@@ -36,9 +36,11 @@ type AddPermissionsToSubUserRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param subUser: 子用户用户名 
- * param addPermissionsInfo: 权限信息 
+ * param regionId: Region ID (Required)
+ * param subUser: 子用户用户名 (Required)
+ * param addPermissionsInfo: 权限信息 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewAddPermissionsToSubUserRequest(
     regionId string,
@@ -59,14 +61,54 @@ func NewAddPermissionsToSubUserRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param subUser: 子用户用户名 (Required)
+ * param addPermissionsInfo: 权限信息 (Required)
+ */
+func NewAddPermissionsToSubUserRequestWithAllParams(
+    regionId string,
+    subUser string,
+    addPermissionsInfo *iam.AddPermissionsInfo,
+) *AddPermissionsToSubUserRequest {
+
+    return &AddPermissionsToSubUserRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/subUser/{subUser}/permisssions",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        SubUser: subUser,
+        AddPermissionsInfo: addPermissionsInfo,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewAddPermissionsToSubUserRequestWithoutParam() *AddPermissionsToSubUserRequest {
+
+    return &AddPermissionsToSubUserRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/subUser/{subUser}/permisssions",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *AddPermissionsToSubUserRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param subUser: 子用户用户名(Required) */
 func (r *AddPermissionsToSubUserRequest) SetSubUser(subUser string) {
     r.SubUser = subUser
 }
 
+/* param addPermissionsInfo: 权限信息(Required) */
 func (r *AddPermissionsToSubUserRequest) SetAddPermissionsInfo(addPermissionsInfo *iam.AddPermissionsInfo) {
     r.AddPermissionsInfo = addPermissionsInfo
 }

@@ -25,7 +25,14 @@ type PublishDomain struct {
     /* 推流域名(Cname) (Optional) */
     PublishDomainCname string `json:"publishDomainCname"`
 
-    /* 直播域名状态 (Optional) */
+    /* 直播域名状态：
+  - online表示启用
+  - offline表示停用
+  - configuring表示配置中
+  - configure_failed表示配置失败
+  - checking表示正在审核
+  - check_failed表示审核失败
+ (Optional) */
     DomainStatus string `json:"domainStatus"`
 
     /* 创建时间 (Optional) */

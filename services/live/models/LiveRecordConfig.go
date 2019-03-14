@@ -22,7 +22,7 @@ type LiveRecordConfig struct {
     /* 推流域名 (Optional) */
     PublishDomain string `json:"publishDomain"`
 
-    /* 推流域名 (Optional) */
+    /* 应用名称 (Optional) */
     AppName string `json:"appName"`
 
     /* 直播流名称 (Optional) */

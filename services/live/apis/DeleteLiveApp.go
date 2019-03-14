@@ -24,16 +24,16 @@ type DeleteLiveAppRequest struct {
 
     core.JDCloudRequest
 
-    /* 推流域名  */
+    /* 直播推流域名  */
     PublishDomain string `json:"publishDomain"`
 
-    /* 直播流所属应用名称  */
+    /* 应用名称  */
     AppName string `json:"appName"`
 }
 
 /*
- * param publishDomain: 推流域名 (Required)
- * param appName: 直播流所属应用名称 (Required)
+ * param publishDomain: 直播推流域名 (Required)
+ * param appName: 应用名称 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -55,8 +55,8 @@ func NewDeleteLiveAppRequest(
 }
 
 /*
- * param publishDomain: 推流域名 (Required)
- * param appName: 直播流所属应用名称 (Required)
+ * param publishDomain: 直播推流域名 (Required)
+ * param appName: 应用名称 (Required)
  */
 func NewDeleteLiveAppRequestWithAllParams(
     publishDomain string,
@@ -88,12 +88,12 @@ func NewDeleteLiveAppRequestWithoutParam() *DeleteLiveAppRequest {
     }
 }
 
-/* param publishDomain: 推流域名(Required) */
+/* param publishDomain: 直播推流域名(Required) */
 func (r *DeleteLiveAppRequest) SetPublishDomain(publishDomain string) {
     r.PublishDomain = publishDomain
 }
 
-/* param appName: 直播流所属应用名称(Required) */
+/* param appName: 应用名称(Required) */
 func (r *DeleteLiveAppRequest) SetAppName(appName string) {
     r.AppName = appName
 }

@@ -22,12 +22,12 @@ type LiveStreamRecordConfig struct {
     /* 推流域名 (Optional) */
     PublishDomain string `json:"publishDomain"`
 
-    /* appName (Optional) */
+    /* 应用名称 (Optional) */
     AppName string `json:"appName"`
 
     /* 流名 (Optional) */
     StreamName string `json:"streamName"`
 
-    /* 水印模板配置 (Optional) */
+    /* 水印模板集合 (Optional) */
     WatermarkConfig []string `json:"watermarkConfig"`
 }

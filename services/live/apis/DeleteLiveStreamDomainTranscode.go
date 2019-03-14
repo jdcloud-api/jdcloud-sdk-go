@@ -27,13 +27,23 @@ type DeleteLiveStreamDomainTranscodeRequest struct {
     /* 推流加速域名  */
     PublishDomain string `json:"publishDomain"`
 
-    /* 转码模版  */
+    /* 转码模板自定义名称:
+  - 标准质量模板：sd、hd、hsd
+  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
+               取值要求：数字、大小写字母或短横线("-"),
+               首尾不能有特殊字符("-")
+  - <b>注意: 不能与标准的转码模板和已定义命名重复</b>  */
     Template string `json:"template"`
 }
 
 /*
  * param publishDomain: 推流加速域名 (Required)
- * param template: 转码模版 (Required)
+ * param template: 转码模板自定义名称:
+  - 标准质量模板：sd、hd、hsd
+  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
+               取值要求：数字、大小写字母或短横线("-"),
+               首尾不能有特殊字符("-")
+  - <b>注意: 不能与标准的转码模板和已定义命名重复</b> (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -56,7 +66,12 @@ func NewDeleteLiveStreamDomainTranscodeRequest(
 
 /*
  * param publishDomain: 推流加速域名 (Required)
- * param template: 转码模版 (Required)
+ * param template: 转码模板自定义名称:
+  - 标准质量模板：sd、hd、hsd
+  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
+               取值要求：数字、大小写字母或短横线("-"),
+               首尾不能有特殊字符("-")
+  - <b>注意: 不能与标准的转码模板和已定义命名重复</b> (Required)
  */
 func NewDeleteLiveStreamDomainTranscodeRequestWithAllParams(
     publishDomain string,
@@ -93,7 +108,12 @@ func (r *DeleteLiveStreamDomainTranscodeRequest) SetPublishDomain(publishDomain 
     r.PublishDomain = publishDomain
 }
 
-/* param template: 转码模版(Required) */
+/* param template: 转码模板自定义名称:
+  - 标准质量模板：sd、hd、hsd
+  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
+               取值要求：数字、大小写字母或短横线("-"),
+               首尾不能有特殊字符("-")
+  - <b>注意: 不能与标准的转码模板和已定义命名重复</b>(Required) */
 func (r *DeleteLiveStreamDomainTranscodeRequest) SetTemplate(template string) {
     r.Template = template
 }

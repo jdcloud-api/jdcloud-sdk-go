@@ -32,8 +32,10 @@ type DeleteUserAccessKeyRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param accessKey: accessKey 
+ * param regionId: Region ID (Required)
+ * param accessKey: accessKey (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDeleteUserAccessKeyRequest(
     regionId string,
@@ -52,10 +54,46 @@ func NewDeleteUserAccessKeyRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param accessKey: accessKey (Required)
+ */
+func NewDeleteUserAccessKeyRequestWithAllParams(
+    regionId string,
+    accessKey string,
+) *DeleteUserAccessKeyRequest {
+
+    return &DeleteUserAccessKeyRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/userAccessKey/{accessKey}",
+            Method:  "DELETE",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        AccessKey: accessKey,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDeleteUserAccessKeyRequestWithoutParam() *DeleteUserAccessKeyRequest {
+
+    return &DeleteUserAccessKeyRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/userAccessKey/{accessKey}",
+            Method:  "DELETE",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DeleteUserAccessKeyRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param accessKey: accessKey(Required) */
 func (r *DeleteUserAccessKeyRequest) SetAccessKey(accessKey string) {
     r.AccessKey = accessKey
 }

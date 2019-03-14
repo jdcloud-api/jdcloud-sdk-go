@@ -29,7 +29,9 @@ type CreateUserAccessKeyRequest struct {
 }
 
 /*
- * param regionId: Region ID 
+ * param regionId: Region ID (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateUserAccessKeyRequest(
     regionId string,
@@ -46,6 +48,38 @@ func NewCreateUserAccessKeyRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ */
+func NewCreateUserAccessKeyRequestWithAllParams(
+    regionId string,
+) *CreateUserAccessKeyRequest {
+
+    return &CreateUserAccessKeyRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/userAccessKey",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewCreateUserAccessKeyRequestWithoutParam() *CreateUserAccessKeyRequest {
+
+    return &CreateUserAccessKeyRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/userAccessKey",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *CreateUserAccessKeyRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

@@ -25,7 +25,7 @@ type QueryDeviceOnlineInfosRequest struct {
 
     core.JDCloudRequest
 
-    /* device标识符array (Optional) */
+    /* 设备Id集合 (Optional) */
     DeviceIds []string `json:"deviceIds"`
 }
 
@@ -47,7 +47,7 @@ func NewQueryDeviceOnlineInfosRequest(
 }
 
 /*
- * param deviceIds: device标识符array (Optional)
+ * param deviceIds: 设备Id集合 (Optional)
  */
 func NewQueryDeviceOnlineInfosRequestWithAllParams(
     deviceIds []string,
@@ -77,7 +77,7 @@ func NewQueryDeviceOnlineInfosRequestWithoutParam() *QueryDeviceOnlineInfosReque
     }
 }
 
-/* param deviceIds: device标识符array(Optional) */
+/* param deviceIds: 设备Id集合(Optional) */
 func (r *QueryDeviceOnlineInfosRequest) SetDeviceIds(deviceIds []string) {
     r.DeviceIds = deviceIds
 }

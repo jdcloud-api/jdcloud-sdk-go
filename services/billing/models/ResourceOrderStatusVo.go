@@ -26,29 +26,29 @@ type ResourceOrderStatusVo struct {
     Pin string `json:"pin"`
 
     /* 资源状态 1:正常 2:停服 3:删除 (Optional) */
-    Status *int `json:"status"`
+    Status int `json:"status"`
 
     /* 计费状态 0:停止计费 1:计费中 (Optional) */
-    BillingStatus *int `json:"billingStatus"`
+    BillingStatus int `json:"billingStatus"`
 
     /* 计费类型 1:按配置 2:按用量 3:包年包月 (Optional) */
-    BillingType *int `json:"billingType"`
+    BillingType int `json:"billingType"`
 
     /* 结束时间 (Optional) */
-    EndTime *string `json:"endTime"`
+    EndTime string `json:"endTime"`
 
     /* billingType兼容交易系统字段 (Optional) */
-    ChargeMode *int `json:"chargeMode"`
+    ChargeMode int `json:"chargeMode"`
 
     /* timeSpan兼容交易系统字段 (Optional) */
-    ChargeDuration *int `json:"chargeDuration"`
+    ChargeDuration int `json:"chargeDuration"`
 
     /* timeUnit兼容交易系统字段 (Optional) */
-    ChargeUnit *int `json:"chargeUnit"`
+    ChargeUnit int `json:"chargeUnit"`
 
     /* 站点信息 0:中国 1:国际  10:专有云 (Optional) */
-    Site *int `json:"site"`
+    Site int `json:"site"`
 
     /* 操作时间 (Optional) */
-    OperateTime *string `json:"operateTime"`
+    OperateTime string `json:"operateTime"`
 }

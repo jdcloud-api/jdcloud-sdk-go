@@ -35,7 +35,7 @@ type File struct {
     EndTime string `json:"endTime"`
 
     /* 录制时长 (Optional) */
-    Duration int `json:"duration"`
+    Duration int64 `json:"duration"`
 
     /* 视频高 (Optional) */
     Height int `json:"height"`

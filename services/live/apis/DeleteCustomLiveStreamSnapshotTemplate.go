@@ -24,12 +24,22 @@ type DeleteCustomLiveStreamSnapshotTemplateRequest struct {
 
     core.JDCloudRequest
 
-    /* 录制模板自定义名称  */
+    /* 截图模板自定义名称:
+  - 标准质量模板：sd、hd、hsd
+  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
+              取值要求：数字、大小写字母或短横线("-"),
+              首尾不能有特殊字符("-")
+  - <b>注意: 不能与标准的转码模板和已定义命名重复</b>  */
     Template string `json:"template"`
 }
 
 /*
- * param template: 录制模板自定义名称 (Required)
+ * param template: 截图模板自定义名称:
+  - 标准质量模板：sd、hd、hsd
+  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
+              取值要求：数字、大小写字母或短横线("-"),
+              首尾不能有特殊字符("-")
+  - <b>注意: 不能与标准的转码模板和已定义命名重复</b> (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -49,7 +59,12 @@ func NewDeleteCustomLiveStreamSnapshotTemplateRequest(
 }
 
 /*
- * param template: 录制模板自定义名称 (Required)
+ * param template: 截图模板自定义名称:
+  - 标准质量模板：sd、hd、hsd
+  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
+              取值要求：数字、大小写字母或短横线("-"),
+              首尾不能有特殊字符("-")
+  - <b>注意: 不能与标准的转码模板和已定义命名重复</b> (Required)
  */
 func NewDeleteCustomLiveStreamSnapshotTemplateRequestWithAllParams(
     template string,
@@ -79,7 +94,12 @@ func NewDeleteCustomLiveStreamSnapshotTemplateRequestWithoutParam() *DeleteCusto
     }
 }
 
-/* param template: 录制模板自定义名称(Required) */
+/* param template: 截图模板自定义名称:
+  - 标准质量模板：sd、hd、hsd
+  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
+              取值要求：数字、大小写字母或短横线("-"),
+              首尾不能有特殊字符("-")
+  - <b>注意: 不能与标准的转码模板和已定义命名重复</b>(Required) */
 func (r *DeleteCustomLiveStreamSnapshotTemplateRequest) SetTemplate(template string) {
     r.Template = template
 }

@@ -24,28 +24,56 @@ type AddCustomLiveStreamRecordTemplateRequest struct {
 
     core.JDCloudRequest
 
-    /* 自动录制周期  */
+    /* 自动录制周期:
+  - 取值:[15,360]
+  - 单位: 分钟
+  */
     RecordPeriod int `json:"recordPeriod"`
 
-    /* null  */
+    /* 存储桶
+  */
     SaveBucket string `json:"saveBucket"`
 
-    /* null  */
+    /* 存储地址
+  */
     SaveEndpoint string `json:"saveEndpoint"`
 
-    /* 录制文件格式  */
+    /* 录制文件格式:
+  - 取值: ts,flv,mp4 (多种类型之前用;隔开)
+  - 不区分大小写
+  */
     RecordFileType string `json:"recordFileType"`
 
-    /* 录制模板自定义名称  */
+    /* 录制模板自定义名称:
+  - 标准质量模板：sd、hd、hsd
+  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
+              取值要求：数字、大小写字母或短横线("-"),
+              首尾不能有特殊字符("-")
+  - <b>注意: 不能与标准的转码模板和已定义命名重复</b>
+  */
     Template string `json:"template"`
 }
 
 /*
- * param recordPeriod: 自动录制周期 (Required)
- * param saveBucket: null (Required)
- * param saveEndpoint: null (Required)
- * param recordFileType: 录制文件格式 (Required)
- * param template: 录制模板自定义名称 (Required)
+ * param recordPeriod: 自动录制周期:
+  - 取值:[15,360]
+  - 单位: 分钟
+ (Required)
+ * param saveBucket: 存储桶
+ (Required)
+ * param saveEndpoint: 存储地址
+ (Required)
+ * param recordFileType: 录制文件格式:
+  - 取值: ts,flv,mp4 (多种类型之前用;隔开)
+  - 不区分大小写
+ (Required)
+ * param template: 录制模板自定义名称:
+  - 标准质量模板：sd、hd、hsd
+  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
+              取值要求：数字、大小写字母或短横线("-"),
+              首尾不能有特殊字符("-")
+  - <b>注意: 不能与标准的转码模板和已定义命名重复</b>
+ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -73,11 +101,25 @@ func NewAddCustomLiveStreamRecordTemplateRequest(
 }
 
 /*
- * param recordPeriod: 自动录制周期 (Required)
- * param saveBucket: null (Required)
- * param saveEndpoint: null (Required)
- * param recordFileType: 录制文件格式 (Required)
- * param template: 录制模板自定义名称 (Required)
+ * param recordPeriod: 自动录制周期:
+  - 取值:[15,360]
+  - 单位: 分钟
+ (Required)
+ * param saveBucket: 存储桶
+ (Required)
+ * param saveEndpoint: 存储地址
+ (Required)
+ * param recordFileType: 录制文件格式:
+  - 取值: ts,flv,mp4 (多种类型之前用;隔开)
+  - 不区分大小写
+ (Required)
+ * param template: 录制模板自定义名称:
+  - 标准质量模板：sd、hd、hsd
+  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
+              取值要求：数字、大小写字母或短横线("-"),
+              首尾不能有特殊字符("-")
+  - <b>注意: 不能与标准的转码模板和已定义命名重复</b>
+ (Required)
  */
 func NewAddCustomLiveStreamRecordTemplateRequestWithAllParams(
     recordPeriod int,
@@ -115,27 +157,41 @@ func NewAddCustomLiveStreamRecordTemplateRequestWithoutParam() *AddCustomLiveStr
     }
 }
 
-/* param recordPeriod: 自动录制周期(Required) */
+/* param recordPeriod: 自动录制周期:
+  - 取值:[15,360]
+  - 单位: 分钟
+(Required) */
 func (r *AddCustomLiveStreamRecordTemplateRequest) SetRecordPeriod(recordPeriod int) {
     r.RecordPeriod = recordPeriod
 }
 
-/* param saveBucket: null(Required) */
+/* param saveBucket: 存储桶
+(Required) */
 func (r *AddCustomLiveStreamRecordTemplateRequest) SetSaveBucket(saveBucket string) {
     r.SaveBucket = saveBucket
 }
 
-/* param saveEndpoint: null(Required) */
+/* param saveEndpoint: 存储地址
+(Required) */
 func (r *AddCustomLiveStreamRecordTemplateRequest) SetSaveEndpoint(saveEndpoint string) {
     r.SaveEndpoint = saveEndpoint
 }
 
-/* param recordFileType: 录制文件格式(Required) */
+/* param recordFileType: 录制文件格式:
+  - 取值: ts,flv,mp4 (多种类型之前用;隔开)
+  - 不区分大小写
+(Required) */
 func (r *AddCustomLiveStreamRecordTemplateRequest) SetRecordFileType(recordFileType string) {
     r.RecordFileType = recordFileType
 }
 
-/* param template: 录制模板自定义名称(Required) */
+/* param template: 录制模板自定义名称:
+  - 标准质量模板：sd、hd、hsd
+  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
+              取值要求：数字、大小写字母或短横线("-"),
+              首尾不能有特殊字符("-")
+  - <b>注意: 不能与标准的转码模板和已定义命名重复</b>
+(Required) */
 func (r *AddCustomLiveStreamRecordTemplateRequest) SetTemplate(template string) {
     r.Template = template
 }

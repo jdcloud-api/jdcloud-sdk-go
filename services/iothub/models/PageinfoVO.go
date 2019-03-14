@@ -19,15 +19,15 @@ package models
 
 type PageinfoVO struct {
 
-    /*  (Optional) */
+    /* 每页显示条数 (Optional) */
     PageSize int `json:"pageSize"`
 
-    /*  (Optional) */
+    /* 当前页数 (Optional) */
     NowPage int `json:"nowPage"`
 
-    /*  (Optional) */
+    /* 总记录数 (Optional) */
     TotalSize int `json:"totalSize"`
 
-    /*  (Optional) */
+    /* 总页数 (Optional) */
     TotalPage int `json:"totalPage"`
 }

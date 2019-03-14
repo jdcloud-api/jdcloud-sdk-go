@@ -32,7 +32,14 @@ type DescribeLiveStreamTranscodeConfigRequest struct {
     /* 分页大小；默认为10；取值范围[10, 100] (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* 转码模板查询过滤条件, 不传递分页参数时默认返回10条 (Optional) */
+    /* 模板配置查询过滤条件:
+  - name:   publishDomain，必填(直播推流域名)
+  - value:  参数
+  - name:   appName，必填(应用名称)
+  - value:  参数
+  - name:   streamName，非必填(推流名称)
+  - value:  参数
+ (Optional) */
     Filters []common.Filter `json:"filters"`
 }
 
@@ -56,7 +63,14 @@ func NewDescribeLiveStreamTranscodeConfigRequest(
 /*
  * param pageNum: 页码；默认为1；取值范围[1, 100000] (Optional)
  * param pageSize: 分页大小；默认为10；取值范围[10, 100] (Optional)
- * param filters: 转码模板查询过滤条件, 不传递分页参数时默认返回10条 (Optional)
+ * param filters: 模板配置查询过滤条件:
+  - name:   publishDomain，必填(直播推流域名)
+  - value:  参数
+  - name:   appName，必填(应用名称)
+  - value:  参数
+  - name:   streamName，非必填(推流名称)
+  - value:  参数
+ (Optional)
  */
 func NewDescribeLiveStreamTranscodeConfigRequestWithAllParams(
     pageNum *int,
@@ -100,7 +114,14 @@ func (r *DescribeLiveStreamTranscodeConfigRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
-/* param filters: 转码模板查询过滤条件, 不传递分页参数时默认返回10条(Optional) */
+/* param filters: 模板配置查询过滤条件:
+  - name:   publishDomain，必填(直播推流域名)
+  - value:  参数
+  - name:   appName，必填(应用名称)
+  - value:  参数
+  - name:   streamName，非必填(推流名称)
+  - value:  参数
+(Optional) */
 func (r *DescribeLiveStreamTranscodeConfigRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }

@@ -42,11 +42,12 @@ type DescribePermissionsRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param pageNumber: 页码 
- * param pageSize: 每页显示数目 
- * param keyword: 关键字 (Optional)
- * param queryType: 权限类型,0-全部，1-系统权限，2-自定义权限 
+ * param regionId: Region ID (Required)
+ * param pageNumber: 页码 (Required)
+ * param pageSize: 每页显示数目 (Required)
+ * param queryType: 权限类型,0-全部，1-系统权限，2-自定义权限 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribePermissionsRequest(
     regionId string,
@@ -69,22 +70,70 @@ func NewDescribePermissionsRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param pageNumber: 页码 (Required)
+ * param pageSize: 每页显示数目 (Required)
+ * param keyword: 关键字 (Optional)
+ * param queryType: 权限类型,0-全部，1-系统权限，2-自定义权限 (Required)
+ */
+func NewDescribePermissionsRequestWithAllParams(
+    regionId string,
+    pageNumber int,
+    pageSize int,
+    keyword *string,
+    queryType int,
+) *DescribePermissionsRequest {
+
+    return &DescribePermissionsRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/permissions",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        PageNumber: pageNumber,
+        PageSize: pageSize,
+        Keyword: keyword,
+        QueryType: queryType,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribePermissionsRequestWithoutParam() *DescribePermissionsRequest {
+
+    return &DescribePermissionsRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/permissions",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DescribePermissionsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param pageNumber: 页码(Required) */
 func (r *DescribePermissionsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = pageNumber
 }
 
+/* param pageSize: 每页显示数目(Required) */
 func (r *DescribePermissionsRequest) SetPageSize(pageSize int) {
     r.PageSize = pageSize
 }
 
+/* param keyword: 关键字(Optional) */
 func (r *DescribePermissionsRequest) SetKeyword(keyword string) {
     r.Keyword = &keyword
 }
 
+/* param queryType: 权限类型,0-全部，1-系统权限，2-自定义权限(Required) */
 func (r *DescribePermissionsRequest) SetQueryType(queryType int) {
     r.QueryType = queryType
 }
