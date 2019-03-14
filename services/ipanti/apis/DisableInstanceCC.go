@@ -27,19 +27,19 @@ type DisableInstanceCCRequest struct {
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 实例id  */
-    InstanceId string `json:"instanceId"`
+    /* 实例 ID  */
+    InstanceId int `json:"instanceId"`
 }
 
 /*
  * param regionId: Region ID (Required)
- * param instanceId: 实例id (Required)
+ * param instanceId: 实例 ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDisableInstanceCCRequest(
     regionId string,
-    instanceId string,
+    instanceId int,
 ) *DisableInstanceCCRequest {
 
 	return &DisableInstanceCCRequest{
@@ -56,11 +56,11 @@ func NewDisableInstanceCCRequest(
 
 /*
  * param regionId: Region ID (Required)
- * param instanceId: 实例id (Required)
+ * param instanceId: 实例 ID (Required)
  */
 func NewDisableInstanceCCRequestWithAllParams(
     regionId string,
-    instanceId string,
+    instanceId int,
 ) *DisableInstanceCCRequest {
 
     return &DisableInstanceCCRequest{
@@ -93,8 +93,8 @@ func (r *DisableInstanceCCRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 实例id(Required) */
-func (r *DisableInstanceCCRequest) SetInstanceId(instanceId string) {
+/* param instanceId: 实例 ID(Required) */
+func (r *DisableInstanceCCRequest) SetInstanceId(instanceId int) {
     r.InstanceId = instanceId
 }
 
@@ -111,4 +111,6 @@ type DisableInstanceCCResponse struct {
 }
 
 type DisableInstanceCCResult struct {
+    Code int `json:"code"`
+    Message string `json:"message"`
 }

@@ -24,27 +24,27 @@ type DeleteForwardRuleRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 区域 Id  */
     RegionId string `json:"regionId"`
 
-    /* 实例id  */
-    InstanceId string `json:"instanceId"`
+    /* 高防实例 Id  */
+    InstanceId int `json:"instanceId"`
 
-    /* 转发规则id  */
-    ForwardRuleId string `json:"forwardRuleId"`
+    /* 转发规则 Id  */
+    ForwardRuleId int `json:"forwardRuleId"`
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: 实例id (Required)
- * param forwardRuleId: 转发规则id (Required)
+ * param regionId: 区域 Id (Required)
+ * param instanceId: 高防实例 Id (Required)
+ * param forwardRuleId: 转发规则 Id (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDeleteForwardRuleRequest(
     regionId string,
-    instanceId string,
-    forwardRuleId string,
+    instanceId int,
+    forwardRuleId int,
 ) *DeleteForwardRuleRequest {
 
 	return &DeleteForwardRuleRequest{
@@ -61,14 +61,14 @@ func NewDeleteForwardRuleRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: 实例id (Required)
- * param forwardRuleId: 转发规则id (Required)
+ * param regionId: 区域 Id (Required)
+ * param instanceId: 高防实例 Id (Required)
+ * param forwardRuleId: 转发规则 Id (Required)
  */
 func NewDeleteForwardRuleRequestWithAllParams(
     regionId string,
-    instanceId string,
-    forwardRuleId string,
+    instanceId int,
+    forwardRuleId int,
 ) *DeleteForwardRuleRequest {
 
     return &DeleteForwardRuleRequest{
@@ -97,18 +97,18 @@ func NewDeleteForwardRuleRequestWithoutParam() *DeleteForwardRuleRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 区域 Id(Required) */
 func (r *DeleteForwardRuleRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 实例id(Required) */
-func (r *DeleteForwardRuleRequest) SetInstanceId(instanceId string) {
+/* param instanceId: 高防实例 Id(Required) */
+func (r *DeleteForwardRuleRequest) SetInstanceId(instanceId int) {
     r.InstanceId = instanceId
 }
 
-/* param forwardRuleId: 转发规则id(Required) */
-func (r *DeleteForwardRuleRequest) SetForwardRuleId(forwardRuleId string) {
+/* param forwardRuleId: 转发规则 Id(Required) */
+func (r *DeleteForwardRuleRequest) SetForwardRuleId(forwardRuleId int) {
     r.ForwardRuleId = forwardRuleId
 }
 
@@ -125,4 +125,6 @@ type DeleteForwardRuleResponse struct {
 }
 
 type DeleteForwardRuleResult struct {
+    Code int `json:"code"`
+    Message string `json:"message"`
 }

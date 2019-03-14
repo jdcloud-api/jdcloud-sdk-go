@@ -19,12 +19,12 @@ package models
 
 type DataTag struct {
 
-    /* 标签名称  */
+    /*  (Optional) */
+    Operation int64 `json:"operation"`
+
+    /*  (Optional) */
     TagKey string `json:"tagKey"`
 
-    /* 标签值  */
+    /*  (Optional) */
     TagValue string `json:"tagValue"`
-
-    /* 标签的处理方式，1 代表对于新增标签的时候，如果数据点存在该标签，跳过不处理，2、代表新增标签的时候，如果标签存在进行覆盖 (Optional) */
-    Operation int64 `json:"operation"`
 }

@@ -25,31 +25,31 @@ type ModifyForwardRuleRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 区域 Id  */
     RegionId string `json:"regionId"`
 
-    /* 实例id  */
-    InstanceId string `json:"instanceId"`
+    /* 高防实例 Id  */
+    InstanceId int `json:"instanceId"`
 
-    /* 转发规则id  */
-    ForwardRuleId string `json:"forwardRuleId"`
+    /* 转发规则 Id  */
+    ForwardRuleId int `json:"forwardRuleId"`
 
-    /* 非网站类规则参数  */
+    /* 更新非网站类规则请求参数  */
     ForwardRuleSpec *ipanti.ForwardRuleSpec `json:"forwardRuleSpec"`
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: 实例id (Required)
- * param forwardRuleId: 转发规则id (Required)
- * param forwardRuleSpec: 非网站类规则参数 (Required)
+ * param regionId: 区域 Id (Required)
+ * param instanceId: 高防实例 Id (Required)
+ * param forwardRuleId: 转发规则 Id (Required)
+ * param forwardRuleSpec: 更新非网站类规则请求参数 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewModifyForwardRuleRequest(
     regionId string,
-    instanceId string,
-    forwardRuleId string,
+    instanceId int,
+    forwardRuleId int,
     forwardRuleSpec *ipanti.ForwardRuleSpec,
 ) *ModifyForwardRuleRequest {
 
@@ -68,15 +68,15 @@ func NewModifyForwardRuleRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: 实例id (Required)
- * param forwardRuleId: 转发规则id (Required)
- * param forwardRuleSpec: 非网站类规则参数 (Required)
+ * param regionId: 区域 Id (Required)
+ * param instanceId: 高防实例 Id (Required)
+ * param forwardRuleId: 转发规则 Id (Required)
+ * param forwardRuleSpec: 更新非网站类规则请求参数 (Required)
  */
 func NewModifyForwardRuleRequestWithAllParams(
     regionId string,
-    instanceId string,
-    forwardRuleId string,
+    instanceId int,
+    forwardRuleId int,
     forwardRuleSpec *ipanti.ForwardRuleSpec,
 ) *ModifyForwardRuleRequest {
 
@@ -107,22 +107,22 @@ func NewModifyForwardRuleRequestWithoutParam() *ModifyForwardRuleRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 区域 Id(Required) */
 func (r *ModifyForwardRuleRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 实例id(Required) */
-func (r *ModifyForwardRuleRequest) SetInstanceId(instanceId string) {
+/* param instanceId: 高防实例 Id(Required) */
+func (r *ModifyForwardRuleRequest) SetInstanceId(instanceId int) {
     r.InstanceId = instanceId
 }
 
-/* param forwardRuleId: 转发规则id(Required) */
-func (r *ModifyForwardRuleRequest) SetForwardRuleId(forwardRuleId string) {
+/* param forwardRuleId: 转发规则 Id(Required) */
+func (r *ModifyForwardRuleRequest) SetForwardRuleId(forwardRuleId int) {
     r.ForwardRuleId = forwardRuleId
 }
 
-/* param forwardRuleSpec: 非网站类规则参数(Required) */
+/* param forwardRuleSpec: 更新非网站类规则请求参数(Required) */
 func (r *ModifyForwardRuleRequest) SetForwardRuleSpec(forwardRuleSpec *ipanti.ForwardRuleSpec) {
     r.ForwardRuleSpec = forwardRuleSpec
 }
@@ -140,4 +140,6 @@ type ModifyForwardRuleResponse struct {
 }
 
 type ModifyForwardRuleResult struct {
+    Code int `json:"code"`
+    Message string `json:"message"`
 }

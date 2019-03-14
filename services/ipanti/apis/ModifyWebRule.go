@@ -25,31 +25,31 @@ type ModifyWebRuleRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 区域 Id  */
     RegionId string `json:"regionId"`
 
-    /* 实例id  */
-    InstanceId string `json:"instanceId"`
+    /* 高防实例 Id  */
+    InstanceId int `json:"instanceId"`
 
-    /* 网站规则id  */
-    WebRuleId string `json:"webRuleId"`
+    /* 网站规则 Id  */
+    WebRuleId int `json:"webRuleId"`
 
-    /* 网站类规则参数  */
+    /* 更新网站类规则请求参数  */
     WebRuleSpec *ipanti.WebRuleSpec `json:"webRuleSpec"`
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: 实例id (Required)
- * param webRuleId: 网站规则id (Required)
- * param webRuleSpec: 网站类规则参数 (Required)
+ * param regionId: 区域 Id (Required)
+ * param instanceId: 高防实例 Id (Required)
+ * param webRuleId: 网站规则 Id (Required)
+ * param webRuleSpec: 更新网站类规则请求参数 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewModifyWebRuleRequest(
     regionId string,
-    instanceId string,
-    webRuleId string,
+    instanceId int,
+    webRuleId int,
     webRuleSpec *ipanti.WebRuleSpec,
 ) *ModifyWebRuleRequest {
 
@@ -68,15 +68,15 @@ func NewModifyWebRuleRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: 实例id (Required)
- * param webRuleId: 网站规则id (Required)
- * param webRuleSpec: 网站类规则参数 (Required)
+ * param regionId: 区域 Id (Required)
+ * param instanceId: 高防实例 Id (Required)
+ * param webRuleId: 网站规则 Id (Required)
+ * param webRuleSpec: 更新网站类规则请求参数 (Required)
  */
 func NewModifyWebRuleRequestWithAllParams(
     regionId string,
-    instanceId string,
-    webRuleId string,
+    instanceId int,
+    webRuleId int,
     webRuleSpec *ipanti.WebRuleSpec,
 ) *ModifyWebRuleRequest {
 
@@ -107,22 +107,22 @@ func NewModifyWebRuleRequestWithoutParam() *ModifyWebRuleRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 区域 Id(Required) */
 func (r *ModifyWebRuleRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 实例id(Required) */
-func (r *ModifyWebRuleRequest) SetInstanceId(instanceId string) {
+/* param instanceId: 高防实例 Id(Required) */
+func (r *ModifyWebRuleRequest) SetInstanceId(instanceId int) {
     r.InstanceId = instanceId
 }
 
-/* param webRuleId: 网站规则id(Required) */
-func (r *ModifyWebRuleRequest) SetWebRuleId(webRuleId string) {
+/* param webRuleId: 网站规则 Id(Required) */
+func (r *ModifyWebRuleRequest) SetWebRuleId(webRuleId int) {
     r.WebRuleId = webRuleId
 }
 
-/* param webRuleSpec: 网站类规则参数(Required) */
+/* param webRuleSpec: 更新网站类规则请求参数(Required) */
 func (r *ModifyWebRuleRequest) SetWebRuleSpec(webRuleSpec *ipanti.WebRuleSpec) {
     r.WebRuleSpec = webRuleSpec
 }
@@ -140,4 +140,6 @@ type ModifyWebRuleResponse struct {
 }
 
 type ModifyWebRuleResult struct {
+    Code int `json:"code"`
+    Message string `json:"message"`
 }

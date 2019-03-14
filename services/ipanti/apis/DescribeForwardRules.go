@@ -25,28 +25,34 @@ type DescribeForwardRulesRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 区域 Id  */
     RegionId string `json:"regionId"`
 
-    /* 实例id  */
-    InstanceId string `json:"instanceId"`
+    /* 高防实例 Id  */
+    InstanceId int `json:"instanceId"`
 
-    /* 页码；默认为1 (Optional) */
+    /* 页码, 默认为1 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* 分页大小；默认为20；取值范围[10, 100] (Optional) */
+    /* 分页大小, 默认为10, 取值范围[10, 100] (Optional) */
     PageSize *int `json:"pageSize"`
+
+    /* 查询类型名称, domain:源站域名, ip:源站 IP, port: 转发端口, originPort: 源站端口 (Optional) */
+    SearchType *string `json:"searchType"`
+
+    /* 查询类型值 (Optional) */
+    SearchValue *string `json:"searchValue"`
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: 实例id (Required)
+ * param regionId: 区域 Id (Required)
+ * param instanceId: 高防实例 Id (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeForwardRulesRequest(
     regionId string,
-    instanceId string,
+    instanceId int,
 ) *DescribeForwardRulesRequest {
 
 	return &DescribeForwardRulesRequest{
@@ -62,16 +68,20 @@ func NewDescribeForwardRulesRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
- * param instanceId: 实例id (Required)
- * param pageNumber: 页码；默认为1 (Optional)
- * param pageSize: 分页大小；默认为20；取值范围[10, 100] (Optional)
+ * param regionId: 区域 Id (Required)
+ * param instanceId: 高防实例 Id (Required)
+ * param pageNumber: 页码, 默认为1 (Optional)
+ * param pageSize: 分页大小, 默认为10, 取值范围[10, 100] (Optional)
+ * param searchType: 查询类型名称, domain:源站域名, ip:源站 IP, port: 转发端口, originPort: 源站端口 (Optional)
+ * param searchValue: 查询类型值 (Optional)
  */
 func NewDescribeForwardRulesRequestWithAllParams(
     regionId string,
-    instanceId string,
+    instanceId int,
     pageNumber *int,
     pageSize *int,
+    searchType *string,
+    searchValue *string,
 ) *DescribeForwardRulesRequest {
 
     return &DescribeForwardRulesRequest{
@@ -85,6 +95,8 @@ func NewDescribeForwardRulesRequestWithAllParams(
         InstanceId: instanceId,
         PageNumber: pageNumber,
         PageSize: pageSize,
+        SearchType: searchType,
+        SearchValue: searchValue,
     }
 }
 
@@ -101,24 +113,34 @@ func NewDescribeForwardRulesRequestWithoutParam() *DescribeForwardRulesRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 区域 Id(Required) */
 func (r *DescribeForwardRulesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 实例id(Required) */
-func (r *DescribeForwardRulesRequest) SetInstanceId(instanceId string) {
+/* param instanceId: 高防实例 Id(Required) */
+func (r *DescribeForwardRulesRequest) SetInstanceId(instanceId int) {
     r.InstanceId = instanceId
 }
 
-/* param pageNumber: 页码；默认为1(Optional) */
+/* param pageNumber: 页码, 默认为1(Optional) */
 func (r *DescribeForwardRulesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
-/* param pageSize: 分页大小；默认为20；取值范围[10, 100](Optional) */
+/* param pageSize: 分页大小, 默认为10, 取值范围[10, 100](Optional) */
 func (r *DescribeForwardRulesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
+}
+
+/* param searchType: 查询类型名称, domain:源站域名, ip:源站 IP, port: 转发端口, originPort: 源站端口(Optional) */
+func (r *DescribeForwardRulesRequest) SetSearchType(searchType string) {
+    r.SearchType = &searchType
+}
+
+/* param searchValue: 查询类型值(Optional) */
+func (r *DescribeForwardRulesRequest) SetSearchValue(searchValue string) {
+    r.SearchValue = &searchValue
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
@@ -135,5 +157,7 @@ type DescribeForwardRulesResponse struct {
 
 type DescribeForwardRulesResult struct {
     DataList []ipanti.ForwardRule `json:"dataList"`
+    CurrentCount int `json:"currentCount"`
     TotalCount int `json:"totalCount"`
+    TotalPage int `json:"totalPage"`
 }
