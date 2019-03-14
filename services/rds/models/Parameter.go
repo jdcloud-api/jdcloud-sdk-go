@@ -19,9 +19,9 @@ package models
 
 type Parameter struct {
 
-    /* 参数名称,目前支持以下参数:max_worker_threads,max_degree_of_parallelism,max_server_memory_(MB) (Optional) */
-    Name *string `json:"name"`
+    /* 参数名称  */
+    Name string `json:"name"`
 
-    /* 参数修改值 (Optional) */
-    Value *string `json:"value"`
+    /* 参数修改值  */
+    Value string `json:"value"`
 }

@@ -30,14 +30,24 @@ type DeleteLiveStreamAppSnapshotRequest struct {
     /* 直播流所属应用名称  */
     AppName string `json:"appName"`
 
-    /* 录制模板自定义名称  */
+    /* 截图模板自定义名称:
+  - 标准质量模板：sd、hd、hsd
+  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
+              取值要求：数字、大小写字母或短横线("-"),
+              首尾不能有特殊字符("-")
+  - <b>注意: 不能与标准的转码模板和已定义命名重复</b>  */
     Template string `json:"template"`
 }
 
 /*
  * param publishDomain: 推流加速域名 (Required)
  * param appName: 直播流所属应用名称 (Required)
- * param template: 录制模板自定义名称 (Required)
+ * param template: 截图模板自定义名称:
+  - 标准质量模板：sd、hd、hsd
+  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
+              取值要求：数字、大小写字母或短横线("-"),
+              首尾不能有特殊字符("-")
+  - <b>注意: 不能与标准的转码模板和已定义命名重复</b> (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -63,7 +73,12 @@ func NewDeleteLiveStreamAppSnapshotRequest(
 /*
  * param publishDomain: 推流加速域名 (Required)
  * param appName: 直播流所属应用名称 (Required)
- * param template: 录制模板自定义名称 (Required)
+ * param template: 截图模板自定义名称:
+  - 标准质量模板：sd、hd、hsd
+  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
+              取值要求：数字、大小写字母或短横线("-"),
+              首尾不能有特殊字符("-")
+  - <b>注意: 不能与标准的转码模板和已定义命名重复</b> (Required)
  */
 func NewDeleteLiveStreamAppSnapshotRequestWithAllParams(
     publishDomain string,
@@ -107,7 +122,12 @@ func (r *DeleteLiveStreamAppSnapshotRequest) SetAppName(appName string) {
     r.AppName = appName
 }
 
-/* param template: 录制模板自定义名称(Required) */
+/* param template: 截图模板自定义名称:
+  - 标准质量模板：sd、hd、hsd
+  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
+              取值要求：数字、大小写字母或短横线("-"),
+              首尾不能有特殊字符("-")
+  - <b>注意: 不能与标准的转码模板和已定义命名重复</b>(Required) */
 func (r *DeleteLiveStreamAppSnapshotRequest) SetTemplate(template string) {
     r.Template = template
 }

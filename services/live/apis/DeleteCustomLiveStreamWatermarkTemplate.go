@@ -24,12 +24,22 @@ type DeleteCustomLiveStreamWatermarkTemplateRequest struct {
 
     core.JDCloudRequest
 
-    /* 转码模版  */
+    /* 水印模板自定义名称:
+  - 标准质量模板：sd、hd、hsd
+  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
+              取值要求：数字、大小写字母或短横线("-"),
+              首尾不能有特殊字符("-")
+  - <b>注意: 不能与标准的转码模板和已定义命名重复</b>  */
     Template string `json:"template"`
 }
 
 /*
- * param template: 转码模版 (Required)
+ * param template: 水印模板自定义名称:
+  - 标准质量模板：sd、hd、hsd
+  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
+              取值要求：数字、大小写字母或短横线("-"),
+              首尾不能有特殊字符("-")
+  - <b>注意: 不能与标准的转码模板和已定义命名重复</b> (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -49,7 +59,12 @@ func NewDeleteCustomLiveStreamWatermarkTemplateRequest(
 }
 
 /*
- * param template: 转码模版 (Required)
+ * param template: 水印模板自定义名称:
+  - 标准质量模板：sd、hd、hsd
+  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
+              取值要求：数字、大小写字母或短横线("-"),
+              首尾不能有特殊字符("-")
+  - <b>注意: 不能与标准的转码模板和已定义命名重复</b> (Required)
  */
 func NewDeleteCustomLiveStreamWatermarkTemplateRequestWithAllParams(
     template string,
@@ -79,7 +94,12 @@ func NewDeleteCustomLiveStreamWatermarkTemplateRequestWithoutParam() *DeleteCust
     }
 }
 
-/* param template: 转码模版(Required) */
+/* param template: 水印模板自定义名称:
+  - 标准质量模板：sd、hd、hsd
+  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
+              取值要求：数字、大小写字母或短横线("-"),
+              首尾不能有特殊字符("-")
+  - <b>注意: 不能与标准的转码模板和已定义命名重复</b>(Required) */
 func (r *DeleteCustomLiveStreamWatermarkTemplateRequest) SetTemplate(template string) {
     r.Template = template
 }

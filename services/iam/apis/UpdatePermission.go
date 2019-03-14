@@ -36,9 +36,11 @@ type UpdatePermissionRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param permissionId: 权限id 
- * param updatePermissionInfo: 权限信息 
+ * param regionId: Region ID (Required)
+ * param permissionId: 权限id (Required)
+ * param updatePermissionInfo: 权限信息 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewUpdatePermissionRequest(
     regionId string,
@@ -59,14 +61,54 @@ func NewUpdatePermissionRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param permissionId: 权限id (Required)
+ * param updatePermissionInfo: 权限信息 (Required)
+ */
+func NewUpdatePermissionRequestWithAllParams(
+    regionId string,
+    permissionId int,
+    updatePermissionInfo *iam.UpdatePermissionInfo,
+) *UpdatePermissionRequest {
+
+    return &UpdatePermissionRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/permission/{permissionId}",
+            Method:  "PUT",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        PermissionId: permissionId,
+        UpdatePermissionInfo: updatePermissionInfo,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewUpdatePermissionRequestWithoutParam() *UpdatePermissionRequest {
+
+    return &UpdatePermissionRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/permission/{permissionId}",
+            Method:  "PUT",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *UpdatePermissionRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param permissionId: 权限id(Required) */
 func (r *UpdatePermissionRequest) SetPermissionId(permissionId int) {
     r.PermissionId = permissionId
 }
 
+/* param updatePermissionInfo: 权限信息(Required) */
 func (r *UpdatePermissionRequest) SetUpdatePermissionInfo(updatePermissionInfo *iam.UpdatePermissionInfo) {
     r.UpdatePermissionInfo = updatePermissionInfo
 }

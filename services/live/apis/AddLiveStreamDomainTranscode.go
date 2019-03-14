@@ -27,13 +27,25 @@ type AddLiveStreamDomainTranscodeRequest struct {
     /* 直播的推流域名  */
     PublishDomain string `json:"publishDomain"`
 
-    /* 转码模版  */
+    /* 转码模版:
+  - 标准质量模板：sd、hd、hsd
+  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
+              取值要求：数字、大小写字母或短横线("-"),
+              首尾不能有特殊字符("-")
+  - 注意: 不能与标准的转码模板和已定义命名重复
+  */
     Template string `json:"template"`
 }
 
 /*
  * param publishDomain: 直播的推流域名 (Required)
- * param template: 转码模版 (Required)
+ * param template: 转码模版:
+  - 标准质量模板：sd、hd、hsd
+  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
+              取值要求：数字、大小写字母或短横线("-"),
+              首尾不能有特殊字符("-")
+  - 注意: 不能与标准的转码模板和已定义命名重复
+ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -56,7 +68,13 @@ func NewAddLiveStreamDomainTranscodeRequest(
 
 /*
  * param publishDomain: 直播的推流域名 (Required)
- * param template: 转码模版 (Required)
+ * param template: 转码模版:
+  - 标准质量模板：sd、hd、hsd
+  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
+              取值要求：数字、大小写字母或短横线("-"),
+              首尾不能有特殊字符("-")
+  - 注意: 不能与标准的转码模板和已定义命名重复
+ (Required)
  */
 func NewAddLiveStreamDomainTranscodeRequestWithAllParams(
     publishDomain string,
@@ -93,7 +111,13 @@ func (r *AddLiveStreamDomainTranscodeRequest) SetPublishDomain(publishDomain str
     r.PublishDomain = publishDomain
 }
 
-/* param template: 转码模版(Required) */
+/* param template: 转码模版:
+  - 标准质量模板：sd、hd、hsd
+  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
+              取值要求：数字、大小写字母或短横线("-"),
+              首尾不能有特殊字符("-")
+  - 注意: 不能与标准的转码模板和已定义命名重复
+(Required) */
 func (r *AddLiveStreamDomainTranscodeRequest) SetTemplate(template string) {
     r.Template = template
 }

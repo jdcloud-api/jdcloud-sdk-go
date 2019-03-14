@@ -19,10 +19,13 @@ package models
 
 type App struct {
 
-    /* 应用名 (Optional) */
+    /* 应用名称 (Optional) */
     AppName string `json:"appName"`
 
-    /* 应用状态 (Optional) */
+    /* 应用状态：
+ - online    开启
+ - offline   关闭
+ (Optional) */
     AppStatus string `json:"appStatus"`
 
     /* 创建时间 (Optional) */

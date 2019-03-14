@@ -33,8 +33,10 @@ type DescribePermissionDetailRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param permissionId: 权限id 
+ * param regionId: Region ID (Required)
+ * param permissionId: 权限id (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribePermissionDetailRequest(
     regionId string,
@@ -53,10 +55,46 @@ func NewDescribePermissionDetailRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param permissionId: 权限id (Required)
+ */
+func NewDescribePermissionDetailRequestWithAllParams(
+    regionId string,
+    permissionId int,
+) *DescribePermissionDetailRequest {
+
+    return &DescribePermissionDetailRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/permission/{permissionId}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        PermissionId: permissionId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribePermissionDetailRequestWithoutParam() *DescribePermissionDetailRequest {
+
+    return &DescribePermissionDetailRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/permission/{permissionId}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DescribePermissionDetailRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param permissionId: 权限id(Required) */
 func (r *DescribePermissionDetailRequest) SetPermissionId(permissionId int) {
     r.PermissionId = permissionId
 }

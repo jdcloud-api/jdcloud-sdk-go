@@ -20,14 +20,14 @@ package models
 type Formula struct {
 
     /* 计费项别名 (Optional) */
-    Key *string `json:"key"`
+    Key string `json:"key"`
 
     /* 用量 (Optional) */
-    Value *float64 `json:"value"`
+    Value float64 `json:"value"`
 
     /* 单位 (Optional) */
-    Unit *string `json:"unit"`
+    Unit string `json:"unit"`
 
     /* 计费项数量 (Optional) */
-    Number *float64 `json:"number"`
+    Number float64 `json:"number"`
 }

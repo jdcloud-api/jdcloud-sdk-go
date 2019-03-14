@@ -35,9 +35,11 @@ type RemovePermissionOfSubUserRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param permissionId: 权限id 
- * param subUser: 子用户用户名 
+ * param regionId: Region ID (Required)
+ * param permissionId: 权限id (Required)
+ * param subUser: 子用户用户名 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewRemovePermissionOfSubUserRequest(
     regionId string,
@@ -58,14 +60,54 @@ func NewRemovePermissionOfSubUserRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param permissionId: 权限id (Required)
+ * param subUser: 子用户用户名 (Required)
+ */
+func NewRemovePermissionOfSubUserRequestWithAllParams(
+    regionId string,
+    permissionId int,
+    subUser string,
+) *RemovePermissionOfSubUserRequest {
+
+    return &RemovePermissionOfSubUserRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/subUser/{subUser}/permissions/{permissionId}",
+            Method:  "DELETE",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        PermissionId: permissionId,
+        SubUser: subUser,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewRemovePermissionOfSubUserRequestWithoutParam() *RemovePermissionOfSubUserRequest {
+
+    return &RemovePermissionOfSubUserRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/subUser/{subUser}/permissions/{permissionId}",
+            Method:  "DELETE",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *RemovePermissionOfSubUserRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param permissionId: 权限id(Required) */
 func (r *RemovePermissionOfSubUserRequest) SetPermissionId(permissionId int) {
     r.PermissionId = permissionId
 }
 
+/* param subUser: 子用户用户名(Required) */
 func (r *RemovePermissionOfSubUserRequest) SetSubUser(subUser string) {
     r.SubUser = subUser
 }

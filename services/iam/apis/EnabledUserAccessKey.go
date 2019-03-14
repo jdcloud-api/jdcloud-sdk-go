@@ -32,8 +32,10 @@ type EnabledUserAccessKeyRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param accessKey: accessKey 
+ * param regionId: Region ID (Required)
+ * param accessKey: accessKey (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewEnabledUserAccessKeyRequest(
     regionId string,
@@ -52,10 +54,46 @@ func NewEnabledUserAccessKeyRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param accessKey: accessKey (Required)
+ */
+func NewEnabledUserAccessKeyRequestWithAllParams(
+    regionId string,
+    accessKey string,
+) *EnabledUserAccessKeyRequest {
+
+    return &EnabledUserAccessKeyRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/userAccessKey/{accessKey}:enabled",
+            Method:  "PUT",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        AccessKey: accessKey,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewEnabledUserAccessKeyRequestWithoutParam() *EnabledUserAccessKeyRequest {
+
+    return &EnabledUserAccessKeyRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/userAccessKey/{accessKey}:enabled",
+            Method:  "PUT",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *EnabledUserAccessKeyRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param accessKey: accessKey(Required) */
 func (r *EnabledUserAccessKeyRequest) SetAccessKey(accessKey string) {
     r.AccessKey = accessKey
 }

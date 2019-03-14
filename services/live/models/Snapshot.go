@@ -31,10 +31,18 @@ type Snapshot struct {
     /* 截图时间 (Optional) */
     SnapshotTime string `json:"snapshotTime"`
 
-    /* 图片高 (Optional) */
+    /* 截图高度:
+  - 取值: [8,8192]
+  - 等比: 如果只填写一个参数,则按参数比例等比缩放截图
+  - 随源: 如果两个参数都不填写，则截取源流大小原图
+ (Optional) */
     Height int `json:"height"`
 
-    /* 图片宽 (Optional) */
+    /* 截图宽度:
+  - 取值: [8,8192]
+  - 等比: 如果只填写一个参数,则按参数比例等比缩放截图
+  - 随源: 如果两个参数都不填写，则截取源流大小原图
+ (Optional) */
     Width int `json:"width"`
 
     /* OSSBucket的名称 (Optional) */

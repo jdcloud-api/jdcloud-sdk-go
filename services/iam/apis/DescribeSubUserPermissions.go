@@ -39,10 +39,12 @@ type DescribeSubUserPermissionsRequest struct {
 }
 
 /*
- * param regionId: Region ID 
- * param subUser: 子用户用户名 
- * param pageNumber: 页码 
- * param pageSize: 每页显示数目 
+ * param regionId: Region ID (Required)
+ * param subUser: 子用户用户名 (Required)
+ * param pageNumber: 页码 (Required)
+ * param pageSize: 每页显示数目 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeSubUserPermissionsRequest(
     regionId string,
@@ -65,18 +67,62 @@ func NewDescribeSubUserPermissionsRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID (Required)
+ * param subUser: 子用户用户名 (Required)
+ * param pageNumber: 页码 (Required)
+ * param pageSize: 每页显示数目 (Required)
+ */
+func NewDescribeSubUserPermissionsRequestWithAllParams(
+    regionId string,
+    subUser string,
+    pageNumber int,
+    pageSize int,
+) *DescribeSubUserPermissionsRequest {
+
+    return &DescribeSubUserPermissionsRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/subUser/{subUser}/permisssions",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        SubUser: subUser,
+        PageNumber: pageNumber,
+        PageSize: pageSize,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDescribeSubUserPermissionsRequestWithoutParam() *DescribeSubUserPermissionsRequest {
+
+    return &DescribeSubUserPermissionsRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/subUser/{subUser}/permisssions",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID(Required) */
 func (r *DescribeSubUserPermissionsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param subUser: 子用户用户名(Required) */
 func (r *DescribeSubUserPermissionsRequest) SetSubUser(subUser string) {
     r.SubUser = subUser
 }
 
+/* param pageNumber: 页码(Required) */
 func (r *DescribeSubUserPermissionsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = pageNumber
 }
 
+/* param pageSize: 每页显示数目(Required) */
 func (r *DescribeSubUserPermissionsRequest) SetPageSize(pageSize int) {
     r.PageSize = pageSize
 }

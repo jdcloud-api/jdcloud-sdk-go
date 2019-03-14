@@ -27,7 +27,13 @@ type AddLiveStreamAppTranscodeRequest struct {
     /* 直播的推流域名  */
     PublishDomain string `json:"publishDomain"`
 
-    /* 转码模版  */
+    /* 转码模版:
+  - 标准质量模板：sd、hd、hsd
+  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
+              取值要求：数字、大小写字母或短横线("-"),
+              首尾不能有特殊字符("-")
+  - <b>注意: 不能与标准的转码模板和已定义命名重复</b>
+  */
     Template string `json:"template"`
 
     /* 直播流所属应用名称  */
@@ -36,7 +42,13 @@ type AddLiveStreamAppTranscodeRequest struct {
 
 /*
  * param publishDomain: 直播的推流域名 (Required)
- * param template: 转码模版 (Required)
+ * param template: 转码模版:
+  - 标准质量模板：sd、hd、hsd
+  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
+              取值要求：数字、大小写字母或短横线("-"),
+              首尾不能有特殊字符("-")
+  - <b>注意: 不能与标准的转码模板和已定义命名重复</b>
+ (Required)
  * param appName: 直播流所属应用名称 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -62,7 +74,13 @@ func NewAddLiveStreamAppTranscodeRequest(
 
 /*
  * param publishDomain: 直播的推流域名 (Required)
- * param template: 转码模版 (Required)
+ * param template: 转码模版:
+  - 标准质量模板：sd、hd、hsd
+  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
+              取值要求：数字、大小写字母或短横线("-"),
+              首尾不能有特殊字符("-")
+  - <b>注意: 不能与标准的转码模板和已定义命名重复</b>
+ (Required)
  * param appName: 直播流所属应用名称 (Required)
  */
 func NewAddLiveStreamAppTranscodeRequestWithAllParams(
@@ -102,7 +120,13 @@ func (r *AddLiveStreamAppTranscodeRequest) SetPublishDomain(publishDomain string
     r.PublishDomain = publishDomain
 }
 
-/* param template: 转码模版(Required) */
+/* param template: 转码模版:
+  - 标准质量模板：sd、hd、hsd
+  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
+              取值要求：数字、大小写字母或短横线("-"),
+              首尾不能有特殊字符("-")
+  - <b>注意: 不能与标准的转码模板和已定义命名重复</b>
+(Required) */
 func (r *AddLiveStreamAppTranscodeRequest) SetTemplate(template string) {
     r.Template = template
 }

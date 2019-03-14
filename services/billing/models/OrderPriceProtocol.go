@@ -20,50 +20,50 @@ package models
 type OrderPriceProtocol struct {
 
     /* 资源id (Optional) */
-    ResourceId *string `json:"resourceId"`
+    ResourceId string `json:"resourceId"`
 
     /* 业务线 (Optional) */
-    AppCode *string `json:"appCode"`
+    AppCode string `json:"appCode"`
 
     /* 产品线 (Optional) */
-    ServiceCode *string `json:"serviceCode"`
+    ServiceCode string `json:"serviceCode"`
 
     /* 站点信息 0：主站  其他：专有云 (Optional) */
-    Site *int `json:"site"`
+    Site int `json:"site"`
 
     /* 地域 (Optional) */
-    Region *string `json:"region"`
+    Region string `json:"region"`
 
     /* 计费类型 1:按配置 2:按用量 3:包年包月 (Optional) */
-    BillingType *int `json:"billingType"`
+    BillingType int `json:"billingType"`
 
     /* 时长 (Optional) */
-    TimeSpan *int `json:"timeSpan"`
+    TimeSpan int `json:"timeSpan"`
 
     /* 时长类型 0:无(非包年包月) 1:小时 2:天 3:月 4:年 (Optional) */
-    TimeUnit *int `json:"timeUnit"`
+    TimeUnit int `json:"timeUnit"`
 
     /* 网络类型 0:non 1:非BGP  2:BGP (Optional) */
-    NetworkOperator *int `json:"networkOperator"`
+    NetworkOperator int `json:"networkOperator"`
 
     /* 计算公式（配置细项） (Optional) */
     Formula []Formula `json:"formula"`
 
     /* 配置细项 (Optional) */
-    FormulaStr *string `json:"formulaStr"`
+    FormulaStr string `json:"formulaStr"`
 
     /* 用户pin (Optional) */
-    Pin *string `json:"pin"`
+    Pin string `json:"pin"`
 
     /* 具体商品数量，默认为1 (Optional) */
-    Count *int `json:"count"`
+    Count int `json:"count"`
 
     /* 订单开始时间 (Optional) */
-    StartTime *string `json:"startTime"`
+    StartTime string `json:"startTime"`
 
     /* 自然单列表 (Optional) */
-    TaskId *string `json:"taskId"`
+    TaskId string `json:"taskId"`
 
     /* 交易单模块sourceId (Optional) */
-    SourceId *string `json:"sourceId"`
+    SourceId string `json:"sourceId"`
 }

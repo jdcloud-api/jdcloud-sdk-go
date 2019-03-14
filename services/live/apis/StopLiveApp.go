@@ -27,13 +27,13 @@ type StopLiveAppRequest struct {
     /* 直播的推流域名  */
     PublishDomain string `json:"publishDomain"`
 
-    /* appName  */
+    /* 应用名称  */
     AppName string `json:"appName"`
 }
 
 /*
  * param publishDomain: 直播的推流域名 (Required)
- * param appName: appName (Required)
+ * param appName: 应用名称 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -56,7 +56,7 @@ func NewStopLiveAppRequest(
 
 /*
  * param publishDomain: 直播的推流域名 (Required)
- * param appName: appName (Required)
+ * param appName: 应用名称 (Required)
  */
 func NewStopLiveAppRequestWithAllParams(
     publishDomain string,
@@ -93,7 +93,7 @@ func (r *StopLiveAppRequest) SetPublishDomain(publishDomain string) {
     r.PublishDomain = publishDomain
 }
 
-/* param appName: appName(Required) */
+/* param appName: 应用名称(Required) */
 func (r *StopLiveAppRequest) SetAppName(appName string) {
     r.AppName = appName
 }

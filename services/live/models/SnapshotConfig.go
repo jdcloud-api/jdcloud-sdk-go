@@ -22,7 +22,7 @@ type SnapshotConfig struct {
     /* 推流域名 (Optional) */
     PublishDomain string `json:"publishDomain"`
 
-    /* APP名称 (Optional) */
+    /* 应用名称 (Optional) */
     AppName string `json:"appName"`
 
     /* 流名称 (Optional) */

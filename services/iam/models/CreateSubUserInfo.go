@@ -19,24 +19,30 @@ package models
 
 type CreateSubUserInfo struct {
 
-    /* 子账号用户名，4~20位数字、字母、中文、下划线、中划线  */
+    /* 子用户名：支持4-20位的字母，数字以及-和_，以字母开头  */
     Name string `json:"name"`
 
     /* 描述，0~256个字符 (Optional) */
     Description *string `json:"description"`
 
-    /* 密码，6~20位，至少包含一个字母，至少包含一个数字或半角符号  */
+    /* 按照密码策略设置，默认8~20位，至少包含一个小写字母、大写字母和数字  */
     Password string `json:"password"`
 
-    /* 手机号码，区号-手机号，目前只支持0086-中国手机号码  */
+    /* 手机号码，区号-手机号  */
     Phone string `json:"phone"`
 
     /* 邮箱  */
     Email string `json:"email"`
 
-    /* 确认密码  */
-    PasswordConfirm string `json:"passwordConfirm"`
+    /* 是否创建accessKey，默认false (Optional) */
+    CreateAk *bool `json:"createAk"`
 
-    /* 是否创建accessKey  */
-    CreateAk bool `json:"createAk"`
+    /* 子用户首次登录是否需要重置密码，默认false (Optional) */
+    NeedResetPassword *bool `json:"needResetPassword"`
+
+    /* 子用户是否支持控制台登录，默认true (Optional) */
+    ConsoleLogin *bool `json:"consoleLogin"`
+
+    /* 是否自动生成密码，默认false (Optional) */
+    AutoGeneratePassword *bool `json:"autoGeneratePassword"`
 }
