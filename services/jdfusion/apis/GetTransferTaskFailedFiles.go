@@ -112,5 +112,5 @@ type GetTransferTaskFailedFilesResponse struct {
 }
 
 type GetTransferTaskFailedFilesResult struct {
-    Bucket jdfusion.TransferTaskFailedDetailInfo `json:"bucket"`
+    Task jdfusion.TransferTaskFailedDetailInfo `json:"task"`
 }

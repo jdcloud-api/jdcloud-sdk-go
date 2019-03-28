@@ -40,7 +40,7 @@ func NewLiveClient(credential *core.Credential) *LiveClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "live",
-            Revision:    "1.0.2",
+            Revision:    "1.0.3",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -53,7 +53,11 @@ func (c *LiveClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-/* 查询直播截图配置 */
+/* 查询直播截图配置
+- 截图模板配置按照 域名,应用,流 3级配置添加,以最小的粒度配置生效
+- 域名、应用、流 依次粒度递减 即: 域名>应用>流
+- 该查询旨在查询域名、应用、流最终生效的截图模板配置,并非各级的模板绑定情况
+ */
 func (c *LiveClient) DescribeCustomLiveStreamSnapshotConfig(request *live.DescribeCustomLiveStreamSnapshotConfigRequest) (*live.DescribeCustomLiveStreamSnapshotConfigResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -73,7 +77,14 @@ func (c *LiveClient) DescribeCustomLiveStreamSnapshotConfig(request *live.Descri
     return jdResp, err
 }
 
-/* 查询用户自定义转码模板详情 */
+/* 查询用户自定义转码模板详情
+- 查询用户自定义转码模板详情
+- 系统标准转码模板
+    ld (h.264/640*360/15f)
+    sd (h.264/854*480/24f)
+    hd (h.264/1280*720/25f)
+    shd (h.264/1920*1080/30f)
+ */
 func (c *LiveClient) DescribeCustomLiveStreamTranscodeTemplate(request *live.DescribeCustomLiveStreamTranscodeTemplateRequest) (*live.DescribeCustomLiveStreamTranscodeTemplateResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -93,7 +104,9 @@ func (c *LiveClient) DescribeCustomLiveStreamTranscodeTemplate(request *live.Des
     return jdResp, err
 }
 
-/* 添加APP直播截图配置 */
+/* 添加应用截图配置
+- 添加应用级别的截图模板配置
+ */
 func (c *LiveClient) AddLiveStreamAppSnapshot(request *live.AddLiveStreamAppSnapshotRequest) (*live.AddLiveStreamAppSnapshotResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -133,7 +146,7 @@ func (c *LiveClient) CloseLiveTimeshift(request *live.CloseLiveTimeshiftRequest)
     return jdResp, err
 }
 
-/* 删除直播流状态通知 */
+/* 删除直播流状态回调地址 */
 func (c *LiveClient) DeleteLiveStreamNotifyConfig(request *live.DeleteLiveStreamNotifyConfigRequest) (*live.DeleteLiveStreamNotifyConfigResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -153,8 +166,8 @@ func (c *LiveClient) DeleteLiveStreamNotifyConfig(request *live.DeleteLiveStream
     return jdResp, err
 }
 
-/* 添加录制打点任务
-  - 您可以调用此接口精确提取已录制的文件中所需要的部分
+/* 添加打点录制任务
+- 您可以调用此接口精确提取已录制的文件中所需要的部分
  */
 func (c *LiveClient) AddLiveRecordTask(request *live.AddLiveRecordTaskRequest) (*live.AddLiveRecordTaskResponse, error) {
     if request == nil {
@@ -175,7 +188,8 @@ func (c *LiveClient) AddLiveRecordTask(request *live.AddLiveRecordTaskRequest) (
     return jdResp, err
 }
 
-/* 添加域名水印配置 */
+/* 添加域名水印配置
+ */
 func (c *LiveClient) AddLiveStreamDomainWatermark(request *live.AddLiveStreamDomainWatermarkRequest) (*live.AddLiveStreamDomainWatermarkResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -195,7 +209,9 @@ func (c *LiveClient) AddLiveStreamDomainWatermark(request *live.AddLiveStreamDom
     return jdResp, err
 }
 
-/* 删除域名截图配置 */
+/* 删除域名截图配置
+- 删除域名级别的截图模板配置,重新推流后生效
+ */
 func (c *LiveClient) DeleteLiveStreamDomainSnapshot(request *live.DeleteLiveStreamDomainSnapshotRequest) (*live.DeleteLiveStreamDomainSnapshotResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -215,7 +231,8 @@ func (c *LiveClient) DeleteLiveStreamDomainSnapshot(request *live.DeleteLiveStre
     return jdResp, err
 }
 
-/* 查询录制模板列表 */
+/* 查询用户自定义直播录制模板列表
+ */
 func (c *LiveClient) DescribeCustomLiveStreamRecordTemplates(request *live.DescribeCustomLiveStreamRecordTemplatesRequest) (*live.DescribeCustomLiveStreamRecordTemplatesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -235,7 +252,11 @@ func (c *LiveClient) DescribeCustomLiveStreamRecordTemplates(request *live.Descr
     return jdResp, err
 }
 
-/* 查询录制配置 */
+/* 查询直播直播录制配置
+- 录制模板配置按照 域名,应用,流 3级配置添加,以最小的粒度配置生效
+- 域名、应用、流 依次粒度递减 即: 域名>应用>流
+- 该查询旨在查询域名、应用、流最终生效的录制模板配置,并非各级的模板绑定情况
+ */
 func (c *LiveClient) DescribeCustomLiveStreamRecordConfig(request *live.DescribeCustomLiveStreamRecordConfigRequest) (*live.DescribeCustomLiveStreamRecordConfigResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -315,7 +336,10 @@ func (c *LiveClient) DescribeLiveDomainDetail(request *live.DescribeLiveDomainDe
     return jdResp, err
 }
 
-/* 添加直播APP */
+/* 添加直播应用名
+- 需要提前在应用(app)级别绑定功能模板时才需要提前新建应用名
+- 新的应用名可以推流时自动创建
+ */
 func (c *LiveClient) AddLiveApp(request *live.AddLiveAppRequest) (*live.AddLiveAppResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -335,7 +359,9 @@ func (c *LiveClient) AddLiveApp(request *live.AddLiveAppRequest) (*live.AddLiveA
     return jdResp, err
 }
 
-/* 删除用户自定义直播截图模板 */
+/* 删除用户自定义直播截图模板
+- 删除截图模板前,请先删除此模板相关的截图配置,否则将会影响线上业务
+ */
 func (c *LiveClient) DeleteCustomLiveStreamSnapshotTemplate(request *live.DeleteCustomLiveStreamSnapshotTemplateRequest) (*live.DeleteCustomLiveStreamSnapshotTemplateResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -355,7 +381,9 @@ func (c *LiveClient) DeleteCustomLiveStreamSnapshotTemplate(request *live.Delete
     return jdResp, err
 }
 
-/* 删除APP水印配置 */
+/* 删除应用级别水印模板配置
+- 删除应用级别的水印模板配置,重新推流后生效
+ */
 func (c *LiveClient) DeleteLiveStreamAppWatermark(request *live.DeleteLiveStreamAppWatermarkRequest) (*live.DeleteLiveStreamAppWatermarkResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -375,7 +403,8 @@ func (c *LiveClient) DeleteLiveStreamAppWatermark(request *live.DeleteLiveStream
     return jdResp, err
 }
 
-/* 添加直播水印模板 */
+/* 添加用户自定义水印模板
+ */
 func (c *LiveClient) AddCustomLiveStreamWatermarkTemplate(request *live.AddCustomLiveStreamWatermarkTemplateRequest) (*live.AddCustomLiveStreamWatermarkTemplateResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -395,7 +424,9 @@ func (c *LiveClient) AddCustomLiveStreamWatermarkTemplate(request *live.AddCusto
     return jdResp, err
 }
 
-/* 删除用户自定义水印模板 */
+/* 删除用户自定义水印模板
+- 删除用户自定义水印模板之前必须先删除此模板在各域名、应用、流级别的水印设置
+ */
 func (c *LiveClient) DeleteCustomLiveStreamWatermarkTemplate(request *live.DeleteCustomLiveStreamWatermarkTemplateRequest) (*live.DeleteCustomLiveStreamWatermarkTemplateResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -415,7 +446,9 @@ func (c *LiveClient) DeleteCustomLiveStreamWatermarkTemplate(request *live.Delet
     return jdResp, err
 }
 
-/* 删除域名水印配置 */
+/* 删除域名级别水印模板配置
+- 删除域名级别水印模板配置,重新推流后生效
+ */
 func (c *LiveClient) DeleteLiveStreamDomainWatermark(request *live.DeleteLiveStreamDomainWatermarkRequest) (*live.DeleteLiveStreamDomainWatermarkResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -435,7 +468,9 @@ func (c *LiveClient) DeleteLiveStreamDomainWatermark(request *live.DeleteLiveStr
     return jdResp, err
 }
 
-/* 删除APP录制配置 */
+/* 删除应用级别录制模板配置
+- 删除应用级别的录制模板配置,重新推流后生效
+ */
 func (c *LiveClient) DeleteLiveStreamAppRecord(request *live.DeleteLiveStreamAppRecordRequest) (*live.DeleteLiveStreamAppRecordResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -455,7 +490,9 @@ func (c *LiveClient) DeleteLiveStreamAppRecord(request *live.DeleteLiveStreamApp
     return jdResp, err
 }
 
-/* 删除用户自定义录制模板 */
+/* 删除用户自定义录制模板
+- 删除用户自定义录制模板之前必须先删除此模板在各域名、应用、流级别的录制设置
+ */
 func (c *LiveClient) DeleteCustomLiveStreamRecordTemplate(request *live.DeleteCustomLiveStreamRecordTemplateRequest) (*live.DeleteCustomLiveStreamRecordTemplateResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -495,7 +532,9 @@ func (c *LiveClient) DescribeLiveSnapshotData(request *live.DescribeLiveSnapshot
     return jdResp, err
 }
 
-/* 删除域名转码配置 */
+/* 删除域名级别转码模板配置
+- 删除域名级别转码模板配置,重新推流后生效
+ */
 func (c *LiveClient) DeleteLiveStreamDomainTranscode(request *live.DeleteLiveStreamDomainTranscodeRequest) (*live.DeleteLiveStreamDomainTranscodeResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -515,7 +554,9 @@ func (c *LiveClient) DeleteLiveStreamDomainTranscode(request *live.DeleteLiveStr
     return jdResp, err
 }
 
-/* 启用APP */
+/* 启用应用
+- 启用 停用 状态的应用
+ */
 func (c *LiveClient) StartLiveApp(request *live.StartLiveAppRequest) (*live.StartLiveAppResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -535,7 +576,8 @@ func (c *LiveClient) StartLiveApp(request *live.StartLiveAppRequest) (*live.Star
     return jdResp, err
 }
 
-/* 设置录制回调通知 */
+/* 设置直播录制回调通知
+ */
 func (c *LiveClient) SetLiveStreamRecordNotifyConfig(request *live.SetLiveStreamRecordNotifyConfigRequest) (*live.SetLiveStreamRecordNotifyConfigResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -555,7 +597,9 @@ func (c *LiveClient) SetLiveStreamRecordNotifyConfig(request *live.SetLiveStream
     return jdResp, err
 }
 
-/* 删除域名录制配置 */
+/* 删除域名级别录制模板配置
+- 删除域名级别录制模板配置,重新推流后生效
+ */
 func (c *LiveClient) DeleteLiveStreamDomainRecord(request *live.DeleteLiveStreamDomainRecordRequest) (*live.DeleteLiveStreamDomainRecordResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -595,7 +639,9 @@ func (c *LiveClient) AddCustomLiveStreamSnapshotTemplate(request *live.AddCustom
     return jdResp, err
 }
 
-/* 启动域名 */
+/* 启动域名
+- 启用状态为 停用 的直播域名对(推流域名,播放域名)将DomainStatus变更为online
+ */
 func (c *LiveClient) StartLiveDomain(request *live.StartLiveDomainRequest) (*live.StartLiveDomainResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -615,7 +661,8 @@ func (c *LiveClient) StartLiveDomain(request *live.StartLiveDomainRequest) (*liv
     return jdResp, err
 }
 
-/* 查询水印模板列表 */
+/* 查询用户定义水印模板列表
+ */
 func (c *LiveClient) DescribeCustomLiveStreamWatermarkTemplates(request *live.DescribeCustomLiveStreamWatermarkTemplatesRequest) (*live.DescribeCustomLiveStreamWatermarkTemplatesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -635,7 +682,9 @@ func (c *LiveClient) DescribeCustomLiveStreamWatermarkTemplates(request *live.De
     return jdResp, err
 }
 
-/* 添加APP转码配置 */
+/* 添加应用转码配置
+- 添加应用级别的转码模板配置
+ */
 func (c *LiveClient) AddLiveStreamAppTranscode(request *live.AddLiveStreamAppTranscodeRequest) (*live.AddLiveStreamAppTranscodeResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -655,7 +704,8 @@ func (c *LiveClient) AddLiveStreamAppTranscode(request *live.AddLiveStreamAppTra
     return jdResp, err
 }
 
-/* 删除截图回调配置 */
+/* 删除截图回调配置
+ */
 func (c *LiveClient) DeleteLiveStreamSnapshotNotifyConfig(request *live.DeleteLiveStreamSnapshotNotifyConfigRequest) (*live.DeleteLiveStreamSnapshotNotifyConfigResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -675,7 +725,7 @@ func (c *LiveClient) DeleteLiveStreamSnapshotNotifyConfig(request *live.DeleteLi
     return jdResp, err
 }
 
-/* 查看域名下推流记录 */
+/* 查看推流历史记录 */
 func (c *LiveClient) DescribeLiveStreamPublishList(request *live.DescribeLiveStreamPublishListRequest) (*live.DescribeLiveStreamPublishListResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -715,7 +765,8 @@ func (c *LiveClient) DescribeLiveTimeshiftConfigs(request *live.DescribeLiveTime
     return jdResp, err
 }
 
-/* 添加APP水印配置 */
+/* 添加应用级别水印配置
+ */
 func (c *LiveClient) AddLiveStreamAppWatermark(request *live.AddLiveStreamAppWatermarkRequest) (*live.AddLiveStreamAppWatermarkResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -735,7 +786,9 @@ func (c *LiveClient) AddLiveStreamAppWatermark(request *live.AddLiveStreamAppWat
     return jdResp, err
 }
 
-/* 添加APP录制配置 */
+/* 添加应用级别直播录制配置
+- 添加应用级别的直播录制模板配置
+ */
 func (c *LiveClient) AddLiveStreamAppRecord(request *live.AddLiveStreamAppRecordRequest) (*live.AddLiveStreamAppRecordResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -755,7 +808,9 @@ func (c *LiveClient) AddLiveStreamAppRecord(request *live.AddLiveStreamAppRecord
     return jdResp, err
 }
 
-/* 添加域名录制配置 */
+/* 添加域名级别直播录制配置
+- 添加域名级别的直播录制模板配置
+ */
 func (c *LiveClient) AddLiveStreamDomainRecord(request *live.AddLiveStreamDomainRecordRequest) (*live.AddLiveStreamDomainRecordResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -795,7 +850,8 @@ func (c *LiveClient) DeleteLiveStreamAppSnapshot(request *live.DeleteLiveStreamA
     return jdResp, err
 }
 
-/* 查询截图回调配置 */
+/* 查询截图回调配置
+ */
 func (c *LiveClient) DescribeLiveStreamSnapshotNotifyConfig(request *live.DescribeLiveStreamSnapshotNotifyConfigRequest) (*live.DescribeLiveStreamSnapshotNotifyConfigResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -815,7 +871,8 @@ func (c *LiveClient) DescribeLiveStreamSnapshotNotifyConfig(request *live.Descri
     return jdResp, err
 }
 
-/* 删除录制回调配置 */
+/* 删除录制回调配置
+ */
 func (c *LiveClient) DeleteLiveStreamRecordNotifyConfig(request *live.DeleteLiveStreamRecordNotifyConfigRequest) (*live.DeleteLiveStreamRecordNotifyConfigResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -835,7 +892,11 @@ func (c *LiveClient) DeleteLiveStreamRecordNotifyConfig(request *live.DeleteLive
     return jdResp, err
 }
 
-/* 查询转码模板配置 */
+/* 查询转码模板配置
+- 转码模板配置按照 域名,应用,流 3级配置添加,以最小的粒度配置生效原则
+- 域名、应用、流 依次粒度递减 即: 域名>应用>流
+- 该查询旨在查询域名、应用、流最终生效的转码模板配置,并非各级的模板绑定情况
+ */
 func (c *LiveClient) DescribeLiveStreamTranscodeConfig(request *live.DescribeLiveStreamTranscodeConfigRequest) (*live.DescribeLiveStreamTranscodeConfigResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -855,7 +916,10 @@ func (c *LiveClient) DescribeLiveStreamTranscodeConfig(request *live.DescribeLiv
     return jdResp, err
 }
 
-/* 删除APP */
+/* 删除应用
+- 删除应用之前需要先停用应用
+- 删除应用同时会删除此应用下的所有数据
+ */
 func (c *LiveClient) DeleteLiveApp(request *live.DeleteLiveAppRequest) (*live.DeleteLiveAppResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -895,7 +959,11 @@ func (c *LiveClient) SetLivePlayAuthKey(request *live.SetLivePlayAuthKeyRequest)
     return jdResp, err
 }
 
-/* 查询水印配置 */
+/* 查询直播水印配置
+- 水印模板配置按照 域名,应用,流 3级配置添加,以最小的粒度配置生效
+- 域名、应用、流 依次粒度递减 即: 域名>应用>流
+- 该查询旨在查询域名、应用、流最终生效的水印模板配置,并非各级的模板绑定情况
+ */
 func (c *LiveClient) DescribeCustomLiveStreamWatermarkConfig(request *live.DescribeCustomLiveStreamWatermarkConfigRequest) (*live.DescribeCustomLiveStreamWatermarkConfigResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -915,7 +983,8 @@ func (c *LiveClient) DescribeCustomLiveStreamWatermarkConfig(request *live.Descr
     return jdResp, err
 }
 
-/* 添加直播录制模板 */
+/* 添加用户自定义直播录制模板
+ */
 func (c *LiveClient) AddCustomLiveStreamRecordTemplate(request *live.AddCustomLiveStreamRecordTemplateRequest) (*live.AddCustomLiveStreamRecordTemplateResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -975,7 +1044,9 @@ func (c *LiveClient) DescribeLivePlayAuthKey(request *live.DescribeLivePlayAuthK
     return jdResp, err
 }
 
-/* 删除用户自定义转码模板 */
+/* 删除用户自定义转码模板
+- 删除用户自定义转码模板之前必须先删除此模板在各域名、应用、流级别的转码设置
+ */
 func (c *LiveClient) DeleteCustomLiveStreamTranscodeTemplate(request *live.DeleteCustomLiveStreamTranscodeTemplateRequest) (*live.DeleteCustomLiveStreamTranscodeTemplateResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -995,7 +1066,10 @@ func (c *LiveClient) DeleteCustomLiveStreamTranscodeTemplate(request *live.Delet
     return jdResp, err
 }
 
-/* 添加直播域名 */
+/* 添加直播域名
+- 创建直播域名之前,必须先开通直播服务
+- 直播域名必须已经备案完成
+ */
 func (c *LiveClient) AddLiveDomain(request *live.AddLiveDomainRequest) (*live.AddLiveDomainResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1015,7 +1089,8 @@ func (c *LiveClient) AddLiveDomain(request *live.AddLiveDomainRequest) (*live.Ad
     return jdResp, err
 }
 
-/* 查询用户自定义转码模板列表 */
+/* 查询用户自定义转码模板列表
+ */
 func (c *LiveClient) DescribeCustomLiveStreamTranscodeTemplates(request *live.DescribeCustomLiveStreamTranscodeTemplatesRequest) (*live.DescribeCustomLiveStreamTranscodeTemplatesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1055,7 +1130,10 @@ func (c *LiveClient) DescribeLivePornData(request *live.DescribeLivePornDataRequ
     return jdResp, err
 }
 
-/* 停用域名 */
+/* 停用域名
+- 停用直播域名对(推流域名,播放域名),将DomainStatus变更为offline
+- 停用该直播域名对后,直播域名信息仍保留,但用户将不能再用该推流域名推流或播放域名播放
+ */
 func (c *LiveClient) StopLiveDomain(request *live.StopLiveDomainRequest) (*live.StopLiveDomainResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1075,7 +1153,7 @@ func (c *LiveClient) StopLiveDomain(request *live.StopLiveDomainRequest) (*live.
     return jdResp, err
 }
 
-/* 查看域名下所有的正在推的流的信息 */
+/* 查询直播中的流的信息 */
 func (c *LiveClient) DescribeLiveStreamOnlineList(request *live.DescribeLiveStreamOnlineListRequest) (*live.DescribeLiveStreamOnlineListResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1095,7 +1173,8 @@ func (c *LiveClient) DescribeLiveStreamOnlineList(request *live.DescribeLiveStre
     return jdResp, err
 }
 
-/* 查询录制回调配置 */
+/* 查询录制回调配置
+ */
 func (c *LiveClient) DescribeLiveStreamRecordNotifyConfig(request *live.DescribeLiveStreamRecordNotifyConfigRequest) (*live.DescribeLiveStreamRecordNotifyConfigResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1115,7 +1194,7 @@ func (c *LiveClient) DescribeLiveStreamRecordNotifyConfig(request *live.Describe
     return jdResp, err
 }
 
-/* 查询直播流状态通知 */
+/* 查询直播流状态回调地址 */
 func (c *LiveClient) DescribeLiveStreamNotifyConfig(request *live.DescribeLiveStreamNotifyConfigRequest) (*live.DescribeLiveStreamNotifyConfigResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1135,7 +1214,9 @@ func (c *LiveClient) DescribeLiveStreamNotifyConfig(request *live.DescribeLiveSt
     return jdResp, err
 }
 
-/* 添加域名直播截图配置 */
+/* 添加域名截图配置
+- 添加域名级别的截图模板配置
+ */
 func (c *LiveClient) AddLiveStreamDomainSnapshot(request *live.AddLiveStreamDomainSnapshotRequest) (*live.AddLiveStreamDomainSnapshotResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1155,7 +1236,7 @@ func (c *LiveClient) AddLiveStreamDomainSnapshot(request *live.AddLiveStreamDoma
     return jdResp, err
 }
 
-/* 设置推流回调配置 */
+/* 设置直播流状态回调地址 */
 func (c *LiveClient) SetLiveStreamNotifyConfig(request *live.SetLiveStreamNotifyConfigRequest) (*live.SetLiveStreamNotifyConfigResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1175,7 +1256,8 @@ func (c *LiveClient) SetLiveStreamNotifyConfig(request *live.SetLiveStreamNotify
     return jdResp, err
 }
 
-/* 设置截图回调通知 */
+/* 设置直播截图回调通知地址
+ */
 func (c *LiveClient) SetLiveStreamSnapshotNotifyConfig(request *live.SetLiveStreamSnapshotNotifyConfigRequest) (*live.SetLiveStreamSnapshotNotifyConfigResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1215,7 +1297,9 @@ func (c *LiveClient) DescribeCustomLiveStreamSnapshotTemplates(request *live.Des
     return jdResp, err
 }
 
-/* 停用APP */
+/* 停用 运行中 状态的应用
+- 停用应用之后,不能再用此应用名推流
+ */
 func (c *LiveClient) StopLiveApp(request *live.StopLiveAppRequest) (*live.StopLiveAppResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1235,7 +1319,10 @@ func (c *LiveClient) StopLiveApp(request *live.StopLiveAppRequest) (*live.StopLi
     return jdResp, err
 }
 
-/* 删除直播域名 */
+/* 删除直播域名
+- 请慎重操作（建议在进行域名删除前到域名解析服务商处恢复域名A记录），以免导致删除操作后此域名不可访问。
+  deleteLiveDomain调用成功后将删除本条直播域名的全部相关记录，对于仅需要暂停使用该直播域名，推荐stopLiveDomain接口
+ */
 func (c *LiveClient) DeleteLiveDomain(request *live.DeleteLiveDomainRequest) (*live.DeleteLiveDomainResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1255,7 +1342,14 @@ func (c *LiveClient) DeleteLiveDomain(request *live.DeleteLiveDomainRequest) (*l
     return jdResp, err
 }
 
-/* 添加自定义转码模板 */
+/* 添加自定义转码模板
+- 系统为您预设了标准转码模板,如果不能满足您的转码需求,可以通过此接口添加自定义转码模板
+- 系统标准转码模板
+    ld (h.264/640*360/15f)
+    sd (h.264/854*480/24f)
+    hd (h.264/1280*720/25f)
+    shd (h.264/1920*1080/30f)
+ */
 func (c *LiveClient) AddCustomLiveStreamTranscodeTemplate(request *live.AddCustomLiveStreamTranscodeTemplateRequest) (*live.AddCustomLiveStreamTranscodeTemplateResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1295,7 +1389,9 @@ func (c *LiveClient) ResumeLiveStream(request *live.ResumeLiveStreamRequest) (*l
     return jdResp, err
 }
 
-/* 添加域名转码配置 */
+/* 添加域名级别转码配置
+- 添加域名级别的转码模板配置
+ */
 func (c *LiveClient) AddLiveStreamDomainTranscode(request *live.AddLiveStreamDomainTranscodeRequest) (*live.AddLiveStreamDomainTranscodeResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1315,7 +1411,9 @@ func (c *LiveClient) AddLiveStreamDomainTranscode(request *live.AddLiveStreamDom
     return jdResp, err
 }
 
-/* 删除APP转码配置 */
+/* 删除应用级别转码模板配置
+- 删除应用级别的转码模板配置,重新推流后生效
+ */
 func (c *LiveClient) DeleteLiveStreamAppTranscode(request *live.DeleteLiveStreamAppTranscodeRequest) (*live.DeleteLiveStreamAppTranscodeResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1335,7 +1433,12 @@ func (c *LiveClient) DeleteLiveStreamAppTranscode(request *live.DeleteLiveStream
     return jdResp, err
 }
 
-/* 开启时移 */
+/* 开启时移
+直播支持最大4小时的HLS时移，使用方式为在播放域名后增加时移参数来实现，参数类型支持指定开始时间和时间偏移量2种方式进行时移。 开启直播时移后，重新推流生效，使用播放域名带相应参数访问即可播放
+- 域名格式：
+1、http://{playDomain}/{appName}/{streamName}/index.m3u8?timeshift=400（秒，指从当前时间往前时移的偏移量）
+2、http://{playDomain}/{appName}/{streamName}/index.m3u8?starttime=1529223702 (unix时间戳)
+ */
 func (c *LiveClient) OpenLiveTimeshift(request *live.OpenLiveTimeshiftRequest) (*live.OpenLiveTimeshiftResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")

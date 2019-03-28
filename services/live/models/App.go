@@ -22,13 +22,16 @@ type App struct {
     /* 应用名称 (Optional) */
     AppName string `json:"appName"`
 
-    /* 应用状态：
- - online    开启
- - offline   关闭
+    /* 应用状态
+  online: 开启
+  offline: 关闭
  (Optional) */
     AppStatus string `json:"appStatus"`
 
-    /* 创建时间 (Optional) */
+    /* 应用创建时间
+- UTC时间
+  格式: yyyy-MM-dd'T'HH:mm:ss'Z'
+ (Optional) */
     CreateTime string `json:"createTime"`
 
     /* 更新时间 (Optional) */

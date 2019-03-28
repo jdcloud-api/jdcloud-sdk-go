@@ -24,64 +24,62 @@ type AddCustomLiveStreamWatermarkTemplateRequest struct {
 
     core.JDCloudRequest
 
-    /* x轴偏移量:
-  - 单位：像素
+    /* x轴偏移量
+- 单位: 像素
   */
     OffsetX int `json:"offsetX"`
 
     /* y轴偏移量:
-  - 单位：像素
+- 单位: 像素
   */
     OffsetY int `json:"offsetY"`
 
     /* 水印宽度:
-  - 取值: [0,1920]
+- 取值: [0,1920]
+- 单位: 像素
   */
     Width int `json:"width"`
 
     /* 水印高度:
-  - 取值: [0,1920]
+- 取值: [0,1920]
+- 单位: 像素
   */
     Height int `json:"height"`
 
-    /* 水印模板自定义名称:
-  - 标准质量模板：sd、hd、hsd
-  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
-              取值要求：数字、大小写字母或短横线("-"),
-              首尾不能有特殊字符("-")
-  - <b>注意: 不能与标准的转码模板和已定义命名重复</b>
+    /* 自定义水印模板名称
+-&ensp;取值要求: 数字、大小写字母或短横线("-"),
+&ensp;&ensp;首尾不能有特殊字符("-"),
+&ensp;&ensp;不超过50字符,utf-8格式
+-&ensp;<b>注意: 不能与已定义命名重复</b>
   */
     Template string `json:"template"`
 
-    /* 水印地址:
-  - 以 http开头，可访问地址
-  */
+    /* 水印地址<br>-&ensp;以&ensp;http:// 开头,可公开访问地址<br>  */
     Url string `json:"url"`
 }
 
 /*
- * param offsetX: x轴偏移量:
-  - 单位：像素
+ * param offsetX: x轴偏移量
+- 单位: 像素
  (Required)
  * param offsetY: y轴偏移量:
-  - 单位：像素
+- 单位: 像素
  (Required)
  * param width: 水印宽度:
-  - 取值: [0,1920]
+- 取值: [0,1920]
+- 单位: 像素
  (Required)
  * param height: 水印高度:
-  - 取值: [0,1920]
+- 取值: [0,1920]
+- 单位: 像素
  (Required)
- * param template: 水印模板自定义名称:
-  - 标准质量模板：sd、hd、hsd
-  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
-              取值要求：数字、大小写字母或短横线("-"),
-              首尾不能有特殊字符("-")
-  - <b>注意: 不能与标准的转码模板和已定义命名重复</b>
+ * param template: 自定义水印模板名称
+-&ensp;取值要求: 数字、大小写字母或短横线("-"),
+&ensp;&ensp;首尾不能有特殊字符("-"),
+&ensp;&ensp;不超过50字符,utf-8格式
+-&ensp;<b>注意: 不能与已定义命名重复</b>
  (Required)
- * param url: 水印地址:
-  - 以 http开头，可访问地址
- (Required)
+ * param url: 水印地址<br>-&ensp;以&ensp;http:// 开头,可公开访问地址<br> (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -111,28 +109,27 @@ func NewAddCustomLiveStreamWatermarkTemplateRequest(
 }
 
 /*
- * param offsetX: x轴偏移量:
-  - 单位：像素
+ * param offsetX: x轴偏移量
+- 单位: 像素
  (Required)
  * param offsetY: y轴偏移量:
-  - 单位：像素
+- 单位: 像素
  (Required)
  * param width: 水印宽度:
-  - 取值: [0,1920]
+- 取值: [0,1920]
+- 单位: 像素
  (Required)
  * param height: 水印高度:
-  - 取值: [0,1920]
+- 取值: [0,1920]
+- 单位: 像素
  (Required)
- * param template: 水印模板自定义名称:
-  - 标准质量模板：sd、hd、hsd
-  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
-              取值要求：数字、大小写字母或短横线("-"),
-              首尾不能有特殊字符("-")
-  - <b>注意: 不能与标准的转码模板和已定义命名重复</b>
+ * param template: 自定义水印模板名称
+-&ensp;取值要求: 数字、大小写字母或短横线("-"),
+&ensp;&ensp;首尾不能有特殊字符("-"),
+&ensp;&ensp;不超过50字符,utf-8格式
+-&ensp;<b>注意: 不能与已定义命名重复</b>
  (Required)
- * param url: 水印地址:
-  - 以 http开头，可访问地址
- (Required)
+ * param url: 水印地址<br>-&ensp;以&ensp;http:// 开头,可公开访问地址<br> (Required)
  */
 func NewAddCustomLiveStreamWatermarkTemplateRequestWithAllParams(
     offsetX int,
@@ -172,48 +169,47 @@ func NewAddCustomLiveStreamWatermarkTemplateRequestWithoutParam() *AddCustomLive
     }
 }
 
-/* param offsetX: x轴偏移量:
-  - 单位：像素
+/* param offsetX: x轴偏移量
+- 单位: 像素
 (Required) */
 func (r *AddCustomLiveStreamWatermarkTemplateRequest) SetOffsetX(offsetX int) {
     r.OffsetX = offsetX
 }
 
 /* param offsetY: y轴偏移量:
-  - 单位：像素
+- 单位: 像素
 (Required) */
 func (r *AddCustomLiveStreamWatermarkTemplateRequest) SetOffsetY(offsetY int) {
     r.OffsetY = offsetY
 }
 
 /* param width: 水印宽度:
-  - 取值: [0,1920]
+- 取值: [0,1920]
+- 单位: 像素
 (Required) */
 func (r *AddCustomLiveStreamWatermarkTemplateRequest) SetWidth(width int) {
     r.Width = width
 }
 
 /* param height: 水印高度:
-  - 取值: [0,1920]
+- 取值: [0,1920]
+- 单位: 像素
 (Required) */
 func (r *AddCustomLiveStreamWatermarkTemplateRequest) SetHeight(height int) {
     r.Height = height
 }
 
-/* param template: 水印模板自定义名称:
-  - 标准质量模板：sd、hd、hsd
-  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
-              取值要求：数字、大小写字母或短横线("-"),
-              首尾不能有特殊字符("-")
-  - <b>注意: 不能与标准的转码模板和已定义命名重复</b>
+/* param template: 自定义水印模板名称
+-&ensp;取值要求: 数字、大小写字母或短横线("-"),
+&ensp;&ensp;首尾不能有特殊字符("-"),
+&ensp;&ensp;不超过50字符,utf-8格式
+-&ensp;<b>注意: 不能与已定义命名重复</b>
 (Required) */
 func (r *AddCustomLiveStreamWatermarkTemplateRequest) SetTemplate(template string) {
     r.Template = template
 }
 
-/* param url: 水印地址:
-  - 以 http开头，可访问地址
-(Required) */
+/* param url: 水印地址<br>-&ensp;以&ensp;http:// 开头,可公开访问地址<br>(Required) */
 func (r *AddCustomLiveStreamWatermarkTemplateRequest) SetUrl(url string) {
     r.Url = url
 }

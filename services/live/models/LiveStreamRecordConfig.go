@@ -25,7 +25,7 @@ type LiveStreamRecordConfig struct {
     /* 应用名称 (Optional) */
     AppName string `json:"appName"`
 
-    /* 流名 (Optional) */
+    /* 流名称 (Optional) */
     StreamName string `json:"streamName"`
 
     /* 水印模板集合 (Optional) */

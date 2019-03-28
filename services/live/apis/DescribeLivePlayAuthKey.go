@@ -24,12 +24,16 @@ type DescribeLivePlayAuthKeyRequest struct {
 
     core.JDCloudRequest
 
-    /* 您的播放加速域名  */
+    /* 直播的播放域名
+- 仅支持精确匹配
+  */
     PlayDomain string `json:"playDomain"`
 }
 
 /*
- * param playDomain: 您的播放加速域名 (Required)
+ * param playDomain: 直播的播放域名
+- 仅支持精确匹配
+ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -49,7 +53,9 @@ func NewDescribeLivePlayAuthKeyRequest(
 }
 
 /*
- * param playDomain: 您的播放加速域名 (Required)
+ * param playDomain: 直播的播放域名
+- 仅支持精确匹配
+ (Required)
  */
 func NewDescribeLivePlayAuthKeyRequestWithAllParams(
     playDomain string,
@@ -79,7 +85,9 @@ func NewDescribeLivePlayAuthKeyRequestWithoutParam() *DescribeLivePlayAuthKeyReq
     }
 }
 
-/* param playDomain: 您的播放加速域名(Required) */
+/* param playDomain: 直播的播放域名
+- 仅支持精确匹配
+(Required) */
 func (r *DescribeLivePlayAuthKeyRequest) SetPlayDomain(playDomain string) {
     r.PlayDomain = playDomain
 }

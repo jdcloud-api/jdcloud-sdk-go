@@ -24,26 +24,26 @@ type ForbidLiveStreamRequest struct {
 
     core.JDCloudRequest
 
+    /* 推流域名  */
+    PublishDomain string `json:"publishDomain"`
+
     /* 应用名称  */
     AppName string `json:"appName"`
-
-    /* 您的加速域名  */
-    PublishDomain string `json:"publishDomain"`
 
     /* 流名称  */
     StreamName string `json:"streamName"`
 }
 
 /*
+ * param publishDomain: 推流域名 (Required)
  * param appName: 应用名称 (Required)
- * param publishDomain: 您的加速域名 (Required)
  * param streamName: 流名称 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewForbidLiveStreamRequest(
-    appName string,
     publishDomain string,
+    appName string,
     streamName string,
 ) *ForbidLiveStreamRequest {
 
@@ -54,20 +54,20 @@ func NewForbidLiveStreamRequest(
 			Header:  nil,
 			Version: "v1",
 		},
-        AppName: appName,
         PublishDomain: publishDomain,
+        AppName: appName,
         StreamName: streamName,
 	}
 }
 
 /*
+ * param publishDomain: 推流域名 (Required)
  * param appName: 应用名称 (Required)
- * param publishDomain: 您的加速域名 (Required)
  * param streamName: 流名称 (Required)
  */
 func NewForbidLiveStreamRequestWithAllParams(
-    appName string,
     publishDomain string,
+    appName string,
     streamName string,
 ) *ForbidLiveStreamRequest {
 
@@ -78,8 +78,8 @@ func NewForbidLiveStreamRequestWithAllParams(
             Header:  nil,
             Version: "v1",
         },
-        AppName: appName,
         PublishDomain: publishDomain,
+        AppName: appName,
         StreamName: streamName,
     }
 }
@@ -97,14 +97,14 @@ func NewForbidLiveStreamRequestWithoutParam() *ForbidLiveStreamRequest {
     }
 }
 
+/* param publishDomain: 推流域名(Required) */
+func (r *ForbidLiveStreamRequest) SetPublishDomain(publishDomain string) {
+    r.PublishDomain = publishDomain
+}
+
 /* param appName: 应用名称(Required) */
 func (r *ForbidLiveStreamRequest) SetAppName(appName string) {
     r.AppName = appName
-}
-
-/* param publishDomain: 您的加速域名(Required) */
-func (r *ForbidLiveStreamRequest) SetPublishDomain(publishDomain string) {
-    r.PublishDomain = publishDomain
 }
 
 /* param streamName: 流名称(Required) */

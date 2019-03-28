@@ -24,21 +24,19 @@ type SetLiveStreamSnapshotNotifyConfigRequest struct {
 
     core.JDCloudRequest
 
-    /* 您的推流加速域名  */
+    /* 推流域名  */
     PublishDomain string `json:"publishDomain"`
 
-    /* 设置直播流信息推送到的 URL 地址:
-  - 以 http:// 开头
-  - 正则校验
+    /* 截图回调通知的URL地址:
+- 以 http:// 开头,外网可访问的地址
   */
     NotifyUrl string `json:"notifyUrl"`
 }
 
 /*
- * param publishDomain: 您的推流加速域名 (Required)
- * param notifyUrl: 设置直播流信息推送到的 URL 地址:
-  - 以 http:// 开头
-  - 正则校验
+ * param publishDomain: 推流域名 (Required)
+ * param notifyUrl: 截图回调通知的URL地址:
+- 以 http:// 开头,外网可访问的地址
  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -61,10 +59,9 @@ func NewSetLiveStreamSnapshotNotifyConfigRequest(
 }
 
 /*
- * param publishDomain: 您的推流加速域名 (Required)
- * param notifyUrl: 设置直播流信息推送到的 URL 地址:
-  - 以 http:// 开头
-  - 正则校验
+ * param publishDomain: 推流域名 (Required)
+ * param notifyUrl: 截图回调通知的URL地址:
+- 以 http:// 开头,外网可访问的地址
  (Required)
  */
 func NewSetLiveStreamSnapshotNotifyConfigRequestWithAllParams(
@@ -97,14 +94,13 @@ func NewSetLiveStreamSnapshotNotifyConfigRequestWithoutParam() *SetLiveStreamSna
     }
 }
 
-/* param publishDomain: 您的推流加速域名(Required) */
+/* param publishDomain: 推流域名(Required) */
 func (r *SetLiveStreamSnapshotNotifyConfigRequest) SetPublishDomain(publishDomain string) {
     r.PublishDomain = publishDomain
 }
 
-/* param notifyUrl: 设置直播流信息推送到的 URL 地址:
-  - 以 http:// 开头
-  - 正则校验
+/* param notifyUrl: 截图回调通知的URL地址:
+- 以 http:// 开头,外网可访问的地址
 (Required) */
 func (r *SetLiveStreamSnapshotNotifyConfigRequest) SetNotifyUrl(notifyUrl string) {
     r.NotifyUrl = notifyUrl

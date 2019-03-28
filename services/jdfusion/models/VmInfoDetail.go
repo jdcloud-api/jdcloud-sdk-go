@@ -34,6 +34,9 @@ type VmInfoDetail struct {
     /* 云主机 (Optional) */
     HostName string `json:"hostName"`
 
+    /* 镜像ID (Optional) */
+    ImageId string `json:"imageId"`
+
     /*  (Optional) */
     ImageType ImageType `json:"imageType"`
 
@@ -60,6 +63,9 @@ type VmInfoDetail struct {
 
     /* 私有ip地址 (Optional) */
     PrivateIpAddress string `json:"privateIpAddress"`
+
+    /* 安全组ID (Optional) */
+    SecurityGroupIds []string `json:"securityGroupIds"`
 
     /* 云主机状态 (Optional) */
     Status string `json:"status"`

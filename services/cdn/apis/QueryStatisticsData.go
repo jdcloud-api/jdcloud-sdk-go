@@ -62,7 +62,7 @@ func NewQueryStatisticsDataRequest(
 
 	return &QueryStatisticsDataRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/statistics",
+			URL:     "/vodStatistics",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -95,7 +95,7 @@ func NewQueryStatisticsDataRequestWithAllParams(
 
     return &QueryStatisticsDataRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/statistics",
+            URL:     "/vodStatistics",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -117,7 +117,7 @@ func NewQueryStatisticsDataRequestWithoutParam() *QueryStatisticsDataRequest {
 
     return &QueryStatisticsDataRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/statistics",
+            URL:     "/vodStatistics",
             Method:  "POST",
             Header:  nil,
             Version: "v1",

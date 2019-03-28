@@ -25,7 +25,7 @@ type LiveRecordConfig struct {
     /* 应用名称 (Optional) */
     AppName string `json:"appName"`
 
-    /* 直播流名称 (Optional) */
+    /* 流名称 (Optional) */
     StreamName string `json:"streamName"`
 
     /*  (Optional) */

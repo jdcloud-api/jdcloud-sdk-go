@@ -19,18 +19,18 @@ package models
 
 type StreamInfo struct {
 
-    /* 直播流的音频帧率 (Optional) */
-    AudioFrameRate int64 `json:"audioFrameRate"`
+    /* 推流域名 (Optional) */
+    PublishDomain string `json:"publishDomain"`
 
-    /* 直播流的 URL (Optional) */
-    StreamUrl string `json:"streamUrl"`
+    /* 应用名称 (Optional) */
+    AppName string `json:"appName"`
 
-    /* 直播流的码率 (Optional) */
-    BitRate int64 `json:"bitRate"`
+    /* 流名称 (Optional) */
+    StreamName string `json:"streamName"`
 
-    /* 直播流的视频帧率 (Optional) */
-    VideoFrameRate int64 `json:"videoFrameRate"`
-
-    /* 统计时刻 (Optional) */
-    Time string `json:"time"`
+    /* 流状态
+  on: 推流中
+  off: 推流中断
+ (Optional) */
+    Status string `json:"status"`
 }

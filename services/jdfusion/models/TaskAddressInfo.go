@@ -36,4 +36,7 @@ type TaskAddressInfo struct {
 
     /* 源地址的Prefix，不能以/开头 (Optional) */
     Prefix *string `json:"prefix"`
+
+    /* 云信息ID (Optional) */
+    CloudID *string `json:"cloudID"`
 }

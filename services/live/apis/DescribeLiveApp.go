@@ -26,15 +26,20 @@ type DescribeLiveAppRequest struct {
 
     core.JDCloudRequest
 
-    /* 页码；默认为1；取值范围[1, 100000] (Optional) */
+    /* 页码
+- 取值范围: [1, 100000]
+ (Optional) */
     PageNum *int `json:"pageNum"`
 
-    /* 分页大小；默认为10；取值范围[10, 100] (Optional) */
+    /* 分页大小
+- 取值范围: [10, 100]
+ (Optional) */
     PageSize *int `json:"pageSize"`
 
     /* 域名下的app列表过滤条件:
-  - name:   publishDomain 直播的推流域名
-  - value:  如果参数为空，则查询全部
+  - name: publishDomain 直播的推流域名
+  - values: 如果参数为空,则查询全部
+  - 过滤条件为空,则表示查询用户下的所有应用名
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
@@ -57,11 +62,16 @@ func NewDescribeLiveAppRequest(
 }
 
 /*
- * param pageNum: 页码；默认为1；取值范围[1, 100000] (Optional)
- * param pageSize: 分页大小；默认为10；取值范围[10, 100] (Optional)
+ * param pageNum: 页码
+- 取值范围: [1, 100000]
+ (Optional)
+ * param pageSize: 分页大小
+- 取值范围: [10, 100]
+ (Optional)
  * param filters: 域名下的app列表过滤条件:
-  - name:   publishDomain 直播的推流域名
-  - value:  如果参数为空，则查询全部
+  - name: publishDomain 直播的推流域名
+  - values: 如果参数为空,则查询全部
+  - 过滤条件为空,则表示查询用户下的所有应用名
  (Optional)
  */
 func NewDescribeLiveAppRequestWithAllParams(
@@ -96,19 +106,24 @@ func NewDescribeLiveAppRequestWithoutParam() *DescribeLiveAppRequest {
     }
 }
 
-/* param pageNum: 页码；默认为1；取值范围[1, 100000](Optional) */
+/* param pageNum: 页码
+- 取值范围: [1, 100000]
+(Optional) */
 func (r *DescribeLiveAppRequest) SetPageNum(pageNum int) {
     r.PageNum = &pageNum
 }
 
-/* param pageSize: 分页大小；默认为10；取值范围[10, 100](Optional) */
+/* param pageSize: 分页大小
+- 取值范围: [10, 100]
+(Optional) */
 func (r *DescribeLiveAppRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
 /* param filters: 域名下的app列表过滤条件:
-  - name:   publishDomain 直播的推流域名
-  - value:  如果参数为空，则查询全部
+  - name: publishDomain 直播的推流域名
+  - values: 如果参数为空,则查询全部
+  - 过滤条件为空,则表示查询用户下的所有应用名
 (Optional) */
 func (r *DescribeLiveAppRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters

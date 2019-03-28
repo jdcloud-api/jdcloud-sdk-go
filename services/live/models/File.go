@@ -19,19 +19,27 @@ package models
 
 type File struct {
 
-    /* 流所属加速域名 (Optional) */
+    /* 推流域名 (Optional) */
     PublishDomain string `json:"publishDomain"`
 
-    /* 流所属应用名称 (Optional) */
+    /* 应用名称 (Optional) */
     AppName string `json:"appName"`
 
-    /* 直播流名称 (Optional) */
+    /* 流名称 (Optional) */
     StreamName string `json:"streamName"`
 
-    /* 开始时间 (Optional) */
+    /* 开始时间
+- UTC时间
+  格式:yyyy-MM-dd'T'HH:mm:ss'Z'
+  示例:2018-10-21T10:00:00Z
+ (Optional) */
     StartTime string `json:"startTime"`
 
-    /* 结束时间 (Optional) */
+    /* 结束时间
+- UTC时间
+  格式:yyyy-MM-dd'T'HH:mm:ss'Z'
+  示例:2018-10-21T10:00:00Z
+ (Optional) */
     EndTime string `json:"endTime"`
 
     /* 录制时长 (Optional) */

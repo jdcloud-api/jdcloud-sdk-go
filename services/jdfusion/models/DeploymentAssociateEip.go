@@ -24,4 +24,7 @@ type DeploymentAssociateEip struct {
 
     /* 云产品的实例ID (Optional) */
     InstanceId string `json:"instanceId"`
+
+    /* 要解绑的资源类型  虚拟机：vm 负载均衡：slb (Optional) */
+    InstanceType string `json:"instanceType"`
 }

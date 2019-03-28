@@ -25,30 +25,39 @@ type DescribeLiveSnapshotDataRequest struct {
 
     core.JDCloudRequest
 
-    /* 您的推流加速域名  */
+    /* 推流域名  */
     PublishDomain string `json:"publishDomain"`
 
-    /* 直播流所属应用名称 (Optional) */
+    /* 应用名称 (Optional) */
     AppName *string `json:"appName"`
 
-    /* 直播流名称 (Optional) */
+    /* 流名称 (Optional) */
     StreamName *string `json:"streamName"`
 
     /* 起始时间:
-  - UTC 时间格式 e.g: 2019-03-12T00:00:00Z
+- UTC时间
+  格式: yyyy-MM-dd'T'HH:mm:ss'Z'
+  示例: 2018-10-21T10:00:00Z
+- 支持最大查询90天以内的数据
   */
     StartTime string `json:"startTime"`
 
     /* 结束时间:
-  - UTC 时间格式 e.g: 2019-03-12T00:00:00Z
+- UTC时间
+  格式: yyyy-MM-dd'T'HH:mm:ss'Z'
+  示例: 2018-10-21T10:00:00Z
+- 为空,默认当前时间
  (Optional) */
     EndTime *string `json:"endTime"`
 }
 
 /*
- * param publishDomain: 您的推流加速域名 (Required)
+ * param publishDomain: 推流域名 (Required)
  * param startTime: 起始时间:
-  - UTC 时间格式 e.g: 2019-03-12T00:00:00Z
+- UTC时间
+  格式: yyyy-MM-dd'T'HH:mm:ss'Z'
+  示例: 2018-10-21T10:00:00Z
+- 支持最大查询90天以内的数据
  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -71,14 +80,20 @@ func NewDescribeLiveSnapshotDataRequest(
 }
 
 /*
- * param publishDomain: 您的推流加速域名 (Required)
- * param appName: 直播流所属应用名称 (Optional)
- * param streamName: 直播流名称 (Optional)
+ * param publishDomain: 推流域名 (Required)
+ * param appName: 应用名称 (Optional)
+ * param streamName: 流名称 (Optional)
  * param startTime: 起始时间:
-  - UTC 时间格式 e.g: 2019-03-12T00:00:00Z
+- UTC时间
+  格式: yyyy-MM-dd'T'HH:mm:ss'Z'
+  示例: 2018-10-21T10:00:00Z
+- 支持最大查询90天以内的数据
  (Required)
  * param endTime: 结束时间:
-  - UTC 时间格式 e.g: 2019-03-12T00:00:00Z
+- UTC时间
+  格式: yyyy-MM-dd'T'HH:mm:ss'Z'
+  示例: 2018-10-21T10:00:00Z
+- 为空,默认当前时间
  (Optional)
  */
 func NewDescribeLiveSnapshotDataRequestWithAllParams(
@@ -117,30 +132,36 @@ func NewDescribeLiveSnapshotDataRequestWithoutParam() *DescribeLiveSnapshotDataR
     }
 }
 
-/* param publishDomain: 您的推流加速域名(Required) */
+/* param publishDomain: 推流域名(Required) */
 func (r *DescribeLiveSnapshotDataRequest) SetPublishDomain(publishDomain string) {
     r.PublishDomain = publishDomain
 }
 
-/* param appName: 直播流所属应用名称(Optional) */
+/* param appName: 应用名称(Optional) */
 func (r *DescribeLiveSnapshotDataRequest) SetAppName(appName string) {
     r.AppName = &appName
 }
 
-/* param streamName: 直播流名称(Optional) */
+/* param streamName: 流名称(Optional) */
 func (r *DescribeLiveSnapshotDataRequest) SetStreamName(streamName string) {
     r.StreamName = &streamName
 }
 
 /* param startTime: 起始时间:
-  - UTC 时间格式 e.g: 2019-03-12T00:00:00Z
+- UTC时间
+  格式: yyyy-MM-dd'T'HH:mm:ss'Z'
+  示例: 2018-10-21T10:00:00Z
+- 支持最大查询90天以内的数据
 (Required) */
 func (r *DescribeLiveSnapshotDataRequest) SetStartTime(startTime string) {
     r.StartTime = startTime
 }
 
 /* param endTime: 结束时间:
-  - UTC 时间格式 e.g: 2019-03-12T00:00:00Z
+- UTC时间
+  格式: yyyy-MM-dd'T'HH:mm:ss'Z'
+  示例: 2018-10-21T10:00:00Z
+- 为空,默认当前时间
 (Optional) */
 func (r *DescribeLiveSnapshotDataRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime

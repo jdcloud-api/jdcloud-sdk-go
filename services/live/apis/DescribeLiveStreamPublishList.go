@@ -28,28 +28,48 @@ type DescribeLiveStreamPublishListRequest struct {
     /* 推流域名  */
     PublishDomain string `json:"publishDomain"`
 
-    /* 页码；默认为1；取值范围[1, 100000] (Optional) */
+    /* 页码<br>
+- 取值范围[1, 100000]
+ (Optional) */
     PageNum *int `json:"pageNum"`
 
-    /* 分页大小；默认为10；取值范围[10, 100] (Optional) */
+    /* 分页大小<br>
+- 取值范围[10, 100]
+ (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* 直播流所属应用名称 (Optional) */
+    /* 应用名称 (Optional) */
     AppName *string `json:"appName"`
 
-    /* 直播流名称 (Optional) */
+    /* 流名称 (Optional) */
     StreamName *string `json:"streamName"`
 
-    /* 起始时间  */
+    /* 推流起始时间<br>
+- UTC时间
+  格式:yyyy-MM-dd'T'HH:mm:ss'Z'
+  示例:2018-10-21T10:00:00Z
+- 最大支持最近90天内的流历史查询
+  */
     StartTime string `json:"startTime"`
 
-    /* 结束时间 (Optional) */
+    /* 推流结束时间<br>
+- UTC时间
+  格式:yyyy-MM-dd'T'HH:mm:ss'Z'
+  示例:2018-10-21T10:00:00Z
+- 最大支持最近90天内的流历史查询
+- 结束时间为空默认为当前时间
+ (Optional) */
     EndTime *string `json:"endTime"`
 }
 
 /*
  * param publishDomain: 推流域名 (Required)
- * param startTime: 起始时间 (Required)
+ * param startTime: 推流起始时间<br>
+- UTC时间
+  格式:yyyy-MM-dd'T'HH:mm:ss'Z'
+  示例:2018-10-21T10:00:00Z
+- 最大支持最近90天内的流历史查询
+ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -72,12 +92,27 @@ func NewDescribeLiveStreamPublishListRequest(
 
 /*
  * param publishDomain: 推流域名 (Required)
- * param pageNum: 页码；默认为1；取值范围[1, 100000] (Optional)
- * param pageSize: 分页大小；默认为10；取值范围[10, 100] (Optional)
- * param appName: 直播流所属应用名称 (Optional)
- * param streamName: 直播流名称 (Optional)
- * param startTime: 起始时间 (Required)
- * param endTime: 结束时间 (Optional)
+ * param pageNum: 页码<br>
+- 取值范围[1, 100000]
+ (Optional)
+ * param pageSize: 分页大小<br>
+- 取值范围[10, 100]
+ (Optional)
+ * param appName: 应用名称 (Optional)
+ * param streamName: 流名称 (Optional)
+ * param startTime: 推流起始时间<br>
+- UTC时间
+  格式:yyyy-MM-dd'T'HH:mm:ss'Z'
+  示例:2018-10-21T10:00:00Z
+- 最大支持最近90天内的流历史查询
+ (Required)
+ * param endTime: 推流结束时间<br>
+- UTC时间
+  格式:yyyy-MM-dd'T'HH:mm:ss'Z'
+  示例:2018-10-21T10:00:00Z
+- 最大支持最近90天内的流历史查询
+- 结束时间为空默认为当前时间
+ (Optional)
  */
 func NewDescribeLiveStreamPublishListRequestWithAllParams(
     publishDomain string,
@@ -124,32 +159,47 @@ func (r *DescribeLiveStreamPublishListRequest) SetPublishDomain(publishDomain st
     r.PublishDomain = publishDomain
 }
 
-/* param pageNum: 页码；默认为1；取值范围[1, 100000](Optional) */
+/* param pageNum: 页码<br>
+- 取值范围[1, 100000]
+(Optional) */
 func (r *DescribeLiveStreamPublishListRequest) SetPageNum(pageNum int) {
     r.PageNum = &pageNum
 }
 
-/* param pageSize: 分页大小；默认为10；取值范围[10, 100](Optional) */
+/* param pageSize: 分页大小<br>
+- 取值范围[10, 100]
+(Optional) */
 func (r *DescribeLiveStreamPublishListRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
-/* param appName: 直播流所属应用名称(Optional) */
+/* param appName: 应用名称(Optional) */
 func (r *DescribeLiveStreamPublishListRequest) SetAppName(appName string) {
     r.AppName = &appName
 }
 
-/* param streamName: 直播流名称(Optional) */
+/* param streamName: 流名称(Optional) */
 func (r *DescribeLiveStreamPublishListRequest) SetStreamName(streamName string) {
     r.StreamName = &streamName
 }
 
-/* param startTime: 起始时间(Required) */
+/* param startTime: 推流起始时间<br>
+- UTC时间
+  格式:yyyy-MM-dd'T'HH:mm:ss'Z'
+  示例:2018-10-21T10:00:00Z
+- 最大支持最近90天内的流历史查询
+(Required) */
 func (r *DescribeLiveStreamPublishListRequest) SetStartTime(startTime string) {
     r.StartTime = startTime
 }
 
-/* param endTime: 结束时间(Optional) */
+/* param endTime: 推流结束时间<br>
+- UTC时间
+  格式:yyyy-MM-dd'T'HH:mm:ss'Z'
+  示例:2018-10-21T10:00:00Z
+- 最大支持最近90天内的流历史查询
+- 结束时间为空默认为当前时间
+(Optional) */
 func (r *DescribeLiveStreamPublishListRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }

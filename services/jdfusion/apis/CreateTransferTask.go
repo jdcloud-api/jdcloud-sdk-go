@@ -29,7 +29,7 @@ type CreateTransferTaskRequest struct {
     RegionId string `json:"regionId"`
 
     /*  (Optional) */
-    Task *jdfusion.TransferTaskInfo `json:"task"`
+    Task *jdfusion.TransferSimpleTaskInfo `json:"task"`
 }
 
 /*
@@ -43,7 +43,7 @@ func NewCreateTransferTaskRequest(
 
 	return &CreateTransferTaskRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/oss_transferTasks",
+			URL:     "/regions/{regionId}/oss_transferTasks_simple",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -58,12 +58,12 @@ func NewCreateTransferTaskRequest(
  */
 func NewCreateTransferTaskRequestWithAllParams(
     regionId string,
-    task *jdfusion.TransferTaskInfo,
+    task *jdfusion.TransferSimpleTaskInfo,
 ) *CreateTransferTaskRequest {
 
     return &CreateTransferTaskRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/oss_transferTasks",
+            URL:     "/regions/{regionId}/oss_transferTasks_simple",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -78,7 +78,7 @@ func NewCreateTransferTaskRequestWithoutParam() *CreateTransferTaskRequest {
 
     return &CreateTransferTaskRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/oss_transferTasks",
+            URL:     "/regions/{regionId}/oss_transferTasks_simple",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -92,7 +92,7 @@ func (r *CreateTransferTaskRequest) SetRegionId(regionId string) {
 }
 
 /* param task: (Optional) */
-func (r *CreateTransferTaskRequest) SetTask(task *jdfusion.TransferTaskInfo) {
+func (r *CreateTransferTaskRequest) SetTask(task *jdfusion.TransferSimpleTaskInfo) {
     r.Task = task
 }
 

@@ -19,7 +19,7 @@ package models
 
 type RecordApp struct {
 
-    /* appName (Optional) */
+    /* 应用名称 (Optional) */
     AppName string `json:"appName"`
 
     /* 自动录制周期 (Optional) */

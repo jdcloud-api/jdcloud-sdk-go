@@ -28,13 +28,17 @@ type DescribeLiveStreamOnlineListRequest struct {
     /* 推流域名  */
     PublishDomain string `json:"publishDomain"`
 
-    /* 页码；默认为1；取值范围[1, 100000] (Optional) */
+    /* 页码
+- 取值范围[1, 100000]
+ (Optional) */
     PageNum *int `json:"pageNum"`
 
-    /* 分页大小；默认为10；取值范围[10, 100] (Optional) */
+    /* 分页大小
+- 取值范围[10, 100]
+ (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* 应用名称（APP） (Optional) */
+    /* 应用名称 (Optional) */
     AppName *string `json:"appName"`
 }
 
@@ -60,9 +64,13 @@ func NewDescribeLiveStreamOnlineListRequest(
 
 /*
  * param publishDomain: 推流域名 (Required)
- * param pageNum: 页码；默认为1；取值范围[1, 100000] (Optional)
- * param pageSize: 分页大小；默认为10；取值范围[10, 100] (Optional)
- * param appName: 应用名称（APP） (Optional)
+ * param pageNum: 页码
+- 取值范围[1, 100000]
+ (Optional)
+ * param pageSize: 分页大小
+- 取值范围[10, 100]
+ (Optional)
+ * param appName: 应用名称 (Optional)
  */
 func NewDescribeLiveStreamOnlineListRequestWithAllParams(
     publishDomain string,
@@ -103,17 +111,21 @@ func (r *DescribeLiveStreamOnlineListRequest) SetPublishDomain(publishDomain str
     r.PublishDomain = publishDomain
 }
 
-/* param pageNum: 页码；默认为1；取值范围[1, 100000](Optional) */
+/* param pageNum: 页码
+- 取值范围[1, 100000]
+(Optional) */
 func (r *DescribeLiveStreamOnlineListRequest) SetPageNum(pageNum int) {
     r.PageNum = &pageNum
 }
 
-/* param pageSize: 分页大小；默认为10；取值范围[10, 100](Optional) */
+/* param pageSize: 分页大小
+- 取值范围[10, 100]
+(Optional) */
 func (r *DescribeLiveStreamOnlineListRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
-/* param appName: 应用名称（APP）(Optional) */
+/* param appName: 应用名称(Optional) */
 func (r *DescribeLiveStreamOnlineListRequest) SetAppName(appName string) {
     r.AppName = &appName
 }

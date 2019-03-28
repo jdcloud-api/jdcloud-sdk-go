@@ -19,23 +19,24 @@ package models
 
 type RecordData struct {
 
-    /* 查询的推流域名 (Optional) */
+    /* 推流域名 (Optional) */
     PublishDomain string `json:"publishDomain"`
 
-    /* 查询的应用名称 (Optional) */
+    /* 应用名称 (Optional) */
     AppName string `json:"appName"`
 
-    /* 查询的流名 (Optional) */
+    /* 流名称 (Optional) */
     StreamName string `json:"streamName"`
 
     /* 日期:
-  - yyyyMMdd 示例:20190308
+- yyyyMMdd
+- 示例: 20190308
  (Optional) */
     Date string `json:"date"`
 
-    /* 单日录制总时长:
-  - 单位: 分
-  - 精确两位小数
+    /* 录制时长:
+- 单位: 分钟
+- 精确两位小数
  (Optional) */
     Total float64 `json:"total"`
 

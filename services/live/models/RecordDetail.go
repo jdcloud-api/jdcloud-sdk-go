@@ -19,16 +19,16 @@ package models
 
 type RecordDetail struct {
 
-    /* 格式:
-  - MP4
-  - FLV
-  - TS
+    /* 格式
+  mp4
+  flv
+  ts
  (Optional) */
     Format string `json:"format"`
 
     /* 时长:
-  - 单位: 分
-  - 精确两位小数
+- 单位: 分钟
+- 精确两位小数
  (Optional) */
     Duration float64 `json:"duration"`
 }

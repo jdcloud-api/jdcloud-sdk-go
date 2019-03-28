@@ -26,15 +26,20 @@ type DescribeCustomLiveStreamTranscodeTemplatesRequest struct {
 
     core.JDCloudRequest
 
-    /* 页码；默认为1；取值范围[1, 100000] (Optional) */
+    /* 页码
+- 取值范围 [1, 100000]
+ (Optional) */
     PageNum *int `json:"pageNum"`
 
-    /* 分页大小；默认为10；取值范围[10, 100] (Optional) */
+    /* 分页大小
+- 取值范围 [10, 100]
+ (Optional) */
     PageSize *int `json:"pageSize"`
 
     /* 转码模板查询过滤条件:
   - name:   template 录制模板自定义名称
   - value:  如果参数为空，则查询全部
+  - 如果为空,则表示查询该用下所有自定义的转码模板
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
@@ -57,11 +62,16 @@ func NewDescribeCustomLiveStreamTranscodeTemplatesRequest(
 }
 
 /*
- * param pageNum: 页码；默认为1；取值范围[1, 100000] (Optional)
- * param pageSize: 分页大小；默认为10；取值范围[10, 100] (Optional)
+ * param pageNum: 页码
+- 取值范围 [1, 100000]
+ (Optional)
+ * param pageSize: 分页大小
+- 取值范围 [10, 100]
+ (Optional)
  * param filters: 转码模板查询过滤条件:
   - name:   template 录制模板自定义名称
   - value:  如果参数为空，则查询全部
+  - 如果为空,则表示查询该用下所有自定义的转码模板
  (Optional)
  */
 func NewDescribeCustomLiveStreamTranscodeTemplatesRequestWithAllParams(
@@ -96,12 +106,16 @@ func NewDescribeCustomLiveStreamTranscodeTemplatesRequestWithoutParam() *Describ
     }
 }
 
-/* param pageNum: 页码；默认为1；取值范围[1, 100000](Optional) */
+/* param pageNum: 页码
+- 取值范围 [1, 100000]
+(Optional) */
 func (r *DescribeCustomLiveStreamTranscodeTemplatesRequest) SetPageNum(pageNum int) {
     r.PageNum = &pageNum
 }
 
-/* param pageSize: 分页大小；默认为10；取值范围[10, 100](Optional) */
+/* param pageSize: 分页大小
+- 取值范围 [10, 100]
+(Optional) */
 func (r *DescribeCustomLiveStreamTranscodeTemplatesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
@@ -109,6 +123,7 @@ func (r *DescribeCustomLiveStreamTranscodeTemplatesRequest) SetPageSize(pageSize
 /* param filters: 转码模板查询过滤条件:
   - name:   template 录制模板自定义名称
   - value:  如果参数为空，则查询全部
+  - 如果为空,则表示查询该用下所有自定义的转码模板
 (Optional) */
 func (r *DescribeCustomLiveStreamTranscodeTemplatesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters

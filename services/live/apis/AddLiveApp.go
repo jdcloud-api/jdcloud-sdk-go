@@ -24,16 +24,20 @@ type AddLiveAppRequest struct {
 
     core.JDCloudRequest
 
-    /* 直播的推流域名(不支持泛域名)  */
+    /* 直播的推流域名  */
     PublishDomain string `json:"publishDomain"`
 
-    /* 应用名称  */
+    /* 应用名称
+- 取值: 数字字母中划线("-")下划线("_") 50个字符以内
+  */
     AppName string `json:"appName"`
 }
 
 /*
- * param publishDomain: 直播的推流域名(不支持泛域名) (Required)
- * param appName: 应用名称 (Required)
+ * param publishDomain: 直播的推流域名 (Required)
+ * param appName: 应用名称
+- 取值: 数字字母中划线("-")下划线("_") 50个字符以内
+ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -55,8 +59,10 @@ func NewAddLiveAppRequest(
 }
 
 /*
- * param publishDomain: 直播的推流域名(不支持泛域名) (Required)
- * param appName: 应用名称 (Required)
+ * param publishDomain: 直播的推流域名 (Required)
+ * param appName: 应用名称
+- 取值: 数字字母中划线("-")下划线("_") 50个字符以内
+ (Required)
  */
 func NewAddLiveAppRequestWithAllParams(
     publishDomain string,
@@ -88,12 +94,14 @@ func NewAddLiveAppRequestWithoutParam() *AddLiveAppRequest {
     }
 }
 
-/* param publishDomain: 直播的推流域名(不支持泛域名)(Required) */
+/* param publishDomain: 直播的推流域名(Required) */
 func (r *AddLiveAppRequest) SetPublishDomain(publishDomain string) {
     r.PublishDomain = publishDomain
 }
 
-/* param appName: 应用名称(Required) */
+/* param appName: 应用名称
+- 取值: 数字字母中划线("-")下划线("_") 50个字符以内
+(Required) */
 func (r *AddLiveAppRequest) SetAppName(appName string) {
     r.AppName = appName
 }

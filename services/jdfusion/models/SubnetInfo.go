@@ -48,4 +48,10 @@ type SubnetInfo struct {
 
     /* 所属云提供商ID (Optional) */
     CloudID string `json:"cloudID"`
+
+    /* 可用区 (Optional) */
+    Az string `json:"az"`
+
+    /* 子网创建时间 (Optional) */
+    CreatedTime string `json:"createdTime"`
 }

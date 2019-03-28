@@ -40,7 +40,7 @@ func NewJdfusionClient(credential *core.Credential) *JdfusionClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "jdfusion",
-            Revision:    "0.2.0",
+            Revision:    "0.3.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -153,6 +153,26 @@ func (c *JdfusionClient) GetTaskInfoHistoryById(request *jdfusion.GetTaskInfoHis
     return jdResp, err
 }
 
+/* 查询某一次的历史执行结果（内部使用） */
+func (c *JdfusionClient) GetDeploymentsResultsByIdRecord(request *jdfusion.GetDeploymentsResultsByIdRecordRequest) (*jdfusion.GetDeploymentsResultsByIdRecordResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdfusion.GetDeploymentsResultsByIdRecordResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 根据云提供商查询对应的虚拟机资源信息 */
 func (c *JdfusionClient) GetVmInstances(request *jdfusion.GetVmInstancesRequest) (*jdfusion.GetVmInstancesResponse, error) {
     if request == nil {
@@ -253,7 +273,7 @@ func (c *JdfusionClient) GetVpcById(request *jdfusion.GetVpcByIdRequest) (*jdfus
     return jdResp, err
 }
 
-/* 根据过滤条件，取得指定RDS实例上的账号信息 */
+/* 取得指定RDS实例上的指定账号信息 */
 func (c *JdfusionClient) GetRdsAccountsByInstIdAndAccountName(request *jdfusion.GetRdsAccountsByInstIdAndAccountNameRequest) (*jdfusion.GetRdsAccountsByInstIdAndAccountNameResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -284,6 +304,26 @@ func (c *JdfusionClient) GetVpcNetworkInterfaceById(request *jdfusion.GetVpcNetw
     }
 
     jdResp := &jdfusion.GetVpcNetworkInterfaceByIdResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除安全组规则 */
+func (c *JdfusionClient) DeleteSecurityGroupsRule(request *jdfusion.DeleteSecurityGroupsRuleRequest) (*jdfusion.DeleteSecurityGroupsRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdfusion.DeleteSecurityGroupsRuleResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -453,6 +493,26 @@ func (c *JdfusionClient) CreateRdsDatabase(request *jdfusion.CreateRdsDatabaseRe
     return jdResp, err
 }
 
+/* 停止监听器 */
+func (c *JdfusionClient) StopSlbListener(request *jdfusion.StopSlbListenerRequest) (*jdfusion.StopSlbListenerResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdfusion.StopSlbListenerResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询部署信息 */
 func (c *JdfusionClient) GetDeploymentsById(request *jdfusion.GetDeploymentsByIdRequest) (*jdfusion.GetDeploymentsByIdResponse, error) {
     if request == nil {
@@ -493,6 +553,46 @@ func (c *JdfusionClient) GetDeployments(request *jdfusion.GetDeploymentsRequest)
     return jdResp, err
 }
 
+/* 根据数据库类型，取得RDS实例的规格 */
+func (c *JdfusionClient) GetRdsSpecification(request *jdfusion.GetRdsSpecificationRequest) (*jdfusion.GetRdsSpecificationResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdfusion.GetRdsSpecificationResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 验证指定云信息的AK、SK */
+func (c *JdfusionClient) ValidCloudInfo(request *jdfusion.ValidCloudInfoRequest) (*jdfusion.ValidCloudInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdfusion.ValidCloudInfoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 启动数据同步 */
 func (c *JdfusionClient) StartChannel(request *jdfusion.StartChannelRequest) (*jdfusion.StartChannelResponse, error) {
     if request == nil {
@@ -504,6 +604,26 @@ func (c *JdfusionClient) StartChannel(request *jdfusion.StartChannelRequest) (*j
     }
 
     jdResp := &jdfusion.StartChannelResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除服务器组 */
+func (c *JdfusionClient) DeleteVserverGroup(request *jdfusion.DeleteVserverGroupRequest) (*jdfusion.DeleteVserverGroupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdfusion.DeleteVserverGroupResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -684,6 +804,26 @@ func (c *JdfusionClient) StopTransferTask(request *jdfusion.StopTransferTaskRequ
     }
 
     jdResp := &jdfusion.StopTransferTaskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据过滤条件，取得服务器组的信息 */
+func (c *JdfusionClient) GetVserverGroupsById(request *jdfusion.GetVserverGroupsByIdRequest) (*jdfusion.GetVserverGroupsByIdResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdfusion.GetVserverGroupsByIdResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1033,7 +1173,7 @@ func (c *JdfusionClient) CreateVpcSlb(request *jdfusion.CreateVpcSlbRequest) (*j
     return jdResp, err
 }
 
-/* 根据云提供商查询对应的RDS实例信息 */
+/* 查询指定ID的RDS实例信息 */
 func (c *JdfusionClient) GetRdsByInstId(request *jdfusion.GetRdsByInstIdRequest) (*jdfusion.GetRdsByInstIdResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1113,6 +1253,26 @@ func (c *JdfusionClient) AttachVpcNetworkInterfaceById(request *jdfusion.AttachV
     return jdResp, err
 }
 
+/* 根据过滤条件，查监听器列表 */
+func (c *JdfusionClient) GetLbHttpListener(request *jdfusion.GetLbHttpListenerRequest) (*jdfusion.GetLbHttpListenerResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdfusion.GetLbHttpListenerResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 预部署 */
 func (c *JdfusionClient) DryrunDeployment(request *jdfusion.DryrunDeploymentRequest) (*jdfusion.DryrunDeploymentResponse, error) {
     if request == nil {
@@ -1153,6 +1313,26 @@ func (c *JdfusionClient) CreateDatasource(request *jdfusion.CreateDatasourceRequ
     return jdResp, err
 }
 
+/* 查询可用域列表信息 */
+func (c *JdfusionClient) GetRegionsAvailableZones(request *jdfusion.GetRegionsAvailableZonesRequest) (*jdfusion.GetRegionsAvailableZonesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdfusion.GetRegionsAvailableZonesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 从虚拟机卸载云硬盘 */
 func (c *JdfusionClient) DetachDiskToVmInstanceByDiskId(request *jdfusion.DetachDiskToVmInstanceByDiskIdRequest) (*jdfusion.DetachDiskToVmInstanceByDiskIdResponse, error) {
     if request == nil {
@@ -1164,6 +1344,26 @@ func (c *JdfusionClient) DetachDiskToVmInstanceByDiskId(request *jdfusion.Detach
     }
 
     jdResp := &jdfusion.DetachDiskToVmInstanceByDiskIdResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 启动监听器 */
+func (c *JdfusionClient) StartSlbListener(request *jdfusion.StartSlbListenerRequest) (*jdfusion.StartSlbListenerResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdfusion.StartSlbListenerResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1233,7 +1433,7 @@ func (c *JdfusionClient) CreateRdsInstance(request *jdfusion.CreateRdsInstanceRe
     return jdResp, err
 }
 
-/* 根据云提供商查询对应的安全组资源信息 */
+/* 查询指定的安全组资源信息 */
 func (c *JdfusionClient) GetVpcSecurityGroupById(request *jdfusion.GetVpcSecurityGroupByIdRequest) (*jdfusion.GetVpcSecurityGroupByIdResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1344,6 +1544,26 @@ func (c *JdfusionClient) GetVpcSecurityGroups(request *jdfusion.GetVpcSecurityGr
     }
 
     jdResp := &jdfusion.GetVpcSecurityGroupsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 新增安全组规则 */
+func (c *JdfusionClient) CreateSecurityGroupsRule(request *jdfusion.CreateSecurityGroupsRuleRequest) (*jdfusion.CreateSecurityGroupsRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdfusion.CreateSecurityGroupsRuleResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1673,6 +1893,26 @@ func (c *JdfusionClient) GetVpcs(request *jdfusion.GetVpcsRequest) (*jdfusion.Ge
     return jdResp, err
 }
 
+/* 启动负载均衡 */
+func (c *JdfusionClient) StartSlb(request *jdfusion.StartSlbRequest) (*jdfusion.StartSlbResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdfusion.StartSlbResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 根据云提供商查询对应的VM资源信息 */
 func (c *JdfusionClient) GetVmInstancesById(request *jdfusion.GetVmInstancesByIdRequest) (*jdfusion.GetVmInstancesByIdResponse, error) {
     if request == nil {
@@ -1684,6 +1924,46 @@ func (c *JdfusionClient) GetVmInstancesById(request *jdfusion.GetVmInstancesById
     }
 
     jdResp := &jdfusion.GetVmInstancesByIdResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询地域列表信息 */
+func (c *JdfusionClient) GetRegions(request *jdfusion.GetRegionsRequest) (*jdfusion.GetRegionsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdfusion.GetRegionsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 停止负载均衡 */
+func (c *JdfusionClient) StopSlb(request *jdfusion.StopSlbRequest) (*jdfusion.StopSlbResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdfusion.StopSlbResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1873,6 +2153,26 @@ func (c *JdfusionClient) GetDisks(request *jdfusion.GetDisksRequest) (*jdfusion.
     return jdResp, err
 }
 
+/* 通过异步任务，给RDS账号分配数据库权限 */
+func (c *JdfusionClient) GrantRdsAccountsByTask(request *jdfusion.GrantRdsAccountsByTaskRequest) (*jdfusion.GrantRdsAccountsByTaskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdfusion.GrantRdsAccountsByTaskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 卸载网卡 */
 func (c *JdfusionClient) DetachVpcNetworkInterfaceById(request *jdfusion.DetachVpcNetworkInterfaceByIdRequest) (*jdfusion.DetachVpcNetworkInterfaceByIdResponse, error) {
     if request == nil {
@@ -1904,6 +2204,26 @@ func (c *JdfusionClient) CreateVmInstance(request *jdfusion.CreateVmInstanceRequ
     }
 
     jdResp := &jdfusion.CreateVmInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除监听器 */
+func (c *JdfusionClient) DeleteSlbsListener(request *jdfusion.DeleteSlbsListenerRequest) (*jdfusion.DeleteSlbsListenerResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdfusion.DeleteSlbsListenerResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1953,7 +2273,7 @@ func (c *JdfusionClient) DeleteVmKeypairByName(request *jdfusion.DeleteVmKeypair
     return jdResp, err
 }
 
-/* 给RDS账号分配数据库权限 */
+/* 撤销RDS账号在指定数据库的所有权限 */
 func (c *JdfusionClient) RevokeRdsAccount(request *jdfusion.RevokeRdsAccountRequest) (*jdfusion.RevokeRdsAccountResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")

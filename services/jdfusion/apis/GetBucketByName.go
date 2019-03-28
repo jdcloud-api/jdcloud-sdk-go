@@ -112,5 +112,5 @@ type GetBucketByNameResponse struct {
 }
 
 type GetBucketByNameResult struct {
-    Bucket jdfusion.OssBucketInfo `json:"bucket"`
+    Bucket jdfusion.OssBucketDetailInfo `json:"bucket"`
 }
