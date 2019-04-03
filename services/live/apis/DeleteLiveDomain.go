@@ -24,12 +24,14 @@ type DeleteLiveDomainRequest struct {
 
     core.JDCloudRequest
 
-    /* 推流域名  */
+    /* 推流域名
+  */
     PublishDomain string `json:"publishDomain"`
 }
 
 /*
- * param publishDomain: 推流域名 (Required)
+ * param publishDomain: 推流域名
+ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -49,7 +51,8 @@ func NewDeleteLiveDomainRequest(
 }
 
 /*
- * param publishDomain: 推流域名 (Required)
+ * param publishDomain: 推流域名
+ (Required)
  */
 func NewDeleteLiveDomainRequestWithAllParams(
     publishDomain string,
@@ -79,7 +82,8 @@ func NewDeleteLiveDomainRequestWithoutParam() *DeleteLiveDomainRequest {
     }
 }
 
-/* param publishDomain: 推流域名(Required) */
+/* param publishDomain: 推流域名
+(Required) */
 func (r *DeleteLiveDomainRequest) SetPublishDomain(publishDomain string) {
     r.PublishDomain = publishDomain
 }

@@ -22,26 +22,26 @@ type Snapshot struct {
     /* 推流域名 (Optional) */
     PublishDomain string `json:"publishDomain"`
 
-    /* 流所属应用名称 (Optional) */
+    /* 应用名称 (Optional) */
     AppName string `json:"appName"`
 
-    /* 直播流名称 (Optional) */
+    /* 流名称 (Optional) */
     StreamName string `json:"streamName"`
 
     /* 截图时间 (Optional) */
     SnapshotTime string `json:"snapshotTime"`
 
     /* 截图高度:
-  - 取值: [8,8192]
-  - 等比: 如果只填写一个参数,则按参数比例等比缩放截图
-  - 随源: 如果两个参数都不填写，则截取源流大小原图
+- 取值: [8,8192]
+- 等比: 如果只填写一个参数,则按参数比例等比缩放截图
+- 随源: 如果两个参数都不填写，则截取源流大小原图
  (Optional) */
     Height int `json:"height"`
 
     /* 截图宽度:
-  - 取值: [8,8192]
-  - 等比: 如果只填写一个参数,则按参数比例等比缩放截图
-  - 随源: 如果两个参数都不填写，则截取源流大小原图
+- 取值: [8,8192]
+- 等比: 如果只填写一个参数,则按参数比例等比缩放截图
+- 随源: 如果两个参数都不填写，则截取源流大小原图
  (Optional) */
     Width int `json:"width"`
 

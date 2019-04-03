@@ -24,7 +24,7 @@ type AddLiveStreamDomainRecordRequest struct {
 
     core.JDCloudRequest
 
-    /* 您的推流加速域名  */
+    /* 推流域名  */
     PublishDomain string `json:"publishDomain"`
 
     /* 录制模版  */
@@ -32,7 +32,7 @@ type AddLiveStreamDomainRecordRequest struct {
 }
 
 /*
- * param publishDomain: 您的推流加速域名 (Required)
+ * param publishDomain: 推流域名 (Required)
  * param template: 录制模版 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -55,7 +55,7 @@ func NewAddLiveStreamDomainRecordRequest(
 }
 
 /*
- * param publishDomain: 您的推流加速域名 (Required)
+ * param publishDomain: 推流域名 (Required)
  * param template: 录制模版 (Required)
  */
 func NewAddLiveStreamDomainRecordRequestWithAllParams(
@@ -88,7 +88,7 @@ func NewAddLiveStreamDomainRecordRequestWithoutParam() *AddLiveStreamDomainRecor
     }
 }
 
-/* param publishDomain: 您的推流加速域名(Required) */
+/* param publishDomain: 推流域名(Required) */
 func (r *AddLiveStreamDomainRecordRequest) SetPublishDomain(publishDomain string) {
     r.PublishDomain = publishDomain
 }

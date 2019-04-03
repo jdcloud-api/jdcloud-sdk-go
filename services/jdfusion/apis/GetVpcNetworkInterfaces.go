@@ -27,6 +27,9 @@ type GetVpcNetworkInterfacesRequest struct {
 
     /* 地域ID  */
     RegionId string `json:"regionId"`
+
+    /* 云主机id (Optional) */
+    VmId *string `json:"vmId"`
 }
 
 /*
@@ -51,9 +54,11 @@ func NewGetVpcNetworkInterfacesRequest(
 
 /*
  * param regionId: 地域ID (Required)
+ * param vmId: 云主机id (Optional)
  */
 func NewGetVpcNetworkInterfacesRequestWithAllParams(
     regionId string,
+    vmId *string,
 ) *GetVpcNetworkInterfacesRequest {
 
     return &GetVpcNetworkInterfacesRequest{
@@ -64,6 +69,7 @@ func NewGetVpcNetworkInterfacesRequestWithAllParams(
             Version: "v1",
         },
         RegionId: regionId,
+        VmId: vmId,
     }
 }
 
@@ -83,6 +89,11 @@ func NewGetVpcNetworkInterfacesRequestWithoutParam() *GetVpcNetworkInterfacesReq
 /* param regionId: 地域ID(Required) */
 func (r *GetVpcNetworkInterfacesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
+}
+
+/* param vmId: 云主机id(Optional) */
+func (r *GetVpcNetworkInterfacesRequest) SetVmId(vmId string) {
+    r.VmId = &vmId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

@@ -22,6 +22,6 @@ type DomainDetails struct {
     /* 推流域名集合 (Optional) */
     PublishDomains []PublishDomain `json:"publishDomains"`
 
-    /* 直播域名集合 (Optional) */
+    /* 播放域名集合 (Optional) */
     PlayDomains []PlayDomain `json:"playDomains"`
 }

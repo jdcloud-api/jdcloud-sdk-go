@@ -24,26 +24,26 @@ type AddLiveStreamAppRecordRequest struct {
 
     core.JDCloudRequest
 
-    /* 直播流所属应用名称  */
-    AppName string `json:"appName"`
-
-    /* 您的推流加速域名  */
+    /* 推流域名  */
     PublishDomain string `json:"publishDomain"`
+
+    /* 应用名称  */
+    AppName string `json:"appName"`
 
     /* 录制模版  */
     Template string `json:"template"`
 }
 
 /*
- * param appName: 直播流所属应用名称 (Required)
- * param publishDomain: 您的推流加速域名 (Required)
+ * param publishDomain: 推流域名 (Required)
+ * param appName: 应用名称 (Required)
  * param template: 录制模版 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewAddLiveStreamAppRecordRequest(
-    appName string,
     publishDomain string,
+    appName string,
     template string,
 ) *AddLiveStreamAppRecordRequest {
 
@@ -54,20 +54,20 @@ func NewAddLiveStreamAppRecordRequest(
 			Header:  nil,
 			Version: "v1",
 		},
-        AppName: appName,
         PublishDomain: publishDomain,
+        AppName: appName,
         Template: template,
 	}
 }
 
 /*
- * param appName: 直播流所属应用名称 (Required)
- * param publishDomain: 您的推流加速域名 (Required)
+ * param publishDomain: 推流域名 (Required)
+ * param appName: 应用名称 (Required)
  * param template: 录制模版 (Required)
  */
 func NewAddLiveStreamAppRecordRequestWithAllParams(
-    appName string,
     publishDomain string,
+    appName string,
     template string,
 ) *AddLiveStreamAppRecordRequest {
 
@@ -78,8 +78,8 @@ func NewAddLiveStreamAppRecordRequestWithAllParams(
             Header:  nil,
             Version: "v1",
         },
-        AppName: appName,
         PublishDomain: publishDomain,
+        AppName: appName,
         Template: template,
     }
 }
@@ -97,14 +97,14 @@ func NewAddLiveStreamAppRecordRequestWithoutParam() *AddLiveStreamAppRecordReque
     }
 }
 
-/* param appName: 直播流所属应用名称(Required) */
-func (r *AddLiveStreamAppRecordRequest) SetAppName(appName string) {
-    r.AppName = appName
-}
-
-/* param publishDomain: 您的推流加速域名(Required) */
+/* param publishDomain: 推流域名(Required) */
 func (r *AddLiveStreamAppRecordRequest) SetPublishDomain(publishDomain string) {
     r.PublishDomain = publishDomain
+}
+
+/* param appName: 应用名称(Required) */
+func (r *AddLiveStreamAppRecordRequest) SetAppName(appName string) {
+    r.AppName = appName
 }
 
 /* param template: 录制模版(Required) */

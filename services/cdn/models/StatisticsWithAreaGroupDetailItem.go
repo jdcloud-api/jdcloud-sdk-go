@@ -22,6 +22,6 @@ type StatisticsWithAreaGroupDetailItem struct {
     /*  (Optional) */
     Area string `json:"area"`
 
-    /* 查询结果,类型为HashMap<String, Object> (Optional) */
-    IspStat interface{} `json:"ispStat"`
+    /*  (Optional) */
+    IspStat []interface{} `json:"ispStat"`
 }

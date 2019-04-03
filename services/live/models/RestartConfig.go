@@ -20,8 +20,8 @@ package models
 type RestartConfig struct {
 
     /* 推流域名集合 (Optional) */
-    PublishDomains []ShiftPublishDomain `json:"publishDomains"`
+    PublishDomains []RestartPublishDomain `json:"publishDomains"`
 
-    /* 直播域名集合 (Optional) */
+    /* 播放域名集合 (Optional) */
     PlayDomains []RestartPlayDomain `json:"playDomains"`
 }

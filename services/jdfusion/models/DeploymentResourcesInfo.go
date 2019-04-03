@@ -38,6 +38,9 @@ type DeploymentResourcesInfo struct {
     SecurityGroups *interface{} `json:"securityGroups"`
 
     /*  (Optional) */
+    SecurityGroupRules *interface{} `json:"securityGroupRules"`
+
+    /*  (Optional) */
     Keypairs *interface{} `json:"keypairs"`
 
     /*  (Optional) */
@@ -60,6 +63,21 @@ type DeploymentResourcesInfo struct {
 
     /*  (Optional) */
     EipAssociate *interface{} `json:"eipAssociate"`
+
+    /*  (Optional) */
+    Rds *interface{} `json:"rds"`
+
+    /*  (Optional) */
+    RdsDatabase *interface{} `json:"rdsDatabase"`
+
+    /*  (Optional) */
+    RdsAccount *interface{} `json:"rdsAccount"`
+
+    /*  (Optional) */
+    RdsAccountGrant *interface{} `json:"rdsAccountGrant"`
+
+    /*  (Optional) */
+    Bucket *interface{} `json:"bucket"`
 
     /*  (Optional) */
     Variables *interface{} `json:"variables"`

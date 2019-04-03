@@ -27,6 +27,9 @@ type GetDisksRequest struct {
 
     /* 地域ID  */
     RegionId string `json:"regionId"`
+
+    /* 云主机id (Optional) */
+    VmId *string `json:"vmId"`
 }
 
 /*
@@ -51,9 +54,11 @@ func NewGetDisksRequest(
 
 /*
  * param regionId: 地域ID (Required)
+ * param vmId: 云主机id (Optional)
  */
 func NewGetDisksRequestWithAllParams(
     regionId string,
+    vmId *string,
 ) *GetDisksRequest {
 
     return &GetDisksRequest{
@@ -64,6 +69,7 @@ func NewGetDisksRequestWithAllParams(
             Version: "v1",
         },
         RegionId: regionId,
+        VmId: vmId,
     }
 }
 
@@ -83,6 +89,11 @@ func NewGetDisksRequestWithoutParam() *GetDisksRequest {
 /* param regionId: 地域ID(Required) */
 func (r *GetDisksRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
+}
+
+/* param vmId: 云主机id(Optional) */
+func (r *GetDisksRequest) SetVmId(vmId string) {
+    r.VmId = &vmId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

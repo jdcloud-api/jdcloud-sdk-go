@@ -24,39 +24,41 @@ type AddLiveStreamAppTranscodeRequest struct {
 
     core.JDCloudRequest
 
-    /* 直播的推流域名  */
+    /* 推流域名  */
     PublishDomain string `json:"publishDomain"`
 
-    /* 转码模版:
-  - 标准质量模板：sd、hd、hsd
-  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
-              取值要求：数字、大小写字母或短横线("-"),
-              首尾不能有特殊字符("-")
-  - <b>注意: 不能与标准的转码模板和已定义命名重复</b>
+    /* 应用名称  */
+    AppName string `json:"appName"`
+
+    /* 转码模版
+- 取值范围: 系统标准转码模板, 用户自定义转码模板
+- 系统标准转码模板
+  ld (h.264/640*360/15f)
+  sd (h.264/854*480/24f)
+  hd (h.264/1280*720/25f)
+  shd (h.264/1920*1080/30f)
   */
     Template string `json:"template"`
-
-    /* 直播流所属应用名称  */
-    AppName string `json:"appName"`
 }
 
 /*
- * param publishDomain: 直播的推流域名 (Required)
- * param template: 转码模版:
-  - 标准质量模板：sd、hd、hsd
-  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
-              取值要求：数字、大小写字母或短横线("-"),
-              首尾不能有特殊字符("-")
-  - <b>注意: 不能与标准的转码模板和已定义命名重复</b>
+ * param publishDomain: 推流域名 (Required)
+ * param appName: 应用名称 (Required)
+ * param template: 转码模版
+- 取值范围: 系统标准转码模板, 用户自定义转码模板
+- 系统标准转码模板
+  ld (h.264/640*360/15f)
+  sd (h.264/854*480/24f)
+  hd (h.264/1280*720/25f)
+  shd (h.264/1920*1080/30f)
  (Required)
- * param appName: 直播流所属应用名称 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewAddLiveStreamAppTranscodeRequest(
     publishDomain string,
-    template string,
     appName string,
+    template string,
 ) *AddLiveStreamAppTranscodeRequest {
 
 	return &AddLiveStreamAppTranscodeRequest{
@@ -67,26 +69,27 @@ func NewAddLiveStreamAppTranscodeRequest(
 			Version: "v1",
 		},
         PublishDomain: publishDomain,
-        Template: template,
         AppName: appName,
+        Template: template,
 	}
 }
 
 /*
- * param publishDomain: 直播的推流域名 (Required)
- * param template: 转码模版:
-  - 标准质量模板：sd、hd、hsd
-  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
-              取值要求：数字、大小写字母或短横线("-"),
-              首尾不能有特殊字符("-")
-  - <b>注意: 不能与标准的转码模板和已定义命名重复</b>
+ * param publishDomain: 推流域名 (Required)
+ * param appName: 应用名称 (Required)
+ * param template: 转码模版
+- 取值范围: 系统标准转码模板, 用户自定义转码模板
+- 系统标准转码模板
+  ld (h.264/640*360/15f)
+  sd (h.264/854*480/24f)
+  hd (h.264/1280*720/25f)
+  shd (h.264/1920*1080/30f)
  (Required)
- * param appName: 直播流所属应用名称 (Required)
  */
 func NewAddLiveStreamAppTranscodeRequestWithAllParams(
     publishDomain string,
-    template string,
     appName string,
+    template string,
 ) *AddLiveStreamAppTranscodeRequest {
 
     return &AddLiveStreamAppTranscodeRequest{
@@ -97,8 +100,8 @@ func NewAddLiveStreamAppTranscodeRequestWithAllParams(
             Version: "v1",
         },
         PublishDomain: publishDomain,
-        Template: template,
         AppName: appName,
+        Template: template,
     }
 }
 
@@ -115,25 +118,26 @@ func NewAddLiveStreamAppTranscodeRequestWithoutParam() *AddLiveStreamAppTranscod
     }
 }
 
-/* param publishDomain: 直播的推流域名(Required) */
+/* param publishDomain: 推流域名(Required) */
 func (r *AddLiveStreamAppTranscodeRequest) SetPublishDomain(publishDomain string) {
     r.PublishDomain = publishDomain
 }
 
-/* param template: 转码模版:
-  - 标准质量模板：sd、hd、hsd
-  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
-              取值要求：数字、大小写字母或短横线("-"),
-              首尾不能有特殊字符("-")
-  - <b>注意: 不能与标准的转码模板和已定义命名重复</b>
+/* param appName: 应用名称(Required) */
+func (r *AddLiveStreamAppTranscodeRequest) SetAppName(appName string) {
+    r.AppName = appName
+}
+
+/* param template: 转码模版
+- 取值范围: 系统标准转码模板, 用户自定义转码模板
+- 系统标准转码模板
+  ld (h.264/640*360/15f)
+  sd (h.264/854*480/24f)
+  hd (h.264/1280*720/25f)
+  shd (h.264/1920*1080/30f)
 (Required) */
 func (r *AddLiveStreamAppTranscodeRequest) SetTemplate(template string) {
     r.Template = template
-}
-
-/* param appName: 直播流所属应用名称(Required) */
-func (r *AddLiveStreamAppTranscodeRequest) SetAppName(appName string) {
-    r.AppName = appName
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

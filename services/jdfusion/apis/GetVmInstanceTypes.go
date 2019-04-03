@@ -27,6 +27,9 @@ type GetVmInstanceTypesRequest struct {
 
     /* 地域ID  */
     RegionId string `json:"regionId"`
+
+    /* 可用区 (Optional) */
+    Az *string `json:"az"`
 }
 
 /*
@@ -51,9 +54,11 @@ func NewGetVmInstanceTypesRequest(
 
 /*
  * param regionId: 地域ID (Required)
+ * param az: 可用区 (Optional)
  */
 func NewGetVmInstanceTypesRequestWithAllParams(
     regionId string,
+    az *string,
 ) *GetVmInstanceTypesRequest {
 
     return &GetVmInstanceTypesRequest{
@@ -64,6 +69,7 @@ func NewGetVmInstanceTypesRequestWithAllParams(
             Version: "v1",
         },
         RegionId: regionId,
+        Az: az,
     }
 }
 
@@ -83,6 +89,11 @@ func NewGetVmInstanceTypesRequestWithoutParam() *GetVmInstanceTypesRequest {
 /* param regionId: 地域ID(Required) */
 func (r *GetVmInstanceTypesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
+}
+
+/* param az: 可用区(Optional) */
+func (r *GetVmInstanceTypesRequest) SetAz(az string) {
+    r.Az = &az
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

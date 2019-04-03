@@ -19,18 +19,22 @@ package models
 
 type OnlineStreamInfo struct {
 
-    /* 您的加速域名 (Optional) */
+    /* 推流域名 (Optional) */
     PublishDomain string `json:"publishDomain"`
 
-    /* 您的APP (Optional) */
+    /* 应用名称 (Optional) */
     AppName string `json:"appName"`
 
-    /* 您的流名 (Optional) */
+    /* 流名称 (Optional) */
     StreamName string `json:"streamName"`
 
-    /* 您的推流时间 (Optional) */
+    /* 推流时间
+- UTC时间
+  格式:yyyy-MM-dd'T'HH:mm:ss'Z'
+  示例:2018-10-21T10:00:00Z
+ (Optional) */
     PublishTime string `json:"publishTime"`
 
-    /* 您的推流地址 (Optional) */
+    /* 推流地址 (Optional) */
     PublishUrl string `json:"publishUrl"`
 }

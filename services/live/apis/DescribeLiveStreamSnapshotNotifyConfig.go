@@ -24,12 +24,12 @@ type DescribeLiveStreamSnapshotNotifyConfigRequest struct {
 
     core.JDCloudRequest
 
-    /* 推流加速域名  */
+    /* 推流域名  */
     PublishDomain string `json:"publishDomain"`
 }
 
 /*
- * param publishDomain: 推流加速域名 (Required)
+ * param publishDomain: 推流域名 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -49,7 +49,7 @@ func NewDescribeLiveStreamSnapshotNotifyConfigRequest(
 }
 
 /*
- * param publishDomain: 推流加速域名 (Required)
+ * param publishDomain: 推流域名 (Required)
  */
 func NewDescribeLiveStreamSnapshotNotifyConfigRequestWithAllParams(
     publishDomain string,
@@ -79,7 +79,7 @@ func NewDescribeLiveStreamSnapshotNotifyConfigRequestWithoutParam() *DescribeLiv
     }
 }
 
-/* param publishDomain: 推流加速域名(Required) */
+/* param publishDomain: 推流域名(Required) */
 func (r *DescribeLiveStreamSnapshotNotifyConfigRequest) SetPublishDomain(publishDomain string) {
     r.PublishDomain = publishDomain
 }

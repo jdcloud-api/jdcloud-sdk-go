@@ -57,4 +57,7 @@ type CreateRDSInstance struct {
 
     /* 子网ID  */
     SubnetId string `json:"subnetId"`
+
+    /* 创建时间 (Optional) */
+    CreateTime *string `json:"createTime"`
 }

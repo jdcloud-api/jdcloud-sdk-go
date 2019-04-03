@@ -27,45 +27,42 @@ type OperateLiveDomainIpBlackListRequest struct {
     /* 用户域名  */
     Domain string `json:"domain"`
 
-    /*   */
-    BlackIpsEnable string `json:"blackIpsEnable"`
+    /*  (Optional) */
+    BlackIpsEnable *string `json:"blackIpsEnable"`
 }
 
 /*
  * param domain: 用户域名 (Required)
- * param blackIpsEnable:  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewOperateLiveDomainIpBlackListRequest(
     domain string,
-    blackIpsEnable string,
 ) *OperateLiveDomainIpBlackListRequest {
 
 	return &OperateLiveDomainIpBlackListRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/liveDomain/{domain}/ipBlackList:{blackIpsEnable}",
+			URL:     "/liveDomain/{domain}/ipBlackList:operate",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         Domain: domain,
-        BlackIpsEnable: blackIpsEnable,
 	}
 }
 
 /*
  * param domain: 用户域名 (Required)
- * param blackIpsEnable:  (Required)
+ * param blackIpsEnable:  (Optional)
  */
 func NewOperateLiveDomainIpBlackListRequestWithAllParams(
     domain string,
-    blackIpsEnable string,
+    blackIpsEnable *string,
 ) *OperateLiveDomainIpBlackListRequest {
 
     return &OperateLiveDomainIpBlackListRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/liveDomain/{domain}/ipBlackList:{blackIpsEnable}",
+            URL:     "/liveDomain/{domain}/ipBlackList:operate",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -80,7 +77,7 @@ func NewOperateLiveDomainIpBlackListRequestWithoutParam() *OperateLiveDomainIpBl
 
     return &OperateLiveDomainIpBlackListRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/liveDomain/{domain}/ipBlackList:{blackIpsEnable}",
+            URL:     "/liveDomain/{domain}/ipBlackList:operate",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -93,9 +90,9 @@ func (r *OperateLiveDomainIpBlackListRequest) SetDomain(domain string) {
     r.Domain = domain
 }
 
-/* param blackIpsEnable: (Required) */
+/* param blackIpsEnable: (Optional) */
 func (r *OperateLiveDomainIpBlackListRequest) SetBlackIpsEnable(blackIpsEnable string) {
-    r.BlackIpsEnable = blackIpsEnable
+    r.BlackIpsEnable = &blackIpsEnable
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

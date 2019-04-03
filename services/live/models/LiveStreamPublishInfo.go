@@ -19,18 +19,24 @@ package models
 
 type LiveStreamPublishInfo struct {
 
-    /* 您的加速域名 (Optional) */
+    /* 推流域名 (Optional) */
     PublishDomain string `json:"publishDomain"`
 
-    /* 您的APP (Optional) */
+    /* 应用名称 (Optional) */
     AppName string `json:"appName"`
 
-    /* 您的流名 (Optional) */
+    /* 流名称 (Optional) */
     StreamName string `json:"streamName"`
 
-    /* 开始推流时刻 UTC 时间 (Optional) */
+    /* 推流开始时间
+- UTC时间
+  格式:yyyy-MM-dd'T'HH:mm:ss'Z'
+ (Optional) */
     PublishUpTime string `json:"publishUpTime"`
 
-    /* 开始推流时刻 UTC 时间 (Optional) */
+    /* 推流结束时刻
+- UTC时间
+  格式:yyyy-MM-dd'T'HH:mm:ss'Z'
+ (Optional) */
     PublishDownTime string `json:"publishDownTime"`
 }

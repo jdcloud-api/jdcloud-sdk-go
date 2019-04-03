@@ -24,18 +24,24 @@ type SetLivePlayAuthKeyRequest struct {
 
     core.JDCloudRequest
 
-    /* 您的播放加速域名  */
+    /* 播放域名  */
     PlayDomain string `json:"playDomain"`
 
-    /* 播放鉴权状态 (Optional) */
+    /* 播放鉴权状态
+  on: 开启
+  off: 关闭
+- 当推流鉴权状态on(开启)时,authKey不能为空
+ (Optional) */
     AuthStatus *string `json:"authStatus"`
 
-    /* 播放鉴权key (Optional) */
+    /* 播放鉴权key
+- 取值: 支持大小写字母和数字 长度6-32位
+ (Optional) */
     AuthKey *string `json:"authKey"`
 }
 
 /*
- * param playDomain: 您的播放加速域名 (Required)
+ * param playDomain: 播放域名 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -55,9 +61,15 @@ func NewSetLivePlayAuthKeyRequest(
 }
 
 /*
- * param playDomain: 您的播放加速域名 (Required)
- * param authStatus: 播放鉴权状态 (Optional)
- * param authKey: 播放鉴权key (Optional)
+ * param playDomain: 播放域名 (Required)
+ * param authStatus: 播放鉴权状态
+  on: 开启
+  off: 关闭
+- 当推流鉴权状态on(开启)时,authKey不能为空
+ (Optional)
+ * param authKey: 播放鉴权key
+- 取值: 支持大小写字母和数字 长度6-32位
+ (Optional)
  */
 func NewSetLivePlayAuthKeyRequestWithAllParams(
     playDomain string,
@@ -91,17 +103,23 @@ func NewSetLivePlayAuthKeyRequestWithoutParam() *SetLivePlayAuthKeyRequest {
     }
 }
 
-/* param playDomain: 您的播放加速域名(Required) */
+/* param playDomain: 播放域名(Required) */
 func (r *SetLivePlayAuthKeyRequest) SetPlayDomain(playDomain string) {
     r.PlayDomain = playDomain
 }
 
-/* param authStatus: 播放鉴权状态(Optional) */
+/* param authStatus: 播放鉴权状态
+  on: 开启
+  off: 关闭
+- 当推流鉴权状态on(开启)时,authKey不能为空
+(Optional) */
 func (r *SetLivePlayAuthKeyRequest) SetAuthStatus(authStatus string) {
     r.AuthStatus = &authStatus
 }
 
-/* param authKey: 播放鉴权key(Optional) */
+/* param authKey: 播放鉴权key
+- 取值: 支持大小写字母和数字 长度6-32位
+(Optional) */
 func (r *SetLivePlayAuthKeyRequest) SetAuthKey(authKey string) {
     r.AuthKey = &authKey
 }

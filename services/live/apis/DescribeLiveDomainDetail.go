@@ -25,12 +25,16 @@ type DescribeLiveDomainDetailRequest struct {
 
     core.JDCloudRequest
 
-    /* 推流域名  */
+    /* 推流域名
+- 需要停用的域名对(推流域名,播放域名)中的推流域名
+  */
     PublishDomain string `json:"publishDomain"`
 }
 
 /*
- * param publishDomain: 推流域名 (Required)
+ * param publishDomain: 推流域名
+- 需要停用的域名对(推流域名,播放域名)中的推流域名
+ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -50,7 +54,9 @@ func NewDescribeLiveDomainDetailRequest(
 }
 
 /*
- * param publishDomain: 推流域名 (Required)
+ * param publishDomain: 推流域名
+- 需要停用的域名对(推流域名,播放域名)中的推流域名
+ (Required)
  */
 func NewDescribeLiveDomainDetailRequestWithAllParams(
     publishDomain string,
@@ -80,7 +86,9 @@ func NewDescribeLiveDomainDetailRequestWithoutParam() *DescribeLiveDomainDetailR
     }
 }
 
-/* param publishDomain: 推流域名(Required) */
+/* param publishDomain: 推流域名
+- 需要停用的域名对(推流域名,播放域名)中的推流域名
+(Required) */
 func (r *DescribeLiveDomainDetailRequest) SetPublishDomain(publishDomain string) {
     r.PublishDomain = publishDomain
 }

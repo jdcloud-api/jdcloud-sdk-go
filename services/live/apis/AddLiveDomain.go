@@ -24,16 +24,24 @@ type AddLiveDomainRequest struct {
 
     core.JDCloudRequest
 
-    /* 直播的推流域名（不支持泛域名）  */
+    /* 直播的推流域名
+- 不支持泛域名
+  */
     PublishDomain string `json:"publishDomain"`
 
-    /* 直播的播放域名（不支持泛域名）  */
+    /* 直播的播放域名
+- 不支持泛域名
+  */
     PlayDomain string `json:"playDomain"`
 }
 
 /*
- * param publishDomain: 直播的推流域名（不支持泛域名） (Required)
- * param playDomain: 直播的播放域名（不支持泛域名） (Required)
+ * param publishDomain: 直播的推流域名
+- 不支持泛域名
+ (Required)
+ * param playDomain: 直播的播放域名
+- 不支持泛域名
+ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -55,8 +63,12 @@ func NewAddLiveDomainRequest(
 }
 
 /*
- * param publishDomain: 直播的推流域名（不支持泛域名） (Required)
- * param playDomain: 直播的播放域名（不支持泛域名） (Required)
+ * param publishDomain: 直播的推流域名
+- 不支持泛域名
+ (Required)
+ * param playDomain: 直播的播放域名
+- 不支持泛域名
+ (Required)
  */
 func NewAddLiveDomainRequestWithAllParams(
     publishDomain string,
@@ -88,12 +100,16 @@ func NewAddLiveDomainRequestWithoutParam() *AddLiveDomainRequest {
     }
 }
 
-/* param publishDomain: 直播的推流域名（不支持泛域名）(Required) */
+/* param publishDomain: 直播的推流域名
+- 不支持泛域名
+(Required) */
 func (r *AddLiveDomainRequest) SetPublishDomain(publishDomain string) {
     r.PublishDomain = publishDomain
 }
 
-/* param playDomain: 直播的播放域名（不支持泛域名）(Required) */
+/* param playDomain: 直播的播放域名
+- 不支持泛域名
+(Required) */
 func (r *AddLiveDomainRequest) SetPlayDomain(playDomain string) {
     r.PlayDomain = playDomain
 }

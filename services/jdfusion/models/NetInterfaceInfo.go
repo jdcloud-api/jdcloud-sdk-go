@@ -57,4 +57,10 @@ type NetInterfaceInfo struct {
 
     /* 所属云提供商ID (Optional) */
     CloudID string `json:"cloudID"`
+
+    /* 安全组id列表 (Optional) */
+    SecurityGroupIds []string `json:"securityGroupIds"`
+
+    /* 内网ip详情列表。 (Optional) */
+    PrivateIps []PrivateIp `json:"privateIps"`
 }

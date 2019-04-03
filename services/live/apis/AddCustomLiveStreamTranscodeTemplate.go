@@ -24,103 +24,107 @@ type AddCustomLiveStreamTranscodeTemplateRequest struct {
 
     core.JDCloudRequest
 
-    /* 转码输出的码率值:
- - 取值范围:[200,3000]
- - 单位: kpbs
+    /* 转码输出的码率值
+- 取值范围: [200,3000]
+- 单位: kpbs
   */
     VideoCodeRate int `json:"videoCodeRate"`
 
-    /* 转码输出的帧率值:
-  - 取值：15/1、25/1、30/1、60/1
+    /* 转码输出的帧率值
+- 取值：15、25、30、60
   */
     VideoFrameRate string `json:"videoFrameRate"`
 
-    /* 转码输出视频宽度:
-  - 取值: [100,1920]
-  - 等比: 如果只填写一个参数,则按参数比例调节输出转码视频
-  - 随源: 如果两个参数都不填写，则按照源比例输出转码视频
+    /* 转码输出视频宽度
+- 取值: [100,1920]
+- 如果(width,height)只设置其中之一,则按所设置参数项等比缩放另一项输出转码
+- 如果(width,height)都不设置，则按源流大小输出转码
  (Optional) */
     Width *int `json:"width"`
 
-    /* 转码输出视频宽度:
-  - 取值: [100,1920]
-  - 等比: 如果只填写一个参数,则按参数比例调节输出转码视频
-  - 随源: 如果两个参数都不填写，则按照源比例输出转码视频
+    /* 转码输出视频宽度
+- 取值: [100,1920]
+- 如果(width,height)只设置其中之一,则按所设置参数项等比缩放另一项输出转码
+- 如果(width,height)都不设置，则按源流大小输出转码
  (Optional) */
     Height *int `json:"height"`
 
-    /* 转码模板后缀:
-  - 标准质量模板：sd、hd、hsd
-  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
-              取值要求：数字、大小写字母或短横线("-"),
-              首尾不能有特殊字符("-")
-  - <b>注意: 不能与标准的转码模板和已定义命名重复</b>
+    /* 转码模板(转码流输出后缀)
+- 取值要求：数字、大小写字母或短横线("-"),必须以数字或字母作为开头和结尾,长度不超过50字符
+- <b>注意: 不能与系统的标准的转码模板和当前用户已自定义命名重复</b>
+- 系统标准转码模板
+  ld (h.264/640*360/15f)
+  sd (h.264/854*480/24f)
+  hd (h.264/1280*720/25f)
+  shd (h.264/1920*1080/30f)
   */
     Template string `json:"template"`
 
-    /* 转码输出音频编码格式:
-  - 取值: aac、mp3
-  - 不区分大小写
+    /* 转码输出音频编码格式
+- 取值: aac、mp3
+- 不区分大小写
   */
     AudioCodec string `json:"audioCodec"`
 
-    /* 转码输出音频格式:
-  - 取值: aac_lc，aac_low，aac_he，aac_he_v2
-  - 不区分大小写
+    /* 转码输出音频格式
+- 取值: aac_lc，aac_low，aac_he，aac_he_v2
+- 不区分大小写
   */
     AudioFormat string `json:"audioFormat"`
 
-    /* 转码输出音频采样率:
-  - 取值: [44100,48000]
+    /* 转码输出音频采样率
+- 取值: [44100,48000]
   */
     AudioSampleRate int `json:"audioSampleRate"`
 
-    /* 转码输出音频通道数:
-  - 1  单声道
-  - 2  双声道
+    /* 转码输出音频通道数
+  1: 单声道
+  2: 双声道
   */
     AudioChannel int `json:"audioChannel"`
 
-    /* 转码输出音频码率:
-  - 取值: [16,128]
-  - 单位: kbps
+    /* 转码输出音频码率
+- 取值: [16,128]
+- 单位: kbps
   */
     AudioCodeRate int `json:"audioCodeRate"`
 }
 
 /*
- * param videoCodeRate: 转码输出的码率值:
- - 取值范围:[200,3000]
- - 单位: kpbs
+ * param videoCodeRate: 转码输出的码率值
+- 取值范围: [200,3000]
+- 单位: kpbs
  (Required)
- * param videoFrameRate: 转码输出的帧率值:
-  - 取值：15/1、25/1、30/1、60/1
+ * param videoFrameRate: 转码输出的帧率值
+- 取值：15、25、30、60
  (Required)
- * param template: 转码模板后缀:
-  - 标准质量模板：sd、hd、hsd
-  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
-              取值要求：数字、大小写字母或短横线("-"),
-              首尾不能有特殊字符("-")
-  - <b>注意: 不能与标准的转码模板和已定义命名重复</b>
+ * param template: 转码模板(转码流输出后缀)
+- 取值要求：数字、大小写字母或短横线("-"),必须以数字或字母作为开头和结尾,长度不超过50字符
+- <b>注意: 不能与系统的标准的转码模板和当前用户已自定义命名重复</b>
+- 系统标准转码模板
+  ld (h.264/640*360/15f)
+  sd (h.264/854*480/24f)
+  hd (h.264/1280*720/25f)
+  shd (h.264/1920*1080/30f)
  (Required)
- * param audioCodec: 转码输出音频编码格式:
-  - 取值: aac、mp3
-  - 不区分大小写
+ * param audioCodec: 转码输出音频编码格式
+- 取值: aac、mp3
+- 不区分大小写
  (Required)
- * param audioFormat: 转码输出音频格式:
-  - 取值: aac_lc，aac_low，aac_he，aac_he_v2
-  - 不区分大小写
+ * param audioFormat: 转码输出音频格式
+- 取值: aac_lc，aac_low，aac_he，aac_he_v2
+- 不区分大小写
  (Required)
- * param audioSampleRate: 转码输出音频采样率:
-  - 取值: [44100,48000]
+ * param audioSampleRate: 转码输出音频采样率
+- 取值: [44100,48000]
  (Required)
- * param audioChannel: 转码输出音频通道数:
-  - 1  单声道
-  - 2  双声道
+ * param audioChannel: 转码输出音频通道数
+  1: 单声道
+  2: 双声道
  (Required)
- * param audioCodeRate: 转码输出音频码率:
-  - 取值: [16,128]
-  - 单位: kbps
+ * param audioCodeRate: 转码输出音频码率
+- 取值: [16,128]
+- 单位: kbps
  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -155,48 +159,50 @@ func NewAddCustomLiveStreamTranscodeTemplateRequest(
 }
 
 /*
- * param videoCodeRate: 转码输出的码率值:
- - 取值范围:[200,3000]
- - 单位: kpbs
+ * param videoCodeRate: 转码输出的码率值
+- 取值范围: [200,3000]
+- 单位: kpbs
  (Required)
- * param videoFrameRate: 转码输出的帧率值:
-  - 取值：15/1、25/1、30/1、60/1
+ * param videoFrameRate: 转码输出的帧率值
+- 取值：15、25、30、60
  (Required)
- * param width: 转码输出视频宽度:
-  - 取值: [100,1920]
-  - 等比: 如果只填写一个参数,则按参数比例调节输出转码视频
-  - 随源: 如果两个参数都不填写，则按照源比例输出转码视频
+ * param width: 转码输出视频宽度
+- 取值: [100,1920]
+- 如果(width,height)只设置其中之一,则按所设置参数项等比缩放另一项输出转码
+- 如果(width,height)都不设置，则按源流大小输出转码
  (Optional)
- * param height: 转码输出视频宽度:
-  - 取值: [100,1920]
-  - 等比: 如果只填写一个参数,则按参数比例调节输出转码视频
-  - 随源: 如果两个参数都不填写，则按照源比例输出转码视频
+ * param height: 转码输出视频宽度
+- 取值: [100,1920]
+- 如果(width,height)只设置其中之一,则按所设置参数项等比缩放另一项输出转码
+- 如果(width,height)都不设置，则按源流大小输出转码
  (Optional)
- * param template: 转码模板后缀:
-  - 标准质量模板：sd、hd、hsd
-  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
-              取值要求：数字、大小写字母或短横线("-"),
-              首尾不能有特殊字符("-")
-  - <b>注意: 不能与标准的转码模板和已定义命名重复</b>
+ * param template: 转码模板(转码流输出后缀)
+- 取值要求：数字、大小写字母或短横线("-"),必须以数字或字母作为开头和结尾,长度不超过50字符
+- <b>注意: 不能与系统的标准的转码模板和当前用户已自定义命名重复</b>
+- 系统标准转码模板
+  ld (h.264/640*360/15f)
+  sd (h.264/854*480/24f)
+  hd (h.264/1280*720/25f)
+  shd (h.264/1920*1080/30f)
  (Required)
- * param audioCodec: 转码输出音频编码格式:
-  - 取值: aac、mp3
-  - 不区分大小写
+ * param audioCodec: 转码输出音频编码格式
+- 取值: aac、mp3
+- 不区分大小写
  (Required)
- * param audioFormat: 转码输出音频格式:
-  - 取值: aac_lc，aac_low，aac_he，aac_he_v2
-  - 不区分大小写
+ * param audioFormat: 转码输出音频格式
+- 取值: aac_lc，aac_low，aac_he，aac_he_v2
+- 不区分大小写
  (Required)
- * param audioSampleRate: 转码输出音频采样率:
-  - 取值: [44100,48000]
+ * param audioSampleRate: 转码输出音频采样率
+- 取值: [44100,48000]
  (Required)
- * param audioChannel: 转码输出音频通道数:
-  - 1  单声道
-  - 2  双声道
+ * param audioChannel: 转码输出音频通道数
+  1: 单声道
+  2: 双声道
  (Required)
- * param audioCodeRate: 转码输出音频码率:
-  - 取值: [16,128]
-  - 单位: kbps
+ * param audioCodeRate: 转码输出音频码率
+- 取值: [16,128]
+- 单位: kbps
  (Required)
  */
 func NewAddCustomLiveStreamTranscodeTemplateRequestWithAllParams(
@@ -245,84 +251,86 @@ func NewAddCustomLiveStreamTranscodeTemplateRequestWithoutParam() *AddCustomLive
     }
 }
 
-/* param videoCodeRate: 转码输出的码率值:
- - 取值范围:[200,3000]
- - 单位: kpbs
+/* param videoCodeRate: 转码输出的码率值
+- 取值范围: [200,3000]
+- 单位: kpbs
 (Required) */
 func (r *AddCustomLiveStreamTranscodeTemplateRequest) SetVideoCodeRate(videoCodeRate int) {
     r.VideoCodeRate = videoCodeRate
 }
 
-/* param videoFrameRate: 转码输出的帧率值:
-  - 取值：15/1、25/1、30/1、60/1
+/* param videoFrameRate: 转码输出的帧率值
+- 取值：15、25、30、60
 (Required) */
 func (r *AddCustomLiveStreamTranscodeTemplateRequest) SetVideoFrameRate(videoFrameRate string) {
     r.VideoFrameRate = videoFrameRate
 }
 
-/* param width: 转码输出视频宽度:
-  - 取值: [100,1920]
-  - 等比: 如果只填写一个参数,则按参数比例调节输出转码视频
-  - 随源: 如果两个参数都不填写，则按照源比例输出转码视频
+/* param width: 转码输出视频宽度
+- 取值: [100,1920]
+- 如果(width,height)只设置其中之一,则按所设置参数项等比缩放另一项输出转码
+- 如果(width,height)都不设置，则按源流大小输出转码
 (Optional) */
 func (r *AddCustomLiveStreamTranscodeTemplateRequest) SetWidth(width int) {
     r.Width = &width
 }
 
-/* param height: 转码输出视频宽度:
-  - 取值: [100,1920]
-  - 等比: 如果只填写一个参数,则按参数比例调节输出转码视频
-  - 随源: 如果两个参数都不填写，则按照源比例输出转码视频
+/* param height: 转码输出视频宽度
+- 取值: [100,1920]
+- 如果(width,height)只设置其中之一,则按所设置参数项等比缩放另一项输出转码
+- 如果(width,height)都不设置，则按源流大小输出转码
 (Optional) */
 func (r *AddCustomLiveStreamTranscodeTemplateRequest) SetHeight(height int) {
     r.Height = &height
 }
 
-/* param template: 转码模板后缀:
-  - 标准质量模板：sd、hd、hsd
-  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
-              取值要求：数字、大小写字母或短横线("-"),
-              首尾不能有特殊字符("-")
-  - <b>注意: 不能与标准的转码模板和已定义命名重复</b>
+/* param template: 转码模板(转码流输出后缀)
+- 取值要求：数字、大小写字母或短横线("-"),必须以数字或字母作为开头和结尾,长度不超过50字符
+- <b>注意: 不能与系统的标准的转码模板和当前用户已自定义命名重复</b>
+- 系统标准转码模板
+  ld (h.264/640*360/15f)
+  sd (h.264/854*480/24f)
+  hd (h.264/1280*720/25f)
+  shd (h.264/1920*1080/30f)
 (Required) */
 func (r *AddCustomLiveStreamTranscodeTemplateRequest) SetTemplate(template string) {
     r.Template = template
 }
 
-/* param audioCodec: 转码输出音频编码格式:
-  - 取值: aac、mp3
-  - 不区分大小写
+/* param audioCodec: 转码输出音频编码格式
+- 取值: aac、mp3
+- 不区分大小写
 (Required) */
 func (r *AddCustomLiveStreamTranscodeTemplateRequest) SetAudioCodec(audioCodec string) {
     r.AudioCodec = audioCodec
 }
 
-/* param audioFormat: 转码输出音频格式:
-  - 取值: aac_lc，aac_low，aac_he，aac_he_v2
-  - 不区分大小写
+/* param audioFormat: 转码输出音频格式
+- 取值: aac_lc，aac_low，aac_he，aac_he_v2
+- 不区分大小写
 (Required) */
 func (r *AddCustomLiveStreamTranscodeTemplateRequest) SetAudioFormat(audioFormat string) {
     r.AudioFormat = audioFormat
 }
 
-/* param audioSampleRate: 转码输出音频采样率:
-  - 取值: [44100,48000]
+/* param audioSampleRate: 转码输出音频采样率
+- 取值: [44100,48000]
 (Required) */
 func (r *AddCustomLiveStreamTranscodeTemplateRequest) SetAudioSampleRate(audioSampleRate int) {
     r.AudioSampleRate = audioSampleRate
 }
 
-/* param audioChannel: 转码输出音频通道数:
-  - 1  单声道
-  - 2  双声道
+/* param audioChannel: 转码输出音频通道数
+  1: 单声道
+  2: 双声道
 (Required) */
 func (r *AddCustomLiveStreamTranscodeTemplateRequest) SetAudioChannel(audioChannel int) {
     r.AudioChannel = audioChannel
 }
 
-/* param audioCodeRate: 转码输出音频码率:
-  - 取值: [16,128]
-  - 单位: kbps
+/* param audioCodeRate: 转码输出音频码率
+- 取值: [16,128]
+- 单位: kbps
 (Required) */
 func (r *AddCustomLiveStreamTranscodeTemplateRequest) SetAudioCodeRate(audioCodeRate int) {
     r.AudioCodeRate = audioCodeRate

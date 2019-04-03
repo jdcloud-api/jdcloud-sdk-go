@@ -19,17 +19,17 @@ package models
 
 type RestartPlayDomain struct {
 
-    /* 直播播放域名 (Optional) */
+    /* 播放域名 (Optional) */
     PlayDomain string `json:"playDomain"`
 
-    /* 直播时移状态:
-  - on表示开启
-  - off表示关闭
+    /* 直播回看状态:
+  on: 开启
+  off: 关闭
  (Optional) */
     RestartStatus string `json:"restartStatus"`
 
     /* 播放域名类型:
-  - normal  一般的播放域名
-  - restart 回看播放域名 (Optional) */
+  normal: 普通播放域名(时移播放域名)
+  restart: 回看播放域名 (Optional) */
     PlayType string `json:"playType"`
 }

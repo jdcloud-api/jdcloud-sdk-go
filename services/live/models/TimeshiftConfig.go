@@ -20,8 +20,8 @@ package models
 type TimeshiftConfig struct {
 
     /* 推流域名集合 (Optional) */
-    PublishDomains []ShiftPublishDomain `json:"publishDomains"`
+    PublishDomains []TimeshiftPublishDomain `json:"publishDomains"`
 
-    /* 直播域名集合 (Optional) */
-    PlayDomains []ShiftPlayDomain `json:"playDomains"`
+    /* 播放域名集合 (Optional) */
+    PlayDomains []TimeshiftPlayDomain `json:"playDomains"`
 }

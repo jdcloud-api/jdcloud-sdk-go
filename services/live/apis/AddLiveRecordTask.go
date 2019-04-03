@@ -25,16 +25,16 @@ type AddLiveRecordTaskRequest struct {
 
     core.JDCloudRequest
 
-    /* 推流加速域名  */
+    /* 推流域名  */
     PublishDomain string `json:"publishDomain"`
 
-    /* 直播流所属应用名称  */
+    /* 应用名称  */
     AppName string `json:"appName"`
 
-    /* 直播流名称  */
+    /* 流名称  */
     StreamName string `json:"streamName"`
 
-    /* 录制时间集合  */
+    /* 录制时间集合 - 最大支持10段,多段合并成一个文件 - 多段时间跨度最小不能小于10s - 多段时间跨度最大不能超过8小时  */
     RecordTimes []live.RecordTime `json:"recordTimes"`
 
     /* 存储桶  */
@@ -44,27 +44,27 @@ type AddLiveRecordTaskRequest struct {
     SaveEndpoint string `json:"saveEndpoint"`
 
     /* 录制文件类型:
-  - 取值: ts,flv,mp4 (多种类型之前用;隔开)
-  - 不区分大小写
+- 取值: ts,flv,mp4 (多种类型之前用;隔开)
+- 不区分大小写
   */
     RecordFileType string `json:"recordFileType"`
 
     /* 录制文件存储路径:
-  - 默认地址: record/{Date}/{ServerId}/{AppName}/{StreamName}/{StartTime}_{EndTime}.{format}
+- 默认地址: record/{Date}/{ServerId}/{AppName}/{StreamName}/{StartTime}_{EndTime}.{format}
  (Optional) */
     SaveObject *string `json:"saveObject"`
 }
 
 /*
- * param publishDomain: 推流加速域名 (Required)
- * param appName: 直播流所属应用名称 (Required)
- * param streamName: 直播流名称 (Required)
- * param recordTimes: 录制时间集合 (Required)
+ * param publishDomain: 推流域名 (Required)
+ * param appName: 应用名称 (Required)
+ * param streamName: 流名称 (Required)
+ * param recordTimes: 录制时间集合 - 最大支持10段,多段合并成一个文件 - 多段时间跨度最小不能小于10s - 多段时间跨度最大不能超过8小时 (Required)
  * param saveBucket: 存储桶 (Required)
  * param saveEndpoint: 存储地址 (Required)
  * param recordFileType: 录制文件类型:
-  - 取值: ts,flv,mp4 (多种类型之前用;隔开)
-  - 不区分大小写
+- 取值: ts,flv,mp4 (多种类型之前用;隔开)
+- 不区分大小写
  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -97,18 +97,18 @@ func NewAddLiveRecordTaskRequest(
 }
 
 /*
- * param publishDomain: 推流加速域名 (Required)
- * param appName: 直播流所属应用名称 (Required)
- * param streamName: 直播流名称 (Required)
- * param recordTimes: 录制时间集合 (Required)
+ * param publishDomain: 推流域名 (Required)
+ * param appName: 应用名称 (Required)
+ * param streamName: 流名称 (Required)
+ * param recordTimes: 录制时间集合 - 最大支持10段,多段合并成一个文件 - 多段时间跨度最小不能小于10s - 多段时间跨度最大不能超过8小时 (Required)
  * param saveBucket: 存储桶 (Required)
  * param saveEndpoint: 存储地址 (Required)
  * param recordFileType: 录制文件类型:
-  - 取值: ts,flv,mp4 (多种类型之前用;隔开)
-  - 不区分大小写
+- 取值: ts,flv,mp4 (多种类型之前用;隔开)
+- 不区分大小写
  (Required)
  * param saveObject: 录制文件存储路径:
-  - 默认地址: record/{Date}/{ServerId}/{AppName}/{StreamName}/{StartTime}_{EndTime}.{format}
+- 默认地址: record/{Date}/{ServerId}/{AppName}/{StreamName}/{StartTime}_{EndTime}.{format}
  (Optional)
  */
 func NewAddLiveRecordTaskRequestWithAllParams(
@@ -153,22 +153,22 @@ func NewAddLiveRecordTaskRequestWithoutParam() *AddLiveRecordTaskRequest {
     }
 }
 
-/* param publishDomain: 推流加速域名(Required) */
+/* param publishDomain: 推流域名(Required) */
 func (r *AddLiveRecordTaskRequest) SetPublishDomain(publishDomain string) {
     r.PublishDomain = publishDomain
 }
 
-/* param appName: 直播流所属应用名称(Required) */
+/* param appName: 应用名称(Required) */
 func (r *AddLiveRecordTaskRequest) SetAppName(appName string) {
     r.AppName = appName
 }
 
-/* param streamName: 直播流名称(Required) */
+/* param streamName: 流名称(Required) */
 func (r *AddLiveRecordTaskRequest) SetStreamName(streamName string) {
     r.StreamName = streamName
 }
 
-/* param recordTimes: 录制时间集合(Required) */
+/* param recordTimes: 录制时间集合 - 最大支持10段,多段合并成一个文件 - 多段时间跨度最小不能小于10s - 多段时间跨度最大不能超过8小时(Required) */
 func (r *AddLiveRecordTaskRequest) SetRecordTimes(recordTimes []live.RecordTime) {
     r.RecordTimes = recordTimes
 }
@@ -184,15 +184,15 @@ func (r *AddLiveRecordTaskRequest) SetSaveEndpoint(saveEndpoint string) {
 }
 
 /* param recordFileType: 录制文件类型:
-  - 取值: ts,flv,mp4 (多种类型之前用;隔开)
-  - 不区分大小写
+- 取值: ts,flv,mp4 (多种类型之前用;隔开)
+- 不区分大小写
 (Required) */
 func (r *AddLiveRecordTaskRequest) SetRecordFileType(recordFileType string) {
     r.RecordFileType = recordFileType
 }
 
 /* param saveObject: 录制文件存储路径:
-  - 默认地址: record/{Date}/{ServerId}/{AppName}/{StreamName}/{StartTime}_{EndTime}.{format}
+- 默认地址: record/{Date}/{ServerId}/{AppName}/{StreamName}/{StartTime}_{EndTime}.{format}
 (Optional) */
 func (r *AddLiveRecordTaskRequest) SetSaveObject(saveObject string) {
     r.SaveObject = &saveObject

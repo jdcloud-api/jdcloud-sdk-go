@@ -24,26 +24,18 @@ type DeleteLiveStreamDomainWatermarkRequest struct {
 
     core.JDCloudRequest
 
-    /* 推流加速域名  */
+    /* 推流域名  */
     PublishDomain string `json:"publishDomain"`
 
-    /* 水印模板自定义名称:
-  - 标准质量模板：sd、hd、hsd
-  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
-              取值要求：数字、大小写字母或短横线("-"),
-              首尾不能有特殊字符("-")
-  - <b>注意: 不能与标准的转码模板和已定义命名重复</b>  */
+    /* 水印模板
+  */
     Template string `json:"template"`
 }
 
 /*
- * param publishDomain: 推流加速域名 (Required)
- * param template: 水印模板自定义名称:
-  - 标准质量模板：sd、hd、hsd
-  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
-              取值要求：数字、大小写字母或短横线("-"),
-              首尾不能有特殊字符("-")
-  - <b>注意: 不能与标准的转码模板和已定义命名重复</b> (Required)
+ * param publishDomain: 推流域名 (Required)
+ * param template: 水印模板
+ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -65,13 +57,9 @@ func NewDeleteLiveStreamDomainWatermarkRequest(
 }
 
 /*
- * param publishDomain: 推流加速域名 (Required)
- * param template: 水印模板自定义名称:
-  - 标准质量模板：sd、hd、hsd
-  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
-              取值要求：数字、大小写字母或短横线("-"),
-              首尾不能有特殊字符("-")
-  - <b>注意: 不能与标准的转码模板和已定义命名重复</b> (Required)
+ * param publishDomain: 推流域名 (Required)
+ * param template: 水印模板
+ (Required)
  */
 func NewDeleteLiveStreamDomainWatermarkRequestWithAllParams(
     publishDomain string,
@@ -103,17 +91,13 @@ func NewDeleteLiveStreamDomainWatermarkRequestWithoutParam() *DeleteLiveStreamDo
     }
 }
 
-/* param publishDomain: 推流加速域名(Required) */
+/* param publishDomain: 推流域名(Required) */
 func (r *DeleteLiveStreamDomainWatermarkRequest) SetPublishDomain(publishDomain string) {
     r.PublishDomain = publishDomain
 }
 
-/* param template: 水印模板自定义名称:
-  - 标准质量模板：sd、hd、hsd
-  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
-              取值要求：数字、大小写字母或短横线("-"),
-              首尾不能有特殊字符("-")
-  - <b>注意: 不能与标准的转码模板和已定义命名重复</b>(Required) */
+/* param template: 水印模板
+(Required) */
 func (r *DeleteLiveStreamDomainWatermarkRequest) SetTemplate(template string) {
     r.Template = template
 }

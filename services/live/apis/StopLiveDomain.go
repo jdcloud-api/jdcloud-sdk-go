@@ -24,12 +24,16 @@ type StopLiveDomainRequest struct {
 
     core.JDCloudRequest
 
-    /* 要停用的域名  */
+    /* 推流域名
+- 需要停用的域名对(推流域名,播放域名)中的推流域名
+  */
     PublishDomain string `json:"publishDomain"`
 }
 
 /*
- * param publishDomain: 要停用的域名 (Required)
+ * param publishDomain: 推流域名
+- 需要停用的域名对(推流域名,播放域名)中的推流域名
+ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -49,7 +53,9 @@ func NewStopLiveDomainRequest(
 }
 
 /*
- * param publishDomain: 要停用的域名 (Required)
+ * param publishDomain: 推流域名
+- 需要停用的域名对(推流域名,播放域名)中的推流域名
+ (Required)
  */
 func NewStopLiveDomainRequestWithAllParams(
     publishDomain string,
@@ -79,7 +85,9 @@ func NewStopLiveDomainRequestWithoutParam() *StopLiveDomainRequest {
     }
 }
 
-/* param publishDomain: 要停用的域名(Required) */
+/* param publishDomain: 推流域名
+- 需要停用的域名对(推流域名,播放域名)中的推流域名
+(Required) */
 func (r *StopLiveDomainRequest) SetPublishDomain(publishDomain string) {
     r.PublishDomain = publishDomain
 }

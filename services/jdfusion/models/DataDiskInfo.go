@@ -19,6 +19,9 @@ package models
 
 type DataDiskInfo struct {
 
+    /* 硬盘ID (Optional) */
+    DiskId string `json:"diskId"`
+
     /* 硬盘大小 (Optional) */
     DiskSize int `json:"diskSize"`
 

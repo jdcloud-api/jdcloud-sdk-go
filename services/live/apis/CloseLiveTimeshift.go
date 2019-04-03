@@ -24,12 +24,12 @@ type CloseLiveTimeshiftRequest struct {
 
     core.JDCloudRequest
 
-    /* 直播的推流域名  */
+    /* 直播的播放域名  */
     PlayDomain string `json:"playDomain"`
 }
 
 /*
- * param playDomain: 直播的推流域名 (Required)
+ * param playDomain: 直播的播放域名 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -49,7 +49,7 @@ func NewCloseLiveTimeshiftRequest(
 }
 
 /*
- * param playDomain: 直播的推流域名 (Required)
+ * param playDomain: 直播的播放域名 (Required)
  */
 func NewCloseLiveTimeshiftRequestWithAllParams(
     playDomain string,
@@ -79,7 +79,7 @@ func NewCloseLiveTimeshiftRequestWithoutParam() *CloseLiveTimeshiftRequest {
     }
 }
 
-/* param playDomain: 直播的推流域名(Required) */
+/* param playDomain: 直播的播放域名(Required) */
 func (r *CloseLiveTimeshiftRequest) SetPlayDomain(playDomain string) {
     r.PlayDomain = playDomain
 }

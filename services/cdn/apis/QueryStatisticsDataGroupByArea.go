@@ -65,7 +65,7 @@ func NewQueryStatisticsDataGroupByAreaRequest(
 
 	return &QueryStatisticsDataGroupByAreaRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/statistics:groupByArea",
+			URL:     "/vodStatistics:groupByArea",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -100,7 +100,7 @@ func NewQueryStatisticsDataGroupByAreaRequestWithAllParams(
 
     return &QueryStatisticsDataGroupByAreaRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/statistics:groupByArea",
+            URL:     "/vodStatistics:groupByArea",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -123,7 +123,7 @@ func NewQueryStatisticsDataGroupByAreaRequestWithoutParam() *QueryStatisticsData
 
     return &QueryStatisticsDataGroupByAreaRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/statistics:groupByArea",
+            URL:     "/vodStatistics:groupByArea",
             Method:  "POST",
             Header:  nil,
             Version: "v1",

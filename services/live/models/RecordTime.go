@@ -19,9 +19,17 @@ package models
 
 type RecordTime struct {
 
-    /* 开始时间  */
+    /* 开始时间
+- UTC时间
+  格式: yyyy-MM-dd'T'HH:mm:ss'Z'
+  示例: 2018-10-21T10:00:00Z
+  */
     StartTime string `json:"startTime"`
 
-    /* 结束时间  */
+    /* 结束时间
+- UTC时间
+  格式: yyyy-MM-dd'T'HH:mm:ss'Z'
+  示例: 2018-10-21T10:00:00Z
+  */
     EndTime string `json:"endTime"`
 }

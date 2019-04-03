@@ -46,7 +46,7 @@ func NewDeleteHttpHeaderRequest(
 	return &DeleteHttpHeaderRequest{
         JDCloudRequest: core.JDCloudRequest{
 			URL:     "/domain/{domain}/httpHeader",
-			Method:  "DELETE",
+			Method:  "PUT",
 			Header:  nil,
 			Version: "v1",
 		},
@@ -68,7 +68,7 @@ func NewDeleteHttpHeaderRequestWithAllParams(
     return &DeleteHttpHeaderRequest{
         JDCloudRequest: core.JDCloudRequest{
             URL:     "/domain/{domain}/httpHeader",
-            Method:  "DELETE",
+            Method:  "PUT",
             Header:  nil,
             Version: "v1",
         },
@@ -84,7 +84,7 @@ func NewDeleteHttpHeaderRequestWithoutParam() *DeleteHttpHeaderRequest {
     return &DeleteHttpHeaderRequest{
             JDCloudRequest: core.JDCloudRequest{
             URL:     "/domain/{domain}/httpHeader",
-            Method:  "DELETE",
+            Method:  "PUT",
             Header:  nil,
             Version: "v1",
         },

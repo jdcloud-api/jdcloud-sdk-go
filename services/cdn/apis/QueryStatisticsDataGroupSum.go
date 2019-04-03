@@ -65,7 +65,7 @@ func NewQueryStatisticsDataGroupSumRequest(
 
 	return &QueryStatisticsDataGroupSumRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/statistics:groupSum",
+			URL:     "/vodStatistics:groupSum",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -100,7 +100,7 @@ func NewQueryStatisticsDataGroupSumRequestWithAllParams(
 
     return &QueryStatisticsDataGroupSumRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/statistics:groupSum",
+            URL:     "/vodStatistics:groupSum",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -123,7 +123,7 @@ func NewQueryStatisticsDataGroupSumRequestWithoutParam() *QueryStatisticsDataGro
 
     return &QueryStatisticsDataGroupSumRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/statistics:groupSum",
+            URL:     "/vodStatistics:groupSum",
             Method:  "POST",
             Header:  nil,
             Version: "v1",

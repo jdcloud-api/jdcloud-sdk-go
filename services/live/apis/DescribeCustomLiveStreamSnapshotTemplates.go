@@ -26,15 +26,19 @@ type DescribeCustomLiveStreamSnapshotTemplatesRequest struct {
 
     core.JDCloudRequest
 
-    /* 页码；默认为1；取值范围[1, 100000] (Optional) */
+    /* 页码
+- 取值范围 [1, 100000]
+ (Optional) */
     PageNum *int `json:"pageNum"`
 
-    /* 分页大小；默认为10；取值范围[10, 100] (Optional) */
+    /* 分页大小
+- 取值范围 [10, 100]
+ (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* 截图模板查询过滤条件:
-  - name:   template 录制模板自定义名称
-  - value:  如果参数为空，则查询全部
+    /* 截图模板查询过滤条件
+- name:   template 录制模板自定义名称
+- value:  如果参数为空，则查询全部
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
@@ -57,11 +61,15 @@ func NewDescribeCustomLiveStreamSnapshotTemplatesRequest(
 }
 
 /*
- * param pageNum: 页码；默认为1；取值范围[1, 100000] (Optional)
- * param pageSize: 分页大小；默认为10；取值范围[10, 100] (Optional)
- * param filters: 截图模板查询过滤条件:
-  - name:   template 录制模板自定义名称
-  - value:  如果参数为空，则查询全部
+ * param pageNum: 页码
+- 取值范围 [1, 100000]
+ (Optional)
+ * param pageSize: 分页大小
+- 取值范围 [10, 100]
+ (Optional)
+ * param filters: 截图模板查询过滤条件
+- name:   template 录制模板自定义名称
+- value:  如果参数为空，则查询全部
  (Optional)
  */
 func NewDescribeCustomLiveStreamSnapshotTemplatesRequestWithAllParams(
@@ -96,19 +104,23 @@ func NewDescribeCustomLiveStreamSnapshotTemplatesRequestWithoutParam() *Describe
     }
 }
 
-/* param pageNum: 页码；默认为1；取值范围[1, 100000](Optional) */
+/* param pageNum: 页码
+- 取值范围 [1, 100000]
+(Optional) */
 func (r *DescribeCustomLiveStreamSnapshotTemplatesRequest) SetPageNum(pageNum int) {
     r.PageNum = &pageNum
 }
 
-/* param pageSize: 分页大小；默认为10；取值范围[10, 100](Optional) */
+/* param pageSize: 分页大小
+- 取值范围 [10, 100]
+(Optional) */
 func (r *DescribeCustomLiveStreamSnapshotTemplatesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
-/* param filters: 截图模板查询过滤条件:
-  - name:   template 录制模板自定义名称
-  - value:  如果参数为空，则查询全部
+/* param filters: 截图模板查询过滤条件
+- name:   template 录制模板自定义名称
+- value:  如果参数为空，则查询全部
 (Optional) */
 func (r *DescribeCustomLiveStreamSnapshotTemplatesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters

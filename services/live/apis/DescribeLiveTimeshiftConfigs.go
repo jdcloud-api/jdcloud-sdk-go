@@ -25,18 +25,26 @@ type DescribeLiveTimeshiftConfigsRequest struct {
 
     core.JDCloudRequest
 
-    /* 页码；默认为1；取值范围[1, 100000] (Optional) */
-    PageNum *int `json:"pageNum"`
+    /* 页码
+- 取值范围[1, 100000]
+ (Optional) */
+    PageNumber *int `json:"pageNumber"`
 
-    /* 分页大小；默认为10；取值范围[10, 100] (Optional) */
+    /* 分页大小
+- 取值范围[10, 100]
+ (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* 直播的推流域名  */
+    /* 直播的播放域名
+- 目前仅支持精确匹配
+  */
     PlayDomain string `json:"playDomain"`
 }
 
 /*
- * param playDomain: 直播的推流域名 (Required)
+ * param playDomain: 直播的播放域名
+- 目前仅支持精确匹配
+ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -56,12 +64,18 @@ func NewDescribeLiveTimeshiftConfigsRequest(
 }
 
 /*
- * param pageNum: 页码；默认为1；取值范围[1, 100000] (Optional)
- * param pageSize: 分页大小；默认为10；取值范围[10, 100] (Optional)
- * param playDomain: 直播的推流域名 (Required)
+ * param pageNumber: 页码
+- 取值范围[1, 100000]
+ (Optional)
+ * param pageSize: 分页大小
+- 取值范围[10, 100]
+ (Optional)
+ * param playDomain: 直播的播放域名
+- 目前仅支持精确匹配
+ (Required)
  */
 func NewDescribeLiveTimeshiftConfigsRequestWithAllParams(
-    pageNum *int,
+    pageNumber *int,
     pageSize *int,
     playDomain string,
 ) *DescribeLiveTimeshiftConfigsRequest {
@@ -73,7 +87,7 @@ func NewDescribeLiveTimeshiftConfigsRequestWithAllParams(
             Header:  nil,
             Version: "v1",
         },
-        PageNum: pageNum,
+        PageNumber: pageNumber,
         PageSize: pageSize,
         PlayDomain: playDomain,
     }
@@ -92,17 +106,23 @@ func NewDescribeLiveTimeshiftConfigsRequestWithoutParam() *DescribeLiveTimeshift
     }
 }
 
-/* param pageNum: 页码；默认为1；取值范围[1, 100000](Optional) */
-func (r *DescribeLiveTimeshiftConfigsRequest) SetPageNum(pageNum int) {
-    r.PageNum = &pageNum
+/* param pageNumber: 页码
+- 取值范围[1, 100000]
+(Optional) */
+func (r *DescribeLiveTimeshiftConfigsRequest) SetPageNumber(pageNumber int) {
+    r.PageNumber = &pageNumber
 }
 
-/* param pageSize: 分页大小；默认为10；取值范围[10, 100](Optional) */
+/* param pageSize: 分页大小
+- 取值范围[10, 100]
+(Optional) */
 func (r *DescribeLiveTimeshiftConfigsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
-/* param playDomain: 直播的推流域名(Required) */
+/* param playDomain: 直播的播放域名
+- 目前仅支持精确匹配
+(Required) */
 func (r *DescribeLiveTimeshiftConfigsRequest) SetPlayDomain(playDomain string) {
     r.PlayDomain = playDomain
 }

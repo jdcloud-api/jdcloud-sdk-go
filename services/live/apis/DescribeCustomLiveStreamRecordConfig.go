@@ -26,18 +26,22 @@ type DescribeCustomLiveStreamRecordConfigRequest struct {
 
     core.JDCloudRequest
 
-    /* 页码；默认为1；取值范围[1, 100000] (Optional) */
+    /* 页码
+- 取值范围 [1, 100000]
+ (Optional) */
     PageNum *int `json:"pageNum"`
 
-    /* 分页大小；默认为10；取值范围[10, 100] (Optional) */
+    /* 分页大小
+- 取值范围 [10, 100]
+ (Optional) */
     PageSize *int `json:"pageSize"`
 
     /* 录制配置查询过滤条件:
-  - name:   publishDomain，必填(直播推流域名)
+  - name:   publishDomain，必填(推流域名)
   - value:  参数
   - name:   appName，必填(应用名称)
   - value:  参数
-  - name:   streamName，非必填(推流名称)
+  - name:   streamName，非必填(流名称)
   - value:  参数
  (Optional) */
     Filters []common.Filter `json:"filters"`
@@ -61,14 +65,18 @@ func NewDescribeCustomLiveStreamRecordConfigRequest(
 }
 
 /*
- * param pageNum: 页码；默认为1；取值范围[1, 100000] (Optional)
- * param pageSize: 分页大小；默认为10；取值范围[10, 100] (Optional)
+ * param pageNum: 页码
+- 取值范围 [1, 100000]
+ (Optional)
+ * param pageSize: 分页大小
+- 取值范围 [10, 100]
+ (Optional)
  * param filters: 录制配置查询过滤条件:
-  - name:   publishDomain，必填(直播推流域名)
+  - name:   publishDomain，必填(推流域名)
   - value:  参数
   - name:   appName，必填(应用名称)
   - value:  参数
-  - name:   streamName，非必填(推流名称)
+  - name:   streamName，非必填(流名称)
   - value:  参数
  (Optional)
  */
@@ -104,22 +112,26 @@ func NewDescribeCustomLiveStreamRecordConfigRequestWithoutParam() *DescribeCusto
     }
 }
 
-/* param pageNum: 页码；默认为1；取值范围[1, 100000](Optional) */
+/* param pageNum: 页码
+- 取值范围 [1, 100000]
+(Optional) */
 func (r *DescribeCustomLiveStreamRecordConfigRequest) SetPageNum(pageNum int) {
     r.PageNum = &pageNum
 }
 
-/* param pageSize: 分页大小；默认为10；取值范围[10, 100](Optional) */
+/* param pageSize: 分页大小
+- 取值范围 [10, 100]
+(Optional) */
 func (r *DescribeCustomLiveStreamRecordConfigRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
 /* param filters: 录制配置查询过滤条件:
-  - name:   publishDomain，必填(直播推流域名)
+  - name:   publishDomain，必填(推流域名)
   - value:  参数
   - name:   appName，必填(应用名称)
   - value:  参数
-  - name:   streamName，非必填(推流名称)
+  - name:   streamName，非必填(流名称)
   - value:  参数
 (Optional) */
 func (r *DescribeCustomLiveStreamRecordConfigRequest) SetFilters(filters []common.Filter) {

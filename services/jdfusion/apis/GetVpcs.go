@@ -98,5 +98,5 @@ type GetVpcsResponse struct {
 }
 
 type GetVpcsResult struct {
-    Vpcs []jdfusion.VpcInfo `json:"vpcs"`
+    Vpcs []jdfusion.VpcListInfo `json:"vpcs"`
 }

@@ -45,4 +45,7 @@ type DeploymentBaseInfo struct {
 
     /* 更新时间 (Optional) */
     UpdatedTime *string `json:"updatedTime"`
+
+    /* 最近一次操作 (Optional) */
+    LastOperation *string `json:"lastOperation"`
 }

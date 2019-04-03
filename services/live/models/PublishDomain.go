@@ -22,22 +22,28 @@ type PublishDomain struct {
     /* 推流域名 (Optional) */
     PublishDomain string `json:"publishDomain"`
 
-    /* 推流域名(Cname) (Optional) */
+    /* 推流域名Cname (Optional) */
     PublishDomainCname string `json:"publishDomainCname"`
 
-    /* 直播域名状态：
-  - online表示启用
-  - offline表示停用
-  - configuring表示配置中
-  - configure_failed表示配置失败
-  - checking表示正在审核
-  - check_failed表示审核失败
+    /* 直播域名状态
+  online: 启用
+  offline: 停用
+  configuring: 配置中
+  configure_failed: 配置失败
+  checking: 正在审核
+  check_failed: 审核失败
  (Optional) */
     DomainStatus string `json:"domainStatus"`
 
-    /* 创建时间 (Optional) */
+    /* 域名创建时间
+- UTC时间
+  格式: yyyy-MM-dd'T'HH:mm:ss'Z'
+ (Optional) */
     CreateTime string `json:"createTime"`
 
-    /* 更新时间 (Optional) */
+    /* 域名更新时间
+- UTC时间
+  格式: yyyy-MM-dd'T'HH:mm:ss'Z'
+ (Optional) */
     UpdateTime string `json:"updateTime"`
 }

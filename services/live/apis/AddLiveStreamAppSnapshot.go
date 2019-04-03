@@ -24,38 +24,28 @@ type AddLiveStreamAppSnapshotRequest struct {
 
     core.JDCloudRequest
 
-    /* 直播流所属应用名称  */
-    AppName string `json:"appName"`
-
-    /* 您的推流加速域名  */
+    /* 推流域名  */
     PublishDomain string `json:"publishDomain"`
 
-    /* 截图模板自定义名称:
-  - 标准质量模板：sd、hd、hsd
-  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
-              取值要求：数字、大小写字母或短横线("-"),
-              首尾不能有特殊字符("-")
-  - <b>注意: 不能与标准的转码模板和已定义命名重复</b>
+    /* 应用名称  */
+    AppName string `json:"appName"`
+
+    /* 截图模板
   */
     Template string `json:"template"`
 }
 
 /*
- * param appName: 直播流所属应用名称 (Required)
- * param publishDomain: 您的推流加速域名 (Required)
- * param template: 截图模板自定义名称:
-  - 标准质量模板：sd、hd、hsd
-  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
-              取值要求：数字、大小写字母或短横线("-"),
-              首尾不能有特殊字符("-")
-  - <b>注意: 不能与标准的转码模板和已定义命名重复</b>
+ * param publishDomain: 推流域名 (Required)
+ * param appName: 应用名称 (Required)
+ * param template: 截图模板
  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewAddLiveStreamAppSnapshotRequest(
-    appName string,
     publishDomain string,
+    appName string,
     template string,
 ) *AddLiveStreamAppSnapshotRequest {
 
@@ -66,26 +56,21 @@ func NewAddLiveStreamAppSnapshotRequest(
 			Header:  nil,
 			Version: "v1",
 		},
-        AppName: appName,
         PublishDomain: publishDomain,
+        AppName: appName,
         Template: template,
 	}
 }
 
 /*
- * param appName: 直播流所属应用名称 (Required)
- * param publishDomain: 您的推流加速域名 (Required)
- * param template: 截图模板自定义名称:
-  - 标准质量模板：sd、hd、hsd
-  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
-              取值要求：数字、大小写字母或短横线("-"),
-              首尾不能有特殊字符("-")
-  - <b>注意: 不能与标准的转码模板和已定义命名重复</b>
+ * param publishDomain: 推流域名 (Required)
+ * param appName: 应用名称 (Required)
+ * param template: 截图模板
  (Required)
  */
 func NewAddLiveStreamAppSnapshotRequestWithAllParams(
-    appName string,
     publishDomain string,
+    appName string,
     template string,
 ) *AddLiveStreamAppSnapshotRequest {
 
@@ -96,8 +81,8 @@ func NewAddLiveStreamAppSnapshotRequestWithAllParams(
             Header:  nil,
             Version: "v1",
         },
-        AppName: appName,
         PublishDomain: publishDomain,
+        AppName: appName,
         Template: template,
     }
 }
@@ -115,22 +100,17 @@ func NewAddLiveStreamAppSnapshotRequestWithoutParam() *AddLiveStreamAppSnapshotR
     }
 }
 
-/* param appName: 直播流所属应用名称(Required) */
-func (r *AddLiveStreamAppSnapshotRequest) SetAppName(appName string) {
-    r.AppName = appName
-}
-
-/* param publishDomain: 您的推流加速域名(Required) */
+/* param publishDomain: 推流域名(Required) */
 func (r *AddLiveStreamAppSnapshotRequest) SetPublishDomain(publishDomain string) {
     r.PublishDomain = publishDomain
 }
 
-/* param template: 截图模板自定义名称:
-  - 标准质量模板：sd、hd、hsd
-  - 自定义模板: 枚举类型校验，忽略大小写，自动删除空格,
-              取值要求：数字、大小写字母或短横线("-"),
-              首尾不能有特殊字符("-")
-  - <b>注意: 不能与标准的转码模板和已定义命名重复</b>
+/* param appName: 应用名称(Required) */
+func (r *AddLiveStreamAppSnapshotRequest) SetAppName(appName string) {
+    r.AppName = appName
+}
+
+/* param template: 截图模板
 (Required) */
 func (r *AddLiveStreamAppSnapshotRequest) SetTemplate(template string) {
     r.Template = template

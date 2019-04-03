@@ -66,4 +66,10 @@ type VmInfo struct {
 
     /* 创建时间 (Optional) */
     CreatedTime string `json:"createdTime"`
+
+    /* 镜像ID (Optional) */
+    ImageId string `json:"imageId"`
+
+    /* 安全组ID (Optional) */
+    SecurityGroupIds []string `json:"securityGroupIds"`
 }

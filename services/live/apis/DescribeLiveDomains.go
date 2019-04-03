@@ -25,13 +25,20 @@ type DescribeLiveDomainsRequest struct {
 
     core.JDCloudRequest
 
-    /* 页码；默认为1；取值范围[1, 100000] (Optional) */
+    /* 页码
+- 取值范围[1, 100000]
+ (Optional) */
     PageNum *int `json:"pageNum"`
 
-    /* 分页大小；默认为10；取值范围[10, 100] (Optional) */
+    /* 分页大小
+- 取值范围[10, 100]
+ (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* 域名 (Optional) */
+    /* 推流域名
+- 目前仅支持精确查询
+- 为空时,查询用户所有直播域名
+ (Optional) */
     PublishDomain *string `json:"publishDomain"`
 }
 
@@ -53,9 +60,16 @@ func NewDescribeLiveDomainsRequest(
 }
 
 /*
- * param pageNum: 页码；默认为1；取值范围[1, 100000] (Optional)
- * param pageSize: 分页大小；默认为10；取值范围[10, 100] (Optional)
- * param publishDomain: 域名 (Optional)
+ * param pageNum: 页码
+- 取值范围[1, 100000]
+ (Optional)
+ * param pageSize: 分页大小
+- 取值范围[10, 100]
+ (Optional)
+ * param publishDomain: 推流域名
+- 目前仅支持精确查询
+- 为空时,查询用户所有直播域名
+ (Optional)
  */
 func NewDescribeLiveDomainsRequestWithAllParams(
     pageNum *int,
@@ -89,17 +103,24 @@ func NewDescribeLiveDomainsRequestWithoutParam() *DescribeLiveDomainsRequest {
     }
 }
 
-/* param pageNum: 页码；默认为1；取值范围[1, 100000](Optional) */
+/* param pageNum: 页码
+- 取值范围[1, 100000]
+(Optional) */
 func (r *DescribeLiveDomainsRequest) SetPageNum(pageNum int) {
     r.PageNum = &pageNum
 }
 
-/* param pageSize: 分页大小；默认为10；取值范围[10, 100](Optional) */
+/* param pageSize: 分页大小
+- 取值范围[10, 100]
+(Optional) */
 func (r *DescribeLiveDomainsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
-/* param publishDomain: 域名(Optional) */
+/* param publishDomain: 推流域名
+- 目前仅支持精确查询
+- 为空时,查询用户所有直播域名
+(Optional) */
 func (r *DescribeLiveDomainsRequest) SetPublishDomain(publishDomain string) {
     r.PublishDomain = &publishDomain
 }

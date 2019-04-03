@@ -24,7 +24,4 @@ type UnassociateEipAddress struct {
 
     /* 要解绑的资源类型 (Optional) */
     InstanceType *string `json:"instanceType"`
-
-    /* 是否强制解绑 (Optional) */
-    Force *bool `json:"force"`
 }
