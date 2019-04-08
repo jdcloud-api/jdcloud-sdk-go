@@ -28,5 +28,5 @@ type BandwidthStatisticResult struct {
     EndTime string `json:"endTime"`
 
     /*  (Optional) */
-    Data interface{} `json:"data"`
+    Data BandwidthStatisticResultData `json:"data"`
 }

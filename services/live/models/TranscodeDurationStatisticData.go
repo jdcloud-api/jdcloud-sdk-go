@@ -17,16 +17,9 @@
 package models
 
 
-type TranscodeDurationStatisticResult struct {
+type TranscodeDurationStatisticData struct {
 
-    /* 时间点
+    /* 时长，单位：秒
  (Optional) */
-    StartTime string `json:"startTime"`
-
-    /* 时间点
- (Optional) */
-    EndTime string `json:"endTime"`
-
-    /*  (Optional) */
-    Data TranscodeDurationStatisticData `json:"data"`
+    Duration string `json:"duration"`
 }

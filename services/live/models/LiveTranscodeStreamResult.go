@@ -17,16 +17,12 @@
 package models
 
 
-type TranscodeDurationStatisticResult struct {
+type LiveTranscodeStreamResult struct {
 
-    /* 时间点
+    /* 流名称
  (Optional) */
-    StartTime string `json:"startTime"`
+    StreamName string `json:"streamName"`
 
-    /* 时间点
- (Optional) */
-    EndTime string `json:"endTime"`
-
-    /*  (Optional) */
-    Data TranscodeDurationStatisticData `json:"data"`
+    /* 流状态 (Optional) */
+    Status string `json:"status"`
 }

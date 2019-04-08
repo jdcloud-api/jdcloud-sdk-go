@@ -40,7 +40,7 @@ func NewLiveClient(credential *core.Credential) *LiveClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "live",
-            Revision:    "1.0.3",
+            Revision:    "1.0.4",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -104,6 +104,26 @@ func (c *LiveClient) DescribeCustomLiveStreamTranscodeTemplate(request *live.Des
     return jdResp, err
 }
 
+/* 查询转码流信息 */
+func (c *LiveClient) DescribeLiveTranscodeStreamList(request *live.DescribeLiveTranscodeStreamListRequest) (*live.DescribeLiveTranscodeStreamListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DescribeLiveTranscodeStreamListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 添加应用截图配置
 - 添加应用级别的截图模板配置
  */
@@ -137,6 +157,26 @@ func (c *LiveClient) CloseLiveTimeshift(request *live.CloseLiveTimeshiftRequest)
     }
 
     jdResp := &live.CloseLiveTimeshiftResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询转码流观看人数 */
+func (c *LiveClient) DescribeLiveTranscodeStreamPlayerUserNum(request *live.DescribeLiveTranscodeStreamPlayerUserNumRequest) (*live.DescribeLiveTranscodeStreamPlayerUserNumResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DescribeLiveTranscodeStreamPlayerUserNumResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -231,6 +271,29 @@ func (c *LiveClient) DeleteLiveStreamDomainSnapshot(request *live.DeleteLiveStre
     return jdResp, err
 }
 
+/* 查询带宽数据
+- 查询某个时间段内的带宽数据（平均带宽）
+- 查询时间跨度：30天
+ */
+func (c *LiveClient) DescribeLiveStreamBandwidthData(request *live.DescribeLiveStreamBandwidthDataRequest) (*live.DescribeLiveStreamBandwidthDataResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DescribeLiveStreamBandwidthDataResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询用户自定义直播录制模板列表
  */
 func (c *LiveClient) DescribeCustomLiveStreamRecordTemplates(request *live.DescribeCustomLiveStreamRecordTemplatesRequest) (*live.DescribeCustomLiveStreamRecordTemplatesResponse, error) {
@@ -276,6 +339,26 @@ func (c *LiveClient) DescribeCustomLiveStreamRecordConfig(request *live.Describe
     return jdResp, err
 }
 
+/* 查询推流监控数据 */
+func (c *LiveClient) DescribePublishStreamInfoData(request *live.DescribePublishStreamInfoDataRequest) (*live.DescribePublishStreamInfoDataResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DescribePublishStreamInfoDataResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 禁止直播流推送 */
 func (c *LiveClient) ForbidLiveStream(request *live.ForbidLiveStreamRequest) (*live.ForbidLiveStreamResponse, error) {
     if request == nil {
@@ -287,6 +370,26 @@ func (c *LiveClient) ForbidLiveStream(request *live.ForbidLiveStreamRequest) (*l
     }
 
     jdResp := &live.ForbidLiveStreamResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询转码流数量 */
+func (c *LiveClient) DescribeLiveTranscodeStreamNum(request *live.DescribeLiveTranscodeStreamNumRequest) (*live.DescribeLiveTranscodeStreamNumResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DescribeLiveTranscodeStreamNumResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -512,6 +615,26 @@ func (c *LiveClient) DeleteCustomLiveStreamRecordTemplate(request *live.DeleteCu
     return jdResp, err
 }
 
+/* 查询直播流播放人数排行 */
+func (c *LiveClient) DescribeLiveStreamPlayerRankingData(request *live.DescribeLiveStreamPlayerRankingDataRequest) (*live.DescribeLiveStreamPlayerRankingDataResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DescribeLiveStreamPlayerRankingDataResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询直播截图张数数据 */
 func (c *LiveClient) DescribeLiveSnapshotData(request *live.DescribeLiveSnapshotDataRequest) (*live.DescribeLiveSnapshotDataResponse, error) {
     if request == nil {
@@ -619,6 +742,26 @@ func (c *LiveClient) DeleteLiveStreamDomainRecord(request *live.DeleteLiveStream
     return jdResp, err
 }
 
+/* 查询直播推流数 */
+func (c *LiveClient) DescribeLivePublishStreamNum(request *live.DescribeLivePublishStreamNumRequest) (*live.DescribeLivePublishStreamNumResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DescribeLivePublishStreamNumResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 添加直播截图模板 */
 func (c *LiveClient) AddCustomLiveStreamSnapshotTemplate(request *live.AddCustomLiveStreamSnapshotTemplateRequest) (*live.AddCustomLiveStreamSnapshotTemplateResponse, error) {
     if request == nil {
@@ -695,6 +838,29 @@ func (c *LiveClient) AddLiveStreamAppTranscode(request *live.AddLiveStreamAppTra
     }
 
     jdResp := &live.AddLiveStreamAppTranscodeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询推流上行流量数据
+- 查询某个时间段内的流量数据。
+- 查询时间跨度：30天
+ */
+func (c *LiveClient) DescribeLiveStreamPublishTrafficData(request *live.DescribeLiveStreamPublishTrafficDataRequest) (*live.DescribeLiveStreamPublishTrafficDataResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DescribeLiveStreamPublishTrafficDataResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1044,6 +1210,26 @@ func (c *LiveClient) DescribeLivePlayAuthKey(request *live.DescribeLivePlayAuthK
     return jdResp, err
 }
 
+/* 查询转码时长数据 */
+func (c *LiveClient) DescribeLiveTranscodingDurationData(request *live.DescribeLiveTranscodingDurationDataRequest) (*live.DescribeLiveTranscodingDurationDataResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DescribeLiveTranscodingDurationDataResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 删除用户自定义转码模板
 - 删除用户自定义转码模板之前必须先删除此模板在各域名、应用、流级别的转码设置
  */
@@ -1153,6 +1339,47 @@ func (c *LiveClient) StopLiveDomain(request *live.StopLiveDomainRequest) (*live.
     return jdResp, err
 }
 
+/* 查询转码流播放带宽 */
+func (c *LiveClient) DescribeLiveTranscodeStreamBandwidth(request *live.DescribeLiveTranscodeStreamBandwidthRequest) (*live.DescribeLiveTranscodeStreamBandwidthResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DescribeLiveTranscodeStreamBandwidthResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询直播实时流信息
+ */
+func (c *LiveClient) DescribeLiveStreamInfo(request *live.DescribeLiveStreamInfoRequest) (*live.DescribeLiveStreamInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DescribeLiveStreamInfoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询直播中的流的信息 */
 func (c *LiveClient) DescribeLiveStreamOnlineList(request *live.DescribeLiveStreamOnlineListRequest) (*live.DescribeLiveStreamOnlineListResponse, error) {
     if request == nil {
@@ -1227,6 +1454,26 @@ func (c *LiveClient) AddLiveStreamDomainSnapshot(request *live.AddLiveStreamDoma
     }
 
     jdResp := &live.AddLiveStreamDomainSnapshotResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询直播流历史在线人数 */
+func (c *LiveClient) DescribeLiveStreamHistoryUserNum(request *live.DescribeLiveStreamHistoryUserNumRequest) (*live.DescribeLiveStreamHistoryUserNumResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DescribeLiveStreamHistoryUserNumResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1333,6 +1580,52 @@ func (c *LiveClient) DeleteLiveDomain(request *live.DeleteLiveDomainRequest) (*l
     }
 
     jdResp := &live.DeleteLiveDomainResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询推流带宽
+- 查询某个时间段内的推流上行带宽数据
+- 查询时间跨度：30天
+ */
+func (c *LiveClient) DescribeLiveStreamPublishBandwidthData(request *live.DescribeLiveStreamPublishBandwidthDataRequest) (*live.DescribeLiveStreamPublishBandwidthDataResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DescribeLiveStreamPublishBandwidthDataResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询流量数据
+- 查询某个时间段内的流量数据。
+- 查询时间跨度：30天
+ */
+func (c *LiveClient) DescribeLiveStreamTrafficData(request *live.DescribeLiveStreamTrafficDataRequest) (*live.DescribeLiveStreamTrafficDataResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DescribeLiveStreamTrafficDataResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

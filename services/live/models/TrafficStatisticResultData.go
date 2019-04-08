@@ -19,7 +19,7 @@ package models
 
 type TrafficStatisticResultData struct {
 
-    /* 流量，单位：Byte
+    /* 流量，单位:Byte
  (Optional) */
-    Value int `json:"value"`
+    Value int64 `json:"value"`
 }
