@@ -28,5 +28,5 @@ type TrafficStatisticResult struct {
     EndTime string `json:"endTime"`
 
     /*  (Optional) */
-    Data interface{} `json:"data"`
+    Data TrafficStatisticResultData `json:"data"`
 }

@@ -17,16 +17,16 @@
 package models
 
 
-type TranscodeDurationStatisticResult struct {
+type LiveStreamUserNumResult struct {
 
-    /* 时间点
+    /* 起始时间点，UTC时间，格式：yyyy-MM-dd'T'HH:mm:ss'Z'
  (Optional) */
     StartTime string `json:"startTime"`
 
-    /* 时间点
+    /* 结束时间点，UTC时间，格式：yyyy-MM-dd'T'HH:mm:ss'Z'
  (Optional) */
     EndTime string `json:"endTime"`
 
     /*  (Optional) */
-    Data TranscodeDurationStatisticData `json:"data"`
+    Data LiveStreamUserNumResultData `json:"data"`
 }

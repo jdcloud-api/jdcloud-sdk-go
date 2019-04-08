@@ -17,16 +17,9 @@
 package models
 
 
-type TranscodeDurationStatisticResult struct {
+type LiveStreamUserNumResultData struct {
 
-    /* 时间点
+    /* 人数
  (Optional) */
-    StartTime string `json:"startTime"`
-
-    /* 时间点
- (Optional) */
-    EndTime string `json:"endTime"`
-
-    /*  (Optional) */
-    Data TranscodeDurationStatisticData `json:"data"`
+    Count int64 `json:"count"`
 }

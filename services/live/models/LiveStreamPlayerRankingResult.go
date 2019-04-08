@@ -17,16 +17,25 @@
 package models
 
 
-type TranscodeDurationStatisticResult struct {
+type LiveStreamPlayerRankingResult struct {
 
-    /* 时间点
+    /* 起始时间点，UTC时间，格式：yyyy-MM-dd'T'HH:mm:ss'Z'
  (Optional) */
     StartTime string `json:"startTime"`
 
-    /* 时间点
+    /* 结束时间点，UTC时间，格式：yyyy-MM-dd'T'HH:mm:ss'Z'
  (Optional) */
     EndTime string `json:"endTime"`
 
-    /*  (Optional) */
-    Data TranscodeDurationStatisticData `json:"data"`
+    /* 排行
+ (Optional) */
+    Ranking int64 `json:"ranking"`
+
+    /* 流名称
+ (Optional) */
+    StreamName string `json:"streamName"`
+
+    /* 观众数量
+ (Optional) */
+    PlayerCount int64 `json:"playerCount"`
 }

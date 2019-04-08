@@ -21,9 +21,9 @@ type BandwidthStatisticResultData struct {
 
     /* 带宽，单位：bps
  (Optional) */
-    Value int `json:"value"`
+    Value int64 `json:"value"`
 
     /* 带宽峰值时间点，单位：秒
  (Optional) */
-    MaxValueTime int `json:"maxValueTime"`
+    MaxValueTime int64 `json:"maxValueTime"`
 }
