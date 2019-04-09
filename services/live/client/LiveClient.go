@@ -40,7 +40,7 @@ func NewLiveClient(credential *core.Credential) *LiveClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "live",
-            Revision:    "1.0.4",
+            Revision:    "1.0.5",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -273,7 +273,7 @@ func (c *LiveClient) DeleteLiveStreamDomainSnapshot(request *live.DeleteLiveStre
 
 /* 查询带宽数据
 - 查询某个时间段内的带宽数据（平均带宽）
-- 查询时间跨度：30天
+- 查询1分钟粒度的数据时，时间跨度不超过7天，其他粒度时时间跨度不超过30天
  */
 func (c *LiveClient) DescribeLiveStreamBandwidthData(request *live.DescribeLiveStreamBandwidthDataRequest) (*live.DescribeLiveStreamBandwidthDataResponse, error) {
     if request == nil {
@@ -849,7 +849,7 @@ func (c *LiveClient) AddLiveStreamAppTranscode(request *live.AddLiveStreamAppTra
 
 /* 查询推流上行流量数据
 - 查询某个时间段内的流量数据。
-- 查询时间跨度：30天
+- 查询1分钟粒度的数据时，时间跨度不超过7天，其他粒度时时间跨度不超过30天
  */
 func (c *LiveClient) DescribeLiveStreamPublishTrafficData(request *live.DescribeLiveStreamPublishTrafficDataRequest) (*live.DescribeLiveStreamPublishTrafficDataResponse, error) {
     if request == nil {
@@ -1339,7 +1339,9 @@ func (c *LiveClient) StopLiveDomain(request *live.StopLiveDomainRequest) (*live.
     return jdResp, err
 }
 
-/* 查询转码流播放带宽 */
+/* 查询转码流播放带宽
+- 查询1分钟粒度的数据时，时间跨度不超过7天，其他粒度时时间跨度不超过30天
+ */
 func (c *LiveClient) DescribeLiveTranscodeStreamBandwidth(request *live.DescribeLiveTranscodeStreamBandwidthRequest) (*live.DescribeLiveTranscodeStreamBandwidthResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1591,7 +1593,7 @@ func (c *LiveClient) DeleteLiveDomain(request *live.DeleteLiveDomainRequest) (*l
 
 /* 查询推流带宽
 - 查询某个时间段内的推流上行带宽数据
-- 查询时间跨度：30天
+- 查询1分钟粒度的数据时，时间跨度不超过7天，其他粒度时时间跨度不超过30天
  */
 func (c *LiveClient) DescribeLiveStreamPublishBandwidthData(request *live.DescribeLiveStreamPublishBandwidthDataRequest) (*live.DescribeLiveStreamPublishBandwidthDataResponse, error) {
     if request == nil {
@@ -1614,7 +1616,7 @@ func (c *LiveClient) DescribeLiveStreamPublishBandwidthData(request *live.Descri
 
 /* 查询流量数据
 - 查询某个时间段内的流量数据。
-- 查询时间跨度：30天
+- 查询1分钟粒度的数据时，时间跨度不超过7天，其他粒度时时间跨度不超过30天
  */
 func (c *LiveClient) DescribeLiveStreamTrafficData(request *live.DescribeLiveStreamTrafficDataRequest) (*live.DescribeLiveStreamTrafficDataResponse, error) {
     if request == nil {

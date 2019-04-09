@@ -45,7 +45,7 @@ type DescribePublishStreamInfoDataRequest struct {
 - UTC时间
   格式:yyyy-MM-dd'T'HH:mm:ss'Z'
   示例:2018-10-21T10:00:00Z
-- 为空,默认为当前时间
+- 为空,默认为当前时间，查询时间跨度不超过1天
  (Optional) */
     EndTime *string `json:"endTime"`
 }
@@ -96,7 +96,7 @@ func NewDescribePublishStreamInfoDataRequest(
 - UTC时间
   格式:yyyy-MM-dd'T'HH:mm:ss'Z'
   示例:2018-10-21T10:00:00Z
-- 为空,默认为当前时间
+- 为空,默认为当前时间，查询时间跨度不超过1天
  (Optional)
  */
 func NewDescribePublishStreamInfoDataRequestWithAllParams(
@@ -163,7 +163,7 @@ func (r *DescribePublishStreamInfoDataRequest) SetStartTime(startTime string) {
 - UTC时间
   格式:yyyy-MM-dd'T'HH:mm:ss'Z'
   示例:2018-10-21T10:00:00Z
-- 为空,默认为当前时间
+- 为空,默认为当前时间，查询时间跨度不超过1天
 (Optional) */
 func (r *DescribePublishStreamInfoDataRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
