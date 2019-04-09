@@ -54,22 +54,22 @@ type DescribeLiveStreamTrafficDataRequest struct {
     Period *string `json:"period"`
 
     /* 查询起始时间，UTC时间，格式：yyyy-MM-dd'T'HH:mm:ss'Z'
- (Optional) */
-    StartTime *string `json:"startTime"`
+  */
+    StartTime string `json:"startTime"`
 
     /* 查询截至时间，UTC时间，格式：yyyy-MM-dd'T'HH:mm:ss'Z'，为空时默认为当前时间
-  */
-    EndTime string `json:"endTime"`
+ (Optional) */
+    EndTime *string `json:"endTime"`
 }
 
 /*
- * param endTime: 查询截至时间，UTC时间，格式：yyyy-MM-dd'T'HH:mm:ss'Z'，为空时默认为当前时间
+ * param startTime: 查询起始时间，UTC时间，格式：yyyy-MM-dd'T'HH:mm:ss'Z'
  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeLiveStreamTrafficDataRequest(
-    endTime string,
+    startTime string,
 ) *DescribeLiveStreamTrafficDataRequest {
 
 	return &DescribeLiveStreamTrafficDataRequest{
@@ -79,7 +79,7 @@ func NewDescribeLiveStreamTrafficDataRequest(
 			Header:  nil,
 			Version: "v1",
 		},
-        EndTime: endTime,
+        StartTime: startTime,
 	}
 }
 
@@ -99,9 +99,9 @@ func NewDescribeLiveStreamTrafficDataRequest(
  * param period: 查询周期，当前取值范围：“oneMin,fiveMin,halfHour,hour,twoHour,sixHour,day,followTime”，分别表示1min，5min，半小时，1小时，2小时，6小时，1天，跟随时间。默认为空，表示fiveMin。当传入followTime时，表示按Endtime-StartTime的周期，只返回一个点
  (Optional)
  * param startTime: 查询起始时间，UTC时间，格式：yyyy-MM-dd'T'HH:mm:ss'Z'
- (Optional)
- * param endTime: 查询截至时间，UTC时间，格式：yyyy-MM-dd'T'HH:mm:ss'Z'，为空时默认为当前时间
  (Required)
+ * param endTime: 查询截至时间，UTC时间，格式：yyyy-MM-dd'T'HH:mm:ss'Z'，为空时默认为当前时间
+ (Optional)
  */
 func NewDescribeLiveStreamTrafficDataRequestWithAllParams(
     domainName *string,
@@ -111,8 +111,8 @@ func NewDescribeLiveStreamTrafficDataRequestWithAllParams(
     locationName *string,
     protocolType *string,
     period *string,
-    startTime *string,
-    endTime string,
+    startTime string,
+    endTime *string,
 ) *DescribeLiveStreamTrafficDataRequest {
 
     return &DescribeLiveStreamTrafficDataRequest{
@@ -190,15 +190,15 @@ func (r *DescribeLiveStreamTrafficDataRequest) SetPeriod(period string) {
 }
 
 /* param startTime: 查询起始时间，UTC时间，格式：yyyy-MM-dd'T'HH:mm:ss'Z'
-(Optional) */
+(Required) */
 func (r *DescribeLiveStreamTrafficDataRequest) SetStartTime(startTime string) {
-    r.StartTime = &startTime
+    r.StartTime = startTime
 }
 
 /* param endTime: 查询截至时间，UTC时间，格式：yyyy-MM-dd'T'HH:mm:ss'Z'，为空时默认为当前时间
-(Required) */
+(Optional) */
 func (r *DescribeLiveStreamTrafficDataRequest) SetEndTime(endTime string) {
-    r.EndTime = endTime
+    r.EndTime = &endTime
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

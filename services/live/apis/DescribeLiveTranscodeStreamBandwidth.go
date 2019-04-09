@@ -200,5 +200,5 @@ type DescribeLiveTranscodeStreamBandwidthResponse struct {
 }
 
 type DescribeLiveTranscodeStreamBandwidthResult struct {
-    DataList []live.LiveStreamUserNumResult `json:"dataList"`
+    DataList []live.BandwidthStatisticResult `json:"dataList"`
 }
