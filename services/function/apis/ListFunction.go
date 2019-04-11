@@ -30,6 +30,7 @@ type ListFunctionRequest struct {
     RegionId string `json:"regionId"`
 
     /* functionId -函数ID，精确匹配，支持多个
+functionName  - 函数名称，模糊匹配，支持单个
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
@@ -57,6 +58,7 @@ func NewListFunctionRequest(
 /*
  * param regionId: Region ID (Required)
  * param filters: functionId -函数ID，精确匹配，支持多个
+functionName  - 函数名称，模糊匹配，支持单个
  (Optional)
  */
 func NewListFunctionRequestWithAllParams(
@@ -95,6 +97,7 @@ func (r *ListFunctionRequest) SetRegionId(regionId string) {
 }
 
 /* param filters: functionId -函数ID，精确匹配，支持多个
+functionName  - 函数名称，模糊匹配，支持单个
 (Optional) */
 func (r *ListFunctionRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters

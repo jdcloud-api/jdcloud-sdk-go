@@ -19,21 +19,25 @@ package models
 
 type Domain struct {
 
-    /* 域名的唯一ID (Optional) */
+    /* 域名在云解析里唯一的ID (Optional) */
     Id int `json:"id"`
 
     /* 域名字符串 (Optional) */
     DomainName string `json:"domainName"`
 
-    /* 创建时间，格式Unix timestamp，时间单位：毫秒 (Optional) */
+    /* 域名的创建时间，Unix timestamp格式，时间单位：毫秒 (Optional) */
     CreateTime int64 `json:"createTime"`
 
-    /* 过期时间，格式Unix timestamp，时间单位：毫秒 (Optional) */
+    /* 域名的过期时间，Unix timestamp格式，时间单位：毫秒 (Optional) */
     ExpirationDate int64 `json:"expirationDate"`
 
-    /* 套餐类型，0->免费 1->企业版 2->企业高级版 (Optional) */
+    /* 域名的套餐类型，0->免费 1->企业版 2->企业高级版  
+不同套餐的描述，请查阅<a href="https://docs.jdcloud.com/cn/jd-cloud-dns/price-overview">文档</a>
+ (Optional) */
     PackId int `json:"packId"`
 
-    /* 域名的锁定状态，0:未锁定， 1:已锁定 (Optional) */
+    /* 域名的锁定状态，0:未锁定， 1:已锁定
+锁定的含义，请查阅<a href="https://docs.jdcloud.com/cn/jd-cloud-dns/lock-domain">文档</a>
+ (Optional) */
     LockStatus int `json:"lockStatus"`
 }

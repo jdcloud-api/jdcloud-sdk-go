@@ -40,7 +40,7 @@ func NewFunctionClient(credential *core.Credential) *FunctionClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "function",
-            Revision:    "1.0.1",
+            Revision:    "1.0.2",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -53,8 +53,8 @@ func (c *FunctionClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-/* 查询函数列表 */
-func (c *FunctionClient) ListFunction(request *function.ListFunctionRequest) (*function.ListFunctionResponse, error) {
+/* 创建别名 */
+func (c *FunctionClient) CreateAlias(request *function.CreateAliasRequest) (*function.CreateAliasResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -63,47 +63,7 @@ func (c *FunctionClient) ListFunction(request *function.ListFunctionRequest) (*f
         return nil, err
     }
 
-    jdResp := &function.ListFunctionResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询触发器列表 */
-func (c *FunctionClient) ListTrigger(request *function.ListTriggerRequest) (*function.ListTriggerResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &function.ListTriggerResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 删除版本 */
-func (c *FunctionClient) DeleteVersion(request *function.DeleteVersionRequest) (*function.DeleteVersionResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &function.DeleteVersionResponse{}
+    jdResp := &function.CreateAliasResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -153,46 +113,6 @@ func (c *FunctionClient) DeleteAlias(request *function.DeleteAliasRequest) (*fun
     return jdResp, err
 }
 
-/* 查询版本列表 */
-func (c *FunctionClient) ListVersion(request *function.ListVersionRequest) (*function.ListVersionResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &function.ListVersionResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询函数详情 */
-func (c *FunctionClient) GetFunction(request *function.GetFunctionRequest) (*function.GetFunctionResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &function.GetFunctionResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 创建函数 */
 func (c *FunctionClient) CreateFunction(request *function.CreateFunctionRequest) (*function.CreateFunctionResponse, error) {
     if request == nil {
@@ -204,66 +124,6 @@ func (c *FunctionClient) CreateFunction(request *function.CreateFunctionRequest)
     }
 
     jdResp := &function.CreateFunctionResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 更新别名 */
-func (c *FunctionClient) UpdateAlias(request *function.UpdateAliasRequest) (*function.UpdateAliasResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &function.UpdateAliasResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询别名详情 */
-func (c *FunctionClient) GetAlias(request *function.GetAliasRequest) (*function.GetAliasResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &function.GetAliasResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 删除函数 */
-func (c *FunctionClient) DeleteFunction(request *function.DeleteFunctionRequest) (*function.DeleteFunctionResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &function.DeleteFunctionResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -293,8 +153,8 @@ func (c *FunctionClient) CreateVersion(request *function.CreateVersionRequest) (
     return jdResp, err
 }
 
-/* 创建别名 */
-func (c *FunctionClient) CreateAlias(request *function.CreateAliasRequest) (*function.CreateAliasResponse, error) {
+/* 查询函数详情 */
+func (c *FunctionClient) GetFunction(request *function.GetFunctionRequest) (*function.GetFunctionResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -303,7 +163,107 @@ func (c *FunctionClient) CreateAlias(request *function.CreateAliasRequest) (*fun
         return nil, err
     }
 
-    jdResp := &function.CreateAliasResponse{}
+    jdResp := &function.GetFunctionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询触发器列表 */
+func (c *FunctionClient) ListTrigger(request *function.ListTriggerRequest) (*function.ListTriggerResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &function.ListTriggerResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询版本列表 */
+func (c *FunctionClient) ListVersion(request *function.ListVersionRequest) (*function.ListVersionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &function.ListVersionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 控制台测试执行函数 */
+func (c *FunctionClient) Invoke(request *function.InvokeRequest) (*function.InvokeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &function.InvokeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新别名 */
+func (c *FunctionClient) UpdateAlias(request *function.UpdateAliasRequest) (*function.UpdateAliasResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &function.UpdateAliasResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 异步测试执行函数 */
+func (c *FunctionClient) AsyncInvoke(request *function.AsyncInvokeRequest) (*function.AsyncInvokeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &function.AsyncInvokeResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -333,8 +293,8 @@ func (c *FunctionClient) GetTrigger(request *function.GetTriggerRequest) (*funct
     return jdResp, err
 }
 
-/* 更新函数 */
-func (c *FunctionClient) UpdateFunction(request *function.UpdateFunctionRequest) (*function.UpdateFunctionResponse, error) {
+/* 删除版本 */
+func (c *FunctionClient) DeleteVersion(request *function.DeleteVersionRequest) (*function.DeleteVersionResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -343,7 +303,7 @@ func (c *FunctionClient) UpdateFunction(request *function.UpdateFunctionRequest)
         return nil, err
     }
 
-    jdResp := &function.UpdateFunctionResponse{}
+    jdResp := &function.DeleteVersionResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -353,8 +313,8 @@ func (c *FunctionClient) UpdateFunction(request *function.UpdateFunctionRequest)
     return jdResp, err
 }
 
-/* 控制台测试执行函数 */
-func (c *FunctionClient) TestInvoke(request *function.TestInvokeRequest) (*function.TestInvokeResponse, error) {
+/* 删除函数 */
+func (c *FunctionClient) DeleteFunction(request *function.DeleteFunctionRequest) (*function.DeleteFunctionResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -363,7 +323,27 @@ func (c *FunctionClient) TestInvoke(request *function.TestInvokeRequest) (*funct
         return nil, err
     }
 
-    jdResp := &function.TestInvokeResponse{}
+    jdResp := &function.DeleteFunctionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询函数列表 */
+func (c *FunctionClient) ListFunction(request *function.ListFunctionRequest) (*function.ListFunctionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &function.ListFunctionResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -384,6 +364,46 @@ func (c *FunctionClient) ListAlias(request *function.ListAliasRequest) (*functio
     }
 
     jdResp := &function.ListAliasResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询别名详情 */
+func (c *FunctionClient) GetAlias(request *function.GetAliasRequest) (*function.GetAliasResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &function.GetAliasResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新函数 */
+func (c *FunctionClient) UpdateFunction(request *function.UpdateFunctionRequest) (*function.UpdateFunctionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &function.UpdateFunctionResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

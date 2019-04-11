@@ -19,8 +19,8 @@ package models
 
 type Getalb struct {
 
-    /* 负载均衡的解析记录的列表中解析记录是否是相同的权重<br>
-true: 均等负载<br>
+    /* 负载均衡的解析记录的列表中解析记录是否是相同的权重 
+true: 均等负载 
 false: 按权重分配负载
  (Optional) */
     Balance bool `json:"balance"`

@@ -27,13 +27,13 @@ type DelDomainRequest struct {
     /* 实例所属的地域ID  */
     RegionId string `json:"regionId"`
 
-    /* 需要删除的域名ID  */
+    /* 需要删除的主域名ID，请使用getDomains接口获取  */
     DomainId int `json:"domainId"`
 }
 
 /*
  * param regionId: 实例所属的地域ID (Required)
- * param domainId: 需要删除的域名ID (Required)
+ * param domainId: 需要删除的主域名ID，请使用getDomains接口获取 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -56,7 +56,7 @@ func NewDelDomainRequest(
 
 /*
  * param regionId: 实例所属的地域ID (Required)
- * param domainId: 需要删除的域名ID (Required)
+ * param domainId: 需要删除的主域名ID，请使用getDomains接口获取 (Required)
  */
 func NewDelDomainRequestWithAllParams(
     regionId string,
@@ -93,7 +93,7 @@ func (r *DelDomainRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param domainId: 需要删除的域名ID(Required) */
+/* param domainId: 需要删除的主域名ID，请使用getDomains接口获取(Required) */
 func (r *DelDomainRequest) SetDomainId(domainId int) {
     r.DomainId = domainId
 }

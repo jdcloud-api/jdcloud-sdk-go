@@ -22,7 +22,7 @@ type ViewTree struct {
     /* 此解析线路是否禁用 (Optional) */
     Disabled bool `json:"disabled"`
 
-    /* 解析线路的名称 (Optional) */
+    /* 解析线路的描述 (Optional) */
     Label string `json:"label"`
 
     /* 此数据是否是叶子节点 (Optional) */
@@ -30,6 +30,9 @@ type ViewTree struct {
 
     /* 解析线路ID (Optional) */
     Value int `json:"value"`
+
+    /* 解析线路的名称，在使用viewName的参数处使用，如果为空表明此解析线路不能直接使用，请使用它的子线路。 (Optional) */
+    ViewName string `json:"viewName"`
 
     /*  (Optional) */
     Children []ViewTree `json:"children"`

@@ -54,15 +54,11 @@ type CreateThumbnailTaskRequest struct {
 }
 
 /*
- * param regionId: region id 
- * param taskID: 任务ID (readonly) (Optional)
- * param status: 状态 (SUCCESS, ERROR, PENDDING, RUNNING) (readonly) (Optional)
- * param errorCode: 错误码 (readonly) (Optional)
- * param createdTime: 任务创建时间 时间格式(GMT): yyyy-MM-dd’T’HH:mm:ss.SSS’Z’  (readonly) (Optional)
- * param lastUpdatedTime: 任务创建时间 时间格式(GMT): yyyy-MM-dd’T’HH:mm:ss.SSS’Z’  (readonly) (Optional)
- * param source:  
- * param target:  
- * param rule:  (Optional)
+ * param regionId: region id (Required)
+ * param source:  (Required)
+ * param target:  (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateThumbnailTaskRequest(
     regionId string,
@@ -83,38 +79,102 @@ func NewCreateThumbnailTaskRequest(
 	}
 }
 
+/*
+ * param regionId: region id (Required)
+ * param taskID: 任务ID (readonly) (Optional)
+ * param status: 状态 (SUCCESS, ERROR, PENDDING, RUNNING) (readonly) (Optional)
+ * param errorCode: 错误码 (readonly) (Optional)
+ * param createdTime: 任务创建时间 时间格式(GMT): yyyy-MM-dd’T’HH:mm:ss.SSS’Z’  (readonly) (Optional)
+ * param lastUpdatedTime: 任务创建时间 时间格式(GMT): yyyy-MM-dd’T’HH:mm:ss.SSS’Z’  (readonly) (Optional)
+ * param source:  (Required)
+ * param target:  (Required)
+ * param rule:  (Optional)
+ */
+func NewCreateThumbnailTaskRequestWithAllParams(
+    regionId string,
+    taskID *string,
+    status *string,
+    errorCode *int,
+    createdTime *string,
+    lastUpdatedTime *string,
+    source *mps.ThumbnailTaskSource,
+    target *mps.ThumbnailTaskTarget,
+    rule *mps.ThumbnailTaskRule,
+) *CreateThumbnailTaskRequest {
+
+    return &CreateThumbnailTaskRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/thumbnail",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        TaskID: taskID,
+        Status: status,
+        ErrorCode: errorCode,
+        CreatedTime: createdTime,
+        LastUpdatedTime: lastUpdatedTime,
+        Source: source,
+        Target: target,
+        Rule: rule,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewCreateThumbnailTaskRequestWithoutParam() *CreateThumbnailTaskRequest {
+
+    return &CreateThumbnailTaskRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/thumbnail",
+            Method:  "POST",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: region id(Required) */
 func (r *CreateThumbnailTaskRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param taskID: 任务ID (readonly)(Optional) */
 func (r *CreateThumbnailTaskRequest) SetTaskID(taskID string) {
     r.TaskID = &taskID
 }
 
+/* param status: 状态 (SUCCESS, ERROR, PENDDING, RUNNING) (readonly)(Optional) */
 func (r *CreateThumbnailTaskRequest) SetStatus(status string) {
     r.Status = &status
 }
 
+/* param errorCode: 错误码 (readonly)(Optional) */
 func (r *CreateThumbnailTaskRequest) SetErrorCode(errorCode int) {
     r.ErrorCode = &errorCode
 }
 
+/* param createdTime: 任务创建时间 时间格式(GMT): yyyy-MM-dd’T’HH:mm:ss.SSS’Z’  (readonly)(Optional) */
 func (r *CreateThumbnailTaskRequest) SetCreatedTime(createdTime string) {
     r.CreatedTime = &createdTime
 }
 
+/* param lastUpdatedTime: 任务创建时间 时间格式(GMT): yyyy-MM-dd’T’HH:mm:ss.SSS’Z’  (readonly)(Optional) */
 func (r *CreateThumbnailTaskRequest) SetLastUpdatedTime(lastUpdatedTime string) {
     r.LastUpdatedTime = &lastUpdatedTime
 }
 
+/* param source: (Required) */
 func (r *CreateThumbnailTaskRequest) SetSource(source *mps.ThumbnailTaskSource) {
     r.Source = source
 }
 
+/* param target: (Required) */
 func (r *CreateThumbnailTaskRequest) SetTarget(target *mps.ThumbnailTaskTarget) {
     r.Target = target
 }
 
+/* param rule: (Optional) */
 func (r *CreateThumbnailTaskRequest) SetRule(rule *mps.ThumbnailTaskRule) {
     r.Rule = rule
 }
