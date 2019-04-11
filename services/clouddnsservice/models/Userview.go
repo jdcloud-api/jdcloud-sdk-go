@@ -25,7 +25,7 @@ type Userview struct {
     /* 自定义线路名称, 最多64个字符 (Optional) */
     ViewName string `json:"viewName"`
 
-    /* 域名ID (Optional) */
+    /* 主域名ID (Optional) */
     DomainId int `json:"domainId"`
 
     /* 域名 (Optional) */

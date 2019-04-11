@@ -33,8 +33,10 @@ type GetThumbnailTaskRequest struct {
 }
 
 /*
- * param regionId: region id 
- * param taskId: task id 
+ * param regionId: region id (Required)
+ * param taskId: task id (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewGetThumbnailTaskRequest(
     regionId string,
@@ -53,10 +55,46 @@ func NewGetThumbnailTaskRequest(
 	}
 }
 
+/*
+ * param regionId: region id (Required)
+ * param taskId: task id (Required)
+ */
+func NewGetThumbnailTaskRequestWithAllParams(
+    regionId string,
+    taskId string,
+) *GetThumbnailTaskRequest {
+
+    return &GetThumbnailTaskRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/thumbnail/{taskId}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        TaskId: taskId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewGetThumbnailTaskRequestWithoutParam() *GetThumbnailTaskRequest {
+
+    return &GetThumbnailTaskRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/thumbnail/{taskId}",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: region id(Required) */
 func (r *GetThumbnailTaskRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param taskId: task id(Required) */
 func (r *GetThumbnailTaskRequest) SetTaskId(taskId string) {
     r.TaskId = taskId
 }

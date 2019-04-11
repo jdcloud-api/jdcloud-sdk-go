@@ -34,7 +34,7 @@ type GetUserViewIPRequest struct {
     ViewId int `json:"viewId"`
 
     /* 自定义线路名称, 最多64个字符 (Optional) */
-    ViewName *int `json:"viewName"`
+    ViewName *string `json:"viewName"`
 
     /* 分页参数，页的序号, 默认为1  */
     PageNumber int `json:"pageNumber"`
@@ -87,7 +87,7 @@ func NewGetUserViewIPRequestWithAllParams(
     regionId string,
     domainId int,
     viewId int,
-    viewName *int,
+    viewName *string,
     pageNumber int,
     pageSize int,
 ) *GetUserViewIPRequest {
@@ -137,7 +137,7 @@ func (r *GetUserViewIPRequest) SetViewId(viewId int) {
 }
 
 /* param viewName: 自定义线路名称, 最多64个字符(Optional) */
-func (r *GetUserViewIPRequest) SetViewName(viewName int) {
+func (r *GetUserViewIPRequest) SetViewName(viewName string) {
     r.ViewName = &viewName
 }
 

@@ -40,7 +40,7 @@ func NewMpsClient(credential *core.Credential) *MpsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "mps",
-            Revision:    "0.3.6",
+            Revision:    "0.4.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,6 +51,106 @@ func (c *MpsClient) SetConfig(config *core.Config) {
 
 func (c *MpsClient) SetLogger(logger core.Logger) {
     c.Logger = logger
+}
+
+/* 创建截图任务，创建成功时返回任务ID。本接口用于截取指定时间点的画面。 */
+func (c *MpsClient) CreateThumbnailTask(request *mps.CreateThumbnailTaskRequest) (*mps.CreateThumbnailTaskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &mps.CreateThumbnailTaskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询截图任务，返回满足查询条件的任务列表。 */
+func (c *MpsClient) ListThumbnailTask(request *mps.ListThumbnailTaskRequest) (*mps.ListThumbnailTaskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &mps.ListThumbnailTaskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除bucket的图片样式分隔符配置 */
+func (c *MpsClient) DeleteStyleDelimiter(request *mps.DeleteStyleDelimiterRequest) (*mps.DeleteStyleDelimiterResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &mps.DeleteStyleDelimiterResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取媒体处理通知 */
+func (c *MpsClient) GetNotification(request *mps.GetNotificationRequest) (*mps.GetNotificationResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &mps.GetNotificationResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据任务ID获取截图任务。 */
+func (c *MpsClient) GetThumbnailTask(request *mps.GetThumbnailTaskRequest) (*mps.GetThumbnailTaskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &mps.GetThumbnailTaskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
 }
 
 /* 设置媒体处理通知, 在设置Notification时会对endpoint进行校验, 设置时会对endpoint发一条SubscriptionConfirmation(x-jdcloud-message-type头)的通知, 要求把Message内容进行base64编码返回给系统(body)进行校验 */
@@ -66,14 +166,15 @@ func (c *MpsClient) SetNotification(request *mps.SetNotificationRequest) (*mps.S
     jdResp := &mps.SetNotificationResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
     return jdResp, err
 }
 
-/* 获取截图通知 */
-func (c *MpsClient) GetNotification(request *mps.GetNotificationRequest) (*mps.GetNotificationResponse, error) {
+/* 设置图片样式分隔符 */
+func (c *MpsClient) SetStyleDelimiter(request *mps.SetStyleDelimiterRequest) (*mps.SetStyleDelimiterResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -82,17 +183,18 @@ func (c *MpsClient) GetNotification(request *mps.GetNotificationRequest) (*mps.G
         return nil, err
     }
 
-    jdResp := &mps.GetNotificationResponse{}
+    jdResp := &mps.SetStyleDelimiterResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
     return jdResp, err
 }
 
-/* 创建截图任务 */
-func (c *MpsClient) CreateThumbnailTask(request *mps.CreateThumbnailTaskRequest) (*mps.CreateThumbnailTaskResponse, error) {
+/* 获取bucket的图片样式分隔符配置 */
+func (c *MpsClient) GetStyleDelimiter(request *mps.GetStyleDelimiterRequest) (*mps.GetStyleDelimiterResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -101,47 +203,10 @@ func (c *MpsClient) CreateThumbnailTask(request *mps.CreateThumbnailTaskRequest)
         return nil, err
     }
 
-    jdResp := &mps.CreateThumbnailTaskResponse{}
+    jdResp := &mps.GetStyleDelimiterResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 获取截图任务 */
-func (c *MpsClient) GetThumbnailTask(request *mps.GetThumbnailTaskRequest) (*mps.GetThumbnailTaskResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &mps.GetThumbnailTaskResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询截图任务 */
-func (c *MpsClient) ListThumbnailTask(request *mps.ListThumbnailTaskRequest) (*mps.ListThumbnailTaskResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &mps.ListThumbnailTaskResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 

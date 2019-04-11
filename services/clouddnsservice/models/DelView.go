@@ -19,7 +19,7 @@ package models
 
 type DelView struct {
 
-    /* 域名ID  */
+    /* 主域名ID，请使用getDomains接口获取  */
     DomainId int `json:"domainId"`
 
     /* 主域名  */
@@ -29,5 +29,5 @@ type DelView struct {
     ViewName string `json:"viewName"`
 
     /* 自定义线路ID  */
-    ViewId string `json:"viewId"`
+    ViewId int `json:"viewId"`
 }

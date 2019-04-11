@@ -30,22 +30,22 @@ type GetDomainQueryTrafficRequest struct {
     /* 域名ID，请使用getDomains接口获取。  */
     DomainId string `json:"domainId"`
 
-    /* 域名  */
+    /* 主域名，请使用getDomains接口获取  */
     DomainName string `json:"domainName"`
 
-    /* 起始时间, UTC时间例如2017-11-10T23:00:00Z  */
+    /* 时间段的起始时间, UTC时间，例如2017-11-10T23:00:00Z  */
     Start string `json:"start"`
 
-    /* 终止时间, UTC时间例如2017-11-10T23:00:00Z  */
+    /* 时间段的终止时间, UTC时间，例如2017-11-10T23:00:00Z  */
     End string `json:"end"`
 }
 
 /*
  * param regionId: 实例所属的地域ID (Required)
  * param domainId: 域名ID，请使用getDomains接口获取。 (Required)
- * param domainName: 域名 (Required)
- * param start: 起始时间, UTC时间例如2017-11-10T23:00:00Z (Required)
- * param end: 终止时间, UTC时间例如2017-11-10T23:00:00Z (Required)
+ * param domainName: 主域名，请使用getDomains接口获取 (Required)
+ * param start: 时间段的起始时间, UTC时间，例如2017-11-10T23:00:00Z (Required)
+ * param end: 时间段的终止时间, UTC时间，例如2017-11-10T23:00:00Z (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -75,9 +75,9 @@ func NewGetDomainQueryTrafficRequest(
 /*
  * param regionId: 实例所属的地域ID (Required)
  * param domainId: 域名ID，请使用getDomains接口获取。 (Required)
- * param domainName: 域名 (Required)
- * param start: 起始时间, UTC时间例如2017-11-10T23:00:00Z (Required)
- * param end: 终止时间, UTC时间例如2017-11-10T23:00:00Z (Required)
+ * param domainName: 主域名，请使用getDomains接口获取 (Required)
+ * param start: 时间段的起始时间, UTC时间，例如2017-11-10T23:00:00Z (Required)
+ * param end: 时间段的终止时间, UTC时间，例如2017-11-10T23:00:00Z (Required)
  */
 func NewGetDomainQueryTrafficRequestWithAllParams(
     regionId string,
@@ -125,17 +125,17 @@ func (r *GetDomainQueryTrafficRequest) SetDomainId(domainId string) {
     r.DomainId = domainId
 }
 
-/* param domainName: 域名(Required) */
+/* param domainName: 主域名，请使用getDomains接口获取(Required) */
 func (r *GetDomainQueryTrafficRequest) SetDomainName(domainName string) {
     r.DomainName = domainName
 }
 
-/* param start: 起始时间, UTC时间例如2017-11-10T23:00:00Z(Required) */
+/* param start: 时间段的起始时间, UTC时间，例如2017-11-10T23:00:00Z(Required) */
 func (r *GetDomainQueryTrafficRequest) SetStart(start string) {
     r.Start = start
 }
 
-/* param end: 终止时间, UTC时间例如2017-11-10T23:00:00Z(Required) */
+/* param end: 时间段的终止时间, UTC时间，例如2017-11-10T23:00:00Z(Required) */
 func (r *GetDomainQueryTrafficRequest) SetEnd(end string) {
     r.End = end
 }

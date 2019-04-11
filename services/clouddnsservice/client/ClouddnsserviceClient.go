@@ -40,7 +40,7 @@ func NewClouddnsserviceClient(credential *core.Credential) *ClouddnsserviceClien
             Credential:  *credential,
             Config:      *config,
             ServiceName: "clouddnsservice",
-            Revision:    "1.0.10",
+            Revision:    "1.0.11",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -73,7 +73,7 @@ func (c *ClouddnsserviceClient) DelDomain(request *clouddnsservice.DelDomainRequ
     return jdResp, err
 }
 
-/* 查看域名的解析次数 */
+/* 查看主域名的解析次数 */
 func (c *ClouddnsserviceClient) GetDomainQueryCount(request *clouddnsservice.GetDomainQueryCountRequest) (*clouddnsservice.GetDomainQueryCountResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -93,7 +93,7 @@ func (c *ClouddnsserviceClient) GetDomainQueryCount(request *clouddnsservice.Get
     return jdResp, err
 }
 
-/* 同一个主域名下，批量新增、更新导入解析记录<br>
+/* 同一个主域名下，批量新增或者批量更新导入解析记录。
 如果解析记录的ID为0，是新增解析记录，如果不为0，则是更新解析记录。
  */
 func (c *ClouddnsserviceClient) BatchSetDnsResolve(request *clouddnsservice.BatchSetDnsResolveRequest) (*clouddnsservice.BatchSetDnsResolveResponse, error) {
@@ -175,7 +175,7 @@ func (c *ClouddnsserviceClient) OperateMonitor(request *clouddnsservice.OperateM
     return jdResp, err
 }
 
-/* 添加域名的自定义解析线路的IP段 */
+/* 添加主域名的自定义解析线路的IP段 */
 func (c *ClouddnsserviceClient) AddUserViewIP(request *clouddnsservice.AddUserViewIPRequest) (*clouddnsservice.AddUserViewIPResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -215,7 +215,7 @@ func (c *ClouddnsserviceClient) AddMonitorTarget(request *clouddnsservice.AddMon
     return jdResp, err
 }
 
-/* 添加域名的解析记录 */
+/* 添加主域名的解析记录 */
 func (c *ClouddnsserviceClient) AddRR(request *clouddnsservice.AddRRRequest) (*clouddnsservice.AddRRResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -235,7 +235,7 @@ func (c *ClouddnsserviceClient) AddRR(request *clouddnsservice.AddRRRequest) (*c
     return jdResp, err
 }
 
-/* 删除域名的自定义解析线路 */
+/* 删除主域名的自定义解析线路 */
 func (c *ClouddnsserviceClient) DelUserView(request *clouddnsservice.DelUserViewRequest) (*clouddnsservice.DelUserViewResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -275,7 +275,7 @@ func (c *ClouddnsserviceClient) OperateRR(request *clouddnsservice.OperateRRRequ
     return jdResp, err
 }
 
-/* 删除域名的自定义解析线路的IP段 */
+/* 删除主域名的自定义解析线路的IP段 */
 func (c *ClouddnsserviceClient) DelUserViewIP(request *clouddnsservice.DelUserViewIPRequest) (*clouddnsservice.DelUserViewIPResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -335,7 +335,7 @@ func (c *ClouddnsserviceClient) UpdateMonitor(request *clouddnsservice.UpdateMon
     return jdResp, err
 }
 
-/* 查询域名的自定义解析线路的IP段 */
+/* 查询主域名的自定义解析线路的IP段 */
 func (c *ClouddnsserviceClient) GetUserViewIP(request *clouddnsservice.GetUserViewIPRequest) (*clouddnsservice.GetUserViewIPResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -455,7 +455,7 @@ func (c *ClouddnsserviceClient) UpdateRR(request *clouddnsservice.UpdateRRReques
     return jdResp, err
 }
 
-/* 添加域名的自定义解析线路 */
+/* 添加主域名的自定义解析线路 */
 func (c *ClouddnsserviceClient) AddUserView(request *clouddnsservice.AddUserViewRequest) (*clouddnsservice.AddUserViewResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -475,7 +475,7 @@ func (c *ClouddnsserviceClient) AddUserView(request *clouddnsservice.AddUserView
     return jdResp, err
 }
 
-/* 查询主域名的解析记录。<br>
+/* 查询主域名的解析记录。  
 在使用解析记录相关的接口之前，请调用此接口获取解析记录的列表。
  */
 func (c *ClouddnsserviceClient) SearchRR(request *clouddnsservice.SearchRRRequest) (*clouddnsservice.SearchRRResponse, error) {
@@ -497,7 +497,7 @@ func (c *ClouddnsserviceClient) SearchRR(request *clouddnsservice.SearchRRReques
     return jdResp, err
 }
 
-/* 查询域名的自定义解析线路 */
+/* 查询主域名的自定义解析线路 */
 func (c *ClouddnsserviceClient) GetUserView(request *clouddnsservice.GetUserViewRequest) (*clouddnsservice.GetUserViewResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -517,8 +517,9 @@ func (c *ClouddnsserviceClient) GetUserView(request *clouddnsservice.GetUserView
     return jdResp, err
 }
 
-/* 查询用户名下的主域名列表。<br>    
-请在调用域名相关的API之前，调用此API获取相关的domainId和domainName。
+/* 获取用户所属的主域名列表。   
+请在调用域名相关的接口之前，调用此接口获取相关的domainId和domainName。  
+主域名的相关概念，请查阅<a href="https://docs.jdcloud.com/cn/jd-cloud-dns/product-overview">云解析文档</a>
  */
 func (c *ClouddnsserviceClient) GetDomains(request *clouddnsservice.GetDomainsRequest) (*clouddnsservice.GetDomainsResponse, error) {
     if request == nil {
@@ -539,7 +540,11 @@ func (c *ClouddnsserviceClient) GetDomains(request *clouddnsservice.GetDomainsRe
     return jdResp, err
 }
 
-/* 添加主域名 */
+/* 添加主域名  
+如何添加免费域名，详细情况请查阅<a href="https://docs.jdcloud.com/cn/jd-cloud-dns/domainadd">文档</a>
+添加收费域名，请查阅<a href="https://docs.jdcloud.com/cn/jd-cloud-dns/purchase-process">文档</a>，
+添加收费域名前，请确保用户的京东云账户有足够的资金支付，Openapi接口回返回订单号，可以用此订单号向计费系统查阅详情。
+ */
 func (c *ClouddnsserviceClient) AddDomain(request *clouddnsservice.AddDomainRequest) (*clouddnsservice.AddDomainResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -559,7 +564,7 @@ func (c *ClouddnsserviceClient) AddDomain(request *clouddnsservice.AddDomainRequ
     return jdResp, err
 }
 
-/* 查询云解析所有的基础解析线路。<br>
+/* 查询云解析所有的基础解析线路。  
 在使用解析线路的参数之前，请调用此接口获取解析线路的ID。
  */
 func (c *ClouddnsserviceClient) GetViewTree(request *clouddnsservice.GetViewTreeRequest) (*clouddnsservice.GetViewTreeResponse, error) {

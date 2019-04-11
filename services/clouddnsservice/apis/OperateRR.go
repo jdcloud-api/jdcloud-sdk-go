@@ -30,7 +30,7 @@ type OperateRRRequest struct {
     /* 域名ID，请使用getDomains接口获取。  */
     DomainId string `json:"domainId"`
 
-    /* 需要操作的解析记录ID  */
+    /* 需要操作的解析记录ID，请使用searchRR接口获取。  */
     Ids []int `json:"ids"`
 
     /* 操作类型，on->启用 off->停用 del->删除  */
@@ -40,7 +40,7 @@ type OperateRRRequest struct {
 /*
  * param regionId: 实例所属的地域ID (Required)
  * param domainId: 域名ID，请使用getDomains接口获取。 (Required)
- * param ids: 需要操作的解析记录ID (Required)
+ * param ids: 需要操作的解析记录ID，请使用searchRR接口获取。 (Required)
  * param action: 操作类型，on->启用 off->停用 del->删除 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -69,7 +69,7 @@ func NewOperateRRRequest(
 /*
  * param regionId: 实例所属的地域ID (Required)
  * param domainId: 域名ID，请使用getDomains接口获取。 (Required)
- * param ids: 需要操作的解析记录ID (Required)
+ * param ids: 需要操作的解析记录ID，请使用searchRR接口获取。 (Required)
  * param action: 操作类型，on->启用 off->停用 del->删除 (Required)
  */
 func NewOperateRRRequestWithAllParams(
@@ -116,7 +116,7 @@ func (r *OperateRRRequest) SetDomainId(domainId string) {
     r.DomainId = domainId
 }
 
-/* param ids: 需要操作的解析记录ID(Required) */
+/* param ids: 需要操作的解析记录ID，请使用searchRR接口获取。(Required) */
 func (r *OperateRRRequest) SetIds(ids []int) {
     r.Ids = ids
 }

@@ -27,17 +27,17 @@ type UpdateDomainRequest struct {
     /* 实例所属的地域ID  */
     RegionId string `json:"regionId"`
 
-    /* 需要修改的域名  */
+    /* 需要修改的主域名，请使用getDomains接口获取  */
     DomainName string `json:"domainName"`
 
-    /* 需要修改的域名ID  */
+    /* 需要修改的主域名ID，请使用getDomains接口获取  */
     Id int `json:"id"`
 }
 
 /*
  * param regionId: 实例所属的地域ID (Required)
- * param domainName: 需要修改的域名 (Required)
- * param id: 需要修改的域名ID (Required)
+ * param domainName: 需要修改的主域名，请使用getDomains接口获取 (Required)
+ * param id: 需要修改的主域名ID，请使用getDomains接口获取 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -62,8 +62,8 @@ func NewUpdateDomainRequest(
 
 /*
  * param regionId: 实例所属的地域ID (Required)
- * param domainName: 需要修改的域名 (Required)
- * param id: 需要修改的域名ID (Required)
+ * param domainName: 需要修改的主域名，请使用getDomains接口获取 (Required)
+ * param id: 需要修改的主域名ID，请使用getDomains接口获取 (Required)
  */
 func NewUpdateDomainRequestWithAllParams(
     regionId string,
@@ -102,12 +102,12 @@ func (r *UpdateDomainRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param domainName: 需要修改的域名(Required) */
+/* param domainName: 需要修改的主域名，请使用getDomains接口获取(Required) */
 func (r *UpdateDomainRequest) SetDomainName(domainName string) {
     r.DomainName = domainName
 }
 
-/* param id: 需要修改的域名ID(Required) */
+/* param id: 需要修改的主域名ID，请使用getDomains接口获取(Required) */
 func (r *UpdateDomainRequest) SetId(id int) {
     r.Id = id
 }

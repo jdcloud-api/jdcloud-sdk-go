@@ -45,12 +45,9 @@ type ListThumbnailTaskRequest struct {
 }
 
 /*
- * param regionId: region id 
- * param status: task 状态 (PENDING, RUNNING, SUCCESS, FAILED) (Optional)
- * param begin: 开始时间 时间格式(GMT): yyyy-MM-dd'T'HH:mm:ss.SSS'Z' (Optional)
- * param end: 结束时间 时间格式(GMT): yyyy-MM-dd'T'HH:mm:ss.SSS'Z' (Optional)
- * param marker: 查询标记 (Optional)
- * param limit: 查询记录数 [1, 1000] (Optional)
+ * param regionId: region id (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewListThumbnailTaskRequest(
     regionId string,
@@ -67,26 +64,78 @@ func NewListThumbnailTaskRequest(
 	}
 }
 
+/*
+ * param regionId: region id (Required)
+ * param status: task 状态 (PENDING, RUNNING, SUCCESS, FAILED) (Optional)
+ * param begin: 开始时间 时间格式(GMT): yyyy-MM-dd'T'HH:mm:ss.SSS'Z' (Optional)
+ * param end: 结束时间 时间格式(GMT): yyyy-MM-dd'T'HH:mm:ss.SSS'Z' (Optional)
+ * param marker: 查询标记 (Optional)
+ * param limit: 查询记录数 [1, 1000] (Optional)
+ */
+func NewListThumbnailTaskRequestWithAllParams(
+    regionId string,
+    status *string,
+    begin *string,
+    end *string,
+    marker *string,
+    limit *int,
+) *ListThumbnailTaskRequest {
+
+    return &ListThumbnailTaskRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/thumbnail",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        Status: status,
+        Begin: begin,
+        End: end,
+        Marker: marker,
+        Limit: limit,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewListThumbnailTaskRequestWithoutParam() *ListThumbnailTaskRequest {
+
+    return &ListThumbnailTaskRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/thumbnail",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: region id(Required) */
 func (r *ListThumbnailTaskRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param status: task 状态 (PENDING, RUNNING, SUCCESS, FAILED)(Optional) */
 func (r *ListThumbnailTaskRequest) SetStatus(status string) {
     r.Status = &status
 }
 
+/* param begin: 开始时间 时间格式(GMT): yyyy-MM-dd'T'HH:mm:ss.SSS'Z'(Optional) */
 func (r *ListThumbnailTaskRequest) SetBegin(begin string) {
     r.Begin = &begin
 }
 
+/* param end: 结束时间 时间格式(GMT): yyyy-MM-dd'T'HH:mm:ss.SSS'Z'(Optional) */
 func (r *ListThumbnailTaskRequest) SetEnd(end string) {
     r.End = &end
 }
 
+/* param marker: 查询标记(Optional) */
 func (r *ListThumbnailTaskRequest) SetMarker(marker string) {
     r.Marker = &marker
 }
 
+/* param limit: 查询记录数 [1, 1000](Optional) */
 func (r *ListThumbnailTaskRequest) SetLimit(limit int) {
     r.Limit = &limit
 }

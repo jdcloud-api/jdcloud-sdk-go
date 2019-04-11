@@ -29,7 +29,9 @@ type GetNotificationRequest struct {
 }
 
 /*
- * param regionId: region id 
+ * param regionId: region id (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewGetNotificationRequest(
     regionId string,
@@ -46,6 +48,38 @@ func NewGetNotificationRequest(
 	}
 }
 
+/*
+ * param regionId: region id (Required)
+ */
+func NewGetNotificationRequestWithAllParams(
+    regionId string,
+) *GetNotificationRequest {
+
+    return &GetNotificationRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/notification",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewGetNotificationRequestWithoutParam() *GetNotificationRequest {
+
+    return &GetNotificationRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/notification",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: region id(Required) */
 func (r *GetNotificationRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

@@ -18,10 +18,9 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    function "github.com/jdcloud-api/jdcloud-sdk-go/services/function/models"
 )
 
-type TestInvokeRequest struct {
+type AsyncInvokeRequest struct {
 
     core.JDCloudRequest
 
@@ -34,7 +33,7 @@ type TestInvokeRequest struct {
     /* 版本名称  */
     VersionName string `json:"versionName"`
 
-    /* 执行函数的输入事件  */
+    /* 异步执行函数的输入事件  */
     Event string `json:"event"`
 }
 
@@ -42,20 +41,20 @@ type TestInvokeRequest struct {
  * param regionId: Region ID (Required)
  * param functionName: 函数名称 (Required)
  * param versionName: 版本名称 (Required)
- * param event: 执行函数的输入事件 (Required)
+ * param event: 异步执行函数的输入事件 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewTestInvokeRequest(
+func NewAsyncInvokeRequest(
     regionId string,
     functionName string,
     versionName string,
     event string,
-) *TestInvokeRequest {
+) *AsyncInvokeRequest {
 
-	return &TestInvokeRequest{
+	return &AsyncInvokeRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/testinvoke",
+			URL:     "/regions/{regionId}/functions/{functionName}/versions/{versionName}:asyncinvoke",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -71,18 +70,18 @@ func NewTestInvokeRequest(
  * param regionId: Region ID (Required)
  * param functionName: 函数名称 (Required)
  * param versionName: 版本名称 (Required)
- * param event: 执行函数的输入事件 (Required)
+ * param event: 异步执行函数的输入事件 (Required)
  */
-func NewTestInvokeRequestWithAllParams(
+func NewAsyncInvokeRequestWithAllParams(
     regionId string,
     functionName string,
     versionName string,
     event string,
-) *TestInvokeRequest {
+) *AsyncInvokeRequest {
 
-    return &TestInvokeRequest{
+    return &AsyncInvokeRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/testinvoke",
+            URL:     "/regions/{regionId}/functions/{functionName}/versions/{versionName}:asyncinvoke",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -95,11 +94,11 @@ func NewTestInvokeRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewTestInvokeRequestWithoutParam() *TestInvokeRequest {
+func NewAsyncInvokeRequestWithoutParam() *AsyncInvokeRequest {
 
-    return &TestInvokeRequest{
+    return &AsyncInvokeRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/testinvoke",
+            URL:     "/regions/{regionId}/functions/{functionName}/versions/{versionName}:asyncinvoke",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -108,37 +107,36 @@ func NewTestInvokeRequestWithoutParam() *TestInvokeRequest {
 }
 
 /* param regionId: Region ID(Required) */
-func (r *TestInvokeRequest) SetRegionId(regionId string) {
+func (r *AsyncInvokeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param functionName: 函数名称(Required) */
-func (r *TestInvokeRequest) SetFunctionName(functionName string) {
+func (r *AsyncInvokeRequest) SetFunctionName(functionName string) {
     r.FunctionName = functionName
 }
 
 /* param versionName: 版本名称(Required) */
-func (r *TestInvokeRequest) SetVersionName(versionName string) {
+func (r *AsyncInvokeRequest) SetVersionName(versionName string) {
     r.VersionName = versionName
 }
 
-/* param event: 执行函数的输入事件(Required) */
-func (r *TestInvokeRequest) SetEvent(event string) {
+/* param event: 异步执行函数的输入事件(Required) */
+func (r *AsyncInvokeRequest) SetEvent(event string) {
     r.Event = event
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r TestInvokeRequest) GetRegionId() string {
+func (r AsyncInvokeRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type TestInvokeResponse struct {
+type AsyncInvokeResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result TestInvokeResult `json:"result"`
+    Result AsyncInvokeResult `json:"result"`
 }
 
-type TestInvokeResult struct {
-    Data function.FunctionInvokeResult `json:"data"`
+type AsyncInvokeResult struct {
 }

@@ -31,10 +31,10 @@ type RR struct {
     /* 是否是京东云资源 (Optional) */
     JcloudRes bool `json:"jcloudRes"`
 
-    /* 优先级，只存在于某些解析记录类型 (Optional) */
+    /* 优先级，只存在于MX, SRV解析记录类型 (Optional) */
     MxPriority int `json:"mxPriority"`
 
-    /* 端口，只存在于某些解析记录类型 (Optional) */
+    /* 端口，只存在于SRV解析记录类型 (Optional) */
     Port int `json:"port"`
 
     /* 解析记录的生存时间 (Optional) */

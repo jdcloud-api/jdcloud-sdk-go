@@ -35,7 +35,7 @@ type GetUserViewRequest struct {
     ViewId int `json:"viewId"`
 
     /* 自定义线路名称, 最多64个字符 (Optional) */
-    ViewName *int `json:"viewName"`
+    ViewName *string `json:"viewName"`
 
     /* 分页参数，页的序号  */
     PageNumber int `json:"pageNumber"`
@@ -88,7 +88,7 @@ func NewGetUserViewRequestWithAllParams(
     regionId string,
     domainId int,
     viewId int,
-    viewName *int,
+    viewName *string,
     pageNumber int,
     pageSize int,
 ) *GetUserViewRequest {
@@ -138,7 +138,7 @@ func (r *GetUserViewRequest) SetViewId(viewId int) {
 }
 
 /* param viewName: 自定义线路名称, 最多64个字符(Optional) */
-func (r *GetUserViewRequest) SetViewName(viewName int) {
+func (r *GetUserViewRequest) SetViewName(viewName string) {
     r.ViewName = &viewName
 }
 
