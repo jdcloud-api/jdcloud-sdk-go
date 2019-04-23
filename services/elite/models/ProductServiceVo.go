@@ -69,4 +69,19 @@ type ProductServiceVo struct {
 
     /* 交付单备注 (Optional) */
     Remark string `json:"remark"`
+
+    /* 订单金额 (Optional) */
+    OrderTotalFee string `json:"orderTotalFee"`
+
+    /* 订单实付金额 (Optional) */
+    OrderActualFee string `json:"orderActualFee"`
+
+    /* 订单支付时间 (Optional) */
+    PaymentDt string `json:"paymentDt"`
+
+    /* 额外计费项信息 (Optional) */
+    ExtraChargeInfo string `json:"extraChargeInfo"`
+
+    /* 额外计费详情信息 (Optional) */
+    OrderItemExtraChargeInfos []OrderItemExtraChargeInfo `json:"orderItemExtraChargeInfos"`
 }

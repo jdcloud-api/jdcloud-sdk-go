@@ -40,7 +40,7 @@ func NewEliteClient(credential *core.Credential) *EliteClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "elite",
-            Revision:    "1.0.0",
+            Revision:    "1.0.4",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -64,6 +64,26 @@ func (c *EliteClient) ListSaleService(request *elite.ListSaleServiceRequest) (*e
     }
 
     jdResp := &elite.ListSaleServiceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取云存服务信息 */
+func (c *EliteClient) GetStoreService(request *elite.GetStoreServiceRequest) (*elite.GetStoreServiceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &elite.GetStoreServiceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
