@@ -21,7 +21,7 @@ import (
 	"strings"
 	"errors"
 	"reflect"
-	"net/url"
+	urllib "net/url"
 )
 
 var baseRequestFields []string
@@ -67,7 +67,7 @@ func (b WithBodyBuilder) BuildURL(url string, paramJson []byte) (string, error) 
 		return "", err
 	}
 
-	encodedUrl, err := encodeUrl(replacedUrl)
+	encodedUrl, err := encodeUrl(replacedUrl, nil)
 	if err != nil {
 		return "", err
 	}
@@ -117,11 +117,7 @@ func (b WithoutBodyBuilder) BuildURL(url string, paramJson []byte) (string, erro
 	}
 
 	queryParams := buildQueryParams(paramMap, url)
-	if queryParams != "" {
-		resultUrl += "?" + queryParams
-	}
-
-	encodedUrl, err := encodeUrl(resultUrl)
+	encodedUrl, err := encodeUrl(resultUrl, queryParams)
 	if err != nil {
 		return "", err
 	}
@@ -153,13 +149,13 @@ func replaceUrlWithPathParam(url string, paramMap map[string]interface{}) (strin
 	return url, nil
 }
 
-func buildQueryParams(paramMap map[string]interface{}, url string) string {
-	resultList := accessMap(paramMap, url, "", []string{})
-	result := strings.Join(resultList, "&")
-	return result
+func buildQueryParams(paramMap map[string]interface{}, url string) urllib.Values {
+	values := urllib.Values{}
+	accessMap(paramMap, url, "", values)
+	return values
 }
 
-func accessMap(paramMap map[string]interface{}, url, prefix string, resultList []string) []string {
+func accessMap(paramMap map[string]interface{}, url, prefix string, values urllib.Values) {
 	for k, v := range paramMap {
 		// exclude fields of JDCloudRequest class and path parameters
 		if shouldIgnoreField(url, k) {
@@ -172,19 +168,17 @@ func accessMap(paramMap map[string]interface{}, url, prefix string, resultList [
 				switch f := n.(type) {
 				case map[string]interface{}:
 					subPrefix := fmt.Sprintf("%s.%d.", k, i+1)
-					resultList = accessMap(f, url, subPrefix, resultList)
+					accessMap(f, url, subPrefix, values)
 				case nil:
 				default:
-					resultList = append(resultList, fmt.Sprintf("%s%s.%d=%s", prefix, k, i+1, n))
+					values.Set(fmt.Sprintf("%s%s.%d", prefix, k, i+1), fmt.Sprintf("%s", n))
 				}
 			}
 		case nil:
 		default:
-			resultList = append(resultList, fmt.Sprintf("%s%s=%v", prefix, k, v))
+			values.Set(fmt.Sprintf("%s%s", prefix, k), fmt.Sprintf("%v", v))
 		}
 	}
-
-	return resultList
 }
 
 func shouldIgnoreField(url, field string) bool {
@@ -200,8 +194,8 @@ func shouldIgnoreField(url, field string) bool {
 	return false
 }
 
-func encodeUrl(requestUrl string) (string, error) {
-	urlObj, err := url.Parse(requestUrl)
+func encodeUrl(requestUrl string, values urllib.Values) (string, error) {
+	urlObj, err := urllib.Parse(requestUrl)
 	if err != nil {
 		return "", err
 	}
@@ -209,9 +203,14 @@ func encodeUrl(requestUrl string) (string, error) {
 	urlObj.RawPath = EscapePath(urlObj.Path, false)
 	uri := urlObj.EscapedPath()
 
-	queryParam := urlObj.Query().Encode()
-	if queryParam != "" {
-		uri += "?" + queryParam
+	if values != nil {
+		queryParam := values.Encode()
+		// RFC 3986, ' ' should be encoded to 20%, '+' to 2B%
+		queryParam = strings.Replace(queryParam, "+", "%20", -1)
+		if queryParam != "" {
+			uri += "?" + queryParam
+		}
 	}
+
 	return uri, nil
 }
