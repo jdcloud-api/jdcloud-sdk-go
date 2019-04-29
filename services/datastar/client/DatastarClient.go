@@ -40,7 +40,7 @@ func NewDatastarClient(credential *core.Credential) *DatastarClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "datastar",
-            Revision:    "1.0.5",
+            Revision:    "1.0.6",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,63 +51,6 @@ func (c *DatastarClient) SetConfig(config *core.Config) {
 
 func (c *DatastarClient) SetLogger(logger core.Logger) {
     c.Logger = logger
-}
-
-/* 创建多级筛选 */
-func (c *DatastarClient) Create(request *datastar.CreateRequest) (*datastar.CreateResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &datastar.CreateResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 多级筛选结果查询接口 */
-func (c *DatastarClient) GetResult(request *datastar.GetResultRequest) (*datastar.GetResultResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &datastar.GetResultResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 根据设备ID获取是否有匹配的人群包 */
-func (c *DatastarClient) GetPackageId(request *datastar.GetPackageIdRequest) (*datastar.GetPackageIdResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &datastar.GetPackageIdResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
 }
 
 /* 根据区域、行业、一级指标、二级指标、起始时间等条件查询数据 */
@@ -123,6 +66,7 @@ func (c *DatastarClient) GetLargeScreenData(request *datastar.GetLargeScreenData
     jdResp := &datastar.GetLargeScreenDataResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 

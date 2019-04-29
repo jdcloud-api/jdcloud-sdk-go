@@ -66,6 +66,7 @@ func (c *AmsClient) DescribeAuthenticate(request *ams.DescribeAuthenticateReques
     jdResp := &ams.DescribeAuthenticateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -85,6 +86,7 @@ func (c *AmsClient) DescribeStreamsInput(request *ams.DescribeStreamsInputReques
     jdResp := &ams.DescribeStreamsInputResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 

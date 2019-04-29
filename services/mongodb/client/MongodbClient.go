@@ -53,226 +53,6 @@ func (c *MongodbClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-/* 查询实例访问白名单 */
-func (c *MongodbClient) DescribeSecurityIps(request *mongodb.DescribeSecurityIpsRequest) (*mongodb.DescribeSecurityIpsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &mongodb.DescribeSecurityIpsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 修改实例名称 */
-func (c *MongodbClient) ModifyInstanceName(request *mongodb.ModifyInstanceNameRequest) (*mongodb.ModifyInstanceNameResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &mongodb.ModifyInstanceNameResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 修改实例访问白名单 */
-func (c *MongodbClient) ModifySecurityIps(request *mongodb.ModifySecurityIpsRequest) (*mongodb.ModifySecurityIpsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &mongodb.ModifySecurityIpsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 重置密码 */
-func (c *MongodbClient) ResetPassword(request *mongodb.ResetPasswordRequest) (*mongodb.ResetPasswordResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &mongodb.ResetPasswordResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 数据恢复 */
-func (c *MongodbClient) RestoreInstance(request *mongodb.RestoreInstanceRequest) (*mongodb.RestoreInstanceResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &mongodb.RestoreInstanceResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 删除实例 */
-func (c *MongodbClient) DeleteInstance(request *mongodb.DeleteInstanceRequest) (*mongodb.DeleteInstanceResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &mongodb.DeleteInstanceResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 获取备份策略 */
-func (c *MongodbClient) DescribeBackupPolicy(request *mongodb.DescribeBackupPolicyRequest) (*mongodb.DescribeBackupPolicyResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &mongodb.DescribeBackupPolicyResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 获取规格 */
-func (c *MongodbClient) DescribeFlavors(request *mongodb.DescribeFlavorsRequest) (*mongodb.DescribeFlavorsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &mongodb.DescribeFlavorsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 获取备份下载链接 */
-func (c *MongodbClient) BackupDownloadURL(request *mongodb.BackupDownloadURLRequest) (*mongodb.BackupDownloadURLResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &mongodb.BackupDownloadURLResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询实例信息 */
-func (c *MongodbClient) DescribeInstances(request *mongodb.DescribeInstancesRequest) (*mongodb.DescribeInstancesResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &mongodb.DescribeInstancesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查看备份 */
-func (c *MongodbClient) DescribeBackups(request *mongodb.DescribeBackupsRequest) (*mongodb.DescribeBackupsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &mongodb.DescribeBackupsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 变更实例规格 */
 func (c *MongodbClient) ModifyInstanceSpec(request *mongodb.ModifyInstanceSpecRequest) (*mongodb.ModifyInstanceSpecResponse, error) {
     if request == nil {
@@ -284,46 +64,6 @@ func (c *MongodbClient) ModifyInstanceSpec(request *mongodb.ModifyInstanceSpecRe
     }
 
     jdResp := &mongodb.ModifyInstanceSpecResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 创建备份 */
-func (c *MongodbClient) CreateBackup(request *mongodb.CreateBackupRequest) (*mongodb.CreateBackupResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &mongodb.CreateBackupResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 修改备份策略 */
-func (c *MongodbClient) ModifyBackupPolicy(request *mongodb.ModifyBackupPolicyRequest) (*mongodb.ModifyBackupPolicyResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &mongodb.ModifyBackupPolicyResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -353,8 +93,8 @@ func (c *MongodbClient) CreateInstance(request *mongodb.CreateInstanceRequest) (
     return jdResp, err
 }
 
-/* 删除备份 */
-func (c *MongodbClient) DeleteBackup(request *mongodb.DeleteBackupRequest) (*mongodb.DeleteBackupResponse, error) {
+/* 获取备份策略 */
+func (c *MongodbClient) DescribeBackupPolicy(request *mongodb.DescribeBackupPolicyRequest) (*mongodb.DescribeBackupPolicyResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -363,7 +103,207 @@ func (c *MongodbClient) DeleteBackup(request *mongodb.DeleteBackupRequest) (*mon
         return nil, err
     }
 
-    jdResp := &mongodb.DeleteBackupResponse{}
+    jdResp := &mongodb.DescribeBackupPolicyResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询实例访问白名单 */
+func (c *MongodbClient) DescribeSecurityIps(request *mongodb.DescribeSecurityIpsRequest) (*mongodb.DescribeSecurityIpsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &mongodb.DescribeSecurityIpsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询实例信息 */
+func (c *MongodbClient) DescribeInstances(request *mongodb.DescribeInstancesRequest) (*mongodb.DescribeInstancesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &mongodb.DescribeInstancesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取备份下载链接 */
+func (c *MongodbClient) BackupDownloadURL(request *mongodb.BackupDownloadURLRequest) (*mongodb.BackupDownloadURLResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &mongodb.BackupDownloadURLResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除实例 */
+func (c *MongodbClient) DeleteInstance(request *mongodb.DeleteInstanceRequest) (*mongodb.DeleteInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &mongodb.DeleteInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 数据恢复 */
+func (c *MongodbClient) RestoreInstance(request *mongodb.RestoreInstanceRequest) (*mongodb.RestoreInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &mongodb.RestoreInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取规格 */
+func (c *MongodbClient) DescribeFlavors(request *mongodb.DescribeFlavorsRequest) (*mongodb.DescribeFlavorsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &mongodb.DescribeFlavorsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 重置密码 */
+func (c *MongodbClient) ResetPassword(request *mongodb.ResetPasswordRequest) (*mongodb.ResetPasswordResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &mongodb.ResetPasswordResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改备份策略 */
+func (c *MongodbClient) ModifyBackupPolicy(request *mongodb.ModifyBackupPolicyRequest) (*mongodb.ModifyBackupPolicyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &mongodb.ModifyBackupPolicyResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建备份 */
+func (c *MongodbClient) CreateBackup(request *mongodb.CreateBackupRequest) (*mongodb.CreateBackupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &mongodb.CreateBackupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改实例名称 */
+func (c *MongodbClient) ModifyInstanceName(request *mongodb.ModifyInstanceNameRequest) (*mongodb.ModifyInstanceNameResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &mongodb.ModifyInstanceNameResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -384,6 +324,66 @@ func (c *MongodbClient) DescribeAvailableZones(request *mongodb.DescribeAvailabl
     }
 
     jdResp := &mongodb.DescribeAvailableZonesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改实例访问白名单 */
+func (c *MongodbClient) ModifySecurityIps(request *mongodb.ModifySecurityIpsRequest) (*mongodb.ModifySecurityIpsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &mongodb.ModifySecurityIpsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查看备份 */
+func (c *MongodbClient) DescribeBackups(request *mongodb.DescribeBackupsRequest) (*mongodb.DescribeBackupsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &mongodb.DescribeBackupsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除备份 */
+func (c *MongodbClient) DeleteBackup(request *mongodb.DeleteBackupRequest) (*mongodb.DeleteBackupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &mongodb.DeleteBackupResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

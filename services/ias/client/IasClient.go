@@ -53,8 +53,8 @@ func (c *IasClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-/* 创建应用 */
-func (c *IasClient) CreateApp(request *ias.CreateAppRequest) (*ias.CreateAppResponse, error) {
+/* 获取应用 */
+func (c *IasClient) GetApp(request *ias.GetAppRequest) (*ias.GetAppResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -63,85 +63,10 @@ func (c *IasClient) CreateApp(request *ias.CreateAppRequest) (*ias.CreateAppResp
         return nil, err
     }
 
-    jdResp := &ias.CreateAppResponse{}
+    jdResp := &ias.GetAppResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 运营后台获取应用详情 */
-func (c *IasClient) AppDetail(request *ias.AppDetailRequest) (*ias.AppDetailResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ias.AppDetailResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 更新应用（只传需要变更的参数，不传的参数不会更新） */
-func (c *IasClient) UpdateApp(request *ias.UpdateAppRequest) (*ias.UpdateAppResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ias.UpdateAppResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 获取账户下所有应用 */
-func (c *IasClient) GetApps(request *ias.GetAppsRequest) (*ias.GetAppsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ias.GetAppsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 运营后台查询app */
-func (c *IasClient) Apps(request *ias.AppsRequest) (*ias.AppsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ias.AppsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -161,6 +86,87 @@ func (c *IasClient) State(request *ias.StateRequest) (*ias.StateResponse, error)
     jdResp := &ias.StateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建应用 */
+func (c *IasClient) CreateApp(request *ias.CreateAppRequest) (*ias.CreateAppResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ias.CreateAppResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取账户下所有应用 */
+func (c *IasClient) GetApps(request *ias.GetAppsRequest) (*ias.GetAppsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ias.GetAppsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新应用（只传需要变更的参数，不传的参数不会更新） */
+func (c *IasClient) UpdateApp(request *ias.UpdateAppRequest) (*ias.UpdateAppResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ias.UpdateAppResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 运营后台获取应用详情 */
+func (c *IasClient) AppDetail(request *ias.AppDetailRequest) (*ias.AppDetailResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ias.AppDetailResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -180,14 +186,15 @@ func (c *IasClient) DeleteApp(request *ias.DeleteAppRequest) (*ias.DeleteAppResp
     jdResp := &ias.DeleteAppResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
     return jdResp, err
 }
 
-/* 获取应用 */
-func (c *IasClient) GetApp(request *ias.GetAppRequest) (*ias.GetAppResponse, error) {
+/* 运营后台查询app */
+func (c *IasClient) Apps(request *ias.AppsRequest) (*ias.AppsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -196,9 +203,10 @@ func (c *IasClient) GetApp(request *ias.GetAppRequest) (*ias.GetAppResponse, err
         return nil, err
     }
 
-    jdResp := &ias.GetAppResponse{}
+    jdResp := &ias.AppsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 

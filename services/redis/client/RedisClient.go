@@ -53,8 +53,8 @@ func (c *RedisClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-/* 查询单个缓存Redis实例详情 */
-func (c *RedisClient) DescribeCacheInstance(request *redis.DescribeCacheInstanceRequest) (*redis.DescribeCacheInstanceResponse, error) {
+/* 查询账户配额信息 */
+func (c *RedisClient) DescribeUserQuota(request *redis.DescribeUserQuotaRequest) (*redis.DescribeUserQuotaResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -63,9 +63,32 @@ func (c *RedisClient) DescribeCacheInstance(request *redis.DescribeCacheInstance
         return nil, err
     }
 
-    jdResp := &redis.DescribeCacheInstanceResponse{}
+    jdResp := &redis.DescribeUserQuotaResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 变更缓存Redis实例配置，只能变更运行状态的实例配置，变更配置的规格不能与之前的相同
+预付费用户，从集群版变配到主从版，新规格的内存大小要大于老规格的内存大小，从主从版到集群版，新规格的内存大小要不小于老规格的内存大小
+ */
+func (c *RedisClient) ModifyCacheInstanceClass(request *redis.ModifyCacheInstanceClassRequest) (*redis.ModifyCacheInstanceClassResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &redis.ModifyCacheInstanceClassResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -85,25 +108,7 @@ func (c *RedisClient) DescribeCacheInstances(request *redis.DescribeCacheInstanc
     jdResp := &redis.DescribeCacheInstancesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询某区域下的实例规格列表 */
-func (c *RedisClient) DescribeInstanceClass(request *redis.DescribeInstanceClassRequest) (*redis.DescribeInstanceClassResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &redis.DescribeInstanceClassResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -123,14 +128,15 @@ func (c *RedisClient) ModifyCacheInstanceAttribute(request *redis.ModifyCacheIns
     jdResp := &redis.ModifyCacheInstanceAttributeResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
     return jdResp, err
 }
 
-/* 查询账户配额信息 */
-func (c *RedisClient) DescribeUserQuota(request *redis.DescribeUserQuotaRequest) (*redis.DescribeUserQuotaResponse, error) {
+/* 查询单个缓存Redis实例详情 */
+func (c *RedisClient) DescribeCacheInstance(request *redis.DescribeCacheInstanceRequest) (*redis.DescribeCacheInstanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -139,28 +145,10 @@ func (c *RedisClient) DescribeUserQuota(request *redis.DescribeUserQuotaRequest)
         return nil, err
     }
 
-    jdResp := &redis.DescribeUserQuotaResponse{}
+    jdResp := &redis.DescribeCacheInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 重置缓存Redis实例密码，支持免密操作 */
-func (c *RedisClient) ResetCacheInstancePassword(request *redis.ResetCacheInstancePasswordRequest) (*redis.ResetCacheInstancePasswordResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &redis.ResetCacheInstancePasswordResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -183,6 +171,47 @@ func (c *RedisClient) DeleteCacheInstance(request *redis.DeleteCacheInstanceRequ
     jdResp := &redis.DeleteCacheInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 重置缓存Redis实例密码，支持免密操作 */
+func (c *RedisClient) ResetCacheInstancePassword(request *redis.ResetCacheInstancePasswordRequest) (*redis.ResetCacheInstancePasswordResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &redis.ResetCacheInstancePasswordResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询某区域下的实例规格列表 */
+func (c *RedisClient) DescribeInstanceClass(request *redis.DescribeInstanceClassRequest) (*redis.DescribeInstanceClassResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &redis.DescribeInstanceClassResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -207,27 +236,7 @@ func (c *RedisClient) CreateCacheInstance(request *redis.CreateCacheInstanceRequ
     jdResp := &redis.CreateCacheInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 变更缓存Redis实例配置，只能变更运行状态的实例配置，变更配置的规格不能与之前的相同
-预付费用户，从集群版变配到主从版，新规格的内存大小要大于老规格的内存大小，从主从版到集群版，新规格的内存大小要不小于老规格的内存大小
- */
-func (c *RedisClient) ModifyCacheInstanceClass(request *redis.ModifyCacheInstanceClassRequest) (*redis.ModifyCacheInstanceClassResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &redis.ModifyCacheInstanceClassResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 

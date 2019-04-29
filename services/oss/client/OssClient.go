@@ -53,9 +53,9 @@ func (c *OssClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-/* 创建bucket
+/* 列出当前用户的所有bucket
  */
-func (c *OssClient) PutBucket(request *oss.PutBucketRequest) (*oss.PutBucketResponse, error) {
+func (c *OssClient) ListBuckets(request *oss.ListBucketsRequest) (*oss.ListBucketsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -64,9 +64,10 @@ func (c *OssClient) PutBucket(request *oss.PutBucketRequest) (*oss.PutBucketResp
         return nil, err
     }
 
-    jdResp := &oss.PutBucketResponse{}
+    jdResp := &oss.ListBucketsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -87,6 +88,7 @@ func (c *OssClient) DeleteBucket(request *oss.DeleteBucketRequest) (*oss.DeleteB
     jdResp := &oss.DeleteBucketResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -107,15 +109,16 @@ func (c *OssClient) HeadBucket(request *oss.HeadBucketRequest) (*oss.HeadBucketR
     jdResp := &oss.HeadBucketResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
     return jdResp, err
 }
 
-/* 列出当前用户的所有bucket
+/* 创建bucket
  */
-func (c *OssClient) ListBuckets(request *oss.ListBucketsRequest) (*oss.ListBucketsResponse, error) {
+func (c *OssClient) PutBucket(request *oss.PutBucketRequest) (*oss.PutBucketResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -124,9 +127,10 @@ func (c *OssClient) ListBuckets(request *oss.ListBucketsRequest) (*oss.ListBucke
         return nil, err
     }
 
-    jdResp := &oss.ListBucketsResponse{}
+    jdResp := &oss.PutBucketResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
