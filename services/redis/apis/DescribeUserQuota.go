@@ -25,12 +25,12 @@ type DescribeUserQuotaRequest struct {
 
     core.JDCloudRequest
 
-    /* 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2  */
+    /* 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2  */
     RegionId string `json:"regionId"`
 }
 
 /*
- * param regionId: 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2 (Required)
+ * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -50,7 +50,7 @@ func NewDescribeUserQuotaRequest(
 }
 
 /*
- * param regionId: 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2 (Required)
+ * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  */
 func NewDescribeUserQuotaRequestWithAllParams(
     regionId string,
@@ -80,7 +80,7 @@ func NewDescribeUserQuotaRequestWithoutParam() *DescribeUserQuotaRequest {
     }
 }
 
-/* param regionId: 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2(Required) */
+/* param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2(Required) */
 func (r *DescribeUserQuotaRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

@@ -17,20 +17,11 @@
 package models
 
 
-type OrderStatus struct {
+type DownloadUrl struct {
 
-    /* 订单总数 (Optional) */
-    Total int `json:"total"`
+    /* 名称  */
+    Name string `json:"name"`
 
-    /* 成功的订单数 (Optional) */
-    Success int `json:"success"`
-
-    /* 失败的订单数 (Optional) */
-    Fail int `json:"fail"`
-
-    /* 正在处理的订单数 (Optional) */
-    InProcess int `json:"inProcess"`
-
-    /* 成功的资源Id (Optional) */
-    ResourceIds []string `json:"resourceIds"`
+    /* 下载链接  */
+    Link string `json:"link"`
 }

@@ -23,7 +23,7 @@ type DBInstance struct {
     /* 实例ID (Optional) */
     InstanceId string `json:"instanceId"`
 
-    /* 实例名称，具体规则可参见帮助中心文档:[名称及密码限制](../../../documentation/Cloud-Database-and-Cache/RDS/Introduction/Restrictions/SQLServer-Restrictions.md) (Optional) */
+    /* 实例名称，具体规则可参见帮助中心文档:[名称及密码限制](../../../documentation/Database-and-Cache-Service/RDS/Introduction/Restrictions/SQLServer-Restrictions.md) (Optional) */
     InstanceName string `json:"instanceName"`
 
     /* 实例类别，例如主实例，只读实例等，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Optional) */
@@ -35,11 +35,29 @@ type DBInstance struct {
     /* 实例引擎版本，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Optional) */
     EngineVersion string `json:"engineVersion"`
 
+    /* 实例规格代码 (Optional) */
+    InstanceClass string `json:"instanceClass"`
+
+    /* 磁盘，单位GB (Optional) */
+    InstanceStorageGB int `json:"instanceStorageGB"`
+
+    /* CPU核数 (Optional) */
+    InstanceCPU int `json:"instanceCPU"`
+
+    /* 内存，单位MB (Optional) */
+    InstanceMemoryMB int `json:"instanceMemoryMB"`
+
     /* 地域ID，参见[地域及可用区对照表](../Enum-Definitions/Regions-AZ.md) (Optional) */
     RegionId string `json:"regionId"`
 
     /* 可用区ID，第一个为主实例在的可用区，参见[地域及可用区对照表](../Enum-Definitions/Regions-AZ.md) (Optional) */
     AzId []string `json:"azId"`
+
+    /* VPC的ID (Optional) */
+    VpcId string `json:"vpcId"`
+
+    /* 子网的ID (Optional) */
+    SubnetId string `json:"subnetId"`
 
     /* 实例状态，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Optional) */
     InstanceStatus string `json:"instanceStatus"`
@@ -52,4 +70,7 @@ type DBInstance struct {
 
     /* 标签信息 (Optional) */
     Tags []Tag `json:"tags"`
+
+    /* MySQL只读实例对应的主实例ID (Optional) */
+    SourceInstanceId string `json:"sourceInstanceId"`
 }

@@ -17,20 +17,20 @@
 package models
 
 
-type OrderStatus struct {
+type DownloadCertDesc struct {
 
-    /* 订单总数 (Optional) */
-    Total int `json:"total"`
+    /* 证书Id (Optional) */
+    CertId string `json:"certId"`
 
-    /* 成功的订单数 (Optional) */
-    Success int `json:"success"`
+    /* 证书名称 (Optional) */
+    CertName string `json:"certName"`
 
-    /* 失败的订单数 (Optional) */
-    Fail int `json:"fail"`
+    /* 私钥 (Optional) */
+    KeyFile string `json:"keyFile"`
 
-    /* 正在处理的订单数 (Optional) */
-    InProcess int `json:"inProcess"`
+    /* 证书 (Optional) */
+    CertFile string `json:"certFile"`
 
-    /* 成功的资源Id (Optional) */
-    ResourceIds []string `json:"resourceIds"`
+    /* 对私钥文件使用sha256算法计算的摘要信息 (Optional) */
+    Digest string `json:"digest"`
 }

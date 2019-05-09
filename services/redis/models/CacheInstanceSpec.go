@@ -19,24 +19,30 @@ package models
 
 type CacheInstanceSpec struct {
 
-    /* 缓存redis实例所属的私有网络ID  */
+    /* 缓存Redis实例所属的私有网络ID  */
     VpcId string `json:"vpcId"`
 
-    /* 缓存redis实例在私有网络下所属的子网ID  */
+    /* 缓存Redis实例在私有网络下所属的子网ID  */
     SubnetId string `json:"subnetId"`
 
-    /* 缓存redis实例名称，只支持数字、字母、英文下划线、中文，且不少于2字符不超过32字符  */
+    /* 缓存Redis实例名称，只支持数字、字母、英文下划线、中文，且不少于2字符不超过32字符  */
     CacheInstanceName string `json:"cacheInstanceName"`
 
-    /* 缓存redis实例规格代码，参见实例规格代码表<a href="https://www.jdcloud.com/help/detail/411/isCatalog/1">实例规格代码</a>。  */
+    /* 缓存Redis实例的规格代码，参考 https://docs.jdcloud.com/cn/jcs-for-redis/specifications  */
     CacheInstanceClass string `json:"cacheInstanceClass"`
 
-    /* 密码，为空即为免密，包含且只支持字母及数字，不少于8字符不超过16字符 (Optional) */
+    /* 缓存Redis实例的连接密码，为空即为免密，包含且只支持字母及数字，不少于8字符不超过16字符 (Optional) */
     Password *string `json:"password"`
 
-    /* 缓存Redis实例所在区域可用区ID信息  */
+    /* 缓存Redis实例所在区域的可用区ID  */
     AzId *AzIdSpec `json:"azId"`
 
-    /* 缓存Redis实例描述，不能超过256个字符 (Optional) */
+    /* 缓存Redis实例的描述，不能超过256个字符 (Optional) */
     CacheInstanceDescription *string `json:"cacheInstanceDescription"`
+
+    /* 支持的缓存Redis引擎主次版本号：目前支持2.8和4.0，默认为2.8 (Optional) */
+    RedisVersion *string `json:"redisVersion"`
+
+    /* 是否支持IPv6，0或空表示不支持，1表示支持IPv6，注意不是所有区域都支持IPv6 (Optional) */
+    Ipv6On *int `json:"ipv6On"`
 }

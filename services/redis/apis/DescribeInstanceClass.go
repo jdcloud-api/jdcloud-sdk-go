@@ -25,12 +25,15 @@ type DescribeInstanceClassRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2  */
     RegionId string `json:"regionId"`
+
+    /* 缓存Redis的版本号：目前有2.8和4.0，默认为2.8 (Optional) */
+    RedisVersion *string `json:"redisVersion"`
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -50,10 +53,12 @@ func NewDescribeInstanceClassRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
+ * param redisVersion: 缓存Redis的版本号：目前有2.8和4.0，默认为2.8 (Optional)
  */
 func NewDescribeInstanceClassRequestWithAllParams(
     regionId string,
+    redisVersion *string,
 ) *DescribeInstanceClassRequest {
 
     return &DescribeInstanceClassRequest{
@@ -64,6 +69,7 @@ func NewDescribeInstanceClassRequestWithAllParams(
             Version: "v1",
         },
         RegionId: regionId,
+        RedisVersion: redisVersion,
     }
 }
 
@@ -80,9 +86,14 @@ func NewDescribeInstanceClassRequestWithoutParam() *DescribeInstanceClassRequest
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2(Required) */
 func (r *DescribeInstanceClassRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
+}
+
+/* param redisVersion: 缓存Redis的版本号：目前有2.8和4.0，默认为2.8(Optional) */
+func (r *DescribeInstanceClassRequest) SetRedisVersion(redisVersion string) {
+    r.RedisVersion = &redisVersion
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

@@ -17,20 +17,17 @@
 package models
 
 
-type OrderStatus struct {
+type CertBindInfo struct {
 
-    /* 订单总数 (Optional) */
-    Total int `json:"total"`
+    /* 绑定名称 (Optional) */
+    BindFrom string `json:"bindFrom"`
 
-    /* 成功的订单数 (Optional) */
-    Success int `json:"success"`
+    /* 绑定Id (Optional) */
+    BindId string `json:"bindId"`
 
-    /* 失败的订单数 (Optional) */
-    Fail int `json:"fail"`
+    /* 绑定资源所在的Region (Optional) */
+    BindRegion string `json:"bindRegion"`
 
-    /* 正在处理的订单数 (Optional) */
-    InProcess int `json:"inProcess"`
-
-    /* 成功的资源Id (Optional) */
-    ResourceIds []string `json:"resourceIds"`
+    /* 绑定资源所在的可用区 (Optional) */
+    BindZone string `json:"bindZone"`
 }

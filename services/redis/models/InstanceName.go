@@ -17,20 +17,14 @@
 package models
 
 
-type OrderStatus struct {
+type InstanceName struct {
 
-    /* 订单总数 (Optional) */
-    Total int `json:"total"`
+    /* 资源Id（即实例id）  */
+    ResourceId string `json:"resourceId"`
 
-    /* 成功的订单数 (Optional) */
-    Success int `json:"success"`
+    /* 资源名称（即实例名称）  */
+    ResourceName string `json:"resourceName"`
 
-    /* 失败的订单数 (Optional) */
-    Fail int `json:"fail"`
-
-    /* 正在处理的订单数 (Optional) */
-    InProcess int `json:"inProcess"`
-
-    /* 成功的资源Id (Optional) */
-    ResourceIds []string `json:"resourceIds"`
+    /* service code（redis）  */
+    ServiceCode string `json:"serviceCode"`
 }

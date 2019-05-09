@@ -26,19 +26,19 @@ type CacheInstance struct {
     /* 实例名称 (Optional) */
     CacheInstanceName string `json:"cacheInstanceName"`
 
-    /* 实例规格代码，参见<a href="https://www.jdcloud.com/help/detail/411/isCatalog/1">实例规格代码</a> (Optional) */
+    /* 规格代码，参考 https://docs.jdcloud.com/cn/jcs-for-redis/specifications (Optional) */
     CacheInstanceClass string `json:"cacheInstanceClass"`
 
-    /* 容量，单位MB (Optional) */
+    /* 实例的总内存（MB） (Optional) */
     CacheInstanceMemoryMB int `json:"cacheInstanceMemoryMB"`
 
-    /* 实例状态，running：运行，error：错误，creating：创建中，changing：变配中，deleting：删除中 (Optional) */
+    /* 实例状态：creating表示创建中，running表示运行中，error表示错误，changing表示变更规格中，deleting表示删除中，configuring表示修改参数中，restoring表示备份恢复中 (Optional) */
     CacheInstanceStatus string `json:"cacheInstanceStatus"`
 
     /* 实例描述 (Optional) */
     CacheInstanceDescription string `json:"cacheInstanceDescription"`
 
-    /* 创建时间 (Optional) */
+    /* 创建时间（ISO 8601标准的UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ） (Optional) */
     CreateTime string `json:"createTime"`
 
     /* az信息 (Optional) */
@@ -59,9 +59,21 @@ type CacheInstance struct {
     /* 计费信息 (Optional) */
     Charge charge.Charge `json:"charge"`
 
-    /* 实例版本 (Optional) */
+    /* 实例的详细版本号，形如x.x-x.x (Optional) */
     InstanceVersion string `json:"instanceVersion"`
 
-    /* 是否免密 (Optional) */
+    /* 连接redis实例时，是否需要密码认证，false表示无密码 (Optional) */
     Auth bool `json:"auth"`
+
+    /* 创建实例时选择的redis引擎版本：目前支持2.8和4.0 (Optional) */
+    RedisVersion string `json:"redisVersion"`
+
+    /* 实例类型：master-slave表示主从版，cluster表示集群版 (Optional) */
+    CacheInstanceType string `json:"cacheInstanceType"`
+
+    /* 是否支持IPv6，0表示不支持（只能用IPv4），1表示支持 (Optional) */
+    Ipv6On int `json:"ipv6On"`
+
+    /* 标签信息 (Optional) */
+    Tags []Tag `json:"tags"`
 }

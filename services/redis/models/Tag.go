@@ -17,20 +17,11 @@
 package models
 
 
-type OrderStatus struct {
+type Tag struct {
 
-    /* 订单总数 (Optional) */
-    Total int `json:"total"`
+    /* 标签的键 (Optional) */
+    Key string `json:"key"`
 
-    /* 成功的订单数 (Optional) */
-    Success int `json:"success"`
-
-    /* 失败的订单数 (Optional) */
-    Fail int `json:"fail"`
-
-    /* 正在处理的订单数 (Optional) */
-    InProcess int `json:"inProcess"`
-
-    /* 成功的资源Id (Optional) */
-    ResourceIds []string `json:"resourceIds"`
+    /* 标签的值 (Optional) */
+    Value string `json:"value"`
 }

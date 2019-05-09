@@ -17,20 +17,17 @@
 package models
 
 
-type OrderStatus struct {
+type DiscountDetailList struct {
 
-    /* 订单总数 (Optional) */
-    Total int `json:"total"`
+    /* 服务code (Optional) */
+    ServiceCode string `json:"serviceCode"`
 
-    /* 成功的订单数 (Optional) */
-    Success int `json:"success"`
+    /* 购买时长 (Optional) */
+    BillPeriod int `json:"billPeriod"`
 
-    /* 失败的订单数 (Optional) */
-    Fail int `json:"fail"`
+    /* 折扣信息 (Optional) */
+    Message string `json:"message"`
 
-    /* 正在处理的订单数 (Optional) */
-    InProcess int `json:"inProcess"`
-
-    /* 成功的资源Id (Optional) */
-    ResourceIds []string `json:"resourceIds"`
+    /* 折扣 (Optional) */
+    Discount int `json:"discount"`
 }
