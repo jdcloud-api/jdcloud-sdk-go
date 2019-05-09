@@ -23,7 +23,7 @@ type DBInstanceAttribute struct {
     /* 实例ID (Optional) */
     InstanceId string `json:"instanceId"`
 
-    /* 实例名称，具体规则可参见帮助中心文档:[名称及密码限制](../../../documentation/Cloud-Database-and-Cache/RDS/Introduction/Restrictions/SQLServer-Restrictions.md) (Optional) */
+    /* 实例名称，具体规则可参见帮助中心文档:[名称及密码限制](../../../documentation/Database-and-Cache-Service/RDS/Introduction/Restrictions/SQLServer-Restrictions.md) (Optional) */
     InstanceName string `json:"instanceName"`
 
     /* 实例类型，例如主实例，只读实例等，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Optional) */
@@ -37,6 +37,12 @@ type DBInstanceAttribute struct {
 
     /* 实例规格代码 (Optional) */
     InstanceClass string `json:"instanceClass"`
+
+    /* 存储类型，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Optional) */
+    InstanceStorageType string `json:"instanceStorageType"`
+
+    /* 实例数据加密. false：不加密; true：加密 (Optional) */
+    StorageEncrypted bool `json:"storageEncrypted"`
 
     /* 磁盘，单位GB (Optional) */
     InstanceStorageGB int `json:"instanceStorageGB"`
@@ -58,6 +64,15 @@ type DBInstanceAttribute struct {
 
     /* 子网的ID (Optional) */
     SubnetId string `json:"subnetId"`
+
+    /* 参数组的ID (Optional) */
+    ParameterGroupId string `json:"parameterGroupId"`
+
+    /* 参数组的名称 (Optional) */
+    ParameterGroupName string `json:"parameterGroupName"`
+
+    /* 参数的状态，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Optional) */
+    ParameterStatus string `json:"parameterStatus"`
 
     /* 实例内网域名 (Optional) */
     InternalDomainName string `json:"internalDomainName"`
@@ -82,6 +97,12 @@ type DBInstanceAttribute struct {
 
     /* 计费配置 (Optional) */
     Charge charge.Charge `json:"charge"`
+
+    /* MySQL只读实例对应的主实例ID (Optional) */
+    SourceInstanceId string `json:"sourceInstanceId"`
+
+    /* 只读实例ID列表 (Optional) */
+    RoInstanceIds []string `json:"roInstanceIds"`
 
     /* 高可用集群中主节点的信息<br>- 仅支持SQL Server (Optional) */
     PrimaryNode DBInstanceNode `json:"primaryNode"`

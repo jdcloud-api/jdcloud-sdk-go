@@ -53,8 +53,8 @@ func (c *StreamcomputerClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-/* 删除namespace,如果旗下关联有其他资源，不允许删除 */
-func (c *StreamcomputerClient) DeleteNamespace(request *streamcomputer.DeleteNamespaceRequest) (*streamcomputer.DeleteNamespaceResponse, error) {
+/* 查询某个应用详情 */
+func (c *StreamcomputerClient) QueryNamespaceDetail(request *streamcomputer.QueryNamespaceDetailRequest) (*streamcomputer.QueryNamespaceDetailResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -63,9 +63,10 @@ func (c *StreamcomputerClient) DeleteNamespace(request *streamcomputer.DeleteNam
         return nil, err
     }
 
-    jdResp := &streamcomputer.DeleteNamespaceResponse{}
+    jdResp := &streamcomputer.QueryNamespaceDetailResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -85,234 +86,7 @@ func (c *StreamcomputerClient) DescribeJob(request *streamcomputer.DescribeJobRe
     jdResp := &streamcomputer.DescribeJobResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 停止作业运行job */
-func (c *StreamcomputerClient) StopJob(request *streamcomputer.StopJobRequest) (*streamcomputer.StopJobResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &streamcomputer.StopJobResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询租户下的应用列表 */
-func (c *StreamcomputerClient) QueryNamespaces(request *streamcomputer.QueryNamespacesRequest) (*streamcomputer.QueryNamespacesResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &streamcomputer.QueryNamespacesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询指定应用下的所有job */
-func (c *StreamcomputerClient) GetJobList(request *streamcomputer.GetJobListRequest) (*streamcomputer.GetJobListResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &streamcomputer.GetJobListResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 删除指定输入 */
-func (c *StreamcomputerClient) DeleteStorage(request *streamcomputer.DeleteStorageRequest) (*streamcomputer.DeleteStorageResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &streamcomputer.DeleteStorageResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 运行job */
-func (c *StreamcomputerClient) StartJob(request *streamcomputer.StartJobRequest) (*streamcomputer.StartJobResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &streamcomputer.StartJobResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 创建或者更新storage */
-func (c *StreamcomputerClient) GetStorageList(request *streamcomputer.GetStorageListRequest) (*streamcomputer.GetStorageListResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &streamcomputer.GetStorageListResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 创建namespace */
-func (c *StreamcomputerClient) CreateNamespace(request *streamcomputer.CreateNamespaceRequest) (*streamcomputer.CreateNamespaceResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &streamcomputer.CreateNamespaceResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 创建或者更新storage */
-func (c *StreamcomputerClient) AddOrUpdateStorage(request *streamcomputer.AddOrUpdateStorageRequest) (*streamcomputer.AddOrUpdateStorageResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &streamcomputer.AddOrUpdateStorageResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 添加或者更新job */
-func (c *StreamcomputerClient) AddOrUpdateJob(request *streamcomputer.AddOrUpdateJobRequest) (*streamcomputer.AddOrUpdateJobResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &streamcomputer.AddOrUpdateJobResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询某个应用详情 */
-func (c *StreamcomputerClient) QueryNamespaceDetail(request *streamcomputer.QueryNamespaceDetailRequest) (*streamcomputer.QueryNamespaceDetailResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &streamcomputer.QueryNamespaceDetailResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 更新namespace */
-func (c *StreamcomputerClient) UpdateNamespace(request *streamcomputer.UpdateNamespaceRequest) (*streamcomputer.UpdateNamespaceResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &streamcomputer.UpdateNamespaceResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 删除作业 */
-func (c *StreamcomputerClient) DeleteJob(request *streamcomputer.DeleteJobRequest) (*streamcomputer.DeleteJobResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &streamcomputer.DeleteJobResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -332,6 +106,247 @@ func (c *StreamcomputerClient) DescribeStorage(request *streamcomputer.DescribeS
     jdResp := &streamcomputer.DescribeStorageResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除作业 */
+func (c *StreamcomputerClient) DeleteJob(request *streamcomputer.DeleteJobRequest) (*streamcomputer.DeleteJobResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &streamcomputer.DeleteJobResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 添加或者更新job */
+func (c *StreamcomputerClient) AddOrUpdateJob(request *streamcomputer.AddOrUpdateJobRequest) (*streamcomputer.AddOrUpdateJobResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &streamcomputer.AddOrUpdateJobResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询租户下的应用列表 */
+func (c *StreamcomputerClient) QueryNamespaces(request *streamcomputer.QueryNamespacesRequest) (*streamcomputer.QueryNamespacesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &streamcomputer.QueryNamespacesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 运行job */
+func (c *StreamcomputerClient) StartJob(request *streamcomputer.StartJobRequest) (*streamcomputer.StartJobResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &streamcomputer.StartJobResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建或者更新storage */
+func (c *StreamcomputerClient) AddOrUpdateStorage(request *streamcomputer.AddOrUpdateStorageRequest) (*streamcomputer.AddOrUpdateStorageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &streamcomputer.AddOrUpdateStorageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询指定应用下的所有job */
+func (c *StreamcomputerClient) GetJobList(request *streamcomputer.GetJobListRequest) (*streamcomputer.GetJobListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &streamcomputer.GetJobListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除namespace,如果旗下关联有其他资源，不允许删除 */
+func (c *StreamcomputerClient) DeleteNamespace(request *streamcomputer.DeleteNamespaceRequest) (*streamcomputer.DeleteNamespaceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &streamcomputer.DeleteNamespaceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 停止作业运行job */
+func (c *StreamcomputerClient) StopJob(request *streamcomputer.StopJobRequest) (*streamcomputer.StopJobResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &streamcomputer.StopJobResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建namespace */
+func (c *StreamcomputerClient) CreateNamespace(request *streamcomputer.CreateNamespaceRequest) (*streamcomputer.CreateNamespaceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &streamcomputer.CreateNamespaceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建或者更新storage */
+func (c *StreamcomputerClient) GetStorageList(request *streamcomputer.GetStorageListRequest) (*streamcomputer.GetStorageListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &streamcomputer.GetStorageListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新namespace */
+func (c *StreamcomputerClient) UpdateNamespace(request *streamcomputer.UpdateNamespaceRequest) (*streamcomputer.UpdateNamespaceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &streamcomputer.UpdateNamespaceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除指定输入 */
+func (c *StreamcomputerClient) DeleteStorage(request *streamcomputer.DeleteStorageRequest) (*streamcomputer.DeleteStorageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &streamcomputer.DeleteStorageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 

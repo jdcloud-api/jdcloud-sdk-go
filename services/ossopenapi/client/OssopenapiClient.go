@@ -53,6 +53,26 @@ func (c *OssopenapiClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
+/* 获取回源配置 */
+func (c *OssopenapiClient) GetBackSourceConfiguration(request *ossopenapi.GetBackSourceConfigurationRequest) (*ossopenapi.GetBackSourceConfigurationResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ossopenapi.GetBackSourceConfigurationResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 添加修改回源配置 */
 func (c *OssopenapiClient) PutBackSourceConfiguration(request *ossopenapi.PutBackSourceConfigurationRequest) (*ossopenapi.PutBackSourceConfigurationResponse, error) {
     if request == nil {
@@ -84,26 +104,6 @@ func (c *OssopenapiClient) DeleteBackSourceConfiguration(request *ossopenapi.Del
     }
 
     jdResp := &ossopenapi.DeleteBackSourceConfigurationResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 获取回源配置 */
-func (c *OssopenapiClient) GetBackSourceConfiguration(request *ossopenapi.GetBackSourceConfigurationRequest) (*ossopenapi.GetBackSourceConfigurationResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ossopenapi.GetBackSourceConfigurationResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

@@ -40,7 +40,7 @@ func NewPortalClient(credential *core.Credential) *PortalClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "portal",
-            Revision:    "0.1.2",
+            Revision:    "0.1.4",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -86,27 +86,6 @@ func (c *PortalClient) DescribeProductsById(request *portal.DescribeProductsById
     }
 
     jdResp := &portal.DescribeProductsByIdResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 产品页列表查询接口
- */
-func (c *PortalClient) DescribeProducts(request *portal.DescribeProductsRequest) (*portal.DescribeProductsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &portal.DescribeProductsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

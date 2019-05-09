@@ -26,28 +26,36 @@ type DescribeCacheInstancesRequest struct {
 
     core.JDCloudRequest
 
-    /* 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2  */
+    /* 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2  */
     RegionId string `json:"regionId"`
 
-    /* 请求查询缓存实例的页码；默认为1 (Optional) */
+    /* 页码：取值范围[1,∞)，默认为1 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* 请求查询缓存实例的分页大小；默认为20；取值范围[10, 100] (Optional) */
+    /* 分页大小：取值范围[10, 100]，默认为10 (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* cacheInstanceId -缓存实例Id，精确匹配，支持多个
-cacheInstanceName - 缓存实例名称，模糊匹配，支持单个
-cacheInstanceStatus - 缓存你实例状态，精确匹配，支持多个(running：运行，error：错误，creating：创建中，changing：变配中，deleting：删除中)
+    /* 过滤属性：
+cacheInstanceId - 实例Id，精确匹配，可选择多个
+cacheInstanceName - 实例名称，模糊匹配
+cacheInstanceStatus - 实例状态，精确匹配，可选择多个(running：运行中，error：错误，creating：创建中，changing：变配中，configuring：参数修改中，restoring：备份恢复中，deleting：删除中)
+redisVersion - redis引擎版本，精确匹配，可选择2.8和4.0
+instanceType - 实例类型，精确匹配（redis表示主从版，redis_cluster表示集群版）
+chargeMode - 计费类型，精确匹配（prepaid_by_duration表示包年包月预付费，postpaid_by_duration表示按配置后付费）
  (Optional) */
     Filters []common.Filter `json:"filters"`
 
-    /* createTime - 创建时间(asc：正序，desc：倒序)
+    /* 排序属性：
+createTime - 按创建时间排序(asc表示按时间正序，desc表示按时间倒序)
  (Optional) */
     Sorts []common.Sort `json:"sorts"`
+
+    /* 标签的过滤条件 (Optional) */
+    TagFilters []common.TagFilter `json:"tagFilters"`
 }
 
 /*
- * param regionId: 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2 (Required)
+ * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -67,15 +75,21 @@ func NewDescribeCacheInstancesRequest(
 }
 
 /*
- * param regionId: 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2 (Required)
- * param pageNumber: 请求查询缓存实例的页码；默认为1 (Optional)
- * param pageSize: 请求查询缓存实例的分页大小；默认为20；取值范围[10, 100] (Optional)
- * param filters: cacheInstanceId -缓存实例Id，精确匹配，支持多个
-cacheInstanceName - 缓存实例名称，模糊匹配，支持单个
-cacheInstanceStatus - 缓存你实例状态，精确匹配，支持多个(running：运行，error：错误，creating：创建中，changing：变配中，deleting：删除中)
+ * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
+ * param pageNumber: 页码：取值范围[1,∞)，默认为1 (Optional)
+ * param pageSize: 分页大小：取值范围[10, 100]，默认为10 (Optional)
+ * param filters: 过滤属性：
+cacheInstanceId - 实例Id，精确匹配，可选择多个
+cacheInstanceName - 实例名称，模糊匹配
+cacheInstanceStatus - 实例状态，精确匹配，可选择多个(running：运行中，error：错误，creating：创建中，changing：变配中，configuring：参数修改中，restoring：备份恢复中，deleting：删除中)
+redisVersion - redis引擎版本，精确匹配，可选择2.8和4.0
+instanceType - 实例类型，精确匹配（redis表示主从版，redis_cluster表示集群版）
+chargeMode - 计费类型，精确匹配（prepaid_by_duration表示包年包月预付费，postpaid_by_duration表示按配置后付费）
  (Optional)
- * param sorts: createTime - 创建时间(asc：正序，desc：倒序)
+ * param sorts: 排序属性：
+createTime - 按创建时间排序(asc表示按时间正序，desc表示按时间倒序)
  (Optional)
+ * param tagFilters: 标签的过滤条件 (Optional)
  */
 func NewDescribeCacheInstancesRequestWithAllParams(
     regionId string,
@@ -83,6 +97,7 @@ func NewDescribeCacheInstancesRequestWithAllParams(
     pageSize *int,
     filters []common.Filter,
     sorts []common.Sort,
+    tagFilters []common.TagFilter,
 ) *DescribeCacheInstancesRequest {
 
     return &DescribeCacheInstancesRequest{
@@ -97,6 +112,7 @@ func NewDescribeCacheInstancesRequestWithAllParams(
         PageSize: pageSize,
         Filters: filters,
         Sorts: sorts,
+        TagFilters: tagFilters,
     }
 }
 
@@ -113,33 +129,43 @@ func NewDescribeCacheInstancesRequestWithoutParam() *DescribeCacheInstancesReque
     }
 }
 
-/* param regionId: 缓存Redis实例所在区域的Region ID。目前缓存Redis有华北、华南、华东区域，对应Region ID为cn-north-1、cn-south-1、cn-east-2(Required) */
+/* param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2(Required) */
 func (r *DescribeCacheInstancesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param pageNumber: 请求查询缓存实例的页码；默认为1(Optional) */
+/* param pageNumber: 页码：取值范围[1,∞)，默认为1(Optional) */
 func (r *DescribeCacheInstancesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
-/* param pageSize: 请求查询缓存实例的分页大小；默认为20；取值范围[10, 100](Optional) */
+/* param pageSize: 分页大小：取值范围[10, 100]，默认为10(Optional) */
 func (r *DescribeCacheInstancesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
-/* param filters: cacheInstanceId -缓存实例Id，精确匹配，支持多个
-cacheInstanceName - 缓存实例名称，模糊匹配，支持单个
-cacheInstanceStatus - 缓存你实例状态，精确匹配，支持多个(running：运行，error：错误，creating：创建中，changing：变配中，deleting：删除中)
+/* param filters: 过滤属性：
+cacheInstanceId - 实例Id，精确匹配，可选择多个
+cacheInstanceName - 实例名称，模糊匹配
+cacheInstanceStatus - 实例状态，精确匹配，可选择多个(running：运行中，error：错误，creating：创建中，changing：变配中，configuring：参数修改中，restoring：备份恢复中，deleting：删除中)
+redisVersion - redis引擎版本，精确匹配，可选择2.8和4.0
+instanceType - 实例类型，精确匹配（redis表示主从版，redis_cluster表示集群版）
+chargeMode - 计费类型，精确匹配（prepaid_by_duration表示包年包月预付费，postpaid_by_duration表示按配置后付费）
 (Optional) */
 func (r *DescribeCacheInstancesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
 
-/* param sorts: createTime - 创建时间(asc：正序，desc：倒序)
+/* param sorts: 排序属性：
+createTime - 按创建时间排序(asc表示按时间正序，desc表示按时间倒序)
 (Optional) */
 func (r *DescribeCacheInstancesRequest) SetSorts(sorts []common.Sort) {
     r.Sorts = sorts
+}
+
+/* param tagFilters: 标签的过滤条件(Optional) */
+func (r *DescribeCacheInstancesRequest) SetTagFilters(tagFilters []common.TagFilter) {
+    r.TagFilters = tagFilters
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

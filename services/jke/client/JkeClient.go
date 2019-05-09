@@ -66,6 +66,7 @@ func (c *JkeClient) DescribeQuotas(request *jke.DescribeQuotasRequest) (*jke.Des
     jdResp := &jke.DescribeQuotasResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 

@@ -25,24 +25,24 @@ type Backup struct {
     /* 备份文件的名称  */
     BackupFileName string `json:"backupFileName"`
 
-    /* 备份实例ID  */
-    SpaceId string `json:"spaceId"`
+    /* 备份文件对应的实例ID  */
+    CacheInstanceId string `json:"cacheInstanceId"`
 
-    /* 备份开始时间  */
+    /* 备份开始时间（ISO 8601标准的UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ）  */
     BackupStartTime string `json:"backupStartTime"`
 
-    /* 备份结束时间  */
+    /* 备份结束时间（ISO 8601标准的UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ）  */
     BackupEndTime string `json:"backupEndTime"`
 
     /* 备份类型，1表示手动备份，0表示自动备份  */
     BackupType int `json:"backupType"`
 
-    /* 备份文件大小，如果实例是集群版，则表示每个分片备份文件大小的总和  */
-    BackupSize int `json:"backupSize"`
+    /* 备份文件总字节大小，如果实例是集群版，则表示每个分片备份文件大小的总和  */
+    BackupSize int64 `json:"backupSize"`
 
-    /* 备份任务状态状态，1表示失败，2表示成功  */
+    /* 备份任务状态状态，0表示备份中，1表示失败，2表示成功  */
     BackupStatus int `json:"backupStatus"`
 
-    /* 备份文件下载的URL地址，集群版有多个URL地址  */
+    /* 备份文件下载地址，已置空，需要调用获取备份文件下载地址接口获取  */
     BackupDownloadURL string `json:"backupDownloadURL"`
 }

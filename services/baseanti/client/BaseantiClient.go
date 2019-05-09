@@ -53,25 +53,6 @@ func (c *BaseantiClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-/* 查询公网Ip的防护明细 */
-func (c *BaseantiClient) DescribeIpResourceProtectInfo(request *baseanti.DescribeIpResourceProtectInfoRequest) (*baseanti.DescribeIpResourceProtectInfoResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &baseanti.DescribeIpResourceProtectInfoResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 设置公网Ip的清洗阈值 */
 func (c *BaseantiClient) SetCleanThreshold(request *baseanti.SetCleanThresholdRequest) (*baseanti.SetCleanThresholdResponse, error) {
     if request == nil {
@@ -85,25 +66,7 @@ func (c *BaseantiClient) SetCleanThreshold(request *baseanti.SetCleanThresholdRe
     jdResp := &baseanti.SetCleanThresholdResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询公网Ip基本信息 */
-func (c *BaseantiClient) DescribeIpResourceInfo(request *baseanti.DescribeIpResourceInfoRequest) (*baseanti.DescribeIpResourceInfoResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &baseanti.DescribeIpResourceInfoResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -123,6 +86,7 @@ func (c *BaseantiClient) DescribeIpResources(request *baseanti.DescribeIpResourc
     jdResp := &baseanti.DescribeIpResourcesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -142,6 +106,47 @@ func (c *BaseantiClient) DescribeIpResourceFlow(request *baseanti.DescribeIpReso
     jdResp := &baseanti.DescribeIpResourceFlowResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询公网Ip的防护明细 */
+func (c *BaseantiClient) DescribeIpResourceProtectInfo(request *baseanti.DescribeIpResourceProtectInfoRequest) (*baseanti.DescribeIpResourceProtectInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &baseanti.DescribeIpResourceProtectInfoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询公网Ip基本信息 */
+func (c *BaseantiClient) DescribeIpResourceInfo(request *baseanti.DescribeIpResourceInfoRequest) (*baseanti.DescribeIpResourceInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &baseanti.DescribeIpResourceInfoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 

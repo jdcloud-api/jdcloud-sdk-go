@@ -19,21 +19,24 @@ package models
 
 type InstanceClass struct {
 
-    /* 实例规格代码,参见实例规格代码表 (Optional) */
+    /* 规格代码：redis 2.8与redis 4.0的规格码不同，具体参考 https://docs.jdcloud.com/cn/jcs-for-redis/specifications (Optional) */
     InstanceClass string `json:"instanceClass"`
 
-    /* cpu (Optional) */
+    /* 规格类型：master-slave表示主从版，cluster表示集群版 (Optional) */
+    InstanceType string `json:"instanceType"`
+
+    /* cpu核数 (Optional) */
     Cpu int `json:"cpu"`
 
-    /* 内存 (Optional) */
+    /* 内存总容量（MB） (Optional) */
     MemoryMB int `json:"memoryMB"`
 
-    /* 磁盘 (Optional) */
+    /* 磁盘总容量（GB） (Optional) */
     DiskGB int `json:"diskGB"`
 
-    /* 最大链接数 (Optional) */
-    MaxConnetction int `json:"maxConnetction"`
+    /* 最大连接数 (Optional) */
+    MaxConnection int `json:"maxConnection"`
 
-    /* 带宽 (Optional) */
+    /* 内网带宽（MBps） (Optional) */
     BandwidthMbps int `json:"bandwidthMbps"`
 }

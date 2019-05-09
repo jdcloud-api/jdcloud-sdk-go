@@ -32,8 +32,10 @@ type HeadBucketRequest struct {
 }
 
 /*
- * param regionId: Region ID，例如：cn-north-1 
- * param bucketname: bucket名字，例如：test-bucket 
+ * param regionId: Region ID，例如：cn-north-1 (Required)
+ * param bucketname: bucket名字，例如：test-bucket (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewHeadBucketRequest(
     regionId string,
@@ -52,10 +54,46 @@ func NewHeadBucketRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID，例如：cn-north-1 (Required)
+ * param bucketname: bucket名字，例如：test-bucket (Required)
+ */
+func NewHeadBucketRequestWithAllParams(
+    regionId string,
+    bucketname string,
+) *HeadBucketRequest {
+
+    return &HeadBucketRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/buckets/{bucketname}",
+            Method:  "HEAD",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        Bucketname: bucketname,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewHeadBucketRequestWithoutParam() *HeadBucketRequest {
+
+    return &HeadBucketRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/buckets/{bucketname}",
+            Method:  "HEAD",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID，例如：cn-north-1(Required) */
 func (r *HeadBucketRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param bucketname: bucket名字，例如：test-bucket(Required) */
 func (r *HeadBucketRequest) SetBucketname(bucketname string) {
     r.Bucketname = bucketname
 }

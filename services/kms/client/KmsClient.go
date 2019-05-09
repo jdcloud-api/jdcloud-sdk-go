@@ -53,8 +53,8 @@ func (c *KmsClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-/* 创建机密 */
-func (c *KmsClient) CreateSecret(request *kms.CreateSecretRequest) (*kms.CreateSecretResponse, error) {
+/* 获取密钥列表 */
+func (c *KmsClient) DescribeKeyList(request *kms.DescribeKeyListRequest) (*kms.DescribeKeyListResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -63,199 +63,10 @@ func (c *KmsClient) CreateSecret(request *kms.CreateSecretRequest) (*kms.CreateS
         return nil, err
     }
 
-    jdResp := &kms.CreateSecretResponse{}
+    jdResp := &kms.DescribeKeyListResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 获取指定机密版本的详细信息 */
-func (c *KmsClient) DescribeSecretVersionInfo(request *kms.DescribeSecretVersionInfoRequest) (*kms.DescribeSecretVersionInfoResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kms.DescribeSecretVersionInfoResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 禁用机密 */
-func (c *KmsClient) DisableSecret(request *kms.DisableSecretRequest) (*kms.DisableSecretResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kms.DisableSecretResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 禁用指定版本机密 */
-func (c *KmsClient) DisableSecretVersion(request *kms.DisableSecretVersionRequest) (*kms.DisableSecretVersionResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kms.DisableSecretVersionResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 获取版本详情 */
-func (c *KmsClient) DescribeKeyDetail(request *kms.DescribeKeyDetailRequest) (*kms.DescribeKeyDetailResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kms.DescribeKeyDetailResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 创建一个CMK（用户主密钥），默认为启用状态 */
-func (c *KmsClient) CreateKey(request *kms.CreateKeyRequest) (*kms.CreateKeyResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kms.CreateKeyResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 使用密钥对数据进行加密 */
-func (c *KmsClient) Encrypt(request *kms.EncryptRequest) (*kms.EncryptResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kms.EncryptResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 启用指定版本密钥 */
-func (c *KmsClient) EnableKeyVersion(request *kms.EnableKeyVersionRequest) (*kms.EnableKeyVersionResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kms.EnableKeyVersionResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 修改机密描述 */
-func (c *KmsClient) UpdateSecret(request *kms.UpdateSecretRequest) (*kms.UpdateSecretResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kms.UpdateSecretResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 取消删除指定版本密钥 */
-func (c *KmsClient) CancelKeyVersionDeletion(request *kms.CancelKeyVersionDeletionRequest) (*kms.CancelKeyVersionDeletionResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kms.CancelKeyVersionDeletionResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 从KMS中获取一对数据密钥的明文/密文 */
-func (c *KmsClient) GenerateDataKey(request *kms.GenerateDataKeyRequest) (*kms.GenerateDataKeyResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kms.GenerateDataKeyResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -275,14 +86,15 @@ func (c *KmsClient) UpdateSecretVersion(request *kms.UpdateSecretVersionRequest)
     jdResp := &kms.UpdateSecretVersionResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
     return jdResp, err
 }
 
-/* 修改密钥配置，包括key的名称、用途、是否自动轮换和轮换周期等 */
-func (c *KmsClient) UpdateKeyDescription(request *kms.UpdateKeyDescriptionRequest) (*kms.UpdateKeyDescriptionResponse, error) {
+/* 从KMS中获取一对数据密钥的明文/密文 */
+func (c *KmsClient) GenerateDataKey(request *kms.GenerateDataKeyRequest) (*kms.GenerateDataKeyResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -291,17 +103,18 @@ func (c *KmsClient) UpdateKeyDescription(request *kms.UpdateKeyDescriptionReques
         return nil, err
     }
 
-    jdResp := &kms.UpdateKeyDescriptionResponse{}
+    jdResp := &kms.GenerateDataKeyResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
     return jdResp, err
 }
 
-/* 禁用当前状态为`已启用`的密钥 */
-func (c *KmsClient) DisableKey(request *kms.DisableKeyRequest) (*kms.DisableKeyResponse, error) {
+/* 启用指定版本密钥 */
+func (c *KmsClient) EnableKeyVersion(request *kms.EnableKeyVersionRequest) (*kms.EnableKeyVersionResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -310,17 +123,18 @@ func (c *KmsClient) DisableKey(request *kms.DisableKeyRequest) (*kms.DisableKeyR
         return nil, err
     }
 
-    jdResp := &kms.DisableKeyResponse{}
+    jdResp := &kms.EnableKeyVersionResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
     return jdResp, err
 }
 
-/* 获取机密详情 */
-func (c *KmsClient) DescribeSecretVersionList(request *kms.DescribeSecretVersionListRequest) (*kms.DescribeSecretVersionListResponse, error) {
+/* 创建机密 */
+func (c *KmsClient) CreateSecret(request *kms.CreateSecretRequest) (*kms.CreateSecretResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -329,17 +143,18 @@ func (c *KmsClient) DescribeSecretVersionList(request *kms.DescribeSecretVersion
         return nil, err
     }
 
-    jdResp := &kms.DescribeSecretVersionListResponse{}
+    jdResp := &kms.CreateSecretResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
     return jdResp, err
 }
 
-/* 计划在以后的是个时间点删除密钥，默认为7天 */
-func (c *KmsClient) ScheduleKeyDeletion(request *kms.ScheduleKeyDeletionRequest) (*kms.ScheduleKeyDeletionResponse, error) {
+/* 使用密钥对数据进行加密 */
+func (c *KmsClient) Encrypt(request *kms.EncryptRequest) (*kms.EncryptResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -348,123 +163,10 @@ func (c *KmsClient) ScheduleKeyDeletion(request *kms.ScheduleKeyDeletionRequest)
         return nil, err
     }
 
-    jdResp := &kms.ScheduleKeyDeletionResponse{}
+    jdResp := &kms.EncryptResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 导入机密 */
-func (c *KmsClient) ImportSecret(request *kms.ImportSecretRequest) (*kms.ImportSecretResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kms.ImportSecretResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 立即轮换密钥，自动轮换周期顺延 */
-func (c *KmsClient) KeyRotation(request *kms.KeyRotationRequest) (*kms.KeyRotationResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kms.KeyRotationResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 获取密钥详情 */
-func (c *KmsClient) DescribeKey(request *kms.DescribeKeyRequest) (*kms.DescribeKeyResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kms.DescribeKeyResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 删除指定版本机密 */
-func (c *KmsClient) DeleteSecretVersion(request *kms.DeleteSecretVersionRequest) (*kms.DeleteSecretVersionResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kms.DeleteSecretVersionResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 获取密钥列表 */
-func (c *KmsClient) DescribeKeyList(request *kms.DescribeKeyListRequest) (*kms.DescribeKeyListResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kms.DescribeKeyListResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 创建机密新的版本，默认为已启用状态 */
-func (c *KmsClient) CreateSecretVersion(request *kms.CreateSecretVersionRequest) (*kms.CreateSecretVersionResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kms.CreateSecretVersionResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -484,44 +186,7 @@ func (c *KmsClient) EnableKey(request *kms.EnableKeyRequest) (*kms.EnableKeyResp
     jdResp := &kms.EnableKeyResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 使用密钥对数据进行解密 */
-func (c *KmsClient) Decrypt(request *kms.DecryptRequest) (*kms.DecryptResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kms.DecryptResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 计划在以后的是个时间点删除指定版本密钥，默认为7天 */
-func (c *KmsClient) ScheduleKeyVersionDeletion(request *kms.ScheduleKeyVersionDeletionRequest) (*kms.ScheduleKeyVersionDeletionResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kms.ScheduleKeyVersionDeletionResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -541,25 +206,7 @@ func (c *KmsClient) CancelKeyDeletion(request *kms.CancelKeyDeletionRequest) (*k
     jdResp := &kms.CancelKeyDeletionResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 启用指定版本机密 */
-func (c *KmsClient) EnableSecretVersion(request *kms.EnableSecretVersionRequest) (*kms.EnableSecretVersionResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kms.EnableSecretVersionResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -579,14 +226,15 @@ func (c *KmsClient) DeleteSecret(request *kms.DeleteSecretRequest) (*kms.DeleteS
     jdResp := &kms.DeleteSecretResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
     return jdResp, err
 }
 
-/* 禁用指定版本密钥 */
-func (c *KmsClient) DisableKeyVersion(request *kms.DisableKeyVersionRequest) (*kms.DisableKeyVersionResponse, error) {
+/* 禁用机密 */
+func (c *KmsClient) DisableSecret(request *kms.DisableSecretRequest) (*kms.DisableSecretResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -595,17 +243,18 @@ func (c *KmsClient) DisableKeyVersion(request *kms.DisableKeyVersionRequest) (*k
         return nil, err
     }
 
-    jdResp := &kms.DisableKeyVersionResponse{}
+    jdResp := &kms.DisableSecretResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
     return jdResp, err
 }
 
-/* 启用机密 */
-func (c *KmsClient) EnableSecret(request *kms.EnableSecretRequest) (*kms.EnableSecretResponse, error) {
+/* 禁用指定版本机密 */
+func (c *KmsClient) DisableSecretVersion(request *kms.DisableSecretVersionRequest) (*kms.DisableSecretVersionResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -614,9 +263,70 @@ func (c *KmsClient) EnableSecret(request *kms.EnableSecretRequest) (*kms.EnableS
         return nil, err
     }
 
-    jdResp := &kms.EnableSecretResponse{}
+    jdResp := &kms.DisableSecretVersionResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建一个CMK（用户主密钥），默认为启用状态 */
+func (c *KmsClient) CreateKey(request *kms.CreateKeyRequest) (*kms.CreateKeyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &kms.CreateKeyResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改密钥配置，包括key的名称、用途、是否自动轮换和轮换周期等 */
+func (c *KmsClient) UpdateKeyDescription(request *kms.UpdateKeyDescriptionRequest) (*kms.UpdateKeyDescriptionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &kms.UpdateKeyDescriptionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取机密详情 */
+func (c *KmsClient) DescribeSecretVersionList(request *kms.DescribeSecretVersionListRequest) (*kms.DescribeSecretVersionListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &kms.DescribeSecretVersionListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -636,6 +346,107 @@ func (c *KmsClient) ExportSecret(request *kms.ExportSecretRequest) (*kms.ExportS
     jdResp := &kms.ExportSecretResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除指定版本机密 */
+func (c *KmsClient) DeleteSecretVersion(request *kms.DeleteSecretVersionRequest) (*kms.DeleteSecretVersionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &kms.DeleteSecretVersionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取密钥详情 */
+func (c *KmsClient) DescribeKey(request *kms.DescribeKeyRequest) (*kms.DescribeKeyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &kms.DescribeKeyResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 导入机密 */
+func (c *KmsClient) ImportSecret(request *kms.ImportSecretRequest) (*kms.ImportSecretResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &kms.ImportSecretResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 计划在以后的是个时间点删除密钥，默认为7天 */
+func (c *KmsClient) ScheduleKeyDeletion(request *kms.ScheduleKeyDeletionRequest) (*kms.ScheduleKeyDeletionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &kms.ScheduleKeyDeletionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 立即轮换密钥，自动轮换周期顺延 */
+func (c *KmsClient) KeyRotation(request *kms.KeyRotationRequest) (*kms.KeyRotationResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &kms.KeyRotationResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -655,6 +466,227 @@ func (c *KmsClient) DescribeSecretList(request *kms.DescribeSecretListRequest) (
     jdResp := &kms.DescribeSecretListResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取指定机密版本的详细信息 */
+func (c *KmsClient) DescribeSecretVersionInfo(request *kms.DescribeSecretVersionInfoRequest) (*kms.DescribeSecretVersionInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &kms.DescribeSecretVersionInfoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 禁用指定版本密钥 */
+func (c *KmsClient) DisableKeyVersion(request *kms.DisableKeyVersionRequest) (*kms.DisableKeyVersionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &kms.DisableKeyVersionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 使用密钥对数据进行解密 */
+func (c *KmsClient) Decrypt(request *kms.DecryptRequest) (*kms.DecryptResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &kms.DecryptResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 启用机密 */
+func (c *KmsClient) EnableSecret(request *kms.EnableSecretRequest) (*kms.EnableSecretResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &kms.EnableSecretResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 禁用当前状态为`已启用`的密钥 */
+func (c *KmsClient) DisableKey(request *kms.DisableKeyRequest) (*kms.DisableKeyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &kms.DisableKeyResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 启用指定版本机密 */
+func (c *KmsClient) EnableSecretVersion(request *kms.EnableSecretVersionRequest) (*kms.EnableSecretVersionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &kms.EnableSecretVersionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 计划在以后的是个时间点删除指定版本密钥，默认为7天 */
+func (c *KmsClient) ScheduleKeyVersionDeletion(request *kms.ScheduleKeyVersionDeletionRequest) (*kms.ScheduleKeyVersionDeletionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &kms.ScheduleKeyVersionDeletionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取版本详情 */
+func (c *KmsClient) DescribeKeyDetail(request *kms.DescribeKeyDetailRequest) (*kms.DescribeKeyDetailResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &kms.DescribeKeyDetailResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建机密新的版本，默认为已启用状态 */
+func (c *KmsClient) CreateSecretVersion(request *kms.CreateSecretVersionRequest) (*kms.CreateSecretVersionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &kms.CreateSecretVersionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改机密描述 */
+func (c *KmsClient) UpdateSecret(request *kms.UpdateSecretRequest) (*kms.UpdateSecretResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &kms.UpdateSecretResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 取消删除指定版本密钥 */
+func (c *KmsClient) CancelKeyVersionDeletion(request *kms.CancelKeyVersionDeletionRequest) (*kms.CancelKeyVersionDeletionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &kms.CancelKeyVersionDeletionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 

@@ -30,7 +30,9 @@ type ListBucketsRequest struct {
 }
 
 /*
- * param regionId: Region ID，例如：cn-north-1 
+ * param regionId: Region ID，例如：cn-north-1 (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewListBucketsRequest(
     regionId string,
@@ -47,6 +49,38 @@ func NewListBucketsRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID，例如：cn-north-1 (Required)
+ */
+func NewListBucketsRequestWithAllParams(
+    regionId string,
+) *ListBucketsRequest {
+
+    return &ListBucketsRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/buckets",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewListBucketsRequestWithoutParam() *ListBucketsRequest {
+
+    return &ListBucketsRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/buckets",
+            Method:  "GET",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID，例如：cn-north-1(Required) */
 func (r *ListBucketsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

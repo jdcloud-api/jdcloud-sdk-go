@@ -32,8 +32,10 @@ type PutBucketRequest struct {
 }
 
 /*
- * param regionId: Region ID，例如：cn-north-1 
- * param bucketname: bucket名字，例如：test-bucket 
+ * param regionId: Region ID，例如：cn-north-1 (Required)
+ * param bucketname: bucket名字，例如：test-bucket (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewPutBucketRequest(
     regionId string,
@@ -52,10 +54,46 @@ func NewPutBucketRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID，例如：cn-north-1 (Required)
+ * param bucketname: bucket名字，例如：test-bucket (Required)
+ */
+func NewPutBucketRequestWithAllParams(
+    regionId string,
+    bucketname string,
+) *PutBucketRequest {
+
+    return &PutBucketRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/buckets/{bucketname}",
+            Method:  "PUT",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        Bucketname: bucketname,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewPutBucketRequestWithoutParam() *PutBucketRequest {
+
+    return &PutBucketRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/buckets/{bucketname}",
+            Method:  "PUT",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID，例如：cn-north-1(Required) */
 func (r *PutBucketRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param bucketname: bucket名字，例如：test-bucket(Required) */
 func (r *PutBucketRequest) SetBucketname(bucketname string) {
     r.Bucketname = bucketname
 }

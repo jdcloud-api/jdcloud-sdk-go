@@ -53,6 +53,200 @@ func (c *NcClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
+/* 容器绑定弹性公网 IP，绑定的是主网卡、主内网IP对应的弹性IP. <br>
+一台云主机只能绑定一个弹性公网 IP(主网卡)，若主网卡已存在弹性公网IP，会返回错误。<br>
+如果是黑名单中的用户，会返回错误。
+ */
+func (c *NcClient) AssociateElasticIp(request *nc.AssociateElasticIpRequest) (*nc.AssociateElasticIpResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &nc.AssociateElasticIpResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询单个 secret 详情
+ */
+func (c *NcClient) DescribeSecret(request *nc.DescribeSecretRequest) (*nc.DescribeSecretResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &nc.DescribeSecretResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建一个 secret，用于存放镜像仓库机密相关信息。
+ */
+func (c *NcClient) CreateSecret(request *nc.CreateSecretRequest) (*nc.CreateSecretResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &nc.CreateSecretResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改容器的 名称 和 描述。
+ */
+func (c *NcClient) ModifyContainerAttribute(request *nc.ModifyContainerAttributeRequest) (*nc.ModifyContainerAttributeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &nc.ModifyContainerAttributeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除单个 secret
+ */
+func (c *NcClient) DeleteSecret(request *nc.DeleteSecretRequest) (*nc.DeleteSecretResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &nc.DeleteSecretResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 容器解绑公网 IP，解绑的是主网卡、主内网 IP 对应的弹性 IP.
+ */
+func (c *NcClient) DisassociateElasticIp(request *nc.DisassociateElasticIpRequest) (*nc.DisassociateElasticIpResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &nc.DisassociateElasticIpResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 容器状态必须为 stopped、running 或 error状态。 <br>
+按量付费的实例，如不主动删除将一直运行，不再使用的实例，可通过本接口主动停用。<br>
+只能支持主动删除按量计费类型的实例。包年包月过期的容器也可以删除，其它的情况还请发工单系统。计费状态异常的容器无法删除。
+ */
+func (c *NcClient) DeleteContainer(request *nc.DeleteContainerRequest) (*nc.DeleteContainerResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &nc.DeleteContainerResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询一台原生容器的详细信息
+ */
+func (c *NcClient) DescribeContainer(request *nc.DescribeContainerRequest) (*nc.DescribeContainerResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &nc.DescribeContainerResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 启动处于关闭状态的单个容器，处在任务执行中的容器无法启动。<br>
+容器实例或其绑定的云盘已欠费时，容器将无法正常启动。<br>
+ */
+func (c *NcClient) StartContainer(request *nc.StartContainerRequest) (*nc.StartContainerResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &nc.StartContainerResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 批量查询原生容器的详细信息<br>
 此接口支持分页查询，默认每页20条。
  */
@@ -68,6 +262,49 @@ func (c *NcClient) DescribeContainers(request *nc.DescribeContainersRequest) (*n
     jdResp := &nc.DescribeContainersResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询单个容器日志
+ */
+func (c *NcClient) GetLogs(request *nc.GetLogsRequest) (*nc.GetLogsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &nc.GetLogsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询资源的配额，支持：原生容器 pod 和 secret.
+ */
+func (c *NcClient) DescribeQuota(request *nc.DescribeQuotaRequest) (*nc.DescribeQuotaResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &nc.DescribeQuotaResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -140,88 +377,7 @@ func (c *NcClient) CreateContainers(request *nc.CreateContainersRequest) (*nc.Cr
     jdResp := &nc.CreateContainersResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询单个容器日志
- */
-func (c *NcClient) GetLogs(request *nc.GetLogsRequest) (*nc.GetLogsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &nc.GetLogsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询单个 secret 详情
- */
-func (c *NcClient) DescribeSecret(request *nc.DescribeSecretRequest) (*nc.DescribeSecretResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &nc.DescribeSecretResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 修改容器的 名称 和 描述。
- */
-func (c *NcClient) ModifyContainerAttribute(request *nc.ModifyContainerAttributeRequest) (*nc.ModifyContainerAttributeResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &nc.ModifyContainerAttributeResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 容器状态必须为 stopped、running 或 error状态。 <br>
-按量付费的实例，如不主动删除将一直运行，不再使用的实例，可通过本接口主动停用。<br>
-只能支持主动删除按量计费类型的实例。包年包月过期的容器也可以删除，其它的情况还请发工单系统。计费状态异常的容器无法删除。
- */
-func (c *NcClient) DeleteContainer(request *nc.DeleteContainerRequest) (*nc.DeleteContainerResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &nc.DeleteContainerResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -242,47 +398,7 @@ func (c *NcClient) StopContainer(request *nc.StopContainerRequest) (*nc.StopCont
     jdResp := &nc.StopContainerResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 启动处于关闭状态的单个容器，处在任务执行中的容器无法启动。<br>
-容器实例或其绑定的云盘已欠费时，容器将无法正常启动。<br>
- */
-func (c *NcClient) StartContainer(request *nc.StartContainerRequest) (*nc.StartContainerResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &nc.StartContainerResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 容器解绑公网 IP，解绑的是主网卡、主内网 IP 对应的弹性 IP.
- */
-func (c *NcClient) DisassociateElasticIp(request *nc.DisassociateElasticIpRequest) (*nc.DisassociateElasticIpResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &nc.DisassociateElasticIpResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -304,108 +420,7 @@ func (c *NcClient) DescribeSecrets(request *nc.DescribeSecretsRequest) (*nc.Desc
     jdResp := &nc.DescribeSecretsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询资源的配额，支持：原生容器 pod 和 secret.
- */
-func (c *NcClient) DescribeQuota(request *nc.DescribeQuotaRequest) (*nc.DescribeQuotaResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &nc.DescribeQuotaResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询一台原生容器的详细信息
- */
-func (c *NcClient) DescribeContainer(request *nc.DescribeContainerRequest) (*nc.DescribeContainerResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &nc.DescribeContainerResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 删除单个 secret
- */
-func (c *NcClient) DeleteSecret(request *nc.DeleteSecretRequest) (*nc.DeleteSecretResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &nc.DeleteSecretResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 创建一个 secret，用于存放镜像仓库机密相关信息。
- */
-func (c *NcClient) CreateSecret(request *nc.CreateSecretRequest) (*nc.CreateSecretResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &nc.CreateSecretResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 容器绑定弹性公网 IP，绑定的是主网卡、主内网IP对应的弹性IP. <br>
-一台云主机只能绑定一个弹性公网 IP(主网卡)，若主网卡已存在弹性公网IP，会返回错误。<br>
-如果是黑名单中的用户，会返回错误。
- */
-func (c *NcClient) AssociateElasticIp(request *nc.AssociateElasticIpRequest) (*nc.AssociateElasticIpResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &nc.AssociateElasticIpResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 

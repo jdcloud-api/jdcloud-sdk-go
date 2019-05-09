@@ -32,8 +32,10 @@ type DeleteBucketRequest struct {
 }
 
 /*
- * param regionId: Region ID，例如：cn-north-1 
- * param bucketname: bucket名字，例如：test-bucket 
+ * param regionId: Region ID，例如：cn-north-1 (Required)
+ * param bucketname: bucket名字，例如：test-bucket (Required)
+ *
+ * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDeleteBucketRequest(
     regionId string,
@@ -52,10 +54,46 @@ func NewDeleteBucketRequest(
 	}
 }
 
+/*
+ * param regionId: Region ID，例如：cn-north-1 (Required)
+ * param bucketname: bucket名字，例如：test-bucket (Required)
+ */
+func NewDeleteBucketRequestWithAllParams(
+    regionId string,
+    bucketname string,
+) *DeleteBucketRequest {
+
+    return &DeleteBucketRequest{
+        JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/buckets/{bucketname}",
+            Method:  "DELETE",
+            Header:  nil,
+            Version: "v1",
+        },
+        RegionId: regionId,
+        Bucketname: bucketname,
+    }
+}
+
+/* This constructor has better compatible ability when API parameters changed */
+func NewDeleteBucketRequestWithoutParam() *DeleteBucketRequest {
+
+    return &DeleteBucketRequest{
+            JDCloudRequest: core.JDCloudRequest{
+            URL:     "/regions/{regionId}/buckets/{bucketname}",
+            Method:  "DELETE",
+            Header:  nil,
+            Version: "v1",
+        },
+    }
+}
+
+/* param regionId: Region ID，例如：cn-north-1(Required) */
 func (r *DeleteBucketRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param bucketname: bucket名字，例如：test-bucket(Required) */
 func (r *DeleteBucketRequest) SetBucketname(bucketname string) {
     r.Bucketname = bucketname
 }

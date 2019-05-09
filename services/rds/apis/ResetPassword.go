@@ -33,7 +33,7 @@ type ResetPasswordRequest struct {
     /* 账号名，在同一个实例中账号名不能重复  */
     AccountName string `json:"accountName"`
 
-    /* 新密码，密码的具体规则可参见帮助中心文档:[名称及密码限制](../../../documentation/Cloud-Database-and-Cache/RDS/Introduction/Restrictions/SQLServer-Restrictions.md)  */
+    /* 新密码，密码的具体规则可参见帮助中心文档:[名称及密码限制](../../../documentation/Database-and-Cache-Service/RDS/Introduction/Restrictions/SQLServer-Restrictions.md)  */
     AccountPassword string `json:"accountPassword"`
 }
 
@@ -41,7 +41,7 @@ type ResetPasswordRequest struct {
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
  * param accountName: 账号名，在同一个实例中账号名不能重复 (Required)
- * param accountPassword: 新密码，密码的具体规则可参见帮助中心文档:[名称及密码限制](../../../documentation/Cloud-Database-and-Cache/RDS/Introduction/Restrictions/SQLServer-Restrictions.md) (Required)
+ * param accountPassword: 新密码，密码的具体规则可参见帮助中心文档:[名称及密码限制](../../../documentation/Database-and-Cache-Service/RDS/Introduction/Restrictions/SQLServer-Restrictions.md) (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -70,7 +70,7 @@ func NewResetPasswordRequest(
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
  * param accountName: 账号名，在同一个实例中账号名不能重复 (Required)
- * param accountPassword: 新密码，密码的具体规则可参见帮助中心文档:[名称及密码限制](../../../documentation/Cloud-Database-and-Cache/RDS/Introduction/Restrictions/SQLServer-Restrictions.md) (Required)
+ * param accountPassword: 新密码，密码的具体规则可参见帮助中心文档:[名称及密码限制](../../../documentation/Database-and-Cache-Service/RDS/Introduction/Restrictions/SQLServer-Restrictions.md) (Required)
  */
 func NewResetPasswordRequestWithAllParams(
     regionId string,
@@ -121,7 +121,7 @@ func (r *ResetPasswordRequest) SetAccountName(accountName string) {
     r.AccountName = accountName
 }
 
-/* param accountPassword: 新密码，密码的具体规则可参见帮助中心文档:[名称及密码限制](../../../documentation/Cloud-Database-and-Cache/RDS/Introduction/Restrictions/SQLServer-Restrictions.md)(Required) */
+/* param accountPassword: 新密码，密码的具体规则可参见帮助中心文档:[名称及密码限制](../../../documentation/Database-and-Cache-Service/RDS/Introduction/Restrictions/SQLServer-Restrictions.md)(Required) */
 func (r *ResetPasswordRequest) SetAccountPassword(accountPassword string) {
     r.AccountPassword = accountPassword
 }

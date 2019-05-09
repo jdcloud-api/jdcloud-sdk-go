@@ -66,6 +66,7 @@ func (c *SopClient) GetSecurityToken(request *sop.GetSecurityTokenRequest) (*sop
     jdResp := &sop.GetSecurityTokenResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -85,6 +86,7 @@ func (c *SopClient) GetSensitiveOpSetting(request *sop.GetSensitiveOpSettingRequ
     jdResp := &sop.GetSensitiveOpSettingResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 

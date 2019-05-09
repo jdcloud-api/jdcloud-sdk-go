@@ -40,7 +40,7 @@ func NewRdsClient(credential *core.Credential) *RdsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "rds",
-            Revision:    "0.4.6",
+            Revision:    "0.5.4",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -633,7 +633,7 @@ func (c *RdsClient) DescribeQueryPerformance(request *rds.DescribeQueryPerforman
     return jdResp, err
 }
 
-/* 查看参数的修改历史<br>- 仅支持MySQL */
+/* 查看参数组绑定的云数据库实例<br>- 仅支持MySQL */
 func (c *RdsClient) DescribeParameterGroupAttachedInstances(request *rds.DescribeParameterGroupAttachedInstancesRequest) (*rds.DescribeParameterGroupAttachedInstancesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -653,7 +653,7 @@ func (c *RdsClient) DescribeParameterGroupAttachedInstances(request *rds.Describ
     return jdResp, err
 }
 
-/* 创建一个跨地域备份同步服务。<br>- 仅支持MySQL */
+/* 创建一个跨地域备份同步服务。 */
 func (c *RdsClient) CreateBackupSynchronicity(request *rds.CreateBackupSynchronicityRequest) (*rds.CreateBackupSynchronicityResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -673,7 +673,7 @@ func (c *RdsClient) CreateBackupSynchronicity(request *rds.CreateBackupSynchroni
     return jdResp, err
 }
 
-/* 删除一个跨地域备份同步服务。<br>- 仅支持MySQL */
+/* 删除一个跨地域备份同步服务。 */
 func (c *RdsClient) DeleteBackupSynchronicity(request *rds.DeleteBackupSynchronicityRequest) (*rds.DeleteBackupSynchronicityResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1193,7 +1193,7 @@ func (c *RdsClient) CreateAudit(request *rds.CreateAuditRequest) (*rds.CreateAud
     return jdResp, err
 }
 
-/* 修改实例名称，可支持中文，实例名的具体规则可参见帮助中心文档:[名称及密码限制](../../../documentation/Cloud-Database-and-Cache/RDS/Introduction/Restrictions/SQLServer-Restrictions.md) */
+/* 修改实例名称，可支持中文，实例名的具体规则可参见帮助中心文档:[名称及密码限制](../../../documentation/Database-and-Cache-Service/RDS/Introduction/Restrictions/SQLServer-Restrictions.md) */
 func (c *RdsClient) ModifyInstanceName(request *rds.ModifyInstanceNameRequest) (*rds.ModifyInstanceNameResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1413,7 +1413,7 @@ func (c *RdsClient) DeleteBackup(request *rds.DeleteBackupRequest) (*rds.DeleteB
     return jdResp, err
 }
 
-/* 查询跨地域备份同步服务列表。<br>- 仅支持MySQL */
+/* 查询跨地域备份同步服务列表。 */
 func (c *RdsClient) DescribeBackupSynchronicities(request *rds.DescribeBackupSynchronicitiesRequest) (*rds.DescribeBackupSynchronicitiesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1553,6 +1553,26 @@ func (c *RdsClient) DescribeInstances(request *rds.DescribeInstancesRequest) (*r
     return jdResp, err
 }
 
+/* 创建MySQL的只读实例<br>- 仅支持MySQL */
+func (c *RdsClient) CreateROInstance(request *rds.CreateROInstanceRequest) (*rds.CreateROInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.CreateROInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 获取当前系统所支持的各种数据库版本的审计选项及相应的推荐选项<br>- 仅支持SQL Server */
 func (c *RdsClient) DescribeAuditOptions(request *rds.DescribeAuditOptionsRequest) (*rds.DescribeAuditOptionsResponse, error) {
     if request == nil {
@@ -1604,6 +1624,26 @@ func (c *RdsClient) ModifyParameterGroupParameters(request *rds.ModifyParameterG
     }
 
     jdResp := &rds.ModifyParameterGroupParametersResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据跨地域备份同步服务时间点创建实例。 */
+func (c *RdsClient) CreateInstanceByTimeInCrossRegion(request *rds.CreateInstanceByTimeInCrossRegionRequest) (*rds.CreateInstanceByTimeInCrossRegionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.CreateInstanceByTimeInCrossRegionResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

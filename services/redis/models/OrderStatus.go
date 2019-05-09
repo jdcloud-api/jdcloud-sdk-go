@@ -22,13 +22,13 @@ type OrderStatus struct {
     /* 订单总数 (Optional) */
     Total int `json:"total"`
 
-    /* 成功数 (Optional) */
+    /* 成功的订单数 (Optional) */
     Success int `json:"success"`
 
-    /* 失败数 (Optional) */
+    /* 失败的订单数 (Optional) */
     Fail int `json:"fail"`
 
-    /* 正在处理数 (Optional) */
+    /* 正在处理的订单数 (Optional) */
     InProcess int `json:"inProcess"`
 
     /* 成功的资源Id (Optional) */

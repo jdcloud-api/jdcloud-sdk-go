@@ -66,44 +66,7 @@ func (c *HttpdnsClient) GetAccountInfo(request *httpdns.GetAccountInfoRequest) (
     jdResp := &httpdns.GetAccountInfoResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 创建httpdns账户 */
-func (c *HttpdnsClient) CreateAccount(request *httpdns.CreateAccountRequest) (*httpdns.CreateAccountResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &httpdns.CreateAccountResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询使用httpdns服务的域名 */
-func (c *HttpdnsClient) GetDomains(request *httpdns.GetDomainsRequest) (*httpdns.GetDomainsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &httpdns.GetDomainsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -125,6 +88,7 @@ func (c *HttpdnsClient) AddDomains(request *httpdns.AddDomainsRequest) (*httpdns
     jdResp := &httpdns.AddDomainsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -144,14 +108,15 @@ func (c *HttpdnsClient) DelDomains(request *httpdns.DelDomainsRequest) (*httpdns
     jdResp := &httpdns.DelDomainsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
     return jdResp, err
 }
 
-/* 创建，启用，禁用httpdns服务密钥 */
-func (c *HttpdnsClient) OperateKey(request *httpdns.OperateKeyRequest) (*httpdns.OperateKeyResponse, error) {
+/* 创建httpdns账户 */
+func (c *HttpdnsClient) CreateAccount(request *httpdns.CreateAccountRequest) (*httpdns.CreateAccountResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -160,9 +125,10 @@ func (c *HttpdnsClient) OperateKey(request *httpdns.OperateKeyRequest) (*httpdns
         return nil, err
     }
 
-    jdResp := &httpdns.OperateKeyResponse{}
+    jdResp := &httpdns.CreateAccountResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -182,6 +148,47 @@ func (c *HttpdnsClient) GetAccountId(request *httpdns.GetAccountIdRequest) (*htt
     jdResp := &httpdns.GetAccountIdResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询使用httpdns服务的域名 */
+func (c *HttpdnsClient) GetDomains(request *httpdns.GetDomainsRequest) (*httpdns.GetDomainsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &httpdns.GetDomainsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建，启用，禁用httpdns服务密钥 */
+func (c *HttpdnsClient) OperateKey(request *httpdns.OperateKeyRequest) (*httpdns.OperateKeyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &httpdns.OperateKeyResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 

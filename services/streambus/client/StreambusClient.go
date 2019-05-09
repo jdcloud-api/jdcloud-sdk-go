@@ -53,120 +53,6 @@ func (c *StreambusClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-/* 查看指定主题的所有消费组 */
-func (c *StreambusClient) GetConsumerGroupList(request *streambus.GetConsumerGroupListRequest) (*streambus.GetConsumerGroupListResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &streambus.GetConsumerGroupListResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 创建consumerGroupName */
-func (c *StreambusClient) CreateConsumerGroup(request *streambus.CreateConsumerGroupRequest) (*streambus.CreateConsumerGroupResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &streambus.CreateConsumerGroupResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 删除consumerGroupName */
-func (c *StreambusClient) DeleteConsumerGroup(request *streambus.DeleteConsumerGroupRequest) (*streambus.DeleteConsumerGroupResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &streambus.DeleteConsumerGroupResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 创建topic时，topicModel中只需要传topic参数，另外两个参数可为空 */
-func (c *StreambusClient) AddTopic(request *streambus.AddTopicRequest) (*streambus.AddTopicResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &streambus.AddTopicResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询指定主题,如果已归档会返回归档信息 */
-func (c *StreambusClient) DescribeTopic(request *streambus.DescribeTopicRequest) (*streambus.DescribeTopicResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &streambus.DescribeTopicResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 删除topic */
-func (c *StreambusClient) DeleteTopic(request *streambus.DeleteTopicRequest) (*streambus.DeleteTopicResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &streambus.DeleteTopicResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 此接口可以用来更新主题，创建归档，修改归档，删除归档，传入不同的参数可以实现不同的功能。修改归档只需要修改相应归档的参数，删除归档只需要把归档参数置为空即可 */
 func (c *StreambusClient) UpdateTopic(request *streambus.UpdateTopicRequest) (*streambus.UpdateTopicResponse, error) {
     if request == nil {
@@ -180,6 +66,27 @@ func (c *StreambusClient) UpdateTopic(request *streambus.UpdateTopicRequest) (*s
     jdResp := &streambus.UpdateTopicResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查看指定主题的所有消费组 */
+func (c *StreambusClient) GetConsumerGroupList(request *streambus.GetConsumerGroupListRequest) (*streambus.GetConsumerGroupListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &streambus.GetConsumerGroupListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
@@ -199,6 +106,107 @@ func (c *StreambusClient) GetTopicList(request *streambus.GetTopicListRequest) (
     jdResp := &streambus.GetTopicListResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除consumerGroupName */
+func (c *StreambusClient) DeleteConsumerGroup(request *streambus.DeleteConsumerGroupRequest) (*streambus.DeleteConsumerGroupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &streambus.DeleteConsumerGroupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建topic时，topicModel中只需要传topic参数，另外两个参数可为空 */
+func (c *StreambusClient) AddTopic(request *streambus.AddTopicRequest) (*streambus.AddTopicResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &streambus.AddTopicResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建consumerGroupName */
+func (c *StreambusClient) CreateConsumerGroup(request *streambus.CreateConsumerGroupRequest) (*streambus.CreateConsumerGroupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &streambus.CreateConsumerGroupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询指定主题,如果已归档会返回归档信息 */
+func (c *StreambusClient) DescribeTopic(request *streambus.DescribeTopicRequest) (*streambus.DescribeTopicResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &streambus.DescribeTopicResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除topic */
+func (c *StreambusClient) DeleteTopic(request *streambus.DeleteTopicRequest) (*streambus.DeleteTopicResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &streambus.DeleteTopicResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
         return nil, err
     }
 
