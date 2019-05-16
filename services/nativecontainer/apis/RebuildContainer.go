@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    nativecontainer "github.com/jdcloud-api/jdcloud-sdk-go/services/nativecontainer/models"
 )
 
 type RebuildContainerRequest struct {
@@ -49,7 +50,7 @@ type RebuildContainerRequest struct {
     WorkingDir *string `json:"workingDir"`
 
     /* 容器执行的环境变量；如果和镜像中的环境变量Key相同，会覆盖镜像中的值；</br> 最大10对 (Optional) */
-    Evns []string `json:"evns"`
+    Envs []nativecontainer.EnvVar `json:"envs"`
 }
 
 /*
@@ -84,7 +85,7 @@ func NewRebuildContainerRequest(
  * param args: 容器执行命令的参数，如果不指定默认是docker镜像的CMD (Optional)
  * param tty: 容器是否分配tty。默认不分配 (Optional)
  * param workingDir: 容器的工作目录。如果不指定，默认是根目录（/）；必须是绝对路径 (Optional)
- * param evns: 容器执行的环境变量；如果和镜像中的环境变量Key相同，会覆盖镜像中的值；</br> 最大10对 (Optional)
+ * param envs: 容器执行的环境变量；如果和镜像中的环境变量Key相同，会覆盖镜像中的值；</br> 最大10对 (Optional)
  */
 func NewRebuildContainerRequestWithAllParams(
     regionId string,
@@ -95,7 +96,7 @@ func NewRebuildContainerRequestWithAllParams(
     args []string,
     tty *bool,
     workingDir *string,
-    evns []string,
+    envs []nativecontainer.EnvVar,
 ) *RebuildContainerRequest {
 
     return &RebuildContainerRequest{
@@ -113,7 +114,7 @@ func NewRebuildContainerRequestWithAllParams(
         Args: args,
         Tty: tty,
         WorkingDir: workingDir,
-        Evns: evns,
+        Envs: envs,
     }
 }
 
@@ -170,9 +171,9 @@ func (r *RebuildContainerRequest) SetWorkingDir(workingDir string) {
     r.WorkingDir = &workingDir
 }
 
-/* param evns: 容器执行的环境变量；如果和镜像中的环境变量Key相同，会覆盖镜像中的值；</br> 最大10对(Optional) */
-func (r *RebuildContainerRequest) SetEvns(evns []string) {
-    r.Evns = evns
+/* param envs: 容器执行的环境变量；如果和镜像中的环境变量Key相同，会覆盖镜像中的值；</br> 最大10对(Optional) */
+func (r *RebuildContainerRequest) SetEnvs(envs []nativecontainer.EnvVar) {
+    r.Envs = envs
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

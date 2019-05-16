@@ -31,12 +31,12 @@ type AddCustomLiveStreamRecordTemplateRequest struct {
     RecordPeriod int `json:"recordPeriod"`
 
     /* 存储桶
-  */
-    SaveBucket string `json:"saveBucket"`
+ (Optional) */
+    SaveBucket *string `json:"saveBucket"`
 
     /* endpoint
-  */
-    SaveEndpoint string `json:"saveEndpoint"`
+ (Optional) */
+    SaveEndpoint *string `json:"saveEndpoint"`
 
     /* 录制文件格式:
 - 取值: ts,flv,mp4 (多种类型之间用;隔开)
@@ -45,7 +45,8 @@ type AddCustomLiveStreamRecordTemplateRequest struct {
     RecordFileType string `json:"recordFileType"`
 
     /* 录制模板自定义名称:
- - 取值要求：数字、大小写字母或短横线("-")
+ - 取值要求：数字、大小写字母或短横线("-")、下划线("_"),
+   最大长度50个字符
  - <b>注意: 不能与已定义命名重复</b>
   */
     Template string `json:"template"`
@@ -56,16 +57,13 @@ type AddCustomLiveStreamRecordTemplateRequest struct {
 - 取值: [15,360]
 - 单位: 分钟
  (Required)
- * param saveBucket: 存储桶
- (Required)
- * param saveEndpoint: endpoint
- (Required)
  * param recordFileType: 录制文件格式:
 - 取值: ts,flv,mp4 (多种类型之间用;隔开)
 - 不区分大小写
  (Required)
  * param template: 录制模板自定义名称:
- - 取值要求：数字、大小写字母或短横线("-")
+ - 取值要求：数字、大小写字母或短横线("-")、下划线("_"),
+   最大长度50个字符
  - <b>注意: 不能与已定义命名重复</b>
  (Required)
  *
@@ -73,8 +71,6 @@ type AddCustomLiveStreamRecordTemplateRequest struct {
  */
 func NewAddCustomLiveStreamRecordTemplateRequest(
     recordPeriod int,
-    saveBucket string,
-    saveEndpoint string,
     recordFileType string,
     template string,
 ) *AddCustomLiveStreamRecordTemplateRequest {
@@ -87,8 +83,6 @@ func NewAddCustomLiveStreamRecordTemplateRequest(
 			Version: "v1",
 		},
         RecordPeriod: recordPeriod,
-        SaveBucket: saveBucket,
-        SaveEndpoint: saveEndpoint,
         RecordFileType: recordFileType,
         Template: template,
 	}
@@ -100,22 +94,23 @@ func NewAddCustomLiveStreamRecordTemplateRequest(
 - 单位: 分钟
  (Required)
  * param saveBucket: 存储桶
- (Required)
+ (Optional)
  * param saveEndpoint: endpoint
- (Required)
+ (Optional)
  * param recordFileType: 录制文件格式:
 - 取值: ts,flv,mp4 (多种类型之间用;隔开)
 - 不区分大小写
  (Required)
  * param template: 录制模板自定义名称:
- - 取值要求：数字、大小写字母或短横线("-")
+ - 取值要求：数字、大小写字母或短横线("-")、下划线("_"),
+   最大长度50个字符
  - <b>注意: 不能与已定义命名重复</b>
  (Required)
  */
 func NewAddCustomLiveStreamRecordTemplateRequestWithAllParams(
     recordPeriod int,
-    saveBucket string,
-    saveEndpoint string,
+    saveBucket *string,
+    saveEndpoint *string,
     recordFileType string,
     template string,
 ) *AddCustomLiveStreamRecordTemplateRequest {
@@ -157,15 +152,15 @@ func (r *AddCustomLiveStreamRecordTemplateRequest) SetRecordPeriod(recordPeriod 
 }
 
 /* param saveBucket: 存储桶
-(Required) */
+(Optional) */
 func (r *AddCustomLiveStreamRecordTemplateRequest) SetSaveBucket(saveBucket string) {
-    r.SaveBucket = saveBucket
+    r.SaveBucket = &saveBucket
 }
 
 /* param saveEndpoint: endpoint
-(Required) */
+(Optional) */
 func (r *AddCustomLiveStreamRecordTemplateRequest) SetSaveEndpoint(saveEndpoint string) {
-    r.SaveEndpoint = saveEndpoint
+    r.SaveEndpoint = &saveEndpoint
 }
 
 /* param recordFileType: 录制文件格式:
@@ -177,7 +172,8 @@ func (r *AddCustomLiveStreamRecordTemplateRequest) SetRecordFileType(recordFileT
 }
 
 /* param template: 录制模板自定义名称:
- - 取值要求：数字、大小写字母或短横线("-")
+ - 取值要求：数字、大小写字母或短横线("-")、下划线("_"),
+   最大长度50个字符
  - <b>注意: 不能与已定义命名重复</b>
 (Required) */
 func (r *AddCustomLiveStreamRecordTemplateRequest) SetTemplate(template string) {

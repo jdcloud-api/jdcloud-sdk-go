@@ -52,6 +52,10 @@ type TranscodeInfo struct {
  (Optional) */
     Template string `json:"template"`
 
+    /* 转码模板名称
+ (Optional) */
+    TemplateName string `json:"templateName"`
+
     /* 转码输出音频编码格式:
   - 取值: aac、mp3
   - 不区分大小写

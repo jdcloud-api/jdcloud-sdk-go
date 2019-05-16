@@ -35,6 +35,14 @@ type DescribeLivePublishStreamNumRequest struct {
  (Optional) */
     ProtocolType *string `json:"protocolType"`
 
+    /* 运营商
+ (Optional) */
+    IspName *string `json:"ispName"`
+
+    /* 查询的区域，如beijing,shanghai。多个用逗号分隔
+ (Optional) */
+    LocationName *string `json:"locationName"`
+
     /* 查询周期，当前取值范围：“oneMin,fiveMin,halfHour,hour,twoHour,sixHour,day,followTime”，分别表示1min，5min，半小时，1小时，2小时，6小时，1天，跟随时间。默认为空，表示fiveMin。当传入followTime时，表示按Endtime-StartTime的周期，只返回一个点
  (Optional) */
     Period *string `json:"period"`
@@ -84,6 +92,10 @@ func NewDescribeLivePublishStreamNumRequest(
  * param appName: 应用名称 (Optional)
  * param protocolType: 查询的流协议类型，取值范围："rtmp,hdl,hls"，多个时以逗号分隔
  (Optional)
+ * param ispName: 运营商
+ (Optional)
+ * param locationName: 查询的区域，如beijing,shanghai。多个用逗号分隔
+ (Optional)
  * param period: 查询周期，当前取值范围：“oneMin,fiveMin,halfHour,hour,twoHour,sixHour,day,followTime”，分别表示1min，5min，半小时，1小时，2小时，6小时，1天，跟随时间。默认为空，表示fiveMin。当传入followTime时，表示按Endtime-StartTime的周期，只返回一个点
  (Optional)
  * param startTime: 起始时间
@@ -102,6 +114,8 @@ func NewDescribeLivePublishStreamNumRequestWithAllParams(
     domainName *string,
     appName *string,
     protocolType *string,
+    ispName *string,
+    locationName *string,
     period *string,
     startTime string,
     endTime *string,
@@ -117,6 +131,8 @@ func NewDescribeLivePublishStreamNumRequestWithAllParams(
         DomainName: domainName,
         AppName: appName,
         ProtocolType: protocolType,
+        IspName: ispName,
+        LocationName: locationName,
         Period: period,
         StartTime: startTime,
         EndTime: endTime,
@@ -150,6 +166,18 @@ func (r *DescribeLivePublishStreamNumRequest) SetAppName(appName string) {
 (Optional) */
 func (r *DescribeLivePublishStreamNumRequest) SetProtocolType(protocolType string) {
     r.ProtocolType = &protocolType
+}
+
+/* param ispName: 运营商
+(Optional) */
+func (r *DescribeLivePublishStreamNumRequest) SetIspName(ispName string) {
+    r.IspName = &ispName
+}
+
+/* param locationName: 查询的区域，如beijing,shanghai。多个用逗号分隔
+(Optional) */
+func (r *DescribeLivePublishStreamNumRequest) SetLocationName(locationName string) {
+    r.LocationName = &locationName
 }
 
 /* param period: 查询周期，当前取值范围：“oneMin,fiveMin,halfHour,hour,twoHour,sixHour,day,followTime”，分别表示1min，5min，半小时，1小时，2小时，6小时，1天，跟随时间。默认为空，表示fiveMin。当传入followTime时，表示按Endtime-StartTime的周期，只返回一个点

@@ -24,6 +24,11 @@ type AddCustomLiveStreamTranscodeTemplateRequest struct {
 
     core.JDCloudRequest
 
+    /* 转码模板名称
+- 长度范围：[1,50]
+ (Optional) */
+    TemplateName *string `json:"templateName"`
+
     /* 转码输出的码率值
 - 取值范围: [200,3000]
 - 单位: kpbs
@@ -31,7 +36,7 @@ type AddCustomLiveStreamTranscodeTemplateRequest struct {
     VideoCodeRate int `json:"videoCodeRate"`
 
     /* 转码输出的帧率值
-- 取值：15、25、30、60
+- 取值：[1,30]
   */
     VideoFrameRate string `json:"videoFrameRate"`
 
@@ -96,7 +101,7 @@ type AddCustomLiveStreamTranscodeTemplateRequest struct {
 - 单位: kpbs
  (Required)
  * param videoFrameRate: 转码输出的帧率值
-- 取值：15、25、30、60
+- 取值：[1,30]
  (Required)
  * param template: 转码模板(转码流输出后缀)
 - 取值要求：数字、大小写字母或短横线("-"),必须以数字或字母作为开头和结尾,长度不超过50字符
@@ -159,12 +164,15 @@ func NewAddCustomLiveStreamTranscodeTemplateRequest(
 }
 
 /*
+ * param templateName: 转码模板名称
+- 长度范围：[1,50]
+ (Optional)
  * param videoCodeRate: 转码输出的码率值
 - 取值范围: [200,3000]
 - 单位: kpbs
  (Required)
  * param videoFrameRate: 转码输出的帧率值
-- 取值：15、25、30、60
+- 取值：[1,30]
  (Required)
  * param width: 转码输出视频宽度
 - 取值: [100,1920]
@@ -206,6 +214,7 @@ func NewAddCustomLiveStreamTranscodeTemplateRequest(
  (Required)
  */
 func NewAddCustomLiveStreamTranscodeTemplateRequestWithAllParams(
+    templateName *string,
     videoCodeRate int,
     videoFrameRate string,
     width *int,
@@ -225,6 +234,7 @@ func NewAddCustomLiveStreamTranscodeTemplateRequestWithAllParams(
             Header:  nil,
             Version: "v1",
         },
+        TemplateName: templateName,
         VideoCodeRate: videoCodeRate,
         VideoFrameRate: videoFrameRate,
         Width: width,
@@ -251,6 +261,13 @@ func NewAddCustomLiveStreamTranscodeTemplateRequestWithoutParam() *AddCustomLive
     }
 }
 
+/* param templateName: 转码模板名称
+- 长度范围：[1,50]
+(Optional) */
+func (r *AddCustomLiveStreamTranscodeTemplateRequest) SetTemplateName(templateName string) {
+    r.TemplateName = &templateName
+}
+
 /* param videoCodeRate: 转码输出的码率值
 - 取值范围: [200,3000]
 - 单位: kpbs
@@ -260,7 +277,7 @@ func (r *AddCustomLiveStreamTranscodeTemplateRequest) SetVideoCodeRate(videoCode
 }
 
 /* param videoFrameRate: 转码输出的帧率值
-- 取值：15、25、30、60
+- 取值：[1,30]
 (Required) */
 func (r *AddCustomLiveStreamTranscodeTemplateRequest) SetVideoFrameRate(videoFrameRate string) {
     r.VideoFrameRate = videoFrameRate

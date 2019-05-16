@@ -20,7 +20,7 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type AddCustomLiveStreamWatermarkTemplateRequest struct {
+type UpdateCustomLiveStreamWatermarkTemplateRequest struct {
 
     core.JDCloudRequest
 
@@ -47,7 +47,7 @@ type AddCustomLiveStreamWatermarkTemplateRequest struct {
     Height int `json:"height"`
 
     /* 自定义水印模板名称
--&ensp;取值要求: 数字、大小写字母、短横线("-")、下划线("_"),
+-&ensp;取值要求: 数字、大小写字母或短横线("-")、下划线("_"),
 &ensp;&ensp;首尾不能有特殊字符("-"),
 &ensp;&ensp;不超过50字符,utf-8格式
 -&ensp;<b>注意: 不能与已定义命名重复</b>
@@ -78,7 +78,7 @@ type AddCustomLiveStreamWatermarkTemplateRequest struct {
 - 单位: 像素
  (Required)
  * param template: 自定义水印模板名称
--&ensp;取值要求: 数字、大小写字母、短横线("-")、下划线("_"),
+-&ensp;取值要求: 数字、大小写字母或短横线("-")、下划线("_"),
 &ensp;&ensp;首尾不能有特殊字符("-"),
 &ensp;&ensp;不超过50字符,utf-8格式
 -&ensp;<b>注意: 不能与已定义命名重复</b>
@@ -87,19 +87,19 @@ type AddCustomLiveStreamWatermarkTemplateRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewAddCustomLiveStreamWatermarkTemplateRequest(
+func NewUpdateCustomLiveStreamWatermarkTemplateRequest(
     offsetX int,
     offsetY int,
     width int,
     height int,
     template string,
     url string,
-) *AddCustomLiveStreamWatermarkTemplateRequest {
+) *UpdateCustomLiveStreamWatermarkTemplateRequest {
 
-	return &AddCustomLiveStreamWatermarkTemplateRequest{
+	return &UpdateCustomLiveStreamWatermarkTemplateRequest{
         JDCloudRequest: core.JDCloudRequest{
 			URL:     "/watermarkCustoms:template",
-			Method:  "POST",
+			Method:  "PUT",
 			Header:  nil,
 			Version: "v1",
 		},
@@ -128,7 +128,7 @@ func NewAddCustomLiveStreamWatermarkTemplateRequest(
 - 单位: 像素
  (Required)
  * param template: 自定义水印模板名称
--&ensp;取值要求: 数字、大小写字母、短横线("-")、下划线("_"),
+-&ensp;取值要求: 数字、大小写字母或短横线("-")、下划线("_"),
 &ensp;&ensp;首尾不能有特殊字符("-"),
 &ensp;&ensp;不超过50字符,utf-8格式
 -&ensp;<b>注意: 不能与已定义命名重复</b>
@@ -137,7 +137,7 @@ func NewAddCustomLiveStreamWatermarkTemplateRequest(
  (Optional)
  * param url: 水印地址<br>-&ensp;以&ensp;http:// 开头,可公开访问地址<br> (Required)
  */
-func NewAddCustomLiveStreamWatermarkTemplateRequestWithAllParams(
+func NewUpdateCustomLiveStreamWatermarkTemplateRequestWithAllParams(
     offsetX int,
     offsetY int,
     width int,
@@ -145,12 +145,12 @@ func NewAddCustomLiveStreamWatermarkTemplateRequestWithAllParams(
     template string,
     uploadId *string,
     url string,
-) *AddCustomLiveStreamWatermarkTemplateRequest {
+) *UpdateCustomLiveStreamWatermarkTemplateRequest {
 
-    return &AddCustomLiveStreamWatermarkTemplateRequest{
+    return &UpdateCustomLiveStreamWatermarkTemplateRequest{
         JDCloudRequest: core.JDCloudRequest{
             URL:     "/watermarkCustoms:template",
-            Method:  "POST",
+            Method:  "PUT",
             Header:  nil,
             Version: "v1",
         },
@@ -165,12 +165,12 @@ func NewAddCustomLiveStreamWatermarkTemplateRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewAddCustomLiveStreamWatermarkTemplateRequestWithoutParam() *AddCustomLiveStreamWatermarkTemplateRequest {
+func NewUpdateCustomLiveStreamWatermarkTemplateRequestWithoutParam() *UpdateCustomLiveStreamWatermarkTemplateRequest {
 
-    return &AddCustomLiveStreamWatermarkTemplateRequest{
+    return &UpdateCustomLiveStreamWatermarkTemplateRequest{
             JDCloudRequest: core.JDCloudRequest{
             URL:     "/watermarkCustoms:template",
-            Method:  "POST",
+            Method:  "PUT",
             Header:  nil,
             Version: "v1",
         },
@@ -180,14 +180,14 @@ func NewAddCustomLiveStreamWatermarkTemplateRequestWithoutParam() *AddCustomLive
 /* param offsetX: x轴偏移量
 - 单位: 像素
 (Required) */
-func (r *AddCustomLiveStreamWatermarkTemplateRequest) SetOffsetX(offsetX int) {
+func (r *UpdateCustomLiveStreamWatermarkTemplateRequest) SetOffsetX(offsetX int) {
     r.OffsetX = offsetX
 }
 
 /* param offsetY: y轴偏移量:
 - 单位: 像素
 (Required) */
-func (r *AddCustomLiveStreamWatermarkTemplateRequest) SetOffsetY(offsetY int) {
+func (r *UpdateCustomLiveStreamWatermarkTemplateRequest) SetOffsetY(offsetY int) {
     r.OffsetY = offsetY
 }
 
@@ -195,7 +195,7 @@ func (r *AddCustomLiveStreamWatermarkTemplateRequest) SetOffsetY(offsetY int) {
 - 取值: [0,1920]
 - 单位: 像素
 (Required) */
-func (r *AddCustomLiveStreamWatermarkTemplateRequest) SetWidth(width int) {
+func (r *UpdateCustomLiveStreamWatermarkTemplateRequest) SetWidth(width int) {
     r.Width = width
 }
 
@@ -203,42 +203,42 @@ func (r *AddCustomLiveStreamWatermarkTemplateRequest) SetWidth(width int) {
 - 取值: [0,1920]
 - 单位: 像素
 (Required) */
-func (r *AddCustomLiveStreamWatermarkTemplateRequest) SetHeight(height int) {
+func (r *UpdateCustomLiveStreamWatermarkTemplateRequest) SetHeight(height int) {
     r.Height = height
 }
 
 /* param template: 自定义水印模板名称
--&ensp;取值要求: 数字、大小写字母、短横线("-")、下划线("_"),
+-&ensp;取值要求: 数字、大小写字母或短横线("-")、下划线("_"),
 &ensp;&ensp;首尾不能有特殊字符("-"),
 &ensp;&ensp;不超过50字符,utf-8格式
 -&ensp;<b>注意: 不能与已定义命名重复</b>
 (Required) */
-func (r *AddCustomLiveStreamWatermarkTemplateRequest) SetTemplate(template string) {
+func (r *UpdateCustomLiveStreamWatermarkTemplateRequest) SetTemplate(template string) {
     r.Template = template
 }
 
 /* param uploadId: 创建上传任务时返回的uploadId参数，当通过接口上传水印图片时，uploadId必填
 (Optional) */
-func (r *AddCustomLiveStreamWatermarkTemplateRequest) SetUploadId(uploadId string) {
+func (r *UpdateCustomLiveStreamWatermarkTemplateRequest) SetUploadId(uploadId string) {
     r.UploadId = &uploadId
 }
 
 /* param url: 水印地址<br>-&ensp;以&ensp;http:// 开头,可公开访问地址<br>(Required) */
-func (r *AddCustomLiveStreamWatermarkTemplateRequest) SetUrl(url string) {
+func (r *UpdateCustomLiveStreamWatermarkTemplateRequest) SetUrl(url string) {
     r.Url = url
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r AddCustomLiveStreamWatermarkTemplateRequest) GetRegionId() string {
+func (r UpdateCustomLiveStreamWatermarkTemplateRequest) GetRegionId() string {
     return ""
 }
 
-type AddCustomLiveStreamWatermarkTemplateResponse struct {
+type UpdateCustomLiveStreamWatermarkTemplateResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result AddCustomLiveStreamWatermarkTemplateResult `json:"result"`
+    Result UpdateCustomLiveStreamWatermarkTemplateResult `json:"result"`
 }
 
-type AddCustomLiveStreamWatermarkTemplateResult struct {
+type UpdateCustomLiveStreamWatermarkTemplateResult struct {
 }

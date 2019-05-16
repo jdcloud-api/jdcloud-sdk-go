@@ -45,11 +45,11 @@ type RecordFile struct {
  (Optional) */
     EndTime string `json:"endTime"`
 
-    /* 视频时长
+    /* 视频时长，单位：毫秒
  (Optional) */
     Duration int `json:"duration"`
 
-    /* 文件大小
+    /* 文件大小，单位：B
  (Optional) */
     Size int `json:"size"`
 
@@ -63,7 +63,7 @@ type RecordFile struct {
 
     /* 文件地址
  (Optional) */
-    ImgUrl string `json:"imgUrl"`
+    FileUrl string `json:"fileUrl"`
 
     /* 创建时间
  (Optional) */
