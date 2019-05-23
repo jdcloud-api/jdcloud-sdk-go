@@ -19,9 +19,11 @@ package models
 
 type CleanThresholdSpec struct {
 
-    /* 触发清洗的流量速率，单位bps，范围是10000000到300000000 (Optional) */
-    CleanThresholdBps *int64 `json:"cleanThresholdBps"`
+    /* 触发清洗的流量速率, 单位 bps. 取值范围由 <a href="http://docs.jdcloud.com/anti-ddos-basic/api/describeipcleanthresholdrange">describeIpCleanThresholdRange</a> 接口查询可知
+  */
+    CleanThresholdBps int64 `json:"cleanThresholdBps"`
 
-    /* 触发清洗的包速率，单位pps，范围是2000到70000 (Optional) */
-    CleanThresholdPps *int64 `json:"cleanThresholdPps"`
+    /* 触发清洗的报文流量速率, 单位 bps. 取值范围由 <a href="http://docs.jdcloud.com/anti-ddos-basic/api/describeipcleanthresholdrange">describeIpCleanThresholdRange</a> 接口查询可知
+  */
+    CleanThresholdPps int64 `json:"cleanThresholdPps"`
 }

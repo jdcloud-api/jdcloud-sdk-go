@@ -19,21 +19,21 @@ package models
 
 type IpResourceInfo struct {
 
-    /* 公网IP (Optional) */
+    /* 公网 IP 地址 (Optional) */
     Ip string `json:"ip"`
 
-    /* 0->安全 1->清洗 2->黑洞 (Optional) */
+    /* 安全状态, 0: 安全, 1: 清洗, 2: 黑洞 (Optional) */
     SafeStatus int `json:"safeStatus"`
 
-    /* 地域，cn-north-1、cn-south-1、cn-east-1、cn-east-2 (Optional) */
+    /* 公网 IP 所属地域编码 (Optional) */
     Region string `json:"region"`
 
-    /* 黑洞阈值，单位bps (Optional) */
+    /* 黑洞阈值，单位 bps (Optional) */
     BlackHoleThreshold int64 `json:"blackHoleThreshold"`
 
-    /* 触发清洗的流量速率，单位bps (Optional) */
+    /* 触发清洗的流量速率，单位 bps (Optional) */
     CleanThresholdBps int64 `json:"cleanThresholdBps"`
 
-    /* 触发清洗的包速率，单位pps (Optional) */
+    /* 触发清洗的包速率，单位 pps (Optional) */
     CleanThresholdPps int64 `json:"cleanThresholdPps"`
 }

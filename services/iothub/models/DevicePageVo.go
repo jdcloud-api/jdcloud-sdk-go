@@ -19,45 +19,30 @@ package models
 
 type DevicePageVo struct {
 
-    /*  (Optional) */
+    /* Edge唯一标识 (Optional) */
     Uuid string `json:"uuid"`
 
-    /*  (Optional) */
+    /* IoT Hub实例唯一标识 (Optional) */
     InstanceId string `json:"instanceId"`
 
-    /*  (Optional) */
-    DeviceId string `json:"deviceId"`
+    /* 资源唯一标识 (Optional) */
+    ResourceId string `json:"resourceId"`
 
-    /*  (Optional) */
-    DisplayName string `json:"displayName"`
+    /* Edge编号 (Optional) */
+    EdgeId string `json:"edgeId"`
 
-    /*  (Optional) */
-    DeviceType string `json:"deviceType"`
+    /* Edge显示名称 (Optional) */
+    EdgeName string `json:"edgeName"`
 
-    /*  (Optional) */
-    DeviceState string `json:"deviceState"`
+    /* Edge状态 (Optional) */
+    EdgeState string `json:"edgeState"`
 
-    /*  (Optional) */
+    /* 物模型编号 (Optional) */
     OmId string `json:"omId"`
 
-    /*  (Optional) */
-    DeviceFilePath string `json:"deviceFilePath"`
-
-    /*  (Optional) */
+    /* 物模型名称 (Optional) */
     OmName string `json:"omName"`
 
-    /*  (Optional) */
-    CreateTime string `json:"createTime"`
-
-    /*  (Optional) */
-    UserPin string `json:"userPin"`
-
-    /*  (Optional) */
-    ParentUuid string `json:"parentUuid"`
-
-    /*  (Optional) */
-    ParentName string `json:"parentName"`
-
-    /*  (Optional) */
-    LastConnectTime string `json:"lastConnectTime"`
+    /* 最后在线时间 (Optional) */
+    LastOnlineTime string `json:"lastOnlineTime"`
 }

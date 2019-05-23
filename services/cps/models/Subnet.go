@@ -25,12 +25,33 @@ type Subnet struct {
     /* 可用区, 如cn-east-1a (Optional) */
     Az string `json:"az"`
 
-    /* 子网CIDR (Optional) */
-    Cidr string `json:"cidr"`
-
     /* 子网ID (Optional) */
     SubnetId string `json:"subnetId"`
 
+    /* 子网名称 (Optional) */
+    Name string `json:"name"`
+
+    /* 子网CIDR (Optional) */
+    Cidr string `json:"cidr"`
+
+    /* 私有网络Id (Optional) */
+    VpcId string `json:"vpcId"`
+
+    /* 私有网络名称 (Optional) */
+    VpcName string `json:"vpcName"`
+
+    /* 可用ip数量 (Optional) */
+    AvailableIpCount int `json:"availableIpCount"`
+
+    /* 总ip数量 (Optional) */
+    TotalIpCount int `json:"totalIpCount"`
+
     /* 网络类型 (Optional) */
     NetworkType string `json:"networkType"`
+
+    /* 描述 (Optional) */
+    Description string `json:"description"`
+
+    /* 创建时间 (Optional) */
+    CreateTime string `json:"createTime"`
 }

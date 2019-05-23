@@ -42,7 +42,4 @@ type ReinstallInstanceSpec struct {
 
     /* 主机名 (Optional) */
     Hostname *string `json:"hostname"`
-
-    /*  (Optional) */
-    Softwares []Software `json:"softwares"`
 }

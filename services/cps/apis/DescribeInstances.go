@@ -32,7 +32,7 @@ type DescribeInstancesRequest struct {
     /* 页码；默认为1 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* 分页大小；默认为10；取值范围[10, 100] (Optional) */
+    /* 分页大小；默认为20；取值范围[20, 100] (Optional) */
     PageSize *int `json:"pageSize"`
 
     /* 可用区，精确匹配 (Optional) */
@@ -41,16 +41,21 @@ type DescribeInstancesRequest struct {
     /* 云物理服务器名称，支持模糊匹配 (Optional) */
     Name *string `json:"name"`
 
-    /* 网络类型，精确匹配，目前只支持basic (Optional) */
+    /* 网络类型，精确匹配，支持basic，vpc (Optional) */
     NetworkType *string `json:"networkType"`
 
     /* 实例类型，精确匹配，调用接口（describeDeviceTypes）获取实例类型 (Optional) */
     DeviceType *string `json:"deviceType"`
 
-    /* 云物理服务器状态，参考云物理服务器状态 (Optional) */
-    Status *string `json:"status"`
+    /* 子网ID (Optional) */
+    SubnetId *string `json:"subnetId"`
 
-    /* instanceId - 云物理服务器ID，精确匹配，支持多个
+    /* 是否启用外网, yes/no (Optional) */
+    EnableInternet *string `json:"enableInternet"`
+
+    /* instanceId - 云物理服务器ID，精确匹配，支持多个<br/>
+privateIp - 云物理服务器内网IP，精确匹配，支持多个<br/>
+status - 云物理服务器状态，参考云物理服务器状态，精确匹配，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
@@ -78,13 +83,16 @@ func NewDescribeInstancesRequest(
 /*
  * param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域 (Required)
  * param pageNumber: 页码；默认为1 (Optional)
- * param pageSize: 分页大小；默认为10；取值范围[10, 100] (Optional)
+ * param pageSize: 分页大小；默认为20；取值范围[20, 100] (Optional)
  * param az: 可用区，精确匹配 (Optional)
  * param name: 云物理服务器名称，支持模糊匹配 (Optional)
- * param networkType: 网络类型，精确匹配，目前只支持basic (Optional)
+ * param networkType: 网络类型，精确匹配，支持basic，vpc (Optional)
  * param deviceType: 实例类型，精确匹配，调用接口（describeDeviceTypes）获取实例类型 (Optional)
- * param status: 云物理服务器状态，参考云物理服务器状态 (Optional)
- * param filters: instanceId - 云物理服务器ID，精确匹配，支持多个
+ * param subnetId: 子网ID (Optional)
+ * param enableInternet: 是否启用外网, yes/no (Optional)
+ * param filters: instanceId - 云物理服务器ID，精确匹配，支持多个<br/>
+privateIp - 云物理服务器内网IP，精确匹配，支持多个<br/>
+status - 云物理服务器状态，参考云物理服务器状态，精确匹配，支持多个
  (Optional)
  */
 func NewDescribeInstancesRequestWithAllParams(
@@ -95,7 +103,8 @@ func NewDescribeInstancesRequestWithAllParams(
     name *string,
     networkType *string,
     deviceType *string,
-    status *string,
+    subnetId *string,
+    enableInternet *string,
     filters []common.Filter,
 ) *DescribeInstancesRequest {
 
@@ -113,7 +122,8 @@ func NewDescribeInstancesRequestWithAllParams(
         Name: name,
         NetworkType: networkType,
         DeviceType: deviceType,
-        Status: status,
+        SubnetId: subnetId,
+        EnableInternet: enableInternet,
         Filters: filters,
     }
 }
@@ -141,7 +151,7 @@ func (r *DescribeInstancesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
-/* param pageSize: 分页大小；默认为10；取值范围[10, 100](Optional) */
+/* param pageSize: 分页大小；默认为20；取值范围[20, 100](Optional) */
 func (r *DescribeInstancesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
@@ -156,7 +166,7 @@ func (r *DescribeInstancesRequest) SetName(name string) {
     r.Name = &name
 }
 
-/* param networkType: 网络类型，精确匹配，目前只支持basic(Optional) */
+/* param networkType: 网络类型，精确匹配，支持basic，vpc(Optional) */
 func (r *DescribeInstancesRequest) SetNetworkType(networkType string) {
     r.NetworkType = &networkType
 }
@@ -166,12 +176,19 @@ func (r *DescribeInstancesRequest) SetDeviceType(deviceType string) {
     r.DeviceType = &deviceType
 }
 
-/* param status: 云物理服务器状态，参考云物理服务器状态(Optional) */
-func (r *DescribeInstancesRequest) SetStatus(status string) {
-    r.Status = &status
+/* param subnetId: 子网ID(Optional) */
+func (r *DescribeInstancesRequest) SetSubnetId(subnetId string) {
+    r.SubnetId = &subnetId
 }
 
-/* param filters: instanceId - 云物理服务器ID，精确匹配，支持多个
+/* param enableInternet: 是否启用外网, yes/no(Optional) */
+func (r *DescribeInstancesRequest) SetEnableInternet(enableInternet string) {
+    r.EnableInternet = &enableInternet
+}
+
+/* param filters: instanceId - 云物理服务器ID，精确匹配，支持多个<br/>
+privateIp - 云物理服务器内网IP，精确匹配，支持多个<br/>
+status - 云物理服务器状态，参考云物理服务器状态，精确匹配，支持多个
 (Optional) */
 func (r *DescribeInstancesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters

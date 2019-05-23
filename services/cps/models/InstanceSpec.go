@@ -29,7 +29,7 @@ type InstanceSpec struct {
     /* 主机名 (Optional) */
     Hostname *string `json:"hostname"`
 
-    /* 镜像类型, 取值范围：standard、standard_app  */
+    /* 镜像类型, 取值范围：standard  */
     ImageType string `json:"imageType"`
 
     /* 操作系统类型ID  */
@@ -50,11 +50,14 @@ type InstanceSpec struct {
     /* 是否启用IPv6，取值范围：yes、no (Optional) */
     EnableIpv6 *string `json:"enableIpv6"`
 
-    /* 网络类型，目前只支持basic  */
+    /* 网络类型，取值范围：basic、vpc  */
     NetworkType string `json:"networkType"`
 
     /* 网络CIDR (Optional) */
     Cidr *string `json:"cidr"`
+
+    /* 内网IP (Optional) */
+    PrivateIp *string `json:"privateIp"`
 
     /* 外网链路类型, 目前只支持bgp (Optional) */
     LineType *string `json:"lineType"`
@@ -76,7 +79,4 @@ type InstanceSpec struct {
 
     /* 计费配置  */
     Charge *charge.ChargeSpec `json:"charge"`
-
-    /*  (Optional) */
-    Softwares []Software `json:"softwares"`
 }

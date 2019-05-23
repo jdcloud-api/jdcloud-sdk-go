@@ -19,12 +19,18 @@ package models
 
 type RuleBaseInfo struct {
 
-    /*  (Optional) */
+    /* 规则Id (Optional) */
     Id string `json:"id"`
 
-    /*  (Optional) */
+    /* 规则名称 (Optional) */
     Name string `json:"name"`
 
-    /*  (Optional) */
+    /* 规则说明 (Optional) */
     Desc string `json:"desc"`
+
+    /* 状态，停止:disable,启动:enable (Optional) */
+    Status string `json:"status"`
+
+    /* 创建时间，精确到毫秒 (Optional) */
+    CreatedTime string `json:"createdTime"`
 }

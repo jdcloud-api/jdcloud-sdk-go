@@ -25,15 +25,17 @@ type DescribeIpResourcesRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域编码. 基础防护已支持华北-北京, 华东-宿迁, 华东-上海, 华南-广州
+  */
     RegionId string `json:"regionId"`
 
-    /* IP模糊匹配 (Optional) */
+    /* IP 模糊匹配 (Optional) */
     Ip *string `json:"ip"`
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 地域编码. 基础防护已支持华北-北京, 华东-宿迁, 华东-上海, 华南-广州
+ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -53,8 +55,9 @@ func NewDescribeIpResourcesRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
- * param ip: IP模糊匹配 (Optional)
+ * param regionId: 地域编码. 基础防护已支持华北-北京, 华东-宿迁, 华东-上海, 华南-广州
+ (Required)
+ * param ip: IP 模糊匹配 (Optional)
  */
 func NewDescribeIpResourcesRequestWithAllParams(
     regionId string,
@@ -86,12 +89,13 @@ func NewDescribeIpResourcesRequestWithoutParam() *DescribeIpResourcesRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 地域编码. 基础防护已支持华北-北京, 华东-宿迁, 华东-上海, 华南-广州
+(Required) */
 func (r *DescribeIpResourcesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param ip: IP模糊匹配(Optional) */
+/* param ip: IP 模糊匹配(Optional) */
 func (r *DescribeIpResourcesRequest) SetIp(ip string) {
     r.Ip = &ip
 }
