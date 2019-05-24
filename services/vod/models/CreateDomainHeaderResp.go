@@ -17,20 +17,23 @@
 package models
 
 
-type Video struct {
+type CreateDomainHeaderResp struct {
 
-    /* 视频编码 (Optional) */
-    Codec *string `json:"codec"`
+    /* 头参数ID (Optional) */
+    Id int64 `json:"id"`
 
-    /* 码率 (Optional) */
-    Bitrate *int `json:"bitrate"`
+    /* 头参数名 (Optional) */
+    Name string `json:"name"`
 
-    /* 帧率 (Optional) */
-    Fps *int `json:"fps"`
+    /* 头参数值 (Optional) */
+    Value string `json:"value"`
 
-    /* 宽度 (Optional) */
-    Width *int `json:"width"`
+    /* 头参数种类 (Optional) */
+    Kind string `json:"kind"`
 
-    /* 高度 (Optional) */
-    Height *int `json:"height"`
+    /*  (Optional) */
+    CreateTime string `json:"createTime"`
+
+    /*  (Optional) */
+    UpdateTime string `json:"updateTime"`
 }

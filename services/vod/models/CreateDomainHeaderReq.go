@@ -17,20 +17,14 @@
 package models
 
 
-type Video struct {
+type CreateDomainHeaderReq struct {
 
-    /* 视频编码 (Optional) */
-    Codec *string `json:"codec"`
+    /* 头参数名 (Optional) */
+    Name string `json:"name"`
 
-    /* 码率 (Optional) */
-    Bitrate *int `json:"bitrate"`
+    /* 头参数值 (Optional) */
+    Value string `json:"value"`
 
-    /* 帧率 (Optional) */
-    Fps *int `json:"fps"`
-
-    /* 宽度 (Optional) */
-    Width *int `json:"width"`
-
-    /* 高度 (Optional) */
-    Height *int `json:"height"`
+    /* 头参数种类 (Optional) */
+    Kind string `json:"kind"`
 }

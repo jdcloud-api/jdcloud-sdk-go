@@ -17,20 +17,20 @@
 package models
 
 
-type Video struct {
+type CreateTranscodeTemplateReq struct {
 
-    /* 视频编码 (Optional) */
-    Codec *string `json:"codec"`
+    /* 模板名称 (Optional) */
+    Name string `json:"name"`
 
-    /* 码率 (Optional) */
-    Bitrate *int `json:"bitrate"`
+    /* 视频参数 (Optional) */
+    Video Video `json:"video"`
 
-    /* 帧率 (Optional) */
-    Fps *int `json:"fps"`
+    /* 音频参数 (Optional) */
+    Audio Audio `json:"audio"`
 
-    /* 宽度 (Optional) */
-    Width *int `json:"width"`
+    /* 封装配置 (Optional) */
+    Encapsulation Encapsulation `json:"encapsulation"`
 
-    /* 高度 (Optional) */
-    Height *int `json:"height"`
+    /* 清晰度规格 (Optional) */
+    Definition string `json:"definition"`
 }

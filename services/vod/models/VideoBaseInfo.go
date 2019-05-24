@@ -17,20 +17,29 @@
 package models
 
 
-type Video struct {
+type VideoBaseInfo struct {
 
-    /* 视频编码 (Optional) */
-    Codec *string `json:"codec"`
+    /* 视频ID (Optional) */
+    VideoId string `json:"videoId"`
 
-    /* 码率 (Optional) */
-    Bitrate *int `json:"bitrate"`
+    /* 视频名称 (Optional) */
+    VideoName string `json:"videoName"`
 
-    /* 帧率 (Optional) */
-    Fps *int `json:"fps"`
+    /* 视频描述 (Optional) */
+    Description string `json:"description"`
 
-    /* 宽度 (Optional) */
-    Width *int `json:"width"`
+    /*  (Optional) */
+    CategoryId int64 `json:"categoryId"`
 
-    /* 高度 (Optional) */
-    Height *int `json:"height"`
+    /* 分类名称 (Optional) */
+    CategoryName string `json:"categoryName"`
+
+    /* 标签 (Optional) */
+    Tags string `json:"tags"`
+
+    /* 视频时长 (Optional) */
+    Duration int64 `json:"duration"`
+
+    /* 封面地址 (Optional) */
+    CoverImgUrl string `json:"coverImgUrl"`
 }

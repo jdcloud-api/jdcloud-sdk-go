@@ -17,20 +17,32 @@
 package models
 
 
-type Video struct {
+type CreateTranscodeTemplateResp struct {
 
-    /* 视频编码 (Optional) */
-    Codec *string `json:"codec"`
+    /* 模板ID (Optional) */
+    Id int64 `json:"id"`
 
-    /* 码率 (Optional) */
-    Bitrate *int `json:"bitrate"`
+    /* 模板名称 (Optional) */
+    Name string `json:"name"`
 
-    /* 帧率 (Optional) */
-    Fps *int `json:"fps"`
+    /* 视频参数 (Optional) */
+    Video Video `json:"video"`
 
-    /* 宽度 (Optional) */
-    Width *int `json:"width"`
+    /* 音频参数 (Optional) */
+    Audio Audio `json:"audio"`
 
-    /* 高度 (Optional) */
-    Height *int `json:"height"`
+    /* 封装配置 (Optional) */
+    Encapsulation Encapsulation `json:"encapsulation"`
+
+    /* 清晰度规格 (Optional) */
+    Definition string `json:"definition"`
+
+    /* 模板来源 (Optional) */
+    Source string `json:"source"`
+
+    /*  (Optional) */
+    CreateTime string `json:"createTime"`
+
+    /*  (Optional) */
+    UpdateTime string `json:"updateTime"`
 }

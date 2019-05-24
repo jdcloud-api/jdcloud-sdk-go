@@ -17,20 +17,17 @@
 package models
 
 
-type Video struct {
+type PageProperties struct {
 
-    /* 视频编码 (Optional) */
-    Codec *string `json:"codec"`
+    /* 当前页码 (Optional) */
+    PageNumber int `json:"pageNumber"`
 
-    /* 码率 (Optional) */
-    Bitrate *int `json:"bitrate"`
+    /* 每页数量 (Optional) */
+    PageSize int `json:"pageSize"`
 
-    /* 帧率 (Optional) */
-    Fps *int `json:"fps"`
+    /* 查询总数 (Optional) */
+    Total int `json:"total"`
 
-    /* 宽度 (Optional) */
-    Width *int `json:"width"`
-
-    /* 高度 (Optional) */
-    Height *int `json:"height"`
+    /* 总页数 (Optional) */
+    Pages int `json:"pages"`
 }

@@ -17,20 +17,14 @@
 package models
 
 
-type Video struct {
+type EstimateData struct {
 
-    /* 视频编码 (Optional) */
-    Codec *string `json:"codec"`
+    /* 时间戳 (Optional) */
+    Timestamp int64 `json:"timestamp"`
 
-    /* 码率 (Optional) */
-    Bitrate *int `json:"bitrate"`
+    /* 流量、带宽 (Optional) */
+    Total float64 `json:"total"`
 
-    /* 帧率 (Optional) */
-    Fps *int `json:"fps"`
-
-    /* 宽度 (Optional) */
-    Width *int `json:"width"`
-
-    /* 高度 (Optional) */
-    Height *int `json:"height"`
+    /* 域名 (Optional) */
+    Domain string `json:"domain"`
 }

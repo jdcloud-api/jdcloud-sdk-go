@@ -17,20 +17,11 @@
 package models
 
 
-type Video struct {
+type TranscodeData struct {
 
-    /* 视频编码 (Optional) */
-    Codec *string `json:"codec"`
+    /* 日期 (Optional) */
+    Date string `json:"date"`
 
-    /* 码率 (Optional) */
-    Bitrate *int `json:"bitrate"`
-
-    /* 帧率 (Optional) */
-    Fps *int `json:"fps"`
-
-    /* 宽度 (Optional) */
-    Width *int `json:"width"`
-
-    /* 高度 (Optional) */
-    Height *int `json:"height"`
+    /* 转码时长 (Optional) */
+    Duration float64 `json:"duration"`
 }

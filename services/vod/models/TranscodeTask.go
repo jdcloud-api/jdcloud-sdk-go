@@ -17,20 +17,17 @@
 package models
 
 
-type Video struct {
+type TranscodeTask struct {
 
-    /* 视频编码 (Optional) */
-    Codec *string `json:"codec"`
+    /* 任务ID (Optional) */
+    TaskId int64 `json:"taskId"`
 
-    /* 码率 (Optional) */
-    Bitrate *int `json:"bitrate"`
+    /* 视频ID (Optional) */
+    VideoId string `json:"videoId"`
 
-    /* 帧率 (Optional) */
-    Fps *int `json:"fps"`
+    /* 转码模板ID (Optional) */
+    TemplateId int64 `json:"templateId"`
 
-    /* 宽度 (Optional) */
-    Width *int `json:"width"`
-
-    /* 高度 (Optional) */
-    Height *int `json:"height"`
+    /* 水印ID列表 (Optional) */
+    WatermarkIds []int64 `json:"watermarkIds"`
 }

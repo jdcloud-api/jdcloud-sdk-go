@@ -17,20 +17,14 @@
 package models
 
 
-type Video struct {
+type VerifyDomainResp struct {
 
-    /* 视频编码 (Optional) */
-    Codec *string `json:"codec"`
+    /* 校验域名 (Optional) */
+    DomainName string `json:"domainName"`
 
-    /* 码率 (Optional) */
-    Bitrate *int `json:"bitrate"`
+    /* 校验是否通过 (Optional) */
+    Verified bool `json:"verified"`
 
-    /* 帧率 (Optional) */
-    Fps *int `json:"fps"`
-
-    /* 宽度 (Optional) */
-    Width *int `json:"width"`
-
-    /* 高度 (Optional) */
-    Height *int `json:"height"`
+    /* ICP信息 (Optional) */
+    IcpInfo string `json:"icpInfo"`
 }

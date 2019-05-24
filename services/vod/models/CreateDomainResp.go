@@ -17,20 +17,26 @@
 package models
 
 
-type Video struct {
+type CreateDomainResp struct {
 
-    /* 视频编码 (Optional) */
-    Codec *string `json:"codec"`
+    /* 域名ID (Optional) */
+    Id string `json:"id"`
 
-    /* 码率 (Optional) */
-    Bitrate *int `json:"bitrate"`
+    /* 域名名称 (Optional) */
+    Name string `json:"name"`
 
-    /* 帧率 (Optional) */
-    Fps *int `json:"fps"`
+    /* 域名CNAME (Optional) */
+    Cname string `json:"cname"`
 
-    /* 宽度 (Optional) */
-    Width *int `json:"width"`
+    /* 域名来源：系统生成 | 用户自建 (Optional) */
+    Source string `json:"source"`
 
-    /* 高度 (Optional) */
-    Height *int `json:"height"`
+    /* 是否默认域名 (Optional) */
+    AsDefault bool `json:"asDefault"`
+
+    /*  (Optional) */
+    CreateTime string `json:"createTime"`
+
+    /*  (Optional) */
+    UpdateTime string `json:"updateTime"`
 }
