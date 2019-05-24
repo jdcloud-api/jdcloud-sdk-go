@@ -24,20 +24,22 @@ type OmEnrollbyFileRequest struct {
 
     core.JDCloudRequest
 
-    /*   */
+    /* 物模型文件名称  */
     FileName string `json:"fileName"`
 
-    /*  (Optional) */
-    InstanceId *string `json:"instanceId"`
+    /* 待上传物模型的IoT Hub实例编号  */
+    InstanceId string `json:"instanceId"`
 }
 
 /*
- * param fileName:  (Required)
+ * param fileName: 物模型文件名称 (Required)
+ * param instanceId: 待上传物模型的IoT Hub实例编号 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewOmEnrollbyFileRequest(
     fileName string,
+    instanceId string,
 ) *OmEnrollbyFileRequest {
 
 	return &OmEnrollbyFileRequest{
@@ -48,16 +50,17 @@ func NewOmEnrollbyFileRequest(
 			Version: "v1",
 		},
         FileName: fileName,
+        InstanceId: instanceId,
 	}
 }
 
 /*
- * param fileName:  (Required)
- * param instanceId:  (Optional)
+ * param fileName: 物模型文件名称 (Required)
+ * param instanceId: 待上传物模型的IoT Hub实例编号 (Required)
  */
 func NewOmEnrollbyFileRequestWithAllParams(
     fileName string,
-    instanceId *string,
+    instanceId string,
 ) *OmEnrollbyFileRequest {
 
     return &OmEnrollbyFileRequest{
@@ -85,14 +88,14 @@ func NewOmEnrollbyFileRequestWithoutParam() *OmEnrollbyFileRequest {
     }
 }
 
-/* param fileName: (Required) */
+/* param fileName: 物模型文件名称(Required) */
 func (r *OmEnrollbyFileRequest) SetFileName(fileName string) {
     r.FileName = fileName
 }
 
-/* param instanceId: (Optional) */
+/* param instanceId: 待上传物模型的IoT Hub实例编号(Required) */
 func (r *OmEnrollbyFileRequest) SetInstanceId(instanceId string) {
-    r.InstanceId = &instanceId
+    r.InstanceId = instanceId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

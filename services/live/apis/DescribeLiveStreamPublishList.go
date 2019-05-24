@@ -48,7 +48,7 @@ type DescribeLiveStreamPublishListRequest struct {
 - UTC时间
   格式:yyyy-MM-dd'T'HH:mm:ss'Z'
   示例:2018-10-21T10:00:00Z
-- 最大支持最近90天内的流历史查询
+- 最大支持最近30天内的流历史查询
   */
     StartTime string `json:"startTime"`
 
@@ -56,7 +56,7 @@ type DescribeLiveStreamPublishListRequest struct {
 - UTC时间
   格式:yyyy-MM-dd'T'HH:mm:ss'Z'
   示例:2018-10-21T10:00:00Z
-- 最大支持最近90天内的流历史查询
+- 最大支持最近30天内的流历史查询
 - 结束时间为空默认为当前时间
  (Optional) */
     EndTime *string `json:"endTime"`
@@ -68,7 +68,7 @@ type DescribeLiveStreamPublishListRequest struct {
 - UTC时间
   格式:yyyy-MM-dd'T'HH:mm:ss'Z'
   示例:2018-10-21T10:00:00Z
-- 最大支持最近90天内的流历史查询
+- 最大支持最近30天内的流历史查询
  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -104,13 +104,13 @@ func NewDescribeLiveStreamPublishListRequest(
 - UTC时间
   格式:yyyy-MM-dd'T'HH:mm:ss'Z'
   示例:2018-10-21T10:00:00Z
-- 最大支持最近90天内的流历史查询
+- 最大支持最近30天内的流历史查询
  (Required)
  * param endTime: 推流结束时间<br>
 - UTC时间
   格式:yyyy-MM-dd'T'HH:mm:ss'Z'
   示例:2018-10-21T10:00:00Z
-- 最大支持最近90天内的流历史查询
+- 最大支持最近30天内的流历史查询
 - 结束时间为空默认为当前时间
  (Optional)
  */
@@ -187,7 +187,7 @@ func (r *DescribeLiveStreamPublishListRequest) SetStreamName(streamName string) 
 - UTC时间
   格式:yyyy-MM-dd'T'HH:mm:ss'Z'
   示例:2018-10-21T10:00:00Z
-- 最大支持最近90天内的流历史查询
+- 最大支持最近30天内的流历史查询
 (Required) */
 func (r *DescribeLiveStreamPublishListRequest) SetStartTime(startTime string) {
     r.StartTime = startTime
@@ -197,7 +197,7 @@ func (r *DescribeLiveStreamPublishListRequest) SetStartTime(startTime string) {
 - UTC时间
   格式:yyyy-MM-dd'T'HH:mm:ss'Z'
   示例:2018-10-21T10:00:00Z
-- 最大支持最近90天内的流历史查询
+- 最大支持最近30天内的流历史查询
 - 结束时间为空默认为当前时间
 (Optional) */
 func (r *DescribeLiveStreamPublishListRequest) SetEndTime(endTime string) {

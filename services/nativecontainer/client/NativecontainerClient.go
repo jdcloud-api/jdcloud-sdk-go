@@ -40,7 +40,7 @@ func NewNativecontainerClient(credential *core.Credential) *NativecontainerClien
             Credential:  *credential,
             Config:      *config,
             ServiceName: "nativecontainer",
-            Revision:    "1.0.0",
+            Revision:    "1.0.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -297,6 +297,48 @@ func (c *NativecontainerClient) AssociateElasticIp(request *nativecontainer.Asso
     return jdResp, err
 }
 
+/* 创建exec
+ */
+func (c *NativecontainerClient) ExecCreate(request *nativecontainer.ExecCreateRequest) (*nativecontainer.ExecCreateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &nativecontainer.ExecCreateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取exec退出码
+ */
+func (c *NativecontainerClient) ExecGetExitCode(request *nativecontainer.ExecGetExitCodeRequest) (*nativecontainer.ExecGetExitCodeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &nativecontainer.ExecGetExitCodeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 创建一台或多台指定配置容器。
 - 创建容器需要通过实名认证
 - 镜像
@@ -426,6 +468,27 @@ func (c *NativecontainerClient) ModifyContainerAttribute(request *nativecontaine
     }
 
     jdResp := &nativecontainer.ModifyContainerAttributeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 调整TTY大小
+ */
+func (c *NativecontainerClient) ResizeTTY(request *nativecontainer.ResizeTTYRequest) (*nativecontainer.ResizeTTYResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &nativecontainer.ResizeTTYResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

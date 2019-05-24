@@ -24,69 +24,75 @@ type ModuleEnrollRequest struct {
 
     core.JDCloudRequest
 
-    /* moduleName 唯一标识  */
-    ModuleName string `json:"moduleName"`
+    /* 边缘计算节点编号  */
+    EdgeId string `json:"edgeId"`
 
-    /*  (Optional) */
-    InstanceId *string `json:"instanceId"`
+    /* 待添加的设备编号 (Optional) */
+    DeviceId *string `json:"deviceId"`
 
-    /*  (Optional) */
-    ModelName *string `json:"modelName"`
+    /* 边缘计算模块名称 (Optional) */
+    ModuleId *string `json:"moduleId"`
 
-    /*  (Optional) */
-    ParentDeviceName *string `json:"parentDeviceName"`
+    /* 边缘计算模块类型编号 (Optional) */
+    ModuleTypeId *string `json:"moduleTypeId"`
 
-    /*  (Optional) */
-    Name *string `json:"name"`
+    /* 边缘计算模块配置编号 (Optional) */
+    ModuleConfId *string `json:"moduleConfId"`
+
+    /* 是否立即部署[0-立即部署,1-暂不部署] (Optional) */
+    IsDeploy *int `json:"isDeploy"`
 }
 
 /*
- * param moduleName: moduleName 唯一标识 (Required)
+ * param edgeId: 边缘计算节点编号 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewModuleEnrollRequest(
-    moduleName string,
+    edgeId string,
 ) *ModuleEnrollRequest {
 
 	return &ModuleEnrollRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/module/{moduleName}/enroll",
+			URL:     "/edge/{edgeId}/module:enroll",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
-        ModuleName: moduleName,
+        EdgeId: edgeId,
 	}
 }
 
 /*
- * param moduleName: moduleName 唯一标识 (Required)
- * param instanceId:  (Optional)
- * param modelName:  (Optional)
- * param parentDeviceName:  (Optional)
- * param name:  (Optional)
+ * param edgeId: 边缘计算节点编号 (Required)
+ * param deviceId: 待添加的设备编号 (Optional)
+ * param moduleId: 边缘计算模块名称 (Optional)
+ * param moduleTypeId: 边缘计算模块类型编号 (Optional)
+ * param moduleConfId: 边缘计算模块配置编号 (Optional)
+ * param isDeploy: 是否立即部署[0-立即部署,1-暂不部署] (Optional)
  */
 func NewModuleEnrollRequestWithAllParams(
-    moduleName string,
-    instanceId *string,
-    modelName *string,
-    parentDeviceName *string,
-    name *string,
+    edgeId string,
+    deviceId *string,
+    moduleId *string,
+    moduleTypeId *string,
+    moduleConfId *string,
+    isDeploy *int,
 ) *ModuleEnrollRequest {
 
     return &ModuleEnrollRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/module/{moduleName}/enroll",
+            URL:     "/edge/{edgeId}/module:enroll",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
-        ModuleName: moduleName,
-        InstanceId: instanceId,
-        ModelName: modelName,
-        ParentDeviceName: parentDeviceName,
-        Name: name,
+        EdgeId: edgeId,
+        DeviceId: deviceId,
+        ModuleId: moduleId,
+        ModuleTypeId: moduleTypeId,
+        ModuleConfId: moduleConfId,
+        IsDeploy: isDeploy,
     }
 }
 
@@ -95,7 +101,7 @@ func NewModuleEnrollRequestWithoutParam() *ModuleEnrollRequest {
 
     return &ModuleEnrollRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/module/{moduleName}/enroll",
+            URL:     "/edge/{edgeId}/module:enroll",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -103,29 +109,34 @@ func NewModuleEnrollRequestWithoutParam() *ModuleEnrollRequest {
     }
 }
 
-/* param moduleName: moduleName 唯一标识(Required) */
-func (r *ModuleEnrollRequest) SetModuleName(moduleName string) {
-    r.ModuleName = moduleName
+/* param edgeId: 边缘计算节点编号(Required) */
+func (r *ModuleEnrollRequest) SetEdgeId(edgeId string) {
+    r.EdgeId = edgeId
 }
 
-/* param instanceId: (Optional) */
-func (r *ModuleEnrollRequest) SetInstanceId(instanceId string) {
-    r.InstanceId = &instanceId
+/* param deviceId: 待添加的设备编号(Optional) */
+func (r *ModuleEnrollRequest) SetDeviceId(deviceId string) {
+    r.DeviceId = &deviceId
 }
 
-/* param modelName: (Optional) */
-func (r *ModuleEnrollRequest) SetModelName(modelName string) {
-    r.ModelName = &modelName
+/* param moduleId: 边缘计算模块名称(Optional) */
+func (r *ModuleEnrollRequest) SetModuleId(moduleId string) {
+    r.ModuleId = &moduleId
 }
 
-/* param parentDeviceName: (Optional) */
-func (r *ModuleEnrollRequest) SetParentDeviceName(parentDeviceName string) {
-    r.ParentDeviceName = &parentDeviceName
+/* param moduleTypeId: 边缘计算模块类型编号(Optional) */
+func (r *ModuleEnrollRequest) SetModuleTypeId(moduleTypeId string) {
+    r.ModuleTypeId = &moduleTypeId
 }
 
-/* param name: (Optional) */
-func (r *ModuleEnrollRequest) SetName(name string) {
-    r.Name = &name
+/* param moduleConfId: 边缘计算模块配置编号(Optional) */
+func (r *ModuleEnrollRequest) SetModuleConfId(moduleConfId string) {
+    r.ModuleConfId = &moduleConfId
+}
+
+/* param isDeploy: 是否立即部署[0-立即部署,1-暂不部署](Optional) */
+func (r *ModuleEnrollRequest) SetIsDeploy(isDeploy int) {
+    r.IsDeploy = &isDeploy
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
@@ -141,5 +152,4 @@ type ModuleEnrollResponse struct {
 }
 
 type ModuleEnrollResult struct {
-    Data string `json:"data"`
 }

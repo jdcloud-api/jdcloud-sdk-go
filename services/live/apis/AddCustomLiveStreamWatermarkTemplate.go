@@ -47,12 +47,16 @@ type AddCustomLiveStreamWatermarkTemplateRequest struct {
     Height int `json:"height"`
 
     /* 自定义水印模板名称
--&ensp;取值要求: 数字、大小写字母或短横线("-"),
+-&ensp;取值要求: 数字、大小写字母、短横线("-")、下划线("_"),
 &ensp;&ensp;首尾不能有特殊字符("-"),
 &ensp;&ensp;不超过50字符,utf-8格式
 -&ensp;<b>注意: 不能与已定义命名重复</b>
   */
     Template string `json:"template"`
+
+    /* 创建上传任务时返回的uploadId参数，当通过接口上传水印图片时，uploadId必填
+ (Optional) */
+    UploadId *string `json:"uploadId"`
 
     /* 水印地址<br>-&ensp;以&ensp;http:// 开头,可公开访问地址<br>  */
     Url string `json:"url"`
@@ -74,7 +78,7 @@ type AddCustomLiveStreamWatermarkTemplateRequest struct {
 - 单位: 像素
  (Required)
  * param template: 自定义水印模板名称
--&ensp;取值要求: 数字、大小写字母或短横线("-"),
+-&ensp;取值要求: 数字、大小写字母、短横线("-")、下划线("_"),
 &ensp;&ensp;首尾不能有特殊字符("-"),
 &ensp;&ensp;不超过50字符,utf-8格式
 -&ensp;<b>注意: 不能与已定义命名重复</b>
@@ -124,11 +128,13 @@ func NewAddCustomLiveStreamWatermarkTemplateRequest(
 - 单位: 像素
  (Required)
  * param template: 自定义水印模板名称
--&ensp;取值要求: 数字、大小写字母或短横线("-"),
+-&ensp;取值要求: 数字、大小写字母、短横线("-")、下划线("_"),
 &ensp;&ensp;首尾不能有特殊字符("-"),
 &ensp;&ensp;不超过50字符,utf-8格式
 -&ensp;<b>注意: 不能与已定义命名重复</b>
  (Required)
+ * param uploadId: 创建上传任务时返回的uploadId参数，当通过接口上传水印图片时，uploadId必填
+ (Optional)
  * param url: 水印地址<br>-&ensp;以&ensp;http:// 开头,可公开访问地址<br> (Required)
  */
 func NewAddCustomLiveStreamWatermarkTemplateRequestWithAllParams(
@@ -137,6 +143,7 @@ func NewAddCustomLiveStreamWatermarkTemplateRequestWithAllParams(
     width int,
     height int,
     template string,
+    uploadId *string,
     url string,
 ) *AddCustomLiveStreamWatermarkTemplateRequest {
 
@@ -152,6 +159,7 @@ func NewAddCustomLiveStreamWatermarkTemplateRequestWithAllParams(
         Width: width,
         Height: height,
         Template: template,
+        UploadId: uploadId,
         Url: url,
     }
 }
@@ -200,13 +208,19 @@ func (r *AddCustomLiveStreamWatermarkTemplateRequest) SetHeight(height int) {
 }
 
 /* param template: 自定义水印模板名称
--&ensp;取值要求: 数字、大小写字母或短横线("-"),
+-&ensp;取值要求: 数字、大小写字母、短横线("-")、下划线("_"),
 &ensp;&ensp;首尾不能有特殊字符("-"),
 &ensp;&ensp;不超过50字符,utf-8格式
 -&ensp;<b>注意: 不能与已定义命名重复</b>
 (Required) */
 func (r *AddCustomLiveStreamWatermarkTemplateRequest) SetTemplate(template string) {
     r.Template = template
+}
+
+/* param uploadId: 创建上传任务时返回的uploadId参数，当通过接口上传水印图片时，uploadId必填
+(Optional) */
+func (r *AddCustomLiveStreamWatermarkTemplateRequest) SetUploadId(uploadId string) {
+    r.UploadId = &uploadId
 }
 
 /* param url: 水印地址<br>-&ensp;以&ensp;http:// 开头,可公开访问地址<br>(Required) */

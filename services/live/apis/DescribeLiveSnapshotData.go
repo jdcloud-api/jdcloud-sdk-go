@@ -25,8 +25,8 @@ type DescribeLiveSnapshotDataRequest struct {
 
     core.JDCloudRequest
 
-    /* 推流域名  */
-    PublishDomain string `json:"publishDomain"`
+    /* 推流域名 (Optional) */
+    PublishDomain *string `json:"publishDomain"`
 
     /* 应用名称 (Optional) */
     AppName *string `json:"appName"`
@@ -52,7 +52,6 @@ type DescribeLiveSnapshotDataRequest struct {
 }
 
 /*
- * param publishDomain: 推流域名 (Required)
  * param startTime: 起始时间:
 - UTC时间
   格式: yyyy-MM-dd'T'HH:mm:ss'Z'
@@ -63,7 +62,6 @@ type DescribeLiveSnapshotDataRequest struct {
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeLiveSnapshotDataRequest(
-    publishDomain string,
     startTime string,
 ) *DescribeLiveSnapshotDataRequest {
 
@@ -74,13 +72,12 @@ func NewDescribeLiveSnapshotDataRequest(
 			Header:  nil,
 			Version: "v1",
 		},
-        PublishDomain: publishDomain,
         StartTime: startTime,
 	}
 }
 
 /*
- * param publishDomain: 推流域名 (Required)
+ * param publishDomain: 推流域名 (Optional)
  * param appName: 应用名称 (Optional)
  * param streamName: 流名称 (Optional)
  * param startTime: 起始时间:
@@ -97,7 +94,7 @@ func NewDescribeLiveSnapshotDataRequest(
  (Optional)
  */
 func NewDescribeLiveSnapshotDataRequestWithAllParams(
-    publishDomain string,
+    publishDomain *string,
     appName *string,
     streamName *string,
     startTime string,
@@ -132,9 +129,9 @@ func NewDescribeLiveSnapshotDataRequestWithoutParam() *DescribeLiveSnapshotDataR
     }
 }
 
-/* param publishDomain: 推流域名(Required) */
+/* param publishDomain: 推流域名(Optional) */
 func (r *DescribeLiveSnapshotDataRequest) SetPublishDomain(publishDomain string) {
-    r.PublishDomain = publishDomain
+    r.PublishDomain = &publishDomain
 }
 
 /* param appName: 应用名称(Optional) */
@@ -180,5 +177,5 @@ type DescribeLiveSnapshotDataResponse struct {
 }
 
 type DescribeLiveSnapshotDataResult struct {
-    SnapshotData []live.SnapshotData `json:"snapshotData"`
+    SnapshotData []live.SnapshotCountStatisticResult `json:"snapshotData"`
 }

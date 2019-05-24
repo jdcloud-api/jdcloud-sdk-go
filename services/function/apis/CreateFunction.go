@@ -28,28 +28,28 @@ type CreateFunctionRequest struct {
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 函数名称  */
-    Name string `json:"name"`
+    /* 函数名称 (Optional) */
+    Name *string `json:"name"`
 
     /* 函数描述信息 (Optional) */
     Description *string `json:"description"`
 
-    /* 函数入口，格式为入口文件.入口函数名  */
-    Entrance string `json:"entrance"`
+    /* 函数入口，格式为入口文件.入口函数名 (Optional) */
+    Entrance *string `json:"entrance"`
 
-    /* 函数运行最大内存  */
-    Memory int `json:"memory"`
+    /* 函数运行最大内存 (Optional) */
+    Memory *int `json:"memory"`
 
-    /* 函数运行环境  */
-    RunTime string `json:"runTime"`
+    /* 函数运行环境 (Optional) */
+    RunTime *string `json:"runTime"`
 
-    /* 函数运行超时时间  */
-    OverTime int `json:"overTime"`
+    /* 函数运行超时时间 (Optional) */
+    OverTime *int `json:"overTime"`
 
     /* 函数版本，默认为LATEST (Optional) */
     Version *string `json:"version"`
 
-    /* 函数代码包  */
+    /* 函数代码包 (Optional) */
     Code *function.Code `json:"code"`
 
     /* 函数运行时环境变量 (Optional) */
@@ -70,23 +70,11 @@ type CreateFunctionRequest struct {
 
 /*
  * param regionId: Region ID (Required)
- * param name: 函数名称 (Required)
- * param entrance: 函数入口，格式为入口文件.入口函数名 (Required)
- * param memory: 函数运行最大内存 (Required)
- * param runTime: 函数运行环境 (Required)
- * param overTime: 函数运行超时时间 (Required)
- * param code: 函数代码包 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateFunctionRequest(
     regionId string,
-    name string,
-    entrance string,
-    memory int,
-    runTime string,
-    overTime int,
-    code *function.Code,
 ) *CreateFunctionRequest {
 
 	return &CreateFunctionRequest{
@@ -97,25 +85,19 @@ func NewCreateFunctionRequest(
 			Version: "v1",
 		},
         RegionId: regionId,
-        Name: name,
-        Entrance: entrance,
-        Memory: memory,
-        RunTime: runTime,
-        OverTime: overTime,
-        Code: code,
 	}
 }
 
 /*
  * param regionId: Region ID (Required)
- * param name: 函数名称 (Required)
+ * param name: 函数名称 (Optional)
  * param description: 函数描述信息 (Optional)
- * param entrance: 函数入口，格式为入口文件.入口函数名 (Required)
- * param memory: 函数运行最大内存 (Required)
- * param runTime: 函数运行环境 (Required)
- * param overTime: 函数运行超时时间 (Required)
+ * param entrance: 函数入口，格式为入口文件.入口函数名 (Optional)
+ * param memory: 函数运行最大内存 (Optional)
+ * param runTime: 函数运行环境 (Optional)
+ * param overTime: 函数运行超时时间 (Optional)
  * param version: 函数版本，默认为LATEST (Optional)
- * param code: 函数代码包 (Required)
+ * param code: 函数代码包 (Optional)
  * param environment: 函数运行时环境变量 (Optional)
  * param logSetId: 函数指定的日志集Id (Optional)
  * param logTopicId: 函数指定的日志主题Id (Optional)
@@ -124,12 +106,12 @@ func NewCreateFunctionRequest(
  */
 func NewCreateFunctionRequestWithAllParams(
     regionId string,
-    name string,
+    name *string,
     description *string,
-    entrance string,
-    memory int,
-    runTime string,
-    overTime int,
+    entrance *string,
+    memory *int,
+    runTime *string,
+    overTime *int,
     version *string,
     code *function.Code,
     environment *function.Env,
@@ -181,9 +163,9 @@ func (r *CreateFunctionRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param name: 函数名称(Required) */
+/* param name: 函数名称(Optional) */
 func (r *CreateFunctionRequest) SetName(name string) {
-    r.Name = name
+    r.Name = &name
 }
 
 /* param description: 函数描述信息(Optional) */
@@ -191,24 +173,24 @@ func (r *CreateFunctionRequest) SetDescription(description string) {
     r.Description = &description
 }
 
-/* param entrance: 函数入口，格式为入口文件.入口函数名(Required) */
+/* param entrance: 函数入口，格式为入口文件.入口函数名(Optional) */
 func (r *CreateFunctionRequest) SetEntrance(entrance string) {
-    r.Entrance = entrance
+    r.Entrance = &entrance
 }
 
-/* param memory: 函数运行最大内存(Required) */
+/* param memory: 函数运行最大内存(Optional) */
 func (r *CreateFunctionRequest) SetMemory(memory int) {
-    r.Memory = memory
+    r.Memory = &memory
 }
 
-/* param runTime: 函数运行环境(Required) */
+/* param runTime: 函数运行环境(Optional) */
 func (r *CreateFunctionRequest) SetRunTime(runTime string) {
-    r.RunTime = runTime
+    r.RunTime = &runTime
 }
 
-/* param overTime: 函数运行超时时间(Required) */
+/* param overTime: 函数运行超时时间(Optional) */
 func (r *CreateFunctionRequest) SetOverTime(overTime int) {
-    r.OverTime = overTime
+    r.OverTime = &overTime
 }
 
 /* param version: 函数版本，默认为LATEST(Optional) */
@@ -216,7 +198,7 @@ func (r *CreateFunctionRequest) SetVersion(version string) {
     r.Version = &version
 }
 
-/* param code: 函数代码包(Required) */
+/* param code: 函数代码包(Optional) */
 func (r *CreateFunctionRequest) SetCode(code *function.Code) {
     r.Code = code
 }

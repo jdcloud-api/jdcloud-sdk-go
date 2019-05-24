@@ -40,7 +40,7 @@ func NewFunctionClient(credential *core.Credential) *FunctionClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "function",
-            Revision:    "1.0.2",
+            Revision:    "1.0.3",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -164,26 +164,6 @@ func (c *FunctionClient) GetFunction(request *function.GetFunctionRequest) (*fun
     }
 
     jdResp := &function.GetFunctionResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询触发器列表 */
-func (c *FunctionClient) ListTrigger(request *function.ListTriggerRequest) (*function.ListTriggerResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &function.ListTriggerResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

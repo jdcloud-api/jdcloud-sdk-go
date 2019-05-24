@@ -28,51 +28,51 @@ type DescribeSubnetRequest struct {
     /* 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域  */
     RegionId string `json:"regionId"`
 
-    /* 可用区, 如cn-east-1a；可调用接口（describeRegiones）获取云物理服务器在该地域支持的可用区  */
-    Az string `json:"az"`
+    /* 子网ID  */
+    SubnetId string `json:"subnetId"`
 }
 
 /*
  * param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域 (Required)
- * param az: 可用区, 如cn-east-1a；可调用接口（describeRegiones）获取云物理服务器在该地域支持的可用区 (Required)
+ * param subnetId: 子网ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeSubnetRequest(
     regionId string,
-    az string,
+    subnetId string,
 ) *DescribeSubnetRequest {
 
 	return &DescribeSubnetRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/subnet",
+			URL:     "/regions/{regionId}/subnets/{subnetId}",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        Az: az,
+        SubnetId: subnetId,
 	}
 }
 
 /*
  * param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域 (Required)
- * param az: 可用区, 如cn-east-1a；可调用接口（describeRegiones）获取云物理服务器在该地域支持的可用区 (Required)
+ * param subnetId: 子网ID (Required)
  */
 func NewDescribeSubnetRequestWithAllParams(
     regionId string,
-    az string,
+    subnetId string,
 ) *DescribeSubnetRequest {
 
     return &DescribeSubnetRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/subnet",
+            URL:     "/regions/{regionId}/subnets/{subnetId}",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        Az: az,
+        SubnetId: subnetId,
     }
 }
 
@@ -81,7 +81,7 @@ func NewDescribeSubnetRequestWithoutParam() *DescribeSubnetRequest {
 
     return &DescribeSubnetRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/subnet",
+            URL:     "/regions/{regionId}/subnets/{subnetId}",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -94,9 +94,9 @@ func (r *DescribeSubnetRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param az: 可用区, 如cn-east-1a；可调用接口（describeRegiones）获取云物理服务器在该地域支持的可用区(Required) */
-func (r *DescribeSubnetRequest) SetAz(az string) {
-    r.Az = az
+/* param subnetId: 子网ID(Required) */
+func (r *DescribeSubnetRequest) SetSubnetId(subnetId string) {
+    r.SubnetId = subnetId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

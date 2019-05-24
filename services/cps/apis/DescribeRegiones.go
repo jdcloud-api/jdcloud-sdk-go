@@ -24,6 +24,9 @@ import (
 type DescribeRegionesRequest struct {
 
     core.JDCloudRequest
+
+    /* 网络类型basic/vpc, 默认basic (Optional) */
+    NetworkType *string `json:"networkType"`
 }
 
 /*
@@ -44,8 +47,10 @@ func NewDescribeRegionesRequest(
 }
 
 /*
+ * param networkType: 网络类型basic/vpc, 默认basic (Optional)
  */
 func NewDescribeRegionesRequestWithAllParams(
+    networkType *string,
 ) *DescribeRegionesRequest {
 
     return &DescribeRegionesRequest{
@@ -55,6 +60,7 @@ func NewDescribeRegionesRequestWithAllParams(
             Header:  nil,
             Version: "v1",
         },
+        NetworkType: networkType,
     }
 }
 
@@ -69,6 +75,11 @@ func NewDescribeRegionesRequestWithoutParam() *DescribeRegionesRequest {
             Version: "v1",
         },
     }
+}
+
+/* param networkType: 网络类型basic/vpc, 默认basic(Optional) */
+func (r *DescribeRegionesRequest) SetNetworkType(networkType string) {
+    r.NetworkType = &networkType
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

@@ -50,7 +50,7 @@ type Instance struct {
     /* 带宽, 单位Mbps (Optional) */
     Bandwidth int `json:"bandwidth"`
 
-    /* 镜像类型, 如 standard/standard_app (Optional) */
+    /* 镜像类型, 如 standard (Optional) */
     ImageType string `json:"imageType"`
 
     /* 操作系统类型ID (Optional) */
@@ -77,17 +77,29 @@ type Instance struct {
     /* 数据盘RAID类型, 如 NORAID, RAID0, RAID1 (Optional) */
     DataRaidType string `json:"dataRaidType"`
 
-    /* 网络类型, 如 basic (Optional) */
+    /* 网络类型, 如 basic, vpc (Optional) */
     NetworkType string `json:"networkType"`
 
-    /* 外网链路类型, 如 bgp (Optional) */
-    LineType string `json:"lineType"`
+    /* 私有网络ID (Optional) */
+    VpcId string `json:"vpcId"`
+
+    /* 私有网络名称 (Optional) */
+    VpcName string `json:"vpcName"`
 
     /* 子网编号 (Optional) */
     SubnetId string `json:"subnetId"`
 
+    /* 子网名称 (Optional) */
+    SubnetName string `json:"subnetName"`
+
     /* 内网IP (Optional) */
     PrivateIp string `json:"privateIp"`
+
+    /* 外网链路类型, 如 bgp (Optional) */
+    LineType string `json:"lineType"`
+
+    /* 弹性公网IPID (Optional) */
+    ElasticIpId string `json:"elasticIpId"`
 
     /* 公网IP (Optional) */
     PublicIp string `json:"publicIp"`

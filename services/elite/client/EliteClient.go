@@ -40,7 +40,7 @@ func NewEliteClient(credential *core.Credential) *EliteClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "elite",
-            Revision:    "1.0.4",
+            Revision:    "1.0.5",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,6 +51,26 @@ func (c *EliteClient) SetConfig(config *core.Config) {
 
 func (c *EliteClient) SetLogger(logger core.Logger) {
     c.Logger = logger
+}
+
+/* 查询价格 */
+func (c *EliteClient) JdxQueryPrice(request *elite.JdxQueryPriceRequest) (*elite.JdxQueryPriceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &elite.JdxQueryPriceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
 }
 
 /* 分页查询交付单信息 */
@@ -84,6 +104,26 @@ func (c *EliteClient) GetStoreService(request *elite.GetStoreServiceRequest) (*e
     }
 
     jdResp := &elite.GetStoreServiceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 上报订单 */
+func (c *EliteClient) JdxReportOrder(request *elite.JdxReportOrderRequest) (*elite.JdxReportOrderResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &elite.JdxReportOrderResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

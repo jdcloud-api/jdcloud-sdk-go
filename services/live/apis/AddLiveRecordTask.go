@@ -41,11 +41,11 @@ type AddLiveRecordTaskRequest struct {
   */
     RecordTimes []live.RecordTime `json:"recordTimes"`
 
-    /* 存储桶  */
-    SaveBucket string `json:"saveBucket"`
+    /* 存储桶 (Optional) */
+    SaveBucket *string `json:"saveBucket"`
 
-    /* 存储地址  */
-    SaveEndpoint string `json:"saveEndpoint"`
+    /* 存储地址 (Optional) */
+    SaveEndpoint *string `json:"saveEndpoint"`
 
     /* 录制文件类型:
 - 取值: ts,flv,mp4 (多种类型之前用;隔开)
@@ -72,8 +72,6 @@ type AddLiveRecordTaskRequest struct {
 - 多段时间跨度最小不能小于10s
 - 多段时间跨度最大不能超过8小时
  (Required)
- * param saveBucket: 存储桶 (Required)
- * param saveEndpoint: 存储地址 (Required)
  * param recordFileType: 录制文件类型:
 - 取值: ts,flv,mp4 (多种类型之前用;隔开)
 - 不区分大小写
@@ -86,8 +84,6 @@ func NewAddLiveRecordTaskRequest(
     appName string,
     streamName string,
     recordTimes []live.RecordTime,
-    saveBucket string,
-    saveEndpoint string,
     recordFileType string,
 ) *AddLiveRecordTaskRequest {
 
@@ -102,8 +98,6 @@ func NewAddLiveRecordTaskRequest(
         AppName: appName,
         StreamName: streamName,
         RecordTimes: recordTimes,
-        SaveBucket: saveBucket,
-        SaveEndpoint: saveEndpoint,
         RecordFileType: recordFileType,
 	}
 }
@@ -117,8 +111,8 @@ func NewAddLiveRecordTaskRequest(
 - 多段时间跨度最小不能小于10s
 - 多段时间跨度最大不能超过8小时
  (Required)
- * param saveBucket: 存储桶 (Required)
- * param saveEndpoint: 存储地址 (Required)
+ * param saveBucket: 存储桶 (Optional)
+ * param saveEndpoint: 存储地址 (Optional)
  * param recordFileType: 录制文件类型:
 - 取值: ts,flv,mp4 (多种类型之前用;隔开)
 - 不区分大小写
@@ -134,8 +128,8 @@ func NewAddLiveRecordTaskRequestWithAllParams(
     appName string,
     streamName string,
     recordTimes []live.RecordTime,
-    saveBucket string,
-    saveEndpoint string,
+    saveBucket *string,
+    saveEndpoint *string,
     recordFileType string,
     saveObject *string,
     taskExternalId *string,
@@ -197,14 +191,14 @@ func (r *AddLiveRecordTaskRequest) SetRecordTimes(recordTimes []live.RecordTime)
     r.RecordTimes = recordTimes
 }
 
-/* param saveBucket: 存储桶(Required) */
+/* param saveBucket: 存储桶(Optional) */
 func (r *AddLiveRecordTaskRequest) SetSaveBucket(saveBucket string) {
-    r.SaveBucket = saveBucket
+    r.SaveBucket = &saveBucket
 }
 
-/* param saveEndpoint: 存储地址(Required) */
+/* param saveEndpoint: 存储地址(Optional) */
 func (r *AddLiveRecordTaskRequest) SetSaveEndpoint(saveEndpoint string) {
-    r.SaveEndpoint = saveEndpoint
+    r.SaveEndpoint = &saveEndpoint
 }
 
 /* param recordFileType: 录制文件类型:

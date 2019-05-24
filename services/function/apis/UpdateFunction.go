@@ -31,74 +31,52 @@ type UpdateFunctionRequest struct {
     /* 函数名称  */
     FunctionName string `json:"functionName"`
 
-    /* 函数描述信息  */
-    Description string `json:"description"`
+    /* 函数描述信息 (Optional) */
+    Description *string `json:"description"`
 
-    /* 函数入口，格式为入口文件.入口函数名  */
-    Entrance string `json:"entrance"`
+    /* 函数入口，格式为入口文件.入口函数名 (Optional) */
+    Entrance *string `json:"entrance"`
 
-    /* 函数运行最大内存  */
-    Memory int `json:"memory"`
+    /* 函数运行最大内存 (Optional) */
+    Memory *int `json:"memory"`
 
-    /* 函数运行环境  */
-    RunTime string `json:"runTime"`
+    /* 函数运行环境 (Optional) */
+    RunTime *string `json:"runTime"`
 
-    /* 函数运行超时时间  */
-    OverTime int `json:"overTime"`
+    /* 函数运行超时时间 (Optional) */
+    OverTime *int `json:"overTime"`
 
     /* 函数版本 (Optional) */
     Version *string `json:"version"`
 
-    /* 函数代码包  */
+    /* 函数代码包 (Optional) */
     Code *function.Code `json:"code"`
 
-    /* 函数运行时环境变量  */
+    /* 函数运行时环境变量 (Optional) */
     Environment *function.Env `json:"environment"`
 
-    /* 函数指定的日志集Id  */
-    LogSetId string `json:"logSetId"`
+    /* 函数指定的日志集Id (Optional) */
+    LogSetId *string `json:"logSetId"`
 
-    /* 函数指定的日志主题Id  */
-    LogTopicId string `json:"logTopicId"`
+    /* 函数指定的日志主题Id (Optional) */
+    LogTopicId *string `json:"logTopicId"`
 
-    /* 函数配置的VPCId  */
-    VpcId string `json:"vpcId"`
+    /* 函数配置的VPCId (Optional) */
+    VpcId *string `json:"vpcId"`
 
-    /* 函数配置的子网Id  */
-    SubnetId string `json:"subnetId"`
+    /* 函数配置的子网Id (Optional) */
+    SubnetId *string `json:"subnetId"`
 }
 
 /*
  * param regionId: Region ID (Required)
  * param functionName: 函数名称 (Required)
- * param description: 函数描述信息 (Required)
- * param entrance: 函数入口，格式为入口文件.入口函数名 (Required)
- * param memory: 函数运行最大内存 (Required)
- * param runTime: 函数运行环境 (Required)
- * param overTime: 函数运行超时时间 (Required)
- * param code: 函数代码包 (Required)
- * param environment: 函数运行时环境变量 (Required)
- * param logSetId: 函数指定的日志集Id (Required)
- * param logTopicId: 函数指定的日志主题Id (Required)
- * param vpcId: 函数配置的VPCId (Required)
- * param subnetId: 函数配置的子网Id (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewUpdateFunctionRequest(
     regionId string,
     functionName string,
-    description string,
-    entrance string,
-    memory int,
-    runTime string,
-    overTime int,
-    code *function.Code,
-    environment *function.Env,
-    logSetId string,
-    logTopicId string,
-    vpcId string,
-    subnetId string,
 ) *UpdateFunctionRequest {
 
 	return &UpdateFunctionRequest{
@@ -110,51 +88,40 @@ func NewUpdateFunctionRequest(
 		},
         RegionId: regionId,
         FunctionName: functionName,
-        Description: description,
-        Entrance: entrance,
-        Memory: memory,
-        RunTime: runTime,
-        OverTime: overTime,
-        Code: code,
-        Environment: environment,
-        LogSetId: logSetId,
-        LogTopicId: logTopicId,
-        VpcId: vpcId,
-        SubnetId: subnetId,
 	}
 }
 
 /*
  * param regionId: Region ID (Required)
  * param functionName: 函数名称 (Required)
- * param description: 函数描述信息 (Required)
- * param entrance: 函数入口，格式为入口文件.入口函数名 (Required)
- * param memory: 函数运行最大内存 (Required)
- * param runTime: 函数运行环境 (Required)
- * param overTime: 函数运行超时时间 (Required)
+ * param description: 函数描述信息 (Optional)
+ * param entrance: 函数入口，格式为入口文件.入口函数名 (Optional)
+ * param memory: 函数运行最大内存 (Optional)
+ * param runTime: 函数运行环境 (Optional)
+ * param overTime: 函数运行超时时间 (Optional)
  * param version: 函数版本 (Optional)
- * param code: 函数代码包 (Required)
- * param environment: 函数运行时环境变量 (Required)
- * param logSetId: 函数指定的日志集Id (Required)
- * param logTopicId: 函数指定的日志主题Id (Required)
- * param vpcId: 函数配置的VPCId (Required)
- * param subnetId: 函数配置的子网Id (Required)
+ * param code: 函数代码包 (Optional)
+ * param environment: 函数运行时环境变量 (Optional)
+ * param logSetId: 函数指定的日志集Id (Optional)
+ * param logTopicId: 函数指定的日志主题Id (Optional)
+ * param vpcId: 函数配置的VPCId (Optional)
+ * param subnetId: 函数配置的子网Id (Optional)
  */
 func NewUpdateFunctionRequestWithAllParams(
     regionId string,
     functionName string,
-    description string,
-    entrance string,
-    memory int,
-    runTime string,
-    overTime int,
+    description *string,
+    entrance *string,
+    memory *int,
+    runTime *string,
+    overTime *int,
     version *string,
     code *function.Code,
     environment *function.Env,
-    logSetId string,
-    logTopicId string,
-    vpcId string,
-    subnetId string,
+    logSetId *string,
+    logTopicId *string,
+    vpcId *string,
+    subnetId *string,
 ) *UpdateFunctionRequest {
 
     return &UpdateFunctionRequest{
@@ -204,29 +171,29 @@ func (r *UpdateFunctionRequest) SetFunctionName(functionName string) {
     r.FunctionName = functionName
 }
 
-/* param description: 函数描述信息(Required) */
+/* param description: 函数描述信息(Optional) */
 func (r *UpdateFunctionRequest) SetDescription(description string) {
-    r.Description = description
+    r.Description = &description
 }
 
-/* param entrance: 函数入口，格式为入口文件.入口函数名(Required) */
+/* param entrance: 函数入口，格式为入口文件.入口函数名(Optional) */
 func (r *UpdateFunctionRequest) SetEntrance(entrance string) {
-    r.Entrance = entrance
+    r.Entrance = &entrance
 }
 
-/* param memory: 函数运行最大内存(Required) */
+/* param memory: 函数运行最大内存(Optional) */
 func (r *UpdateFunctionRequest) SetMemory(memory int) {
-    r.Memory = memory
+    r.Memory = &memory
 }
 
-/* param runTime: 函数运行环境(Required) */
+/* param runTime: 函数运行环境(Optional) */
 func (r *UpdateFunctionRequest) SetRunTime(runTime string) {
-    r.RunTime = runTime
+    r.RunTime = &runTime
 }
 
-/* param overTime: 函数运行超时时间(Required) */
+/* param overTime: 函数运行超时时间(Optional) */
 func (r *UpdateFunctionRequest) SetOverTime(overTime int) {
-    r.OverTime = overTime
+    r.OverTime = &overTime
 }
 
 /* param version: 函数版本(Optional) */
@@ -234,34 +201,34 @@ func (r *UpdateFunctionRequest) SetVersion(version string) {
     r.Version = &version
 }
 
-/* param code: 函数代码包(Required) */
+/* param code: 函数代码包(Optional) */
 func (r *UpdateFunctionRequest) SetCode(code *function.Code) {
     r.Code = code
 }
 
-/* param environment: 函数运行时环境变量(Required) */
+/* param environment: 函数运行时环境变量(Optional) */
 func (r *UpdateFunctionRequest) SetEnvironment(environment *function.Env) {
     r.Environment = environment
 }
 
-/* param logSetId: 函数指定的日志集Id(Required) */
+/* param logSetId: 函数指定的日志集Id(Optional) */
 func (r *UpdateFunctionRequest) SetLogSetId(logSetId string) {
-    r.LogSetId = logSetId
+    r.LogSetId = &logSetId
 }
 
-/* param logTopicId: 函数指定的日志主题Id(Required) */
+/* param logTopicId: 函数指定的日志主题Id(Optional) */
 func (r *UpdateFunctionRequest) SetLogTopicId(logTopicId string) {
-    r.LogTopicId = logTopicId
+    r.LogTopicId = &logTopicId
 }
 
-/* param vpcId: 函数配置的VPCId(Required) */
+/* param vpcId: 函数配置的VPCId(Optional) */
 func (r *UpdateFunctionRequest) SetVpcId(vpcId string) {
-    r.VpcId = vpcId
+    r.VpcId = &vpcId
 }
 
-/* param subnetId: 函数配置的子网Id(Required) */
+/* param subnetId: 函数配置的子网Id(Optional) */
 func (r *UpdateFunctionRequest) SetSubnetId(subnetId string) {
-    r.SubnetId = subnetId
+    r.SubnetId = &subnetId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

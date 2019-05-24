@@ -19,20 +19,14 @@ package models
 
 type DeviceType struct {
 
-    /* 实例类型英文名称, 如 cps.c.normal (Optional) */
-    NameEN string `json:"nameEN"`
+    /* 实例类型, 如 cps.c.normal (Optional) */
+    DeviceType string `json:"deviceType"`
 
-    /* 实例类型中文名称, 如 计算型 (Optional) */
-    NameZH string `json:"nameZH"`
+    /* 实例类型名称, 如 标准计算型 (Optional) */
+    Name string `json:"name"`
 
     /* 实例所属规格系列，如 计算、存储、GPU (Optional) */
     Family string `json:"family"`
-
-    /* 镜像类型英文描述, 如 standard (Optional) */
-    UseTypeEN string `json:"useTypeEN"`
-
-    /* 镜像类型中文描述, 如 标准型 (Optional) */
-    UseTypeZH string `json:"useTypeZH"`
 
     /* 区域代码, 如 cn-east-1 (Optional) */
     Region string `json:"region"`
@@ -55,23 +49,29 @@ type DeviceType struct {
     /* 网口详细信息 (Optional) */
     IfDetail string `json:"ifDetail"`
 
-    /* 系统磁盘概要信息 (Optional) */
-    SystemDiskConcise string `json:"systemDiskConcise"`
-
-    /* 系统磁盘详细信息 (Optional) */
-    SystemDiskDetail string `json:"systemDiskDetail"`
-
-    /* 数据磁盘概要信息 (Optional) */
-    DataDiskConcise string `json:"dataDiskConcise"`
-
-    /* 数据磁盘详细信息 (Optional) */
-    DataDiskDetail string `json:"dataDiskDetail"`
-
     /* GPU概要信息 (Optional) */
     GpuConcise string `json:"gpuConcise"`
 
     /* GPU详细信息 (Optional) */
     GpuDetail string `json:"gpuDetail"`
+
+    /* 系统盘数量 (Optional) */
+    SystemDiskAmount int `json:"systemDiskAmount"`
+
+    /* 系统盘单盘大小（GB） (Optional) */
+    SystemDiskSize int `json:"systemDiskSize"`
+
+    /* 系统盘规格 (Optional) */
+    SystemDiskModel string `json:"systemDiskModel"`
+
+    /* 数据盘数量 (Optional) */
+    DataDiskAmount int `json:"dataDiskAmount"`
+
+    /* 数据盘单盘大小（GB） (Optional) */
+    DataDiskSize int `json:"dataDiskSize"`
+
+    /* 数据盘规格 (Optional) */
+    DataDiskModel string `json:"dataDiskModel"`
 
     /* 售罄状态 (Optional) */
     IsSoldOut bool `json:"isSoldOut"`

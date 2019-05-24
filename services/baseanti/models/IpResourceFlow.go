@@ -19,9 +19,15 @@ package models
 
 type IpResourceFlow struct {
 
-    /*  (Optional) */
-    Bps IpResourceFlowDetail `json:"bps"`
+    /* UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Optional) */
+    Time []string `json:"time"`
 
-    /*  (Optional) */
-    Pps IpResourceFlowDetail `json:"pps"`
+    /* 防护后流量 (Optional) */
+    PostProtect []float64 `json:"postProtect"`
+
+    /* 防护前流量 (Optional) */
+    PreProtect []float64 `json:"preProtect"`
+
+    /* 流量单位 (Optional) */
+    Unit string `json:"unit"`
 }

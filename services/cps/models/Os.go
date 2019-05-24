@@ -31,6 +31,6 @@ type Os struct {
     /* 操作系统版本, 如 14.04/16.04 (Optional) */
     OsVersion string `json:"osVersion"`
 
-    /* 实例类型, 如 cps.c.normal, (Optional) */
+    /* 实例类型, 如 cps.c.normal (Optional) */
     DeviceType string `json:"deviceType"`
 }

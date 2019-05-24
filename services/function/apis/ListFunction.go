@@ -29,6 +29,15 @@ type ListFunctionRequest struct {
     /* Region ID  */
     RegionId string `json:"regionId"`
 
+    /* 是否返回所有函数  */
+    ListAll bool `json:"listAll"`
+
+    /* 页码 (Optional) */
+    PageNumber *int `json:"pageNumber"`
+
+    /* 分页大小 (Optional) */
+    PageSize *int `json:"pageSize"`
+
     /* functionId -函数ID，精确匹配，支持多个
 functionName  - 函数名称，模糊匹配，支持单个
  (Optional) */
@@ -37,11 +46,13 @@ functionName  - 函数名称，模糊匹配，支持单个
 
 /*
  * param regionId: Region ID (Required)
+ * param listAll: 是否返回所有函数 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewListFunctionRequest(
     regionId string,
+    listAll bool,
 ) *ListFunctionRequest {
 
 	return &ListFunctionRequest{
@@ -52,17 +63,24 @@ func NewListFunctionRequest(
 			Version: "v1",
 		},
         RegionId: regionId,
+        ListAll: listAll,
 	}
 }
 
 /*
  * param regionId: Region ID (Required)
+ * param listAll: 是否返回所有函数 (Required)
+ * param pageNumber: 页码 (Optional)
+ * param pageSize: 分页大小 (Optional)
  * param filters: functionId -函数ID，精确匹配，支持多个
 functionName  - 函数名称，模糊匹配，支持单个
  (Optional)
  */
 func NewListFunctionRequestWithAllParams(
     regionId string,
+    listAll bool,
+    pageNumber *int,
+    pageSize *int,
     filters []common.Filter,
 ) *ListFunctionRequest {
 
@@ -74,6 +92,9 @@ func NewListFunctionRequestWithAllParams(
             Version: "v1",
         },
         RegionId: regionId,
+        ListAll: listAll,
+        PageNumber: pageNumber,
+        PageSize: pageSize,
         Filters: filters,
     }
 }
@@ -96,6 +117,21 @@ func (r *ListFunctionRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param listAll: 是否返回所有函数(Required) */
+func (r *ListFunctionRequest) SetListAll(listAll bool) {
+    r.ListAll = listAll
+}
+
+/* param pageNumber: 页码(Optional) */
+func (r *ListFunctionRequest) SetPageNumber(pageNumber int) {
+    r.PageNumber = &pageNumber
+}
+
+/* param pageSize: 分页大小(Optional) */
+func (r *ListFunctionRequest) SetPageSize(pageSize int) {
+    r.PageSize = &pageSize
+}
+
 /* param filters: functionId -函数ID，精确匹配，支持多个
 functionName  - 函数名称，模糊匹配，支持单个
 (Optional) */
@@ -116,5 +152,5 @@ type ListFunctionResponse struct {
 }
 
 type ListFunctionResult struct {
-    Data []function.FunctionSpec `json:"data"`
+    Data function.ListFunctionResult `json:"data"`
 }

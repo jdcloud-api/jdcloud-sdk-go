@@ -35,6 +35,9 @@ type DescribeNodeGroupsRequest struct {
     /* 分页大小；默认为20；取值范围[10, 100] (Optional) */
     PageSize *int `json:"pageSize"`
 
+    /* Tag筛选条件 (Optional) */
+    Tags []kubernetes.TagFilter `json:"tags"`
+
     /* name - 节点组名称，模糊匹配，支持单个      
 id - 节点组 id，支持多个     
 clusterId - 根据clusterId查询        
@@ -67,6 +70,7 @@ func NewDescribeNodeGroupsRequest(
  * param regionId: 地域 ID (Required)
  * param pageNumber: 页码；默认为1 (Optional)
  * param pageSize: 分页大小；默认为20；取值范围[10, 100] (Optional)
+ * param tags: Tag筛选条件 (Optional)
  * param filters: name - 节点组名称，模糊匹配，支持单个      
 id - 节点组 id，支持多个     
 clusterId - 根据clusterId查询        
@@ -77,6 +81,7 @@ func NewDescribeNodeGroupsRequestWithAllParams(
     regionId string,
     pageNumber *int,
     pageSize *int,
+    tags []kubernetes.TagFilter,
     filters []common.Filter,
 ) *DescribeNodeGroupsRequest {
 
@@ -90,6 +95,7 @@ func NewDescribeNodeGroupsRequestWithAllParams(
         RegionId: regionId,
         PageNumber: pageNumber,
         PageSize: pageSize,
+        Tags: tags,
         Filters: filters,
     }
 }
@@ -120,6 +126,11 @@ func (r *DescribeNodeGroupsRequest) SetPageNumber(pageNumber int) {
 /* param pageSize: 分页大小；默认为20；取值范围[10, 100](Optional) */
 func (r *DescribeNodeGroupsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
+}
+
+/* param tags: Tag筛选条件(Optional) */
+func (r *DescribeNodeGroupsRequest) SetTags(tags []kubernetes.TagFilter) {
+    r.Tags = tags
 }
 
 /* param filters: name - 节点组名称，模糊匹配，支持单个      

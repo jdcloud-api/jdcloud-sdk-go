@@ -55,6 +55,9 @@ type NodeGroup struct {
     /* 状态  [pending,running,resizing,reconciling,deleting,deleted,error,running_with_error(部分节点有问题)] (Optional) */
     State string `json:"state"`
 
+    /*  (Optional) */
+    Tags []Tag `json:"tags"`
+
     /* 更新时间 (Optional) */
     UpdateTime string `json:"updateTime"`
 
