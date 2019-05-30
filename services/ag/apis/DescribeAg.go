@@ -18,61 +18,70 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    vod "github.com/jdcloud-api/jdcloud-sdk-go/services/vod/models"
+    ag "github.com/jdcloud-api/jdcloud-sdk-go/services/ag/models"
 )
 
-type GetVideoRequest struct {
+type DescribeAgRequest struct {
 
     core.JDCloudRequest
 
-    /* 视频ID  */
-    VideoId string `json:"videoId"`
+    /* 地域  */
+    RegionId string `json:"regionId"`
+
+    /* 高可用组 ID  */
+    AgId string `json:"agId"`
 }
 
 /*
- * param videoId: 视频ID (Required)
+ * param regionId: 地域 (Required)
+ * param agId: 高可用组 ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewGetVideoRequest(
-    videoId string,
-) *GetVideoRequest {
+func NewDescribeAgRequest(
+    regionId string,
+    agId string,
+) *DescribeAgRequest {
 
-	return &GetVideoRequest{
+	return &DescribeAgRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/videos/{videoId}",
+			URL:     "/regions/{regionId}/availabilityGroups/{agId}",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
-        VideoId: videoId,
+        RegionId: regionId,
+        AgId: agId,
 	}
 }
 
 /*
- * param videoId: 视频ID (Required)
+ * param regionId: 地域 (Required)
+ * param agId: 高可用组 ID (Required)
  */
-func NewGetVideoRequestWithAllParams(
-    videoId string,
-) *GetVideoRequest {
+func NewDescribeAgRequestWithAllParams(
+    regionId string,
+    agId string,
+) *DescribeAgRequest {
 
-    return &GetVideoRequest{
+    return &DescribeAgRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/videos/{videoId}",
+            URL:     "/regions/{regionId}/availabilityGroups/{agId}",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
-        VideoId: videoId,
+        RegionId: regionId,
+        AgId: agId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewGetVideoRequestWithoutParam() *GetVideoRequest {
+func NewDescribeAgRequestWithoutParam() *DescribeAgRequest {
 
-    return &GetVideoRequest{
+    return &DescribeAgRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/videos/{videoId}",
+            URL:     "/regions/{regionId}/availabilityGroups/{agId}",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -80,36 +89,28 @@ func NewGetVideoRequestWithoutParam() *GetVideoRequest {
     }
 }
 
-/* param videoId: 视频ID(Required) */
-func (r *GetVideoRequest) SetVideoId(videoId string) {
-    r.VideoId = videoId
+/* param regionId: 地域(Required) */
+func (r *DescribeAgRequest) SetRegionId(regionId string) {
+    r.RegionId = regionId
+}
+
+/* param agId: 高可用组 ID(Required) */
+func (r *DescribeAgRequest) SetAgId(agId string) {
+    r.AgId = agId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r GetVideoRequest) GetRegionId() string {
-    return ""
+func (r DescribeAgRequest) GetRegionId() string {
+    return r.RegionId
 }
 
-type GetVideoResponse struct {
+type DescribeAgResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result GetVideoResult `json:"result"`
+    Result DescribeAgResult `json:"result"`
 }
 
-type GetVideoResult struct {
-    Id string `json:"id"`
-    Name string `json:"name"`
-    Description string `json:"description"`
-    CoverUrl string `json:"coverUrl"`
-    Status string `json:"status"`
-    FileSize int64 `json:"fileSize"`
-    Checksum string `json:"checksum"`
-    Duration int64 `json:"duration"`
-    Tags []string `json:"tags"`
-    CategoryId int64 `json:"categoryId"`
-    CategoryName string `json:"categoryName"`
-    Snapshots []vod.Snapshot `json:"snapshots"`
-    CreateTime string `json:"createTime"`
-    UpdateTime string `json:"updateTime"`
+type DescribeAgResult struct {
+    Ag ag.AvailabilityGroup `json:"ag"`
 }

@@ -17,17 +17,11 @@
 package models
 
 
-type PageProperties struct {
+type Azs struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* az编号 (Optional) */
+    AzId string `json:"azId"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
-
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
-
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
+    /* az名称 (Optional) */
+    AzName string `json:"azName"`
 }

@@ -164,5 +164,18 @@ type UpdateVideoResponse struct {
 }
 
 type UpdateVideoResult struct {
-    UpdateVideoResp vod.UpdateVideoResp `json:"updateVideoResp"`
+    Id string `json:"id"`
+    Name string `json:"name"`
+    Description string `json:"description"`
+    CoverUrl string `json:"coverUrl"`
+    Status string `json:"status"`
+    FileSize int64 `json:"fileSize"`
+    Checksum string `json:"checksum"`
+    Duration int64 `json:"duration"`
+    Tags []string `json:"tags"`
+    CategoryId int64 `json:"categoryId"`
+    CategoryName string `json:"categoryName"`
+    Snapshots []vod.Snapshot `json:"snapshots"`
+    CreateTime string `json:"createTime"`
+    UpdateTime string `json:"updateTime"`
 }

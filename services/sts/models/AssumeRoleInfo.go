@@ -17,17 +17,14 @@
 package models
 
 
-type PageProperties struct {
+type AssumeRoleInfo struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 角色资源标识(jrn)  */
+    RoleJrn string `json:"roleJrn"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 角色会话名称  */
+    RoleSessionName string `json:"roleSessionName"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
-
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
+    /* 临时凭证有效期，单位秒，取值范围：3600~您所扮演的角色设置的maxSessionDuration，默认3600 (Optional) */
+    DurationSeconds *int `json:"durationSeconds"`
 }

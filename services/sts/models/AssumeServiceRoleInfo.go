@@ -17,17 +17,11 @@
 package models
 
 
-type PageProperties struct {
+type AssumeServiceRoleInfo struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 角色类型, 1-服务相关角色，2-服务角色  */
+    RoleType int `json:"roleType"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
-
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
-
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
+    /* 令牌有效期，单位秒，默认3600 (Optional) */
+    DurationSeconds int `json:"durationSeconds"`
 }

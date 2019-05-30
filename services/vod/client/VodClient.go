@@ -40,7 +40,7 @@ func NewVodClient(credential *core.Credential) *VodClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vod",
-            Revision:    "1.1.0",
+            Revision:    "1.1.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -84,6 +84,26 @@ func (c *VodClient) GetVideoPlayInfo(request *vod.GetVideoPlayInfoRequest) (*vod
     }
 
     jdResp := &vod.GetVideoPlayInfoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除域名访问头参数 */
+func (c *VodClient) DeleteHeader(request *vod.DeleteHeaderRequest) (*vod.DeleteHeaderResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vod.DeleteHeaderResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -253,6 +273,26 @@ func (c *VodClient) DeleteDomain(request *vod.DeleteDomainRequest) (*vod.DeleteD
     return jdResp, err
 }
 
+/* 查询域名访问头参数列表 */
+func (c *VodClient) ListHeaders(request *vod.ListHeadersRequest) (*vod.ListHeadersResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vod.ListHeadersResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 设置CDN域名URL规则 */
 func (c *VodClient) SetURLRule(request *vod.SetURLRuleRequest) (*vod.SetURLRuleResponse, error) {
     if request == nil {
@@ -404,6 +444,26 @@ func (c *VodClient) DeleteWatermark(request *vod.DeleteWatermarkRequest) (*vod.D
     }
 
     jdResp := &vod.DeleteWatermarkResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设置域名访问头参数 */
+func (c *VodClient) SetHeader(request *vod.SetHeaderRequest) (*vod.SetHeaderResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vod.SetHeaderResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

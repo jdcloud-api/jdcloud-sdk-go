@@ -17,17 +17,11 @@
 package models
 
 
-type PageProperties struct {
+type AssumedRoleUser struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 代入角色id (Optional) */
+    AssumedRoleId string `json:"assumedRoleId"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
-
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
-
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
+    /* 京东云资源标识(jrn) (Optional) */
+    Jrn string `json:"jrn"`
 }

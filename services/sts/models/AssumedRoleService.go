@@ -17,17 +17,11 @@
 package models
 
 
-type PageProperties struct {
+type AssumedRoleService struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 代入角色id (Optional) */
+    AssumedServiceRoleId string `json:"assumedServiceRoleId"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
-
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
-
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
+    /* 代入角色名 (Optional) */
+    AssumedServiceRoleName string `json:"assumedServiceRoleName"`
 }

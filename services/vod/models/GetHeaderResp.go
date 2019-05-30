@@ -17,17 +17,20 @@
 package models
 
 
-type PageProperties struct {
+type GetHeaderResp struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 头参数名 (Optional) */
+    HeaderName string `json:"headerName"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 头参数值 (Optional) */
+    HeaderValue string `json:"headerValue"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
+    /* 头参数类型 (Optional) */
+    HeaderType string `json:"headerType"`
 
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
+    /*  (Optional) */
+    CreateTime string `json:"createTime"`
+
+    /*  (Optional) */
+    UpdateTime string `json:"updateTime"`
 }

@@ -17,17 +17,17 @@
 package models
 
 
-type PageProperties struct {
+type Credentials struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 临时accessKey (Optional) */
+    AccessKey string `json:"accessKey"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 临时secretKey (Optional) */
+    SecretKey string `json:"secretKey"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
+    /* 临时安全令牌 (Optional) */
+    SessionToken string `json:"sessionToken"`
 
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
+    /* 有效期 (Optional) */
+    Expiration string `json:"expiration"`
 }

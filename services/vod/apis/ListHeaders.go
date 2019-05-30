@@ -18,61 +18,60 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    vod "github.com/jdcloud-api/jdcloud-sdk-go/services/vod/models"
 )
 
-type GetVideoRequest struct {
+type ListHeadersRequest struct {
 
     core.JDCloudRequest
 
-    /* 视频ID  */
-    VideoId string `json:"videoId"`
+    /* 域名ID  */
+    DomainId int `json:"domainId"`
 }
 
 /*
- * param videoId: 视频ID (Required)
+ * param domainId: 域名ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewGetVideoRequest(
-    videoId string,
-) *GetVideoRequest {
+func NewListHeadersRequest(
+    domainId int,
+) *ListHeadersRequest {
 
-	return &GetVideoRequest{
+	return &ListHeadersRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/videos/{videoId}",
+			URL:     "/domains/{domainId}:listHeaders",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
-        VideoId: videoId,
+        DomainId: domainId,
 	}
 }
 
 /*
- * param videoId: 视频ID (Required)
+ * param domainId: 域名ID (Required)
  */
-func NewGetVideoRequestWithAllParams(
-    videoId string,
-) *GetVideoRequest {
+func NewListHeadersRequestWithAllParams(
+    domainId int,
+) *ListHeadersRequest {
 
-    return &GetVideoRequest{
+    return &ListHeadersRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/videos/{videoId}",
+            URL:     "/domains/{domainId}:listHeaders",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
-        VideoId: videoId,
+        DomainId: domainId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewGetVideoRequestWithoutParam() *GetVideoRequest {
+func NewListHeadersRequestWithoutParam() *ListHeadersRequest {
 
-    return &GetVideoRequest{
+    return &ListHeadersRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/videos/{videoId}",
+            URL:     "/domains/{domainId}:listHeaders",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -80,36 +79,22 @@ func NewGetVideoRequestWithoutParam() *GetVideoRequest {
     }
 }
 
-/* param videoId: 视频ID(Required) */
-func (r *GetVideoRequest) SetVideoId(videoId string) {
-    r.VideoId = videoId
+/* param domainId: 域名ID(Required) */
+func (r *ListHeadersRequest) SetDomainId(domainId int) {
+    r.DomainId = domainId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r GetVideoRequest) GetRegionId() string {
+func (r ListHeadersRequest) GetRegionId() string {
     return ""
 }
 
-type GetVideoResponse struct {
+type ListHeadersResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result GetVideoResult `json:"result"`
+    Result ListHeadersResult `json:"result"`
 }
 
-type GetVideoResult struct {
-    Id string `json:"id"`
-    Name string `json:"name"`
-    Description string `json:"description"`
-    CoverUrl string `json:"coverUrl"`
-    Status string `json:"status"`
-    FileSize int64 `json:"fileSize"`
-    Checksum string `json:"checksum"`
-    Duration int64 `json:"duration"`
-    Tags []string `json:"tags"`
-    CategoryId int64 `json:"categoryId"`
-    CategoryName string `json:"categoryName"`
-    Snapshots []vod.Snapshot `json:"snapshots"`
-    CreateTime string `json:"createTime"`
-    UpdateTime string `json:"updateTime"`
+type ListHeadersResult struct {
 }

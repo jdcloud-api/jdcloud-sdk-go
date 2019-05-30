@@ -17,17 +17,14 @@
 package models
 
 
-type PageProperties struct {
+type RegionInfo struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* region编号 (Optional) */
+    RegionId string `json:"regionId"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* region名称 (Optional) */
+    RegionName string `json:"regionName"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
-
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
+    /* AZ集合 (Optional) */
+    AzInfo []Azs `json:"azInfo"`
 }

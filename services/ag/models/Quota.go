@@ -17,17 +17,14 @@
 package models
 
 
-type PageProperties struct {
+type Quota struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 资源类型[ag] (Optional) */
+    ResourceType string `json:"resourceType"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 配额上限 (Optional) */
+    Limit int `json:"limit"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
-
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
+    /* 已用配额 (Optional) */
+    Used int `json:"used"`
 }
