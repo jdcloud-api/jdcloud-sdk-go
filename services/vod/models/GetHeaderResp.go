@@ -17,20 +17,20 @@
 package models
 
 
-type Video struct {
+type GetHeaderResp struct {
 
-    /* 视频编码 (Optional) */
-    Codec *string `json:"codec"`
+    /* 头参数名 (Optional) */
+    HeaderName string `json:"headerName"`
 
-    /* 码率 (Optional) */
-    Bitrate *int `json:"bitrate"`
+    /* 头参数值 (Optional) */
+    HeaderValue string `json:"headerValue"`
 
-    /* 帧率 (Optional) */
-    Fps *int `json:"fps"`
+    /* 头参数类型 (Optional) */
+    HeaderType string `json:"headerType"`
 
-    /* 宽度 (Optional) */
-    Width *int `json:"width"`
+    /*  (Optional) */
+    CreateTime string `json:"createTime"`
 
-    /* 高度 (Optional) */
-    Height *int `json:"height"`
+    /*  (Optional) */
+    UpdateTime string `json:"updateTime"`
 }

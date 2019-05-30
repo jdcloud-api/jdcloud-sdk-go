@@ -17,20 +17,26 @@
 package models
 
 
-type Video struct {
+type CreateCategoryResp struct {
 
-    /* 视频编码 (Optional) */
-    Codec *string `json:"codec"`
+    /* 分类ID (Optional) */
+    Id int64 `json:"id"`
 
-    /* 码率 (Optional) */
-    Bitrate *int `json:"bitrate"`
+    /* 分类名称 (Optional) */
+    Name string `json:"name"`
 
-    /* 帧率 (Optional) */
-    Fps *int `json:"fps"`
+    /* 分类级别 (Optional) */
+    Level int `json:"level"`
 
-    /* 宽度 (Optional) */
-    Width *int `json:"width"`
+    /* 父分类ID (Optional) */
+    ParentId int64 `json:"parentId"`
 
-    /* 高度 (Optional) */
-    Height *int `json:"height"`
+    /* 分类描述信息 (Optional) */
+    Description string `json:"description"`
+
+    /* 创建时间 (Optional) */
+    CreateTime string `json:"createTime"`
+
+    /* 修改时间 (Optional) */
+    UpdateTime string `json:"updateTime"`
 }

@@ -17,20 +17,11 @@
 package models
 
 
-type Video struct {
+type Azs struct {
 
-    /* 视频编码 (Optional) */
-    Codec *string `json:"codec"`
+    /* az编号 (Optional) */
+    AzId string `json:"azId"`
 
-    /* 码率 (Optional) */
-    Bitrate *int `json:"bitrate"`
-
-    /* 帧率 (Optional) */
-    Fps *int `json:"fps"`
-
-    /* 宽度 (Optional) */
-    Width *int `json:"width"`
-
-    /* 高度 (Optional) */
-    Height *int `json:"height"`
+    /* az名称 (Optional) */
+    AzName string `json:"azName"`
 }

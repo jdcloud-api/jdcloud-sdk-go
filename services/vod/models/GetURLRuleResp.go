@@ -17,20 +17,20 @@
 package models
 
 
-type Video struct {
+type GetURLRuleResp struct {
 
-    /* 视频编码 (Optional) */
-    Codec *string `json:"codec"`
+    /* 规则类型，取值 'url' (Optional) */
+    RuleType string `json:"ruleType"`
 
-    /* 码率 (Optional) */
-    Bitrate *int `json:"bitrate"`
+    /* 规则配置对象 (Optional) */
+    Config interface{} `json:"config"`
 
-    /* 帧率 (Optional) */
-    Fps *int `json:"fps"`
+    /* 是否启用该规则 (Optional) */
+    Enabled bool `json:"enabled"`
 
-    /* 宽度 (Optional) */
-    Width *int `json:"width"`
+    /*  (Optional) */
+    CreateTime string `json:"createTime"`
 
-    /* 高度 (Optional) */
-    Height *int `json:"height"`
+    /*  (Optional) */
+    UpdateTime string `json:"updateTime"`
 }

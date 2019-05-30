@@ -17,20 +17,17 @@
 package models
 
 
-type Video struct {
+type Credentials struct {
 
-    /* 视频编码 (Optional) */
-    Codec *string `json:"codec"`
+    /* 临时accessKey (Optional) */
+    AccessKey string `json:"accessKey"`
 
-    /* 码率 (Optional) */
-    Bitrate *int `json:"bitrate"`
+    /* 临时secretKey (Optional) */
+    SecretKey string `json:"secretKey"`
 
-    /* 帧率 (Optional) */
-    Fps *int `json:"fps"`
+    /* 临时安全令牌 (Optional) */
+    SessionToken string `json:"sessionToken"`
 
-    /* 宽度 (Optional) */
-    Width *int `json:"width"`
-
-    /* 高度 (Optional) */
-    Height *int `json:"height"`
+    /* 有效期 (Optional) */
+    Expiration string `json:"expiration"`
 }

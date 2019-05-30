@@ -17,20 +17,11 @@
 package models
 
 
-type Video struct {
+type AssumeServiceRoleInfo struct {
 
-    /* 视频编码 (Optional) */
-    Codec *string `json:"codec"`
+    /* 角色类型, 1-服务相关角色，2-服务角色  */
+    RoleType int `json:"roleType"`
 
-    /* 码率 (Optional) */
-    Bitrate *int `json:"bitrate"`
-
-    /* 帧率 (Optional) */
-    Fps *int `json:"fps"`
-
-    /* 宽度 (Optional) */
-    Width *int `json:"width"`
-
-    /* 高度 (Optional) */
-    Height *int `json:"height"`
+    /* 令牌有效期，单位秒，默认3600 (Optional) */
+    DurationSeconds int `json:"durationSeconds"`
 }

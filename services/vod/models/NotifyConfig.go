@@ -17,20 +17,29 @@
 package models
 
 
-type Video struct {
+type NotifyConfig struct {
 
-    /* 视频编码 (Optional) */
-    Codec *string `json:"codec"`
+    /* 回调ID (Optional) */
+    NotifyId int64 `json:"notifyId"`
 
-    /* 码率 (Optional) */
-    Bitrate *int `json:"bitrate"`
+    /* 类型 (Optional) */
+    Type int `json:"type"`
 
-    /* 帧率 (Optional) */
-    Fps *int `json:"fps"`
+    /* 回调开关 (Optional) */
+    NotifyFlag int `json:"notifyFlag"`
 
-    /* 宽度 (Optional) */
-    Width *int `json:"width"`
+    /* 回调地址 (Optional) */
+    NotifyUrl string `json:"notifyUrl"`
 
-    /* 高度 (Optional) */
-    Height *int `json:"height"`
+    /* 回调类型 (Optional) */
+    CallType string `json:"callType"`
+
+    /* 回调关键值 (Optional) */
+    NotifyKey string `json:"notifyKey"`
+
+    /* 创建时间 (Optional) */
+    CreateTime string `json:"createTime"`
+
+    /* 修改时间 (Optional) */
+    UpdateTime string `json:"updateTime"`
 }

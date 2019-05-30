@@ -17,20 +17,8 @@
 package models
 
 
-type Video struct {
+type BatchUpdateVideosReq struct {
 
-    /* 视频编码 (Optional) */
-    Codec *string `json:"codec"`
-
-    /* 码率 (Optional) */
-    Bitrate *int `json:"bitrate"`
-
-    /* 帧率 (Optional) */
-    Fps *int `json:"fps"`
-
-    /* 宽度 (Optional) */
-    Width *int `json:"width"`
-
-    /* 高度 (Optional) */
-    Height *int `json:"height"`
+    /*  (Optional) */
+    Contents []interface{} `json:"contents"`
 }

@@ -17,20 +17,11 @@
 package models
 
 
-type Video struct {
+type AssumedRoleUser struct {
 
-    /* 视频编码 (Optional) */
-    Codec *string `json:"codec"`
+    /* 代入角色id (Optional) */
+    AssumedRoleId string `json:"assumedRoleId"`
 
-    /* 码率 (Optional) */
-    Bitrate *int `json:"bitrate"`
-
-    /* 帧率 (Optional) */
-    Fps *int `json:"fps"`
-
-    /* 宽度 (Optional) */
-    Width *int `json:"width"`
-
-    /* 高度 (Optional) */
-    Height *int `json:"height"`
+    /* 京东云资源标识(jrn) (Optional) */
+    Jrn string `json:"jrn"`
 }

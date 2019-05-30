@@ -17,20 +17,14 @@
 package models
 
 
-type Video struct {
+type Filter struct {
 
-    /* 视频编码 (Optional) */
-    Codec *string `json:"codec"`
+    /* 筛选属性名  */
+    Name string `json:"name"`
 
-    /* 码率 (Optional) */
-    Bitrate *int `json:"bitrate"`
+    /* 筛选操作符，默认eq (Optional) */
+    Operator *string `json:"operator"`
 
-    /* 帧率 (Optional) */
-    Fps *int `json:"fps"`
-
-    /* 宽度 (Optional) */
-    Width *int `json:"width"`
-
-    /* 高度 (Optional) */
-    Height *int `json:"height"`
+    /* 筛选值列表  */
+    Values []string `json:"values"`
 }

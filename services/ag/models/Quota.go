@@ -17,20 +17,14 @@
 package models
 
 
-type Video struct {
+type Quota struct {
 
-    /* 视频编码 (Optional) */
-    Codec *string `json:"codec"`
+    /* 资源类型[ag] (Optional) */
+    ResourceType string `json:"resourceType"`
 
-    /* 码率 (Optional) */
-    Bitrate *int `json:"bitrate"`
+    /* 配额上限 (Optional) */
+    Limit int `json:"limit"`
 
-    /* 帧率 (Optional) */
-    Fps *int `json:"fps"`
-
-    /* 宽度 (Optional) */
-    Width *int `json:"width"`
-
-    /* 高度 (Optional) */
-    Height *int `json:"height"`
+    /* 已用配额 (Optional) */
+    Used int `json:"used"`
 }

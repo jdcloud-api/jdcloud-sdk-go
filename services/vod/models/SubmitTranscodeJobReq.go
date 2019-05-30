@@ -17,20 +17,14 @@
 package models
 
 
-type Video struct {
+type SubmitTranscodeJobReq struct {
 
-    /* 视频编码 (Optional) */
-    Codec *string `json:"codec"`
+    /* 视频ID (Optional) */
+    VideoId string `json:"videoId"`
 
-    /* 码率 (Optional) */
-    Bitrate *int `json:"bitrate"`
+    /* 转码模板ID列表 (Optional) */
+    TemplateIds []string `json:"templateIds"`
 
-    /* 帧率 (Optional) */
-    Fps *int `json:"fps"`
-
-    /* 宽度 (Optional) */
-    Width *int `json:"width"`
-
-    /* 高度 (Optional) */
-    Height *int `json:"height"`
+    /* 水印ID列表 (Optional) */
+    WatermarkIds string `json:"watermarkIds"`
 }

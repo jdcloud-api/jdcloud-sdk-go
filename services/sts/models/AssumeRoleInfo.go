@@ -17,20 +17,14 @@
 package models
 
 
-type Video struct {
+type AssumeRoleInfo struct {
 
-    /* 视频编码 (Optional) */
-    Codec *string `json:"codec"`
+    /* 角色资源标识(jrn)  */
+    RoleJrn string `json:"roleJrn"`
 
-    /* 码率 (Optional) */
-    Bitrate *int `json:"bitrate"`
+    /* 角色会话名称  */
+    RoleSessionName string `json:"roleSessionName"`
 
-    /* 帧率 (Optional) */
-    Fps *int `json:"fps"`
-
-    /* 宽度 (Optional) */
-    Width *int `json:"width"`
-
-    /* 高度 (Optional) */
-    Height *int `json:"height"`
+    /* 临时凭证有效期，单位秒，取值范围：3600~您所扮演的角色设置的maxSessionDuration，默认3600 (Optional) */
+    DurationSeconds *int `json:"durationSeconds"`
 }

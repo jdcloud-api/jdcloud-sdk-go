@@ -17,20 +17,11 @@
 package models
 
 
-type Video struct {
+type Sort struct {
 
-    /* 视频编码 (Optional) */
-    Codec *string `json:"codec"`
+    /* 排序属性名 (Optional) */
+    Name *string `json:"name"`
 
-    /* 码率 (Optional) */
-    Bitrate *int `json:"bitrate"`
-
-    /* 帧率 (Optional) */
-    Fps *int `json:"fps"`
-
-    /* 宽度 (Optional) */
-    Width *int `json:"width"`
-
-    /* 高度 (Optional) */
-    Height *int `json:"height"`
+    /* 排序方向 (Optional) */
+    Direction *string `json:"direction"`
 }

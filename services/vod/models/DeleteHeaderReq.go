@@ -17,20 +17,11 @@
 package models
 
 
-type Video struct {
+type DeleteHeaderReq struct {
 
-    /* 视频编码 (Optional) */
-    Codec *string `json:"codec"`
+    /* 头参数名 (Optional) */
+    HeaderName string `json:"headerName"`
 
-    /* 码率 (Optional) */
-    Bitrate *int `json:"bitrate"`
-
-    /* 帧率 (Optional) */
-    Fps *int `json:"fps"`
-
-    /* 宽度 (Optional) */
-    Width *int `json:"width"`
-
-    /* 高度 (Optional) */
-    Height *int `json:"height"`
+    /* 头参数类型 (Optional) */
+    HeaderType string `json:"headerType"`
 }

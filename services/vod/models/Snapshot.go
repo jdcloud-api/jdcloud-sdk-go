@@ -17,20 +17,17 @@
 package models
 
 
-type Video struct {
+type Snapshot struct {
 
-    /* 视频编码 (Optional) */
-    Codec *string `json:"codec"`
+    /* 截图ID (Optional) */
+    ImgId int64 `json:"imgId"`
 
-    /* 码率 (Optional) */
-    Bitrate *int `json:"bitrate"`
-
-    /* 帧率 (Optional) */
-    Fps *int `json:"fps"`
+    /* 截图URL (Optional) */
+    ImgUrl string `json:"imgUrl"`
 
     /* 宽度 (Optional) */
-    Width *int `json:"width"`
+    Width int `json:"width"`
 
     /* 高度 (Optional) */
-    Height *int `json:"height"`
+    Height int `json:"height"`
 }

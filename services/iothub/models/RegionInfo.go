@@ -17,20 +17,14 @@
 package models
 
 
-type Video struct {
+type RegionInfo struct {
 
-    /* 视频编码 (Optional) */
-    Codec *string `json:"codec"`
+    /* region编号 (Optional) */
+    RegionId string `json:"regionId"`
 
-    /* 码率 (Optional) */
-    Bitrate *int `json:"bitrate"`
+    /* region名称 (Optional) */
+    RegionName string `json:"regionName"`
 
-    /* 帧率 (Optional) */
-    Fps *int `json:"fps"`
-
-    /* 宽度 (Optional) */
-    Width *int `json:"width"`
-
-    /* 高度 (Optional) */
-    Height *int `json:"height"`
+    /* AZ集合 (Optional) */
+    AzInfo []Azs `json:"azInfo"`
 }

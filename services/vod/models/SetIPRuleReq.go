@@ -17,20 +17,14 @@
 package models
 
 
-type Video struct {
+type SetIPRuleReq struct {
 
-    /* 视频编码 (Optional) */
-    Codec *string `json:"codec"`
+    /* 规则类型，取值 'ip' (Optional) */
+    RuleType string `json:"ruleType"`
 
-    /* 码率 (Optional) */
-    Bitrate *int `json:"bitrate"`
+    /* 规则配置对象 (Optional) */
+    Config interface{} `json:"config"`
 
-    /* 帧率 (Optional) */
-    Fps *int `json:"fps"`
-
-    /* 宽度 (Optional) */
-    Width *int `json:"width"`
-
-    /* 高度 (Optional) */
-    Height *int `json:"height"`
+    /* 是否启用该规则 (Optional) */
+    Enabled bool `json:"enabled"`
 }

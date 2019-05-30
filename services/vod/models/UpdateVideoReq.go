@@ -17,20 +17,23 @@
 package models
 
 
-type Video struct {
+type UpdateVideoReq struct {
 
-    /* 视频编码 (Optional) */
-    Codec *string `json:"codec"`
+    /* 视频ID (Optional) */
+    Id string `json:"id"`
 
-    /* 码率 (Optional) */
-    Bitrate *int `json:"bitrate"`
+    /* 视频名称 (Optional) */
+    Name string `json:"name"`
 
-    /* 帧率 (Optional) */
-    Fps *int `json:"fps"`
+    /* 分类ID (Optional) */
+    CategoryId int64 `json:"categoryId"`
 
-    /* 宽度 (Optional) */
-    Width *int `json:"width"`
+    /* 标签 (Optional) */
+    Tags []string `json:"tags"`
 
-    /* 高度 (Optional) */
-    Height *int `json:"height"`
+    /* 封面地址 (Optional) */
+    CoverUrl string `json:"coverUrl"`
+
+    /* 视频描述 (Optional) */
+    Description string `json:"description"`
 }

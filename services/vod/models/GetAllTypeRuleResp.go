@@ -17,20 +17,14 @@
 package models
 
 
-type Video struct {
+type GetAllTypeRuleResp struct {
 
-    /* 视频编码 (Optional) */
-    Codec *string `json:"codec"`
+    /*  (Optional) */
+    Referer GetRefererRuleResp `json:"referer"`
 
-    /* 码率 (Optional) */
-    Bitrate *int `json:"bitrate"`
+    /*  (Optional) */
+    Url GetURLRuleResp `json:"url"`
 
-    /* 帧率 (Optional) */
-    Fps *int `json:"fps"`
-
-    /* 宽度 (Optional) */
-    Width *int `json:"width"`
-
-    /* 高度 (Optional) */
-    Height *int `json:"height"`
+    /*  (Optional) */
+    Ip GetIPRuleResp `json:"ip"`
 }

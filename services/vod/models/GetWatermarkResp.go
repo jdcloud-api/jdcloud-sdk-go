@@ -17,20 +17,38 @@
 package models
 
 
-type Video struct {
+type GetWatermarkResp struct {
 
-    /* 视频编码 (Optional) */
-    Codec *string `json:"codec"`
+    /* 水印ID (Optional) */
+    Id int64 `json:"id"`
 
-    /* 码率 (Optional) */
-    Bitrate *int `json:"bitrate"`
+    /* 水印名称 (Optional) */
+    Name string `json:"name"`
 
-    /* 帧率 (Optional) */
-    Fps *int `json:"fps"`
+    /* 图片地址 (Optional) */
+    ImgUrl string `json:"imgUrl"`
 
     /* 宽度 (Optional) */
-    Width *int `json:"width"`
+    Width int `json:"width"`
 
     /* 高度 (Optional) */
-    Height *int `json:"height"`
+    Height int `json:"height"`
+
+    /* 水印位置 (Optional) */
+    Position string `json:"position"`
+
+    /* 偏移单位 (Optional) */
+    Unit string `json:"unit"`
+
+    /* 水平偏移 (Optional) */
+    OffsetX int `json:"offsetX"`
+
+    /* 竖直偏移 (Optional) */
+    OffsetY int `json:"offsetY"`
+
+    /*  (Optional) */
+    CreateTime string `json:"createTime"`
+
+    /*  (Optional) */
+    UpdateTime string `json:"updateTime"`
 }

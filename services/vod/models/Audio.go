@@ -17,20 +17,17 @@
 package models
 
 
-type Video struct {
+type Audio struct {
 
-    /* 视频编码 (Optional) */
+    /* 音频编码 (Optional) */
     Codec *string `json:"codec"`
 
     /* 码率 (Optional) */
     Bitrate *int `json:"bitrate"`
 
-    /* 帧率 (Optional) */
-    Fps *int `json:"fps"`
+    /* 采样率 (Optional) */
+    SampleRate *int `json:"sampleRate"`
 
-    /* 宽度 (Optional) */
-    Width *int `json:"width"`
-
-    /* 高度 (Optional) */
-    Height *int `json:"height"`
+    /* 声道数 (Optional) */
+    Channels *int `json:"channels"`
 }
