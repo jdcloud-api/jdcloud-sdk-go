@@ -19,6 +19,6 @@ package models
 
 type UpdatePolicyInfo struct {
 
-    /* 策略信息详情，最多2048个字符  */
+    /* 策略信息详情，最多6144个字符  */
     Content string `json:"content"`
 }

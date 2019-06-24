@@ -19,12 +19,12 @@ package models
 
 type SubUserInfo struct {
 
-    /* 用户名 (Optional) */
+    /* 子用户名 (Optional) */
     Name string `json:"name"`
 
     /* 描述信息 (Optional) */
     Description string `json:"description"`
 
-    /* 用户更新时间 (Optional) */
+    /* 用户创建时间 (Optional) */
     CreateTime string `json:"createTime"`
 }

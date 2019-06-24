@@ -19,15 +19,15 @@ package models
 
 type RolePolicy struct {
 
-    /* 权限名称 (Optional) */
+    /* 策略名称 (Optional) */
     PolicyName string `json:"policyName"`
 
     /* 描述 (Optional) */
     Description string `json:"description"`
 
-    /* 权限类型 (Optional) */
+    /* 策略类型：0-系统策略，1-用户策略 (Optional) */
     Type string `json:"type"`
 
-    /* 权限资源描 (Optional) */
+    /* 京东云策略资源描述 (Optional) */
     PolicyJrn string `json:"policyJrn"`
 }

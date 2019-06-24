@@ -23,5 +23,5 @@ type CreateGroupInfo struct {
     Name string `json:"name"`
 
     /* 描述，0~256个字符 (Optional) */
-    Description string `json:"description"`
+    Description *string `json:"description"`
 }

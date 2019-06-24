@@ -17,8 +17,29 @@
 package models
 
 
-type UpdateAssumeRolePolicyInfo struct {
+type RenewInstanceParam struct {
 
-    /* 信任实体信息 (Optional) */
-    AssumeRolePolicyDocument *string `json:"assumeRolePolicyDocument"`
+    /* 业务线  */
+    AppCode string `json:"appCode"`
+
+    /* 产品线  */
+    ServiceCode string `json:"serviceCode"`
+
+    /* 时间单位 1:小时 2:天 3:月 4:年  */
+    TimeUnit int `json:"timeUnit"`
+
+    /* 时长  */
+    TimeSpan int `json:"timeSpan"`
+
+    /* 签名 md5(pin+serviceCode+key)  */
+    Sign string `json:"sign"`
+
+    /* 待续费资源id列表,英文逗号分隔  */
+    InstanceIds string `json:"instanceIds"`
+
+    /* 是否统一续费到期日续费 1-是 0-否（默认为0） (Optional) */
+    UnifyDate *int `json:"unifyDate"`
+
+    /* 回调地址 (Optional) */
+    ReturnURL *string `json:"returnURL"`
 }

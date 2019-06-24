@@ -17,8 +17,17 @@
 package models
 
 
-type UpdateAssumeRolePolicyInfo struct {
+type ResourceMapResult struct {
 
-    /* 信任实体信息 (Optional) */
-    AssumeRolePolicyDocument *string `json:"assumeRolePolicyDocument"`
+    /* 产品线 (Optional) */
+    ServiceCode string `json:"serviceCode"`
+
+    /* 该产品线的已过期资源信息 (Optional) */
+    ResourceList []QueryExpiredResourceResultVo `json:"resourceList"`
+
+    /* 该产品线的已过期资源总数 (Optional) */
+    TotalNumber int `json:"totalNumber"`
+
+    /* 该产品线的已过期资源ID信息 (Optional) */
+    ResourceIdList []string `json:"resourceIdList"`
 }

@@ -20,5 +20,5 @@ package models
 type UpdateGroupInfo struct {
 
     /* 用户组描述 (Optional) */
-    Description string `json:"description"`
+    Description *string `json:"description"`
 }

@@ -17,8 +17,20 @@
 package models
 
 
-type UpdateAssumeRolePolicyInfo struct {
+type QueryExpiredResourceParam struct {
 
-    /* 信任实体信息 (Optional) */
-    AssumeRolePolicyDocument *string `json:"assumeRolePolicyDocument"`
+    /* 地域：不传时获取全部  */
+    Region string `json:"region"`
+
+    /* 产品线：多个用逗号分隔  */
+    ServiceCodes string `json:"serviceCodes"`
+
+    /* 到期类型：大于0-订单还有几天到期; 等于0-订单已经到期; 小于0-全部  */
+    ExpireType int `json:"expireType"`
+
+    /* 当前页码 (Optional) */
+    PageIndex int `json:"pageIndex"`
+
+    /* 每页条数 (Optional) */
+    PageSize int `json:"pageSize"`
 }

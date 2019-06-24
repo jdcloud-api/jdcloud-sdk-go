@@ -28,6 +28,6 @@ type CreateLoginProfileInfo struct {
     /* 是否自动生成密码，默认false (Optional) */
     AutoGeneratePassword bool `json:"autoGeneratePassword"`
 
-    /* 指定子用户在下次登录时是否必须绑定多因素认证器 (Optional) */
+    /* 指定子用户在下次登录时是否必须绑定虚拟MFA设备 (Optional) */
     MFABindRequired bool `json:"mFABindRequired"`
 }

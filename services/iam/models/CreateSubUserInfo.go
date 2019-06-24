@@ -19,7 +19,7 @@ package models
 
 type CreateSubUserInfo struct {
 
-    /* 子用户名：支持4-20位的字母，数字以及-和_，以字母开头  */
+    /* 子用户名，支持4~20位的字母，数字以及-和_，以字母开头  */
     Name string `json:"name"`
 
     /* 描述，0~256个字符 (Optional) */

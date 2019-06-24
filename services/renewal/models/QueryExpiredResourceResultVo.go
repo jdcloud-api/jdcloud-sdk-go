@@ -17,8 +17,26 @@
 package models
 
 
-type UpdateAssumeRolePolicyInfo struct {
+type QueryExpiredResourceResultVo struct {
 
-    /* 信任实体信息 (Optional) */
-    AssumeRolePolicyDocument *string `json:"assumeRolePolicyDocument"`
+    /* 资源Id (Optional) */
+    ResourceId string `json:"resourceId"`
+
+    /* 资源名称 (Optional) */
+    ResourceName string `json:"resourceName"`
+
+    /* 产品线 (Optional) */
+    ServiceCode string `json:"serviceCode"`
+
+    /* 业务线 (Optional) */
+    AppCode string `json:"appCode"`
+
+    /* 已过期天数 (Optional) */
+    ExpiredDays int `json:"expiredDays"`
+
+    /* 资源所在区域 (Optional) */
+    RegionId string `json:"regionId"`
+
+    /* 计费类型 (Optional) */
+    BillingType int `json:"billingType"`
 }
