@@ -19,7 +19,7 @@ package models
 
 type VideoPlayInfo struct {
 
-    /* 生成播放信息的任务ID (Optional) */
+    /* 生成播放信息的转码任务ID (Optional) */
     TaskId string `json:"taskId"`
 
     /* 清晰度规格 (Optional) */
@@ -28,8 +28,8 @@ type VideoPlayInfo struct {
     /* 媒体类型 (Optional) */
     MediaType int `json:"mediaType"`
 
-    /* 播放信息状态，目前只有完成状态 (Optional) */
-    Status int `json:"status"`
+    /* 播放信息状态，目前只有正常状态(normal) (Optional) */
+    Status string `json:"status"`
 
     /* CDN地址，原始地址或者鉴权地址 (Optional) */
     Url string `json:"url"`

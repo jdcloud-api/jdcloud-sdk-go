@@ -30,9 +30,6 @@ type DeleteHeaderRequest struct {
     /* 头参数名 (Optional) */
     HeaderName *string `json:"headerName"`
 
-    /* 头参数值 (Optional) */
-    HeaderValue *string `json:"headerValue"`
-
     /* 头参数类型 (Optional) */
     HeaderType *string `json:"headerType"`
 }
@@ -60,13 +57,11 @@ func NewDeleteHeaderRequest(
 /*
  * param domainId: 域名ID (Required)
  * param headerName: 头参数名 (Optional)
- * param headerValue: 头参数值 (Optional)
  * param headerType: 头参数类型 (Optional)
  */
 func NewDeleteHeaderRequestWithAllParams(
     domainId int,
     headerName *string,
-    headerValue *string,
     headerType *string,
 ) *DeleteHeaderRequest {
 
@@ -79,7 +74,6 @@ func NewDeleteHeaderRequestWithAllParams(
         },
         DomainId: domainId,
         HeaderName: headerName,
-        HeaderValue: headerValue,
         HeaderType: headerType,
     }
 }
@@ -105,11 +99,6 @@ func (r *DeleteHeaderRequest) SetDomainId(domainId int) {
 /* param headerName: 头参数名(Optional) */
 func (r *DeleteHeaderRequest) SetHeaderName(headerName string) {
     r.HeaderName = &headerName
-}
-
-/* param headerValue: 头参数值(Optional) */
-func (r *DeleteHeaderRequest) SetHeaderValue(headerValue string) {
-    r.HeaderValue = &headerValue
 }
 
 /* param headerType: 头参数类型(Optional) */

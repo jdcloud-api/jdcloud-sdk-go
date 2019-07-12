@@ -25,24 +25,27 @@ type QueryInstanceParam struct {
     /* 产品线  */
     ServiceCode string `json:"serviceCode"`
 
-    /* 当前页码 (Optional) */
-    PageNumber *int `json:"pageNumber"`
-
-    /* 每页条数 (Optional) */
-    PageSize *int `json:"pageSize"`
-
-    /* 资源续费状态 0:手动续费资源 1:全部资源 2:自动续费资源,默认全部 (Optional) */
-    RenewStatus *int `json:"renewStatus"`
-
-    /* 到期时间 0:已过期,n:n天内到期,-1:全部,-2:未到期,默认全部 (Optional) */
-    ExpireTime *string `json:"expireTime"`
-
     /* 资源名称 (Optional) */
     InstanceName *string `json:"instanceName"`
 
     /* 资源ID (Optional) */
     InstanceId *string `json:"instanceId"`
 
-    /* 资源计费类型 1:按配置,3:包年包月,默认不筛选 (Optional) */
+    /* 资源续费状态(AUTO-开通自动续费资源,MANUAL-未开通自动续费资源,ALL-全部资源) (Optional) */
+    RenewStatus *string `json:"renewStatus"`
+
+    /* 资源计费类型(CONFIG-按配置,FLOW-按用量,MONTHLY-包年包月)，不传显示全部资源 (Optional) */
     BillingType *string `json:"billingType"`
+
+    /* 资源到期类型(EXPIRED-已到期,UNEXPIRED-未到期,ONE-1天内到期,THREE-3天内到期,SEVEN-7天内到期,ALL_TIME-全部) (Optional) */
+    ExpireType *string `json:"expireType"`
+
+    /* 主机绑定的内网IP地址 (Optional) */
+    IpAddress *string `json:"ipAddress"`
+
+    /* 当前页码，不传默认为1 (Optional) */
+    PageNumber *int `json:"pageNumber"`
+
+    /* 每页条数，不传默认为10 (Optional) */
+    PageSize *int `json:"pageSize"`
 }

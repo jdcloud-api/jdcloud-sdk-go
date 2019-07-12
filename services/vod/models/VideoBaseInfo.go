@@ -41,5 +41,5 @@ type VideoBaseInfo struct {
     Duration int64 `json:"duration"`
 
     /* 封面地址 (Optional) */
-    CoverImgUrl string `json:"coverImgUrl"`
+    CoverUrl string `json:"coverUrl"`
 }

@@ -66,8 +66,8 @@ type AddCustomLiveStreamSnapshotTemplateRequest struct {
   */
     SaveMode int `json:"saveMode"`
 
-    /* 存储桶 (Optional) */
-    SaveBucket *string `json:"saveBucket"`
+    /* 存储桶  */
+    SaveBucket string `json:"saveBucket"`
 
     /* 存储地址 (Optional) */
     SaveEndpoint *string `json:"saveEndpoint"`
@@ -102,6 +102,7 @@ type AddCustomLiveStreamSnapshotTemplateRequest struct {
   1: 覆盖存储
   2: 顺序存储
  (Required)
+ * param saveBucket: 存储桶 (Required)
  * param template: 截图模板自定义名称:
 - 取值要求: 数字、大小写字母或短横线("-")、下划线("_"),
   首尾不能有特殊字符("-")
@@ -116,6 +117,7 @@ func NewAddCustomLiveStreamSnapshotTemplateRequest(
     fillType int,
     snapshotInterval int,
     saveMode int,
+    saveBucket string,
     template string,
 ) *AddCustomLiveStreamSnapshotTemplateRequest {
 
@@ -130,6 +132,7 @@ func NewAddCustomLiveStreamSnapshotTemplateRequest(
         FillType: fillType,
         SnapshotInterval: snapshotInterval,
         SaveMode: saveMode,
+        SaveBucket: saveBucket,
         Template: template,
 	}
 }
@@ -165,7 +168,7 @@ func NewAddCustomLiveStreamSnapshotTemplateRequest(
   1: 覆盖存储
   2: 顺序存储
  (Required)
- * param saveBucket: 存储桶 (Optional)
+ * param saveBucket: 存储桶 (Required)
  * param saveEndpoint: 存储地址 (Optional)
  * param template: 截图模板自定义名称:
 - 取值要求: 数字、大小写字母或短横线("-")、下划线("_"),
@@ -181,7 +184,7 @@ func NewAddCustomLiveStreamSnapshotTemplateRequestWithAllParams(
     fillType int,
     snapshotInterval int,
     saveMode int,
-    saveBucket *string,
+    saveBucket string,
     saveEndpoint *string,
     template string,
 ) *AddCustomLiveStreamSnapshotTemplateRequest {
@@ -272,9 +275,9 @@ func (r *AddCustomLiveStreamSnapshotTemplateRequest) SetSaveMode(saveMode int) {
     r.SaveMode = saveMode
 }
 
-/* param saveBucket: 存储桶(Optional) */
+/* param saveBucket: 存储桶(Required) */
 func (r *AddCustomLiveStreamSnapshotTemplateRequest) SetSaveBucket(saveBucket string) {
-    r.SaveBucket = &saveBucket
+    r.SaveBucket = saveBucket
 }
 
 /* param saveEndpoint: 存储地址(Optional) */

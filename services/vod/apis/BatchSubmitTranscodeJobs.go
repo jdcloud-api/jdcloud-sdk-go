@@ -26,7 +26,7 @@ type BatchSubmitTranscodeJobsRequest struct {
     core.JDCloudRequest
 
     /*  (Optional) */
-    Jobs []vod.SubmitTranscodeJobReq `json:"jobs"`
+    Jobs []vod.SubmitTranscodeJobRequestObject `json:"jobs"`
 }
 
 /*
@@ -50,7 +50,7 @@ func NewBatchSubmitTranscodeJobsRequest(
  * param jobs:  (Optional)
  */
 func NewBatchSubmitTranscodeJobsRequestWithAllParams(
-    jobs []vod.SubmitTranscodeJobReq,
+    jobs []vod.SubmitTranscodeJobRequestObject,
 ) *BatchSubmitTranscodeJobsRequest {
 
     return &BatchSubmitTranscodeJobsRequest{
@@ -78,7 +78,7 @@ func NewBatchSubmitTranscodeJobsRequestWithoutParam() *BatchSubmitTranscodeJobsR
 }
 
 /* param jobs: (Optional) */
-func (r *BatchSubmitTranscodeJobsRequest) SetJobs(jobs []vod.SubmitTranscodeJobReq) {
+func (r *BatchSubmitTranscodeJobsRequest) SetJobs(jobs []vod.SubmitTranscodeJobRequestObject) {
     r.Jobs = jobs
 }
 

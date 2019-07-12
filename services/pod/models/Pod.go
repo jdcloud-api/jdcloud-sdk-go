@@ -77,6 +77,9 @@ type Pod struct {
     /* 主网卡配置信息 (Optional) */
     PrimaryNetworkInterface NetworkInterfaceAttachment `json:"primaryNetworkInterface"`
 
+    /*  (Optional) */
+    Tags []Tag `json:"tags"`
+
     /* 计费配置；如不指定，默认计费类型是后付费-按使用时常付费 (Optional) */
     Charge charge.Charge `json:"charge"`
 

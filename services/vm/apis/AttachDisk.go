@@ -33,10 +33,10 @@ type AttachDiskRequest struct {
     /* 云硬盘ID  */
     DiskId string `json:"diskId"`
 
-    /* 数据盘的逻辑挂载点[vda,vdb,vdc,vdd,vde,vdf,vdg,vdh,vdi]，挂载系统盘时vda必传 (Optional) */
+    /* 设备名[vda,vdb,vdc,vdd,vde,vdf,vdg,vdh,vdi,vmj,vdk,vdl,vdm]，挂载系统盘时必传，且需传vda (Optional) */
     DeviceName *string `json:"deviceName"`
 
-    /* 自动随主机删除此云硬盘，默认为False。仅按配置计费云硬盘支持修改此参数，包年包月云硬盘默认为False且不可修改。如果是共享型云硬盘，此参数无效。 (Optional) */
+    /* 随云主机删除自动删除此云硬盘，默认为False。仅按配置计费云硬盘支持修改此参数，包年包月云硬盘不可修改。 (Optional) */
     AutoDelete *bool `json:"autoDelete"`
 }
 
@@ -70,8 +70,8 @@ func NewAttachDiskRequest(
  * param regionId: 地域ID (Required)
  * param instanceId: 云主机ID (Required)
  * param diskId: 云硬盘ID (Required)
- * param deviceName: 数据盘的逻辑挂载点[vda,vdb,vdc,vdd,vde,vdf,vdg,vdh,vdi]，挂载系统盘时vda必传 (Optional)
- * param autoDelete: 自动随主机删除此云硬盘，默认为False。仅按配置计费云硬盘支持修改此参数，包年包月云硬盘默认为False且不可修改。如果是共享型云硬盘，此参数无效。 (Optional)
+ * param deviceName: 设备名[vda,vdb,vdc,vdd,vde,vdf,vdg,vdh,vdi,vmj,vdk,vdl,vdm]，挂载系统盘时必传，且需传vda (Optional)
+ * param autoDelete: 随云主机删除自动删除此云硬盘，默认为False。仅按配置计费云硬盘支持修改此参数，包年包月云硬盘不可修改。 (Optional)
  */
 func NewAttachDiskRequestWithAllParams(
     regionId string,
@@ -124,12 +124,12 @@ func (r *AttachDiskRequest) SetDiskId(diskId string) {
     r.DiskId = diskId
 }
 
-/* param deviceName: 数据盘的逻辑挂载点[vda,vdb,vdc,vdd,vde,vdf,vdg,vdh,vdi]，挂载系统盘时vda必传(Optional) */
+/* param deviceName: 设备名[vda,vdb,vdc,vdd,vde,vdf,vdg,vdh,vdi,vmj,vdk,vdl,vdm]，挂载系统盘时必传，且需传vda(Optional) */
 func (r *AttachDiskRequest) SetDeviceName(deviceName string) {
     r.DeviceName = &deviceName
 }
 
-/* param autoDelete: 自动随主机删除此云硬盘，默认为False。仅按配置计费云硬盘支持修改此参数，包年包月云硬盘默认为False且不可修改。如果是共享型云硬盘，此参数无效。(Optional) */
+/* param autoDelete: 随云主机删除自动删除此云硬盘，默认为False。仅按配置计费云硬盘支持修改此参数，包年包月云硬盘不可修改。(Optional) */
 func (r *AttachDiskRequest) SetAutoDelete(autoDelete bool) {
     r.AutoDelete = &autoDelete
 }

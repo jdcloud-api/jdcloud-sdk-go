@@ -28,9 +28,6 @@ type UpdateVideoRequest struct {
     /* 视频ID  */
     VideoId string `json:"videoId"`
 
-    /* 视频ID (Optional) */
-    Id *string `json:"id"`
-
     /* 视频名称 (Optional) */
     Name *string `json:"name"`
 
@@ -43,7 +40,7 @@ type UpdateVideoRequest struct {
     /* 封面地址 (Optional) */
     CoverUrl *string `json:"coverUrl"`
 
-    /* 视频描述 (Optional) */
+    /* 视频描述信息 (Optional) */
     Description *string `json:"description"`
 }
 
@@ -69,16 +66,14 @@ func NewUpdateVideoRequest(
 
 /*
  * param videoId: 视频ID (Required)
- * param id: 视频ID (Optional)
  * param name: 视频名称 (Optional)
  * param categoryId: 分类ID (Optional)
  * param tags: 标签 (Optional)
  * param coverUrl: 封面地址 (Optional)
- * param description: 视频描述 (Optional)
+ * param description: 视频描述信息 (Optional)
  */
 func NewUpdateVideoRequestWithAllParams(
     videoId string,
-    id *string,
     name *string,
     categoryId *int64,
     tags []string,
@@ -94,7 +89,6 @@ func NewUpdateVideoRequestWithAllParams(
             Version: "v1",
         },
         VideoId: videoId,
-        Id: id,
         Name: name,
         CategoryId: categoryId,
         Tags: tags,
@@ -121,11 +115,6 @@ func (r *UpdateVideoRequest) SetVideoId(videoId string) {
     r.VideoId = videoId
 }
 
-/* param id: 视频ID(Optional) */
-func (r *UpdateVideoRequest) SetId(id string) {
-    r.Id = &id
-}
-
 /* param name: 视频名称(Optional) */
 func (r *UpdateVideoRequest) SetName(name string) {
     r.Name = &name
@@ -146,7 +135,7 @@ func (r *UpdateVideoRequest) SetCoverUrl(coverUrl string) {
     r.CoverUrl = &coverUrl
 }
 
-/* param description: 视频描述(Optional) */
+/* param description: 视频描述信息(Optional) */
 func (r *UpdateVideoRequest) SetDescription(description string) {
     r.Description = &description
 }

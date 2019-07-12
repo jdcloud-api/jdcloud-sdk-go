@@ -19,30 +19,33 @@ package models
 
 type RelationResource struct {
 
+    /* 业务线 (Optional) */
+    AppCode string `json:"appCode"`
+
+    /* 产品线 (Optional) */
+    ServiceCode string `json:"serviceCode"`
+
     /* 资源ID (Optional) */
     ResourceId string `json:"resourceId"`
 
     /* 资源名称 (Optional) */
     ResourceName string `json:"resourceName"`
 
-    /* 产品线 (Optional) */
-    ServiceCode string `json:"serviceCode"`
-
-    /* 计费类型 (Optional) */
-    BillingType int `json:"billingType"`
-
-    /* 到期时间 (Optional) */
-    ExpireTime string `json:"expireTime"`
-
     /* 地域 (Optional) */
-    DataCenter string `json:"dataCenter"`
+    Region string `json:"region"`
 
-    /* 是否开通自动续费(0:未开通,1:已开通) (Optional) */
-    AutoRenew int `json:"autoRenew"`
+    /* 资源计费类型(CONFIG-按配置,FLOW-按用量,MONTHLY-包年包月)，不传显示全部资源 (Optional) */
+    BillingType string `json:"billingType"`
+
+    /* 资源到期时间 (Optional) */
+    ExpireTime string `json:"expireTime"`
 
     /* 倒计时 (Optional) */
     LastTime int `json:"lastTime"`
 
-    /* 关联资源特殊需求 (Optional) */
-    Remark string `json:"remark"`
+    /* 自动续费状态(UNOPENED-未开通,OPENED-已开通) (Optional) */
+    AutoRenewStatus string `json:"autoRenewStatus"`
+
+    /* 扩展字段，包括数据库类型、资源特殊说明等 (Optional) */
+    ExtendField string `json:"extendField"`
 }

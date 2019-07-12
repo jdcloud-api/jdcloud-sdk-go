@@ -101,7 +101,5 @@ type GetCategoryWithChildrenResult struct {
     Name string `json:"name"`
     Level int `json:"level"`
     Description string `json:"description"`
-    CreateTime string `json:"createTime"`
-    UpdateTime string `json:"updateTime"`
     Children []interface{} `json:"children"`
 }

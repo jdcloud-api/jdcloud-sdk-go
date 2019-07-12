@@ -19,24 +19,24 @@ package models
 
 type SetRenewalParam struct {
 
-    /* 资源id列表,英文逗号分隔  */
-    InstanceIds string `json:"instanceIds"`
-
-    /* 自动续费状态 0-关闭自动续费,1-开通或修改自动续费  */
-    AutoRenewStatus int `json:"autoRenewStatus"`
-
     /* 业务线  */
     AppCode string `json:"appCode"`
 
     /* 产品线  */
     ServiceCode string `json:"serviceCode"`
 
-    /* 续费周期（autoRenewStatus=1时必传） (Optional) */
+    /* 续费时长 (Optional) */
     TimeSpan *int `json:"timeSpan"`
 
-    /* 时间单位 1-小时 2-天 3-月 4-年（autoRenewStatus=1时必传） (Optional) */
-    TimeUnit *int `json:"timeUnit"`
+    /* 时间单位(MONTH-月,YEAR-年) (Optional) */
+    TimeUnit *string `json:"timeUnit"`
 
-    /* 是否绑定关联资源一并续费 0-不绑定,1-绑定（autoRenewStatus=1时必传） (Optional) */
-    AllAutoPay *int `json:"allAutoPay"`
+    /* 资源ID列表,英文逗号分隔  */
+    InstanceIds string `json:"instanceIds"`
+
+    /* 自动续费状态(OPEN-开通自动续费,CLOSE-关闭自动续费,MODIFY-修改自动续费)  */
+    AutoRenewStatus string `json:"autoRenewStatus"`
+
+    /* 是否绑定关联资源一并自动续费(AUTO_RENEW-是,UN_AUTO_RENEW-否) (Optional) */
+    AllAutoPay *string `json:"allAutoPay"`
 }

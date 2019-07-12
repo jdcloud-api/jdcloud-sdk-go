@@ -27,9 +27,6 @@ type UpdateWatermarkRequest struct {
     /* 水印ID  */
     WatermarkId int `json:"watermarkId"`
 
-    /* 水印ID (Optional) */
-    Id *int64 `json:"id"`
-
     /* 水印名称 (Optional) */
     Name *string `json:"name"`
 
@@ -37,10 +34,10 @@ type UpdateWatermarkRequest struct {
     ImgUrl *string `json:"imgUrl"`
 
     /* 宽度 (Optional) */
-    Width *int `json:"width"`
+    Width *string `json:"width"`
 
     /* 高度 (Optional) */
-    Height *int `json:"height"`
+    Height *string `json:"height"`
 
     /* 水印位置 (Optional) */
     Position *string `json:"position"`
@@ -77,7 +74,6 @@ func NewUpdateWatermarkRequest(
 
 /*
  * param watermarkId: 水印ID (Required)
- * param id: 水印ID (Optional)
  * param name: 水印名称 (Optional)
  * param imgUrl: 图片地址 (Optional)
  * param width: 宽度 (Optional)
@@ -89,11 +85,10 @@ func NewUpdateWatermarkRequest(
  */
 func NewUpdateWatermarkRequestWithAllParams(
     watermarkId int,
-    id *int64,
     name *string,
     imgUrl *string,
-    width *int,
-    height *int,
+    width *string,
+    height *string,
     position *string,
     unit *string,
     offsetX *int,
@@ -108,7 +103,6 @@ func NewUpdateWatermarkRequestWithAllParams(
             Version: "v1",
         },
         WatermarkId: watermarkId,
-        Id: id,
         Name: name,
         ImgUrl: imgUrl,
         Width: width,
@@ -138,11 +132,6 @@ func (r *UpdateWatermarkRequest) SetWatermarkId(watermarkId int) {
     r.WatermarkId = watermarkId
 }
 
-/* param id: 水印ID(Optional) */
-func (r *UpdateWatermarkRequest) SetId(id int64) {
-    r.Id = &id
-}
-
 /* param name: 水印名称(Optional) */
 func (r *UpdateWatermarkRequest) SetName(name string) {
     r.Name = &name
@@ -154,12 +143,12 @@ func (r *UpdateWatermarkRequest) SetImgUrl(imgUrl string) {
 }
 
 /* param width: 宽度(Optional) */
-func (r *UpdateWatermarkRequest) SetWidth(width int) {
+func (r *UpdateWatermarkRequest) SetWidth(width string) {
     r.Width = &width
 }
 
 /* param height: 高度(Optional) */
-func (r *UpdateWatermarkRequest) SetHeight(height int) {
+func (r *UpdateWatermarkRequest) SetHeight(height string) {
     r.Height = &height
 }
 
@@ -199,8 +188,8 @@ type UpdateWatermarkResult struct {
     Id int64 `json:"id"`
     Name string `json:"name"`
     ImgUrl string `json:"imgUrl"`
-    Width int `json:"width"`
-    Height int `json:"height"`
+    Width string `json:"width"`
+    Height string `json:"height"`
     Position string `json:"position"`
     Unit string `json:"unit"`
     OffsetX int `json:"offsetX"`

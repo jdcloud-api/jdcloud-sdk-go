@@ -31,10 +31,10 @@ type CreateWatermarkRequest struct {
     ImgUrl *string `json:"imgUrl"`
 
     /* 宽度 (Optional) */
-    Width *int `json:"width"`
+    Width *string `json:"width"`
 
     /* 高度 (Optional) */
-    Height *int `json:"height"`
+    Height *string `json:"height"`
 
     /* 水印位置 (Optional) */
     Position *string `json:"position"`
@@ -79,8 +79,8 @@ func NewCreateWatermarkRequest(
 func NewCreateWatermarkRequestWithAllParams(
     name *string,
     imgUrl *string,
-    width *int,
-    height *int,
+    width *string,
+    height *string,
     position *string,
     unit *string,
     offsetX *int,
@@ -129,12 +129,12 @@ func (r *CreateWatermarkRequest) SetImgUrl(imgUrl string) {
 }
 
 /* param width: 宽度(Optional) */
-func (r *CreateWatermarkRequest) SetWidth(width int) {
+func (r *CreateWatermarkRequest) SetWidth(width string) {
     r.Width = &width
 }
 
 /* param height: 高度(Optional) */
-func (r *CreateWatermarkRequest) SetHeight(height int) {
+func (r *CreateWatermarkRequest) SetHeight(height string) {
     r.Height = &height
 }
 
@@ -174,8 +174,8 @@ type CreateWatermarkResult struct {
     Id int64 `json:"id"`
     Name string `json:"name"`
     ImgUrl string `json:"imgUrl"`
-    Width int `json:"width"`
-    Height int `json:"height"`
+    Width string `json:"width"`
+    Height string `json:"height"`
     Position string `json:"position"`
     Unit string `json:"unit"`
     OffsetX int `json:"offsetX"`

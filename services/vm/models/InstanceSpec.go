@@ -66,4 +66,21 @@ type InstanceSpec struct {
 
     /* 主机描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional) */
     Description *string `json:"description"`
+
+    /* 不使用模板中的密码。
+仅当不使用Ag，并且使用了模板，并且password参数为空时，此参数(值为true)生效。
+若使用模板创建虚机时，又指定了password参数时，此参数无效，以新指定的为准。
+ (Optional) */
+    NoPassword *bool `json:"noPassword"`
+
+    /* 不使用模板中的密钥。
+仅当不使用Ag，并且使用了模板，并且keynames参数为空时，此参数(值为true)生效。
+若使用模板创建虚机时，又指定了keynames参数时，此参数无效，以新指定的为准。
+ (Optional) */
+    NoKeyNames *bool `json:"noKeyNames"`
+
+    /* 不使用模板中的弹性公网IP。
+仅当不使用Ag，并且使用了模板，并且elasticIp参数为空时，此参数(值为true)生效。
+若使用模板创建虚机时，又指定了elasticIp参数时，此参数无效，以新指定的为准。 (Optional) */
+    NoElasticIp *bool `json:"noElasticIp"`
 }

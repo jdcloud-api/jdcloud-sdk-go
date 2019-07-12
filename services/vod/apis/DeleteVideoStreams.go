@@ -108,4 +108,7 @@ type DeleteVideoStreamsResponse struct {
 }
 
 type DeleteVideoStreamsResult struct {
+    OkTaskIds []int64 `json:"okTaskIds"`
+    NotFoundTaskIds []int64 `json:"notFoundTaskIds"`
+    FailedTaskIds []int64 `json:"failedTaskIds"`
 }

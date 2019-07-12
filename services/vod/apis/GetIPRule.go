@@ -100,6 +100,4 @@ type GetIPRuleResult struct {
     RuleType string `json:"ruleType"`
     Config interface{} `json:"config"`
     Enabled bool `json:"enabled"`
-    CreateTime string `json:"createTime"`
-    UpdateTime string `json:"updateTime"`
 }

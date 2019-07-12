@@ -106,6 +106,7 @@ type DescribeLiveDomainDetailResponse struct {
 }
 
 type DescribeLiveDomainDetailResult struct {
+    SourceId int64 `json:"sourceId"`
     PublishDomains []live.PublishDomain `json:"publishDomains"`
     PlayDomains []live.PlayDomain `json:"playDomains"`
 }

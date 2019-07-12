@@ -33,10 +33,4 @@ type CategoryTreeNode struct {
 
     /*  (Optional) */
     Children []CategoryTreeNode `json:"children"`
-
-    /* 创建时间 (Optional) */
-    CreateTime string `json:"createTime"`
-
-    /* 修改时间 (Optional) */
-    UpdateTime string `json:"updateTime"`
 }

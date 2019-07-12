@@ -19,23 +19,34 @@ package models
 
 type WatermarkTemplate struct {
 
+    /* 水印位置
+- 取值范围：左上：1，右上：3， 左下：7，右下：9，默认：1
+ (Optional) */
+    Position int `json:"position"`
+
+    /* 偏移量单位
+- 取值: percent,pixel
+ (Optional) */
+    OffsetUnit string `json:"offsetUnit"`
+
     /* x轴偏移量
-- 单位: 像素
  (Optional) */
     OffSetX int `json:"offSetX"`
 
     /* y轴偏移量
-- 单位: 像素
  (Optional) */
     OffSetY int `json:"offSetY"`
 
+    /* 水印大小单位
+- 取值: percent,pixel
+ (Optional) */
+    SizeUnit string `json:"sizeUnit"`
+
     /* 水印宽度
-- 单位: 像素
  (Optional) */
     Width int `json:"width"`
 
     /* 水印高度
-- 单位: 像素
  (Optional) */
     Height int `json:"height"`
 

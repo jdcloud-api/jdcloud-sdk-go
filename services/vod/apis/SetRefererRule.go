@@ -27,9 +27,6 @@ type SetRefererRuleRequest struct {
     /* 域名ID  */
     DomainId int `json:"domainId"`
 
-    /* 规则类型，取值 'referer' (Optional) */
-    RuleType *string `json:"ruleType"`
-
     /* 规则配置对象 (Optional) */
     Config *interface{} `json:"config"`
 
@@ -59,13 +56,11 @@ func NewSetRefererRuleRequest(
 
 /*
  * param domainId: 域名ID (Required)
- * param ruleType: 规则类型，取值 'referer' (Optional)
  * param config: 规则配置对象 (Optional)
  * param enabled: 是否启用该规则 (Optional)
  */
 func NewSetRefererRuleRequestWithAllParams(
     domainId int,
-    ruleType *string,
     config *interface{},
     enabled *bool,
 ) *SetRefererRuleRequest {
@@ -78,7 +73,6 @@ func NewSetRefererRuleRequestWithAllParams(
             Version: "v1",
         },
         DomainId: domainId,
-        RuleType: ruleType,
         Config: config,
         Enabled: enabled,
     }
@@ -100,11 +94,6 @@ func NewSetRefererRuleRequestWithoutParam() *SetRefererRuleRequest {
 /* param domainId: 域名ID(Required) */
 func (r *SetRefererRuleRequest) SetDomainId(domainId int) {
     r.DomainId = domainId
-}
-
-/* param ruleType: 规则类型，取值 'referer'(Optional) */
-func (r *SetRefererRuleRequest) SetRuleType(ruleType string) {
-    r.RuleType = &ruleType
 }
 
 /* param config: 规则配置对象(Optional) */

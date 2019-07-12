@@ -27,9 +27,6 @@ type CreateCategoryRequest struct {
     /* 分类名称 (Optional) */
     Name *string `json:"name"`
 
-    /* 分类级别 (Optional) */
-    Level *int `json:"level"`
-
     /* 父分类ID (Optional) */
     ParentId *int64 `json:"parentId"`
 
@@ -56,13 +53,11 @@ func NewCreateCategoryRequest(
 
 /*
  * param name: 分类名称 (Optional)
- * param level: 分类级别 (Optional)
  * param parentId: 父分类ID (Optional)
  * param description: 分类描述信息 (Optional)
  */
 func NewCreateCategoryRequestWithAllParams(
     name *string,
-    level *int,
     parentId *int64,
     description *string,
 ) *CreateCategoryRequest {
@@ -75,7 +70,6 @@ func NewCreateCategoryRequestWithAllParams(
             Version: "v1",
         },
         Name: name,
-        Level: level,
         ParentId: parentId,
         Description: description,
     }
@@ -97,11 +91,6 @@ func NewCreateCategoryRequestWithoutParam() *CreateCategoryRequest {
 /* param name: 分类名称(Optional) */
 func (r *CreateCategoryRequest) SetName(name string) {
     r.Name = &name
-}
-
-/* param level: 分类级别(Optional) */
-func (r *CreateCategoryRequest) SetLevel(level int) {
-    r.Level = &level
 }
 
 /* param parentId: 父分类ID(Optional) */

@@ -18,14 +18,15 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    vod "github.com/jdcloud-api/jdcloud-sdk-go/services/vod/models"
 )
 
 type BatchUpdateVideosRequest struct {
 
     core.JDCloudRequest
 
-    /*  (Optional) */
-    Contents []interface{} `json:"contents"`
+    /* 批量更新视频的条目列表信息 (Optional) */
+    Bulk []vod.UpdateVideoBulkItem `json:"bulk"`
 }
 
 /*
@@ -46,10 +47,10 @@ func NewBatchUpdateVideosRequest(
 }
 
 /*
- * param contents:  (Optional)
+ * param bulk: 批量更新视频的条目列表信息 (Optional)
  */
 func NewBatchUpdateVideosRequestWithAllParams(
-    contents []interface{},
+    bulk []vod.UpdateVideoBulkItem,
 ) *BatchUpdateVideosRequest {
 
     return &BatchUpdateVideosRequest{
@@ -59,7 +60,7 @@ func NewBatchUpdateVideosRequestWithAllParams(
             Header:  nil,
             Version: "v1",
         },
-        Contents: contents,
+        Bulk: bulk,
     }
 }
 
@@ -76,9 +77,9 @@ func NewBatchUpdateVideosRequestWithoutParam() *BatchUpdateVideosRequest {
     }
 }
 
-/* param contents: (Optional) */
-func (r *BatchUpdateVideosRequest) SetContents(contents []interface{}) {
-    r.Contents = contents
+/* param bulk: 批量更新视频的条目列表信息(Optional) */
+func (r *BatchUpdateVideosRequest) SetBulk(bulk []vod.UpdateVideoBulkItem) {
+    r.Bulk = bulk
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
@@ -94,6 +95,7 @@ type BatchUpdateVideosResponse struct {
 }
 
 type BatchUpdateVideosResult struct {
-    UpdateVideoIds []string `json:"updateVideoIds"`
+    OkVideoIds []string `json:"okVideoIds"`
     NotFoundVideoIds []string `json:"notFoundVideoIds"`
+    FailedVideoIds []string `json:"failedVideoIds"`
 }

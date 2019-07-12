@@ -98,6 +98,6 @@ type GetVideoPlayInfoResponse struct {
 }
 
 type GetVideoPlayInfoResult struct {
-    VideoInfo vod.VideoBaseInfo `json:"videoInfo"`
+    BaseInfo vod.VideoBaseInfo `json:"baseInfo"`
     PlayInfoList []vod.VideoPlayInfo `json:"playInfoList"`
 }

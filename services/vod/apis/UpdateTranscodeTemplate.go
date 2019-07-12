@@ -28,19 +28,16 @@ type UpdateTranscodeTemplateRequest struct {
     /* 模板ID  */
     TemplateId int `json:"templateId"`
 
-    /* 模板ID (Optional) */
-    Id *int64 `json:"id"`
-
     /* 模板名称 (Optional) */
     Name *string `json:"name"`
 
-    /* 视频参数 (Optional) */
+    /*  (Optional) */
     Video *vod.Video `json:"video"`
 
-    /* 音频参数 (Optional) */
+    /*  (Optional) */
     Audio *vod.Audio `json:"audio"`
 
-    /* 封装配置 (Optional) */
+    /*  (Optional) */
     Encapsulation *vod.Encapsulation `json:"encapsulation"`
 
     /* 清晰度规格 (Optional) */
@@ -69,16 +66,14 @@ func NewUpdateTranscodeTemplateRequest(
 
 /*
  * param templateId: 模板ID (Required)
- * param id: 模板ID (Optional)
  * param name: 模板名称 (Optional)
- * param video: 视频参数 (Optional)
- * param audio: 音频参数 (Optional)
- * param encapsulation: 封装配置 (Optional)
+ * param video:  (Optional)
+ * param audio:  (Optional)
+ * param encapsulation:  (Optional)
  * param definition: 清晰度规格 (Optional)
  */
 func NewUpdateTranscodeTemplateRequestWithAllParams(
     templateId int,
-    id *int64,
     name *string,
     video *vod.Video,
     audio *vod.Audio,
@@ -94,7 +89,6 @@ func NewUpdateTranscodeTemplateRequestWithAllParams(
             Version: "v1",
         },
         TemplateId: templateId,
-        Id: id,
         Name: name,
         Video: video,
         Audio: audio,
@@ -121,27 +115,22 @@ func (r *UpdateTranscodeTemplateRequest) SetTemplateId(templateId int) {
     r.TemplateId = templateId
 }
 
-/* param id: 模板ID(Optional) */
-func (r *UpdateTranscodeTemplateRequest) SetId(id int64) {
-    r.Id = &id
-}
-
 /* param name: 模板名称(Optional) */
 func (r *UpdateTranscodeTemplateRequest) SetName(name string) {
     r.Name = &name
 }
 
-/* param video: 视频参数(Optional) */
+/* param video: (Optional) */
 func (r *UpdateTranscodeTemplateRequest) SetVideo(video *vod.Video) {
     r.Video = video
 }
 
-/* param audio: 音频参数(Optional) */
+/* param audio: (Optional) */
 func (r *UpdateTranscodeTemplateRequest) SetAudio(audio *vod.Audio) {
     r.Audio = audio
 }
 
-/* param encapsulation: 封装配置(Optional) */
+/* param encapsulation: (Optional) */
 func (r *UpdateTranscodeTemplateRequest) SetEncapsulation(encapsulation *vod.Encapsulation) {
     r.Encapsulation = encapsulation
 }

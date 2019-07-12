@@ -34,8 +34,8 @@ type CreateImageRequest struct {
     /* 镜像名称，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。  */
     Name string `json:"name"`
 
-    /* 镜像描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。  */
-    Description string `json:"description"`
+    /* 镜像描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional) */
+    Description *string `json:"description"`
 
     /* 数据盘列表，可以在实例已挂载数据盘的基础上，额外增加新的快照、空盘、或排除云主机中的数据盘。 (Optional) */
     DataDisks []vm.InstanceDiskAttachmentSpec `json:"dataDisks"`
@@ -45,7 +45,6 @@ type CreateImageRequest struct {
  * param regionId: 地域ID (Required)
  * param instanceId: 云主机ID (Required)
  * param name: 镜像名称，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Required)
- * param description: 镜像描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -53,7 +52,6 @@ func NewCreateImageRequest(
     regionId string,
     instanceId string,
     name string,
-    description string,
 ) *CreateImageRequest {
 
 	return &CreateImageRequest{
@@ -66,7 +64,6 @@ func NewCreateImageRequest(
         RegionId: regionId,
         InstanceId: instanceId,
         Name: name,
-        Description: description,
 	}
 }
 
@@ -74,14 +71,14 @@ func NewCreateImageRequest(
  * param regionId: 地域ID (Required)
  * param instanceId: 云主机ID (Required)
  * param name: 镜像名称，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Required)
- * param description: 镜像描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Required)
+ * param description: 镜像描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional)
  * param dataDisks: 数据盘列表，可以在实例已挂载数据盘的基础上，额外增加新的快照、空盘、或排除云主机中的数据盘。 (Optional)
  */
 func NewCreateImageRequestWithAllParams(
     regionId string,
     instanceId string,
     name string,
-    description string,
+    description *string,
     dataDisks []vm.InstanceDiskAttachmentSpec,
 ) *CreateImageRequest {
 
@@ -128,9 +125,9 @@ func (r *CreateImageRequest) SetName(name string) {
     r.Name = name
 }
 
-/* param description: 镜像描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。(Required) */
+/* param description: 镜像描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。(Optional) */
 func (r *CreateImageRequest) SetDescription(description string) {
-    r.Description = description
+    r.Description = &description
 }
 
 /* param dataDisks: 数据盘列表，可以在实例已挂载数据盘的基础上，额外增加新的快照、空盘、或排除云主机中的数据盘。(Optional) */

@@ -40,7 +40,7 @@ func NewNativecontainerClient(credential *core.Credential) *NativecontainerClien
             Credential:  *credential,
             Config:      *config,
             ServiceName: "nativecontainer",
-            Revision:    "1.0.1",
+            Revision:    "1.0.2",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }

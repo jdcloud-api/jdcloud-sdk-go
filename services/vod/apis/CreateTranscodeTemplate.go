@@ -28,13 +28,13 @@ type CreateTranscodeTemplateRequest struct {
     /* 模板名称 (Optional) */
     Name *string `json:"name"`
 
-    /* 视频参数 (Optional) */
+    /*  (Optional) */
     Video *vod.Video `json:"video"`
 
-    /* 音频参数 (Optional) */
+    /*  (Optional) */
     Audio *vod.Audio `json:"audio"`
 
-    /* 封装配置 (Optional) */
+    /*  (Optional) */
     Encapsulation *vod.Encapsulation `json:"encapsulation"`
 
     /* 清晰度规格 (Optional) */
@@ -60,9 +60,9 @@ func NewCreateTranscodeTemplateRequest(
 
 /*
  * param name: 模板名称 (Optional)
- * param video: 视频参数 (Optional)
- * param audio: 音频参数 (Optional)
- * param encapsulation: 封装配置 (Optional)
+ * param video:  (Optional)
+ * param audio:  (Optional)
+ * param encapsulation:  (Optional)
  * param definition: 清晰度规格 (Optional)
  */
 func NewCreateTranscodeTemplateRequestWithAllParams(
@@ -106,17 +106,17 @@ func (r *CreateTranscodeTemplateRequest) SetName(name string) {
     r.Name = &name
 }
 
-/* param video: 视频参数(Optional) */
+/* param video: (Optional) */
 func (r *CreateTranscodeTemplateRequest) SetVideo(video *vod.Video) {
     r.Video = video
 }
 
-/* param audio: 音频参数(Optional) */
+/* param audio: (Optional) */
 func (r *CreateTranscodeTemplateRequest) SetAudio(audio *vod.Audio) {
     r.Audio = audio
 }
 
-/* param encapsulation: 封装配置(Optional) */
+/* param encapsulation: (Optional) */
 func (r *CreateTranscodeTemplateRequest) SetEncapsulation(encapsulation *vod.Encapsulation) {
     r.Encapsulation = encapsulation
 }

@@ -26,5 +26,5 @@ type InstanceTemplateNetworkInterfaceSpec struct {
     SecurityGroups []string `json:"securityGroups"`
 
     /* PortSecurity，取值为0或者1，默认为1 (Optional) */
-    SanityCheck int `json:"sanityCheck"`
+    SanityCheck *int `json:"sanityCheck"`
 }

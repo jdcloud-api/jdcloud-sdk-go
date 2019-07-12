@@ -44,6 +44,9 @@ name - 实例名称，模糊匹配，支持单个
 subnetId - 镜像ID，模糊匹配，支持单个
  (Optional) */
     Filters []common.Filter `json:"filters"`
+
+    /* Tag筛选条件 (Optional) */
+    Tags []pod.TagFilter `json:"tags"`
 }
 
 /*
@@ -78,12 +81,14 @@ phase - pod 状态，精确匹配，支持多个
 name - 实例名称，模糊匹配，支持单个
 subnetId - 镜像ID，模糊匹配，支持单个
  (Optional)
+ * param tags: Tag筛选条件 (Optional)
  */
 func NewDescribePodsRequestWithAllParams(
     regionId string,
     pageNumber *int,
     pageSize *int,
     filters []common.Filter,
+    tags []pod.TagFilter,
 ) *DescribePodsRequest {
 
     return &DescribePodsRequest{
@@ -97,6 +102,7 @@ func NewDescribePodsRequestWithAllParams(
         PageNumber: pageNumber,
         PageSize: pageSize,
         Filters: filters,
+        Tags: tags,
     }
 }
 
@@ -138,6 +144,11 @@ subnetId - 镜像ID，模糊匹配，支持单个
 (Optional) */
 func (r *DescribePodsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
+}
+
+/* param tags: Tag筛选条件(Optional) */
+func (r *DescribePodsRequest) SetTags(tags []pod.TagFilter) {
+    r.Tags = tags
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

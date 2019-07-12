@@ -38,7 +38,7 @@ type InstanceTemplateData struct {
     DataDisks []InstanceTemplateDiskAttachment `json:"dataDisks"`
 
     /* 主网卡信息 (Optional) */
-    PrimaryNetworkInterface InstanceTemplateNetworkInterfaceAttachmentSpec `json:"primaryNetworkInterface"`
+    PrimaryNetworkInterface InstanceTemplateNetworkInterfaceAttachment `json:"primaryNetworkInterface"`
 
     /* 主网卡主IP关联的弹性IP规格 (Optional) */
     ElasticIp InstanceTemplateElasticIp `json:"elasticIp"`

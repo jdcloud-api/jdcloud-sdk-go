@@ -40,7 +40,7 @@ func NewRenewalClient(credential *core.Credential) *RenewalClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "renewal",
-            Revision:    "0.1.0",
+            Revision:    "0.2.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -53,7 +53,7 @@ func (c *RenewalClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-/* 开通、取消实例自动续费 */
+/* 为一个或多个实例设置自动续费服务。 */
 func (c *RenewalClient) SetRenewal(request *renewal.SetRenewalRequest) (*renewal.SetRenewalResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -73,7 +73,7 @@ func (c *RenewalClient) SetRenewal(request *renewal.SetRenewalRequest) (*renewal
     return jdResp, err
 }
 
-/* 实例续费 */
+/* 对相关实例进行续费。调用该接口会创建一个续费订单，并自动扣除您账户可用代金券和余额完成支付，如因为某些原因支付失败，订单会自动取消。 */
 func (c *RenewalClient) RenewInstance(request *renewal.RenewInstanceRequest) (*renewal.RenewInstanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -93,7 +93,7 @@ func (c *RenewalClient) RenewInstance(request *renewal.RenewInstanceRequest) (*r
     return jdResp, err
 }
 
-/* 查询可续费实例 */
+/* 提供可续费的实例信息查询。 */
 func (c *RenewalClient) QueryInstance(request *renewal.QueryInstanceRequest) (*renewal.QueryInstanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")

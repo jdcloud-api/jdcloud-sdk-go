@@ -24,7 +24,7 @@ type BatchDeleteVideosRequest struct {
 
     core.JDCloudRequest
 
-    /*  (Optional) */
+    /* 需要删除的视频ID列表 (Optional) */
     VideoIds []string `json:"videoIds"`
 }
 
@@ -46,7 +46,7 @@ func NewBatchDeleteVideosRequest(
 }
 
 /*
- * param videoIds:  (Optional)
+ * param videoIds: 需要删除的视频ID列表 (Optional)
  */
 func NewBatchDeleteVideosRequestWithAllParams(
     videoIds []string,
@@ -76,7 +76,7 @@ func NewBatchDeleteVideosRequestWithoutParam() *BatchDeleteVideosRequest {
     }
 }
 
-/* param videoIds: (Optional) */
+/* param videoIds: 需要删除的视频ID列表(Optional) */
 func (r *BatchDeleteVideosRequest) SetVideoIds(videoIds []string) {
     r.VideoIds = videoIds
 }
@@ -94,6 +94,7 @@ type BatchDeleteVideosResponse struct {
 }
 
 type BatchDeleteVideosResult struct {
-    DeletedVideoIds []string `json:"deletedVideoIds"`
+    OkVideoIds []string `json:"okVideoIds"`
     NotFoundVideoIds []string `json:"notFoundVideoIds"`
+    FailedVideoIds []string `json:"failedVideoIds"`
 }

@@ -40,7 +40,7 @@ func NewPodClient(credential *core.Credential) *PodClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "pod",
-            Revision:    "1.0.0",
+            Revision:    "1.0.4",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -245,7 +245,7 @@ func (c *PodClient) ModifyPodAttribute(request *pod.ModifyPodAttributeRequest) (
 /* pod 状态必须为 stopped、running 或 error状态。 <br>
 按量付费的实例，如不主动删除将一直运行，不再使用的实例，可通过本接口主动停用。<br>
 只能支持主动删除按量计费类型的实例。包年包月过期的 pod 也可以删除，其它的情况还请发工单系统。计费状态异常的容器无法删除。
- */
+ [MFA enabled] */
 func (c *PodClient) DeletePod(request *pod.DeletePodRequest) (*pod.DeletePodResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -256,6 +256,27 @@ func (c *PodClient) DeletePod(request *pod.DeletePodRequest) (*pod.DeletePodResp
     }
 
     jdResp := &pod.DeletePodResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 对 pod 中的容器使用新的镜像进行重置，pod 需要处于关闭状态。
+ */
+func (c *PodClient) RebuildPod(request *pod.RebuildPodRequest) (*pod.RebuildPodResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &pod.RebuildPodResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

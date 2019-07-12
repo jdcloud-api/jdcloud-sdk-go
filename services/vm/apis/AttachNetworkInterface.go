@@ -33,7 +33,7 @@ type AttachNetworkInterfaceRequest struct {
     /* 弹性网卡ID  */
     NetworkInterfaceId string `json:"networkInterfaceId"`
 
-    /* 随主机自动删除，默认为False (Optional) */
+    /* 随云主机删除而自动删除，默认为False (Optional) */
     AutoDelete *bool `json:"autoDelete"`
 }
 
@@ -67,7 +67,7 @@ func NewAttachNetworkInterfaceRequest(
  * param regionId: 地域ID (Required)
  * param instanceId: 云主机ID (Required)
  * param networkInterfaceId: 弹性网卡ID (Required)
- * param autoDelete: 随主机自动删除，默认为False (Optional)
+ * param autoDelete: 随云主机删除而自动删除，默认为False (Optional)
  */
 func NewAttachNetworkInterfaceRequestWithAllParams(
     regionId string,
@@ -118,7 +118,7 @@ func (r *AttachNetworkInterfaceRequest) SetNetworkInterfaceId(networkInterfaceId
     r.NetworkInterfaceId = networkInterfaceId
 }
 
-/* param autoDelete: 随主机自动删除，默认为False(Optional) */
+/* param autoDelete: 随云主机删除而自动删除，默认为False(Optional) */
 func (r *AttachNetworkInterfaceRequest) SetAutoDelete(autoDelete bool) {
     r.AutoDelete = &autoDelete
 }
