@@ -25,10 +25,10 @@ type ListDomainsRequest struct {
 
     core.JDCloudRequest
 
-    /* 页码；默认值为1 (Optional) */
+    /* 页码；默认值为 1 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* 分页大小；默认值为10；取值范围[10, 100] (Optional) */
+    /* 分页大小；默认值为 10；取值范围 [10, 100] (Optional) */
     PageSize *int `json:"pageSize"`
 
     /*  (Optional) */
@@ -53,8 +53,8 @@ func NewListDomainsRequest(
 }
 
 /*
- * param pageNumber: 页码；默认值为1 (Optional)
- * param pageSize: 分页大小；默认值为10；取值范围[10, 100] (Optional)
+ * param pageNumber: 页码；默认值为 1 (Optional)
+ * param pageSize: 分页大小；默认值为 10；取值范围 [10, 100] (Optional)
  * param sorts:  (Optional)
  */
 func NewListDomainsRequestWithAllParams(
@@ -89,12 +89,12 @@ func NewListDomainsRequestWithoutParam() *ListDomainsRequest {
     }
 }
 
-/* param pageNumber: 页码；默认值为1(Optional) */
+/* param pageNumber: 页码；默认值为 1(Optional) */
 func (r *ListDomainsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
-/* param pageSize: 分页大小；默认值为10；取值范围[10, 100](Optional) */
+/* param pageSize: 分页大小；默认值为 10；取值范围 [10, 100](Optional) */
 func (r *ListDomainsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
@@ -117,4 +117,9 @@ type ListDomainsResponse struct {
 }
 
 type ListDomainsResult struct {
+    PageNumber int `json:"pageNumber"`
+    PageSize int `json:"pageSize"`
+    TotalElements int `json:"totalElements"`
+    TotalPages int `json:"totalPages"`
+    Content []vod.DomainObject `json:"content"`
 }

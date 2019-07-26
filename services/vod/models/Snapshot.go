@@ -25,9 +25,9 @@ type Snapshot struct {
     /* 截图URL (Optional) */
     ImgUrl string `json:"imgUrl"`
 
-    /* 宽度 (Optional) */
+    /* 截图宽度 (Optional) */
     Width int `json:"width"`
 
-    /* 高度 (Optional) */
+    /* 截图高度 (Optional) */
     Height int `json:"height"`
 }

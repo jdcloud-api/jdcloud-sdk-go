@@ -22,7 +22,13 @@ type VideoPlayInfo struct {
     /* 生成播放信息的转码任务ID (Optional) */
     TaskId string `json:"taskId"`
 
-    /* 清晰度规格 (Optional) */
+    /* 清晰度规格标记。取值范围：
+  SD - 标清
+  HD - 高清
+  FHD - 超清
+  2K
+  4K
+ (Optional) */
     Definition string `json:"definition"`
 
     /* 媒体类型 (Optional) */
@@ -49,13 +55,13 @@ type VideoPlayInfo struct {
     /* 封装格式 (Optional) */
     Format string `json:"format"`
 
-    /* 宽度 (Optional) */
+    /* 视频宽度 (Optional) */
     Width int `json:"width"`
 
-    /* 高度 (Optional) */
+    /* 视频高度 (Optional) */
     Height int `json:"height"`
 
-    /* 帧率 (Optional) */
+    /* 视频帧率 (Optional) */
     Fps string `json:"fps"`
 
     /*  (Optional) */

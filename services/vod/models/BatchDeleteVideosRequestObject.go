@@ -19,6 +19,6 @@ package models
 
 type BatchDeleteVideosRequestObject struct {
 
-    /* 需要删除的视频ID列表 (Optional) */
+    /* 视频ID集合  */
     VideoIds []string `json:"videoIds"`
 }

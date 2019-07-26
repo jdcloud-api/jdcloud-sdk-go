@@ -19,12 +19,12 @@ package models
 
 type Filter struct {
 
-    /* 筛选属性名  */
+    /* 过滤器属性名  */
     Name string `json:"name"`
 
-    /* 筛选操作符，默认eq (Optional) */
+    /* 过滤器操作符，默认值为 eq (Optional) */
     Operator *string `json:"operator"`
 
-    /* 筛选值列表  */
+    /* 过滤器属性值  */
     Values []string `json:"values"`
 }

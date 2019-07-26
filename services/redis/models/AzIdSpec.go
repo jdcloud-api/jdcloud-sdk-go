@@ -19,9 +19,9 @@ package models
 
 type AzIdSpec struct {
 
-    /* 缓存Redis主实例所在区域可用区ID (Optional) */
-    Master *string `json:"master"`
+    /* 缓存Redis主实例所在的可用区ID  */
+    Master string `json:"master"`
 
-    /* 缓存Redis从实例所在区域可用区ID (Optional) */
-    Slave *string `json:"slave"`
+    /* 缓存Redis从实例所在的可用区ID  */
+    Slave string `json:"slave"`
 }

@@ -32,6 +32,9 @@ type ForbidLiveStreamRequest struct {
 
     /* 流名称  */
     StreamName string `json:"streamName"`
+
+    /* 禁流时长,单位:s 0表示永久禁流;大于0为限时禁流,超过时长自动解禁 (Optional) */
+    ForbidTime *int `json:"forbidTime"`
 }
 
 /*
@@ -64,11 +67,13 @@ func NewForbidLiveStreamRequest(
  * param publishDomain: 推流域名 (Required)
  * param appName: 应用名称 (Required)
  * param streamName: 流名称 (Required)
+ * param forbidTime: 禁流时长,单位:s 0表示永久禁流;大于0为限时禁流,超过时长自动解禁 (Optional)
  */
 func NewForbidLiveStreamRequestWithAllParams(
     publishDomain string,
     appName string,
     streamName string,
+    forbidTime *int,
 ) *ForbidLiveStreamRequest {
 
     return &ForbidLiveStreamRequest{
@@ -81,6 +86,7 @@ func NewForbidLiveStreamRequestWithAllParams(
         PublishDomain: publishDomain,
         AppName: appName,
         StreamName: streamName,
+        ForbidTime: forbidTime,
     }
 }
 
@@ -110,6 +116,11 @@ func (r *ForbidLiveStreamRequest) SetAppName(appName string) {
 /* param streamName: 流名称(Required) */
 func (r *ForbidLiveStreamRequest) SetStreamName(streamName string) {
     r.StreamName = streamName
+}
+
+/* param forbidTime: 禁流时长,单位:s 0表示永久禁流;大于0为限时禁流,超过时长自动解禁(Optional) */
+func (r *ForbidLiveStreamRequest) SetForbidTime(forbidTime int) {
+    r.ForbidTime = &forbidTime
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

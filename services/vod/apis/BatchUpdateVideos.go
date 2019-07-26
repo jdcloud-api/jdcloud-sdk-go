@@ -25,15 +25,17 @@ type BatchUpdateVideosRequest struct {
 
     core.JDCloudRequest
 
-    /* 批量更新视频的条目列表信息 (Optional) */
-    Bulk []vod.UpdateVideoBulkItem `json:"bulk"`
+    /* 批量更新视频的条目集合  */
+    BulkItems []vod.BatchUpdateVideosBulkItem `json:"bulkItems"`
 }
 
 /*
+ * param bulkItems: 批量更新视频的条目集合 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewBatchUpdateVideosRequest(
+    bulkItems []vod.BatchUpdateVideosBulkItem,
 ) *BatchUpdateVideosRequest {
 
 	return &BatchUpdateVideosRequest{
@@ -43,14 +45,15 @@ func NewBatchUpdateVideosRequest(
 			Header:  nil,
 			Version: "v1",
 		},
+        BulkItems: bulkItems,
 	}
 }
 
 /*
- * param bulk: 批量更新视频的条目列表信息 (Optional)
+ * param bulkItems: 批量更新视频的条目集合 (Required)
  */
 func NewBatchUpdateVideosRequestWithAllParams(
-    bulk []vod.UpdateVideoBulkItem,
+    bulkItems []vod.BatchUpdateVideosBulkItem,
 ) *BatchUpdateVideosRequest {
 
     return &BatchUpdateVideosRequest{
@@ -60,7 +63,7 @@ func NewBatchUpdateVideosRequestWithAllParams(
             Header:  nil,
             Version: "v1",
         },
-        Bulk: bulk,
+        BulkItems: bulkItems,
     }
 }
 
@@ -77,9 +80,9 @@ func NewBatchUpdateVideosRequestWithoutParam() *BatchUpdateVideosRequest {
     }
 }
 
-/* param bulk: 批量更新视频的条目列表信息(Optional) */
-func (r *BatchUpdateVideosRequest) SetBulk(bulk []vod.UpdateVideoBulkItem) {
-    r.Bulk = bulk
+/* param bulkItems: 批量更新视频的条目集合(Required) */
+func (r *BatchUpdateVideosRequest) SetBulkItems(bulkItems []vod.BatchUpdateVideosBulkItem) {
+    r.BulkItems = bulkItems
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

@@ -28,11 +28,11 @@ type DescribeDomainsLogRequest struct {
     /* 播放域名，多个时以逗号（,）分隔  */
     Domains string `json:"domains"`
 
-    /* 时间间隔，取值(hour，day，fiveMin),不传默认小时 (Optional) */
+    /* 时间间隔，取值(hour，day),不传默认小时
+- 按小时（hour）下载时是.log文件
+- 按天（day）下载时是.zip文件
+ (Optional) */
     Interval *string `json:"interval"`
-
-    /* 日志后缀格式，取值（zip，log，gz）,默认值为log (Optional) */
-    LogType *string `json:"logType"`
 
     /* 起始时间
 - UTC时间
@@ -79,8 +79,10 @@ func NewDescribeDomainsLogRequest(
 
 /*
  * param domains: 播放域名，多个时以逗号（,）分隔 (Required)
- * param interval: 时间间隔，取值(hour，day，fiveMin),不传默认小时 (Optional)
- * param logType: 日志后缀格式，取值（zip，log，gz）,默认值为log (Optional)
+ * param interval: 时间间隔，取值(hour，day),不传默认小时
+- 按小时（hour）下载时是.log文件
+- 按天（day）下载时是.zip文件
+ (Optional)
  * param startTime: 起始时间
 - UTC时间
   格式:yyyy-MM-dd'T'HH:mm:ss'Z'
@@ -96,7 +98,6 @@ func NewDescribeDomainsLogRequest(
 func NewDescribeDomainsLogRequestWithAllParams(
     domains string,
     interval *string,
-    logType *string,
     startTime string,
     endTime *string,
 ) *DescribeDomainsLogRequest {
@@ -110,7 +111,6 @@ func NewDescribeDomainsLogRequestWithAllParams(
         },
         Domains: domains,
         Interval: interval,
-        LogType: logType,
         StartTime: startTime,
         EndTime: endTime,
     }
@@ -134,14 +134,12 @@ func (r *DescribeDomainsLogRequest) SetDomains(domains string) {
     r.Domains = domains
 }
 
-/* param interval: 时间间隔，取值(hour，day，fiveMin),不传默认小时(Optional) */
+/* param interval: 时间间隔，取值(hour，day),不传默认小时
+- 按小时（hour）下载时是.log文件
+- 按天（day）下载时是.zip文件
+(Optional) */
 func (r *DescribeDomainsLogRequest) SetInterval(interval string) {
     r.Interval = &interval
-}
-
-/* param logType: 日志后缀格式，取值（zip，log，gz）,默认值为log(Optional) */
-func (r *DescribeDomainsLogRequest) SetLogType(logType string) {
-    r.LogType = &logType
 }
 
 /* param startTime: 起始时间

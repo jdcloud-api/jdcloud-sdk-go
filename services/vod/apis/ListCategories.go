@@ -25,10 +25,10 @@ type ListCategoriesRequest struct {
 
     core.JDCloudRequest
 
-    /* 页码；默认值为1 (Optional) */
+    /* 页码；默认值为 1 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* 分页大小；默认值为10；取值范围[10, 100] (Optional) */
+    /* 分页大小；默认值为 10；取值范围 [10, 100] (Optional) */
     PageSize *int `json:"pageSize"`
 
     /*  (Optional) */
@@ -53,8 +53,8 @@ func NewListCategoriesRequest(
 }
 
 /*
- * param pageNumber: 页码；默认值为1 (Optional)
- * param pageSize: 分页大小；默认值为10；取值范围[10, 100] (Optional)
+ * param pageNumber: 页码；默认值为 1 (Optional)
+ * param pageSize: 分页大小；默认值为 10；取值范围 [10, 100] (Optional)
  * param sorts:  (Optional)
  */
 func NewListCategoriesRequestWithAllParams(
@@ -89,12 +89,12 @@ func NewListCategoriesRequestWithoutParam() *ListCategoriesRequest {
     }
 }
 
-/* param pageNumber: 页码；默认值为1(Optional) */
+/* param pageNumber: 页码；默认值为 1(Optional) */
 func (r *ListCategoriesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
-/* param pageSize: 分页大小；默认值为10；取值范围[10, 100](Optional) */
+/* param pageSize: 分页大小；默认值为 10；取值范围 [10, 100](Optional) */
 func (r *ListCategoriesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
@@ -117,4 +117,9 @@ type ListCategoriesResponse struct {
 }
 
 type ListCategoriesResult struct {
+    PageNumber int `json:"pageNumber"`
+    PageSize int `json:"pageSize"`
+    TotalElements int `json:"totalElements"`
+    TotalPages int `json:"totalPages"`
+    Content []vod.CategoryObject `json:"content"`
 }

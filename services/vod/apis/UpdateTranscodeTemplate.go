@@ -31,17 +31,29 @@ type UpdateTranscodeTemplateRequest struct {
     /* 模板名称 (Optional) */
     Name *string `json:"name"`
 
-    /*  (Optional) */
+    /* 视频参数配置 (Optional) */
     Video *vod.Video `json:"video"`
 
-    /*  (Optional) */
+    /* 音频参数配置 (Optional) */
     Audio *vod.Audio `json:"audio"`
 
-    /*  (Optional) */
+    /* 封装配置 (Optional) */
     Encapsulation *vod.Encapsulation `json:"encapsulation"`
 
-    /* 清晰度规格 (Optional) */
+    /* 清晰度规格标记。取值范围：
+  SD - 标清
+  HD - 高清
+  FHD - 超清
+  2K
+  4K
+ (Optional) */
     Definition *string `json:"definition"`
+
+    /* 模板类型。取值范围：
+  jdchd - 京享超清
+  jdchs - 极速转码
+ (Optional) */
+    TemplateType *string `json:"templateType"`
 }
 
 /*
@@ -67,10 +79,20 @@ func NewUpdateTranscodeTemplateRequest(
 /*
  * param templateId: 模板ID (Required)
  * param name: 模板名称 (Optional)
- * param video:  (Optional)
- * param audio:  (Optional)
- * param encapsulation:  (Optional)
- * param definition: 清晰度规格 (Optional)
+ * param video: 视频参数配置 (Optional)
+ * param audio: 音频参数配置 (Optional)
+ * param encapsulation: 封装配置 (Optional)
+ * param definition: 清晰度规格标记。取值范围：
+  SD - 标清
+  HD - 高清
+  FHD - 超清
+  2K
+  4K
+ (Optional)
+ * param templateType: 模板类型。取值范围：
+  jdchd - 京享超清
+  jdchs - 极速转码
+ (Optional)
  */
 func NewUpdateTranscodeTemplateRequestWithAllParams(
     templateId int,
@@ -79,6 +101,7 @@ func NewUpdateTranscodeTemplateRequestWithAllParams(
     audio *vod.Audio,
     encapsulation *vod.Encapsulation,
     definition *string,
+    templateType *string,
 ) *UpdateTranscodeTemplateRequest {
 
     return &UpdateTranscodeTemplateRequest{
@@ -94,6 +117,7 @@ func NewUpdateTranscodeTemplateRequestWithAllParams(
         Audio: audio,
         Encapsulation: encapsulation,
         Definition: definition,
+        TemplateType: templateType,
     }
 }
 
@@ -120,24 +144,38 @@ func (r *UpdateTranscodeTemplateRequest) SetName(name string) {
     r.Name = &name
 }
 
-/* param video: (Optional) */
+/* param video: 视频参数配置(Optional) */
 func (r *UpdateTranscodeTemplateRequest) SetVideo(video *vod.Video) {
     r.Video = video
 }
 
-/* param audio: (Optional) */
+/* param audio: 音频参数配置(Optional) */
 func (r *UpdateTranscodeTemplateRequest) SetAudio(audio *vod.Audio) {
     r.Audio = audio
 }
 
-/* param encapsulation: (Optional) */
+/* param encapsulation: 封装配置(Optional) */
 func (r *UpdateTranscodeTemplateRequest) SetEncapsulation(encapsulation *vod.Encapsulation) {
     r.Encapsulation = encapsulation
 }
 
-/* param definition: 清晰度规格(Optional) */
+/* param definition: 清晰度规格标记。取值范围：
+  SD - 标清
+  HD - 高清
+  FHD - 超清
+  2K
+  4K
+(Optional) */
 func (r *UpdateTranscodeTemplateRequest) SetDefinition(definition string) {
     r.Definition = &definition
+}
+
+/* param templateType: 模板类型。取值范围：
+  jdchd - 京享超清
+  jdchs - 极速转码
+(Optional) */
+func (r *UpdateTranscodeTemplateRequest) SetTemplateType(templateType string) {
+    r.TemplateType = &templateType
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
@@ -160,6 +198,7 @@ type UpdateTranscodeTemplateResult struct {
     Encapsulation vod.Encapsulation `json:"encapsulation"`
     Definition string `json:"definition"`
     Source string `json:"source"`
+    TemplateType string `json:"templateType"`
     CreateTime string `json:"createTime"`
     UpdateTime string `json:"updateTime"`
 }

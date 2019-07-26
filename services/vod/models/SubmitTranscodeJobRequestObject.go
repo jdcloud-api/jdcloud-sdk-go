@@ -20,11 +20,11 @@ package models
 type SubmitTranscodeJobRequestObject struct {
 
     /* 视频ID (Optional) */
-    VideoId string `json:"videoId"`
+    VideoId *string `json:"videoId"`
 
     /* 转码模板ID列表 (Optional) */
-    TemplateIds []string `json:"templateIds"`
+    TemplateIds []int64 `json:"templateIds"`
 
     /* 水印ID列表 (Optional) */
-    WatermarkIds string `json:"watermarkIds"`
+    WatermarkIds []int64 `json:"watermarkIds"`
 }

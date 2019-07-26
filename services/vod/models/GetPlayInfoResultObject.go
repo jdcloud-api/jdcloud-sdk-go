@@ -19,9 +19,9 @@ package models
 
 type GetPlayInfoResultObject struct {
 
-    /*  (Optional) */
+    /* 视频基础信息 (Optional) */
     BaseInfo VideoBaseInfo `json:"baseInfo"`
 
-    /*  (Optional) */
+    /* 视频播放信息列表 (Optional) */
     PlayInfoList []VideoPlayInfo `json:"playInfoList"`
 }

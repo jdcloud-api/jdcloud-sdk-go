@@ -22,15 +22,27 @@ type UpdateTranscodeTemplateRequestObject struct {
     /* 模板名称 (Optional) */
     Name string `json:"name"`
 
-    /*  (Optional) */
+    /* 视频参数配置 (Optional) */
     Video Video `json:"video"`
 
-    /*  (Optional) */
+    /* 音频参数配置 (Optional) */
     Audio Audio `json:"audio"`
 
-    /*  (Optional) */
+    /* 封装配置 (Optional) */
     Encapsulation Encapsulation `json:"encapsulation"`
 
-    /* 清晰度规格 (Optional) */
+    /* 清晰度规格标记。取值范围：
+  SD - 标清
+  HD - 高清
+  FHD - 超清
+  2K
+  4K
+ (Optional) */
     Definition string `json:"definition"`
+
+    /* 模板类型。取值范围：
+  jdchd - 京享超清
+  jdchs - 极速转码
+ (Optional) */
+    TemplateType string `json:"templateType"`
 }

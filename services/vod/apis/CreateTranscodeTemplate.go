@@ -25,27 +25,55 @@ type CreateTranscodeTemplateRequest struct {
 
     core.JDCloudRequest
 
-    /* 模板名称 (Optional) */
-    Name *string `json:"name"`
+    /* 模板名称  */
+    Name string `json:"name"`
 
-    /*  (Optional) */
+    /* 视频参数配置  */
     Video *vod.Video `json:"video"`
 
-    /*  (Optional) */
+    /* 音频参数配置  */
     Audio *vod.Audio `json:"audio"`
 
-    /*  (Optional) */
+    /* 封装配置  */
     Encapsulation *vod.Encapsulation `json:"encapsulation"`
 
-    /* 清晰度规格 (Optional) */
-    Definition *string `json:"definition"`
+    /* 清晰度规格标记。取值范围：
+  SD - 标清
+  HD - 高清
+  FHD - 超清
+  2K
+  4K
+  */
+    Definition string `json:"definition"`
+
+    /* 模板类型。取值范围：
+  jdchd - 京享超清
+  jdchs - 极速转码
+ (Optional) */
+    TemplateType *string `json:"templateType"`
 }
 
 /*
+ * param name: 模板名称 (Required)
+ * param video: 视频参数配置 (Required)
+ * param audio: 音频参数配置 (Required)
+ * param encapsulation: 封装配置 (Required)
+ * param definition: 清晰度规格标记。取值范围：
+  SD - 标清
+  HD - 高清
+  FHD - 超清
+  2K
+  4K
+ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateTranscodeTemplateRequest(
+    name string,
+    video *vod.Video,
+    audio *vod.Audio,
+    encapsulation *vod.Encapsulation,
+    definition string,
 ) *CreateTranscodeTemplateRequest {
 
 	return &CreateTranscodeTemplateRequest{
@@ -55,22 +83,38 @@ func NewCreateTranscodeTemplateRequest(
 			Header:  nil,
 			Version: "v1",
 		},
+        Name: name,
+        Video: video,
+        Audio: audio,
+        Encapsulation: encapsulation,
+        Definition: definition,
 	}
 }
 
 /*
- * param name: 模板名称 (Optional)
- * param video:  (Optional)
- * param audio:  (Optional)
- * param encapsulation:  (Optional)
- * param definition: 清晰度规格 (Optional)
+ * param name: 模板名称 (Required)
+ * param video: 视频参数配置 (Required)
+ * param audio: 音频参数配置 (Required)
+ * param encapsulation: 封装配置 (Required)
+ * param definition: 清晰度规格标记。取值范围：
+  SD - 标清
+  HD - 高清
+  FHD - 超清
+  2K
+  4K
+ (Required)
+ * param templateType: 模板类型。取值范围：
+  jdchd - 京享超清
+  jdchs - 极速转码
+ (Optional)
  */
 func NewCreateTranscodeTemplateRequestWithAllParams(
-    name *string,
+    name string,
     video *vod.Video,
     audio *vod.Audio,
     encapsulation *vod.Encapsulation,
-    definition *string,
+    definition string,
+    templateType *string,
 ) *CreateTranscodeTemplateRequest {
 
     return &CreateTranscodeTemplateRequest{
@@ -85,6 +129,7 @@ func NewCreateTranscodeTemplateRequestWithAllParams(
         Audio: audio,
         Encapsulation: encapsulation,
         Definition: definition,
+        TemplateType: templateType,
     }
 }
 
@@ -101,29 +146,43 @@ func NewCreateTranscodeTemplateRequestWithoutParam() *CreateTranscodeTemplateReq
     }
 }
 
-/* param name: 模板名称(Optional) */
+/* param name: 模板名称(Required) */
 func (r *CreateTranscodeTemplateRequest) SetName(name string) {
-    r.Name = &name
+    r.Name = name
 }
 
-/* param video: (Optional) */
+/* param video: 视频参数配置(Required) */
 func (r *CreateTranscodeTemplateRequest) SetVideo(video *vod.Video) {
     r.Video = video
 }
 
-/* param audio: (Optional) */
+/* param audio: 音频参数配置(Required) */
 func (r *CreateTranscodeTemplateRequest) SetAudio(audio *vod.Audio) {
     r.Audio = audio
 }
 
-/* param encapsulation: (Optional) */
+/* param encapsulation: 封装配置(Required) */
 func (r *CreateTranscodeTemplateRequest) SetEncapsulation(encapsulation *vod.Encapsulation) {
     r.Encapsulation = encapsulation
 }
 
-/* param definition: 清晰度规格(Optional) */
+/* param definition: 清晰度规格标记。取值范围：
+  SD - 标清
+  HD - 高清
+  FHD - 超清
+  2K
+  4K
+(Required) */
 func (r *CreateTranscodeTemplateRequest) SetDefinition(definition string) {
-    r.Definition = &definition
+    r.Definition = definition
+}
+
+/* param templateType: 模板类型。取值范围：
+  jdchd - 京享超清
+  jdchs - 极速转码
+(Optional) */
+func (r *CreateTranscodeTemplateRequest) SetTemplateType(templateType string) {
+    r.TemplateType = &templateType
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
@@ -146,6 +205,7 @@ type CreateTranscodeTemplateResult struct {
     Encapsulation vod.Encapsulation `json:"encapsulation"`
     Definition string `json:"definition"`
     Source string `json:"source"`
+    TemplateType string `json:"templateType"`
     CreateTime string `json:"createTime"`
     UpdateTime string `json:"updateTime"`
 }

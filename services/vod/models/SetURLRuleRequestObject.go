@@ -19,9 +19,9 @@ package models
 
 type SetURLRuleRequestObject struct {
 
-    /* 规则配置对象 (Optional) */
-    Config interface{} `json:"config"`
+    /* URL鉴权规则配置对象  */
+    Config URLRuleConfigObject `json:"config"`
 
-    /* 是否启用该规则 (Optional) */
+    /* 是否启用该规则  */
     Enabled bool `json:"enabled"`
 }

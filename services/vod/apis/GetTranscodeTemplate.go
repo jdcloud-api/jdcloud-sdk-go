@@ -105,6 +105,7 @@ type GetTranscodeTemplateResult struct {
     Encapsulation vod.Encapsulation `json:"encapsulation"`
     Definition string `json:"definition"`
     Source string `json:"source"`
+    TemplateType string `json:"templateType"`
     CreateTime string `json:"createTime"`
     UpdateTime string `json:"updateTime"`
 }

@@ -53,7 +53,7 @@ type Pod struct {
     /* 主网卡主IP地址 (Optional) */
     PrivateIpAddress string `json:"privateIpAddress"`
 
-    /* pod内容器的/etc/resolv.conf配置 [DnsConfig](DnsConfig.md)      pod内容器的/etc/resolv.conf配置 (Optional) */
+    /* pod内容器的/etc/resolv.conf配置 (Optional) */
     DnsConfig DnsConfig `json:"dnsConfig"`
 
     /* 容器日志配置信息；默认会在本地分配10MB的存储空间 (Optional) */

@@ -36,7 +36,7 @@ type AddCustomLiveStreamTranscodeTemplateRequest struct {
     VideoCodec *string `json:"videoCodec"`
 
     /* 转码输出的码率值
-- 取值范围: [1,15000]
+- 取值范围: [128,15000]
 - 单位: kpbs
   */
     VideoCodeRate int `json:"videoCodeRate"`
@@ -47,14 +47,14 @@ type AddCustomLiveStreamTranscodeTemplateRequest struct {
     VideoFrameRate string `json:"videoFrameRate"`
 
     /* 转码输出视频宽度
-- 取值: [128,3840]
+- 取值: [128,4096]
 - 如果(width,height)只设置其中之一,则按所设置参数项等比缩放另一项输出转码
 - 如果(width,height)都不设置，则按源流大小输出转码
  (Optional) */
     Width *int `json:"width"`
 
     /* 转码输出视频高度
-- 取值: [128,2160]
+- 取值: [128,4096]
 - 如果(width,height)只设置其中之一,则按所设置参数项等比缩放另一项输出转码
 - 如果(width,height)都不设置，则按源流大小输出转码
  (Optional) */
@@ -118,7 +118,7 @@ type AddCustomLiveStreamTranscodeTemplateRequest struct {
 
 /*
  * param videoCodeRate: 转码输出的码率值
-- 取值范围: [1,15000]
+- 取值范围: [128,15000]
 - 单位: kpbs
  (Required)
  * param videoFrameRate: 转码输出的帧率值
@@ -191,19 +191,19 @@ func NewAddCustomLiveStreamTranscodeTemplateRequest(
 - h265时,分辨率小于等于4k
  (Optional)
  * param videoCodeRate: 转码输出的码率值
-- 取值范围: [1,15000]
+- 取值范围: [128,15000]
 - 单位: kpbs
  (Required)
  * param videoFrameRate: 转码输出的帧率值
 - 取值：[1,30]
  (Required)
  * param width: 转码输出视频宽度
-- 取值: [128,3840]
+- 取值: [128,4096]
 - 如果(width,height)只设置其中之一,则按所设置参数项等比缩放另一项输出转码
 - 如果(width,height)都不设置，则按源流大小输出转码
  (Optional)
  * param height: 转码输出视频高度
-- 取值: [128,2160]
+- 取值: [128,4096]
 - 如果(width,height)只设置其中之一,则按所设置参数项等比缩放另一项输出转码
 - 如果(width,height)都不设置，则按源流大小输出转码
  (Optional)
@@ -317,7 +317,7 @@ func (r *AddCustomLiveStreamTranscodeTemplateRequest) SetVideoCodec(videoCodec s
 }
 
 /* param videoCodeRate: 转码输出的码率值
-- 取值范围: [1,15000]
+- 取值范围: [128,15000]
 - 单位: kpbs
 (Required) */
 func (r *AddCustomLiveStreamTranscodeTemplateRequest) SetVideoCodeRate(videoCodeRate int) {
@@ -332,7 +332,7 @@ func (r *AddCustomLiveStreamTranscodeTemplateRequest) SetVideoFrameRate(videoFra
 }
 
 /* param width: 转码输出视频宽度
-- 取值: [128,3840]
+- 取值: [128,4096]
 - 如果(width,height)只设置其中之一,则按所设置参数项等比缩放另一项输出转码
 - 如果(width,height)都不设置，则按源流大小输出转码
 (Optional) */
@@ -341,7 +341,7 @@ func (r *AddCustomLiveStreamTranscodeTemplateRequest) SetWidth(width int) {
 }
 
 /* param height: 转码输出视频高度
-- 取值: [128,2160]
+- 取值: [128,4096]
 - 如果(width,height)只设置其中之一,则按所设置参数项等比缩放另一项输出转码
 - 如果(width,height)都不设置，则按源流大小输出转码
 (Optional) */

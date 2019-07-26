@@ -19,27 +19,32 @@ package models
 
 type CreateWatermarkRequestObject struct {
 
-    /* 水印名称 (Optional) */
+    /* 水印名称  */
     Name string `json:"name"`
 
-    /* 图片地址 (Optional) */
+    /* 图片地址  */
     ImgUrl string `json:"imgUrl"`
 
-    /* 宽度 (Optional) */
-    Width string `json:"width"`
+    /* 水印宽度  */
+    Width int `json:"width"`
 
-    /* 高度 (Optional) */
-    Height string `json:"height"`
+    /* 水印高度  */
+    Height int `json:"height"`
 
-    /* 水印位置 (Optional) */
+    /* 水印位置。取值范围：
+  LT - 左上
+  RT - 右上
+  LB - 左下
+  RB - 右下
+  */
     Position string `json:"position"`
 
     /* 偏移单位 (Optional) */
     Unit string `json:"unit"`
 
-    /* 水平偏移 (Optional) */
+    /* 水平偏移  */
     OffsetX int `json:"offsetX"`
 
-    /* 竖直偏移 (Optional) */
+    /* 竖直偏移  */
     OffsetY int `json:"offsetY"`
 }

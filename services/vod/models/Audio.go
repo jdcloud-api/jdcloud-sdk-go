@@ -19,15 +19,18 @@ package models
 
 type Audio struct {
 
-    /* 音频编码 (Optional) */
+    /* 音频编码。取值范围：aac (Optional) */
     Codec *string `json:"codec"`
 
-    /* 码率 (Optional) */
+    /* 音频目标码率。取值范围：[8，1000]，单位为 Kbps (Optional) */
     Bitrate *int `json:"bitrate"`
 
-    /* 采样率 (Optional) */
+    /* 音频采样率。取值范围：8000、11025、12000、16000、22050、24000、32000、44100、48000、64000、88200、96000 (Optional) */
     SampleRate *int `json:"sampleRate"`
 
-    /* 声道数 (Optional) */
+    /* 音频声道数：1、2 (Optional) */
     Channels *int `json:"channels"`
+
+    /* 是否开启舒适音频：true、false (Optional) */
+    Comfortable *bool `json:"comfortable"`
 }

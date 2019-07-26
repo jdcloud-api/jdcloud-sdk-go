@@ -22,8 +22,8 @@ type GetURLRuleResultObject struct {
     /* 规则类型，取值 'url' (Optional) */
     RuleType string `json:"ruleType"`
 
-    /* 规则配置对象 (Optional) */
-    Config interface{} `json:"config"`
+    /* URL鉴权规则配置对象 (Optional) */
+    Config URLRuleConfigObject `json:"config"`
 
     /* 是否启用该规则 (Optional) */
     Enabled bool `json:"enabled"`

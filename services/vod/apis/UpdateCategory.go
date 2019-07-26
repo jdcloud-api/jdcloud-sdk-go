@@ -30,7 +30,8 @@ type UpdateCategoryRequest struct {
     /* 分类名称 (Optional) */
     Name *string `json:"name"`
 
-    /* 父分类ID (Optional) */
+    /* 父分类ID，取值为 0 或 null 时，表示该分类为一级分类
+ (Optional) */
     ParentId *int64 `json:"parentId"`
 
     /* 分类描述信息 (Optional) */
@@ -60,7 +61,8 @@ func NewUpdateCategoryRequest(
 /*
  * param categoryId: 分类ID (Required)
  * param name: 分类名称 (Optional)
- * param parentId: 父分类ID (Optional)
+ * param parentId: 父分类ID，取值为 0 或 null 时，表示该分类为一级分类
+ (Optional)
  * param description: 分类描述信息 (Optional)
  */
 func NewUpdateCategoryRequestWithAllParams(
@@ -107,7 +109,8 @@ func (r *UpdateCategoryRequest) SetName(name string) {
     r.Name = &name
 }
 
-/* param parentId: 父分类ID(Optional) */
+/* param parentId: 父分类ID，取值为 0 或 null 时，表示该分类为一级分类
+(Optional) */
 func (r *UpdateCategoryRequest) SetParentId(parentId int64) {
     r.ParentId = &parentId
 }

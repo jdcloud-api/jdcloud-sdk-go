@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    vod "github.com/jdcloud-api/jdcloud-sdk-go/services/vod/models"
 )
 
 type ListHeadersRequest struct {
@@ -97,4 +98,5 @@ type ListHeadersResponse struct {
 }
 
 type ListHeadersResult struct {
+    Headers []vod.GetHeaderResultObject `json:"headers"`
 }

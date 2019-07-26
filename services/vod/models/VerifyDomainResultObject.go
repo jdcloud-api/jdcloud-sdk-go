@@ -25,6 +25,6 @@ type VerifyDomainResultObject struct {
     /* 校验是否通过 (Optional) */
     Verified bool `json:"verified"`
 
-    /* ICP信息 (Optional) */
+    /* ICP备案信息 (Optional) */
     IcpInfo string `json:"icpInfo"`
 }

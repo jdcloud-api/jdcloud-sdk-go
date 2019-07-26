@@ -51,4 +51,10 @@ type ProtectionRule struct {
 
     /* geo 拦截地域列表 (Optional) */
     GeoBlackList []GeoBlack `json:"geoBlackList"`
+
+    /* IP 黑名单列表 (Optional) */
+    IpBlackList []string `json:"ipBlackList"`
+
+    /* IP 白名单列表 (Optional) */
+    IpWhiteList []string `json:"ipWhiteList"`
 }

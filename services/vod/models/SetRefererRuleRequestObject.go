@@ -19,9 +19,9 @@ package models
 
 type SetRefererRuleRequestObject struct {
 
-    /* 规则配置对象 (Optional) */
-    Config interface{} `json:"config"`
+    /* Referer防盗链规则配置对象  */
+    Config RefererRuleConfigObject `json:"config"`
 
-    /* 是否启用该规则 (Optional) */
+    /* 是否启用该规则  */
     Enabled bool `json:"enabled"`
 }

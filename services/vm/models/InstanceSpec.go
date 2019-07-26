@@ -64,6 +64,12 @@ type InstanceSpec struct {
  (Optional) */
     Charge *charge.ChargeSpec `json:"charge"`
 
+    /* 元数据信息，目前只支持传入一个key为"launch-script"，表示首次启动脚本。value为base64格式。
+launch-script：linux系统支持bash和python，编码前须分别以 #!/bin/bash 和 #!/usr/bin/env python 作为内容首行;
+launch-script：windows系统支持bat和powershell，编码前须分别以 <cmd></cmd> 和 <powershell></powershell> 作为内容首、尾行。
+ (Optional) */
+    Userdata []Userdata `json:"userdata"`
+
     /* 主机描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional) */
     Description *string `json:"description"`
 

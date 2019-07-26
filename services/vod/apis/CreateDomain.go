@@ -24,15 +24,17 @@ type CreateDomainRequest struct {
 
     core.JDCloudRequest
 
-    /* 域名名称 (Optional) */
-    Name *string `json:"name"`
+    /* 域名名称  */
+    Name string `json:"name"`
 }
 
 /*
+ * param name: 域名名称 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateDomainRequest(
+    name string,
 ) *CreateDomainRequest {
 
 	return &CreateDomainRequest{
@@ -42,14 +44,15 @@ func NewCreateDomainRequest(
 			Header:  nil,
 			Version: "v1",
 		},
+        Name: name,
 	}
 }
 
 /*
- * param name: 域名名称 (Optional)
+ * param name: 域名名称 (Required)
  */
 func NewCreateDomainRequestWithAllParams(
-    name *string,
+    name string,
 ) *CreateDomainRequest {
 
     return &CreateDomainRequest{
@@ -76,9 +79,9 @@ func NewCreateDomainRequestWithoutParam() *CreateDomainRequest {
     }
 }
 
-/* param name: 域名名称(Optional) */
+/* param name: 域名名称(Required) */
 func (r *CreateDomainRequest) SetName(name string) {
-    r.Name = &name
+    r.Name = name
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
@@ -97,6 +100,7 @@ type CreateDomainResult struct {
     Id string `json:"id"`
     Name string `json:"name"`
     Cname string `json:"cname"`
+    Status string `json:"status"`
     Source string `json:"source"`
     AsDefault bool `json:"asDefault"`
     CreateTime string `json:"createTime"`

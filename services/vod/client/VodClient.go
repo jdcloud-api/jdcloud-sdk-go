@@ -40,7 +40,7 @@ func NewVodClient(credential *core.Credential) *VodClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vod",
-            Revision:    "1.1.2",
+            Revision:    "1.1.3",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -153,6 +153,26 @@ func (c *VodClient) ListDomains(request *vod.ListDomainsRequest) (*vod.ListDomai
     return jdResp, err
 }
 
+/* 获取视频上传地址和凭证 */
+func (c *VodClient) CreateVideoUploadTask(request *vod.CreateVideoUploadTaskRequest) (*vod.CreateVideoUploadTaskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vod.CreateVideoUploadTaskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 修改分类 */
 func (c *VodClient) UpdateCategory(request *vod.UpdateCategoryRequest) (*vod.UpdateCategoryResponse, error) {
     if request == nil {
@@ -173,7 +193,7 @@ func (c *VodClient) UpdateCategory(request *vod.UpdateCategoryRequest) (*vod.Upd
     return jdResp, err
 }
 
-/* 设置CDN域名Referer规则 */
+/* 设置CDN域名Referer防盗链规则 */
 func (c *VodClient) SetRefererRule(request *vod.SetRefererRuleRequest) (*vod.SetRefererRuleResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -193,7 +213,7 @@ func (c *VodClient) SetRefererRule(request *vod.SetRefererRuleRequest) (*vod.Set
     return jdResp, err
 }
 
-/* 查询CDN域名URL规则 */
+/* 查询CDN域名URL鉴权规则配置 */
 func (c *VodClient) GetURLRule(request *vod.GetURLRuleRequest) (*vod.GetURLRuleResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -213,27 +233,7 @@ func (c *VodClient) GetURLRule(request *vod.GetURLRuleRequest) (*vod.GetURLRuleR
     return jdResp, err
 }
 
-/* 获取转码任务信息 */
-func (c *VodClient) GetTranscodeTask(request *vod.GetTranscodeTaskRequest) (*vod.GetTranscodeTaskResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &vod.GetTranscodeTaskResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询CDN域名Referer规则 */
+/* 查询CDN域名Referer防盗链规则配置 */
 func (c *VodClient) GetRefererRule(request *vod.GetRefererRuleRequest) (*vod.GetRefererRuleResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -293,7 +293,7 @@ func (c *VodClient) ListHeaders(request *vod.ListHeadersRequest) (*vod.ListHeade
     return jdResp, err
 }
 
-/* 设置CDN域名URL规则 */
+/* 设置CDN域名URL鉴权规则 */
 func (c *VodClient) SetURLRule(request *vod.SetURLRuleRequest) (*vod.SetURLRuleResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -333,7 +333,8 @@ func (c *VodClient) GetCategoryWithChildren(request *vod.GetCategoryWithChildren
     return jdResp, err
 }
 
-/* 添加分类 */
+/* 添加分类
+ */
 func (c *VodClient) CreateCategory(request *vod.CreateCategoryRequest) (*vod.CreateCategoryResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -353,7 +354,14 @@ func (c *VodClient) CreateCategory(request *vod.CreateCategoryRequest) (*vod.Cre
     return jdResp, err
 }
 
-/* 查询转码模板列表 */
+/* 查询转码模板列表。允许通过条件过滤查询，支持的过滤字段如下：
+- source 模板来源。枚举值，取值范围为：
+  - system 系统预置
+  - custom 用户自建
+- templateType 模板类型。枚举值，取值范围：
+  - jdchd 京享超清
+  - jdchs 极速转码
+ */
 func (c *VodClient) ListTranscodeTemplates(request *vod.ListTranscodeTemplatesRequest) (*vod.ListTranscodeTemplatesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -473,6 +481,26 @@ func (c *VodClient) SetHeader(request *vod.SetHeaderRequest) (*vod.SetHeaderResp
     return jdResp, err
 }
 
+/* 刷新视频上传地址和凭证 */
+func (c *VodClient) RefreshVideoUploadTask(request *vod.RefreshVideoUploadTaskRequest) (*vod.RefreshVideoUploadTaskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vod.RefreshVideoUploadTaskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 提交转码作业 */
 func (c *VodClient) SubmitTranscodeJob(request *vod.SubmitTranscodeJobRequest) (*vod.SubmitTranscodeJobResponse, error) {
     if request == nil {
@@ -573,6 +601,26 @@ func (c *VodClient) BatchUpdateVideos(request *vod.BatchUpdateVideosRequest) (*v
     return jdResp, err
 }
 
+/* 获取图片上传地址和凭证 */
+func (c *VodClient) CreateImageUploadTask(request *vod.CreateImageUploadTaskRequest) (*vod.CreateImageUploadTaskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vod.CreateImageUploadTaskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 添加水印 */
 func (c *VodClient) CreateWatermark(request *vod.CreateWatermarkRequest) (*vod.CreateWatermarkResponse, error) {
     if request == nil {
@@ -613,7 +661,7 @@ func (c *VodClient) GetDomain(request *vod.GetDomainRequest) (*vod.GetDomainResp
     return jdResp, err
 }
 
-/* 删除视频，调用该接口会同时删除与该视频相关的所有信息 */
+/* 删除视频，调用该接口会同时删除与指定视频相关的所有信息，包括转码任务信息、转码流数据等，同时清除云存储中相关文件资源。 */
 func (c *VodClient) DeleteVideo(request *vod.DeleteVideoRequest) (*vod.DeleteVideoResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -633,7 +681,7 @@ func (c *VodClient) DeleteVideo(request *vod.DeleteVideoRequest) (*vod.DeleteVid
     return jdResp, err
 }
 
-/* 查询CDN域名IP规则 */
+/* 查询CDN域名IP黑名单规则配置 */
 func (c *VodClient) GetIPRule(request *vod.GetIPRuleRequest) (*vod.GetIPRuleResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -673,26 +721,6 @@ func (c *VodClient) EnableDomain(request *vod.EnableDomainRequest) (*vod.EnableD
     return jdResp, err
 }
 
-/* 校验域名 */
-func (c *VodClient) VerifyDomain(request *vod.VerifyDomainRequest) (*vod.VerifyDomainResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &vod.VerifyDomainResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 查询水印 */
 func (c *VodClient) GetWatermark(request *vod.GetWatermarkRequest) (*vod.GetWatermarkResponse, error) {
     if request == nil {
@@ -713,7 +741,7 @@ func (c *VodClient) GetWatermark(request *vod.GetWatermarkRequest) (*vod.GetWate
     return jdResp, err
 }
 
-/* 删除视频码流信息 */
+/* 删除视频转码流 */
 func (c *VodClient) DeleteVideoStreams(request *vod.DeleteVideoStreamsRequest) (*vod.DeleteVideoStreamsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -773,7 +801,7 @@ func (c *VodClient) BatchSubmitTranscodeJobs(request *vod.BatchSubmitTranscodeJo
     return jdResp, err
 }
 
-/* 设置CDN域名IP规则 */
+/* 设置CDN域名IP黑名单规则 */
 func (c *VodClient) SetIPRule(request *vod.SetIPRuleRequest) (*vod.SetIPRuleResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -853,7 +881,8 @@ func (c *VodClient) GetTranscodeTemplate(request *vod.GetTranscodeTemplateReques
     return jdResp, err
 }
 
-/* 查询分类列表 */
+/* 查询分类列表，按照分页方式，返回分类列表信息
+ */
 func (c *VodClient) ListCategories(request *vod.ListCategoriesRequest) (*vod.ListCategoriesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -893,7 +922,7 @@ func (c *VodClient) DeleteCategory(request *vod.DeleteCategoryRequest) (*vod.Del
     return jdResp, err
 }
 
-/* 批量删除视频信息，调用该接口会同时删除与指定视频相关的所有信息 */
+/* 批量删除视频，调用该接口会同时删除与指定视频相关的所有信息，包括转码任务信息、转码流数据等，同时清除云存储中相关文件资源。 */
 func (c *VodClient) BatchDeleteVideos(request *vod.BatchDeleteVideosRequest) (*vod.BatchDeleteVideosResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")

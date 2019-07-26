@@ -19,6 +19,6 @@ package models
 
 type BatchUpdateVideosRequestObject struct {
 
-    /* 批量更新视频的条目列表信息 (Optional) */
-    Bulk []UpdateVideoBulkItem `json:"bulk"`
+    /* 批量更新视频的条目集合  */
+    BulkItems []BatchUpdateVideosBulkItem `json:"bulkItems"`
 }

@@ -31,6 +31,12 @@ type GetCategoryWithChildrenResultObject struct {
     /* 分类描述 (Optional) */
     Description string `json:"description"`
 
-    /*  (Optional) */
-    Children []interface{} `json:"children"`
+    /* 下级分类 (Optional) */
+    Children []SubCategory `json:"children"`
+
+    /* 创建时间 (Optional) */
+    CreateTime string `json:"createTime"`
+
+    /* 修改时间 (Optional) */
+    UpdateTime string `json:"updateTime"`
 }

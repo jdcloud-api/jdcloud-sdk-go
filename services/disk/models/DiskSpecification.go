@@ -51,4 +51,10 @@ type DiskSpecification struct {
 
     /* 最大吞吐量 (Optional) */
     MaxThroughput int `json:"maxThroughput"`
+
+    /* 是否开启IOPS可调整 (Optional) */
+    ScalableIOPS bool `json:"scalableIOPS"`
+
+    /* 最大iops步长 (Optional) */
+    MaxStepIOPS int `json:"maxStepIOPS"`
 }

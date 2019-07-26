@@ -26,7 +26,7 @@ type BatchSubmitTranscodeJobsRequest struct {
     core.JDCloudRequest
 
     /*  (Optional) */
-    Jobs []vod.SubmitTranscodeJobRequestObject `json:"jobs"`
+    BulkItems []vod.SubmitTranscodeJobRequestObject `json:"bulkItems"`
 }
 
 /*
@@ -47,10 +47,10 @@ func NewBatchSubmitTranscodeJobsRequest(
 }
 
 /*
- * param jobs:  (Optional)
+ * param bulkItems:  (Optional)
  */
 func NewBatchSubmitTranscodeJobsRequestWithAllParams(
-    jobs []vod.SubmitTranscodeJobRequestObject,
+    bulkItems []vod.SubmitTranscodeJobRequestObject,
 ) *BatchSubmitTranscodeJobsRequest {
 
     return &BatchSubmitTranscodeJobsRequest{
@@ -60,7 +60,7 @@ func NewBatchSubmitTranscodeJobsRequestWithAllParams(
             Header:  nil,
             Version: "v1",
         },
-        Jobs: jobs,
+        BulkItems: bulkItems,
     }
 }
 
@@ -77,9 +77,9 @@ func NewBatchSubmitTranscodeJobsRequestWithoutParam() *BatchSubmitTranscodeJobsR
     }
 }
 
-/* param jobs: (Optional) */
-func (r *BatchSubmitTranscodeJobsRequest) SetJobs(jobs []vod.SubmitTranscodeJobRequestObject) {
-    r.Jobs = jobs
+/* param bulkItems: (Optional) */
+func (r *BatchSubmitTranscodeJobsRequest) SetBulkItems(bulkItems []vod.SubmitTranscodeJobRequestObject) {
+    r.BulkItems = bulkItems
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
@@ -95,5 +95,5 @@ type BatchSubmitTranscodeJobsResponse struct {
 }
 
 type BatchSubmitTranscodeJobsResult struct {
-    Tasks []vod.TranscodeTask `json:"tasks"`
+    Tasks []vod.SubmittedTranscodeTask `json:"tasks"`
 }

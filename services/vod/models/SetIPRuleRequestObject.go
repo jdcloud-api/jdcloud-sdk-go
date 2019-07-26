@@ -19,9 +19,9 @@ package models
 
 type SetIPRuleRequestObject struct {
 
-    /* 规则配置对象 (Optional) */
-    Config interface{} `json:"config"`
+    /* IP黑名单规则配置对象  */
+    Config IPRuleConfigObject `json:"config"`
 
-    /* 是否启用该规则 (Optional) */
+    /* 是否启用该规则  */
     Enabled bool `json:"enabled"`
 }

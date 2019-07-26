@@ -204,5 +204,6 @@ type DescribeDomainOnlineStreamResponse struct {
 }
 
 type DescribeDomainOnlineStreamResult struct {
-    DataList []live.PublishOnlineStreamResult `json:"dataList"`
+    StreamList []live.PublishOnlineStreamResultData `json:"streamList"`
+    Total int `json:"total"`
 }

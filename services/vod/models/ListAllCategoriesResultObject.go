@@ -19,9 +19,9 @@ package models
 
 type ListAllCategoriesResultObject struct {
 
-    /*  (Optional) */
-    FlatResult []GetCategoryResultObject `json:"flatResult"`
+    /* 平坦结构结果 (Optional) */
+    FlatResult []CategoryObject `json:"flatResult"`
 
-    /*  (Optional) */
+    /* 树结构结果 (Optional) */
     TreeResult CategoryTreeNode `json:"treeResult"`
 }

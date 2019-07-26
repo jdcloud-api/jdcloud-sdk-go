@@ -100,8 +100,8 @@ type GetWatermarkResult struct {
     Id int64 `json:"id"`
     Name string `json:"name"`
     ImgUrl string `json:"imgUrl"`
-    Width string `json:"width"`
-    Height string `json:"height"`
+    Width int `json:"width"`
+    Height int `json:"height"`
     Position string `json:"position"`
     Unit string `json:"unit"`
     OffsetX int `json:"offsetX"`

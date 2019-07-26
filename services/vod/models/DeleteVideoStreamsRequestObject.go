@@ -19,6 +19,6 @@ package models
 
 type DeleteVideoStreamsRequestObject struct {
 
-    /*  (Optional) */
+    /*   */
     TaskIds []int64 `json:"taskIds"`
 }

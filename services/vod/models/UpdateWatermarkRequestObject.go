@@ -25,13 +25,18 @@ type UpdateWatermarkRequestObject struct {
     /* 图片地址 (Optional) */
     ImgUrl string `json:"imgUrl"`
 
-    /* 宽度 (Optional) */
-    Width string `json:"width"`
+    /* 水印宽度 (Optional) */
+    Width int `json:"width"`
 
-    /* 高度 (Optional) */
-    Height string `json:"height"`
+    /* 水印高度 (Optional) */
+    Height int `json:"height"`
 
-    /* 水印位置 (Optional) */
+    /* 水印位置。取值范围：
+  LT - 左上
+  RT - 右上
+  LB - 左下
+  RB - 右下
+ (Optional) */
     Position string `json:"position"`
 
     /* 偏移单位 (Optional) */

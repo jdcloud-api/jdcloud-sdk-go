@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    vod "github.com/jdcloud-api/jdcloud-sdk-go/services/vod/models"
 )
 
 type GetCategoryWithChildrenRequest struct {
@@ -101,5 +102,7 @@ type GetCategoryWithChildrenResult struct {
     Name string `json:"name"`
     Level int `json:"level"`
     Description string `json:"description"`
-    Children []interface{} `json:"children"`
+    Children []vod.SubCategory `json:"children"`
+    CreateTime string `json:"createTime"`
+    UpdateTime string `json:"updateTime"`
 }

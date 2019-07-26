@@ -33,13 +33,18 @@ type UpdateWatermarkRequest struct {
     /* 图片地址 (Optional) */
     ImgUrl *string `json:"imgUrl"`
 
-    /* 宽度 (Optional) */
-    Width *string `json:"width"`
+    /* 水印宽度 (Optional) */
+    Width *int `json:"width"`
 
-    /* 高度 (Optional) */
-    Height *string `json:"height"`
+    /* 水印高度 (Optional) */
+    Height *int `json:"height"`
 
-    /* 水印位置 (Optional) */
+    /* 水印位置。取值范围：
+  LT - 左上
+  RT - 右上
+  LB - 左下
+  RB - 右下
+ (Optional) */
     Position *string `json:"position"`
 
     /* 偏移单位 (Optional) */
@@ -76,9 +81,14 @@ func NewUpdateWatermarkRequest(
  * param watermarkId: 水印ID (Required)
  * param name: 水印名称 (Optional)
  * param imgUrl: 图片地址 (Optional)
- * param width: 宽度 (Optional)
- * param height: 高度 (Optional)
- * param position: 水印位置 (Optional)
+ * param width: 水印宽度 (Optional)
+ * param height: 水印高度 (Optional)
+ * param position: 水印位置。取值范围：
+  LT - 左上
+  RT - 右上
+  LB - 左下
+  RB - 右下
+ (Optional)
  * param unit: 偏移单位 (Optional)
  * param offsetX: 水平偏移 (Optional)
  * param offsetY: 竖直偏移 (Optional)
@@ -87,8 +97,8 @@ func NewUpdateWatermarkRequestWithAllParams(
     watermarkId int,
     name *string,
     imgUrl *string,
-    width *string,
-    height *string,
+    width *int,
+    height *int,
     position *string,
     unit *string,
     offsetX *int,
@@ -142,17 +152,22 @@ func (r *UpdateWatermarkRequest) SetImgUrl(imgUrl string) {
     r.ImgUrl = &imgUrl
 }
 
-/* param width: 宽度(Optional) */
-func (r *UpdateWatermarkRequest) SetWidth(width string) {
+/* param width: 水印宽度(Optional) */
+func (r *UpdateWatermarkRequest) SetWidth(width int) {
     r.Width = &width
 }
 
-/* param height: 高度(Optional) */
-func (r *UpdateWatermarkRequest) SetHeight(height string) {
+/* param height: 水印高度(Optional) */
+func (r *UpdateWatermarkRequest) SetHeight(height int) {
     r.Height = &height
 }
 
-/* param position: 水印位置(Optional) */
+/* param position: 水印位置。取值范围：
+  LT - 左上
+  RT - 右上
+  LB - 左下
+  RB - 右下
+(Optional) */
 func (r *UpdateWatermarkRequest) SetPosition(position string) {
     r.Position = &position
 }
@@ -188,8 +203,8 @@ type UpdateWatermarkResult struct {
     Id int64 `json:"id"`
     Name string `json:"name"`
     ImgUrl string `json:"imgUrl"`
-    Width string `json:"width"`
-    Height string `json:"height"`
+    Width int `json:"width"`
+    Height int `json:"height"`
     Position string `json:"position"`
     Unit string `json:"unit"`
     OffsetX int `json:"offsetX"`

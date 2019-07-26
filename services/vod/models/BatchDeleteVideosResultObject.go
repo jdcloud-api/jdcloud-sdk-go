@@ -19,12 +19,12 @@ package models
 
 type BatchDeleteVideosResultObject struct {
 
-    /* 删除成功的视频ID列表 (Optional) */
+    /* 删除成功的视频ID集合 (Optional) */
     OkVideoIds []string `json:"okVideoIds"`
 
-    /* 未找到的视频ID列表 (Optional) */
+    /* 未找到的视频ID集合 (Optional) */
     NotFoundVideoIds []string `json:"notFoundVideoIds"`
 
-    /* 删除失败的视频ID列表 (Optional) */
+    /* 删除失败的视频ID集合 (Optional) */
     FailedVideoIds []string `json:"failedVideoIds"`
 }

@@ -25,6 +25,6 @@ type GetHeaderResultObject struct {
     /* 头参数值 (Optional) */
     HeaderValue string `json:"headerValue"`
 
-    /* 头参数类型 (Optional) */
+    /* 头参数类型，取值范围：req、resp (Optional) */
     HeaderType string `json:"headerType"`
 }

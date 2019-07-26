@@ -19,6 +19,6 @@ package models
 
 type CreateDomainRequestObject struct {
 
-    /* 域名名称 (Optional) */
+    /* 域名名称  */
     Name string `json:"name"`
 }

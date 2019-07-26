@@ -18,17 +18,21 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    vod "github.com/jdcloud-api/jdcloud-sdk-go/services/vod/models"
 )
 
 type ListTranscodeTemplatesRequest struct {
 
     core.JDCloudRequest
 
-    /* 页码；默认值为1 (Optional) */
+    /* 页码；默认值为 1 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* 分页大小；默认值为10；取值范围[10, 100] (Optional) */
+    /* 分页大小；默认值为 10；取值范围 [10, 100] (Optional) */
     PageSize *int `json:"pageSize"`
+
+    /*  (Optional) */
+    Filters []vod.Filter `json:"filters"`
 }
 
 /*
@@ -49,12 +53,14 @@ func NewListTranscodeTemplatesRequest(
 }
 
 /*
- * param pageNumber: 页码；默认值为1 (Optional)
- * param pageSize: 分页大小；默认值为10；取值范围[10, 100] (Optional)
+ * param pageNumber: 页码；默认值为 1 (Optional)
+ * param pageSize: 分页大小；默认值为 10；取值范围 [10, 100] (Optional)
+ * param filters:  (Optional)
  */
 func NewListTranscodeTemplatesRequestWithAllParams(
     pageNumber *int,
     pageSize *int,
+    filters []vod.Filter,
 ) *ListTranscodeTemplatesRequest {
 
     return &ListTranscodeTemplatesRequest{
@@ -66,6 +72,7 @@ func NewListTranscodeTemplatesRequestWithAllParams(
         },
         PageNumber: pageNumber,
         PageSize: pageSize,
+        Filters: filters,
     }
 }
 
@@ -82,14 +89,19 @@ func NewListTranscodeTemplatesRequestWithoutParam() *ListTranscodeTemplatesReque
     }
 }
 
-/* param pageNumber: 页码；默认值为1(Optional) */
+/* param pageNumber: 页码；默认值为 1(Optional) */
 func (r *ListTranscodeTemplatesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
-/* param pageSize: 分页大小；默认值为10；取值范围[10, 100](Optional) */
+/* param pageSize: 分页大小；默认值为 10；取值范围 [10, 100](Optional) */
 func (r *ListTranscodeTemplatesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
+}
+
+/* param filters: (Optional) */
+func (r *ListTranscodeTemplatesRequest) SetFilters(filters []vod.Filter) {
+    r.Filters = filters
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
@@ -105,4 +117,9 @@ type ListTranscodeTemplatesResponse struct {
 }
 
 type ListTranscodeTemplatesResult struct {
+    PageNumber int `json:"pageNumber"`
+    PageSize int `json:"pageSize"`
+    TotalElements int `json:"totalElements"`
+    TotalPages int `json:"totalPages"`
+    Content []vod.TranscodeTemplateObject `json:"content"`
 }

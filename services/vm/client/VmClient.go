@@ -40,7 +40,7 @@ func NewVmClient(credential *core.Credential) *VmClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vm",
-            Revision:    "1.2.0",
+            Revision:    "1.2.2",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -938,6 +938,27 @@ func (c *VmClient) DescribeInstancePrivateIpAddress(request *vm.DescribeInstance
     return jdResp, err
 }
 
+/* 查询镜像导入任务详情
+ */
+func (c *VmClient) ImageTasks(request *vm.ImageTasksRequest) (*vm.ImageTasksResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.ImageTasksResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 批量查询云主机状态 */
 func (c *VmClient) DescribeInstanceStatus(request *vm.DescribeInstanceStatusRequest) (*vm.DescribeInstanceStatusResponse, error) {
     if request == nil {
@@ -992,6 +1013,27 @@ func (c *VmClient) DetachDisk(request *vm.DetachDiskRequest) (*vm.DetachDiskResp
     }
 
     jdResp := &vm.DetachDiskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 导入镜像，将外部镜像导入到京东云中
+ */
+func (c *VmClient) ImportImage(request *vm.ImportImageRequest) (*vm.ImportImageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.ImportImageResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

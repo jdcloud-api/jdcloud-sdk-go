@@ -19,9 +19,17 @@ package models
 
 type DeleteHeaderRequestObject struct {
 
-    /* 头参数名 (Optional) */
+    /* 头参数名。当前支持的访问头参数取值范围：
+  Content-Disposition
+  Content-Language
+  Expires
+  Access-Control-Allow-Origin
+  Access-Control-Allow-Methods
+  Access-Control-Max-Age
+  Access-Control-Expose-Headers
+  */
     HeaderName string `json:"headerName"`
 
-    /* 头参数类型 (Optional) */
+    /* 头参数类型，取值范围：req、resp  */
     HeaderType string `json:"headerType"`
 }

@@ -19,18 +19,30 @@ package models
 
 type CreateTranscodeTemplateRequestObject struct {
 
-    /* 模板名称 (Optional) */
+    /* 模板名称  */
     Name string `json:"name"`
 
-    /*  (Optional) */
+    /* 视频参数配置  */
     Video Video `json:"video"`
 
-    /*  (Optional) */
+    /* 音频参数配置  */
     Audio Audio `json:"audio"`
 
-    /*  (Optional) */
+    /* 封装配置  */
     Encapsulation Encapsulation `json:"encapsulation"`
 
-    /* 清晰度规格 (Optional) */
+    /* 清晰度规格标记。取值范围：
+  SD - 标清
+  HD - 高清
+  FHD - 超清
+  2K
+  4K
+  */
     Definition string `json:"definition"`
+
+    /* 模板类型。取值范围：
+  jdchd - 京享超清
+  jdchs - 极速转码
+ (Optional) */
+    TemplateType string `json:"templateType"`
 }

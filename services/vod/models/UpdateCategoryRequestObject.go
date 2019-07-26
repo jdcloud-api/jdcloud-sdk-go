@@ -22,7 +22,8 @@ type UpdateCategoryRequestObject struct {
     /* 分类名称 (Optional) */
     Name string `json:"name"`
 
-    /* 父分类ID (Optional) */
+    /* 父分类ID，取值为 0 或 null 时，表示该分类为一级分类
+ (Optional) */
     ParentId int64 `json:"parentId"`
 
     /* 分类描述信息 (Optional) */
