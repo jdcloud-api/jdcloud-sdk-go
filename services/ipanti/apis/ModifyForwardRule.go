@@ -25,21 +25,21 @@ type ModifyForwardRuleRequest struct {
 
     core.JDCloudRequest
 
-    /* 区域 Id  */
+    /* 区域 ID, 高防不区分区域, 传 cn-north-1 即可  */
     RegionId string `json:"regionId"`
 
     /* 高防实例 Id  */
-    InstanceId int `json:"instanceId"`
+    InstanceId string `json:"instanceId"`
 
     /* 转发规则 Id  */
-    ForwardRuleId int `json:"forwardRuleId"`
+    ForwardRuleId string `json:"forwardRuleId"`
 
     /* 更新非网站类规则请求参数  */
     ForwardRuleSpec *ipanti.ForwardRuleSpec `json:"forwardRuleSpec"`
 }
 
 /*
- * param regionId: 区域 Id (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param instanceId: 高防实例 Id (Required)
  * param forwardRuleId: 转发规则 Id (Required)
  * param forwardRuleSpec: 更新非网站类规则请求参数 (Required)
@@ -48,8 +48,8 @@ type ModifyForwardRuleRequest struct {
  */
 func NewModifyForwardRuleRequest(
     regionId string,
-    instanceId int,
-    forwardRuleId int,
+    instanceId string,
+    forwardRuleId string,
     forwardRuleSpec *ipanti.ForwardRuleSpec,
 ) *ModifyForwardRuleRequest {
 
@@ -68,15 +68,15 @@ func NewModifyForwardRuleRequest(
 }
 
 /*
- * param regionId: 区域 Id (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param instanceId: 高防实例 Id (Required)
  * param forwardRuleId: 转发规则 Id (Required)
  * param forwardRuleSpec: 更新非网站类规则请求参数 (Required)
  */
 func NewModifyForwardRuleRequestWithAllParams(
     regionId string,
-    instanceId int,
-    forwardRuleId int,
+    instanceId string,
+    forwardRuleId string,
     forwardRuleSpec *ipanti.ForwardRuleSpec,
 ) *ModifyForwardRuleRequest {
 
@@ -107,18 +107,18 @@ func NewModifyForwardRuleRequestWithoutParam() *ModifyForwardRuleRequest {
     }
 }
 
-/* param regionId: 区域 Id(Required) */
+/* param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可(Required) */
 func (r *ModifyForwardRuleRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 高防实例 Id(Required) */
-func (r *ModifyForwardRuleRequest) SetInstanceId(instanceId int) {
+func (r *ModifyForwardRuleRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
 /* param forwardRuleId: 转发规则 Id(Required) */
-func (r *ModifyForwardRuleRequest) SetForwardRuleId(forwardRuleId int) {
+func (r *ModifyForwardRuleRequest) SetForwardRuleId(forwardRuleId string) {
     r.ForwardRuleId = forwardRuleId
 }
 

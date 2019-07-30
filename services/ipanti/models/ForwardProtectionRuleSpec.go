@@ -52,6 +52,6 @@ type ForwardProtectionRuleSpec struct {
     /* 报文最大长度, 取值范围(datagramRangeMin, 1518]  */
     DatagramRangeMax int64 `json:"datagramRangeMax"`
 
-    /* geo 拦截地域编码列表, 可设置编码列表由 describeGeoAreas 接口查询可得 (Optional) */
+    /* geo 拦截地域编码列表. 查询 <a href="http://docs.jdcloud.com/anti-ddos-pro/api/describegeoareas">describeGeoAreas</a> 接口获取可设置的地域编码列表 (Optional) */
     GeoBlackList []string `json:"geoBlackList"`
 }

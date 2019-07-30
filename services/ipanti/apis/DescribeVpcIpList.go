@@ -25,7 +25,7 @@ type DescribeVpcIpListRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 区域 ID, 高防不区分区域, 传 cn-north-1 即可  */
     RegionId string `json:"regionId"`
 
     /* 页码, 默认为 1 (Optional) */
@@ -36,7 +36,7 @@ type DescribeVpcIpListRequest struct {
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -56,7 +56,7 @@ func NewDescribeVpcIpListRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param pageNumber: 页码, 默认为 1 (Optional)
  * param pageSize: 分页大小, 默认为 10, 取值范围 [0, 100], 0 表示全量 (Optional)
  */
@@ -92,7 +92,7 @@ func NewDescribeVpcIpListRequestWithoutParam() *DescribeVpcIpListRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可(Required) */
 func (r *DescribeVpcIpListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

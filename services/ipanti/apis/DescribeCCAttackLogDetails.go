@@ -25,7 +25,7 @@ type DescribeCCAttackLogDetailsRequest struct {
 
     core.JDCloudRequest
 
-    /* 区域 Id  */
+    /* 区域 ID, 高防不区分区域, 传 cn-north-1 即可  */
     RegionId string `json:"regionId"`
 
     /* 页码, 默认为1 (Optional) */
@@ -40,18 +40,20 @@ type DescribeCCAttackLogDetailsRequest struct {
     /* 查询的结束时间, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ  */
     EndTime string `json:"endTime"`
 
-    /* 高防实例 ID  */
-    InstanceId int `json:"instanceId"`
+    /* 高防实例 ID (Optional) */
+    InstanceId *string `json:"instanceId"`
 
-    /* 子域名 (Optional) */
+    /* 查询的子域名，只有选中某一个实例后才能多选子域名 (Optional) */
     SubDomain []string `json:"subDomain"`
+
+    /* CC 攻击记录Id (Optional) */
+    AttackId *string `json:"attackId"`
 }
 
 /*
- * param regionId: 区域 Id (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param startTime: 开始时间, 只能查询最近 60 天以内的数据, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Required)
  * param endTime: 查询的结束时间, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Required)
- * param instanceId: 高防实例 ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -59,12 +61,11 @@ func NewDescribeCCAttackLogDetailsRequest(
     regionId string,
     startTime string,
     endTime string,
-    instanceId int,
 ) *DescribeCCAttackLogDetailsRequest {
 
 	return &DescribeCCAttackLogDetailsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/attacklog:CCDetail",
+			URL:     "/regions/{regionId}/attacklog:describeCCAttackLogDetails",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -72,18 +73,18 @@ func NewDescribeCCAttackLogDetailsRequest(
         RegionId: regionId,
         StartTime: startTime,
         EndTime: endTime,
-        InstanceId: instanceId,
 	}
 }
 
 /*
- * param regionId: 区域 Id (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param pageNumber: 页码, 默认为1 (Optional)
  * param pageSize: 分页大小, 默认为10, 取值范围[10, 100] (Optional)
  * param startTime: 开始时间, 只能查询最近 60 天以内的数据, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Required)
  * param endTime: 查询的结束时间, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Required)
- * param instanceId: 高防实例 ID (Required)
- * param subDomain: 子域名 (Optional)
+ * param instanceId: 高防实例 ID (Optional)
+ * param subDomain: 查询的子域名，只有选中某一个实例后才能多选子域名 (Optional)
+ * param attackId: CC 攻击记录Id (Optional)
  */
 func NewDescribeCCAttackLogDetailsRequestWithAllParams(
     regionId string,
@@ -91,13 +92,14 @@ func NewDescribeCCAttackLogDetailsRequestWithAllParams(
     pageSize *int,
     startTime string,
     endTime string,
-    instanceId int,
+    instanceId *string,
     subDomain []string,
+    attackId *string,
 ) *DescribeCCAttackLogDetailsRequest {
 
     return &DescribeCCAttackLogDetailsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/attacklog:CCDetail",
+            URL:     "/regions/{regionId}/attacklog:describeCCAttackLogDetails",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -109,6 +111,7 @@ func NewDescribeCCAttackLogDetailsRequestWithAllParams(
         EndTime: endTime,
         InstanceId: instanceId,
         SubDomain: subDomain,
+        AttackId: attackId,
     }
 }
 
@@ -117,7 +120,7 @@ func NewDescribeCCAttackLogDetailsRequestWithoutParam() *DescribeCCAttackLogDeta
 
     return &DescribeCCAttackLogDetailsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/attacklog:CCDetail",
+            URL:     "/regions/{regionId}/attacklog:describeCCAttackLogDetails",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -125,7 +128,7 @@ func NewDescribeCCAttackLogDetailsRequestWithoutParam() *DescribeCCAttackLogDeta
     }
 }
 
-/* param regionId: 区域 Id(Required) */
+/* param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可(Required) */
 func (r *DescribeCCAttackLogDetailsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
@@ -150,14 +153,19 @@ func (r *DescribeCCAttackLogDetailsRequest) SetEndTime(endTime string) {
     r.EndTime = endTime
 }
 
-/* param instanceId: 高防实例 ID(Required) */
-func (r *DescribeCCAttackLogDetailsRequest) SetInstanceId(instanceId int) {
-    r.InstanceId = instanceId
+/* param instanceId: 高防实例 ID(Optional) */
+func (r *DescribeCCAttackLogDetailsRequest) SetInstanceId(instanceId string) {
+    r.InstanceId = &instanceId
 }
 
-/* param subDomain: 子域名(Optional) */
+/* param subDomain: 查询的子域名，只有选中某一个实例后才能多选子域名(Optional) */
 func (r *DescribeCCAttackLogDetailsRequest) SetSubDomain(subDomain []string) {
     r.SubDomain = subDomain
+}
+
+/* param attackId: CC 攻击记录Id(Optional) */
+func (r *DescribeCCAttackLogDetailsRequest) SetAttackId(attackId string) {
+    r.AttackId = &attackId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

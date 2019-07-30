@@ -24,7 +24,7 @@ type CheckNameRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 区域 ID, 高防不区分区域, 传 cn-north-1 即可  */
     RegionId string `json:"regionId"`
 
     /* 待检测实例名称  */
@@ -32,7 +32,7 @@ type CheckNameRequest struct {
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param name: 待检测实例名称 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -55,7 +55,7 @@ func NewCheckNameRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param name: 待检测实例名称 (Required)
  */
 func NewCheckNameRequestWithAllParams(
@@ -88,7 +88,7 @@ func NewCheckNameRequestWithoutParam() *CheckNameRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可(Required) */
 func (r *CheckNameRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

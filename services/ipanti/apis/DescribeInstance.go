@@ -25,22 +25,22 @@ type DescribeInstanceRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 区域 ID, 高防不区分区域, 传 cn-north-1 即可  */
     RegionId string `json:"regionId"`
 
     /* 实例 ID  */
-    InstanceId int `json:"instanceId"`
+    InstanceId string `json:"instanceId"`
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param instanceId: 实例 ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeInstanceRequest(
     regionId string,
-    instanceId int,
+    instanceId string,
 ) *DescribeInstanceRequest {
 
 	return &DescribeInstanceRequest{
@@ -56,12 +56,12 @@ func NewDescribeInstanceRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param instanceId: 实例 ID (Required)
  */
 func NewDescribeInstanceRequestWithAllParams(
     regionId string,
-    instanceId int,
+    instanceId string,
 ) *DescribeInstanceRequest {
 
     return &DescribeInstanceRequest{
@@ -89,13 +89,13 @@ func NewDescribeInstanceRequestWithoutParam() *DescribeInstanceRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可(Required) */
 func (r *DescribeInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 实例 ID(Required) */
-func (r *DescribeInstanceRequest) SetInstanceId(instanceId int) {
+func (r *DescribeInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 

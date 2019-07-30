@@ -25,7 +25,7 @@ type CreateInstanceRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 区域 ID, 高防不区分区域, 传 cn-north-1 即可  */
     RegionId string `json:"regionId"`
 
     /* 新购或升级实例请求参数  */
@@ -33,7 +33,7 @@ type CreateInstanceRequest struct {
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param createInstanceSpec: 新购或升级实例请求参数 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -56,7 +56,7 @@ func NewCreateInstanceRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param createInstanceSpec: 新购或升级实例请求参数 (Required)
  */
 func NewCreateInstanceRequestWithAllParams(
@@ -89,7 +89,7 @@ func NewCreateInstanceRequestWithoutParam() *CreateInstanceRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可(Required) */
 func (r *CreateInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

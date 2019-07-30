@@ -20,10 +20,10 @@ package models
 type ForwardRule struct {
 
     /* 规则id (Optional) */
-    Id int64 `json:"id"`
+    Id string `json:"id"`
 
     /* 实例id (Optional) */
-    InstanceId int64 `json:"instanceId"`
+    InstanceId string `json:"instanceId"`
 
     /* TCP或UDP (Optional) */
     Protocol string `json:"protocol"`
@@ -39,7 +39,6 @@ type ForwardRule struct {
 
     /* 转发规则
 - wrr 带权重的轮询
-- wlc 加权最小连接
 - rr  不带权重的轮询
 - sh  源地址hash
  (Optional) */

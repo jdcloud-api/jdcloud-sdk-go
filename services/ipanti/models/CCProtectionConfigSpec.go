@@ -23,17 +23,17 @@ type CCProtectionConfigSpec struct {
     Level int `json:"level"`
 
     /* HTTP 请求数阈值, 防护等级为自定义时必传 (Optional) */
-    CcThreshold int64 `json:"ccThreshold"`
+    CcThreshold *int64 `json:"ccThreshold"`
 
     /* Host 的防护阈值, 防护等级为自定义时必传 (Optional) */
-    HostQps int64 `json:"hostQps"`
+    HostQps *int64 `json:"hostQps"`
 
     /* Host + Url 的防护阈值, 防护等级为自定义时必传 (Optional) */
-    HostUrlQps int64 `json:"hostUrlQps"`
+    HostUrlQps *int64 `json:"hostUrlQps"`
 
     /* 每个源 IP 对 Host 的防护阈值, 防护等级为自定义时必传 (Optional) */
-    IpHostQps int64 `json:"ipHostQps"`
+    IpHostQps *int64 `json:"ipHostQps"`
 
     /* 每个源 IP 对 Host + Url 的防护阈值, 防护等级为自定义时必传 (Optional) */
-    IpHostUrlQps int64 `json:"ipHostUrlQps"`
+    IpHostUrlQps *int64 `json:"ipHostUrlQps"`
 }

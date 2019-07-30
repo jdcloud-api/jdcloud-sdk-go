@@ -25,12 +25,12 @@ type DescribeProtectionStatisticsRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 区域 ID, 高防不区分区域, 传 cn-north-1 即可  */
     RegionId string `json:"regionId"`
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -50,7 +50,7 @@ func NewDescribeProtectionStatisticsRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  */
 func NewDescribeProtectionStatisticsRequestWithAllParams(
     regionId string,
@@ -80,7 +80,7 @@ func NewDescribeProtectionStatisticsRequestWithoutParam() *DescribeProtectionSta
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可(Required) */
 func (r *DescribeProtectionStatisticsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

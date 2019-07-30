@@ -24,7 +24,7 @@ type DescribeAttackStatisticsRequest struct {
 
     core.JDCloudRequest
 
-    /* 区域 Id  */
+    /* 区域 ID, 高防不区分区域, 传 cn-north-1 即可  */
     RegionId string `json:"regionId"`
 
     /* 开始时间, 只能查询最近 60 天以内的数据, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ  */
@@ -34,17 +34,17 @@ type DescribeAttackStatisticsRequest struct {
     EndTime string `json:"endTime"`
 
     /* 高防实例 ID (Optional) */
-    InstanceId []int64 `json:"instanceId"`
+    InstanceId []string `json:"instanceId"`
 
-    /* 攻击类型, 0 为 DDos, 1 为 CC  */
+    /* 攻击类型, 0 为 DDoS, 1 为 CC  */
     Type int `json:"type"`
 }
 
 /*
- * param regionId: 区域 Id (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param startTime: 开始时间, 只能查询最近 60 天以内的数据, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
  * param endTime: 查询的结束时间, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
- * param type_: 攻击类型, 0 为 DDos, 1 为 CC (Required)
+ * param type_: 攻击类型, 0 为 DDoS, 1 为 CC (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -57,7 +57,7 @@ func NewDescribeAttackStatisticsRequest(
 
 	return &DescribeAttackStatisticsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/attacklog/describeAttackStatistics",
+			URL:     "/regions/{regionId}/attacklog:describeAttackStatistics",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -70,23 +70,23 @@ func NewDescribeAttackStatisticsRequest(
 }
 
 /*
- * param regionId: 区域 Id (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param startTime: 开始时间, 只能查询最近 60 天以内的数据, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
  * param endTime: 查询的结束时间, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
  * param instanceId: 高防实例 ID (Optional)
- * param type_: 攻击类型, 0 为 DDos, 1 为 CC (Required)
+ * param type_: 攻击类型, 0 为 DDoS, 1 为 CC (Required)
  */
 func NewDescribeAttackStatisticsRequestWithAllParams(
     regionId string,
     startTime string,
     endTime string,
-    instanceId []int64,
+    instanceId []string,
     type_ int,
 ) *DescribeAttackStatisticsRequest {
 
     return &DescribeAttackStatisticsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/attacklog/describeAttackStatistics",
+            URL:     "/regions/{regionId}/attacklog:describeAttackStatistics",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -104,7 +104,7 @@ func NewDescribeAttackStatisticsRequestWithoutParam() *DescribeAttackStatisticsR
 
     return &DescribeAttackStatisticsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/attacklog/describeAttackStatistics",
+            URL:     "/regions/{regionId}/attacklog:describeAttackStatistics",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -112,7 +112,7 @@ func NewDescribeAttackStatisticsRequestWithoutParam() *DescribeAttackStatisticsR
     }
 }
 
-/* param regionId: 区域 Id(Required) */
+/* param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可(Required) */
 func (r *DescribeAttackStatisticsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
@@ -128,11 +128,11 @@ func (r *DescribeAttackStatisticsRequest) SetEndTime(endTime string) {
 }
 
 /* param instanceId: 高防实例 ID(Optional) */
-func (r *DescribeAttackStatisticsRequest) SetInstanceId(instanceId []int64) {
+func (r *DescribeAttackStatisticsRequest) SetInstanceId(instanceId []string) {
     r.InstanceId = instanceId
 }
 
-/* param type_: 攻击类型, 0 为 DDos, 1 为 CC(Required) */
+/* param type_: 攻击类型, 0 为 DDoS, 1 为 CC(Required) */
 func (r *DescribeAttackStatisticsRequest) SetType(type_ int) {
     r.Type = type_
 }

@@ -24,18 +24,18 @@ type SwitchForwardRuleOriginRequest struct {
 
     core.JDCloudRequest
 
-    /* 区域 Id  */
+    /* 区域 ID, 高防不区分区域, 传 cn-north-1 即可  */
     RegionId string `json:"regionId"`
 
     /* 高防实例 Id  */
-    InstanceId int `json:"instanceId"`
+    InstanceId string `json:"instanceId"`
 
     /* 转发规则 Id  */
-    ForwardRuleId int `json:"forwardRuleId"`
+    ForwardRuleId string `json:"forwardRuleId"`
 }
 
 /*
- * param regionId: 区域 Id (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param instanceId: 高防实例 Id (Required)
  * param forwardRuleId: 转发规则 Id (Required)
  *
@@ -43,8 +43,8 @@ type SwitchForwardRuleOriginRequest struct {
  */
 func NewSwitchForwardRuleOriginRequest(
     regionId string,
-    instanceId int,
-    forwardRuleId int,
+    instanceId string,
+    forwardRuleId string,
 ) *SwitchForwardRuleOriginRequest {
 
 	return &SwitchForwardRuleOriginRequest{
@@ -61,14 +61,14 @@ func NewSwitchForwardRuleOriginRequest(
 }
 
 /*
- * param regionId: 区域 Id (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param instanceId: 高防实例 Id (Required)
  * param forwardRuleId: 转发规则 Id (Required)
  */
 func NewSwitchForwardRuleOriginRequestWithAllParams(
     regionId string,
-    instanceId int,
-    forwardRuleId int,
+    instanceId string,
+    forwardRuleId string,
 ) *SwitchForwardRuleOriginRequest {
 
     return &SwitchForwardRuleOriginRequest{
@@ -97,18 +97,18 @@ func NewSwitchForwardRuleOriginRequestWithoutParam() *SwitchForwardRuleOriginReq
     }
 }
 
-/* param regionId: 区域 Id(Required) */
+/* param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可(Required) */
 func (r *SwitchForwardRuleOriginRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 高防实例 Id(Required) */
-func (r *SwitchForwardRuleOriginRequest) SetInstanceId(instanceId int) {
+func (r *SwitchForwardRuleOriginRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
 /* param forwardRuleId: 转发规则 Id(Required) */
-func (r *SwitchForwardRuleOriginRequest) SetForwardRuleId(forwardRuleId int) {
+func (r *SwitchForwardRuleOriginRequest) SetForwardRuleId(forwardRuleId string) {
     r.ForwardRuleId = forwardRuleId
 }
 

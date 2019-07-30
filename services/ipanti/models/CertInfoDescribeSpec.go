@@ -20,8 +20,8 @@ package models
 type CertInfoDescribeSpec struct {
 
     /* 域名 (Optional) */
-    Domain *string `json:"domain"`
+    Domain string `json:"domain"`
 
     /* 证书内容 (Optional) */
-    HttpsCertContent *string `json:"httpsCertContent"`
+    HttpsCertContent string `json:"httpsCertContent"`
 }

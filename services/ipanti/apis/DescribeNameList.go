@@ -25,11 +25,11 @@ type DescribeNameListRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 区域 ID, 高防不区分区域, 传 cn-north-1 即可  */
     RegionId string `json:"regionId"`
 
     /* 高防实例 ID, 为空则查询所有实例名称 (Optional) */
-    Id *int `json:"id"`
+    Id *string `json:"id"`
 
     /* 实例名称, 可模糊匹配 (Optional) */
     Name *string `json:"name"`
@@ -42,7 +42,7 @@ type DescribeNameListRequest struct {
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -62,7 +62,7 @@ func NewDescribeNameListRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param id: 高防实例 ID, 为空则查询所有实例名称 (Optional)
  * param name: 实例名称, 可模糊匹配 (Optional)
  * param pageNumber: 页码, 默认为 1 (Optional)
@@ -70,7 +70,7 @@ func NewDescribeNameListRequest(
  */
 func NewDescribeNameListRequestWithAllParams(
     regionId string,
-    id *int,
+    id *string,
     name *string,
     pageNumber *int,
     pageSize *int,
@@ -104,13 +104,13 @@ func NewDescribeNameListRequestWithoutParam() *DescribeNameListRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可(Required) */
 func (r *DescribeNameListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param id: 高防实例 ID, 为空则查询所有实例名称(Optional) */
-func (r *DescribeNameListRequest) SetId(id int) {
+func (r *DescribeNameListRequest) SetId(id string) {
     r.Id = &id
 }
 

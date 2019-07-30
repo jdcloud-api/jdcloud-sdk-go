@@ -25,12 +25,12 @@ type DescribeGeoAreasRequest struct {
 
     core.JDCloudRequest
 
-    /* 区域 Id  */
+    /* 区域 ID, 高防不区分区域, 传 cn-north-1 即可  */
     RegionId string `json:"regionId"`
 }
 
 /*
- * param regionId: 区域 Id (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -50,7 +50,7 @@ func NewDescribeGeoAreasRequest(
 }
 
 /*
- * param regionId: 区域 Id (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  */
 func NewDescribeGeoAreasRequestWithAllParams(
     regionId string,
@@ -80,7 +80,7 @@ func NewDescribeGeoAreasRequestWithoutParam() *DescribeGeoAreasRequest {
     }
 }
 
-/* param regionId: 区域 Id(Required) */
+/* param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可(Required) */
 func (r *DescribeGeoAreasRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
