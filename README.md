@@ -15,7 +15,7 @@
 1.	京东云Go SDK的下载地址：https://github.com/jdcloud-api/jdcloud-sdk-go 。
 2.	您也可以使用以下命令获取安装包，代码会被下载到GOPATH环境变量中第一个路径src目录中。
 
-    `go get github.com/jdcloud-api/jdcloud-sdk-go/core github.com/satori/go.uuid`
+    `go get github.com/jdcloud-api/jdcloud-sdk-go/core github.com/gofrs/uuid`
 
 ## 调用SDK
 ### 业务侧SDK的调用主要分为4步：
