@@ -24,36 +24,60 @@ type CreateWatermarkRequest struct {
 
     core.JDCloudRequest
 
-    /* 水印名称 (Optional) */
-    Name *string `json:"name"`
+    /* 水印名称  */
+    Name string `json:"name"`
 
-    /* 图片地址 (Optional) */
-    ImgUrl *string `json:"imgUrl"`
+    /* 图片地址  */
+    ImgUrl string `json:"imgUrl"`
 
-    /* 宽度 (Optional) */
-    Width *int `json:"width"`
+    /* 水印宽度  */
+    Width int `json:"width"`
 
-    /* 高度 (Optional) */
-    Height *int `json:"height"`
+    /* 水印高度  */
+    Height int `json:"height"`
 
-    /* 水印位置 (Optional) */
-    Position *string `json:"position"`
+    /* 水印位置。取值范围：
+  LT - 左上
+  RT - 右上
+  LB - 左下
+  RB - 右下
+  */
+    Position string `json:"position"`
 
     /* 偏移单位 (Optional) */
     Unit *string `json:"unit"`
 
-    /* 水平偏移 (Optional) */
-    OffsetX *int `json:"offsetX"`
+    /* 水平偏移  */
+    OffsetX int `json:"offsetX"`
 
-    /* 竖直偏移 (Optional) */
-    OffsetY *int `json:"offsetY"`
+    /* 竖直偏移  */
+    OffsetY int `json:"offsetY"`
 }
 
 /*
+ * param name: 水印名称 (Required)
+ * param imgUrl: 图片地址 (Required)
+ * param width: 水印宽度 (Required)
+ * param height: 水印高度 (Required)
+ * param position: 水印位置。取值范围：
+  LT - 左上
+  RT - 右上
+  LB - 左下
+  RB - 右下
+ (Required)
+ * param offsetX: 水平偏移 (Required)
+ * param offsetY: 竖直偏移 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateWatermarkRequest(
+    name string,
+    imgUrl string,
+    width int,
+    height int,
+    position string,
+    offsetX int,
+    offsetY int,
 ) *CreateWatermarkRequest {
 
 	return &CreateWatermarkRequest{
@@ -63,28 +87,40 @@ func NewCreateWatermarkRequest(
 			Header:  nil,
 			Version: "v1",
 		},
+        Name: name,
+        ImgUrl: imgUrl,
+        Width: width,
+        Height: height,
+        Position: position,
+        OffsetX: offsetX,
+        OffsetY: offsetY,
 	}
 }
 
 /*
- * param name: 水印名称 (Optional)
- * param imgUrl: 图片地址 (Optional)
- * param width: 宽度 (Optional)
- * param height: 高度 (Optional)
- * param position: 水印位置 (Optional)
+ * param name: 水印名称 (Required)
+ * param imgUrl: 图片地址 (Required)
+ * param width: 水印宽度 (Required)
+ * param height: 水印高度 (Required)
+ * param position: 水印位置。取值范围：
+  LT - 左上
+  RT - 右上
+  LB - 左下
+  RB - 右下
+ (Required)
  * param unit: 偏移单位 (Optional)
- * param offsetX: 水平偏移 (Optional)
- * param offsetY: 竖直偏移 (Optional)
+ * param offsetX: 水平偏移 (Required)
+ * param offsetY: 竖直偏移 (Required)
  */
 func NewCreateWatermarkRequestWithAllParams(
-    name *string,
-    imgUrl *string,
-    width *int,
-    height *int,
-    position *string,
+    name string,
+    imgUrl string,
+    width int,
+    height int,
+    position string,
     unit *string,
-    offsetX *int,
-    offsetY *int,
+    offsetX int,
+    offsetY int,
 ) *CreateWatermarkRequest {
 
     return &CreateWatermarkRequest{
@@ -118,29 +154,34 @@ func NewCreateWatermarkRequestWithoutParam() *CreateWatermarkRequest {
     }
 }
 
-/* param name: 水印名称(Optional) */
+/* param name: 水印名称(Required) */
 func (r *CreateWatermarkRequest) SetName(name string) {
-    r.Name = &name
+    r.Name = name
 }
 
-/* param imgUrl: 图片地址(Optional) */
+/* param imgUrl: 图片地址(Required) */
 func (r *CreateWatermarkRequest) SetImgUrl(imgUrl string) {
-    r.ImgUrl = &imgUrl
+    r.ImgUrl = imgUrl
 }
 
-/* param width: 宽度(Optional) */
+/* param width: 水印宽度(Required) */
 func (r *CreateWatermarkRequest) SetWidth(width int) {
-    r.Width = &width
+    r.Width = width
 }
 
-/* param height: 高度(Optional) */
+/* param height: 水印高度(Required) */
 func (r *CreateWatermarkRequest) SetHeight(height int) {
-    r.Height = &height
+    r.Height = height
 }
 
-/* param position: 水印位置(Optional) */
+/* param position: 水印位置。取值范围：
+  LT - 左上
+  RT - 右上
+  LB - 左下
+  RB - 右下
+(Required) */
 func (r *CreateWatermarkRequest) SetPosition(position string) {
-    r.Position = &position
+    r.Position = position
 }
 
 /* param unit: 偏移单位(Optional) */
@@ -148,14 +189,14 @@ func (r *CreateWatermarkRequest) SetUnit(unit string) {
     r.Unit = &unit
 }
 
-/* param offsetX: 水平偏移(Optional) */
+/* param offsetX: 水平偏移(Required) */
 func (r *CreateWatermarkRequest) SetOffsetX(offsetX int) {
-    r.OffsetX = &offsetX
+    r.OffsetX = offsetX
 }
 
-/* param offsetY: 竖直偏移(Optional) */
+/* param offsetY: 竖直偏移(Required) */
 func (r *CreateWatermarkRequest) SetOffsetY(offsetY int) {
-    r.OffsetY = &offsetY
+    r.OffsetY = offsetY
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

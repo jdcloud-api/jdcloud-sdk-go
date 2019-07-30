@@ -97,6 +97,7 @@ type DescribeCustomLiveStreamTranscodeTemplateResponse struct {
 }
 
 type DescribeCustomLiveStreamTranscodeTemplateResult struct {
+    VideoCodec string `json:"videoCodec"`
     VideoCodeRate int `json:"videoCodeRate"`
     VideoFrameRate string `json:"videoFrameRate"`
     Width int `json:"width"`
@@ -107,4 +108,6 @@ type DescribeCustomLiveStreamTranscodeTemplateResult struct {
     AudioSampleRate int `json:"audioSampleRate"`
     AudioChannel int `json:"audioChannel"`
     AudioCodeRate int `json:"audioCodeRate"`
+    Jdchd string `json:"jdchd"`
+    AudioComfort string `json:"audioComfort"`
 }

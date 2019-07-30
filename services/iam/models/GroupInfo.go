@@ -25,7 +25,7 @@ type GroupInfo struct {
     /* 用户组名 (Optional) */
     Name string `json:"name"`
 
-    /* jrn描述 (Optional) */
+    /* 京东云资源标识(jrn) (Optional) */
     Jrn string `json:"jrn"`
 
     /*  (Optional) */

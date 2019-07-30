@@ -23,6 +23,7 @@ type LiveTranscodeStreamResult struct {
  (Optional) */
     StreamName string `json:"streamName"`
 
-    /* 流状态 (Optional) */
+    /* 流状态
+ (Optional) */
     Status string `json:"status"`
 }

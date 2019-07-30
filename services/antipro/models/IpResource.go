@@ -49,7 +49,7 @@ type IpResource struct {
     /* 黑洞阈值 (Optional) */
     BalckHoleThreshold int64 `json:"balckHoleThreshold"`
 
-    /* 绑定防护包 ID, 为 0 时表示未绑定防护包 (Optional) */
+    /* 绑定防护包 ID, 为空字符时表示未绑定防护包 (Optional) */
     InstanceId string `json:"instanceId"`
 
     /* 绑定防护包名称, 为空字符串时表示未绑定防护包 (Optional) */

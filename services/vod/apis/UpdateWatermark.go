@@ -27,22 +27,24 @@ type UpdateWatermarkRequest struct {
     /* 水印ID  */
     WatermarkId int `json:"watermarkId"`
 
-    /* 水印ID (Optional) */
-    Id *int64 `json:"id"`
-
     /* 水印名称 (Optional) */
     Name *string `json:"name"`
 
     /* 图片地址 (Optional) */
     ImgUrl *string `json:"imgUrl"`
 
-    /* 宽度 (Optional) */
+    /* 水印宽度 (Optional) */
     Width *int `json:"width"`
 
-    /* 高度 (Optional) */
+    /* 水印高度 (Optional) */
     Height *int `json:"height"`
 
-    /* 水印位置 (Optional) */
+    /* 水印位置。取值范围：
+  LT - 左上
+  RT - 右上
+  LB - 左下
+  RB - 右下
+ (Optional) */
     Position *string `json:"position"`
 
     /* 偏移单位 (Optional) */
@@ -77,19 +79,22 @@ func NewUpdateWatermarkRequest(
 
 /*
  * param watermarkId: 水印ID (Required)
- * param id: 水印ID (Optional)
  * param name: 水印名称 (Optional)
  * param imgUrl: 图片地址 (Optional)
- * param width: 宽度 (Optional)
- * param height: 高度 (Optional)
- * param position: 水印位置 (Optional)
+ * param width: 水印宽度 (Optional)
+ * param height: 水印高度 (Optional)
+ * param position: 水印位置。取值范围：
+  LT - 左上
+  RT - 右上
+  LB - 左下
+  RB - 右下
+ (Optional)
  * param unit: 偏移单位 (Optional)
  * param offsetX: 水平偏移 (Optional)
  * param offsetY: 竖直偏移 (Optional)
  */
 func NewUpdateWatermarkRequestWithAllParams(
     watermarkId int,
-    id *int64,
     name *string,
     imgUrl *string,
     width *int,
@@ -108,7 +113,6 @@ func NewUpdateWatermarkRequestWithAllParams(
             Version: "v1",
         },
         WatermarkId: watermarkId,
-        Id: id,
         Name: name,
         ImgUrl: imgUrl,
         Width: width,
@@ -138,11 +142,6 @@ func (r *UpdateWatermarkRequest) SetWatermarkId(watermarkId int) {
     r.WatermarkId = watermarkId
 }
 
-/* param id: 水印ID(Optional) */
-func (r *UpdateWatermarkRequest) SetId(id int64) {
-    r.Id = &id
-}
-
 /* param name: 水印名称(Optional) */
 func (r *UpdateWatermarkRequest) SetName(name string) {
     r.Name = &name
@@ -153,17 +152,22 @@ func (r *UpdateWatermarkRequest) SetImgUrl(imgUrl string) {
     r.ImgUrl = &imgUrl
 }
 
-/* param width: 宽度(Optional) */
+/* param width: 水印宽度(Optional) */
 func (r *UpdateWatermarkRequest) SetWidth(width int) {
     r.Width = &width
 }
 
-/* param height: 高度(Optional) */
+/* param height: 水印高度(Optional) */
 func (r *UpdateWatermarkRequest) SetHeight(height int) {
     r.Height = &height
 }
 
-/* param position: 水印位置(Optional) */
+/* param position: 水印位置。取值范围：
+  LT - 左上
+  RT - 右上
+  LB - 左下
+  RB - 右下
+(Optional) */
 func (r *UpdateWatermarkRequest) SetPosition(position string) {
     r.Position = &position
 }

@@ -37,6 +37,9 @@ type CloudDiskSpec struct {
     /* 指定volume文件系统类型，目前支持[xfs, ext4]；如果新创建的盘，不指定文件系统类型默认格式化成xfs (Optional) */
     FsType *string `json:"fsType"`
 
+    /* 云盘的 iops 值，目前只有 ssd.io1 类型有效 (Optional) */
+    Iops *int `json:"iops"`
+
     /* 是否随pod删除。默认：true (Optional) */
     AutoDelete *bool `json:"autoDelete"`
 }

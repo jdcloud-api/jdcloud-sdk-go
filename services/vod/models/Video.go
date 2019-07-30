@@ -19,18 +19,18 @@ package models
 
 type Video struct {
 
-    /* 视频编码 (Optional) */
+    /* 视频编码。取值范围：h265、h264 (Optional) */
     Codec *string `json:"codec"`
 
-    /* 码率 (Optional) */
+    /* 视频码率。取值范围 [128、10000]，单位为 Kbps (Optional) */
     Bitrate *int `json:"bitrate"`
 
-    /* 帧率 (Optional) */
+    /* 视频帧率。取值范围为 [1、60]，单位为 fps (Optional) */
     Fps *int `json:"fps"`
 
-    /* 宽度 (Optional) */
+    /* 视频输出宽度。取值范围 [128，4096]，取值需为2的倍数 (Optional) */
     Width *int `json:"width"`
 
-    /* 高度 (Optional) */
+    /* 视频输出高度。取值范围 [128，4096]，取值需为2的倍数 (Optional) */
     Height *int `json:"height"`
 }

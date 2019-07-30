@@ -24,13 +24,11 @@ type CreateCategoryRequest struct {
 
     core.JDCloudRequest
 
-    /* 分类名称 (Optional) */
-    Name *string `json:"name"`
+    /* 分类名称  */
+    Name string `json:"name"`
 
-    /* 分类级别 (Optional) */
-    Level *int `json:"level"`
-
-    /* 父分类ID (Optional) */
+    /* 父分类ID，取值为 0 或 null 时，表示该分类为一级分类
+ (Optional) */
     ParentId *int64 `json:"parentId"`
 
     /* 分类描述信息 (Optional) */
@@ -38,10 +36,12 @@ type CreateCategoryRequest struct {
 }
 
 /*
+ * param name: 分类名称 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateCategoryRequest(
+    name string,
 ) *CreateCategoryRequest {
 
 	return &CreateCategoryRequest{
@@ -51,18 +51,18 @@ func NewCreateCategoryRequest(
 			Header:  nil,
 			Version: "v1",
 		},
+        Name: name,
 	}
 }
 
 /*
- * param name: 分类名称 (Optional)
- * param level: 分类级别 (Optional)
- * param parentId: 父分类ID (Optional)
+ * param name: 分类名称 (Required)
+ * param parentId: 父分类ID，取值为 0 或 null 时，表示该分类为一级分类
+ (Optional)
  * param description: 分类描述信息 (Optional)
  */
 func NewCreateCategoryRequestWithAllParams(
-    name *string,
-    level *int,
+    name string,
     parentId *int64,
     description *string,
 ) *CreateCategoryRequest {
@@ -75,7 +75,6 @@ func NewCreateCategoryRequestWithAllParams(
             Version: "v1",
         },
         Name: name,
-        Level: level,
         ParentId: parentId,
         Description: description,
     }
@@ -94,17 +93,13 @@ func NewCreateCategoryRequestWithoutParam() *CreateCategoryRequest {
     }
 }
 
-/* param name: 分类名称(Optional) */
+/* param name: 分类名称(Required) */
 func (r *CreateCategoryRequest) SetName(name string) {
-    r.Name = &name
+    r.Name = name
 }
 
-/* param level: 分类级别(Optional) */
-func (r *CreateCategoryRequest) SetLevel(level int) {
-    r.Level = &level
-}
-
-/* param parentId: 父分类ID(Optional) */
+/* param parentId: 父分类ID，取值为 0 或 null 时，表示该分类为一级分类
+(Optional) */
 func (r *CreateCategoryRequest) SetParentId(parentId int64) {
     r.ParentId = &parentId
 }

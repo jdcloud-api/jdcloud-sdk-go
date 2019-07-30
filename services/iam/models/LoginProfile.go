@@ -25,6 +25,6 @@ type LoginProfile struct {
     /* 要求下次登录时重设密码 (Optional) */
     PasswordResetRequired bool `json:"passwordResetRequired"`
 
-    /* 要求必须绑定多因素认证设备 (Optional) */
+    /* 要求必须绑定虚拟MFA设备 (Optional) */
     MFABindRequired bool `json:"mFABindRequired"`
 }

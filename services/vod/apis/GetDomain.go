@@ -100,6 +100,7 @@ type GetDomainResult struct {
     Id string `json:"id"`
     Name string `json:"name"`
     Cname string `json:"cname"`
+    Status string `json:"status"`
     Source string `json:"source"`
     AsDefault bool `json:"asDefault"`
     CreateTime string `json:"createTime"`

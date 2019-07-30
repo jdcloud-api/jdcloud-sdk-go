@@ -19,11 +19,11 @@ package models
 
 type CreatePolicyInfo struct {
 
-    /* 策略名：支持4-64位的字母，数字以及-和_, 以字母开头  */
+    /* 策略名，支持4~64位的字母，数字以及-和_, 以字母开头  */
     Name string `json:"name"`
 
     /* 描述，0~256个字符 (Optional) */
-    Description string `json:"description"`
+    Description *string `json:"description"`
 
     /* 策略文档，最多6144个字符  */
     Content string `json:"content"`

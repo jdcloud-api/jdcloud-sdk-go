@@ -27,17 +27,19 @@ type DeleteVideoStreamsRequest struct {
     /* 视频ID  */
     VideoId string `json:"videoId"`
 
-    /*  (Optional) */
+    /*   */
     TaskIds []int64 `json:"taskIds"`
 }
 
 /*
  * param videoId: 视频ID (Required)
+ * param taskIds:  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDeleteVideoStreamsRequest(
     videoId string,
+    taskIds []int64,
 ) *DeleteVideoStreamsRequest {
 
 	return &DeleteVideoStreamsRequest{
@@ -48,12 +50,13 @@ func NewDeleteVideoStreamsRequest(
 			Version: "v1",
 		},
         VideoId: videoId,
+        TaskIds: taskIds,
 	}
 }
 
 /*
  * param videoId: 视频ID (Required)
- * param taskIds:  (Optional)
+ * param taskIds:  (Required)
  */
 func NewDeleteVideoStreamsRequestWithAllParams(
     videoId string,
@@ -90,7 +93,7 @@ func (r *DeleteVideoStreamsRequest) SetVideoId(videoId string) {
     r.VideoId = videoId
 }
 
-/* param taskIds: (Optional) */
+/* param taskIds: (Required) */
 func (r *DeleteVideoStreamsRequest) SetTaskIds(taskIds []int64) {
     r.TaskIds = taskIds
 }
@@ -108,4 +111,7 @@ type DeleteVideoStreamsResponse struct {
 }
 
 type DeleteVideoStreamsResult struct {
+    OkTaskIds []int64 `json:"okTaskIds"`
+    NotFoundTaskIds []int64 `json:"notFoundTaskIds"`
+    FailedTaskIds []int64 `json:"failedTaskIds"`
 }

@@ -31,8 +31,8 @@ type AddCustomLiveStreamRecordTemplateRequest struct {
     RecordPeriod int `json:"recordPeriod"`
 
     /* 存储桶
- (Optional) */
-    SaveBucket *string `json:"saveBucket"`
+  */
+    SaveBucket string `json:"saveBucket"`
 
     /* endpoint
  (Optional) */
@@ -57,6 +57,8 @@ type AddCustomLiveStreamRecordTemplateRequest struct {
 - 取值: [15,360]
 - 单位: 分钟
  (Required)
+ * param saveBucket: 存储桶
+ (Required)
  * param recordFileType: 录制文件格式:
 - 取值: ts,flv,mp4 (多种类型之间用;隔开)
 - 不区分大小写
@@ -71,6 +73,7 @@ type AddCustomLiveStreamRecordTemplateRequest struct {
  */
 func NewAddCustomLiveStreamRecordTemplateRequest(
     recordPeriod int,
+    saveBucket string,
     recordFileType string,
     template string,
 ) *AddCustomLiveStreamRecordTemplateRequest {
@@ -83,6 +86,7 @@ func NewAddCustomLiveStreamRecordTemplateRequest(
 			Version: "v1",
 		},
         RecordPeriod: recordPeriod,
+        SaveBucket: saveBucket,
         RecordFileType: recordFileType,
         Template: template,
 	}
@@ -94,7 +98,7 @@ func NewAddCustomLiveStreamRecordTemplateRequest(
 - 单位: 分钟
  (Required)
  * param saveBucket: 存储桶
- (Optional)
+ (Required)
  * param saveEndpoint: endpoint
  (Optional)
  * param recordFileType: 录制文件格式:
@@ -109,7 +113,7 @@ func NewAddCustomLiveStreamRecordTemplateRequest(
  */
 func NewAddCustomLiveStreamRecordTemplateRequestWithAllParams(
     recordPeriod int,
-    saveBucket *string,
+    saveBucket string,
     saveEndpoint *string,
     recordFileType string,
     template string,
@@ -152,9 +156,9 @@ func (r *AddCustomLiveStreamRecordTemplateRequest) SetRecordPeriod(recordPeriod 
 }
 
 /* param saveBucket: 存储桶
-(Optional) */
+(Required) */
 func (r *AddCustomLiveStreamRecordTemplateRequest) SetSaveBucket(saveBucket string) {
-    r.SaveBucket = &saveBucket
+    r.SaveBucket = saveBucket
 }
 
 /* param saveEndpoint: endpoint

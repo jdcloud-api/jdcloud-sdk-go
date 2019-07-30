@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    vod "github.com/jdcloud-api/jdcloud-sdk-go/services/vod/models"
 )
 
 type GetRefererRuleRequest struct {
@@ -98,8 +99,6 @@ type GetRefererRuleResponse struct {
 
 type GetRefererRuleResult struct {
     RuleType string `json:"ruleType"`
-    Config interface{} `json:"config"`
+    Config vod.RefererRuleConfigObject `json:"config"`
     Enabled bool `json:"enabled"`
-    CreateTime string `json:"createTime"`
-    UpdateTime string `json:"updateTime"`
 }

@@ -18,21 +18,24 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    vod "github.com/jdcloud-api/jdcloud-sdk-go/services/vod/models"
 )
 
 type BatchUpdateVideosRequest struct {
 
     core.JDCloudRequest
 
-    /*  (Optional) */
-    Contents []interface{} `json:"contents"`
+    /* 批量更新视频的条目集合  */
+    BulkItems []vod.BatchUpdateVideosBulkItem `json:"bulkItems"`
 }
 
 /*
+ * param bulkItems: 批量更新视频的条目集合 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewBatchUpdateVideosRequest(
+    bulkItems []vod.BatchUpdateVideosBulkItem,
 ) *BatchUpdateVideosRequest {
 
 	return &BatchUpdateVideosRequest{
@@ -42,14 +45,15 @@ func NewBatchUpdateVideosRequest(
 			Header:  nil,
 			Version: "v1",
 		},
+        BulkItems: bulkItems,
 	}
 }
 
 /*
- * param contents:  (Optional)
+ * param bulkItems: 批量更新视频的条目集合 (Required)
  */
 func NewBatchUpdateVideosRequestWithAllParams(
-    contents []interface{},
+    bulkItems []vod.BatchUpdateVideosBulkItem,
 ) *BatchUpdateVideosRequest {
 
     return &BatchUpdateVideosRequest{
@@ -59,7 +63,7 @@ func NewBatchUpdateVideosRequestWithAllParams(
             Header:  nil,
             Version: "v1",
         },
-        Contents: contents,
+        BulkItems: bulkItems,
     }
 }
 
@@ -76,9 +80,9 @@ func NewBatchUpdateVideosRequestWithoutParam() *BatchUpdateVideosRequest {
     }
 }
 
-/* param contents: (Optional) */
-func (r *BatchUpdateVideosRequest) SetContents(contents []interface{}) {
-    r.Contents = contents
+/* param bulkItems: 批量更新视频的条目集合(Required) */
+func (r *BatchUpdateVideosRequest) SetBulkItems(bulkItems []vod.BatchUpdateVideosBulkItem) {
+    r.BulkItems = bulkItems
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
@@ -94,6 +98,7 @@ type BatchUpdateVideosResponse struct {
 }
 
 type BatchUpdateVideosResult struct {
-    UpdateVideoIds []string `json:"updateVideoIds"`
+    OkVideoIds []string `json:"okVideoIds"`
     NotFoundVideoIds []string `json:"notFoundVideoIds"`
+    FailedVideoIds []string `json:"failedVideoIds"`
 }

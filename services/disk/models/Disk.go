@@ -60,7 +60,7 @@ type Disk struct {
     Encrypted bool `json:"encrypted"`
 
     /* 云盘是否被暂停（IOPS限制为极低） (Optional) */
-    Enable bool `json:"enable"`
+    Enabled bool `json:"enabled"`
 
     /* 创建云硬盘时间 (Optional) */
     CreateTime string `json:"createTime"`

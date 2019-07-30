@@ -40,7 +40,7 @@ func NewBaseantiClient(credential *core.Credential) *BaseantiClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "baseanti",
-            Revision:    "1.1.0",
+            Revision:    "1.2.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -113,7 +113,7 @@ func (c *BaseantiClient) DescribeIpMonitorFlow(request *baseanti.DescribeIpMonit
     return jdResp, err
 }
 
-/* 查询公网 IP 的安全信息列表. 包括私有网络的弹性公网 IP(运营商级 NAT 保留地址除外), 云物理服务器的公网 IP 和弹性公网 IP. (已废弃, 建议使用 <a href="http://docs.jdcloud.com/anti-ddos-basic/api/describeelasticipresources">describeElasticIpResources</a>, <a href="http://docs.jdcloud.com/anti-ddos-basic/api/describecpsipresources">describeCpsIpResources</a> 接口)"
+/* 查询基础防护已防护的公网 IP 的安全信息列表. 包括私有网络的弹性公网 IP(运营商级 NAT 保留地址除外), 云物理服务器的公网 IP 和弹性公网 IP. (已废弃, 建议使用 <a href="http://docs.jdcloud.com/anti-ddos-basic/api/describeelasticipresources">describeElasticIpResources</a>, <a href="http://docs.jdcloud.com/anti-ddos-basic/api/describecpsipresources">describeCpsIpResources</a> 接口)"
  */
 func (c *BaseantiClient) DescribeIpResources(request *baseanti.DescribeIpResourcesRequest) (*baseanti.DescribeIpResourcesResponse, error) {
     if request == nil {
@@ -154,7 +154,7 @@ func (c *BaseantiClient) DescribeAttackStatistics(request *baseanti.DescribeAtta
     return jdResp, err
 }
 
-/* 查询私有网络的弹性公网 IP 的安全信息. 包括私有网络的弹性公网 IP(运营商级 NAT 保留地址除外)
+/* 查询基础防护已防护的私有网络的弹性公网 IP 的安全信息. 包括私有网络的弹性公网 IP(运营商级 NAT 保留地址除外)
  */
 func (c *BaseantiClient) DescribeElasticIpResources(request *baseanti.DescribeElasticIpResourcesRequest) (*baseanti.DescribeElasticIpResourcesResponse, error) {
     if request == nil {
@@ -166,6 +166,26 @@ func (c *BaseantiClient) DescribeElasticIpResources(request *baseanti.DescribeEl
     }
 
     jdResp := &baseanti.DescribeElasticIpResourcesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询基础防护已防护的托管区 IP 的安全信息 */
+func (c *BaseantiClient) DescribeCcsIpResources(request *baseanti.DescribeCcsIpResourcesRequest) (*baseanti.DescribeCcsIpResourcesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &baseanti.DescribeCcsIpResourcesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -236,7 +256,7 @@ func (c *BaseantiClient) DescribeIpResourceProtectInfo(request *baseanti.Describ
     return jdResp, err
 }
 
-/* 查询云物理服务器公网 IP 的安全信息. 包括云物理服务器的公网 IP 和弹性公网 IP.
+/* 查询基础防护已防护的云物理服务器公网 IP 的安全信息. 包括云物理服务器的公网 IP 和弹性公网 IP.
  */
 func (c *BaseantiClient) DescribeCpsIpResources(request *baseanti.DescribeCpsIpResourcesRequest) (*baseanti.DescribeCpsIpResourcesResponse, error) {
     if request == nil {

@@ -29,8 +29,14 @@ type AddCustomLiveStreamTranscodeTemplateRequest struct {
  (Optional) */
     TemplateName *string `json:"templateName"`
 
+    /* 视频编码格式，取值：h264,h265，默认h264
+- h264时,分辨率小于等于1080p
+- h265时,分辨率小于等于4k
+ (Optional) */
+    VideoCodec *string `json:"videoCodec"`
+
     /* 转码输出的码率值
-- 取值范围: [200,3000]
+- 取值范围: [128,15000]
 - 单位: kpbs
   */
     VideoCodeRate int `json:"videoCodeRate"`
@@ -41,14 +47,14 @@ type AddCustomLiveStreamTranscodeTemplateRequest struct {
     VideoFrameRate string `json:"videoFrameRate"`
 
     /* 转码输出视频宽度
-- 取值: [100,1920]
+- 取值: [128,4096]
 - 如果(width,height)只设置其中之一,则按所设置参数项等比缩放另一项输出转码
 - 如果(width,height)都不设置，则按源流大小输出转码
  (Optional) */
     Width *int `json:"width"`
 
-    /* 转码输出视频宽度
-- 取值: [100,1920]
+    /* 转码输出视频高度
+- 取值: [128,4096]
 - 如果(width,height)只设置其中之一,则按所设置参数项等比缩放另一项输出转码
 - 如果(width,height)都不设置，则按源流大小输出转码
  (Optional) */
@@ -59,9 +65,13 @@ type AddCustomLiveStreamTranscodeTemplateRequest struct {
 - <b>注意: 不能与系统的标准的转码模板和当前用户已自定义命名重复</b>
 - 系统标准转码模板
   ld (h.264/640*360/15f)
-  sd (h.264/854*480/24f)
+  sd (h.264/960*540/25f)
   hd (h.264/1280*720/25f)
   shd (h.264/1920*1080/30f)
+  ld-265 (h.265/640*360/15f)
+  sd-265 (h.265/960*540/25f)
+  hd-265 (h.265/1280*720/25f)
+  shd-265 (h.265/1920*1080/30f)
   */
     Template string `json:"template"`
 
@@ -72,10 +82,10 @@ type AddCustomLiveStreamTranscodeTemplateRequest struct {
     AudioCodec string `json:"audioCodec"`
 
     /* 转码输出音频格式
-- 取值: aac_lc，aac_low，aac_he，aac_he_v2
+- 取值: aac_lc,aac_low,aac_he,aac_he_v2; 默认:aac_he
 - 不区分大小写
-  */
-    AudioFormat string `json:"audioFormat"`
+ (Optional) */
+    AudioFormat *string `json:"audioFormat"`
 
     /* 转码输出音频采样率
 - 取值: [44100,48000]
@@ -93,11 +103,22 @@ type AddCustomLiveStreamTranscodeTemplateRequest struct {
 - 单位: kbps
   */
     AudioCodeRate int `json:"audioCodeRate"`
+
+    /* 京享超清开关
+- 取值: jdchd-1.0,off
+- 京享超清暂时只支持h.264
+ (Optional) */
+    Jdchd *string `json:"jdchd"`
+
+    /* 舒适音频
+- 取值: on,off
+ (Optional) */
+    AudioComfort *string `json:"audioComfort"`
 }
 
 /*
  * param videoCodeRate: 转码输出的码率值
-- 取值范围: [200,3000]
+- 取值范围: [128,15000]
 - 单位: kpbs
  (Required)
  * param videoFrameRate: 转码输出的帧率值
@@ -108,16 +129,16 @@ type AddCustomLiveStreamTranscodeTemplateRequest struct {
 - <b>注意: 不能与系统的标准的转码模板和当前用户已自定义命名重复</b>
 - 系统标准转码模板
   ld (h.264/640*360/15f)
-  sd (h.264/854*480/24f)
+  sd (h.264/960*540/25f)
   hd (h.264/1280*720/25f)
   shd (h.264/1920*1080/30f)
+  ld-265 (h.265/640*360/15f)
+  sd-265 (h.265/960*540/25f)
+  hd-265 (h.265/1280*720/25f)
+  shd-265 (h.265/1920*1080/30f)
  (Required)
  * param audioCodec: 转码输出音频编码格式
 - 取值: aac、mp3
-- 不区分大小写
- (Required)
- * param audioFormat: 转码输出音频格式
-- 取值: aac_lc，aac_low，aac_he，aac_he_v2
 - 不区分大小写
  (Required)
  * param audioSampleRate: 转码输出音频采样率
@@ -139,7 +160,6 @@ func NewAddCustomLiveStreamTranscodeTemplateRequest(
     videoFrameRate string,
     template string,
     audioCodec string,
-    audioFormat string,
     audioSampleRate int,
     audioChannel int,
     audioCodeRate int,
@@ -156,7 +176,6 @@ func NewAddCustomLiveStreamTranscodeTemplateRequest(
         VideoFrameRate: videoFrameRate,
         Template: template,
         AudioCodec: audioCodec,
-        AudioFormat: audioFormat,
         AudioSampleRate: audioSampleRate,
         AudioChannel: audioChannel,
         AudioCodeRate: audioCodeRate,
@@ -167,20 +186,24 @@ func NewAddCustomLiveStreamTranscodeTemplateRequest(
  * param templateName: 转码模板名称
 - 长度范围：[1,50]
  (Optional)
+ * param videoCodec: 视频编码格式，取值：h264,h265，默认h264
+- h264时,分辨率小于等于1080p
+- h265时,分辨率小于等于4k
+ (Optional)
  * param videoCodeRate: 转码输出的码率值
-- 取值范围: [200,3000]
+- 取值范围: [128,15000]
 - 单位: kpbs
  (Required)
  * param videoFrameRate: 转码输出的帧率值
 - 取值：[1,30]
  (Required)
  * param width: 转码输出视频宽度
-- 取值: [100,1920]
+- 取值: [128,4096]
 - 如果(width,height)只设置其中之一,则按所设置参数项等比缩放另一项输出转码
 - 如果(width,height)都不设置，则按源流大小输出转码
  (Optional)
- * param height: 转码输出视频宽度
-- 取值: [100,1920]
+ * param height: 转码输出视频高度
+- 取值: [128,4096]
 - 如果(width,height)只设置其中之一,则按所设置参数项等比缩放另一项输出转码
 - 如果(width,height)都不设置，则按源流大小输出转码
  (Optional)
@@ -189,18 +212,22 @@ func NewAddCustomLiveStreamTranscodeTemplateRequest(
 - <b>注意: 不能与系统的标准的转码模板和当前用户已自定义命名重复</b>
 - 系统标准转码模板
   ld (h.264/640*360/15f)
-  sd (h.264/854*480/24f)
+  sd (h.264/960*540/25f)
   hd (h.264/1280*720/25f)
   shd (h.264/1920*1080/30f)
+  ld-265 (h.265/640*360/15f)
+  sd-265 (h.265/960*540/25f)
+  hd-265 (h.265/1280*720/25f)
+  shd-265 (h.265/1920*1080/30f)
  (Required)
  * param audioCodec: 转码输出音频编码格式
 - 取值: aac、mp3
 - 不区分大小写
  (Required)
  * param audioFormat: 转码输出音频格式
-- 取值: aac_lc，aac_low，aac_he，aac_he_v2
+- 取值: aac_lc,aac_low,aac_he,aac_he_v2; 默认:aac_he
 - 不区分大小写
- (Required)
+ (Optional)
  * param audioSampleRate: 转码输出音频采样率
 - 取值: [44100,48000]
  (Required)
@@ -212,19 +239,29 @@ func NewAddCustomLiveStreamTranscodeTemplateRequest(
 - 取值: [16,128]
 - 单位: kbps
  (Required)
+ * param jdchd: 京享超清开关
+- 取值: jdchd-1.0,off
+- 京享超清暂时只支持h.264
+ (Optional)
+ * param audioComfort: 舒适音频
+- 取值: on,off
+ (Optional)
  */
 func NewAddCustomLiveStreamTranscodeTemplateRequestWithAllParams(
     templateName *string,
+    videoCodec *string,
     videoCodeRate int,
     videoFrameRate string,
     width *int,
     height *int,
     template string,
     audioCodec string,
-    audioFormat string,
+    audioFormat *string,
     audioSampleRate int,
     audioChannel int,
     audioCodeRate int,
+    jdchd *string,
+    audioComfort *string,
 ) *AddCustomLiveStreamTranscodeTemplateRequest {
 
     return &AddCustomLiveStreamTranscodeTemplateRequest{
@@ -235,6 +272,7 @@ func NewAddCustomLiveStreamTranscodeTemplateRequestWithAllParams(
             Version: "v1",
         },
         TemplateName: templateName,
+        VideoCodec: videoCodec,
         VideoCodeRate: videoCodeRate,
         VideoFrameRate: videoFrameRate,
         Width: width,
@@ -245,6 +283,8 @@ func NewAddCustomLiveStreamTranscodeTemplateRequestWithAllParams(
         AudioSampleRate: audioSampleRate,
         AudioChannel: audioChannel,
         AudioCodeRate: audioCodeRate,
+        Jdchd: jdchd,
+        AudioComfort: audioComfort,
     }
 }
 
@@ -268,8 +308,16 @@ func (r *AddCustomLiveStreamTranscodeTemplateRequest) SetTemplateName(templateNa
     r.TemplateName = &templateName
 }
 
+/* param videoCodec: 视频编码格式，取值：h264,h265，默认h264
+- h264时,分辨率小于等于1080p
+- h265时,分辨率小于等于4k
+(Optional) */
+func (r *AddCustomLiveStreamTranscodeTemplateRequest) SetVideoCodec(videoCodec string) {
+    r.VideoCodec = &videoCodec
+}
+
 /* param videoCodeRate: 转码输出的码率值
-- 取值范围: [200,3000]
+- 取值范围: [128,15000]
 - 单位: kpbs
 (Required) */
 func (r *AddCustomLiveStreamTranscodeTemplateRequest) SetVideoCodeRate(videoCodeRate int) {
@@ -284,7 +332,7 @@ func (r *AddCustomLiveStreamTranscodeTemplateRequest) SetVideoFrameRate(videoFra
 }
 
 /* param width: 转码输出视频宽度
-- 取值: [100,1920]
+- 取值: [128,4096]
 - 如果(width,height)只设置其中之一,则按所设置参数项等比缩放另一项输出转码
 - 如果(width,height)都不设置，则按源流大小输出转码
 (Optional) */
@@ -292,8 +340,8 @@ func (r *AddCustomLiveStreamTranscodeTemplateRequest) SetWidth(width int) {
     r.Width = &width
 }
 
-/* param height: 转码输出视频宽度
-- 取值: [100,1920]
+/* param height: 转码输出视频高度
+- 取值: [128,4096]
 - 如果(width,height)只设置其中之一,则按所设置参数项等比缩放另一项输出转码
 - 如果(width,height)都不设置，则按源流大小输出转码
 (Optional) */
@@ -306,9 +354,13 @@ func (r *AddCustomLiveStreamTranscodeTemplateRequest) SetHeight(height int) {
 - <b>注意: 不能与系统的标准的转码模板和当前用户已自定义命名重复</b>
 - 系统标准转码模板
   ld (h.264/640*360/15f)
-  sd (h.264/854*480/24f)
+  sd (h.264/960*540/25f)
   hd (h.264/1280*720/25f)
   shd (h.264/1920*1080/30f)
+  ld-265 (h.265/640*360/15f)
+  sd-265 (h.265/960*540/25f)
+  hd-265 (h.265/1280*720/25f)
+  shd-265 (h.265/1920*1080/30f)
 (Required) */
 func (r *AddCustomLiveStreamTranscodeTemplateRequest) SetTemplate(template string) {
     r.Template = template
@@ -323,11 +375,11 @@ func (r *AddCustomLiveStreamTranscodeTemplateRequest) SetAudioCodec(audioCodec s
 }
 
 /* param audioFormat: 转码输出音频格式
-- 取值: aac_lc，aac_low，aac_he，aac_he_v2
+- 取值: aac_lc,aac_low,aac_he,aac_he_v2; 默认:aac_he
 - 不区分大小写
-(Required) */
+(Optional) */
 func (r *AddCustomLiveStreamTranscodeTemplateRequest) SetAudioFormat(audioFormat string) {
-    r.AudioFormat = audioFormat
+    r.AudioFormat = &audioFormat
 }
 
 /* param audioSampleRate: 转码输出音频采样率
@@ -351,6 +403,21 @@ func (r *AddCustomLiveStreamTranscodeTemplateRequest) SetAudioChannel(audioChann
 (Required) */
 func (r *AddCustomLiveStreamTranscodeTemplateRequest) SetAudioCodeRate(audioCodeRate int) {
     r.AudioCodeRate = audioCodeRate
+}
+
+/* param jdchd: 京享超清开关
+- 取值: jdchd-1.0,off
+- 京享超清暂时只支持h.264
+(Optional) */
+func (r *AddCustomLiveStreamTranscodeTemplateRequest) SetJdchd(jdchd string) {
+    r.Jdchd = &jdchd
+}
+
+/* param audioComfort: 舒适音频
+- 取值: on,off
+(Optional) */
+func (r *AddCustomLiveStreamTranscodeTemplateRequest) SetAudioComfort(audioComfort string) {
+    r.AudioComfort = &audioComfort
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

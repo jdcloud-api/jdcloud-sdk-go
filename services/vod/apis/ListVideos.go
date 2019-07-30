@@ -25,10 +25,10 @@ type ListVideosRequest struct {
 
     core.JDCloudRequest
 
-    /* 页码；默认值为1 (Optional) */
+    /* 页码；默认值为 1 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* 分页大小；默认值为10；取值范围[10, 100] (Optional) */
+    /* 分页大小；默认值为 10；取值范围 [10, 100] (Optional) */
     PageSize *int `json:"pageSize"`
 
     /*  (Optional) */
@@ -56,8 +56,8 @@ func NewListVideosRequest(
 }
 
 /*
- * param pageNumber: 页码；默认值为1 (Optional)
- * param pageSize: 分页大小；默认值为10；取值范围[10, 100] (Optional)
+ * param pageNumber: 页码；默认值为 1 (Optional)
+ * param pageSize: 分页大小；默认值为 10；取值范围 [10, 100] (Optional)
  * param filters:  (Optional)
  * param sorts:  (Optional)
  */
@@ -95,12 +95,12 @@ func NewListVideosRequestWithoutParam() *ListVideosRequest {
     }
 }
 
-/* param pageNumber: 页码；默认值为1(Optional) */
+/* param pageNumber: 页码；默认值为 1(Optional) */
 func (r *ListVideosRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
-/* param pageSize: 分页大小；默认值为10；取值范围[10, 100](Optional) */
+/* param pageSize: 分页大小；默认值为 10；取值范围 [10, 100](Optional) */
 func (r *ListVideosRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
@@ -128,4 +128,9 @@ type ListVideosResponse struct {
 }
 
 type ListVideosResult struct {
+    PageNumber int `json:"pageNumber"`
+    PageSize int `json:"pageSize"`
+    TotalElements int `json:"totalElements"`
+    TotalPages int `json:"totalPages"`
+    Content []vod.VideoObject `json:"content"`
 }

@@ -29,10 +29,10 @@ type SubmitTranscodeJobRequest struct {
     VideoId *string `json:"videoId"`
 
     /* 转码模板ID列表 (Optional) */
-    TemplateIds []string `json:"templateIds"`
+    TemplateIds []int64 `json:"templateIds"`
 
     /* 水印ID列表 (Optional) */
-    WatermarkIds *string `json:"watermarkIds"`
+    WatermarkIds []int64 `json:"watermarkIds"`
 }
 
 /*
@@ -59,8 +59,8 @@ func NewSubmitTranscodeJobRequest(
  */
 func NewSubmitTranscodeJobRequestWithAllParams(
     videoId *string,
-    templateIds []string,
-    watermarkIds *string,
+    templateIds []int64,
+    watermarkIds []int64,
 ) *SubmitTranscodeJobRequest {
 
     return &SubmitTranscodeJobRequest{
@@ -95,13 +95,13 @@ func (r *SubmitTranscodeJobRequest) SetVideoId(videoId string) {
 }
 
 /* param templateIds: 转码模板ID列表(Optional) */
-func (r *SubmitTranscodeJobRequest) SetTemplateIds(templateIds []string) {
+func (r *SubmitTranscodeJobRequest) SetTemplateIds(templateIds []int64) {
     r.TemplateIds = templateIds
 }
 
 /* param watermarkIds: 水印ID列表(Optional) */
-func (r *SubmitTranscodeJobRequest) SetWatermarkIds(watermarkIds string) {
-    r.WatermarkIds = &watermarkIds
+func (r *SubmitTranscodeJobRequest) SetWatermarkIds(watermarkIds []int64) {
+    r.WatermarkIds = watermarkIds
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
@@ -117,5 +117,5 @@ type SubmitTranscodeJobResponse struct {
 }
 
 type SubmitTranscodeJobResult struct {
-    Tasks []vod.TranscodeTask `json:"tasks"`
+    Tasks []vod.SubmittedTranscodeTask `json:"tasks"`
 }

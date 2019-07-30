@@ -34,7 +34,7 @@ type InstanceTemplateDiskAttachment struct {
     /* 数据盘配置 (Optional) */
     InstanceTemplateDisk InstanceTemplateDisk `json:"instanceTemplateDisk"`
 
-    /* 数据盘逻辑挂载点，取值范围：vda,vdb,vdc,vdd,vde,vdf,vdg,vdh,vdi。系统盘不需要使用，数据盘时才能够使用。 (Optional) */
+    /* 数据盘逻辑挂载点，取值范围：vda,vdb,vdc,vdd,vde,vdf,vdg,vdh,vdi,vmj,vdk,vdl,vdm。系统盘不需要使用，数据盘时才能够使用。 (Optional) */
     DeviceName string `json:"deviceName"`
 
     /* 排除设备，使用此参数noDevice配合deviceName一起使用。

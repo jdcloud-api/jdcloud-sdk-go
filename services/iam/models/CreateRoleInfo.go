@@ -19,10 +19,7 @@ package models
 
 type CreateRoleInfo struct {
 
-    /* 角色路径 (Optional) */
-    Path string `json:"path"`
-
-    /* 角色名：支持4-64位的字母，数字以及-和_, 以字母开头  */
+    /* 角色名，支持4~64位的字母，数字以及-和_, 以字母开头  */
     RoleName string `json:"roleName"`
 
     /* 角色类型，3-服务角色，4-用户角色  */
@@ -32,8 +29,8 @@ type CreateRoleInfo struct {
     AssumeRolePolicyDocument string `json:"assumeRolePolicyDocument"`
 
     /* 描述，0~256个字符 (Optional) */
-    Description string `json:"description"`
+    Description *string `json:"description"`
 
     /* 最大会话时长3600~43200秒，默认3600秒 (Optional) */
-    MaxSessionDuration int `json:"maxSessionDuration"`
+    MaxSessionDuration *int `json:"maxSessionDuration"`
 }

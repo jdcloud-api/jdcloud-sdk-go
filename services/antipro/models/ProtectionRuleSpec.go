@@ -52,6 +52,13 @@ type ProtectionRuleSpec struct {
     /* 报文最大长度, 取值范围 (datagramRangeMin, 1518] (Optional) */
     DatagramRangeMax *int64 `json:"datagramRangeMax"`
 
-    /* geo 拦截地域编码列表. 查询 <a href="http://docs.jdcloud.com/anti-ddos-protection-package/api/describegeoareas">describeGeoAreas</a> 接口获取可设置的地域编码列表 (Optional) */
+    /* geo 拦截地域编码列表. 查询 <a href="http://docs.jdcloud.com/anti-ddos-protection-package/api/describegeoareas">describeGeoAreas</a> 接口获取可设置的地域编码列表
+ (Optional) */
     GeoBlackList []string `json:"geoBlackList"`
+
+    /* IP 黑名单列表 (Optional) */
+    IpBlackList []string `json:"ipBlackList"`
+
+    /* IP 白名单列表 (Optional) */
+    IpWhiteList []string `json:"ipWhiteList"`
 }

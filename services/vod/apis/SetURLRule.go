@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    vod "github.com/jdcloud-api/jdcloud-sdk-go/services/vod/models"
 )
 
 type SetURLRuleRequest struct {
@@ -27,23 +28,24 @@ type SetURLRuleRequest struct {
     /* 域名ID  */
     DomainId int `json:"domainId"`
 
-    /* 规则类型，取值 'url' (Optional) */
-    RuleType *string `json:"ruleType"`
+    /* URL鉴权规则配置对象  */
+    Config *vod.URLRuleConfigObject `json:"config"`
 
-    /* 规则配置对象 (Optional) */
-    Config *interface{} `json:"config"`
-
-    /* 是否启用该规则 (Optional) */
-    Enabled *bool `json:"enabled"`
+    /* 是否启用该规则  */
+    Enabled bool `json:"enabled"`
 }
 
 /*
  * param domainId: 域名ID (Required)
+ * param config: URL鉴权规则配置对象 (Required)
+ * param enabled: 是否启用该规则 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewSetURLRuleRequest(
     domainId int,
+    config *vod.URLRuleConfigObject,
+    enabled bool,
 ) *SetURLRuleRequest {
 
 	return &SetURLRuleRequest{
@@ -54,20 +56,20 @@ func NewSetURLRuleRequest(
 			Version: "v1",
 		},
         DomainId: domainId,
+        Config: config,
+        Enabled: enabled,
 	}
 }
 
 /*
  * param domainId: 域名ID (Required)
- * param ruleType: 规则类型，取值 'url' (Optional)
- * param config: 规则配置对象 (Optional)
- * param enabled: 是否启用该规则 (Optional)
+ * param config: URL鉴权规则配置对象 (Required)
+ * param enabled: 是否启用该规则 (Required)
  */
 func NewSetURLRuleRequestWithAllParams(
     domainId int,
-    ruleType *string,
-    config *interface{},
-    enabled *bool,
+    config *vod.URLRuleConfigObject,
+    enabled bool,
 ) *SetURLRuleRequest {
 
     return &SetURLRuleRequest{
@@ -78,7 +80,6 @@ func NewSetURLRuleRequestWithAllParams(
             Version: "v1",
         },
         DomainId: domainId,
-        RuleType: ruleType,
         Config: config,
         Enabled: enabled,
     }
@@ -102,19 +103,14 @@ func (r *SetURLRuleRequest) SetDomainId(domainId int) {
     r.DomainId = domainId
 }
 
-/* param ruleType: 规则类型，取值 'url'(Optional) */
-func (r *SetURLRuleRequest) SetRuleType(ruleType string) {
-    r.RuleType = &ruleType
+/* param config: URL鉴权规则配置对象(Required) */
+func (r *SetURLRuleRequest) SetConfig(config *vod.URLRuleConfigObject) {
+    r.Config = config
 }
 
-/* param config: 规则配置对象(Optional) */
-func (r *SetURLRuleRequest) SetConfig(config interface{}) {
-    r.Config = &config
-}
-
-/* param enabled: 是否启用该规则(Optional) */
+/* param enabled: 是否启用该规则(Required) */
 func (r *SetURLRuleRequest) SetEnabled(enabled bool) {
-    r.Enabled = &enabled
+    r.Enabled = enabled
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

@@ -40,7 +40,7 @@ func NewSmsClient(credential *core.Credential) *SmsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "sms",
-            Revision:    "1.0.0",
+            Revision:    "1.2.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -53,168 +53,8 @@ func (c *SmsClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-/* 拉取回复短信 */
-func (c *SmsClient) PullMoMsg(request *sms.PullMoMsgRequest) (*sms.PullMoMsgResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &sms.PullMoMsgResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 删除短信签名接口 */
-func (c *SmsClient) DeleteSdkSmsSign(request *sms.DeleteSdkSmsSignRequest) (*sms.DeleteSdkSmsSignResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &sms.DeleteSdkSmsSignResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 新增短信模板接口 */
-func (c *SmsClient) AddSdkSmsTemplate(request *sms.AddSdkSmsTemplateRequest) (*sms.AddSdkSmsTemplateResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &sms.AddSdkSmsTemplateResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 删除短信模板接口 */
-func (c *SmsClient) DeleteSdkSmsTemplate(request *sms.DeleteSdkSmsTemplateRequest) (*sms.DeleteSdkSmsTemplateResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &sms.DeleteSdkSmsTemplateResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 拉取短信状态 */
-func (c *SmsClient) PullMtMsg(request *sms.PullMtMsgRequest) (*sms.PullMtMsgResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &sms.PullMtMsgResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询短信签名接口 */
-func (c *SmsClient) QuerySdkSmsSignStatus(request *sms.QuerySdkSmsSignStatusRequest) (*sms.QuerySdkSmsSignStatusResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &sms.QuerySdkSmsSignStatusResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 发送数据统计 */
-func (c *SmsClient) AggSendStatus(request *sms.AggSendStatusRequest) (*sms.AggSendStatusResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &sms.AggSendStatusResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 指定模板单发短信 */
-func (c *SmsClient) SendSingleSms(request *sms.SendSingleSmsRequest) (*sms.SendSingleSmsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &sms.SendSingleSmsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 指定模板群发短信 */
-func (c *SmsClient) SendBatchSms(request *sms.SendBatchSmsRequest) (*sms.SendBatchSmsResponse, error) {
+func (c *SmsClient) BatchSend(request *sms.BatchSendRequest) (*sms.BatchSendResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -223,7 +63,7 @@ func (c *SmsClient) SendBatchSms(request *sms.SendBatchSmsRequest) (*sms.SendBat
         return nil, err
     }
 
-    jdResp := &sms.SendBatchSmsResponse{}
+    jdResp := &sms.BatchSendResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -233,8 +73,8 @@ func (c *SmsClient) SendBatchSms(request *sms.SendBatchSmsRequest) (*sms.SendBat
     return jdResp, err
 }
 
-/* 查询短信模板接口 */
-func (c *SmsClient) QuerySdkSmsTemplateStatus(request *sms.QuerySdkSmsTemplateStatusRequest) (*sms.QuerySdkSmsTemplateStatusResponse, error) {
+/* 短信发送回执接口 */
+func (c *SmsClient) StatusReport(request *sms.StatusReportRequest) (*sms.StatusReportResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -243,7 +83,7 @@ func (c *SmsClient) QuerySdkSmsTemplateStatus(request *sms.QuerySdkSmsTemplateSt
         return nil, err
     }
 
-    jdResp := &sms.QuerySdkSmsTemplateStatusResponse{}
+    jdResp := &sms.StatusReportResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -253,8 +93,8 @@ func (c *SmsClient) QuerySdkSmsTemplateStatus(request *sms.QuerySdkSmsTemplateSt
     return jdResp, err
 }
 
-/* 回执数据统计 */
-func (c *SmsClient) AggReceiptStatus(request *sms.AggReceiptStatusRequest) (*sms.AggReceiptStatusResponse, error) {
+/* 短信回复接口 */
+func (c *SmsClient) Reply(request *sms.ReplyRequest) (*sms.ReplyResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -263,107 +103,7 @@ func (c *SmsClient) AggReceiptStatus(request *sms.AggReceiptStatusRequest) (*sms
         return nil, err
     }
 
-    jdResp := &sms.AggReceiptStatusResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 拉取单个手机的回复短信 */
-func (c *SmsClient) PullMoMsgByMobile(request *sms.PullMoMsgByMobileRequest) (*sms.PullMoMsgByMobileResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &sms.PullMoMsgByMobileResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 新增短信签名接口 */
-func (c *SmsClient) AddSdkSmsSign(request *sms.AddSdkSmsSignRequest) (*sms.AddSdkSmsSignResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &sms.AddSdkSmsSignResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 拉取单个手机短信状态 */
-func (c *SmsClient) PullMtMsgByMobile(request *sms.PullMtMsgByMobileRequest) (*sms.PullMtMsgByMobileResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &sms.PullMtMsgByMobileResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 编辑短信模板接口 */
-func (c *SmsClient) EditSdkSmsTemplate(request *sms.EditSdkSmsTemplateRequest) (*sms.EditSdkSmsTemplateResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &sms.EditSdkSmsTemplateResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 编辑短信签名接口 */
-func (c *SmsClient) EditSdkSmsSign(request *sms.EditSdkSmsSignRequest) (*sms.EditSdkSmsSignResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &sms.EditSdkSmsSignResponse{}
+    jdResp := &sms.ReplyResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

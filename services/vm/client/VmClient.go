@@ -40,7 +40,7 @@ func NewVmClient(credential *core.Credential) *VmClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vm",
-            Revision:    "1.0.8",
+            Revision:    "1.2.2",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -65,6 +65,30 @@ func (c *VmClient) DescribeImageMembers(request *vm.DescribeImageMembersRequest)
     }
 
     jdResp := &vm.DescribeImageMembersResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建一个指定参数的启动模板，启动模板中包含创建云主机时的大部分配置参数，避免每次创建云主机时的重复性工作。<br>
+如果是使用启动模板创建云主机，如果指定了某些参数与模板中的参数相冲突，那么新指定的参数会替换模板中的参数。<br>
+如果是使用启动模板创建云主机，如果指定了镜像ID与模板中的镜像ID不一致，那么模板中的dataDisks参数会失效。<br>
+如果使用高可用组(Ag)创建云主机，那么Ag所关联的模板中的参数都不可以被调整，只能以模板为准。
+ */
+func (c *VmClient) CreateInstanceTemplate(request *vm.CreateInstanceTemplateRequest) (*vm.CreateInstanceTemplateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.CreateInstanceTemplateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -104,17 +128,16 @@ func (c *VmClient) CreateImage(request *vm.CreateImageRequest) (*vm.CreateImageR
     - 可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeinstancetypes">DescribeInstanceTypes</a>接口获得指定地域或可用区的规格信息。
     - 不能使用已下线、或已售馨的规格ID
 - 镜像
-    - Windows Server 2012 R2标准版 64位 中文版 SQL Server 2014 标准版 SP2内存需大于1GB；
     - Windows Server所有镜像CPU不可选超过64核CPU。
     - 可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeimages">DescribeImages</a>接口获得指定地域的镜像信息。
     - 选择的镜像必须支持选择的实例规格。可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeimageconstraints">DescribeImageConstraints</a>接口获得指定镜像的实例规格限制信息。<br>
 - 网络配置
     - 指定主网卡配置信息
         - 必须指定subnetId
-        - 可以指定elasticIp规格来约束创建的弹性IP，带宽取值范围[1-100]Mbps，步进1Mbps
+        - 可以指定elasticIp规格来约束创建的弹性IP，带宽取值范围[1-200]Mbps，步进1Mbps
         - 可以指定主网卡的内网主IP(primaryIpAddress)，此时maxCount只能为1
         - 安全组securityGroup需与子网Subnet在同一个私有网络VPC内
-        - 一台云主机创建时必须指定一个安全组，至多指定5个安全组，如果没有指定安全组，默认使用默认安全组
+        - 一台云主机创建时必须至少指定一个安全组，至多指定5个安全组，如果没有指定安全组，默认使用默认安全组
         - 主网卡deviceIndex设置为1
 - 存储
     - 系统盘
@@ -123,17 +146,18 @@ func (c *VmClient) CreateImage(request *vm.CreateImageRequest) (*vm.CreateImageR
             - local：不能指定大小，默认为40GB
             - cloud：取值范围: 40-500GB，并且不能小于镜像的最小系统盘大小，如果没有指定，默认以镜像中的系统盘大小为准
         - 自动删除
-            - 如果是local，默认自动删除，不能修改此属性
-            - 如果是cloud类型的按配置计费的云硬盘，可以指定为True
+            - 如果是local类型，默认自动删除，不可修改
+            - 如果是cloud类型的按配置计费的云硬盘，默认为True，可修改
+            - 如果是cloud类型的包年包月的云硬盘，默认为False，不可修改
     - 数据盘
         - 磁盘分类，数据盘仅支持cloud
-        - 云硬盘类型可以选择ssd、premium-hdd
+        - 云硬盘类型可以选择ssd、premium-hdd、hdd.std1、ssd.gp1、ssd.io1
         - 磁盘大小
             - premium-hdd：范围[20,3000]GB，步长为10G
             - ssd：范围[20,1000]GB，步长为10G
+            - hdd.std1、ssd.gp1、ssd.io1: 范围[20-16000]GB，步长为10GB
         - 自动删除
-            - 默认自动删除，如果是包年包月的数据盘或共享型数据盘，此参数不生效
-            - 可以指定SnapshotId创建云硬盘
+            - 默认自动删除，如果是包年包月的云硬盘，此参数不生效
         - 可以从快照创建磁盘
     - local类型系统的云主机可以挂载8块云硬盘
     - cloud类型系统的云主机可以挂载7块云硬盘
@@ -167,8 +191,8 @@ func (c *VmClient) CreateInstances(request *vm.CreateInstancesRequest) (*vm.Crea
     return jdResp, err
 }
 
-/* 为云主机主网卡下的主内网IP绑定弹性公网IP。<br>
-一台云主机只能绑定一个弹性公网IP(主网卡)，若主网卡已存在弹性公网IP，会返回错误。<br>
+/* 为云主机主网卡的主内网IP绑定弹性公网IP。<br>
+一台云主机的主网卡的主内网IP只能绑定一个弹性公网IP，若已绑定弹性公网IP，操作绑定会返回错误。<br>
  */
 func (c *VmClient) AssociateElasticIp(request *vm.AssociateElasticIpRequest) (*vm.AssociateElasticIpResponse, error) {
     if request == nil {
@@ -254,7 +278,7 @@ func (c *VmClient) StopInstance(request *vm.StopInstanceRequest) (*vm.StopInstan
 }
 
 /* 启动单个云主机，只能启动<b>stopped</b>状态的云主机，云主机没有正在进行中的任务才可启动。<br>
-只能启动正常计费状态的云主机。
+只能启动正常计费状态的云主机，若已欠费停服或到期停服则不支持启动。
  */
 func (c *VmClient) StartInstance(request *vm.StartInstanceRequest) (*vm.StartInstanceResponse, error) {
     if request == nil {
@@ -266,6 +290,27 @@ func (c *VmClient) StartInstance(request *vm.StartInstanceRequest) (*vm.StartIns
     }
 
     jdResp := &vm.StartInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询启动模板详情
+ */
+func (c *VmClient) DescribeInstanceTemplate(request *vm.DescribeInstanceTemplateRequest) (*vm.DescribeInstanceTemplateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.DescribeInstanceTemplateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -344,8 +389,8 @@ func (c *VmClient) DescribeInstanceVncUrl(request *vm.DescribeInstanceVncUrlRequ
 
 /* 云主机使用指定镜像重置云主机系统<br>
 云主机的状态必须为<b>stopped</b>状态。<br>
-若当前云主机的系统盘类型为local类型，那么更换的镜像必须为localDisk类型的镜像；同理若当前云主机的系统盘为cloud类型，那么更换的镜像必须为cloudDisk类型的镜像。可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeimages">DescribeImages</a>接口获得指定地域的镜像信息。<br>
 若不指定镜像ID，默认使用当前主机的原镜像重置系统。<br>
+云主机系统盘类型必须与待更换镜像支持的系统盘类型保持一致，若当前云主机系统盘为local类型，则更换镜像的系统盘类型必须为loaclDisk类型；同理，若当前云主机系统盘为cloud类型，则更换镜像的系统盘类型必须为cloudDisk类型。可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeimages">DescribeImages</a>接口获得指定地域的镜像信息。<br>
 指定的镜像必须能够支持当前主机的实例规格(instanceType)，否则会返回错误。可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeimageconstraints">DescribeImageConstraints</a>接口获得指定镜像支持的系统盘类型信息。
  */
 func (c *VmClient) RebuildInstance(request *vm.RebuildInstanceRequest) (*vm.RebuildInstanceResponse, error) {
@@ -411,10 +456,10 @@ func (c *VmClient) ModifyInstanceAttribute(request *vm.ModifyInstanceAttributeRe
 
 /* 云主机变更实例规格<br>
 云主机的状态必须为<b>stopped</b>状态。<br>
-16年创建的云硬盘做系统盘的主机，一代与二代实例规格不允许相互调整。<br>
-本地盘(local类型)做系统盘的主机，一代与二代实例规格不允许相互调整。<br>
-使用高可用组(Ag)创建的主机，一代与二代实例规格不允许相互调整。<br>
-云硬盘(cloud类型)做系统盘的主机，一代与二代实例规格允许相互调整。<br>
+以下情况的云主机，不允许在一代与二代实例规格间互相调整，例：不允许g.n1与g.n2之间互相调配<br>
+1、16年创建的云硬盘做系统盘的云主机<br>
+2、本地盘(local类型)做系统盘的云主机。<br>
+3、使用高可用组(Ag)创建的云主机。<br>
 如果当前主机中的弹性网卡数量，大于新实例规格允许的弹性网卡数量，会返回错误。可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeinstancetypes">DescribeInstanceTypes</a>接口获得指定地域及可用区下的实例规格信息。<br>
 当前主机所使用的镜像，需要支持要变更的目标实例规格，否则返回错误。可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeimageconstraints">DescribeImageConstraints</a>接口获得指定镜像的实例规格限制信息。<br>
 云主机欠费或到期时，无法更改实例规格。
@@ -460,9 +505,30 @@ func (c *VmClient) DescribeImageConstraintsBatch(request *vm.DescribeImageConstr
     return jdResp, err
 }
 
-/* 为一台云主机挂载一块数据盘(云硬盘)，云主机和云硬盘没有正在进行中的的任务时才可挂载。<br>
+/* 修改一个启动模板的信息，包括名称、描述
+ */
+func (c *VmClient) UpdateInstanceTemplate(request *vm.UpdateInstanceTemplateRequest) (*vm.UpdateInstanceTemplateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.UpdateInstanceTemplateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 为一台云主机挂载一块云硬盘，云主机和云硬盘没有正在进行中的的任务时才可挂载。<br>
 云主机状态必须是<b>running</b>或<b>stopped</b>状态。<br>
-本地盘(local类型)做系统盘的云主机可挂载8块数据盘，云硬盘(cloud类型)做系统盘的云主机可挂载7块数据盘。
+本地盘(local类型)做系统盘的云主机可挂载8块云硬盘，云硬盘(cloud类型)做系统盘的云主机可挂载除系统盘外7块云硬盘。
  */
 func (c *VmClient) AttachDisk(request *vm.AttachDiskRequest) (*vm.AttachDiskResponse, error) {
     if request == nil {
@@ -548,9 +614,9 @@ func (c *VmClient) DescribeInstanceTypes(request *vm.DescribeInstanceTypesReques
     return jdResp, err
 }
 
-/* 云主机挂载一块弹性网卡。<br>
+/* 云主机绑定一块弹性网卡。<br>
 云主机状态必须为<b>running</b>或<b>stopped</b>状态，并且没有正在进行中的任务才可操作。<br>
-弹性网卡上如果绑定了公网IP，那么公网IP所在az需要与云主机的az保持一致，或者公网IP属于全可用区，才可挂载。<br>
+弹性网卡上如果绑定了弹性公网IP，那么其所在az需要与云主机的az保持一致，或者为全可用区型弹性公网IP，才可挂载该网卡。<br>
 云主机挂载弹性网卡的数量，不能超过实例规格的限制。可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeinstancetypes">DescribeInstanceTypes</a>接口获得指定规格可挂载弹性网卡的数量上限。<br>
 弹性网卡与云主机必须在相同vpc下。
  */
@@ -638,6 +704,27 @@ func (c *VmClient) DetachNetworkInterface(request *vm.DetachNetworkInterfaceRequ
     return jdResp, err
 }
 
+/* 删除一个启动模板
+ */
+func (c *VmClient) DeleteInstanceTemplate(request *vm.DeleteInstanceTemplateRequest) (*vm.DeleteInstanceTemplateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.DeleteInstanceTemplateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 导入由其他工具生成的密钥对的公钥部分。<br>
 若传入已存在的密钥名称，会返回错误。
  */
@@ -703,6 +790,27 @@ func (c *VmClient) DescribeInstance(request *vm.DescribeInstanceRequest) (*vm.De
     return jdResp, err
 }
 
+/* 查询启动模板列表
+ */
+func (c *VmClient) DescribeInstanceTemplates(request *vm.DescribeInstanceTemplatesRequest) (*vm.DescribeInstanceTemplatesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.DescribeInstanceTemplatesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 修改虚机弹性网卡属性，包括是否随云主机一起删除。<br>
 不能修改主网卡。
  */
@@ -725,7 +833,7 @@ func (c *VmClient) ModifyInstanceNetworkAttribute(request *vm.ModifyInstanceNetw
     return jdResp, err
 }
 
-/* 查询配额，支持：云主机、镜像、密钥、模板、镜像共享
+/* 查询配额，支持的类型：云主机、镜像、密钥、模板、镜像共享。
  */
 func (c *VmClient) DescribeQuotas(request *vm.DescribeQuotasRequest) (*vm.DescribeQuotasResponse, error) {
     if request == nil {
@@ -788,7 +896,8 @@ func (c *VmClient) RebootInstance(request *vm.RebootInstanceRequest) (*vm.Reboot
     return jdResp, err
 }
 
-/* 修改云主机挂载的数据盘属性，包括是否随主机删除。
+/* 修改云主机挂载的数据盘属性，包括是否随主机删除。<br>
+仅按配置计费云硬盘支持设置随实例删除属性;包年包月计费云硬盘该属性不生效,实例删除时云硬盘将保留。<br>
  */
 func (c *VmClient) ModifyInstanceDiskAttribute(request *vm.ModifyInstanceDiskAttributeRequest) (*vm.ModifyInstanceDiskAttributeResponse, error) {
     if request == nil {
@@ -820,6 +929,27 @@ func (c *VmClient) DescribeInstancePrivateIpAddress(request *vm.DescribeInstance
     }
 
     jdResp := &vm.DescribeInstancePrivateIpAddressResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询镜像导入任务详情
+ */
+func (c *VmClient) ImageTasks(request *vm.ImageTasksRequest) (*vm.ImageTasksResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.ImageTasksResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -871,7 +1001,7 @@ func (c *VmClient) DescribeKeypairs(request *vm.DescribeKeypairsRequest) (*vm.De
     return jdResp, err
 }
 
-/* 云主机缷载数据盘，云主机和云硬盘没有正在进行中的任务时才可缷载。<br>
+/* 云主机缷载云硬盘，云主机和云硬盘没有正在进行中的任务时才可缷载。<br>
  */
 func (c *VmClient) DetachDisk(request *vm.DetachDiskRequest) (*vm.DetachDiskResponse, error) {
     if request == nil {
@@ -892,10 +1022,30 @@ func (c *VmClient) DetachDisk(request *vm.DetachDiskRequest) (*vm.DetachDiskResp
     return jdResp, err
 }
 
+/* 导入镜像，将外部镜像导入到京东云中
+ */
+func (c *VmClient) ImportImage(request *vm.ImportImageRequest) (*vm.ImportImageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.ImportImageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 删除按配置计费、或包年包月已到期的单个云主机。不能删除没有计费信息的云主机。<br>
 云主机状态必须为运行<b>running</b>、停止<b>stopped</b>、错误<b>error</b>，同时云主机没有正在进行中的任务才可删除。<br>
-包年包月未到期的云主机不能删除。<br>
-如果主机中挂载的数据盘为按配置计费的云硬盘，并且不是共享型云硬盘，并且AutoDelete属性为true，那么数据盘会随主机一起删除。
+如果主机中挂载的数据盘为按配置计费的云硬盘且AutoDelete属性为true，那么数据盘会随主机一起删除。
  [MFA enabled] */
 func (c *VmClient) DeleteInstance(request *vm.DeleteInstanceRequest) (*vm.DeleteInstanceResponse, error) {
     if request == nil {
@@ -951,6 +1101,27 @@ func (c *VmClient) CreateKeypair(request *vm.CreateKeypairRequest) (*vm.CreateKe
     }
 
     jdResp := &vm.CreateKeypairResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 校验启动模板的有效性
+ */
+func (c *VmClient) VerifyInstanceTemplate(request *vm.VerifyInstanceTemplateRequest) (*vm.VerifyInstanceTemplateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.VerifyInstanceTemplateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

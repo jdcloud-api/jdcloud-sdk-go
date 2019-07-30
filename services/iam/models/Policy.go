@@ -25,13 +25,13 @@ type Policy struct {
     /* 策略名称 (Optional) */
     Name string `json:"name"`
 
-    /* jrn描述 (Optional) */
+    /* 京东云资源标识(jrn) (Optional) */
     Jrn string `json:"jrn"`
 
     /* 描述 (Optional) */
     Description string `json:"description"`
 
-    /* 策略类型:0-系统策略，1-用户策略 (Optional) */
+    /* 策略类型：0-系统策略，1-用户策略 (Optional) */
     PolicyType string `json:"policyType"`
 
     /* 策略版本号 (Optional) */

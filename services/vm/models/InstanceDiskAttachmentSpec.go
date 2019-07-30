@@ -35,7 +35,7 @@ type InstanceDiskAttachmentSpec struct {
     /* 数据盘配置 (Optional) */
     CloudDiskSpec *disk.DiskSpec `json:"cloudDiskSpec"`
 
-    /* 数据盘逻辑挂载点，取值范围：vda,vdb,vdc,vdd,vde,vdf,vdg,vdh,vdi (Optional) */
+    /* 数据盘逻辑挂载点，取值范围：vda,vdb,vdc,vdd,vde,vdf,vdg,vdh,vdi,vmj,vdk,vdl,vdm (Optional) */
     DeviceName *string `json:"deviceName"`
 
     /* 排除设备，使用此参数noDevice配合deviceName一起使用。

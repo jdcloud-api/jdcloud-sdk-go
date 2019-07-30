@@ -19,9 +19,6 @@ package models
 
 type RoleInfo struct {
 
-    /* 角色路径 (Optional) */
-    Path string `json:"path"`
-
     /* 角色ID (Optional) */
     RoleId string `json:"roleId"`
 
@@ -31,7 +28,7 @@ type RoleInfo struct {
     /* 角色类型，2-服务相关角色，3-服务角色，4-用户角色 (Optional) */
     Type int `json:"type"`
 
-    /* 角色代入policy (Optional) */
+    /* 信任实体信息 (Optional) */
     AssumeRolePolicyDocument string `json:"assumeRolePolicyDocument"`
 
     /* 描述，0~256个字符 (Optional) */
@@ -40,7 +37,7 @@ type RoleInfo struct {
     /* 最大会话时长3600~43200秒，默认3600秒 (Optional) */
     MaxSessionDuration int `json:"maxSessionDuration"`
 
-    /* 资源描述 (Optional) */
+    /* 京东云资源标识(jrn) (Optional) */
     Jrn string `json:"jrn"`
 
     /* 创建角色的时间 (Optional) */

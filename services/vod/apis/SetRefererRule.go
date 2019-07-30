@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    vod "github.com/jdcloud-api/jdcloud-sdk-go/services/vod/models"
 )
 
 type SetRefererRuleRequest struct {
@@ -27,23 +28,24 @@ type SetRefererRuleRequest struct {
     /* 域名ID  */
     DomainId int `json:"domainId"`
 
-    /* 规则类型，取值 'referer' (Optional) */
-    RuleType *string `json:"ruleType"`
+    /* Referer防盗链规则配置对象  */
+    Config *vod.RefererRuleConfigObject `json:"config"`
 
-    /* 规则配置对象 (Optional) */
-    Config *interface{} `json:"config"`
-
-    /* 是否启用该规则 (Optional) */
-    Enabled *bool `json:"enabled"`
+    /* 是否启用该规则  */
+    Enabled bool `json:"enabled"`
 }
 
 /*
  * param domainId: 域名ID (Required)
+ * param config: Referer防盗链规则配置对象 (Required)
+ * param enabled: 是否启用该规则 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewSetRefererRuleRequest(
     domainId int,
+    config *vod.RefererRuleConfigObject,
+    enabled bool,
 ) *SetRefererRuleRequest {
 
 	return &SetRefererRuleRequest{
@@ -54,20 +56,20 @@ func NewSetRefererRuleRequest(
 			Version: "v1",
 		},
         DomainId: domainId,
+        Config: config,
+        Enabled: enabled,
 	}
 }
 
 /*
  * param domainId: 域名ID (Required)
- * param ruleType: 规则类型，取值 'referer' (Optional)
- * param config: 规则配置对象 (Optional)
- * param enabled: 是否启用该规则 (Optional)
+ * param config: Referer防盗链规则配置对象 (Required)
+ * param enabled: 是否启用该规则 (Required)
  */
 func NewSetRefererRuleRequestWithAllParams(
     domainId int,
-    ruleType *string,
-    config *interface{},
-    enabled *bool,
+    config *vod.RefererRuleConfigObject,
+    enabled bool,
 ) *SetRefererRuleRequest {
 
     return &SetRefererRuleRequest{
@@ -78,7 +80,6 @@ func NewSetRefererRuleRequestWithAllParams(
             Version: "v1",
         },
         DomainId: domainId,
-        RuleType: ruleType,
         Config: config,
         Enabled: enabled,
     }
@@ -102,19 +103,14 @@ func (r *SetRefererRuleRequest) SetDomainId(domainId int) {
     r.DomainId = domainId
 }
 
-/* param ruleType: 规则类型，取值 'referer'(Optional) */
-func (r *SetRefererRuleRequest) SetRuleType(ruleType string) {
-    r.RuleType = &ruleType
+/* param config: Referer防盗链规则配置对象(Required) */
+func (r *SetRefererRuleRequest) SetConfig(config *vod.RefererRuleConfigObject) {
+    r.Config = config
 }
 
-/* param config: 规则配置对象(Optional) */
-func (r *SetRefererRuleRequest) SetConfig(config interface{}) {
-    r.Config = &config
-}
-
-/* param enabled: 是否启用该规则(Optional) */
+/* param enabled: 是否启用该规则(Required) */
 func (r *SetRefererRuleRequest) SetEnabled(enabled bool) {
-    r.Enabled = &enabled
+    r.Enabled = enabled
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

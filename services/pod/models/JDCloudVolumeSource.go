@@ -40,6 +40,9 @@ type JDCloudVolumeSource struct {
     /* 随容器自动创建的新盘，会自动格式化成指定的文件系统类型；挂载已有的盘，默认不会格式化，只会按照指定的fsType去挂载；如果希望格式化，必须设置此字段为true (Optional) */
     FormatVolume *bool `json:"formatVolume"`
 
+    /* 云盘的 iops 值，目前只有 ssd.io1 类型有效 (Optional) */
+    Iops *int `json:"iops"`
+
     /* 是否随pod删除。默认：true (Optional) */
     AutoDelete *bool `json:"autoDelete"`
 }

@@ -34,7 +34,7 @@ type DescribeProtectedIpListRequest struct {
     /* 实例 Id, 缺省时查询用户所有已防护 IP (Optional) */
     InstanceId *int `json:"instanceId"`
 
-    /* 被防护 IP类型: 0: 全部, 1: 弹性公网 IP, 2: 云物理服务器公网 IP  */
+    /* 被防护 IP类型: 0: 全部, 1: 弹性公网 IP, 2: 云物理服务器公网 IP, 4: 托管区公网 IP  */
     Type int `json:"type"`
 
     /* 被防护 IP, 支持模糊查询 (Optional) */
@@ -42,7 +42,7 @@ type DescribeProtectedIpListRequest struct {
 }
 
 /*
- * param type_: 被防护 IP类型: 0: 全部, 1: 弹性公网 IP, 2: 云物理服务器公网 IP (Required)
+ * param type_: 被防护 IP类型: 0: 全部, 1: 弹性公网 IP, 2: 云物理服务器公网 IP, 4: 托管区公网 IP (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -65,7 +65,7 @@ func NewDescribeProtectedIpListRequest(
  * param pageNumber: 页码 (Optional)
  * param pageSize: 分页大小 (Optional)
  * param instanceId: 实例 Id, 缺省时查询用户所有已防护 IP (Optional)
- * param type_: 被防护 IP类型: 0: 全部, 1: 弹性公网 IP, 2: 云物理服务器公网 IP (Required)
+ * param type_: 被防护 IP类型: 0: 全部, 1: 弹性公网 IP, 2: 云物理服务器公网 IP, 4: 托管区公网 IP (Required)
  * param ip: 被防护 IP, 支持模糊查询 (Optional)
  */
 func NewDescribeProtectedIpListRequestWithAllParams(
@@ -119,7 +119,7 @@ func (r *DescribeProtectedIpListRequest) SetInstanceId(instanceId int) {
     r.InstanceId = &instanceId
 }
 
-/* param type_: 被防护 IP类型: 0: 全部, 1: 弹性公网 IP, 2: 云物理服务器公网 IP(Required) */
+/* param type_: 被防护 IP类型: 0: 全部, 1: 弹性公网 IP, 2: 云物理服务器公网 IP, 4: 托管区公网 IP(Required) */
 func (r *DescribeProtectedIpListRequest) SetType(type_ int) {
     r.Type = type_
 }

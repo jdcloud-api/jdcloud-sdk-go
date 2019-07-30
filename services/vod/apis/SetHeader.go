@@ -27,23 +27,45 @@ type SetHeaderRequest struct {
     /* 域名ID  */
     DomainId int `json:"domainId"`
 
-    /* 头参数名 (Optional) */
-    HeaderName *string `json:"headerName"`
+    /* 头参数名。当前支持的访问头参数取值范围：
+  Content-Disposition
+  Content-Language
+  Expires
+  Access-Control-Allow-Origin
+  Access-Control-Allow-Methods
+  Access-Control-Max-Age
+  Access-Control-Expose-Headers
+  */
+    HeaderName string `json:"headerName"`
 
-    /* 头参数值 (Optional) */
-    HeaderValue *string `json:"headerValue"`
+    /* 头参数值  */
+    HeaderValue string `json:"headerValue"`
 
-    /* 头参数类型 (Optional) */
-    HeaderType *string `json:"headerType"`
+    /* 头参数类型，取值范围：req、resp  */
+    HeaderType string `json:"headerType"`
 }
 
 /*
  * param domainId: 域名ID (Required)
+ * param headerName: 头参数名。当前支持的访问头参数取值范围：
+  Content-Disposition
+  Content-Language
+  Expires
+  Access-Control-Allow-Origin
+  Access-Control-Allow-Methods
+  Access-Control-Max-Age
+  Access-Control-Expose-Headers
+ (Required)
+ * param headerValue: 头参数值 (Required)
+ * param headerType: 头参数类型，取值范围：req、resp (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewSetHeaderRequest(
     domainId int,
+    headerName string,
+    headerValue string,
+    headerType string,
 ) *SetHeaderRequest {
 
 	return &SetHeaderRequest{
@@ -54,20 +76,31 @@ func NewSetHeaderRequest(
 			Version: "v1",
 		},
         DomainId: domainId,
+        HeaderName: headerName,
+        HeaderValue: headerValue,
+        HeaderType: headerType,
 	}
 }
 
 /*
  * param domainId: 域名ID (Required)
- * param headerName: 头参数名 (Optional)
- * param headerValue: 头参数值 (Optional)
- * param headerType: 头参数类型 (Optional)
+ * param headerName: 头参数名。当前支持的访问头参数取值范围：
+  Content-Disposition
+  Content-Language
+  Expires
+  Access-Control-Allow-Origin
+  Access-Control-Allow-Methods
+  Access-Control-Max-Age
+  Access-Control-Expose-Headers
+ (Required)
+ * param headerValue: 头参数值 (Required)
+ * param headerType: 头参数类型，取值范围：req、resp (Required)
  */
 func NewSetHeaderRequestWithAllParams(
     domainId int,
-    headerName *string,
-    headerValue *string,
-    headerType *string,
+    headerName string,
+    headerValue string,
+    headerType string,
 ) *SetHeaderRequest {
 
     return &SetHeaderRequest{
@@ -102,19 +135,27 @@ func (r *SetHeaderRequest) SetDomainId(domainId int) {
     r.DomainId = domainId
 }
 
-/* param headerName: 头参数名(Optional) */
+/* param headerName: 头参数名。当前支持的访问头参数取值范围：
+  Content-Disposition
+  Content-Language
+  Expires
+  Access-Control-Allow-Origin
+  Access-Control-Allow-Methods
+  Access-Control-Max-Age
+  Access-Control-Expose-Headers
+(Required) */
 func (r *SetHeaderRequest) SetHeaderName(headerName string) {
-    r.HeaderName = &headerName
+    r.HeaderName = headerName
 }
 
-/* param headerValue: 头参数值(Optional) */
+/* param headerValue: 头参数值(Required) */
 func (r *SetHeaderRequest) SetHeaderValue(headerValue string) {
-    r.HeaderValue = &headerValue
+    r.HeaderValue = headerValue
 }
 
-/* param headerType: 头参数类型(Optional) */
+/* param headerType: 头参数类型，取值范围：req、resp(Required) */
 func (r *SetHeaderRequest) SetHeaderType(headerType string) {
-    r.HeaderType = &headerType
+    r.HeaderType = headerType
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

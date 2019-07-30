@@ -24,25 +24,48 @@ type AddCustomLiveStreamWatermarkTemplateRequest struct {
 
     core.JDCloudRequest
 
+    /* 水印位置
+- 取值范围：左上：1，右上：3， 左下：7，右下：9，默认：1
+ (Optional) */
+    Position *int `json:"position"`
+
+    /* 偏移量单位
+- 取值: percent,pixel
+- percent:按百分比; pixel:像素 默认:pixel
+ (Optional) */
+    OffsetUnit *string `json:"offsetUnit"`
+
     /* x轴偏移量
-- 单位: 像素
+- 取值范围
+  percent: (0,100]
+  pixel: (0,1920]
   */
     OffsetX int `json:"offsetX"`
 
     /* y轴偏移量:
-- 单位: 像素
+- 取值范围
+  percent: (0,100]
+  pixel: (0,1920]
   */
     OffsetY int `json:"offsetY"`
 
+    /* 水印大小单位
+- 取值: percent,pixel
+- percent:按百分比; pixel:像素 默认:pixel
+ (Optional) */
+    SizeUnit *string `json:"sizeUnit"`
+
     /* 水印宽度:
-- 取值: [0,1920]
-- 单位: 像素
+- 取值范围
+  percent: (0,100]
+  pixel: (0,1920]
   */
     Width int `json:"width"`
 
     /* 水印高度:
-- 取值: [0,1920]
-- 单位: 像素
+- 取值范围
+  percent: (0,100]
+  pixel: (0,1920]
   */
     Height int `json:"height"`
 
@@ -64,18 +87,24 @@ type AddCustomLiveStreamWatermarkTemplateRequest struct {
 
 /*
  * param offsetX: x轴偏移量
-- 单位: 像素
+- 取值范围
+  percent: (0,100]
+  pixel: (0,1920]
  (Required)
  * param offsetY: y轴偏移量:
-- 单位: 像素
+- 取值范围
+  percent: (0,100]
+  pixel: (0,1920]
  (Required)
  * param width: 水印宽度:
-- 取值: [0,1920]
-- 单位: 像素
+- 取值范围
+  percent: (0,100]
+  pixel: (0,1920]
  (Required)
  * param height: 水印高度:
-- 取值: [0,1920]
-- 单位: 像素
+- 取值范围
+  percent: (0,100]
+  pixel: (0,1920]
  (Required)
  * param template: 自定义水印模板名称
 -&ensp;取值要求: 数字、大小写字母、短横线("-")、下划线("_"),
@@ -113,19 +142,36 @@ func NewAddCustomLiveStreamWatermarkTemplateRequest(
 }
 
 /*
+ * param position: 水印位置
+- 取值范围：左上：1，右上：3， 左下：7，右下：9，默认：1
+ (Optional)
+ * param offsetUnit: 偏移量单位
+- 取值: percent,pixel
+- percent:按百分比; pixel:像素 默认:pixel
+ (Optional)
  * param offsetX: x轴偏移量
-- 单位: 像素
+- 取值范围
+  percent: (0,100]
+  pixel: (0,1920]
  (Required)
  * param offsetY: y轴偏移量:
-- 单位: 像素
+- 取值范围
+  percent: (0,100]
+  pixel: (0,1920]
  (Required)
+ * param sizeUnit: 水印大小单位
+- 取值: percent,pixel
+- percent:按百分比; pixel:像素 默认:pixel
+ (Optional)
  * param width: 水印宽度:
-- 取值: [0,1920]
-- 单位: 像素
+- 取值范围
+  percent: (0,100]
+  pixel: (0,1920]
  (Required)
  * param height: 水印高度:
-- 取值: [0,1920]
-- 单位: 像素
+- 取值范围
+  percent: (0,100]
+  pixel: (0,1920]
  (Required)
  * param template: 自定义水印模板名称
 -&ensp;取值要求: 数字、大小写字母、短横线("-")、下划线("_"),
@@ -138,8 +184,11 @@ func NewAddCustomLiveStreamWatermarkTemplateRequest(
  * param url: 水印地址<br>-&ensp;以&ensp;http:// 开头,可公开访问地址<br> (Required)
  */
 func NewAddCustomLiveStreamWatermarkTemplateRequestWithAllParams(
+    position *int,
+    offsetUnit *string,
     offsetX int,
     offsetY int,
+    sizeUnit *string,
     width int,
     height int,
     template string,
@@ -154,8 +203,11 @@ func NewAddCustomLiveStreamWatermarkTemplateRequestWithAllParams(
             Header:  nil,
             Version: "v1",
         },
+        Position: position,
+        OffsetUnit: offsetUnit,
         OffsetX: offsetX,
         OffsetY: offsetY,
+        SizeUnit: sizeUnit,
         Width: width,
         Height: height,
         Template: template,
@@ -177,31 +229,60 @@ func NewAddCustomLiveStreamWatermarkTemplateRequestWithoutParam() *AddCustomLive
     }
 }
 
+/* param position: 水印位置
+- 取值范围：左上：1，右上：3， 左下：7，右下：9，默认：1
+(Optional) */
+func (r *AddCustomLiveStreamWatermarkTemplateRequest) SetPosition(position int) {
+    r.Position = &position
+}
+
+/* param offsetUnit: 偏移量单位
+- 取值: percent,pixel
+- percent:按百分比; pixel:像素 默认:pixel
+(Optional) */
+func (r *AddCustomLiveStreamWatermarkTemplateRequest) SetOffsetUnit(offsetUnit string) {
+    r.OffsetUnit = &offsetUnit
+}
+
 /* param offsetX: x轴偏移量
-- 单位: 像素
+- 取值范围
+  percent: (0,100]
+  pixel: (0,1920]
 (Required) */
 func (r *AddCustomLiveStreamWatermarkTemplateRequest) SetOffsetX(offsetX int) {
     r.OffsetX = offsetX
 }
 
 /* param offsetY: y轴偏移量:
-- 单位: 像素
+- 取值范围
+  percent: (0,100]
+  pixel: (0,1920]
 (Required) */
 func (r *AddCustomLiveStreamWatermarkTemplateRequest) SetOffsetY(offsetY int) {
     r.OffsetY = offsetY
 }
 
+/* param sizeUnit: 水印大小单位
+- 取值: percent,pixel
+- percent:按百分比; pixel:像素 默认:pixel
+(Optional) */
+func (r *AddCustomLiveStreamWatermarkTemplateRequest) SetSizeUnit(sizeUnit string) {
+    r.SizeUnit = &sizeUnit
+}
+
 /* param width: 水印宽度:
-- 取值: [0,1920]
-- 单位: 像素
+- 取值范围
+  percent: (0,100]
+  pixel: (0,1920]
 (Required) */
 func (r *AddCustomLiveStreamWatermarkTemplateRequest) SetWidth(width int) {
     r.Width = width
 }
 
 /* param height: 水印高度:
-- 取值: [0,1920]
-- 单位: 像素
+- 取值范围
+  percent: (0,100]
+  pixel: (0,1920]
 (Required) */
 func (r *AddCustomLiveStreamWatermarkTemplateRequest) SetHeight(height int) {
     r.Height = height

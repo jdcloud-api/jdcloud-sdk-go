@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    vod "github.com/jdcloud-api/jdcloud-sdk-go/services/vod/models"
 )
 
 type SetIPRuleRequest struct {
@@ -27,23 +28,24 @@ type SetIPRuleRequest struct {
     /* 域名ID  */
     DomainId int `json:"domainId"`
 
-    /* 规则类型，取值 'ip' (Optional) */
-    RuleType *string `json:"ruleType"`
+    /* IP黑名单规则配置对象  */
+    Config *vod.IPRuleConfigObject `json:"config"`
 
-    /* 规则配置对象 (Optional) */
-    Config *interface{} `json:"config"`
-
-    /* 是否启用该规则 (Optional) */
-    Enabled *bool `json:"enabled"`
+    /* 是否启用该规则  */
+    Enabled bool `json:"enabled"`
 }
 
 /*
  * param domainId: 域名ID (Required)
+ * param config: IP黑名单规则配置对象 (Required)
+ * param enabled: 是否启用该规则 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewSetIPRuleRequest(
     domainId int,
+    config *vod.IPRuleConfigObject,
+    enabled bool,
 ) *SetIPRuleRequest {
 
 	return &SetIPRuleRequest{
@@ -54,20 +56,20 @@ func NewSetIPRuleRequest(
 			Version: "v1",
 		},
         DomainId: domainId,
+        Config: config,
+        Enabled: enabled,
 	}
 }
 
 /*
  * param domainId: 域名ID (Required)
- * param ruleType: 规则类型，取值 'ip' (Optional)
- * param config: 规则配置对象 (Optional)
- * param enabled: 是否启用该规则 (Optional)
+ * param config: IP黑名单规则配置对象 (Required)
+ * param enabled: 是否启用该规则 (Required)
  */
 func NewSetIPRuleRequestWithAllParams(
     domainId int,
-    ruleType *string,
-    config *interface{},
-    enabled *bool,
+    config *vod.IPRuleConfigObject,
+    enabled bool,
 ) *SetIPRuleRequest {
 
     return &SetIPRuleRequest{
@@ -78,7 +80,6 @@ func NewSetIPRuleRequestWithAllParams(
             Version: "v1",
         },
         DomainId: domainId,
-        RuleType: ruleType,
         Config: config,
         Enabled: enabled,
     }
@@ -102,19 +103,14 @@ func (r *SetIPRuleRequest) SetDomainId(domainId int) {
     r.DomainId = domainId
 }
 
-/* param ruleType: 规则类型，取值 'ip'(Optional) */
-func (r *SetIPRuleRequest) SetRuleType(ruleType string) {
-    r.RuleType = &ruleType
+/* param config: IP黑名单规则配置对象(Required) */
+func (r *SetIPRuleRequest) SetConfig(config *vod.IPRuleConfigObject) {
+    r.Config = config
 }
 
-/* param config: 规则配置对象(Optional) */
-func (r *SetIPRuleRequest) SetConfig(config interface{}) {
-    r.Config = &config
-}
-
-/* param enabled: 是否启用该规则(Optional) */
+/* param enabled: 是否启用该规则(Required) */
 func (r *SetIPRuleRequest) SetEnabled(enabled bool) {
-    r.Enabled = &enabled
+    r.Enabled = enabled
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

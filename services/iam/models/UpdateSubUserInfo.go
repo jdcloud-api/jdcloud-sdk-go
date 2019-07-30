@@ -20,11 +20,11 @@ package models
 type UpdateSubUserInfo struct {
 
     /* 描述，0~256个字符 (Optional) */
-    Description string `json:"description"`
+    Description *string `json:"description"`
 
-    /* 手机号码，区号-手机号，目前只支持0086-中国手机号码 (Optional) */
-    Phone string `json:"phone"`
+    /* 手机号码，区号-手机号 (Optional) */
+    Phone *string `json:"phone"`
 
     /* 邮箱 (Optional) */
-    Email string `json:"email"`
+    Email *string `json:"email"`
 }

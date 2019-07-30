@@ -40,7 +40,7 @@ func NewRedisClient(credential *core.Credential) *RedisClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "redis",
-            Revision:    "1.1.0",
+            Revision:    "1.3.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -106,6 +106,26 @@ func (c *RedisClient) DescribeCacheInstances(request *redis.DescribeCacheInstanc
     }
 
     jdResp := &redis.DescribeCacheInstancesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询Redis实例的内部集群信息 */
+func (c *RedisClient) DescribeClusterInfo(request *redis.DescribeClusterInfoRequest) (*redis.DescribeClusterInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &redis.DescribeClusterInfoResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

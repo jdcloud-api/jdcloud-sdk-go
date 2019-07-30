@@ -19,6 +19,6 @@ package models
 
 type UpdateAssumeRolePolicyInfo struct {
 
-    /* 角色代入policy (Optional) */
-    AssumeRolePolicyDocument string `json:"assumeRolePolicyDocument"`
+    /* 信任实体信息 (Optional) */
+    AssumeRolePolicyDocument *string `json:"assumeRolePolicyDocument"`
 }

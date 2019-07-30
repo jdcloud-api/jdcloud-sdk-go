@@ -31,7 +31,7 @@ type CategoryTreeNode struct {
     /* 分类描述信息 (Optional) */
     Description string `json:"description"`
 
-    /*  (Optional) */
+    /* 子分类 (Optional) */
     Children []CategoryTreeNode `json:"children"`
 
     /* 创建时间 (Optional) */
