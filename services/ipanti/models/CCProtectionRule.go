@@ -20,13 +20,13 @@ package models
 type CCProtectionRule struct {
 
     /* CC 防护规则 ID (Optional) */
-    Id int64 `json:"id"`
+    Id string `json:"id"`
 
     /* CC 防护规则对应的网站规则 ID (Optional) */
-    WebRuleId int64 `json:"webRuleId"`
+    WebRuleId string `json:"webRuleId"`
 
     /* CC 防护规则对应的实例 ID (Optional) */
-    InstanceId int64 `json:"instanceId"`
+    InstanceId string `json:"instanceId"`
 
     /* CC 防护规则名称, 30 字符以内 (Optional) */
     Name string `json:"name"`
@@ -49,6 +49,6 @@ type CCProtectionRule struct {
     /* 阻断类型, 1: 封禁, 2: 人机交互 (Optional) */
     BlockType int `json:"blockType"`
 
-    /* 阻断持续时间, 单位为分钟, 取值范围[1, 1440] (Optional) */
+    /* 阻断持续时间, 单位为秒, 取值范围[10, 86400] (Optional) */
     BlockTime int64 `json:"blockTime"`
 }

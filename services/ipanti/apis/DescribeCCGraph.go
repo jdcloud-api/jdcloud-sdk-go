@@ -24,7 +24,7 @@ type DescribeCCGraphRequest struct {
 
     core.JDCloudRequest
 
-    /* 区域 Id  */
+    /* 区域 ID, 高防不区分区域, 传 cn-north-1 即可  */
     RegionId string `json:"regionId"`
 
     /* 开始时间, 最多查最近 60 天, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ  */
@@ -34,14 +34,14 @@ type DescribeCCGraphRequest struct {
     EndTime string `json:"endTime"`
 
     /* 高防实例 Id 列表 (Optional) */
-    InstanceId []int64 `json:"instanceId"`
+    InstanceId []string `json:"instanceId"`
 
     /* 规则域名列表 (Optional) */
     SubDomain []string `json:"subDomain"`
 }
 
 /*
- * param regionId: 区域 Id (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param startTime: 开始时间, 最多查最近 60 天, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Required)
  * param endTime: 查询的结束时间, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Required)
  *
@@ -67,7 +67,7 @@ func NewDescribeCCGraphRequest(
 }
 
 /*
- * param regionId: 区域 Id (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param startTime: 开始时间, 最多查最近 60 天, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Required)
  * param endTime: 查询的结束时间, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Required)
  * param instanceId: 高防实例 Id 列表 (Optional)
@@ -77,7 +77,7 @@ func NewDescribeCCGraphRequestWithAllParams(
     regionId string,
     startTime string,
     endTime string,
-    instanceId []int64,
+    instanceId []string,
     subDomain []string,
 ) *DescribeCCGraphRequest {
 
@@ -109,7 +109,7 @@ func NewDescribeCCGraphRequestWithoutParam() *DescribeCCGraphRequest {
     }
 }
 
-/* param regionId: 区域 Id(Required) */
+/* param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可(Required) */
 func (r *DescribeCCGraphRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
@@ -125,7 +125,7 @@ func (r *DescribeCCGraphRequest) SetEndTime(endTime string) {
 }
 
 /* param instanceId: 高防实例 Id 列表(Optional) */
-func (r *DescribeCCGraphRequest) SetInstanceId(instanceId []int64) {
+func (r *DescribeCCGraphRequest) SetInstanceId(instanceId []string) {
     r.InstanceId = instanceId
 }
 

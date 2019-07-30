@@ -37,6 +37,6 @@ type CCProtectionRuleSpec struct {
     /* 阻断类型, 1: 封禁, 2: 人机交互  */
     BlockType int `json:"blockType"`
 
-    /* 阻断持续时间, 单位为分钟, 取值范围[1, 1440]  */
+    /* 阻断持续时间, 单位为秒, 取值范围[10, 86400]  */
     BlockTime int64 `json:"blockTime"`
 }

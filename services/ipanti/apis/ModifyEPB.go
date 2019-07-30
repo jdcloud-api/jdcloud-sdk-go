@@ -25,18 +25,18 @@ type ModifyEPBRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 区域 ID, 高防不区分区域, 传 cn-north-1 即可  */
     RegionId string `json:"regionId"`
 
     /* 实例 ID  */
-    InstanceId int `json:"instanceId"`
+    InstanceId string `json:"instanceId"`
 
     /* 修改实例名称请求参数  */
     ModifyInstanceEPBSpec *ipanti.ModifyInstanceEPBSpec `json:"modifyInstanceEPBSpec"`
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param instanceId: 实例 ID (Required)
  * param modifyInstanceEPBSpec: 修改实例名称请求参数 (Required)
  *
@@ -44,7 +44,7 @@ type ModifyEPBRequest struct {
  */
 func NewModifyEPBRequest(
     regionId string,
-    instanceId int,
+    instanceId string,
     modifyInstanceEPBSpec *ipanti.ModifyInstanceEPBSpec,
 ) *ModifyEPBRequest {
 
@@ -62,13 +62,13 @@ func NewModifyEPBRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param instanceId: 实例 ID (Required)
  * param modifyInstanceEPBSpec: 修改实例名称请求参数 (Required)
  */
 func NewModifyEPBRequestWithAllParams(
     regionId string,
-    instanceId int,
+    instanceId string,
     modifyInstanceEPBSpec *ipanti.ModifyInstanceEPBSpec,
 ) *ModifyEPBRequest {
 
@@ -98,13 +98,13 @@ func NewModifyEPBRequestWithoutParam() *ModifyEPBRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可(Required) */
 func (r *ModifyEPBRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 实例 ID(Required) */
-func (r *ModifyEPBRequest) SetInstanceId(instanceId int) {
+func (r *ModifyEPBRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 

@@ -25,7 +25,7 @@ type DescribeDDoSAttackLogsRequest struct {
 
     core.JDCloudRequest
 
-    /* 区域 Id  */
+    /* 区域 ID, 高防不区分区域, 传 cn-north-1 即可  */
     RegionId string `json:"regionId"`
 
     /* 页码, 默认为1 (Optional) */
@@ -41,11 +41,11 @@ type DescribeDDoSAttackLogsRequest struct {
     EndTime string `json:"endTime"`
 
     /* 高防实例 ID (Optional) */
-    InstanceId []int64 `json:"instanceId"`
+    InstanceId []string `json:"instanceId"`
 }
 
 /*
- * param regionId: 区域 Id (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param startTime: 开始时间, 只能查询最近 60 天以内的数据, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
  * param endTime: 查询的结束时间, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
  *
@@ -59,7 +59,7 @@ func NewDescribeDDoSAttackLogsRequest(
 
 	return &DescribeDDoSAttackLogsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/attacklog:DDoS",
+			URL:     "/regions/{regionId}/attacklog:describeDDoSAttackLogs",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -71,7 +71,7 @@ func NewDescribeDDoSAttackLogsRequest(
 }
 
 /*
- * param regionId: 区域 Id (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param pageNumber: 页码, 默认为1 (Optional)
  * param pageSize: 分页大小, 默认为10, 取值范围[10, 100] (Optional)
  * param startTime: 开始时间, 只能查询最近 60 天以内的数据, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
@@ -84,12 +84,12 @@ func NewDescribeDDoSAttackLogsRequestWithAllParams(
     pageSize *int,
     startTime string,
     endTime string,
-    instanceId []int64,
+    instanceId []string,
 ) *DescribeDDoSAttackLogsRequest {
 
     return &DescribeDDoSAttackLogsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/attacklog:DDoS",
+            URL:     "/regions/{regionId}/attacklog:describeDDoSAttackLogs",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -108,7 +108,7 @@ func NewDescribeDDoSAttackLogsRequestWithoutParam() *DescribeDDoSAttackLogsReque
 
     return &DescribeDDoSAttackLogsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/attacklog:DDoS",
+            URL:     "/regions/{regionId}/attacklog:describeDDoSAttackLogs",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -116,7 +116,7 @@ func NewDescribeDDoSAttackLogsRequestWithoutParam() *DescribeDDoSAttackLogsReque
     }
 }
 
-/* param regionId: 区域 Id(Required) */
+/* param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可(Required) */
 func (r *DescribeDDoSAttackLogsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
@@ -142,7 +142,7 @@ func (r *DescribeDDoSAttackLogsRequest) SetEndTime(endTime string) {
 }
 
 /* param instanceId: 高防实例 ID(Optional) */
-func (r *DescribeDDoSAttackLogsRequest) SetInstanceId(instanceId []int64) {
+func (r *DescribeDDoSAttackLogsRequest) SetInstanceId(instanceId []string) {
     r.InstanceId = instanceId
 }
 
@@ -159,7 +159,7 @@ type DescribeDDoSAttackLogsResponse struct {
 }
 
 type DescribeDDoSAttackLogsResult struct {
-    DataList []ipanti.DDosAttackLog `json:"dataList"`
+    DataList []ipanti.DDoSAttackLog `json:"dataList"`
     CurrentCount int `json:"currentCount"`
     TotalCount int `json:"totalCount"`
     TotalPage int `json:"totalPage"`

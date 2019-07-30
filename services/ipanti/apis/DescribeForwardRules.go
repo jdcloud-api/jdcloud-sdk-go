@@ -25,11 +25,11 @@ type DescribeForwardRulesRequest struct {
 
     core.JDCloudRequest
 
-    /* 区域 Id  */
+    /* 区域 ID, 高防不区分区域, 传 cn-north-1 即可  */
     RegionId string `json:"regionId"`
 
     /* 高防实例 Id  */
-    InstanceId int `json:"instanceId"`
+    InstanceId string `json:"instanceId"`
 
     /* 页码, 默认为1 (Optional) */
     PageNumber *int `json:"pageNumber"`
@@ -45,14 +45,14 @@ type DescribeForwardRulesRequest struct {
 }
 
 /*
- * param regionId: 区域 Id (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param instanceId: 高防实例 Id (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeForwardRulesRequest(
     regionId string,
-    instanceId int,
+    instanceId string,
 ) *DescribeForwardRulesRequest {
 
 	return &DescribeForwardRulesRequest{
@@ -68,7 +68,7 @@ func NewDescribeForwardRulesRequest(
 }
 
 /*
- * param regionId: 区域 Id (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param instanceId: 高防实例 Id (Required)
  * param pageNumber: 页码, 默认为1 (Optional)
  * param pageSize: 分页大小, 默认为10, 取值范围[10, 100] (Optional)
@@ -77,7 +77,7 @@ func NewDescribeForwardRulesRequest(
  */
 func NewDescribeForwardRulesRequestWithAllParams(
     regionId string,
-    instanceId int,
+    instanceId string,
     pageNumber *int,
     pageSize *int,
     searchType *string,
@@ -113,13 +113,13 @@ func NewDescribeForwardRulesRequestWithoutParam() *DescribeForwardRulesRequest {
     }
 }
 
-/* param regionId: 区域 Id(Required) */
+/* param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可(Required) */
 func (r *DescribeForwardRulesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 高防实例 Id(Required) */
-func (r *DescribeForwardRulesRequest) SetInstanceId(instanceId int) {
+func (r *DescribeForwardRulesRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 

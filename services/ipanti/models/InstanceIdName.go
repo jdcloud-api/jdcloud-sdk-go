@@ -20,7 +20,7 @@ package models
 type InstanceIdName struct {
 
     /* 实例id (Optional) */
-    Id int64 `json:"id"`
+    Id string `json:"id"`
 
     /* 实例名称 (Optional) */
     Name string `json:"name"`

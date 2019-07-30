@@ -20,7 +20,7 @@ package models
 type CreateInstanceSpec struct {
 
     /* 实例 Id, 升级时必传 (Optional) */
-    Id *int64 `json:"id"`
+    Id *string `json:"id"`
 
     /* 实例名称, 新购时必传 (Optional) */
     Name *string `json:"name"`
@@ -34,8 +34,8 @@ type CreateInstanceSpec struct {
     /* 可防护 ip 类型, 目前仅电信线路支持 IPV6 线路:
 - 0: IPV4,
 - 1: IPV4/IPV6
-  */
-    IpType int `json:"ipType"`
+ (Optional) */
+    IpType *int `json:"ipType"`
 
     /* 保底带宽：单位Gbps  */
     Bp int `json:"bp"`

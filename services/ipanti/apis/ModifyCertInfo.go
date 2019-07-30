@@ -25,21 +25,21 @@ type ModifyCertInfoRequest struct {
 
     core.JDCloudRequest
 
-    /* 区域 Id  */
+    /* 区域 ID, 高防不区分区域, 传 cn-north-1 即可  */
     RegionId string `json:"regionId"`
 
     /* 高防实例 Id  */
-    InstanceId int `json:"instanceId"`
+    InstanceId string `json:"instanceId"`
 
     /* 网站规则 Id  */
-    WebRuleId int `json:"webRuleId"`
+    WebRuleId string `json:"webRuleId"`
 
     /* 编辑网站规则证书信息请求参数  */
     CertInfoModifySpec *ipanti.CertInfoModifySpec `json:"certInfoModifySpec"`
 }
 
 /*
- * param regionId: 区域 Id (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param instanceId: 高防实例 Id (Required)
  * param webRuleId: 网站规则 Id (Required)
  * param certInfoModifySpec: 编辑网站规则证书信息请求参数 (Required)
@@ -48,8 +48,8 @@ type ModifyCertInfoRequest struct {
  */
 func NewModifyCertInfoRequest(
     regionId string,
-    instanceId int,
-    webRuleId int,
+    instanceId string,
+    webRuleId string,
     certInfoModifySpec *ipanti.CertInfoModifySpec,
 ) *ModifyCertInfoRequest {
 
@@ -68,15 +68,15 @@ func NewModifyCertInfoRequest(
 }
 
 /*
- * param regionId: 区域 Id (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param instanceId: 高防实例 Id (Required)
  * param webRuleId: 网站规则 Id (Required)
  * param certInfoModifySpec: 编辑网站规则证书信息请求参数 (Required)
  */
 func NewModifyCertInfoRequestWithAllParams(
     regionId string,
-    instanceId int,
-    webRuleId int,
+    instanceId string,
+    webRuleId string,
     certInfoModifySpec *ipanti.CertInfoModifySpec,
 ) *ModifyCertInfoRequest {
 
@@ -107,18 +107,18 @@ func NewModifyCertInfoRequestWithoutParam() *ModifyCertInfoRequest {
     }
 }
 
-/* param regionId: 区域 Id(Required) */
+/* param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可(Required) */
 func (r *ModifyCertInfoRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 高防实例 Id(Required) */
-func (r *ModifyCertInfoRequest) SetInstanceId(instanceId int) {
+func (r *ModifyCertInfoRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
 /* param webRuleId: 网站规则 Id(Required) */
-func (r *ModifyCertInfoRequest) SetWebRuleId(webRuleId int) {
+func (r *ModifyCertInfoRequest) SetWebRuleId(webRuleId string) {
     r.WebRuleId = webRuleId
 }
 

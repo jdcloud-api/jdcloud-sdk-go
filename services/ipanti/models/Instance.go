@@ -19,8 +19,8 @@ package models
 
 type Instance struct {
 
-    /* 实例 Id (Optional) */
-    Id int64 `json:"id"`
+    /* 实例 ID (Optional) */
+    Id string `json:"id"`
 
     /* 实例名称 (Optional) */
     Name string `json:"name"`
@@ -28,7 +28,7 @@ type Instance struct {
     /* 链路类型, 1: 电信, 2: 电信、联通, 3: 电信、联通和移动 (Optional) */
     Carrier int `json:"carrier"`
 
-    /* 可防护 ip 类型, 目前仅电信线路支持 IPV6 线路:
+    /* 可防护 IP 类型, 目前仅电信线路支持 IPV6 线路:
 - 0: IPV4,
 - 1: IPV4/IPV6
  (Optional) */
@@ -49,8 +49,11 @@ type Instance struct {
     /* 业务带宽大小 (Optional) */
     BusinessBitslimit int `json:"businessBitslimit"`
 
-    /* cc阈值大小 (Optional) */
+    /* CC 阈值大小 (Optional) */
     CcThreshold int `json:"ccThreshold"`
+
+    /* CC 防护峰值, 单位: QPS (Optional) */
+    CcPeakQPS int `json:"ccPeakQPS"`
 
     /* 非网站类规则数 (Optional) */
     RuleCount int `json:"ruleCount"`
@@ -70,31 +73,51 @@ type Instance struct {
     /* 实例的过期时间 (Optional) */
     ExpireTime string `json:"expireTime"`
 
-    /* 资源id，升级和续费时使用 (Optional) */
+    /* 资源 ID, 升级和续费时使用 (Optional) */
     ResourceId string `json:"resourceId"`
 
-    /* cc防护模式，0正常、1紧急、2宽松、3自定义 (Optional) */
+    /* CC 防护观察者模式.
+- 0: 关闭
+- 1: 开启
+ (Optional) */
+    CcObserveMode int `json:"ccObserveMode"`
+
+    /* CC 防护模式.
+- 0: 正常
+- 1: 紧急
+- 2: 宽松
+- 3: 自定义
+ (Optional) */
     CcProtectMode int `json:"ccProtectMode"`
 
-    /* cc开关状态，0关闭，1开启 (Optional) */
+    /* CC 开关状态.
+- 0: 关闭
+- 1: 开启
+ (Optional) */
     CcProtectStatus int `json:"ccProtectStatus"`
 
-    /* cc防护模式为自定义时的限速大小 (Optional) */
+    /* CC 防护模式为自定义时的限速大小 (Optional) */
     CcSpeedLimit int `json:"ccSpeedLimit"`
 
-    /* cc防护模式为自定义时的限速周期 (Optional) */
+    /* CC 防护模式为自定义时的限速周期 (Optional) */
     CcSpeedPeriod int `json:"ccSpeedPeriod"`
 
-    /* ip黑名单列表 (Optional) */
+    /* IP 黑名单列表 (Optional) */
     IpBlackList []string `json:"ipBlackList"`
 
-    /* ip黑名单状态，0关闭，1开启 (Optional) */
+    /* IP 黑名单状态.
+- 0: 关闭
+- 1: 开启
+ (Optional) */
     IpBlackStatus int `json:"ipBlackStatus"`
 
-    /* ip白名单列表 (Optional) */
+    /* IP 白名单列表 (Optional) */
     IpWhiteList []string `json:"ipWhiteList"`
 
-    /* ip白名单状态，0关闭，1开启 (Optional) */
+    /* IP 白名单状态.
+- 0: 关闭
+- 1: 开启
+ (Optional) */
     IpWhiteStatus int `json:"ipWhiteStatus"`
 
     /* url白名单列表 (Optional) */

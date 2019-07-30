@@ -53,5 +53,5 @@ type ForwardProtectionRule struct {
     DatagramRangeMax int64 `json:"datagramRangeMax"`
 
     /* geo 拦截地域列表 (Optional) */
-    GeoBlackList []GeoBlack `json:"geoBlackList"`
+    GeoBlackList []Geo `json:"geoBlackList"`
 }

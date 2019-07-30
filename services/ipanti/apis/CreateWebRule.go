@@ -25,18 +25,18 @@ type CreateWebRuleRequest struct {
 
     core.JDCloudRequest
 
-    /* 区域 Id  */
+    /* 区域 ID, 高防不区分区域, 传 cn-north-1 即可  */
     RegionId string `json:"regionId"`
 
     /* 高防实例 Id  */
-    InstanceId int `json:"instanceId"`
+    InstanceId string `json:"instanceId"`
 
     /* 添加网站类规则请求参数  */
     WebRuleSpec *ipanti.WebRuleSpec `json:"webRuleSpec"`
 }
 
 /*
- * param regionId: 区域 Id (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param instanceId: 高防实例 Id (Required)
  * param webRuleSpec: 添加网站类规则请求参数 (Required)
  *
@@ -44,7 +44,7 @@ type CreateWebRuleRequest struct {
  */
 func NewCreateWebRuleRequest(
     regionId string,
-    instanceId int,
+    instanceId string,
     webRuleSpec *ipanti.WebRuleSpec,
 ) *CreateWebRuleRequest {
 
@@ -62,13 +62,13 @@ func NewCreateWebRuleRequest(
 }
 
 /*
- * param regionId: 区域 Id (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param instanceId: 高防实例 Id (Required)
  * param webRuleSpec: 添加网站类规则请求参数 (Required)
  */
 func NewCreateWebRuleRequestWithAllParams(
     regionId string,
-    instanceId int,
+    instanceId string,
     webRuleSpec *ipanti.WebRuleSpec,
 ) *CreateWebRuleRequest {
 
@@ -98,13 +98,13 @@ func NewCreateWebRuleRequestWithoutParam() *CreateWebRuleRequest {
     }
 }
 
-/* param regionId: 区域 Id(Required) */
+/* param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可(Required) */
 func (r *CreateWebRuleRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 高防实例 Id(Required) */
-func (r *CreateWebRuleRequest) SetInstanceId(instanceId int) {
+func (r *CreateWebRuleRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 

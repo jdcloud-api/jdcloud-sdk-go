@@ -23,7 +23,7 @@ type CertInfoModifySpec struct {
 - 如果传 certId, 请确认已经上传了相应的证书
 - certId 缺省时网站规则将使用 httpsCertContent, httpsRsaKey 对应的证书
  (Optional) */
-    CertId *int64 `json:"certId"`
+    CertId *string `json:"certId"`
 
     /* 证书内容 (Optional) */
     HttpsCertContent *string `json:"httpsCertContent"`

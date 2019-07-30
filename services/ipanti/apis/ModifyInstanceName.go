@@ -25,18 +25,18 @@ type ModifyInstanceNameRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 区域 ID, 高防不区分区域, 传 cn-north-1 即可  */
     RegionId string `json:"regionId"`
 
     /* 实例 ID  */
-    InstanceId int `json:"instanceId"`
+    InstanceId string `json:"instanceId"`
 
     /* 修改实例名称请求参数  */
     RenameInstanceSpec *ipanti.RenameInstanceSpec `json:"renameInstanceSpec"`
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param instanceId: 实例 ID (Required)
  * param renameInstanceSpec: 修改实例名称请求参数 (Required)
  *
@@ -44,7 +44,7 @@ type ModifyInstanceNameRequest struct {
  */
 func NewModifyInstanceNameRequest(
     regionId string,
-    instanceId int,
+    instanceId string,
     renameInstanceSpec *ipanti.RenameInstanceSpec,
 ) *ModifyInstanceNameRequest {
 
@@ -62,13 +62,13 @@ func NewModifyInstanceNameRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param instanceId: 实例 ID (Required)
  * param renameInstanceSpec: 修改实例名称请求参数 (Required)
  */
 func NewModifyInstanceNameRequestWithAllParams(
     regionId string,
-    instanceId int,
+    instanceId string,
     renameInstanceSpec *ipanti.RenameInstanceSpec,
 ) *ModifyInstanceNameRequest {
 
@@ -98,13 +98,13 @@ func NewModifyInstanceNameRequestWithoutParam() *ModifyInstanceNameRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可(Required) */
 func (r *ModifyInstanceNameRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 实例 ID(Required) */
-func (r *ModifyInstanceNameRequest) SetInstanceId(instanceId int) {
+func (r *ModifyInstanceNameRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 

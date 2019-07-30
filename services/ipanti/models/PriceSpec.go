@@ -38,7 +38,7 @@ type PriceSpec struct {
     Ep int `json:"ep"`
 
     /* 实例 Id, 升级高防实例查询价格时必传 (Optional) */
-    Id int64 `json:"id"`
+    Id string `json:"id"`
 
     /* 购买防护包时长, 新购高防实例时必传
 - timeUnit 为 3 时, 可取值 1-9

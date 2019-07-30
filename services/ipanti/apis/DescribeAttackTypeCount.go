@@ -25,7 +25,7 @@ type DescribeAttackTypeCountRequest struct {
 
     core.JDCloudRequest
 
-    /* 区域 Id  */
+    /* 区域 ID, 高防不区分区域, 传 cn-north-1 即可  */
     RegionId string `json:"regionId"`
 
     /* 开始时间, 只能查询最近 60 天以内的数据, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ  */
@@ -35,11 +35,11 @@ type DescribeAttackTypeCountRequest struct {
     EndTime string `json:"endTime"`
 
     /* 高防实例 ID (Optional) */
-    InstanceId []int64 `json:"instanceId"`
+    InstanceId []string `json:"instanceId"`
 }
 
 /*
- * param regionId: 区域 Id (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param startTime: 开始时间, 只能查询最近 60 天以内的数据, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
  * param endTime: 查询的结束时间, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
  *
@@ -53,7 +53,7 @@ func NewDescribeAttackTypeCountRequest(
 
 	return &DescribeAttackTypeCountRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/attacklog/describeAttackTypeCount",
+			URL:     "/regions/{regionId}/attacklog:describeAttackTypeCount",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -65,7 +65,7 @@ func NewDescribeAttackTypeCountRequest(
 }
 
 /*
- * param regionId: 区域 Id (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param startTime: 开始时间, 只能查询最近 60 天以内的数据, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
  * param endTime: 查询的结束时间, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
  * param instanceId: 高防实例 ID (Optional)
@@ -74,12 +74,12 @@ func NewDescribeAttackTypeCountRequestWithAllParams(
     regionId string,
     startTime string,
     endTime string,
-    instanceId []int64,
+    instanceId []string,
 ) *DescribeAttackTypeCountRequest {
 
     return &DescribeAttackTypeCountRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/attacklog/describeAttackTypeCount",
+            URL:     "/regions/{regionId}/attacklog:describeAttackTypeCount",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -96,7 +96,7 @@ func NewDescribeAttackTypeCountRequestWithoutParam() *DescribeAttackTypeCountReq
 
     return &DescribeAttackTypeCountRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/attacklog/describeAttackTypeCount",
+            URL:     "/regions/{regionId}/attacklog:describeAttackTypeCount",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -104,7 +104,7 @@ func NewDescribeAttackTypeCountRequestWithoutParam() *DescribeAttackTypeCountReq
     }
 }
 
-/* param regionId: 区域 Id(Required) */
+/* param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可(Required) */
 func (r *DescribeAttackTypeCountRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
@@ -120,7 +120,7 @@ func (r *DescribeAttackTypeCountRequest) SetEndTime(endTime string) {
 }
 
 /* param instanceId: 高防实例 ID(Optional) */
-func (r *DescribeAttackTypeCountRequest) SetInstanceId(instanceId []int64) {
+func (r *DescribeAttackTypeCountRequest) SetInstanceId(instanceId []string) {
     r.InstanceId = instanceId
 }
 

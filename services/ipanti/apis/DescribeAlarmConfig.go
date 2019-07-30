@@ -25,22 +25,22 @@ type DescribeAlarmConfigRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 区域 ID, 高防不区分区域, 传 cn-north-1 即可  */
     RegionId string `json:"regionId"`
 
     /* 实例 ID  */
-    InstanceId int `json:"instanceId"`
+    InstanceId string `json:"instanceId"`
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param instanceId: 实例 ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeAlarmConfigRequest(
     regionId string,
-    instanceId int,
+    instanceId string,
 ) *DescribeAlarmConfigRequest {
 
 	return &DescribeAlarmConfigRequest{
@@ -56,12 +56,12 @@ func NewDescribeAlarmConfigRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param instanceId: 实例 ID (Required)
  */
 func NewDescribeAlarmConfigRequestWithAllParams(
     regionId string,
-    instanceId int,
+    instanceId string,
 ) *DescribeAlarmConfigRequest {
 
     return &DescribeAlarmConfigRequest{
@@ -89,13 +89,13 @@ func NewDescribeAlarmConfigRequestWithoutParam() *DescribeAlarmConfigRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可(Required) */
 func (r *DescribeAlarmConfigRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 实例 ID(Required) */
-func (r *DescribeAlarmConfigRequest) SetInstanceId(instanceId int) {
+func (r *DescribeAlarmConfigRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 

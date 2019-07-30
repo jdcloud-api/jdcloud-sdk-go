@@ -25,18 +25,18 @@ type ModifyAlarmConfigRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 区域 ID, 高防不区分区域, 传 cn-north-1 即可  */
     RegionId string `json:"regionId"`
 
     /* 实例 ID  */
-    InstanceId int `json:"instanceId"`
+    InstanceId string `json:"instanceId"`
 
     /* 更新告警配置请求参数  */
     AlarmConfigSpec *ipanti.AlarmConfigSpec `json:"alarmConfigSpec"`
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param instanceId: 实例 ID (Required)
  * param alarmConfigSpec: 更新告警配置请求参数 (Required)
  *
@@ -44,7 +44,7 @@ type ModifyAlarmConfigRequest struct {
  */
 func NewModifyAlarmConfigRequest(
     regionId string,
-    instanceId int,
+    instanceId string,
     alarmConfigSpec *ipanti.AlarmConfigSpec,
 ) *ModifyAlarmConfigRequest {
 
@@ -62,13 +62,13 @@ func NewModifyAlarmConfigRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param instanceId: 实例 ID (Required)
  * param alarmConfigSpec: 更新告警配置请求参数 (Required)
  */
 func NewModifyAlarmConfigRequestWithAllParams(
     regionId string,
-    instanceId int,
+    instanceId string,
     alarmConfigSpec *ipanti.AlarmConfigSpec,
 ) *ModifyAlarmConfigRequest {
 
@@ -98,13 +98,13 @@ func NewModifyAlarmConfigRequestWithoutParam() *ModifyAlarmConfigRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
+/* param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可(Required) */
 func (r *ModifyAlarmConfigRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 实例 ID(Required) */
-func (r *ModifyAlarmConfigRequest) SetInstanceId(instanceId int) {
+func (r *ModifyAlarmConfigRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 

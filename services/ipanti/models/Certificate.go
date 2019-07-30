@@ -20,7 +20,7 @@ package models
 type Certificate struct {
 
     /* 证书 Id (Optional) */
-    Id int64 `json:"id"`
+    Id string `json:"id"`
 
     /* 证书名称 (Optional) */
     Name string `json:"name"`

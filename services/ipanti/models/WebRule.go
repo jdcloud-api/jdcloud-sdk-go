@@ -20,16 +20,19 @@ package models
 type WebRule struct {
 
     /* 规则 Id (Optional) */
-    Id int64 `json:"id"`
+    Id string `json:"id"`
 
     /* 实例 Id (Optional) */
-    InstanceId int64 `json:"instanceId"`
+    InstanceId string `json:"instanceId"`
 
     /* 子域名 (Optional) */
     Domain string `json:"domain"`
 
-    /* 规则的 cname (Optional) */
+    /* 规则的 CNAME (Optional) */
     Cname string `json:"cname"`
+
+    /* CNAME 解析状态, 0: 解析异常, 1: 解析正常 (Optional) */
+    CnameStatus int `json:"cnameStatus"`
 
     /*  (Optional) */
     Protocol WebRuleProtocol `json:"protocol"`
@@ -65,7 +68,7 @@ type WebRule struct {
     HttpCertStatus int `json:"httpCertStatus"`
 
     /* 证书 Id (Optional) */
-    CertId int64 `json:"certId"`
+    CertId string `json:"certId"`
 
     /* 证书名称 (Optional) */
     CertName string `json:"certName"`
@@ -88,6 +91,12 @@ type WebRule struct {
     /* CC 状态, 0: CC 关闭, 1: CC 开启 (Optional) */
     CcStatus int `json:"ccStatus"`
 
-    /* webSocketStatus, 0: 关闭, 1: 开启 (Optional) */
+    /* webSocket 状态, 0: 关闭, 1: 开启 (Optional) */
     WebSocketStatus int `json:"webSocketStatus"`
+
+    /* 黑名单状态, 0: 关闭, 1: 开启 (Optional) */
+    BlackListEnable int `json:"blackListEnable"`
+
+    /* 白名单状态, 0: 关闭, 1: 开启 (Optional) */
+    WhiteListEnable int `json:"whiteListEnable"`
 }
