@@ -19,7 +19,7 @@ package models
 
 type VolumeMount struct {
 
-    /* 环境变量名称 (Optional) */
+    /* 磁盘分类 (Optional) */
     Category string `json:"category"`
 
     /* 自动删除，删除容器时自动删除此volume (Optional) */

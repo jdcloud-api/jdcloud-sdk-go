@@ -31,13 +31,16 @@ type DescribeAlarmHistoryAllRegionRequest struct {
     /* 页面大小，默认为20；取值范围[1, 100] (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* 产品线 (Optional) */
+    /* 产品线标识,默认返回该serviceCode下所有group的数据。eg:serviceCode=jdw（jdw产品线下包含jdw-master与jdw-segment两个分组)会返回jdw-master和jdw-segment的数据。 (Optional) */
     ServiceCode *string `json:"serviceCode"`
+
+    /* 分组标识、指定该参数时，查询只返回该group的数据。groupCode参数仅在与serviceCode匹配时生效；eg:serviceCode=jdw、groupCode=jdw-master,只返回jdw-master分组的数据，不返回jdw-segment的数据。 (Optional) */
+    GroupCode *string `json:"groupCode"`
 
     /* 资源Id (Optional) */
     ResourceId *string `json:"resourceId"`
 
-    /* resourceId列表 (Optional) */
+    /* resourceId列表，必须指定serviceCode才会生效 (Optional) */
     ResourceIdList []string `json:"resourceIdList"`
 
     /* 规则Id (Optional) */
@@ -58,9 +61,10 @@ type DescribeAlarmHistoryAllRegionRequest struct {
     /* 规则类型,默认查询1， 1表示资源监控，6表示站点监控,7表示可用性监控 (Optional) */
     RuleType *int `json:"ruleType"`
 
-    /* 服务码或资源Id列表
-filter name 为serviceCodes表示查询多个产品线的规则
-filter name 为resourceIds表示查询多个资源的规则 (Optional) */
+    /* serviceCodes - 产品线servicecode，精确匹配，支持多个
+resourceIds - 资源Id，精确匹配，支持多个（必须指定serviceCode才会在该serviceCode下根据resourceIds过滤，否则该参数不生效）
+alarmIds - 规则Id，精确匹配，支持多个
+ruleName - 规则名称，模糊匹配，支持单个 (Optional) */
     Filters []monitor.Filter `json:"filters"`
 }
 
@@ -74,7 +78,7 @@ func NewDescribeAlarmHistoryAllRegionRequest(
 	return &DescribeAlarmHistoryAllRegionRequest{
         JDCloudRequest: core.JDCloudRequest{
 			URL:     "/ruleNoticeHistory",
-			Method:  "POST",
+			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
@@ -84,23 +88,26 @@ func NewDescribeAlarmHistoryAllRegionRequest(
 /*
  * param pageNumber: 当前所在页，默认为1 (Optional)
  * param pageSize: 页面大小，默认为20；取值范围[1, 100] (Optional)
- * param serviceCode: 产品线 (Optional)
+ * param serviceCode: 产品线标识,默认返回该serviceCode下所有group的数据。eg:serviceCode=jdw（jdw产品线下包含jdw-master与jdw-segment两个分组)会返回jdw-master和jdw-segment的数据。 (Optional)
+ * param groupCode: 分组标识、指定该参数时，查询只返回该group的数据。groupCode参数仅在与serviceCode匹配时生效；eg:serviceCode=jdw、groupCode=jdw-master,只返回jdw-master分组的数据，不返回jdw-segment的数据。 (Optional)
  * param resourceId: 资源Id (Optional)
- * param resourceIdList: resourceId列表 (Optional)
+ * param resourceIdList: resourceId列表，必须指定serviceCode才会生效 (Optional)
  * param alarmId: 规则Id (Optional)
  * param alarming: 正在报警, 取值为1 (Optional)
  * param serviceCodeList: 产品线列表 (Optional)
  * param startTime: 开始时间 (Optional)
  * param endTime: 结束时间 (Optional)
  * param ruleType: 规则类型,默认查询1， 1表示资源监控，6表示站点监控,7表示可用性监控 (Optional)
- * param filters: 服务码或资源Id列表
-filter name 为serviceCodes表示查询多个产品线的规则
-filter name 为resourceIds表示查询多个资源的规则 (Optional)
+ * param filters: serviceCodes - 产品线servicecode，精确匹配，支持多个
+resourceIds - 资源Id，精确匹配，支持多个（必须指定serviceCode才会在该serviceCode下根据resourceIds过滤，否则该参数不生效）
+alarmIds - 规则Id，精确匹配，支持多个
+ruleName - 规则名称，模糊匹配，支持单个 (Optional)
  */
 func NewDescribeAlarmHistoryAllRegionRequestWithAllParams(
     pageNumber *int,
     pageSize *int,
     serviceCode *string,
+    groupCode *string,
     resourceId *string,
     resourceIdList []string,
     alarmId *string,
@@ -115,13 +122,14 @@ func NewDescribeAlarmHistoryAllRegionRequestWithAllParams(
     return &DescribeAlarmHistoryAllRegionRequest{
         JDCloudRequest: core.JDCloudRequest{
             URL:     "/ruleNoticeHistory",
-            Method:  "POST",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         PageNumber: pageNumber,
         PageSize: pageSize,
         ServiceCode: serviceCode,
+        GroupCode: groupCode,
         ResourceId: resourceId,
         ResourceIdList: resourceIdList,
         AlarmId: alarmId,
@@ -140,7 +148,7 @@ func NewDescribeAlarmHistoryAllRegionRequestWithoutParam() *DescribeAlarmHistory
     return &DescribeAlarmHistoryAllRegionRequest{
             JDCloudRequest: core.JDCloudRequest{
             URL:     "/ruleNoticeHistory",
-            Method:  "POST",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
@@ -157,9 +165,14 @@ func (r *DescribeAlarmHistoryAllRegionRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
-/* param serviceCode: 产品线(Optional) */
+/* param serviceCode: 产品线标识,默认返回该serviceCode下所有group的数据。eg:serviceCode=jdw（jdw产品线下包含jdw-master与jdw-segment两个分组)会返回jdw-master和jdw-segment的数据。(Optional) */
 func (r *DescribeAlarmHistoryAllRegionRequest) SetServiceCode(serviceCode string) {
     r.ServiceCode = &serviceCode
+}
+
+/* param groupCode: 分组标识、指定该参数时，查询只返回该group的数据。groupCode参数仅在与serviceCode匹配时生效；eg:serviceCode=jdw、groupCode=jdw-master,只返回jdw-master分组的数据，不返回jdw-segment的数据。(Optional) */
+func (r *DescribeAlarmHistoryAllRegionRequest) SetGroupCode(groupCode string) {
+    r.GroupCode = &groupCode
 }
 
 /* param resourceId: 资源Id(Optional) */
@@ -167,7 +180,7 @@ func (r *DescribeAlarmHistoryAllRegionRequest) SetResourceId(resourceId string) 
     r.ResourceId = &resourceId
 }
 
-/* param resourceIdList: resourceId列表(Optional) */
+/* param resourceIdList: resourceId列表，必须指定serviceCode才会生效(Optional) */
 func (r *DescribeAlarmHistoryAllRegionRequest) SetResourceIdList(resourceIdList []string) {
     r.ResourceIdList = resourceIdList
 }
@@ -202,9 +215,10 @@ func (r *DescribeAlarmHistoryAllRegionRequest) SetRuleType(ruleType int) {
     r.RuleType = &ruleType
 }
 
-/* param filters: 服务码或资源Id列表
-filter name 为serviceCodes表示查询多个产品线的规则
-filter name 为resourceIds表示查询多个资源的规则(Optional) */
+/* param filters: serviceCodes - 产品线servicecode，精确匹配，支持多个
+resourceIds - 资源Id，精确匹配，支持多个（必须指定serviceCode才会在该serviceCode下根据resourceIds过滤，否则该参数不生效）
+alarmIds - 规则Id，精确匹配，支持多个
+ruleName - 规则名称，模糊匹配，支持单个(Optional) */
 func (r *DescribeAlarmHistoryAllRegionRequest) SetFilters(filters []monitor.Filter) {
     r.Filters = filters
 }

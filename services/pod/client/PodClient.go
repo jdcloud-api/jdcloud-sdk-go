@@ -40,7 +40,7 @@ func NewPodClient(credential *core.Credential) *PodClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "pod",
-            Revision:    "1.0.5",
+            Revision:    "2.1.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -65,6 +65,26 @@ func (c *PodClient) DescribeQuota(request *pod.DescribeQuotaRequest) (*pod.Descr
     }
 
     jdResp := &pod.DescribeQuotaResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取 pod 中某个容器的详情 */
+func (c *PodClient) DescribeContainer(request *pod.DescribeContainerRequest) (*pod.DescribeContainerResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &pod.DescribeContainerResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -180,6 +200,27 @@ func (c *PodClient) GetContainerLogs(request *pod.GetContainerLogsRequest) (*pod
     return jdResp, err
 }
 
+/* 查询实例规格信息列表
+ */
+func (c *PodClient) DescribeInstanceTypes(request *pod.DescribeInstanceTypesRequest) (*pod.DescribeInstanceTypesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &pod.DescribeInstanceTypesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 设置TTY大小 */
 func (c *PodClient) ResizeTTY(request *pod.ResizeTTYRequest) (*pod.ResizeTTYResponse, error) {
     if request == nil {
@@ -200,7 +241,7 @@ func (c *PodClient) ResizeTTY(request *pod.ResizeTTYRequest) (*pod.ResizeTTYResp
     return jdResp, err
 }
 
-/* 查询单个容器日志
+/* 将容器连接到本地标准输入输出
  */
 func (c *PodClient) Attach(request *pod.AttachRequest) (*pod.AttachResponse, error) {
     if request == nil {
@@ -221,7 +262,7 @@ func (c *PodClient) Attach(request *pod.AttachRequest) (*pod.AttachResponse, err
     return jdResp, err
 }
 
-/* 修改 pod 的 名称 和 描述。
+/* 修改 pod 的描述。
  */
 func (c *PodClient) ModifyPodAttribute(request *pod.ModifyPodAttributeRequest) (*pod.ModifyPodAttributeResponse, error) {
     if request == nil {
@@ -414,7 +455,8 @@ func (c *PodClient) ExecCreate(request *pod.ExecCreateRequest) (*pod.ExecCreateR
     return jdResp, err
 }
 
-/* - 创建pod需要通过实名认证
+/* 创建一台或多台 pod
+- 创建pod需要通过实名认证
 - hostname规范
     - 支持两种方式：以标签方式书写或以完整主机名方式书写
     - 标签规范
@@ -425,7 +467,7 @@ func (c *PodClient) ExecCreate(request *pod.ExecCreateRequest) (*pod.ExecCreateR
         - 标签与标签之间使用“.”(点)进行连接
         - 不能以“.”(点)开始，也不能以“.”(点)结尾
         - 整个主机名（包括标签以及分隔点“.”）最多有63个ASCII字符
-    - 正则：`^([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9])(.([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9]))*$`
+    - 正则：`^([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9])(\.([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9]))*$`
 - 网络配置
     - 指定主网卡配置信息
         - 必须指定subnetId
@@ -433,32 +475,37 @@ func (c *PodClient) ExecCreate(request *pod.ExecCreateRequest) (*pod.ExecCreateR
         - 可以指定网卡的主IP(primaryIpAddress)和辅助IP(secondaryIpAddresses)，此时maxCount只能为1
         - 可以设置网卡的自动删除autoDelete属性，指明是否删除实例时自动删除网卡
         - 安全组securityGroup需与子网Subnet在同一个私有网络VPC内
-        - 一个 pod 创建时必须指定一个安全组，至多指定5个安全组
+        - 一个 pod 创建时至多指定5个安全组
         - 主网卡deviceIndex设置为1
 - 存储
-    - volume分为root volume和data volume，root volume的挂载目录是/，data volume的挂载目录可以随意指定
-    - volume的底层存储介质当前只支持cloud类别，也就是云硬盘
-    - root volume
-        - root volume只能是cloud类别
-        - 云硬盘类型可以选择ssd、premium-hdd
+    - volume分为container system disk和pod data volume，container system disk的挂载目录是/，data volume的挂载目录可以随意指定
+    - container system disk
+        - 只能是cloud类别
+        - 云硬盘类型可以选择hdd.std1、ssd.gp1、ssd.io1
         - 磁盘大小
-            - ssd：范围[10,100]GB，步长为10G
-            - premium-hdd：范围[10,100]GB，步长为10G
+            - 所有类型：范围[20,100]GB，步长为10G
         - 自动删除
             - 默认自动删除
         - 可以选择已存在的云硬盘
     - data volume
-        - data volume当前只能选择cloud类别
-        - 云硬盘类型可以选择ssd、premium-hdd
+        - 当前只能选择cloud类别
+        - 云硬盘类型可以选择hdd.std1、ssd.gp1、ssd.io1
         - 磁盘大小
-            - ssd：范围[20,1000]GB，步长为10G
-            - premium-hdd：范围[20,3000]GB，步长为10G
+            - 所有类型：范围[20,4000]GB，步长为10G
         - 自动删除
             - 默认自动删除
         - 可以选择已存在的云硬盘
         - 可以从快照创建磁盘
 - pod 容器日志
     - default：默认在本地分配10MB的存储空间，自动rotate
+- DNS-1123 label规范
+    - 长度范围: [1-63]
+    - 正则表达式: `^[a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?$`
+    - 例子: my-name, 123-abc
+- DNS-1123 subdomain规范
+    - 长度范围: [1-253]
+    - 正则表达式: `^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$`
+    - 例子: example.com, registry.docker-cn.com
 - 其他
     - 创建完成后，pod 状态为running
     - maxCount为最大努力，不保证一定能达到maxCount
@@ -515,26 +562,6 @@ func (c *PodClient) DescribePod(request *pod.DescribePodRequest) (*pod.DescribeP
     }
 
     jdResp := &pod.DescribePodResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 获取 pod 中某个容器的详情 */
-func (c *PodClient) DecribeContainer(request *pod.DecribeContainerRequest) (*pod.DecribeContainerResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &pod.DecribeContainerResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

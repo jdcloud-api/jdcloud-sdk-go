@@ -19,16 +19,16 @@ package models
 
 type CloudDiskSpec struct {
 
-    /* 云盘id，使用已有云盘 (Optional) */
+    /* 云盘ID，指定使用已有云盘 (Optional) */
     VolumeId *string `json:"volumeId"`
 
     /* 云盘名称 (Optional) */
     Name *string `json:"name"`
 
-    /* 云盘快照id，根据云盘快照创建云盘。 (Optional) */
-    Snapshot *string `json:"snapshot"`
+    /* 云盘快照ID，根据云盘快照创建云盘。 (Optional) */
+    SnapshotId *string `json:"snapshotId"`
 
-    /* 云盘类型：ssd,premium-hdd,hdd.std1,ssd.gp1,ssd.io1 (Optional) */
+    /* 云盘类型：hdd.std1,ssd.gp1,ssd.io1 (Optional) */
     DiskType *string `json:"diskType"`
 
     /* 云盘size,单位 GB,要求 (Optional) */

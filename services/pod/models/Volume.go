@@ -19,9 +19,9 @@ package models
 
 type Volume struct {
 
-    /* volume名字，必须是DNS_LABEL，在一个Pod是唯一的。  */
+    /* volume名字，在一个Pod唯一。 (Optional) */
     Name string `json:"name"`
 
-    /* 提供给Pod的cloud disk.  */
-    JdcloudDisk *JDCloudVolumeSource `json:"jdcloudDisk"`
+    /* 提供给Pod的cloud disk. (Optional) */
+    JdcloudDisk JDCloudVolumeSource `json:"jdcloudDisk"`
 }

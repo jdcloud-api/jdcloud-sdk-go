@@ -33,7 +33,7 @@ type ExecCreateRequest struct {
     /* container name  */
     ContainerName string `json:"containerName"`
 
-    /* 执行的命令 (Optional) */
+    /* 执行的命令  */
     Command []string `json:"command"`
 
     /* 执行命令是否分配tty。默认不分配 (Optional) */
@@ -44,6 +44,7 @@ type ExecCreateRequest struct {
  * param regionId: Region ID (Required)
  * param podId: Pod ID (Required)
  * param containerName: container name (Required)
+ * param command: 执行的命令 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -51,6 +52,7 @@ func NewExecCreateRequest(
     regionId string,
     podId string,
     containerName string,
+    command []string,
 ) *ExecCreateRequest {
 
 	return &ExecCreateRequest{
@@ -63,6 +65,7 @@ func NewExecCreateRequest(
         RegionId: regionId,
         PodId: podId,
         ContainerName: containerName,
+        Command: command,
 	}
 }
 
@@ -70,7 +73,7 @@ func NewExecCreateRequest(
  * param regionId: Region ID (Required)
  * param podId: Pod ID (Required)
  * param containerName: container name (Required)
- * param command: 执行的命令 (Optional)
+ * param command: 执行的命令 (Required)
  * param tty: 执行命令是否分配tty。默认不分配 (Optional)
  */
 func NewExecCreateRequestWithAllParams(
@@ -124,7 +127,7 @@ func (r *ExecCreateRequest) SetContainerName(containerName string) {
     r.ContainerName = containerName
 }
 
-/* param command: 执行的命令(Optional) */
+/* param command: 执行的命令(Required) */
 func (r *ExecCreateRequest) SetCommand(command []string) {
     r.Command = command
 }

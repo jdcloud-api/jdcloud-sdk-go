@@ -40,7 +40,7 @@ func NewOssopenapiClient(credential *core.Credential) *OssopenapiClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "ossopenapi",
-            Revision:    "0.4.5",
+            Revision:    "0.8.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,6 +51,26 @@ func (c *OssopenapiClient) SetConfig(config *core.Config) {
 
 func (c *OssopenapiClient) SetLogger(logger core.Logger) {
     c.Logger = logger
+}
+
+/* 根据type获取指定bucket用量数据 */
+func (c *OssopenapiClient) GetSingleBucketCapacity(request *ossopenapi.GetSingleBucketCapacityRequest) (*ossopenapi.GetSingleBucketCapacityResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ossopenapi.GetSingleBucketCapacityResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
 }
 
 /* 获取回源配置 */

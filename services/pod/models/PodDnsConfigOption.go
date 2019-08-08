@@ -19,9 +19,9 @@ package models
 
 type PodDnsConfigOption struct {
 
-    /* 长度范围：[1-63]，需满足linux resolver限制  */
+    /* 长度范围：[1-63]，需满足linux resolver限制 (Optional) */
     Name string `json:"name"`
 
     /* 长度范围：[0-100]，仅限timeout, attempts, ndots (Optional) */
-    Value *string `json:"value"`
+    Value string `json:"value"`
 }

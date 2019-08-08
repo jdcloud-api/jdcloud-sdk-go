@@ -31,6 +31,9 @@ type ApplyTemplateSpec struct {
     /* 资源ID列表，resourceIds数量为1--40，每一项不能为空或包含*  */
     ResourceIds []string `json:"resourceIds"`
 
+    /* 规则名称，规则名称，最大长度42个字符，只允许中英文、数字、''-''和"_" (Optional) */
+    RuleName string `json:"ruleName"`
+
     /* 资源类型  */
     ServiceCode string `json:"serviceCode"`
 

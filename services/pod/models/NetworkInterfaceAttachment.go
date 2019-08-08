@@ -16,11 +16,10 @@
 
 package models
 
-import nc "github.com/jdcloud-api/jdcloud-sdk-go/services/nc/models"
 
 type NetworkInterfaceAttachment struct {
 
-    /* 指明删除pod时是否删除网卡，默认True；当前只能是True (Optional) */
+    /* 指明删除pod时是否删除网卡。 (Optional) */
     AutoDelete bool `json:"autoDelete"`
 
     /* 设备Index，目前pod只支持一个网卡，所以只能设置为1 (Optional) */
@@ -33,5 +32,5 @@ type NetworkInterfaceAttachment struct {
     AttachTime string `json:"attachTime"`
 
     /* 网卡接口规范 (Optional) */
-    NetworkInterface nc.InstanceNetworkInterface `json:"networkInterface"`
+    NetworkInterface InstanceNetworkInterface `json:"networkInterface"`
 }

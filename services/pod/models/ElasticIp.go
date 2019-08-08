@@ -20,8 +20,8 @@ package models
 type ElasticIp struct {
 
     /* 弹性ip的Id (Optional) */
-    ElasticIpId *string `json:"elasticIpId"`
+    ElasticIpId string `json:"elasticIpId"`
 
     /* 弹性ip地址 (Optional) */
-    ElasticIpAddress *string `json:"elasticIpAddress"`
+    ElasticIpAddress string `json:"elasticIpAddress"`
 }

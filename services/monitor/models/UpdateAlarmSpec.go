@@ -28,12 +28,12 @@ type UpdateAlarmSpec struct {
     /* 回调content 注：仅webHookUrl和webHookContent均不为空时，才会创建webHook (Optional) */
     WebHookContent string `json:"webHookContent"`
 
-    /* webHook协议 (Optional) */
+    /* webHook协议，目前支持http，https (Optional) */
     WebHookProtocol string `json:"webHookProtocol"`
 
     /* 回调secret，用户请求签名，防伪造 (Optional) */
     WebHookSecret string `json:"webHookSecret"`
 
-    /* 回调url (Optional) */
+    /* 回调url，例如http://www.jdcloud.com (Optional) */
     WebHookUrl string `json:"webHookUrl"`
 }

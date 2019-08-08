@@ -25,6 +25,12 @@ type DescribedAlarmHistory struct {
     /* 告警联系人 (Optional) */
     Contacts []DescribedNoticeContacts `json:"contacts"`
 
+    /* 告警持续次数 (Optional) */
+    DurationTimes int64 `json:"durationTimes"`
+
+    /* 告警持续时间，单位分钟 (Optional) */
+    NoticeDurationTime int64 `json:"noticeDurationTime"`
+
     /* 触发的告警级别。从低到高分别为‘common’, ‘critical’, ‘fatal’ (Optional) */
     NoticeLevelTriggered string `json:"noticeLevelTriggered"`
 

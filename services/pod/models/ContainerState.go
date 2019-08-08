@@ -19,12 +19,12 @@ package models
 
 type ContainerState struct {
 
-    /* 容器running的详细信息 (Optional) */
+    /* 容器运行的详细信息 (Optional) */
     Running ContainerStateRunning `json:"running"`
 
-    /* 容器Terminated的详细信息 (Optional) */
+    /* 容器终止的详细信息 (Optional) */
     Terminated ContainerStateTerminated `json:"terminated"`
 
-    /* 容器waiting的详细信息 (Optional) */
+    /* 容器等待的详细信息 (Optional) */
     Waiting ContainerStateWaiting `json:"waiting"`
 }

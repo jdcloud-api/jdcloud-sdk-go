@@ -34,6 +34,9 @@ type BatchCreateAlarmsSpec struct {
     /* 报警规则对应实例列表，每次最多100个，例如"['resourceId1','resourceId2']"  */
     ResourceIds []string `json:"resourceIds"`
 
+    /* 规则名称，规则名称，最大长度42个字符，只允许中英文、数字、''-''和"_" (Optional) */
+    RuleName string `json:"ruleName"`
+
     /* 规则类型, 1表示资源监控，6表示站点监控，默认为1 (Optional) */
     RuleType int64 `json:"ruleType"`
 
@@ -55,12 +58,12 @@ type BatchCreateAlarmsSpec struct {
     /* 回调content 注：仅webHookUrl和webHookContent均不为空时，才会创建webHook (Optional) */
     WebHookContent string `json:"webHookContent"`
 
-    /* webHook协议 (Optional) */
+    /* webHook协议，目前支持http，https (Optional) */
     WebHookProtocol string `json:"webHookProtocol"`
 
     /* 回调secret，用户请求签名，防伪造 (Optional) */
     WebHookSecret string `json:"webHookSecret"`
 
-    /* 回调url (Optional) */
+    /* 回调url，例如http://www.jdcloud.com (Optional) */
     WebHookUrl string `json:"webHookUrl"`
 }

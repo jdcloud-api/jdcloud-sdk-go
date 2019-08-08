@@ -19,7 +19,7 @@ package models
 
 type ContainerSpec struct {
 
-    /* 容器名称  */
+    /* 容器名称，符合DNS-1123 label规范，在一个Pod内不能重复。  */
     Name string `json:"name"`
 
     /* 容器执行命令，如果不指定默认是docker镜像的ENTRYPOINT。总长度256个字符。 (Optional) */
@@ -28,17 +28,17 @@ type ContainerSpec struct {
     /* 容器执行命令的参数，如果不指定默认是docker镜像的CMD。总长度2048个字符。 (Optional) */
     Args []string `json:"args"`
 
-    /* 容器执行的环境变量；如果和镜像中的环境变量Key相同，会覆盖镜像中的值。长度范围：[0-100] (Optional) */
+    /* 容器执行的环境变量；如果和镜像中的环境变量Key相同，会覆盖镜像中的值。数组范围：[0-100] (Optional) */
     Env []EnvSpec `json:"env"`
 
     /* 镜像名称 </br>
-容器镜像名字。 nginx:latest。长度范围：[1-500]
+容器镜像名字。 nginx:latest。长度范围：[1-639]
 1. Docker Hub官方镜像通过类似nginx, mysql/mysql-server的名字指定 </br> 
 2. repository长度最大256个字符，tag最大128个字符，registry最大255个字符 </br> 
   */
     Image string `json:"image"`
 
-    /* 镜像仓库secret名字。如果目前不传，默认选择dockerHub镜像 (Optional) */
+    /* 镜像仓库认证信息。如果目前不传，默认选择dockerHub镜像 (Optional) */
     Secret *string `json:"secret"`
 
     /* 容器是否分配tty。默认不分配 (Optional) */
@@ -59,6 +59,6 @@ type ContainerSpec struct {
     /* 容器计算资源配置  */
     SystemDisk *CloudDiskSpec `json:"systemDisk"`
 
-    /* 容器计算资源配置 (Optional) */
-    VolumeMounts []VolumeMount `json:"volumeMounts"`
+    /* 云盘挂载信息 (Optional) */
+    VolumeMounts []VolumeMountSpec `json:"volumeMounts"`
 }

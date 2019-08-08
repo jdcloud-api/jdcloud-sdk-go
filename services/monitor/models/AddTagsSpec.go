@@ -31,6 +31,9 @@ type AddTagsSpec struct {
     /* 资源的产品线  */
     ServiceCode string `json:"serviceCode"`
 
+    /* 打标签操作所属产品线的serviceCode  */
+    SrcServiceCode string `json:"srcServiceCode"`
+
     /* 标签名称。调用此API前需要与云监控确认可以使用的标签名称  */
     TagK string `json:"tagK"`
 

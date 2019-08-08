@@ -28,6 +28,9 @@ type InstanceNetworkInterface struct {
     /* 虚拟网络ID (Optional) */
     VpcId string `json:"vpcId"`
 
+    /* 子网ID (Optional) */
+    SubnetId string `json:"subnetId"`
+
     /* 描述 (Optional) */
     Description string `json:"description"`
 

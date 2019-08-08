@@ -25,7 +25,7 @@ type CreateAlarmRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域 Id  */
+    /* 地域 Id，对于类似CDN这种没有地域属性的产品，regionId为cn-north-1  */
     RegionId string `json:"regionId"`
 
     /* 幂等性校验参数,最长36位,若两个请求clientToken相等，则返回第一次创建的规则id，只创建一次规则  */
@@ -36,7 +36,7 @@ type CreateAlarmRequest struct {
 }
 
 /*
- * param regionId: 地域 Id (Required)
+ * param regionId: 地域 Id，对于类似CDN这种没有地域属性的产品，regionId为cn-north-1 (Required)
  * param clientToken: 幂等性校验参数,最长36位,若两个请求clientToken相等，则返回第一次创建的规则id，只创建一次规则 (Required)
  * param createAlarmSpec:  (Required)
  *
@@ -62,7 +62,7 @@ func NewCreateAlarmRequest(
 }
 
 /*
- * param regionId: 地域 Id (Required)
+ * param regionId: 地域 Id，对于类似CDN这种没有地域属性的产品，regionId为cn-north-1 (Required)
  * param clientToken: 幂等性校验参数,最长36位,若两个请求clientToken相等，则返回第一次创建的规则id，只创建一次规则 (Required)
  * param createAlarmSpec:  (Required)
  */
@@ -98,7 +98,7 @@ func NewCreateAlarmRequestWithoutParam() *CreateAlarmRequest {
     }
 }
 
-/* param regionId: 地域 Id(Required) */
+/* param regionId: 地域 Id，对于类似CDN这种没有地域属性的产品，regionId为cn-north-1(Required) */
 func (r *CreateAlarmRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

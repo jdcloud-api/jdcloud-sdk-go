@@ -19,6 +19,6 @@ package models
 
 type TcpSocketSpec struct {
 
-    /* 范围：[1-65535]  */
+    /* 端口号，范围：[1-65535]  */
     Port int `json:"port"`
 }

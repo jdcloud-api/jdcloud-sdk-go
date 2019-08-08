@@ -28,20 +28,27 @@ type CreateContainersRequest struct {
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 创建容器规格 (Optional) */
+    /* 创建容器规格  */
     ContainerSpec *nativecontainer.ContainerSpec `json:"containerSpec"`
 
-    /* 购买实例数量；取值范围：[1,100] (Optional) */
-    MaxCount *int `json:"maxCount"`
+    /* 购买实例数量；取值范围：[1,100]  */
+    MaxCount int `json:"maxCount"`
+
+    /* 保证请求幂等性 (Optional) */
+    ClientToken *string `json:"clientToken"`
 }
 
 /*
  * param regionId: Region ID (Required)
+ * param containerSpec: 创建容器规格 (Required)
+ * param maxCount: 购买实例数量；取值范围：[1,100] (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateContainersRequest(
     regionId string,
+    containerSpec *nativecontainer.ContainerSpec,
+    maxCount int,
 ) *CreateContainersRequest {
 
 	return &CreateContainersRequest{
@@ -52,18 +59,22 @@ func NewCreateContainersRequest(
 			Version: "v1",
 		},
         RegionId: regionId,
+        ContainerSpec: containerSpec,
+        MaxCount: maxCount,
 	}
 }
 
 /*
  * param regionId: Region ID (Required)
- * param containerSpec: 创建容器规格 (Optional)
- * param maxCount: 购买实例数量；取值范围：[1,100] (Optional)
+ * param containerSpec: 创建容器规格 (Required)
+ * param maxCount: 购买实例数量；取值范围：[1,100] (Required)
+ * param clientToken: 保证请求幂等性 (Optional)
  */
 func NewCreateContainersRequestWithAllParams(
     regionId string,
     containerSpec *nativecontainer.ContainerSpec,
-    maxCount *int,
+    maxCount int,
+    clientToken *string,
 ) *CreateContainersRequest {
 
     return &CreateContainersRequest{
@@ -76,6 +87,7 @@ func NewCreateContainersRequestWithAllParams(
         RegionId: regionId,
         ContainerSpec: containerSpec,
         MaxCount: maxCount,
+        ClientToken: clientToken,
     }
 }
 
@@ -97,14 +109,19 @@ func (r *CreateContainersRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param containerSpec: 创建容器规格(Optional) */
+/* param containerSpec: 创建容器规格(Required) */
 func (r *CreateContainersRequest) SetContainerSpec(containerSpec *nativecontainer.ContainerSpec) {
     r.ContainerSpec = containerSpec
 }
 
-/* param maxCount: 购买实例数量；取值范围：[1,100](Optional) */
+/* param maxCount: 购买实例数量；取值范围：[1,100](Required) */
 func (r *CreateContainersRequest) SetMaxCount(maxCount int) {
-    r.MaxCount = &maxCount
+    r.MaxCount = maxCount
+}
+
+/* param clientToken: 保证请求幂等性(Optional) */
+func (r *CreateContainersRequest) SetClientToken(clientToken string) {
+    r.ClientToken = &clientToken
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

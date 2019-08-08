@@ -37,16 +37,16 @@ type DescribeMetricDataRequest struct {
     /* 采样方式，默认等于aggrType或avg，可选值参考：sum、avg、last、min、max (Optional) */
     DownSampleType *string `json:"downSampleType"`
 
-    /* 查询时间范围的开始时间， UTC时间，格式：yyyy-MM-dd'T'HH:mm:ssZ (Optional) */
+    /* 查询时间范围的开始时间， UTC时间，格式：2016-12-11T00:00:00+0800（注意在url中+要转译为%2B故url中为2016-12-11T00:00:00%2B0800） (Optional) */
     StartTime *string `json:"startTime"`
 
-    /* 查询时间范围的结束时间， UTC时间，格式：2016-12- yyyy-MM-dd'T'HH:mm:ssZ（为空时，将由startTime与timeInterval计算得出） (Optional) */
+    /* 查询时间范围的结束时间， UTC时间，格式：2016-12-11T00:00:00+0800（为空时，将由startTime与timeInterval计算得出）（注意在url中+要转译为%2B故url中为2016-12-11T00:00:00%2B0800） (Optional) */
     EndTime *string `json:"endTime"`
 
     /* 时间间隔：1h，6h，12h，1d，3d，7d，14d，固定时间间隔，timeInterval默认为1h，当前时间往 前1h (Optional) */
     TimeInterval *string `json:"timeInterval"`
 
-    /* 自定义标签/tag；至少要传一个tag，且tag.Values不为空 (Optional) */
+    /* 监控指标数据的维度信息,根据tags来筛选指标数据不同的维度 (Optional) */
     Tags []monitor.TagFilter `json:"tags"`
 
     /* 是否对查询的tags分组 (Optional) */
@@ -96,10 +96,10 @@ func NewDescribeMetricDataRequest(
  * param metric: 监控项英文标识(id) (Required)
  * param aggrType: 聚合方式，默认等于downSampleType或avg，可选值参考:sum、avg、last、min、max (Optional)
  * param downSampleType: 采样方式，默认等于aggrType或avg，可选值参考：sum、avg、last、min、max (Optional)
- * param startTime: 查询时间范围的开始时间， UTC时间，格式：yyyy-MM-dd'T'HH:mm:ssZ (Optional)
- * param endTime: 查询时间范围的结束时间， UTC时间，格式：2016-12- yyyy-MM-dd'T'HH:mm:ssZ（为空时，将由startTime与timeInterval计算得出） (Optional)
+ * param startTime: 查询时间范围的开始时间， UTC时间，格式：2016-12-11T00:00:00+0800（注意在url中+要转译为%2B故url中为2016-12-11T00:00:00%2B0800） (Optional)
+ * param endTime: 查询时间范围的结束时间， UTC时间，格式：2016-12-11T00:00:00+0800（为空时，将由startTime与timeInterval计算得出）（注意在url中+要转译为%2B故url中为2016-12-11T00:00:00%2B0800） (Optional)
  * param timeInterval: 时间间隔：1h，6h，12h，1d，3d，7d，14d，固定时间间隔，timeInterval默认为1h，当前时间往 前1h (Optional)
- * param tags: 自定义标签/tag；至少要传一个tag，且tag.Values不为空 (Optional)
+ * param tags: 监控指标数据的维度信息,根据tags来筛选指标数据不同的维度 (Optional)
  * param groupBy: 是否对查询的tags分组 (Optional)
  * param rate: 是否求速率 (Optional)
  * param serviceCode: 资源的类型，取值vm, lb, ip, database 等 (Required)
@@ -175,12 +175,12 @@ func (r *DescribeMetricDataRequest) SetDownSampleType(downSampleType string) {
     r.DownSampleType = &downSampleType
 }
 
-/* param startTime: 查询时间范围的开始时间， UTC时间，格式：yyyy-MM-dd'T'HH:mm:ssZ(Optional) */
+/* param startTime: 查询时间范围的开始时间， UTC时间，格式：2016-12-11T00:00:00+0800（注意在url中+要转译为%2B故url中为2016-12-11T00:00:00%2B0800）(Optional) */
 func (r *DescribeMetricDataRequest) SetStartTime(startTime string) {
     r.StartTime = &startTime
 }
 
-/* param endTime: 查询时间范围的结束时间， UTC时间，格式：2016-12- yyyy-MM-dd'T'HH:mm:ssZ（为空时，将由startTime与timeInterval计算得出）(Optional) */
+/* param endTime: 查询时间范围的结束时间， UTC时间，格式：2016-12-11T00:00:00+0800（为空时，将由startTime与timeInterval计算得出）（注意在url中+要转译为%2B故url中为2016-12-11T00:00:00%2B0800）(Optional) */
 func (r *DescribeMetricDataRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
@@ -190,7 +190,7 @@ func (r *DescribeMetricDataRequest) SetTimeInterval(timeInterval string) {
     r.TimeInterval = &timeInterval
 }
 
-/* param tags: 自定义标签/tag；至少要传一个tag，且tag.Values不为空(Optional) */
+/* param tags: 监控指标数据的维度信息,根据tags来筛选指标数据不同的维度(Optional) */
 func (r *DescribeMetricDataRequest) SetTags(tags []monitor.TagFilter) {
     r.Tags = tags
 }

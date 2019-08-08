@@ -19,9 +19,6 @@ package models
 
 type TcpSocket struct {
 
-    /* 连接到pod的host信息，默认使用pod_ip (Optional) */
-    Host string `json:"host"`
-
-    /* 范围：[1-65535]  */
+    /* 端口号，范围：[1-65535] (Optional) */
     Port int `json:"port"`
 }

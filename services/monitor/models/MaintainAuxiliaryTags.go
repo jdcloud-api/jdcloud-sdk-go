@@ -31,8 +31,11 @@ type MaintainAuxiliaryTags struct {
     /* 资源列表。  */
     ResourceIds []string `json:"resourceIds"`
 
-    /* 资源的产品线  */
+    /* 资源的产品线，要对哪个产品线的资源打标签  */
     ServiceCode string `json:"serviceCode"`
+
+    /* 打标签操作所属产品线的serviceCode  */
+    SrcServiceCode string `json:"srcServiceCode"`
 
     /*   */
     Tags HandleTags `json:"tags"`
