@@ -28,20 +28,27 @@ type CreatePodsRequest struct {
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* pod 创建参数 (Optional) */
+    /* pod 创建参数  */
     PodSpec *pod.PodSpec `json:"podSpec"`
 
-    /* 购买实例数量；取值范围：[1,100] (Optional) */
-    MaxCount *int `json:"maxCount"`
+    /* 购买实例数量；取值范围：[1,100]  */
+    MaxCount int `json:"maxCount"`
+
+    /* 保证请求幂等性的字符串；最大长度64个ASCII字符 (Optional) */
+    ClientToken *string `json:"clientToken"`
 }
 
 /*
  * param regionId: Region ID (Required)
+ * param podSpec: pod 创建参数 (Required)
+ * param maxCount: 购买实例数量；取值范围：[1,100] (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreatePodsRequest(
     regionId string,
+    podSpec *pod.PodSpec,
+    maxCount int,
 ) *CreatePodsRequest {
 
 	return &CreatePodsRequest{
@@ -52,18 +59,22 @@ func NewCreatePodsRequest(
 			Version: "v1",
 		},
         RegionId: regionId,
+        PodSpec: podSpec,
+        MaxCount: maxCount,
 	}
 }
 
 /*
  * param regionId: Region ID (Required)
- * param podSpec: pod 创建参数 (Optional)
- * param maxCount: 购买实例数量；取值范围：[1,100] (Optional)
+ * param podSpec: pod 创建参数 (Required)
+ * param maxCount: 购买实例数量；取值范围：[1,100] (Required)
+ * param clientToken: 保证请求幂等性的字符串；最大长度64个ASCII字符 (Optional)
  */
 func NewCreatePodsRequestWithAllParams(
     regionId string,
     podSpec *pod.PodSpec,
-    maxCount *int,
+    maxCount int,
+    clientToken *string,
 ) *CreatePodsRequest {
 
     return &CreatePodsRequest{
@@ -76,6 +87,7 @@ func NewCreatePodsRequestWithAllParams(
         RegionId: regionId,
         PodSpec: podSpec,
         MaxCount: maxCount,
+        ClientToken: clientToken,
     }
 }
 
@@ -97,14 +109,19 @@ func (r *CreatePodsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param podSpec: pod 创建参数(Optional) */
+/* param podSpec: pod 创建参数(Required) */
 func (r *CreatePodsRequest) SetPodSpec(podSpec *pod.PodSpec) {
     r.PodSpec = podSpec
 }
 
-/* param maxCount: 购买实例数量；取值范围：[1,100](Optional) */
+/* param maxCount: 购买实例数量；取值范围：[1,100](Required) */
 func (r *CreatePodsRequest) SetMaxCount(maxCount int) {
-    r.MaxCount = &maxCount
+    r.MaxCount = maxCount
+}
+
+/* param clientToken: 保证请求幂等性的字符串；最大长度64个ASCII字符(Optional) */
+func (r *CreatePodsRequest) SetClientToken(clientToken string) {
+    r.ClientToken = &clientToken
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

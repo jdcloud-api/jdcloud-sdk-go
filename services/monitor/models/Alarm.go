@@ -43,6 +43,9 @@ type Alarm struct {
     /* 规则id监控项名称 (Optional) */
     MetricName string `json:"metricName"`
 
+    /*  (Optional) */
+    NoticeLevel NoticeLevel `json:"noticeLevel"`
+
     /* 通知周期 单位：小时 (Optional) */
     NoticePeriod int64 `json:"noticePeriod"`
 
@@ -61,6 +64,9 @@ type Alarm struct {
     /* 此规则所应用的资源id (Optional) */
     ResourceId string `json:"resourceId"`
 
+    /* 规则名称 (Optional) */
+    RuleName string `json:"ruleName"`
+
     /* 报警规则对应的产品 (Optional) */
     ServiceCode string `json:"serviceCode"`
 
@@ -78,4 +84,16 @@ type Alarm struct {
 
     /* 报警值 (Optional) */
     Value float64 `json:"value"`
+
+    /* 回调content (Optional) */
+    WebHookContent string `json:"webHookContent"`
+
+    /* webHook协议 (Optional) */
+    WebHookProtocol string `json:"webHookProtocol"`
+
+    /* 回调secret，用户请求签名，防伪造 (Optional) */
+    WebHookSecret string `json:"webHookSecret"`
+
+    /* 回调url (Optional) */
+    WebHookUrl string `json:"webHookUrl"`
 }

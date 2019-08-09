@@ -40,7 +40,7 @@ func NewYundingdatapushClient(credential *core.Credential) *YundingdatapushClien
             Credential:  *credential,
             Config:      *config,
             ServiceName: "yundingdatapush",
-            Revision:    "1.0.1",
+            Revision:    "1.0.2",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }

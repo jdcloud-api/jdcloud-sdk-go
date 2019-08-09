@@ -20,10 +20,10 @@ import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
 
 type ElasticIpSpec struct {
 
-    /* 弹性公网IP的限速 单位：MB (Optional) */
-    BandwidthMbps *int `json:"bandwidthMbps"`
+    /* 弹性公网IP的限速 单位：MB  */
+    BandwidthMbps int `json:"bandwidthMbps"`
 
-    /* IP服务商，取值为bgp或no_bg (Optional) */
+    /* IP服务商，取值为bgp或no_bgp (Optional) */
     Provider *string `json:"provider"`
 
     /* 计费配置 (Optional) */

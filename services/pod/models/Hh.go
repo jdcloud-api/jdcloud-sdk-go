@@ -19,9 +19,9 @@ package models
 
 type Hh struct {
 
-    /* http header key，需满足http的规则  */
+    /* http header 键 (Optional) */
     Name string `json:"name"`
 
-    /* 容器探活方式  */
+    /* http header 值 (Optional) */
     Value string `json:"value"`
 }

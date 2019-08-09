@@ -20,29 +20,26 @@ package models
 type JDCloudVolumeSource struct {
 
     /* 云盘id，使用已有云盘 (Optional) */
-    VolumeId *string `json:"volumeId"`
-
-    /* 云盘名称 (Optional) */
-    Name *string `json:"name"`
+    VolumeId string `json:"volumeId"`
 
     /* 云盘快照id，根据云盘快照创建云盘。 (Optional) */
-    Snapshot *string `json:"snapshot"`
+    SnapshotId string `json:"snapshotId"`
 
-    /* 云盘类型：ssd,premium-hdd,hdd.std1,ssd.gp1,ssd.io1 (Optional) */
-    DiskType *string `json:"diskType"`
+    /* 云盘类型：hdd.std1,ssd.gp1,ssd.io1 (Optional) */
+    DiskType string `json:"diskType"`
 
     /* 云盘size,单位 GB,要求 (Optional) */
-    SizeGB *int `json:"sizeGB"`
+    SizeGB int `json:"sizeGB"`
 
-    /* 指定volume文件系统类型，目前支持[xfs, ext4]；如果新创建的盘，不指定文件系统类型默认格式化成xfs  */
+    /* 指定volume文件系统类型，目前支持[xfs, ext4]；如果新创建的盘，不指定文件系统类型默认格式化成xfs (Optional) */
     FsType string `json:"fsType"`
 
     /* 随容器自动创建的新盘，会自动格式化成指定的文件系统类型；挂载已有的盘，默认不会格式化，只会按照指定的fsType去挂载；如果希望格式化，必须设置此字段为true (Optional) */
-    FormatVolume *bool `json:"formatVolume"`
+    FormatVolume bool `json:"formatVolume"`
 
     /* 云盘的 iops 值，目前只有 ssd.io1 类型有效 (Optional) */
-    Iops *int `json:"iops"`
+    Iops int `json:"iops"`
 
     /* 是否随pod删除。默认：true (Optional) */
-    AutoDelete *bool `json:"autoDelete"`
+    AutoDelete bool `json:"autoDelete"`
 }

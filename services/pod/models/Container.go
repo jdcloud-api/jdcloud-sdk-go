@@ -22,38 +22,38 @@ type Container struct {
     /* 容器名称 (Optional) */
     Name string `json:"name"`
 
-    /* 容器执行命令，如果不指定默认是docker镜像的ENTRYPOINT。总长度256个字符。 (Optional) */
+    /* 容器执行的命令。 (Optional) */
     Command []string `json:"command"`
 
-    /* 容器执行命令的参数，如果不指定默认是docker镜像的CMD。总长度2048个字符。 (Optional) */
+    /* 容器执行命令的参数。 (Optional) */
     Args []string `json:"args"`
 
-    /* 容器执行的环境变量；如果和镜像中的环境变量Key相同，会覆盖镜像中的值。长度范围：[0-100] (Optional) */
-    Env []EnvSpec `json:"env"`
+    /* 容器执行的环境变量。 (Optional) */
+    Env []Env `json:"env"`
 
-    /* 镜像名称 </br> 容器镜像名字。 nginx:latest。长度范围：[1-500] 1. Docker Hub官方镜像通过类似nginx, mysql/mysql-server的名字指定 </br> 2. repository长度最大256个字符，tag最大128个字符，registry最大255个字符 </br> (Optional) */
+    /* 容器镜像名称。 (Optional) */
     Image string `json:"image"`
 
-    /* 镜像仓库secret名字。如果目前不传，默认选择dockerHub镜像 (Optional) */
+    /* 容器镜像仓库认证信息。 (Optional) */
     Secret string `json:"secret"`
 
-    /* 容器是否分配tty。默认不分配 (Optional) */
+    /* 容器是否分配tty。 (Optional) */
     Tty bool `json:"tty"`
 
-    /* 容器的工作目录。如果不指定，默认是根目录（/）；必须是绝对路径；长度范围：[0-1024] (Optional) */
+    /* 容器的工作目录。 (Optional) */
     WorkingDir string `json:"workingDir"`
 
     /* 容器存活探针配置 (Optional) */
-    LivenessProbe ProbeSpec `json:"livenessProbe"`
+    LivenessProbe Probe `json:"livenessProbe"`
 
     /* 容器服务就绪探针配置 (Optional) */
-    ReadinessProbe ProbeSpec `json:"readinessProbe"`
+    ReadinessProbe Probe `json:"readinessProbe"`
 
     /* 容器计算资源配置 (Optional) */
-    Resources ResourceRequestsSpec `json:"resources"`
+    Resources ResourceRequests `json:"resources"`
 
     /* 容器计算资源配置 (Optional) */
-    SystemDisk CloudDiskSpec `json:"systemDisk"`
+    SystemDisk CloudDisk `json:"systemDisk"`
 
     /* 容器计算资源配置 (Optional) */
     VolumeMounts []VolumeMount `json:"volumeMounts"`

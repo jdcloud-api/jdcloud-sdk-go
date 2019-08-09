@@ -94,6 +94,9 @@ type Rule struct {
     /* rootRuleID (Optional) */
     RootRuleId int64 `json:"rootRuleId"`
 
+    /* 规则名称 (Optional) */
+    RuleName string `json:"ruleName"`
+
     /* rutye 1:经典监控  5：自定义监控   6：站点监控 7：可用性监控 (Optional) */
     RuleType int64 `json:"ruleType"`
 

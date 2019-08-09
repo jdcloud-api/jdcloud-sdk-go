@@ -19,12 +19,12 @@ package models
 
 type VolumeMount struct {
 
-    /* 必须使用pod volume名称  */
+    /* 挂载的云盘在pod中的名称。 (Optional) */
     Name string `json:"name"`
 
-    /* 容器内挂载点，绝对路径，不得重复和嵌套挂载，不得挂载到根目录("/")。长度范围：[1-1024]  */
+    /* 容器内挂载点。 (Optional) */
     MountPath string `json:"mountPath"`
 
-    /* 是否以只读方式挂载。默认 读写模式 (Optional) */
-    ReadOnly *bool `json:"readOnly"`
+    /* 是否以只读方式挂载。 (Optional) */
+    ReadOnly bool `json:"readOnly"`
 }

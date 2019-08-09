@@ -28,27 +28,28 @@ type CreateSecretRequest struct {
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 机密数据名称，不能重复
+    /* 镜像仓库认证信息名称，不能重复
   */
     Name string `json:"name"`
 
-    /* 机密数据的类型，目前仅支持：docker-registry 类型，用来和docker registry认证的类型。
+    /* 镜像仓库认证信息类型，目前仅支持：docker-registry 类型，用来和docker registry认证的类型。
   */
     SecretType string `json:"secretType"`
 
-    /* 机密的数据。<br>
-key 的有效字符包括字母、数字、-、_和.； <br>
-value 是 Base64 编码的字符串，不能包含换行符（在 linux 下使用 base64 -w 0选项），每个value长度上限为4KB，整个data的长度不能超过256KB; <br>
+    /* 镜像仓库认证信息数据。<br>
 必须包含server、username、password 字段，email 字段是可选的。<br>
- (Optional) */
+  */
     Data *nativecontainer.DockerRegistryData `json:"data"`
 }
 
 /*
  * param regionId: Region ID (Required)
- * param name: 机密数据名称，不能重复
+ * param name: 镜像仓库认证信息名称，不能重复
  (Required)
- * param secretType: 机密数据的类型，目前仅支持：docker-registry 类型，用来和docker registry认证的类型。
+ * param secretType: 镜像仓库认证信息类型，目前仅支持：docker-registry 类型，用来和docker registry认证的类型。
+ (Required)
+ * param data: 镜像仓库认证信息数据。<br>
+必须包含server、username、password 字段，email 字段是可选的。<br>
  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -57,6 +58,7 @@ func NewCreateSecretRequest(
     regionId string,
     name string,
     secretType string,
+    data *nativecontainer.DockerRegistryData,
 ) *CreateSecretRequest {
 
 	return &CreateSecretRequest{
@@ -69,20 +71,19 @@ func NewCreateSecretRequest(
         RegionId: regionId,
         Name: name,
         SecretType: secretType,
+        Data: data,
 	}
 }
 
 /*
  * param regionId: Region ID (Required)
- * param name: 机密数据名称，不能重复
+ * param name: 镜像仓库认证信息名称，不能重复
  (Required)
- * param secretType: 机密数据的类型，目前仅支持：docker-registry 类型，用来和docker registry认证的类型。
+ * param secretType: 镜像仓库认证信息类型，目前仅支持：docker-registry 类型，用来和docker registry认证的类型。
  (Required)
- * param data: 机密的数据。<br>
-key 的有效字符包括字母、数字、-、_和.； <br>
-value 是 Base64 编码的字符串，不能包含换行符（在 linux 下使用 base64 -w 0选项），每个value长度上限为4KB，整个data的长度不能超过256KB; <br>
+ * param data: 镜像仓库认证信息数据。<br>
 必须包含server、username、password 字段，email 字段是可选的。<br>
- (Optional)
+ (Required)
  */
 func NewCreateSecretRequestWithAllParams(
     regionId string,
@@ -123,23 +124,21 @@ func (r *CreateSecretRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param name: 机密数据名称，不能重复
+/* param name: 镜像仓库认证信息名称，不能重复
 (Required) */
 func (r *CreateSecretRequest) SetName(name string) {
     r.Name = name
 }
 
-/* param secretType: 机密数据的类型，目前仅支持：docker-registry 类型，用来和docker registry认证的类型。
+/* param secretType: 镜像仓库认证信息类型，目前仅支持：docker-registry 类型，用来和docker registry认证的类型。
 (Required) */
 func (r *CreateSecretRequest) SetSecretType(secretType string) {
     r.SecretType = secretType
 }
 
-/* param data: 机密的数据。<br>
-key 的有效字符包括字母、数字、-、_和.； <br>
-value 是 Base64 编码的字符串，不能包含换行符（在 linux 下使用 base64 -w 0选项），每个value长度上限为4KB，整个data的长度不能超过256KB; <br>
+/* param data: 镜像仓库认证信息数据。<br>
 必须包含server、username、password 字段，email 字段是可选的。<br>
-(Optional) */
+(Required) */
 func (r *CreateSecretRequest) SetData(data *nativecontainer.DockerRegistryData) {
     r.Data = data
 }

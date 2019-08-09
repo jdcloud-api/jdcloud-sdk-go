@@ -40,7 +40,7 @@ func NewCpsClient(credential *core.Credential) *CpsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "cps",
-            Revision:    "2.0.0",
+            Revision:    "2.1.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -73,8 +73,8 @@ func (c *CpsClient) DescribeSubnet(request *cps.DescribeSubnetRequest) (*cps.Des
     return jdResp, err
 }
 
-/* 对单台云物理服务器执行关机操作，只能停止running状态的服务器 */
-func (c *CpsClient) StopInstance(request *cps.StopInstanceRequest) (*cps.StopInstanceResponse, error) {
+/* 修改监听器 */
+func (c *CpsClient) ModifyListener(request *cps.ModifyListenerRequest) (*cps.ModifyListenerResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -83,7 +83,7 @@ func (c *CpsClient) StopInstance(request *cps.StopInstanceRequest) (*cps.StopIns
         return nil, err
     }
 
-    jdResp := &cps.StopInstanceResponse{}
+    jdResp := &cps.ModifyListenerResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -93,8 +93,8 @@ func (c *CpsClient) StopInstance(request *cps.StopInstanceRequest) (*cps.StopIns
     return jdResp, err
 }
 
-/* 查询私有网络详情 */
-func (c *CpsClient) DescribeVpc(request *cps.DescribeVpcRequest) (*cps.DescribeVpcResponse, error) {
+/* 绑定弹性公网IP */
+func (c *CpsClient) AssociateElasticIpLB(request *cps.AssociateElasticIpLBRequest) (*cps.AssociateElasticIpLBResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -103,7 +103,7 @@ func (c *CpsClient) DescribeVpc(request *cps.DescribeVpcRequest) (*cps.DescribeV
         return nil, err
     }
 
-    jdResp := &cps.DescribeVpcResponse{}
+    jdResp := &cps.AssociateElasticIpLBResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -113,8 +113,8 @@ func (c *CpsClient) DescribeVpc(request *cps.DescribeVpcRequest) (*cps.DescribeV
     return jdResp, err
 }
 
-/* 查询子网列表 */
-func (c *CpsClient) DescribeSubnets(request *cps.DescribeSubnetsRequest) (*cps.DescribeSubnetsResponse, error) {
+/* 查询监听器详情 */
+func (c *CpsClient) QueryListener(request *cps.QueryListenerRequest) (*cps.QueryListenerResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -123,7 +123,7 @@ func (c *CpsClient) DescribeSubnets(request *cps.DescribeSubnetsRequest) (*cps.D
         return nil, err
     }
 
-    jdResp := &cps.DescribeSubnetsResponse{}
+    jdResp := &cps.QueryListenerResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -174,9 +174,8 @@ func (c *CpsClient) DescribeInstanceStatus(request *cps.DescribeInstanceStatusRe
     return jdResp, err
 }
 
-/* 申请弹性公网IP
- */
-func (c *CpsClient) ApplyElasticIps(request *cps.ApplyElasticIpsRequest) (*cps.ApplyElasticIpsResponse, error) {
+/* 添加后端服务器 */
+func (c *CpsClient) AddServers(request *cps.AddServersRequest) (*cps.AddServersResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -185,7 +184,7 @@ func (c *CpsClient) ApplyElasticIps(request *cps.ApplyElasticIpsRequest) (*cps.A
         return nil, err
     }
 
-    jdResp := &cps.ApplyElasticIpsResponse{}
+    jdResp := &cps.AddServersResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -197,7 +196,7 @@ func (c *CpsClient) ApplyElasticIps(request *cps.ApplyElasticIpsRequest) (*cps.A
 
 /* 重装云物理服务器，只能重装stopped状态的服务器<br/>
 - 可调用接口（describeOS）获取云物理服务器支持的操作系统列表
- */
+ [MFA enabled] */
 func (c *CpsClient) ReinstallInstance(request *cps.ReinstallInstanceRequest) (*cps.ReinstallInstanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -208,6 +207,26 @@ func (c *CpsClient) ReinstallInstance(request *cps.ReinstallInstanceRequest) (*c
     }
 
     jdResp := &cps.ReinstallInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除虚拟服务器组 */
+func (c *CpsClient) DeleteServerGroup(request *cps.DeleteServerGroupRequest) (*cps.DeleteServerGroupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.DeleteServerGroupResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -228,6 +247,26 @@ func (c *CpsClient) DescribeDeviceRaids(request *cps.DescribeDeviceRaidsRequest)
     }
 
     jdResp := &cps.DescribeDeviceRaidsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 解绑弹性公网IP */
+func (c *CpsClient) DisassociateElasticIpLB(request *cps.DisassociateElasticIpLBRequest) (*cps.DisassociateElasticIpLBResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.DisassociateElasticIpLBResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -258,6 +297,26 @@ func (c *CpsClient) ModifyVpc(request *cps.ModifyVpcRequest) (*cps.ModifyVpcResp
     return jdResp, err
 }
 
+/* 查询负载均衡实例详情 */
+func (c *CpsClient) QueryLoadBalancer(request *cps.QueryLoadBalancerRequest) (*cps.QueryLoadBalancerResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.QueryLoadBalancerResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询云物理服务器名称 */
 func (c *CpsClient) DescribeInstanceName(request *cps.DescribeInstanceNameRequest) (*cps.DescribeInstanceNameResponse, error) {
     if request == nil {
@@ -269,6 +328,26 @@ func (c *CpsClient) DescribeInstanceName(request *cps.DescribeInstanceNameReques
     }
 
     jdResp := &cps.DescribeInstanceNameResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询后端服务器列表 */
+func (c *CpsClient) QueryServers(request *cps.QueryServersRequest) (*cps.QueryServersResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.QueryServersResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -358,8 +437,8 @@ func (c *CpsClient) DescribeRegiones(request *cps.DescribeRegionesRequest) (*cps
     return jdResp, err
 }
 
-/* 对单台云物理服务器执行开机操作，只能启动stopped状态的服务器 */
-func (c *CpsClient) StartInstance(request *cps.StartInstanceRequest) (*cps.StartInstanceResponse, error) {
+/* 查询负载均衡实例列表 */
+func (c *CpsClient) QueryLoadBalancers(request *cps.QueryLoadBalancersRequest) (*cps.QueryLoadBalancersResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -368,7 +447,27 @@ func (c *CpsClient) StartInstance(request *cps.StartInstanceRequest) (*cps.Start
         return nil, err
     }
 
-    jdResp := &cps.StartInstanceResponse{}
+    jdResp := &cps.QueryLoadBalancersResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改虚拟服务器组 */
+func (c *CpsClient) ModifyServerGroup(request *cps.ModifyServerGroupRequest) (*cps.ModifyServerGroupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.ModifyServerGroupResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -439,26 +538,6 @@ func (c *CpsClient) DisassociateElasticIp(request *cps.DisassociateElasticIpRequ
     return jdResp, err
 }
 
-/* 创建子网 */
-func (c *CpsClient) CreateSubnet(request *cps.CreateSubnetRequest) (*cps.CreateSubnetResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &cps.CreateSubnetResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 查询弹性公网IP详情 */
 func (c *CpsClient) DescribeElasticIp(request *cps.DescribeElasticIpRequest) (*cps.DescribeElasticIpResponse, error) {
     if request == nil {
@@ -479,7 +558,489 @@ func (c *CpsClient) DescribeElasticIp(request *cps.DescribeElasticIpRequest) (*c
     return jdResp, err
 }
 
-/* 重启单台云物理服务器，只能重启running状态的服务器 */
+/* 查询路由表列表 */
+func (c *CpsClient) QueryRouteTables(request *cps.QueryRouteTablesRequest) (*cps.QueryRouteTablesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.QueryRouteTablesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改负载均衡实例 */
+func (c *CpsClient) ModifyLoadBalancer(request *cps.ModifyLoadBalancerRequest) (*cps.ModifyLoadBalancerResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.ModifyLoadBalancerResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 开启负载均衡实例 */
+func (c *CpsClient) StartLoadBalancer(request *cps.StartLoadBalancerRequest) (*cps.StartLoadBalancerResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.StartLoadBalancerResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 关闭负载均衡实例 */
+func (c *CpsClient) StopLoadBalancer(request *cps.StopLoadBalancerRequest) (*cps.StopLoadBalancerResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.StopLoadBalancerResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询单台云物理服务器详细信息 */
+func (c *CpsClient) DescribeInstance(request *cps.DescribeInstanceRequest) (*cps.DescribeInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.DescribeInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 升级云物理服务器外网带宽，只能操作running或者stopped状态的服务器<br/>
+- 不支持未启用外网的服务器升级带宽
+- 外网带宽不支持降级
+ */
+func (c *CpsClient) ModifyBandwidth(request *cps.ModifyBandwidthRequest) (*cps.ModifyBandwidthResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.ModifyBandwidthResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询云物理服务器监控信息 */
+func (c *CpsClient) DescribeInstanceMonitorInfo(request *cps.DescribeInstanceMonitorInfoRequest) (*cps.DescribeInstanceMonitorInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.DescribeInstanceMonitorInfoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询虚拟服务器组列表 */
+func (c *CpsClient) QueryServerGroups(request *cps.QueryServerGroupsRequest) (*cps.QueryServerGroupsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.QueryServerGroupsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建一台或多台指定配置的云物理服务器<br/>
+- 地域与可用区<br/>
+  - 调用接口（describeRegiones）获取云物理服务器支持的地域与可用区<br/>
+- 实例类型<br/>
+  - 调用接口（describeDeviceTypes）获取物理实例类型列表<br/>
+  - 不能使用已下线、或已售馨的实例类型<br/>
+- 操作系统<br/>
+  - 可调用接口（describeOS）获取云物理服务器支持的操作系统列表<br/>
+- 存储<br/>
+  - 数据盘多种RAID可选，可调用接口（describeDeviceRaids）获取服务器支持的RAID列表<br/>
+- 网络<br/>
+  - 网络类型目前支持basic、vpc<br/>
+  - 线路目前只支持bgp<br/>
+  - 支持不启用外网，如果启用外网，带宽范围[1,200] 单位Mbps<br/>
+- 其他<br/>
+  - 购买时长，可按年或月购买：月取值范围[1,9], 年取值范围[1,3]<br/>
+  - 密码设置参考公共参数规范<br/>
+ */
+func (c *CpsClient) CreateInstances(request *cps.CreateInstancesRequest) (*cps.CreateInstancesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.CreateInstancesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 绑定弹性公网IP
+ */
+func (c *CpsClient) AssociateElasticIp(request *cps.AssociateElasticIpRequest) (*cps.AssociateElasticIpResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.AssociateElasticIpResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 对单台云物理服务器执行关机操作，只能停止running状态的服务器 [MFA enabled] */
+func (c *CpsClient) StopInstance(request *cps.StopInstanceRequest) (*cps.StopInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.StopInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询私有网络详情 */
+func (c *CpsClient) DescribeVpc(request *cps.DescribeVpcRequest) (*cps.DescribeVpcResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.DescribeVpcResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询子网列表 */
+func (c *CpsClient) DescribeSubnets(request *cps.DescribeSubnetsRequest) (*cps.DescribeSubnetsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.DescribeSubnetsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询路由表详情 */
+func (c *CpsClient) QueryRouteTable(request *cps.QueryRouteTableRequest) (*cps.QueryRouteTableResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.QueryRouteTableResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 申请弹性公网IP
+ */
+func (c *CpsClient) ApplyElasticIps(request *cps.ApplyElasticIpsRequest) (*cps.ApplyElasticIpsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.ApplyElasticIpsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除监听器 */
+func (c *CpsClient) DeleteListener(request *cps.DeleteListenerRequest) (*cps.DeleteListenerResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.DeleteListenerResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 移除后端服务器 */
+func (c *CpsClient) RemoveServer(request *cps.RemoveServerRequest) (*cps.RemoveServerResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.RemoveServerResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建虚拟服务器组 */
+func (c *CpsClient) CreateServerGroup(request *cps.CreateServerGroupRequest) (*cps.CreateServerGroupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.CreateServerGroupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 开启监听器 */
+func (c *CpsClient) StartListener(request *cps.StartListenerRequest) (*cps.StartListenerResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.StartListenerResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询负载均衡地域列表 */
+func (c *CpsClient) QueryCPSLBRegions(request *cps.QueryCPSLBRegionsRequest) (*cps.QueryCPSLBRegionsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.QueryCPSLBRegionsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询虚拟服务器组 */
+func (c *CpsClient) QueryServerGroup(request *cps.QueryServerGroupRequest) (*cps.QueryServerGroupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.QueryServerGroupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 对单台云物理服务器执行开机操作，只能启动stopped状态的服务器 */
+func (c *CpsClient) StartInstance(request *cps.StartInstanceRequest) (*cps.StartInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.StartInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建子网 */
+func (c *CpsClient) CreateSubnet(request *cps.CreateSubnetRequest) (*cps.CreateSubnetResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.CreateSubnetResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 重启单台云物理服务器，只能重启running状态的服务器 [MFA enabled] */
 func (c *CpsClient) RestartInstance(request *cps.RestartInstanceRequest) (*cps.RestartInstanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -541,6 +1102,26 @@ func (c *CpsClient) DescribeOS(request *cps.DescribeOSRequest) (*cps.DescribeOSR
     return jdResp, err
 }
 
+/* 创建监听器 */
+func (c *CpsClient) CreateListener(request *cps.CreateListenerRequest) (*cps.CreateListenerResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.CreateListenerResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 修改弹性公网IP带宽
  */
 func (c *CpsClient) ModifyElasticIpBandwidth(request *cps.ModifyElasticIpBandwidthRequest) (*cps.ModifyElasticIpBandwidthResponse, error) {
@@ -562,8 +1143,8 @@ func (c *CpsClient) ModifyElasticIpBandwidth(request *cps.ModifyElasticIpBandwid
     return jdResp, err
 }
 
-/* 查询单台云物理服务器详细信息 */
-func (c *CpsClient) DescribeInstance(request *cps.DescribeInstanceRequest) (*cps.DescribeInstanceResponse, error) {
+/* 查询监听器 */
+func (c *CpsClient) QueryListeners(request *cps.QueryListenersRequest) (*cps.QueryListenersResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -572,7 +1153,7 @@ func (c *CpsClient) DescribeInstance(request *cps.DescribeInstanceRequest) (*cps
         return nil, err
     }
 
-    jdResp := &cps.DescribeInstanceResponse{}
+    jdResp := &cps.QueryListenersResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -582,11 +1163,8 @@ func (c *CpsClient) DescribeInstance(request *cps.DescribeInstanceRequest) (*cps
     return jdResp, err
 }
 
-/* 升级云物理服务器外网带宽，只能操作running或者stopped状态的服务器<br/>
-- 不支持未启用外网的服务器升级带宽
-- 外网带宽不支持降级
- */
-func (c *CpsClient) ModifyBandwidth(request *cps.ModifyBandwidthRequest) (*cps.ModifyBandwidthResponse, error) {
+/* 修改后端服务器 */
+func (c *CpsClient) ModifyServer(request *cps.ModifyServerRequest) (*cps.ModifyServerResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -595,7 +1173,7 @@ func (c *CpsClient) ModifyBandwidth(request *cps.ModifyBandwidthRequest) (*cps.M
         return nil, err
     }
 
-    jdResp := &cps.ModifyBandwidthResponse{}
+    jdResp := &cps.ModifyServerResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -627,25 +1205,8 @@ func (c *CpsClient) DescribeInstances(request *cps.DescribeInstancesRequest) (*c
     return jdResp, err
 }
 
-/* 创建一台或多台指定配置的云物理服务器<br/>
-- 地域与可用区<br/>
-  - 调用接口（describeRegiones）获取云物理服务器支持的地域与可用区<br/>
-- 实例类型<br/>
-  - 调用接口（describeDeviceTypes）获取物理实例类型列表<br/>
-  - 不能使用已下线、或已售馨的实例类型<br/>
-- 操作系统<br/>
-  - 可调用接口（describeOS）获取云物理服务器支持的操作系统列表<br/>
-- 存储<br/>
-  - 数据盘多种RAID可选，可调用接口（describeDeviceRaids）获取服务器支持的RAID列表<br/>
-- 网络<br/>
-  - 网络类型目前支持basic、vpc<br/>
-  - 线路目前只支持bgp<br/>
-  - 支持不启用外网，如果启用外网，带宽范围[1,200] 单位Mbps<br/>
-- 其他<br/>
-  - 购买时长，可按年或月购买：月取值范围[1,9], 年取值范围[1,3]<br/>
-  - 密码设置参考公共参数规范<br/>
- */
-func (c *CpsClient) CreateInstances(request *cps.CreateInstancesRequest) (*cps.CreateInstancesResponse, error) {
+/* 创建负载均衡实例 */
+func (c *CpsClient) CreateLoadBalancer(request *cps.CreateLoadBalancerRequest) (*cps.CreateLoadBalancerResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -654,7 +1215,7 @@ func (c *CpsClient) CreateInstances(request *cps.CreateInstancesRequest) (*cps.C
         return nil, err
     }
 
-    jdResp := &cps.CreateInstancesResponse{}
+    jdResp := &cps.CreateLoadBalancerResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -684,9 +1245,8 @@ func (c *CpsClient) CreateVpc(request *cps.CreateVpcRequest) (*cps.CreateVpcResp
     return jdResp, err
 }
 
-/* 绑定弹性公网IP
- */
-func (c *CpsClient) AssociateElasticIp(request *cps.AssociateElasticIpRequest) (*cps.AssociateElasticIpResponse, error) {
+/* 关闭监听器 */
+func (c *CpsClient) StopListener(request *cps.StopListenerRequest) (*cps.StopListenerResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -695,7 +1255,7 @@ func (c *CpsClient) AssociateElasticIp(request *cps.AssociateElasticIpRequest) (
         return nil, err
     }
 
-    jdResp := &cps.AssociateElasticIpResponse{}
+    jdResp := &cps.StopListenerResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

@@ -23,7 +23,13 @@ type SiteMonitorUdpOption struct {
     ReqContent string `json:"reqContent"`
 
     /*  (Optional) */
+    ReqContentType string `json:"reqContentType"`
+
+    /*  (Optional) */
     ResCheck string `json:"resCheck"`
+
+    /*  (Optional) */
+    ResCheckType string `json:"resCheckType"`
 
     /*  (Optional) */
     Timeout int64 `json:"timeout"`

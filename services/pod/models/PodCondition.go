@@ -19,21 +19,21 @@ package models
 
 type PodCondition struct {
 
-    /* Last time we probed the condition. (Optional) */
+    /* 最后一次探测状态的时间 (Optional) */
     LastProbeTime string `json:"lastProbeTime"`
 
-    /* Last time the condition transitioned from one status to another. (Optional) */
+    /* 最后一次改变状态的时间 (Optional) */
     LastTransitionTime string `json:"lastTransitionTime"`
 
-    /* Unique, one-word, CamelCase reason for the condition's last transition. (Optional) */
+    /* 最后一次状态改变的简要原因 (Optional) */
     Reason string `json:"reason"`
 
     /* Status is the status of the condition. Can be True, False, Unknown. (Optional) */
     Status string `json:"status"`
 
-    /* Human-readable message indicating details about last transition. (Optional) */
+    /* 最后一次状态改变的信息 (Optional) */
     Message string `json:"message"`
 
-    /* Type is the type of the condition. Currently only Ready. (Optional) */
+    /* 状态的条件。目前仅限 Ready. (Optional) */
     ConditionType string `json:"conditionType"`
 }

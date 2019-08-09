@@ -19,9 +19,9 @@ package models
 
 type BaseContact struct {
 
-    /* 联系人id  */
+    /* 联系人id。  注：ReferenceType=2时，联系人id请填0  */
     ReferenceId int64 `json:"referenceId"`
 
-    /* 联系人id类型：0,联系人分组id;1,联系人id  */
+    /* 联系人id类型：0,联系人分组id;1,联系人id，2，pin帐号主联系人  */
     ReferenceType int64 `json:"referenceType"`
 }

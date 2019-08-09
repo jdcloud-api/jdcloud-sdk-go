@@ -20,7 +20,7 @@ import disk "github.com/jdcloud-api/jdcloud-sdk-go/services/disk/models"
 
 type VolumeMountSpec struct {
 
-    /* 磁盘分类 cloud： 基于云硬盘的卷 root volume只能是cloud类型  */
+    /* 磁盘分类 cloud：基于云硬盘的卷 仅支持cloud类型  */
     Category string `json:"category"`
 
     /* 自动删除，删除容器时自动删除此volume，默认为True；只支持磁盘是云硬盘的场景 (Optional) */
@@ -35,7 +35,7 @@ type VolumeMountSpec struct {
     /* 云硬盘规格；随容器自动创建的云硬盘，不会对磁盘分区，只会格式化文件系统 (Optional) */
     CloudDiskSpec *disk.DiskSpec `json:"cloudDiskSpec"`
 
-    /* 云硬盘ID；如果使用已有的云硬盘，必须指定partion和fsType (Optional) */
+    /* 云硬盘ID，使用已有的云硬盘，必须同时指定fsType (Optional) */
     CloudDiskId *string `json:"cloudDiskId"`
 
     /* 指定volume文件系统类型，目前支持[xfs, ext4]；如果新创建的盘，不指定文件系统类型默认格式化成xfs (Optional) */

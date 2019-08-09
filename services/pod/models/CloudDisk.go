@@ -19,15 +19,24 @@ package models
 
 type CloudDisk struct {
 
-    /* 云盘id，使用已有云盘 (Optional) */
+    /* 云盘ID。 (Optional) */
     VolumeId string `json:"volumeId"`
 
-    /* 云盘类型：ssd,premium-hdd,hdd.std1,ssd.gp1,ssd.io1 (Optional) */
+    /* 云盘快照ID。 (Optional) */
+    SnapshotId string `json:"snapshotId"`
+
+    /* 云盘类型：hdd.std1,ssd.gp1,ssd.io1。 (Optional) */
     DiskType string `json:"diskType"`
 
-    /* 指定volume文件系统类型，目前支持[xfs, ext4]；如果新创建的盘，不指定文件系统类型默认格式化成xfs (Optional) */
+    /* 云盘size,单位 GB。 (Optional) */
+    SizeGB int `json:"sizeGB"`
+
+    /* 指定volume文件系统类型，目前支持[xfs, ext4]。 (Optional) */
     FsType string `json:"fsType"`
 
-    /* 是否随pod删除。默认：true (Optional) */
+    /* 云盘的 iops 值，目前只有 ssd.io1 类型有效。 (Optional) */
+    Iops int `json:"iops"`
+
+    /* 是否随pod删除。 (Optional) */
     AutoDelete bool `json:"autoDelete"`
 }

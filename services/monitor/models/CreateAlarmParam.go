@@ -46,11 +46,14 @@ type CreateAlarmParam struct {
     /* 报警比较符，只能为以下几种lte(<=),lt(<),gt(>),gte(>=),eq(==),ne(!=)  */
     Operation string `json:"operation"`
 
-    /* 查询指标的周期，单位为分钟,目前支持的取值：1，2，5，15，30，60  */
+    /* 查询指标的周期，单位为分钟,目前支持的取值：1，2，5，10,15，30，60  */
     Period int64 `json:"period"`
 
     /* 报警规则对应实例列表，每次最多100个，例如"['resourceId1','resourceId2']"  */
     ResourceIds []string `json:"resourceIds"`
+
+    /* 规则名称，最大长度42个字符，只允许中英文、数字、''-''和"_" (Optional) */
+    RuleName *string `json:"ruleName"`
 
     /* 产品名称  */
     ServiceCode string `json:"serviceCode"`
@@ -67,12 +70,12 @@ type CreateAlarmParam struct {
     /* 回调content 注：仅webHookUrl和webHookContent均不为空时，才会创建webHook (Optional) */
     WebHookContent *string `json:"webHookContent"`
 
-    /* webHook协议 (Optional) */
+    /* webHook协议，目前支持http，https (Optional) */
     WebHookProtocol *string `json:"webHookProtocol"`
 
     /* 回调secret，用户请求签名，防伪造 (Optional) */
     WebHookSecret *string `json:"webHookSecret"`
 
-    /* 回调url (Optional) */
+    /* 回调url，例如http://www.jdcloud.com (Optional) */
     WebHookUrl *string `json:"webHookUrl"`
 }

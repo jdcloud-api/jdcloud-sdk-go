@@ -30,4 +30,7 @@ type ServiceMetricItem struct {
 
     /*  (Optional) */
     Name string `json:"name"`
+
+    /*  (Optional) */
+    ServiceCode string `json:"serviceCode"`
 }

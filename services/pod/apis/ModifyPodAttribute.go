@@ -30,7 +30,7 @@ type ModifyPodAttributeRequest struct {
     /* Pod ID  */
     PodId string `json:"podId"`
 
-    /* pod name 和 description 必须要指定一个 (Optional) */
+    /* 修改后的描述 (Optional) */
     Description *string `json:"description"`
 }
 
@@ -60,7 +60,7 @@ func NewModifyPodAttributeRequest(
 /*
  * param regionId: Region ID (Required)
  * param podId: Pod ID (Required)
- * param description: pod name 和 description 必须要指定一个 (Optional)
+ * param description: 修改后的描述 (Optional)
  */
 func NewModifyPodAttributeRequestWithAllParams(
     regionId string,
@@ -104,7 +104,7 @@ func (r *ModifyPodAttributeRequest) SetPodId(podId string) {
     r.PodId = podId
 }
 
-/* param description: pod name 和 description 必须要指定一个(Optional) */
+/* param description: 修改后的描述(Optional) */
 func (r *ModifyPodAttributeRequest) SetDescription(description string) {
     r.Description = &description
 }

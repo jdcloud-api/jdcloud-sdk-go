@@ -25,7 +25,7 @@ type UpdateAlarmRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域 Id  */
+    /* 地域 Id，对于类似CDN这种没有地域属性的产品，regionId为cn-north-1  */
     RegionId string `json:"regionId"`
 
     /* 规则id  */
@@ -40,18 +40,18 @@ type UpdateAlarmRequest struct {
     /* 回调content 注：仅webHookUrl和webHookContent均不为空时，才会创建webHook (Optional) */
     WebHookContent *string `json:"webHookContent"`
 
-    /* webHook协议 (Optional) */
+    /* webHook协议，目前支持http，https (Optional) */
     WebHookProtocol *string `json:"webHookProtocol"`
 
     /* 回调secret，用户请求签名，防伪造 (Optional) */
     WebHookSecret *string `json:"webHookSecret"`
 
-    /* 回调url (Optional) */
+    /* 回调url，例如http://www.jdcloud.com (Optional) */
     WebHookUrl *string `json:"webHookUrl"`
 }
 
 /*
- * param regionId: 地域 Id (Required)
+ * param regionId: 地域 Id，对于类似CDN这种没有地域属性的产品，regionId为cn-north-1 (Required)
  * param alarmId: 规则id (Required)
  * param rule:  (Required)
  *
@@ -77,14 +77,14 @@ func NewUpdateAlarmRequest(
 }
 
 /*
- * param regionId: 地域 Id (Required)
+ * param regionId: 地域 Id，对于类似CDN这种没有地域属性的产品，regionId为cn-north-1 (Required)
  * param alarmId: 规则id (Required)
  * param contacts: 通知联系人 (Optional)
  * param rule:  (Required)
  * param webHookContent: 回调content 注：仅webHookUrl和webHookContent均不为空时，才会创建webHook (Optional)
- * param webHookProtocol: webHook协议 (Optional)
+ * param webHookProtocol: webHook协议，目前支持http，https (Optional)
  * param webHookSecret: 回调secret，用户请求签名，防伪造 (Optional)
- * param webHookUrl: 回调url (Optional)
+ * param webHookUrl: 回调url，例如http://www.jdcloud.com (Optional)
  */
 func NewUpdateAlarmRequestWithAllParams(
     regionId string,
@@ -128,7 +128,7 @@ func NewUpdateAlarmRequestWithoutParam() *UpdateAlarmRequest {
     }
 }
 
-/* param regionId: 地域 Id(Required) */
+/* param regionId: 地域 Id，对于类似CDN这种没有地域属性的产品，regionId为cn-north-1(Required) */
 func (r *UpdateAlarmRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
@@ -153,7 +153,7 @@ func (r *UpdateAlarmRequest) SetWebHookContent(webHookContent string) {
     r.WebHookContent = &webHookContent
 }
 
-/* param webHookProtocol: webHook协议(Optional) */
+/* param webHookProtocol: webHook协议，目前支持http，https(Optional) */
 func (r *UpdateAlarmRequest) SetWebHookProtocol(webHookProtocol string) {
     r.WebHookProtocol = &webHookProtocol
 }
@@ -163,7 +163,7 @@ func (r *UpdateAlarmRequest) SetWebHookSecret(webHookSecret string) {
     r.WebHookSecret = &webHookSecret
 }
 
-/* param webHookUrl: 回调url(Optional) */
+/* param webHookUrl: 回调url，例如http://www.jdcloud.com(Optional) */
 func (r *UpdateAlarmRequest) SetWebHookUrl(webHookUrl string) {
     r.WebHookUrl = &webHookUrl
 }

@@ -40,8 +40,11 @@ type DescribeDatapushVendersRequest struct {
     /* 数据库实例名称 (Optional) */
     RdsInstanceName *string `json:"rdsInstanceName"`
 
-    /* 商家PIN (Optional) */
-    VenderPin *string `json:"venderPin"`
+    /* 商家ID (Optional) */
+    VenderId *string `json:"venderId"`
+
+    /* 商家店铺名称 (Optional) */
+    VenderName *string `json:"venderName"`
 }
 
 /*
@@ -70,7 +73,8 @@ func NewDescribeDatapushVendersRequest(
  * param pageSize: 页大小 (Optional)
  * param ydRdsInstanceId: 云鼎数据库实例ID (Optional)
  * param rdsInstanceName: 数据库实例名称 (Optional)
- * param venderPin: 商家PIN (Optional)
+ * param venderId: 商家ID (Optional)
+ * param venderName: 商家店铺名称 (Optional)
  */
 func NewDescribeDatapushVendersRequestWithAllParams(
     appkey string,
@@ -78,7 +82,8 @@ func NewDescribeDatapushVendersRequestWithAllParams(
     pageSize *int,
     ydRdsInstanceId *string,
     rdsInstanceName *string,
-    venderPin *string,
+    venderId *string,
+    venderName *string,
 ) *DescribeDatapushVendersRequest {
 
     return &DescribeDatapushVendersRequest{
@@ -93,7 +98,8 @@ func NewDescribeDatapushVendersRequestWithAllParams(
         PageSize: pageSize,
         YdRdsInstanceId: ydRdsInstanceId,
         RdsInstanceName: rdsInstanceName,
-        VenderPin: venderPin,
+        VenderId: venderId,
+        VenderName: venderName,
     }
 }
 
@@ -135,9 +141,14 @@ func (r *DescribeDatapushVendersRequest) SetRdsInstanceName(rdsInstanceName stri
     r.RdsInstanceName = &rdsInstanceName
 }
 
-/* param venderPin: 商家PIN(Optional) */
-func (r *DescribeDatapushVendersRequest) SetVenderPin(venderPin string) {
-    r.VenderPin = &venderPin
+/* param venderId: 商家ID(Optional) */
+func (r *DescribeDatapushVendersRequest) SetVenderId(venderId string) {
+    r.VenderId = &venderId
+}
+
+/* param venderName: 商家店铺名称(Optional) */
+func (r *DescribeDatapushVendersRequest) SetVenderName(venderName string) {
+    r.VenderName = &venderName
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
@@ -153,5 +164,5 @@ type DescribeDatapushVendersResponse struct {
 }
 
 type DescribeDatapushVendersResult struct {
-    Venders []yundingdatapush.Vender `json:"venders"`
+    Venders []yundingdatapush.VenderShow `json:"venders"`
 }

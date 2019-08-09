@@ -25,6 +25,9 @@ type TaskInfo struct {
     /* task的探测地址 (Optional) */
     Address string `json:"address"`
 
+    /* 该task状态[true:被删除] (Optional) */
+    Deleted bool `json:"deleted"`
+
     /* 任务状态[false：己禁用，true：己启用] (Optional) */
     Enabled bool `json:"enabled"`
 

@@ -22,7 +22,7 @@ type NetworkInterfacePrivateIp struct {
     /* 私有IP的IPV4地址 (Optional) */
     PrivateIpAddress string `json:"privateIpAddress"`
 
-    /* 私有IP的IPV4地址 (Optional) */
+    /* 弹性IP实例ID (Optional) */
     ElasticIpId string `json:"elasticIpId"`
 
     /* 弹性IP实例地址 (Optional) */

@@ -61,6 +61,9 @@ type DescribedAlarm struct {
     /* 资源id (Optional) */
     ResourceId string `json:"resourceId"`
 
+    /* 规则名称 (Optional) */
+    RuleName string `json:"ruleName"`
+
     /* 产品线编码 (Optional) */
     ServiceCode string `json:"serviceCode"`
 
@@ -75,4 +78,16 @@ type DescribedAlarm struct {
 
     /* 告警次数 (Optional) */
     Times int64 `json:"times"`
+
+    /* 回调content (Optional) */
+    WebHookContent string `json:"webHookContent"`
+
+    /* webHook协议 (Optional) */
+    WebHookProtocol string `json:"webHookProtocol"`
+
+    /* 回调secret，用户请求签名，防伪造 (Optional) */
+    WebHookSecret string `json:"webHookSecret"`
+
+    /* 回调url (Optional) */
+    WebHookUrl string `json:"webHookUrl"`
 }

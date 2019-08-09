@@ -53,7 +53,7 @@ type Container struct {
     /* 镜像名称 (Optional) */
     Image string `json:"image"`
 
-    /* secret引用的名称 (Optional) */
+    /* 镜像仓库认证信息名称 (Optional) */
     Secret string `json:"secret"`
 
     /* 容器是否分配tty (Optional) */

@@ -20,8 +20,8 @@ package models
 type LogOption struct {
 
     /* null (Optional) */
-    Key *string `json:"key"`
+    Key string `json:"key"`
 
     /* null (Optional) */
-    Value *string `json:"value"`
+    Value string `json:"value"`
 }

@@ -18,7 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    nc "github.com/jdcloud-api/jdcloud-sdk-go/services/nc/models"
+    pod "github.com/jdcloud-api/jdcloud-sdk-go/services/pod/models"
 )
 
 type CreateSecretRequest struct {
@@ -40,8 +40,8 @@ type CreateSecretRequest struct {
 key 的有效字符包括字母、数字、-、_和.； <br>
 value 是 Base64 编码的字符串，不能包含换行符（在 linux 下使用 base64 -w 0选项），每个value长度上限为4KB，整个data的长度不能超过256KB; <br>
 必须包含server、username、password 字段，email 字段是可选的。<br>
- (Optional) */
-    Data *nc.DockerRegistryData `json:"data"`
+  */
+    Data *pod.DockerRegistryData `json:"data"`
 }
 
 /*
@@ -50,6 +50,11 @@ value 是 Base64 编码的字符串，不能包含换行符（在 linux 下使�
  (Required)
  * param secretType: 机密数据的类型，目前仅支持：docker-registry 类型，用来和docker registry认证的类型。
  (Required)
+ * param data: 机密的数据。<br>
+key 的有效字符包括字母、数字、-、_和.； <br>
+value 是 Base64 编码的字符串，不能包含换行符（在 linux 下使用 base64 -w 0选项），每个value长度上限为4KB，整个data的长度不能超过256KB; <br>
+必须包含server、username、password 字段，email 字段是可选的。<br>
+ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -57,6 +62,7 @@ func NewCreateSecretRequest(
     regionId string,
     name string,
     secretType string,
+    data *pod.DockerRegistryData,
 ) *CreateSecretRequest {
 
 	return &CreateSecretRequest{
@@ -69,6 +75,7 @@ func NewCreateSecretRequest(
         RegionId: regionId,
         Name: name,
         SecretType: secretType,
+        Data: data,
 	}
 }
 
@@ -82,13 +89,13 @@ func NewCreateSecretRequest(
 key 的有效字符包括字母、数字、-、_和.； <br>
 value 是 Base64 编码的字符串，不能包含换行符（在 linux 下使用 base64 -w 0选项），每个value长度上限为4KB，整个data的长度不能超过256KB; <br>
 必须包含server、username、password 字段，email 字段是可选的。<br>
- (Optional)
+ (Required)
  */
 func NewCreateSecretRequestWithAllParams(
     regionId string,
     name string,
     secretType string,
-    data *nc.DockerRegistryData,
+    data *pod.DockerRegistryData,
 ) *CreateSecretRequest {
 
     return &CreateSecretRequest{
@@ -139,8 +146,8 @@ func (r *CreateSecretRequest) SetSecretType(secretType string) {
 key 的有效字符包括字母、数字、-、_和.； <br>
 value 是 Base64 编码的字符串，不能包含换行符（在 linux 下使用 base64 -w 0选项），每个value长度上限为4KB，整个data的长度不能超过256KB; <br>
 必须包含server、username、password 字段，email 字段是可选的。<br>
-(Optional) */
-func (r *CreateSecretRequest) SetData(data *nc.DockerRegistryData) {
+(Required) */
+func (r *CreateSecretRequest) SetData(data *pod.DockerRegistryData) {
     r.Data = data
 }
 
