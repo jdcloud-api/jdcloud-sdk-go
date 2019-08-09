@@ -38,6 +38,9 @@ type UpdateSiteMonitorSpec struct {
     Enabled string `json:"enabled"`
 
     /*  (Optional) */
+    FtpOption SiteMonitorFtpOption `json:"ftpOption"`
+
+    /*  (Optional) */
     HawkeyeId int64 `json:"hawkeyeId"`
 
     /*  (Optional) */
@@ -59,16 +62,19 @@ type UpdateSiteMonitorSpec struct {
     Port string `json:"port"`
 
     /*  (Optional) */
+    SmtpOption SiteMonitorSmtpOption `json:"smtpOption"`
+
+    /*  (Optional) */
     Source []SiteMonitorSource `json:"source"`
 
     /*  (Optional) */
     Stats interface{} `json:"stats"`
 
     /*  (Optional) */
-    TcpOption SiteMonitorTcpOption `json:"tcpOption"`
+    TaskType string `json:"taskType"`
 
     /*  (Optional) */
-    Type string `json:"type"`
+    TcpOption SiteMonitorTcpOption `json:"tcpOption"`
 
     /*  (Optional) */
     UdpOption SiteMonitorUdpOption `json:"udpOption"`

@@ -34,10 +34,13 @@ type DescribeAlarmsRequest struct {
     /* 页面大小，默认为20；取值范围[1, 100] (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* 产品名称 (Optional) */
+    /* 产品线标识,默认返回该serviceCode下所有group的数据。eg:serviceCode=jdw（jdw产品线下包含jdw-master与jdw-segment两个分组)会返回jdw-master和jdw-segment的数据。 (Optional) */
     ServiceCode *string `json:"serviceCode"`
 
-    /* 资源ID (Optional) */
+    /* 分组标识、指定该参数时，查询只返回该group的数据。groupCode参数仅在与serviceCode匹配时生效；eg:serviceCode=jdw、groupCode=jdw-master,只返回jdw-master分组的数据，不返回jdw-segment的数据。 (Optional) */
+    GroupCode *string `json:"groupCode"`
+
+    /* 资源ID,根据resourceId查询时必须指定serviceCode才会生效 (Optional) */
     ResourceId *string `json:"resourceId"`
 
     /* 规则类型, 1表示资源监控，6表示站点监控,7表示可用性监控 (Optional) */
@@ -52,12 +55,14 @@ type DescribeAlarmsRequest struct {
     /* 是否为正在报警的规则，0为忽略，1为是，与 status 同时只能生效一个,isAlarming 优先生效 (Optional) */
     IsAlarming *int `json:"isAlarming"`
 
-    /* 规则的id (Optional) */
+    /* 规则的id，若指定filter的alarmIds过滤时，忽略该参数 (Optional) */
     AlarmId *string `json:"alarmId"`
 
     /* 服务码或资源Id列表
-filter name 为serviceCodes表示查询多个产品线的规则
-filter name 为resourceIds表示查询多个资源的规则 (Optional) */
+serviceCodes - 产品线servicecode，精确匹配，支持多个
+resourceIds - 资源Id，精确匹配，支持多个（必须指定serviceCode才会在该serviceCode下根据resourceIds过滤，否则该参数不生效）
+alarmIds - 规则id，精确匹配，支持多个
+ruleName - 规则名称，模糊匹配，支持单个 (Optional) */
     Filters []monitor.Filter `json:"filters"`
 }
 
@@ -85,22 +90,26 @@ func NewDescribeAlarmsRequest(
  * param regionId: 地域 Id (Required)
  * param pageNumber: 当前所在页，默认为1 (Optional)
  * param pageSize: 页面大小，默认为20；取值范围[1, 100] (Optional)
- * param serviceCode: 产品名称 (Optional)
- * param resourceId: 资源ID (Optional)
+ * param serviceCode: 产品线标识,默认返回该serviceCode下所有group的数据。eg:serviceCode=jdw（jdw产品线下包含jdw-master与jdw-segment两个分组)会返回jdw-master和jdw-segment的数据。 (Optional)
+ * param groupCode: 分组标识、指定该参数时，查询只返回该group的数据。groupCode参数仅在与serviceCode匹配时生效；eg:serviceCode=jdw、groupCode=jdw-master,只返回jdw-master分组的数据，不返回jdw-segment的数据。 (Optional)
+ * param resourceId: 资源ID,根据resourceId查询时必须指定serviceCode才会生效 (Optional)
  * param ruleType: 规则类型, 1表示资源监控，6表示站点监控,7表示可用性监控 (Optional)
  * param status: 规则报警状态, 1：正常, 2：报警，4：数据不足 (Optional)
  * param enabled: 规则状态：1为启用，0为禁用 (Optional)
  * param isAlarming: 是否为正在报警的规则，0为忽略，1为是，与 status 同时只能生效一个,isAlarming 优先生效 (Optional)
- * param alarmId: 规则的id (Optional)
+ * param alarmId: 规则的id，若指定filter的alarmIds过滤时，忽略该参数 (Optional)
  * param filters: 服务码或资源Id列表
-filter name 为serviceCodes表示查询多个产品线的规则
-filter name 为resourceIds表示查询多个资源的规则 (Optional)
+serviceCodes - 产品线servicecode，精确匹配，支持多个
+resourceIds - 资源Id，精确匹配，支持多个（必须指定serviceCode才会在该serviceCode下根据resourceIds过滤，否则该参数不生效）
+alarmIds - 规则id，精确匹配，支持多个
+ruleName - 规则名称，模糊匹配，支持单个 (Optional)
  */
 func NewDescribeAlarmsRequestWithAllParams(
     regionId string,
     pageNumber *int,
     pageSize *int,
     serviceCode *string,
+    groupCode *string,
     resourceId *string,
     ruleType *int,
     status *int,
@@ -121,6 +130,7 @@ func NewDescribeAlarmsRequestWithAllParams(
         PageNumber: pageNumber,
         PageSize: pageSize,
         ServiceCode: serviceCode,
+        GroupCode: groupCode,
         ResourceId: resourceId,
         RuleType: ruleType,
         Status: status,
@@ -159,12 +169,17 @@ func (r *DescribeAlarmsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
-/* param serviceCode: 产品名称(Optional) */
+/* param serviceCode: 产品线标识,默认返回该serviceCode下所有group的数据。eg:serviceCode=jdw（jdw产品线下包含jdw-master与jdw-segment两个分组)会返回jdw-master和jdw-segment的数据。(Optional) */
 func (r *DescribeAlarmsRequest) SetServiceCode(serviceCode string) {
     r.ServiceCode = &serviceCode
 }
 
-/* param resourceId: 资源ID(Optional) */
+/* param groupCode: 分组标识、指定该参数时，查询只返回该group的数据。groupCode参数仅在与serviceCode匹配时生效；eg:serviceCode=jdw、groupCode=jdw-master,只返回jdw-master分组的数据，不返回jdw-segment的数据。(Optional) */
+func (r *DescribeAlarmsRequest) SetGroupCode(groupCode string) {
+    r.GroupCode = &groupCode
+}
+
+/* param resourceId: 资源ID,根据resourceId查询时必须指定serviceCode才会生效(Optional) */
 func (r *DescribeAlarmsRequest) SetResourceId(resourceId string) {
     r.ResourceId = &resourceId
 }
@@ -189,14 +204,16 @@ func (r *DescribeAlarmsRequest) SetIsAlarming(isAlarming int) {
     r.IsAlarming = &isAlarming
 }
 
-/* param alarmId: 规则的id(Optional) */
+/* param alarmId: 规则的id，若指定filter的alarmIds过滤时，忽略该参数(Optional) */
 func (r *DescribeAlarmsRequest) SetAlarmId(alarmId string) {
     r.AlarmId = &alarmId
 }
 
 /* param filters: 服务码或资源Id列表
-filter name 为serviceCodes表示查询多个产品线的规则
-filter name 为resourceIds表示查询多个资源的规则(Optional) */
+serviceCodes - 产品线servicecode，精确匹配，支持多个
+resourceIds - 资源Id，精确匹配，支持多个（必须指定serviceCode才会在该serviceCode下根据resourceIds过滤，否则该参数不生效）
+alarmIds - 规则id，精确匹配，支持多个
+ruleName - 规则名称，模糊匹配，支持单个(Optional) */
 func (r *DescribeAlarmsRequest) SetFilters(filters []monitor.Filter) {
     r.Filters = filters
 }

@@ -19,6 +19,6 @@ package models
 
 type Exec struct {
 
-    /* 执行的命令,总长度256个字符。 s  */
+    /* 执行的命令。 (Optional) */
     Command []string `json:"command"`
 }

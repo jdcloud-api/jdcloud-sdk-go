@@ -33,14 +33,15 @@ type ExecStartRequest struct {
     /* container name  */
     ContainerName string `json:"containerName"`
 
-    /*  (Optional) */
-    ExecId *string `json:"execId"`
+    /*   */
+    ExecId string `json:"execId"`
 }
 
 /*
  * param regionId: Region ID (Required)
  * param podId: Pod ID (Required)
  * param containerName: container name (Required)
+ * param execId:  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -48,6 +49,7 @@ func NewExecStartRequest(
     regionId string,
     podId string,
     containerName string,
+    execId string,
 ) *ExecStartRequest {
 
 	return &ExecStartRequest{
@@ -60,6 +62,7 @@ func NewExecStartRequest(
         RegionId: regionId,
         PodId: podId,
         ContainerName: containerName,
+        ExecId: execId,
 	}
 }
 
@@ -67,13 +70,13 @@ func NewExecStartRequest(
  * param regionId: Region ID (Required)
  * param podId: Pod ID (Required)
  * param containerName: container name (Required)
- * param execId:  (Optional)
+ * param execId:  (Required)
  */
 func NewExecStartRequestWithAllParams(
     regionId string,
     podId string,
     containerName string,
-    execId *string,
+    execId string,
 ) *ExecStartRequest {
 
     return &ExecStartRequest{
@@ -118,9 +121,9 @@ func (r *ExecStartRequest) SetContainerName(containerName string) {
     r.ContainerName = containerName
 }
 
-/* param execId: (Optional) */
+/* param execId: (Required) */
 func (r *ExecStartRequest) SetExecId(execId string) {
-    r.ExecId = &execId
+    r.ExecId = execId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

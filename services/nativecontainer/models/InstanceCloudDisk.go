@@ -31,7 +31,7 @@ type InstanceCloudDisk struct {
     /* 硬盘描述 (Optional) */
     Description string `json:"description"`
 
-    /* 磁盘类型，取值为 ssd, premium-hdd 之一 (Optional) */
+    /* 磁盘类型 (Optional) */
     DiskType string `json:"diskType"`
 
     /* 磁盘大小（GiB） (Optional) */

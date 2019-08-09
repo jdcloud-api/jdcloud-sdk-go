@@ -43,6 +43,9 @@ type UpdateCmAlarmSpec struct {
     /* 统计周期（单位：分钟）目前支持的取值：2，5，15，30，60  */
     Period int64 `json:"period"`
 
+    /* 规则名称，最大长度42个字符，只允许中英文、数字、''-''和"_" (Optional) */
+    RuleName string `json:"ruleName"`
+
     /* 产品名称  */
     ServiceCode string `json:"serviceCode"`
 

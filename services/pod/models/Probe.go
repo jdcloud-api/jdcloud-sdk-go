@@ -19,27 +19,27 @@ package models
 
 type Probe struct {
 
-    /* 容器启动多长时\间后，触发探针。默认10秒；范围:[0-300] (Optional) */
+    /* 容器启动多久后触发探针。 (Optional) */
     InitialDelaySeconds int `json:"initialDelaySeconds"`
 
-    /* 探测的时间间隔。默认值 10秒，范围:[1-300] (Optional) */
+    /* 探测的时间间隔。 (Optional) */
     PeriodSeconds int `json:"periodSeconds"`
 
-    /* 探测的超时时间。默认值 1秒；范围:[1-300] (Optional) */
+    /* 探测的超时时间。 (Optional) */
     TimeoutSeconds int `json:"timeoutSeconds"`
 
-    /* 在成功状态后，连续探活失败的次数，认为探活失败。默认值 3次；范围 1-10 (Optional) */
+    /* 在成功状态后，连续探活失败的次数，认为探活失败。 (Optional) */
     FailureThreshold int `json:"failureThreshold"`
 
-    /* 在失败状态后，连续探活成功的次数，认为探活成功。默认值 1次；范围 1-10 (Optional) */
+    /* 在失败状态后，连续探活成功的次数，认为探活成功。 (Optional) */
     SuccessThreshold int `json:"successThreshold"`
 
     /* 在容器内执行指定命令；如果命令退出时返回码为 0 则认为诊断成功。 (Optional) */
     Exec Exec `json:"exec"`
 
-    /* 对指定的端口和路径上的容器的 IP 地址执行 HTTP Get 请求。如果响应的状态码大于等于200 且小于 400，则诊断被认为是成功的。 (Optional) */
+    /* 对指定的端口和路径上的容器的 IP 地址执行 HTTP Get 请求。如果响应的状态码大于等于 200 且小于 400，则认为诊断成功。 (Optional) */
     HttpGet Hg `json:"httpGet"`
 
-    /* 对指定端口上的容器的 IP 地址进行 TCP 检查；如果端口打开，则诊断被认为是成功的。 (Optional) */
+    /* 对指定端口上的容器的 IP 地址进行 TCP 检查；如果端口打开，则认为诊断成功。 (Optional) */
     TcpSocket TcpSocket `json:"tcpSocket"`
 }

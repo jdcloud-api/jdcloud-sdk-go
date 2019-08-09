@@ -19,12 +19,12 @@ package models
 
 type RuleState struct {
 
-    /*  (Optional) */
+    /* 资源id (Optional) */
     ResourceId string `json:"resourceId"`
 
-    /*  (Optional) */
+    /* 规则个数 (Optional) */
     RuleCount int64 `json:"ruleCount"`
 
-    /*  (Optional) */
+    /* 资源的规则状态。1：正常、 2：报警、4：数据不足 -1:没有规则 -2:未启用 (Optional) */
     State int64 `json:"state"`
 }

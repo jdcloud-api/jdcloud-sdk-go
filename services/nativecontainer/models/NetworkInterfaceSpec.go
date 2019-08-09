@@ -22,7 +22,7 @@ type NetworkInterfaceSpec struct {
     /* 子网ID  */
     SubnetId string `json:"subnetId"`
 
-    /* 可用区，用户的默认可用区  */
+    /* 可用区，用户的默认可用区，暂不支持  */
     Az string `json:"az"`
 
     /* 网卡主IP (Optional) */
@@ -34,10 +34,10 @@ type NetworkInterfaceSpec struct {
     /* 自动分配的SecondaryIp数量 (Optional) */
     SecondaryIpCount *int `json:"secondaryIpCount"`
 
-    /* 安全组ID列表 (Optional) */
+    /* 要绑定的安全组ID列表，最多指定5个安全组 (Optional) */
     SecurityGroups []string `json:"securityGroups"`
 
-    /* PortSecurity，取值为0或者1，默认为1 (Optional) */
+    /* 源和目标IP地址校验，取值为0或者1，默认为1，暂不支持此功能 (Optional) */
     SanityCheck *bool `json:"sanityCheck"`
 
     /* 描述 (Optional) */

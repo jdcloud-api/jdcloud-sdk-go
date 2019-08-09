@@ -27,6 +27,9 @@ type DescribeMetricsRequest struct {
 
     /* 资源的类型，取值vm, lb, ip, database 等  */
     ServiceCode string `json:"serviceCode"`
+
+    /* metric的类型，取值0(控制台展示)、1(内部使用，控制台不展示)、2(所有).默认取0 (Optional) */
+    Type *int `json:"type"`
 }
 
 /*
@@ -51,9 +54,11 @@ func NewDescribeMetricsRequest(
 
 /*
  * param serviceCode: 资源的类型，取值vm, lb, ip, database 等 (Required)
+ * param type_: metric的类型，取值0(控制台展示)、1(内部使用，控制台不展示)、2(所有).默认取0 (Optional)
  */
 func NewDescribeMetricsRequestWithAllParams(
     serviceCode string,
+    type_ *int,
 ) *DescribeMetricsRequest {
 
     return &DescribeMetricsRequest{
@@ -64,6 +69,7 @@ func NewDescribeMetricsRequestWithAllParams(
             Version: "v1",
         },
         ServiceCode: serviceCode,
+        Type: type_,
     }
 }
 
@@ -83,6 +89,11 @@ func NewDescribeMetricsRequestWithoutParam() *DescribeMetricsRequest {
 /* param serviceCode: 资源的类型，取值vm, lb, ip, database 等(Required) */
 func (r *DescribeMetricsRequest) SetServiceCode(serviceCode string) {
     r.ServiceCode = serviceCode
+}
+
+/* param type_: metric的类型，取值0(控制台展示)、1(内部使用，控制台不展示)、2(所有).默认取0(Optional) */
+func (r *DescribeMetricsRequest) SetType(type_ int) {
+    r.Type = &type_
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

@@ -19,19 +19,19 @@ package models
 
 type ContainerStateTerminated struct {
 
-    /* 容器被termination的信号。 (Optional) */
+    /* 容器被终止的信号。 (Optional) */
     Signal int `json:"signal"`
 
-    /* 容器被termination的退出码。 (Optional) */
+    /* 容器被终止的退出码。 (Optional) */
     ExitCode int `json:"exitCode"`
 
-    /* （简要）容器被termination的原因。 (Optional) */
+    /* （简要）容器被终止的原因。 (Optional) */
     Reason string `json:"reason"`
 
-    /* 容器被termination的详细信息。 (Optional) */
+    /* 容器被终止的详细信息。 (Optional) */
     Message string `json:"message"`
 
-    /* 容器被termination的时间。 (Optional) */
+    /* 容器被终止的时间。 (Optional) */
     FinishedAt string `json:"finishedAt"`
 
     /* 容器开始执行的时间。 (Optional) */

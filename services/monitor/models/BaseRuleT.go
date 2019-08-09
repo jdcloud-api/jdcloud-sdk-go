@@ -31,7 +31,7 @@ type BaseRuleT struct {
     /* 降采样函数 (Optional) */
     DownSample string `json:"downSample"`
 
-    /* 监控项 (Optional) */
+    /* 监控项  */
     Metric string `json:"metric"`
 
     /* 监控项ID (Optional) */
@@ -46,7 +46,7 @@ type BaseRuleT struct {
     /* 报警比较符，只能为以下几种lte(<=),lt(<),gt(>),gte(>=),eq(==),ne(!=)  */
     Operation string `json:"operation"`
 
-    /* 查询指标的周期，单位为分钟,目前支持的取值：1, 2，5，15，30，60  */
+    /* 查询指标的周期，单位为分钟,目前支持的取值：1, 2，5，10,15，30，60  */
     Period int64 `json:"period"`
 
     /* 规则类型, 1表示云监控，2表示弹性伸缩，3表示AG，4表示AutoHeal，5表示自定义监控，6表示hawkeye  */

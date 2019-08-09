@@ -27,6 +27,9 @@ type DescribeMetricsForCreateAlarmRequest struct {
 
     /* 资源的类型，取值vm, lb, ip, database 等 (Optional) */
     ServiceCode *string `json:"serviceCode"`
+
+    /* metric类型，取值0、1；默认值：0（常规指标，用于控制台创建报警规则）、1（其它） (Optional) */
+    Type *int `json:"type"`
 }
 
 /*
@@ -48,9 +51,11 @@ func NewDescribeMetricsForCreateAlarmRequest(
 
 /*
  * param serviceCode: 资源的类型，取值vm, lb, ip, database 等 (Optional)
+ * param type_: metric类型，取值0、1；默认值：0（常规指标，用于控制台创建报警规则）、1（其它） (Optional)
  */
 func NewDescribeMetricsForCreateAlarmRequestWithAllParams(
     serviceCode *string,
+    type_ *int,
 ) *DescribeMetricsForCreateAlarmRequest {
 
     return &DescribeMetricsForCreateAlarmRequest{
@@ -61,6 +66,7 @@ func NewDescribeMetricsForCreateAlarmRequestWithAllParams(
             Version: "v1",
         },
         ServiceCode: serviceCode,
+        Type: type_,
     }
 }
 
@@ -80,6 +86,11 @@ func NewDescribeMetricsForCreateAlarmRequestWithoutParam() *DescribeMetricsForCr
 /* param serviceCode: 资源的类型，取值vm, lb, ip, database 等(Optional) */
 func (r *DescribeMetricsForCreateAlarmRequest) SetServiceCode(serviceCode string) {
     r.ServiceCode = &serviceCode
+}
+
+/* param type_: metric类型，取值0、1；默认值：0（常规指标，用于控制台创建报警规则）、1（其它）(Optional) */
+func (r *DescribeMetricsForCreateAlarmRequest) SetType(type_ int) {
+    r.Type = &type_
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

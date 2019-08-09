@@ -16,19 +16,18 @@
 
 package models
 
-import nc "github.com/jdcloud-api/jdcloud-sdk-go/services/nc/models"
 
 type Secret struct {
 
-    /* 机密数据名称 (Optional) */
+    /* 镜像仓库认证信息名称 (Optional) */
     Name string `json:"name"`
 
-    /* 私密数据的类型，目前仅支持如下类型：docker-registry：用来和docker registry认证的类型 (Optional) */
+    /* 镜像仓库认证信息类型 (Optional) */
     Type string `json:"type"`
 
-    /* 创建时间 (Optional) */
+    /* 镜像仓库认证信息创建时间 (Optional) */
     CreatedAt string `json:"createdAt"`
 
-    /* 机密的数据 (Optional) */
-    Data nc.DockerRegistryData `json:"data"`
+    /* 镜像仓库认证信息数据 (Optional) */
+    Data DockerRegistryData `json:"data"`
 }

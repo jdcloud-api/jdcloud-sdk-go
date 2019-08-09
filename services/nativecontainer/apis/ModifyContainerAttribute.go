@@ -33,7 +33,7 @@ type ModifyContainerAttributeRequest struct {
     /* 容器名称 (Optional) */
     Name *string `json:"name"`
 
-    /* 容器描述；和description必须要指定一个 (Optional) */
+    /* 容器描述 (Optional) */
     Description *string `json:"description"`
 }
 
@@ -64,7 +64,7 @@ func NewModifyContainerAttributeRequest(
  * param regionId: Region ID (Required)
  * param containerId: Container ID (Required)
  * param name: 容器名称 (Optional)
- * param description: 容器描述；和description必须要指定一个 (Optional)
+ * param description: 容器描述 (Optional)
  */
 func NewModifyContainerAttributeRequestWithAllParams(
     regionId string,
@@ -115,7 +115,7 @@ func (r *ModifyContainerAttributeRequest) SetName(name string) {
     r.Name = &name
 }
 
-/* param description: 容器描述；和description必须要指定一个(Optional) */
+/* param description: 容器描述(Optional) */
 func (r *ModifyContainerAttributeRequest) SetDescription(description string) {
     r.Description = &description
 }

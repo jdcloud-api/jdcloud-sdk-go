@@ -40,7 +40,7 @@ func NewMonitorClient(credential *core.Credential) *MonitorClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "monitor",
-            Revision:    "1.3.1",
+            Revision:    "1.3.9",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -93,6 +93,26 @@ func (c *MonitorClient) DescribeMetricData(request *monitor.DescribeMetricDataRe
     return jdResp, err
 }
 
+/* 概览页产品线信息接口 */
+func (c *MonitorClient) DescribeServices(request *monitor.DescribeServicesRequest) (*monitor.DescribeServicesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &monitor.DescribeServicesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询规则的报警联系人 */
 func (c *MonitorClient) DescribeAlarmContacts(request *monitor.DescribeAlarmContactsRequest) (*monitor.DescribeAlarmContactsResponse, error) {
     if request == nil {
@@ -115,12 +135,17 @@ func (c *MonitorClient) DescribeAlarmContacts(request *monitor.DescribeAlarmCont
 
 /* 查询报警历史
 检索条件组合优先级从高到低为
-1. alarmId
-2. serviceCode
-2.1 serviceCode + resourceId
-2.2 serviceCode + resourceIds
-3. serviceCodes
-4. 用户所有规则 */
+1：alarmIds不为空
+2：alarmId不为空
+3：serviceCode不为空
+3.1：serviceCode + resourceId
+3.2: serviceCode + resourceIds
+3.3: serviceCode + ruleName
+4：serviceCodes不为空
+4.1：serviceCode + resourceId
+4.2: serviceCode + resourceIds
+4.3: serviceCode + ruleName
+5: 所有规则 */
 func (c *MonitorClient) DescribeAlarmHistory(request *monitor.DescribeAlarmHistoryRequest) (*monitor.DescribeAlarmHistoryResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -180,7 +205,7 @@ func (c *MonitorClient) DescribeMetricsForCreateAlarm(request *monitor.DescribeM
     return jdResp, err
 }
 
-/* 批量删除规则 */
+/* 删除规则 */
 func (c *MonitorClient) DeleteAlarms(request *monitor.DeleteAlarmsRequest) (*monitor.DeleteAlarmsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -262,12 +287,17 @@ func (c *MonitorClient) UpdateAlarm(request *monitor.UpdateAlarmRequest) (*monit
 
 /* 查询报警历史
 检索条件组合优先级从高到低为
-1. alarmId
-2. serviceCode
-2.1 serviceCode + resourceId
-2.2 serviceCode + resourceIds
-3. serviceCodes
-4. 用户所有规则 */
+1：alarmIds不为空
+2：alarmId不为空
+3：serviceCode不为空
+3.1：serviceCode + resourceId
+3.2: serviceCode + resourceIds
+3.3: serviceCode + ruleName
+4：serviceCodes不为空
+4.1：serviceCode + resourceId
+4.2: serviceCode + resourceIds
+4.3: serviceCode + ruleName
+5: 所有规则 */
 func (c *MonitorClient) DescribeAlarmHistoryAllRegion(request *monitor.DescribeAlarmHistoryAllRegionRequest) (*monitor.DescribeAlarmHistoryAllRegionResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -348,12 +378,17 @@ func (c *MonitorClient) EnableAlarm(request *monitor.EnableAlarmRequest) (*monit
 }
 
 /* 查询规则, 查询参数组合及优先级从高到低为：
-1：alarmId不为空
-2：serviceCode不为空
-2.1：serviceCode + resourceId
-2.2: serviceCode + resourceIds
-3：serviceCodes不为空
-4: 所有规则 */
+1：alarmIds不为空
+2：alarmId不为空
+3：serviceCode不为空
+3.1：serviceCode + resourceId
+3.2: serviceCode + resourceIds
+3.3: serviceCode + ruleName
+4：serviceCodes不为空
+4.1：serviceCode + resourceId
+4.2: serviceCode + resourceIds
+4.3: serviceCode + ruleName
+5: 所有规则 */
 func (c *MonitorClient) DescribeAlarms(request *monitor.DescribeAlarmsRequest) (*monitor.DescribeAlarmsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")

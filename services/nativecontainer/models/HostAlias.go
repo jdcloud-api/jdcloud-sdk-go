@@ -19,9 +19,9 @@ package models
 
 type HostAlias struct {
 
-    /* 域名列表  */
+    /* 域名列表 (Optional) */
     Hostnames []string `json:"hostnames"`
 
-    /* IP地址  */
+    /* IP地址 (Optional) */
     Ip string `json:"ip"`
 }

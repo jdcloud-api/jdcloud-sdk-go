@@ -28,10 +28,10 @@ type PodStatus struct {
     /* pod处于当前状态原因的详细信息 (Optional) */
     Message string `json:"message"`
 
-    /* IP address allocated to the pod. Routable at least within the cluster. Empty if not yet allocated. (Optional) */
+    /* 分配给pod的IP地址。至少在集群内是可路由的。未分配则为空。 (Optional) */
     PodIP string `json:"podIP"`
 
-    /* Current service state of pod. (Optional) */
+    /* 目前pod的状态。 (Optional) */
     Conditions []PodCondition `json:"conditions"`
 
     /* Pod生命周期开始的时间。 (Optional) */

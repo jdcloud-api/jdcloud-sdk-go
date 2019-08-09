@@ -21,7 +21,7 @@ import (
     pod "github.com/jdcloud-api/jdcloud-sdk-go/services/pod/models"
 )
 
-type DecribeContainerRequest struct {
+type DescribeContainerRequest struct {
 
     core.JDCloudRequest
 
@@ -42,13 +42,13 @@ type DecribeContainerRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDecribeContainerRequest(
+func NewDescribeContainerRequest(
     regionId string,
     podId string,
     containerName string,
-) *DecribeContainerRequest {
+) *DescribeContainerRequest {
 
-	return &DecribeContainerRequest{
+	return &DescribeContainerRequest{
         JDCloudRequest: core.JDCloudRequest{
 			URL:     "/regions/{regionId}/pods/{podId}/containers/{containerName}",
 			Method:  "GET",
@@ -66,13 +66,13 @@ func NewDecribeContainerRequest(
  * param podId: Pod ID (Required)
  * param containerName: container name (Required)
  */
-func NewDecribeContainerRequestWithAllParams(
+func NewDescribeContainerRequestWithAllParams(
     regionId string,
     podId string,
     containerName string,
-) *DecribeContainerRequest {
+) *DescribeContainerRequest {
 
-    return &DecribeContainerRequest{
+    return &DescribeContainerRequest{
         JDCloudRequest: core.JDCloudRequest{
             URL:     "/regions/{regionId}/pods/{podId}/containers/{containerName}",
             Method:  "GET",
@@ -86,9 +86,9 @@ func NewDecribeContainerRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDecribeContainerRequestWithoutParam() *DecribeContainerRequest {
+func NewDescribeContainerRequestWithoutParam() *DescribeContainerRequest {
 
-    return &DecribeContainerRequest{
+    return &DescribeContainerRequest{
             JDCloudRequest: core.JDCloudRequest{
             URL:     "/regions/{regionId}/pods/{podId}/containers/{containerName}",
             Method:  "GET",
@@ -99,32 +99,32 @@ func NewDecribeContainerRequestWithoutParam() *DecribeContainerRequest {
 }
 
 /* param regionId: Region ID(Required) */
-func (r *DecribeContainerRequest) SetRegionId(regionId string) {
+func (r *DescribeContainerRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param podId: Pod ID(Required) */
-func (r *DecribeContainerRequest) SetPodId(podId string) {
+func (r *DescribeContainerRequest) SetPodId(podId string) {
     r.PodId = podId
 }
 
 /* param containerName: container name(Required) */
-func (r *DecribeContainerRequest) SetContainerName(containerName string) {
+func (r *DescribeContainerRequest) SetContainerName(containerName string) {
     r.ContainerName = containerName
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DecribeContainerRequest) GetRegionId() string {
+func (r DescribeContainerRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DecribeContainerResponse struct {
+type DescribeContainerResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DecribeContainerResult `json:"result"`
+    Result DescribeContainerResult `json:"result"`
 }
 
-type DecribeContainerResult struct {
+type DescribeContainerResult struct {
     Container pod.Container `json:"container"`
 }

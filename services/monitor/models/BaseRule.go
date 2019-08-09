@@ -43,8 +43,11 @@ type BaseRule struct {
     /* 报警比较符，只能为以下几种lte(<=),lt(<),gt(>),gte(>=),eq(==),ne(!=)  */
     Operation string `json:"operation"`
 
-    /* 查询指标的周期，单位为分钟,目前支持的取值：1,2，5，15，30，60  */
+    /* 查询指标的周期，单位为分钟,目前支持的取值：1,2，5，10,15，30，60  */
     Period int64 `json:"period"`
+
+    /* 规则名称，规则名称，最大长度42个字符，只允许中英文、数字、''-''和"_" (Optional) */
+    RuleName *string `json:"ruleName"`
 
     /* 规则类型, 1云监控的规则， 6站点监控。默认为1 (Optional) */
     RuleType *int64 `json:"ruleType"`

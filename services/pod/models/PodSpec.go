@@ -42,25 +42,25 @@ type PodSpec struct {
     Az string `json:"az"`
 
     /* pod内容器的/etc/resolv.conf配置 (Optional) */
-    DnsConfig *DnsConfig `json:"dnsConfig"`
+    DnsConfig *DnsConfigSpec `json:"dnsConfig"`
 
     /* 容器日志配置信息；默认会在本地分配10MB的存储空间 (Optional) */
-    LogConfig *LogConfig `json:"logConfig"`
+    LogConfig *LogConfigSpec `json:"logConfig"`
 
     /* 域名和IP映射的信息；</br> 最大10个alias (Optional) */
-    HostAliases []HostAlias `json:"hostAliases"`
+    HostAliases []HostAliasSpec `json:"hostAliases"`
 
-    /* 域名和IP映射的信息；</br> 最大10个alias (Optional) */
-    Volumes []Volume `json:"volumes"`
+    /* Pod的volume列表，可以挂载到container上。长度范围：[0,7] (Optional) */
+    Volumes []VolumeSpec `json:"volumes"`
 
-    /* 域名和IP映射的信息；</br> 最大10个alias  */
+    /* Pod的容器列表，至少一个容器。长度范围[1,8]  */
     Containers []ContainerSpec `json:"containers"`
 
-    /* 预付费（prepaid_by_duration）, 按配置后付费（postpaid_by_duration）。默认：按配置后付费 (Optional) */
+    /* 计费模式：包年包月预付费（prepaid_by_duration）, 按配置后付费（postpaid_by_duration）。默认：按配置后付费 (Optional) */
     Charge *charge.ChargeSpec `json:"charge"`
 
     /* 主网卡主IP关联的弹性IP规格 (Optional) */
-    ElasticIp *ElasticIp `json:"elasticIp"`
+    ElasticIp *ElasticIpSpec `json:"elasticIp"`
 
     /* 主网卡配置信息  */
     PrimaryNetworkInterface *NetworkInterfaceAttachmentSpec `json:"primaryNetworkInterface"`

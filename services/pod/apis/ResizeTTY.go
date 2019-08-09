@@ -33,13 +33,13 @@ type ResizeTTYRequest struct {
     /* container name  */
     ContainerName string `json:"containerName"`
 
-    /* tty row，取值范围：[10, 2000] (Optional) */
-    Height *int `json:"height"`
+    /* tty row，取值范围：[10, 2000]  */
+    Height int `json:"height"`
 
-    /* tty column，取值范围：[10, 1000] (Optional) */
-    Width *int `json:"width"`
+    /* tty column，取值范围：[10, 1000]  */
+    Width int `json:"width"`
 
-    /* tty column，取值范围：[10, 1000] (Optional) */
+    /* exec ID (Optional) */
     ExecId *string `json:"execId"`
 }
 
@@ -47,6 +47,8 @@ type ResizeTTYRequest struct {
  * param regionId: Region ID (Required)
  * param podId: Pod ID (Required)
  * param containerName: container name (Required)
+ * param height: tty row，取值范围：[10, 2000] (Required)
+ * param width: tty column，取值范围：[10, 1000] (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -54,6 +56,8 @@ func NewResizeTTYRequest(
     regionId string,
     podId string,
     containerName string,
+    height int,
+    width int,
 ) *ResizeTTYRequest {
 
 	return &ResizeTTYRequest{
@@ -66,6 +70,8 @@ func NewResizeTTYRequest(
         RegionId: regionId,
         PodId: podId,
         ContainerName: containerName,
+        Height: height,
+        Width: width,
 	}
 }
 
@@ -73,16 +79,16 @@ func NewResizeTTYRequest(
  * param regionId: Region ID (Required)
  * param podId: Pod ID (Required)
  * param containerName: container name (Required)
- * param height: tty row，取值范围：[10, 2000] (Optional)
- * param width: tty column，取值范围：[10, 1000] (Optional)
- * param execId: tty column，取值范围：[10, 1000] (Optional)
+ * param height: tty row，取值范围：[10, 2000] (Required)
+ * param width: tty column，取值范围：[10, 1000] (Required)
+ * param execId: exec ID (Optional)
  */
 func NewResizeTTYRequestWithAllParams(
     regionId string,
     podId string,
     containerName string,
-    height *int,
-    width *int,
+    height int,
+    width int,
     execId *string,
 ) *ResizeTTYRequest {
 
@@ -130,17 +136,17 @@ func (r *ResizeTTYRequest) SetContainerName(containerName string) {
     r.ContainerName = containerName
 }
 
-/* param height: tty row，取值范围：[10, 2000](Optional) */
+/* param height: tty row，取值范围：[10, 2000](Required) */
 func (r *ResizeTTYRequest) SetHeight(height int) {
-    r.Height = &height
+    r.Height = height
 }
 
-/* param width: tty column，取值范围：[10, 1000](Optional) */
+/* param width: tty column，取值范围：[10, 1000](Required) */
 func (r *ResizeTTYRequest) SetWidth(width int) {
-    r.Width = &width
+    r.Width = width
 }
 
-/* param execId: tty column，取值范围：[10, 1000](Optional) */
+/* param execId: exec ID(Optional) */
 func (r *ResizeTTYRequest) SetExecId(execId string) {
     r.ExecId = &execId
 }

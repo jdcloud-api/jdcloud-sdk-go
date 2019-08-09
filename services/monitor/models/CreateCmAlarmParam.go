@@ -49,6 +49,9 @@ type CreateCmAlarmParam struct {
     /* 查询指标的周期，单位为分钟,目前支持的取值：2，5，15，30，60  */
     Period int64 `json:"period"`
 
+    /* 规则名称，最大长度42个字符，只允许中英文、数字、''-''和"_" (Optional) */
+    RuleName string `json:"ruleName"`
+
     /* 报警阈值，目前只开放数值类型功能  */
     Threshold float64 `json:"threshold"`
 

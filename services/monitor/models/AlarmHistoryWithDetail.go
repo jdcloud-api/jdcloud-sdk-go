@@ -22,6 +22,12 @@ type AlarmHistoryWithDetail struct {
     /* 告警联系人 (Optional) */
     Contacts []DescribedNoticeContacts `json:"contacts"`
 
+    /* 告警持续次数 (Optional) */
+    DurationTimes int64 `json:"durationTimes"`
+
+    /* 告警持续时间，单位分钟 (Optional) */
+    NoticeDurationTime int64 `json:"noticeDurationTime"`
+
     /* 用于前端显示的‘触发告警级别’。从低到高分别为‘普通’, ‘紧急’, ‘严重’ (Optional) */
     NoticeLevel string `json:"noticeLevel"`
 

@@ -19,6 +19,9 @@ package models
 
 type ServiceInfo struct {
 
+    /*  (Optional) */
+    GroupTree GroupTree `json:"groupTree"`
+
     /* 产品线下的分组信息 (Optional) */
     MetricGroup []GroupInfo `json:"metricGroup"`
 

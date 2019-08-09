@@ -25,6 +25,6 @@ type Vender struct {
     /* 云鼎数据库实例ID  */
     YdRdsInstanceId string `json:"ydRdsInstanceId"`
 
-    /* 商家PIN  */
-    VenderPin string `json:"venderPin"`
+    /* 商家ID  */
+    VenderId string `json:"venderId"`
 }

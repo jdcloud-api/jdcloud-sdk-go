@@ -22,9 +22,6 @@ type CreateProbeTaskParam struct {
     /* 探测地址，探测类型为http：内容为url（校验http或https头）；探测类型为telnet：内容为ip或域名（只允许中英文 、数字、中划线（-）、小数点（.）、开头及结尾均不能含有“-”）  */
     Address string `json:"address"`
 
-    /* 探测间隔（单位：秒）：默认值：300，取值范围[60,1200] (Optional) */
-    Frequency int64 `json:"frequency"`
-
     /* http body：选择探测类型为1=http时有效，最长不超过1024字节
 in: query (Optional) */
     HttpBody string `json:"httpBody"`
@@ -60,7 +57,4 @@ in: query (Optional) */
 
     /* task类型：1=url/ip、2=RDS、3=redis  */
     TaskType int64 `json:"taskType"`
-
-    /* 探测超时时间（单位：秒）：默认值:5，取值范围 [1,300] (Optional) */
-    Timeout int64 `json:"timeout"`
 }

@@ -79,6 +79,9 @@ type CmAlarm struct {
     /* rule id (Optional) */
     RuleId int64 `json:"ruleId"`
 
+    /* 规则名称 (Optional) */
+    RuleName string `json:"ruleName"`
+
     /* 报警规则对应的产品 (Optional) */
     ServiceCode string `json:"serviceCode"`
 

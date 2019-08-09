@@ -30,21 +30,21 @@ type DeleteDatapushVenderRequest struct {
     /* 云鼎数据库实例ID  */
     YdRdsInstanceId string `json:"ydRdsInstanceId"`
 
-    /* 商家PIN  */
-    VenderPin string `json:"venderPin"`
+    /* 商家ID  */
+    VenderId string `json:"venderId"`
 }
 
 /*
  * param appkey: appkey (Required)
  * param ydRdsInstanceId: 云鼎数据库实例ID (Required)
- * param venderPin: 商家PIN (Required)
+ * param venderId: 商家ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDeleteDatapushVenderRequest(
     appkey string,
     ydRdsInstanceId string,
-    venderPin string,
+    venderId string,
 ) *DeleteDatapushVenderRequest {
 
 	return &DeleteDatapushVenderRequest{
@@ -56,19 +56,19 @@ func NewDeleteDatapushVenderRequest(
 		},
         Appkey: appkey,
         YdRdsInstanceId: ydRdsInstanceId,
-        VenderPin: venderPin,
+        VenderId: venderId,
 	}
 }
 
 /*
  * param appkey: appkey (Required)
  * param ydRdsInstanceId: 云鼎数据库实例ID (Required)
- * param venderPin: 商家PIN (Required)
+ * param venderId: 商家ID (Required)
  */
 func NewDeleteDatapushVenderRequestWithAllParams(
     appkey string,
     ydRdsInstanceId string,
-    venderPin string,
+    venderId string,
 ) *DeleteDatapushVenderRequest {
 
     return &DeleteDatapushVenderRequest{
@@ -80,7 +80,7 @@ func NewDeleteDatapushVenderRequestWithAllParams(
         },
         Appkey: appkey,
         YdRdsInstanceId: ydRdsInstanceId,
-        VenderPin: venderPin,
+        VenderId: venderId,
     }
 }
 
@@ -107,9 +107,9 @@ func (r *DeleteDatapushVenderRequest) SetYdRdsInstanceId(ydRdsInstanceId string)
     r.YdRdsInstanceId = ydRdsInstanceId
 }
 
-/* param venderPin: 商家PIN(Required) */
-func (r *DeleteDatapushVenderRequest) SetVenderPin(venderPin string) {
-    r.VenderPin = venderPin
+/* param venderId: 商家ID(Required) */
+func (r *DeleteDatapushVenderRequest) SetVenderId(venderId string) {
+    r.VenderId = venderId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

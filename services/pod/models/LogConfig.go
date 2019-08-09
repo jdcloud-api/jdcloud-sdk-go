@@ -19,6 +19,6 @@ package models
 
 type LogConfig struct {
 
-    /* 日志Driver名称，目前只支持默认为每一个容器在本地分配10MB的存储空间，自动rotate。默认值：default。 (Optional) */
-    LogDriver *string `json:"logDriver"`
+    /* 日志Driver名称。 (Optional) */
+    LogDriver string `json:"logDriver"`
 }

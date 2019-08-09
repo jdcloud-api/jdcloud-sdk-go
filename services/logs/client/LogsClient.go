@@ -40,7 +40,7 @@ func NewLogsClient(credential *core.Credential) *LogsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "logs",
-            Revision:    "1.2.0",
+            Revision:    "1.2.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,6 +51,26 @@ func (c *LogsClient) SetConfig(config *core.Config) {
 
 func (c *LogsClient) SetLogger(logger core.Logger) {
     c.Logger = logger
+}
+
+/* 查询日志主题基本信息。如配置了采集配置，将返回采集配置的UID */
+func (c *LogsClient) DescribeLogtopic(request *logs.DescribeLogtopicRequest) (*logs.DescribeLogtopicResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &logs.DescribeLogtopicResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
 }
 
 /* 返回特定有效期的证书 */
@@ -64,6 +84,146 @@ func (c *LogsClient) DescribeLogdCA(request *logs.DescribeLogdCARequest) (*logs.
     }
 
     jdResp := &logs.DescribeLogdCAResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询日志集详情。 */
+func (c *LogsClient) DescribeLogset(request *logs.DescribeLogsetRequest) (*logs.DescribeLogsetResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &logs.DescribeLogsetResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询当前实例的采集配置列表：此接口会生成agent心跳监控数据，用以表征agent的可用性。请求中若添加了X-Jdcloud-Logs-md5的header，将按照md5的方式处理返回值。 */
+func (c *LogsClient) DescribeInstanceCollectConfs(request *logs.DescribeInstanceCollectConfsRequest) (*logs.DescribeInstanceCollectConfsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &logs.DescribeInstanceCollectConfsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除日志主题。其采集配置与采集实例配置将一并删除。 */
+func (c *LogsClient) DeleteLogtopic(request *logs.DeleteLogtopicRequest) (*logs.DeleteLogtopicResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &logs.DeleteLogtopicResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询采集配置的实例列表 */
+func (c *LogsClient) DescribeCollectResources(request *logs.DescribeCollectResourcesRequest) (*logs.DescribeCollectResourcesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &logs.DescribeCollectResourcesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新日志主题。日志主题名称不可更新。 */
+func (c *LogsClient) UpdateLogtopic(request *logs.UpdateLogtopicRequest) (*logs.UpdateLogtopicResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &logs.UpdateLogtopicResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询日志集列表。支持按照名称进行模糊查询。结果中包含了该日志集是否存在日志主题的信息。存在日志主题的日志集不允许删除。 */
+func (c *LogsClient) DescribeLogsets(request *logs.DescribeLogsetsRequest) (*logs.DescribeLogsetsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &logs.DescribeLogsetsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新采集配置。若传入的实例列表不为空，将覆盖之前的所有实例，而非新增。 */
+func (c *LogsClient) UpdateCollectInfo(request *logs.UpdateCollectInfoRequest) (*logs.UpdateCollectInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &logs.UpdateCollectInfoResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -93,8 +253,8 @@ func (c *LogsClient) Put(request *logs.PutRequest) (*logs.PutResponse, error) {
     return jdResp, err
 }
 
-/* 查询当前实例的采集配置列表：此接口会生成agent心跳监控数据，用以表征agent的可用性。请求中若添加了X-Jdcloud-Logs-md5的header，将按照md5的方式处理返回值。 */
-func (c *LogsClient) DescribeInstanceCollectConfs(request *logs.DescribeInstanceCollectConfsRequest) (*logs.DescribeInstanceCollectConfsResponse, error) {
+/* 采集配置的基本信息。 */
+func (c *LogsClient) DescribeCollectInfo(request *logs.DescribeCollectInfoRequest) (*logs.DescribeCollectInfoResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -103,7 +263,147 @@ func (c *LogsClient) DescribeInstanceCollectConfs(request *logs.DescribeInstance
         return nil, err
     }
 
-    jdResp := &logs.DescribeInstanceCollectConfsResponse{}
+    jdResp := &logs.DescribeCollectInfoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建日志集。名称不可重复。 */
+func (c *LogsClient) CreateLogset(request *logs.CreateLogsetRequest) (*logs.CreateLogsetResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &logs.CreateLogsetResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新日志集。日志集名称不可更新。 */
+func (c *LogsClient) UpdateLogset(request *logs.UpdateLogsetRequest) (*logs.UpdateLogsetResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &logs.UpdateLogsetResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询日志主题列表，支持按照名称模糊查询。 */
+func (c *LogsClient) DescribeLogtopics(request *logs.DescribeLogtopicsRequest) (*logs.DescribeLogtopicsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &logs.DescribeLogtopicsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建采集配置，支持基于云产品模板生成采集模板；支持用于自定义采集配置。 */
+func (c *LogsClient) CreateCollectInfo(request *logs.CreateCollectInfoRequest) (*logs.CreateCollectInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &logs.CreateCollectInfoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除日志集,删除多个日志集时，任意的日志集包含了日志主题的，将导致全部删除失败。 */
+func (c *LogsClient) DeleteLogset(request *logs.DeleteLogsetRequest) (*logs.DeleteLogsetResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &logs.DeleteLogsetResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 增量更新采集实例列表。更新的动作支持 add 、 remove */
+func (c *LogsClient) UpdateCollectResources(request *logs.UpdateCollectResourcesRequest) (*logs.UpdateCollectResourcesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &logs.UpdateCollectResourcesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建日志主题，不可与当前日志集下现有日志主题重名。 */
+func (c *LogsClient) CreateLogtopic(request *logs.CreateLogtopicRequest) (*logs.CreateLogtopicResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &logs.CreateLogtopicResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
