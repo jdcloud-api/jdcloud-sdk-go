@@ -20,7 +20,7 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type CreateAuditRequest struct {
+type AlterTableWithOnlineDDLRequest struct {
 
     core.JDCloudRequest
 
@@ -30,66 +30,84 @@ type CreateAuditRequest struct {
     /* RDS 实例ID，唯一标识一个RDS实例  */
     InstanceId string `json:"instanceId"`
 
-    /* 要开启的审计选项，各个选项之间用英文逗号或空格进行分割，例如：DATABASE_OBJECT_ACCESS_GROUP,ACKUP_RESTORE_GROU等<br>各个数据库版本支持的审计选项可以通过接口[describeAuditOptions](./describeAuditOptions.md)获得，各个审计项的具体含义可以参看微软的官方文档  */
-    Enabled string `json:"enabled"`
+    /* DDL命令修改的库名  */
+    Database string `json:"database"`
+
+    /* DDL命令修改的表名  */
+    Table string `json:"table"`
+
+    /* 需要执行的的DDL命令  */
+    Command string `json:"command"`
 }
 
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
- * param enabled: 要开启的审计选项，各个选项之间用英文逗号或空格进行分割，例如：DATABASE_OBJECT_ACCESS_GROUP,ACKUP_RESTORE_GROU等<br>各个数据库版本支持的审计选项可以通过接口[describeAuditOptions](./describeAuditOptions.md)获得，各个审计项的具体含义可以参看微软的官方文档 (Required)
+ * param database: DDL命令修改的库名 (Required)
+ * param table: DDL命令修改的表名 (Required)
+ * param command: 需要执行的的DDL命令 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewCreateAuditRequest(
+func NewAlterTableWithOnlineDDLRequest(
     regionId string,
     instanceId string,
-    enabled string,
-) *CreateAuditRequest {
+    database string,
+    table string,
+    command string,
+) *AlterTableWithOnlineDDLRequest {
 
-	return &CreateAuditRequest{
+	return &AlterTableWithOnlineDDLRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/audit",
+			URL:     "/regions/{regionId}/instances/{instanceId}:alterTableWithOnlineDDL",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         InstanceId: instanceId,
-        Enabled: enabled,
+        Database: database,
+        Table: table,
+        Command: command,
 	}
 }
 
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
- * param enabled: 要开启的审计选项，各个选项之间用英文逗号或空格进行分割，例如：DATABASE_OBJECT_ACCESS_GROUP,ACKUP_RESTORE_GROU等<br>各个数据库版本支持的审计选项可以通过接口[describeAuditOptions](./describeAuditOptions.md)获得，各个审计项的具体含义可以参看微软的官方文档 (Required)
+ * param database: DDL命令修改的库名 (Required)
+ * param table: DDL命令修改的表名 (Required)
+ * param command: 需要执行的的DDL命令 (Required)
  */
-func NewCreateAuditRequestWithAllParams(
+func NewAlterTableWithOnlineDDLRequestWithAllParams(
     regionId string,
     instanceId string,
-    enabled string,
-) *CreateAuditRequest {
+    database string,
+    table string,
+    command string,
+) *AlterTableWithOnlineDDLRequest {
 
-    return &CreateAuditRequest{
+    return &AlterTableWithOnlineDDLRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/audit",
+            URL:     "/regions/{regionId}/instances/{instanceId}:alterTableWithOnlineDDL",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         InstanceId: instanceId,
-        Enabled: enabled,
+        Database: database,
+        Table: table,
+        Command: command,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewCreateAuditRequestWithoutParam() *CreateAuditRequest {
+func NewAlterTableWithOnlineDDLRequestWithoutParam() *AlterTableWithOnlineDDLRequest {
 
-    return &CreateAuditRequest{
+    return &AlterTableWithOnlineDDLRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/audit",
+            URL:     "/regions/{regionId}/instances/{instanceId}:alterTableWithOnlineDDL",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -98,31 +116,41 @@ func NewCreateAuditRequestWithoutParam() *CreateAuditRequest {
 }
 
 /* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
-func (r *CreateAuditRequest) SetRegionId(regionId string) {
+func (r *AlterTableWithOnlineDDLRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
-func (r *CreateAuditRequest) SetInstanceId(instanceId string) {
+func (r *AlterTableWithOnlineDDLRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param enabled: 要开启的审计选项，各个选项之间用英文逗号或空格进行分割，例如：DATABASE_OBJECT_ACCESS_GROUP,ACKUP_RESTORE_GROU等<br>各个数据库版本支持的审计选项可以通过接口[describeAuditOptions](./describeAuditOptions.md)获得，各个审计项的具体含义可以参看微软的官方文档(Required) */
-func (r *CreateAuditRequest) SetEnabled(enabled string) {
-    r.Enabled = enabled
+/* param database: DDL命令修改的库名(Required) */
+func (r *AlterTableWithOnlineDDLRequest) SetDatabase(database string) {
+    r.Database = database
+}
+
+/* param table: DDL命令修改的表名(Required) */
+func (r *AlterTableWithOnlineDDLRequest) SetTable(table string) {
+    r.Table = table
+}
+
+/* param command: 需要执行的的DDL命令(Required) */
+func (r *AlterTableWithOnlineDDLRequest) SetCommand(command string) {
+    r.Command = command
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r CreateAuditRequest) GetRegionId() string {
+func (r AlterTableWithOnlineDDLRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type CreateAuditResponse struct {
+type AlterTableWithOnlineDDLResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result CreateAuditResult `json:"result"`
+    Result AlterTableWithOnlineDDLResult `json:"result"`
 }
 
-type CreateAuditResult struct {
+type AlterTableWithOnlineDDLResult struct {
 }

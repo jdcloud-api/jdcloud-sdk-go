@@ -65,13 +65,13 @@ type DBInstanceAttribute struct {
     /* 子网的ID (Optional) */
     SubnetId string `json:"subnetId"`
 
-    /* 参数组的ID (Optional) */
+    /* 参数组的ID<br>- 仅支持MySQL (Optional) */
     ParameterGroupId string `json:"parameterGroupId"`
 
-    /* 参数组的名称 (Optional) */
+    /* 参数组的名称<br>- 仅支持MySQL (Optional) */
     ParameterGroupName string `json:"parameterGroupName"`
 
-    /* 参数的状态，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Optional) */
+    /* 参数的状态，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md)<br>- 仅支持MySQL (Optional) */
     ParameterStatus string `json:"parameterStatus"`
 
     /* 实例内网域名 (Optional) */
@@ -83,10 +83,10 @@ type DBInstanceAttribute struct {
     /* 应用访问端口 (Optional) */
     InstancePort string `json:"instancePort"`
 
-    /* 访问模式，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Optional) */
+    /* 访问模式，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md)<br>- 仅支持MySQL (Optional) */
     ConnectionMode string `json:"connectionMode"`
 
-    /* 审计状态，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Optional) */
+    /* 审计状态，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md)<br>- 仅支持MySQL (Optional) */
     AuditStatus string `json:"auditStatus"`
 
     /* 实例状态，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Optional) */
@@ -98,10 +98,10 @@ type DBInstanceAttribute struct {
     /* 计费配置 (Optional) */
     Charge charge.Charge `json:"charge"`
 
-    /* MySQL只读实例对应的主实例ID (Optional) */
+    /* MySQL只读实例对应的主实例ID<br>- 仅支持MySQL (Optional) */
     SourceInstanceId string `json:"sourceInstanceId"`
 
-    /* 只读实例ID列表 (Optional) */
+    /* 只读实例ID列表<br>- 仅支持MySQL (Optional) */
     RoInstanceIds []string `json:"roInstanceIds"`
 
     /* 高可用集群中主节点的信息<br>- 仅支持SQL Server (Optional) */

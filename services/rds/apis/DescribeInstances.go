@@ -43,6 +43,7 @@ engine, 支持operator选项：eq
 engineVersion, 支持operator选项：eq
 instanceStatus, 支持operator选项：eq
 chargeMode, 支持operator选项：eq
+vpcId, 支持operator选项：eq
  (Optional) */
     Filters []common.Filter `json:"filters"`
 
@@ -82,6 +83,7 @@ engine, 支持operator选项：eq
 engineVersion, 支持operator选项：eq
 instanceStatus, 支持operator选项：eq
 chargeMode, 支持operator选项：eq
+vpcId, 支持operator选项：eq
  (Optional)
  * param tagFilters: 资源标签 (Optional)
  */
@@ -144,6 +146,7 @@ engine, 支持operator选项：eq
 engineVersion, 支持operator选项：eq
 instanceStatus, 支持operator选项：eq
 chargeMode, 支持operator选项：eq
+vpcId, 支持operator选项：eq
 (Optional) */
 func (r *DescribeInstancesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters

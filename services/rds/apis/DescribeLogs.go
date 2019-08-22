@@ -18,9 +18,10 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    rds "github.com/jdcloud-api/jdcloud-sdk-go/services/rds/models"
 )
 
-type CreateAuditRequest struct {
+type DescribeLogsRequest struct {
 
     core.JDCloudRequest
 
@@ -30,67 +31,70 @@ type CreateAuditRequest struct {
     /* RDS 实例ID，唯一标识一个RDS实例  */
     InstanceId string `json:"instanceId"`
 
-    /* 要开启的审计选项，各个选项之间用英文逗号或空格进行分割，例如：DATABASE_OBJECT_ACCESS_GROUP,ACKUP_RESTORE_GROU等<br>各个数据库版本支持的审计选项可以通过接口[describeAuditOptions](./describeAuditOptions.md)获得，各个审计项的具体含义可以参看微软的官方文档  */
-    Enabled string `json:"enabled"`
+    /* 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页; (Optional) */
+    PageNumber *int `json:"pageNumber"`
+
+    /* 每页显示的数据条数，默认为100，取值范围：[10,100]，用于查询列表的接口 (Optional) */
+    PageSize *int `json:"pageSize"`
 }
 
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
- * param enabled: 要开启的审计选项，各个选项之间用英文逗号或空格进行分割，例如：DATABASE_OBJECT_ACCESS_GROUP,ACKUP_RESTORE_GROU等<br>各个数据库版本支持的审计选项可以通过接口[describeAuditOptions](./describeAuditOptions.md)获得，各个审计项的具体含义可以参看微软的官方文档 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewCreateAuditRequest(
+func NewDescribeLogsRequest(
     regionId string,
     instanceId string,
-    enabled string,
-) *CreateAuditRequest {
+) *DescribeLogsRequest {
 
-	return &CreateAuditRequest{
+	return &DescribeLogsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/audit",
-			Method:  "POST",
+			URL:     "/regions/{regionId}/instances/{instanceId}/log:describeLogs",
+			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         InstanceId: instanceId,
-        Enabled: enabled,
 	}
 }
 
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
- * param enabled: 要开启的审计选项，各个选项之间用英文逗号或空格进行分割，例如：DATABASE_OBJECT_ACCESS_GROUP,ACKUP_RESTORE_GROU等<br>各个数据库版本支持的审计选项可以通过接口[describeAuditOptions](./describeAuditOptions.md)获得，各个审计项的具体含义可以参看微软的官方文档 (Required)
+ * param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页; (Optional)
+ * param pageSize: 每页显示的数据条数，默认为100，取值范围：[10,100]，用于查询列表的接口 (Optional)
  */
-func NewCreateAuditRequestWithAllParams(
+func NewDescribeLogsRequestWithAllParams(
     regionId string,
     instanceId string,
-    enabled string,
-) *CreateAuditRequest {
+    pageNumber *int,
+    pageSize *int,
+) *DescribeLogsRequest {
 
-    return &CreateAuditRequest{
+    return &DescribeLogsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/audit",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/instances/{instanceId}/log:describeLogs",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         InstanceId: instanceId,
-        Enabled: enabled,
+        PageNumber: pageNumber,
+        PageSize: pageSize,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewCreateAuditRequestWithoutParam() *CreateAuditRequest {
+func NewDescribeLogsRequestWithoutParam() *DescribeLogsRequest {
 
-    return &CreateAuditRequest{
+    return &DescribeLogsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/audit",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/instances/{instanceId}/log:describeLogs",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
@@ -98,31 +102,38 @@ func NewCreateAuditRequestWithoutParam() *CreateAuditRequest {
 }
 
 /* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
-func (r *CreateAuditRequest) SetRegionId(regionId string) {
+func (r *DescribeLogsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
-func (r *CreateAuditRequest) SetInstanceId(instanceId string) {
+func (r *DescribeLogsRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param enabled: 要开启的审计选项，各个选项之间用英文逗号或空格进行分割，例如：DATABASE_OBJECT_ACCESS_GROUP,ACKUP_RESTORE_GROU等<br>各个数据库版本支持的审计选项可以通过接口[describeAuditOptions](./describeAuditOptions.md)获得，各个审计项的具体含义可以参看微软的官方文档(Required) */
-func (r *CreateAuditRequest) SetEnabled(enabled string) {
-    r.Enabled = enabled
+/* param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页;(Optional) */
+func (r *DescribeLogsRequest) SetPageNumber(pageNumber int) {
+    r.PageNumber = &pageNumber
+}
+
+/* param pageSize: 每页显示的数据条数，默认为100，取值范围：[10,100]，用于查询列表的接口(Optional) */
+func (r *DescribeLogsRequest) SetPageSize(pageSize int) {
+    r.PageSize = &pageSize
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r CreateAuditRequest) GetRegionId() string {
+func (r DescribeLogsRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type CreateAuditResponse struct {
+type DescribeLogsResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result CreateAuditResult `json:"result"`
+    Result DescribeLogsResult `json:"result"`
 }
 
-type CreateAuditResult struct {
+type DescribeLogsResult struct {
+    DbInstances []rds.Log `json:"dbInstances"`
+    TotalCount int `json:"totalCount"`
 }

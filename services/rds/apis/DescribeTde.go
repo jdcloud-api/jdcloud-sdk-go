@@ -20,7 +20,7 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type CreateAuditRequest struct {
+type DescribeTdeRequest struct {
 
     core.JDCloudRequest
 
@@ -29,68 +29,59 @@ type CreateAuditRequest struct {
 
     /* RDS 实例ID，唯一标识一个RDS实例  */
     InstanceId string `json:"instanceId"`
-
-    /* 要开启的审计选项，各个选项之间用英文逗号或空格进行分割，例如：DATABASE_OBJECT_ACCESS_GROUP,ACKUP_RESTORE_GROU等<br>各个数据库版本支持的审计选项可以通过接口[describeAuditOptions](./describeAuditOptions.md)获得，各个审计项的具体含义可以参看微软的官方文档  */
-    Enabled string `json:"enabled"`
 }
 
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
- * param enabled: 要开启的审计选项，各个选项之间用英文逗号或空格进行分割，例如：DATABASE_OBJECT_ACCESS_GROUP,ACKUP_RESTORE_GROU等<br>各个数据库版本支持的审计选项可以通过接口[describeAuditOptions](./describeAuditOptions.md)获得，各个审计项的具体含义可以参看微软的官方文档 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewCreateAuditRequest(
+func NewDescribeTdeRequest(
     regionId string,
     instanceId string,
-    enabled string,
-) *CreateAuditRequest {
+) *DescribeTdeRequest {
 
-	return &CreateAuditRequest{
+	return &DescribeTdeRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/audit",
-			Method:  "POST",
+			URL:     "/regions/{regionId}/instances/{instanceId}/tde",
+			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         InstanceId: instanceId,
-        Enabled: enabled,
 	}
 }
 
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
- * param enabled: 要开启的审计选项，各个选项之间用英文逗号或空格进行分割，例如：DATABASE_OBJECT_ACCESS_GROUP,ACKUP_RESTORE_GROU等<br>各个数据库版本支持的审计选项可以通过接口[describeAuditOptions](./describeAuditOptions.md)获得，各个审计项的具体含义可以参看微软的官方文档 (Required)
  */
-func NewCreateAuditRequestWithAllParams(
+func NewDescribeTdeRequestWithAllParams(
     regionId string,
     instanceId string,
-    enabled string,
-) *CreateAuditRequest {
+) *DescribeTdeRequest {
 
-    return &CreateAuditRequest{
+    return &DescribeTdeRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/audit",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/instances/{instanceId}/tde",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         InstanceId: instanceId,
-        Enabled: enabled,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewCreateAuditRequestWithoutParam() *CreateAuditRequest {
+func NewDescribeTdeRequestWithoutParam() *DescribeTdeRequest {
 
-    return &CreateAuditRequest{
+    return &DescribeTdeRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/audit",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/instances/{instanceId}/tde",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
@@ -98,31 +89,27 @@ func NewCreateAuditRequestWithoutParam() *CreateAuditRequest {
 }
 
 /* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
-func (r *CreateAuditRequest) SetRegionId(regionId string) {
+func (r *DescribeTdeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
-func (r *CreateAuditRequest) SetInstanceId(instanceId string) {
+func (r *DescribeTdeRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
-}
-
-/* param enabled: 要开启的审计选项，各个选项之间用英文逗号或空格进行分割，例如：DATABASE_OBJECT_ACCESS_GROUP,ACKUP_RESTORE_GROU等<br>各个数据库版本支持的审计选项可以通过接口[describeAuditOptions](./describeAuditOptions.md)获得，各个审计项的具体含义可以参看微软的官方文档(Required) */
-func (r *CreateAuditRequest) SetEnabled(enabled string) {
-    r.Enabled = enabled
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r CreateAuditRequest) GetRegionId() string {
+func (r DescribeTdeRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type CreateAuditResponse struct {
+type DescribeTdeResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result CreateAuditResult `json:"result"`
+    Result DescribeTdeResult `json:"result"`
 }
 
-type CreateAuditResult struct {
+type DescribeTdeResult struct {
+    Status string `json:"status"`
 }

@@ -40,7 +40,7 @@ func NewRdsClient(credential *core.Credential) *RdsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "rds",
-            Revision:    "0.5.4",
+            Revision:    "0.6.4",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -204,6 +204,26 @@ func (c *RdsClient) DeleteInstance(request *rds.DeleteInstanceRequest) (*rds.Del
     }
 
     jdResp := &rds.DeleteInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 通过 PT-OSC 服务来处理 DDL 命令, 避免锁表。此接口暂是对部分用户开放 */
+func (c *RdsClient) AlterTableWithOnlineDDL(request *rds.AlterTableWithOnlineDDLRequest) (*rds.AlterTableWithOnlineDDLResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.AlterTableWithOnlineDDLResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -573,7 +593,7 @@ func (c *RdsClient) DescribeInstanceAttributes(request *rds.DescribeInstanceAttr
     return jdResp, err
 }
 
-/* 实例扩容，支持升级实例的CPU，内存及磁盘。目前暂不支持实例降配<br>- 仅支持MySQL */
+/* 实例扩容，支持升级实例的CPU，内存及磁盘。 */
 func (c *RdsClient) ModifyInstanceSpec(request *rds.ModifyInstanceSpecRequest) (*rds.ModifyInstanceSpecResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -644,6 +664,26 @@ func (c *RdsClient) DescribeParameterGroupAttachedInstances(request *rds.Describ
     }
 
     jdResp := &rds.DescribeParameterGroupAttachedInstancesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查看当前实例是否开启TDE */
+func (c *RdsClient) DescribeTde(request *rds.DescribeTdeRequest) (*rds.DescribeTdeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DescribeTdeResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -833,6 +873,26 @@ func (c *RdsClient) DescribeErrorLogs(request *rds.DescribeErrorLogsRequest) (*r
     return jdResp, err
 }
 
+/* 开启数据库的TDE功能 */
+func (c *RdsClient) EnableTde(request *rds.EnableTdeRequest) (*rds.EnableTdeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.EnableTdeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询MySQL实例的慢日志的概要信息。<br>- 仅支持MySQL */
 func (c *RdsClient) DescribeSlowLogs(request *rds.DescribeSlowLogsRequest) (*rds.DescribeSlowLogsResponse, error) {
     if request == nil {
@@ -884,6 +944,26 @@ func (c *RdsClient) DescribeActiveQueryPerformance(request *rds.DescribeActiveQu
     }
 
     jdResp := &rds.DescribeActiveQueryPerformanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建数据库账号，用户可以使用客户端，应用程序等通过该账号和密码登录RDS数据库实例。<br>为便于管理和恢复，RDS对账号进行了限制，数据库账号只能通过控制台或者OpenAPI进行创建、删除账号以及对账号授权等，用户不能通过SQL语句对账号进行相关操作。 */
+func (c *RdsClient) CreateSuperAccount(request *rds.CreateSuperAccountRequest) (*rds.CreateSuperAccountResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.CreateSuperAccountResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -964,6 +1044,26 @@ func (c *RdsClient) ResetPassword(request *rds.ResetPasswordRequest) (*rds.Reset
     }
 
     jdResp := &rds.ResetPasswordResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设置日志文件的下载链接过期时间，重新生成 PostgreSQL 的日志文件下载地址 */
+func (c *RdsClient) UpdateLogDownloadURLInternal(request *rds.UpdateLogDownloadURLInternalRequest) (*rds.UpdateLogDownloadURLInternalResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.UpdateLogDownloadURLInternalResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1193,7 +1293,7 @@ func (c *RdsClient) CreateAudit(request *rds.CreateAuditRequest) (*rds.CreateAud
     return jdResp, err
 }
 
-/* 修改实例名称，可支持中文，实例名的具体规则可参见帮助中心文档:[名称及密码限制](../../../documentation/Database-and-Cache-Service/RDS/Introduction/Restrictions/SQLServer-Restrictions.md) */
+/* 修改实例名称，可支持中文，实例名的具体规则可参见帮助中心文档:[名称及密码限制](../../documentation/Database-and-Cache-Service/RDS/Introduction/Restrictions/SQLServer-Restrictions.md) */
 func (c *RdsClient) ModifyInstanceName(request *rds.ModifyInstanceNameRequest) (*rds.ModifyInstanceNameResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1313,7 +1413,7 @@ func (c *RdsClient) ModifyBackupPolicy(request *rds.ModifyBackupPolicyRequest) (
     return jdResp, err
 }
 
-/* 使用实例的全量备份覆盖恢复当前实例<br>- 仅支持MySQL */
+/* 使用实例的全量备份覆盖恢复当前实例 */
 func (c *RdsClient) RestoreInstance(request *rds.RestoreInstanceRequest) (*rds.RestoreInstanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1324,6 +1424,26 @@ func (c *RdsClient) RestoreInstance(request *rds.RestoreInstanceRequest) (*rds.R
     }
 
     jdResp := &rds.RestoreInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取 PostgreSQL 的日志文件列表 */
+func (c *RdsClient) DescribeLogs(request *rds.DescribeLogsRequest) (*rds.DescribeLogsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DescribeLogsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

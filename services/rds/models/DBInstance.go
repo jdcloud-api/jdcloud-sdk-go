@@ -65,6 +65,9 @@ type DBInstance struct {
     /* 实例创建时间 (Optional) */
     CreateTime string `json:"createTime"`
 
+    /* 实例跨地域备份服务开启相关信息 (Optional) */
+    BackupSynchronicity []BackupSynchronicityAbstract `json:"backupSynchronicity"`
+
     /* 计费配置 (Optional) */
     Charge charge.Charge `json:"charge"`
 
