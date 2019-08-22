@@ -17,14 +17,20 @@
 package models
 
 
-type InstanceName struct {
+type RuleBaseInfo struct {
 
-    /* 资源id（即实例id）  */
-    ResourceId string `json:"resourceId"`
+    /* 规则Id (Optional) */
+    Id string `json:"id"`
 
-    /* 资源名称（即实例名称）  */
-    ResourceName string `json:"resourceName"`
+    /* 规则名称 (Optional) */
+    Name string `json:"name"`
 
-    /* service code（redis）  */
-    ServiceCode string `json:"serviceCode"`
+    /* 规则说明 (Optional) */
+    Desc string `json:"desc"`
+
+    /* 状态，停止:disable,启动:enable (Optional) */
+    Status string `json:"status"`
+
+    /* 创建时间，精确到毫秒 (Optional) */
+    CreatedTime string `json:"createdTime"`
 }

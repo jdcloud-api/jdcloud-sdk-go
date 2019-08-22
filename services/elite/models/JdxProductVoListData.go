@@ -17,14 +17,20 @@
 package models
 
 
-type InstanceName struct {
+type JdxProductVoListData struct {
 
-    /* 资源id（即实例id）  */
-    ResourceId string `json:"resourceId"`
+    /* 页码 (Optional) */
+    PageNo int `json:"pageNo"`
 
-    /* 资源名称（即实例名称）  */
-    ResourceName string `json:"resourceName"`
+    /* 每页记录数 (Optional) */
+    PageSize int `json:"pageSize"`
 
-    /* service code（redis）  */
-    ServiceCode string `json:"serviceCode"`
+    /* 总记录数 (Optional) */
+    TotalRecord int `json:"totalRecord"`
+
+    /* 总页数 (Optional) */
+    TotalPage int `json:"totalPage"`
+
+    /* 商品信息列表 (Optional) */
+    DataList []JdxProductVo `json:"dataList"`
 }

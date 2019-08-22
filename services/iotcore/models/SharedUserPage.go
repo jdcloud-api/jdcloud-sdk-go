@@ -17,14 +17,20 @@
 package models
 
 
-type InstanceName struct {
+type SharedUserPage struct {
 
-    /* 资源id（即实例id）  */
-    ResourceId string `json:"resourceId"`
+    /* 总用户数 (Optional) */
+    TotalSize int `json:"totalSize"`
 
-    /* 资源名称（即实例名称）  */
-    ResourceName string `json:"resourceName"`
+    /* 总页数 (Optional) */
+    TotalPage int `json:"totalPage"`
 
-    /* service code（redis）  */
-    ServiceCode string `json:"serviceCode"`
+    /* 每页条数 (Optional) */
+    PageSize int `json:"pageSize"`
+
+    /* 当前页 (Optional) */
+    NowPage int `json:"nowPage"`
+
+    /* 用户信息列表 (Optional) */
+    Users []SharedUsers `json:"users"`
 }

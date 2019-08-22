@@ -17,14 +17,11 @@
 package models
 
 
-type InstanceName struct {
+type ProductCategory struct {
 
-    /* 资源id（即实例id）  */
-    ResourceId string `json:"resourceId"`
+    /* 产品分类名称 (Optional) */
+    ProductCategoryName string `json:"productCategoryName"`
 
-    /* 资源名称（即实例名称）  */
-    ResourceName string `json:"resourceName"`
-
-    /* service code（redis）  */
-    ServiceCode string `json:"serviceCode"`
+    /* 产品分类唯一标识 (Optional) */
+    ProductCategoryId string `json:"productCategoryId"`
 }

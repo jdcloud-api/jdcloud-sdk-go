@@ -17,14 +17,14 @@
 package models
 
 
-type InstanceName struct {
+type OnlineInfo struct {
 
-    /* 资源id（即实例id）  */
-    ResourceId string `json:"resourceId"`
+    /*  (Optional) */
+    DeviceId string `json:"deviceId"`
 
-    /* 资源名称（即实例名称）  */
-    ResourceName string `json:"resourceName"`
+    /*  (Optional) */
+    Online int `json:"online"`
 
-    /* service code（redis）  */
-    ServiceCode string `json:"serviceCode"`
+    /*  (Optional) */
+    LastConnectTime string `json:"lastConnectTime"`
 }

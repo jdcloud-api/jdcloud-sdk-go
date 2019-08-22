@@ -40,7 +40,7 @@ func NewEliteClient(credential *core.Credential) *EliteClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "elite",
-            Revision:    "1.0.5",
+            Revision:    "1.0.6",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -93,6 +93,26 @@ func (c *EliteClient) ListSaleService(request *elite.ListSaleServiceRequest) (*e
     return jdResp, err
 }
 
+/* 查询交付信息接口 */
+func (c *EliteClient) JdxQueryDeliveryInfo(request *elite.JdxQueryDeliveryInfoRequest) (*elite.JdxQueryDeliveryInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &elite.JdxQueryDeliveryInfoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 获取云存服务信息 */
 func (c *EliteClient) GetStoreService(request *elite.GetStoreServiceRequest) (*elite.GetStoreServiceResponse, error) {
     if request == nil {
@@ -133,8 +153,8 @@ func (c *EliteClient) JdxReportOrder(request *elite.JdxReportOrderRequest) (*eli
     return jdResp, err
 }
 
-/* 确认交付 */
-func (c *EliteClient) ConfirmSaleServiceDelivery(request *elite.ConfirmSaleServiceDeliveryRequest) (*elite.ConfirmSaleServiceDeliveryResponse, error) {
+/* 下单接口 */
+func (c *EliteClient) JdxCreateOrder(request *elite.JdxCreateOrderRequest) (*elite.JdxCreateOrderResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -143,7 +163,7 @@ func (c *EliteClient) ConfirmSaleServiceDelivery(request *elite.ConfirmSaleServi
         return nil, err
     }
 
-    jdResp := &elite.ConfirmSaleServiceDeliveryResponse{}
+    jdResp := &elite.JdxCreateOrderResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -164,6 +184,46 @@ func (c *EliteClient) GetSaleServiceByDeliverNumber(request *elite.GetSaleServic
     }
 
     jdResp := &elite.GetSaleServiceByDeliverNumberResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 输出商品接口 */
+func (c *EliteClient) JdxQueryProduct(request *elite.JdxQueryProductRequest) (*elite.JdxQueryProductResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &elite.JdxQueryProductResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 确认交付 */
+func (c *EliteClient) ConfirmSaleServiceDelivery(request *elite.ConfirmSaleServiceDeliveryRequest) (*elite.ConfirmSaleServiceDeliveryResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &elite.ConfirmSaleServiceDeliveryResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

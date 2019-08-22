@@ -17,14 +17,20 @@
 package models
 
 
-type InstanceName struct {
+type OssSpec struct {
 
-    /* 资源id（即实例id）  */
-    ResourceId string `json:"resourceId"`
+    /* OSS AK  */
+    Oss_ak string `json:"oss_ak"`
 
-    /* 资源名称（即实例名称）  */
-    ResourceName string `json:"resourceName"`
+    /* OSS SK  */
+    Oss_sk string `json:"oss_sk"`
 
-    /* service code（redis）  */
-    ServiceCode string `json:"serviceCode"`
+    /* OSS region  */
+    Oss_region string `json:"oss_region"`
+
+    /* OSS endpoint  */
+    Oss_endpoint string `json:"oss_endpoint"`
+
+    /* OSS bucket  */
+    Oss_bucket string `json:"oss_bucket"`
 }

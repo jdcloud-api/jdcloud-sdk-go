@@ -17,14 +17,14 @@
 package models
 
 
-type InstanceName struct {
+type QueryDeliveryInfoResultVo struct {
 
-    /* 资源id（即实例id）  */
-    ResourceId string `json:"resourceId"`
+    /* 交付信息 (Optional) */
+    Remark string `json:"remark"`
 
-    /* 资源名称（即实例名称）  */
-    ResourceName string `json:"resourceName"`
+    /* 生效时间，格式：yyyy-MM-dd HH:mm:ss (Optional) */
+    EffectiveDt string `json:"effectiveDt"`
 
-    /* service code（redis）  */
-    ServiceCode string `json:"serviceCode"`
+    /* 失效时间，格式：yyyy-MM-dd HH:mm:ss (Optional) */
+    FailureDt string `json:"failureDt"`
 }

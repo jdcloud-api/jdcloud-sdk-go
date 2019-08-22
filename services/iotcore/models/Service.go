@@ -17,14 +17,26 @@
 package models
 
 
-type InstanceName struct {
+type Service struct {
 
-    /* 资源id（即实例id）  */
-    ResourceId string `json:"resourceId"`
+    /* 服务名称 (Optional) */
+    Name string `json:"name"`
 
-    /* 资源名称（即实例名称）  */
-    ResourceName string `json:"resourceName"`
+    /* 服务ID (Optional) */
+    ServiceId string `json:"serviceId"`
 
-    /* service code（redis）  */
-    ServiceCode string `json:"serviceCode"`
+    /* 服务描述 (Optional) */
+    Description string `json:"description"`
+
+    /* 服务入参,object的key为参数名称，value为参数值 (Optional) */
+    Input interface{} `json:"input"`
+
+    /* 服务出参,object的key为参数名称，value为参数值 (Optional) */
+    Output interface{} `json:"output"`
+
+    /* 结果码200:成功,400:参数错误 (Optional) */
+    Code int `json:"code"`
+
+    /* 创建时间 (Optional) */
+    CreatedTime int64 `json:"createdTime"`
 }

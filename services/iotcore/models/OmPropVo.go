@@ -17,14 +17,29 @@
 package models
 
 
-type InstanceName struct {
+type OmPropVo struct {
 
-    /* 资源id（即实例id）  */
-    ResourceId string `json:"resourceId"`
+    /*  (Optional) */
+    Uuid string `json:"uuid"`
 
-    /* 资源名称（即实例名称）  */
-    ResourceName string `json:"resourceName"`
+    /*  (Optional) */
+    OmId string `json:"omId"`
 
-    /* service code（redis）  */
-    ServiceCode string `json:"serviceCode"`
+    /*  (Optional) */
+    OmName string `json:"omName"`
+
+    /*  (Optional) */
+    AttrName string `json:"attrName"`
+
+    /*  (Optional) */
+    AttrText string `json:"attrText"`
+
+    /*  (Optional) */
+    AttrType string `json:"attrType"`
+
+    /*  (Optional) */
+    UserPin string `json:"userPin"`
+
+    /*  (Optional) */
+    InstanceId string `json:"instanceId"`
 }

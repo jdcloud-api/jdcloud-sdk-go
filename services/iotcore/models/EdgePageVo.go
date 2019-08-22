@@ -17,14 +17,20 @@
 package models
 
 
-type InstanceName struct {
+type EdgePageVo struct {
 
-    /* 资源id（即实例id）  */
-    ResourceId string `json:"resourceId"`
+    /* Edge编号 (Optional) */
+    EdgeId string `json:"edgeId"`
 
-    /* 资源名称（即实例名称）  */
-    ResourceName string `json:"resourceName"`
+    /* Edge显示名称 (Optional) */
+    EdgeName string `json:"edgeName"`
 
-    /* service code（redis）  */
-    ServiceCode string `json:"serviceCode"`
+    /* Edge状态 (Optional) */
+    EdgeState string `json:"edgeState"`
+
+    /* 物模型名称 (Optional) */
+    OmName string `json:"omName"`
+
+    /* 最后在线时间 (Optional) */
+    LastOnlineTime string `json:"lastOnlineTime"`
 }

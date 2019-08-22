@@ -17,14 +17,14 @@
 package models
 
 
-type InstanceName struct {
+type TopicList struct {
 
-    /* 资源id（即实例id）  */
-    ResourceId string `json:"resourceId"`
+    /* topic (Optional) */
+    Topic string `json:"topic"`
 
-    /* 资源名称（即实例名称）  */
-    ResourceName string `json:"resourceName"`
+    /* 权限 (Optional) */
+    Authority string `json:"authority"`
 
-    /* service code（redis）  */
-    ServiceCode string `json:"serviceCode"`
+    /* 描述 (Optional) */
+    Descripton string `json:"descripton"`
 }

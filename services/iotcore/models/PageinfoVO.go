@@ -17,14 +17,17 @@
 package models
 
 
-type InstanceName struct {
+type PageinfoVO struct {
 
-    /* 资源id（即实例id）  */
-    ResourceId string `json:"resourceId"`
+    /* 每页显示条数 (Optional) */
+    PageSize int `json:"pageSize"`
 
-    /* 资源名称（即实例名称）  */
-    ResourceName string `json:"resourceName"`
+    /* 当前页数 (Optional) */
+    NowPage int `json:"nowPage"`
 
-    /* service code（redis）  */
-    ServiceCode string `json:"serviceCode"`
+    /* 总记录数 (Optional) */
+    TotalSize int `json:"totalSize"`
+
+    /* 总页数 (Optional) */
+    TotalPage int `json:"totalPage"`
 }

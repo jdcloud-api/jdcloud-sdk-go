@@ -43,6 +43,6 @@ type Backup struct {
     /* 备份任务状态状态，0表示备份中，1表示失败，2表示成功  */
     BackupStatus int `json:"backupStatus"`
 
-    /* 备份文件下载地址，已置空，需要调用获取备份文件下载地址接口获取  */
+    /* 备份文件下载地址（已废弃，调用获取备份文件下载地址接口获取）  */
     BackupDownloadURL string `json:"backupDownloadURL"`
 }

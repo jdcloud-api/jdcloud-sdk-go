@@ -17,14 +17,11 @@
 package models
 
 
-type InstanceName struct {
+type CartExtraChargeVo struct {
 
-    /* 资源id（即实例id）  */
-    ResourceId string `json:"resourceId"`
+    /* 额外计费项名称 (Optional) */
+    Name *string `json:"name"`
 
-    /* 资源名称（即实例名称）  */
-    ResourceName string `json:"resourceName"`
-
-    /* service code（redis）  */
-    ServiceCode string `json:"serviceCode"`
+    /* 购买数量 (Optional) */
+    BuyNum *int `json:"buyNum"`
 }

@@ -17,14 +17,20 @@
 package models
 
 
-type InstanceName struct {
+type DeviceCredential struct {
 
-    /* 资源id（即实例id）  */
-    ResourceId string `json:"resourceId"`
+    /* 设备Id (Optional) */
+    DeviceId string `json:"deviceId"`
 
-    /* 资源名称（即实例名称）  */
-    ResourceName string `json:"resourceName"`
+    /* 设备名称 (Optional) */
+    DeviceName string `json:"deviceName"`
 
-    /* service code（redis）  */
-    ServiceCode string `json:"serviceCode"`
+    /* 设备鉴权标识 (Optional) */
+    Identifier string `json:"identifier"`
+
+    /* 设备秘钥 (Optional) */
+    Secret string `json:"secret"`
+
+    /* 所属产品 (Optional) */
+    ProductKey string `json:"productKey"`
 }

@@ -17,14 +17,26 @@
 package models
 
 
-type InstanceName struct {
+type NewInstanceSpec struct {
 
-    /* 资源id（即实例id）  */
-    ResourceId string `json:"resourceId"`
+    /* 可用区ID， 如果两个可用区一样，也需输入两个azId  */
+    AzId []string `json:"azId"`
 
-    /* 资源名称（即实例名称）  */
-    ResourceName string `json:"resourceName"`
+    /* AZ1实例硬件规格  */
+    Az1flavor string `json:"az1flavor"`
 
-    /* service code（redis）  */
-    ServiceCode string `json:"serviceCode"`
+    /* AZ1节点个数  */
+    Az1replica int `json:"az1replica"`
+
+    /* AZ1云硬盘大小  */
+    Az1storagesize int `json:"az1storagesize"`
+
+    /* AZ2实例硬件规格  */
+    Az2flavor string `json:"az2flavor"`
+
+    /* AZ2节点个数  */
+    Az2replica int `json:"az2replica"`
+
+    /* AZ2云硬盘大小  */
+    Az2storagesize int `json:"az2storagesize"`
 }

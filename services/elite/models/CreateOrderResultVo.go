@@ -17,14 +17,8 @@
 package models
 
 
-type InstanceName struct {
+type CreateOrderResultVo struct {
 
-    /* 资源id（即实例id）  */
-    ResourceId string `json:"resourceId"`
-
-    /* 资源名称（即实例名称）  */
-    ResourceName string `json:"resourceName"`
-
-    /* service code（redis）  */
-    ServiceCode string `json:"serviceCode"`
+    /* 订单号 (Optional) */
+    OrderNumber string `json:"orderNumber"`
 }

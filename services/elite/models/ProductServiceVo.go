@@ -25,6 +25,15 @@ type ProductServiceVo struct {
     /* 订单号 (Optional) */
     OrderNumber string `json:"orderNumber"`
 
+    /* 购买人 (Optional) */
+    BuyerPin string `json:"buyerPin"`
+
+    /* 映射编号 (Optional) */
+    MappingCode string `json:"mappingCode"`
+
+    /* 是否支持自动交付：0表示不支持，1表示支持 (Optional) */
+    SupportAutoDeliver int `json:"supportAutoDeliver"`
+
     /* 产品ID (Optional) */
     ProductId int `json:"productId"`
 

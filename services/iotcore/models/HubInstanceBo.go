@@ -17,14 +17,17 @@
 package models
 
 
-type InstanceName struct {
+type HubInstanceBo struct {
 
-    /* 资源id（即实例id）  */
-    ResourceId string `json:"resourceId"`
+    /*  (Optional) */
+    InstanceUuid string `json:"instanceUuid"`
 
-    /* 资源名称（即实例名称）  */
-    ResourceName string `json:"resourceName"`
+    /*  (Optional) */
+    InstanceId string `json:"instanceId"`
 
-    /* service code（redis）  */
-    ServiceCode string `json:"serviceCode"`
+    /*  (Optional) */
+    InstanceName string `json:"instanceName"`
+
+    /*  (Optional) */
+    Region string `json:"region"`
 }

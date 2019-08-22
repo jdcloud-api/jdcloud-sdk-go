@@ -17,14 +17,17 @@
 package models
 
 
-type InstanceName struct {
+type Action struct {
 
-    /* 资源id（即实例id）  */
-    ResourceId string `json:"resourceId"`
+    /*  (Optional) */
+    ActionId string `json:"actionId"`
 
-    /* 资源名称（即实例名称）  */
-    ResourceName string `json:"resourceName"`
+    /* 动作类型，包括：handle（数据处理）、forward（转发数据）和failure（转发失败） (Optional) */
+    ActionType string `json:"actionType"`
 
-    /* service code（redis）  */
-    ServiceCode string `json:"serviceCode"`
+    /* 操作类型,包括：JCQ、JsScript、Kafka、RabbitMq、RDS和ES (Optional) */
+    OperationType string `json:"operationType"`
+
+    /* 规则动作的配置信息, Configuration是JSONObject格式，会根据不同的规则动作，形成不同的JSONObject格式，即不同的配置信息格式。 (Optional) */
+    Configuration interface{} `json:"configuration"`
 }

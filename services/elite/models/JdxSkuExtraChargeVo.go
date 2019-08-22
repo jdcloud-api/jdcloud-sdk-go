@@ -17,14 +17,20 @@
 package models
 
 
-type InstanceName struct {
+type JdxSkuExtraChargeVo struct {
 
-    /* 资源id（即实例id）  */
-    ResourceId string `json:"resourceId"`
+    /* 额外计费项名称 (Optional) */
+    ExtraChargeName string `json:"extraChargeName"`
 
-    /* 资源名称（即实例名称）  */
-    ResourceName string `json:"resourceName"`
+    /* 额外计费项单位 (Optional) */
+    ExtraChargeUnit string `json:"extraChargeUnit"`
 
-    /* service code（redis）  */
-    ServiceCode string `json:"serviceCode"`
+    /* 售价 (Optional) */
+    SellingPrice int `json:"sellingPrice"`
+
+    /* 1、范围 2、枚举 (Optional) */
+    NumType int `json:"numType"`
+
+    /* 1,100逗号分隔,numType=1表示可购买数量的范围,numType=2表示只支持购买特定数量 (Optional) */
+    Num string `json:"num"`
 }

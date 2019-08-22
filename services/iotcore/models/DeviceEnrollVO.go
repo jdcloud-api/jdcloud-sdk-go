@@ -17,14 +17,17 @@
 package models
 
 
-type InstanceName struct {
+type DeviceEnrollVO struct {
 
-    /* 资源id（即实例id）  */
-    ResourceId string `json:"resourceId"`
+    /*  (Optional) */
+    DeviceIds []string `json:"deviceIds"`
 
-    /* 资源名称（即实例名称）  */
-    ResourceName string `json:"resourceName"`
+    /*  (Optional) */
+    ModelName string `json:"modelName"`
 
-    /* service code（redis）  */
-    ServiceCode string `json:"serviceCode"`
+    /*  (Optional) */
+    DeviceType int `json:"deviceType"`
+
+    /*  (Optional) */
+    ParentDeviceName string `json:"parentDeviceName"`
 }

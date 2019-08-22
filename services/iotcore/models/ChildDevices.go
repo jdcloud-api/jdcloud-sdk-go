@@ -17,14 +17,17 @@
 package models
 
 
-type InstanceName struct {
+type ChildDevices struct {
 
-    /* 资源id（即实例id）  */
-    ResourceId string `json:"resourceId"`
+    /* 设备编号 (Optional) */
+    DeviceId string `json:"deviceId"`
 
-    /* 资源名称（即实例名称）  */
-    ResourceName string `json:"resourceName"`
+    /* 设备名称 (Optional) */
+    DeviceName string `json:"deviceName"`
 
-    /* service code（redis）  */
-    ServiceCode string `json:"serviceCode"`
+    /* devvice-service名称 (Optional) */
+    DeviceServiceName string `json:"deviceServiceName"`
+
+    /* 在线状态 (Optional) */
+    Online string `json:"online"`
 }

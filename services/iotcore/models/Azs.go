@@ -17,14 +17,11 @@
 package models
 
 
-type InstanceName struct {
+type Azs struct {
 
-    /* 资源id（即实例id）  */
-    ResourceId string `json:"resourceId"`
+    /* az编号 (Optional) */
+    AzId string `json:"azId"`
 
-    /* 资源名称（即实例名称）  */
-    ResourceName string `json:"resourceName"`
-
-    /* service code（redis）  */
-    ServiceCode string `json:"serviceCode"`
+    /* az名称 (Optional) */
+    AzName string `json:"azName"`
 }

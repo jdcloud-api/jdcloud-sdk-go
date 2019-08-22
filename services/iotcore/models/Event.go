@@ -17,14 +17,20 @@
 package models
 
 
-type InstanceName struct {
+type Event struct {
 
-    /* 资源id（即实例id）  */
-    ResourceId string `json:"resourceId"`
+    /* 事件名称 (Optional) */
+    Name string `json:"name"`
 
-    /* 资源名称（即实例名称）  */
-    ResourceName string `json:"resourceName"`
+    /* 事件ID (Optional) */
+    EventId string `json:"eventId"`
 
-    /* service code（redis）  */
-    ServiceCode string `json:"serviceCode"`
+    /* 事件类型 (Optional) */
+    EventType string `json:"eventType"`
+
+    /* 输出参数,object的key为参数名称，value为参数值 (Optional) */
+    Output interface{} `json:"output"`
+
+    /* 产生时间 (Optional) */
+    CreatedTime int64 `json:"createdTime"`
 }

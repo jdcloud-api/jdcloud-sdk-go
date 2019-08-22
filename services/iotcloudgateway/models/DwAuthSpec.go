@@ -17,14 +17,14 @@
 package models
 
 
-type InstanceName struct {
+type DwAuthSpec struct {
 
-    /* 资源id（即实例id）  */
-    ResourceId string `json:"resourceId"`
+    /* 产品key  */
+    ProductKey string `json:"productKey"`
 
-    /* 资源名称（即实例名称）  */
-    ResourceName string `json:"resourceName"`
+    /* 设备IDENT  */
+    DeviceIdent string `json:"deviceIdent"`
 
-    /* service code（redis）  */
-    ServiceCode string `json:"serviceCode"`
+    /* 设备密钥  */
+    DeviceSecret string `json:"deviceSecret"`
 }

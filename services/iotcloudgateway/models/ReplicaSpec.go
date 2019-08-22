@@ -17,14 +17,11 @@
 package models
 
 
-type InstanceName struct {
+type ReplicaSpec struct {
 
-    /* 资源id（即实例id）  */
-    ResourceId string `json:"resourceId"`
+    /* 副本集名称  */
+    Rsname string `json:"rsname"`
 
-    /* 资源名称（即实例名称）  */
-    ResourceName string `json:"resourceName"`
-
-    /* service code（redis）  */
-    ServiceCode string `json:"serviceCode"`
+    /* 副本数  */
+    Replica int `json:"replica"`
 }

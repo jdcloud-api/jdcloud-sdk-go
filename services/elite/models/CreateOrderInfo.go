@@ -17,14 +17,20 @@
 package models
 
 
-type InstanceName struct {
+type CreateOrderInfo struct {
 
-    /* 资源id（即实例id）  */
-    ResourceId string `json:"resourceId"`
+    /* spu ID  */
+    ProductId int `json:"productId"`
 
-    /* 资源名称（即实例名称）  */
-    ResourceName string `json:"resourceName"`
+    /* sku ID  */
+    SkuId int `json:"skuId"`
 
-    /* service code（redis）  */
-    ServiceCode string `json:"serviceCode"`
+    /* 购买数量  */
+    BuyNum int `json:"buyNum"`
+
+    /* 备注 (Optional) */
+    Remark *string `json:"remark"`
+
+    /* 额外计费项信息 (Optional) */
+    CartExtraChargeVos []CartExtraChargeVo `json:"cartExtraChargeVos"`
 }

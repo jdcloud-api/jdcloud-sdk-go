@@ -17,14 +17,14 @@
 package models
 
 
-type InstanceName struct {
+type DeviceControlSpec struct {
 
-    /* 资源id（即实例id）  */
-    ResourceId string `json:"resourceId"`
+    /* 请求ID  */
+    Request_id string `json:"request_id"`
 
-    /* 资源名称（即实例名称）  */
-    ResourceName string `json:"resourceName"`
+    /* 设备列表  */
+    Peers string `json:"peers"`
 
-    /* service code（redis）  */
-    ServiceCode string `json:"serviceCode"`
+    /* 设备指令串base64  */
+    Br_msg string `json:"br_msg"`
 }

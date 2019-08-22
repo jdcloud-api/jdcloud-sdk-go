@@ -18,43 +18,43 @@ package client
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    redis "github.com/jdcloud-api/jdcloud-sdk-go/services/redis/apis"
+    iotcore "github.com/jdcloud-api/jdcloud-sdk-go/services/iotcore/apis"
     "encoding/json"
     "errors"
 )
 
-type RedisClient struct {
+type IotcoreClient struct {
     core.JDCloudClient
 }
 
-func NewRedisClient(credential *core.Credential) *RedisClient {
+func NewIotcoreClient(credential *core.Credential) *IotcoreClient {
     if credential == nil {
         return nil
     }
 
     config := core.NewConfig()
-    config.SetEndpoint("redis.jdcloud-api.com")
+    config.SetEndpoint("iotcore.jdcloud-api.com")
 
-    return &RedisClient{
+    return &IotcoreClient{
         core.JDCloudClient{
             Credential:  *credential,
             Config:      *config,
-            ServiceName: "redis",
-            Revision:    "1.5.0",
+            ServiceName: "iotcore",
+            Revision:    "1.0.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
 
-func (c *RedisClient) SetConfig(config *core.Config) {
+func (c *IotcoreClient) SetConfig(config *core.Config) {
     c.Config = *config
 }
 
-func (c *RedisClient) SetLogger(logger core.Logger) {
+func (c *IotcoreClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-/* 修改缓存Redis实例的自动备份策略，可修改备份周期和备份时间 */
-func (c *RedisClient) ModifyBackupPolicy(request *redis.ModifyBackupPolicyRequest) (*redis.ModifyBackupPolicyResponse, error) {
+/* 注册单个设备并返回秘钥信息 */
+func (c *IotcoreClient) AddDevice(request *iotcore.AddDeviceRequest) (*iotcore.AddDeviceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -63,7 +63,7 @@ func (c *RedisClient) ModifyBackupPolicy(request *redis.ModifyBackupPolicyReques
         return nil, err
     }
 
-    jdResp := &redis.ModifyBackupPolicyResponse{}
+    jdResp := &iotcore.AddDeviceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -73,10 +73,8 @@ func (c *RedisClient) ModifyBackupPolicy(request *redis.ModifyBackupPolicyReques
     return jdResp, err
 }
 
-/* 变更缓存Redis实例规格（变配），只能变更运行状态的实例规格，变更的规格不能与之前的相同。
-预付费用户，从集群版变配到主从版，新规格的内存大小要大于老规格的内存大小，从主从版到集群版，新规格的内存大小要不小于老规格的内存大小。
- */
-func (c *RedisClient) ModifyCacheInstanceClass(request *redis.ModifyCacheInstanceClassRequest) (*redis.ModifyCacheInstanceClassResponse, error) {
+/* 更新设备影子的期望值 */
+func (c *IotcoreClient) UpdateThingShadow(request *iotcore.UpdateThingShadowRequest) (*iotcore.UpdateThingShadowResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -85,7 +83,7 @@ func (c *RedisClient) ModifyCacheInstanceClass(request *redis.ModifyCacheInstanc
         return nil, err
     }
 
-    jdResp := &redis.ModifyCacheInstanceClassResponse{}
+    jdResp := &iotcore.UpdateThingShadowResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -95,8 +93,8 @@ func (c *RedisClient) ModifyCacheInstanceClass(request *redis.ModifyCacheInstanc
     return jdResp, err
 }
 
-/* 创建并执行缓存Redis实例的备份任务，只能为手动备份，可设置备份文件名称 */
-func (c *RedisClient) CreateBackup(request *redis.CreateBackupRequest) (*redis.CreateBackupResponse, error) {
+/* 删除产品 */
+func (c *IotcoreClient) DeleteProduct(request *iotcore.DeleteProductRequest) (*iotcore.DeleteProductResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -105,7 +103,7 @@ func (c *RedisClient) CreateBackup(request *redis.CreateBackupRequest) (*redis.C
         return nil, err
     }
 
-    jdResp := &redis.CreateBackupResponse{}
+    jdResp := &iotcore.DeleteProductResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -115,8 +113,8 @@ func (c *RedisClient) CreateBackup(request *redis.CreateBackupRequest) (*redis.C
     return jdResp, err
 }
 
-/* 查看缓存Redis实例的当前配置参数 */
-func (c *RedisClient) DescribeInstanceConfig(request *redis.DescribeInstanceConfigRequest) (*redis.DescribeInstanceConfigResponse, error) {
+/* 分页查询设备信息,支持一个或多个条件 */
+func (c *IotcoreClient) QueryDevicePage(request *iotcore.QueryDevicePageRequest) (*iotcore.QueryDevicePageResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -125,7 +123,7 @@ func (c *RedisClient) DescribeInstanceConfig(request *redis.DescribeInstanceConf
         return nil, err
     }
 
-    jdResp := &redis.DescribeInstanceConfigResponse{}
+    jdResp := &iotcore.QueryDevicePageResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -135,8 +133,8 @@ func (c *RedisClient) DescribeInstanceConfig(request *redis.DescribeInstanceConf
     return jdResp, err
 }
 
-/* 查询缓存Redis实例的自动备份策略 */
-func (c *RedisClient) DescribeBackupPolicy(request *redis.DescribeBackupPolicyRequest) (*redis.DescribeBackupPolicyResponse, error) {
+/* 设备服务调用 */
+func (c *IotcoreClient) InvokeThingService(request *iotcore.InvokeThingServiceRequest) (*iotcore.InvokeThingServiceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -145,7 +143,7 @@ func (c *RedisClient) DescribeBackupPolicy(request *redis.DescribeBackupPolicyRe
         return nil, err
     }
 
-    jdResp := &redis.DescribeBackupPolicyResponse{}
+    jdResp := &iotcore.InvokeThingServiceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -155,11 +153,8 @@ func (c *RedisClient) DescribeBackupPolicy(request *redis.DescribeBackupPolicyRe
     return jdResp, err
 }
 
-/* 删除按配置计费、或包年包月已到期的缓存Redis实例，包年包月未到期不可删除。
-只有处于运行running或者错误error状态才可以删除，其余状态不可以删除。
-白名单用户不能删除包年包月已到期的缓存Redis实例。
- */
-func (c *RedisClient) DeleteCacheInstance(request *redis.DeleteCacheInstanceRequest) (*redis.DeleteCacheInstanceResponse, error) {
+/* 查看设备影子 */
+func (c *IotcoreClient) DescribeThingShadow(request *iotcore.DescribeThingShadowRequest) (*iotcore.DescribeThingShadowResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -168,7 +163,7 @@ func (c *RedisClient) DeleteCacheInstance(request *redis.DeleteCacheInstanceRequ
         return nil, err
     }
 
-    jdResp := &redis.DeleteCacheInstanceResponse{}
+    jdResp := &iotcore.DescribeThingShadowResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -178,8 +173,8 @@ func (c *RedisClient) DeleteCacheInstance(request *redis.DeleteCacheInstanceRequ
     return jdResp, err
 }
 
-/* 重置缓存Redis实例的密码，可为空 */
-func (c *RedisClient) ResetCacheInstancePassword(request *redis.ResetCacheInstancePasswordRequest) (*redis.ResetCacheInstancePasswordResponse, error) {
+/* 查看产品列表接口 */
+func (c *IotcoreClient) ListProducts(request *iotcore.ListProductsRequest) (*iotcore.ListProductsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -188,7 +183,7 @@ func (c *RedisClient) ResetCacheInstancePassword(request *redis.ResetCacheInstan
         return nil, err
     }
 
-    jdResp := &redis.ResetCacheInstancePasswordResponse{}
+    jdResp := &iotcore.ListProductsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -198,9 +193,8 @@ func (c *RedisClient) ResetCacheInstancePassword(request *redis.ResetCacheInstan
     return jdResp, err
 }
 
-/* 创建一个指定配置的缓存Redis实例：可选择主从版或集群版，每种类型又分为多种规格（按CPU核数、内存容量、磁盘容量、带宽等划分），具体可参考产品规格代码，https://docs.jdcloud.com/cn/jcs-for-redis/specifications
- */
-func (c *RedisClient) CreateCacheInstance(request *redis.CreateCacheInstanceRequest) (*redis.CreateCacheInstanceResponse, error) {
+/* 新建产品 */
+func (c *IotcoreClient) CreateProduct(request *iotcore.CreateProductRequest) (*iotcore.CreateProductResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -209,7 +203,7 @@ func (c *RedisClient) CreateCacheInstance(request *redis.CreateCacheInstanceRequ
         return nil, err
     }
 
-    jdResp := &redis.CreateCacheInstanceResponse{}
+    jdResp := &iotcore.CreateProductResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -219,8 +213,8 @@ func (c *RedisClient) CreateCacheInstance(request *redis.CreateCacheInstanceRequ
     return jdResp, err
 }
 
-/* 恢复缓存Redis实例的某次备份 */
-func (c *RedisClient) RestoreInstance(request *redis.RestoreInstanceRequest) (*redis.RestoreInstanceResponse, error) {
+/* 导出物模型 */
+func (c *IotcoreClient) ExportThingModel(request *iotcore.ExportThingModelRequest) (*iotcore.ExportThingModelResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -229,7 +223,7 @@ func (c *RedisClient) RestoreInstance(request *redis.RestoreInstanceRequest) (*r
         return nil, err
     }
 
-    jdResp := &redis.RestoreInstanceResponse{}
+    jdResp := &iotcore.ExportThingModelResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -239,8 +233,8 @@ func (c *RedisClient) RestoreInstance(request *redis.RestoreInstanceRequest) (*r
     return jdResp, err
 }
 
-/* 查询账户的缓存Redis配额信息 */
-func (c *RedisClient) DescribeUserQuota(request *redis.DescribeUserQuotaRequest) (*redis.DescribeUserQuotaResponse, error) {
+/* 查看产品功能列表接口 */
+func (c *IotcoreClient) ListProductAbilities(request *iotcore.ListProductAbilitiesRequest) (*iotcore.ListProductAbilitiesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -249,7 +243,7 @@ func (c *RedisClient) DescribeUserQuota(request *redis.DescribeUserQuotaRequest)
         return nil, err
     }
 
-    jdResp := &redis.DescribeUserQuotaResponse{}
+    jdResp := &iotcore.ListProductAbilitiesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -259,8 +253,8 @@ func (c *RedisClient) DescribeUserQuota(request *redis.DescribeUserQuotaRequest)
     return jdResp, err
 }
 
-/* 获取缓存Redis实例的备份文件临时下载地址 */
-func (c *RedisClient) DescribeDownloadUrl(request *redis.DescribeDownloadUrlRequest) (*redis.DescribeDownloadUrlResponse, error) {
+/* 查看产品 */
+func (c *IotcoreClient) DescribeProduct(request *iotcore.DescribeProductRequest) (*iotcore.DescribeProductResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -269,7 +263,7 @@ func (c *RedisClient) DescribeDownloadUrl(request *redis.DescribeDownloadUrlRequ
         return nil, err
     }
 
-    jdResp := &redis.DescribeDownloadUrlResponse{}
+    jdResp := &iotcore.DescribeProductResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -279,8 +273,8 @@ func (c *RedisClient) DescribeDownloadUrl(request *redis.DescribeDownloadUrlRequ
     return jdResp, err
 }
 
-/* 查询缓存Redis实例列表，可分页、可排序、可搜索、可过滤 */
-func (c *RedisClient) DescribeCacheInstances(request *redis.DescribeCacheInstancesRequest) (*redis.DescribeCacheInstancesResponse, error) {
+/* 修改设备详情 */
+func (c *IotcoreClient) UpdateDevice(request *iotcore.UpdateDeviceRequest) (*iotcore.UpdateDeviceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -289,7 +283,7 @@ func (c *RedisClient) DescribeCacheInstances(request *redis.DescribeCacheInstanc
         return nil, err
     }
 
-    jdResp := &redis.DescribeCacheInstancesResponse{}
+    jdResp := &iotcore.UpdateDeviceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -299,8 +293,8 @@ func (c *RedisClient) DescribeCacheInstances(request *redis.DescribeCacheInstanc
     return jdResp, err
 }
 
-/* 查询Redis实例的集群内部信息 */
-func (c *RedisClient) DescribeClusterInfo(request *redis.DescribeClusterInfoRequest) (*redis.DescribeClusterInfoResponse, error) {
+/* 修改产品 */
+func (c *IotcoreClient) UpdateProduct(request *iotcore.UpdateProductRequest) (*iotcore.UpdateProductResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -309,7 +303,7 @@ func (c *RedisClient) DescribeClusterInfo(request *redis.DescribeClusterInfoRequ
         return nil, err
     }
 
-    jdResp := &redis.DescribeClusterInfoResponse{}
+    jdResp := &iotcore.UpdateProductResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -319,8 +313,8 @@ func (c *RedisClient) DescribeClusterInfo(request *redis.DescribeClusterInfoRequ
     return jdResp, err
 }
 
-/* 修改缓存Redis实例的资源名称或描述，二者至少选一 */
-func (c *RedisClient) ModifyCacheInstanceAttribute(request *redis.ModifyCacheInstanceAttributeRequest) (*redis.ModifyCacheInstanceAttributeResponse, error) {
+/* 查询设备详情 */
+func (c *IotcoreClient) QueryDeviceDetail(request *iotcore.QueryDeviceDetailRequest) (*iotcore.QueryDeviceDetailResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -329,7 +323,7 @@ func (c *RedisClient) ModifyCacheInstanceAttribute(request *redis.ModifyCacheIns
         return nil, err
     }
 
-    jdResp := &redis.ModifyCacheInstanceAttributeResponse{}
+    jdResp := &iotcore.QueryDeviceDetailResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -339,8 +333,8 @@ func (c *RedisClient) ModifyCacheInstanceAttribute(request *redis.ModifyCacheIns
     return jdResp, err
 }
 
-/* 查询缓存Redis实例的备份结果（备份文件列表），可分页、可指定起止时间或备份任务ID */
-func (c *RedisClient) DescribeBackups(request *redis.DescribeBackupsRequest) (*redis.DescribeBackupsResponse, error) {
+/* 导入物模型 */
+func (c *IotcoreClient) ImportThingModel(request *iotcore.ImportThingModelRequest) (*iotcore.ImportThingModelResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -349,7 +343,7 @@ func (c *RedisClient) DescribeBackups(request *redis.DescribeBackupsRequest) (*r
         return nil, err
     }
 
-    jdResp := &redis.DescribeBackupsResponse{}
+    jdResp := &iotcore.ImportThingModelResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -359,8 +353,8 @@ func (c *RedisClient) DescribeBackups(request *redis.DescribeBackupsRequest) (*r
     return jdResp, err
 }
 
-/* 查询缓存Redis实例的详细信息 */
-func (c *RedisClient) DescribeCacheInstance(request *redis.DescribeCacheInstanceRequest) (*redis.DescribeCacheInstanceResponse, error) {
+/* 删除设备 */
+func (c *IotcoreClient) RemoveDevice(request *iotcore.RemoveDeviceRequest) (*iotcore.RemoveDeviceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -369,47 +363,7 @@ func (c *RedisClient) DescribeCacheInstance(request *redis.DescribeCacheInstance
         return nil, err
     }
 
-    jdResp := &redis.DescribeCacheInstanceResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 修改缓存Redis实例的配置参数，支持部分参数修改 */
-func (c *RedisClient) ModifyInstanceConfig(request *redis.ModifyInstanceConfigRequest) (*redis.ModifyInstanceConfigResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &redis.ModifyInstanceConfigResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询某区域下的缓存Redis实例规格列表 */
-func (c *RedisClient) DescribeInstanceClass(request *redis.DescribeInstanceClassRequest) (*redis.DescribeInstanceClassResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &redis.DescribeInstanceClassResponse{}
+    jdResp := &iotcore.RemoveDeviceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

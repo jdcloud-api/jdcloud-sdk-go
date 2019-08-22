@@ -17,14 +17,14 @@
 package models
 
 
-type InstanceName struct {
+type RegionInfo struct {
 
-    /* 资源id（即实例id）  */
-    ResourceId string `json:"resourceId"`
+    /* region编号 (Optional) */
+    RegionId string `json:"regionId"`
 
-    /* 资源名称（即实例名称）  */
-    ResourceName string `json:"resourceName"`
+    /* region名称 (Optional) */
+    RegionName string `json:"regionName"`
 
-    /* service code（redis）  */
-    ServiceCode string `json:"serviceCode"`
+    /* AZ集合 (Optional) */
+    AzInfo []Azs `json:"azInfo"`
 }

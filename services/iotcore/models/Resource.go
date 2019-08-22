@@ -17,14 +17,11 @@
 package models
 
 
-type InstanceName struct {
+type Resource struct {
 
-    /* 资源id（即实例id）  */
+    /* 资源ID (Optional) */
     ResourceId string `json:"resourceId"`
 
-    /* 资源名称（即实例名称）  */
+    /* 资源名称 (Optional) */
     ResourceName string `json:"resourceName"`
-
-    /* service code（redis）  */
-    ServiceCode string `json:"serviceCode"`
 }

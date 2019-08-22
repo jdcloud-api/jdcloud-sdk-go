@@ -17,14 +17,23 @@
 package models
 
 
-type InstanceName struct {
+type ChildModules struct {
 
-    /* 资源id（即实例id）  */
-    ResourceId string `json:"resourceId"`
+    /* 模块编号 (Optional) */
+    ModuleId string `json:"moduleId"`
 
-    /* 资源名称（即实例名称）  */
-    ResourceName string `json:"resourceName"`
+    /* 模块名称 (Optional) */
+    ModuleName string `json:"moduleName"`
 
-    /* service code（redis）  */
-    ServiceCode string `json:"serviceCode"`
+    /* 模块类型版本 (Optional) */
+    ModuleTypeVersion string `json:"moduleTypeVersion"`
+
+    /* 物模型名称 (Optional) */
+    OmName string `json:"omName"`
+
+    /* 物模型描述 (Optional) */
+    OmDesc string `json:"omDesc"`
+
+    /* 模块状态 (Optional) */
+    ModuleState string `json:"moduleState"`
 }

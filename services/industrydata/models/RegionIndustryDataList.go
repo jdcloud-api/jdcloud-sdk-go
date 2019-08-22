@@ -17,14 +17,8 @@
 package models
 
 
-type InstanceName struct {
+type RegionIndustryDataList struct {
 
-    /* 资源id（即实例id）  */
-    ResourceId string `json:"resourceId"`
-
-    /* 资源名称（即实例名称）  */
-    ResourceName string `json:"resourceName"`
-
-    /* service code（redis）  */
-    ServiceCode string `json:"serviceCode"`
+    /* 查询结果的数组类型 (Optional) */
+    DataList []RegionIndustryData `json:"dataList"`
 }
