@@ -18,9 +18,10 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    kubernetes "github.com/jdcloud-api/jdcloud-sdk-go/services/kubernetes/models"
 )
 
-type UpgradeClusterRequest struct {
+type SetAddonsRequest struct {
 
     core.JDCloudRequest
 
@@ -30,81 +31,66 @@ type UpgradeClusterRequest struct {
     /* 集群 ID  */
     ClusterId string `json:"clusterId"`
 
-    /* 升级范围  */
-    Scope string `json:"scope"`
-
-    /* 节点组 id (Optional) */
-    NodeGroupIds []string `json:"nodeGroupIds"`
-
-    /* 指定升级到的版本  */
-    Version string `json:"version"`
+    /* 需要设置的集群组件配置  */
+    AddonsConfig []kubernetes.AddonConfigSpec `json:"addonsConfig"`
 }
 
 /*
  * param regionId: 地域 ID (Required)
  * param clusterId: 集群 ID (Required)
- * param scope: 升级范围 (Required)
- * param version: 指定升级到的版本 (Required)
+ * param addonsConfig: 需要设置的集群组件配置 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewUpgradeClusterRequest(
+func NewSetAddonsRequest(
     regionId string,
     clusterId string,
-    scope string,
-    version string,
-) *UpgradeClusterRequest {
+    addonsConfig []kubernetes.AddonConfigSpec,
+) *SetAddonsRequest {
 
-	return &UpgradeClusterRequest{
+	return &SetAddonsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/clusters/{clusterId}:upgradeCluster",
+			URL:     "/regions/{regionId}/clusters/{clusterId}:setAddons",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         ClusterId: clusterId,
-        Scope: scope,
-        Version: version,
+        AddonsConfig: addonsConfig,
 	}
 }
 
 /*
  * param regionId: 地域 ID (Required)
  * param clusterId: 集群 ID (Required)
- * param scope: 升级范围 (Required)
- * param nodeGroupIds: 节点组 id (Optional)
- * param version: 指定升级到的版本 (Required)
+ * param addonsConfig: 需要设置的集群组件配置 (Required)
  */
-func NewUpgradeClusterRequestWithAllParams(
+func NewSetAddonsRequestWithAllParams(
     regionId string,
     clusterId string,
-    scope string,
-    nodeGroupIds []string,
-    version string,
-) *UpgradeClusterRequest {
+    addonsConfig []kubernetes.AddonConfigSpec,
+) *SetAddonsRequest {
 
-    return &UpgradeClusterRequest{
+    return &SetAddonsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/clusters/{clusterId}:upgradeCluster",
+            URL:     "/regions/{regionId}/clusters/{clusterId}:setAddons",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         ClusterId: clusterId,
-        Scope: scope,
-        NodeGroupIds: nodeGroupIds,
-        Version: version,
+        AddonsConfig: addonsConfig,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewUpgradeClusterRequestWithoutParam() *UpgradeClusterRequest {
+func NewSetAddonsRequestWithoutParam() *SetAddonsRequest {
 
-    return &UpgradeClusterRequest{
+    return &SetAddonsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/clusters/{clusterId}:upgradeCluster",
+            URL:     "/regions/{regionId}/clusters/{clusterId}:setAddons",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -113,41 +99,31 @@ func NewUpgradeClusterRequestWithoutParam() *UpgradeClusterRequest {
 }
 
 /* param regionId: 地域 ID(Required) */
-func (r *UpgradeClusterRequest) SetRegionId(regionId string) {
+func (r *SetAddonsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param clusterId: 集群 ID(Required) */
-func (r *UpgradeClusterRequest) SetClusterId(clusterId string) {
+func (r *SetAddonsRequest) SetClusterId(clusterId string) {
     r.ClusterId = clusterId
 }
 
-/* param scope: 升级范围(Required) */
-func (r *UpgradeClusterRequest) SetScope(scope string) {
-    r.Scope = scope
-}
-
-/* param nodeGroupIds: 节点组 id(Optional) */
-func (r *UpgradeClusterRequest) SetNodeGroupIds(nodeGroupIds []string) {
-    r.NodeGroupIds = nodeGroupIds
-}
-
-/* param version: 指定升级到的版本(Required) */
-func (r *UpgradeClusterRequest) SetVersion(version string) {
-    r.Version = version
+/* param addonsConfig: 需要设置的集群组件配置(Required) */
+func (r *SetAddonsRequest) SetAddonsConfig(addonsConfig []kubernetes.AddonConfigSpec) {
+    r.AddonsConfig = addonsConfig
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r UpgradeClusterRequest) GetRegionId() string {
+func (r SetAddonsRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type UpgradeClusterResponse struct {
+type SetAddonsResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result UpgradeClusterResult `json:"result"`
+    Result SetAddonsResult `json:"result"`
 }
 
-type UpgradeClusterResult struct {
+type SetAddonsResult struct {
 }

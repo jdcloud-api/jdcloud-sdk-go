@@ -73,6 +73,21 @@ type Cluster struct {
     /* endpoint的dashboard port (Optional) */
     DashboardPort string `json:"dashboardPort"`
 
-    /* 用户是否启用集群自定义监控 (Optional) */
+    /* deprecated 优先以addonsConfig中的配置为准 <br>用户是否启用集群自定义监控，true 表示开启用，false 表示未开启用 (Optional) */
     UserMetrics bool `json:"userMetrics"`
+
+    /* 集群组件配置信息 (Optional) */
+    AddonsConfig []AddonConfig `json:"addonsConfig"`
+
+    /* 是否开启集群自动升级，true 表示开启，false 表示未开启 (Optional) */
+    AutoUpgrade bool `json:"autoUpgrade"`
+
+    /* 配置集群维护策略 (Optional) */
+    MaintenanceWindow MaintenanceWindow `json:"maintenanceWindow"`
+
+    /* 集群升级计划信息, 仅展示最新一条升级计划信息 (Optional) */
+    UpgradePlan UpgradePlan `json:"upgradePlan"`
+
+    /* 控制节点操作进度 (Optional) */
+    MasterProgress MaintenanceWindow `json:"masterProgress"`
 }

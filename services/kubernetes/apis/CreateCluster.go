@@ -58,8 +58,11 @@ type CreateClusterRequest struct {
     /* 用户的SecretKey，插件调用open-api时的认证凭证  */
     SecretKey string `json:"secretKey"`
 
-    /* 是否启用用户自定义监控，默认不启用 (Optional) */
+    /* deprecated 在addonsConfig中同时指定，将被addonsConfig的设置覆盖 <br>是否启用用户自定义监控 (Optional) */
     UserMetrics *bool `json:"userMetrics"`
+
+    /* 集群组件配置 (Optional) */
+    AddonsConfig []kubernetes.AddonConfigSpec `json:"addonsConfig"`
 }
 
 /*
@@ -112,7 +115,8 @@ func NewCreateClusterRequest(
  * param masterCidr: k8s的master的cidr (Required)
  * param accessKey: 用户的AccessKey，插件调用open-api时的认证凭证 (Required)
  * param secretKey: 用户的SecretKey，插件调用open-api时的认证凭证 (Required)
- * param userMetrics: 是否启用用户自定义监控，默认不启用 (Optional)
+ * param userMetrics: deprecated 在addonsConfig中同时指定，将被addonsConfig的设置覆盖 <br>是否启用用户自定义监控 (Optional)
+ * param addonsConfig: 集群组件配置 (Optional)
  */
 func NewCreateClusterRequestWithAllParams(
     regionId string,
@@ -127,6 +131,7 @@ func NewCreateClusterRequestWithAllParams(
     accessKey string,
     secretKey string,
     userMetrics *bool,
+    addonsConfig []kubernetes.AddonConfigSpec,
 ) *CreateClusterRequest {
 
     return &CreateClusterRequest{
@@ -148,6 +153,7 @@ func NewCreateClusterRequestWithAllParams(
         AccessKey: accessKey,
         SecretKey: secretKey,
         UserMetrics: userMetrics,
+        AddonsConfig: addonsConfig,
     }
 }
 
@@ -219,9 +225,14 @@ func (r *CreateClusterRequest) SetSecretKey(secretKey string) {
     r.SecretKey = secretKey
 }
 
-/* param userMetrics: 是否启用用户自定义监控，默认不启用(Optional) */
+/* param userMetrics: deprecated 在addonsConfig中同时指定，将被addonsConfig的设置覆盖 <br>是否启用用户自定义监控(Optional) */
 func (r *CreateClusterRequest) SetUserMetrics(userMetrics bool) {
     r.UserMetrics = &userMetrics
+}
+
+/* param addonsConfig: 集群组件配置(Optional) */
+func (r *CreateClusterRequest) SetAddonsConfig(addonsConfig []kubernetes.AddonConfigSpec) {
+    r.AddonsConfig = addonsConfig
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
