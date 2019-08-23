@@ -50,5 +50,5 @@ type Backup struct {
     BackupFiles []string `json:"backupFiles"`
 
     /* 整个备份集大小，单位：Byte (Optional) */
-    BackupSizeByte int `json:"backupSizeByte"`
+    BackupSizeByte int64 `json:"backupSizeByte"`
 }

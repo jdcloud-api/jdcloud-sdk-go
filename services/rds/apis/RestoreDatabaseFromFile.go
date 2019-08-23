@@ -33,7 +33,7 @@ type RestoreDatabaseFromFileRequest struct {
     /* 库名称  */
     DbName string `json:"dbName"`
 
-    /* 共享文件的全局ID，可从上传文件查询接口[describeImportFiles](../import/describeImportFiles.md)获取；如果该文件不是共享文件，则不用输入该参数 (Optional) */
+    /* 共享文件的全局ID，可从上传文件查询接口[describeImportFiles](../Cloud-on-Single-Database/describeImportFiles.md)获取；如果该文件不是共享文件，则不用输入该参数 (Optional) */
     SharedFileGid *string `json:"sharedFileGid"`
 
     /* 用户上传的备份文件名称（包括文件后缀名），例如mydb1.bak  */
@@ -73,7 +73,7 @@ func NewRestoreDatabaseFromFileRequest(
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
  * param dbName: 库名称 (Required)
- * param sharedFileGid: 共享文件的全局ID，可从上传文件查询接口[describeImportFiles](../import/describeImportFiles.md)获取；如果该文件不是共享文件，则不用输入该参数 (Optional)
+ * param sharedFileGid: 共享文件的全局ID，可从上传文件查询接口[describeImportFiles](../Cloud-on-Single-Database/describeImportFiles.md)获取；如果该文件不是共享文件，则不用输入该参数 (Optional)
  * param fileName: 用户上传的备份文件名称（包括文件后缀名），例如mydb1.bak (Required)
  */
 func NewRestoreDatabaseFromFileRequestWithAllParams(
@@ -127,7 +127,7 @@ func (r *RestoreDatabaseFromFileRequest) SetDbName(dbName string) {
     r.DbName = dbName
 }
 
-/* param sharedFileGid: 共享文件的全局ID，可从上传文件查询接口[describeImportFiles](../import/describeImportFiles.md)获取；如果该文件不是共享文件，则不用输入该参数(Optional) */
+/* param sharedFileGid: 共享文件的全局ID，可从上传文件查询接口[describeImportFiles](../Cloud-on-Single-Database/describeImportFiles.md)获取；如果该文件不是共享文件，则不用输入该参数(Optional) */
 func (r *RestoreDatabaseFromFileRequest) SetSharedFileGid(sharedFileGid string) {
     r.SharedFileGid = &sharedFileGid
 }

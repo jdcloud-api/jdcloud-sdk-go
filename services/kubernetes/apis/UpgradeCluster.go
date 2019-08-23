@@ -37,14 +37,14 @@ type UpgradeClusterRequest struct {
     NodeGroupIds []string `json:"nodeGroupIds"`
 
     /* 指定升级到的版本  */
-    Verison string `json:"verison"`
+    Version string `json:"version"`
 }
 
 /*
  * param regionId: 地域 ID (Required)
  * param clusterId: 集群 ID (Required)
  * param scope: 升级范围 (Required)
- * param verison: 指定升级到的版本 (Required)
+ * param version: 指定升级到的版本 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -52,7 +52,7 @@ func NewUpgradeClusterRequest(
     regionId string,
     clusterId string,
     scope string,
-    verison string,
+    version string,
 ) *UpgradeClusterRequest {
 
 	return &UpgradeClusterRequest{
@@ -65,7 +65,7 @@ func NewUpgradeClusterRequest(
         RegionId: regionId,
         ClusterId: clusterId,
         Scope: scope,
-        Verison: verison,
+        Version: version,
 	}
 }
 
@@ -74,14 +74,14 @@ func NewUpgradeClusterRequest(
  * param clusterId: 集群 ID (Required)
  * param scope: 升级范围 (Required)
  * param nodeGroupIds: 节点组 id (Optional)
- * param verison: 指定升级到的版本 (Required)
+ * param version: 指定升级到的版本 (Required)
  */
 func NewUpgradeClusterRequestWithAllParams(
     regionId string,
     clusterId string,
     scope string,
     nodeGroupIds []string,
-    verison string,
+    version string,
 ) *UpgradeClusterRequest {
 
     return &UpgradeClusterRequest{
@@ -95,7 +95,7 @@ func NewUpgradeClusterRequestWithAllParams(
         ClusterId: clusterId,
         Scope: scope,
         NodeGroupIds: nodeGroupIds,
-        Verison: verison,
+        Version: version,
     }
 }
 
@@ -132,9 +132,9 @@ func (r *UpgradeClusterRequest) SetNodeGroupIds(nodeGroupIds []string) {
     r.NodeGroupIds = nodeGroupIds
 }
 
-/* param verison: 指定升级到的版本(Required) */
-func (r *UpgradeClusterRequest) SetVerison(verison string) {
-    r.Verison = verison
+/* param version: 指定升级到的版本(Required) */
+func (r *UpgradeClusterRequest) SetVersion(version string) {
+    r.Version = version
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

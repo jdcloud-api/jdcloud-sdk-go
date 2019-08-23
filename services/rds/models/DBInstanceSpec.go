@@ -32,7 +32,7 @@ type DBInstanceSpec struct {
     /* 实例规格代码，可以查看文档[MySQL 实例规格](../Instance-Specifications/Instance-Specifications-MySQL.md)、[SQL Server实例规格](../Instance-Specifications/Instance-Specifications-SQLServer.md)  */
     InstanceClass string `json:"instanceClass"`
 
-    /* 磁盘大小，单位GB  */
+    /* 磁盘大小，单位GB，可以查看文档[MySQL 实例规格](../Instance-Specifications/Instance-Specifications-MySQL.md)、[SQL Server实例规格](../Instance-Specifications/Instance-Specifications-SQLServer.md)  */
     InstanceStorageGB int `json:"instanceStorageGB"`
 
     /* 可用区ID， 第一个ID必须为主实例所在的可用区。如两个可用区一样，也需输入两个azId  */
@@ -52,6 +52,9 @@ type DBInstanceSpec struct {
 
     /* 存储类型，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md), 缺省值为：LOCAL_SSD<br>- 仅支持MySQL (Optional) */
     InstanceStorageType *string `json:"instanceStorageType"`
+
+    /* 应用访问端口, 仅支持 MySQL，Percona, MariaDB, 默认值为 3306 (Optional) */
+    InstancePort *string `json:"instancePort"`
 
     /* 实例数据加密(存储类型为云硬盘才支持数据加密)。false：不加密，true：加密，缺省为false<br>- 仅支持MySQL (Optional) */
     StorageEncrypted *bool `json:"storageEncrypted"`

@@ -47,6 +47,9 @@ type RestoredNewDBInstanceSpec struct {
     /* 存储类型，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md), 缺省值为：LOCAL_SSD<br>- 仅支持MySQL (Optional) */
     InstanceStorageType *string `json:"instanceStorageType"`
 
+    /* 应用访问端口, 仅支持 MySQL，Percona, MariaDB, 默认值为 3306 (Optional) */
+    InstancePort *string `json:"instancePort"`
+
     /* 实例数据加密(存储类型为云硬盘才支持数据加密)。false：不加密，true：加密，缺省为false<br>- 仅支持MySQL (Optional) */
     StorageEncrypted *bool `json:"storageEncrypted"`
 

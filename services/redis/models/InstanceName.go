@@ -19,7 +19,7 @@ package models
 
 type InstanceName struct {
 
-    /* 资源Id（即实例id）  */
+    /* 资源id（即实例id）  */
     ResourceId string `json:"resourceId"`
 
     /* 资源名称（即实例名称）  */
