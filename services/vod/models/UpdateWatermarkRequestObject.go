@@ -19,17 +19,31 @@ package models
 
 type UpdateWatermarkRequestObject struct {
 
-    /* 水印名称 (Optional) */
+    /* 水印名称。只支持中英文、数字。长度不超过128个字符。UTF-8编码。
+ (Optional) */
     Name string `json:"name"`
 
     /* 图片地址 (Optional) */
     ImgUrl string `json:"imgUrl"`
 
-    /* 水印宽度 (Optional) */
-    Width int `json:"width"`
+    /* 水印宽度。
+当 sizeUnit = pixel 时，取值范围为 [8, 4096] 整数
+当 sizeUnit = percent 时，取值范围为 [0, 100] 小数
+ (Optional) */
+    Width string `json:"width"`
 
-    /* 水印高度 (Optional) */
-    Height int `json:"height"`
+    /* 水印高度。
+当 sizeUnit = pixel 时，取值范围为 [8, 4096] 整数
+当 sizeUnit = percent 时，取值范围为 [0, 100] 小数
+ (Optional) */
+    Height string `json:"height"`
+
+    /* 尺寸单位。取值范围：
+  pixel - 像素
+  percent - 百分比
+默认值为 pixel
+ (Optional) */
+    SizeUnit string `json:"sizeUnit"`
 
     /* 水印位置。取值范围：
   LT - 左上
@@ -39,12 +53,22 @@ type UpdateWatermarkRequestObject struct {
  (Optional) */
     Position string `json:"position"`
 
-    /* 偏移单位 (Optional) */
-    Unit string `json:"unit"`
+    /* 水平偏移。
+当 offsetUnit = pixel 时，取值范围为 [8, 4088] 整数
+当 offsetUnit = percent 时，取值范围为 [0, 100] 小数
+ (Optional) */
+    OffsetX string `json:"offsetX"`
 
-    /* 水平偏移 (Optional) */
-    OffsetX int `json:"offsetX"`
+    /* 竖直偏移。
+当 offsetUnit = pixel 时，取值范围为 [8, 4088] 整数
+当 offsetUnit = percent 时，取值范围为 [0, 100] 小数
+ (Optional) */
+    OffsetY string `json:"offsetY"`
 
-    /* 竖直偏移 (Optional) */
-    OffsetY int `json:"offsetY"`
+    /* 偏移单位。取值范围：
+  pixel - 像素
+  percent - 百分比
+默认值为 pixel
+ (Optional) */
+    OffsetUnit string `json:"offsetUnit"`
 }

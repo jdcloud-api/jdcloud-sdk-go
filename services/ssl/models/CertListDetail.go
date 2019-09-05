@@ -51,4 +51,10 @@ type CertListDetail struct {
 
     /* 是否允许被下载,0->不允许,1->允许 (Optional) */
     Downloadable int `json:"downloadable"`
+
+    /* 是否允许被更新,0->不允许,1->允许 (Optional) */
+    Updateable int `json:"updateable"`
+
+    /* 证书状态 (Optional) */
+    CertStatus int `json:"certStatus"`
 }

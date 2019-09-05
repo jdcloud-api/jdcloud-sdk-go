@@ -25,7 +25,8 @@ type CreateTranscodeTemplateRequest struct {
 
     core.JDCloudRequest
 
-    /* 模板名称  */
+    /* 模板名称。长度不超过128个字符。UTF-8编码。
+  */
     Name string `json:"name"`
 
     /* 视频参数配置  */
@@ -54,7 +55,8 @@ type CreateTranscodeTemplateRequest struct {
 }
 
 /*
- * param name: 模板名称 (Required)
+ * param name: 模板名称。长度不超过128个字符。UTF-8编码。
+ (Required)
  * param video: 视频参数配置 (Required)
  * param audio: 音频参数配置 (Required)
  * param encapsulation: 封装配置 (Required)
@@ -92,7 +94,8 @@ func NewCreateTranscodeTemplateRequest(
 }
 
 /*
- * param name: 模板名称 (Required)
+ * param name: 模板名称。长度不超过128个字符。UTF-8编码。
+ (Required)
  * param video: 视频参数配置 (Required)
  * param audio: 音频参数配置 (Required)
  * param encapsulation: 封装配置 (Required)
@@ -146,7 +149,8 @@ func NewCreateTranscodeTemplateRequestWithoutParam() *CreateTranscodeTemplateReq
     }
 }
 
-/* param name: 模板名称(Required) */
+/* param name: 模板名称。长度不超过128个字符。UTF-8编码。
+(Required) */
 func (r *CreateTranscodeTemplateRequest) SetName(name string) {
     r.Name = name
 }

@@ -19,7 +19,8 @@ package models
 
 type CreateTranscodeTemplateRequestObject struct {
 
-    /* 模板名称  */
+    /* 模板名称。长度不超过128个字符。UTF-8编码。
+  */
     Name string `json:"name"`
 
     /* 视频参数配置  */

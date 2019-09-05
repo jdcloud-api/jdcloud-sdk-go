@@ -22,7 +22,8 @@ type TranscodeTemplateObject struct {
     /* 模板ID (Optional) */
     Id int64 `json:"id"`
 
-    /* 模板名称 (Optional) */
+    /* 模板名称。长度不超过128个字符。UTF-8编码。
+ (Optional) */
     Name string `json:"name"`
 
     /* 视频参数配置 (Optional) */

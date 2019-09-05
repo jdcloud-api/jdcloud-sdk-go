@@ -28,7 +28,8 @@ type UpdateTranscodeTemplateRequest struct {
     /* 模板ID  */
     TemplateId int `json:"templateId"`
 
-    /* 模板名称 (Optional) */
+    /* 模板名称。长度不超过128个字符。UTF-8编码。
+ (Optional) */
     Name *string `json:"name"`
 
     /* 视频参数配置 (Optional) */
@@ -78,7 +79,8 @@ func NewUpdateTranscodeTemplateRequest(
 
 /*
  * param templateId: 模板ID (Required)
- * param name: 模板名称 (Optional)
+ * param name: 模板名称。长度不超过128个字符。UTF-8编码。
+ (Optional)
  * param video: 视频参数配置 (Optional)
  * param audio: 音频参数配置 (Optional)
  * param encapsulation: 封装配置 (Optional)
@@ -139,7 +141,8 @@ func (r *UpdateTranscodeTemplateRequest) SetTemplateId(templateId int) {
     r.TemplateId = templateId
 }
 
-/* param name: 模板名称(Optional) */
+/* param name: 模板名称。长度不超过128个字符。UTF-8编码。
+(Optional) */
 func (r *UpdateTranscodeTemplateRequest) SetName(name string) {
     r.Name = &name
 }

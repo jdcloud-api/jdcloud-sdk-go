@@ -33,4 +33,16 @@ type DownloadCertDesc struct {
 
     /* 对私钥文件使用sha256算法计算的摘要信息 (Optional) */
     Digest string `json:"digest"`
+
+    /* 中间证书 (Optional) */
+    CaCertFile string `json:"caCertFile"`
+
+    /* 证书应用服务器类型 (Optional) */
+    ServerType string `json:"serverType"`
+
+    /* 证书加密密码 (Optional) */
+    CertEncryptePassword string `json:"certEncryptePassword"`
+
+    /* 域名 (Optional) */
+    CommonName string `json:"commonName"`
 }

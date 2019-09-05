@@ -28,9 +28,13 @@ type Video struct {
     /* 视频帧率。取值范围为 [1、60]，单位为 fps (Optional) */
     Fps *int `json:"fps"`
 
-    /* 视频输出宽度。取值范围 [128，4096]，取值需为2的倍数 (Optional) */
+    /* 视频输出宽度。取值范围 [128，4096] 整数。
+当值为空时，若 height 也为空，则 width 和 height 与原视频保持一致；若 height 不为空，则 width 按照原视频的分辨率等比缩放。
+ (Optional) */
     Width *int `json:"width"`
 
-    /* 视频输出高度。取值范围 [128，4096]，取值需为2的倍数 (Optional) */
+    /* 视频输出高度。取值范围 [128，4096] 整数。
+当值为空时，若 width 也为空，则 width 和 height 与原视频保持一致；若 width 不为空，则 height 按照原视频的分辨率等比缩放。
+ (Optional) */
     Height *int `json:"height"`
 }
