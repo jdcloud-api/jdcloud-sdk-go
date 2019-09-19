@@ -71,11 +71,17 @@ type InstanceSpec struct {
     /* 云物理服务器描述 (Optional) */
     Description *string `json:"description"`
 
-    /* 密码  */
-    Password string `json:"password"`
+    /* 密码，不传值会随机生成密码 (Optional) */
+    Password *string `json:"password"`
 
     /* 购买数量  */
     Count int `json:"count"`
+
+    /* 可执行脚本Base64编码后的内容，支持shell和python脚本 (Optional) */
+    UserData *string `json:"userData"`
+
+    /* 密钥对id (Optional) */
+    KeypairId *string `json:"keypairId"`
 
     /* 计费配置  */
     Charge *charge.ChargeSpec `json:"charge"`

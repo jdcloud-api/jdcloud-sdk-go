@@ -41,7 +41,7 @@ func NewPutMetricDataRequest(
 			URL:     "/customMetrics",
 			Method:  "POST",
 			Header:  nil,
-			Version: "v1",
+			Version: "v2",
 		},
 	}
 }
@@ -58,7 +58,7 @@ func NewPutMetricDataRequestWithAllParams(
             URL:     "/customMetrics",
             Method:  "POST",
             Header:  nil,
-            Version: "v1",
+            Version: "v2",
         },
         MetricDataList: metricDataList,
     }
@@ -72,7 +72,7 @@ func NewPutMetricDataRequestWithoutParam() *PutMetricDataRequest {
             URL:     "/customMetrics",
             Method:  "POST",
             Header:  nil,
-            Version: "v1",
+            Version: "v2",
         },
     }
 }

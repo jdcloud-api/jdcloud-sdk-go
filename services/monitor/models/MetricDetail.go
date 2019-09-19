@@ -19,18 +19,21 @@ package models
 
 type MetricDetail struct {
 
-    /* 指标的计算单位，比如bit/s、%、byte等 (Optional) */
+    /* 指标的计算单位，比如bit/s、%、k等 (Optional) */
     CalculateUnit string `json:"calculateUnit"`
 
-    /* 监控指标英文标识 (Optional) */
-    Metric string `json:"metric"`
-
-    /* 监控指标名称 (Optional) */
-    MetricName string `json:"metricName"`
-
-    /* 资源类型标识 (Optional) */
-    ServiceCode string `json:"serviceCode"`
+    /* 维度标识 (Optional) */
+    Dimension string `json:"dimension"`
 
     /* 取样频次 (Optional) */
     DownSample string `json:"downSample"`
+
+    /* 监控项英文标识 (Optional) */
+    Metric string `json:"metric"`
+
+    /* 监控项名称 (Optional) */
+    MetricName string `json:"metricName"`
+
+    /* 产品线标识 (Optional) */
+    ServiceCode string `json:"serviceCode"`
 }

@@ -25,63 +25,123 @@ type CreateAlarmRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域 Id，对于类似CDN这种没有地域属性的产品，regionId为cn-north-1  */
-    RegionId string `json:"regionId"`
+    /* 告警通知联系人 (Optional) */
+    BaseContact []monitor.BaseContact `json:"baseContact"`
 
     /* 幂等性校验参数,最长36位,若两个请求clientToken相等，则返回第一次创建的规则id，只创建一次规则  */
     ClientToken string `json:"clientToken"`
 
+    /* 资源维度，可用的维度请使用 describeProductsForAlarm接口查询 (Optional) */
+    Dimension *string `json:"dimension"`
+
+    /* 是否启用, 1表示启用规则，0表示禁用规则，默认为1 (Optional) */
+    Enabled *int64 `json:"enabled"`
+
+    /* 通知策略 (Optional) */
+    NoticeOption []monitor.NoticeOption `json:"noticeOption"`
+
+    /* 资源类型, 可用的资源类型列表请使用 describeProductsForAlarm接口查询。  */
+    Product string `json:"product"`
+
     /*   */
-    CreateAlarmSpec *monitor.CreateAlarmParam `json:"createAlarmSpec"`
+    ResourceOption *monitor.ResourceOption `json:"resourceOption"`
+
+    /* 规则名称，规则名称，最大长度42个字符，只允许中英文、数字、''-''和"_"  */
+    RuleName string `json:"ruleName"`
+
+    /*   */
+    RuleOption *monitor.RuleOption `json:"ruleOption"`
+
+    /* 规则类型, 默认为resourceMonitor (Optional) */
+    RuleType *string `json:"ruleType"`
+
+    /* 资源维度，指定监控数据实例的维度标签,如resourceId=id。(请确认资源的监控数据带有该标签，否则规则会报数据不足) (Optional) */
+    Tags *interface{} `json:"tags"`
+
+    /*  (Optional) */
+    WebHookOption *monitor.WebHookOption `json:"webHookOption"`
 }
 
 /*
- * param regionId: 地域 Id，对于类似CDN这种没有地域属性的产品，regionId为cn-north-1 (Required)
  * param clientToken: 幂等性校验参数,最长36位,若两个请求clientToken相等，则返回第一次创建的规则id，只创建一次规则 (Required)
- * param createAlarmSpec:  (Required)
+ * param product: 资源类型, 可用的资源类型列表请使用 describeProductsForAlarm接口查询。 (Required)
+ * param resourceOption:  (Required)
+ * param ruleName: 规则名称，规则名称，最大长度42个字符，只允许中英文、数字、''-''和"_" (Required)
+ * param ruleOption:  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateAlarmRequest(
-    regionId string,
     clientToken string,
-    createAlarmSpec *monitor.CreateAlarmParam,
+    product string,
+    resourceOption *monitor.ResourceOption,
+    ruleName string,
+    ruleOption *monitor.RuleOption,
 ) *CreateAlarmRequest {
 
 	return &CreateAlarmRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/alarms",
+			URL:     "/groupAlarms",
 			Method:  "POST",
 			Header:  nil,
-			Version: "v1",
+			Version: "v2",
 		},
-        RegionId: regionId,
         ClientToken: clientToken,
-        CreateAlarmSpec: createAlarmSpec,
+        Product: product,
+        ResourceOption: resourceOption,
+        RuleName: ruleName,
+        RuleOption: ruleOption,
 	}
 }
 
 /*
- * param regionId: 地域 Id，对于类似CDN这种没有地域属性的产品，regionId为cn-north-1 (Required)
+ * param baseContact: 告警通知联系人 (Optional)
  * param clientToken: 幂等性校验参数,最长36位,若两个请求clientToken相等，则返回第一次创建的规则id，只创建一次规则 (Required)
- * param createAlarmSpec:  (Required)
+ * param dimension: 资源维度，可用的维度请使用 describeProductsForAlarm接口查询 (Optional)
+ * param enabled: 是否启用, 1表示启用规则，0表示禁用规则，默认为1 (Optional)
+ * param noticeOption: 通知策略 (Optional)
+ * param product: 资源类型, 可用的资源类型列表请使用 describeProductsForAlarm接口查询。 (Required)
+ * param resourceOption:  (Required)
+ * param ruleName: 规则名称，规则名称，最大长度42个字符，只允许中英文、数字、''-''和"_" (Required)
+ * param ruleOption:  (Required)
+ * param ruleType: 规则类型, 默认为resourceMonitor (Optional)
+ * param tags: 资源维度，指定监控数据实例的维度标签,如resourceId=id。(请确认资源的监控数据带有该标签，否则规则会报数据不足) (Optional)
+ * param webHookOption:  (Optional)
  */
 func NewCreateAlarmRequestWithAllParams(
-    regionId string,
+    baseContact []monitor.BaseContact,
     clientToken string,
-    createAlarmSpec *monitor.CreateAlarmParam,
+    dimension *string,
+    enabled *int64,
+    noticeOption []monitor.NoticeOption,
+    product string,
+    resourceOption *monitor.ResourceOption,
+    ruleName string,
+    ruleOption *monitor.RuleOption,
+    ruleType *string,
+    tags *interface{},
+    webHookOption *monitor.WebHookOption,
 ) *CreateAlarmRequest {
 
     return &CreateAlarmRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/alarms",
+            URL:     "/groupAlarms",
             Method:  "POST",
             Header:  nil,
-            Version: "v1",
+            Version: "v2",
         },
-        RegionId: regionId,
+        BaseContact: baseContact,
         ClientToken: clientToken,
-        CreateAlarmSpec: createAlarmSpec,
+        Dimension: dimension,
+        Enabled: enabled,
+        NoticeOption: noticeOption,
+        Product: product,
+        ResourceOption: resourceOption,
+        RuleName: ruleName,
+        RuleOption: ruleOption,
+        RuleType: ruleType,
+        Tags: tags,
+        WebHookOption: webHookOption,
     }
 }
 
@@ -90,17 +150,17 @@ func NewCreateAlarmRequestWithoutParam() *CreateAlarmRequest {
 
     return &CreateAlarmRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/alarms",
+            URL:     "/groupAlarms",
             Method:  "POST",
             Header:  nil,
-            Version: "v1",
+            Version: "v2",
         },
     }
 }
 
-/* param regionId: 地域 Id，对于类似CDN这种没有地域属性的产品，regionId为cn-north-1(Required) */
-func (r *CreateAlarmRequest) SetRegionId(regionId string) {
-    r.RegionId = regionId
+/* param baseContact: 告警通知联系人(Optional) */
+func (r *CreateAlarmRequest) SetBaseContact(baseContact []monitor.BaseContact) {
+    r.BaseContact = baseContact
 }
 
 /* param clientToken: 幂等性校验参数,最长36位,若两个请求clientToken相等，则返回第一次创建的规则id，只创建一次规则(Required) */
@@ -108,15 +168,60 @@ func (r *CreateAlarmRequest) SetClientToken(clientToken string) {
     r.ClientToken = clientToken
 }
 
-/* param createAlarmSpec: (Required) */
-func (r *CreateAlarmRequest) SetCreateAlarmSpec(createAlarmSpec *monitor.CreateAlarmParam) {
-    r.CreateAlarmSpec = createAlarmSpec
+/* param dimension: 资源维度，可用的维度请使用 describeProductsForAlarm接口查询(Optional) */
+func (r *CreateAlarmRequest) SetDimension(dimension string) {
+    r.Dimension = &dimension
+}
+
+/* param enabled: 是否启用, 1表示启用规则，0表示禁用规则，默认为1(Optional) */
+func (r *CreateAlarmRequest) SetEnabled(enabled int64) {
+    r.Enabled = &enabled
+}
+
+/* param noticeOption: 通知策略(Optional) */
+func (r *CreateAlarmRequest) SetNoticeOption(noticeOption []monitor.NoticeOption) {
+    r.NoticeOption = noticeOption
+}
+
+/* param product: 资源类型, 可用的资源类型列表请使用 describeProductsForAlarm接口查询。(Required) */
+func (r *CreateAlarmRequest) SetProduct(product string) {
+    r.Product = product
+}
+
+/* param resourceOption: (Required) */
+func (r *CreateAlarmRequest) SetResourceOption(resourceOption *monitor.ResourceOption) {
+    r.ResourceOption = resourceOption
+}
+
+/* param ruleName: 规则名称，规则名称，最大长度42个字符，只允许中英文、数字、''-''和"_"(Required) */
+func (r *CreateAlarmRequest) SetRuleName(ruleName string) {
+    r.RuleName = ruleName
+}
+
+/* param ruleOption: (Required) */
+func (r *CreateAlarmRequest) SetRuleOption(ruleOption *monitor.RuleOption) {
+    r.RuleOption = ruleOption
+}
+
+/* param ruleType: 规则类型, 默认为resourceMonitor(Optional) */
+func (r *CreateAlarmRequest) SetRuleType(ruleType string) {
+    r.RuleType = &ruleType
+}
+
+/* param tags: 资源维度，指定监控数据实例的维度标签,如resourceId=id。(请确认资源的监控数据带有该标签，否则规则会报数据不足)(Optional) */
+func (r *CreateAlarmRequest) SetTags(tags interface{}) {
+    r.Tags = &tags
+}
+
+/* param webHookOption: (Optional) */
+func (r *CreateAlarmRequest) SetWebHookOption(webHookOption *monitor.WebHookOption) {
+    r.WebHookOption = webHookOption
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r CreateAlarmRequest) GetRegionId() string {
-    return r.RegionId
+    return ""
 }
 
 type CreateAlarmResponse struct {
@@ -126,5 +231,5 @@ type CreateAlarmResponse struct {
 }
 
 type CreateAlarmResult struct {
-    AlarmIdList []string `json:"alarmIdList"`
+    AlarmId string `json:"alarmId"`
 }

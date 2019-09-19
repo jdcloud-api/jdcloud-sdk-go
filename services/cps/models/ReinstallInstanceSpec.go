@@ -42,4 +42,10 @@ type ReinstallInstanceSpec struct {
 
     /* 主机名 (Optional) */
     Hostname *string `json:"hostname"`
+
+    /* 可执行脚本Base64编码后的内容，支持shell和python脚本 (Optional) */
+    UserData *string `json:"userData"`
+
+    /* 秘钥对id (Optional) */
+    KeypairId *string `json:"keypairId"`
 }

@@ -25,7 +25,7 @@ type DescribeMetricsRequest struct {
 
     core.JDCloudRequest
 
-    /* 资源的类型，取值vm, lb, ip, database 等  */
+    /* 资源的类型，取值vm, lb, ip, database 等。<a href="https://docs.jdcloud.com/cn/monitoring/api/describeservices?content=API&SOP=JDCloud">describeServices</a>：查询己接入云监控的产品线列表，当产品线下有多个分组时，查询分组对应的监控项，serviceCode请传对应分组的groupCode字段值  */
     ServiceCode string `json:"serviceCode"`
 
     /* metric的类型，取值0(控制台展示)、1(内部使用，控制台不展示)、2(所有).默认取0 (Optional) */
@@ -33,7 +33,7 @@ type DescribeMetricsRequest struct {
 }
 
 /*
- * param serviceCode: 资源的类型，取值vm, lb, ip, database 等 (Required)
+ * param serviceCode: 资源的类型，取值vm, lb, ip, database 等。<a href="https://docs.jdcloud.com/cn/monitoring/api/describeservices?content=API&SOP=JDCloud">describeServices</a>：查询己接入云监控的产品线列表，当产品线下有多个分组时，查询分组对应的监控项，serviceCode请传对应分组的groupCode字段值 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -46,14 +46,14 @@ func NewDescribeMetricsRequest(
 			URL:     "/metrics",
 			Method:  "GET",
 			Header:  nil,
-			Version: "v1",
+			Version: "v2",
 		},
         ServiceCode: serviceCode,
 	}
 }
 
 /*
- * param serviceCode: 资源的类型，取值vm, lb, ip, database 等 (Required)
+ * param serviceCode: 资源的类型，取值vm, lb, ip, database 等。<a href="https://docs.jdcloud.com/cn/monitoring/api/describeservices?content=API&SOP=JDCloud">describeServices</a>：查询己接入云监控的产品线列表，当产品线下有多个分组时，查询分组对应的监控项，serviceCode请传对应分组的groupCode字段值 (Required)
  * param type_: metric的类型，取值0(控制台展示)、1(内部使用，控制台不展示)、2(所有).默认取0 (Optional)
  */
 func NewDescribeMetricsRequestWithAllParams(
@@ -66,7 +66,7 @@ func NewDescribeMetricsRequestWithAllParams(
             URL:     "/metrics",
             Method:  "GET",
             Header:  nil,
-            Version: "v1",
+            Version: "v2",
         },
         ServiceCode: serviceCode,
         Type: type_,
@@ -81,12 +81,12 @@ func NewDescribeMetricsRequestWithoutParam() *DescribeMetricsRequest {
             URL:     "/metrics",
             Method:  "GET",
             Header:  nil,
-            Version: "v1",
+            Version: "v2",
         },
     }
 }
 
-/* param serviceCode: 资源的类型，取值vm, lb, ip, database 等(Required) */
+/* param serviceCode: 资源的类型，取值vm, lb, ip, database 等。<a href="https://docs.jdcloud.com/cn/monitoring/api/describeservices?content=API&SOP=JDCloud">describeServices</a>：查询己接入云监控的产品线列表，当产品线下有多个分组时，查询分组对应的监控项，serviceCode请传对应分组的groupCode字段值(Required) */
 func (r *DescribeMetricsRequest) SetServiceCode(serviceCode string) {
     r.ServiceCode = serviceCode
 }

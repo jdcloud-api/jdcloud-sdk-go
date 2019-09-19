@@ -24,54 +24,45 @@ type DeleteAlarmsRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域 Id  */
-    RegionId string `json:"regionId"`
-
-    /* 待删除的规则id，用逗号,分隔  */
-    Ids string `json:"ids"`
+    /* 规则id  */
+    AlarmId string `json:"alarmId"`
 }
 
 /*
- * param regionId: 地域 Id (Required)
- * param ids: 待删除的规则id，用逗号,分隔 (Required)
+ * param alarmId: 规则id (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDeleteAlarmsRequest(
-    regionId string,
-    ids string,
+    alarmId string,
 ) *DeleteAlarmsRequest {
 
 	return &DeleteAlarmsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/alarms",
+			URL:     "/groupAlarms/{alarmId}",
 			Method:  "DELETE",
 			Header:  nil,
-			Version: "v1",
+			Version: "v2",
 		},
-        RegionId: regionId,
-        Ids: ids,
+        AlarmId: alarmId,
 	}
 }
 
 /*
- * param regionId: 地域 Id (Required)
- * param ids: 待删除的规则id，用逗号,分隔 (Required)
+ * param alarmId: 规则id (Required)
  */
 func NewDeleteAlarmsRequestWithAllParams(
-    regionId string,
-    ids string,
+    alarmId string,
 ) *DeleteAlarmsRequest {
 
     return &DeleteAlarmsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/alarms",
+            URL:     "/groupAlarms/{alarmId}",
             Method:  "DELETE",
             Header:  nil,
-            Version: "v1",
+            Version: "v2",
         },
-        RegionId: regionId,
-        Ids: ids,
+        AlarmId: alarmId,
     }
 }
 
@@ -80,28 +71,23 @@ func NewDeleteAlarmsRequestWithoutParam() *DeleteAlarmsRequest {
 
     return &DeleteAlarmsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/alarms",
+            URL:     "/groupAlarms/{alarmId}",
             Method:  "DELETE",
             Header:  nil,
-            Version: "v1",
+            Version: "v2",
         },
     }
 }
 
-/* param regionId: 地域 Id(Required) */
-func (r *DeleteAlarmsRequest) SetRegionId(regionId string) {
-    r.RegionId = regionId
-}
-
-/* param ids: 待删除的规则id，用逗号,分隔(Required) */
-func (r *DeleteAlarmsRequest) SetIds(ids string) {
-    r.Ids = ids
+/* param alarmId: 规则id(Required) */
+func (r *DeleteAlarmsRequest) SetAlarmId(alarmId string) {
+    r.AlarmId = alarmId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r DeleteAlarmsRequest) GetRegionId() string {
-    return r.RegionId
+    return ""
 }
 
 type DeleteAlarmsResponse struct {
@@ -111,4 +97,5 @@ type DeleteAlarmsResponse struct {
 }
 
 type DeleteAlarmsResult struct {
+    Success bool `json:"success"`
 }

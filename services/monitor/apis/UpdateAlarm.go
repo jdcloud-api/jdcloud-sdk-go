@@ -25,93 +25,123 @@ type UpdateAlarmRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域 Id，对于类似CDN这种没有地域属性的产品，regionId为cn-north-1  */
-    RegionId string `json:"regionId"`
-
     /* 规则id  */
     AlarmId string `json:"alarmId"`
 
-    /* 通知联系人 (Optional) */
-    Contacts []monitor.BaseContact `json:"contacts"`
+    /* 告警通知联系人 (Optional) */
+    BaseContact []monitor.BaseContact `json:"baseContact"`
+
+    /* 资源维度，可用的维度请使用 describeProductsForAlarm接口查询 (Optional) */
+    Dimension *string `json:"dimension"`
+
+    /* 是否启用, 1表示启用规则，0表示禁用规则，默认为1 (Optional) */
+    Enabled *int64 `json:"enabled"`
+
+    /* 通知策略 (Optional) */
+    NoticeOption []monitor.NoticeOption `json:"noticeOption"`
+
+    /* 资源类型, 可用的资源类型列表请使用 describeProductsForAlarm接口查询。  */
+    Product string `json:"product"`
 
     /*   */
-    Rule *monitor.BaseRule `json:"rule"`
+    ResourceOption *monitor.ResourceOption `json:"resourceOption"`
 
-    /* 回调content 注：仅webHookUrl和webHookContent均不为空时，才会创建webHook (Optional) */
-    WebHookContent *string `json:"webHookContent"`
+    /* 规则名称，规则名称，最大长度42个字符，只允许中英文、数字、''-''和"_"  */
+    RuleName string `json:"ruleName"`
 
-    /* webHook协议，目前支持http，https (Optional) */
-    WebHookProtocol *string `json:"webHookProtocol"`
+    /*   */
+    RuleOption *monitor.RuleOption `json:"ruleOption"`
 
-    /* 回调secret，用户请求签名，防伪造 (Optional) */
-    WebHookSecret *string `json:"webHookSecret"`
+    /* 规则类型, 默认为resourceMonitor (Optional) */
+    RuleType *string `json:"ruleType"`
 
-    /* 回调url，例如http://www.jdcloud.com (Optional) */
-    WebHookUrl *string `json:"webHookUrl"`
+    /* 资源维度，指定监控数据实例的维度标签,如resourceId=id。(请确认资源的监控数据带有该标签，否则规则会报数据不足) (Optional) */
+    Tags *interface{} `json:"tags"`
+
+    /*  (Optional) */
+    WebHookOption *monitor.WebHookOption `json:"webHookOption"`
 }
 
 /*
- * param regionId: 地域 Id，对于类似CDN这种没有地域属性的产品，regionId为cn-north-1 (Required)
  * param alarmId: 规则id (Required)
- * param rule:  (Required)
+ * param product: 资源类型, 可用的资源类型列表请使用 describeProductsForAlarm接口查询。 (Required)
+ * param resourceOption:  (Required)
+ * param ruleName: 规则名称，规则名称，最大长度42个字符，只允许中英文、数字、''-''和"_" (Required)
+ * param ruleOption:  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewUpdateAlarmRequest(
-    regionId string,
     alarmId string,
-    rule *monitor.BaseRule,
+    product string,
+    resourceOption *monitor.ResourceOption,
+    ruleName string,
+    ruleOption *monitor.RuleOption,
 ) *UpdateAlarmRequest {
 
 	return &UpdateAlarmRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/alarms/{alarmId}",
-			Method:  "PATCH",
+			URL:     "/groupAlarms/{alarmId}",
+			Method:  "PUT",
 			Header:  nil,
-			Version: "v1",
+			Version: "v2",
 		},
-        RegionId: regionId,
         AlarmId: alarmId,
-        Rule: rule,
+        Product: product,
+        ResourceOption: resourceOption,
+        RuleName: ruleName,
+        RuleOption: ruleOption,
 	}
 }
 
 /*
- * param regionId: 地域 Id，对于类似CDN这种没有地域属性的产品，regionId为cn-north-1 (Required)
  * param alarmId: 规则id (Required)
- * param contacts: 通知联系人 (Optional)
- * param rule:  (Required)
- * param webHookContent: 回调content 注：仅webHookUrl和webHookContent均不为空时，才会创建webHook (Optional)
- * param webHookProtocol: webHook协议，目前支持http，https (Optional)
- * param webHookSecret: 回调secret，用户请求签名，防伪造 (Optional)
- * param webHookUrl: 回调url，例如http://www.jdcloud.com (Optional)
+ * param baseContact: 告警通知联系人 (Optional)
+ * param dimension: 资源维度，可用的维度请使用 describeProductsForAlarm接口查询 (Optional)
+ * param enabled: 是否启用, 1表示启用规则，0表示禁用规则，默认为1 (Optional)
+ * param noticeOption: 通知策略 (Optional)
+ * param product: 资源类型, 可用的资源类型列表请使用 describeProductsForAlarm接口查询。 (Required)
+ * param resourceOption:  (Required)
+ * param ruleName: 规则名称，规则名称，最大长度42个字符，只允许中英文、数字、''-''和"_" (Required)
+ * param ruleOption:  (Required)
+ * param ruleType: 规则类型, 默认为resourceMonitor (Optional)
+ * param tags: 资源维度，指定监控数据实例的维度标签,如resourceId=id。(请确认资源的监控数据带有该标签，否则规则会报数据不足) (Optional)
+ * param webHookOption:  (Optional)
  */
 func NewUpdateAlarmRequestWithAllParams(
-    regionId string,
     alarmId string,
-    contacts []monitor.BaseContact,
-    rule *monitor.BaseRule,
-    webHookContent *string,
-    webHookProtocol *string,
-    webHookSecret *string,
-    webHookUrl *string,
+    baseContact []monitor.BaseContact,
+    dimension *string,
+    enabled *int64,
+    noticeOption []monitor.NoticeOption,
+    product string,
+    resourceOption *monitor.ResourceOption,
+    ruleName string,
+    ruleOption *monitor.RuleOption,
+    ruleType *string,
+    tags *interface{},
+    webHookOption *monitor.WebHookOption,
 ) *UpdateAlarmRequest {
 
     return &UpdateAlarmRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/alarms/{alarmId}",
-            Method:  "PATCH",
+            URL:     "/groupAlarms/{alarmId}",
+            Method:  "PUT",
             Header:  nil,
-            Version: "v1",
+            Version: "v2",
         },
-        RegionId: regionId,
         AlarmId: alarmId,
-        Contacts: contacts,
-        Rule: rule,
-        WebHookContent: webHookContent,
-        WebHookProtocol: webHookProtocol,
-        WebHookSecret: webHookSecret,
-        WebHookUrl: webHookUrl,
+        BaseContact: baseContact,
+        Dimension: dimension,
+        Enabled: enabled,
+        NoticeOption: noticeOption,
+        Product: product,
+        ResourceOption: resourceOption,
+        RuleName: ruleName,
+        RuleOption: ruleOption,
+        RuleType: ruleType,
+        Tags: tags,
+        WebHookOption: webHookOption,
     }
 }
 
@@ -120,17 +150,12 @@ func NewUpdateAlarmRequestWithoutParam() *UpdateAlarmRequest {
 
     return &UpdateAlarmRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/alarms/{alarmId}",
-            Method:  "PATCH",
+            URL:     "/groupAlarms/{alarmId}",
+            Method:  "PUT",
             Header:  nil,
-            Version: "v1",
+            Version: "v2",
         },
     }
-}
-
-/* param regionId: 地域 Id，对于类似CDN这种没有地域属性的产品，regionId为cn-north-1(Required) */
-func (r *UpdateAlarmRequest) SetRegionId(regionId string) {
-    r.RegionId = regionId
 }
 
 /* param alarmId: 规则id(Required) */
@@ -138,40 +163,65 @@ func (r *UpdateAlarmRequest) SetAlarmId(alarmId string) {
     r.AlarmId = alarmId
 }
 
-/* param contacts: 通知联系人(Optional) */
-func (r *UpdateAlarmRequest) SetContacts(contacts []monitor.BaseContact) {
-    r.Contacts = contacts
+/* param baseContact: 告警通知联系人(Optional) */
+func (r *UpdateAlarmRequest) SetBaseContact(baseContact []monitor.BaseContact) {
+    r.BaseContact = baseContact
 }
 
-/* param rule: (Required) */
-func (r *UpdateAlarmRequest) SetRule(rule *monitor.BaseRule) {
-    r.Rule = rule
+/* param dimension: 资源维度，可用的维度请使用 describeProductsForAlarm接口查询(Optional) */
+func (r *UpdateAlarmRequest) SetDimension(dimension string) {
+    r.Dimension = &dimension
 }
 
-/* param webHookContent: 回调content 注：仅webHookUrl和webHookContent均不为空时，才会创建webHook(Optional) */
-func (r *UpdateAlarmRequest) SetWebHookContent(webHookContent string) {
-    r.WebHookContent = &webHookContent
+/* param enabled: 是否启用, 1表示启用规则，0表示禁用规则，默认为1(Optional) */
+func (r *UpdateAlarmRequest) SetEnabled(enabled int64) {
+    r.Enabled = &enabled
 }
 
-/* param webHookProtocol: webHook协议，目前支持http，https(Optional) */
-func (r *UpdateAlarmRequest) SetWebHookProtocol(webHookProtocol string) {
-    r.WebHookProtocol = &webHookProtocol
+/* param noticeOption: 通知策略(Optional) */
+func (r *UpdateAlarmRequest) SetNoticeOption(noticeOption []monitor.NoticeOption) {
+    r.NoticeOption = noticeOption
 }
 
-/* param webHookSecret: 回调secret，用户请求签名，防伪造(Optional) */
-func (r *UpdateAlarmRequest) SetWebHookSecret(webHookSecret string) {
-    r.WebHookSecret = &webHookSecret
+/* param product: 资源类型, 可用的资源类型列表请使用 describeProductsForAlarm接口查询。(Required) */
+func (r *UpdateAlarmRequest) SetProduct(product string) {
+    r.Product = product
 }
 
-/* param webHookUrl: 回调url，例如http://www.jdcloud.com(Optional) */
-func (r *UpdateAlarmRequest) SetWebHookUrl(webHookUrl string) {
-    r.WebHookUrl = &webHookUrl
+/* param resourceOption: (Required) */
+func (r *UpdateAlarmRequest) SetResourceOption(resourceOption *monitor.ResourceOption) {
+    r.ResourceOption = resourceOption
+}
+
+/* param ruleName: 规则名称，规则名称，最大长度42个字符，只允许中英文、数字、''-''和"_"(Required) */
+func (r *UpdateAlarmRequest) SetRuleName(ruleName string) {
+    r.RuleName = ruleName
+}
+
+/* param ruleOption: (Required) */
+func (r *UpdateAlarmRequest) SetRuleOption(ruleOption *monitor.RuleOption) {
+    r.RuleOption = ruleOption
+}
+
+/* param ruleType: 规则类型, 默认为resourceMonitor(Optional) */
+func (r *UpdateAlarmRequest) SetRuleType(ruleType string) {
+    r.RuleType = &ruleType
+}
+
+/* param tags: 资源维度，指定监控数据实例的维度标签,如resourceId=id。(请确认资源的监控数据带有该标签，否则规则会报数据不足)(Optional) */
+func (r *UpdateAlarmRequest) SetTags(tags interface{}) {
+    r.Tags = &tags
+}
+
+/* param webHookOption: (Optional) */
+func (r *UpdateAlarmRequest) SetWebHookOption(webHookOption *monitor.WebHookOption) {
+    r.WebHookOption = webHookOption
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r UpdateAlarmRequest) GetRegionId() string {
-    return r.RegionId
+    return ""
 }
 
 type UpdateAlarmResponse struct {
@@ -181,4 +231,6 @@ type UpdateAlarmResponse struct {
 }
 
 type UpdateAlarmResult struct {
+    AlarmId string `json:"alarmId"`
+    Success bool `json:"success"`
 }

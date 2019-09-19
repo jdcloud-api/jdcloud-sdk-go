@@ -31,10 +31,10 @@ type DescribeMetricDataRequest struct {
     /* 监控项英文标识(id)  */
     Metric string `json:"metric"`
 
-    /* 聚合方式，默认等于downSampleType或avg，可选值参考:sum、avg、last、min、max (Optional) */
+    /* 聚合方式，用于不同时间轴上的聚合。如balance产品同一个resourceId下存在port=80和port=8080等多种维度。可选值参考:sum、avg、min、max (Optional) */
     AggrType *string `json:"aggrType"`
 
-    /* 采样方式，默认等于aggrType或avg，可选值参考：sum、avg、last、min、max (Optional) */
+    /* 采样方式，用于在时间轴维度上将聚合周期内的数据聚合为一个点。可选值参考：sum(聚合周期内的数据求和)、avg(求平均)、last(最新值)、min(最小值)、max(最大值) (Optional) */
     DownSampleType *string `json:"downSampleType"`
 
     /* 查询时间范围的开始时间， UTC时间，格式：2016-12-11T00:00:00+0800（注意在url中+要转译为%2B故url中为2016-12-11T00:00:00%2B0800） (Optional) */
@@ -55,8 +55,11 @@ type DescribeMetricDataRequest struct {
     /* 是否求速率 (Optional) */
     Rate *bool `json:"rate"`
 
-    /* 资源的类型，取值vm, lb, ip, database 等  */
-    ServiceCode string `json:"serviceCode"`
+    /* 资源的类型，取值vm, lb, ip, database 等,<a href="https://docs.jdcloud.com/cn/monitoring/api/describeservices?content=API&SOP=JDCloud">describeServices</a>：查询己接入云监控的产品线列表 (Optional) */
+    ServiceCode *string `json:"serviceCode"`
+
+    /* 资源的维度。查询serviceCode下可用的维度请使用describeServices接口 (Optional) */
+    Dimension *string `json:"dimension"`
 
     /* 资源的uuid  */
     ResourceId string `json:"resourceId"`
@@ -65,7 +68,6 @@ type DescribeMetricDataRequest struct {
 /*
  * param regionId: 地域 Id (Required)
  * param metric: 监控项英文标识(id) (Required)
- * param serviceCode: 资源的类型，取值vm, lb, ip, database 等 (Required)
  * param resourceId: 资源的uuid (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -73,7 +75,6 @@ type DescribeMetricDataRequest struct {
 func NewDescribeMetricDataRequest(
     regionId string,
     metric string,
-    serviceCode string,
     resourceId string,
 ) *DescribeMetricDataRequest {
 
@@ -82,11 +83,10 @@ func NewDescribeMetricDataRequest(
 			URL:     "/regions/{regionId}/metrics/{metric}/metricData",
 			Method:  "GET",
 			Header:  nil,
-			Version: "v1",
+			Version: "v2",
 		},
         RegionId: regionId,
         Metric: metric,
-        ServiceCode: serviceCode,
         ResourceId: resourceId,
 	}
 }
@@ -94,15 +94,16 @@ func NewDescribeMetricDataRequest(
 /*
  * param regionId: 地域 Id (Required)
  * param metric: 监控项英文标识(id) (Required)
- * param aggrType: 聚合方式，默认等于downSampleType或avg，可选值参考:sum、avg、last、min、max (Optional)
- * param downSampleType: 采样方式，默认等于aggrType或avg，可选值参考：sum、avg、last、min、max (Optional)
+ * param aggrType: 聚合方式，用于不同时间轴上的聚合。如balance产品同一个resourceId下存在port=80和port=8080等多种维度。可选值参考:sum、avg、min、max (Optional)
+ * param downSampleType: 采样方式，用于在时间轴维度上将聚合周期内的数据聚合为一个点。可选值参考：sum(聚合周期内的数据求和)、avg(求平均)、last(最新值)、min(最小值)、max(最大值) (Optional)
  * param startTime: 查询时间范围的开始时间， UTC时间，格式：2016-12-11T00:00:00+0800（注意在url中+要转译为%2B故url中为2016-12-11T00:00:00%2B0800） (Optional)
  * param endTime: 查询时间范围的结束时间， UTC时间，格式：2016-12-11T00:00:00+0800（为空时，将由startTime与timeInterval计算得出）（注意在url中+要转译为%2B故url中为2016-12-11T00:00:00%2B0800） (Optional)
  * param timeInterval: 时间间隔：1h，6h，12h，1d，3d，7d，14d，固定时间间隔，timeInterval默认为1h，当前时间往 前1h (Optional)
  * param tags: 监控指标数据的维度信息,根据tags来筛选指标数据不同的维度 (Optional)
  * param groupBy: 是否对查询的tags分组 (Optional)
  * param rate: 是否求速率 (Optional)
- * param serviceCode: 资源的类型，取值vm, lb, ip, database 等 (Required)
+ * param serviceCode: 资源的类型，取值vm, lb, ip, database 等,<a href="https://docs.jdcloud.com/cn/monitoring/api/describeservices?content=API&SOP=JDCloud">describeServices</a>：查询己接入云监控的产品线列表 (Optional)
+ * param dimension: 资源的维度。查询serviceCode下可用的维度请使用describeServices接口 (Optional)
  * param resourceId: 资源的uuid (Required)
  */
 func NewDescribeMetricDataRequestWithAllParams(
@@ -116,7 +117,8 @@ func NewDescribeMetricDataRequestWithAllParams(
     tags []monitor.TagFilter,
     groupBy *bool,
     rate *bool,
-    serviceCode string,
+    serviceCode *string,
+    dimension *string,
     resourceId string,
 ) *DescribeMetricDataRequest {
 
@@ -125,7 +127,7 @@ func NewDescribeMetricDataRequestWithAllParams(
             URL:     "/regions/{regionId}/metrics/{metric}/metricData",
             Method:  "GET",
             Header:  nil,
-            Version: "v1",
+            Version: "v2",
         },
         RegionId: regionId,
         Metric: metric,
@@ -138,6 +140,7 @@ func NewDescribeMetricDataRequestWithAllParams(
         GroupBy: groupBy,
         Rate: rate,
         ServiceCode: serviceCode,
+        Dimension: dimension,
         ResourceId: resourceId,
     }
 }
@@ -150,7 +153,7 @@ func NewDescribeMetricDataRequestWithoutParam() *DescribeMetricDataRequest {
             URL:     "/regions/{regionId}/metrics/{metric}/metricData",
             Method:  "GET",
             Header:  nil,
-            Version: "v1",
+            Version: "v2",
         },
     }
 }
@@ -165,12 +168,12 @@ func (r *DescribeMetricDataRequest) SetMetric(metric string) {
     r.Metric = metric
 }
 
-/* param aggrType: 聚合方式，默认等于downSampleType或avg，可选值参考:sum、avg、last、min、max(Optional) */
+/* param aggrType: 聚合方式，用于不同时间轴上的聚合。如balance产品同一个resourceId下存在port=80和port=8080等多种维度。可选值参考:sum、avg、min、max(Optional) */
 func (r *DescribeMetricDataRequest) SetAggrType(aggrType string) {
     r.AggrType = &aggrType
 }
 
-/* param downSampleType: 采样方式，默认等于aggrType或avg，可选值参考：sum、avg、last、min、max(Optional) */
+/* param downSampleType: 采样方式，用于在时间轴维度上将聚合周期内的数据聚合为一个点。可选值参考：sum(聚合周期内的数据求和)、avg(求平均)、last(最新值)、min(最小值)、max(最大值)(Optional) */
 func (r *DescribeMetricDataRequest) SetDownSampleType(downSampleType string) {
     r.DownSampleType = &downSampleType
 }
@@ -205,9 +208,14 @@ func (r *DescribeMetricDataRequest) SetRate(rate bool) {
     r.Rate = &rate
 }
 
-/* param serviceCode: 资源的类型，取值vm, lb, ip, database 等(Required) */
+/* param serviceCode: 资源的类型，取值vm, lb, ip, database 等,<a href="https://docs.jdcloud.com/cn/monitoring/api/describeservices?content=API&SOP=JDCloud">describeServices</a>：查询己接入云监控的产品线列表(Optional) */
 func (r *DescribeMetricDataRequest) SetServiceCode(serviceCode string) {
-    r.ServiceCode = serviceCode
+    r.ServiceCode = &serviceCode
+}
+
+/* param dimension: 资源的维度。查询serviceCode下可用的维度请使用describeServices接口(Optional) */
+func (r *DescribeMetricDataRequest) SetDimension(dimension string) {
+    r.Dimension = &dimension
 }
 
 /* param resourceId: 资源的uuid(Required) */

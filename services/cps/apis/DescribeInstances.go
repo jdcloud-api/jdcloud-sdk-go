@@ -50,6 +50,9 @@ type DescribeInstancesRequest struct {
     /* 子网ID (Optional) */
     SubnetId *string `json:"subnetId"`
 
+    /* 密钥对ID (Optional) */
+    KeypairId *string `json:"keypairId"`
+
     /* 是否启用外网, yes/no (Optional) */
     EnableInternet *string `json:"enableInternet"`
 
@@ -89,6 +92,7 @@ func NewDescribeInstancesRequest(
  * param networkType: 网络类型，精确匹配，支持basic，vpc (Optional)
  * param deviceType: 实例类型，精确匹配，调用接口（describeDeviceTypes）获取实例类型 (Optional)
  * param subnetId: 子网ID (Optional)
+ * param keypairId: 密钥对ID (Optional)
  * param enableInternet: 是否启用外网, yes/no (Optional)
  * param filters: instanceId - 云物理服务器ID，精确匹配，支持多个<br/>
 privateIp - 云物理服务器内网IP，精确匹配，支持多个<br/>
@@ -104,6 +108,7 @@ func NewDescribeInstancesRequestWithAllParams(
     networkType *string,
     deviceType *string,
     subnetId *string,
+    keypairId *string,
     enableInternet *string,
     filters []common.Filter,
 ) *DescribeInstancesRequest {
@@ -123,6 +128,7 @@ func NewDescribeInstancesRequestWithAllParams(
         NetworkType: networkType,
         DeviceType: deviceType,
         SubnetId: subnetId,
+        KeypairId: keypairId,
         EnableInternet: enableInternet,
         Filters: filters,
     }
@@ -179,6 +185,11 @@ func (r *DescribeInstancesRequest) SetDeviceType(deviceType string) {
 /* param subnetId: 子网ID(Optional) */
 func (r *DescribeInstancesRequest) SetSubnetId(subnetId string) {
     r.SubnetId = &subnetId
+}
+
+/* param keypairId: 密钥对ID(Optional) */
+func (r *DescribeInstancesRequest) SetKeypairId(keypairId string) {
+    r.KeypairId = &keypairId
 }
 
 /* param enableInternet: 是否启用外网, yes/no(Optional) */

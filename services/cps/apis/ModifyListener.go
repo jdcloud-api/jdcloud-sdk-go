@@ -25,7 +25,7 @@ type ModifyListenerRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域  */
+    /* 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域  */
     RegionId string `json:"regionId"`
 
     /* 监听器ID  */
@@ -37,26 +37,14 @@ type ModifyListenerRequest struct {
     /* 会话保持 (Optional) */
     StickySession *string `json:"stickySession"`
 
-    /* 会话保持超时时间，单位s (Optional) */
-    StickySessionTimeout *int `json:"stickySessionTimeout"`
-
-    /* 会话类型ImplantCookie|RewriteCookie (Optional) */
-    CookieType *string `json:"cookieType"`
-
     /* 是否获取真实ip，取值范围on|off (Optional) */
     RealIp *string `json:"realIp"`
-
-    /* 证书ID (Optional) */
-    CertificateId *string `json:"certificateId"`
 
     /* 名称 (Optional) */
     Name *string `json:"name"`
 
     /* 描述 (Optional) */
     Description *string `json:"description"`
-
-    /* HTTP扩展头部 (Optional) */
-    Headers []string `json:"headers"`
 
     /* 健康检查 (Optional) */
     HealthCheck *string `json:"healthCheck"`
@@ -73,21 +61,12 @@ type ModifyListenerRequest struct {
     /* 健康检查结果为fail的阈值 (Optional) */
     UnhealthyThreshold *int `json:"unhealthyThreshold"`
 
-    /* 健康检查的URI (Optional) */
-    HealthCheckUri *string `json:"healthCheckUri"`
-
-    /* 健康检查正常的HTTP状态码 (Optional) */
-    HealthCheckHttpCode *string `json:"healthCheckHttpCode"`
-
-    /* 健康检查ip (Optional) */
-    HealthCheckIp *string `json:"healthCheckIp"`
-
     /* 服务器组id (Optional) */
     ServerGroupId *string `json:"serverGroupId"`
 }
 
 /*
- * param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域 (Required)
  * param listenerId: 监听器ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -110,25 +89,18 @@ func NewModifyListenerRequest(
 }
 
 /*
- * param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域 (Required)
  * param listenerId: 监听器ID (Required)
  * param algorithm: 调度算法 (Optional)
  * param stickySession: 会话保持 (Optional)
- * param stickySessionTimeout: 会话保持超时时间，单位s (Optional)
- * param cookieType: 会话类型ImplantCookie|RewriteCookie (Optional)
  * param realIp: 是否获取真实ip，取值范围on|off (Optional)
- * param certificateId: 证书ID (Optional)
  * param name: 名称 (Optional)
  * param description: 描述 (Optional)
- * param headers: HTTP扩展头部 (Optional)
  * param healthCheck: 健康检查 (Optional)
  * param healthCheckTimeout: 健康检查响应的最大超时时间 (Optional)
  * param healthCheckInterval: 健康检查响应的最大间隔时间 (Optional)
  * param healthyThreshold: 健康检查结果为success的阈值 (Optional)
  * param unhealthyThreshold: 健康检查结果为fail的阈值 (Optional)
- * param healthCheckUri: 健康检查的URI (Optional)
- * param healthCheckHttpCode: 健康检查正常的HTTP状态码 (Optional)
- * param healthCheckIp: 健康检查ip (Optional)
  * param serverGroupId: 服务器组id (Optional)
  */
 func NewModifyListenerRequestWithAllParams(
@@ -136,21 +108,14 @@ func NewModifyListenerRequestWithAllParams(
     listenerId string,
     algorithm *string,
     stickySession *string,
-    stickySessionTimeout *int,
-    cookieType *string,
     realIp *string,
-    certificateId *string,
     name *string,
     description *string,
-    headers []string,
     healthCheck *string,
     healthCheckTimeout *int,
     healthCheckInterval *int,
     healthyThreshold *int,
     unhealthyThreshold *int,
-    healthCheckUri *string,
-    healthCheckHttpCode *string,
-    healthCheckIp *string,
     serverGroupId *string,
 ) *ModifyListenerRequest {
 
@@ -165,21 +130,14 @@ func NewModifyListenerRequestWithAllParams(
         ListenerId: listenerId,
         Algorithm: algorithm,
         StickySession: stickySession,
-        StickySessionTimeout: stickySessionTimeout,
-        CookieType: cookieType,
         RealIp: realIp,
-        CertificateId: certificateId,
         Name: name,
         Description: description,
-        Headers: headers,
         HealthCheck: healthCheck,
         HealthCheckTimeout: healthCheckTimeout,
         HealthCheckInterval: healthCheckInterval,
         HealthyThreshold: healthyThreshold,
         UnhealthyThreshold: unhealthyThreshold,
-        HealthCheckUri: healthCheckUri,
-        HealthCheckHttpCode: healthCheckHttpCode,
-        HealthCheckIp: healthCheckIp,
         ServerGroupId: serverGroupId,
     }
 }
@@ -197,7 +155,7 @@ func NewModifyListenerRequestWithoutParam() *ModifyListenerRequest {
     }
 }
 
-/* param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域(Required) */
+/* param regionId: 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域(Required) */
 func (r *ModifyListenerRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
@@ -217,24 +175,9 @@ func (r *ModifyListenerRequest) SetStickySession(stickySession string) {
     r.StickySession = &stickySession
 }
 
-/* param stickySessionTimeout: 会话保持超时时间，单位s(Optional) */
-func (r *ModifyListenerRequest) SetStickySessionTimeout(stickySessionTimeout int) {
-    r.StickySessionTimeout = &stickySessionTimeout
-}
-
-/* param cookieType: 会话类型ImplantCookie|RewriteCookie(Optional) */
-func (r *ModifyListenerRequest) SetCookieType(cookieType string) {
-    r.CookieType = &cookieType
-}
-
 /* param realIp: 是否获取真实ip，取值范围on|off(Optional) */
 func (r *ModifyListenerRequest) SetRealIp(realIp string) {
     r.RealIp = &realIp
-}
-
-/* param certificateId: 证书ID(Optional) */
-func (r *ModifyListenerRequest) SetCertificateId(certificateId string) {
-    r.CertificateId = &certificateId
 }
 
 /* param name: 名称(Optional) */
@@ -245,11 +188,6 @@ func (r *ModifyListenerRequest) SetName(name string) {
 /* param description: 描述(Optional) */
 func (r *ModifyListenerRequest) SetDescription(description string) {
     r.Description = &description
-}
-
-/* param headers: HTTP扩展头部(Optional) */
-func (r *ModifyListenerRequest) SetHeaders(headers []string) {
-    r.Headers = headers
 }
 
 /* param healthCheck: 健康检查(Optional) */
@@ -275,21 +213,6 @@ func (r *ModifyListenerRequest) SetHealthyThreshold(healthyThreshold int) {
 /* param unhealthyThreshold: 健康检查结果为fail的阈值(Optional) */
 func (r *ModifyListenerRequest) SetUnhealthyThreshold(unhealthyThreshold int) {
     r.UnhealthyThreshold = &unhealthyThreshold
-}
-
-/* param healthCheckUri: 健康检查的URI(Optional) */
-func (r *ModifyListenerRequest) SetHealthCheckUri(healthCheckUri string) {
-    r.HealthCheckUri = &healthCheckUri
-}
-
-/* param healthCheckHttpCode: 健康检查正常的HTTP状态码(Optional) */
-func (r *ModifyListenerRequest) SetHealthCheckHttpCode(healthCheckHttpCode string) {
-    r.HealthCheckHttpCode = &healthCheckHttpCode
-}
-
-/* param healthCheckIp: 健康检查ip(Optional) */
-func (r *ModifyListenerRequest) SetHealthCheckIp(healthCheckIp string) {
-    r.HealthCheckIp = &healthCheckIp
 }
 
 /* param serverGroupId: 服务器组id(Optional) */

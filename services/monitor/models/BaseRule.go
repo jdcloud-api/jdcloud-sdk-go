@@ -20,7 +20,7 @@ package models
 type BaseRule struct {
 
     /* 弹性伸缩组ID (Optional) */
-    AutoScalingPolicyId *string `json:"autoScalingPolicyId"`
+    AutoScalingPolicyId string `json:"autoScalingPolicyId"`
 
     /* 单位  */
     CalculateUnit string `json:"calculateUnit"`
@@ -31,11 +31,11 @@ type BaseRule struct {
     /* 降采样函数  */
     DownSample string `json:"downSample"`
 
-    /* 监控项  */
+    /* 监控项唯一标识，可根据DescribeMetricsForCreateAlarm接口查询各产品线可用的监控项（创建规则时使用Metric字段）。格式：metric:downsample  */
     Metric string `json:"metric"`
 
     /*  (Optional) */
-    NoticeLevel *NoticeLevel `json:"noticeLevel"`
+    NoticeLevel NoticeLevel `json:"noticeLevel"`
 
     /* 通知周期，单位：小时  */
     NoticePeriod int64 `json:"noticePeriod"`
@@ -47,13 +47,13 @@ type BaseRule struct {
     Period int64 `json:"period"`
 
     /* 规则名称，规则名称，最大长度42个字符，只允许中英文、数字、''-''和"_" (Optional) */
-    RuleName *string `json:"ruleName"`
+    RuleName string `json:"ruleName"`
 
     /* 规则类型, 1云监控的规则， 6站点监控。默认为1 (Optional) */
-    RuleType *int64 `json:"ruleType"`
+    RuleType int64 `json:"ruleType"`
 
     /* 多值标签 (Optional) */
-    Tags *interface{} `json:"tags"`
+    Tags interface{} `json:"tags"`
 
     /* 报警阈值，目前只开放数值类型功能  */
     Threshold float64 `json:"threshold"`

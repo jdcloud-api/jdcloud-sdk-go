@@ -25,9 +25,6 @@ type DescribeAlarmContactsRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域 Id  */
-    RegionId string `json:"regionId"`
-
     /* 规则id  */
     AlarmId string `json:"alarmId"`
 
@@ -42,37 +39,32 @@ type DescribeAlarmContactsRequest struct {
 }
 
 /*
- * param regionId: 地域 Id (Required)
  * param alarmId: 规则id (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeAlarmContactsRequest(
-    regionId string,
     alarmId string,
 ) *DescribeAlarmContactsRequest {
 
 	return &DescribeAlarmContactsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/alarms/{alarmId}/contacts",
+			URL:     "/groupAlarms/{alarmId}/contacts",
 			Method:  "GET",
 			Header:  nil,
-			Version: "v1",
+			Version: "v2",
 		},
-        RegionId: regionId,
         AlarmId: alarmId,
 	}
 }
 
 /*
- * param regionId: 地域 Id (Required)
  * param alarmId: 规则id (Required)
  * param pageNumber: 当前所在页，默认为1 (Optional)
  * param pageSize: 页面大小，默认为20；取值范围[1, 100] (Optional)
  * param referenceType: 联系人类型。0,联系人分组; 1,联系人 (Optional)
  */
 func NewDescribeAlarmContactsRequestWithAllParams(
-    regionId string,
     alarmId string,
     pageNumber *int,
     pageSize *int,
@@ -81,12 +73,11 @@ func NewDescribeAlarmContactsRequestWithAllParams(
 
     return &DescribeAlarmContactsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/alarms/{alarmId}/contacts",
+            URL:     "/groupAlarms/{alarmId}/contacts",
             Method:  "GET",
             Header:  nil,
-            Version: "v1",
+            Version: "v2",
         },
-        RegionId: regionId,
         AlarmId: alarmId,
         PageNumber: pageNumber,
         PageSize: pageSize,
@@ -99,17 +90,12 @@ func NewDescribeAlarmContactsRequestWithoutParam() *DescribeAlarmContactsRequest
 
     return &DescribeAlarmContactsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/alarms/{alarmId}/contacts",
+            URL:     "/groupAlarms/{alarmId}/contacts",
             Method:  "GET",
             Header:  nil,
-            Version: "v1",
+            Version: "v2",
         },
     }
-}
-
-/* param regionId: 地域 Id(Required) */
-func (r *DescribeAlarmContactsRequest) SetRegionId(regionId string) {
-    r.RegionId = regionId
 }
 
 /* param alarmId: 规则id(Required) */
@@ -135,7 +121,7 @@ func (r *DescribeAlarmContactsRequest) SetReferenceType(referenceType int) {
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r DescribeAlarmContactsRequest) GetRegionId() string {
-    return r.RegionId
+    return ""
 }
 
 type DescribeAlarmContactsResponse struct {

@@ -37,17 +37,8 @@ type Listener struct {
     /* 会话保持状态，取值on|off (Optional) */
     StickySession string `json:"stickySession"`
 
-    /* 会话保持超时时间，单位s (Optional) */
-    StickySessionTimeout int `json:"stickySessionTimeout"`
-
-    /* 会话类型 (Optional) */
-    CookieType string `json:"cookieType"`
-
     /* 获取真实ip (Optional) */
     RealIp string `json:"realIp"`
-
-    /* 证书ID (Optional) */
-    CertificateId string `json:"certificateId"`
 
     /* 状态 (Optional) */
     Status string `json:"status"`
@@ -57,9 +48,6 @@ type Listener struct {
 
     /* 描述 (Optional) */
     Description string `json:"description"`
-
-    /* HTTP扩展头部 (Optional) */
-    Headers []string `json:"headers"`
 
     /* 健康检查状态，取值on|off (Optional) */
     HealthCheck string `json:"healthCheck"`
@@ -75,12 +63,6 @@ type Listener struct {
 
     /* 健康检查结果为fail的阈值 (Optional) */
     UnhealthyThreshold int `json:"unhealthyThreshold"`
-
-    /* 健康检查的URI (Optional) */
-    HealthCheckUri string `json:"healthCheckUri"`
-
-    /* 健康检查正常的HTTP状态码 (Optional) */
-    HealthCheckHttpCode string `json:"healthCheckHttpCode"`
 
     /* 健康检查ip (Optional) */
     HealthCheckIp string `json:"healthCheckIp"`

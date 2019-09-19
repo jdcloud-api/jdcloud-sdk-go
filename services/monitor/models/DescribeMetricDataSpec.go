@@ -19,10 +19,13 @@ package models
 
 type DescribeMetricDataSpec struct {
 
-    /* 聚合方式，默认等于downSampleType或avg，可选值参考:sum、avg、min、max (Optional) */
+    /* 聚合方式，可选值参考:sum、avg、min、max (Optional) */
     AggrType string `json:"aggrType"`
 
-    /* 采样方式，默认等于aggrType或avg，可选值参考：sum、avg、last、min、max (Optional) */
+    /* 资源的维度。当serviceCode下存在多个维度时，查询数据必须指定相应的维度 (Optional) */
+    Dimension string `json:"dimension"`
+
+    /* 采样方式，可选值参考：sum、avg、last、min、max (Optional) */
     DownSampleType string `json:"downSampleType"`
 
     /* 查询时间范围的结束时间， UTC时间，格式：2016-12-11T00:00:00+0800（为空时，将由startTime与timeInterval计算得出）（注意在url中+要转译为%2B故url中为2016-12-11T00:00:00%2B0800）
@@ -40,7 +43,7 @@ in: query (Optional) */
     /* 资源的uuid  */
     ResourceId string `json:"resourceId"`
 
-    /* 资源的类型，取值vm, lb, ip, database 等  */
+    /* 资源的类型，取值vm, lb, ip, database 等,<a href="https://docs.jdcloud.com/cn/monitoring/api/describeservices?content=API&SOP=JDCloud">describeServices</a>：查询己接入云监控的产品线列表，当产品线下有多个分组时，查询分组对应的监控项，serviceCode请传对应分组的groupCode字段值 (Optional) */
     ServiceCode string `json:"serviceCode"`
 
     /* 查询时间范围的开始时间， UTC时间，格式：2016-12-11T00:00:00+0800（注意在url中+要转译为%2B故url中为2016-12-11T00:00:00%2B0800）

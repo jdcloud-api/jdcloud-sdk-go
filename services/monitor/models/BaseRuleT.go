@@ -31,7 +31,7 @@ type BaseRuleT struct {
     /* 降采样函数 (Optional) */
     DownSample string `json:"downSample"`
 
-    /* 监控项  */
+    /* 监控项唯一标识，可根据DescribeMetricsForCreateAlarm接口查询各产品线可用的监控项（创建规则时使用Metric字段）。格式：metric:downsample  */
     Metric string `json:"metric"`
 
     /* 监控项ID (Optional) */
