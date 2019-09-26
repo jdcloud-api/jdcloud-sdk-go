@@ -20,64 +20,64 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type DescribeLivePlayAuthKeyRequest struct {
+type DescribeLiveRestartAuthKeyRequest struct {
 
     core.JDCloudRequest
 
-    /* (直播or时移)播放域名
+    /* 直播回看播放域名
 - 仅支持精确匹配
   */
-    PlayDomain string `json:"playDomain"`
+    RestartDomain string `json:"restartDomain"`
 }
 
 /*
- * param playDomain: (直播or时移)播放域名
+ * param restartDomain: 直播回看播放域名
 - 仅支持精确匹配
  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeLivePlayAuthKeyRequest(
-    playDomain string,
-) *DescribeLivePlayAuthKeyRequest {
+func NewDescribeLiveRestartAuthKeyRequest(
+    restartDomain string,
+) *DescribeLiveRestartAuthKeyRequest {
 
-	return &DescribeLivePlayAuthKeyRequest{
+	return &DescribeLiveRestartAuthKeyRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/livePlayAuthKey",
+			URL:     "/liveRestartAuthKey",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
-        PlayDomain: playDomain,
+        RestartDomain: restartDomain,
 	}
 }
 
 /*
- * param playDomain: (直播or时移)播放域名
+ * param restartDomain: 直播回看播放域名
 - 仅支持精确匹配
  (Required)
  */
-func NewDescribeLivePlayAuthKeyRequestWithAllParams(
-    playDomain string,
-) *DescribeLivePlayAuthKeyRequest {
+func NewDescribeLiveRestartAuthKeyRequestWithAllParams(
+    restartDomain string,
+) *DescribeLiveRestartAuthKeyRequest {
 
-    return &DescribeLivePlayAuthKeyRequest{
+    return &DescribeLiveRestartAuthKeyRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/livePlayAuthKey",
+            URL:     "/liveRestartAuthKey",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
-        PlayDomain: playDomain,
+        RestartDomain: restartDomain,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeLivePlayAuthKeyRequestWithoutParam() *DescribeLivePlayAuthKeyRequest {
+func NewDescribeLiveRestartAuthKeyRequestWithoutParam() *DescribeLiveRestartAuthKeyRequest {
 
-    return &DescribeLivePlayAuthKeyRequest{
+    return &DescribeLiveRestartAuthKeyRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/livePlayAuthKey",
+            URL:     "/liveRestartAuthKey",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -85,26 +85,26 @@ func NewDescribeLivePlayAuthKeyRequestWithoutParam() *DescribeLivePlayAuthKeyReq
     }
 }
 
-/* param playDomain: (直播or时移)播放域名
+/* param restartDomain: 直播回看播放域名
 - 仅支持精确匹配
 (Required) */
-func (r *DescribeLivePlayAuthKeyRequest) SetPlayDomain(playDomain string) {
-    r.PlayDomain = playDomain
+func (r *DescribeLiveRestartAuthKeyRequest) SetRestartDomain(restartDomain string) {
+    r.RestartDomain = restartDomain
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeLivePlayAuthKeyRequest) GetRegionId() string {
+func (r DescribeLiveRestartAuthKeyRequest) GetRegionId() string {
     return ""
 }
 
-type DescribeLivePlayAuthKeyResponse struct {
+type DescribeLiveRestartAuthKeyResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeLivePlayAuthKeyResult `json:"result"`
+    Result DescribeLiveRestartAuthKeyResult `json:"result"`
 }
 
-type DescribeLivePlayAuthKeyResult struct {
+type DescribeLiveRestartAuthKeyResult struct {
     PlayDomain string `json:"playDomain"`
     AuthStatus string `json:"authStatus"`
     AuthKey string `json:"authKey"`

@@ -20,82 +20,82 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type SetLivePlayAuthKeyRequest struct {
+type SetLiveRestartAuthKeyRequest struct {
 
     core.JDCloudRequest
 
-    /* (直播or时移)播放域名  */
-    PlayDomain string `json:"playDomain"`
+    /* 直播回看播放域名  */
+    RestartDomain string `json:"restartDomain"`
 
-    /* (直播or时移)播放鉴权状态
+    /* 直播回看播放鉴权状态
   on: 开启
   off: 关闭
-- 当播放鉴权状态on(开启)时,authKey不能为空
+- 当回看播放鉴权状态on(开启)时,authKey不能为空
  (Optional) */
     AuthStatus *string `json:"authStatus"`
 
-    /* (直播or时移)播放鉴权key
+    /* 直播回看播放鉴权key
 - 取值: 支持大小写字母和数字 长度6-32位
  (Optional) */
     AuthKey *string `json:"authKey"`
 }
 
 /*
- * param playDomain: (直播or时移)播放域名 (Required)
+ * param restartDomain: 直播回看播放域名 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewSetLivePlayAuthKeyRequest(
-    playDomain string,
-) *SetLivePlayAuthKeyRequest {
+func NewSetLiveRestartAuthKeyRequest(
+    restartDomain string,
+) *SetLiveRestartAuthKeyRequest {
 
-	return &SetLivePlayAuthKeyRequest{
+	return &SetLiveRestartAuthKeyRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/livePlayAuthKey",
+			URL:     "/liveRestartAuthKey",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
-        PlayDomain: playDomain,
+        RestartDomain: restartDomain,
 	}
 }
 
 /*
- * param playDomain: (直播or时移)播放域名 (Required)
- * param authStatus: (直播or时移)播放鉴权状态
+ * param restartDomain: 直播回看播放域名 (Required)
+ * param authStatus: 直播回看播放鉴权状态
   on: 开启
   off: 关闭
-- 当播放鉴权状态on(开启)时,authKey不能为空
+- 当回看播放鉴权状态on(开启)时,authKey不能为空
  (Optional)
- * param authKey: (直播or时移)播放鉴权key
+ * param authKey: 直播回看播放鉴权key
 - 取值: 支持大小写字母和数字 长度6-32位
  (Optional)
  */
-func NewSetLivePlayAuthKeyRequestWithAllParams(
-    playDomain string,
+func NewSetLiveRestartAuthKeyRequestWithAllParams(
+    restartDomain string,
     authStatus *string,
     authKey *string,
-) *SetLivePlayAuthKeyRequest {
+) *SetLiveRestartAuthKeyRequest {
 
-    return &SetLivePlayAuthKeyRequest{
+    return &SetLiveRestartAuthKeyRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/livePlayAuthKey",
+            URL:     "/liveRestartAuthKey",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
-        PlayDomain: playDomain,
+        RestartDomain: restartDomain,
         AuthStatus: authStatus,
         AuthKey: authKey,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewSetLivePlayAuthKeyRequestWithoutParam() *SetLivePlayAuthKeyRequest {
+func NewSetLiveRestartAuthKeyRequestWithoutParam() *SetLiveRestartAuthKeyRequest {
 
-    return &SetLivePlayAuthKeyRequest{
+    return &SetLiveRestartAuthKeyRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/livePlayAuthKey",
+            URL:     "/liveRestartAuthKey",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -103,38 +103,38 @@ func NewSetLivePlayAuthKeyRequestWithoutParam() *SetLivePlayAuthKeyRequest {
     }
 }
 
-/* param playDomain: (直播or时移)播放域名(Required) */
-func (r *SetLivePlayAuthKeyRequest) SetPlayDomain(playDomain string) {
-    r.PlayDomain = playDomain
+/* param restartDomain: 直播回看播放域名(Required) */
+func (r *SetLiveRestartAuthKeyRequest) SetRestartDomain(restartDomain string) {
+    r.RestartDomain = restartDomain
 }
 
-/* param authStatus: (直播or时移)播放鉴权状态
+/* param authStatus: 直播回看播放鉴权状态
   on: 开启
   off: 关闭
-- 当播放鉴权状态on(开启)时,authKey不能为空
+- 当回看播放鉴权状态on(开启)时,authKey不能为空
 (Optional) */
-func (r *SetLivePlayAuthKeyRequest) SetAuthStatus(authStatus string) {
+func (r *SetLiveRestartAuthKeyRequest) SetAuthStatus(authStatus string) {
     r.AuthStatus = &authStatus
 }
 
-/* param authKey: (直播or时移)播放鉴权key
+/* param authKey: 直播回看播放鉴权key
 - 取值: 支持大小写字母和数字 长度6-32位
 (Optional) */
-func (r *SetLivePlayAuthKeyRequest) SetAuthKey(authKey string) {
+func (r *SetLiveRestartAuthKeyRequest) SetAuthKey(authKey string) {
     r.AuthKey = &authKey
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r SetLivePlayAuthKeyRequest) GetRegionId() string {
+func (r SetLiveRestartAuthKeyRequest) GetRegionId() string {
     return ""
 }
 
-type SetLivePlayAuthKeyResponse struct {
+type SetLiveRestartAuthKeyResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result SetLivePlayAuthKeyResult `json:"result"`
+    Result SetLiveRestartAuthKeyResult `json:"result"`
 }
 
-type SetLivePlayAuthKeyResult struct {
+type SetLiveRestartAuthKeyResult struct {
 }

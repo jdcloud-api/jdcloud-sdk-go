@@ -20,7 +20,7 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type DescribeLivePlayAuthKeyRequest struct {
+type DescribeLiveDomainCertificateRequest struct {
 
     core.JDCloudRequest
 
@@ -37,13 +37,13 @@ type DescribeLivePlayAuthKeyRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeLivePlayAuthKeyRequest(
+func NewDescribeLiveDomainCertificateRequest(
     playDomain string,
-) *DescribeLivePlayAuthKeyRequest {
+) *DescribeLiveDomainCertificateRequest {
 
-	return &DescribeLivePlayAuthKeyRequest{
+	return &DescribeLiveDomainCertificateRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/livePlayAuthKey",
+			URL:     "/liveDomainCertificate",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -57,13 +57,13 @@ func NewDescribeLivePlayAuthKeyRequest(
 - 仅支持精确匹配
  (Required)
  */
-func NewDescribeLivePlayAuthKeyRequestWithAllParams(
+func NewDescribeLiveDomainCertificateRequestWithAllParams(
     playDomain string,
-) *DescribeLivePlayAuthKeyRequest {
+) *DescribeLiveDomainCertificateRequest {
 
-    return &DescribeLivePlayAuthKeyRequest{
+    return &DescribeLiveDomainCertificateRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/livePlayAuthKey",
+            URL:     "/liveDomainCertificate",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -73,11 +73,11 @@ func NewDescribeLivePlayAuthKeyRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeLivePlayAuthKeyRequestWithoutParam() *DescribeLivePlayAuthKeyRequest {
+func NewDescribeLiveDomainCertificateRequestWithoutParam() *DescribeLiveDomainCertificateRequest {
 
-    return &DescribeLivePlayAuthKeyRequest{
+    return &DescribeLiveDomainCertificateRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/livePlayAuthKey",
+            URL:     "/liveDomainCertificate",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -88,24 +88,25 @@ func NewDescribeLivePlayAuthKeyRequestWithoutParam() *DescribeLivePlayAuthKeyReq
 /* param playDomain: (直播or时移)播放域名
 - 仅支持精确匹配
 (Required) */
-func (r *DescribeLivePlayAuthKeyRequest) SetPlayDomain(playDomain string) {
+func (r *DescribeLiveDomainCertificateRequest) SetPlayDomain(playDomain string) {
     r.PlayDomain = playDomain
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeLivePlayAuthKeyRequest) GetRegionId() string {
+func (r DescribeLiveDomainCertificateRequest) GetRegionId() string {
     return ""
 }
 
-type DescribeLivePlayAuthKeyResponse struct {
+type DescribeLiveDomainCertificateResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeLivePlayAuthKeyResult `json:"result"`
+    Result DescribeLiveDomainCertificateResult `json:"result"`
 }
 
-type DescribeLivePlayAuthKeyResult struct {
+type DescribeLiveDomainCertificateResult struct {
     PlayDomain string `json:"playDomain"`
-    AuthStatus string `json:"authStatus"`
-    AuthKey string `json:"authKey"`
+    CertStatus string `json:"certStatus"`
+    Cert string `json:"cert"`
+    Title string `json:"title"`
 }
