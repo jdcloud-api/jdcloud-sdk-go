@@ -25,7 +25,7 @@ type QueryLoadBalancerRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域  */
+    /* 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域  */
     RegionId string `json:"regionId"`
 
     /* 负载均衡实例ID  */
@@ -33,7 +33,7 @@ type QueryLoadBalancerRequest struct {
 }
 
 /*
- * param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域 (Required)
  * param loadBalancerId: 负载均衡实例ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -56,7 +56,7 @@ func NewQueryLoadBalancerRequest(
 }
 
 /*
- * param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域 (Required)
  * param loadBalancerId: 负载均衡实例ID (Required)
  */
 func NewQueryLoadBalancerRequestWithAllParams(
@@ -89,7 +89,7 @@ func NewQueryLoadBalancerRequestWithoutParam() *QueryLoadBalancerRequest {
     }
 }
 
-/* param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域(Required) */
+/* param regionId: 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域(Required) */
 func (r *QueryLoadBalancerRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

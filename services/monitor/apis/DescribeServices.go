@@ -45,7 +45,7 @@ func NewDescribeServicesRequest(
 			URL:     "/services",
 			Method:  "GET",
 			Header:  nil,
-			Version: "v1",
+			Version: "v2",
 		},
 	}
 }
@@ -65,7 +65,7 @@ func NewDescribeServicesRequestWithAllParams(
             URL:     "/services",
             Method:  "GET",
             Header:  nil,
-            Version: "v1",
+            Version: "v2",
         },
         Filters: filters,
         ProductType: productType,
@@ -80,7 +80,7 @@ func NewDescribeServicesRequestWithoutParam() *DescribeServicesRequest {
             URL:     "/services",
             Method:  "GET",
             Header:  nil,
-            Version: "v1",
+            Version: "v2",
         },
     }
 }
@@ -109,5 +109,5 @@ type DescribeServicesResponse struct {
 }
 
 type DescribeServicesResult struct {
-    Services []monitor.ServiceInfo `json:"services"`
+    Services []monitor.ServiceInfoV2 `json:"services"`
 }

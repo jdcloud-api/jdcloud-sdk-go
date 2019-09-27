@@ -33,6 +33,9 @@ type DescribeCertsRequest struct {
 
     /* 域名，支持按照域名检索证书 (Optional) */
     DomainName *string `json:"domainName"`
+
+    /* 证书id/别名 (Optional) */
+    CertIds *string `json:"certIds"`
 }
 
 /*
@@ -56,11 +59,13 @@ func NewDescribeCertsRequest(
  * param pageNumber: 第几页，从1开始计数 (Optional)
  * param pageSize: 每页显示的数目 (Optional)
  * param domainName: 域名，支持按照域名检索证书 (Optional)
+ * param certIds: 证书id/别名 (Optional)
  */
 func NewDescribeCertsRequestWithAllParams(
     pageNumber *int,
     pageSize *int,
     domainName *string,
+    certIds *string,
 ) *DescribeCertsRequest {
 
     return &DescribeCertsRequest{
@@ -73,6 +78,7 @@ func NewDescribeCertsRequestWithAllParams(
         PageNumber: pageNumber,
         PageSize: pageSize,
         DomainName: domainName,
+        CertIds: certIds,
     }
 }
 
@@ -102,6 +108,11 @@ func (r *DescribeCertsRequest) SetPageSize(pageSize int) {
 /* param domainName: 域名，支持按照域名检索证书(Optional) */
 func (r *DescribeCertsRequest) SetDomainName(domainName string) {
     r.DomainName = &domainName
+}
+
+/* param certIds: 证书id/别名(Optional) */
+func (r *DescribeCertsRequest) SetCertIds(certIds string) {
+    r.CertIds = &certIds
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

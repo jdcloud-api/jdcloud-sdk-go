@@ -19,11 +19,14 @@ package models
 
 type DescribedAlarmHistory struct {
 
-    /*  (Optional) */
-    Alarm DescribedAlarm `json:"alarm"`
+    /* 报警规则ID (Optional) */
+    AlarmId string `json:"alarmId"`
 
-    /* 告警联系人 (Optional) */
-    Contacts []DescribedNoticeContacts `json:"contacts"`
+    /* 资源维度 (Optional) */
+    Dimension string `json:"dimension"`
+
+    /* 资源维度名称 (Optional) */
+    DimensionName string `json:"dimensionName"`
 
     /* 告警持续次数 (Optional) */
     DurationTimes int64 `json:"durationTimes"`
@@ -31,11 +34,38 @@ type DescribedAlarmHistory struct {
     /* 告警持续时间，单位分钟 (Optional) */
     NoticeDurationTime int64 `json:"noticeDurationTime"`
 
+    /* 用于前端显示的‘触发告警级别’。从低到高分别为‘普通’, ‘紧急’, ‘严重’ (Optional) */
+    NoticeLevel string `json:"noticeLevel"`
+
     /* 触发的告警级别。从低到高分别为‘common’, ‘critical’, ‘fatal’ (Optional) */
     NoticeLevelTriggered string `json:"noticeLevelTriggered"`
 
     /* 告警时间 (Optional) */
     NoticeTime string `json:"noticeTime"`
+
+    /* 资源类型 (Optional) */
+    Product string `json:"product"`
+
+    /* 资源类型名称 (Optional) */
+    ProductName string `json:"productName"`
+
+    /* 告警通知人 (Optional) */
+    Receivers []NoticeReceiver `json:"receivers"`
+
+    /* 资源Id (Optional) */
+    ResourceId string `json:"resourceId"`
+
+    /*  (Optional) */
+    Rule BasicRuleDetail `json:"rule"`
+
+    /* 规则类型 (Optional) */
+    RuleType string `json:"ruleType"`
+
+    /* 告警类型  1-告警恢复  2-告警 4-数据不足 (Optional) */
+    Status int64 `json:"status"`
+
+    /* 资源tags (Optional) */
+    Tags interface{} `json:"tags"`
 
     /* 告警值 (Optional) */
     Value float64 `json:"value"`

@@ -34,8 +34,11 @@ type RecordDescDetail struct {
     /* 证书类型 (Optional) */
     CertType string `json:"certType"`
 
-    /* 域名个数 (Optional) */
+    /* 域名的个数 (Optional) */
     DomainCount int `json:"domainCount"`
+
+    /* 泛域名的个数 (Optional) */
+    WildcardDomainCount int `json:"wildcardDomainCount"`
 
     /* 证书年限 (Optional) */
     CertValidity int `json:"certValidity"`
@@ -63,4 +66,7 @@ type RecordDescDetail struct {
 
     /* 联系人邮箱 (Optional) */
     Email string `json:"email"`
+
+    /* 自动DNS验证结果信息 (Optional) */
+    ErrorMessage string `json:"errorMessage"`
 }

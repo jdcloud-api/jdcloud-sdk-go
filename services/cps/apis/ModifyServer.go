@@ -24,7 +24,7 @@ type ModifyServerRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域  */
+    /* 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域  */
     RegionId string `json:"regionId"`
 
     /* 服务器组ID  */
@@ -38,7 +38,7 @@ type ModifyServerRequest struct {
 }
 
 /*
- * param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域 (Required)
  * param serverGroupId: 服务器组ID (Required)
  * param serverId: 后端服务器ID (Required)
  *
@@ -64,7 +64,7 @@ func NewModifyServerRequest(
 }
 
 /*
- * param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域 (Required)
  * param serverGroupId: 服务器组ID (Required)
  * param serverId: 后端服务器ID (Required)
  * param weight: 权重 (Optional)
@@ -103,7 +103,7 @@ func NewModifyServerRequestWithoutParam() *ModifyServerRequest {
     }
 }
 
-/* param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域(Required) */
+/* param regionId: 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域(Required) */
 func (r *ModifyServerRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

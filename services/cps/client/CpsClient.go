@@ -40,7 +40,7 @@ func NewCpsClient(credential *core.Credential) *CpsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "cps",
-            Revision:    "2.1.0",
+            Revision:    "2.2.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -417,6 +417,26 @@ func (c *CpsClient) DescribeInstanceRaid(request *cps.DescribeInstanceRaidReques
     return jdResp, err
 }
 
+/* 查询密钥对详情 */
+func (c *CpsClient) QueryKeypair(request *cps.QueryKeypairRequest) (*cps.QueryKeypairResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.QueryKeypairResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询云物理服务器地域列表 */
 func (c *CpsClient) DescribeRegiones(request *cps.DescribeRegionesRequest) (*cps.DescribeRegionesResponse, error) {
     if request == nil {
@@ -488,6 +508,26 @@ func (c *CpsClient) ModifyInstance(request *cps.ModifyInstanceRequest) (*cps.Mod
     }
 
     jdResp := &cps.ModifyInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询密钥对列表 */
+func (c *CpsClient) QueryKeypairs(request *cps.QueryKeypairsRequest) (*cps.QueryKeypairsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.QueryKeypairsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -758,6 +798,27 @@ func (c *CpsClient) CreateInstances(request *cps.CreateInstancesRequest) (*cps.C
     return jdResp, err
 }
 
+/* 重置云物理服务器密码
+ */
+func (c *CpsClient) ResetPassword(request *cps.ResetPasswordRequest) (*cps.ResetPasswordResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.ResetPasswordResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 绑定弹性公网IP
  */
 func (c *CpsClient) AssociateElasticIp(request *cps.AssociateElasticIpRequest) (*cps.AssociateElasticIpResponse, error) {
@@ -900,6 +961,26 @@ func (c *CpsClient) DeleteListener(request *cps.DeleteListenerRequest) (*cps.Del
     return jdResp, err
 }
 
+/* 创建密钥对 */
+func (c *CpsClient) CreateKeypairs(request *cps.CreateKeypairsRequest) (*cps.CreateKeypairsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.CreateKeypairsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 移除后端服务器 */
 func (c *CpsClient) RemoveServer(request *cps.RemoveServerRequest) (*cps.RemoveServerResponse, error) {
     if request == nil {
@@ -911,6 +992,26 @@ func (c *CpsClient) RemoveServer(request *cps.RemoveServerRequest) (*cps.RemoveS
     }
 
     jdResp := &cps.RemoveServerResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 导入密钥对 */
+func (c *CpsClient) ImportKeypairs(request *cps.ImportKeypairsRequest) (*cps.ImportKeypairsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.ImportKeypairsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1236,6 +1337,26 @@ func (c *CpsClient) CreateVpc(request *cps.CreateVpcRequest) (*cps.CreateVpcResp
     }
 
     jdResp := &cps.CreateVpcResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除密钥对 */
+func (c *CpsClient) DeleteKeypairs(request *cps.DeleteKeypairsRequest) (*cps.DeleteKeypairsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cps.DeleteKeypairsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

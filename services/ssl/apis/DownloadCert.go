@@ -25,45 +25,54 @@ type DownloadCertRequest struct {
 
     core.JDCloudRequest
 
-    /* 证书 Id  */
+    /* 证书Id,以逗号分隔多个Id  */
     CertId string `json:"certId"`
+
+    /* 证书应用的服务器类型(Nginx Apache Tomcat IIS Other)  */
+    ServerType string `json:"serverType"`
 }
 
 /*
- * param certId: 证书 Id (Required)
+ * param certId: 证书Id,以逗号分隔多个Id (Required)
+ * param serverType: 证书应用的服务器类型(Nginx Apache Tomcat IIS Other) (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDownloadCertRequest(
     certId string,
+    serverType string,
 ) *DownloadCertRequest {
 
 	return &DownloadCertRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/sslCert/{certId}:download",
-			Method:  "GET",
+			URL:     "/sslCert:download",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         CertId: certId,
+        ServerType: serverType,
 	}
 }
 
 /*
- * param certId: 证书 Id (Required)
+ * param certId: 证书Id,以逗号分隔多个Id (Required)
+ * param serverType: 证书应用的服务器类型(Nginx Apache Tomcat IIS Other) (Required)
  */
 func NewDownloadCertRequestWithAllParams(
     certId string,
+    serverType string,
 ) *DownloadCertRequest {
 
     return &DownloadCertRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/sslCert/{certId}:download",
-            Method:  "GET",
+            URL:     "/sslCert:download",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         CertId: certId,
+        ServerType: serverType,
     }
 }
 
@@ -72,17 +81,22 @@ func NewDownloadCertRequestWithoutParam() *DownloadCertRequest {
 
     return &DownloadCertRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/sslCert/{certId}:download",
-            Method:  "GET",
+            URL:     "/sslCert:download",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
     }
 }
 
-/* param certId: 证书 Id(Required) */
+/* param certId: 证书Id,以逗号分隔多个Id(Required) */
 func (r *DownloadCertRequest) SetCertId(certId string) {
     r.CertId = certId
+}
+
+/* param serverType: 证书应用的服务器类型(Nginx Apache Tomcat IIS Other)(Required) */
+func (r *DownloadCertRequest) SetServerType(serverType string) {
+    r.ServerType = serverType
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

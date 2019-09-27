@@ -24,17 +24,31 @@ type CreateWatermarkRequest struct {
 
     core.JDCloudRequest
 
-    /* 水印名称  */
+    /* 水印名称。只支持中英文、数字。长度不超过128个字符。UTF-8编码。
+  */
     Name string `json:"name"`
 
     /* 图片地址  */
     ImgUrl string `json:"imgUrl"`
 
-    /* 水印宽度  */
-    Width int `json:"width"`
+    /* 水印宽度。
+当 sizeUnit = pixel 时，取值范围为 [8, 4096] 整数
+当 sizeUnit = percent 时，取值范围为 [0, 100] 小数
+  */
+    Width string `json:"width"`
 
-    /* 水印高度  */
-    Height int `json:"height"`
+    /* 水印高度。
+当 sizeUnit = pixel 时，取值范围为 [8, 4096] 整数
+当 sizeUnit = percent 时，取值范围为 [0, 100] 小数
+  */
+    Height string `json:"height"`
+
+    /* 尺寸单位。取值范围：
+  pixel - 像素
+  percent - 百分比
+默认值为 pixel
+ (Optional) */
+    SizeUnit *string `json:"sizeUnit"`
 
     /* 水印位置。取值范围：
   LT - 左上
@@ -44,40 +58,63 @@ type CreateWatermarkRequest struct {
   */
     Position string `json:"position"`
 
-    /* 偏移单位 (Optional) */
-    Unit *string `json:"unit"`
+    /* 水平偏移。
+当 offsetUnit = pixel 时，取值范围为 [8, 4088] 整数
+当 offsetUnit = percent 时，取值范围为 [0, 100] 小数
+  */
+    OffsetX string `json:"offsetX"`
 
-    /* 水平偏移  */
-    OffsetX int `json:"offsetX"`
+    /* 竖直偏移。
+当 offsetUnit = pixel 时，取值范围为 [8, 4088] 整数
+当 offsetUnit = percent 时，取值范围为 [0, 100] 小数
+  */
+    OffsetY string `json:"offsetY"`
 
-    /* 竖直偏移  */
-    OffsetY int `json:"offsetY"`
+    /* 偏移单位。取值范围：
+  pixel - 像素
+  percent - 百分比
+默认值为 pixel
+ (Optional) */
+    OffsetUnit *string `json:"offsetUnit"`
 }
 
 /*
- * param name: 水印名称 (Required)
+ * param name: 水印名称。只支持中英文、数字。长度不超过128个字符。UTF-8编码。
+ (Required)
  * param imgUrl: 图片地址 (Required)
- * param width: 水印宽度 (Required)
- * param height: 水印高度 (Required)
+ * param width: 水印宽度。
+当 sizeUnit = pixel 时，取值范围为 [8, 4096] 整数
+当 sizeUnit = percent 时，取值范围为 [0, 100] 小数
+ (Required)
+ * param height: 水印高度。
+当 sizeUnit = pixel 时，取值范围为 [8, 4096] 整数
+当 sizeUnit = percent 时，取值范围为 [0, 100] 小数
+ (Required)
  * param position: 水印位置。取值范围：
   LT - 左上
   RT - 右上
   LB - 左下
   RB - 右下
  (Required)
- * param offsetX: 水平偏移 (Required)
- * param offsetY: 竖直偏移 (Required)
+ * param offsetX: 水平偏移。
+当 offsetUnit = pixel 时，取值范围为 [8, 4088] 整数
+当 offsetUnit = percent 时，取值范围为 [0, 100] 小数
+ (Required)
+ * param offsetY: 竖直偏移。
+当 offsetUnit = pixel 时，取值范围为 [8, 4088] 整数
+当 offsetUnit = percent 时，取值范围为 [0, 100] 小数
+ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateWatermarkRequest(
     name string,
     imgUrl string,
-    width int,
-    height int,
+    width string,
+    height string,
     position string,
-    offsetX int,
-    offsetY int,
+    offsetX string,
+    offsetY string,
 ) *CreateWatermarkRequest {
 
 	return &CreateWatermarkRequest{
@@ -98,29 +135,52 @@ func NewCreateWatermarkRequest(
 }
 
 /*
- * param name: 水印名称 (Required)
+ * param name: 水印名称。只支持中英文、数字。长度不超过128个字符。UTF-8编码。
+ (Required)
  * param imgUrl: 图片地址 (Required)
- * param width: 水印宽度 (Required)
- * param height: 水印高度 (Required)
+ * param width: 水印宽度。
+当 sizeUnit = pixel 时，取值范围为 [8, 4096] 整数
+当 sizeUnit = percent 时，取值范围为 [0, 100] 小数
+ (Required)
+ * param height: 水印高度。
+当 sizeUnit = pixel 时，取值范围为 [8, 4096] 整数
+当 sizeUnit = percent 时，取值范围为 [0, 100] 小数
+ (Required)
+ * param sizeUnit: 尺寸单位。取值范围：
+  pixel - 像素
+  percent - 百分比
+默认值为 pixel
+ (Optional)
  * param position: 水印位置。取值范围：
   LT - 左上
   RT - 右上
   LB - 左下
   RB - 右下
  (Required)
- * param unit: 偏移单位 (Optional)
- * param offsetX: 水平偏移 (Required)
- * param offsetY: 竖直偏移 (Required)
+ * param offsetX: 水平偏移。
+当 offsetUnit = pixel 时，取值范围为 [8, 4088] 整数
+当 offsetUnit = percent 时，取值范围为 [0, 100] 小数
+ (Required)
+ * param offsetY: 竖直偏移。
+当 offsetUnit = pixel 时，取值范围为 [8, 4088] 整数
+当 offsetUnit = percent 时，取值范围为 [0, 100] 小数
+ (Required)
+ * param offsetUnit: 偏移单位。取值范围：
+  pixel - 像素
+  percent - 百分比
+默认值为 pixel
+ (Optional)
  */
 func NewCreateWatermarkRequestWithAllParams(
     name string,
     imgUrl string,
-    width int,
-    height int,
+    width string,
+    height string,
+    sizeUnit *string,
     position string,
-    unit *string,
-    offsetX int,
-    offsetY int,
+    offsetX string,
+    offsetY string,
+    offsetUnit *string,
 ) *CreateWatermarkRequest {
 
     return &CreateWatermarkRequest{
@@ -134,10 +194,11 @@ func NewCreateWatermarkRequestWithAllParams(
         ImgUrl: imgUrl,
         Width: width,
         Height: height,
+        SizeUnit: sizeUnit,
         Position: position,
-        Unit: unit,
         OffsetX: offsetX,
         OffsetY: offsetY,
+        OffsetUnit: offsetUnit,
     }
 }
 
@@ -154,7 +215,8 @@ func NewCreateWatermarkRequestWithoutParam() *CreateWatermarkRequest {
     }
 }
 
-/* param name: 水印名称(Required) */
+/* param name: 水印名称。只支持中英文、数字。长度不超过128个字符。UTF-8编码。
+(Required) */
 func (r *CreateWatermarkRequest) SetName(name string) {
     r.Name = name
 }
@@ -164,14 +226,29 @@ func (r *CreateWatermarkRequest) SetImgUrl(imgUrl string) {
     r.ImgUrl = imgUrl
 }
 
-/* param width: 水印宽度(Required) */
-func (r *CreateWatermarkRequest) SetWidth(width int) {
+/* param width: 水印宽度。
+当 sizeUnit = pixel 时，取值范围为 [8, 4096] 整数
+当 sizeUnit = percent 时，取值范围为 [0, 100] 小数
+(Required) */
+func (r *CreateWatermarkRequest) SetWidth(width string) {
     r.Width = width
 }
 
-/* param height: 水印高度(Required) */
-func (r *CreateWatermarkRequest) SetHeight(height int) {
+/* param height: 水印高度。
+当 sizeUnit = pixel 时，取值范围为 [8, 4096] 整数
+当 sizeUnit = percent 时，取值范围为 [0, 100] 小数
+(Required) */
+func (r *CreateWatermarkRequest) SetHeight(height string) {
     r.Height = height
+}
+
+/* param sizeUnit: 尺寸单位。取值范围：
+  pixel - 像素
+  percent - 百分比
+默认值为 pixel
+(Optional) */
+func (r *CreateWatermarkRequest) SetSizeUnit(sizeUnit string) {
+    r.SizeUnit = &sizeUnit
 }
 
 /* param position: 水印位置。取值范围：
@@ -184,19 +261,29 @@ func (r *CreateWatermarkRequest) SetPosition(position string) {
     r.Position = position
 }
 
-/* param unit: 偏移单位(Optional) */
-func (r *CreateWatermarkRequest) SetUnit(unit string) {
-    r.Unit = &unit
-}
-
-/* param offsetX: 水平偏移(Required) */
-func (r *CreateWatermarkRequest) SetOffsetX(offsetX int) {
+/* param offsetX: 水平偏移。
+当 offsetUnit = pixel 时，取值范围为 [8, 4088] 整数
+当 offsetUnit = percent 时，取值范围为 [0, 100] 小数
+(Required) */
+func (r *CreateWatermarkRequest) SetOffsetX(offsetX string) {
     r.OffsetX = offsetX
 }
 
-/* param offsetY: 竖直偏移(Required) */
-func (r *CreateWatermarkRequest) SetOffsetY(offsetY int) {
+/* param offsetY: 竖直偏移。
+当 offsetUnit = pixel 时，取值范围为 [8, 4088] 整数
+当 offsetUnit = percent 时，取值范围为 [0, 100] 小数
+(Required) */
+func (r *CreateWatermarkRequest) SetOffsetY(offsetY string) {
     r.OffsetY = offsetY
+}
+
+/* param offsetUnit: 偏移单位。取值范围：
+  pixel - 像素
+  percent - 百分比
+默认值为 pixel
+(Optional) */
+func (r *CreateWatermarkRequest) SetOffsetUnit(offsetUnit string) {
+    r.OffsetUnit = &offsetUnit
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
@@ -215,12 +302,13 @@ type CreateWatermarkResult struct {
     Id int64 `json:"id"`
     Name string `json:"name"`
     ImgUrl string `json:"imgUrl"`
-    Width int `json:"width"`
-    Height int `json:"height"`
+    Width string `json:"width"`
+    Height string `json:"height"`
+    SizeUnit string `json:"sizeUnit"`
     Position string `json:"position"`
-    Unit string `json:"unit"`
-    OffsetX int `json:"offsetX"`
-    OffsetY int `json:"offsetY"`
+    OffsetX string `json:"offsetX"`
+    OffsetY string `json:"offsetY"`
+    OffsetUnit string `json:"offsetUnit"`
     CreateTime string `json:"createTime"`
     UpdateTime string `json:"updateTime"`
 }

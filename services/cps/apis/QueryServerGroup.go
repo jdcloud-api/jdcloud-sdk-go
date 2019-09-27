@@ -25,7 +25,7 @@ type QueryServerGroupRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域  */
+    /* 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域  */
     RegionId string `json:"regionId"`
 
     /* 服务器组ID  */
@@ -33,7 +33,7 @@ type QueryServerGroupRequest struct {
 }
 
 /*
- * param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域 (Required)
  * param serverGroupId: 服务器组ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -56,7 +56,7 @@ func NewQueryServerGroupRequest(
 }
 
 /*
- * param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域 (Required)
  * param serverGroupId: 服务器组ID (Required)
  */
 func NewQueryServerGroupRequestWithAllParams(
@@ -89,7 +89,7 @@ func NewQueryServerGroupRequestWithoutParam() *QueryServerGroupRequest {
     }
 }
 
-/* param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域(Required) */
+/* param regionId: 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域(Required) */
 func (r *QueryServerGroupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

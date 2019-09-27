@@ -46,6 +46,9 @@ type CertDescDetail struct {
     /* 对私钥文件使用sha256算法计算的摘要信息 (Optional) */
     Digest string `json:"digest"`
 
+    /* 绑定信息的总数量 (Optional) */
+    TotalCount int `json:"totalCount"`
+
     /* 证书关联信息 (Optional) */
     UsedBy []CertBindInfo `json:"usedBy"`
 }

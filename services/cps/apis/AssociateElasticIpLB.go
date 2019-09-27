@@ -24,7 +24,7 @@ type AssociateElasticIpLBRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域  */
+    /* 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域  */
     RegionId string `json:"regionId"`
 
     /* 负载均衡实例ID  */
@@ -40,7 +40,7 @@ type AssociateElasticIpLBRequest struct {
 }
 
 /*
- * param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域 (Required)
  * param loadBalancerId: 负载均衡实例ID (Required)
  * param elasticIpId: 弹性公网IPId (Required)
  *
@@ -66,7 +66,7 @@ func NewAssociateElasticIpLBRequest(
 }
 
 /*
- * param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域 (Required)
  * param loadBalancerId: 负载均衡实例ID (Required)
  * param clientToken: 由客户端生成，用于保证请求的幂等性，长度不能超过36个字符；<br/>
 如果多个请求使用了相同的clientToken，只会执行第一个请求，之后的请求直接返回第一个请求的结果<br/>
@@ -107,7 +107,7 @@ func NewAssociateElasticIpLBRequestWithoutParam() *AssociateElasticIpLBRequest {
     }
 }
 
-/* param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域(Required) */
+/* param regionId: 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域(Required) */
 func (r *AssociateElasticIpLBRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

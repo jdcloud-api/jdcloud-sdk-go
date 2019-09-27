@@ -40,7 +40,7 @@ func NewSslClient(credential *core.Credential) *SslClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "ssl",
-            Revision:    "0.2.9",
+            Revision:    "1.0.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -53,8 +53,8 @@ func (c *SslClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-/* 下载证书 [MFA enabled] */
-func (c *SslClient) DownloadCert(request *ssl.DownloadCertRequest) (*ssl.DownloadCertResponse, error) {
+/* 更新证书 [MFA enabled] */
+func (c *SslClient) UpdateCert(request *ssl.UpdateCertRequest) (*ssl.UpdateCertResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -63,27 +63,7 @@ func (c *SslClient) DownloadCert(request *ssl.DownloadCertRequest) (*ssl.Downloa
         return nil, err
     }
 
-    jdResp := &ssl.DownloadCertResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查看证书列表 */
-func (c *SslClient) DescribeCerts(request *ssl.DescribeCertsRequest) (*ssl.DescribeCertsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ssl.DescribeCertsResponse{}
+    jdResp := &ssl.UpdateCertResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -144,6 +124,66 @@ func (c *SslClient) DeleteCerts(request *ssl.DeleteCertsRequest) (*ssl.DeleteCer
     }
 
     jdResp := &ssl.DeleteCertsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 下载证书 [MFA enabled] */
+func (c *SslClient) DownloadCert(request *ssl.DownloadCertRequest) (*ssl.DownloadCertResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ssl.DownloadCertResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查看证书列表 */
+func (c *SslClient) DescribeCerts(request *ssl.DescribeCertsRequest) (*ssl.DescribeCertsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ssl.DescribeCertsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改证书名称 */
+func (c *SslClient) UpdateCertName(request *ssl.UpdateCertNameRequest) (*ssl.UpdateCertNameResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ssl.UpdateCertNameResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

@@ -34,26 +34,14 @@ type ListenerSpec struct {
     /* 是否开启会话保持，取值on|off  */
     StickySession string `json:"stickySession"`
 
-    /* 会话保持超时时间，单位s (Optional) */
-    StickySessionTimeout *int `json:"stickySessionTimeout"`
-
-    /* 会话类型，取值ImplantCookie|RewriteCookie (Optional) */
-    CookieType *string `json:"cookieType"`
-
     /* 是否获取真实ip，取值on|off (Optional) */
     RealIp *string `json:"realIp"`
-
-    /* 证书ID (Optional) */
-    CertificateId *string `json:"certificateId"`
 
     /* 名称  */
     Name string `json:"name"`
 
     /* 描述 (Optional) */
     Description *string `json:"description"`
-
-    /* HTTP扩展头部 (Optional) */
-    Headers []string `json:"headers"`
 
     /* 是否开启健康检查，取值on|off  */
     HealthCheck string `json:"healthCheck"`
@@ -69,15 +57,6 @@ type ListenerSpec struct {
 
     /* 健康检查结果为fail的阈值 (Optional) */
     UnhealthyThreshold *int `json:"unhealthyThreshold"`
-
-    /* 健康检查的URI (Optional) */
-    HealthCheckUri *string `json:"healthCheckUri"`
-
-    /* 健康检查正常的HTTP状态码，多个用,隔开 (Optional) */
-    HealthCheckHttpCode *string `json:"healthCheckHttpCode"`
-
-    /* 健康检查ip (Optional) */
-    HealthCheckIp *string `json:"healthCheckIp"`
 
     /* 服务器组id (Optional) */
     ServerGroupId *string `json:"serverGroupId"`

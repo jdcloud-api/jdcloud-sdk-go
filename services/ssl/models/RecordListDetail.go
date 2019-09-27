@@ -49,6 +49,12 @@ type RecordListDetail struct {
     /* 购买域名数量 (Optional) */
     DomainCount int `json:"domainCount"`
 
+    /* 购买泛域名数量 (Optional) */
+    WildcardDomainCount int `json:"wildcardDomainCount"`
+
     /* 备用域名 (Optional) */
     DnsNames []string `json:"dnsNames"`
+
+    /* 证书Id (Optional) */
+    CertId string `json:"certId"`
 }

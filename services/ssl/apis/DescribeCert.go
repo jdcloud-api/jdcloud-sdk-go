@@ -27,6 +27,12 @@ type DescribeCertRequest struct {
 
     /* 证书 Id  */
     CertId string `json:"certId"`
+
+    /* 第几页，从1开始计数 (Optional) */
+    PageNumber *int `json:"pageNumber"`
+
+    /* 每页显示的数目 (Optional) */
+    PageSize *int `json:"pageSize"`
 }
 
 /*
@@ -51,9 +57,13 @@ func NewDescribeCertRequest(
 
 /*
  * param certId: 证书 Id (Required)
+ * param pageNumber: 第几页，从1开始计数 (Optional)
+ * param pageSize: 每页显示的数目 (Optional)
  */
 func NewDescribeCertRequestWithAllParams(
     certId string,
+    pageNumber *int,
+    pageSize *int,
 ) *DescribeCertRequest {
 
     return &DescribeCertRequest{
@@ -64,6 +74,8 @@ func NewDescribeCertRequestWithAllParams(
             Version: "v1",
         },
         CertId: certId,
+        PageNumber: pageNumber,
+        PageSize: pageSize,
     }
 }
 
@@ -83,6 +95,16 @@ func NewDescribeCertRequestWithoutParam() *DescribeCertRequest {
 /* param certId: 证书 Id(Required) */
 func (r *DescribeCertRequest) SetCertId(certId string) {
     r.CertId = certId
+}
+
+/* param pageNumber: 第几页，从1开始计数(Optional) */
+func (r *DescribeCertRequest) SetPageNumber(pageNumber int) {
+    r.PageNumber = &pageNumber
+}
+
+/* param pageSize: 每页显示的数目(Optional) */
+func (r *DescribeCertRequest) SetPageSize(pageSize int) {
+    r.PageSize = &pageSize
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
@@ -107,5 +129,6 @@ type DescribeCertResult struct {
     EndTime string `json:"endTime"`
     DnsNames []string `json:"dnsNames"`
     Digest string `json:"digest"`
+    TotalCount int `json:"totalCount"`
     UsedBy []ssl.CertBindInfo `json:"usedBy"`
 }

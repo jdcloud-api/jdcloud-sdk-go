@@ -107,6 +107,12 @@ type Instance struct {
     /* 公网IPv6 (Optional) */
     PublicIpv6 string `json:"publicIpv6"`
 
+    /* 密钥对id (Optional) */
+    KeypairId string `json:"keypairId"`
+
+    /* agent状态 (Optional) */
+    AgentStatus string `json:"agentStatus"`
+
     /* 计费信息 (Optional) */
     Charge charge.Charge `json:"charge"`
 }

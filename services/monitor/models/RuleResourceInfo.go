@@ -19,9 +19,15 @@ package models
 
 type RuleResourceInfo struct {
 
-    /* RuleCnt     int64  `json:"ruleCnt" xorm:"cnt"` (Optional) */
-    ResourceId string `json:"resourceId"`
+    /* 维度 (Optional) */
+    Dimension string `json:"dimension"`
+
+    /* 产品类型 (Optional) */
+    Product string `json:"product"`
 
     /*  (Optional) */
-    ServiceCode string `json:"serviceCode"`
+    Region string `json:"region"`
+
+    /*  (Optional) */
+    ResourceId string `json:"resourceId"`
 }

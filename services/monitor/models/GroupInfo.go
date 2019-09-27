@@ -28,9 +28,6 @@ type GroupInfo struct {
     /* 分组名称 (Optional) */
     GroupName string `json:"groupName"`
 
-    /* 分组内的metric列表 (Optional) */
-    Metrics []string `json:"metrics"`
-
     /* 分组下metric对应的tags (Optional) */
     Tags interface{} `json:"tags"`
 

@@ -31,8 +31,11 @@ type LastDownsampleRequest struct {
     /* 监控项英文标识(id)  */
     Metric string `json:"metric"`
 
-    /* 资源的类型，取值vm, lb, ip, database 等  */
+    /* 资源的类型，取值vm, lb, ip, database 等。可用的serviceCode请使用describeServices接口查询  */
     ServiceCode string `json:"serviceCode"`
+
+    /* 资源的维度。serviceCode下可用的dimension请使用describeServices接口查询 (Optional) */
+    Dimension *string `json:"dimension"`
 
     /* 资源的uuid，支持多个resourceId批量查询，每个id用竖线分隔。 如：id1|id2|id3|id4  */
     ResourceId string `json:"resourceId"`
@@ -59,7 +62,7 @@ type LastDownsampleRequest struct {
 /*
  * param regionId: 地域 Id (Required)
  * param metric: 监控项英文标识(id) (Required)
- * param serviceCode: 资源的类型，取值vm, lb, ip, database 等 (Required)
+ * param serviceCode: 资源的类型，取值vm, lb, ip, database 等。可用的serviceCode请使用describeServices接口查询 (Required)
  * param resourceId: 资源的uuid，支持多个resourceId批量查询，每个id用竖线分隔。 如：id1|id2|id3|id4 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -76,7 +79,7 @@ func NewLastDownsampleRequest(
 			URL:     "/regions/{regionId}/metrics/{metric}/lastDownsample",
 			Method:  "GET",
 			Header:  nil,
-			Version: "v1",
+			Version: "v2",
 		},
         RegionId: regionId,
         Metric: metric,
@@ -88,7 +91,8 @@ func NewLastDownsampleRequest(
 /*
  * param regionId: 地域 Id (Required)
  * param metric: 监控项英文标识(id) (Required)
- * param serviceCode: 资源的类型，取值vm, lb, ip, database 等 (Required)
+ * param serviceCode: 资源的类型，取值vm, lb, ip, database 等。可用的serviceCode请使用describeServices接口查询 (Required)
+ * param dimension: 资源的维度。serviceCode下可用的dimension请使用describeServices接口查询 (Optional)
  * param resourceId: 资源的uuid，支持多个resourceId批量查询，每个id用竖线分隔。 如：id1|id2|id3|id4 (Required)
  * param tags: 自定义标签 (Optional)
  * param startTime: 查询时间范围的开始时间， UTC时间，格式：2016-12-11T00:00:00+0800（早于30d时，将被重置为30d）（注意在url中+要转译为%2B故url中为2016-12-11T00:00:00%2B0800） (Optional)
@@ -101,6 +105,7 @@ func NewLastDownsampleRequestWithAllParams(
     regionId string,
     metric string,
     serviceCode string,
+    dimension *string,
     resourceId string,
     tags []monitor.TagFilter,
     startTime *string,
@@ -115,11 +120,12 @@ func NewLastDownsampleRequestWithAllParams(
             URL:     "/regions/{regionId}/metrics/{metric}/lastDownsample",
             Method:  "GET",
             Header:  nil,
-            Version: "v1",
+            Version: "v2",
         },
         RegionId: regionId,
         Metric: metric,
         ServiceCode: serviceCode,
+        Dimension: dimension,
         ResourceId: resourceId,
         Tags: tags,
         StartTime: startTime,
@@ -138,7 +144,7 @@ func NewLastDownsampleRequestWithoutParam() *LastDownsampleRequest {
             URL:     "/regions/{regionId}/metrics/{metric}/lastDownsample",
             Method:  "GET",
             Header:  nil,
-            Version: "v1",
+            Version: "v2",
         },
     }
 }
@@ -153,9 +159,14 @@ func (r *LastDownsampleRequest) SetMetric(metric string) {
     r.Metric = metric
 }
 
-/* param serviceCode: 资源的类型，取值vm, lb, ip, database 等(Required) */
+/* param serviceCode: 资源的类型，取值vm, lb, ip, database 等。可用的serviceCode请使用describeServices接口查询(Required) */
 func (r *LastDownsampleRequest) SetServiceCode(serviceCode string) {
     r.ServiceCode = serviceCode
+}
+
+/* param dimension: 资源的维度。serviceCode下可用的dimension请使用describeServices接口查询(Optional) */
+func (r *LastDownsampleRequest) SetDimension(dimension string) {
+    r.Dimension = &dimension
 }
 
 /* param resourceId: 资源的uuid，支持多个resourceId批量查询，每个id用竖线分隔。 如：id1|id2|id3|id4(Required) */

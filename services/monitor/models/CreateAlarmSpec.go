@@ -19,9 +19,39 @@ package models
 
 type CreateAlarmSpec struct {
 
+    /* 告警通知联系人 (Optional) */
+    BaseContact []BaseContact `json:"baseContact"`
+
     /* 幂等性校验参数,最长36位,若两个请求clientToken相等，则返回第一次创建的规则id，只创建一次规则  */
     ClientToken string `json:"clientToken"`
 
+    /* 资源维度，可用的维度请使用 describeProductsForAlarm接口查询 (Optional) */
+    Dimension string `json:"dimension"`
+
+    /* 是否启用, 1表示启用规则，0表示禁用规则，默认为1 (Optional) */
+    Enabled int64 `json:"enabled"`
+
+    /* 通知策略 (Optional) */
+    NoticeOption []NoticeOption `json:"noticeOption"`
+
+    /* 资源类型, 可用的资源类型列表请使用 describeProductsForAlarm接口查询。  */
+    Product string `json:"product"`
+
     /*   */
-    CreateAlarmSpec CreateAlarmParam `json:"createAlarmSpec"`
+    ResourceOption ResourceOption `json:"resourceOption"`
+
+    /* 规则名称，规则名称，最大长度42个字符，只允许中英文、数字、''-''和"_"  */
+    RuleName string `json:"ruleName"`
+
+    /*   */
+    RuleOption RuleOption `json:"ruleOption"`
+
+    /* 规则类型, 默认为resourceMonitor (Optional) */
+    RuleType string `json:"ruleType"`
+
+    /* 资源维度，指定监控数据实例的维度标签,如resourceId=id。(请确认资源的监控数据带有该标签，否则规则会报数据不足) (Optional) */
+    Tags interface{} `json:"tags"`
+
+    /*  (Optional) */
+    WebHookOption WebHookOption `json:"webHookOption"`
 }

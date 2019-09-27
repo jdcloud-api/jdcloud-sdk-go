@@ -25,118 +25,101 @@ type DescribeAlarmsRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域 Id  */
-    RegionId string `json:"regionId"`
-
     /* 当前所在页，默认为1 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
     /* 页面大小，默认为20；取值范围[1, 100] (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* 产品线标识,默认返回该serviceCode下所有group的数据。eg:serviceCode=jdw（jdw产品线下包含jdw-master与jdw-segment两个分组)会返回jdw-master和jdw-segment的数据。 (Optional) */
+    /* 产品线标识，同一个产品线下可能存在多个product，如(redis下有redis2.8cluster、redis4.0) (Optional) */
     ServiceCode *string `json:"serviceCode"`
 
-    /* 分组标识、指定该参数时，查询只返回该group的数据。groupCode参数仅在与serviceCode匹配时生效；eg:serviceCode=jdw、groupCode=jdw-master,只返回jdw-master分组的数据，不返回jdw-segment的数据。 (Optional) */
-    GroupCode *string `json:"groupCode"`
+    /* 产品标识，如redis下分多个产品(redis2.8cluster、redis4.0)。同时指定serviceCode与product时，product优先生效 (Optional) */
+    Product *string `json:"product"`
 
-    /* 资源ID,根据resourceId查询时必须指定serviceCode才会生效 (Optional) */
-    ResourceId *string `json:"resourceId"`
+    /* 产品下的维度标识，指定dimension时必须指定product (Optional) */
+    Dimension *string `json:"dimension"`
+
+    /* 规则名称 (Optional) */
+    RuleName *string `json:"ruleName"`
 
     /* 规则类型, 1表示资源监控，6表示站点监控,7表示可用性监控 (Optional) */
     RuleType *int `json:"ruleType"`
 
-    /* 规则报警状态, 1：正常, 2：报警，4：数据不足 (Optional) */
-    Status *int `json:"status"`
-
     /* 规则状态：1为启用，0为禁用 (Optional) */
     Enabled *int `json:"enabled"`
 
-    /* 是否为正在报警的规则，0为忽略，1为是，与 status 同时只能生效一个,isAlarming 优先生效 (Optional) */
-    IsAlarming *int `json:"isAlarming"`
-
-    /* 规则的id，若指定filter的alarmIds过滤时，忽略该参数 (Optional) */
-    AlarmId *string `json:"alarmId"`
+    /* 资源的规则状态  2：报警、4：数据不足 (Optional) */
+    RuleStatus *int `json:"ruleStatus"`
 
     /* 服务码或资源Id列表
-serviceCodes - 产品线servicecode，精确匹配，支持多个
-resourceIds - 资源Id，精确匹配，支持多个（必须指定serviceCode才会在该serviceCode下根据resourceIds过滤，否则该参数不生效）
-alarmIds - 规则id，精确匹配，支持多个
-ruleName - 规则名称，模糊匹配，支持单个 (Optional) */
+products - 产品product，精确匹配，支持多个
+resourceIds - 资源Id，精确匹配，支持多个（必须指定serviceCode、product或dimension，否则该参数不生效）
+alarmIds - 规则id，精确匹配，支持多个 (Optional) */
     Filters []monitor.Filter `json:"filters"`
 }
 
 /*
- * param regionId: 地域 Id (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeAlarmsRequest(
-    regionId string,
 ) *DescribeAlarmsRequest {
 
 	return &DescribeAlarmsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/alarms",
+			URL:     "/groupAlarms",
 			Method:  "GET",
 			Header:  nil,
-			Version: "v1",
+			Version: "v2",
 		},
-        RegionId: regionId,
 	}
 }
 
 /*
- * param regionId: 地域 Id (Required)
  * param pageNumber: 当前所在页，默认为1 (Optional)
  * param pageSize: 页面大小，默认为20；取值范围[1, 100] (Optional)
- * param serviceCode: 产品线标识,默认返回该serviceCode下所有group的数据。eg:serviceCode=jdw（jdw产品线下包含jdw-master与jdw-segment两个分组)会返回jdw-master和jdw-segment的数据。 (Optional)
- * param groupCode: 分组标识、指定该参数时，查询只返回该group的数据。groupCode参数仅在与serviceCode匹配时生效；eg:serviceCode=jdw、groupCode=jdw-master,只返回jdw-master分组的数据，不返回jdw-segment的数据。 (Optional)
- * param resourceId: 资源ID,根据resourceId查询时必须指定serviceCode才会生效 (Optional)
+ * param serviceCode: 产品线标识，同一个产品线下可能存在多个product，如(redis下有redis2.8cluster、redis4.0) (Optional)
+ * param product: 产品标识，如redis下分多个产品(redis2.8cluster、redis4.0)。同时指定serviceCode与product时，product优先生效 (Optional)
+ * param dimension: 产品下的维度标识，指定dimension时必须指定product (Optional)
+ * param ruleName: 规则名称 (Optional)
  * param ruleType: 规则类型, 1表示资源监控，6表示站点监控,7表示可用性监控 (Optional)
- * param status: 规则报警状态, 1：正常, 2：报警，4：数据不足 (Optional)
  * param enabled: 规则状态：1为启用，0为禁用 (Optional)
- * param isAlarming: 是否为正在报警的规则，0为忽略，1为是，与 status 同时只能生效一个,isAlarming 优先生效 (Optional)
- * param alarmId: 规则的id，若指定filter的alarmIds过滤时，忽略该参数 (Optional)
+ * param ruleStatus: 资源的规则状态  2：报警、4：数据不足 (Optional)
  * param filters: 服务码或资源Id列表
-serviceCodes - 产品线servicecode，精确匹配，支持多个
-resourceIds - 资源Id，精确匹配，支持多个（必须指定serviceCode才会在该serviceCode下根据resourceIds过滤，否则该参数不生效）
-alarmIds - 规则id，精确匹配，支持多个
-ruleName - 规则名称，模糊匹配，支持单个 (Optional)
+products - 产品product，精确匹配，支持多个
+resourceIds - 资源Id，精确匹配，支持多个（必须指定serviceCode、product或dimension，否则该参数不生效）
+alarmIds - 规则id，精确匹配，支持多个 (Optional)
  */
 func NewDescribeAlarmsRequestWithAllParams(
-    regionId string,
     pageNumber *int,
     pageSize *int,
     serviceCode *string,
-    groupCode *string,
-    resourceId *string,
+    product *string,
+    dimension *string,
+    ruleName *string,
     ruleType *int,
-    status *int,
     enabled *int,
-    isAlarming *int,
-    alarmId *string,
+    ruleStatus *int,
     filters []monitor.Filter,
 ) *DescribeAlarmsRequest {
 
     return &DescribeAlarmsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/alarms",
+            URL:     "/groupAlarms",
             Method:  "GET",
             Header:  nil,
-            Version: "v1",
+            Version: "v2",
         },
-        RegionId: regionId,
         PageNumber: pageNumber,
         PageSize: pageSize,
         ServiceCode: serviceCode,
-        GroupCode: groupCode,
-        ResourceId: resourceId,
+        Product: product,
+        Dimension: dimension,
+        RuleName: ruleName,
         RuleType: ruleType,
-        Status: status,
         Enabled: enabled,
-        IsAlarming: isAlarming,
-        AlarmId: alarmId,
+        RuleStatus: ruleStatus,
         Filters: filters,
     }
 }
@@ -146,17 +129,12 @@ func NewDescribeAlarmsRequestWithoutParam() *DescribeAlarmsRequest {
 
     return &DescribeAlarmsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/alarms",
+            URL:     "/groupAlarms",
             Method:  "GET",
             Header:  nil,
-            Version: "v1",
+            Version: "v2",
         },
     }
-}
-
-/* param regionId: 地域 Id(Required) */
-func (r *DescribeAlarmsRequest) SetRegionId(regionId string) {
-    r.RegionId = regionId
 }
 
 /* param pageNumber: 当前所在页，默认为1(Optional) */
@@ -169,19 +147,24 @@ func (r *DescribeAlarmsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
-/* param serviceCode: 产品线标识,默认返回该serviceCode下所有group的数据。eg:serviceCode=jdw（jdw产品线下包含jdw-master与jdw-segment两个分组)会返回jdw-master和jdw-segment的数据。(Optional) */
+/* param serviceCode: 产品线标识，同一个产品线下可能存在多个product，如(redis下有redis2.8cluster、redis4.0)(Optional) */
 func (r *DescribeAlarmsRequest) SetServiceCode(serviceCode string) {
     r.ServiceCode = &serviceCode
 }
 
-/* param groupCode: 分组标识、指定该参数时，查询只返回该group的数据。groupCode参数仅在与serviceCode匹配时生效；eg:serviceCode=jdw、groupCode=jdw-master,只返回jdw-master分组的数据，不返回jdw-segment的数据。(Optional) */
-func (r *DescribeAlarmsRequest) SetGroupCode(groupCode string) {
-    r.GroupCode = &groupCode
+/* param product: 产品标识，如redis下分多个产品(redis2.8cluster、redis4.0)。同时指定serviceCode与product时，product优先生效(Optional) */
+func (r *DescribeAlarmsRequest) SetProduct(product string) {
+    r.Product = &product
 }
 
-/* param resourceId: 资源ID,根据resourceId查询时必须指定serviceCode才会生效(Optional) */
-func (r *DescribeAlarmsRequest) SetResourceId(resourceId string) {
-    r.ResourceId = &resourceId
+/* param dimension: 产品下的维度标识，指定dimension时必须指定product(Optional) */
+func (r *DescribeAlarmsRequest) SetDimension(dimension string) {
+    r.Dimension = &dimension
+}
+
+/* param ruleName: 规则名称(Optional) */
+func (r *DescribeAlarmsRequest) SetRuleName(ruleName string) {
+    r.RuleName = &ruleName
 }
 
 /* param ruleType: 规则类型, 1表示资源监控，6表示站点监控,7表示可用性监控(Optional) */
@@ -189,31 +172,20 @@ func (r *DescribeAlarmsRequest) SetRuleType(ruleType int) {
     r.RuleType = &ruleType
 }
 
-/* param status: 规则报警状态, 1：正常, 2：报警，4：数据不足(Optional) */
-func (r *DescribeAlarmsRequest) SetStatus(status int) {
-    r.Status = &status
-}
-
 /* param enabled: 规则状态：1为启用，0为禁用(Optional) */
 func (r *DescribeAlarmsRequest) SetEnabled(enabled int) {
     r.Enabled = &enabled
 }
 
-/* param isAlarming: 是否为正在报警的规则，0为忽略，1为是，与 status 同时只能生效一个,isAlarming 优先生效(Optional) */
-func (r *DescribeAlarmsRequest) SetIsAlarming(isAlarming int) {
-    r.IsAlarming = &isAlarming
-}
-
-/* param alarmId: 规则的id，若指定filter的alarmIds过滤时，忽略该参数(Optional) */
-func (r *DescribeAlarmsRequest) SetAlarmId(alarmId string) {
-    r.AlarmId = &alarmId
+/* param ruleStatus: 资源的规则状态  2：报警、4：数据不足(Optional) */
+func (r *DescribeAlarmsRequest) SetRuleStatus(ruleStatus int) {
+    r.RuleStatus = &ruleStatus
 }
 
 /* param filters: 服务码或资源Id列表
-serviceCodes - 产品线servicecode，精确匹配，支持多个
-resourceIds - 资源Id，精确匹配，支持多个（必须指定serviceCode才会在该serviceCode下根据resourceIds过滤，否则该参数不生效）
-alarmIds - 规则id，精确匹配，支持多个
-ruleName - 规则名称，模糊匹配，支持单个(Optional) */
+products - 产品product，精确匹配，支持多个
+resourceIds - 资源Id，精确匹配，支持多个（必须指定serviceCode、product或dimension，否则该参数不生效）
+alarmIds - 规则id，精确匹配，支持多个(Optional) */
 func (r *DescribeAlarmsRequest) SetFilters(filters []monitor.Filter) {
     r.Filters = filters
 }
@@ -221,7 +193,7 @@ func (r *DescribeAlarmsRequest) SetFilters(filters []monitor.Filter) {
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r DescribeAlarmsRequest) GetRegionId() string {
-    return r.RegionId
+    return ""
 }
 
 type DescribeAlarmsResponse struct {
@@ -231,6 +203,9 @@ type DescribeAlarmsResponse struct {
 }
 
 type DescribeAlarmsResult struct {
-    AlarmList []monitor.DescribedAlarm `json:"alarmList"`
-    Total int64 `json:"total"`
+    AlarmList []monitor.DescribeGroupAlarm `json:"alarmList"`
+    NumberPages int64 `json:"numberPages"`
+    NumberRecords int64 `json:"numberRecords"`
+    PageNumber int64 `json:"pageNumber"`
+    PageSize int64 `json:"pageSize"`
 }

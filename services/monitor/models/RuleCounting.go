@@ -28,8 +28,8 @@ type RuleCounting struct {
     /* 处于正常状态的规则个数  status：1 (Optional) */
     NormalRuleCount int64 `json:"normalRuleCount"`
 
-    /* 报警联系人列表 (Optional) */
-    ServiceCode string `json:"serviceCode"`
+    /* 产品标识 (Optional) */
+    Product string `json:"product"`
 
     /* 监控规则 总数 (Optional) */
     TotalRuleCount int64 `json:"totalRuleCount"`
