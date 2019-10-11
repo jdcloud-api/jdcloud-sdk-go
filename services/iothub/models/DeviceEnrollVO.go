@@ -23,11 +23,11 @@ type DeviceEnrollVO struct {
     DeviceIds []string `json:"deviceIds"`
 
     /*  (Optional) */
-    ModelName *string `json:"modelName"`
+    ModelName string `json:"modelName"`
 
     /*  (Optional) */
-    DeviceType *int `json:"deviceType"`
+    DeviceType int `json:"deviceType"`
 
     /*  (Optional) */
-    ParentDeviceName *string `json:"parentDeviceName"`
+    ParentDeviceName string `json:"parentDeviceName"`
 }

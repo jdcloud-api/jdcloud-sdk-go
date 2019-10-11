@@ -17,11 +17,17 @@
 package models
 
 
-type DeviceCommandVO struct {
+type Rules struct {
 
-    /*  (Optional) */
-    Name string `json:"name"`
+    /* 规则编号 (Optional) */
+    RuleId string `json:"ruleId"`
 
-    /*  (Optional) */
-    InputData string `json:"inputData"`
+    /* 0-正常规则，1-异常规则 (Optional) */
+    RuleType int `json:"ruleType"`
+
+    /* 用户填写的规则信息 (Optional) */
+    RuleInfo string `json:"ruleInfo"`
+
+    /* 用户规则映射的jcq信息 (Optional) */
+    JcqInfo string `json:"jcqInfo"`
 }

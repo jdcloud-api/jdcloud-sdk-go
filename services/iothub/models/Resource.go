@@ -17,11 +17,11 @@
 package models
 
 
-type DeviceCommandVO struct {
+type Resource struct {
 
-    /*  (Optional) */
-    Name string `json:"name"`
+    /* 资源ID (Optional) */
+    ResourceId string `json:"resourceId"`
 
-    /*  (Optional) */
-    InputData string `json:"inputData"`
+    /* 资源名称 (Optional) */
+    ResourceName string `json:"resourceName"`
 }

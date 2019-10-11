@@ -53,6 +53,10 @@ func (c *LiveClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
+func (c *LiveClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
+}
+
 /* 查询在线流列表 */
 func (c *LiveClient) DescribeDomainOnlineStream(request *live.DescribeDomainOnlineStreamRequest) (*live.DescribeDomainOnlineStreamResponse, error) {
     if request == nil {

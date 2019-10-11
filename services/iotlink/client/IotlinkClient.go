@@ -18,47 +18,47 @@ package client
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    jdccs "github.com/jdcloud-api/jdcloud-sdk-go/services/jdccs/apis"
+    iotlink "github.com/jdcloud-api/jdcloud-sdk-go/services/iotlink/apis"
     "encoding/json"
     "errors"
 )
 
-type JdccsClient struct {
+type IotlinkClient struct {
     core.JDCloudClient
 }
 
-func NewJdccsClient(credential *core.Credential) *JdccsClient {
+func NewIotlinkClient(credential *core.Credential) *IotlinkClient {
     if credential == nil {
         return nil
     }
 
     config := core.NewConfig()
-    config.SetEndpoint("jdccs.jdcloud-api.com")
+    config.SetEndpoint("iotlink.jdcloud-api.com")
 
-    return &JdccsClient{
+    return &IotlinkClient{
         core.JDCloudClient{
             Credential:  *credential,
             Config:      *config,
-            ServiceName: "jdccs",
-            Revision:    "1.0.2",
+            ServiceName: "iotlink",
+            Revision:    "1.0.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
 
-func (c *JdccsClient) SetConfig(config *core.Config) {
+func (c *IotlinkClient) SetConfig(config *core.Config) {
     c.Config = *config
 }
 
-func (c *JdccsClient) SetLogger(logger core.Logger) {
+func (c *IotlinkClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-func (c *JdccsClient) DisableLogger() {
+func (c *IotlinkClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
 }
 
-/* 查看某资源单个监控项数据 */
-func (c *JdccsClient) DescribeMetricData(request *jdccs.DescribeMetricDataRequest) (*jdccs.DescribeMetricDataResponse, error) {
+/* 根据物联网卡iccid查询该卡的开关机状态信息 */
+func (c *IotlinkClient) OnOffStatus(request *iotlink.OnOffStatusRequest) (*iotlink.OnOffStatusResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -67,7 +67,7 @@ func (c *JdccsClient) DescribeMetricData(request *jdccs.DescribeMetricDataReques
         return nil, err
     }
 
-    jdResp := &jdccs.DescribeMetricDataResponse{}
+    jdResp := &iotlink.OnOffStatusResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -77,8 +77,8 @@ func (c *JdccsClient) DescribeMetricData(request *jdccs.DescribeMetricDataReques
     return jdResp, err
 }
 
-/* 查看某资源的最后一个监控数据点 */
-func (c *JdccsClient) LastDownsample(request *jdccs.LastDownsampleRequest) (*jdccs.LastDownsampleResponse, error) {
+/* 物联网卡开机操作 */
+func (c *IotlinkClient) OpenIotCard(request *iotlink.OpenIotCardRequest) (*iotlink.OpenIotCardResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -87,7 +87,7 @@ func (c *JdccsClient) LastDownsample(request *jdccs.LastDownsampleRequest) (*jdc
         return nil, err
     }
 
-    jdResp := &jdccs.LastDownsampleResponse{}
+    jdResp := &iotlink.OpenIotCardResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -97,8 +97,8 @@ func (c *JdccsClient) LastDownsample(request *jdccs.LastDownsampleRequest) (*jdc
     return jdResp, err
 }
 
-/* 查询IDC机房列表 */
-func (c *JdccsClient) DescribeIdcs(request *jdccs.DescribeIdcsRequest) (*jdccs.DescribeIdcsResponse, error) {
+/* 物联网卡停机操作 */
+func (c *IotlinkClient) CloseIotCard(request *iotlink.CloseIotCardRequest) (*iotlink.CloseIotCardResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -107,7 +107,7 @@ func (c *JdccsClient) DescribeIdcs(request *jdccs.DescribeIdcsRequest) (*jdccs.D
         return nil, err
     }
 
-    jdResp := &jdccs.DescribeIdcsResponse{}
+    jdResp := &iotlink.CloseIotCardResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -117,8 +117,8 @@ func (c *JdccsClient) DescribeIdcs(request *jdccs.DescribeIdcsRequest) (*jdccs.D
     return jdResp, err
 }
 
-/* 查询机柜列表 */
-func (c *JdccsClient) DescribeCabinets(request *jdccs.DescribeCabinetsRequest) (*jdccs.DescribeCabinetsResponse, error) {
+/* 根据物联网卡iccid查询该卡的生命周期信息 */
+func (c *IotlinkClient) LifeStatus(request *iotlink.LifeStatusRequest) (*iotlink.LifeStatusResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -127,7 +127,7 @@ func (c *JdccsClient) DescribeCabinets(request *jdccs.DescribeCabinetsRequest) (
         return nil, err
     }
 
-    jdResp := &jdccs.DescribeCabinetsResponse{}
+    jdResp := &iotlink.LifeStatusResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -137,8 +137,8 @@ func (c *JdccsClient) DescribeCabinets(request *jdccs.DescribeCabinetsRequest) (
     return jdResp, err
 }
 
-/* 查询可用监控项列表 */
-func (c *JdccsClient) DescribeMetrics(request *jdccs.DescribeMetricsRequest) (*jdccs.DescribeMetricsResponse, error) {
+/* 物联网卡停流量操作 */
+func (c *IotlinkClient) CloseIotFlow(request *iotlink.CloseIotFlowRequest) (*iotlink.CloseIotFlowResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -147,7 +147,7 @@ func (c *JdccsClient) DescribeMetrics(request *jdccs.DescribeMetricsRequest) (*j
         return nil, err
     }
 
-    jdResp := &jdccs.DescribeMetricsResponse{}
+    jdResp := &iotlink.CloseIotFlowResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -157,8 +157,8 @@ func (c *JdccsClient) DescribeMetrics(request *jdccs.DescribeMetricsRequest) (*j
     return jdResp, err
 }
 
-/* 查询机房房间号列表 */
-func (c *JdccsClient) DescribeRooms(request *jdccs.DescribeRoomsRequest) (*jdccs.DescribeRoomsResponse, error) {
+/* 根据物联网卡iccid查询该卡的gprs状态信息 */
+func (c *IotlinkClient) GprsStatus(request *iotlink.GprsStatusRequest) (*iotlink.GprsStatusResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -167,7 +167,47 @@ func (c *JdccsClient) DescribeRooms(request *jdccs.DescribeRoomsRequest) (*jdccs
         return nil, err
     }
 
-    jdResp := &jdccs.DescribeRoomsResponse{}
+    jdResp := &iotlink.GprsStatusResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 物联网卡开启流量操作 */
+func (c *IotlinkClient) OpenIotFlow(request *iotlink.OpenIotFlowRequest) (*iotlink.OpenIotFlowResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotlink.OpenIotFlowResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据物联网卡iccid查询该卡的当月套餐内的GPRS实时使用量 */
+func (c *IotlinkClient) GprsRealtimeInfo(request *iotlink.GprsRealtimeInfoRequest) (*iotlink.GprsRealtimeInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotlink.GprsRealtimeInfoResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

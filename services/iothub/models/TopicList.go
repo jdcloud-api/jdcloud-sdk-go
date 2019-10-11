@@ -17,11 +17,14 @@
 package models
 
 
-type DeviceCommandVO struct {
+type TopicList struct {
 
-    /*  (Optional) */
-    Name string `json:"name"`
+    /* topic (Optional) */
+    Topic string `json:"topic"`
 
-    /*  (Optional) */
-    InputData string `json:"inputData"`
+    /* 权限 (Optional) */
+    Authority string `json:"authority"`
+
+    /* 描述 (Optional) */
+    Descripton string `json:"descripton"`
 }

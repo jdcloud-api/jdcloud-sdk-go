@@ -17,11 +17,11 @@
 package models
 
 
-type DeviceCommandVO struct {
+type ProductCategory struct {
 
-    /*  (Optional) */
-    Name string `json:"name"`
+    /* 产品分类名称 (Optional) */
+    ProductCategoryName string `json:"productCategoryName"`
 
-    /*  (Optional) */
-    InputData string `json:"inputData"`
+    /* 产品分类唯一标识 (Optional) */
+    ProductCategoryId string `json:"productCategoryId"`
 }

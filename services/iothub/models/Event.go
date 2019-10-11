@@ -17,11 +17,20 @@
 package models
 
 
-type DeviceCommandVO struct {
+type Event struct {
 
-    /*  (Optional) */
+    /* 事件名称 (Optional) */
     Name string `json:"name"`
 
-    /*  (Optional) */
-    InputData string `json:"inputData"`
+    /* 事件ID (Optional) */
+    EventId string `json:"eventId"`
+
+    /* 事件类型 (Optional) */
+    EventType string `json:"eventType"`
+
+    /* 输出参数,object的key为参数名称，value为参数值 (Optional) */
+    Output interface{} `json:"output"`
+
+    /* 产生时间 (Optional) */
+    CreatedTime int64 `json:"createdTime"`
 }

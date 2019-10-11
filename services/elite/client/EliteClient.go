@@ -40,7 +40,7 @@ func NewEliteClient(credential *core.Credential) *EliteClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "elite",
-            Revision:    "1.0.6",
+            Revision:    "1.0.8",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,6 +51,10 @@ func (c *EliteClient) SetConfig(config *core.Config) {
 
 func (c *EliteClient) SetLogger(logger core.Logger) {
     c.Logger = logger
+}
+
+func (c *EliteClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
 }
 
 /* 查询价格 */

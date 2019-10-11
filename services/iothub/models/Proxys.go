@@ -17,11 +17,17 @@
 package models
 
 
-type DeviceCommandVO struct {
+type Proxys struct {
 
-    /*  (Optional) */
-    Name string `json:"name"`
+    /* IoT Hub Proxy实例编号 (Optional) */
+    ProxyId string `json:"proxyId"`
 
-    /*  (Optional) */
-    InputData string `json:"inputData"`
+    /* Proxy对应的用户Pin (Optional) */
+    UserPin string `json:"userPin"`
+
+    /* IoT Hub Proxy实例创建时间 (Optional) */
+    CreateTime int `json:"createTime"`
+
+    /* IoT Hub Proxy下执行的规则数量 (Optional) */
+    TotalRuleNums int `json:"totalRuleNums"`
 }

@@ -17,11 +17,14 @@
 package models
 
 
-type DeviceCommandVO struct {
+type GprsStatusResp struct {
 
-    /*  (Optional) */
-    Name string `json:"name"`
+    /* 物联网卡iccid (Optional) */
+    Iccid string `json:"iccid"`
 
-    /*  (Optional) */
-    InputData string `json:"inputData"`
+    /* 物联网卡msisdn (Optional) */
+    Msisdn string `json:"msisdn"`
+
+    /* GPRS在线状态(00:离线;01:在线;02:该运营商不支持查询;03:未知) (Optional) */
+    Onlinestatus string `json:"onlinestatus"`
 }
