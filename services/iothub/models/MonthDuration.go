@@ -17,11 +17,11 @@
 package models
 
 
-type DeviceCommandVO struct {
+type MonthDuration struct {
 
-    /*  (Optional) */
-    Name string `json:"name"`
+    /* 日期 (Optional) */
+    DurationMonth string `json:"durationMonth"`
 
-    /*  (Optional) */
-    InputData string `json:"inputData"`
+    /* 时长(分钟) (Optional) */
+    DurationValue int64 `json:"durationValue"`
 }

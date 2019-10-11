@@ -17,11 +17,17 @@
 package models
 
 
-type DeviceCommandVO struct {
+type MonitorIotHubInstance struct {
 
-    /*  (Optional) */
-    Name string `json:"name"`
+    /* 实例Id (Optional) */
+    InstanceId string `json:"instanceId"`
 
-    /*  (Optional) */
-    InputData string `json:"inputData"`
+    /* 用户PIN (Optional) */
+    UserPin string `json:"userPin"`
+
+    /* 开通时间 (Optional) */
+    CreatedTime int64 `json:"createdTime"`
+
+    /* 公网域名 (Optional) */
+    PubDomain string `json:"pubDomain"`
 }

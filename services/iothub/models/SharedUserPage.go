@@ -17,11 +17,20 @@
 package models
 
 
-type DeviceCommandVO struct {
+type SharedUserPage struct {
 
-    /*  (Optional) */
-    Name string `json:"name"`
+    /* 总用户数 (Optional) */
+    TotalSize int `json:"totalSize"`
 
-    /*  (Optional) */
-    InputData string `json:"inputData"`
+    /* 总页数 (Optional) */
+    TotalPage int `json:"totalPage"`
+
+    /* 每页条数 (Optional) */
+    PageSize int `json:"pageSize"`
+
+    /* 当前页 (Optional) */
+    NowPage int `json:"nowPage"`
+
+    /* 用户信息列表 (Optional) */
+    Users []SharedUsers `json:"users"`
 }

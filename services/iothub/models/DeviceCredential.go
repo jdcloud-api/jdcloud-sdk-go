@@ -17,11 +17,20 @@
 package models
 
 
-type DeviceCommandVO struct {
+type DeviceCredential struct {
 
-    /*  (Optional) */
-    Name string `json:"name"`
+    /* 设备Id (Optional) */
+    DeviceId string `json:"deviceId"`
 
-    /*  (Optional) */
-    InputData string `json:"inputData"`
+    /* 设备名称 (Optional) */
+    DeviceName string `json:"deviceName"`
+
+    /* 设备鉴权标识 (Optional) */
+    Identifier string `json:"identifier"`
+
+    /* 设备秘钥 (Optional) */
+    Secret string `json:"secret"`
+
+    /* 所属产品 (Optional) */
+    ProductKey string `json:"productKey"`
 }

@@ -46,15 +46,24 @@ type DataVO struct {
     /* 内网域名 (Optional) */
     PriDomain string `json:"priDomain"`
 
-    /* 实例状态[0-创建中，1-运行中，2-停止] (Optional) */
-    Status string `json:"status"`
-
-    /* 资费形式 (Optional) */
-    Feetype string `json:"feetype"`
+    /* IoT Hub实例状态[10~100为创建中,0或1-运行中,2-欠费停服,3-待删除] (Optional) */
+    Status int `json:"status"`
 
     /* 创建时间 (Optional) */
-    CreateTime string `json:"createTime"`
+    CreateTime int `json:"createTime"`
+
+    /* 实例到期时间 (Optional) */
+    EndTime int `json:"endTime"`
+
+    /* 最大在线设备数 (Optional) */
+    MaxDevices int `json:"maxDevices"`
+
+    /* 最大消息条数 (Optional) */
+    MaxMessage int `json:"maxMessage"`
 
     /* 实例编号 (Optional) */
     InstanceId string `json:"instanceId"`
+
+    /* 实例类型[0-独享，1-共享] (Optional) */
+    InstanceType string `json:"instanceType"`
 }

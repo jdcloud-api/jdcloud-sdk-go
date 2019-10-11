@@ -17,11 +17,14 @@
 package models
 
 
-type DeviceCommandVO struct {
+type OnOffStatusResp struct {
 
-    /*  (Optional) */
-    Name string `json:"name"`
+    /* 物联网卡iccid (Optional) */
+    Iccid string `json:"iccid"`
 
-    /*  (Optional) */
-    InputData string `json:"inputData"`
+    /* 物联网卡msisdn (Optional) */
+    Msisdn string `json:"msisdn"`
+
+    /* 终端的开关机状态(00:关机;01:开机;02:该运营商不支持查询;03:未知) (Optional) */
+    Status string `json:"status"`
 }

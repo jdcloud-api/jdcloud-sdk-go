@@ -17,11 +17,14 @@
 package models
 
 
-type DeviceCommandVO struct {
+type OperationIotlinkResp struct {
 
-    /*  (Optional) */
-    Name string `json:"name"`
+    /* 物联网卡iccid (Optional) */
+    Iccid string `json:"iccid"`
 
-    /*  (Optional) */
-    InputData string `json:"inputData"`
+    /* 操作状态(0:操作成功;1:操作失败) (Optional) */
+    Status string `json:"status"`
+
+    /* 卡操作反馈信息 (Optional) */
+    Message string `json:"message"`
 }

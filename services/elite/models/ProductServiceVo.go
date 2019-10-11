@@ -25,6 +25,15 @@ type ProductServiceVo struct {
     /* 订单号 (Optional) */
     OrderNumber string `json:"orderNumber"`
 
+    /* 续费订单所关联的新购订单号，该字段只针对续费单有效，新购单该字段为null (Optional) */
+    RefOrderNumber string `json:"refOrderNumber"`
+
+    /* 订单类型 (Optional) */
+    OrderType int `json:"orderType"`
+
+    /* 订单类型名称 (Optional) */
+    OrderTypeName string `json:"orderTypeName"`
+
     /* 购买人 (Optional) */
     BuyerPin string `json:"buyerPin"`
 

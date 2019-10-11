@@ -17,11 +17,11 @@
 package models
 
 
-type DeviceCommandVO struct {
+type GprsRealtimeInfoResp struct {
 
-    /*  (Optional) */
-    Name string `json:"name"`
+    /* 套餐流量总量(单位MB) (Optional) */
+    Total string `json:"total"`
 
-    /*  (Optional) */
-    InputData string `json:"inputData"`
+    /* 累计使用量(单位KB) (Optional) */
+    Used string `json:"used"`
 }
