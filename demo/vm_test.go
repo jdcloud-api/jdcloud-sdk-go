@@ -118,6 +118,15 @@ func testVmGetInstancesWithFilter(t *testing.T, instanceId string) {
 func stopInstance(instanceId string) bool {
 	req := NewStopInstanceRequest("cn-north-1", instanceId)
 	client := initVmClient()
+
+	config := NewConfig()
+	config.SetEndpoint("vm.internal.cn-north-1.jdcloud-api.com") //指定非默认访问点，如供VPC专用调用的域名
+	config.SetScheme(SchemeHttp) //设置使用HTTP而不是HTTPS，vpc专用域名不支持HTTPS
+	config.SetTimeout(20 * time.Second) //设置请求超时
+	client.SetConfig(config)
+
+	client.DisableLogger() //关闭日志打印
+
 	resp, err := client.StopInstance(req)
 	return err == nil && resp.Error.Code == 0
 }
