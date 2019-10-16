@@ -65,15 +65,15 @@ resp, err := client.DeleteInstance(req)
 
 如果需要设置访问点，配置超时等，请参考如下更复杂的例子：
 ```
-	config := NewConfig()
-	config.SetEndpoint("vm.internal.cn-north-1.jdcloud-api.com") //指定非默认访问点，如供VPC专用调用的域名
-	config.SetScheme(SchemeHttp) //设置使用HTTP而不是HTTPS，vpc专用域名不支持HTTPS
-	config.SetTimeout(20 * time.Second) //设置请求超时
-	client.SetConfig(config)
+config := NewConfig()
+config.SetEndpoint("vm.internal.cn-north-1.jdcloud-api.com") //指定非默认访问点，如供VPC专用调用的域名
+config.SetScheme(SchemeHttp) //设置使用HTTP而不是HTTPS，vpc专用域名不支持HTTPS
+config.SetTimeout(20 * time.Second) //设置请求超时
+client.SetConfig(config)
 ```
 
 如果需要关闭日志输出，则按照如下方式：
 ```
-	client.DisableLogger()
+client.DisableLogger()
 ```
 
