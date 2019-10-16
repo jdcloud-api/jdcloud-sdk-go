@@ -51,6 +51,10 @@ func main() {
 	fmt.Println(len(resp.Result.Instances))
 }
 ```
+
+**注意：**
+- 每支云产品都有自己的Client，当调用该产品API时，需使用该产品的Client。例如：使用NewVmClient创建的client只能调用云主机（Vm）的接口；使用用NewAgClient创建的client只能调用高可用组（Ag）的接口。
+
 如果需要设置额外的header，例如要调用开启了MFA操作保护的接口，需要传递x-jdcloud-security-token，则按照如下方式：
 ```
 const HeaderSecurityToken = "x-jdcloud-security-token"
@@ -58,4 +62,18 @@ req := NewDeleteInstanceRequest("cn-north-1", "i-xxxxx")
 req.AddHeader(HeaderSecurityToken, "xxx")
 resp, err := client.DeleteInstance(req)
 ```
-请参考demo中的测试用例，访问京东云各业务线接口。
+
+如果需要设置访问点，配置超时等，请参考如下更复杂的例子：
+```
+	config := NewConfig()
+	config.SetEndpoint("vm.internal.cn-north-1.jdcloud-api.com") //指定非默认访问点，如供VPC专用调用的域名
+	config.SetScheme(SchemeHttp) //设置使用HTTP而不是HTTPS，vpc专用域名不支持HTTPS
+	config.SetTimeout(20 * time.Second) //设置请求超时
+	client.SetConfig(config)
+```
+
+如果需要关闭日志输出，则按照如下方式：
+```
+	client.DisableLogger()
+```
+
