@@ -28,7 +28,7 @@ import (
 	"strings"
 	"time"
 	"bytes"
-	"github.com/gofrs/uuid"
+	"github.com/satori/go.uuid"
 )
 
 const (
@@ -299,7 +299,7 @@ func makeSha256Reader(reader io.ReadSeeker) []byte {
 const doubleSpace = "  "
 
 // stripExcessSpaces will rewrite the passed in slice's string values to not
-// contain multiple side-by-side spaces.
+// contain muliple side-by-side spaces.
 func stripExcessSpaces(vals []string) {
 	var j, k, l, m, spaces int
 	for i, str := range vals {

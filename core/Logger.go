@@ -41,3 +41,12 @@ func (logger DefaultLogger) Log (level int, message... interface{}) {
 	}
 }
 
+type DummyLogger struct {
+}
+
+func NewDummyLogger() *DummyLogger {
+	return &DummyLogger{}
+}
+
+func (logger DummyLogger) Log (level int, message... interface{}) {
+}
