@@ -25,7 +25,7 @@ type ModifySubnetRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域  */
+    /* 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域  */
     RegionId string `json:"regionId"`
 
     /* 子网ID  */
@@ -39,7 +39,7 @@ type ModifySubnetRequest struct {
 }
 
 /*
- * param regionId: 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
  * param subnetId: 子网ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -62,7 +62,7 @@ func NewModifySubnetRequest(
 }
 
 /*
- * param regionId: 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
  * param subnetId: 子网ID (Required)
  * param name: 名称 (Optional)
  * param description: 描述 (Optional)
@@ -101,7 +101,7 @@ func NewModifySubnetRequestWithoutParam() *ModifySubnetRequest {
     }
 }
 
-/* param regionId: 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域(Required) */
+/* param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域(Required) */
 func (r *ModifySubnetRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

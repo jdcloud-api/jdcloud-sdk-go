@@ -40,7 +40,7 @@ func NewDiskClient(credential *core.Credential) *DiskClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "disk",
-            Revision:    "0.12.3",
+            Revision:    "0.12.4",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }

@@ -26,7 +26,7 @@ type DescribeInstancesRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域  */
+    /* 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域  */
     RegionId string `json:"regionId"`
 
     /* 页码；默认为1 (Optional) */
@@ -53,6 +53,9 @@ type DescribeInstancesRequest struct {
     /* 是否启用外网, yes/no (Optional) */
     EnableInternet *string `json:"enableInternet"`
 
+    /* 密钥对id (Optional) */
+    KeypairId *string `json:"keypairId"`
+
     /* instanceId - 分布式云物理服务器ID，精确匹配，支持多个<br/>
 privateIp - 分布式云物理服务器内网IP，精确匹配，支持多个<br/>
 status - 分布式云物理服务器状态，参考分布式云物理服务器状态，精确匹配，支持多个
@@ -61,7 +64,7 @@ status - 分布式云物理服务器状态，参考分布式云物理服务器�
 }
 
 /*
- * param regionId: 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -81,7 +84,7 @@ func NewDescribeInstancesRequest(
 }
 
 /*
- * param regionId: 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
  * param pageNumber: 页码；默认为1 (Optional)
  * param pageSize: 分页大小；默认为20；取值范围[20, 100] (Optional)
  * param az: 可用区，精确匹配 (Optional)
@@ -90,6 +93,7 @@ func NewDescribeInstancesRequest(
  * param deviceType: 实例类型，精确匹配，调用接口（describeDeviceTypes）获取实例类型 (Optional)
  * param subnetId: 子网ID (Optional)
  * param enableInternet: 是否启用外网, yes/no (Optional)
+ * param keypairId: 密钥对id (Optional)
  * param filters: instanceId - 分布式云物理服务器ID，精确匹配，支持多个<br/>
 privateIp - 分布式云物理服务器内网IP，精确匹配，支持多个<br/>
 status - 分布式云物理服务器状态，参考分布式云物理服务器状态，精确匹配，支持多个
@@ -105,6 +109,7 @@ func NewDescribeInstancesRequestWithAllParams(
     deviceType *string,
     subnetId *string,
     enableInternet *string,
+    keypairId *string,
     filters []common.Filter,
 ) *DescribeInstancesRequest {
 
@@ -124,6 +129,7 @@ func NewDescribeInstancesRequestWithAllParams(
         DeviceType: deviceType,
         SubnetId: subnetId,
         EnableInternet: enableInternet,
+        KeypairId: keypairId,
         Filters: filters,
     }
 }
@@ -141,7 +147,7 @@ func NewDescribeInstancesRequestWithoutParam() *DescribeInstancesRequest {
     }
 }
 
-/* param regionId: 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域(Required) */
+/* param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域(Required) */
 func (r *DescribeInstancesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
@@ -184,6 +190,11 @@ func (r *DescribeInstancesRequest) SetSubnetId(subnetId string) {
 /* param enableInternet: 是否启用外网, yes/no(Optional) */
 func (r *DescribeInstancesRequest) SetEnableInternet(enableInternet string) {
     r.EnableInternet = &enableInternet
+}
+
+/* param keypairId: 密钥对id(Optional) */
+func (r *DescribeInstancesRequest) SetKeypairId(keypairId string) {
+    r.KeypairId = &keypairId
 }
 
 /* param filters: instanceId - 分布式云物理服务器ID，精确匹配，支持多个<br/>

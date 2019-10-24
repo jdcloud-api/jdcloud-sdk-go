@@ -55,6 +55,12 @@ type Image struct {
     /* 镜像描述 (Optional) */
     Desc string `json:"desc"`
 
+    /* 该镜像所有者的用户PIN (Optional) */
+    OwnerPin string `json:"ownerPin"`
+
+    /* 镜像的使用权限，取值：all（所有人可用）， specifiedUsers（共享用户可用），ownerOnly（镜像所有者自己可用） (Optional) */
+    LaunchPermission string `json:"launchPermission"`
+
     /* 镜像系统盘配置 (Optional) */
     SystemDisk InstanceDiskAttachment `json:"systemDisk"`
 

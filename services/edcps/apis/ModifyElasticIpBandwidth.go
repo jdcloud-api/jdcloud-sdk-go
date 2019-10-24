@@ -24,7 +24,7 @@ type ModifyElasticIpBandwidthRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域  */
+    /* 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域  */
     RegionId string `json:"regionId"`
 
     /* 弹性公网IPID  */
@@ -35,14 +35,17 @@ type ModifyElasticIpBandwidthRequest struct {
  (Optional) */
     ClientToken *string `json:"clientToken"`
 
-    /* 带宽，单位Mbps，取值范围[1,200]  */
+    /* 带宽，单位Mbps，取值范围[1,10240]  */
     Bandwidth int `json:"bandwidth"`
+
+    /* 额外上行带宽，单位Mbps，取值范围[0,10240] (Optional) */
+    ExtraUplinkBandwidth *int `json:"extraUplinkBandwidth"`
 }
 
 /*
- * param regionId: 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
  * param elasticIpId: 弹性公网IPID (Required)
- * param bandwidth: 带宽，单位Mbps，取值范围[1,200] (Required)
+ * param bandwidth: 带宽，单位Mbps，取值范围[1,10240] (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -66,18 +69,20 @@ func NewModifyElasticIpBandwidthRequest(
 }
 
 /*
- * param regionId: 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
  * param elasticIpId: 弹性公网IPID (Required)
  * param clientToken: 由客户端生成，用于保证请求的幂等性，长度不能超过36个字符；<br/>
 如果多个请求使用了相同的clientToken，只会执行第一个请求，之后的请求直接返回第一个请求的结果<br/>
  (Optional)
- * param bandwidth: 带宽，单位Mbps，取值范围[1,200] (Required)
+ * param bandwidth: 带宽，单位Mbps，取值范围[1,10240] (Required)
+ * param extraUplinkBandwidth: 额外上行带宽，单位Mbps，取值范围[0,10240] (Optional)
  */
 func NewModifyElasticIpBandwidthRequestWithAllParams(
     regionId string,
     elasticIpId string,
     clientToken *string,
     bandwidth int,
+    extraUplinkBandwidth *int,
 ) *ModifyElasticIpBandwidthRequest {
 
     return &ModifyElasticIpBandwidthRequest{
@@ -91,6 +96,7 @@ func NewModifyElasticIpBandwidthRequestWithAllParams(
         ElasticIpId: elasticIpId,
         ClientToken: clientToken,
         Bandwidth: bandwidth,
+        ExtraUplinkBandwidth: extraUplinkBandwidth,
     }
 }
 
@@ -107,7 +113,7 @@ func NewModifyElasticIpBandwidthRequestWithoutParam() *ModifyElasticIpBandwidthR
     }
 }
 
-/* param regionId: 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域(Required) */
+/* param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域(Required) */
 func (r *ModifyElasticIpBandwidthRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
@@ -124,9 +130,14 @@ func (r *ModifyElasticIpBandwidthRequest) SetClientToken(clientToken string) {
     r.ClientToken = &clientToken
 }
 
-/* param bandwidth: 带宽，单位Mbps，取值范围[1,200](Required) */
+/* param bandwidth: 带宽，单位Mbps，取值范围[1,10240](Required) */
 func (r *ModifyElasticIpBandwidthRequest) SetBandwidth(bandwidth int) {
     r.Bandwidth = bandwidth
+}
+
+/* param extraUplinkBandwidth: 额外上行带宽，单位Mbps，取值范围[0,10240](Optional) */
+func (r *ModifyElasticIpBandwidthRequest) SetExtraUplinkBandwidth(extraUplinkBandwidth int) {
+    r.ExtraUplinkBandwidth = &extraUplinkBandwidth
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

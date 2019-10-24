@@ -29,14 +29,8 @@ type DomainTemplateConfig struct {
     TemplateId int64 `json:"templateId"`
 
     /* 模板名称 (Optional) */
-    TemplateName string `json:"templateName"`
+    Template string `json:"template"`
 
-    /* 录制周期 (Optional) */
-    RecordPeriod int `json:"recordPeriod"`
-
-    /* 录制格式 (Optional) */
-    RecordFileType int `json:"recordFileType"`
-
-    /* 创建时间 (Optional) */
-    CreateTime string `json:"createTime"`
+    /* 检测项列表 (Optional) */
+    Modules string `json:"modules"`
 }

@@ -59,8 +59,11 @@ type InstanceSpec struct {
     /* 外网链路类型, 目前支持联通un、电信ct、移动cm (Optional) */
     LineType *string `json:"lineType"`
 
-    /* 外网带宽, 范围[1,200] 单位Mbps (Optional) */
+    /* 外网带宽, 范围[1,10240] 单位Mbps (Optional) */
     Bandwidth *int `json:"bandwidth"`
+
+    /* 额外上行带宽, 范围[0,10240] 单位Mbps (Optional) */
+    ExtraUplinkBandwidth *int `json:"extraUplinkBandwidth"`
 
     /* 云物理服务器名称  */
     Name string `json:"name"`
@@ -76,6 +79,9 @@ type InstanceSpec struct {
 
     /* 可执行脚本Base64编码后的内容，支持shell和python脚本 (Optional) */
     UserData *string `json:"userData"`
+
+    /* 密钥对id (Optional) */
+    KeypairId *string `json:"keypairId"`
 
     /* 计费配置  */
     Charge *charge.ChargeSpec `json:"charge"`

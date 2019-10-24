@@ -40,7 +40,7 @@ func NewDomainserviceClient(credential *core.Credential) *DomainserviceClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "domainservice",
-            Revision:    "2.0.0",
+            Revision:    "2.0.3",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }

@@ -29,16 +29,16 @@ type CreateCacheInstanceRequest struct {
     /* 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2  */
     RegionId string `json:"regionId"`
 
-    /* 创建实例时输入的信息  */
+    /* 创建实例时指定的信息  */
     CacheInstance *redis.CacheInstanceSpec `json:"cacheInstance"`
 
-    /* 该实例规格的计费信息 (Optional) */
+    /* 实例的计费类型 (Optional) */
     Charge *charge.ChargeSpec `json:"charge"`
 }
 
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
- * param cacheInstance: 创建实例时输入的信息 (Required)
+ * param cacheInstance: 创建实例时指定的信息 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -61,8 +61,8 @@ func NewCreateCacheInstanceRequest(
 
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
- * param cacheInstance: 创建实例时输入的信息 (Required)
- * param charge: 该实例规格的计费信息 (Optional)
+ * param cacheInstance: 创建实例时指定的信息 (Required)
+ * param charge: 实例的计费类型 (Optional)
  */
 func NewCreateCacheInstanceRequestWithAllParams(
     regionId string,
@@ -101,12 +101,12 @@ func (r *CreateCacheInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param cacheInstance: 创建实例时输入的信息(Required) */
+/* param cacheInstance: 创建实例时指定的信息(Required) */
 func (r *CreateCacheInstanceRequest) SetCacheInstance(cacheInstance *redis.CacheInstanceSpec) {
     r.CacheInstance = cacheInstance
 }
 
-/* param charge: 该实例规格的计费信息(Optional) */
+/* param charge: 实例的计费类型(Optional) */
 func (r *CreateCacheInstanceRequest) SetCharge(charge *charge.ChargeSpec) {
     r.Charge = charge
 }

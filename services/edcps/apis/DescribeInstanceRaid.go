@@ -24,7 +24,7 @@ type DescribeInstanceRaidRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域  */
+    /* 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域  */
     RegionId string `json:"regionId"`
 
     /* 分布式云物理服务器ID  */
@@ -32,7 +32,7 @@ type DescribeInstanceRaidRequest struct {
 }
 
 /*
- * param regionId: 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
  * param instanceId: 分布式云物理服务器ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -55,7 +55,7 @@ func NewDescribeInstanceRaidRequest(
 }
 
 /*
- * param regionId: 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
  * param instanceId: 分布式云物理服务器ID (Required)
  */
 func NewDescribeInstanceRaidRequestWithAllParams(
@@ -88,7 +88,7 @@ func NewDescribeInstanceRaidRequestWithoutParam() *DescribeInstanceRaidRequest {
     }
 }
 
-/* param regionId: 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域(Required) */
+/* param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域(Required) */
 func (r *DescribeInstanceRaidRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

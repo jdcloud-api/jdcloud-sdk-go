@@ -37,7 +37,7 @@ type DomainInfo struct {
     /* 套餐的名字 (Optional) */
     PackName string `json:"packName"`
 
-    /* 解析的状态, 暂无解析:1，正常解析:2， 部分解析:3， 暂停解析:4 NS未修改:5 (Optional) */
+    /* 解析的状态, 暂无解析:1，正常解析:2， 部分解析:3， 暂停解析:4 NS未修改:5，域名探测错误:7，域名未注册:8，注册局暂停解析:9 (Optional) */
     ResolvingStatus string `json:"resolvingStatus"`
 
     /* 创建者 (Optional) */
@@ -48,4 +48,10 @@ type DomainInfo struct {
 
     /* 域名的锁定状态，0:未锁定， 1:已锁定 (Optional) */
     LockStatus int `json:"lockStatus"`
+
+    /* 主域名当前的Nameserver列表 (Optional) */
+    ProbeNsList []string `json:"probeNsList"`
+
+    /* 主域名应该设置的Nameserver列表 (Optional) */
+    DefNsList []string `json:"defNsList"`
 }

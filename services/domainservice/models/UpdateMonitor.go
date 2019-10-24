@@ -66,4 +66,13 @@ type UpdateMonitor struct {
 
     /* 0自动恢复至主host 1手动恢复至主host  */
     SwitchRecoverRule int `json:"switchRecoverRule"`
+
+    /* 探测请求携带自定义头域及其域值列表 (Optional) */
+    RequestHeaders []HttpHeader `json:"requestHeaders"`
+
+    /* 探测响应Body体中包含的字符串 (Optional) */
+    ResponseBodyMatch *string `json:"responseBodyMatch"`
+
+    /* 探测响应码范围列表 (Optional) */
+    ResponseCodeRanges []HttpResponseCodeRange `json:"responseCodeRanges"`
 }

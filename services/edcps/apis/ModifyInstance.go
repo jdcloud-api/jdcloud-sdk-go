@@ -24,7 +24,7 @@ type ModifyInstanceRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域  */
+    /* 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域  */
     RegionId string `json:"regionId"`
 
     /* 分布式云物理服务器ID  */
@@ -38,7 +38,7 @@ type ModifyInstanceRequest struct {
 }
 
 /*
- * param regionId: 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
  * param instanceId: 分布式云物理服务器ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -61,7 +61,7 @@ func NewModifyInstanceRequest(
 }
 
 /*
- * param regionId: 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
  * param instanceId: 分布式云物理服务器ID (Required)
  * param name: 分布式云物理服务器名称 (Optional)
  * param description: 分布式云物理服务器描述 (Optional)
@@ -100,7 +100,7 @@ func NewModifyInstanceRequestWithoutParam() *ModifyInstanceRequest {
     }
 }
 
-/* param regionId: 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域(Required) */
+/* param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域(Required) */
 func (r *ModifyInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

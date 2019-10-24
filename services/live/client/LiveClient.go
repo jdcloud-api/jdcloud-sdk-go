@@ -40,7 +40,7 @@ func NewLiveClient(credential *core.Credential) *LiveClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "live",
-            Revision:    "1.0.12",
+            Revision:    "1.0.13",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -113,6 +113,48 @@ func (c *LiveClient) OpenLiveRestart(request *live.OpenLiveRestartRequest) (*liv
     }
 
     jdResp := &live.OpenLiveRestartResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 添加应用质量检测配置
+- 添加应用级别的质量检测模板配置
+ */
+func (c *LiveClient) AddLiveStreamAppQualityDetection(request *live.AddLiveStreamAppQualityDetectionRequest) (*live.AddLiveStreamAppQualityDetectionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.AddLiveStreamAppQualityDetectionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 添加直播质量检测模板 */
+func (c *LiveClient) AddCustomLiveStreamQualityDetectionTemplate(request *live.AddCustomLiveStreamQualityDetectionTemplateRequest) (*live.AddCustomLiveStreamQualityDetectionTemplateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.AddCustomLiveStreamQualityDetectionTemplateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -899,6 +941,28 @@ func (c *LiveClient) SetLiveStreamSnapshotNotifyConfig(request *live.SetLiveStre
     return jdResp, err
 }
 
+/* 添加域名质量检测配置
+- 添加域名级别的质量检测模板配置
+ */
+func (c *LiveClient) AddLiveStreamDomainQualityDetection(request *live.AddLiveStreamDomainQualityDetectionRequest) (*live.AddLiveStreamDomainQualityDetectionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.AddLiveStreamDomainQualityDetectionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 删除直播域名
 - 请慎重操作（建议在进行域名删除前到域名解析服务商处恢复域名A记录），以免导致删除操作后此域名不可访问。
   deleteLiveDomain调用成功后将删除本条直播域名的全部相关记录，对于仅需要暂停使用该直播域名，推荐stopLiveDomain接口
@@ -1002,6 +1066,27 @@ func (c *LiveClient) DescribeCustomLiveStreamSnapshotConfig(request *live.Descri
     }
 
     jdResp := &live.DescribeCustomLiveStreamSnapshotConfigResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询质量检测模板绑定
+ */
+func (c *LiveClient) DescribeQualityDetectionBinding(request *live.DescribeQualityDetectionBindingRequest) (*live.DescribeQualityDetectionBindingResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DescribeQualityDetectionBindingResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1165,6 +1250,28 @@ func (c *LiveClient) DescribeLiveDomainCertificate(request *live.DescribeLiveDom
     return jdResp, err
 }
 
+/* 删除直播质量检测模板
+- 删除质量检测模板前,请先删除此模板相关的质量检测配置,否则无法删除
+ */
+func (c *LiveClient) DeleteCustomLiveStreamQualityDetectionTemplate(request *live.DeleteCustomLiveStreamQualityDetectionTemplateRequest) (*live.DeleteCustomLiveStreamQualityDetectionTemplateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DeleteCustomLiveStreamQualityDetectionTemplateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 关闭时移 */
 func (c *LiveClient) CloseLiveTimeshift(request *live.CloseLiveTimeshiftRequest) (*live.CloseLiveTimeshiftResponse, error) {
     if request == nil {
@@ -1239,6 +1346,27 @@ func (c *LiveClient) AddLiveStreamDomainWatermark(request *live.AddLiveStreamDom
     }
 
     jdResp := &live.AddLiveStreamDomainWatermarkResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设置直播质量检测回调通知地址
+ */
+func (c *LiveClient) SetLiveStreamQualityDetectionNotifyConfig(request *live.SetLiveStreamQualityDetectionNotifyConfigRequest) (*live.SetLiveStreamQualityDetectionNotifyConfigResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.SetLiveStreamQualityDetectionNotifyConfigResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1325,6 +1453,28 @@ func (c *LiveClient) AddLiveRestartDomain(request *live.AddLiveRestartDomainRequ
     }
 
     jdResp := &live.AddLiveRestartDomainResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除域名质量检测配置
+- 删除域名级别的质量检测模板配置,重新推流后生效
+ */
+func (c *LiveClient) DeleteLiveStreamDomainQualityDetection(request *live.DeleteLiveStreamDomainQualityDetectionRequest) (*live.DeleteLiveStreamDomainQualityDetectionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DeleteLiveStreamDomainQualityDetectionResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1565,6 +1715,27 @@ func (c *LiveClient) DeleteCustomLiveStreamRecordTemplate(request *live.DeleteCu
     return jdResp, err
 }
 
+/* 删除质量检测回调配置
+ */
+func (c *LiveClient) DeleteLiveStreamQualityDetectionNotifyConfig(request *live.DeleteLiveStreamQualityDetectionNotifyConfigRequest) (*live.DeleteLiveStreamQualityDetectionNotifyConfigResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DeleteLiveStreamQualityDetectionNotifyConfigResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询直播截图张数数据 */
 func (c *LiveClient) DescribeLiveSnapshotData(request *live.DescribeLiveSnapshotDataRequest) (*live.DescribeLiveSnapshotDataResponse, error) {
     if request == nil {
@@ -1598,6 +1769,28 @@ func (c *LiveClient) DeleteLiveStreamDomainTranscode(request *live.DeleteLiveStr
     }
 
     jdResp := &live.DeleteLiveStreamDomainTranscodeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除应用级别质量检测模板配置
+- 删除应用级别质量检测模板配置,重新推流后生效
+ */
+func (c *LiveClient) DeleteLiveStreamAppQualityDetection(request *live.DeleteLiveStreamAppQualityDetectionRequest) (*live.DeleteLiveStreamAppQualityDetectionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DeleteLiveStreamAppQualityDetectionResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1882,6 +2075,27 @@ func (c *LiveClient) DescribeLiveApp(request *live.DescribeLiveAppRequest) (*liv
     return jdResp, err
 }
 
+/* 查询质量检测回调配置
+ */
+func (c *LiveClient) DescribeLiveStreamQualityDetectionNotifyConfig(request *live.DescribeLiveStreamQualityDetectionNotifyConfigRequest) (*live.DescribeLiveStreamQualityDetectionNotifyConfigResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DescribeLiveStreamQualityDetectionNotifyConfigResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 中断直播流推送
 - 中断操作1秒后可以继续推流
  */
@@ -1961,6 +2175,26 @@ func (c *LiveClient) DescribeLiveStreamInfo(request *live.DescribeLiveStreamInfo
     }
 
     jdResp := &live.DescribeLiveStreamInfoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询直播质量检测模板列表 */
+func (c *LiveClient) DescribeCustomLiveStreamQualityDetectionTemplates(request *live.DescribeCustomLiveStreamQualityDetectionTemplatesRequest) (*live.DescribeCustomLiveStreamQualityDetectionTemplatesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DescribeCustomLiveStreamQualityDetectionTemplatesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

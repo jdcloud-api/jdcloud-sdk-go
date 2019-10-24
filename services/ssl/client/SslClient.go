@@ -40,7 +40,7 @@ func NewSslClient(credential *core.Credential) *SslClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "ssl",
-            Revision:    "1.0.1",
+            Revision:    "1.0.2",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }

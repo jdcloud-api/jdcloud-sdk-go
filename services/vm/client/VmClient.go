@@ -40,7 +40,7 @@ func NewVmClient(credential *core.Credential) *VmClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vm",
-            Revision:    "1.2.2",
+            Revision:    "1.2.4",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -69,54 +69,6 @@ func (c *VmClient) DescribeImageMembers(request *vm.DescribeImageMembersRequest)
     }
 
     jdResp := &vm.DescribeImageMembersResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 创建一个指定参数的启动模板，启动模板中包含创建云主机时的大部分配置参数，避免每次创建云主机时的重复性工作。<br>
-如果是使用启动模板创建云主机，如果指定了某些参数与模板中的参数相冲突，那么新指定的参数会替换模板中的参数。<br>
-如果是使用启动模板创建云主机，如果指定了镜像ID与模板中的镜像ID不一致，那么模板中的dataDisks参数会失效。<br>
-如果使用高可用组(Ag)创建云主机，那么Ag所关联的模板中的参数都不可以被调整，只能以模板为准。
- */
-func (c *VmClient) CreateInstanceTemplate(request *vm.CreateInstanceTemplateRequest) (*vm.CreateInstanceTemplateResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &vm.CreateInstanceTemplateResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 为云主机创建私有镜像。云主机状态必须为<b>stopped</b>。<br>
-云主机没有正在进行中的任务才可制作镜像。<br>
-制作镜像以备份系统盘为基础，在此之上可选择全部或部分挂载数据盘制作整机镜像（如不做任何更改将默认制作整机镜像），制作镜像过程会为所挂载云硬盘创建快照并与镜像关联。<br>
-调用接口后，需要等待镜像状态变为<b>ready</b>后，才能正常使用镜像。
- */
-func (c *VmClient) CreateImage(request *vm.CreateImageRequest) (*vm.CreateImageResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &vm.CreateImageResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -195,28 +147,6 @@ func (c *VmClient) CreateInstances(request *vm.CreateInstancesRequest) (*vm.Crea
     return jdResp, err
 }
 
-/* 为云主机主网卡的主内网IP绑定弹性公网IP。<br>
-一台云主机的主网卡的主内网IP只能绑定一个弹性公网IP，若已绑定弹性公网IP，操作绑定会返回错误。<br>
- */
-func (c *VmClient) AssociateElasticIp(request *vm.AssociateElasticIpRequest) (*vm.AssociateElasticIpResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &vm.AssociateElasticIpResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 共享镜像，只允许操作您的个人私有镜像，单个镜像最多可共享给20个京东云帐户。<br>
 整机镜像目前不支持共享。
  */
@@ -230,6 +160,509 @@ func (c *VmClient) ShareImage(request *vm.ShareImageRequest) (*vm.ShareImageResp
     }
 
     jdResp := &vm.ShareImageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 启动单个云主机，只能启动<b>stopped</b>状态的云主机，云主机没有正在进行中的任务才可启动。<br>
+只能启动正常计费状态的云主机，若已欠费停服或到期停服则不支持启动。
+ */
+func (c *VmClient) StartInstance(request *vm.StartInstanceRequest) (*vm.StartInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.StartInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 撤销社区镜像，只允许操作您的个人私有镜像。
+ */
+func (c *VmClient) UnReleaseImage(request *vm.UnReleaseImageRequest) (*vm.UnReleaseImageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.UnReleaseImageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 取消共享镜像，只允许操作您的个人私有镜像。
+ */
+func (c *VmClient) UnShareImage(request *vm.UnShareImageRequest) (*vm.UnShareImageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.UnShareImageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 批量查询镜像的实例规格限制。<br>
+通过此接口可以查看镜像不支持的实例规格。只有官方镜像、第三方镜像有实例规格的限制，个人的私有镜像没有此限制。
+ */
+func (c *VmClient) DescribeImageConstraintsBatch(request *vm.DescribeImageConstraintsBatchRequest) (*vm.DescribeImageConstraintsBatchResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.DescribeImageConstraintsBatchResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改一个启动模板的信息，包括名称、描述
+ */
+func (c *VmClient) UpdateInstanceTemplate(request *vm.UpdateInstanceTemplateRequest) (*vm.UpdateInstanceTemplateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.UpdateInstanceTemplateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 为一台云主机挂载一块云硬盘，云主机和云硬盘没有正在进行中的的任务时才可挂载。<br>
+云主机状态必须是<b>running</b>或<b>stopped</b>状态。<br>
+本地盘(local类型)做系统盘的云主机可挂载8块云硬盘，云硬盘(cloud类型)做系统盘的云主机可挂载除系统盘外7块云硬盘。
+ */
+func (c *VmClient) AttachDisk(request *vm.AttachDiskRequest) (*vm.AttachDiskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.AttachDiskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改云主机密码，主机没有正在进行中的任务时才可操作。<br>
+修改密码后，需要重启云主机后生效。
+ */
+func (c *VmClient) ModifyInstancePassword(request *vm.ModifyInstancePasswordRequest) (*vm.ModifyInstancePasswordResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.ModifyInstancePasswordResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 云主机绑定一块弹性网卡。<br>
+云主机状态必须为<b>running</b>或<b>stopped</b>状态，并且没有正在进行中的任务才可操作。<br>
+弹性网卡上如果绑定了弹性公网IP，那么其所在az需要与云主机的az保持一致，或者为全可用区型弹性公网IP，才可挂载该网卡。<br>
+云主机挂载弹性网卡的数量，不能超过实例规格的限制。可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeinstancetypes">DescribeInstanceTypes</a>接口获得指定规格可挂载弹性网卡的数量上限。<br>
+弹性网卡与云主机必须在相同vpc下。
+ */
+func (c *VmClient) AttachNetworkInterface(request *vm.AttachNetworkInterfaceRequest) (*vm.AttachNetworkInterfaceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.AttachNetworkInterfaceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除ssh密钥对。
+ */
+func (c *VmClient) DeleteKeypair(request *vm.DeleteKeypairRequest) (*vm.DeleteKeypairResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.DeleteKeypairResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询镜像详情。
+ */
+func (c *VmClient) DescribeImage(request *vm.DescribeImageRequest) (*vm.DescribeImageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.DescribeImageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 导入由其他工具生成的密钥对的公钥部分。<br>
+若传入已存在的密钥名称，会返回错误。
+ */
+func (c *VmClient) ImportKeypair(request *vm.ImportKeypairRequest) (*vm.ImportKeypairResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.ImportKeypairResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 镜像跨区复制，将私有镜像复制到其它地域下，只允许操作您的个人私有镜像。<br>
+只支持rootDeviceType为cloudDisk的云硬盘系统盘镜像操作。
+ */
+func (c *VmClient) CopyImages(request *vm.CopyImagesRequest) (*vm.CopyImagesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.CopyImagesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询一台云主机的详细信息
+ */
+func (c *VmClient) DescribeInstance(request *vm.DescribeInstanceRequest) (*vm.DescribeInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.DescribeInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改虚机弹性网卡属性，包括是否随云主机一起删除。<br>
+不能修改主网卡。
+ */
+func (c *VmClient) ModifyInstanceNetworkAttribute(request *vm.ModifyInstanceNetworkAttributeRequest) (*vm.ModifyInstanceNetworkAttributeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.ModifyInstanceNetworkAttributeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询配额，支持的类型：云主机、镜像、密钥、模板、镜像共享。
+ */
+func (c *VmClient) DescribeQuotas(request *vm.DescribeQuotasRequest) (*vm.DescribeQuotasResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.DescribeQuotasResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改镜像信息，包括名称、描述；只允许操作您的个人私有镜像。
+ */
+func (c *VmClient) ModifyImageAttribute(request *vm.ModifyImageAttributeRequest) (*vm.ModifyImageAttributeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.ModifyImageAttributeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 重启单个云主机，只能重启<b>running</b>状态的云主机，云主机没有正在进行中的任务才可重启。
+ */
+func (c *VmClient) RebootInstance(request *vm.RebootInstanceRequest) (*vm.RebootInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.RebootInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 批量查询密钥对。<br>
+此接口支持分页查询，默认每页20条。
+ */
+func (c *VmClient) DescribeKeypairs(request *vm.DescribeKeypairsRequest) (*vm.DescribeKeypairsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.DescribeKeypairsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 云主机缷载云硬盘，云主机和云硬盘没有正在进行中的任务时才可缷载。<br>
+ */
+func (c *VmClient) DetachDisk(request *vm.DetachDiskRequest) (*vm.DetachDiskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.DetachDiskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 导入镜像，将外部镜像导入到京东云中
+ */
+func (c *VmClient) ImportImage(request *vm.ImportImageRequest) (*vm.ImportImageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.ImportImageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建一个指定参数的启动模板，启动模板中包含创建云主机时的大部分配置参数，避免每次创建云主机时的重复性工作。<br>
+如果是使用启动模板创建云主机，如果指定了某些参数与模板中的参数相冲突，那么新指定的参数会替换模板中的参数。<br>
+如果是使用启动模板创建云主机，如果指定了镜像ID与模板中的镜像ID不一致，那么模板中的dataDisks参数会失效。<br>
+如果使用高可用组(Ag)创建云主机，那么Ag所关联的模板中的参数都不可以被调整，只能以模板为准。
+ */
+func (c *VmClient) CreateInstanceTemplate(request *vm.CreateInstanceTemplateRequest) (*vm.CreateInstanceTemplateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.CreateInstanceTemplateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 为云主机创建私有镜像。云主机状态必须为<b>stopped</b>。<br>
+云主机没有正在进行中的任务才可制作镜像。<br>
+制作镜像以备份系统盘为基础，在此之上可选择全部或部分挂载数据盘制作整机镜像（如不做任何更改将默认制作整机镜像），制作镜像过程会为所挂载云硬盘创建快照并与镜像关联。<br>
+调用接口后，需要等待镜像状态变为<b>ready</b>后，才能正常使用镜像。
+ */
+func (c *VmClient) CreateImage(request *vm.CreateImageRequest) (*vm.CreateImageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.CreateImageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 为云主机主网卡的主内网IP绑定弹性公网IP。<br>
+一台云主机的主网卡的主内网IP只能绑定一个弹性公网IP，若已绑定弹性公网IP，操作绑定会返回错误。<br>
+ */
+func (c *VmClient) AssociateElasticIp(request *vm.AssociateElasticIpRequest) (*vm.AssociateElasticIpResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.AssociateElasticIpResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -272,28 +705,6 @@ func (c *VmClient) StopInstance(request *vm.StopInstanceRequest) (*vm.StopInstan
     }
 
     jdResp := &vm.StopInstanceResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 启动单个云主机，只能启动<b>stopped</b>状态的云主机，云主机没有正在进行中的任务才可启动。<br>
-只能启动正常计费状态的云主机，若已欠费停服或到期停服则不支持启动。
- */
-func (c *VmClient) StartInstance(request *vm.StartInstanceRequest) (*vm.StartInstanceResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &vm.StartInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -416,9 +827,9 @@ func (c *VmClient) RebuildInstance(request *vm.RebuildInstanceRequest) (*vm.Rebu
     return jdResp, err
 }
 
-/* 取消共享镜像，只允许操作您的个人私有镜像。
+/* 发布社区镜像，只允许操作您的个人私有镜像。发布为社区镜像后会撤销共享关系。<br>
  */
-func (c *VmClient) UnShareImage(request *vm.UnShareImageRequest) (*vm.UnShareImageResponse, error) {
+func (c *VmClient) ReleaseImage(request *vm.ReleaseImageRequest) (*vm.ReleaseImageResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -427,7 +838,7 @@ func (c *VmClient) UnShareImage(request *vm.UnShareImageRequest) (*vm.UnShareIma
         return nil, err
     }
 
-    jdResp := &vm.UnShareImageResponse{}
+    jdResp := &vm.ReleaseImageResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -487,94 +898,6 @@ func (c *VmClient) ResizeInstance(request *vm.ResizeInstanceRequest) (*vm.Resize
     return jdResp, err
 }
 
-/* 批量查询镜像的实例规格限制。<br>
-通过此接口可以查看镜像不支持的实例规格。只有官方镜像、第三方镜像有实例规格的限制，个人的私有镜像没有此限制。
- */
-func (c *VmClient) DescribeImageConstraintsBatch(request *vm.DescribeImageConstraintsBatchRequest) (*vm.DescribeImageConstraintsBatchResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &vm.DescribeImageConstraintsBatchResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 修改一个启动模板的信息，包括名称、描述
- */
-func (c *VmClient) UpdateInstanceTemplate(request *vm.UpdateInstanceTemplateRequest) (*vm.UpdateInstanceTemplateResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &vm.UpdateInstanceTemplateResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 为一台云主机挂载一块云硬盘，云主机和云硬盘没有正在进行中的的任务时才可挂载。<br>
-云主机状态必须是<b>running</b>或<b>stopped</b>状态。<br>
-本地盘(local类型)做系统盘的云主机可挂载8块云硬盘，云硬盘(cloud类型)做系统盘的云主机可挂载除系统盘外7块云硬盘。
- */
-func (c *VmClient) AttachDisk(request *vm.AttachDiskRequest) (*vm.AttachDiskResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &vm.AttachDiskResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 修改云主机密码，主机没有正在进行中的任务时才可操作。<br>
-修改密码后，需要重启云主机后生效。
- */
-func (c *VmClient) ModifyInstancePassword(request *vm.ModifyInstancePasswordRequest) (*vm.ModifyInstancePasswordResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &vm.ModifyInstancePasswordResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 删除一个私有镜像，只允许操作您的个人私有镜像。<br>
 若镜像已共享给其他用户，需先取消共享才可删除。
  */
@@ -609,73 +932,6 @@ func (c *VmClient) DescribeInstanceTypes(request *vm.DescribeInstanceTypesReques
     }
 
     jdResp := &vm.DescribeInstanceTypesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 云主机绑定一块弹性网卡。<br>
-云主机状态必须为<b>running</b>或<b>stopped</b>状态，并且没有正在进行中的任务才可操作。<br>
-弹性网卡上如果绑定了弹性公网IP，那么其所在az需要与云主机的az保持一致，或者为全可用区型弹性公网IP，才可挂载该网卡。<br>
-云主机挂载弹性网卡的数量，不能超过实例规格的限制。可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeinstancetypes">DescribeInstanceTypes</a>接口获得指定规格可挂载弹性网卡的数量上限。<br>
-弹性网卡与云主机必须在相同vpc下。
- */
-func (c *VmClient) AttachNetworkInterface(request *vm.AttachNetworkInterfaceRequest) (*vm.AttachNetworkInterfaceResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &vm.AttachNetworkInterfaceResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 删除ssh密钥对。
- */
-func (c *VmClient) DeleteKeypair(request *vm.DeleteKeypairRequest) (*vm.DeleteKeypairResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &vm.DeleteKeypairResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询镜像详情。
- */
-func (c *VmClient) DescribeImage(request *vm.DescribeImageRequest) (*vm.DescribeImageResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &vm.DescribeImageResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -729,71 +985,6 @@ func (c *VmClient) DeleteInstanceTemplate(request *vm.DeleteInstanceTemplateRequ
     return jdResp, err
 }
 
-/* 导入由其他工具生成的密钥对的公钥部分。<br>
-若传入已存在的密钥名称，会返回错误。
- */
-func (c *VmClient) ImportKeypair(request *vm.ImportKeypairRequest) (*vm.ImportKeypairResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &vm.ImportKeypairResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 镜像跨区复制，将私有镜像复制到其它地域下，只允许操作您的个人私有镜像。<br>
-只支持rootDeviceType为cloudDisk的云硬盘系统盘镜像操作。
- */
-func (c *VmClient) CopyImages(request *vm.CopyImagesRequest) (*vm.CopyImagesResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &vm.CopyImagesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询一台云主机的详细信息
- */
-func (c *VmClient) DescribeInstance(request *vm.DescribeInstanceRequest) (*vm.DescribeInstanceResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &vm.DescribeInstanceResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 查询启动模板列表
  */
 func (c *VmClient) DescribeInstanceTemplates(request *vm.DescribeInstanceTemplatesRequest) (*vm.DescribeInstanceTemplatesResponse, error) {
@@ -806,91 +997,6 @@ func (c *VmClient) DescribeInstanceTemplates(request *vm.DescribeInstanceTemplat
     }
 
     jdResp := &vm.DescribeInstanceTemplatesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 修改虚机弹性网卡属性，包括是否随云主机一起删除。<br>
-不能修改主网卡。
- */
-func (c *VmClient) ModifyInstanceNetworkAttribute(request *vm.ModifyInstanceNetworkAttributeRequest) (*vm.ModifyInstanceNetworkAttributeResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &vm.ModifyInstanceNetworkAttributeResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询配额，支持的类型：云主机、镜像、密钥、模板、镜像共享。
- */
-func (c *VmClient) DescribeQuotas(request *vm.DescribeQuotasRequest) (*vm.DescribeQuotasResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &vm.DescribeQuotasResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 修改镜像信息，包括名称、描述；只允许操作您的个人私有镜像。
- */
-func (c *VmClient) ModifyImageAttribute(request *vm.ModifyImageAttributeRequest) (*vm.ModifyImageAttributeResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &vm.ModifyImageAttributeResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 重启单个云主机，只能重启<b>running</b>状态的云主机，云主机没有正在进行中的任务才可重启。
- */
-func (c *VmClient) RebootInstance(request *vm.RebootInstanceRequest) (*vm.RebootInstanceResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &vm.RebootInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -974,70 +1080,6 @@ func (c *VmClient) DescribeInstanceStatus(request *vm.DescribeInstanceStatusRequ
     }
 
     jdResp := &vm.DescribeInstanceStatusResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 批量查询密钥对。<br>
-此接口支持分页查询，默认每页20条。
- */
-func (c *VmClient) DescribeKeypairs(request *vm.DescribeKeypairsRequest) (*vm.DescribeKeypairsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &vm.DescribeKeypairsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 云主机缷载云硬盘，云主机和云硬盘没有正在进行中的任务时才可缷载。<br>
- */
-func (c *VmClient) DetachDisk(request *vm.DetachDiskRequest) (*vm.DetachDiskResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &vm.DetachDiskResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 导入镜像，将外部镜像导入到京东云中
- */
-func (c *VmClient) ImportImage(request *vm.ImportImageRequest) (*vm.ImportImageResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &vm.ImportImageResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
