@@ -25,7 +25,7 @@ type DescribeDeviceRaidsRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域  */
+    /* 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域  */
     RegionId string `json:"regionId"`
 
     /* 实例类型，可调用（describeDeviceTypes）接口获取指定地域的实例类型，例如：edcps.c.normal1  */
@@ -36,7 +36,7 @@ type DescribeDeviceRaidsRequest struct {
 }
 
 /*
- * param regionId: 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
  * param deviceType: 实例类型，可调用（describeDeviceTypes）接口获取指定地域的实例类型，例如：edcps.c.normal1 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -59,7 +59,7 @@ func NewDescribeDeviceRaidsRequest(
 }
 
 /*
- * param regionId: 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
  * param deviceType: 实例类型，可调用（describeDeviceTypes）接口获取指定地域的实例类型，例如：edcps.c.normal1 (Required)
  * param volumeType: 磁盘类型，取值范围：system、data (Optional)
  */
@@ -95,7 +95,7 @@ func NewDescribeDeviceRaidsRequestWithoutParam() *DescribeDeviceRaidsRequest {
     }
 }
 
-/* param regionId: 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域(Required) */
+/* param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域(Required) */
 func (r *DescribeDeviceRaidsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

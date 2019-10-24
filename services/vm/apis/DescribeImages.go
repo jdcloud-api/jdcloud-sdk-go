@@ -28,7 +28,7 @@ type DescribeImagesRequest struct {
     /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /* 镜像来源，如果没有指定ids参数，此参数必传；取值范围：public、shared、thirdparty、private (Optional) */
+    /* 镜像来源，如果没有指定ids参数，此参数必传；取值范围：public、shared、thirdparty、private、community (Optional) */
     ImageSource *string `json:"imageSource"`
 
     /* 操作系统平台，取值范围：Windows Server、CentOS、Ubuntu (Optional) */
@@ -39,6 +39,9 @@ type DescribeImagesRequest struct {
 
     /* 镜像支持的系统盘类型，[localDisk,cloudDisk] (Optional) */
     RootDeviceType *string `json:"rootDeviceType"`
+
+    /* 镜像的使用权限[all, specifiedUsers，ownerOnly]，可选参数，仅当imageSource取值private时有效 (Optional) */
+    LaunchPermission *string `json:"launchPermission"`
 
     /* <a href="http://docs.jdcloud.com/virtual-machines/api/image_status">参考镜像状态</a> (Optional) */
     Status *string `json:"status"`
@@ -72,10 +75,11 @@ func NewDescribeImagesRequest(
 
 /*
  * param regionId: 地域ID (Required)
- * param imageSource: 镜像来源，如果没有指定ids参数，此参数必传；取值范围：public、shared、thirdparty、private (Optional)
+ * param imageSource: 镜像来源，如果没有指定ids参数，此参数必传；取值范围：public、shared、thirdparty、private、community (Optional)
  * param platform: 操作系统平台，取值范围：Windows Server、CentOS、Ubuntu (Optional)
  * param ids: 镜像ID列表，如果指定了此参数，其它参数可为空 (Optional)
  * param rootDeviceType: 镜像支持的系统盘类型，[localDisk,cloudDisk] (Optional)
+ * param launchPermission: 镜像的使用权限[all, specifiedUsers，ownerOnly]，可选参数，仅当imageSource取值private时有效 (Optional)
  * param status: <a href="http://docs.jdcloud.com/virtual-machines/api/image_status">参考镜像状态</a> (Optional)
  * param pageNumber: 页码；默认为1 (Optional)
  * param pageSize: 分页大小；默认为20；取值范围[10, 100] (Optional)
@@ -86,6 +90,7 @@ func NewDescribeImagesRequestWithAllParams(
     platform *string,
     ids []string,
     rootDeviceType *string,
+    launchPermission *string,
     status *string,
     pageNumber *int,
     pageSize *int,
@@ -103,6 +108,7 @@ func NewDescribeImagesRequestWithAllParams(
         Platform: platform,
         Ids: ids,
         RootDeviceType: rootDeviceType,
+        LaunchPermission: launchPermission,
         Status: status,
         PageNumber: pageNumber,
         PageSize: pageSize,
@@ -127,7 +133,7 @@ func (r *DescribeImagesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param imageSource: 镜像来源，如果没有指定ids参数，此参数必传；取值范围：public、shared、thirdparty、private(Optional) */
+/* param imageSource: 镜像来源，如果没有指定ids参数，此参数必传；取值范围：public、shared、thirdparty、private、community(Optional) */
 func (r *DescribeImagesRequest) SetImageSource(imageSource string) {
     r.ImageSource = &imageSource
 }
@@ -145,6 +151,11 @@ func (r *DescribeImagesRequest) SetIds(ids []string) {
 /* param rootDeviceType: 镜像支持的系统盘类型，[localDisk,cloudDisk](Optional) */
 func (r *DescribeImagesRequest) SetRootDeviceType(rootDeviceType string) {
     r.RootDeviceType = &rootDeviceType
+}
+
+/* param launchPermission: 镜像的使用权限[all, specifiedUsers，ownerOnly]，可选参数，仅当imageSource取值private时有效(Optional) */
+func (r *DescribeImagesRequest) SetLaunchPermission(launchPermission string) {
+    r.LaunchPermission = &launchPermission
 }
 
 /* param status: <a href="http://docs.jdcloud.com/virtual-machines/api/image_status">参考镜像状态</a>(Optional) */

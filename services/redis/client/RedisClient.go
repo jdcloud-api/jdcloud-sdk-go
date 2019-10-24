@@ -40,7 +40,7 @@ func NewRedisClient(credential *core.Credential) *RedisClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "redis",
-            Revision:    "1.5.0",
+            Revision:    "1.7.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,6 +51,10 @@ func (c *RedisClient) SetConfig(config *core.Config) {
 
 func (c *RedisClient) SetLogger(logger core.Logger) {
     c.Logger = logger
+}
+
+func (c *RedisClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
 }
 
 /* 修改缓存Redis实例的自动备份策略，可修改备份周期和备份时间 */
@@ -189,6 +193,26 @@ func (c *RedisClient) ResetCacheInstancePassword(request *redis.ResetCacheInstan
     }
 
     jdResp := &redis.ResetCacheInstancePasswordResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取缓存Redis实例的慢查询日志 */
+func (c *RedisClient) DescribeSlowLog(request *redis.DescribeSlowLogRequest) (*redis.DescribeSlowLogResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &redis.DescribeSlowLogResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

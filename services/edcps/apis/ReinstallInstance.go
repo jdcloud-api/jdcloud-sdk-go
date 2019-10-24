@@ -25,7 +25,7 @@ type ReinstallInstanceRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域  */
+    /* 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域  */
     RegionId string `json:"regionId"`
 
     /* 分布式云物理服务器ID  */
@@ -41,7 +41,7 @@ type ReinstallInstanceRequest struct {
 }
 
 /*
- * param regionId: 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
  * param instanceId: 分布式云物理服务器ID (Required)
  * param instanceSpec: 分布式云物理服务器配置 (Required)
  *
@@ -67,7 +67,7 @@ func NewReinstallInstanceRequest(
 }
 
 /*
- * param regionId: 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
  * param instanceId: 分布式云物理服务器ID (Required)
  * param clientToken: 由客户端生成，用于保证请求的幂等性，长度不能超过36个字符；<br/>
 如果多个请求使用了相同的clientToken，只会执行第一个请求，之后的请求直接返回第一个请求的结果<br/>
@@ -108,7 +108,7 @@ func NewReinstallInstanceRequestWithoutParam() *ReinstallInstanceRequest {
     }
 }
 
-/* param regionId: 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域(Required) */
+/* param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域(Required) */
 func (r *ReinstallInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

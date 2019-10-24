@@ -40,7 +40,7 @@ func NewDiskClient(credential *core.Credential) *DiskClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "disk",
-            Revision:    "0.12.3",
+            Revision:    "0.12.4",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,6 +51,10 @@ func (c *DiskClient) SetConfig(config *core.Config) {
 
 func (c *DiskClient) SetLogger(logger core.Logger) {
     c.Logger = logger
+}
+
+func (c *DiskClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
 }
 
 /* 修改快照的名字或描述信息 */

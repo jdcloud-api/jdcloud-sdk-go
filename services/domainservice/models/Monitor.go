@@ -117,4 +117,19 @@ type Monitor struct {
 
     /* 使用记录，host_value 0，ip_backup_01 1，ip_backup_02 2，cname_backup 3 (Optional) */
     UsedType int `json:"usedType"`
+
+    /* 备用地址及其状态列表 (Optional) */
+    BackupAddressList []BackupAddressesInfo `json:"backupAddressList"`
+
+    /* 探测请求携带自定义头域及其域值列表 (Optional) */
+    RequestHeaders []HttpHeader `json:"requestHeaders"`
+
+    /* 探测响应Body体中包含的字符串 (Optional) */
+    ResponseBodyMatch string `json:"responseBodyMatch"`
+
+    /* 探测响应码范围列表 (Optional) */
+    ResponseCodeRanges []HttpResponseCodeRange `json:"responseCodeRanges"`
+
+    /* 正在使用的有效解析地址 (Optional) */
+    EffectAddr string `json:"effectAddr"`
 }

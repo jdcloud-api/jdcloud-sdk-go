@@ -25,7 +25,7 @@ type DownloadCertRequest struct {
 
     core.JDCloudRequest
 
-    /* 证书Id,以逗号分隔多个Id  */
+    /* 证书 Id  */
     CertId string `json:"certId"`
 
     /* 证书应用的服务器类型(Nginx Apache Tomcat IIS Other)  */
@@ -33,7 +33,7 @@ type DownloadCertRequest struct {
 }
 
 /*
- * param certId: 证书Id,以逗号分隔多个Id (Required)
+ * param certId: 证书 Id (Required)
  * param serverType: 证书应用的服务器类型(Nginx Apache Tomcat IIS Other) (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -45,8 +45,8 @@ func NewDownloadCertRequest(
 
 	return &DownloadCertRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/sslCert:download",
-			Method:  "POST",
+			URL:     "/sslCert/{certId}:download",
+			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
@@ -56,7 +56,7 @@ func NewDownloadCertRequest(
 }
 
 /*
- * param certId: 证书Id,以逗号分隔多个Id (Required)
+ * param certId: 证书 Id (Required)
  * param serverType: 证书应用的服务器类型(Nginx Apache Tomcat IIS Other) (Required)
  */
 func NewDownloadCertRequestWithAllParams(
@@ -66,8 +66,8 @@ func NewDownloadCertRequestWithAllParams(
 
     return &DownloadCertRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/sslCert:download",
-            Method:  "POST",
+            URL:     "/sslCert/{certId}:download",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
@@ -81,15 +81,15 @@ func NewDownloadCertRequestWithoutParam() *DownloadCertRequest {
 
     return &DownloadCertRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/sslCert:download",
-            Method:  "POST",
+            URL:     "/sslCert/{certId}:download",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
     }
 }
 
-/* param certId: 证书Id,以逗号分隔多个Id(Required) */
+/* param certId: 证书 Id(Required) */
 func (r *DownloadCertRequest) SetCertId(certId string) {
     r.CertId = certId
 }

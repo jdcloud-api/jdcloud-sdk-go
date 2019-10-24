@@ -40,7 +40,7 @@ func NewSslClient(credential *core.Credential) *SslClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "ssl",
-            Revision:    "1.0.1",
+            Revision:    "1.0.2",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,6 +51,10 @@ func (c *SslClient) SetConfig(config *core.Config) {
 
 func (c *SslClient) SetLogger(logger core.Logger) {
     c.Logger = logger
+}
+
+func (c *SslClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
 }
 
 /* 更新证书 [MFA enabled] */

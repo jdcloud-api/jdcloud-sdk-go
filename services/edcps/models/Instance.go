@@ -50,6 +50,9 @@ type Instance struct {
     /* 带宽, 单位Mbps (Optional) */
     Bandwidth int `json:"bandwidth"`
 
+    /* 额外上行带宽, 单位Mbps (Optional) */
+    ExtraUplinkBandwidth int `json:"extraUplinkBandwidth"`
+
     /* 镜像类型, 如 standard (Optional) */
     ImageType string `json:"imageType"`
 
@@ -106,6 +109,12 @@ type Instance struct {
 
     /* 公网IPv6 (Optional) */
     PublicIpv6 string `json:"publicIpv6"`
+
+    /* 密钥对id (Optional) */
+    KeypairId string `json:"keypairId"`
+
+    /* agent状态 (Optional) */
+    AgentStatus string `json:"agentStatus"`
 
     /* 计费信息 (Optional) */
     Charge charge.Charge `json:"charge"`

@@ -19,12 +19,18 @@ package models
 
 type ChargeSpec struct {
 
-    /* 计费模式，取值为：prepaid_by_duration，postpaid_by_usage或postpaid_by_duration，prepaid_by_duration表示预付费，postpaid_by_usage表示按用量后付费，postpaid_by_duration表示按配置后付费，默认为postpaid_by_duration (Optional) */
+    /* 计费模式，取值为：prepaid_by_duration，postpaid_by_usage或postpaid_by_duration，prepaid_by_duration表示预付费，postpaid_by_usage表示按用量后付费，postpaid_by_duration表示按配置后付费，默认为postpaid_by_duration.请参阅具体产品线帮助文档确认该产品线支持的计费类型 (Optional) */
     ChargeMode *string `json:"chargeMode"`
 
-    /* 预付费计费单位，当chargeMode为prepaid_by_duration时有效，取值为：month、year，默认为month (Optional) */
+    /* 预付费计费单位，预付费必填，当chargeMode为prepaid_by_duration时有效，取值为：month、year，默认为month (Optional) */
     ChargeUnit *string `json:"chargeUnit"`
 
-    /* 预付费计费时长，当chargeMode取值为prepaid_by_duration时有效。当chargeUnit为month时取值为：1~9，当chargeUnit为year时取值为：1、2、3 (Optional) */
+    /* 预付费计费时长，预付费必填，当chargeMode取值为prepaid_by_duration时有效。当chargeUnit为month时取值为：1~9，当chargeUnit为year时取值为：1、2、3 (Optional) */
     ChargeDuration *int `json:"chargeDuration"`
+
+    /* True=：OPEN——开通自动续费、False=CLOSE—— 不开通自动续费，默认为CLOSE (Optional) */
+    AutoRenew *bool `json:"autoRenew"`
+
+    /* 产品线统一活动凭证JSON字符串，需要BASE64编码，目前要求编码前格式为 {"activity":{"activityType":必填字段, "activityIdentifier":必填字段}} (Optional) */
+    BuyScenario *string `json:"buyScenario"`
 }

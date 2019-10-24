@@ -34,10 +34,10 @@ type DescribeSubscriptionsRequest struct {
     /* consumerGroupFilter，consumerGroupId的过滤条件 (Optional) */
     ConsumerGroupFilter *string `json:"consumerGroupFilter"`
 
-    /* 分页之中的每页大小 (Optional) */
+    /* 分页大小；默认为10；取值范围[10, 100] (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* 分页之中的页码 (Optional) */
+    /* 页码 (Optional) */
     PageNumber *int `json:"pageNumber"`
 }
 
@@ -68,8 +68,8 @@ func NewDescribeSubscriptionsRequest(
  * param regionId: 所在区域的Region ID (Required)
  * param topicName: topic 名称 (Required)
  * param consumerGroupFilter: consumerGroupFilter，consumerGroupId的过滤条件 (Optional)
- * param pageSize: 分页之中的每页大小 (Optional)
- * param pageNumber: 分页之中的页码 (Optional)
+ * param pageSize: 分页大小；默认为10；取值范围[10, 100] (Optional)
+ * param pageNumber: 页码 (Optional)
  */
 func NewDescribeSubscriptionsRequestWithAllParams(
     regionId string,
@@ -122,12 +122,12 @@ func (r *DescribeSubscriptionsRequest) SetConsumerGroupFilter(consumerGroupFilte
     r.ConsumerGroupFilter = &consumerGroupFilter
 }
 
-/* param pageSize: 分页之中的每页大小(Optional) */
+/* param pageSize: 分页大小；默认为10；取值范围[10, 100](Optional) */
 func (r *DescribeSubscriptionsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
-/* param pageNumber: 分页之中的页码(Optional) */
+/* param pageNumber: 页码(Optional) */
 func (r *DescribeSubscriptionsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }

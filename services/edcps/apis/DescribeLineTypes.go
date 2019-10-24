@@ -21,49 +21,58 @@ import (
     edcps "github.com/jdcloud-api/jdcloud-sdk-go/services/edcps/models"
 )
 
-type QueryEdCPSRegionsRequest struct {
+type DescribeLineTypesRequest struct {
 
     core.JDCloudRequest
+
+    /* 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域  */
+    RegionId string `json:"regionId"`
 }
 
 /*
+ * param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewQueryEdCPSRegionsRequest(
-) *QueryEdCPSRegionsRequest {
+func NewDescribeLineTypesRequest(
+    regionId string,
+) *DescribeLineTypesRequest {
 
-	return &QueryEdCPSRegionsRequest{
+	return &DescribeLineTypesRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/edgeRegions",
+			URL:     "/regions/{regionId}/lineTypes",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
+        RegionId: regionId,
 	}
 }
 
 /*
+ * param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
  */
-func NewQueryEdCPSRegionsRequestWithAllParams(
-) *QueryEdCPSRegionsRequest {
+func NewDescribeLineTypesRequestWithAllParams(
+    regionId string,
+) *DescribeLineTypesRequest {
 
-    return &QueryEdCPSRegionsRequest{
+    return &DescribeLineTypesRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/edgeRegions",
+            URL:     "/regions/{regionId}/lineTypes",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
+        RegionId: regionId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewQueryEdCPSRegionsRequestWithoutParam() *QueryEdCPSRegionsRequest {
+func NewDescribeLineTypesRequestWithoutParam() *DescribeLineTypesRequest {
 
-    return &QueryEdCPSRegionsRequest{
+    return &DescribeLineTypesRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/edgeRegions",
+            URL:     "/regions/{regionId}/lineTypes",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -71,18 +80,23 @@ func NewQueryEdCPSRegionsRequestWithoutParam() *QueryEdCPSRegionsRequest {
     }
 }
 
+/* param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域(Required) */
+func (r *DescribeLineTypesRequest) SetRegionId(regionId string) {
+    r.RegionId = regionId
+}
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r QueryEdCPSRegionsRequest) GetRegionId() string {
-    return ""
+func (r DescribeLineTypesRequest) GetRegionId() string {
+    return r.RegionId
 }
 
-type QueryEdCPSRegionsResponse struct {
+type DescribeLineTypesResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result QueryEdCPSRegionsResult `json:"result"`
+    Result DescribeLineTypesResult `json:"result"`
 }
 
-type QueryEdCPSRegionsResult struct {
-    Regions []edcps.Region `json:"regions"`
+type DescribeLineTypesResult struct {
+    LineTypes []edcps.LineType `json:"lineTypes"`
 }

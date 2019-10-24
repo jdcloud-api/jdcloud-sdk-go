@@ -26,7 +26,7 @@ type DescribeVpcsRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域  */
+    /* 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域  */
     RegionId string `json:"regionId"`
 
     /* 页码；默认为1 (Optional) */
@@ -44,7 +44,7 @@ type DescribeVpcsRequest struct {
 }
 
 /*
- * param regionId: 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -64,7 +64,7 @@ func NewDescribeVpcsRequest(
 }
 
 /*
- * param regionId: 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
  * param pageNumber: 页码；默认为1 (Optional)
  * param pageSize: 分页大小；默认为20；取值范围[20, 100] (Optional)
  * param name: 私有网络名称 (Optional)
@@ -107,7 +107,7 @@ func NewDescribeVpcsRequestWithoutParam() *DescribeVpcsRequest {
     }
 }
 
-/* param regionId: 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域(Required) */
+/* param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域(Required) */
 func (r *DescribeVpcsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

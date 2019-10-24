@@ -20,86 +20,77 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type ModifyBandwidthRequest struct {
+type CreateKeypairsRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域  */
+    /* 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域  */
     RegionId string `json:"regionId"`
-
-    /* 分布式云物理服务器ID  */
-    InstanceId string `json:"instanceId"`
 
     /* 由客户端生成，用于保证请求的幂等性，长度不能超过36个字符；<br/>
 如果多个请求使用了相同的clientToken，只会执行第一个请求，之后的请求直接返回第一个请求的结果<br/>
  (Optional) */
     ClientToken *string `json:"clientToken"`
 
-    /* 外网带宽，单位Mbps，取值范围[1,200]  */
-    Bandwidth int `json:"bandwidth"`
+    /* 密钥对名称  */
+    Name string `json:"name"`
 }
 
 /*
- * param regionId: 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
- * param instanceId: 分布式云物理服务器ID (Required)
- * param bandwidth: 外网带宽，单位Mbps，取值范围[1,200] (Required)
+ * param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
+ * param name: 密钥对名称 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewModifyBandwidthRequest(
+func NewCreateKeypairsRequest(
     regionId string,
-    instanceId string,
-    bandwidth int,
-) *ModifyBandwidthRequest {
+    name string,
+) *CreateKeypairsRequest {
 
-	return &ModifyBandwidthRequest{
+	return &CreateKeypairsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}:modifyBandwidth",
+			URL:     "/regions/{regionId}/keypairs",
 			Method:  "PUT",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        InstanceId: instanceId,
-        Bandwidth: bandwidth,
+        Name: name,
 	}
 }
 
 /*
- * param regionId: 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
- * param instanceId: 分布式云物理服务器ID (Required)
+ * param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
  * param clientToken: 由客户端生成，用于保证请求的幂等性，长度不能超过36个字符；<br/>
 如果多个请求使用了相同的clientToken，只会执行第一个请求，之后的请求直接返回第一个请求的结果<br/>
  (Optional)
- * param bandwidth: 外网带宽，单位Mbps，取值范围[1,200] (Required)
+ * param name: 密钥对名称 (Required)
  */
-func NewModifyBandwidthRequestWithAllParams(
+func NewCreateKeypairsRequestWithAllParams(
     regionId string,
-    instanceId string,
     clientToken *string,
-    bandwidth int,
-) *ModifyBandwidthRequest {
+    name string,
+) *CreateKeypairsRequest {
 
-    return &ModifyBandwidthRequest{
+    return &CreateKeypairsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:modifyBandwidth",
+            URL:     "/regions/{regionId}/keypairs",
             Method:  "PUT",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        InstanceId: instanceId,
         ClientToken: clientToken,
-        Bandwidth: bandwidth,
+        Name: name,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewModifyBandwidthRequestWithoutParam() *ModifyBandwidthRequest {
+func NewCreateKeypairsRequestWithoutParam() *CreateKeypairsRequest {
 
-    return &ModifyBandwidthRequest{
+    return &CreateKeypairsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:modifyBandwidth",
+            URL:     "/regions/{regionId}/keypairs",
             Method:  "PUT",
             Header:  nil,
             Version: "v1",
@@ -107,40 +98,42 @@ func NewModifyBandwidthRequestWithoutParam() *ModifyBandwidthRequest {
     }
 }
 
-/* param regionId: 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域(Required) */
-func (r *ModifyBandwidthRequest) SetRegionId(regionId string) {
+/* param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域(Required) */
+func (r *CreateKeypairsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
-}
-
-/* param instanceId: 分布式云物理服务器ID(Required) */
-func (r *ModifyBandwidthRequest) SetInstanceId(instanceId string) {
-    r.InstanceId = instanceId
 }
 
 /* param clientToken: 由客户端生成，用于保证请求的幂等性，长度不能超过36个字符；<br/>
 如果多个请求使用了相同的clientToken，只会执行第一个请求，之后的请求直接返回第一个请求的结果<br/>
 (Optional) */
-func (r *ModifyBandwidthRequest) SetClientToken(clientToken string) {
+func (r *CreateKeypairsRequest) SetClientToken(clientToken string) {
     r.ClientToken = &clientToken
 }
 
-/* param bandwidth: 外网带宽，单位Mbps，取值范围[1,200](Required) */
-func (r *ModifyBandwidthRequest) SetBandwidth(bandwidth int) {
-    r.Bandwidth = bandwidth
+/* param name: 密钥对名称(Required) */
+func (r *CreateKeypairsRequest) SetName(name string) {
+    r.Name = name
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r ModifyBandwidthRequest) GetRegionId() string {
+func (r CreateKeypairsRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type ModifyBandwidthResponse struct {
+type CreateKeypairsResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result ModifyBandwidthResult `json:"result"`
+    Result CreateKeypairsResult `json:"result"`
 }
 
-type ModifyBandwidthResult struct {
-    Success bool `json:"success"`
+type CreateKeypairsResult struct {
+    KeypairId string `json:"keypairId"`
+    Region string `json:"region"`
+    Name string `json:"name"`
+    PublicKey string `json:"publicKey"`
+    FingerPrint string `json:"fingerPrint"`
+    CreateTime string `json:"createTime"`
+    UpdateTime string `json:"updateTime"`
+    PrivateKey string `json:"privateKey"`
 }

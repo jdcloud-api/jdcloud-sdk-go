@@ -32,6 +32,15 @@ type CreateSubscriptionRequest struct {
 
     /* consumerGroupId  */
     ConsumerGroupId string `json:"consumerGroupId"`
+
+    /* 消息隐藏时间单位秒 (Optional) */
+    MessageInvisibleTimeInSeconds *int `json:"messageInvisibleTimeInSeconds"`
+
+    /* 是否开启死信队列[true, false] (Optional) */
+    DlqEnable *bool `json:"dlqEnable"`
+
+    /* 最大重试次数dlqEnable为true必填,范围[0,16] (Optional) */
+    MaxRetryTimes *int `json:"maxRetryTimes"`
 }
 
 /*
@@ -64,11 +73,17 @@ func NewCreateSubscriptionRequest(
  * param regionId: 所在区域的Region ID (Required)
  * param topicName: topic 名称 (Required)
  * param consumerGroupId: consumerGroupId (Required)
+ * param messageInvisibleTimeInSeconds: 消息隐藏时间单位秒 (Optional)
+ * param dlqEnable: 是否开启死信队列[true, false] (Optional)
+ * param maxRetryTimes: 最大重试次数dlqEnable为true必填,范围[0,16] (Optional)
  */
 func NewCreateSubscriptionRequestWithAllParams(
     regionId string,
     topicName string,
     consumerGroupId string,
+    messageInvisibleTimeInSeconds *int,
+    dlqEnable *bool,
+    maxRetryTimes *int,
 ) *CreateSubscriptionRequest {
 
     return &CreateSubscriptionRequest{
@@ -81,6 +96,9 @@ func NewCreateSubscriptionRequestWithAllParams(
         RegionId: regionId,
         TopicName: topicName,
         ConsumerGroupId: consumerGroupId,
+        MessageInvisibleTimeInSeconds: messageInvisibleTimeInSeconds,
+        DlqEnable: dlqEnable,
+        MaxRetryTimes: maxRetryTimes,
     }
 }
 
@@ -110,6 +128,21 @@ func (r *CreateSubscriptionRequest) SetTopicName(topicName string) {
 /* param consumerGroupId: consumerGroupId(Required) */
 func (r *CreateSubscriptionRequest) SetConsumerGroupId(consumerGroupId string) {
     r.ConsumerGroupId = consumerGroupId
+}
+
+/* param messageInvisibleTimeInSeconds: 消息隐藏时间单位秒(Optional) */
+func (r *CreateSubscriptionRequest) SetMessageInvisibleTimeInSeconds(messageInvisibleTimeInSeconds int) {
+    r.MessageInvisibleTimeInSeconds = &messageInvisibleTimeInSeconds
+}
+
+/* param dlqEnable: 是否开启死信队列[true, false](Optional) */
+func (r *CreateSubscriptionRequest) SetDlqEnable(dlqEnable bool) {
+    r.DlqEnable = &dlqEnable
+}
+
+/* param maxRetryTimes: 最大重试次数dlqEnable为true必填,范围[0,16](Optional) */
+func (r *CreateSubscriptionRequest) SetMaxRetryTimes(maxRetryTimes int) {
+    r.MaxRetryTimes = &maxRetryTimes
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

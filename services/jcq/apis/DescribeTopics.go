@@ -29,10 +29,10 @@ type DescribeTopicsRequest struct {
     /* 所在区域的Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 分页之中的每页大小 (Optional) */
+    /* 分页大小；默认为10；取值范围[10, 100] (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* 分页之中的页码 (Optional) */
+    /* 页码 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
     /* topic名称的过滤条件，大小写不敏感 (Optional) */
@@ -64,8 +64,8 @@ func NewDescribeTopicsRequest(
 
 /*
  * param regionId: 所在区域的Region ID (Required)
- * param pageSize: 分页之中的每页大小 (Optional)
- * param pageNumber: 分页之中的页码 (Optional)
+ * param pageSize: 分页大小；默认为10；取值范围[10, 100] (Optional)
+ * param pageNumber: 页码 (Optional)
  * param topicFilter: topic名称的过滤条件，大小写不敏感 (Optional)
  * param tagFilters: 标签过滤条件 (Optional)
  */
@@ -110,12 +110,12 @@ func (r *DescribeTopicsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param pageSize: 分页之中的每页大小(Optional) */
+/* param pageSize: 分页大小；默认为10；取值范围[10, 100](Optional) */
 func (r *DescribeTopicsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
-/* param pageNumber: 分页之中的页码(Optional) */
+/* param pageNumber: 页码(Optional) */
 func (r *DescribeTopicsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }

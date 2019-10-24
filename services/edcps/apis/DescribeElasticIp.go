@@ -25,7 +25,7 @@ type DescribeElasticIpRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域  */
+    /* 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域  */
     RegionId string `json:"regionId"`
 
     /* 弹性公网IPID  */
@@ -33,7 +33,7 @@ type DescribeElasticIpRequest struct {
 }
 
 /*
- * param regionId: 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
  * param elasticIpId: 弹性公网IPID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -56,7 +56,7 @@ func NewDescribeElasticIpRequest(
 }
 
 /*
- * param regionId: 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
  * param elasticIpId: 弹性公网IPID (Required)
  */
 func NewDescribeElasticIpRequestWithAllParams(
@@ -89,7 +89,7 @@ func NewDescribeElasticIpRequestWithoutParam() *DescribeElasticIpRequest {
     }
 }
 
-/* param regionId: 地域ID，可调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域(Required) */
+/* param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域(Required) */
 func (r *DescribeElasticIpRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

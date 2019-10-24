@@ -40,7 +40,7 @@ func NewDomainserviceClient(credential *core.Credential) *DomainserviceClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "domainservice",
-            Revision:    "2.0.0",
+            Revision:    "2.0.3",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,6 +51,10 @@ func (c *DomainserviceClient) SetConfig(config *core.Config) {
 
 func (c *DomainserviceClient) SetLogger(logger core.Logger) {
     c.Logger = logger
+}
+
+func (c *DomainserviceClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
 }
 
 /* 删除主域名的自定义解析线路的IP段 */

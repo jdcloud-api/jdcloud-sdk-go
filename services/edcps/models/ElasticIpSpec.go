@@ -20,8 +20,11 @@ import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
 
 type ElasticIpSpec struct {
 
-    /* 带宽, 范围[1,200] 单位Mbps  */
+    /* 带宽, 范围[1,10240] 单位Mbps  */
     Bandwidth int `json:"bandwidth"`
+
+    /* 额外上行带宽, 范围[0,10240] 单位Mbps (Optional) */
+    ExtraUplinkBandwidth *int `json:"extraUplinkBandwidth"`
 
     /* 购买数量  */
     Count int `json:"count"`

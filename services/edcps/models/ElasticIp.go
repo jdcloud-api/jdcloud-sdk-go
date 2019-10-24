@@ -32,6 +32,9 @@ type ElasticIp struct {
     /* 带宽, 单位Mbps (Optional) */
     Bandwidth int `json:"bandwidth"`
 
+    /* 额外上行带宽, 单位Mbps (Optional) */
+    ExtraUplinkBandwidth int `json:"extraUplinkBandwidth"`
+
     /* 链路类型 (Optional) */
     LineType string `json:"lineType"`
 
