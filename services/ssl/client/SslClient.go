@@ -53,6 +53,10 @@ func (c *SslClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
+func (c *SslClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
+}
+
 /* 更新证书 [MFA enabled] */
 func (c *SslClient) UpdateCert(request *ssl.UpdateCertRequest) (*ssl.UpdateCertResponse, error) {
     if request == nil {
