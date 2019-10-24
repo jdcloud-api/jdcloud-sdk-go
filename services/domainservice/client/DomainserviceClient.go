@@ -53,6 +53,10 @@ func (c *DomainserviceClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
+func (c *DomainserviceClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
+}
+
 /* 删除主域名的自定义解析线路的IP段 */
 func (c *DomainserviceClient) DeleteUserViewIP(request *domainservice.DeleteUserViewIPRequest) (*domainservice.DeleteUserViewIPResponse, error) {
     if request == nil {
