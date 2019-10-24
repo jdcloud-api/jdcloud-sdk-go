@@ -53,6 +53,10 @@ func (c *RedisClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
+func (c *RedisClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
+}
+
 /* 修改缓存Redis实例的自动备份策略，可修改备份周期和备份时间 */
 func (c *RedisClient) ModifyBackupPolicy(request *redis.ModifyBackupPolicyRequest) (*redis.ModifyBackupPolicyResponse, error) {
     if request == nil {

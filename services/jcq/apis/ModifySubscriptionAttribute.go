@@ -20,7 +20,7 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type CreateSubscriptionRequest struct {
+type ModifySubscriptionAttributeRequest struct {
 
     core.JDCloudRequest
 
@@ -33,14 +33,14 @@ type CreateSubscriptionRequest struct {
     /* consumerGroupId  */
     ConsumerGroupId string `json:"consumerGroupId"`
 
-    /* 消息隐藏时间单位秒 (Optional) */
+    /* 最大重试次数 (Optional) */
+    MaxRetryTimes *int `json:"maxRetryTimes"`
+
+    /* 消息ack超时时间 (Optional) */
     MessageInvisibleTimeInSeconds *int `json:"messageInvisibleTimeInSeconds"`
 
     /* 是否开启死信队列[true, false] (Optional) */
     DlqEnable *bool `json:"dlqEnable"`
-
-    /* 最大重试次数dlqEnable为true必填,范围[0,16] (Optional) */
-    MaxRetryTimes *int `json:"maxRetryTimes"`
 }
 
 /*
@@ -50,16 +50,16 @@ type CreateSubscriptionRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewCreateSubscriptionRequest(
+func NewModifySubscriptionAttributeRequest(
     regionId string,
     topicName string,
     consumerGroupId string,
-) *CreateSubscriptionRequest {
+) *ModifySubscriptionAttributeRequest {
 
-	return &CreateSubscriptionRequest{
+	return &ModifySubscriptionAttributeRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/topics/{topicName}/subscriptions",
-			Method:  "POST",
+			URL:     "/regions/{regionId}/topics/{topicName}/subscriptions/{consumerGroupId}",
+			Method:  "PATCH",
 			Header:  nil,
 			Version: "v1",
 		},
@@ -73,42 +73,42 @@ func NewCreateSubscriptionRequest(
  * param regionId: 所在区域的Region ID (Required)
  * param topicName: topic 名称 (Required)
  * param consumerGroupId: consumerGroupId (Required)
- * param messageInvisibleTimeInSeconds: 消息隐藏时间单位秒 (Optional)
+ * param maxRetryTimes: 最大重试次数 (Optional)
+ * param messageInvisibleTimeInSeconds: 消息ack超时时间 (Optional)
  * param dlqEnable: 是否开启死信队列[true, false] (Optional)
- * param maxRetryTimes: 最大重试次数dlqEnable为true必填,范围[0,16] (Optional)
  */
-func NewCreateSubscriptionRequestWithAllParams(
+func NewModifySubscriptionAttributeRequestWithAllParams(
     regionId string,
     topicName string,
     consumerGroupId string,
+    maxRetryTimes *int,
     messageInvisibleTimeInSeconds *int,
     dlqEnable *bool,
-    maxRetryTimes *int,
-) *CreateSubscriptionRequest {
+) *ModifySubscriptionAttributeRequest {
 
-    return &CreateSubscriptionRequest{
+    return &ModifySubscriptionAttributeRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/topics/{topicName}/subscriptions",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/topics/{topicName}/subscriptions/{consumerGroupId}",
+            Method:  "PATCH",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         TopicName: topicName,
         ConsumerGroupId: consumerGroupId,
+        MaxRetryTimes: maxRetryTimes,
         MessageInvisibleTimeInSeconds: messageInvisibleTimeInSeconds,
         DlqEnable: dlqEnable,
-        MaxRetryTimes: maxRetryTimes,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewCreateSubscriptionRequestWithoutParam() *CreateSubscriptionRequest {
+func NewModifySubscriptionAttributeRequestWithoutParam() *ModifySubscriptionAttributeRequest {
 
-    return &CreateSubscriptionRequest{
+    return &ModifySubscriptionAttributeRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/topics/{topicName}/subscriptions",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/topics/{topicName}/subscriptions/{consumerGroupId}",
+            Method:  "PATCH",
             Header:  nil,
             Version: "v1",
         },
@@ -116,46 +116,46 @@ func NewCreateSubscriptionRequestWithoutParam() *CreateSubscriptionRequest {
 }
 
 /* param regionId: 所在区域的Region ID(Required) */
-func (r *CreateSubscriptionRequest) SetRegionId(regionId string) {
+func (r *ModifySubscriptionAttributeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param topicName: topic 名称(Required) */
-func (r *CreateSubscriptionRequest) SetTopicName(topicName string) {
+func (r *ModifySubscriptionAttributeRequest) SetTopicName(topicName string) {
     r.TopicName = topicName
 }
 
 /* param consumerGroupId: consumerGroupId(Required) */
-func (r *CreateSubscriptionRequest) SetConsumerGroupId(consumerGroupId string) {
+func (r *ModifySubscriptionAttributeRequest) SetConsumerGroupId(consumerGroupId string) {
     r.ConsumerGroupId = consumerGroupId
 }
 
-/* param messageInvisibleTimeInSeconds: 消息隐藏时间单位秒(Optional) */
-func (r *CreateSubscriptionRequest) SetMessageInvisibleTimeInSeconds(messageInvisibleTimeInSeconds int) {
+/* param maxRetryTimes: 最大重试次数(Optional) */
+func (r *ModifySubscriptionAttributeRequest) SetMaxRetryTimes(maxRetryTimes int) {
+    r.MaxRetryTimes = &maxRetryTimes
+}
+
+/* param messageInvisibleTimeInSeconds: 消息ack超时时间(Optional) */
+func (r *ModifySubscriptionAttributeRequest) SetMessageInvisibleTimeInSeconds(messageInvisibleTimeInSeconds int) {
     r.MessageInvisibleTimeInSeconds = &messageInvisibleTimeInSeconds
 }
 
 /* param dlqEnable: 是否开启死信队列[true, false](Optional) */
-func (r *CreateSubscriptionRequest) SetDlqEnable(dlqEnable bool) {
+func (r *ModifySubscriptionAttributeRequest) SetDlqEnable(dlqEnable bool) {
     r.DlqEnable = &dlqEnable
-}
-
-/* param maxRetryTimes: 最大重试次数dlqEnable为true必填,范围[0,16](Optional) */
-func (r *CreateSubscriptionRequest) SetMaxRetryTimes(maxRetryTimes int) {
-    r.MaxRetryTimes = &maxRetryTimes
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r CreateSubscriptionRequest) GetRegionId() string {
+func (r ModifySubscriptionAttributeRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type CreateSubscriptionResponse struct {
+type ModifySubscriptionAttributeResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result CreateSubscriptionResult `json:"result"`
+    Result ModifySubscriptionAttributeResult `json:"result"`
 }
 
-type CreateSubscriptionResult struct {
+type ModifySubscriptionAttributeResult struct {
 }

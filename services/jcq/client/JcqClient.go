@@ -40,7 +40,7 @@ func NewJcqClient(credential *core.Credential) *JcqClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "jcq",
-            Revision:    "1.0.1",
+            Revision:    "1.0.2",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,6 +51,150 @@ func (c *JcqClient) SetConfig(config *core.Config) {
 
 func (c *JcqClient) SetLogger(logger core.Logger) {
     c.Logger = logger
+}
+
+func (c *JcqClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
+}
+
+/* 死信队列列表 */
+func (c *JcqClient) ListDeadLetters(request *jcq.ListDeadLettersRequest) (*jcq.ListDeadLettersResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jcq.ListDeadLettersResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 死信消息数(按照用户或者consumerGroupId) */
+func (c *JcqClient) DescribeDeadLetterNumbers(request *jcq.DescribeDeadLetterNumbersRequest) (*jcq.DescribeDeadLetterNumbersResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jcq.DescribeDeadLetterNumbersResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 清除消息 */
+func (c *JcqClient) CleanMessages(request *jcq.CleanMessagesRequest) (*jcq.CleanMessagesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jcq.CleanMessagesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除单个topic */
+func (c *JcqClient) DeleteTopic(request *jcq.DeleteTopicRequest) (*jcq.DeleteTopicResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jcq.DeleteTopicResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 重发死信消息 */
+func (c *JcqClient) ResendDeadLetters(request *jcq.ResendDeadLettersRequest) (*jcq.ResendDeadLettersResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jcq.ResendDeadLettersResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查看接入点接口 */
+func (c *JcqClient) DescribeAccessPoint(request *jcq.DescribeAccessPointRequest) (*jcq.DescribeAccessPointResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jcq.DescribeAccessPointResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询topic列表 */
+func (c *JcqClient) DescribeTopics(request *jcq.DescribeTopicsRequest) (*jcq.DescribeTopicsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jcq.DescribeTopicsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
 }
 
 /* 删除当前topic对目标用户授权的权限 */
@@ -133,46 +277,6 @@ func (c *JcqClient) CreateTopic(request *jcq.CreateTopicRequest) (*jcq.CreateTop
     return jdResp, err
 }
 
-/* 死信队列列表 */
-func (c *JcqClient) ListDeadLetters(request *jcq.ListDeadLettersRequest) (*jcq.ListDeadLettersResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jcq.ListDeadLettersResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 死信消息数(按照用户或者consumerGroupId) */
-func (c *JcqClient) DescribeDeadLetterNumbers(request *jcq.DescribeDeadLetterNumbersRequest) (*jcq.DescribeDeadLetterNumbersResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jcq.DescribeDeadLetterNumbersResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 创建订阅 */
 func (c *JcqClient) CreateSubscription(request *jcq.CreateSubscriptionRequest) (*jcq.CreateSubscriptionResponse, error) {
     if request == nil {
@@ -193,8 +297,8 @@ func (c *JcqClient) CreateSubscription(request *jcq.CreateSubscriptionRequest) (
     return jdResp, err
 }
 
-/* 清除消息 */
-func (c *JcqClient) CleanMessages(request *jcq.CleanMessagesRequest) (*jcq.CleanMessagesResponse, error) {
+/* 查询消息轨迹 */
+func (c *JcqClient) DescribeMessageTrace(request *jcq.DescribeMessageTraceRequest) (*jcq.DescribeMessageTraceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -203,47 +307,7 @@ func (c *JcqClient) CleanMessages(request *jcq.CleanMessagesRequest) (*jcq.Clean
         return nil, err
     }
 
-    jdResp := &jcq.CleanMessagesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 删除单个topic */
-func (c *JcqClient) DeleteTopic(request *jcq.DeleteTopicRequest) (*jcq.DeleteTopicResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jcq.DeleteTopicResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 重发死信消息 */
-func (c *JcqClient) ResendDeadLetters(request *jcq.ResendDeadLettersRequest) (*jcq.ResendDeadLettersResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jcq.ResendDeadLettersResponse{}
+    jdResp := &jcq.DescribeMessageTraceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -273,8 +337,8 @@ func (c *JcqClient) DescribeConsumerGroupIds(request *jcq.DescribeConsumerGroupI
     return jdResp, err
 }
 
-/* 查看接入点接口 */
-func (c *JcqClient) DescribeAccessPoint(request *jcq.DescribeAccessPointRequest) (*jcq.DescribeAccessPointResponse, error) {
+/* 修改订阅 */
+func (c *JcqClient) ModifySubscriptionAttribute(request *jcq.ModifySubscriptionAttributeRequest) (*jcq.ModifySubscriptionAttributeResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -283,7 +347,7 @@ func (c *JcqClient) DescribeAccessPoint(request *jcq.DescribeAccessPointRequest)
         return nil, err
     }
 
-    jdResp := &jcq.DescribeAccessPointResponse{}
+    jdResp := &jcq.ModifySubscriptionAttributeResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -373,26 +437,6 @@ func (c *JcqClient) DescribeMessages(request *jcq.DescribeMessagesRequest) (*jcq
     return jdResp, err
 }
 
-/* 查询topic列表 */
-func (c *JcqClient) DescribeTopics(request *jcq.DescribeTopicsRequest) (*jcq.DescribeTopicsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jcq.DescribeTopicsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 订阅列表 */
 func (c *JcqClient) DescribeSubscriptions(request *jcq.DescribeSubscriptionsRequest) (*jcq.DescribeSubscriptionsResponse, error) {
     if request == nil {
@@ -424,6 +468,26 @@ func (c *JcqClient) DescribeMessage(request *jcq.DescribeMessageRequest) (*jcq.D
     }
 
     jdResp := &jcq.DescribeMessageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据businessId查询消息 */
+func (c *JcqClient) DescribeMessagesByBusinessId(request *jcq.DescribeMessagesByBusinessIdRequest) (*jcq.DescribeMessagesByBusinessIdResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jcq.DescribeMessagesByBusinessIdResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

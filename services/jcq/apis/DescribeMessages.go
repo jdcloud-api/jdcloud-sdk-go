@@ -36,6 +36,12 @@ type DescribeMessagesRequest struct {
 
     /* 结束时间  */
     EndTime string `json:"endTime"`
+
+    /* 分页大小；默认为10；取值范围[10, 100] (Optional) */
+    PageSize *int `json:"pageSize"`
+
+    /* 页码 (Optional) */
+    PageNumber *int `json:"pageNumber"`
 }
 
 /*
@@ -72,12 +78,16 @@ func NewDescribeMessagesRequest(
  * param topicName: topic 名称 (Required)
  * param startTime: 开始时间 (Required)
  * param endTime: 结束时间 (Required)
+ * param pageSize: 分页大小；默认为10；取值范围[10, 100] (Optional)
+ * param pageNumber: 页码 (Optional)
  */
 func NewDescribeMessagesRequestWithAllParams(
     regionId string,
     topicName string,
     startTime string,
     endTime string,
+    pageSize *int,
+    pageNumber *int,
 ) *DescribeMessagesRequest {
 
     return &DescribeMessagesRequest{
@@ -91,6 +101,8 @@ func NewDescribeMessagesRequestWithAllParams(
         TopicName: topicName,
         StartTime: startTime,
         EndTime: endTime,
+        PageSize: pageSize,
+        PageNumber: pageNumber,
     }
 }
 
@@ -125,6 +137,16 @@ func (r *DescribeMessagesRequest) SetStartTime(startTime string) {
 /* param endTime: 结束时间(Required) */
 func (r *DescribeMessagesRequest) SetEndTime(endTime string) {
     r.EndTime = endTime
+}
+
+/* param pageSize: 分页大小；默认为10；取值范围[10, 100](Optional) */
+func (r *DescribeMessagesRequest) SetPageSize(pageSize int) {
+    r.PageSize = &pageSize
+}
+
+/* param pageNumber: 页码(Optional) */
+func (r *DescribeMessagesRequest) SetPageNumber(pageNumber int) {
+    r.PageNumber = &pageNumber
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

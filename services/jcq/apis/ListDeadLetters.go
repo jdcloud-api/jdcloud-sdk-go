@@ -34,10 +34,10 @@ type ListDeadLettersRequest struct {
     /* consumerGroupId  */
     ConsumerGroupId string `json:"consumerGroupId"`
 
-    /* 页码；默认为1 (Optional) */
+    /* 页码 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* 分页大小；默认为20；取值范围[10, 100] (Optional) */
+    /* 分页大小；默认为10；取值范围[10, 100] (Optional) */
     PageSize *int `json:"pageSize"`
 
     /* 开始时间  */
@@ -83,8 +83,8 @@ func NewListDeadLettersRequest(
  * param regionId: 所在区域的Region ID (Required)
  * param topicName: topic 名称 (Required)
  * param consumerGroupId: consumerGroupId (Required)
- * param pageNumber: 页码；默认为1 (Optional)
- * param pageSize: 分页大小；默认为20；取值范围[10, 100] (Optional)
+ * param pageNumber: 页码 (Optional)
+ * param pageSize: 分页大小；默认为10；取值范围[10, 100] (Optional)
  * param startTime: 开始时间 (Required)
  * param endTime: 结束时间 (Required)
  */
@@ -143,12 +143,12 @@ func (r *ListDeadLettersRequest) SetConsumerGroupId(consumerGroupId string) {
     r.ConsumerGroupId = consumerGroupId
 }
 
-/* param pageNumber: 页码；默认为1(Optional) */
+/* param pageNumber: 页码(Optional) */
 func (r *ListDeadLettersRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
-/* param pageSize: 分页大小；默认为20；取值范围[10, 100](Optional) */
+/* param pageSize: 分页大小；默认为10；取值范围[10, 100](Optional) */
 func (r *ListDeadLettersRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }

@@ -37,7 +37,7 @@ type DescribeDeadLetterNumbersWithTopicRequest struct {
     /* 页码 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* 每页数 (Optional) */
+    /* 分页大小；默认为10；取值范围[10, 100] (Optional) */
     PageSize *int `json:"pageSize"`
 }
 
@@ -69,7 +69,7 @@ func NewDescribeDeadLetterNumbersWithTopicRequest(
  * param topicName: topic 名称 (Required)
  * param consumerGroupId: consumerGroupId为空则显示该Topic下所有订阅关系里的死信数量 (Optional)
  * param pageNumber: 页码 (Optional)
- * param pageSize: 每页数 (Optional)
+ * param pageSize: 分页大小；默认为10；取值范围[10, 100] (Optional)
  */
 func NewDescribeDeadLetterNumbersWithTopicRequestWithAllParams(
     regionId string,
@@ -127,7 +127,7 @@ func (r *DescribeDeadLetterNumbersWithTopicRequest) SetPageNumber(pageNumber int
     r.PageNumber = &pageNumber
 }
 
-/* param pageSize: 每页数(Optional) */
+/* param pageSize: 分页大小；默认为10；取值范围[10, 100](Optional) */
 func (r *DescribeDeadLetterNumbersWithTopicRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
