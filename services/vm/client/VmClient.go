@@ -53,6 +53,10 @@ func (c *VmClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
+func (c *VmClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
+}
+
 /* 查询镜像共享帐户列表，只允许操作您的个人私有镜像。
  */
 func (c *VmClient) DescribeImageMembers(request *vm.DescribeImageMembersRequest) (*vm.DescribeImageMembersResponse, error) {
