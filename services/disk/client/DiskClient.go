@@ -53,6 +53,10 @@ func (c *DiskClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
+func (c *DiskClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
+}
+
 /* 修改快照的名字或描述信息 */
 func (c *DiskClient) ModifySnapshotAttribute(request *disk.ModifySnapshotAttributeRequest) (*disk.ModifySnapshotAttributeResponse, error) {
     if request == nil {
