@@ -53,6 +53,10 @@ func (c *EdcpsClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
+func (c *EdcpsClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
+}
+
 /* 修改分布式云物理服务器部分信息，包括名称、描述 */
 func (c *EdcpsClient) ModifyInstance(request *edcps.ModifyInstanceRequest) (*edcps.ModifyInstanceResponse, error) {
     if request == nil {
