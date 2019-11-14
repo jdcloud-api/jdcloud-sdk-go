@@ -20,7 +20,7 @@ package models
 type Log struct {
 
     /* 日志文件id (Optional) */
-    Id int `json:"id"`
+    Id string `json:"id"`
 
     /* 日志文件名称 (Optional) */
     Name string `json:"name"`

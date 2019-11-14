@@ -36,8 +36,8 @@ type CreateMountTargetRequest struct {
     /* vpcId  */
     VpcId string `json:"vpcId"`
 
-    /* 安全组id  */
-    SecurityGroupId string `json:"securityGroupId"`
+    /* 安全组id (Optional) */
+    SecurityGroupId *string `json:"securityGroupId"`
 
     /* 幂等性参数(只支持数字、大小写字母，且不能超过64字符)  */
     ClientToken string `json:"clientToken"`
@@ -48,7 +48,6 @@ type CreateMountTargetRequest struct {
  * param fileSystemId: 创建挂载目标的文件系统 (Required)
  * param subnetId: 子网id (Required)
  * param vpcId: vpcId (Required)
- * param securityGroupId: 安全组id (Required)
  * param clientToken: 幂等性参数(只支持数字、大小写字母，且不能超过64字符) (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -58,7 +57,6 @@ func NewCreateMountTargetRequest(
     fileSystemId string,
     subnetId string,
     vpcId string,
-    securityGroupId string,
     clientToken string,
 ) *CreateMountTargetRequest {
 
@@ -73,7 +71,6 @@ func NewCreateMountTargetRequest(
         FileSystemId: fileSystemId,
         SubnetId: subnetId,
         VpcId: vpcId,
-        SecurityGroupId: securityGroupId,
         ClientToken: clientToken,
 	}
 }
@@ -83,7 +80,7 @@ func NewCreateMountTargetRequest(
  * param fileSystemId: 创建挂载目标的文件系统 (Required)
  * param subnetId: 子网id (Required)
  * param vpcId: vpcId (Required)
- * param securityGroupId: 安全组id (Required)
+ * param securityGroupId: 安全组id (Optional)
  * param clientToken: 幂等性参数(只支持数字、大小写字母，且不能超过64字符) (Required)
  */
 func NewCreateMountTargetRequestWithAllParams(
@@ -91,7 +88,7 @@ func NewCreateMountTargetRequestWithAllParams(
     fileSystemId string,
     subnetId string,
     vpcId string,
-    securityGroupId string,
+    securityGroupId *string,
     clientToken string,
 ) *CreateMountTargetRequest {
 
@@ -144,9 +141,9 @@ func (r *CreateMountTargetRequest) SetVpcId(vpcId string) {
     r.VpcId = vpcId
 }
 
-/* param securityGroupId: 安全组id(Required) */
+/* param securityGroupId: 安全组id(Optional) */
 func (r *CreateMountTargetRequest) SetSecurityGroupId(securityGroupId string) {
-    r.SecurityGroupId = securityGroupId
+    r.SecurityGroupId = &securityGroupId
 }
 
 /* param clientToken: 幂等性参数(只支持数字、大小写字母，且不能超过64字符)(Required) */

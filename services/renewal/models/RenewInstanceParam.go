@@ -34,10 +34,10 @@ type RenewInstanceParam struct {
     /* 待续费资源ID列表,英文逗号分隔  */
     InstanceIds string `json:"instanceIds"`
 
-    /* 续费至统一续费到期日(YES-是,NO-否) (Optional) */
+    /* 是否统一到期日续费(YES-是,NO-否)，默认为NO (Optional) */
     UnifyDate *string `json:"unifyDate"`
 
-    /* 是否自动支付 (Optional) */
+    /* 是否自动支付，默认为true，外部用户调用时只能传true (Optional) */
     AutoPay *bool `json:"autoPay"`
 
     /* 支付成功后的回调地址 (Optional) */

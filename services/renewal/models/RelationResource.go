@@ -34,7 +34,7 @@ type RelationResource struct {
     /* 地域 (Optional) */
     Region string `json:"region"`
 
-    /* 资源计费类型(CONFIG-按配置,FLOW-按用量,MONTHLY-包年包月)，不传显示全部资源 (Optional) */
+    /* 资源计费类型(CONFIG-按配置,FLOW-按用量,MONTHLY-包年包月) (Optional) */
     BillingType string `json:"billingType"`
 
     /* 资源到期时间 (Optional) */
@@ -43,7 +43,7 @@ type RelationResource struct {
     /* 倒计时 (Optional) */
     LastTime int `json:"lastTime"`
 
-    /* 自动续费状态(UNOPENED-未开通,OPENED-已开通) (Optional) */
+    /* 开通自动续费状态(UNOPENED-未开通,OPENED-已开通) (Optional) */
     AutoRenewStatus string `json:"autoRenewStatus"`
 
     /* 扩展字段，包括数据库类型、资源特殊说明等 (Optional) */

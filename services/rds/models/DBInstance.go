@@ -62,6 +62,12 @@ type DBInstance struct {
     /* 实例状态，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Optional) */
     InstanceStatus string `json:"instanceStatus"`
 
+    /* 实例公网域名<br>- 仅支持MySQL (Optional) */
+    PublicDomainName string `json:"publicDomainName"`
+
+    /* 实例内网域名<br>- 仅支持MySQL (Optional) */
+    InternalDomainName string `json:"internalDomainName"`
+
     /* 实例创建时间 (Optional) */
     CreateTime string `json:"createTime"`
 
@@ -74,6 +80,6 @@ type DBInstance struct {
     /* 标签信息 (Optional) */
     Tags []Tag `json:"tags"`
 
-    /* MySQL只读实例对应的主实例ID (Optional) */
+    /* MySQL、PostgreSQL只读实例对应的主实例ID (Optional) */
     SourceInstanceId string `json:"sourceInstanceId"`
 }

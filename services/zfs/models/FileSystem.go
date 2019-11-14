@@ -37,9 +37,15 @@ type FileSystem struct {
     /* 文件系统状态(创建中:creating、可用:available、使用中:in-use、删除中:deleting) (Optional) */
     Status string `json:"status"`
 
+    /* 文件系统类型(通用型:gp1,容量型:std1) (Optional) */
+    FileSystemType string `json:"fileSystemType"`
+
     /* 创建时间 (Optional) */
     CreateTime string `json:"createTime"`
 
     /* dns名称 (Optional) */
     DnsName string `json:"dnsName"`
+
+    /* Tag信息 (Optional) */
+    Tags []Tag `json:"tags"`
 }

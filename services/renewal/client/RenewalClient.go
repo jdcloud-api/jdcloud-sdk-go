@@ -40,7 +40,7 @@ func NewRenewalClient(credential *core.Credential) *RenewalClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "renewal",
-            Revision:    "0.2.1",
+            Revision:    "0.2.2",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,6 +51,10 @@ func (c *RenewalClient) SetConfig(config *core.Config) {
 
 func (c *RenewalClient) SetLogger(logger core.Logger) {
     c.Logger = logger
+}
+
+func (c *RenewalClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
 }
 
 /* 为一个或多个实例设置自动续费服务。 */

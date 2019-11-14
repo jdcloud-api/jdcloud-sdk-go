@@ -19,7 +19,6 @@ package apis
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
     live "github.com/jdcloud-api/jdcloud-sdk-go/services/live/models"
-    common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
 
 type DescribeCustomLiveStreamSnapshotConfigRequest struct {
@@ -44,7 +43,7 @@ type DescribeCustomLiveStreamSnapshotConfigRequest struct {
 - name:   streamName 非必填(流名称)
 - value:  参数
  (Optional) */
-    Filters []common.Filter `json:"filters"`
+    Filters []live.Filter `json:"filters"`
 }
 
 /*
@@ -83,7 +82,7 @@ func NewDescribeCustomLiveStreamSnapshotConfigRequest(
 func NewDescribeCustomLiveStreamSnapshotConfigRequestWithAllParams(
     pageNum *int,
     pageSize *int,
-    filters []common.Filter,
+    filters []live.Filter,
 ) *DescribeCustomLiveStreamSnapshotConfigRequest {
 
     return &DescribeCustomLiveStreamSnapshotConfigRequest{
@@ -134,7 +133,7 @@ func (r *DescribeCustomLiveStreamSnapshotConfigRequest) SetPageSize(pageSize int
 - name:   streamName 非必填(流名称)
 - value:  参数
 (Optional) */
-func (r *DescribeCustomLiveStreamSnapshotConfigRequest) SetFilters(filters []common.Filter) {
+func (r *DescribeCustomLiveStreamSnapshotConfigRequest) SetFilters(filters []live.Filter) {
     r.Filters = filters
 }
 

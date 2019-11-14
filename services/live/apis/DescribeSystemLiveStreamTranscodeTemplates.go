@@ -19,7 +19,6 @@ package apis
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
     live "github.com/jdcloud-api/jdcloud-sdk-go/services/live/models"
-    common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
 
 type DescribeSystemLiveStreamTranscodeTemplatesRequest struct {
@@ -41,7 +40,7 @@ type DescribeSystemLiveStreamTranscodeTemplatesRequest struct {
   - value:  如果参数为空，则查询全部
   - 如果为空,则表示查询该用下所有自定义的转码模板
  (Optional) */
-    Filters []common.Filter `json:"filters"`
+    Filters []live.Filter `json:"filters"`
 }
 
 /*
@@ -77,7 +76,7 @@ func NewDescribeSystemLiveStreamTranscodeTemplatesRequest(
 func NewDescribeSystemLiveStreamTranscodeTemplatesRequestWithAllParams(
     pageNum *int,
     pageSize *int,
-    filters []common.Filter,
+    filters []live.Filter,
 ) *DescribeSystemLiveStreamTranscodeTemplatesRequest {
 
     return &DescribeSystemLiveStreamTranscodeTemplatesRequest{
@@ -125,7 +124,7 @@ func (r *DescribeSystemLiveStreamTranscodeTemplatesRequest) SetPageSize(pageSize
   - value:  如果参数为空，则查询全部
   - 如果为空,则表示查询该用下所有自定义的转码模板
 (Optional) */
-func (r *DescribeSystemLiveStreamTranscodeTemplatesRequest) SetFilters(filters []common.Filter) {
+func (r *DescribeSystemLiveStreamTranscodeTemplatesRequest) SetFilters(filters []live.Filter) {
     r.Filters = filters
 }
 

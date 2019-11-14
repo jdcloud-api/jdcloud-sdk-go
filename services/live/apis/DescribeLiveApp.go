@@ -19,7 +19,6 @@ package apis
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
     live "github.com/jdcloud-api/jdcloud-sdk-go/services/live/models"
-    common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
 
 type DescribeLiveAppRequest struct {
@@ -41,7 +40,7 @@ type DescribeLiveAppRequest struct {
   - values: 如果参数为空,则查询全部
   - 过滤条件为空,则表示查询用户下的所有应用名
  (Optional) */
-    Filters []common.Filter `json:"filters"`
+    Filters []live.Filter `json:"filters"`
 }
 
 /*
@@ -77,7 +76,7 @@ func NewDescribeLiveAppRequest(
 func NewDescribeLiveAppRequestWithAllParams(
     pageNum *int,
     pageSize *int,
-    filters []common.Filter,
+    filters []live.Filter,
 ) *DescribeLiveAppRequest {
 
     return &DescribeLiveAppRequest{
@@ -125,7 +124,7 @@ func (r *DescribeLiveAppRequest) SetPageSize(pageSize int) {
   - values: 如果参数为空,则查询全部
   - 过滤条件为空,则表示查询用户下的所有应用名
 (Optional) */
-func (r *DescribeLiveAppRequest) SetFilters(filters []common.Filter) {
+func (r *DescribeLiveAppRequest) SetFilters(filters []live.Filter) {
     r.Filters = filters
 }
 

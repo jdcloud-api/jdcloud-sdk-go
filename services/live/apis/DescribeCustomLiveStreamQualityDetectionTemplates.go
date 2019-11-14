@@ -19,7 +19,6 @@ package apis
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
     live "github.com/jdcloud-api/jdcloud-sdk-go/services/live/models"
-    common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
 
 type DescribeCustomLiveStreamQualityDetectionTemplatesRequest struct {
@@ -40,7 +39,7 @@ type DescribeCustomLiveStreamQualityDetectionTemplatesRequest struct {
 - name:   template 质量检测自定义名称
 - value:  如果参数为空，则查询全部
  (Optional) */
-    Filters []common.Filter `json:"filters"`
+    Filters []live.Filter `json:"filters"`
 }
 
 /*
@@ -75,7 +74,7 @@ func NewDescribeCustomLiveStreamQualityDetectionTemplatesRequest(
 func NewDescribeCustomLiveStreamQualityDetectionTemplatesRequestWithAllParams(
     pageNum *int,
     pageSize *int,
-    filters []common.Filter,
+    filters []live.Filter,
 ) *DescribeCustomLiveStreamQualityDetectionTemplatesRequest {
 
     return &DescribeCustomLiveStreamQualityDetectionTemplatesRequest{
@@ -122,7 +121,7 @@ func (r *DescribeCustomLiveStreamQualityDetectionTemplatesRequest) SetPageSize(p
 - name:   template 质量检测自定义名称
 - value:  如果参数为空，则查询全部
 (Optional) */
-func (r *DescribeCustomLiveStreamQualityDetectionTemplatesRequest) SetFilters(filters []common.Filter) {
+func (r *DescribeCustomLiveStreamQualityDetectionTemplatesRequest) SetFilters(filters []live.Filter) {
     r.Filters = filters
 }
 

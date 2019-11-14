@@ -19,7 +19,6 @@ package apis
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
     live "github.com/jdcloud-api/jdcloud-sdk-go/services/live/models"
-    common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
 
 type DescribeCustomLiveStreamRecordTemplatesRequest struct {
@@ -40,7 +39,7 @@ type DescribeCustomLiveStreamRecordTemplatesRequest struct {
   - name:   template 录制模板自定义名称
   - value:  如果参数为空，则查询全部
  (Optional) */
-    Filters []common.Filter `json:"filters"`
+    Filters []live.Filter `json:"filters"`
 }
 
 /*
@@ -75,7 +74,7 @@ func NewDescribeCustomLiveStreamRecordTemplatesRequest(
 func NewDescribeCustomLiveStreamRecordTemplatesRequestWithAllParams(
     pageNum *int,
     pageSize *int,
-    filters []common.Filter,
+    filters []live.Filter,
 ) *DescribeCustomLiveStreamRecordTemplatesRequest {
 
     return &DescribeCustomLiveStreamRecordTemplatesRequest{
@@ -122,7 +121,7 @@ func (r *DescribeCustomLiveStreamRecordTemplatesRequest) SetPageSize(pageSize in
   - name:   template 录制模板自定义名称
   - value:  如果参数为空，则查询全部
 (Optional) */
-func (r *DescribeCustomLiveStreamRecordTemplatesRequest) SetFilters(filters []common.Filter) {
+func (r *DescribeCustomLiveStreamRecordTemplatesRequest) SetFilters(filters []live.Filter) {
     r.Filters = filters
 }
 
