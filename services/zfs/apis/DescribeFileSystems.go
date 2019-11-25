@@ -35,6 +35,9 @@ type DescribeFileSystemsRequest struct {
     /* 分页大小，默认为20，取值范围：[10,100] (Optional) */
     PageSize *int `json:"pageSize"`
 
+    /* Tag筛选条件 (Optional) */
+    Tags []zfs.TagFilter `json:"tags"`
+
     /* fileSystemId - 文件系统ID，精确匹配，支持多个
 name - 文件系统名称，模糊匹配，支持单个
 status - 文件系统状态，精确匹配，支持多个 FileSystem Status/creating、available、in-use
@@ -66,6 +69,7 @@ func NewDescribeFileSystemsRequest(
  * param regionId: 地域ID (Required)
  * param pageNumber: 页码, 默认为1, 取值范围：[1,∞) (Optional)
  * param pageSize: 分页大小，默认为20，取值范围：[10,100] (Optional)
+ * param tags: Tag筛选条件 (Optional)
  * param filters: fileSystemId - 文件系统ID，精确匹配，支持多个
 name - 文件系统名称，模糊匹配，支持单个
 status - 文件系统状态，精确匹配，支持多个 FileSystem Status/creating、available、in-use
@@ -75,6 +79,7 @@ func NewDescribeFileSystemsRequestWithAllParams(
     regionId string,
     pageNumber *int,
     pageSize *int,
+    tags []zfs.TagFilter,
     filters []common.Filter,
 ) *DescribeFileSystemsRequest {
 
@@ -88,6 +93,7 @@ func NewDescribeFileSystemsRequestWithAllParams(
         RegionId: regionId,
         PageNumber: pageNumber,
         PageSize: pageSize,
+        Tags: tags,
         Filters: filters,
     }
 }
@@ -118,6 +124,11 @@ func (r *DescribeFileSystemsRequest) SetPageNumber(pageNumber int) {
 /* param pageSize: 分页大小，默认为20，取值范围：[10,100](Optional) */
 func (r *DescribeFileSystemsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
+}
+
+/* param tags: Tag筛选条件(Optional) */
+func (r *DescribeFileSystemsRequest) SetTags(tags []zfs.TagFilter) {
+    r.Tags = tags
 }
 
 /* param filters: fileSystemId - 文件系统ID，精确匹配，支持多个

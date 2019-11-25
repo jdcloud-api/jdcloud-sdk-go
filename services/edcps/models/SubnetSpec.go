@@ -28,6 +28,12 @@ type SubnetSpec struct {
     /* 子网的网络范围  */
     Cidr string `json:"cidr"`
 
+    /* 子网的次要cidr (Optional) */
+    SecondaryCidr *string `json:"secondaryCidr"`
+
+    /* 子网的次要cidr名称 (Optional) */
+    SecondaryCidrName *string `json:"secondaryCidrName"`
+
     /* 名称  */
     Name string `json:"name"`
 

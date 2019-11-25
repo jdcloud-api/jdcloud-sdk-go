@@ -19,7 +19,6 @@ package apis
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
     live "github.com/jdcloud-api/jdcloud-sdk-go/services/live/models"
-    common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
 
 type DescribeCustomLiveStreamWatermarkConfigRequest struct {
@@ -44,7 +43,7 @@ type DescribeCustomLiveStreamWatermarkConfigRequest struct {
   - name:   streamName，非必填(流名称)
   - value:  参数
  (Optional) */
-    Filters []common.Filter `json:"filters"`
+    Filters []live.Filter `json:"filters"`
 }
 
 /*
@@ -83,7 +82,7 @@ func NewDescribeCustomLiveStreamWatermarkConfigRequest(
 func NewDescribeCustomLiveStreamWatermarkConfigRequestWithAllParams(
     pageNum *int,
     pageSize *int,
-    filters []common.Filter,
+    filters []live.Filter,
 ) *DescribeCustomLiveStreamWatermarkConfigRequest {
 
     return &DescribeCustomLiveStreamWatermarkConfigRequest{
@@ -134,7 +133,7 @@ func (r *DescribeCustomLiveStreamWatermarkConfigRequest) SetPageSize(pageSize in
   - name:   streamName，非必填(流名称)
   - value:  参数
 (Optional) */
-func (r *DescribeCustomLiveStreamWatermarkConfigRequest) SetFilters(filters []common.Filter) {
+func (r *DescribeCustomLiveStreamWatermarkConfigRequest) SetFilters(filters []live.Filter) {
     r.Filters = filters
 }
 

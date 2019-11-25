@@ -50,6 +50,9 @@ type ElasticIp struct {
     /* 创建时间 (Optional) */
     CreateTime string `json:"createTime"`
 
+    /* 别名IP id (Optional) */
+    AliasIpId string `json:"aliasIpId"`
+
     /* 计费信息 (Optional) */
     Charge charge.Charge `json:"charge"`
 }

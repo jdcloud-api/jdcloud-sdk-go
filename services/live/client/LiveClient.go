@@ -40,7 +40,7 @@ func NewLiveClient(credential *core.Credential) *LiveClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "live",
-            Revision:    "1.0.13",
+            Revision:    "1.0.15",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -175,6 +175,27 @@ func (c *LiveClient) DeleteLiveStreamNotifyConfig(request *live.DeleteLiveStream
     }
 
     jdResp := &live.DeleteLiveStreamNotifyConfigResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 开启P2P
+ */
+func (c *LiveClient) OpenLiveP2p(request *live.OpenLiveP2pRequest) (*live.OpenLiveP2pResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.OpenLiveP2pResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -670,6 +691,26 @@ func (c *LiveClient) DescribeLivePlayAuthKey(request *live.DescribeLivePlayAuthK
     return jdResp, err
 }
 
+/* 查询P2P配置 */
+func (c *LiveClient) DescribeLiveP2pConfigs(request *live.DescribeLiveP2pConfigsRequest) (*live.DescribeLiveP2pConfigsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DescribeLiveP2pConfigsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询转码时长数据 */
 func (c *LiveClient) DescribeLiveTranscodingDurationData(request *live.DescribeLiveTranscodingDurationDataRequest) (*live.DescribeLiveTranscodingDurationDataResponse, error) {
     if request == nil {
@@ -954,6 +995,26 @@ func (c *LiveClient) AddLiveStreamDomainQualityDetection(request *live.AddLiveSt
     }
 
     jdResp := &live.AddLiveStreamDomainQualityDetectionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 关闭P2P */
+func (c *LiveClient) CloseLiveP2p(request *live.CloseLiveP2pRequest) (*live.CloseLiveP2pResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.CloseLiveP2pResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1462,6 +1523,26 @@ func (c *LiveClient) AddLiveRestartDomain(request *live.AddLiveRestartDomainRequ
     return jdResp, err
 }
 
+/* 查询直播回看播放证书 */
+func (c *LiveClient) DescribeLiveRestartDomainCertificate(request *live.DescribeLiveRestartDomainCertificateRequest) (*live.DescribeLiveRestartDomainCertificateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DescribeLiveRestartDomainCertificateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 删除域名质量检测配置
 - 删除域名级别的质量检测模板配置,重新推流后生效
  */
@@ -1727,6 +1808,28 @@ func (c *LiveClient) DeleteLiveStreamQualityDetectionNotifyConfig(request *live.
     }
 
     jdResp := &live.DeleteLiveStreamQualityDetectionNotifyConfigResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设置直播回看证书
+-- 设置成功之后30分钟以内生效
+ */
+func (c *LiveClient) SetLiveRestartDomainCertificate(request *live.SetLiveRestartDomainCertificateRequest) (*live.SetLiveRestartDomainCertificateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.SetLiveRestartDomainCertificateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

@@ -40,7 +40,7 @@ func NewRdsClient(credential *core.Credential) *RdsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "rds",
-            Revision:    "0.6.4",
+            Revision:    "0.7.3",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,6 +51,10 @@ func (c *RdsClient) SetConfig(config *core.Config) {
 
 func (c *RdsClient) SetLogger(logger core.Logger) {
     c.Logger = logger
+}
+
+func (c *RdsClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
 }
 
 /* 获取某个审计文件的下载链接，同时支持内链和外链，链接的有效时间为24小时<br>- 仅支持SQL Server */
@@ -153,7 +157,7 @@ func (c *RdsClient) DescribeBackupDownloadURL(request *rds.DescribeBackupDownloa
     return jdResp, err
 }
 
-/* 拷贝参数组<br>- 仅支持MySQL */
+/* 拷贝参数组 */
 func (c *RdsClient) CopyParameterGroup(request *rds.CopyParameterGroupRequest) (*rds.CopyParameterGroupResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -173,7 +177,7 @@ func (c *RdsClient) CopyParameterGroup(request *rds.CopyParameterGroupRequest) (
     return jdResp, err
 }
 
-/* 获取MySQL实例中binlog的详细信息<br>- 仅支持MySQL */
+/* 获取MySQL实例中binlog的详细信息<br>- 仅支持 MySQL, Percona, MariaDB */
 func (c *RdsClient) DescribeBinlogs(request *rds.DescribeBinlogsRequest) (*rds.DescribeBinlogsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -193,7 +197,7 @@ func (c *RdsClient) DescribeBinlogs(request *rds.DescribeBinlogsRequest) (*rds.D
     return jdResp, err
 }
 
-/* 删除一个RDS实例或者MySQL的只读实例。删除MySQL主实例时，会同时将对应的MySQL只读实例也删除 [MFA enabled] */
+/* 删除一个RDS实例或者MySQL/PostgreSQL的只读实例。删除MySQL/PostgreSQL主实例时，会同时将对应的MySQL/PostgreSQL只读实例也删除 [MFA enabled] */
 func (c *RdsClient) DeleteInstance(request *rds.DeleteInstanceRequest) (*rds.DeleteInstanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -233,7 +237,7 @@ func (c *RdsClient) AlterTableWithOnlineDDL(request *rds.AlterTableWithOnlineDDL
     return jdResp, err
 }
 
-/* 创建一个参数组<br>- 仅支持MySQL */
+/* 创建一个参数组<br>- 仅支持MySQL，Percona，MariaDB，PostgreSQL */
 func (c *RdsClient) CreateParameterGroup(request *rds.CreateParameterGroupRequest) (*rds.CreateParameterGroupResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -393,7 +397,7 @@ func (c *RdsClient) ModifyParameterGroup(request *rds.ModifyParameterGroupReques
     return jdResp, err
 }
 
-/* 查看参数的修改历史<br>- 仅支持MySQL */
+/* 查看参数的修改历史<br>- 仅支持MySQL，Percona，MariaDB，PostgreSQL */
 func (c *RdsClient) DescribeParameterModifyRecords(request *rds.DescribeParameterModifyRecordsRequest) (*rds.DescribeParameterModifyRecordsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -413,7 +417,7 @@ func (c *RdsClient) DescribeParameterModifyRecords(request *rds.DescribeParamete
     return jdResp, err
 }
 
-/* 获取MySQL实例的binlog的下载链接<br>- 仅支持MySQL */
+/* 获取MySQL实例的binlog的下载链接<br>- 仅支持 MySQL, Percona, MariaDB */
 func (c *RdsClient) DescribeBinlogDownloadURL(request *rds.DescribeBinlogDownloadURLRequest) (*rds.DescribeBinlogDownloadURLResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -573,7 +577,7 @@ func (c *RdsClient) RestoreDatabaseFromFile(request *rds.RestoreDatabaseFromFile
     return jdResp, err
 }
 
-/* 查询RDS实例（MySQL、SQL Server等）的详细信息以及MySQL只读实例详细信息 */
+/* 查询RDS实例（MySQL、SQL Server等）的详细信息以及MySQL/PostgreSQL只读实例详细信息 */
 func (c *RdsClient) DescribeInstanceAttributes(request *rds.DescribeInstanceAttributesRequest) (*rds.DescribeInstanceAttributesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -653,7 +657,7 @@ func (c *RdsClient) DescribeQueryPerformance(request *rds.DescribeQueryPerforman
     return jdResp, err
 }
 
-/* 查看参数组绑定的云数据库实例<br>- 仅支持MySQL */
+/* 查看参数组绑定的云数据库实例<br>- 仅支持MySQL，Percona，MariaDB，PostgreSQL */
 func (c *RdsClient) DescribeParameterGroupAttachedInstances(request *rds.DescribeParameterGroupAttachedInstancesRequest) (*rds.DescribeParameterGroupAttachedInstancesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -773,7 +777,7 @@ func (c *RdsClient) DescribeSlowLogAttributes(request *rds.DescribeSlowLogAttrib
     return jdResp, err
 }
 
-/* 修改参数组名称，描述<br>- 仅支持MySQL */
+/* 修改参数组名称，描述<br>- 仅支持MySQL，Percona，MariaDB，PostgreSQL */
 func (c *RdsClient) ModifyParameterGroupAttribute(request *rds.ModifyParameterGroupAttributeRequest) (*rds.ModifyParameterGroupAttributeResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -813,7 +817,7 @@ func (c *RdsClient) ModifyAudit(request *rds.ModifyAuditRequest) (*rds.ModifyAud
     return jdResp, err
 }
 
-/* 仅支持查看MySQL实例的审计内容 */
+/* 仅支持查看MySQL实例的审计内容<br>- 仅支持 MySQL 5.6, MySQL 5.7, Percona, MariaDB */
 func (c *RdsClient) DescribeAuditResult(request *rds.DescribeAuditResultRequest) (*rds.DescribeAuditResultResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1073,6 +1077,26 @@ func (c *RdsClient) UpdateLogDownloadURLInternal(request *rds.UpdateLogDownloadU
     return jdResp, err
 }
 
+/* 根据日志文件的下载链接过期时间，生成日志文件下载地址 仅支持 PostgreSQL, MySQL, Percona, MariaDB */
+func (c *RdsClient) DescribeLogDownloadURL(request *rds.DescribeLogDownloadURLRequest) (*rds.DescribeLogDownloadURLResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DescribeLogDownloadURLResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 修改允许访问实例的IP白名单。白名单是允许访问当前实例的IP/IP段列表，缺省情况下，白名单对本VPC开放。如果用户开启了外网访问的功能，还需要对外网的IP配置白名单。 */
 func (c *RdsClient) ModifyWhiteList(request *rds.ModifyWhiteListRequest) (*rds.ModifyWhiteListResponse, error) {
     if request == nil {
@@ -1133,7 +1157,7 @@ func (c *RdsClient) DisableIntercept(request *rds.DisableInterceptRequest) (*rds
     return jdResp, err
 }
 
-/* 仅支持MySQL实例关闭数据库审计 */
+/* 仅支持MySQL实例关闭数据库审计<br>- 仅支持 MySQL 5.6, MySQL 5.7, Percona, MariaDB */
 func (c *RdsClient) DisableAudit(request *rds.DisableAuditRequest) (*rds.DisableAuditResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1313,7 +1337,7 @@ func (c *RdsClient) ModifyInstanceName(request *rds.ModifyInstanceNameRequest) (
     return jdResp, err
 }
 
-/* 仅支持MySQL实例开启数据库审计 */
+/* 仅支持MySQL实例开启数据库审计<br>- 仅支持 MySQL 5.6, MySQL 5.7, Percona, MariaDB */
 func (c *RdsClient) EnableAudit(request *rds.EnableAuditRequest) (*rds.EnableAuditResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1333,7 +1357,7 @@ func (c *RdsClient) EnableAudit(request *rds.EnableAuditRequest) (*rds.EnableAud
     return jdResp, err
 }
 
-/* 删除参数组<br>- 仅支持MySQL */
+/* 删除参数组<br>- 仅支持MySQL，Percona，MariaDB，PostgreSQL */
 func (c *RdsClient) DeleteParameterGroup(request *rds.DeleteParameterGroupRequest) (*rds.DeleteParameterGroupResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1433,7 +1457,7 @@ func (c *RdsClient) RestoreInstance(request *rds.RestoreInstanceRequest) (*rds.R
     return jdResp, err
 }
 
-/* 获取 PostgreSQL 的日志文件列表 */
+/* 获取日志文件列表<br>- 仅支持PostgreSQL, MySQL, Percona, MariaDB */
 func (c *RdsClient) DescribeLogs(request *rds.DescribeLogsRequest) (*rds.DescribeLogsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1493,7 +1517,7 @@ func (c *RdsClient) DescribeImportFiles(request *rds.DescribeImportFilesRequest)
     return jdResp, err
 }
 
-/* 获取当前账号下所有的参数组列表<br>- 仅支持MySQL */
+/* 获取当前账号下所有的参数组列表<br>- 仅支持MySQL，Percona，MariaDB，PostgreSQL */
 func (c *RdsClient) DescribeParameterGroups(request *rds.DescribeParameterGroupsRequest) (*rds.DescribeParameterGroupsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1593,7 +1617,7 @@ func (c *RdsClient) DescribeWhiteList(request *rds.DescribeWhiteListRequest) (*r
     return jdResp, err
 }
 
-/* 查看参数组的参数<br>- 仅支持MySQL */
+/* 查看参数组的参数<br>- 仅支持MySQL，Percona，MariaDB，PostgreSQL */
 func (c *RdsClient) DescribeParameterGroupParameters(request *rds.DescribeParameterGroupParametersRequest) (*rds.DescribeParameterGroupParametersResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1653,7 +1677,7 @@ func (c *RdsClient) DisableInternetAccess(request *rds.DisableInternetAccessRequ
     return jdResp, err
 }
 
-/* 获取当前账号下所有RDS实例及MySQL只读实例的概要信息，例如实例类型，版本，计费信息等 */
+/* 获取当前账号下所有RDS实例及MySQL/PostgreSQL只读实例的概要信息，例如实例类型，版本，计费信息等 */
 func (c *RdsClient) DescribeInstances(request *rds.DescribeInstancesRequest) (*rds.DescribeInstancesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1673,7 +1697,7 @@ func (c *RdsClient) DescribeInstances(request *rds.DescribeInstancesRequest) (*r
     return jdResp, err
 }
 
-/* 创建MySQL的只读实例<br>- 仅支持MySQL */
+/* 创建MySQL的只读实例<br> - 仅支持MySQL<br> - 创建的只读实例跟主实例在同一个VPC同一个子网中<br> * 只读实例只支持按配置计费 */
 func (c *RdsClient) CreateROInstance(request *rds.CreateROInstanceRequest) (*rds.CreateROInstanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1733,7 +1757,7 @@ func (c *RdsClient) DeleteAccount(request *rds.DeleteAccountRequest) (*rds.Delet
     return jdResp, err
 }
 
-/* 修改参数组的参数<br>- 仅支持MySQL */
+/* 修改参数组的参数<br>- 仅支持MySQL，Percona，MariaDB，PostgreSQL */
 func (c *RdsClient) ModifyParameterGroupParameters(request *rds.ModifyParameterGroupParametersRequest) (*rds.ModifyParameterGroupParametersResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")

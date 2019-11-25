@@ -18,6 +18,7 @@ package models
 
 import vpc "github.com/jdcloud-api/jdcloud-sdk-go/services/vpc/models"
 import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
+import disk "github.com/jdcloud-api/jdcloud-sdk-go/services/disk/models"
 
 type InstanceSpec struct {
 
@@ -87,6 +88,10 @@ launch-script：windows系统支持bat和powershell，编码前须分别以 <cmd
 
     /* 不使用模板中的弹性公网IP。
 仅当不使用Ag，并且使用了模板，并且elasticIp参数为空时，此参数(值为true)生效。
-若使用模板创建虚机时，又指定了elasticIp参数时，此参数无效，以新指定的为准。 (Optional) */
+若使用模板创建虚机时，又指定了elasticIp参数时，此参数无效，以新指定的为准。
+ (Optional) */
     NoElasticIp *bool `json:"noElasticIp"`
+
+    /* 用户普通标签集合 (Optional) */
+    UserTags []disk.Tag `json:"userTags"`
 }

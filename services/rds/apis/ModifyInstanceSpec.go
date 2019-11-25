@@ -35,6 +35,12 @@ type ModifyInstanceSpecRequest struct {
 
     /* 扩容后实例磁盘大小  */
     NewInstanceStorageGB int `json:"newInstanceStorageGB"`
+
+    /* 存储类型，如果不指定，默认会采用实例原存储类型. (Optional) */
+    NewInstanceStorageType *string `json:"newInstanceStorageType"`
+
+    /* 实例数据加密(存储类型为云硬盘才支持数据加密). false：不加密; true：加密. 如果实例从本地盘变为云硬盘，缺省为false. 如果实例本来就是使用云硬盘的，缺省和源实例保持一致 (Optional) */
+    StorageEncrypted *bool `json:"storageEncrypted"`
 }
 
 /*
@@ -71,12 +77,16 @@ func NewModifyInstanceSpecRequest(
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
  * param newInstanceClass: 扩容后实例规格 (Required)
  * param newInstanceStorageGB: 扩容后实例磁盘大小 (Required)
+ * param newInstanceStorageType: 存储类型，如果不指定，默认会采用实例原存储类型. (Optional)
+ * param storageEncrypted: 实例数据加密(存储类型为云硬盘才支持数据加密). false：不加密; true：加密. 如果实例从本地盘变为云硬盘，缺省为false. 如果实例本来就是使用云硬盘的，缺省和源实例保持一致 (Optional)
  */
 func NewModifyInstanceSpecRequestWithAllParams(
     regionId string,
     instanceId string,
     newInstanceClass string,
     newInstanceStorageGB int,
+    newInstanceStorageType *string,
+    storageEncrypted *bool,
 ) *ModifyInstanceSpecRequest {
 
     return &ModifyInstanceSpecRequest{
@@ -90,6 +100,8 @@ func NewModifyInstanceSpecRequestWithAllParams(
         InstanceId: instanceId,
         NewInstanceClass: newInstanceClass,
         NewInstanceStorageGB: newInstanceStorageGB,
+        NewInstanceStorageType: newInstanceStorageType,
+        StorageEncrypted: storageEncrypted,
     }
 }
 
@@ -124,6 +136,16 @@ func (r *ModifyInstanceSpecRequest) SetNewInstanceClass(newInstanceClass string)
 /* param newInstanceStorageGB: 扩容后实例磁盘大小(Required) */
 func (r *ModifyInstanceSpecRequest) SetNewInstanceStorageGB(newInstanceStorageGB int) {
     r.NewInstanceStorageGB = newInstanceStorageGB
+}
+
+/* param newInstanceStorageType: 存储类型，如果不指定，默认会采用实例原存储类型.(Optional) */
+func (r *ModifyInstanceSpecRequest) SetNewInstanceStorageType(newInstanceStorageType string) {
+    r.NewInstanceStorageType = &newInstanceStorageType
+}
+
+/* param storageEncrypted: 实例数据加密(存储类型为云硬盘才支持数据加密). false：不加密; true：加密. 如果实例从本地盘变为云硬盘，缺省为false. 如果实例本来就是使用云硬盘的，缺省和源实例保持一致(Optional) */
+func (r *ModifyInstanceSpecRequest) SetStorageEncrypted(storageEncrypted bool) {
+    r.StorageEncrypted = &storageEncrypted
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

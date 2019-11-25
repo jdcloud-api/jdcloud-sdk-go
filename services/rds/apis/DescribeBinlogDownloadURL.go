@@ -32,6 +32,9 @@ type DescribeBinlogDownloadURLRequest struct {
 
     /* binlog的备份ID，可以通过describeBinlogs获得  */
     BinlogBackupId string `json:"binlogBackupId"`
+
+    /* 设置链接地址的过期时间，单位是秒，默认值是 300 秒，最长不能超过取值范围为 1 ~ 86400 秒 (Optional) */
+    Seconds *int `json:"seconds"`
 }
 
 /*
@@ -64,11 +67,13 @@ func NewDescribeBinlogDownloadURLRequest(
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
  * param binlogBackupId: binlog的备份ID，可以通过describeBinlogs获得 (Required)
+ * param seconds: 设置链接地址的过期时间，单位是秒，默认值是 300 秒，最长不能超过取值范围为 1 ~ 86400 秒 (Optional)
  */
 func NewDescribeBinlogDownloadURLRequestWithAllParams(
     regionId string,
     instanceId string,
     binlogBackupId string,
+    seconds *int,
 ) *DescribeBinlogDownloadURLRequest {
 
     return &DescribeBinlogDownloadURLRequest{
@@ -81,6 +86,7 @@ func NewDescribeBinlogDownloadURLRequestWithAllParams(
         RegionId: regionId,
         InstanceId: instanceId,
         BinlogBackupId: binlogBackupId,
+        Seconds: seconds,
     }
 }
 
@@ -110,6 +116,11 @@ func (r *DescribeBinlogDownloadURLRequest) SetInstanceId(instanceId string) {
 /* param binlogBackupId: binlog的备份ID，可以通过describeBinlogs获得(Required) */
 func (r *DescribeBinlogDownloadURLRequest) SetBinlogBackupId(binlogBackupId string) {
     r.BinlogBackupId = binlogBackupId
+}
+
+/* param seconds: 设置链接地址的过期时间，单位是秒，默认值是 300 秒，最长不能超过取值范围为 1 ~ 86400 秒(Optional) */
+func (r *DescribeBinlogDownloadURLRequest) SetSeconds(seconds int) {
+    r.Seconds = &seconds
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

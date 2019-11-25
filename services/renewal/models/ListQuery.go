@@ -34,7 +34,7 @@ type ListQuery struct {
     /* 地域 (Optional) */
     Region string `json:"region"`
 
-    /* 资源计费类型(CONFIG-按配置,FLOW-按用量,MONTHLY-包年包月)，不传显示全部资源 (Optional) */
+    /* 资源计费类型(CONFIG-按配置,FLOW-按用量,MONTHLY-包年包月) (Optional) */
     BillingType string `json:"billingType"`
 
     /* 资源到期时间 (Optional) */
@@ -43,13 +43,13 @@ type ListQuery struct {
     /* 倒计时 (Optional) */
     LastTime int `json:"lastTime"`
 
-    /* 自动续费状态(UNOPENED-未开通,OPENED-已开通) (Optional) */
+    /* 开通自动续费状态(UNOPENED-未开通,OPENED-已开通) (Optional) */
     AutoRenewStatus string `json:"autoRenewStatus"`
 
     /* 自动续费周期，单位为月 (Optional) */
     AutoRenewPeriod string `json:"autoRenewPeriod"`
 
-    /* 是否绑定关联资源一并续费(BIND-是,UNBIND-否) (Optional) */
+    /* 是否绑定关联资源一并开通自动续费(AUTO_RENEW:关联包年包月资源一并自动续费 UN_AUTO_RENEW：关联包年包月资源不自动续费) (Optional) */
     AssociateResource string `json:"associateResource"`
 
     /* 扩展字段，包括数据库类型、资源特殊说明等 (Optional) */

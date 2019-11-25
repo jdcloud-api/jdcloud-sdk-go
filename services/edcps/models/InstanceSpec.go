@@ -85,4 +85,7 @@ type InstanceSpec struct {
 
     /* 计费配置  */
     Charge *charge.ChargeSpec `json:"charge"`
+
+    /* 别名ip配置 (Optional) */
+    AliasIps []AliasIpInfo `json:"aliasIps"`
 }

@@ -35,6 +35,9 @@ type CreateFileSystemRequest struct {
 
     /* 幂等性参数(只支持数字、大小写字母，且不能超过64字符)  */
     ClientToken string `json:"clientToken"`
+
+    /* 文件系统类型(通用型:gp1,容量型:std1),默认为通用型 (Optional) */
+    FileSystemType *string `json:"fileSystemType"`
 }
 
 /*
@@ -71,12 +74,14 @@ func NewCreateFileSystemRequest(
  * param name: 文件系统名称 (Required)
  * param description: 文件系统描述 (Required)
  * param clientToken: 幂等性参数(只支持数字、大小写字母，且不能超过64字符) (Required)
+ * param fileSystemType: 文件系统类型(通用型:gp1,容量型:std1),默认为通用型 (Optional)
  */
 func NewCreateFileSystemRequestWithAllParams(
     regionId string,
     name string,
     description string,
     clientToken string,
+    fileSystemType *string,
 ) *CreateFileSystemRequest {
 
     return &CreateFileSystemRequest{
@@ -90,6 +95,7 @@ func NewCreateFileSystemRequestWithAllParams(
         Name: name,
         Description: description,
         ClientToken: clientToken,
+        FileSystemType: fileSystemType,
     }
 }
 
@@ -124,6 +130,11 @@ func (r *CreateFileSystemRequest) SetDescription(description string) {
 /* param clientToken: 幂等性参数(只支持数字、大小写字母，且不能超过64字符)(Required) */
 func (r *CreateFileSystemRequest) SetClientToken(clientToken string) {
     r.ClientToken = clientToken
+}
+
+/* param fileSystemType: 文件系统类型(通用型:gp1,容量型:std1),默认为通用型(Optional) */
+func (r *CreateFileSystemRequest) SetFileSystemType(fileSystemType string) {
+    r.FileSystemType = &fileSystemType
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

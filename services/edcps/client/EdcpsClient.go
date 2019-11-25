@@ -40,7 +40,7 @@ func NewEdcpsClient(credential *core.Credential) *EdcpsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "edcps",
-            Revision:    "1.1.0",
+            Revision:    "1.1.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -89,6 +89,449 @@ func (c *EdcpsClient) DisassociateElasticIp(request *edcps.DisassociateElasticIp
     }
 
     jdResp := &edcps.DisassociateElasticIpResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询弹性公网IP列表<br/>
+支持分页查询，默认每页20条<br/>
+ */
+func (c *EdcpsClient) DescribeElasticIps(request *edcps.DescribeElasticIpsRequest) (*edcps.DescribeElasticIpsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &edcps.DescribeElasticIpsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询分布式云物理服务器支持的操作系统 */
+func (c *EdcpsClient) DescribeOS(request *edcps.DescribeOSRequest) (*edcps.DescribeOSResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &edcps.DescribeOSResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询分布式云物理服务器实例类型 */
+func (c *EdcpsClient) DescribeDeviceTypes(request *edcps.DescribeDeviceTypesRequest) (*edcps.DescribeDeviceTypesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &edcps.DescribeDeviceTypesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除别名IP */
+func (c *EdcpsClient) DeleteAliasIp(request *edcps.DeleteAliasIpRequest) (*edcps.DeleteAliasIpResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &edcps.DeleteAliasIpResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改弹性公网IP带宽
+ */
+func (c *EdcpsClient) ModifyElasticIpBandwidth(request *edcps.ModifyElasticIpBandwidthRequest) (*edcps.ModifyElasticIpBandwidthResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &edcps.ModifyElasticIpBandwidthResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询单个分布式云物理服务器已安装的RAID信息，包括系统盘RAID信息和数据盘RAID信息 */
+func (c *EdcpsClient) DescribeInstanceRaid(request *edcps.DescribeInstanceRaidRequest) (*edcps.DescribeInstanceRaidResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &edcps.DescribeInstanceRaidResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除私有网络
+ */
+func (c *EdcpsClient) DeleteVpc(request *edcps.DeleteVpcRequest) (*edcps.DeleteVpcResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &edcps.DeleteVpcResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询子网详情 */
+func (c *EdcpsClient) DescribeSubnet(request *edcps.DescribeSubnetRequest) (*edcps.DescribeSubnetResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &edcps.DescribeSubnetResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询别名IP列表 */
+func (c *EdcpsClient) DescribeAliasIps(request *edcps.DescribeAliasIpsRequest) (*edcps.DescribeAliasIpsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &edcps.DescribeAliasIpsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询链路类型列表 */
+func (c *EdcpsClient) DescribeLineTypes(request *edcps.DescribeLineTypesRequest) (*edcps.DescribeLineTypesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &edcps.DescribeLineTypesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询密钥对列表 */
+func (c *EdcpsClient) DescribeKeypairs(request *edcps.DescribeKeypairsRequest) (*edcps.DescribeKeypairsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &edcps.DescribeKeypairsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询密钥对详情 */
+func (c *EdcpsClient) DescribeKeypair(request *edcps.DescribeKeypairRequest) (*edcps.DescribeKeypairResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &edcps.DescribeKeypairResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 绑定弹性公网IP
+ */
+func (c *EdcpsClient) AssociateElasticIp(request *edcps.AssociateElasticIpRequest) (*edcps.AssociateElasticIpResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &edcps.AssociateElasticIpResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询次要CIDR列表 */
+func (c *EdcpsClient) DescribeSecondaryCidrs(request *edcps.DescribeSecondaryCidrsRequest) (*edcps.DescribeSecondaryCidrsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &edcps.DescribeSecondaryCidrsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建一台或多台指定配置的分布式云物理服务器<br/>
+- 地域与可用区<br/>
+  - 调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域与可用区<br/>
+- 实例类型<br/>
+  - 调用接口（describeDeviceTypes）获取物理实例类型列表<br/>
+  - 不能使用已下线、或已售馨的实例类型<br/>
+- 操作系统<br/>
+  - 可调用接口（describeOS）获取分布式云物理服务器支持的操作系统列表<br/>
+- 存储<br/>
+  - 数据盘多种RAID可选，可调用接口（describeDeviceRaids）获取服务器支持的RAID列表<br/>
+- 网络<br/>
+  - 网络类型目前支持vpc<br/>
+  - 线路目前支持联通un、电信ct、移动cm<br/>
+  - 支持不启用外网，如果启用外网，带宽范围[1,200] 单位Mbps<br/>
+- 其他<br/>
+  - 购买时长，可按年或月购买：月取值范围[1,9], 年取值范围[1,3]<br/>
+  - 密码设置参考公共参数规范<br/>
+ */
+func (c *EdcpsClient) CreateInstances(request *edcps.CreateInstancesRequest) (*edcps.CreateInstancesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &edcps.CreateInstancesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询可用的私有IP列表 */
+func (c *EdcpsClient) DescribeAvailablePrivateIp(request *edcps.DescribeAvailablePrivateIpRequest) (*edcps.DescribeAvailablePrivateIpResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &edcps.DescribeAvailablePrivateIpResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 重置分布式云物理服务器密码
+ */
+func (c *EdcpsClient) ResetPassword(request *edcps.ResetPasswordRequest) (*edcps.ResetPasswordResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &edcps.ResetPasswordResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询弹性公网IP详情 */
+func (c *EdcpsClient) DescribeElasticIp(request *edcps.DescribeElasticIpRequest) (*edcps.DescribeElasticIpResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &edcps.DescribeElasticIpResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除密钥对 */
+func (c *EdcpsClient) DeleteKeypairs(request *edcps.DeleteKeypairsRequest) (*edcps.DeleteKeypairsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &edcps.DeleteKeypairsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 对单台分布式云物理服务器执行关机操作，只能停止running状态的服务器 [MFA enabled] */
+func (c *EdcpsClient) StopInstance(request *edcps.StopInstanceRequest) (*edcps.StopInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &edcps.StopInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询分布式分布式云物理服务器地域列表 */
+func (c *EdcpsClient) DescribeEdCPSRegions(request *edcps.DescribeEdCPSRegionsRequest) (*edcps.DescribeEdCPSRegionsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &edcps.DescribeEdCPSRegionsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -180,6 +623,28 @@ func (c *EdcpsClient) DescribeInstances(request *edcps.DescribeInstancesRequest)
     return jdResp, err
 }
 
+/* 删除单台云物理物理服务器，只能删除运行running、停止stopped、错误error状态的服务器<br/>
+不能删除没有计费信息的服务器<br/>
+ */
+func (c *EdcpsClient) DeleteInstance(request *edcps.DeleteInstanceRequest) (*edcps.DeleteInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &edcps.DeleteInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 修改子网 */
 func (c *EdcpsClient) ModifySubnet(request *edcps.ModifySubnetRequest) (*edcps.ModifySubnetResponse, error) {
     if request == nil {
@@ -191,48 +656,6 @@ func (c *EdcpsClient) ModifySubnet(request *edcps.ModifySubnetRequest) (*edcps.M
     }
 
     jdResp := &edcps.ModifySubnetResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询弹性公网IP列表<br/>
-支持分页查询，默认每页20条<br/>
- */
-func (c *EdcpsClient) DescribeElasticIps(request *edcps.DescribeElasticIpsRequest) (*edcps.DescribeElasticIpsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &edcps.DescribeElasticIpsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询分布式云物理服务器支持的操作系统 */
-func (c *EdcpsClient) DescribeOS(request *edcps.DescribeOSRequest) (*edcps.DescribeOSResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &edcps.DescribeOSResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -262,29 +685,9 @@ func (c *EdcpsClient) DescribeInstanceStatus(request *edcps.DescribeInstanceStat
     return jdResp, err
 }
 
-/* 查询分布式云物理服务器实例类型 */
-func (c *EdcpsClient) DescribeDeviceTypes(request *edcps.DescribeDeviceTypesRequest) (*edcps.DescribeDeviceTypesResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &edcps.DescribeDeviceTypesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 修改弹性公网IP带宽
+/* 删除弹性公网IP
  */
-func (c *EdcpsClient) ModifyElasticIpBandwidth(request *edcps.ModifyElasticIpBandwidthRequest) (*edcps.ModifyElasticIpBandwidthResponse, error) {
+func (c *EdcpsClient) DeleteelasticIp(request *edcps.DeleteelasticIpRequest) (*edcps.DeleteelasticIpResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -293,27 +696,7 @@ func (c *EdcpsClient) ModifyElasticIpBandwidth(request *edcps.ModifyElasticIpBan
         return nil, err
     }
 
-    jdResp := &edcps.ModifyElasticIpBandwidthResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询单个分布式云物理服务器已安装的RAID信息，包括系统盘RAID信息和数据盘RAID信息 */
-func (c *EdcpsClient) DescribeInstanceRaid(request *edcps.DescribeInstanceRaidRequest) (*edcps.DescribeInstanceRaidResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &edcps.DescribeInstanceRaidResponse{}
+    jdResp := &edcps.DeleteelasticIpResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -363,27 +746,6 @@ func (c *EdcpsClient) DescribeSubnets(request *edcps.DescribeSubnetsRequest) (*e
     return jdResp, err
 }
 
-/* 删除私有网络
- */
-func (c *EdcpsClient) DeleteVpc(request *edcps.DeleteVpcRequest) (*edcps.DeleteVpcResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &edcps.DeleteVpcResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 查询弹性公网IP库存 */
 func (c *EdcpsClient) DescribeElasticIpStock(request *edcps.DescribeElasticIpStockRequest) (*edcps.DescribeElasticIpStockResponse, error) {
     if request == nil {
@@ -424,46 +786,6 @@ func (c *EdcpsClient) ImportKeypairs(request *edcps.ImportKeypairsRequest) (*edc
     return jdResp, err
 }
 
-/* 查询子网详情 */
-func (c *EdcpsClient) DescribeSubnet(request *edcps.DescribeSubnetRequest) (*edcps.DescribeSubnetResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &edcps.DescribeSubnetResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询链路类型列表 */
-func (c *EdcpsClient) DescribeLineTypes(request *edcps.DescribeLineTypesRequest) (*edcps.DescribeLineTypesResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &edcps.DescribeLineTypesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 对单台分布式云物理服务器执行开机操作，只能启动stopped状态的服务器 */
 func (c *EdcpsClient) StartInstance(request *edcps.StartInstanceRequest) (*edcps.StartInstanceResponse, error) {
     if request == nil {
@@ -484,8 +806,8 @@ func (c *EdcpsClient) StartInstance(request *edcps.StartInstanceRequest) (*edcps
     return jdResp, err
 }
 
-/* 查询密钥对列表 */
-func (c *EdcpsClient) DescribeKeypairs(request *edcps.DescribeKeypairsRequest) (*edcps.DescribeKeypairsResponse, error) {
+/* 添加次要CIDR */
+func (c *EdcpsClient) CreateSecondaryCidr(request *edcps.CreateSecondaryCidrRequest) (*edcps.CreateSecondaryCidrResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -494,48 +816,7 @@ func (c *EdcpsClient) DescribeKeypairs(request *edcps.DescribeKeypairsRequest) (
         return nil, err
     }
 
-    jdResp := &edcps.DescribeKeypairsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询密钥对详情 */
-func (c *EdcpsClient) DescribeKeypair(request *edcps.DescribeKeypairRequest) (*edcps.DescribeKeypairResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &edcps.DescribeKeypairResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 绑定弹性公网IP
- */
-func (c *EdcpsClient) AssociateElasticIp(request *edcps.AssociateElasticIpRequest) (*edcps.AssociateElasticIpResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &edcps.AssociateElasticIpResponse{}
+    jdResp := &edcps.CreateSecondaryCidrResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -585,63 +866,6 @@ func (c *EdcpsClient) DescribeInstance(request *edcps.DescribeInstanceRequest) (
     return jdResp, err
 }
 
-/* 创建一台或多台指定配置的分布式云物理服务器<br/>
-- 地域与可用区<br/>
-  - 调用接口（queryEdCPSRegions）获取分布式云物理服务器支持的地域与可用区<br/>
-- 实例类型<br/>
-  - 调用接口（describeDeviceTypes）获取物理实例类型列表<br/>
-  - 不能使用已下线、或已售馨的实例类型<br/>
-- 操作系统<br/>
-  - 可调用接口（describeOS）获取分布式云物理服务器支持的操作系统列表<br/>
-- 存储<br/>
-  - 数据盘多种RAID可选，可调用接口（describeDeviceRaids）获取服务器支持的RAID列表<br/>
-- 网络<br/>
-  - 网络类型目前支持vpc<br/>
-  - 线路目前支持联通un、电信ct、移动cm<br/>
-  - 支持不启用外网，如果启用外网，带宽范围[1,200] 单位Mbps<br/>
-- 其他<br/>
-  - 购买时长，可按年或月购买：月取值范围[1,9], 年取值范围[1,3]<br/>
-  - 密码设置参考公共参数规范<br/>
- */
-func (c *EdcpsClient) CreateInstances(request *edcps.CreateInstancesRequest) (*edcps.CreateInstancesResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &edcps.CreateInstancesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询可用的私有IP列表 */
-func (c *EdcpsClient) DescribeAvailablePrivateIp(request *edcps.DescribeAvailablePrivateIpRequest) (*edcps.DescribeAvailablePrivateIpResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &edcps.DescribeAvailablePrivateIpResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 查询分布式云物理服务器名称 */
 func (c *EdcpsClient) DescribeInstanceName(request *edcps.DescribeInstanceNameRequest) (*edcps.DescribeInstanceNameResponse, error) {
     if request == nil {
@@ -653,27 +877,6 @@ func (c *EdcpsClient) DescribeInstanceName(request *edcps.DescribeInstanceNameRe
     }
 
     jdResp := &edcps.DescribeInstanceNameResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 重置分布式云物理服务器密码
- */
-func (c *EdcpsClient) ResetPassword(request *edcps.ResetPasswordRequest) (*edcps.ResetPasswordResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &edcps.ResetPasswordResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -703,8 +906,8 @@ func (c *EdcpsClient) CreateSubnet(request *edcps.CreateSubnetRequest) (*edcps.C
     return jdResp, err
 }
 
-/* 查询弹性公网IP详情 */
-func (c *EdcpsClient) DescribeElasticIp(request *edcps.DescribeElasticIpRequest) (*edcps.DescribeElasticIpResponse, error) {
+/* 添加别名IP */
+func (c *EdcpsClient) CreateAliasIp(request *edcps.CreateAliasIpRequest) (*edcps.CreateAliasIpResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -713,27 +916,7 @@ func (c *EdcpsClient) DescribeElasticIp(request *edcps.DescribeElasticIpRequest)
         return nil, err
     }
 
-    jdResp := &edcps.DescribeElasticIpResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 删除密钥对 */
-func (c *EdcpsClient) DeleteKeypairs(request *edcps.DeleteKeypairsRequest) (*edcps.DeleteKeypairsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &edcps.DeleteKeypairsResponse{}
+    jdResp := &edcps.CreateAliasIpResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -846,26 +1029,6 @@ func (c *EdcpsClient) DeleteSubnet(request *edcps.DeleteSubnetRequest) (*edcps.D
     return jdResp, err
 }
 
-/* 对单台分布式云物理服务器执行关机操作，只能停止running状态的服务器 [MFA enabled] */
-func (c *EdcpsClient) StopInstance(request *edcps.StopInstanceRequest) (*edcps.StopInstanceResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &edcps.StopInstanceResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 申请弹性公网IP
  */
 func (c *EdcpsClient) ApplyElasticIps(request *edcps.ApplyElasticIpsRequest) (*edcps.ApplyElasticIpsResponse, error) {
@@ -887,8 +1050,8 @@ func (c *EdcpsClient) ApplyElasticIps(request *edcps.ApplyElasticIpsRequest) (*e
     return jdResp, err
 }
 
-/* 查询分布式分布式云物理服务器地域列表 */
-func (c *EdcpsClient) DescribeEdCPSRegions(request *edcps.DescribeEdCPSRegionsRequest) (*edcps.DescribeEdCPSRegionsResponse, error) {
+/* 删除次要CIDR */
+func (c *EdcpsClient) DeleteSecondaryCidr(request *edcps.DeleteSecondaryCidrRequest) (*edcps.DeleteSecondaryCidrResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -897,7 +1060,7 @@ func (c *EdcpsClient) DescribeEdCPSRegions(request *edcps.DescribeEdCPSRegionsRe
         return nil, err
     }
 
-    jdResp := &edcps.DescribeEdCPSRegionsResponse{}
+    jdResp := &edcps.DeleteSecondaryCidrResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

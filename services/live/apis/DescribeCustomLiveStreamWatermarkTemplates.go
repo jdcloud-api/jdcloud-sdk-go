@@ -19,7 +19,6 @@ package apis
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
     live "github.com/jdcloud-api/jdcloud-sdk-go/services/live/models"
-    common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
 
 type DescribeCustomLiveStreamWatermarkTemplatesRequest struct {
@@ -40,7 +39,7 @@ type DescribeCustomLiveStreamWatermarkTemplatesRequest struct {
   - name:   template 录制模板自定义名称
   - value:  如果参数为空，则查询全部
  (Optional) */
-    Filters []common.Filter `json:"filters"`
+    Filters []live.Filter `json:"filters"`
 }
 
 /*
@@ -75,7 +74,7 @@ func NewDescribeCustomLiveStreamWatermarkTemplatesRequest(
 func NewDescribeCustomLiveStreamWatermarkTemplatesRequestWithAllParams(
     pageNum *int,
     pageSize *int,
-    filters []common.Filter,
+    filters []live.Filter,
 ) *DescribeCustomLiveStreamWatermarkTemplatesRequest {
 
     return &DescribeCustomLiveStreamWatermarkTemplatesRequest{
@@ -122,7 +121,7 @@ func (r *DescribeCustomLiveStreamWatermarkTemplatesRequest) SetPageSize(pageSize
   - name:   template 录制模板自定义名称
   - value:  如果参数为空，则查询全部
 (Optional) */
-func (r *DescribeCustomLiveStreamWatermarkTemplatesRequest) SetFilters(filters []common.Filter) {
+func (r *DescribeCustomLiveStreamWatermarkTemplatesRequest) SetFilters(filters []live.Filter) {
     r.Filters = filters
 }
 

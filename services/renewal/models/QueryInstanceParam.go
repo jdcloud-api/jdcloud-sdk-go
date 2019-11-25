@@ -31,13 +31,13 @@ type QueryInstanceParam struct {
     /* 资源ID (Optional) */
     InstanceId *string `json:"instanceId"`
 
-    /* 资源续费状态(AUTO-开通自动续费资源,MANUAL-未开通自动续费资源,ALL-全部资源) (Optional) */
+    /* 资源续费状态(AUTO-开通自动续费资源,MANUAL-未开通自动续费资源,ALL-全部资源)，默认为全部 (Optional) */
     RenewStatus *string `json:"renewStatus"`
 
-    /* 资源计费类型(CONFIG-按配置,FLOW-按用量,MONTHLY-包年包月)，不传显示全部资源 (Optional) */
+    /* 资源计费类型(CONFIG-按配置,FLOW-按用量,MONTHLY-包年包月)，不传显示全部计费类型的资源 (Optional) */
     BillingType *string `json:"billingType"`
 
-    /* 资源到期类型(EXPIRED-已到期,UNEXPIRED-未到期,ONE-1天内到期,THREE-3天内到期,SEVEN-7天内到期,ALL_TIME-全部) (Optional) */
+    /* 资源到期类型(EXPIRED-已到期,UNEXPIRED-未到期,ONE-1天内到期,THREE-3天内到期,SEVEN-7天内到期,ALL_TIME-全部)，默认为全部 (Optional) */
     ExpireType *string `json:"expireType"`
 
     /* 主机绑定的内网IP地址 (Optional) */

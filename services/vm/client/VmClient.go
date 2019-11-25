@@ -40,7 +40,7 @@ func NewVmClient(credential *core.Credential) *VmClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vm",
-            Revision:    "1.2.4",
+            Revision:    "1.2.5",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }

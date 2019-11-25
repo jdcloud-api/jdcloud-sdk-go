@@ -32,18 +32,20 @@ type DescribeInstancesRequest struct {
     /* 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页; (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* 每页显示的数据条数，默认为100，取值范围：[10,100]，用于查询列表的接口 (Optional) */
+    /* 每页显示的数据条数，默认为10，取值范围：[10,100]，且为10的整数倍 (Optional) */
     PageSize *int `json:"pageSize"`
 
     /* 过滤参数，多个过滤参数之间的关系为“与”(and)
 支持以下属性的过滤：
 instanceId, 支持operator选项：eq
-instanceName, 支持operator选项：eq
+instanceName, 支持operator选项：eq, like
 engine, 支持operator选项：eq
 engineVersion, 支持operator选项：eq
 instanceStatus, 支持operator选项：eq
-chargeMode, 支持operator选项：eq
 vpcId, 支持operator选项：eq
+instanceType, 支持operator选项：eq
+internalDomainName, 支持operator选项：eq
+publicDomainName, 支持operator选项：eq
  (Optional) */
     Filters []common.Filter `json:"filters"`
 
@@ -74,16 +76,18 @@ func NewDescribeInstancesRequest(
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页; (Optional)
- * param pageSize: 每页显示的数据条数，默认为100，取值范围：[10,100]，用于查询列表的接口 (Optional)
+ * param pageSize: 每页显示的数据条数，默认为10，取值范围：[10,100]，且为10的整数倍 (Optional)
  * param filters: 过滤参数，多个过滤参数之间的关系为“与”(and)
 支持以下属性的过滤：
 instanceId, 支持operator选项：eq
-instanceName, 支持operator选项：eq
+instanceName, 支持operator选项：eq, like
 engine, 支持operator选项：eq
 engineVersion, 支持operator选项：eq
 instanceStatus, 支持operator选项：eq
-chargeMode, 支持operator选项：eq
 vpcId, 支持operator选项：eq
+instanceType, 支持operator选项：eq
+internalDomainName, 支持operator选项：eq
+publicDomainName, 支持operator选项：eq
  (Optional)
  * param tagFilters: 资源标签 (Optional)
  */
@@ -133,7 +137,7 @@ func (r *DescribeInstancesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
-/* param pageSize: 每页显示的数据条数，默认为100，取值范围：[10,100]，用于查询列表的接口(Optional) */
+/* param pageSize: 每页显示的数据条数，默认为10，取值范围：[10,100]，且为10的整数倍(Optional) */
 func (r *DescribeInstancesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
@@ -141,12 +145,14 @@ func (r *DescribeInstancesRequest) SetPageSize(pageSize int) {
 /* param filters: 过滤参数，多个过滤参数之间的关系为“与”(and)
 支持以下属性的过滤：
 instanceId, 支持operator选项：eq
-instanceName, 支持operator选项：eq
+instanceName, 支持operator选项：eq, like
 engine, 支持operator选项：eq
 engineVersion, 支持operator选项：eq
 instanceStatus, 支持operator选项：eq
-chargeMode, 支持operator选项：eq
 vpcId, 支持operator选项：eq
+instanceType, 支持operator选项：eq
+internalDomainName, 支持operator选项：eq
+publicDomainName, 支持operator选项：eq
 (Optional) */
 func (r *DescribeInstancesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters

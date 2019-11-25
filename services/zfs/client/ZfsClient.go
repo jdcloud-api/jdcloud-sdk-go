@@ -40,7 +40,7 @@ func NewZfsClient(credential *core.Credential) *ZfsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "zfs",
-            Revision:    "1.0.1",
+            Revision:    "1.0.5",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,6 +51,10 @@ func (c *ZfsClient) SetConfig(config *core.Config) {
 
 func (c *ZfsClient) SetLogger(logger core.Logger) {
     c.Logger = logger
+}
+
+func (c *ZfsClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
 }
 
 /* - 为一个文件系统创建一个挂载目标。通过这个挂载目标,你可以挂载将一个文件系统挂载到主机实例上。
@@ -160,7 +164,7 @@ func (c *ZfsClient) DescribeFileSystems(request *zfs.DescribeFileSystemsRequest)
 }
 
 /* -   删除一个文件系统，一旦删除，该文件系统将不存在，也无法访问已删除的文件系统里的任何内容。
- */
+ [MFA enabled] */
 func (c *ZfsClient) DeleteFileSystem(request *zfs.DeleteFileSystemRequest) (*zfs.DeleteFileSystemResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")

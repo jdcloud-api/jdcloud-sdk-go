@@ -37,6 +37,6 @@ type SetRenewalParam struct {
     /* 自动续费状态(OPEN-开通自动续费,CLOSE-关闭自动续费,MODIFY-修改自动续费)  */
     AutoRenewStatus string `json:"autoRenewStatus"`
 
-    /* 是否绑定关联资源一并自动续费(AUTO_RENEW-是,UN_AUTO_RENEW-否) (Optional) */
+    /* 是否绑定关联资源一并开通自动续费(UNBIND：不绑定，BIND：绑定) (Optional) */
     AllAutoPay *string `json:"allAutoPay"`
 }
