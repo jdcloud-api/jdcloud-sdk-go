@@ -34,33 +34,36 @@ type CreateNodeGroupRequest struct {
     /* 描述 (Optional) */
     Description *string `json:"description"`
 
-    /* node group所属的cluster  */
+    /* 工作节点所属的集群  */
     ClusterId string `json:"clusterId"`
 
-    /* 节点组配置  */
+    /* 工作节点配置信息  */
     NodeConfig *kubernetes.NodeConfigSpec `json:"nodeConfig"`
 
-    /* nodeGroup初始化大小  */
+    /* 工作节点组的 az，必须为集群az的子集，默认为集群az (Optional) */
+    Azs []string `json:"azs"`
+
+    /* 工作节点组初始化大小  */
     InitialNodeCount int `json:"initialNodeCount"`
 
-    /* k8s运行的vpc  */
+    /* 工作节点组初始化大小运行的VPC  */
     VpcId string `json:"vpcId"`
 
-    /* k8s的node的cidr  */
+    /* 工作节点组的cidr  */
     NodeCidr string `json:"nodeCidr"`
 
-    /* 是否开启 node group 的自动修复，默认关闭 (Optional) */
+    /* 是否开启工作节点组的自动修复，默认关闭 (Optional) */
     AutoRepair *bool `json:"autoRepair"`
 }
 
 /*
  * param regionId: 地域 ID (Required)
  * param name: 名称（同一用户的 cluster 内部唯一） (Required)
- * param clusterId: node group所属的cluster (Required)
- * param nodeConfig: 节点组配置 (Required)
- * param initialNodeCount: nodeGroup初始化大小 (Required)
- * param vpcId: k8s运行的vpc (Required)
- * param nodeCidr: k8s的node的cidr (Required)
+ * param clusterId: 工作节点所属的集群 (Required)
+ * param nodeConfig: 工作节点配置信息 (Required)
+ * param initialNodeCount: 工作节点组初始化大小 (Required)
+ * param vpcId: 工作节点组初始化大小运行的VPC (Required)
+ * param nodeCidr: 工作节点组的cidr (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -95,12 +98,13 @@ func NewCreateNodeGroupRequest(
  * param regionId: 地域 ID (Required)
  * param name: 名称（同一用户的 cluster 内部唯一） (Required)
  * param description: 描述 (Optional)
- * param clusterId: node group所属的cluster (Required)
- * param nodeConfig: 节点组配置 (Required)
- * param initialNodeCount: nodeGroup初始化大小 (Required)
- * param vpcId: k8s运行的vpc (Required)
- * param nodeCidr: k8s的node的cidr (Required)
- * param autoRepair: 是否开启 node group 的自动修复，默认关闭 (Optional)
+ * param clusterId: 工作节点所属的集群 (Required)
+ * param nodeConfig: 工作节点配置信息 (Required)
+ * param azs: 工作节点组的 az，必须为集群az的子集，默认为集群az (Optional)
+ * param initialNodeCount: 工作节点组初始化大小 (Required)
+ * param vpcId: 工作节点组初始化大小运行的VPC (Required)
+ * param nodeCidr: 工作节点组的cidr (Required)
+ * param autoRepair: 是否开启工作节点组的自动修复，默认关闭 (Optional)
  */
 func NewCreateNodeGroupRequestWithAllParams(
     regionId string,
@@ -108,6 +112,7 @@ func NewCreateNodeGroupRequestWithAllParams(
     description *string,
     clusterId string,
     nodeConfig *kubernetes.NodeConfigSpec,
+    azs []string,
     initialNodeCount int,
     vpcId string,
     nodeCidr string,
@@ -126,6 +131,7 @@ func NewCreateNodeGroupRequestWithAllParams(
         Description: description,
         ClusterId: clusterId,
         NodeConfig: nodeConfig,
+        Azs: azs,
         InitialNodeCount: initialNodeCount,
         VpcId: vpcId,
         NodeCidr: nodeCidr,
@@ -161,32 +167,37 @@ func (r *CreateNodeGroupRequest) SetDescription(description string) {
     r.Description = &description
 }
 
-/* param clusterId: node group所属的cluster(Required) */
+/* param clusterId: 工作节点所属的集群(Required) */
 func (r *CreateNodeGroupRequest) SetClusterId(clusterId string) {
     r.ClusterId = clusterId
 }
 
-/* param nodeConfig: 节点组配置(Required) */
+/* param nodeConfig: 工作节点配置信息(Required) */
 func (r *CreateNodeGroupRequest) SetNodeConfig(nodeConfig *kubernetes.NodeConfigSpec) {
     r.NodeConfig = nodeConfig
 }
 
-/* param initialNodeCount: nodeGroup初始化大小(Required) */
+/* param azs: 工作节点组的 az，必须为集群az的子集，默认为集群az(Optional) */
+func (r *CreateNodeGroupRequest) SetAzs(azs []string) {
+    r.Azs = azs
+}
+
+/* param initialNodeCount: 工作节点组初始化大小(Required) */
 func (r *CreateNodeGroupRequest) SetInitialNodeCount(initialNodeCount int) {
     r.InitialNodeCount = initialNodeCount
 }
 
-/* param vpcId: k8s运行的vpc(Required) */
+/* param vpcId: 工作节点组初始化大小运行的VPC(Required) */
 func (r *CreateNodeGroupRequest) SetVpcId(vpcId string) {
     r.VpcId = vpcId
 }
 
-/* param nodeCidr: k8s的node的cidr(Required) */
+/* param nodeCidr: 工作节点组的cidr(Required) */
 func (r *CreateNodeGroupRequest) SetNodeCidr(nodeCidr string) {
     r.NodeCidr = nodeCidr
 }
 
-/* param autoRepair: 是否开启 node group 的自动修复，默认关闭(Optional) */
+/* param autoRepair: 是否开启工作节点组的自动修复，默认关闭(Optional) */
 func (r *CreateNodeGroupRequest) SetAutoRepair(autoRepair bool) {
     r.AutoRepair = &autoRepair
 }

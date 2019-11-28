@@ -26,10 +26,10 @@ type TopNRespItem struct {
     TopValue interface{} `json:"topValue"`
 
     /*  (Optional) */
-    TopFlowValue float64 `json:"topFlowValue"`
+    TopDataValue float64 `json:"topDataValue"`
 
     /*  (Optional) */
-    TopFlowPercent string `json:"topFlowPercent"`
+    TopDataPercent string `json:"topDataPercent"`
 
     /*  (Optional) */
     Details []TopNRespItemDetail `json:"details"`

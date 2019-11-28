@@ -34,9 +34,6 @@ type DeviceVO struct {
     /* 设备状态，0-未激活，1-激活离线，2-激活在线 (Optional) */
     Status int `json:"status"`
 
-    /* 产品Key (Optional) */
-    ProductKey string `json:"productKey"`
-
     /* 设备标识符 (Optional) */
     Identifier string `json:"identifier"`
 
@@ -58,12 +55,21 @@ type DeviceVO struct {
     /* 修改时间 (Optional) */
     UpdatedTime int64 `json:"updatedTime"`
 
+    /* 产品Key (Optional) */
+    ProductKey string `json:"productKey"`
+
     /* 产品名称 (Optional) */
     ProductName string `json:"productName"`
+
+    /* 产品秘钥 (Optional) */
+    ProductSecret string `json:"productSecret"`
 
     /* 设备型号 (Optional) */
     Model string `json:"model"`
 
     /* 设备厂商 (Optional) */
     Manufacturer string `json:"manufacturer"`
+
+    /* 是否开启动态注册,0:关闭,1:开启，开启动态注册的设备认证类型为一型一密，否则为一机一密 (Optional) */
+    DynamicRegister int `json:"dynamicRegister"`
 }

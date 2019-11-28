@@ -40,7 +40,7 @@ func NewIotlinkClient(credential *core.Credential) *IotlinkClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "iotlink",
-            Revision:    "1.0.1",
+            Revision:    "1.0.3",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }

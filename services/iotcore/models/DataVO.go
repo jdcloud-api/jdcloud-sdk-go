@@ -52,6 +52,15 @@ type DataVO struct {
     /* 创建时间 (Optional) */
     CreateTime int `json:"createTime"`
 
+    /* 实例到期时间 (Optional) */
+    EndTime int `json:"endTime"`
+
+    /* 最大在线设备数 (Optional) */
+    MaxDevices int `json:"maxDevices"`
+
+    /* 最大消息条数 (Optional) */
+    MaxMessage int `json:"maxMessage"`
+
     /* 实例编号 (Optional) */
     InstanceId string `json:"instanceId"`
 

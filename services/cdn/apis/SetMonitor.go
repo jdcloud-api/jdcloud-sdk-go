@@ -33,7 +33,7 @@ type SetMonitorRequest struct {
     /* 探测路径 (Optional) */
     MonitorPath *string `json:"monitorPath"`
 
-    /*  (Optional) */
+    /* http请求头 (Optional) */
     HttpRequestHeader *interface{} `json:"httpRequestHeader"`
 }
 
@@ -61,7 +61,7 @@ func NewSetMonitorRequest(
  * param domain: 用户域名 (Required)
  * param cycle: 探测周期，取值1和5，单位为分钟 (Optional)
  * param monitorPath: 探测路径 (Optional)
- * param httpRequestHeader:  (Optional)
+ * param httpRequestHeader: http请求头 (Optional)
  */
 func NewSetMonitorRequestWithAllParams(
     domain string,
@@ -112,7 +112,7 @@ func (r *SetMonitorRequest) SetMonitorPath(monitorPath string) {
     r.MonitorPath = &monitorPath
 }
 
-/* param httpRequestHeader: (Optional) */
+/* param httpRequestHeader: http请求头(Optional) */
 func (r *SetMonitorRequest) SetHttpRequestHeader(httpRequestHeader interface{}) {
     r.HttpRequestHeader = &httpRequestHeader
 }

@@ -19,7 +19,7 @@ package models
 
 type EnvSpec struct {
 
-    /* 环境变量名称（ASCII）。范围：[1-64]。必须为字母、数字、下划线(_)，正则为`[a-zA-Z0-9]*$`。  */
+    /* 环境变量名称（ASCII）。范围：[1-64]。必须为字母、数字、下划线(_)，正则为`^[a-zA-Z0-9]*$`。  */
     Name string `json:"name"`
 
     /* 环境变量取值。范围：[0-1024] (Optional) */

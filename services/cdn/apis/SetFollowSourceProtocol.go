@@ -108,4 +108,5 @@ type SetFollowSourceProtocolResponse struct {
 }
 
 type SetFollowSourceProtocolResult struct {
+    TaskId string `json:"taskId"`
 }

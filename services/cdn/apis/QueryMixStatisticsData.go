@@ -45,6 +45,9 @@ type QueryMixStatisticsDataRequest struct {
 
     /* 时间粒度，可选值:[oneMin,fiveMin,followTime],followTime只会返回一个汇总后的数据 (Optional) */
     Period *string `json:"period"`
+
+    /* 查询协议，可选值:[http,https,all],传空默认返回全部协议汇总后的数据 (Optional) */
+    Scheme *string `json:"scheme"`
 }
 
 /*
@@ -72,6 +75,7 @@ func NewQueryMixStatisticsDataRequest(
  * param area:  (Optional)
  * param isp:  (Optional)
  * param period: 时间粒度，可选值:[oneMin,fiveMin,followTime],followTime只会返回一个汇总后的数据 (Optional)
+ * param scheme: 查询协议，可选值:[http,https,all],传空默认返回全部协议汇总后的数据 (Optional)
  */
 func NewQueryMixStatisticsDataRequestWithAllParams(
     startTime *string,
@@ -81,6 +85,7 @@ func NewQueryMixStatisticsDataRequestWithAllParams(
     area *string,
     isp *string,
     period *string,
+    scheme *string,
 ) *QueryMixStatisticsDataRequest {
 
     return &QueryMixStatisticsDataRequest{
@@ -97,6 +102,7 @@ func NewQueryMixStatisticsDataRequestWithAllParams(
         Area: area,
         Isp: isp,
         Period: period,
+        Scheme: scheme,
     }
 }
 
@@ -146,6 +152,11 @@ func (r *QueryMixStatisticsDataRequest) SetIsp(isp string) {
 /* param period: 时间粒度，可选值:[oneMin,fiveMin,followTime],followTime只会返回一个汇总后的数据(Optional) */
 func (r *QueryMixStatisticsDataRequest) SetPeriod(period string) {
     r.Period = &period
+}
+
+/* param scheme: 查询协议，可选值:[http,https,all],传空默认返回全部协议汇总后的数据(Optional) */
+func (r *QueryMixStatisticsDataRequest) SetScheme(scheme string) {
+    r.Scheme = &scheme
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

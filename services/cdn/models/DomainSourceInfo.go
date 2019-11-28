@@ -19,12 +19,12 @@ package models
 
 type DomainSourceInfo struct {
 
-    /*  (Optional) */
+    /* 优先级（1-10） (Optional) */
     Priority int `json:"priority"`
 
-    /*  (Optional) */
+    /* 回源host (Optional) */
     SourceHost string `json:"sourceHost"`
 
-    /*  (Optional) */
+    /* 回源域名 (Optional) */
     Domain string `json:"domain"`
 }

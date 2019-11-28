@@ -36,11 +36,14 @@ type InvokeThingServiceRequest struct {
     /* 产品Key  */
     ProductKey string `json:"productKey"`
 
-    /* 服务名称 (Optional) */
-    Name *string `json:"name"`
+    /* 服务名称  */
+    Name string `json:"name"`
 
     /* 输入参数,object的key为参数名称，value为参数值 (Optional) */
     Input *interface{} `json:"input"`
+
+    /* 回调spring的bean的名称 (Optional) */
+    CallbackBeanName *string `json:"callbackBeanName"`
 }
 
 /*
@@ -48,6 +51,7 @@ type InvokeThingServiceRequest struct {
  * param regionId: 设备归属的实例所在区域 (Required)
  * param identifier: 设备唯一标识 (Required)
  * param productKey: 产品Key (Required)
+ * param name: 服务名称 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -56,6 +60,7 @@ func NewInvokeThingServiceRequest(
     regionId string,
     identifier string,
     productKey string,
+    name string,
 ) *InvokeThingServiceRequest {
 
 	return &InvokeThingServiceRequest{
@@ -69,6 +74,7 @@ func NewInvokeThingServiceRequest(
         RegionId: regionId,
         Identifier: identifier,
         ProductKey: productKey,
+        Name: name,
 	}
 }
 
@@ -77,16 +83,18 @@ func NewInvokeThingServiceRequest(
  * param regionId: 设备归属的实例所在区域 (Required)
  * param identifier: 设备唯一标识 (Required)
  * param productKey: 产品Key (Required)
- * param name: 服务名称 (Optional)
+ * param name: 服务名称 (Required)
  * param input: 输入参数,object的key为参数名称，value为参数值 (Optional)
+ * param callbackBeanName: 回调spring的bean的名称 (Optional)
  */
 func NewInvokeThingServiceRequestWithAllParams(
     instanceId string,
     regionId string,
     identifier string,
     productKey string,
-    name *string,
+    name string,
     input *interface{},
+    callbackBeanName *string,
 ) *InvokeThingServiceRequest {
 
     return &InvokeThingServiceRequest{
@@ -102,6 +110,7 @@ func NewInvokeThingServiceRequestWithAllParams(
         ProductKey: productKey,
         Name: name,
         Input: input,
+        CallbackBeanName: callbackBeanName,
     }
 }
 
@@ -138,14 +147,19 @@ func (r *InvokeThingServiceRequest) SetProductKey(productKey string) {
     r.ProductKey = productKey
 }
 
-/* param name: 服务名称(Optional) */
+/* param name: 服务名称(Required) */
 func (r *InvokeThingServiceRequest) SetName(name string) {
-    r.Name = &name
+    r.Name = name
 }
 
 /* param input: 输入参数,object的key为参数名称，value为参数值(Optional) */
 func (r *InvokeThingServiceRequest) SetInput(input interface{}) {
     r.Input = &input
+}
+
+/* param callbackBeanName: 回调spring的bean的名称(Optional) */
+func (r *InvokeThingServiceRequest) SetCallbackBeanName(callbackBeanName string) {
+    r.CallbackBeanName = &callbackBeanName
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

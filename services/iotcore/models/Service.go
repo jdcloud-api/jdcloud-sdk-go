@@ -39,4 +39,10 @@ type Service struct {
 
     /* 创建时间 (Optional) */
     CreatedTime int64 `json:"createdTime"`
+
+    /* 记录ID (Optional) */
+    MsgId string `json:"msgId"`
+
+    /* 失败原因 (Optional) */
+    Message string `json:"message"`
 }

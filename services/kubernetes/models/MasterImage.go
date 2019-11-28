@@ -37,9 +37,9 @@ type MasterImage struct {
     /* 可见度:0：所有人可见；1：授权用户可见；2：只有白名单用户可见 (Optional) */
     Visibility int `json:"visibility"`
 
-    /* 默认ndoe镜像编码 (Optional) */
+    /* 默认节点镜像编码 (Optional) */
     DefaultNodeImageCode string `json:"defaultNodeImageCode"`
 
-    /* node 节点的配置 (Optional) */
+    /* 工作节点镜像 (Optional) */
     NodeImages []NodeImage `json:"nodeImages"`
 }

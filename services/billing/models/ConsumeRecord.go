@@ -84,4 +84,10 @@ type ConsumeRecord struct {
 
     /* 退款单号 (Optional) */
     RefundNo string `json:"refundNo"`
+
+    /* 优惠后金额 (Optional) */
+    ActualFee int `json:"actualFee"`
+
+    /* 规格名称 (Optional) */
+    FormulaName string `json:"formulaName"`
 }

@@ -39,4 +39,7 @@ type Consumption struct {
 
     /* 欠费金额 (Optional) */
     ArrearFee int `json:"arrearFee"`
+
+    /* 分组显示值 (Optional) */
+    GroupTagValue string `json:"groupTagValue"`
 }

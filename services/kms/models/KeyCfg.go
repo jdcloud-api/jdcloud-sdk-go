@@ -22,6 +22,6 @@ type KeyCfg struct {
     /* 密钥描述配置  */
     KeyDescCfg *KeyDescCfg `json:"keyDescCfg"`
 
-    /* 密钥轮换配置  */
+    /* 对称密钥的轮换配置；非对称密钥的操作，不支持该配置  */
     KeyRotateCfg *KeyRotateCfg `json:"keyRotateCfg"`
 }

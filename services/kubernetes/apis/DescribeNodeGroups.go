@@ -38,10 +38,10 @@ type DescribeNodeGroupsRequest struct {
     /* Tag筛选条件 (Optional) */
     Tags []kubernetes.TagFilter `json:"tags"`
 
-    /* name - 节点组名称，模糊匹配，支持单个      
-id - 节点组 id，支持多个     
-clusterId - 根据clusterId查询        
-clusterName - 根据名称查询 cluster             
+    /* name - 节点组名称，模糊匹配，支持单个
+id - 节点组 id，支持多个
+clusterId - 根据 clusterId 查询
+clusterName - 根据 cluster 名称查询
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
@@ -71,10 +71,10 @@ func NewDescribeNodeGroupsRequest(
  * param pageNumber: 页码；默认为1 (Optional)
  * param pageSize: 分页大小；默认为20；取值范围[10, 100] (Optional)
  * param tags: Tag筛选条件 (Optional)
- * param filters: name - 节点组名称，模糊匹配，支持单个      
-id - 节点组 id，支持多个     
-clusterId - 根据clusterId查询        
-clusterName - 根据名称查询 cluster             
+ * param filters: name - 节点组名称，模糊匹配，支持单个
+id - 节点组 id，支持多个
+clusterId - 根据 clusterId 查询
+clusterName - 根据 cluster 名称查询
  (Optional)
  */
 func NewDescribeNodeGroupsRequestWithAllParams(
@@ -133,10 +133,10 @@ func (r *DescribeNodeGroupsRequest) SetTags(tags []kubernetes.TagFilter) {
     r.Tags = tags
 }
 
-/* param filters: name - 节点组名称，模糊匹配，支持单个      
-id - 节点组 id，支持多个     
-clusterId - 根据clusterId查询        
-clusterName - 根据名称查询 cluster             
+/* param filters: name - 节点组名称，模糊匹配，支持单个
+id - 节点组 id，支持多个
+clusterId - 根据 clusterId 查询
+clusterName - 根据 cluster 名称查询
 (Optional) */
 func (r *DescribeNodeGroupsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters

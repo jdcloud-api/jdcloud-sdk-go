@@ -38,6 +38,18 @@ type SetHttpTypeRequest struct {
 
     /* 有三种类型：default、http、https (Optional) */
     JumpType *string `json:"jumpType"`
+
+    /* 证书来源有两种类型：default,ssl (Optional) */
+    CertFrom *string `json:"certFrom"`
+
+    /* ssl证书id (Optional) */
+    SslCertId *string `json:"sslCertId"`
+
+    /* 是否同步到ssl,boolean值，取值true或者false (Optional) */
+    SyncToSsl *bool `json:"syncToSsl"`
+
+    /* syncToSsl是true时，certName是必填项 (Optional) */
+    CertName *string `json:"certName"`
 }
 
 /*
@@ -66,6 +78,10 @@ func NewSetHttpTypeRequest(
  * param certificate: 用户证书,当Type为https时必须设置 (Optional)
  * param rsaKey: 证书私钥 (Optional)
  * param jumpType: 有三种类型：default、http、https (Optional)
+ * param certFrom: 证书来源有两种类型：default,ssl (Optional)
+ * param sslCertId: ssl证书id (Optional)
+ * param syncToSsl: 是否同步到ssl,boolean值，取值true或者false (Optional)
+ * param certName: syncToSsl是true时，certName是必填项 (Optional)
  */
 func NewSetHttpTypeRequestWithAllParams(
     domain string,
@@ -73,6 +89,10 @@ func NewSetHttpTypeRequestWithAllParams(
     certificate *string,
     rsaKey *string,
     jumpType *string,
+    certFrom *string,
+    sslCertId *string,
+    syncToSsl *bool,
+    certName *string,
 ) *SetHttpTypeRequest {
 
     return &SetHttpTypeRequest{
@@ -87,6 +107,10 @@ func NewSetHttpTypeRequestWithAllParams(
         Certificate: certificate,
         RsaKey: rsaKey,
         JumpType: jumpType,
+        CertFrom: certFrom,
+        SslCertId: sslCertId,
+        SyncToSsl: syncToSsl,
+        CertName: certName,
     }
 }
 
@@ -128,6 +152,26 @@ func (r *SetHttpTypeRequest) SetJumpType(jumpType string) {
     r.JumpType = &jumpType
 }
 
+/* param certFrom: 证书来源有两种类型：default,ssl(Optional) */
+func (r *SetHttpTypeRequest) SetCertFrom(certFrom string) {
+    r.CertFrom = &certFrom
+}
+
+/* param sslCertId: ssl证书id(Optional) */
+func (r *SetHttpTypeRequest) SetSslCertId(sslCertId string) {
+    r.SslCertId = &sslCertId
+}
+
+/* param syncToSsl: 是否同步到ssl,boolean值，取值true或者false(Optional) */
+func (r *SetHttpTypeRequest) SetSyncToSsl(syncToSsl bool) {
+    r.SyncToSsl = &syncToSsl
+}
+
+/* param certName: syncToSsl是true时，certName是必填项(Optional) */
+func (r *SetHttpTypeRequest) SetCertName(certName string) {
+    r.CertName = &certName
+}
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r SetHttpTypeRequest) GetRegionId() string {
@@ -141,4 +185,5 @@ type SetHttpTypeResponse struct {
 }
 
 type SetHttpTypeResult struct {
+    TaskId string `json:"taskId"`
 }

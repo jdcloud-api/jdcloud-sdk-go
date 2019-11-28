@@ -28,17 +28,20 @@ type GetDomainListRequest struct {
     /* 根据关键字进行模糊匹配 (Optional) */
     KeyWord *string `json:"keyWord"`
 
-    /* pageNumber (Optional) */
+    /* pageNumber,默认值1 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* pageSize (Optional) */
+    /* pageSize,最大值50,默认值20 (Optional) */
     PageSize *int `json:"pageSize"`
 
     /* 根据域名状态查询, 可选值[offline, online, configuring, auditing, audit_reject] (Optional) */
     Status *string `json:"status"`
 
-    /* type (Optional) */
+    /* 域名类型，(web:静态小文件，download:大文件加速，vod:视频加速，live:直播加速),不传查所有 (Optional) */
     Type *string `json:"type"`
+
+    /* 加速区域，(mainLand:中国大陆，nonMainLand:海外加港澳台，all:全球),不传为全球 (Optional) */
+    AccelerateRegion *string `json:"accelerateRegion"`
 }
 
 /*
@@ -60,10 +63,11 @@ func NewGetDomainListRequest(
 
 /*
  * param keyWord: 根据关键字进行模糊匹配 (Optional)
- * param pageNumber: pageNumber (Optional)
- * param pageSize: pageSize (Optional)
+ * param pageNumber: pageNumber,默认值1 (Optional)
+ * param pageSize: pageSize,最大值50,默认值20 (Optional)
  * param status: 根据域名状态查询, 可选值[offline, online, configuring, auditing, audit_reject] (Optional)
- * param type_: type (Optional)
+ * param type_: 域名类型，(web:静态小文件，download:大文件加速，vod:视频加速，live:直播加速),不传查所有 (Optional)
+ * param accelerateRegion: 加速区域，(mainLand:中国大陆，nonMainLand:海外加港澳台，all:全球),不传为全球 (Optional)
  */
 func NewGetDomainListRequestWithAllParams(
     keyWord *string,
@@ -71,6 +75,7 @@ func NewGetDomainListRequestWithAllParams(
     pageSize *int,
     status *string,
     type_ *string,
+    accelerateRegion *string,
 ) *GetDomainListRequest {
 
     return &GetDomainListRequest{
@@ -85,6 +90,7 @@ func NewGetDomainListRequestWithAllParams(
         PageSize: pageSize,
         Status: status,
         Type: type_,
+        AccelerateRegion: accelerateRegion,
     }
 }
 
@@ -106,12 +112,12 @@ func (r *GetDomainListRequest) SetKeyWord(keyWord string) {
     r.KeyWord = &keyWord
 }
 
-/* param pageNumber: pageNumber(Optional) */
+/* param pageNumber: pageNumber,默认值1(Optional) */
 func (r *GetDomainListRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
-/* param pageSize: pageSize(Optional) */
+/* param pageSize: pageSize,最大值50,默认值20(Optional) */
 func (r *GetDomainListRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
@@ -121,9 +127,14 @@ func (r *GetDomainListRequest) SetStatus(status string) {
     r.Status = &status
 }
 
-/* param type_: type(Optional) */
+/* param type_: 域名类型，(web:静态小文件，download:大文件加速，vod:视频加速，live:直播加速),不传查所有(Optional) */
 func (r *GetDomainListRequest) SetType(type_ string) {
     r.Type = &type_
+}
+
+/* param accelerateRegion: 加速区域，(mainLand:中国大陆，nonMainLand:海外加港澳台，all:全球),不传为全球(Optional) */
+func (r *GetDomainListRequest) SetAccelerateRegion(accelerateRegion string) {
+    r.AccelerateRegion = &accelerateRegion
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

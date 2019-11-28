@@ -40,7 +40,7 @@ func NewNativecontainerClient(credential *core.Credential) *NativecontainerClien
             Credential:  *credential,
             Config:      *config,
             ServiceName: "nativecontainer",
-            Revision:    "2.1.0",
+            Revision:    "2.2.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,6 +51,10 @@ func (c *NativecontainerClient) SetConfig(config *core.Config) {
 
 func (c *NativecontainerClient) SetLogger(logger core.Logger) {
     c.Logger = logger
+}
+
+func (c *NativecontainerClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
 }
 
 /* 查询实例规格信息列表
@@ -151,6 +155,32 @@ func (c *NativecontainerClient) DeleteContainer(request *nativecontainer.DeleteC
     }
 
     jdResp := &nativecontainer.DeleteContainerResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 调整原生容器实例类型配置。
+- 原生容器状态为停止;
+- 支持升配、降配；**不支持原有规格**
+- 计费类型不变
+    - 包年包月：需要计算配置差价，如果所选配置价格高，需要补齐到期前的差价，到期时间不变；如果所选配置价格低，需要延长到期时间
+    - 按配置：按照所选规格，进行计费
+ */
+func (c *NativecontainerClient) ResizeContainer(request *nativecontainer.ResizeContainerRequest) (*nativecontainer.ResizeContainerResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &nativecontainer.ResizeContainerResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -378,7 +408,7 @@ func (c *NativecontainerClient) ExecGetExitCode(request *nativecontainer.ExecGet
     - 不能以“.”(点)开始，也不能以“.”(点)结尾
     - 整个主机名（包括标签以及分隔点“.”）最多有63个ASCII字符
   - 正则表达式
-    - `^([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9])(\.([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9]))*$`
+    - ^([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9])(\.([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9]))*$
 - 网络配置
   - 指定主网卡配置信息
     - 必须指定vpcId、subnetId、securityGroupIds

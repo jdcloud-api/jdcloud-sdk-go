@@ -58,10 +58,10 @@ type Cluster struct {
     /* 用户的AccessKey，插件调用open-api时的认证凭证 (Optional) */
     AccessKey string `json:"accessKey"`
 
-    /*  (Optional) */
+    /* 基本验证方式 (Optional) */
     BasicAuth bool `json:"basicAuth"`
 
-    /*  (Optional) */
+    /* 证书验证方式 (Optional) */
     ClientCertificate bool `json:"clientCertificate"`
 
     /* 用户访问的ip (Optional) */

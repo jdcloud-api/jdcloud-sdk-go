@@ -27,7 +27,7 @@ type DeleteCacheRuleRequest struct {
     /* 用户域名  */
     Domain string `json:"domain"`
 
-    /* 缓存规则id (Optional) */
+    /* 缓存规则配置ID (Optional) */
     ConfigId *int64 `json:"configId"`
 }
 
@@ -53,7 +53,7 @@ func NewDeleteCacheRuleRequest(
 
 /*
  * param domain: 用户域名 (Required)
- * param configId: 缓存规则id (Optional)
+ * param configId: 缓存规则配置ID (Optional)
  */
 func NewDeleteCacheRuleRequestWithAllParams(
     domain string,
@@ -90,7 +90,7 @@ func (r *DeleteCacheRuleRequest) SetDomain(domain string) {
     r.Domain = domain
 }
 
-/* param configId: 缓存规则id(Optional) */
+/* param configId: 缓存规则配置ID(Optional) */
 func (r *DeleteCacheRuleRequest) SetConfigId(configId int64) {
     r.ConfigId = &configId
 }

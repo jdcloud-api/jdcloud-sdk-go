@@ -96,4 +96,7 @@ type ConsumeBillQueryResultItem struct {
 
     /* 规格 (Optional) */
     FormulaStr string `json:"formulaStr"`
+
+    /* 标签明细 (Optional) */
+    TagDetails []ResourceTagVo `json:"tagDetails"`
 }

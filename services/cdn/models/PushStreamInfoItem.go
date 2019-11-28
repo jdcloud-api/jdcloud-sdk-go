@@ -20,16 +20,22 @@ package models
 type PushStreamInfoItem struct {
 
     /*  (Optional) */
+    App string `json:"app"`
+
+    /*  (Optional) */
     Stream string `json:"stream"`
 
     /*  (Optional) */
     ClientIp string `json:"clientIp"`
 
     /*  (Optional) */
-    StartTimeStamp int64 `json:"startTimeStamp"`
+    NodeIp string `json:"nodeIp"`
 
-    /*  (Optional) */
-    EndTimeStamp int64 `json:"endTimeStamp"`
+    /* 任务创建时间,UTC时间 (Optional) */
+    StartTime string `json:"startTime"`
+
+    /* 任务创建时间,UTC时间 (Optional) */
+    EndTime string `json:"endTime"`
 
     /*  (Optional) */
     Duration int64 `json:"duration"`

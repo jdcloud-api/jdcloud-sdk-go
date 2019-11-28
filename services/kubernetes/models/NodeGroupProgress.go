@@ -19,15 +19,15 @@ package models
 
 type NodeGroupProgress struct {
 
-    /* 节点组 id (Optional) */
+    /* 工作节点组 id (Optional) */
     NodeGroupId string `json:"nodeGroupId"`
 
     /* 操作类型, upgrade, downgrade, rollback (Optional) */
     Action string `json:"action"`
 
-    /* 总node个数 (Optional) */
+    /* 总工作节点个数 (Optional) */
     TotalCount int `json:"totalCount"`
 
-    /* 升级完成node个数 (Optional) */
+    /* 升级完成工作节点个数 (Optional) */
     UpdatedCount int `json:"updatedCount"`
 }

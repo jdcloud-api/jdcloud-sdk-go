@@ -40,10 +40,10 @@ type SetSourceRequest struct {
     /*  (Optional) */
     DomainSource []cdn.DomainSourceInfo `json:"domainSource"`
 
-    /*  (Optional) */
+    /* oss回源域名 (Optional) */
     OssSource *string `json:"ossSource"`
 
-    /*  (Optional) */
+    /* 默认回源host (Optional) */
     DefaultSourceHost *string `json:"defaultSourceHost"`
 }
 
@@ -73,8 +73,8 @@ func NewSetSourceRequest(
  * param backSourceType: 回源方式,只能是[https,http]中的一种,默认http (Optional)
  * param ipSource:  (Optional)
  * param domainSource:  (Optional)
- * param ossSource:  (Optional)
- * param defaultSourceHost:  (Optional)
+ * param ossSource: oss回源域名 (Optional)
+ * param defaultSourceHost: 默认回源host (Optional)
  */
 func NewSetSourceRequestWithAllParams(
     domain string,
@@ -141,12 +141,12 @@ func (r *SetSourceRequest) SetDomainSource(domainSource []cdn.DomainSourceInfo) 
     r.DomainSource = domainSource
 }
 
-/* param ossSource: (Optional) */
+/* param ossSource: oss回源域名(Optional) */
 func (r *SetSourceRequest) SetOssSource(ossSource string) {
     r.OssSource = &ossSource
 }
 
-/* param defaultSourceHost: (Optional) */
+/* param defaultSourceHost: 默认回源host(Optional) */
 func (r *SetSourceRequest) SetDefaultSourceHost(defaultSourceHost string) {
     r.DefaultSourceHost = &defaultSourceHost
 }
@@ -164,4 +164,5 @@ type SetSourceResponse struct {
 }
 
 type SetSourceResult struct {
+    TaskId string `json:"taskId"`
 }

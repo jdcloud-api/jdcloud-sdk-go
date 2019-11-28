@@ -24,4 +24,7 @@ type KeyDescCfg struct {
 
     /* key描述，默认为""  */
     KeyDesc string `json:"keyDesc"`
+
+    /* 密钥类型： 1: rsa-2048, 0: aes-256，default: aes-256 (Optional) */
+    KeyType *int `json:"keyType"`
 }

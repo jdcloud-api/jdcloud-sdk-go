@@ -25,12 +25,21 @@ type NodeConfig struct {
     /* 镜像信息 (Optional) */
     ImageId string `json:"imageId"`
 
-    /* 云盘系统盘的大小  单位(GB) (Optional) */
+    /* 云主机SSH密钥对名称 (Optional) */
+    KeyNames []string `json:"keyNames"`
+
+    /* 云主机磁盘类型 (Optional) */
+    SystemDiskCategory string `json:"systemDiskCategory"`
+
+    /* 云主机云盘系统盘大小  单位(GB) (Optional) */
     SystemDiskSize int `json:"systemDiskSize"`
 
-    /* 云盘系统盘的大小[ssd,premium-hdd] (Optional) */
+    /* 云主机云盘系统盘类型 (Optional) */
     SystemDiskType string `json:"systemDiskType"`
 
-    /* Node的信息 (Optional) */
+    /* 云主机云盘 iops，仅限 ssd 类型云盘有效 (Optional) */
+    SystemDiskIops int `json:"systemDiskIops"`
+
+    /* 工作节点组标签 (Optional) */
     Labels []LabelSpec `json:"labels"`
 }

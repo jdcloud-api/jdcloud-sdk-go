@@ -22,15 +22,18 @@ type NodeConfigSpec struct {
     /* 实例类型  */
     InstanceType string `json:"instanceType"`
 
-    /* 镜像信息 (Optional) */
+    /* 工作节点版本，不指定则使用默认版本 (Optional) */
     Version *string `json:"version"`
 
-    /* 云盘系统盘的大小  单位(GB)  */
-    SystemDiskSize int `json:"systemDiskSize"`
+    /* 云主机密码，默认为集群密码，密码规范参考：[公共参数规范](https://docs.jdcloud.com/cn/virtual-machines/api/general_parameters) (Optional) */
+    Password *string `json:"password"`
 
-    /* 云盘系统盘的大小[ssd,premium-hdd]  */
-    SystemDiskType string `json:"systemDiskType"`
+    /* 云主机SSH密钥对名称，当前仅支持一个。使用中的SSH密钥请勿删除。 (Optional) */
+    KeyNames []string `json:"keyNames"`
 
-    /* Node的信息 (Optional) */
+    /* 云主机系统盘配置信息 (Optional) */
+    SystemDisk *DiskSpec `json:"systemDisk"`
+
+    /* 工作节点组标签，最多支持 10 个 (Optional) */
     Labels []LabelSpec `json:"labels"`
 }

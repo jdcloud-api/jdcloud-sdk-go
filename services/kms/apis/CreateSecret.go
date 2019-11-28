@@ -98,4 +98,5 @@ type CreateSecretResponse struct {
 }
 
 type CreateSecretResult struct {
+    SecretId string `json:"secretId"`
 }

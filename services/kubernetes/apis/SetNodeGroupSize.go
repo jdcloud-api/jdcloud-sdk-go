@@ -27,17 +27,17 @@ type SetNodeGroupSizeRequest struct {
     /* 地域 ID  */
     RegionId string `json:"regionId"`
 
-    /* 节点组 ID  */
+    /* 工作节点组 ID  */
     NodeGroupId string `json:"nodeGroupId"`
 
-    /* 创建集群请求参数模型  */
+    /* 预期目标节点数量  */
     ExpectCount int `json:"expectCount"`
 }
 
 /*
  * param regionId: 地域 ID (Required)
- * param nodeGroupId: 节点组 ID (Required)
- * param expectCount: 创建集群请求参数模型 (Required)
+ * param nodeGroupId: 工作节点组 ID (Required)
+ * param expectCount: 预期目标节点数量 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -62,8 +62,8 @@ func NewSetNodeGroupSizeRequest(
 
 /*
  * param regionId: 地域 ID (Required)
- * param nodeGroupId: 节点组 ID (Required)
- * param expectCount: 创建集群请求参数模型 (Required)
+ * param nodeGroupId: 工作节点组 ID (Required)
+ * param expectCount: 预期目标节点数量 (Required)
  */
 func NewSetNodeGroupSizeRequestWithAllParams(
     regionId string,
@@ -102,12 +102,12 @@ func (r *SetNodeGroupSizeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param nodeGroupId: 节点组 ID(Required) */
+/* param nodeGroupId: 工作节点组 ID(Required) */
 func (r *SetNodeGroupSizeRequest) SetNodeGroupId(nodeGroupId string) {
     r.NodeGroupId = nodeGroupId
 }
 
-/* param expectCount: 创建集群请求参数模型(Required) */
+/* param expectCount: 预期目标节点数量(Required) */
 func (r *SetNodeGroupSizeRequest) SetExpectCount(expectCount int) {
     r.ExpectCount = expectCount
 }

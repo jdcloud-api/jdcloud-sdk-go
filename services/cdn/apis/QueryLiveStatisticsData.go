@@ -35,10 +35,10 @@ type QueryLiveStatisticsDataRequest struct {
     Domain *string `json:"domain"`
 
     /* app名 (Optional) */
-    Appname *string `json:"appname"`
+    AppName *string `json:"appName"`
 
     /* 流名 (Optional) */
-    Streamname *string `json:"streamname"`
+    StreamName *string `json:"streamName"`
 
     /* 子域名 (Optional) */
     SubDomain *string `json:"subDomain"`
@@ -83,8 +83,8 @@ func NewQueryLiveStatisticsDataRequest(
  * param startTime: 查询起始时间,UTC时间，格式为:yyyy-MM-dd'T'HH:mm:ss'Z'，示例:2018-10-21T10:00:00Z (Optional)
  * param endTime: 查询截止时间,UTC时间，格式为:yyyy-MM-dd'T'HH:mm:ss'Z'，示例:2018-10-21T10:00:00Z (Optional)
  * param domain: 需要查询的域名, 必须为用户pin下有权限的域名 (Optional)
- * param appname: app名 (Optional)
- * param streamname: 流名 (Optional)
+ * param appName: app名 (Optional)
+ * param streamName: 流名 (Optional)
  * param subDomain: 子域名 (Optional)
  * param fields: 需要查询的字段 (Optional)
  * param area:  (Optional)
@@ -97,8 +97,8 @@ func NewQueryLiveStatisticsDataRequestWithAllParams(
     startTime *string,
     endTime *string,
     domain *string,
-    appname *string,
-    streamname *string,
+    appName *string,
+    streamName *string,
     subDomain *string,
     fields *string,
     area *string,
@@ -118,8 +118,8 @@ func NewQueryLiveStatisticsDataRequestWithAllParams(
         StartTime: startTime,
         EndTime: endTime,
         Domain: domain,
-        Appname: appname,
-        Streamname: streamname,
+        AppName: appName,
+        StreamName: streamName,
         SubDomain: subDomain,
         Fields: fields,
         Area: area,
@@ -158,14 +158,14 @@ func (r *QueryLiveStatisticsDataRequest) SetDomain(domain string) {
     r.Domain = &domain
 }
 
-/* param appname: app名(Optional) */
-func (r *QueryLiveStatisticsDataRequest) SetAppname(appname string) {
-    r.Appname = &appname
+/* param appName: app名(Optional) */
+func (r *QueryLiveStatisticsDataRequest) SetAppName(appName string) {
+    r.AppName = &appName
 }
 
-/* param streamname: 流名(Optional) */
-func (r *QueryLiveStatisticsDataRequest) SetStreamname(streamname string) {
-    r.Streamname = &streamname
+/* param streamName: 流名(Optional) */
+func (r *QueryLiveStatisticsDataRequest) SetStreamName(streamName string) {
+    r.StreamName = &streamName
 }
 
 /* param subDomain: 子域名(Optional) */

@@ -46,6 +46,9 @@ type QueryBillDetailRequest struct {
     /* 资源单id列表 (Optional) */
     ResourceIds []string `json:"resourceIds"`
 
+    /* 标签 (Optional) */
+    Tags []interface{} `json:"tags"`
+
     /* pageIndex (Optional) */
     PageIndex *int `json:"pageIndex"`
 
@@ -87,6 +90,7 @@ func NewQueryBillDetailRequest(
  * param serviceCode: 产品代码 (Optional)
  * param billingType: 计费类型 1、按配置 2、按用量 3、包年包月 4、按次 (Optional)
  * param resourceIds: 资源单id列表 (Optional)
+ * param tags: 标签 (Optional)
  * param pageIndex: pageIndex (Optional)
  * param pageSize: pageSize (Optional)
  */
@@ -98,6 +102,7 @@ func NewQueryBillDetailRequestWithAllParams(
     serviceCode *string,
     billingType *int,
     resourceIds []string,
+    tags []interface{},
     pageIndex *int,
     pageSize *int,
 ) *QueryBillDetailRequest {
@@ -116,6 +121,7 @@ func NewQueryBillDetailRequestWithAllParams(
         ServiceCode: serviceCode,
         BillingType: billingType,
         ResourceIds: resourceIds,
+        Tags: tags,
         PageIndex: pageIndex,
         PageSize: pageSize,
     }
@@ -167,6 +173,11 @@ func (r *QueryBillDetailRequest) SetBillingType(billingType int) {
 /* param resourceIds: 资源单id列表(Optional) */
 func (r *QueryBillDetailRequest) SetResourceIds(resourceIds []string) {
     r.ResourceIds = resourceIds
+}
+
+/* param tags: 标签(Optional) */
+func (r *QueryBillDetailRequest) SetTags(tags []interface{}) {
+    r.Tags = tags
 }
 
 /* param pageIndex: pageIndex(Optional) */

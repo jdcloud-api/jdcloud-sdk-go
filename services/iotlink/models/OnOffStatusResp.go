@@ -25,6 +25,9 @@ type OnOffStatusResp struct {
     /* 物联网卡msisdn (Optional) */
     Msisdn string `json:"msisdn"`
 
+    /* 物联网卡imsi (Optional) */
+    Imsi string `json:"imsi"`
+
     /* 终端的开关机状态(00:关机;01:开机;02:该运营商不支持查询;03:未知) (Optional) */
     Status string `json:"status"`
 }

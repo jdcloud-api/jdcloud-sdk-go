@@ -42,6 +42,9 @@ type UpdateDeviceRequest struct {
 
     /* 设备描述 (Optional) */
     Description *string `json:"description"`
+
+    /* 设备状态 (Optional) */
+    Status *int `json:"status"`
 }
 
 /*
@@ -77,6 +80,7 @@ func NewUpdateDeviceRequest(
  * param model: 设备型号 (Optional)
  * param manufacturer: 设备厂商 (Optional)
  * param description: 设备描述 (Optional)
+ * param status: 设备状态 (Optional)
  */
 func NewUpdateDeviceRequestWithAllParams(
     instanceId string,
@@ -85,6 +89,7 @@ func NewUpdateDeviceRequestWithAllParams(
     model *string,
     manufacturer *string,
     description *string,
+    status *int,
 ) *UpdateDeviceRequest {
 
     return &UpdateDeviceRequest{
@@ -100,6 +105,7 @@ func NewUpdateDeviceRequestWithAllParams(
         Model: model,
         Manufacturer: manufacturer,
         Description: description,
+        Status: status,
     }
 }
 
@@ -144,6 +150,11 @@ func (r *UpdateDeviceRequest) SetManufacturer(manufacturer string) {
 /* param description: 设备描述(Optional) */
 func (r *UpdateDeviceRequest) SetDescription(description string) {
     r.Description = &description
+}
+
+/* param status: 设备状态(Optional) */
+func (r *UpdateDeviceRequest) SetStatus(status int) {
+    r.Status = &status
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

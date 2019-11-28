@@ -19,37 +19,40 @@ package models
 
 type NodeGroup struct {
 
-    /* 集群id (Optional) */
+    /* 集群 id (Optional) */
     ClusterId string `json:"clusterId"`
 
-    /* node group id (Optional) */
+    /* 工作节点组 id (Optional) */
     NodeGroupId string `json:"nodeGroupId"`
 
-    /* 名称 (Optional) */
+    /* 工作节点组名称 (Optional) */
     Name string `json:"name"`
 
-    /* 描述 (Optional) */
+    /* 工作节点组描述 (Optional) */
     Description string `json:"description"`
 
-    /* Node的信息 (Optional) */
+    /* 工作节点组配置信息 (Optional) */
     NodeConfig NodeConfig `json:"nodeConfig"`
 
-    /* k8s中的node的版本 (Optional) */
+    /* 工作节点版本 (Optional) */
     Version string `json:"version"`
 
-    /* node所属的网络信息 (Optional) */
+    /* 工作节点所属的网络信息 (Optional) */
     NodeNetwork NodeNetwork `json:"nodeNetwork"`
 
-    /* 当前node数量 (Optional) */
+    /* 当前工作节点数量 (Optional) */
     CurrentCount int `json:"currentCount"`
 
-    /* 期望的node数量 (Optional) */
+    /* 期望的工作节点数量 (Optional) */
     ExpectCount int `json:"expectCount"`
 
-    /* node group的ag id ，通过agid可以查询该node group下的实例 (Optional) */
+    /* 工作节点组的ag id ，通过agid可以查询该工作节点组下的实例 (Optional) */
     AgId string `json:"agId"`
 
-    /* node group的ag id对应的实例模板 (Optional) */
+    /* 工作节点组所在的 az (Optional) */
+    Azs []string `json:"azs"`
+
+    /* 工作节点组的 ag 对应的实例模板 (Optional) */
     InstanceTemplateId string `json:"instanceTemplateId"`
 
     /* 状态  [pending,running,resizing,reconciling,deleting,deleted,error,running_with_error(部分节点有问题)] (Optional) */

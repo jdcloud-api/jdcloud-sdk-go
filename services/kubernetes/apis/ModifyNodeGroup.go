@@ -27,19 +27,19 @@ type ModifyNodeGroupRequest struct {
     /* 地域 ID  */
     RegionId string `json:"regionId"`
 
-    /* 节点组 ID  */
+    /* 工作节点组 ID  */
     NodeGroupId string `json:"nodeGroupId"`
 
-    /* 节点组名称 (Optional) */
+    /* 工作节点组名称 (Optional) */
     Name *string `json:"name"`
 
-    /* 集群 name 和 description 必须要指定一个 (Optional) */
+    /* 工作节点组描述 (Optional) */
     Description *string `json:"description"`
 }
 
 /*
  * param regionId: 地域 ID (Required)
- * param nodeGroupId: 节点组 ID (Required)
+ * param nodeGroupId: 工作节点组 ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -62,9 +62,9 @@ func NewModifyNodeGroupRequest(
 
 /*
  * param regionId: 地域 ID (Required)
- * param nodeGroupId: 节点组 ID (Required)
- * param name: 节点组名称 (Optional)
- * param description: 集群 name 和 description 必须要指定一个 (Optional)
+ * param nodeGroupId: 工作节点组 ID (Required)
+ * param name: 工作节点组名称 (Optional)
+ * param description: 工作节点组描述 (Optional)
  */
 func NewModifyNodeGroupRequestWithAllParams(
     regionId string,
@@ -105,17 +105,17 @@ func (r *ModifyNodeGroupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param nodeGroupId: 节点组 ID(Required) */
+/* param nodeGroupId: 工作节点组 ID(Required) */
 func (r *ModifyNodeGroupRequest) SetNodeGroupId(nodeGroupId string) {
     r.NodeGroupId = nodeGroupId
 }
 
-/* param name: 节点组名称(Optional) */
+/* param name: 工作节点组名称(Optional) */
 func (r *ModifyNodeGroupRequest) SetName(name string) {
     r.Name = &name
 }
 
-/* param description: 集群 name 和 description 必须要指定一个(Optional) */
+/* param description: 工作节点组描述(Optional) */
 func (r *ModifyNodeGroupRequest) SetDescription(description string) {
     r.Description = &description
 }

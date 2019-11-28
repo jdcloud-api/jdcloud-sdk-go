@@ -40,7 +40,7 @@ func NewQueryLiveDomainDetailRequest(
 
 	return &QueryLiveDomainDetailRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/liveDomain/{domain}",
+			URL:     "/liveDomains/{domain}",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -58,7 +58,7 @@ func NewQueryLiveDomainDetailRequestWithAllParams(
 
     return &QueryLiveDomainDetailRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/liveDomain/{domain}",
+            URL:     "/liveDomains/{domain}",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -72,7 +72,7 @@ func NewQueryLiveDomainDetailRequestWithoutParam() *QueryLiveDomainDetailRequest
 
     return &QueryLiveDomainDetailRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/liveDomain/{domain}",
+            URL:     "/liveDomains/{domain}",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -147,4 +147,11 @@ type QueryLiveDomainDetailResult struct {
     PublishNormalTimeout string `json:"publishNormalTimeout"`
     NotifyCustomUrl string `json:"notifyCustomUrl"`
     NotifyCustomAuthKey string `json:"notifyCustomAuthKey"`
+    CertFrom string `json:"certFrom"`
+    SslCertId string `json:"sslCertId"`
+    CertName string `json:"certName"`
+    CertType string `json:"certType"`
+    SslCertStartTime string `json:"sslCertStartTime"`
+    SslCertEndTime string `json:"sslCertEndTime"`
+    AccelerateRegion string `json:"accelerateRegion"`
 }

@@ -98,4 +98,5 @@ type CreateKeyResponse struct {
 }
 
 type CreateKeyResult struct {
+    KeyId string `json:"keyId"`
 }

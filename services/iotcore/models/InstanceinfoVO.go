@@ -47,6 +47,7 @@ type InstanceinfoVO struct {
     PriDomain string `json:"priDomain"`
 
     /* IoT Hub实例状态
+PREPARING-准备资源 |
 BUILDING-创建中 |
 RUNNING-运行中 |
 SUSPENDING-暂停使用

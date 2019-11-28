@@ -28,17 +28,20 @@ type GetDomainListByFilterRequest struct {
     /* 根据关键字进行模糊匹配 (Optional) */
     KeyWord *string `json:"keyWord"`
 
-    /* pageNumber (Optional) */
+    /* pageNumber,默认值为1 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* pageSize (Optional) */
+    /* pageSize,默认值为20,最大值为50 (Optional) */
     PageSize *int `json:"pageSize"`
 
     /* 根据域名状态查询, 可选值[offline, online, configuring, auditing, audit_reject] (Optional) */
     Status *string `json:"status"`
 
-    /* type (Optional) */
+    /* 域名类型，(web:静态小文件，download:大文件加速，vod:视频加速，live:直播加速),不传查所有 (Optional) */
     Type *string `json:"type"`
+
+    /* 加速区域，(mainLand:中国大陆，nonMainLand:海外加港澳台，all:全球),不传为全球 (Optional) */
+    AccelerateRegion *string `json:"accelerateRegion"`
 
     /* 标签过滤条件 (Optional) */
     TagFilters []cdn.TagFilter `json:"tagFilters"`
@@ -63,10 +66,11 @@ func NewGetDomainListByFilterRequest(
 
 /*
  * param keyWord: 根据关键字进行模糊匹配 (Optional)
- * param pageNumber: pageNumber (Optional)
- * param pageSize: pageSize (Optional)
+ * param pageNumber: pageNumber,默认值为1 (Optional)
+ * param pageSize: pageSize,默认值为20,最大值为50 (Optional)
  * param status: 根据域名状态查询, 可选值[offline, online, configuring, auditing, audit_reject] (Optional)
- * param type_: type (Optional)
+ * param type_: 域名类型，(web:静态小文件，download:大文件加速，vod:视频加速，live:直播加速),不传查所有 (Optional)
+ * param accelerateRegion: 加速区域，(mainLand:中国大陆，nonMainLand:海外加港澳台，all:全球),不传为全球 (Optional)
  * param tagFilters: 标签过滤条件 (Optional)
  */
 func NewGetDomainListByFilterRequestWithAllParams(
@@ -75,6 +79,7 @@ func NewGetDomainListByFilterRequestWithAllParams(
     pageSize *int,
     status *string,
     type_ *string,
+    accelerateRegion *string,
     tagFilters []cdn.TagFilter,
 ) *GetDomainListByFilterRequest {
 
@@ -90,6 +95,7 @@ func NewGetDomainListByFilterRequestWithAllParams(
         PageSize: pageSize,
         Status: status,
         Type: type_,
+        AccelerateRegion: accelerateRegion,
         TagFilters: tagFilters,
     }
 }
@@ -112,12 +118,12 @@ func (r *GetDomainListByFilterRequest) SetKeyWord(keyWord string) {
     r.KeyWord = &keyWord
 }
 
-/* param pageNumber: pageNumber(Optional) */
+/* param pageNumber: pageNumber,默认值为1(Optional) */
 func (r *GetDomainListByFilterRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
-/* param pageSize: pageSize(Optional) */
+/* param pageSize: pageSize,默认值为20,最大值为50(Optional) */
 func (r *GetDomainListByFilterRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
@@ -127,9 +133,14 @@ func (r *GetDomainListByFilterRequest) SetStatus(status string) {
     r.Status = &status
 }
 
-/* param type_: type(Optional) */
+/* param type_: 域名类型，(web:静态小文件，download:大文件加速，vod:视频加速，live:直播加速),不传查所有(Optional) */
 func (r *GetDomainListByFilterRequest) SetType(type_ string) {
     r.Type = &type_
+}
+
+/* param accelerateRegion: 加速区域，(mainLand:中国大陆，nonMainLand:海外加港澳台，all:全球),不传为全球(Optional) */
+func (r *GetDomainListByFilterRequest) SetAccelerateRegion(accelerateRegion string) {
+    r.AccelerateRegion = &accelerateRegion
 }
 
 /* param tagFilters: 标签过滤条件(Optional) */

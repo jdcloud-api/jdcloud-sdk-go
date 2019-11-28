@@ -26,5 +26,14 @@ type DomainbdwItem struct {
     DomainType string `json:"domainType"`
 
     /*  (Optional) */
-    TimeStamp int64 `json:"timeStamp"`
+    TopTimeStamp int64 `json:"topTimeStamp"`
+
+    /*  (Optional) */
+    Pv int64 `json:"pv"`
+
+    /*  (Optional) */
+    Flow float64 `json:"flow"`
+
+    /*  (Optional) */
+    Avgbandwidth float64 `json:"avgbandwidth"`
 }
