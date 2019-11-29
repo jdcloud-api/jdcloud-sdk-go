@@ -38,10 +38,16 @@ type ListDomainItemByFilter struct {
     Status string `json:"status"`
 
     /*  (Optional) */
+    WafStatus string `json:"wafStatus"`
+
+    /*  (Optional) */
     Type string `json:"type"`
 
     /*  (Optional) */
     AuditStatus string `json:"auditStatus"`
+
+    /*  (Optional) */
+    AccelerateRegion string `json:"accelerateRegion"`
 
     /*  (Optional) */
     Tags []Tag `json:"tags"`

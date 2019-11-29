@@ -28,13 +28,13 @@ type DescribeNodeGroupRequest struct {
     /* 地域 ID  */
     RegionId string `json:"regionId"`
 
-    /* 节点组 ID  */
+    /* 工作节点组 ID  */
     NodeGroupId string `json:"nodeGroupId"`
 }
 
 /*
  * param regionId: 地域 ID (Required)
- * param nodeGroupId: 节点组 ID (Required)
+ * param nodeGroupId: 工作节点组 ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -57,7 +57,7 @@ func NewDescribeNodeGroupRequest(
 
 /*
  * param regionId: 地域 ID (Required)
- * param nodeGroupId: 节点组 ID (Required)
+ * param nodeGroupId: 工作节点组 ID (Required)
  */
 func NewDescribeNodeGroupRequestWithAllParams(
     regionId string,
@@ -94,7 +94,7 @@ func (r *DescribeNodeGroupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param nodeGroupId: 节点组 ID(Required) */
+/* param nodeGroupId: 工作节点组 ID(Required) */
 func (r *DescribeNodeGroupRequest) SetNodeGroupId(nodeGroupId string) {
     r.NodeGroupId = nodeGroupId
 }

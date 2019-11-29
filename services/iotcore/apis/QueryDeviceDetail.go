@@ -155,4 +155,5 @@ type QueryDeviceDetailResult struct {
     ProductName string `json:"productName"`
     Model string `json:"model"`
     Manufacturer string `json:"manufacturer"`
+    DynamicRegister int `json:"dynamicRegister"`
 }

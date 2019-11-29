@@ -19,12 +19,12 @@ package models
 
 type IpSourceInfo struct {
 
-    /*  (Optional) */
+    /* 1：主；2：备 (Optional) */
     Master int `json:"master"`
 
-    /*  (Optional) */
+    /* 回源IP (Optional) */
     Ip string `json:"ip"`
 
-    /*  (Optional) */
+    /* 占比 (Optional) */
     Ratio float64 `json:"ratio"`
 }

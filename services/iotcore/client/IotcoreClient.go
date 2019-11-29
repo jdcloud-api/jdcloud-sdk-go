@@ -40,7 +40,7 @@ func NewIotcoreClient(credential *core.Credential) *IotcoreClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "iotcore",
-            Revision:    "1.0.1",
+            Revision:    "1.1.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,6 +51,10 @@ func (c *IotcoreClient) SetConfig(config *core.Config) {
 
 func (c *IotcoreClient) SetLogger(logger core.Logger) {
     c.Logger = logger
+}
+
+func (c *IotcoreClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
 }
 
 /* 注册单个设备并返回秘钥信息 */
@@ -84,6 +88,26 @@ func (c *IotcoreClient) UpdateThingShadow(request *iotcore.UpdateThingShadowRequ
     }
 
     jdResp := &iotcore.UpdateThingShadowResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 新建产品Topic */
+func (c *IotcoreClient) CreateProductTopic(request *iotcore.CreateProductTopicRequest) (*iotcore.CreateProductTopicResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotcore.CreateProductTopicResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -164,6 +188,26 @@ func (c *IotcoreClient) DescribeThingShadow(request *iotcore.DescribeThingShadow
     }
 
     jdResp := &iotcore.DescribeThingShadowResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设备Topic调用 */
+func (c *IotcoreClient) InvokeThingTopic(request *iotcore.InvokeThingTopicRequest) (*iotcore.InvokeThingTopicResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotcore.InvokeThingTopicResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

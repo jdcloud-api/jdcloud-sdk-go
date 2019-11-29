@@ -20,7 +20,7 @@ package models
 type AreaIspItem struct {
 
     /*  (Optional) */
-    Name string `json:"name"`
+    Description string `json:"description"`
 
     /*  (Optional) */
     Code string `json:"code"`

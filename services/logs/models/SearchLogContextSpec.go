@@ -19,18 +19,18 @@ package models
 
 type SearchLogContextSpec struct {
 
-    /* 查询anchor，基于该值偏移进行上下文检索 (Optional) */
+    /* 查询anchor,基于该值偏移进行上下文检索  */
     Anchor []interface{} `json:"anchor"`
 
-    /* 搜索方向， 默认both, 可取值: up，down, both (Optional) */
+    /* 搜索方向,默认both,可取值:up,down,both (Optional) */
     Direction string `json:"direction"`
 
-    /* 日志记录ID，系统日志必填 (Optional) */
+    /* 日志记录ID  */
     Id string `json:"id"`
 
-    /* 查看上下文行数大小，最大支持200 (Optional) */
-    LineSize string `json:"lineSize"`
+    /* 查看上下文行数大小，最大支持200  */
+    LineSize int64 `json:"lineSize"`
 
-    /* 查询日志时返回的时间戳 (Optional) */
+    /* 查询日志时返回的时间戳  */
     Time int64 `json:"time"`
 }

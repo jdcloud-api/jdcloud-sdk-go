@@ -38,8 +38,14 @@ type ListDomainItem struct {
     Status string `json:"status"`
 
     /*  (Optional) */
+    WafStatus string `json:"wafStatus"`
+
+    /*  (Optional) */
     Type string `json:"type"`
 
     /*  (Optional) */
     AuditStatus string `json:"auditStatus"`
+
+    /*  (Optional) */
+    AccelerateRegion string `json:"accelerateRegion"`
 }

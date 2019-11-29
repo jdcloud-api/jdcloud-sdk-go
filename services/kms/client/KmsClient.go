@@ -40,7 +40,7 @@ func NewKmsClient(credential *core.Credential) *KmsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "kms",
-            Revision:    "0.1.1",
+            Revision:    "0.3.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,6 +51,30 @@ func (c *KmsClient) SetConfig(config *core.Config) {
 
 func (c *KmsClient) SetLogger(logger core.Logger) {
     c.Logger = logger
+}
+
+func (c *KmsClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
+}
+
+/* 获取非对称密钥的公钥 */
+func (c *KmsClient) GetPublicKey(request *kms.GetPublicKeyRequest) (*kms.GetPublicKeyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &kms.GetPublicKeyResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
 }
 
 /* 获取密钥列表 */
@@ -153,7 +177,7 @@ func (c *KmsClient) CreateSecret(request *kms.CreateSecretRequest) (*kms.CreateS
     return jdResp, err
 }
 
-/* 使用密钥对数据进行加密 */
+/* 使用密钥对数据进行加密，针对非对称密钥：使用公钥进行加密，仅支持RSA_PKCS1_PADDING填充方式，最大加密数据长度为245字节 */
 func (c *KmsClient) Encrypt(request *kms.EncryptRequest) (*kms.EncryptResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -293,7 +317,9 @@ func (c *KmsClient) CreateKey(request *kms.CreateKeyRequest) (*kms.CreateKeyResp
     return jdResp, err
 }
 
-/* 修改密钥配置，包括key的名称、用途、是否自动轮换和轮换周期等 */
+/* -   修改对称密钥配置，包括key的名称、用途、是否自动轮换和轮换周期等;
+-   修改非对称密钥配置，包括key的名称、用途等。
+ */
 func (c *KmsClient) UpdateKeyDescription(request *kms.UpdateKeyDescriptionRequest) (*kms.UpdateKeyDescriptionResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -304,6 +330,26 @@ func (c *KmsClient) UpdateKeyDescription(request *kms.UpdateKeyDescriptionReques
     }
 
     jdResp := &kms.UpdateKeyDescriptionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 使用非对称密钥的私钥签名,签名算法仅支持RSA_PKCS1_PADDING填充方式,最大签名数据长度为4K字节 */
+func (c *KmsClient) Sign(request *kms.SignRequest) (*kms.SignResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &kms.SignResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -324,6 +370,26 @@ func (c *KmsClient) DescribeSecretVersionList(request *kms.DescribeSecretVersion
     }
 
     jdResp := &kms.DescribeSecretVersionListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 使用非对称密钥的公钥验证签名 */
+func (c *KmsClient) Validate(request *kms.ValidateRequest) (*kms.ValidateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &kms.ValidateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -433,7 +499,7 @@ func (c *KmsClient) ScheduleKeyDeletion(request *kms.ScheduleKeyDeletionRequest)
     return jdResp, err
 }
 
-/* 立即轮换密钥，自动轮换周期顺延 */
+/* 立即轮换密钥，自动轮换周期顺延-支持对称密钥 */
 func (c *KmsClient) KeyRotation(request *kms.KeyRotationRequest) (*kms.KeyRotationResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -513,7 +579,7 @@ func (c *KmsClient) DisableKeyVersion(request *kms.DisableKeyVersionRequest) (*k
     return jdResp, err
 }
 
-/* 使用密钥对数据进行解密 */
+/* 使用密钥对数据进行解密，针对非对称密钥：使用私钥进行加密 */
 func (c *KmsClient) Decrypt(request *kms.DecryptRequest) (*kms.DecryptResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")

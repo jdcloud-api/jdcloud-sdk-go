@@ -44,6 +44,9 @@ type CreateProductRequest struct {
 
     /* 物模型模板ID，内部参数，用户不可见，默认为自定义 (Optional) */
     TemplateId *string `json:"templateId"`
+
+    /* 内部标签，内部参数，用户不可见，隐藏标签：hidden:true (Optional) */
+    InternalTags *interface{} `json:"internalTags"`
 }
 
 /*
@@ -88,6 +91,7 @@ func NewCreateProductRequest(
  (Required)
  * param productDescription: 产品描述，80字符以内 (Optional)
  * param templateId: 物模型模板ID，内部参数，用户不可见，默认为自定义 (Optional)
+ * param internalTags: 内部标签，内部参数，用户不可见，隐藏标签：hidden:true (Optional)
  */
 func NewCreateProductRequestWithAllParams(
     regionId string,
@@ -96,6 +100,7 @@ func NewCreateProductRequestWithAllParams(
     productType int,
     productDescription *string,
     templateId *string,
+    internalTags *interface{},
 ) *CreateProductRequest {
 
     return &CreateProductRequest{
@@ -111,6 +116,7 @@ func NewCreateProductRequestWithAllParams(
         ProductType: productType,
         ProductDescription: productDescription,
         TemplateId: templateId,
+        InternalTags: internalTags,
     }
 }
 
@@ -158,6 +164,11 @@ func (r *CreateProductRequest) SetProductDescription(productDescription string) 
 /* param templateId: 物模型模板ID，内部参数，用户不可见，默认为自定义(Optional) */
 func (r *CreateProductRequest) SetTemplateId(templateId string) {
     r.TemplateId = &templateId
+}
+
+/* param internalTags: 内部标签，内部参数，用户不可见，隐藏标签：hidden:true(Optional) */
+func (r *CreateProductRequest) SetInternalTags(internalTags interface{}) {
+    r.InternalTags = &internalTags
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

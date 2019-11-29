@@ -23,5 +23,5 @@ type TopNRespItemDetail struct {
     TimeStamp int64 `json:"timeStamp"`
 
     /*  (Optional) */
-    Data int64 `json:"data"`
+    Data float64 `json:"data"`
 }

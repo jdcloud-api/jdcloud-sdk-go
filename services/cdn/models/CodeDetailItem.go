@@ -23,44 +23,44 @@ type CodeDetailItem struct {
     TimeStamp int64 `json:"timeStamp"`
 
     /*  (Optional) */
-    Ok int64 `json:"ok"`
+    Ok float64 `json:"ok"`
 
     /*  (Optional) */
-    BadGateway int64 `json:"badGateway"`
+    BadGateway float64 `json:"badGateway"`
 
     /*  (Optional) */
-    BadRequest int64 `json:"badRequest"`
+    BadRequest float64 `json:"badRequest"`
 
     /*  (Optional) */
-    Forbidden int64 `json:"forbidden"`
+    Forbidden float64 `json:"forbidden"`
 
     /*  (Optional) */
-    Found int64 `json:"found"`
+    Found float64 `json:"found"`
 
     /*  (Optional) */
-    GatewayTimeout int64 `json:"gatewayTimeout"`
+    GatewayTimeout float64 `json:"gatewayTimeout"`
 
     /*  (Optional) */
-    InternalServerError int64 `json:"internalServerError"`
+    InternalServerError float64 `json:"internalServerError"`
 
     /*  (Optional) */
-    MovedPermanently int64 `json:"movedPermanently"`
+    MovedPermanently float64 `json:"movedPermanently"`
 
     /*  (Optional) */
-    NotFound int64 `json:"notFound"`
+    NotFound float64 `json:"notFound"`
 
     /*  (Optional) */
-    NotModified int64 `json:"notModified"`
+    NotModified float64 `json:"notModified"`
 
     /*  (Optional) */
-    PartialContent int64 `json:"partialContent"`
+    PartialContent float64 `json:"partialContent"`
 
     /*  (Optional) */
-    RequestedRangeNotSuitable int64 `json:"requestedRangeNotSuitable"`
+    RequestedRangeNotSuitable float64 `json:"requestedRangeNotSuitable"`
 
     /*  (Optional) */
-    Other int64 `json:"other"`
+    Other float64 `json:"other"`
 
     /*  (Optional) */
-    ServiceUnavailable int64 `json:"serviceUnavailable"`
+    ServiceUnavailable float64 `json:"serviceUnavailable"`
 }

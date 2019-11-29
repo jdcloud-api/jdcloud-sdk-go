@@ -82,7 +82,7 @@ type OrderPriceDetail struct {
     /* 结束时间 (Optional) */
     EndTime string `json:"endTime"`
 
-    /* 变配明细（1-升配补差价，2-降配延时） (Optional) */
+    /* 变配明细（1-升配补差价，2-降配延时，3-临时升配） (Optional) */
     ProcessType int `json:"processType"`
 
     /* 交易单模块sourceId (Optional) */

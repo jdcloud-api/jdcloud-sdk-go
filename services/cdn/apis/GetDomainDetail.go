@@ -125,4 +125,11 @@ type GetDomainDetailResult struct {
     Certificate string `json:"certificate"`
     RsaKey string `json:"rsaKey"`
     JumpType string `json:"jumpType"`
+    CertFrom string `json:"certFrom"`
+    SslCertId string `json:"sslCertId"`
+    CertName string `json:"certName"`
+    CertType string `json:"certType"`
+    SslCertStartTime string `json:"sslCertStartTime"`
+    SslCertEndTime string `json:"sslCertEndTime"`
+    AccelerateRegion string `json:"accelerateRegion"`
 }

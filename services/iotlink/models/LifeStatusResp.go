@@ -25,6 +25,9 @@ type LifeStatusResp struct {
     /* 物联网卡msisdn (Optional) */
     Msisdn string `json:"msisdn"`
 
+    /* 物联网卡imsi (Optional) */
+    Imsi string `json:"imsi"`
+
     /* 生命周期状态(00:可激活;01:已激活;02:已停用;03:已失效;04:未知;05:可测试) (Optional) */
     Status string `json:"status"`
 }

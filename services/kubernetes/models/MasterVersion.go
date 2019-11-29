@@ -25,7 +25,7 @@ type MasterVersion struct {
     /* 是否默认版本 (Optional) */
     IsDefault bool `json:"isDefault"`
 
-    /* 默认ndoe版本号 (Optional) */
+    /* 默认工作节点版本号 (Optional) */
     DefaultNodeVersion string `json:"defaultNodeVersion"`
 
     /* 版本状态 (Optional) */

@@ -29,7 +29,10 @@ type HitrationTableItem struct {
     Pv int64 `json:"pv"`
 
     /*  (Optional) */
-    Hitpv int64 `json:"hitpv"`
+    HitPv int64 `json:"hitPv"`
+
+    /*  (Optional) */
+    OriPV int64 `json:"oriPV"`
 
     /*  (Optional) */
     HitRatio string `json:"hitRatio"`

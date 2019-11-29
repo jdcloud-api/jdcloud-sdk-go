@@ -19,9 +19,9 @@ package models
 
 type RequestSpec struct {
 
-    /* 容器必需的计算资源 (Optional) */
+    /* 容器必需的计算资源，例：300m，1000m (Optional) */
     Cpu *string `json:"cpu"`
 
-    /* 容器使用计算资源上限 (Optional) */
+    /* 容器使用计算资源上限，例：1024Mi，16384Mi (Optional) */
     MemoryMB *string `json:"memoryMB"`
 }

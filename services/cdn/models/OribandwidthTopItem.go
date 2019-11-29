@@ -26,5 +26,5 @@ type OribandwidthTopItem struct {
     Total float64 `json:"total"`
 
     /*  (Optional) */
-    Detail []OriBandwithDetailItem `json:"detail"`
+    Details []OriBandwithDetailItem `json:"details"`
 }

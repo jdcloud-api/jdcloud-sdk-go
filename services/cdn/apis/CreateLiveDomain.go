@@ -25,10 +25,10 @@ type CreateLiveDomainRequest struct {
 
     core.JDCloudRequest
 
-    /* 播放域名 (Optional) */
+    /* 播放域名（仅siteType=1且publishDomain不为空时可为空） (Optional) */
     PlayDomain *string `json:"playDomain"`
 
-    /* 创建推流域名时，必传推流域名 (Optional) */
+    /* 推流域名（siteType=push时playDomain与publishDomain不能同时传入） (Optional) */
     PublishDomain *string `json:"publishDomain"`
 
     /* 回源类型只能是[ips,domain]中的一种 (Optional) */
@@ -40,17 +40,29 @@ type CreateLiveDomainRequest struct {
     /* 默认回源host (Optional) */
     DefaultSourceHost *string `json:"defaultSourceHost"`
 
-    /* 站点类型pull(拉流)push(推流) (Optional) */
+    /* 站点类型1:push(推流模式),2:pull(拉流模式),3:mix(混合模式) (Optional) */
     SiteType *string `json:"siteType"`
 
-    /* 回源类型，目前只能为rtmp (Optional) */
+    /* 回源类型，支持rtmp, http-flv, https-flv, http-hls,https-hls，默认rtmp (Optional) */
     BackSourceType *string `json:"backSourceType"`
 
-    /*  (Optional) */
+    /* 播放协议，默认为rtmp,hdl,hls全选 (Optional) */
+    PlayProtocol []string `json:"playProtocol"`
+
+    /* 转推地址 (Optional) */
+    ForwardCustomVhost *string `json:"forwardCustomVhost"`
+
+    /* 回源IP信息 (Optional) */
     IpSource []cdn.IpSourceInfo `json:"ipSource"`
 
-    /*  (Optional) */
+    /* 回源域名信息 (Optional) */
     DomainSource []cdn.DomainSourceInfo `json:"domainSource"`
+
+    /* 默认为H.264 (Optional) */
+    VideoType *string `json:"videoType"`
+
+    /* 默认为AAC (Optional) */
+    AudioType *string `json:"audioType"`
 }
 
 /*
@@ -62,7 +74,7 @@ func NewCreateLiveDomainRequest(
 
 	return &CreateLiveDomainRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/liveDomain:batchCreate",
+			URL:     "/liveDomain",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -71,15 +83,19 @@ func NewCreateLiveDomainRequest(
 }
 
 /*
- * param playDomain: 播放域名 (Optional)
- * param publishDomain: 创建推流域名时，必传推流域名 (Optional)
+ * param playDomain: 播放域名（仅siteType=1且publishDomain不为空时可为空） (Optional)
+ * param publishDomain: 推流域名（siteType=push时playDomain与publishDomain不能同时传入） (Optional)
  * param sourceType: 回源类型只能是[ips,domain]中的一种 (Optional)
  * param backHttpType:  (Optional)
  * param defaultSourceHost: 默认回源host (Optional)
- * param siteType: 站点类型pull(拉流)push(推流) (Optional)
- * param backSourceType: 回源类型，目前只能为rtmp (Optional)
- * param ipSource:  (Optional)
- * param domainSource:  (Optional)
+ * param siteType: 站点类型1:push(推流模式),2:pull(拉流模式),3:mix(混合模式) (Optional)
+ * param backSourceType: 回源类型，支持rtmp, http-flv, https-flv, http-hls,https-hls，默认rtmp (Optional)
+ * param playProtocol: 播放协议，默认为rtmp,hdl,hls全选 (Optional)
+ * param forwardCustomVhost: 转推地址 (Optional)
+ * param ipSource: 回源IP信息 (Optional)
+ * param domainSource: 回源域名信息 (Optional)
+ * param videoType: 默认为H.264 (Optional)
+ * param audioType: 默认为AAC (Optional)
  */
 func NewCreateLiveDomainRequestWithAllParams(
     playDomain *string,
@@ -89,13 +105,17 @@ func NewCreateLiveDomainRequestWithAllParams(
     defaultSourceHost *string,
     siteType *string,
     backSourceType *string,
+    playProtocol []string,
+    forwardCustomVhost *string,
     ipSource []cdn.IpSourceInfo,
     domainSource []cdn.DomainSourceInfo,
+    videoType *string,
+    audioType *string,
 ) *CreateLiveDomainRequest {
 
     return &CreateLiveDomainRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/liveDomain:batchCreate",
+            URL:     "/liveDomain",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -107,8 +127,12 @@ func NewCreateLiveDomainRequestWithAllParams(
         DefaultSourceHost: defaultSourceHost,
         SiteType: siteType,
         BackSourceType: backSourceType,
+        PlayProtocol: playProtocol,
+        ForwardCustomVhost: forwardCustomVhost,
         IpSource: ipSource,
         DomainSource: domainSource,
+        VideoType: videoType,
+        AudioType: audioType,
     }
 }
 
@@ -117,7 +141,7 @@ func NewCreateLiveDomainRequestWithoutParam() *CreateLiveDomainRequest {
 
     return &CreateLiveDomainRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/liveDomain:batchCreate",
+            URL:     "/liveDomain",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -125,12 +149,12 @@ func NewCreateLiveDomainRequestWithoutParam() *CreateLiveDomainRequest {
     }
 }
 
-/* param playDomain: 播放域名(Optional) */
+/* param playDomain: 播放域名（仅siteType=1且publishDomain不为空时可为空）(Optional) */
 func (r *CreateLiveDomainRequest) SetPlayDomain(playDomain string) {
     r.PlayDomain = &playDomain
 }
 
-/* param publishDomain: 创建推流域名时，必传推流域名(Optional) */
+/* param publishDomain: 推流域名（siteType=push时playDomain与publishDomain不能同时传入）(Optional) */
 func (r *CreateLiveDomainRequest) SetPublishDomain(publishDomain string) {
     r.PublishDomain = &publishDomain
 }
@@ -150,24 +174,44 @@ func (r *CreateLiveDomainRequest) SetDefaultSourceHost(defaultSourceHost string)
     r.DefaultSourceHost = &defaultSourceHost
 }
 
-/* param siteType: 站点类型pull(拉流)push(推流)(Optional) */
+/* param siteType: 站点类型1:push(推流模式),2:pull(拉流模式),3:mix(混合模式)(Optional) */
 func (r *CreateLiveDomainRequest) SetSiteType(siteType string) {
     r.SiteType = &siteType
 }
 
-/* param backSourceType: 回源类型，目前只能为rtmp(Optional) */
+/* param backSourceType: 回源类型，支持rtmp, http-flv, https-flv, http-hls,https-hls，默认rtmp(Optional) */
 func (r *CreateLiveDomainRequest) SetBackSourceType(backSourceType string) {
     r.BackSourceType = &backSourceType
 }
 
-/* param ipSource: (Optional) */
+/* param playProtocol: 播放协议，默认为rtmp,hdl,hls全选(Optional) */
+func (r *CreateLiveDomainRequest) SetPlayProtocol(playProtocol []string) {
+    r.PlayProtocol = playProtocol
+}
+
+/* param forwardCustomVhost: 转推地址(Optional) */
+func (r *CreateLiveDomainRequest) SetForwardCustomVhost(forwardCustomVhost string) {
+    r.ForwardCustomVhost = &forwardCustomVhost
+}
+
+/* param ipSource: 回源IP信息(Optional) */
 func (r *CreateLiveDomainRequest) SetIpSource(ipSource []cdn.IpSourceInfo) {
     r.IpSource = ipSource
 }
 
-/* param domainSource: (Optional) */
+/* param domainSource: 回源域名信息(Optional) */
 func (r *CreateLiveDomainRequest) SetDomainSource(domainSource []cdn.DomainSourceInfo) {
     r.DomainSource = domainSource
+}
+
+/* param videoType: 默认为H.264(Optional) */
+func (r *CreateLiveDomainRequest) SetVideoType(videoType string) {
+    r.VideoType = &videoType
+}
+
+/* param audioType: 默认为AAC(Optional) */
+func (r *CreateLiveDomainRequest) SetAudioType(audioType string) {
+    r.AudioType = &audioType
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

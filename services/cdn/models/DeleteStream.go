@@ -24,4 +24,7 @@ type DeleteStream struct {
 
     /* 封禁推流的app (Optional) */
     App string `json:"app"`
+
+    /*  (Optional) */
+    PublishIp string `json:"publishIp"`
 }

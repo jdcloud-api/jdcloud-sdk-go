@@ -43,6 +43,9 @@ type QueryBillSummaryRequest struct {
     /* 资源单id列表 (Optional) */
     ResourceIds []string `json:"resourceIds"`
 
+    /* 标签 (Optional) */
+    Tags []interface{} `json:"tags"`
+
     /* pageIndex (Optional) */
     PageIndex *int `json:"pageIndex"`
 
@@ -83,6 +86,7 @@ func NewQueryBillSummaryRequest(
  * param appCode: 产品线代码 (Optional)
  * param serviceCode: 产品代码 (Optional)
  * param resourceIds: 资源单id列表 (Optional)
+ * param tags: 标签 (Optional)
  * param pageIndex: pageIndex (Optional)
  * param pageSize: pageSize (Optional)
  */
@@ -93,6 +97,7 @@ func NewQueryBillSummaryRequestWithAllParams(
     appCode *string,
     serviceCode *string,
     resourceIds []string,
+    tags []interface{},
     pageIndex *int,
     pageSize *int,
 ) *QueryBillSummaryRequest {
@@ -110,6 +115,7 @@ func NewQueryBillSummaryRequestWithAllParams(
         AppCode: appCode,
         ServiceCode: serviceCode,
         ResourceIds: resourceIds,
+        Tags: tags,
         PageIndex: pageIndex,
         PageSize: pageSize,
     }
@@ -156,6 +162,11 @@ func (r *QueryBillSummaryRequest) SetServiceCode(serviceCode string) {
 /* param resourceIds: 资源单id列表(Optional) */
 func (r *QueryBillSummaryRequest) SetResourceIds(resourceIds []string) {
     r.ResourceIds = resourceIds
+}
+
+/* param tags: 标签(Optional) */
+func (r *QueryBillSummaryRequest) SetTags(tags []interface{}) {
+    r.Tags = tags
 }
 
 /* param pageIndex: pageIndex(Optional) */

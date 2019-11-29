@@ -27,13 +27,13 @@ type RollbackNodeGroupUpgradeRequest struct {
     /* 地域 ID  */
     RegionId string `json:"regionId"`
 
-    /* 节点组 ID  */
+    /* 工作节点组 ID  */
     NodeGroupId string `json:"nodeGroupId"`
 }
 
 /*
  * param regionId: 地域 ID (Required)
- * param nodeGroupId: 节点组 ID (Required)
+ * param nodeGroupId: 工作节点组 ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -56,7 +56,7 @@ func NewRollbackNodeGroupUpgradeRequest(
 
 /*
  * param regionId: 地域 ID (Required)
- * param nodeGroupId: 节点组 ID (Required)
+ * param nodeGroupId: 工作节点组 ID (Required)
  */
 func NewRollbackNodeGroupUpgradeRequestWithAllParams(
     regionId string,
@@ -93,7 +93,7 @@ func (r *RollbackNodeGroupUpgradeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param nodeGroupId: 节点组 ID(Required) */
+/* param nodeGroupId: 工作节点组 ID(Required) */
 func (r *RollbackNodeGroupUpgradeRequest) SetNodeGroupId(nodeGroupId string) {
     r.NodeGroupId = nodeGroupId
 }

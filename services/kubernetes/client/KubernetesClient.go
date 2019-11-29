@@ -40,7 +40,7 @@ func NewKubernetesClient(credential *core.Credential) *KubernetesClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "kubernetes",
-            Revision:    "0.5.1",
+            Revision:    "0.6.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -53,7 +53,11 @@ func (c *KubernetesClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-/* cluster 摘除 nodeGroup 并删除 nodeGroup */
+func (c *KubernetesClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
+}
+
+/* 集群摘除工作节点组并删除工作节点组 */
 func (c *KubernetesClient) DeleteNodeGroup(request *kubernetes.DeleteNodeGroupRequest) (*kubernetes.DeleteNodeGroupResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -73,7 +77,7 @@ func (c *KubernetesClient) DeleteNodeGroup(request *kubernetes.DeleteNodeGroupRe
     return jdResp, err
 }
 
-/* 查询节点组列表 */
+/* 查询工作节点组列表 */
 func (c *KubernetesClient) DescribeNodeGroups(request *kubernetes.DescribeNodeGroupsRequest) (*kubernetes.DescribeNodeGroupsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -133,8 +137,8 @@ func (c *KubernetesClient) SetAddons(request *kubernetes.SetAddonsRequest) (*kub
     return jdResp, err
 }
 
-/* 创建k8s的nodeGroup
-要求集群状态为running
+/* 创建工作节点组<br>
+- 要求集群状态为running
  */
 func (c *KubernetesClient) CreateNodeGroup(request *kubernetes.CreateNodeGroupRequest) (*kubernetes.CreateNodeGroupResponse, error) {
     if request == nil {
@@ -175,7 +179,7 @@ func (c *KubernetesClient) DeleteCluster(request *kubernetes.DeleteClusterReques
     return jdResp, err
 }
 
-/* 修改节点组的 名称 和 描述 */
+/* 修改工作节点组的 名称 和 描述<br>name 和 description 必须要指定一个 */
 func (c *KubernetesClient) ModifyNodeGroup(request *kubernetes.ModifyNodeGroupRequest) (*kubernetes.ModifyNodeGroupResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -215,7 +219,7 @@ func (c *KubernetesClient) SetUserMetrics(request *kubernetes.SetUserMetricsRequ
     return jdResp, err
 }
 
-/* 调整节点组实例数量 */
+/* 调整工作节点组实例数量 */
 func (c *KubernetesClient) SetNodeGroupSize(request *kubernetes.SetNodeGroupSizeRequest) (*kubernetes.SetNodeGroupSizeResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -235,7 +239,7 @@ func (c *KubernetesClient) SetNodeGroupSize(request *kubernetes.SetNodeGroupSize
     return jdResp, err
 }
 
-/* 查询(k8s 集群)服务配置信息 */
+/* 查询 kubernetes 集群服务配置信息 */
 func (c *KubernetesClient) DescribeServerConfig(request *kubernetes.DescribeServerConfigRequest) (*kubernetes.DescribeServerConfigResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -295,7 +299,7 @@ func (c *KubernetesClient) DescribeVersions(request *kubernetes.DescribeVersions
     return jdResp, err
 }
 
-/* 设置节点组的自动修复 */
+/* 设置工作节点组的自动修复 */
 func (c *KubernetesClient) SetAutoRepair(request *kubernetes.SetAutoRepairRequest) (*kubernetes.SetAutoRepairResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -315,7 +319,7 @@ func (c *KubernetesClient) SetAutoRepair(request *kubernetes.SetAutoRepairReques
     return jdResp, err
 }
 
-/* 查询(k8s 集群)配额 */
+/* 查询 kubernetes 集群配额 */
 func (c *KubernetesClient) DescribeQuotas(request *kubernetes.DescribeQuotasRequest) (*kubernetes.DescribeQuotasResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -335,7 +339,7 @@ func (c *KubernetesClient) DescribeQuotas(request *kubernetes.DescribeQuotasRequ
     return jdResp, err
 }
 
-/* 查询单个节点组详情 */
+/* 查询单个工作节点组详情 */
 func (c *KubernetesClient) DescribeNodeGroup(request *kubernetes.DescribeNodeGroupRequest) (*kubernetes.DescribeNodeGroupResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -395,7 +399,7 @@ func (c *KubernetesClient) DescribeNodeVersion(request *kubernetes.DescribeNodeV
     return jdResp, err
 }
 
-/* 回滚未升级完的节点组 */
+/* 回滚未升级完的工作节点组 */
 func (c *KubernetesClient) RollbackNodeGroupUpgrade(request *kubernetes.RollbackNodeGroupUpgradeRequest) (*kubernetes.RollbackNodeGroupUpgradeResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -531,7 +535,7 @@ func (c *KubernetesClient) DescribeCluster(request *kubernetes.DescribeClusterRe
     return jdResp, err
 }
 
-/* 修改集群的 名称 和 描述。 */
+/* 修改集群的 名称 和 描述。<br>集群 name 和 description 必须要指定一个 */
 func (c *KubernetesClient) ModifyCluster(request *kubernetes.ModifyClusterRequest) (*kubernetes.ModifyClusterResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")

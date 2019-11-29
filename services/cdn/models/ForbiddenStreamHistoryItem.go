@@ -25,8 +25,11 @@ type ForbiddenStreamHistoryItem struct {
     /* 封禁推流的app (Optional) */
     App string `json:"app"`
 
+    /* 封禁的IP (Optional) */
+    PublishIp string `json:"publishIp"`
+
     /* 禁播类型:forever永不禁播limit限时禁播 (Optional) */
-    Type string `json:"type"`
+    ForbiddenType string `json:"forbiddenType"`
 
     /* 禁播时长 (Optional) */
     Ttl int64 `json:"ttl"`
@@ -36,4 +39,7 @@ type ForbiddenStreamHistoryItem struct {
 
     /* 结束禁播时间 (Optional) */
     EndTime string `json:"endTime"`
+
+    /* 禁播类型说明 (Optional) */
+    ForbiddenTypeDesc string `json:"forbiddenTypeDesc"`
 }

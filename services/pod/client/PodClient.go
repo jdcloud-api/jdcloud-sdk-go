@@ -40,7 +40,7 @@ func NewPodClient(credential *core.Credential) *PodClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "pod",
-            Revision:    "2.1.0",
+            Revision:    "2.2.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,6 +51,10 @@ func (c *PodClient) SetConfig(config *core.Config) {
 
 func (c *PodClient) SetLogger(logger core.Logger) {
     c.Logger = logger
+}
+
+func (c *PodClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
 }
 
 /* 查询资源的配额，支持：原生容器 pod 和 secret.
@@ -179,6 +183,226 @@ func (c *PodClient) DisassociateElasticIp(request *pod.DisassociateElasticIpRequ
     return jdResp, err
 }
 
+/* 设置TTY大小 */
+func (c *PodClient) ResizeTTY(request *pod.ResizeTTYRequest) (*pod.ResizeTTYResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &pod.ResizeTTYResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 将容器连接到本地标准输入输出
+ */
+func (c *PodClient) Attach(request *pod.AttachRequest) (*pod.AttachResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &pod.AttachResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 执行exec，此接口需要升级Http协议到WebSocket */
+func (c *PodClient) ExecStart(request *pod.ExecStartRequest) (*pod.ExecStartResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &pod.ExecStartResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 启动处于关闭状态的单个 pod ，处在任务执行中的 pod 无法启动。<br>
+pod 实例或其绑定的云盘已欠费时，容器将无法正常启动。<br>
+ */
+func (c *PodClient) StartPod(request *pod.StartPodRequest) (*pod.StartPodResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &pod.StartPodResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 批量查询 pod 的详细信息<br>
+此接口支持分页查询，默认每页20条。
+ */
+func (c *PodClient) DescribePods(request *pod.DescribePodsRequest) (*pod.DescribePodsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &pod.DescribePodsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取exec退出码 */
+func (c *PodClient) ExecGetExitCode(request *pod.ExecGetExitCodeRequest) (*pod.ExecGetExitCodeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &pod.ExecGetExitCodeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建一台或多台 pod
+- 创建pod需要通过实名认证
+- hostname规范
+    - 支持两种方式：以标签方式书写或以完整主机名方式书写
+    - 标签规范
+        - 0-9，a-z(不分大小写)和-（减号），其他的都是无效的字符串
+        - 不能以减号开始，也不能以减号结尾
+        - 最小1个字符，最大63个字符
+    - 完整的主机名由一系列标签与点连接组成
+        - 标签与标签之间使用“.”(点)进行连接
+        - 不能以“.”(点)开始，也不能以“.”(点)结尾
+        - 整个主机名（包括标签以及分隔点“.”）最多有63个ASCII字符
+    - 正则：^([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9])(\.([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9]))*$
+- 网络配置
+    - 指定主网卡配置信息
+        - 必须指定subnetId
+        - 可以指定elasticIp规格来约束创建的弹性IP，带宽取值范围[1-100]Mbps，步进1Mbps
+        - 可以指定网卡的主IP(primaryIpAddress)和辅助IP(secondaryIpAddresses)，此时maxCount只能为1
+        - 可以设置网卡的自动删除autoDelete属性，指明是否删除实例时自动删除网卡
+        - 安全组securityGroup需与子网Subnet在同一个私有网络VPC内
+        - 一个 pod 创建时至多指定5个安全组
+        - 主网卡deviceIndex设置为1
+- 存储
+    - volume分为container system disk和pod data volume，container system disk的挂载目录是/，data volume的挂载目录可以随意指定
+    - container system disk
+        - 只能是cloud类别
+        - 云硬盘类型可以选择hdd.std1、ssd.gp1、ssd.io1
+        - 磁盘大小
+            - 所有类型：范围[20,100]GB，步长为10G
+        - 自动删除
+            - 默认自动删除
+        - 可以选择已存在的云硬盘
+    - data volume
+        - 当前只能选择cloud类别
+        - 云硬盘类型可以选择hdd.std1、ssd.gp1、ssd.io1
+        - 磁盘大小
+            - 所有类型：范围[20,4000]GB，步长为10G
+        - 自动删除
+            - 默认自动删除
+        - 可以选择已存在的云硬盘
+        - 可以从快照创建磁盘
+- pod 容器日志
+    - default：默认在本地分配10MB的存储空间，自动rotate
+- DNS-1123 label规范
+    - 长度范围: [1-63]
+    - 正则表达式: ^[a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?$
+    - 例子: my-name, 123-abc
+- DNS-1123 subdomain规范
+    - 长度范围: [1-253]
+    - 正则表达式: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
+    - 例子: example.com, registry.docker-cn.com
+- 其他
+    - 创建完成后，pod 状态为running
+    - maxCount为最大努力，不保证一定能达到maxCount
+ */
+func (c *PodClient) CreatePods(request *pod.CreatePodsRequest) (*pod.CreatePodsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &pod.CreatePodsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* podName 是否符合命名规范，以及查询指定 podName 区域内是否已经存在。
+ */
+func (c *PodClient) CheckPodName(request *pod.CheckPodNameRequest) (*pod.CheckPodNameResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &pod.CheckPodNameResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询单个容器日志
  */
 func (c *PodClient) GetContainerLogs(request *pod.GetContainerLogsRequest) (*pod.GetContainerLogsResponse, error) {
@@ -212,47 +436,6 @@ func (c *PodClient) DescribeInstanceTypes(request *pod.DescribeInstanceTypesRequ
     }
 
     jdResp := &pod.DescribeInstanceTypesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 设置TTY大小 */
-func (c *PodClient) ResizeTTY(request *pod.ResizeTTYRequest) (*pod.ResizeTTYResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &pod.ResizeTTYResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 将容器连接到本地标准输入输出
- */
-func (c *PodClient) Attach(request *pod.AttachRequest) (*pod.AttachResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &pod.AttachResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -327,26 +510,6 @@ func (c *PodClient) RebuildPod(request *pod.RebuildPodRequest) (*pod.RebuildPodR
     return jdResp, err
 }
 
-/* 执行exec，此接口需要升级Http协议到WebSocket */
-func (c *PodClient) ExecStart(request *pod.ExecStartRequest) (*pod.ExecStartResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &pod.ExecStartResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* pod 绑定弹性公网 IP，绑定的是主网卡、主内网IP对应的弹性IP. <br>
 一个 pod 只能绑定一个弹性公网 IP(主网卡)，若主网卡已存在弹性公网IP，会返回错误。<br>
 如果是黑名单中的用户，会返回错误。
@@ -370,10 +533,17 @@ func (c *PodClient) AssociateElasticIp(request *pod.AssociateElasticIpRequest) (
     return jdResp, err
 }
 
-/* 启动处于关闭状态的单个 pod ，处在任务执行中的 pod 无法启动。<br>
-pod 实例或其绑定的云盘已欠费时，容器将无法正常启动。<br>
+/* 调整pod实例类型配置。
+- pod phase 需是停止状态；
+- 支持升配、降配；**不支持原有规格**
+- 计费类型不变
+    - 包年包月：需要计算配置差价，如果所选配置价格高，需要补齐到期前的差价，到期时间不变；如果所选配置价格低，需要延长到期时间
+    - 按配置：按照所选规格，进行计费
+- 支持对 pod 中的容器进行资源限制、资源需求的调整
+    - 容器需求的总资源占用不得超过 pod 的实例类型
+    - 容器资源限制不得超过 pod 的实例类型
  */
-func (c *PodClient) StartPod(request *pod.StartPodRequest) (*pod.StartPodResponse, error) {
+func (c *PodClient) ResizePod(request *pod.ResizePodRequest) (*pod.ResizePodResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -382,49 +552,7 @@ func (c *PodClient) StartPod(request *pod.StartPodRequest) (*pod.StartPodRespons
         return nil, err
     }
 
-    jdResp := &pod.StartPodResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 批量查询 pod 的详细信息<br>
-此接口支持分页查询，默认每页20条。
- */
-func (c *PodClient) DescribePods(request *pod.DescribePodsRequest) (*pod.DescribePodsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &pod.DescribePodsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 获取exec退出码 */
-func (c *PodClient) ExecGetExitCode(request *pod.ExecGetExitCodeRequest) (*pod.ExecGetExitCodeResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &pod.ExecGetExitCodeResponse{}
+    jdResp := &pod.ResizePodResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -446,80 +574,6 @@ func (c *PodClient) ExecCreate(request *pod.ExecCreateRequest) (*pod.ExecCreateR
     }
 
     jdResp := &pod.ExecCreateResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 创建一台或多台 pod
-- 创建pod需要通过实名认证
-- hostname规范
-    - 支持两种方式：以标签方式书写或以完整主机名方式书写
-    - 标签规范
-        - 0-9，a-z(不分大小写)和-（减号），其他的都是无效的字符串
-        - 不能以减号开始，也不能以减号结尾
-        - 最小1个字符，最大63个字符
-    - 完整的主机名由一系列标签与点连接组成
-        - 标签与标签之间使用“.”(点)进行连接
-        - 不能以“.”(点)开始，也不能以“.”(点)结尾
-        - 整个主机名（包括标签以及分隔点“.”）最多有63个ASCII字符
-    - 正则：`^([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9])(\.([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9]))*$`
-- 网络配置
-    - 指定主网卡配置信息
-        - 必须指定subnetId
-        - 可以指定elasticIp规格来约束创建的弹性IP，带宽取值范围[1-100]Mbps，步进1Mbps
-        - 可以指定网卡的主IP(primaryIpAddress)和辅助IP(secondaryIpAddresses)，此时maxCount只能为1
-        - 可以设置网卡的自动删除autoDelete属性，指明是否删除实例时自动删除网卡
-        - 安全组securityGroup需与子网Subnet在同一个私有网络VPC内
-        - 一个 pod 创建时至多指定5个安全组
-        - 主网卡deviceIndex设置为1
-- 存储
-    - volume分为container system disk和pod data volume，container system disk的挂载目录是/，data volume的挂载目录可以随意指定
-    - container system disk
-        - 只能是cloud类别
-        - 云硬盘类型可以选择hdd.std1、ssd.gp1、ssd.io1
-        - 磁盘大小
-            - 所有类型：范围[20,100]GB，步长为10G
-        - 自动删除
-            - 默认自动删除
-        - 可以选择已存在的云硬盘
-    - data volume
-        - 当前只能选择cloud类别
-        - 云硬盘类型可以选择hdd.std1、ssd.gp1、ssd.io1
-        - 磁盘大小
-            - 所有类型：范围[20,4000]GB，步长为10G
-        - 自动删除
-            - 默认自动删除
-        - 可以选择已存在的云硬盘
-        - 可以从快照创建磁盘
-- pod 容器日志
-    - default：默认在本地分配10MB的存储空间，自动rotate
-- DNS-1123 label规范
-    - 长度范围: [1-63]
-    - 正则表达式: `^[a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?$`
-    - 例子: my-name, 123-abc
-- DNS-1123 subdomain规范
-    - 长度范围: [1-253]
-    - 正则表达式: `^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$`
-    - 例子: example.com, registry.docker-cn.com
-- 其他
-    - 创建完成后，pod 状态为running
-    - maxCount为最大努力，不保证一定能达到maxCount
- */
-func (c *PodClient) CreatePods(request *pod.CreatePodsRequest) (*pod.CreatePodsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &pod.CreatePodsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -583,27 +637,6 @@ func (c *PodClient) DeleteSecret(request *pod.DeleteSecretRequest) (*pod.DeleteS
     }
 
     jdResp := &pod.DeleteSecretResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* podName 是否符合命名规范，以及查询指定 podName 区域内是否已经存在。
- */
-func (c *PodClient) CheckPodName(request *pod.CheckPodNameRequest) (*pod.CheckPodNameResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &pod.CheckPodNameResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

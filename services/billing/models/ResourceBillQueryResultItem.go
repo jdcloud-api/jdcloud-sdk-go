@@ -99,4 +99,7 @@ type ResourceBillQueryResultItem struct {
 
     /* 资源名称 (Optional) */
     ResourceName string `json:"resourceName"`
+
+    /* 标签明细 (Optional) */
+    TagDetails []ResourceTagVo `json:"tagDetails"`
 }

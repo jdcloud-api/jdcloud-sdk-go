@@ -33,7 +33,7 @@ type ModifyClusterRequest struct {
     /* 集群名称 (Optional) */
     Name *string `json:"name"`
 
-    /* 集群 name 和 description 必须要指定一个 (Optional) */
+    /* 集群描述 (Optional) */
     Description *string `json:"description"`
 }
 
@@ -64,7 +64,7 @@ func NewModifyClusterRequest(
  * param regionId: 地域 ID (Required)
  * param clusterId: 集群 ID (Required)
  * param name: 集群名称 (Optional)
- * param description: 集群 name 和 description 必须要指定一个 (Optional)
+ * param description: 集群描述 (Optional)
  */
 func NewModifyClusterRequestWithAllParams(
     regionId string,
@@ -115,7 +115,7 @@ func (r *ModifyClusterRequest) SetName(name string) {
     r.Name = &name
 }
 
-/* param description: 集群 name 和 description 必须要指定一个(Optional) */
+/* param description: 集群描述(Optional) */
 func (r *ModifyClusterRequest) SetDescription(description string) {
     r.Description = &description
 }

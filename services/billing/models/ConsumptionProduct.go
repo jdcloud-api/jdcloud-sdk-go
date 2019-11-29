@@ -51,4 +51,7 @@ type ConsumptionProduct struct {
 
     /*  (Optional) */
     ProductDetailList interface{} `json:"productDetailList"`
+
+    /* 分组显示值 (Optional) */
+    GroupTagValue string `json:"groupTagValue"`
 }

@@ -53,6 +53,10 @@ func (c *OssopenapiClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
+func (c *OssopenapiClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
+}
+
 /* 根据type获取指定bucket用量数据 */
 func (c *OssopenapiClient) GetSingleBucketCapacity(request *ossopenapi.GetSingleBucketCapacityRequest) (*ossopenapi.GetSingleBucketCapacityResponse, error) {
     if request == nil {

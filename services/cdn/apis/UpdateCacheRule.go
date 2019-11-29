@@ -39,7 +39,7 @@ type UpdateCacheRuleRequest struct {
     /* 缓存方式：0、不缓存，1自定义 (Optional) */
     CacheType *int `json:"cacheType"`
 
-    /* 配置id (Optional) */
+    /* 缓存规则配置ID (Optional) */
     ConfigId *int64 `json:"configId"`
 }
 
@@ -69,7 +69,7 @@ func NewUpdateCacheRuleRequest(
  * param ttl: 缓存时间,单位秒 (Optional)
  * param contents: 规则内容。其他类型只能以/或者.开头，如/a/b或.jpg (Optional)
  * param cacheType: 缓存方式：0、不缓存，1自定义 (Optional)
- * param configId: 配置id (Optional)
+ * param configId: 缓存规则配置ID (Optional)
  */
 func NewUpdateCacheRuleRequestWithAllParams(
     domain string,
@@ -134,7 +134,7 @@ func (r *UpdateCacheRuleRequest) SetCacheType(cacheType int) {
     r.CacheType = &cacheType
 }
 
-/* param configId: 配置id(Optional) */
+/* param configId: 缓存规则配置ID(Optional) */
 func (r *UpdateCacheRuleRequest) SetConfigId(configId int64) {
     r.ConfigId = &configId
 }

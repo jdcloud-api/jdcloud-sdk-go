@@ -84,4 +84,7 @@ type BillSummary struct {
 
     /* 欠费金额 (Optional) */
     ArrearFee int `json:"arrearFee"`
+
+    /* 标签明细 (Optional) */
+    TagDetails []ResourceTagVo `json:"tagDetails"`
 }

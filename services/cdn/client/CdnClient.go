@@ -40,7 +40,7 @@ func NewCdnClient(credential *core.Credential) *CdnClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "cdn",
-            Revision:    "0.8.3",
+            Revision:    "0.9.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,6 +51,10 @@ func (c *CdnClient) SetConfig(config *core.Config) {
 
 func (c *CdnClient) SetLogger(logger core.Logger) {
     c.Logger = logger
+}
+
+func (c *CdnClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
 }
 
 /* 设置线上计费方式 */
@@ -64,26 +68,6 @@ func (c *CdnClient) SetOnlineBillingType(request *cdn.SetOnlineBillingTypeReques
     }
 
     jdResp := &cdn.SetOnlineBillingTypeResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询统计数据并进行汇总加和 */
-func (c *CdnClient) QueryMixTrafficGroupSum(request *cdn.QueryMixTrafficGroupSumRequest) (*cdn.QueryMixTrafficGroupSumResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &cdn.QueryMixTrafficGroupSumResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -113,6 +97,26 @@ func (c *CdnClient) QueryDomainGroupDetail(request *cdn.QueryDomainGroupDetailRe
     return jdResp, err
 }
 
+/* 查询WAF黑名单开关 */
+func (c *CdnClient) QueryWafBlackRuleSwitch(request *cdn.QueryWafBlackRuleSwitchRequest) (*cdn.QueryWafBlackRuleSwitchResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryWafBlackRuleSwitchResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 删除httpHeader */
 func (c *CdnClient) DeleteHttpHeader(request *cdn.DeleteHttpHeaderRequest) (*cdn.DeleteHttpHeaderResponse, error) {
     if request == nil {
@@ -133,6 +137,1306 @@ func (c *CdnClient) DeleteHttpHeader(request *cdn.DeleteHttpHeaderRequest) (*cdn
     return jdResp, err
 }
 
+/* 设置是否开启过滤参数 */
+func (c *CdnClient) OperateLiveDomainIgnoreQueryString(request *cdn.OperateLiveDomainIgnoreQueryStringRequest) (*cdn.OperateLiveDomainIgnoreQueryStringResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.OperateLiveDomainIgnoreQueryStringResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 禁用WAF黑名单 */
+func (c *CdnClient) DisableWafBlackRules(request *cdn.DisableWafBlackRulesRequest) (*cdn.DisableWafBlackRulesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.DisableWafBlackRulesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询web防护开关 */
+func (c *CdnClient) QueryWebProtectSettings(request *cdn.QueryWebProtectSettingsRequest) (*cdn.QueryWebProtectSettingsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryWebProtectSettingsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询geo地域 */
+func (c *CdnClient) QueryGeoAreas(request *cdn.QueryGeoAreasRequest) (*cdn.QueryGeoAreasResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryGeoAreasResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询TOP Url */
+func (c *CdnClient) QueryStatisticsTopUrl(request *cdn.QueryStatisticsTopUrlRequest) (*cdn.QueryStatisticsTopUrlResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryStatisticsTopUrlResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询域名配置状态 */
+func (c *CdnClient) QueryDomainConfigStatus(request *cdn.QueryDomainConfigStatusRequest) (*cdn.QueryDomainConfigStatusResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryDomainConfigStatusResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取所有上层节点的ip */
+func (c *CdnClient) GetAllUpperNodeIpList(request *cdn.GetAllUpperNodeIpListRequest) (*cdn.GetAllUpperNodeIpListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.GetAllUpperNodeIpListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 分地区及运营商查询统计数据 */
+func (c *CdnClient) QueryLiveStatisticsAreaDataGroupBy(request *cdn.QueryLiveStatisticsAreaDataGroupByRequest) (*cdn.QueryLiveStatisticsAreaDataGroupByResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryLiveStatisticsAreaDataGroupByResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设置ip黑名单 */
+func (c *CdnClient) SetIpBlackList(request *cdn.SetIpBlackListRequest) (*cdn.SetIpBlackListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.SetIpBlackListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改指定的白名单规则 */
+func (c *CdnClient) UpdateWafWhiteRule(request *cdn.UpdateWafWhiteRuleRequest) (*cdn.UpdateWafWhiteRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.UpdateWafWhiteRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新域名配置 */
+func (c *CdnClient) SetDomainConfig(request *cdn.SetDomainConfigRequest) (*cdn.SetDomainConfigResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.SetDomainConfigResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设置回源302跳转 */
+func (c *CdnClient) SetFollowRedirect(request *cdn.SetFollowRedirectRequest) (*cdn.SetFollowRedirectResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.SetFollowRedirectResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 启动加速域名 */
+func (c *CdnClient) StartDomain(request *cdn.StartDomainRequest) (*cdn.StartDomainResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.StartDomainResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 分地域运营商带宽查询接口 */
+func (c *CdnClient) QueryBandWithArea(request *cdn.QueryBandWithAreaRequest) (*cdn.QueryBandWithAreaResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryBandWithAreaResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设置url鉴权 */
+func (c *CdnClient) SetAccesskeyConfig(request *cdn.SetAccesskeyConfigRequest) (*cdn.SetAccesskeyConfigResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.SetAccesskeyConfigResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设置range参数 */
+func (c *CdnClient) SetRange(request *cdn.SetRangeRequest) (*cdn.SetRangeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.SetRangeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设置直播域名ip黑名单 */
+func (c *CdnClient) SetLiveDomainIpBlackList(request *cdn.SetLiveDomainIpBlackListRequest) (*cdn.SetLiveDomainIpBlackListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.SetLiveDomainIpBlackListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设置CC 防护开关 */
+func (c *CdnClient) SetCCProtectSwitch(request *cdn.SetCCProtectSwitchRequest) (*cdn.SetCCProtectSwitchResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.SetCCProtectSwitchResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询源站监控信息 */
+func (c *CdnClient) QueryMonitor(request *cdn.QueryMonitorRequest) (*cdn.QueryMonitorResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryMonitorResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询直播域名app列表 */
+func (c *CdnClient) QueryLiveDomainApps(request *cdn.QueryLiveDomainAppsRequest) (*cdn.QueryLiveDomainAppsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryLiveDomainAppsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 禁用WAF白名单 */
+func (c *CdnClient) DisableWafWhiteRules(request *cdn.DisableWafWhiteRulesRequest) (*cdn.DisableWafWhiteRulesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.DisableWafWhiteRulesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 新增一条黑名单规则 */
+func (c *CdnClient) CreateWafBlackRule(request *cdn.CreateWafBlackRuleRequest) (*cdn.CreateWafBlackRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.CreateWafBlackRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建域名组 */
+func (c *CdnClient) CreateDomainGroup(request *cdn.CreateDomainGroupRequest) (*cdn.CreateDomainGroupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.CreateDomainGroupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询web防护开关 */
+func (c *CdnClient) QueryWebProtectSwitch(request *cdn.QueryWebProtectSwitchRequest) (*cdn.QueryWebProtectSwitchResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryWebProtectSwitchResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询攻击来源 */
+func (c *CdnClient) WafQueryPvForAreaAndIp(request *cdn.WafQueryPvForAreaAndIpRequest) (*cdn.WafQueryPvForAreaAndIpResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.WafQueryPvForAreaAndIpResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设置ip黑名单状态 */
+func (c *CdnClient) OperateIpBlackList(request *cdn.OperateIpBlackListRequest) (*cdn.OperateIpBlackListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.OperateIpBlackListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询统计数据 */
+func (c *CdnClient) QueryMixStatisticsData(request *cdn.QueryMixStatisticsDataRequest) (*cdn.QueryMixStatisticsDataResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryMixStatisticsDataResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询刷新预热任务 */
+func (c *CdnClient) QueryRefreshTask(request *cdn.QueryRefreshTaskRequest) (*cdn.QueryRefreshTaskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryRefreshTaskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询加速域名详情 */
+func (c *CdnClient) GetDomainDetail(request *cdn.GetDomainDetailRequest) (*cdn.GetDomainDetailResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.GetDomainDetailResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设置网络防护层规则总开关 */
+func (c *CdnClient) SetNetProtectionRulesSwitch(request *cdn.SetNetProtectionRulesSwitchRequest) (*cdn.SetNetProtectionRulesSwitchResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.SetNetProtectionRulesSwitchResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 攻击记录查询 */
+func (c *CdnClient) SearchAttackLog(request *cdn.SearchAttackLogRequest) (*cdn.SearchAttackLogResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.SearchAttackLogResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 分地区及运营商查询统计数据 */
+func (c *CdnClient) QueryStatisticsDataGroupByArea(request *cdn.QueryStatisticsDataGroupByAreaRequest) (*cdn.QueryStatisticsDataGroupByAreaResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryStatisticsDataGroupByAreaResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设置URL鉴权 */
+func (c *CdnClient) SetLiveDomainAccessKey(request *cdn.SetLiveDomainAccessKeyRequest) (*cdn.SetLiveDomainAccessKeyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.SetLiveDomainAccessKeyResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询WAF黑名单规则列表 */
+func (c *CdnClient) QuerywafBlackRules(request *cdn.QuerywafBlackRulesRequest) (*cdn.QuerywafBlackRulesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QuerywafBlackRulesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除禁播流 */
+func (c *CdnClient) DeleteForbiddenStream(request *cdn.DeleteForbiddenStreamRequest) (*cdn.DeleteForbiddenStreamResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.DeleteForbiddenStreamResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设置WAF白名单开关 */
+func (c *CdnClient) SetWafWhiteRuleSwitch(request *cdn.SetWafWhiteRuleSwitchRequest) (*cdn.SetWafWhiteRuleSwitchResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.SetWafWhiteRuleSwitchResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设置IP白名单 */
+func (c *CdnClient) SetPushIpWhiteList(request *cdn.SetPushIpWhiteListRequest) (*cdn.SetPushIpWhiteListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.SetPushIpWhiteListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据taskIds查询刷新预热任务 */
+func (c *CdnClient) QueryRefreshTaskByIds(request *cdn.QueryRefreshTaskByIdsRequest) (*cdn.QueryRefreshTaskByIdsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryRefreshTaskByIdsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询统计数据并进行汇总加和 */
+func (c *CdnClient) QueryStatisticsDataGroupSum(request *cdn.QueryStatisticsDataGroupSumRequest) (*cdn.QueryStatisticsDataGroupSumResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryStatisticsDataGroupSumResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 带宽查询接口 */
+func (c *CdnClient) QueryBand(request *cdn.QueryBandRequest) (*cdn.QueryBandResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryBandResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 添加httpHeader */
+func (c *CdnClient) SetHttpHeader(request *cdn.SetHttpHeaderRequest) (*cdn.SetHttpHeaderResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.SetHttpHeaderResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取所有上层节点的ip */
+func (c *CdnClient) CheckWhetherIpBelongToJCloud(request *cdn.CheckWhetherIpBelongToJCloudRequest) (*cdn.CheckWhetherIpBelongToJCloudResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.CheckWhetherIpBelongToJCloudResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询统计数据 */
+func (c *CdnClient) QueryLiveStatisticsData(request *cdn.QueryLiveStatisticsDataRequest) (*cdn.QueryLiveStatisticsDataResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryLiveStatisticsDataResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设置回源鉴权信息 */
+func (c *CdnClient) SetOriginAuthentication(request *cdn.SetOriginAuthenticationRequest) (*cdn.SetOriginAuthenticationResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.SetOriginAuthenticationResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 批量域名查询日志 */
+func (c *CdnClient) QueryDomainsLog(request *cdn.QueryDomainsLogRequest) (*cdn.QueryDomainsLogResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryDomainsLogResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 启用CC防护规则 */
+func (c *CdnClient) EnableCCProtectRule(request *cdn.EnableCCProtectRuleRequest) (*cdn.EnableCCProtectRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.EnableCCProtectRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设置域名refer */
+func (c *CdnClient) SetRefer(request *cdn.SetReferRequest) (*cdn.SetReferResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.SetReferResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询直播域名详情v1 */
+func (c *CdnClient) QueryLiveDomainDetail(request *cdn.QueryLiveDomainDetailRequest) (*cdn.QueryLiveDomainDetailResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryLiveDomainDetailResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询waf ip黑名单配置状态 */
+func (c *CdnClient) QueryIpBlackSettingStatus(request *cdn.QueryIpBlackSettingStatusRequest) (*cdn.QueryIpBlackSettingStatusResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryIpBlackSettingStatusResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建直播预热任务 */
+func (c *CdnClient) CreateLiveDomainPrefecthTask(request *cdn.CreateLiveDomainPrefecthTaskRequest) (*cdn.CreateLiveDomainPrefecthTaskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.CreateLiveDomainPrefecthTaskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询TOP IP */
+func (c *CdnClient) QueryStatisticsTopIp(request *cdn.QueryStatisticsTopIpRequest) (*cdn.QueryStatisticsTopIpResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryStatisticsTopIpResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询攻击记录详情 */
+func (c *CdnClient) WafQueryAttackDetails(request *cdn.WafQueryAttackDetailsRequest) (*cdn.WafQueryAttackDetailsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.WafQueryAttackDetailsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 停止源站监控 */
+func (c *CdnClient) StopMonitor(request *cdn.StopMonitorRequest) (*cdn.StopMonitorResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.StopMonitorResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询http header头 */
+func (c *CdnClient) QueryHttpHeader(request *cdn.QueryHttpHeaderRequest) (*cdn.QueryHttpHeaderResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryHttpHeaderResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询waf地域信息 */
+func (c *CdnClient) QueryWafRegions(request *cdn.QueryWafRegionsRequest) (*cdn.QueryWafRegionsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryWafRegionsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询直播域名详情v2 */
+func (c *CdnClient) QueryLiveDomainDetailV2(request *cdn.QueryLiveDomainDetailV2Request) (*cdn.QueryLiveDomainDetailV2Response, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryLiveDomainDetailV2Response{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建刷新预热回调任务 */
+func (c *CdnClient) CreateRefreshTaskForCallbackV2(request *cdn.CreateRefreshTaskForCallbackV2Request) (*cdn.CreateRefreshTaskForCallbackV2Response, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.CreateRefreshTaskForCallbackV2Response{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询WAF总开关 */
+func (c *CdnClient) QueryWafWhiteRuleSwitch(request *cdn.QueryWafWhiteRuleSwitchRequest) (*cdn.QueryWafWhiteRuleSwitchResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryWafWhiteRuleSwitchResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 新增一条CC防护规则 */
+func (c *CdnClient) CreateCCProtectRule(request *cdn.CreateCCProtectRuleRequest) (*cdn.CreateCCProtectRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.CreateCCProtectRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询直播预热任务 */
+func (c *CdnClient) QueryLivePrefetchTask(request *cdn.QueryLivePrefetchTaskRequest) (*cdn.QueryLivePrefetchTaskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryLivePrefetchTaskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 新增一条白名单规则 */
+func (c *CdnClient) CreateWafWhiteRule(request *cdn.CreateWafWhiteRuleRequest) (*cdn.CreateWafWhiteRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.CreateWafWhiteRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询WAF白名单规则列表 */
+func (c *CdnClient) QuerywafWhiteRules(request *cdn.QuerywafWhiteRulesRequest) (*cdn.QuerywafWhiteRulesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QuerywafWhiteRulesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设置http协议 */
+func (c *CdnClient) SetHttpType(request *cdn.SetHttpTypeRequest) (*cdn.SetHttpTypeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.SetHttpTypeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询日志 */
+func (c *CdnClient) QueryDomainLog(request *cdn.QueryDomainLogRequest) (*cdn.QueryDomainLogResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryDomainLogResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询统计数据并进行汇总加和 */
+func (c *CdnClient) QueryMixTrafficGroupSum(request *cdn.QueryMixTrafficGroupSumRequest) (*cdn.QueryMixTrafficGroupSumResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryMixTrafficGroupSumResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询oss存储域名 */
 func (c *CdnClient) QueryOssBuckets(request *cdn.QueryOssBucketsRequest) (*cdn.QueryOssBucketsResponse, error) {
     if request == nil {
@@ -144,6 +1448,26 @@ func (c *CdnClient) QueryOssBuckets(request *cdn.QueryOssBucketsRequest) (*cdn.Q
     }
 
     jdResp := &cdn.QueryOssBucketsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 攻击类型统计接口 */
+func (c *CdnClient) QueryAttackTypeCount(request *cdn.QueryAttackTypeCountRequest) (*cdn.QueryAttackTypeCountResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryAttackTypeCountResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -193,26 +1517,6 @@ func (c *CdnClient) SetLiveDomainBackSourceHost(request *cdn.SetLiveDomainBackSo
     return jdResp, err
 }
 
-/* 查询TOP Url */
-func (c *CdnClient) QueryStatisticsTopUrl(request *cdn.QueryStatisticsTopUrlRequest) (*cdn.QueryStatisticsTopUrlResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &cdn.QueryStatisticsTopUrlResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 设置转协议 */
 func (c *CdnClient) SetProtocolConvert(request *cdn.SetProtocolConvertRequest) (*cdn.SetProtocolConvertResponse, error) {
     if request == nil {
@@ -233,8 +1537,8 @@ func (c *CdnClient) SetProtocolConvert(request *cdn.SetProtocolConvertRequest) (
     return jdResp, err
 }
 
-/* 分地区及运营商查询统计数据 */
-func (c *CdnClient) QueryLiveStatisticsAreaDataGroupBy(request *cdn.QueryLiveStatisticsAreaDataGroupByRequest) (*cdn.QueryLiveStatisticsAreaDataGroupByResponse, error) {
+/* 查询CC防护规则列表 */
+func (c *CdnClient) QueryCCProtectRules(request *cdn.QueryCCProtectRulesRequest) (*cdn.QueryCCProtectRulesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -243,7 +1547,7 @@ func (c *CdnClient) QueryLiveStatisticsAreaDataGroupBy(request *cdn.QueryLiveSta
         return nil, err
     }
 
-    jdResp := &cdn.QueryLiveStatisticsAreaDataGroupByResponse{}
+    jdResp := &cdn.QueryCCProtectRulesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -284,26 +1588,6 @@ func (c *CdnClient) SetLiveDomainRefer(request *cdn.SetLiveDomainReferRequest) (
     }
 
     jdResp := &cdn.SetLiveDomainReferResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 设置ip黑名单 */
-func (c *CdnClient) SetIpBlackList(request *cdn.SetIpBlackListRequest) (*cdn.SetIpBlackListResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &cdn.SetIpBlackListResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -373,6 +1657,26 @@ func (c *CdnClient) SetUserAgentConfig(request *cdn.SetUserAgentConfigRequest) (
     return jdResp, err
 }
 
+/* 设置网络防护层规则 */
+func (c *CdnClient) SetNetProtectionRules(request *cdn.SetNetProtectionRulesRequest) (*cdn.SetNetProtectionRulesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.SetNetProtectionRulesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 设置直播域名回源信息 */
 func (c *CdnClient) SetLiveDomainBackSource(request *cdn.SetLiveDomainBackSourceRequest) (*cdn.SetLiveDomainBackSourceResponse, error) {
     if request == nil {
@@ -413,8 +1717,8 @@ func (c *CdnClient) SetFollowSourceProtocol(request *cdn.SetFollowSourceProtocol
     return jdResp, err
 }
 
-/* 设置回源302跳转 */
-func (c *CdnClient) SetFollowRedirect(request *cdn.SetFollowRedirectRequest) (*cdn.SetFollowRedirectResponse, error) {
+/* 设置推流中断超时时间 */
+func (c *CdnClient) SetPublishNormalTimeout(request *cdn.SetPublishNormalTimeoutRequest) (*cdn.SetPublishNormalTimeoutResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -423,7 +1727,7 @@ func (c *CdnClient) SetFollowRedirect(request *cdn.SetFollowRedirectRequest) (*c
         return nil, err
     }
 
-    jdResp := &cdn.SetFollowRedirectResponse{}
+    jdResp := &cdn.SetPublishNormalTimeoutResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -433,8 +1737,8 @@ func (c *CdnClient) SetFollowRedirect(request *cdn.SetFollowRedirectRequest) (*c
     return jdResp, err
 }
 
-/* 启动加速域名 */
-func (c *CdnClient) StartDomain(request *cdn.StartDomainRequest) (*cdn.StartDomainResponse, error) {
+/* 查看证书列表 */
+func (c *CdnClient) GetSslCertList(request *cdn.GetSslCertListRequest) (*cdn.GetSslCertListResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -443,47 +1747,7 @@ func (c *CdnClient) StartDomain(request *cdn.StartDomainRequest) (*cdn.StartDoma
         return nil, err
     }
 
-    jdResp := &cdn.StartDomainResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 设置url鉴权 */
-func (c *CdnClient) SetAccesskeyConfig(request *cdn.SetAccesskeyConfigRequest) (*cdn.SetAccesskeyConfigResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &cdn.SetAccesskeyConfigResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 设置range参数 */
-func (c *CdnClient) SetRange(request *cdn.SetRangeRequest) (*cdn.SetRangeResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &cdn.SetRangeResponse{}
+    jdResp := &cdn.GetSslCertListResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -553,8 +1817,8 @@ func (c *CdnClient) SetVideoDraft(request *cdn.SetVideoDraftRequest) (*cdn.SetVi
     return jdResp, err
 }
 
-/* 设置直播域名ip黑名单 */
-func (c *CdnClient) SetLiveDomainIpBlackList(request *cdn.SetLiveDomainIpBlackListRequest) (*cdn.SetLiveDomainIpBlackListResponse, error) {
+/* 绑定推流域名 */
+func (c *CdnClient) BindPublishDomain(request *cdn.BindPublishDomainRequest) (*cdn.BindPublishDomainResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -563,7 +1827,7 @@ func (c *CdnClient) SetLiveDomainIpBlackList(request *cdn.SetLiveDomainIpBlackLi
         return nil, err
     }
 
-    jdResp := &cdn.SetLiveDomainIpBlackListResponse{}
+    jdResp := &cdn.BindPublishDomainResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -573,8 +1837,8 @@ func (c *CdnClient) SetLiveDomainIpBlackList(request *cdn.SetLiveDomainIpBlackLi
     return jdResp, err
 }
 
-/* 查询源站监控信息 */
-func (c *CdnClient) QueryMonitor(request *cdn.QueryMonitorRequest) (*cdn.QueryMonitorResponse, error) {
+/* 查询CC 防护开关 */
+func (c *CdnClient) QueryCCProtectSwitch(request *cdn.QueryCCProtectSwitchRequest) (*cdn.QueryCCProtectSwitchResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -583,7 +1847,7 @@ func (c *CdnClient) QueryMonitor(request *cdn.QueryMonitorRequest) (*cdn.QueryMo
         return nil, err
     }
 
-    jdResp := &cdn.QueryMonitorResponse{}
+    jdResp := &cdn.QueryCCProtectSwitchResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -593,7 +1857,7 @@ func (c *CdnClient) QueryMonitor(request *cdn.QueryMonitorRequest) (*cdn.QueryMo
     return jdResp, err
 }
 
-/* 创建直播域名 */
+/* 创建直播域名V2 */
 func (c *CdnClient) CreateLiveDomain(request *cdn.CreateLiveDomainRequest) (*cdn.CreateLiveDomainResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -604,6 +1868,26 @@ func (c *CdnClient) CreateLiveDomain(request *cdn.CreateLiveDomainRequest) (*cdn
     }
 
     jdResp := &cdn.CreateLiveDomainResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设置web防护开关 */
+func (c *CdnClient) UpdateWebProtectSettings(request *cdn.UpdateWebProtectSettingsRequest) (*cdn.UpdateWebProtectSettingsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.UpdateWebProtectSettingsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -633,8 +1917,8 @@ func (c *CdnClient) OperateShareCache(request *cdn.OperateShareCacheRequest) (*c
     return jdResp, err
 }
 
-/* 查询直播域名app列表 */
-func (c *CdnClient) QueryLiveDomainApps(request *cdn.QueryLiveDomainAppsRequest) (*cdn.QueryLiveDomainAppsResponse, error) {
+/* 启用WAF白名单 */
+func (c *CdnClient) EnableWafWhiteRules(request *cdn.EnableWafWhiteRulesRequest) (*cdn.EnableWafWhiteRulesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -643,7 +1927,7 @@ func (c *CdnClient) QueryLiveDomainApps(request *cdn.QueryLiveDomainAppsRequest)
         return nil, err
     }
 
-    jdResp := &cdn.QueryLiveDomainAppsResponse{}
+    jdResp := &cdn.EnableWafWhiteRulesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -664,6 +1948,26 @@ func (c *CdnClient) QueryMixStatisticsWithAreaData(request *cdn.QueryMixStatisti
     }
 
     jdResp := &cdn.QueryMixStatisticsWithAreaDataResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设置web防护开关 */
+func (c *CdnClient) SetWebProtectSwitch(request *cdn.SetWebProtectSwitchRequest) (*cdn.SetWebProtectSwitchResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.SetWebProtectSwitchResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -733,8 +2037,8 @@ func (c *CdnClient) QueryAreaIspList(request *cdn.QueryAreaIspListRequest) (*cdn
     return jdResp, err
 }
 
-/* 创建域名组 */
-func (c *CdnClient) CreateDomainGroup(request *cdn.CreateDomainGroupRequest) (*cdn.CreateDomainGroupResponse, error) {
+/* 删除ccProtectRule */
+func (c *CdnClient) DeleteCCProtectRule(request *cdn.DeleteCCProtectRuleRequest) (*cdn.DeleteCCProtectRuleResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -743,7 +2047,7 @@ func (c *CdnClient) CreateDomainGroup(request *cdn.CreateDomainGroupRequest) (*c
         return nil, err
     }
 
-    jdResp := &cdn.CreateDomainGroupResponse{}
+    jdResp := &cdn.DeleteCCProtectRuleResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -753,8 +2057,8 @@ func (c *CdnClient) CreateDomainGroup(request *cdn.CreateDomainGroupRequest) (*c
     return jdResp, err
 }
 
-/* 设置ip黑名单状态 */
-func (c *CdnClient) OperateIpBlackList(request *cdn.OperateIpBlackListRequest) (*cdn.OperateIpBlackListResponse, error) {
+/* 设置WAF黑名单开关 */
+func (c *CdnClient) SetWafBlackRuleSwitch(request *cdn.SetWafBlackRuleSwitchRequest) (*cdn.SetWafBlackRuleSwitchResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -763,27 +2067,7 @@ func (c *CdnClient) OperateIpBlackList(request *cdn.OperateIpBlackListRequest) (
         return nil, err
     }
 
-    jdResp := &cdn.OperateIpBlackListResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询统计数据 */
-func (c *CdnClient) QueryMixStatisticsData(request *cdn.QueryMixStatisticsDataRequest) (*cdn.QueryMixStatisticsDataResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &cdn.QueryMixStatisticsDataResponse{}
+    jdResp := &cdn.SetWafBlackRuleSwitchResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -804,26 +2088,6 @@ func (c *CdnClient) QueryDefaultHttpHeaderKey(request *cdn.QueryDefaultHttpHeade
     }
 
     jdResp := &cdn.QueryDefaultHttpHeaderKeyResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询加速域名详情 */
-func (c *CdnClient) GetDomainDetail(request *cdn.GetDomainDetailRequest) (*cdn.GetDomainDetailResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &cdn.GetDomainDetailResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -913,6 +2177,26 @@ func (c *CdnClient) GetDomainListByFilter(request *cdn.GetDomainListByFilterRequ
     return jdResp, err
 }
 
+/* 查询总请求量与攻击请求量 */
+func (c *CdnClient) WafQueryPv(request *cdn.WafQueryPvRequest) (*cdn.WafQueryPvResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.WafQueryPvResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询回源302跳转信息 */
 func (c *CdnClient) QueryFollowRedirect(request *cdn.QueryFollowRedirectRequest) (*cdn.QueryFollowRedirectResponse, error) {
     if request == nil {
@@ -953,26 +2237,6 @@ func (c *CdnClient) QueryPushDomainORAppOrStream(request *cdn.QueryPushDomainORA
     return jdResp, err
 }
 
-/* 分地区及运营商查询统计数据 */
-func (c *CdnClient) QueryStatisticsDataGroupByArea(request *cdn.QueryStatisticsDataGroupByAreaRequest) (*cdn.QueryStatisticsDataGroupByAreaResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &cdn.QueryStatisticsDataGroupByAreaResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 删除缓存规则 */
 func (c *CdnClient) DeleteCacheRule(request *cdn.DeleteCacheRuleRequest) (*cdn.DeleteCacheRuleResponse, error) {
     if request == nil {
@@ -993,8 +2257,8 @@ func (c *CdnClient) DeleteCacheRule(request *cdn.DeleteCacheRuleRequest) (*cdn.D
     return jdResp, err
 }
 
-/* 设置URL鉴权 */
-func (c *CdnClient) SetLiveDomainAccessKey(request *cdn.SetLiveDomainAccessKeyRequest) (*cdn.SetLiveDomainAccessKeyResponse, error) {
+/* 查询网络防护层规则 */
+func (c *CdnClient) QueryNetProtectionRulesSwitch(request *cdn.QueryNetProtectionRulesSwitchRequest) (*cdn.QueryNetProtectionRulesSwitchResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -1003,7 +2267,7 @@ func (c *CdnClient) SetLiveDomainAccessKey(request *cdn.SetLiveDomainAccessKeyRe
         return nil, err
     }
 
-    jdResp := &cdn.SetLiveDomainAccessKeyResponse{}
+    jdResp := &cdn.QueryNetProtectionRulesSwitchResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1053,26 +2317,6 @@ func (c *CdnClient) QueryDomainsNotInGroup(request *cdn.QueryDomainsNotInGroupRe
     return jdResp, err
 }
 
-/* 删除禁播流 */
-func (c *CdnClient) DeleteForbiddenStream(request *cdn.DeleteForbiddenStreamRequest) (*cdn.DeleteForbiddenStreamResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &cdn.DeleteForbiddenStreamResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 查询协议跟随回源 */
 func (c *CdnClient) QueryFollowSourceProtocol(request *cdn.QueryFollowSourceProtocolRequest) (*cdn.QueryFollowSourceProtocolResponse, error) {
     if request == nil {
@@ -1084,46 +2328,6 @@ func (c *CdnClient) QueryFollowSourceProtocol(request *cdn.QueryFollowSourceProt
     }
 
     jdResp := &cdn.QueryFollowSourceProtocolResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询统计数据并进行汇总加和 */
-func (c *CdnClient) QueryStatisticsDataGroupSum(request *cdn.QueryStatisticsDataGroupSumRequest) (*cdn.QueryStatisticsDataGroupSumResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &cdn.QueryStatisticsDataGroupSumResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 添加httpHeader */
-func (c *CdnClient) SetHttpHeader(request *cdn.SetHttpHeaderRequest) (*cdn.SetHttpHeaderResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &cdn.SetHttpHeaderResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1153,6 +2357,26 @@ func (c *CdnClient) UpdateDomainGroup(request *cdn.UpdateDomainGroupRequest) (*c
     return jdResp, err
 }
 
+/* 查看证书详情 */
+func (c *CdnClient) GetSslCertDetail(request *cdn.GetSslCertDetailRequest) (*cdn.GetSslCertDetailResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.GetSslCertDetailResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 停止加速域名 */
 func (c *CdnClient) StopDomain(request *cdn.StopDomainRequest) (*cdn.StopDomainResponse, error) {
     if request == nil {
@@ -1173,8 +2397,8 @@ func (c *CdnClient) StopDomain(request *cdn.StopDomainRequest) (*cdn.StopDomainR
     return jdResp, err
 }
 
-/* 查询统计数据 */
-func (c *CdnClient) QueryLiveStatisticsData(request *cdn.QueryLiveStatisticsDataRequest) (*cdn.QueryLiveStatisticsDataResponse, error) {
+/* 查询关联域名 */
+func (c *CdnClient) DescribebindedDomains(request *cdn.DescribebindedDomainsRequest) (*cdn.DescribebindedDomainsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -1183,7 +2407,7 @@ func (c *CdnClient) QueryLiveStatisticsData(request *cdn.QueryLiveStatisticsData
         return nil, err
     }
 
-    jdResp := &cdn.QueryLiveStatisticsDataResponse{}
+    jdResp := &cdn.DescribebindedDomainsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1193,8 +2417,8 @@ func (c *CdnClient) QueryLiveStatisticsData(request *cdn.QueryLiveStatisticsData
     return jdResp, err
 }
 
-/* 设置域名refer */
-func (c *CdnClient) SetRefer(request *cdn.SetReferRequest) (*cdn.SetReferResponse, error) {
+/* 查询WAF总开关 */
+func (c *CdnClient) QueryWafSwitch(request *cdn.QueryWafSwitchRequest) (*cdn.QueryWafSwitchResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -1203,7 +2427,7 @@ func (c *CdnClient) SetRefer(request *cdn.SetReferRequest) (*cdn.SetReferRespons
         return nil, err
     }
 
-    jdResp := &cdn.SetReferResponse{}
+    jdResp := &cdn.QueryWafSwitchResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1213,8 +2437,8 @@ func (c *CdnClient) SetRefer(request *cdn.SetReferRequest) (*cdn.SetReferRespons
     return jdResp, err
 }
 
-/* 查询直播域名详情 */
-func (c *CdnClient) QueryLiveDomainDetail(request *cdn.QueryLiveDomainDetailRequest) (*cdn.QueryLiveDomainDetailResponse, error) {
+/* 查询全部推流域名 */
+func (c *CdnClient) DescribePublishDomains(request *cdn.DescribePublishDomainsRequest) (*cdn.DescribePublishDomainsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -1223,7 +2447,7 @@ func (c *CdnClient) QueryLiveDomainDetail(request *cdn.QueryLiveDomainDetailRequ
         return nil, err
     }
 
-    jdResp := &cdn.QueryLiveDomainDetailResponse{}
+    jdResp := &cdn.DescribePublishDomainsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1233,8 +2457,8 @@ func (c *CdnClient) QueryLiveDomainDetail(request *cdn.QueryLiveDomainDetailRequ
     return jdResp, err
 }
 
-/* 创建直播预热任务 */
-func (c *CdnClient) CreateLiveDomainPrefecthTask(request *cdn.CreateLiveDomainPrefecthTaskRequest) (*cdn.CreateLiveDomainPrefecthTaskResponse, error) {
+/* 创建刷新预热任务 */
+func (c *CdnClient) CreateRefreshTask(request *cdn.CreateRefreshTaskRequest) (*cdn.CreateRefreshTaskResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -1243,7 +2467,7 @@ func (c *CdnClient) CreateLiveDomainPrefecthTask(request *cdn.CreateLiveDomainPr
         return nil, err
     }
 
-    jdResp := &cdn.CreateLiveDomainPrefecthTaskResponse{}
+    jdResp := &cdn.CreateRefreshTaskResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1253,8 +2477,8 @@ func (c *CdnClient) CreateLiveDomainPrefecthTask(request *cdn.CreateLiveDomainPr
     return jdResp, err
 }
 
-/* 查询TOP IP */
-func (c *CdnClient) QueryStatisticsTopIp(request *cdn.QueryStatisticsTopIpRequest) (*cdn.QueryStatisticsTopIpResponse, error) {
+/* 查询网络防护层规则接口 */
+func (c *CdnClient) QueryNetProtectionRules(request *cdn.QueryNetProtectionRulesRequest) (*cdn.QueryNetProtectionRulesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -1263,7 +2487,7 @@ func (c *CdnClient) QueryStatisticsTopIp(request *cdn.QueryStatisticsTopIpReques
         return nil, err
     }
 
-    jdResp := &cdn.QueryStatisticsTopIpResponse{}
+    jdResp := &cdn.QueryNetProtectionRulesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1293,8 +2517,8 @@ func (c *CdnClient) PreviewCertificate(request *cdn.PreviewCertificateRequest) (
     return jdResp, err
 }
 
-/* 停止源站监控 */
-func (c *CdnClient) StopMonitor(request *cdn.StopMonitorRequest) (*cdn.StopMonitorResponse, error) {
+/* DDOS攻击报表接口 */
+func (c *CdnClient) QueryDdosGraph(request *cdn.QueryDdosGraphRequest) (*cdn.QueryDdosGraphResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -1303,7 +2527,67 @@ func (c *CdnClient) StopMonitor(request *cdn.StopMonitorRequest) (*cdn.StopMonit
         return nil, err
     }
 
-    jdResp := &cdn.StopMonitorResponse{}
+    jdResp := &cdn.QueryDdosGraphResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除WAF黑名单 */
+func (c *CdnClient) DeleteWafBlackRules(request *cdn.DeleteWafBlackRulesRequest) (*cdn.DeleteWafBlackRulesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.DeleteWafBlackRulesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改指定的黑名单规则 */
+func (c *CdnClient) UpdateWafBlackRule(request *cdn.UpdateWafBlackRuleRequest) (*cdn.UpdateWafBlackRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.UpdateWafBlackRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 启用WAF黑名单 */
+func (c *CdnClient) EnableWafBlackRules(request *cdn.EnableWafBlackRulesRequest) (*cdn.EnableWafBlackRulesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.EnableWafBlackRulesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1333,8 +2617,8 @@ func (c *CdnClient) QueryAccesskeyConfig(request *cdn.QueryAccesskeyConfigReques
     return jdResp, err
 }
 
-/* 查询http header头 */
-func (c *CdnClient) QueryHttpHeader(request *cdn.QueryHttpHeaderRequest) (*cdn.QueryHttpHeaderResponse, error) {
+/* 禁用CC防护规则 */
+func (c *CdnClient) DisableCCProtectRule(request *cdn.DisableCCProtectRuleRequest) (*cdn.DisableCCProtectRuleResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -1343,7 +2627,47 @@ func (c *CdnClient) QueryHttpHeader(request *cdn.QueryHttpHeaderRequest) (*cdn.Q
         return nil, err
     }
 
-    jdResp := &cdn.QueryHttpHeaderResponse{}
+    jdResp := &cdn.DisableCCProtectRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建刷新预热回调任务 */
+func (c *CdnClient) CreateRefreshTaskForCallback(request *cdn.CreateRefreshTaskForCallbackRequest) (*cdn.CreateRefreshTaskForCallbackResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.CreateRefreshTaskForCallbackResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设置转推域名 */
+func (c *CdnClient) ModifyLiveDomainForwardCustomVhost(request *cdn.ModifyLiveDomainForwardCustomVhostRequest) (*cdn.ModifyLiveDomainForwardCustomVhostResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.ModifyLiveDomainForwardCustomVhostResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1373,8 +2697,8 @@ func (c *CdnClient) BatchCreate(request *cdn.BatchCreateRequest) (*cdn.BatchCrea
     return jdResp, err
 }
 
-/* 查询直播预热任务 */
-func (c *CdnClient) QueryLivePrefetchTask(request *cdn.QueryLivePrefetchTaskRequest) (*cdn.QueryLivePrefetchTaskResponse, error) {
+/* 设置转推鉴权信息 */
+func (c *CdnClient) SetForwardAuthentication(request *cdn.SetForwardAuthenticationRequest) (*cdn.SetForwardAuthenticationResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -1383,7 +2707,7 @@ func (c *CdnClient) QueryLivePrefetchTask(request *cdn.QueryLivePrefetchTaskRequ
         return nil, err
     }
 
-    jdResp := &cdn.QueryLivePrefetchTaskResponse{}
+    jdResp := &cdn.SetForwardAuthenticationResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1413,6 +2737,46 @@ func (c *CdnClient) QueryLiveTrafficGroupSum(request *cdn.QueryLiveTrafficGroupS
     return jdResp, err
 }
 
+/* 删除WAF白名单 */
+func (c *CdnClient) DeleteWafWhiteRules(request *cdn.DeleteWafWhiteRulesRequest) (*cdn.DeleteWafWhiteRulesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.DeleteWafWhiteRulesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改CC防护规则 */
+func (c *CdnClient) UpdateCCProtectRule(request *cdn.UpdateCCProtectRuleRequest) (*cdn.UpdateCCProtectRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.UpdateCCProtectRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 设置线上计费方式 */
 func (c *CdnClient) QueryOnlineBillingType(request *cdn.QueryOnlineBillingTypeRequest) (*cdn.QueryOnlineBillingTypeResponse, error) {
     if request == nil {
@@ -1424,6 +2788,26 @@ func (c *CdnClient) QueryOnlineBillingType(request *cdn.QueryOnlineBillingTypeRe
     }
 
     jdResp := &cdn.QueryOnlineBillingTypeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据taskId查询刷新预热任务 */
+func (c *CdnClient) QueryRefreshTaskById(request *cdn.QueryRefreshTaskByIdRequest) (*cdn.QueryRefreshTaskByIdResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryRefreshTaskByIdResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1453,8 +2837,8 @@ func (c *CdnClient) UpdateCacheRule(request *cdn.UpdateCacheRuleRequest) (*cdn.U
     return jdResp, err
 }
 
-/* 设置http协议 */
-func (c *CdnClient) SetHttpType(request *cdn.SetHttpTypeRequest) (*cdn.SetHttpTypeResponse, error) {
+/* 设置WAF总开关 */
+func (c *CdnClient) SetWafSwitch(request *cdn.SetWafSwitchRequest) (*cdn.SetWafSwitchResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -1463,7 +2847,47 @@ func (c *CdnClient) SetHttpType(request *cdn.SetHttpTypeRequest) (*cdn.SetHttpTy
         return nil, err
     }
 
-    jdResp := &cdn.SetHttpTypeResponse{}
+    jdResp := &cdn.SetWafSwitchResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设置推流中断通知方式 */
+func (c *CdnClient) SetStreamNotifyInfo(request *cdn.SetStreamNotifyInfoRequest) (*cdn.SetStreamNotifyInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.SetStreamNotifyInfoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 上传证书 */
+func (c *CdnClient) UploadCert(request *cdn.UploadCertRequest) (*cdn.UploadCertResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.UploadCertResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1484,6 +2908,26 @@ func (c *CdnClient) CreateCacheRule(request *cdn.CreateCacheRuleRequest) (*cdn.C
     }
 
     jdResp := &cdn.CreateCacheRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建直播域名 */
+func (c *CdnClient) BatchCreateLiveDomain(request *cdn.BatchCreateLiveDomainRequest) (*cdn.BatchCreateLiveDomainResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.BatchCreateLiveDomainResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

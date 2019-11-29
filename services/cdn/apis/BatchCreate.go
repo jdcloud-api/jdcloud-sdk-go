@@ -69,6 +69,9 @@ type BatchCreateRequest struct {
 
     /*  (Optional) */
     OssSource *string `json:"ossSource"`
+
+    /* 加速区域 (mainLand:中国大陆，nonMainLand:海外加港澳台，all:全球)默认为中国大陆 (Optional) */
+    AccelerateRegion *string `json:"accelerateRegion"`
 }
 
 /*
@@ -104,6 +107,7 @@ func NewBatchCreateRequest(
  * param ipSource:  (Optional)
  * param domainSource:  (Optional)
  * param ossSource:  (Optional)
+ * param accelerateRegion: 加速区域 (mainLand:中国大陆，nonMainLand:海外加港澳台，all:全球)默认为中国大陆 (Optional)
  */
 func NewBatchCreateRequestWithAllParams(
     domains []string,
@@ -121,6 +125,7 @@ func NewBatchCreateRequestWithAllParams(
     ipSource []cdn.IpSourceInfo,
     domainSource []cdn.DomainSourceInfo,
     ossSource *string,
+    accelerateRegion *string,
 ) *BatchCreateRequest {
 
     return &BatchCreateRequest{
@@ -145,6 +150,7 @@ func NewBatchCreateRequestWithAllParams(
         IpSource: ipSource,
         DomainSource: domainSource,
         OssSource: ossSource,
+        AccelerateRegion: accelerateRegion,
     }
 }
 
@@ -234,6 +240,11 @@ func (r *BatchCreateRequest) SetDomainSource(domainSource []cdn.DomainSourceInfo
 /* param ossSource: (Optional) */
 func (r *BatchCreateRequest) SetOssSource(ossSource string) {
     r.OssSource = &ossSource
+}
+
+/* param accelerateRegion: 加速区域 (mainLand:中国大陆，nonMainLand:海外加港澳台，all:全球)默认为中国大陆(Optional) */
+func (r *BatchCreateRequest) SetAccelerateRegion(accelerateRegion string) {
+    r.AccelerateRegion = &accelerateRegion
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

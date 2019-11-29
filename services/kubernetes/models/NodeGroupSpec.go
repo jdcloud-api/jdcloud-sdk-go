@@ -25,16 +25,19 @@ type NodeGroupSpec struct {
     /*  (Optional) */
     Description *string `json:"description"`
 
-    /* Node的信息  */
+    /* 工作节点组的信息  */
     NodeConfig *NodeConfigSpec `json:"nodeConfig"`
 
-    /* nodeGroup初始化大小，至少为1个  */
+    /* 工作节点组的 az，必须为集群az的子集，默认为集群az (Optional) */
+    Azs []string `json:"azs"`
+
+    /* 工作节点组初始化大小，至少为1个  */
     InitialNodeCount int `json:"initialNodeCount"`
 
-    /* k8s运行的vpc  */
+    /* 工作节点组运行的vpc  */
     VpcId string `json:"vpcId"`
 
-    /* k8s的node的cidr (Optional) */
+    /* 工作节点组的cidr (Optional) */
     NodeCidr *string `json:"nodeCidr"`
 
     /* 是否开启自动修复，默认不开启。 (Optional) */

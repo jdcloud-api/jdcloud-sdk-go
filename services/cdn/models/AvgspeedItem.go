@@ -23,10 +23,16 @@ type AvgspeedItem struct {
     Area string `json:"area"`
 
     /*  (Optional) */
-    Avgspeed int64 `json:"avgspeed"`
+    Avgspeed float64 `json:"avgspeed"`
+
+    /*  (Optional) */
+    AvgspeedUnit string `json:"avgspeedUnit"`
 
     /*  (Optional) */
     Firstpkgtime float64 `json:"firstpkgtime"`
+
+    /*  (Optional) */
+    FirstpkgtimeUnit string `json:"firstpkgtimeUnit"`
 
     /*  (Optional) */
     ErrorRatio float64 `json:"errorRatio"`
@@ -35,11 +41,14 @@ type AvgspeedItem struct {
     Flow float64 `json:"flow"`
 
     /*  (Optional) */
+    FlowUnit string `json:"flowUnit"`
+
+    /*  (Optional) */
     FlowPercent float64 `json:"flowPercent"`
 
     /*  (Optional) */
     Pv int64 `json:"pv"`
 
     /*  (Optional) */
-    HitRatio int `json:"hitRatio"`
+    HitRatio float64 `json:"hitRatio"`
 }

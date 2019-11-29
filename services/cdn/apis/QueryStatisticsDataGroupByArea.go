@@ -54,6 +54,9 @@ type QueryStatisticsDataGroupByAreaRequest struct {
 
     /* 分组依据 (Optional) */
     GroupBy *string `json:"groupBy"`
+
+    /* 查询协议，可选值:[http,https,all],传空默认返回全部协议汇总后的数据 (Optional) */
+    Scheme *string `json:"scheme"`
 }
 
 /*
@@ -84,6 +87,7 @@ func NewQueryStatisticsDataGroupByAreaRequest(
  * param origin:  (Optional)
  * param period: 时间粒度，可选值:[oneMin,fiveMin,followTime],followTime只会返回一个汇总后的数据 (Optional)
  * param groupBy: 分组依据 (Optional)
+ * param scheme: 查询协议，可选值:[http,https,all],传空默认返回全部协议汇总后的数据 (Optional)
  */
 func NewQueryStatisticsDataGroupByAreaRequestWithAllParams(
     startTime *string,
@@ -96,6 +100,7 @@ func NewQueryStatisticsDataGroupByAreaRequestWithAllParams(
     origin *string,
     period *string,
     groupBy *string,
+    scheme *string,
 ) *QueryStatisticsDataGroupByAreaRequest {
 
     return &QueryStatisticsDataGroupByAreaRequest{
@@ -115,6 +120,7 @@ func NewQueryStatisticsDataGroupByAreaRequestWithAllParams(
         Origin: origin,
         Period: period,
         GroupBy: groupBy,
+        Scheme: scheme,
     }
 }
 
@@ -179,6 +185,11 @@ func (r *QueryStatisticsDataGroupByAreaRequest) SetPeriod(period string) {
 /* param groupBy: 分组依据(Optional) */
 func (r *QueryStatisticsDataGroupByAreaRequest) SetGroupBy(groupBy string) {
     r.GroupBy = &groupBy
+}
+
+/* param scheme: 查询协议，可选值:[http,https,all],传空默认返回全部协议汇总后的数据(Optional) */
+func (r *QueryStatisticsDataGroupByAreaRequest) SetScheme(scheme string) {
+    r.Scheme = &scheme
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
