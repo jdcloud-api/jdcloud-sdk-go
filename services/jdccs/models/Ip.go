@@ -17,14 +17,29 @@
 package models
 
 
-type LastDownsampleRespItem struct {
+type Ip struct {
 
-    /* 监控项英文标识 (Optional) */
-    Metric string `json:"metric"`
+    /* 机房英文标识 (Optional) */
+    Idc string `json:"idc"`
 
-    /* 资源ID (Optional) */
-    ResourceId string `json:"resourceId"`
+    /* 机房名称 (Optional) */
+    IdcName string `json:"idcName"`
 
-    /* 采样值 (Optional) */
-    Value float64 `json:"value"`
+    /* 公网IP实例ID (Optional) */
+    IpId string `json:"ipId"`
+
+    /* IP地址段 (Optional) */
+    CidrAddr string `json:"cidrAddr"`
+
+    /* 网络位地址 (Optional) */
+    NetworkAddr string `json:"networkAddr"`
+
+    /* 网关地址 (Optional) */
+    GatewayAddr int `json:"gatewayAddr"`
+
+    /* 广播地址 (Optional) */
+    BroadcastAddr int `json:"broadcastAddr"`
+
+    /* 状态 normal:正常 abnormal:异常 (Optional) */
+    Status string `json:"status"`
 }

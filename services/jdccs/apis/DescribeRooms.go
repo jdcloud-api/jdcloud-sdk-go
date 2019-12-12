@@ -26,13 +26,13 @@ type DescribeRoomsRequest struct {
 
     core.JDCloudRequest
 
-    /* IDC机房id  */
+    /* IDC机房ID  */
     Idc string `json:"idc"`
 
-    /* 页码, 默认为1, 取值范围：[1,∞) (Optional) */
+    /* 页码, 默认为1 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* 分页大小，默认为20，取值范围：[10,100] (Optional) */
+    /* 分页大小，默认为20 (Optional) */
     PageSize *int `json:"pageSize"`
 
     /* roomNo - 房间号，精确匹配，支持多个
@@ -41,7 +41,7 @@ type DescribeRoomsRequest struct {
 }
 
 /*
- * param idc: IDC机房id (Required)
+ * param idc: IDC机房ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -61,9 +61,9 @@ func NewDescribeRoomsRequest(
 }
 
 /*
- * param idc: IDC机房id (Required)
- * param pageNumber: 页码, 默认为1, 取值范围：[1,∞) (Optional)
- * param pageSize: 分页大小，默认为20，取值范围：[10,100] (Optional)
+ * param idc: IDC机房ID (Required)
+ * param pageNumber: 页码, 默认为1 (Optional)
+ * param pageSize: 分页大小，默认为20 (Optional)
  * param filters: roomNo - 房间号，精确匹配，支持多个
  (Optional)
  */
@@ -101,17 +101,17 @@ func NewDescribeRoomsRequestWithoutParam() *DescribeRoomsRequest {
     }
 }
 
-/* param idc: IDC机房id(Required) */
+/* param idc: IDC机房ID(Required) */
 func (r *DescribeRoomsRequest) SetIdc(idc string) {
     r.Idc = idc
 }
 
-/* param pageNumber: 页码, 默认为1, 取值范围：[1,∞)(Optional) */
+/* param pageNumber: 页码, 默认为1(Optional) */
 func (r *DescribeRoomsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
-/* param pageSize: 分页大小，默认为20，取值范围：[10,100](Optional) */
+/* param pageSize: 分页大小，默认为20(Optional) */
 func (r *DescribeRoomsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
