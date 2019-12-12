@@ -26,13 +26,13 @@ type DescribeCabinetsRequest struct {
 
     core.JDCloudRequest
 
-    /* IDC机房id  */
+    /* IDC机房ID  */
     Idc string `json:"idc"`
 
-    /* 页码, 默认为1, 取值范围：[1,∞) (Optional) */
+    /* 页码, 默认为1 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* 分页大小，默认为20，取值范围：[10,100] (Optional) */
+    /* 分页大小，默认为20 (Optional) */
     PageSize *int `json:"pageSize"`
 
     /* roomNo - 房间号，精确匹配，支持多个
@@ -42,7 +42,7 @@ cabinetId - 机柜ID，精确匹配，支持多个
 }
 
 /*
- * param idc: IDC机房id (Required)
+ * param idc: IDC机房ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -62,9 +62,9 @@ func NewDescribeCabinetsRequest(
 }
 
 /*
- * param idc: IDC机房id (Required)
- * param pageNumber: 页码, 默认为1, 取值范围：[1,∞) (Optional)
- * param pageSize: 分页大小，默认为20，取值范围：[10,100] (Optional)
+ * param idc: IDC机房ID (Required)
+ * param pageNumber: 页码, 默认为1 (Optional)
+ * param pageSize: 分页大小，默认为20 (Optional)
  * param filters: roomNo - 房间号，精确匹配，支持多个
 cabinetId - 机柜ID，精确匹配，支持多个
  (Optional)
@@ -103,17 +103,17 @@ func NewDescribeCabinetsRequestWithoutParam() *DescribeCabinetsRequest {
     }
 }
 
-/* param idc: IDC机房id(Required) */
+/* param idc: IDC机房ID(Required) */
 func (r *DescribeCabinetsRequest) SetIdc(idc string) {
     r.Idc = idc
 }
 
-/* param pageNumber: 页码, 默认为1, 取值范围：[1,∞)(Optional) */
+/* param pageNumber: 页码, 默认为1(Optional) */
 func (r *DescribeCabinetsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
-/* param pageSize: 分页大小，默认为20，取值范围：[10,100](Optional) */
+/* param pageSize: 分页大小，默认为20(Optional) */
 func (r *DescribeCabinetsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
@@ -138,7 +138,7 @@ type DescribeCabinetsResponse struct {
 }
 
 type DescribeCabinetsResult struct {
-    Cabinets []jdccs.Cabinet `json:"cabinets"`
+    Cabinets []jdccs.DescribeCabinet `json:"cabinets"`
     PageNumber int `json:"pageNumber"`
     PageSize int `json:"pageSize"`
     TotalCount int `json:"totalCount"`

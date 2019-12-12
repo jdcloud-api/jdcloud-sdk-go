@@ -17,7 +17,7 @@
 package models
 
 
-type Cabinet struct {
+type Device struct {
 
     /* 机房英文标识 (Optional) */
     Idc string `json:"idc"`
@@ -25,42 +25,51 @@ type Cabinet struct {
     /* 机房名称 (Optional) */
     IdcName string `json:"idcName"`
 
-    /* 机柜Id (Optional) */
-    CabinetId string `json:"cabinetId"`
+    /* 设备Id (Optional) */
+    DeviceId string `json:"deviceId"`
+
+    /* 设备SN号 (Optional) */
+    SnNo string `json:"snNo"`
 
     /* 机柜编码 (Optional) */
     CabinetNo string `json:"cabinetNo"`
 
-    /* 房间号 (Optional) */
-    RoomNo string `json:"roomNo"`
+    /* 所在U位 (Optional) */
+    RackUIndex string `json:"rackUIndex"`
 
-    /* 机柜空间(U) (Optional) */
-    CabinetSpace int `json:"cabinetSpace"`
+    /* U数（U） (Optional) */
+    UNum int `json:"uNum"`
 
-    /* 额定电流(A) (Optional) */
-    CabinetPower int `json:"cabinetPower"`
+    /* 品牌 (Optional) */
+    Brand string `json:"brand"`
 
-    /* 机柜类型 formal:正式机柜 reserved:预留机柜 (Optional) */
-    CabinetType string `json:"cabinetType"`
+    /* 型号 (Optional) */
+    Model string `json:"model"`
 
-    /* 机柜开通状态 disabled:未开通 enabling:开通中 enabled:已开通 disabling:关闭中 (Optional) */
-    CabinetOpenStatus string `json:"cabinetOpenStatus"`
+    /* 设备类型 server:服务器 network:网络设备 storage:存储设备 other:其他设备 (Optional) */
+    DeviceType string `json:"deviceType"`
 
-    /* 开通时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
-    CabinetOpenTime string `json:"cabinetOpenTime"`
+    /* 资产归属 own:自备 lease:租赁 (Optional) */
+    AssetBelong string `json:"assetBelong"`
+
+    /* 资产状态 inWarehouse:已入库 launched:已上架 (Optional) */
+    AssetStatus string `json:"assetStatus"`
+
+    /* CPU逻辑核数(核) (Optional) */
+    CpuCore string `json:"cpuCore"`
+
+    /* 内存总容量(GB) (Optional) */
+    Memory string `json:"memory"`
+
+    /* 硬盘总容量(GB) (Optional) */
+    Disk string `json:"disk"`
+
+    /* 网卡带宽(Mbps) (Optional) */
+    NetworkCardBandwidth string `json:"networkCardBandwidth"`
 
     /* 起租时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
     StartTime string `json:"startTime"`
 
     /* 退租时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
     EndTime string `json:"endTime"`
-
-    /* 设备数量 (Optional) */
-    DeviceNum int `json:"deviceNum"`
-
-    /* 占用U数(U) (Optional) */
-    RackUOccupy int `json:"rackUOccupy"`
-
-    /* 空闲U数(U) (Optional) */
-    RackUFree int `json:"rackUFree"`
 }

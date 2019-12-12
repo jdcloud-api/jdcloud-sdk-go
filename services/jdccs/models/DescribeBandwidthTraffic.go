@@ -17,14 +17,26 @@
 package models
 
 
-type LastDownsampleRespItem struct {
+type DescribeBandwidthTraffic struct {
 
-    /* 监控项英文标识 (Optional) */
-    Metric string `json:"metric"`
+    /* 机房英文标识 (Optional) */
+    Idc string `json:"idc"`
 
-    /* 资源ID (Optional) */
-    ResourceId string `json:"resourceId"`
+    /* 机房名称 (Optional) */
+    IdcName string `json:"idcName"`
 
-    /* 采样值 (Optional) */
-    Value float64 `json:"value"`
+    /* 带宽实例ID (Optional) */
+    BandwidthId string `json:"bandwidthId"`
+
+    /* 带宽名称 (Optional) */
+    BandwidthName string `json:"bandwidthName"`
+
+    /* 总上行实时流量 (Optional) */
+    TotalTrafficIn float64 `json:"totalTrafficIn"`
+
+    /* 总下行实时流量 (Optional) */
+    TotalTrafficOut float64 `json:"totalTrafficOut"`
+
+    /* 总带宽 (Optional) */
+    Bandwidth int `json:"bandwidth"`
 }

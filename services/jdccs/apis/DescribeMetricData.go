@@ -25,13 +25,13 @@ type DescribeMetricDataRequest struct {
 
     core.JDCloudRequest
 
-    /* 机房名称（英文标识）  */
+    /* IDC机房ID  */
     Idc string `json:"idc"`
 
     /* 监控项英文标识(id)  */
     Metric string `json:"metric"`
 
-    /* 资源的uuid  */
+    /* 资源ID  */
     ResourceId string `json:"resourceId"`
 
     /* 查询时间范围的开始时间， UNIX时间戳，（最多支持最近90天数据查询）  */
@@ -45,9 +45,9 @@ type DescribeMetricDataRequest struct {
 }
 
 /*
- * param idc: 机房名称（英文标识） (Required)
+ * param idc: IDC机房ID (Required)
  * param metric: 监控项英文标识(id) (Required)
- * param resourceId: 资源的uuid (Required)
+ * param resourceId: 资源ID (Required)
  * param startTime: 查询时间范围的开始时间， UNIX时间戳，（最多支持最近90天数据查询） (Required)
  * param endTime: 查询时间范围的结束时间， UNIX时间戳，（最多支持最近90天数据查询） (Required)
  *
@@ -77,9 +77,9 @@ func NewDescribeMetricDataRequest(
 }
 
 /*
- * param idc: 机房名称（英文标识） (Required)
+ * param idc: IDC机房ID (Required)
  * param metric: 监控项英文标识(id) (Required)
- * param resourceId: 资源的uuid (Required)
+ * param resourceId: 资源ID (Required)
  * param startTime: 查询时间范围的开始时间， UNIX时间戳，（最多支持最近90天数据查询） (Required)
  * param endTime: 查询时间范围的结束时间， UNIX时间戳，（最多支持最近90天数据查询） (Required)
  * param timeInterval: 时间间隔：分钟m、小时h、天d，如： 10分钟=10m、1小时=1h，3天=3d；默认5m，最小支持5m，最大90d (Optional)
@@ -122,7 +122,7 @@ func NewDescribeMetricDataRequestWithoutParam() *DescribeMetricDataRequest {
     }
 }
 
-/* param idc: 机房名称（英文标识）(Required) */
+/* param idc: IDC机房ID(Required) */
 func (r *DescribeMetricDataRequest) SetIdc(idc string) {
     r.Idc = idc
 }
@@ -132,7 +132,7 @@ func (r *DescribeMetricDataRequest) SetMetric(metric string) {
     r.Metric = metric
 }
 
-/* param resourceId: 资源的uuid(Required) */
+/* param resourceId: 资源ID(Required) */
 func (r *DescribeMetricDataRequest) SetResourceId(resourceId string) {
     r.ResourceId = resourceId
 }

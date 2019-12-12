@@ -25,20 +25,20 @@ type LastDownsampleRequest struct {
 
     core.JDCloudRequest
 
-    /* 机房名称（英文标识）  */
+    /* IDC机房ID  */
     Idc string `json:"idc"`
 
     /* 监控项英文标识(id)  */
     Metric string `json:"metric"`
 
-    /* 资源的uuid，支持多个resourceId批量查询，每个id用竖线 | 分隔  */
+    /* 资源ID，支持多个resourceId批量查询，每个id用竖线 | 分隔  */
     ResourceId string `json:"resourceId"`
 }
 
 /*
- * param idc: 机房名称（英文标识） (Required)
+ * param idc: IDC机房ID (Required)
  * param metric: 监控项英文标识(id) (Required)
- * param resourceId: 资源的uuid，支持多个resourceId批量查询，每个id用竖线 | 分隔 (Required)
+ * param resourceId: 资源ID，支持多个resourceId批量查询，每个id用竖线 | 分隔 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -62,9 +62,9 @@ func NewLastDownsampleRequest(
 }
 
 /*
- * param idc: 机房名称（英文标识） (Required)
+ * param idc: IDC机房ID (Required)
  * param metric: 监控项英文标识(id) (Required)
- * param resourceId: 资源的uuid，支持多个resourceId批量查询，每个id用竖线 | 分隔 (Required)
+ * param resourceId: 资源ID，支持多个resourceId批量查询，每个id用竖线 | 分隔 (Required)
  */
 func NewLastDownsampleRequestWithAllParams(
     idc string,
@@ -98,7 +98,7 @@ func NewLastDownsampleRequestWithoutParam() *LastDownsampleRequest {
     }
 }
 
-/* param idc: 机房名称（英文标识）(Required) */
+/* param idc: IDC机房ID(Required) */
 func (r *LastDownsampleRequest) SetIdc(idc string) {
     r.Idc = idc
 }
@@ -108,7 +108,7 @@ func (r *LastDownsampleRequest) SetMetric(metric string) {
     r.Metric = metric
 }
 
-/* param resourceId: 资源的uuid，支持多个resourceId批量查询，每个id用竖线 | 分隔(Required) */
+/* param resourceId: 资源ID，支持多个resourceId批量查询，每个id用竖线 | 分隔(Required) */
 func (r *LastDownsampleRequest) SetResourceId(resourceId string) {
     r.ResourceId = resourceId
 }

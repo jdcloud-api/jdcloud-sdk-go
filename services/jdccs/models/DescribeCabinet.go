@@ -17,7 +17,7 @@
 package models
 
 
-type Cabinet struct {
+type DescribeCabinet struct {
 
     /* 机房英文标识 (Optional) */
     Idc string `json:"idc"`
@@ -54,13 +54,4 @@ type Cabinet struct {
 
     /* 退租时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
     EndTime string `json:"endTime"`
-
-    /* 设备数量 (Optional) */
-    DeviceNum int `json:"deviceNum"`
-
-    /* 占用U数(U) (Optional) */
-    RackUOccupy int `json:"rackUOccupy"`
-
-    /* 空闲U数(U) (Optional) */
-    RackUFree int `json:"rackUFree"`
 }
