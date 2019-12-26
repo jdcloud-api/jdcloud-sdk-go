@@ -25,7 +25,7 @@ type CreateLoadBalancerRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域  */
+    /* 地域ID，可调用接口（describeCPSLBRegions）获取云物理服务器支持的地域  */
     RegionId string `json:"regionId"`
 
     /* 由客户端生成，用于保证请求的幂等性，长度不能超过36个字符；<br/>
@@ -38,7 +38,7 @@ type CreateLoadBalancerRequest struct {
 }
 
 /*
- * param regionId: 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（describeCPSLBRegions）获取云物理服务器支持的地域 (Required)
  * param loadBalancerSpec: 负载均衡配置 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -61,7 +61,7 @@ func NewCreateLoadBalancerRequest(
 }
 
 /*
- * param regionId: 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（describeCPSLBRegions）获取云物理服务器支持的地域 (Required)
  * param clientToken: 由客户端生成，用于保证请求的幂等性，长度不能超过36个字符；<br/>
 如果多个请求使用了相同的clientToken，只会执行第一个请求，之后的请求直接返回第一个请求的结果<br/>
  (Optional)
@@ -99,7 +99,7 @@ func NewCreateLoadBalancerRequestWithoutParam() *CreateLoadBalancerRequest {
     }
 }
 
-/* param regionId: 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域(Required) */
+/* param regionId: 地域ID，可调用接口（describeCPSLBRegions）获取云物理服务器支持的地域(Required) */
 func (r *CreateLoadBalancerRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

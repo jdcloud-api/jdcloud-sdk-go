@@ -66,4 +66,7 @@ type DescribeAlarm struct {
 
     /* 规则状态 disabled:禁用 enabled:启用 (Optional) */
     Status string `json:"status"`
+
+    /*  (Optional) */
+    Switchboard []interface{} `json:"switchboard"`
 }

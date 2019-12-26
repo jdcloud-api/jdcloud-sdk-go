@@ -17,23 +17,15 @@
 package models
 
 
-type MasterVersion struct {
+type CAConfig struct {
 
-    /* 集群版本号 (Optional) */
-    Version string `json:"version"`
+    /* 是否启用了自动伸缩
+ (Optional) */
+    Enable bool `json:"enable"`
 
-    /* 是否默认版本 (Optional) */
-    IsDefault bool `json:"isDefault"`
+    /* 自动扩容最大工作节点数 (Optional) */
+    MaxNode int `json:"maxNode"`
 
-    /* 默认工作节点版本号 (Optional) */
-    DefaultNodeVersion string `json:"defaultNodeVersion"`
-
-    /* 版本状态 (Optional) */
-    VersionStatus string `json:"versionStatus"`
-
-    /* node 节点的配置 (Optional) */
-    NodeVersions []NodeVersion `json:"nodeVersions"`
-
-    /* node节点操作系统类型列表，以 "," 分割，目前支持 CentOS|Windows (Optional) */
-    NodeOsTypes string `json:"nodeOsTypes"`
+    /* 自动扩容最小工作节点数 (Optional) */
+    MinNode int `json:"minNode"`
 }

@@ -19,6 +19,7 @@ package apis
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
     edcps "github.com/jdcloud-api/jdcloud-sdk-go/services/edcps/models"
+    common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
 
 type DescribeAliasIpsRequest struct {
@@ -42,6 +43,10 @@ type DescribeAliasIpsRequest struct {
 
     /* CIDR段，模糊搜索 (Optional) */
     Cidr *string `json:"cidr"`
+
+    /* aliasIpId - 别名IP id<br/>
+ (Optional) */
+    Filters []common.Filter `json:"filters"`
 }
 
 /*
@@ -71,6 +76,8 @@ func NewDescribeAliasIpsRequest(
  * param subnetId: 子网ID (Optional)
  * param instanceId: 实例ID (Optional)
  * param cidr: CIDR段，模糊搜索 (Optional)
+ * param filters: aliasIpId - 别名IP id<br/>
+ (Optional)
  */
 func NewDescribeAliasIpsRequestWithAllParams(
     regionId string,
@@ -79,6 +86,7 @@ func NewDescribeAliasIpsRequestWithAllParams(
     subnetId *string,
     instanceId *string,
     cidr *string,
+    filters []common.Filter,
 ) *DescribeAliasIpsRequest {
 
     return &DescribeAliasIpsRequest{
@@ -94,6 +102,7 @@ func NewDescribeAliasIpsRequestWithAllParams(
         SubnetId: subnetId,
         InstanceId: instanceId,
         Cidr: cidr,
+        Filters: filters,
     }
 }
 
@@ -138,6 +147,12 @@ func (r *DescribeAliasIpsRequest) SetInstanceId(instanceId string) {
 /* param cidr: CIDR段，模糊搜索(Optional) */
 func (r *DescribeAliasIpsRequest) SetCidr(cidr string) {
     r.Cidr = &cidr
+}
+
+/* param filters: aliasIpId - 别名IP id<br/>
+(Optional) */
+func (r *DescribeAliasIpsRequest) SetFilters(filters []common.Filter) {
+    r.Filters = filters
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

@@ -18,79 +18,71 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    cps "github.com/jdcloud-api/jdcloud-sdk-go/services/cps/models"
 )
 
-type RemoveServerRequest struct {
+type DescribeListenerRequest struct {
 
     core.JDCloudRequest
 
     /* 地域ID，可调用接口（describeCPSLBRegions）获取云物理服务器支持的地域  */
     RegionId string `json:"regionId"`
 
-    /* 服务器组ID  */
-    ServerGroupId string `json:"serverGroupId"`
-
-    /* 后端服务器ID  */
-    ServerId string `json:"serverId"`
+    /* 监听器ID  */
+    ListenerId string `json:"listenerId"`
 }
 
 /*
  * param regionId: 地域ID，可调用接口（describeCPSLBRegions）获取云物理服务器支持的地域 (Required)
- * param serverGroupId: 服务器组ID (Required)
- * param serverId: 后端服务器ID (Required)
+ * param listenerId: 监听器ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewRemoveServerRequest(
+func NewDescribeListenerRequest(
     regionId string,
-    serverGroupId string,
-    serverId string,
-) *RemoveServerRequest {
+    listenerId string,
+) *DescribeListenerRequest {
 
-	return &RemoveServerRequest{
+	return &DescribeListenerRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/serverGroups/{serverGroupId}/servers/{serverId}",
-			Method:  "DELETE",
+			URL:     "/regions/{regionId}/listeners/{listenerId}",
+			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        ServerGroupId: serverGroupId,
-        ServerId: serverId,
+        ListenerId: listenerId,
 	}
 }
 
 /*
  * param regionId: 地域ID，可调用接口（describeCPSLBRegions）获取云物理服务器支持的地域 (Required)
- * param serverGroupId: 服务器组ID (Required)
- * param serverId: 后端服务器ID (Required)
+ * param listenerId: 监听器ID (Required)
  */
-func NewRemoveServerRequestWithAllParams(
+func NewDescribeListenerRequestWithAllParams(
     regionId string,
-    serverGroupId string,
-    serverId string,
-) *RemoveServerRequest {
+    listenerId string,
+) *DescribeListenerRequest {
 
-    return &RemoveServerRequest{
+    return &DescribeListenerRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/serverGroups/{serverGroupId}/servers/{serverId}",
-            Method:  "DELETE",
+            URL:     "/regions/{regionId}/listeners/{listenerId}",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        ServerGroupId: serverGroupId,
-        ServerId: serverId,
+        ListenerId: listenerId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewRemoveServerRequestWithoutParam() *RemoveServerRequest {
+func NewDescribeListenerRequestWithoutParam() *DescribeListenerRequest {
 
-    return &RemoveServerRequest{
+    return &DescribeListenerRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/serverGroups/{serverGroupId}/servers/{serverId}",
-            Method:  "DELETE",
+            URL:     "/regions/{regionId}/listeners/{listenerId}",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
@@ -98,32 +90,27 @@ func NewRemoveServerRequestWithoutParam() *RemoveServerRequest {
 }
 
 /* param regionId: 地域ID，可调用接口（describeCPSLBRegions）获取云物理服务器支持的地域(Required) */
-func (r *RemoveServerRequest) SetRegionId(regionId string) {
+func (r *DescribeListenerRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param serverGroupId: 服务器组ID(Required) */
-func (r *RemoveServerRequest) SetServerGroupId(serverGroupId string) {
-    r.ServerGroupId = serverGroupId
-}
-
-/* param serverId: 后端服务器ID(Required) */
-func (r *RemoveServerRequest) SetServerId(serverId string) {
-    r.ServerId = serverId
+/* param listenerId: 监听器ID(Required) */
+func (r *DescribeListenerRequest) SetListenerId(listenerId string) {
+    r.ListenerId = listenerId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r RemoveServerRequest) GetRegionId() string {
+func (r DescribeListenerRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type RemoveServerResponse struct {
+type DescribeListenerResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result RemoveServerResult `json:"result"`
+    Result DescribeListenerResult `json:"result"`
 }
 
-type RemoveServerResult struct {
-    Success bool `json:"success"`
+type DescribeListenerResult struct {
+    Listener cps.Listener `json:"listener"`
 }

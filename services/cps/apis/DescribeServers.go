@@ -19,9 +19,10 @@ package apis
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
     cps "github.com/jdcloud-api/jdcloud-sdk-go/services/cps/models"
+    common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
 
-type AddServersRequest struct {
+type DescribeServersRequest struct {
 
     core.JDCloudRequest
 
@@ -31,77 +32,84 @@ type AddServersRequest struct {
     /* 服务器组ID  */
     ServerGroupId string `json:"serverGroupId"`
 
-    /* 由客户端生成，用于保证请求的幂等性，长度不能超过36个字符；<br/>
-如果多个请求使用了相同的clientToken，只会执行第一个请求，之后的请求直接返回第一个请求的结果<br/>
- (Optional) */
-    ClientToken *string `json:"clientToken"`
+    /* 页码；默认为1 (Optional) */
+    PageNumber *int `json:"pageNumber"`
 
-    /* 后端服务器配置  */
-    ServerSpec []cps.ServerSpec `json:"serverSpec"`
+    /* 分页大小；默认为20；取值范围[20, 100] (Optional) */
+    PageSize *int `json:"pageSize"`
+
+    /* 监听器Id (Optional) */
+    ListenerId *string `json:"listenerId"`
+
+    /* serverId - 后端服务器ID，精确匹配，支持多个
+ (Optional) */
+    Filters []common.Filter `json:"filters"`
 }
 
 /*
  * param regionId: 地域ID，可调用接口（describeCPSLBRegions）获取云物理服务器支持的地域 (Required)
  * param serverGroupId: 服务器组ID (Required)
- * param serverSpec: 后端服务器配置 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewAddServersRequest(
+func NewDescribeServersRequest(
     regionId string,
     serverGroupId string,
-    serverSpec []cps.ServerSpec,
-) *AddServersRequest {
+) *DescribeServersRequest {
 
-	return &AddServersRequest{
+	return &DescribeServersRequest{
         JDCloudRequest: core.JDCloudRequest{
 			URL:     "/regions/{regionId}/serverGroups/{serverGroupId}/servers",
-			Method:  "PUT",
+			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         ServerGroupId: serverGroupId,
-        ServerSpec: serverSpec,
 	}
 }
 
 /*
  * param regionId: 地域ID，可调用接口（describeCPSLBRegions）获取云物理服务器支持的地域 (Required)
  * param serverGroupId: 服务器组ID (Required)
- * param clientToken: 由客户端生成，用于保证请求的幂等性，长度不能超过36个字符；<br/>
-如果多个请求使用了相同的clientToken，只会执行第一个请求，之后的请求直接返回第一个请求的结果<br/>
+ * param pageNumber: 页码；默认为1 (Optional)
+ * param pageSize: 分页大小；默认为20；取值范围[20, 100] (Optional)
+ * param listenerId: 监听器Id (Optional)
+ * param filters: serverId - 后端服务器ID，精确匹配，支持多个
  (Optional)
- * param serverSpec: 后端服务器配置 (Required)
  */
-func NewAddServersRequestWithAllParams(
+func NewDescribeServersRequestWithAllParams(
     regionId string,
     serverGroupId string,
-    clientToken *string,
-    serverSpec []cps.ServerSpec,
-) *AddServersRequest {
+    pageNumber *int,
+    pageSize *int,
+    listenerId *string,
+    filters []common.Filter,
+) *DescribeServersRequest {
 
-    return &AddServersRequest{
+    return &DescribeServersRequest{
         JDCloudRequest: core.JDCloudRequest{
             URL:     "/regions/{regionId}/serverGroups/{serverGroupId}/servers",
-            Method:  "PUT",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         ServerGroupId: serverGroupId,
-        ClientToken: clientToken,
-        ServerSpec: serverSpec,
+        PageNumber: pageNumber,
+        PageSize: pageSize,
+        ListenerId: listenerId,
+        Filters: filters,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewAddServersRequestWithoutParam() *AddServersRequest {
+func NewDescribeServersRequestWithoutParam() *DescribeServersRequest {
 
-    return &AddServersRequest{
+    return &DescribeServersRequest{
             JDCloudRequest: core.JDCloudRequest{
             URL:     "/regions/{regionId}/serverGroups/{serverGroupId}/servers",
-            Method:  "PUT",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
@@ -109,39 +117,51 @@ func NewAddServersRequestWithoutParam() *AddServersRequest {
 }
 
 /* param regionId: 地域ID，可调用接口（describeCPSLBRegions）获取云物理服务器支持的地域(Required) */
-func (r *AddServersRequest) SetRegionId(regionId string) {
+func (r *DescribeServersRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param serverGroupId: 服务器组ID(Required) */
-func (r *AddServersRequest) SetServerGroupId(serverGroupId string) {
+func (r *DescribeServersRequest) SetServerGroupId(serverGroupId string) {
     r.ServerGroupId = serverGroupId
 }
 
-/* param clientToken: 由客户端生成，用于保证请求的幂等性，长度不能超过36个字符；<br/>
-如果多个请求使用了相同的clientToken，只会执行第一个请求，之后的请求直接返回第一个请求的结果<br/>
-(Optional) */
-func (r *AddServersRequest) SetClientToken(clientToken string) {
-    r.ClientToken = &clientToken
+/* param pageNumber: 页码；默认为1(Optional) */
+func (r *DescribeServersRequest) SetPageNumber(pageNumber int) {
+    r.PageNumber = &pageNumber
 }
 
-/* param serverSpec: 后端服务器配置(Required) */
-func (r *AddServersRequest) SetServerSpec(serverSpec []cps.ServerSpec) {
-    r.ServerSpec = serverSpec
+/* param pageSize: 分页大小；默认为20；取值范围[20, 100](Optional) */
+func (r *DescribeServersRequest) SetPageSize(pageSize int) {
+    r.PageSize = &pageSize
+}
+
+/* param listenerId: 监听器Id(Optional) */
+func (r *DescribeServersRequest) SetListenerId(listenerId string) {
+    r.ListenerId = &listenerId
+}
+
+/* param filters: serverId - 后端服务器ID，精确匹配，支持多个
+(Optional) */
+func (r *DescribeServersRequest) SetFilters(filters []common.Filter) {
+    r.Filters = filters
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r AddServersRequest) GetRegionId() string {
+func (r DescribeServersRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type AddServersResponse struct {
+type DescribeServersResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result AddServersResult `json:"result"`
+    Result DescribeServersResult `json:"result"`
 }
 
-type AddServersResult struct {
-    ServerIds []string `json:"serverIds"`
+type DescribeServersResult struct {
+    Servers []cps.Server `json:"servers"`
+    PageNumber int `json:"pageNumber"`
+    PageSize int `json:"pageSize"`
+    TotalCount int `json:"totalCount"`
 }

@@ -40,7 +40,7 @@ func NewKubernetesClient(credential *core.Credential) *KubernetesClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "kubernetes",
-            Revision:    "0.6.1",
+            Revision:    "0.7.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -68,6 +68,26 @@ func (c *KubernetesClient) DeleteNodeGroup(request *kubernetes.DeleteNodeGroupRe
     }
 
     jdResp := &kubernetes.DeleteNodeGroupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 从工作节点组中删除指定实例 */
+func (c *KubernetesClient) DeleteNodeInstances(request *kubernetes.DeleteNodeInstancesRequest) (*kubernetes.DeleteNodeInstancesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &kubernetes.DeleteNodeInstancesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -310,6 +330,26 @@ func (c *KubernetesClient) SetAutoRepair(request *kubernetes.SetAutoRepairReques
     }
 
     jdResp := &kubernetes.SetAutoRepairResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设置工作节点组自动扩容 */
+func (c *KubernetesClient) SetNodeGroupCA(request *kubernetes.SetNodeGroupCARequest) (*kubernetes.SetNodeGroupCAResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &kubernetes.SetNodeGroupCAResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

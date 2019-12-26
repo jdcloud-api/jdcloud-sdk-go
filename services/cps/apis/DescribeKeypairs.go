@@ -22,7 +22,7 @@ import (
     common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
 
-type DescribeElasticIpsRequest struct {
+type DescribeKeypairsRequest struct {
 
     core.JDCloudRequest
 
@@ -35,14 +35,10 @@ type DescribeElasticIpsRequest struct {
     /* 分页大小；默认为20；取值范围[20, 100] (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* 弹性公网IP状态，取值范围：associate、disassociate (Optional) */
-    Status *string `json:"status"`
+    /* 密钥对名称 (Optional) */
+    Name *string `json:"name"`
 
-    /* 是否包含负载均衡 (Optional) */
-    IncludeLB *string `json:"includeLB"`
-
-    /* elasticIpId - 弹性公网IPID，精确匹配，支持多个<br/>
-elasticIp - 弹性公网IP，精确匹配，支持多个
+    /* keypairId  - 密钥对ID，精确匹配，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
@@ -52,13 +48,13 @@ elasticIp - 弹性公网IP，精确匹配，支持多个
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeElasticIpsRequest(
+func NewDescribeKeypairsRequest(
     regionId string,
-) *DescribeElasticIpsRequest {
+) *DescribeKeypairsRequest {
 
-	return &DescribeElasticIpsRequest{
+	return &DescribeKeypairsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/elasticIps",
+			URL:     "/regions/{regionId}/keypairs",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -71,24 +67,21 @@ func NewDescribeElasticIpsRequest(
  * param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域 (Required)
  * param pageNumber: 页码；默认为1 (Optional)
  * param pageSize: 分页大小；默认为20；取值范围[20, 100] (Optional)
- * param status: 弹性公网IP状态，取值范围：associate、disassociate (Optional)
- * param includeLB: 是否包含负载均衡 (Optional)
- * param filters: elasticIpId - 弹性公网IPID，精确匹配，支持多个<br/>
-elasticIp - 弹性公网IP，精确匹配，支持多个
+ * param name: 密钥对名称 (Optional)
+ * param filters: keypairId  - 密钥对ID，精确匹配，支持多个
  (Optional)
  */
-func NewDescribeElasticIpsRequestWithAllParams(
+func NewDescribeKeypairsRequestWithAllParams(
     regionId string,
     pageNumber *int,
     pageSize *int,
-    status *string,
-    includeLB *string,
+    name *string,
     filters []common.Filter,
-) *DescribeElasticIpsRequest {
+) *DescribeKeypairsRequest {
 
-    return &DescribeElasticIpsRequest{
+    return &DescribeKeypairsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/elasticIps",
+            URL:     "/regions/{regionId}/keypairs",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -96,18 +89,17 @@ func NewDescribeElasticIpsRequestWithAllParams(
         RegionId: regionId,
         PageNumber: pageNumber,
         PageSize: pageSize,
-        Status: status,
-        IncludeLB: includeLB,
+        Name: name,
         Filters: filters,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeElasticIpsRequestWithoutParam() *DescribeElasticIpsRequest {
+func NewDescribeKeypairsRequestWithoutParam() *DescribeKeypairsRequest {
 
-    return &DescribeElasticIpsRequest{
+    return &DescribeKeypairsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/elasticIps",
+            URL:     "/regions/{regionId}/keypairs",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -116,51 +108,45 @@ func NewDescribeElasticIpsRequestWithoutParam() *DescribeElasticIpsRequest {
 }
 
 /* param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域(Required) */
-func (r *DescribeElasticIpsRequest) SetRegionId(regionId string) {
+func (r *DescribeKeypairsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param pageNumber: 页码；默认为1(Optional) */
-func (r *DescribeElasticIpsRequest) SetPageNumber(pageNumber int) {
+func (r *DescribeKeypairsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
 /* param pageSize: 分页大小；默认为20；取值范围[20, 100](Optional) */
-func (r *DescribeElasticIpsRequest) SetPageSize(pageSize int) {
+func (r *DescribeKeypairsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
-/* param status: 弹性公网IP状态，取值范围：associate、disassociate(Optional) */
-func (r *DescribeElasticIpsRequest) SetStatus(status string) {
-    r.Status = &status
+/* param name: 密钥对名称(Optional) */
+func (r *DescribeKeypairsRequest) SetName(name string) {
+    r.Name = &name
 }
 
-/* param includeLB: 是否包含负载均衡(Optional) */
-func (r *DescribeElasticIpsRequest) SetIncludeLB(includeLB string) {
-    r.IncludeLB = &includeLB
-}
-
-/* param filters: elasticIpId - 弹性公网IPID，精确匹配，支持多个<br/>
-elasticIp - 弹性公网IP，精确匹配，支持多个
+/* param filters: keypairId  - 密钥对ID，精确匹配，支持多个
 (Optional) */
-func (r *DescribeElasticIpsRequest) SetFilters(filters []common.Filter) {
+func (r *DescribeKeypairsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeElasticIpsRequest) GetRegionId() string {
+func (r DescribeKeypairsRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeElasticIpsResponse struct {
+type DescribeKeypairsResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeElasticIpsResult `json:"result"`
+    Result DescribeKeypairsResult `json:"result"`
 }
 
-type DescribeElasticIpsResult struct {
-    ElasticIps []cps.ElasticIp `json:"elasticIps"`
+type DescribeKeypairsResult struct {
+    Keypairs []cps.Keypair `json:"keypairs"`
     PageNumber int `json:"pageNumber"`
     PageSize int `json:"pageSize"`
     TotalCount int `json:"totalCount"`

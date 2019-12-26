@@ -19,6 +19,7 @@ package apis
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
     cps "github.com/jdcloud-api/jdcloud-sdk-go/services/cps/models"
+    common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
 
 type DescribeInstanceMonitorInfoRequest struct {
@@ -37,7 +38,8 @@ type DescribeInstanceMonitorInfoRequest struct {
     /* 结束时间的时间戳，格式：1562915166551 (Optional) */
     EndTime *int `json:"endTime"`
 
-    /* cps.cpu.util - CPU使用率<br/>
+    /* metric - 监控指标，精确匹配，支持多个，具体如下<br/>
+cps.cpu.util - CPU使用率<br/>
 cps.memory.util - 内存使用率<br/>
 cps.memory.used - 内存使用量<br/>
 cps.disk.used - 磁盘使用量<br/>
@@ -57,7 +59,7 @@ cps.tcp.connect.total - TCP总连接数<br/>
 cps.tcp.connect.established - TCP正常连接数<br/>
 cps.process.total - 总进程数
  (Optional) */
-    Metrics []string `json:"metrics"`
+    Filters []common.Filter `json:"filters"`
 }
 
 /*
@@ -88,7 +90,8 @@ func NewDescribeInstanceMonitorInfoRequest(
  * param instanceId: 云物理服务器ID (Required)
  * param startTime: 开始时间的时间戳，格式：1562915166551 (Optional)
  * param endTime: 结束时间的时间戳，格式：1562915166551 (Optional)
- * param metrics: cps.cpu.util - CPU使用率<br/>
+ * param filters: metric - 监控指标，精确匹配，支持多个，具体如下<br/>
+cps.cpu.util - CPU使用率<br/>
 cps.memory.util - 内存使用率<br/>
 cps.memory.used - 内存使用量<br/>
 cps.disk.used - 磁盘使用量<br/>
@@ -114,7 +117,7 @@ func NewDescribeInstanceMonitorInfoRequestWithAllParams(
     instanceId string,
     startTime *int,
     endTime *int,
-    metrics []string,
+    filters []common.Filter,
 ) *DescribeInstanceMonitorInfoRequest {
 
     return &DescribeInstanceMonitorInfoRequest{
@@ -128,7 +131,7 @@ func NewDescribeInstanceMonitorInfoRequestWithAllParams(
         InstanceId: instanceId,
         StartTime: startTime,
         EndTime: endTime,
-        Metrics: metrics,
+        Filters: filters,
     }
 }
 
@@ -165,7 +168,8 @@ func (r *DescribeInstanceMonitorInfoRequest) SetEndTime(endTime int) {
     r.EndTime = &endTime
 }
 
-/* param metrics: cps.cpu.util - CPU使用率<br/>
+/* param filters: metric - 监控指标，精确匹配，支持多个，具体如下<br/>
+cps.cpu.util - CPU使用率<br/>
 cps.memory.util - 内存使用率<br/>
 cps.memory.used - 内存使用量<br/>
 cps.disk.used - 磁盘使用量<br/>
@@ -185,8 +189,8 @@ cps.tcp.connect.total - TCP总连接数<br/>
 cps.tcp.connect.established - TCP正常连接数<br/>
 cps.process.total - 总进程数
 (Optional) */
-func (r *DescribeInstanceMonitorInfoRequest) SetMetrics(metrics []string) {
-    r.Metrics = metrics
+func (r *DescribeInstanceMonitorInfoRequest) SetFilters(filters []common.Filter) {
+    r.Filters = filters
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
@@ -202,5 +206,5 @@ type DescribeInstanceMonitorInfoResponse struct {
 }
 
 type DescribeInstanceMonitorInfoResult struct {
-    MetricDatas cps.MetricData `json:"metricDatas"`
+    MetricDatas []cps.MetricData `json:"metricDatas"`
 }

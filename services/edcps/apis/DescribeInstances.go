@@ -53,11 +53,13 @@ type DescribeInstancesRequest struct {
     /* 是否启用外网, yes/no (Optional) */
     EnableInternet *string `json:"enableInternet"`
 
+    /* 内网ip (Optional) */
+    PrivateIp *string `json:"privateIp"`
+
     /* 密钥对id (Optional) */
     KeypairId *string `json:"keypairId"`
 
     /* instanceId - 分布式云物理服务器ID，精确匹配，支持多个<br/>
-privateIp - 分布式云物理服务器内网IP，精确匹配，支持多个<br/>
 status - 分布式云物理服务器状态，参考分布式云物理服务器状态，精确匹配，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
@@ -93,9 +95,9 @@ func NewDescribeInstancesRequest(
  * param deviceType: 实例类型，精确匹配，调用接口（describeDeviceTypes）获取实例类型 (Optional)
  * param subnetId: 子网ID (Optional)
  * param enableInternet: 是否启用外网, yes/no (Optional)
+ * param privateIp: 内网ip (Optional)
  * param keypairId: 密钥对id (Optional)
  * param filters: instanceId - 分布式云物理服务器ID，精确匹配，支持多个<br/>
-privateIp - 分布式云物理服务器内网IP，精确匹配，支持多个<br/>
 status - 分布式云物理服务器状态，参考分布式云物理服务器状态，精确匹配，支持多个
  (Optional)
  */
@@ -109,6 +111,7 @@ func NewDescribeInstancesRequestWithAllParams(
     deviceType *string,
     subnetId *string,
     enableInternet *string,
+    privateIp *string,
     keypairId *string,
     filters []common.Filter,
 ) *DescribeInstancesRequest {
@@ -129,6 +132,7 @@ func NewDescribeInstancesRequestWithAllParams(
         DeviceType: deviceType,
         SubnetId: subnetId,
         EnableInternet: enableInternet,
+        PrivateIp: privateIp,
         KeypairId: keypairId,
         Filters: filters,
     }
@@ -192,13 +196,17 @@ func (r *DescribeInstancesRequest) SetEnableInternet(enableInternet string) {
     r.EnableInternet = &enableInternet
 }
 
+/* param privateIp: 内网ip(Optional) */
+func (r *DescribeInstancesRequest) SetPrivateIp(privateIp string) {
+    r.PrivateIp = &privateIp
+}
+
 /* param keypairId: 密钥对id(Optional) */
 func (r *DescribeInstancesRequest) SetKeypairId(keypairId string) {
     r.KeypairId = &keypairId
 }
 
 /* param filters: instanceId - 分布式云物理服务器ID，精确匹配，支持多个<br/>
-privateIp - 分布式云物理服务器内网IP，精确匹配，支持多个<br/>
 status - 分布式云物理服务器状态，参考分布式云物理服务器状态，精确匹配，支持多个
 (Optional) */
 func (r *DescribeInstancesRequest) SetFilters(filters []common.Filter) {

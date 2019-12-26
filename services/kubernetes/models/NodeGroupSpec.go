@@ -42,4 +42,7 @@ type NodeGroupSpec struct {
 
     /* 是否开启自动修复，默认不开启。 (Optional) */
     AutoRepair *bool `json:"autoRepair"`
+
+    /* 自动伸缩配置 (Optional) */
+    CaConfig *CAConfigSpec `json:"caConfig"`
 }

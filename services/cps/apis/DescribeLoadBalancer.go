@@ -18,79 +18,71 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    cps "github.com/jdcloud-api/jdcloud-sdk-go/services/cps/models"
 )
 
-type RemoveServerRequest struct {
+type DescribeLoadBalancerRequest struct {
 
     core.JDCloudRequest
 
     /* 地域ID，可调用接口（describeCPSLBRegions）获取云物理服务器支持的地域  */
     RegionId string `json:"regionId"`
 
-    /* 服务器组ID  */
-    ServerGroupId string `json:"serverGroupId"`
-
-    /* 后端服务器ID  */
-    ServerId string `json:"serverId"`
+    /* 负载均衡实例ID  */
+    LoadBalancerId string `json:"loadBalancerId"`
 }
 
 /*
  * param regionId: 地域ID，可调用接口（describeCPSLBRegions）获取云物理服务器支持的地域 (Required)
- * param serverGroupId: 服务器组ID (Required)
- * param serverId: 后端服务器ID (Required)
+ * param loadBalancerId: 负载均衡实例ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewRemoveServerRequest(
+func NewDescribeLoadBalancerRequest(
     regionId string,
-    serverGroupId string,
-    serverId string,
-) *RemoveServerRequest {
+    loadBalancerId string,
+) *DescribeLoadBalancerRequest {
 
-	return &RemoveServerRequest{
+	return &DescribeLoadBalancerRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/serverGroups/{serverGroupId}/servers/{serverId}",
-			Method:  "DELETE",
+			URL:     "/regions/{regionId}/slbs/{loadBalancerId}",
+			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        ServerGroupId: serverGroupId,
-        ServerId: serverId,
+        LoadBalancerId: loadBalancerId,
 	}
 }
 
 /*
  * param regionId: 地域ID，可调用接口（describeCPSLBRegions）获取云物理服务器支持的地域 (Required)
- * param serverGroupId: 服务器组ID (Required)
- * param serverId: 后端服务器ID (Required)
+ * param loadBalancerId: 负载均衡实例ID (Required)
  */
-func NewRemoveServerRequestWithAllParams(
+func NewDescribeLoadBalancerRequestWithAllParams(
     regionId string,
-    serverGroupId string,
-    serverId string,
-) *RemoveServerRequest {
+    loadBalancerId string,
+) *DescribeLoadBalancerRequest {
 
-    return &RemoveServerRequest{
+    return &DescribeLoadBalancerRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/serverGroups/{serverGroupId}/servers/{serverId}",
-            Method:  "DELETE",
+            URL:     "/regions/{regionId}/slbs/{loadBalancerId}",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        ServerGroupId: serverGroupId,
-        ServerId: serverId,
+        LoadBalancerId: loadBalancerId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewRemoveServerRequestWithoutParam() *RemoveServerRequest {
+func NewDescribeLoadBalancerRequestWithoutParam() *DescribeLoadBalancerRequest {
 
-    return &RemoveServerRequest{
+    return &DescribeLoadBalancerRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/serverGroups/{serverGroupId}/servers/{serverId}",
-            Method:  "DELETE",
+            URL:     "/regions/{regionId}/slbs/{loadBalancerId}",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
@@ -98,32 +90,27 @@ func NewRemoveServerRequestWithoutParam() *RemoveServerRequest {
 }
 
 /* param regionId: 地域ID，可调用接口（describeCPSLBRegions）获取云物理服务器支持的地域(Required) */
-func (r *RemoveServerRequest) SetRegionId(regionId string) {
+func (r *DescribeLoadBalancerRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param serverGroupId: 服务器组ID(Required) */
-func (r *RemoveServerRequest) SetServerGroupId(serverGroupId string) {
-    r.ServerGroupId = serverGroupId
-}
-
-/* param serverId: 后端服务器ID(Required) */
-func (r *RemoveServerRequest) SetServerId(serverId string) {
-    r.ServerId = serverId
+/* param loadBalancerId: 负载均衡实例ID(Required) */
+func (r *DescribeLoadBalancerRequest) SetLoadBalancerId(loadBalancerId string) {
+    r.LoadBalancerId = loadBalancerId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r RemoveServerRequest) GetRegionId() string {
+func (r DescribeLoadBalancerRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type RemoveServerResponse struct {
+type DescribeLoadBalancerResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result RemoveServerResult `json:"result"`
+    Result DescribeLoadBalancerResult `json:"result"`
 }
 
-type RemoveServerResult struct {
-    Success bool `json:"success"`
+type DescribeLoadBalancerResult struct {
+    LoadBalancer cps.LoadBalancer `json:"loadBalancer"`
 }

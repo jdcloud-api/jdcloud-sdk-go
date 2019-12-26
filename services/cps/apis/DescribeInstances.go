@@ -56,8 +56,10 @@ type DescribeInstancesRequest struct {
     /* 是否启用外网, yes/no (Optional) */
     EnableInternet *string `json:"enableInternet"`
 
+    /* 内网ip (Optional) */
+    PrivateIp *string `json:"privateIp"`
+
     /* instanceId - 云物理服务器ID，精确匹配，支持多个<br/>
-privateIp - 云物理服务器内网IP，精确匹配，支持多个<br/>
 status - 云物理服务器状态，参考云物理服务器状态，精确匹配，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
@@ -94,8 +96,8 @@ func NewDescribeInstancesRequest(
  * param subnetId: 子网ID (Optional)
  * param keypairId: 密钥对ID (Optional)
  * param enableInternet: 是否启用外网, yes/no (Optional)
+ * param privateIp: 内网ip (Optional)
  * param filters: instanceId - 云物理服务器ID，精确匹配，支持多个<br/>
-privateIp - 云物理服务器内网IP，精确匹配，支持多个<br/>
 status - 云物理服务器状态，参考云物理服务器状态，精确匹配，支持多个
  (Optional)
  */
@@ -110,6 +112,7 @@ func NewDescribeInstancesRequestWithAllParams(
     subnetId *string,
     keypairId *string,
     enableInternet *string,
+    privateIp *string,
     filters []common.Filter,
 ) *DescribeInstancesRequest {
 
@@ -130,6 +133,7 @@ func NewDescribeInstancesRequestWithAllParams(
         SubnetId: subnetId,
         KeypairId: keypairId,
         EnableInternet: enableInternet,
+        PrivateIp: privateIp,
         Filters: filters,
     }
 }
@@ -197,8 +201,12 @@ func (r *DescribeInstancesRequest) SetEnableInternet(enableInternet string) {
     r.EnableInternet = &enableInternet
 }
 
+/* param privateIp: 内网ip(Optional) */
+func (r *DescribeInstancesRequest) SetPrivateIp(privateIp string) {
+    r.PrivateIp = &privateIp
+}
+
 /* param filters: instanceId - 云物理服务器ID，精确匹配，支持多个<br/>
-privateIp - 云物理服务器内网IP，精确匹配，支持多个<br/>
 status - 云物理服务器状态，参考云物理服务器状态，精确匹配，支持多个
 (Optional) */
 func (r *DescribeInstancesRequest) SetFilters(filters []common.Filter) {

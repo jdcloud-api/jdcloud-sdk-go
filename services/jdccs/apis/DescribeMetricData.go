@@ -42,6 +42,12 @@ type DescribeMetricDataRequest struct {
 
     /* 时间间隔：分钟m、小时h、天d，如： 10分钟=10m、1小时=1h，3天=3d；默认5m，最小支持5m，最大90d (Optional) */
     TimeInterval *string `json:"timeInterval"`
+
+    /* 交换机IP，指定ip时须同时指定port (Optional) */
+    Ip *string `json:"ip"`
+
+    /* 端口，指定port时须同时指定ip (Optional) */
+    Port *string `json:"port"`
 }
 
 /*
@@ -83,6 +89,8 @@ func NewDescribeMetricDataRequest(
  * param startTime: 查询时间范围的开始时间， UNIX时间戳，（最多支持最近90天数据查询） (Required)
  * param endTime: 查询时间范围的结束时间， UNIX时间戳，（最多支持最近90天数据查询） (Required)
  * param timeInterval: 时间间隔：分钟m、小时h、天d，如： 10分钟=10m、1小时=1h，3天=3d；默认5m，最小支持5m，最大90d (Optional)
+ * param ip: 交换机IP，指定ip时须同时指定port (Optional)
+ * param port: 端口，指定port时须同时指定ip (Optional)
  */
 func NewDescribeMetricDataRequestWithAllParams(
     idc string,
@@ -91,6 +99,8 @@ func NewDescribeMetricDataRequestWithAllParams(
     startTime int,
     endTime int,
     timeInterval *string,
+    ip *string,
+    port *string,
 ) *DescribeMetricDataRequest {
 
     return &DescribeMetricDataRequest{
@@ -106,6 +116,8 @@ func NewDescribeMetricDataRequestWithAllParams(
         StartTime: startTime,
         EndTime: endTime,
         TimeInterval: timeInterval,
+        Ip: ip,
+        Port: port,
     }
 }
 
@@ -150,6 +162,16 @@ func (r *DescribeMetricDataRequest) SetEndTime(endTime int) {
 /* param timeInterval: 时间间隔：分钟m、小时h、天d，如： 10分钟=10m、1小时=1h，3天=3d；默认5m，最小支持5m，最大90d(Optional) */
 func (r *DescribeMetricDataRequest) SetTimeInterval(timeInterval string) {
     r.TimeInterval = &timeInterval
+}
+
+/* param ip: 交换机IP，指定ip时须同时指定port(Optional) */
+func (r *DescribeMetricDataRequest) SetIp(ip string) {
+    r.Ip = &ip
+}
+
+/* param port: 端口，指定port时须同时指定ip(Optional) */
+func (r *DescribeMetricDataRequest) SetPort(port string) {
+    r.Port = &port
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

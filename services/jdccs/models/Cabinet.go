@@ -49,11 +49,14 @@ type Cabinet struct {
     /* 开通时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
     CabinetOpenTime string `json:"cabinetOpenTime"`
 
-    /* 起租时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
-    StartTime string `json:"startTime"`
+    /* 到期时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
+    ExpireTime string `json:"expireTime"`
 
-    /* 退租时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
-    EndTime string `json:"endTime"`
+    /* 预留开始时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
+    ReserveStartTime string `json:"reserveStartTime"`
+
+    /* 预留结束时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
+    ReserveEndTime string `json:"reserveEndTime"`
 
     /* 设备数量 (Optional) */
     DeviceNum int `json:"deviceNum"`
@@ -63,4 +66,7 @@ type Cabinet struct {
 
     /* 空闲U数(U) (Optional) */
     RackUFree int `json:"rackUFree"`
+
+    /* 计费类型 1:按配置 2:按用量 3:包年包月 4:一次性（目前仅支持包年包月） (Optional) */
+    BillingType int `json:"billingType"`
 }

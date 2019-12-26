@@ -25,7 +25,7 @@ type ModifyListenerRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域  */
+    /* 地域ID，可调用接口（describeCPSLBRegions）获取云物理服务器支持的地域  */
     RegionId string `json:"regionId"`
 
     /* 监听器ID  */
@@ -66,7 +66,7 @@ type ModifyListenerRequest struct {
 }
 
 /*
- * param regionId: 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（describeCPSLBRegions）获取云物理服务器支持的地域 (Required)
  * param listenerId: 监听器ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -78,7 +78,7 @@ func NewModifyListenerRequest(
 
 	return &ModifyListenerRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/listeners/{listenerId}:modifylistenerAttributes",
+			URL:     "/regions/{regionId}/listeners/{listenerId}:modifyListenerAttributes",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -89,7 +89,7 @@ func NewModifyListenerRequest(
 }
 
 /*
- * param regionId: 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（describeCPSLBRegions）获取云物理服务器支持的地域 (Required)
  * param listenerId: 监听器ID (Required)
  * param algorithm: 调度算法 (Optional)
  * param stickySession: 会话保持 (Optional)
@@ -121,7 +121,7 @@ func NewModifyListenerRequestWithAllParams(
 
     return &ModifyListenerRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/listeners/{listenerId}:modifylistenerAttributes",
+            URL:     "/regions/{regionId}/listeners/{listenerId}:modifyListenerAttributes",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -147,7 +147,7 @@ func NewModifyListenerRequestWithoutParam() *ModifyListenerRequest {
 
     return &ModifyListenerRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/listeners/{listenerId}:modifylistenerAttributes",
+            URL:     "/regions/{regionId}/listeners/{listenerId}:modifyListenerAttributes",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -155,7 +155,7 @@ func NewModifyListenerRequestWithoutParam() *ModifyListenerRequest {
     }
 }
 
-/* param regionId: 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域(Required) */
+/* param regionId: 地域ID，可调用接口（describeCPSLBRegions）获取云物理服务器支持的地域(Required) */
 func (r *ModifyListenerRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
@@ -233,5 +233,5 @@ type ModifyListenerResponse struct {
 }
 
 type ModifyListenerResult struct {
-    LoadBalancer cps.Listener `json:"loadBalancer"`
+    Listener cps.Listener `json:"listener"`
 }

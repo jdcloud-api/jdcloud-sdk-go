@@ -21,7 +21,7 @@ import (
     cps "github.com/jdcloud-api/jdcloud-sdk-go/services/cps/models"
 )
 
-type AddServersRequest struct {
+type DescribeServerGroupRequest struct {
 
     core.JDCloudRequest
 
@@ -30,78 +30,59 @@ type AddServersRequest struct {
 
     /* 服务器组ID  */
     ServerGroupId string `json:"serverGroupId"`
-
-    /* 由客户端生成，用于保证请求的幂等性，长度不能超过36个字符；<br/>
-如果多个请求使用了相同的clientToken，只会执行第一个请求，之后的请求直接返回第一个请求的结果<br/>
- (Optional) */
-    ClientToken *string `json:"clientToken"`
-
-    /* 后端服务器配置  */
-    ServerSpec []cps.ServerSpec `json:"serverSpec"`
 }
 
 /*
  * param regionId: 地域ID，可调用接口（describeCPSLBRegions）获取云物理服务器支持的地域 (Required)
  * param serverGroupId: 服务器组ID (Required)
- * param serverSpec: 后端服务器配置 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewAddServersRequest(
+func NewDescribeServerGroupRequest(
     regionId string,
     serverGroupId string,
-    serverSpec []cps.ServerSpec,
-) *AddServersRequest {
+) *DescribeServerGroupRequest {
 
-	return &AddServersRequest{
+	return &DescribeServerGroupRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/serverGroups/{serverGroupId}/servers",
-			Method:  "PUT",
+			URL:     "/regions/{regionId}/serverGroups/{serverGroupId}",
+			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         ServerGroupId: serverGroupId,
-        ServerSpec: serverSpec,
 	}
 }
 
 /*
  * param regionId: 地域ID，可调用接口（describeCPSLBRegions）获取云物理服务器支持的地域 (Required)
  * param serverGroupId: 服务器组ID (Required)
- * param clientToken: 由客户端生成，用于保证请求的幂等性，长度不能超过36个字符；<br/>
-如果多个请求使用了相同的clientToken，只会执行第一个请求，之后的请求直接返回第一个请求的结果<br/>
- (Optional)
- * param serverSpec: 后端服务器配置 (Required)
  */
-func NewAddServersRequestWithAllParams(
+func NewDescribeServerGroupRequestWithAllParams(
     regionId string,
     serverGroupId string,
-    clientToken *string,
-    serverSpec []cps.ServerSpec,
-) *AddServersRequest {
+) *DescribeServerGroupRequest {
 
-    return &AddServersRequest{
+    return &DescribeServerGroupRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/serverGroups/{serverGroupId}/servers",
-            Method:  "PUT",
+            URL:     "/regions/{regionId}/serverGroups/{serverGroupId}",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         ServerGroupId: serverGroupId,
-        ClientToken: clientToken,
-        ServerSpec: serverSpec,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewAddServersRequestWithoutParam() *AddServersRequest {
+func NewDescribeServerGroupRequestWithoutParam() *DescribeServerGroupRequest {
 
-    return &AddServersRequest{
+    return &DescribeServerGroupRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/serverGroups/{serverGroupId}/servers",
-            Method:  "PUT",
+            URL:     "/regions/{regionId}/serverGroups/{serverGroupId}",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
@@ -109,39 +90,27 @@ func NewAddServersRequestWithoutParam() *AddServersRequest {
 }
 
 /* param regionId: 地域ID，可调用接口（describeCPSLBRegions）获取云物理服务器支持的地域(Required) */
-func (r *AddServersRequest) SetRegionId(regionId string) {
+func (r *DescribeServerGroupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param serverGroupId: 服务器组ID(Required) */
-func (r *AddServersRequest) SetServerGroupId(serverGroupId string) {
+func (r *DescribeServerGroupRequest) SetServerGroupId(serverGroupId string) {
     r.ServerGroupId = serverGroupId
-}
-
-/* param clientToken: 由客户端生成，用于保证请求的幂等性，长度不能超过36个字符；<br/>
-如果多个请求使用了相同的clientToken，只会执行第一个请求，之后的请求直接返回第一个请求的结果<br/>
-(Optional) */
-func (r *AddServersRequest) SetClientToken(clientToken string) {
-    r.ClientToken = &clientToken
-}
-
-/* param serverSpec: 后端服务器配置(Required) */
-func (r *AddServersRequest) SetServerSpec(serverSpec []cps.ServerSpec) {
-    r.ServerSpec = serverSpec
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r AddServersRequest) GetRegionId() string {
+func (r DescribeServerGroupRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type AddServersResponse struct {
+type DescribeServerGroupResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result AddServersResult `json:"result"`
+    Result DescribeServerGroupResult `json:"result"`
 }
 
-type AddServersResult struct {
-    ServerIds []string `json:"serverIds"`
+type DescribeServerGroupResult struct {
+    ServerGroup cps.ServerGroup `json:"serverGroup"`
 }

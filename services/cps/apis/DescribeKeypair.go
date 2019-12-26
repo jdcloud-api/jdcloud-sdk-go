@@ -18,14 +18,14 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    edcps "github.com/jdcloud-api/jdcloud-sdk-go/services/edcps/models"
+    cps "github.com/jdcloud-api/jdcloud-sdk-go/services/cps/models"
 )
 
 type DescribeKeypairRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域  */
+    /* 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域  */
     RegionId string `json:"regionId"`
 
     /* 密钥对ID  */
@@ -33,7 +33,7 @@ type DescribeKeypairRequest struct {
 }
 
 /*
- * param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域 (Required)
  * param keypairId: 密钥对ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -56,7 +56,7 @@ func NewDescribeKeypairRequest(
 }
 
 /*
- * param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域 (Required)
  * param keypairId: 密钥对ID (Required)
  */
 func NewDescribeKeypairRequestWithAllParams(
@@ -89,7 +89,7 @@ func NewDescribeKeypairRequestWithoutParam() *DescribeKeypairRequest {
     }
 }
 
-/* param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域(Required) */
+/* param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域(Required) */
 func (r *DescribeKeypairRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
@@ -112,5 +112,5 @@ type DescribeKeypairResponse struct {
 }
 
 type DescribeKeypairResult struct {
-    Keypair edcps.Keypair `json:"keypair"`
+    Keypair cps.Keypair `json:"keypair"`
 }

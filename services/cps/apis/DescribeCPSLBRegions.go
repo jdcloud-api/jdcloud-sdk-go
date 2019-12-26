@@ -18,61 +18,52 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    yundingdatapush "github.com/jdcloud-api/jdcloud-sdk-go/services/yundingdatapush/models"
+    cps "github.com/jdcloud-api/jdcloud-sdk-go/services/cps/models"
 )
 
-type DescribeRdsInstancesRequest struct {
+type DescribeCPSLBRegionsRequest struct {
 
     core.JDCloudRequest
-
-    /* appkey  */
-    Appkey string `json:"appkey"`
 }
 
 /*
- * param appkey: appkey (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeRdsInstancesRequest(
-    appkey string,
-) *DescribeRdsInstancesRequest {
+func NewDescribeCPSLBRegionsRequest(
+) *DescribeCPSLBRegionsRequest {
 
-	return &DescribeRdsInstancesRequest{
+	return &DescribeCPSLBRegionsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/describeRdsInstances",
+			URL:     "/cpslbRegions",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
-        Appkey: appkey,
 	}
 }
 
 /*
- * param appkey: appkey (Required)
  */
-func NewDescribeRdsInstancesRequestWithAllParams(
-    appkey string,
-) *DescribeRdsInstancesRequest {
+func NewDescribeCPSLBRegionsRequestWithAllParams(
+) *DescribeCPSLBRegionsRequest {
 
-    return &DescribeRdsInstancesRequest{
+    return &DescribeCPSLBRegionsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/describeRdsInstances",
+            URL:     "/cpslbRegions",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
-        Appkey: appkey,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeRdsInstancesRequestWithoutParam() *DescribeRdsInstancesRequest {
+func NewDescribeCPSLBRegionsRequestWithoutParam() *DescribeCPSLBRegionsRequest {
 
-    return &DescribeRdsInstancesRequest{
+    return &DescribeCPSLBRegionsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/describeRdsInstances",
+            URL:     "/cpslbRegions",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -80,23 +71,18 @@ func NewDescribeRdsInstancesRequestWithoutParam() *DescribeRdsInstancesRequest {
     }
 }
 
-/* param appkey: appkey(Required) */
-func (r *DescribeRdsInstancesRequest) SetAppkey(appkey string) {
-    r.Appkey = appkey
-}
-
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeRdsInstancesRequest) GetRegionId() string {
+func (r DescribeCPSLBRegionsRequest) GetRegionId() string {
     return ""
 }
 
-type DescribeRdsInstancesResponse struct {
+type DescribeCPSLBRegionsResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeRdsInstancesResult `json:"result"`
+    Result DescribeCPSLBRegionsResult `json:"result"`
 }
 
-type DescribeRdsInstancesResult struct {
-    RdsInstances []yundingdatapush.RdsInstance `json:"rdsInstances"`
+type DescribeCPSLBRegionsResult struct {
+    Regions []cps.Region `json:"regions"`
 }

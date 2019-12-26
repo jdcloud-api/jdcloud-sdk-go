@@ -40,7 +40,7 @@ func NewEdcpsClient(credential *core.Credential) *EdcpsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "edcps",
-            Revision:    "1.1.1",
+            Revision:    "1.1.2",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }

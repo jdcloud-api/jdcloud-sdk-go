@@ -22,11 +22,11 @@ import (
     common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
 
-type DescribeElasticIpsRequest struct {
+type DescribeLoadBalancersRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域  */
+    /* 地域ID，可调用接口（describeCPSLBRegions）获取云物理服务器支持的地域  */
     RegionId string `json:"regionId"`
 
     /* 页码；默认为1 (Optional) */
@@ -35,30 +35,35 @@ type DescribeElasticIpsRequest struct {
     /* 分页大小；默认为20；取值范围[20, 100] (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* 弹性公网IP状态，取值范围：associate、disassociate (Optional) */
+    /* 状态 (Optional) */
     Status *string `json:"status"`
 
-    /* 是否包含负载均衡 (Optional) */
-    IncludeLB *string `json:"includeLB"`
+    /* 名称 (Optional) */
+    Name *string `json:"name"`
 
-    /* elasticIpId - 弹性公网IPID，精确匹配，支持多个<br/>
-elasticIp - 弹性公网IP，精确匹配，支持多个
+    /* 私有网络ID，精确匹配 (Optional) */
+    VpcId *string `json:"vpcId"`
+
+    /* 是否绑定eip (Optional) */
+    BindEip *bool `json:"bindEip"`
+
+    /* loadBalancerId - 负载均衡实例ID，精确匹配，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
 
 /*
- * param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（describeCPSLBRegions）获取云物理服务器支持的地域 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeElasticIpsRequest(
+func NewDescribeLoadBalancersRequest(
     regionId string,
-) *DescribeElasticIpsRequest {
+) *DescribeLoadBalancersRequest {
 
-	return &DescribeElasticIpsRequest{
+	return &DescribeLoadBalancersRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/elasticIps",
+			URL:     "/regions/{regionId}/slbs",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -68,27 +73,30 @@ func NewDescribeElasticIpsRequest(
 }
 
 /*
- * param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（describeCPSLBRegions）获取云物理服务器支持的地域 (Required)
  * param pageNumber: 页码；默认为1 (Optional)
  * param pageSize: 分页大小；默认为20；取值范围[20, 100] (Optional)
- * param status: 弹性公网IP状态，取值范围：associate、disassociate (Optional)
- * param includeLB: 是否包含负载均衡 (Optional)
- * param filters: elasticIpId - 弹性公网IPID，精确匹配，支持多个<br/>
-elasticIp - 弹性公网IP，精确匹配，支持多个
+ * param status: 状态 (Optional)
+ * param name: 名称 (Optional)
+ * param vpcId: 私有网络ID，精确匹配 (Optional)
+ * param bindEip: 是否绑定eip (Optional)
+ * param filters: loadBalancerId - 负载均衡实例ID，精确匹配，支持多个
  (Optional)
  */
-func NewDescribeElasticIpsRequestWithAllParams(
+func NewDescribeLoadBalancersRequestWithAllParams(
     regionId string,
     pageNumber *int,
     pageSize *int,
     status *string,
-    includeLB *string,
+    name *string,
+    vpcId *string,
+    bindEip *bool,
     filters []common.Filter,
-) *DescribeElasticIpsRequest {
+) *DescribeLoadBalancersRequest {
 
-    return &DescribeElasticIpsRequest{
+    return &DescribeLoadBalancersRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/elasticIps",
+            URL:     "/regions/{regionId}/slbs",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -97,17 +105,19 @@ func NewDescribeElasticIpsRequestWithAllParams(
         PageNumber: pageNumber,
         PageSize: pageSize,
         Status: status,
-        IncludeLB: includeLB,
+        Name: name,
+        VpcId: vpcId,
+        BindEip: bindEip,
         Filters: filters,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeElasticIpsRequestWithoutParam() *DescribeElasticIpsRequest {
+func NewDescribeLoadBalancersRequestWithoutParam() *DescribeLoadBalancersRequest {
 
-    return &DescribeElasticIpsRequest{
+    return &DescribeLoadBalancersRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/elasticIps",
+            URL:     "/regions/{regionId}/slbs",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -115,52 +125,61 @@ func NewDescribeElasticIpsRequestWithoutParam() *DescribeElasticIpsRequest {
     }
 }
 
-/* param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域(Required) */
-func (r *DescribeElasticIpsRequest) SetRegionId(regionId string) {
+/* param regionId: 地域ID，可调用接口（describeCPSLBRegions）获取云物理服务器支持的地域(Required) */
+func (r *DescribeLoadBalancersRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param pageNumber: 页码；默认为1(Optional) */
-func (r *DescribeElasticIpsRequest) SetPageNumber(pageNumber int) {
+func (r *DescribeLoadBalancersRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
 /* param pageSize: 分页大小；默认为20；取值范围[20, 100](Optional) */
-func (r *DescribeElasticIpsRequest) SetPageSize(pageSize int) {
+func (r *DescribeLoadBalancersRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
-/* param status: 弹性公网IP状态，取值范围：associate、disassociate(Optional) */
-func (r *DescribeElasticIpsRequest) SetStatus(status string) {
+/* param status: 状态(Optional) */
+func (r *DescribeLoadBalancersRequest) SetStatus(status string) {
     r.Status = &status
 }
 
-/* param includeLB: 是否包含负载均衡(Optional) */
-func (r *DescribeElasticIpsRequest) SetIncludeLB(includeLB string) {
-    r.IncludeLB = &includeLB
+/* param name: 名称(Optional) */
+func (r *DescribeLoadBalancersRequest) SetName(name string) {
+    r.Name = &name
 }
 
-/* param filters: elasticIpId - 弹性公网IPID，精确匹配，支持多个<br/>
-elasticIp - 弹性公网IP，精确匹配，支持多个
+/* param vpcId: 私有网络ID，精确匹配(Optional) */
+func (r *DescribeLoadBalancersRequest) SetVpcId(vpcId string) {
+    r.VpcId = &vpcId
+}
+
+/* param bindEip: 是否绑定eip(Optional) */
+func (r *DescribeLoadBalancersRequest) SetBindEip(bindEip bool) {
+    r.BindEip = &bindEip
+}
+
+/* param filters: loadBalancerId - 负载均衡实例ID，精确匹配，支持多个
 (Optional) */
-func (r *DescribeElasticIpsRequest) SetFilters(filters []common.Filter) {
+func (r *DescribeLoadBalancersRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeElasticIpsRequest) GetRegionId() string {
+func (r DescribeLoadBalancersRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeElasticIpsResponse struct {
+type DescribeLoadBalancersResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeElasticIpsResult `json:"result"`
+    Result DescribeLoadBalancersResult `json:"result"`
 }
 
-type DescribeElasticIpsResult struct {
-    ElasticIps []cps.ElasticIp `json:"elasticIps"`
+type DescribeLoadBalancersResult struct {
+    LoadBalancers []cps.LoadBalancer `json:"loadBalancers"`
     PageNumber int `json:"pageNumber"`
     PageSize int `json:"pageSize"`
     TotalCount int `json:"totalCount"`

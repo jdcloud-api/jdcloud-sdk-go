@@ -25,7 +25,7 @@ type CreateListenerRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域  */
+    /* 地域ID，可调用接口（describeCPSLBRegions）获取云物理服务器支持的地域  */
     RegionId string `json:"regionId"`
 
     /* 由客户端生成，用于保证请求的幂等性，长度不能超过36个字符；<br/>
@@ -34,18 +34,18 @@ type CreateListenerRequest struct {
     ClientToken *string `json:"clientToken"`
 
     /* 监听器配置  */
-    LoadBalancerSpec *cps.ListenerSpec `json:"loadBalancerSpec"`
+    ListenerSpec *cps.ListenerSpec `json:"listenerSpec"`
 }
 
 /*
- * param regionId: 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域 (Required)
- * param loadBalancerSpec: 监听器配置 (Required)
+ * param regionId: 地域ID，可调用接口（describeCPSLBRegions）获取云物理服务器支持的地域 (Required)
+ * param listenerSpec: 监听器配置 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateListenerRequest(
     regionId string,
-    loadBalancerSpec *cps.ListenerSpec,
+    listenerSpec *cps.ListenerSpec,
 ) *CreateListenerRequest {
 
 	return &CreateListenerRequest{
@@ -56,21 +56,21 @@ func NewCreateListenerRequest(
 			Version: "v1",
 		},
         RegionId: regionId,
-        LoadBalancerSpec: loadBalancerSpec,
+        ListenerSpec: listenerSpec,
 	}
 }
 
 /*
- * param regionId: 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（describeCPSLBRegions）获取云物理服务器支持的地域 (Required)
  * param clientToken: 由客户端生成，用于保证请求的幂等性，长度不能超过36个字符；<br/>
 如果多个请求使用了相同的clientToken，只会执行第一个请求，之后的请求直接返回第一个请求的结果<br/>
  (Optional)
- * param loadBalancerSpec: 监听器配置 (Required)
+ * param listenerSpec: 监听器配置 (Required)
  */
 func NewCreateListenerRequestWithAllParams(
     regionId string,
     clientToken *string,
-    loadBalancerSpec *cps.ListenerSpec,
+    listenerSpec *cps.ListenerSpec,
 ) *CreateListenerRequest {
 
     return &CreateListenerRequest{
@@ -82,7 +82,7 @@ func NewCreateListenerRequestWithAllParams(
         },
         RegionId: regionId,
         ClientToken: clientToken,
-        LoadBalancerSpec: loadBalancerSpec,
+        ListenerSpec: listenerSpec,
     }
 }
 
@@ -99,7 +99,7 @@ func NewCreateListenerRequestWithoutParam() *CreateListenerRequest {
     }
 }
 
-/* param regionId: 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域(Required) */
+/* param regionId: 地域ID，可调用接口（describeCPSLBRegions）获取云物理服务器支持的地域(Required) */
 func (r *CreateListenerRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
@@ -111,9 +111,9 @@ func (r *CreateListenerRequest) SetClientToken(clientToken string) {
     r.ClientToken = &clientToken
 }
 
-/* param loadBalancerSpec: 监听器配置(Required) */
-func (r *CreateListenerRequest) SetLoadBalancerSpec(loadBalancerSpec *cps.ListenerSpec) {
-    r.LoadBalancerSpec = loadBalancerSpec
+/* param listenerSpec: 监听器配置(Required) */
+func (r *CreateListenerRequest) SetListenerSpec(listenerSpec *cps.ListenerSpec) {
+    r.ListenerSpec = listenerSpec
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
