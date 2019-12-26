@@ -27,16 +27,16 @@ type DescribeQuotaRequest struct {
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 资源类型，取值范围：vpc、elastic_ip、subnet、security_group、vpcpeering、network_interface（配额只统计辅助网卡）  */
+    /* 资源类型，取值范围：vpc、elastic_ip、subnet、security_group、vpcpeering、network_interface（配额只统计辅助网卡）、acl、aclRule、routeTable、staticRoute、propagatedRoute、securityGroupRule  */
     Type string `json:"type"`
 
-    /* type为vpc、elastic_ip、network_interface不设置, type为subnet、security_group、vpcpeering设置为vpcId (Optional) */
+    /* type为vpc、elastic_ip、network_interface不设置, type为subnet、security_group、vpcpeering、acl、routeTable设置为vpcId, type为aclRule设置为aclId, type为staticRoute、propagatedRoute设置为routeTableId, type为securityGroupRule为securityGroupId (Optional) */
     ParentResourceId *string `json:"parentResourceId"`
 }
 
 /*
  * param regionId: Region ID (Required)
- * param type_: 资源类型，取值范围：vpc、elastic_ip、subnet、security_group、vpcpeering、network_interface（配额只统计辅助网卡） (Required)
+ * param type_: 资源类型，取值范围：vpc、elastic_ip、subnet、security_group、vpcpeering、network_interface（配额只统计辅助网卡）、acl、aclRule、routeTable、staticRoute、propagatedRoute、securityGroupRule (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -59,8 +59,8 @@ func NewDescribeQuotaRequest(
 
 /*
  * param regionId: Region ID (Required)
- * param type_: 资源类型，取值范围：vpc、elastic_ip、subnet、security_group、vpcpeering、network_interface（配额只统计辅助网卡） (Required)
- * param parentResourceId: type为vpc、elastic_ip、network_interface不设置, type为subnet、security_group、vpcpeering设置为vpcId (Optional)
+ * param type_: 资源类型，取值范围：vpc、elastic_ip、subnet、security_group、vpcpeering、network_interface（配额只统计辅助网卡）、acl、aclRule、routeTable、staticRoute、propagatedRoute、securityGroupRule (Required)
+ * param parentResourceId: type为vpc、elastic_ip、network_interface不设置, type为subnet、security_group、vpcpeering、acl、routeTable设置为vpcId, type为aclRule设置为aclId, type为staticRoute、propagatedRoute设置为routeTableId, type为securityGroupRule为securityGroupId (Optional)
  */
 func NewDescribeQuotaRequestWithAllParams(
     regionId string,
@@ -99,12 +99,12 @@ func (r *DescribeQuotaRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param type_: 资源类型，取值范围：vpc、elastic_ip、subnet、security_group、vpcpeering、network_interface（配额只统计辅助网卡）(Required) */
+/* param type_: 资源类型，取值范围：vpc、elastic_ip、subnet、security_group、vpcpeering、network_interface（配额只统计辅助网卡）、acl、aclRule、routeTable、staticRoute、propagatedRoute、securityGroupRule(Required) */
 func (r *DescribeQuotaRequest) SetType(type_ string) {
     r.Type = type_
 }
 
-/* param parentResourceId: type为vpc、elastic_ip、network_interface不设置, type为subnet、security_group、vpcpeering设置为vpcId(Optional) */
+/* param parentResourceId: type为vpc、elastic_ip、network_interface不设置, type为subnet、security_group、vpcpeering、acl、routeTable设置为vpcId, type为aclRule设置为aclId, type为staticRoute、propagatedRoute设置为routeTableId, type为securityGroupRule为securityGroupId(Optional) */
 func (r *DescribeQuotaRequest) SetParentResourceId(parentResourceId string) {
     r.ParentResourceId = &parentResourceId
 }

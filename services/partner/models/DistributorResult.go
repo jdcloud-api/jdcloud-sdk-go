@@ -25,7 +25,7 @@ type DistributorResult struct {
     /* 渠道商名称 (Optional) */
     DistributorName string `json:"distributorName"`
 
-    /* 京东云账户 (Optional) */
+    /* pin (Optional) */
     Pin string `json:"pin"`
 
     /* 合同编号 (Optional) */
@@ -82,8 +82,62 @@ type DistributorResult struct {
     /* 部门名称 (Optional) */
     DeptName string `json:"deptName"`
 
+    /* 是否需要返还（0需要1不需要） (Optional) */
+    ReturnFlag int `json:"returnFlag"`
+
+    /* 返还政策ID (Optional) */
+    ReturnPolicyId string `json:"returnPolicyId"`
+
+    /* 结算周期类型（1月、2季度、3年、4天、5周） (Optional) */
+    CircleType int `json:"circleType"`
+
+    /* 结算周期类型名称 (Optional) */
+    CircleTypeName string `json:"circleTypeName"`
+
+    /* 服务商返还方式 (Optional) */
+    ReturnMode int `json:"returnMode"`
+
+    /* 服务商返还方式名称（1现金2代金券） (Optional) */
+    ReturnModeName string `json:"returnModeName"`
+
+    /* 合同主体 (Optional) */
+    ContractSubject string `json:"contractSubject"`
+
+    /* 合同主体名称 (Optional) */
+    ContractSubjectName string `json:"contractSubjectName"`
+
+    /* 是否有下级服务商（0有1不没有） (Optional) */
+    SubFlag int `json:"subFlag"`
+
+    /* 下级服务商是否需要返还（0需要1不需要） (Optional) */
+    SubReturnFlag int `json:"subReturnFlag"`
+
+    /* 下级服务商返还政策ID (Optional) */
+    SubReturnPolicyId string `json:"subReturnPolicyId"`
+
+    /* 结算周期类型（1月、2季度、3年、4天、5周） (Optional) */
+    SubCircleType int `json:"subCircleType"`
+
+    /* 结算周期类型名称 (Optional) */
+    SubCircleTypeName string `json:"subCircleTypeName"`
+
+    /* 下级服务商返还方式 (Optional) */
+    SubReturnMode int `json:"subReturnMode"`
+
+    /* 下级服务商返还方式名称（1现金2代金券） (Optional) */
+    SubReturnModeName string `json:"subReturnModeName"`
+
     /* 京东云负责人(京东云人员erp或名称) (Optional) */
     Erp string `json:"erp"`
+
+    /*  (Optional) */
+    DistributorProductList []DistributorProduct `json:"distributorProductList"`
+
+    /*  (Optional) */
+    DistributorPolicyList []DistributorPolicy `json:"distributorPolicyList"`
+
+    /*  (Optional) */
+    SubDistributorPolicyList []DistributorPolicy `json:"subDistributorPolicyList"`
 
     /*  (Optional) */
     CustomerCount int `json:"customerCount"`
@@ -93,6 +147,9 @@ type DistributorResult struct {
 
     /* 入驻时间 (Optional) */
     SettleTimeStr string `json:"settleTimeStr"`
+
+    /* 帐户名 (Optional) */
+    LoginName string `json:"loginName"`
 
     /* 服务商最大层级 (Optional) */
     Level int `json:"level"`

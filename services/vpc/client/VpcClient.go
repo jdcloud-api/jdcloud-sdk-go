@@ -40,7 +40,7 @@ func NewVpcClient(credential *core.Credential) *VpcClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vpc",
-            Revision:    "0.5.1",
+            Revision:    "0.9.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,6 +51,10 @@ func (c *VpcClient) SetConfig(config *core.Config) {
 
 func (c *VpcClient) SetLogger(logger core.Logger) {
     c.Logger = logger
+}
+
+func (c *VpcClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
 }
 
 /* 删除弹性Ip */

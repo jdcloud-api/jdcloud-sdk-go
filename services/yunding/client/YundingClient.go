@@ -40,7 +40,7 @@ func NewYundingClient(credential *core.Credential) *YundingClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "yunding",
-            Revision:    "2.0.0",
+            Revision:    "2.0.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -55,6 +55,147 @@ func (c *YundingClient) SetLogger(logger core.Logger) {
 
 func (c *YundingClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
+}
+
+/* 查询RDS实例（MySQL、SQL Server等）的详细信息以及MySQL只读实例详细信息 */
+func (c *YundingClient) DescribeRdsInstance(request *yunding.DescribeRdsInstanceRequest) (*yunding.DescribeRdsInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yunding.DescribeRdsInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询云鼎数据库实例列表
+ */
+func (c *YundingClient) DescribeYdRdsInstances(request *yunding.DescribeYdRdsInstancesRequest) (*yunding.DescribeYdRdsInstancesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yunding.DescribeYdRdsInstancesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 给网卡分配secondaryIp接口 */
+func (c *YundingClient) AssignSecondaryIps(request *yunding.AssignSecondaryIpsRequest) (*yunding.AssignSecondaryIpsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yunding.AssignSecondaryIpsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改允许访问实例的IP白名单。白名单是允许访问当前实例的IP/IP段列表，缺省情况下，白名单对本VPC开放。如果用户开启了外网访问的功能，还需要对外网的IP配置白名单。 */
+func (c *YundingClient) ModifyRdsWhiteList(request *yunding.ModifyRdsWhiteListRequest) (*yunding.ModifyRdsWhiteListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yunding.ModifyRdsWhiteListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建一个数据库。 为了实例的管理和数据恢复，RDS对用户权限进行了限制，用户仅能通过控制台或本接口创建数据库 */
+func (c *YundingClient) CreateRdsDatabase(request *yunding.CreateRdsDatabaseRequest) (*yunding.CreateRdsDatabaseResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yunding.CreateRdsDatabaseResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查看某个RDS实例下所有账号信息，包括账号名称、对各个数据库的访问权限信息等 */
+func (c *YundingClient) DescribeRdsAccounts(request *yunding.DescribeRdsAccountsRequest) (*yunding.DescribeRdsAccountsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yunding.DescribeRdsAccountsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 授予账号的数据库访问权限，即该账号对数据库拥有什么权限。一个账号可以对多个数据库具有访问权限。<br>为便于管理，RDS对权限进行了归类，目前提供以下两种权限<br>- ro：只读权限，用户只能读取数据库中的数据，不能进行创建、插入、删除、更改等操作。<br>- rw：读写权限，用户可以对数据库进行增删改查等操作 */
+func (c *YundingClient) GrantRdsPrivilege(request *yunding.GrantRdsPrivilegeRequest) (*yunding.GrantRdsPrivilegeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yunding.GrantRdsPrivilegeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
 }
 
 /* 从RDS实例中删除数据库。为便于管理和数据恢复，RDS对用户权限进行了控制，用户仅能通过控制台或本接口删除数据库 [MFA enabled] */
@@ -77,11 +218,8 @@ func (c *YundingClient) DeleteRdsDatabase(request *yunding.DeleteRdsDatabaseRequ
     return jdResp, err
 }
 
-/* 删除按配置计费、或包年包月已到期的单个云主机。不能删除没有计费信息的云主机。<br>
-云主机状态必须为运行<b>running</b>、停止<b>stopped</b>、错误<b>error</b>，同时云主机没有正在进行中的任务才可删除。<br>
-如果主机中挂载的数据盘为按配置计费的云硬盘且AutoDelete属性为true，那么数据盘会随主机一起删除。
- [MFA enabled] */
-func (c *YundingClient) DeleteVmInstance(request *yunding.DeleteVmInstanceRequest) (*yunding.DeleteVmInstanceResponse, error) {
+/* 获取当前实例的所有数据库详细信息的列表 */
+func (c *YundingClient) DescribeRdsDatabases(request *yunding.DescribeRdsDatabasesRequest) (*yunding.DescribeRdsDatabasesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -90,7 +228,87 @@ func (c *YundingClient) DeleteVmInstance(request *yunding.DeleteVmInstanceReques
         return nil, err
     }
 
-    jdResp := &yunding.DeleteVmInstanceResponse{}
+    jdResp := &yunding.DescribeRdsDatabasesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 批量查询云数据库实例列表信息<br>此接口支持分页查询，默认每页20条。 */
+func (c *YundingClient) DescribeRdsInstances(request *yunding.DescribeRdsInstancesRequest) (*yunding.DescribeRdsInstancesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yunding.DescribeRdsInstancesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询RDS实例（MySQL、SQL Server等）的真实状态 */
+func (c *YundingClient) DescribeInstanceInfo(request *yunding.DescribeInstanceInfoRequest) (*yunding.DescribeInstanceInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yunding.DescribeInstanceInfoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建数据库账号，用户可以使用客户端，应用程序等通过该账号和密码登录RDS数据库实例。<br>为便于管理和恢复，RDS对账号进行了限制，数据库账号只能通过控制台或者OpenAPI进行创建、删除账号以及对账号授权等，用户不能通过SQL语句对账号进行相关操作。 */
+func (c *YundingClient) CreateRdsAccount(request *yunding.CreateRdsAccountRequest) (*yunding.CreateRdsAccountResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yunding.CreateRdsAccountResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查看RDS实例当前白名单。白名单是允许访问当前实例的IP/IP段列表，缺省情况下，白名单对本VPC开放。如果用户开启了外网访问的功能，还需要对外网的IP配置白名单。 */
+func (c *YundingClient) DescribeRdsWhiteList(request *yunding.DescribeRdsWhiteListRequest) (*yunding.DescribeRdsWhiteListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yunding.DescribeRdsWhiteListResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -120,8 +338,8 @@ func (c *YundingClient) UnassignSecondaryIps(request *yunding.UnassignSecondaryI
     return jdResp, err
 }
 
-/* 给网卡分配secondaryIp接口 */
-func (c *YundingClient) AssignSecondaryIps(request *yunding.AssignSecondaryIpsRequest) (*yunding.AssignSecondaryIpsResponse, error) {
+/* 删除数据库账号，账号删除后不可恢复，用户无法再使用该账号登录RDS实例 */
+func (c *YundingClient) DeleteRdsAccount(request *yunding.DeleteRdsAccountRequest) (*yunding.DeleteRdsAccountResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -130,7 +348,7 @@ func (c *YundingClient) AssignSecondaryIps(request *yunding.AssignSecondaryIpsRe
         return nil, err
     }
 
-    jdResp := &yunding.AssignSecondaryIpsResponse{}
+    jdResp := &yunding.DeleteRdsAccountResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

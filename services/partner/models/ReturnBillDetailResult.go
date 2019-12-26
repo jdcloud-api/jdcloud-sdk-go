@@ -40,6 +40,27 @@ type ReturnBillDetailResult struct {
     /* 返还项目名称 (Optional) */
     ItemName string `json:"itemName"`
 
+    /* 返还依据类型 (Optional) */
+    ReturnRuleType int `json:"returnRuleType"`
+
+    /* 产品类型 (Optional) */
+    ProductType int `json:"productType"`
+
+    /* 产品ID (Optional) */
+    ProductId string `json:"productId"`
+
+    /* 产品名称 (Optional) */
+    ProductName string `json:"productName"`
+
+    /*  (Optional) */
+    ReturnBillDetailProductList []ReturnBillDetailProduct `json:"returnBillDetailProductList"`
+
+    /* 账单ID (Optional) */
+    AccountingBillId int `json:"accountingBillId"`
+
+    /* 订单号 (Optional) */
+    MainTransactionNo string `json:"mainTransactionNo"`
+
     /* 周期类型 (Optional) */
     CircleType int `json:"circleType"`
 

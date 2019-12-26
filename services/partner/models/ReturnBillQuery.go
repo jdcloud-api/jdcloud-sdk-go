@@ -61,6 +61,9 @@ type ReturnBillQuery struct {
     /* 返还金额 (Optional) */
     ReturnMount int `json:"returnMount"`
 
+    /* 返还方式 (Optional) */
+    ReturnMode int `json:"returnMode"`
+
     /* 状态 (Optional) */
     Status int `json:"status"`
 

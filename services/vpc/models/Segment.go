@@ -34,7 +34,7 @@ type Segment struct {
     /* 网段可用ip数量 (Optional) */
     AvailableIpCount int `json:"availableIpCount"`
 
-    /* IP服务商，取值为bgp或no_bgp，cn-north-1：bgp；cn-south-1：[bgp，no_bgp]；cn-east-1：[bgp，no_bgp]；cn-east-2：bgp (Optional) */
+    /* IP服务商，取值为bgp或no_bgp，cn-north-1：bgp；cn-south-1：bgp；cn-east-1：[bgp，no_bgp]；cn-east-2：bgp (Optional) */
     Provider string `json:"provider"`
 
     /* 网段的起始地址 (Optional) */

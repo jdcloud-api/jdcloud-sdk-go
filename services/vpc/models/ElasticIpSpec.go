@@ -23,7 +23,7 @@ type ElasticIpSpec struct {
     /* 弹性公网IP的限速（单位：Mbps），取值范围为[1-200]  */
     BandwidthMbps int `json:"bandwidthMbps"`
 
-    /* IP服务商，取值为bgp或no_bgp，cn-north-1：bgp；cn-south-1：[bgp，no_bgp]；cn-east-1：[bgp，no_bgp]；cn-east-2：bgp  */
+    /* IP服务商，取值为bgp或no_bgp，cn-north-1：bgp；cn-south-1：bgp；cn-east-1：[bgp，no_bgp]；cn-east-2：bgp  */
     Provider string `json:"provider"`
 
     /* 计费配置 (Optional) */

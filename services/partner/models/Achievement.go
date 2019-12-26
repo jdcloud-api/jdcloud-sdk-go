@@ -34,6 +34,9 @@ type Achievement struct {
     /* serviceCodeName (Optional) */
     ServiceCodeName string `json:"serviceCodeName"`
 
+    /* loginName (Optional) */
+    LoginName string `json:"loginName"`
+
     /* 时间 (Optional) */
     ConsumeDate string `json:"consumeDate"`
 

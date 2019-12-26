@@ -30,7 +30,7 @@ type CreateNetworkInterfaceRequest struct {
     /* 子网ID  */
     SubnetId string `json:"subnetId"`
 
-    /* 可用区，用户的默认可用区 (Optional) */
+    /* 可用区，用户的默认可用区，该参数无效，不建议使用 (Optional) */
     Az *string `json:"az"`
 
     /* 网卡名称，只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符。 (Optional) */
@@ -81,7 +81,7 @@ func NewCreateNetworkInterfaceRequest(
 /*
  * param regionId: Region ID (Required)
  * param subnetId: 子网ID (Required)
- * param az: 可用区，用户的默认可用区 (Optional)
+ * param az: 可用区，用户的默认可用区，该参数无效，不建议使用 (Optional)
  * param networkInterfaceName: 网卡名称，只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符。 (Optional)
  * param primaryIpAddress: 网卡主IP，如果不指定，会自动从子网中分配 (Optional)
  * param secondaryIpAddresses: SecondaryIp列表 (Optional)
@@ -146,7 +146,7 @@ func (r *CreateNetworkInterfaceRequest) SetSubnetId(subnetId string) {
     r.SubnetId = subnetId
 }
 
-/* param az: 可用区，用户的默认可用区(Optional) */
+/* param az: 可用区，用户的默认可用区，该参数无效，不建议使用(Optional) */
 func (r *CreateNetworkInterfaceRequest) SetAz(az string) {
     r.Az = &az
 }

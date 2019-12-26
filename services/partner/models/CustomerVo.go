@@ -31,6 +31,9 @@ type CustomerVo struct {
     /* 关联时间 (Optional) */
     RelTime string `json:"relTime"`
 
+    /* 账户名 (Optional) */
+    LoginName string `json:"loginName"`
+
     /* 来源(0渠道商自身,1京东云客户) (Optional) */
     Source int `json:"source"`
 

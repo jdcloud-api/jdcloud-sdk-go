@@ -25,7 +25,7 @@ type RouteTableRule struct {
     /* 规则匹配优先级，取值范围[1,255]，默认为100。当路由规则子网掩码不同时，路由最长匹配优先；当路由规则子网掩码相同时, 按照优先级匹配转发, 优先级数字越小优先级越高，路由规则子网掩码相同、优先级相同、下一跳不同时，形成等价路由，不同下一跳负载均担。 (Optional) */
     Priority int `json:"priority"`
 
-    /* 下一跳类型, 取值范围:local:本地, instance:云主机, internet:公网, vpc_peering:vpc对等连接, bgw:边界网关 (Optional) */
+    /* 下一跳类型, 取值范围:local:本地, instance:云主机, internet:公网, vpc_peering:vpc对等连接, bgw:边界网关, natgw:NAT网关 (Optional) */
     NextHopType string `json:"nextHopType"`
 
     /* 下一跳id (Optional) */
@@ -33,4 +33,10 @@ type RouteTableRule struct {
 
     /* 匹配地址前缀, internet类型路由跟其他类型的路由，addressPrefix不允许重复 (Optional) */
     AddressPrefix string `json:"addressPrefix"`
+
+    /* 路由类型，propagated:传播、static:静态 (Optional) */
+    RouteType string `json:"routeType"`
+
+    /* 路由描述，允许输入UTF-8编码下的全部字符，不超过256字符。 (Optional) */
+    Description string `json:"description"`
 }
