@@ -31,11 +31,26 @@ type ReturnPolicyQuery struct {
     /* 返还类型 (Optional) */
     ReturnType int `json:"returnType"`
 
+    /* 返还政策主ID (Optional) */
+    ReturnPolicyId int `json:"returnPolicyId"`
+
+    /* 返还政策主名称 (Optional) */
+    ReturnPolicyName string `json:"returnPolicyName"`
+
     /* 项目编码 (Optional) */
     ItemId int `json:"itemId"`
 
     /* 项目名称 (Optional) */
     ItemName string `json:"itemName"`
+
+    /* 返还依据类型 (Optional) */
+    ReturnRuleType int `json:"returnRuleType"`
+
+    /* 产品ID (Optional) */
+    ProductId string `json:"productId"`
+
+    /* 产品类型 (Optional) */
+    ProductType int `json:"productType"`
 
     /* 周期类型 (Optional) */
     CircleType int `json:"circleType"`

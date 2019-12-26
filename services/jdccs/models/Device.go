@@ -46,30 +46,30 @@ type Device struct {
     /* 型号 (Optional) */
     Model string `json:"model"`
 
+    /* 系统IP (Optional) */
+    SysIp string `json:"sysIp"`
+
+    /* 管理IP (Optional) */
+    ManageIp string `json:"manageIp"`
+
     /* 设备类型 server:服务器 network:网络设备 storage:存储设备 other:其他设备 (Optional) */
     DeviceType string `json:"deviceType"`
 
     /* 资产归属 own:自备 lease:租赁 (Optional) */
     AssetBelong string `json:"assetBelong"`
 
-    /* 资产状态 inWarehouse:已入库 launched:已上架 (Optional) */
+    /* 资产状态 launched:已上架 opened:已开通 canceling:退订中 operating:操作中 modifing:变更中 (Optional) */
     AssetStatus string `json:"assetStatus"`
 
-    /* CPU逻辑核数(核) (Optional) */
+    /* 开通时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
+    DeviceOpenTime string `json:"deviceOpenTime"`
+
+    /* CPU (Optional) */
     CpuCore string `json:"cpuCore"`
 
-    /* 内存总容量(GB) (Optional) */
+    /* 内存 (Optional) */
     Memory string `json:"memory"`
 
-    /* 硬盘总容量(GB) (Optional) */
+    /* 磁盘 (Optional) */
     Disk string `json:"disk"`
-
-    /* 网卡带宽(Mbps) (Optional) */
-    NetworkCardBandwidth string `json:"networkCardBandwidth"`
-
-    /* 起租时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
-    StartTime string `json:"startTime"`
-
-    /* 退租时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
-    EndTime string `json:"endTime"`
 }

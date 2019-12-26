@@ -41,7 +41,7 @@ type ElasticIp struct {
     /* 实例Id (Optional) */
     InstanceId string `json:"instanceId"`
 
-    /* 实例类型 (Optional) */
+    /* 实例类型,取值为：compute、lb、container、pod (Optional) */
     InstanceType string `json:"instanceType"`
 
     /* 计费配置 (Optional) */
@@ -52,4 +52,7 @@ type ElasticIp struct {
 
     /* 弹性ip可用区属性，如果为空，表示全可用区 (Optional) */
     Az string `json:"az"`
+
+    /* Tag信息 (Optional) */
+    Tags []Tag `json:"tags"`
 }

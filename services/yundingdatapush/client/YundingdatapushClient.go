@@ -40,7 +40,7 @@ func NewYundingdatapushClient(credential *core.Credential) *YundingdatapushClien
             Credential:  *credential,
             Config:      *config,
             ServiceName: "yundingdatapush",
-            Revision:    "1.0.2",
+            Revision:    "1.0.3",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,6 +51,10 @@ func (c *YundingdatapushClient) SetConfig(config *core.Config) {
 
 func (c *YundingdatapushClient) SetLogger(logger core.Logger) {
     c.Logger = logger
+}
+
+func (c *YundingdatapushClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
 }
 
 /* 添加数据推送用户 */
@@ -93,7 +97,7 @@ func (c *YundingdatapushClient) DescribeDatapushVenders(request *yundingdatapush
     return jdResp, err
 }
 
-/* 查询开通数据推送的数据库实例 */
+/* 查询已绑定数据推送的数据库实例 */
 func (c *YundingdatapushClient) DescribeRdsInstances(request *yundingdatapush.DescribeRdsInstancesRequest) (*yundingdatapush.DescribeRdsInstancesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")

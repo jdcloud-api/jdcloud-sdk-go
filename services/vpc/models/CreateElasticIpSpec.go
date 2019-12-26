@@ -27,4 +27,7 @@ type CreateElasticIpSpec struct {
 
     /* 弹性ip规格  */
     ElasticIpSpec ElasticIpSpec `json:"elasticIpSpec"`
+
+    /* 用户标签 (Optional) */
+    UserTags []Tag `json:"userTags"`
 }

@@ -25,6 +25,9 @@ type Customer struct {
     /* 客户pin (Optional) */
     Pin string `json:"pin"`
 
+    /* 账户名 (Optional) */
+    LoginName string `json:"loginName"`
+
     /* 渠道商ID (Optional) */
     DistributorId string `json:"distributorId"`
 

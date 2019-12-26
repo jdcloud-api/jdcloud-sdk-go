@@ -49,9 +49,12 @@ type DescribeCabinet struct {
     /* 开通时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
     CabinetOpenTime string `json:"cabinetOpenTime"`
 
-    /* 起租时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
-    StartTime string `json:"startTime"`
+    /* 到期时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
+    ExpireTime string `json:"expireTime"`
 
-    /* 退租时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
-    EndTime string `json:"endTime"`
+    /* 预留开始时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
+    ReserveStartTime string `json:"reserveStartTime"`
+
+    /* 预留结束时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
+    ReserveEndTime string `json:"reserveEndTime"`
 }

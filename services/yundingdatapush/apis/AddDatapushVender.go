@@ -25,13 +25,13 @@ type AddDatapushVenderRequest struct {
 
     core.JDCloudRequest
 
-    /* 添加/删除数据推送用户对象
+    /* 添加数据推送用户对象
   */
     DatapushVender *yundingdatapush.Vender `json:"datapushVender"`
 }
 
 /*
- * param datapushVender: 添加/删除数据推送用户对象
+ * param datapushVender: 添加数据推送用户对象
  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -52,7 +52,7 @@ func NewAddDatapushVenderRequest(
 }
 
 /*
- * param datapushVender: 添加/删除数据推送用户对象
+ * param datapushVender: 添加数据推送用户对象
  (Required)
  */
 func NewAddDatapushVenderRequestWithAllParams(
@@ -83,7 +83,7 @@ func NewAddDatapushVenderRequestWithoutParam() *AddDatapushVenderRequest {
     }
 }
 
-/* param datapushVender: 添加/删除数据推送用户对象
+/* param datapushVender: 添加数据推送用户对象
 (Required) */
 func (r *AddDatapushVenderRequest) SetDatapushVender(datapushVender *yundingdatapush.Vender) {
     r.DatapushVender = datapushVender
@@ -102,4 +102,5 @@ type AddDatapushVenderResponse struct {
 }
 
 type AddDatapushVenderResult struct {
+    Success bool `json:"success"`
 }

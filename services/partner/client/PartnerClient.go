@@ -40,7 +40,7 @@ func NewPartnerClient(credential *core.Credential) *PartnerClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "partner",
-            Revision:    "1.0.5",
+            Revision:    "1.1.4",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,6 +51,10 @@ func (c *PartnerClient) SetConfig(config *core.Config) {
 
 func (c *PartnerClient) SetLogger(logger core.Logger) {
     c.Logger = logger
+}
+
+func (c *PartnerClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
 }
 
 /* 查询客户信息 */
@@ -64,6 +68,66 @@ func (c *PartnerClient) QueryMyCustomerList(request *partner.QueryMyCustomerList
     }
 
     jdResp := &partner.QueryMyCustomerListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询服务商下每个客户总消费数据 */
+func (c *PartnerClient) GetEachConsumption(request *partner.GetEachConsumptionRequest) (*partner.GetEachConsumptionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &partner.GetEachConsumptionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询服务商相关pin下每个产品的消费数据 */
+func (c *PartnerClient) DescribeCustomerBillByProduct(request *partner.DescribeCustomerBillByProductRequest) (*partner.DescribeCustomerBillByProductResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &partner.DescribeCustomerBillByProductResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询服务商相关的总消费数据 */
+func (c *PartnerClient) GetTotalConsumption(request *partner.GetTotalConsumptionRequest) (*partner.GetTotalConsumptionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &partner.GetTotalConsumptionResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

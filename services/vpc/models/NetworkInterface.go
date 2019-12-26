@@ -25,7 +25,7 @@ type NetworkInterface struct {
     /* 弹性网卡ID (Optional) */
     NetworkInterfaceId string `json:"networkInterfaceId"`
 
-    /* 可用区名称 (Optional) */
+    /* 可用区名称，该参数无效，不建议使用 (Optional) */
     Az string `json:"az"`
 
     /* 网卡角色，取值范围：Primary（主网卡）、Secondary（辅助网卡） (Optional) */
@@ -66,6 +66,12 @@ type NetworkInterface struct {
 
     /* 网卡描述信息 (Optional) */
     Description string `json:"description"`
+
+    /* 弹性网卡绑定实例状态，attached（已绑定）、detached（未绑定） (Optional) */
+    AttachmentStatus string `json:"attachmentStatus"`
+
+    /* 弹性网卡可用状态，enabled（启用）、disabled（停用） (Optional) */
+    NetworkInterfaceStatus string `json:"networkInterfaceStatus"`
 
     /* 弹性网卡创建时间 (Optional) */
     CreatedTime string `json:"createdTime"`

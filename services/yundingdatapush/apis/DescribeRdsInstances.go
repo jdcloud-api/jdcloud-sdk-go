@@ -98,5 +98,5 @@ type DescribeRdsInstancesResponse struct {
 }
 
 type DescribeRdsInstancesResult struct {
-    Venders []yundingdatapush.RdsInstance `json:"venders"`
+    RdsInstances []yundingdatapush.RdsInstance `json:"rdsInstances"`
 }

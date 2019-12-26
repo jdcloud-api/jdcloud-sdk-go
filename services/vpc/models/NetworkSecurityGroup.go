@@ -36,4 +36,10 @@ type NetworkSecurityGroup struct {
 
     /* 安全组创建时间 (Optional) */
     CreatedTime string `json:"createdTime"`
+
+    /* 安全组类型, default：默认安全组，custom：自定义安全组 (Optional) */
+    NetworkSecurityGroupType string `json:"networkSecurityGroupType"`
+
+    /* 安全组绑定的弹性网卡列表 (Optional) */
+    NetworkInterfaceIds []string `json:"networkInterfaceIds"`
 }

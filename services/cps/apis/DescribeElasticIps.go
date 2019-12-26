@@ -38,6 +38,9 @@ type DescribeElasticIpsRequest struct {
     /* 弹性公网IP状态，取值范围：associate、disassociate (Optional) */
     Status *string `json:"status"`
 
+    /* 是否包含负载均衡 (Optional) */
+    IncludeLB *string `json:"includeLB"`
+
     /* elasticIpId - 弹性公网IPID，精确匹配，支持多个<br/>
 elasticIp - 弹性公网IP，精确匹配，支持多个
  (Optional) */
@@ -69,6 +72,7 @@ func NewDescribeElasticIpsRequest(
  * param pageNumber: 页码；默认为1 (Optional)
  * param pageSize: 分页大小；默认为20；取值范围[20, 100] (Optional)
  * param status: 弹性公网IP状态，取值范围：associate、disassociate (Optional)
+ * param includeLB: 是否包含负载均衡 (Optional)
  * param filters: elasticIpId - 弹性公网IPID，精确匹配，支持多个<br/>
 elasticIp - 弹性公网IP，精确匹配，支持多个
  (Optional)
@@ -78,6 +82,7 @@ func NewDescribeElasticIpsRequestWithAllParams(
     pageNumber *int,
     pageSize *int,
     status *string,
+    includeLB *string,
     filters []common.Filter,
 ) *DescribeElasticIpsRequest {
 
@@ -92,6 +97,7 @@ func NewDescribeElasticIpsRequestWithAllParams(
         PageNumber: pageNumber,
         PageSize: pageSize,
         Status: status,
+        IncludeLB: includeLB,
         Filters: filters,
     }
 }
@@ -127,6 +133,11 @@ func (r *DescribeElasticIpsRequest) SetPageSize(pageSize int) {
 /* param status: 弹性公网IP状态，取值范围：associate、disassociate(Optional) */
 func (r *DescribeElasticIpsRequest) SetStatus(status string) {
     r.Status = &status
+}
+
+/* param includeLB: 是否包含负载均衡(Optional) */
+func (r *DescribeElasticIpsRequest) SetIncludeLB(includeLB string) {
+    r.IncludeLB = &includeLB
 }
 
 /* param filters: elasticIpId - 弹性公网IPID，精确匹配，支持多个<br/>

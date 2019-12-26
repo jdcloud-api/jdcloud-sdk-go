@@ -112,5 +112,5 @@ type DescribeKeypairResponse struct {
 }
 
 type DescribeKeypairResult struct {
-    Server edcps.Keypair `json:"server"`
+    Keypair edcps.Keypair `json:"keypair"`
 }

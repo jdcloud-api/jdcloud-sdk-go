@@ -25,7 +25,7 @@ type AddServersRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域  */
+    /* 地域ID，可调用接口（describeCPSLBRegions）获取云物理服务器支持的地域  */
     RegionId string `json:"regionId"`
 
     /* 服务器组ID  */
@@ -41,7 +41,7 @@ type AddServersRequest struct {
 }
 
 /*
- * param regionId: 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（describeCPSLBRegions）获取云物理服务器支持的地域 (Required)
  * param serverGroupId: 服务器组ID (Required)
  * param serverSpec: 后端服务器配置 (Required)
  *
@@ -67,7 +67,7 @@ func NewAddServersRequest(
 }
 
 /*
- * param regionId: 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域 (Required)
+ * param regionId: 地域ID，可调用接口（describeCPSLBRegions）获取云物理服务器支持的地域 (Required)
  * param serverGroupId: 服务器组ID (Required)
  * param clientToken: 由客户端生成，用于保证请求的幂等性，长度不能超过36个字符；<br/>
 如果多个请求使用了相同的clientToken，只会执行第一个请求，之后的请求直接返回第一个请求的结果<br/>
@@ -108,7 +108,7 @@ func NewAddServersRequestWithoutParam() *AddServersRequest {
     }
 }
 
-/* param regionId: 地域ID，可调用接口（queryCPSLBRegions）获取云物理服务器支持的地域(Required) */
+/* param regionId: 地域ID，可调用接口（describeCPSLBRegions）获取云物理服务器支持的地域(Required) */
 func (r *AddServersRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

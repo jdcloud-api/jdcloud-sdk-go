@@ -37,6 +37,9 @@ type RouteTable struct {
     /* 路由表规则信息 (Optional) */
     RouteTableRules []RouteTableRule `json:"routeTableRules"`
 
+    /* 路由传播列表 (Optional) */
+    RoutePropagations []RoutePropagation `json:"routePropagations"`
+
     /* 路由表绑定的子网列表 (Optional) */
     SubnetIds []string `json:"subnetIds"`
 

@@ -43,6 +43,12 @@ type ReturnItemResult struct {
     /* 返还类型 (Optional) */
     ReturnType int `json:"returnType"`
 
+    /* 返还依据 (Optional) */
+    ReturnRuleType int `json:"returnRuleType"`
+
+    /* 返还依据名称 (Optional) */
+    ReturnRuleTypeName string `json:"returnRuleTypeName"`
+
     /* 项目条件 (Optional) */
     ConditionItem string `json:"conditionItem"`
 

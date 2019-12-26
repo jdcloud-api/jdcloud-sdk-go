@@ -146,7 +146,7 @@ type DescribeKeypairsResponse struct {
 }
 
 type DescribeKeypairsResult struct {
-    Servers []edcps.Keypair `json:"servers"`
+    Keypairs []edcps.Keypair `json:"keypairs"`
     PageNumber int `json:"pageNumber"`
     PageSize int `json:"pageSize"`
     TotalCount int `json:"totalCount"`

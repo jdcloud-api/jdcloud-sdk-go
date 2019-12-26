@@ -19,10 +19,10 @@ package models
 
 type Quota struct {
 
-    /* 资源类型，取值范围：vpc、elastic_ip、subnet、security_group、vpcpeering、network_interface（配额只统计辅助网卡） (Optional) */
+    /* 资源类型，取值范围：vpc、elastic_ip、subnet、security_group、vpcpeering、network_interface（配额只统计辅助网卡）、acl、aclRule、routeTable、staticRoute、propagatedRoute、securityGroupRule (Optional) */
     Type string `json:"type"`
 
-    /* vpc、elastic_ip、network_interface为空, subnet、security_group、vpcpeering为vpcId (Optional) */
+    /* vpc、elastic_ip、network_interface为空, subnet、security_group、vpcpeering、acl、routeTable为vpcId, aclRule为aclId，staticRoute、propagatedRoute为routeTableId, securityGroupRule为securityGroupId (Optional) */
     ParentResourceId string `json:"parentResourceId"`
 
     /* 配额大小 (Optional) */

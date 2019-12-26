@@ -31,14 +31,14 @@ type AddRouteTableRulesRequest struct {
     /* RouteTable ID  */
     RouteTableId string `json:"routeTableId"`
 
-    /* 安全组规则信息  */
+    /* 路由表规则信息  */
     RouteTableRuleSpecs []vpc.AddRouteTableRules `json:"routeTableRuleSpecs"`
 }
 
 /*
  * param regionId: Region ID (Required)
  * param routeTableId: RouteTable ID (Required)
- * param routeTableRuleSpecs: 安全组规则信息 (Required)
+ * param routeTableRuleSpecs: 路由表规则信息 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -64,7 +64,7 @@ func NewAddRouteTableRulesRequest(
 /*
  * param regionId: Region ID (Required)
  * param routeTableId: RouteTable ID (Required)
- * param routeTableRuleSpecs: 安全组规则信息 (Required)
+ * param routeTableRuleSpecs: 路由表规则信息 (Required)
  */
 func NewAddRouteTableRulesRequestWithAllParams(
     regionId string,
@@ -108,7 +108,7 @@ func (r *AddRouteTableRulesRequest) SetRouteTableId(routeTableId string) {
     r.RouteTableId = routeTableId
 }
 
-/* param routeTableRuleSpecs: 安全组规则信息(Required) */
+/* param routeTableRuleSpecs: 路由表规则信息(Required) */
 func (r *AddRouteTableRulesRequest) SetRouteTableRuleSpecs(routeTableRuleSpecs []vpc.AddRouteTableRules) {
     r.RouteTableRuleSpecs = routeTableRuleSpecs
 }

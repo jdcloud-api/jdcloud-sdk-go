@@ -25,8 +25,11 @@ type DistributorQuery struct {
     /* 渠道商名称 (Optional) */
     DistributorName string `json:"distributorName"`
 
-    /* 京东云账户 (Optional) */
+    /* pin (Optional) */
     Pin string `json:"pin"`
+
+    /* 帐户名 (Optional) */
+    LoginName string `json:"loginName"`
 
     /* 合同编号 (Optional) */
     ContractNo string `json:"contractNo"`
@@ -84,6 +87,27 @@ type DistributorQuery struct {
 
     /* 所属部门(0企业线、1政府线) (Optional) */
     Dept int `json:"dept"`
+
+    /* 是否需要返还（0需要1不需要） (Optional) */
+    ReturnFlag int `json:"returnFlag"`
+
+    /* 返还政策ID (Optional) */
+    ReturnPolicyId string `json:"returnPolicyId"`
+
+    /* 结算周期类型（1月、2季度、3年、4天、5周） (Optional) */
+    CircleType int `json:"circleType"`
+
+    /* 是否有下级服务商（0有1不没有） (Optional) */
+    SubFlag int `json:"subFlag"`
+
+    /* 下级服务商是否需要返还（0需要1不需要） (Optional) */
+    SubReturnFlag int `json:"subReturnFlag"`
+
+    /* 下级服务商返还政策ID (Optional) */
+    SubReturnPolicyId string `json:"subReturnPolicyId"`
+
+    /* 结算周期类型（1月、2季度、3年、4天、5周） (Optional) */
+    SubCircleType int `json:"subCircleType"`
 
     /* 京东云负责人(京东云人员erp或名称) (Optional) */
     Erp string `json:"erp"`

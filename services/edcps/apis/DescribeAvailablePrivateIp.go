@@ -111,4 +111,5 @@ type DescribeAvailablePrivateIpResponse struct {
 }
 
 type DescribeAvailablePrivateIpResult struct {
+    AvailablePrivateIps []string `json:"availablePrivateIps"`
 }

@@ -64,6 +64,9 @@ type OperatorPrePayAchievement struct {
     /* opTypeName (Optional) */
     OpTypeName string `json:"opTypeName"`
 
+    /* 帐户名 (Optional) */
+    LoginName string `json:"loginName"`
+
     /* 开始时间 (Optional) */
     BillTime string `json:"billTime"`
 

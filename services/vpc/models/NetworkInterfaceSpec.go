@@ -22,7 +22,7 @@ type NetworkInterfaceSpec struct {
     /* 子网ID  */
     SubnetId string `json:"subnetId"`
 
-    /* 可用区，用户的默认可用区 (Optional) */
+    /* 可用区，用户的默认可用区，该参数无效，不建议使用 (Optional) */
     Az *string `json:"az"`
 
     /* 网卡名称，只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符。 (Optional) */

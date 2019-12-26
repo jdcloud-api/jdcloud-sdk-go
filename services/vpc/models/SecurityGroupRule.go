@@ -45,4 +45,7 @@ type SecurityGroupRule struct {
 
     /* 描述,​ 允许输入UTF-8编码下的全部字符，不超过256字符 (Optional) */
     Description string `json:"description"`
+
+    /* 安全组规则类型, default：默认安全组规则，custom：自定义安全组规则 (Optional) */
+    RuleType string `json:"ruleType"`
 }

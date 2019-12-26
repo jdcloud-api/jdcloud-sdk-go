@@ -58,6 +58,15 @@ type ReturnBillResult struct {
     /* 返还金额 (Optional) */
     ReturnMount int `json:"returnMount"`
 
+    /* 返还方式 (Optional) */
+    ReturnMode int `json:"returnMode"`
+
+    /* 返还方式 (Optional) */
+    ReturnModeName string `json:"returnModeName"`
+
+    /* 合同主体 (Optional) */
+    ContractSubject string `json:"contractSubject"`
+
     /* 次数 (Optional) */
     RedoQty int `json:"redoQty"`
 
@@ -75,6 +84,9 @@ type ReturnBillResult struct {
 
     /* 部门名称 (Optional) */
     DeptName string `json:"deptName"`
+
+    /* 返还明细展示类型 (Optional) */
+    ReturnDetailRuleType int `json:"returnDetailRuleType"`
 
     /* 创建时间 (Optional) */
     CreateTime string `json:"createTime"`

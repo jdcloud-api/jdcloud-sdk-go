@@ -40,6 +40,9 @@ elasticIpAddress - eip的IP地址，支持单个
 chargeStatus	- eip的费用支付状态,normal(正常状态) or overdue(预付费已到期) or arrear(欠费状态)，支持单个
  (Optional) */
     Filters []common.Filter `json:"filters"`
+
+    /* Tag筛选条件 (Optional) */
+    Tags []vpc.TagFilter `json:"tags"`
 }
 
 /*
@@ -70,12 +73,14 @@ func NewDescribeElasticIpsRequest(
 elasticIpAddress - eip的IP地址，支持单个
 chargeStatus	- eip的费用支付状态,normal(正常状态) or overdue(预付费已到期) or arrear(欠费状态)，支持单个
  (Optional)
+ * param tags: Tag筛选条件 (Optional)
  */
 func NewDescribeElasticIpsRequestWithAllParams(
     regionId string,
     pageNumber *int,
     pageSize *int,
     filters []common.Filter,
+    tags []vpc.TagFilter,
 ) *DescribeElasticIpsRequest {
 
     return &DescribeElasticIpsRequest{
@@ -89,6 +94,7 @@ func NewDescribeElasticIpsRequestWithAllParams(
         PageNumber: pageNumber,
         PageSize: pageSize,
         Filters: filters,
+        Tags: tags,
     }
 }
 
@@ -126,6 +132,11 @@ chargeStatus	- eip的费用支付状态,normal(正常状态) or overdue(预付�
 (Optional) */
 func (r *DescribeElasticIpsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
+}
+
+/* param tags: Tag筛选条件(Optional) */
+func (r *DescribeElasticIpsRequest) SetTags(tags []vpc.TagFilter) {
+    r.Tags = tags
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

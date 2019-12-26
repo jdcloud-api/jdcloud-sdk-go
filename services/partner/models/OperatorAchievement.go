@@ -58,6 +58,9 @@ type OperatorAchievement struct {
     /* serviceCodeName (Optional) */
     ServiceCodeName string `json:"serviceCodeName"`
 
+    /* 帐户名 (Optional) */
+    LoginName string `json:"loginName"`
+
     /* 时间 (Optional) */
     ConsumeDate string `json:"consumeDate"`
 

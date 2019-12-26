@@ -28,11 +28,14 @@ type QueryMyCustomerListRequest struct {
     /*   */
     RegionId string `json:"regionId"`
 
-    /* 客户pin（客户账户） (Optional) */
+    /* 客户pin (Optional) */
     CustomerPin *string `json:"customerPin"`
 
     /* 客户昵称 (Optional) */
     AliasName *string `json:"aliasName"`
+
+    /* 帐户名 (Optional) */
+    LoginName *string `json:"loginName"`
 
     /* 关联开始时间（格式：yyyy-MM-dd HH:mm:ss） (Optional) */
     StartRelTime *string `json:"startRelTime"`
@@ -58,7 +61,7 @@ func NewQueryMyCustomerListRequest(
 
 	return &QueryMyCustomerListRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/customerManage/queryMyCustomerList",
+			URL:     "/regions/{regionId}/customerManage:queryMyCustomerList",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -69,8 +72,9 @@ func NewQueryMyCustomerListRequest(
 
 /*
  * param regionId:  (Required)
- * param customerPin: 客户pin（客户账户） (Optional)
+ * param customerPin: 客户pin (Optional)
  * param aliasName: 客户昵称 (Optional)
+ * param loginName: 帐户名 (Optional)
  * param startRelTime: 关联开始时间（格式：yyyy-MM-dd HH:mm:ss） (Optional)
  * param endRelTime: 关联结束时间（格式：yyyy-MM-dd HH:mm:ss） (Optional)
  * param pageIndex: 当前页序号 (Optional)
@@ -80,6 +84,7 @@ func NewQueryMyCustomerListRequestWithAllParams(
     regionId string,
     customerPin *string,
     aliasName *string,
+    loginName *string,
     startRelTime *string,
     endRelTime *string,
     pageIndex *int,
@@ -88,7 +93,7 @@ func NewQueryMyCustomerListRequestWithAllParams(
 
     return &QueryMyCustomerListRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/customerManage/queryMyCustomerList",
+            URL:     "/regions/{regionId}/customerManage:queryMyCustomerList",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -96,6 +101,7 @@ func NewQueryMyCustomerListRequestWithAllParams(
         RegionId: regionId,
         CustomerPin: customerPin,
         AliasName: aliasName,
+        LoginName: loginName,
         StartRelTime: startRelTime,
         EndRelTime: endRelTime,
         PageIndex: pageIndex,
@@ -108,7 +114,7 @@ func NewQueryMyCustomerListRequestWithoutParam() *QueryMyCustomerListRequest {
 
     return &QueryMyCustomerListRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/customerManage/queryMyCustomerList",
+            URL:     "/regions/{regionId}/customerManage:queryMyCustomerList",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -121,7 +127,7 @@ func (r *QueryMyCustomerListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param customerPin: 客户pin（客户账户）(Optional) */
+/* param customerPin: 客户pin(Optional) */
 func (r *QueryMyCustomerListRequest) SetCustomerPin(customerPin string) {
     r.CustomerPin = &customerPin
 }
@@ -129,6 +135,11 @@ func (r *QueryMyCustomerListRequest) SetCustomerPin(customerPin string) {
 /* param aliasName: 客户昵称(Optional) */
 func (r *QueryMyCustomerListRequest) SetAliasName(aliasName string) {
     r.AliasName = &aliasName
+}
+
+/* param loginName: 帐户名(Optional) */
+func (r *QueryMyCustomerListRequest) SetLoginName(loginName string) {
+    r.LoginName = &loginName
 }
 
 /* param startRelTime: 关联开始时间（格式：yyyy-MM-dd HH:mm:ss）(Optional) */

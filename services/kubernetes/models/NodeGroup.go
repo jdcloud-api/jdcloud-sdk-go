@@ -73,6 +73,9 @@ type NodeGroup struct {
     /* 控制节点操作进度 (Optional) */
     Progress NodeGroupProgress `json:"progress"`
 
+    /* 自动伸缩配置 (Optional) */
+    CaConfig CAConfig `json:"caConfig"`
+
     /* 创建时间 (Optional) */
     CreatedTime string `json:"createdTime"`
 }

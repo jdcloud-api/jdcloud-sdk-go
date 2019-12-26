@@ -33,4 +33,7 @@ type MasterVersion struct {
 
     /* node 节点的配置 (Optional) */
     NodeVersions []NodeVersion `json:"nodeVersions"`
+
+    /* node节点操作系统类型列表，以 "," 分割，目前支持 CentOS|Windows (Optional) */
+    NodeOsTypes string `json:"nodeOsTypes"`
 }

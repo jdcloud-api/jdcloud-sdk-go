@@ -125,4 +125,5 @@ type DeleteDatapushVenderResponse struct {
 }
 
 type DeleteDatapushVenderResult struct {
+    Success bool `json:"success"`
 }
