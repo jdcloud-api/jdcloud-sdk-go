@@ -22,7 +22,7 @@ type CreateImageUploadTaskRequestObject struct {
     /* HTTP 请求方法，取值范围：GET、POST、PUT、DELETE、HEAD、PATCH，默认值为 PUT (Optional) */
     HttpMethod string `json:"httpMethod"`
 
-    /* 文件名称 (Optional) */
+    /* 文件名称  */
     FileName string `json:"fileName"`
 
     /* 文件大小 (Optional) */

@@ -40,7 +40,7 @@ type DescribeMetricDataRequest struct {
     /* 查询时间范围的结束时间， UNIX时间戳，（最多支持最近90天数据查询）  */
     EndTime int `json:"endTime"`
 
-    /* 时间间隔：分钟m、小时h、天d，如： 10分钟=10m、1小时=1h，3天=3d；默认5m，最小支持5m，最大90d (Optional) */
+    /* 时间间隔：分钟m、小时h、天d，如： 10分钟=10m、1小时=1h，3天=3d；默认5m，最小支持5m，最大90d 目前带宽上、下行流量查询，会根据时间范围是否超过2小时，设定时间间隔为1m或5m (Optional) */
     TimeInterval *string `json:"timeInterval"`
 
     /* 交换机IP，指定ip时须同时指定port (Optional) */
@@ -88,7 +88,7 @@ func NewDescribeMetricDataRequest(
  * param resourceId: 资源ID (Required)
  * param startTime: 查询时间范围的开始时间， UNIX时间戳，（最多支持最近90天数据查询） (Required)
  * param endTime: 查询时间范围的结束时间， UNIX时间戳，（最多支持最近90天数据查询） (Required)
- * param timeInterval: 时间间隔：分钟m、小时h、天d，如： 10分钟=10m、1小时=1h，3天=3d；默认5m，最小支持5m，最大90d (Optional)
+ * param timeInterval: 时间间隔：分钟m、小时h、天d，如： 10分钟=10m、1小时=1h，3天=3d；默认5m，最小支持5m，最大90d 目前带宽上、下行流量查询，会根据时间范围是否超过2小时，设定时间间隔为1m或5m (Optional)
  * param ip: 交换机IP，指定ip时须同时指定port (Optional)
  * param port: 端口，指定port时须同时指定ip (Optional)
  */
@@ -159,7 +159,7 @@ func (r *DescribeMetricDataRequest) SetEndTime(endTime int) {
     r.EndTime = endTime
 }
 
-/* param timeInterval: 时间间隔：分钟m、小时h、天d，如： 10分钟=10m、1小时=1h，3天=3d；默认5m，最小支持5m，最大90d(Optional) */
+/* param timeInterval: 时间间隔：分钟m、小时h、天d，如： 10分钟=10m、1小时=1h，3天=3d；默认5m，最小支持5m，最大90d 目前带宽上、下行流量查询，会根据时间范围是否超过2小时，设定时间间隔为1m或5m(Optional) */
 func (r *DescribeMetricDataRequest) SetTimeInterval(timeInterval string) {
     r.TimeInterval = &timeInterval
 }

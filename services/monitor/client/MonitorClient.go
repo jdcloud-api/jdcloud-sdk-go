@@ -40,7 +40,7 @@ func NewMonitorClient(credential *core.Credential) *MonitorClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "monitor",
-            Revision:    "2.0.0",
+            Revision:    "2.0.2",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,6 +51,10 @@ func (c *MonitorClient) SetConfig(config *core.Config) {
 
 func (c *MonitorClient) SetLogger(logger core.Logger) {
     c.Logger = logger
+}
+
+func (c *MonitorClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
 }
 
 /* 创建报警规则 */
@@ -193,6 +197,26 @@ func (c *MonitorClient) DescribeAlarm(request *monitor.DescribeAlarmRequest) (*m
     return jdResp, err
 }
 
+/* 根据不同的聚合方式将metric的数据聚合为一个点。downAggrType：last(最后一个点)、max(最大值)、min(最小值)、avg(平均值)。该接口返回值为上报metric的原始值，没有做单位转换。metric介绍：<a href="https://docs.jdcloud.com/cn/monitoring/metrics">Metrics</a> */
+func (c *MonitorClient) DescribeOneDataPoint(request *monitor.DescribeOneDataPointRequest) (*monitor.DescribeOneDataPointResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &monitor.DescribeOneDataPointResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 删除规则 */
 func (c *MonitorClient) DeleteAlarms(request *monitor.DeleteAlarmsRequest) (*monitor.DeleteAlarmsResponse, error) {
     if request == nil {
@@ -204,26 +228,6 @@ func (c *MonitorClient) DeleteAlarms(request *monitor.DeleteAlarmsRequest) (*mon
     }
 
     jdResp := &monitor.DeleteAlarmsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 根据不同的聚合方式将metric的数据聚合为一个点。downAggrType：last(最后一个点)、max(最大值)、min(最小值)、avg(平均值)。该接口返回值为上报metric的原始值，没有做单位转换。metric介绍：<a href="https://docs.jdcloud.com/cn/monitoring/metrics">Metrics</a> */
-func (c *MonitorClient) LastDownsample(request *monitor.LastDownsampleRequest) (*monitor.LastDownsampleResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.LastDownsampleResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -284,6 +288,26 @@ func (c *MonitorClient) EnableAlarms(request *monitor.EnableAlarmsRequest) (*mon
     }
 
     jdResp := &monitor.EnableAlarmsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 该接口为自定义监控数据上报的接口，方便您将自己采集的时序数据上报到云监控。不同region域名上报不同region的数据，参考：<a href="https://docs.jdcloud.com/cn/monitoring/reporting-monitoring-data">调用说明</a>可上报原始数据和已聚合的统计数据。支持批量上报方式。单次请求最多包含 50 个数据点；数据大小不超过 256k。 */
+func (c *MonitorClient) PutCustomMetricData(request *monitor.PutCustomMetricDataRequest) (*monitor.PutCustomMetricDataResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &monitor.PutCustomMetricDataResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

@@ -27,18 +27,20 @@ type CreateImageUploadTaskRequest struct {
     /* HTTP 请求方法，取值范围：GET、POST、PUT、DELETE、HEAD、PATCH，默认值为 PUT (Optional) */
     HttpMethod *string `json:"httpMethod"`
 
-    /* 文件名称 (Optional) */
-    FileName *string `json:"fileName"`
+    /* 文件名称  */
+    FileName string `json:"fileName"`
 
     /* 文件大小 (Optional) */
     FileSize *int64 `json:"fileSize"`
 }
 
 /*
+ * param fileName: 文件名称 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateImageUploadTaskRequest(
+    fileName string,
 ) *CreateImageUploadTaskRequest {
 
 	return &CreateImageUploadTaskRequest{
@@ -48,17 +50,18 @@ func NewCreateImageUploadTaskRequest(
 			Header:  nil,
 			Version: "v1",
 		},
+        FileName: fileName,
 	}
 }
 
 /*
  * param httpMethod: HTTP 请求方法，取值范围：GET、POST、PUT、DELETE、HEAD、PATCH，默认值为 PUT (Optional)
- * param fileName: 文件名称 (Optional)
+ * param fileName: 文件名称 (Required)
  * param fileSize: 文件大小 (Optional)
  */
 func NewCreateImageUploadTaskRequestWithAllParams(
     httpMethod *string,
-    fileName *string,
+    fileName string,
     fileSize *int64,
 ) *CreateImageUploadTaskRequest {
 
@@ -93,9 +96,9 @@ func (r *CreateImageUploadTaskRequest) SetHttpMethod(httpMethod string) {
     r.HttpMethod = &httpMethod
 }
 
-/* param fileName: 文件名称(Optional) */
+/* param fileName: 文件名称(Required) */
 func (r *CreateImageUploadTaskRequest) SetFileName(fileName string) {
-    r.FileName = &fileName
+    r.FileName = fileName
 }
 
 /* param fileSize: 文件大小(Optional) */

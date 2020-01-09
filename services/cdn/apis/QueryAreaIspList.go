@@ -87,4 +87,10 @@ type QueryAreaIspListResult struct {
     MainLand []cdn.AreaIspItem `json:"mainLand"`
     Overseas []cdn.AreaIspItem `json:"overseas"`
     Isp []cdn.AreaIspItem `json:"isp"`
+    Gangaotai []cdn.AreaIspItem `json:"gangaotai"`
+    Oceanica []cdn.AreaIspItem `json:"oceanica"`
+    SouthAmerica []cdn.AreaIspItem `json:"southAmerica"`
+    NorthAmerica []cdn.AreaIspItem `json:"northAmerica"`
+    Asia []cdn.AreaIspItem `json:"asia"`
+    Europe []cdn.AreaIspItem `json:"europe"`
 }

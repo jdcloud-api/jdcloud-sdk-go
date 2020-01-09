@@ -28,6 +28,9 @@ type UpdateAlarmRequest struct {
     /* 规则id  */
     AlarmId string `json:"alarmId"`
 
+    /* 弹性伸缩组Id。注：仅ag\asg产品线内部使用 (Optional) */
+    AutoScalingPolicyId *string `json:"autoScalingPolicyId"`
+
     /* 告警通知联系人 (Optional) */
     BaseContact []monitor.BaseContact `json:"baseContact"`
 
@@ -96,6 +99,7 @@ func NewUpdateAlarmRequest(
 
 /*
  * param alarmId: 规则id (Required)
+ * param autoScalingPolicyId: 弹性伸缩组Id。注：仅ag\asg产品线内部使用 (Optional)
  * param baseContact: 告警通知联系人 (Optional)
  * param dimension: 资源维度，可用的维度请使用 describeProductsForAlarm接口查询 (Optional)
  * param enabled: 是否启用, 1表示启用规则，0表示禁用规则，默认为1 (Optional)
@@ -110,6 +114,7 @@ func NewUpdateAlarmRequest(
  */
 func NewUpdateAlarmRequestWithAllParams(
     alarmId string,
+    autoScalingPolicyId *string,
     baseContact []monitor.BaseContact,
     dimension *string,
     enabled *int64,
@@ -131,6 +136,7 @@ func NewUpdateAlarmRequestWithAllParams(
             Version: "v2",
         },
         AlarmId: alarmId,
+        AutoScalingPolicyId: autoScalingPolicyId,
         BaseContact: baseContact,
         Dimension: dimension,
         Enabled: enabled,
@@ -161,6 +167,11 @@ func NewUpdateAlarmRequestWithoutParam() *UpdateAlarmRequest {
 /* param alarmId: 规则id(Required) */
 func (r *UpdateAlarmRequest) SetAlarmId(alarmId string) {
     r.AlarmId = alarmId
+}
+
+/* param autoScalingPolicyId: 弹性伸缩组Id。注：仅ag\asg产品线内部使用(Optional) */
+func (r *UpdateAlarmRequest) SetAutoScalingPolicyId(autoScalingPolicyId string) {
+    r.AutoScalingPolicyId = &autoScalingPolicyId
 }
 
 /* param baseContact: 告警通知联系人(Optional) */
@@ -232,5 +243,6 @@ type UpdateAlarmResponse struct {
 
 type UpdateAlarmResult struct {
     AlarmId string `json:"alarmId"`
+    RuleIds []int64 `json:"ruleIds"`
     Success bool `json:"success"`
 }

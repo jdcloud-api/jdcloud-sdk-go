@@ -19,10 +19,10 @@ package models
 
 type NoticeOption struct {
 
-    /* 生效截止时间，默认值:23:59 (Optional) */
+    /* 生效截止时间，默认值:23:59:59 (Optional) */
     EffectiveIntervalEnd *string `json:"effectiveIntervalEnd"`
 
-    /* 生效起始时间，默认值:00:00 (Optional) */
+    /* 生效起始时间，默认值:00:00:00 (Optional) */
     EffectiveIntervalStart *string `json:"effectiveIntervalStart"`
 
     /* 通知条件 1-告警 2-数据不足3-告警恢复 (Optional) */

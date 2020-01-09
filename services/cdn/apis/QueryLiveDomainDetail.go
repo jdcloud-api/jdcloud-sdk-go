@@ -40,7 +40,7 @@ func NewQueryLiveDomainDetailRequest(
 
 	return &QueryLiveDomainDetailRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/liveDomains/{domain}",
+			URL:     "/liveDomain/{domain}",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -58,7 +58,7 @@ func NewQueryLiveDomainDetailRequestWithAllParams(
 
     return &QueryLiveDomainDetailRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/liveDomains/{domain}",
+            URL:     "/liveDomain/{domain}",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -72,7 +72,7 @@ func NewQueryLiveDomainDetailRequestWithoutParam() *QueryLiveDomainDetailRequest
 
     return &QueryLiveDomainDetailRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/liveDomains/{domain}",
+            URL:     "/liveDomain/{domain}",
             Method:  "GET",
             Header:  nil,
             Version: "v1",

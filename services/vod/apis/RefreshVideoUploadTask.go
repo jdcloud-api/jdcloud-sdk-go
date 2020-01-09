@@ -99,4 +99,5 @@ type RefreshVideoUploadTaskResponse struct {
 type RefreshVideoUploadTaskResult struct {
     VideoId string `json:"videoId"`
     UploadUrl string `json:"uploadUrl"`
+    AuthToken string `json:"authToken"`
 }

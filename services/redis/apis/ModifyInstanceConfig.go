@@ -31,14 +31,14 @@ type ModifyInstanceConfigRequest struct {
     /* 缓存Redis实例ID，是访问实例的唯一标识  */
     CacheInstanceId string `json:"cacheInstanceId"`
 
-    /* 要修改的配置参数名和参数值  */
+    /* 配置参数名和参数值  */
     InstanceConfig []redis.ConfigItem `json:"instanceConfig"`
 }
 
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
- * param instanceConfig: 要修改的配置参数名和参数值 (Required)
+ * param instanceConfig: 配置参数名和参数值 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -64,7 +64,7 @@ func NewModifyInstanceConfigRequest(
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
- * param instanceConfig: 要修改的配置参数名和参数值 (Required)
+ * param instanceConfig: 配置参数名和参数值 (Required)
  */
 func NewModifyInstanceConfigRequestWithAllParams(
     regionId string,
@@ -108,7 +108,7 @@ func (r *ModifyInstanceConfigRequest) SetCacheInstanceId(cacheInstanceId string)
     r.CacheInstanceId = cacheInstanceId
 }
 
-/* param instanceConfig: 要修改的配置参数名和参数值(Required) */
+/* param instanceConfig: 配置参数名和参数值(Required) */
 func (r *ModifyInstanceConfigRequest) SetInstanceConfig(instanceConfig []redis.ConfigItem) {
     r.InstanceConfig = instanceConfig
 }

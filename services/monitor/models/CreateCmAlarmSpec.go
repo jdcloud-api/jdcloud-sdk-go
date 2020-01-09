@@ -19,9 +19,9 @@ package models
 
 type CreateCmAlarmSpec struct {
 
-    /* 幂等性校验参数,最长36位  */
+    /* 幂等性校验参数,最长36位,若两个请求clientToken相等，则返回第一次创建的规则id，保证只创建一次规则  */
     ClientToken string `json:"clientToken"`
 
     /*   */
-    CreateCmAlarmSpec CreateCmAlarmParam `json:"createCmAlarmSpec"`
+    CreateCmAlarmSpec CreateCustomAlarmParam `json:"createCmAlarmSpec"`
 }

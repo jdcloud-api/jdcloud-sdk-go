@@ -22,6 +22,9 @@ type VideoUploadTaskObject struct {
     /* 视频ID (Optional) */
     VideoId string `json:"videoId"`
 
-    /* 视频上传地址 (Optional) */
+    /* 上传地址 (Optional) */
     UploadUrl string `json:"uploadUrl"`
+
+    /* 上传凭证 (Optional) */
+    AuthToken string `json:"authToken"`
 }

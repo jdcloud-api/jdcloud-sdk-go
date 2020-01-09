@@ -29,5 +29,8 @@ type LastDownsampleRespItem struct {
     Tags interface{} `json:"tags"`
 
     /*  (Optional) */
+    Unit string `json:"unit"`
+
+    /*  (Optional) */
     Value interface{} `json:"value"`
 }

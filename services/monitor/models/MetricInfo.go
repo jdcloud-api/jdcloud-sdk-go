@@ -19,12 +19,12 @@ package models
 
 type MetricInfo struct {
 
-    /* metric 单位 (Optional) */
+    /* 单位 (Optional) */
     CalculateUnit string `json:"calculateUnit"`
 
-    /* metric名称 (Optional) */
+    /* metricName (Optional) */
     MetricName string `json:"metricName"`
 
-    /* metric uid (Optional) */
-    MetricUid string `json:"metricUid"`
+    /* metricUID (Optional) */
+    MetricUID string `json:"metricUID"`
 }
