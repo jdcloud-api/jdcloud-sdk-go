@@ -35,6 +35,9 @@ type CreateAccountRequest struct {
 
     /* 密码,密码的具体规则可参见帮助中心文档:[名称及密码限制](../../../documentation/Database-and-Cache-Service/RDS/Introduction/Restrictions/SQLServer-Restrictions.md)  */
     AccountPassword string `json:"accountPassword"`
+
+    /* 备注信息，仅支持PostgreSQL (Optional) */
+    Notes *string `json:"notes"`
 }
 
 /*
@@ -71,12 +74,14 @@ func NewCreateAccountRequest(
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
  * param accountName: 账号名，在同一个RDS实例中，账号名不能重复。账号名的具体规则可参见帮助中心文档:[名称及密码限制](../../../documentation/Database-and-Cache-Service/RDS/Introduction/Restrictions/SQLServer-Restrictions.md) (Required)
  * param accountPassword: 密码,密码的具体规则可参见帮助中心文档:[名称及密码限制](../../../documentation/Database-and-Cache-Service/RDS/Introduction/Restrictions/SQLServer-Restrictions.md) (Required)
+ * param notes: 备注信息，仅支持PostgreSQL (Optional)
  */
 func NewCreateAccountRequestWithAllParams(
     regionId string,
     instanceId string,
     accountName string,
     accountPassword string,
+    notes *string,
 ) *CreateAccountRequest {
 
     return &CreateAccountRequest{
@@ -90,6 +95,7 @@ func NewCreateAccountRequestWithAllParams(
         InstanceId: instanceId,
         AccountName: accountName,
         AccountPassword: accountPassword,
+        Notes: notes,
     }
 }
 
@@ -124,6 +130,11 @@ func (r *CreateAccountRequest) SetAccountName(accountName string) {
 /* param accountPassword: 密码,密码的具体规则可参见帮助中心文档:[名称及密码限制](../../../documentation/Database-and-Cache-Service/RDS/Introduction/Restrictions/SQLServer-Restrictions.md)(Required) */
 func (r *CreateAccountRequest) SetAccountPassword(accountPassword string) {
     r.AccountPassword = accountPassword
+}
+
+/* param notes: 备注信息，仅支持PostgreSQL(Optional) */
+func (r *CreateAccountRequest) SetNotes(notes string) {
+    r.Notes = &notes
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

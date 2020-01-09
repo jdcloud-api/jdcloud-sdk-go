@@ -25,6 +25,18 @@ type Account struct {
     /* 账号状态，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md)<br>- **MySQL：不支持，不返回该字段**<br>- **SQL Server：返回该字段** (Optional) */
     AccountStatus string `json:"accountStatus"`
 
+    /* 账号类型，normal：普通，super：高权限<br>- 仅支持SQL Server (Optional) */
+    AccountType string `json:"accountType"`
+
+    /* 创建账号时间，格式为：YYYY-MM-DD HH:mm:ss<br>- 仅支持PostgreSQL (Optional) */
+    CreateTime string `json:"createTime"`
+
+    /* 修改账号时间，格式为：YYYY-MM-DD HH:mm:ss<br>- 仅支持PostgreSQL (Optional) */
+    UpdateTime string `json:"updateTime"`
+
+    /* 账号备注内容<br>- 仅支持PostgreSQL (Optional) */
+    Notes string `json:"notes"`
+
     /* 具有的权限 (Optional) */
     AccountPrivileges []AccountPrivilege `json:"accountPrivileges"`
 }

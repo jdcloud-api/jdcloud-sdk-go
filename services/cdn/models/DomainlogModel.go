@@ -31,6 +31,9 @@ type DomainlogModel struct {
     /* 日志结束时间，格式：yyyy-MM-dd HH:ss 如：2019-04-12 00:05 (Optional) */
     EndTime string `json:"endTime"`
 
+    /* 日志修改时间，UTC时间 (Optional) */
+    LastModified string `json:"lastModified"`
+
     /* MD5值 (Optional) */
     Md5 string `json:"md5"`
 }

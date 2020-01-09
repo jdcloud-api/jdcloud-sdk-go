@@ -40,6 +40,9 @@ type DescribeAlarmHistoryRequest struct {
     /* 维度标识、指定该参数时，查询只返回该维度的数据。如redis2.8cluster下存在实例、分片等多个维度 (Optional) */
     Dimension *string `json:"dimension"`
 
+    /* 根据region筛选对应region的资源的报警历史 (Optional) */
+    Region *string `json:"region"`
+
     /* 正在报警, 取值为1 (Optional) */
     IsAlarming *int `json:"isAlarming"`
 
@@ -87,6 +90,7 @@ func NewDescribeAlarmHistoryRequest(
  * param serviceCode: 产品线标识，同一个产品线下可能存在多个product，如(redis下有redis2.8cluster、redis4.0) (Optional)
  * param product: 产品标识,默认返回该product下所有dimension的数据。eg:product=redis2.8cluster（redis2.8cluster产品下包含redis2.8-shard与redis2.8-proxy、redis2.8-instance多个维度)。 (Optional)
  * param dimension: 维度标识、指定该参数时，查询只返回该维度的数据。如redis2.8cluster下存在实例、分片等多个维度 (Optional)
+ * param region: 根据region筛选对应region的资源的报警历史 (Optional)
  * param isAlarming: 正在报警, 取值为1 (Optional)
  * param status: 报警的状态,1为报警恢复、2为报警、4为报警恢复无数据 (Optional)
  * param startTime: 开始时间 (Optional)
@@ -103,6 +107,7 @@ func NewDescribeAlarmHistoryRequestWithAllParams(
     serviceCode *string,
     product *string,
     dimension *string,
+    region *string,
     isAlarming *int,
     status *int,
     startTime *string,
@@ -124,6 +129,7 @@ func NewDescribeAlarmHistoryRequestWithAllParams(
         ServiceCode: serviceCode,
         Product: product,
         Dimension: dimension,
+        Region: region,
         IsAlarming: isAlarming,
         Status: status,
         StartTime: startTime,
@@ -170,6 +176,11 @@ func (r *DescribeAlarmHistoryRequest) SetProduct(product string) {
 /* param dimension: 维度标识、指定该参数时，查询只返回该维度的数据。如redis2.8cluster下存在实例、分片等多个维度(Optional) */
 func (r *DescribeAlarmHistoryRequest) SetDimension(dimension string) {
     r.Dimension = &dimension
+}
+
+/* param region: 根据region筛选对应region的资源的报警历史(Optional) */
+func (r *DescribeAlarmHistoryRequest) SetRegion(region string) {
+    r.Region = &region
 }
 
 /* param isAlarming: 正在报警, 取值为1(Optional) */

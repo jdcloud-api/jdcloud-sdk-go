@@ -32,5 +32,8 @@ type CheckWhetherIpBelongToJCloudItem struct {
     Province string `json:"province"`
 
     /*  (Optional) */
+    City string `json:"city"`
+
+    /*  (Optional) */
     Isp string `json:"isp"`
 }

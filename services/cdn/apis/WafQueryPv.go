@@ -118,4 +118,6 @@ type WafQueryPvResponse struct {
 
 type WafQueryPvResult struct {
     Pvs []cdn.PvItem `json:"pvs"`
+    PeakAttackPv int `json:"peakAttackPv"`
+    PeakTotalPv int `json:"peakTotalPv"`
 }

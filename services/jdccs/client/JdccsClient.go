@@ -40,7 +40,7 @@ func NewJdccsClient(credential *core.Credential) *JdccsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "jdccs",
-            Revision:    "1.0.4",
+            Revision:    "1.0.5",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -77,6 +77,26 @@ func (c *JdccsClient) DescribeMetricData(request *jdccs.DescribeMetricDataReques
     return jdResp, err
 }
 
+/* 查询工单详情 */
+func (c *JdccsClient) DescribeTicket(request *jdccs.DescribeTicketRequest) (*jdccs.DescribeTicketResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdccs.DescribeTicketResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查看某资源的最后一个监控数据点（目前只支持机柜电流） */
 func (c *JdccsClient) LastDownsample(request *jdccs.LastDownsampleRequest) (*jdccs.LastDownsampleResponse, error) {
     if request == nil {
@@ -88,26 +108,6 @@ func (c *JdccsClient) LastDownsample(request *jdccs.LastDownsampleRequest) (*jdc
     }
 
     jdResp := &jdccs.LastDownsampleResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询可用监控项列表 */
-func (c *JdccsClient) DescribeMetrics(request *jdccs.DescribeMetricsRequest) (*jdccs.DescribeMetricsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jdccs.DescribeMetricsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -137,6 +137,46 @@ func (c *JdccsClient) DescribeRooms(request *jdccs.DescribeRoomsRequest) (*jdccs
     return jdResp, err
 }
 
+/* 查询工单列表 */
+func (c *JdccsClient) DescribeTickets(request *jdccs.DescribeTicketsRequest) (*jdccs.DescribeTicketsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdccs.DescribeTicketsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 报警历史列表 */
+func (c *JdccsClient) DescribeAlarmHistory(request *jdccs.DescribeAlarmHistoryRequest) (*jdccs.DescribeAlarmHistoryResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdccs.DescribeAlarmHistoryResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询带宽（出口）流量（资源）详情 */
 func (c *JdccsClient) DescribeBandwidthTraffic(request *jdccs.DescribeBandwidthTrafficRequest) (*jdccs.DescribeBandwidthTrafficResponse, error) {
     if request == nil {
@@ -148,6 +188,26 @@ func (c *JdccsClient) DescribeBandwidthTraffic(request *jdccs.DescribeBandwidthT
     }
 
     jdResp := &jdccs.DescribeBandwidthTrafficResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询设备详情 */
+func (c *JdccsClient) DescribeDevice(request *jdccs.DescribeDeviceRequest) (*jdccs.DescribeDeviceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdccs.DescribeDeviceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -177,6 +237,66 @@ func (c *JdccsClient) DescribeBandwidthTraffics(request *jdccs.DescribeBandwidth
     return jdResp, err
 }
 
+/* 查询报警规则列表 */
+func (c *JdccsClient) DescribeAlarms(request *jdccs.DescribeAlarmsRequest) (*jdccs.DescribeAlarmsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdccs.DescribeAlarmsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询带宽（出口）列表 */
+func (c *JdccsClient) DescribeBandwidths(request *jdccs.DescribeBandwidthsRequest) (*jdccs.DescribeBandwidthsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdccs.DescribeBandwidthsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询设备列表 */
+func (c *JdccsClient) DescribeDevices(request *jdccs.DescribeDevicesRequest) (*jdccs.DescribeDevicesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdccs.DescribeDevicesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询IDC机房列表 */
 func (c *JdccsClient) DescribeIdcs(request *jdccs.DescribeIdcsRequest) (*jdccs.DescribeIdcsResponse, error) {
     if request == nil {
@@ -197,6 +317,86 @@ func (c *JdccsClient) DescribeIdcs(request *jdccs.DescribeIdcsRequest) (*jdccs.D
     return jdResp, err
 }
 
+/* 查询公网IP列表 */
+func (c *JdccsClient) DescribeIps(request *jdccs.DescribeIpsRequest) (*jdccs.DescribeIpsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdccs.DescribeIpsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询带宽（出口）详情 */
+func (c *JdccsClient) DescribeBandwidth(request *jdccs.DescribeBandwidthRequest) (*jdccs.DescribeBandwidthResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdccs.DescribeBandwidthResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询可用监控项列表 */
+func (c *JdccsClient) DescribeMetrics(request *jdccs.DescribeMetricsRequest) (*jdccs.DescribeMetricsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdccs.DescribeMetricsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询机柜详情 */
+func (c *JdccsClient) DescribeCabinet(request *jdccs.DescribeCabinetRequest) (*jdccs.DescribeCabinetResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdccs.DescribeCabinetResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询机柜列表 */
 func (c *JdccsClient) DescribeCabinets(request *jdccs.DescribeCabinetsRequest) (*jdccs.DescribeCabinetsResponse, error) {
     if request == nil {
@@ -208,6 +408,26 @@ func (c *JdccsClient) DescribeCabinets(request *jdccs.DescribeCabinetsRequest) (
     }
 
     jdResp := &jdccs.DescribeCabinetsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询报警规则详情 */
+func (c *JdccsClient) DescribeAlarm(request *jdccs.DescribeAlarmRequest) (*jdccs.DescribeAlarmResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdccs.DescribeAlarmResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

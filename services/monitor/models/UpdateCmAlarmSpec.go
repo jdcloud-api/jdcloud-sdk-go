@@ -19,39 +19,33 @@ package models
 
 type UpdateCmAlarmSpec struct {
 
-    /* 统计方法：平均值=avg、最大值=max、最小值=min、总和=sum  */
-    Calculation string `json:"calculation"`
+    /* 聚合方式，多个维度聚合成1个维度时，多维度值之间的聚合方式。可选值:sum、avg、min、max  */
+    AggrType string `json:"aggrType"`
 
-    /* 通知的联系组，如 [“联系组1”,”联系组2”] (Optional) */
-    ContactGroups []string `json:"contactGroups"`
+    /* 告警通知联系人 (Optional) */
+    BaseContact []BaseContact `json:"baseContact"`
 
-    /* 通知的联系人，如 [“联系人1”,”联系人2”] (Optional) */
-    ContactPersons []string `json:"contactPersons"`
+    /* 资源维度，指定监控数据实例的维度标签,如resourceId=id。(请确认资源的监控数据带有该标签，否则规则会报数据不足)，至少指定一个  */
+    Dimensions []DimensionsParam `json:"dimensions"`
 
-    /* 取样频次 (Optional) */
-    DownSample string `json:"downSample"`
+    /* 是否启用, 1表示启用规则，0表示禁用规则，默认为1 (Optional) */
+    Enabled int64 `json:"enabled"`
 
-    /* 根据产品线查询可用监控项列表 接口 返回的Metric字段  */
-    Metric string `json:"metric"`
+    /* 命名空间  */
+    Namespace string `json:"namespace"`
 
-    /* 通知周期 单位：小时 (Optional) */
-    NoticePeriod int64 `json:"noticePeriod"`
+    /* 通知策略 (Optional) */
+    NoticeOption []NoticeOption `json:"noticeOption"`
 
-    /* >=、>、<、<=、=、！=  */
-    Operation string `json:"operation"`
+    /* 规则绑定资源所在地域  */
+    Region string `json:"region"`
 
-    /* 统计周期（单位：分钟）目前支持的取值：2，5，15，30，60  */
-    Period int64 `json:"period"`
-
-    /* 规则名称，最大长度42个字符，只允许中英文、数字、''-''和"_" (Optional) */
+    /* 规则名称，规则名称，最大长度42个字符，只允许中英文、数字、''-''和"_"  */
     RuleName string `json:"ruleName"`
 
-    /* 产品名称  */
-    ServiceCode string `json:"serviceCode"`
+    /* 规则的触发条件设置选项  */
+    RuleOption []BasicCustomRule `json:"ruleOption"`
 
-    /* 阈值  */
-    Threshold float64 `json:"threshold"`
-
-    /* 连续多少次后报警，可选值:1,2,3,5  */
-    Times int64 `json:"times"`
+    /*  (Optional) */
+    WebHookOption WebHookOption `json:"webHookOption"`
 }

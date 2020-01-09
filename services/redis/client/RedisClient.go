@@ -40,7 +40,7 @@ func NewRedisClient(credential *core.Credential) *RedisClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "redis",
-            Revision:    "1.7.0",
+            Revision:    "1.9.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -77,8 +77,7 @@ func (c *RedisClient) ModifyBackupPolicy(request *redis.ModifyBackupPolicyReques
     return jdResp, err
 }
 
-/* 变更缓存Redis实例规格（变配），只能变更运行状态的实例规格，变更的规格不能与之前的相同。
-预付费用户，从集群版变配到主从版，新规格的内存大小要大于老规格的内存大小，从主从版到集群版，新规格的内存大小要不小于老规格的内存大小。
+/* 变更缓存Redis实例规格（变配），实例运行时可以变配，新规格不能与之前的老规格相同，新规格内存大小不能小于实例的已使用内存。
  */
 func (c *RedisClient) ModifyCacheInstanceClass(request *redis.ModifyCacheInstanceClassRequest) (*redis.ModifyCacheInstanceClassResponse, error) {
     if request == nil {
@@ -182,7 +181,7 @@ func (c *RedisClient) DeleteCacheInstance(request *redis.DeleteCacheInstanceRequ
     return jdResp, err
 }
 
-/* 重置缓存Redis实例的密码，可为空 */
+/* 修改缓存Redis实例的密码，可为空 */
 func (c *RedisClient) ResetCacheInstancePassword(request *redis.ResetCacheInstancePasswordRequest) (*redis.ResetCacheInstancePasswordResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -202,7 +201,7 @@ func (c *RedisClient) ResetCacheInstancePassword(request *redis.ResetCacheInstan
     return jdResp, err
 }
 
-/* 获取缓存Redis实例的慢查询日志 */
+/* 获取缓存Redis实例的慢查询日志，可分页、可搜索 */
 func (c *RedisClient) DescribeSlowLog(request *redis.DescribeSlowLogRequest) (*redis.DescribeSlowLogResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -222,7 +221,7 @@ func (c *RedisClient) DescribeSlowLog(request *redis.DescribeSlowLogRequest) (*r
     return jdResp, err
 }
 
-/* 创建一个指定配置的缓存Redis实例：可选择主从版或集群版，每种类型又分为多种规格（按CPU核数、内存容量、磁盘容量、带宽等划分），具体可参考产品规格代码，https://docs.jdcloud.com/cn/jcs-for-redis/specifications
+/* 创建一个指定配置的缓存Redis实例：可选择主从版或集群版，每种类型又分为多种规格（按CPU核数、内存容量、磁盘容量、带宽等划分），不同规格价格也不同，具体可参考产品规格代码，https://docs.jdcloud.com/cn/jcs-for-redis/specifications
  */
 func (c *RedisClient) CreateCacheInstance(request *redis.CreateCacheInstanceRequest) (*redis.CreateCacheInstanceResponse, error) {
     if request == nil {
@@ -283,7 +282,7 @@ func (c *RedisClient) DescribeUserQuota(request *redis.DescribeUserQuotaRequest)
     return jdResp, err
 }
 
-/* 获取缓存Redis实例的备份文件临时下载地址 */
+/* 获取缓存Redis实例的备份文件临时下载地址（1个小时有效期） */
 func (c *RedisClient) DescribeDownloadUrl(request *redis.DescribeDownloadUrlRequest) (*redis.DescribeDownloadUrlResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -363,7 +362,7 @@ func (c *RedisClient) ModifyCacheInstanceAttribute(request *redis.ModifyCacheIns
     return jdResp, err
 }
 
-/* 查询缓存Redis实例的备份结果（备份文件列表），可分页、可指定起止时间或备份任务ID */
+/* 查询缓存Redis实例的备份任务（文件）列表，可分页、可指定起止时间或备份任务ID */
 func (c *RedisClient) DescribeBackups(request *redis.DescribeBackupsRequest) (*redis.DescribeBackupsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -403,7 +402,7 @@ func (c *RedisClient) DescribeCacheInstance(request *redis.DescribeCacheInstance
     return jdResp, err
 }
 
-/* 修改缓存Redis实例的配置参数，支持部分参数修改 */
+/* 修改缓存Redis实例的配置参数，支持部分配置参数修改 */
 func (c *RedisClient) ModifyInstanceConfig(request *redis.ModifyInstanceConfigRequest) (*redis.ModifyInstanceConfigResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")

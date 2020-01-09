@@ -29,6 +29,9 @@ type DBInstance struct {
     /* 实例类别，例如主实例，只读实例等，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Optional) */
     InstanceType string `json:"instanceType"`
 
+    /* 存储类型，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md)<br>- 仅支持MySQL，Percona，MariaDB, SQL Server (Optional) */
+    InstanceStorageType string `json:"instanceStorageType"`
+
     /* 实例引擎类型，如MySQL或SQL Server等，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Optional) */
     Engine string `json:"engine"`
 

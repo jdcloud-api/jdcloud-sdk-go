@@ -28,6 +28,12 @@ type DomainLog struct {
     /* 文件名 (Optional) */
     FileName string `json:"fileName"`
 
+    /* 日志格式 (Optional) */
+    LogType string `json:"logType"`
+
+    /* 日志粒度 (Optional) */
+    Interval string `json:"interval"`
+
     /* 文件大小 (Optional) */
     Size int64 `json:"size"`
 
@@ -36,4 +42,7 @@ type DomainLog struct {
 
     /* 日志结束时间，UTC时间 (Optional) */
     EndTime string `json:"endTime"`
+
+    /* 日志修改时间，UTC时间 (Optional) */
+    LastModified string `json:"lastModified"`
 }

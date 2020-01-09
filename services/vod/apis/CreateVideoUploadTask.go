@@ -27,11 +27,11 @@ type CreateVideoUploadTaskRequest struct {
     /* HTTP 请求方法，取值范围：GET、POST、PUT、DELETE、HEAD、PATCH，默认值为 PUT (Optional) */
     HttpMethod *string `json:"httpMethod"`
 
-    /* 视频标题 (Optional) */
-    Title *string `json:"title"`
+    /* 视频标题  */
+    Title string `json:"title"`
 
-    /* 文件名称 (Optional) */
-    FileName *string `json:"fileName"`
+    /* 文件名称  */
+    FileName string `json:"fileName"`
 
     /* 文件大小 (Optional) */
     FileSize *int64 `json:"fileSize"`
@@ -56,10 +56,14 @@ type CreateVideoUploadTaskRequest struct {
 }
 
 /*
+ * param title: 视频标题 (Required)
+ * param fileName: 文件名称 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateVideoUploadTaskRequest(
+    title string,
+    fileName string,
 ) *CreateVideoUploadTaskRequest {
 
 	return &CreateVideoUploadTaskRequest{
@@ -69,13 +73,15 @@ func NewCreateVideoUploadTaskRequest(
 			Header:  nil,
 			Version: "v1",
 		},
+        Title: title,
+        FileName: fileName,
 	}
 }
 
 /*
  * param httpMethod: HTTP 请求方法，取值范围：GET、POST、PUT、DELETE、HEAD、PATCH，默认值为 PUT (Optional)
- * param title: 视频标题 (Optional)
- * param fileName: 文件名称 (Optional)
+ * param title: 视频标题 (Required)
+ * param fileName: 文件名称 (Required)
  * param fileSize: 文件大小 (Optional)
  * param coverUrl: 封面地址 (Optional)
  * param description: 视频描述 (Optional)
@@ -86,8 +92,8 @@ func NewCreateVideoUploadTaskRequest(
  */
 func NewCreateVideoUploadTaskRequestWithAllParams(
     httpMethod *string,
-    title *string,
-    fileName *string,
+    title string,
+    fileName string,
     fileSize *int64,
     coverUrl *string,
     description *string,
@@ -135,14 +141,14 @@ func (r *CreateVideoUploadTaskRequest) SetHttpMethod(httpMethod string) {
     r.HttpMethod = &httpMethod
 }
 
-/* param title: 视频标题(Optional) */
+/* param title: 视频标题(Required) */
 func (r *CreateVideoUploadTaskRequest) SetTitle(title string) {
-    r.Title = &title
+    r.Title = title
 }
 
-/* param fileName: 文件名称(Optional) */
+/* param fileName: 文件名称(Required) */
 func (r *CreateVideoUploadTaskRequest) SetFileName(fileName string) {
-    r.FileName = &fileName
+    r.FileName = fileName
 }
 
 /* param fileSize: 文件大小(Optional) */
@@ -195,4 +201,5 @@ type CreateVideoUploadTaskResponse struct {
 type CreateVideoUploadTaskResult struct {
     VideoId string `json:"videoId"`
     UploadUrl string `json:"uploadUrl"`
+    AuthToken string `json:"authToken"`
 }

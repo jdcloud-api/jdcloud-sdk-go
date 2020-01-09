@@ -19,6 +19,9 @@ package models
 
 type CreateAlarmSpec struct {
 
+    /* 弹性伸缩组Id。注：仅ag\asg产品线内部使用 (Optional) */
+    AutoScalingPolicyId string `json:"autoScalingPolicyId"`
+
     /* 告警通知联系人 (Optional) */
     BaseContact []BaseContact `json:"baseContact"`
 

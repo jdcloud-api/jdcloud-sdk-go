@@ -43,6 +43,9 @@ type DescribedAlarmHistory struct {
     /* 告警时间 (Optional) */
     NoticeTime string `json:"noticeTime"`
 
+    /* 告警时间对应的时间戳 (Optional) */
+    NoticeTimeUnix int64 `json:"noticeTimeUnix"`
+
     /* 资源类型 (Optional) */
     Product string `json:"product"`
 
@@ -51,6 +54,9 @@ type DescribedAlarmHistory struct {
 
     /* 告警通知人 (Optional) */
     Receivers []NoticeReceiver `json:"receivers"`
+
+    /* 资源Id对应的region (Optional) */
+    Region string `json:"region"`
 
     /* 资源Id (Optional) */
     ResourceId string `json:"resourceId"`

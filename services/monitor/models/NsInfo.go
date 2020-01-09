@@ -19,15 +19,9 @@ package models
 
 type NsInfo struct {
 
-    /* metric个数 (Optional) */
-    MetricCount int64 `json:"metricCount"`
+    /* namespace名字 (Optional) */
+    NamespaceName string `json:"namespaceName"`
 
-    /* 命名空间名称 (Optional) */
-    NsName string `json:"nsName"`
-
-    /* 命名空间uid (Optional) */
-    NsUid string `json:"nsUid"`
-
-    /* obj个数 (Optional) */
-    ObjCount int64 `json:"objCount"`
+    /* namespaceUUID (Optional) */
+    NamespaceUuid string `json:"namespaceUuid"`
 }

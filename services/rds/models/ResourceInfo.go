@@ -24,4 +24,10 @@ type ResourceInfo struct {
 
     /* 实例名称 (Optional) */
     ResourceName string `json:"resourceName"`
+
+    /* 备注 (Optional) */
+    Remark string `json:"remark"`
+
+    /* 绑定的资源 (Optional) */
+    Bind []ResourceInfo `json:"bind"`
 }

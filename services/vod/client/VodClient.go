@@ -40,7 +40,7 @@ func NewVodClient(credential *core.Credential) *VodClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vod",
-            Revision:    "1.1.5",
+            Revision:    "1.1.6",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,6 +51,10 @@ func (c *VodClient) SetConfig(config *core.Config) {
 
 func (c *VodClient) SetLogger(logger core.Logger) {
     c.Logger = logger
+}
+
+func (c *VodClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
 }
 
 /* 批量提交质检作业 */

@@ -34,6 +34,9 @@ type AuditResult struct {
     /* 线程ID (Optional) */
     ThreadId string `json:"threadId"`
 
+    /* 线程ID，仅 PostgreSQL 支持此参数 (Optional) */
+    ProcessId string `json:"processId"`
+
     /* 数据库名 (Optional) */
     DbName string `json:"dbName"`
 

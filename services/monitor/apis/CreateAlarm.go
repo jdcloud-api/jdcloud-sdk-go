@@ -25,6 +25,9 @@ type CreateAlarmRequest struct {
 
     core.JDCloudRequest
 
+    /* 弹性伸缩组Id。注：仅ag\asg产品线内部使用 (Optional) */
+    AutoScalingPolicyId *string `json:"autoScalingPolicyId"`
+
     /* 告警通知联系人 (Optional) */
     BaseContact []monitor.BaseContact `json:"baseContact"`
 
@@ -95,6 +98,7 @@ func NewCreateAlarmRequest(
 }
 
 /*
+ * param autoScalingPolicyId: 弹性伸缩组Id。注：仅ag\asg产品线内部使用 (Optional)
  * param baseContact: 告警通知联系人 (Optional)
  * param clientToken: 幂等性校验参数,最长36位,若两个请求clientToken相等，则返回第一次创建的规则id，只创建一次规则 (Required)
  * param dimension: 资源维度，可用的维度请使用 describeProductsForAlarm接口查询 (Optional)
@@ -109,6 +113,7 @@ func NewCreateAlarmRequest(
  * param webHookOption:  (Optional)
  */
 func NewCreateAlarmRequestWithAllParams(
+    autoScalingPolicyId *string,
     baseContact []monitor.BaseContact,
     clientToken string,
     dimension *string,
@@ -130,6 +135,7 @@ func NewCreateAlarmRequestWithAllParams(
             Header:  nil,
             Version: "v2",
         },
+        AutoScalingPolicyId: autoScalingPolicyId,
         BaseContact: baseContact,
         ClientToken: clientToken,
         Dimension: dimension,
@@ -156,6 +162,11 @@ func NewCreateAlarmRequestWithoutParam() *CreateAlarmRequest {
             Version: "v2",
         },
     }
+}
+
+/* param autoScalingPolicyId: 弹性伸缩组Id。注：仅ag\asg产品线内部使用(Optional) */
+func (r *CreateAlarmRequest) SetAutoScalingPolicyId(autoScalingPolicyId string) {
+    r.AutoScalingPolicyId = &autoScalingPolicyId
 }
 
 /* param baseContact: 告警通知联系人(Optional) */
@@ -232,4 +243,5 @@ type CreateAlarmResponse struct {
 
 type CreateAlarmResult struct {
     AlarmId string `json:"alarmId"`
+    RuleIds []int64 `json:"ruleIds"`
 }
