@@ -17,17 +17,20 @@
 package models
 
 
-type Credentials struct {
+type DescribeSwitchboard struct {
 
-    /* 临时accessKey (Optional) */
-    AccessKey string `json:"accessKey"`
+    /* IP (Optional) */
+    Ip string `json:"ip"`
 
-    /* 临时secretKey (Optional) */
-    SecretKey string `json:"secretKey"`
+    /* 端口 (Optional) */
+    Port string `json:"port"`
 
-    /* 临时安全令牌 (Optional) */
-    SessionToken string `json:"sessionToken"`
+    /* 上行实时流量 (Optional) */
+    TrafficIn float64 `json:"trafficIn"`
 
-    /* 失效时间，格式：yyyy-MM-dd HH:mm:ss(eg 2019-01-01 00:00:00) (Optional) */
-    Expiration string `json:"expiration"`
+    /* 下行实时流量 (Optional) */
+    TrafficOut float64 `json:"trafficOut"`
+
+    /* 报警状态 normal:正常 alarm:报警 (Optional) */
+    AlarmStatus string `json:"alarmStatus"`
 }

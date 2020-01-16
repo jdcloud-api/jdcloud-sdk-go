@@ -17,17 +17,11 @@
 package models
 
 
-type Credentials struct {
+type RelatedIp struct {
 
-    /* 临时accessKey (Optional) */
-    AccessKey string `json:"accessKey"`
+    /* IP地址段 (Optional) */
+    CidrAddr string `json:"cidrAddr"`
 
-    /* 临时secretKey (Optional) */
-    SecretKey string `json:"secretKey"`
-
-    /* 临时安全令牌 (Optional) */
-    SessionToken string `json:"sessionToken"`
-
-    /* 失效时间，格式：yyyy-MM-dd HH:mm:ss(eg 2019-01-01 00:00:00) (Optional) */
-    Expiration string `json:"expiration"`
+    /* 线路类型 bgp:BGP telecom:电信单线 unicom:联通单线 mobile:移动单线 (Optional) */
+    LineType string `json:"lineType"`
 }

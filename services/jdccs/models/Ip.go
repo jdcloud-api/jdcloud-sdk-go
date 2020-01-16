@@ -35,10 +35,10 @@ type Ip struct {
     NetworkAddr string `json:"networkAddr"`
 
     /* 网关地址 (Optional) */
-    GatewayAddr int `json:"gatewayAddr"`
+    GatewayAddr string `json:"gatewayAddr"`
 
     /* 广播地址 (Optional) */
-    BroadcastAddr int `json:"broadcastAddr"`
+    BroadcastAddr string `json:"broadcastAddr"`
 
     /* 状态 normal:正常 abnormal:异常 (Optional) */
     Status string `json:"status"`

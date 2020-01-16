@@ -40,7 +40,7 @@ func NewStsClient(credential *core.Credential) *StsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "sts",
-            Revision:    "0.1.0",
+            Revision:    "0.2.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,6 +51,10 @@ func (c *StsClient) SetConfig(config *core.Config) {
 
 func (c *StsClient) SetLogger(logger core.Logger) {
     c.Logger = logger
+}
+
+func (c *StsClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
 }
 
 /* 扮演用户角色，获取临时凭证 */

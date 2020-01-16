@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    logs "github.com/jdcloud-api/jdcloud-sdk-go/services/logs/models"
 )
 
 type SearchLogContextRequest struct {
@@ -38,6 +39,9 @@ type SearchLogContextRequest struct {
 
     /* 搜索方向,默认both,可取值:up,down,both (Optional) */
     Direction *string `json:"direction"`
+
+    /* 指定返回字段，只对系统日志生效，不填默认按照产品线配置返回字段，Name支持：key，Values填入返回字段 (Optional) */
+    Filters []logs.Filter `json:"filters"`
 
     /* 日志记录ID  */
     Id string `json:"id"`
@@ -93,6 +97,7 @@ func NewSearchLogContextRequest(
  * param logtopicUID: 日志主题 UID (Required)
  * param anchor: 查询anchor,基于该值偏移进行上下文检索 (Required)
  * param direction: 搜索方向,默认both,可取值:up,down,both (Optional)
+ * param filters: 指定返回字段，只对系统日志生效，不填默认按照产品线配置返回字段，Name支持：key，Values填入返回字段 (Optional)
  * param id: 日志记录ID (Required)
  * param lineSize: 查看上下文行数大小，最大支持200 (Required)
  * param time: 查询日志时返回的时间戳 (Required)
@@ -103,6 +108,7 @@ func NewSearchLogContextRequestWithAllParams(
     logtopicUID string,
     anchor []interface{},
     direction *string,
+    filters []logs.Filter,
     id string,
     lineSize int64,
     time int64,
@@ -120,6 +126,7 @@ func NewSearchLogContextRequestWithAllParams(
         LogtopicUID: logtopicUID,
         Anchor: anchor,
         Direction: direction,
+        Filters: filters,
         Id: id,
         LineSize: lineSize,
         Time: time,
@@ -162,6 +169,11 @@ func (r *SearchLogContextRequest) SetAnchor(anchor []interface{}) {
 /* param direction: 搜索方向,默认both,可取值:up,down,both(Optional) */
 func (r *SearchLogContextRequest) SetDirection(direction string) {
     r.Direction = &direction
+}
+
+/* param filters: 指定返回字段，只对系统日志生效，不填默认按照产品线配置返回字段，Name支持：key，Values填入返回字段(Optional) */
+func (r *SearchLogContextRequest) SetFilters(filters []logs.Filter) {
+    r.Filters = filters
 }
 
 /* param id: 日志记录ID(Required) */

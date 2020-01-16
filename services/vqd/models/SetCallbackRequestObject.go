@@ -25,6 +25,10 @@ type SetCallbackRequestObject struct {
     /* HTTP方式的该字段为必选项 (Optional) */
     HttpUrl string `json:"httpUrl"`
 
-    /* 回调事件列表  */
+    /* 回调事件列表。
+- VqdSuccess 视频质检成功
+- VqdFailure 视频质检失败
+- VqdStart 视频质检开始
+  */
     CallbackEvents []string `json:"callbackEvents"`
 }

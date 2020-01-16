@@ -21,67 +21,67 @@ import (
     vqd "github.com/jdcloud-api/jdcloud-sdk-go/services/vqd/models"
 )
 
-type BatchSubmitVqdTasksRequest struct {
+type SubmitVqdTaskRequest struct {
 
     core.JDCloudRequest
 
-    /* 媒体列表  */
-    MediaList []vqd.VqdMediaObject `json:"mediaList"`
+    /*   */
+    Media *vqd.VqdMediaObject `json:"media"`
 
     /* 检测模板ID  */
     TemplateId string `json:"templateId"`
 }
 
 /*
- * param mediaList: 媒体列表 (Required)
+ * param media:  (Required)
  * param templateId: 检测模板ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewBatchSubmitVqdTasksRequest(
-    mediaList []vqd.VqdMediaObject,
+func NewSubmitVqdTaskRequest(
+    media *vqd.VqdMediaObject,
     templateId string,
-) *BatchSubmitVqdTasksRequest {
+) *SubmitVqdTaskRequest {
 
-	return &BatchSubmitVqdTasksRequest{
+	return &SubmitVqdTaskRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/vqdTasks:batchSubmit",
+			URL:     "/vqdTasks:submit",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
-        MediaList: mediaList,
+        Media: media,
         TemplateId: templateId,
 	}
 }
 
 /*
- * param mediaList: 媒体列表 (Required)
+ * param media:  (Required)
  * param templateId: 检测模板ID (Required)
  */
-func NewBatchSubmitVqdTasksRequestWithAllParams(
-    mediaList []vqd.VqdMediaObject,
+func NewSubmitVqdTaskRequestWithAllParams(
+    media *vqd.VqdMediaObject,
     templateId string,
-) *BatchSubmitVqdTasksRequest {
+) *SubmitVqdTaskRequest {
 
-    return &BatchSubmitVqdTasksRequest{
+    return &SubmitVqdTaskRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/vqdTasks:batchSubmit",
+            URL:     "/vqdTasks:submit",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
-        MediaList: mediaList,
+        Media: media,
         TemplateId: templateId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewBatchSubmitVqdTasksRequestWithoutParam() *BatchSubmitVqdTasksRequest {
+func NewSubmitVqdTaskRequestWithoutParam() *SubmitVqdTaskRequest {
 
-    return &BatchSubmitVqdTasksRequest{
+    return &SubmitVqdTaskRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/vqdTasks:batchSubmit",
+            URL:     "/vqdTasks:submit",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -89,28 +89,28 @@ func NewBatchSubmitVqdTasksRequestWithoutParam() *BatchSubmitVqdTasksRequest {
     }
 }
 
-/* param mediaList: 媒体列表(Required) */
-func (r *BatchSubmitVqdTasksRequest) SetMediaList(mediaList []vqd.VqdMediaObject) {
-    r.MediaList = mediaList
+/* param media: (Required) */
+func (r *SubmitVqdTaskRequest) SetMedia(media *vqd.VqdMediaObject) {
+    r.Media = media
 }
 
 /* param templateId: 检测模板ID(Required) */
-func (r *BatchSubmitVqdTasksRequest) SetTemplateId(templateId string) {
+func (r *SubmitVqdTaskRequest) SetTemplateId(templateId string) {
     r.TemplateId = templateId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r BatchSubmitVqdTasksRequest) GetRegionId() string {
+func (r SubmitVqdTaskRequest) GetRegionId() string {
     return ""
 }
 
-type BatchSubmitVqdTasksResponse struct {
+type SubmitVqdTaskResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result BatchSubmitVqdTasksResult `json:"result"`
+    Result SubmitVqdTaskResult `json:"result"`
 }
 
-type BatchSubmitVqdTasksResult struct {
-    TaskIds []string `json:"taskIds"`
+type SubmitVqdTaskResult struct {
+    TaskId string `json:"taskId"`
 }

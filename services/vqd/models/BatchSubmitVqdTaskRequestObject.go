@@ -19,7 +19,7 @@ package models
 
 type BatchSubmitVqdTaskRequestObject struct {
 
-    /* 媒体列表 (Optional) */
+    /* 媒体列表  */
     MediaList []VqdMediaObject `json:"mediaList"`
 
     /* 检测模板ID  */

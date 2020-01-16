@@ -34,6 +34,9 @@ type PutRequest struct {
     /* 全局时间戳，UTC格式，最多支持到纳秒级别，不传入则取服务器时间。如 2019-04-08T03:08:04.437670934Z、2019-04-08T03:08:04Z、2019-04-08T03:08:04.123Z (Optional) */
     Timestamp *string `json:"timestamp"`
 
+    /* 全局标签 map[string]string (Optional) */
+    Tags *interface{} `json:"tags"`
+
     /* 日志数据  */
     Entries []logs.Entry `json:"entries"`
 }
@@ -65,12 +68,14 @@ func NewPutRequest(
  * param logtopicUID: 日志主题uid (Required)
  * param stream: 全局 strean 日志流标识符（建议起能唯一界定一个文件的名字，如 /i-iqnvqpinkjiq/app.log），不传则写入default日志流中（会导致很多文件混合在一起，不推荐） (Optional)
  * param timestamp: 全局时间戳，UTC格式，最多支持到纳秒级别，不传入则取服务器时间。如 2019-04-08T03:08:04.437670934Z、2019-04-08T03:08:04Z、2019-04-08T03:08:04.123Z (Optional)
+ * param tags: 全局标签 map[string]string (Optional)
  * param entries: 日志数据 (Required)
  */
 func NewPutRequestWithAllParams(
     logtopicUID string,
     stream *string,
     timestamp *string,
+    tags *interface{},
     entries []logs.Entry,
 ) *PutRequest {
 
@@ -84,6 +89,7 @@ func NewPutRequestWithAllParams(
         LogtopicUID: logtopicUID,
         Stream: stream,
         Timestamp: timestamp,
+        Tags: tags,
         Entries: entries,
     }
 }
@@ -114,6 +120,11 @@ func (r *PutRequest) SetStream(stream string) {
 /* param timestamp: 全局时间戳，UTC格式，最多支持到纳秒级别，不传入则取服务器时间。如 2019-04-08T03:08:04.437670934Z、2019-04-08T03:08:04Z、2019-04-08T03:08:04.123Z(Optional) */
 func (r *PutRequest) SetTimestamp(timestamp string) {
     r.Timestamp = &timestamp
+}
+
+/* param tags: 全局标签 map[string]string(Optional) */
+func (r *PutRequest) SetTags(tags interface{}) {
+    r.Tags = &tags
 }
 
 /* param entries: 日志数据(Required) */

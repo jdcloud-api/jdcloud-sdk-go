@@ -61,7 +61,7 @@ type Device struct {
     /* 资产状态 launched:已上架 opened:已开通 canceling:退订中 operating:操作中 modifing:变更中 (Optional) */
     AssetStatus string `json:"assetStatus"`
 
-    /* 开通时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
+    /* 开通时间，遵循ISO8601标准，使用UTC时间，格式为：yyyy-MM-ddTHH:mm:ssZ (Optional) */
     DeviceOpenTime string `json:"deviceOpenTime"`
 
     /* CPU (Optional) */

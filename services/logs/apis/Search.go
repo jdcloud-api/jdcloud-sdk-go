@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    logs "github.com/jdcloud-api/jdcloud-sdk-go/services/logs/models"
 )
 
 type SearchRequest struct {
@@ -42,10 +43,10 @@ type SearchRequest struct {
     /* 搜索关键字大小写敏感， 默认false (Optional) */
     CaseSensitive *bool `json:"caseSensitive"`
 
-    /* 开始时间。格式 “YYYY-MM-DDThh:mm:ssTZD”, 比如 “2018-11-09T15:34:46+0800” (Optional) */
+    /* 开始时间。格式 “YYYY-MM-DDThh:mm:ssTZD”, 比如 “2018-11-09T15:34:46+0800” 当action != preview时，必填 (Optional) */
     StartTime *string `json:"startTime"`
 
-    /* 结束时间。格式 “YYYY-MM-DDThh:mm:ssTZD”, 比如 “2018-11-09T15:34:46+0800” (Optional) */
+    /* 结束时间。格式 “YYYY-MM-DDThh:mm:ssTZD”, 比如 “2018-11-09T15:34:46+0800” 当action != preview时，必填 (Optional) */
     EndTime *string `json:"endTime"`
 
     /* 页数。 最小为1，最大为99 (Optional) */
@@ -53,6 +54,12 @@ type SearchRequest struct {
 
     /* 每页个数。默认为10，最大100 (Optional) */
     PageSize *int `json:"pageSize"`
+
+    /* 返回排序,不填或者为空，默认为desc，"asc":按照时间正序返回结果，"desc":按照时间倒序返回结果 (Optional) */
+    Sort *string `json:"sort"`
+
+    /* 指定返回字段，只对系统日志生效，不填默认按照产品线配置返回字段，Name支持：key，Values填入返回字段 (Optional) */
+    Filters []logs.Filter `json:"filters"`
 }
 
 /*
@@ -91,10 +98,12 @@ func NewSearchRequest(
  * param action: "preview"表示预览, "fulltext"表示全文检索, "advance"表示按照搜索语句检索 (Required)
  * param expr: Base64编码的搜索表达式, (Optional)
  * param caseSensitive: 搜索关键字大小写敏感， 默认false (Optional)
- * param startTime: 开始时间。格式 “YYYY-MM-DDThh:mm:ssTZD”, 比如 “2018-11-09T15:34:46+0800” (Optional)
- * param endTime: 结束时间。格式 “YYYY-MM-DDThh:mm:ssTZD”, 比如 “2018-11-09T15:34:46+0800” (Optional)
+ * param startTime: 开始时间。格式 “YYYY-MM-DDThh:mm:ssTZD”, 比如 “2018-11-09T15:34:46+0800” 当action != preview时，必填 (Optional)
+ * param endTime: 结束时间。格式 “YYYY-MM-DDThh:mm:ssTZD”, 比如 “2018-11-09T15:34:46+0800” 当action != preview时，必填 (Optional)
  * param pageNumber: 页数。 最小为1，最大为99 (Optional)
  * param pageSize: 每页个数。默认为10，最大100 (Optional)
+ * param sort: 返回排序,不填或者为空，默认为desc，"asc":按照时间正序返回结果，"desc":按照时间倒序返回结果 (Optional)
+ * param filters: 指定返回字段，只对系统日志生效，不填默认按照产品线配置返回字段，Name支持：key，Values填入返回字段 (Optional)
  */
 func NewSearchRequestWithAllParams(
     regionId string,
@@ -107,6 +116,8 @@ func NewSearchRequestWithAllParams(
     endTime *string,
     pageNumber *int,
     pageSize *int,
+    sort *string,
+    filters []logs.Filter,
 ) *SearchRequest {
 
     return &SearchRequest{
@@ -126,6 +137,8 @@ func NewSearchRequestWithAllParams(
         EndTime: endTime,
         PageNumber: pageNumber,
         PageSize: pageSize,
+        Sort: sort,
+        Filters: filters,
     }
 }
 
@@ -172,12 +185,12 @@ func (r *SearchRequest) SetCaseSensitive(caseSensitive bool) {
     r.CaseSensitive = &caseSensitive
 }
 
-/* param startTime: 开始时间。格式 “YYYY-MM-DDThh:mm:ssTZD”, 比如 “2018-11-09T15:34:46+0800”(Optional) */
+/* param startTime: 开始时间。格式 “YYYY-MM-DDThh:mm:ssTZD”, 比如 “2018-11-09T15:34:46+0800” 当action != preview时，必填(Optional) */
 func (r *SearchRequest) SetStartTime(startTime string) {
     r.StartTime = &startTime
 }
 
-/* param endTime: 结束时间。格式 “YYYY-MM-DDThh:mm:ssTZD”, 比如 “2018-11-09T15:34:46+0800”(Optional) */
+/* param endTime: 结束时间。格式 “YYYY-MM-DDThh:mm:ssTZD”, 比如 “2018-11-09T15:34:46+0800” 当action != preview时，必填(Optional) */
 func (r *SearchRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
@@ -190,6 +203,16 @@ func (r *SearchRequest) SetPageNumber(pageNumber int) {
 /* param pageSize: 每页个数。默认为10，最大100(Optional) */
 func (r *SearchRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
+}
+
+/* param sort: 返回排序,不填或者为空，默认为desc，"asc":按照时间正序返回结果，"desc":按照时间倒序返回结果(Optional) */
+func (r *SearchRequest) SetSort(sort string) {
+    r.Sort = &sort
+}
+
+/* param filters: 指定返回字段，只对系统日志生效，不填默认按照产品线配置返回字段，Name支持：key，Values填入返回字段(Optional) */
+func (r *SearchRequest) SetFilters(filters []logs.Filter) {
+    r.Filters = filters
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

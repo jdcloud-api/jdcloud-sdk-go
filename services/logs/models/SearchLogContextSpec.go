@@ -25,6 +25,9 @@ type SearchLogContextSpec struct {
     /* 搜索方向,默认both,可取值:up,down,both (Optional) */
     Direction string `json:"direction"`
 
+    /* 指定返回字段，只对系统日志生效，不填默认按照产品线配置返回字段，Name支持：key，Values填入返回字段 (Optional) */
+    Filters []Filter `json:"filters"`
+
     /* 日志记录ID  */
     Id string `json:"id"`
 

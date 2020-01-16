@@ -19,7 +19,7 @@ package models
 
 type SubmitVqdTaskRequestObject struct {
 
-    /*  (Optional) */
+    /*   */
     Media VqdMediaObject `json:"media"`
 
     /* 检测模板ID  */

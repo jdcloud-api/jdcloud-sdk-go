@@ -35,11 +35,11 @@ type DescribeBandwidth struct {
     Status string `json:"status"`
 
     /* 线路类型 bgp:BGP telecom:电信单线 unicom:联通单线 mobile:移动单线 (Optional) */
-    LineType int `json:"lineType"`
+    LineType string `json:"lineType"`
 
     /* 合同带宽（Mbps） (Optional) */
     Bandwidth int `json:"bandwidth"`
 
     /* 关联的公网IP (Optional) */
-    RelatedIp []interface{} `json:"relatedIp"`
+    RelatedIp []RelatedIp `json:"relatedIp"`
 }

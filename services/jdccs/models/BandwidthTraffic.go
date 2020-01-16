@@ -44,8 +44,8 @@ type BandwidthTraffic struct {
     LineType string `json:"lineType"`
 
     /* 关联的公网IP (Optional) */
-    RelatedIp []interface{} `json:"relatedIp"`
+    RelatedIp []RelatedIp `json:"relatedIp"`
 
-    /*  (Optional) */
-    Switchboard []interface{} `json:"switchboard"`
+    /* 交换机信息 (Optional) */
+    Switchboard []DescribeSwitchboard `json:"switchboard"`
 }

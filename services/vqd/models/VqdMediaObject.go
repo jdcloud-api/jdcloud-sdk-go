@@ -19,8 +19,8 @@ package models
 
 type VqdMediaObject struct {
 
-    /* 媒体URL (Optional) */
-    MediaUrl *string `json:"mediaUrl"`
+    /* 媒体URL  */
+    MediaUrl string `json:"mediaUrl"`
 
     /* 媒体名称 (Optional) */
     MediaName *string `json:"mediaName"`

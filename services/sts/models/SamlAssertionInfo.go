@@ -17,17 +17,17 @@
 package models
 
 
-type Credentials struct {
+type SamlAssertionInfo struct {
 
-    /* 临时accessKey (Optional) */
-    AccessKey string `json:"accessKey"`
+    /* SAML断言中NameID的格式 (Optional) */
+    SubjectType string `json:"subjectType"`
 
-    /* 临时secretKey (Optional) */
-    SecretKey string `json:"secretKey"`
+    /* SAML断言中Subject.NameID字段值 (Optional) */
+    Subject string `json:"subject"`
 
-    /* 临时安全令牌 (Optional) */
-    SessionToken string `json:"sessionToken"`
+    /* SAML断言中Subject.SubjectConfirmation.SubjectConfirmationData字段中Recipient字段值 (Optional) */
+    Recipient string `json:"recipient"`
 
-    /* 失效时间，格式：yyyy-MM-dd HH:mm:ss(eg 2019-01-01 00:00:00) (Optional) */
-    Expiration string `json:"expiration"`
+    /* SAML断言中Issuer字段值 (Optional) */
+    Issuer string `json:"issuer"`
 }

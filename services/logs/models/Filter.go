@@ -17,17 +17,14 @@
 package models
 
 
-type Credentials struct {
+type Filter struct {
 
-    /* 临时accessKey (Optional) */
-    AccessKey string `json:"accessKey"`
+    /* 过滤条件的名称 (Optional) */
+    Name *string `json:"name"`
 
-    /* 临时secretKey (Optional) */
-    SecretKey string `json:"secretKey"`
+    /* 过滤条件的操作符，默认eq (Optional) (Optional) */
+    Operator *string `json:"operator"`
 
-    /* 临时安全令牌 (Optional) */
-    SessionToken string `json:"sessionToken"`
-
-    /* 失效时间，格式：yyyy-MM-dd HH:mm:ss(eg 2019-01-01 00:00:00) (Optional) */
-    Expiration string `json:"expiration"`
+    /* 过滤条件的值 (Optional) */
+    Values []string `json:"values"`
 }

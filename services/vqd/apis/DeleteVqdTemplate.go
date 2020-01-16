@@ -18,99 +18,83 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    vqd "github.com/jdcloud-api/jdcloud-sdk-go/services/vqd/models"
 )
 
-type BatchSubmitVqdTasksRequest struct {
+type DeleteVqdTemplateRequest struct {
 
     core.JDCloudRequest
 
-    /* 媒体列表  */
-    MediaList []vqd.VqdMediaObject `json:"mediaList"`
-
-    /* 检测模板ID  */
+    /* 模板ID，路径参数  */
     TemplateId string `json:"templateId"`
 }
 
 /*
- * param mediaList: 媒体列表 (Required)
- * param templateId: 检测模板ID (Required)
+ * param templateId: 模板ID，路径参数 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewBatchSubmitVqdTasksRequest(
-    mediaList []vqd.VqdMediaObject,
+func NewDeleteVqdTemplateRequest(
     templateId string,
-) *BatchSubmitVqdTasksRequest {
+) *DeleteVqdTemplateRequest {
 
-	return &BatchSubmitVqdTasksRequest{
+	return &DeleteVqdTemplateRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/vqdTasks:batchSubmit",
-			Method:  "POST",
+			URL:     "/vqdTemplates/{templateId}",
+			Method:  "DELETE",
 			Header:  nil,
 			Version: "v1",
 		},
-        MediaList: mediaList,
         TemplateId: templateId,
 	}
 }
 
 /*
- * param mediaList: 媒体列表 (Required)
- * param templateId: 检测模板ID (Required)
+ * param templateId: 模板ID，路径参数 (Required)
  */
-func NewBatchSubmitVqdTasksRequestWithAllParams(
-    mediaList []vqd.VqdMediaObject,
+func NewDeleteVqdTemplateRequestWithAllParams(
     templateId string,
-) *BatchSubmitVqdTasksRequest {
+) *DeleteVqdTemplateRequest {
 
-    return &BatchSubmitVqdTasksRequest{
+    return &DeleteVqdTemplateRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/vqdTasks:batchSubmit",
-            Method:  "POST",
+            URL:     "/vqdTemplates/{templateId}",
+            Method:  "DELETE",
             Header:  nil,
             Version: "v1",
         },
-        MediaList: mediaList,
         TemplateId: templateId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewBatchSubmitVqdTasksRequestWithoutParam() *BatchSubmitVqdTasksRequest {
+func NewDeleteVqdTemplateRequestWithoutParam() *DeleteVqdTemplateRequest {
 
-    return &BatchSubmitVqdTasksRequest{
+    return &DeleteVqdTemplateRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/vqdTasks:batchSubmit",
-            Method:  "POST",
+            URL:     "/vqdTemplates/{templateId}",
+            Method:  "DELETE",
             Header:  nil,
             Version: "v1",
         },
     }
 }
 
-/* param mediaList: 媒体列表(Required) */
-func (r *BatchSubmitVqdTasksRequest) SetMediaList(mediaList []vqd.VqdMediaObject) {
-    r.MediaList = mediaList
-}
-
-/* param templateId: 检测模板ID(Required) */
-func (r *BatchSubmitVqdTasksRequest) SetTemplateId(templateId string) {
+/* param templateId: 模板ID，路径参数(Required) */
+func (r *DeleteVqdTemplateRequest) SetTemplateId(templateId string) {
     r.TemplateId = templateId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r BatchSubmitVqdTasksRequest) GetRegionId() string {
+func (r DeleteVqdTemplateRequest) GetRegionId() string {
     return ""
 }
 
-type BatchSubmitVqdTasksResponse struct {
+type DeleteVqdTemplateResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result BatchSubmitVqdTasksResult `json:"result"`
+    Result DeleteVqdTemplateResult `json:"result"`
 }
 
-type BatchSubmitVqdTasksResult struct {
-    TaskIds []string `json:"taskIds"`
+type DeleteVqdTemplateResult struct {
 }
