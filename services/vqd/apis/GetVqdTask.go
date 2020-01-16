@@ -20,81 +20,89 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type BatchDeleteVqdTasksRequest struct {
+type GetVqdTaskRequest struct {
 
     core.JDCloudRequest
 
-    /*   */
-    TaskIds []string `json:"taskIds"`
+    /* 任务ID，路径参数  */
+    TaskId string `json:"taskId"`
 }
 
 /*
- * param taskIds:  (Required)
+ * param taskId: 任务ID，路径参数 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewBatchDeleteVqdTasksRequest(
-    taskIds []string,
-) *BatchDeleteVqdTasksRequest {
+func NewGetVqdTaskRequest(
+    taskId string,
+) *GetVqdTaskRequest {
 
-	return &BatchDeleteVqdTasksRequest{
+	return &GetVqdTaskRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/vqdTasks:batchDelete",
-			Method:  "POST",
+			URL:     "/vqdTasks/{taskId}",
+			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
-        TaskIds: taskIds,
+        TaskId: taskId,
 	}
 }
 
 /*
- * param taskIds:  (Required)
+ * param taskId: 任务ID，路径参数 (Required)
  */
-func NewBatchDeleteVqdTasksRequestWithAllParams(
-    taskIds []string,
-) *BatchDeleteVqdTasksRequest {
+func NewGetVqdTaskRequestWithAllParams(
+    taskId string,
+) *GetVqdTaskRequest {
 
-    return &BatchDeleteVqdTasksRequest{
+    return &GetVqdTaskRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/vqdTasks:batchDelete",
-            Method:  "POST",
+            URL:     "/vqdTasks/{taskId}",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
-        TaskIds: taskIds,
+        TaskId: taskId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewBatchDeleteVqdTasksRequestWithoutParam() *BatchDeleteVqdTasksRequest {
+func NewGetVqdTaskRequestWithoutParam() *GetVqdTaskRequest {
 
-    return &BatchDeleteVqdTasksRequest{
+    return &GetVqdTaskRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/vqdTasks:batchDelete",
-            Method:  "POST",
+            URL:     "/vqdTasks/{taskId}",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
     }
 }
 
-/* param taskIds: (Required) */
-func (r *BatchDeleteVqdTasksRequest) SetTaskIds(taskIds []string) {
-    r.TaskIds = taskIds
+/* param taskId: 任务ID，路径参数(Required) */
+func (r *GetVqdTaskRequest) SetTaskId(taskId string) {
+    r.TaskId = taskId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r BatchDeleteVqdTasksRequest) GetRegionId() string {
+func (r GetVqdTaskRequest) GetRegionId() string {
     return ""
 }
 
-type BatchDeleteVqdTasksResponse struct {
+type GetVqdTaskResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result BatchDeleteVqdTasksResult `json:"result"`
+    Result GetVqdTaskResult `json:"result"`
 }
 
-type BatchDeleteVqdTasksResult struct {
+type GetVqdTaskResult struct {
+    TaskId string `json:"taskId"`
+    TemplateId string `json:"templateId"`
+    MediaName string `json:"mediaName"`
+    Threshold float64 `json:"threshold"`
+    Detections []string `json:"detections"`
+    Status string `json:"status"`
+    CreateTime string `json:"createTime"`
+    UpdateTime string `json:"updateTime"`
 }

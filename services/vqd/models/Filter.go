@@ -23,7 +23,7 @@ type Filter struct {
     Name string `json:"name"`
 
     /* 过滤器操作符，默认值为 eq (Optional) */
-    Operator string `json:"operator"`
+    Operator *string `json:"operator"`
 
     /* 过滤器属性值  */
     Values []string `json:"values"`

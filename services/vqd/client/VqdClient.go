@@ -40,7 +40,7 @@ func NewVqdClient(credential *core.Credential) *VqdClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vqd",
-            Revision:    "0.1.0",
+            Revision:    "0.1.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -57,8 +57,8 @@ func (c *VqdClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
 }
 
-/* 设置回调配置 */
-func (c *VqdClient) SetCallback(request *vqd.SetCallbackRequest) (*vqd.SetCallbackResponse, error) {
+/* 删除视频质检模板 */
+func (c *VqdClient) DeleteVqdTemplate(request *vqd.DeleteVqdTemplateRequest) (*vqd.DeleteVqdTemplateResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -67,7 +67,50 @@ func (c *VqdClient) SetCallback(request *vqd.SetCallbackRequest) (*vqd.SetCallba
         return nil, err
     }
 
-    jdResp := &vqd.SetCallbackResponse{}
+    jdResp := &vqd.DeleteVqdTemplateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 批量删除视频质检任务。删除任务时，会同时删除任务相关的数据，如任务执行结果等。一次最多删除50条 */
+func (c *VqdClient) BatchDeleteVqdTasks(request *vqd.BatchDeleteVqdTasksRequest) (*vqd.BatchDeleteVqdTasksResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vqd.BatchDeleteVqdTasksResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询视频质检模板列表。
+支持过滤查询：
+  - templateId,eq 精确匹配模板ID，非必选
+ */
+func (c *VqdClient) ListVqdTemplates(request *vqd.ListVqdTemplatesRequest) (*vqd.ListVqdTemplatesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vqd.ListVqdTemplatesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -97,6 +140,111 @@ func (c *VqdClient) QueryCallback(request *vqd.QueryCallbackRequest) (*vqd.Query
     return jdResp, err
 }
 
+/* 获取视频质检任务详细信息 */
+func (c *VqdClient) GetVqdTask(request *vqd.GetVqdTaskRequest) (*vqd.GetVqdTaskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vqd.GetVqdTaskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询视频质检模板 */
+func (c *VqdClient) GetVqdTemplate(request *vqd.GetVqdTemplateRequest) (*vqd.GetVqdTemplateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vqd.GetVqdTemplateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询视频质检任务列表
+支持过滤查询：
+  - createTime,ge 最早任务创建时间
+  - createTime,le 最晚任务创建时间
+  - status,in 任务状态
+ */
+func (c *VqdClient) ListVqdTasks(request *vqd.ListVqdTasksRequest) (*vqd.ListVqdTasksResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vqd.ListVqdTasksResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询视频质检任务结果 */
+func (c *VqdClient) QueryVqdTaskResult(request *vqd.QueryVqdTaskResultRequest) (*vqd.QueryVqdTaskResultResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vqd.QueryVqdTaskResultResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设置回调配置 */
+func (c *VqdClient) SetCallback(request *vqd.SetCallbackRequest) (*vqd.SetCallbackResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vqd.SetCallbackResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 批量提交视频质检任务，一次同时最多提交50个输入媒体 */
 func (c *VqdClient) BatchSubmitVqdTasks(request *vqd.BatchSubmitVqdTasksRequest) (*vqd.BatchSubmitVqdTasksResponse, error) {
     if request == nil {
@@ -117,8 +265,8 @@ func (c *VqdClient) BatchSubmitVqdTasks(request *vqd.BatchSubmitVqdTasksRequest)
     return jdResp, err
 }
 
-/* 批量删除视频质检任务。删除任务时，会同时删除任务相关的数据，如任务执行结果等。一次最多删除50条 */
-func (c *VqdClient) BatchDeleteVqdTasks(request *vqd.BatchDeleteVqdTasksRequest) (*vqd.BatchDeleteVqdTasksResponse, error) {
+/* 删除视频质检任务。删除任务时，会同时删除任务相关的数据，如任务执行结果等 */
+func (c *VqdClient) DeleteVqdTask(request *vqd.DeleteVqdTaskRequest) (*vqd.DeleteVqdTaskResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -127,7 +275,67 @@ func (c *VqdClient) BatchDeleteVqdTasks(request *vqd.BatchDeleteVqdTasksRequest)
         return nil, err
     }
 
-    jdResp := &vqd.BatchDeleteVqdTasksResponse{}
+    jdResp := &vqd.DeleteVqdTaskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建视频质检模板 */
+func (c *VqdClient) CreateVqdTemplate(request *vqd.CreateVqdTemplateRequest) (*vqd.CreateVqdTemplateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vqd.CreateVqdTemplateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改视频质检模板 */
+func (c *VqdClient) UpdateVqdTemplate(request *vqd.UpdateVqdTemplateRequest) (*vqd.UpdateVqdTemplateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vqd.UpdateVqdTemplateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 提交视频质检任务 */
+func (c *VqdClient) SubmitVqdTask(request *vqd.SubmitVqdTaskRequest) (*vqd.SubmitVqdTaskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vqd.SubmitVqdTaskResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

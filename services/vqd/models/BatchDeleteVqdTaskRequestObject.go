@@ -19,6 +19,6 @@ package models
 
 type BatchDeleteVqdTaskRequestObject struct {
 
-    /*  (Optional) */
+    /*   */
     TaskIds []string `json:"taskIds"`
 }

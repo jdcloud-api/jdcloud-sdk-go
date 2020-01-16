@@ -67,8 +67,11 @@ type AlarmHistory struct {
     /* 规则状态 disabled:禁用 enabled:启用 (Optional) */
     Status string `json:"status"`
 
-    /*  (Optional) */
-    Switchboard []interface{} `json:"switchboard"`
+    /* IP地址 (Optional) */
+    ManagementIp string `json:"managementIp"`
+
+    /* 端口名称 (Optional) */
+    IfName string `json:"ifName"`
 
     /* 报警状态 normal:正常 alarm:报警 (Optional) */
     AlarmStatus string `json:"alarmStatus"`
@@ -76,6 +79,6 @@ type AlarmHistory struct {
     /* 报警值 (Optional) */
     Value float64 `json:"value"`
 
-    /* 报警时间 遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
+    /* 报警时间 遵循ISO8601标准，使用UTC时间，格式为：yyyy-MM-ddTHH:mm:ssZ (Optional) */
     NoticeTime string `json:"noticeTime"`
 }

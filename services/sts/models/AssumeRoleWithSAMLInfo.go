@@ -17,17 +17,20 @@
 package models
 
 
-type Credentials struct {
+type AssumeRoleWithSAMLInfo struct {
 
-    /* 临时accessKey (Optional) */
-    AccessKey string `json:"accessKey"`
+    /* 角色资源标识(jrn)  */
+    RoleJrn string `json:"roleJrn"`
 
-    /* 临时secretKey (Optional) */
-    SecretKey string `json:"secretKey"`
+    /* 身份提供商资源标识(jrn)  */
+    SamlProviderJrn string `json:"samlProviderJrn"`
 
-    /* 临时安全令牌 (Optional) */
-    SessionToken string `json:"sessionToken"`
+    /* 会话策略，压缩后不超过1024字节 (Optional) */
+    Policy string `json:"policy"`
 
-    /* 失效时间，格式：yyyy-MM-dd HH:mm:ss(eg 2019-01-01 00:00:00) (Optional) */
-    Expiration string `json:"expiration"`
+    /* 临时凭证有效期，单位秒，取值范围：1800~您所扮演的角色设置的maxSessionDuration，默认3600 (Optional) */
+    DurationSeconds int `json:"durationSeconds"`
+
+    /* SAML断言（Base64编码）  */
+    SamlAssertion string `json:"samlAssertion"`
 }

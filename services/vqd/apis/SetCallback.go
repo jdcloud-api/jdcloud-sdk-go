@@ -30,13 +30,21 @@ type SetCallbackRequest struct {
     /* HTTP方式的该字段为必选项 (Optional) */
     HttpUrl *string `json:"httpUrl"`
 
-    /* 回调事件列表  */
+    /* 回调事件列表。
+- VqdSuccess 视频质检成功
+- VqdFailure 视频质检失败
+- VqdStart 视频质检开始
+  */
     CallbackEvents []string `json:"callbackEvents"`
 }
 
 /*
  * param callbackType: 回调方式，目前只支持 http (Required)
- * param callbackEvents: 回调事件列表 (Required)
+ * param callbackEvents: 回调事件列表。
+- VqdSuccess 视频质检成功
+- VqdFailure 视频质检失败
+- VqdStart 视频质检开始
+ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -60,7 +68,11 @@ func NewSetCallbackRequest(
 /*
  * param callbackType: 回调方式，目前只支持 http (Required)
  * param httpUrl: HTTP方式的该字段为必选项 (Optional)
- * param callbackEvents: 回调事件列表 (Required)
+ * param callbackEvents: 回调事件列表。
+- VqdSuccess 视频质检成功
+- VqdFailure 视频质检失败
+- VqdStart 视频质检开始
+ (Required)
  */
 func NewSetCallbackRequestWithAllParams(
     callbackType string,
@@ -104,7 +116,11 @@ func (r *SetCallbackRequest) SetHttpUrl(httpUrl string) {
     r.HttpUrl = &httpUrl
 }
 
-/* param callbackEvents: 回调事件列表(Required) */
+/* param callbackEvents: 回调事件列表。
+- VqdSuccess 视频质检成功
+- VqdFailure 视频质检失败
+- VqdStart 视频质检开始
+(Required) */
 func (r *SetCallbackRequest) SetCallbackEvents(callbackEvents []string) {
     r.CallbackEvents = callbackEvents
 }

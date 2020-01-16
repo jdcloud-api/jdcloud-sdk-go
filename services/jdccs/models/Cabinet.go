@@ -43,19 +43,19 @@ type Cabinet struct {
     /* 机柜类型 formal:正式机柜 reserved:预留机柜 (Optional) */
     CabinetType string `json:"cabinetType"`
 
-    /* 机柜开通状态 disabled:未开通 enabling:开通中 enabled:已开通 disabling:关闭中 (Optional) */
+    /* 机柜开通状态 disabled:未开通 enabling:开通中 enabled:已开通 disabling:关电中 (Optional) */
     CabinetOpenStatus string `json:"cabinetOpenStatus"`
 
-    /* 开通时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
+    /* 开通时间，遵循ISO8601标准，使用UTC时间，格式为：yyyy-MM-ddTHH:mm:ssZ (Optional) */
     CabinetOpenTime string `json:"cabinetOpenTime"`
 
-    /* 到期时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
+    /* 到期时间，遵循ISO8601标准，使用UTC时间，格式为：yyyy-MM-ddTHH:mm:ssZ (Optional) */
     ExpireTime string `json:"expireTime"`
 
-    /* 预留开始时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
+    /* 预留开始时间，遵循ISO8601标准，使用UTC时间，格式为：yyyy-MM-ddTHH:mm:ssZ (Optional) */
     ReserveStartTime string `json:"reserveStartTime"`
 
-    /* 预留结束时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
+    /* 预留结束时间，遵循ISO8601标准，使用UTC时间，格式为：yyyy-MM-ddTHH:mm:ssZ (Optional) */
     ReserveEndTime string `json:"reserveEndTime"`
 
     /* 设备数量 (Optional) */

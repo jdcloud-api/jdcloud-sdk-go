@@ -17,17 +17,11 @@
 package models
 
 
-type Credentials struct {
+type Switchboard struct {
 
-    /* 临时accessKey (Optional) */
-    AccessKey string `json:"accessKey"`
+    /* IP (Optional) */
+    Ip string `json:"ip"`
 
-    /* 临时secretKey (Optional) */
-    SecretKey string `json:"secretKey"`
-
-    /* 临时安全令牌 (Optional) */
-    SessionToken string `json:"sessionToken"`
-
-    /* 失效时间，格式：yyyy-MM-dd HH:mm:ss(eg 2019-01-01 00:00:00) (Optional) */
-    Expiration string `json:"expiration"`
+    /* 端口 (Optional) */
+    Port string `json:"port"`
 }

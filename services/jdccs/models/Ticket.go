@@ -37,10 +37,10 @@ type Ticket struct {
     /* 描述 (Optional) */
     Description string `json:"description"`
 
-    /* 创建时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
+    /* 创建时间，遵循ISO8601标准，使用UTC时间，格式为：yyyy-MM-ddTHH:mm:ssZ (Optional) */
     CreatedTime string `json:"createdTime"`
 
-    /* 关闭时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
+    /* 关闭时间，遵循ISO8601标准，使用UTC时间，格式为：yyyy-MM-ddTHH:mm:ssZ (Optional) */
     ClosedTime string `json:"closedTime"`
 
     /* 电话 (Optional) */
