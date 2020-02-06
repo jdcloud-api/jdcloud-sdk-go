@@ -33,6 +33,12 @@ type DescribeAlarmHistoryRequest struct {
 
     /* 报警规则ID (Optional) */
     AlarmId *string `json:"alarmId"`
+
+    /* 查询时间范围的开始时间， UNIX时间戳 (Optional) */
+    StartTime *int `json:"startTime"`
+
+    /* 查询时间范围的结束时间， UNIX时间戳 (Optional) */
+    EndTime *int `json:"endTime"`
 }
 
 /*
@@ -56,11 +62,15 @@ func NewDescribeAlarmHistoryRequest(
  * param pageNumber: 页码, 默认为1 (Optional)
  * param pageSize: 分页大小，默认为20 (Optional)
  * param alarmId: 报警规则ID (Optional)
+ * param startTime: 查询时间范围的开始时间， UNIX时间戳 (Optional)
+ * param endTime: 查询时间范围的结束时间， UNIX时间戳 (Optional)
  */
 func NewDescribeAlarmHistoryRequestWithAllParams(
     pageNumber *int,
     pageSize *int,
     alarmId *string,
+    startTime *int,
+    endTime *int,
 ) *DescribeAlarmHistoryRequest {
 
     return &DescribeAlarmHistoryRequest{
@@ -73,6 +83,8 @@ func NewDescribeAlarmHistoryRequestWithAllParams(
         PageNumber: pageNumber,
         PageSize: pageSize,
         AlarmId: alarmId,
+        StartTime: startTime,
+        EndTime: endTime,
     }
 }
 
@@ -102,6 +114,16 @@ func (r *DescribeAlarmHistoryRequest) SetPageSize(pageSize int) {
 /* param alarmId: 报警规则ID(Optional) */
 func (r *DescribeAlarmHistoryRequest) SetAlarmId(alarmId string) {
     r.AlarmId = &alarmId
+}
+
+/* param startTime: 查询时间范围的开始时间， UNIX时间戳(Optional) */
+func (r *DescribeAlarmHistoryRequest) SetStartTime(startTime int) {
+    r.StartTime = &startTime
+}
+
+/* param endTime: 查询时间范围的结束时间， UNIX时间戳(Optional) */
+func (r *DescribeAlarmHistoryRequest) SetEndTime(endTime int) {
+    r.EndTime = &endTime
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
