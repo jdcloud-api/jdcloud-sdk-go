@@ -81,4 +81,10 @@ type AlarmHistory struct {
 
     /* 报警时间 遵循ISO8601标准，使用UTC时间，格式为：yyyy-MM-ddTHH:mm:ssZ (Optional) */
     NoticeTime string `json:"noticeTime"`
+
+    /* 报警条件 (Optional) */
+    Condition string `json:"condition"`
+
+    /* 策略ID (Optional) */
+    StrategyId int `json:"strategyId"`
 }
