@@ -53,6 +53,10 @@ func (c *MpsClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
+func (c *MpsClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
+}
+
 /* 创建截图任务，创建成功时返回任务ID。本接口用于截取指定时间点的画面。 */
 func (c *MpsClient) CreateThumbnailTask(request *mps.CreateThumbnailTaskRequest) (*mps.CreateThumbnailTaskResponse, error) {
     if request == nil {
