@@ -17,17 +17,14 @@
 package models
 
 
-type Data struct {
+type DelSnapshot struct {
 
-    /* 云硬盘ID (Optional) */
-    ResourceId string `json:"resourceId"`
+    /* 云硬盘快照ID (Optional) */
+    SnapshotId string `json:"snapshotId"`
 
-    /* 云硬盘名称，只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符。 (Optional) */
-    ResourceName string `json:"resourceName"`
+    /* 是否成功 (Optional) */
+    Success bool `json:"success"`
 
-    /* 云硬盘状态，取值为 creating、available、in-use、extending、restoring、deleting、deleted、error_create、error_delete、error_restore、error_extend 之一 (Optional) */
-    Status string `json:"status"`
-
-    /* 绑定资源列表 (Optional) */
-    Bind []Bind `json:"bind"`
+    /* 详细信息 (Optional) */
+    Detail string `json:"detail"`
 }

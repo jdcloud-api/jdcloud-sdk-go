@@ -17,17 +17,17 @@
 package models
 
 
-type Data struct {
+type InstanceClassDetail struct {
 
-    /* 云硬盘ID (Optional) */
-    ResourceId string `json:"resourceId"`
+    /* 规格代码，规格代码详情参见：https://docs.jdcloud.com/cn/jcs-for-elasticsearch/specifications (Optional) */
+    InstanceClassCode string `json:"instanceClassCode"`
 
-    /* 云硬盘名称，只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符。 (Optional) */
-    ResourceName string `json:"resourceName"`
+    /* cpu核数 (Optional) */
+    Cpu int `json:"cpu"`
 
-    /* 云硬盘状态，取值为 creating、available、in-use、extending、restoring、deleting、deleted、error_create、error_delete、error_restore、error_extend 之一 (Optional) */
-    Status string `json:"status"`
+    /* 内存单位GB (Optional) */
+    MemoryGB int `json:"memoryGB"`
 
-    /* 绑定资源列表 (Optional) */
-    Bind []Bind `json:"bind"`
+    /* 存储大小单位GB (Optional) */
+    DiskGB int `json:"diskGB"`
 }

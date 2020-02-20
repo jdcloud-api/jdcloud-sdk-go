@@ -17,17 +17,23 @@
 package models
 
 
-type Data struct {
+type StampResult struct {
 
-    /* 云硬盘ID (Optional) */
-    ResourceId string `json:"resourceId"`
+    /* 验证结果 (Optional) */
+    Verified bool `json:"verified"`
 
-    /* 云硬盘名称，只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符。 (Optional) */
-    ResourceName string `json:"resourceName"`
+    /* 时间戳 (Optional) */
+    Timestamp string `json:"timestamp"`
 
-    /* 云硬盘状态，取值为 creating、available、in-use、extending、restoring、deleting、deleted、error_create、error_delete、error_restore、error_extend 之一 (Optional) */
-    Status string `json:"status"`
+    /* 签名算法信息 (Optional) */
+    Algorithm string `json:"algorithm"`
 
-    /* 绑定资源列表 (Optional) */
-    Bind []Bind `json:"bind"`
+    /* 证书信息 (Optional) */
+    CertInfo string `json:"certInfo"`
+
+    /* 是否验证根证书 (Optional) */
+    ChainRootVerified bool `json:"chainRootVerified"`
+
+    /* 子类型 (Optional) */
+    SubType string `json:"subType"`
 }

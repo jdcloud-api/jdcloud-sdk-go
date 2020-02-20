@@ -17,17 +17,20 @@
 package models
 
 
-type Data struct {
+type Snapshot struct {
 
-    /* 云硬盘ID (Optional) */
-    ResourceId string `json:"resourceId"`
+    /* 快照ID (Optional) */
+    SnapshotId string `json:"snapshotId"`
 
-    /* 云硬盘名称，只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符。 (Optional) */
-    ResourceName string `json:"resourceName"`
+    /* 快照类型，Auto：自动，Manual：人工 (Optional) */
+    Type string `json:"type"`
 
-    /* 云硬盘状态，取值为 creating、available、in-use、extending、restoring、deleting、deleted、error_create、error_delete、error_restore、error_extend 之一 (Optional) */
+    /* 创建时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
+    CreateTime string `json:"createTime"`
+
+    /* 备份的索引 (Optional) */
+    Indices []string `json:"indices"`
+
+    /* 快照状态，Available：可用，Unavailable：不可用，Creating：创建中 (Optional) */
     Status string `json:"status"`
-
-    /* 绑定资源列表 (Optional) */
-    Bind []Bind `json:"bind"`
 }

@@ -17,17 +17,26 @@
 package models
 
 
-type Data struct {
+type StatisticsInfo struct {
 
-    /* 云硬盘ID (Optional) */
-    ResourceId string `json:"resourceId"`
+    /* 已签合同数量 (Optional) */
+    ContractNumber int `json:"contractNumber"`
 
-    /* 云硬盘名称，只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符。 (Optional) */
-    ResourceName string `json:"resourceName"`
+    /* 印章数量 (Optional) */
+    StampNumber int `json:"stampNumber"`
 
-    /* 云硬盘状态，取值为 creating、available、in-use、extending、restoring、deleting、deleted、error_create、error_delete、error_restore、error_extend 之一 (Optional) */
-    Status string `json:"status"`
+    /* 合同模板数量 (Optional) */
+    TemplateNumber int `json:"templateNumber"`
 
-    /* 绑定资源列表 (Optional) */
-    Bind []Bind `json:"bind"`
+    /* 是否启用存管 (Optional) */
+    ContractSave bool `json:"contractSave"`
+
+    /* 已用存储空间容量(单位:MB) (Optional) */
+    UsedSpace int `json:"usedSpace"`
+
+    /* 签章系统加密密钥ID (Optional) */
+    KmsKeyId string `json:"kmsKeyId"`
+
+    /* 签章次数统计[24小时，7天，30天] (Optional) */
+    SignStatistic []SignItem `json:"signStatistic"`
 }

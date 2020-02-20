@@ -17,17 +17,14 @@
 package models
 
 
-type Data struct {
+type InstanceSpecConf struct {
 
-    /* 云硬盘ID (Optional) */
-    ResourceId string `json:"resourceId"`
+    /* es版本 (Optional) */
+    Version []string `json:"version"`
 
-    /* 云硬盘名称，只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符。 (Optional) */
-    ResourceName string `json:"resourceName"`
+    /* 规格详情 (Optional) */
+    InstanceClassDetail []InstanceClassDetail `json:"instanceClassDetail"`
 
-    /* 云硬盘状态，取值为 creating、available、in-use、extending、restoring、deleting、deleted、error_create、error_delete、error_restore、error_extend 之一 (Optional) */
-    Status string `json:"status"`
-
-    /* 绑定资源列表 (Optional) */
-    Bind []Bind `json:"bind"`
+    /* az的配置 (Optional) */
+    AzConf []AzConf `json:"azConf"`
 }

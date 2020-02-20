@@ -17,17 +17,23 @@
 package models
 
 
-type Data struct {
+type ContractInfo struct {
 
-    /* 云硬盘ID (Optional) */
-    ResourceId string `json:"resourceId"`
+    /* 合同ID (Optional) */
+    ContractId string `json:"contractId"`
 
-    /* 云硬盘名称，只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符。 (Optional) */
-    ResourceName string `json:"resourceName"`
+    /* 合同标题 (Optional) */
+    ContractTitle string `json:"contractTitle"`
 
-    /* 云硬盘状态，取值为 creating、available、in-use、extending、restoring、deleting、deleted、error_create、error_delete、error_restore、error_extend 之一 (Optional) */
-    Status string `json:"status"`
+    /* 印章名称(可能有多个印章) (Optional) */
+    StampNames []string `json:"stampNames"`
 
-    /* 绑定资源列表 (Optional) */
-    Bind []Bind `json:"bind"`
+    /* 合同文件（base64） (Optional) */
+    ContractContent string `json:"contractContent"`
+
+    /* 合同文件摘要 (Optional) */
+    ContractDigest string `json:"contractDigest"`
+
+    /* 合同签章时间 (Optional) */
+    CreateTime string `json:"createTime"`
 }

@@ -18,47 +18,47 @@ package client
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    disk "github.com/jdcloud-api/jdcloud-sdk-go/services/disk/apis"
+    cloudsign "github.com/jdcloud-api/jdcloud-sdk-go/services/cloudsign/apis"
     "encoding/json"
     "errors"
 )
 
-type DiskClient struct {
+type CloudsignClient struct {
     core.JDCloudClient
 }
 
-func NewDiskClient(credential *core.Credential) *DiskClient {
+func NewCloudsignClient(credential *core.Credential) *CloudsignClient {
     if credential == nil {
         return nil
     }
 
     config := core.NewConfig()
-    config.SetEndpoint("disk.jdcloud-api.com")
+    config.SetEndpoint("cloudsign.jdcloud-api.com")
 
-    return &DiskClient{
+    return &CloudsignClient{
         core.JDCloudClient{
             Credential:  *credential,
             Config:      *config,
-            ServiceName: "disk",
-            Revision:    "0.12.5",
+            ServiceName: "cloudsign",
+            Revision:    "1.0.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
 
-func (c *DiskClient) SetConfig(config *core.Config) {
+func (c *CloudsignClient) SetConfig(config *core.Config) {
     c.Config = *config
 }
 
-func (c *DiskClient) SetLogger(logger core.Logger) {
+func (c *CloudsignClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-func (c *DiskClient) DisableLogger() {
+func (c *CloudsignClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
 }
 
-/* 修改快照的名字或描述信息 */
-func (c *DiskClient) ModifySnapshotAttribute(request *disk.ModifySnapshotAttributeRequest) (*disk.ModifySnapshotAttributeResponse, error) {
+/* 查询服务开通状态 */
+func (c *CloudsignClient) DescribeApplyStatus(request *cloudsign.DescribeApplyStatusRequest) (*cloudsign.DescribeApplyStatusResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -67,7 +67,7 @@ func (c *DiskClient) ModifySnapshotAttribute(request *disk.ModifySnapshotAttribu
         return nil, err
     }
 
-    jdResp := &disk.ModifySnapshotAttributeResponse{}
+    jdResp := &cloudsign.DescribeApplyStatusResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -77,11 +77,115 @@ func (c *DiskClient) ModifySnapshotAttribute(request *disk.ModifySnapshotAttribu
     return jdResp, err
 }
 
-/* -   删除云硬盘快照:快照状态必须为 available 或 error 状态。
--   快照独立于云硬盘生命周期，删除快照不会对创建快照的云硬盘有任何影响。
--   快照删除后不可恢复，请谨慎操作。
+/* 启用合同存管 */
+func (c *CloudsignClient) EnableContractSave(request *cloudsign.EnableContractSaveRequest) (*cloudsign.EnableContractSaveResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cloudsign.EnableContractSaveResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取合同模板列表 */
+func (c *CloudsignClient) DescribeTemplateList(request *cloudsign.DescribeTemplateListRequest) (*cloudsign.DescribeTemplateListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cloudsign.DescribeTemplateListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取已签章合同列表 */
+func (c *CloudsignClient) DescribeContractList(request *cloudsign.DescribeContractListRequest) (*cloudsign.DescribeContractListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cloudsign.DescribeContractListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 上传印章 */
+func (c *CloudsignClient) UploadStamp(request *cloudsign.UploadStampRequest) (*cloudsign.UploadStampResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cloudsign.UploadStampResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 1. 下载印章
+2. 多个印章id用逗号分隔
+ [MFA enabled] */
+func (c *CloudsignClient) DownloadStamps(request *cloudsign.DownloadStampsRequest) (*cloudsign.DownloadStampsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cloudsign.DownloadStampsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 合同签章四种方式：
+1. 合同文件 + 印章文件：contractContent + stampContent
+2. 合同文件 + 印章ID：contractContent + stampId
+3. 模板ID + 印章文件：templateId + stampContent
+4. 模板ID + 印章ID：templateId + stampId
  */
-func (c *DiskClient) DeleteSnapshots(request *disk.DeleteSnapshotsRequest) (*disk.DeleteSnapshotsResponse, error) {
+func (c *CloudsignClient) SignContract(request *cloudsign.SignContractRequest) (*cloudsign.SignContractResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -90,7 +194,7 @@ func (c *DiskClient) DeleteSnapshots(request *disk.DeleteSnapshotsRequest) (*dis
         return nil, err
     }
 
-    jdResp := &disk.DeleteSnapshotsResponse{}
+    jdResp := &cloudsign.SignContractResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -100,8 +204,10 @@ func (c *DiskClient) DeleteSnapshots(request *disk.DeleteSnapshotsRequest) (*dis
     return jdResp, err
 }
 
-/* 查询某一块云硬盘的信息详情 */
-func (c *DiskClient) DescribeDisk(request *disk.DescribeDiskRequest) (*disk.DescribeDiskResponse, error) {
+/* 1. 下载已签章的合同
+2. 多个合同id用逗号分隔
+ [MFA enabled] */
+func (c *CloudsignClient) DownloadContracts(request *cloudsign.DownloadContractsRequest) (*cloudsign.DownloadContractsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -110,7 +216,7 @@ func (c *DiskClient) DescribeDisk(request *disk.DescribeDiskRequest) (*disk.Desc
         return nil, err
     }
 
-    jdResp := &disk.DescribeDiskResponse{}
+    jdResp := &cloudsign.DownloadContractsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -120,10 +226,10 @@ func (c *DiskClient) DescribeDisk(request *disk.DescribeDiskRequest) (*disk.Desc
     return jdResp, err
 }
 
-/* -   扩容云硬盘到指定大小，云硬盘状态必须为 available。
--   当云硬盘正在创建快照时，不允许扩容。
- */
-func (c *DiskClient) ExtendDisk(request *disk.ExtendDiskRequest) (*disk.ExtendDiskResponse, error) {
+/* 1. 下载合同模板
+2. 多个合同id用逗号分隔
+ [MFA enabled] */
+func (c *CloudsignClient) DownloadTemplates(request *cloudsign.DownloadTemplatesRequest) (*cloudsign.DownloadTemplatesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -132,7 +238,7 @@ func (c *DiskClient) ExtendDisk(request *disk.ExtendDiskRequest) (*disk.ExtendDi
         return nil, err
     }
 
-    jdResp := &disk.ExtendDiskResponse{}
+    jdResp := &cloudsign.DownloadTemplatesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -142,8 +248,8 @@ func (c *DiskClient) ExtendDisk(request *disk.ExtendDiskRequest) (*disk.ExtendDi
     return jdResp, err
 }
 
-/* 修改云硬盘的名字或描述信息，名字或描述信息至少要指定一个。 */
-func (c *DiskClient) ModifyDiskAttribute(request *disk.ModifyDiskAttributeRequest) (*disk.ModifyDiskAttributeResponse, error) {
+/* 验签已签章合同 */
+func (c *CloudsignClient) VerifyContract(request *cloudsign.VerifyContractRequest) (*cloudsign.VerifyContractResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -152,7 +258,7 @@ func (c *DiskClient) ModifyDiskAttribute(request *disk.ModifyDiskAttributeReques
         return nil, err
     }
 
-    jdResp := &disk.ModifyDiskAttributeResponse{}
+    jdResp := &cloudsign.VerifyContractResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -162,16 +268,8 @@ func (c *DiskClient) ModifyDiskAttribute(request *disk.ModifyDiskAttributeReques
     return jdResp, err
 }
 
-/* -   创建一块或多块按配置或者按使用时长付费的云硬盘。
--   云硬盘类型包括高效云盘(premium-hdd)、SSD云盘(ssd)、通用型SSD(ssd.gp1)、性能型SSD(ssd.io1)、容量型HDD(hdd.std1)。
--   计费方式默认为按配置付费。
--   创建完成后，云硬盘状态为 available。
--   可选参数快照 ID用于从快照创建新盘。
--   批量创建时，云硬盘的命名为 硬盘名称-数字，例如 myDisk-1，myDisk-2。
--   maxCount为最大努力，不保证一定能达到maxCount。
--   userTags 为创建云盘时打的标签
- */
-func (c *DiskClient) CreateDisks(request *disk.CreateDisksRequest) (*disk.CreateDisksResponse, error) {
+/* 上传合同模板 */
+func (c *CloudsignClient) UploadTemplate(request *cloudsign.UploadTemplateRequest) (*cloudsign.UploadTemplateResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -180,7 +278,7 @@ func (c *DiskClient) CreateDisks(request *disk.CreateDisksRequest) (*disk.Create
         return nil, err
     }
 
-    jdResp := &disk.CreateDisksResponse{}
+    jdResp := &cloudsign.UploadTemplateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -190,11 +288,8 @@ func (c *DiskClient) CreateDisks(request *disk.CreateDisksRequest) (*disk.Create
     return jdResp, err
 }
 
-/* -   删除单个云硬盘快照:快照状态必须为 available 或 error 状态。
--   快照独立于云硬盘生命周期，删除快照不会对创建快照的云硬盘有任何影响。
--   快照删除后不可恢复，请谨慎操作。
- */
-func (c *DiskClient) DeleteSnapshot(request *disk.DeleteSnapshotRequest) (*disk.DeleteSnapshotResponse, error) {
+/* 删除合同模板 [MFA enabled] */
+func (c *CloudsignClient) DeleteTemplate(request *cloudsign.DeleteTemplateRequest) (*cloudsign.DeleteTemplateResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -203,7 +298,7 @@ func (c *DiskClient) DeleteSnapshot(request *disk.DeleteSnapshotRequest) (*disk.
         return nil, err
     }
 
-    jdResp := &disk.DeleteSnapshotResponse{}
+    jdResp := &cloudsign.DeleteTemplateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -213,8 +308,8 @@ func (c *DiskClient) DeleteSnapshot(request *disk.DeleteSnapshotRequest) (*disk.
     return jdResp, err
 }
 
-/* 查询云硬盘快照列表，filters多个过滤条件之间是逻辑与(AND)，每个条件内部的多个取值是逻辑或(OR) */
-func (c *DiskClient) DescribeSnapshots(request *disk.DescribeSnapshotsRequest) (*disk.DescribeSnapshotsResponse, error) {
+/* 删除已签章的合同 [MFA enabled] */
+func (c *CloudsignClient) DeleteContract(request *cloudsign.DeleteContractRequest) (*cloudsign.DeleteContractResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -223,7 +318,7 @@ func (c *DiskClient) DescribeSnapshots(request *disk.DescribeSnapshotsRequest) (
         return nil, err
     }
 
-    jdResp := &disk.DescribeSnapshotsResponse{}
+    jdResp := &cloudsign.DeleteContractResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -233,11 +328,8 @@ func (c *DiskClient) DescribeSnapshots(request *disk.DescribeSnapshotsRequest) (
     return jdResp, err
 }
 
-/* -   仅可对制作快照的源硬盘进行数据恢复操作。
--   仅源硬盘处于可用状态时才能使用快照进行数据恢复操作。
--   云硬盘恢复后，当前数据将被清除，请您谨慎操作。
- */
-func (c *DiskClient) RestoreDisk(request *disk.RestoreDiskRequest) (*disk.RestoreDiskResponse, error) {
+/* 禁用合同存管 */
+func (c *CloudsignClient) DisableContractSave(request *cloudsign.DisableContractSaveRequest) (*cloudsign.DisableContractSaveResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -246,7 +338,7 @@ func (c *DiskClient) RestoreDisk(request *disk.RestoreDiskRequest) (*disk.Restor
         return nil, err
     }
 
-    jdResp := &disk.RestoreDiskResponse{}
+    jdResp := &cloudsign.DisableContractSaveResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -256,10 +348,8 @@ func (c *DiskClient) RestoreDisk(request *disk.RestoreDiskRequest) (*disk.Restor
     return jdResp, err
 }
 
-/* -   查询您已经创建的云硬盘。
--   filters多个过滤条件之间是逻辑与(AND)，每个条件内部的多个取值是逻辑或(OR)
- */
-func (c *DiskClient) DescribeDisks(request *disk.DescribeDisksRequest) (*disk.DescribeDisksResponse, error) {
+/* 签章系统加密密钥 [MFA enabled] */
+func (c *CloudsignClient) SetKmsKeyId(request *cloudsign.SetKmsKeyIdRequest) (*cloudsign.SetKmsKeyIdResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -268,7 +358,7 @@ func (c *DiskClient) DescribeDisks(request *disk.DescribeDisksRequest) (*disk.De
         return nil, err
     }
 
-    jdResp := &disk.DescribeDisksResponse{}
+    jdResp := &cloudsign.SetKmsKeyIdResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -278,11 +368,8 @@ func (c *DiskClient) DescribeDisks(request *disk.DescribeDisksRequest) (*disk.De
     return jdResp, err
 }
 
-/* -   删除一块按配置计费的云硬盘，云盘类型包括高效云盘、SSD云盘、通用型SSD、性能型SSD和容量型HDD。
--   删除云盘时，云盘的状态必须为 待挂载（Available）。
--   云盘被删除后，云硬盘快照可以被保留。
- */
-func (c *DiskClient) DeleteDisk(request *disk.DeleteDiskRequest) (*disk.DeleteDiskResponse, error) {
+/* 删除印章 [MFA enabled] */
+func (c *CloudsignClient) DeleteStamp(request *cloudsign.DeleteStampRequest) (*cloudsign.DeleteStampResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -291,7 +378,7 @@ func (c *DiskClient) DeleteDisk(request *disk.DeleteDiskRequest) (*disk.DeleteDi
         return nil, err
     }
 
-    jdResp := &disk.DeleteDiskResponse{}
+    jdResp := &cloudsign.DeleteStampResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -301,14 +388,8 @@ func (c *DiskClient) DeleteDisk(request *disk.DeleteDiskRequest) (*disk.DeleteDi
     return jdResp, err
 }
 
-/* -   为指定云硬盘创建快照，新生成的快照的状态为creating。
--   同一地域下单用户快照的配额为15块。
--   为保证数据完整性，请您在创建快照之前，停止对云硬盘进行写入操作，以保证快照数据的完整性。
--   在执行创建快照前，建议您对云硬盘进行卸载操作，创建快照后再重新挂载到云主机上。
--   手动快照的生命周期独立于云硬盘，请您及时删除不需要的快照。
--   创建快照所需时间取决于云硬盘容量的大小，云硬盘容量越大耗时越长。
- */
-func (c *DiskClient) CreateSnapshot(request *disk.CreateSnapshotRequest) (*disk.CreateSnapshotResponse, error) {
+/* 获取印章列表 */
+func (c *CloudsignClient) DescribeStampList(request *cloudsign.DescribeStampListRequest) (*cloudsign.DescribeStampListResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -317,27 +398,7 @@ func (c *DiskClient) CreateSnapshot(request *disk.CreateSnapshotRequest) (*disk.
         return nil, err
     }
 
-    jdResp := &disk.CreateSnapshotResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询云硬盘快照信息详情 */
-func (c *DiskClient) DescribeSnapshot(request *disk.DescribeSnapshotRequest) (*disk.DescribeSnapshotResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &disk.DescribeSnapshotResponse{}
+    jdResp := &cloudsign.DescribeStampListResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

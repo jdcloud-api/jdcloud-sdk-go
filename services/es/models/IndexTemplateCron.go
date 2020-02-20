@@ -17,17 +17,14 @@
 package models
 
 
-type Data struct {
+type IndexTemplateCron struct {
 
-    /* 云硬盘ID (Optional) */
-    ResourceId string `json:"resourceId"`
+    /* 任务ID (Optional) */
+    TaskID string `json:"taskID"`
 
-    /* 云硬盘名称，只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符。 (Optional) */
-    ResourceName string `json:"resourceName"`
+    /* 创建时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
+    CreateTime string `json:"createTime"`
 
-    /* 云硬盘状态，取值为 creating、available、in-use、extending、restoring、deleting、deleted、error_create、error_delete、error_restore、error_extend 之一 (Optional) */
-    Status string `json:"status"`
-
-    /* 绑定资源列表 (Optional) */
-    Bind []Bind `json:"bind"`
+    /* 任务配置信息 (Optional) */
+    Settings IndexTemplateCronConf `json:"settings"`
 }
