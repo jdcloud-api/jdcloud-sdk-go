@@ -17,11 +17,17 @@
 package models
 
 
-type Tag struct {
+type AzConf struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* azId (Optional) */
+    AzId string `json:"azId"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* 数据节点 (Optional) */
+    DataNode NodeConf `json:"dataNode"`
+
+    /* 专有主节点 (Optional) */
+    MasterNode NodeConf `json:"masterNode"`
+
+    /* 协调节点 (Optional) */
+    CoordinatingNode NodeConf `json:"coordinatingNode"`
 }

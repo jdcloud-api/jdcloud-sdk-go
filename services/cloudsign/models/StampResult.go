@@ -17,11 +17,23 @@
 package models
 
 
-type Tag struct {
+type StampResult struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* 验证结果 (Optional) */
+    Verified bool `json:"verified"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* 时间戳 (Optional) */
+    Timestamp string `json:"timestamp"`
+
+    /* 签名算法信息 (Optional) */
+    Algorithm string `json:"algorithm"`
+
+    /* 证书信息 (Optional) */
+    CertInfo string `json:"certInfo"`
+
+    /* 是否验证根证书 (Optional) */
+    ChainRootVerified bool `json:"chainRootVerified"`
+
+    /* 子类型 (Optional) */
+    SubType string `json:"subType"`
 }

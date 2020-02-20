@@ -17,11 +17,14 @@
 package models
 
 
-type Tag struct {
+type DelSnapshot struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* 云硬盘快照ID (Optional) */
+    SnapshotId string `json:"snapshotId"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* 是否成功 (Optional) */
+    Success bool `json:"success"`
+
+    /* 详细信息 (Optional) */
+    Detail string `json:"detail"`
 }

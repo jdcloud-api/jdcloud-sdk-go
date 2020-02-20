@@ -17,11 +17,11 @@
 package models
 
 
-type Tag struct {
+type AutoSnapshot struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* 是否开启自动备份；true为开启，false为不开启 (Optional) */
+    Open *bool `json:"open"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* 自动备份时间，0时区的小时数，[0，24）范围内取整 (Optional) */
+    Hour *int `json:"hour"`
 }

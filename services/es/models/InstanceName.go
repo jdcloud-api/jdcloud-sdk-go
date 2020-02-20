@@ -17,11 +17,11 @@
 package models
 
 
-type Tag struct {
+type InstanceName struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* 实例ID (Optional) */
+    ResourceId string `json:"resourceId"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* 实例名称 (Optional) */
+    ResourceName string `json:"resourceName"`
 }

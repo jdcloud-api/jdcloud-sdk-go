@@ -17,11 +17,26 @@
 package models
 
 
-type Tag struct {
+type TemplateInfo struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* 合同模板ID (Optional) */
+    TemplateId string `json:"templateId"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* 合同模板名称 (Optional) */
+    TemplateName string `json:"templateName"`
+
+    /* 合同模板标题 (Optional) */
+    TemplateTitle string `json:"templateTitle"`
+
+    /* 合同模板文件名称 (Optional) */
+    TemplateFileName string `json:"templateFileName"`
+
+    /* 合同模板文件（base64） (Optional) */
+    TemplateContent string `json:"templateContent"`
+
+    /* 合同模板文件摘要 (Optional) */
+    TemplateDigest string `json:"templateDigest"`
+
+    /* 创建时间 (Optional) */
+    CreateTime string `json:"createTime"`
 }

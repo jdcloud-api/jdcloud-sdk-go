@@ -17,11 +17,11 @@
 package models
 
 
-type Tag struct {
+type ContractVerifySpec struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* 合同文件（base64） (Optional) */
+    ContractContent *string `json:"contractContent"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* 是否验证证书链 (Optional) */
+    CheckCertChain *bool `json:"checkCertChain"`
 }

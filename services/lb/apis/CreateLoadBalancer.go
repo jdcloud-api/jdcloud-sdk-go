@@ -41,7 +41,7 @@ type CreateLoadBalancerRequest struct {
     /* 【alb，nlb】LoadBalancer所属availability Zone列表,对于alb,nlb是必选参数 <br>【dnlb】全可用区可用，不必传该参数  */
     Azs []string `json:"azs"`
 
-    /* 【alb】支持按用量和按配置(按配置即将下线，请勿使用，已使用该计费方式的服务后续请使用按用量方式创建alb)计费，默认为按用量，目前免费。【nlb】支持按用量计费，目前免费。【dnlb】支持按配置计费，目前免费 (Optional) */
+    /* 【alb】支持按用量计费，默认为按用量。【nlb】支持按用量计费。【dnlb】支持按配置计费 (Optional) */
     ChargeSpec *charge.ChargeSpec `json:"chargeSpec"`
 
     /* 负载均衡关联的弹性IP规格 (Optional) */
@@ -92,7 +92,7 @@ func NewCreateLoadBalancerRequest(
  * param subnetId: LoadBalancer所属子网的Id (Required)
  * param type_: LoadBalancer的类型，取值：alb、nlb、dnlb，默认为alb (Optional)
  * param azs: 【alb，nlb】LoadBalancer所属availability Zone列表,对于alb,nlb是必选参数 <br>【dnlb】全可用区可用，不必传该参数 (Required)
- * param chargeSpec: 【alb】支持按用量和按配置(按配置即将下线，请勿使用，已使用该计费方式的服务后续请使用按用量方式创建alb)计费，默认为按用量，目前免费。【nlb】支持按用量计费，目前免费。【dnlb】支持按配置计费，目前免费 (Optional)
+ * param chargeSpec: 【alb】支持按用量计费，默认为按用量。【nlb】支持按用量计费。【dnlb】支持按配置计费 (Optional)
  * param elasticIp: 负载均衡关联的弹性IP规格 (Optional)
  * param securityGroupIds: 【alb】 安全组 ID列表 (Optional)
  * param description: LoadBalancer的描述信息,允许输入UTF-8编码下的全部字符，不超过256字符 (Optional)
@@ -169,7 +169,7 @@ func (r *CreateLoadBalancerRequest) SetAzs(azs []string) {
     r.Azs = azs
 }
 
-/* param chargeSpec: 【alb】支持按用量和按配置(按配置即将下线，请勿使用，已使用该计费方式的服务后续请使用按用量方式创建alb)计费，默认为按用量，目前免费。【nlb】支持按用量计费，目前免费。【dnlb】支持按配置计费，目前免费(Optional) */
+/* param chargeSpec: 【alb】支持按用量计费，默认为按用量。【nlb】支持按用量计费。【dnlb】支持按配置计费(Optional) */
 func (r *CreateLoadBalancerRequest) SetChargeSpec(chargeSpec *charge.ChargeSpec) {
     r.ChargeSpec = chargeSpec
 }

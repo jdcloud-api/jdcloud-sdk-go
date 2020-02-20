@@ -17,11 +17,14 @@
 package models
 
 
-type Tag struct {
+type VerifyInfo struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* 验签是否成功，true 成功 false 失败 (Optional) */
+    Success bool `json:"success"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* 验证消息 (Optional) */
+    Message string `json:"message"`
+
+    /* 签章验证列表 (Optional) */
+    Results []StampResult `json:"results"`
 }

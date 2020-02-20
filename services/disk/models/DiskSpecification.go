@@ -34,6 +34,9 @@ type DiskSpecification struct {
     /* 描述信息 (Optional) */
     Description string `json:"description"`
 
+    /* 类型名称 (Optional) */
+    DiskTypeName string `json:"diskTypeName"`
+
     /* 默认的iops数量(基础iops数量) (Optional) */
     DefaultIOPS int `json:"defaultIOPS"`
 

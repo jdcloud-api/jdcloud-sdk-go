@@ -17,11 +17,14 @@
 package models
 
 
-type Tag struct {
+type IndexTemplateCron struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* 任务ID (Optional) */
+    TaskID string `json:"taskID"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* 创建时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
+    CreateTime string `json:"createTime"`
+
+    /* 任务配置信息 (Optional) */
+    Settings IndexTemplateCronConf `json:"settings"`
 }

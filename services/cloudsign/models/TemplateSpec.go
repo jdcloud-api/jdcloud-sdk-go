@@ -17,11 +17,14 @@
 package models
 
 
-type Tag struct {
+type TemplateSpec struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* 合同模板文件（base64） (Optional) */
+    TemplateContent *string `json:"templateContent"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* 合同模板名称 (Optional) */
+    TemplateName *string `json:"templateName"`
+
+    /* 合同模板标题 (Optional) */
+    TemplateTitle *string `json:"templateTitle"`
 }

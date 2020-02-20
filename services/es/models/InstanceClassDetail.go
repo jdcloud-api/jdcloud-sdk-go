@@ -17,11 +17,17 @@
 package models
 
 
-type Tag struct {
+type InstanceClassDetail struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* 规格代码，规格代码详情参见：https://docs.jdcloud.com/cn/jcs-for-elasticsearch/specifications (Optional) */
+    InstanceClassCode string `json:"instanceClassCode"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* cpu核数 (Optional) */
+    Cpu int `json:"cpu"`
+
+    /* 内存单位GB (Optional) */
+    MemoryGB int `json:"memoryGB"`
+
+    /* 存储大小单位GB (Optional) */
+    DiskGB int `json:"diskGB"`
 }

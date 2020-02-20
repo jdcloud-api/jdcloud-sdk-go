@@ -34,6 +34,9 @@ type CreateDisksRequest struct {
     /* 购买实例数量；取值范围：[1,100]  */
     MaxCount int `json:"maxCount"`
 
+    /* 用户标签 (Optional) */
+    UserTags []disk.Tag `json:"userTags"`
+
     /* 幂等性校验参数  */
     ClientToken string `json:"clientToken"`
 }
@@ -71,12 +74,14 @@ func NewCreateDisksRequest(
  * param regionId: 地域ID (Required)
  * param diskSpec: 创建云硬盘规格 (Required)
  * param maxCount: 购买实例数量；取值范围：[1,100] (Required)
+ * param userTags: 用户标签 (Optional)
  * param clientToken: 幂等性校验参数 (Required)
  */
 func NewCreateDisksRequestWithAllParams(
     regionId string,
     diskSpec *disk.DiskSpec,
     maxCount int,
+    userTags []disk.Tag,
     clientToken string,
 ) *CreateDisksRequest {
 
@@ -90,6 +95,7 @@ func NewCreateDisksRequestWithAllParams(
         RegionId: regionId,
         DiskSpec: diskSpec,
         MaxCount: maxCount,
+        UserTags: userTags,
         ClientToken: clientToken,
     }
 }
@@ -122,6 +128,11 @@ func (r *CreateDisksRequest) SetMaxCount(maxCount int) {
     r.MaxCount = maxCount
 }
 
+/* param userTags: 用户标签(Optional) */
+func (r *CreateDisksRequest) SetUserTags(userTags []disk.Tag) {
+    r.UserTags = userTags
+}
+
 /* param clientToken: 幂等性校验参数(Required) */
 func (r *CreateDisksRequest) SetClientToken(clientToken string) {
     r.ClientToken = clientToken
@@ -141,4 +152,5 @@ type CreateDisksResponse struct {
 
 type CreateDisksResult struct {
     DiskIds []string `json:"diskIds"`
+    Tagmsg string `json:"tagmsg"`
 }
