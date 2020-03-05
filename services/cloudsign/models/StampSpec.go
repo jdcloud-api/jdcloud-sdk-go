@@ -17,11 +17,11 @@
 package models
 
 
-type Tag struct {
+type StampSpec struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* 印章图片（base64） (Optional) */
+    StampContent *string `json:"stampContent"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* 印章名称 (Optional) */
+    StampName *string `json:"stampName"`
 }

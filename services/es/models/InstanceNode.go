@@ -17,11 +17,8 @@
 package models
 
 
-type Tag struct {
+type InstanceNode struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
-
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* 节点名称 (Optional) */
+    NodeName string `json:"nodeName"`
 }

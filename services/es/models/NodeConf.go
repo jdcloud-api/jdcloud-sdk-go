@@ -17,11 +17,11 @@
 package models
 
 
-type Tag struct {
+type NodeConf struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* 磁盘类型，支持两种：zbs（SSD云硬盘）和local_ssd（本地SSD盘），默认为zbs (Optional) */
+    StorageType []string `json:"storageType"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* 限制条件 (Optional) */
+    Constraints ConstraintsConf `json:"constraints"`
 }

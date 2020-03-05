@@ -17,11 +17,26 @@
 package models
 
 
-type Tag struct {
+type ContractSpec struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* 个人用户盖章信息 (Optional) */
+    PersonStamps []PerStamp `json:"personStamps"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* 企业用户盖章信息 (Optional) */
+    CompanyStamps []ComStamp `json:"companyStamps"`
+
+    /* 合同文件（base64） (Optional) */
+    ContractContent *string `json:"contractContent"`
+
+    /* 合同模板文件（base64） (Optional) */
+    TemplateContent *string `json:"templateContent"`
+
+    /* 合同模板文件ID (Optional) */
+    TemplateId *string `json:"templateId"`
+
+    /* 合同标题或名称 (Optional) */
+    ContractTitle *string `json:"contractTitle"`
+
+    /* 证书类型 (Optional) */
+    CaType *string `json:"caType"`
 }

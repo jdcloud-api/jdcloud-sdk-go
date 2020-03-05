@@ -17,11 +17,20 @@
 package models
 
 
-type Tag struct {
+type StampInfo struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* 印章ID (Optional) */
+    StampId string `json:"stampId"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* 印章名称 (Optional) */
+    StampName string `json:"stampName"`
+
+    /* 印章图片（base64） (Optional) */
+    StampContent string `json:"stampContent"`
+
+    /* 印章摘要 (Optional) */
+    StampDigest string `json:"stampDigest"`
+
+    /* 印章上传时间 (Optional) */
+    CreateTime string `json:"createTime"`
 }

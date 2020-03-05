@@ -17,11 +17,14 @@
 package models
 
 
-type Tag struct {
+type AuthConfig struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* 是否开启身份验证；true为开启，false为不开启 (Optional) */
+    AuthEnabled *bool `json:"authEnabled"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* 用户名. 不可为空，支持数字、大小写字母、英文下划线“_”及中划线“-”，且不超过32字符 (Optional) */
+    Username *string `json:"username"`
+
+    /* 密码. 需6到128位，包括大小写字母、数字、和特殊字符（[a-z],[A-Z],[0-9]和[-!@#$%&^*+=_:;,.?]） (Optional) */
+    Password *string `json:"password"`
 }

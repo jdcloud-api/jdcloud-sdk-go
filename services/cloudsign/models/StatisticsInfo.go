@@ -17,11 +17,26 @@
 package models
 
 
-type Tag struct {
+type StatisticsInfo struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* 已签合同数量 (Optional) */
+    ContractNumber int `json:"contractNumber"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* 印章数量 (Optional) */
+    StampNumber int `json:"stampNumber"`
+
+    /* 合同模板数量 (Optional) */
+    TemplateNumber int `json:"templateNumber"`
+
+    /* 是否启用存管 (Optional) */
+    ContractSave bool `json:"contractSave"`
+
+    /* 已用存储空间容量(单位:MB) (Optional) */
+    UsedSpace int `json:"usedSpace"`
+
+    /* 签章系统加密密钥ID (Optional) */
+    KmsKeyId string `json:"kmsKeyId"`
+
+    /* 签章次数统计[24小时，7天，30天] (Optional) */
+    SignStatistic []SignItem `json:"signStatistic"`
 }

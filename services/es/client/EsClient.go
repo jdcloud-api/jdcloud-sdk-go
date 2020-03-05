@@ -18,47 +18,49 @@ package client
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    mps "github.com/jdcloud-api/jdcloud-sdk-go/services/mps/apis"
+    es "github.com/jdcloud-api/jdcloud-sdk-go/services/es/apis"
     "encoding/json"
     "errors"
 )
 
-type MpsClient struct {
+type EsClient struct {
     core.JDCloudClient
 }
 
-func NewMpsClient(credential *core.Credential) *MpsClient {
+func NewEsClient(credential *core.Credential) *EsClient {
     if credential == nil {
         return nil
     }
 
     config := core.NewConfig()
-    config.SetEndpoint("mps.jdcloud-api.com")
+    config.SetEndpoint("es.jdcloud-api.com")
 
-    return &MpsClient{
+    return &EsClient{
         core.JDCloudClient{
             Credential:  *credential,
             Config:      *config,
-            ServiceName: "mps",
-            Revision:    "0.4.1",
+            ServiceName: "es",
+            Revision:    "1.0.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
 
-func (c *MpsClient) SetConfig(config *core.Config) {
+func (c *EsClient) SetConfig(config *core.Config) {
     c.Config = *config
 }
 
-func (c *MpsClient) SetLogger(logger core.Logger) {
+func (c *EsClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-func (c *MpsClient) DisableLogger() {
+func (c *EsClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
 }
 
-/* 创建截图任务，创建成功时返回任务ID。本接口用于截取指定时间点的画面。 */
-func (c *MpsClient) CreateThumbnailTask(request *mps.CreateThumbnailTaskRequest) (*mps.CreateThumbnailTaskResponse, error) {
+/* 删除按配置计费或包年包月已到期的es实例，包年包月未到期不可删除。
+状态为创建中和变配中的不可删除。
+ */
+func (c *EsClient) DeleteInstance(request *es.DeleteInstanceRequest) (*es.DeleteInstanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -67,7 +69,7 @@ func (c *MpsClient) CreateThumbnailTask(request *mps.CreateThumbnailTaskRequest)
         return nil, err
     }
 
-    jdResp := &mps.CreateThumbnailTaskResponse{}
+    jdResp := &es.DeleteInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -77,8 +79,8 @@ func (c *MpsClient) CreateThumbnailTask(request *mps.CreateThumbnailTaskRequest)
     return jdResp, err
 }
 
-/* 查询截图任务，返回满足查询条件的任务列表。 */
-func (c *MpsClient) ListThumbnailTask(request *mps.ListThumbnailTaskRequest) (*mps.ListThumbnailTaskResponse, error) {
+/* 查询es实例列表 */
+func (c *EsClient) DescribeInstances(request *es.DescribeInstancesRequest) (*es.DescribeInstancesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -87,7 +89,7 @@ func (c *MpsClient) ListThumbnailTask(request *mps.ListThumbnailTaskRequest) (*m
         return nil, err
     }
 
-    jdResp := &mps.ListThumbnailTaskResponse{}
+    jdResp := &es.DescribeInstancesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -97,8 +99,10 @@ func (c *MpsClient) ListThumbnailTask(request *mps.ListThumbnailTaskRequest) (*m
     return jdResp, err
 }
 
-/* 删除bucket的图片样式分隔符配置 */
-func (c *MpsClient) DeleteStyleDelimiter(request *mps.DeleteStyleDelimiterRequest) (*mps.DeleteStyleDelimiterResponse, error) {
+/* 变更es实例的配置，实例为running状态才可变更配置，每次只能变更一种且不可与原来的相同。
+实例配置（cpu核数、内存、磁盘容量、节点数量）目前只允许变大
+ */
+func (c *EsClient) ModifyInstanceSpec(request *es.ModifyInstanceSpecRequest) (*es.ModifyInstanceSpecResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -107,7 +111,7 @@ func (c *MpsClient) DeleteStyleDelimiter(request *mps.DeleteStyleDelimiterReques
         return nil, err
     }
 
-    jdResp := &mps.DeleteStyleDelimiterResponse{}
+    jdResp := &es.ModifyInstanceSpecResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -117,8 +121,8 @@ func (c *MpsClient) DeleteStyleDelimiter(request *mps.DeleteStyleDelimiterReques
     return jdResp, err
 }
 
-/* 获取媒体处理通知 */
-func (c *MpsClient) GetNotification(request *mps.GetNotificationRequest) (*mps.GetNotificationResponse, error) {
+/* 关闭自定义字典。同时清除用户已上传的字典 */
+func (c *EsClient) DisableDicts(request *es.DisableDictsRequest) (*es.DisableDictsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -127,7 +131,7 @@ func (c *MpsClient) GetNotification(request *mps.GetNotificationRequest) (*mps.G
         return nil, err
     }
 
-    jdResp := &mps.GetNotificationResponse{}
+    jdResp := &es.DisableDictsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -137,8 +141,8 @@ func (c *MpsClient) GetNotification(request *mps.GetNotificationRequest) (*mps.G
     return jdResp, err
 }
 
-/* 根据任务ID获取截图任务。 */
-func (c *MpsClient) GetThumbnailTask(request *mps.GetThumbnailTaskRequest) (*mps.GetThumbnailTaskResponse, error) {
+/* 创建一个指定配置的es实例 */
+func (c *EsClient) CreateInstance(request *es.CreateInstanceRequest) (*es.CreateInstanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -147,7 +151,7 @@ func (c *MpsClient) GetThumbnailTask(request *mps.GetThumbnailTaskRequest) (*mps
         return nil, err
     }
 
-    jdResp := &mps.GetThumbnailTaskResponse{}
+    jdResp := &es.CreateInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -157,8 +161,8 @@ func (c *MpsClient) GetThumbnailTask(request *mps.GetThumbnailTaskRequest) (*mps
     return jdResp, err
 }
 
-/* 设置媒体处理通知, 在设置Notification时会对endpoint进行校验, 设置时会对endpoint发一条SubscriptionConfirmation(x-jdcloud-message-type头)的通知, 要求把Message内容进行base64编码返回给系统(body)进行校验 */
-func (c *MpsClient) SetNotification(request *mps.SetNotificationRequest) (*mps.SetNotificationResponse, error) {
+/* 查询es实例的详细信息 */
+func (c *EsClient) DescribeInstance(request *es.DescribeInstanceRequest) (*es.DescribeInstanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -167,47 +171,7 @@ func (c *MpsClient) SetNotification(request *mps.SetNotificationRequest) (*mps.S
         return nil, err
     }
 
-    jdResp := &mps.SetNotificationResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 设置图片样式分隔符 */
-func (c *MpsClient) SetStyleDelimiter(request *mps.SetStyleDelimiterRequest) (*mps.SetStyleDelimiterResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &mps.SetStyleDelimiterResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 获取bucket的图片样式分隔符配置 */
-func (c *MpsClient) GetStyleDelimiter(request *mps.GetStyleDelimiterRequest) (*mps.GetStyleDelimiterResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &mps.GetStyleDelimiterResponse{}
+    jdResp := &es.DescribeInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

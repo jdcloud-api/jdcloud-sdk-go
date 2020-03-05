@@ -17,11 +17,11 @@
 package models
 
 
-type Tag struct {
+type SignItem struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* 13位时间戳 (Optional) */
+    Time string `json:"time"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* 签章次数 (Optional) */
+    Value int `json:"value"`
 }

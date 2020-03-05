@@ -17,11 +17,23 @@
 package models
 
 
-type Tag struct {
+type ContractInfo struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* 合同ID (Optional) */
+    ContractId string `json:"contractId"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* 合同标题 (Optional) */
+    ContractTitle string `json:"contractTitle"`
+
+    /* 印章名称(可能有多个印章) (Optional) */
+    StampNames []string `json:"stampNames"`
+
+    /* 合同文件（base64） (Optional) */
+    ContractContent string `json:"contractContent"`
+
+    /* 合同文件摘要 (Optional) */
+    ContractDigest string `json:"contractDigest"`
+
+    /* 合同签章时间 (Optional) */
+    CreateTime string `json:"createTime"`
 }

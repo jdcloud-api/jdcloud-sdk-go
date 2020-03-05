@@ -17,11 +17,14 @@
 package models
 
 
-type Tag struct {
+type InstanceSpecConf struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* es版本 (Optional) */
+    Version []string `json:"version"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* 规格详情 (Optional) */
+    InstanceClassDetail []InstanceClassDetail `json:"instanceClassDetail"`
+
+    /* az的配置 (Optional) */
+    AzConf []AzConf `json:"azConf"`
 }

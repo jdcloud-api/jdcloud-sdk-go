@@ -17,11 +17,14 @@
 package models
 
 
-type Tag struct {
+type InternalEndpoint struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* es http endpoint (Optional) */
+    EsHttpEndpoint string `json:"esHttpEndpoint"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* es tcp endpoint (Optional) */
+    EsTcpEndpoint []string `json:"esTcpEndpoint"`
+
+    /* kibana endpoint (Optional) */
+    KibanaEndpoint string `json:"kibanaEndpoint"`
 }

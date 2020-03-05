@@ -17,11 +17,20 @@
 package models
 
 
-type Tag struct {
+type Snapshot struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* 快照ID (Optional) */
+    SnapshotId string `json:"snapshotId"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* 快照类型，Auto：自动，Manual：人工 (Optional) */
+    Type string `json:"type"`
+
+    /* 创建时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
+    CreateTime string `json:"createTime"`
+
+    /* 备份的索引 (Optional) */
+    Indices []string `json:"indices"`
+
+    /* 快照状态，Available：可用，Unavailable：不可用，Creating：创建中 (Optional) */
+    Status string `json:"status"`
 }
