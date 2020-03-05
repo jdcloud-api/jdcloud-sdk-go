@@ -19,59 +19,48 @@ package models
 
 type WebRuleSpec struct {
 
+    /* 高防 IP (Optional) */
+    ServiceIp *string `json:"serviceIp"`
+
     /* 子域名  */
     Domain string `json:"domain"`
 
     /* 协议: http, https 至少一个为 true  */
     Protocol *WebRuleProtocol `json:"protocol"`
 
-    /* HTTP协议的端口号, 如80, 81; 如果 protocol.http 为 true, 至少配置一个端口, 最多添加 5 个 (Optional) */
+    /* HTTP 协议的端口号, 如80, 81; 如果 protocol.http 为 true, 至少配置一个端口, 最多添加 5 个 (Optional) */
     Port []int `json:"port"`
 
-    /* HTTPS协议的端口号，如443, 8443; 如果 protocol.https 为 true, 至少配置一个端口, 最多添加 5 个 (Optional) */
+    /* HTTPS 协议的端口号, 如443, 8443; 如果 protocol.https 为 true, 至少配置一个端口, 最多添加 5 个 (Optional) */
     HttpsPort []int `json:"httpsPort"`
 
-    /* 回源类型：A或者CNAME  */
+    /* 回源类型：A 或者 CNAME  */
     OriginType string `json:"originType"`
 
-    /* originType 为 A 时，需要设置该字段 (Optional) */
+    /* originType 为 A 时, 需要设置该字段 (Optional) */
     OriginAddr []OriginAddrItem `json:"originAddr"`
 
-    /* 备用的回源地址列表，可以配置为一个域名或者多个 ip 地址 (Optional) */
+    /* 备用的回源地址列表, 可以配置为一个域名或者多个 ip 地址 (Optional) */
     OnlineAddr []string `json:"onlineAddr"`
 
-    /* 回源域名,originType为CNAME时需要指定该字段 (Optional) */
+    /* 回源域名, originType 为 CNAME 时需要指定该字段 (Optional) */
     OriginDomain *string `json:"originDomain"`
 
-    /* 转发规则：wrr->带权重的轮询，rr->不带权重的轮询  */
+    /* 转发规则. <br>- wrr: 带权重的轮询<br>- rr:  不带权重的轮询<br>- sh:  源地址hash  */
     Algorithm string `json:"algorithm"`
 
-    /* 是否开启 https 强制跳转，当 protocol 为 HTTP_HTTPS 时可以配置该属性
-  - 0 不开启强制跳转
-  - 1 开启强制跳转
- (Optional) */
+    /* 是否开启 HTTPS 强制跳转, protocol.http 和 protocol.https 都为 true 时此参数生效. <br>- 0: 不开启强制跳转. <br>- 1: 开启强制跳转 (Optional) */
     ForceJump *int `json:"forceJump"`
 
-    /* 是否为自定义端口号，0为默认 1为自定义 (Optional) */
+    /* 是否为自定义端口号. 0: 默认<br>- 1: 自定义 (Optional) */
     CustomPortStatus *int `json:"customPortStatus"`
 
-    /* 是否开启http回源, 当勾选HTTPS时可以配置该属性
-  - 0 不开启
-  - 1 开启
- (Optional) */
+    /* 是否开启 HTTP 回源, protocol.https 为 true 时此参数生效. <br>- 0: 不开启. <br>- 1: 开启 (Optional) */
     HttpOrigin *int `json:"httpOrigin"`
 
-    /* 是否开启 WebSocket, 0 为不开启, 1 为开启  */
+    /* 是否开启 WebSocket.<br>- 0: 不开启<br>- 1: 开启  */
     WebSocketStatus int `json:"webSocketStatus"`
 
-    /* 证书内容 (Optional) */
-    HttpsCertContent *string `json:"httpsCertContent"`
-
-    /* 证书私钥 (Optional) */
-    HttpsRsaKey *string `json:"httpsRsaKey"`
-
-    /* 证书 Id
-  - 如果传 certId, 请确认已经上传了相应的证书
-  - certId 缺省时网站规则将使用 httpsCertContent, httpsRsaKey 对应的证书 (Optional) */
-    CertId *string `json:"certId"`
+    /* 按区域分流回源配置 (Optional) */
+    GeoRsRoute []GeoRsRoute `json:"geoRsRoute"`
 }

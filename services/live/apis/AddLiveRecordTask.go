@@ -41,24 +41,24 @@ type AddLiveRecordTaskRequest struct {
   */
     RecordTimes []live.RecordTime `json:"recordTimes"`
 
-    /* 存储桶 (Optional) */
-    SaveBucket *string `json:"saveBucket"`
+    /* 存储桶  */
+    SaveBucket string `json:"saveBucket"`
 
-    /* 存储地址 (Optional) */
-    SaveEndpoint *string `json:"saveEndpoint"`
+    /* 存储地址  */
+    SaveEndpoint string `json:"saveEndpoint"`
 
     /* 录制文件类型:
-- 取值: ts,flv,mp4 (多种类型之前用;隔开)
+- 取值: ts,flv,mp4 (多种类型之间用;隔开)
 - 不区分大小写
   */
     RecordFileType string `json:"recordFileType"`
 
-    /* 录制文件存储路径:
-- 默认地址: record/{Date}/{ServerId}/{AppName}/{StreamName}/{StartTime}_{EndTime}
+    /* 录制文件存储Object:
+- 默认: /record/{Date}/{ServerId}/{AppName}/{StreamName}/{StartTime}_{EndTime}
  (Optional) */
     SaveObject *string `json:"saveObject"`
 
-    /* 打点录制任务外键
+    /* 打点录制任务外部id(可传入您的id,在回调时会在该字段返回)
  (Optional) */
     TaskExternalId *string `json:"taskExternalId"`
 }
@@ -72,8 +72,10 @@ type AddLiveRecordTaskRequest struct {
 - 多段时间跨度最小不能小于10s
 - 多段时间跨度最大不能超过8小时
  (Required)
+ * param saveBucket: 存储桶 (Required)
+ * param saveEndpoint: 存储地址 (Required)
  * param recordFileType: 录制文件类型:
-- 取值: ts,flv,mp4 (多种类型之前用;隔开)
+- 取值: ts,flv,mp4 (多种类型之间用;隔开)
 - 不区分大小写
  (Required)
  *
@@ -84,6 +86,8 @@ func NewAddLiveRecordTaskRequest(
     appName string,
     streamName string,
     recordTimes []live.RecordTime,
+    saveBucket string,
+    saveEndpoint string,
     recordFileType string,
 ) *AddLiveRecordTaskRequest {
 
@@ -98,6 +102,8 @@ func NewAddLiveRecordTaskRequest(
         AppName: appName,
         StreamName: streamName,
         RecordTimes: recordTimes,
+        SaveBucket: saveBucket,
+        SaveEndpoint: saveEndpoint,
         RecordFileType: recordFileType,
 	}
 }
@@ -111,16 +117,16 @@ func NewAddLiveRecordTaskRequest(
 - 多段时间跨度最小不能小于10s
 - 多段时间跨度最大不能超过8小时
  (Required)
- * param saveBucket: 存储桶 (Optional)
- * param saveEndpoint: 存储地址 (Optional)
+ * param saveBucket: 存储桶 (Required)
+ * param saveEndpoint: 存储地址 (Required)
  * param recordFileType: 录制文件类型:
-- 取值: ts,flv,mp4 (多种类型之前用;隔开)
+- 取值: ts,flv,mp4 (多种类型之间用;隔开)
 - 不区分大小写
  (Required)
- * param saveObject: 录制文件存储路径:
-- 默认地址: record/{Date}/{ServerId}/{AppName}/{StreamName}/{StartTime}_{EndTime}
+ * param saveObject: 录制文件存储Object:
+- 默认: /record/{Date}/{ServerId}/{AppName}/{StreamName}/{StartTime}_{EndTime}
  (Optional)
- * param taskExternalId: 打点录制任务外键
+ * param taskExternalId: 打点录制任务外部id(可传入您的id,在回调时会在该字段返回)
  (Optional)
  */
 func NewAddLiveRecordTaskRequestWithAllParams(
@@ -128,8 +134,8 @@ func NewAddLiveRecordTaskRequestWithAllParams(
     appName string,
     streamName string,
     recordTimes []live.RecordTime,
-    saveBucket *string,
-    saveEndpoint *string,
+    saveBucket string,
+    saveEndpoint string,
     recordFileType string,
     saveObject *string,
     taskExternalId *string,
@@ -191,32 +197,32 @@ func (r *AddLiveRecordTaskRequest) SetRecordTimes(recordTimes []live.RecordTime)
     r.RecordTimes = recordTimes
 }
 
-/* param saveBucket: 存储桶(Optional) */
+/* param saveBucket: 存储桶(Required) */
 func (r *AddLiveRecordTaskRequest) SetSaveBucket(saveBucket string) {
-    r.SaveBucket = &saveBucket
+    r.SaveBucket = saveBucket
 }
 
-/* param saveEndpoint: 存储地址(Optional) */
+/* param saveEndpoint: 存储地址(Required) */
 func (r *AddLiveRecordTaskRequest) SetSaveEndpoint(saveEndpoint string) {
-    r.SaveEndpoint = &saveEndpoint
+    r.SaveEndpoint = saveEndpoint
 }
 
 /* param recordFileType: 录制文件类型:
-- 取值: ts,flv,mp4 (多种类型之前用;隔开)
+- 取值: ts,flv,mp4 (多种类型之间用;隔开)
 - 不区分大小写
 (Required) */
 func (r *AddLiveRecordTaskRequest) SetRecordFileType(recordFileType string) {
     r.RecordFileType = recordFileType
 }
 
-/* param saveObject: 录制文件存储路径:
-- 默认地址: record/{Date}/{ServerId}/{AppName}/{StreamName}/{StartTime}_{EndTime}
+/* param saveObject: 录制文件存储Object:
+- 默认: /record/{Date}/{ServerId}/{AppName}/{StreamName}/{StartTime}_{EndTime}
 (Optional) */
 func (r *AddLiveRecordTaskRequest) SetSaveObject(saveObject string) {
     r.SaveObject = &saveObject
 }
 
-/* param taskExternalId: 打点录制任务外键
+/* param taskExternalId: 打点录制任务外部id(可传入您的id,在回调时会在该字段返回)
 (Optional) */
 func (r *AddLiveRecordTaskRequest) SetTaskExternalId(taskExternalId string) {
     r.TaskExternalId = &taskExternalId

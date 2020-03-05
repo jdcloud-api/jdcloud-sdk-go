@@ -34,33 +34,29 @@ type DescribeCCAttackLogDetailsRequest struct {
     /* 分页大小, 默认为10, 取值范围[10, 100] (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* 开始时间, 只能查询最近 60 天以内的数据, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ  */
-    StartTime string `json:"startTime"`
+    /* 开始时间, 只能查询最近 90 天以内的数据, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ, attackId 为空时必传 (Optional) */
+    StartTime *string `json:"startTime"`
 
-    /* 查询的结束时间, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ  */
-    EndTime string `json:"endTime"`
+    /* 查询的结束时间, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Optional) */
+    EndTime *string `json:"endTime"`
 
     /* 高防实例 ID (Optional) */
     InstanceId *string `json:"instanceId"`
 
-    /* 查询的子域名，只有选中某一个实例后才能多选子域名 (Optional) */
+    /* 查询的子域名, 只有选中某一个实例后才能多选子域名 (Optional) */
     SubDomain []string `json:"subDomain"`
 
-    /* CC 攻击记录Id (Optional) */
+    /* CC 攻击记录 Id, 不为空时忽略 startTime, endTime (Optional) */
     AttackId *string `json:"attackId"`
 }
 
 /*
  * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
- * param startTime: 开始时间, 只能查询最近 60 天以内的数据, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Required)
- * param endTime: 查询的结束时间, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeCCAttackLogDetailsRequest(
     regionId string,
-    startTime string,
-    endTime string,
 ) *DescribeCCAttackLogDetailsRequest {
 
 	return &DescribeCCAttackLogDetailsRequest{
@@ -71,8 +67,6 @@ func NewDescribeCCAttackLogDetailsRequest(
 			Version: "v1",
 		},
         RegionId: regionId,
-        StartTime: startTime,
-        EndTime: endTime,
 	}
 }
 
@@ -80,18 +74,18 @@ func NewDescribeCCAttackLogDetailsRequest(
  * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param pageNumber: 页码, 默认为1 (Optional)
  * param pageSize: 分页大小, 默认为10, 取值范围[10, 100] (Optional)
- * param startTime: 开始时间, 只能查询最近 60 天以内的数据, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Required)
- * param endTime: 查询的结束时间, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Required)
+ * param startTime: 开始时间, 只能查询最近 90 天以内的数据, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ, attackId 为空时必传 (Optional)
+ * param endTime: 查询的结束时间, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Optional)
  * param instanceId: 高防实例 ID (Optional)
- * param subDomain: 查询的子域名，只有选中某一个实例后才能多选子域名 (Optional)
- * param attackId: CC 攻击记录Id (Optional)
+ * param subDomain: 查询的子域名, 只有选中某一个实例后才能多选子域名 (Optional)
+ * param attackId: CC 攻击记录 Id, 不为空时忽略 startTime, endTime (Optional)
  */
 func NewDescribeCCAttackLogDetailsRequestWithAllParams(
     regionId string,
     pageNumber *int,
     pageSize *int,
-    startTime string,
-    endTime string,
+    startTime *string,
+    endTime *string,
     instanceId *string,
     subDomain []string,
     attackId *string,
@@ -143,14 +137,14 @@ func (r *DescribeCCAttackLogDetailsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
-/* param startTime: 开始时间, 只能查询最近 60 天以内的数据, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ(Required) */
+/* param startTime: 开始时间, 只能查询最近 90 天以内的数据, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ, attackId 为空时必传(Optional) */
 func (r *DescribeCCAttackLogDetailsRequest) SetStartTime(startTime string) {
-    r.StartTime = startTime
+    r.StartTime = &startTime
 }
 
-/* param endTime: 查询的结束时间, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ(Required) */
+/* param endTime: 查询的结束时间, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ(Optional) */
 func (r *DescribeCCAttackLogDetailsRequest) SetEndTime(endTime string) {
-    r.EndTime = endTime
+    r.EndTime = &endTime
 }
 
 /* param instanceId: 高防实例 ID(Optional) */
@@ -158,12 +152,12 @@ func (r *DescribeCCAttackLogDetailsRequest) SetInstanceId(instanceId string) {
     r.InstanceId = &instanceId
 }
 
-/* param subDomain: 查询的子域名，只有选中某一个实例后才能多选子域名(Optional) */
+/* param subDomain: 查询的子域名, 只有选中某一个实例后才能多选子域名(Optional) */
 func (r *DescribeCCAttackLogDetailsRequest) SetSubDomain(subDomain []string) {
     r.SubDomain = subDomain
 }
 
-/* param attackId: CC 攻击记录Id(Optional) */
+/* param attackId: CC 攻击记录 Id, 不为空时忽略 startTime, endTime(Optional) */
 func (r *DescribeCCAttackLogDetailsRequest) SetAttackId(attackId string) {
     r.AttackId = &attackId
 }

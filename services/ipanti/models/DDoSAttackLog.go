@@ -22,7 +22,7 @@ type DDoSAttackLog struct {
     /* 攻击流量大小 (Optional) */
     AttackTraffic float64 `json:"attackTraffic"`
 
-    /* 是否触发黑洞，0否 1是 (Optional) */
+    /* 是否触发黑洞, 0否 1是 (Optional) */
     BlackHole int `json:"blackHole"`
 
     /* 攻击开始时间 (Optional) */
@@ -31,7 +31,7 @@ type DDoSAttackLog struct {
     /* 攻击结束时间 (Optional) */
     EndTime string `json:"endTime"`
 
-    /* 流量单位，bps、Kbps、Mbps、Gbps (Optional) */
+    /* 流量单位, bps、Kbps、Mbps、Gbps (Optional) */
     Unit string `json:"unit"`
 
     /* 高防实例id (Optional) */

@@ -19,17 +19,16 @@ package models
 
 type ForwardRuleSpec struct {
 
-    /* 协议: TCP或者UDP  */
+    /* 协议: TCP 或者 UDP  */
     Protocol string `json:"protocol"`
+
+    /* 高防 IP (Optional) */
+    ServiceIp *string `json:"serviceIp"`
 
     /* 端口号, 取值范围[1, 65535]  */
     Port int `json:"port"`
 
-    /* 转发规则
-- wrr 带权重的轮询
-- rr  不带权重的轮询
-- sh  源地址hash
-  */
+    /* 转发规则. <br>- wrr: 带权重的轮询<br>- rr:  不带权重的轮询<br>- sh:  源地址hash  */
     Algorithm string `json:"algorithm"`
 
     /* 回源类型: A 或者 CNAME  */

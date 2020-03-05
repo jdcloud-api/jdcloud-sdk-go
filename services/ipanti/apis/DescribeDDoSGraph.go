@@ -27,11 +27,11 @@ type DescribeDDoSGraphRequest struct {
     /* 区域 ID, 高防不区分区域, 传 cn-north-1 即可  */
     RegionId string `json:"regionId"`
 
-    /* 开始时间, 最多查最近 60 天, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ  */
+    /* 开始时间, 只能查询最近 90 天以内的数据, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ  */
     StartTime string `json:"startTime"`
 
-    /* 查询的结束时间, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ  */
-    EndTime string `json:"endTime"`
+    /* 查询的结束时间, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Optional) */
+    EndTime *string `json:"endTime"`
 
     /* 高防实例 Id 列表 (Optional) */
     InstanceId []string `json:"instanceId"`
@@ -39,15 +39,13 @@ type DescribeDDoSGraphRequest struct {
 
 /*
  * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
- * param startTime: 开始时间, 最多查最近 60 天, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Required)
- * param endTime: 查询的结束时间, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Required)
+ * param startTime: 开始时间, 只能查询最近 90 天以内的数据, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeDDoSGraphRequest(
     regionId string,
     startTime string,
-    endTime string,
 ) *DescribeDDoSGraphRequest {
 
 	return &DescribeDDoSGraphRequest{
@@ -59,20 +57,19 @@ func NewDescribeDDoSGraphRequest(
 		},
         RegionId: regionId,
         StartTime: startTime,
-        EndTime: endTime,
 	}
 }
 
 /*
  * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
- * param startTime: 开始时间, 最多查最近 60 天, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Required)
- * param endTime: 查询的结束时间, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Required)
+ * param startTime: 开始时间, 只能查询最近 90 天以内的数据, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Required)
+ * param endTime: 查询的结束时间, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Optional)
  * param instanceId: 高防实例 Id 列表 (Optional)
  */
 func NewDescribeDDoSGraphRequestWithAllParams(
     regionId string,
     startTime string,
-    endTime string,
+    endTime *string,
     instanceId []string,
 ) *DescribeDDoSGraphRequest {
 
@@ -108,14 +105,14 @@ func (r *DescribeDDoSGraphRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param startTime: 开始时间, 最多查最近 60 天, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ(Required) */
+/* param startTime: 开始时间, 只能查询最近 90 天以内的数据, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ(Required) */
 func (r *DescribeDDoSGraphRequest) SetStartTime(startTime string) {
     r.StartTime = startTime
 }
 
-/* param endTime: 查询的结束时间, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ(Required) */
+/* param endTime: 查询的结束时间, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ(Optional) */
 func (r *DescribeDDoSGraphRequest) SetEndTime(endTime string) {
-    r.EndTime = endTime
+    r.EndTime = &endTime
 }
 
 /* param instanceId: 高防实例 Id 列表(Optional) */

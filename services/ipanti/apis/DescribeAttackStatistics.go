@@ -27,11 +27,11 @@ type DescribeAttackStatisticsRequest struct {
     /* 区域 ID, 高防不区分区域, 传 cn-north-1 即可  */
     RegionId string `json:"regionId"`
 
-    /* 开始时间, 只能查询最近 60 天以内的数据, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ  */
+    /* 开始时间, 只能查询最近 90 天以内的数据, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ  */
     StartTime string `json:"startTime"`
 
-    /* 查询的结束时间, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ  */
-    EndTime string `json:"endTime"`
+    /* 查询的结束时间, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Optional) */
+    EndTime *string `json:"endTime"`
 
     /* 高防实例 ID (Optional) */
     InstanceId []string `json:"instanceId"`
@@ -42,8 +42,7 @@ type DescribeAttackStatisticsRequest struct {
 
 /*
  * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
- * param startTime: 开始时间, 只能查询最近 60 天以内的数据, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
- * param endTime: 查询的结束时间, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
+ * param startTime: 开始时间, 只能查询最近 90 天以内的数据, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Required)
  * param type_: 攻击类型, 0 为 DDoS, 1 为 CC (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -51,7 +50,6 @@ type DescribeAttackStatisticsRequest struct {
 func NewDescribeAttackStatisticsRequest(
     regionId string,
     startTime string,
-    endTime string,
     type_ int,
 ) *DescribeAttackStatisticsRequest {
 
@@ -64,22 +62,21 @@ func NewDescribeAttackStatisticsRequest(
 		},
         RegionId: regionId,
         StartTime: startTime,
-        EndTime: endTime,
         Type: type_,
 	}
 }
 
 /*
  * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
- * param startTime: 开始时间, 只能查询最近 60 天以内的数据, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
- * param endTime: 查询的结束时间, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
+ * param startTime: 开始时间, 只能查询最近 90 天以内的数据, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Required)
+ * param endTime: 查询的结束时间, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Optional)
  * param instanceId: 高防实例 ID (Optional)
  * param type_: 攻击类型, 0 为 DDoS, 1 为 CC (Required)
  */
 func NewDescribeAttackStatisticsRequestWithAllParams(
     regionId string,
     startTime string,
-    endTime string,
+    endTime *string,
     instanceId []string,
     type_ int,
 ) *DescribeAttackStatisticsRequest {
@@ -117,14 +114,14 @@ func (r *DescribeAttackStatisticsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param startTime: 开始时间, 只能查询最近 60 天以内的数据, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ(Required) */
+/* param startTime: 开始时间, 只能查询最近 90 天以内的数据, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ(Required) */
 func (r *DescribeAttackStatisticsRequest) SetStartTime(startTime string) {
     r.StartTime = startTime
 }
 
-/* param endTime: 查询的结束时间, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ(Required) */
+/* param endTime: 查询的结束时间, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ(Optional) */
 func (r *DescribeAttackStatisticsRequest) SetEndTime(endTime string) {
-    r.EndTime = endTime
+    r.EndTime = &endTime
 }
 
 /* param instanceId: 高防实例 ID(Optional) */

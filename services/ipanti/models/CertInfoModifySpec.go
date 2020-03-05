@@ -19,10 +19,7 @@ package models
 
 type CertInfoModifySpec struct {
 
-    /* 证书 Id
-- 如果传 certId, 请确认已经上传了相应的证书
-- certId 缺省时网站规则将使用 httpsCertContent, httpsRsaKey 对应的证书
- (Optional) */
+    /* 证书 Id<br>- 如果传 certId, 请确认已经上传了相应的证书<br>- certId 缺省时网站规则将使用 httpsCertContent, httpsRsaKey 对应的证书 (Optional) */
     CertId *string `json:"certId"`
 
     /* 证书内容 (Optional) */

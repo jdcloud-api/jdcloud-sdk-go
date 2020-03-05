@@ -28,42 +28,22 @@ type WebBlackListRule struct {
     /* 匹配模式:<br>- 0: uri<br>- 1: ip<br>- 2: cookie<br>- 3: geo<br>- 4: header (Optional) */
     Mode int `json:"mode"`
 
-    /* 匹配 key.
-- mode 为 cookie 时, 为 cookie 的 name
-- mode 为 header 时, 为 header 的 key
- (Optional) */
+    /* 匹配 key. <br>- mode 为 cookie 时, 为 cookie 的 name<br>- mode 为 header 时, 为 header 的 key (Optional) */
     Key string `json:"key"`
 
-    /* 匹配 value.
-- mode 为 uri 时, 为要匹配的 uri
-- mode 为 ip 时, 为引用的 ip 黑白名单 Id
-- mode 为 cookie 时, 为 cookie 的 value
-- mode 为 header 时, 为 header 的 value
- (Optional) */
+    /* 匹配 value. <br>- mode 为 uri 时, 为要匹配的 uri<br>- mode 为 ip 时, 为引用的 ip 黑白名单 Id<br>- mode 为 cookie 时, 为 cookie 的 value<br>- mode 为 header 时, 为 header 的 value (Optional) */
     Value string `json:"value"`
 
-    /* 匹配规则. mode 为 uri, cookie 和 header 时必传. 包含以下匹配规则
-- 0: 完全匹配
-- 1: 前缀匹配
-- 2: 包含
-- 3: 正则匹配
-- 4: 后缀匹配
- (Optional) */
+    /* 匹配规则, mode 为 uri, cookie 和 header 时有效. 包含以下匹配规则: <br>- 0: 完全匹配<br>- 1: 前缀匹配<br>- 2: 包含<br>- 3: 正则匹配<br>- 4: 后缀匹配 (Optional) */
     Pattern int `json:"pattern"`
 
-    /* 命中后处理动作.
-- 0: 放行
-- 1: CC 防护
- (Optional) */
+    /* 命中后处理动作. <br>- 0: 放行<br>- 1: CC 防护 (Optional) */
     Action int `json:"action"`
 
     /* 命中后处理值, action 为 2 时 actionValue 为跳转路径 (Optional) */
     ActionValue string `json:"actionValue"`
 
-    /* 规则状态.
-- 0: 关闭
-- 1: 开启
- (Optional) */
+    /* 规则状态. <br>- 0: 关闭<br>- 1: 开启 (Optional) */
     Status int `json:"status"`
 
     /* geo 黑名单地域列表, mode 不为 geo 或未设置时此字段为空 (Optional) */

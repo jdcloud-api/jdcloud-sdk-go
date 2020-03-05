@@ -19,29 +19,28 @@ package models
 
 type ForwardRule struct {
 
-    /* 规则id (Optional) */
+    /* 规则 Id (Optional) */
     Id string `json:"id"`
 
-    /* 实例id (Optional) */
+    /* 实例 Id (Optional) */
     InstanceId string `json:"instanceId"`
 
-    /* TCP或UDP (Optional) */
+    /* TCP 或 UDP (Optional) */
     Protocol string `json:"protocol"`
 
-    /* 规则的cname (Optional) */
+    /* 规则的 CNAME (Optional) */
     Cname string `json:"cname"`
 
-    /* 回源类型: ip或者domain (Optional) */
+    /* 回源类型: ip 或者 domain (Optional) */
     OriginType string `json:"originType"`
+
+    /* 高防 IP (Optional) */
+    ServiceIp string `json:"serviceIp"`
 
     /* 端口号 (Optional) */
     Port int `json:"port"`
 
-    /* 转发规则
-- wrr 带权重的轮询
-- rr  不带权重的轮询
-- sh  源地址hash
- (Optional) */
+    /* 转发规则. <br>- wrr: 带权重的轮询<br>- rr:  不带权重的轮询<br>- sh:  源地址hash (Optional) */
     Algorithm string `json:"algorithm"`
 
     /*  (Optional) */
@@ -56,6 +55,6 @@ type ForwardRule struct {
     /* 回源端口号 (Optional) */
     OriginPort int `json:"originPort"`
 
-    /* 0防御状态，1回源状态 (Optional) */
+    /* 0: 防御状态<br>1: 回源状态 (Optional) */
     Status int `json:"status"`
 }

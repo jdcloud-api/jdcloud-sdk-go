@@ -40,7 +40,7 @@ func NewLiveClient(credential *core.Credential) *LiveClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "live",
-            Revision:    "1.0.15",
+            Revision:    "1.0.17",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -196,6 +196,32 @@ func (c *LiveClient) OpenLiveP2p(request *live.OpenLiveP2pRequest) (*live.OpenLi
     }
 
     jdResp := &live.OpenLiveP2pResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询直播计费账单用量数据
+允许通过条件过滤查询，支持的过滤字段如下：
+  - startTime[eq]  账单开始时间
+  - endTime[eq]    账单结束时间
+  - billType[eq]   账单计费类型
+  - userPin[like]  用户PIN
+ */
+func (c *LiveClient) DescribeLiveBillData(request *live.DescribeLiveBillDataRequest) (*live.DescribeLiveBillDataResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DescribeLiveBillDataResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
