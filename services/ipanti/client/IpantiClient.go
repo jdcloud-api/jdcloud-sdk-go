@@ -40,7 +40,7 @@ func NewIpantiClient(credential *core.Credential) *IpantiClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "ipanti",
-            Revision:    "1.4.9",
+            Revision:    "1.6.12",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,6 +51,10 @@ func (c *IpantiClient) SetConfig(config *core.Config) {
 
 func (c *IpantiClient) SetLogger(logger core.Logger) {
     c.Logger = logger
+}
+
+func (c *IpantiClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
 }
 
 /* 开启转发规则的黑名单规则 */
@@ -1075,6 +1079,26 @@ func (c *IpantiClient) DisableBlackListRuleOfWebRule(request *ipanti.DisableBlac
     return jdResp, err
 }
 
+/* 网站类规则绑定 SSL 证书 */
+func (c *IpantiClient) BindCert(request *ipanti.BindCertRequest) (*ipanti.BindCertResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.BindCertResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 网站类规则切换成回源状态 */
 func (c *IpantiClient) SwitchWebRuleOrigin(request *ipanti.SwitchWebRuleOriginRequest) (*ipanti.SwitchWebRuleOriginResponse, error) {
     if request == nil {
@@ -1495,6 +1519,26 @@ func (c *IpantiClient) ModifyCCProtectionConfigOfWebRule(request *ipanti.ModifyC
     return jdResp, err
 }
 
+/* 查询网站类转发规则按地域回源配置 geoRsRoute 可设置的区域 */
+func (c *IpantiClient) DescribeWebRuleRSGeoAreas(request *ipanti.DescribeWebRuleRSGeoAreasRequest) (*ipanti.DescribeWebRuleRSGeoAreasResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DescribeWebRuleRSGeoAreasResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 关闭转发规则的白名单规则 */
 func (c *IpantiClient) DisableWhiteListRuleOfForwardRule(request *ipanti.DisableWhiteListRuleOfForwardRuleRequest) (*ipanti.DisableWhiteListRuleOfForwardRuleResponse, error) {
     if request == nil {
@@ -1775,7 +1819,7 @@ func (c *IpantiClient) DescribeInstance(request *ipanti.DescribeInstanceRequest)
     return jdResp, err
 }
 
-/* 开启网站类规则 CC 观察者模式, 观察模式下，CC 防护只告警不防御。支持批量操作, 批量操作时 webRuleId 传多个, 以 ',' 分隔, 返回 result.code 为 1 表示操作成功, 为 0 时可能全部失败, 也可能部分失败 */
+/* 开启网站类规则 CC 观察者模式, 观察模式下, CC 防护只告警不防御。支持批量操作, 批量操作时 webRuleId 传多个, 以 ',' 分隔, 返回 result.code 为 1 表示操作成功, 为 0 时可能全部失败, 也可能部分失败 */
 func (c *IpantiClient) EnableWebRuleCCObserverMode(request *ipanti.EnableWebRuleCCObserverModeRequest) (*ipanti.EnableWebRuleCCObserverModeResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")

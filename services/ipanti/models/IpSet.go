@@ -24,7 +24,4 @@ type IpSet struct {
 
     /* IP 黑白名单的名称 (Optional) */
     Name string `json:"name"`
-
-    /* IP 或 IP 段的数组 (Optional) */
-    Ip []string `json:"ip"`
 }

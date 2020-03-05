@@ -25,14 +25,14 @@ type DescribeLiveStatisticGroupByStreamRequest struct {
 
     core.JDCloudRequest
 
-    /* 播放域名  */
-    DomainName string `json:"domainName"`
+    /* 播放域名 (Optional) */
+    DomainName *string `json:"domainName"`
 
-    /* 应用名称  */
-    AppName string `json:"appName"`
+    /* 应用名称 (Optional) */
+    AppName *string `json:"appName"`
 
-    /* 流名称  */
-    StreamName string `json:"streamName"`
+    /* 流名称 (Optional) */
+    StreamName *string `json:"streamName"`
 
     /* 运营商
  (Optional) */
@@ -63,9 +63,6 @@ type DescribeLiveStatisticGroupByStreamRequest struct {
 }
 
 /*
- * param domainName: 播放域名 (Required)
- * param appName: 应用名称 (Required)
- * param streamName: 流名称 (Required)
  * param startTime: 起始时间
 - UTC时间
   格式:yyyy-MM-dd'T'HH:mm:ss'Z'
@@ -75,9 +72,6 @@ type DescribeLiveStatisticGroupByStreamRequest struct {
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeLiveStatisticGroupByStreamRequest(
-    domainName string,
-    appName string,
-    streamName string,
     startTime string,
 ) *DescribeLiveStatisticGroupByStreamRequest {
 
@@ -88,17 +82,14 @@ func NewDescribeLiveStatisticGroupByStreamRequest(
 			Header:  nil,
 			Version: "v1",
 		},
-        DomainName: domainName,
-        AppName: appName,
-        StreamName: streamName,
         StartTime: startTime,
 	}
 }
 
 /*
- * param domainName: 播放域名 (Required)
- * param appName: 应用名称 (Required)
- * param streamName: 流名称 (Required)
+ * param domainName: 播放域名 (Optional)
+ * param appName: 应用名称 (Optional)
+ * param streamName: 流名称 (Optional)
  * param ispName: 运营商
  (Optional)
  * param locationName: 查询的区域，如beijing,shanghai。多个用逗号分隔
@@ -118,9 +109,9 @@ func NewDescribeLiveStatisticGroupByStreamRequest(
  (Optional)
  */
 func NewDescribeLiveStatisticGroupByStreamRequestWithAllParams(
-    domainName string,
-    appName string,
-    streamName string,
+    domainName *string,
+    appName *string,
+    streamName *string,
     ispName *string,
     locationName *string,
     period *string,
@@ -159,19 +150,19 @@ func NewDescribeLiveStatisticGroupByStreamRequestWithoutParam() *DescribeLiveSta
     }
 }
 
-/* param domainName: 播放域名(Required) */
+/* param domainName: 播放域名(Optional) */
 func (r *DescribeLiveStatisticGroupByStreamRequest) SetDomainName(domainName string) {
-    r.DomainName = domainName
+    r.DomainName = &domainName
 }
 
-/* param appName: 应用名称(Required) */
+/* param appName: 应用名称(Optional) */
 func (r *DescribeLiveStatisticGroupByStreamRequest) SetAppName(appName string) {
-    r.AppName = appName
+    r.AppName = &appName
 }
 
-/* param streamName: 流名称(Required) */
+/* param streamName: 流名称(Optional) */
 func (r *DescribeLiveStatisticGroupByStreamRequest) SetStreamName(streamName string) {
-    r.StreamName = streamName
+    r.StreamName = &streamName
 }
 
 /* param ispName: 运营商

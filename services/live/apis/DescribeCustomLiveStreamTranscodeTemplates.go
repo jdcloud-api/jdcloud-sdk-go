@@ -36,7 +36,7 @@ type DescribeCustomLiveStreamTranscodeTemplatesRequest struct {
     PageSize *int `json:"pageSize"`
 
     /* 转码模板查询过滤条件:
-  - name:   template 录制模板自定义名称
+  - name:   template 转码模板自定义名称
   - value:  如果参数为空，则查询全部
   - 如果为空,则表示查询该用下所有自定义的转码模板
  (Optional) */
@@ -68,7 +68,7 @@ func NewDescribeCustomLiveStreamTranscodeTemplatesRequest(
 - 取值范围 [10, 100]
  (Optional)
  * param filters: 转码模板查询过滤条件:
-  - name:   template 录制模板自定义名称
+  - name:   template 转码模板自定义名称
   - value:  如果参数为空，则查询全部
   - 如果为空,则表示查询该用下所有自定义的转码模板
  (Optional)
@@ -120,7 +120,7 @@ func (r *DescribeCustomLiveStreamTranscodeTemplatesRequest) SetPageSize(pageSize
 }
 
 /* param filters: 转码模板查询过滤条件:
-  - name:   template 录制模板自定义名称
+  - name:   template 转码模板自定义名称
   - value:  如果参数为空，则查询全部
   - 如果为空,则表示查询该用下所有自定义的转码模板
 (Optional) */

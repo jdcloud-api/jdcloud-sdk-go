@@ -34,7 +34,7 @@ type DescribeInstancesRequest struct {
     /* 分页大小, 默认为 10, 取值范围[10, 100], 0 表示全量 (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* 实例名称，可模糊匹配 (Optional) */
+    /* 实例名称, 可模糊匹配 (Optional) */
     Name *string `json:"name"`
 }
 
@@ -62,7 +62,7 @@ func NewDescribeInstancesRequest(
  * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param pageNumber: 页码, 默认为 1 (Optional)
  * param pageSize: 分页大小, 默认为 10, 取值范围[10, 100], 0 表示全量 (Optional)
- * param name: 实例名称，可模糊匹配 (Optional)
+ * param name: 实例名称, 可模糊匹配 (Optional)
  */
 func NewDescribeInstancesRequestWithAllParams(
     regionId string,
@@ -113,7 +113,7 @@ func (r *DescribeInstancesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
-/* param name: 实例名称，可模糊匹配(Optional) */
+/* param name: 实例名称, 可模糊匹配(Optional) */
 func (r *DescribeInstancesRequest) SetName(name string) {
     r.Name = &name
 }

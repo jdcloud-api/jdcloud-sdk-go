@@ -43,6 +43,6 @@ type CCProtectionConfig struct {
     /* 每个源 IP 对 Host + Url 的防护阈值 (Optional) */
     IpHostUrlQps int64 `json:"ipHostUrlQps"`
 
-    /* 开启的 cc 防护规则数量 (Optional) */
+    /* 开启的 CC 防护规则数量 (Optional) */
     CcProtectionRuleEnableCount int64 `json:"ccProtectionRuleEnableCount"`
 }

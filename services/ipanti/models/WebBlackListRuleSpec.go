@@ -25,44 +25,21 @@ type WebBlackListRuleSpec struct {
     /* 模式:<br>- 0: uri<br>- 1: ip<br>- 2: cookie<br>- 3: geo<br>- 4: header  */
     Mode int `json:"mode"`
 
-    /* 匹配 key. mode 为 cookie 和 header 时必传.
-- mode 为 cookie 时, 传 cookie 的 name
-- mode 为 header 时, 传 header 的 key
- (Optional) */
+    /* 匹配 key, mode 为 cookie 和 header 时必传. <br>- mode 为 cookie 时, 传 cookie 的 name<br>- mode 为 header 时, 传 header 的 key (Optional) */
     Key *string `json:"key"`
 
-    /* 匹配 value.
-- mode 为 uri 时, 传要匹配的 uri
-- mode 为 ip 时, 传引用的 ip 黑白名单 Id
-- mode 为 cookie 时, 传 cookie 的 value
-- mode 为 geo 时, 传 geo 区域编码以 ',' 分隔的字符串. 查询 <a href="http://docs.jdcloud.com/anti-ddos-pro/api/describegeoareas">describeGeoAreas</a> 接口获取可设置的地域编码列表
-- mode 为 header 时, 传 header 的 value
-  */
+    /* 匹配 value. <br>- mode 为 uri 时, 传要匹配的 uri<br>- mode 为 ip 时, 传引用的 ip 黑白名单 Id<br>- mode 为 cookie 时, 传 cookie 的 value<br>- mode 为 geo 时, 传 geo 区域编码以 ',' 分隔的字符串. 查询 <a href='http://docs.jdcloud.com/anti-ddos-pro/api/describewebruleblacklistgeoareas'>describeWebRuleBlackListGeoAreas</a> 接口获取可设置的地域编码列表<br>- mode 为 header 时, 传 header 的 value  */
     Value string `json:"value"`
 
-    /* 匹配规则. mode 为 uri, cookie 和 header 时必传. 支持以下匹配规则
-- 0: 完全匹配
-- 1: 前缀匹配
-- 2: 包含
-- 3: 正则匹配
-- 4: 后缀匹配
- (Optional) */
+    /* 匹配规则, mode 为 uri, cookie 和 header 时必传. 支持以下匹配规则: <br>- 0: 完全匹配<br>- 1: 前缀匹配<br>- 2: 包含<br>- 3: 正则匹配<br>- 4: 后缀匹配 (Optional) */
     Pattern *int `json:"pattern"`
 
-    /* 命中后处理动作
-- 0: 阻断
-- 1: 跳转
-- 2: 验证码
-  */
+    /* 命中后处理动作. <br>- 0: 阻断<br>- 1: 跳转<br>- 2: 验证码  */
     Action int `json:"action"`
 
-    /* 命中后处理值, action 为 1 时传跳转路径
- (Optional) */
+    /* 命中后处理值, action 为 1 时传跳转路径 (Optional) */
     ActionValue *string `json:"actionValue"`
 
-    /* 规则状态.
-- 0: 关闭
-- 1: 开启
-  */
+    /* 规则状态. <br>- 0: 关闭<br>- 1: 开启  */
     Status int `json:"status"`
 }

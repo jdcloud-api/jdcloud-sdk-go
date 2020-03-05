@@ -34,6 +34,9 @@ type WebRule struct {
     /* CNAME 解析状态, 0: 解析异常, 1: 解析正常 (Optional) */
     CnameStatus int `json:"cnameStatus"`
 
+    /* 高防 IP (Optional) */
+    ServiceIp string `json:"serviceIp"`
+
     /*  (Optional) */
     Protocol WebRuleProtocol `json:"protocol"`
 
@@ -46,7 +49,7 @@ type WebRule struct {
     /* HTTPS 协议的端口号, 如 443,8443 (Optional) */
     HttpsPort []int `json:"httpsPort"`
 
-    /* 是否开启 http 回源, 0: 为不开启, 1: 为开启, 当勾选 HTTPS 时可以配置该属性 (Optional) */
+    /* 是否开启 HTTP 回源, 0: 为不开启, 1: 为开启, 当勾选 HTTPS 时可以配置该属性 (Optional) */
     HttpOrigin int `json:"httpOrigin"`
 
     /* 0: 防御状态, 1: 回源状态 (Optional) */
@@ -55,16 +58,16 @@ type WebRule struct {
     /* 回源类型: A 或者 CNAME (Optional) */
     OriginType string `json:"originType"`
 
-    /*  (Optional) */
+    /* 回源域名, originType 为 A 时返回该字段 (Optional) */
     OriginAddr []OriginAddrItem `json:"originAddr"`
 
     /* 回源域名, originType 为 CNAME 时返回该字段 (Optional) */
     OriginDomain string `json:"originDomain"`
 
-    /*  (Optional) */
+    /* 备用的回源地址列表, 为一个域名或者多个 IP 地址 (Optional) */
     OnlineAddr []string `json:"onlineAddr"`
 
-    /* 证书状态, 0: 异常, 1: 正常, 2: 证书未上传 (Optional) */
+    /* 证书状态. <br>- 0: 异常<br>- 1: 正常<br>- 2: 证书未上传 (Optional) */
     HttpCertStatus int `json:"httpCertStatus"`
 
     /* 证书 Id (Optional) */
@@ -79,13 +82,10 @@ type WebRule struct {
     /* 证书私钥 (Optional) */
     HttpsRsaKey string `json:"httpsRsaKey"`
 
-    /* 是否开启https强制跳转, 当 protocol 为 HTTP_HTTPS 时可以配置该属性
-  - 0 不强跳
-  - 1 开启强跳
- (Optional) */
+    /* 是否开启 HTTPS 强制跳转, 当 protocol 为 HTTP_HTTPS 时可以配置该属性<br>- 0: 不强跳<br>- 1: 开启强跳 (Optional) */
     ForceJump int `json:"forceJump"`
 
-    /* 转发规则,  wrr: 带权重的轮询, rr: 不带权重的轮询 (Optional) */
+    /* 转发规则. <br>- wrr: 带权重的轮询<br>- rr:  不带权重的轮询<br>- sh:  源地址hash (Optional) */
     Algorithm string `json:"algorithm"`
 
     /* CC 状态, 0: CC 关闭, 1: CC 开启 (Optional) */
@@ -99,4 +99,7 @@ type WebRule struct {
 
     /* 白名单状态, 0: 关闭, 1: 开启 (Optional) */
     WhiteListEnable int `json:"whiteListEnable"`
+
+    /* 按区域分流回源配置 (Optional) */
+    GeoRsRoute []GeoRsRoute `json:"geoRsRoute"`
 }

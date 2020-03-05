@@ -34,11 +34,11 @@ type DescribeCCAttackLogsRequest struct {
     /* 分页大小, 默认为10, 取值范围[10, 100] (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* 开始时间, 只能查询最近 60 天以内的数据, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ  */
+    /* 开始时间, 只能查询最近 90 天以内的数据, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ  */
     StartTime string `json:"startTime"`
 
-    /* 查询的结束时间, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ  */
-    EndTime string `json:"endTime"`
+    /* 查询的结束时间, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Optional) */
+    EndTime *string `json:"endTime"`
 
     /* 高防实例 ID (Optional) */
     InstanceId []string `json:"instanceId"`
@@ -46,15 +46,13 @@ type DescribeCCAttackLogsRequest struct {
 
 /*
  * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
- * param startTime: 开始时间, 只能查询最近 60 天以内的数据, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
- * param endTime: 查询的结束时间, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
+ * param startTime: 开始时间, 只能查询最近 90 天以内的数据, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeCCAttackLogsRequest(
     regionId string,
     startTime string,
-    endTime string,
 ) *DescribeCCAttackLogsRequest {
 
 	return &DescribeCCAttackLogsRequest{
@@ -66,7 +64,6 @@ func NewDescribeCCAttackLogsRequest(
 		},
         RegionId: regionId,
         StartTime: startTime,
-        EndTime: endTime,
 	}
 }
 
@@ -74,8 +71,8 @@ func NewDescribeCCAttackLogsRequest(
  * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param pageNumber: 页码, 默认为1 (Optional)
  * param pageSize: 分页大小, 默认为10, 取值范围[10, 100] (Optional)
- * param startTime: 开始时间, 只能查询最近 60 天以内的数据, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
- * param endTime: 查询的结束时间, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
+ * param startTime: 开始时间, 只能查询最近 90 天以内的数据, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Required)
+ * param endTime: 查询的结束时间, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Optional)
  * param instanceId: 高防实例 ID (Optional)
  */
 func NewDescribeCCAttackLogsRequestWithAllParams(
@@ -83,7 +80,7 @@ func NewDescribeCCAttackLogsRequestWithAllParams(
     pageNumber *int,
     pageSize *int,
     startTime string,
-    endTime string,
+    endTime *string,
     instanceId []string,
 ) *DescribeCCAttackLogsRequest {
 
@@ -131,14 +128,14 @@ func (r *DescribeCCAttackLogsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
-/* param startTime: 开始时间, 只能查询最近 60 天以内的数据, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ(Required) */
+/* param startTime: 开始时间, 只能查询最近 90 天以内的数据, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ(Required) */
 func (r *DescribeCCAttackLogsRequest) SetStartTime(startTime string) {
     r.StartTime = startTime
 }
 
-/* param endTime: 查询的结束时间, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ(Required) */
+/* param endTime: 查询的结束时间, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ(Optional) */
 func (r *DescribeCCAttackLogsRequest) SetEndTime(endTime string) {
-    r.EndTime = endTime
+    r.EndTime = &endTime
 }
 
 /* param instanceId: 高防实例 ID(Optional) */

@@ -25,39 +25,39 @@ type CreateInstanceSpec struct {
     /* 实例名称, 新购时必传 (Optional) */
     Name *string `json:"name"`
 
-    /* 购买类型：1新购 3升级  */
+    /* 购买类型. <br>- 1: 新购<br>- 3: 升级  */
     BuyType int `json:"buyType"`
 
-    /* 链路类型, 1: 电信, 2: 电信、联通, 3: 电信、联通和移动  */
+    /* 链路类型. <br>- 1: 电信<br>- 3: 电信、联通和移动<br>- 4: BGP 线路  */
     Carrier int `json:"carrier"`
 
-    /* 可防护 ip 类型, 目前仅电信线路支持 IPV6 线路:
-- 0: IPV4,
-- 1: IPV4/IPV6
- (Optional) */
+    /* 可防护 ip 类型, 目前仅电信线路支持 IPV6 线路<br>- 0: IPV4,<br>- 1: IPV4/IPV6 (Optional) */
     IpType *int `json:"ipType"`
 
-    /* 保底带宽：单位Gbps  */
+    /* IP 数量  */
+    IpCount int `json:"ipCount"`
+
+    /* 可配的转发端口数量  */
+    PortCount int `json:"portCount"`
+
+    /* 可配的网站规则域名数量 (Optional) */
+    DomainCount *int `json:"domainCount"`
+
+    /* 保底带宽: 单位 Gbps  */
     Bp int `json:"bp"`
 
-    /* 弹性带宽：单位Gbps  */
+    /* 弹性带宽: 单位 Gbps  */
     Ep int `json:"ep"`
 
-    /* 业务带宽：单位Mbps  */
+    /* 业务带宽: 单位 Mbps  */
     Bw int `json:"bw"`
 
-    /* 购买防护包时长, 新购高防实例时必传
-- timeUnit 为 3 时, 可取值 1-9
-- timeUnit 为 4 时, 可取值 1-3
- (Optional) */
+    /* 购买防护包时长, 新购高防实例时必传<br>- timeUnit 为 3 时, 可取值 1-9<br>- timeUnit 为 4 时, 可取值 1-3 (Optional) */
     TimeSpan *int64 `json:"timeSpan"`
 
-    /* 购买时长类型, 新购高防实例时必传
-- 3: 月
-- 4: 年
- (Optional) */
+    /* 购买时长类型, 新购高防实例时必传<br>- 3: 月<br>- 4: 年 (Optional) */
     TimeUnit *int `json:"timeUnit"`
 
-    /* 支付成功后跳转的页面，控制台交互模式传该字段 (Optional) */
+    /* 支付成功后跳转的页面, 控制台交互模式传该字段 (Optional) */
     ReturnUrl *string `json:"returnUrl"`
 }

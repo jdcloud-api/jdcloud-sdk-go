@@ -40,7 +40,7 @@ func NewYundingdatapushClient(credential *core.Credential) *YundingdatapushClien
             Credential:  *credential,
             Config:      *config,
             ServiceName: "yundingdatapush",
-            Revision:    "1.0.3",
+            Revision:    "1.0.4",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -68,6 +68,26 @@ func (c *YundingdatapushClient) AddDatapushVender(request *yundingdatapush.AddDa
     }
 
     jdResp := &yundingdatapush.AddDatapushVenderResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建历史订单同步 */
+func (c *YundingdatapushClient) CreateOrderSync(request *yundingdatapush.CreateOrderSyncRequest) (*yundingdatapush.CreateOrderSyncResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yundingdatapush.CreateOrderSyncResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
