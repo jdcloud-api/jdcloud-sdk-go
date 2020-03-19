@@ -40,7 +40,7 @@ func NewIotlinkClient(credential *core.Credential) *IotlinkClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "iotlink",
-            Revision:    "1.0.3",
+            Revision:    "1.0.4",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -108,6 +108,46 @@ func (c *IotlinkClient) CloseIotCard(request *iotlink.CloseIotCardRequest) (*iot
     }
 
     jdResp := &iotlink.CloseIotCardResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 物联网卡查询通用操作 */
+func (c *IotlinkClient) Search(request *iotlink.SearchRequest) (*iotlink.SearchResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotlink.SearchResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 物联网卡卡操作通用操作 */
+func (c *IotlinkClient) Operate(request *iotlink.OperateRequest) (*iotlink.OperateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotlink.OperateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
