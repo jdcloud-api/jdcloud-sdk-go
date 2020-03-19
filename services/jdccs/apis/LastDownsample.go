@@ -31,14 +31,14 @@ type LastDownsampleRequest struct {
     /* 监控项英文标识(id)  */
     Metric string `json:"metric"`
 
-    /* 资源ID，支持多个resourceId批量查询，每个id用竖线 | 分隔  */
+    /* 资源ID，支持多个resourceId批量查询，每个id用英文竖线分隔  */
     ResourceId string `json:"resourceId"`
 }
 
 /*
  * param idc: IDC机房ID (Required)
  * param metric: 监控项英文标识(id) (Required)
- * param resourceId: 资源ID，支持多个resourceId批量查询，每个id用竖线 | 分隔 (Required)
+ * param resourceId: 资源ID，支持多个resourceId批量查询，每个id用英文竖线分隔 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -64,7 +64,7 @@ func NewLastDownsampleRequest(
 /*
  * param idc: IDC机房ID (Required)
  * param metric: 监控项英文标识(id) (Required)
- * param resourceId: 资源ID，支持多个resourceId批量查询，每个id用竖线 | 分隔 (Required)
+ * param resourceId: 资源ID，支持多个resourceId批量查询，每个id用英文竖线分隔 (Required)
  */
 func NewLastDownsampleRequestWithAllParams(
     idc string,
@@ -108,7 +108,7 @@ func (r *LastDownsampleRequest) SetMetric(metric string) {
     r.Metric = metric
 }
 
-/* param resourceId: 资源ID，支持多个resourceId批量查询，每个id用竖线 | 分隔(Required) */
+/* param resourceId: 资源ID，支持多个resourceId批量查询，每个id用英文竖线分隔(Required) */
 func (r *LastDownsampleRequest) SetResourceId(resourceId string) {
     r.ResourceId = resourceId
 }
