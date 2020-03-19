@@ -22,15 +22,18 @@ import (
     common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
 
-type ListProductsRequest struct {
+type DescribeProductTopicsRequest struct {
 
     core.JDCloudRequest
 
     /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /* IoT Engine实例ID信息  */
+    /* IoTCore实例ID信息  */
     InstanceId string `json:"instanceId"`
+
+    /* 产品Key  */
+    ProductKey string `json:"productKey"`
 
     /* 页码, 默认为1, 取值范围：[1,∞) (Optional) */
     PageNumber *int `json:"pageNumber"`
@@ -38,65 +41,65 @@ type ListProductsRequest struct {
     /* 分页大小，默认为10，取值范围：[10,100] (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* productName-产品名称，模糊匹配，支持单个
-productKey-产品key，精确匹配，支持单个
-productType-产品类型，精确匹配，支持单个
-templateName-模板名称，精确匹配，支持多个
+    /* topicShortName-topic名称，模糊匹配，支持单个
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param instanceId: IoT Engine实例ID信息 (Required)
+ * param instanceId: IoTCore实例ID信息 (Required)
+ * param productKey: 产品Key (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewListProductsRequest(
+func NewDescribeProductTopicsRequest(
     regionId string,
     instanceId string,
-) *ListProductsRequest {
+    productKey string,
+) *DescribeProductTopicsRequest {
 
-	return &ListProductsRequest{
+	return &DescribeProductTopicsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/products",
+			URL:     "/regions/{regionId}/instances/{instanceId}/products/{productKey}/topics",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v2",
 		},
         RegionId: regionId,
         InstanceId: instanceId,
+        ProductKey: productKey,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param instanceId: IoT Engine实例ID信息 (Required)
+ * param instanceId: IoTCore实例ID信息 (Required)
+ * param productKey: 产品Key (Required)
  * param pageNumber: 页码, 默认为1, 取值范围：[1,∞) (Optional)
  * param pageSize: 分页大小，默认为10，取值范围：[10,100] (Optional)
- * param filters: productName-产品名称，模糊匹配，支持单个
-productKey-产品key，精确匹配，支持单个
-productType-产品类型，精确匹配，支持单个
-templateName-模板名称，精确匹配，支持多个
+ * param filters: topicShortName-topic名称，模糊匹配，支持单个
  (Optional)
  */
-func NewListProductsRequestWithAllParams(
+func NewDescribeProductTopicsRequestWithAllParams(
     regionId string,
     instanceId string,
+    productKey string,
     pageNumber *int,
     pageSize *int,
     filters []common.Filter,
-) *ListProductsRequest {
+) *DescribeProductTopicsRequest {
 
-    return &ListProductsRequest{
+    return &DescribeProductTopicsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/products",
+            URL:     "/regions/{regionId}/instances/{instanceId}/products/{productKey}/topics",
             Method:  "GET",
             Header:  nil,
             Version: "v2",
         },
         RegionId: regionId,
         InstanceId: instanceId,
+        ProductKey: productKey,
         PageNumber: pageNumber,
         PageSize: pageSize,
         Filters: filters,
@@ -104,11 +107,11 @@ func NewListProductsRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewListProductsRequestWithoutParam() *ListProductsRequest {
+func NewDescribeProductTopicsRequestWithoutParam() *DescribeProductTopicsRequest {
 
-    return &ListProductsRequest{
+    return &DescribeProductTopicsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/products",
+            URL:     "/regions/{regionId}/instances/{instanceId}/products/{productKey}/topics",
             Method:  "GET",
             Header:  nil,
             Version: "v2",
@@ -117,47 +120,49 @@ func NewListProductsRequestWithoutParam() *ListProductsRequest {
 }
 
 /* param regionId: 地域ID(Required) */
-func (r *ListProductsRequest) SetRegionId(regionId string) {
+func (r *DescribeProductTopicsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: IoT Engine实例ID信息(Required) */
-func (r *ListProductsRequest) SetInstanceId(instanceId string) {
+/* param instanceId: IoTCore实例ID信息(Required) */
+func (r *DescribeProductTopicsRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
+/* param productKey: 产品Key(Required) */
+func (r *DescribeProductTopicsRequest) SetProductKey(productKey string) {
+    r.ProductKey = productKey
+}
+
 /* param pageNumber: 页码, 默认为1, 取值范围：[1,∞)(Optional) */
-func (r *ListProductsRequest) SetPageNumber(pageNumber int) {
+func (r *DescribeProductTopicsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
 /* param pageSize: 分页大小，默认为10，取值范围：[10,100](Optional) */
-func (r *ListProductsRequest) SetPageSize(pageSize int) {
+func (r *DescribeProductTopicsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
-/* param filters: productName-产品名称，模糊匹配，支持单个
-productKey-产品key，精确匹配，支持单个
-productType-产品类型，精确匹配，支持单个
-templateName-模板名称，精确匹配，支持多个
+/* param filters: topicShortName-topic名称，模糊匹配，支持单个
 (Optional) */
-func (r *ListProductsRequest) SetFilters(filters []common.Filter) {
+func (r *DescribeProductTopicsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r ListProductsRequest) GetRegionId() string {
+func (r DescribeProductTopicsRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type ListProductsResponse struct {
+type DescribeProductTopicsResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result ListProductsResult `json:"result"`
+    Result DescribeProductTopicsResult `json:"result"`
 }
 
-type ListProductsResult struct {
+type DescribeProductTopicsResult struct {
     Page iotcore.PageinfoVO `json:"page"`
-    Products []iotcore.Product `json:"products"`
+    ProductTopics []iotcore.ProductTopic `json:"productTopics"`
 }
