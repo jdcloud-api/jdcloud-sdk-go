@@ -20,7 +20,7 @@ import disk "github.com/jdcloud-api/jdcloud-sdk-go/services/disk/models"
 
 type VolumeMountSpec struct {
 
-    /* 磁盘分类 cloud：基于云硬盘的卷 仅支持cloud类型  */
+    /* 磁盘分类 cloud：基于云硬盘的卷 local：本地盘（使用前需申请）  */
     Category string `json:"category"`
 
     /* 自动删除，删除容器时自动删除此volume，默认为True；只支持磁盘是云硬盘的场景 (Optional) */

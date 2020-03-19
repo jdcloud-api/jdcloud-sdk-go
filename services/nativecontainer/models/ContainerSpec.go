@@ -26,7 +26,7 @@ type ContainerSpec struct {
     /* 容器所属可用区  */
     Az string `json:"az"`
 
-    /* 容器名称  */
+    /* 容器名称，不可为空，只支持中文、数字、大小写字母、英文下划线“_”及中划线“-”，且不能超过32字符  */
     Name string `json:"name"`
 
     /* 域名和IP映射的信息；</br> 最大10个alias (Optional) */
