@@ -20,13 +20,13 @@ import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
 
 type PodSpec struct {
 
-    /* Pod名称  */
+    /* Pod名称，符合DNS-1123 subdomain规范；名称不可重复、不支持修改  */
     Name string `json:"name"`
 
     /* 描述信息，默认为空；允许输入UTF-8编码下的全部字符，不超过256字符。 (Optional) */
     Description *string `json:"description"`
 
-    /* 主机名；范围：[1-63]个ASCII字符，默认值为 podId (Optional) */
+    /* 主机名；符合hostname规范，默认值为 podId (Optional) */
     Hostname *string `json:"hostname"`
 
     /* pod中容器重启策略；Always, OnFailure, Never；默认：Always (Optional) */

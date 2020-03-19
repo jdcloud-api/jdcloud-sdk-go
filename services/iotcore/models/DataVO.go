@@ -66,4 +66,10 @@ type DataVO struct {
 
     /* 实例类型[0-独享，1-共享] (Optional) */
     InstanceType string `json:"instanceType"`
+
+    /* Edge是否开通，0-未开通，1-已开通 (Optional) */
+    EdgeStatus string `json:"edgeStatus"`
+
+    /* Edge开通时间 (Optional) */
+    EdgeOpenTime string `json:"edgeOpenTime"`
 }

@@ -40,7 +40,7 @@ func NewEsClient(credential *core.Credential) *EsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "es",
-            Revision:    "1.0.0",
+            Revision:    "1.0.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }

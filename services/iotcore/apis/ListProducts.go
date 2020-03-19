@@ -38,9 +38,10 @@ type ListProductsRequest struct {
     /* 分页大小，默认为10，取值范围：[10,100] (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* productName-产品名称，精确匹配，支持单个
+    /* productName-产品名称，模糊匹配，支持单个
 productKey-产品key，精确匹配，支持单个
 productType-产品类型，精确匹配，支持单个
+templateName-模板名称，精确匹配，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
@@ -73,9 +74,10 @@ func NewListProductsRequest(
  * param instanceId: IoT Engine实例ID信息 (Required)
  * param pageNumber: 页码, 默认为1, 取值范围：[1,∞) (Optional)
  * param pageSize: 分页大小，默认为10，取值范围：[10,100] (Optional)
- * param filters: productName-产品名称，精确匹配，支持单个
+ * param filters: productName-产品名称，模糊匹配，支持单个
 productKey-产品key，精确匹配，支持单个
 productType-产品类型，精确匹配，支持单个
+templateName-模板名称，精确匹配，支持多个
  (Optional)
  */
 func NewListProductsRequestWithAllParams(
@@ -134,9 +136,10 @@ func (r *ListProductsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
-/* param filters: productName-产品名称，精确匹配，支持单个
+/* param filters: productName-产品名称，模糊匹配，支持单个
 productKey-产品key，精确匹配，支持单个
 productType-产品类型，精确匹配，支持单个
+templateName-模板名称，精确匹配，支持多个
 (Optional) */
 func (r *ListProductsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters

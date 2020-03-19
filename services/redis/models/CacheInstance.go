@@ -26,7 +26,7 @@ type CacheInstance struct {
     /* 实例名称 (Optional) */
     CacheInstanceName string `json:"cacheInstanceName"`
 
-    /* 规格代码，参考 https://docs.jdcloud.com/cn/jcs-for-redis/specifications (Optional) */
+    /* 规格代码，或者自定义分片实例的单分片规格代码，参考 https://docs.jdcloud.com/cn/jcs-for-redis/specifications (Optional) */
     CacheInstanceClass string `json:"cacheInstanceClass"`
 
     /* 实例的总内存（MB） (Optional) */
@@ -44,19 +44,19 @@ type CacheInstance struct {
     /* az信息 (Optional) */
     AzId AzId `json:"azId"`
 
-    /* 所属VPC的ID (Optional) */
+    /* 实例所属VPC ID (Optional) */
     VpcId string `json:"vpcId"`
 
-    /* 所属子网的ID (Optional) */
+    /* 实例所属子网ID (Optional) */
     SubnetId string `json:"subnetId"`
 
-    /* 访问域名 (Optional) */
+    /* 实例的访问域名 (Optional) */
     ConnectionDomain string `json:"connectionDomain"`
 
-    /* 端口 (Optional) */
+    /* 实例的访问端口 (Optional) */
     Port int `json:"port"`
 
-    /* 计费信息 (Optional) */
+    /* 实例的计费信息 (Optional) */
     Charge charge.Charge `json:"charge"`
 
     /* 实例的详细版本号，形如x.x-x.x (Optional) */
@@ -76,4 +76,10 @@ type CacheInstance struct {
 
     /* 标签信息 (Optional) */
     Tags []Tag `json:"tags"`
+
+    /* 实例分片数，自定义分片规格的实例分片数由用户创建时选择，其他实例为固定分片数 (Optional) */
+    ShardNumber int `json:"shardNumber"`
+
+    /* 单分片内存大小（MB） (Optional) */
+    MemoryMBPerShard int `json:"memoryMBPerShard"`
 }

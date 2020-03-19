@@ -19,7 +19,7 @@ package models
 
 type ContainerSpec struct {
 
-    /* 容器名称，符合DNS-1123 label规范，在一个Pod内不能重复。  */
+    /* 容器名称，符合DNS-1123 label规范，在一个Pod内不可重复、不支持修改  */
     Name string `json:"name"`
 
     /* 容器执行命令，如果不指定默认是docker镜像的ENTRYPOINT。总长度256个字符。 (Optional) */

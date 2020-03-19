@@ -32,6 +32,9 @@ type ModifyCacheInstanceClassRequest struct {
 
     /* 新规格  */
     CacheInstanceClass string `json:"cacheInstanceClass"`
+
+    /* 自定义分片数，只对自定义分片规格实例有效 (Optional) */
+    ShardNumber *int `json:"shardNumber"`
 }
 
 /*
@@ -64,11 +67,13 @@ func NewModifyCacheInstanceClassRequest(
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
  * param cacheInstanceClass: 新规格 (Required)
+ * param shardNumber: 自定义分片数，只对自定义分片规格实例有效 (Optional)
  */
 func NewModifyCacheInstanceClassRequestWithAllParams(
     regionId string,
     cacheInstanceId string,
     cacheInstanceClass string,
+    shardNumber *int,
 ) *ModifyCacheInstanceClassRequest {
 
     return &ModifyCacheInstanceClassRequest{
@@ -81,6 +86,7 @@ func NewModifyCacheInstanceClassRequestWithAllParams(
         RegionId: regionId,
         CacheInstanceId: cacheInstanceId,
         CacheInstanceClass: cacheInstanceClass,
+        ShardNumber: shardNumber,
     }
 }
 
@@ -110,6 +116,11 @@ func (r *ModifyCacheInstanceClassRequest) SetCacheInstanceId(cacheInstanceId str
 /* param cacheInstanceClass: 新规格(Required) */
 func (r *ModifyCacheInstanceClassRequest) SetCacheInstanceClass(cacheInstanceClass string) {
     r.CacheInstanceClass = cacheInstanceClass
+}
+
+/* param shardNumber: 自定义分片数，只对自定义分片规格实例有效(Optional) */
+func (r *ModifyCacheInstanceClassRequest) SetShardNumber(shardNumber int) {
+    r.ShardNumber = &shardNumber
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

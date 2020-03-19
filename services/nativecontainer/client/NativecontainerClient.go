@@ -40,7 +40,7 @@ func NewNativecontainerClient(credential *core.Credential) *NativecontainerClien
             Credential:  *credential,
             Config:      *config,
             ServiceName: "nativecontainer",
-            Revision:    "2.2.0",
+            Revision:    "2.2.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -407,8 +407,6 @@ func (c *NativecontainerClient) ExecGetExitCode(request *nativecontainer.ExecGet
     - 标签与标签之间使用“.”(点)进行连接
     - 不能以“.”(点)开始，也不能以“.”(点)结尾
     - 整个主机名（包括标签以及分隔点“.”）最多有63个ASCII字符
-  - 正则表达式
-    - ^([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9])(\.([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9]))*$
 - 网络配置
   - 指定主网卡配置信息
     - 必须指定vpcId、subnetId、securityGroupIds

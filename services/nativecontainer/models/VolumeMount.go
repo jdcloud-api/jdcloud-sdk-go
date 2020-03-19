@@ -34,6 +34,9 @@ type VolumeMount struct {
     /* 云硬盘规格 (Optional) */
     CloudDisk InstanceCloudDisk `json:"cloudDisk"`
 
+    /* 云硬盘规格 (Optional) */
+    LocalDisk InstanceLocalDisk `json:"localDisk"`
+
     /* 指定volume文件系统类型，目前支持[xfs, ext4] (Optional) */
     FsType string `json:"fsType"`
 }

@@ -27,18 +27,21 @@ type CreateProductTopicRequest struct {
     /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /* IoT Engine实例ID信息  */
+    /* IoTCore实例ID信息  */
     InstanceId string `json:"instanceId"`
 
     /* 产品Key  */
     ProductKey string `json:"productKey"`
 
-    /* 自定义类目名称, /user/{productKey}/{identifier}/topicShortName  */
+    /* Topic名称为必填，同一个产品下的Topic名称不能重复
+只能包含字母，数字和下划线，最多64个字符，每个层级都不能为空
+不能以/结尾
+  */
     TopicShortName string `json:"topicShortName"`
 
-    /* 设备对该Topic类的操作权限，取值
-sub:订阅
+    /* 操作权限，设备对该Topic类的操作权限，取值
 pub:发布
+sub:订阅
   */
     TopicOperation string `json:"topicOperation"`
 
@@ -48,12 +51,15 @@ pub:发布
 
 /*
  * param regionId: 地域ID (Required)
- * param instanceId: IoT Engine实例ID信息 (Required)
+ * param instanceId: IoTCore实例ID信息 (Required)
  * param productKey: 产品Key (Required)
- * param topicShortName: 自定义类目名称, /user/{productKey}/{identifier}/topicShortName (Required)
- * param topicOperation: 设备对该Topic类的操作权限，取值
-sub:订阅
+ * param topicShortName: Topic名称为必填，同一个产品下的Topic名称不能重复
+只能包含字母，数字和下划线，最多64个字符，每个层级都不能为空
+不能以/结尾
+ (Required)
+ * param topicOperation: 操作权限，设备对该Topic类的操作权限，取值
 pub:发布
+sub:订阅
  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -83,12 +89,15 @@ func NewCreateProductTopicRequest(
 
 /*
  * param regionId: 地域ID (Required)
- * param instanceId: IoT Engine实例ID信息 (Required)
+ * param instanceId: IoTCore实例ID信息 (Required)
  * param productKey: 产品Key (Required)
- * param topicShortName: 自定义类目名称, /user/{productKey}/{identifier}/topicShortName (Required)
- * param topicOperation: 设备对该Topic类的操作权限，取值
-sub:订阅
+ * param topicShortName: Topic名称为必填，同一个产品下的Topic名称不能重复
+只能包含字母，数字和下划线，最多64个字符，每个层级都不能为空
+不能以/结尾
+ (Required)
+ * param topicOperation: 操作权限，设备对该Topic类的操作权限，取值
 pub:发布
+sub:订阅
  (Required)
  * param topicDescription: 描述, 0-50个字符 (Optional)
  */
@@ -135,7 +144,7 @@ func (r *CreateProductTopicRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: IoT Engine实例ID信息(Required) */
+/* param instanceId: IoTCore实例ID信息(Required) */
 func (r *CreateProductTopicRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
@@ -145,14 +154,17 @@ func (r *CreateProductTopicRequest) SetProductKey(productKey string) {
     r.ProductKey = productKey
 }
 
-/* param topicShortName: 自定义类目名称, /user/{productKey}/{identifier}/topicShortName(Required) */
+/* param topicShortName: Topic名称为必填，同一个产品下的Topic名称不能重复
+只能包含字母，数字和下划线，最多64个字符，每个层级都不能为空
+不能以/结尾
+(Required) */
 func (r *CreateProductTopicRequest) SetTopicShortName(topicShortName string) {
     r.TopicShortName = topicShortName
 }
 
-/* param topicOperation: 设备对该Topic类的操作权限，取值
-sub:订阅
+/* param topicOperation: 操作权限，设备对该Topic类的操作权限，取值
 pub:发布
+sub:订阅
 (Required) */
 func (r *CreateProductTopicRequest) SetTopicOperation(topicOperation string) {
     r.TopicOperation = topicOperation
