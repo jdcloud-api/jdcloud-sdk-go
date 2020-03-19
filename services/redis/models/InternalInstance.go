@@ -43,10 +43,10 @@ type InternalInstance struct {
     /* 创建时间（ISO 8601标准的UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ） (Optional) */
     CreatedTime string `json:"createdTime"`
 
-    /* 所属VPC的ID (Optional) */
+    /* 所属VPC ID (Optional) */
     VpcId string `json:"vpcId"`
 
-    /* 所属子网的ID (Optional) */
+    /* 所属子网ID (Optional) */
     SubnetId string `json:"subnetId"`
 
     /* 访问域名 (Optional) */

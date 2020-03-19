@@ -18,9 +18,10 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    redis "github.com/jdcloud-api/jdcloud-sdk-go/services/redis/models"
 )
 
-type ModifyCacheInstanceClassRequest struct {
+type DescribeCacheAnalysisResultRequest struct {
 
     core.JDCloudRequest
 
@@ -30,73 +31,67 @@ type ModifyCacheInstanceClassRequest struct {
     /* 缓存Redis实例ID，是访问实例的唯一标识  */
     CacheInstanceId string `json:"cacheInstanceId"`
 
-    /* 新规格  */
-    CacheInstanceClass string `json:"cacheInstanceClass"`
-
-    /* 自定义分片数，只对自定义分片规格实例有效 (Optional) */
-    ShardNumber *int `json:"shardNumber"`
+    /* 查询缓存分析任务详情的任务ID  */
+    TaskId string `json:"taskId"`
 }
 
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
- * param cacheInstanceClass: 新规格 (Required)
+ * param taskId: 查询缓存分析任务详情的任务ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewModifyCacheInstanceClassRequest(
+func NewDescribeCacheAnalysisResultRequest(
     regionId string,
     cacheInstanceId string,
-    cacheInstanceClass string,
-) *ModifyCacheInstanceClassRequest {
+    taskId string,
+) *DescribeCacheAnalysisResultRequest {
 
-	return &ModifyCacheInstanceClassRequest{
+	return &DescribeCacheAnalysisResultRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}:modifyCacheInstanceClass",
-			Method:  "POST",
+			URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/cacheAnalysis/{taskId}",
+			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         CacheInstanceId: cacheInstanceId,
-        CacheInstanceClass: cacheInstanceClass,
+        TaskId: taskId,
 	}
 }
 
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
- * param cacheInstanceClass: 新规格 (Required)
- * param shardNumber: 自定义分片数，只对自定义分片规格实例有效 (Optional)
+ * param taskId: 查询缓存分析任务详情的任务ID (Required)
  */
-func NewModifyCacheInstanceClassRequestWithAllParams(
+func NewDescribeCacheAnalysisResultRequestWithAllParams(
     regionId string,
     cacheInstanceId string,
-    cacheInstanceClass string,
-    shardNumber *int,
-) *ModifyCacheInstanceClassRequest {
+    taskId string,
+) *DescribeCacheAnalysisResultRequest {
 
-    return &ModifyCacheInstanceClassRequest{
+    return &DescribeCacheAnalysisResultRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}:modifyCacheInstanceClass",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/cacheAnalysis/{taskId}",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         CacheInstanceId: cacheInstanceId,
-        CacheInstanceClass: cacheInstanceClass,
-        ShardNumber: shardNumber,
+        TaskId: taskId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewModifyCacheInstanceClassRequestWithoutParam() *ModifyCacheInstanceClassRequest {
+func NewDescribeCacheAnalysisResultRequestWithoutParam() *DescribeCacheAnalysisResultRequest {
 
-    return &ModifyCacheInstanceClassRequest{
+    return &DescribeCacheAnalysisResultRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}:modifyCacheInstanceClass",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/cacheAnalysis/{taskId}",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
@@ -104,38 +99,41 @@ func NewModifyCacheInstanceClassRequestWithoutParam() *ModifyCacheInstanceClassR
 }
 
 /* param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2(Required) */
-func (r *ModifyCacheInstanceClassRequest) SetRegionId(regionId string) {
+func (r *DescribeCacheAnalysisResultRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
-func (r *ModifyCacheInstanceClassRequest) SetCacheInstanceId(cacheInstanceId string) {
+func (r *DescribeCacheAnalysisResultRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
 
-/* param cacheInstanceClass: 新规格(Required) */
-func (r *ModifyCacheInstanceClassRequest) SetCacheInstanceClass(cacheInstanceClass string) {
-    r.CacheInstanceClass = cacheInstanceClass
-}
-
-/* param shardNumber: 自定义分片数，只对自定义分片规格实例有效(Optional) */
-func (r *ModifyCacheInstanceClassRequest) SetShardNumber(shardNumber int) {
-    r.ShardNumber = &shardNumber
+/* param taskId: 查询缓存分析任务详情的任务ID(Required) */
+func (r *DescribeCacheAnalysisResultRequest) SetTaskId(taskId string) {
+    r.TaskId = taskId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r ModifyCacheInstanceClassRequest) GetRegionId() string {
+func (r DescribeCacheAnalysisResultRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type ModifyCacheInstanceClassResponse struct {
+type DescribeCacheAnalysisResultResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result ModifyCacheInstanceClassResult `json:"result"`
+    Result DescribeCacheAnalysisResultResult `json:"result"`
 }
 
-type ModifyCacheInstanceClassResult struct {
-    OrderNum string `json:"orderNum"`
-    BuyId string `json:"buyId"`
+type DescribeCacheAnalysisResultResult struct {
+    StartTime string `json:"startTime"`
+    FinishTime string `json:"finishTime"`
+    AnalysisType int `json:"analysisType"`
+    StringBigKeys []redis.RedisKey `json:"stringBigKeys"`
+    OtherBigKeys []redis.RedisKey `json:"otherBigKeys"`
+    HotKeys []redis.RedisKey `json:"hotKeys"`
+    CmdCallTimesTop []redis.RedisCmd `json:"cmdCallTimesTop"`
+    CmdUseCpuTop []redis.RedisCmd `json:"cmdUseCpuTop"`
+    KeyTypeDistribution interface{} `json:"keyTypeDistribution"`
+    KeySizeDistribution interface{} `json:"keySizeDistribution"`
 }

@@ -18,9 +18,10 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    redis "github.com/jdcloud-api/jdcloud-sdk-go/services/redis/models"
 )
 
-type ModifyCacheInstanceClassRequest struct {
+type DescribeCacheAnalysisListRequest struct {
 
     core.JDCloudRequest
 
@@ -30,73 +31,67 @@ type ModifyCacheInstanceClassRequest struct {
     /* 缓存Redis实例ID，是访问实例的唯一标识  */
     CacheInstanceId string `json:"cacheInstanceId"`
 
-    /* 新规格  */
-    CacheInstanceClass string `json:"cacheInstanceClass"`
-
-    /* 自定义分片数，只对自定义分片规格实例有效 (Optional) */
-    ShardNumber *int `json:"shardNumber"`
+    /* 格式:yyyy-MM-dd,表示查询某一天的缓存分析列表  */
+    Date string `json:"date"`
 }
 
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
- * param cacheInstanceClass: 新规格 (Required)
+ * param date: 格式:yyyy-MM-dd,表示查询某一天的缓存分析列表 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewModifyCacheInstanceClassRequest(
+func NewDescribeCacheAnalysisListRequest(
     regionId string,
     cacheInstanceId string,
-    cacheInstanceClass string,
-) *ModifyCacheInstanceClassRequest {
+    date string,
+) *DescribeCacheAnalysisListRequest {
 
-	return &ModifyCacheInstanceClassRequest{
+	return &DescribeCacheAnalysisListRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}:modifyCacheInstanceClass",
-			Method:  "POST",
+			URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/cacheAnalysis",
+			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         CacheInstanceId: cacheInstanceId,
-        CacheInstanceClass: cacheInstanceClass,
+        Date: date,
 	}
 }
 
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
- * param cacheInstanceClass: 新规格 (Required)
- * param shardNumber: 自定义分片数，只对自定义分片规格实例有效 (Optional)
+ * param date: 格式:yyyy-MM-dd,表示查询某一天的缓存分析列表 (Required)
  */
-func NewModifyCacheInstanceClassRequestWithAllParams(
+func NewDescribeCacheAnalysisListRequestWithAllParams(
     regionId string,
     cacheInstanceId string,
-    cacheInstanceClass string,
-    shardNumber *int,
-) *ModifyCacheInstanceClassRequest {
+    date string,
+) *DescribeCacheAnalysisListRequest {
 
-    return &ModifyCacheInstanceClassRequest{
+    return &DescribeCacheAnalysisListRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}:modifyCacheInstanceClass",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/cacheAnalysis",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         CacheInstanceId: cacheInstanceId,
-        CacheInstanceClass: cacheInstanceClass,
-        ShardNumber: shardNumber,
+        Date: date,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewModifyCacheInstanceClassRequestWithoutParam() *ModifyCacheInstanceClassRequest {
+func NewDescribeCacheAnalysisListRequestWithoutParam() *DescribeCacheAnalysisListRequest {
 
-    return &ModifyCacheInstanceClassRequest{
+    return &DescribeCacheAnalysisListRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}:modifyCacheInstanceClass",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/cacheAnalysis",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
@@ -104,38 +99,32 @@ func NewModifyCacheInstanceClassRequestWithoutParam() *ModifyCacheInstanceClassR
 }
 
 /* param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2(Required) */
-func (r *ModifyCacheInstanceClassRequest) SetRegionId(regionId string) {
+func (r *DescribeCacheAnalysisListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
-func (r *ModifyCacheInstanceClassRequest) SetCacheInstanceId(cacheInstanceId string) {
+func (r *DescribeCacheAnalysisListRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
 
-/* param cacheInstanceClass: 新规格(Required) */
-func (r *ModifyCacheInstanceClassRequest) SetCacheInstanceClass(cacheInstanceClass string) {
-    r.CacheInstanceClass = cacheInstanceClass
-}
-
-/* param shardNumber: 自定义分片数，只对自定义分片规格实例有效(Optional) */
-func (r *ModifyCacheInstanceClassRequest) SetShardNumber(shardNumber int) {
-    r.ShardNumber = &shardNumber
+/* param date: 格式:yyyy-MM-dd,表示查询某一天的缓存分析列表(Required) */
+func (r *DescribeCacheAnalysisListRequest) SetDate(date string) {
+    r.Date = date
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r ModifyCacheInstanceClassRequest) GetRegionId() string {
+func (r DescribeCacheAnalysisListRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type ModifyCacheInstanceClassResponse struct {
+type DescribeCacheAnalysisListResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result ModifyCacheInstanceClassResult `json:"result"`
+    Result DescribeCacheAnalysisListResult `json:"result"`
 }
 
-type ModifyCacheInstanceClassResult struct {
-    OrderNum string `json:"orderNum"`
-    BuyId string `json:"buyId"`
+type DescribeCacheAnalysisListResult struct {
+    Analyses []redis.CacheAnalysis `json:"analyses"`
 }

@@ -20,7 +20,7 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type ModifyCacheInstanceClassRequest struct {
+type ModifyAnalysisTimeRequest struct {
 
     core.JDCloudRequest
 
@@ -30,72 +30,66 @@ type ModifyCacheInstanceClassRequest struct {
     /* 缓存Redis实例ID，是访问实例的唯一标识  */
     CacheInstanceId string `json:"cacheInstanceId"`
 
-    /* 新规格  */
-    CacheInstanceClass string `json:"cacheInstanceClass"`
-
-    /* 自定义分片数，只对自定义分片规格实例有效 (Optional) */
-    ShardNumber *int `json:"shardNumber"`
+    /* 自动缓存分析时间，设置为-表示关闭，否则为：HH:mm-HH:mm 时区，例如"01:00-02:00 +0800"，表示东八区的1点到2点  */
+    AnalysisTime string `json:"analysisTime"`
 }
 
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
- * param cacheInstanceClass: 新规格 (Required)
+ * param analysisTime: 自动缓存分析时间，设置为-表示关闭，否则为：HH:mm-HH:mm 时区，例如"01:00-02:00 +0800"，表示东八区的1点到2点 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewModifyCacheInstanceClassRequest(
+func NewModifyAnalysisTimeRequest(
     regionId string,
     cacheInstanceId string,
-    cacheInstanceClass string,
-) *ModifyCacheInstanceClassRequest {
+    analysisTime string,
+) *ModifyAnalysisTimeRequest {
 
-	return &ModifyCacheInstanceClassRequest{
+	return &ModifyAnalysisTimeRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}:modifyCacheInstanceClass",
+			URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/analysisTime",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         CacheInstanceId: cacheInstanceId,
-        CacheInstanceClass: cacheInstanceClass,
+        AnalysisTime: analysisTime,
 	}
 }
 
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
- * param cacheInstanceClass: 新规格 (Required)
- * param shardNumber: 自定义分片数，只对自定义分片规格实例有效 (Optional)
+ * param analysisTime: 自动缓存分析时间，设置为-表示关闭，否则为：HH:mm-HH:mm 时区，例如"01:00-02:00 +0800"，表示东八区的1点到2点 (Required)
  */
-func NewModifyCacheInstanceClassRequestWithAllParams(
+func NewModifyAnalysisTimeRequestWithAllParams(
     regionId string,
     cacheInstanceId string,
-    cacheInstanceClass string,
-    shardNumber *int,
-) *ModifyCacheInstanceClassRequest {
+    analysisTime string,
+) *ModifyAnalysisTimeRequest {
 
-    return &ModifyCacheInstanceClassRequest{
+    return &ModifyAnalysisTimeRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}:modifyCacheInstanceClass",
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/analysisTime",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         CacheInstanceId: cacheInstanceId,
-        CacheInstanceClass: cacheInstanceClass,
-        ShardNumber: shardNumber,
+        AnalysisTime: analysisTime,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewModifyCacheInstanceClassRequestWithoutParam() *ModifyCacheInstanceClassRequest {
+func NewModifyAnalysisTimeRequestWithoutParam() *ModifyAnalysisTimeRequest {
 
-    return &ModifyCacheInstanceClassRequest{
+    return &ModifyAnalysisTimeRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}:modifyCacheInstanceClass",
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/analysisTime",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -104,38 +98,31 @@ func NewModifyCacheInstanceClassRequestWithoutParam() *ModifyCacheInstanceClassR
 }
 
 /* param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2(Required) */
-func (r *ModifyCacheInstanceClassRequest) SetRegionId(regionId string) {
+func (r *ModifyAnalysisTimeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
-func (r *ModifyCacheInstanceClassRequest) SetCacheInstanceId(cacheInstanceId string) {
+func (r *ModifyAnalysisTimeRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
 
-/* param cacheInstanceClass: 新规格(Required) */
-func (r *ModifyCacheInstanceClassRequest) SetCacheInstanceClass(cacheInstanceClass string) {
-    r.CacheInstanceClass = cacheInstanceClass
-}
-
-/* param shardNumber: 自定义分片数，只对自定义分片规格实例有效(Optional) */
-func (r *ModifyCacheInstanceClassRequest) SetShardNumber(shardNumber int) {
-    r.ShardNumber = &shardNumber
+/* param analysisTime: 自动缓存分析时间，设置为-表示关闭，否则为：HH:mm-HH:mm 时区，例如"01:00-02:00 +0800"，表示东八区的1点到2点(Required) */
+func (r *ModifyAnalysisTimeRequest) SetAnalysisTime(analysisTime string) {
+    r.AnalysisTime = analysisTime
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r ModifyCacheInstanceClassRequest) GetRegionId() string {
+func (r ModifyAnalysisTimeRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type ModifyCacheInstanceClassResponse struct {
+type ModifyAnalysisTimeResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result ModifyCacheInstanceClassResult `json:"result"`
+    Result ModifyAnalysisTimeResult `json:"result"`
 }
 
-type ModifyCacheInstanceClassResult struct {
-    OrderNum string `json:"orderNum"`
-    BuyId string `json:"buyId"`
+type ModifyAnalysisTimeResult struct {
 }

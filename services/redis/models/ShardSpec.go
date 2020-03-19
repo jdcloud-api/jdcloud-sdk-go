@@ -17,26 +17,17 @@
 package models
 
 
-type InstanceClass struct {
+type ShardSpec struct {
 
-    /* 规格代码：redis 2.8与redis 4.0的规格码不同，具体参考 https://docs.jdcloud.com/cn/jcs-for-redis/specifications，自定义分片规格请调用describeSpecConfig获取 (Optional) */
-    InstanceClass string `json:"instanceClass"`
+    /* 单分片规格代码，自定义分片实例才有 (Optional) */
+    ShardClass string `json:"shardClass"`
 
-    /* 规格类型：master-slave表示主从版，cluster表示集群版 (Optional) */
-    InstanceType string `json:"instanceType"`
-
-    /* cpu核数 (Optional) */
+    /* 单分片CPU核数 (Optional) */
     Cpu int `json:"cpu"`
 
-    /* 内存总容量（MB） (Optional) */
-    MemoryMB int `json:"memoryMB"`
+    /* 单分片内存大小（GB） (Optional) */
+    MemoryGB int `json:"memoryGB"`
 
-    /* 磁盘总容量（GB） (Optional) */
+    /* 单分片磁盘大小（GB） (Optional) */
     DiskGB int `json:"diskGB"`
-
-    /* 最大连接数 (Optional) */
-    MaxConnection int `json:"maxConnection"`
-
-    /* 内网带宽（MBps） (Optional) */
-    BandwidthMbps int `json:"bandwidthMbps"`
 }

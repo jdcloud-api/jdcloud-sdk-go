@@ -28,7 +28,7 @@ type CacheInstanceSpec struct {
     /* 缓存Redis实例名称，只支持数字、字母、英文下划线、中文，且不少于2字符不超过32字符  */
     CacheInstanceName string `json:"cacheInstanceName"`
 
-    /* 缓存Redis实例的规格代码，参考 https://docs.jdcloud.com/cn/jcs-for-redis/specifications  */
+    /* 缓存Redis实例的规格代码（可调用describeInstanceClass接口获取），或者自定义分片实例的单分片规格代码（可调用describeSpecConfig接口获取）  */
     CacheInstanceClass string `json:"cacheInstanceClass"`
 
     /* 缓存Redis实例的连接密码，为空即为免密，包含且只支持字母及数字，不少于8字符不超过16字符 (Optional) */
@@ -40,9 +40,12 @@ type CacheInstanceSpec struct {
     /* 缓存Redis实例的描述，不能超过256个字符 (Optional) */
     CacheInstanceDescription *string `json:"cacheInstanceDescription"`
 
-    /* 支持的缓存Redis引擎主次版本号：目前支持2.8和4.0，默认为2.8 (Optional) */
+    /* 缓存Redis引擎主次版本号：目前支持2.8和4.0，默认为2.8 (Optional) */
     RedisVersion *string `json:"redisVersion"`
 
-    /* 是否支持IPv6，0或空表示不支持，1表示支持IPv6，注意不是所有区域都支持IPv6 (Optional) */
+    /* 是否支持IPv6，0或空表示不支持，1表示支持IPv6，注意不是所有区域都支持IPv6，且必须保证VPC支持IPv6 (Optional) */
     Ipv6On *int `json:"ipv6On"`
+
+    /* 自定义分片数，只对自定义规格实例有效 (Optional) */
+    ShardNumber *int `json:"shardNumber"`
 }
