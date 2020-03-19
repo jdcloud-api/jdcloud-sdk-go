@@ -19,6 +19,9 @@ package models
 
 type CloudDisk struct {
 
+    /*  (Optional) */
+    Category string `json:"category"`
+
     /* 云盘ID。 (Optional) */
     VolumeId string `json:"volumeId"`
 
