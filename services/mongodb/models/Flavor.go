@@ -19,6 +19,18 @@ package models
 
 type Flavor struct {
 
+    /* 实例类型，副本集：Replication；分片集群：Sharding (Optional) */
+    InstanceType string `json:"instanceType"`
+
+    /* 副本集规格代码 (Optional) */
+    InstanceClass string `json:"instanceClass"`
+
+    /* 分片集群节点角色，mongos、configserver、shard (Optional) */
+    NodeRole string `json:"nodeRole"`
+
+    /* 分片集群节点规格代码 (Optional) */
+    NodeType string `json:"nodeType"`
+
     /* CPU核数 (Optional) */
     Cpu int `json:"cpu"`
 
@@ -39,4 +51,7 @@ type Flavor struct {
 
     /* 磁盘步长 (Optional) */
     DiskStep int `json:"diskStep"`
+
+    /* 存储类型。LOCAL_SSD -本地盘SSD、LOCAL_NVMe -本地盘NVMe、EBS_SSD-SSD云盘。 (Optional) */
+    InstanceStorageType string `json:"instanceStorageType"`
 }

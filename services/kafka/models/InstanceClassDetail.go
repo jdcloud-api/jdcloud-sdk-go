@@ -17,17 +17,17 @@
 package models
 
 
-type TopologyPair struct {
+type InstanceClassDetail struct {
 
-    /* 域名 (Optional) */
-    Domain string `json:"domain"`
+    /* 规格代码 (Optional) */
+    InstanceClassCode string `json:"instanceClassCode"`
 
-    /* ip地址 (Optional) */
-    Ip string `json:"ip"`
+    /* cpu核数 (Optional) */
+    Cpu int `json:"cpu"`
 
-    /* 端口 (Optional) */
-    Port string `json:"port"`
+    /* 内存单位GB (Optional) */
+    MemoryGB int `json:"memoryGB"`
 
-    /* floatingIp地址 (Optional) */
-    FloatingIp string `json:"floatingIp"`
+    /* 存储大小单位GB (Optional) */
+    DiskGB int `json:"diskGB"`
 }

@@ -17,17 +17,11 @@
 package models
 
 
-type TopologyPair struct {
+type InternalEndpoint struct {
 
-    /* 域名 (Optional) */
-    Domain string `json:"domain"`
+    /* broker endpoint (Optional) */
+    BrokerEndpoint []string `json:"brokerEndpoint"`
 
-    /* ip地址 (Optional) */
-    Ip string `json:"ip"`
-
-    /* 端口 (Optional) */
-    Port string `json:"port"`
-
-    /* floatingIp地址 (Optional) */
-    FloatingIp string `json:"floatingIp"`
+    /* zk endpoint (Optional) */
+    ZkEndpoint []string `json:"zkEndpoint"`
 }

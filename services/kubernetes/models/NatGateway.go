@@ -17,17 +17,11 @@
 package models
 
 
-type TopologyPair struct {
+type NatGateway struct {
 
-    /* 域名 (Optional) */
-    Domain string `json:"domain"`
+    /* nat的类型，nat_vm/nat_gw/nat_none (Optional) */
+    NatType string `json:"natType"`
 
-    /* ip地址 (Optional) */
-    Ip string `json:"ip"`
-
-    /* 端口 (Optional) */
-    Port string `json:"port"`
-
-    /* floatingIp地址 (Optional) */
-    FloatingIp string `json:"floatingIp"`
+    /* nat虚机id，或者nat网关的实例id (Optional) */
+    NatId string `json:"natId"`
 }

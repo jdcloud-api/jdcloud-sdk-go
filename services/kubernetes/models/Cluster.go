@@ -90,4 +90,10 @@ type Cluster struct {
 
     /* 控制节点操作进度 (Optional) */
     MasterProgress MaintenanceWindow `json:"masterProgress"`
+
+    /* 网络配置信息 (Optional) */
+    ClusterNetwork ClusterNetwork `json:"clusterNetwork"`
+
+    /* 集群网络类型,可取值为auto和customized (Optional) */
+    NetworkMode string `json:"networkMode"`
 }

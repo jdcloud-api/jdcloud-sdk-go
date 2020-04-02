@@ -17,17 +17,14 @@
 package models
 
 
-type TopologyPair struct {
+type DBInstanceInternal struct {
 
-    /* 域名 (Optional) */
-    Domain string `json:"domain"`
+    /* 实例ID (Optional) */
+    InstanceId string `json:"instanceId"`
 
-    /* ip地址 (Optional) */
-    Ip string `json:"ip"`
+    /* 实例名称 (Optional) */
+    InstanceName string `json:"instanceName"`
 
-    /* 端口 (Optional) */
-    Port string `json:"port"`
-
-    /* floatingIp地址 (Optional) */
-    FloatingIp string `json:"floatingIp"`
+    /* 实例状态.RUNNING：运行, ERROR：错误 ,BUILDING：创建中, DELETING：删除中, RESTORING：恢复中, RESIZING：变配中 (Optional) */
+    InstanceStatus string `json:"instanceStatus"`
 }

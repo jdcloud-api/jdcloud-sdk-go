@@ -40,6 +40,9 @@ type Backup struct {
     /* 备份模式，Automated(系统自动备份)、Manual(手动备份) (Optional) */
     BackupMode string `json:"backupMode"`
 
+    /* 备份方式，Logical - 逻辑备份、Physical - 物理备份 (Optional) */
+    BackupMethod string `json:"backupMethod"`
+
     /* 整个备份集大小，单位：Byte (Optional) */
     BackupSizeByte int `json:"backupSizeByte"`
 }

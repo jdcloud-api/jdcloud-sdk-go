@@ -40,7 +40,7 @@ func NewKubernetesClient(credential *core.Credential) *KubernetesClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "kubernetes",
-            Revision:    "0.7.1",
+            Revision:    "0.8.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }

@@ -17,17 +17,23 @@
 package models
 
 
-type TopologyPair struct {
+type ClusterNetwork struct {
 
-    /* 域名 (Optional) */
-    Domain string `json:"domain"`
+    /* kube-apiserver是否可公网访问，false则kube-apiserver不绑定公网地址，true绑定公网地址 (Optional) */
+    PublicApiServer bool `json:"publicApiServer"`
 
-    /* ip地址 (Optional) */
-    Ip string `json:"ip"`
+    /* master网络的cidr (Optional) */
+    MasterCidr string `json:"masterCidr"`
 
-    /* 端口 (Optional) */
-    Port string `json:"port"`
+    /* service网络的cidr (Optional) */
+    ServiceCidr string `json:"serviceCidr"`
 
-    /* floatingIp地址 (Optional) */
-    FloatingIp string `json:"floatingIp"`
+    /* 用户侧承载node和pod的vpc id (Optional) */
+    VpcId string `json:"vpcId"`
+
+    /* 集群子网信息 (Optional) */
+    ClusterSubnets []ClusterNetworkSubnet `json:"clusterSubnets"`
+
+    /* nat网关配置 (Optional) */
+    NatGateway []NatGateway `json:"natGateway"`
 }

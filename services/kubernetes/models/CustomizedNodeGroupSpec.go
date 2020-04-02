@@ -17,17 +17,26 @@
 package models
 
 
-type TopologyPair struct {
+type CustomizedNodeGroupSpec struct {
 
-    /* 域名 (Optional) */
-    Domain string `json:"domain"`
+    /* 名称  */
+    Name string `json:"name"`
 
-    /* ip地址 (Optional) */
-    Ip string `json:"ip"`
+    /*  (Optional) */
+    Description string `json:"description"`
 
-    /* 端口 (Optional) */
-    Port string `json:"port"`
+    /* 工作节点组的信息  */
+    NodeConfig NodeConfigSpec `json:"nodeConfig"`
 
-    /* floatingIp地址 (Optional) */
-    FloatingIp string `json:"floatingIp"`
+    /* 工作节点组的 az，必须为集群az的子集，默认为集群az (Optional) */
+    Azs []string `json:"azs"`
+
+    /* 工作节点组初始化大小，至少为1个  */
+    InitialNodeCount int `json:"initialNodeCount"`
+
+    /* 是否开启自动修复，默认不开启。 (Optional) */
+    AutoRepair bool `json:"autoRepair"`
+
+    /* 自动伸缩配置 (Optional) */
+    CaConfig CAConfigSpec `json:"caConfig"`
 }
