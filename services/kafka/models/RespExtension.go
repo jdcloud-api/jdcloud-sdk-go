@@ -17,17 +17,11 @@
 package models
 
 
-type TopologyPair struct {
+type RespExtension struct {
 
-    /* 域名 (Optional) */
-    Domain string `json:"domain"`
+    /* 内网地址，详情接口 (Optional) */
+    InternalEndpoint InternalEndpoint `json:"internalEndpoint"`
 
-    /* ip地址 (Optional) */
-    Ip string `json:"ip"`
-
-    /* 端口 (Optional) */
-    Port string `json:"port"`
-
-    /* floatingIp地址 (Optional) */
-    FloatingIp string `json:"floatingIp"`
+    /* kafka managerUrl (Optional) */
+    ManagerUrl string `json:"managerUrl"`
 }

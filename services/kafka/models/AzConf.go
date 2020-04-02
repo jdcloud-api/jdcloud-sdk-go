@@ -17,17 +17,14 @@
 package models
 
 
-type TopologyPair struct {
+type AzConf struct {
 
-    /* 域名 (Optional) */
-    Domain string `json:"domain"`
+    /* azId (Optional) */
+    AzId string `json:"azId"`
 
-    /* ip地址 (Optional) */
-    Ip string `json:"ip"`
+    /* 角色 (Optional) */
+    Role string `json:"role"`
 
-    /* 端口 (Optional) */
-    Port string `json:"port"`
-
-    /* floatingIp地址 (Optional) */
-    FloatingIp string `json:"floatingIp"`
+    /* 节点配置 (Optional) */
+    NodeConf NodeConf `json:"nodeConf"`
 }

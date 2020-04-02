@@ -18,81 +18,79 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    kafka "github.com/jdcloud-api/jdcloud-sdk-go/services/kafka/models"
 )
 
-type CreateBackupRequest struct {
+type ModifyInstanceSpecRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* regionId  */
     RegionId string `json:"regionId"`
 
     /* 实例ID  */
     InstanceId string `json:"instanceId"`
 
-    /* 备份名称 (Optional) */
-    BackupName *string `json:"backupName"`
-
-    /* 备份方式，Logical - 逻辑备份、Physical - 物理备份 (Optional) */
-    BackupMethod *string `json:"backupMethod"`
+    /* 变更的规格  */
+    InstanceClassSpec []kafka.InstanceClassSpec `json:"instanceClassSpec"`
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: regionId (Required)
  * param instanceId: 实例ID (Required)
+ * param instanceClassSpec: 变更的规格 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewCreateBackupRequest(
+func NewModifyInstanceSpecRequest(
     regionId string,
     instanceId string,
-) *CreateBackupRequest {
+    instanceClassSpec []kafka.InstanceClassSpec,
+) *ModifyInstanceSpecRequest {
 
-	return &CreateBackupRequest{
+	return &ModifyInstanceSpecRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/backups",
+			URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstanceSpec",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         InstanceId: instanceId,
+        InstanceClassSpec: instanceClassSpec,
 	}
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: regionId (Required)
  * param instanceId: 实例ID (Required)
- * param backupName: 备份名称 (Optional)
- * param backupMethod: 备份方式，Logical - 逻辑备份、Physical - 物理备份 (Optional)
+ * param instanceClassSpec: 变更的规格 (Required)
  */
-func NewCreateBackupRequestWithAllParams(
+func NewModifyInstanceSpecRequestWithAllParams(
     regionId string,
     instanceId string,
-    backupName *string,
-    backupMethod *string,
-) *CreateBackupRequest {
+    instanceClassSpec []kafka.InstanceClassSpec,
+) *ModifyInstanceSpecRequest {
 
-    return &CreateBackupRequest{
+    return &ModifyInstanceSpecRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/backups",
+            URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstanceSpec",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         InstanceId: instanceId,
-        BackupName: backupName,
-        BackupMethod: backupMethod,
+        InstanceClassSpec: instanceClassSpec,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewCreateBackupRequestWithoutParam() *CreateBackupRequest {
+func NewModifyInstanceSpecRequestWithoutParam() *ModifyInstanceSpecRequest {
 
-    return &CreateBackupRequest{
+    return &ModifyInstanceSpecRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/backups",
+            URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstanceSpec",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -100,38 +98,34 @@ func NewCreateBackupRequestWithoutParam() *CreateBackupRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
-func (r *CreateBackupRequest) SetRegionId(regionId string) {
+/* param regionId: regionId(Required) */
+func (r *ModifyInstanceSpecRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 实例ID(Required) */
-func (r *CreateBackupRequest) SetInstanceId(instanceId string) {
+func (r *ModifyInstanceSpecRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param backupName: 备份名称(Optional) */
-func (r *CreateBackupRequest) SetBackupName(backupName string) {
-    r.BackupName = &backupName
-}
-
-/* param backupMethod: 备份方式，Logical - 逻辑备份、Physical - 物理备份(Optional) */
-func (r *CreateBackupRequest) SetBackupMethod(backupMethod string) {
-    r.BackupMethod = &backupMethod
+/* param instanceClassSpec: 变更的规格(Required) */
+func (r *ModifyInstanceSpecRequest) SetInstanceClassSpec(instanceClassSpec []kafka.InstanceClassSpec) {
+    r.InstanceClassSpec = instanceClassSpec
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r CreateBackupRequest) GetRegionId() string {
+func (r ModifyInstanceSpecRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type CreateBackupResponse struct {
+type ModifyInstanceSpecResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result CreateBackupResult `json:"result"`
+    Result ModifyInstanceSpecResult `json:"result"`
 }
 
-type CreateBackupResult struct {
-    BackupId string `json:"backupId"`
+type ModifyInstanceSpecResult struct {
+    InstanceId string `json:"instanceId"`
+    BuyId string `json:"buyId"`
 }

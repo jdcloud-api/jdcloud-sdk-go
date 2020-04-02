@@ -17,17 +17,8 @@
 package models
 
 
-type TopologyPair struct {
+type ReqExtension struct {
 
-    /* 域名 (Optional) */
-    Domain string `json:"domain"`
-
-    /* ip地址 (Optional) */
-    Ip string `json:"ip"`
-
-    /* 端口 (Optional) */
-    Port string `json:"port"`
-
-    /* floatingIp地址 (Optional) */
-    FloatingIp string `json:"floatingIp"`
+    /* 消息保留时长 (Optional) */
+    MsgRetain *int `json:"msgRetain"`
 }

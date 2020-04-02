@@ -49,14 +49,17 @@ type CreateNodeGroupRequest struct {
     /* 工作节点组初始化大小运行的VPC  */
     VpcId string `json:"vpcId"`
 
-    /* 工作节点组的cidr  */
-    NodeCidr string `json:"nodeCidr"`
+    /* 工作节点组的cidr (Optional) */
+    NodeCidr *string `json:"nodeCidr"`
 
     /* 是否开启工作节点组的自动修复，默认关闭 (Optional) */
     AutoRepair *bool `json:"autoRepair"`
 
     /* 自动伸缩配置 (Optional) */
     CaConfig *kubernetes.CAConfigSpec `json:"caConfig"`
+
+    /* 节点组的网络配置，如果集群的类型customized类型，则必须指定该参数，如果是auto，则不是必须 (Optional) */
+    NodeGroupNetwork *kubernetes.NodeGroupNetworkSpec `json:"nodeGroupNetwork"`
 }
 
 /*
@@ -66,7 +69,6 @@ type CreateNodeGroupRequest struct {
  * param nodeConfig: 工作节点配置信息 (Required)
  * param initialNodeCount: 工作节点组初始化大小 (Required)
  * param vpcId: 工作节点组初始化大小运行的VPC (Required)
- * param nodeCidr: 工作节点组的cidr (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -77,7 +79,6 @@ func NewCreateNodeGroupRequest(
     nodeConfig *kubernetes.NodeConfigSpec,
     initialNodeCount int,
     vpcId string,
-    nodeCidr string,
 ) *CreateNodeGroupRequest {
 
 	return &CreateNodeGroupRequest{
@@ -93,7 +94,6 @@ func NewCreateNodeGroupRequest(
         NodeConfig: nodeConfig,
         InitialNodeCount: initialNodeCount,
         VpcId: vpcId,
-        NodeCidr: nodeCidr,
 	}
 }
 
@@ -106,9 +106,10 @@ func NewCreateNodeGroupRequest(
  * param azs: 工作节点组的 az，必须为集群az的子集，默认为集群az (Optional)
  * param initialNodeCount: 工作节点组初始化大小 (Required)
  * param vpcId: 工作节点组初始化大小运行的VPC (Required)
- * param nodeCidr: 工作节点组的cidr (Required)
+ * param nodeCidr: 工作节点组的cidr (Optional)
  * param autoRepair: 是否开启工作节点组的自动修复，默认关闭 (Optional)
  * param caConfig: 自动伸缩配置 (Optional)
+ * param nodeGroupNetwork: 节点组的网络配置，如果集群的类型customized类型，则必须指定该参数，如果是auto，则不是必须 (Optional)
  */
 func NewCreateNodeGroupRequestWithAllParams(
     regionId string,
@@ -119,9 +120,10 @@ func NewCreateNodeGroupRequestWithAllParams(
     azs []string,
     initialNodeCount int,
     vpcId string,
-    nodeCidr string,
+    nodeCidr *string,
     autoRepair *bool,
     caConfig *kubernetes.CAConfigSpec,
+    nodeGroupNetwork *kubernetes.NodeGroupNetworkSpec,
 ) *CreateNodeGroupRequest {
 
     return &CreateNodeGroupRequest{
@@ -142,6 +144,7 @@ func NewCreateNodeGroupRequestWithAllParams(
         NodeCidr: nodeCidr,
         AutoRepair: autoRepair,
         CaConfig: caConfig,
+        NodeGroupNetwork: nodeGroupNetwork,
     }
 }
 
@@ -198,9 +201,9 @@ func (r *CreateNodeGroupRequest) SetVpcId(vpcId string) {
     r.VpcId = vpcId
 }
 
-/* param nodeCidr: 工作节点组的cidr(Required) */
+/* param nodeCidr: 工作节点组的cidr(Optional) */
 func (r *CreateNodeGroupRequest) SetNodeCidr(nodeCidr string) {
-    r.NodeCidr = nodeCidr
+    r.NodeCidr = &nodeCidr
 }
 
 /* param autoRepair: 是否开启工作节点组的自动修复，默认关闭(Optional) */
@@ -211,6 +214,11 @@ func (r *CreateNodeGroupRequest) SetAutoRepair(autoRepair bool) {
 /* param caConfig: 自动伸缩配置(Optional) */
 func (r *CreateNodeGroupRequest) SetCaConfig(caConfig *kubernetes.CAConfigSpec) {
     r.CaConfig = caConfig
+}
+
+/* param nodeGroupNetwork: 节点组的网络配置，如果集群的类型customized类型，则必须指定该参数，如果是auto，则不是必须(Optional) */
+func (r *CreateNodeGroupRequest) SetNodeGroupNetwork(nodeGroupNetwork *kubernetes.NodeGroupNetworkSpec) {
+    r.NodeGroupNetwork = nodeGroupNetwork
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

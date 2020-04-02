@@ -17,17 +17,23 @@
 package models
 
 
-type TopologyPair struct {
+type ClusterSubnet struct {
 
-    /* 域名 (Optional) */
-    Domain string `json:"domain"`
+    /* 子网 ID (Optional) */
+    SubnetId string `json:"subnetId"`
 
-    /* ip地址 (Optional) */
-    Ip string `json:"ip"`
+    /* 子网类型，可取值为：pod_subnet/lb_subnet/node_subnet (Optional) */
+    SubnetType string `json:"subnetType"`
 
-    /* 端口 (Optional) */
-    Port string `json:"port"`
+    /* 子网是否启用，仅pod子网可用。 (Optional) */
+    Enabled bool `json:"enabled"`
 
-    /* floatingIp地址 (Optional) */
-    FloatingIp string `json:"floatingIp"`
+    /* 子网CIDR (Optional) */
+    Cidr string `json:"cidr"`
+
+    /* 子网中可用的IP数量 (Optional) */
+    AvailableIpNum int `json:"availableIpNum"`
+
+    /* 子网名称 (Optional) */
+    SubnetName string `json:"subnetName"`
 }

@@ -17,17 +17,11 @@
 package models
 
 
-type TopologyPair struct {
+type InstanceName struct {
 
-    /* 域名 (Optional) */
-    Domain string `json:"domain"`
+    /* 实例ID (Optional) */
+    ResourceId string `json:"resourceId"`
 
-    /* ip地址 (Optional) */
-    Ip string `json:"ip"`
-
-    /* 端口 (Optional) */
-    Port string `json:"port"`
-
-    /* floatingIp地址 (Optional) */
-    FloatingIp string `json:"floatingIp"`
+    /* 实例名称 (Optional) */
+    ResourceName string `json:"resourceName"`
 }

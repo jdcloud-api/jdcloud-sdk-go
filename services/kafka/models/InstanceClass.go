@@ -17,17 +17,26 @@
 package models
 
 
-type TopologyPair struct {
+type InstanceClass struct {
 
-    /* 域名 (Optional) */
-    Domain string `json:"domain"`
+    /* 角色 (Optional) */
+    Role string `json:"role"`
 
-    /* ip地址 (Optional) */
-    Ip string `json:"ip"`
+    /* 节点规格代码 (Optional) */
+    NodeClassCode string `json:"nodeClassCode"`
 
-    /* 端口 (Optional) */
-    Port string `json:"port"`
+    /* 节点cpu核数 (Optional) */
+    NodeCpu int `json:"nodeCpu"`
 
-    /* floatingIp地址 (Optional) */
-    FloatingIp string `json:"floatingIp"`
+    /* 节点内存单位GB (Optional) */
+    NodeMemoryGB int `json:"nodeMemoryGB"`
+
+    /* 节点个数 (Optional) */
+    NodeCount int `json:"nodeCount"`
+
+    /* 磁盘类型 (Optional) */
+    NodeDiskType string `json:"nodeDiskType"`
+
+    /* 单节点磁盘大小单位GB (Optional) */
+    NodeDiskGB int `json:"nodeDiskGB"`
 }

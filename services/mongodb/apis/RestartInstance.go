@@ -20,37 +20,31 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type CreateBackupRequest struct {
+type RestartInstanceRequest struct {
 
     core.JDCloudRequest
 
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 实例ID  */
+    /* Instance ID  */
     InstanceId string `json:"instanceId"`
-
-    /* 备份名称 (Optional) */
-    BackupName *string `json:"backupName"`
-
-    /* 备份方式，Logical - 逻辑备份、Physical - 物理备份 (Optional) */
-    BackupMethod *string `json:"backupMethod"`
 }
 
 /*
  * param regionId: Region ID (Required)
- * param instanceId: 实例ID (Required)
+ * param instanceId: Instance ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewCreateBackupRequest(
+func NewRestartInstanceRequest(
     regionId string,
     instanceId string,
-) *CreateBackupRequest {
+) *RestartInstanceRequest {
 
-	return &CreateBackupRequest{
+	return &RestartInstanceRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/backups",
+			URL:     "/regions/{regionId}/instances/{instanceId}:restartInstance",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -62,37 +56,31 @@ func NewCreateBackupRequest(
 
 /*
  * param regionId: Region ID (Required)
- * param instanceId: 实例ID (Required)
- * param backupName: 备份名称 (Optional)
- * param backupMethod: 备份方式，Logical - 逻辑备份、Physical - 物理备份 (Optional)
+ * param instanceId: Instance ID (Required)
  */
-func NewCreateBackupRequestWithAllParams(
+func NewRestartInstanceRequestWithAllParams(
     regionId string,
     instanceId string,
-    backupName *string,
-    backupMethod *string,
-) *CreateBackupRequest {
+) *RestartInstanceRequest {
 
-    return &CreateBackupRequest{
+    return &RestartInstanceRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/backups",
+            URL:     "/regions/{regionId}/instances/{instanceId}:restartInstance",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         InstanceId: instanceId,
-        BackupName: backupName,
-        BackupMethod: backupMethod,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewCreateBackupRequestWithoutParam() *CreateBackupRequest {
+func NewRestartInstanceRequestWithoutParam() *RestartInstanceRequest {
 
-    return &CreateBackupRequest{
+    return &RestartInstanceRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/backups",
+            URL:     "/regions/{regionId}/instances/{instanceId}:restartInstance",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -101,37 +89,27 @@ func NewCreateBackupRequestWithoutParam() *CreateBackupRequest {
 }
 
 /* param regionId: Region ID(Required) */
-func (r *CreateBackupRequest) SetRegionId(regionId string) {
+func (r *RestartInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 实例ID(Required) */
-func (r *CreateBackupRequest) SetInstanceId(instanceId string) {
+/* param instanceId: Instance ID(Required) */
+func (r *RestartInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
-}
-
-/* param backupName: 备份名称(Optional) */
-func (r *CreateBackupRequest) SetBackupName(backupName string) {
-    r.BackupName = &backupName
-}
-
-/* param backupMethod: 备份方式，Logical - 逻辑备份、Physical - 物理备份(Optional) */
-func (r *CreateBackupRequest) SetBackupMethod(backupMethod string) {
-    r.BackupMethod = &backupMethod
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r CreateBackupRequest) GetRegionId() string {
+func (r RestartInstanceRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type CreateBackupResponse struct {
+type RestartInstanceResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result CreateBackupResult `json:"result"`
+    Result RestartInstanceResult `json:"result"`
 }
 
-type CreateBackupResult struct {
-    BackupId string `json:"backupId"`
+type RestartInstanceResult struct {
+    InstanceId string `json:"instanceId"`
 }

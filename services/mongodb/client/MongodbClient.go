@@ -40,7 +40,7 @@ func NewMongodbClient(credential *core.Credential) *MongodbClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "mongodb",
-            Revision:    "1.0.5",
+            Revision:    "1.1.9",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,6 +51,30 @@ func (c *MongodbClient) SetConfig(config *core.Config) {
 
 func (c *MongodbClient) SetLogger(logger core.Logger) {
     c.Logger = logger
+}
+
+func (c *MongodbClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
+}
+
+/* 删除跨地域备份同步服务 */
+func (c *MongodbClient) DeleteBackupSynchronicities(request *mongodb.DeleteBackupSynchronicitiesRequest) (*mongodb.DeleteBackupSynchronicitiesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &mongodb.DeleteBackupSynchronicitiesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
 }
 
 /* 变更实例规格 */
@@ -73,6 +97,26 @@ func (c *MongodbClient) ModifyInstanceSpec(request *mongodb.ModifyInstanceSpecRe
     return jdResp, err
 }
 
+/* 重启实例 */
+func (c *MongodbClient) RestartInstance(request *mongodb.RestartInstanceRequest) (*mongodb.RestartInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &mongodb.RestartInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 创建实例 */
 func (c *MongodbClient) CreateInstance(request *mongodb.CreateInstanceRequest) (*mongodb.CreateInstanceResponse, error) {
     if request == nil {
@@ -84,6 +128,26 @@ func (c *MongodbClient) CreateInstance(request *mongodb.CreateInstanceRequest) (
     }
 
     jdResp := &mongodb.CreateInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 变更分片集群的节点规格，支持Mognos、Shard节点。 */
+func (c *MongodbClient) ModifyNodeSpec(request *mongodb.ModifyNodeSpecRequest) (*mongodb.ModifyNodeSpecResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &mongodb.ModifyNodeSpecResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -153,6 +217,26 @@ func (c *MongodbClient) DescribeInstances(request *mongodb.DescribeInstancesRequ
     return jdResp, err
 }
 
+/* 创建分片集群 */
+func (c *MongodbClient) CreateShardingInstance(request *mongodb.CreateShardingInstanceRequest) (*mongodb.CreateShardingInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &mongodb.CreateShardingInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 获取备份下载链接 */
 func (c *MongodbClient) BackupDownloadURL(request *mongodb.BackupDownloadURLRequest) (*mongodb.BackupDownloadURLResponse, error) {
     if request == nil {
@@ -164,6 +248,46 @@ func (c *MongodbClient) BackupDownloadURL(request *mongodb.BackupDownloadURLRequ
     }
 
     jdResp := &mongodb.BackupDownloadURLResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 重启MongoDB分片集群节点，支持重启Mongos、Shard。 */
+func (c *MongodbClient) RestartNode(request *mongodb.RestartNodeRequest) (*mongodb.RestartNodeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &mongodb.RestartNodeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询跨区域备份同步服务 */
+func (c *MongodbClient) DescribeBackupSynchronicities(request *mongodb.DescribeBackupSynchronicitiesRequest) (*mongodb.DescribeBackupSynchronicitiesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &mongodb.DescribeBackupSynchronicitiesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -204,6 +328,26 @@ func (c *MongodbClient) RestoreInstance(request *mongodb.RestoreInstanceRequest)
     }
 
     jdResp := &mongodb.RestoreInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建跨区域备份同步服务 */
+func (c *MongodbClient) CreateBackupSynchronicity(request *mongodb.CreateBackupSynchronicityRequest) (*mongodb.CreateBackupSynchronicityResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &mongodb.CreateBackupSynchronicityResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

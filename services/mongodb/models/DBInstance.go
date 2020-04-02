@@ -26,25 +26,34 @@ type DBInstance struct {
     /* 实例名称 (Optional) */
     InstanceName string `json:"instanceName"`
 
+    /* 实例类型，副本集：Replication；分片集群：Sharding； (Optional) */
+    InstanceType string `json:"instanceType"`
+
     /* 数据库类型 (Optional) */
     Engine string `json:"engine"`
 
     /* 数据库版本 (Optional) */
     EngineVersion string `json:"engineVersion"`
 
-    /* 实例规格代码 (Optional) */
+    /* 存储类型。LOCAL_SSD -本地盘SSD、LOCAL_NVMe -本地盘NVMe、EBS_SSD-SSD云盘。 (Optional) */
+    InstanceStorageType string `json:"instanceStorageType"`
+
+    /* 实例数据加密（存储类型为云硬盘才支持数据加密）。 false：不加密；true：加密。缺省为false。 (Optional) */
+    StorageEncrypted bool `json:"storageEncrypted"`
+
+    /* 副本集实例规格代码 (Optional) */
     InstanceClass string `json:"instanceClass"`
 
-    /* 存储空间 (Optional) */
+    /* 副本集存储空间 (Optional) */
     InstanceStorageGB int `json:"instanceStorageGB"`
 
-    /* CPU核数 (Optional) */
+    /* 副本集CPU核数 (Optional) */
     InstanceCPU int `json:"instanceCPU"`
 
-    /* 内存，单位GB (Optional) */
+    /* 副本集内存，单位GB (Optional) */
     InstanceMemoryGB int `json:"instanceMemoryGB"`
 
-    /* 可取区ID，依次为主、从、隐藏节点所在可用区 (Optional) */
+    /* 副本集可用区区ID，依次为主、从、隐藏节点所在可用区 (Optional) */
     AzId []string `json:"azId"`
 
     /* VPCID (Optional) */
@@ -56,7 +65,7 @@ type DBInstance struct {
     /* 副本集名称 (Optional) */
     ReplicaSetName string `json:"replicaSetName"`
 
-    /* 域名 (Optional) */
+    /* 副本集域名 (Optional) */
     InstanceDomain string `json:"instanceDomain"`
 
     /* 默认库名 (Optional) */
@@ -65,7 +74,7 @@ type DBInstance struct {
     /* 默认用户名 (Optional) */
     AccountName string `json:"accountName"`
 
-    /* 应用访问端口 (Optional) */
+    /* 副本集访问端口 (Optional) */
     InstancePort string `json:"instancePort"`
 
     /* 实例状态.RUNNING：运行, ERROR：错误 ,BUILDING：创建中, DELETING：删除中, RESTORING：恢复中, RESIZING：变配中 (Optional) */
@@ -91,4 +100,13 @@ type DBInstance struct {
 
     /* 标签 (Optional) */
     Tags []Tag `json:"tags"`
+
+    /* mongos信息 (Optional) */
+    Mongos []Mongos `json:"mongos"`
+
+    /* configserver信息 (Optional) */
+    Configserver []Configserver `json:"configserver"`
+
+    /* shard信息 (Optional) */
+    Shard []Shard `json:"shard"`
 }

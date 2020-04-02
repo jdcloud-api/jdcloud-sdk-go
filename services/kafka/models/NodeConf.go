@@ -17,17 +17,11 @@
 package models
 
 
-type TopologyPair struct {
+type NodeConf struct {
 
-    /* 域名 (Optional) */
-    Domain string `json:"domain"`
+    /* 磁盘类型 (Optional) */
+    StorageType []string `json:"storageType"`
 
-    /* ip地址 (Optional) */
-    Ip string `json:"ip"`
-
-    /* 端口 (Optional) */
-    Port string `json:"port"`
-
-    /* floatingIp地址 (Optional) */
-    FloatingIp string `json:"floatingIp"`
+    /* 限制条件 (Optional) */
+    Constraints ConstraintsConf `json:"constraints"`
 }

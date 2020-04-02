@@ -17,17 +17,8 @@
 package models
 
 
-type TopologyPair struct {
+type ConsumerGroup struct {
 
-    /* 域名 (Optional) */
-    Domain string `json:"domain"`
-
-    /* ip地址 (Optional) */
-    Ip string `json:"ip"`
-
-    /* 端口 (Optional) */
-    Port string `json:"port"`
-
-    /* floatingIp地址 (Optional) */
-    FloatingIp string `json:"floatingIp"`
+    /* 名称 (Optional) */
+    Name string `json:"name"`
 }
