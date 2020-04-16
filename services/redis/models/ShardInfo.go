@@ -27,4 +27,7 @@ type ShardInfo struct {
 
     /* 分片数列表 (Optional) */
     ShardNumberList []int `json:"shardNumberList"`
+
+    /* 需要的IP数列表 (Optional) */
+    IpNumberList []int `json:"ipNumberList"`
 }

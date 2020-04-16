@@ -25,8 +25,7 @@ type SetIpCleanThresholdRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域编码. 基础防护已支持华北-北京, 华东-宿迁, 华东-上海, 华南-广州
-  */
+    /* 地域编码. 基础防护已支持华北-北京, 华东-宿迁, 华东-上海, 华南-广州  */
     RegionId string `json:"regionId"`
 
     /* 请求参数  */
@@ -34,8 +33,7 @@ type SetIpCleanThresholdRequest struct {
 }
 
 /*
- * param regionId: 地域编码. 基础防护已支持华北-北京, 华东-宿迁, 华东-上海, 华南-广州
- (Required)
+ * param regionId: 地域编码. 基础防护已支持华北-北京, 华东-宿迁, 华东-上海, 华南-广州 (Required)
  * param ipCleanThresholdSpec: 请求参数 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -58,8 +56,7 @@ func NewSetIpCleanThresholdRequest(
 }
 
 /*
- * param regionId: 地域编码. 基础防护已支持华北-北京, 华东-宿迁, 华东-上海, 华南-广州
- (Required)
+ * param regionId: 地域编码. 基础防护已支持华北-北京, 华东-宿迁, 华东-上海, 华南-广州 (Required)
  * param ipCleanThresholdSpec: 请求参数 (Required)
  */
 func NewSetIpCleanThresholdRequestWithAllParams(
@@ -92,8 +89,7 @@ func NewSetIpCleanThresholdRequestWithoutParam() *SetIpCleanThresholdRequest {
     }
 }
 
-/* param regionId: 地域编码. 基础防护已支持华北-北京, 华东-宿迁, 华东-上海, 华南-广州
-(Required) */
+/* param regionId: 地域编码. 基础防护已支持华北-北京, 华东-宿迁, 华东-上海, 华南-广州(Required) */
 func (r *SetIpCleanThresholdRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

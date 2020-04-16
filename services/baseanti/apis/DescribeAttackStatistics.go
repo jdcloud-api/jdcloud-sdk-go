@@ -30,10 +30,7 @@ type DescribeAttackStatisticsRequest struct {
     /* 结束时间, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ  */
     EndTime string `json:"endTime"`
 
-    /* 基础防护已防护的公网 IP, ip 不为空时, 统计 ip 对应的攻击情况, ip 为空时, 统计用户所有公网 IP 的攻击情况
-- 使用 <a href="http://docs.jdcloud.com/anti-ddos-basic/api/describeelasticipresources">describeElasticIpResources</a> 接口查询基础防护已防护的私有网络弹性公网 IP
-- 使用 <a href="http://docs.jdcloud.com/anti-ddos-basic/api/describecpsipresources">describeCpsIpResources</a> 接口查询基础防护已防护的云物理服务器公网IP 和 弹性公网 IP
- (Optional) */
+    /* 基础防护已防护的公网 IP, ip 不为空时, 统计 ip 对应的攻击情况, ip 为空时, 统计用户所有公网 IP 的攻击情况. <br>- 使用 <a href='http://docs.jdcloud.com/anti-ddos-basic/api/describeelasticipresources'>describeElasticIpResources</a> 接口查询基础防护已防护的私有网络弹性公网 IP. <br>- 使用 <a href='http://docs.jdcloud.com/anti-ddos-basic/api/describecpsipresources'>describeCpsIpResources</a> 接口查询基础防护已防护的云物理服务器公网IP 和 弹性公网 IP. <br>- 使用 <a href='http://docs.jdcloud.com/anti-ddos-basic/api/describeccsipresources'>describeCcsIpResources</a> 接口查询基础防护已防护的托管区公网 IP (Optional) */
     Ip []string `json:"ip"`
 }
 
@@ -63,10 +60,7 @@ func NewDescribeAttackStatisticsRequest(
 /*
  * param startTime: 开始时间, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Required)
  * param endTime: 结束时间, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Required)
- * param ip: 基础防护已防护的公网 IP, ip 不为空时, 统计 ip 对应的攻击情况, ip 为空时, 统计用户所有公网 IP 的攻击情况
-- 使用 <a href="http://docs.jdcloud.com/anti-ddos-basic/api/describeelasticipresources">describeElasticIpResources</a> 接口查询基础防护已防护的私有网络弹性公网 IP
-- 使用 <a href="http://docs.jdcloud.com/anti-ddos-basic/api/describecpsipresources">describeCpsIpResources</a> 接口查询基础防护已防护的云物理服务器公网IP 和 弹性公网 IP
- (Optional)
+ * param ip: 基础防护已防护的公网 IP, ip 不为空时, 统计 ip 对应的攻击情况, ip 为空时, 统计用户所有公网 IP 的攻击情况. <br>- 使用 <a href='http://docs.jdcloud.com/anti-ddos-basic/api/describeelasticipresources'>describeElasticIpResources</a> 接口查询基础防护已防护的私有网络弹性公网 IP. <br>- 使用 <a href='http://docs.jdcloud.com/anti-ddos-basic/api/describecpsipresources'>describeCpsIpResources</a> 接口查询基础防护已防护的云物理服务器公网IP 和 弹性公网 IP. <br>- 使用 <a href='http://docs.jdcloud.com/anti-ddos-basic/api/describeccsipresources'>describeCcsIpResources</a> 接口查询基础防护已防护的托管区公网 IP (Optional)
  */
 func NewDescribeAttackStatisticsRequestWithAllParams(
     startTime string,
@@ -110,10 +104,7 @@ func (r *DescribeAttackStatisticsRequest) SetEndTime(endTime string) {
     r.EndTime = endTime
 }
 
-/* param ip: 基础防护已防护的公网 IP, ip 不为空时, 统计 ip 对应的攻击情况, ip 为空时, 统计用户所有公网 IP 的攻击情况
-- 使用 <a href="http://docs.jdcloud.com/anti-ddos-basic/api/describeelasticipresources">describeElasticIpResources</a> 接口查询基础防护已防护的私有网络弹性公网 IP
-- 使用 <a href="http://docs.jdcloud.com/anti-ddos-basic/api/describecpsipresources">describeCpsIpResources</a> 接口查询基础防护已防护的云物理服务器公网IP 和 弹性公网 IP
-(Optional) */
+/* param ip: 基础防护已防护的公网 IP, ip 不为空时, 统计 ip 对应的攻击情况, ip 为空时, 统计用户所有公网 IP 的攻击情况. <br>- 使用 <a href='http://docs.jdcloud.com/anti-ddos-basic/api/describeelasticipresources'>describeElasticIpResources</a> 接口查询基础防护已防护的私有网络弹性公网 IP. <br>- 使用 <a href='http://docs.jdcloud.com/anti-ddos-basic/api/describecpsipresources'>describeCpsIpResources</a> 接口查询基础防护已防护的云物理服务器公网IP 和 弹性公网 IP. <br>- 使用 <a href='http://docs.jdcloud.com/anti-ddos-basic/api/describeccsipresources'>describeCcsIpResources</a> 接口查询基础防护已防护的托管区公网 IP(Optional) */
 func (r *DescribeAttackStatisticsRequest) SetIp(ip []string) {
     r.Ip = ip
 }
@@ -133,6 +124,6 @@ type DescribeAttackStatisticsResponse struct {
 type DescribeAttackStatisticsResult struct {
     AttackCount int `json:"attackCount"`
     BlackHoleCount int `json:"blackHoleCount"`
-    Peak int `json:"peak"`
+    Peak float64 `json:"peak"`
     Unit string `json:"unit"`
 }

@@ -26,7 +26,7 @@ type CacheInstance struct {
     /* 实例名称 (Optional) */
     CacheInstanceName string `json:"cacheInstanceName"`
 
-    /* 规格代码，或者自定义分片实例的单分片规格代码，参考 https://docs.jdcloud.com/cn/jcs-for-redis/specifications (Optional) */
+    /* 规格代码，或者自定义分片实例的单分片规格代码 (Optional) */
     CacheInstanceClass string `json:"cacheInstanceClass"`
 
     /* 实例的总内存（MB） (Optional) */

@@ -30,4 +30,13 @@ type ShardSpec struct {
 
     /* 单分片磁盘大小（GB） (Optional) */
     DiskGB int `json:"diskGB"`
+
+    /* 单分片最大连接数 (Optional) */
+    MaxConnection int `json:"maxConnection"`
+
+    /* 单分片带宽（Mbps） (Optional) */
+    BandwidthMbps int `json:"bandwidthMbps"`
+
+    /* 支持的分片数列表 (Optional) */
+    ShardNumberList []int `json:"shardNumberList"`
 }

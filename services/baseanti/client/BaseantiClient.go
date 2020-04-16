@@ -40,7 +40,7 @@ func NewBaseantiClient(credential *core.Credential) *BaseantiClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "baseanti",
-            Revision:    "1.2.0",
+            Revision:    "1.2.3",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,6 +51,10 @@ func (c *BaseantiClient) SetConfig(config *core.Config) {
 
 func (c *BaseantiClient) SetLogger(logger core.Logger) {
     c.Logger = logger
+}
+
+func (c *BaseantiClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
 }
 
 /* 查询基础防护已防护公网 IP 安全信息, 支持 ipv4 和 ipv6 */
@@ -113,8 +117,7 @@ func (c *BaseantiClient) DescribeIpMonitorFlow(request *baseanti.DescribeIpMonit
     return jdResp, err
 }
 
-/* 查询基础防护已防护的公网 IP 的安全信息列表. 包括私有网络的弹性公网 IP(运营商级 NAT 保留地址除外), 云物理服务器的公网 IP 和弹性公网 IP. (已废弃, 建议使用 <a href="http://docs.jdcloud.com/anti-ddos-basic/api/describeelasticipresources">describeElasticIpResources</a>, <a href="http://docs.jdcloud.com/anti-ddos-basic/api/describecpsipresources">describeCpsIpResources</a> 接口)"
- */
+/* 查询基础防护已防护的公网 IP 的安全信息列表. 包括私有网络的弹性公网 IP(运营商级 NAT 保留地址除外), 云物理服务器的公网 IP 和弹性公网 IP. (已废弃, 建议使用 <a href='http://docs.jdcloud.com/anti-ddos-basic/api/describeelasticipresources'>describeElasticIpResources</a>, <a href='http://docs.jdcloud.com/anti-ddos-basic/api/describecpsipresources'>describeCpsIpResources</a> 接口) */
 func (c *BaseantiClient) DescribeIpResources(request *baseanti.DescribeIpResourcesRequest) (*baseanti.DescribeIpResourcesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -235,7 +238,7 @@ func (c *BaseantiClient) DescribeAttackTypeCount(request *baseanti.DescribeAttac
     return jdResp, err
 }
 
-/* 查询公网 IP 的攻击记录, 仅支持 ipv4. (已废弃, 建议使用 <a href="http://docs.jdcloud.com/anti-ddos-basic/api/describeattacklogs">describeAttackLogs</a> 接口)
+/* 查询公网 IP 的攻击记录, 仅支持 ipv4. (已废弃, 建议使用 <a href='http://docs.jdcloud.com/anti-ddos-basic/api/describeattacklogs'>describeAttackLogs</a> 接口)
  */
 func (c *BaseantiClient) DescribeIpResourceProtectInfo(request *baseanti.DescribeIpResourceProtectInfoRequest) (*baseanti.DescribeIpResourceProtectInfoResponse, error) {
     if request == nil {
@@ -277,7 +280,7 @@ func (c *BaseantiClient) DescribeCpsIpResources(request *baseanti.DescribeCpsIpR
     return jdResp, err
 }
 
-/* 设置基础防护已防护公网 IP 的清洗阈值, 仅支持 ipv4. (已废弃, 建议使用 <a href="http://docs.jdcloud.com/anti-ddos-basic/api/setipcleanthreshold">setIpCleanThreshold</a> 接口)
+/* 设置基础防护已防护公网 IP 的清洗阈值, 仅支持 ipv4. (已废弃, 建议使用 <a href='http://docs.jdcloud.com/anti-ddos-basic/api/setipcleanthreshold'>setIpCleanThreshold</a> 接口)
  */
 func (c *BaseantiClient) SetCleanThreshold(request *baseanti.SetCleanThresholdRequest) (*baseanti.SetCleanThresholdResponse, error) {
     if request == nil {
@@ -298,7 +301,7 @@ func (c *BaseantiClient) SetCleanThreshold(request *baseanti.SetCleanThresholdRe
     return jdResp, err
 }
 
-/* 查询公网 IP 的 endTime 之前 15 分钟内监控流量, 仅支持 ipv4. (已废弃, 建议使用 <a href="http://docs.jdcloud.com/anti-ddos-basic/api/describeipmonitorflow">describeIpMonitorFlow</a> 接口)
+/* 查询公网 IP 的 endTime 之前 15 分钟内监控流量, 仅支持 ipv4. (已废弃, 建议使用 <a href='http://docs.jdcloud.com/anti-ddos-basic/api/describeipmonitorflow'>describeIpMonitorFlow</a> 接口)
  */
 func (c *BaseantiClient) DescribeIpResourceFlow(request *baseanti.DescribeIpResourceFlowRequest) (*baseanti.DescribeIpResourceFlowResponse, error) {
     if request == nil {
@@ -319,7 +322,7 @@ func (c *BaseantiClient) DescribeIpResourceFlow(request *baseanti.DescribeIpReso
     return jdResp, err
 }
 
-/* 查询公网 IP 安全信息, 仅支持 ipv4. (已废弃, 建议使用 <a href="http://docs.jdcloud.com/anti-ddos-basic/api/describeipsafetyinfo">describeIpSafetyInfo</a> 接口)
+/* 查询公网 IP 安全信息, 仅支持 ipv4. (已废弃, 建议使用 <a href='http://docs.jdcloud.com/anti-ddos-basic/api/describeipsafetyinfo'>describeIpSafetyInfo</a> 接口)
  */
 func (c *BaseantiClient) DescribeIpResourceInfo(request *baseanti.DescribeIpResourceInfoRequest) (*baseanti.DescribeIpResourceInfoResponse, error) {
     if request == nil {

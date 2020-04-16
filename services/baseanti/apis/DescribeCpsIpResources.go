@@ -25,8 +25,7 @@ type DescribeCpsIpResourcesRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域编码. 基础防护已支持华北-北京, 华东-宿迁, 华东-上海, 华南-广州
-  */
+    /* 地域编码. 基础防护已支持华北-北京, 华东-宿迁, 华东-上海, 华南-广州  */
     RegionId string `json:"regionId"`
 
     /* 页码 (Optional) */
@@ -37,8 +36,7 @@ type DescribeCpsIpResourcesRequest struct {
 }
 
 /*
- * param regionId: 地域编码. 基础防护已支持华北-北京, 华东-宿迁, 华东-上海, 华南-广州
- (Required)
+ * param regionId: 地域编码. 基础防护已支持华北-北京, 华东-宿迁, 华东-上海, 华南-广州 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -58,8 +56,7 @@ func NewDescribeCpsIpResourcesRequest(
 }
 
 /*
- * param regionId: 地域编码. 基础防护已支持华北-北京, 华东-宿迁, 华东-上海, 华南-广州
- (Required)
+ * param regionId: 地域编码. 基础防护已支持华北-北京, 华东-宿迁, 华东-上海, 华南-广州 (Required)
  * param pageNumber: 页码 (Optional)
  * param pageSize: 分页大小 (Optional)
  */
@@ -95,8 +92,7 @@ func NewDescribeCpsIpResourcesRequestWithoutParam() *DescribeCpsIpResourcesReque
     }
 }
 
-/* param regionId: 地域编码. 基础防护已支持华北-北京, 华东-宿迁, 华东-上海, 华南-广州
-(Required) */
+/* param regionId: 地域编码. 基础防护已支持华北-北京, 华东-宿迁, 华东-上海, 华南-广州(Required) */
 func (r *DescribeCpsIpResourcesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

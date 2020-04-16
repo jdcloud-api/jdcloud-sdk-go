@@ -25,9 +25,9 @@ type IpResourceProtectInfo struct {
     /* 攻击结束时间 (Optional) */
     EndTime string `json:"endTime"`
 
-    /* 安全状态, 0: 安全, 1: 清洗, 2: 黑洞 (Optional) */
+    /* 安全状态. <br>- 0: 安全<br>- 1: 清洗<br>- 2: 黑洞 (Optional) */
     Status int `json:"status"`
 
-    /* 触发原因，0->未知 1->四层 2->七层 3->四和7层 (Optional) */
+    /* 触发原因. <br>- 0: 未知<br>- 1: 四层<br>- 2: 七层<br>- 3: 四和7层 (Optional) */
     Cause int `json:"cause"`
 }
