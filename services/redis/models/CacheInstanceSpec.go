@@ -46,6 +46,6 @@ type CacheInstanceSpec struct {
     /* 是否支持IPv6，0或空表示不支持，1表示支持IPv6，注意不是所有区域都支持IPv6，且必须保证VPC支持IPv6 (Optional) */
     Ipv6On *int `json:"ipv6On"`
 
-    /* 自定义分片数，只对自定义规格实例有效 (Optional) */
+    /* 分片数，只对自定义分片规格实例有效，主从版固定为1，集群版大于1。每种分片规格支持的分片数可调用describeSpecConfig接口获取 (Optional) */
     ShardNumber *int `json:"shardNumber"`
 }

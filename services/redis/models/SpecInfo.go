@@ -37,6 +37,9 @@ type SpecInfo struct {
     /* 带宽（Mbps)，0表示自定义分片集群，带宽由分片数变化 (Optional) */
     BandwidthMbps int `json:"bandwidthMbps"`
 
+    /* 需要的IP数，0表示自定义分片集群，IP数由分片数变化 (Optional) */
+    IpNumber int `json:"ipNumber"`
+
     /* 该内存对应的分片列表信息，redis 2.8以及redis 4.0主从版没有分片列表信息 (Optional) */
     Shard ShardInfo `json:"shard"`
 

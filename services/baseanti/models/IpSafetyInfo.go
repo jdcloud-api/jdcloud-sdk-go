@@ -22,7 +22,7 @@ type IpSafetyInfo struct {
     /* 公网 IP 地址 (Optional) */
     Ip string `json:"ip"`
 
-    /* 安全状态, 0->安全, 1->清洗, 2->黑洞 (Optional) */
+    /* 安全状态. <br>- 0: 安全<br>- 1: 清洗<br>- 2: 黑洞 (Optional) */
     SafetyStatus int `json:"safetyStatus"`
 
     /* 地域编码 (Optional) */

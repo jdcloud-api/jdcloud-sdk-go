@@ -25,8 +25,7 @@ type DescribeIpResourcesRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域编码. 基础防护已支持华北-北京, 华东-宿迁, 华东-上海, 华南-广州
-  */
+    /* 地域编码. 基础防护已支持华北-北京, 华东-宿迁, 华东-上海, 华南-广州  */
     RegionId string `json:"regionId"`
 
     /* IP 模糊匹配 (Optional) */
@@ -34,8 +33,7 @@ type DescribeIpResourcesRequest struct {
 }
 
 /*
- * param regionId: 地域编码. 基础防护已支持华北-北京, 华东-宿迁, 华东-上海, 华南-广州
- (Required)
+ * param regionId: 地域编码. 基础防护已支持华北-北京, 华东-宿迁, 华东-上海, 华南-广州 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -55,8 +53,7 @@ func NewDescribeIpResourcesRequest(
 }
 
 /*
- * param regionId: 地域编码. 基础防护已支持华北-北京, 华东-宿迁, 华东-上海, 华南-广州
- (Required)
+ * param regionId: 地域编码. 基础防护已支持华北-北京, 华东-宿迁, 华东-上海, 华南-广州 (Required)
  * param ip: IP 模糊匹配 (Optional)
  */
 func NewDescribeIpResourcesRequestWithAllParams(
@@ -89,8 +86,7 @@ func NewDescribeIpResourcesRequestWithoutParam() *DescribeIpResourcesRequest {
     }
 }
 
-/* param regionId: 地域编码. 基础防护已支持华北-北京, 华东-宿迁, 华东-上海, 华南-广州
-(Required) */
+/* param regionId: 地域编码. 基础防护已支持华北-北京, 华东-宿迁, 华东-上海, 华南-广州(Required) */
 func (r *DescribeIpResourcesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
