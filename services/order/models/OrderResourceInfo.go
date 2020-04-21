@@ -17,20 +17,17 @@
 package models
 
 
-type CreateElasticIpSpec struct {
+type OrderResourceInfo struct {
 
-    /* 购买弹性ip数量；取值范围：[1,100]  */
-    MaxCount int `json:"maxCount"`
+    /* 订单号 (Optional) */
+    OrderNumber string `json:"orderNumber"`
 
-    /* 指定弹性ip地址进行创建，当申请创建多个弹性ip时，必须为空 (Optional) */
-    ElasticIpAddress string `json:"elasticIpAddress"`
+    /* 用户pin (Optional) */
+    Pin string `json:"pin"`
 
-    /* 弹性ip规格  */
-    ElasticIpSpec ElasticIpSpec `json:"elasticIpSpec"`
+    /* 资源id,下单没有传替，则预生成一个 (Optional) */
+    ResourceId string `json:"resourceId"`
 
-    /* 用户标签 (Optional) */
-    UserTags []Tag `json:"userTags"`
-
-    /* 弹性ip类型，取值：standard(标准公网IP)，edge(边缘公网IP)，默认为standard (Optional) */
-    IpType string `json:"ipType"`
+    /* 创建资源唯一标识 (Optional) */
+    SourceId string `json:"sourceId"`
 }

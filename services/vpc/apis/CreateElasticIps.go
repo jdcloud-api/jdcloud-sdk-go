@@ -39,6 +39,9 @@ type CreateElasticIpsRequest struct {
 
     /* 用户标签 (Optional) */
     UserTags []vpc.Tag `json:"userTags"`
+
+    /* 弹性ip类型，取值：standard(标准公网IP)，edge(边缘公网IP)，默认为standard (Optional) */
+    IpType *string `json:"ipType"`
 }
 
 /*
@@ -73,6 +76,7 @@ func NewCreateElasticIpsRequest(
  * param elasticIpAddress: 指定弹性ip地址进行创建，当申请创建多个弹性ip时，必须为空 (Optional)
  * param elasticIpSpec: 弹性ip规格 (Required)
  * param userTags: 用户标签 (Optional)
+ * param ipType: 弹性ip类型，取值：standard(标准公网IP)，edge(边缘公网IP)，默认为standard (Optional)
  */
 func NewCreateElasticIpsRequestWithAllParams(
     regionId string,
@@ -80,6 +84,7 @@ func NewCreateElasticIpsRequestWithAllParams(
     elasticIpAddress *string,
     elasticIpSpec *vpc.ElasticIpSpec,
     userTags []vpc.Tag,
+    ipType *string,
 ) *CreateElasticIpsRequest {
 
     return &CreateElasticIpsRequest{
@@ -94,6 +99,7 @@ func NewCreateElasticIpsRequestWithAllParams(
         ElasticIpAddress: elasticIpAddress,
         ElasticIpSpec: elasticIpSpec,
         UserTags: userTags,
+        IpType: ipType,
     }
 }
 
@@ -133,6 +139,11 @@ func (r *CreateElasticIpsRequest) SetElasticIpSpec(elasticIpSpec *vpc.ElasticIpS
 /* param userTags: 用户标签(Optional) */
 func (r *CreateElasticIpsRequest) SetUserTags(userTags []vpc.Tag) {
     r.UserTags = userTags
+}
+
+/* param ipType: 弹性ip类型，取值：standard(标准公网IP)，edge(边缘公网IP)，默认为standard(Optional) */
+func (r *CreateElasticIpsRequest) SetIpType(ipType string) {
+    r.IpType = &ipType
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

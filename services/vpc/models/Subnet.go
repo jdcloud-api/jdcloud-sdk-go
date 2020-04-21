@@ -51,4 +51,10 @@ type Subnet struct {
 
     /* 子网创建时间 (Optional) */
     CreatedTime string `json:"createdTime"`
+
+    /* 子网类型，取值：standard(标准子网)，edge(边缘子网) (Optional) */
+    SubnetType string `json:"subnetType"`
+
+    /* 子网可用区 (Optional) */
+    Az string `json:"az"`
 }

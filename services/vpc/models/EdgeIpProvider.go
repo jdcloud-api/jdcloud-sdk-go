@@ -17,20 +17,20 @@
 package models
 
 
-type CreateElasticIpSpec struct {
+type EdgeIpProvider struct {
 
-    /* 购买弹性ip数量；取值范围：[1,100]  */
-    MaxCount int `json:"maxCount"`
+    /* 边缘公网IP的线路 (Optional) */
+    Provider string `json:"provider"`
 
-    /* 指定弹性ip地址进行创建，当申请创建多个弹性ip时，必须为空 (Optional) */
-    ElasticIpAddress string `json:"elasticIpAddress"`
+    /* 边缘公网IP的线路接入区 (Optional) */
+    PointOfAccess string `json:"pointOfAccess"`
 
-    /* 弹性ip规格  */
-    ElasticIpSpec ElasticIpSpec `json:"elasticIpSpec"`
+    /* 边缘公网IP的资源关联范围 (Optional) */
+    AssociationScope string `json:"associationScope"`
 
-    /* 用户标签 (Optional) */
-    UserTags []Tag `json:"userTags"`
+    /* 边缘公网IP的服务类型 (Optional) */
+    ServiceType string `json:"serviceType"`
 
-    /* 弹性ip类型，取值：standard(标准公网IP)，edge(边缘公网IP)，默认为standard (Optional) */
-    IpType string `json:"ipType"`
+    /* 边缘公网IP的可用区 (Optional) */
+    Az string `json:"az"`
 }

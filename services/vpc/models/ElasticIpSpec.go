@@ -23,9 +23,9 @@ type ElasticIpSpec struct {
     /* 弹性公网IP的限速（单位：Mbps），取值范围为[1-200]  */
     BandwidthMbps int `json:"bandwidthMbps"`
 
-    /* IP服务商，取值为bgp或no_bgp，cn-north-1：bgp；cn-south-1：bgp；cn-east-1：[bgp，no_bgp]；cn-east-2：bgp  */
+    /* IP线路信息。当IP类型为标准公网IP时，取值为bgp或no_bgp，cn-north-1：bgp；cn-south-1：bgp；cn-east-1：bgp；cn-east-2：bgp。当IP类型为边缘公网IP时，其值可通过调用describeEdgeIpProviders、获取不同边缘节点的边缘公网IP线路信息  */
     Provider string `json:"provider"`
 
-    /* 计费配置 (Optional) */
+    /* 计费配置。边缘公网IP支持包年包月、按配置；标准公网IP支持包年包月、按配置、按流量 (Optional) */
     ChargeSpec *charge.ChargeSpec `json:"chargeSpec"`
 }

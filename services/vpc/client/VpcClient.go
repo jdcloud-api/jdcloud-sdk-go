@@ -40,7 +40,7 @@ func NewVpcClient(credential *core.Credential) *VpcClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vpc",
-            Revision:    "0.9.1",
+            Revision:    "0.9.2",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -57,7 +57,7 @@ func (c *VpcClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
 }
 
-/* 删除弹性Ip */
+/* 删除弹性公网IP */
 func (c *VpcClient) DeleteElasticIp(request *vpc.DeleteElasticIpRequest) (*vpc.DeleteElasticIpResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -97,7 +97,7 @@ func (c *VpcClient) ModifyVpcPeering(request *vpc.ModifyVpcPeeringRequest) (*vpc
     return jdResp, err
 }
 
-/* 修改弹性IP */
+/* 修改弹性公网IP */
 func (c *VpcClient) ModifyElasticIp(request *vpc.ModifyElasticIpRequest) (*vpc.ModifyElasticIpResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -537,6 +537,26 @@ func (c *VpcClient) DisassociateNetworkAcl(request *vpc.DisassociateNetworkAclRe
     return jdResp, err
 }
 
+/* 查询边缘公网IP可用线路列表 */
+func (c *VpcClient) DescribeEdgeIpProviders(request *vpc.DescribeEdgeIpProvidersRequest) (*vpc.DescribeEdgeIpProvidersResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.DescribeEdgeIpProvidersResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 移除networkAcl规则 */
 func (c *VpcClient) RemoveNetworkAclRules(request *vpc.RemoveNetworkAclRulesRequest) (*vpc.RemoveNetworkAclRulesResponse, error) {
     if request == nil {
@@ -777,7 +797,7 @@ func (c *VpcClient) ModifyNetworkInterface(request *vpc.ModifyNetworkInterfaceRe
     return jdResp, err
 }
 
-/* 查询弹性ip列表 */
+/* 查询弹性公网IP列表 */
 func (c *VpcClient) DescribeElasticIps(request *vpc.DescribeElasticIpsRequest) (*vpc.DescribeElasticIpsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1137,7 +1157,7 @@ func (c *VpcClient) ModifySubnet(request *vpc.ModifySubnetRequest) (*vpc.ModifyS
     return jdResp, err
 }
 
-/* 创建一个或者多个弹性Ip */
+/* 创建一个或者多个弹性公网IP */
 func (c *VpcClient) CreateElasticIps(request *vpc.CreateElasticIpsRequest) (*vpc.CreateElasticIpsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")

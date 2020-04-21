@@ -36,11 +36,17 @@ type CreateSubnetRequest struct {
     /* 子网网段，vpc内子网网段不能重叠，cidr的取值范围：10.0.0.0/8、172.16.0.0/12和192.168.0.0/16及它们包含的子网，且子网掩码长度为16-28之间，如果vpc含有cidr，则必须为vpc所在cidr的子网  */
     AddressPrefix string `json:"addressPrefix"`
 
-    /* 子网关联的路由表Id, 默认为vpc的默认路由表 (Optional) */
+    /* 子网关联的路由表Id, 默认为vpc的默认路由表,子网关联路由表需检查路由表中已绑定的子网与本子网类型是否一致（一致标准为：或者都为标准子网，或者都为相同边缘可用区的边缘子网） (Optional) */
     RouteTableId *string `json:"routeTableId"`
 
     /* 子网描述信息,允许输入UTF-8编码下的全部字符，不超过256字符。 (Optional) */
     Description *string `json:"description"`
+
+    /* 子网类型，取值：standard(标准子网)，edge(边缘子网) (Optional) */
+    SubnetType *string `json:"subnetType"`
+
+    /* 子网可用区，边缘子网必须指定可用区 (Optional) */
+    Az *string `json:"az"`
 }
 
 /*
@@ -77,8 +83,10 @@ func NewCreateSubnetRequest(
  * param vpcId: 子网所属vpc的Id (Required)
  * param subnetName: 子网名称,只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符。 (Required)
  * param addressPrefix: 子网网段，vpc内子网网段不能重叠，cidr的取值范围：10.0.0.0/8、172.16.0.0/12和192.168.0.0/16及它们包含的子网，且子网掩码长度为16-28之间，如果vpc含有cidr，则必须为vpc所在cidr的子网 (Required)
- * param routeTableId: 子网关联的路由表Id, 默认为vpc的默认路由表 (Optional)
+ * param routeTableId: 子网关联的路由表Id, 默认为vpc的默认路由表,子网关联路由表需检查路由表中已绑定的子网与本子网类型是否一致（一致标准为：或者都为标准子网，或者都为相同边缘可用区的边缘子网） (Optional)
  * param description: 子网描述信息,允许输入UTF-8编码下的全部字符，不超过256字符。 (Optional)
+ * param subnetType: 子网类型，取值：standard(标准子网)，edge(边缘子网) (Optional)
+ * param az: 子网可用区，边缘子网必须指定可用区 (Optional)
  */
 func NewCreateSubnetRequestWithAllParams(
     regionId string,
@@ -87,6 +95,8 @@ func NewCreateSubnetRequestWithAllParams(
     addressPrefix string,
     routeTableId *string,
     description *string,
+    subnetType *string,
+    az *string,
 ) *CreateSubnetRequest {
 
     return &CreateSubnetRequest{
@@ -102,6 +112,8 @@ func NewCreateSubnetRequestWithAllParams(
         AddressPrefix: addressPrefix,
         RouteTableId: routeTableId,
         Description: description,
+        SubnetType: subnetType,
+        Az: az,
     }
 }
 
@@ -138,7 +150,7 @@ func (r *CreateSubnetRequest) SetAddressPrefix(addressPrefix string) {
     r.AddressPrefix = addressPrefix
 }
 
-/* param routeTableId: 子网关联的路由表Id, 默认为vpc的默认路由表(Optional) */
+/* param routeTableId: 子网关联的路由表Id, 默认为vpc的默认路由表,子网关联路由表需检查路由表中已绑定的子网与本子网类型是否一致（一致标准为：或者都为标准子网，或者都为相同边缘可用区的边缘子网）(Optional) */
 func (r *CreateSubnetRequest) SetRouteTableId(routeTableId string) {
     r.RouteTableId = &routeTableId
 }
@@ -146,6 +158,16 @@ func (r *CreateSubnetRequest) SetRouteTableId(routeTableId string) {
 /* param description: 子网描述信息,允许输入UTF-8编码下的全部字符，不超过256字符。(Optional) */
 func (r *CreateSubnetRequest) SetDescription(description string) {
     r.Description = &description
+}
+
+/* param subnetType: 子网类型，取值：standard(标准子网)，edge(边缘子网)(Optional) */
+func (r *CreateSubnetRequest) SetSubnetType(subnetType string) {
+    r.SubnetType = &subnetType
+}
+
+/* param az: 子网可用区，边缘子网必须指定可用区(Optional) */
+func (r *CreateSubnetRequest) SetAz(az string) {
+    r.Az = &az
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
