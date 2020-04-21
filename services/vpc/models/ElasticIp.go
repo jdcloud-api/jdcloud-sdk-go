@@ -20,16 +20,16 @@ import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
 
 type ElasticIp struct {
 
-    /* 弹性IP的Id (Optional) */
+    /* 弹性公网IP的Id (Optional) */
     ElasticIpId string `json:"elasticIpId"`
 
-    /* 弹性IP地址 (Optional) */
+    /* 弹性公网IP的地址 (Optional) */
     ElasticIpAddress string `json:"elasticIpAddress"`
 
-    /* 弹性ip的限速（单位：Mbps) (Optional) */
+    /* 弹性公网IP的限速（单位：Mbps) (Optional) */
     BandwidthMbps int `json:"bandwidthMbps"`
 
-    /* IP服务商，取值为bgp或no_bgp (Optional) */
+    /* 弹性公网IP的线路，标准公网IP的线路、取值为bgp或no_bgp；边缘公网IP的线路、可通过describeEdgeIpProviders接口获取 (Optional) */
     Provider string `json:"provider"`
 
     /* 私有IP的IPV4地址 (Optional) */
@@ -47,12 +47,15 @@ type ElasticIp struct {
     /* 计费配置 (Optional) */
     Charge charge.Charge `json:"charge"`
 
-    /* 弹性ip创建时间 (Optional) */
+    /* 弹性公网IP的创建时间 (Optional) */
     CreatedTime string `json:"createdTime"`
 
-    /* 弹性ip可用区属性，如果为空，表示全可用区 (Optional) */
+    /* 弹性公网IP的可用区属性，如果为空，表示全可用区 (Optional) */
     Az string `json:"az"`
 
     /* Tag信息 (Optional) */
     Tags []Tag `json:"tags"`
+
+    /* 弹性公网IP的IP类型，取值：standard(标准弹性IP)、edge(边缘弹性IP) (Optional) */
+    IpType string `json:"ipType"`
 }

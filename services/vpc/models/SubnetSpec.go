@@ -28,9 +28,15 @@ type SubnetSpec struct {
     /* 子网网段，vpc内子网网段不能重叠，cidr的取值范围：10.0.0.0/8、172.16.0.0/12和192.168.0.0/16及它们包含的子网，且子网掩码长度为16-28之间，如果vpc含有cidr，则必须为vpc所在cidr的子网  */
     AddressPrefix string `json:"addressPrefix"`
 
-    /* 子网关联的路由表Id, 默认为vpc的默认路由表 (Optional) */
+    /* 子网关联的路由表Id, 默认为vpc的默认路由表,子网关联路由表需检查路由表中已绑定的子网与本子网类型是否一致（一致标准为：或者都为标准子网，或者都为相同边缘可用区的边缘子网） (Optional) */
     RouteTableId string `json:"routeTableId"`
 
     /* 子网描述信息,允许输入UTF-8编码下的全部字符，不超过256字符。 (Optional) */
     Description string `json:"description"`
+
+    /* 子网类型，取值：standard(标准子网)，edge(边缘子网) (Optional) */
+    SubnetType string `json:"subnetType"`
+
+    /* 子网可用区，边缘子网必须指定可用区 (Optional) */
+    Az string `json:"az"`
 }
