@@ -139,6 +139,6 @@ type ReplyResponse struct {
 type ReplyResult struct {
     Data []sms.ReplyResp `json:"data"`
     Status bool `json:"status"`
-    Code string `json:"code"`
+    Code int64 `json:"code"`
     Message string `json:"message"`
 }

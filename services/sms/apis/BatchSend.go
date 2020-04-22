@@ -34,7 +34,7 @@ type BatchSendRequest struct {
     /* 签名Id  */
     SignId string `json:"signId"`
 
-    /* 群发的国内电话号码,群发时一次最多不要超过200个手机号  */
+    /* 群发的国内电话号码,群发时一次最多不要超过100个手机号  */
     PhoneList []string `json:"phoneList"`
 
     /* 短信模板变量对应的数据值,Array格式 (Optional) */
@@ -45,7 +45,7 @@ type BatchSendRequest struct {
  * param regionId: Region ID (Required)
  * param templateId: 模板Id (Required)
  * param signId: 签名Id (Required)
- * param phoneList: 群发的国内电话号码,群发时一次最多不要超过200个手机号 (Required)
+ * param phoneList: 群发的国内电话号码,群发时一次最多不要超过100个手机号 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -74,7 +74,7 @@ func NewBatchSendRequest(
  * param regionId: Region ID (Required)
  * param templateId: 模板Id (Required)
  * param signId: 签名Id (Required)
- * param phoneList: 群发的国内电话号码,群发时一次最多不要超过200个手机号 (Required)
+ * param phoneList: 群发的国内电话号码,群发时一次最多不要超过100个手机号 (Required)
  * param params: 短信模板变量对应的数据值,Array格式 (Optional)
  */
 func NewBatchSendRequestWithAllParams(
@@ -128,7 +128,7 @@ func (r *BatchSendRequest) SetSignId(signId string) {
     r.SignId = signId
 }
 
-/* param phoneList: 群发的国内电话号码,群发时一次最多不要超过200个手机号(Required) */
+/* param phoneList: 群发的国内电话号码,群发时一次最多不要超过100个手机号(Required) */
 func (r *BatchSendRequest) SetPhoneList(phoneList []string) {
     r.PhoneList = phoneList
 }
@@ -153,6 +153,6 @@ type BatchSendResponse struct {
 type BatchSendResult struct {
     Data sms.BatchSendResp `json:"data"`
     Status bool `json:"status"`
-    Code string `json:"code"`
+    Code int64 `json:"code"`
     Message string `json:"message"`
 }

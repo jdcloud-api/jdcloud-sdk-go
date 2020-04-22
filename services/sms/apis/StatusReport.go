@@ -125,6 +125,6 @@ type StatusReportResponse struct {
 type StatusReportResult struct {
     Data []sms.StatusReportResp `json:"data"`
     Status bool `json:"status"`
-    Code string `json:"code"`
+    Code int64 `json:"code"`
     Message string `json:"message"`
 }
