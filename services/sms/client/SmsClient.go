@@ -40,7 +40,7 @@ func NewSmsClient(credential *core.Credential) *SmsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "sms",
-            Revision:    "1.2.0",
+            Revision:    "1.3.2",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -53,7 +53,11 @@ func (c *SmsClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-/* 指定模板群发短信 */
+func (c *SmsClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
+}
+
+/* 指定模板群发短信接口。接口调用需要使用京东云统一鉴权的SDK方式接入，以下文档仅是接口出参、入参描述，并不是最终程序实现逻辑的范例，具体接口实现请查看SDK参考：https://docs.jdcloud.com/cn/text-message/java */
 func (c *SmsClient) BatchSend(request *sms.BatchSendRequest) (*sms.BatchSendResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -73,7 +77,7 @@ func (c *SmsClient) BatchSend(request *sms.BatchSendRequest) (*sms.BatchSendResp
     return jdResp, err
 }
 
-/* 短信发送回执接口 */
+/* 短信发送回执接口。接口调用需要使用京东云统一鉴权的SDK方式接入，以下文档仅是接口出参、入参描述，并不是最终程序实现逻辑的范例，具体接口实现请查看SDK参考：https://docs.jdcloud.com/cn/text-message/java */
 func (c *SmsClient) StatusReport(request *sms.StatusReportRequest) (*sms.StatusReportResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -93,7 +97,7 @@ func (c *SmsClient) StatusReport(request *sms.StatusReportRequest) (*sms.StatusR
     return jdResp, err
 }
 
-/* 短信回复接口 */
+/* 短信回复接口。 接口调用需要使用京东云统一鉴权的SDK方式接入，以下文档仅是接口出参、入参描述，并不是最终程序实现逻辑的范例，具体接口实现请查看SDK参考：https://docs.jdcloud.com/cn/text-message/java */
 func (c *SmsClient) Reply(request *sms.ReplyRequest) (*sms.ReplyResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
