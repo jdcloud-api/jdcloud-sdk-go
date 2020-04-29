@@ -17,20 +17,11 @@
 package models
 
 
-type UserSysDisk struct {
+type ChargeEvent struct {
 
-    /* 用户pin (Optional) */
-    Pin string `json:"pin"`
+    /* 开机时间，格式 2020-03-19 00:24:02 (Optional) */
+    StartTime string `json:"startTime"`
 
-    /* 地域 (Optional) */
-    Region string `json:"region"`
-
-    /* 系统类型 (Optional) */
-    SystemType string `json:"systemType"`
-
-    /* 默认本地盘系统盘大小 (Optional) */
-    SystemDiskSize int `json:"systemDiskSize"`
-
-    /* 逗号分隔的规格列表，*代表所有。 (Optional) */
-    Flavors string `json:"flavors"`
+    /* 关机时间，格式 2020-03-19 00:24:02 (Optional) */
+    StopTime string `json:"stopTime"`
 }

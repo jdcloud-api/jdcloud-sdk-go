@@ -45,4 +45,7 @@ type InstanceTemplateData struct {
 
     /* 密钥对名称；当前只支持一个 (Optional) */
     KeyNames []string `json:"keyNames"`
+
+    /* 停机不计费的标志， keepCharging(默认)：关机后继续计费；stopCharging：关机后停止计费。 (Optional) */
+    ChargeOnStopped string `json:"chargeOnStopped"`
 }

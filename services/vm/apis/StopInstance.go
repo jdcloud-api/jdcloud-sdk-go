@@ -29,6 +29,9 @@ type StopInstanceRequest struct {
 
     /* 云主机ID  */
     InstanceId string `json:"instanceId"`
+
+    /* 关机模式，只支持云盘做系统盘的按配置计费云主机keepCharging：关机后继续计费；stopCharging：关机后停止计费。 (Optional) */
+    ChargeOnStopped *string `json:"chargeOnStopped"`
 }
 
 /*
@@ -57,10 +60,12 @@ func NewStopInstanceRequest(
 /*
  * param regionId: 地域ID (Required)
  * param instanceId: 云主机ID (Required)
+ * param chargeOnStopped: 关机模式，只支持云盘做系统盘的按配置计费云主机keepCharging：关机后继续计费；stopCharging：关机后停止计费。 (Optional)
  */
 func NewStopInstanceRequestWithAllParams(
     regionId string,
     instanceId string,
+    chargeOnStopped *string,
 ) *StopInstanceRequest {
 
     return &StopInstanceRequest{
@@ -72,6 +77,7 @@ func NewStopInstanceRequestWithAllParams(
         },
         RegionId: regionId,
         InstanceId: instanceId,
+        ChargeOnStopped: chargeOnStopped,
     }
 }
 
@@ -96,6 +102,11 @@ func (r *StopInstanceRequest) SetRegionId(regionId string) {
 /* param instanceId: 云主机ID(Required) */
 func (r *StopInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
+}
+
+/* param chargeOnStopped: 关机模式，只支持云盘做系统盘的按配置计费云主机keepCharging：关机后继续计费；stopCharging：关机后停止计费。(Optional) */
+func (r *StopInstanceRequest) SetChargeOnStopped(chargeOnStopped string) {
+    r.ChargeOnStopped = &chargeOnStopped
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

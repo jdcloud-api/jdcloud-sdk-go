@@ -28,7 +28,7 @@ type ImageTasksRequest struct {
     /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /* 任务种类。可选值：ImportImage  */
+    /* 任务种类。可选值：ImportImage， ExportImage  */
     TaskAction string `json:"taskAction"`
 
     /* 任务id (Optional) */
@@ -52,7 +52,7 @@ type ImageTasksRequest struct {
 
 /*
  * param regionId: 地域ID (Required)
- * param taskAction: 任务种类。可选值：ImportImage (Required)
+ * param taskAction: 任务种类。可选值：ImportImage， ExportImage (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -75,7 +75,7 @@ func NewImageTasksRequest(
 
 /*
  * param regionId: 地域ID (Required)
- * param taskAction: 任务种类。可选值：ImportImage (Required)
+ * param taskAction: 任务种类。可选值：ImportImage， ExportImage (Required)
  * param taskIds: 任务id (Optional)
  * param taskStatus: 任务状态。可选值：pending,running,failed,finished (Optional)
  * param startTime: 任务开始时间 (Optional)
@@ -130,7 +130,7 @@ func (r *ImageTasksRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param taskAction: 任务种类。可选值：ImportImage(Required) */
+/* param taskAction: 任务种类。可选值：ImportImage， ExportImage(Required) */
 func (r *ImageTasksRequest) SetTaskAction(taskAction string) {
     r.TaskAction = taskAction
 }

@@ -17,20 +17,11 @@
 package models
 
 
-type UserSysDisk struct {
+type BriefInstanceNetworkInterfaceAttachment struct {
 
-    /* 用户pin (Optional) */
-    Pin string `json:"pin"`
+    /* 设备Index (Optional) */
+    DeviceIndex int `json:"deviceIndex"`
 
-    /* 地域 (Optional) */
-    Region string `json:"region"`
-
-    /* 系统类型 (Optional) */
-    SystemType string `json:"systemType"`
-
-    /* 默认本地盘系统盘大小 (Optional) */
-    SystemDiskSize int `json:"systemDiskSize"`
-
-    /* 逗号分隔的规格列表，*代表所有。 (Optional) */
-    Flavors string `json:"flavors"`
+    /* 指明删除实例时是否删除网卡，默认true；当前只能是true (Optional) */
+    AutoDelete bool `json:"autoDelete"`
 }

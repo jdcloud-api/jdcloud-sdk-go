@@ -75,4 +75,10 @@ type Image struct {
 
     /* 镜像复制和转换时的进度，仅显示数值，单位为百分比 (Optional) */
     Progress string `json:"progress"`
+
+    /* 该镜像的上下线状态 (Optional) */
+    Offline bool `json:"offline"`
+
+    /* 该镜像所属的产品线标识 (Optional) */
+    ServiceCode string `json:"serviceCode"`
 }

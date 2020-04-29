@@ -45,4 +45,7 @@ type InstanceType struct {
 
     /* 本地缓存盘配置，目前只有Gpu规格上才有 (Optional) */
     LocalDisks []LocalDisk `json:"localDisks"`
+
+    /* 实例规格代数 (Optional) */
+    Generation int `json:"generation"`
 }

@@ -40,7 +40,7 @@ func NewVmClient(credential *core.Credential) *VmClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vm",
-            Revision:    "1.2.5",
+            Revision:    "1.3.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -115,6 +115,8 @@ func (c *VmClient) DescribeImageMembers(request *vm.DescribeImageMembersRequest)
         - 自动删除
             - 默认自动删除，如果是包年包月的云硬盘，此参数不生效
         - 可以从快照创建磁盘
+    - iops
+        - 仅当云盘类型为ssd.io1时，可指定iops值，范围为【200， min（32000，size * 50 ）】，步长为10，若不指定则按此公式计算默认值
     - local类型系统的云主机可以挂载8块云硬盘
     - cloud类型系统的云主机可以挂载7块云硬盘
 - 计费
@@ -160,6 +162,27 @@ func (c *VmClient) ShareImage(request *vm.ShareImageRequest) (*vm.ShareImageResp
     }
 
     jdResp := &vm.ShareImageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 导出镜像，将京东云私有镜像导出至京东云以外环境
+ */
+func (c *VmClient) ExportImage(request *vm.ExportImageRequest) (*vm.ExportImageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.ExportImageResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1048,7 +1071,7 @@ func (c *VmClient) DescribeInstancePrivateIpAddress(request *vm.DescribeInstance
     return jdResp, err
 }
 
-/* 查询镜像导入任务详情
+/* 查询镜像导入导出任务详情
  */
 func (c *VmClient) ImageTasks(request *vm.ImageTasksRequest) (*vm.ImageTasksResponse, error) {
     if request == nil {
@@ -1103,6 +1126,28 @@ func (c *VmClient) DeleteInstance(request *vm.DeleteInstanceRequest) (*vm.Delete
     }
 
     jdResp := &vm.DeleteInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 批量查询云主机信息的轻量接口，不返回云盘、网络、计费、标签等信息。如果不需要关联资源属性，尽量选择使用该接口。<br>
+此接口支持分页查询，默认每页20条。
+ */
+func (c *VmClient) DescribeBriefInstances(request *vm.DescribeBriefInstancesRequest) (*vm.DescribeBriefInstancesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.DescribeBriefInstancesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
