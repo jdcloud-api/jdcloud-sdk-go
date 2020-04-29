@@ -22,7 +22,7 @@ type InstanceTemplateElasticIpSpec struct {
     /* 弹性公网IP的限速（单位：MB）  */
     BandwidthMbps int `json:"bandwidthMbps"`
 
-    /* IP服务商，取值为BGP,nonBGP (Optional) */
+    /* IP服务商，取值为BGP,nonBGP，不支持边缘可用区 (Optional) */
     Provider *string `json:"provider"`
 
     /* 计费类型，支持按带宽计费(bandwith)，按流量计费(flow)  */

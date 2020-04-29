@@ -42,4 +42,7 @@ type InstanceTemplateSpec struct {
 
     /* 数据盘配置信息 (Optional) */
     DataDisks []InstanceTemplateDiskAttachmentSpec `json:"dataDisks"`
+
+    /* 停机不计费的标志， keepCharging(默认)：关机后继续计费；stopCharging：关机后停止计费。 (Optional) */
+    ChargeOnStopped *string `json:"chargeOnStopped"`
 }

@@ -43,6 +43,7 @@ name - 云主机名称，模糊匹配，支持单个
 imageId - 镜像ID，精确匹配，支持多个
 networkInterfaceId - 弹性网卡ID，精确匹配，支持多个
 subnetId - 子网ID，精确匹配，支持多个
+chargeOnStopped - 停机不计费标志，keepCharging、stopCharging 或者 notApplicable
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
@@ -79,6 +80,7 @@ name - 云主机名称，模糊匹配，支持单个
 imageId - 镜像ID，精确匹配，支持多个
 networkInterfaceId - 弹性网卡ID，精确匹配，支持多个
 subnetId - 子网ID，精确匹配，支持多个
+chargeOnStopped - 停机不计费标志，keepCharging、stopCharging 或者 notApplicable
  (Optional)
  */
 func NewDescribeInstancePrivateIpAddressRequestWithAllParams(
@@ -138,6 +140,7 @@ name - 云主机名称，模糊匹配，支持单个
 imageId - 镜像ID，精确匹配，支持多个
 networkInterfaceId - 弹性网卡ID，精确匹配，支持多个
 subnetId - 子网ID，精确匹配，支持多个
+chargeOnStopped - 停机不计费标志，keepCharging、stopCharging 或者 notApplicable
 (Optional) */
 func (r *DescribeInstancePrivateIpAddressRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters

@@ -17,8 +17,11 @@
 package models
 
 
-type ImageStyleID struct {
+type ChargeEvent struct {
 
-    /* 图片样式ID (Optional) */
-    Id int64 `json:"id"`
+    /* 开机时间，格式 2020-03-19 00:24:02 (Optional) */
+    StartTime string `json:"startTime"`
+
+    /* 关机时间，格式 2020-03-19 00:24:02 (Optional) */
+    StopTime string `json:"stopTime"`
 }

@@ -19,7 +19,7 @@ package models
 
 type InstanceTemplateNetworkInterfaceSpec struct {
 
-    /* 子网ID  */
+    /* 子网ID 仅支持中心可用区的子网  */
     SubnetId string `json:"subnetId"`
 
     /* 安全组ID列表 (Optional) */

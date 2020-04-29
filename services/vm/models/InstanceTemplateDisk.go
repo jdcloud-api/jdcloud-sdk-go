@@ -25,6 +25,12 @@ type InstanceTemplateDisk struct {
     /* 云硬盘大小，单位为 GiB；ssd 类型取值范围[20,1000]GB，步长为10G，premium-hdd 类型取值范围[20,3000]GB，步长为10G，hdd.std1、ssd.gp1、ssd.io1 类型取值范围[20-16000]GB，步长为10GB (Optional) */
     DiskSizeGB int `json:"diskSizeGB"`
 
-    /* 用于创建云硬盘的快照ID (Optional) */
+    /* 创建云硬盘的快照ID (Optional) */
     SnapshotId string `json:"snapshotId"`
+
+    /* 是否加密，false:(默认)不加密；true:加密 (Optional) */
+    Encrypt bool `json:"encrypt"`
+
+    /* 云硬盘的iops值 (Optional) */
+    Iops int `json:"iops"`
 }

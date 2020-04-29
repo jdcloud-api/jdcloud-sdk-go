@@ -22,7 +22,7 @@ import (
     common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
 
-type DescribeInstancesRequest struct {
+type DescribeBriefInstancesRequest struct {
 
     core.JDCloudRequest
 
@@ -34,6 +34,9 @@ type DescribeInstancesRequest struct {
 
     /* 分页大小；默认为20；取值范围[10, 100] (Optional) */
     PageSize *int `json:"pageSize"`
+
+    /* Tag筛选条件 (Optional) */
+    Tags []vm.TagFilter `json:"tags"`
 
     /* instanceId - 云主机ID，精确匹配，支持多个
 privateIpAddress - 主网卡内网主IP地址，模糊匹配，支持多个
@@ -59,14 +62,14 @@ elasticIpAddress - 公网IP地址，精确匹配，支持单个
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeInstancesRequest(
+func NewDescribeBriefInstancesRequest(
     regionId string,
-) *DescribeInstancesRequest {
+) *DescribeBriefInstancesRequest {
 
-	return &DescribeInstancesRequest{
+	return &DescribeBriefInstancesRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/instances:describeBriefInstances",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
@@ -78,6 +81,7 @@ func NewDescribeInstancesRequest(
  * param regionId: 地域ID (Required)
  * param pageNumber: 页码；默认为1 (Optional)
  * param pageSize: 分页大小；默认为20；取值范围[10, 100] (Optional)
+ * param tags: Tag筛选条件 (Optional)
  * param filters: instanceId - 云主机ID，精确匹配，支持多个
 privateIpAddress - 主网卡内网主IP地址，模糊匹配，支持多个
 az - 可用区，精确匹配，支持多个
@@ -95,34 +99,36 @@ instanceType - 实例规格，精确匹配，支持多个
 elasticIpAddress - 公网IP地址，精确匹配，支持单个
  (Optional)
  */
-func NewDescribeInstancesRequestWithAllParams(
+func NewDescribeBriefInstancesRequestWithAllParams(
     regionId string,
     pageNumber *int,
     pageSize *int,
+    tags []vm.TagFilter,
     filters []common.Filter,
-) *DescribeInstancesRequest {
+) *DescribeBriefInstancesRequest {
 
-    return &DescribeInstancesRequest{
+    return &DescribeBriefInstancesRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/instances:describeBriefInstances",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         PageNumber: pageNumber,
         PageSize: pageSize,
+        Tags: tags,
         Filters: filters,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeInstancesRequestWithoutParam() *DescribeInstancesRequest {
+func NewDescribeBriefInstancesRequestWithoutParam() *DescribeBriefInstancesRequest {
 
-    return &DescribeInstancesRequest{
+    return &DescribeBriefInstancesRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/instances:describeBriefInstances",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
@@ -130,18 +136,23 @@ func NewDescribeInstancesRequestWithoutParam() *DescribeInstancesRequest {
 }
 
 /* param regionId: 地域ID(Required) */
-func (r *DescribeInstancesRequest) SetRegionId(regionId string) {
+func (r *DescribeBriefInstancesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param pageNumber: 页码；默认为1(Optional) */
-func (r *DescribeInstancesRequest) SetPageNumber(pageNumber int) {
+func (r *DescribeBriefInstancesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
 /* param pageSize: 分页大小；默认为20；取值范围[10, 100](Optional) */
-func (r *DescribeInstancesRequest) SetPageSize(pageSize int) {
+func (r *DescribeBriefInstancesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
+}
+
+/* param tags: Tag筛选条件(Optional) */
+func (r *DescribeBriefInstancesRequest) SetTags(tags []vm.TagFilter) {
+    r.Tags = tags
 }
 
 /* param filters: instanceId - 云主机ID，精确匹配，支持多个
@@ -160,23 +171,23 @@ dedicatedPoolId - 专有宿主机池ID，精确匹配，支持多个
 instanceType - 实例规格，精确匹配，支持多个
 elasticIpAddress - 公网IP地址，精确匹配，支持单个
 (Optional) */
-func (r *DescribeInstancesRequest) SetFilters(filters []common.Filter) {
+func (r *DescribeBriefInstancesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeInstancesRequest) GetRegionId() string {
+func (r DescribeBriefInstancesRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeInstancesResponse struct {
+type DescribeBriefInstancesResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeInstancesResult `json:"result"`
+    Result DescribeBriefInstancesResult `json:"result"`
 }
 
-type DescribeInstancesResult struct {
-    Instances []vm.Instance `json:"instances"`
+type DescribeBriefInstancesResult struct {
+    Instances []vm.BriefInstance `json:"instances"`
     TotalCount int `json:"totalCount"`
 }

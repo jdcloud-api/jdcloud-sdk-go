@@ -24,4 +24,7 @@ type InstanceTypeState struct {
 
     /* 可售卖情况，true:可售卖、false:已售罄不可用 (Optional) */
     InStock bool `json:"inStock"`
+
+    /* 可用库存数量，预留字段，敬请期待。 (Optional) */
+    AvailableCount int `json:"availableCount"`
 }

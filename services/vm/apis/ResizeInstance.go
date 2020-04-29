@@ -32,6 +32,9 @@ type ResizeInstanceRequest struct {
 
     /* 实例规格，可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeinstancetypes">DescribeInstanceTypes</a>接口获得指定地域或可用区的规格信息。  */
     InstanceType string `json:"instanceType"`
+
+    /* 是否强制调配，默认为false；如果指定为true, 将会清除本地数据盘。 (Optional) */
+    Force *bool `json:"force"`
 }
 
 /*
@@ -64,11 +67,13 @@ func NewResizeInstanceRequest(
  * param regionId: 地域ID (Required)
  * param instanceId: 云主机ID (Required)
  * param instanceType: 实例规格，可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeinstancetypes">DescribeInstanceTypes</a>接口获得指定地域或可用区的规格信息。 (Required)
+ * param force: 是否强制调配，默认为false；如果指定为true, 将会清除本地数据盘。 (Optional)
  */
 func NewResizeInstanceRequestWithAllParams(
     regionId string,
     instanceId string,
     instanceType string,
+    force *bool,
 ) *ResizeInstanceRequest {
 
     return &ResizeInstanceRequest{
@@ -81,6 +86,7 @@ func NewResizeInstanceRequestWithAllParams(
         RegionId: regionId,
         InstanceId: instanceId,
         InstanceType: instanceType,
+        Force: force,
     }
 }
 
@@ -110,6 +116,11 @@ func (r *ResizeInstanceRequest) SetInstanceId(instanceId string) {
 /* param instanceType: 实例规格，可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeinstancetypes">DescribeInstanceTypes</a>接口获得指定地域或可用区的规格信息。(Required) */
 func (r *ResizeInstanceRequest) SetInstanceType(instanceType string) {
     r.InstanceType = instanceType
+}
+
+/* param force: 是否强制调配，默认为false；如果指定为true, 将会清除本地数据盘。(Optional) */
+func (r *ResizeInstanceRequest) SetForce(force bool) {
+    r.Force = &force
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

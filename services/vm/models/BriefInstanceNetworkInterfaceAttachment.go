@@ -17,17 +17,11 @@
 package models
 
 
-type ImageStyleQueryResult struct {
+type BriefInstanceNetworkInterfaceAttachment struct {
 
-    /* 按样式名称查询 (Optional) */
-    StyleName string `json:"styleName"`
+    /* 设备Index (Optional) */
+    DeviceIndex int `json:"deviceIndex"`
 
-    /* 数据页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
-
-    /* 每页数据的条数 (Optional) */
-    PageSize int `json:"pageSize"`
-
-    /* 图片样式列表 (Optional) */
-    ImageStyleList []ImageStyle `json:"imageStyleList"`
+    /* 指明删除实例时是否删除网卡，默认true；当前只能是true (Optional) */
+    AutoDelete bool `json:"autoDelete"`
 }

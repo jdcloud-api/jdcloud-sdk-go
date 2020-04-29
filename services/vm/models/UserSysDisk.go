@@ -30,4 +30,7 @@ type UserSysDisk struct {
 
     /* 默认本地盘系统盘大小 (Optional) */
     SystemDiskSize int `json:"systemDiskSize"`
+
+    /* 逗号分隔的规格列表，*代表所有。 (Optional) */
+    Flavors string `json:"flavors"`
 }

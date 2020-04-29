@@ -16,10 +16,8 @@
 
 package models
 
-import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
-import disk "github.com/jdcloud-api/jdcloud-sdk-go/services/disk/models"
 
-type Instance struct {
+type BriefInstance struct {
 
     /* 云主机ID (Optional) */
     InstanceId string `json:"instanceId"`
@@ -39,12 +37,6 @@ type Instance struct {
     /* 主网卡主IP地址 (Optional) */
     PrivateIpAddress string `json:"privateIpAddress"`
 
-    /* 主网卡主IP绑定弹性IP的ID (Optional) */
-    ElasticIpId string `json:"elasticIpId"`
-
-    /* 主网卡主IP绑定弹性IP的地址 (Optional) */
-    ElasticIpAddress string `json:"elasticIpAddress"`
-
     /* 云主机状态，<a href="http://docs.jdcloud.com/virtual-machines/api/vm_status">参考云主机状态</a> (Optional) */
     Status string `json:"status"`
 
@@ -55,16 +47,16 @@ type Instance struct {
     ImageId string `json:"imageId"`
 
     /* 系统盘配置 (Optional) */
-    SystemDisk InstanceDiskAttachment `json:"systemDisk"`
+    SystemDisk BriefInstanceDiskAttachment `json:"systemDisk"`
 
     /* 数据盘配置 (Optional) */
-    DataDisks []InstanceDiskAttachment `json:"dataDisks"`
+    DataDisks []BriefInstanceDiskAttachment `json:"dataDisks"`
 
     /* 主网卡配置 (Optional) */
-    PrimaryNetworkInterface InstanceNetworkInterfaceAttachment `json:"primaryNetworkInterface"`
+    PrimaryNetworkInterface BriefInstanceNetworkInterfaceAttachment `json:"primaryNetworkInterface"`
 
     /* 辅助网卡配置 (Optional) */
-    SecondaryNetworkInterfaces []InstanceNetworkInterfaceAttachment `json:"secondaryNetworkInterfaces"`
+    SecondaryNetworkInterfaces []BriefInstanceNetworkInterfaceAttachment `json:"secondaryNetworkInterfaces"`
 
     /* 创建时间 (Optional) */
     LaunchTime string `json:"launchTime"`
@@ -75,18 +67,15 @@ type Instance struct {
     /* 密钥对名称 (Optional) */
     KeyNames []string `json:"keyNames"`
 
-    /* 计费信息 (Optional) */
-    Charge charge.Charge `json:"charge"`
-
-    /* 高可用组，如果创建云主机使用了高可用组，此处可展示高可用组名称 (Optional) */
-    Ag Ag `json:"ag"`
-
     /* 高可用组中的错误域 (Optional) */
     FaultDomain string `json:"faultDomain"`
 
-    /* Tag信息 (Optional) */
-    Tags []disk.Tag `json:"tags"`
-
-    /* 关机模式，只支持云盘做系统盘的按配置计费云主机。keepCharging：关机后继续计费；stopCharging：关机后停止计费。 (Optional) */
+    /* 关机模式，只支持云盘做系统盘的按配置计费云主机。KeepCharging：关机后继续计费；StopCharging：关机后停止计费。 (Optional) */
     ChargeOnStopped string `json:"chargeOnStopped"`
+
+    /* 实例所属的专有宿主机池 (Optional) */
+    DedicatedPoolId string `json:"dedicatedPoolId"`
+
+    /* 专有宿主机ID (Optional) */
+    DedicatedHostId string `json:"dedicatedHostId"`
 }

@@ -31,6 +31,12 @@ type DescribeImagesRequest struct {
     /* 镜像来源，如果没有指定ids参数，此参数必传；取值范围：public、shared、thirdparty、private、community (Optional) */
     ImageSource *string `json:"imageSource"`
 
+    /* 产品线标识，非必传，不传的时候返回全部产品线镜像 (Optional) */
+    ServiceCode *string `json:"serviceCode"`
+
+    /* 是否下线，默认值为false；imageSource为public或者thirdparty时，此参数才有意义，其它情况下此参数无效；指定镜像ID查询时，此参数无效 (Optional) */
+    Offline *bool `json:"offline"`
+
     /* 操作系统平台，取值范围：Windows Server、CentOS、Ubuntu (Optional) */
     Platform *string `json:"platform"`
 
@@ -76,6 +82,8 @@ func NewDescribeImagesRequest(
 /*
  * param regionId: 地域ID (Required)
  * param imageSource: 镜像来源，如果没有指定ids参数，此参数必传；取值范围：public、shared、thirdparty、private、community (Optional)
+ * param serviceCode: 产品线标识，非必传，不传的时候返回全部产品线镜像 (Optional)
+ * param offline: 是否下线，默认值为false；imageSource为public或者thirdparty时，此参数才有意义，其它情况下此参数无效；指定镜像ID查询时，此参数无效 (Optional)
  * param platform: 操作系统平台，取值范围：Windows Server、CentOS、Ubuntu (Optional)
  * param ids: 镜像ID列表，如果指定了此参数，其它参数可为空 (Optional)
  * param rootDeviceType: 镜像支持的系统盘类型，[localDisk,cloudDisk] (Optional)
@@ -87,6 +95,8 @@ func NewDescribeImagesRequest(
 func NewDescribeImagesRequestWithAllParams(
     regionId string,
     imageSource *string,
+    serviceCode *string,
+    offline *bool,
     platform *string,
     ids []string,
     rootDeviceType *string,
@@ -105,6 +115,8 @@ func NewDescribeImagesRequestWithAllParams(
         },
         RegionId: regionId,
         ImageSource: imageSource,
+        ServiceCode: serviceCode,
+        Offline: offline,
         Platform: platform,
         Ids: ids,
         RootDeviceType: rootDeviceType,
@@ -136,6 +148,16 @@ func (r *DescribeImagesRequest) SetRegionId(regionId string) {
 /* param imageSource: 镜像来源，如果没有指定ids参数，此参数必传；取值范围：public、shared、thirdparty、private、community(Optional) */
 func (r *DescribeImagesRequest) SetImageSource(imageSource string) {
     r.ImageSource = &imageSource
+}
+
+/* param serviceCode: 产品线标识，非必传，不传的时候返回全部产品线镜像(Optional) */
+func (r *DescribeImagesRequest) SetServiceCode(serviceCode string) {
+    r.ServiceCode = &serviceCode
+}
+
+/* param offline: 是否下线，默认值为false；imageSource为public或者thirdparty时，此参数才有意义，其它情况下此参数无效；指定镜像ID查询时，此参数无效(Optional) */
+func (r *DescribeImagesRequest) SetOffline(offline bool) {
+    r.Offline = &offline
 }
 
 /* param platform: 操作系统平台，取值范围：Windows Server、CentOS、Ubuntu(Optional) */
