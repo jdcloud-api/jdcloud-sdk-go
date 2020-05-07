@@ -24,7 +24,7 @@ type CreateImageUploadTaskRequest struct {
 
     core.JDCloudRequest
 
-    /* HTTP 请求方法，取值范围：GET、POST、PUT、DELETE、HEAD、PATCH，默认值为 PUT (Optional) */
+    /* HTTP 请求方法，上传只支持 PUT 方法，默认值为 PUT (Optional) */
     HttpMethod *string `json:"httpMethod"`
 
     /* 文件名称  */
@@ -55,7 +55,7 @@ func NewCreateImageUploadTaskRequest(
 }
 
 /*
- * param httpMethod: HTTP 请求方法，取值范围：GET、POST、PUT、DELETE、HEAD、PATCH，默认值为 PUT (Optional)
+ * param httpMethod: HTTP 请求方法，上传只支持 PUT 方法，默认值为 PUT (Optional)
  * param fileName: 文件名称 (Required)
  * param fileSize: 文件大小 (Optional)
  */
@@ -91,7 +91,7 @@ func NewCreateImageUploadTaskRequestWithoutParam() *CreateImageUploadTaskRequest
     }
 }
 
-/* param httpMethod: HTTP 请求方法，取值范围：GET、POST、PUT、DELETE、HEAD、PATCH，默认值为 PUT(Optional) */
+/* param httpMethod: HTTP 请求方法，上传只支持 PUT 方法，默认值为 PUT(Optional) */
 func (r *CreateImageUploadTaskRequest) SetHttpMethod(httpMethod string) {
     r.HttpMethod = &httpMethod
 }

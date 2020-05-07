@@ -40,7 +40,7 @@ func NewVodClient(credential *core.Credential) *VodClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vod",
-            Revision:    "1.1.6",
+            Revision:    "1.1.7",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -782,6 +782,26 @@ func (c *VodClient) DeleteDomain(request *vod.DeleteDomainRequest) (*vod.DeleteD
     return jdResp, err
 }
 
+/* 创建直播转点播任务 */
+func (c *VodClient) CreateLiveToVodTask(request *vod.CreateLiveToVodTaskRequest) (*vod.CreateLiveToVodTaskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vod.CreateLiveToVodTaskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 添加分类 */
 func (c *VodClient) CreateCategory(request *vod.CreateCategoryRequest) (*vod.CreateCategoryResponse, error) {
     if request == nil {
@@ -793,6 +813,28 @@ func (c *VodClient) CreateCategory(request *vod.CreateCategoryRequest) (*vod.Cre
     }
 
     jdResp := &vod.CreateCategoryResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 视频审核
+视频在上传中或者转码中不允许更改视频审核状态，即视频只有在正常或屏蔽状态下才可以调用此接口设置审核状态
+ */
+func (c *VodClient) VideoAudit(request *vod.VideoAuditRequest) (*vod.VideoAuditResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vod.VideoAuditResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

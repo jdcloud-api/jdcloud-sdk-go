@@ -17,14 +17,19 @@
 package models
 
 
-type CreateImageUploadTaskRequestObject struct {
+type RecordTime struct {
 
-    /* HTTP 请求方法，上传只支持 PUT 方法，默认值为 PUT (Optional) */
-    HttpMethod string `json:"httpMethod"`
+    /* 开始时间
+- UTC时间
+  格式: yyyy-MM-dd'T'HH:mm:ss'Z'
+  示例: 2018-10-21T10:00:00Z
+  */
+    StartTime string `json:"startTime"`
 
-    /* 文件名称  */
-    FileName string `json:"fileName"`
-
-    /* 文件大小 (Optional) */
-    FileSize int64 `json:"fileSize"`
+    /* 结束时间
+- UTC时间
+  格式: yyyy-MM-dd'T'HH:mm:ss'Z'
+  示例: 2018-10-21T10:00:00Z
+  */
+    EndTime string `json:"endTime"`
 }

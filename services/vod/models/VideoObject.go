@@ -36,6 +36,7 @@ type VideoObject struct {
   transcode_failed - 转码失败
   normal - 正常
   uploaded - 上传完成（未转码）
+  blocked - 封禁
  (Optional) */
     Status string `json:"status"`
 
