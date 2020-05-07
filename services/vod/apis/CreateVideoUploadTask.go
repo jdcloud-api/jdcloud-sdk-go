@@ -24,7 +24,7 @@ type CreateVideoUploadTaskRequest struct {
 
     core.JDCloudRequest
 
-    /* HTTP 请求方法，取值范围：GET、POST、PUT、DELETE、HEAD、PATCH，默认值为 PUT (Optional) */
+    /* HTTP 请求方法，上传只支持 PUT 方法，默认值为 PUT (Optional) */
     HttpMethod *string `json:"httpMethod"`
 
     /* 视频标题  */
@@ -53,6 +53,9 @@ type CreateVideoUploadTaskRequest struct {
 
     /* 水印ID集合 (Optional) */
     WatermarkIds []int64 `json:"watermarkIds"`
+
+    /* 自定义数据 (Optional) */
+    UserData *string `json:"userData"`
 }
 
 /*
@@ -79,7 +82,7 @@ func NewCreateVideoUploadTaskRequest(
 }
 
 /*
- * param httpMethod: HTTP 请求方法，取值范围：GET、POST、PUT、DELETE、HEAD、PATCH，默认值为 PUT (Optional)
+ * param httpMethod: HTTP 请求方法，上传只支持 PUT 方法，默认值为 PUT (Optional)
  * param title: 视频标题 (Required)
  * param fileName: 文件名称 (Required)
  * param fileSize: 文件大小 (Optional)
@@ -89,6 +92,7 @@ func NewCreateVideoUploadTaskRequest(
  * param tags: 视频标签集合 (Optional)
  * param transcodeTemplateIds: 转码模板ID集合 (Optional)
  * param watermarkIds: 水印ID集合 (Optional)
+ * param userData: 自定义数据 (Optional)
  */
 func NewCreateVideoUploadTaskRequestWithAllParams(
     httpMethod *string,
@@ -101,6 +105,7 @@ func NewCreateVideoUploadTaskRequestWithAllParams(
     tags []string,
     transcodeTemplateIds []int64,
     watermarkIds []int64,
+    userData *string,
 ) *CreateVideoUploadTaskRequest {
 
     return &CreateVideoUploadTaskRequest{
@@ -120,6 +125,7 @@ func NewCreateVideoUploadTaskRequestWithAllParams(
         Tags: tags,
         TranscodeTemplateIds: transcodeTemplateIds,
         WatermarkIds: watermarkIds,
+        UserData: userData,
     }
 }
 
@@ -136,7 +142,7 @@ func NewCreateVideoUploadTaskRequestWithoutParam() *CreateVideoUploadTaskRequest
     }
 }
 
-/* param httpMethod: HTTP 请求方法，取值范围：GET、POST、PUT、DELETE、HEAD、PATCH，默认值为 PUT(Optional) */
+/* param httpMethod: HTTP 请求方法，上传只支持 PUT 方法，默认值为 PUT(Optional) */
 func (r *CreateVideoUploadTaskRequest) SetHttpMethod(httpMethod string) {
     r.HttpMethod = &httpMethod
 }
@@ -184,6 +190,11 @@ func (r *CreateVideoUploadTaskRequest) SetTranscodeTemplateIds(transcodeTemplate
 /* param watermarkIds: 水印ID集合(Optional) */
 func (r *CreateVideoUploadTaskRequest) SetWatermarkIds(watermarkIds []int64) {
     r.WatermarkIds = watermarkIds
+}
+
+/* param userData: 自定义数据(Optional) */
+func (r *CreateVideoUploadTaskRequest) SetUserData(userData string) {
+    r.UserData = &userData
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

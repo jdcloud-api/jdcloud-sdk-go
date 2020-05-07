@@ -17,14 +17,11 @@
 package models
 
 
-type CreateImageUploadTaskRequestObject struct {
+type AuditVideoRequestObject struct {
 
-    /* HTTP 请求方法，上传只支持 PUT 方法，默认值为 PUT (Optional) */
-    HttpMethod string `json:"httpMethod"`
-
-    /* 文件名称  */
-    FileName string `json:"fileName"`
-
-    /* 文件大小 (Optional) */
-    FileSize int64 `json:"fileSize"`
+    /* 审核结果，取值范围:
+ block(封禁)
+ unblock(解封)
+  */
+    AuditResult string `json:"auditResult"`
 }

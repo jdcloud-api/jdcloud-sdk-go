@@ -17,10 +17,7 @@
 package models
 
 
-type CreateVideoUploadTaskRequestObject struct {
-
-    /* HTTP 请求方法，上传只支持 PUT 方法，默认值为 PUT (Optional) */
-    HttpMethod string `json:"httpMethod"`
+type CreateLiveToVodTaskRequestObject struct {
 
     /* 视频标题  */
     Title string `json:"title"`
@@ -49,6 +46,35 @@ type CreateVideoUploadTaskRequestObject struct {
     /* 水印ID集合 (Optional) */
     WatermarkIds []int64 `json:"watermarkIds"`
 
-    /* 自定义数据 (Optional) */
-    UserData string `json:"userData"`
+    /* 推流域名  */
+    PublishDomain string `json:"publishDomain"`
+
+    /* 应用名称  */
+    AppName string `json:"appName"`
+
+    /* 流名称  */
+    StreamName string `json:"streamName"`
+
+    /* 录制时间段集合
+- 支持自定义1-10个时间段,拼接成一个文件
+- 每个时间段不小于10s
+- 总跨度不超过12小时
+- 时间段按升序排列且无重叠
+  */
+    RecordTimes []RecordTime `json:"recordTimes"`
+
+    /* 录制文件类型:
+- 取值: ts, flv, mp4
+- 不区分大小写
+  */
+    RecordFileType string `json:"recordFileType"`
+
+    /* 直播录制任务外键 (Optional) */
+    TaskExternalId string `json:"taskExternalId"`
+
+    /* 任务优先级:
+- 取值: low, medium, high
+- 不区分大小写
+ (Optional) */
+    Priority string `json:"priority"`
 }
