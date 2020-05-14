@@ -22,25 +22,25 @@ type SpecInfo struct {
     /* 内存大小（GB） (Optional) */
     MemoryGB int `json:"memoryGB"`
 
-    /* 实例规格，空表示自定义分片集群，只有分片规格，没有实例规格 (Optional) */
+    /* 实例规格，标准版不为空，4.0 自定义分片集群版规格为空，具体规格参考单分片规格 (Optional) */
     InstanceClass string `json:"instanceClass"`
 
-    /* 实例CPU核数，0表示自定义分片集群，CPU核数由分片数变化 (Optional) */
+    /* 实例CPU核数，0表示自定义分片集群版规格，CPU核数由分片数变化 (Optional) */
     Cpu int `json:"cpu"`
 
-    /* 实例磁盘大小（GB)，0表示自定义分片集群，磁盘大小由分片数变化 (Optional) */
+    /* 实例磁盘大小（GB)，0表示自定义分片集群版规格，磁盘大小由分片数变化 (Optional) */
     DiskGB int `json:"diskGB"`
 
-    /* 最大连接数，0表示自定义分片集群，最大连接数由分片数变化 (Optional) */
+    /* 最大连接数，0表示自定义分片集群版规格，最大连接数由分片数变化 (Optional) */
     MaxConntion int `json:"maxConntion"`
 
-    /* 带宽（Mbps)，0表示自定义分片集群，带宽由分片数变化 (Optional) */
+    /* 带宽（Mbps)，0表示自定义分片集群版规格，带宽由分片数变化 (Optional) */
     BandwidthMbps int `json:"bandwidthMbps"`
 
-    /* 需要的IP数，0表示自定义分片集群，IP数由分片数变化 (Optional) */
+    /* 需要的IP数，0表示自定义分片集群版规格，IP数由分片数变化 (Optional) */
     IpNumber int `json:"ipNumber"`
 
-    /* 该内存对应的分片列表信息，redis 2.8以及redis 4.0主从版没有分片列表信息 (Optional) */
+    /* 实例的分片列表信息，redis 2.8标准版、集群版以及redis 4.0标准版没有分片列表信息 (Optional) */
     Shard ShardInfo `json:"shard"`
 
     /* az列表 (Optional) */

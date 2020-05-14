@@ -17,14 +17,11 @@
 package models
 
 
-type ContainerNetworkInterfaceAttachmentSpec struct {
+type ReadRegisterValue struct {
 
-    /* 指明删除容器时是否删除网卡，默认True；当前只能是True (Optional) */
-    AutoDelete *bool `json:"autoDelete"`
+    /*  (Optional) */
+    Data []RegisterValue `json:"data"`
 
-    /* 设备Index，主网卡为1 (Optional) */
-    DeviceIndex *int `json:"deviceIndex"`
-
-    /* 网卡接口规范  */
-    NetworkInterface *NetworkInterfaceSpec `json:"networkInterface"`
+    /* 运行状态总数 (Optional) */
+    TotalCount int `json:"totalCount"`
 }

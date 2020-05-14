@@ -19,7 +19,7 @@ package models
 
 type CloudDiskSpec struct {
 
-    /* 磁盘类型，cloud 云盘，local 本地盘（使用前需申请） (Optional) */
+    /* 磁盘类型，支持云盘： cloud (Optional) */
     Category *string `json:"category"`
 
     /* 云盘ID，指定使用已有云盘 (Optional) */

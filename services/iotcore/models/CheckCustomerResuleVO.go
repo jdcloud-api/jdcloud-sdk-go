@@ -17,14 +17,17 @@
 package models
 
 
-type ContainerNetworkInterfaceAttachmentSpec struct {
+type CheckCustomerResuleVO struct {
 
-    /* 指明删除容器时是否删除网卡，默认True；当前只能是True (Optional) */
-    AutoDelete *bool `json:"autoDelete"`
+    /* 实例ID (Optional) */
+    InstanceId string `json:"instanceId"`
 
-    /* 设备Index，主网卡为1 (Optional) */
-    DeviceIndex *int `json:"deviceIndex"`
+    /* 实例状态 (Optional) */
+    InstanceStatus string `json:"instanceStatus"`
 
-    /* 网卡接口规范  */
-    NetworkInterface *NetworkInterfaceSpec `json:"networkInterface"`
+    /* 用户状态 (Optional) */
+    UserStatus string `json:"userStatus"`
+
+    /* 是否为管理员 (Optional) */
+    IsAdmin string `json:"isAdmin"`
 }

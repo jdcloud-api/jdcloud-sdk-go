@@ -17,14 +17,20 @@
 package models
 
 
-type ContainerNetworkInterfaceAttachmentSpec struct {
+type UserConfigure struct {
 
-    /* 指明删除容器时是否删除网卡，默认True；当前只能是True (Optional) */
-    AutoDelete *bool `json:"autoDelete"`
+    /* 用户 pin (Optional) */
+    Pin string `json:"pin"`
 
-    /* 设备Index，主网卡为1 (Optional) */
-    DeviceIndex *int `json:"deviceIndex"`
+    /* 本地盘容量 (Optional) */
+    LocalDiskSize int `json:"localDiskSize"`
 
-    /* 网卡接口规范  */
-    NetworkInterface *NetworkInterfaceSpec `json:"networkInterface"`
+    /* 创建时间 (Optional) */
+    CreateTime string `json:"createTime"`
+
+    /* 更新时间 (Optional) */
+    UpdateTime string `json:"updateTime"`
+
+    /* 配置状态 (Optional) */
+    Status int `json:"status"`
 }

@@ -17,14 +17,29 @@
 package models
 
 
-type ContainerNetworkInterfaceAttachmentSpec struct {
+type ServiceUser struct {
 
-    /* 指明删除容器时是否删除网卡，默认True；当前只能是True (Optional) */
-    AutoDelete *bool `json:"autoDelete"`
+    /* 用户唯一标识 (Optional) */
+    Uuid string `json:"uuid"`
 
-    /* 设备Index，主网卡为1 (Optional) */
-    DeviceIndex *int `json:"deviceIndex"`
+    /* 用户Pin (Optional) */
+    UserPin string `json:"userPin"`
 
-    /* 网卡接口规范  */
-    NetworkInterface *NetworkInterfaceSpec `json:"networkInterface"`
+    /* 用户名称 (Optional) */
+    UserName string `json:"userName"`
+
+    /* 用户电话 (Optional) */
+    UserPhone string `json:"userPhone"`
+
+    /* 用户公司 (Optional) */
+    Company string `json:"company"`
+
+    /* 用户地址 (Optional) */
+    Address string `json:"address"`
+
+    /* 用户描述 (Optional) */
+    Desc string `json:"desc"`
+
+    /* 注册时间 (Optional) */
+    CreateTime string `json:"createTime"`
 }

@@ -19,7 +19,7 @@ package models
 
 type ShardSpec struct {
 
-    /* 单分片规格代码，自定义分片实例才有 (Optional) */
+    /* 单分片规格代码，自定义分片集群实例才需要，标准版不需要 (Optional) */
     ShardClass string `json:"shardClass"`
 
     /* 单分片CPU核数 (Optional) */
