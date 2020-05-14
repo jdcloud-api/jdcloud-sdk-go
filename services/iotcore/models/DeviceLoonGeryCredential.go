@@ -17,14 +17,23 @@
 package models
 
 
-type ContainerNetworkInterfaceAttachmentSpec struct {
+type DeviceLoonGeryCredential struct {
 
-    /* 指明删除容器时是否删除网卡，默认True；当前只能是True (Optional) */
-    AutoDelete *bool `json:"autoDelete"`
+    /* 设备Id (Optional) */
+    DeviceId string `json:"deviceId"`
 
-    /* 设备Index，主网卡为1 (Optional) */
-    DeviceIndex *int `json:"deviceIndex"`
+    /* 心跳码 (Optional) */
+    HeartbeatCode string `json:"heartbeatCode"`
 
-    /* 网卡接口规范  */
-    NetworkInterface *NetworkInterfaceSpec `json:"networkInterface"`
+    /* 连接码 (Optional) */
+    LinkCode string `json:"linkCode"`
+
+    /* 连接器名称 (Optional) */
+    ConnectorName string `json:"connectorName"`
+
+    /* 设备秘钥 (Optional) */
+    Secret string `json:"secret"`
+
+    /* 所属产品 (Optional) */
+    ProductKey string `json:"productKey"`
 }

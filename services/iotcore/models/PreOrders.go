@@ -17,14 +17,29 @@
 package models
 
 
-type ContainerNetworkInterfaceAttachmentSpec struct {
+type PreOrders struct {
 
-    /* 指明删除容器时是否删除网卡，默认True；当前只能是True (Optional) */
-    AutoDelete *bool `json:"autoDelete"`
+    /* 预购订单编号 (Optional) */
+    PreOrderId string `json:"preOrderId"`
 
-    /* 设备Index，主网卡为1 (Optional) */
-    DeviceIndex *int `json:"deviceIndex"`
+    /* 预购订单数量 (Optional) */
+    PreOrderNum string `json:"preOrderNum"`
 
-    /* 网卡接口规范  */
-    NetworkInterface *NetworkInterfaceSpec `json:"networkInterface"`
+    /* 产品Key (Optional) */
+    ProductKey string `json:"productKey"`
+
+    /* 用户Pin (Optional) */
+    UserPin string `json:"userPin"`
+
+    /* 用户名称 (Optional) */
+    UserName string `json:"userName"`
+
+    /* 已录入数量 (Optional) */
+    RecordNum int `json:"recordNum"`
+
+    /* 创建时间 (Optional) */
+    CreateTime string `json:"createTime"`
+
+    /* 订单状态，0-下单,1-处理完成 (Optional) */
+    PreOrderStatus string `json:"preOrderStatus"`
 }

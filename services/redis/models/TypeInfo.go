@@ -19,7 +19,7 @@ package models
 
 type TypeInfo struct {
 
-    /* 实例类型：目前支持主从版（master-slave）、集群版（cluster） (Optional) */
+    /* 实例类型：目前支持标准版（master-slave）、集群版（cluster） (Optional) */
     InstanceType string `json:"instanceType"`
 
     /* 规格列表 (Optional) */

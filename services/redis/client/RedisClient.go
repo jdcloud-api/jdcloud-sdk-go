@@ -40,7 +40,7 @@ func NewRedisClient(credential *core.Credential) *RedisClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "redis",
-            Revision:    "2.1.1",
+            Revision:    "2.1.2",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -57,7 +57,7 @@ func (c *RedisClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
 }
 
-/* 修改缓存Redis实例的自动备份策略，可修改备份周期和备份时间 */
+/* 开启或更新缓存Redis实例的自动备份策略，可修改备份周期和备份时间 */
 func (c *RedisClient) ModifyBackupPolicy(request *redis.ModifyBackupPolicyRequest) (*redis.ModifyBackupPolicyResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")

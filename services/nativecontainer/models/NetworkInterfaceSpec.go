@@ -28,10 +28,10 @@ type NetworkInterfaceSpec struct {
     /* 网卡主IP (Optional) */
     PrimaryIpAddress *string `json:"primaryIpAddress"`
 
-    /* SecondaryIp列表 (Optional) */
+    /* 网卡辅助IP，暂不支持 (Optional) */
     SecondaryIpAddresses []string `json:"secondaryIpAddresses"`
 
-    /* 自动分配的SecondaryIp数量 (Optional) */
+    /* 自动分配的辅助Ip数量，暂不支持 (Optional) */
     SecondaryIpCount *int `json:"secondaryIpCount"`
 
     /* 要绑定的安全组ID列表，最多指定5个安全组 (Optional) */
@@ -40,6 +40,6 @@ type NetworkInterfaceSpec struct {
     /* 源和目标IP地址校验，取值为0或者1，默认为1，暂不支持此功能 (Optional) */
     SanityCheck *bool `json:"sanityCheck"`
 
-    /* 描述 (Optional) */
+    /* 描述，最大长度256字符 (Optional) */
     Description *string `json:"description"`
 }
