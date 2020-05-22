@@ -40,7 +40,7 @@ func NewIotcoreClient(credential *core.Credential) *IotcoreClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "iotcore",
-            Revision:    "1.1.15",
+            Revision:    "1.1.17",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -77,6 +77,26 @@ func (c *IotcoreClient) AddDeviceLinks(request *iotcore.AddDeviceLinksRequest) (
     return jdResp, err
 }
 
+/* 查询物类型列表 */
+func (c *IotcoreClient) ThingTypeList(request *iotcore.ThingTypeListRequest) (*iotcore.ThingTypeListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotcore.ThingTypeListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 注册单个设备并返回秘钥信息 */
 func (c *IotcoreClient) AddDevice(request *iotcore.AddDeviceRequest) (*iotcore.AddDeviceResponse, error) {
     if request == nil {
@@ -88,6 +108,66 @@ func (c *IotcoreClient) AddDevice(request *iotcore.AddDeviceRequest) (*iotcore.A
     }
 
     jdResp := &iotcore.AddDeviceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查看所有产品的列表 */
+func (c *IotcoreClient) ListProductsWithAdmin(request *iotcore.ListProductsWithAdminRequest) (*iotcore.ListProductsWithAdminResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotcore.ListProductsWithAdminResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询方法调用列表信息 */
+func (c *IotcoreClient) FunctionList(request *iotcore.FunctionListRequest) (*iotcore.FunctionListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotcore.FunctionListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设备事件查询 */
+func (c *IotcoreClient) EventList(request *iotcore.EventListRequest) (*iotcore.EventListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotcore.EventListResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -117,6 +197,46 @@ func (c *IotcoreClient) DescribeProductTopics(request *iotcore.DescribeProductTo
     return jdResp, err
 }
 
+/* 写入采集器数据 */
+func (c *IotcoreClient) CollectorWriteMessage(request *iotcore.CollectorWriteMessageRequest) (*iotcore.CollectorWriteMessageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotcore.CollectorWriteMessageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设备控制接口 */
+func (c *IotcoreClient) DevicePropertySet(request *iotcore.DevicePropertySetRequest) (*iotcore.DevicePropertySetResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotcore.DevicePropertySetResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 设备服务调用 */
 func (c *IotcoreClient) InvokeThingService(request *iotcore.InvokeThingServiceRequest) (*iotcore.InvokeThingServiceResponse, error) {
     if request == nil {
@@ -128,6 +248,26 @@ func (c *IotcoreClient) InvokeThingService(request *iotcore.InvokeThingServiceRe
     }
 
     jdResp := &iotcore.InvokeThingServiceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除产品 */
+func (c *IotcoreClient) DeleteProductWithAdmin(request *iotcore.DeleteProductWithAdminRequest) (*iotcore.DeleteProductWithAdminResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotcore.DeleteProductWithAdminResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -197,6 +337,26 @@ func (c *IotcoreClient) RemoveLoongrayDevice(request *iotcore.RemoveLoongrayDevi
     return jdResp, err
 }
 
+/* 设备删除接口 */
+func (c *IotcoreClient) DeleteDevice(request *iotcore.DeleteDeviceRequest) (*iotcore.DeleteDeviceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotcore.DeleteDeviceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 修改产品 */
 func (c *IotcoreClient) UpdateProduct(request *iotcore.UpdateProductRequest) (*iotcore.UpdateProductResponse, error) {
     if request == nil {
@@ -237,6 +397,106 @@ func (c *IotcoreClient) QueryDeviceDetail(request *iotcore.QueryDeviceDetailRequ
     return jdResp, err
 }
 
+/* 根据模型ID查看物模型完整信息 */
+func (c *IotcoreClient) DiscribeThingModel(request *iotcore.DiscribeThingModelRequest) (*iotcore.DiscribeThingModelResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotcore.DiscribeThingModelResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 下载设备证书接口 */
+func (c *IotcoreClient) DownloadCertificate(request *iotcore.DownloadCertificateRequest) (*iotcore.DownloadCertificateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotcore.DownloadCertificateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 新建产品 */
+func (c *IotcoreClient) CreateAdminProduct(request *iotcore.CreateAdminProductRequest) (*iotcore.CreateAdminProductResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotcore.CreateAdminProductResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询单个设备详细信息 */
+func (c *IotcoreClient) DeviceQuery(request *iotcore.DeviceQueryRequest) (*iotcore.DeviceQueryResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotcore.DeviceQueryResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设备注册接口 */
+func (c *IotcoreClient) DeviceRegister(request *iotcore.DeviceRegisterRequest) (*iotcore.DeviceRegisterResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotcore.DeviceRegisterResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 删除设备 */
 func (c *IotcoreClient) RemoveDevice(request *iotcore.RemoveDeviceRequest) (*iotcore.RemoveDeviceResponse, error) {
     if request == nil {
@@ -248,6 +508,26 @@ func (c *IotcoreClient) RemoveDevice(request *iotcore.RemoveDeviceRequest) (*iot
     }
 
     jdResp := &iotcore.RemoveDeviceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设备方法执行 */
+func (c *IotcoreClient) InvokeFunction(request *iotcore.InvokeFunctionRequest) (*iotcore.InvokeFunctionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotcore.InvokeFunctionResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -357,6 +637,26 @@ func (c *IotcoreClient) QueryDevicePage(request *iotcore.QueryDevicePageRequest)
     return jdResp, err
 }
 
+/* 获取协议信息 */
+func (c *IotcoreClient) CollectorReadMessage(request *iotcore.CollectorReadMessageRequest) (*iotcore.CollectorReadMessageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotcore.CollectorReadMessageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查看设备影子 */
 func (c *IotcoreClient) DescribeThingShadow(request *iotcore.DescribeThingShadowRequest) (*iotcore.DescribeThingShadowResponse, error) {
     if request == nil {
@@ -437,6 +737,26 @@ func (c *IotcoreClient) ExportThingModel(request *iotcore.ExportThingModelReques
     return jdResp, err
 }
 
+/* 查看产品 */
+func (c *IotcoreClient) DescribeProductWithAdmin(request *iotcore.DescribeProductWithAdminRequest) (*iotcore.DescribeProductWithAdminResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotcore.DescribeProductWithAdminResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查看产品功能列表接口 */
 func (c *IotcoreClient) ListProductAbilities(request *iotcore.ListProductAbilitiesRequest) (*iotcore.ListProductAbilitiesResponse, error) {
     if request == nil {
@@ -468,6 +788,26 @@ func (c *IotcoreClient) LoongrayQueryPage(request *iotcore.LoongrayQueryPageRequ
     }
 
     jdResp := &iotcore.LoongrayQueryPageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改产品 */
+func (c *IotcoreClient) UpdateProductWithAdmin(request *iotcore.UpdateProductWithAdminRequest) (*iotcore.UpdateProductWithAdminResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotcore.UpdateProductWithAdminResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -548,6 +888,46 @@ func (c *IotcoreClient) ImportThingModel(request *iotcore.ImportThingModelReques
     }
 
     jdResp := &iotcore.ImportThingModelResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询物类型列表 */
+func (c *IotcoreClient) ThingTypeDescribe(request *iotcore.ThingTypeDescribeRequest) (*iotcore.ThingTypeDescribeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotcore.ThingTypeDescribeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取电梯运行状态 */
+func (c *IotcoreClient) ElevatorOperatingStatus(request *iotcore.ElevatorOperatingStatusRequest) (*iotcore.ElevatorOperatingStatusResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotcore.ElevatorOperatingStatusResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

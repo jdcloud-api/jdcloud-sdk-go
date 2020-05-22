@@ -28,6 +28,9 @@ type PreOrders struct {
     /* 产品Key (Optional) */
     ProductKey string `json:"productKey"`
 
+    /* 产品名称 (Optional) */
+    ProductName string `json:"productName"`
+
     /* 用户Pin (Optional) */
     UserPin string `json:"userPin"`
 

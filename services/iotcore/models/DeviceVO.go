@@ -72,4 +72,10 @@ type DeviceVO struct {
 
     /* 是否开启动态注册,0:关闭,1:开启，开启动态注册的设备认证类型为一型一密，否则为一机一密 (Optional) */
     DynamicRegister int `json:"dynamicRegister"`
+
+    /* 设备采集器类型 (Optional) */
+    DeviceCollectorType string `json:"deviceCollectorType"`
+
+    /* 最后离线时间 (Optional) */
+    LastDisconnectTime int64 `json:"lastDisconnectTime"`
 }
