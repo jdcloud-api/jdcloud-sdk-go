@@ -57,6 +57,12 @@ type LoongrayQueryPageRequest struct {
 
     /* 父设备Id (Optional) */
     ParentId *string `json:"parentId"`
+
+    /* 订单号 (Optional) */
+    OrderId *int `json:"orderId"`
+
+    /* 设备采集器类型 (Optional) */
+    DeviceCollectorType *string `json:"deviceCollectorType"`
 }
 
 /*
@@ -94,6 +100,8 @@ func NewLoongrayQueryPageRequest(
  * param order: 排序关键字--name,type,productKey,status--最多支持一个字段 (Optional)
  * param direction: 顺序，升序降序--asc,desc (Optional)
  * param parentId: 父设备Id (Optional)
+ * param orderId: 订单号 (Optional)
+ * param deviceCollectorType: 设备采集器类型 (Optional)
  */
 func NewLoongrayQueryPageRequestWithAllParams(
     instanceId string,
@@ -107,6 +115,8 @@ func NewLoongrayQueryPageRequestWithAllParams(
     order *string,
     direction *string,
     parentId *string,
+    orderId *int,
+    deviceCollectorType *string,
 ) *LoongrayQueryPageRequest {
 
     return &LoongrayQueryPageRequest{
@@ -127,6 +137,8 @@ func NewLoongrayQueryPageRequestWithAllParams(
         Order: order,
         Direction: direction,
         ParentId: parentId,
+        OrderId: orderId,
+        DeviceCollectorType: deviceCollectorType,
     }
 }
 
@@ -196,6 +208,16 @@ func (r *LoongrayQueryPageRequest) SetDirection(direction string) {
 /* param parentId: 父设备Id(Optional) */
 func (r *LoongrayQueryPageRequest) SetParentId(parentId string) {
     r.ParentId = &parentId
+}
+
+/* param orderId: 订单号(Optional) */
+func (r *LoongrayQueryPageRequest) SetOrderId(orderId int) {
+    r.OrderId = &orderId
+}
+
+/* param deviceCollectorType: 设备采集器类型(Optional) */
+func (r *LoongrayQueryPageRequest) SetDeviceCollectorType(deviceCollectorType string) {
+    r.DeviceCollectorType = &deviceCollectorType
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

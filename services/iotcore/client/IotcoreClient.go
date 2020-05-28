@@ -40,7 +40,7 @@ func NewIotcoreClient(credential *core.Credential) *IotcoreClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "iotcore",
-            Revision:    "1.1.17",
+            Revision:    "1.1.18",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }

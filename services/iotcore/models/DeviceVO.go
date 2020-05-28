@@ -78,4 +78,7 @@ type DeviceVO struct {
 
     /* 最后离线时间 (Optional) */
     LastDisconnectTime int64 `json:"lastDisconnectTime"`
+
+    /* 订单号 (Optional) */
+    OrderId int64 `json:"orderId"`
 }

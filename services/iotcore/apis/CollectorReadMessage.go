@@ -30,22 +30,38 @@ type CollectorReadMessageRequest struct {
     /* 区域Id  */
     RegionId string `json:"regionId"`
 
-    /* 当前的链接码 (Optional) */
-    Identifier *string `json:"identifier"`
+    /* 当前的链接码  */
+    Identifier string `json:"identifier"`
 
-    /* 当前的协议类型 (Optional) */
-    Protocol *string `json:"protocol"`
+    /* 当前的协议类型：
+语音播报控制器-输入端子,0X00000~X0007：inputTerminal
+语音播报控制器-播放信息,0X00024~X0027：playInfo
+LR001-516-5B边缘数据采集器-传感器管理：sensor
+LR001-516-5B边缘数据采集器-采集器属性：collectorProperty
+LR001-516-5B边缘数据采集器-电梯属性：elevatorProperty
+  */
+    Protocol string `json:"protocol"`
 }
 
 /*
  * param instanceId: Hub实例Id (Required)
  * param regionId: 区域Id (Required)
+ * param identifier: 当前的链接码 (Required)
+ * param protocol: 当前的协议类型：
+语音播报控制器-输入端子,0X00000~X0007：inputTerminal
+语音播报控制器-播放信息,0X00024~X0027：playInfo
+LR001-516-5B边缘数据采集器-传感器管理：sensor
+LR001-516-5B边缘数据采集器-采集器属性：collectorProperty
+LR001-516-5B边缘数据采集器-电梯属性：elevatorProperty
+ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCollectorReadMessageRequest(
     instanceId string,
     regionId string,
+    identifier string,
+    protocol string,
 ) *CollectorReadMessageRequest {
 
 	return &CollectorReadMessageRequest{
@@ -57,20 +73,28 @@ func NewCollectorReadMessageRequest(
 		},
         InstanceId: instanceId,
         RegionId: regionId,
+        Identifier: identifier,
+        Protocol: protocol,
 	}
 }
 
 /*
  * param instanceId: Hub实例Id (Required)
  * param regionId: 区域Id (Required)
- * param identifier: 当前的链接码 (Optional)
- * param protocol: 当前的协议类型 (Optional)
+ * param identifier: 当前的链接码 (Required)
+ * param protocol: 当前的协议类型：
+语音播报控制器-输入端子,0X00000~X0007：inputTerminal
+语音播报控制器-播放信息,0X00024~X0027：playInfo
+LR001-516-5B边缘数据采集器-传感器管理：sensor
+LR001-516-5B边缘数据采集器-采集器属性：collectorProperty
+LR001-516-5B边缘数据采集器-电梯属性：elevatorProperty
+ (Required)
  */
 func NewCollectorReadMessageRequestWithAllParams(
     instanceId string,
     regionId string,
-    identifier *string,
-    protocol *string,
+    identifier string,
+    protocol string,
 ) *CollectorReadMessageRequest {
 
     return &CollectorReadMessageRequest{
@@ -110,14 +134,20 @@ func (r *CollectorReadMessageRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param identifier: 当前的链接码(Optional) */
+/* param identifier: 当前的链接码(Required) */
 func (r *CollectorReadMessageRequest) SetIdentifier(identifier string) {
-    r.Identifier = &identifier
+    r.Identifier = identifier
 }
 
-/* param protocol: 当前的协议类型(Optional) */
+/* param protocol: 当前的协议类型：
+语音播报控制器-输入端子,0X00000~X0007：inputTerminal
+语音播报控制器-播放信息,0X00024~X0027：playInfo
+LR001-516-5B边缘数据采集器-传感器管理：sensor
+LR001-516-5B边缘数据采集器-采集器属性：collectorProperty
+LR001-516-5B边缘数据采集器-电梯属性：elevatorProperty
+(Required) */
 func (r *CollectorReadMessageRequest) SetProtocol(protocol string) {
-    r.Protocol = &protocol
+    r.Protocol = protocol
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

@@ -30,25 +30,112 @@ type CollectorWriteMessageRequest struct {
     /* 区域Id  */
     RegionId string `json:"regionId"`
 
-    /* 当前的链接码 (Optional) */
-    Identifier *string `json:"identifier"`
+    /* 当前的链接码  */
+    Identifier string `json:"identifier"`
 
-    /* 当前的协议类型 (Optional) */
+    /* 当前的协议类型,非必填项
+ (Optional) */
     Protocol *string `json:"protocol"`
 
-    /* 当前待写入的数据 (Optional) */
-    Data *interface{} `json:"data"`
+    /* 当前待写入的数据
+如指定播放设备，寄存地址：13对应16进制0x0D，寄存器值:2
+{
+  "13":2
+}
+如播放控制，寄存地址：14对应16进制0x0E，寄存器值:1
+{
+  "14": 1
+}
+如音量设置，寄存地址：15对应16进制0x0F，寄存器值:10，取值范围0~30
+{
+  "15": 10
+}
+如指定文件夹和文件播放,寄存地址：16对应16进制0x10，寄存器值:1
+寄存器值为两字节，第一个字节为文件夹，第二个字节为文件名
+如0x01文件夹,0x03文件名，0x0103换算为10进制为259
+{
+  "16": 259
+}
+如组合播放，寄存器地址：17、18和19，寄存器值：257、258和259，寄存器值的算法和指定文件夹和文件播放是一致的，如259可换算为0x01文件夹,0x03文件名
+{
+  "17": 257,
+  "18": 258,
+  "19": 259
+}
+如播放广告，寄存地址：32对应16进制0x20，寄存器值:259，寄存器值的算法和指定文件夹和文件播放是一致的，如259可换算为0x01文件夹,0x03文件名
+{
+  "32": 259
+}
+如指定文件夹循环播放，寄存地址：33对应16进制0x21，寄存器值:256，寄存器值的算法，如256可换算为0x0100文件夹
+{
+  "33": 256
+}
+如指定文件夹随机播放，寄存地址：34对应16进制0x22，寄存器值:256，寄存器值的算法，如256可换算为0x0100文件夹
+{
+  "34": 256
+}
+如指定曲目播放，寄存地址：35对应16进制0x23，寄存器值:13,歌曲选择范围为0~3000
+{
+  "35": 13
+}
+  */
+    Data interface{} `json:"data"`
 }
 
 /*
  * param instanceId: Hub实例Id (Required)
  * param regionId: 区域Id (Required)
+ * param identifier: 当前的链接码 (Required)
+ * param data: 当前待写入的数据
+如指定播放设备，寄存地址：13对应16进制0x0D，寄存器值:2
+{
+  "13":2
+}
+如播放控制，寄存地址：14对应16进制0x0E，寄存器值:1
+{
+  "14": 1
+}
+如音量设置，寄存地址：15对应16进制0x0F，寄存器值:10，取值范围0~30
+{
+  "15": 10
+}
+如指定文件夹和文件播放,寄存地址：16对应16进制0x10，寄存器值:1
+寄存器值为两字节，第一个字节为文件夹，第二个字节为文件名
+如0x01文件夹,0x03文件名，0x0103换算为10进制为259
+{
+  "16": 259
+}
+如组合播放，寄存器地址：17、18和19，寄存器值：257、258和259，寄存器值的算法和指定文件夹和文件播放是一致的，如259可换算为0x01文件夹,0x03文件名
+{
+  "17": 257,
+  "18": 258,
+  "19": 259
+}
+如播放广告，寄存地址：32对应16进制0x20，寄存器值:259，寄存器值的算法和指定文件夹和文件播放是一致的，如259可换算为0x01文件夹,0x03文件名
+{
+  "32": 259
+}
+如指定文件夹循环播放，寄存地址：33对应16进制0x21，寄存器值:256，寄存器值的算法，如256可换算为0x0100文件夹
+{
+  "33": 256
+}
+如指定文件夹随机播放，寄存地址：34对应16进制0x22，寄存器值:256，寄存器值的算法，如256可换算为0x0100文件夹
+{
+  "34": 256
+}
+如指定曲目播放，寄存地址：35对应16进制0x23，寄存器值:13,歌曲选择范围为0~3000
+{
+  "35": 13
+}
+ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCollectorWriteMessageRequest(
     instanceId string,
     regionId string,
+    identifier string,
+    data interface{},
 ) *CollectorWriteMessageRequest {
 
 	return &CollectorWriteMessageRequest{
@@ -60,22 +147,66 @@ func NewCollectorWriteMessageRequest(
 		},
         InstanceId: instanceId,
         RegionId: regionId,
+        Identifier: identifier,
+        Data: data,
 	}
 }
 
 /*
  * param instanceId: Hub实例Id (Required)
  * param regionId: 区域Id (Required)
- * param identifier: 当前的链接码 (Optional)
- * param protocol: 当前的协议类型 (Optional)
- * param data: 当前待写入的数据 (Optional)
+ * param identifier: 当前的链接码 (Required)
+ * param protocol: 当前的协议类型,非必填项
+ (Optional)
+ * param data: 当前待写入的数据
+如指定播放设备，寄存地址：13对应16进制0x0D，寄存器值:2
+{
+  "13":2
+}
+如播放控制，寄存地址：14对应16进制0x0E，寄存器值:1
+{
+  "14": 1
+}
+如音量设置，寄存地址：15对应16进制0x0F，寄存器值:10，取值范围0~30
+{
+  "15": 10
+}
+如指定文件夹和文件播放,寄存地址：16对应16进制0x10，寄存器值:1
+寄存器值为两字节，第一个字节为文件夹，第二个字节为文件名
+如0x01文件夹,0x03文件名，0x0103换算为10进制为259
+{
+  "16": 259
+}
+如组合播放，寄存器地址：17、18和19，寄存器值：257、258和259，寄存器值的算法和指定文件夹和文件播放是一致的，如259可换算为0x01文件夹,0x03文件名
+{
+  "17": 257,
+  "18": 258,
+  "19": 259
+}
+如播放广告，寄存地址：32对应16进制0x20，寄存器值:259，寄存器值的算法和指定文件夹和文件播放是一致的，如259可换算为0x01文件夹,0x03文件名
+{
+  "32": 259
+}
+如指定文件夹循环播放，寄存地址：33对应16进制0x21，寄存器值:256，寄存器值的算法，如256可换算为0x0100文件夹
+{
+  "33": 256
+}
+如指定文件夹随机播放，寄存地址：34对应16进制0x22，寄存器值:256，寄存器值的算法，如256可换算为0x0100文件夹
+{
+  "34": 256
+}
+如指定曲目播放，寄存地址：35对应16进制0x23，寄存器值:13,歌曲选择范围为0~3000
+{
+  "35": 13
+}
+ (Required)
  */
 func NewCollectorWriteMessageRequestWithAllParams(
     instanceId string,
     regionId string,
-    identifier *string,
+    identifier string,
     protocol *string,
-    data *interface{},
+    data interface{},
 ) *CollectorWriteMessageRequest {
 
     return &CollectorWriteMessageRequest{
@@ -116,19 +247,61 @@ func (r *CollectorWriteMessageRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param identifier: 当前的链接码(Optional) */
+/* param identifier: 当前的链接码(Required) */
 func (r *CollectorWriteMessageRequest) SetIdentifier(identifier string) {
-    r.Identifier = &identifier
+    r.Identifier = identifier
 }
 
-/* param protocol: 当前的协议类型(Optional) */
+/* param protocol: 当前的协议类型,非必填项
+(Optional) */
 func (r *CollectorWriteMessageRequest) SetProtocol(protocol string) {
     r.Protocol = &protocol
 }
 
-/* param data: 当前待写入的数据(Optional) */
+/* param data: 当前待写入的数据
+如指定播放设备，寄存地址：13对应16进制0x0D，寄存器值:2
+{
+  "13":2
+}
+如播放控制，寄存地址：14对应16进制0x0E，寄存器值:1
+{
+  "14": 1
+}
+如音量设置，寄存地址：15对应16进制0x0F，寄存器值:10，取值范围0~30
+{
+  "15": 10
+}
+如指定文件夹和文件播放,寄存地址：16对应16进制0x10，寄存器值:1
+寄存器值为两字节，第一个字节为文件夹，第二个字节为文件名
+如0x01文件夹,0x03文件名，0x0103换算为10进制为259
+{
+  "16": 259
+}
+如组合播放，寄存器地址：17、18和19，寄存器值：257、258和259，寄存器值的算法和指定文件夹和文件播放是一致的，如259可换算为0x01文件夹,0x03文件名
+{
+  "17": 257,
+  "18": 258,
+  "19": 259
+}
+如播放广告，寄存地址：32对应16进制0x20，寄存器值:259，寄存器值的算法和指定文件夹和文件播放是一致的，如259可换算为0x01文件夹,0x03文件名
+{
+  "32": 259
+}
+如指定文件夹循环播放，寄存地址：33对应16进制0x21，寄存器值:256，寄存器值的算法，如256可换算为0x0100文件夹
+{
+  "33": 256
+}
+如指定文件夹随机播放，寄存地址：34对应16进制0x22，寄存器值:256，寄存器值的算法，如256可换算为0x0100文件夹
+{
+  "34": 256
+}
+如指定曲目播放，寄存地址：35对应16进制0x23，寄存器值:13,歌曲选择范围为0~3000
+{
+  "35": 13
+}
+(Required) */
 func (r *CollectorWriteMessageRequest) SetData(data interface{}) {
-    r.Data = &data
+    r.Data = data
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
@@ -144,4 +317,5 @@ type CollectorWriteMessageResponse struct {
 }
 
 type CollectorWriteMessageResult struct {
+    WriteStatus string `json:"writeStatus"`
 }
