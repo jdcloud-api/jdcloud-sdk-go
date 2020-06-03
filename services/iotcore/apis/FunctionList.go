@@ -128,7 +128,6 @@ type FunctionListResponse struct {
 type FunctionListResult struct {
     PageSize int `json:"pageSize"`
     CurrentPage int `json:"currentPage"`
-    TotalSize int `json:"totalSize"`
-    TotalPage int `json:"totalPage"`
+    TotalCount int `json:"totalCount"`
     Data []iotcore.FunctionCallRecordVo `json:"data"`
 }

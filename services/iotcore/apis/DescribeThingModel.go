@@ -21,7 +21,7 @@ import (
     iotcore "github.com/jdcloud-api/jdcloud-sdk-go/services/iotcore/models"
 )
 
-type DiscribeThingModelRequest struct {
+type DescribeThingModelRequest struct {
 
     core.JDCloudRequest
 
@@ -45,15 +45,15 @@ type DiscribeThingModelRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDiscribeThingModelRequest(
+func NewDescribeThingModelRequest(
     regionId string,
     instanceId string,
     thingModelId string,
-) *DiscribeThingModelRequest {
+) *DescribeThingModelRequest {
 
-	return &DiscribeThingModelRequest{
+	return &DescribeThingModelRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/coreinstances/{instanceId}/thingModel:discribeThingModel",
+			URL:     "/regions/{regionId}/coreinstances/{instanceId}/thingModel:describeThingModel",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v2",
@@ -70,16 +70,16 @@ func NewDiscribeThingModelRequest(
  * param thingModelId: 物模型ID编号 (Required)
  * param thingModelVersion: 版本号。如果为空，则返回最新版本 (Optional)
  */
-func NewDiscribeThingModelRequestWithAllParams(
+func NewDescribeThingModelRequestWithAllParams(
     regionId string,
     instanceId string,
     thingModelId string,
     thingModelVersion *string,
-) *DiscribeThingModelRequest {
+) *DescribeThingModelRequest {
 
-    return &DiscribeThingModelRequest{
+    return &DescribeThingModelRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/coreinstances/{instanceId}/thingModel:discribeThingModel",
+            URL:     "/regions/{regionId}/coreinstances/{instanceId}/thingModel:describeThingModel",
             Method:  "GET",
             Header:  nil,
             Version: "v2",
@@ -92,11 +92,11 @@ func NewDiscribeThingModelRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDiscribeThingModelRequestWithoutParam() *DiscribeThingModelRequest {
+func NewDescribeThingModelRequestWithoutParam() *DescribeThingModelRequest {
 
-    return &DiscribeThingModelRequest{
+    return &DescribeThingModelRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/coreinstances/{instanceId}/thingModel:discribeThingModel",
+            URL:     "/regions/{regionId}/coreinstances/{instanceId}/thingModel:describeThingModel",
             Method:  "GET",
             Header:  nil,
             Version: "v2",
@@ -105,37 +105,37 @@ func NewDiscribeThingModelRequestWithoutParam() *DiscribeThingModelRequest {
 }
 
 /* param regionId: 区域id(Required) */
-func (r *DiscribeThingModelRequest) SetRegionId(regionId string) {
+func (r *DescribeThingModelRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 实例Id(Required) */
-func (r *DiscribeThingModelRequest) SetInstanceId(instanceId string) {
+func (r *DescribeThingModelRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
 /* param thingModelId: 物模型ID编号(Required) */
-func (r *DiscribeThingModelRequest) SetThingModelId(thingModelId string) {
+func (r *DescribeThingModelRequest) SetThingModelId(thingModelId string) {
     r.ThingModelId = thingModelId
 }
 
 /* param thingModelVersion: 版本号。如果为空，则返回最新版本(Optional) */
-func (r *DiscribeThingModelRequest) SetThingModelVersion(thingModelVersion string) {
+func (r *DescribeThingModelRequest) SetThingModelVersion(thingModelVersion string) {
     r.ThingModelVersion = &thingModelVersion
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DiscribeThingModelRequest) GetRegionId() string {
+func (r DescribeThingModelRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DiscribeThingModelResponse struct {
+type DescribeThingModelResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DiscribeThingModelResult `json:"result"`
+    Result DescribeThingModelResult `json:"result"`
 }
 
-type DiscribeThingModelResult struct {
+type DescribeThingModelResult struct {
     ThingModelRespTO iotcore.ThingModelRespTO `json:"thingModelRespTO"`
 }
