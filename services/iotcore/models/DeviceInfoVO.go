@@ -79,9 +79,6 @@ type DeviceInfoVO struct {
     /* 物模型版本号 (Optional) */
     ThingModelVersion *string `json:"thingModelVersion"`
 
-    /* 物模型类型 (Optional) */
-    ThingType *string `json:"thingType"`
-
     /* 物类型ID (Optional) */
     ThingTypeCode *string `json:"thingTypeCode"`
 

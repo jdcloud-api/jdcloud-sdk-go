@@ -21,7 +21,7 @@ import (
     iotcore "github.com/jdcloud-api/jdcloud-sdk-go/services/iotcore/models"
 )
 
-type FunctionListRequest struct {
+type DescribeThingModelRequest struct {
 
     core.JDCloudRequest
 
@@ -31,67 +31,73 @@ type FunctionListRequest struct {
     /* 实例Id  */
     InstanceId string `json:"instanceId"`
 
-    /* 方法查询请求  */
-    FunctionCallPageBo *iotcore.FunctionCallPageBo `json:"functionCallPageBo"`
+    /* 物模型ID编号  */
+    ThingModelId string `json:"thingModelId"`
+
+    /* 版本号。如果为空，则返回最新版本 (Optional) */
+    ThingModelVersion *string `json:"thingModelVersion"`
 }
 
 /*
  * param regionId: 区域id (Required)
  * param instanceId: 实例Id (Required)
- * param functionCallPageBo: 方法查询请求 (Required)
+ * param thingModelId: 物模型ID编号 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewFunctionListRequest(
+func NewDescribeThingModelRequest(
     regionId string,
     instanceId string,
-    functionCallPageBo *iotcore.FunctionCallPageBo,
-) *FunctionListRequest {
+    thingModelId string,
+) *DescribeThingModelRequest {
 
-	return &FunctionListRequest{
+	return &DescribeThingModelRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/coreinstances/{instanceId}/function:list",
-			Method:  "POST",
+			URL:     "/regions/{regionId}/coreinstances/{instanceId}/thingModel:describeThingModel",
+			Method:  "GET",
 			Header:  nil,
 			Version: "v2",
 		},
         RegionId: regionId,
         InstanceId: instanceId,
-        FunctionCallPageBo: functionCallPageBo,
+        ThingModelId: thingModelId,
 	}
 }
 
 /*
  * param regionId: 区域id (Required)
  * param instanceId: 实例Id (Required)
- * param functionCallPageBo: 方法查询请求 (Required)
+ * param thingModelId: 物模型ID编号 (Required)
+ * param thingModelVersion: 版本号。如果为空，则返回最新版本 (Optional)
  */
-func NewFunctionListRequestWithAllParams(
+func NewDescribeThingModelRequestWithAllParams(
     regionId string,
     instanceId string,
-    functionCallPageBo *iotcore.FunctionCallPageBo,
-) *FunctionListRequest {
+    thingModelId string,
+    thingModelVersion *string,
+) *DescribeThingModelRequest {
 
-    return &FunctionListRequest{
+    return &DescribeThingModelRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/coreinstances/{instanceId}/function:list",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/coreinstances/{instanceId}/thingModel:describeThingModel",
+            Method:  "GET",
             Header:  nil,
             Version: "v2",
         },
         RegionId: regionId,
         InstanceId: instanceId,
-        FunctionCallPageBo: functionCallPageBo,
+        ThingModelId: thingModelId,
+        ThingModelVersion: thingModelVersion,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewFunctionListRequestWithoutParam() *FunctionListRequest {
+func NewDescribeThingModelRequestWithoutParam() *DescribeThingModelRequest {
 
-    return &FunctionListRequest{
+    return &DescribeThingModelRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/coreinstances/{instanceId}/function:list",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/coreinstances/{instanceId}/thingModel:describeThingModel",
+            Method:  "GET",
             Header:  nil,
             Version: "v2",
         },
@@ -99,35 +105,37 @@ func NewFunctionListRequestWithoutParam() *FunctionListRequest {
 }
 
 /* param regionId: 区域id(Required) */
-func (r *FunctionListRequest) SetRegionId(regionId string) {
+func (r *DescribeThingModelRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 实例Id(Required) */
-func (r *FunctionListRequest) SetInstanceId(instanceId string) {
+func (r *DescribeThingModelRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param functionCallPageBo: 方法查询请求(Required) */
-func (r *FunctionListRequest) SetFunctionCallPageBo(functionCallPageBo *iotcore.FunctionCallPageBo) {
-    r.FunctionCallPageBo = functionCallPageBo
+/* param thingModelId: 物模型ID编号(Required) */
+func (r *DescribeThingModelRequest) SetThingModelId(thingModelId string) {
+    r.ThingModelId = thingModelId
+}
+
+/* param thingModelVersion: 版本号。如果为空，则返回最新版本(Optional) */
+func (r *DescribeThingModelRequest) SetThingModelVersion(thingModelVersion string) {
+    r.ThingModelVersion = &thingModelVersion
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r FunctionListRequest) GetRegionId() string {
+func (r DescribeThingModelRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type FunctionListResponse struct {
+type DescribeThingModelResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result FunctionListResult `json:"result"`
+    Result DescribeThingModelResult `json:"result"`
 }
 
-type FunctionListResult struct {
-    PageSize int `json:"pageSize"`
-    CurrentPage int `json:"currentPage"`
-    TotalCount int `json:"totalCount"`
-    Data []iotcore.FunctionCallRecordVo `json:"data"`
+type DescribeThingModelResult struct {
+    ThingModelRespTO iotcore.ThingModelRespTO `json:"thingModelRespTO"`
 }
