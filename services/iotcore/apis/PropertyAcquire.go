@@ -18,9 +18,10 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    iotcore "github.com/jdcloud-api/jdcloud-sdk-go/services/iotcore/models"
 )
 
-type DownloadCertificateRequest struct {
+type PropertyAcquireRequest struct {
 
     core.JDCloudRequest
 
@@ -41,15 +42,15 @@ type DownloadCertificateRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDownloadCertificateRequest(
+func NewPropertyAcquireRequest(
     regionId string,
     instanceId string,
     deviceId string,
-) *DownloadCertificateRequest {
+) *PropertyAcquireRequest {
 
-	return &DownloadCertificateRequest{
+	return &PropertyAcquireRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/coreinstances/{instanceId}/device:downloadCertificate",
+			URL:     "/regions/{regionId}/coreinstances/{instanceId}/property:acquire",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v2",
@@ -65,15 +66,15 @@ func NewDownloadCertificateRequest(
  * param instanceId: 实例Id (Required)
  * param deviceId: 设备ID (Required)
  */
-func NewDownloadCertificateRequestWithAllParams(
+func NewPropertyAcquireRequestWithAllParams(
     regionId string,
     instanceId string,
     deviceId string,
-) *DownloadCertificateRequest {
+) *PropertyAcquireRequest {
 
-    return &DownloadCertificateRequest{
+    return &PropertyAcquireRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/coreinstances/{instanceId}/device:downloadCertificate",
+            URL:     "/regions/{regionId}/coreinstances/{instanceId}/property:acquire",
             Method:  "GET",
             Header:  nil,
             Version: "v2",
@@ -85,11 +86,11 @@ func NewDownloadCertificateRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDownloadCertificateRequestWithoutParam() *DownloadCertificateRequest {
+func NewPropertyAcquireRequestWithoutParam() *PropertyAcquireRequest {
 
-    return &DownloadCertificateRequest{
+    return &PropertyAcquireRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/coreinstances/{instanceId}/device:downloadCertificate",
+            URL:     "/regions/{regionId}/coreinstances/{instanceId}/property:acquire",
             Method:  "GET",
             Header:  nil,
             Version: "v2",
@@ -98,33 +99,32 @@ func NewDownloadCertificateRequestWithoutParam() *DownloadCertificateRequest {
 }
 
 /* param regionId: 区域id(Required) */
-func (r *DownloadCertificateRequest) SetRegionId(regionId string) {
+func (r *PropertyAcquireRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 实例Id(Required) */
-func (r *DownloadCertificateRequest) SetInstanceId(instanceId string) {
+func (r *PropertyAcquireRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
 /* param deviceId: 设备ID(Required) */
-func (r *DownloadCertificateRequest) SetDeviceId(deviceId string) {
+func (r *PropertyAcquireRequest) SetDeviceId(deviceId string) {
     r.DeviceId = deviceId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DownloadCertificateRequest) GetRegionId() string {
+func (r PropertyAcquireRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DownloadCertificateResponse struct {
+type PropertyAcquireResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DownloadCertificateResult `json:"result"`
+    Result PropertyAcquireResult `json:"result"`
 }
 
-type DownloadCertificateResult struct {
-    DeviceId string `json:"deviceId"`
-    DeviceCertUrl string `json:"deviceCertUrl"`
+type PropertyAcquireResult struct {
+    PropertyAcquireVo iotcore.PropertyAcquireVo `json:"propertyAcquireVo"`
 }

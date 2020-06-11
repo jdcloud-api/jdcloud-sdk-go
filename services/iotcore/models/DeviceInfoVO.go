@@ -41,7 +41,7 @@ type DeviceInfoVO struct {
     DeviceTagList []TagVO `json:"deviceTagList"`
 
     /*  (Optional) */
-    GlobalProfiles *GlobalProfileVO `json:"globalProfiles"`
+    GlobalProfiles []GlobalProfileVO `json:"globalProfiles"`
 
     /* 最近一次上线时间 (Optional) */
     LastConnectTime *string `json:"lastConnectTime"`

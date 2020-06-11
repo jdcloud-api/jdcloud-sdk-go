@@ -17,14 +17,14 @@
 package models
 
 
-type DeviceFunctionVO struct {
+type PropertyAcquireVo struct {
 
-    /* 设备标识Id  */
-    DeviceId string `json:"deviceId"`
+    /* 属性状态  */
+    State interface{} `json:"state"`
 
-    /* 输入参数 (Optional) */
-    InParams *interface{} `json:"inParams"`
+    /* 元数据  */
+    MetaData interface{} `json:"metaData"`
 
-    /* 服务名称  */
-    FunctionName string `json:"functionName"`
+    /* 版本号  */
+    Version int `json:"version"`
 }
