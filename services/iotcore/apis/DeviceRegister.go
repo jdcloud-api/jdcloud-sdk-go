@@ -126,4 +126,5 @@ type DeviceRegisterResponse struct {
 }
 
 type DeviceRegisterResult struct {
+    DeviceInfoVO iotcore.DeviceInfoVO `json:"deviceInfoVO"`
 }

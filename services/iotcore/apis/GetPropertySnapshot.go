@@ -18,9 +18,10 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    iotcore "github.com/jdcloud-api/jdcloud-sdk-go/services/iotcore/models"
 )
 
-type DownloadCertificateRequest struct {
+type GetPropertySnapshotRequest struct {
 
     core.JDCloudRequest
 
@@ -30,67 +31,67 @@ type DownloadCertificateRequest struct {
     /* 实例Id  */
     InstanceId string `json:"instanceId"`
 
-    /* 设备ID  */
-    DeviceId string `json:"deviceId"`
+    /* 方法查询请求  */
+    DeviceSnapshotRequestVO *iotcore.DeviceSnapshotRequestVO `json:"deviceSnapshotRequestVO"`
 }
 
 /*
  * param regionId: 区域id (Required)
  * param instanceId: 实例Id (Required)
- * param deviceId: 设备ID (Required)
+ * param deviceSnapshotRequestVO: 方法查询请求 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDownloadCertificateRequest(
+func NewGetPropertySnapshotRequest(
     regionId string,
     instanceId string,
-    deviceId string,
-) *DownloadCertificateRequest {
+    deviceSnapshotRequestVO *iotcore.DeviceSnapshotRequestVO,
+) *GetPropertySnapshotRequest {
 
-	return &DownloadCertificateRequest{
+	return &GetPropertySnapshotRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/coreinstances/{instanceId}/device:downloadCertificate",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/coreinstances/{instanceId}/property:getSnapshot",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v2",
 		},
         RegionId: regionId,
         InstanceId: instanceId,
-        DeviceId: deviceId,
+        DeviceSnapshotRequestVO: deviceSnapshotRequestVO,
 	}
 }
 
 /*
  * param regionId: 区域id (Required)
  * param instanceId: 实例Id (Required)
- * param deviceId: 设备ID (Required)
+ * param deviceSnapshotRequestVO: 方法查询请求 (Required)
  */
-func NewDownloadCertificateRequestWithAllParams(
+func NewGetPropertySnapshotRequestWithAllParams(
     regionId string,
     instanceId string,
-    deviceId string,
-) *DownloadCertificateRequest {
+    deviceSnapshotRequestVO *iotcore.DeviceSnapshotRequestVO,
+) *GetPropertySnapshotRequest {
 
-    return &DownloadCertificateRequest{
+    return &GetPropertySnapshotRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/coreinstances/{instanceId}/device:downloadCertificate",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/coreinstances/{instanceId}/property:getSnapshot",
+            Method:  "POST",
             Header:  nil,
             Version: "v2",
         },
         RegionId: regionId,
         InstanceId: instanceId,
-        DeviceId: deviceId,
+        DeviceSnapshotRequestVO: deviceSnapshotRequestVO,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDownloadCertificateRequestWithoutParam() *DownloadCertificateRequest {
+func NewGetPropertySnapshotRequestWithoutParam() *GetPropertySnapshotRequest {
 
-    return &DownloadCertificateRequest{
+    return &GetPropertySnapshotRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/coreinstances/{instanceId}/device:downloadCertificate",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/coreinstances/{instanceId}/property:getSnapshot",
+            Method:  "POST",
             Header:  nil,
             Version: "v2",
         },
@@ -98,33 +99,31 @@ func NewDownloadCertificateRequestWithoutParam() *DownloadCertificateRequest {
 }
 
 /* param regionId: 区域id(Required) */
-func (r *DownloadCertificateRequest) SetRegionId(regionId string) {
+func (r *GetPropertySnapshotRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 实例Id(Required) */
-func (r *DownloadCertificateRequest) SetInstanceId(instanceId string) {
+func (r *GetPropertySnapshotRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param deviceId: 设备ID(Required) */
-func (r *DownloadCertificateRequest) SetDeviceId(deviceId string) {
-    r.DeviceId = deviceId
+/* param deviceSnapshotRequestVO: 方法查询请求(Required) */
+func (r *GetPropertySnapshotRequest) SetDeviceSnapshotRequestVO(deviceSnapshotRequestVO *iotcore.DeviceSnapshotRequestVO) {
+    r.DeviceSnapshotRequestVO = deviceSnapshotRequestVO
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DownloadCertificateRequest) GetRegionId() string {
+func (r GetPropertySnapshotRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DownloadCertificateResponse struct {
+type GetPropertySnapshotResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DownloadCertificateResult `json:"result"`
+    Result GetPropertySnapshotResult `json:"result"`
 }
 
-type DownloadCertificateResult struct {
-    DeviceId string `json:"deviceId"`
-    DeviceCertUrl string `json:"deviceCertUrl"`
+type GetPropertySnapshotResult struct {
 }

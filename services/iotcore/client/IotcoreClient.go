@@ -40,7 +40,7 @@ func NewIotcoreClient(credential *core.Credential) *IotcoreClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "iotcore",
-            Revision:    "1.1.19",
+            Revision:    "1.1.20",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -168,6 +168,26 @@ func (c *IotcoreClient) EventList(request *iotcore.EventListRequest) (*iotcore.E
     }
 
     jdResp := &iotcore.EventListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询属性接口 */
+func (c *IotcoreClient) PropertyAcquire(request *iotcore.PropertyAcquireRequest) (*iotcore.PropertyAcquireResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotcore.PropertyAcquireResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -448,6 +468,26 @@ func (c *IotcoreClient) DeviceQuery(request *iotcore.DeviceQueryRequest) (*iotco
     }
 
     jdResp := &iotcore.DeviceQueryResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 属性获取接口 */
+func (c *IotcoreClient) GetPropertySnapshot(request *iotcore.GetPropertySnapshotRequest) (*iotcore.GetPropertySnapshotResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotcore.GetPropertySnapshotResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

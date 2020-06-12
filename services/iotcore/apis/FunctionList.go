@@ -31,14 +31,14 @@ type FunctionListRequest struct {
     /* 实例Id  */
     InstanceId string `json:"instanceId"`
 
-    /* 方法查询请求  */
+    /* 方法查询请求对象  */
     FunctionCallPageBo *iotcore.FunctionCallPageBo `json:"functionCallPageBo"`
 }
 
 /*
  * param regionId: 区域id (Required)
  * param instanceId: 实例Id (Required)
- * param functionCallPageBo: 方法查询请求 (Required)
+ * param functionCallPageBo: 方法查询请求对象 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -64,7 +64,7 @@ func NewFunctionListRequest(
 /*
  * param regionId: 区域id (Required)
  * param instanceId: 实例Id (Required)
- * param functionCallPageBo: 方法查询请求 (Required)
+ * param functionCallPageBo: 方法查询请求对象 (Required)
  */
 func NewFunctionListRequestWithAllParams(
     regionId string,
@@ -108,7 +108,7 @@ func (r *FunctionListRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param functionCallPageBo: 方法查询请求(Required) */
+/* param functionCallPageBo: 方法查询请求对象(Required) */
 func (r *FunctionListRequest) SetFunctionCallPageBo(functionCallPageBo *iotcore.FunctionCallPageBo) {
     r.FunctionCallPageBo = functionCallPageBo
 }

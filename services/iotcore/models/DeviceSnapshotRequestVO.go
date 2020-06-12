@@ -17,14 +17,17 @@
 package models
 
 
-type DeviceFunctionVO struct {
+type DeviceSnapshotRequestVO struct {
 
-    /* 设备标识Id  */
+    /* 设备标识ID  */
     DeviceId string `json:"deviceId"`
 
-    /* 输入参数 (Optional) */
-    InParams *interface{} `json:"inParams"`
+    /* 参数名称列表 (Optional) */
+    Params []string `json:"params"`
 
-    /* 服务名称  */
-    FunctionName string `json:"functionName"`
+    /* 设备名称 (Optional) */
+    DeviceName *string `json:"deviceName"`
+
+    /* 物类型名称  */
+    ThingTypeName string `json:"thingTypeName"`
 }
