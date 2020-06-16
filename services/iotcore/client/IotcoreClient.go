@@ -40,7 +40,7 @@ func NewIotcoreClient(credential *core.Credential) *IotcoreClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "iotcore",
-            Revision:    "1.1.20",
+            Revision:    "1.1.21",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -908,6 +908,26 @@ func (c *IotcoreClient) UpdateDevice(request *iotcore.UpdateDeviceRequest) (*iot
     }
 
     jdResp := &iotcore.UpdateDeviceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设备基本数据统计，包括设备数，激活数，在线数 */
+func (c *IotcoreClient) QueryAdminStatistics(request *iotcore.QueryAdminStatisticsRequest) (*iotcore.QueryAdminStatisticsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotcore.QueryAdminStatisticsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
