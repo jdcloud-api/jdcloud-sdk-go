@@ -34,6 +34,9 @@ type Api struct {
     /* 请求路径 (Optional) */
     Path string `json:"path"`
 
+    /* 匹配模式：1."absolute"(绝对匹配); 2."prefix"（前缀匹配）; (Optional) */
+    MatchType string `json:"matchType"`
+
     /* 后端类型，为空或null时前端显示未设置 (Optional) */
     BackServiceType string `json:"backServiceType"`
 
@@ -69,4 +72,13 @@ type Api struct {
 
     /* 响应格式类型,当resBodyType等于3时,使用该响应格式类型 (Optional) */
     EditableResBodyType string `json:"editableResBodyType"`
+
+    /* waf状态，如：observe,deny,off (Optional) */
+    WafStatus string `json:"wafStatus"`
+
+    /* 请求体格式类型，1代表jsonschema，2代表swagger，默认为1 (Optional) */
+    ReqBodyFormatType int `json:"reqBodyFormatType"`
+
+    /* 返回体格式类型，1代表jsonschema，2代表swagger，默认为1 (Optional) */
+    ResBodyFormatType int `json:"resBodyFormatType"`
 }

@@ -19,6 +19,9 @@ package models
 
 type CreateApi struct {
 
+    /* 分组ID  */
+    ApiGroupId string `json:"apiGroupId"`
+
     /* 名称  */
     ApiName string `json:"apiName"`
 
@@ -27,6 +30,9 @@ type CreateApi struct {
 
     /* 请求路径  */
     Path string `json:"path"`
+
+    /* 匹配模式："absolute"(绝对匹配); "prefix"（前缀匹配）;  */
+    MatchType string `json:"matchType"`
 
     /* 描述 (Optional) */
     Description string `json:"description"`
@@ -78,4 +84,10 @@ type CreateApi struct {
 
     /* 响应格式类型,当resBodyType等于3时,使用该响应格式类型 (Optional) */
     EditableResBodyType string `json:"editableResBodyType"`
+
+    /* 请求体格式类型，1代表jsonschema，2代表swagger，默认为1 (Optional) */
+    ReqBodyFormatType int `json:"reqBodyFormatType"`
+
+    /* 返回提格式类型，1代表jsonschema，2代表swagger，默认为1 (Optional) */
+    ResBodyFormatType int `json:"resBodyFormatType"`
 }
