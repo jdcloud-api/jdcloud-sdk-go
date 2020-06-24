@@ -40,7 +40,7 @@ func NewHufuClient(credential *core.Credential) *HufuClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "hufu",
-            Revision:    "1.0.2",
+            Revision:    "1.0.7",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -77,8 +77,8 @@ func (c *HufuClient) Encrypt(request *hufu.EncryptRequest) (*hufu.EncryptRespons
     return jdResp, err
 }
 
-/* 下游更新路由信息 */
-func (c *HufuClient) ModifyRouterByLower(request *hufu.ModifyRouterByLowerRequest) (*hufu.ModifyRouterByLowerResponse, error) {
+/* 查询该版本的部署详情 */
+func (c *HufuClient) DescribeDeployment(request *hufu.DescribeDeploymentRequest) (*hufu.DescribeDeploymentResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -87,7 +87,7 @@ func (c *HufuClient) ModifyRouterByLower(request *hufu.ModifyRouterByLowerReques
         return nil, err
     }
 
-    jdResp := &hufu.ModifyRouterByLowerResponse{}
+    jdResp := &hufu.DescribeDeploymentResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -97,8 +97,8 @@ func (c *HufuClient) ModifyRouterByLower(request *hufu.ModifyRouterByLowerReques
     return jdResp, err
 }
 
-/* 查询api列表 */
-func (c *HufuClient) QueryApis(request *hufu.QueryApisRequest) (*hufu.QueryApisResponse, error) {
+/* 查询access日志 */
+func (c *HufuClient) QueryAccessLog(request *hufu.QueryAccessLogRequest) (*hufu.QueryAccessLogResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -107,7 +107,47 @@ func (c *HufuClient) QueryApis(request *hufu.QueryApisRequest) (*hufu.QueryApisR
         return nil, err
     }
 
-    jdResp := &hufu.QueryApisResponse{}
+    jdResp := &hufu.QueryAccessLogResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 发布版本 */
+func (c *HufuClient) Deploy(request *hufu.DeployRequest) (*hufu.DeployResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &hufu.DeployResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 加密 */
+func (c *HufuClient) IsEncryptData(request *hufu.IsEncryptDataRequest) (*hufu.IsEncryptDataResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &hufu.IsEncryptDataResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
