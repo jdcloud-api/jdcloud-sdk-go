@@ -17,20 +17,14 @@
 package models
 
 
-type InstanceAcl struct {
+type AutoRenewalSpec struct {
 
-    /* 黑名单引用的IP黑白名单库列表 (Optional) */
-    BlackListIds []IpSet `json:"blackListIds"`
+    /* 是否开通自动续费, true: 开通自动续费, false: 不开通自动续费  */
+    AutoRenewalEnable bool `json:"autoRenewalEnable"`
 
-    /* 白名单引用的IP黑白名单库列表 (Optional) */
-    WhiteListIds []IpSet `json:"whiteListIds"`
+    /* 购买时长, 开通自动续费时必传. <br>- timeUnit 为 3 时, 可取值 1-9<br>- timeUnit 为 4 时, 可取值 1-3 (Optional) */
+    TimeSpan *int `json:"timeSpan"`
 
-    /* geo 拦截地域列表 (Optional) */
-    GeoBlack []Geo `json:"geoBlack"`
-
-    /* 上一次修改是否下发成功 (Optional) */
-    Success bool `json:"success"`
-
-    /* 上一次修改下发失败的情况下，是否可以回滚到上一次修改之前下发成功的配置 (Optional) */
-    CanRecover bool `json:"canRecover"`
+    /* 自动续费时长类型, 开通自动续费时必传. <br>- 3: 月<br>- 4: 年 (Optional) */
+    TimeUnit *int `json:"timeUnit"`
 }

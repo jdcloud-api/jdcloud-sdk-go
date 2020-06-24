@@ -22,6 +22,6 @@ type RelatedIp struct {
     /* IP地址段 (Optional) */
     CidrAddr string `json:"cidrAddr"`
 
-    /* 线路类型 bgp:BGP telecom:电信单线 unicom:联通单线 mobile:移动单线 (Optional) */
+    /* 线路类型 dynamicBGP:动态BGP thirdLineBGP:三线BGP telecom:电信单线 unicom:联通单线 mobile:移动单线 (Optional) */
     LineType string `json:"lineType"`
 }

@@ -67,6 +67,9 @@ type Instance struct {
     /* 网站类规则数 (Optional) */
     WebRuleCount int `json:"webRuleCount"`
 
+    /* 防护调度规则数 (Optional) */
+    DispatchRuleCount int `json:"dispatchRuleCount"`
+
     /* 计费状态. <br>- PAID: 已支付<br>- ARREARS: 欠费<br>- EXPIRED: 过期 (Optional) */
     ChargeStatus string `json:"chargeStatus"`
 
@@ -126,4 +129,10 @@ type Instance struct {
 
     /* ccProtectMode为自定义模式时, 每个源IP对Host+URI的防护阈值 (Optional) */
     IpHostUrlQps int `json:"ipHostUrlQps"`
+
+    /* 关联的自定义页面id (Optional) */
+    PageId string `json:"pageId"`
+
+    /* 关联的自定义页面名称 (Optional) */
+    PageName string `json:"pageName"`
 }

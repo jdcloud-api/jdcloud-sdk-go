@@ -17,20 +17,20 @@
 package models
 
 
-type InstanceAcl struct {
+type CustomPage struct {
 
-    /* 黑名单引用的IP黑白名单库列表 (Optional) */
-    BlackListIds []IpSet `json:"blackListIds"`
+    /* 自定义页面Id (Optional) */
+    Id string `json:"id"`
 
-    /* 白名单引用的IP黑白名单库列表 (Optional) */
-    WhiteListIds []IpSet `json:"whiteListIds"`
+    /* 自定义页面名称 (Optional) */
+    Name string `json:"name"`
 
-    /* geo 拦截地域列表 (Optional) */
-    GeoBlack []Geo `json:"geoBlack"`
+    /* 自定义页面内容 (Optional) */
+    Content string `json:"content"`
 
-    /* 上一次修改是否下发成功 (Optional) */
-    Success bool `json:"success"`
+    /* 更新时间 (Optional) */
+    UpdateTime string `json:"updateTime"`
 
-    /* 上一次修改下发失败的情况下，是否可以回滚到上一次修改之前下发成功的配置 (Optional) */
-    CanRecover bool `json:"canRecover"`
+    /* approving: 审批中, refused: 审批不通过, approved: 审批通过 (Optional) */
+    Status string `json:"status"`
 }

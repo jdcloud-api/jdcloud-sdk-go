@@ -37,7 +37,7 @@ type DescribeForwardRulesRequest struct {
     /* 分页大小, 默认为10, 取值范围[10, 100] (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* 查询类型名称, domain:源站域名, ip:源站 IP, port: 转发端口, originPort: 源站端口 (Optional) */
+    /* 查询类型名称, domain:源站域名, ip:源站 IP, port: 转发端口, originPort: 源站端口, serviceIp: 高防IP(仅支持BGP线路的实例) (Optional) */
     SearchType *string `json:"searchType"`
 
     /* 查询类型值 (Optional) */
@@ -72,7 +72,7 @@ func NewDescribeForwardRulesRequest(
  * param instanceId: 高防实例 Id (Required)
  * param pageNumber: 页码, 默认为1 (Optional)
  * param pageSize: 分页大小, 默认为10, 取值范围[10, 100] (Optional)
- * param searchType: 查询类型名称, domain:源站域名, ip:源站 IP, port: 转发端口, originPort: 源站端口 (Optional)
+ * param searchType: 查询类型名称, domain:源站域名, ip:源站 IP, port: 转发端口, originPort: 源站端口, serviceIp: 高防IP(仅支持BGP线路的实例) (Optional)
  * param searchValue: 查询类型值 (Optional)
  */
 func NewDescribeForwardRulesRequestWithAllParams(
@@ -133,7 +133,7 @@ func (r *DescribeForwardRulesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
-/* param searchType: 查询类型名称, domain:源站域名, ip:源站 IP, port: 转发端口, originPort: 源站端口(Optional) */
+/* param searchType: 查询类型名称, domain:源站域名, ip:源站 IP, port: 转发端口, originPort: 源站端口, serviceIp: 高防IP(仅支持BGP线路的实例)(Optional) */
 func (r *DescribeForwardRulesRequest) SetSearchType(searchType string) {
     r.SearchType = &searchType
 }

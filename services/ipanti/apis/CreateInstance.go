@@ -30,6 +30,9 @@ type CreateInstanceRequest struct {
 
     /* 新购或升级实例请求参数  */
     CreateInstanceSpec *ipanti.CreateInstanceSpec `json:"createInstanceSpec"`
+
+    /* 自动续费配置, 默认不开通, 仅新购实例时可设置 (Optional) */
+    AutoRenewalSpec *ipanti.AutoRenewalSpec `json:"autoRenewalSpec"`
 }
 
 /*
@@ -58,10 +61,12 @@ func NewCreateInstanceRequest(
 /*
  * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param createInstanceSpec: 新购或升级实例请求参数 (Required)
+ * param autoRenewalSpec: 自动续费配置, 默认不开通, 仅新购实例时可设置 (Optional)
  */
 func NewCreateInstanceRequestWithAllParams(
     regionId string,
     createInstanceSpec *ipanti.CreateInstanceSpec,
+    autoRenewalSpec *ipanti.AutoRenewalSpec,
 ) *CreateInstanceRequest {
 
     return &CreateInstanceRequest{
@@ -73,6 +78,7 @@ func NewCreateInstanceRequestWithAllParams(
         },
         RegionId: regionId,
         CreateInstanceSpec: createInstanceSpec,
+        AutoRenewalSpec: autoRenewalSpec,
     }
 }
 
@@ -97,6 +103,11 @@ func (r *CreateInstanceRequest) SetRegionId(regionId string) {
 /* param createInstanceSpec: 新购或升级实例请求参数(Required) */
 func (r *CreateInstanceRequest) SetCreateInstanceSpec(createInstanceSpec *ipanti.CreateInstanceSpec) {
     r.CreateInstanceSpec = createInstanceSpec
+}
+
+/* param autoRenewalSpec: 自动续费配置, 默认不开通, 仅新购实例时可设置(Optional) */
+func (r *CreateInstanceRequest) SetAutoRenewalSpec(autoRenewalSpec *ipanti.AutoRenewalSpec) {
+    r.AutoRenewalSpec = autoRenewalSpec
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

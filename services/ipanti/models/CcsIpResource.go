@@ -17,20 +17,11 @@
 package models
 
 
-type InstanceAcl struct {
+type CcsIpResource struct {
 
-    /* 黑名单引用的IP黑白名单库列表 (Optional) */
-    BlackListIds []IpSet `json:"blackListIds"`
+    /* 云物理服务器公网 IP 地址 (Optional) */
+    Ip string `json:"ip"`
 
-    /* 白名单引用的IP黑白名单库列表 (Optional) */
-    WhiteListIds []IpSet `json:"whiteListIds"`
-
-    /* geo 拦截地域列表 (Optional) */
-    GeoBlack []Geo `json:"geoBlack"`
-
-    /* 上一次修改是否下发成功 (Optional) */
-    Success bool `json:"success"`
-
-    /* 上一次修改下发失败的情况下，是否可以回滚到上一次修改之前下发成功的配置 (Optional) */
-    CanRecover bool `json:"canRecover"`
+    /* 公网 IP 类型或绑定资源类型. <br>- 0: 未知类型<br>- 1: 弹性公网 IP(IP 为弹性公网 IP, 绑定资源类型未知)<br>- 10: 弹性公网 IP(IP 为弹性公网 IP, 但未绑定资源)<br>- 11: 弹性公网 IP, 绑定了云主机<br>- 12: 弹性公网 IP, 绑定了负载均衡<br>- 13: 弹性公网 IP, 绑定了原生容器实例<br>- 14: 弹性公网 IP, 绑定了原生容器 Pod<br>- 2: 云物理服务器公网 IP<br>- 4: 托管区公网 IP (Optional) */
+    ResourceType int `json:"resourceType"`
 }

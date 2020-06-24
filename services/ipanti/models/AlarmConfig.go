@@ -42,4 +42,13 @@ type AlarmConfig struct {
 
     /* 错误码告警域名列表 (Optional) */
     ErrorCodeDomain []string `json:"errorCodeDomain"`
+
+    /* 错误码列表 (Optional) */
+    ErrorCode []int `json:"errorCode"`
+
+    /* 错误码触发告警比例 (Optional) */
+    ErrorCodePercent int `json:"errorCodePercent"`
+
+    /* 错误码触发告警次数 (Optional) */
+    ErrorCodeCount int `json:"errorCodeCount"`
 }
