@@ -40,7 +40,7 @@ func NewIpantiClient(credential *core.Credential) *IpantiClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "ipanti",
-            Revision:    "1.6.12",
+            Revision:    "1.7.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -1230,6 +1230,26 @@ func (c *IpantiClient) EnableWhiteListRuleOfForwardRule(request *ipanti.EnableWh
     }
 
     jdResp := &ipanti.EnableWhiteListRuleOfForwardRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询实例高防 IP 列表 */
+func (c *IpantiClient) DescribeServiceIpList(request *ipanti.DescribeServiceIpListRequest) (*ipanti.DescribeServiceIpListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DescribeServiceIpListResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

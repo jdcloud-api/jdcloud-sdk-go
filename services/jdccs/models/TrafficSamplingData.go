@@ -43,6 +43,9 @@ type TrafficSamplingData struct {
     /* 时间戳 (Optional) */
     Timestamp int `json:"timestamp"`
 
+    /* 唯一ID标识 (Optional) */
+    UniqueId string `json:"uniqueId"`
+
     /* 运营商类型 移动:CM 联通:CU 电信:CT (Optional) */
     OperatorType string `json:"operatorType"`
 }

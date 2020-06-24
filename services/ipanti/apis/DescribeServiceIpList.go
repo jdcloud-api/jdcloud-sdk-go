@@ -21,43 +21,37 @@ import (
     ipanti "github.com/jdcloud-api/jdcloud-sdk-go/services/ipanti/models"
 )
 
-type DescribeWebRulesRequest struct {
+type DescribeServiceIpListRequest struct {
 
     core.JDCloudRequest
 
     /* 区域 ID, 高防不区分区域, 传 cn-north-1 即可  */
     RegionId string `json:"regionId"`
 
-    /* 高防实例 Id  */
+    /* 实例 ID  */
     InstanceId string `json:"instanceId"`
 
-    /* 页码, 默认为1 (Optional) */
+    /* 页码, 默认为 1 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* 分页大小, 默认为10, 取值范围[10, 100] (Optional) */
+    /* 分页大小, 默认为 10, 取值范围[10, 100] (Optional) */
     PageSize *int `json:"pageSize"`
-
-    /* 查询类型名称, domain:源站域名, ip:源站 IP, rawDomain: 域名, serviceIp: 高防IP(仅支持BGP线路的实例) (Optional) */
-    SearchType *string `json:"searchType"`
-
-    /* 查询类型值 (Optional) */
-    SearchValue *string `json:"searchValue"`
 }
 
 /*
  * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
- * param instanceId: 高防实例 Id (Required)
+ * param instanceId: 实例 ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeWebRulesRequest(
+func NewDescribeServiceIpListRequest(
     regionId string,
     instanceId string,
-) *DescribeWebRulesRequest {
+) *DescribeServiceIpListRequest {
 
-	return &DescribeWebRulesRequest{
+	return &DescribeServiceIpListRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/webRules",
+			URL:     "/regions/{regionId}/instances/{instanceId}:describeServiceIpList",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -69,24 +63,20 @@ func NewDescribeWebRulesRequest(
 
 /*
  * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
- * param instanceId: 高防实例 Id (Required)
- * param pageNumber: 页码, 默认为1 (Optional)
- * param pageSize: 分页大小, 默认为10, 取值范围[10, 100] (Optional)
- * param searchType: 查询类型名称, domain:源站域名, ip:源站 IP, rawDomain: 域名, serviceIp: 高防IP(仅支持BGP线路的实例) (Optional)
- * param searchValue: 查询类型值 (Optional)
+ * param instanceId: 实例 ID (Required)
+ * param pageNumber: 页码, 默认为 1 (Optional)
+ * param pageSize: 分页大小, 默认为 10, 取值范围[10, 100] (Optional)
  */
-func NewDescribeWebRulesRequestWithAllParams(
+func NewDescribeServiceIpListRequestWithAllParams(
     regionId string,
     instanceId string,
     pageNumber *int,
     pageSize *int,
-    searchType *string,
-    searchValue *string,
-) *DescribeWebRulesRequest {
+) *DescribeServiceIpListRequest {
 
-    return &DescribeWebRulesRequest{
+    return &DescribeServiceIpListRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/webRules",
+            URL:     "/regions/{regionId}/instances/{instanceId}:describeServiceIpList",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -95,17 +85,15 @@ func NewDescribeWebRulesRequestWithAllParams(
         InstanceId: instanceId,
         PageNumber: pageNumber,
         PageSize: pageSize,
-        SearchType: searchType,
-        SearchValue: searchValue,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeWebRulesRequestWithoutParam() *DescribeWebRulesRequest {
+func NewDescribeServiceIpListRequestWithoutParam() *DescribeServiceIpListRequest {
 
-    return &DescribeWebRulesRequest{
+    return &DescribeServiceIpListRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/webRules",
+            URL:     "/regions/{regionId}/instances/{instanceId}:describeServiceIpList",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -114,49 +102,39 @@ func NewDescribeWebRulesRequestWithoutParam() *DescribeWebRulesRequest {
 }
 
 /* param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可(Required) */
-func (r *DescribeWebRulesRequest) SetRegionId(regionId string) {
+func (r *DescribeServiceIpListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 高防实例 Id(Required) */
-func (r *DescribeWebRulesRequest) SetInstanceId(instanceId string) {
+/* param instanceId: 实例 ID(Required) */
+func (r *DescribeServiceIpListRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param pageNumber: 页码, 默认为1(Optional) */
-func (r *DescribeWebRulesRequest) SetPageNumber(pageNumber int) {
+/* param pageNumber: 页码, 默认为 1(Optional) */
+func (r *DescribeServiceIpListRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
-/* param pageSize: 分页大小, 默认为10, 取值范围[10, 100](Optional) */
-func (r *DescribeWebRulesRequest) SetPageSize(pageSize int) {
+/* param pageSize: 分页大小, 默认为 10, 取值范围[10, 100](Optional) */
+func (r *DescribeServiceIpListRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
-}
-
-/* param searchType: 查询类型名称, domain:源站域名, ip:源站 IP, rawDomain: 域名, serviceIp: 高防IP(仅支持BGP线路的实例)(Optional) */
-func (r *DescribeWebRulesRequest) SetSearchType(searchType string) {
-    r.SearchType = &searchType
-}
-
-/* param searchValue: 查询类型值(Optional) */
-func (r *DescribeWebRulesRequest) SetSearchValue(searchValue string) {
-    r.SearchValue = &searchValue
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeWebRulesRequest) GetRegionId() string {
+func (r DescribeServiceIpListRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeWebRulesResponse struct {
+type DescribeServiceIpListResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeWebRulesResult `json:"result"`
+    Result DescribeServiceIpListResult `json:"result"`
 }
 
-type DescribeWebRulesResult struct {
-    DataList []ipanti.WebRule `json:"dataList"`
+type DescribeServiceIpListResult struct {
+    DataList []ipanti.ServiceIp `json:"dataList"`
     CurrentCount int `json:"currentCount"`
     TotalCount int `json:"totalCount"`
     TotalPage int `json:"totalPage"`

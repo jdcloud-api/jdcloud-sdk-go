@@ -22,7 +22,7 @@ type DDoSAttackLog struct {
     /* 攻击流量大小 (Optional) */
     AttackTraffic float64 `json:"attackTraffic"`
 
-    /* 是否触发黑洞, 0否 1是 (Optional) */
+    /* 封禁状态,0:未封禁,1:封禁中,2:封禁结束 (Optional) */
     BlackHole int `json:"blackHole"`
 
     /* 攻击开始时间 (Optional) */

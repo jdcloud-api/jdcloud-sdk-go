@@ -34,8 +34,11 @@ type Bandwidth struct {
     /* 状态 normal:正常 abnormal:异常 (Optional) */
     Status string `json:"status"`
 
-    /* 线路类型 bgp:BGP telecom:电信单线 unicom:联通单线 mobile:移动单线 (Optional) */
+    /* 线路类型 dynamicBGP:动态BGP thirdLineBGP:三线BGP telecom:电信单线 unicom:联通单线 mobile:移动单线 (Optional) */
     LineType string `json:"lineType"`
+
+    /* 计费方式 fixedBandwidth:固定带宽 95thPercentile:95峰值 merge95thPercentile:合并95峰值 (Optional) */
+    ChargeType string `json:"chargeType"`
 
     /* 合同带宽（Mbps） (Optional) */
     Bandwidth int `json:"bandwidth"`

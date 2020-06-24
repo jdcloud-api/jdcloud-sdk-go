@@ -34,11 +34,11 @@ type CreateInstanceSpec struct {
     /* 可防护 ip 类型, 目前仅电信线路支持 IPV6 线路<br>- 0: IPV4,<br>- 1: IPV4/IPV6 (Optional) */
     IpType *int `json:"ipType"`
 
-    /* IP 数量  */
-    IpCount int `json:"ipCount"`
+    /* IP 数量 (Optional) */
+    IpCount *int `json:"ipCount"`
 
-    /* 可配的转发端口数量  */
-    PortCount int `json:"portCount"`
+    /* 可配的转发端口数量 (Optional) */
+    PortCount *int `json:"portCount"`
 
     /* 可配的网站规则域名数量 (Optional) */
     DomainCount *int `json:"domainCount"`
@@ -52,8 +52,8 @@ type CreateInstanceSpec struct {
     /* 业务带宽: 单位 Mbps  */
     Bw int `json:"bw"`
 
-    /* 购买防护包时长, 新购高防实例时必传<br>- timeUnit 为 3 时, 可取值 1-9<br>- timeUnit 为 4 时, 可取值 1-3 (Optional) */
-    TimeSpan *int64 `json:"timeSpan"`
+    /* 购买时长, 新购高防实例时必传<br>- timeUnit 为 3 时, 可取值 1-9<br>- timeUnit 为 4 时, 可取值 1-3 (Optional) */
+    TimeSpan *int `json:"timeSpan"`
 
     /* 购买时长类型, 新购高防实例时必传<br>- 3: 月<br>- 4: 年 (Optional) */
     TimeUnit *int `json:"timeUnit"`

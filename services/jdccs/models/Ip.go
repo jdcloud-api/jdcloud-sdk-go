@@ -31,6 +31,12 @@ type Ip struct {
     /* IP地址段 (Optional) */
     CidrAddr string `json:"cidrAddr"`
 
+    /* IP数量 (Optional) */
+    IpQuantity string `json:"ipQuantity"`
+
+    /* IP类型 IPV4/IPV6 (Optional) */
+    IpType string `json:"ipType"`
+
     /* 网络位地址 (Optional) */
     NetworkAddr string `json:"networkAddr"`
 
@@ -39,6 +45,9 @@ type Ip struct {
 
     /* 广播地址 (Optional) */
     BroadcastAddr string `json:"broadcastAddr"`
+
+    /* 线路类型 dynamicBGP:动态BGP thirdLineBGP:三线BGP telecom:电信单线 unicom:联通单线 mobile:移动单线 (Optional) */
+    LineType string `json:"lineType"`
 
     /* 状态 normal:正常 abnormal:异常 (Optional) */
     Status string `json:"status"`

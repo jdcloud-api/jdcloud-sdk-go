@@ -39,4 +39,7 @@ type CCProtectionRuleSpec struct {
 
     /* 阻断持续时间, 单位为秒, 取值范围[10, 86400]  */
     BlockTime int64 `json:"blockTime"`
+
+    /* 关联的自定义页面id (Optional) */
+    PageId *string `json:"pageId"`
 }

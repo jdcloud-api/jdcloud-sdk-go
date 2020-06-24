@@ -17,20 +17,29 @@
 package models
 
 
-type InstanceAcl struct {
+type DispatchRule struct {
 
-    /* 黑名单引用的IP黑白名单库列表 (Optional) */
-    BlackListIds []IpSet `json:"blackListIds"`
+    /* 规则 Id (Optional) */
+    Id string `json:"id"`
 
-    /* 白名单引用的IP黑白名单库列表 (Optional) */
-    WhiteListIds []IpSet `json:"whiteListIds"`
+    /* 规则名称 (Optional) */
+    Name string `json:"name"`
 
-    /* geo 拦截地域列表 (Optional) */
-    GeoBlack []Geo `json:"geoBlack"`
+    /* 规则的 CNAME (Optional) */
+    Cname string `json:"cname"`
 
-    /* 上一次修改是否下发成功 (Optional) */
-    Success bool `json:"success"`
+    /* 高防 IP (Optional) */
+    ServiceIp string `json:"serviceIp"`
 
-    /* 上一次修改下发失败的情况下，是否可以回滚到上一次修改之前下发成功的配置 (Optional) */
-    CanRecover bool `json:"canRecover"`
+    /* 云内IP (Optional) */
+    InnerIps []string `json:"innerIps"`
+
+    /* 触发调度的流量阈值, 单位 Mbps (Optional) */
+    DispatchThresholdMbps int64 `json:"dispatchThresholdMbps"`
+
+    /* 触发调度的报文阈值, 单位 pps (Optional) */
+    DispatchThresholdPps int64 `json:"dispatchThresholdPps"`
+
+    /* 0: 防御状态, 1: 回源状态 (Optional) */
+    Status int `json:"status"`
 }

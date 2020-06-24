@@ -40,7 +40,7 @@ func NewJdccsClient(credential *core.Credential) *JdccsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "jdccs",
-            Revision:    "1.0.8",
+            Revision:    "1.0.10",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
