@@ -125,4 +125,5 @@ type DeleteDeviceResponse struct {
 }
 
 type DeleteDeviceResult struct {
+    Success bool `json:"success"`
 }

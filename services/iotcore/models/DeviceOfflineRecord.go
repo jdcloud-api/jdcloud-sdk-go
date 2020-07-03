@@ -17,17 +17,17 @@
 package models
 
 
-type DeviceFunctionVO struct {
+type DeviceOfflineRecord struct {
 
-    /* 设备标识Id  */
-    DeviceId string `json:"deviceId"`
+    /* 设备名称 (Optional) */
+    DeviceName string `json:"deviceName"`
 
-    /* 方法Key (Optional) */
-    FunctionKey *string `json:"functionKey"`
+    /* 设备标识 (Optional) */
+    Identifier string `json:"identifier"`
 
-    /* 输入参数（Map<String,Object>类型） (Optional) */
-    InParams *interface{} `json:"inParams"`
+    /* 产品名称 (Optional) */
+    ProductName string `json:"productName"`
 
-    /* 输出参数（Map<String,Object>类型） (Optional) */
-    OutParams *interface{} `json:"outParams"`
+    /*  (Optional) */
+    CreateTime int64 `json:"createTime"`
 }

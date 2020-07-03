@@ -21,7 +21,7 @@ import (
     iotcore "github.com/jdcloud-api/jdcloud-sdk-go/services/iotcore/models"
 )
 
-type DeviceRegisterRequest struct {
+type SetDevicePropertyRequest struct {
 
     core.JDCloudRequest
 
@@ -31,66 +31,66 @@ type DeviceRegisterRequest struct {
     /* 实例Id  */
     InstanceId string `json:"instanceId"`
 
-    /* 物模型ID编号  */
-    DeviceInfoVO *iotcore.DeviceInfoVO `json:"deviceInfoVO"`
+    /* 设备ID  */
+    DevicePropertyVO *iotcore.DevicePropertyVO `json:"devicePropertyVO"`
 }
 
 /*
  * param regionId: 区域id (Required)
  * param instanceId: 实例Id (Required)
- * param deviceInfoVO: 物模型ID编号 (Required)
+ * param devicePropertyVO: 设备ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDeviceRegisterRequest(
+func NewSetDevicePropertyRequest(
     regionId string,
     instanceId string,
-    deviceInfoVO *iotcore.DeviceInfoVO,
-) *DeviceRegisterRequest {
+    devicePropertyVO *iotcore.DevicePropertyVO,
+) *SetDevicePropertyRequest {
 
-	return &DeviceRegisterRequest{
+	return &SetDevicePropertyRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/coreinstances/{instanceId}/device:register",
+			URL:     "/regions/{regionId}/coreinstances/{instanceId}/deviceProperty:set",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v2",
 		},
         RegionId: regionId,
         InstanceId: instanceId,
-        DeviceInfoVO: deviceInfoVO,
+        DevicePropertyVO: devicePropertyVO,
 	}
 }
 
 /*
  * param regionId: 区域id (Required)
  * param instanceId: 实例Id (Required)
- * param deviceInfoVO: 物模型ID编号 (Required)
+ * param devicePropertyVO: 设备ID (Required)
  */
-func NewDeviceRegisterRequestWithAllParams(
+func NewSetDevicePropertyRequestWithAllParams(
     regionId string,
     instanceId string,
-    deviceInfoVO *iotcore.DeviceInfoVO,
-) *DeviceRegisterRequest {
+    devicePropertyVO *iotcore.DevicePropertyVO,
+) *SetDevicePropertyRequest {
 
-    return &DeviceRegisterRequest{
+    return &SetDevicePropertyRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/coreinstances/{instanceId}/device:register",
+            URL:     "/regions/{regionId}/coreinstances/{instanceId}/deviceProperty:set",
             Method:  "POST",
             Header:  nil,
             Version: "v2",
         },
         RegionId: regionId,
         InstanceId: instanceId,
-        DeviceInfoVO: deviceInfoVO,
+        DevicePropertyVO: devicePropertyVO,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDeviceRegisterRequestWithoutParam() *DeviceRegisterRequest {
+func NewSetDevicePropertyRequestWithoutParam() *SetDevicePropertyRequest {
 
-    return &DeviceRegisterRequest{
+    return &SetDevicePropertyRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/coreinstances/{instanceId}/device:register",
+            URL:     "/regions/{regionId}/coreinstances/{instanceId}/deviceProperty:set",
             Method:  "POST",
             Header:  nil,
             Version: "v2",
@@ -99,32 +99,32 @@ func NewDeviceRegisterRequestWithoutParam() *DeviceRegisterRequest {
 }
 
 /* param regionId: 区域id(Required) */
-func (r *DeviceRegisterRequest) SetRegionId(regionId string) {
+func (r *SetDevicePropertyRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 实例Id(Required) */
-func (r *DeviceRegisterRequest) SetInstanceId(instanceId string) {
+func (r *SetDevicePropertyRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param deviceInfoVO: 物模型ID编号(Required) */
-func (r *DeviceRegisterRequest) SetDeviceInfoVO(deviceInfoVO *iotcore.DeviceInfoVO) {
-    r.DeviceInfoVO = deviceInfoVO
+/* param devicePropertyVO: 设备ID(Required) */
+func (r *SetDevicePropertyRequest) SetDevicePropertyVO(devicePropertyVO *iotcore.DevicePropertyVO) {
+    r.DevicePropertyVO = devicePropertyVO
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DeviceRegisterRequest) GetRegionId() string {
+func (r SetDevicePropertyRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DeviceRegisterResponse struct {
+type SetDevicePropertyResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DeviceRegisterResult `json:"result"`
+    Result SetDevicePropertyResult `json:"result"`
 }
 
-type DeviceRegisterResult struct {
-    DeviceInfoVO iotcore.DeviceInfoVO `json:"deviceInfoVO"`
+type SetDevicePropertyResult struct {
+    Success bool `json:"success"`
 }

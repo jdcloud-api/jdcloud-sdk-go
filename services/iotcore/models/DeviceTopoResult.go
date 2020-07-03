@@ -17,17 +17,17 @@
 package models
 
 
-type DeviceFunctionVO struct {
+type DeviceTopoResult struct {
 
-    /* 设备标识Id  */
+    /* 边缘代理设备ID (Optional) */
     DeviceId string `json:"deviceId"`
 
-    /* 方法Key (Optional) */
-    FunctionKey *string `json:"functionKey"`
+    /* 请求的拓扑关系总个数 (Optional) */
+    Total int `json:"total"`
 
-    /* 输入参数（Map<String,Object>类型） (Optional) */
-    InParams *interface{} `json:"inParams"`
+    /* 成功个数 (Optional) */
+    Success int `json:"success"`
 
-    /* 输出参数（Map<String,Object>类型） (Optional) */
-    OutParams *interface{} `json:"outParams"`
+    /*  (Optional) */
+    ErrorDevicesList []DeviceTopoErrorMap `json:"errorDevicesList"`
 }

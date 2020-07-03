@@ -18,9 +18,10 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    iotcore "github.com/jdcloud-api/jdcloud-sdk-go/services/iotcore/models"
 )
 
-type DownloadCertificateRequest struct {
+type DescribeDeviceTopoRequest struct {
 
     core.JDCloudRequest
 
@@ -30,67 +31,67 @@ type DownloadCertificateRequest struct {
     /* 实例Id  */
     InstanceId string `json:"instanceId"`
 
-    /* 设备ID  */
-    DeviceId string `json:"deviceId"`
+    /* 方法查询请求  */
+    DeviceTopoPageBO *iotcore.DeviceTopoPageBO `json:"deviceTopoPageBO"`
 }
 
 /*
  * param regionId: 区域id (Required)
  * param instanceId: 实例Id (Required)
- * param deviceId: 设备ID (Required)
+ * param deviceTopoPageBO: 方法查询请求 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDownloadCertificateRequest(
+func NewDescribeDeviceTopoRequest(
     regionId string,
     instanceId string,
-    deviceId string,
-) *DownloadCertificateRequest {
+    deviceTopoPageBO *iotcore.DeviceTopoPageBO,
+) *DescribeDeviceTopoRequest {
 
-	return &DownloadCertificateRequest{
+	return &DescribeDeviceTopoRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/coreinstances/{instanceId}/device:downloadCertificate",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/coreinstances/{instanceId}/deviceTopo:describe",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v2",
 		},
         RegionId: regionId,
         InstanceId: instanceId,
-        DeviceId: deviceId,
+        DeviceTopoPageBO: deviceTopoPageBO,
 	}
 }
 
 /*
  * param regionId: 区域id (Required)
  * param instanceId: 实例Id (Required)
- * param deviceId: 设备ID (Required)
+ * param deviceTopoPageBO: 方法查询请求 (Required)
  */
-func NewDownloadCertificateRequestWithAllParams(
+func NewDescribeDeviceTopoRequestWithAllParams(
     regionId string,
     instanceId string,
-    deviceId string,
-) *DownloadCertificateRequest {
+    deviceTopoPageBO *iotcore.DeviceTopoPageBO,
+) *DescribeDeviceTopoRequest {
 
-    return &DownloadCertificateRequest{
+    return &DescribeDeviceTopoRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/coreinstances/{instanceId}/device:downloadCertificate",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/coreinstances/{instanceId}/deviceTopo:describe",
+            Method:  "POST",
             Header:  nil,
             Version: "v2",
         },
         RegionId: regionId,
         InstanceId: instanceId,
-        DeviceId: deviceId,
+        DeviceTopoPageBO: deviceTopoPageBO,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDownloadCertificateRequestWithoutParam() *DownloadCertificateRequest {
+func NewDescribeDeviceTopoRequestWithoutParam() *DescribeDeviceTopoRequest {
 
-    return &DownloadCertificateRequest{
+    return &DescribeDeviceTopoRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/coreinstances/{instanceId}/device:downloadCertificate",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/coreinstances/{instanceId}/deviceTopo:describe",
+            Method:  "POST",
             Header:  nil,
             Version: "v2",
         },
@@ -98,33 +99,35 @@ func NewDownloadCertificateRequestWithoutParam() *DownloadCertificateRequest {
 }
 
 /* param regionId: 区域id(Required) */
-func (r *DownloadCertificateRequest) SetRegionId(regionId string) {
+func (r *DescribeDeviceTopoRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 实例Id(Required) */
-func (r *DownloadCertificateRequest) SetInstanceId(instanceId string) {
+func (r *DescribeDeviceTopoRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param deviceId: 设备ID(Required) */
-func (r *DownloadCertificateRequest) SetDeviceId(deviceId string) {
-    r.DeviceId = deviceId
+/* param deviceTopoPageBO: 方法查询请求(Required) */
+func (r *DescribeDeviceTopoRequest) SetDeviceTopoPageBO(deviceTopoPageBO *iotcore.DeviceTopoPageBO) {
+    r.DeviceTopoPageBO = deviceTopoPageBO
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DownloadCertificateRequest) GetRegionId() string {
+func (r DescribeDeviceTopoRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DownloadCertificateResponse struct {
+type DescribeDeviceTopoResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DownloadCertificateResult `json:"result"`
+    Result DescribeDeviceTopoResult `json:"result"`
 }
 
-type DownloadCertificateResult struct {
-    DeviceId string `json:"deviceId"`
-    DeviceCertUrl string `json:"deviceCertUrl"`
+type DescribeDeviceTopoResult struct {
+    PageSize int `json:"pageSize"`
+    CurrentPage int `json:"currentPage"`
+    TotalCount int `json:"totalCount"`
+    List []iotcore.DeviceTopoRecordVO `json:"list"`
 }

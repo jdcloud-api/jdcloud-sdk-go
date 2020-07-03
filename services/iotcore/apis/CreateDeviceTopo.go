@@ -21,7 +21,7 @@ import (
     iotcore "github.com/jdcloud-api/jdcloud-sdk-go/services/iotcore/models"
 )
 
-type PropertyAcquireRequest struct {
+type CreateDeviceTopoRequest struct {
 
     core.JDCloudRequest
 
@@ -31,67 +31,67 @@ type PropertyAcquireRequest struct {
     /* 实例Id  */
     InstanceId string `json:"instanceId"`
 
-    /* 设备ID  */
-    DeviceId string `json:"deviceId"`
+    /* 方法查询请求  */
+    DeviceTopoInfoVO *iotcore.DeviceTopoInfoVO `json:"deviceTopoInfoVO"`
 }
 
 /*
  * param regionId: 区域id (Required)
  * param instanceId: 实例Id (Required)
- * param deviceId: 设备ID (Required)
+ * param deviceTopoInfoVO: 方法查询请求 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewPropertyAcquireRequest(
+func NewCreateDeviceTopoRequest(
     regionId string,
     instanceId string,
-    deviceId string,
-) *PropertyAcquireRequest {
+    deviceTopoInfoVO *iotcore.DeviceTopoInfoVO,
+) *CreateDeviceTopoRequest {
 
-	return &PropertyAcquireRequest{
+	return &CreateDeviceTopoRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/coreinstances/{instanceId}/property:acquire",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/coreinstances/{instanceId}/deviceTopo:create",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v2",
 		},
         RegionId: regionId,
         InstanceId: instanceId,
-        DeviceId: deviceId,
+        DeviceTopoInfoVO: deviceTopoInfoVO,
 	}
 }
 
 /*
  * param regionId: 区域id (Required)
  * param instanceId: 实例Id (Required)
- * param deviceId: 设备ID (Required)
+ * param deviceTopoInfoVO: 方法查询请求 (Required)
  */
-func NewPropertyAcquireRequestWithAllParams(
+func NewCreateDeviceTopoRequestWithAllParams(
     regionId string,
     instanceId string,
-    deviceId string,
-) *PropertyAcquireRequest {
+    deviceTopoInfoVO *iotcore.DeviceTopoInfoVO,
+) *CreateDeviceTopoRequest {
 
-    return &PropertyAcquireRequest{
+    return &CreateDeviceTopoRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/coreinstances/{instanceId}/property:acquire",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/coreinstances/{instanceId}/deviceTopo:create",
+            Method:  "POST",
             Header:  nil,
             Version: "v2",
         },
         RegionId: regionId,
         InstanceId: instanceId,
-        DeviceId: deviceId,
+        DeviceTopoInfoVO: deviceTopoInfoVO,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewPropertyAcquireRequestWithoutParam() *PropertyAcquireRequest {
+func NewCreateDeviceTopoRequestWithoutParam() *CreateDeviceTopoRequest {
 
-    return &PropertyAcquireRequest{
+    return &CreateDeviceTopoRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/coreinstances/{instanceId}/property:acquire",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/coreinstances/{instanceId}/deviceTopo:create",
+            Method:  "POST",
             Header:  nil,
             Version: "v2",
         },
@@ -99,32 +99,32 @@ func NewPropertyAcquireRequestWithoutParam() *PropertyAcquireRequest {
 }
 
 /* param regionId: 区域id(Required) */
-func (r *PropertyAcquireRequest) SetRegionId(regionId string) {
+func (r *CreateDeviceTopoRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 实例Id(Required) */
-func (r *PropertyAcquireRequest) SetInstanceId(instanceId string) {
+func (r *CreateDeviceTopoRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param deviceId: 设备ID(Required) */
-func (r *PropertyAcquireRequest) SetDeviceId(deviceId string) {
-    r.DeviceId = deviceId
+/* param deviceTopoInfoVO: 方法查询请求(Required) */
+func (r *CreateDeviceTopoRequest) SetDeviceTopoInfoVO(deviceTopoInfoVO *iotcore.DeviceTopoInfoVO) {
+    r.DeviceTopoInfoVO = deviceTopoInfoVO
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r PropertyAcquireRequest) GetRegionId() string {
+func (r CreateDeviceTopoRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type PropertyAcquireResponse struct {
+type CreateDeviceTopoResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result PropertyAcquireResult `json:"result"`
+    Result CreateDeviceTopoResult `json:"result"`
 }
 
-type PropertyAcquireResult struct {
-    PropertyAcquireVo iotcore.PropertyAcquireVo `json:"propertyAcquireVo"`
+type CreateDeviceTopoResult struct {
+    DeviceTopoResult iotcore.DeviceTopoResult `json:"deviceTopoResult"`
 }

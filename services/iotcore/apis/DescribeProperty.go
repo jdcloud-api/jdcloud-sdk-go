@@ -21,7 +21,7 @@ import (
     iotcore "github.com/jdcloud-api/jdcloud-sdk-go/services/iotcore/models"
 )
 
-type DeviceQueryRequest struct {
+type DescribePropertyRequest struct {
 
     core.JDCloudRequest
 
@@ -42,15 +42,15 @@ type DeviceQueryRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDeviceQueryRequest(
+func NewDescribePropertyRequest(
     regionId string,
     instanceId string,
     deviceId string,
-) *DeviceQueryRequest {
+) *DescribePropertyRequest {
 
-	return &DeviceQueryRequest{
+	return &DescribePropertyRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/coreinstances/{instanceId}/device:query",
+			URL:     "/regions/{regionId}/coreinstances/{instanceId}/property:describe",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v2",
@@ -66,15 +66,15 @@ func NewDeviceQueryRequest(
  * param instanceId: 实例Id (Required)
  * param deviceId: 设备ID (Required)
  */
-func NewDeviceQueryRequestWithAllParams(
+func NewDescribePropertyRequestWithAllParams(
     regionId string,
     instanceId string,
     deviceId string,
-) *DeviceQueryRequest {
+) *DescribePropertyRequest {
 
-    return &DeviceQueryRequest{
+    return &DescribePropertyRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/coreinstances/{instanceId}/device:query",
+            URL:     "/regions/{regionId}/coreinstances/{instanceId}/property:describe",
             Method:  "GET",
             Header:  nil,
             Version: "v2",
@@ -86,11 +86,11 @@ func NewDeviceQueryRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDeviceQueryRequestWithoutParam() *DeviceQueryRequest {
+func NewDescribePropertyRequestWithoutParam() *DescribePropertyRequest {
 
-    return &DeviceQueryRequest{
+    return &DescribePropertyRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/coreinstances/{instanceId}/device:query",
+            URL:     "/regions/{regionId}/coreinstances/{instanceId}/property:describe",
             Method:  "GET",
             Header:  nil,
             Version: "v2",
@@ -99,32 +99,32 @@ func NewDeviceQueryRequestWithoutParam() *DeviceQueryRequest {
 }
 
 /* param regionId: 区域id(Required) */
-func (r *DeviceQueryRequest) SetRegionId(regionId string) {
+func (r *DescribePropertyRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 实例Id(Required) */
-func (r *DeviceQueryRequest) SetInstanceId(instanceId string) {
+func (r *DescribePropertyRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
 /* param deviceId: 设备ID(Required) */
-func (r *DeviceQueryRequest) SetDeviceId(deviceId string) {
+func (r *DescribePropertyRequest) SetDeviceId(deviceId string) {
     r.DeviceId = deviceId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DeviceQueryRequest) GetRegionId() string {
+func (r DescribePropertyRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DeviceQueryResponse struct {
+type DescribePropertyResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DeviceQueryResult `json:"result"`
+    Result DescribePropertyResult `json:"result"`
 }
 
-type DeviceQueryResult struct {
-    DeviceInfoVO iotcore.DeviceInfoVO `json:"deviceInfoVO"`
+type DescribePropertyResult struct {
+    PropertyAcquireVo iotcore.PropertyAcquireVo `json:"propertyAcquireVo"`
 }

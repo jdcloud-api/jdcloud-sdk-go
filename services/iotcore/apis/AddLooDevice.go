@@ -53,9 +53,6 @@ type AddLooDeviceRequest struct {
 
     /* 设备名 (Optional) */
     Description *string `json:"description"`
-
-    /* 设备类型  */
-    DeviceType string `json:"deviceType"`
 }
 
 /*
@@ -63,7 +60,6 @@ type AddLooDeviceRequest struct {
  * param regionId: 设备归属的实例所在区域 (Required)
  * param preOrderId: 申请单编号 (Required)
  * param userPinParam: 用户Pin (Required)
- * param deviceType: 设备类型 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -72,7 +68,6 @@ func NewAddLooDeviceRequest(
     regionId string,
     preOrderId string,
     userPinParam string,
-    deviceType string,
 ) *AddLooDeviceRequest {
 
 	return &AddLooDeviceRequest{
@@ -86,7 +81,6 @@ func NewAddLooDeviceRequest(
         RegionId: regionId,
         PreOrderId: preOrderId,
         UserPinParam: userPinParam,
-        DeviceType: deviceType,
 	}
 }
 
@@ -101,7 +95,6 @@ func NewAddLooDeviceRequest(
  * param manufacturer: 厂商 (Optional)
  * param identifier: 连接码 (Optional)
  * param description: 设备名 (Optional)
- * param deviceType: 设备类型 (Required)
  */
 func NewAddLooDeviceRequestWithAllParams(
     instanceId string,
@@ -114,7 +107,6 @@ func NewAddLooDeviceRequestWithAllParams(
     manufacturer *string,
     identifier *string,
     description *string,
-    deviceType string,
 ) *AddLooDeviceRequest {
 
     return &AddLooDeviceRequest{
@@ -134,7 +126,6 @@ func NewAddLooDeviceRequestWithAllParams(
         Manufacturer: manufacturer,
         Identifier: identifier,
         Description: description,
-        DeviceType: deviceType,
     }
 }
 
@@ -199,11 +190,6 @@ func (r *AddLooDeviceRequest) SetIdentifier(identifier string) {
 /* param description: 设备名(Optional) */
 func (r *AddLooDeviceRequest) SetDescription(description string) {
     r.Description = &description
-}
-
-/* param deviceType: 设备类型(Required) */
-func (r *AddLooDeviceRequest) SetDeviceType(deviceType string) {
-    r.DeviceType = deviceType
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

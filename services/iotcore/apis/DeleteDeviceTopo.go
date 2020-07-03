@@ -21,7 +21,7 @@ import (
     iotcore "github.com/jdcloud-api/jdcloud-sdk-go/services/iotcore/models"
 )
 
-type EventListRequest struct {
+type DeleteDeviceTopoRequest struct {
 
     core.JDCloudRequest
 
@@ -31,66 +31,66 @@ type EventListRequest struct {
     /* 实例Id  */
     InstanceId string `json:"instanceId"`
 
-    /* 事件查询请求  */
-    EventReportPageBo *iotcore.EventReportPageBo `json:"eventReportPageBo"`
+    /* 方法查询请求  */
+    DeviceTopoInfoVO *iotcore.DeviceTopoInfoVO `json:"deviceTopoInfoVO"`
 }
 
 /*
  * param regionId: 区域id (Required)
  * param instanceId: 实例Id (Required)
- * param eventReportPageBo: 事件查询请求 (Required)
+ * param deviceTopoInfoVO: 方法查询请求 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewEventListRequest(
+func NewDeleteDeviceTopoRequest(
     regionId string,
     instanceId string,
-    eventReportPageBo *iotcore.EventReportPageBo,
-) *EventListRequest {
+    deviceTopoInfoVO *iotcore.DeviceTopoInfoVO,
+) *DeleteDeviceTopoRequest {
 
-	return &EventListRequest{
+	return &DeleteDeviceTopoRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/coreinstances/{instanceId}/event:list",
+			URL:     "/regions/{regionId}/coreinstances/{instanceId}/deviceTopo:delete",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v2",
 		},
         RegionId: regionId,
         InstanceId: instanceId,
-        EventReportPageBo: eventReportPageBo,
+        DeviceTopoInfoVO: deviceTopoInfoVO,
 	}
 }
 
 /*
  * param regionId: 区域id (Required)
  * param instanceId: 实例Id (Required)
- * param eventReportPageBo: 事件查询请求 (Required)
+ * param deviceTopoInfoVO: 方法查询请求 (Required)
  */
-func NewEventListRequestWithAllParams(
+func NewDeleteDeviceTopoRequestWithAllParams(
     regionId string,
     instanceId string,
-    eventReportPageBo *iotcore.EventReportPageBo,
-) *EventListRequest {
+    deviceTopoInfoVO *iotcore.DeviceTopoInfoVO,
+) *DeleteDeviceTopoRequest {
 
-    return &EventListRequest{
+    return &DeleteDeviceTopoRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/coreinstances/{instanceId}/event:list",
+            URL:     "/regions/{regionId}/coreinstances/{instanceId}/deviceTopo:delete",
             Method:  "POST",
             Header:  nil,
             Version: "v2",
         },
         RegionId: regionId,
         InstanceId: instanceId,
-        EventReportPageBo: eventReportPageBo,
+        DeviceTopoInfoVO: deviceTopoInfoVO,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewEventListRequestWithoutParam() *EventListRequest {
+func NewDeleteDeviceTopoRequestWithoutParam() *DeleteDeviceTopoRequest {
 
-    return &EventListRequest{
+    return &DeleteDeviceTopoRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/coreinstances/{instanceId}/event:list",
+            URL:     "/regions/{regionId}/coreinstances/{instanceId}/deviceTopo:delete",
             Method:  "POST",
             Header:  nil,
             Version: "v2",
@@ -99,35 +99,32 @@ func NewEventListRequestWithoutParam() *EventListRequest {
 }
 
 /* param regionId: 区域id(Required) */
-func (r *EventListRequest) SetRegionId(regionId string) {
+func (r *DeleteDeviceTopoRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 实例Id(Required) */
-func (r *EventListRequest) SetInstanceId(instanceId string) {
+func (r *DeleteDeviceTopoRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param eventReportPageBo: 事件查询请求(Required) */
-func (r *EventListRequest) SetEventReportPageBo(eventReportPageBo *iotcore.EventReportPageBo) {
-    r.EventReportPageBo = eventReportPageBo
+/* param deviceTopoInfoVO: 方法查询请求(Required) */
+func (r *DeleteDeviceTopoRequest) SetDeviceTopoInfoVO(deviceTopoInfoVO *iotcore.DeviceTopoInfoVO) {
+    r.DeviceTopoInfoVO = deviceTopoInfoVO
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r EventListRequest) GetRegionId() string {
+func (r DeleteDeviceTopoRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type EventListResponse struct {
+type DeleteDeviceTopoResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result EventListResult `json:"result"`
+    Result DeleteDeviceTopoResult `json:"result"`
 }
 
-type EventListResult struct {
-    PageSize int `json:"pageSize"`
-    CurrentPage int `json:"currentPage"`
-    TotalCount int `json:"totalCount"`
-    Data []iotcore.EventReportVo `json:"data"`
+type DeleteDeviceTopoResult struct {
+    DeviceTopoResult iotcore.DeviceTopoResult `json:"deviceTopoResult"`
 }

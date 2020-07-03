@@ -28,6 +28,9 @@ type ThingTypeInfoVO struct {
     /* 创建时间 (Optional) */
     CreatedTime string `json:"createdTime"`
 
+    /* 更新时间 (Optional) */
+    UpdateTime string `json:"updateTime"`
+
     /* 自定义档案信息 (Optional) */
     CustomProfiles []CustomProfileVO `json:"customProfiles"`
 
@@ -49,9 +52,9 @@ type ThingTypeInfoVO struct {
     /* 节点类型1:直连终端、2:边缘代理、3:非直连终端 (Optional) */
     NodeType int `json:"nodeType"`
 
-    /* 所属物类型Code (Optional) */
+    /* 所属物类型Code  */
     Code string `json:"code"`
 
-    /* 更新时间 (Optional) */
-    UpdateTime string `json:"updateTime"`
+    /* 所属物类型名称  */
+    Name string `json:"name"`
 }

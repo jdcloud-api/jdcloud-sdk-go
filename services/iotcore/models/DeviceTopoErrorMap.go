@@ -17,17 +17,11 @@
 package models
 
 
-type DeviceFunctionVO struct {
+type DeviceTopoErrorMap struct {
 
-    /* 设备标识Id  */
+    /* 设备ID (Optional) */
     DeviceId string `json:"deviceId"`
 
-    /* 方法Key (Optional) */
-    FunctionKey *string `json:"functionKey"`
-
-    /* 输入参数（Map<String,Object>类型） (Optional) */
-    InParams *interface{} `json:"inParams"`
-
-    /* 输出参数（Map<String,Object>类型） (Optional) */
-    OutParams *interface{} `json:"outParams"`
+    /* 设备信息 (Optional) */
+    ErrInfo string `json:"errInfo"`
 }

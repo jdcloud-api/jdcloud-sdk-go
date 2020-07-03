@@ -21,7 +21,7 @@ import (
     iotcore "github.com/jdcloud-api/jdcloud-sdk-go/services/iotcore/models"
 )
 
-type DevicePropertySetRequest struct {
+type DescribeFunctionListRequest struct {
 
     core.JDCloudRequest
 
@@ -31,66 +31,66 @@ type DevicePropertySetRequest struct {
     /* 实例Id  */
     InstanceId string `json:"instanceId"`
 
-    /* 设备ID  */
-    DevicePropertyVO *iotcore.DevicePropertyVO `json:"devicePropertyVO"`
+    /* 方法查询请求对象  */
+    FunctionCallPageBo *iotcore.FunctionCallPageBo `json:"functionCallPageBo"`
 }
 
 /*
  * param regionId: 区域id (Required)
  * param instanceId: 实例Id (Required)
- * param devicePropertyVO: 设备ID (Required)
+ * param functionCallPageBo: 方法查询请求对象 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDevicePropertySetRequest(
+func NewDescribeFunctionListRequest(
     regionId string,
     instanceId string,
-    devicePropertyVO *iotcore.DevicePropertyVO,
-) *DevicePropertySetRequest {
+    functionCallPageBo *iotcore.FunctionCallPageBo,
+) *DescribeFunctionListRequest {
 
-	return &DevicePropertySetRequest{
+	return &DescribeFunctionListRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/coreinstances/{instanceId}/deviceProperty:set",
+			URL:     "/regions/{regionId}/coreinstances/{instanceId}/function:list",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v2",
 		},
         RegionId: regionId,
         InstanceId: instanceId,
-        DevicePropertyVO: devicePropertyVO,
+        FunctionCallPageBo: functionCallPageBo,
 	}
 }
 
 /*
  * param regionId: 区域id (Required)
  * param instanceId: 实例Id (Required)
- * param devicePropertyVO: 设备ID (Required)
+ * param functionCallPageBo: 方法查询请求对象 (Required)
  */
-func NewDevicePropertySetRequestWithAllParams(
+func NewDescribeFunctionListRequestWithAllParams(
     regionId string,
     instanceId string,
-    devicePropertyVO *iotcore.DevicePropertyVO,
-) *DevicePropertySetRequest {
+    functionCallPageBo *iotcore.FunctionCallPageBo,
+) *DescribeFunctionListRequest {
 
-    return &DevicePropertySetRequest{
+    return &DescribeFunctionListRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/coreinstances/{instanceId}/deviceProperty:set",
+            URL:     "/regions/{regionId}/coreinstances/{instanceId}/function:list",
             Method:  "POST",
             Header:  nil,
             Version: "v2",
         },
         RegionId: regionId,
         InstanceId: instanceId,
-        DevicePropertyVO: devicePropertyVO,
+        FunctionCallPageBo: functionCallPageBo,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDevicePropertySetRequestWithoutParam() *DevicePropertySetRequest {
+func NewDescribeFunctionListRequestWithoutParam() *DescribeFunctionListRequest {
 
-    return &DevicePropertySetRequest{
+    return &DescribeFunctionListRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/coreinstances/{instanceId}/deviceProperty:set",
+            URL:     "/regions/{regionId}/coreinstances/{instanceId}/function:list",
             Method:  "POST",
             Header:  nil,
             Version: "v2",
@@ -99,31 +99,35 @@ func NewDevicePropertySetRequestWithoutParam() *DevicePropertySetRequest {
 }
 
 /* param regionId: 区域id(Required) */
-func (r *DevicePropertySetRequest) SetRegionId(regionId string) {
+func (r *DescribeFunctionListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 实例Id(Required) */
-func (r *DevicePropertySetRequest) SetInstanceId(instanceId string) {
+func (r *DescribeFunctionListRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param devicePropertyVO: 设备ID(Required) */
-func (r *DevicePropertySetRequest) SetDevicePropertyVO(devicePropertyVO *iotcore.DevicePropertyVO) {
-    r.DevicePropertyVO = devicePropertyVO
+/* param functionCallPageBo: 方法查询请求对象(Required) */
+func (r *DescribeFunctionListRequest) SetFunctionCallPageBo(functionCallPageBo *iotcore.FunctionCallPageBo) {
+    r.FunctionCallPageBo = functionCallPageBo
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DevicePropertySetRequest) GetRegionId() string {
+func (r DescribeFunctionListRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DevicePropertySetResponse struct {
+type DescribeFunctionListResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DevicePropertySetResult `json:"result"`
+    Result DescribeFunctionListResult `json:"result"`
 }
 
-type DevicePropertySetResult struct {
+type DescribeFunctionListResult struct {
+    PageSize int `json:"pageSize"`
+    CurrentPage int `json:"currentPage"`
+    TotalCount int `json:"totalCount"`
+    List []iotcore.FunctionCallRecordVo `json:"list"`
 }

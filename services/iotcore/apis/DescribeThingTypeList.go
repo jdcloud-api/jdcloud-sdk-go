@@ -21,7 +21,7 @@ import (
     iotcore "github.com/jdcloud-api/jdcloud-sdk-go/services/iotcore/models"
 )
 
-type ThingTypeListRequest struct {
+type DescribeThingTypeListRequest struct {
 
     core.JDCloudRequest
 
@@ -53,12 +53,12 @@ type ThingTypeListRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewThingTypeListRequest(
+func NewDescribeThingTypeListRequest(
     regionId string,
     instanceId string,
-) *ThingTypeListRequest {
+) *DescribeThingTypeListRequest {
 
-	return &ThingTypeListRequest{
+	return &DescribeThingTypeListRequest{
         JDCloudRequest: core.JDCloudRequest{
 			URL:     "/regions/{regionId}/coreinstances/{instanceId}/thingType:list",
 			Method:  "GET",
@@ -79,7 +79,7 @@ func NewThingTypeListRequest(
  * param pageNo: 页码 (Optional)
  * param pageSize: 每页显示条数 (Optional)
  */
-func NewThingTypeListRequestWithAllParams(
+func NewDescribeThingTypeListRequestWithAllParams(
     regionId string,
     instanceId string,
     deviceMetaId *string,
@@ -87,9 +87,9 @@ func NewThingTypeListRequestWithAllParams(
     nodeType *int,
     pageNo *int,
     pageSize *int,
-) *ThingTypeListRequest {
+) *DescribeThingTypeListRequest {
 
-    return &ThingTypeListRequest{
+    return &DescribeThingTypeListRequest{
         JDCloudRequest: core.JDCloudRequest{
             URL:     "/regions/{regionId}/coreinstances/{instanceId}/thingType:list",
             Method:  "GET",
@@ -107,9 +107,9 @@ func NewThingTypeListRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewThingTypeListRequestWithoutParam() *ThingTypeListRequest {
+func NewDescribeThingTypeListRequestWithoutParam() *DescribeThingTypeListRequest {
 
-    return &ThingTypeListRequest{
+    return &DescribeThingTypeListRequest{
             JDCloudRequest: core.JDCloudRequest{
             URL:     "/regions/{regionId}/coreinstances/{instanceId}/thingType:list",
             Method:  "GET",
@@ -120,55 +120,55 @@ func NewThingTypeListRequestWithoutParam() *ThingTypeListRequest {
 }
 
 /* param regionId: 区域id(Required) */
-func (r *ThingTypeListRequest) SetRegionId(regionId string) {
+func (r *DescribeThingTypeListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 实例Id(Required) */
-func (r *ThingTypeListRequest) SetInstanceId(instanceId string) {
+func (r *DescribeThingTypeListRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
 /* param deviceMetaId: 设备型号标识(Optional) */
-func (r *ThingTypeListRequest) SetDeviceMetaId(deviceMetaId string) {
+func (r *DescribeThingTypeListRequest) SetDeviceMetaId(deviceMetaId string) {
     r.DeviceMetaId = &deviceMetaId
 }
 
 /* param deviceMetaName: 设备型号名称(Optional) */
-func (r *ThingTypeListRequest) SetDeviceMetaName(deviceMetaName string) {
+func (r *DescribeThingTypeListRequest) SetDeviceMetaName(deviceMetaName string) {
     r.DeviceMetaName = &deviceMetaName
 }
 
 /* param nodeType: 节点类型(Optional) */
-func (r *ThingTypeListRequest) SetNodeType(nodeType int) {
+func (r *DescribeThingTypeListRequest) SetNodeType(nodeType int) {
     r.NodeType = &nodeType
 }
 
 /* param pageNo: 页码(Optional) */
-func (r *ThingTypeListRequest) SetPageNo(pageNo int) {
+func (r *DescribeThingTypeListRequest) SetPageNo(pageNo int) {
     r.PageNo = &pageNo
 }
 
 /* param pageSize: 每页显示条数(Optional) */
-func (r *ThingTypeListRequest) SetPageSize(pageSize int) {
+func (r *DescribeThingTypeListRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r ThingTypeListRequest) GetRegionId() string {
+func (r DescribeThingTypeListRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type ThingTypeListResponse struct {
+type DescribeThingTypeListResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result ThingTypeListResult `json:"result"`
+    Result DescribeThingTypeListResult `json:"result"`
 }
 
-type ThingTypeListResult struct {
+type DescribeThingTypeListResult struct {
     PageSize int `json:"pageSize"`
     CurrentPage int `json:"currentPage"`
     TotalCount int `json:"totalCount"`
-    Data []iotcore.ThingTypeInfoVO `json:"data"`
+    List []iotcore.ThingTypeInfoVO `json:"list"`
 }

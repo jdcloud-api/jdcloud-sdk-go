@@ -21,7 +21,7 @@ import (
     iotcore "github.com/jdcloud-api/jdcloud-sdk-go/services/iotcore/models"
 )
 
-type GetPropertySnapshotRequest struct {
+type RegisterDeviceRequest struct {
 
     core.JDCloudRequest
 
@@ -31,66 +31,66 @@ type GetPropertySnapshotRequest struct {
     /* 实例Id  */
     InstanceId string `json:"instanceId"`
 
-    /* 方法查询请求  */
-    DeviceSnapshotRequestVO *iotcore.DeviceSnapshotRequestVO `json:"deviceSnapshotRequestVO"`
+    /* 物模型ID编号  */
+    DeviceInfoVO *iotcore.DeviceInfoVO `json:"deviceInfoVO"`
 }
 
 /*
  * param regionId: 区域id (Required)
  * param instanceId: 实例Id (Required)
- * param deviceSnapshotRequestVO: 方法查询请求 (Required)
+ * param deviceInfoVO: 物模型ID编号 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewGetPropertySnapshotRequest(
+func NewRegisterDeviceRequest(
     regionId string,
     instanceId string,
-    deviceSnapshotRequestVO *iotcore.DeviceSnapshotRequestVO,
-) *GetPropertySnapshotRequest {
+    deviceInfoVO *iotcore.DeviceInfoVO,
+) *RegisterDeviceRequest {
 
-	return &GetPropertySnapshotRequest{
+	return &RegisterDeviceRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/coreinstances/{instanceId}/property:getSnapshot",
+			URL:     "/regions/{regionId}/coreinstances/{instanceId}/device:register",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v2",
 		},
         RegionId: regionId,
         InstanceId: instanceId,
-        DeviceSnapshotRequestVO: deviceSnapshotRequestVO,
+        DeviceInfoVO: deviceInfoVO,
 	}
 }
 
 /*
  * param regionId: 区域id (Required)
  * param instanceId: 实例Id (Required)
- * param deviceSnapshotRequestVO: 方法查询请求 (Required)
+ * param deviceInfoVO: 物模型ID编号 (Required)
  */
-func NewGetPropertySnapshotRequestWithAllParams(
+func NewRegisterDeviceRequestWithAllParams(
     regionId string,
     instanceId string,
-    deviceSnapshotRequestVO *iotcore.DeviceSnapshotRequestVO,
-) *GetPropertySnapshotRequest {
+    deviceInfoVO *iotcore.DeviceInfoVO,
+) *RegisterDeviceRequest {
 
-    return &GetPropertySnapshotRequest{
+    return &RegisterDeviceRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/coreinstances/{instanceId}/property:getSnapshot",
+            URL:     "/regions/{regionId}/coreinstances/{instanceId}/device:register",
             Method:  "POST",
             Header:  nil,
             Version: "v2",
         },
         RegionId: regionId,
         InstanceId: instanceId,
-        DeviceSnapshotRequestVO: deviceSnapshotRequestVO,
+        DeviceInfoVO: deviceInfoVO,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewGetPropertySnapshotRequestWithoutParam() *GetPropertySnapshotRequest {
+func NewRegisterDeviceRequestWithoutParam() *RegisterDeviceRequest {
 
-    return &GetPropertySnapshotRequest{
+    return &RegisterDeviceRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/coreinstances/{instanceId}/property:getSnapshot",
+            URL:     "/regions/{regionId}/coreinstances/{instanceId}/device:register",
             Method:  "POST",
             Header:  nil,
             Version: "v2",
@@ -99,31 +99,32 @@ func NewGetPropertySnapshotRequestWithoutParam() *GetPropertySnapshotRequest {
 }
 
 /* param regionId: 区域id(Required) */
-func (r *GetPropertySnapshotRequest) SetRegionId(regionId string) {
+func (r *RegisterDeviceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 实例Id(Required) */
-func (r *GetPropertySnapshotRequest) SetInstanceId(instanceId string) {
+func (r *RegisterDeviceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param deviceSnapshotRequestVO: 方法查询请求(Required) */
-func (r *GetPropertySnapshotRequest) SetDeviceSnapshotRequestVO(deviceSnapshotRequestVO *iotcore.DeviceSnapshotRequestVO) {
-    r.DeviceSnapshotRequestVO = deviceSnapshotRequestVO
+/* param deviceInfoVO: 物模型ID编号(Required) */
+func (r *RegisterDeviceRequest) SetDeviceInfoVO(deviceInfoVO *iotcore.DeviceInfoVO) {
+    r.DeviceInfoVO = deviceInfoVO
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r GetPropertySnapshotRequest) GetRegionId() string {
+func (r RegisterDeviceRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type GetPropertySnapshotResponse struct {
+type RegisterDeviceResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result GetPropertySnapshotResult `json:"result"`
+    Result RegisterDeviceResult `json:"result"`
 }
 
-type GetPropertySnapshotResult struct {
+type RegisterDeviceResult struct {
+    DeviceId string `json:"deviceId"`
 }

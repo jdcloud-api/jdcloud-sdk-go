@@ -17,17 +17,17 @@
 package models
 
 
-type DeviceFunctionVO struct {
+type DeviceTopoRecordVO struct {
 
-    /* 设备标识Id  */
+    /* 子设备ID (Optional) */
     DeviceId string `json:"deviceId"`
 
-    /* 方法Key (Optional) */
-    FunctionKey *string `json:"functionKey"`
+    /* 子设备名 (Optional) */
+    Name string `json:"name"`
 
-    /* 输入参数（Map<String,Object>类型） (Optional) */
-    InParams *interface{} `json:"inParams"`
+    /* 设备物理ID (Optional) */
+    UniqueId string `json:"uniqueId"`
 
-    /* 输出参数（Map<String,Object>类型） (Optional) */
-    OutParams *interface{} `json:"outParams"`
+    /* 在线状态 (Optional) */
+    Online bool `json:"online"`
 }

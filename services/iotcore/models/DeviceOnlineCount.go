@@ -17,17 +17,14 @@
 package models
 
 
-type DeviceFunctionVO struct {
+type DeviceOnlineCount struct {
 
-    /* 设备标识Id  */
-    DeviceId string `json:"deviceId"`
+    /* 统计时间 (Optional) */
+    Save_time int64 `json:"save_time"`
 
-    /* 方法Key (Optional) */
-    FunctionKey *string `json:"functionKey"`
+    /* 在线时长 (Optional) */
+    Online_time int `json:"online_time"`
 
-    /* 输入参数（Map<String,Object>类型） (Optional) */
-    InParams *interface{} `json:"inParams"`
-
-    /* 输出参数（Map<String,Object>类型） (Optional) */
-    OutParams *interface{} `json:"outParams"`
+    /* 上线次数 (Optional) */
+    Count_time int `json:"count_time"`
 }

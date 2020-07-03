@@ -17,17 +17,26 @@
 package models
 
 
-type DeviceFunctionVO struct {
+type DeviceTopoPageBO struct {
 
-    /* 设备标识Id  */
-    DeviceId string `json:"deviceId"`
+    /* 设备标识Id (Optional) */
+    DeviceId *string `json:"deviceId"`
 
-    /* 方法Key (Optional) */
-    FunctionKey *string `json:"functionKey"`
+    /* 子设备标识Id (Optional) */
+    SubDeviceId *string `json:"subDeviceId"`
 
-    /* 输入参数（Map<String,Object>类型） (Optional) */
-    InParams *interface{} `json:"inParams"`
+    /* 子设备名 (Optional) */
+    SubDeviceName *string `json:"subDeviceName"`
 
-    /* 输出参数（Map<String,Object>类型） (Optional) */
-    OutParams *interface{} `json:"outParams"`
+    /* 排序方式;升序-ASC,降序-DESC (Optional) */
+    Order *string `json:"order"`
+
+    /* 排序方式;升序-ASC,降序-DESC (Optional) */
+    Orders *interface{} `json:"orders"`
+
+    /* 页码 (Optional) */
+    PageNo *int `json:"pageNo"`
+
+    /* 每页条数 (Optional) */
+    PageSize *int `json:"pageSize"`
 }

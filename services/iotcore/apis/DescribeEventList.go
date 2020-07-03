@@ -21,7 +21,7 @@ import (
     iotcore "github.com/jdcloud-api/jdcloud-sdk-go/services/iotcore/models"
 )
 
-type ThingTypeDescribeRequest struct {
+type DescribeEventListRequest struct {
 
     core.JDCloudRequest
 
@@ -31,64 +31,67 @@ type ThingTypeDescribeRequest struct {
     /* 实例Id  */
     InstanceId string `json:"instanceId"`
 
-    /* 设备型号标识 (Optional) */
-    DeviceMetaId *string `json:"deviceMetaId"`
+    /* 事件查询请求  */
+    EventReportPageBo *iotcore.EventReportPageBo `json:"eventReportPageBo"`
 }
 
 /*
  * param regionId: 区域id (Required)
  * param instanceId: 实例Id (Required)
+ * param eventReportPageBo: 事件查询请求 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewThingTypeDescribeRequest(
+func NewDescribeEventListRequest(
     regionId string,
     instanceId string,
-) *ThingTypeDescribeRequest {
+    eventReportPageBo *iotcore.EventReportPageBo,
+) *DescribeEventListRequest {
 
-	return &ThingTypeDescribeRequest{
+	return &DescribeEventListRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/coreinstances/{instanceId}/thingType:thingTypeDescribe",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/coreinstances/{instanceId}/event:list",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v2",
 		},
         RegionId: regionId,
         InstanceId: instanceId,
+        EventReportPageBo: eventReportPageBo,
 	}
 }
 
 /*
  * param regionId: 区域id (Required)
  * param instanceId: 实例Id (Required)
- * param deviceMetaId: 设备型号标识 (Optional)
+ * param eventReportPageBo: 事件查询请求 (Required)
  */
-func NewThingTypeDescribeRequestWithAllParams(
+func NewDescribeEventListRequestWithAllParams(
     regionId string,
     instanceId string,
-    deviceMetaId *string,
-) *ThingTypeDescribeRequest {
+    eventReportPageBo *iotcore.EventReportPageBo,
+) *DescribeEventListRequest {
 
-    return &ThingTypeDescribeRequest{
+    return &DescribeEventListRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/coreinstances/{instanceId}/thingType:thingTypeDescribe",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/coreinstances/{instanceId}/event:list",
+            Method:  "POST",
             Header:  nil,
             Version: "v2",
         },
         RegionId: regionId,
         InstanceId: instanceId,
-        DeviceMetaId: deviceMetaId,
+        EventReportPageBo: eventReportPageBo,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewThingTypeDescribeRequestWithoutParam() *ThingTypeDescribeRequest {
+func NewDescribeEventListRequestWithoutParam() *DescribeEventListRequest {
 
-    return &ThingTypeDescribeRequest{
+    return &DescribeEventListRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/coreinstances/{instanceId}/thingType:thingTypeDescribe",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/coreinstances/{instanceId}/event:list",
+            Method:  "POST",
             Header:  nil,
             Version: "v2",
         },
@@ -96,32 +99,35 @@ func NewThingTypeDescribeRequestWithoutParam() *ThingTypeDescribeRequest {
 }
 
 /* param regionId: 区域id(Required) */
-func (r *ThingTypeDescribeRequest) SetRegionId(regionId string) {
+func (r *DescribeEventListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 实例Id(Required) */
-func (r *ThingTypeDescribeRequest) SetInstanceId(instanceId string) {
+func (r *DescribeEventListRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param deviceMetaId: 设备型号标识(Optional) */
-func (r *ThingTypeDescribeRequest) SetDeviceMetaId(deviceMetaId string) {
-    r.DeviceMetaId = &deviceMetaId
+/* param eventReportPageBo: 事件查询请求(Required) */
+func (r *DescribeEventListRequest) SetEventReportPageBo(eventReportPageBo *iotcore.EventReportPageBo) {
+    r.EventReportPageBo = eventReportPageBo
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r ThingTypeDescribeRequest) GetRegionId() string {
+func (r DescribeEventListRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type ThingTypeDescribeResponse struct {
+type DescribeEventListResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result ThingTypeDescribeResult `json:"result"`
+    Result DescribeEventListResult `json:"result"`
 }
 
-type ThingTypeDescribeResult struct {
-    ThingTypeInfoVO iotcore.ThingTypeInfoVO `json:"thingTypeInfoVO"`
+type DescribeEventListResult struct {
+    PageSize int `json:"pageSize"`
+    CurrentPage int `json:"currentPage"`
+    TotalCount int `json:"totalCount"`
+    List []iotcore.EventReportVo `json:"list"`
 }

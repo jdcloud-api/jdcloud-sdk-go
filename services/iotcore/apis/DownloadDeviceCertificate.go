@@ -18,10 +18,9 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    iotcore "github.com/jdcloud-api/jdcloud-sdk-go/services/iotcore/models"
 )
 
-type FunctionListRequest struct {
+type DownloadDeviceCertificateRequest struct {
 
     core.JDCloudRequest
 
@@ -31,67 +30,67 @@ type FunctionListRequest struct {
     /* 实例Id  */
     InstanceId string `json:"instanceId"`
 
-    /* 方法查询请求对象  */
-    FunctionCallPageBo *iotcore.FunctionCallPageBo `json:"functionCallPageBo"`
+    /* 设备ID  */
+    DeviceId string `json:"deviceId"`
 }
 
 /*
  * param regionId: 区域id (Required)
  * param instanceId: 实例Id (Required)
- * param functionCallPageBo: 方法查询请求对象 (Required)
+ * param deviceId: 设备ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewFunctionListRequest(
+func NewDownloadDeviceCertificateRequest(
     regionId string,
     instanceId string,
-    functionCallPageBo *iotcore.FunctionCallPageBo,
-) *FunctionListRequest {
+    deviceId string,
+) *DownloadDeviceCertificateRequest {
 
-	return &FunctionListRequest{
+	return &DownloadDeviceCertificateRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/coreinstances/{instanceId}/function:list",
-			Method:  "POST",
+			URL:     "/regions/{regionId}/coreinstances/{instanceId}/device:downloadCertificate",
+			Method:  "GET",
 			Header:  nil,
 			Version: "v2",
 		},
         RegionId: regionId,
         InstanceId: instanceId,
-        FunctionCallPageBo: functionCallPageBo,
+        DeviceId: deviceId,
 	}
 }
 
 /*
  * param regionId: 区域id (Required)
  * param instanceId: 实例Id (Required)
- * param functionCallPageBo: 方法查询请求对象 (Required)
+ * param deviceId: 设备ID (Required)
  */
-func NewFunctionListRequestWithAllParams(
+func NewDownloadDeviceCertificateRequestWithAllParams(
     regionId string,
     instanceId string,
-    functionCallPageBo *iotcore.FunctionCallPageBo,
-) *FunctionListRequest {
+    deviceId string,
+) *DownloadDeviceCertificateRequest {
 
-    return &FunctionListRequest{
+    return &DownloadDeviceCertificateRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/coreinstances/{instanceId}/function:list",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/coreinstances/{instanceId}/device:downloadCertificate",
+            Method:  "GET",
             Header:  nil,
             Version: "v2",
         },
         RegionId: regionId,
         InstanceId: instanceId,
-        FunctionCallPageBo: functionCallPageBo,
+        DeviceId: deviceId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewFunctionListRequestWithoutParam() *FunctionListRequest {
+func NewDownloadDeviceCertificateRequestWithoutParam() *DownloadDeviceCertificateRequest {
 
-    return &FunctionListRequest{
+    return &DownloadDeviceCertificateRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/coreinstances/{instanceId}/function:list",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/coreinstances/{instanceId}/device:downloadCertificate",
+            Method:  "GET",
             Header:  nil,
             Version: "v2",
         },
@@ -99,35 +98,33 @@ func NewFunctionListRequestWithoutParam() *FunctionListRequest {
 }
 
 /* param regionId: 区域id(Required) */
-func (r *FunctionListRequest) SetRegionId(regionId string) {
+func (r *DownloadDeviceCertificateRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 实例Id(Required) */
-func (r *FunctionListRequest) SetInstanceId(instanceId string) {
+func (r *DownloadDeviceCertificateRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param functionCallPageBo: 方法查询请求对象(Required) */
-func (r *FunctionListRequest) SetFunctionCallPageBo(functionCallPageBo *iotcore.FunctionCallPageBo) {
-    r.FunctionCallPageBo = functionCallPageBo
+/* param deviceId: 设备ID(Required) */
+func (r *DownloadDeviceCertificateRequest) SetDeviceId(deviceId string) {
+    r.DeviceId = deviceId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r FunctionListRequest) GetRegionId() string {
+func (r DownloadDeviceCertificateRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type FunctionListResponse struct {
+type DownloadDeviceCertificateResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result FunctionListResult `json:"result"`
+    Result DownloadDeviceCertificateResult `json:"result"`
 }
 
-type FunctionListResult struct {
-    PageSize int `json:"pageSize"`
-    CurrentPage int `json:"currentPage"`
-    TotalCount int `json:"totalCount"`
-    Data []iotcore.FunctionCallRecordVo `json:"data"`
+type DownloadDeviceCertificateResult struct {
+    DeviceId string `json:"deviceId"`
+    DeviceCertUrl string `json:"deviceCertUrl"`
 }
