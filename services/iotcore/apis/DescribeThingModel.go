@@ -31,8 +31,8 @@ type DescribeThingModelRequest struct {
     /* 实例Id  */
     InstanceId string `json:"instanceId"`
 
-    /* 物模型ID编号  */
-    ThingModelId string `json:"thingModelId"`
+    /* 物类型Code  */
+    ThingTypeCode string `json:"thingTypeCode"`
 
     /* 版本号。如果为空，则返回最新版本 (Optional) */
     ThingModelVersion *string `json:"thingModelVersion"`
@@ -41,52 +41,52 @@ type DescribeThingModelRequest struct {
 /*
  * param regionId: 区域id (Required)
  * param instanceId: 实例Id (Required)
- * param thingModelId: 物模型ID编号 (Required)
+ * param thingTypeCode: 物类型Code (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeThingModelRequest(
     regionId string,
     instanceId string,
-    thingModelId string,
+    thingTypeCode string,
 ) *DescribeThingModelRequest {
 
 	return &DescribeThingModelRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/coreinstances/{instanceId}/thingModel:describeThingModel",
+			URL:     "/regions/{regionId}/coreinstances/{instanceId}/thingModel:describe",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v2",
 		},
         RegionId: regionId,
         InstanceId: instanceId,
-        ThingModelId: thingModelId,
+        ThingTypeCode: thingTypeCode,
 	}
 }
 
 /*
  * param regionId: 区域id (Required)
  * param instanceId: 实例Id (Required)
- * param thingModelId: 物模型ID编号 (Required)
+ * param thingTypeCode: 物类型Code (Required)
  * param thingModelVersion: 版本号。如果为空，则返回最新版本 (Optional)
  */
 func NewDescribeThingModelRequestWithAllParams(
     regionId string,
     instanceId string,
-    thingModelId string,
+    thingTypeCode string,
     thingModelVersion *string,
 ) *DescribeThingModelRequest {
 
     return &DescribeThingModelRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/coreinstances/{instanceId}/thingModel:describeThingModel",
+            URL:     "/regions/{regionId}/coreinstances/{instanceId}/thingModel:describe",
             Method:  "GET",
             Header:  nil,
             Version: "v2",
         },
         RegionId: regionId,
         InstanceId: instanceId,
-        ThingModelId: thingModelId,
+        ThingTypeCode: thingTypeCode,
         ThingModelVersion: thingModelVersion,
     }
 }
@@ -96,7 +96,7 @@ func NewDescribeThingModelRequestWithoutParam() *DescribeThingModelRequest {
 
     return &DescribeThingModelRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/coreinstances/{instanceId}/thingModel:describeThingModel",
+            URL:     "/regions/{regionId}/coreinstances/{instanceId}/thingModel:describe",
             Method:  "GET",
             Header:  nil,
             Version: "v2",
@@ -114,9 +114,9 @@ func (r *DescribeThingModelRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param thingModelId: 物模型ID编号(Required) */
-func (r *DescribeThingModelRequest) SetThingModelId(thingModelId string) {
-    r.ThingModelId = thingModelId
+/* param thingTypeCode: 物类型Code(Required) */
+func (r *DescribeThingModelRequest) SetThingTypeCode(thingTypeCode string) {
+    r.ThingTypeCode = thingTypeCode
 }
 
 /* param thingModelVersion: 版本号。如果为空，则返回最新版本(Optional) */

@@ -21,7 +21,7 @@ import (
     iotcore "github.com/jdcloud-api/jdcloud-sdk-go/services/iotcore/models"
 )
 
-type InvokeFunctionRequest struct {
+type DescribeDeviceTopoRequest struct {
 
     core.JDCloudRequest
 
@@ -31,66 +31,66 @@ type InvokeFunctionRequest struct {
     /* 实例Id  */
     InstanceId string `json:"instanceId"`
 
-    /* 设备方法  */
-    DeviceFunctionVO *iotcore.DeviceFunctionVO `json:"deviceFunctionVO"`
+    /* 方法查询请求  */
+    DeviceTopoPageBO *iotcore.DeviceTopoPageBO `json:"deviceTopoPageBO"`
 }
 
 /*
  * param regionId: 区域id (Required)
  * param instanceId: 实例Id (Required)
- * param deviceFunctionVO: 设备方法 (Required)
+ * param deviceTopoPageBO: 方法查询请求 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewInvokeFunctionRequest(
+func NewDescribeDeviceTopoRequest(
     regionId string,
     instanceId string,
-    deviceFunctionVO *iotcore.DeviceFunctionVO,
-) *InvokeFunctionRequest {
+    deviceTopoPageBO *iotcore.DeviceTopoPageBO,
+) *DescribeDeviceTopoRequest {
 
-	return &InvokeFunctionRequest{
+	return &DescribeDeviceTopoRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/coreinstances/{instanceId}/function:invokeFunction",
+			URL:     "/regions/{regionId}/coreinstances/{instanceId}/deviceTopo:describe",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v2",
 		},
         RegionId: regionId,
         InstanceId: instanceId,
-        DeviceFunctionVO: deviceFunctionVO,
+        DeviceTopoPageBO: deviceTopoPageBO,
 	}
 }
 
 /*
  * param regionId: 区域id (Required)
  * param instanceId: 实例Id (Required)
- * param deviceFunctionVO: 设备方法 (Required)
+ * param deviceTopoPageBO: 方法查询请求 (Required)
  */
-func NewInvokeFunctionRequestWithAllParams(
+func NewDescribeDeviceTopoRequestWithAllParams(
     regionId string,
     instanceId string,
-    deviceFunctionVO *iotcore.DeviceFunctionVO,
-) *InvokeFunctionRequest {
+    deviceTopoPageBO *iotcore.DeviceTopoPageBO,
+) *DescribeDeviceTopoRequest {
 
-    return &InvokeFunctionRequest{
+    return &DescribeDeviceTopoRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/coreinstances/{instanceId}/function:invokeFunction",
+            URL:     "/regions/{regionId}/coreinstances/{instanceId}/deviceTopo:describe",
             Method:  "POST",
             Header:  nil,
             Version: "v2",
         },
         RegionId: regionId,
         InstanceId: instanceId,
-        DeviceFunctionVO: deviceFunctionVO,
+        DeviceTopoPageBO: deviceTopoPageBO,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewInvokeFunctionRequestWithoutParam() *InvokeFunctionRequest {
+func NewDescribeDeviceTopoRequestWithoutParam() *DescribeDeviceTopoRequest {
 
-    return &InvokeFunctionRequest{
+    return &DescribeDeviceTopoRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/coreinstances/{instanceId}/function:invokeFunction",
+            URL:     "/regions/{regionId}/coreinstances/{instanceId}/deviceTopo:describe",
             Method:  "POST",
             Header:  nil,
             Version: "v2",
@@ -99,35 +99,35 @@ func NewInvokeFunctionRequestWithoutParam() *InvokeFunctionRequest {
 }
 
 /* param regionId: 区域id(Required) */
-func (r *InvokeFunctionRequest) SetRegionId(regionId string) {
+func (r *DescribeDeviceTopoRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 实例Id(Required) */
-func (r *InvokeFunctionRequest) SetInstanceId(instanceId string) {
+func (r *DescribeDeviceTopoRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param deviceFunctionVO: 设备方法(Required) */
-func (r *InvokeFunctionRequest) SetDeviceFunctionVO(deviceFunctionVO *iotcore.DeviceFunctionVO) {
-    r.DeviceFunctionVO = deviceFunctionVO
+/* param deviceTopoPageBO: 方法查询请求(Required) */
+func (r *DescribeDeviceTopoRequest) SetDeviceTopoPageBO(deviceTopoPageBO *iotcore.DeviceTopoPageBO) {
+    r.DeviceTopoPageBO = deviceTopoPageBO
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r InvokeFunctionRequest) GetRegionId() string {
+func (r DescribeDeviceTopoRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type InvokeFunctionResponse struct {
+type DescribeDeviceTopoResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result InvokeFunctionResult `json:"result"`
+    Result DescribeDeviceTopoResult `json:"result"`
 }
 
-type InvokeFunctionResult struct {
-    Code int `json:"code"`
-    Message string `json:"message"`
-    Success bool `json:"success"`
-    ReturnValues iotcore.DeviceFunctionVO `json:"returnValues"`
+type DescribeDeviceTopoResult struct {
+    PageSize int `json:"pageSize"`
+    CurrentPage int `json:"currentPage"`
+    TotalCount int `json:"totalCount"`
+    List []iotcore.DeviceTopoRecordVO `json:"list"`
 }

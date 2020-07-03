@@ -34,6 +34,12 @@ type LoongrayQueryPageRequest struct {
     /* 设备名称，模糊匹配 (Optional) */
     DeviceName *string `json:"deviceName"`
 
+    /* 设备厂商，模糊匹配 (Optional) */
+    Manufacturer *string `json:"manufacturer"`
+
+    /* 设备型号，模糊匹配 (Optional) */
+    Model *string `json:"model"`
+
     /* 设备状态 0-未激活，1-激活离线，2-激活在线 (Optional) */
     Status *int `json:"status"`
 
@@ -92,6 +98,8 @@ func NewLoongrayQueryPageRequest(
  * param instanceId: 设备归属的实例ID (Required)
  * param regionId: 设备归属的实例所在区域 (Required)
  * param deviceName: 设备名称，模糊匹配 (Optional)
+ * param manufacturer: 设备厂商，模糊匹配 (Optional)
+ * param model: 设备型号，模糊匹配 (Optional)
  * param status: 设备状态 0-未激活，1-激活离线，2-激活在线 (Optional)
  * param productKey: 设备所归属的产品Key (Optional)
  * param deviceType: 设备类型，同产品类型，0-设备，1-网关 (Optional)
@@ -107,6 +115,8 @@ func NewLoongrayQueryPageRequestWithAllParams(
     instanceId string,
     regionId string,
     deviceName *string,
+    manufacturer *string,
+    model *string,
     status *int,
     productKey *string,
     deviceType *int,
@@ -129,6 +139,8 @@ func NewLoongrayQueryPageRequestWithAllParams(
         InstanceId: instanceId,
         RegionId: regionId,
         DeviceName: deviceName,
+        Manufacturer: manufacturer,
+        Model: model,
         Status: status,
         ProductKey: productKey,
         DeviceType: deviceType,
@@ -168,6 +180,16 @@ func (r *LoongrayQueryPageRequest) SetRegionId(regionId string) {
 /* param deviceName: 设备名称，模糊匹配(Optional) */
 func (r *LoongrayQueryPageRequest) SetDeviceName(deviceName string) {
     r.DeviceName = &deviceName
+}
+
+/* param manufacturer: 设备厂商，模糊匹配(Optional) */
+func (r *LoongrayQueryPageRequest) SetManufacturer(manufacturer string) {
+    r.Manufacturer = &manufacturer
+}
+
+/* param model: 设备型号，模糊匹配(Optional) */
+func (r *LoongrayQueryPageRequest) SetModel(model string) {
+    r.Model = &model
 }
 
 /* param status: 设备状态 0-未激活，1-激活离线，2-激活在线(Optional) */

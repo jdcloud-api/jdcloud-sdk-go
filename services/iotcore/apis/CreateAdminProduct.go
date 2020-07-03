@@ -47,6 +47,9 @@ type CreateAdminProductRequest struct {
 
     /* 内部标签，内部参数，用户不可见，隐藏标签：hidden:true (Optional) */
     InternalTags *interface{} `json:"internalTags"`
+
+    /* 产品名下所有设备的采集器类型  */
+    CollDeviceType string `json:"collDeviceType"`
 }
 
 /*
@@ -57,6 +60,7 @@ type CreateAdminProductRequest struct {
 0：设备。设备不能挂载子设备。可以直连物联网平台，也可以作为网关的子设备连接物联网平台
 1：网关。网关可以挂载子设备，具有子设备管理模块，维持子设备的拓扑关系，和将拓扑关系同步到物联网平台
  (Required)
+ * param collDeviceType: 产品名下所有设备的采集器类型 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -65,6 +69,7 @@ func NewCreateAdminProductRequest(
     instanceId string,
     productName string,
     productType int,
+    collDeviceType string,
 ) *CreateAdminProductRequest {
 
 	return &CreateAdminProductRequest{
@@ -78,6 +83,7 @@ func NewCreateAdminProductRequest(
         InstanceId: instanceId,
         ProductName: productName,
         ProductType: productType,
+        CollDeviceType: collDeviceType,
 	}
 }
 
@@ -92,6 +98,7 @@ func NewCreateAdminProductRequest(
  * param productDescription: 产品描述，80字符以内 (Optional)
  * param templateId: 物模型模板ID，内部参数，用户不可见，默认为自定义 (Optional)
  * param internalTags: 内部标签，内部参数，用户不可见，隐藏标签：hidden:true (Optional)
+ * param collDeviceType: 产品名下所有设备的采集器类型 (Required)
  */
 func NewCreateAdminProductRequestWithAllParams(
     regionId string,
@@ -101,6 +108,7 @@ func NewCreateAdminProductRequestWithAllParams(
     productDescription *string,
     templateId *string,
     internalTags *interface{},
+    collDeviceType string,
 ) *CreateAdminProductRequest {
 
     return &CreateAdminProductRequest{
@@ -117,6 +125,7 @@ func NewCreateAdminProductRequestWithAllParams(
         ProductDescription: productDescription,
         TemplateId: templateId,
         InternalTags: internalTags,
+        CollDeviceType: collDeviceType,
     }
 }
 
@@ -169,6 +178,11 @@ func (r *CreateAdminProductRequest) SetTemplateId(templateId string) {
 /* param internalTags: 内部标签，内部参数，用户不可见，隐藏标签：hidden:true(Optional) */
 func (r *CreateAdminProductRequest) SetInternalTags(internalTags interface{}) {
     r.InternalTags = &internalTags
+}
+
+/* param collDeviceType: 产品名下所有设备的采集器类型(Required) */
+func (r *CreateAdminProductRequest) SetCollDeviceType(collDeviceType string) {
+    r.CollDeviceType = collDeviceType
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

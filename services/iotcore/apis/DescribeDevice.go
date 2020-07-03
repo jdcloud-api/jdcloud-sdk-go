@@ -21,7 +21,7 @@ import (
     iotcore "github.com/jdcloud-api/jdcloud-sdk-go/services/iotcore/models"
 )
 
-type InvokeFunctionRequest struct {
+type DescribeDeviceRequest struct {
 
     core.JDCloudRequest
 
@@ -31,67 +31,67 @@ type InvokeFunctionRequest struct {
     /* 实例Id  */
     InstanceId string `json:"instanceId"`
 
-    /* 设备方法  */
-    DeviceFunctionVO *iotcore.DeviceFunctionVO `json:"deviceFunctionVO"`
+    /* 设备ID  */
+    DeviceId string `json:"deviceId"`
 }
 
 /*
  * param regionId: 区域id (Required)
  * param instanceId: 实例Id (Required)
- * param deviceFunctionVO: 设备方法 (Required)
+ * param deviceId: 设备ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewInvokeFunctionRequest(
+func NewDescribeDeviceRequest(
     regionId string,
     instanceId string,
-    deviceFunctionVO *iotcore.DeviceFunctionVO,
-) *InvokeFunctionRequest {
+    deviceId string,
+) *DescribeDeviceRequest {
 
-	return &InvokeFunctionRequest{
+	return &DescribeDeviceRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/coreinstances/{instanceId}/function:invokeFunction",
-			Method:  "POST",
+			URL:     "/regions/{regionId}/coreinstances/{instanceId}/device:describe",
+			Method:  "GET",
 			Header:  nil,
 			Version: "v2",
 		},
         RegionId: regionId,
         InstanceId: instanceId,
-        DeviceFunctionVO: deviceFunctionVO,
+        DeviceId: deviceId,
 	}
 }
 
 /*
  * param regionId: 区域id (Required)
  * param instanceId: 实例Id (Required)
- * param deviceFunctionVO: 设备方法 (Required)
+ * param deviceId: 设备ID (Required)
  */
-func NewInvokeFunctionRequestWithAllParams(
+func NewDescribeDeviceRequestWithAllParams(
     regionId string,
     instanceId string,
-    deviceFunctionVO *iotcore.DeviceFunctionVO,
-) *InvokeFunctionRequest {
+    deviceId string,
+) *DescribeDeviceRequest {
 
-    return &InvokeFunctionRequest{
+    return &DescribeDeviceRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/coreinstances/{instanceId}/function:invokeFunction",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/coreinstances/{instanceId}/device:describe",
+            Method:  "GET",
             Header:  nil,
             Version: "v2",
         },
         RegionId: regionId,
         InstanceId: instanceId,
-        DeviceFunctionVO: deviceFunctionVO,
+        DeviceId: deviceId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewInvokeFunctionRequestWithoutParam() *InvokeFunctionRequest {
+func NewDescribeDeviceRequestWithoutParam() *DescribeDeviceRequest {
 
-    return &InvokeFunctionRequest{
+    return &DescribeDeviceRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/coreinstances/{instanceId}/function:invokeFunction",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/coreinstances/{instanceId}/device:describe",
+            Method:  "GET",
             Header:  nil,
             Version: "v2",
         },
@@ -99,35 +99,32 @@ func NewInvokeFunctionRequestWithoutParam() *InvokeFunctionRequest {
 }
 
 /* param regionId: 区域id(Required) */
-func (r *InvokeFunctionRequest) SetRegionId(regionId string) {
+func (r *DescribeDeviceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 实例Id(Required) */
-func (r *InvokeFunctionRequest) SetInstanceId(instanceId string) {
+func (r *DescribeDeviceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param deviceFunctionVO: 设备方法(Required) */
-func (r *InvokeFunctionRequest) SetDeviceFunctionVO(deviceFunctionVO *iotcore.DeviceFunctionVO) {
-    r.DeviceFunctionVO = deviceFunctionVO
+/* param deviceId: 设备ID(Required) */
+func (r *DescribeDeviceRequest) SetDeviceId(deviceId string) {
+    r.DeviceId = deviceId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r InvokeFunctionRequest) GetRegionId() string {
+func (r DescribeDeviceRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type InvokeFunctionResponse struct {
+type DescribeDeviceResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result InvokeFunctionResult `json:"result"`
+    Result DescribeDeviceResult `json:"result"`
 }
 
-type InvokeFunctionResult struct {
-    Code int `json:"code"`
-    Message string `json:"message"`
-    Success bool `json:"success"`
-    ReturnValues iotcore.DeviceFunctionVO `json:"returnValues"`
+type DescribeDeviceResult struct {
+    DeviceInfoVO iotcore.DeviceInfoVO `json:"deviceInfoVO"`
 }

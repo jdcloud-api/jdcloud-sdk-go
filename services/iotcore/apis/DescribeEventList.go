@@ -21,7 +21,7 @@ import (
     iotcore "github.com/jdcloud-api/jdcloud-sdk-go/services/iotcore/models"
 )
 
-type InvokeFunctionRequest struct {
+type DescribeEventListRequest struct {
 
     core.JDCloudRequest
 
@@ -31,66 +31,66 @@ type InvokeFunctionRequest struct {
     /* 实例Id  */
     InstanceId string `json:"instanceId"`
 
-    /* 设备方法  */
-    DeviceFunctionVO *iotcore.DeviceFunctionVO `json:"deviceFunctionVO"`
+    /* 事件查询请求  */
+    EventReportPageBo *iotcore.EventReportPageBo `json:"eventReportPageBo"`
 }
 
 /*
  * param regionId: 区域id (Required)
  * param instanceId: 实例Id (Required)
- * param deviceFunctionVO: 设备方法 (Required)
+ * param eventReportPageBo: 事件查询请求 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewInvokeFunctionRequest(
+func NewDescribeEventListRequest(
     regionId string,
     instanceId string,
-    deviceFunctionVO *iotcore.DeviceFunctionVO,
-) *InvokeFunctionRequest {
+    eventReportPageBo *iotcore.EventReportPageBo,
+) *DescribeEventListRequest {
 
-	return &InvokeFunctionRequest{
+	return &DescribeEventListRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/coreinstances/{instanceId}/function:invokeFunction",
+			URL:     "/regions/{regionId}/coreinstances/{instanceId}/event:list",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v2",
 		},
         RegionId: regionId,
         InstanceId: instanceId,
-        DeviceFunctionVO: deviceFunctionVO,
+        EventReportPageBo: eventReportPageBo,
 	}
 }
 
 /*
  * param regionId: 区域id (Required)
  * param instanceId: 实例Id (Required)
- * param deviceFunctionVO: 设备方法 (Required)
+ * param eventReportPageBo: 事件查询请求 (Required)
  */
-func NewInvokeFunctionRequestWithAllParams(
+func NewDescribeEventListRequestWithAllParams(
     regionId string,
     instanceId string,
-    deviceFunctionVO *iotcore.DeviceFunctionVO,
-) *InvokeFunctionRequest {
+    eventReportPageBo *iotcore.EventReportPageBo,
+) *DescribeEventListRequest {
 
-    return &InvokeFunctionRequest{
+    return &DescribeEventListRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/coreinstances/{instanceId}/function:invokeFunction",
+            URL:     "/regions/{regionId}/coreinstances/{instanceId}/event:list",
             Method:  "POST",
             Header:  nil,
             Version: "v2",
         },
         RegionId: regionId,
         InstanceId: instanceId,
-        DeviceFunctionVO: deviceFunctionVO,
+        EventReportPageBo: eventReportPageBo,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewInvokeFunctionRequestWithoutParam() *InvokeFunctionRequest {
+func NewDescribeEventListRequestWithoutParam() *DescribeEventListRequest {
 
-    return &InvokeFunctionRequest{
+    return &DescribeEventListRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/coreinstances/{instanceId}/function:invokeFunction",
+            URL:     "/regions/{regionId}/coreinstances/{instanceId}/event:list",
             Method:  "POST",
             Header:  nil,
             Version: "v2",
@@ -99,35 +99,35 @@ func NewInvokeFunctionRequestWithoutParam() *InvokeFunctionRequest {
 }
 
 /* param regionId: 区域id(Required) */
-func (r *InvokeFunctionRequest) SetRegionId(regionId string) {
+func (r *DescribeEventListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: 实例Id(Required) */
-func (r *InvokeFunctionRequest) SetInstanceId(instanceId string) {
+func (r *DescribeEventListRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param deviceFunctionVO: 设备方法(Required) */
-func (r *InvokeFunctionRequest) SetDeviceFunctionVO(deviceFunctionVO *iotcore.DeviceFunctionVO) {
-    r.DeviceFunctionVO = deviceFunctionVO
+/* param eventReportPageBo: 事件查询请求(Required) */
+func (r *DescribeEventListRequest) SetEventReportPageBo(eventReportPageBo *iotcore.EventReportPageBo) {
+    r.EventReportPageBo = eventReportPageBo
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r InvokeFunctionRequest) GetRegionId() string {
+func (r DescribeEventListRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type InvokeFunctionResponse struct {
+type DescribeEventListResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result InvokeFunctionResult `json:"result"`
+    Result DescribeEventListResult `json:"result"`
 }
 
-type InvokeFunctionResult struct {
-    Code int `json:"code"`
-    Message string `json:"message"`
-    Success bool `json:"success"`
-    ReturnValues iotcore.DeviceFunctionVO `json:"returnValues"`
+type DescribeEventListResult struct {
+    PageSize int `json:"pageSize"`
+    CurrentPage int `json:"currentPage"`
+    TotalCount int `json:"totalCount"`
+    List []iotcore.EventReportVo `json:"list"`
 }

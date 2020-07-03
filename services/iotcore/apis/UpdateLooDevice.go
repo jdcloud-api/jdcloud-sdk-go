@@ -51,16 +51,12 @@ type UpdateLooDeviceRequest struct {
 
     /* 心跳 (Optional) */
     DeviceName *string `json:"deviceName"`
-
-    /* 设备类型  */
-    DeviceType string `json:"deviceType"`
 }
 
 /*
  * param instanceId: 设备归属的实例ID (Required)
  * param regionId: 设备归属的实例所在区域 (Required)
  * param deviceId: 设备Id (Required)
- * param deviceType: 设备类型 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -68,7 +64,6 @@ func NewUpdateLooDeviceRequest(
     instanceId string,
     regionId string,
     deviceId string,
-    deviceType string,
 ) *UpdateLooDeviceRequest {
 
 	return &UpdateLooDeviceRequest{
@@ -81,7 +76,6 @@ func NewUpdateLooDeviceRequest(
         InstanceId: instanceId,
         RegionId: regionId,
         DeviceId: deviceId,
-        DeviceType: deviceType,
 	}
 }
 
@@ -95,7 +89,6 @@ func NewUpdateLooDeviceRequest(
  * param status: 设备状态 (Optional)
  * param identifier: 连接码 (Optional)
  * param deviceName: 心跳 (Optional)
- * param deviceType: 设备类型 (Required)
  */
 func NewUpdateLooDeviceRequestWithAllParams(
     instanceId string,
@@ -107,7 +100,6 @@ func NewUpdateLooDeviceRequestWithAllParams(
     status *int,
     identifier *string,
     deviceName *string,
-    deviceType string,
 ) *UpdateLooDeviceRequest {
 
     return &UpdateLooDeviceRequest{
@@ -126,7 +118,6 @@ func NewUpdateLooDeviceRequestWithAllParams(
         Status: status,
         Identifier: identifier,
         DeviceName: deviceName,
-        DeviceType: deviceType,
     }
 }
 
@@ -186,11 +177,6 @@ func (r *UpdateLooDeviceRequest) SetIdentifier(identifier string) {
 /* param deviceName: 心跳(Optional) */
 func (r *UpdateLooDeviceRequest) SetDeviceName(deviceName string) {
     r.DeviceName = &deviceName
-}
-
-/* param deviceType: 设备类型(Required) */
-func (r *UpdateLooDeviceRequest) SetDeviceType(deviceType string) {
-    r.DeviceType = deviceType
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

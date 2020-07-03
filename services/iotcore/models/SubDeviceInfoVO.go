@@ -17,17 +17,17 @@
 package models
 
 
-type DeviceFunctionVO struct {
+type SubDeviceInfoVO struct {
 
-    /* 设备标识Id  */
-    DeviceId string `json:"deviceId"`
+    /* 子设备ID  */
+    SubDeviceId string `json:"subDeviceId"`
 
-    /* 方法Key (Optional) */
-    FunctionKey *string `json:"functionKey"`
+    /* 子设备名称 (Optional) */
+    SubDeviceName *string `json:"subDeviceName"`
 
-    /* 输入参数（Map<String,Object>类型） (Optional) */
-    InParams *interface{} `json:"inParams"`
+    /* 设备驱动名 (Optional) */
+    ServiceName *string `json:"serviceName"`
 
-    /* 输出参数（Map<String,Object>类型） (Optional) */
-    OutParams *interface{} `json:"outParams"`
+    /* 设备通讯协议的详细说明 (Optional) */
+    ProtocolSpec *string `json:"protocolSpec"`
 }

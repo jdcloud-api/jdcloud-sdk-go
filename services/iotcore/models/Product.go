@@ -38,4 +38,7 @@ type Product struct {
 
     /* 产品类型，如自定义等 (Optional) */
     TemplateName string `json:"templateName"`
+
+    /* 产品的采集器类型 (Optional) */
+    CollDeviceType string `json:"collDeviceType"`
 }
