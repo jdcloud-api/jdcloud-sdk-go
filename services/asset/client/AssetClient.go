@@ -40,7 +40,7 @@ func NewAssetClient(credential *core.Credential) *AssetClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "asset",
-            Revision:    "0.0.2",
+            Revision:    "0.0.3",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
