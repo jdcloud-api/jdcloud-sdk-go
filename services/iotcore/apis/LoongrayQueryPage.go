@@ -69,6 +69,9 @@ type LoongrayQueryPageRequest struct {
 
     /* 设备采集器类型 (Optional) */
     DeviceCollectorType *string `json:"deviceCollectorType"`
+
+    /* 查询的userPin (Optional) */
+    QueryUserPin *string `json:"queryUserPin"`
 }
 
 /*
@@ -110,6 +113,7 @@ func NewLoongrayQueryPageRequest(
  * param parentId: 父设备Id (Optional)
  * param orderId: 订单号 (Optional)
  * param deviceCollectorType: 设备采集器类型 (Optional)
+ * param queryUserPin: 查询的userPin (Optional)
  */
 func NewLoongrayQueryPageRequestWithAllParams(
     instanceId string,
@@ -127,6 +131,7 @@ func NewLoongrayQueryPageRequestWithAllParams(
     parentId *string,
     orderId *int,
     deviceCollectorType *string,
+    queryUserPin *string,
 ) *LoongrayQueryPageRequest {
 
     return &LoongrayQueryPageRequest{
@@ -151,6 +156,7 @@ func NewLoongrayQueryPageRequestWithAllParams(
         ParentId: parentId,
         OrderId: orderId,
         DeviceCollectorType: deviceCollectorType,
+        QueryUserPin: queryUserPin,
     }
 }
 
@@ -240,6 +246,11 @@ func (r *LoongrayQueryPageRequest) SetOrderId(orderId int) {
 /* param deviceCollectorType: 设备采集器类型(Optional) */
 func (r *LoongrayQueryPageRequest) SetDeviceCollectorType(deviceCollectorType string) {
     r.DeviceCollectorType = &deviceCollectorType
+}
+
+/* param queryUserPin: 查询的userPin(Optional) */
+func (r *LoongrayQueryPageRequest) SetQueryUserPin(queryUserPin string) {
+    r.QueryUserPin = &queryUserPin
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

@@ -40,7 +40,7 @@ func NewIotcoreClient(credential *core.Credential) *IotcoreClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "iotcore",
-            Revision:    "1.1.24",
+            Revision:    "1.1.25",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -328,6 +328,26 @@ func (c *IotcoreClient) DeleteProduct(request *iotcore.DeleteProductRequest) (*i
     }
 
     jdResp := &iotcore.DeleteProductResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取分组列表 */
+func (c *IotcoreClient) GetDeviceGroup(request *iotcore.GetDeviceGroupRequest) (*iotcore.GetDeviceGroupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotcore.GetDeviceGroupResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -837,6 +857,26 @@ func (c *IotcoreClient) CreateProductTopic(request *iotcore.CreateProductTopicRe
     return jdResp, err
 }
 
+/* 获取组列表 */
+func (c *IotcoreClient) GetDeviceGroupList(request *iotcore.GetDeviceGroupListRequest) (*iotcore.GetDeviceGroupListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotcore.GetDeviceGroupListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查看产品自定义Topic */
 func (c *IotcoreClient) DescribeProductTopic(request *iotcore.DescribeProductTopicRequest) (*iotcore.DescribeProductTopicResponse, error) {
     if request == nil {
@@ -1028,6 +1068,26 @@ func (c *IotcoreClient) ListProductAbilities(request *iotcore.ListProductAbiliti
     }
 
     jdResp := &iotcore.ListProductAbilitiesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取分组列表 */
+func (c *IotcoreClient) FindDeviceGroupLinkPage(request *iotcore.FindDeviceGroupLinkPageRequest) (*iotcore.FindDeviceGroupLinkPageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotcore.FindDeviceGroupLinkPageResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
