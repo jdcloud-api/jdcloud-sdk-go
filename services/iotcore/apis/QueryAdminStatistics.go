@@ -38,6 +38,9 @@ type QueryAdminStatisticsRequest struct {
 
     /* 采集器类型 (Optional) */
     DeviceCollectorType *string `json:"deviceCollectorType"`
+
+    /* 查询的用户信息 (Optional) */
+    QueryUserPin *string `json:"queryUserPin"`
 }
 
 /*
@@ -69,6 +72,7 @@ func NewQueryAdminStatisticsRequest(
  * param productKey: 过滤条件，产品Key (Optional)
  * param parentId: 针对parentId下的子设备进行统计 (Optional)
  * param deviceCollectorType: 采集器类型 (Optional)
+ * param queryUserPin: 查询的用户信息 (Optional)
  */
 func NewQueryAdminStatisticsRequestWithAllParams(
     instanceId string,
@@ -76,6 +80,7 @@ func NewQueryAdminStatisticsRequestWithAllParams(
     productKey *string,
     parentId *string,
     deviceCollectorType *string,
+    queryUserPin *string,
 ) *QueryAdminStatisticsRequest {
 
     return &QueryAdminStatisticsRequest{
@@ -90,6 +95,7 @@ func NewQueryAdminStatisticsRequestWithAllParams(
         ProductKey: productKey,
         ParentId: parentId,
         DeviceCollectorType: deviceCollectorType,
+        QueryUserPin: queryUserPin,
     }
 }
 
@@ -129,6 +135,11 @@ func (r *QueryAdminStatisticsRequest) SetParentId(parentId string) {
 /* param deviceCollectorType: 采集器类型(Optional) */
 func (r *QueryAdminStatisticsRequest) SetDeviceCollectorType(deviceCollectorType string) {
     r.DeviceCollectorType = &deviceCollectorType
+}
+
+/* param queryUserPin: 查询的用户信息(Optional) */
+func (r *QueryAdminStatisticsRequest) SetQueryUserPin(queryUserPin string) {
+    r.QueryUserPin = &queryUserPin
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
