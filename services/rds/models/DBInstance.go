@@ -32,6 +32,9 @@ type DBInstance struct {
     /* 存储类型，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md)<br>- 仅支持MySQL，Percona，MariaDB, SQL Server (Optional) */
     InstanceStorageType string `json:"instanceStorageType"`
 
+    /* 实例数据加密. false：不加密; true：加密 (Optional) */
+    StorageEncrypted bool `json:"storageEncrypted"`
+
     /* 实例引擎类型，如MySQL或SQL Server等，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Optional) */
     Engine string `json:"engine"`
 
@@ -85,4 +88,7 @@ type DBInstance struct {
 
     /* MySQL、PostgreSQL只读实例对应的主实例ID (Optional) */
     SourceInstanceId string `json:"sourceInstanceId"`
+
+    /* 应用访问端口<br>- 仅支持MySQL (Optional) */
+    InstancePort string `json:"instancePort"`
 }

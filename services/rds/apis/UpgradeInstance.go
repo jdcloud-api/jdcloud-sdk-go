@@ -20,7 +20,7 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type DescribeBackupPolicyRequest struct {
+type UpgradeInstanceRequest struct {
 
     core.JDCloudRequest
 
@@ -29,6 +29,9 @@ type DescribeBackupPolicyRequest struct {
 
     /* RDS 实例ID，唯一标识一个RDS实例  */
     InstanceId string `json:"instanceId"`
+
+    /* 升级操作生效时间，取值为immediate和MaintainTime，默认值为immediate；immediate表示立即生效，MaintainTime表示在运维时间窗口内生效；**备注：MaintainTime暂不支持 (Optional) */
+    UpgradeTime *string `json:"upgradeTime"`
 }
 
 /*
@@ -37,15 +40,15 @@ type DescribeBackupPolicyRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeBackupPolicyRequest(
+func NewUpgradeInstanceRequest(
     regionId string,
     instanceId string,
-) *DescribeBackupPolicyRequest {
+) *UpgradeInstanceRequest {
 
-	return &DescribeBackupPolicyRequest{
+	return &UpgradeInstanceRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}:describeBackupPolicy",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/instances/{instanceId}/upgradeInstance",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
@@ -57,31 +60,34 @@ func NewDescribeBackupPolicyRequest(
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
+ * param upgradeTime: 升级操作生效时间，取值为immediate和MaintainTime，默认值为immediate；immediate表示立即生效，MaintainTime表示在运维时间窗口内生效；**备注：MaintainTime暂不支持 (Optional)
  */
-func NewDescribeBackupPolicyRequestWithAllParams(
+func NewUpgradeInstanceRequestWithAllParams(
     regionId string,
     instanceId string,
-) *DescribeBackupPolicyRequest {
+    upgradeTime *string,
+) *UpgradeInstanceRequest {
 
-    return &DescribeBackupPolicyRequest{
+    return &UpgradeInstanceRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:describeBackupPolicy",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/instances/{instanceId}/upgradeInstance",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         InstanceId: instanceId,
+        UpgradeTime: upgradeTime,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeBackupPolicyRequestWithoutParam() *DescribeBackupPolicyRequest {
+func NewUpgradeInstanceRequestWithoutParam() *UpgradeInstanceRequest {
 
-    return &DescribeBackupPolicyRequest{
+    return &UpgradeInstanceRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:describeBackupPolicy",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/instances/{instanceId}/upgradeInstance",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
@@ -89,32 +95,31 @@ func NewDescribeBackupPolicyRequestWithoutParam() *DescribeBackupPolicyRequest {
 }
 
 /* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
-func (r *DescribeBackupPolicyRequest) SetRegionId(regionId string) {
+func (r *UpgradeInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
-func (r *DescribeBackupPolicyRequest) SetInstanceId(instanceId string) {
+func (r *UpgradeInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
+}
+
+/* param upgradeTime: 升级操作生效时间，取值为immediate和MaintainTime，默认值为immediate；immediate表示立即生效，MaintainTime表示在运维时间窗口内生效；**备注：MaintainTime暂不支持(Optional) */
+func (r *UpgradeInstanceRequest) SetUpgradeTime(upgradeTime string) {
+    r.UpgradeTime = &upgradeTime
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeBackupPolicyRequest) GetRegionId() string {
+func (r UpgradeInstanceRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeBackupPolicyResponse struct {
+type UpgradeInstanceResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeBackupPolicyResult `json:"result"`
+    Result UpgradeInstanceResult `json:"result"`
 }
 
-type DescribeBackupPolicyResult struct {
-    StartWindow string `json:"startWindow"`
-    RetentionPeriod int `json:"retentionPeriod"`
-    BinlogRetentionPeriod int `json:"binlogRetentionPeriod"`
-    BinlogUsageLimit int `json:"binlogUsageLimit"`
-    CycleMode int `json:"cycleMode"`
-    BackupBinlog string `json:"backupBinlog"`
+type UpgradeInstanceResult struct {
 }

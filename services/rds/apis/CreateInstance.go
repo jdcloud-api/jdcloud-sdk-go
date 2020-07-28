@@ -113,4 +113,5 @@ type CreateInstanceResponse struct {
 
 type CreateInstanceResult struct {
     InstanceId string `json:"instanceId"`
+    OrderId string `json:"orderId"`
 }

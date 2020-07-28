@@ -18,75 +18,70 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    rds "github.com/jdcloud-api/jdcloud-sdk-go/services/rds/models"
 )
 
-type DescribePrivilegeRequest struct {
+type DescribeAccountsForOpsRequest struct {
 
     core.JDCloudRequest
 
     /* 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)  */
     RegionId string `json:"regionId"`
 
-    /* 设置可见的引擎类型，如 MySQL 等  */
-    Engine string `json:"engine"`
-
-    /* RDS 实例ID，唯一标识一个RDS实例 (Optional) */
-    InstanceId *string `json:"instanceId"`
+    /* RDS 实例ID，唯一标识一个RDS实例  */
+    InstanceId string `json:"instanceId"`
 }
 
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
- * param engine: 设置可见的引擎类型，如 MySQL 等 (Required)
+ * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribePrivilegeRequest(
+func NewDescribeAccountsForOpsRequest(
     regionId string,
-    engine string,
-) *DescribePrivilegeRequest {
+    instanceId string,
+) *DescribeAccountsForOpsRequest {
 
-	return &DescribePrivilegeRequest{
+	return &DescribeAccountsForOpsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/common:describePrivilege",
+			URL:     "/regions/{regionId}/instances/{instanceId}/accountsForOps",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        Engine: engine,
+        InstanceId: instanceId,
 	}
 }
 
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
- * param engine: 设置可见的引擎类型，如 MySQL 等 (Required)
- * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Optional)
+ * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
  */
-func NewDescribePrivilegeRequestWithAllParams(
+func NewDescribeAccountsForOpsRequestWithAllParams(
     regionId string,
-    engine string,
-    instanceId *string,
-) *DescribePrivilegeRequest {
+    instanceId string,
+) *DescribeAccountsForOpsRequest {
 
-    return &DescribePrivilegeRequest{
+    return &DescribeAccountsForOpsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/common:describePrivilege",
+            URL:     "/regions/{regionId}/instances/{instanceId}/accountsForOps",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        Engine: engine,
         InstanceId: instanceId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribePrivilegeRequestWithoutParam() *DescribePrivilegeRequest {
+func NewDescribeAccountsForOpsRequestWithoutParam() *DescribeAccountsForOpsRequest {
 
-    return &DescribePrivilegeRequest{
+    return &DescribeAccountsForOpsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/common:describePrivilege",
+            URL:     "/regions/{regionId}/instances/{instanceId}/accountsForOps",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -95,34 +90,28 @@ func NewDescribePrivilegeRequestWithoutParam() *DescribePrivilegeRequest {
 }
 
 /* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
-func (r *DescribePrivilegeRequest) SetRegionId(regionId string) {
+func (r *DescribeAccountsForOpsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param engine: 设置可见的引擎类型，如 MySQL 等(Required) */
-func (r *DescribePrivilegeRequest) SetEngine(engine string) {
-    r.Engine = engine
-}
-
-/* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Optional) */
-func (r *DescribePrivilegeRequest) SetInstanceId(instanceId string) {
-    r.InstanceId = &instanceId
+/* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
+func (r *DescribeAccountsForOpsRequest) SetInstanceId(instanceId string) {
+    r.InstanceId = instanceId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribePrivilegeRequest) GetRegionId() string {
+func (r DescribeAccountsForOpsRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribePrivilegeResponse struct {
+type DescribeAccountsForOpsResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribePrivilegeResult `json:"result"`
+    Result DescribeAccountsForOpsResult `json:"result"`
 }
 
-type DescribePrivilegeResult struct {
-    GlobalPrivileges []string `json:"globalPrivileges"`
-    DatabasePrivileges []string `json:"databasePrivileges"`
-    TablePrivileges []string `json:"tablePrivileges"`
+type DescribeAccountsForOpsResult struct {
+    Accounts []rds.DBInstanceAccountForOps `json:"accounts"`
+    TotalCount int `json:"totalCount"`
 }

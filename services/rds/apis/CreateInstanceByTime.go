@@ -141,4 +141,5 @@ type CreateInstanceByTimeResponse struct {
 
 type CreateInstanceByTimeResult struct {
     InstanceId string `json:"instanceId"`
+    OrderId string `json:"orderId"`
 }

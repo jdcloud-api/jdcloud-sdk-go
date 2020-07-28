@@ -141,4 +141,5 @@ type CreateInstanceByTimeInCrossRegionResponse struct {
 
 type CreateInstanceByTimeInCrossRegionResult struct {
     InstanceId string `json:"instanceId"`
+    OrderId string `json:"orderId"`
 }
