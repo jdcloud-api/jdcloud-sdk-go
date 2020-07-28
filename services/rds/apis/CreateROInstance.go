@@ -59,6 +59,9 @@ type CreateROInstanceRequest struct {
 
     /* 创建只读实例的数目,缺省为1 (Optional) */
     Count *int `json:"count"`
+
+    /* 只读代理服务的ID，缺省值为 “NULL”，表示不绑定代理服务 (Optional) */
+    RoInstanceProxy *string `json:"roInstanceProxy"`
 }
 
 /*
@@ -109,6 +112,7 @@ func NewCreateROInstanceRequest(
  * param parameterGroup: 参数组ID，缺省采用和常规实例一样的参数组 (Optional)
  * param storageEncrypted: 实例数据加密(存储类型为云硬盘才支持数据加密)。false：不加密；true：加密。缺省为false。 (Optional)
  * param count: 创建只读实例的数目,缺省为1 (Optional)
+ * param roInstanceProxy: 只读代理服务的ID，缺省值为 “NULL”，表示不绑定代理服务 (Optional)
  */
 func NewCreateROInstanceRequestWithAllParams(
     regionId string,
@@ -123,6 +127,7 @@ func NewCreateROInstanceRequestWithAllParams(
     parameterGroup *string,
     storageEncrypted *bool,
     count *int,
+    roInstanceProxy *string,
 ) *CreateROInstanceRequest {
 
     return &CreateROInstanceRequest{
@@ -144,6 +149,7 @@ func NewCreateROInstanceRequestWithAllParams(
         ParameterGroup: parameterGroup,
         StorageEncrypted: storageEncrypted,
         Count: count,
+        RoInstanceProxy: roInstanceProxy,
     }
 }
 
@@ -218,6 +224,11 @@ func (r *CreateROInstanceRequest) SetStorageEncrypted(storageEncrypted bool) {
 /* param count: 创建只读实例的数目,缺省为1(Optional) */
 func (r *CreateROInstanceRequest) SetCount(count int) {
     r.Count = &count
+}
+
+/* param roInstanceProxy: 只读代理服务的ID，缺省值为 “NULL”，表示不绑定代理服务(Optional) */
+func (r *CreateROInstanceRequest) SetRoInstanceProxy(roInstanceProxy string) {
+    r.RoInstanceProxy = &roInstanceProxy
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

@@ -18,75 +18,70 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    rds "github.com/jdcloud-api/jdcloud-sdk-go/services/rds/models"
 )
 
-type DescribePrivilegeRequest struct {
+type DescribeReadWriteProxyAttributeRequest struct {
 
     core.JDCloudRequest
 
     /* 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)  */
     RegionId string `json:"regionId"`
 
-    /* 设置可见的引擎类型，如 MySQL 等  */
-    Engine string `json:"engine"`
-
-    /* RDS 实例ID，唯一标识一个RDS实例 (Optional) */
-    InstanceId *string `json:"instanceId"`
+    /* 读写分离代理服务ID  */
+    ReadWriteProxyId string `json:"readWriteProxyId"`
 }
 
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
- * param engine: 设置可见的引擎类型，如 MySQL 等 (Required)
+ * param readWriteProxyId: 读写分离代理服务ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribePrivilegeRequest(
+func NewDescribeReadWriteProxyAttributeRequest(
     regionId string,
-    engine string,
-) *DescribePrivilegeRequest {
+    readWriteProxyId string,
+) *DescribeReadWriteProxyAttributeRequest {
 
-	return &DescribePrivilegeRequest{
+	return &DescribeReadWriteProxyAttributeRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/common:describePrivilege",
+			URL:     "/regions/{regionId}/readWriteProxy/{readWriteProxyId}",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        Engine: engine,
+        ReadWriteProxyId: readWriteProxyId,
 	}
 }
 
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
- * param engine: 设置可见的引擎类型，如 MySQL 等 (Required)
- * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Optional)
+ * param readWriteProxyId: 读写分离代理服务ID (Required)
  */
-func NewDescribePrivilegeRequestWithAllParams(
+func NewDescribeReadWriteProxyAttributeRequestWithAllParams(
     regionId string,
-    engine string,
-    instanceId *string,
-) *DescribePrivilegeRequest {
+    readWriteProxyId string,
+) *DescribeReadWriteProxyAttributeRequest {
 
-    return &DescribePrivilegeRequest{
+    return &DescribeReadWriteProxyAttributeRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/common:describePrivilege",
+            URL:     "/regions/{regionId}/readWriteProxy/{readWriteProxyId}",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        Engine: engine,
-        InstanceId: instanceId,
+        ReadWriteProxyId: readWriteProxyId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribePrivilegeRequestWithoutParam() *DescribePrivilegeRequest {
+func NewDescribeReadWriteProxyAttributeRequestWithoutParam() *DescribeReadWriteProxyAttributeRequest {
 
-    return &DescribePrivilegeRequest{
+    return &DescribeReadWriteProxyAttributeRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/common:describePrivilege",
+            URL:     "/regions/{regionId}/readWriteProxy/{readWriteProxyId}",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -95,34 +90,27 @@ func NewDescribePrivilegeRequestWithoutParam() *DescribePrivilegeRequest {
 }
 
 /* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
-func (r *DescribePrivilegeRequest) SetRegionId(regionId string) {
+func (r *DescribeReadWriteProxyAttributeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param engine: 设置可见的引擎类型，如 MySQL 等(Required) */
-func (r *DescribePrivilegeRequest) SetEngine(engine string) {
-    r.Engine = engine
-}
-
-/* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Optional) */
-func (r *DescribePrivilegeRequest) SetInstanceId(instanceId string) {
-    r.InstanceId = &instanceId
+/* param readWriteProxyId: 读写分离代理服务ID(Required) */
+func (r *DescribeReadWriteProxyAttributeRequest) SetReadWriteProxyId(readWriteProxyId string) {
+    r.ReadWriteProxyId = readWriteProxyId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribePrivilegeRequest) GetRegionId() string {
+func (r DescribeReadWriteProxyAttributeRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribePrivilegeResponse struct {
+type DescribeReadWriteProxyAttributeResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribePrivilegeResult `json:"result"`
+    Result DescribeReadWriteProxyAttributeResult `json:"result"`
 }
 
-type DescribePrivilegeResult struct {
-    GlobalPrivileges []string `json:"globalPrivileges"`
-    DatabasePrivileges []string `json:"databasePrivileges"`
-    TablePrivileges []string `json:"tablePrivileges"`
+type DescribeReadWriteProxyAttributeResult struct {
+    ReadWriteProxy rds.ReadWriteProxy `json:"readWriteProxy"`
 }

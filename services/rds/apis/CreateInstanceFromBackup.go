@@ -141,4 +141,5 @@ type CreateInstanceFromBackupResponse struct {
 
 type CreateInstanceFromBackupResult struct {
     InstanceId string `json:"instanceId"`
+    OrderId string `json:"orderId"`
 }

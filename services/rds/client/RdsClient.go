@@ -40,7 +40,7 @@ func NewRdsClient(credential *core.Credential) *RdsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "rds",
-            Revision:    "0.8.6",
+            Revision:    "0.9.8",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -248,6 +248,46 @@ func (c *RdsClient) GrantPrivilege(request *rds.GrantPrivilegeRequest) (*rds.Gra
     }
 
     jdResp := &rds.GrantPrivilegeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 关闭读写分离代理服务的外网访问功能。关闭后，用户无法通过 Internet 连接读写分离代理服务，但可以在京东云内网通过内网域名连接<br>- 仅支持MySQL */
+func (c *RdsClient) DisableReadWriteProxyInternetAccess(request *rds.DisableReadWriteProxyInternetAccessRequest) (*rds.DisableReadWriteProxyInternetAccessResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DisableReadWriteProxyInternetAccessResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查看指定RDS读写分离代理详情<br>- 仅支持MySQL */
+func (c *RdsClient) DescribeReadWriteProxyAttribute(request *rds.DescribeReadWriteProxyAttributeRequest) (*rds.DescribeReadWriteProxyAttributeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DescribeReadWriteProxyAttributeResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -797,7 +837,7 @@ func (c *RdsClient) CreateAudit(request *rds.CreateAuditRequest) (*rds.CreateAud
     return jdResp, err
 }
 
-/* 修改实例名称，可支持中文，实例名的具体规则可参见帮助中心文档:[名称及密码限制](../../documentation/Database-and-Cache-Service/RDS/Introduction/Restrictions/SQLServer-Restrictions.md) */
+/* 修改实例名称，可支持中文，实例名的具体规则可参见帮助中心文档:[名称及密码限制](../../../documentation/Database-and-Cache-Service/RDS/Introduction/Restrictions/SQLServer-Restrictions.md) */
 func (c *RdsClient) ModifyInstanceName(request *rds.ModifyInstanceNameRequest) (*rds.ModifyInstanceNameResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -808,6 +848,26 @@ func (c *RdsClient) ModifyInstanceName(request *rds.ModifyInstanceNameRequest) (
     }
 
     jdResp := &rds.ModifyInstanceNameResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除RDS 实例的读写分离代理<br>- 仅支持MySQL */
+func (c *RdsClient) DeleteReadWriteProxy(request *rds.DeleteReadWriteProxyRequest) (*rds.DeleteReadWriteProxyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DeleteReadWriteProxyResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -828,6 +888,26 @@ func (c *RdsClient) EnableAudit(request *rds.EnableAuditRequest) (*rds.EnableAud
     }
 
     jdResp := &rds.EnableAuditResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 开启读写分离代理服务的外网访问功能。开启后，用户可以通过 internet 连接读写分离代理服务<br>- 仅支持MySQL */
+func (c *RdsClient) EnableReadWriteProxyInternetAccess(request *rds.EnableReadWriteProxyInternetAccessRequest) (*rds.EnableReadWriteProxyInternetAccessResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.EnableReadWriteProxyInternetAccessResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -968,6 +1048,26 @@ func (c *RdsClient) RestoreDatabaseFromBackup(request *rds.RestoreDatabaseFromBa
     }
 
     jdResp := &rds.RestoreDatabaseFromBackupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建数据库读写分离代理服务<br>- 仅支持MySQL */
+func (c *RdsClient) CreateReadWriteProxy(request *rds.CreateReadWriteProxyRequest) (*rds.CreateReadWriteProxyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.CreateReadWriteProxyResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1148,6 +1248,26 @@ func (c *RdsClient) CreateParameterGroup(request *rds.CreateParameterGroupReques
     }
 
     jdResp := &rds.CreateParameterGroupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改数据库临时运维账号属性。<br>- 仅支持 MySQL，Percona，MariaDB */
+func (c *RdsClient) ModifyAccountForOps(request *rds.ModifyAccountForOpsRequest) (*rds.ModifyAccountForOpsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.ModifyAccountForOpsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1357,6 +1477,66 @@ func (c *RdsClient) RevokePrivilege(request *rds.RevokePrivilegeRequest) (*rds.R
     return jdResp, err
 }
 
+/* 创建数据库临时运维账号。<br>如果在使用数据库过程中需要京东云提供技术支持,并且需要对您的实例进行操作，您可以把临时运维账号提供给技术支持人员。<br>临时运维账号默认授予全局Select、Process权限，且账号只能通过控制台或者OpenAPI进行创建、删除账号以及对账号授权等，用户不能通过SQL语句对账号进行相关操作。<br>- 仅支持 MySQL，Percona，MariaDB */
+func (c *RdsClient) CreateAccountForOps(request *rds.CreateAccountForOpsRequest) (*rds.CreateAccountForOpsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.CreateAccountForOpsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 升级指定实例的RDS版本。 仅当实例处于running状态时才可以升级。 */
+func (c *RdsClient) UpgradeInstance(request *rds.UpgradeInstanceRequest) (*rds.UpgradeInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.UpgradeInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改SQL Server对接的Active Directory 服务。支持SQL Server 2012 及2012以上以上的版本。<br>注意：修改目录服务后，需重启SQL Server实例才能生效 */
+func (c *RdsClient) ModifyActiveDirectory(request *rds.ModifyActiveDirectoryRequest) (*rds.ModifyActiveDirectoryResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.ModifyActiveDirectoryResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查看当前实例已开启的审计选项。如当前实例未开启审计，则返回空<br>- 仅支持SQL Server */
 func (c *RdsClient) DescribeAudit(request *rds.DescribeAuditRequest) (*rds.DescribeAuditResponse, error) {
     if request == nil {
@@ -1368,6 +1548,26 @@ func (c *RdsClient) DescribeAudit(request *rds.DescribeAuditRequest) (*rds.Descr
     }
 
     jdResp := &rds.DescribeAuditResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取当前实例的版本信息 */
+func (c *RdsClient) DescribeInstanceVersionInternal(request *rds.DescribeInstanceVersionInternalRequest) (*rds.DescribeInstanceVersionInternalResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DescribeInstanceVersionInternalResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1617,6 +1817,26 @@ func (c *RdsClient) ResetPassword(request *rds.ResetPasswordRequest) (*rds.Reset
     return jdResp, err
 }
 
+/* 关闭数据库的加密连接, 需要重启数据库实例才生效<br>- 仅支持SQL Server */
+func (c *RdsClient) DisableSSL(request *rds.DisableSSLRequest) (*rds.DisableSSLResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DisableSSLResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 修改允许访问实例的IP白名单。白名单是允许访问当前实例的IP/IP段列表，缺省情况下，白名单对本VPC开放。如果用户开启了外网访问的功能，还需要对外网的IP配置白名单。 */
 func (c *RdsClient) ModifyWhiteList(request *rds.ModifyWhiteListRequest) (*rds.ModifyWhiteListResponse, error) {
     if request == nil {
@@ -1688,6 +1908,26 @@ func (c *RdsClient) DescribeSSL(request *rds.DescribeSSLRequest) (*rds.DescribeS
     }
 
     jdResp := &rds.DescribeSSLResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查看某个RDS实例下的运维账号信息。<br>- 仅支持 MySQL，Percona，MariaDB */
+func (c *RdsClient) DescribeAccountsForOps(request *rds.DescribeAccountsForOpsRequest) (*rds.DescribeAccountsForOpsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DescribeAccountsForOpsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1828,6 +2068,26 @@ func (c *RdsClient) DescribeParameterGroupParameters(request *rds.DescribeParame
     }
 
     jdResp := &rds.DescribeParameterGroupParametersResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改数据库读写分离代理服务配置<br>- 仅支持MySQL */
+func (c *RdsClient) ModifyReadWriteProxy(request *rds.ModifyReadWriteProxyRequest) (*rds.ModifyReadWriteProxyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.ModifyReadWriteProxyResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

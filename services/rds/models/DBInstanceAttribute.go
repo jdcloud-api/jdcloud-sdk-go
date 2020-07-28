@@ -112,4 +112,13 @@ type DBInstanceAttribute struct {
 
     /* 标签信息 (Optional) */
     Tags []Tag `json:"tags"`
+
+    /* 对接的目录服务的相关信息<br>仅支SQL Server (Optional) */
+    ActiveDirectory ADService `json:"activeDirectory"`
+
+    /* 只读代理服务 ID (Optional) */
+    RoInstanceProxyID string `json:"roInstanceProxyID"`
+
+    /* 读写分离代理服务 ID (Optional) */
+    ReadWriteProxyId string `json:"readWriteProxyId"`
 }
