@@ -26,5 +26,11 @@ type TotalDetalItem struct {
     OriData interface{} `json:"oriData"`
 
     /*  (Optional) */
+    Httpdata interface{} `json:"httpdata"`
+
+    /*  (Optional) */
+    HttpsData interface{} `json:"httpsData"`
+
+    /*  (Optional) */
     TimeStamp int64 `json:"timeStamp"`
 }

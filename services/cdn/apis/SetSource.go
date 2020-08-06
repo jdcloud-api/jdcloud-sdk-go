@@ -34,6 +34,9 @@ type SetSourceRequest struct {
     /* 回源方式,只能是[https,http]中的一种,默认http (Optional) */
     BackSourceType *string `json:"backSourceType"`
 
+    /* 加速区域,必须是[mainland,nonMainland,all]中的一种,分别代表大陆,海外+中国港澳台,全球 (Optional) */
+    AccelerateRegion *string `json:"accelerateRegion"`
+
     /*  (Optional) */
     IpSource []cdn.IpSourceInfo `json:"ipSource"`
 
@@ -71,6 +74,7 @@ func NewSetSourceRequest(
  * param domain: 用户域名 (Required)
  * param sourceType: 回源类型只能是[ips,domain,oss]中的一种 (Optional)
  * param backSourceType: 回源方式,只能是[https,http]中的一种,默认http (Optional)
+ * param accelerateRegion: 加速区域,必须是[mainland,nonMainland,all]中的一种,分别代表大陆,海外+中国港澳台,全球 (Optional)
  * param ipSource:  (Optional)
  * param domainSource:  (Optional)
  * param ossSource: oss回源域名 (Optional)
@@ -80,6 +84,7 @@ func NewSetSourceRequestWithAllParams(
     domain string,
     sourceType *string,
     backSourceType *string,
+    accelerateRegion *string,
     ipSource []cdn.IpSourceInfo,
     domainSource []cdn.DomainSourceInfo,
     ossSource *string,
@@ -96,6 +101,7 @@ func NewSetSourceRequestWithAllParams(
         Domain: domain,
         SourceType: sourceType,
         BackSourceType: backSourceType,
+        AccelerateRegion: accelerateRegion,
         IpSource: ipSource,
         DomainSource: domainSource,
         OssSource: ossSource,
@@ -129,6 +135,11 @@ func (r *SetSourceRequest) SetSourceType(sourceType string) {
 /* param backSourceType: 回源方式,只能是[https,http]中的一种,默认http(Optional) */
 func (r *SetSourceRequest) SetBackSourceType(backSourceType string) {
     r.BackSourceType = &backSourceType
+}
+
+/* param accelerateRegion: 加速区域,必须是[mainland,nonMainland,all]中的一种,分别代表大陆,海外+中国港澳台,全球(Optional) */
+func (r *SetSourceRequest) SetAccelerateRegion(accelerateRegion string) {
+    r.AccelerateRegion = &accelerateRegion
 }
 
 /* param ipSource: (Optional) */

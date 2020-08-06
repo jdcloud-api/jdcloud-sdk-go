@@ -98,6 +98,7 @@ type QueryIpBlackListResponse struct {
 
 type QueryIpBlackListResult struct {
     Domain string `json:"domain"`
-    Ips []interface{} `json:"ips"`
+    Ips []string `json:"ips"`
     Status string `json:"status"`
+    WhiteIps []string `json:"whiteIps"`
 }

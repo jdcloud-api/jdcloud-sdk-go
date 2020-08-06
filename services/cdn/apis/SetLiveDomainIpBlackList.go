@@ -27,8 +27,11 @@ type SetLiveDomainIpBlackListRequest struct {
     /* 用户域名  */
     Domain string `json:"domain"`
 
-    /*  (Optional) */
+    /* ip名单,ips中url不能超过50条 (Optional) */
     Ips []string `json:"ips"`
+
+    /* ip黑白名单类型，black:黑名单,white:白名单 (Optional) */
+    IpListType *string `json:"ipListType"`
 }
 
 /*
@@ -53,11 +56,13 @@ func NewSetLiveDomainIpBlackListRequest(
 
 /*
  * param domain: 用户域名 (Required)
- * param ips:  (Optional)
+ * param ips: ip名单,ips中url不能超过50条 (Optional)
+ * param ipListType: ip黑白名单类型，black:黑名单,white:白名单 (Optional)
  */
 func NewSetLiveDomainIpBlackListRequestWithAllParams(
     domain string,
     ips []string,
+    ipListType *string,
 ) *SetLiveDomainIpBlackListRequest {
 
     return &SetLiveDomainIpBlackListRequest{
@@ -69,6 +74,7 @@ func NewSetLiveDomainIpBlackListRequestWithAllParams(
         },
         Domain: domain,
         Ips: ips,
+        IpListType: ipListType,
     }
 }
 
@@ -90,9 +96,14 @@ func (r *SetLiveDomainIpBlackListRequest) SetDomain(domain string) {
     r.Domain = domain
 }
 
-/* param ips: (Optional) */
+/* param ips: ip名单,ips中url不能超过50条(Optional) */
 func (r *SetLiveDomainIpBlackListRequest) SetIps(ips []string) {
     r.Ips = ips
+}
+
+/* param ipListType: ip黑白名单类型，black:黑名单,white:白名单(Optional) */
+func (r *SetLiveDomainIpBlackListRequest) SetIpListType(ipListType string) {
+    r.IpListType = &ipListType
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

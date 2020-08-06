@@ -58,6 +58,9 @@ type QueryLiveStatisticsDataRequest struct {
     /* 查询的流协议类型 (Optional) */
     Scheme *string `json:"scheme"`
 
+    /* cacheLevel (Optional) */
+    CacheLevel *string `json:"cacheLevel"`
+
     /* 时间粒度，可选值:[oneMin,fiveMin,followTime],followTime只会返回一个汇总后的数据 (Optional) */
     Period *string `json:"period"`
 }
@@ -91,6 +94,7 @@ func NewQueryLiveStatisticsDataRequest(
  * param isp:  (Optional)
  * param reqMethod:  (Optional)
  * param scheme: 查询的流协议类型 (Optional)
+ * param cacheLevel: cacheLevel (Optional)
  * param period: 时间粒度，可选值:[oneMin,fiveMin,followTime],followTime只会返回一个汇总后的数据 (Optional)
  */
 func NewQueryLiveStatisticsDataRequestWithAllParams(
@@ -105,6 +109,7 @@ func NewQueryLiveStatisticsDataRequestWithAllParams(
     isp *string,
     reqMethod *string,
     scheme *string,
+    cacheLevel *string,
     period *string,
 ) *QueryLiveStatisticsDataRequest {
 
@@ -126,6 +131,7 @@ func NewQueryLiveStatisticsDataRequestWithAllParams(
         Isp: isp,
         ReqMethod: reqMethod,
         Scheme: scheme,
+        CacheLevel: cacheLevel,
         Period: period,
     }
 }
@@ -196,6 +202,11 @@ func (r *QueryLiveStatisticsDataRequest) SetReqMethod(reqMethod string) {
 /* param scheme: 查询的流协议类型(Optional) */
 func (r *QueryLiveStatisticsDataRequest) SetScheme(scheme string) {
     r.Scheme = &scheme
+}
+
+/* param cacheLevel: cacheLevel(Optional) */
+func (r *QueryLiveStatisticsDataRequest) SetCacheLevel(cacheLevel string) {
+    r.CacheLevel = &cacheLevel
 }
 
 /* param period: 时间粒度，可选值:[oneMin,fiveMin,followTime],followTime只会返回一个汇总后的数据(Optional) */
