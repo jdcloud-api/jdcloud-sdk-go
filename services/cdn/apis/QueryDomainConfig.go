@@ -111,5 +111,7 @@ type QueryDomainConfigResult struct {
     JcdnTimeAnti string `json:"jcdnTimeAnti"`
     ShareCache string `json:"shareCache"`
     IsShareOpen string `json:"isShareOpen"`
+    Gzip string `json:"gzip"`
+    GzipTypes string `json:"gzipTypes"`
     CacheRules []cdn.CacheRule `json:"cacheRules"`
 }

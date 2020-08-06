@@ -63,6 +63,9 @@ type QueryLiveStatisticsAreaDataGroupByRequest struct {
 
     /*  (Optional) */
     ReqMethod *string `json:"reqMethod"`
+
+    /* cacheLevel (Optional) */
+    CacheLevel *string `json:"cacheLevel"`
 }
 
 /*
@@ -96,6 +99,7 @@ func NewQueryLiveStatisticsAreaDataGroupByRequest(
  * param subDomain:  (Optional)
  * param scheme: 查询的流协议 (Optional)
  * param reqMethod:  (Optional)
+ * param cacheLevel: cacheLevel (Optional)
  */
 func NewQueryLiveStatisticsAreaDataGroupByRequestWithAllParams(
     startTime *string,
@@ -111,6 +115,7 @@ func NewQueryLiveStatisticsAreaDataGroupByRequestWithAllParams(
     subDomain *string,
     scheme *string,
     reqMethod *string,
+    cacheLevel *string,
 ) *QueryLiveStatisticsAreaDataGroupByRequest {
 
     return &QueryLiveStatisticsAreaDataGroupByRequest{
@@ -133,6 +138,7 @@ func NewQueryLiveStatisticsAreaDataGroupByRequestWithAllParams(
         SubDomain: subDomain,
         Scheme: scheme,
         ReqMethod: reqMethod,
+        CacheLevel: cacheLevel,
     }
 }
 
@@ -212,6 +218,11 @@ func (r *QueryLiveStatisticsAreaDataGroupByRequest) SetScheme(scheme string) {
 /* param reqMethod: (Optional) */
 func (r *QueryLiveStatisticsAreaDataGroupByRequest) SetReqMethod(reqMethod string) {
     r.ReqMethod = &reqMethod
+}
+
+/* param cacheLevel: cacheLevel(Optional) */
+func (r *QueryLiveStatisticsAreaDataGroupByRequest) SetCacheLevel(cacheLevel string) {
+    r.CacheLevel = &cacheLevel
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

@@ -25,7 +25,7 @@ type SslCertModel struct {
     /* 证书名称 (Optional) */
     CertName string `json:"certName"`
 
-    /* 绑定域名 (Optional) */
+    /* 主域名 (Optional) */
     CommonName string `json:"commonName"`
 
     /* 证书类型 (Optional) */
@@ -43,6 +43,9 @@ type SslCertModel struct {
     /* 对私钥文件使用sha256算法计算的摘要信息 (Optional) */
     Digest string `json:"digest"`
 
-    /* 绑定的域名 (Optional) */
+    /* 证书别名 (Optional) */
+    AliasName string `json:"aliasName"`
+
+    /* 备用域名 (Optional) */
     RelatedDomains []string `json:"relatedDomains"`
 }

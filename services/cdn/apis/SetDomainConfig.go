@@ -35,6 +35,15 @@ type SetDomainConfigRequest struct {
 
     /* 有三种类型：default、http、https (Optional) */
     JumpType *string `json:"jumpType"`
+
+    /* dash鉴权相关配置 (Optional) */
+    JcdnTimeAnti *string `json:"jcdnTimeAnti"`
+
+    /* 回源鉴权相关配置 (Optional) */
+    HdrCtrl *string `json:"hdrCtrl"`
+
+    /* 头条header配置 (Optional) */
+    ToutiaoHeader *string `json:"toutiaoHeader"`
 }
 
 /*
@@ -62,12 +71,18 @@ func NewSetDomainConfigRequest(
  * param httpType: http类型,只能为http或者https (Optional)
  * param backSourceType: 回源类型 (Optional)
  * param jumpType: 有三种类型：default、http、https (Optional)
+ * param jcdnTimeAnti: dash鉴权相关配置 (Optional)
+ * param hdrCtrl: 回源鉴权相关配置 (Optional)
+ * param toutiaoHeader: 头条header配置 (Optional)
  */
 func NewSetDomainConfigRequestWithAllParams(
     domain string,
     httpType *string,
     backSourceType *string,
     jumpType *string,
+    jcdnTimeAnti *string,
+    hdrCtrl *string,
+    toutiaoHeader *string,
 ) *SetDomainConfigRequest {
 
     return &SetDomainConfigRequest{
@@ -81,6 +96,9 @@ func NewSetDomainConfigRequestWithAllParams(
         HttpType: httpType,
         BackSourceType: backSourceType,
         JumpType: jumpType,
+        JcdnTimeAnti: jcdnTimeAnti,
+        HdrCtrl: hdrCtrl,
+        ToutiaoHeader: toutiaoHeader,
     }
 }
 
@@ -115,6 +133,21 @@ func (r *SetDomainConfigRequest) SetBackSourceType(backSourceType string) {
 /* param jumpType: 有三种类型：default、http、https(Optional) */
 func (r *SetDomainConfigRequest) SetJumpType(jumpType string) {
     r.JumpType = &jumpType
+}
+
+/* param jcdnTimeAnti: dash鉴权相关配置(Optional) */
+func (r *SetDomainConfigRequest) SetJcdnTimeAnti(jcdnTimeAnti string) {
+    r.JcdnTimeAnti = &jcdnTimeAnti
+}
+
+/* param hdrCtrl: 回源鉴权相关配置(Optional) */
+func (r *SetDomainConfigRequest) SetHdrCtrl(hdrCtrl string) {
+    r.HdrCtrl = &hdrCtrl
+}
+
+/* param toutiaoHeader: 头条header配置(Optional) */
+func (r *SetDomainConfigRequest) SetToutiaoHeader(toutiaoHeader string) {
+    r.ToutiaoHeader = &toutiaoHeader
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

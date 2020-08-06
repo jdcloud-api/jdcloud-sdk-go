@@ -63,6 +63,9 @@ type QueryLiveTrafficGroupSumRequest struct {
 
     /*  (Optional) */
     ReqMethod *string `json:"reqMethod"`
+
+    /* cacheLevel (Optional) */
+    CacheLevel *string `json:"cacheLevel"`
 }
 
 /*
@@ -96,6 +99,7 @@ func NewQueryLiveTrafficGroupSumRequest(
  * param period: 时间粒度，可选值:[oneMin,fiveMin,followTime],followTime只会返回一个汇总后的数据 (Optional)
  * param groupBy: 分组依据 (Optional)
  * param reqMethod:  (Optional)
+ * param cacheLevel: cacheLevel (Optional)
  */
 func NewQueryLiveTrafficGroupSumRequestWithAllParams(
     startTime *string,
@@ -111,6 +115,7 @@ func NewQueryLiveTrafficGroupSumRequestWithAllParams(
     period *string,
     groupBy *string,
     reqMethod *string,
+    cacheLevel *string,
 ) *QueryLiveTrafficGroupSumRequest {
 
     return &QueryLiveTrafficGroupSumRequest{
@@ -133,6 +138,7 @@ func NewQueryLiveTrafficGroupSumRequestWithAllParams(
         Period: period,
         GroupBy: groupBy,
         ReqMethod: reqMethod,
+        CacheLevel: cacheLevel,
     }
 }
 
@@ -212,6 +218,11 @@ func (r *QueryLiveTrafficGroupSumRequest) SetGroupBy(groupBy string) {
 /* param reqMethod: (Optional) */
 func (r *QueryLiveTrafficGroupSumRequest) SetReqMethod(reqMethod string) {
     r.ReqMethod = &reqMethod
+}
+
+/* param cacheLevel: cacheLevel(Optional) */
+func (r *QueryLiveTrafficGroupSumRequest) SetCacheLevel(cacheLevel string) {
+    r.CacheLevel = &cacheLevel
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

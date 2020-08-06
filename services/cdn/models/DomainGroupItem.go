@@ -30,4 +30,7 @@ type DomainGroupItem struct {
 
     /* 域名组名称 (Optional) */
     DomainGroupName string `json:"domainGroupName"`
+
+    /* 域名组id (Optional) */
+    Id int64 `json:"id"`
 }

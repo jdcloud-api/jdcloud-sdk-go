@@ -103,7 +103,7 @@ type GetSslCertDetailResult struct {
     CertType string `json:"certType"`
     SslCertStartTime string `json:"sslCertStartTime"`
     SslCertEndTime string `json:"sslCertEndTime"`
-    Deletable int `json:"deletable"`
     Digest string `json:"digest"`
     RelatedDomains []string `json:"relatedDomains"`
+    BindResources []string `json:"bindResources"`
 }
