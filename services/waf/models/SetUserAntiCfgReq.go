@@ -25,11 +25,20 @@ type SetUserAntiCfgReq struct {
     /* 域名  */
     Domain string `json:"domain"`
 
-    /* 是否开启头管理，"1"表示使能,"0"表示否 (Optional) */
+    /* 是否开启头管理，"1"表示使能,"0"表示否，即将废弃 (Optional) */
     FilterHeaderEnable string `json:"filterHeaderEnable"`
+
+    /* 是否开启请求头管理，"1"表示使能,"0"表示否 (Optional) */
+    ReqHeaderEnable string `json:"reqHeaderEnable"`
+
+    /* 是否开启响应头管理，"1"表示使能,"0"表示否 (Optional) */
+    RespHeaderEnable string `json:"respHeaderEnable"`
 
     /* 是否开启敏感信息防泄漏，"1"表示使能,"0"表示否 (Optional) */
     FilterSenseEnable string `json:"filterSenseEnable"`
+
+    /* 是否开启状态码修改，"1"表示使能,"0"表示否 (Optional) */
+    StatusEnable string `json:"statusEnable"`
 
     /* 是否开启白名单，"1"表示使能,"0"表示否 (Optional) */
     SkipEnable string `json:"skipEnable"`

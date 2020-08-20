@@ -20,11 +20,11 @@ package models
 type IpCfg struct {
 
     /* 序号id,更新时需要 (Optional) */
-    Id int `json:"id"`
+    Id *int `json:"id"`
 
     /* 支持 ipv4/8 ipv4/16 ipv4/24 ipv4/32 ipv6/64  */
     Val string `json:"val"`
 
     /* action配置  */
-    AtCfg AtCfg `json:"atCfg"`
+    AtCfg *AtCfg `json:"atCfg"`
 }

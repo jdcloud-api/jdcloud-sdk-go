@@ -44,11 +44,14 @@ type LoadBalancer struct {
     /* LoadBalancer绑定的安全组列表 (Optional) */
     SecurityGroupIds []string `json:"securityGroupIds"`
 
-    /* LoadBalancer的IP地址信息 (Optional) */
+    /* 描述LB的私有对象信息 (Optional) */
     PrivateIp PrivateIpAddress `json:"privateIp"`
 
     /* 计费配置 (Optional) */
     Charge charge.Charge `json:"charge"`
+
+    /* tag信息 (Optional) */
+    Tags []Tag `json:"tags"`
 
     /* LoadBalancer的描述信息 (Optional) */
     Description string `json:"description"`

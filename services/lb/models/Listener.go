@@ -52,7 +52,7 @@ type Listener struct {
     /* 【alb、nlb】空闲连接超时时间, 范围为[1,86400]。 <br>（Tcp和Tls协议）默认为：1800s <br>（Http和Https协议）默认为：60s <br>【dnlb】不支持 (Optional) */
     ConnectionIdleTimeSeconds int `json:"connectionIdleTimeSeconds"`
 
-    /* 【alb Https和Tls协议】ssl server证书列表，现只支持一个证书 (Optional) */
+    /* 【alb Https和Tls协议】Listener绑定的默认证书，只支持一个 (Optional) */
     CertificateSpecs []CertificateSpec `json:"certificateSpecs"`
 
     /* Listener的描述信息 (Optional) */
@@ -60,4 +60,7 @@ type Listener struct {
 
     /* Listener的创建时间 (Optional) */
     CreatedTime string `json:"createdTime"`
+
+    /* 【alb Https和Tls协议】Listener绑定的扩展证书列表 (Optional) */
+    ExtensionCertificateSpecs []ExtensionCertificateSpec `json:"extensionCertificateSpecs"`
 }

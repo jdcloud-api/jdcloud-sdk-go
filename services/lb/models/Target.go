@@ -25,18 +25,21 @@ type Target struct {
     /* TargetGroup的Id (Optional) */
     TargetGroupId string `json:"targetGroupId"`
 
-    /* Target的类型，取值为vm或container, 默认为vm (Optional) */
+    /* Target的类型，取值为vm、container或ip, 默认为vm (Optional) */
     Type string `json:"type"`
 
-    /* Target所属实例的Id (Optional) */
+    /* Target所属实例（vm或container）的Id (Optional) */
     InstanceId string `json:"instanceId"`
 
-    /* Target提供服务的端口，取值范围：0-65535，其中0表示与backend的端口相同，默认为0 (Optional) */
+    /* Target提供服务的端口，取值范围：0-65535，其中0表示与backend的端口相同，默认为0。 <br>【dnlb】使用限制：dnlb同一TargetGroup下，同一实例/ip仅允许一个端口提供服务 (Optional) */
     Port int `json:"port"`
 
-    /* Target的权重，取值范围：1-100 ，默认为10 (Optional) */
+    /* 该Target的权重，取值范围：0-100 ，默认为10。0表示不参与流量转发，仅alb支持权重为0的target (Optional) */
     Weight int `json:"weight"`
 
-    /* Target的内网IP地址 (Optional) */
+    /* Target所属实例（vm或container）的内网IP地址 (Optional) */
     PrivateIpAddress string `json:"privateIpAddress"`
+
+    /* Target的IP地址。当Target类型为vm或container时，表示vm或container的内网IP地址；当Target类型为ip时，表示注册Target时指定的IP地址 (Optional) */
+    IpAddress string `json:"ipAddress"`
 }

@@ -38,6 +38,9 @@ type DescribeBandwidthsRequest struct {
     /* bandwidthId - 带宽实例IID，精确匹配，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
+
+    /* 线路类型 dynamicBGP:动态BGP thirdLineBGP:三线BGP telecom:电信单线 unicom:联通单线 mobile:移动单线 (Optional) */
+    LineType *string `json:"lineType"`
 }
 
 /*
@@ -66,12 +69,14 @@ func NewDescribeBandwidthsRequest(
  * param pageSize: 分页大小，默认为20 (Optional)
  * param filters: bandwidthId - 带宽实例IID，精确匹配，支持多个
  (Optional)
+ * param lineType: 线路类型 dynamicBGP:动态BGP thirdLineBGP:三线BGP telecom:电信单线 unicom:联通单线 mobile:移动单线 (Optional)
  */
 func NewDescribeBandwidthsRequestWithAllParams(
     idc string,
     pageNumber *int,
     pageSize *int,
     filters []common.Filter,
+    lineType *string,
 ) *DescribeBandwidthsRequest {
 
     return &DescribeBandwidthsRequest{
@@ -85,6 +90,7 @@ func NewDescribeBandwidthsRequestWithAllParams(
         PageNumber: pageNumber,
         PageSize: pageSize,
         Filters: filters,
+        LineType: lineType,
     }
 }
 
@@ -120,6 +126,11 @@ func (r *DescribeBandwidthsRequest) SetPageSize(pageSize int) {
 (Optional) */
 func (r *DescribeBandwidthsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
+}
+
+/* param lineType: 线路类型 dynamicBGP:动态BGP thirdLineBGP:三线BGP telecom:电信单线 unicom:联通单线 mobile:移动单线(Optional) */
+func (r *DescribeBandwidthsRequest) SetLineType(lineType string) {
+    r.LineType = &lineType
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

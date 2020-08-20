@@ -40,7 +40,7 @@ func NewLbClient(credential *core.Credential) *LbClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "lb",
-            Revision:    "0.4.2",
+            Revision:    "0.5.3",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -217,7 +217,7 @@ func (c *LbClient) UpdateTargets(request *lb.UpdateTargetsRequest) (*lb.UpdateTa
     return jdResp, err
 }
 
-/* 查询TargetGroup详情 */
+/* 查询TargetGroup详情，返回target详情功能3个月后将会下线，建议用户直接使用describeTargets接口查询target详情 */
 func (c *LbClient) DescribeTargetGroup(request *lb.DescribeTargetGroupRequest) (*lb.DescribeTargetGroupResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -248,6 +248,26 @@ func (c *LbClient) DeleteBackend(request *lb.DeleteBackendRequest) (*lb.DeleteBa
     }
 
     jdResp := &lb.DeleteBackendResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* listener批量删除扩展证书 */
+func (c *LbClient) DeleteListenerCertificates(request *lb.DeleteListenerCertificatesRequest) (*lb.DeleteListenerCertificatesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &lb.DeleteListenerCertificatesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -477,7 +497,7 @@ func (c *LbClient) DescribeListener(request *lb.DescribeListenerRequest) (*lb.De
     return jdResp, err
 }
 
-/* 查询虚拟服务器组列表详情 */
+/* 查询虚拟服务器组列表详情，返回target详情功能3个月后将会下线，建议用户直接使用describeTargets接口查询target详情 */
 func (c *LbClient) DescribeTargetGroups(request *lb.DescribeTargetGroupsRequest) (*lb.DescribeTargetGroupsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -577,7 +597,7 @@ func (c *LbClient) AssociateSecurityGroup(request *lb.AssociateSecurityGroupRequ
     return jdResp, err
 }
 
-/* 从TargetGroup中移除一个或多个Target，失败则全部回滚。 成功移除后，所有target将不会再接收来自loadbalancer新建连接的流量 */
+/* 从TargetGroup中移除一个或多个Target，失败则全部回滚。 成功移除的target将不会再接收来自loadbalancer新建连接的流量 */
 func (c *LbClient) DeRegisterTargets(request *lb.DeRegisterTargetsRequest) (*lb.DeRegisterTargetsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -717,6 +737,26 @@ func (c *LbClient) DescribeTargetHealth(request *lb.DescribeTargetHealthRequest)
     return jdResp, err
 }
 
+/* listener批量添加扩展证书 */
+func (c *LbClient) AddListenerCertificates(request *lb.AddListenerCertificatesRequest) (*lb.AddListenerCertificatesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &lb.AddListenerCertificatesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 负载均衡解绑弹性公网IP */
 func (c *LbClient) DisassociateElasticIp(request *lb.DisassociateElasticIpRequest) (*lb.DisassociateElasticIpResponse, error) {
     if request == nil {
@@ -748,6 +788,26 @@ func (c *LbClient) UpdateRules(request *lb.UpdateRulesRequest) (*lb.UpdateRulesR
     }
 
     jdResp := &lb.UpdateRulesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* listener批量修改扩展证书 */
+func (c *LbClient) UpdateListenerCertificates(request *lb.UpdateListenerCertificatesRequest) (*lb.UpdateListenerCertificatesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &lb.UpdateListenerCertificatesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

@@ -49,6 +49,12 @@ type AddDomain struct {
     /* Waf侧支持http版本，不传时默认值为http1.1,传"http2"为http2 (Optional) */
     HttpVersion *string `json:"httpVersion"`
 
+    /* 回源是否支持长链接，0为否 (Optional) */
+    EnableKeepalive *int `json:"enableKeepalive"`
+
     /* 加密套件等级，0表示默认为中级，1表示高级，2表示低级 (Optional) */
     SuiteLevel *int `json:"suiteLevel"`
+
+    /* 请求头是否支持下划线，0-否，1-是。缺省为0 (Optional) */
+    EnableUnderscores *int `json:"enableUnderscores"`
 }

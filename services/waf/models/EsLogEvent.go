@@ -48,4 +48,10 @@ type EsLogEvent struct {
 
     /* 动作 (Optional) */
     Action string `json:"action"`
+
+    /* 请求ID (Optional) */
+    RequestId string `json:"requestId"`
+
+    /* 回源错误信息 (Optional) */
+    UpstreamErr string `json:"upstreamErr"`
 }

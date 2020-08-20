@@ -31,7 +31,7 @@ type SetCcRuleReq struct {
     /* uri以/开头  */
     Uri string `json:"uri"`
 
-    /* 匹配uri 类型 0 精确匹配，1 前缀匹配（目前就支持精确匹配） (Optional) */
+    /* 精确匹配0  前缀匹配1 包含匹配2 后缀匹配5 (Optional) */
     MatchType int `json:"matchType"`
 
     /* 检测周期，单位是秒，[30~600]  */
@@ -45,4 +45,7 @@ type SetCcRuleReq struct {
 
     /* block 持续时间，单位为分钟 [1~9999999]  */
     BlockTime int `json:"blockTime"`
+
+    /* blockType 为3 时，为自定义页面名称，缺省为default (Optional) */
+    Redirection string `json:"redirection"`
 }

@@ -19,7 +19,7 @@ package models
 
 type ActiveFuncReq struct {
 
-    /* 实例id，代表要设置的WAF实例  */
+    /* 实例id，代表要设置的WAF实例 (Optional) */
     WafInstanceId string `json:"wafInstanceId"`
 
     /* 域名  */

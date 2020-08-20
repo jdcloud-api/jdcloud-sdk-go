@@ -22,6 +22,12 @@ type FilterHeaderConf struct {
     /* 是否使能 0表示否 (Optional) */
     Enable int `json:"enable"`
 
+    /* 是否使能请求头 0表示否 (Optional) */
+    ReqEnable int `json:"reqEnable"`
+
+    /* 是否使能响应头 0表示否 (Optional) */
+    RespEnable int `json:"respEnable"`
+
     /* 请求头条数 (Optional) */
     ReqHeaderNum int `json:"reqHeaderNum"`
 

@@ -39,4 +39,7 @@ type SetBotUsrRuleReq struct {
 
     /* 动作配置，默认为告警,仅支持1和4和5三种动作  */
     Action *DenyActionCfg `json:"action"`
+
+    /* 规则类型，general-通用规则，advanced-高级规则，缺省为general (Optional) */
+    RuleType *string `json:"ruleType"`
 }

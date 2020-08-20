@@ -51,4 +51,7 @@ type ListCcRuleCfg struct {
 
     /* 0-使用中 1-禁用 (Optional) */
     Disable int `json:"disable"`
+
+    /* blockType 为3 时，为自定义页面名称，缺省为default (Optional) */
+    Redirection string `json:"redirection"`
 }

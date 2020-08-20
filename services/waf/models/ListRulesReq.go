@@ -25,6 +25,9 @@ type ListRulesReq struct {
     /* 域名  */
     Domain string `json:"domain"`
 
+    /* 规则类型 (Optional) */
+    RuleType *string `json:"ruleType"`
+
     /* 页码，[1-100]，默认是1 (Optional) */
     PageIndex *int `json:"pageIndex"`
 

@@ -143,6 +143,8 @@ type GetDomainAntiConfigResult struct {
     SkipConf waf.SkipConf `json:"skipConf"`
     FilterHeaderConf waf.FilterHeaderConf `json:"filterHeaderConf"`
     FilterSenseConf waf.FilterSenseConf `json:"filterSenseConf"`
+    StatusConf waf.StatusConf `json:"statusConf"`
     UriRewriteConf waf.UriRewriteConf `json:"uriRewriteConf"`
     ProxycacheConf waf.EnableConf `json:"proxycacheConf"`
+    RiskConf waf.EnableConf `json:"riskConf"`
 }

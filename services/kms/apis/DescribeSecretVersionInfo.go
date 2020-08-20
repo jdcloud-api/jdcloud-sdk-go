@@ -18,7 +18,6 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    kms "github.com/jdcloud-api/jdcloud-sdk-go/services/kms/models"
 )
 
 type DescribeSecretVersionInfoRequest struct {
@@ -112,5 +111,9 @@ type DescribeSecretVersionInfoResponse struct {
 }
 
 type DescribeSecretVersionInfoResult struct {
-    SecretVersionItem kms.SecretVersionItem `json:"secretVersionItem"`
+    SecretVersion string `json:"secretVersion"`
+    SecretStatus int `json:"secretStatus"`
+    StartTime string `json:"startTime"`
+    ExpireTime string `json:"expireTime"`
+    SecretData string `json:"secretData"`
 }

@@ -31,7 +31,7 @@ type InstanceIdCfg struct {
     /* 地域信息 (Optional) */
     Region string `json:"region"`
 
-    /* 资源ID，续费用 (Optional) */
+    /* 资源ID，续费,标签用 (Optional) */
     SourceId string `json:"sourceId"`
 
     /* 额外的域名扩展包 (Optional) */

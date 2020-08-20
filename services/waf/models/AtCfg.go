@@ -20,8 +20,8 @@ package models
 type AtCfg struct {
 
     /* 黑名单动作配置 (Optional) */
-    DenyAction DenyActionCfg `json:"denyAction"`
+    DenyAction *DenyActionCfg `json:"denyAction"`
 
     /* 白名单动作配置 (Optional) */
-    SkipAction SkipActionCfg `json:"skipAction"`
+    SkipAction *SkipActionCfg `json:"skipAction"`
 }

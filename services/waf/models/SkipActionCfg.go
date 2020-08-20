@@ -33,4 +33,10 @@ type SkipActionCfg struct {
 
     /* 是否执行限速，1表示是，0表示否  */
     RateLimit int `json:"rateLimit"`
+
+    /* 是否执行bot，1表示是，0表示否  */
+    Bot int `json:"bot"`
+
+    /* 是否执行风控，1表示是，0表示否  */
+    Risk int `json:"risk"`
 }

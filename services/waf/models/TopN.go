@@ -24,4 +24,10 @@ type TopN struct {
 
     /*  (Optional) */
     Area_top10 TopValue `json:"area_top10"`
+
+    /*  (Optional) */
+    Url_top10 TopValue `json:"url_top10"`
+
+    /*  (Optional) */
+    Ua_top10 TopValue `json:"ua_top10"`
 }

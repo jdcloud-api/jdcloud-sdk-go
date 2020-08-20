@@ -22,21 +22,21 @@ type SetReq struct {
     /* 规则id  */
     Id int `json:"id"`
 
-    /* 告警类型，wafAnti-waf攻击告警，ccAnti-cc攻击告警  */
+    /* 规则名称 (Optional) */
+    RuleName string `json:"ruleName"`
+
+    /* WAF实例id (Optional) */
+    WafInstanceId string `json:"wafInstanceId"`
+
+    /* 域名集 (Optional) */
+    Domains []string `json:"domains"`
+
+    /* 告警类型，wafAnti-waf攻击告警，ccAnti-cc攻击告警，statusCode-状态码告警，upstreamStatus-回源IP监控  */
     WarnType string `json:"warnType"`
 
-    /* 检测/通知周期，单位小时，即时告警传0，1~24  */
-    DetectSpan int `json:"detectSpan"`
+    /* 阈值单位，""-个数，"percent"-百分比。缺省为个数 (Optional) */
+    Unit string `json:"unit"`
 
-    /* 告警阈值，1~500次  */
-    DetectThreshold int `json:"detectThreshold"`
-
-    /* 告警方式 (Optional) */
-    ContactWays []string `json:"contactWays"`
-
-    /* 告警通知人 (Optional) */
-    ContactorPersons []Contactor `json:"contactorPersons"`
-
-    /* 告警通知群组 (Optional) */
-    ContactorGroups []Contactor `json:"contactorGroups"`
+    /* 检测时长单位，hour/minute,缺省为hour (Optional) */
+    DetectUnit string `json:"detectUnit"`
 }

@@ -41,6 +41,9 @@ loadBalancerNames - 负载均衡名称列表，支持多个
 vpcId - 负载均衡所在Vpc的Id，支持单个
  (Optional) */
     Filters []common.Filter `json:"filters"`
+
+    /* Tag筛选条件 (Optional) */
+    Tags []lb.TagFilter `json:"tags"`
 }
 
 /*
@@ -72,12 +75,14 @@ loadBalancerIds - 负载均衡ID列表，支持多个
 loadBalancerNames - 负载均衡名称列表，支持多个
 vpcId - 负载均衡所在Vpc的Id，支持单个
  (Optional)
+ * param tags: Tag筛选条件 (Optional)
  */
 func NewDescribeLoadBalancersRequestWithAllParams(
     regionId string,
     pageNumber *int,
     pageSize *int,
     filters []common.Filter,
+    tags []lb.TagFilter,
 ) *DescribeLoadBalancersRequest {
 
     return &DescribeLoadBalancersRequest{
@@ -91,6 +96,7 @@ func NewDescribeLoadBalancersRequestWithAllParams(
         PageNumber: pageNumber,
         PageSize: pageSize,
         Filters: filters,
+        Tags: tags,
     }
 }
 
@@ -129,6 +135,11 @@ vpcId - 负载均衡所在Vpc的Id，支持单个
 (Optional) */
 func (r *DescribeLoadBalancersRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
+}
+
+/* param tags: Tag筛选条件(Optional) */
+func (r *DescribeLoadBalancersRequest) SetTags(tags []lb.TagFilter) {
+    r.Tags = tags
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

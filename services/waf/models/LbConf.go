@@ -49,6 +49,15 @@ type LbConf struct {
     /* Waf侧支持http版本，""为默认值http1.1,"http2"为http2 (Optional) */
     HttpVersion string `json:"httpVersion"`
 
+    /* 回源是否支持长链接，0为否 (Optional) */
+    EnableKeepalive int `json:"enableKeepalive"`
+
     /* 加密套件等级，0表示默认为中级，1表示高级，2表示低级 (Optional) */
     SuiteLevel int `json:"suiteLevel"`
+
+    /* 请求头是否支持下划线，1-是，0-否 (Optional) */
+    EnableUnderscores int `json:"enableUnderscores"`
+
+    /* 请求body最大值，默认300M，可为G/K (Optional) */
+    MaxBodySize string `json:"maxBodySize"`
 }

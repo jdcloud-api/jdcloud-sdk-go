@@ -24,4 +24,7 @@ type Idc struct {
 
     /* 机房名称 (Optional) */
     IdcName string `json:"idcName"`
+
+    /* 是否是商业化外部机房 (Optional) */
+    IsExternalIdc bool `json:"isExternalIdc"`
 }

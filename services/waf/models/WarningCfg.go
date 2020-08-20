@@ -25,6 +25,18 @@ type WarningCfg struct {
     /* 用户名 (Optional) */
     UserPin string `json:"userPin"`
 
+    /* WAF实例id (Optional) */
+    WafInstanceId string `json:"wafInstanceId"`
+
+    /* 域名集 (Optional) */
+    Domains []string `json:"domains"`
+
+    /* 全局告警globle 自定义告警userdefine (Optional) */
+    RuleType string `json:"ruleType"`
+
+    /* 规则名称 (Optional) */
+    RuleName string `json:"ruleName"`
+
     /* 告警类型 (Optional) */
     WarnType string `json:"warnType"`
 
@@ -37,6 +49,12 @@ type WarningCfg struct {
     /* 告警阈值 (Optional) */
     DetectThreshold int `json:"detectThreshold"`
 
+    /* 阈值单位，""-个数，"percent"-百分比，缺省为个数 (Optional) */
+    Unit string `json:"unit"`
+
+    /* 检测时长单位，hour/minute (Optional) */
+    DetectUnit string `json:"detectUnit"`
+
     /* 告警方式 (Optional) */
     ContactWays []string `json:"contactWays"`
 
@@ -45,4 +63,7 @@ type WarningCfg struct {
 
     /* 告警通知群组 (Optional) */
     ContactorGroups []ContactGroup `json:"contactorGroups"`
+
+    /* warnType为statusCode时为要检测的状态码 (Optional) */
+    DetectItems []string `json:"detectItems"`
 }

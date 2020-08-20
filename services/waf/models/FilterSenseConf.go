@@ -22,7 +22,7 @@ type FilterSenseConf struct {
     /* 是否使能 0表示否 (Optional) */
     Enable int `json:"enable"`
 
-    /* 响应码条数 (Optional) */
+    /* 响应码条数  即将废弃 (Optional) */
     RespCodeNum int `json:"respCodeNum"`
 
     /* 敏感信息条数 (Optional) */

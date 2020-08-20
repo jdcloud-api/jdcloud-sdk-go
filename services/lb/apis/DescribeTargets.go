@@ -39,8 +39,10 @@ type DescribeTargetsRequest struct {
     PageSize *int `json:"pageSize"`
 
     /* targetIds - Target ID列表，支持多个
-instanceId - Instance ID，支持单个
-port - Target提供服务的端口，支持单个
+instanceId - Instance ID,仅支持单个
+type － vm, container, ip,仅支持单个
+port - 端口,仅支持单个
+ipAddress - ip地址,仅支持单个
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
@@ -74,8 +76,10 @@ func NewDescribeTargetsRequest(
  * param pageNumber: 页码, 默认为1, 取值范围：[1,∞), 页码超过总页数时, 显示最后一页 (Optional)
  * param pageSize: 分页大小，默认为20，取值范围：[10,100] (Optional)
  * param filters: targetIds - Target ID列表，支持多个
-instanceId - Instance ID，支持单个
-port - Target提供服务的端口，支持单个
+instanceId - Instance ID,仅支持单个
+type － vm, container, ip,仅支持单个
+port - 端口,仅支持单个
+ipAddress - ip地址,仅支持单个
  (Optional)
  */
 func NewDescribeTargetsRequestWithAllParams(
@@ -135,8 +139,10 @@ func (r *DescribeTargetsRequest) SetPageSize(pageSize int) {
 }
 
 /* param filters: targetIds - Target ID列表，支持多个
-instanceId - Instance ID，支持单个
-port - Target提供服务的端口，支持单个
+instanceId - Instance ID,仅支持单个
+type － vm, container, ip,仅支持单个
+port - 端口,仅支持单个
+ipAddress - ip地址,仅支持单个
 (Optional) */
 func (r *DescribeTargetsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters

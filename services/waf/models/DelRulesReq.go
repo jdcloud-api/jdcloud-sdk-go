@@ -27,4 +27,7 @@ type DelRulesReq struct {
 
     /* 要删除的id  */
     Ids []int `json:"ids"`
+
+    /* 类型 (Optional) */
+    RuleType *string `json:"ruleType"`
 }

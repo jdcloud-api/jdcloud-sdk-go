@@ -20,6 +20,7 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
     charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
     vpc "github.com/jdcloud-api/jdcloud-sdk-go/services/vpc/models"
+    lb "github.com/jdcloud-api/jdcloud-sdk-go/services/lb/models"
 )
 
 type CreateLoadBalancerRequest struct {
@@ -55,6 +56,9 @@ type CreateLoadBalancerRequest struct {
 
     /* 删除保护，取值为True(开启)或False(关闭)，默认为False (Optional) */
     DeleteProtection *bool `json:"deleteProtection"`
+
+    /* 用户tag 信息 (Optional) */
+    UserTags []lb.Tag `json:"userTags"`
 }
 
 /*
@@ -97,6 +101,7 @@ func NewCreateLoadBalancerRequest(
  * param securityGroupIds: 【alb】 安全组 ID列表 (Optional)
  * param description: LoadBalancer的描述信息,允许输入UTF-8编码下的全部字符，不超过256字符 (Optional)
  * param deleteProtection: 删除保护，取值为True(开启)或False(关闭)，默认为False (Optional)
+ * param userTags: 用户tag 信息 (Optional)
  */
 func NewCreateLoadBalancerRequestWithAllParams(
     regionId string,
@@ -109,6 +114,7 @@ func NewCreateLoadBalancerRequestWithAllParams(
     securityGroupIds []string,
     description *string,
     deleteProtection *bool,
+    userTags []lb.Tag,
 ) *CreateLoadBalancerRequest {
 
     return &CreateLoadBalancerRequest{
@@ -128,6 +134,7 @@ func NewCreateLoadBalancerRequestWithAllParams(
         SecurityGroupIds: securityGroupIds,
         Description: description,
         DeleteProtection: deleteProtection,
+        UserTags: userTags,
     }
 }
 
@@ -192,6 +199,11 @@ func (r *CreateLoadBalancerRequest) SetDescription(description string) {
 /* param deleteProtection: 删除保护，取值为True(开启)或False(关闭)，默认为False(Optional) */
 func (r *CreateLoadBalancerRequest) SetDeleteProtection(deleteProtection bool) {
     r.DeleteProtection = &deleteProtection
+}
+
+/* param userTags: 用户tag 信息(Optional) */
+func (r *CreateLoadBalancerRequest) SetUserTags(userTags []lb.Tag) {
+    r.UserTags = userTags
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

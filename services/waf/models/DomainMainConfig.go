@@ -28,9 +28,6 @@ type DomainMainConfig struct {
     /* 绑定的证书名称 (Optional) */
     CertName string `json:"certName"`
 
-    /* vip (Optional) */
-    Vip string `json:"vip"`
-
     /* 使用协议，["http","https"] (Optional) */
     Protocols []string `json:"protocols"`
 
@@ -57,4 +54,10 @@ type DomainMainConfig struct {
 
     /* cname解析状态。0为解析到VIP，1为解析到回源地址 (Optional) */
     EnableCname2Rs int `json:"enableCname2Rs"`
+
+    /* cname解析状态。0为解析到VIP，1为解析到回源地址 (Optional) */
+    EnableIpv6 int `json:"enableIpv6"`
+
+    /* 域名的地域信息，类型是map[string]regionVipInfo (Optional) */
+    Region RegionVipInfo `json:"region"`
 }

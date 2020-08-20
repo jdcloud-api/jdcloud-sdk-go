@@ -35,6 +35,9 @@ type CreateTargetGroupRequest struct {
 
     /* 描述,允许输入UTF-8编码下的全部字符，不超过256字符 (Optional) */
     Description *string `json:"description"`
+
+    /* 类型，取值为instance或ip (Optional) */
+    Type *string `json:"type"`
 }
 
 /*
@@ -68,12 +71,14 @@ func NewCreateTargetGroupRequest(
  * param targetGroupName: 虚拟服务器组名称,只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符 (Required)
  * param loadBalancerId: 负载均衡的Id (Required)
  * param description: 描述,允许输入UTF-8编码下的全部字符，不超过256字符 (Optional)
+ * param type_: 类型，取值为instance或ip (Optional)
  */
 func NewCreateTargetGroupRequestWithAllParams(
     regionId string,
     targetGroupName string,
     loadBalancerId string,
     description *string,
+    type_ *string,
 ) *CreateTargetGroupRequest {
 
     return &CreateTargetGroupRequest{
@@ -87,6 +92,7 @@ func NewCreateTargetGroupRequestWithAllParams(
         TargetGroupName: targetGroupName,
         LoadBalancerId: loadBalancerId,
         Description: description,
+        Type: type_,
     }
 }
 
@@ -121,6 +127,11 @@ func (r *CreateTargetGroupRequest) SetLoadBalancerId(loadBalancerId string) {
 /* param description: 描述,允许输入UTF-8编码下的全部字符，不超过256字符(Optional) */
 func (r *CreateTargetGroupRequest) SetDescription(description string) {
     r.Description = &description
+}
+
+/* param type_: 类型，取值为instance或ip(Optional) */
+func (r *CreateTargetGroupRequest) SetType(type_ string) {
+    r.Type = &type_
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

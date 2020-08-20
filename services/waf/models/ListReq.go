@@ -21,4 +21,13 @@ type ListReq struct {
 
     /* 指定规则id (Optional) */
     Id int `json:"id"`
+
+    /* 全局告警globle 自定义告警userdefine ,默认是全局告警 (Optional) */
+    RuleType string `json:"ruleType"`
+
+    /* 页码，[1-100]，默认是1 (Optional) */
+    PageIndex int `json:"pageIndex"`
+
+    /* 页大小，[1-100]，默认是10 (Optional) */
+    PageSize int `json:"pageSize"`
 }

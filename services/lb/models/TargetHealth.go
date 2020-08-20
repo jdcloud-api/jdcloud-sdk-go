@@ -25,18 +25,21 @@ type TargetHealth struct {
     /* Target所在的高可用组Id，与targetGroupId不能并存 (Optional) */
     AgId string `json:"agId"`
 
-    /* Target所属实例的Id (Optional) */
+    /* Target所属实例的Id（type为vm或container时显示） (Optional) */
     InstanceId string `json:"instanceId"`
 
-    /* Target所属的type，取值为vm或者container,默认为vm (Optional) */
+    /* Target所属的type，取值为vm、container或ip,默认为vm (Optional) */
     Type string `json:"type"`
 
-    /* Target提供服务的端口，取值范围：0-65535，其中0表示与backend的端口相同 (Optional) */
+    /* 健康检查的port (Optional) */
     Port int `json:"port"`
 
-    /* Target的权重，取值范围：1-100 ，默认为10。 (Optional) */
+    /* 该Target的权重，取值范围：0-100 ，默认为10。0表示不参与流量转发 (Optional) */
     Weight int `json:"weight"`
 
-    /* Target的健康状态，取值为healthy、unhealthy (Optional) */
+    /* 该Target的健康状态，取值为healthy、unhealthy (Optional) */
     Status string `json:"status"`
+
+    /* Target的IP地址。当Target type为vm或container时，表示vm或container的私网IP；当Target type为ip时，表示注册Target时指定的IP地址 (Optional) */
+    IpAddress string `json:"ipAddress"`
 }

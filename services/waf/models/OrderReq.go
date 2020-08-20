@@ -19,7 +19,7 @@ package models
 
 type OrderReq struct {
 
-    /* 地域信息  */
+    /* 地域信息, hb_bgp, hn, hd_bgp 企业版支持两个，旗舰版支持3个，多个以 , 分隔  */
     Region string `json:"region"`
 
     /* 购买类型, 1:创建 2:续费 3:升配  */
@@ -35,7 +35,7 @@ type OrderReq struct {
     StartTime int `json:"startTime"`
 
     /* 实例id，除新建必传 (Optional) */
-    WafInstanceId string `json:"wafInstanceId"`
+    WafInstanceId *string `json:"wafInstanceId"`
 
     /* 套餐类型 1:高级版, 2:企业版 3:旗舰版 4:基础版  */
     PackageType int `json:"packageType"`
@@ -44,7 +44,7 @@ type OrderReq struct {
     ExtraDomainsNum int `json:"extraDomainsNum"`
 
     /* 实例名，新建订单时必传，只能包含汉字、英文字母、下划线、破折号、数字，且长度不能超过16 (Optional) */
-    NickName string `json:"nickName"`
+    NickName *string `json:"nickName"`
 
     /* 下单成功后返回的url, eg:http://abc.com  */
     ReturnURL string `json:"returnURL"`

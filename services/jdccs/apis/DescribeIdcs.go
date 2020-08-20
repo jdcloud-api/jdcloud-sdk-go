@@ -30,6 +30,9 @@ type DescribeIdcsRequest struct {
 
     /* 分页大小，默认为20 (Optional) */
     PageSize *int `json:"pageSize"`
+
+    /* 是否强制包含外部机房 yes/no (Optional) */
+    IncludeExternalIdc *string `json:"includeExternalIdc"`
 }
 
 /*
@@ -52,10 +55,12 @@ func NewDescribeIdcsRequest(
 /*
  * param pageNumber: 页码, 默认为1 (Optional)
  * param pageSize: 分页大小，默认为20 (Optional)
+ * param includeExternalIdc: 是否强制包含外部机房 yes/no (Optional)
  */
 func NewDescribeIdcsRequestWithAllParams(
     pageNumber *int,
     pageSize *int,
+    includeExternalIdc *string,
 ) *DescribeIdcsRequest {
 
     return &DescribeIdcsRequest{
@@ -67,6 +72,7 @@ func NewDescribeIdcsRequestWithAllParams(
         },
         PageNumber: pageNumber,
         PageSize: pageSize,
+        IncludeExternalIdc: includeExternalIdc,
     }
 }
 
@@ -91,6 +97,11 @@ func (r *DescribeIdcsRequest) SetPageNumber(pageNumber int) {
 /* param pageSize: 分页大小，默认为20(Optional) */
 func (r *DescribeIdcsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
+}
+
+/* param includeExternalIdc: 是否强制包含外部机房 yes/no(Optional) */
+func (r *DescribeIdcsRequest) SetIncludeExternalIdc(includeExternalIdc string) {
+    r.IncludeExternalIdc = &includeExternalIdc
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

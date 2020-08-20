@@ -19,10 +19,10 @@ package models
 
 type BotMatchItem struct {
 
-    /* 匹配字段，ip,uri,user-agent,refer,cookie， uri只能设置一个  */
+    /* 匹配字段，ruleType为general时，可为ip,uri,user_agent,referer,cookie， uri只能设置一个。ruleType为advanced时，可为fingerExist(是否存在),fingerValid(合法性)  */
     Field string `json:"field"`
 
-    /* 0-完全匹配 1-包含匹配  */
+    /* 0-完全匹配 1-包含匹配, field为fingerExist/fingerValid时无意义。  */
     Logic int `json:"logic"`
 
     /* filed为ip时支持8/16/24位掩码和完全匹配，field为uri且logic为0时需以"/"开头  */

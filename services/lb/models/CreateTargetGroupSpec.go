@@ -27,4 +27,7 @@ type CreateTargetGroupSpec struct {
 
     /* 描述,允许输入UTF-8编码下的全部字符，不超过256字符 (Optional) */
     Description string `json:"description"`
+
+    /* 类型，取值为instance或ip (Optional) */
+    Type string `json:"type"`
 }

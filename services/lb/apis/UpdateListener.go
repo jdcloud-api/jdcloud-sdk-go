@@ -37,7 +37,7 @@ type UpdateListenerRequest struct {
     /* Listener状态, 取值为On或者为Off (Optional) */
     Status *string `json:"status"`
 
-    /* 【alb Https和Tls协议】ssl server证书列表，现只支持一个证书 (Optional) */
+    /* 【alb Https和Tls协议】Listener绑定的默认证书，只支持一个证书 (Optional) */
     CertificateSpecs []lb.CertificateSpec `json:"certificateSpecs"`
 
     /* 【alb、nlb】空闲连接超时时间, 范围为[1,86400]。 <br>（Tcp和Tls协议）默认为：1800s <br>（Http和Https协议）默认为：60s <br>【dnlb】不支持该功能 (Optional) */
@@ -81,7 +81,7 @@ func NewUpdateListenerRequest(
  * param listenerId: 监听器ID (Required)
  * param listenerName: 监听器名称,只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符 (Optional)
  * param status: Listener状态, 取值为On或者为Off (Optional)
- * param certificateSpecs: 【alb Https和Tls协议】ssl server证书列表，现只支持一个证书 (Optional)
+ * param certificateSpecs: 【alb Https和Tls协议】Listener绑定的默认证书，只支持一个证书 (Optional)
  * param connectionIdleTimeSeconds: 【alb、nlb】空闲连接超时时间, 范围为[1,86400]。 <br>（Tcp和Tls协议）默认为：1800s <br>（Http和Https协议）默认为：60s <br>【dnlb】不支持该功能 (Optional)
  * param backendId: 默认后端服务Id (Optional)
  * param urlMapId: 【alb Https和Http协议】转发规则组Id (Optional)
@@ -151,7 +151,7 @@ func (r *UpdateListenerRequest) SetStatus(status string) {
     r.Status = &status
 }
 
-/* param certificateSpecs: 【alb Https和Tls协议】ssl server证书列表，现只支持一个证书(Optional) */
+/* param certificateSpecs: 【alb Https和Tls协议】Listener绑定的默认证书，只支持一个证书(Optional) */
 func (r *UpdateListenerRequest) SetCertificateSpecs(certificateSpecs []lb.CertificateSpec) {
     r.CertificateSpecs = certificateSpecs
 }

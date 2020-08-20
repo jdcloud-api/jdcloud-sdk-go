@@ -28,6 +28,9 @@ type Device struct {
     /* 设备Id (Optional) */
     DeviceId string `json:"deviceId"`
 
+    /* 设备编码 (Optional) */
+    DeviceNo string `json:"deviceNo"`
+
     /* 设备SN号 (Optional) */
     SnNo string `json:"snNo"`
 
@@ -58,7 +61,7 @@ type Device struct {
     /* 资产归属 own:自备 lease:租赁 (Optional) */
     AssetBelong string `json:"assetBelong"`
 
-    /* 资产状态 launched:已上架 opened:已开通 canceling:退订中 operating:操作中 modifing:变更中 (Optional) */
+    /* 资产状态 launched:已上架 opened:已开通 canceling:退订中 operating:操作中 modifying:变更中 (Optional) */
     AssetStatus string `json:"assetStatus"`
 
     /* 开通时间，遵循ISO8601标准，使用UTC时间，格式为：yyyy-MM-ddTHH:mm:ssZ (Optional) */

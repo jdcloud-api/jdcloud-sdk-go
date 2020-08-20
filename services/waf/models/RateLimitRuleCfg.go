@@ -36,4 +36,10 @@ type RateLimitRuleCfg struct {
 
     /* 限速大小 (Optional) */
     Rate int `json:"rate"`
+
+    /* forbidden redirect，缺省为forbidden (Optional) */
+    MatchAction string `json:"matchAction"`
+
+    /* 跳转地址，matchAction为redirect时必须为当前实例下的域名的url，forbidden时为自定义页面名称，缺省为default (Optional) */
+    Redirection string `json:"redirection"`
 }

@@ -37,7 +37,7 @@ type HealthCheck struct {
     /* 检查端口, 取值范围为[0,65535], 默认为0，默认端口为每个后端实例接收负载均衡流量的端口 (Optional) */
     Port int `json:"port"`
 
-    /* 【Http协议】检查域名 (Optional) */
+    /* 【Http协议】检查域名，支持输入域名和IP地址。如果输入域名，仅支持大小写字母、数字、英文中划线"-"和点"."，不区分大小写，且不超过255个字符。默认为空，表示健康检查不携带域名 (Optional) */
     HttpDomain string `json:"httpDomain"`
 
     /* 【Http协议】检查路径, 健康检查的目标路径，必须以"/"开头，允许输入具体的文件路径，默认为根目录 (Optional) */

@@ -22,9 +22,9 @@ type TargetUpdateSpec struct {
     /* Target Id  */
     TargetId string `json:"targetId"`
 
-    /* Target提供服务的端口，取值范围：0-65535，其中0表示与backend的端口相同 <br>【dnlb】使用限制：同一TargetGroup下，同一实例仅允许一个端口提供服务 (Optional) */
+    /* Target提供服务的端口，取值范围：0-65535，其中0表示与backend的端口相同 <br>【dnlb】使用限制：dnlb同一TargetGroup下，同一实例/ip仅允许一个端口提供服务 (Optional) */
     Port *int `json:"port"`
 
-    /* Target的权重，取值范围：1-100 (Optional) */
+    /* Target的权重，取值范围：0-100。0表示不参与流量转发 (Optional) */
     Weight *int `json:"weight"`
 }

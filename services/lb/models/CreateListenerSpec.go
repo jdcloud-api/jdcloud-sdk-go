@@ -40,7 +40,7 @@ type CreateListenerSpec struct {
     /* 默认后端服务的转发策略,取值为Forward或Redirect, 现只支持Forward, 默认为Forward (Optional) */
     Action string `json:"action"`
 
-    /* 【alb Https和Tls协议】ssl server证书列表，现只支持一个证书 (Optional) */
+    /* 【alb Https和Tls协议】Listener绑定的默认证书，只支持一个证书 (Optional) */
     CertificateSpecs []CertificateSpec `json:"certificateSpecs"`
 
     /* 【alb、nlb】空闲连接超时时间, 范围为[1,86400]。 <br>（Tcp和Tls协议）默认为：1800s <br>（Http和Https协议）默认为：60s <br>【dnlb】不支持 (Optional) */
