@@ -36,6 +36,9 @@ type DescribeAlarmsRequest struct {
 
     /* 资源ID，指定resourceId时须指定resourceType (Optional) */
     ResourceId *string `json:"resourceId"`
+
+    /* 规则状态 disabled:禁用 enabled:启用 (Optional) */
+    Status *string `json:"status"`
 }
 
 /*
@@ -60,12 +63,14 @@ func NewDescribeAlarmsRequest(
  * param pageSize: 分页大小，默认为20 (Optional)
  * param resourceType: 资源类型 bandwidth:带宽 (Optional)
  * param resourceId: 资源ID，指定resourceId时须指定resourceType (Optional)
+ * param status: 规则状态 disabled:禁用 enabled:启用 (Optional)
  */
 func NewDescribeAlarmsRequestWithAllParams(
     pageNumber *int,
     pageSize *int,
     resourceType *string,
     resourceId *string,
+    status *string,
 ) *DescribeAlarmsRequest {
 
     return &DescribeAlarmsRequest{
@@ -79,6 +84,7 @@ func NewDescribeAlarmsRequestWithAllParams(
         PageSize: pageSize,
         ResourceType: resourceType,
         ResourceId: resourceId,
+        Status: status,
     }
 }
 
@@ -113,6 +119,11 @@ func (r *DescribeAlarmsRequest) SetResourceType(resourceType string) {
 /* param resourceId: 资源ID，指定resourceId时须指定resourceType(Optional) */
 func (r *DescribeAlarmsRequest) SetResourceId(resourceId string) {
     r.ResourceId = &resourceId
+}
+
+/* param status: 规则状态 disabled:禁用 enabled:启用(Optional) */
+func (r *DescribeAlarmsRequest) SetStatus(status string) {
+    r.Status = &status
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

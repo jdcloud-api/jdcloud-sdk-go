@@ -39,6 +39,9 @@ type DescribeCabinetsRequest struct {
 cabinetId - 机柜ID，精确匹配，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
+
+    /* 机柜开通状态 disabled:未开通 enabling:开通中 enabled:已开通 disabling:关电中 (Optional) */
+    CabinetOpenStatus *string `json:"cabinetOpenStatus"`
 }
 
 /*
@@ -68,12 +71,14 @@ func NewDescribeCabinetsRequest(
  * param filters: roomNo - 房间号，精确匹配，支持多个
 cabinetId - 机柜ID，精确匹配，支持多个
  (Optional)
+ * param cabinetOpenStatus: 机柜开通状态 disabled:未开通 enabling:开通中 enabled:已开通 disabling:关电中 (Optional)
  */
 func NewDescribeCabinetsRequestWithAllParams(
     idc string,
     pageNumber *int,
     pageSize *int,
     filters []common.Filter,
+    cabinetOpenStatus *string,
 ) *DescribeCabinetsRequest {
 
     return &DescribeCabinetsRequest{
@@ -87,6 +92,7 @@ func NewDescribeCabinetsRequestWithAllParams(
         PageNumber: pageNumber,
         PageSize: pageSize,
         Filters: filters,
+        CabinetOpenStatus: cabinetOpenStatus,
     }
 }
 
@@ -123,6 +129,11 @@ cabinetId - 机柜ID，精确匹配，支持多个
 (Optional) */
 func (r *DescribeCabinetsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
+}
+
+/* param cabinetOpenStatus: 机柜开通状态 disabled:未开通 enabling:开通中 enabled:已开通 disabling:关电中(Optional) */
+func (r *DescribeCabinetsRequest) SetCabinetOpenStatus(cabinetOpenStatus string) {
+    r.CabinetOpenStatus = &cabinetOpenStatus
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

@@ -38,6 +38,9 @@ type DescribeIpsRequest struct {
     /* ipId - 公网IP实例ID，精确匹配，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
+
+    /* 状态 normal:正常 abnormal:异常 (Optional) */
+    Status *string `json:"status"`
 }
 
 /*
@@ -66,12 +69,14 @@ func NewDescribeIpsRequest(
  * param pageSize: 分页大小，默认为20 (Optional)
  * param filters: ipId - 公网IP实例ID，精确匹配，支持多个
  (Optional)
+ * param status: 状态 normal:正常 abnormal:异常 (Optional)
  */
 func NewDescribeIpsRequestWithAllParams(
     idc string,
     pageNumber *int,
     pageSize *int,
     filters []common.Filter,
+    status *string,
 ) *DescribeIpsRequest {
 
     return &DescribeIpsRequest{
@@ -85,6 +90,7 @@ func NewDescribeIpsRequestWithAllParams(
         PageNumber: pageNumber,
         PageSize: pageSize,
         Filters: filters,
+        Status: status,
     }
 }
 
@@ -120,6 +126,11 @@ func (r *DescribeIpsRequest) SetPageSize(pageSize int) {
 (Optional) */
 func (r *DescribeIpsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
+}
+
+/* param status: 状态 normal:正常 abnormal:异常(Optional) */
+func (r *DescribeIpsRequest) SetStatus(status string) {
+    r.Status = &status
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

@@ -49,7 +49,7 @@ type CreateListenerRequest struct {
     /* 默认后端服务的转发策略,取值为Forward或Redirect, 现只支持Forward, 默认为Forward (Optional) */
     Action *string `json:"action"`
 
-    /* 【alb Https和Tls协议】ssl server证书列表，现只支持一个证书 (Optional) */
+    /* 【alb Https和Tls协议】Listener绑定的默认证书，只支持一个证书 (Optional) */
     CertificateSpecs []lb.CertificateSpec `json:"certificateSpecs"`
 
     /* 【alb、nlb】空闲连接超时时间, 范围为[1,86400]。 <br>（Tcp和Tls协议）默认为：1800s <br>（Http和Https协议）默认为：60s <br>【dnlb】不支持 (Optional) */
@@ -103,7 +103,7 @@ func NewCreateListenerRequest(
  * param loadBalancerId: Listener所属loadBalancer的Id (Required)
  * param urlMapId: 【alb Https和Http协议】转发规则组Id (Optional)
  * param action: 默认后端服务的转发策略,取值为Forward或Redirect, 现只支持Forward, 默认为Forward (Optional)
- * param certificateSpecs: 【alb Https和Tls协议】ssl server证书列表，现只支持一个证书 (Optional)
+ * param certificateSpecs: 【alb Https和Tls协议】Listener绑定的默认证书，只支持一个证书 (Optional)
  * param connectionIdleTimeSeconds: 【alb、nlb】空闲连接超时时间, 范围为[1,86400]。 <br>（Tcp和Tls协议）默认为：1800s <br>（Http和Https协议）默认为：60s <br>【dnlb】不支持 (Optional)
  * param description: 描述,允许输入UTF-8编码下的全部字符，不超过256字符 (Optional)
  */
@@ -195,7 +195,7 @@ func (r *CreateListenerRequest) SetAction(action string) {
     r.Action = &action
 }
 
-/* param certificateSpecs: 【alb Https和Tls协议】ssl server证书列表，现只支持一个证书(Optional) */
+/* param certificateSpecs: 【alb Https和Tls协议】Listener绑定的默认证书，只支持一个证书(Optional) */
 func (r *CreateListenerRequest) SetCertificateSpecs(certificateSpecs []lb.CertificateSpec) {
     r.CertificateSpecs = certificateSpecs
 }

@@ -47,4 +47,7 @@ type CreateLoadBalancerSpec struct {
 
     /* 删除保护，取值为True(开启)或False(关闭)，默认为False (Optional) */
     DeleteProtection bool `json:"deleteProtection"`
+
+    /* 用户tag 信息 (Optional) */
+    UserTags []Tag `json:"userTags"`
 }

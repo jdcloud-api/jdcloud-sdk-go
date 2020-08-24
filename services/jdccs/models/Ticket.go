@@ -54,4 +54,19 @@ type Ticket struct {
 
     /* 机房名称 (Optional) */
     IdcName string `json:"idcName"`
+
+    /* 通用服务工单申请数量 (Optional) */
+    Count int `json:"count"`
+
+    /* 是否是商业化外部机房 (Optional) */
+    IsExternalIdc bool `json:"isExternalIdc"`
+
+    /* 外部机房地址 (Optional) */
+    ExternalIdcAddress string `json:"externalIdcAddress"`
+
+    /* 外部机房联系人 (Optional) */
+    ExternalIdcContactPerson string `json:"externalIdcContactPerson"`
+
+    /* 外部机房联系电话 (Optional) */
+    ExternalIdcContactPhone string `json:"externalIdcContactPhone"`
 }

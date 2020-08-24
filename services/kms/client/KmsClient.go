@@ -40,7 +40,7 @@ func NewKmsClient(credential *core.Credential) *KmsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "kms",
-            Revision:    "0.3.0",
+            Revision:    "0.3.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }

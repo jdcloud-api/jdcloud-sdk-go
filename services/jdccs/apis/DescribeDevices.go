@@ -42,6 +42,9 @@ type DescribeDevicesRequest struct {
 snNo - 设备SN号，精确匹配，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
+
+    /* 设备类型 server:服务器 network:网络设备 storage:存储设备 other:其他设备 (Optional) */
+    DeviceType *string `json:"deviceType"`
 }
 
 /*
@@ -72,6 +75,7 @@ func NewDescribeDevicesRequest(
  * param filters: deviceId - 设备实例ID，精确匹配，支持多个
 snNo - 设备SN号，精确匹配，支持多个
  (Optional)
+ * param deviceType: 设备类型 server:服务器 network:网络设备 storage:存储设备 other:其他设备 (Optional)
  */
 func NewDescribeDevicesRequestWithAllParams(
     idc string,
@@ -79,6 +83,7 @@ func NewDescribeDevicesRequestWithAllParams(
     pageSize *int,
     cabinetId *string,
     filters []common.Filter,
+    deviceType *string,
 ) *DescribeDevicesRequest {
 
     return &DescribeDevicesRequest{
@@ -93,6 +98,7 @@ func NewDescribeDevicesRequestWithAllParams(
         PageSize: pageSize,
         CabinetId: cabinetId,
         Filters: filters,
+        DeviceType: deviceType,
     }
 }
 
@@ -134,6 +140,11 @@ snNo - 设备SN号，精确匹配，支持多个
 (Optional) */
 func (r *DescribeDevicesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
+}
+
+/* param deviceType: 设备类型 server:服务器 network:网络设备 storage:存储设备 other:其他设备(Optional) */
+func (r *DescribeDevicesRequest) SetDeviceType(deviceType string) {
+    r.DeviceType = &deviceType
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
