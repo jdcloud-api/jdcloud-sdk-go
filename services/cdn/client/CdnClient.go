@@ -40,7 +40,7 @@ func NewCdnClient(credential *core.Credential) *CdnClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "cdn",
-            Revision:    "0.10.20",
+            Revision:    "0.10.22",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -628,26 +628,6 @@ func (c *CdnClient) QueryCdnUserQuota(request *cdn.QueryCdnUserQuotaRequest) (*c
     }
 
     jdResp := &cdn.QueryCdnUserQuotaResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 获取所有上层节点的ip */
-func (c *CdnClient) CheckWhetherIpBelongToJCloudV2(request *cdn.CheckWhetherIpBelongToJCloudV2Request) (*cdn.CheckWhetherIpBelongToJCloudV2Response, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &cdn.CheckWhetherIpBelongToJCloudV2Response{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1817,6 +1797,26 @@ func (c *CdnClient) QueryUnForbiddenStatus(request *cdn.QueryUnForbiddenStatusRe
     return jdResp, err
 }
 
+/* dash鉴权设置 */
+func (c *CdnClient) SetAuthConfig(request *cdn.SetAuthConfigRequest) (*cdn.SetAuthConfigResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.SetAuthConfigResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询ip黑白名单 */
 func (c *CdnClient) QueryIpBlackList(request *cdn.QueryIpBlackListRequest) (*cdn.QueryIpBlackListResponse, error) {
     if request == nil {
@@ -2628,6 +2628,26 @@ func (c *CdnClient) QueryBackSourcePath(request *cdn.QueryBackSourcePathRequest)
     }
 
     jdResp := &cdn.QueryBackSourcePathResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 回源鉴权设置 */
+func (c *CdnClient) SetSourceAuthConfig(request *cdn.SetSourceAuthConfigRequest) (*cdn.SetSourceAuthConfigResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.SetSourceAuthConfigResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

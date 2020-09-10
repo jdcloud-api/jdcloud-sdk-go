@@ -40,13 +40,13 @@ type PerStamp struct {
     /* 盖章页码（选择坐标盖章时需要） (Optional) */
     Page *int `json:"page"`
 
-    /* 印章名称,必须和imageB64同时非空 (Optional) */
+    /* 印章名称 (Optional) */
     SealName *string `json:"sealName"`
 
-    /* 印章图像base64(与stampId二选一) (Optional) */
+    /* 印章图像base64(建议png格式,不传使用默认方形章) (Optional) */
     ImageB64 *string `json:"imageB64"`
 
-    /* 印章ID(与imageB64二选一) (Optional) */
+    /* 印章ID (Optional) */
     StampId *string `json:"stampId"`
 
     /* 印章描述 (Optional) */

@@ -28,41 +28,44 @@ type AddTemplateRequest struct {
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* appId参数 (Optional) */
-    AppId *string `json:"appId"`
+    /* 应用ID  */
+    AppId string `json:"appId"`
 
-    /* signType参数 (Optional) */
-    SignType *string `json:"signType"`
+    /* 资质ID  */
+    AptitudesId string `json:"aptitudesId"`
 
-    /* purpose参数 (Optional) */
-    Purpose *string `json:"purpose"`
+    /* 短信主题  */
+    Title string `json:"title"`
 
-    /* signCardType参数 (Optional) */
-    SignCardType *string `json:"signCardType"`
+    /* 短信描述  */
+    Description string `json:"description"`
 
-    /* aptitudes参数 (Optional) */
-    Aptitudes *string `json:"aptitudes"`
+    /* 短信签名  */
+    SignContent string `json:"signContent"`
 
-    /* title参数 (Optional) */
-    Title *string `json:"title"`
-
-    /* description参数 (Optional) */
-    Description *string `json:"description"`
-
-    /* isTuiding参数 (Optional) */
-    IsTuiding *string `json:"isTuiding"`
-
-    /* content参数 (Optional) */
-    Content []rms.QueryAddTemplateContent `json:"content"`
+    /* 短信内容  */
+    Content []rms.TemplateContent `json:"content"`
 }
 
 /*
  * param regionId: Region ID (Required)
+ * param appId: 应用ID (Required)
+ * param aptitudesId: 资质ID (Required)
+ * param title: 短信主题 (Required)
+ * param description: 短信描述 (Required)
+ * param signContent: 短信签名 (Required)
+ * param content: 短信内容 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewAddTemplateRequest(
     regionId string,
+    appId string,
+    aptitudesId string,
+    title string,
+    description string,
+    signContent string,
+    content []rms.TemplateContent,
 ) *AddTemplateRequest {
 
 	return &AddTemplateRequest{
@@ -70,35 +73,35 @@ func NewAddTemplateRequest(
 			URL:     "/regions/{regionId}/addTemplate",
 			Method:  "POST",
 			Header:  nil,
-			Version: "v1",
+			Version: "v2",
 		},
         RegionId: regionId,
+        AppId: appId,
+        AptitudesId: aptitudesId,
+        Title: title,
+        Description: description,
+        SignContent: signContent,
+        Content: content,
 	}
 }
 
 /*
  * param regionId: Region ID (Required)
- * param appId: appId参数 (Optional)
- * param signType: signType参数 (Optional)
- * param purpose: purpose参数 (Optional)
- * param signCardType: signCardType参数 (Optional)
- * param aptitudes: aptitudes参数 (Optional)
- * param title: title参数 (Optional)
- * param description: description参数 (Optional)
- * param isTuiding: isTuiding参数 (Optional)
- * param content: content参数 (Optional)
+ * param appId: 应用ID (Required)
+ * param aptitudesId: 资质ID (Required)
+ * param title: 短信主题 (Required)
+ * param description: 短信描述 (Required)
+ * param signContent: 短信签名 (Required)
+ * param content: 短信内容 (Required)
  */
 func NewAddTemplateRequestWithAllParams(
     regionId string,
-    appId *string,
-    signType *string,
-    purpose *string,
-    signCardType *string,
-    aptitudes *string,
-    title *string,
-    description *string,
-    isTuiding *string,
-    content []rms.QueryAddTemplateContent,
+    appId string,
+    aptitudesId string,
+    title string,
+    description string,
+    signContent string,
+    content []rms.TemplateContent,
 ) *AddTemplateRequest {
 
     return &AddTemplateRequest{
@@ -106,17 +109,14 @@ func NewAddTemplateRequestWithAllParams(
             URL:     "/regions/{regionId}/addTemplate",
             Method:  "POST",
             Header:  nil,
-            Version: "v1",
+            Version: "v2",
         },
         RegionId: regionId,
         AppId: appId,
-        SignType: signType,
-        Purpose: purpose,
-        SignCardType: signCardType,
-        Aptitudes: aptitudes,
+        AptitudesId: aptitudesId,
         Title: title,
         Description: description,
-        IsTuiding: isTuiding,
+        SignContent: signContent,
         Content: content,
     }
 }
@@ -129,7 +129,7 @@ func NewAddTemplateRequestWithoutParam() *AddTemplateRequest {
             URL:     "/regions/{regionId}/addTemplate",
             Method:  "POST",
             Header:  nil,
-            Version: "v1",
+            Version: "v2",
         },
     }
 }
@@ -139,48 +139,33 @@ func (r *AddTemplateRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param appId: appId参数(Optional) */
+/* param appId: 应用ID(Required) */
 func (r *AddTemplateRequest) SetAppId(appId string) {
-    r.AppId = &appId
+    r.AppId = appId
 }
 
-/* param signType: signType参数(Optional) */
-func (r *AddTemplateRequest) SetSignType(signType string) {
-    r.SignType = &signType
+/* param aptitudesId: 资质ID(Required) */
+func (r *AddTemplateRequest) SetAptitudesId(aptitudesId string) {
+    r.AptitudesId = aptitudesId
 }
 
-/* param purpose: purpose参数(Optional) */
-func (r *AddTemplateRequest) SetPurpose(purpose string) {
-    r.Purpose = &purpose
-}
-
-/* param signCardType: signCardType参数(Optional) */
-func (r *AddTemplateRequest) SetSignCardType(signCardType string) {
-    r.SignCardType = &signCardType
-}
-
-/* param aptitudes: aptitudes参数(Optional) */
-func (r *AddTemplateRequest) SetAptitudes(aptitudes string) {
-    r.Aptitudes = &aptitudes
-}
-
-/* param title: title参数(Optional) */
+/* param title: 短信主题(Required) */
 func (r *AddTemplateRequest) SetTitle(title string) {
-    r.Title = &title
+    r.Title = title
 }
 
-/* param description: description参数(Optional) */
+/* param description: 短信描述(Required) */
 func (r *AddTemplateRequest) SetDescription(description string) {
-    r.Description = &description
+    r.Description = description
 }
 
-/* param isTuiding: isTuiding参数(Optional) */
-func (r *AddTemplateRequest) SetIsTuiding(isTuiding string) {
-    r.IsTuiding = &isTuiding
+/* param signContent: 短信签名(Required) */
+func (r *AddTemplateRequest) SetSignContent(signContent string) {
+    r.SignContent = signContent
 }
 
-/* param content: content参数(Optional) */
-func (r *AddTemplateRequest) SetContent(content []rms.QueryAddTemplateContent) {
+/* param content: 短信内容(Required) */
+func (r *AddTemplateRequest) SetContent(content []rms.TemplateContent) {
     r.Content = content
 }
 
@@ -197,7 +182,8 @@ type AddTemplateResponse struct {
 }
 
 type AddTemplateResult struct {
-    Data []rms.RespAddTemplateData `json:"data"`
+    Data rms.RespTemplateData `json:"data"`
+    Status bool `json:"status"`
+    Code string `json:"code"`
     Message string `json:"message"`
-    Status string `json:"status"`
 }

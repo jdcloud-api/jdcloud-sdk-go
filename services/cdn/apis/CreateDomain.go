@@ -72,6 +72,9 @@ type CreateDomainRequest struct {
 
     /* 加速区域:(mainLand:中国大陆，nonMainLand:海外加港澳台，all:全球)默认为中国大陆 (Optional) */
     AccelerateRegion *string `json:"accelerateRegion"`
+
+    /*  (Optional) */
+    TempInstId *int64 `json:"tempInstId"`
 }
 
 /*
@@ -111,6 +114,7 @@ func NewCreateDomainRequest(
  * param domainSource:  (Optional)
  * param ossSource:  (Optional)
  * param accelerateRegion: 加速区域:(mainLand:中国大陆，nonMainLand:海外加港澳台，all:全球)默认为中国大陆 (Optional)
+ * param tempInstId:  (Optional)
  */
 func NewCreateDomainRequestWithAllParams(
     domain string,
@@ -129,6 +133,7 @@ func NewCreateDomainRequestWithAllParams(
     domainSource []cdn.DomainSourceInfo,
     ossSource *string,
     accelerateRegion *string,
+    tempInstId *int64,
 ) *CreateDomainRequest {
 
     return &CreateDomainRequest{
@@ -154,6 +159,7 @@ func NewCreateDomainRequestWithAllParams(
         DomainSource: domainSource,
         OssSource: ossSource,
         AccelerateRegion: accelerateRegion,
+        TempInstId: tempInstId,
     }
 }
 
@@ -248,6 +254,11 @@ func (r *CreateDomainRequest) SetOssSource(ossSource string) {
 /* param accelerateRegion: 加速区域:(mainLand:中国大陆，nonMainLand:海外加港澳台，all:全球)默认为中国大陆(Optional) */
 func (r *CreateDomainRequest) SetAccelerateRegion(accelerateRegion string) {
     r.AccelerateRegion = &accelerateRegion
+}
+
+/* param tempInstId: (Optional) */
+func (r *CreateDomainRequest) SetTempInstId(tempInstId int64) {
+    r.TempInstId = &tempInstId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

@@ -25,13 +25,13 @@ type QueryJDBoxStatisticsDataRequest struct {
 
     core.JDCloudRequest
 
-    /* 查询起始时间,UTC时间，格式为:yyyy-MM-dd'T'HH:mm:ss'Z'，示例:2018-10-21T10:00:00Z (Optional) */
-    StartTime *string `json:"startTime"`
+    /* 查询起始时间,时间戳 (Optional) */
+    StartTime *int64 `json:"startTime"`
 
-    /* 查询截止时间,UTC时间，格式为:yyyy-MM-dd'T'HH:mm:ss'Z'，示例:2018-10-21T10:00:00Z (Optional) */
-    EndTime *string `json:"endTime"`
+    /* 查询截止时间,时间戳 (Optional) */
+    EndTime *int64 `json:"endTime"`
 
-    /* 查询的字段，决定了查询结果中出现哪些字段，取值范围见"统计字段说明"。多个用逗号分隔。默认为空，表示查询带宽流量 pv (Optional) */
+    /* 查询的字段，取值范围(avgbandwidth,pv,flow)。多个用逗号分隔。默认为空，表示查询带宽流量 (Optional) */
     Fields *string `json:"fields"`
 
     /*  (Optional) */
@@ -40,17 +40,17 @@ type QueryJDBoxStatisticsDataRequest struct {
     /*  (Optional) */
     Isp *string `json:"isp"`
 
-    /* 查询周期，当前取值范围：“oneMin,fiveMin,halfHour,hour,twoHour,sixHour,day,followTime”，分别表示1min，5min，半小时，1小时，2小时，6小时，1天，跟随时间。默认为空，表示fiveMin。当传入followTime时，表示按Endtime-StartTime的周期，只返回一个点 (Optional) */
+    /* 查询周期，当前取值范围：“oneMin,fiveMin”，分别表示1min，5min。默认为空，表示fiveMin (Optional) */
     Period *string `json:"period"`
-
-    /* 取值范围[area,isp,mac_addr,category]  按区域、运营商、设备、业务类型分组，默认为isp (Optional) */
-    GroupBy *string `json:"groupBy"`
 
     /* 业务类型 (Optional) */
     Category *string `json:"category"`
 
     /* 设备id (Optional) */
     MacAddr *string `json:"macAddr"`
+
+    /* 插件pin (Optional) */
+    PluginPin *string `json:"pluginPin"`
 }
 
 /*
@@ -71,26 +71,26 @@ func NewQueryJDBoxStatisticsDataRequest(
 }
 
 /*
- * param startTime: 查询起始时间,UTC时间，格式为:yyyy-MM-dd'T'HH:mm:ss'Z'，示例:2018-10-21T10:00:00Z (Optional)
- * param endTime: 查询截止时间,UTC时间，格式为:yyyy-MM-dd'T'HH:mm:ss'Z'，示例:2018-10-21T10:00:00Z (Optional)
- * param fields: 查询的字段，决定了查询结果中出现哪些字段，取值范围见"统计字段说明"。多个用逗号分隔。默认为空，表示查询带宽流量 pv (Optional)
+ * param startTime: 查询起始时间,时间戳 (Optional)
+ * param endTime: 查询截止时间,时间戳 (Optional)
+ * param fields: 查询的字段，取值范围(avgbandwidth,pv,flow)。多个用逗号分隔。默认为空，表示查询带宽流量 (Optional)
  * param area:  (Optional)
  * param isp:  (Optional)
- * param period: 查询周期，当前取值范围：“oneMin,fiveMin,halfHour,hour,twoHour,sixHour,day,followTime”，分别表示1min，5min，半小时，1小时，2小时，6小时，1天，跟随时间。默认为空，表示fiveMin。当传入followTime时，表示按Endtime-StartTime的周期，只返回一个点 (Optional)
- * param groupBy: 取值范围[area,isp,mac_addr,category]  按区域、运营商、设备、业务类型分组，默认为isp (Optional)
+ * param period: 查询周期，当前取值范围：“oneMin,fiveMin”，分别表示1min，5min。默认为空，表示fiveMin (Optional)
  * param category: 业务类型 (Optional)
  * param macAddr: 设备id (Optional)
+ * param pluginPin: 插件pin (Optional)
  */
 func NewQueryJDBoxStatisticsDataRequestWithAllParams(
-    startTime *string,
-    endTime *string,
+    startTime *int64,
+    endTime *int64,
     fields *string,
     area *string,
     isp *string,
     period *string,
-    groupBy *string,
     category *string,
     macAddr *string,
+    pluginPin *string,
 ) *QueryJDBoxStatisticsDataRequest {
 
     return &QueryJDBoxStatisticsDataRequest{
@@ -106,9 +106,9 @@ func NewQueryJDBoxStatisticsDataRequestWithAllParams(
         Area: area,
         Isp: isp,
         Period: period,
-        GroupBy: groupBy,
         Category: category,
         MacAddr: macAddr,
+        PluginPin: pluginPin,
     }
 }
 
@@ -125,17 +125,17 @@ func NewQueryJDBoxStatisticsDataRequestWithoutParam() *QueryJDBoxStatisticsDataR
     }
 }
 
-/* param startTime: 查询起始时间,UTC时间，格式为:yyyy-MM-dd'T'HH:mm:ss'Z'，示例:2018-10-21T10:00:00Z(Optional) */
-func (r *QueryJDBoxStatisticsDataRequest) SetStartTime(startTime string) {
+/* param startTime: 查询起始时间,时间戳(Optional) */
+func (r *QueryJDBoxStatisticsDataRequest) SetStartTime(startTime int64) {
     r.StartTime = &startTime
 }
 
-/* param endTime: 查询截止时间,UTC时间，格式为:yyyy-MM-dd'T'HH:mm:ss'Z'，示例:2018-10-21T10:00:00Z(Optional) */
-func (r *QueryJDBoxStatisticsDataRequest) SetEndTime(endTime string) {
+/* param endTime: 查询截止时间,时间戳(Optional) */
+func (r *QueryJDBoxStatisticsDataRequest) SetEndTime(endTime int64) {
     r.EndTime = &endTime
 }
 
-/* param fields: 查询的字段，决定了查询结果中出现哪些字段，取值范围见"统计字段说明"。多个用逗号分隔。默认为空，表示查询带宽流量 pv(Optional) */
+/* param fields: 查询的字段，取值范围(avgbandwidth,pv,flow)。多个用逗号分隔。默认为空，表示查询带宽流量(Optional) */
 func (r *QueryJDBoxStatisticsDataRequest) SetFields(fields string) {
     r.Fields = &fields
 }
@@ -150,14 +150,9 @@ func (r *QueryJDBoxStatisticsDataRequest) SetIsp(isp string) {
     r.Isp = &isp
 }
 
-/* param period: 查询周期，当前取值范围：“oneMin,fiveMin,halfHour,hour,twoHour,sixHour,day,followTime”，分别表示1min，5min，半小时，1小时，2小时，6小时，1天，跟随时间。默认为空，表示fiveMin。当传入followTime时，表示按Endtime-StartTime的周期，只返回一个点(Optional) */
+/* param period: 查询周期，当前取值范围：“oneMin,fiveMin”，分别表示1min，5min。默认为空，表示fiveMin(Optional) */
 func (r *QueryJDBoxStatisticsDataRequest) SetPeriod(period string) {
     r.Period = &period
-}
-
-/* param groupBy: 取值范围[area,isp,mac_addr,category]  按区域、运营商、设备、业务类型分组，默认为isp(Optional) */
-func (r *QueryJDBoxStatisticsDataRequest) SetGroupBy(groupBy string) {
-    r.GroupBy = &groupBy
 }
 
 /* param category: 业务类型(Optional) */
@@ -168,6 +163,11 @@ func (r *QueryJDBoxStatisticsDataRequest) SetCategory(category string) {
 /* param macAddr: 设备id(Optional) */
 func (r *QueryJDBoxStatisticsDataRequest) SetMacAddr(macAddr string) {
     r.MacAddr = &macAddr
+}
+
+/* param pluginPin: 插件pin(Optional) */
+func (r *QueryJDBoxStatisticsDataRequest) SetPluginPin(pluginPin string) {
+    r.PluginPin = &pluginPin
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

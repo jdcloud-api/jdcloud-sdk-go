@@ -33,6 +33,9 @@ type DescribeTemplateListRequest struct {
 
     /* 合同模板名称或者标题 (Optional) */
     TemplateNameOrTitle *string `json:"templateNameOrTitle"`
+
+    /* 模板类型 pdf,word,pdf-auto(不传查所有类型) (Optional) */
+    TemplateType *string `json:"templateType"`
 }
 
 /*
@@ -56,11 +59,13 @@ func NewDescribeTemplateListRequest(
  * param pageNumber: 页码, 默认为1 (Optional)
  * param pageSize: 分页大小, 默认为10, 取值范围[10, 100] (Optional)
  * param templateNameOrTitle: 合同模板名称或者标题 (Optional)
+ * param templateType: 模板类型 pdf,word,pdf-auto(不传查所有类型) (Optional)
  */
 func NewDescribeTemplateListRequestWithAllParams(
     pageNumber *int,
     pageSize *int,
     templateNameOrTitle *string,
+    templateType *string,
 ) *DescribeTemplateListRequest {
 
     return &DescribeTemplateListRequest{
@@ -73,6 +78,7 @@ func NewDescribeTemplateListRequestWithAllParams(
         PageNumber: pageNumber,
         PageSize: pageSize,
         TemplateNameOrTitle: templateNameOrTitle,
+        TemplateType: templateType,
     }
 }
 
@@ -102,6 +108,11 @@ func (r *DescribeTemplateListRequest) SetPageSize(pageSize int) {
 /* param templateNameOrTitle: 合同模板名称或者标题(Optional) */
 func (r *DescribeTemplateListRequest) SetTemplateNameOrTitle(templateNameOrTitle string) {
     r.TemplateNameOrTitle = &templateNameOrTitle
+}
+
+/* param templateType: 模板类型 pdf,word,pdf-auto(不传查所有类型)(Optional) */
+func (r *DescribeTemplateListRequest) SetTemplateType(templateType string) {
+    r.TemplateType = &templateType
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

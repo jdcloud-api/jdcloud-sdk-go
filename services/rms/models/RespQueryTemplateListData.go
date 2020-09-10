@@ -19,24 +19,27 @@ package models
 
 type RespQueryTemplateListData struct {
 
-    /* reason参数 (Optional) */
-    Reason string `json:"reason"`
-
-    /* createTime参数 (Optional) */
-    CreateTime string `json:"createTime"`
-
-    /* contentSize参数 (Optional) */
-    ContentSize string `json:"contentSize"`
-
-    /* description参数 (Optional) */
-    Description string `json:"description"`
-
-    /* templateId参数 (Optional) */
+    /* 短信ID (Optional) */
     TemplateId string `json:"templateId"`
 
-    /* title参数 (Optional) */
+    /* 短信标题 (Optional) */
     Title string `json:"title"`
 
-    /* status参数 (Optional) */
+    /* 审核状态 0: 审核中 1: 通过 2: 未通过 4:待提交 (Optional) */
     Status string `json:"status"`
+
+    /* 审核未通过原因 (Optional) */
+    Reason string `json:"reason"`
+
+    /* 短信创建时间 yyyy-MM-dd HH:mm:ss (Optional) */
+    CreateTime string `json:"createTime"`
+
+    /* 短信内容大小 (Optional) */
+    ContentSize string `json:"contentSize"`
+
+    /* 资质Id (Optional) */
+    AptitudesId string `json:"aptitudesId"`
+
+    /* 短信描述 (Optional) */
+    Description string `json:"description"`
 }

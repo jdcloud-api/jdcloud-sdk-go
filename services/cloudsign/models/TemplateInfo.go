@@ -37,6 +37,12 @@ type TemplateInfo struct {
     /* 合同模板文件摘要 (Optional) */
     TemplateDigest string `json:"templateDigest"`
 
+    /* 合同模板文件类型 pdf,word,pdf-auto (Optional) */
+    TemplateType string `json:"templateType"`
+
+    /* 填充信息 (Optional) */
+    PaddingInfo []PaddingInfo `json:"paddingInfo"`
+
     /* 创建时间 (Optional) */
     CreateTime string `json:"createTime"`
 }

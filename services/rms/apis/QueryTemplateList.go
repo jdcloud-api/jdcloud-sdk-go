@@ -28,38 +28,41 @@ type QueryTemplateListRequest struct {
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* appId参数 (Optional) */
-    AppId *string `json:"appId"`
+    /* 应用ID  */
+    AppId string `json:"appId"`
 
-    /* searchKey参数 (Optional) */
-    SearchKey *string `json:"searchKey"`
-
-    /* pageNum参数 (Optional) */
-    PageNum *string `json:"pageNum"`
-
-    /* pageLimit参数 (Optional) */
-    PageLimit *string `json:"pageLimit"`
-
-    /* status参数 (Optional) */
-    Status *string `json:"status"`
-
-    /* title参数 (Optional) */
+    /* 查询标题关键词 (Optional) */
     Title *string `json:"title"`
 
-    /* startTime参数 (Optional) */
+    /* 第几页  */
+    PageNum int `json:"pageNum"`
+
+    /* 每页多少条记录  */
+    PageLimit int `json:"pageLimit"`
+
+    /* 审核状态：0: 审核中 1: 通过 2: 未通过 4:待提交 (Optional) */
+    Status *string `json:"status"`
+
+    /* 开始时间,格式YYYY-MM-DD (Optional) */
     StartTime *string `json:"startTime"`
 
-    /* endTime参数 (Optional) */
+    /* 结束时间,格式YYYY-MM-DD (Optional) */
     EndTime *string `json:"endTime"`
 }
 
 /*
  * param regionId: Region ID (Required)
+ * param appId: 应用ID (Required)
+ * param pageNum: 第几页 (Required)
+ * param pageLimit: 每页多少条记录 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewQueryTemplateListRequest(
     regionId string,
+    appId string,
+    pageNum int,
+    pageLimit int,
 ) *QueryTemplateListRequest {
 
 	return &QueryTemplateListRequest{
@@ -67,31 +70,32 @@ func NewQueryTemplateListRequest(
 			URL:     "/regions/{regionId}/queryTemplateList",
 			Method:  "POST",
 			Header:  nil,
-			Version: "v1",
+			Version: "v2",
 		},
         RegionId: regionId,
+        AppId: appId,
+        PageNum: pageNum,
+        PageLimit: pageLimit,
 	}
 }
 
 /*
  * param regionId: Region ID (Required)
- * param appId: appId参数 (Optional)
- * param searchKey: searchKey参数 (Optional)
- * param pageNum: pageNum参数 (Optional)
- * param pageLimit: pageLimit参数 (Optional)
- * param status: status参数 (Optional)
- * param title: title参数 (Optional)
- * param startTime: startTime参数 (Optional)
- * param endTime: endTime参数 (Optional)
+ * param appId: 应用ID (Required)
+ * param title: 查询标题关键词 (Optional)
+ * param pageNum: 第几页 (Required)
+ * param pageLimit: 每页多少条记录 (Required)
+ * param status: 审核状态：0: 审核中 1: 通过 2: 未通过 4:待提交 (Optional)
+ * param startTime: 开始时间,格式YYYY-MM-DD (Optional)
+ * param endTime: 结束时间,格式YYYY-MM-DD (Optional)
  */
 func NewQueryTemplateListRequestWithAllParams(
     regionId string,
-    appId *string,
-    searchKey *string,
-    pageNum *string,
-    pageLimit *string,
-    status *string,
+    appId string,
     title *string,
+    pageNum int,
+    pageLimit int,
+    status *string,
     startTime *string,
     endTime *string,
 ) *QueryTemplateListRequest {
@@ -101,15 +105,14 @@ func NewQueryTemplateListRequestWithAllParams(
             URL:     "/regions/{regionId}/queryTemplateList",
             Method:  "POST",
             Header:  nil,
-            Version: "v1",
+            Version: "v2",
         },
         RegionId: regionId,
         AppId: appId,
-        SearchKey: searchKey,
+        Title: title,
         PageNum: pageNum,
         PageLimit: pageLimit,
         Status: status,
-        Title: title,
         StartTime: startTime,
         EndTime: endTime,
     }
@@ -123,7 +126,7 @@ func NewQueryTemplateListRequestWithoutParam() *QueryTemplateListRequest {
             URL:     "/regions/{regionId}/queryTemplateList",
             Method:  "POST",
             Header:  nil,
-            Version: "v1",
+            Version: "v2",
         },
     }
 }
@@ -133,42 +136,37 @@ func (r *QueryTemplateListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param appId: appId参数(Optional) */
+/* param appId: 应用ID(Required) */
 func (r *QueryTemplateListRequest) SetAppId(appId string) {
-    r.AppId = &appId
+    r.AppId = appId
 }
 
-/* param searchKey: searchKey参数(Optional) */
-func (r *QueryTemplateListRequest) SetSearchKey(searchKey string) {
-    r.SearchKey = &searchKey
-}
-
-/* param pageNum: pageNum参数(Optional) */
-func (r *QueryTemplateListRequest) SetPageNum(pageNum string) {
-    r.PageNum = &pageNum
-}
-
-/* param pageLimit: pageLimit参数(Optional) */
-func (r *QueryTemplateListRequest) SetPageLimit(pageLimit string) {
-    r.PageLimit = &pageLimit
-}
-
-/* param status: status参数(Optional) */
-func (r *QueryTemplateListRequest) SetStatus(status string) {
-    r.Status = &status
-}
-
-/* param title: title参数(Optional) */
+/* param title: 查询标题关键词(Optional) */
 func (r *QueryTemplateListRequest) SetTitle(title string) {
     r.Title = &title
 }
 
-/* param startTime: startTime参数(Optional) */
+/* param pageNum: 第几页(Required) */
+func (r *QueryTemplateListRequest) SetPageNum(pageNum int) {
+    r.PageNum = pageNum
+}
+
+/* param pageLimit: 每页多少条记录(Required) */
+func (r *QueryTemplateListRequest) SetPageLimit(pageLimit int) {
+    r.PageLimit = pageLimit
+}
+
+/* param status: 审核状态：0: 审核中 1: 通过 2: 未通过 4:待提交(Optional) */
+func (r *QueryTemplateListRequest) SetStatus(status string) {
+    r.Status = &status
+}
+
+/* param startTime: 开始时间,格式YYYY-MM-DD(Optional) */
 func (r *QueryTemplateListRequest) SetStartTime(startTime string) {
     r.StartTime = &startTime
 }
 
-/* param endTime: endTime参数(Optional) */
+/* param endTime: 结束时间,格式YYYY-MM-DD(Optional) */
 func (r *QueryTemplateListRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
@@ -186,8 +184,8 @@ type QueryTemplateListResponse struct {
 }
 
 type QueryTemplateListResult struct {
-    Data []rms.RespQueryTemplateListData `json:"data"`
+    Data rms.RespTemplatePageResult `json:"data"`
+    Status bool `json:"status"`
+    Code string `json:"code"`
     Message string `json:"message"`
-    TotalElements string `json:"totalElements"`
-    Status string `json:"status"`
 }

@@ -40,7 +40,7 @@ func NewRmsClient(credential *core.Credential) *RmsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "rms",
-            Revision:    "1.0.0",
+            Revision:    "1.2.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,6 +51,30 @@ func (c *RmsClient) SetConfig(config *core.Config) {
 
 func (c *RmsClient) SetLogger(logger core.Logger) {
     c.Logger = logger
+}
+
+func (c *RmsClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
+}
+
+/* 查询富媒体短信资质列表接口 */
+func (c *RmsClient) QueryCreditList(request *rms.QueryCreditListRequest) (*rms.QueryCreditListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rms.QueryCreditListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
 }
 
 /* 增加富媒体短信内容接口 */
@@ -64,6 +88,106 @@ func (c *RmsClient) AddTemplate(request *rms.AddTemplateRequest) (*rms.AddTempla
     }
 
     jdResp := &rms.AddTemplateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除富媒体短信内容接口 */
+func (c *RmsClient) DeleteTemplate(request *rms.DeleteTemplateRequest) (*rms.DeleteTemplateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rms.DeleteTemplateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询富媒体短信内容列表接口 */
+func (c *RmsClient) QueryTemplateList(request *rms.QueryTemplateListRequest) (*rms.QueryTemplateListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rms.QueryTemplateListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 套餐包余量，仅预付费用户使用 */
+func (c *RmsClient) QueryPackageRemainder(request *rms.QueryPackageRemainderRequest) (*rms.QueryPackageRemainderResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rms.QueryPackageRemainderResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改富媒体短信资质接口 */
+func (c *RmsClient) EditCredit(request *rms.EditCreditRequest) (*rms.EditCreditResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rms.EditCreditResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除富媒体短信资质接口 */
+func (c *RmsClient) DeleteCredit(request *rms.DeleteCreditRequest) (*rms.DeleteCreditResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rms.DeleteCreditResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -93,8 +217,8 @@ func (c *RmsClient) SendBatchMsg(request *rms.SendBatchMsgRequest) (*rms.SendBat
     return jdResp, err
 }
 
-/* 查询一个富媒体短信内容接口 */
-func (c *RmsClient) QueryOneTemplate(request *rms.QueryOneTemplateRequest) (*rms.QueryOneTemplateResponse, error) {
+/* 修改富媒体短信内容接口 */
+func (c *RmsClient) EditTemplate(request *rms.EditTemplateRequest) (*rms.EditTemplateResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -103,7 +227,7 @@ func (c *RmsClient) QueryOneTemplate(request *rms.QueryOneTemplateRequest) (*rms
         return nil, err
     }
 
-    jdResp := &rms.QueryOneTemplateResponse{}
+    jdResp := &rms.EditTemplateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -113,8 +237,8 @@ func (c *RmsClient) QueryOneTemplate(request *rms.QueryOneTemplateRequest) (*rms
     return jdResp, err
 }
 
-/* 查询富媒体短信内容列表接口 */
-func (c *RmsClient) QueryTemplateList(request *rms.QueryTemplateListRequest) (*rms.QueryTemplateListResponse, error) {
+/* 查询一个富媒体短信内容接口 */
+func (c *RmsClient) QueryTemplateById(request *rms.QueryTemplateByIdRequest) (*rms.QueryTemplateByIdResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -123,7 +247,27 @@ func (c *RmsClient) QueryTemplateList(request *rms.QueryTemplateListRequest) (*r
         return nil, err
     }
 
-    jdResp := &rms.QueryTemplateListResponse{}
+    jdResp := &rms.QueryTemplateByIdResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 增加富媒体短信资质接口 */
+func (c *RmsClient) AddCredit(request *rms.AddCreditRequest) (*rms.AddCreditResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rms.AddCreditResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

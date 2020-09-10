@@ -28,19 +28,27 @@ type QuerySendStatusRequest struct {
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 获取发送状态请求参数  */
-    QuerySendStatusSpec *rms.QuerySendStatusSpec `json:"querySendStatusSpec"`
+    /* 应用ID  */
+    AppId string `json:"appId"`
+
+    /* 序列号  */
+    SequenceNumber string `json:"sequenceNumber"`
+
+    /* 手机号 (Optional) */
+    Phone *string `json:"phone"`
 }
 
 /*
  * param regionId: Region ID (Required)
- * param querySendStatusSpec: 获取发送状态请求参数 (Required)
+ * param appId: 应用ID (Required)
+ * param sequenceNumber: 序列号 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewQuerySendStatusRequest(
     regionId string,
-    querySendStatusSpec *rms.QuerySendStatusSpec,
+    appId string,
+    sequenceNumber string,
 ) *QuerySendStatusRequest {
 
 	return &QuerySendStatusRequest{
@@ -48,20 +56,25 @@ func NewQuerySendStatusRequest(
 			URL:     "/regions/{regionId}/querySendStatus",
 			Method:  "POST",
 			Header:  nil,
-			Version: "v1",
+			Version: "v2",
 		},
         RegionId: regionId,
-        QuerySendStatusSpec: querySendStatusSpec,
+        AppId: appId,
+        SequenceNumber: sequenceNumber,
 	}
 }
 
 /*
  * param regionId: Region ID (Required)
- * param querySendStatusSpec: 获取发送状态请求参数 (Required)
+ * param appId: 应用ID (Required)
+ * param sequenceNumber: 序列号 (Required)
+ * param phone: 手机号 (Optional)
  */
 func NewQuerySendStatusRequestWithAllParams(
     regionId string,
-    querySendStatusSpec *rms.QuerySendStatusSpec,
+    appId string,
+    sequenceNumber string,
+    phone *string,
 ) *QuerySendStatusRequest {
 
     return &QuerySendStatusRequest{
@@ -69,10 +82,12 @@ func NewQuerySendStatusRequestWithAllParams(
             URL:     "/regions/{regionId}/querySendStatus",
             Method:  "POST",
             Header:  nil,
-            Version: "v1",
+            Version: "v2",
         },
         RegionId: regionId,
-        QuerySendStatusSpec: querySendStatusSpec,
+        AppId: appId,
+        SequenceNumber: sequenceNumber,
+        Phone: phone,
     }
 }
 
@@ -84,7 +99,7 @@ func NewQuerySendStatusRequestWithoutParam() *QuerySendStatusRequest {
             URL:     "/regions/{regionId}/querySendStatus",
             Method:  "POST",
             Header:  nil,
-            Version: "v1",
+            Version: "v2",
         },
     }
 }
@@ -94,9 +109,19 @@ func (r *QuerySendStatusRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param querySendStatusSpec: 获取发送状态请求参数(Required) */
-func (r *QuerySendStatusRequest) SetQuerySendStatusSpec(querySendStatusSpec *rms.QuerySendStatusSpec) {
-    r.QuerySendStatusSpec = querySendStatusSpec
+/* param appId: 应用ID(Required) */
+func (r *QuerySendStatusRequest) SetAppId(appId string) {
+    r.AppId = appId
+}
+
+/* param sequenceNumber: 序列号(Required) */
+func (r *QuerySendStatusRequest) SetSequenceNumber(sequenceNumber string) {
+    r.SequenceNumber = sequenceNumber
+}
+
+/* param phone: 手机号(Optional) */
+func (r *QuerySendStatusRequest) SetPhone(phone string) {
+    r.Phone = &phone
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
@@ -113,4 +138,7 @@ type QuerySendStatusResponse struct {
 
 type QuerySendStatusResult struct {
     Data []rms.QuerySendStatus `json:"data"`
+    Status bool `json:"status"`
+    Code string `json:"code"`
+    Message string `json:"message"`
 }

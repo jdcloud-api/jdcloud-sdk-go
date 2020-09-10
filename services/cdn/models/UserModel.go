@@ -23,7 +23,7 @@ type UserModel struct {
     Pin string `json:"pin"`
 
     /* 计费类型 (Optional) */
-    TypeList int `json:"typeList"`
+    TypeList string `json:"typeList"`
 
     /* 计费类型描述 (Optional) */
     TypeDescList string `json:"typeDescList"`
@@ -39,4 +39,7 @@ type UserModel struct {
 
     /* 结算方式描述 (Optional) */
     SettlementMethodDesc string `json:"settlementMethodDesc"`
+
+    /* 计费资源id (Optional) */
+    BillSourceid string `json:"billSourceid"`
 }

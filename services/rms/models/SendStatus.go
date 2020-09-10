@@ -25,8 +25,8 @@ type SendStatus struct {
     /* 应用ID (Optional) */
     AppId string `json:"appId"`
 
-    /* 任务ID (Optional) */
-    TaskId string `json:"taskId"`
+    /* 任务序列号 (Optional) */
+    SequenceNumber string `json:"sequenceNumber"`
 
     /* 短信ID (Optional) */
     TemplateId string `json:"templateId"`
@@ -37,6 +37,6 @@ type SendStatus struct {
     /* 发送状态 -1：初始状态；0：成功发送到网关；1：下载成功；2：发送失败；3：未发送至网关，过期失败；4：发送到网关，过期失败 (Optional) */
     StateFlag int `json:"stateFlag"`
 
-    /* 发送时间 (Optional) */
+    /* 发送时间 yyyy-MM-dd HH:mm:ss (Optional) */
     SendTime string `json:"sendTime"`
 }
