@@ -28,9 +28,14 @@ type AuthInfo struct {
     /* 认证结果状态码  */
     Code string `json:"code"`
 
-    /* 认证结果  */
+    /* 1. 认证结果信息
+2. 查询结果信息
+3. 状态码信息
+  */
     Message string `json:"message"`
 
-    /*   */
-    Detail AuthDetail `json:"detail"`
+    /* 1. 认证结果信息
+2. 查询结果信息
+  */
+    Detail string `json:"detail"`
 }

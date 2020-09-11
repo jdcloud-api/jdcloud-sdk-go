@@ -20,7 +20,7 @@ package models
 type CheckInfo struct {
 
     /* 金额  */
-    PaymentAmount float32 `json:"paymentAmount"`
+    PaymentAmount string `json:"paymentAmount"`
 
     /* 订单号  */
     OrderNumber string `json:"orderNumber"`
