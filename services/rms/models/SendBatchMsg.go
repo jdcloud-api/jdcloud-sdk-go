@@ -19,15 +19,6 @@ package models
 
 type SendBatchMsg struct {
 
-    /* 请求状态 (Optional) */
-    Status bool `json:"status"`
-
-    /* 错误码 (Optional) */
-    Code string `json:"code"`
-
-    /* 错误消息 (Optional) */
-    Message string `json:"message"`
-
     /* 本次发送请求的序列号 (Optional) */
     SequenceNumber string `json:"sequenceNumber"`
 }

@@ -28,19 +28,32 @@ type SendBatchMsgRequest struct {
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 指定短信Id群发短信请求参数  */
-    SendBatchMsgSpec *rms.SendBatchMsgSpec `json:"sendBatchMsgSpec"`
+    /* 应用ID  */
+    AppId string `json:"appId"`
+
+    /* 短信ID  */
+    TemplateId string `json:"templateId"`
+
+    /* 群发的国内电话号码，群发时一次最多不要超过100个手机号  */
+    Phone []string `json:"phone"`
+
+    /* 短信模板变量对应的数据值，Array格式 (Optional) */
+    Params []string `json:"params"`
 }
 
 /*
  * param regionId: Region ID (Required)
- * param sendBatchMsgSpec: 指定短信Id群发短信请求参数 (Required)
+ * param appId: 应用ID (Required)
+ * param templateId: 短信ID (Required)
+ * param phone: 群发的国内电话号码，群发时一次最多不要超过100个手机号 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewSendBatchMsgRequest(
     regionId string,
-    sendBatchMsgSpec *rms.SendBatchMsgSpec,
+    appId string,
+    templateId string,
+    phone []string,
 ) *SendBatchMsgRequest {
 
 	return &SendBatchMsgRequest{
@@ -48,20 +61,28 @@ func NewSendBatchMsgRequest(
 			URL:     "/regions/{regionId}/sendBatchMsg",
 			Method:  "POST",
 			Header:  nil,
-			Version: "v1",
+			Version: "v2",
 		},
         RegionId: regionId,
-        SendBatchMsgSpec: sendBatchMsgSpec,
+        AppId: appId,
+        TemplateId: templateId,
+        Phone: phone,
 	}
 }
 
 /*
  * param regionId: Region ID (Required)
- * param sendBatchMsgSpec: 指定短信Id群发短信请求参数 (Required)
+ * param appId: 应用ID (Required)
+ * param templateId: 短信ID (Required)
+ * param phone: 群发的国内电话号码，群发时一次最多不要超过100个手机号 (Required)
+ * param params: 短信模板变量对应的数据值，Array格式 (Optional)
  */
 func NewSendBatchMsgRequestWithAllParams(
     regionId string,
-    sendBatchMsgSpec *rms.SendBatchMsgSpec,
+    appId string,
+    templateId string,
+    phone []string,
+    params []string,
 ) *SendBatchMsgRequest {
 
     return &SendBatchMsgRequest{
@@ -69,10 +90,13 @@ func NewSendBatchMsgRequestWithAllParams(
             URL:     "/regions/{regionId}/sendBatchMsg",
             Method:  "POST",
             Header:  nil,
-            Version: "v1",
+            Version: "v2",
         },
         RegionId: regionId,
-        SendBatchMsgSpec: sendBatchMsgSpec,
+        AppId: appId,
+        TemplateId: templateId,
+        Phone: phone,
+        Params: params,
     }
 }
 
@@ -84,7 +108,7 @@ func NewSendBatchMsgRequestWithoutParam() *SendBatchMsgRequest {
             URL:     "/regions/{regionId}/sendBatchMsg",
             Method:  "POST",
             Header:  nil,
-            Version: "v1",
+            Version: "v2",
         },
     }
 }
@@ -94,9 +118,24 @@ func (r *SendBatchMsgRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param sendBatchMsgSpec: 指定短信Id群发短信请求参数(Required) */
-func (r *SendBatchMsgRequest) SetSendBatchMsgSpec(sendBatchMsgSpec *rms.SendBatchMsgSpec) {
-    r.SendBatchMsgSpec = sendBatchMsgSpec
+/* param appId: 应用ID(Required) */
+func (r *SendBatchMsgRequest) SetAppId(appId string) {
+    r.AppId = appId
+}
+
+/* param templateId: 短信ID(Required) */
+func (r *SendBatchMsgRequest) SetTemplateId(templateId string) {
+    r.TemplateId = templateId
+}
+
+/* param phone: 群发的国内电话号码，群发时一次最多不要超过100个手机号(Required) */
+func (r *SendBatchMsgRequest) SetPhone(phone []string) {
+    r.Phone = phone
+}
+
+/* param params: 短信模板变量对应的数据值，Array格式(Optional) */
+func (r *SendBatchMsgRequest) SetParams(params []string) {
+    r.Params = params
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
@@ -113,4 +152,7 @@ type SendBatchMsgResponse struct {
 
 type SendBatchMsgResult struct {
     Data rms.SendBatchMsg `json:"data"`
+    Status bool `json:"status"`
+    Code string `json:"code"`
+    Message string `json:"message"`
 }
