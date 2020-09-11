@@ -98,5 +98,9 @@ type PersonalAuthResponse struct {
 }
 
 type PersonalAuthResult struct {
-    AuthInfo cloudauth.AuthInfo `json:"authInfo"`
+    Success bool `json:"success"`
+    HasException bool `json:"hasException"`
+    Code string `json:"code"`
+    Message string `json:"message"`
+    Detail string `json:"detail"`
 }

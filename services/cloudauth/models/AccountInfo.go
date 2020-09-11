@@ -22,9 +22,6 @@ type AccountInfo struct {
     /* 组织名称  */
     OrgName string `json:"orgName"`
 
-    /* 身份证号码 (Optional) */
-    IdCard *string `json:"idCard"`
-
     /* 银行卡号  */
     BankCardNum string `json:"bankCardNum"`
 
