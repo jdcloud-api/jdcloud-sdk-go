@@ -53,6 +53,20 @@ type UpdateWatermarkRequest struct {
  (Optional) */
     SizeUnit *string `json:"sizeUnit"`
 
+    /*  (Optional) */
+    WidthRef *string `json:"widthRef"`
+
+    /* 高度参考，仅当 siteUnit = percent 时生效。
+取值说明：
+  w: 输出水印高度 = height * 水印原图高度
+  v: 等同于 vh
+  vw: 输出水印高度 = height * 输出视频宽度
+  vh: 输出水印高度 = height * 输出视频高度
+  vls: 输出水印高度 = height * 输出视频长边
+  vss: 输出水印高度 = height * 输出视频短边
+ (Optional) */
+    HeightRef *string `json:"heightRef"`
+
     /* 水印位置。取值范围：
   LT - 左上
   RT - 右上
@@ -119,6 +133,16 @@ func NewUpdateWatermarkRequest(
   percent - 百分比
 默认值为 pixel
  (Optional)
+ * param widthRef:  (Optional)
+ * param heightRef: 高度参考，仅当 siteUnit = percent 时生效。
+取值说明：
+  w: 输出水印高度 = height * 水印原图高度
+  v: 等同于 vh
+  vw: 输出水印高度 = height * 输出视频宽度
+  vh: 输出水印高度 = height * 输出视频高度
+  vls: 输出水印高度 = height * 输出视频长边
+  vss: 输出水印高度 = height * 输出视频短边
+ (Optional)
  * param position: 水印位置。取值范围：
   LT - 左上
   RT - 右上
@@ -146,6 +170,8 @@ func NewUpdateWatermarkRequestWithAllParams(
     width *string,
     height *string,
     sizeUnit *string,
+    widthRef *string,
+    heightRef *string,
     position *string,
     offsetX *string,
     offsetY *string,
@@ -165,6 +191,8 @@ func NewUpdateWatermarkRequestWithAllParams(
         Width: width,
         Height: height,
         SizeUnit: sizeUnit,
+        WidthRef: widthRef,
+        HeightRef: heightRef,
         Position: position,
         OffsetX: offsetX,
         OffsetY: offsetY,
@@ -226,6 +254,24 @@ func (r *UpdateWatermarkRequest) SetSizeUnit(sizeUnit string) {
     r.SizeUnit = &sizeUnit
 }
 
+/* param widthRef: (Optional) */
+func (r *UpdateWatermarkRequest) SetWidthRef(widthRef string) {
+    r.WidthRef = &widthRef
+}
+
+/* param heightRef: 高度参考，仅当 siteUnit = percent 时生效。
+取值说明：
+  w: 输出水印高度 = height * 水印原图高度
+  v: 等同于 vh
+  vw: 输出水印高度 = height * 输出视频宽度
+  vh: 输出水印高度 = height * 输出视频高度
+  vls: 输出水印高度 = height * 输出视频长边
+  vss: 输出水印高度 = height * 输出视频短边
+(Optional) */
+func (r *UpdateWatermarkRequest) SetHeightRef(heightRef string) {
+    r.HeightRef = &heightRef
+}
+
 /* param position: 水印位置。取值范围：
   LT - 左上
   RT - 右上
@@ -280,6 +326,8 @@ type UpdateWatermarkResult struct {
     Width string `json:"width"`
     Height string `json:"height"`
     SizeUnit string `json:"sizeUnit"`
+    WidthRef string `json:"widthRef"`
+    HeightRef string `json:"heightRef"`
     Position string `json:"position"`
     OffsetX string `json:"offsetX"`
     OffsetY string `json:"offsetY"`

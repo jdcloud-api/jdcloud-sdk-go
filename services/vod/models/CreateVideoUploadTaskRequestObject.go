@@ -19,7 +19,9 @@ package models
 
 type CreateVideoUploadTaskRequestObject struct {
 
-    /* HTTP 请求方法，上传只支持 PUT 方法，默认值为 PUT (Optional) */
+    /* HTTP 请求方法，上传支持 PUT 和 POST 方法，默认值为 PUT 。
+通过该接口获取到上传地址和凭证之后，后续的上传动作，必须使用和该值一致的方法进行文件上传。
+ (Optional) */
     HttpMethod string `json:"httpMethod"`
 
     /* 视频标题  */

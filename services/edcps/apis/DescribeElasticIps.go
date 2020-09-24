@@ -38,8 +38,21 @@ type DescribeElasticIpsRequest struct {
     /* 弹性公网IP状态，取值范围：associate、disassociate (Optional) */
     Status *string `json:"status"`
 
+    /* 弹性公网IP是否加入共享带宽，取值范围：yes、no (Optional) */
+    HasJoinBandwidthPackage *string `json:"hasJoinBandwidthPackage"`
+
+    /* 支付模式，取值为：prepaid_by_duration表示预付费，postpaid_by_duration表示按配置后付费 (Optional) */
+    ChargeMode *string `json:"chargeMode"`
+
+    /* 实例Id (Optional) */
+    InstanceId *string `json:"instanceId"`
+
+    /* 子网Id (Optional) */
+    SubnetId *string `json:"subnetId"`
+
     /* elasticIpId - 弹性公网IPID，精确匹配，支持多个<br/>
-elasticIp - 弹性公网IP，精确匹配，支持多个
+elasticIp - 弹性公网IP，精确匹配，支持多个<br/>
+bandwidthPackageId - 共享带宽ID，精确匹配，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
@@ -69,8 +82,13 @@ func NewDescribeElasticIpsRequest(
  * param pageNumber: 页码；默认为1 (Optional)
  * param pageSize: 分页大小；默认为20；取值范围[20, 100] (Optional)
  * param status: 弹性公网IP状态，取值范围：associate、disassociate (Optional)
+ * param hasJoinBandwidthPackage: 弹性公网IP是否加入共享带宽，取值范围：yes、no (Optional)
+ * param chargeMode: 支付模式，取值为：prepaid_by_duration表示预付费，postpaid_by_duration表示按配置后付费 (Optional)
+ * param instanceId: 实例Id (Optional)
+ * param subnetId: 子网Id (Optional)
  * param filters: elasticIpId - 弹性公网IPID，精确匹配，支持多个<br/>
-elasticIp - 弹性公网IP，精确匹配，支持多个
+elasticIp - 弹性公网IP，精确匹配，支持多个<br/>
+bandwidthPackageId - 共享带宽ID，精确匹配，支持多个
  (Optional)
  */
 func NewDescribeElasticIpsRequestWithAllParams(
@@ -78,6 +96,10 @@ func NewDescribeElasticIpsRequestWithAllParams(
     pageNumber *int,
     pageSize *int,
     status *string,
+    hasJoinBandwidthPackage *string,
+    chargeMode *string,
+    instanceId *string,
+    subnetId *string,
     filters []common.Filter,
 ) *DescribeElasticIpsRequest {
 
@@ -92,6 +114,10 @@ func NewDescribeElasticIpsRequestWithAllParams(
         PageNumber: pageNumber,
         PageSize: pageSize,
         Status: status,
+        HasJoinBandwidthPackage: hasJoinBandwidthPackage,
+        ChargeMode: chargeMode,
+        InstanceId: instanceId,
+        SubnetId: subnetId,
         Filters: filters,
     }
 }
@@ -129,8 +155,29 @@ func (r *DescribeElasticIpsRequest) SetStatus(status string) {
     r.Status = &status
 }
 
+/* param hasJoinBandwidthPackage: 弹性公网IP是否加入共享带宽，取值范围：yes、no(Optional) */
+func (r *DescribeElasticIpsRequest) SetHasJoinBandwidthPackage(hasJoinBandwidthPackage string) {
+    r.HasJoinBandwidthPackage = &hasJoinBandwidthPackage
+}
+
+/* param chargeMode: 支付模式，取值为：prepaid_by_duration表示预付费，postpaid_by_duration表示按配置后付费(Optional) */
+func (r *DescribeElasticIpsRequest) SetChargeMode(chargeMode string) {
+    r.ChargeMode = &chargeMode
+}
+
+/* param instanceId: 实例Id(Optional) */
+func (r *DescribeElasticIpsRequest) SetInstanceId(instanceId string) {
+    r.InstanceId = &instanceId
+}
+
+/* param subnetId: 子网Id(Optional) */
+func (r *DescribeElasticIpsRequest) SetSubnetId(subnetId string) {
+    r.SubnetId = &subnetId
+}
+
 /* param filters: elasticIpId - 弹性公网IPID，精确匹配，支持多个<br/>
-elasticIp - 弹性公网IP，精确匹配，支持多个
+elasticIp - 弹性公网IP，精确匹配，支持多个<br/>
+bandwidthPackageId - 共享带宽ID，精确匹配，支持多个
 (Optional) */
 func (r *DescribeElasticIpsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters

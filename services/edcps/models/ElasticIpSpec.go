@@ -26,6 +26,9 @@ type ElasticIpSpec struct {
     /* 额外上行带宽, 范围[0,10240] 单位Mbps (Optional) */
     ExtraUplinkBandwidth *int `json:"extraUplinkBandwidth"`
 
+    /* 共享带宽ID, 选择加入共享带宽方式购买时必传 (Optional) */
+    BandwidthPackageId *string `json:"bandwidthPackageId"`
+
     /* 购买数量  */
     Count int `json:"count"`
 

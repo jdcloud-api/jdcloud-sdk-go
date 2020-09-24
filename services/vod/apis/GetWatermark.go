@@ -103,6 +103,8 @@ type GetWatermarkResult struct {
     Width string `json:"width"`
     Height string `json:"height"`
     SizeUnit string `json:"sizeUnit"`
+    WidthRef string `json:"widthRef"`
+    HeightRef string `json:"heightRef"`
     Position string `json:"position"`
     OffsetX string `json:"offsetX"`
     OffsetY string `json:"offsetY"`

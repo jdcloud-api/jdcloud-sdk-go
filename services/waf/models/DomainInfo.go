@@ -19,6 +19,9 @@ package models
 
 type DomainInfo struct {
 
+    /* 实例 (Optional) */
+    WafInstanceId string `json:"wafInstanceId"`
+
     /* 域名 (Optional) */
     Domain string `json:"domain"`
 

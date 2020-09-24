@@ -17,6 +17,7 @@
 package models
 
 import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
+import resourcetag "github.com/jdcloud-api/jdcloud-sdk-go/services/resourcetag/models"
 
 type InstanceSpec struct {
 
@@ -41,11 +42,17 @@ type InstanceSpec struct {
     /* 数据盘RAID类型ID  */
     DataRaidTypeId string `json:"dataRaidTypeId"`
 
-    /* 子网编号 (Optional) */
+    /* 子网ID (Optional) */
     SubnetId *string `json:"subnetId"`
 
     /* 是否启用外网，取值范围：yes、no (Optional) */
     EnableInternet *string `json:"enableInternet"`
+
+    /* 启用外网时弹性公网IP的计费模式，取值范围：prepaid_by_duration、postpaid_by_duration (Optional) */
+    InternetChargeMode *string `json:"internetChargeMode"`
+
+    /* 弹性公网IP加入的共享带宽ID (Optional) */
+    BandwidthPackageId *string `json:"bandwidthPackageId"`
 
     /* 网络类型，取值范围：vpc  */
     NetworkType string `json:"networkType"`
@@ -55,6 +62,9 @@ type InstanceSpec struct {
 
     /* 内网IP (Optional) */
     PrivateIp *string `json:"privateIp"`
+
+    /* 内网添加的别名IP范围 (Optional) */
+    AliasIps []AliasIpInfo `json:"aliasIps"`
 
     /* 外网链路类型, 目前支持联通un、电信ct、移动cm (Optional) */
     LineType *string `json:"lineType"`
@@ -86,6 +96,36 @@ type InstanceSpec struct {
     /* 计费配置  */
     Charge *charge.ChargeSpec `json:"charge"`
 
-    /* 别名ip配置 (Optional) */
-    AliasIps []AliasIpInfo `json:"aliasIps"`
+    /* 网络接口模式，单网口:bond、双网口:dual (Optional) */
+    InterfaceMode *string `json:"interfaceMode"`
+
+    /* 辅网口子网ID (Optional) */
+    ExtensionSubnetId *string `json:"extensionSubnetId"`
+
+    /* 辅网口手动分配的内网ip (Optional) */
+    ExtensionPrivateIp *string `json:"extensionPrivateIp"`
+
+    /* 辅网口内网添加的别名IP范围 (Optional) */
+    ExtensionAliasIps []AliasIpInfo `json:"extensionAliasIps"`
+
+    /* 辅网口是否启用外网，取值范围：yes、no (Optional) */
+    ExtensionEnableInternet *string `json:"extensionEnableInternet"`
+
+    /* 辅网口链路类型, 目前支持联通un、电信ct、移动cm (Optional) */
+    ExtensionLineType *string `json:"extensionLineType"`
+
+    /* 辅网口外网带宽，范围[1,10240] 单位Mbps (Optional) */
+    ExtensionBandwidth *int `json:"extensionBandwidth"`
+
+    /* 辅网口额外上行带宽, 范围[0,10240] 单位Mbps (Optional) */
+    ExtensionExtraUplinkBandwidth *int `json:"extensionExtraUplinkBandwidth"`
+
+    /* 辅网口启用外网时弹性公网IP的计费模式，取值范围：prepaid_by_duration、postpaid_by_duration (Optional) */
+    ExtensionInternetChargeMode *string `json:"extensionInternetChargeMode"`
+
+    /* 辅网口弹性公网IP加入的共享带宽ID (Optional) */
+    ExtensionBandwidthPackageId *string `json:"extensionBandwidthPackageId"`
+
+    /* 标签 (Optional) */
+    ResourceTags []resourcetag.Tag `json:"resourceTags"`
 }

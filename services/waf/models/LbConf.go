@@ -60,4 +60,10 @@ type LbConf struct {
 
     /* 请求body最大值，默认300M，可为G/K (Optional) */
     MaxBodySize string `json:"maxBodySize"`
+
+    /* 禁用被动健康检查，缺省为0-否 (Optional) */
+    DisableHealthCheck int `json:"disableHealthCheck"`
+
+    /* 连接超时时间，3-60s (Optional) */
+    ProxyConnectTimeout int `json:"proxyConnectTimeout"`
 }

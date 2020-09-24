@@ -40,7 +40,7 @@ func NewRedisClient(credential *core.Credential) *RedisClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "redis",
-            Revision:    "2.1.2",
+            Revision:    "2.2.2",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -128,6 +128,26 @@ func (c *RedisClient) CreateCacheAnalysis(request *redis.CreateCacheAnalysisRequ
     }
 
     jdResp := &redis.CreateCacheAnalysisResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询指定客户端IP的连接详细信息 */
+func (c *RedisClient) DescribeClientIpDetail(request *redis.DescribeClientIpDetailRequest) (*redis.DescribeClientIpDetailResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &redis.DescribeClientIpDetailResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -493,6 +513,26 @@ func (c *RedisClient) DescribeUserQuota(request *redis.DescribeUserQuotaRequest)
     }
 
     jdResp := &redis.DescribeUserQuotaResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询当前客户端IP列表 */
+func (c *RedisClient) DescribeClientList(request *redis.DescribeClientListRequest) (*redis.DescribeClientListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &redis.DescribeClientListResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

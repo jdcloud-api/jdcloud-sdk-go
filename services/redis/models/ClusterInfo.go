@@ -20,8 +20,8 @@ package models
 type ClusterInfo struct {
 
     /* proxy列表 (Optional) */
-    Proxies Proxy `json:"proxies"`
+    Proxies []Proxy `json:"proxies"`
 
     /* shard列表 (Optional) */
-    Shards Shard `json:"shards"`
+    Shards []Shard `json:"shards"`
 }

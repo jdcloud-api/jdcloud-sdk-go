@@ -113,8 +113,47 @@ type Instance struct {
     /* 密钥对id (Optional) */
     KeypairId string `json:"keypairId"`
 
+    /* 网络接口模式，单网口:bond、双网口:dual (Optional) */
+    InterfaceMode string `json:"interfaceMode"`
+
+    /* 辅网口私有网络ID (Optional) */
+    ExtensionVpcId string `json:"extensionVpcId"`
+
+    /* 辅网口私有网络名称 (Optional) */
+    ExtensionVpcName string `json:"extensionVpcName"`
+
+    /* 辅网口子网ID (Optional) */
+    ExtensionSubnetId string `json:"extensionSubnetId"`
+
+    /* 辅网口子网名称 (Optional) */
+    ExtensionSubnetName string `json:"extensionSubnetName"`
+
+    /* 辅网口手动分配的内网ip (Optional) */
+    ExtensionPrivateIp string `json:"extensionPrivateIp"`
+
+    /* 辅网口是否启用外网 (Optional) */
+    ExtensionEnableInternet string `json:"extensionEnableInternet"`
+
+    /* 辅网口弹性公网ip id (Optional) */
+    ExtensionElasticIpId string `json:"extensionElasticIpId"`
+
+    /* 辅网口公网ip (Optional) */
+    ExtensionPublicIp string `json:"extensionPublicIp"`
+
+    /* 辅网口外网带宽，单位Mbps (Optional) */
+    ExtensionBandwidth int `json:"extensionBandwidth"`
+
+    /* 辅网口额外上行带宽, 单位Mbps (Optional) */
+    ExtensionExtraUplinkBandwidth int `json:"extensionExtraUplinkBandwidth"`
+
     /* agent状态 (Optional) */
     AgentStatus string `json:"agentStatus"`
+
+    /* 创建时间 (Optional) */
+    CreateTime string `json:"createTime"`
+
+    /* 更新时间 (Optional) */
+    UpdateTime string `json:"updateTime"`
 
     /* 计费信息 (Optional) */
     Charge charge.Charge `json:"charge"`
