@@ -22,6 +22,9 @@ type RsConfig struct {
     /* 回源地址  */
     RsAddr []string `json:"rsAddr"`
 
+    /* 回源地址权重，与rsAddr顺序对应 (Optional) */
+    Weight []int `json:"weight"`
+
     /* http回源端口 (Optional) */
     HttpRsPort []string `json:"httpRsPort"`
 

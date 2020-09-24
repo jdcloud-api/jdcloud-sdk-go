@@ -103,6 +103,7 @@ type GetTranscodeTemplateResult struct {
     Video vod.Video `json:"video"`
     Audio vod.Audio `json:"audio"`
     Encapsulation vod.Encapsulation `json:"encapsulation"`
+    OutFile vod.OutFile `json:"outFile"`
     Definition string `json:"definition"`
     Source string `json:"source"`
     TemplateType string `json:"templateType"`

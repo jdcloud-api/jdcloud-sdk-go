@@ -40,7 +40,7 @@ func NewVodClient(credential *core.Credential) *VodClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vod",
-            Revision:    "1.1.7",
+            Revision:    "1.1.8",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -237,6 +237,26 @@ func (c *VodClient) GetCategoryWithChildren(request *vod.GetCategoryWithChildren
     return jdResp, err
 }
 
+/* 查询转码作业摘要 */
+func (c *VodClient) GetTranscodeJobSummaries(request *vod.GetTranscodeJobSummariesRequest) (*vod.GetTranscodeJobSummariesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vod.GetTranscodeJobSummariesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询转码模板列表。
 允许通过条件过滤查询，支持的过滤字段如下：
   - source[eq] 按模板来源精确查询
@@ -252,6 +272,26 @@ func (c *VodClient) ListTranscodeTemplates(request *vod.ListTranscodeTemplatesRe
     }
 
     jdResp := &vod.ListTranscodeTemplatesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询视频转码摘要 */
+func (c *VodClient) GetTranscodeSummaries(request *vod.GetTranscodeSummariesRequest) (*vod.GetTranscodeSummariesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vod.GetTranscodeSummariesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -453,6 +493,29 @@ func (c *VodClient) GetDomain(request *vod.GetDomainRequest) (*vod.GetDomainResp
     }
 
     jdResp := &vod.GetDomainResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询截图模板列表。
+允许通过条件过滤查询，支持的过滤字段如下：
+  - templateType[eq] 按模板类型精确查询
+ */
+func (c *VodClient) ListSnapshotTemplates(request *vod.ListSnapshotTemplatesRequest) (*vod.ListSnapshotTemplatesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vod.ListSnapshotTemplatesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -673,6 +736,26 @@ func (c *VodClient) UpdateCategory(request *vod.UpdateCategoryRequest) (*vod.Upd
     }
 
     jdResp := &vod.UpdateCategoryResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除截图模板 */
+func (c *VodClient) DeleteSnapshotTemplate(request *vod.DeleteSnapshotTemplateRequest) (*vod.DeleteSnapshotTemplateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vod.DeleteSnapshotTemplateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -970,6 +1053,26 @@ func (c *VodClient) ListVideos(request *vod.ListVideosRequest) (*vod.ListVideosR
     return jdResp, err
 }
 
+/* 查询截图模板 */
+func (c *VodClient) GetSnapshotTemplate(request *vod.GetSnapshotTemplateRequest) (*vod.GetSnapshotTemplateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vod.GetSnapshotTemplateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 添加水印 */
 func (c *VodClient) CreateWatermark(request *vod.CreateWatermarkRequest) (*vod.CreateWatermarkResponse, error) {
     if request == nil {
@@ -1010,6 +1113,46 @@ func (c *VodClient) DeleteVideo(request *vod.DeleteVideoRequest) (*vod.DeleteVid
     return jdResp, err
 }
 
+/* 修改截图模板 */
+func (c *VodClient) UpdateSnapshotTemplate(request *vod.UpdateSnapshotTemplateRequest) (*vod.UpdateSnapshotTemplateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vod.UpdateSnapshotTemplateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询转码任务摘要 */
+func (c *VodClient) GetTranscodeTaskSummaries(request *vod.GetTranscodeTaskSummariesRequest) (*vod.GetTranscodeTaskSummariesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vod.GetTranscodeTaskSummariesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 提交质检作业 */
 func (c *VodClient) SubmitQualityDetectionJob(request *vod.SubmitQualityDetectionJobRequest) (*vod.SubmitQualityDetectionJobResponse, error) {
     if request == nil {
@@ -1021,6 +1164,26 @@ func (c *VodClient) SubmitQualityDetectionJob(request *vod.SubmitQualityDetectio
     }
 
     jdResp := &vod.SubmitQualityDetectionJobResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建截图模板 */
+func (c *VodClient) CreateSnapshotTemplate(request *vod.CreateSnapshotTemplateRequest) (*vod.CreateSnapshotTemplateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vod.CreateSnapshotTemplateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

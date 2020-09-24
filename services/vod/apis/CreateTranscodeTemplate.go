@@ -38,6 +38,9 @@ type CreateTranscodeTemplateRequest struct {
     /* 封装配置  */
     Encapsulation *vod.Encapsulation `json:"encapsulation"`
 
+    /* 输出文件配置 (Optional) */
+    OutFile *vod.OutFile `json:"outFile"`
+
     /* 清晰度规格标记。取值范围：
   SD - 标清
   HD - 高清
@@ -99,6 +102,7 @@ func NewCreateTranscodeTemplateRequest(
  * param video: 视频参数配置 (Required)
  * param audio: 音频参数配置 (Required)
  * param encapsulation: 封装配置 (Required)
+ * param outFile: 输出文件配置 (Optional)
  * param definition: 清晰度规格标记。取值范围：
   SD - 标清
   HD - 高清
@@ -116,6 +120,7 @@ func NewCreateTranscodeTemplateRequestWithAllParams(
     video *vod.Video,
     audio *vod.Audio,
     encapsulation *vod.Encapsulation,
+    outFile *vod.OutFile,
     definition string,
     templateType *string,
 ) *CreateTranscodeTemplateRequest {
@@ -131,6 +136,7 @@ func NewCreateTranscodeTemplateRequestWithAllParams(
         Video: video,
         Audio: audio,
         Encapsulation: encapsulation,
+        OutFile: outFile,
         Definition: definition,
         TemplateType: templateType,
     }
@@ -170,6 +176,11 @@ func (r *CreateTranscodeTemplateRequest) SetEncapsulation(encapsulation *vod.Enc
     r.Encapsulation = encapsulation
 }
 
+/* param outFile: 输出文件配置(Optional) */
+func (r *CreateTranscodeTemplateRequest) SetOutFile(outFile *vod.OutFile) {
+    r.OutFile = outFile
+}
+
 /* param definition: 清晰度规格标记。取值范围：
   SD - 标清
   HD - 高清
@@ -207,6 +218,7 @@ type CreateTranscodeTemplateResult struct {
     Video vod.Video `json:"video"`
     Audio vod.Audio `json:"audio"`
     Encapsulation vod.Encapsulation `json:"encapsulation"`
+    OutFile vod.OutFile `json:"outFile"`
     Definition string `json:"definition"`
     Source string `json:"source"`
     TemplateType string `json:"templateType"`

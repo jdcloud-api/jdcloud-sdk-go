@@ -40,7 +40,7 @@ func NewWafClient(credential *core.Credential) *WafClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "waf",
-            Revision:    "1.0.0",
+            Revision:    "1.0.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -168,26 +168,6 @@ func (c *WafClient) AddDomain(request *waf.AddDomainRequest) (*waf.AddDomainResp
     }
 
     jdResp := &waf.AddDomainResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 获取ip的域名信息 */
-func (c *WafClient) DescribeIpDomainInfo(request *waf.DescribeIpDomainInfoRequest) (*waf.DescribeIpDomainInfoResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &waf.DescribeIpDomainInfoResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -617,6 +597,26 @@ func (c *WafClient) DelRiskRule(request *waf.DelRiskRuleRequest) (*waf.DelRiskRu
     return jdResp, err
 }
 
+/* 获取回源ip段 */
+func (c *WafClient) DescribeLbOutIp(request *waf.DescribeLbOutIpRequest) (*waf.DescribeLbOutIpResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &waf.DescribeLbOutIpResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 获取网站在一定时间内的bps信息。 */
 func (c *WafClient) GetBpsData(request *waf.GetBpsDataRequest) (*waf.GetBpsDataResponse, error) {
     if request == nil {
@@ -788,26 +788,6 @@ func (c *WafClient) EnableRisk(request *waf.EnableRiskRequest) (*waf.EnableRiskR
     }
 
     jdResp := &waf.EnableRiskResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 判断IP是否为waf的vip */
-func (c *WafClient) IsWafVip(request *waf.IsWafVipRequest) (*waf.IsWafVipResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &waf.IsWafVipResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

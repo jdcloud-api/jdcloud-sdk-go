@@ -18,70 +18,58 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    waf "github.com/jdcloud-api/jdcloud-sdk-go/services/waf/models"
+    vod "github.com/jdcloud-api/jdcloud-sdk-go/services/vod/models"
 )
 
-type IsWafVipRequest struct {
+type GetTranscodeSummariesRequest struct {
 
     core.JDCloudRequest
 
-    /*   */
-    RegionId string `json:"regionId"`
-
-    /* ip列表，多个以逗号分隔  */
-    Ip string `json:"ip"`
+    /*  (Optional) */
+    VideoIds []string `json:"videoIds"`
 }
 
 /*
- * param regionId:  (Required)
- * param ip: ip列表，多个以逗号分隔 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewIsWafVipRequest(
-    regionId string,
-    ip string,
-) *IsWafVipRequest {
+func NewGetTranscodeSummariesRequest(
+) *GetTranscodeSummariesRequest {
 
-	return &IsWafVipRequest{
+	return &GetTranscodeSummariesRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/ip:isWafVip",
+			URL:     "/transcode:summary",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
-        RegionId: regionId,
-        Ip: ip,
 	}
 }
 
 /*
- * param regionId:  (Required)
- * param ip: ip列表，多个以逗号分隔 (Required)
+ * param videoIds:  (Optional)
  */
-func NewIsWafVipRequestWithAllParams(
-    regionId string,
-    ip string,
-) *IsWafVipRequest {
+func NewGetTranscodeSummariesRequestWithAllParams(
+    videoIds []string,
+) *GetTranscodeSummariesRequest {
 
-    return &IsWafVipRequest{
+    return &GetTranscodeSummariesRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/ip:isWafVip",
+            URL:     "/transcode:summary",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
-        RegionId: regionId,
-        Ip: ip,
+        VideoIds: videoIds,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewIsWafVipRequestWithoutParam() *IsWafVipRequest {
+func NewGetTranscodeSummariesRequestWithoutParam() *GetTranscodeSummariesRequest {
 
-    return &IsWafVipRequest{
+    return &GetTranscodeSummariesRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/ip:isWafVip",
+            URL:     "/transcode:summary",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -89,28 +77,24 @@ func NewIsWafVipRequestWithoutParam() *IsWafVipRequest {
     }
 }
 
-/* param regionId: (Required) */
-func (r *IsWafVipRequest) SetRegionId(regionId string) {
-    r.RegionId = regionId
-}
-
-/* param ip: ip列表，多个以逗号分隔(Required) */
-func (r *IsWafVipRequest) SetIp(ip string) {
-    r.Ip = ip
+/* param videoIds: (Optional) */
+func (r *GetTranscodeSummariesRequest) SetVideoIds(videoIds []string) {
+    r.VideoIds = videoIds
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r IsWafVipRequest) GetRegionId() string {
-    return r.RegionId
+func (r GetTranscodeSummariesRequest) GetRegionId() string {
+    return ""
 }
 
-type IsWafVipResponse struct {
+type GetTranscodeSummariesResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result IsWafVipResult `json:"result"`
+    Result GetTranscodeSummariesResult `json:"result"`
 }
 
-type IsWafVipResult struct {
-    List []waf.IpVipInfo `json:"list"`
+type GetTranscodeSummariesResult struct {
+    JobSummaries []vod.TranscodeJobSummary `json:"jobSummaries"`
+    FailedVideoIds []string `json:"failedVideoIds"`
 }

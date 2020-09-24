@@ -19,7 +19,7 @@ package models
 
 type CreateImageUploadTaskRequestObject struct {
 
-    /* HTTP 请求方法，上传只支持 PUT 方法，默认值为 PUT (Optional) */
+    /* HTTP 请求方法，上传支持 PUT 和 POST 方法，默认值为 PUT 。 (Optional) */
     HttpMethod string `json:"httpMethod"`
 
     /* 文件名称  */

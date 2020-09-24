@@ -17,17 +17,14 @@
 package models
 
 
-type EnableWebcacheReq struct {
+type InstanceInternalSpec struct {
 
-    /* WAF实例id  */
-    WafInstanceId string `json:"wafInstanceId"`
+    /* 实例ID (Optional) */
+    InstanceId string `json:"instanceId"`
 
-    /* 域名  */
-    Domain string `json:"domain"`
+    /* 实例总内存（GB） (Optional) */
+    InstanceMemoryGB int `json:"instanceMemoryGB"`
 
-    /* 是否使能，0表示否  */
-    Enable int `json:"enable"`
-
-    /* 规则名  */
-    Name string `json:"name"`
+    /* 内部节点角色列表 (Optional) */
+    NodeRoles []NodeRole `json:"nodeRoles"`
 }

@@ -29,17 +29,22 @@ type DescribeAvailablePrivateIpRequest struct {
 
     /* 分布式云物理服务器ID  */
     InstanceId string `json:"instanceId"`
+
+    /* 主网口或者辅网口的子网id  */
+    SubnetId string `json:"subnetId"`
 }
 
 /*
  * param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
  * param instanceId: 分布式云物理服务器ID (Required)
+ * param subnetId: 主网口或者辅网口的子网id (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeAvailablePrivateIpRequest(
     regionId string,
     instanceId string,
+    subnetId string,
 ) *DescribeAvailablePrivateIpRequest {
 
 	return &DescribeAvailablePrivateIpRequest{
@@ -51,16 +56,19 @@ func NewDescribeAvailablePrivateIpRequest(
 		},
         RegionId: regionId,
         InstanceId: instanceId,
+        SubnetId: subnetId,
 	}
 }
 
 /*
  * param regionId: 地域ID，可调用接口（describeEdCPSRegions）获取分布式云物理服务器支持的地域 (Required)
  * param instanceId: 分布式云物理服务器ID (Required)
+ * param subnetId: 主网口或者辅网口的子网id (Required)
  */
 func NewDescribeAvailablePrivateIpRequestWithAllParams(
     regionId string,
     instanceId string,
+    subnetId string,
 ) *DescribeAvailablePrivateIpRequest {
 
     return &DescribeAvailablePrivateIpRequest{
@@ -72,6 +80,7 @@ func NewDescribeAvailablePrivateIpRequestWithAllParams(
         },
         RegionId: regionId,
         InstanceId: instanceId,
+        SubnetId: subnetId,
     }
 }
 
@@ -96,6 +105,11 @@ func (r *DescribeAvailablePrivateIpRequest) SetRegionId(regionId string) {
 /* param instanceId: 分布式云物理服务器ID(Required) */
 func (r *DescribeAvailablePrivateIpRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
+}
+
+/* param subnetId: 主网口或者辅网口的子网id(Required) */
+func (r *DescribeAvailablePrivateIpRequest) SetSubnetId(subnetId string) {
+    r.SubnetId = subnetId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

@@ -32,6 +32,9 @@ type UpdateTranscodeTemplateRequestObject struct {
     /* 封装配置 (Optional) */
     Encapsulation Encapsulation `json:"encapsulation"`
 
+    /* 输出文件配置 (Optional) */
+    OutFile OutFile `json:"outFile"`
+
     /* 清晰度规格标记。取值范围：
   SD - 标清
   HD - 高清

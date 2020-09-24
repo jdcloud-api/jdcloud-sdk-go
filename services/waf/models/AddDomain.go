@@ -31,7 +31,7 @@ type AddDomain struct {
     /* ssl协议，eg:["TLSv1","TLSv1.1","TLSv1.2","SSLv2","SSLv3"] (Optional) */
     SslProtocols []string `json:"sslProtocols"`
 
-    /* 负载均衡算法，eg:"rr"，"ip_hash"  */
+    /* 负载均衡算法，eg:"rr"，"ip_hash","weight_rr"  */
     LbType string `json:"lbType"`
 
     /* 回源配置  */
@@ -57,4 +57,10 @@ type AddDomain struct {
 
     /* 请求头是否支持下划线，0-否，1-是。缺省为0 (Optional) */
     EnableUnderscores *int `json:"enableUnderscores"`
+
+    /* 禁用被动健康检查，缺省为0-否 (Optional) */
+    DisableHealthCheck *int `json:"disableHealthCheck"`
+
+    /* 连接超时时间，3-60s (Optional) */
+    ProxyConnectTimeout *int `json:"proxyConnectTimeout"`
 }

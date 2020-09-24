@@ -53,11 +53,17 @@ type DescribeInstancesRequest struct {
     /* 是否启用外网, yes/no (Optional) */
     EnableInternet *string `json:"enableInternet"`
 
-    /* 内网ip (Optional) */
+    /* 主网口内网ip (Optional) */
     PrivateIp *string `json:"privateIp"`
+
+    /* 辅网口内网ip (Optional) */
+    ExtensionPrivateIp *string `json:"extensionPrivateIp"`
 
     /* 密钥对id (Optional) */
     KeypairId *string `json:"keypairId"`
+
+    /* 网口模式 单网口:bond,双网口:dual (Optional) */
+    InterfaceMode *string `json:"interfaceMode"`
 
     /* instanceId - 分布式云物理服务器ID，精确匹配，支持多个<br/>
 status - 分布式云物理服务器状态，参考分布式云物理服务器状态，精确匹配，支持多个
@@ -95,8 +101,10 @@ func NewDescribeInstancesRequest(
  * param deviceType: 实例类型，精确匹配，调用接口（describeDeviceTypes）获取实例类型 (Optional)
  * param subnetId: 子网ID (Optional)
  * param enableInternet: 是否启用外网, yes/no (Optional)
- * param privateIp: 内网ip (Optional)
+ * param privateIp: 主网口内网ip (Optional)
+ * param extensionPrivateIp: 辅网口内网ip (Optional)
  * param keypairId: 密钥对id (Optional)
+ * param interfaceMode: 网口模式 单网口:bond,双网口:dual (Optional)
  * param filters: instanceId - 分布式云物理服务器ID，精确匹配，支持多个<br/>
 status - 分布式云物理服务器状态，参考分布式云物理服务器状态，精确匹配，支持多个
  (Optional)
@@ -112,7 +120,9 @@ func NewDescribeInstancesRequestWithAllParams(
     subnetId *string,
     enableInternet *string,
     privateIp *string,
+    extensionPrivateIp *string,
     keypairId *string,
+    interfaceMode *string,
     filters []common.Filter,
 ) *DescribeInstancesRequest {
 
@@ -133,7 +143,9 @@ func NewDescribeInstancesRequestWithAllParams(
         SubnetId: subnetId,
         EnableInternet: enableInternet,
         PrivateIp: privateIp,
+        ExtensionPrivateIp: extensionPrivateIp,
         KeypairId: keypairId,
+        InterfaceMode: interfaceMode,
         Filters: filters,
     }
 }
@@ -196,14 +208,24 @@ func (r *DescribeInstancesRequest) SetEnableInternet(enableInternet string) {
     r.EnableInternet = &enableInternet
 }
 
-/* param privateIp: 内网ip(Optional) */
+/* param privateIp: 主网口内网ip(Optional) */
 func (r *DescribeInstancesRequest) SetPrivateIp(privateIp string) {
     r.PrivateIp = &privateIp
+}
+
+/* param extensionPrivateIp: 辅网口内网ip(Optional) */
+func (r *DescribeInstancesRequest) SetExtensionPrivateIp(extensionPrivateIp string) {
+    r.ExtensionPrivateIp = &extensionPrivateIp
 }
 
 /* param keypairId: 密钥对id(Optional) */
 func (r *DescribeInstancesRequest) SetKeypairId(keypairId string) {
     r.KeypairId = &keypairId
+}
+
+/* param interfaceMode: 网口模式 单网口:bond,双网口:dual(Optional) */
+func (r *DescribeInstancesRequest) SetInterfaceMode(interfaceMode string) {
+    r.InterfaceMode = &interfaceMode
 }
 
 /* param filters: instanceId - 分布式云物理服务器ID，精确匹配，支持多个<br/>

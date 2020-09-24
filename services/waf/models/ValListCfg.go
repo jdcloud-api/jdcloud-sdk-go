@@ -23,7 +23,7 @@ type ValListCfg struct {
     Id int `json:"id"`
 
     /* 规则更新时间，秒级时间戳, 0 表示历史数据无记录 (Optional) */
-    UpdateTime string `json:"updateTime"`
+    UpdateTime int `json:"updateTime"`
 
     /* 0-使用中 1-禁用 (Optional) */
     Disable int `json:"disable"`

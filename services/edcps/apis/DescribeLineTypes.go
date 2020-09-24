@@ -98,5 +98,5 @@ type DescribeLineTypesResponse struct {
 }
 
 type DescribeLineTypesResult struct {
-    LineTypes []edcps.LineType `json:"lineTypes"`
+    LineType edcps.LineType `json:"lineType"`
 }

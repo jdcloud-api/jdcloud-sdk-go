@@ -25,6 +25,6 @@ type IpDomainInfo struct {
     /* 是否waf的vip，true-是，false-不是 (Optional) */
     IsVip bool `json:"isVip"`
 
-    /* 绑定的证书名称 (Optional) */
+    /* 域名信息 (Optional) */
     DomainInfo []DomainInfo `json:"domainInfo"`
 }

@@ -18,99 +18,97 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    waf "github.com/jdcloud-api/jdcloud-sdk-go/services/waf/models"
 )
 
-type DescribeIpDomainInfoRequest struct {
+type DelBWListRequest struct {
 
     core.JDCloudRequest
 
-    /*   */
+    /* 实例所属的地域ID  */
     RegionId string `json:"regionId"`
 
-    /* ip列表，多个以逗号分隔  */
-    Ip string `json:"ip"`
+    /* 黑白名单ID, 多个用逗号分隔  */
+    Id string `json:"id"`
 }
 
 /*
- * param regionId:  (Required)
- * param ip: ip列表，多个以逗号分隔 (Required)
+ * param regionId: 实例所属的地域ID (Required)
+ * param id: 黑白名单ID, 多个用逗号分隔 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeIpDomainInfoRequest(
+func NewDelBWListRequest(
     regionId string,
-    ip string,
-) *DescribeIpDomainInfoRequest {
+    id string,
+) *DelBWListRequest {
 
-	return &DescribeIpDomainInfoRequest{
+	return &DelBWListRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/ip:domainInfo",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/blackwhite:list",
+			Method:  "DELETE",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        Ip: ip,
+        Id: id,
 	}
 }
 
 /*
- * param regionId:  (Required)
- * param ip: ip列表，多个以逗号分隔 (Required)
+ * param regionId: 实例所属的地域ID (Required)
+ * param id: 黑白名单ID, 多个用逗号分隔 (Required)
  */
-func NewDescribeIpDomainInfoRequestWithAllParams(
+func NewDelBWListRequestWithAllParams(
     regionId string,
-    ip string,
-) *DescribeIpDomainInfoRequest {
+    id string,
+) *DelBWListRequest {
 
-    return &DescribeIpDomainInfoRequest{
+    return &DelBWListRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/ip:domainInfo",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/blackwhite:list",
+            Method:  "DELETE",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        Ip: ip,
+        Id: id,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeIpDomainInfoRequestWithoutParam() *DescribeIpDomainInfoRequest {
+func NewDelBWListRequestWithoutParam() *DelBWListRequest {
 
-    return &DescribeIpDomainInfoRequest{
+    return &DelBWListRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/ip:domainInfo",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/blackwhite:list",
+            Method:  "DELETE",
             Header:  nil,
             Version: "v1",
         },
     }
 }
 
-/* param regionId: (Required) */
-func (r *DescribeIpDomainInfoRequest) SetRegionId(regionId string) {
+/* param regionId: 实例所属的地域ID(Required) */
+func (r *DelBWListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param ip: ip列表，多个以逗号分隔(Required) */
-func (r *DescribeIpDomainInfoRequest) SetIp(ip string) {
-    r.Ip = ip
+/* param id: 黑白名单ID, 多个用逗号分隔(Required) */
+func (r *DelBWListRequest) SetId(id string) {
+    r.Id = id
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeIpDomainInfoRequest) GetRegionId() string {
+func (r DelBWListRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeIpDomainInfoResponse struct {
+type DelBWListResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeIpDomainInfoResult `json:"result"`
+    Result DelBWListResult `json:"result"`
 }
 
-type DescribeIpDomainInfoResult struct {
-    List []waf.IpDomainInfo `json:"list"`
+type DelBWListResult struct {
 }

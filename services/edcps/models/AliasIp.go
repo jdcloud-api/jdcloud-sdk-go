@@ -19,14 +19,14 @@ package models
 
 type AliasIp struct {
 
-    /* 实例ID (Optional) */
-    InstanceId string `json:"instanceId"`
-
     /* 地域 (Optional) */
     Region string `json:"region"`
 
     /* 可用区 (Optional) */
     Az string `json:"az"`
+
+    /* 实例ID (Optional) */
+    InstanceId string `json:"instanceId"`
 
     /* 子网ID (Optional) */
     SubnetId string `json:"subnetId"`
@@ -39,4 +39,7 @@ type AliasIp struct {
 
     /* cidr段 (Optional) */
     Cidr string `json:"cidr"`
+
+    /* 是否已绑弹性公网ip (Optional) */
+    IsBondEip bool `json:"isBondEip"`
 }

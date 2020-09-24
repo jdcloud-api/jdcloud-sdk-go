@@ -45,6 +45,20 @@ type UpdateWatermarkRequestObject struct {
  (Optional) */
     SizeUnit string `json:"sizeUnit"`
 
+    /*  (Optional) */
+    WidthRef string `json:"widthRef"`
+
+    /* 高度参考，仅当 siteUnit = percent 时生效。
+取值说明：
+  w: 输出水印高度 = height * 水印原图高度
+  v: 等同于 vh
+  vw: 输出水印高度 = height * 输出视频宽度
+  vh: 输出水印高度 = height * 输出视频高度
+  vls: 输出水印高度 = height * 输出视频长边
+  vss: 输出水印高度 = height * 输出视频短边
+ (Optional) */
+    HeightRef string `json:"heightRef"`
+
     /* 水印位置。取值范围：
   LT - 左上
   RT - 右上

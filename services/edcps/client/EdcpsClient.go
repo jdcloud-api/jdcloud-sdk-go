@@ -40,7 +40,7 @@ func NewEdcpsClient(credential *core.Credential) *EdcpsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "edcps",
-            Revision:    "1.1.2",
+            Revision:    "1.3.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -282,7 +282,7 @@ func (c *EdcpsClient) DescribeAliasIps(request *edcps.DescribeAliasIpsRequest) (
     return jdResp, err
 }
 
-/* 查询链路类型列表 */
+/* 查询链路类型 */
 func (c *EdcpsClient) DescribeLineTypes(request *edcps.DescribeLineTypesRequest) (*edcps.DescribeLineTypesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -440,6 +440,46 @@ func (c *EdcpsClient) DescribeAvailablePrivateIp(request *edcps.DescribeAvailabl
     return jdResp, err
 }
 
+/* 查询共享带宽库存 */
+func (c *EdcpsClient) DescribeBandwidthPackageStock(request *edcps.DescribeBandwidthPackageStockRequest) (*edcps.DescribeBandwidthPackageStockResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &edcps.DescribeBandwidthPackageStockResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询共享带宽详情 */
+func (c *EdcpsClient) DescribeBandwidthPackage(request *edcps.DescribeBandwidthPackageRequest) (*edcps.DescribeBandwidthPackageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &edcps.DescribeBandwidthPackageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 重置分布式云物理服务器密码
  */
 func (c *EdcpsClient) ResetPassword(request *edcps.ResetPasswordRequest) (*edcps.ResetPasswordResponse, error) {
@@ -501,6 +541,28 @@ func (c *EdcpsClient) DeleteKeypairs(request *edcps.DeleteKeypairsRequest) (*edc
     return jdResp, err
 }
 
+/* 查询弹性公网IP列表<br/>
+支持分页查询，默认每页20条<br/>
+ */
+func (c *EdcpsClient) DescribeBandwidthPackages(request *edcps.DescribeBandwidthPackagesRequest) (*edcps.DescribeBandwidthPackagesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &edcps.DescribeBandwidthPackagesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 对单台分布式云物理服务器执行关机操作，只能停止running状态的服务器 [MFA enabled] */
 func (c *EdcpsClient) StopInstance(request *edcps.StopInstanceRequest) (*edcps.StopInstanceResponse, error) {
     if request == nil {
@@ -532,6 +594,48 @@ func (c *EdcpsClient) DescribeEdCPSRegions(request *edcps.DescribeEdCPSRegionsRe
     }
 
     jdResp := &edcps.DescribeEdCPSRegionsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改共享带宽的带宽
+ */
+func (c *EdcpsClient) ModifyBandwidthPackageBandwidth(request *edcps.ModifyBandwidthPackageBandwidthRequest) (*edcps.ModifyBandwidthPackageBandwidthResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &edcps.ModifyBandwidthPackageBandwidthResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除共享带宽
+ */
+func (c *EdcpsClient) DeleteBandwidthPackage(request *edcps.DeleteBandwidthPackageRequest) (*edcps.DeleteBandwidthPackageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &edcps.DeleteBandwidthPackageResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -685,6 +789,27 @@ func (c *EdcpsClient) DescribeInstanceStatus(request *edcps.DescribeInstanceStat
     return jdResp, err
 }
 
+/* 修改共享带宽
+ */
+func (c *EdcpsClient) ModifyBandwidthPackage(request *edcps.ModifyBandwidthPackageRequest) (*edcps.ModifyBandwidthPackageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &edcps.ModifyBandwidthPackageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 删除弹性公网IP
  */
 func (c *EdcpsClient) DeleteelasticIp(request *edcps.DeleteelasticIpRequest) (*edcps.DeleteelasticIpResponse, error) {
@@ -766,6 +891,27 @@ func (c *EdcpsClient) DescribeElasticIpStock(request *edcps.DescribeElasticIpSto
     return jdResp, err
 }
 
+/* 移除共享带宽IP
+ */
+func (c *EdcpsClient) RemoveBandwidthPackageIp(request *edcps.RemoveBandwidthPackageIpRequest) (*edcps.RemoveBandwidthPackageIpResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &edcps.RemoveBandwidthPackageIpResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 导入密钥对 */
 func (c *EdcpsClient) ImportKeypairs(request *edcps.ImportKeypairsRequest) (*edcps.ImportKeypairsResponse, error) {
     if request == nil {
@@ -837,6 +983,27 @@ func (c *EdcpsClient) DescribeDeviceStock(request *edcps.DescribeDeviceStockRequ
     }
 
     jdResp := &edcps.DescribeDeviceStockResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 添加共享带宽IP
+ */
+func (c *EdcpsClient) AddBandwidthPackageIp(request *edcps.AddBandwidthPackageIpRequest) (*edcps.AddBandwidthPackageIpResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &edcps.AddBandwidthPackageIpResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1041,6 +1208,27 @@ func (c *EdcpsClient) ApplyElasticIps(request *edcps.ApplyElasticIpsRequest) (*e
     }
 
     jdResp := &edcps.ApplyElasticIpsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 申请共享带宽
+ */
+func (c *EdcpsClient) ApplyBandwidthPackages(request *edcps.ApplyBandwidthPackagesRequest) (*edcps.ApplyBandwidthPackagesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &edcps.ApplyBandwidthPackagesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
