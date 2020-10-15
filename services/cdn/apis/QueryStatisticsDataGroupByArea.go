@@ -57,6 +57,9 @@ type QueryStatisticsDataGroupByAreaRequest struct {
 
     /* 查询协议，可选值:[http,https,all],传空默认返回全部协议汇总后的数据 (Optional) */
     Scheme *string `json:"scheme"`
+
+    /* true 代表查询境外数据，默认false查询境内数据 (Optional) */
+    Abroad *bool `json:"abroad"`
 }
 
 /*
@@ -88,6 +91,7 @@ func NewQueryStatisticsDataGroupByAreaRequest(
  * param period: 时间粒度，可选值:[oneMin,fiveMin,followTime],followTime只会返回一个汇总后的数据 (Optional)
  * param groupBy: 分组依据 (Optional)
  * param scheme: 查询协议，可选值:[http,https,all],传空默认返回全部协议汇总后的数据 (Optional)
+ * param abroad: true 代表查询境外数据，默认false查询境内数据 (Optional)
  */
 func NewQueryStatisticsDataGroupByAreaRequestWithAllParams(
     startTime *string,
@@ -101,6 +105,7 @@ func NewQueryStatisticsDataGroupByAreaRequestWithAllParams(
     period *string,
     groupBy *string,
     scheme *string,
+    abroad *bool,
 ) *QueryStatisticsDataGroupByAreaRequest {
 
     return &QueryStatisticsDataGroupByAreaRequest{
@@ -121,6 +126,7 @@ func NewQueryStatisticsDataGroupByAreaRequestWithAllParams(
         Period: period,
         GroupBy: groupBy,
         Scheme: scheme,
+        Abroad: abroad,
     }
 }
 
@@ -190,6 +196,11 @@ func (r *QueryStatisticsDataGroupByAreaRequest) SetGroupBy(groupBy string) {
 /* param scheme: 查询协议，可选值:[http,https,all],传空默认返回全部协议汇总后的数据(Optional) */
 func (r *QueryStatisticsDataGroupByAreaRequest) SetScheme(scheme string) {
     r.Scheme = &scheme
+}
+
+/* param abroad: true 代表查询境外数据，默认false查询境内数据(Optional) */
+func (r *QueryStatisticsDataGroupByAreaRequest) SetAbroad(abroad bool) {
+    r.Abroad = &abroad
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

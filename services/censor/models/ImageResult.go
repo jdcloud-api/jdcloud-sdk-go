@@ -31,6 +31,9 @@ type ImageResult struct {
     /* 该检测任务的ID (Optional) */
     TaskId string `json:"taskId"`
 
+    /* 对应请求中的url (Optional) */
+    Url string `json:"url"`
+
     /* 返回结果。调用成功时（code=200），返回结果中包含一个或多个元素。每个元素是个结构体，具体结构描述见ImageResultDetail (Optional) */
     Results []ImageResultDetail `json:"results"`
 }

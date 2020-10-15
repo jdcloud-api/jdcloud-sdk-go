@@ -25,6 +25,9 @@ type DataConsumeData struct {
     /* 涉黄 (Optional) */
     Porn int `json:"porn"`
 
+    /*  (Optional) */
+    Ad int `json:"ad"`
+
     /* 涉政暴恐 (Optional) */
     Politics_terrorism int `json:"politics_terrorism"`
 

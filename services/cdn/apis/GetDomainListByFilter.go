@@ -25,7 +25,7 @@ type GetDomainListByFilterRequest struct {
 
     core.JDCloudRequest
 
-    /* 根据关键字进行模糊匹配 (Optional) */
+    /* 根据关键字进行模糊匹配，域名或者回源信息 (Optional) */
     KeyWord *string `json:"keyWord"`
 
     /* pageNumber,默认值为1 (Optional) */
@@ -42,6 +42,9 @@ type GetDomainListByFilterRequest struct {
 
     /* 加速区域，(mainLand:中国大陆，nonMainLand:海外加港澳台，all:全球),不传为全球 (Optional) */
     AccelerateRegion *string `json:"accelerateRegion"`
+
+    /* 筛选依据（0：根据域名筛选，1：根据回源信息筛选），默认按照域名进行筛选 (Optional) */
+    FilterBy *int `json:"filterBy"`
 
     /* 标签过滤条件 (Optional) */
     TagFilters []cdn.TagFilter `json:"tagFilters"`
@@ -65,12 +68,13 @@ func NewGetDomainListByFilterRequest(
 }
 
 /*
- * param keyWord: 根据关键字进行模糊匹配 (Optional)
+ * param keyWord: 根据关键字进行模糊匹配，域名或者回源信息 (Optional)
  * param pageNumber: pageNumber,默认值为1 (Optional)
  * param pageSize: pageSize,默认值为20,最大值为50 (Optional)
  * param status: 根据域名状态查询, 可选值[offline, online, configuring, auditing, audit_reject] (Optional)
  * param type_: 域名类型，(web:静态小文件，download:大文件加速，vod:视频加速，live:直播加速),不传查所有 (Optional)
  * param accelerateRegion: 加速区域，(mainLand:中国大陆，nonMainLand:海外加港澳台，all:全球),不传为全球 (Optional)
+ * param filterBy: 筛选依据（0：根据域名筛选，1：根据回源信息筛选），默认按照域名进行筛选 (Optional)
  * param tagFilters: 标签过滤条件 (Optional)
  */
 func NewGetDomainListByFilterRequestWithAllParams(
@@ -80,6 +84,7 @@ func NewGetDomainListByFilterRequestWithAllParams(
     status *string,
     type_ *string,
     accelerateRegion *string,
+    filterBy *int,
     tagFilters []cdn.TagFilter,
 ) *GetDomainListByFilterRequest {
 
@@ -96,6 +101,7 @@ func NewGetDomainListByFilterRequestWithAllParams(
         Status: status,
         Type: type_,
         AccelerateRegion: accelerateRegion,
+        FilterBy: filterBy,
         TagFilters: tagFilters,
     }
 }
@@ -113,7 +119,7 @@ func NewGetDomainListByFilterRequestWithoutParam() *GetDomainListByFilterRequest
     }
 }
 
-/* param keyWord: 根据关键字进行模糊匹配(Optional) */
+/* param keyWord: 根据关键字进行模糊匹配，域名或者回源信息(Optional) */
 func (r *GetDomainListByFilterRequest) SetKeyWord(keyWord string) {
     r.KeyWord = &keyWord
 }
@@ -141,6 +147,11 @@ func (r *GetDomainListByFilterRequest) SetType(type_ string) {
 /* param accelerateRegion: 加速区域，(mainLand:中国大陆，nonMainLand:海外加港澳台，all:全球),不传为全球(Optional) */
 func (r *GetDomainListByFilterRequest) SetAccelerateRegion(accelerateRegion string) {
     r.AccelerateRegion = &accelerateRegion
+}
+
+/* param filterBy: 筛选依据（0：根据域名筛选，1：根据回源信息筛选），默认按照域名进行筛选(Optional) */
+func (r *GetDomainListByFilterRequest) SetFilterBy(filterBy int) {
+    r.FilterBy = &filterBy
 }
 
 /* param tagFilters: 标签过滤条件(Optional) */

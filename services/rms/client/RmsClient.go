@@ -40,7 +40,7 @@ func NewRmsClient(credential *core.Credential) *RmsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "rms",
-            Revision:    "1.2.0",
+            Revision:    "1.3.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -68,26 +68,6 @@ func (c *RmsClient) QueryCreditList(request *rms.QueryCreditListRequest) (*rms.Q
     }
 
     jdResp := &rms.QueryCreditListResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 增加富媒体短信内容接口 */
-func (c *RmsClient) AddTemplate(request *rms.AddTemplateRequest) (*rms.AddTemplateResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &rms.AddTemplateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -128,6 +108,26 @@ func (c *RmsClient) QueryTemplateList(request *rms.QueryTemplateListRequest) (*r
     }
 
     jdResp := &rms.QueryTemplateListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 增加富媒体短信内容接口 */
+func (c *RmsClient) AddTemplateNew(request *rms.AddTemplateNewRequest) (*rms.AddTemplateNewResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rms.AddTemplateNewResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

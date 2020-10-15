@@ -40,7 +40,7 @@ func NewDbauditClient(credential *core.Credential) *DbauditClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "dbaudit",
-            Revision:    "1.0.1",
+            Revision:    "1.0.2",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -744,7 +744,7 @@ func (c *DbauditClient) UpdateDatabase(request *dbaudit.UpdateDatabaseRequest) (
     return jdResp, err
 }
 
-/* 添加一条IP白名单记录，仅支持IPv4地址 */
+/* 添加一条IP白名单记录 */
 func (c *DbauditClient) AddIpWhiteItem(request *dbaudit.AddIpWhiteItemRequest) (*dbaudit.AddIpWhiteItemResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")

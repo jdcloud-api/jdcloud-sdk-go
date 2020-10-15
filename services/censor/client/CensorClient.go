@@ -40,7 +40,7 @@ func NewCensorClient(credential *core.Credential) *CensorClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "censor",
-            Revision:    "1.0.0",
+            Revision:    "1.0.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -57,8 +57,8 @@ func (c *CensorClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
 }
 
-/* 提交图片异步检测任务 */
-func (c *CensorClient) AsyncImageScan(request *censor.AsyncImageScanRequest) (*censor.AsyncImageScanResponse, error) {
+/* 查看音频异步检测结果 */
+func (c *CensorClient) AudioResults(request *censor.AudioResultsRequest) (*censor.AudioResultsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -67,7 +67,87 @@ func (c *CensorClient) AsyncImageScan(request *censor.AsyncImageScanRequest) (*c
         return nil, err
     }
 
-    jdResp := &censor.AsyncImageScanResponse{}
+    jdResp := &censor.AudioResultsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除限制参数配置 */
+func (c *CensorClient) DeleteLimit(request *censor.DeleteLimitRequest) (*censor.DeleteLimitResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &censor.DeleteLimitResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 文本同步检测-检测文本中是否包含违规信息 */
+func (c *CensorClient) InnerTextScan(request *censor.InnerTextScanRequest) (*censor.InnerTextScanResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &censor.InnerTextScanResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 提交音频异步检测任务 */
+func (c *CensorClient) AsyncAudioScan(request *censor.AsyncAudioScanRequest) (*censor.AsyncAudioScanResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &censor.AsyncAudioScanResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查看视频异步检测结果 */
+func (c *CensorClient) VideoResults(request *censor.VideoResultsRequest) (*censor.VideoResultsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &censor.VideoResultsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -97,6 +177,26 @@ func (c *CensorClient) ImageResults(request *censor.ImageResultsRequest) (*censo
     return jdResp, err
 }
 
+/* 删除敏感库 */
+func (c *CensorClient) DeleteCensorLib(request *censor.DeleteCensorLibRequest) (*censor.DeleteCensorLibResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &censor.DeleteCensorLibResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 文本同步检测-检测文本中是否包含违规信息 */
 func (c *CensorClient) TextScan(request *censor.TextScanRequest) (*censor.TextScanResponse, error) {
     if request == nil {
@@ -108,6 +208,66 @@ func (c *CensorClient) TextScan(request *censor.TextScanRequest) (*censor.TextSc
     }
 
     jdResp := &censor.TextScanResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 提交视频异步检测任务 */
+func (c *CensorClient) AsyncVideoScan(request *censor.AsyncVideoScanRequest) (*censor.AsyncVideoScanResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &censor.AsyncVideoScanResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除敏感库Item */
+func (c *CensorClient) DeleteCensorLibItems(request *censor.DeleteCensorLibItemsRequest) (*censor.DeleteCensorLibItemsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &censor.DeleteCensorLibItemsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 提交图片异步检测任务 */
+func (c *CensorClient) AsyncImageScan(request *censor.AsyncImageScanRequest) (*censor.AsyncImageScanResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &censor.AsyncImageScanResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

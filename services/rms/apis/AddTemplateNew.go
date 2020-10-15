@@ -21,7 +21,7 @@ import (
     rms "github.com/jdcloud-api/jdcloud-sdk-go/services/rms/models"
 )
 
-type AddTemplateRequest struct {
+type AddTemplateNewRequest struct {
 
     core.JDCloudRequest
 
@@ -58,7 +58,7 @@ type AddTemplateRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewAddTemplateRequest(
+func NewAddTemplateNewRequest(
     regionId string,
     appId string,
     aptitudesId string,
@@ -66,11 +66,11 @@ func NewAddTemplateRequest(
     description string,
     signContent string,
     content []rms.TemplateContent,
-) *AddTemplateRequest {
+) *AddTemplateNewRequest {
 
-	return &AddTemplateRequest{
+	return &AddTemplateNewRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/addTemplate",
+			URL:     "/regions/{regionId}/addTemplateNew",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v2",
@@ -94,7 +94,7 @@ func NewAddTemplateRequest(
  * param signContent: 短信签名 (Required)
  * param content: 短信内容 (Required)
  */
-func NewAddTemplateRequestWithAllParams(
+func NewAddTemplateNewRequestWithAllParams(
     regionId string,
     appId string,
     aptitudesId string,
@@ -102,11 +102,11 @@ func NewAddTemplateRequestWithAllParams(
     description string,
     signContent string,
     content []rms.TemplateContent,
-) *AddTemplateRequest {
+) *AddTemplateNewRequest {
 
-    return &AddTemplateRequest{
+    return &AddTemplateNewRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/addTemplate",
+            URL:     "/regions/{regionId}/addTemplateNew",
             Method:  "POST",
             Header:  nil,
             Version: "v2",
@@ -122,11 +122,11 @@ func NewAddTemplateRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewAddTemplateRequestWithoutParam() *AddTemplateRequest {
+func NewAddTemplateNewRequestWithoutParam() *AddTemplateNewRequest {
 
-    return &AddTemplateRequest{
+    return &AddTemplateNewRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/addTemplate",
+            URL:     "/regions/{regionId}/addTemplateNew",
             Method:  "POST",
             Header:  nil,
             Version: "v2",
@@ -135,53 +135,53 @@ func NewAddTemplateRequestWithoutParam() *AddTemplateRequest {
 }
 
 /* param regionId: Region ID(Required) */
-func (r *AddTemplateRequest) SetRegionId(regionId string) {
+func (r *AddTemplateNewRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param appId: 应用ID(Required) */
-func (r *AddTemplateRequest) SetAppId(appId string) {
+func (r *AddTemplateNewRequest) SetAppId(appId string) {
     r.AppId = appId
 }
 
 /* param aptitudesId: 资质ID(Required) */
-func (r *AddTemplateRequest) SetAptitudesId(aptitudesId string) {
+func (r *AddTemplateNewRequest) SetAptitudesId(aptitudesId string) {
     r.AptitudesId = aptitudesId
 }
 
 /* param title: 短信主题(Required) */
-func (r *AddTemplateRequest) SetTitle(title string) {
+func (r *AddTemplateNewRequest) SetTitle(title string) {
     r.Title = title
 }
 
 /* param description: 短信描述(Required) */
-func (r *AddTemplateRequest) SetDescription(description string) {
+func (r *AddTemplateNewRequest) SetDescription(description string) {
     r.Description = description
 }
 
 /* param signContent: 短信签名(Required) */
-func (r *AddTemplateRequest) SetSignContent(signContent string) {
+func (r *AddTemplateNewRequest) SetSignContent(signContent string) {
     r.SignContent = signContent
 }
 
 /* param content: 短信内容(Required) */
-func (r *AddTemplateRequest) SetContent(content []rms.TemplateContent) {
+func (r *AddTemplateNewRequest) SetContent(content []rms.TemplateContent) {
     r.Content = content
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r AddTemplateRequest) GetRegionId() string {
+func (r AddTemplateNewRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type AddTemplateResponse struct {
+type AddTemplateNewResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result AddTemplateResult `json:"result"`
+    Result AddTemplateNewResult `json:"result"`
 }
 
-type AddTemplateResult struct {
+type AddTemplateNewResult struct {
     Data rms.RespTemplateData `json:"data"`
     Status bool `json:"status"`
     Code string `json:"code"`

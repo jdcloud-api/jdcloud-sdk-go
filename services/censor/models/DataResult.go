@@ -28,13 +28,16 @@ type DataResult struct {
     /* dataId (Optional) */
     DataId string `json:"dataId"`
 
-    /* 送审时间，秒级时间戳 (Optional) */
-    Time int `json:"time"`
+    /* 送审时间 2019-12-18 16:02:19（北京时间UTC+8） (Optional) */
+    Time string `json:"time"`
+
+    /* 日志落盘时间 2019-12-18 16:02:19（北京时间UTC+8） (Optional) */
+    LogTime string `json:"logTime"`
 
     /* 识别结果 (Optional) */
     Result string `json:"result"`
 
-    /* 详情,见blockDetail中描述 (Optional) */
+    /* 场景_结果 格式。 (Optional) */
     Details []string `json:"details"`
 
     /* 响应结果 (Optional) */
@@ -45,4 +48,13 @@ type DataResult struct {
 
     /* 状态码 (Optional) */
     Code string `json:"code"`
+
+    /* 图片/音频/视频的url (Optional) */
+    Url string `json:"url"`
+
+    /* 视频截帧 (Optional) */
+    Frame FrameCfg `json:"frame"`
+
+    /* 人工审核结果，空表示没有审核 (Optional) */
+    FbSuggestion string `json:"fbSuggestion"`
 }

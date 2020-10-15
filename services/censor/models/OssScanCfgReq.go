@@ -45,4 +45,10 @@ type OssScanCfgReq struct {
 
     /* 视频截帧配置, 暂不支持 (Optional) */
     FrameInfo FrameConf `json:"frameInfo"`
+
+    /* 文本配置 (Optional) */
+    TextInfo ScanConf `json:"textInfo"`
+
+    /* 音频配置 (Optional) */
+    AudioInfo ScanConf `json:"audioInfo"`
 }

@@ -30,4 +30,7 @@ type TaskData struct {
 
     /* 该检测任务的ID (Optional) */
     TaskId string `json:"taskId"`
+
+    /* 对应请求中的url (Optional) */
+    Url string `json:"url"`
 }
