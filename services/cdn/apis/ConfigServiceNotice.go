@@ -44,6 +44,9 @@ type ConfigServiceNoticeRequest struct {
 
     /* 通知周期,取值[daily,weekly,monthly]. (Optional) */
     NoticePeriod []string `json:"noticePeriod"`
+
+    /* 通知状态，取值[init,start,stop] (Optional) */
+    NoticeStatus *string `json:"noticeStatus"`
 }
 
 /*
@@ -71,6 +74,7 @@ func NewConfigServiceNoticeRequest(
  * param noticeCC: 通知抄送人,多个用逗号隔开. (Optional)
  * param noticeContent: 通知正文. (Optional)
  * param noticePeriod: 通知周期,取值[daily,weekly,monthly]. (Optional)
+ * param noticeStatus: 通知状态，取值[init,start,stop] (Optional)
  */
 func NewConfigServiceNoticeRequestWithAllParams(
     id *int64,
@@ -80,6 +84,7 @@ func NewConfigServiceNoticeRequestWithAllParams(
     noticeCC *string,
     noticeContent *string,
     noticePeriod []string,
+    noticeStatus *string,
 ) *ConfigServiceNoticeRequest {
 
     return &ConfigServiceNoticeRequest{
@@ -96,6 +101,7 @@ func NewConfigServiceNoticeRequestWithAllParams(
         NoticeCC: noticeCC,
         NoticeContent: noticeContent,
         NoticePeriod: noticePeriod,
+        NoticeStatus: noticeStatus,
     }
 }
 
@@ -145,6 +151,11 @@ func (r *ConfigServiceNoticeRequest) SetNoticeContent(noticeContent string) {
 /* param noticePeriod: 通知周期,取值[daily,weekly,monthly].(Optional) */
 func (r *ConfigServiceNoticeRequest) SetNoticePeriod(noticePeriod []string) {
     r.NoticePeriod = noticePeriod
+}
+
+/* param noticeStatus: 通知状态，取值[init,start,stop](Optional) */
+func (r *ConfigServiceNoticeRequest) SetNoticeStatus(noticeStatus string) {
+    r.NoticeStatus = &noticeStatus
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

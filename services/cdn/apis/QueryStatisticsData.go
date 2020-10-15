@@ -51,6 +51,9 @@ type QueryStatisticsDataRequest struct {
 
     /* 时间粒度，可选值:[oneMin,fiveMin,followTime],followTime只会返回一个汇总后的数据 (Optional) */
     Period *string `json:"period"`
+
+    /* true 代表查询境外数据，默认false查询境内数据 (Optional) */
+    Abroad *bool `json:"abroad"`
 }
 
 /*
@@ -80,6 +83,7 @@ func NewQueryStatisticsDataRequest(
  * param isp:  (Optional)
  * param origin:  (Optional)
  * param period: 时间粒度，可选值:[oneMin,fiveMin,followTime],followTime只会返回一个汇总后的数据 (Optional)
+ * param abroad: true 代表查询境外数据，默认false查询境内数据 (Optional)
  */
 func NewQueryStatisticsDataRequestWithAllParams(
     startTime *string,
@@ -91,6 +95,7 @@ func NewQueryStatisticsDataRequestWithAllParams(
     isp *string,
     origin *string,
     period *string,
+    abroad *bool,
 ) *QueryStatisticsDataRequest {
 
     return &QueryStatisticsDataRequest{
@@ -109,6 +114,7 @@ func NewQueryStatisticsDataRequestWithAllParams(
         Isp: isp,
         Origin: origin,
         Period: period,
+        Abroad: abroad,
     }
 }
 
@@ -168,6 +174,11 @@ func (r *QueryStatisticsDataRequest) SetOrigin(origin string) {
 /* param period: 时间粒度，可选值:[oneMin,fiveMin,followTime],followTime只会返回一个汇总后的数据(Optional) */
 func (r *QueryStatisticsDataRequest) SetPeriod(period string) {
     r.Period = &period
+}
+
+/* param abroad: true 代表查询境外数据，默认false查询境内数据(Optional) */
+func (r *QueryStatisticsDataRequest) SetAbroad(abroad bool) {
+    r.Abroad = &abroad
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

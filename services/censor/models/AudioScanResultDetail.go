@@ -22,11 +22,14 @@ type AudioScanResultDetail struct {
     /* 句子开始的时间，单位是秒。 (Optional) */
     StartTime int `json:"startTime"`
 
-    /* 该句语言的检测结果的分类，取值参见audioScenes与label参数说明。 (Optional) */
-    EndTime string `json:"endTime"`
+    /* 句子结束的时间，单位是秒。 (Optional) */
+    EndTime int `json:"endTime"`
 
     /* 语音转换成文本的结果。 (Optional) */
     Text string `json:"text"`
+
+    /* 该句语言的检测结果的分类，取值参见audioScenes与label参数说明。 (Optional) */
+    Label string `json:"label"`
 
     /* 命中该风险的上下文信息。具体结构描述见hintWordsInfo (Optional) */
     HintWordsInfos []HintWordsInfo `json:"hintWordsInfos"`

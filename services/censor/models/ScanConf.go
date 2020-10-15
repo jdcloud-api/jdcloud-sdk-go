@@ -22,12 +22,18 @@ type ScanConf struct {
     /* 0-不开启检测，1-开启检测  */
     Enable int `json:"enable"`
 
-    /* 检测场景，porn-涉黄，terrorism-涉政暴恐，enable为1时必须 (Optional) */
+    /* 检测场景，audio-语音违规-视频支持，porn-涉黄-图片视频支持，terrorism-涉政暴恐-图片视频支持，antispam-反垃圾-文本语音支持，enable为1时必须 (Optional) */
     Scense []string `json:"scense"`
 
     /* 0-不开启自动冻结，1-开启自动冻结 (Optional) */
     Frozen int `json:"frozen"`
 
-    /* 自动冻结阈值，视频检测时阈值0表示不冻结，1表示违规冻结，不对阈值进行比较 (Optional) */
+    /* 自动冻结阈值 (Optional) */
     Threshold FrozenThreshold `json:"threshold"`
+
+    /* 检测类型，all-全部 (Optional) */
+    FileType []string `json:"fileType"`
+
+    /* 文件后缀，all-表示全部 (Optional) */
+    FileSuffix []string `json:"fileSuffix"`
 }

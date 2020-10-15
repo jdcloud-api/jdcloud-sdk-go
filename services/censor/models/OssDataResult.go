@@ -28,8 +28,11 @@ type OssDataResult struct {
     /* dataId (Optional) */
     DataId string `json:"dataId"`
 
-    /* 送审时间 (Optional) */
+    /* 送审时间 2019-12-18 16:02:19（北京时间UTC+8） (Optional) */
     Time string `json:"time"`
+
+    /* 日志落盘时间 2019-12-18 16:02:19（北京时间UTC+8） (Optional) */
+    LogTime string `json:"logTime"`
 
     /* 识别结果 (Optional) */
     Result string `json:"result"`

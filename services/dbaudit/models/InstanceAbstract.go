@@ -40,6 +40,9 @@ type InstanceAbstract struct {
     /* VPC内地址 (Optional) */
     IpAddr string `json:"ipAddr"`
 
+    /* VPC内ipv6地址 (Optional) */
+    Ipv6Addr string `json:"ipv6Addr"`
+
     /* 实例规格: basic:标准版 professional:企业版 enterprise:增强版 ultimate:旗舰版 (Optional) */
     InsType string `json:"insType"`
 

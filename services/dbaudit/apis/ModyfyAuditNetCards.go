@@ -33,7 +33,7 @@ type ModyfyAuditNetCardsRequest struct {
     /* agentId  */
     AgentId string `json:"agentId"`
 
-    /* 网卡信息 (Optional) */
+    /* 网卡信息  */
     NetCards []string `json:"netCards"`
 }
 
@@ -41,6 +41,7 @@ type ModyfyAuditNetCardsRequest struct {
  * param regionId: 地域 Id (Required)
  * param databaseId: 数据库ID (Required)
  * param agentId: agentId (Required)
+ * param netCards: 网卡信息 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -48,6 +49,7 @@ func NewModyfyAuditNetCardsRequest(
     regionId string,
     databaseId string,
     agentId string,
+    netCards []string,
 ) *ModyfyAuditNetCardsRequest {
 
 	return &ModyfyAuditNetCardsRequest{
@@ -60,6 +62,7 @@ func NewModyfyAuditNetCardsRequest(
         RegionId: regionId,
         DatabaseId: databaseId,
         AgentId: agentId,
+        NetCards: netCards,
 	}
 }
 
@@ -67,7 +70,7 @@ func NewModyfyAuditNetCardsRequest(
  * param regionId: 地域 Id (Required)
  * param databaseId: 数据库ID (Required)
  * param agentId: agentId (Required)
- * param netCards: 网卡信息 (Optional)
+ * param netCards: 网卡信息 (Required)
  */
 func NewModyfyAuditNetCardsRequestWithAllParams(
     regionId string,
@@ -118,7 +121,7 @@ func (r *ModyfyAuditNetCardsRequest) SetAgentId(agentId string) {
     r.AgentId = agentId
 }
 
-/* param netCards: 网卡信息(Optional) */
+/* param netCards: 网卡信息(Required) */
 func (r *ModyfyAuditNetCardsRequest) SetNetCards(netCards []string) {
     r.NetCards = netCards
 }

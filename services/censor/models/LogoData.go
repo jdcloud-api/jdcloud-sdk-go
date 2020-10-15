@@ -19,9 +19,6 @@ package models
 
 type LogoData struct {
 
-    /* 识别出的logo类型，取值为TV （台标） (Optional) */
-    LogoType string `json:"logoType"`
-
     /* 识别出的logo名称 (Optional) */
     Name string `json:"name"`
 

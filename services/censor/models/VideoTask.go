@@ -24,4 +24,10 @@ type VideoTask struct {
 
     /* 待检测视频的URL，最大200M (Optional) */
     Url string `json:"url"`
+
+    /* 视频截帧间隔，单位为秒，取值范围为1~60。默认值为1秒 (Optional) */
+    Interval int `json:"interval"`
+
+    /* 本视频截帧的张数上限，取值范围为5~3600，默认为200张，该参数仅在文件检测中生效(live=false) 如果是视频流(live=true)该参数无效。 (Optional) */
+    MaxFrames int `json:"maxFrames"`
 }

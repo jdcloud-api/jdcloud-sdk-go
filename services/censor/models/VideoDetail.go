@@ -31,6 +31,9 @@ type VideoDetail struct {
     /* 暴恐截帧数 (Optional) */
     Terrorism_frame_count int `json:"terrorism_frame_count"`
 
+    /* 图文截帧数 (Optional) */
+    Ad_frame_count int `json:"ad_frame_count"`
+
     /* 总截帧数 (Optional) */
     Total_frame_count int `json:"total_frame_count"`
 }

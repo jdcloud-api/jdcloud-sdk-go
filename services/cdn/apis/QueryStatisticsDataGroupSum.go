@@ -54,6 +54,9 @@ type QueryStatisticsDataGroupSumRequest struct {
 
     /* 分组依据 (Optional) */
     GroupBy *string `json:"groupBy"`
+
+    /* true 代表查询境外数据，默认false查询境内数据 (Optional) */
+    Abroad *bool `json:"abroad"`
 }
 
 /*
@@ -84,6 +87,7 @@ func NewQueryStatisticsDataGroupSumRequest(
  * param origin:  (Optional)
  * param period: 时间粒度，可选值:[oneMin,fiveMin,followTime],followTime只会返回一个汇总后的数据 (Optional)
  * param groupBy: 分组依据 (Optional)
+ * param abroad: true 代表查询境外数据，默认false查询境内数据 (Optional)
  */
 func NewQueryStatisticsDataGroupSumRequestWithAllParams(
     startTime *string,
@@ -96,6 +100,7 @@ func NewQueryStatisticsDataGroupSumRequestWithAllParams(
     origin *string,
     period *string,
     groupBy *string,
+    abroad *bool,
 ) *QueryStatisticsDataGroupSumRequest {
 
     return &QueryStatisticsDataGroupSumRequest{
@@ -115,6 +120,7 @@ func NewQueryStatisticsDataGroupSumRequestWithAllParams(
         Origin: origin,
         Period: period,
         GroupBy: groupBy,
+        Abroad: abroad,
     }
 }
 
@@ -179,6 +185,11 @@ func (r *QueryStatisticsDataGroupSumRequest) SetPeriod(period string) {
 /* param groupBy: 分组依据(Optional) */
 func (r *QueryStatisticsDataGroupSumRequest) SetGroupBy(groupBy string) {
     r.GroupBy = &groupBy
+}
+
+/* param abroad: true 代表查询境外数据，默认false查询境内数据(Optional) */
+func (r *QueryStatisticsDataGroupSumRequest) SetAbroad(abroad bool) {
+    r.Abroad = &abroad
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

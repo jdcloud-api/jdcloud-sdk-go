@@ -39,4 +39,7 @@ type ServiceNoticeItem struct {
 
     /* 通知周期,取值[daily,weekly,monthly]. (Optional) */
     NoticePeriod []string `json:"noticePeriod"`
+
+    /* 通知状态，取值[init,start,stop] (Optional) */
+    NoticeStatus string `json:"noticeStatus"`
 }
