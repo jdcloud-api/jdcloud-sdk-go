@@ -19,6 +19,7 @@ package apis
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
     ipanti "github.com/jdcloud-api/jdcloud-sdk-go/services/ipanti/models"
+    common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
 
 type DescribeForwardRulesRequest struct {
@@ -42,6 +43,11 @@ type DescribeForwardRulesRequest struct {
 
     /* 查询类型值 (Optional) */
     SearchValue *string `json:"searchValue"`
+
+    /* 排序属性：
+port - 按转发端口排序，默认不排序,asc表示按转发端口升序，desc表示按转发端口降序
+ (Optional) */
+    Sorts []common.Sort `json:"sorts"`
 }
 
 /*
@@ -74,6 +80,9 @@ func NewDescribeForwardRulesRequest(
  * param pageSize: 分页大小, 默认为10, 取值范围[10, 100] (Optional)
  * param searchType: 查询类型名称, domain:源站域名, ip:源站 IP, port: 转发端口, originPort: 源站端口, serviceIp: 高防IP(仅支持BGP线路的实例) (Optional)
  * param searchValue: 查询类型值 (Optional)
+ * param sorts: 排序属性：
+port - 按转发端口排序，默认不排序,asc表示按转发端口升序，desc表示按转发端口降序
+ (Optional)
  */
 func NewDescribeForwardRulesRequestWithAllParams(
     regionId string,
@@ -82,6 +91,7 @@ func NewDescribeForwardRulesRequestWithAllParams(
     pageSize *int,
     searchType *string,
     searchValue *string,
+    sorts []common.Sort,
 ) *DescribeForwardRulesRequest {
 
     return &DescribeForwardRulesRequest{
@@ -97,6 +107,7 @@ func NewDescribeForwardRulesRequestWithAllParams(
         PageSize: pageSize,
         SearchType: searchType,
         SearchValue: searchValue,
+        Sorts: sorts,
     }
 }
 
@@ -141,6 +152,13 @@ func (r *DescribeForwardRulesRequest) SetSearchType(searchType string) {
 /* param searchValue: 查询类型值(Optional) */
 func (r *DescribeForwardRulesRequest) SetSearchValue(searchValue string) {
     r.SearchValue = &searchValue
+}
+
+/* param sorts: 排序属性：
+port - 按转发端口排序，默认不排序,asc表示按转发端口升序，desc表示按转发端口降序
+(Optional) */
+func (r *DescribeForwardRulesRequest) SetSorts(sorts []common.Sort) {
+    r.Sorts = sorts
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

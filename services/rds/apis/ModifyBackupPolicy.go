@@ -33,11 +33,17 @@ type ModifyBackupPolicyRequest struct {
     /* 自动备份开始时间窗口,例如：00:00-01:00，表示0点到1点开始进行数据库自动备份，备份完成时间则跟实例大小有关，不一定在这个时间范围中<br>SQL Server:范围00:00-23:59，时间范围差不得小于30分钟。<br>MySQL,只能是以下取值:<br>00:00-01:00<br>01:00-02:00<br>......<br>23:00-24:00 (Optional) */
     StartWindow *string `json:"startWindow"`
 
-    /* binlog本地保留周期，单位小时,范围24-168 (Optional) */
+    /* binlog本地保留周期，单位小时,范围1-168 (Optional) */
     BinlogRetentionPeriod *int `json:"binlogRetentionPeriod"`
 
     /* binlog本地占用空间上限，单位%，范围1-50 (Optional) */
     BinlogUsageLimit *int `json:"binlogUsageLimit"`
+
+    /* 自动备份保留周期，单位天，范围7-730<br>当enhancedBackup为true时可修改<br>- 仅支持SQL Server (Optional) */
+    RetentionPeriod *int `json:"retentionPeriod"`
+
+    /* 自动备份循环模式<br>1：表示每天都是全量备份<br>2：表示自动备份按照全量、增量、增量这样的方式进行，例如第1天是全量备份，第2、3天是增量备份；第4天又是全量备份，以此类推<br>当enhancedBackup为true时可修改<br>- 仅支持SQL Server (Optional) */
+    CycleMode *int `json:"cycleMode"`
 }
 
 /*
@@ -67,8 +73,10 @@ func NewModifyBackupPolicyRequest(
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
  * param startWindow: 自动备份开始时间窗口,例如：00:00-01:00，表示0点到1点开始进行数据库自动备份，备份完成时间则跟实例大小有关，不一定在这个时间范围中<br>SQL Server:范围00:00-23:59，时间范围差不得小于30分钟。<br>MySQL,只能是以下取值:<br>00:00-01:00<br>01:00-02:00<br>......<br>23:00-24:00 (Optional)
- * param binlogRetentionPeriod: binlog本地保留周期，单位小时,范围24-168 (Optional)
+ * param binlogRetentionPeriod: binlog本地保留周期，单位小时,范围1-168 (Optional)
  * param binlogUsageLimit: binlog本地占用空间上限，单位%，范围1-50 (Optional)
+ * param retentionPeriod: 自动备份保留周期，单位天，范围7-730<br>当enhancedBackup为true时可修改<br>- 仅支持SQL Server (Optional)
+ * param cycleMode: 自动备份循环模式<br>1：表示每天都是全量备份<br>2：表示自动备份按照全量、增量、增量这样的方式进行，例如第1天是全量备份，第2、3天是增量备份；第4天又是全量备份，以此类推<br>当enhancedBackup为true时可修改<br>- 仅支持SQL Server (Optional)
  */
 func NewModifyBackupPolicyRequestWithAllParams(
     regionId string,
@@ -76,6 +84,8 @@ func NewModifyBackupPolicyRequestWithAllParams(
     startWindow *string,
     binlogRetentionPeriod *int,
     binlogUsageLimit *int,
+    retentionPeriod *int,
+    cycleMode *int,
 ) *ModifyBackupPolicyRequest {
 
     return &ModifyBackupPolicyRequest{
@@ -90,6 +100,8 @@ func NewModifyBackupPolicyRequestWithAllParams(
         StartWindow: startWindow,
         BinlogRetentionPeriod: binlogRetentionPeriod,
         BinlogUsageLimit: binlogUsageLimit,
+        RetentionPeriod: retentionPeriod,
+        CycleMode: cycleMode,
     }
 }
 
@@ -121,7 +133,7 @@ func (r *ModifyBackupPolicyRequest) SetStartWindow(startWindow string) {
     r.StartWindow = &startWindow
 }
 
-/* param binlogRetentionPeriod: binlog本地保留周期，单位小时,范围24-168(Optional) */
+/* param binlogRetentionPeriod: binlog本地保留周期，单位小时,范围1-168(Optional) */
 func (r *ModifyBackupPolicyRequest) SetBinlogRetentionPeriod(binlogRetentionPeriod int) {
     r.BinlogRetentionPeriod = &binlogRetentionPeriod
 }
@@ -129,6 +141,16 @@ func (r *ModifyBackupPolicyRequest) SetBinlogRetentionPeriod(binlogRetentionPeri
 /* param binlogUsageLimit: binlog本地占用空间上限，单位%，范围1-50(Optional) */
 func (r *ModifyBackupPolicyRequest) SetBinlogUsageLimit(binlogUsageLimit int) {
     r.BinlogUsageLimit = &binlogUsageLimit
+}
+
+/* param retentionPeriod: 自动备份保留周期，单位天，范围7-730<br>当enhancedBackup为true时可修改<br>- 仅支持SQL Server(Optional) */
+func (r *ModifyBackupPolicyRequest) SetRetentionPeriod(retentionPeriod int) {
+    r.RetentionPeriod = &retentionPeriod
+}
+
+/* param cycleMode: 自动备份循环模式<br>1：表示每天都是全量备份<br>2：表示自动备份按照全量、增量、增量这样的方式进行，例如第1天是全量备份，第2、3天是增量备份；第4天又是全量备份，以此类推<br>当enhancedBackup为true时可修改<br>- 仅支持SQL Server(Optional) */
+func (r *ModifyBackupPolicyRequest) SetCycleMode(cycleMode int) {
+    r.CycleMode = &cycleMode
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

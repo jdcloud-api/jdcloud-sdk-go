@@ -33,4 +33,7 @@ type DBInstanceInternal struct {
 
     /* 实例状态，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Optional) */
     InstanceStatus string `json:"instanceStatus"`
+
+    /* 实例的网络状态；0表示实例的网络处于中断状态，1表示实例的网络处于正常状态 (Optional) */
+    AccessibleStatus int `json:"accessibleStatus"`
 }

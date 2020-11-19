@@ -20,5 +20,5 @@ package models
 type RespCreditData struct {
 
     /* 资质ID (Optional) */
-    CreditId string `json:"creditId"`
+    SignId string `json:"signId"`
 }

@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    rds "github.com/jdcloud-api/jdcloud-sdk-go/services/rds/models"
 )
 
 type DescribeTdeRequest struct {
@@ -112,4 +113,5 @@ type DescribeTdeResponse struct {
 
 type DescribeTdeResult struct {
     Status string `json:"status"`
+    StatusDetail rds.StatusDetail `json:"statusDetail"`
 }

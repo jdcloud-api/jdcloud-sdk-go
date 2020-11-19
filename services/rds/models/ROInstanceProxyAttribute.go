@@ -39,4 +39,7 @@ type ROInstanceProxyAttribute struct {
 
     /* 绑定的只读实例 ID 列表 (Optional) */
     RoInstanceId []string `json:"roInstanceId"`
+
+    /* 只读实例列表 (Optional) */
+    RoInstanceList []RoInstanceList `json:"roInstanceList"`
 }

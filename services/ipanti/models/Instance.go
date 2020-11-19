@@ -135,4 +135,10 @@ type Instance struct {
 
     /* 关联的自定义页面名称 (Optional) */
     PageName string `json:"pageName"`
+
+    /* 是否开启自定义页面, 关闭时透传状态码.  <br>- 0: 关闭<br>- 1: 开启 (Optional) */
+    PageStatus int `json:"pageStatus"`
+
+    /* 每条网站规则可配的http/https端口数 (Optional) */
+    WebRulePortLimit int `json:"webRulePortLimit"`
 }
