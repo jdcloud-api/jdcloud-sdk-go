@@ -119,6 +119,15 @@ type DBInstanceAttribute struct {
     /* 只读代理服务 ID (Optional) */
     RoInstanceProxyID string `json:"roInstanceProxyID"`
 
+    /* 只读代理服务 名称 (Optional) */
+    RoInstanceProxyName string `json:"roInstanceProxyName"`
+
     /* 读写分离代理服务 ID (Optional) */
     ReadWriteProxyId string `json:"readWriteProxyId"`
+
+    /* 实例关联的数据同步任务Id；未关联数据同步任务时返回空 (Optional) */
+    SyncTaskId string `json:"syncTaskId"`
+
+    /* 实例内网域名解析到的内网IP地址<br>仅支持MySQL, Percona, MariaDB (Optional) */
+    InstanceVip string `json:"instanceVip"`
 }

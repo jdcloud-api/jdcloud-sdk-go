@@ -34,12 +34,15 @@ type WebBlackListRuleSpec struct {
     /* 匹配规则, mode 为 uri, cookie 和 header 时必传. 支持以下匹配规则: <br>- 0: 完全匹配<br>- 1: 前缀匹配<br>- 2: 包含<br>- 3: 正则匹配<br>- 4: 后缀匹配 (Optional) */
     Pattern *int `json:"pattern"`
 
-    /* 命中后处理动作. <br>- 0: 阻断<br>- 1: 跳转<br>- 2: 验证码  */
+    /* 命中后处理动作. <br>- 0: 封禁并返回自定义页面<br>- 1: 跳转<br>- 2: 验证码  */
     Action int `json:"action"`
 
-    /* 命中后处理值, action 为 1 时传跳转路径 (Optional) */
+    /* 命中后处理值, 命中后处理动作为跳转时有效, 表示跳转路径 (Optional) */
     ActionValue *string `json:"actionValue"`
 
     /* 规则状态. <br>- 0: 关闭<br>- 1: 开启  */
     Status int `json:"status"`
+
+    /* 关联的自定义页面id, 命中后处理动作为封禁并返回自定义页面时有效, 为空时表示默认页面 (Optional) */
+    PageId *string `json:"pageId"`
 }

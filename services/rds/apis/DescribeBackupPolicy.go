@@ -117,4 +117,5 @@ type DescribeBackupPolicyResult struct {
     BinlogUsageLimit int `json:"binlogUsageLimit"`
     CycleMode int `json:"cycleMode"`
     BackupBinlog string `json:"backupBinlog"`
+    EnhancedBackup string `json:"enhancedBackup"`
 }

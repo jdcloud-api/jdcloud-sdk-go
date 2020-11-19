@@ -40,7 +40,7 @@ func NewRmsClient(credential *core.Credential) *RmsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "rms",
-            Revision:    "1.3.0",
+            Revision:    "1.4.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }

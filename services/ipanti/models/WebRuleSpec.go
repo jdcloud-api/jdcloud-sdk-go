@@ -28,10 +28,10 @@ type WebRuleSpec struct {
     /* 协议: http, https 至少一个为 true  */
     Protocol *WebRuleProtocol `json:"protocol"`
 
-    /* HTTP 协议的端口号, 如80, 81; 如果 protocol.http 为 true, 至少配置一个端口, 最多添加 5 个 (Optional) */
+    /* HTTP 协议的端口号, 如80, 81; 如果 protocol.http 为 true, 至少配置一个端口 (Optional) */
     Port []int `json:"port"`
 
-    /* HTTPS 协议的端口号, 如443, 8443; 如果 protocol.https 为 true, 至少配置一个端口, 最多添加 5 个 (Optional) */
+    /* HTTPS 协议的端口号, 如443, 8443; 如果 protocol.https 为 true, 至少配置一个端口 (Optional) */
     HttpsPort []int `json:"httpsPort"`
 
     /* 回源类型：A 或者 CNAME  */
@@ -63,4 +63,25 @@ type WebRuleSpec struct {
 
     /* 按区域分流回源配置 (Optional) */
     GeoRsRoute []GeoRsRoute `json:"geoRsRoute"`
+
+    /* 是否开启回源长连接, protocol 选项开启 https 时生效, 可取值<br>- on: 开启<br>- off: 关闭 (Optional) */
+    EnableKeepalive *string `json:"enableKeepalive"`
+
+    /* http 版本, protocol 选项开启 https 时生效, 可取值 http1 或 http2 (Optional) */
+    HttpVersion *string `json:"httpVersion"`
+
+    /* SSL协议类型, protocol 选项开启 https 时生效, 可取值SSLv2,SSLv3,TLSv1.0,TLSv1.1,TLSv1.2 (Optional) */
+    SslProtocols []string `json:"sslProtocols"`
+
+    /* 加密套件等级, protocol 选项开启 https 时生效, 可取值<br>- low: 低级<br>- middle: 中级<br>- high：高级 (Optional) */
+    SuiteLevel *string `json:"suiteLevel"`
+
+    /* 健康检查开关, 0: 关闭, 1: 开启 (Optional) */
+    EnableHealthCheck *int `json:"enableHealthCheck"`
+
+    /* 回源连接超时时长, 单位 秒 (Optional) */
+    ProxyConnectTimeout *int `json:"proxyConnectTimeout"`
+
+    /* 请求头支持下划线, 0: 关闭, 1: 开启 (Optional) */
+    EnableUnderscores *int `json:"enableUnderscores"`
 }

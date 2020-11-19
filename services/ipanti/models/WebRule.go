@@ -102,4 +102,34 @@ type WebRule struct {
 
     /* 按区域分流回源配置 (Optional) */
     GeoRsRoute []GeoRsRoute `json:"geoRsRoute"`
+
+    /* 是否开启回源长连接, protocol 选项开启 https 时生效, 可取值<br>- on: 开启<br>- off: 关闭 (Optional) */
+    EnableKeepalive string `json:"enableKeepalive"`
+
+    /* http 版本, protocol 选项开启 https 时生效, 可取值 http1 或 http2 (Optional) */
+    HttpVersion string `json:"httpVersion"`
+
+    /* SSL协议类型, protocol 选项开启 https 时生效, 可取值SSLv2,SSLv3,TLSv1.0,TLSv1.1,TLSv1.2 (Optional) */
+    SslProtocols []string `json:"sslProtocols"`
+
+    /* 加密套件等级, protocol 选项开启 https 时生效, 可取值<br>- low: 低级<br>- middle: 中级<br>- high：高级 (Optional) */
+    SuiteLevel string `json:"suiteLevel"`
+
+    /* 是否允许在 response 中插入 JS, 0: 关闭, 1: 开启 (Optional) */
+    JsFingerprintEnable int `json:"jsFingerprintEnable"`
+
+    /* JS 指纹生效范围, 0: 所有页面, 1: 已配置的自定义页面 (Optional) */
+    JsFingerprintScope int `json:"jsFingerprintScope"`
+
+    /* CC自定义规则总开关, 0: 关闭, 1: 开启 (Optional) */
+    CcCustomStatus int `json:"ccCustomStatus"`
+
+    /* 健康检查开关, 0: 关闭, 1: 开启 (Optional) */
+    EnableHealthCheck int `json:"enableHealthCheck"`
+
+    /* 回源连接超时时长, 单位 秒 (Optional) */
+    ProxyConnectTimeout int `json:"proxyConnectTimeout"`
+
+    /* 请求头支持下划线, 0: 关闭, 1: 开启 (Optional) */
+    EnableUnderscores int `json:"enableUnderscores"`
 }

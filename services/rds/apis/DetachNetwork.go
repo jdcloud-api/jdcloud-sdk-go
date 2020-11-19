@@ -20,7 +20,7 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type UpgradeInstanceRequest struct {
+type DetachNetworkRequest struct {
 
     core.JDCloudRequest
 
@@ -29,9 +29,6 @@ type UpgradeInstanceRequest struct {
 
     /* RDS 实例ID，唯一标识一个RDS实例  */
     InstanceId string `json:"instanceId"`
-
-    /* 升级操作生效时间，取值为immediate和MaintainTime，默认值为immediate；immediate表示立即生效，MaintainTime表示在运维时间窗口内生效；**备注：MaintainTime暂不支持 (Optional) */
-    UpgradeTime *string `json:"upgradeTime"`
 }
 
 /*
@@ -40,14 +37,14 @@ type UpgradeInstanceRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewUpgradeInstanceRequest(
+func NewDetachNetworkRequest(
     regionId string,
     instanceId string,
-) *UpgradeInstanceRequest {
+) *DetachNetworkRequest {
 
-	return &UpgradeInstanceRequest{
+	return &DetachNetworkRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/upgradeInstance",
+			URL:     "/regions/{regionId}/instances/{instanceId}:detachNetwork",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -60,33 +57,30 @@ func NewUpgradeInstanceRequest(
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
- * param upgradeTime: 升级操作生效时间，取值为immediate和MaintainTime，默认值为immediate；immediate表示立即生效，MaintainTime表示在运维时间窗口内生效；**备注：MaintainTime暂不支持 (Optional)
  */
-func NewUpgradeInstanceRequestWithAllParams(
+func NewDetachNetworkRequestWithAllParams(
     regionId string,
     instanceId string,
-    upgradeTime *string,
-) *UpgradeInstanceRequest {
+) *DetachNetworkRequest {
 
-    return &UpgradeInstanceRequest{
+    return &DetachNetworkRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/upgradeInstance",
+            URL:     "/regions/{regionId}/instances/{instanceId}:detachNetwork",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         InstanceId: instanceId,
-        UpgradeTime: upgradeTime,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewUpgradeInstanceRequestWithoutParam() *UpgradeInstanceRequest {
+func NewDetachNetworkRequestWithoutParam() *DetachNetworkRequest {
 
-    return &UpgradeInstanceRequest{
+    return &DetachNetworkRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/upgradeInstance",
+            URL:     "/regions/{regionId}/instances/{instanceId}:detachNetwork",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -95,31 +89,26 @@ func NewUpgradeInstanceRequestWithoutParam() *UpgradeInstanceRequest {
 }
 
 /* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
-func (r *UpgradeInstanceRequest) SetRegionId(regionId string) {
+func (r *DetachNetworkRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
-func (r *UpgradeInstanceRequest) SetInstanceId(instanceId string) {
+func (r *DetachNetworkRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
-}
-
-/* param upgradeTime: 升级操作生效时间，取值为immediate和MaintainTime，默认值为immediate；immediate表示立即生效，MaintainTime表示在运维时间窗口内生效；**备注：MaintainTime暂不支持(Optional) */
-func (r *UpgradeInstanceRequest) SetUpgradeTime(upgradeTime string) {
-    r.UpgradeTime = &upgradeTime
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r UpgradeInstanceRequest) GetRegionId() string {
+func (r DetachNetworkRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type UpgradeInstanceResponse struct {
+type DetachNetworkResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result UpgradeInstanceResult `json:"result"`
+    Result DetachNetworkResult `json:"result"`
 }
 
-type UpgradeInstanceResult struct {
+type DetachNetworkResult struct {
 }

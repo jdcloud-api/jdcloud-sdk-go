@@ -34,12 +34,15 @@ type CCProtectionRuleSpec struct {
     /* ip 访问次数, 取值范围[2, 2000]  */
     SingleIpLimit int64 `json:"singleIpLimit"`
 
-    /* 阻断类型, 1: 封禁, 2: 人机交互  */
+    /* 阻断类型, 1: 封禁并返回自定义页面, 2: 人机交互  */
     BlockType int `json:"blockType"`
 
     /* 阻断持续时间, 单位为秒, 取值范围[10, 86400]  */
     BlockTime int64 `json:"blockTime"`
 
-    /* 关联的自定义页面id (Optional) */
+    /* 关联的自定义页面id, 阻断类型为封禁时有效, 为空时封禁并返回默认页面 (Optional) */
     PageId *string `json:"pageId"`
+
+    /* 关联的自定义页面名称 (Optional) */
+    PageName *string `json:"pageName"`
 }

@@ -40,7 +40,7 @@ func NewIpantiClient(credential *core.Credential) *IpantiClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "ipanti",
-            Revision:    "1.7.0",
+            Revision:    "1.8.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -55,6 +55,1088 @@ func (c *IpantiClient) SetLogger(logger core.Logger) {
 
 func (c *IpantiClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
+}
+
+/* 更新实例弹性防护带宽 */
+func (c *IpantiClient) ModifyEPB(request *ipanti.ModifyEPBRequest) (*ipanti.ModifyEPBResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.ModifyEPBResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 批量添加网站类规则允许插入JS指纹的页面 */
+func (c *IpantiClient) CreateJsPagesOfWebRule(request *ipanti.CreateJsPagesOfWebRuleRequest) (*ipanti.CreateJsPagesOfWebRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.CreateJsPagesOfWebRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改网站类规则 */
+func (c *IpantiClient) ModifyWebRule(request *ipanti.ModifyWebRuleRequest) (*ipanti.ModifyWebRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.ModifyWebRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 开启网站类规则的黑名单 */
+func (c *IpantiClient) EnableWebRuleBlackList(request *ipanti.EnableWebRuleBlackListRequest) (*ipanti.EnableWebRuleBlackListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.EnableWebRuleBlackListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询实例的 IP 黑白名单库列表 */
+func (c *IpantiClient) DescribeIpSets(request *ipanti.DescribeIpSetsRequest) (*ipanti.DescribeIpSetsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DescribeIpSetsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 开启网站类规则的白名单规则, 批量操作时 webWhiteListRuleId 传多个, 以 ',' 分隔, 返回 result.code 为 1 表示操作成功, 为 0 时可能全部失败, 也可能部分失败 */
+func (c *IpantiClient) EnableWhiteListRuleOfWebRule(request *ipanti.EnableWhiteListRuleOfWebRuleRequest) (*ipanti.EnableWhiteListRuleOfWebRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.EnableWhiteListRuleOfWebRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除网站类规则的白名单规则, 批量操作时 webWhiteListRuleId 传多个, 以 ',' 分隔, 返回 result.code 为 1 表示操作成功, 为 0 时可能全部失败, 也可能部分失败 */
+func (c *IpantiClient) DeleteWhiteListRuleOfWebRule(request *ipanti.DeleteWhiteListRuleOfWebRuleRequest) (*ipanti.DeleteWhiteListRuleOfWebRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DeleteWhiteListRuleOfWebRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 关闭网站类规则的白名单 */
+func (c *IpantiClient) DisableWebRuleWhiteList(request *ipanti.DisableWebRuleWhiteListRequest) (*ipanti.DisableWebRuleWhiteListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DisableWebRuleWhiteListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询实例列表 */
+func (c *IpantiClient) DescribeInstances(request *ipanti.DescribeInstancesRequest) (*ipanti.DescribeInstancesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DescribeInstancesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 新购或升级高防实例 */
+func (c *IpantiClient) CreateInstance(request *ipanti.CreateInstanceRequest) (*ipanti.CreateInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.CreateInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询 CC 攻击日志详情.
+- 参数 attackId 优先级高于 instanceId, attackId 不为空时, 忽略 instanceId
+ */
+func (c *IpantiClient) DescribeCCAttackLogDetails(request *ipanti.DescribeCCAttackLogDetailsRequest) (*ipanti.DescribeCCAttackLogDetailsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DescribeCCAttackLogDetailsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 关闭网站类规则的 CC 防护规则 */
+func (c *IpantiClient) DisableCCProtectionRuleOfWebRule(request *ipanti.DisableCCProtectionRuleOfWebRuleRequest) (*ipanti.DisableCCProtectionRuleOfWebRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DisableCCProtectionRuleOfWebRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 批量添加非网站类规则 */
+func (c *IpantiClient) CreateForwardRules(request *ipanti.CreateForwardRulesRequest) (*ipanti.CreateForwardRulesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.CreateForwardRulesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询 CC 攻击日志 */
+func (c *IpantiClient) DescribeCCAttackLogs(request *ipanti.DescribeCCAttackLogsRequest) (*ipanti.DescribeCCAttackLogsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DescribeCCAttackLogsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除网站规则的 CC 防护规则 */
+func (c *IpantiClient) DeleteCCProtectionRuleOfWebRule(request *ipanti.DeleteCCProtectionRuleOfWebRuleRequest) (*ipanti.DeleteCCProtectionRuleOfWebRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DeleteCCProtectionRuleOfWebRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新非网站类规则 */
+func (c *IpantiClient) ModifyForwardRule(request *ipanti.ModifyForwardRuleRequest) (*ipanti.ModifyForwardRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.ModifyForwardRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 关闭网站类规则 CC 观察者模式, 观察模式下, CC 防护只告警不防御。支持批量操作, 批量操作时 webRuleId 传多个, 以 ',' 分隔, 返回 result.code 为 1 表示操作成功, 为 0 时可能全部失败, 也可能部分失败 */
+func (c *IpantiClient) DisableWebRuleCCObserverMode(request *ipanti.DisableWebRuleCCObserverModeRequest) (*ipanti.DisableWebRuleCCObserverModeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DisableWebRuleCCObserverModeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询某个实例下的网站类规则 */
+func (c *IpantiClient) DescribeWebRules(request *ipanti.DescribeWebRulesRequest) (*ipanti.DescribeWebRulesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DescribeWebRulesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改网站类规则的黑名单规则 */
+func (c *IpantiClient) ModifyBlackListRuleOfWebRule(request *ipanti.ModifyBlackListRuleOfWebRuleRequest) (*ipanti.ModifyBlackListRuleOfWebRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.ModifyBlackListRuleOfWebRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 开启网站类规则的白名单 */
+func (c *IpantiClient) EnableWebRuleWhiteList(request *ipanti.EnableWebRuleWhiteListRequest) (*ipanti.EnableWebRuleWhiteListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.EnableWebRuleWhiteListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询高防实例防护统计信息 */
+func (c *IpantiClient) DescribeProtectionStatistics(request *ipanti.DescribeProtectionStatisticsRequest) (*ipanti.DescribeProtectionStatisticsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DescribeProtectionStatisticsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询网站类规则允许插入JS指纹的页面 */
+func (c *IpantiClient) DescribeJsPagesOfWebRule(request *ipanti.DescribeJsPagesOfWebRuleRequest) (*ipanti.DescribeJsPagesOfWebRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DescribeJsPagesOfWebRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询网站类转发规则 Geo 模式的白名单可设置区域编码 */
+func (c *IpantiClient) DescribeWebRuleWhiteListGeoAreas(request *ipanti.DescribeWebRuleWhiteListGeoAreasRequest) (*ipanti.DescribeWebRuleWhiteListGeoAreasResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DescribeWebRuleWhiteListGeoAreasResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改转发规则的黑名单规则 */
+func (c *IpantiClient) ModifyBlackListRuleOfForwardRule(request *ipanti.ModifyBlackListRuleOfForwardRuleRequest) (*ipanti.ModifyBlackListRuleOfForwardRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.ModifyBlackListRuleOfForwardRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改网站类规则允许插入 JS 指纹的页面 */
+func (c *IpantiClient) ModifyJsPageOfWebRule(request *ipanti.ModifyJsPageOfWebRuleRequest) (*ipanti.ModifyJsPageOfWebRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.ModifyJsPageOfWebRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 关闭网站类规则的黑名单 */
+func (c *IpantiClient) DisableWebRuleBlackList(request *ipanti.DisableWebRuleBlackListRequest) (*ipanti.DisableWebRuleBlackListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DisableWebRuleBlackListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 非网站类规则切换成防御状态。支持批量操作, 批量操作时 forwardRuleId 传多个, 以 ',' 分隔, 返回 result.code 为 1 表示操作成功, 为 0 时可能全部失败, 也可能部分失败 */
+func (c *IpantiClient) SwitchForwardRuleProtect(request *ipanti.SwitchForwardRuleProtectRequest) (*ipanti.SwitchForwardRuleProtectResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.SwitchForwardRuleProtectResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询网站类规则的 CC 防护规则 */
+func (c *IpantiClient) DescribeCCProtectionRuleOfWebRule(request *ipanti.DescribeCCProtectionRuleOfWebRuleRequest) (*ipanti.DescribeCCProtectionRuleOfWebRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DescribeCCProtectionRuleOfWebRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 插入JS指纹到所有页面, 需要打开网站类规则的JS指纹开关 */
+func (c *IpantiClient) ModifyWebRuleJsPageToAll(request *ipanti.ModifyWebRuleJsPageToAllRequest) (*ipanti.ModifyWebRuleJsPageToAllResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.ModifyWebRuleJsPageToAllResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 网站类规则绑定 SSL 证书 */
+func (c *IpantiClient) BindCert(request *ipanti.BindCertRequest) (*ipanti.BindCertResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.BindCertResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询网站类规则的白名单规则 */
+func (c *IpantiClient) DescribeWhiteListRuleOfWebRule(request *ipanti.DescribeWhiteListRuleOfWebRuleRequest) (*ipanti.DescribeWhiteListRuleOfWebRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DescribeWhiteListRuleOfWebRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询网站类规则的黑名单规则 */
+func (c *IpantiClient) DescribeBlackListRuleOfWebRule(request *ipanti.DescribeBlackListRuleOfWebRuleRequest) (*ipanti.DescribeBlackListRuleOfWebRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DescribeBlackListRuleOfWebRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询攻击次数及流量峰值 */
+func (c *IpantiClient) DescribeAttackStatistics(request *ipanti.DescribeAttackStatisticsRequest) (*ipanti.DescribeAttackStatisticsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DescribeAttackStatisticsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询 DDoS 攻击日志 */
+func (c *IpantiClient) DescribeDDoSAttackLogs(request *ipanti.DescribeDDoSAttackLogsRequest) (*ipanti.DescribeDDoSAttackLogsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DescribeDDoSAttackLogsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 关闭网站类规则的JS指纹开关 */
+func (c *IpantiClient) DisableWebRuleJsPage(request *ipanti.DisableWebRuleJsPageRequest) (*ipanti.DisableWebRuleJsPageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DisableWebRuleJsPageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 开启转发规则的白名单规则 */
+func (c *IpantiClient) EnableWhiteListRuleOfForwardRule(request *ipanti.EnableWhiteListRuleOfForwardRuleRequest) (*ipanti.EnableWhiteListRuleOfForwardRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.EnableWhiteListRuleOfForwardRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询实例高防 IP 列表 */
+func (c *IpantiClient) DescribeServiceIpList(request *ipanti.DescribeServiceIpListRequest) (*ipanti.DescribeServiceIpListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DescribeServiceIpListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 关闭网站类规则的白名单规则, 批量操作时 webWhiteListRuleId 传多个, 以 ',' 分隔, 返回 result.code 为 1 表示操作成功, 为 0 时可能全部失败, 也可能部分失败 */
+func (c *IpantiClient) DisableWhiteListRuleOfWebRule(request *ipanti.DisableWhiteListRuleOfWebRuleRequest) (*ipanti.DisableWhiteListRuleOfWebRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DisableWhiteListRuleOfWebRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 添加网站类规则 */
+func (c *IpantiClient) CreateWebRule(request *ipanti.CreateWebRuleRequest) (*ipanti.CreateWebRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.CreateWebRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询网站类规则的 CC 防护配置 */
+func (c *IpantiClient) DescribeCCProtectionConfigOfWebRule(request *ipanti.DescribeCCProtectionConfigOfWebRuleRequest) (*ipanti.DescribeCCProtectionConfigOfWebRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DescribeCCProtectionConfigOfWebRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 关闭网站类规则 CC 防护, 网站类规则的 CC 防护规则和 CC 防护配置失效。支持批量操作, 批量操作时 webRuleId 传多个, 以 ',' 分隔, 返回 result.code 为 1 表示操作成功, 为 0 时可能全部失败, 也可能部分失败 */
+func (c *IpantiClient) DisableWebRuleCC(request *ipanti.DisableWebRuleCCRequest) (*ipanti.DisableWebRuleCCResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DisableWebRuleCCResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 添加网站类规则的白名单规则 */
+func (c *IpantiClient) CreateWhiteListRuleOfWebRule(request *ipanti.CreateWhiteListRuleOfWebRuleRequest) (*ipanti.CreateWhiteListRuleOfWebRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.CreateWhiteListRuleOfWebRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 检测实例名称是否合法 */
+func (c *IpantiClient) CheckName(request *ipanti.CheckNameRequest) (*ipanti.CheckNameResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.CheckNameResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 关闭网站类规则的自定义 CC 防护规则总开关, 所有自定义 CC 防护规则失效 */
+func (c *IpantiClient) DisableWebRuleCCProtectionRule(request *ipanti.DisableWebRuleCCProtectionRuleRequest) (*ipanti.DisableWebRuleCCProtectionRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DisableWebRuleCCProtectionRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询实例的 IP 黑白名单用量信息 */
+func (c *IpantiClient) DescribeIpSetUsage(request *ipanti.DescribeIpSetUsageRequest) (*ipanti.DescribeIpSetUsageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DescribeIpSetUsageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 关闭转发规则的白名单规则 */
+func (c *IpantiClient) DisableWhiteListRuleOfForwardRule(request *ipanti.DisableWhiteListRuleOfForwardRuleRequest) (*ipanti.DisableWhiteListRuleOfForwardRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DisableWhiteListRuleOfForwardRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 开启网站类规则的 CC 防护规则 */
+func (c *IpantiClient) EnableCCProtectionRuleOfWebRule(request *ipanti.EnableCCProtectionRuleOfWebRuleRequest) (*ipanti.EnableCCProtectionRuleOfWebRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.EnableCCProtectionRuleOfWebRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询网站类规则 */
+func (c *IpantiClient) DescribeWebRule(request *ipanti.DescribeWebRuleRequest) (*ipanti.DescribeWebRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DescribeWebRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询网站类转发规则 Geo 模式的黑名单可设置区域编码 */
+func (c *IpantiClient) DescribeWebRuleBlackListGeoAreas(request *ipanti.DescribeWebRuleBlackListGeoAreasRequest) (*ipanti.DescribeWebRuleBlackListGeoAreasResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DescribeWebRuleBlackListGeoAreasResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改实例名称 */
+func (c *IpantiClient) ModifyInstanceName(request *ipanti.ModifyInstanceNameRequest) (*ipanti.ModifyInstanceNameResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.ModifyInstanceNameResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询非网站类规则 */
+func (c *IpantiClient) DescribeForwardRule(request *ipanti.DescribeForwardRuleRequest) (*ipanti.DescribeForwardRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DescribeForwardRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询转发规则的白名单规则 */
+func (c *IpantiClient) DescribeWhiteListRuleOfForwardRule(request *ipanti.DescribeWhiteListRuleOfForwardRuleRequest) (*ipanti.DescribeWhiteListRuleOfForwardRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DescribeWhiteListRuleOfForwardRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* CC 防护流量报表 */
+func (c *IpantiClient) DescribeCCGraph(request *ipanti.DescribeCCGraphRequest) (*ipanti.DescribeCCGraphResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DescribeCCGraphResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询实例 */
+func (c *IpantiClient) DescribeInstance(request *ipanti.DescribeInstanceRequest) (*ipanti.DescribeInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DescribeInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
 }
 
 /* 开启转发规则的黑名单规则 */
@@ -177,8 +1259,8 @@ func (c *IpantiClient) CreateCCProtectionRuleOfWebRule(request *ipanti.CreateCCP
     return jdResp, err
 }
 
-/* 更新实例弹性防护带宽 */
-func (c *IpantiClient) ModifyEPB(request *ipanti.ModifyEPBRequest) (*ipanti.ModifyEPBResponse, error) {
+/* 删除网站类规则允许插入 JS 指纹的页面。支持批量操作, 批量操作时 jsPageId 传多个, 以 ',' 分隔 */
+func (c *IpantiClient) DeleteJsPageOfWebRule(request *ipanti.DeleteJsPageOfWebRuleRequest) (*ipanti.DeleteJsPageOfWebRuleResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -187,7 +1269,7 @@ func (c *IpantiClient) ModifyEPB(request *ipanti.ModifyEPBRequest) (*ipanti.Modi
         return nil, err
     }
 
-    jdResp := &ipanti.ModifyEPBResponse{}
+    jdResp := &ipanti.DeleteJsPageOfWebRuleResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -237,46 +1319,6 @@ func (c *IpantiClient) ModifyWhiteListRuleOfWebRule(request *ipanti.ModifyWhiteL
     return jdResp, err
 }
 
-/* 修改网站类规则 */
-func (c *IpantiClient) ModifyWebRule(request *ipanti.ModifyWebRuleRequest) (*ipanti.ModifyWebRuleResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.ModifyWebRuleResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 开启网站类规则的黑名单 */
-func (c *IpantiClient) EnableWebRuleBlackList(request *ipanti.EnableWebRuleBlackListRequest) (*ipanti.EnableWebRuleBlackListResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.EnableWebRuleBlackListResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 开启网站类规则的黑名单规则, 批量操作时 webBlackListRuleId 传多个, 以 ',' 分隔, 返回 result.code 为 1 表示操作成功, 为 0 时可能全部失败, 也可能部分失败 */
 func (c *IpantiClient) EnableBlackListRuleOfWebRule(request *ipanti.EnableBlackListRuleOfWebRuleRequest) (*ipanti.EnableBlackListRuleOfWebRuleResponse, error) {
     if request == nil {
@@ -288,66 +1330,6 @@ func (c *IpantiClient) EnableBlackListRuleOfWebRule(request *ipanti.EnableBlackL
     }
 
     jdResp := &ipanti.EnableBlackListRuleOfWebRuleResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询实例的 IP 黑白名单库列表 */
-func (c *IpantiClient) DescribeIpSets(request *ipanti.DescribeIpSetsRequest) (*ipanti.DescribeIpSetsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.DescribeIpSetsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 开启网站类规则的白名单规则, 批量操作时 webWhiteListRuleId 传多个, 以 ',' 分隔, 返回 result.code 为 1 表示操作成功, 为 0 时可能全部失败, 也可能部分失败 */
-func (c *IpantiClient) EnableWhiteListRuleOfWebRule(request *ipanti.EnableWhiteListRuleOfWebRuleRequest) (*ipanti.EnableWhiteListRuleOfWebRuleResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.EnableWhiteListRuleOfWebRuleResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 删除网站类规则的白名单规则, 批量操作时 webWhiteListRuleId 传多个, 以 ',' 分隔, 返回 result.code 为 1 表示操作成功, 为 0 时可能全部失败, 也可能部分失败 */
-func (c *IpantiClient) DeleteWhiteListRuleOfWebRule(request *ipanti.DeleteWhiteListRuleOfWebRuleRequest) (*ipanti.DeleteWhiteListRuleOfWebRuleResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.DeleteWhiteListRuleOfWebRuleResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -377,26 +1359,6 @@ func (c *IpantiClient) DescribeIpSet(request *ipanti.DescribeIpSetRequest) (*ipa
     return jdResp, err
 }
 
-/* 关闭网站类规则的白名单 */
-func (c *IpantiClient) DisableWebRuleWhiteList(request *ipanti.DisableWebRuleWhiteListRequest) (*ipanti.DisableWebRuleWhiteListResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.DisableWebRuleWhiteListResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 删除非网站规则, 批量操作时, 返回 result.code 为 1 表示操作成功, 为 0 时可能全部失败, 也可能部分失败 */
 func (c *IpantiClient) DeleteForwardRule(request *ipanti.DeleteForwardRuleRequest) (*ipanti.DeleteForwardRuleResponse, error) {
     if request == nil {
@@ -417,7 +1379,7 @@ func (c *IpantiClient) DeleteForwardRule(request *ipanti.DeleteForwardRuleReques
     return jdResp, err
 }
 
-/* 网站类规则切换成防御状态 */
+/* 网站类规则切换成防御状态。支持批量操作, 批量操作时 webRuleId 传多个, 以 ',' 分隔, 返回 result.code 为 1 表示操作成功, 为 0 时可能全部失败, 也可能部分失败 */
 func (c *IpantiClient) SwitchWebRuleProtect(request *ipanti.SwitchWebRuleProtectRequest) (*ipanti.SwitchWebRuleProtectResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -437,8 +1399,8 @@ func (c *IpantiClient) SwitchWebRuleProtect(request *ipanti.SwitchWebRuleProtect
     return jdResp, err
 }
 
-/* 查询实例列表 */
-func (c *IpantiClient) DescribeInstances(request *ipanti.DescribeInstancesRequest) (*ipanti.DescribeInstancesResponse, error) {
+/* 插入JS指纹到配置的自定义页面, 需要打开网站类规则的JS指纹开关 */
+func (c *IpantiClient) ModifyWebRuleJsPageToCustom(request *ipanti.ModifyWebRuleJsPageToCustomRequest) (*ipanti.ModifyWebRuleJsPageToCustomResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -447,27 +1409,7 @@ func (c *IpantiClient) DescribeInstances(request *ipanti.DescribeInstancesReques
         return nil, err
     }
 
-    jdResp := &ipanti.DescribeInstancesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 新购或升级高防实例 */
-func (c *IpantiClient) CreateInstance(request *ipanti.CreateInstanceRequest) (*ipanti.CreateInstanceResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.CreateInstanceResponse{}
+    jdResp := &ipanti.ModifyWebRuleJsPageToCustomResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -497,28 +1439,6 @@ func (c *IpantiClient) DescribeCpsIpList(request *ipanti.DescribeCpsIpListReques
     return jdResp, err
 }
 
-/* 查询 CC 攻击日志详情.
-- 参数 attackId 优先级高于 instanceId, attackId 不为空时, 忽略 instanceId
- */
-func (c *IpantiClient) DescribeCCAttackLogDetails(request *ipanti.DescribeCCAttackLogDetailsRequest) (*ipanti.DescribeCCAttackLogDetailsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.DescribeCCAttackLogDetailsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 查询各类型攻击次数 */
 func (c *IpantiClient) DescribeAttackTypeCount(request *ipanti.DescribeAttackTypeCountRequest) (*ipanti.DescribeAttackTypeCountResponse, error) {
     if request == nil {
@@ -539,7 +1459,7 @@ func (c *IpantiClient) DescribeAttackTypeCount(request *ipanti.DescribeAttackTyp
     return jdResp, err
 }
 
-/* 非网站类规则切换成回源状态 */
+/* 非网站类规则切换成回源状态。支持批量操作, 批量操作时 forwardRuleId 传多个, 以 ',' 分隔, 返回 result.code 为 1 表示操作成功, 为 0 时可能全部失败, 也可能部分失败 */
 func (c *IpantiClient) SwitchForwardRuleOrigin(request *ipanti.SwitchForwardRuleOriginRequest) (*ipanti.SwitchForwardRuleOriginResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -579,8 +1499,8 @@ func (c *IpantiClient) DescribeBlackListRuleOfForwardRule(request *ipanti.Descri
     return jdResp, err
 }
 
-/* 关闭网站类规则的 CC 防护规则 */
-func (c *IpantiClient) DisableCCProtectionRuleOfWebRule(request *ipanti.DisableCCProtectionRuleOfWebRuleRequest) (*ipanti.DisableCCProtectionRuleOfWebRuleResponse, error) {
+/* 添加网站类规则允许插入JS指纹的页面 */
+func (c *IpantiClient) CreateJsPageOfWebRule(request *ipanti.CreateJsPageOfWebRuleRequest) (*ipanti.CreateJsPageOfWebRuleResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -589,7 +1509,7 @@ func (c *IpantiClient) DisableCCProtectionRuleOfWebRule(request *ipanti.DisableC
         return nil, err
     }
 
-    jdResp := &ipanti.DisableCCProtectionRuleOfWebRuleResponse{}
+    jdResp := &ipanti.CreateJsPageOfWebRuleResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -639,46 +1559,6 @@ func (c *IpantiClient) EnableWebRuleCC(request *ipanti.EnableWebRuleCCRequest) (
     return jdResp, err
 }
 
-/* 查询 CC 攻击日志 */
-func (c *IpantiClient) DescribeCCAttackLogs(request *ipanti.DescribeCCAttackLogsRequest) (*ipanti.DescribeCCAttackLogsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.DescribeCCAttackLogsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 删除网站规则的 CC 防护规则 */
-func (c *IpantiClient) DeleteCCProtectionRuleOfWebRule(request *ipanti.DeleteCCProtectionRuleOfWebRuleRequest) (*ipanti.DeleteCCProtectionRuleOfWebRuleResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.DeleteCCProtectionRuleOfWebRuleResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 转发流量报表 */
 func (c *IpantiClient) DescribeFwdGraph(request *ipanti.DescribeFwdGraphRequest) (*ipanti.DescribeFwdGraphResponse, error) {
     if request == nil {
@@ -690,26 +1570,6 @@ func (c *IpantiClient) DescribeFwdGraph(request *ipanti.DescribeFwdGraphRequest)
     }
 
     jdResp := &ipanti.DescribeFwdGraphResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 更新非网站类规则 */
-func (c *IpantiClient) ModifyForwardRule(request *ipanti.ModifyForwardRuleRequest) (*ipanti.ModifyForwardRuleResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.ModifyForwardRuleResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -739,26 +1599,6 @@ func (c *IpantiClient) DescribeNameList(request *ipanti.DescribeNameListRequest)
     return jdResp, err
 }
 
-/* 关闭网站类规则 CC 观察者模式, 观察模式下, CC 防护只告警不防御。支持批量操作, 批量操作时 webRuleId 传多个, 以 ',' 分隔, 返回 result.code 为 1 表示操作成功, 为 0 时可能全部失败, 也可能部分失败 */
-func (c *IpantiClient) DisableWebRuleCCObserverMode(request *ipanti.DisableWebRuleCCObserverModeRequest) (*ipanti.DisableWebRuleCCObserverModeResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.DisableWebRuleCCObserverModeResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 查询某个实例下的非网站转发配置 */
 func (c *IpantiClient) DescribeForwardRules(request *ipanti.DescribeForwardRulesRequest) (*ipanti.DescribeForwardRulesResponse, error) {
     if request == nil {
@@ -770,46 +1610,6 @@ func (c *IpantiClient) DescribeForwardRules(request *ipanti.DescribeForwardRules
     }
 
     jdResp := &ipanti.DescribeForwardRulesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询某个实例下的网站类规则 */
-func (c *IpantiClient) DescribeWebRules(request *ipanti.DescribeWebRulesRequest) (*ipanti.DescribeWebRulesResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.DescribeWebRulesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 修改网站类规则的黑名单规则 */
-func (c *IpantiClient) ModifyBlackListRuleOfWebRule(request *ipanti.ModifyBlackListRuleOfWebRuleRequest) (*ipanti.ModifyBlackListRuleOfWebRuleResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.ModifyBlackListRuleOfWebRuleResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -839,8 +1639,8 @@ func (c *IpantiClient) DeleteIpSet(request *ipanti.DeleteIpSetRequest) (*ipanti.
     return jdResp, err
 }
 
-/* 开启网站类规则的白名单 */
-func (c *IpantiClient) EnableWebRuleWhiteList(request *ipanti.EnableWebRuleWhiteListRequest) (*ipanti.EnableWebRuleWhiteListResponse, error) {
+/* 打开网站类规则的JS指纹开关 */
+func (c *IpantiClient) EnableWebRuleJsPage(request *ipanti.EnableWebRuleJsPageRequest) (*ipanti.EnableWebRuleJsPageResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -849,27 +1649,7 @@ func (c *IpantiClient) EnableWebRuleWhiteList(request *ipanti.EnableWebRuleWhite
         return nil, err
     }
 
-    jdResp := &ipanti.EnableWebRuleWhiteListResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询高防实例防护统计信息 */
-func (c *IpantiClient) DescribeProtectionStatistics(request *ipanti.DescribeProtectionStatisticsRequest) (*ipanti.DescribeProtectionStatisticsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.DescribeProtectionStatisticsResponse{}
+    jdResp := &ipanti.EnableWebRuleJsPageResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -939,86 +1719,6 @@ func (c *IpantiClient) ModifyAlarmConfig(request *ipanti.ModifyAlarmConfigReques
     return jdResp, err
 }
 
-/* 查询网站类转发规则 Geo 模式的白名单可设置区域编码 */
-func (c *IpantiClient) DescribeWebRuleWhiteListGeoAreas(request *ipanti.DescribeWebRuleWhiteListGeoAreasRequest) (*ipanti.DescribeWebRuleWhiteListGeoAreasResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.DescribeWebRuleWhiteListGeoAreasResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 修改转发规则的黑名单规则 */
-func (c *IpantiClient) ModifyBlackListRuleOfForwardRule(request *ipanti.ModifyBlackListRuleOfForwardRuleRequest) (*ipanti.ModifyBlackListRuleOfForwardRuleResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.ModifyBlackListRuleOfForwardRuleResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 关闭网站类规则的黑名单 */
-func (c *IpantiClient) DisableWebRuleBlackList(request *ipanti.DisableWebRuleBlackListRequest) (*ipanti.DisableWebRuleBlackListResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.DisableWebRuleBlackListResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 非网站类规则切换成防御状态 */
-func (c *IpantiClient) SwitchForwardRuleProtect(request *ipanti.SwitchForwardRuleProtectRequest) (*ipanti.SwitchForwardRuleProtectResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.SwitchForwardRuleProtectResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 删除网站类规则的黑名单规则, 批量操作时 webBlackListRuleId 传多个, 以 ',' 分隔, 返回 result.code 为 1 表示操作成功, 为 0 时可能全部失败, 也可能部分失败 */
 func (c *IpantiClient) DeleteBlackListRuleOfWebRule(request *ipanti.DeleteBlackListRuleOfWebRuleRequest) (*ipanti.DeleteBlackListRuleOfWebRuleResponse, error) {
     if request == nil {
@@ -1030,26 +1730,6 @@ func (c *IpantiClient) DeleteBlackListRuleOfWebRule(request *ipanti.DeleteBlackL
     }
 
     jdResp := &ipanti.DeleteBlackListRuleOfWebRuleResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询网站类规则的 CC 防护规则 */
-func (c *IpantiClient) DescribeCCProtectionRuleOfWebRule(request *ipanti.DescribeCCProtectionRuleOfWebRuleRequest) (*ipanti.DescribeCCProtectionRuleOfWebRuleResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.DescribeCCProtectionRuleOfWebRuleResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1079,27 +1759,7 @@ func (c *IpantiClient) DisableBlackListRuleOfWebRule(request *ipanti.DisableBlac
     return jdResp, err
 }
 
-/* 网站类规则绑定 SSL 证书 */
-func (c *IpantiClient) BindCert(request *ipanti.BindCertRequest) (*ipanti.BindCertResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.BindCertResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 网站类规则切换成回源状态 */
+/* 网站类规则切换成回源状态。支持批量操作, 批量操作时 webRuleId 传多个, 以 ',' 分隔, 返回 result.code 为 1 表示操作成功, 为 0 时可能全部失败, 也可能部分失败 */
 func (c *IpantiClient) SwitchWebRuleOrigin(request *ipanti.SwitchWebRuleOriginRequest) (*ipanti.SwitchWebRuleOriginResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1119,8 +1779,8 @@ func (c *IpantiClient) SwitchWebRuleOrigin(request *ipanti.SwitchWebRuleOriginRe
     return jdResp, err
 }
 
-/* 查询网站类规则的白名单规则 */
-func (c *IpantiClient) DescribeWhiteListRuleOfWebRule(request *ipanti.DescribeWhiteListRuleOfWebRuleRequest) (*ipanti.DescribeWhiteListRuleOfWebRuleResponse, error) {
+/* 开启网站类规则的自定义 CC 防护规则总开关, 状态为开启的自定义 CC 防护规则生效 */
+func (c *IpantiClient) EnableWebRuleCCProtectionRule(request *ipanti.EnableWebRuleCCProtectionRuleRequest) (*ipanti.EnableWebRuleCCProtectionRuleResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -1129,67 +1789,7 @@ func (c *IpantiClient) DescribeWhiteListRuleOfWebRule(request *ipanti.DescribeWh
         return nil, err
     }
 
-    jdResp := &ipanti.DescribeWhiteListRuleOfWebRuleResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询网站类规则的黑名单规则 */
-func (c *IpantiClient) DescribeBlackListRuleOfWebRule(request *ipanti.DescribeBlackListRuleOfWebRuleRequest) (*ipanti.DescribeBlackListRuleOfWebRuleResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.DescribeBlackListRuleOfWebRuleResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询攻击次数及流量峰值 */
-func (c *IpantiClient) DescribeAttackStatistics(request *ipanti.DescribeAttackStatisticsRequest) (*ipanti.DescribeAttackStatisticsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.DescribeAttackStatisticsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询 DDoS 攻击日志 */
-func (c *IpantiClient) DescribeDDoSAttackLogs(request *ipanti.DescribeDDoSAttackLogsRequest) (*ipanti.DescribeDDoSAttackLogsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.DescribeDDoSAttackLogsResponse{}
+    jdResp := &ipanti.EnableWebRuleCCProtectionRuleResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1219,8 +1819,8 @@ func (c *IpantiClient) DescribeBlackListRulesOfWebRule(request *ipanti.DescribeB
     return jdResp, err
 }
 
-/* 开启转发规则的白名单规则 */
-func (c *IpantiClient) EnableWhiteListRuleOfForwardRule(request *ipanti.EnableWhiteListRuleOfForwardRuleRequest) (*ipanti.EnableWhiteListRuleOfForwardRuleResponse, error) {
+/* 批量添加网站类规则 */
+func (c *IpantiClient) CreateWebRules(request *ipanti.CreateWebRulesRequest) (*ipanti.CreateWebRulesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -1229,47 +1829,7 @@ func (c *IpantiClient) EnableWhiteListRuleOfForwardRule(request *ipanti.EnableWh
         return nil, err
     }
 
-    jdResp := &ipanti.EnableWhiteListRuleOfForwardRuleResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询实例高防 IP 列表 */
-func (c *IpantiClient) DescribeServiceIpList(request *ipanti.DescribeServiceIpListRequest) (*ipanti.DescribeServiceIpListResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.DescribeServiceIpListResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 关闭网站类规则的白名单规则, 批量操作时 webWhiteListRuleId 传多个, 以 ',' 分隔, 返回 result.code 为 1 表示操作成功, 为 0 时可能全部失败, 也可能部分失败 */
-func (c *IpantiClient) DisableWhiteListRuleOfWebRule(request *ipanti.DisableWhiteListRuleOfWebRuleRequest) (*ipanti.DisableWhiteListRuleOfWebRuleResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.DisableWhiteListRuleOfWebRuleResponse{}
+    jdResp := &ipanti.CreateWebRulesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1299,26 +1859,6 @@ func (c *IpantiClient) ModifyWhiteListRuleOfForwardRule(request *ipanti.ModifyWh
     return jdResp, err
 }
 
-/* 添加网站类规则 */
-func (c *IpantiClient) CreateWebRule(request *ipanti.CreateWebRuleRequest) (*ipanti.CreateWebRuleResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.CreateWebRuleResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 修改网站类规则的 CC 防护规则 */
 func (c *IpantiClient) ModifyCCProtectionRuleOfWebRule(request *ipanti.ModifyCCProtectionRuleOfWebRuleRequest) (*ipanti.ModifyCCProtectionRuleOfWebRuleResponse, error) {
     if request == nil {
@@ -1339,26 +1879,6 @@ func (c *IpantiClient) ModifyCCProtectionRuleOfWebRule(request *ipanti.ModifyCCP
     return jdResp, err
 }
 
-/* 查询网站类规则的 CC 防护配置 */
-func (c *IpantiClient) DescribeCCProtectionConfigOfWebRule(request *ipanti.DescribeCCProtectionConfigOfWebRuleRequest) (*ipanti.DescribeCCProtectionConfigOfWebRuleResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.DescribeCCProtectionConfigOfWebRuleResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 查询网站类规则的 CC 防护规则列表 */
 func (c *IpantiClient) DescribeCCProtectionRulesOfWebRule(request *ipanti.DescribeCCProtectionRulesOfWebRuleRequest) (*ipanti.DescribeCCProtectionRulesOfWebRuleResponse, error) {
     if request == nil {
@@ -1370,66 +1890,6 @@ func (c *IpantiClient) DescribeCCProtectionRulesOfWebRule(request *ipanti.Descri
     }
 
     jdResp := &ipanti.DescribeCCProtectionRulesOfWebRuleResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 关闭网站类规则 CC 防护, 网站类规则的 CC 防护规则和 CC 防护配置失效。支持批量操作, 批量操作时 webRuleId 传多个, 以 ',' 分隔, 返回 result.code 为 1 表示操作成功, 为 0 时可能全部失败, 也可能部分失败 */
-func (c *IpantiClient) DisableWebRuleCC(request *ipanti.DisableWebRuleCCRequest) (*ipanti.DisableWebRuleCCResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.DisableWebRuleCCResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 添加网站类规则的白名单规则 */
-func (c *IpantiClient) CreateWhiteListRuleOfWebRule(request *ipanti.CreateWhiteListRuleOfWebRuleRequest) (*ipanti.CreateWhiteListRuleOfWebRuleResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.CreateWhiteListRuleOfWebRuleResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 检测实例名称是否合法 */
-func (c *IpantiClient) CheckName(request *ipanti.CheckNameRequest) (*ipanti.CheckNameResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.CheckNameResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1499,26 +1959,6 @@ func (c *IpantiClient) DisableBlackListRuleOfForwardRule(request *ipanti.Disable
     return jdResp, err
 }
 
-/* 查询实例的 IP 黑白名单用量信息 */
-func (c *IpantiClient) DescribeIpSetUsage(request *ipanti.DescribeIpSetUsageRequest) (*ipanti.DescribeIpSetUsageResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.DescribeIpSetUsageResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 修改网站类规则的 CC 防护配置 */
 func (c *IpantiClient) ModifyCCProtectionConfigOfWebRule(request *ipanti.ModifyCCProtectionConfigOfWebRuleRequest) (*ipanti.ModifyCCProtectionConfigOfWebRuleResponse, error) {
     if request == nil {
@@ -1550,46 +1990,6 @@ func (c *IpantiClient) DescribeWebRuleRSGeoAreas(request *ipanti.DescribeWebRule
     }
 
     jdResp := &ipanti.DescribeWebRuleRSGeoAreasResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 关闭转发规则的白名单规则 */
-func (c *IpantiClient) DisableWhiteListRuleOfForwardRule(request *ipanti.DisableWhiteListRuleOfForwardRuleRequest) (*ipanti.DisableWhiteListRuleOfForwardRuleResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.DisableWhiteListRuleOfForwardRuleResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 开启网站类规则的 CC 防护规则 */
-func (c *IpantiClient) EnableCCProtectionRuleOfWebRule(request *ipanti.EnableCCProtectionRuleOfWebRuleRequest) (*ipanti.EnableCCProtectionRuleOfWebRuleResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.EnableCCProtectionRuleOfWebRuleResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1659,46 +2059,6 @@ func (c *IpantiClient) DescribeVpcIpList(request *ipanti.DescribeVpcIpListReques
     return jdResp, err
 }
 
-/* 查询网站类规则 */
-func (c *IpantiClient) DescribeWebRule(request *ipanti.DescribeWebRuleRequest) (*ipanti.DescribeWebRuleResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.DescribeWebRuleResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询网站类转发规则 Geo 模式的黑名单可设置区域编码 */
-func (c *IpantiClient) DescribeWebRuleBlackListGeoAreas(request *ipanti.DescribeWebRuleBlackListGeoAreasRequest) (*ipanti.DescribeWebRuleBlackListGeoAreasResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.DescribeWebRuleBlackListGeoAreasResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 修改非网站类转发规则的防护规则 */
 func (c *IpantiClient) ModifyProtectionRuleOfForwardRule(request *ipanti.ModifyProtectionRuleOfForwardRuleRequest) (*ipanti.ModifyProtectionRuleOfForwardRuleResponse, error) {
     if request == nil {
@@ -1730,106 +2090,6 @@ func (c *IpantiClient) DeleteWebRule(request *ipanti.DeleteWebRuleRequest) (*ipa
     }
 
     jdResp := &ipanti.DeleteWebRuleResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 修改实例名称 */
-func (c *IpantiClient) ModifyInstanceName(request *ipanti.ModifyInstanceNameRequest) (*ipanti.ModifyInstanceNameResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.ModifyInstanceNameResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询非网站类规则 */
-func (c *IpantiClient) DescribeForwardRule(request *ipanti.DescribeForwardRuleRequest) (*ipanti.DescribeForwardRuleResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.DescribeForwardRuleResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询转发规则的白名单规则 */
-func (c *IpantiClient) DescribeWhiteListRuleOfForwardRule(request *ipanti.DescribeWhiteListRuleOfForwardRuleRequest) (*ipanti.DescribeWhiteListRuleOfForwardRuleResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.DescribeWhiteListRuleOfForwardRuleResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* CC 防护流量报表 */
-func (c *IpantiClient) DescribeCCGraph(request *ipanti.DescribeCCGraphRequest) (*ipanti.DescribeCCGraphResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.DescribeCCGraphResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询实例 */
-func (c *IpantiClient) DescribeInstance(request *ipanti.DescribeInstanceRequest) (*ipanti.DescribeInstanceResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ipanti.DescribeInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

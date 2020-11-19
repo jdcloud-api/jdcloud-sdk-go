@@ -40,7 +40,7 @@ func NewVodClient(credential *core.Credential) *VodClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vod",
-            Revision:    "1.1.8",
+            Revision:    "1.1.9",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -958,6 +958,26 @@ func (c *VodClient) GetHttpSsl(request *vod.GetHttpSslRequest) (*vod.GetHttpSslR
     }
 
     jdResp := &vod.GetHttpSslResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取视频源文件信息 */
+func (c *VodClient) GetVideoSourceInfo(request *vod.GetVideoSourceInfoRequest) (*vod.GetVideoSourceInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vod.GetVideoSourceInfoResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

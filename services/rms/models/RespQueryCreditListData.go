@@ -20,7 +20,7 @@ package models
 type RespQueryCreditListData struct {
 
     /* 资质ID (Optional) */
-    CreditId string `json:"creditId"`
+    SignId string `json:"signId"`
 
     /* 资质名称 (Optional) */
     CreditName string `json:"creditName"`
