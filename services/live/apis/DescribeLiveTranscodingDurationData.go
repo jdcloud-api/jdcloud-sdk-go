@@ -25,6 +25,9 @@ type DescribeLiveTranscodingDurationDataRequest struct {
 
     core.JDCloudRequest
 
+    /* 播放域名 (Optional) */
+    DomainName *string `json:"domainName"`
+
     /* 码率档次，可以查询指定档次的转码时长，取值：
 - video_h264_4k_1
 - video_h264_2k_1
@@ -74,6 +77,7 @@ func NewDescribeLiveTranscodingDurationDataRequest(
 }
 
 /*
+ * param domainName: 播放域名 (Optional)
  * param grade: 码率档次，可以查询指定档次的转码时长，取值：
 - video_h264_4k_1
 - video_h264_2k_1
@@ -94,6 +98,7 @@ func NewDescribeLiveTranscodingDurationDataRequest(
  (Optional)
  */
 func NewDescribeLiveTranscodingDurationDataRequestWithAllParams(
+    domainName *string,
     grade *string,
     period *string,
     startTime string,
@@ -107,6 +112,7 @@ func NewDescribeLiveTranscodingDurationDataRequestWithAllParams(
             Header:  nil,
             Version: "v1",
         },
+        DomainName: domainName,
         Grade: grade,
         Period: period,
         StartTime: startTime,
@@ -125,6 +131,11 @@ func NewDescribeLiveTranscodingDurationDataRequestWithoutParam() *DescribeLiveTr
             Version: "v1",
         },
     }
+}
+
+/* param domainName: 播放域名(Optional) */
+func (r *DescribeLiveTranscodingDurationDataRequest) SetDomainName(domainName string) {
+    r.DomainName = &domainName
 }
 
 /* param grade: 码率档次，可以查询指定档次的转码时长，取值：

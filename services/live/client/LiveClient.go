@@ -40,7 +40,7 @@ func NewLiveClient(credential *core.Credential) *LiveClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "live",
-            Revision:    "1.0.17",
+            Revision:    "1.0.18",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -2270,6 +2270,27 @@ func (c *LiveClient) AddLiveDomain(request *live.AddLiveDomainRequest) (*live.Ad
     return jdResp, err
 }
 
+/* 删除录制文件
+ */
+func (c *LiveClient) DeleteLiveRecordings(request *live.DeleteLiveRecordingsRequest) (*live.DeleteLiveRecordingsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DeleteLiveRecordingsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询转码流播放带宽
 - 查询1分钟粒度的数据时，时间跨度不超过7天，其他粒度时时间跨度不超过30天
  */
@@ -2344,6 +2365,26 @@ func (c *LiveClient) DescribeLiveStreamNotifyConfig(request *live.DescribeLiveSt
     }
 
     jdResp := &live.DescribeLiveStreamNotifyConfigResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询流分组统计数据(上行) */
+func (c *LiveClient) DescribeLivePublishStatisticGroupByStream(request *live.DescribeLivePublishStatisticGroupByStreamRequest) (*live.DescribeLivePublishStatisticGroupByStreamResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DescribeLivePublishStatisticGroupByStreamResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

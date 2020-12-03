@@ -49,6 +49,9 @@ type DescribeSlowLogAttributesRequest struct {
 
     /* 慢日志明细的排序规则，不指定时按上报日志的时间戳降序返回所有的日志 (Optional) */
     Sorts []common.Sort `json:"sorts"`
+
+    /*  (Optional) */
+    Filters []common.Filter `json:"filters"`
 }
 
 /*
@@ -89,6 +92,7 @@ func NewDescribeSlowLogAttributesRequest(
  * param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,1000)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页。 (Optional)
  * param pageSize: 每页显示的数据条数，默认为10，取值范围：10、20、30、50、100 (Optional)
  * param sorts: 慢日志明细的排序规则，不指定时按上报日志的时间戳降序返回所有的日志 (Optional)
+ * param filters:  (Optional)
  */
 func NewDescribeSlowLogAttributesRequestWithAllParams(
     regionId string,
@@ -99,6 +103,7 @@ func NewDescribeSlowLogAttributesRequestWithAllParams(
     pageNumber *int,
     pageSize *int,
     sorts []common.Sort,
+    filters []common.Filter,
 ) *DescribeSlowLogAttributesRequest {
 
     return &DescribeSlowLogAttributesRequest{
@@ -116,6 +121,7 @@ func NewDescribeSlowLogAttributesRequestWithAllParams(
         PageNumber: pageNumber,
         PageSize: pageSize,
         Sorts: sorts,
+        Filters: filters,
     }
 }
 
@@ -170,6 +176,11 @@ func (r *DescribeSlowLogAttributesRequest) SetPageSize(pageSize int) {
 /* param sorts: 慢日志明细的排序规则，不指定时按上报日志的时间戳降序返回所有的日志(Optional) */
 func (r *DescribeSlowLogAttributesRequest) SetSorts(sorts []common.Sort) {
     r.Sorts = sorts
+}
+
+/* param filters: (Optional) */
+func (r *DescribeSlowLogAttributesRequest) SetFilters(filters []common.Filter) {
+    r.Filters = filters
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

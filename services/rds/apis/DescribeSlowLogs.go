@@ -19,6 +19,7 @@ package apis
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
     rds "github.com/jdcloud-api/jdcloud-sdk-go/services/rds/models"
+    common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
 
 type DescribeSlowLogsRequest struct {
@@ -45,6 +46,9 @@ type DescribeSlowLogsRequest struct {
 
     /* 每页显示的数据条数，默认为10，取值范围：10、20、30、50、100 (Optional) */
     PageSize *int `json:"pageSize"`
+
+    /*  (Optional) */
+    Filters []common.Filter `json:"filters"`
 }
 
 /*
@@ -84,6 +88,7 @@ func NewDescribeSlowLogsRequest(
  * param dbName: 查询哪个数据库的慢日志，不填表示返回所有数据库的慢日志 (Optional)
  * param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,1000)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页。 (Optional)
  * param pageSize: 每页显示的数据条数，默认为10，取值范围：10、20、30、50、100 (Optional)
+ * param filters:  (Optional)
  */
 func NewDescribeSlowLogsRequestWithAllParams(
     regionId string,
@@ -93,6 +98,7 @@ func NewDescribeSlowLogsRequestWithAllParams(
     dbName *string,
     pageNumber *int,
     pageSize *int,
+    filters []common.Filter,
 ) *DescribeSlowLogsRequest {
 
     return &DescribeSlowLogsRequest{
@@ -109,6 +115,7 @@ func NewDescribeSlowLogsRequestWithAllParams(
         DbName: dbName,
         PageNumber: pageNumber,
         PageSize: pageSize,
+        Filters: filters,
     }
 }
 
@@ -158,6 +165,11 @@ func (r *DescribeSlowLogsRequest) SetPageNumber(pageNumber int) {
 /* param pageSize: 每页显示的数据条数，默认为10，取值范围：10、20、30、50、100(Optional) */
 func (r *DescribeSlowLogsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
+}
+
+/* param filters: (Optional) */
+func (r *DescribeSlowLogsRequest) SetFilters(filters []common.Filter) {
+    r.Filters = filters
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

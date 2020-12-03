@@ -17,14 +17,17 @@
 package models
 
 
-type ClusterExpansion struct {
+type MonitorLabelNodeDetail struct {
 
-    /* 集群ID  */
-    ClusterId string `json:"clusterId"`
+    /* 监控显示名称 (Optional) */
+    Label string `json:"label"`
 
-    /* 扩容节点个数  */
-    ExpansionNum string `json:"expansionNum"`
+    /* 监控项目代码 (Optional) */
+    ServiceCode string `json:"serviceCode"`
 
-    /* 扩容节点类型。 Task：计算节点，Core：存储和计算节点 (Optional) */
-    NodeType *string `json:"nodeType"`
+    /* 监控项目资源代码 (Optional) */
+    ResourceId string `json:"resourceId"`
+
+    /* 过滤条件的值 (Optional) */
+    Filters []string `json:"filters"`
 }

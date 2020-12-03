@@ -43,6 +43,9 @@ type Backup struct {
     /* 备份模式，系统自动备份或手动备份，请查看[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Optional) */
     BackupMode string `json:"backupMode"`
 
+    /* 备份方法，支持物理备份和快照备份，请查看[枚举参数定义](../Enum-Definitions/Enum-Definitions.md)<br>- **仅支持 MySQL、MariaDB、Percona** (Optional) */
+    BackupMethod string `json:"backupMethod"`
+
     /* 备份粒度，实例备份或者多库备份，请查看[枚举参数定义](../Enum-Definitions/Enum-Definitions.md)<br>- **SQL Server支持**<br>- **MySQL不支持** (Optional) */
     BackupUnit string `json:"backupUnit"`
 

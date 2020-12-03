@@ -17,14 +17,17 @@
 package models
 
 
-type ClusterExpansion struct {
+type LivePublishStatisticGroupByStreamResultData struct {
 
-    /* 集群ID  */
-    ClusterId string `json:"clusterId"`
+    /* 流名称
+ (Optional) */
+    StreamName string `json:"streamName"`
 
-    /* 扩容节点个数  */
-    ExpansionNum string `json:"expansionNum"`
+    /* 帧率
+ (Optional) */
+    Framerate int64 `json:"framerate"`
 
-    /* 扩容节点类型。 Task：计算节点，Core：存储和计算节点 (Optional) */
-    NodeType *string `json:"nodeType"`
+    /* 码率，单位：bps
+ (Optional) */
+    Bitrate int64 `json:"bitrate"`
 }

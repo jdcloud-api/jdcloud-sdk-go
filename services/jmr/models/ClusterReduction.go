@@ -17,14 +17,14 @@
 package models
 
 
-type ClusterExpansion struct {
+type ClusterReduction struct {
 
     /* 集群ID  */
     ClusterId string `json:"clusterId"`
 
-    /* 扩容节点个数  */
-    ExpansionNum string `json:"expansionNum"`
+    /* 保留的节点个数 (Optional) */
+    ReserveNum *string `json:"reserveNum"`
 
-    /* 扩容节点类型。 Task：计算节点，Core：存储和计算节点 (Optional) */
+    /* 缩容节点类型。 仅支持 Task ，即计算节点 (Optional) */
     NodeType *string `json:"nodeType"`
 }
