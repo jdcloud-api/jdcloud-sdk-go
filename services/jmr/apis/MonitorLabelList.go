@@ -21,75 +21,67 @@ import (
     jmr "github.com/jdcloud-api/jdcloud-sdk-go/services/jmr/models"
 )
 
-type ClusterExpansionRequest struct {
+type MonitorLabelListRequest struct {
 
     core.JDCloudRequest
 
     /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /* 描述集群扩容信息  */
-    ClusterExpansion *jmr.ClusterExpansion `json:"clusterExpansion"`
-
-    /* 用于保证请求的幂等性。由客户端生成，长度不能超过64个字符。
- (Optional) */
-    ClientToken *string `json:"clientToken"`
+    /* 集群ID  */
+    ClusterId string `json:"clusterId"`
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param clusterExpansion: 描述集群扩容信息 (Required)
+ * param clusterId: 集群ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewClusterExpansionRequest(
+func NewMonitorLabelListRequest(
     regionId string,
-    clusterExpansion *jmr.ClusterExpansion,
-) *ClusterExpansionRequest {
+    clusterId string,
+) *MonitorLabelListRequest {
 
-	return &ClusterExpansionRequest{
+	return &MonitorLabelListRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/cluster:expansion",
+			URL:     "/regions/{regionId}/monitorLabelList/{clusterId}",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        ClusterExpansion: clusterExpansion,
+        ClusterId: clusterId,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param clusterExpansion: 描述集群扩容信息 (Required)
- * param clientToken: 用于保证请求的幂等性。由客户端生成，长度不能超过64个字符。
- (Optional)
+ * param clusterId: 集群ID (Required)
  */
-func NewClusterExpansionRequestWithAllParams(
+func NewMonitorLabelListRequestWithAllParams(
     regionId string,
-    clusterExpansion *jmr.ClusterExpansion,
-    clientToken *string,
-) *ClusterExpansionRequest {
+    clusterId string,
+) *MonitorLabelListRequest {
 
-    return &ClusterExpansionRequest{
+    return &MonitorLabelListRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cluster:expansion",
+            URL:     "/regions/{regionId}/monitorLabelList/{clusterId}",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        ClusterExpansion: clusterExpansion,
-        ClientToken: clientToken,
+        ClusterId: clusterId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewClusterExpansionRequestWithoutParam() *ClusterExpansionRequest {
+func NewMonitorLabelListRequestWithoutParam() *MonitorLabelListRequest {
 
-    return &ClusterExpansionRequest{
+    return &MonitorLabelListRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cluster:expansion",
+            URL:     "/regions/{regionId}/monitorLabelList/{clusterId}",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -98,33 +90,28 @@ func NewClusterExpansionRequestWithoutParam() *ClusterExpansionRequest {
 }
 
 /* param regionId: 地域ID(Required) */
-func (r *ClusterExpansionRequest) SetRegionId(regionId string) {
+func (r *MonitorLabelListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param clusterExpansion: 描述集群扩容信息(Required) */
-func (r *ClusterExpansionRequest) SetClusterExpansion(clusterExpansion *jmr.ClusterExpansion) {
-    r.ClusterExpansion = clusterExpansion
-}
-
-/* param clientToken: 用于保证请求的幂等性。由客户端生成，长度不能超过64个字符。
-(Optional) */
-func (r *ClusterExpansionRequest) SetClientToken(clientToken string) {
-    r.ClientToken = &clientToken
+/* param clusterId: 集群ID(Required) */
+func (r *MonitorLabelListRequest) SetClusterId(clusterId string) {
+    r.ClusterId = clusterId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r ClusterExpansionRequest) GetRegionId() string {
+func (r MonitorLabelListRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type ClusterExpansionResponse struct {
+type MonitorLabelListResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result ClusterExpansionResult `json:"result"`
+    Result MonitorLabelListResult `json:"result"`
 }
 
-type ClusterExpansionResult struct {
+type MonitorLabelListResult struct {
+    Data []jmr.MonitorLabelDetail `json:"data"`
     Status bool `json:"status"`
 }

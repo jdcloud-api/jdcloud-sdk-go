@@ -17,14 +17,11 @@
 package models
 
 
-type ClusterExpansion struct {
+type SoftwareStack struct {
 
-    /* 集群ID  */
-    ClusterId string `json:"clusterId"`
+    /* 软件列表 (Optional) */
+    Software string `json:"software"`
 
-    /* 扩容节点个数  */
-    ExpansionNum string `json:"expansionNum"`
-
-    /* 扩容节点类型。 Task：计算节点，Core：存储和计算节点 (Optional) */
-    NodeType *string `json:"nodeType"`
+    /* 版本 (Optional) */
+    Version string `json:"version"`
 }

@@ -27,19 +27,17 @@ type IdataClusterRequest struct {
     /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /* 集群ID  */
-    ClusterId string `json:"clusterId"`
+    /* 地域信息 (Optional) */
+    DataCenter *string `json:"dataCenter"`
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param clusterId: 集群ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewIdataClusterRequest(
     regionId string,
-    clusterId string,
 ) *IdataClusterRequest {
 
 	return &IdataClusterRequest{
@@ -50,17 +48,16 @@ func NewIdataClusterRequest(
 			Version: "v1",
 		},
         RegionId: regionId,
-        ClusterId: clusterId,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param clusterId: 集群ID (Required)
+ * param dataCenter: 地域信息 (Optional)
  */
 func NewIdataClusterRequestWithAllParams(
     regionId string,
-    clusterId string,
+    dataCenter *string,
 ) *IdataClusterRequest {
 
     return &IdataClusterRequest{
@@ -71,7 +68,7 @@ func NewIdataClusterRequestWithAllParams(
             Version: "v1",
         },
         RegionId: regionId,
-        ClusterId: clusterId,
+        DataCenter: dataCenter,
     }
 }
 
@@ -93,9 +90,9 @@ func (r *IdataClusterRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param clusterId: 集群ID(Required) */
-func (r *IdataClusterRequest) SetClusterId(clusterId string) {
-    r.ClusterId = clusterId
+/* param dataCenter: 地域信息(Optional) */
+func (r *IdataClusterRequest) SetDataCenter(dataCenter string) {
+    r.DataCenter = &dataCenter
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

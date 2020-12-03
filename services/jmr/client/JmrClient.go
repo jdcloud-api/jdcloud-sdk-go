@@ -40,7 +40,7 @@ func NewJmrClient(credential *core.Credential) *JmrClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "jmr",
-            Revision:    "1.1.3",
+            Revision:    "1.1.6",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -77,6 +77,67 @@ func (c *JmrClient) GetJmrVersionList(request *jmr.GetJmrVersionListRequest) (*j
     return jdResp, err
 }
 
+/* 查询JMR的监控模板信息 */
+func (c *JmrClient) MonitorLabelList(request *jmr.MonitorLabelListRequest) (*jmr.MonitorLabelListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.MonitorLabelListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 缩容集群 */
+func (c *JmrClient) ClusterReduction(request *jmr.ClusterReductionRequest) (*jmr.ClusterReductionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.ClusterReductionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询用户集群的列表
+ */
+func (c *JmrClient) DescribeClusters(request *jmr.DescribeClustersRequest) (*jmr.DescribeClustersResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.DescribeClustersResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 释放集群
  */
 func (c *JmrClient) ReleaseCluster(request *jmr.ReleaseClusterRequest) (*jmr.ReleaseClusterResponse, error) {
@@ -98,27 +159,7 @@ func (c *JmrClient) ReleaseCluster(request *jmr.ReleaseClusterRequest) (*jmr.Rel
     return jdResp, err
 }
 
-/* 查询集群列表 */
-func (c *JmrClient) DescribeClusters(request *jmr.DescribeClustersRequest) (*jmr.DescribeClustersResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jmr.DescribeClustersResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询用户指定clusterId对应的集群列表及相关服务的一些信息 */
+/* 查询用户的集群列表及相关服务的一些信息 */
 func (c *JmrClient) IdataCluster(request *jmr.IdataClusterRequest) (*jmr.IdataClusterResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")

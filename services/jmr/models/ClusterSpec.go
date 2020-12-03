@@ -28,17 +28,11 @@ type ClusterSpec struct {
     /* 集群版本，默认版本为JMR2.0.0  */
     Version string `json:"version"`
 
-    /* 集群计费类型，支持按配置和包年包月计费  */
-    PayType string `json:"payType"`
+    /* 集群计费类型，支持按配置和包年包月计费 (Optional) */
+    PayType *string `json:"payType"`
 
     /* 主节点数量  */
     MasterNodeCount int `json:"masterNodeCount"`
-
-    /* Master节点CPU (Optional) */
-    MasterCore *int `json:"masterCore"`
-
-    /* Master节点内存(推荐至少8G内存，否则服务可能会部署失败) (Optional) */
-    MasterMemory *int `json:"masterMemory"`
 
     /* Master系统硬盘类型：ssd.gp1,ssd.io1和hdd.std1  */
     MasterSystemDiskType string `json:"masterSystemDiskType"`
@@ -46,8 +40,8 @@ type ClusterSpec struct {
     /* Master系统硬盘大小，单位GB  */
     MasterSystemDiskVolume int `json:"masterSystemDiskVolume"`
 
-    /* Master系统硬盘iops，只有在硬盘类型是ssd.gp1,ssd.io1时，才需要有iops，200起步，步长为10  */
-    MasterSystemDiskIops int `json:"masterSystemDiskIops"`
+    /* Master系统硬盘iops，只有在硬盘类型是ssd.gp1,ssd.io1时，才需要有iops，200起步，步长为10 (Optional) */
+    MasterSystemDiskIops *int `json:"masterSystemDiskIops"`
 
     /* Master数据盘类型：ssd.gp1,ssd.io1和hdd.std1  */
     MasterDiskType string `json:"masterDiskType"`
@@ -55,8 +49,8 @@ type ClusterSpec struct {
     /* Master数据盘大小，单位GB  */
     MasterDiskVolume int `json:"masterDiskVolume"`
 
-    /* Master数据盘ipos，只有在硬盘类型是ssd.gp1,ssd.io1时，才需要有iops，200起步，步长为10  */
-    MasterDiskIops int `json:"masterDiskIops"`
+    /* Master数据盘ipos，只有在硬盘类型是ssd.gp1,ssd.io1时，才需要有iops，200起步，步长为10 (Optional) */
+    MasterDiskIops *int `json:"masterDiskIops"`
 
     /* master节点规格  */
     MasterInstanceType string `json:"masterInstanceType"`
@@ -64,20 +58,14 @@ type ClusterSpec struct {
     /* Slave节点数量  */
     SlaveNodeCount int `json:"slaveNodeCount"`
 
-    /* Slave节点CPU (Optional) */
-    SlaveCore *int `json:"slaveCore"`
-
-    /* Slave节点内存(推荐至少4G内存，否则服务可能会部署失败) (Optional) */
-    SlaveMemory *int `json:"slaveMemory"`
-
     /* Slave系统硬盘类型：ssd.gp1,ssd.io1和hdd.std1  */
     SlaveSystemDiskType string `json:"slaveSystemDiskType"`
 
     /* Slave系统硬盘大小，单位GB  */
     SlaveSystemDiskVolume int `json:"slaveSystemDiskVolume"`
 
-    /* Slave系统硬盘iops，只有在硬盘类型是ssd.gp1,ssd.io1时，才需要有iops，200起步，步长为10  */
-    SlaveSystemDiskIops int `json:"slaveSystemDiskIops"`
+    /* Slave系统硬盘iops，只有在硬盘类型是ssd.gp1,ssd.io1时，才需要有iops，200起步，步长为10 (Optional) */
+    SlaveSystemDiskIops *int `json:"slaveSystemDiskIops"`
 
     /* Slave数据盘类型：ssd.gp1,ssd.io1和hdd.std1  */
     SlaveDiskType string `json:"slaveDiskType"`
@@ -85,8 +73,8 @@ type ClusterSpec struct {
     /* Slave数据盘大小，单位GB  */
     SlaveDiskVolume int `json:"slaveDiskVolume"`
 
-    /* Slave数据盘ipos，只有在硬盘类型是ssd.gp1,ssd.io1时，才需要有iops，200起步，步长为10  */
-    SlaveDiskIops int `json:"slaveDiskIops"`
+    /* Slave数据盘ipos，只有在硬盘类型是ssd.gp1,ssd.io1时，才需要有iops，200起步，步长为10 (Optional) */
+    SlaveDiskIops *int `json:"slaveDiskIops"`
 
     /* slave节点规格  */
     CoreInstanceType string `json:"coreInstanceType"`
@@ -111,4 +99,13 @@ type ClusterSpec struct {
 
     /* 数据中心的可用区  */
     Az string `json:"az"`
+
+    /* 是否创建公网IP (Optional) */
+    CreateOuterIpFlag *bool `json:"createOuterIpFlag"`
+
+    /* 是否创建安全组 (Optional) */
+    CreateSecurityGroupFlag *bool `json:"createSecurityGroupFlag"`
+
+    /* 安全组ID (Optional) */
+    SecurityGroupId *string `json:"securityGroupId"`
 }

@@ -17,14 +17,16 @@
 package models
 
 
-type ClusterExpansion struct {
+type LivePublishStatisticGroupByStreamResult struct {
 
-    /* 集群ID  */
-    ClusterId string `json:"clusterId"`
+    /* 起始时间点，UTC时间，格式：yyyy-MM-dd'T'HH:mm:ss'Z'
+ (Optional) */
+    StartTime string `json:"startTime"`
 
-    /* 扩容节点个数  */
-    ExpansionNum string `json:"expansionNum"`
+    /* 结束时间点，UTC时间，格式：yyyy-MM-dd'T'HH:mm:ss'Z'
+ (Optional) */
+    EndTime string `json:"endTime"`
 
-    /* 扩容节点类型。 Task：计算节点，Core：存储和计算节点 (Optional) */
-    NodeType *string `json:"nodeType"`
+    /*  (Optional) */
+    Data []LivePublishStatisticGroupByStreamResultData `json:"data"`
 }

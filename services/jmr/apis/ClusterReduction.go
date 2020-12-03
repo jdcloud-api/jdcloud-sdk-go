@@ -21,15 +21,15 @@ import (
     jmr "github.com/jdcloud-api/jdcloud-sdk-go/services/jmr/models"
 )
 
-type ClusterExpansionRequest struct {
+type ClusterReductionRequest struct {
 
     core.JDCloudRequest
 
     /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /* 描述集群扩容信息  */
-    ClusterExpansion *jmr.ClusterExpansion `json:"clusterExpansion"`
+    /* 描述集群缩容信息  */
+    ClusterReduction *jmr.ClusterReduction `json:"clusterReduction"`
 
     /* 用于保证请求的幂等性。由客户端生成，长度不能超过64个字符。
  (Optional) */
@@ -38,58 +38,58 @@ type ClusterExpansionRequest struct {
 
 /*
  * param regionId: 地域ID (Required)
- * param clusterExpansion: 描述集群扩容信息 (Required)
+ * param clusterReduction: 描述集群缩容信息 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewClusterExpansionRequest(
+func NewClusterReductionRequest(
     regionId string,
-    clusterExpansion *jmr.ClusterExpansion,
-) *ClusterExpansionRequest {
+    clusterReduction *jmr.ClusterReduction,
+) *ClusterReductionRequest {
 
-	return &ClusterExpansionRequest{
+	return &ClusterReductionRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/cluster:expansion",
+			URL:     "/regions/{regionId}/cluster:reduction",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        ClusterExpansion: clusterExpansion,
+        ClusterReduction: clusterReduction,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param clusterExpansion: 描述集群扩容信息 (Required)
+ * param clusterReduction: 描述集群缩容信息 (Required)
  * param clientToken: 用于保证请求的幂等性。由客户端生成，长度不能超过64个字符。
  (Optional)
  */
-func NewClusterExpansionRequestWithAllParams(
+func NewClusterReductionRequestWithAllParams(
     regionId string,
-    clusterExpansion *jmr.ClusterExpansion,
+    clusterReduction *jmr.ClusterReduction,
     clientToken *string,
-) *ClusterExpansionRequest {
+) *ClusterReductionRequest {
 
-    return &ClusterExpansionRequest{
+    return &ClusterReductionRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cluster:expansion",
+            URL:     "/regions/{regionId}/cluster:reduction",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        ClusterExpansion: clusterExpansion,
+        ClusterReduction: clusterReduction,
         ClientToken: clientToken,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewClusterExpansionRequestWithoutParam() *ClusterExpansionRequest {
+func NewClusterReductionRequestWithoutParam() *ClusterReductionRequest {
 
-    return &ClusterExpansionRequest{
+    return &ClusterReductionRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cluster:expansion",
+            URL:     "/regions/{regionId}/cluster:reduction",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -98,33 +98,33 @@ func NewClusterExpansionRequestWithoutParam() *ClusterExpansionRequest {
 }
 
 /* param regionId: 地域ID(Required) */
-func (r *ClusterExpansionRequest) SetRegionId(regionId string) {
+func (r *ClusterReductionRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param clusterExpansion: 描述集群扩容信息(Required) */
-func (r *ClusterExpansionRequest) SetClusterExpansion(clusterExpansion *jmr.ClusterExpansion) {
-    r.ClusterExpansion = clusterExpansion
+/* param clusterReduction: 描述集群缩容信息(Required) */
+func (r *ClusterReductionRequest) SetClusterReduction(clusterReduction *jmr.ClusterReduction) {
+    r.ClusterReduction = clusterReduction
 }
 
 /* param clientToken: 用于保证请求的幂等性。由客户端生成，长度不能超过64个字符。
 (Optional) */
-func (r *ClusterExpansionRequest) SetClientToken(clientToken string) {
+func (r *ClusterReductionRequest) SetClientToken(clientToken string) {
     r.ClientToken = &clientToken
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r ClusterExpansionRequest) GetRegionId() string {
+func (r ClusterReductionRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type ClusterExpansionResponse struct {
+type ClusterReductionResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result ClusterExpansionResult `json:"result"`
+    Result ClusterReductionResult `json:"result"`
 }
 
-type ClusterExpansionResult struct {
+type ClusterReductionResult struct {
     Status bool `json:"status"`
 }

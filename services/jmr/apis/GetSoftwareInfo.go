@@ -28,50 +28,50 @@ type GetSoftwareInfoRequest struct {
     RegionId string `json:"regionId"`
 
     /* JMR软件版本号  */
-    Ver string `json:"ver"`
+    Version string `json:"version"`
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param ver: JMR软件版本号 (Required)
+ * param version: JMR软件版本号 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewGetSoftwareInfoRequest(
     regionId string,
-    ver string,
+    version string,
 ) *GetSoftwareInfoRequest {
 
 	return &GetSoftwareInfoRequest{
         JDCloudRequest: core.JDCloudRequest{
 			URL:     "/regions/{regionId}/softwareInfo",
-			Method:  "POST",
+			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        Ver: ver,
+        Version: version,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param ver: JMR软件版本号 (Required)
+ * param version: JMR软件版本号 (Required)
  */
 func NewGetSoftwareInfoRequestWithAllParams(
     regionId string,
-    ver string,
+    version string,
 ) *GetSoftwareInfoRequest {
 
     return &GetSoftwareInfoRequest{
         JDCloudRequest: core.JDCloudRequest{
             URL:     "/regions/{regionId}/softwareInfo",
-            Method:  "POST",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        Ver: ver,
+        Version: version,
     }
 }
 
@@ -81,7 +81,7 @@ func NewGetSoftwareInfoRequestWithoutParam() *GetSoftwareInfoRequest {
     return &GetSoftwareInfoRequest{
             JDCloudRequest: core.JDCloudRequest{
             URL:     "/regions/{regionId}/softwareInfo",
-            Method:  "POST",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
@@ -93,9 +93,9 @@ func (r *GetSoftwareInfoRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param ver: JMR软件版本号(Required) */
-func (r *GetSoftwareInfoRequest) SetVer(ver string) {
-    r.Ver = ver
+/* param version: JMR软件版本号(Required) */
+func (r *GetSoftwareInfoRequest) SetVersion(version string) {
+    r.Version = version
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

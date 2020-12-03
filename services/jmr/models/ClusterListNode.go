@@ -17,7 +17,7 @@
 package models
 
 
-type Cluster struct {
+type ClusterListNode struct {
 
     /* 集群ID (Optional) */
     Id string `json:"id"`
@@ -29,7 +29,7 @@ type Cluster struct {
     DataCenter string `json:"dataCenter"`
 
     /* 集群ID (Optional) */
-    ClusterPrimaryId string `json:"clusterPrimaryId"`
+    RecordId int `json:"recordId"`
 
     /* 监控ID (Optional) */
     MonitorResourceId string `json:"monitorResourceId"`
@@ -37,20 +37,11 @@ type Cluster struct {
     /* 集群状态 (Optional) */
     Status string `json:"status"`
 
-    /* 软件信息 (Optional) */
-    SoftwareStack SoftwareStack `json:"softwareStack"`
+    /* 错误信息 (Optional) */
+    ErrorMessage string `json:"errorMessage"`
 
     /* 集群创建时间 (Optional) */
     CreateTime string `json:"createTime"`
-
-    /* 集群是否高可用 (Optional) */
-    HaFlag bool `json:"haFlag"`
-
-    /* 集群是否使用OSS (Optional) */
-    JssFlag bool `json:"jssFlag"`
-
-    /* 集群费用 (Optional) */
-    PayPrice float64 `json:"payPrice"`
 
     /* 集群收费类型 (Optional) */
     PayType string `json:"payType"`
@@ -58,9 +49,6 @@ type Cluster struct {
     /* 集群运行时间 (Optional) */
     Duration string `json:"duration"`
 
-    /* 集群节点个数 (Optional) */
-    NodeCount int `json:"nodeCount"`
-
-    /* 集群节点信息 (Optional) */
-    Hardware []ClusterNode `json:"hardware"`
+    /* 公网Ip (Optional) */
+    OuterIp string `json:"outerIp"`
 }

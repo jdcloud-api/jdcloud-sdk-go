@@ -28,10 +28,22 @@ type DescribeClustersRequest struct {
     /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /* 页码；默认为1 (Optional) */
-    PageNumber *int `json:"pageNumber"`
+    /* 地域 (Optional) */
+    DataCenter *string `json:"dataCenter"`
 
-    /* 分页大小；默认为10；取值范围[10, 100] (Optional) */
+    /* 集群状态，CREATING，RUNNING，RELEASED，FAILED等 (Optional) */
+    Status *string `json:"status"`
+
+    /* 集群名称 (Optional) */
+    ClusterName *string `json:"clusterName"`
+
+    /* 排序，比如 id desc (Optional) */
+    OrderBy *string `json:"orderBy"`
+
+    /* 页数，默认为1 (Optional) */
+    PageNum *int `json:"pageNum"`
+
+    /* 每页数目，默认为10 (Optional) */
     PageSize *int `json:"pageSize"`
 }
 
@@ -46,7 +58,7 @@ func NewDescribeClustersRequest(
 
 	return &DescribeClustersRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/cluster:create",
+			URL:     "/regions/{regionId}/clusters",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -57,24 +69,36 @@ func NewDescribeClustersRequest(
 
 /*
  * param regionId: 地域ID (Required)
- * param pageNumber: 页码；默认为1 (Optional)
- * param pageSize: 分页大小；默认为10；取值范围[10, 100] (Optional)
+ * param dataCenter: 地域 (Optional)
+ * param status: 集群状态，CREATING，RUNNING，RELEASED，FAILED等 (Optional)
+ * param clusterName: 集群名称 (Optional)
+ * param orderBy: 排序，比如 id desc (Optional)
+ * param pageNum: 页数，默认为1 (Optional)
+ * param pageSize: 每页数目，默认为10 (Optional)
  */
 func NewDescribeClustersRequestWithAllParams(
     regionId string,
-    pageNumber *int,
+    dataCenter *string,
+    status *string,
+    clusterName *string,
+    orderBy *string,
+    pageNum *int,
     pageSize *int,
 ) *DescribeClustersRequest {
 
     return &DescribeClustersRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cluster:create",
+            URL:     "/regions/{regionId}/clusters",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        PageNumber: pageNumber,
+        DataCenter: dataCenter,
+        Status: status,
+        ClusterName: clusterName,
+        OrderBy: orderBy,
+        PageNum: pageNum,
         PageSize: pageSize,
     }
 }
@@ -84,7 +108,7 @@ func NewDescribeClustersRequestWithoutParam() *DescribeClustersRequest {
 
     return &DescribeClustersRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cluster:create",
+            URL:     "/regions/{regionId}/clusters",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -97,12 +121,32 @@ func (r *DescribeClustersRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param pageNumber: 页码；默认为1(Optional) */
-func (r *DescribeClustersRequest) SetPageNumber(pageNumber int) {
-    r.PageNumber = &pageNumber
+/* param dataCenter: 地域(Optional) */
+func (r *DescribeClustersRequest) SetDataCenter(dataCenter string) {
+    r.DataCenter = &dataCenter
 }
 
-/* param pageSize: 分页大小；默认为10；取值范围[10, 100](Optional) */
+/* param status: 集群状态，CREATING，RUNNING，RELEASED，FAILED等(Optional) */
+func (r *DescribeClustersRequest) SetStatus(status string) {
+    r.Status = &status
+}
+
+/* param clusterName: 集群名称(Optional) */
+func (r *DescribeClustersRequest) SetClusterName(clusterName string) {
+    r.ClusterName = &clusterName
+}
+
+/* param orderBy: 排序，比如 id desc(Optional) */
+func (r *DescribeClustersRequest) SetOrderBy(orderBy string) {
+    r.OrderBy = &orderBy
+}
+
+/* param pageNum: 页数，默认为1(Optional) */
+func (r *DescribeClustersRequest) SetPageNum(pageNum int) {
+    r.PageNum = &pageNum
+}
+
+/* param pageSize: 每页数目，默认为10(Optional) */
 func (r *DescribeClustersRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
@@ -120,7 +164,7 @@ type DescribeClustersResponse struct {
 }
 
 type DescribeClustersResult struct {
-    Clusters []jmr.Cluster `json:"clusters"`
-    TotalCount int `json:"totalCount"`
+    TotalNum int `json:"totalNum"`
+    Clusters []jmr.ClusterListNode `json:"clusters"`
     Status bool `json:"status"`
 }
