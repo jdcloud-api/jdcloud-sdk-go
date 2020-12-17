@@ -48,6 +48,12 @@ type QueryRefreshTaskRequest struct {
 
     /* 分页页面大小,默认值50 (Optional) */
     PageSize *int `json:"pageSize"`
+
+    /* 查询的账号范围 (Optional) */
+    AccountType *string `json:"accountType"`
+
+    /* 查询的子账号，多个用逗号隔开 (Optional) */
+    SubUsers *string `json:"subUsers"`
 }
 
 /*
@@ -76,6 +82,8 @@ func NewQueryRefreshTaskRequest(
  * param taskType: null (Optional)
  * param pageNumber: 分页页数,默认值1 (Optional)
  * param pageSize: 分页页面大小,默认值50 (Optional)
+ * param accountType: 查询的账号范围 (Optional)
+ * param subUsers: 查询的子账号，多个用逗号隔开 (Optional)
  */
 func NewQueryRefreshTaskRequestWithAllParams(
     startTime *string,
@@ -86,6 +94,8 @@ func NewQueryRefreshTaskRequestWithAllParams(
     taskType *string,
     pageNumber *int,
     pageSize *int,
+    accountType *string,
+    subUsers *string,
 ) *QueryRefreshTaskRequest {
 
     return &QueryRefreshTaskRequest{
@@ -103,6 +113,8 @@ func NewQueryRefreshTaskRequestWithAllParams(
         TaskType: taskType,
         PageNumber: pageNumber,
         PageSize: pageSize,
+        AccountType: accountType,
+        SubUsers: subUsers,
     }
 }
 
@@ -157,6 +169,16 @@ func (r *QueryRefreshTaskRequest) SetPageNumber(pageNumber int) {
 /* param pageSize: 分页页面大小,默认值50(Optional) */
 func (r *QueryRefreshTaskRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
+}
+
+/* param accountType: 查询的账号范围(Optional) */
+func (r *QueryRefreshTaskRequest) SetAccountType(accountType string) {
+    r.AccountType = &accountType
+}
+
+/* param subUsers: 查询的子账号，多个用逗号隔开(Optional) */
+func (r *QueryRefreshTaskRequest) SetSubUsers(subUsers string) {
+    r.SubUsers = &subUsers
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
