@@ -40,7 +40,7 @@ func NewCdnClient(credential *core.Credential) *CdnClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "cdn",
-            Revision:    "0.10.23",
+            Revision:    "0.10.24",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -428,6 +428,26 @@ func (c *CdnClient) SetDomainConfig(request *cdn.SetDomainConfigRequest) (*cdn.S
     }
 
     jdResp := &cdn.SetDomainConfigResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询定制的目录带宽，仅有部分用户支持该功能 */
+func (c *CdnClient) QueryCustomizedDirBandWidth(request *cdn.QueryCustomizedDirBandWidthRequest) (*cdn.QueryCustomizedDirBandWidthResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryCustomizedDirBandWidthResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1577,6 +1597,26 @@ func (c *CdnClient) CreateWafWhiteRule(request *cdn.CreateWafWhiteRuleRequest) (
     return jdResp, err
 }
 
+/* 查找地域运营商列表 */
+func (c *CdnClient) QueryAreaIspListV2(request *cdn.QueryAreaIspListV2Request) (*cdn.QueryAreaIspListV2Response, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryAreaIspListV2Response{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询平均带宽 */
 func (c *CdnClient) QueryAvgBandwidthForPCdn(request *cdn.QueryAvgBandwidthForPCdnRequest) (*cdn.QueryAvgBandwidthForPCdnResponse, error) {
     if request == nil {
@@ -2668,6 +2708,26 @@ func (c *CdnClient) QueryBackSourcePath(request *cdn.QueryBackSourcePathRequest)
     }
 
     jdResp := &cdn.QueryBackSourcePathResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询平均带宽 */
+func (c *CdnClient) QueryJBoxAvgBandwidth(request *cdn.QueryJBoxAvgBandwidthRequest) (*cdn.QueryJBoxAvgBandwidthResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryJBoxAvgBandwidthResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

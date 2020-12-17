@@ -17,14 +17,17 @@
 package models
 
 
-type QueryAvgBandwidthItem struct {
+type FlowItem struct {
 
-    /* 五分钟序列，202003021100 表示 从 2020-03-02 11:00 到 2020-03-02 11:05 这个时段 (Optional) */
-    StartTime string `json:"startTime"`
+    /* 时间点，2020-12-08 00:00 (Optional) */
+    Time string `json:"time"`
 
-    /* 平均带宽kbps (Optional) */
-    Avgbandwidth float64 `json:"avgbandwidth"`
+    /* 目录流量(Byte) (Optional) */
+    Flow float64 `json:"flow"`
 
-    /*  (Optional) */
-    Isp string `json:"isp"`
+    /* 目录 (Optional) */
+    Dir string `json:"dir"`
+
+    /* 目录访问次数 (Optional) */
+    Pv int64 `json:"pv"`
 }
