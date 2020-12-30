@@ -19,10 +19,10 @@ package models
 
 type Subnet struct {
 
-    /* 地域代码, 如cn-east-1 (Optional) */
+    /* 地域代码, 如cn-north-1 (Optional) */
     Region string `json:"region"`
 
-    /* 可用区, 如cn-east-1a (Optional) */
+    /* 可用区, 如cn-north-1c (Optional) */
     Az string `json:"az"`
 
     /* 子网ID (Optional) */
@@ -31,8 +31,11 @@ type Subnet struct {
     /* 子网名称 (Optional) */
     Name string `json:"name"`
 
-    /* 子网CIDR (Optional) */
+    /* 子网ipv4 CIDR (Optional) */
     Cidr string `json:"cidr"`
+
+    /* 子网IPv6 CIDR (Optional) */
+    Ipv6Cidr string `json:"ipv6Cidr"`
 
     /* 私有网络Id (Optional) */
     VpcId string `json:"vpcId"`
@@ -40,11 +43,32 @@ type Subnet struct {
     /* 私有网络名称 (Optional) */
     VpcName string `json:"vpcName"`
 
-    /* 可用ip数量 (Optional) */
+    /* 私有网络IPv4 CIDR (Optional) */
+    VpcCidr string `json:"vpcCidr"`
+
+    /* 私有网络IPv6 CIDR (Optional) */
+    VpcIpv6Cidr string `json:"vpcIpv6Cidr"`
+
+    /* 可用IPv4地址数量 (Optional) */
     AvailableIpCount int `json:"availableIpCount"`
 
-    /* 总ip数量 (Optional) */
+    /* 总IPv4地址数量 (Optional) */
     TotalIpCount int `json:"totalIpCount"`
+
+    /* 已用IPv6地址数量 (Optional) */
+    UsedIpv6IpCount int `json:"usedIpv6IpCount"`
+
+    /* 总IPv6地址数量 (Optional) */
+    TotalIpv6IpCount string `json:"totalIpv6IpCount"`
+
+    /* 子网次要CIDR名称 (Optional) */
+    SecondaryCidrName string `json:"secondaryCidrName"`
+
+    /* 子网次要CIDR (Optional) */
+    SecondaryCidr string `json:"secondaryCidr"`
+
+    /* 子网次要CIDR ID (Optional) */
+    SecondaryCidrId string `json:"secondaryCidrId"`
 
     /* 网络类型 (Optional) */
     NetworkType string `json:"networkType"`

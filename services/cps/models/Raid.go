@@ -28,7 +28,7 @@ type Raid struct {
     /* RAID类型ID (Optional) */
     RaidTypeId string `json:"raidTypeId"`
 
-    /* RAID类型, 如 NORAID, RAID0, RAID1 (Optional) */
+    /* RAID类型, 如 NORAID, RAID0, RAID1，RAID10 (Optional) */
     RaidType string `json:"raidType"`
 
     /* 云物理服务器类型, 如 cps.c.normal (Optional) */

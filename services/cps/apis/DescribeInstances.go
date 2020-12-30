@@ -41,7 +41,7 @@ type DescribeInstancesRequest struct {
     /* 云物理服务器名称，支持模糊匹配 (Optional) */
     Name *string `json:"name"`
 
-    /* 网络类型，精确匹配，支持basic，vpc (Optional) */
+    /* 网络类型，精确匹配，支持basic（基础网络）、vpc（私有网络）、retail（零售中台网络） (Optional) */
     NetworkType *string `json:"networkType"`
 
     /* 实例类型，精确匹配，调用接口（describeDeviceTypes）获取实例类型 (Optional) */
@@ -53,11 +53,14 @@ type DescribeInstancesRequest struct {
     /* 密钥对ID (Optional) */
     KeypairId *string `json:"keypairId"`
 
-    /* 是否启用外网, yes/no (Optional) */
+    /* 是否启用外网, yes、no (Optional) */
     EnableInternet *string `json:"enableInternet"`
 
     /* 内网ip (Optional) */
     PrivateIp *string `json:"privateIp"`
+
+    /* 实例网卡类型：bond（网卡bond）、dual（双网卡） (Optional) */
+    InterfaceMode *string `json:"interfaceMode"`
 
     /* instanceId - 云物理服务器ID，精确匹配，支持多个<br/>
 status - 云物理服务器状态，参考云物理服务器状态，精确匹配，支持多个
@@ -91,12 +94,13 @@ func NewDescribeInstancesRequest(
  * param pageSize: 分页大小；默认为20；取值范围[20, 100] (Optional)
  * param az: 可用区，精确匹配 (Optional)
  * param name: 云物理服务器名称，支持模糊匹配 (Optional)
- * param networkType: 网络类型，精确匹配，支持basic，vpc (Optional)
+ * param networkType: 网络类型，精确匹配，支持basic（基础网络）、vpc（私有网络）、retail（零售中台网络） (Optional)
  * param deviceType: 实例类型，精确匹配，调用接口（describeDeviceTypes）获取实例类型 (Optional)
  * param subnetId: 子网ID (Optional)
  * param keypairId: 密钥对ID (Optional)
- * param enableInternet: 是否启用外网, yes/no (Optional)
+ * param enableInternet: 是否启用外网, yes、no (Optional)
  * param privateIp: 内网ip (Optional)
+ * param interfaceMode: 实例网卡类型：bond（网卡bond）、dual（双网卡） (Optional)
  * param filters: instanceId - 云物理服务器ID，精确匹配，支持多个<br/>
 status - 云物理服务器状态，参考云物理服务器状态，精确匹配，支持多个
  (Optional)
@@ -113,6 +117,7 @@ func NewDescribeInstancesRequestWithAllParams(
     keypairId *string,
     enableInternet *string,
     privateIp *string,
+    interfaceMode *string,
     filters []common.Filter,
 ) *DescribeInstancesRequest {
 
@@ -134,6 +139,7 @@ func NewDescribeInstancesRequestWithAllParams(
         KeypairId: keypairId,
         EnableInternet: enableInternet,
         PrivateIp: privateIp,
+        InterfaceMode: interfaceMode,
         Filters: filters,
     }
 }
@@ -176,7 +182,7 @@ func (r *DescribeInstancesRequest) SetName(name string) {
     r.Name = &name
 }
 
-/* param networkType: 网络类型，精确匹配，支持basic，vpc(Optional) */
+/* param networkType: 网络类型，精确匹配，支持basic（基础网络）、vpc（私有网络）、retail（零售中台网络）(Optional) */
 func (r *DescribeInstancesRequest) SetNetworkType(networkType string) {
     r.NetworkType = &networkType
 }
@@ -196,7 +202,7 @@ func (r *DescribeInstancesRequest) SetKeypairId(keypairId string) {
     r.KeypairId = &keypairId
 }
 
-/* param enableInternet: 是否启用外网, yes/no(Optional) */
+/* param enableInternet: 是否启用外网, yes、no(Optional) */
 func (r *DescribeInstancesRequest) SetEnableInternet(enableInternet string) {
     r.EnableInternet = &enableInternet
 }
@@ -204,6 +210,11 @@ func (r *DescribeInstancesRequest) SetEnableInternet(enableInternet string) {
 /* param privateIp: 内网ip(Optional) */
 func (r *DescribeInstancesRequest) SetPrivateIp(privateIp string) {
     r.PrivateIp = &privateIp
+}
+
+/* param interfaceMode: 实例网卡类型：bond（网卡bond）、dual（双网卡）(Optional) */
+func (r *DescribeInstancesRequest) SetInterfaceMode(interfaceMode string) {
+    r.InterfaceMode = &interfaceMode
 }
 
 /* param filters: instanceId - 云物理服务器ID，精确匹配，支持多个<br/>

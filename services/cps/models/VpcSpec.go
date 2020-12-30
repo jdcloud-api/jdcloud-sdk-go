@@ -25,6 +25,9 @@ type VpcSpec struct {
     /* 名称  */
     Name string `json:"name"`
 
+    /* 是否开通IPv6网关，取值范围：yes、no (Optional) */
+    EnableIpv6 *string `json:"enableIpv6"`
+
     /* 描述  */
     Description string `json:"description"`
 }

@@ -44,6 +44,9 @@ type ElasticIp struct {
     /* 实例ID (Optional) */
     InstanceId string `json:"instanceId"`
 
+    /* 绑定的ip地址 (Optional) */
+    TargetIp string `json:"targetIp"`
+
     /* 创建时间 (Optional) */
     CreateTime string `json:"createTime"`
 
