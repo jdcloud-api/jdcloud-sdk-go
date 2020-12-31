@@ -17,11 +17,20 @@
 package models
 
 
-type Tag struct {
+type RespTemplatePageResult struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* 总条数 (Optional) */
+    Count int64 `json:"count"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* 当前页 (Optional) */
+    PageNum int `json:"pageNum"`
+
+    /* 每页条数 (Optional) */
+    PageSize int `json:"pageSize"`
+
+    /* 总页数 (Optional) */
+    PageCount int `json:"pageCount"`
+
+    /* 数据 (Optional) */
+    List []RespQueryTemplateListData `json:"list"`
 }

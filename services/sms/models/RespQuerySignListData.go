@@ -17,11 +17,17 @@
 package models
 
 
-type Tag struct {
+type RespQuerySignListData struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* 签名ID (Optional) */
+    SignId string `json:"signId"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* 签名内容 (Optional) */
+    SignName string `json:"signName"`
+
+    /* 签名状态: -1 草稿， 0 审核中， 1 审核通过， 2 审核不通过， 3 停用 (Optional) */
+    SignStatus string `json:"signStatus"`
+
+    /* 短信创建时间 yyyy-MM-dd HH:mm:ss (Optional) */
+    CreateTime string `json:"createTime"`
 }

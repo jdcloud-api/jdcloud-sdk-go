@@ -17,11 +17,14 @@
 package models
 
 
-type Tag struct {
+type CreateUserResultObj struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* JRtc用户ID (Optional) */
+    PeerId int64 `json:"peerId"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* 应用ID (Optional) */
+    AppId string `json:"appId"`
+
+    /* 业务接入方的用户ID (Optional) */
+    UserId string `json:"userId"`
 }

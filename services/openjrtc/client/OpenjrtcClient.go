@@ -18,47 +18,48 @@ package client
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    sms "github.com/jdcloud-api/jdcloud-sdk-go/services/sms/apis"
+    openjrtc "github.com/jdcloud-api/jdcloud-sdk-go/services/openjrtc/apis"
     "encoding/json"
     "errors"
 )
 
-type SmsClient struct {
+type OpenjrtcClient struct {
     core.JDCloudClient
 }
 
-func NewSmsClient(credential *core.Credential) *SmsClient {
+func NewOpenjrtcClient(credential *core.Credential) *OpenjrtcClient {
     if credential == nil {
         return nil
     }
 
     config := core.NewConfig()
-    config.SetEndpoint("sms.jdcloud-api.com")
+    config.SetEndpoint("openjrtc.jdcloud-api.com")
 
-    return &SmsClient{
+    return &OpenjrtcClient{
         core.JDCloudClient{
             Credential:  *credential,
             Config:      *config,
-            ServiceName: "sms",
-            Revision:    "1.3.3",
+            ServiceName: "openjrtc",
+            Revision:    "1.0.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
 
-func (c *SmsClient) SetConfig(config *core.Config) {
+func (c *OpenjrtcClient) SetConfig(config *core.Config) {
     c.Config = *config
 }
 
-func (c *SmsClient) SetLogger(logger core.Logger) {
+func (c *OpenjrtcClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-func (c *SmsClient) DisableLogger() {
+func (c *OpenjrtcClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
 }
 
-/* 指定模板群发短信接口。接口调用需要使用京东云统一鉴权的SDK方式接入，以下文档仅是接口出参、入参描述，并不是最终程序实现逻辑的范例，具体接口实现请查看SDK参考：https://docs.jdcloud.com/cn/text-message/java */
-func (c *SmsClient) BatchSend(request *sms.BatchSendRequest) (*sms.BatchSendResponse, error) {
+/* 创建房间
+ */
+func (c *OpenjrtcClient) CreateRoom(request *openjrtc.CreateRoomRequest) (*openjrtc.CreateRoomResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -67,7 +68,7 @@ func (c *SmsClient) BatchSend(request *sms.BatchSendRequest) (*sms.BatchSendResp
         return nil, err
     }
 
-    jdResp := &sms.BatchSendResponse{}
+    jdResp := &openjrtc.CreateRoomResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -77,8 +78,9 @@ func (c *SmsClient) BatchSend(request *sms.BatchSendRequest) (*sms.BatchSendResp
     return jdResp, err
 }
 
-/* 短信发送回执接口。接口调用需要使用京东云统一鉴权的SDK方式接入，以下文档仅是接口出参、入参描述，并不是最终程序实现逻辑的范例，具体接口实现请查看SDK参考：https://docs.jdcloud.com/cn/text-message/java */
-func (c *SmsClient) StatusReport(request *sms.StatusReportRequest) (*sms.StatusReportResponse, error) {
+/* 查询房间实时在线人数:
+ */
+func (c *OpenjrtcClient) DescribeRoomOnlineUserNum(request *openjrtc.DescribeRoomOnlineUserNumRequest) (*openjrtc.DescribeRoomOnlineUserNumResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -87,7 +89,7 @@ func (c *SmsClient) StatusReport(request *sms.StatusReportRequest) (*sms.StatusR
         return nil, err
     }
 
-    jdResp := &sms.StatusReportResponse{}
+    jdResp := &openjrtc.DescribeRoomOnlineUserNumResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -97,8 +99,9 @@ func (c *SmsClient) StatusReport(request *sms.StatusReportRequest) (*sms.StatusR
     return jdResp, err
 }
 
-/* 短信回复接口。 接口调用需要使用京东云统一鉴权的SDK方式接入，以下文档仅是接口出参、入参描述，并不是最终程序实现逻辑的范例，具体接口实现请查看SDK参考：https://docs.jdcloud.com/cn/text-message/java */
-func (c *SmsClient) Reply(request *sms.ReplyRequest) (*sms.ReplyResponse, error) {
+/* 创建JRtc用户
+ */
+func (c *OpenjrtcClient) CreateUser(request *openjrtc.CreateUserRequest) (*openjrtc.CreateUserResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -107,7 +110,7 @@ func (c *SmsClient) Reply(request *sms.ReplyRequest) (*sms.ReplyResponse, error)
         return nil, err
     }
 
-    jdResp := &sms.ReplyResponse{}
+    jdResp := &openjrtc.CreateUserResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

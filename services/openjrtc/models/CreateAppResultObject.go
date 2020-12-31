@@ -17,11 +17,11 @@
 package models
 
 
-type Tag struct {
+type CreateAppResultObject struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* 应用ID (Optional) */
+    AppId string `json:"appId"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* 应用名称 (Optional) */
+    AppName string `json:"appName"`
 }

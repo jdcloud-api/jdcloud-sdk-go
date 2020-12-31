@@ -64,4 +64,7 @@ type PodSpec struct {
 
     /* 主网卡配置信息  */
     PrimaryNetworkInterface *NetworkInterfaceAttachmentSpec `json:"primaryNetworkInterface"`
+
+    /* 用户普通标签集合 (Optional) */
+    UserTags []Tag `json:"userTags"`
 }

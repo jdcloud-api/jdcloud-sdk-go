@@ -17,11 +17,22 @@
 package models
 
 
-type Tag struct {
+type AppInfoObject struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* 应用ID (Optional) */
+    AppId string `json:"appId"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* 应用名称 (Optional) */
+    AppName string `json:"appName"`
+
+    /* 应用状态: OPEN-启用, CLOSE-停用
+ (Optional) */
+    Status string `json:"status"`
+
+    /* 计费类型: Duration-按时长
+ (Optional) */
+    BillType string `json:"billType"`
+
+    /* 创建时间 (Optional) */
+    CreateTime string `json:"createTime"`
 }

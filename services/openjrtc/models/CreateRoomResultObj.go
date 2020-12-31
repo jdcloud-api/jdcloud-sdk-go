@@ -17,11 +17,17 @@
 package models
 
 
-type Tag struct {
+type CreateRoomResultObj struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* 房间ID (Optional) */
+    RoomId int64 `json:"roomId"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* 房间名称 (Optional) */
+    RoomName string `json:"roomName"`
+
+    /* appId (Optional) */
+    AppId string `json:"appId"`
+
+    /* JRtc用户ID(创建者ID) (Optional) */
+    PeerId int64 `json:"peerId"`
 }

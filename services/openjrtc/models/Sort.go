@@ -17,11 +17,11 @@
 package models
 
 
-type Tag struct {
+type Sort struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* 排序属性名 (Optional) */
+    Name string `json:"name"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* 排序方向 (Optional) */
+    Direction string `json:"direction"`
 }

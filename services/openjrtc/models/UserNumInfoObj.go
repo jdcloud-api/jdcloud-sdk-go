@@ -17,11 +17,17 @@
 package models
 
 
-type Tag struct {
+type UserNumInfoObj struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* 应用ID (Optional) */
+    AppId string `json:"appId"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* 房间ID (Optional) */
+    RoomId int64 `json:"roomId"`
+
+    /* 房间在线人数 (Optional) */
+    Number int `json:"number"`
+
+    /* 创建时间UTC (Optional) */
+    CreateTime string `json:"createTime"`
 }

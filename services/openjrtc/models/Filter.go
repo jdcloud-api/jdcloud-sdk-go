@@ -17,11 +17,24 @@
 package models
 
 
-type Tag struct {
+type Filter struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* 过滤器属性名  */
+    Name string `json:"name"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* 过滤器操作符,默认值为 eq
+enum:
+  - eq
+  - lt
+  - le
+  - gt
+  - ge
+  - ne
+  - in
+  - like
+ (Optional) */
+    Operator string `json:"operator"`
+
+    /* 过滤器属性值  */
+    Values []string `json:"values"`
 }

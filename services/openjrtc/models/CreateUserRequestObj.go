@@ -17,11 +17,17 @@
 package models
 
 
-type Tag struct {
+type CreateUserRequestObj struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* 应用ID (Optional) */
+    AppId string `json:"appId"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* 用户名称 (Optional) */
+    UserName string `json:"userName"`
+
+    /* 业务接入方的用户ID (Optional) */
+    UserId string `json:"userId"`
+
+    /* 是否临时用户 (Optional) */
+    Temporary bool `json:"temporary"`
 }

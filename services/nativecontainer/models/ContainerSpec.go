@@ -76,4 +76,7 @@ type ContainerSpec struct {
 
     /* 计费配置；如不指定，默认计费类型是后付费-按使用时常付费 (Optional) */
     Charge *charge.ChargeSpec `json:"charge"`
+
+    /* 用户普通标签集合 (Optional) */
+    UserTags []Tag `json:"userTags"`
 }

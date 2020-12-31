@@ -17,11 +17,26 @@
 package models
 
 
-type Tag struct {
+type CheckAuthInfo struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* appId (Optional) */
+    AppId string `json:"appId"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* appKey (Optional) */
+    AppKey string `json:"appKey"`
+
+    /* 用户id (Optional) */
+    UserId string `json:"userId"`
+
+    /* 会议号 (Optional) */
+    RoomId int64 `json:"roomId"`
+
+    /* 随机令牌 (Optional) */
+    Nonce string `json:"nonce"`
+
+    /* 时间戳-毫秒 (Optional) */
+    Timestamp int64 `json:"timestamp"`
+
+    /* token (Optional) */
+    Token string `json:"token"`
 }

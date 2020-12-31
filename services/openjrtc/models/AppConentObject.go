@@ -17,11 +17,20 @@
 package models
 
 
-type Tag struct {
+type AppConentObject struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* 当前页码 (Optional) */
+    PageNumber int `json:"pageNumber"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* 每页数量 (Optional) */
+    PageSize int `json:"pageSize"`
+
+    /* 查询总数 (Optional) */
+    TotalElements int `json:"totalElements"`
+
+    /* 总页数 (Optional) */
+    TotalPages int `json:"totalPages"`
+
+    /* 分页内容 (Optional) */
+    Content []AppInfoObject `json:"content"`
 }

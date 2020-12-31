@@ -17,11 +17,14 @@
 package models
 
 
-type Tag struct {
+type ContentRequest struct {
 
-    /* Tag键 (Optional) */
-    Key *string `json:"key"`
+    /* 类型只能为 jpg/png  */
+    FileType string `json:"fileType"`
 
-    /* Tag值 (Optional) */
-    Value *string `json:"value"`
+    /* 这里需要填写文件对应的base64编码  */
+    Value string `json:"value"`
+
+    /* 文件名称 (Optional) */
+    FileName string `json:"fileName"`
 }
