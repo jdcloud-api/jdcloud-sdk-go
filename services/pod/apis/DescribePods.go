@@ -36,7 +36,7 @@ type DescribePodsRequest struct {
     PageSize *int `json:"pageSize"`
 
     /* podId - pod ID，精确匹配，支持多个
-privateIpAddress - 主网卡IP地址，精确匹配，支持单个
+privateIpAddress - 主网卡IP地址，模糊匹配，支持单个
 az - 可用区，精确匹配，支持多个
 vpcId - 私有网络ID，精确匹配，支持多个
 phase - pod 状态，精确匹配，支持多个
@@ -74,7 +74,7 @@ func NewDescribePodsRequest(
  * param pageNumber: 页码；默认为1 (Optional)
  * param pageSize: 分页大小；默认为20；取值范围[10, 100] (Optional)
  * param filters: podId - pod ID，精确匹配，支持多个
-privateIpAddress - 主网卡IP地址，精确匹配，支持单个
+privateIpAddress - 主网卡IP地址，模糊匹配，支持单个
 az - 可用区，精确匹配，支持多个
 vpcId - 私有网络ID，精确匹配，支持多个
 phase - pod 状态，精确匹配，支持多个
@@ -135,7 +135,7 @@ func (r *DescribePodsRequest) SetPageSize(pageSize int) {
 }
 
 /* param filters: podId - pod ID，精确匹配，支持多个
-privateIpAddress - 主网卡IP地址，精确匹配，支持单个
+privateIpAddress - 主网卡IP地址，模糊匹配，支持单个
 az - 可用区，精确匹配，支持多个
 vpcId - 私有网络ID，精确匹配，支持多个
 phase - pod 状态，精确匹配，支持多个

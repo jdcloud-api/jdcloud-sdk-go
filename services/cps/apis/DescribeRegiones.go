@@ -25,7 +25,7 @@ type DescribeRegionesRequest struct {
 
     core.JDCloudRequest
 
-    /* 网络类型basic/vpc, 默认basic (Optional) */
+    /* 网络类型basic（基础网络）、vpc（私有网络）、retail（零售中台网络）, 默认basic (Optional) */
     NetworkType *string `json:"networkType"`
 }
 
@@ -47,7 +47,7 @@ func NewDescribeRegionesRequest(
 }
 
 /*
- * param networkType: 网络类型basic/vpc, 默认basic (Optional)
+ * param networkType: 网络类型basic（基础网络）、vpc（私有网络）、retail（零售中台网络）, 默认basic (Optional)
  */
 func NewDescribeRegionesRequestWithAllParams(
     networkType *string,
@@ -77,7 +77,7 @@ func NewDescribeRegionesRequestWithoutParam() *DescribeRegionesRequest {
     }
 }
 
-/* param networkType: 网络类型basic/vpc, 默认basic(Optional) */
+/* param networkType: 网络类型basic（基础网络）、vpc（私有网络）、retail（零售中台网络）, 默认basic(Optional) */
 func (r *DescribeRegionesRequest) SetNetworkType(networkType string) {
     r.NetworkType = &networkType
 }

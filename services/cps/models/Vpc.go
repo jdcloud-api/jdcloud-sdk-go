@@ -28,8 +28,14 @@ type Vpc struct {
     /* 私有网络名称 (Optional) */
     Name string `json:"name"`
 
-    /* 私有网络CIDR (Optional) */
+    /* 私有网络IPv4 CIDR (Optional) */
     Cidr string `json:"cidr"`
+
+    /* 私有网络IPv6 CIDR (Optional) */
+    Ipv6Cidr string `json:"ipv6Cidr"`
+
+    /* IPv6网关ID (Optional) */
+    Ipv6GatewayId string `json:"ipv6GatewayId"`
 
     /* 描述 (Optional) */
     Description string `json:"description"`

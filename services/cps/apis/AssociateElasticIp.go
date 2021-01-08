@@ -37,6 +37,12 @@ type AssociateElasticIpRequest struct {
 
     /* 弹性公网IPID  */
     ElasticIpId string `json:"elasticIpId"`
+
+    /* 私有IP (Optional) */
+    TargetIp *string `json:"targetIp"`
+
+    /* 主网口或辅网口的子网ID，多网口实例必填 (Optional) */
+    SubnetId *string `json:"subnetId"`
 }
 
 /*
@@ -72,12 +78,16 @@ func NewAssociateElasticIpRequest(
 如果多个请求使用了相同的clientToken，只会执行第一个请求，之后的请求直接返回第一个请求的结果<br/>
  (Optional)
  * param elasticIpId: 弹性公网IPID (Required)
+ * param targetIp: 私有IP (Optional)
+ * param subnetId: 主网口或辅网口的子网ID，多网口实例必填 (Optional)
  */
 func NewAssociateElasticIpRequestWithAllParams(
     regionId string,
     instanceId string,
     clientToken *string,
     elasticIpId string,
+    targetIp *string,
+    subnetId *string,
 ) *AssociateElasticIpRequest {
 
     return &AssociateElasticIpRequest{
@@ -91,6 +101,8 @@ func NewAssociateElasticIpRequestWithAllParams(
         InstanceId: instanceId,
         ClientToken: clientToken,
         ElasticIpId: elasticIpId,
+        TargetIp: targetIp,
+        SubnetId: subnetId,
     }
 }
 
@@ -127,6 +139,16 @@ func (r *AssociateElasticIpRequest) SetClientToken(clientToken string) {
 /* param elasticIpId: 弹性公网IPID(Required) */
 func (r *AssociateElasticIpRequest) SetElasticIpId(elasticIpId string) {
     r.ElasticIpId = elasticIpId
+}
+
+/* param targetIp: 私有IP(Optional) */
+func (r *AssociateElasticIpRequest) SetTargetIp(targetIp string) {
+    r.TargetIp = &targetIp
+}
+
+/* param subnetId: 主网口或辅网口的子网ID，多网口实例必填(Optional) */
+func (r *AssociateElasticIpRequest) SetSubnetId(subnetId string) {
+    r.SubnetId = &subnetId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

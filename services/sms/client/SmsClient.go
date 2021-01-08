@@ -40,7 +40,7 @@ func NewSmsClient(credential *core.Credential) *SmsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "sms",
-            Revision:    "1.3.2",
+            Revision:    "1.3.3",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }

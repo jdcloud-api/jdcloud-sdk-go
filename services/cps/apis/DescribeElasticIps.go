@@ -41,6 +41,15 @@ type DescribeElasticIpsRequest struct {
     /* 是否包含负载均衡 (Optional) */
     IncludeLB *string `json:"includeLB"`
 
+    /* 支付模式，取值为：prepaid_by_duration表示预付费，postpaid_by_duration表示按配置后付费 (Optional) */
+    ChargeMode *string `json:"chargeMode"`
+
+    /* 实例Id (Optional) */
+    InstanceId *string `json:"instanceId"`
+
+    /* 子网Id (Optional) */
+    SubnetId *string `json:"subnetId"`
+
     /* elasticIpId - 弹性公网IPID，精确匹配，支持多个<br/>
 elasticIp - 弹性公网IP，精确匹配，支持多个
  (Optional) */
@@ -73,6 +82,9 @@ func NewDescribeElasticIpsRequest(
  * param pageSize: 分页大小；默认为20；取值范围[20, 100] (Optional)
  * param status: 弹性公网IP状态，取值范围：associate、disassociate (Optional)
  * param includeLB: 是否包含负载均衡 (Optional)
+ * param chargeMode: 支付模式，取值为：prepaid_by_duration表示预付费，postpaid_by_duration表示按配置后付费 (Optional)
+ * param instanceId: 实例Id (Optional)
+ * param subnetId: 子网Id (Optional)
  * param filters: elasticIpId - 弹性公网IPID，精确匹配，支持多个<br/>
 elasticIp - 弹性公网IP，精确匹配，支持多个
  (Optional)
@@ -83,6 +95,9 @@ func NewDescribeElasticIpsRequestWithAllParams(
     pageSize *int,
     status *string,
     includeLB *string,
+    chargeMode *string,
+    instanceId *string,
+    subnetId *string,
     filters []common.Filter,
 ) *DescribeElasticIpsRequest {
 
@@ -98,6 +113,9 @@ func NewDescribeElasticIpsRequestWithAllParams(
         PageSize: pageSize,
         Status: status,
         IncludeLB: includeLB,
+        ChargeMode: chargeMode,
+        InstanceId: instanceId,
+        SubnetId: subnetId,
         Filters: filters,
     }
 }
@@ -138,6 +156,21 @@ func (r *DescribeElasticIpsRequest) SetStatus(status string) {
 /* param includeLB: 是否包含负载均衡(Optional) */
 func (r *DescribeElasticIpsRequest) SetIncludeLB(includeLB string) {
     r.IncludeLB = &includeLB
+}
+
+/* param chargeMode: 支付模式，取值为：prepaid_by_duration表示预付费，postpaid_by_duration表示按配置后付费(Optional) */
+func (r *DescribeElasticIpsRequest) SetChargeMode(chargeMode string) {
+    r.ChargeMode = &chargeMode
+}
+
+/* param instanceId: 实例Id(Optional) */
+func (r *DescribeElasticIpsRequest) SetInstanceId(instanceId string) {
+    r.InstanceId = &instanceId
+}
+
+/* param subnetId: 子网Id(Optional) */
+func (r *DescribeElasticIpsRequest) SetSubnetId(subnetId string) {
+    r.SubnetId = &subnetId
 }
 
 /* param filters: elasticIpId - 弹性公网IPID，精确匹配，支持多个<br/>

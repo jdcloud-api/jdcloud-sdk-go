@@ -28,6 +28,9 @@ type RouteTable struct {
     /* 私有网络ID (Optional) */
     VpcId string `json:"vpcId"`
 
+    /* 私有网络名称 (Optional) */
+    VpcName string `json:"vpcName"`
+
     /* 名称 (Optional) */
     Name string `json:"name"`
 

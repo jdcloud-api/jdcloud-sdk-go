@@ -19,8 +19,8 @@ package models
 
 type LiveStreamPublishInfo struct {
 
-    /* 推流域名 (Optional) */
-    PublishDomain string `json:"publishDomain"`
+    /* 流起始时间 (Optional) */
+    StartTime string `json:"startTime"`
 
     /* 应用名称 (Optional) */
     AppName string `json:"appName"`
@@ -28,15 +28,9 @@ type LiveStreamPublishInfo struct {
     /* 流名称 (Optional) */
     StreamName string `json:"streamName"`
 
-    /* 推流开始时间
-- UTC时间
-  格式:yyyy-MM-dd'T'HH:mm:ss'Z'
- (Optional) */
-    PublishUpTime string `json:"publishUpTime"`
+    /* 码率 (Optional) */
+    Bitrate float64 `json:"bitrate"`
 
-    /* 推流结束时刻
-- UTC时间
-  格式:yyyy-MM-dd'T'HH:mm:ss'Z'
- (Optional) */
-    PublishDownTime string `json:"publishDownTime"`
+    /* 帧率 (Optional) */
+    Framerate float64 `json:"framerate"`
 }

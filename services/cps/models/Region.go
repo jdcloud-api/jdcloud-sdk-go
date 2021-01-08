@@ -19,10 +19,10 @@ package models
 
 type Region struct {
 
-    /* 地域代码, 如 cn-east-1 (Optional) */
+    /* 地域代码, 如 cn-north-1 (Optional) */
     Region string `json:"region"`
 
-    /* 地域名称，如 华东一区 (Optional) */
+    /* 地域名称，如华北-北京 (Optional) */
     RegionName string `json:"regionName"`
 
     /* 可用区列表 (Optional) */

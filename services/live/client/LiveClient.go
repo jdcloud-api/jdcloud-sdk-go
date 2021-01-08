@@ -40,7 +40,7 @@ func NewLiveClient(credential *core.Credential) *LiveClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "live",
-            Revision:    "1.0.18",
+            Revision:    "1.0.19",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -497,6 +497,26 @@ func (c *LiveClient) StartLiveDomain(request *live.StartLiveDomainRequest) (*liv
     }
 
     jdResp := &live.StartLiveDomainResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询推流码率、帧率 */
+func (c *LiveClient) DescribeLiveStreamPublishInfoByPage(request *live.DescribeLiveStreamPublishInfoByPageRequest) (*live.DescribeLiveStreamPublishInfoByPageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DescribeLiveStreamPublishInfoByPageResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1662,6 +1682,26 @@ func (c *LiveClient) DescribeLiveTranscodeStreamNum(request *live.DescribeLiveTr
     }
 
     jdResp := &live.DescribeLiveTranscodeStreamNumResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询观看人数 */
+func (c *LiveClient) DescribeLiveStreamPlayInfoByPage(request *live.DescribeLiveStreamPlayInfoByPageRequest) (*live.DescribeLiveStreamPlayInfoByPageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DescribeLiveStreamPlayInfoByPageResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

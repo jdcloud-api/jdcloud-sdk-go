@@ -34,8 +34,8 @@ type ReinstallInstanceSpec struct {
     /* 是否保留数据盘数据, 取值为：yes、no  */
     KeepData string `json:"keepData"`
 
-    /* 数据盘RAID类型ID  */
-    DataRaidTypeId string `json:"dataRaidTypeId"`
+    /* 数据盘RAID类型ID (Optional) */
+    DataRaidTypeId *string `json:"dataRaidTypeId"`
 
     /* 密码  */
     Password string `json:"password"`

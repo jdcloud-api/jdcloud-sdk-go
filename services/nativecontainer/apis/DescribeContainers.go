@@ -36,13 +36,12 @@ type DescribeContainersRequest struct {
     PageSize *int `json:"pageSize"`
 
     /* containerId - 实例ID，精确匹配，支持多个
-privateIpAddress - 主网卡IP地址，精确匹配，支持单个
+privateIpAddress - 主网卡IP地址，模糊匹配，支持单个
 az - 可用区，精确匹配，支持多个
 vpcId - 私有网络ID，精确匹配，支持多个
 status - 容器状态，精确匹配，支持多个
 name - 容器名称，模糊匹配，支持单个
 subnetId - 子网ID，精确匹配，支持多个
-securityGroups - 安全组 id，精确匹配，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
 
@@ -75,13 +74,12 @@ func NewDescribeContainersRequest(
  * param pageNumber: 页码；默认为1 (Optional)
  * param pageSize: 分页大小；默认为20；取值范围[10, 100] (Optional)
  * param filters: containerId - 实例ID，精确匹配，支持多个
-privateIpAddress - 主网卡IP地址，精确匹配，支持单个
+privateIpAddress - 主网卡IP地址，模糊匹配，支持单个
 az - 可用区，精确匹配，支持多个
 vpcId - 私有网络ID，精确匹配，支持多个
 status - 容器状态，精确匹配，支持多个
 name - 容器名称，模糊匹配，支持单个
 subnetId - 子网ID，精确匹配，支持多个
-securityGroups - 安全组 id，精确匹配，支持多个
  (Optional)
  * param tags: Tag筛选条件 (Optional)
  */
@@ -137,13 +135,12 @@ func (r *DescribeContainersRequest) SetPageSize(pageSize int) {
 }
 
 /* param filters: containerId - 实例ID，精确匹配，支持多个
-privateIpAddress - 主网卡IP地址，精确匹配，支持单个
+privateIpAddress - 主网卡IP地址，模糊匹配，支持单个
 az - 可用区，精确匹配，支持多个
 vpcId - 私有网络ID，精确匹配，支持多个
 status - 容器状态，精确匹配，支持多个
 name - 容器名称，模糊匹配，支持单个
 subnetId - 子网ID，精确匹配，支持多个
-securityGroups - 安全组 id，精确匹配，支持多个
 (Optional) */
 func (r *DescribeContainersRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters

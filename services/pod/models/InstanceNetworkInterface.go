@@ -45,4 +45,7 @@ type InstanceNetworkInterface struct {
 
     /*  (Optional) */
     SecondaryIps []NetworkInterfacePrivateIp `json:"secondaryIps"`
+
+    /* 网卡IPv6地址 (Optional) */
+    Ipv6Addresses []string `json:"ipv6Addresses"`
 }

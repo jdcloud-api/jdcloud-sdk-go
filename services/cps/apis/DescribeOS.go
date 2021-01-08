@@ -31,7 +31,7 @@ type DescribeOSRequest struct {
     /* 实例类型，可调用接口（describeDeviceTypes）获取指定地域的实例类型，例如：cps.c.normal  */
     DeviceType string `json:"deviceType"`
 
-    /* 操作系统类型，取值范围：CentOS、Ubuntu (Optional) */
+    /* 操作系统类型，取值范围：CentOS、Ubuntu、Windows (Optional) */
     OsType *string `json:"osType"`
 }
 
@@ -61,7 +61,7 @@ func NewDescribeOSRequest(
 /*
  * param regionId: 地域ID，可调用接口（describeRegiones）获取云物理服务器支持的地域 (Required)
  * param deviceType: 实例类型，可调用接口（describeDeviceTypes）获取指定地域的实例类型，例如：cps.c.normal (Required)
- * param osType: 操作系统类型，取值范围：CentOS、Ubuntu (Optional)
+ * param osType: 操作系统类型，取值范围：CentOS、Ubuntu、Windows (Optional)
  */
 func NewDescribeOSRequestWithAllParams(
     regionId string,
@@ -105,7 +105,7 @@ func (r *DescribeOSRequest) SetDeviceType(deviceType string) {
     r.DeviceType = deviceType
 }
 
-/* param osType: 操作系统类型，取值范围：CentOS、Ubuntu(Optional) */
+/* param osType: 操作系统类型，取值范围：CentOS、Ubuntu、Windows(Optional) */
 func (r *DescribeOSRequest) SetOsType(osType string) {
     r.OsType = &osType
 }

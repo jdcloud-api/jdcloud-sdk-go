@@ -25,12 +25,21 @@ type SubnetSpec struct {
     /* 私有网络ID  */
     VpcId string `json:"vpcId"`
 
-    /* 子网的网络范围  */
+    /* 子网的IPv4网络范围  */
     Cidr string `json:"cidr"`
+
+    /* 子网的IPv6网络范围 (Optional) */
+    Ipv6Cidr *string `json:"ipv6Cidr"`
 
     /* 名称  */
     Name string `json:"name"`
 
     /* 描述  */
     Description string `json:"description"`
+
+    /* 子网的次要cidr (Optional) */
+    SecondaryCidr *string `json:"secondaryCidr"`
+
+    /* 子网的次要cidr名称 (Optional) */
+    SecondaryCidrName *string `json:"secondaryCidrName"`
 }
