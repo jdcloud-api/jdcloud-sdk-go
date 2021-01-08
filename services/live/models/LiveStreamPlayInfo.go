@@ -17,7 +17,7 @@
 package models
 
 
-type LiveStreamPublishInfo struct {
+type LiveStreamPlayInfo struct {
 
     /* 流起始时间 (Optional) */
     StartTime string `json:"startTime"`
@@ -28,9 +28,6 @@ type LiveStreamPublishInfo struct {
     /* 流名称 (Optional) */
     StreamName string `json:"streamName"`
 
-    /* 码率 (Optional) */
-    Bitrate float64 `json:"bitrate"`
-
-    /* 帧率 (Optional) */
-    Framerate float64 `json:"framerate"`
+    /* 观看人数 (Optional) */
+    PlayerCount int64 `json:"playerCount"`
 }

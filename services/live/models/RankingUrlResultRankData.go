@@ -31,6 +31,7 @@ type RankingUrlResultRankData struct {
  (Optional) */
     Pv int64 `json:"pv"`
 
-    /* 流量，单位：Byte (Optional) */
+    /* 流量，单位：Byte
+ (Optional) */
     Flow int64 `json:"flow"`
 }

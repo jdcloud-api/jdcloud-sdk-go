@@ -34,6 +34,9 @@ type DescribeLiveSnapshotDataRequest struct {
     /* 流名称 (Optional) */
     StreamName *string `json:"streamName"`
 
+    /* 截图模式：1表示采样截图；2表示关键帧截图(默认为2) (Optional) */
+    ShotMode *int `json:"shotMode"`
+
     /* 起始时间:
 - UTC时间
   格式: yyyy-MM-dd'T'HH:mm:ss'Z'
@@ -80,6 +83,7 @@ func NewDescribeLiveSnapshotDataRequest(
  * param publishDomain: 推流域名 (Optional)
  * param appName: 应用名称 (Optional)
  * param streamName: 流名称 (Optional)
+ * param shotMode: 截图模式：1表示采样截图；2表示关键帧截图(默认为2) (Optional)
  * param startTime: 起始时间:
 - UTC时间
   格式: yyyy-MM-dd'T'HH:mm:ss'Z'
@@ -97,6 +101,7 @@ func NewDescribeLiveSnapshotDataRequestWithAllParams(
     publishDomain *string,
     appName *string,
     streamName *string,
+    shotMode *int,
     startTime string,
     endTime *string,
 ) *DescribeLiveSnapshotDataRequest {
@@ -111,6 +116,7 @@ func NewDescribeLiveSnapshotDataRequestWithAllParams(
         PublishDomain: publishDomain,
         AppName: appName,
         StreamName: streamName,
+        ShotMode: shotMode,
         StartTime: startTime,
         EndTime: endTime,
     }
@@ -142,6 +148,11 @@ func (r *DescribeLiveSnapshotDataRequest) SetAppName(appName string) {
 /* param streamName: 流名称(Optional) */
 func (r *DescribeLiveSnapshotDataRequest) SetStreamName(streamName string) {
     r.StreamName = &streamName
+}
+
+/* param shotMode: 截图模式：1表示采样截图；2表示关键帧截图(默认为2)(Optional) */
+func (r *DescribeLiveSnapshotDataRequest) SetShotMode(shotMode int) {
+    r.ShotMode = &shotMode
 }
 
 /* param startTime: 起始时间:
