@@ -17,17 +17,11 @@
 package models
 
 
-type Keypair struct {
+type Policy struct {
 
-    /* 密钥对名称 (Optional) */
-    KeyName string `json:"keyName"`
+    /* 策略ID。 (Optional) */
+    PolicyId string `json:"policyId"`
 
-    /* 密钥对的指纹，根据 RFC4716 定义的公钥指纹格式，采用 MD5 信息摘要算法。 (Optional) */
-    KeyFingerprint string `json:"keyFingerprint"`
-
-    /* 创建时间 (Optional) */
-    CreateTime string `json:"createTime"`
-
-    /* 绑定了此密钥的所有虚机id (Optional) */
-    InstanceIds []string `json:"instanceIds"`
+    /* 策略类型。 (Optional) */
+    PolicyType string `json:"policyType"`
 }

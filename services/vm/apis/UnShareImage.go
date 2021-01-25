@@ -30,19 +30,21 @@ type UnShareImageRequest struct {
     /* 镜像ID  */
     ImageId string `json:"imageId"`
 
-    /* 需要取消的帐户 (Optional) */
+    /* 需要取消的帐户  */
     Pins []string `json:"pins"`
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param imageId: 镜像ID (Required)
+ * param pins: 需要取消的帐户 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewUnShareImageRequest(
     regionId string,
     imageId string,
+    pins []string,
 ) *UnShareImageRequest {
 
 	return &UnShareImageRequest{
@@ -54,13 +56,14 @@ func NewUnShareImageRequest(
 		},
         RegionId: regionId,
         ImageId: imageId,
+        Pins: pins,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param imageId: 镜像ID (Required)
- * param pins: 需要取消的帐户 (Optional)
+ * param pins: 需要取消的帐户 (Required)
  */
 func NewUnShareImageRequestWithAllParams(
     regionId string,
@@ -104,7 +107,7 @@ func (r *UnShareImageRequest) SetImageId(imageId string) {
     r.ImageId = imageId
 }
 
-/* param pins: 需要取消的帐户(Optional) */
+/* param pins: 需要取消的帐户(Required) */
 func (r *UnShareImageRequest) SetPins(pins []string) {
     r.Pins = pins
 }

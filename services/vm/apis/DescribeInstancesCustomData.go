@@ -22,7 +22,7 @@ import (
     common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
 
-type DescribeBriefInstancesRequest struct {
+type DescribeInstancesCustomDataRequest struct {
 
     core.JDCloudRequest
 
@@ -32,27 +32,16 @@ type DescribeBriefInstancesRequest struct {
     /* 页码；默认为1 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* 分页大小；默认为20；取值范围[10, 100] (Optional) */
+    /* 分页大小；默认为10；取值范围[1, 10] (Optional) */
     PageSize *int `json:"pageSize"`
-
-    /* Tag筛选条件 (Optional) */
-    Tags []vm.TagFilter `json:"tags"`
 
     /* instanceId - 云主机ID，精确匹配，支持多个
 privateIpAddress - 主网卡内网主IP地址，模糊匹配，支持多个
-az - 可用区，精确匹配，支持多个
 vpcId - 私有网络ID，精确匹配，支持多个
 status - 云主机状态，精确匹配，支持多个，<a href="http://docs.jdcloud.com/virtual-machines/api/vm_status">参考云主机状态</a>
-name - 云主机名称，模糊匹配，支持单个
 imageId - 镜像ID，精确匹配，支持多个
 networkInterfaceId - 弹性网卡ID，精确匹配，支持多个
 subnetId - 子网ID，精确匹配，支持多个
-agId - 使用可用组id，支持单个
-faultDomain - 错误域，支持多个
-dedicatedHostId - 专有宿主机ID，精确匹配，支持多个
-dedicatedPoolId - 专有宿主机池ID，精确匹配，支持多个
-instanceType - 实例规格，精确匹配，支持多个
-elasticIpAddress - 公网IP地址，精确匹配，支持单个
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
@@ -62,13 +51,13 @@ elasticIpAddress - 公网IP地址，精确匹配，支持单个
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeBriefInstancesRequest(
+func NewDescribeInstancesCustomDataRequest(
     regionId string,
-) *DescribeBriefInstancesRequest {
+) *DescribeInstancesCustomDataRequest {
 
-	return &DescribeBriefInstancesRequest{
+	return &DescribeInstancesCustomDataRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances:describeBriefInstances",
+			URL:     "/regions/{regionId}/instancesCustomData",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -80,36 +69,26 @@ func NewDescribeBriefInstancesRequest(
 /*
  * param regionId: 地域ID (Required)
  * param pageNumber: 页码；默认为1 (Optional)
- * param pageSize: 分页大小；默认为20；取值范围[10, 100] (Optional)
- * param tags: Tag筛选条件 (Optional)
+ * param pageSize: 分页大小；默认为10；取值范围[1, 10] (Optional)
  * param filters: instanceId - 云主机ID，精确匹配，支持多个
 privateIpAddress - 主网卡内网主IP地址，模糊匹配，支持多个
-az - 可用区，精确匹配，支持多个
 vpcId - 私有网络ID，精确匹配，支持多个
 status - 云主机状态，精确匹配，支持多个，<a href="http://docs.jdcloud.com/virtual-machines/api/vm_status">参考云主机状态</a>
-name - 云主机名称，模糊匹配，支持单个
 imageId - 镜像ID，精确匹配，支持多个
 networkInterfaceId - 弹性网卡ID，精确匹配，支持多个
 subnetId - 子网ID，精确匹配，支持多个
-agId - 使用可用组id，支持单个
-faultDomain - 错误域，支持多个
-dedicatedHostId - 专有宿主机ID，精确匹配，支持多个
-dedicatedPoolId - 专有宿主机池ID，精确匹配，支持多个
-instanceType - 实例规格，精确匹配，支持多个
-elasticIpAddress - 公网IP地址，精确匹配，支持单个
  (Optional)
  */
-func NewDescribeBriefInstancesRequestWithAllParams(
+func NewDescribeInstancesCustomDataRequestWithAllParams(
     regionId string,
     pageNumber *int,
     pageSize *int,
-    tags []vm.TagFilter,
     filters []common.Filter,
-) *DescribeBriefInstancesRequest {
+) *DescribeInstancesCustomDataRequest {
 
-    return &DescribeBriefInstancesRequest{
+    return &DescribeInstancesCustomDataRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances:describeBriefInstances",
+            URL:     "/regions/{regionId}/instancesCustomData",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -117,17 +96,16 @@ func NewDescribeBriefInstancesRequestWithAllParams(
         RegionId: regionId,
         PageNumber: pageNumber,
         PageSize: pageSize,
-        Tags: tags,
         Filters: filters,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeBriefInstancesRequestWithoutParam() *DescribeBriefInstancesRequest {
+func NewDescribeInstancesCustomDataRequestWithoutParam() *DescribeInstancesCustomDataRequest {
 
-    return &DescribeBriefInstancesRequest{
+    return &DescribeInstancesCustomDataRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances:describeBriefInstances",
+            URL:     "/regions/{regionId}/instancesCustomData",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -136,58 +114,45 @@ func NewDescribeBriefInstancesRequestWithoutParam() *DescribeBriefInstancesReque
 }
 
 /* param regionId: 地域ID(Required) */
-func (r *DescribeBriefInstancesRequest) SetRegionId(regionId string) {
+func (r *DescribeInstancesCustomDataRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param pageNumber: 页码；默认为1(Optional) */
-func (r *DescribeBriefInstancesRequest) SetPageNumber(pageNumber int) {
+func (r *DescribeInstancesCustomDataRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
-/* param pageSize: 分页大小；默认为20；取值范围[10, 100](Optional) */
-func (r *DescribeBriefInstancesRequest) SetPageSize(pageSize int) {
+/* param pageSize: 分页大小；默认为10；取值范围[1, 10](Optional) */
+func (r *DescribeInstancesCustomDataRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
-}
-
-/* param tags: Tag筛选条件(Optional) */
-func (r *DescribeBriefInstancesRequest) SetTags(tags []vm.TagFilter) {
-    r.Tags = tags
 }
 
 /* param filters: instanceId - 云主机ID，精确匹配，支持多个
 privateIpAddress - 主网卡内网主IP地址，模糊匹配，支持多个
-az - 可用区，精确匹配，支持多个
 vpcId - 私有网络ID，精确匹配，支持多个
 status - 云主机状态，精确匹配，支持多个，<a href="http://docs.jdcloud.com/virtual-machines/api/vm_status">参考云主机状态</a>
-name - 云主机名称，模糊匹配，支持单个
 imageId - 镜像ID，精确匹配，支持多个
 networkInterfaceId - 弹性网卡ID，精确匹配，支持多个
 subnetId - 子网ID，精确匹配，支持多个
-agId - 使用可用组id，支持单个
-faultDomain - 错误域，支持多个
-dedicatedHostId - 专有宿主机ID，精确匹配，支持多个
-dedicatedPoolId - 专有宿主机池ID，精确匹配，支持多个
-instanceType - 实例规格，精确匹配，支持多个
-elasticIpAddress - 公网IP地址，精确匹配，支持单个
 (Optional) */
-func (r *DescribeBriefInstancesRequest) SetFilters(filters []common.Filter) {
+func (r *DescribeInstancesCustomDataRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeBriefInstancesRequest) GetRegionId() string {
+func (r DescribeInstancesCustomDataRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeBriefInstancesResponse struct {
+type DescribeInstancesCustomDataResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeBriefInstancesResult `json:"result"`
+    Result DescribeInstancesCustomDataResult `json:"result"`
 }
 
-type DescribeBriefInstancesResult struct {
-    Instances []vm.BriefInstance `json:"instances"`
+type DescribeInstancesCustomDataResult struct {
+    CustomData []vm.CustomData `json:"customData"`
     TotalCount int `json:"totalCount"`
 }

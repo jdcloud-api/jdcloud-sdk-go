@@ -49,7 +49,7 @@ faultDomain - 错误域，支持多个
 dedicatedHostId - 专有宿主机ID，精确匹配，支持多个
 dedicatedPoolId - 专有宿主机池ID，精确匹配，支持多个
 instanceType - 实例规格，精确匹配，支持多个
-elasticIpAddress - 公网IP地址，精确匹配，支持单个
+elasticIpAddress - 公网IP地址，精确匹配，支持单个。该条件会将公网IP转换成networkInterfaceId进行查询，所以与networkInterfaceId为或者的关系。
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
@@ -92,7 +92,7 @@ faultDomain - 错误域，支持多个
 dedicatedHostId - 专有宿主机ID，精确匹配，支持多个
 dedicatedPoolId - 专有宿主机池ID，精确匹配，支持多个
 instanceType - 实例规格，精确匹配，支持多个
-elasticIpAddress - 公网IP地址，精确匹配，支持单个
+elasticIpAddress - 公网IP地址，精确匹配，支持单个。该条件会将公网IP转换成networkInterfaceId进行查询，所以与networkInterfaceId为或者的关系。
  (Optional)
  */
 func NewDescribeInstancesRequestWithAllParams(
@@ -158,7 +158,7 @@ faultDomain - 错误域，支持多个
 dedicatedHostId - 专有宿主机ID，精确匹配，支持多个
 dedicatedPoolId - 专有宿主机池ID，精确匹配，支持多个
 instanceType - 实例规格，精确匹配，支持多个
-elasticIpAddress - 公网IP地址，精确匹配，支持单个
+elasticIpAddress - 公网IP地址，精确匹配，支持单个。该条件会将公网IP转换成networkInterfaceId进行查询，所以与networkInterfaceId为或者的关系。
 (Optional) */
 func (r *DescribeInstancesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters

@@ -81,4 +81,7 @@ type InternalInstance struct {
 
     /* 实例的物理机 IP (Optional) */
     HostIp string `json:"hostIp"`
+
+    /* 机架信息 (Optional) */
+    Rack string `json:"rack"`
 }

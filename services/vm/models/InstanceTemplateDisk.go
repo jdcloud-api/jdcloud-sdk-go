@@ -28,6 +28,9 @@ type InstanceTemplateDisk struct {
     /* 创建云硬盘的快照ID (Optional) */
     SnapshotId string `json:"snapshotId"`
 
+    /* 策略ID (Optional) */
+    PolicyId string `json:"policyId"`
+
     /* 是否加密，false:(默认)不加密；true:加密 (Optional) */
     Encrypt bool `json:"encrypt"`
 

@@ -28,6 +28,9 @@ type InstanceTemplateDiskSpec struct {
     /* 用于创建云硬盘的快照ID (Optional) */
     SnapshotId *string `json:"snapshotId"`
 
+    /* 策略ID (Optional) */
+    PolicyId *string `json:"policyId"`
+
     /* 用于指定是否加密，false:(默认)不加密；true:加密，未指定快照时生效，只有打包创建2代主机的时候才允许创建加密数据盘。 (Optional) */
     Encrypt *bool `json:"encrypt"`
 

@@ -40,7 +40,7 @@ func NewVmClient(credential *core.Credential) *VmClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vm",
-            Revision:    "1.3.0",
+            Revision:    "1.3.4",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -69,6 +69,26 @@ func (c *VmClient) DescribeImageMembers(request *vm.DescribeImageMembersRequest)
     }
 
     jdResp := &vm.DescribeImageMembersResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 批量查询云主机用户自定义元数据 */
+func (c *VmClient) DescribeInstancesCustomData(request *vm.DescribeInstancesCustomDataRequest) (*vm.DescribeInstancesCustomDataResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.DescribeInstancesCustomDataResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -162,6 +182,48 @@ func (c *VmClient) ShareImage(request *vm.ShareImageRequest) (*vm.ShareImageResp
     }
 
     jdResp := &vm.ShareImageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询模板自定义元数据
+ */
+func (c *VmClient) DescribeInstanceTemplatesCustomdata(request *vm.DescribeInstanceTemplatesCustomdataRequest) (*vm.DescribeInstanceTemplatesCustomdataResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.DescribeInstanceTemplatesCustomdataResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 绑定ssh密钥对。
+ */
+func (c *VmClient) AttachKeypair(request *vm.AttachKeypairRequest) (*vm.AttachKeypairResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.AttachKeypairResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1103,6 +1165,27 @@ func (c *VmClient) DescribeInstanceStatus(request *vm.DescribeInstanceStatusRequ
     }
 
     jdResp := &vm.DescribeInstanceStatusResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 解绑ssh密钥对。
+ */
+func (c *VmClient) DetachKeypair(request *vm.DetachKeypairRequest) (*vm.DetachKeypairResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.DetachKeypairResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

@@ -20,76 +20,76 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type ShareImageRequest struct {
+type DetachKeypairRequest struct {
 
     core.JDCloudRequest
 
     /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /* 镜像ID  */
-    ImageId string `json:"imageId"`
+    /* 密钥名称  */
+    KeyName string `json:"keyName"`
 
-    /* 需要共享的帐户  */
-    Pins []string `json:"pins"`
+    /* 虚机Id  */
+    InstanceIds []string `json:"instanceIds"`
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param imageId: 镜像ID (Required)
- * param pins: 需要共享的帐户 (Required)
+ * param keyName: 密钥名称 (Required)
+ * param instanceIds: 虚机Id (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewShareImageRequest(
+func NewDetachKeypairRequest(
     regionId string,
-    imageId string,
-    pins []string,
-) *ShareImageRequest {
+    keyName string,
+    instanceIds []string,
+) *DetachKeypairRequest {
 
-	return &ShareImageRequest{
+	return &DetachKeypairRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/images/{imageId}:share",
+			URL:     "/regions/{regionId}/keypairs/{keyName}:detach",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        ImageId: imageId,
-        Pins: pins,
+        KeyName: keyName,
+        InstanceIds: instanceIds,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param imageId: 镜像ID (Required)
- * param pins: 需要共享的帐户 (Required)
+ * param keyName: 密钥名称 (Required)
+ * param instanceIds: 虚机Id (Required)
  */
-func NewShareImageRequestWithAllParams(
+func NewDetachKeypairRequestWithAllParams(
     regionId string,
-    imageId string,
-    pins []string,
-) *ShareImageRequest {
+    keyName string,
+    instanceIds []string,
+) *DetachKeypairRequest {
 
-    return &ShareImageRequest{
+    return &DetachKeypairRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/images/{imageId}:share",
+            URL:     "/regions/{regionId}/keypairs/{keyName}:detach",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        ImageId: imageId,
-        Pins: pins,
+        KeyName: keyName,
+        InstanceIds: instanceIds,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewShareImageRequestWithoutParam() *ShareImageRequest {
+func NewDetachKeypairRequestWithoutParam() *DetachKeypairRequest {
 
-    return &ShareImageRequest{
+    return &DetachKeypairRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/images/{imageId}:share",
+            URL:     "/regions/{regionId}/keypairs/{keyName}:detach",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -98,31 +98,33 @@ func NewShareImageRequestWithoutParam() *ShareImageRequest {
 }
 
 /* param regionId: 地域ID(Required) */
-func (r *ShareImageRequest) SetRegionId(regionId string) {
+func (r *DetachKeypairRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param imageId: 镜像ID(Required) */
-func (r *ShareImageRequest) SetImageId(imageId string) {
-    r.ImageId = imageId
+/* param keyName: 密钥名称(Required) */
+func (r *DetachKeypairRequest) SetKeyName(keyName string) {
+    r.KeyName = keyName
 }
 
-/* param pins: 需要共享的帐户(Required) */
-func (r *ShareImageRequest) SetPins(pins []string) {
-    r.Pins = pins
+/* param instanceIds: 虚机Id(Required) */
+func (r *DetachKeypairRequest) SetInstanceIds(instanceIds []string) {
+    r.InstanceIds = instanceIds
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r ShareImageRequest) GetRegionId() string {
+func (r DetachKeypairRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type ShareImageResponse struct {
+type DetachKeypairResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result ShareImageResult `json:"result"`
+    Result DetachKeypairResult `json:"result"`
 }
 
-type ShareImageResult struct {
+type DetachKeypairResult struct {
+    SuccessInstanceId []string `json:"successInstanceId"`
+    FailInstanceId []string `json:"failInstanceId"`
 }
