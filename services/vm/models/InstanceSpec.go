@@ -37,8 +37,17 @@ type InstanceSpec struct {
     /* 镜像ID。可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeimages">DescribeImages</a>接口获得指定地域的镜像信息。 (Optional) */
     ImageId *string `json:"imageId"`
 
-    /* 云主机名称，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。  */
+    /* 云主机名称，不为空且只允许中文、数字、大小写字母、英文下划线（_）、连字符（-）及点（.），不能以（.）作为首尾，长度为2~128个字符。
+批量创建多台云主机时，可在name中非首位位置以[start_number]格式来设置有序name。start_number为起始序号，取值范围[0,9999]。例如：name设置为“instance-[000]-ops”，则第一台主机name为“instance-000-ops”，第二台主机name为“instance-001-ops”。再如：name设置为“instance-[0]-ops”，则第一台主机name为“instance-0-ops”，第二台主机name为“instance-1-ops”。
+  */
     Name string `json:"name"`
+
+    /* 云主机hostname，若不指定hostname，则hostname默认使用云主机名称name，但是会以RFC 952和RFC 1123命名规范做一定转义。
+Windows Server系统：长度为2-15个字符，允许大小写字母、数字或连字符（-）。不能以连字符（-）开头或结尾，不能连续使用连字符（-），也不能全部使用数字。不支持点号（.）。
+Linux系统：长度为2-64个字符，允许支持多个点号，点之间为一段，每段允许使用大小写字母、数字或连字符（-），但不能连续使用点号（.）或连字符（-），不能以点号（.）或连字符（-）开头或结尾。
+批量创建多台云主机时，可在hostname中非首位位置以[start_number]格式来设置有序hostname。start_number为起始序号，取值范围[0,9999]。例如：hostname设置为“instance-[000]-ops”，则第一台主机hostname为“instance-000-ops”，第二台主机hostname为“instance-001-ops”。再如：hostname设置为“instance-[0]-ops”，则第一台主机hostname为“instance-0-ops”，第二台主机hostname为“instance-1-ops”。批量创建时若不指定起始序号，则会默认追加从1开始的数字，例如批量创建两台虚拟机，且指定hostname是test，则hostname默认是test1，test2。
+ (Optional) */
+    Hostname *string `json:"hostname"`
 
     /* 密码，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional) */
     Password *string `json:"password"`
@@ -64,6 +73,11 @@ type InstanceSpec struct {
 打包创建弹性公网IP的情况下，若公网IP的计费方式没有指定为按用量计费，那么公网IP计费方式只能与云主机保持一致。
  (Optional) */
     Charge *charge.ChargeSpec `json:"charge"`
+
+    /* 用户自定义元数据信息，key-value键值对总数量不超过40对，其中有效键值对数量不超过20，无效键值对数量不超过20对。不区分大小写。
+注意：key不要以连字符(-)结尾，否则此key不生效。
+ (Optional) */
+    Metadata []Metadata `json:"metadata"`
 
     /* 元数据信息，目前只支持传入一个key为"launch-script"，表示首次启动脚本。value为base64格式，编码前数据不能大于16KB。
 launch-script：linux系统支持bash和python，编码前须分别以 #!/bin/bash 和 #!/usr/bin/env python 作为内容首行;
@@ -97,4 +111,13 @@ launch-script：windows系统支持bat和powershell，编码前须分别以 <cmd
 
     /* 关机模式，只支持云盘做系统盘的按配置计费云主机。keepCharging：关机后继续计费；stopCharging：关机后停止计费。 (Optional) */
     ChargeOnStopped *string `json:"chargeOnStopped"`
+
+    /* 自动镜像策略ID。 (Optional) */
+    AutoImagePolicyId *string `json:"autoImagePolicyId"`
+
+    /* 当存在密钥时，是否同时使用密码登录，"yes"为使用，"no"为不使用，""默认为"yes" (Optional) */
+    PasswordAuth *string `json:"passwordAuth"`
+
+    /* 继承镜像中的登录验证方式，"yes"为使用，"no"为不使用，""默认为"no" (Optional) */
+    ImageInherit *string `json:"imageInherit"`
 }

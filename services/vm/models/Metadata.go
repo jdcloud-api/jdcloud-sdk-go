@@ -17,17 +17,11 @@
 package models
 
 
-type Keypair struct {
+type Metadata struct {
 
-    /* 密钥对名称 (Optional) */
-    KeyName string `json:"keyName"`
+    /* 键，最大长度256，支持全字符 (Optional) */
+    Key *string `json:"key"`
 
-    /* 密钥对的指纹，根据 RFC4716 定义的公钥指纹格式，采用 MD5 信息摘要算法。 (Optional) */
-    KeyFingerprint string `json:"keyFingerprint"`
-
-    /* 创建时间 (Optional) */
-    CreateTime string `json:"createTime"`
-
-    /* 绑定了此密钥的所有虚机id (Optional) */
-    InstanceIds []string `json:"instanceIds"`
+    /* 值，最大长度16k，支持全字符 (Optional) */
+    Value *string `json:"value"`
 }

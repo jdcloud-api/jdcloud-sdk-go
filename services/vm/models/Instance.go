@@ -27,6 +27,9 @@ type Instance struct {
     /* 云主机名称 (Optional) */
     InstanceName string `json:"instanceName"`
 
+    /* 云主机hostname (Optional) */
+    Hostname string `json:"hostname"`
+
     /* 实例规格 (Optional) */
     InstanceType string `json:"instanceType"`
 
@@ -89,4 +92,7 @@ type Instance struct {
 
     /* 关机模式，只支持云盘做系统盘的按配置计费云主机。keepCharging：关机后继续计费；stopCharging：关机后停止计费。 (Optional) */
     ChargeOnStopped string `json:"chargeOnStopped"`
+
+    /* 策略信息 (Optional) */
+    Policies []Policy `json:"policies"`
 }

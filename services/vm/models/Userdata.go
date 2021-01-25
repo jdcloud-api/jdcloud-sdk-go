@@ -19,9 +19,9 @@ package models
 
 type Userdata struct {
 
-    /* 键 (Optional) */
+    /* 键，最大长度48字符 (Optional) */
     Key *string `json:"key"`
 
-    /* 值 (Optional) */
+    /* 值，最大长度21848字符 (Optional) */
     Value *string `json:"value"`
 }

@@ -34,6 +34,9 @@ type BriefInstanceDiskAttachment struct {
     /* 本地磁盘配置 (Optional) */
     LocalDisk LocalDisk `json:"localDisk"`
 
+    /* 云硬盘配置 (Optional) */
+    CloudDisk LightCloudDiskInfo `json:"cloudDisk"`
+
     /* 数据盘逻辑挂载点，取值范围：vda,vdb,vdc,vdd,vde,vdf,vdg,vdh,vdi,vmj,vdk,vdl,vdm (Optional) */
     DeviceName string `json:"deviceName"`
 

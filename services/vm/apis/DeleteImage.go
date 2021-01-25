@@ -29,6 +29,9 @@ type DeleteImageRequest struct {
 
     /* 镜像ID  */
     ImageId string `json:"imageId"`
+
+    /* 删除镜像是否删除关联的快照，默认为false；如果指定为true, 将会删除镜像关联的快照。 (Optional) */
+    DeleteSnapshot *bool `json:"deleteSnapshot"`
 }
 
 /*
@@ -57,10 +60,12 @@ func NewDeleteImageRequest(
 /*
  * param regionId: 地域ID (Required)
  * param imageId: 镜像ID (Required)
+ * param deleteSnapshot: 删除镜像是否删除关联的快照，默认为false；如果指定为true, 将会删除镜像关联的快照。 (Optional)
  */
 func NewDeleteImageRequestWithAllParams(
     regionId string,
     imageId string,
+    deleteSnapshot *bool,
 ) *DeleteImageRequest {
 
     return &DeleteImageRequest{
@@ -72,6 +77,7 @@ func NewDeleteImageRequestWithAllParams(
         },
         RegionId: regionId,
         ImageId: imageId,
+        DeleteSnapshot: deleteSnapshot,
     }
 }
 
@@ -96,6 +102,11 @@ func (r *DeleteImageRequest) SetRegionId(regionId string) {
 /* param imageId: 镜像ID(Required) */
 func (r *DeleteImageRequest) SetImageId(imageId string) {
     r.ImageId = imageId
+}
+
+/* param deleteSnapshot: 删除镜像是否删除关联的快照，默认为false；如果指定为true, 将会删除镜像关联的快照。(Optional) */
+func (r *DeleteImageRequest) SetDeleteSnapshot(deleteSnapshot bool) {
+    r.DeleteSnapshot = &deleteSnapshot
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

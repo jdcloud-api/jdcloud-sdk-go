@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    vm "github.com/jdcloud-api/jdcloud-sdk-go/services/vm/models"
 )
 
 type ModifyInstanceAttributeRequest struct {
@@ -30,11 +31,29 @@ type ModifyInstanceAttributeRequest struct {
     /* 云主机ID  */
     InstanceId string `json:"instanceId"`
 
-    /* 名称，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional) */
+    /* 名称，不为空且只允许中文、数字、大小写字母、英文下划线（_）、中划线（-）及点（.），不能以（.）作为首尾，长度为2~128个字符 (Optional) */
     Name *string `json:"name"`
 
     /* 描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional) */
     Description *string `json:"description"`
+
+    /* 云主机hostname，若不指定hostname，则hostname默认使用云主机名称name，但是会以RFC 952和RFC 1123命名规范做一定转义
+Windows Server系统：长度为2-15个字符，允许大小写字母、数字或连字符（-）。不能以连字符（-）开头或结尾，不能连续使用连字符（-），也不能全部使用数字。不支持点号（.）。
+Linux系统：长度为2-64个字符，允许支持多个点号，点之间为一段，每段允许使用大小写字母、数字或连字符（-），但不能连续使用点号（.）或连字符（-），不能以点号（.）或连字符（-）开头或结尾。
+hostname修改后，重启云主机hostname生效
+ (Optional) */
+    Hostname *string `json:"hostname"`
+
+    /* 用户自定义元数据信息，key-value 键值对总数量不超过40，其中更新和新增键值对总数量不超过20对，删除的键值对总数量不超过20对。不区分大小写。
+如key已有认为是更新value；如key不存在认为是新增键值对；如key后面有连字符(-)，比如key-，则删除此key。
+ (Optional) */
+    Metadata []vm.Metadata `json:"metadata"`
+
+    /* 元数据信息，目前只支持传入一个key为"launch-script"，表示首次启动脚本。value为base64格式。
+launch-script：linux系统支持bash和python，编码前须分别以 #!/bin/bash 和 #!/usr/bin/env python 作为内容首行;
+launch-script：windows系统支持bat和powershell，编码前须分别以 <cmd></cmd> 和 <powershell></powershell> 作为内容首、尾行。
+ (Optional) */
+    Userdata []vm.Userdata `json:"userdata"`
 }
 
 /*
@@ -63,14 +82,29 @@ func NewModifyInstanceAttributeRequest(
 /*
  * param regionId: 地域ID (Required)
  * param instanceId: 云主机ID (Required)
- * param name: 名称，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional)
+ * param name: 名称，不为空且只允许中文、数字、大小写字母、英文下划线（_）、中划线（-）及点（.），不能以（.）作为首尾，长度为2~128个字符 (Optional)
  * param description: 描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional)
+ * param hostname: 云主机hostname，若不指定hostname，则hostname默认使用云主机名称name，但是会以RFC 952和RFC 1123命名规范做一定转义
+Windows Server系统：长度为2-15个字符，允许大小写字母、数字或连字符（-）。不能以连字符（-）开头或结尾，不能连续使用连字符（-），也不能全部使用数字。不支持点号（.）。
+Linux系统：长度为2-64个字符，允许支持多个点号，点之间为一段，每段允许使用大小写字母、数字或连字符（-），但不能连续使用点号（.）或连字符（-），不能以点号（.）或连字符（-）开头或结尾。
+hostname修改后，重启云主机hostname生效
+ (Optional)
+ * param metadata: 用户自定义元数据信息，key-value 键值对总数量不超过40，其中更新和新增键值对总数量不超过20对，删除的键值对总数量不超过20对。不区分大小写。
+如key已有认为是更新value；如key不存在认为是新增键值对；如key后面有连字符(-)，比如key-，则删除此key。
+ (Optional)
+ * param userdata: 元数据信息，目前只支持传入一个key为"launch-script"，表示首次启动脚本。value为base64格式。
+launch-script：linux系统支持bash和python，编码前须分别以 #!/bin/bash 和 #!/usr/bin/env python 作为内容首行;
+launch-script：windows系统支持bat和powershell，编码前须分别以 <cmd></cmd> 和 <powershell></powershell> 作为内容首、尾行。
+ (Optional)
  */
 func NewModifyInstanceAttributeRequestWithAllParams(
     regionId string,
     instanceId string,
     name *string,
     description *string,
+    hostname *string,
+    metadata []vm.Metadata,
+    userdata []vm.Userdata,
 ) *ModifyInstanceAttributeRequest {
 
     return &ModifyInstanceAttributeRequest{
@@ -84,6 +118,9 @@ func NewModifyInstanceAttributeRequestWithAllParams(
         InstanceId: instanceId,
         Name: name,
         Description: description,
+        Hostname: hostname,
+        Metadata: metadata,
+        Userdata: userdata,
     }
 }
 
@@ -110,7 +147,7 @@ func (r *ModifyInstanceAttributeRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param name: 名称，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。(Optional) */
+/* param name: 名称，不为空且只允许中文、数字、大小写字母、英文下划线（_）、中划线（-）及点（.），不能以（.）作为首尾，长度为2~128个字符(Optional) */
 func (r *ModifyInstanceAttributeRequest) SetName(name string) {
     r.Name = &name
 }
@@ -118,6 +155,30 @@ func (r *ModifyInstanceAttributeRequest) SetName(name string) {
 /* param description: 描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。(Optional) */
 func (r *ModifyInstanceAttributeRequest) SetDescription(description string) {
     r.Description = &description
+}
+
+/* param hostname: 云主机hostname，若不指定hostname，则hostname默认使用云主机名称name，但是会以RFC 952和RFC 1123命名规范做一定转义
+Windows Server系统：长度为2-15个字符，允许大小写字母、数字或连字符（-）。不能以连字符（-）开头或结尾，不能连续使用连字符（-），也不能全部使用数字。不支持点号（.）。
+Linux系统：长度为2-64个字符，允许支持多个点号，点之间为一段，每段允许使用大小写字母、数字或连字符（-），但不能连续使用点号（.）或连字符（-），不能以点号（.）或连字符（-）开头或结尾。
+hostname修改后，重启云主机hostname生效
+(Optional) */
+func (r *ModifyInstanceAttributeRequest) SetHostname(hostname string) {
+    r.Hostname = &hostname
+}
+
+/* param metadata: 用户自定义元数据信息，key-value 键值对总数量不超过40，其中更新和新增键值对总数量不超过20对，删除的键值对总数量不超过20对。不区分大小写。
+如key已有认为是更新value；如key不存在认为是新增键值对；如key后面有连字符(-)，比如key-，则删除此key。
+(Optional) */
+func (r *ModifyInstanceAttributeRequest) SetMetadata(metadata []vm.Metadata) {
+    r.Metadata = metadata
+}
+
+/* param userdata: 元数据信息，目前只支持传入一个key为"launch-script"，表示首次启动脚本。value为base64格式。
+launch-script：linux系统支持bash和python，编码前须分别以 #!/bin/bash 和 #!/usr/bin/env python 作为内容首行;
+launch-script：windows系统支持bat和powershell，编码前须分别以 <cmd></cmd> 和 <powershell></powershell> 作为内容首、尾行。
+(Optional) */
+func (r *ModifyInstanceAttributeRequest) SetUserdata(userdata []vm.Userdata) {
+    r.Userdata = userdata
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

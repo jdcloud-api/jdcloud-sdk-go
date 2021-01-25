@@ -17,17 +17,14 @@
 package models
 
 
-type Keypair struct {
+type CustomData struct {
 
-    /* 密钥对名称 (Optional) */
-    KeyName string `json:"keyName"`
+    /* 云主机ID (Optional) */
+    InstanceId string `json:"instanceId"`
 
-    /* 密钥对的指纹，根据 RFC4716 定义的公钥指纹格式，采用 MD5 信息摘要算法。 (Optional) */
-    KeyFingerprint string `json:"keyFingerprint"`
+    /* 用户自定义元数据信息 key-value对，key、value不区分大小写 (Optional) */
+    Metadata []Metadata `json:"metadata"`
 
-    /* 创建时间 (Optional) */
-    CreateTime string `json:"createTime"`
-
-    /* 绑定了此密钥的所有虚机id (Optional) */
-    InstanceIds []string `json:"instanceIds"`
+    /* 元数据信息，目前只支持传入一个key为"launch-script"，表示首次启动脚本。vaule以base64编码返回 (Optional) */
+    Userdata []Userdata `json:"userdata"`
 }

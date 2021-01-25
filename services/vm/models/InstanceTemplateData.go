@@ -48,4 +48,13 @@ type InstanceTemplateData struct {
 
     /* 停机不计费的标志， keepCharging(默认)：关机后继续计费；stopCharging：关机后停止计费。 (Optional) */
     ChargeOnStopped string `json:"chargeOnStopped"`
+
+    /* 自动镜像策略ID (Optional) */
+    AutoImagePolicyId string `json:"autoImagePolicyId"`
+
+    /* 是否使用密码 (Optional) */
+    PasswordAuth string `json:"passwordAuth"`
+
+    /* 是否继承镜像密码密钥 (Optional) */
+    ImageInherit string `json:"imageInherit"`
 }

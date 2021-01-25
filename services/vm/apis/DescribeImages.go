@@ -43,6 +43,9 @@ type DescribeImagesRequest struct {
     /* 镜像ID列表，如果指定了此参数，其它参数可为空 (Optional) */
     Ids []string `json:"ids"`
 
+    /* 根据镜像名称模糊查找 (Optional) */
+    ImageName *string `json:"imageName"`
+
     /* 镜像支持的系统盘类型，[localDisk,cloudDisk] (Optional) */
     RootDeviceType *string `json:"rootDeviceType"`
 
@@ -86,6 +89,7 @@ func NewDescribeImagesRequest(
  * param offline: 是否下线，默认值为false；imageSource为public或者thirdparty时，此参数才有意义，其它情况下此参数无效；指定镜像ID查询时，此参数无效 (Optional)
  * param platform: 操作系统平台，取值范围：Windows Server、CentOS、Ubuntu (Optional)
  * param ids: 镜像ID列表，如果指定了此参数，其它参数可为空 (Optional)
+ * param imageName: 根据镜像名称模糊查找 (Optional)
  * param rootDeviceType: 镜像支持的系统盘类型，[localDisk,cloudDisk] (Optional)
  * param launchPermission: 镜像的使用权限[all, specifiedUsers，ownerOnly]，可选参数，仅当imageSource取值private时有效 (Optional)
  * param status: <a href="http://docs.jdcloud.com/virtual-machines/api/image_status">参考镜像状态</a> (Optional)
@@ -99,6 +103,7 @@ func NewDescribeImagesRequestWithAllParams(
     offline *bool,
     platform *string,
     ids []string,
+    imageName *string,
     rootDeviceType *string,
     launchPermission *string,
     status *string,
@@ -119,6 +124,7 @@ func NewDescribeImagesRequestWithAllParams(
         Offline: offline,
         Platform: platform,
         Ids: ids,
+        ImageName: imageName,
         RootDeviceType: rootDeviceType,
         LaunchPermission: launchPermission,
         Status: status,
@@ -168,6 +174,11 @@ func (r *DescribeImagesRequest) SetPlatform(platform string) {
 /* param ids: 镜像ID列表，如果指定了此参数，其它参数可为空(Optional) */
 func (r *DescribeImagesRequest) SetIds(ids []string) {
     r.Ids = ids
+}
+
+/* param imageName: 根据镜像名称模糊查找(Optional) */
+func (r *DescribeImagesRequest) SetImageName(imageName string) {
+    r.ImageName = &imageName
 }
 
 /* param rootDeviceType: 镜像支持的系统盘类型，[localDisk,cloudDisk](Optional) */
