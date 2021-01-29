@@ -20,7 +20,7 @@ package models
 type CustomPageSpec struct {
 
     /* 自定义页面名称, 创建后不可修改, 添加自定义页面时必传 (Optional) */
-    Name string `json:"name"`
+    Name *string `json:"name"`
 
     /* 自定义页面内容, 添加自定义页面时必传  */
     Content string `json:"content"`

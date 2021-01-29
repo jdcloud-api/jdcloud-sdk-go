@@ -51,4 +51,7 @@ type SmsTaskVO struct {
 
     /* 模板id (Optional) */
     TemplateId string `json:"templateId"`
+
+    /* 发送号码数量 (Optional) */
+    PhoneCount int `json:"phoneCount"`
 }

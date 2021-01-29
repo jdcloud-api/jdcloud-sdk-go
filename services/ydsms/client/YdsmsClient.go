@@ -40,7 +40,7 @@ func NewYdsmsClient(credential *core.Credential) *YdsmsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "ydsms",
-            Revision:    "1.0.1",
+            Revision:    "1.0.4",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -88,6 +88,26 @@ func (c *YdsmsClient) OpenServiceUsingPOST(request *ydsms.OpenServiceUsingPOSTRe
     }
 
     jdResp := &ydsms.OpenServiceUsingPOSTResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改应用启停状态 */
+func (c *YdsmsClient) ModifyStatusUsingGET(request *ydsms.ModifyStatusUsingGETRequest) (*ydsms.ModifyStatusUsingGETResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydsms.ModifyStatusUsingGETResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -357,6 +377,26 @@ func (c *YdsmsClient) CreateSmsSignUsingPOST(request *ydsms.CreateSmsSignUsingPO
     return jdResp, err
 }
 
+/* 编辑短信发送任务 */
+func (c *YdsmsClient) ModifySmsTaskUsingPOST(request *ydsms.ModifySmsTaskUsingPOSTRequest) (*ydsms.ModifySmsTaskUsingPOSTResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydsms.ModifySmsTaskUsingPOSTResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询短信回执记录 */
 func (c *YdsmsClient) QueryReceiptRecordUsingGET(request *ydsms.QueryReceiptRecordUsingGETRequest) (*ydsms.QueryReceiptRecordUsingGETResponse, error) {
     if request == nil {
@@ -557,8 +597,8 @@ func (c *YdsmsClient) GetSmsTaskIdUsingGET(request *ydsms.GetSmsTaskIdUsingGETRe
     return jdResp, err
 }
 
-/* 修改应用启停状态 */
-func (c *YdsmsClient) ModifyStatusUsingPOST(request *ydsms.ModifyStatusUsingPOSTRequest) (*ydsms.ModifyStatusUsingPOSTResponse, error) {
+/* 获取短信任务中的短信内容及计费条数 */
+func (c *YdsmsClient) GetSmsTaskContentUsingGET(request *ydsms.GetSmsTaskContentUsingGETRequest) (*ydsms.GetSmsTaskContentUsingGETResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -567,7 +607,7 @@ func (c *YdsmsClient) ModifyStatusUsingPOST(request *ydsms.ModifyStatusUsingPOST
         return nil, err
     }
 
-    jdResp := &ydsms.ModifyStatusUsingPOSTResponse{}
+    jdResp := &ydsms.GetSmsTaskContentUsingGETResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -637,7 +677,7 @@ func (c *YdsmsClient) ListSmsSignsUsingGET(request *ydsms.ListSmsSignsUsingGETRe
     return jdResp, err
 }
 
-/* 查询短信模板 */
+/* 查询短信模板列表 */
 func (c *YdsmsClient) ListSmsTemplatesUsingGET(request *ydsms.ListSmsTemplatesUsingGETRequest) (*ydsms.ListSmsTemplatesUsingGETResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -688,6 +728,26 @@ func (c *YdsmsClient) ListSmsSignTypesUsingGET(request *ydsms.ListSmsSignTypesUs
     }
 
     jdResp := &ydsms.ListSmsSignTypesUsingGETResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除任务 */
+func (c *YdsmsClient) TaskDeleteUsingDelete(request *ydsms.TaskDeleteUsingDeleteRequest) (*ydsms.TaskDeleteUsingDeleteResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydsms.TaskDeleteUsingDeleteResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

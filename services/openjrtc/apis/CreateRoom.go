@@ -30,7 +30,7 @@ type CreateRoomRequest struct {
     /* 应用ID (Optional) */
     AppId *string `json:"appId"`
 
-    /* JRtc用户ID(创建者ID) (Optional) */
+    /* 用户ID(创建者ID) (Optional) */
     PeerId *int64 `json:"peerId"`
 }
 
@@ -54,7 +54,7 @@ func NewCreateRoomRequest(
 /*
  * param roomName: 房间名称 (Optional)
  * param appId: 应用ID (Optional)
- * param peerId: JRtc用户ID(创建者ID) (Optional)
+ * param peerId: 用户ID(创建者ID) (Optional)
  */
 func NewCreateRoomRequestWithAllParams(
     roomName *string,
@@ -98,7 +98,7 @@ func (r *CreateRoomRequest) SetAppId(appId string) {
     r.AppId = &appId
 }
 
-/* param peerId: JRtc用户ID(创建者ID)(Optional) */
+/* param peerId: 用户ID(创建者ID)(Optional) */
 func (r *CreateRoomRequest) SetPeerId(peerId int64) {
     r.PeerId = &peerId
 }
@@ -120,4 +120,6 @@ type CreateRoomResult struct {
     RoomName string `json:"roomName"`
     AppId string `json:"appId"`
     PeerId int64 `json:"peerId"`
+    CreateTime string `json:"createTime"`
+    UpdateTime string `json:"updateTime"`
 }

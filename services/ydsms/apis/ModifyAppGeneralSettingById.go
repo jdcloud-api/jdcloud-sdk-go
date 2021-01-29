@@ -44,7 +44,7 @@ func NewModifyAppGeneralSettingByIdRequest(
 	return &ModifyAppGeneralSettingByIdRequest{
         JDCloudRequest: core.JDCloudRequest{
 			URL:     "/smsAppGeneralSettings/{id}:modify",
-			Method:  "POST",
+			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
@@ -65,7 +65,7 @@ func NewModifyAppGeneralSettingByIdRequestWithAllParams(
     return &ModifyAppGeneralSettingByIdRequest{
         JDCloudRequest: core.JDCloudRequest{
             URL:     "/smsAppGeneralSettings/{id}:modify",
-            Method:  "POST",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
@@ -81,7 +81,7 @@ func NewModifyAppGeneralSettingByIdRequestWithoutParam() *ModifyAppGeneralSettin
     return &ModifyAppGeneralSettingByIdRequest{
             JDCloudRequest: core.JDCloudRequest{
             URL:     "/smsAppGeneralSettings/{id}:modify",
-            Method:  "POST",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },

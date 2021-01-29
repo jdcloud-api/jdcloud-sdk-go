@@ -18,7 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    rds "github.com/jdcloud-api/jdcloud-sdk-go/services/rds/models"
+    yunding "github.com/jdcloud-api/jdcloud-sdk-go/services/yunding/models"
 )
 
 type DescribeRdsInstanceRequest struct {
@@ -112,5 +112,5 @@ type DescribeRdsInstanceResponse struct {
 }
 
 type DescribeRdsInstanceResult struct {
-    DbInstanceAttributes rds.DBInstanceAttribute `json:"dbInstanceAttributes"`
+    DbInstanceAttributes yunding.DBInstanceAttribute `json:"dbInstanceAttributes"`
 }

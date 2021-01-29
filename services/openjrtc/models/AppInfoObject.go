@@ -33,6 +33,6 @@ type AppInfoObject struct {
  (Optional) */
     BillType string `json:"billType"`
 
-    /* 创建时间 (Optional) */
+    /* 创建时间(UTC) (Optional) */
     CreateTime string `json:"createTime"`
 }

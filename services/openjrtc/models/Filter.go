@@ -33,7 +33,7 @@ enum:
   - in
   - like
  (Optional) */
-    Operator string `json:"operator"`
+    Operator *string `json:"operator"`
 
     /* 过滤器属性值  */
     Values []string `json:"values"`

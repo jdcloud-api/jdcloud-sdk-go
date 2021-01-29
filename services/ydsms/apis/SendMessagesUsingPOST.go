@@ -28,7 +28,7 @@ type SendMessagesUsingPOSTRequest struct {
     /* 应用id  */
     AppId string `json:"appId"`
 
-    /* 短信模板变量对应的数据值  */
+    /* 短信模板变量对应的数据值 (Optional) */
     Params []string `json:"params"`
 
     /* 群发的国内电话号码,群发时一次最多不要超过100个手机号  */
@@ -43,7 +43,6 @@ type SendMessagesUsingPOSTRequest struct {
 
 /*
  * param appId: 应用id (Required)
- * param params: 短信模板变量对应的数据值 (Required)
  * param phoneList: 群发的国内电话号码,群发时一次最多不要超过100个手机号 (Required)
  * param signId: 签名id (Required)
  * param templateId: 模板id (Required)
@@ -52,7 +51,6 @@ type SendMessagesUsingPOSTRequest struct {
  */
 func NewSendMessagesUsingPOSTRequest(
     appId string,
-    params []string,
     phoneList []string,
     signId string,
     templateId string,
@@ -66,7 +64,6 @@ func NewSendMessagesUsingPOSTRequest(
 			Version: "v1",
 		},
         AppId: appId,
-        Params: params,
         PhoneList: phoneList,
         SignId: signId,
         TemplateId: templateId,
@@ -75,7 +72,7 @@ func NewSendMessagesUsingPOSTRequest(
 
 /*
  * param appId: 应用id (Required)
- * param params: 短信模板变量对应的数据值 (Required)
+ * param params: 短信模板变量对应的数据值 (Optional)
  * param phoneList: 群发的国内电话号码,群发时一次最多不要超过100个手机号 (Required)
  * param signId: 签名id (Required)
  * param templateId: 模板id (Required)
@@ -121,7 +118,7 @@ func (r *SendMessagesUsingPOSTRequest) SetAppId(appId string) {
     r.AppId = appId
 }
 
-/* param params: 短信模板变量对应的数据值(Required) */
+/* param params: 短信模板变量对应的数据值(Optional) */
 func (r *SendMessagesUsingPOSTRequest) SetParams(params []string) {
     r.Params = params
 }

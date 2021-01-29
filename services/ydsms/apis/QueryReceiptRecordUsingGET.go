@@ -126,5 +126,7 @@ type QueryReceiptRecordUsingGETResponse struct {
 }
 
 type QueryReceiptRecordUsingGETResult struct {
-    QueryReceiptRecordRes ydsms.QueryReceiptRecordRes `json:"queryReceiptRecordRes"`
+    Pin string `json:"pin"`
+    AppId string `json:"appId"`
+    ReceiptRecords []ydsms.ReceiptRecord `json:"receiptRecords"`
 }

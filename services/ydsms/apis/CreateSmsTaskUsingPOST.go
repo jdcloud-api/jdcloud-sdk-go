@@ -41,6 +41,9 @@ type CreateSmsTaskUsingPOSTRequest struct {
 
     /* 短信模板id  */
     TemplateId string `json:"templateId"`
+
+    /* 任务类型，1：通道短信 2：营销短信 (Optional) */
+    TaskType *int `json:"taskType"`
 }
 
 /*
@@ -79,6 +82,7 @@ func NewCreateSmsTaskUsingPOSTRequest(
  * param signId: 短信签名id (Required)
  * param taskName: 任务名称 (Required)
  * param templateId: 短信模板id (Required)
+ * param taskType: 任务类型，1：通道短信 2：营销短信 (Optional)
  */
 func NewCreateSmsTaskUsingPOSTRequestWithAllParams(
     appId string,
@@ -87,6 +91,7 @@ func NewCreateSmsTaskUsingPOSTRequestWithAllParams(
     signId string,
     taskName string,
     templateId string,
+    taskType *int,
 ) *CreateSmsTaskUsingPOSTRequest {
 
     return &CreateSmsTaskUsingPOSTRequest{
@@ -102,6 +107,7 @@ func NewCreateSmsTaskUsingPOSTRequestWithAllParams(
         SignId: signId,
         TaskName: taskName,
         TemplateId: templateId,
+        TaskType: taskType,
     }
 }
 
@@ -146,6 +152,11 @@ func (r *CreateSmsTaskUsingPOSTRequest) SetTaskName(taskName string) {
 /* param templateId: 短信模板id(Required) */
 func (r *CreateSmsTaskUsingPOSTRequest) SetTemplateId(templateId string) {
     r.TemplateId = templateId
+}
+
+/* param taskType: 任务类型，1：通道短信 2：营销短信(Optional) */
+func (r *CreateSmsTaskUsingPOSTRequest) SetTaskType(taskType int) {
+    r.TaskType = &taskType
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

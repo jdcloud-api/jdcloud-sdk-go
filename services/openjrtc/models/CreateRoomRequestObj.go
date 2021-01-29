@@ -25,6 +25,6 @@ type CreateRoomRequestObj struct {
     /* 应用ID (Optional) */
     AppId string `json:"appId"`
 
-    /* JRtc用户ID(创建者ID) (Optional) */
+    /* 用户ID(创建者ID) (Optional) */
     PeerId int64 `json:"peerId"`
 }
