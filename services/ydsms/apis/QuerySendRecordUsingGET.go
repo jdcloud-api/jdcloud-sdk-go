@@ -192,6 +192,6 @@ type QuerySendRecordUsingGETResponse struct {
 }
 
 type QuerySendRecordUsingGETResult struct {
-    SmsApps []ydsms.SendRecord `json:"smsApps"`
+    SendRecords []ydsms.SendRecord `json:"sendRecords"`
     TotalCount int64 `json:"totalCount"`
 }

@@ -20,30 +20,27 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type ModifyStatusUsingPOSTRequest struct {
+type DescribeAppRequest struct {
 
     core.JDCloudRequest
 
-    /* 应用id  */
+    /* 应用ID  */
     AppId string `json:"appId"`
-
-    /* 应用状态,0 停用 1 启用 (Optional) */
-    Status *int `json:"status"`
 }
 
 /*
- * param appId: 应用id (Required)
+ * param appId: 应用ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewModifyStatusUsingPOSTRequest(
+func NewDescribeAppRequest(
     appId string,
-) *ModifyStatusUsingPOSTRequest {
+) *DescribeAppRequest {
 
-	return &ModifyStatusUsingPOSTRequest{
+	return &DescribeAppRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/smsApps/{appId}:modifyStatus",
-			Method:  "POST",
+			URL:     "/applications/{appId}",
+			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
@@ -52,61 +49,57 @@ func NewModifyStatusUsingPOSTRequest(
 }
 
 /*
- * param appId: 应用id (Required)
- * param status: 应用状态,0 停用 1 启用 (Optional)
+ * param appId: 应用ID (Required)
  */
-func NewModifyStatusUsingPOSTRequestWithAllParams(
+func NewDescribeAppRequestWithAllParams(
     appId string,
-    status *int,
-) *ModifyStatusUsingPOSTRequest {
+) *DescribeAppRequest {
 
-    return &ModifyStatusUsingPOSTRequest{
+    return &DescribeAppRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/smsApps/{appId}:modifyStatus",
-            Method:  "POST",
+            URL:     "/applications/{appId}",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         AppId: appId,
-        Status: status,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewModifyStatusUsingPOSTRequestWithoutParam() *ModifyStatusUsingPOSTRequest {
+func NewDescribeAppRequestWithoutParam() *DescribeAppRequest {
 
-    return &ModifyStatusUsingPOSTRequest{
+    return &DescribeAppRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/smsApps/{appId}:modifyStatus",
-            Method:  "POST",
+            URL:     "/applications/{appId}",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
     }
 }
 
-/* param appId: 应用id(Required) */
-func (r *ModifyStatusUsingPOSTRequest) SetAppId(appId string) {
+/* param appId: 应用ID(Required) */
+func (r *DescribeAppRequest) SetAppId(appId string) {
     r.AppId = appId
-}
-
-/* param status: 应用状态,0 停用 1 启用(Optional) */
-func (r *ModifyStatusUsingPOSTRequest) SetStatus(status int) {
-    r.Status = &status
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r ModifyStatusUsingPOSTRequest) GetRegionId() string {
+func (r DescribeAppRequest) GetRegionId() string {
     return ""
 }
 
-type ModifyStatusUsingPOSTResponse struct {
+type DescribeAppResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result ModifyStatusUsingPOSTResult `json:"result"`
+    Result DescribeAppResult `json:"result"`
 }
 
-type ModifyStatusUsingPOSTResult struct {
+type DescribeAppResult struct {
     AppId string `json:"appId"`
+    AppName string `json:"appName"`
+    Status string `json:"status"`
+    BillType string `json:"billType"`
+    CreateTime string `json:"createTime"`
 }

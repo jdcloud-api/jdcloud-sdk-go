@@ -141,4 +141,7 @@ type Instance struct {
 
     /* 每条网站规则可配的http/https端口数 (Optional) */
     WebRulePortLimit int `json:"webRulePortLimit"`
+
+    /* Tag信息 (Optional) */
+    Tags []Tag `json:"tags"`
 }

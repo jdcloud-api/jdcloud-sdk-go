@@ -19,7 +19,7 @@ package models
 
 type CreateUserResultObj struct {
 
-    /* JRtc用户ID (Optional) */
+    /* 用户ID (Optional) */
     PeerId int64 `json:"peerId"`
 
     /* 应用ID (Optional) */

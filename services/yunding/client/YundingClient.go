@@ -40,7 +40,7 @@ func NewYundingClient(credential *core.Credential) *YundingClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "yunding",
-            Revision:    "2.0.1",
+            Revision:    "2.0.3",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -198,6 +198,26 @@ func (c *YundingClient) GrantRdsPrivilege(request *yunding.GrantRdsPrivilegeRequ
     return jdResp, err
 }
 
+/* 监控数据上报。 */
+func (c *YundingClient) PutProductMetricData(request *yunding.PutProductMetricDataRequest) (*yunding.PutProductMetricDataResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yunding.PutProductMetricDataResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 从RDS实例中删除数据库。为便于管理和数据恢复，RDS对用户权限进行了控制，用户仅能通过控制台或本接口删除数据库 [MFA enabled] */
 func (c *YundingClient) DeleteRdsDatabase(request *yunding.DeleteRdsDatabaseRequest) (*yunding.DeleteRdsDatabaseResponse, error) {
     if request == nil {
@@ -209,6 +229,46 @@ func (c *YundingClient) DeleteRdsDatabase(request *yunding.DeleteRdsDatabaseRequ
     }
 
     jdResp := &yunding.DeleteRdsDatabaseResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 云拔测-可用性agent任务查询接口 */
+func (c *YundingClient) DescribeTasks(request *yunding.DescribeTasksRequest) (*yunding.DescribeTasksResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yunding.DescribeTasksResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 取消该账号对某个数据库的所有权限。权限取消后，该账号将不能访问此数据库。取消账号对某个数据库的访问权限，不影响该账号对其他数据库的访问权限 */
+func (c *YundingClient) RevokePrivilege(request *yunding.RevokePrivilegeRequest) (*yunding.RevokePrivilegeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yunding.RevokePrivilegeResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -249,6 +309,26 @@ func (c *YundingClient) DescribeRdsInstances(request *yunding.DescribeRdsInstanc
     }
 
     jdResp := &yunding.DescribeRdsInstancesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询弹性网卡信息详情 */
+func (c *YundingClient) DescribeNetworkInterface(request *yunding.DescribeNetworkInterfaceRequest) (*yunding.DescribeNetworkInterfaceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yunding.DescribeNetworkInterfaceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -309,6 +389,26 @@ func (c *YundingClient) DescribeRdsWhiteList(request *yunding.DescribeRdsWhiteLi
     }
 
     jdResp := &yunding.DescribeRdsWhiteListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 监控数据上报。 */
+func (c *YundingClient) Put(request *yunding.PutRequest) (*yunding.PutResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yunding.PutResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

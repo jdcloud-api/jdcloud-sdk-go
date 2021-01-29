@@ -17,17 +17,20 @@
 package models
 
 
-type CreateRoomResultObj struct {
+type ViTemplatePageInfo struct {
 
-    /* 房间ID (Optional) */
-    RoomId int64 `json:"roomId"`
+    /* 当前页码 (Optional) */
+    PageNumber int `json:"pageNumber"`
 
-    /* 房间名称 (Optional) */
-    RoomName string `json:"roomName"`
+    /* 每页数量 (Optional) */
+    PageSize int `json:"pageSize"`
 
-    /* appId (Optional) */
-    AppId string `json:"appId"`
+    /* 查询总数 (Optional) */
+    TotalElements int `json:"totalElements"`
 
-    /* JRtc用户ID(创建者ID) (Optional) */
-    PeerId int64 `json:"peerId"`
+    /* 总页数 (Optional) */
+    TotalPages int `json:"totalPages"`
+
+    /* 分页内容 (Optional) */
+    Content []ViTemplateInfo `json:"content"`
 }

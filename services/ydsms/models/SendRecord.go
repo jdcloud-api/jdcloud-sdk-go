@@ -25,6 +25,12 @@ type SendRecord struct {
     /* 短信内容 (Optional) */
     SmsContent string `json:"smsContent"`
 
+    /* 短信字数 (Optional) */
+    ContentLength int `json:"contentLength"`
+
+    /* 折成条数 (Optional) */
+    ChargeCount int `json:"chargeCount"`
+
     /* 短信类型 短信类型，1 通道短信 2 官方短信 (Optional) */
     PackageType int `json:"packageType"`
 

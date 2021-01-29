@@ -148,5 +148,7 @@ type ListSmsSendOverviewUsingGETResponse struct {
 }
 
 type ListSmsSendOverviewUsingGETResult struct {
-    ListSmsSendOverviewVO ydsms.ListSmsSendOverviewVO `json:"listSmsSendOverviewVO"`
+    Pin string `json:"pin"`
+    AppId string `json:"appId"`
+    SendOverviewVOList []ydsms.SendOverviewVO `json:"sendOverviewVOList"`
 }

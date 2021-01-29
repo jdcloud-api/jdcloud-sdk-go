@@ -36,6 +36,9 @@ type ListSmsTemplatesUsingGETRequest struct {
 
     /* 状态，1申请中 2拒绝 3通过 (Optional) */
     Status *string `json:"status"`
+
+    /* 要查询的模板类型，多个以 , 隔开(0 验证码短信,1 通知短信,2 推广短信) (Optional) */
+    TemplateTypes *string `json:"templateTypes"`
 }
 
 /*
@@ -63,12 +66,14 @@ func NewListSmsTemplatesUsingGETRequest(
  * param pageNumber: 页码 (Optional)
  * param pageSize: 分页大小 (Optional)
  * param status: 状态，1申请中 2拒绝 3通过 (Optional)
+ * param templateTypes: 要查询的模板类型，多个以 , 隔开(0 验证码短信,1 通知短信,2 推广短信) (Optional)
  */
 func NewListSmsTemplatesUsingGETRequestWithAllParams(
     appId string,
     pageNumber *int,
     pageSize *int,
     status *string,
+    templateTypes *string,
 ) *ListSmsTemplatesUsingGETRequest {
 
     return &ListSmsTemplatesUsingGETRequest{
@@ -82,6 +87,7 @@ func NewListSmsTemplatesUsingGETRequestWithAllParams(
         PageNumber: pageNumber,
         PageSize: pageSize,
         Status: status,
+        TemplateTypes: templateTypes,
     }
 }
 
@@ -116,6 +122,11 @@ func (r *ListSmsTemplatesUsingGETRequest) SetPageSize(pageSize int) {
 /* param status: 状态，1申请中 2拒绝 3通过(Optional) */
 func (r *ListSmsTemplatesUsingGETRequest) SetStatus(status string) {
     r.Status = &status
+}
+
+/* param templateTypes: 要查询的模板类型，多个以 , 隔开(0 验证码短信,1 通知短信,2 推广短信)(Optional) */
+func (r *ListSmsTemplatesUsingGETRequest) SetTemplateTypes(templateTypes string) {
+    r.TemplateTypes = &templateTypes
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

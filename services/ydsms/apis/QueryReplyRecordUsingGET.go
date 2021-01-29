@@ -159,6 +159,6 @@ type QueryReplyRecordUsingGETResponse struct {
 }
 
 type QueryReplyRecordUsingGETResult struct {
-    SmsApps []ydsms.ReplyRecord `json:"smsApps"`
+    ReplyRecords []ydsms.ReplyRecord `json:"replyRecords"`
     TotalCount int64 `json:"totalCount"`
 }
