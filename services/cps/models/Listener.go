@@ -69,4 +69,22 @@ type Listener struct {
 
     /* 服务器组id (Optional) */
     ServerGroupId string `json:"serverGroupId"`
+
+    /* 会话保持超时时间，单位s (Optional) */
+    StickySessionTimeout int `json:"stickySessionTimeout"`
+
+    /* 会话类型，植入Cookie or 重写Cookie (Optional) */
+    CookieType string `json:"cookieType"`
+
+    /* 检查路径 (Optional) */
+    HealthCheckUri string `json:"healthCheckUri"`
+
+    /* 正常态码，要使用的Http状态码 (Optional) */
+    HealthCheckHttpCode string `json:"healthCheckHttpCode"`
+
+    /* 证书ID (Optional) */
+    CertificateId string `json:"certificateId"`
+
+    /* 获取HTTP头字段：X-Forwarded-For、X-Forwarded-Proto、X- Forwarded-Port、X-Forwarded-LBIP (Optional) */
+    Headers []string `json:"headers"`
 }

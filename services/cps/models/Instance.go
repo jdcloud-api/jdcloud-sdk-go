@@ -53,6 +53,12 @@ type Instance struct {
     /* 镜像类型, 如 standard (Optional) */
     ImageType string `json:"imageType"`
 
+    /* 机柜信息 (Optional) */
+    Cabinet string `json:"cabinet"`
+
+    /* 带外管理IP (Optional) */
+    IloIp string `json:"iloIp"`
+
     /* 操作系统类型ID (Optional) */
     OsTypeId string `json:"osTypeId"`
 
@@ -94,6 +100,12 @@ type Instance struct {
 
     /* IPv6网关ID (Optional) */
     Ipv6GatewayId string `json:"ipv6GatewayId"`
+
+    /* POD网络名称 (Optional) */
+    PodName string `json:"podName"`
+
+    /* POD机房地址描述 (Optional) */
+    PodRoom string `json:"podRoom"`
 
     /* 子网编号 (Optional) */
     SubnetId string `json:"subnetId"`

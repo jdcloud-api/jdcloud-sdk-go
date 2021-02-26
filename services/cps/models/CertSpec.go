@@ -17,23 +17,14 @@
 package models
 
 
-type ServerSpec struct {
+type CertSpec struct {
 
-    /* 后端云物理服务器ID (Optional) */
-    InstanceId *string `json:"instanceId"`
+    /* 证书名称  */
+    Name string `json:"name"`
 
-    /* 端口 (Optional) */
-    Port *int `json:"port"`
+    /* 证书内容  */
+    Certificate string `json:"certificate"`
 
-    /* 后端云物理服务器权重 (Optional) */
-    Weight *int `json:"weight"`
-
-    /* 别名IP (Optional) */
-    Aliasip *string `json:"aliasip"`
-
-    /* 主网口或辅网口IP (Optional) */
-    Rip *string `json:"rip"`
-
-    /* bond0 单网卡-主网口| eth0 双网卡-主网口 | eth1 双网卡-辅网口 (Optional) */
-    NetworkPort *string `json:"networkPort"`
+    /* 证书私钥  */
+    PrivateKey string `json:"privateKey"`
 }
