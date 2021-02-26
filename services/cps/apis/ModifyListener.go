@@ -63,6 +63,24 @@ type ModifyListenerRequest struct {
 
     /* 服务器组id (Optional) */
     ServerGroupId *string `json:"serverGroupId"`
+
+    /* 会话保持超时时间，单位s (Optional) */
+    StickySessionTimeout *int `json:"stickySessionTimeout"`
+
+    /* 会话类型，植入Cookie or 重写Cookie (Optional) */
+    CookieType *string `json:"cookieType"`
+
+    /* 检查路径 (Optional) */
+    HealthCheckUri *string `json:"healthCheckUri"`
+
+    /* 正常态码，要使用的Http状态码 (Optional) */
+    HealthCheckHttpCode *string `json:"healthCheckHttpCode"`
+
+    /* 证书ID (Optional) */
+    CertificateId *string `json:"certificateId"`
+
+    /* 获取HTTP头字段：X-Forwarded-For、X-Forwarded-Proto、X- Forwarded-Port、X-Forwarded-LBIP (Optional) */
+    Headers []string `json:"headers"`
 }
 
 /*
@@ -102,6 +120,12 @@ func NewModifyListenerRequest(
  * param healthyThreshold: 健康检查结果为success的阈值 (Optional)
  * param unhealthyThreshold: 健康检查结果为fail的阈值 (Optional)
  * param serverGroupId: 服务器组id (Optional)
+ * param stickySessionTimeout: 会话保持超时时间，单位s (Optional)
+ * param cookieType: 会话类型，植入Cookie or 重写Cookie (Optional)
+ * param healthCheckUri: 检查路径 (Optional)
+ * param healthCheckHttpCode: 正常态码，要使用的Http状态码 (Optional)
+ * param certificateId: 证书ID (Optional)
+ * param headers: 获取HTTP头字段：X-Forwarded-For、X-Forwarded-Proto、X- Forwarded-Port、X-Forwarded-LBIP (Optional)
  */
 func NewModifyListenerRequestWithAllParams(
     regionId string,
@@ -117,6 +141,12 @@ func NewModifyListenerRequestWithAllParams(
     healthyThreshold *int,
     unhealthyThreshold *int,
     serverGroupId *string,
+    stickySessionTimeout *int,
+    cookieType *string,
+    healthCheckUri *string,
+    healthCheckHttpCode *string,
+    certificateId *string,
+    headers []string,
 ) *ModifyListenerRequest {
 
     return &ModifyListenerRequest{
@@ -139,6 +169,12 @@ func NewModifyListenerRequestWithAllParams(
         HealthyThreshold: healthyThreshold,
         UnhealthyThreshold: unhealthyThreshold,
         ServerGroupId: serverGroupId,
+        StickySessionTimeout: stickySessionTimeout,
+        CookieType: cookieType,
+        HealthCheckUri: healthCheckUri,
+        HealthCheckHttpCode: healthCheckHttpCode,
+        CertificateId: certificateId,
+        Headers: headers,
     }
 }
 
@@ -218,6 +254,36 @@ func (r *ModifyListenerRequest) SetUnhealthyThreshold(unhealthyThreshold int) {
 /* param serverGroupId: 服务器组id(Optional) */
 func (r *ModifyListenerRequest) SetServerGroupId(serverGroupId string) {
     r.ServerGroupId = &serverGroupId
+}
+
+/* param stickySessionTimeout: 会话保持超时时间，单位s(Optional) */
+func (r *ModifyListenerRequest) SetStickySessionTimeout(stickySessionTimeout int) {
+    r.StickySessionTimeout = &stickySessionTimeout
+}
+
+/* param cookieType: 会话类型，植入Cookie or 重写Cookie(Optional) */
+func (r *ModifyListenerRequest) SetCookieType(cookieType string) {
+    r.CookieType = &cookieType
+}
+
+/* param healthCheckUri: 检查路径(Optional) */
+func (r *ModifyListenerRequest) SetHealthCheckUri(healthCheckUri string) {
+    r.HealthCheckUri = &healthCheckUri
+}
+
+/* param healthCheckHttpCode: 正常态码，要使用的Http状态码(Optional) */
+func (r *ModifyListenerRequest) SetHealthCheckHttpCode(healthCheckHttpCode string) {
+    r.HealthCheckHttpCode = &healthCheckHttpCode
+}
+
+/* param certificateId: 证书ID(Optional) */
+func (r *ModifyListenerRequest) SetCertificateId(certificateId string) {
+    r.CertificateId = &certificateId
+}
+
+/* param headers: 获取HTTP头字段：X-Forwarded-For、X-Forwarded-Proto、X- Forwarded-Port、X-Forwarded-LBIP(Optional) */
+func (r *ModifyListenerRequest) SetHeaders(headers []string) {
+    r.Headers = headers
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

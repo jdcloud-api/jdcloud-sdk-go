@@ -48,4 +48,10 @@ type Server struct {
 
     /* 健康状态 (Optional) */
     HealthyStatus string `json:"healthyStatus"`
+
+    /* 别名IP (Optional) */
+    Aliasip string `json:"aliasip"`
+
+    /* IP类型：别名IPv4 or 内网IPv4 (Optional) */
+    Iptype string `json:"iptype"`
 }

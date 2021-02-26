@@ -17,6 +17,7 @@
 package models
 
 import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
+import resourcetag "github.com/jdcloud-api/jdcloud-sdk-go/services/resourcetag/models"
 
 type LoadBalancerSpec struct {
 
@@ -43,4 +44,7 @@ type LoadBalancerSpec struct {
 
     /* 计费配置  */
     Charge *charge.ChargeSpec `json:"charge"`
+
+    /* 标签 (Optional) */
+    ResourceTags []resourcetag.Tag `json:"resourceTags"`
 }
