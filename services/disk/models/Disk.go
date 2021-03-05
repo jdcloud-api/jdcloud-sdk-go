@@ -68,6 +68,9 @@ type Disk struct {
     /* 云硬盘计费配置信息 (Optional) */
     Charge charge.Charge `json:"charge"`
 
-    /* Tag信息 (Optional) */
+    /* null (Optional) */
     Tags []Tag `json:"tags"`
+
+    /*  (Optional) */
+    SnapshotPolicies []SnapshotPolicy `json:"snapshotPolicies"`
 }

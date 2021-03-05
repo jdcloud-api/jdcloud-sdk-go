@@ -151,6 +151,7 @@ type CreateDisksResponse struct {
 }
 
 type CreateDisksResult struct {
+    PolicyRelations []disk.PolicyDiskRelationOpResult `json:"policyRelations"`
     DiskIds []string `json:"diskIds"`
     Tagmsg string `json:"tagmsg"`
 }

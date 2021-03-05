@@ -19,10 +19,9 @@ package apis
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
     disk "github.com/jdcloud-api/jdcloud-sdk-go/services/disk/models"
-    common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
 
-type DescribeDisksRequest struct {
+type DescribeVolumesIgnoreServiceCodeRequest struct {
 
     core.JDCloudRequest
 
@@ -50,7 +49,7 @@ encrypted - 云硬盘是否加密，精确匹配，支持单个
 policyId - 绑定policyId的云硬盘，精确匹配，支持多个
 notPolicyId - 未绑定policyId的云硬盘，精确匹配，支持多个
  (Optional) */
-    Filters []common.Filter `json:"filters"`
+    FilterGroups []disk.FilterGroups `json:"filterGroups"`
 }
 
 /*
@@ -58,14 +57,14 @@ notPolicyId - 未绑定policyId的云硬盘，精确匹配，支持多个
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeDisksRequest(
+func NewDescribeVolumesIgnoreServiceCodeRequest(
     regionId string,
-) *DescribeDisksRequest {
+) *DescribeVolumesIgnoreServiceCodeRequest {
 
-	return &DescribeDisksRequest{
+	return &DescribeVolumesIgnoreServiceCodeRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/disks",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/disks:ignoreServiceCode",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
@@ -78,7 +77,7 @@ func NewDescribeDisksRequest(
  * param pageNumber: 页码, 默认为1, 取值范围：[1,∞) (Optional)
  * param pageSize: 分页大小，默认为20，取值范围：[10,100] (Optional)
  * param tags: Tag筛选条件 (Optional)
- * param filters: diskId - 云硬盘ID，精确匹配，支持多个
+ * param filterGroups: diskId - 云硬盘ID，精确匹配，支持多个
 diskType - 云硬盘类型，精确匹配，支持多个，取值为 ssd,premium-hdd,ssd.io1,ssd.gp1,hdd.std1
 instanceId - 云硬盘所挂载主机的ID，精确匹配，支持多个
 instanceType - 云硬盘所挂载主机的类型，精确匹配，支持多个
@@ -91,18 +90,18 @@ policyId - 绑定policyId的云硬盘，精确匹配，支持多个
 notPolicyId - 未绑定policyId的云硬盘，精确匹配，支持多个
  (Optional)
  */
-func NewDescribeDisksRequestWithAllParams(
+func NewDescribeVolumesIgnoreServiceCodeRequestWithAllParams(
     regionId string,
     pageNumber *int,
     pageSize *int,
     tags []disk.TagFilter,
-    filters []common.Filter,
-) *DescribeDisksRequest {
+    filterGroups []disk.FilterGroups,
+) *DescribeVolumesIgnoreServiceCodeRequest {
 
-    return &DescribeDisksRequest{
+    return &DescribeVolumesIgnoreServiceCodeRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/disks",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/disks:ignoreServiceCode",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
@@ -110,17 +109,17 @@ func NewDescribeDisksRequestWithAllParams(
         PageNumber: pageNumber,
         PageSize: pageSize,
         Tags: tags,
-        Filters: filters,
+        FilterGroups: filterGroups,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeDisksRequestWithoutParam() *DescribeDisksRequest {
+func NewDescribeVolumesIgnoreServiceCodeRequestWithoutParam() *DescribeVolumesIgnoreServiceCodeRequest {
 
-    return &DescribeDisksRequest{
+    return &DescribeVolumesIgnoreServiceCodeRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/disks",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/disks:ignoreServiceCode",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
@@ -128,26 +127,26 @@ func NewDescribeDisksRequestWithoutParam() *DescribeDisksRequest {
 }
 
 /* param regionId: 地域ID(Required) */
-func (r *DescribeDisksRequest) SetRegionId(regionId string) {
+func (r *DescribeVolumesIgnoreServiceCodeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param pageNumber: 页码, 默认为1, 取值范围：[1,∞)(Optional) */
-func (r *DescribeDisksRequest) SetPageNumber(pageNumber int) {
+func (r *DescribeVolumesIgnoreServiceCodeRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
 /* param pageSize: 分页大小，默认为20，取值范围：[10,100](Optional) */
-func (r *DescribeDisksRequest) SetPageSize(pageSize int) {
+func (r *DescribeVolumesIgnoreServiceCodeRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
 /* param tags: Tag筛选条件(Optional) */
-func (r *DescribeDisksRequest) SetTags(tags []disk.TagFilter) {
+func (r *DescribeVolumesIgnoreServiceCodeRequest) SetTags(tags []disk.TagFilter) {
     r.Tags = tags
 }
 
-/* param filters: diskId - 云硬盘ID，精确匹配，支持多个
+/* param filterGroups: diskId - 云硬盘ID，精确匹配，支持多个
 diskType - 云硬盘类型，精确匹配，支持多个，取值为 ssd,premium-hdd,ssd.io1,ssd.gp1,hdd.std1
 instanceId - 云硬盘所挂载主机的ID，精确匹配，支持多个
 instanceType - 云硬盘所挂载主机的类型，精确匹配，支持多个
@@ -159,23 +158,23 @@ encrypted - 云硬盘是否加密，精确匹配，支持单个
 policyId - 绑定policyId的云硬盘，精确匹配，支持多个
 notPolicyId - 未绑定policyId的云硬盘，精确匹配，支持多个
 (Optional) */
-func (r *DescribeDisksRequest) SetFilters(filters []common.Filter) {
-    r.Filters = filters
+func (r *DescribeVolumesIgnoreServiceCodeRequest) SetFilterGroups(filterGroups []disk.FilterGroups) {
+    r.FilterGroups = filterGroups
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeDisksRequest) GetRegionId() string {
+func (r DescribeVolumesIgnoreServiceCodeRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeDisksResponse struct {
+type DescribeVolumesIgnoreServiceCodeResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeDisksResult `json:"result"`
+    Result DescribeVolumesIgnoreServiceCodeResult `json:"result"`
 }
 
-type DescribeDisksResult struct {
+type DescribeVolumesIgnoreServiceCodeResult struct {
     Disks []disk.Disk `json:"disks"`
     TotalCount int `json:"totalCount"`
 }
