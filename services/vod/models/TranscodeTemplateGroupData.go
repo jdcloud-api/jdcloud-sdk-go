@@ -17,17 +17,20 @@
 package models
 
 
-type SubmitTranscodeJobRequestObject struct {
+type TranscodeTemplateGroupData struct {
 
-    /* 视频ID (Optional) */
-    VideoId *string `json:"videoId"`
+    /* 转码模板组ID (Optional) */
+    GroupId string `json:"groupId"`
 
-    /* 转码模板组ID。若此字段不为空，则以模板组方式提交作业，templateIds字段将被忽略。 (Optional) */
-    TemplateGroupId *string `json:"templateGroupId"`
+    /* 转码模板组名称 (Optional) */
+    GroupName string `json:"groupName"`
 
-    /* 转码模板ID列表 (Optional) */
-    TemplateIds []int64 `json:"templateIds"`
+    /*  (Optional) */
+    Templates GroupedTranscodeTemplateData `json:"templates"`
 
-    /* 水印ID列表 (Optional) */
-    WatermarkIds []int64 `json:"watermarkIds"`
+    /* 创建时间 (Optional) */
+    CreateTime string `json:"createTime"`
+
+    /* 修改时间 (Optional) */
+    UpdateTime string `json:"updateTime"`
 }

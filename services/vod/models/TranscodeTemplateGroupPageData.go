@@ -17,17 +17,20 @@
 package models
 
 
-type SubmitTranscodeJobRequestObject struct {
+type TranscodeTemplateGroupPageData struct {
 
-    /* 视频ID (Optional) */
-    VideoId *string `json:"videoId"`
+    /* 当前页码 (Optional) */
+    PageNumber int `json:"pageNumber"`
 
-    /* 转码模板组ID。若此字段不为空，则以模板组方式提交作业，templateIds字段将被忽略。 (Optional) */
-    TemplateGroupId *string `json:"templateGroupId"`
+    /* 每页数量 (Optional) */
+    PageSize int `json:"pageSize"`
 
-    /* 转码模板ID列表 (Optional) */
-    TemplateIds []int64 `json:"templateIds"`
+    /* 查询总数 (Optional) */
+    TotalElements int `json:"totalElements"`
 
-    /* 水印ID列表 (Optional) */
-    WatermarkIds []int64 `json:"watermarkIds"`
+    /* 总页数 (Optional) */
+    TotalPages int `json:"totalPages"`
+
+    /* 分页内容 (Optional) */
+    Content []TranscodeTemplateGroupData `json:"content"`
 }

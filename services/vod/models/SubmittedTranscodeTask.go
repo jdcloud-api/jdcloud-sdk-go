@@ -25,8 +25,17 @@ type SubmittedTranscodeTask struct {
     /* 视频ID (Optional) */
     VideoId string `json:"videoId"`
 
-    /* 转码模板ID (Optional) */
+    /* 打包类型。取值范围：None, HLSPackage (Optional) */
+    PackageType string `json:"packageType"`
+
+    /* 转码模板ID。非打包转码，包含此字段。 (Optional) */
     TemplateId int64 `json:"templateId"`
+
+    /* 转码模板组ID。若是以模板组方式提交作业，生成的转码任务中包含此字段。 (Optional) */
+    TemplateGroupId string `json:"templateGroupId"`
+
+    /* 模板ID列表。 (Optional) */
+    TemplateIds []int64 `json:"templateIds"`
 
     /* 水印ID列表 (Optional) */
     WatermarkIds []int64 `json:"watermarkIds"`

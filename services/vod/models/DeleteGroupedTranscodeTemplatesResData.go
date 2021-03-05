@@ -17,17 +17,14 @@
 package models
 
 
-type SubmitTranscodeJobRequestObject struct {
+type DeleteGroupedTranscodeTemplatesResData struct {
 
-    /* 视频ID (Optional) */
-    VideoId *string `json:"videoId"`
+    /* 模板组ID (Optional) */
+    GroupId int64 `json:"groupId"`
 
-    /* 转码模板组ID。若此字段不为空，则以模板组方式提交作业，templateIds字段将被忽略。 (Optional) */
-    TemplateGroupId *string `json:"templateGroupId"`
+    /* 删除成功的模板ID列表 (Optional) */
+    OkTemplateIds []int64 `json:"okTemplateIds"`
 
-    /* 转码模板ID列表 (Optional) */
-    TemplateIds []int64 `json:"templateIds"`
-
-    /* 水印ID列表 (Optional) */
-    WatermarkIds []int64 `json:"watermarkIds"`
+    /* 不存在的模板ID列表 (Optional) */
+    NotExistTemplateIds []int64 `json:"notExistTemplateIds"`
 }
