@@ -40,7 +40,7 @@ func NewYundingClient(credential *core.Credential) *YundingClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "yunding",
-            Revision:    "2.0.3",
+            Revision:    "2.0.4",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -98,8 +98,8 @@ func (c *YundingClient) DescribeYdRdsInstances(request *yunding.DescribeYdRdsIns
     return jdResp, err
 }
 
-/* 给网卡分配secondaryIp接口 */
-func (c *YundingClient) AssignSecondaryIps(request *yunding.AssignSecondaryIpsRequest) (*yunding.AssignSecondaryIpsResponse, error) {
+/* 删除子网 */
+func (c *YundingClient) DeleteSubnet(request *yunding.DeleteSubnetRequest) (*yunding.DeleteSubnetResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -108,7 +108,7 @@ func (c *YundingClient) AssignSecondaryIps(request *yunding.AssignSecondaryIpsRe
         return nil, err
     }
 
-    jdResp := &yunding.AssignSecondaryIpsResponse{}
+    jdResp := &yunding.DeleteSubnetResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -118,8 +118,8 @@ func (c *YundingClient) AssignSecondaryIps(request *yunding.AssignSecondaryIpsRe
     return jdResp, err
 }
 
-/* 修改允许访问实例的IP白名单。白名单是允许访问当前实例的IP/IP段列表，缺省情况下，白名单对本VPC开放。如果用户开启了外网访问的功能，还需要对外网的IP配置白名单。 */
-func (c *YundingClient) ModifyRdsWhiteList(request *yunding.ModifyRdsWhiteListRequest) (*yunding.ModifyRdsWhiteListResponse, error) {
+/* 查询子网列表 */
+func (c *YundingClient) DescribeSubnets(request *yunding.DescribeSubnetsRequest) (*yunding.DescribeSubnetsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -128,27 +128,7 @@ func (c *YundingClient) ModifyRdsWhiteList(request *yunding.ModifyRdsWhiteListRe
         return nil, err
     }
 
-    jdResp := &yunding.ModifyRdsWhiteListResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 创建一个数据库。 为了实例的管理和数据恢复，RDS对用户权限进行了限制，用户仅能通过控制台或本接口创建数据库 */
-func (c *YundingClient) CreateRdsDatabase(request *yunding.CreateRdsDatabaseRequest) (*yunding.CreateRdsDatabaseResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &yunding.CreateRdsDatabaseResponse{}
+    jdResp := &yunding.DescribeSubnetsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -178,8 +158,8 @@ func (c *YundingClient) DescribeRdsAccounts(request *yunding.DescribeRdsAccounts
     return jdResp, err
 }
 
-/* 授予账号的数据库访问权限，即该账号对数据库拥有什么权限。一个账号可以对多个数据库具有访问权限。<br>为便于管理，RDS对权限进行了归类，目前提供以下两种权限<br>- ro：只读权限，用户只能读取数据库中的数据，不能进行创建、插入、删除、更改等操作。<br>- rw：读写权限，用户可以对数据库进行增删改查等操作 */
-func (c *YundingClient) GrantRdsPrivilege(request *yunding.GrantRdsPrivilegeRequest) (*yunding.GrantRdsPrivilegeResponse, error) {
+/* 创建子网 */
+func (c *YundingClient) CreateSubnet(request *yunding.CreateSubnetRequest) (*yunding.CreateSubnetResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -188,7 +168,7 @@ func (c *YundingClient) GrantRdsPrivilege(request *yunding.GrantRdsPrivilegeRequ
         return nil, err
     }
 
-    jdResp := &yunding.GrantRdsPrivilegeResponse{}
+    jdResp := &yunding.CreateSubnetResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -298,6 +278,206 @@ func (c *YundingClient) DescribeRdsDatabases(request *yunding.DescribeRdsDatabas
     return jdResp, err
 }
 
+/* 查询弹性网卡信息详情 */
+func (c *YundingClient) DescribeNetworkInterface(request *yunding.DescribeNetworkInterfaceRequest) (*yunding.DescribeNetworkInterfaceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yunding.DescribeNetworkInterfaceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 监控数据上报。 */
+func (c *YundingClient) Put(request *yunding.PutRequest) (*yunding.PutResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yunding.PutResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 给网卡删除secondaryIp接口 */
+func (c *YundingClient) UnassignSecondaryIps(request *yunding.UnassignSecondaryIpsRequest) (*yunding.UnassignSecondaryIpsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yunding.UnassignSecondaryIpsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询弹性网卡列表 */
+func (c *YundingClient) DescribeNetworkInterfaces(request *yunding.DescribeNetworkInterfacesRequest) (*yunding.DescribeNetworkInterfacesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yunding.DescribeNetworkInterfacesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 给网卡分配secondaryIp接口 */
+func (c *YundingClient) AssignSecondaryIps(request *yunding.AssignSecondaryIpsRequest) (*yunding.AssignSecondaryIpsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yunding.AssignSecondaryIpsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改允许访问实例的IP白名单。白名单是允许访问当前实例的IP/IP段列表，缺省情况下，白名单对本VPC开放。如果用户开启了外网访问的功能，还需要对外网的IP配置白名单。 */
+func (c *YundingClient) ModifyRdsWhiteList(request *yunding.ModifyRdsWhiteListRequest) (*yunding.ModifyRdsWhiteListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yunding.ModifyRdsWhiteListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建一个数据库。 为了实例的管理和数据恢复，RDS对用户权限进行了限制，用户仅能通过控制台或本接口创建数据库 */
+func (c *YundingClient) CreateRdsDatabase(request *yunding.CreateRdsDatabaseRequest) (*yunding.CreateRdsDatabaseResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yunding.CreateRdsDatabaseResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 授予账号的数据库访问权限，即该账号对数据库拥有什么权限。一个账号可以对多个数据库具有访问权限。<br>为便于管理，RDS对权限进行了归类，目前提供以下两种权限<br>- ro：只读权限，用户只能读取数据库中的数据，不能进行创建、插入、删除、更改等操作。<br>- rw：读写权限，用户可以对数据库进行增删改查等操作 */
+func (c *YundingClient) GrantRdsPrivilege(request *yunding.GrantRdsPrivilegeRequest) (*yunding.GrantRdsPrivilegeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yunding.GrantRdsPrivilegeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建网卡接口，只能创建辅助网卡 */
+func (c *YundingClient) CreateNetworkInterface(request *yunding.CreateNetworkInterfaceRequest) (*yunding.CreateNetworkInterfaceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yunding.CreateNetworkInterfaceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询子网信息详情 */
+func (c *YundingClient) DescribeSubnet(request *yunding.DescribeSubnetRequest) (*yunding.DescribeSubnetResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yunding.DescribeSubnetResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 批量查询云数据库实例列表信息<br>此接口支持分页查询，默认每页20条。 */
 func (c *YundingClient) DescribeRdsInstances(request *yunding.DescribeRdsInstancesRequest) (*yunding.DescribeRdsInstancesResponse, error) {
     if request == nil {
@@ -318,8 +498,8 @@ func (c *YundingClient) DescribeRdsInstances(request *yunding.DescribeRdsInstanc
     return jdResp, err
 }
 
-/* 查询弹性网卡信息详情 */
-func (c *YundingClient) DescribeNetworkInterface(request *yunding.DescribeNetworkInterfaceRequest) (*yunding.DescribeNetworkInterfaceResponse, error) {
+/* 删除弹性网卡接口 */
+func (c *YundingClient) DeleteNetworkInterface(request *yunding.DeleteNetworkInterfaceRequest) (*yunding.DeleteNetworkInterfaceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -328,7 +508,7 @@ func (c *YundingClient) DescribeNetworkInterface(request *yunding.DescribeNetwor
         return nil, err
     }
 
-    jdResp := &yunding.DescribeNetworkInterfaceResponse{}
+    jdResp := &yunding.DeleteNetworkInterfaceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -389,46 +569,6 @@ func (c *YundingClient) DescribeRdsWhiteList(request *yunding.DescribeRdsWhiteLi
     }
 
     jdResp := &yunding.DescribeRdsWhiteListResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 监控数据上报。 */
-func (c *YundingClient) Put(request *yunding.PutRequest) (*yunding.PutResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &yunding.PutResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 给网卡删除secondaryIp接口 */
-func (c *YundingClient) UnassignSecondaryIps(request *yunding.UnassignSecondaryIpsRequest) (*yunding.UnassignSecondaryIpsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &yunding.UnassignSecondaryIpsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
