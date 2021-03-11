@@ -17,20 +17,11 @@
 package models
 
 
-type CreateDispatchRuleSpec struct {
+type DispatchedInnerIp struct {
 
-    /* 规则名称  */
-    Name string `json:"name"`
+    /* 云内IP (Optional) */
+    Ip string `json:"ip"`
 
-    /* 高防 IP (Optional) */
-    ServiceIp *string `json:"serviceIp"`
-
-    /* 云内IP  */
-    InnerIps []string `json:"innerIps"`
-
-    /* 触发调度的流量阈值, 单位 Mbps  */
-    DispatchThresholdMbps int64 `json:"dispatchThresholdMbps"`
-
-    /* 触发调度的报文阈值, 单位 pps  */
-    DispatchThresholdPps int64 `json:"dispatchThresholdPps"`
+    /* 配置了该云内IP的调度规则Id (Optional) */
+    Ids []string `json:"ids"`
 }
