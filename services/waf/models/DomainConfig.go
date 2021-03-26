@@ -93,4 +93,7 @@ type DomainConfig struct {
 
     /* bot配置 (Optional) */
     BotConf EnableConf `json:"botConf"`
+
+    /* risk配置 (Optional) */
+    RiskConf RiskConf `json:"riskConf"`
 }

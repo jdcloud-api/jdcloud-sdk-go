@@ -129,4 +129,13 @@ type EsLogEvent struct {
 
     /* 命中规则请求原始响应报文 (Optional) */
     AntiRespRaw string `json:"antiRespRaw"`
+
+    /* 来源地域信息 (Optional) */
+    AntiGeo string `json:"antiGeo"`
+
+    /* 指纹ID (Optional) */
+    AntiRiskFid string `json:"antiRiskFid"`
+
+    /* 指纹采集详细信息 (Optional) */
+    AntiRiskRaw string `json:"antiRiskRaw"`
 }

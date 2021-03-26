@@ -23,7 +23,7 @@ type AddDomain struct {
     WafInstanceId string `json:"wafInstanceId"`
 
     /* 域名  */
-    Domain string `json:"domain"`
+    Domain []string `json:"domain"`
 
     /* 使用协议，eg:["http","https"]  */
     Protocols []string `json:"protocols"`

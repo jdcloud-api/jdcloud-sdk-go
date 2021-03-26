@@ -34,6 +34,18 @@ type SetRiskRuleReq struct {
     /* uri 以/开头  */
     Uri string `json:"uri"`
 
-    /* 动作 支持notice / verify@captcha  */
+    /* 动作 支持 verify@captcha / verify@jscookie / forbidden / notice / redirect  */
     Action string `json:"action"`
+
+    /* 请求方法 支持 POST:1,GET:1,PUT:1  */
+    Methods string `json:"methods"`
+
+    /* 场景 支持 account_login / account_register / data_risk_control  */
+    SceneRef string `json:"sceneRef"`
+
+    /* 事件 支持 passwd:BODY.passwd,username:ARGS.username  */
+    Event string `json:"event"`
+
+    /* 跳转地址，Action为redirect时必须为当前实例下的域名的url，forbidden时为自定义页面名称  */
+    Redirection string `json:"redirection"`
 }

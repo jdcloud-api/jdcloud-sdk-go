@@ -41,10 +41,10 @@ type InstanceIdCfg struct {
     ExtraBitsLimit int `json:"extraBitsLimit"`
 
     /* 创建时间 (Optional) */
-    StartTime int `json:"startTime"`
+    StartTime string `json:"startTime"`
 
     /* 资源预计释放时间，仅过期且未释放时有效 (Optional) */
-    ReleaseingTime int `json:"releaseingTime"`
+    ReleaseingTime string `json:"releaseingTime"`
 
     /* 资源的计费状态，1-服务中，2-过期停服，3-过期释放 (Optional) */
     Status int `json:"status"`

@@ -30,4 +30,10 @@ type TopN struct {
 
     /*  (Optional) */
     Ua_top10 TopValue `json:"ua_top10"`
+
+    /*  (Optional) */
+    Domain_anti_top10 TopAntiValue `json:"domain_anti_top10"`
+
+    /*  (Optional) */
+    Url_anti_top10 TopAntiValue `json:"url_anti_top10"`
 }

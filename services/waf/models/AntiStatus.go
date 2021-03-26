@@ -23,8 +23,8 @@ type AntiStatus struct {
     Acl int `json:"acl"`
 
     /* cc防护 (Optional) */
-    Cc string `json:"cc"`
+    Cc int `json:"cc"`
 
     /* waf防护 (Optional) */
-    Waf string `json:"waf"`
+    Waf int `json:"waf"`
 }

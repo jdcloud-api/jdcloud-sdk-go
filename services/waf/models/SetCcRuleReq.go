@@ -48,4 +48,10 @@ type SetCcRuleReq struct {
 
     /* blockType 为3 时，为自定义页面名称，缺省为default (Optional) */
     Redirection string `json:"redirection"`
+
+    /* cc 统计维度，ip或cookie (Optional) */
+    Dimension string `json:"dimension"`
+
+    /* cookiename, 只有当 dimension 为 cookie 时才有效 (Optional) */
+    Dmvalue string `json:"dmvalue"`
 }
