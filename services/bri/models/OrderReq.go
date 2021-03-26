@@ -39,4 +39,13 @@ type OrderReq struct {
 
     /* 下单成功后返回的url, eg:http://abc.com  */
     ReturnURL string `json:"returnURL"`
+
+    /* QPS上限(1-7) 1-100 2-300 3-500 4-1000 5-3000 6-5000 7-10000  */
+    QpsLimit int `json:"qpsLimit"`
+
+    /* 是否需要爬虫IP识别,当packageType为ip时必填  false-不购买  true-购买 (Optional) */
+    NeedSpiderIp bool `json:"needSpiderIp"`
+
+    /* 注册，登录，营销场景的版本号，当packageTpe为signup,login,marketing时必填   1-标准版  2-定制版 (Optional) */
+    Version int `json:"version"`
 }

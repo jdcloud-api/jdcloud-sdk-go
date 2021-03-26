@@ -17,14 +17,17 @@
 package models
 
 
-type CreditTask struct {
+type KmsSpec struct {
 
-    /* 数据Id。需要保证在一次请求中所有的Id不重复 (Optional) */
-    DataId string `json:"dataId"`
+    /* KMS 密钥ID  */
+    KmsKeyId string `json:"kmsKeyId"`
 
-    /* 待检测数据，最长512个字符 (Optional) */
-    Content string `json:"content"`
+    /* 数据密钥密文  */
+    KeyCipher string `json:"keyCipher"`
 
-    /* 数据类型，ip-IP，phone-手机，addr-地址，card-身份，pin-账户，eid-设备，signup-注册，login-登录，marketing-营销 (Optional) */
-    ResourceType string `json:"resourceType"`
+    /* 加密算法，AES256/SM4  */
+    EncryptAlgo string `json:"encryptAlgo"`
+
+    /* 索引算法，SHA256/SM3  */
+    IndexAlgo string `json:"indexAlgo"`
 }

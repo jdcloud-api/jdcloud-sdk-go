@@ -22,7 +22,7 @@ type DataResult struct {
     /* 检测时间，秒级时间戳 (Optional) */
     Timestamp int `json:"timestamp"`
 
-    /* 数据类型，ip-IP，phone-手机，addr-地址，card-身份，pin-账户，eid-设备 (Optional) */
+    /* 数据类型，ip-IP，phone-手机，addr-地址，card-身份，pin-账户，eid-设备，reg-注册，login-登录，activity-营销 (Optional) */
     ResourceType string `json:"resourceType"`
 
     /* 文本类型为检测内容，图片类型为图片短链 (Optional) */

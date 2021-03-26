@@ -17,14 +17,14 @@
 package models
 
 
-type CreditTask struct {
+type CreditTaskSignUp struct {
 
     /* 数据Id。需要保证在一次请求中所有的Id不重复 (Optional) */
     DataId string `json:"dataId"`
 
-    /* 待检测数据，最长512个字符 (Optional) */
-    Content string `json:"content"`
+    /* 待检测数据字符串，最长4096个字符，为可解析字符串json，例如："{\"phone\":\"18212341234\",\"ip\":\"1.1.1.1\",\"regEmail\":\"\",\"regName\":\"user1\",\"regType\":1,\"channel\":1,\"timestamp\":1604588399968,\"elapsedTime\":\"29\",\"eid\":\"7E8XXX\",\"regResult\":1}"。数据结构如creditTaskSignUpDetail (Optional) */
+    Content CreditTaskSignUpDetail `json:"content"`
 
-    /* 数据类型，ip-IP，phone-手机，addr-地址，card-身份，pin-账户，eid-设备，signup-注册，login-登录，marketing-营销 (Optional) */
+    /* 数据类型，signup-注册场景 (Optional) */
     ResourceType string `json:"resourceType"`
 }

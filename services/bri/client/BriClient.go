@@ -40,7 +40,7 @@ func NewBriClient(credential *core.Credential) *BriClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "bri",
-            Revision:    "1.0.0",
+            Revision:    "1.1.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }

@@ -17,14 +17,14 @@
 package models
 
 
-type CreditTask struct {
+type DataSourceTrendItem struct {
 
-    /* 数据Id。需要保证在一次请求中所有的Id不重复 (Optional) */
-    DataId string `json:"dataId"`
+    /* 时间戳 (Optional) */
+    TimeStamp int `json:"timeStamp"`
 
-    /* 待检测数据，最长512个字符 (Optional) */
-    Content string `json:"content"`
+    /* 受保护的数据源数量 (Optional) */
+    ProtectDataSourceCount int `json:"protectDataSourceCount"`
 
-    /* 数据类型，ip-IP，phone-手机，addr-地址，card-身份，pin-账户，eid-设备，signup-注册，login-登录，marketing-营销 (Optional) */
-    ResourceType string `json:"resourceType"`
+    /* 总的数据源数量 (Optional) */
+    TotalDataSourceCount int `json:"totalDataSourceCount"`
 }

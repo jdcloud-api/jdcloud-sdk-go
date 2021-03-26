@@ -17,14 +17,17 @@
 package models
 
 
-type CreditTask struct {
+type LevelSpec struct {
 
-    /* 数据Id。需要保证在一次请求中所有的Id不重复 (Optional) */
-    DataId string `json:"dataId"`
+    /* 敏感数据等级
+1. 值越大，敏感等级越高
+2. 最小值为0
+ (Optional) */
+    LevelId *int `json:"levelId"`
 
-    /* 待检测数据，最长512个字符 (Optional) */
-    Content string `json:"content"`
+    /* 敏感数据标签 (Optional) */
+    LevelTag *string `json:"levelTag"`
 
-    /* 数据类型，ip-IP，phone-手机，addr-地址，card-身份，pin-账户，eid-设备，signup-注册，login-登录，marketing-营销 (Optional) */
-    ResourceType string `json:"resourceType"`
+    /* 敏感数据描述 (Optional) */
+    LevelDesc *string `json:"levelDesc"`
 }

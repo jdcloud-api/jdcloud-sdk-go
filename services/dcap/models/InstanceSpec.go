@@ -17,14 +17,23 @@
 package models
 
 
-type CreditTask struct {
+type InstanceSpec struct {
 
-    /* 数据Id。需要保证在一次请求中所有的Id不重复 (Optional) */
-    DataId string `json:"dataId"`
+    /* 实例名称,长度限制32字节,允许英文字母,数字,下划线,中划线和中文  */
+    InstanceName string `json:"instanceName"`
 
-    /* 待检测数据，最长512个字符 (Optional) */
-    Content string `json:"content"`
+    /* 实例类型-规格 1->网关版本, 2->插件版本  */
+    InstanceType int `json:"instanceType"`
 
-    /* 数据类型，ip-IP，phone-手机，addr-地址，card-身份，pin-账户，eid-设备，signup-注册，login-登录，marketing-营销 (Optional) */
-    ResourceType string `json:"resourceType"`
+    /* 实例副本数量  */
+    Replicas int `json:"replicas"`
+
+    /* 数据源ID  */
+    DataSourceId string `json:"dataSourceId"`
+
+    /* AccessKey  */
+    AccessKey string `json:"accessKey"`
+
+    /* SecretKey  */
+    SecretKey string `json:"secretKey"`
 }

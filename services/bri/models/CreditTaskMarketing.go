@@ -17,14 +17,14 @@
 package models
 
 
-type CreditTask struct {
+type CreditTaskMarketing struct {
 
     /* 数据Id。需要保证在一次请求中所有的Id不重复 (Optional) */
     DataId string `json:"dataId"`
 
-    /* 待检测数据，最长512个字符 (Optional) */
-    Content string `json:"content"`
+    /* 待检测数据字符串，最长4096个字符，为可解析字符串json，数据结构如creditTaskMarketingDetail (Optional) */
+    Content CreditTaskMarketingDetail `json:"content"`
 
-    /* 数据类型，ip-IP，phone-手机，addr-地址，card-身份，pin-账户，eid-设备，signup-注册，login-登录，marketing-营销 (Optional) */
+    /* 数据类型，marketing-营销 (Optional) */
     ResourceType string `json:"resourceType"`
 }

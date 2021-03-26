@@ -17,14 +17,17 @@
 package models
 
 
-type CreditTask struct {
+type FieldSpec struct {
 
-    /* 数据Id。需要保证在一次请求中所有的Id不重复 (Optional) */
-    DataId string `json:"dataId"`
+    /* 字段名称  */
+    FieldName string `json:"fieldName"`
 
-    /* 待检测数据，最长512个字符 (Optional) */
-    Content string `json:"content"`
+    /* 加密字段  */
+    EncryptField string `json:"encryptField"`
 
-    /* 数据类型，ip-IP，phone-手机，addr-地址，card-身份，pin-账户，eid-设备，signup-注册，login-登录，marketing-营销 (Optional) */
-    ResourceType string `json:"resourceType"`
+    /* 索引字段  */
+    IndexField string `json:"indexField"`
+
+    /* 是否保留明文字段,true:保留明文字段  */
+    KeepPlainText bool `json:"keepPlainText"`
 }

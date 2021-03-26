@@ -17,14 +17,23 @@
 package models
 
 
-type CreditTask struct {
+type CallDataDetail struct {
 
-    /* 数据Id。需要保证在一次请求中所有的Id不重复 (Optional) */
-    DataId string `json:"dataId"`
+    /* IP (Optional) */
+    Ip int `json:"ip"`
 
-    /* 待检测数据，最长512个字符 (Optional) */
-    Content string `json:"content"`
+    /* 地址 (Optional) */
+    Addr int `json:"addr"`
 
-    /* 数据类型，ip-IP，phone-手机，addr-地址，card-身份，pin-账户，eid-设备，signup-注册，login-登录，marketing-营销 (Optional) */
-    ResourceType string `json:"resourceType"`
+    /* 设备 (Optional) */
+    Eid int `json:"eid"`
+
+    /* 手机 (Optional) */
+    Phone int `json:"phone"`
+
+    /* 账号 (Optional) */
+    Pin int `json:"pin"`
+
+    /* 身份 (Optional) */
+    Card int `json:"card"`
 }
