@@ -34,11 +34,17 @@ type CreateAlarmRequest struct {
     /* 幂等性校验参数,最长36位,若两个请求clientToken相等，则返回第一次创建的规则id，只创建一次规则  */
     ClientToken string `json:"clientToken"`
 
+    /* 数据所有者，1云监控控制台; 2云鼎。默认为1 (Optional) */
+    DataOwner *int64 `json:"dataOwner"`
+
     /* 资源维度，可用的维度请使用 describeProductsForAlarm接口查询 (Optional) */
     Dimension *string `json:"dimension"`
 
     /* 是否启用, 1表示启用规则，0表示禁用规则，默认为1 (Optional) */
     Enabled *int64 `json:"enabled"`
+
+    /* url回调设置数组 (Optional) */
+    MultiWebHook []monitor.WebHookOption `json:"multiWebHook"`
 
     /* 通知策略 (Optional) */
     NoticeOption []monitor.NoticeOption `json:"noticeOption"`
@@ -101,8 +107,10 @@ func NewCreateAlarmRequest(
  * param autoScalingPolicyId: 弹性伸缩组Id。注：仅ag\asg产品线内部使用 (Optional)
  * param baseContact: 告警通知联系人 (Optional)
  * param clientToken: 幂等性校验参数,最长36位,若两个请求clientToken相等，则返回第一次创建的规则id，只创建一次规则 (Required)
+ * param dataOwner: 数据所有者，1云监控控制台; 2云鼎。默认为1 (Optional)
  * param dimension: 资源维度，可用的维度请使用 describeProductsForAlarm接口查询 (Optional)
  * param enabled: 是否启用, 1表示启用规则，0表示禁用规则，默认为1 (Optional)
+ * param multiWebHook: url回调设置数组 (Optional)
  * param noticeOption: 通知策略 (Optional)
  * param product: 资源类型, 可用的资源类型列表请使用 describeProductsForAlarm接口查询。 (Required)
  * param resourceOption:  (Required)
@@ -116,8 +124,10 @@ func NewCreateAlarmRequestWithAllParams(
     autoScalingPolicyId *string,
     baseContact []monitor.BaseContact,
     clientToken string,
+    dataOwner *int64,
     dimension *string,
     enabled *int64,
+    multiWebHook []monitor.WebHookOption,
     noticeOption []monitor.NoticeOption,
     product string,
     resourceOption *monitor.ResourceOption,
@@ -138,8 +148,10 @@ func NewCreateAlarmRequestWithAllParams(
         AutoScalingPolicyId: autoScalingPolicyId,
         BaseContact: baseContact,
         ClientToken: clientToken,
+        DataOwner: dataOwner,
         Dimension: dimension,
         Enabled: enabled,
+        MultiWebHook: multiWebHook,
         NoticeOption: noticeOption,
         Product: product,
         ResourceOption: resourceOption,
@@ -179,6 +191,11 @@ func (r *CreateAlarmRequest) SetClientToken(clientToken string) {
     r.ClientToken = clientToken
 }
 
+/* param dataOwner: 数据所有者，1云监控控制台; 2云鼎。默认为1(Optional) */
+func (r *CreateAlarmRequest) SetDataOwner(dataOwner int64) {
+    r.DataOwner = &dataOwner
+}
+
 /* param dimension: 资源维度，可用的维度请使用 describeProductsForAlarm接口查询(Optional) */
 func (r *CreateAlarmRequest) SetDimension(dimension string) {
     r.Dimension = &dimension
@@ -187,6 +204,11 @@ func (r *CreateAlarmRequest) SetDimension(dimension string) {
 /* param enabled: 是否启用, 1表示启用规则，0表示禁用规则，默认为1(Optional) */
 func (r *CreateAlarmRequest) SetEnabled(enabled int64) {
     r.Enabled = &enabled
+}
+
+/* param multiWebHook: url回调设置数组(Optional) */
+func (r *CreateAlarmRequest) SetMultiWebHook(multiWebHook []monitor.WebHookOption) {
+    r.MultiWebHook = multiWebHook
 }
 
 /* param noticeOption: 通知策略(Optional) */

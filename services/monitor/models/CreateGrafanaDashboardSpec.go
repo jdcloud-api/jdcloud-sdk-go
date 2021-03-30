@@ -28,6 +28,9 @@ type CreateGrafanaDashboardSpec struct {
     /* Params, 模板参数名称及指定值，key为名称、value为指定值  */
     Params interface{} `json:"params"`
 
+    /* templateUid  */
+    TemplateUid string `json:"templateUid"`
+
     /* Title  */
     Title string `json:"title"`
 }

@@ -17,20 +17,14 @@
 package models
 
 
-type Datasource struct {
+type PanelTagResource struct {
 
-    /* customHttpHeader (Optional) */
-    CustomHttpHeader interface{} `json:"customHttpHeader"`
+    /* 标签服务对应的key  */
+    Key string `json:"key"`
 
-    /* 数据源名称  */
-    Name string `json:"name"`
+    /* region  */
+    RegionId string `json:"regionId"`
 
-    /*  (Optional) */
-    OpentsdbExtend OpentsdbExtend `json:"opentsdbExtend"`
-
-    /* jdcloud-monitor-opentsdb     后续可能会有其它。如jdcloud-monitor-prometheus等  */
-    PluginType string `json:"pluginType"`
-
-    /* 数据源地址  */
-    Url string `json:"url"`
+    /* 标签服务对应的values  */
+    Values []string `json:"values"`
 }

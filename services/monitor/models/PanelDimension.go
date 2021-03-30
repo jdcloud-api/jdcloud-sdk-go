@@ -17,20 +17,20 @@
 package models
 
 
-type Datasource struct {
+type PanelDimension struct {
 
-    /* customHttpHeader (Optional) */
-    CustomHttpHeader interface{} `json:"customHttpHeader"`
+    /* 绑定tags，查数据必传 (Optional) */
+    BindTags interface{} `json:"bindTags"`
 
-    /* 数据源名称  */
-    Name string `json:"name"`
+    /* 维度标识 (Optional) */
+    Dimension string `json:"dimension"`
 
-    /*  (Optional) */
-    OpentsdbExtend OpentsdbExtend `json:"opentsdbExtend"`
+    /* 维度名称 (Optional) */
+    DimensionName string `json:"dimensionName"`
 
-    /* jdcloud-monitor-opentsdb     后续可能会有其它。如jdcloud-monitor-prometheus等  */
-    PluginType string `json:"pluginType"`
+    /* 是否有子节点 (Optional) */
+    HasSubNode bool `json:"hasSubNode"`
 
-    /* 数据源地址  */
-    Url string `json:"url"`
+    /* 子节点的tagKey (Optional) */
+    SubNodeKeys []SubNodeKeys `json:"subNodeKeys"`
 }

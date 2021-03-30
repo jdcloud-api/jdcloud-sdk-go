@@ -17,20 +17,14 @@
 package models
 
 
-type Datasource struct {
+type AlarmUsage struct {
 
-    /* customHttpHeader (Optional) */
-    CustomHttpHeader interface{} `json:"customHttpHeader"`
+    /* 规则类型：resourceMonitor资源监控；customMetric自定义监控；oneclickAlarm一键报警 (Optional) */
+    AlarmType string `json:"alarmType"`
 
-    /* 数据源名称  */
-    Name string `json:"name"`
+    /* 总个数 (Optional) */
+    AllCount int64 `json:"allCount"`
 
-    /*  (Optional) */
-    OpentsdbExtend OpentsdbExtend `json:"opentsdbExtend"`
-
-    /* jdcloud-monitor-opentsdb     后续可能会有其它。如jdcloud-monitor-prometheus等  */
-    PluginType string `json:"pluginType"`
-
-    /* 数据源地址  */
-    Url string `json:"url"`
+    /* 启用个数 (Optional) */
+    EnableCount int64 `json:"enableCount"`
 }

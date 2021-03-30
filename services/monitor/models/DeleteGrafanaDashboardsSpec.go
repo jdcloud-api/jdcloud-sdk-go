@@ -19,6 +19,6 @@ package models
 
 type DeleteGrafanaDashboardsSpec struct {
 
-    /* filters, name为dashboardUids， values为dashboardUid列表，精确匹配，支持多个  */
+    /* filters, name为dashboardUids， values为dashboardUid列表，精确匹配，支持多个 (Optional) */
     Filters []Filter `json:"filters"`
 }

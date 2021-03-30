@@ -25,11 +25,17 @@ type UpdateAlarmSpec struct {
     /* 告警通知联系人 (Optional) */
     BaseContact []BaseContact `json:"baseContact"`
 
+    /* 数据所有者，1云监控控制台; 2云鼎。默认为1 (Optional) */
+    DataOwner int64 `json:"dataOwner"`
+
     /* 资源维度，可用的维度请使用 describeProductsForAlarm接口查询 (Optional) */
     Dimension string `json:"dimension"`
 
     /* 是否启用, 1表示启用规则，0表示禁用规则，默认为1 (Optional) */
     Enabled int64 `json:"enabled"`
+
+    /* url回调设置数组 (Optional) */
+    MultiWebHook []WebHookOption `json:"multiWebHook"`
 
     /* 通知策略 (Optional) */
     NoticeOption []NoticeOption `json:"noticeOption"`

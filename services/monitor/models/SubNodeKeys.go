@@ -17,20 +17,11 @@
 package models
 
 
-type Datasource struct {
+type SubNodeKeys struct {
 
-    /* customHttpHeader (Optional) */
-    CustomHttpHeader interface{} `json:"customHttpHeader"`
+    /* 该key所在层级 (Optional) */
+    Index int64 `json:"index"`
 
-    /* 数据源名称  */
-    Name string `json:"name"`
-
-    /*  (Optional) */
-    OpentsdbExtend OpentsdbExtend `json:"opentsdbExtend"`
-
-    /* jdcloud-monitor-opentsdb     后续可能会有其它。如jdcloud-monitor-prometheus等  */
-    PluginType string `json:"pluginType"`
-
-    /* 数据源地址  */
-    Url string `json:"url"`
+    /* key (Optional) */
+    Key string `json:"key"`
 }

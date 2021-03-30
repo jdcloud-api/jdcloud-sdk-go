@@ -17,20 +17,14 @@
 package models
 
 
-type Datasource struct {
+type ConfigNotificationSpec struct {
 
-    /* customHttpHeader (Optional) */
-    CustomHttpHeader interface{} `json:"customHttpHeader"`
-
-    /* 数据源名称  */
-    Name string `json:"name"`
+    /* 事件操作类型、    create、update、delete  */
+    ActionType string `json:"actionType"`
 
     /*  (Optional) */
-    OpentsdbExtend OpentsdbExtend `json:"opentsdbExtend"`
+    MsgDetail AlarmNofityConfig `json:"msgDetail"`
 
-    /* jdcloud-monitor-opentsdb     后续可能会有其它。如jdcloud-monitor-prometheus等  */
-    PluginType string `json:"pluginType"`
-
-    /* 数据源地址  */
-    Url string `json:"url"`
+    /* 事件类型、    nofityChannelMsg(通知渠道配置消息)  */
+    MsgType string `json:"msgType"`
 }

@@ -17,20 +17,11 @@
 package models
 
 
-type Datasource struct {
+type UpdatePanelsPositionSpec struct {
 
-    /* customHttpHeader (Optional) */
-    CustomHttpHeader interface{} `json:"customHttpHeader"`
+    /* 更新panel的所属dashboard的uid  */
+    DashboardUid string `json:"dashboardUid"`
 
-    /* 数据源名称  */
-    Name string `json:"name"`
-
-    /*  (Optional) */
-    OpentsdbExtend OpentsdbExtend `json:"opentsdbExtend"`
-
-    /* jdcloud-monitor-opentsdb     后续可能会有其它。如jdcloud-monitor-prometheus等  */
-    PluginType string `json:"pluginType"`
-
-    /* 数据源地址  */
-    Url string `json:"url"`
+    /* 更新位置的panel  */
+    PanelsPosition []PanelPositionForUpdate `json:"panelsPosition"`
 }

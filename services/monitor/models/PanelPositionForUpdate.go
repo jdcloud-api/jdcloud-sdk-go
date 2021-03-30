@@ -17,20 +17,23 @@
 package models
 
 
-type Datasource struct {
+type PanelPositionForUpdate struct {
 
-    /* customHttpHeader (Optional) */
-    CustomHttpHeader interface{} `json:"customHttpHeader"`
+    /* 该panel所在列  */
+    Col int64 `json:"col"`
 
-    /* 数据源名称  */
-    Name string `json:"name"`
+    /* 该panel高度  */
+    Height int64 `json:"height"`
 
-    /*  (Optional) */
-    OpentsdbExtend OpentsdbExtend `json:"opentsdbExtend"`
+    /* 该panel在dashboard中的顺序  */
+    Order int64 `json:"order"`
 
-    /* jdcloud-monitor-opentsdb     后续可能会有其它。如jdcloud-monitor-prometheus等  */
-    PluginType string `json:"pluginType"`
+    /* 更新panel的uuid  */
+    PanelUid string `json:"panelUid"`
 
-    /* 数据源地址  */
-    Url string `json:"url"`
+    /* 该panel所在行  */
+    Row int64 `json:"row"`
+
+    /* 该panel宽度  */
+    Width int64 `json:"width"`
 }

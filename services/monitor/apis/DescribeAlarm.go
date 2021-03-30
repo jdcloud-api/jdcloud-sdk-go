@@ -106,6 +106,7 @@ type DescribeAlarmResult struct {
     Dimension string `json:"dimension"`
     DimensionName string `json:"dimensionName"`
     Enabled int64 `json:"enabled"`
+    MultiWebHook []monitor.WebHookOption `json:"multiWebHook"`
     NoticeOption []monitor.NoticeOption `json:"noticeOption"`
     Product string `json:"product"`
     ProductName string `json:"productName"`

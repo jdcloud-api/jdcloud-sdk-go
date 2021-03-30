@@ -17,20 +17,20 @@
 package models
 
 
-type Datasource struct {
-
-    /* customHttpHeader (Optional) */
-    CustomHttpHeader interface{} `json:"customHttpHeader"`
-
-    /* 数据源名称  */
-    Name string `json:"name"`
+type AlertChannel struct {
 
     /*  (Optional) */
-    OpentsdbExtend OpentsdbExtend `json:"opentsdbExtend"`
+    Created string `json:"created"`
 
-    /* jdcloud-monitor-opentsdb     后续可能会有其它。如jdcloud-monitor-prometheus等  */
-    PluginType string `json:"pluginType"`
+    /* channel id (Optional) */
+    Uid string `json:"uid"`
 
-    /* 数据源地址  */
-    Url string `json:"url"`
+    /* alert channel类型 (Optional) */
+    AlertChannelType string `json:"alertChannelType"`
+
+    /* 名称 (Optional) */
+    Name string `json:"name"`
+
+    /* 详情 (Optional) */
+    Settings interface{} `json:"settings"`
 }

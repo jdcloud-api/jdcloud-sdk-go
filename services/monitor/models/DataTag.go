@@ -19,7 +19,8 @@ package models
 
 type DataTag struct {
 
-    /*  (Optional) */
+    /* 1 进数据点打tag，如果数据点存在该tag，予以覆盖，2进行数据点打tag，如果数据存在该tag，跳过不予处理，3 对于数据点中存在tag进行改名称，
+例如：{"tagKey":"resourceId","tagValue":"nodeId","operation":3}，原数据点名称resourceId:"ia-adx01"改名成nodeId:"ia-adx01" (Optional) */
     Operation int64 `json:"operation"`
 
     /*  (Optional) */

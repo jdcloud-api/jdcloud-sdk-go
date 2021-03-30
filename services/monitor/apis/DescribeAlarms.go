@@ -31,6 +31,9 @@ type DescribeAlarmsRequest struct {
     /* 页面大小，默认为20；取值范围[1, 100] (Optional) */
     PageSize *int `json:"pageSize"`
 
+    /* 数据所有者，1云监控控制台; 2云鼎。默认为1 (Optional) */
+    DataOwner *int `json:"dataOwner"`
+
     /* 产品线标识，同一个产品线下可能存在多个product，如(redis下有redis2.8cluster、redis4.0) (Optional) */
     ServiceCode *string `json:"serviceCode"`
 
@@ -79,6 +82,7 @@ func NewDescribeAlarmsRequest(
 /*
  * param pageNumber: 当前所在页，默认为1 (Optional)
  * param pageSize: 页面大小，默认为20；取值范围[1, 100] (Optional)
+ * param dataOwner: 数据所有者，1云监控控制台; 2云鼎。默认为1 (Optional)
  * param serviceCode: 产品线标识，同一个产品线下可能存在多个product，如(redis下有redis2.8cluster、redis4.0) (Optional)
  * param product: 产品标识，如redis下分多个产品(redis2.8cluster、redis4.0)。同时指定serviceCode与product时，product优先生效 (Optional)
  * param dimension: 产品下的维度标识，指定dimension时必须指定product (Optional)
@@ -94,6 +98,7 @@ alarmIds - 规则id，精确匹配，支持多个 (Optional)
 func NewDescribeAlarmsRequestWithAllParams(
     pageNumber *int,
     pageSize *int,
+    dataOwner *int,
     serviceCode *string,
     product *string,
     dimension *string,
@@ -113,6 +118,7 @@ func NewDescribeAlarmsRequestWithAllParams(
         },
         PageNumber: pageNumber,
         PageSize: pageSize,
+        DataOwner: dataOwner,
         ServiceCode: serviceCode,
         Product: product,
         Dimension: dimension,
@@ -145,6 +151,11 @@ func (r *DescribeAlarmsRequest) SetPageNumber(pageNumber int) {
 /* param pageSize: 页面大小，默认为20；取值范围[1, 100](Optional) */
 func (r *DescribeAlarmsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
+}
+
+/* param dataOwner: 数据所有者，1云监控控制台; 2云鼎。默认为1(Optional) */
+func (r *DescribeAlarmsRequest) SetDataOwner(dataOwner int) {
+    r.DataOwner = &dataOwner
 }
 
 /* param serviceCode: 产品线标识，同一个产品线下可能存在多个product，如(redis下有redis2.8cluster、redis4.0)(Optional) */

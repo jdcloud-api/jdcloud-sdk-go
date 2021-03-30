@@ -31,6 +31,9 @@ type DescribeAlarmHistoryRequest struct {
     /* 页面大小，默认为20；取值范围[1, 100] (Optional) */
     PageSize *int `json:"pageSize"`
 
+    /* 数据所有者，1云监控控制台; 2云鼎。默认为1 (Optional) */
+    DataOwner *int `json:"dataOwner"`
+
     /* 产品线标识，同一个产品线下可能存在多个product，如(redis下有redis2.8cluster、redis4.0) (Optional) */
     ServiceCode *string `json:"serviceCode"`
 
@@ -87,6 +90,7 @@ func NewDescribeAlarmHistoryRequest(
 /*
  * param pageNumber: 当前所在页，默认为1 (Optional)
  * param pageSize: 页面大小，默认为20；取值范围[1, 100] (Optional)
+ * param dataOwner: 数据所有者，1云监控控制台; 2云鼎。默认为1 (Optional)
  * param serviceCode: 产品线标识，同一个产品线下可能存在多个product，如(redis下有redis2.8cluster、redis4.0) (Optional)
  * param product: 产品标识,默认返回该product下所有dimension的数据。eg:product=redis2.8cluster（redis2.8cluster产品下包含redis2.8-shard与redis2.8-proxy、redis2.8-instance多个维度)。 (Optional)
  * param dimension: 维度标识、指定该参数时，查询只返回该维度的数据。如redis2.8cluster下存在实例、分片等多个维度 (Optional)
@@ -104,6 +108,7 @@ alarmIds - 规则Id，精确匹配，支持多个 (Optional)
 func NewDescribeAlarmHistoryRequestWithAllParams(
     pageNumber *int,
     pageSize *int,
+    dataOwner *int,
     serviceCode *string,
     product *string,
     dimension *string,
@@ -126,6 +131,7 @@ func NewDescribeAlarmHistoryRequestWithAllParams(
         },
         PageNumber: pageNumber,
         PageSize: pageSize,
+        DataOwner: dataOwner,
         ServiceCode: serviceCode,
         Product: product,
         Dimension: dimension,
@@ -161,6 +167,11 @@ func (r *DescribeAlarmHistoryRequest) SetPageNumber(pageNumber int) {
 /* param pageSize: 页面大小，默认为20；取值范围[1, 100](Optional) */
 func (r *DescribeAlarmHistoryRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
+}
+
+/* param dataOwner: 数据所有者，1云监控控制台; 2云鼎。默认为1(Optional) */
+func (r *DescribeAlarmHistoryRequest) SetDataOwner(dataOwner int) {
+    r.DataOwner = &dataOwner
 }
 
 /* param serviceCode: 产品线标识，同一个产品线下可能存在多个product，如(redis下有redis2.8cluster、redis4.0)(Optional) */

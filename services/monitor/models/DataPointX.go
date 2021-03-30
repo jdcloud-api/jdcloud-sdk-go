@@ -23,7 +23,7 @@ type DataPointX struct {
     Metric string `json:"metric"`
 
     /* 数据维度，数据类型为map类型，最多五个标签，尽量不传或少传。总长度不大于255字节，只允许英文、数字、下划线_、点., [0-9][a-z] [A-Z] [. _ ]，  其它会返回err (Optional) */
-    Tags interface{} `json:"tags"`
+    Tags *interface{} `json:"tags"`
 
     /* 秒级时间戳，早于当前时间30天的不能写入；建议的上报时间戳：上报时间间隔的整数倍，如上报间隔为5s，则建议上报的时间戳为 timestamp = current timestamp - (current timestamp % time interval) = 1487647187 - （1487647187 % 5） = 1487647187 -2 = 1487647185  */
     Timestamp int64 `json:"timestamp"`

@@ -19,6 +19,9 @@ package models
 
 type BasicDatasource struct {
 
+    /* customHttpHeader (Optional) */
+    CustomHttpHeader interface{} `json:"customHttpHeader"`
+
     /*  (Optional) */
     OpentsdbExtend OpentsdbExtend `json:"opentsdbExtend"`
 

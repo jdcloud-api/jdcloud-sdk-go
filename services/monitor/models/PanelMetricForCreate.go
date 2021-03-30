@@ -17,20 +17,14 @@
 package models
 
 
-type Datasource struct {
+type PanelMetricForCreate struct {
 
-    /* customHttpHeader (Optional) */
-    CustomHttpHeader interface{} `json:"customHttpHeader"`
+    /* 聚合方式，跨资源计算方式 (Optional) */
+    Aggregator string `json:"aggregator"`
 
-    /* 数据源名称  */
-    Name string `json:"name"`
+    /* 采样方式，同一资源计算方式，如一分钟两个点，计算一分钟内这两个点的平均值得出一个点 (Optional) */
+    Downsample string `json:"downsample"`
 
-    /*  (Optional) */
-    OpentsdbExtend OpentsdbExtend `json:"opentsdbExtend"`
-
-    /* jdcloud-monitor-opentsdb     后续可能会有其它。如jdcloud-monitor-prometheus等  */
-    PluginType string `json:"pluginType"`
-
-    /* 数据源地址  */
-    Url string `json:"url"`
+    /* metric  */
+    Metric string `json:"metric"`
 }

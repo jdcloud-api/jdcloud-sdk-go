@@ -17,20 +17,11 @@
 package models
 
 
-type Datasource struct {
+type SwitchOneClickAlarmsSpec struct {
 
-    /* customHttpHeader (Optional) */
-    CustomHttpHeader interface{} `json:"customHttpHeader"`
+    /* 产品线的serviceCode  */
+    ServiceCode string `json:"serviceCode"`
 
-    /* 数据源名称  */
-    Name string `json:"name"`
-
-    /*  (Optional) */
-    OpentsdbExtend OpentsdbExtend `json:"opentsdbExtend"`
-
-    /* jdcloud-monitor-opentsdb     后续可能会有其它。如jdcloud-monitor-prometheus等  */
-    PluginType string `json:"pluginType"`
-
-    /* 数据源地址  */
-    Url string `json:"url"`
+    /* 1启动、0关闭  */
+    State int64 `json:"state"`
 }

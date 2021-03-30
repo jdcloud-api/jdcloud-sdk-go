@@ -17,20 +17,17 @@
 package models
 
 
-type Datasource struct {
+type RawData struct {
 
-    /* customHttpHeader (Optional) */
-    CustomHttpHeader interface{} `json:"customHttpHeader"`
+    /* 被聚合的tags (Optional) */
+    AggregateTags []string `json:"aggregateTags"`
 
-    /* 数据源名称  */
-    Name string `json:"name"`
+    /* 数据点 (Optional) */
+    Dps interface{} `json:"dps"`
 
-    /*  (Optional) */
-    OpentsdbExtend OpentsdbExtend `json:"opentsdbExtend"`
+    /* metric (Optional) */
+    Metric string `json:"metric"`
 
-    /* jdcloud-monitor-opentsdb     后续可能会有其它。如jdcloud-monitor-prometheus等  */
-    PluginType string `json:"pluginType"`
-
-    /* 数据源地址  */
-    Url string `json:"url"`
+    /* tags (Optional) */
+    Tags interface{} `json:"tags"`
 }

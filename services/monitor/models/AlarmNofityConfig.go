@@ -17,20 +17,14 @@
 package models
 
 
-type Datasource struct {
+type AlarmNofityConfig struct {
 
-    /* customHttpHeader (Optional) */
-    CustomHttpHeader interface{} `json:"customHttpHeader"`
+    /* ark节点  */
+    ArkNode string `json:"arkNode"`
 
-    /* 数据源名称  */
-    Name string `json:"name"`
+    /* 通知channle名称  */
+    ChannelName string `json:"channelName"`
 
-    /*  (Optional) */
-    OpentsdbExtend OpentsdbExtend `json:"opentsdbExtend"`
-
-    /* jdcloud-monitor-opentsdb     后续可能会有其它。如jdcloud-monitor-prometheus等  */
-    PluginType string `json:"pluginType"`
-
-    /* 数据源地址  */
-    Url string `json:"url"`
+    /* 通知channle目的地url  */
+    ChannelUrl string `json:"channelUrl"`
 }
