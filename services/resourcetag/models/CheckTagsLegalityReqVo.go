@@ -17,22 +17,14 @@
 package models
 
 
-type TagKeysReqVo struct {
+type CheckTagsLegalityReqVo struct {
 
-    /* 产品线名称列表
-标签系统支持的产品线名称如下
-- vm               disk        sqlserver  es          mongodb               ip
-- memcached        redis       drds       rds         database              db_ro
-- percona          percona_ro  mariadb    mariadb_ro  pg                    cdn
-- nativecontainer  pod         zfs        jqs         kubernetesNodegroup   jcq
- (Optional) */
+    /* 接入标签系统的产品线名称集合 (Optional) */
     ServiceCodes []string `json:"serviceCodes"`
 
-    /* 标签过滤列表 (Optional) */
-    TagFilters []TagFilter `json:"tagFilters"`
+    /* 用户普通标签集合 (Optional) */
+    UserTags []Tag `json:"userTags"`
 
-    /* 控制标签显示参数, 默认为0
-0: 只显示普通用户标签
-1: 显示系统标签和普通用户标签 (Optional) */
-    ShowTagStatus *int `json:"showTagStatus"`
+    /* 系统标签集合 (Optional) */
+    SysTags []Tag `json:"sysTags"`
 }

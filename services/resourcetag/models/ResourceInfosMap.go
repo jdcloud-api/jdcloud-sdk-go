@@ -17,7 +17,7 @@
 package models
 
 
-type TagKeysReqVo struct {
+type ResourceInfosMap struct {
 
     /* 产品线名称列表
 标签系统支持的产品线名称如下
@@ -25,14 +25,9 @@ type TagKeysReqVo struct {
 - memcached        redis       drds       rds         database              db_ro
 - percona          percona_ro  mariadb    mariadb_ro  pg                    cdn
 - nativecontainer  pod         zfs        jqs         kubernetesNodegroup   jcq
- (Optional) */
-    ServiceCodes []string `json:"serviceCodes"`
+  */
+    ServiceCode string `json:"serviceCode"`
 
-    /* 标签过滤列表 (Optional) */
-    TagFilters []TagFilter `json:"tagFilters"`
-
-    /* 控制标签显示参数, 默认为0
-0: 只显示普通用户标签
-1: 显示系统标签和普通用户标签 (Optional) */
-    ShowTagStatus *int `json:"showTagStatus"`
+    /* 资源id列表  */
+    ResourceIds []string `json:"resourceIds"`
 }

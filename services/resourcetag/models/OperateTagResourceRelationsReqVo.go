@@ -17,26 +17,19 @@
 package models
 
 
-type FrontResourceTagMapping struct {
+type OperateTagResourceRelationsReqVo struct {
 
-    /* jrn本期不用, 默认为null (Optional) */
-    Jrn string `json:"jrn"`
+    /* 产品线与资源id列表对象  */
+    ResourceInfos []ResourceInfosMap `json:"resourceInfos"`
 
-    /* 资源id (Optional) */
-    ResourceId string `json:"resourceId"`
+    /* 用户普通标签集合(字段sysTags和userTags不能同时为空)
+ (Optional) */
+    UserTags []Tag `json:"userTags"`
 
-    /* 产品线名称 (Optional) */
-    ServiceCode string `json:"serviceCode"`
+    /* 系统标签集合(字段sysTags和userTags不能同时为空)
+ (Optional) */
+    SysTags []Tag `json:"sysTags"`
 
-    /* 资源绑定的标签数组 (Optional) */
-    Tags []Tag `json:"tags"`
-
-    /* 资源名称 (Optional) */
-    ResourceName string `json:"resourceName"`
-
-    /* 资源详情url地址 (Optional) */
-    DetailUrl string `json:"detailUrl"`
-
-    /* 可用区 (Optional) */
-    Az string `json:"az"`
+    /* 操作类型, 0:解绑(预留参数,暂不支持) 1:绑定  */
+    Operate int `json:"operate"`
 }

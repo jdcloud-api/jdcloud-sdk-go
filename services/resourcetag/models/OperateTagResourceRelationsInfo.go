@@ -17,26 +17,17 @@
 package models
 
 
-type FrontResourceTagMapping struct {
-
-    /* jrn本期不用, 默认为null (Optional) */
-    Jrn string `json:"jrn"`
+type OperateTagResourceRelationsInfo struct {
 
     /* 资源id (Optional) */
     ResourceId string `json:"resourceId"`
 
-    /* 产品线名称 (Optional) */
-    ServiceCode string `json:"serviceCode"`
+    /* 操作标签与资源关系结果状态
+ (Optional) */
+    Success bool `json:"success"`
 
-    /* 资源绑定的标签数组 (Optional) */
-    Tags []Tag `json:"tags"`
-
-    /* 资源名称 (Optional) */
-    ResourceName string `json:"resourceName"`
-
-    /* 资源详情url地址 (Optional) */
-    DetailUrl string `json:"detailUrl"`
-
-    /* 可用区 (Optional) */
-    Az string `json:"az"`
+    /* 操作标签与资源关系结果描述
+操作成功时msg为操作成功
+操作失败时msg为失败的原因 (Optional) */
+    Msg string `json:"msg"`
 }

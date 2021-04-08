@@ -17,26 +17,20 @@
 package models
 
 
-type FrontResourceTagMapping struct {
+type ProductLineAccessInfo struct {
 
-    /* jrn本期不用, 默认为null (Optional) */
-    Jrn string `json:"jrn"`
-
-    /* 资源id (Optional) */
-    ResourceId string `json:"resourceId"`
-
-    /* 产品线名称 (Optional) */
+    /* 产品线代号名称 (Optional) */
     ServiceCode string `json:"serviceCode"`
 
-    /* 资源绑定的标签数组 (Optional) */
-    Tags []Tag `json:"tags"`
+    /* 产品线英文名称, 提供给标签控制台展示 (Optional) */
+    FeName string `json:"feName"`
 
-    /* 资源名称 (Optional) */
-    ResourceName string `json:"resourceName"`
+    /* 产品线中文名称, 提供给标签控制台展示 (Optional) */
+    FeNameCn string `json:"feNameCn"`
 
-    /* 资源详情url地址 (Optional) */
-    DetailUrl string `json:"detailUrl"`
+    /* 产品线是否标准接入标签系统 (Optional) */
+    StandardAccess bool `json:"standardAccess"`
 
-    /* 可用区 (Optional) */
-    Az string `json:"az"`
+    /* 是否区分地域 (Optional) */
+    DistinguishRegion bool `json:"distinguishRegion"`
 }

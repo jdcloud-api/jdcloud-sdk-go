@@ -32,7 +32,7 @@ type TagsResourcesInfo struct {
     DiskResourceCount int64 `json:"diskResourceCount"`
 
     /* 标签绑定的数据库SQL Server资源个数 (Optional) */
-    SqlServerResourceCount int64 `json:"sqlServerResourceCount"`
+    SqlserverResourceCount int64 `json:"sqlserverResourceCount"`
 
     /* 标签绑定的MongoDB资源个数 (Optional) */
     MongodbResourceCount int64 `json:"mongodbResourceCount"`
@@ -90,4 +90,76 @@ type TagsResourcesInfo struct {
 
     /* 标签绑定的Kubernetes集群资源个数 (Optional) */
     KubernetesNodegroupResourceCount int64 `json:"kubernetesNodegroupResourceCount"`
+
+    /* 标签绑定的网关资源个数 (Optional) */
+    ApigatewayResourceCount int64 `json:"apigatewayResourceCount"`
+
+    /* 标签绑定的对象存储资源个数 (Optional) */
+    StorageResourceCount int64 `json:"storageResourceCount"`
+
+    /* 标签绑定的云数据库InfluxDB资源个数 (Optional) */
+    TsdsResourceCount int64 `json:"tsdsResourceCount"`
+
+    /* 标签绑定的云数据库Greenplum资源个数 (Optional) */
+    JdwResourceCount int64 `json:"jdwResourceCount"`
+
+    /* 标签绑定的DDos防护包资源个数 (Optional) */
+    AntiproResourceCount int64 `json:"antiproResourceCount"`
+
+    /* 标签绑定的Dts数据传输产品资源个数 (Optional) */
+    DtsResourceCount int64 `json:"dtsResourceCount"`
+
+    /* 标签绑定的Cps云物理服务器资源个数 (Optional) */
+    CpsResourceCount int64 `json:"cpsResourceCount"`
+
+    /* 标签绑定的edcps资源个数 (Optional) */
+    EdcpsResourceCount int64 `json:"edcpsResourceCount"`
+
+    /* 标签绑定的sgw资源个数 (Optional) */
+    SgwResourceCount int64 `json:"sgwResourceCount"`
+
+    /* 标签绑定的waf资源个数 (Optional) */
+    WafResourceCount int64 `json:"wafResourceCount"`
+
+    /* 标签绑定的kafka资源个数 (Optional) */
+    KafkaResourceCount int64 `json:"kafkaResourceCount"`
+
+    /* 标签绑定的zk资源个数 (Optional) */
+    ZkResourceCount int64 `json:"zkResourceCount"`
+
+    /* 标签绑定的balance资源个数 (Optional) */
+    BalanceResourceCount int64 `json:"balanceResourceCount"`
+
+    /* 标签绑定的nlb资源个数 (Optional) */
+    NlbResourceCount int64 `json:"nlbResourceCount"`
+
+    /* 标签绑定的dnlb资源个数 (Optional) */
+    DnlbResourceCount int64 `json:"dnlbResourceCount"`
+
+    /* 标签绑定的threatscanner资源个数 (Optional) */
+    ThreatscannerResourceCount int64 `json:"threatscannerResourceCount"`
+
+    /* 标签绑定的jns资源个数 (Optional) */
+    JnsResourceCount int64 `json:"jnsResourceCount"`
+
+    /* 标签绑定的rabbitmq资源个数 (Optional) */
+    RabbitmqResourceCount int64 `json:"rabbitmqResourceCount"`
+
+    /* 标签绑定的natgateway资源个数 (Optional) */
+    NatgatewayResourceCount int64 `json:"natgatewayResourceCount"`
+
+    /* 标签绑定的clickhouse资源个数 (Optional) */
+    ClickHouseResourceCount int64 `json:"clickHouseResourceCount"`
+
+    /* 标签绑定的tidb资源个数 (Optional) */
+    TidbResourceCount int64 `json:"tidbResourceCount"`
+
+    /* 标签绑定的dbs资源个数 (Optional) */
+    DbsResourceCount int64 `json:"dbsResourceCount"`
+
+    /* 标签绑定的jdccs资源个数 (Optional) */
+    JdccsResourceCount int64 `json:"jdccsResourceCount"`
+
+    /* 标签绑定的edcs资源个数 (Optional) */
+    EpcsResourceCount int64 `json:"epcsResourceCount"`
 }

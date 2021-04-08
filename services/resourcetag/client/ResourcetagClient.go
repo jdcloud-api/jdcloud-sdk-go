@@ -40,7 +40,7 @@ func NewResourcetagClient(credential *core.Credential) *ResourcetagClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "resourcetag",
-            Revision:    "0.1.7",
+            Revision:    "0.6.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,6 +51,74 @@ func (c *ResourcetagClient) SetConfig(config *core.Config) {
 
 func (c *ResourcetagClient) SetLogger(logger core.Logger) {
     c.Logger = logger
+}
+
+func (c *ResourcetagClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
+}
+
+/* 资源标签解绑。<br/>
+注意cdn资源解绑标签时url中regionId必须指定为cn-all。
+ */
+func (c *ResourcetagClient) UnTagResources(request *resourcetag.UnTagResourcesRequest) (*resourcetag.UnTagResourcesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &resourcetag.UnTagResourcesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据标签查找资源。 <br/>
+若要查找cdn产品线的资源则url中的regionId必须指定为cn-all。
+ */
+func (c *ResourcetagClient) QueryResource(request *resourcetag.QueryResourceRequest) (*resourcetag.QueryResourceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &resourcetag.QueryResourceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取标签键 */
+func (c *ResourcetagClient) DescribeKeys(request *resourcetag.DescribeKeysRequest) (*resourcetag.DescribeKeysResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &resourcetag.DescribeKeysResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
 }
 
 /* 获得资源与对应标签列表详情，不含资源名称和可用区。<br/>
@@ -67,6 +135,26 @@ func (c *ResourcetagClient) DescribeResources(request *resourcetag.DescribeResou
     }
 
     jdResp := &resourcetag.DescribeResourcesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取标签值 */
+func (c *ResourcetagClient) DescribeValues(request *resourcetag.DescribeValuesRequest) (*resourcetag.DescribeValuesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &resourcetag.DescribeValuesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -112,50 +200,6 @@ func (c *ResourcetagClient) TagResources(request *resourcetag.TagResourcesReques
     }
 
     jdResp := &resourcetag.TagResourcesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 资源标签解绑。<br/>
-注意cdn资源解绑标签时url中regionId必须指定为cn-all。
- */
-func (c *ResourcetagClient) UnTagResources(request *resourcetag.UnTagResourcesRequest) (*resourcetag.UnTagResourcesResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &resourcetag.UnTagResourcesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 根据标签查找资源。 <br/>
-若要查找cdn产品线的资源则url中的regionId必须指定为cn-all。
- */
-func (c *ResourcetagClient) QueryResource(request *resourcetag.QueryResourceRequest) (*resourcetag.QueryResourceResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &resourcetag.QueryResourceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
