@@ -85,6 +85,12 @@ type AlarmHistory struct {
     /* 报警条件 (Optional) */
     Condition string `json:"condition"`
 
+    /* 报警条件（英文） (Optional) */
+    ConditionEn string `json:"conditionEn"`
+
+    /* 通知对象 (Optional) */
+    SendInfo interface{} `json:"sendInfo"`
+
     /* 策略ID (Optional) */
     StrategyId int `json:"strategyId"`
 }

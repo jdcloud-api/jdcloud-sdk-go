@@ -17,16 +17,7 @@
 package models
 
 
-type CreateAlarmSpec struct {
-
-    /* idc机房实例ID (Optional) */
-    Idc string `json:"idc"`
-
-    /* 资源类型，bandwidth:带宽 (Optional) */
-    ResourceType string `json:"resourceType"`
-
-    /* 带宽实例ID (Optional) */
-    ResourceId string `json:"resourceId"`
+type UpdateAlarmSpec struct {
 
     /* 规则名称 (Optional) */
     Name string `json:"name"`
@@ -57,9 +48,6 @@ type CreateAlarmSpec struct {
 
     /* 通知方式 all:全部 sms：短信 email:邮件 (Optional) */
     NoticeMethod string `json:"noticeMethod"`
-
-    /* 通知对象 all:全部 persons：个人 groups:角色组 (Optional) */
-    NoticeObj string `json:"noticeObj"`
 
     /* 通知对象用户ID,若多个用逗号分隔 (Optional) */
     UserId string `json:"userId"`

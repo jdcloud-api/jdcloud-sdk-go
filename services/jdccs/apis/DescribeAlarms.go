@@ -19,6 +19,7 @@ package apis
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
     jdccs "github.com/jdcloud-api/jdcloud-sdk-go/services/jdccs/models"
+    common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
 
 type DescribeAlarmsRequest struct {
@@ -31,14 +32,24 @@ type DescribeAlarmsRequest struct {
     /* 分页大小，默认为20 (Optional) */
     PageSize *int `json:"pageSize"`
 
+    /* 是否查询全部，默认分页 (Optional) */
+    All *int `json:"all"`
+
     /* 资源类型 bandwidth:带宽 (Optional) */
     ResourceType *string `json:"resourceType"`
 
     /* 资源ID，指定resourceId时须指定resourceType (Optional) */
     ResourceId *string `json:"resourceId"`
 
+    /* 机房英文标识 (Optional) */
+    Idc *string `json:"idc"`
+
     /* 规则状态 disabled:禁用 enabled:启用 (Optional) */
     Status *string `json:"status"`
+
+    /* alarmId - 规则实施ID，精确匹配，支持多个
+ (Optional) */
+    Filters []common.Filter `json:"filters"`
 }
 
 /*
@@ -61,16 +72,23 @@ func NewDescribeAlarmsRequest(
 /*
  * param pageNumber: 页码, 默认为1 (Optional)
  * param pageSize: 分页大小，默认为20 (Optional)
+ * param all: 是否查询全部，默认分页 (Optional)
  * param resourceType: 资源类型 bandwidth:带宽 (Optional)
  * param resourceId: 资源ID，指定resourceId时须指定resourceType (Optional)
+ * param idc: 机房英文标识 (Optional)
  * param status: 规则状态 disabled:禁用 enabled:启用 (Optional)
+ * param filters: alarmId - 规则实施ID，精确匹配，支持多个
+ (Optional)
  */
 func NewDescribeAlarmsRequestWithAllParams(
     pageNumber *int,
     pageSize *int,
+    all *int,
     resourceType *string,
     resourceId *string,
+    idc *string,
     status *string,
+    filters []common.Filter,
 ) *DescribeAlarmsRequest {
 
     return &DescribeAlarmsRequest{
@@ -82,9 +100,12 @@ func NewDescribeAlarmsRequestWithAllParams(
         },
         PageNumber: pageNumber,
         PageSize: pageSize,
+        All: all,
         ResourceType: resourceType,
         ResourceId: resourceId,
+        Idc: idc,
         Status: status,
+        Filters: filters,
     }
 }
 
@@ -111,6 +132,11 @@ func (r *DescribeAlarmsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
+/* param all: 是否查询全部，默认分页(Optional) */
+func (r *DescribeAlarmsRequest) SetAll(all int) {
+    r.All = &all
+}
+
 /* param resourceType: 资源类型 bandwidth:带宽(Optional) */
 func (r *DescribeAlarmsRequest) SetResourceType(resourceType string) {
     r.ResourceType = &resourceType
@@ -121,9 +147,20 @@ func (r *DescribeAlarmsRequest) SetResourceId(resourceId string) {
     r.ResourceId = &resourceId
 }
 
+/* param idc: 机房英文标识(Optional) */
+func (r *DescribeAlarmsRequest) SetIdc(idc string) {
+    r.Idc = &idc
+}
+
 /* param status: 规则状态 disabled:禁用 enabled:启用(Optional) */
 func (r *DescribeAlarmsRequest) SetStatus(status string) {
     r.Status = &status
+}
+
+/* param filters: alarmId - 规则实施ID，精确匹配，支持多个
+(Optional) */
+func (r *DescribeAlarmsRequest) SetFilters(filters []common.Filter) {
+    r.Filters = filters
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

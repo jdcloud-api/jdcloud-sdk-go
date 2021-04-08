@@ -20,18 +20,12 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type CreateAlarmRequest struct {
+type UpdateAlarmRequest struct {
 
     core.JDCloudRequest
 
-    /* idc机房实例ID (Optional) */
-    Idc *string `json:"idc"`
-
-    /* 资源类型，bandwidth:带宽 (Optional) */
-    ResourceType *string `json:"resourceType"`
-
-    /* 带宽实例ID (Optional) */
-    ResourceId *string `json:"resourceId"`
+    /* 报警规则ID  */
+    AlarmId string `json:"alarmId"`
 
     /* 规则名称 (Optional) */
     Name *string `json:"name"`
@@ -63,9 +57,6 @@ type CreateAlarmRequest struct {
     /* 通知方式 all:全部 sms：短信 email:邮件 (Optional) */
     NoticeMethod *string `json:"noticeMethod"`
 
-    /* 通知对象 all:全部 persons：个人 groups:角色组 (Optional) */
-    NoticeObj *string `json:"noticeObj"`
-
     /* 通知对象用户ID,若多个用逗号分隔 (Optional) */
     UserId *string `json:"userId"`
 
@@ -74,26 +65,27 @@ type CreateAlarmRequest struct {
 }
 
 /*
+ * param alarmId: 报警规则ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewCreateAlarmRequest(
-) *CreateAlarmRequest {
+func NewUpdateAlarmRequest(
+    alarmId string,
+) *UpdateAlarmRequest {
 
-	return &CreateAlarmRequest{
+	return &UpdateAlarmRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/alarms",
-			Method:  "POST",
+			URL:     "/alarms/{alarmId}",
+			Method:  "PUT",
 			Header:  nil,
 			Version: "v1",
 		},
+        AlarmId: alarmId,
 	}
 }
 
 /*
- * param idc: idc机房实例ID (Optional)
- * param resourceType: 资源类型，bandwidth:带宽 (Optional)
- * param resourceId: 带宽实例ID (Optional)
+ * param alarmId: 报警规则ID (Required)
  * param name: 规则名称 (Optional)
  * param metric: 监控项，bandwidthTrafficIn:上行实时流量 bandwidthTrafficOut:下行实时流量 (Optional)
  * param period: 统计周期（单位：分钟） (Optional)
@@ -104,14 +96,11 @@ func NewCreateAlarmRequest(
  * param noticePeriod: 通知周期 单位：小时 (Optional)
  * param status: 规则状态 disabled:禁用 enabled:启用 (Optional)
  * param noticeMethod: 通知方式 all:全部 sms：短信 email:邮件 (Optional)
- * param noticeObj: 通知对象 all:全部 persons：个人 groups:角色组 (Optional)
  * param userId: 通知对象用户ID,若多个用逗号分隔 (Optional)
  * param groupId: 通知对象组ID (Optional)
  */
-func NewCreateAlarmRequestWithAllParams(
-    idc *string,
-    resourceType *string,
-    resourceId *string,
+func NewUpdateAlarmRequestWithAllParams(
+    alarmId string,
     name *string,
     metric *string,
     period *int,
@@ -122,21 +111,18 @@ func NewCreateAlarmRequestWithAllParams(
     noticePeriod *int,
     status *string,
     noticeMethod *string,
-    noticeObj *string,
     userId *string,
     groupId *string,
-) *CreateAlarmRequest {
+) *UpdateAlarmRequest {
 
-    return &CreateAlarmRequest{
+    return &UpdateAlarmRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/alarms",
-            Method:  "POST",
+            URL:     "/alarms/{alarmId}",
+            Method:  "PUT",
             Header:  nil,
             Version: "v1",
         },
-        Idc: idc,
-        ResourceType: resourceType,
-        ResourceId: resourceId,
+        AlarmId: alarmId,
         Name: name,
         Metric: metric,
         Period: period,
@@ -147,117 +133,101 @@ func NewCreateAlarmRequestWithAllParams(
         NoticePeriod: noticePeriod,
         Status: status,
         NoticeMethod: noticeMethod,
-        NoticeObj: noticeObj,
         UserId: userId,
         GroupId: groupId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewCreateAlarmRequestWithoutParam() *CreateAlarmRequest {
+func NewUpdateAlarmRequestWithoutParam() *UpdateAlarmRequest {
 
-    return &CreateAlarmRequest{
+    return &UpdateAlarmRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/alarms",
-            Method:  "POST",
+            URL:     "/alarms/{alarmId}",
+            Method:  "PUT",
             Header:  nil,
             Version: "v1",
         },
     }
 }
 
-/* param idc: idc机房实例ID(Optional) */
-func (r *CreateAlarmRequest) SetIdc(idc string) {
-    r.Idc = &idc
-}
-
-/* param resourceType: 资源类型，bandwidth:带宽(Optional) */
-func (r *CreateAlarmRequest) SetResourceType(resourceType string) {
-    r.ResourceType = &resourceType
-}
-
-/* param resourceId: 带宽实例ID(Optional) */
-func (r *CreateAlarmRequest) SetResourceId(resourceId string) {
-    r.ResourceId = &resourceId
+/* param alarmId: 报警规则ID(Required) */
+func (r *UpdateAlarmRequest) SetAlarmId(alarmId string) {
+    r.AlarmId = alarmId
 }
 
 /* param name: 规则名称(Optional) */
-func (r *CreateAlarmRequest) SetName(name string) {
+func (r *UpdateAlarmRequest) SetName(name string) {
     r.Name = &name
 }
 
 /* param metric: 监控项，bandwidthTrafficIn:上行实时流量 bandwidthTrafficOut:下行实时流量(Optional) */
-func (r *CreateAlarmRequest) SetMetric(metric string) {
+func (r *UpdateAlarmRequest) SetMetric(metric string) {
     r.Metric = &metric
 }
 
 /* param period: 统计周期（单位：分钟）(Optional) */
-func (r *CreateAlarmRequest) SetPeriod(period int) {
+func (r *UpdateAlarmRequest) SetPeriod(period int) {
     r.Period = &period
 }
 
 /* param statisticMethod: 统计方法：平均值=avg、最大值=max、最小值=min(Optional) */
-func (r *CreateAlarmRequest) SetStatisticMethod(statisticMethod string) {
+func (r *UpdateAlarmRequest) SetStatisticMethod(statisticMethod string) {
     r.StatisticMethod = &statisticMethod
 }
 
 /* param operator: 计算方式 >=、>、<、<=、=、！=(Optional) */
-func (r *CreateAlarmRequest) SetOperator(operator string) {
+func (r *UpdateAlarmRequest) SetOperator(operator string) {
     r.Operator = &operator
 }
 
 /* param threshold: 阈值(Optional) */
-func (r *CreateAlarmRequest) SetThreshold(threshold float64) {
+func (r *UpdateAlarmRequest) SetThreshold(threshold float64) {
     r.Threshold = &threshold
 }
 
 /* param times: 连续多少次后报警(Optional) */
-func (r *CreateAlarmRequest) SetTimes(times int) {
+func (r *UpdateAlarmRequest) SetTimes(times int) {
     r.Times = &times
 }
 
 /* param noticePeriod: 通知周期 单位：小时(Optional) */
-func (r *CreateAlarmRequest) SetNoticePeriod(noticePeriod int) {
+func (r *UpdateAlarmRequest) SetNoticePeriod(noticePeriod int) {
     r.NoticePeriod = &noticePeriod
 }
 
 /* param status: 规则状态 disabled:禁用 enabled:启用(Optional) */
-func (r *CreateAlarmRequest) SetStatus(status string) {
+func (r *UpdateAlarmRequest) SetStatus(status string) {
     r.Status = &status
 }
 
 /* param noticeMethod: 通知方式 all:全部 sms：短信 email:邮件(Optional) */
-func (r *CreateAlarmRequest) SetNoticeMethod(noticeMethod string) {
+func (r *UpdateAlarmRequest) SetNoticeMethod(noticeMethod string) {
     r.NoticeMethod = &noticeMethod
 }
 
-/* param noticeObj: 通知对象 all:全部 persons：个人 groups:角色组(Optional) */
-func (r *CreateAlarmRequest) SetNoticeObj(noticeObj string) {
-    r.NoticeObj = &noticeObj
-}
-
 /* param userId: 通知对象用户ID,若多个用逗号分隔(Optional) */
-func (r *CreateAlarmRequest) SetUserId(userId string) {
+func (r *UpdateAlarmRequest) SetUserId(userId string) {
     r.UserId = &userId
 }
 
 /* param groupId: 通知对象组ID(Optional) */
-func (r *CreateAlarmRequest) SetGroupId(groupId string) {
+func (r *UpdateAlarmRequest) SetGroupId(groupId string) {
     r.GroupId = &groupId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r CreateAlarmRequest) GetRegionId() string {
+func (r UpdateAlarmRequest) GetRegionId() string {
     return ""
 }
 
-type CreateAlarmResponse struct {
+type UpdateAlarmResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result CreateAlarmResult `json:"result"`
+    Result UpdateAlarmResult `json:"result"`
 }
 
-type CreateAlarmResult struct {
+type UpdateAlarmResult struct {
     Success bool `json:"success"`
 }

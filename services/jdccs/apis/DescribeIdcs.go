@@ -31,6 +31,9 @@ type DescribeIdcsRequest struct {
     /* 分页大小，默认为20 (Optional) */
     PageSize *int `json:"pageSize"`
 
+    /* 是否查询全部，默认分页 (Optional) */
+    All *int `json:"all"`
+
     /* 是否强制包含外部机房 yes/no (Optional) */
     IncludeExternalIdc *string `json:"includeExternalIdc"`
 }
@@ -55,11 +58,13 @@ func NewDescribeIdcsRequest(
 /*
  * param pageNumber: 页码, 默认为1 (Optional)
  * param pageSize: 分页大小，默认为20 (Optional)
+ * param all: 是否查询全部，默认分页 (Optional)
  * param includeExternalIdc: 是否强制包含外部机房 yes/no (Optional)
  */
 func NewDescribeIdcsRequestWithAllParams(
     pageNumber *int,
     pageSize *int,
+    all *int,
     includeExternalIdc *string,
 ) *DescribeIdcsRequest {
 
@@ -72,6 +77,7 @@ func NewDescribeIdcsRequestWithAllParams(
         },
         PageNumber: pageNumber,
         PageSize: pageSize,
+        All: all,
         IncludeExternalIdc: includeExternalIdc,
     }
 }
@@ -97,6 +103,11 @@ func (r *DescribeIdcsRequest) SetPageNumber(pageNumber int) {
 /* param pageSize: 分页大小，默认为20(Optional) */
 func (r *DescribeIdcsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
+}
+
+/* param all: 是否查询全部，默认分页(Optional) */
+func (r *DescribeIdcsRequest) SetAll(all int) {
+    r.All = &all
 }
 
 /* param includeExternalIdc: 是否强制包含外部机房 yes/no(Optional) */

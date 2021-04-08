@@ -17,26 +17,14 @@
 package models
 
 
-type Idc struct {
+type Point struct {
 
-    /* 机房英文标识 (Optional) */
-    Idc string `json:"idc"`
+    /* 数据点名称 (Optional) */
+    PointName string `json:"pointName"`
 
-    /* 机房名称 (Optional) */
-    IdcName string `json:"idcName"`
+    /* 数据点数据 (Optional) */
+    PointData float64 `json:"pointData"`
 
-    /* 是否是商业化外部机房 (Optional) */
-    IsExternalIdc bool `json:"isExternalIdc"`
-
-    /* 机房地址 (Optional) */
-    Address string `json:"address"`
-
-    /* 机房主管 (Optional) */
-    Manager string `json:"manager"`
-
-    /* 机房主管电话 (Optional) */
-    ManagerPhone string `json:"managerPhone"`
-
-    /* 机房类别 1:租用 2:自建 3:合作 4:其他 (Optional) */
-    Category int `json:"category"`
+    /* 数据点标签 currentA A支路电流 currentB B支路电流 powerA A支路功率 powerB B支路功率 voltageA A支路电压 voltageB B支路电压 temperature温度 humidity湿度 averageVoltage三相平均相电压 totalPower总功率 totalCurrent总电流 (Optional) */
+    PointTag string `json:"pointTag"`
 }

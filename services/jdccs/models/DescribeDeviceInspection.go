@@ -17,7 +17,10 @@
 package models
 
 
-type Idc struct {
+type DescribeDeviceInspection struct {
+
+    /* 巡检时间,UTC时间 (Optional) */
+    InspectionTime string `json:"inspectionTime"`
 
     /* 机房英文标识 (Optional) */
     Idc string `json:"idc"`
@@ -25,18 +28,18 @@ type Idc struct {
     /* 机房名称 (Optional) */
     IdcName string `json:"idcName"`
 
-    /* 是否是商业化外部机房 (Optional) */
-    IsExternalIdc bool `json:"isExternalIdc"`
+    /* 故障状态 (Optional) */
+    Status string `json:"status"`
 
-    /* 机房地址 (Optional) */
-    Address string `json:"address"`
+    /* 设备编码 (Optional) */
+    DeviceNo string `json:"deviceNo"`
 
-    /* 机房主管 (Optional) */
-    Manager string `json:"manager"`
+    /* 设备SN号 (Optional) */
+    SnNo string `json:"snNo"`
 
-    /* 机房主管电话 (Optional) */
-    ManagerPhone string `json:"managerPhone"`
+    /* 设备类型 (Optional) */
+    DeviceType string `json:"deviceType"`
 
-    /* 机房类别 1:租用 2:自建 3:合作 4:其他 (Optional) */
-    Category int `json:"category"`
+    /* 故障类型 (Optional) */
+    FaultType string `json:"faultType"`
 }

@@ -35,6 +35,9 @@ type DescribeRoomsRequest struct {
     /* 分页大小，默认为20 (Optional) */
     PageSize *int `json:"pageSize"`
 
+    /* 是否查询全部，默认分页 (Optional) */
+    All *int `json:"all"`
+
     /* roomNo - 房间号，精确匹配，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
@@ -64,6 +67,7 @@ func NewDescribeRoomsRequest(
  * param idc: IDC机房ID (Required)
  * param pageNumber: 页码, 默认为1 (Optional)
  * param pageSize: 分页大小，默认为20 (Optional)
+ * param all: 是否查询全部，默认分页 (Optional)
  * param filters: roomNo - 房间号，精确匹配，支持多个
  (Optional)
  */
@@ -71,6 +75,7 @@ func NewDescribeRoomsRequestWithAllParams(
     idc string,
     pageNumber *int,
     pageSize *int,
+    all *int,
     filters []common.Filter,
 ) *DescribeRoomsRequest {
 
@@ -84,6 +89,7 @@ func NewDescribeRoomsRequestWithAllParams(
         Idc: idc,
         PageNumber: pageNumber,
         PageSize: pageSize,
+        All: all,
         Filters: filters,
     }
 }
@@ -114,6 +120,11 @@ func (r *DescribeRoomsRequest) SetPageNumber(pageNumber int) {
 /* param pageSize: 分页大小，默认为20(Optional) */
 func (r *DescribeRoomsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
+}
+
+/* param all: 是否查询全部，默认分页(Optional) */
+func (r *DescribeRoomsRequest) SetAll(all int) {
+    r.All = &all
 }
 
 /* param filters: roomNo - 房间号，精确匹配，支持多个
