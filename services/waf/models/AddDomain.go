@@ -22,8 +22,11 @@ type AddDomain struct {
     /* 实例id，代表要设置的WAF实例  */
     WafInstanceId string `json:"wafInstanceId"`
 
-    /* 域名  */
-    Domain []string `json:"domain"`
+    /* 域名，单个  */
+    Domain string `json:"domain"`
+
+    /* 域名数组 (Optional) */
+    Domains []string `json:"domains"`
 
     /* 使用协议，eg:["http","https"]  */
     Protocols []string `json:"protocols"`

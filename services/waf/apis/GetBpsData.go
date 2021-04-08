@@ -112,6 +112,6 @@ type GetBpsDataResponse struct {
 }
 
 type GetBpsDataResult struct {
-    TimeScope []int `json:"timeScope"`
+    TimeScope []int64 `json:"timeScope"`
     Bps waf.Bps `json:"bps"`
 }

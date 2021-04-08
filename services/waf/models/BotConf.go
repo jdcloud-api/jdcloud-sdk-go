@@ -24,4 +24,7 @@ type BotConf struct {
 
     /* 自定义类型bot。1-使能 0-禁止 (Optional) */
     EnableUserDefine int `json:"enableUserDefine"`
+
+    /* bot IDC开关。1-使能 0-禁止 (Optional) */
+    EnableThreatIp int `json:"enableThreatIp"`
 }
