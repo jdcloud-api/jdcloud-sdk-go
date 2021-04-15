@@ -20,13 +20,13 @@ package models
 type QueryOption struct {
 
     /* 聚合方式，默认等于downSampleType(若downSampleType为last，AggrType取max)或avg，可选值参考:sum、avg、min、max (Optional) */
-    AggrType string `json:"aggrType"`
+    AggrType *string `json:"aggrType"`
 
     /* 监控指标数据的维度信息,根据tags来指定查询的监控数据维度，至少指定一个查询维度  */
     Dimensions []DimensionsParam `json:"dimensions"`
 
     /* 采样方式，默认等于aggrType或avg，可选值参考：sum、avg、last、min、max (Optional) */
-    DownSampleType string `json:"downSampleType"`
+    DownSampleType *string `json:"downSampleType"`
 
     /* metric  */
     Metric string `json:"metric"`

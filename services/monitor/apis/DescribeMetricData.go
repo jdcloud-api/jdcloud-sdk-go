@@ -52,7 +52,7 @@ type DescribeMetricDataRequest struct {
     /* 是否对查询的tags分组 (Optional) */
     GroupBy *bool `json:"groupBy"`
 
-    /* 是否求速率 (Optional) */
+    /* 是否求速率。仅对累积类型指标有意义 (Optional) */
     Rate *bool `json:"rate"`
 
     /* 资源的类型，取值vm, lb, ip, database 等,<a href="https://docs.jdcloud.com/cn/monitoring/api/describeservices?content=API&SOP=JDCloud">describeServices</a>：查询己接入云监控的产品线列表 (Optional) */
@@ -101,7 +101,7 @@ func NewDescribeMetricDataRequest(
  * param timeInterval: 时间间隔：1h，6h，12h，1d，3d，7d，14d，固定时间间隔，timeInterval默认为1h，当前时间往 前1h (Optional)
  * param tags: 监控指标数据的维度信息,根据tags来筛选指标数据不同的维度 (Optional)
  * param groupBy: 是否对查询的tags分组 (Optional)
- * param rate: 是否求速率 (Optional)
+ * param rate: 是否求速率。仅对累积类型指标有意义 (Optional)
  * param serviceCode: 资源的类型，取值vm, lb, ip, database 等,<a href="https://docs.jdcloud.com/cn/monitoring/api/describeservices?content=API&SOP=JDCloud">describeServices</a>：查询己接入云监控的产品线列表 (Optional)
  * param dimension: 资源的维度。查询serviceCode下可用的维度请使用describeServices接口 (Optional)
  * param resourceId: 资源的uuid (Required)
@@ -203,7 +203,7 @@ func (r *DescribeMetricDataRequest) SetGroupBy(groupBy bool) {
     r.GroupBy = &groupBy
 }
 
-/* param rate: 是否求速率(Optional) */
+/* param rate: 是否求速率。仅对累积类型指标有意义(Optional) */
 func (r *DescribeMetricDataRequest) SetRate(rate bool) {
     r.Rate = &rate
 }

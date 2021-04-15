@@ -20,10 +20,10 @@ package models
 type DimensionsParam struct {
 
     /* 是否分组查询 (Optional) */
-    GroupBy bool `json:"groupBy"`
+    GroupBy *bool `json:"groupBy"`
 
     /* 维度key (Optional) */
-    Key string `json:"key"`
+    Key *string `json:"key"`
 
     /* 维度值 (Optional) */
     Values []string `json:"values"`

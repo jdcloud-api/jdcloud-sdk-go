@@ -31,6 +31,9 @@ type DescribedAlarmHistory struct {
     /* 告警持续次数 (Optional) */
     DurationTimes int64 `json:"durationTimes"`
 
+    /* 是否是一键告警 (1-一键告警  0-非一键告警) (Optional) */
+    IsOneClickAlarm int64 `json:"isOneClickAlarm"`
+
     /* 告警持续时间，单位分钟 (Optional) */
     NoticeDurationTime int64 `json:"noticeDurationTime"`
 

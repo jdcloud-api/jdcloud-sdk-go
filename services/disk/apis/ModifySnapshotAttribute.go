@@ -33,8 +33,11 @@ type ModifySnapshotAttributeRequest struct {
     /* 快照名称 (Optional) */
     Name *string `json:"name"`
 
-    /* 快照描述，name和description必须要指定一个 (Optional) */
+    /* 快照描述 (Optional) */
     Description *string `json:"description"`
+
+    /* 快照过期时间，三者至少指定一个 (Optional) */
+    ExpireTime *string `json:"expireTime"`
 }
 
 /*
@@ -64,13 +67,15 @@ func NewModifySnapshotAttributeRequest(
  * param regionId: 地域ID (Required)
  * param snapshotId: 快照ID (Required)
  * param name: 快照名称 (Optional)
- * param description: 快照描述，name和description必须要指定一个 (Optional)
+ * param description: 快照描述 (Optional)
+ * param expireTime: 快照过期时间，三者至少指定一个 (Optional)
  */
 func NewModifySnapshotAttributeRequestWithAllParams(
     regionId string,
     snapshotId string,
     name *string,
     description *string,
+    expireTime *string,
 ) *ModifySnapshotAttributeRequest {
 
     return &ModifySnapshotAttributeRequest{
@@ -84,6 +89,7 @@ func NewModifySnapshotAttributeRequestWithAllParams(
         SnapshotId: snapshotId,
         Name: name,
         Description: description,
+        ExpireTime: expireTime,
     }
 }
 
@@ -115,9 +121,14 @@ func (r *ModifySnapshotAttributeRequest) SetName(name string) {
     r.Name = &name
 }
 
-/* param description: 快照描述，name和description必须要指定一个(Optional) */
+/* param description: 快照描述(Optional) */
 func (r *ModifySnapshotAttributeRequest) SetDescription(description string) {
     r.Description = &description
+}
+
+/* param expireTime: 快照过期时间，三者至少指定一个(Optional) */
+func (r *ModifySnapshotAttributeRequest) SetExpireTime(expireTime string) {
+    r.ExpireTime = &expireTime
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

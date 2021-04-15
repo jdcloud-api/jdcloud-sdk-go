@@ -33,4 +33,7 @@ type CcConf struct {
 
     /* cc自定义规则个数 (Optional) */
     RulesCount int `json:"rulesCount"`
+
+    /* 动作配置，默认为告警，支持1，2，3和5四种类型动作 (Optional) */
+    Action DenyActionCfg `json:"action"`
 }

@@ -19,7 +19,7 @@ package models
 
 type RuleOptionDetail struct {
 
-    /* 规则触发条件,与模块参数同时指定时，优先使用rules (Optional) */
+    /* 规则触发条件,与模板参数同时指定时，优先使用rules (Optional) */
     Rules []BasicRuleDetail `json:"rules"`
 
     /*  (Optional) */

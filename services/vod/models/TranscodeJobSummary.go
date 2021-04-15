@@ -25,8 +25,11 @@ type TranscodeJobSummary struct {
     /* 视频ID (Optional) */
     VideoId string `json:"videoId"`
 
-    /* 模板ID列表 (Optional) */
+    /* 模板ID列表。以转码模板列表方式提交的转码作业，包含此字段。 (Optional) */
     TemplateIds []int64 `json:"templateIds"`
+
+    /* 模板组ID。以转码模板组方式提交的转码作业，包含此字段。 (Optional) */
+    TemplateGroupId string `json:"templateGroupId"`
 
     /* 创建时间 (Optional) */
     CreateTime string `json:"createTime"`

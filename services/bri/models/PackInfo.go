@@ -39,4 +39,13 @@ type PackInfo struct {
 
     /* 资源包id (Optional) */
     PackId string `json:"packId"`
+
+    /* 是否需要爬虫ip (Optional) */
+    NeedSpiderIp bool `json:"needSpiderIp"`
+
+    /* QPS上限 (Optional) */
+    QpsLimit int `json:"qpsLimit"`
+
+    /* 注册，登录，营销场景的版本 (Optional) */
+    Version int `json:"version"`
 }

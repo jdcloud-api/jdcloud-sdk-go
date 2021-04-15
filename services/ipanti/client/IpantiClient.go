@@ -40,7 +40,7 @@ func NewIpantiClient(credential *core.Credential) *IpantiClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "ipanti",
-            Revision:    "1.9.0",
+            Revision:    "1.10.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -108,6 +108,26 @@ func (c *IpantiClient) DeleteCustomPage(request *ipanti.DeleteCustomPageRequest)
     }
 
     jdResp := &ipanti.DeleteCustomPageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新防护调度规则 */
+func (c *IpantiClient) ModifyDispatchRule(request *ipanti.ModifyDispatchRuleRequest) (*ipanti.ModifyDispatchRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.ModifyDispatchRuleResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -939,6 +959,26 @@ func (c *IpantiClient) EnableWhiteListRuleOfForwardRule(request *ipanti.EnableWh
     return jdResp, err
 }
 
+/* 防护调度规则切换成防御状态 */
+func (c *IpantiClient) SwitchDispatchRuleProtect(request *ipanti.SwitchDispatchRuleProtectRequest) (*ipanti.SwitchDispatchRuleProtectResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.SwitchDispatchRuleProtectResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询实例高防 IP 列表 */
 func (c *IpantiClient) DescribeServiceIpList(request *ipanti.DescribeServiceIpListRequest) (*ipanti.DescribeServiceIpListResponse, error) {
     if request == nil {
@@ -970,6 +1010,46 @@ func (c *IpantiClient) DisableWhiteListRuleOfWebRule(request *ipanti.DisableWhit
     }
 
     jdResp := &ipanti.DisableWhiteListRuleOfWebRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询高防实例防护概要 */
+func (c *IpantiClient) DescribeProtectionOutline(request *ipanti.DescribeProtectionOutlineRequest) (*ipanti.DescribeProtectionOutlineResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DescribeProtectionOutlineResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除防护调度规则 */
+func (c *IpantiClient) DeleteDispatchRule(request *ipanti.DeleteDispatchRuleRequest) (*ipanti.DeleteDispatchRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DeleteDispatchRuleResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1499,6 +1579,26 @@ func (c *IpantiClient) ModifyWhiteListRuleOfWebRule(request *ipanti.ModifyWhiteL
     return jdResp, err
 }
 
+/* 查询高防实例回源 IP 白名单列表 */
+func (c *IpantiClient) DescribeOriginWhiteIpList(request *ipanti.DescribeOriginWhiteIpListRequest) (*ipanti.DescribeOriginWhiteIpListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DescribeOriginWhiteIpListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 开启网站类规则的黑名单规则, 批量操作时 webBlackListRuleId 传多个, 以 ',' 分隔, 返回 result.code 为 1 表示操作成功, 为 0 时可能全部失败, 也可能部分失败 */
 func (c *IpantiClient) EnableBlackListRuleOfWebRule(request *ipanti.EnableBlackListRuleOfWebRuleRequest) (*ipanti.EnableBlackListRuleOfWebRuleResponse, error) {
     if request == nil {
@@ -2019,6 +2119,26 @@ func (c *IpantiClient) EnableWebRuleCCProtectionRule(request *ipanti.EnableWebRu
     return jdResp, err
 }
 
+/* 防护调度规则切换成回源状态 */
+func (c *IpantiClient) SwitchDispatchRuleOrigin(request *ipanti.SwitchDispatchRuleOriginRequest) (*ipanti.SwitchDispatchRuleOriginResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.SwitchDispatchRuleOriginResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询网站类规则的黑名单规则列表 */
 func (c *IpantiClient) DescribeBlackListRulesOfWebRule(request *ipanti.DescribeBlackListRulesOfWebRuleRequest) (*ipanti.DescribeBlackListRulesOfWebRuleResponse, error) {
     if request == nil {
@@ -2030,6 +2150,26 @@ func (c *IpantiClient) DescribeBlackListRulesOfWebRule(request *ipanti.DescribeB
     }
 
     jdResp := &ipanti.DescribeBlackListRulesOfWebRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询某个实例下的防护调度规则 */
+func (c *IpantiClient) DescribeDispatchRules(request *ipanti.DescribeDispatchRulesRequest) (*ipanti.DescribeDispatchRulesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DescribeDispatchRulesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2190,6 +2330,26 @@ func (c *IpantiClient) DescribeDDoSGraph(request *ipanti.DescribeDDoSGraphReques
     }
 
     jdResp := &ipanti.DescribeDDoSGraphResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 添加防护调度规则 */
+func (c *IpantiClient) CreateDispatchRule(request *ipanti.CreateDispatchRuleRequest) (*ipanti.CreateDispatchRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.CreateDispatchRuleResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2370,6 +2530,26 @@ func (c *IpantiClient) DeleteWebRule(request *ipanti.DeleteWebRuleRequest) (*ipa
     }
 
     jdResp := &ipanti.DeleteWebRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 批量添加防护调度规则 */
+func (c *IpantiClient) CreateDispatchRules(request *ipanti.CreateDispatchRulesRequest) (*ipanti.CreateDispatchRulesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.CreateDispatchRulesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

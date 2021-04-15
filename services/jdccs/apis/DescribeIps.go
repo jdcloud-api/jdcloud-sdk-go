@@ -35,12 +35,24 @@ type DescribeIpsRequest struct {
     /* 分页大小，默认为20 (Optional) */
     PageSize *int `json:"pageSize"`
 
+    /* 是否查询全部，默认分页 (Optional) */
+    All *int `json:"all"`
+
+    /* 线路类型 dynamicBGP:动态BGP thirdLineBGP:三线BGP telecom:电信单线 unicom:联通单线 mobile:移动单线 (Optional) */
+    LineType *string `json:"lineType"`
+
+    /* 状态 normal:正常 abnormal:异常 (Optional) */
+    Status *string `json:"status"`
+
+    /* IP地址段 (Optional) */
+    CidrAddr *string `json:"cidrAddr"`
+
     /* ipId - 公网IP实例ID，精确匹配，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
 
-    /* 状态 normal:正常 abnormal:异常 (Optional) */
-    Status *string `json:"status"`
+    /* null (Optional) */
+    Sorts []common.Sort `json:"sorts"`
 }
 
 /*
@@ -67,16 +79,24 @@ func NewDescribeIpsRequest(
  * param idc: IDC机房ID (Required)
  * param pageNumber: 页码, 默认为1 (Optional)
  * param pageSize: 分页大小，默认为20 (Optional)
+ * param all: 是否查询全部，默认分页 (Optional)
+ * param lineType: 线路类型 dynamicBGP:动态BGP thirdLineBGP:三线BGP telecom:电信单线 unicom:联通单线 mobile:移动单线 (Optional)
+ * param status: 状态 normal:正常 abnormal:异常 (Optional)
+ * param cidrAddr: IP地址段 (Optional)
  * param filters: ipId - 公网IP实例ID，精确匹配，支持多个
  (Optional)
- * param status: 状态 normal:正常 abnormal:异常 (Optional)
+ * param sorts: null (Optional)
  */
 func NewDescribeIpsRequestWithAllParams(
     idc string,
     pageNumber *int,
     pageSize *int,
-    filters []common.Filter,
+    all *int,
+    lineType *string,
     status *string,
+    cidrAddr *string,
+    filters []common.Filter,
+    sorts []common.Sort,
 ) *DescribeIpsRequest {
 
     return &DescribeIpsRequest{
@@ -89,8 +109,12 @@ func NewDescribeIpsRequestWithAllParams(
         Idc: idc,
         PageNumber: pageNumber,
         PageSize: pageSize,
-        Filters: filters,
+        All: all,
+        LineType: lineType,
         Status: status,
+        CidrAddr: cidrAddr,
+        Filters: filters,
+        Sorts: sorts,
     }
 }
 
@@ -122,15 +146,35 @@ func (r *DescribeIpsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
+/* param all: 是否查询全部，默认分页(Optional) */
+func (r *DescribeIpsRequest) SetAll(all int) {
+    r.All = &all
+}
+
+/* param lineType: 线路类型 dynamicBGP:动态BGP thirdLineBGP:三线BGP telecom:电信单线 unicom:联通单线 mobile:移动单线(Optional) */
+func (r *DescribeIpsRequest) SetLineType(lineType string) {
+    r.LineType = &lineType
+}
+
+/* param status: 状态 normal:正常 abnormal:异常(Optional) */
+func (r *DescribeIpsRequest) SetStatus(status string) {
+    r.Status = &status
+}
+
+/* param cidrAddr: IP地址段(Optional) */
+func (r *DescribeIpsRequest) SetCidrAddr(cidrAddr string) {
+    r.CidrAddr = &cidrAddr
+}
+
 /* param filters: ipId - 公网IP实例ID，精确匹配，支持多个
 (Optional) */
 func (r *DescribeIpsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
 
-/* param status: 状态 normal:正常 abnormal:异常(Optional) */
-func (r *DescribeIpsRequest) SetStatus(status string) {
-    r.Status = &status
+/* param sorts: null(Optional) */
+func (r *DescribeIpsRequest) SetSorts(sorts []common.Sort) {
+    r.Sorts = sorts
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

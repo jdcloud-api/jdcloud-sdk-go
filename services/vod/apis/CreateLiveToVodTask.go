@@ -46,6 +46,9 @@ type CreateLiveToVodTaskRequest struct {
     /* 视频标签集合 (Optional) */
     Tags []string `json:"tags"`
 
+    /* 转码模板组ID。若此字段不为空，则将以模板组方式提交转码作业，transcodeTemplateIds字段将被忽略。 (Optional) */
+    TranscodeTemplateGroupId *string `json:"transcodeTemplateGroupId"`
+
     /* 转码模板ID集合 (Optional) */
     TranscodeTemplateIds []int64 `json:"transcodeTemplateIds"`
 
@@ -139,6 +142,7 @@ func NewCreateLiveToVodTaskRequest(
  * param description: 视频描述 (Optional)
  * param categoryId: 分类ID (Optional)
  * param tags: 视频标签集合 (Optional)
+ * param transcodeTemplateGroupId: 转码模板组ID。若此字段不为空，则将以模板组方式提交转码作业，transcodeTemplateIds字段将被忽略。 (Optional)
  * param transcodeTemplateIds: 转码模板ID集合 (Optional)
  * param watermarkIds: 水印ID集合 (Optional)
  * param publishDomain: 推流域名 (Required)
@@ -168,6 +172,7 @@ func NewCreateLiveToVodTaskRequestWithAllParams(
     description *string,
     categoryId *int64,
     tags []string,
+    transcodeTemplateGroupId *string,
     transcodeTemplateIds []int64,
     watermarkIds []int64,
     publishDomain string,
@@ -193,6 +198,7 @@ func NewCreateLiveToVodTaskRequestWithAllParams(
         Description: description,
         CategoryId: categoryId,
         Tags: tags,
+        TranscodeTemplateGroupId: transcodeTemplateGroupId,
         TranscodeTemplateIds: transcodeTemplateIds,
         WatermarkIds: watermarkIds,
         PublishDomain: publishDomain,
@@ -251,6 +257,11 @@ func (r *CreateLiveToVodTaskRequest) SetCategoryId(categoryId int64) {
 /* param tags: 视频标签集合(Optional) */
 func (r *CreateLiveToVodTaskRequest) SetTags(tags []string) {
     r.Tags = tags
+}
+
+/* param transcodeTemplateGroupId: 转码模板组ID。若此字段不为空，则将以模板组方式提交转码作业，transcodeTemplateIds字段将被忽略。(Optional) */
+func (r *CreateLiveToVodTaskRequest) SetTranscodeTemplateGroupId(transcodeTemplateGroupId string) {
+    r.TranscodeTemplateGroupId = &transcodeTemplateGroupId
 }
 
 /* param transcodeTemplateIds: 转码模板ID集合(Optional) */

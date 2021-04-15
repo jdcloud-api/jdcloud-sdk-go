@@ -21,7 +21,7 @@ import (
     monitor "github.com/jdcloud-api/jdcloud-sdk-go/services/monitor/models"
 )
 
-type DescribeOneDataPointRequest struct {
+type LastDownsampleRequest struct {
 
     core.JDCloudRequest
 
@@ -57,6 +57,9 @@ type DescribeOneDataPointRequest struct {
 
     /* 聚合方式：max avg min等,用于将维度内一个周期数据聚合为一个点的聚合方式,默认last (Optional) */
     DownAggrType *string `json:"downAggrType"`
+
+    /* 时间偏移，可传入30s、1m、1h、1d等数字+单位的形式(其中s秒，m分，h时，d天)，当业务侧数据上报存在延迟时，可以传入该参数，该参数会使查询的时间段整体向前偏移.偏移后的开始时间若早于30天前,则开始时间自动设置为30天前;若偏移后结束时间早于30天前，则无效 (Optional) */
+    TimeOffset *string `json:"timeOffset"`
 }
 
 /*
@@ -67,14 +70,14 @@ type DescribeOneDataPointRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeOneDataPointRequest(
+func NewLastDownsampleRequest(
     regionId string,
     metric string,
     serviceCode string,
     resourceId string,
-) *DescribeOneDataPointRequest {
+) *LastDownsampleRequest {
 
-	return &DescribeOneDataPointRequest{
+	return &LastDownsampleRequest{
         JDCloudRequest: core.JDCloudRequest{
 			URL:     "/regions/{regionId}/metrics/{metric}/lastDownsample",
 			Method:  "GET",
@@ -100,8 +103,9 @@ func NewDescribeOneDataPointRequest(
  * param timeInterval: 查询的时间间隔，最大不超过30天，支持分钟级别,小时级别，天级别，例如：1m、1h、1d (Optional)
  * param aggrType: 聚合方式：max avg min等,用于不同维度之间聚合 (Optional)
  * param downAggrType: 聚合方式：max avg min等,用于将维度内一个周期数据聚合为一个点的聚合方式,默认last (Optional)
+ * param timeOffset: 时间偏移，可传入30s、1m、1h、1d等数字+单位的形式(其中s秒，m分，h时，d天)，当业务侧数据上报存在延迟时，可以传入该参数，该参数会使查询的时间段整体向前偏移.偏移后的开始时间若早于30天前,则开始时间自动设置为30天前;若偏移后结束时间早于30天前，则无效 (Optional)
  */
-func NewDescribeOneDataPointRequestWithAllParams(
+func NewLastDownsampleRequestWithAllParams(
     regionId string,
     metric string,
     serviceCode string,
@@ -113,9 +117,10 @@ func NewDescribeOneDataPointRequestWithAllParams(
     timeInterval *string,
     aggrType *string,
     downAggrType *string,
-) *DescribeOneDataPointRequest {
+    timeOffset *string,
+) *LastDownsampleRequest {
 
-    return &DescribeOneDataPointRequest{
+    return &LastDownsampleRequest{
         JDCloudRequest: core.JDCloudRequest{
             URL:     "/regions/{regionId}/metrics/{metric}/lastDownsample",
             Method:  "GET",
@@ -133,13 +138,14 @@ func NewDescribeOneDataPointRequestWithAllParams(
         TimeInterval: timeInterval,
         AggrType: aggrType,
         DownAggrType: downAggrType,
+        TimeOffset: timeOffset,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeOneDataPointRequestWithoutParam() *DescribeOneDataPointRequest {
+func NewLastDownsampleRequestWithoutParam() *LastDownsampleRequest {
 
-    return &DescribeOneDataPointRequest{
+    return &LastDownsampleRequest{
             JDCloudRequest: core.JDCloudRequest{
             URL:     "/regions/{regionId}/metrics/{metric}/lastDownsample",
             Method:  "GET",
@@ -150,72 +156,77 @@ func NewDescribeOneDataPointRequestWithoutParam() *DescribeOneDataPointRequest {
 }
 
 /* param regionId: 地域 Id(Required) */
-func (r *DescribeOneDataPointRequest) SetRegionId(regionId string) {
+func (r *LastDownsampleRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param metric: 监控项英文标识(id)(Required) */
-func (r *DescribeOneDataPointRequest) SetMetric(metric string) {
+func (r *LastDownsampleRequest) SetMetric(metric string) {
     r.Metric = metric
 }
 
 /* param serviceCode: 资源的类型，取值vm, lb, ip, database 等。可用的serviceCode请使用describeServices接口查询(Required) */
-func (r *DescribeOneDataPointRequest) SetServiceCode(serviceCode string) {
+func (r *LastDownsampleRequest) SetServiceCode(serviceCode string) {
     r.ServiceCode = serviceCode
 }
 
 /* param dimension: 资源的维度。serviceCode下可用的dimension请使用describeServices接口查询(Optional) */
-func (r *DescribeOneDataPointRequest) SetDimension(dimension string) {
+func (r *LastDownsampleRequest) SetDimension(dimension string) {
     r.Dimension = &dimension
 }
 
 /* param resourceId: 资源的uuid，支持多个resourceId批量查询，每个id用竖线分隔。 如：id1|id2|id3|id4(Required) */
-func (r *DescribeOneDataPointRequest) SetResourceId(resourceId string) {
+func (r *LastDownsampleRequest) SetResourceId(resourceId string) {
     r.ResourceId = resourceId
 }
 
 /* param tags: 自定义标签(Optional) */
-func (r *DescribeOneDataPointRequest) SetTags(tags []monitor.TagFilter) {
+func (r *LastDownsampleRequest) SetTags(tags []monitor.TagFilter) {
     r.Tags = tags
 }
 
 /* param startTime: 查询时间范围的开始时间， UTC时间，格式：2016-12-11T00:00:00+0800（早于30d时，将被重置为30d）（注意在url中+要转译为%2B故url中为2016-12-11T00:00:00%2B0800）(Optional) */
-func (r *DescribeOneDataPointRequest) SetStartTime(startTime string) {
+func (r *LastDownsampleRequest) SetStartTime(startTime string) {
     r.StartTime = &startTime
 }
 
 /* param endTime: 查询时间范围的结束时间， UTC时间，格式：2016-12-11T00:00:00+0800（为空时，将由startTime与timeInterval计算得出）（注意在url中+要转译为%2B故url中为2016-12-11T00:00:00%2B0800）(Optional) */
-func (r *DescribeOneDataPointRequest) SetEndTime(endTime string) {
+func (r *LastDownsampleRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
 
 /* param timeInterval: 查询的时间间隔，最大不超过30天，支持分钟级别,小时级别，天级别，例如：1m、1h、1d(Optional) */
-func (r *DescribeOneDataPointRequest) SetTimeInterval(timeInterval string) {
+func (r *LastDownsampleRequest) SetTimeInterval(timeInterval string) {
     r.TimeInterval = &timeInterval
 }
 
 /* param aggrType: 聚合方式：max avg min等,用于不同维度之间聚合(Optional) */
-func (r *DescribeOneDataPointRequest) SetAggrType(aggrType string) {
+func (r *LastDownsampleRequest) SetAggrType(aggrType string) {
     r.AggrType = &aggrType
 }
 
 /* param downAggrType: 聚合方式：max avg min等,用于将维度内一个周期数据聚合为一个点的聚合方式,默认last(Optional) */
-func (r *DescribeOneDataPointRequest) SetDownAggrType(downAggrType string) {
+func (r *LastDownsampleRequest) SetDownAggrType(downAggrType string) {
     r.DownAggrType = &downAggrType
+}
+
+/* param timeOffset: 时间偏移，可传入30s、1m、1h、1d等数字+单位的形式(其中s秒，m分，h时，d天)，当业务侧数据上报存在延迟时，可以传入该参数，该参数会使查询的时间段整体向前偏移.偏移后的开始时间若早于30天前,则开始时间自动设置为30天前;若偏移后结束时间早于30天前，则无效(Optional) */
+func (r *LastDownsampleRequest) SetTimeOffset(timeOffset string) {
+    r.TimeOffset = &timeOffset
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeOneDataPointRequest) GetRegionId() string {
+func (r LastDownsampleRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeOneDataPointResponse struct {
+type LastDownsampleResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeOneDataPointResult `json:"result"`
+    Result LastDownsampleResult `json:"result"`
 }
 
-type DescribeOneDataPointResult struct {
+type LastDownsampleResult struct {
     Items []monitor.LastDownsampleRespItem `json:"items"`
 }

@@ -31,9 +31,6 @@ type DomainInfo struct {
     /* waf防护状态，rs-回源，vip-云端 (Optional) */
     DnsType string `json:"dnsType"`
 
-    /* 备用cname (Optional) */
-    BackupCname string `json:"backupCname"`
-
-    /* 是否切清洗，0-否，1-是 (Optional) */
-    Enable2Dos int `json:"enable2Dos"`
+    /* cname (Optional) */
+    Cname string `json:"cname"`
 }

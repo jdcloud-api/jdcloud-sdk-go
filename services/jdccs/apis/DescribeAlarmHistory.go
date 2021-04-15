@@ -34,6 +34,9 @@ type DescribeAlarmHistoryRequest struct {
     /* 报警规则ID (Optional) */
     AlarmId *string `json:"alarmId"`
 
+    /* 机房英文标识 (Optional) */
+    Idc *string `json:"idc"`
+
     /* 查询时间范围的开始时间， UNIX时间戳 (Optional) */
     StartTime *int `json:"startTime"`
 
@@ -62,6 +65,7 @@ func NewDescribeAlarmHistoryRequest(
  * param pageNumber: 页码, 默认为1 (Optional)
  * param pageSize: 分页大小，默认为20 (Optional)
  * param alarmId: 报警规则ID (Optional)
+ * param idc: 机房英文标识 (Optional)
  * param startTime: 查询时间范围的开始时间， UNIX时间戳 (Optional)
  * param endTime: 查询时间范围的结束时间， UNIX时间戳 (Optional)
  */
@@ -69,6 +73,7 @@ func NewDescribeAlarmHistoryRequestWithAllParams(
     pageNumber *int,
     pageSize *int,
     alarmId *string,
+    idc *string,
     startTime *int,
     endTime *int,
 ) *DescribeAlarmHistoryRequest {
@@ -83,6 +88,7 @@ func NewDescribeAlarmHistoryRequestWithAllParams(
         PageNumber: pageNumber,
         PageSize: pageSize,
         AlarmId: alarmId,
+        Idc: idc,
         StartTime: startTime,
         EndTime: endTime,
     }
@@ -114,6 +120,11 @@ func (r *DescribeAlarmHistoryRequest) SetPageSize(pageSize int) {
 /* param alarmId: 报警规则ID(Optional) */
 func (r *DescribeAlarmHistoryRequest) SetAlarmId(alarmId string) {
     r.AlarmId = &alarmId
+}
+
+/* param idc: 机房英文标识(Optional) */
+func (r *DescribeAlarmHistoryRequest) SetIdc(idc string) {
+    r.Idc = &idc
 }
 
 /* param startTime: 查询时间范围的开始时间， UNIX时间戳(Optional) */

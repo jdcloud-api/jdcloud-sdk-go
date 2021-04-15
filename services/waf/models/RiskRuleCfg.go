@@ -37,9 +37,21 @@ type RiskRuleCfg struct {
     /* 动作 支持notice / verify@captcha (Optional) */
     Action string `json:"action"`
 
+    /* 请求方法 支持 POST:1,GET:1,PUT:1 (Optional) */
+    Methods string `json:"methods"`
+
+    /* 场景 支持 account_login / account_register (Optional) */
+    SceneRef string `json:"sceneRef"`
+
+    /* 事件 支持 passwd:JSON_BODY.passwd,username:ARGS.username,session:ARGS_BODY.session (Optional) */
+    Event string `json:"event"`
+
     /* 0-使用中 1-禁用 (Optional) */
     Disable int `json:"disable"`
 
     /* 更新时间，s (Optional) */
     UpdateTime int `json:"updateTime"`
+
+    /* 跳转地址，Action为redirect时必须为当前实例下的域名的url，forbidden时为自定义页面名称 (Optional) */
+    Redirection string `json:"redirection"`
 }

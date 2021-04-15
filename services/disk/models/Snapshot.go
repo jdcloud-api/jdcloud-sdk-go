@@ -46,8 +46,14 @@ type Snapshot struct {
     /* 创建时间 (Optional) */
     CreateTime string `json:"createTime"`
 
-    /* 共享信息 (Optional) */
+    /* 过期删除时间 (Optional) */
+    ExpireTime string `json:"expireTime"`
+
+    /* 共享信息(已废弃，使用shareInfo) (Optional) */
     SharInfo []ShareInfo `json:"sharInfo"`
+
+    /* 共享信息 (Optional) */
+    ShareInfo []ShareInfo `json:"shareInfo"`
 
     /* 快照是否为加密盘的快照 (Optional) */
     Encrypted bool `json:"encrypted"`

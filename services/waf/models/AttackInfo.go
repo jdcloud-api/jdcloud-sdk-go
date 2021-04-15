@@ -20,11 +20,11 @@ package models
 type AttackInfo struct {
 
     /* 自定义规则防护 (Optional) */
-    AclAnti int `json:"aclAnti"`
+    AclAnti int64 `json:"aclAnti"`
 
     /* cc防护 (Optional) */
-    CcAnti string `json:"ccAnti"`
+    CcAnti int64 `json:"ccAnti"`
 
     /* web防护 (Optional) */
-    WafAnti string `json:"wafAnti"`
+    WafAnti int64 `json:"wafAnti"`
 }

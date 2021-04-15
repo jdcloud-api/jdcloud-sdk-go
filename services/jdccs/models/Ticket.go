@@ -37,6 +37,27 @@ type Ticket struct {
     /* 描述 (Optional) */
     Description string `json:"description"`
 
+    /* 当前任务节点 (Optional) */
+    CurrentTaskNodeId string `json:"currentTaskNodeId"`
+
+    /* 工单类型ID (Optional) */
+    TicketTypeId int `json:"ticketTypeId"`
+
+    /* 工单模板ID (Optional) */
+    TicketTemplateId int `json:"ticketTemplateId"`
+
+    /* 主账号pin (Optional) */
+    OwnerPin string `json:"ownerPin"`
+
+    /* 子用户pin (Optional) */
+    SubUserPin string `json:"subUserPin"`
+
+    /* 提交账号 (Optional) */
+    SubmitAccount string `json:"submitAccount"`
+
+    /* 用户操作 (Optional) */
+    UserOperation []int `json:"userOperation"`
+
     /* 创建时间，遵循ISO8601标准，使用UTC时间，格式为：yyyy-MM-ddTHH:mm:ssZ (Optional) */
     CreatedTime string `json:"createdTime"`
 

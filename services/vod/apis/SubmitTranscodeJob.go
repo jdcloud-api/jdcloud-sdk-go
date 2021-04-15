@@ -28,6 +28,9 @@ type SubmitTranscodeJobRequest struct {
     /* 视频ID (Optional) */
     VideoId *string `json:"videoId"`
 
+    /* 转码模板组ID。若此字段不为空，则以模板组方式提交作业，templateIds字段将被忽略。 (Optional) */
+    TemplateGroupId *string `json:"templateGroupId"`
+
     /* 转码模板ID列表 (Optional) */
     TemplateIds []int64 `json:"templateIds"`
 
@@ -54,11 +57,13 @@ func NewSubmitTranscodeJobRequest(
 
 /*
  * param videoId: 视频ID (Optional)
+ * param templateGroupId: 转码模板组ID。若此字段不为空，则以模板组方式提交作业，templateIds字段将被忽略。 (Optional)
  * param templateIds: 转码模板ID列表 (Optional)
  * param watermarkIds: 水印ID列表 (Optional)
  */
 func NewSubmitTranscodeJobRequestWithAllParams(
     videoId *string,
+    templateGroupId *string,
     templateIds []int64,
     watermarkIds []int64,
 ) *SubmitTranscodeJobRequest {
@@ -71,6 +76,7 @@ func NewSubmitTranscodeJobRequestWithAllParams(
             Version: "v1",
         },
         VideoId: videoId,
+        TemplateGroupId: templateGroupId,
         TemplateIds: templateIds,
         WatermarkIds: watermarkIds,
     }
@@ -92,6 +98,11 @@ func NewSubmitTranscodeJobRequestWithoutParam() *SubmitTranscodeJobRequest {
 /* param videoId: 视频ID(Optional) */
 func (r *SubmitTranscodeJobRequest) SetVideoId(videoId string) {
     r.VideoId = &videoId
+}
+
+/* param templateGroupId: 转码模板组ID。若此字段不为空，则以模板组方式提交作业，templateIds字段将被忽略。(Optional) */
+func (r *SubmitTranscodeJobRequest) SetTemplateGroupId(templateGroupId string) {
+    r.TemplateGroupId = &templateGroupId
 }
 
 /* param templateIds: 转码模板ID列表(Optional) */

@@ -25,6 +25,6 @@ type CreditTask struct {
     /* 待检测数据，最长512个字符 (Optional) */
     Content string `json:"content"`
 
-    /* 数据类型，ip-IP，phone-手机，addr-地址，card-身份，pin-账户，eid-设备 (Optional) */
+    /* 数据类型，ip-IP，phone-手机，addr-地址，card-身份，pin-账户，eid-设备，signup-注册，login-登录，marketing-营销 (Optional) */
     ResourceType string `json:"resourceType"`
 }

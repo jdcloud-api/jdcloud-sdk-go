@@ -67,6 +67,15 @@ type Alarm struct {
     /* 规则状态 disabled:禁用 enabled:启用 (Optional) */
     Status string `json:"status"`
 
+    /* 通知方式 all:全部 sms：短信 email:邮件 (Optional) */
+    NoticeMethod string `json:"noticeMethod"`
+
     /* 交换机信息 (Optional) */
     Switchboard []Switchboard `json:"switchboard"`
+
+    /* 通知对象用户ID,若多个用逗号分隔 (Optional) */
+    UserId string `json:"userId"`
+
+    /* 通知对象组ID (Optional) */
+    GroupId string `json:"groupId"`
 }

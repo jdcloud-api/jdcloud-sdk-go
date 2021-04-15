@@ -66,4 +66,13 @@ type DescribeAlarm struct {
 
     /* 规则状态 disabled:禁用 enabled:启用 (Optional) */
     Status string `json:"status"`
+
+    /* 交换机信息 (Optional) */
+    Switchboard []Switchboard `json:"switchboard"`
+
+    /* 通知对象用户ID,若多个用逗号分隔 (Optional) */
+    UserId string `json:"userId"`
+
+    /* 通知对象组ID (Optional) */
+    GroupId string `json:"groupId"`
 }

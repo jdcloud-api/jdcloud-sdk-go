@@ -33,4 +33,19 @@ type DeviceOverview struct {
 
     /* 其它设备总数目 (Optional) */
     Other int `json:"other"`
+
+    /* 已开通 (Optional) */
+    Opened int `json:"opened"`
+
+    /* 已上架 (Optional) */
+    Launched int `json:"launched"`
+
+    /* 操作中 (Optional) */
+    Operating int `json:"operating"`
+
+    /* 变更中 (Optional) */
+    Modifying int `json:"modifying"`
+
+    /* 退订中 (Optional) */
+    Canceling int `json:"canceling"`
 }

@@ -28,7 +28,7 @@ type DescribeBandwidth struct {
     /* 带宽实例ID (Optional) */
     BandwidthId string `json:"bandwidthId"`
 
-    /* 带宽名称 (Optional) */
+    /* 带宽（出口）名称 (Optional) */
     BandwidthName string `json:"bandwidthName"`
 
     /* 状态 normal:正常 abnormal:异常 (Optional) */

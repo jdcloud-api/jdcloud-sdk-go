@@ -40,7 +40,7 @@ func NewVodClient(credential *core.Credential) *VodClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vod",
-            Revision:    "1.1.9",
+            Revision:    "1.1.10",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -545,6 +545,27 @@ func (c *VodClient) GetWatermark(request *vod.GetWatermarkRequest) (*vod.GetWate
     return jdResp, err
 }
 
+/* 删除转码模板组中的模板。
+ */
+func (c *VodClient) DeleteGroupedTranscodeTemplates(request *vod.DeleteGroupedTranscodeTemplatesRequest) (*vod.DeleteGroupedTranscodeTemplatesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vod.DeleteGroupedTranscodeTemplatesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 删除视频转码流 */
 func (c *VodClient) DeleteVideoStreams(request *vod.DeleteVideoStreamsRequest) (*vod.DeleteVideoStreamsResponse, error) {
     if request == nil {
@@ -596,6 +617,26 @@ func (c *VodClient) SetIPRule(request *vod.SetIPRuleRequest) (*vod.SetIPRuleResp
     }
 
     jdResp := &vod.SetIPRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除转码模板组 */
+func (c *VodClient) DeleteTranscodeTemplateGroup(request *vod.DeleteTranscodeTemplateGroupRequest) (*vod.DeleteTranscodeTemplateGroupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vod.DeleteTranscodeTemplateGroupResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -716,6 +757,26 @@ func (c *VodClient) DeleteHeader(request *vod.DeleteHeaderRequest) (*vod.DeleteH
     }
 
     jdResp := &vod.DeleteHeaderResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改转码模板组 */
+func (c *VodClient) UpdateTranscodeTemplateGroup(request *vod.UpdateTranscodeTemplateGroupRequest) (*vod.UpdateTranscodeTemplateGroupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vod.UpdateTranscodeTemplateGroupResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1027,6 +1088,26 @@ func (c *VodClient) RefreshVideoUploadTask(request *vod.RefreshVideoUploadTaskRe
     return jdResp, err
 }
 
+/* 查询转码模板组 */
+func (c *VodClient) GetTranscodeTemplateGroup(request *vod.GetTranscodeTemplateGroupRequest) (*vod.GetTranscodeTemplateGroupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vod.GetTranscodeTemplateGroupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询单个视频信息 */
 func (c *VodClient) GetVideo(request *vod.GetVideoRequest) (*vod.GetVideoResponse, error) {
     if request == nil {
@@ -1213,6 +1294,26 @@ func (c *VodClient) CreateSnapshotTemplate(request *vod.CreateSnapshotTemplateRe
     return jdResp, err
 }
 
+/* 创建转码模板组 */
+func (c *VodClient) CreateTranscodeTemplateGroup(request *vod.CreateTranscodeTemplateGroupRequest) (*vod.CreateTranscodeTemplateGroupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vod.CreateTranscodeTemplateGroupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询CDN域名IP黑名单规则配置 */
 func (c *VodClient) GetIPRule(request *vod.GetIPRuleRequest) (*vod.GetIPRuleResponse, error) {
     if request == nil {
@@ -1284,6 +1385,27 @@ func (c *VodClient) CreateTranscodeTemplate(request *vod.CreateTranscodeTemplate
     }
 
     jdResp := &vod.CreateTranscodeTemplateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询转码模板组列表。
+ */
+func (c *VodClient) ListTranscodeTemplateGroups(request *vod.ListTranscodeTemplateGroupsRequest) (*vod.ListTranscodeTemplateGroupsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vod.ListTranscodeTemplateGroupsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

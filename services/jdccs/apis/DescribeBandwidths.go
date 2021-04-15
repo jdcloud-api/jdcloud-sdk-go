@@ -35,12 +35,27 @@ type DescribeBandwidthsRequest struct {
     /* 分页大小，默认为20 (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* bandwidthId - 带宽实例IID，精确匹配，支持多个
- (Optional) */
-    Filters []common.Filter `json:"filters"`
+    /* 是否查询全部，默认分页 (Optional) */
+    All *int `json:"all"`
 
     /* 线路类型 dynamicBGP:动态BGP thirdLineBGP:三线BGP telecom:电信单线 unicom:联通单线 mobile:移动单线 (Optional) */
     LineType *string `json:"lineType"`
+
+    /* 计费方式 fixedBandwidth:固定带宽 95thPercentile:95峰值 merge95thPercentile:合并95峰值 (Optional) */
+    ChargeType *string `json:"chargeType"`
+
+    /* 带宽（出口）名称 (Optional) */
+    BandwidthName *string `json:"bandwidthName"`
+
+    /* 关联的公网IP (Optional) */
+    RelatedIp *string `json:"relatedIp"`
+
+    /* bandwidthId - 带宽实例ID，精确匹配，支持多个
+ (Optional) */
+    Filters []common.Filter `json:"filters"`
+
+    /* null (Optional) */
+    Sorts []common.Sort `json:"sorts"`
 }
 
 /*
@@ -67,16 +82,26 @@ func NewDescribeBandwidthsRequest(
  * param idc: IDC机房ID (Required)
  * param pageNumber: 页码, 默认为1 (Optional)
  * param pageSize: 分页大小，默认为20 (Optional)
- * param filters: bandwidthId - 带宽实例IID，精确匹配，支持多个
- (Optional)
+ * param all: 是否查询全部，默认分页 (Optional)
  * param lineType: 线路类型 dynamicBGP:动态BGP thirdLineBGP:三线BGP telecom:电信单线 unicom:联通单线 mobile:移动单线 (Optional)
+ * param chargeType: 计费方式 fixedBandwidth:固定带宽 95thPercentile:95峰值 merge95thPercentile:合并95峰值 (Optional)
+ * param bandwidthName: 带宽（出口）名称 (Optional)
+ * param relatedIp: 关联的公网IP (Optional)
+ * param filters: bandwidthId - 带宽实例ID，精确匹配，支持多个
+ (Optional)
+ * param sorts: null (Optional)
  */
 func NewDescribeBandwidthsRequestWithAllParams(
     idc string,
     pageNumber *int,
     pageSize *int,
-    filters []common.Filter,
+    all *int,
     lineType *string,
+    chargeType *string,
+    bandwidthName *string,
+    relatedIp *string,
+    filters []common.Filter,
+    sorts []common.Sort,
 ) *DescribeBandwidthsRequest {
 
     return &DescribeBandwidthsRequest{
@@ -89,8 +114,13 @@ func NewDescribeBandwidthsRequestWithAllParams(
         Idc: idc,
         PageNumber: pageNumber,
         PageSize: pageSize,
-        Filters: filters,
+        All: all,
         LineType: lineType,
+        ChargeType: chargeType,
+        BandwidthName: bandwidthName,
+        RelatedIp: relatedIp,
+        Filters: filters,
+        Sorts: sorts,
     }
 }
 
@@ -122,15 +152,40 @@ func (r *DescribeBandwidthsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
-/* param filters: bandwidthId - 带宽实例IID，精确匹配，支持多个
-(Optional) */
-func (r *DescribeBandwidthsRequest) SetFilters(filters []common.Filter) {
-    r.Filters = filters
+/* param all: 是否查询全部，默认分页(Optional) */
+func (r *DescribeBandwidthsRequest) SetAll(all int) {
+    r.All = &all
 }
 
 /* param lineType: 线路类型 dynamicBGP:动态BGP thirdLineBGP:三线BGP telecom:电信单线 unicom:联通单线 mobile:移动单线(Optional) */
 func (r *DescribeBandwidthsRequest) SetLineType(lineType string) {
     r.LineType = &lineType
+}
+
+/* param chargeType: 计费方式 fixedBandwidth:固定带宽 95thPercentile:95峰值 merge95thPercentile:合并95峰值(Optional) */
+func (r *DescribeBandwidthsRequest) SetChargeType(chargeType string) {
+    r.ChargeType = &chargeType
+}
+
+/* param bandwidthName: 带宽（出口）名称(Optional) */
+func (r *DescribeBandwidthsRequest) SetBandwidthName(bandwidthName string) {
+    r.BandwidthName = &bandwidthName
+}
+
+/* param relatedIp: 关联的公网IP(Optional) */
+func (r *DescribeBandwidthsRequest) SetRelatedIp(relatedIp string) {
+    r.RelatedIp = &relatedIp
+}
+
+/* param filters: bandwidthId - 带宽实例ID，精确匹配，支持多个
+(Optional) */
+func (r *DescribeBandwidthsRequest) SetFilters(filters []common.Filter) {
+    r.Filters = filters
+}
+
+/* param sorts: null(Optional) */
+func (r *DescribeBandwidthsRequest) SetSorts(sorts []common.Sort) {
+    r.Sorts = sorts
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

@@ -19,6 +19,9 @@ package models
 
 type Datasource struct {
 
+    /* customHttpHeader (Optional) */
+    CustomHttpHeader interface{} `json:"customHttpHeader"`
+
     /* 数据源名称  */
     Name string `json:"name"`
 

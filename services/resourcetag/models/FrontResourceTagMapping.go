@@ -34,6 +34,9 @@ type FrontResourceTagMapping struct {
     /* 资源名称 (Optional) */
     ResourceName string `json:"resourceName"`
 
+    /* 资源详情url地址 (Optional) */
+    DetailUrl string `json:"detailUrl"`
+
     /* 可用区 (Optional) */
     Az string `json:"az"`
 }

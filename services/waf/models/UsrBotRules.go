@@ -42,4 +42,22 @@ type UsrBotRules struct {
 
     /* 更新时间 (Optional) */
     UpdateTime int `json:"updateTime"`
+
+    /* 响应状态码 (Optional) */
+    Status int `json:"status"`
+
+    /* 状态码数量阀值 (Optional) */
+    Ststhrst int `json:"ststhrst"`
+
+    /* 状态码比例阀值 (Optional) */
+    StsthrstRatio int `json:"ststhrstRatio"`
+
+    /* 响应码功能是否启用 (Optional) */
+    StatusDisable int `json:"statusDisable"`
+
+    /* 规则生效时间是否启用 (Optional) */
+    DateDisable int `json:"dateDisable"`
+
+    /* 统计维度 (Optional) */
+    Unit string `json:"unit"`
 }

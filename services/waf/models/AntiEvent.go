@@ -25,6 +25,9 @@ type AntiEvent struct {
     /* 情报标签 (Optional) */
     CsaInfo string `json:"csaInfo"`
 
+    /* 风险等级 (Optional) */
+    RiskLevel string `json:"riskLevel"`
+
     /* 来源地区 (Optional) */
     Area string `json:"area"`
 
@@ -57,4 +60,16 @@ type AntiEvent struct {
 
     /* 实例id (Optional) */
     WafInstanceId string `json:"wafInstanceId"`
+
+    /* 状态码 (Optional) */
+    AntiStatus string `json:"antiStatus"`
+
+    /* 状态标识 (Optional) */
+    UpstreamErr string `json:"upstreamErr"`
+
+    /* 是否已加入白名单 (Optional) */
+    SkipExist int `json:"skipExist"`
+
+    /* 是否已加入黑名单 (Optional) */
+    DenyExist int `json:"denyExist"`
 }

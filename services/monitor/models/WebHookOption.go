@@ -19,7 +19,7 @@ package models
 
 type WebHookOption struct {
 
-    /* 回调content 注：仅webHookUrl和webHookProtocol均不为空时，才会创建webHook (Optional) */
+    /* 回调content 注：仅webHookUrl和webHookProtocol均不为空时，才会创建webHook。当前支持的变量:${resourceId},${resourceName},${ipAddress},${requestId},${metric},${currentValue},${times},${tags},${alertTime},${region},${threshold},${serviceCode},${asGroupId},${unhealthyInstance} (Optional) */
     WebHookContent *string `json:"webHookContent"`
 
     /* webHook协议 (Optional) */

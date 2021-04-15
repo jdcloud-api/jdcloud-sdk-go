@@ -19,8 +19,11 @@ package models
 
 type HandleTags struct {
 
-    /*  (Optional) */
+    /* 操作类型 1 复制原数据点，复制过程中只拷贝对原数据中tag改名的tag 2 不进行复制 (Optional) */
     HandleTagCode int64 `json:"handleTagCode"`
+
+    /*  (Optional) */
+    HandleTags []DataTag `json:"handleTags"`
 
     /*  (Optional) */
     PrefixMetric string `json:"prefixMetric"`

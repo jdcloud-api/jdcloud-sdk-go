@@ -63,4 +63,7 @@ type CreateAlarmSpec struct {
 
     /* 通知对象用户ID,若多个用逗号分隔 (Optional) */
     UserId string `json:"userId"`
+
+    /* 通知对象组ID (Optional) */
+    GroupId string `json:"groupId"`
 }

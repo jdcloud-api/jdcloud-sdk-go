@@ -146,5 +146,6 @@ type GetDomainAntiConfigResult struct {
     StatusConf waf.StatusConf `json:"statusConf"`
     UriRewriteConf waf.UriRewriteConf `json:"uriRewriteConf"`
     ProxycacheConf waf.EnableConf `json:"proxycacheConf"`
-    RiskConf waf.EnableConf `json:"riskConf"`
+    RiskConf waf.RiskConf `json:"riskConf"`
+    BotConf waf.BotConf `json:"botConf"`
 }

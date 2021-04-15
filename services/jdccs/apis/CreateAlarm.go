@@ -68,6 +68,9 @@ type CreateAlarmRequest struct {
 
     /* 通知对象用户ID,若多个用逗号分隔 (Optional) */
     UserId *string `json:"userId"`
+
+    /* 通知对象组ID (Optional) */
+    GroupId *string `json:"groupId"`
 }
 
 /*
@@ -103,6 +106,7 @@ func NewCreateAlarmRequest(
  * param noticeMethod: 通知方式 all:全部 sms：短信 email:邮件 (Optional)
  * param noticeObj: 通知对象 all:全部 persons：个人 groups:角色组 (Optional)
  * param userId: 通知对象用户ID,若多个用逗号分隔 (Optional)
+ * param groupId: 通知对象组ID (Optional)
  */
 func NewCreateAlarmRequestWithAllParams(
     idc *string,
@@ -120,6 +124,7 @@ func NewCreateAlarmRequestWithAllParams(
     noticeMethod *string,
     noticeObj *string,
     userId *string,
+    groupId *string,
 ) *CreateAlarmRequest {
 
     return &CreateAlarmRequest{
@@ -144,6 +149,7 @@ func NewCreateAlarmRequestWithAllParams(
         NoticeMethod: noticeMethod,
         NoticeObj: noticeObj,
         UserId: userId,
+        GroupId: groupId,
     }
 }
 
@@ -233,6 +239,11 @@ func (r *CreateAlarmRequest) SetNoticeObj(noticeObj string) {
 /* param userId: 通知对象用户ID,若多个用逗号分隔(Optional) */
 func (r *CreateAlarmRequest) SetUserId(userId string) {
     r.UserId = &userId
+}
+
+/* param groupId: 通知对象组ID(Optional) */
+func (r *CreateAlarmRequest) SetGroupId(groupId string) {
+    r.GroupId = &groupId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

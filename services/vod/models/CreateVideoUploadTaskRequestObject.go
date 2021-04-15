@@ -45,6 +45,9 @@ type CreateVideoUploadTaskRequestObject struct {
     /* 视频标签集合 (Optional) */
     Tags []string `json:"tags"`
 
+    /* 转码模板组ID (Optional) */
+    TranscodeTemplateGroupId string `json:"transcodeTemplateGroupId"`
+
     /* 转码模板ID集合 (Optional) */
     TranscodeTemplateIds []int64 `json:"transcodeTemplateIds"`
 

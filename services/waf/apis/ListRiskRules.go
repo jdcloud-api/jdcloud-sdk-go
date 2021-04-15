@@ -32,7 +32,7 @@ type ListRiskRulesRequest struct {
     WafInstanceId string `json:"wafInstanceId"`
 
     /* 请求  */
-    Req *waf.ListRulesReq `json:"req"`
+    Req *waf.ListRiskRulesReq `json:"req"`
 }
 
 /*
@@ -45,7 +45,7 @@ type ListRiskRulesRequest struct {
 func NewListRiskRulesRequest(
     regionId string,
     wafInstanceId string,
-    req *waf.ListRulesReq,
+    req *waf.ListRiskRulesReq,
 ) *ListRiskRulesRequest {
 
 	return &ListRiskRulesRequest{
@@ -69,7 +69,7 @@ func NewListRiskRulesRequest(
 func NewListRiskRulesRequestWithAllParams(
     regionId string,
     wafInstanceId string,
-    req *waf.ListRulesReq,
+    req *waf.ListRiskRulesReq,
 ) *ListRiskRulesRequest {
 
     return &ListRiskRulesRequest{
@@ -109,7 +109,7 @@ func (r *ListRiskRulesRequest) SetWafInstanceId(wafInstanceId string) {
 }
 
 /* param req: 请求(Required) */
-func (r *ListRiskRulesRequest) SetReq(req *waf.ListRulesReq) {
+func (r *ListRiskRulesRequest) SetReq(req *waf.ListRiskRulesReq) {
     r.Req = req
 }
 

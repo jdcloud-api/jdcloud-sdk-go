@@ -40,7 +40,7 @@ func NewMonitorClient(credential *core.Credential) *MonitorClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "monitor",
-            Revision:    "2.0.2",
+            Revision:    "2.4.5",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -197,26 +197,6 @@ func (c *MonitorClient) DescribeAlarm(request *monitor.DescribeAlarmRequest) (*m
     return jdResp, err
 }
 
-/* 根据不同的聚合方式将metric的数据聚合为一个点。downAggrType：last(最后一个点)、max(最大值)、min(最小值)、avg(平均值)。该接口返回值为上报metric的原始值，没有做单位转换。metric介绍：<a href="https://docs.jdcloud.com/cn/monitoring/metrics">Metrics</a> */
-func (c *MonitorClient) DescribeOneDataPoint(request *monitor.DescribeOneDataPointRequest) (*monitor.DescribeOneDataPointResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &monitor.DescribeOneDataPointResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 删除规则 */
 func (c *MonitorClient) DeleteAlarms(request *monitor.DeleteAlarmsRequest) (*monitor.DeleteAlarmsResponse, error) {
     if request == nil {
@@ -228,6 +208,26 @@ func (c *MonitorClient) DeleteAlarms(request *monitor.DeleteAlarmsRequest) (*mon
     }
 
     jdResp := &monitor.DeleteAlarmsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据不同的聚合方式将metric的数据聚合为一个点。downAggrType：last(最后一个点)、max(最大值)、min(最小值)、avg(平均值)。该接口返回值为上报metric的原始值，没有做单位转换。metric介绍：<a href="https://docs.jdcloud.com/cn/monitoring/metrics">Metrics</a> */
+func (c *MonitorClient) LastDownsample(request *monitor.LastDownsampleRequest) (*monitor.LastDownsampleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &monitor.LastDownsampleResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -277,6 +277,26 @@ func (c *MonitorClient) UpdateAlarm(request *monitor.UpdateAlarmRequest) (*monit
     return jdResp, err
 }
 
+/* 通过指定维度查询自定义监控的数据 */
+func (c *MonitorClient) DescribeCustomMetricData(request *monitor.DescribeCustomMetricDataRequest) (*monitor.DescribeCustomMetricDataResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &monitor.DescribeCustomMetricDataResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 启用、禁用规则 */
 func (c *MonitorClient) EnableAlarms(request *monitor.EnableAlarmsRequest) (*monitor.EnableAlarmsResponse, error) {
     if request == nil {
@@ -288,6 +308,26 @@ func (c *MonitorClient) EnableAlarms(request *monitor.EnableAlarmsRequest) (*mon
     }
 
     jdResp := &monitor.EnableAlarmsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询某资源下指定tag key的tag value */
+func (c *MonitorClient) DescribeTagValues(request *monitor.DescribeTagValuesRequest) (*monitor.DescribeTagValuesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &monitor.DescribeTagValuesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

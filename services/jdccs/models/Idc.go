@@ -27,4 +27,16 @@ type Idc struct {
 
     /* 是否是商业化外部机房 (Optional) */
     IsExternalIdc bool `json:"isExternalIdc"`
+
+    /* 机房地址 (Optional) */
+    Address string `json:"address"`
+
+    /* 机房主管 (Optional) */
+    Manager string `json:"manager"`
+
+    /* 机房主管电话 (Optional) */
+    ManagerPhone string `json:"managerPhone"`
+
+    /* 机房类别 1:租用 2:自建 3:合作 4:其他 (Optional) */
+    Category int `json:"category"`
 }

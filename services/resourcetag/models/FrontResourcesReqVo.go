@@ -34,6 +34,12 @@ type FrontResourcesReqVo struct {
     /* 标签过滤列表 (Optional) */
     TagFilters []TagFilter `json:"tagFilters"`
 
+    /* 控制标签显示参数, 默认为0
+0: 只显示普通用户标签
+1: 显示系统标签和普通用户标签
+ (Optional) */
+    ShowTagStatus int `json:"showTagStatus"`
+
     /* 每页记录数大小, 默认为20条记录每页, 上限为500条记录每页 (Optional) */
     PageSize int `json:"pageSize"`
 

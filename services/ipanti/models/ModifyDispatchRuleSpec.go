@@ -23,7 +23,7 @@ type ModifyDispatchRuleSpec struct {
     Name string `json:"name"`
 
     /* 高防 IP (Optional) */
-    ServiceIp string `json:"serviceIp"`
+    ServiceIp *string `json:"serviceIp"`
 
     /* 云内IP  */
     InnerIps []string `json:"innerIps"`

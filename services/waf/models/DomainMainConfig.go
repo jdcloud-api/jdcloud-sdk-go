@@ -59,5 +59,5 @@ type DomainMainConfig struct {
     EnableIpv6 int `json:"enableIpv6"`
 
     /* 域名的地域信息，类型是map[string]regionVipInfo (Optional) */
-    Region RegionVipInfo `json:"region"`
+    Region DomainRegionInfo `json:"region"`
 }

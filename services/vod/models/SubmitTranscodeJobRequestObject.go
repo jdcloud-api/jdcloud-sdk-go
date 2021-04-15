@@ -22,6 +22,9 @@ type SubmitTranscodeJobRequestObject struct {
     /* 视频ID (Optional) */
     VideoId *string `json:"videoId"`
 
+    /* 转码模板组ID。若此字段不为空，则以模板组方式提交作业，templateIds字段将被忽略。 (Optional) */
+    TemplateGroupId *string `json:"templateGroupId"`
+
     /* 转码模板ID列表 (Optional) */
     TemplateIds []int64 `json:"templateIds"`
 

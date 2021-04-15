@@ -112,6 +112,6 @@ type GetQpsDataResponse struct {
 }
 
 type GetQpsDataResult struct {
-    TimeScope []int `json:"timeScope"`
+    TimeScope []int64 `json:"timeScope"`
     Qps waf.Qps `json:"qps"`
 }

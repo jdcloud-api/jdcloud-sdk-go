@@ -25,7 +25,7 @@ type CreditScoreDetail struct {
     /* 风险类型编码 (Optional) */
     RiskCode string `json:"riskCode"`
 
-    /* 风险分类，对应riskCode的分类，101~106账号综合风险，201~207手机综合风险，301设备综合风险，401~403身份综合风险，501~506IP综合风险 (Optional) */
+    /* 风险分类，对应riskCode的分类，101~106账号综合风险，201~207手机综合风险，301设备综合风险，401~403身份综合风险，501~506IP综合风险，600~604注册综合风险，700~703登录综合风险，800~803营销综合风险 (Optional) */
     RiskClass string `json:"riskClass"`
 
     /* 风险评分，1-低风险 2-中低风险 3-中风险 4-中高风险 5-高风险 0-未知 (Optional) */
@@ -33,4 +33,7 @@ type CreditScoreDetail struct {
 
     /* 对应score的中文描述，1-低风险 2-中低风险 3-中风险 4-中高风险 5-高风险 0-未知 (Optional) */
     ScoreDesc string `json:"scoreDesc"`
+
+    /* 手机号码归属地，只有resourceType为phone时且归属地不为空时提供字段值，如：黑龙江-伊春市 (Optional) */
+    Attribution string `json:"attribution"`
 }

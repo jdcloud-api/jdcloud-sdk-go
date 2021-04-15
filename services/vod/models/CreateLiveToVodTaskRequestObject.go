@@ -40,6 +40,9 @@ type CreateLiveToVodTaskRequestObject struct {
     /* 视频标签集合 (Optional) */
     Tags []string `json:"tags"`
 
+    /* 转码模板组ID。若此字段不为空，则将以模板组方式提交转码作业，transcodeTemplateIds字段将被忽略。 (Optional) */
+    TranscodeTemplateGroupId string `json:"transcodeTemplateGroupId"`
+
     /* 转码模板ID集合 (Optional) */
     TranscodeTemplateIds []int64 `json:"transcodeTemplateIds"`
 

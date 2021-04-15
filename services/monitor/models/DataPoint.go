@@ -19,9 +19,9 @@ package models
 
 type DataPoint struct {
 
-    /*  (Optional) */
+    /* 时间戳 (Optional) */
     Timestamp int64 `json:"timestamp"`
 
-    /*  (Optional) */
+    /* 值 (Optional) */
     Value interface{} `json:"value"`
 }

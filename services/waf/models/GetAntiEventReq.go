@@ -20,21 +20,24 @@ package models
 type GetAntiEventReq struct {
 
     /* 实例id，代表要查询的WAF实例，为空时表示当前用户下的所有实例 (Optional) */
-    WafInstanceId string `json:"wafInstanceId"`
+    WafInstanceId *string `json:"wafInstanceId"`
 
     /* 域名，为空时表示当前实例下的所有域名 (Optional) */
-    Domain string `json:"domain"`
+    Domain *string `json:"domain"`
 
     /* 攻击类型，支持类型："cc"(cc攻击)，"waf"(Web攻击)，"acl"(自定义规则)  */
     AntiType string `json:"antiType"`
 
     /* 源ip，检索字段 (Optional) */
-    RemoteAddr string `json:"remoteAddr"`
+    RemoteAddr *string `json:"remoteAddr"`
 
-    /* 开始时间戳，单位毫秒，时间间隔要求大于5分钟，小于30天。  */
+    /* 状态码，检索字段 (Optional) */
+    AntiStatus *string `json:"antiStatus"`
+
+    /* 开始时间戳，单位秒，时间间隔要求大于5分钟，小于30天。  */
     Start int `json:"start"`
 
-    /* 结束时间戳，单位毫秒，时间间隔要求大于5分钟，小于30天。  */
+    /* 结束时间戳，单位秒，时间间隔要求大于5分钟，小于30天。  */
     End int `json:"end"`
 
     /* 每页显示的个数。  */
@@ -44,8 +47,8 @@ type GetAntiEventReq struct {
     PageIndex int `json:"pageIndex"`
 
     /* 排序字段，document_uri:uri, remote_addr:源ip, time:时间 (Optional) */
-    SortKey string `json:"sortKey"`
+    SortKey *string `json:"sortKey"`
 
     /* 排序方式，desc-倒序 asc-增序 (Optional) */
-    SortDesc string `json:"sortDesc"`
+    SortDesc *string `json:"sortDesc"`
 }

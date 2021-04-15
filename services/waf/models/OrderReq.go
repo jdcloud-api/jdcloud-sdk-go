@@ -32,7 +32,7 @@ type OrderReq struct {
     TimeUnit string `json:"timeUnit"`
 
     /* 创建时间  */
-    StartTime int `json:"startTime"`
+    StartTime int64 `json:"startTime"`
 
     /* 实例id，除新建必传 (Optional) */
     WafInstanceId *string `json:"wafInstanceId"`
@@ -51,4 +51,10 @@ type OrderReq struct {
 
     /* 额外的qps扩展包,单位为M 该值为50M的倍数  */
     ExtraBitsLimit int `json:"extraBitsLimit"`
+
+    /* 云鼎的appCode (Optional) */
+    AppCode *string `json:"appCode"`
+
+    /* 云鼎的serviceCode (Optional) */
+    ServiceCode *string `json:"serviceCode"`
 }

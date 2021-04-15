@@ -57,4 +57,10 @@ type DescribeCabinet struct {
 
     /* 预留结束时间，遵循ISO8601标准，使用UTC时间，格式为：yyyy-MM-ddTHH:mm:ssZ (Optional) */
     ReserveEndTime string `json:"reserveEndTime"`
+
+    /* 占用U数(U) (Optional) */
+    RackUOccupy int `json:"rackUOccupy"`
+
+    /* 空闲U数(U) (Optional) */
+    RackUFree int `json:"rackUFree"`
 }
