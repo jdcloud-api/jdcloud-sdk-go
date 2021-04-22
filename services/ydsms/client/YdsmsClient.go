@@ -40,7 +40,7 @@ func NewYdsmsClient(credential *core.Credential) *YdsmsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "ydsms",
-            Revision:    "1.0.4",
+            Revision:    "1.0.5",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -128,6 +128,26 @@ func (c *YdsmsClient) QuerySecretKeyUsingGET(request *ydsms.QuerySecretKeyUsingG
     }
 
     jdResp := &ydsms.QuerySecretKeyUsingGETResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据pin发送短信 */
+func (c *YdsmsClient) SendMessagesByPinUsingPOST(request *ydsms.SendMessagesByPinUsingPOSTRequest) (*ydsms.SendMessagesByPinUsingPOSTResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydsms.SendMessagesByPinUsingPOSTResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -608,6 +628,26 @@ func (c *YdsmsClient) GetSmsTaskContentUsingGET(request *ydsms.GetSmsTaskContent
     }
 
     jdResp := &ydsms.GetSmsTaskContentUsingGETResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据订单号发送短信 */
+func (c *YdsmsClient) SendMessagesByOrderIdUsingPOST(request *ydsms.SendMessagesByOrderIdUsingPOSTRequest) (*ydsms.SendMessagesByOrderIdUsingPOSTResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydsms.SendMessagesByOrderIdUsingPOSTResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
