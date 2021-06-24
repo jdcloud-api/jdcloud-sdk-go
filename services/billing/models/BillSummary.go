@@ -65,25 +65,25 @@ type BillSummary struct {
     BillTime string `json:"billTime"`
 
     /* 账单总额 (Optional) */
-    TotalFee int `json:"totalFee"`
+    TotalFee float64 `json:"totalFee"`
 
     /* 优惠金额 (Optional) */
-    DiscountFee int `json:"discountFee"`
+    DiscountFee float64 `json:"discountFee"`
 
     /* 优惠后总价金额 (Optional) */
-    RealTotalFee int `json:"realTotalFee"`
+    RealTotalFee float64 `json:"realTotalFee"`
 
     /* 代金券支付金额 (Optional) */
-    CashCouponPayFee int `json:"cashCouponPayFee"`
+    CashCouponPayFee float64 `json:"cashCouponPayFee"`
 
     /* 余额支付金额 (Optional) */
-    BalancePayFee int `json:"balancePayFee"`
+    BalancePayFee float64 `json:"balancePayFee"`
 
     /* 现金支付金额 (Optional) */
-    CashPayFee int `json:"cashPayFee"`
+    CashPayFee float64 `json:"cashPayFee"`
 
     /* 欠费金额 (Optional) */
-    ArrearFee int `json:"arrearFee"`
+    ArrearFee float64 `json:"arrearFee"`
 
     /* 标签明细 (Optional) */
     TagDetails []ResourceTagVo `json:"tagDetails"`
