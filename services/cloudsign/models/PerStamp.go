@@ -19,7 +19,10 @@ package models
 
 type PerStamp struct {
 
-    /* 盖章类型（0 坐标 1 关键字） (Optional) */
+    /* 最多盖章数目（默认10） (Optional) */
+    StampMax *int `json:"stampMax"`
+
+    /* 盖章类型（0 坐标 1 关键字，默认为 1） (Optional) */
     SignPositionType *int `json:"signPositionType"`
 
     /* 盖章关键字（与坐标二选一） (Optional) */
@@ -37,7 +40,7 @@ type PerStamp struct {
     /* 盖章Y坐标偏移量（配合positionY） (Optional) */
     OffsetY *int `json:"offsetY"`
 
-    /* 盖章页码（选择坐标盖章时需要） (Optional) */
+    /* 盖章页码（选择坐标盖章时需要传入本参数） (Optional) */
     Page *int `json:"page"`
 
     /* 印章名称 (Optional) */
@@ -55,7 +58,7 @@ type PerStamp struct {
     /* 是否作为以后签章默认章 (Optional) */
     IsDefault *bool `json:"isDefault"`
 
-    /* 图片类型，只支持png格式 (Optional) */
+    /* 图片类型 (Optional) */
     ImageType *string `json:"imageType"`
 
     /* 图片大小，高度*宽度 (Optional) */

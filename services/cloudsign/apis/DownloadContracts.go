@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    cloudsign "github.com/jdcloud-api/jdcloud-sdk-go/services/cloudsign/models"
 )
 
 type DownloadContractsRequest struct {
@@ -97,4 +98,6 @@ type DownloadContractsResponse struct {
 }
 
 type DownloadContractsResult struct {
+    ContractList []cloudsign.ContractInfo `json:"contractList"`
+    TotalCount int `json:"totalCount"`
 }
