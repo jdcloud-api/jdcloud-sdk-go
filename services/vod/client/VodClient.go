@@ -40,7 +40,7 @@ func NewVodClient(credential *core.Credential) *VodClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vod",
-            Revision:    "1.1.10",
+            Revision:    "1.1.12",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }

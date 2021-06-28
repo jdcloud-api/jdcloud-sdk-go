@@ -26,7 +26,7 @@ type TranscodeTemplateGroupData struct {
     GroupName string `json:"groupName"`
 
     /*  (Optional) */
-    Templates GroupedTranscodeTemplateData `json:"templates"`
+    Templates []GroupedTranscodeTemplateData `json:"templates"`
 
     /* 创建时间 (Optional) */
     CreateTime string `json:"createTime"`

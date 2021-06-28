@@ -32,7 +32,7 @@ type UpdateTranscodeTemplateGroupRequest struct {
     GroupName *string `json:"groupName"`
 
     /*  (Optional) */
-    Templates *vod.GroupedTranscodeTemplateData `json:"templates"`
+    Templates []vod.GroupedTranscodeTemplateData `json:"templates"`
 }
 
 /*
@@ -63,7 +63,7 @@ func NewUpdateTranscodeTemplateGroupRequest(
 func NewUpdateTranscodeTemplateGroupRequestWithAllParams(
     groupId string,
     groupName *string,
-    templates *vod.GroupedTranscodeTemplateData,
+    templates []vod.GroupedTranscodeTemplateData,
 ) *UpdateTranscodeTemplateGroupRequest {
 
     return &UpdateTranscodeTemplateGroupRequest{
@@ -103,7 +103,7 @@ func (r *UpdateTranscodeTemplateGroupRequest) SetGroupName(groupName string) {
 }
 
 /* param templates: (Optional) */
-func (r *UpdateTranscodeTemplateGroupRequest) SetTemplates(templates *vod.GroupedTranscodeTemplateData) {
+func (r *UpdateTranscodeTemplateGroupRequest) SetTemplates(templates []vod.GroupedTranscodeTemplateData) {
     r.Templates = templates
 }
 
@@ -122,7 +122,7 @@ type UpdateTranscodeTemplateGroupResponse struct {
 type UpdateTranscodeTemplateGroupResult struct {
     GroupId string `json:"groupId"`
     GroupName string `json:"groupName"`
-    Templates vod.GroupedTranscodeTemplateData `json:"templates"`
+    Templates []vod.GroupedTranscodeTemplateData `json:"templates"`
     CreateTime string `json:"createTime"`
     UpdateTime string `json:"updateTime"`
 }

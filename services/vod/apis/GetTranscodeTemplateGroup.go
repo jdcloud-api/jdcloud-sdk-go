@@ -100,7 +100,7 @@ type GetTranscodeTemplateGroupResponse struct {
 type GetTranscodeTemplateGroupResult struct {
     GroupId string `json:"groupId"`
     GroupName string `json:"groupName"`
-    Templates vod.GroupedTranscodeTemplateData `json:"templates"`
+    Templates []vod.GroupedTranscodeTemplateData `json:"templates"`
     CreateTime string `json:"createTime"`
     UpdateTime string `json:"updateTime"`
 }

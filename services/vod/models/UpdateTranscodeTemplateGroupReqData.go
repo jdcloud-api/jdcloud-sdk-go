@@ -23,5 +23,5 @@ type UpdateTranscodeTemplateGroupReqData struct {
     GroupName string `json:"groupName"`
 
     /*  (Optional) */
-    Templates GroupedTranscodeTemplateData `json:"templates"`
+    Templates []GroupedTranscodeTemplateData `json:"templates"`
 }

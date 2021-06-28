@@ -19,7 +19,10 @@ package models
 
 type ComStamp struct {
 
-    /* 盖章类型（0 坐标 1 关键字） (Optional) */
+    /* 最多盖章数目（默认10） (Optional) */
+    StampMax *int `json:"stampMax"`
+
+    /* 盖章类型（0 坐标 1 关键字 默认1 ） (Optional) */
     SignPositionType *int `json:"signPositionType"`
 
     /* 盖章关键字（与坐标二选一） (Optional) */
