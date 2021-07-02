@@ -37,7 +37,7 @@ type CustomInfo struct {
     /* 文本/语音支持 antispam-反垃圾，视频/图片支持 porn-涉黄，terrorism-涉政暴恐 (Optional) */
     Scenes string `json:"scenes"`
 
-    /* white 白名单，black 黑名单，suspect 疑似名单 (Optional) */
+    /* pass 白名单，block 黑名单，review 疑似名单 (Optional) */
     Suggestion string `json:"suggestion"`
 
     /* 状态 1启用，0禁用 (Optional) */
