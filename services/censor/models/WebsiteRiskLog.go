@@ -40,6 +40,12 @@ type WebsiteRiskLog struct {
     /* 风险等级 1低 2中 3高 (Optional) */
     RiskLevel int `json:"riskLevel"`
 
+    /* 资源类型 (Optional) */
+    ResourceType string `json:"resourceType"`
+
+    /* 响应详情 (Optional) */
+    Response string `json:"response"`
+
     /* 处理状态 0未处理 1已处理 (Optional) */
     Status int `json:"status"`
 

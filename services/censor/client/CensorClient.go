@@ -40,7 +40,7 @@ func NewCensorClient(credential *core.Credential) *CensorClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "censor",
-            Revision:    "1.0.1",
+            Revision:    "1.0.2",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -97,26 +97,6 @@ func (c *CensorClient) DeleteLimit(request *censor.DeleteLimitRequest) (*censor.
     return jdResp, err
 }
 
-/* 文本同步检测-检测文本中是否包含违规信息 */
-func (c *CensorClient) InnerTextScan(request *censor.InnerTextScanRequest) (*censor.InnerTextScanResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &censor.InnerTextScanResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 提交音频异步检测任务 */
 func (c *CensorClient) AsyncAudioScan(request *censor.AsyncAudioScanRequest) (*censor.AsyncAudioScanResponse, error) {
     if request == nil {
@@ -137,8 +117,8 @@ func (c *CensorClient) AsyncAudioScan(request *censor.AsyncAudioScanRequest) (*c
     return jdResp, err
 }
 
-/* 查看视频异步检测结果 */
-func (c *CensorClient) VideoResults(request *censor.VideoResultsRequest) (*censor.VideoResultsResponse, error) {
+/* 提交音频异步检测任务V2 */
+func (c *CensorClient) AsyncAudioScanV2(request *censor.AsyncAudioScanV2Request) (*censor.AsyncAudioScanV2Response, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -147,7 +127,7 @@ func (c *CensorClient) VideoResults(request *censor.VideoResultsRequest) (*censo
         return nil, err
     }
 
-    jdResp := &censor.VideoResultsResponse{}
+    jdResp := &censor.AsyncAudioScanV2Response{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -217,8 +197,8 @@ func (c *CensorClient) TextScan(request *censor.TextScanRequest) (*censor.TextSc
     return jdResp, err
 }
 
-/* 提交视频异步检测任务 */
-func (c *CensorClient) AsyncVideoScan(request *censor.AsyncVideoScanRequest) (*censor.AsyncVideoScanResponse, error) {
+/* 查看文本疑似结果，小于10s/20次，请求频率过快服务器会拒绝处理 */
+func (c *CensorClient) TextResultsV2(request *censor.TextResultsV2Request) (*censor.TextResultsV2Response, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -227,7 +207,7 @@ func (c *CensorClient) AsyncVideoScan(request *censor.AsyncVideoScanRequest) (*c
         return nil, err
     }
 
-    jdResp := &censor.AsyncVideoScanResponse{}
+    jdResp := &censor.TextResultsV2Response{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -277,6 +257,26 @@ func (c *CensorClient) AsyncImageScan(request *censor.AsyncImageScanRequest) (*c
     return jdResp, err
 }
 
+/* 根据taskid查询视频检测结果，小于10s/20次，请求频率过快服务器会拒绝处理 */
+func (c *CensorClient) VideoResultsV2(request *censor.VideoResultsV2Request) (*censor.VideoResultsV2Response, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &censor.VideoResultsV2Response{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 图片同步检测 */
 func (c *CensorClient) ImageScan(request *censor.ImageScanRequest) (*censor.ImageScanResponse, error) {
     if request == nil {
@@ -288,6 +288,186 @@ func (c *CensorClient) ImageScan(request *censor.ImageScanRequest) (*censor.Imag
     }
 
     jdResp := &censor.ImageScanResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 语音检测结果获取接口，获取离线处理的数据后，下次调用，不会再次返回之前获取过的离线数据。小于10s/20次，请求频率过快服务器会拒绝处理 */
+func (c *CensorClient) AudioCallbackV2(request *censor.AudioCallbackV2Request) (*censor.AudioCallbackV2Response, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &censor.AudioCallbackV2Response{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 文本同步检测-检测文本中是否包含违规信息 */
+func (c *CensorClient) InnerTextScan(request *censor.InnerTextScanRequest) (*censor.InnerTextScanResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &censor.InnerTextScanResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查看视频异步检测结果 */
+func (c *CensorClient) VideoResults(request *censor.VideoResultsRequest) (*censor.VideoResultsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &censor.VideoResultsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 提交视频异步检测任务 */
+func (c *CensorClient) AsyncVideoScan(request *censor.AsyncVideoScanRequest) (*censor.AsyncVideoScanResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &censor.AsyncVideoScanResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 视频检测结果获取接口，获取离线处理的数据后，下次调用，不会再次返回之前获取过的离线数据。小于10s/20次，请求频率过快服务器会拒绝处理 */
+func (c *CensorClient) VideoCallbackV2(request *censor.VideoCallbackV2Request) (*censor.VideoCallbackV2Response, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &censor.VideoCallbackV2Response{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据taskid查询语音检测结果，小于10s/20次，请求频率过快服务器会拒绝处理 */
+func (c *CensorClient) AudioResultsV2(request *censor.AudioResultsV2Request) (*censor.AudioResultsV2Response, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &censor.AudioResultsV2Response{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 提交视频异步检测任务V2 */
+func (c *CensorClient) AsyncVideoScanV2(request *censor.AsyncVideoScanV2Request) (*censor.AsyncVideoScanV2Response, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &censor.AsyncVideoScanV2Response{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 图片同步检测v2 */
+func (c *CensorClient) ImageScanV2(request *censor.ImageScanV2Request) (*censor.ImageScanV2Response, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &censor.ImageScanV2Response{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 文本同步检测-检测文本中是否包含违规信息 */
+func (c *CensorClient) TextScanV2(request *censor.TextScanV2Request) (*censor.TextScanV2Response, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &censor.TextScanV2Response{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
