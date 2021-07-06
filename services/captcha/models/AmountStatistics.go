@@ -17,20 +17,14 @@
 package models
 
 
-type Tactics struct {
+type AmountStatistics struct {
 
-    /* 场景id  */
-    SceneId int64 `json:"sceneId"`
+    /* 免费总数 (Optional) */
+    Free int `json:"free"`
 
-    /* 所属应用id  */
-    AppId int64 `json:"appId"`
+    /* 付费总数 (Optional) */
+    Charge int `json:"charge"`
 
-    /* 策略类型：1 智能组合,2过载保护,3自有策略,4验证码策略 (Optional) */
-    TacticsType int `json:"tacticsType"`
-
-    /* 可疑请求配置 (Optional) */
-    SuspiciousRiskConfig RiskConfig `json:"suspiciousRiskConfig"`
-
-    /* 问题请求配置 (Optional) */
-    AbandonRiskConfig RiskConfig `json:"abandonRiskConfig"`
+    /* 总数 (Optional) */
+    Total int `json:"total"`
 }

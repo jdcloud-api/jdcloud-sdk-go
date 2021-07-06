@@ -37,16 +37,16 @@ type VerifyTokenRequest struct {
     /* 场景id (Optional) */
     SceneId *int64 `json:"sceneId"`
 
+    /* 密钥，从界面获取 (Optional) */
+    Secret *string `json:"secret"`
+
     /* 客户端ip (Optional) */
     Ip *string `json:"ip"`
 
     /* 客户端userAgent (Optional) */
     UserAgent *string `json:"userAgent"`
 
-    /* 指纹，客户端sdk获取 (Optional) */
-    FingerPrint *string `json:"fingerPrint"`
-
-    /* 客户端类型, android, ios (Optional) */
+    /* 客户端类型, 可选值: android, ios, pc, wxapp, m (Optional) */
     ClientType *string `json:"clientType"`
 
     /* 客户端版本，用户端app版本，可选 (Optional) */
@@ -75,10 +75,10 @@ func NewVerifyTokenRequest(
  * param sessionId: 验证码会话id，getsessionid返回 (Optional)
  * param appId: 应用id (Optional)
  * param sceneId: 场景id (Optional)
+ * param secret: 密钥，从界面获取 (Optional)
  * param ip: 客户端ip (Optional)
  * param userAgent: 客户端userAgent (Optional)
- * param fingerPrint: 指纹，客户端sdk获取 (Optional)
- * param clientType: 客户端类型, android, ios (Optional)
+ * param clientType: 客户端类型, 可选值: android, ios, pc, wxapp, m (Optional)
  * param clientVersion: 客户端版本，用户端app版本，可选 (Optional)
  */
 func NewVerifyTokenRequestWithAllParams(
@@ -86,9 +86,9 @@ func NewVerifyTokenRequestWithAllParams(
     sessionId *string,
     appId *int64,
     sceneId *int64,
+    secret *string,
     ip *string,
     userAgent *string,
-    fingerPrint *string,
     clientType *string,
     clientVersion *string,
 ) *VerifyTokenRequest {
@@ -104,9 +104,9 @@ func NewVerifyTokenRequestWithAllParams(
         SessionId: sessionId,
         AppId: appId,
         SceneId: sceneId,
+        Secret: secret,
         Ip: ip,
         UserAgent: userAgent,
-        FingerPrint: fingerPrint,
         ClientType: clientType,
         ClientVersion: clientVersion,
     }
@@ -145,6 +145,11 @@ func (r *VerifyTokenRequest) SetSceneId(sceneId int64) {
     r.SceneId = &sceneId
 }
 
+/* param secret: 密钥，从界面获取(Optional) */
+func (r *VerifyTokenRequest) SetSecret(secret string) {
+    r.Secret = &secret
+}
+
 /* param ip: 客户端ip(Optional) */
 func (r *VerifyTokenRequest) SetIp(ip string) {
     r.Ip = &ip
@@ -155,12 +160,7 @@ func (r *VerifyTokenRequest) SetUserAgent(userAgent string) {
     r.UserAgent = &userAgent
 }
 
-/* param fingerPrint: 指纹，客户端sdk获取(Optional) */
-func (r *VerifyTokenRequest) SetFingerPrint(fingerPrint string) {
-    r.FingerPrint = &fingerPrint
-}
-
-/* param clientType: 客户端类型, android, ios(Optional) */
+/* param clientType: 客户端类型, 可选值: android, ios, pc, wxapp, m(Optional) */
 func (r *VerifyTokenRequest) SetClientType(clientType string) {
     r.ClientType = &clientType
 }

@@ -17,20 +17,11 @@
 package models
 
 
-type Tactics struct {
+type UserPkgDetail struct {
 
-    /* 场景id  */
-    SceneId int64 `json:"sceneId"`
+    /* 用户名称 (Optional) */
+    Pin string `json:"pin"`
 
-    /* 所属应用id  */
-    AppId int64 `json:"appId"`
-
-    /* 策略类型：1 智能组合,2过载保护,3自有策略,4验证码策略 (Optional) */
-    TacticsType int `json:"tacticsType"`
-
-    /* 可疑请求配置 (Optional) */
-    SuspiciousRiskConfig RiskConfig `json:"suspiciousRiskConfig"`
-
-    /* 问题请求配置 (Optional) */
-    AbandonRiskConfig RiskConfig `json:"abandonRiskConfig"`
+    /* 购买流量包数 (Optional) */
+    Pkg []int `json:"pkg"`
 }

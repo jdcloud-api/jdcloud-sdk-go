@@ -17,20 +17,8 @@
 package models
 
 
-type Tactics struct {
+type ModifyReq struct {
 
-    /* 场景id  */
-    SceneId int64 `json:"sceneId"`
-
-    /* 所属应用id  */
-    AppId int64 `json:"appId"`
-
-    /* 策略类型：1 智能组合,2过载保护,3自有策略,4验证码策略 (Optional) */
-    TacticsType int `json:"tacticsType"`
-
-    /* 可疑请求配置 (Optional) */
-    SuspiciousRiskConfig RiskConfig `json:"suspiciousRiskConfig"`
-
-    /* 问题请求配置 (Optional) */
-    AbandonRiskConfig RiskConfig `json:"abandonRiskConfig"`
+    /* 跟踪描述 (Optional) */
+    Tracking string `json:"tracking"`
 }

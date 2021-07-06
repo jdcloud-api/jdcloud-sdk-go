@@ -34,7 +34,7 @@ type GetSessionIdRequest struct {
     /* 密钥，从界面获取 (Optional) */
     Secret *string `json:"secret"`
 
-    /* uuid，ios客户端传openudid, android客户端传androidid (Optional) */
+    /* uuid，ios客户端传openudid, android客户端传androidid, m, pc, wxapp客户端此值为空即可 (Optional) */
     Uuid *string `json:"uuid"`
 
     /* 客户端ip (Optional) */
@@ -43,10 +43,10 @@ type GetSessionIdRequest struct {
     /* 客户端userAgent (Optional) */
     UserAgent *string `json:"userAgent"`
 
-    /* 指纹，客户端sdk获取 (Optional) */
+    /* 指纹，ios和android客户端(clientType)从sdk获取, m, pc, wxapp客户端此值为空即可 (Optional) */
     FingerPrint *string `json:"fingerPrint"`
 
-    /* 客户端类型, android, ios (Optional) */
+    /* 客户端类型, android, ios, pc, wxmapp, m (Optional) */
     ClientType *string `json:"clientType"`
 
     /* 客户端版本，用户端app版本，可选 (Optional) */
@@ -74,11 +74,11 @@ func NewGetSessionIdRequest(
  * param appId: 应用id (Optional)
  * param sceneId: 场景id (Optional)
  * param secret: 密钥，从界面获取 (Optional)
- * param uuid: uuid，ios客户端传openudid, android客户端传androidid (Optional)
+ * param uuid: uuid，ios客户端传openudid, android客户端传androidid, m, pc, wxapp客户端此值为空即可 (Optional)
  * param ip: 客户端ip (Optional)
  * param userAgent: 客户端userAgent (Optional)
- * param fingerPrint: 指纹，客户端sdk获取 (Optional)
- * param clientType: 客户端类型, android, ios (Optional)
+ * param fingerPrint: 指纹，ios和android客户端(clientType)从sdk获取, m, pc, wxapp客户端此值为空即可 (Optional)
+ * param clientType: 客户端类型, android, ios, pc, wxmapp, m (Optional)
  * param clientVersion: 客户端版本，用户端app版本，可选 (Optional)
  */
 func NewGetSessionIdRequestWithAllParams(
@@ -140,7 +140,7 @@ func (r *GetSessionIdRequest) SetSecret(secret string) {
     r.Secret = &secret
 }
 
-/* param uuid: uuid，ios客户端传openudid, android客户端传androidid(Optional) */
+/* param uuid: uuid，ios客户端传openudid, android客户端传androidid, m, pc, wxapp客户端此值为空即可(Optional) */
 func (r *GetSessionIdRequest) SetUuid(uuid string) {
     r.Uuid = &uuid
 }
@@ -155,12 +155,12 @@ func (r *GetSessionIdRequest) SetUserAgent(userAgent string) {
     r.UserAgent = &userAgent
 }
 
-/* param fingerPrint: 指纹，客户端sdk获取(Optional) */
+/* param fingerPrint: 指纹，ios和android客户端(clientType)从sdk获取, m, pc, wxapp客户端此值为空即可(Optional) */
 func (r *GetSessionIdRequest) SetFingerPrint(fingerPrint string) {
     r.FingerPrint = &fingerPrint
 }
 
-/* param clientType: 客户端类型, android, ios(Optional) */
+/* param clientType: 客户端类型, android, ios, pc, wxmapp, m(Optional) */
 func (r *GetSessionIdRequest) SetClientType(clientType string) {
     r.ClientType = &clientType
 }
