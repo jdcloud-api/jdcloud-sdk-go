@@ -17,20 +17,23 @@
 package models
 
 
-type Tactics struct {
+type Trial struct {
 
-    /* 场景id  */
-    SceneId int64 `json:"sceneId"`
-
-    /* 所属应用id  */
+    /* 应用id (Optional) */
     AppId int64 `json:"appId"`
 
-    /* 策略类型：1 智能组合,2过载保护,3自有策略,4验证码策略 (Optional) */
-    TacticsType int `json:"tacticsType"`
+    /* 场景id (Optional) */
+    SceneId int64 `json:"sceneId"`
 
-    /* 可疑请求配置 (Optional) */
-    SuspiciousRiskConfig RiskConfig `json:"suspiciousRiskConfig"`
+    /* 场景secret，前端调用时需要先解密再调用，解密请联系相关研发 (Optional) */
+    Secret string `json:"secret"`
 
-    /* 问题请求配置 (Optional) */
-    AbandonRiskConfig RiskConfig `json:"abandonRiskConfig"`
+    /* 支持的APP类型，有的验证码类型不支持pc端体验，需要切换到移动端体验， eg["pc","m"] (Optional) */
+    Supports []string `json:"supports"`
+
+    /* 验证码类型 (Optional) */
+    CaptchaType int `json:"captchaType"`
+
+    /* 验证码名称 (Optional) */
+    CaptchaName string `json:"captchaName"`
 }

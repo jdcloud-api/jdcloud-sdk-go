@@ -17,13 +17,7 @@
 package models
 
 
-type Tactics struct {
-
-    /* 场景id  */
-    SceneId int64 `json:"sceneId"`
-
-    /* 所属应用id  */
-    AppId int64 `json:"appId"`
+type TacticsItem struct {
 
     /* 策略类型：1 智能组合,2过载保护,3自有策略,4验证码策略 (Optional) */
     TacticsType int `json:"tacticsType"`

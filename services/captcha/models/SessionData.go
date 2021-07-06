@@ -25,10 +25,10 @@ type SessionData struct {
     /* 场景id  */
     SceneId int64 `json:"sceneId"`
 
-    /* 密钥，从界面获取 (Optional) */
+    /* 密钥，从界面获取  */
     Secret string `json:"secret"`
 
-    /* uuid，ios客户端传openudid, android客户端传androidid (Optional) */
+    /* uuid，ios客户端传openudid, android客户端传androidid, pc和wxapp客户端可不传 (Optional) */
     Uuid string `json:"uuid"`
 
     /* 客户端ip  */
@@ -40,7 +40,7 @@ type SessionData struct {
     /* 指纹，客户端sdk获取 (Optional) */
     FingerPrint string `json:"fingerPrint"`
 
-    /* 客户端类型, android, ios, pc, m  */
+    /* 客户端类型, android, ios, pc, wxapp, m  */
     ClientType string `json:"clientType"`
 
     /* 客户端版本，用户端app版本，可选 (Optional) */

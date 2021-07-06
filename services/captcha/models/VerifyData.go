@@ -28,7 +28,7 @@ type VerifyData struct {
     /* 应用id  */
     AppId int `json:"appId"`
 
-    /* 场景id (Optional) */
+    /* 场景id  */
     SceneId int `json:"sceneId"`
 
     /* 密钥，从界面获取 (Optional) */
@@ -40,7 +40,7 @@ type VerifyData struct {
     /* 客户端userAgent  */
     UserAgent string `json:"userAgent"`
 
-    /* 客户端类型, android, ios, pc, m (Optional) */
+    /* 客户端类型, android, ios, pc, wxapp (Optional) */
     ClientType string `json:"clientType"`
 
     /* 客户端版本，用户端app版本，可选 (Optional) */
