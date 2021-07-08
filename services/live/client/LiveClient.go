@@ -40,7 +40,7 @@ func NewLiveClient(credential *core.Credential) *LiveClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "live",
-            Revision:    "1.0.19",
+            Revision:    "1.0.20",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -55,6 +55,30 @@ func (c *LiveClient) SetLogger(logger core.Logger) {
 
 func (c *LiveClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
+}
+
+/* 添加域名翻译配置
+- 添加域名级别的翻译模板配置
+- 一个域名最多可绑定一个翻译模板
+- 重新推流后生效
+ */
+func (c *LiveClient) AddLiveStreamDomainTranslate(request *live.AddLiveStreamDomainTranslateRequest) (*live.AddLiveStreamDomainTranslateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.AddLiveStreamDomainTranslateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
 }
 
 /* 查询在线流列表 */
@@ -175,6 +199,27 @@ func (c *LiveClient) DeleteLiveStreamNotifyConfig(request *live.DeleteLiveStream
     }
 
     jdResp := &live.DeleteLiveStreamNotifyConfigResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询翻译模板绑定
+ */
+func (c *LiveClient) DescribeTranslateBinding(request *live.DescribeTranslateBindingRequest) (*live.DescribeTranslateBindingResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DescribeTranslateBindingResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -484,6 +529,30 @@ func (c *LiveClient) AddCustomLiveStreamSnapshotTemplate(request *live.AddCustom
     return jdResp, err
 }
 
+/* 添加流翻译配置
+- 添加流级别的翻译模板配置
+- 一个流最多可绑定一个翻译模板
+- 重新推流后生效
+ */
+func (c *LiveClient) AddLiveStreamTranslate(request *live.AddLiveStreamTranslateRequest) (*live.AddLiveStreamTranslateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.AddLiveStreamTranslateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 启动域名
 - 启用状态为 停用 的直播域名对(推流域名,播放域名)将DomainStatus变更为online
  */
@@ -517,6 +586,28 @@ func (c *LiveClient) DescribeLiveStreamPublishInfoByPage(request *live.DescribeL
     }
 
     jdResp := &live.DescribeLiveStreamPublishInfoByPageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除流的翻译模板配置
+- 删除流级别翻译模板配置,重新推流后生效
+ */
+func (c *LiveClient) DeleteLiveStreamTranslate(request *live.DeleteLiveStreamTranslateRequest) (*live.DeleteLiveStreamTranslateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DeleteLiveStreamTranslateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -945,6 +1036,28 @@ func (c *LiveClient) DescribeLiveStreamRecordNotifyConfig(request *live.Describe
     return jdResp, err
 }
 
+/* 删除域名的翻译模板配置
+- 删除域名级别翻译模板配置,重新推流后生效
+ */
+func (c *LiveClient) DeleteLiveStreamDomainTranslate(request *live.DeleteLiveStreamDomainTranslateRequest) (*live.DeleteLiveStreamDomainTranslateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DeleteLiveStreamDomainTranslateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 添加域名截图配置
 - 添加域名级别的截图模板配置
  */
@@ -1019,6 +1132,27 @@ func (c *LiveClient) SetLiveStreamSnapshotNotifyConfig(request *live.SetLiveStre
     }
 
     jdResp := &live.SetLiveStreamSnapshotNotifyConfigResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询域名下的翻译模板配置
+ */
+func (c *LiveClient) DescribeLiveDomainTranslateConfig(request *live.DescribeLiveDomainTranslateConfigRequest) (*live.DescribeLiveDomainTranslateConfigResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DescribeLiveDomainTranslateConfigResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1453,6 +1587,27 @@ func (c *LiveClient) AddLiveStreamDomainWatermark(request *live.AddLiveStreamDom
     }
 
     jdResp := &live.AddLiveStreamDomainWatermarkResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询系统默认翻译模板列表
+ */
+func (c *LiveClient) DescribeSystemLiveStreamTranslateTemplates(request *live.DescribeSystemLiveStreamTranslateTemplatesRequest) (*live.DescribeSystemLiveStreamTranslateTemplatesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DescribeSystemLiveStreamTranslateTemplatesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1969,6 +2124,28 @@ func (c *LiveClient) DeleteLiveStreamAppQualityDetection(request *live.DeleteLiv
     return jdResp, err
 }
 
+/* 删除应用的翻译模板配置
+- 删除应用级别的翻译模板配置,重新推流后生效
+ */
+func (c *LiveClient) DeleteLiveStreamAppTranslate(request *live.DeleteLiveStreamAppTranslateRequest) (*live.DeleteLiveStreamAppTranslateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DeleteLiveStreamAppTranslateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 删除域名级别录制模板配置
 - 删除域名级别录制模板配置,重新推流后生效
  */
@@ -2086,6 +2263,29 @@ func (c *LiveClient) DescribeLiveStreamPublishList(request *live.DescribeLiveStr
     }
 
     jdResp := &live.DescribeLiveStreamPublishListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 恢复指定流的翻译任务
+- 恢复添加实时翻译字幕到指定流
+- 指定的流需在线且配置了翻译模板，同时处于翻译暂停状态
+ */
+func (c *LiveClient) ResumeLiveStreamTranslate(request *live.ResumeLiveStreamTranslateRequest) (*live.ResumeLiveStreamTranslateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.ResumeLiveStreamTranslateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2310,6 +2510,29 @@ func (c *LiveClient) AddLiveDomain(request *live.AddLiveDomainRequest) (*live.Ad
     return jdResp, err
 }
 
+/* 暂停指定流的翻译任务
+- 暂停添加实时翻译字幕到指定流
+- 指定的流需在线且配置了翻译模板
+ */
+func (c *LiveClient) PauseLiveStreamTranslate(request *live.PauseLiveStreamTranslateRequest) (*live.PauseLiveStreamTranslateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.PauseLiveStreamTranslateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 删除录制文件
  */
 func (c *LiveClient) DeleteLiveRecordings(request *live.DeleteLiveRecordingsRequest) (*live.DeleteLiveRecordingsResponse, error) {
@@ -2405,6 +2628,30 @@ func (c *LiveClient) DescribeLiveStreamNotifyConfig(request *live.DescribeLiveSt
     }
 
     jdResp := &live.DescribeLiveStreamNotifyConfigResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询翻译模板配置
+- 翻译模板配置按照 域名,应用,流 3级配置添加,以最小的粒度配置生效原则
+- 域名、应用、流 依次粒度递减 即: 域名>应用>流
+- 该查询旨在查询域名、应用、流最终生效的翻译模板配置,并非各级的模板绑定情况
+ */
+func (c *LiveClient) DescribeLiveStreamTranslateConfig(request *live.DescribeLiveStreamTranslateConfigRequest) (*live.DescribeLiveStreamTranslateConfigResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DescribeLiveStreamTranslateConfigResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2521,6 +2768,30 @@ func (c *LiveClient) AddCustomLiveStreamTranscodeTemplate(request *live.AddCusto
     }
 
     jdResp := &live.AddCustomLiveStreamTranscodeTemplateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 添加应用翻译配置
+- 添加应用级别的翻译模板配置
+- 一个应用最多可绑定一个翻译模板
+- 重新推流后生效
+ */
+func (c *LiveClient) AddLiveStreamAppTranslate(request *live.AddLiveStreamAppTranslateRequest) (*live.AddLiveStreamAppTranslateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.AddLiveStreamAppTranslateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
