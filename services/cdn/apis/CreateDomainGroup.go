@@ -24,7 +24,7 @@ type CreateDomainGroupRequest struct {
 
     core.JDCloudRequest
 
-    /* 是否共享内存 (Optional) */
+    /* 是否共享内存，共享缓存仅对中国境内加速域名生效 (Optional) */
     ShareCache *string `json:"shareCache"`
 
     /* 主域名,开启共享缓存时必传 (Optional) */
@@ -55,7 +55,7 @@ func NewCreateDomainGroupRequest(
 }
 
 /*
- * param shareCache: 是否共享内存 (Optional)
+ * param shareCache: 是否共享内存，共享缓存仅对中国境内加速域名生效 (Optional)
  * param primaryDomain: 主域名,开启共享缓存时必传 (Optional)
  * param domainGroupName: 域名组名称 (Optional)
  * param domains: 域名组内域名包含主域名 (Optional)
@@ -94,7 +94,7 @@ func NewCreateDomainGroupRequestWithoutParam() *CreateDomainGroupRequest {
     }
 }
 
-/* param shareCache: 是否共享内存(Optional) */
+/* param shareCache: 是否共享内存，共享缓存仅对中国境内加速域名生效(Optional) */
 func (r *CreateDomainGroupRequest) SetShareCache(shareCache string) {
     r.ShareCache = &shareCache
 }

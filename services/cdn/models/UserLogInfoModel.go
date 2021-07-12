@@ -19,6 +19,9 @@ package models
 
 type UserLogInfoModel struct {
 
+    /* domain所归属pin (Optional) */
+    Pin string `json:"pin"`
+
     /* 日志上传域名，如：www.a.com (Optional) */
     Domain string `json:"domain"`
 

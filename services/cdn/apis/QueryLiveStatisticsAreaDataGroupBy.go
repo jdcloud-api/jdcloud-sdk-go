@@ -34,38 +34,41 @@ type QueryLiveStatisticsAreaDataGroupByRequest struct {
     /* 需要查询的域名, 必须为用户pin下有权限的域名 (Optional) */
     Domain *string `json:"domain"`
 
-    /* app名 (Optional) */
+    /* 查询的App名称，多个用逗号分隔。 (Optional) */
     AppName *string `json:"appName"`
 
     /* 需要查询的字段 (Optional) */
     Fields *string `json:"fields"`
 
-    /*  (Optional) */
+    /* 查询的区域，如beijing,shanghai。多个用逗号分隔 (Optional) */
     Area *string `json:"area"`
 
-    /*  (Optional) */
+    /* 查询的运营商，cmcc,cnc,ct，表示移动、联通、电信。多个用逗号分隔 (Optional) */
     Isp *string `json:"isp"`
 
-    /*  (Optional) */
+    /* 查询的流名称，多个用逗号分隔。 (Optional) */
     StreamName *string `json:"streamName"`
 
     /* 时间粒度，可选值:[oneMin,fiveMin,followTime],followTime只会返回一个汇总后的数据 (Optional) */
     Period *string `json:"period"`
 
-    /* 分组依据 (Optional) */
+    /* 分组依据,可选值：[appname,streamname]，如果为空，则只按area/isp进行group。 (Optional) */
     GroupBy *string `json:"groupBy"`
 
-    /*  (Optional) */
+    /* 查询泛域名时，指定的子域名列表，多个用逗号分隔。非泛域名时，传入空即可 (Optional) */
     SubDomain *string `json:"subDomain"`
 
-    /* 查询的流协议 (Optional) */
+    /* 查询的流协议，取值范围："rtmp,hdl,hls"，多个用逗号分隔，默认为空，表示查询所有协议。 (Optional) */
     Scheme *string `json:"scheme"`
 
-    /*  (Optional) */
+    /* 当前取值范围("GET,HEAD,forward,forward-hls,ingest,play,publish,detour-ingest,Forward-Origin") (Optional) */
     ReqMethod *string `json:"reqMethod"`
 
-    /* cacheLevel (Optional) */
+    /* cacheLevel，可选值：[L1,L2,L3] (Optional) */
     CacheLevel *string `json:"cacheLevel"`
+
+    /* 查询节点层级，可选值:[all,edge,mid],默认查询all,edge边缘 mid中间 (Optional) */
+    CacheType *string `json:"cacheType"`
 }
 
 /*
@@ -89,17 +92,18 @@ func NewQueryLiveStatisticsAreaDataGroupByRequest(
  * param startTime: 查询起始时间,UTC时间，格式为:yyyy-MM-dd'T'HH:mm:ss'Z'，示例:2018-10-21T10:00:00Z (Optional)
  * param endTime: 查询截止时间,UTC时间，格式为:yyyy-MM-dd'T'HH:mm:ss'Z'，示例:2018-10-21T10:00:00Z (Optional)
  * param domain: 需要查询的域名, 必须为用户pin下有权限的域名 (Optional)
- * param appName: app名 (Optional)
+ * param appName: 查询的App名称，多个用逗号分隔。 (Optional)
  * param fields: 需要查询的字段 (Optional)
- * param area:  (Optional)
- * param isp:  (Optional)
- * param streamName:  (Optional)
+ * param area: 查询的区域，如beijing,shanghai。多个用逗号分隔 (Optional)
+ * param isp: 查询的运营商，cmcc,cnc,ct，表示移动、联通、电信。多个用逗号分隔 (Optional)
+ * param streamName: 查询的流名称，多个用逗号分隔。 (Optional)
  * param period: 时间粒度，可选值:[oneMin,fiveMin,followTime],followTime只会返回一个汇总后的数据 (Optional)
- * param groupBy: 分组依据 (Optional)
- * param subDomain:  (Optional)
- * param scheme: 查询的流协议 (Optional)
- * param reqMethod:  (Optional)
- * param cacheLevel: cacheLevel (Optional)
+ * param groupBy: 分组依据,可选值：[appname,streamname]，如果为空，则只按area/isp进行group。 (Optional)
+ * param subDomain: 查询泛域名时，指定的子域名列表，多个用逗号分隔。非泛域名时，传入空即可 (Optional)
+ * param scheme: 查询的流协议，取值范围："rtmp,hdl,hls"，多个用逗号分隔，默认为空，表示查询所有协议。 (Optional)
+ * param reqMethod: 当前取值范围("GET,HEAD,forward,forward-hls,ingest,play,publish,detour-ingest,Forward-Origin") (Optional)
+ * param cacheLevel: cacheLevel，可选值：[L1,L2,L3] (Optional)
+ * param cacheType: 查询节点层级，可选值:[all,edge,mid],默认查询all,edge边缘 mid中间 (Optional)
  */
 func NewQueryLiveStatisticsAreaDataGroupByRequestWithAllParams(
     startTime *string,
@@ -116,6 +120,7 @@ func NewQueryLiveStatisticsAreaDataGroupByRequestWithAllParams(
     scheme *string,
     reqMethod *string,
     cacheLevel *string,
+    cacheType *string,
 ) *QueryLiveStatisticsAreaDataGroupByRequest {
 
     return &QueryLiveStatisticsAreaDataGroupByRequest{
@@ -139,6 +144,7 @@ func NewQueryLiveStatisticsAreaDataGroupByRequestWithAllParams(
         Scheme: scheme,
         ReqMethod: reqMethod,
         CacheLevel: cacheLevel,
+        CacheType: cacheType,
     }
 }
 
@@ -170,7 +176,7 @@ func (r *QueryLiveStatisticsAreaDataGroupByRequest) SetDomain(domain string) {
     r.Domain = &domain
 }
 
-/* param appName: app名(Optional) */
+/* param appName: 查询的App名称，多个用逗号分隔。(Optional) */
 func (r *QueryLiveStatisticsAreaDataGroupByRequest) SetAppName(appName string) {
     r.AppName = &appName
 }
@@ -180,17 +186,17 @@ func (r *QueryLiveStatisticsAreaDataGroupByRequest) SetFields(fields string) {
     r.Fields = &fields
 }
 
-/* param area: (Optional) */
+/* param area: 查询的区域，如beijing,shanghai。多个用逗号分隔(Optional) */
 func (r *QueryLiveStatisticsAreaDataGroupByRequest) SetArea(area string) {
     r.Area = &area
 }
 
-/* param isp: (Optional) */
+/* param isp: 查询的运营商，cmcc,cnc,ct，表示移动、联通、电信。多个用逗号分隔(Optional) */
 func (r *QueryLiveStatisticsAreaDataGroupByRequest) SetIsp(isp string) {
     r.Isp = &isp
 }
 
-/* param streamName: (Optional) */
+/* param streamName: 查询的流名称，多个用逗号分隔。(Optional) */
 func (r *QueryLiveStatisticsAreaDataGroupByRequest) SetStreamName(streamName string) {
     r.StreamName = &streamName
 }
@@ -200,29 +206,34 @@ func (r *QueryLiveStatisticsAreaDataGroupByRequest) SetPeriod(period string) {
     r.Period = &period
 }
 
-/* param groupBy: 分组依据(Optional) */
+/* param groupBy: 分组依据,可选值：[appname,streamname]，如果为空，则只按area/isp进行group。(Optional) */
 func (r *QueryLiveStatisticsAreaDataGroupByRequest) SetGroupBy(groupBy string) {
     r.GroupBy = &groupBy
 }
 
-/* param subDomain: (Optional) */
+/* param subDomain: 查询泛域名时，指定的子域名列表，多个用逗号分隔。非泛域名时，传入空即可(Optional) */
 func (r *QueryLiveStatisticsAreaDataGroupByRequest) SetSubDomain(subDomain string) {
     r.SubDomain = &subDomain
 }
 
-/* param scheme: 查询的流协议(Optional) */
+/* param scheme: 查询的流协议，取值范围："rtmp,hdl,hls"，多个用逗号分隔，默认为空，表示查询所有协议。(Optional) */
 func (r *QueryLiveStatisticsAreaDataGroupByRequest) SetScheme(scheme string) {
     r.Scheme = &scheme
 }
 
-/* param reqMethod: (Optional) */
+/* param reqMethod: 当前取值范围("GET,HEAD,forward,forward-hls,ingest,play,publish,detour-ingest,Forward-Origin")(Optional) */
 func (r *QueryLiveStatisticsAreaDataGroupByRequest) SetReqMethod(reqMethod string) {
     r.ReqMethod = &reqMethod
 }
 
-/* param cacheLevel: cacheLevel(Optional) */
+/* param cacheLevel: cacheLevel，可选值：[L1,L2,L3](Optional) */
 func (r *QueryLiveStatisticsAreaDataGroupByRequest) SetCacheLevel(cacheLevel string) {
     r.CacheLevel = &cacheLevel
+}
+
+/* param cacheType: 查询节点层级，可选值:[all,edge,mid],默认查询all,edge边缘 mid中间(Optional) */
+func (r *QueryLiveStatisticsAreaDataGroupByRequest) SetCacheType(cacheType string) {
+    r.CacheType = &cacheType
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

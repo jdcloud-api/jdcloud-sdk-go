@@ -26,6 +26,9 @@ type CacheRule struct {
     Ttl int64 `json:"ttl"`
 
     /*  (Optional) */
+    ConfigId int64 `json:"configId"`
+
+    /*  (Optional) */
     Contents string `json:"contents"`
 
     /*  (Optional) */

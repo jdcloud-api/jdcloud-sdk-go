@@ -37,10 +37,10 @@ type QueryMixStatisticsDataRequest struct {
     /* 需要查询的字段 (Optional) */
     Fields *string `json:"fields"`
 
-    /*  (Optional) */
+    /* 查询的区域，如beijing,shanghai。多个用逗号分隔 (Optional) */
     Area *string `json:"area"`
 
-    /*  (Optional) */
+    /* 查询的运营商，cmcc,cnc,ct，表示移动、联通、电信。多个用逗号分隔 (Optional) */
     Isp *string `json:"isp"`
 
     /* 时间粒度，可选值:[oneMin,fiveMin,followTime],followTime只会返回一个汇总后的数据 (Optional) */
@@ -48,6 +48,9 @@ type QueryMixStatisticsDataRequest struct {
 
     /* 查询协议，可选值:[http,https,all],传空默认返回全部协议汇总后的数据 (Optional) */
     Scheme *string `json:"scheme"`
+
+    /* 查询节点层级，可选值:[all,edge,mid],默认查询all,edge边缘 mid中间 (Optional) */
+    CacheType *string `json:"cacheType"`
 }
 
 /*
@@ -72,10 +75,11 @@ func NewQueryMixStatisticsDataRequest(
  * param endTime: 查询截止时间,UTC时间，格式为:yyyy-MM-dd'T'HH:mm:ss'Z'，示例:2018-10-21T10:00:00Z (Optional)
  * param domain: 需要查询的域名, 必须为用户pin下有权限的域名 (Optional)
  * param fields: 需要查询的字段 (Optional)
- * param area:  (Optional)
- * param isp:  (Optional)
+ * param area: 查询的区域，如beijing,shanghai。多个用逗号分隔 (Optional)
+ * param isp: 查询的运营商，cmcc,cnc,ct，表示移动、联通、电信。多个用逗号分隔 (Optional)
  * param period: 时间粒度，可选值:[oneMin,fiveMin,followTime],followTime只会返回一个汇总后的数据 (Optional)
  * param scheme: 查询协议，可选值:[http,https,all],传空默认返回全部协议汇总后的数据 (Optional)
+ * param cacheType: 查询节点层级，可选值:[all,edge,mid],默认查询all,edge边缘 mid中间 (Optional)
  */
 func NewQueryMixStatisticsDataRequestWithAllParams(
     startTime *string,
@@ -86,6 +90,7 @@ func NewQueryMixStatisticsDataRequestWithAllParams(
     isp *string,
     period *string,
     scheme *string,
+    cacheType *string,
 ) *QueryMixStatisticsDataRequest {
 
     return &QueryMixStatisticsDataRequest{
@@ -103,6 +108,7 @@ func NewQueryMixStatisticsDataRequestWithAllParams(
         Isp: isp,
         Period: period,
         Scheme: scheme,
+        CacheType: cacheType,
     }
 }
 
@@ -139,12 +145,12 @@ func (r *QueryMixStatisticsDataRequest) SetFields(fields string) {
     r.Fields = &fields
 }
 
-/* param area: (Optional) */
+/* param area: 查询的区域，如beijing,shanghai。多个用逗号分隔(Optional) */
 func (r *QueryMixStatisticsDataRequest) SetArea(area string) {
     r.Area = &area
 }
 
-/* param isp: (Optional) */
+/* param isp: 查询的运营商，cmcc,cnc,ct，表示移动、联通、电信。多个用逗号分隔(Optional) */
 func (r *QueryMixStatisticsDataRequest) SetIsp(isp string) {
     r.Isp = &isp
 }
@@ -157,6 +163,11 @@ func (r *QueryMixStatisticsDataRequest) SetPeriod(period string) {
 /* param scheme: 查询协议，可选值:[http,https,all],传空默认返回全部协议汇总后的数据(Optional) */
 func (r *QueryMixStatisticsDataRequest) SetScheme(scheme string) {
     r.Scheme = &scheme
+}
+
+/* param cacheType: 查询节点层级，可选值:[all,edge,mid],默认查询all,edge边缘 mid中间(Optional) */
+func (r *QueryMixStatisticsDataRequest) SetCacheType(cacheType string) {
+    r.CacheType = &cacheType
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

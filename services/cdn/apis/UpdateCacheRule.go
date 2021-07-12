@@ -30,7 +30,7 @@ type UpdateCacheRuleRequest struct {
     /* 此条配置的权重值, 取值范围为1-10,1最大 (Optional) */
     Weight *int `json:"weight"`
 
-    /* 缓存时间,单位秒 (Optional) */
+    /* 缓存时间,单位秒，中国境内加速域名最长可配置2年，中国境外/全球加速域名最长可配置1年 (Optional) */
     Ttl *int64 `json:"ttl"`
 
     /* 规则内容。其他类型只能以/或者.开头，如/a/b或.jpg (Optional) */
@@ -66,7 +66,7 @@ func NewUpdateCacheRuleRequest(
 /*
  * param domain: 用户域名 (Required)
  * param weight: 此条配置的权重值, 取值范围为1-10,1最大 (Optional)
- * param ttl: 缓存时间,单位秒 (Optional)
+ * param ttl: 缓存时间,单位秒，中国境内加速域名最长可配置2年，中国境外/全球加速域名最长可配置1年 (Optional)
  * param contents: 规则内容。其他类型只能以/或者.开头，如/a/b或.jpg (Optional)
  * param cacheType: 缓存方式：0、不缓存，1自定义 (Optional)
  * param configId: 缓存规则配置ID (Optional)
@@ -119,7 +119,7 @@ func (r *UpdateCacheRuleRequest) SetWeight(weight int) {
     r.Weight = &weight
 }
 
-/* param ttl: 缓存时间,单位秒(Optional) */
+/* param ttl: 缓存时间,单位秒，中国境内加速域名最长可配置2年，中国境外/全球加速域名最长可配置1年(Optional) */
 func (r *UpdateCacheRuleRequest) SetTtl(ttl int64) {
     r.Ttl = &ttl
 }

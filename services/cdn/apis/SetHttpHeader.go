@@ -27,13 +27,13 @@ type SetHttpHeaderRequest struct {
     /* 用户域名  */
     Domain string `json:"domain"`
 
-    /* header类型[resp,req] (Optional) */
+    /* header类型[resp,req],resp：配置响应头，req：配置请求头 (Optional) */
     HeaderType *string `json:"headerType"`
 
-    /* header名 (Optional) */
+    /* header名，例如：Content-Disposition，可自定义，长度不能超过256个字符，不能包含中文字符，不能包含$和_，不支持设置如下头名：["Content-Length","Date","Host","Content-Encoding","If-Modified-Since","If-Range","Content-Type","Transfer-Encoding","Cache-Control","Last-Modified","Connection", "Content-Range","ETag","Age","Authentication-Info","Proxy-Authenticate","Retry-After","Set-Cookie","Vary","Content-Location","Meter","Allow","Error","X-Trace", "Proxy-Connection"] (Optional) */
     HeaderName *string `json:"headerName"`
 
-    /* header值 (Optional) */
+    /* header值，不能包含($,_,#)，不能超过256个字符 (Optional) */
     HeaderValue *string `json:"headerValue"`
 }
 
@@ -59,9 +59,9 @@ func NewSetHttpHeaderRequest(
 
 /*
  * param domain: 用户域名 (Required)
- * param headerType: header类型[resp,req] (Optional)
- * param headerName: header名 (Optional)
- * param headerValue: header值 (Optional)
+ * param headerType: header类型[resp,req],resp：配置响应头，req：配置请求头 (Optional)
+ * param headerName: header名，例如：Content-Disposition，可自定义，长度不能超过256个字符，不能包含中文字符，不能包含$和_，不支持设置如下头名：["Content-Length","Date","Host","Content-Encoding","If-Modified-Since","If-Range","Content-Type","Transfer-Encoding","Cache-Control","Last-Modified","Connection", "Content-Range","ETag","Age","Authentication-Info","Proxy-Authenticate","Retry-After","Set-Cookie","Vary","Content-Location","Meter","Allow","Error","X-Trace", "Proxy-Connection"] (Optional)
+ * param headerValue: header值，不能包含($,_,#)，不能超过256个字符 (Optional)
  */
 func NewSetHttpHeaderRequestWithAllParams(
     domain string,
@@ -102,17 +102,17 @@ func (r *SetHttpHeaderRequest) SetDomain(domain string) {
     r.Domain = domain
 }
 
-/* param headerType: header类型[resp,req](Optional) */
+/* param headerType: header类型[resp,req],resp：配置响应头，req：配置请求头(Optional) */
 func (r *SetHttpHeaderRequest) SetHeaderType(headerType string) {
     r.HeaderType = &headerType
 }
 
-/* param headerName: header名(Optional) */
+/* param headerName: header名，例如：Content-Disposition，可自定义，长度不能超过256个字符，不能包含中文字符，不能包含$和_，不支持设置如下头名：["Content-Length","Date","Host","Content-Encoding","If-Modified-Since","If-Range","Content-Type","Transfer-Encoding","Cache-Control","Last-Modified","Connection", "Content-Range","ETag","Age","Authentication-Info","Proxy-Authenticate","Retry-After","Set-Cookie","Vary","Content-Location","Meter","Allow","Error","X-Trace", "Proxy-Connection"](Optional) */
 func (r *SetHttpHeaderRequest) SetHeaderName(headerName string) {
     r.HeaderName = &headerName
 }
 
-/* param headerValue: header值(Optional) */
+/* param headerValue: header值，不能包含($,_,#)，不能超过256个字符(Optional) */
 func (r *SetHttpHeaderRequest) SetHeaderValue(headerValue string) {
     r.HeaderValue = &headerValue
 }

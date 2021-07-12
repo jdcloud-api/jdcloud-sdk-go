@@ -34,35 +34,38 @@ type QueryLiveStatisticsDataRequest struct {
     /* 需要查询的域名, 必须为用户pin下有权限的域名 (Optional) */
     Domain *string `json:"domain"`
 
-    /* app名 (Optional) */
+    /* app名,查询的App名称，多个用逗号分隔。注意，传如多个AppName时，表示查询这些AppName的和值，即“或”的关系。默认为空，表示查询所有App (Optional) */
     AppName *string `json:"appName"`
 
-    /* 流名 (Optional) */
+    /* 流名,查询的流名称，多个用逗号分隔。注意，传如多个StreamName时，表示查询这些StreamName的和值，即“或”的关系。默认为空，表示查询所有Stream (Optional) */
     StreamName *string `json:"streamName"`
 
-    /* 子域名 (Optional) */
+    /* 子域名,查询泛域名时，指定的子域名列表，多个用逗号分隔。非泛域名时，传入空即可 (Optional) */
     SubDomain *string `json:"subDomain"`
 
     /* 需要查询的字段 (Optional) */
     Fields *string `json:"fields"`
 
-    /*  (Optional) */
+    /* 查询的区域，如beijing,shanghai。多个用逗号分隔 (Optional) */
     Area *string `json:"area"`
 
-    /*  (Optional) */
+    /* 查询的运营商，cmcc,cnc,ct，表示移动、联通、电信。多个用逗号分隔 (Optional) */
     Isp *string `json:"isp"`
 
-    /*  (Optional) */
+    /* 当前取值范围("GET,HEAD,forward,forward-hls,ingest,play,publish,detour-ingest,Forward-Origin") (Optional) */
     ReqMethod *string `json:"reqMethod"`
 
-    /* 查询的流协议类型 (Optional) */
+    /* 查询的流协议类型,取值范围："rtmp,hdl,hls"，多个用逗号分隔，默认为空，表示查询所有协议。 (Optional) */
     Scheme *string `json:"scheme"`
 
-    /* cacheLevel (Optional) */
+    /* cacheLevel,可选值：[L1,L2,L3] (Optional) */
     CacheLevel *string `json:"cacheLevel"`
 
     /* 时间粒度，可选值:[oneMin,fiveMin,followTime],followTime只会返回一个汇总后的数据 (Optional) */
     Period *string `json:"period"`
+
+    /* 查询节点层级，可选值:[all,edge,mid],默认查询all,edge边缘 mid中间 (Optional) */
+    CacheType *string `json:"cacheType"`
 }
 
 /*
@@ -86,16 +89,17 @@ func NewQueryLiveStatisticsDataRequest(
  * param startTime: 查询起始时间,UTC时间，格式为:yyyy-MM-dd'T'HH:mm:ss'Z'，示例:2018-10-21T10:00:00Z (Optional)
  * param endTime: 查询截止时间,UTC时间，格式为:yyyy-MM-dd'T'HH:mm:ss'Z'，示例:2018-10-21T10:00:00Z (Optional)
  * param domain: 需要查询的域名, 必须为用户pin下有权限的域名 (Optional)
- * param appName: app名 (Optional)
- * param streamName: 流名 (Optional)
- * param subDomain: 子域名 (Optional)
+ * param appName: app名,查询的App名称，多个用逗号分隔。注意，传如多个AppName时，表示查询这些AppName的和值，即“或”的关系。默认为空，表示查询所有App (Optional)
+ * param streamName: 流名,查询的流名称，多个用逗号分隔。注意，传如多个StreamName时，表示查询这些StreamName的和值，即“或”的关系。默认为空，表示查询所有Stream (Optional)
+ * param subDomain: 子域名,查询泛域名时，指定的子域名列表，多个用逗号分隔。非泛域名时，传入空即可 (Optional)
  * param fields: 需要查询的字段 (Optional)
- * param area:  (Optional)
- * param isp:  (Optional)
- * param reqMethod:  (Optional)
- * param scheme: 查询的流协议类型 (Optional)
- * param cacheLevel: cacheLevel (Optional)
+ * param area: 查询的区域，如beijing,shanghai。多个用逗号分隔 (Optional)
+ * param isp: 查询的运营商，cmcc,cnc,ct，表示移动、联通、电信。多个用逗号分隔 (Optional)
+ * param reqMethod: 当前取值范围("GET,HEAD,forward,forward-hls,ingest,play,publish,detour-ingest,Forward-Origin") (Optional)
+ * param scheme: 查询的流协议类型,取值范围："rtmp,hdl,hls"，多个用逗号分隔，默认为空，表示查询所有协议。 (Optional)
+ * param cacheLevel: cacheLevel,可选值：[L1,L2,L3] (Optional)
  * param period: 时间粒度，可选值:[oneMin,fiveMin,followTime],followTime只会返回一个汇总后的数据 (Optional)
+ * param cacheType: 查询节点层级，可选值:[all,edge,mid],默认查询all,edge边缘 mid中间 (Optional)
  */
 func NewQueryLiveStatisticsDataRequestWithAllParams(
     startTime *string,
@@ -111,6 +115,7 @@ func NewQueryLiveStatisticsDataRequestWithAllParams(
     scheme *string,
     cacheLevel *string,
     period *string,
+    cacheType *string,
 ) *QueryLiveStatisticsDataRequest {
 
     return &QueryLiveStatisticsDataRequest{
@@ -133,6 +138,7 @@ func NewQueryLiveStatisticsDataRequestWithAllParams(
         Scheme: scheme,
         CacheLevel: cacheLevel,
         Period: period,
+        CacheType: cacheType,
     }
 }
 
@@ -164,17 +170,17 @@ func (r *QueryLiveStatisticsDataRequest) SetDomain(domain string) {
     r.Domain = &domain
 }
 
-/* param appName: app名(Optional) */
+/* param appName: app名,查询的App名称，多个用逗号分隔。注意，传如多个AppName时，表示查询这些AppName的和值，即“或”的关系。默认为空，表示查询所有App(Optional) */
 func (r *QueryLiveStatisticsDataRequest) SetAppName(appName string) {
     r.AppName = &appName
 }
 
-/* param streamName: 流名(Optional) */
+/* param streamName: 流名,查询的流名称，多个用逗号分隔。注意，传如多个StreamName时，表示查询这些StreamName的和值，即“或”的关系。默认为空，表示查询所有Stream(Optional) */
 func (r *QueryLiveStatisticsDataRequest) SetStreamName(streamName string) {
     r.StreamName = &streamName
 }
 
-/* param subDomain: 子域名(Optional) */
+/* param subDomain: 子域名,查询泛域名时，指定的子域名列表，多个用逗号分隔。非泛域名时，传入空即可(Optional) */
 func (r *QueryLiveStatisticsDataRequest) SetSubDomain(subDomain string) {
     r.SubDomain = &subDomain
 }
@@ -184,27 +190,27 @@ func (r *QueryLiveStatisticsDataRequest) SetFields(fields string) {
     r.Fields = &fields
 }
 
-/* param area: (Optional) */
+/* param area: 查询的区域，如beijing,shanghai。多个用逗号分隔(Optional) */
 func (r *QueryLiveStatisticsDataRequest) SetArea(area string) {
     r.Area = &area
 }
 
-/* param isp: (Optional) */
+/* param isp: 查询的运营商，cmcc,cnc,ct，表示移动、联通、电信。多个用逗号分隔(Optional) */
 func (r *QueryLiveStatisticsDataRequest) SetIsp(isp string) {
     r.Isp = &isp
 }
 
-/* param reqMethod: (Optional) */
+/* param reqMethod: 当前取值范围("GET,HEAD,forward,forward-hls,ingest,play,publish,detour-ingest,Forward-Origin")(Optional) */
 func (r *QueryLiveStatisticsDataRequest) SetReqMethod(reqMethod string) {
     r.ReqMethod = &reqMethod
 }
 
-/* param scheme: 查询的流协议类型(Optional) */
+/* param scheme: 查询的流协议类型,取值范围："rtmp,hdl,hls"，多个用逗号分隔，默认为空，表示查询所有协议。(Optional) */
 func (r *QueryLiveStatisticsDataRequest) SetScheme(scheme string) {
     r.Scheme = &scheme
 }
 
-/* param cacheLevel: cacheLevel(Optional) */
+/* param cacheLevel: cacheLevel,可选值：[L1,L2,L3](Optional) */
 func (r *QueryLiveStatisticsDataRequest) SetCacheLevel(cacheLevel string) {
     r.CacheLevel = &cacheLevel
 }
@@ -212,6 +218,11 @@ func (r *QueryLiveStatisticsDataRequest) SetCacheLevel(cacheLevel string) {
 /* param period: 时间粒度，可选值:[oneMin,fiveMin,followTime],followTime只会返回一个汇总后的数据(Optional) */
 func (r *QueryLiveStatisticsDataRequest) SetPeriod(period string) {
     r.Period = &period
+}
+
+/* param cacheType: 查询节点层级，可选值:[all,edge,mid],默认查询all,edge边缘 mid中间(Optional) */
+func (r *QueryLiveStatisticsDataRequest) SetCacheType(cacheType string) {
+    r.CacheType = &cacheType
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

@@ -37,17 +37,20 @@ type QueryMixTrafficGroupSumRequest struct {
     /* 需要查询的字段 (Optional) */
     Fields *string `json:"fields"`
 
-    /*  (Optional) */
+    /* 查询的区域，如beijing,shanghai。多个用逗号分隔 (Optional) */
     Area *string `json:"area"`
 
-    /*  (Optional) */
+    /* 查询的运营商，cmcc,cnc,ct，表示移动、联通、电信。多个用逗号分隔 (Optional) */
     Isp *string `json:"isp"`
 
     /* 时间粒度，可选值:[oneMin,fiveMin,followTime],followTime只会返回一个汇总后的数据 (Optional) */
     Period *string `json:"period"`
 
-    /* 分组依据,只能按域名分组 (Optional) */
+    /* 分组依据,只能按域名[domain]分组 (Optional) */
     GroupBy *string `json:"groupBy"`
+
+    /* 查询节点层级，可选值:[all,edge,mid],默认查询all,edge边缘 mid中间 (Optional) */
+    CacheType *string `json:"cacheType"`
 }
 
 /*
@@ -72,10 +75,11 @@ func NewQueryMixTrafficGroupSumRequest(
  * param endTime: 查询截止时间,UTC时间，格式为:yyyy-MM-dd'T'HH:mm:ss'Z'，示例:2018-10-21T10:00:00Z (Optional)
  * param domain: 需要查询的域名, 必须为用户pin下有权限的域名 (Optional)
  * param fields: 需要查询的字段 (Optional)
- * param area:  (Optional)
- * param isp:  (Optional)
+ * param area: 查询的区域，如beijing,shanghai。多个用逗号分隔 (Optional)
+ * param isp: 查询的运营商，cmcc,cnc,ct，表示移动、联通、电信。多个用逗号分隔 (Optional)
  * param period: 时间粒度，可选值:[oneMin,fiveMin,followTime],followTime只会返回一个汇总后的数据 (Optional)
- * param groupBy: 分组依据,只能按域名分组 (Optional)
+ * param groupBy: 分组依据,只能按域名[domain]分组 (Optional)
+ * param cacheType: 查询节点层级，可选值:[all,edge,mid],默认查询all,edge边缘 mid中间 (Optional)
  */
 func NewQueryMixTrafficGroupSumRequestWithAllParams(
     startTime *string,
@@ -86,6 +90,7 @@ func NewQueryMixTrafficGroupSumRequestWithAllParams(
     isp *string,
     period *string,
     groupBy *string,
+    cacheType *string,
 ) *QueryMixTrafficGroupSumRequest {
 
     return &QueryMixTrafficGroupSumRequest{
@@ -103,6 +108,7 @@ func NewQueryMixTrafficGroupSumRequestWithAllParams(
         Isp: isp,
         Period: period,
         GroupBy: groupBy,
+        CacheType: cacheType,
     }
 }
 
@@ -139,12 +145,12 @@ func (r *QueryMixTrafficGroupSumRequest) SetFields(fields string) {
     r.Fields = &fields
 }
 
-/* param area: (Optional) */
+/* param area: 查询的区域，如beijing,shanghai。多个用逗号分隔(Optional) */
 func (r *QueryMixTrafficGroupSumRequest) SetArea(area string) {
     r.Area = &area
 }
 
-/* param isp: (Optional) */
+/* param isp: 查询的运营商，cmcc,cnc,ct，表示移动、联通、电信。多个用逗号分隔(Optional) */
 func (r *QueryMixTrafficGroupSumRequest) SetIsp(isp string) {
     r.Isp = &isp
 }
@@ -154,9 +160,14 @@ func (r *QueryMixTrafficGroupSumRequest) SetPeriod(period string) {
     r.Period = &period
 }
 
-/* param groupBy: 分组依据,只能按域名分组(Optional) */
+/* param groupBy: 分组依据,只能按域名[domain]分组(Optional) */
 func (r *QueryMixTrafficGroupSumRequest) SetGroupBy(groupBy string) {
     r.GroupBy = &groupBy
+}
+
+/* param cacheType: 查询节点层级，可选值:[all,edge,mid],默认查询all,edge边缘 mid中间(Optional) */
+func (r *QueryMixTrafficGroupSumRequest) SetCacheType(cacheType string) {
+    r.CacheType = &cacheType
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

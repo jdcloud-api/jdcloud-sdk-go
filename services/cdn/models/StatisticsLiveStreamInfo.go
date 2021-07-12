@@ -17,14 +17,23 @@
 package models
 
 
-type BackSourceInfo struct {
+type StatisticsLiveStreamInfo struct {
 
-    /* ip回源配置，对应sourceType=ips的取值 (Optional) */
-    Ips []IpSourceInfo `json:"ips"`
+    /* 流起始时间 (Optional) */
+    StartTime string `json:"startTime"`
 
-    /* 域名回源配置，对应sourceType=domain的取值 (Optional) */
-    Domain []DomainSourceInfo `json:"domain"`
+    /* app名 (Optional) */
+    AppName string `json:"appName"`
 
-    /* oss回源配置，对应sourceType=oss的取值 (Optional) */
-    OssSource string `json:"ossSource"`
+    /* 流名 (Optional) */
+    StreamName string `json:"streamName"`
+
+    /* 上行码率 (Optional) */
+    AvgupSpeed float64 `json:"avgupSpeed"`
+
+    /* 上行帧率 (Optional) */
+    Avgupframerate float64 `json:"avgupframerate"`
+
+    /* 观看人数 (Optional) */
+    PlayerCount int64 `json:"playerCount"`
 }

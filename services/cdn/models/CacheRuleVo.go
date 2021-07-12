@@ -17,14 +17,17 @@
 package models
 
 
-type BackSourceInfo struct {
+type CacheRuleVo struct {
 
-    /* ip回源配置，对应sourceType=ips的取值 (Optional) */
-    Ips []IpSourceInfo `json:"ips"`
+    /* 此条配置的权重值, 取值范围为1-10,1最大 (Optional) */
+    Weight int `json:"weight"`
 
-    /* 域名回源配置，对应sourceType=domain的取值 (Optional) */
-    Domain []DomainSourceInfo `json:"domain"`
+    /* 缓存时间,单位秒 (Optional) */
+    Ttl int64 `json:"ttl"`
 
-    /* oss回源配置，对应sourceType=oss的取值 (Optional) */
-    OssSource string `json:"ossSource"`
+    /* 规则内容。其他类型只能以/或者.开头，如/a/b或.jpg (Optional) */
+    Content string `json:"content"`
+
+    /* 缓存方式：0、不缓存，1自定义 (Optional) */
+    CacheType int `json:"cacheType"`
 }
