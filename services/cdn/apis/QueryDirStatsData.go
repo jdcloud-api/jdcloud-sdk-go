@@ -36,6 +36,9 @@ type QueryDirStatsDataRequest struct {
 
     /* 需要过滤的目录 (Optional) */
     Dirs *string `json:"dirs"`
+
+    /* 查询节点层级，可选值:[all,edge,mid],默认查询all,edge边缘 mid中间 (Optional) */
+    CacheType *string `json:"cacheType"`
 }
 
 /*
@@ -60,12 +63,14 @@ func NewQueryDirStatsDataRequest(
  * param endTime: 查询截止时间,UTC时间，格式为:yyyy-MM-dd'T'HH:mm:ss'Z'，示例:2018-10-21T10:00:00Z (Optional)
  * param domain: 需要查询的域名, 必须为用户pin下有权限的域名，该接口仅支持单域名查询 (Optional)
  * param dirs: 需要过滤的目录 (Optional)
+ * param cacheType: 查询节点层级，可选值:[all,edge,mid],默认查询all,edge边缘 mid中间 (Optional)
  */
 func NewQueryDirStatsDataRequestWithAllParams(
     startTime *string,
     endTime *string,
     domain *string,
     dirs *string,
+    cacheType *string,
 ) *QueryDirStatsDataRequest {
 
     return &QueryDirStatsDataRequest{
@@ -79,6 +84,7 @@ func NewQueryDirStatsDataRequestWithAllParams(
         EndTime: endTime,
         Domain: domain,
         Dirs: dirs,
+        CacheType: cacheType,
     }
 }
 
@@ -113,6 +119,11 @@ func (r *QueryDirStatsDataRequest) SetDomain(domain string) {
 /* param dirs: 需要过滤的目录(Optional) */
 func (r *QueryDirStatsDataRequest) SetDirs(dirs string) {
     r.Dirs = &dirs
+}
+
+/* param cacheType: 查询节点层级，可选值:[all,edge,mid],默认查询all,edge边缘 mid中间(Optional) */
+func (r *QueryDirStatsDataRequest) SetCacheType(cacheType string) {
+    r.CacheType = &cacheType
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

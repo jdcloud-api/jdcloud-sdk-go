@@ -18,63 +18,67 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    cdn "github.com/jdcloud-api/jdcloud-sdk-go/services/cdn/models"
 )
 
-type CreateRefreshTaskRequest struct {
+type SetCacheRulesRequest struct {
 
     core.JDCloudRequest
 
-    /* 刷新预热类型,(url:url刷新,dir:目录刷新,prefetch:预热)，中国境外/全球加速域名暂不支持预热功能 (Optional) */
-    TaskType *string `json:"taskType"`
+    /* 用户域名  */
+    Domain string `json:"domain"`
 
     /*  (Optional) */
-    Urls []string `json:"urls"`
+    CacheRules []cdn.CacheRuleVo `json:"cacheRules"`
 }
 
 /*
+ * param domain: 用户域名 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewCreateRefreshTaskRequest(
-) *CreateRefreshTaskRequest {
+func NewSetCacheRulesRequest(
+    domain string,
+) *SetCacheRulesRequest {
 
-	return &CreateRefreshTaskRequest{
+	return &SetCacheRulesRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/task",
+			URL:     "/domain/{domain}/cacheRules",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
+        Domain: domain,
 	}
 }
 
 /*
- * param taskType: 刷新预热类型,(url:url刷新,dir:目录刷新,prefetch:预热)，中国境外/全球加速域名暂不支持预热功能 (Optional)
- * param urls:  (Optional)
+ * param domain: 用户域名 (Required)
+ * param cacheRules:  (Optional)
  */
-func NewCreateRefreshTaskRequestWithAllParams(
-    taskType *string,
-    urls []string,
-) *CreateRefreshTaskRequest {
+func NewSetCacheRulesRequestWithAllParams(
+    domain string,
+    cacheRules []cdn.CacheRuleVo,
+) *SetCacheRulesRequest {
 
-    return &CreateRefreshTaskRequest{
+    return &SetCacheRulesRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/task",
+            URL:     "/domain/{domain}/cacheRules",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
-        TaskType: taskType,
-        Urls: urls,
+        Domain: domain,
+        CacheRules: cacheRules,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewCreateRefreshTaskRequestWithoutParam() *CreateRefreshTaskRequest {
+func NewSetCacheRulesRequestWithoutParam() *SetCacheRulesRequest {
 
-    return &CreateRefreshTaskRequest{
+    return &SetCacheRulesRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/task",
+            URL:     "/domain/{domain}/cacheRules",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -82,29 +86,28 @@ func NewCreateRefreshTaskRequestWithoutParam() *CreateRefreshTaskRequest {
     }
 }
 
-/* param taskType: 刷新预热类型,(url:url刷新,dir:目录刷新,prefetch:预热)，中国境外/全球加速域名暂不支持预热功能(Optional) */
-func (r *CreateRefreshTaskRequest) SetTaskType(taskType string) {
-    r.TaskType = &taskType
+/* param domain: 用户域名(Required) */
+func (r *SetCacheRulesRequest) SetDomain(domain string) {
+    r.Domain = domain
 }
 
-/* param urls: (Optional) */
-func (r *CreateRefreshTaskRequest) SetUrls(urls []string) {
-    r.Urls = urls
+/* param cacheRules: (Optional) */
+func (r *SetCacheRulesRequest) SetCacheRules(cacheRules []cdn.CacheRuleVo) {
+    r.CacheRules = cacheRules
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r CreateRefreshTaskRequest) GetRegionId() string {
+func (r SetCacheRulesRequest) GetRegionId() string {
     return ""
 }
 
-type CreateRefreshTaskResponse struct {
+type SetCacheRulesResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result CreateRefreshTaskResult `json:"result"`
+    Result SetCacheRulesResult `json:"result"`
 }
 
-type CreateRefreshTaskResult struct {
-    ErrorCount int `json:"errorCount"`
-    TaskId string `json:"taskId"`
+type SetCacheRulesResult struct {
+    Data []cdn.CacheVo `json:"data"`
 }

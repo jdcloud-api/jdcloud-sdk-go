@@ -40,7 +40,7 @@ func NewCdnClient(credential *core.Credential) *CdnClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "cdn",
-            Revision:    "0.10.24",
+            Revision:    "0.10.25",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -297,7 +297,7 @@ func (c *CdnClient) QueryGeoAreas(request *cdn.QueryGeoAreasRequest) (*cdn.Query
     return jdResp, err
 }
 
-/* 查询TOP Url */
+/* 查询TOP Url，仅可查询中国境内的相关信息 */
 func (c *CdnClient) QueryStatisticsTopUrl(request *cdn.QueryStatisticsTopUrlRequest) (*cdn.QueryStatisticsTopUrlResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -817,7 +817,7 @@ func (c *CdnClient) OperateIpBlackList(request *cdn.OperateIpBlackListRequest) (
     return jdResp, err
 }
 
-/* 查询统计数据 */
+/* 查询统计数据，仅可查询中国境内的相关信息 */
 func (c *CdnClient) QueryMixStatisticsData(request *cdn.QueryMixStatisticsDataRequest) (*cdn.QueryMixStatisticsDataResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -917,7 +917,7 @@ func (c *CdnClient) SetNetProtectionRulesSwitch(request *cdn.SetNetProtectionRul
     return jdResp, err
 }
 
-/* http2配置 */
+/* http2配置，中国境外/全球加速域名暂不支持该配置 */
 func (c *CdnClient) ConfigHttp2(request *cdn.ConfigHttp2Request) (*cdn.ConfigHttp2Response, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1157,7 +1157,7 @@ func (c *CdnClient) SetHttpHeader(request *cdn.SetHttpHeaderRequest) (*cdn.SetHt
     return jdResp, err
 }
 
-/* 获取所有上层节点的ip */
+/* 获取所有上层节点的ip，仅支持中国境内上层节点IP地址查询 */
 func (c *CdnClient) CheckWhetherIpBelongToJCloud(request *cdn.CheckWhetherIpBelongToJCloudRequest) (*cdn.CheckWhetherIpBelongToJCloudResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1377,7 +1377,7 @@ func (c *CdnClient) CreateLiveDomainPrefecthTask(request *cdn.CreateLiveDomainPr
     return jdResp, err
 }
 
-/* 查询TOP IP */
+/* 查询TOP IP，仅可查询中国境内的相关信息 */
 func (c *CdnClient) QueryStatisticsTopIp(request *cdn.QueryStatisticsTopIpRequest) (*cdn.QueryStatisticsTopIpResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1777,7 +1777,7 @@ func (c *CdnClient) StopPrefetchTask(request *cdn.StopPrefetchTaskRequest) (*cdn
     return jdResp, err
 }
 
-/* 查询统计数据并进行汇总加和 */
+/* 查询统计数据并进行汇总加和，仅可查询中国境内的相关信息 */
 func (c *CdnClient) QueryMixTrafficGroupSum(request *cdn.QueryMixTrafficGroupSumRequest) (*cdn.QueryMixTrafficGroupSumResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -2337,6 +2337,26 @@ func (c *CdnClient) QueryDirBandwidth(request *cdn.QueryDirBandwidthRequest) (*c
     return jdResp, err
 }
 
+/* 批量添加缓存规则 */
+func (c *CdnClient) SetCacheRules(request *cdn.SetCacheRulesRequest) (*cdn.SetCacheRulesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.SetCacheRulesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 设置视频拖拽 */
 func (c *CdnClient) SetVideoDraft(request *cdn.SetVideoDraftRequest) (*cdn.SetVideoDraftResponse, error) {
     if request == nil {
@@ -2477,7 +2497,7 @@ func (c *CdnClient) QueryRefreshLimit(request *cdn.QueryRefreshLimitRequest) (*c
     return jdResp, err
 }
 
-/* 分地区及运营商查询统计数据 */
+/* 分地区及运营商查询统计数据，仅可查询中国境内的相关信息 */
 func (c *CdnClient) QueryMixStatisticsWithAreaData(request *cdn.QueryMixStatisticsWithAreaDataRequest) (*cdn.QueryMixStatisticsWithAreaDataResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -2608,6 +2628,26 @@ func (c *CdnClient) DeleteCCProtectRule(request *cdn.DeleteCCProtectRuleRequest)
     }
 
     jdResp := &cdn.DeleteCCProtectRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 分页查询直播流数据接口 */
+func (c *CdnClient) QueryStreamInfo(request *cdn.QueryStreamInfoRequest) (*cdn.QueryStreamInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryStreamInfoResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -3177,7 +3217,7 @@ func (c *CdnClient) ConfigServiceNotice(request *cdn.ConfigServiceNoticeRequest)
     return jdResp, err
 }
 
-/* 创建刷新预热任务 */
+/* 创建刷新预热任务， */
 func (c *CdnClient) CreateRefreshTask(request *cdn.CreateRefreshTaskRequest) (*cdn.CreateRefreshTaskResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -3288,6 +3328,26 @@ func (c *CdnClient) DeleteWafBlackRules(request *cdn.DeleteWafBlackRulesRequest)
     }
 
     jdResp := &cdn.DeleteWafBlackRulesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 无线宝按group查询的统计接口 */
+func (c *CdnClient) QueryJDBoxStatisticsDataWithGroup(request *cdn.QueryJDBoxStatisticsDataWithGroupRequest) (*cdn.QueryJDBoxStatisticsDataWithGroupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryJDBoxStatisticsDataWithGroupResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

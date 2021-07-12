@@ -39,6 +39,9 @@ type QueryDirBandwidthRequest struct {
 
     /* 需要过滤的地区 (Optional) */
     Regions *string `json:"regions"`
+
+    /* 查询节点层级，可选值:[all,edge,mid],默认查询all,edge边缘 mid中间 (Optional) */
+    CacheType *string `json:"cacheType"`
 }
 
 /*
@@ -64,6 +67,7 @@ func NewQueryDirBandwidthRequest(
  * param domain: 需要查询的域名, 必须为用户pin下有权限的域名，该接口仅支持单域名查询 (Optional)
  * param dirs: 需要过滤的目录 (Optional)
  * param regions: 需要过滤的地区 (Optional)
+ * param cacheType: 查询节点层级，可选值:[all,edge,mid],默认查询all,edge边缘 mid中间 (Optional)
  */
 func NewQueryDirBandwidthRequestWithAllParams(
     startTime *string,
@@ -71,6 +75,7 @@ func NewQueryDirBandwidthRequestWithAllParams(
     domain *string,
     dirs *string,
     regions *string,
+    cacheType *string,
 ) *QueryDirBandwidthRequest {
 
     return &QueryDirBandwidthRequest{
@@ -85,6 +90,7 @@ func NewQueryDirBandwidthRequestWithAllParams(
         Domain: domain,
         Dirs: dirs,
         Regions: regions,
+        CacheType: cacheType,
     }
 }
 
@@ -124,6 +130,11 @@ func (r *QueryDirBandwidthRequest) SetDirs(dirs string) {
 /* param regions: 需要过滤的地区(Optional) */
 func (r *QueryDirBandwidthRequest) SetRegions(regions string) {
     r.Regions = &regions
+}
+
+/* param cacheType: 查询节点层级，可选值:[all,edge,mid],默认查询all,edge边缘 mid中间(Optional) */
+func (r *QueryDirBandwidthRequest) SetCacheType(cacheType string) {
+    r.CacheType = &cacheType
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

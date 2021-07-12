@@ -33,7 +33,7 @@ type UpdateDomainGroupRequest struct {
     /* 主域名,开启共享缓存时必传 (Optional) */
     PrimaryDomain *string `json:"primaryDomain"`
 
-    /* 是否共享内存 (Optional) */
+    /* 是否共享内存，共享缓存仅对中国境内加速域名生效 (Optional) */
     ShareCache *string `json:"shareCache"`
 
     /*  (Optional) */
@@ -64,7 +64,7 @@ func NewUpdateDomainGroupRequest(
  * param id: 域名组id (Required)
  * param domains: 域名组内域名，包含主域名 (Optional)
  * param primaryDomain: 主域名,开启共享缓存时必传 (Optional)
- * param shareCache: 是否共享内存 (Optional)
+ * param shareCache: 是否共享内存，共享缓存仅对中国境内加速域名生效 (Optional)
  * param domainGroupName:  (Optional)
  */
 func NewUpdateDomainGroupRequestWithAllParams(
@@ -118,7 +118,7 @@ func (r *UpdateDomainGroupRequest) SetPrimaryDomain(primaryDomain string) {
     r.PrimaryDomain = &primaryDomain
 }
 
-/* param shareCache: 是否共享内存(Optional) */
+/* param shareCache: 是否共享内存，共享缓存仅对中国境内加速域名生效(Optional) */
 func (r *UpdateDomainGroupRequest) SetShareCache(shareCache string) {
     r.ShareCache = &shareCache
 }
