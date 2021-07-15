@@ -17,14 +17,23 @@
 package models
 
 
-type BackSourceInfo struct {
+type MediaClip struct {
 
-    /* ip回源配置，对应sourceType=ips的取值 (Optional) */
-    Ips []IpSourceInfo `json:"ips"`
+    /* 素材ID，此处，必须为视频点播媒资的视频ID (Optional) */
+    MediaId *string `json:"mediaId"`
 
-    /* 域名回源配置，对应sourceType=domain的取值 (Optional) */
-    Domain []DomainSourceInfo `json:"domain"`
+    /* 素材片段在媒资中的入点 (Optional) */
+    MediaIn *int `json:"mediaIn"`
 
-    /* oss回源配置，对应sourceType=oss的取值 (Optional) */
-    OssSource string `json:"ossSource"`
+    /* 素材片段在媒资中的出点 (Optional) */
+    MediaOut *int `json:"mediaOut"`
+
+    /* 素材片段在合成时间线中的入点 (Optional) */
+    TimelineIn *int `json:"timelineIn"`
+
+    /* 素材片段在合成时间线中的出点 (Optional) */
+    TimelineOut *int `json:"timelineOut"`
+
+    /*  (Optional) */
+    Operations []ClipOperation `json:"operations"`
 }

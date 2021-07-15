@@ -17,14 +17,14 @@
 package models
 
 
-type BackSourceInfo struct {
+type VeditJobSubmitReqData struct {
 
-    /* ip回源配置，对应sourceType=ips的取值 (Optional) */
-    Ips []IpSourceInfo `json:"ips"`
+    /* 工程ID (Optional) */
+    ProjectId int64 `json:"projectId"`
 
-    /* 域名回源配置，对应sourceType=domain的取值 (Optional) */
-    Domain []DomainSourceInfo `json:"domain"`
+    /* 合成媒资元数据 (Optional) */
+    MediaMetadata MediaMetadata `json:"mediaMetadata"`
 
-    /* oss回源配置，对应sourceType=oss的取值 (Optional) */
-    OssSource string `json:"ossSource"`
+    /* 用户数据，JSON格式字符串 (Optional) */
+    UserData string `json:"userData"`
 }

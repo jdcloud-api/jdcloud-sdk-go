@@ -30,7 +30,7 @@ type SetReferRequest struct {
     /* refer类型，取值：block（黑名单），allow（白名单）默认为block (Optional) */
     ReferType *string `json:"referType"`
 
-    /* 逗号隔开的域名列表，如果referList传空则为删除 (Optional) */
+    /* 逗号隔开的域名列表，如果referList传空则为删除，中国境内加速域名至多可配置400条，中国境外/全球加速域名至多可配置50条 (Optional) */
     ReferList []string `json:"referList"`
 
     /* 是否允许空refer访问，默认为“on” (Optional) */
@@ -63,7 +63,7 @@ func NewSetReferRequest(
 /*
  * param domain: 用户域名 (Required)
  * param referType: refer类型，取值：block（黑名单），allow（白名单）默认为block (Optional)
- * param referList: 逗号隔开的域名列表，如果referList传空则为删除 (Optional)
+ * param referList: 逗号隔开的域名列表，如果referList传空则为删除，中国境内加速域名至多可配置400条，中国境外/全球加速域名至多可配置50条 (Optional)
  * param allowNoReferHeader: 是否允许空refer访问，默认为“on” (Optional)
  * param allowNullReferHeader: 是否允许无ua访问，默认为“on” (Optional)
  */
@@ -113,7 +113,7 @@ func (r *SetReferRequest) SetReferType(referType string) {
     r.ReferType = &referType
 }
 
-/* param referList: 逗号隔开的域名列表，如果referList传空则为删除(Optional) */
+/* param referList: 逗号隔开的域名列表，如果referList传空则为删除，中国境内加速域名至多可配置400条，中国境外/全球加速域名至多可配置50条(Optional) */
 func (r *SetReferRequest) SetReferList(referList []string) {
     r.ReferList = referList
 }

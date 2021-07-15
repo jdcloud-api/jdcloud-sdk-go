@@ -34,26 +34,29 @@ type QueryStatisticsDataRequest struct {
     /* 需要查询的域名, 必须为用户pin下有权限的域名 (Optional) */
     Domain *string `json:"domain"`
 
-    /* 待查询的子域名 (Optional) */
+    /* 查询泛域名时，指定的子域名列表，多个用逗号分隔。非泛域名时，传入空即可 (Optional) */
     SubDomain *string `json:"subDomain"`
 
     /* 需要查询的字段 (Optional) */
     Fields *string `json:"fields"`
 
-    /*  (Optional) */
+    /* 查询的区域，如beijing,shanghai。多个用逗号分隔 (Optional) */
     Area *string `json:"area"`
 
-    /*  (Optional) */
+    /* 查询的运营商，cmcc,cnc,ct，表示移动、联通、电信。多个用逗号分隔 (Optional) */
     Isp *string `json:"isp"`
 
-    /*  (Optional) */
-    Origin *string `json:"origin"`
+    /* 是否查询回源统计信息。取值为true和false，默认为false。注意，如果查询回源信息，Fields的取值当前只支持oribandwidth，oripv，oricodestat三个，其余Fields忽略。 (Optional) */
+    Origin *bool `json:"origin"`
 
     /* 时间粒度，可选值:[oneMin,fiveMin,followTime],followTime只会返回一个汇总后的数据 (Optional) */
     Period *string `json:"period"`
 
     /* true 代表查询境外数据，默认false查询境内数据 (Optional) */
     Abroad *bool `json:"abroad"`
+
+    /* 查询节点层级，可选值:[all,edge,mid],默认查询all,edge边缘 mid中间 (Optional) */
+    CacheType *string `json:"cacheType"`
 }
 
 /*
@@ -77,13 +80,14 @@ func NewQueryStatisticsDataRequest(
  * param startTime: 查询起始时间,UTC时间，格式为:yyyy-MM-dd'T'HH:mm:ss'Z'，示例:2018-10-21T10:00:00Z (Optional)
  * param endTime: 查询截止时间,UTC时间，格式为:yyyy-MM-dd'T'HH:mm:ss'Z'，示例:2018-10-21T10:00:00Z (Optional)
  * param domain: 需要查询的域名, 必须为用户pin下有权限的域名 (Optional)
- * param subDomain: 待查询的子域名 (Optional)
+ * param subDomain: 查询泛域名时，指定的子域名列表，多个用逗号分隔。非泛域名时，传入空即可 (Optional)
  * param fields: 需要查询的字段 (Optional)
- * param area:  (Optional)
- * param isp:  (Optional)
- * param origin:  (Optional)
+ * param area: 查询的区域，如beijing,shanghai。多个用逗号分隔 (Optional)
+ * param isp: 查询的运营商，cmcc,cnc,ct，表示移动、联通、电信。多个用逗号分隔 (Optional)
+ * param origin: 是否查询回源统计信息。取值为true和false，默认为false。注意，如果查询回源信息，Fields的取值当前只支持oribandwidth，oripv，oricodestat三个，其余Fields忽略。 (Optional)
  * param period: 时间粒度，可选值:[oneMin,fiveMin,followTime],followTime只会返回一个汇总后的数据 (Optional)
  * param abroad: true 代表查询境外数据，默认false查询境内数据 (Optional)
+ * param cacheType: 查询节点层级，可选值:[all,edge,mid],默认查询all,edge边缘 mid中间 (Optional)
  */
 func NewQueryStatisticsDataRequestWithAllParams(
     startTime *string,
@@ -93,9 +97,10 @@ func NewQueryStatisticsDataRequestWithAllParams(
     fields *string,
     area *string,
     isp *string,
-    origin *string,
+    origin *bool,
     period *string,
     abroad *bool,
+    cacheType *string,
 ) *QueryStatisticsDataRequest {
 
     return &QueryStatisticsDataRequest{
@@ -115,6 +120,7 @@ func NewQueryStatisticsDataRequestWithAllParams(
         Origin: origin,
         Period: period,
         Abroad: abroad,
+        CacheType: cacheType,
     }
 }
 
@@ -146,7 +152,7 @@ func (r *QueryStatisticsDataRequest) SetDomain(domain string) {
     r.Domain = &domain
 }
 
-/* param subDomain: 待查询的子域名(Optional) */
+/* param subDomain: 查询泛域名时，指定的子域名列表，多个用逗号分隔。非泛域名时，传入空即可(Optional) */
 func (r *QueryStatisticsDataRequest) SetSubDomain(subDomain string) {
     r.SubDomain = &subDomain
 }
@@ -156,18 +162,18 @@ func (r *QueryStatisticsDataRequest) SetFields(fields string) {
     r.Fields = &fields
 }
 
-/* param area: (Optional) */
+/* param area: 查询的区域，如beijing,shanghai。多个用逗号分隔(Optional) */
 func (r *QueryStatisticsDataRequest) SetArea(area string) {
     r.Area = &area
 }
 
-/* param isp: (Optional) */
+/* param isp: 查询的运营商，cmcc,cnc,ct，表示移动、联通、电信。多个用逗号分隔(Optional) */
 func (r *QueryStatisticsDataRequest) SetIsp(isp string) {
     r.Isp = &isp
 }
 
-/* param origin: (Optional) */
-func (r *QueryStatisticsDataRequest) SetOrigin(origin string) {
+/* param origin: 是否查询回源统计信息。取值为true和false，默认为false。注意，如果查询回源信息，Fields的取值当前只支持oribandwidth，oripv，oricodestat三个，其余Fields忽略。(Optional) */
+func (r *QueryStatisticsDataRequest) SetOrigin(origin bool) {
     r.Origin = &origin
 }
 
@@ -179,6 +185,11 @@ func (r *QueryStatisticsDataRequest) SetPeriod(period string) {
 /* param abroad: true 代表查询境外数据，默认false查询境内数据(Optional) */
 func (r *QueryStatisticsDataRequest) SetAbroad(abroad bool) {
     r.Abroad = &abroad
+}
+
+/* param cacheType: 查询节点层级，可选值:[all,edge,mid],默认查询all,edge边缘 mid中间(Optional) */
+func (r *QueryStatisticsDataRequest) SetCacheType(cacheType string) {
+    r.CacheType = &cacheType
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

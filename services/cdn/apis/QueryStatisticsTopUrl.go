@@ -34,13 +34,13 @@ type QueryStatisticsTopUrlRequest struct {
     /* 需要查询的域名, 必须为用户pin下有权限的域名 (Optional) */
     Domain *string `json:"domain"`
 
-    /* 待查询的子域名 (Optional) */
+    /* 待查询的子域名,查询泛域名时，指定的子域名列表，多个用逗号分隔。非泛域名时，传入空即可 (Optional) */
     SubDomain *string `json:"subDomain"`
 
-    /*  (Optional) */
+    /* 查询的topN的条数，取值范围：1-100，默认为20 (Optional) */
     Size *int `json:"size"`
 
-    /* 排序依据 (Optional) */
+    /* 排序依据,当前可选：pv,flow，bandwidth, 分别表示按pv、按流量、按带宽topN url，默认为"pv" (Optional) */
     TopBy *string `json:"topBy"`
 }
 
@@ -65,9 +65,9 @@ func NewQueryStatisticsTopUrlRequest(
  * param startTime: 查询起始时间,UTC时间，格式为:yyyy-MM-dd'T'HH:mm:ss'Z'，示例:2018-10-21T10:00:00Z (Optional)
  * param endTime: 查询截止时间,UTC时间，格式为:yyyy-MM-dd'T'HH:mm:ss'Z'，示例:2018-10-21T10:00:00Z (Optional)
  * param domain: 需要查询的域名, 必须为用户pin下有权限的域名 (Optional)
- * param subDomain: 待查询的子域名 (Optional)
- * param size:  (Optional)
- * param topBy: 排序依据 (Optional)
+ * param subDomain: 待查询的子域名,查询泛域名时，指定的子域名列表，多个用逗号分隔。非泛域名时，传入空即可 (Optional)
+ * param size: 查询的topN的条数，取值范围：1-100，默认为20 (Optional)
+ * param topBy: 排序依据,当前可选：pv,flow，bandwidth, 分别表示按pv、按流量、按带宽topN url，默认为"pv" (Optional)
  */
 func NewQueryStatisticsTopUrlRequestWithAllParams(
     startTime *string,
@@ -122,17 +122,17 @@ func (r *QueryStatisticsTopUrlRequest) SetDomain(domain string) {
     r.Domain = &domain
 }
 
-/* param subDomain: 待查询的子域名(Optional) */
+/* param subDomain: 待查询的子域名,查询泛域名时，指定的子域名列表，多个用逗号分隔。非泛域名时，传入空即可(Optional) */
 func (r *QueryStatisticsTopUrlRequest) SetSubDomain(subDomain string) {
     r.SubDomain = &subDomain
 }
 
-/* param size: (Optional) */
+/* param size: 查询的topN的条数，取值范围：1-100，默认为20(Optional) */
 func (r *QueryStatisticsTopUrlRequest) SetSize(size int) {
     r.Size = &size
 }
 
-/* param topBy: 排序依据(Optional) */
+/* param topBy: 排序依据,当前可选：pv,flow，bandwidth, 分别表示按pv、按流量、按带宽topN url，默认为"pv"(Optional) */
 func (r *QueryStatisticsTopUrlRequest) SetTopBy(topBy string) {
     r.TopBy = &topBy
 }

@@ -40,7 +40,7 @@ func NewVodClient(credential *core.Credential) *VodClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vod",
-            Revision:    "1.1.12",
+            Revision:    "1.2.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -482,6 +482,26 @@ func (c *VodClient) UpdateQualityDetectionTemplate(request *vod.UpdateQualityDet
     return jdResp, err
 }
 
+/* 提交视频剪辑作业 */
+func (c *VodClient) SubmitVeditJob(request *vod.SubmitVeditJobRequest) (*vod.SubmitVeditJobResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vod.SubmitVeditJobResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询域名 */
 func (c *VodClient) GetDomain(request *vod.GetDomainRequest) (*vod.GetDomainResponse, error) {
     if request == nil {
@@ -516,6 +536,67 @@ func (c *VodClient) ListSnapshotTemplates(request *vod.ListSnapshotTemplatesRequ
     }
 
     jdResp := &vod.ListSnapshotTemplatesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建视频剪辑工程 */
+func (c *VodClient) CreateVeditProject(request *vod.CreateVeditProjectRequest) (*vod.CreateVeditProjectResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vod.CreateVeditProjectResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建视频剪辑作业
+ */
+func (c *VodClient) CreateVeditJob(request *vod.CreateVeditJobRequest) (*vod.CreateVeditJobResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vod.CreateVeditJobResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询视频剪辑工程详情 */
+func (c *VodClient) GetVeditProject(request *vod.GetVeditProjectRequest) (*vod.GetVeditProjectResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vod.GetVeditProjectResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1028,6 +1109,26 @@ func (c *VodClient) GetHttpSsl(request *vod.GetHttpSslRequest) (*vod.GetHttpSslR
     return jdResp, err
 }
 
+/* 删除视频剪辑工程 */
+func (c *VodClient) DeleteVeditProject(request *vod.DeleteVeditProjectRequest) (*vod.DeleteVeditProjectResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vod.DeleteVeditProjectResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 获取视频源文件信息 */
 func (c *VodClient) GetVideoSourceInfo(request *vod.GetVideoSourceInfoRequest) (*vod.GetVideoSourceInfoResponse, error) {
     if request == nil {
@@ -1099,6 +1200,29 @@ func (c *VodClient) GetTranscodeTemplateGroup(request *vod.GetTranscodeTemplateG
     }
 
     jdResp := &vod.GetTranscodeTemplateGroupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询视频剪辑工程列表。
+允许通过条件过滤查询，支持的过滤字段如下：
+  - projectId[eq] 按照工程ID精确查询
+ */
+func (c *VodClient) ListVeditProjects(request *vod.ListVeditProjectsRequest) (*vod.ListVeditProjectsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vod.ListVeditProjectsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1385,6 +1509,26 @@ func (c *VodClient) CreateTranscodeTemplate(request *vod.CreateTranscodeTemplate
     }
 
     jdResp := &vod.CreateTranscodeTemplateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改视频剪辑工程信息 */
+func (c *VodClient) UpdateVeditProject(request *vod.UpdateVeditProjectRequest) (*vod.UpdateVeditProjectResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vod.UpdateVeditProjectResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

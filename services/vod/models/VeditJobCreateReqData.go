@@ -17,14 +17,20 @@
 package models
 
 
-type BackSourceInfo struct {
+type VeditJobCreateReqData struct {
 
-    /* ip回源配置，对应sourceType=ips的取值 (Optional) */
-    Ips []IpSourceInfo `json:"ips"`
+    /* 工程名称 (Optional) */
+    ProjectName string `json:"projectName"`
 
-    /* 域名回源配置，对应sourceType=domain的取值 (Optional) */
-    Domain []DomainSourceInfo `json:"domain"`
+    /* 工程描述 (Optional) */
+    Description string `json:"description"`
 
-    /* oss回源配置，对应sourceType=oss的取值 (Optional) */
-    OssSource string `json:"ossSource"`
+    /* 时间线信息 (Optional) */
+    Timeline Timeline `json:"timeline"`
+
+    /* 剪辑合成媒资元数据 (Optional) */
+    MediaMetadata MediaMetadata `json:"mediaMetadata"`
+
+    /* 用户数据，JSON格式的字符串 (Optional) */
+    UserData string `json:"userData"`
 }

@@ -17,14 +17,20 @@
 package models
 
 
-type BackSourceInfo struct {
+type VeditProjectPageData struct {
 
-    /* ip回源配置，对应sourceType=ips的取值 (Optional) */
-    Ips []IpSourceInfo `json:"ips"`
+    /* 当前页码 (Optional) */
+    PageNumber int `json:"pageNumber"`
 
-    /* 域名回源配置，对应sourceType=domain的取值 (Optional) */
-    Domain []DomainSourceInfo `json:"domain"`
+    /* 每页数量 (Optional) */
+    PageSize int `json:"pageSize"`
 
-    /* oss回源配置，对应sourceType=oss的取值 (Optional) */
-    OssSource string `json:"ossSource"`
+    /* 查询总数 (Optional) */
+    TotalElements int `json:"totalElements"`
+
+    /* 总页数 (Optional) */
+    TotalPages int `json:"totalPages"`
+
+    /* 分页内容 (Optional) */
+    Content []VeditProjectData `json:"content"`
 }

@@ -17,14 +17,8 @@
 package models
 
 
-type BackSourceInfo struct {
+type TransparentParams struct {
 
-    /* ip回源配置，对应sourceType=ips的取值 (Optional) */
-    Ips []IpSourceInfo `json:"ips"`
-
-    /* 域名回源配置，对应sourceType=domain的取值 (Optional) */
-    Domain []DomainSourceInfo `json:"domain"`
-
-    /* oss回源配置，对应sourceType=oss的取值 (Optional) */
-    OssSource string `json:"ossSource"`
+    /* 透明度 (Optional) */
+    Alpha int `json:"alpha"`
 }

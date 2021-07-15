@@ -17,14 +17,23 @@
 package models
 
 
-type BackSourceInfo struct {
+type VeditProjectData struct {
 
-    /* ip回源配置，对应sourceType=ips的取值 (Optional) */
-    Ips []IpSourceInfo `json:"ips"`
+    /* 工程ID (Optional) */
+    ProjectId int64 `json:"projectId"`
 
-    /* 域名回源配置，对应sourceType=domain的取值 (Optional) */
-    Domain []DomainSourceInfo `json:"domain"`
+    /* 工程名称 (Optional) */
+    ProjectName string `json:"projectName"`
 
-    /* oss回源配置，对应sourceType=oss的取值 (Optional) */
-    OssSource string `json:"ossSource"`
+    /* 工程描述 (Optional) */
+    Description string `json:"description"`
+
+    /* 时间线信息 (Optional) */
+    Timeline Timeline `json:"timeline"`
+
+    /* 创建时间 (Optional) */
+    CreateTime string `json:"createTime"`
+
+    /* 修改时间 (Optional) */
+    UpdateTime string `json:"updateTime"`
 }

@@ -17,14 +17,11 @@
 package models
 
 
-type BackSourceInfo struct {
+type SubmittedVeditJob struct {
 
-    /* ip回源配置，对应sourceType=ips的取值 (Optional) */
-    Ips []IpSourceInfo `json:"ips"`
+    /* 作业ID (Optional) */
+    JobId int64 `json:"jobId"`
 
-    /* 域名回源配置，对应sourceType=domain的取值 (Optional) */
-    Domain []DomainSourceInfo `json:"domain"`
-
-    /* oss回源配置，对应sourceType=oss的取值 (Optional) */
-    OssSource string `json:"ossSource"`
+    /* 工程ID (Optional) */
+    ProjectId int64 `json:"projectId"`
 }

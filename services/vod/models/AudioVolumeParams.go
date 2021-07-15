@@ -17,14 +17,8 @@
 package models
 
 
-type BackSourceInfo struct {
+type AudioVolumeParams struct {
 
-    /* ip回源配置，对应sourceType=ips的取值 (Optional) */
-    Ips []IpSourceInfo `json:"ips"`
-
-    /* 域名回源配置，对应sourceType=domain的取值 (Optional) */
-    Domain []DomainSourceInfo `json:"domain"`
-
-    /* oss回源配置，对应sourceType=oss的取值 (Optional) */
-    OssSource string `json:"ossSource"`
+    /* 音量值，取值0-100之间的整数 (Optional) */
+    Value int `json:"value"`
 }

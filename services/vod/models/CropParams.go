@@ -17,14 +17,17 @@
 package models
 
 
-type BackSourceInfo struct {
+type CropParams struct {
 
-    /* ip回源配置，对应sourceType=ips的取值 (Optional) */
-    Ips []IpSourceInfo `json:"ips"`
+    /* 剪裁图像横坐标 (Optional) */
+    X int `json:"x"`
 
-    /* 域名回源配置，对应sourceType=domain的取值 (Optional) */
-    Domain []DomainSourceInfo `json:"domain"`
+    /* 剪裁图像纵坐标 (Optional) */
+    Y int `json:"y"`
 
-    /* oss回源配置，对应sourceType=oss的取值 (Optional) */
-    OssSource string `json:"ossSource"`
+    /* 剪裁图像宽度 (Optional) */
+    Width int `json:"width"`
+
+    /* 剪裁图像高度 (Optional) */
+    Height int `json:"height"`
 }

@@ -17,14 +17,11 @@
 package models
 
 
-type BackSourceInfo struct {
+type MediaTrack struct {
 
-    /* ip回源配置，对应sourceType=ips的取值 (Optional) */
-    Ips []IpSourceInfo `json:"ips"`
+    /* 轨类型。当前只支持 video (Optional) */
+    TrackType *string `json:"trackType"`
 
-    /* 域名回源配置，对应sourceType=domain的取值 (Optional) */
-    Domain []DomainSourceInfo `json:"domain"`
-
-    /* oss回源配置，对应sourceType=oss的取值 (Optional) */
-    OssSource string `json:"ossSource"`
+    /*  (Optional) */
+    Clips []MediaClip `json:"clips"`
 }

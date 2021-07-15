@@ -27,7 +27,7 @@ type SetIpBlackListRequest struct {
     /* 用户域名  */
     Domain string `json:"domain"`
 
-    /* ip名单,ips中url不能超过50条 (Optional) */
+    /* ip名单,ips中url不能超过50条，中国境外/全球加速域名暂不支持传IP段 (Optional) */
     Ips []string `json:"ips"`
 
     /* ip黑白名单类型，black:黑名单,white:白名单 (Optional) */
@@ -56,7 +56,7 @@ func NewSetIpBlackListRequest(
 
 /*
  * param domain: 用户域名 (Required)
- * param ips: ip名单,ips中url不能超过50条 (Optional)
+ * param ips: ip名单,ips中url不能超过50条，中国境外/全球加速域名暂不支持传IP段 (Optional)
  * param ipListType: ip黑白名单类型，black:黑名单,white:白名单 (Optional)
  */
 func NewSetIpBlackListRequestWithAllParams(
@@ -96,7 +96,7 @@ func (r *SetIpBlackListRequest) SetDomain(domain string) {
     r.Domain = domain
 }
 
-/* param ips: ip名单,ips中url不能超过50条(Optional) */
+/* param ips: ip名单,ips中url不能超过50条，中国境外/全球加速域名暂不支持传IP段(Optional) */
 func (r *SetIpBlackListRequest) SetIps(ips []string) {
     r.Ips = ips
 }

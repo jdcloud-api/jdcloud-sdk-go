@@ -17,14 +17,11 @@
 package models
 
 
-type BackSourceInfo struct {
+type ClipOperation struct {
 
-    /* ip回源配置，对应sourceType=ips的取值 (Optional) */
-    Ips []IpSourceInfo `json:"ips"`
+    /* 操作类型，当前支持 crop,transparent,volume (Optional) */
+    OpType *string `json:"opType"`
 
-    /* 域名回源配置，对应sourceType=domain的取值 (Optional) */
-    Domain []DomainSourceInfo `json:"domain"`
-
-    /* oss回源配置，对应sourceType=oss的取值 (Optional) */
-    OssSource string `json:"ossSource"`
+    /* 操作参数，JSON对象，如 CropParams, TransparentParams, AudioVolumeParams (Optional) */
+    Params *interface{} `json:"params"`
 }

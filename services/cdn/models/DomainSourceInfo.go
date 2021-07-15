@@ -22,7 +22,7 @@ type DomainSourceInfo struct {
     /* 优先级（1-10） (Optional) */
     Priority int `json:"priority"`
 
-    /* 回源host (Optional) */
+    /* 自定义回源host，仅中国境内加速域名可配置 (Optional) */
     SourceHost string `json:"sourceHost"`
 
     /* 回源域名 (Optional) */

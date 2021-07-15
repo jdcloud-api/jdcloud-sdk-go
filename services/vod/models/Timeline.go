@@ -17,14 +17,8 @@
 package models
 
 
-type BackSourceInfo struct {
+type Timeline struct {
 
-    /* ip回源配置，对应sourceType=ips的取值 (Optional) */
-    Ips []IpSourceInfo `json:"ips"`
-
-    /* 域名回源配置，对应sourceType=domain的取值 (Optional) */
-    Domain []DomainSourceInfo `json:"domain"`
-
-    /* oss回源配置，对应sourceType=oss的取值 (Optional) */
-    OssSource string `json:"ossSource"`
+    /* 媒体轨列表，有序，若有重合时间段，则排在后面的媒体轨上的重叠部分将被忽略 (Optional) */
+    TrackList []MediaTrack `json:"trackList"`
 }
