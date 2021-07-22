@@ -100,6 +100,7 @@ type DescribeAppResult struct {
     AppId string `json:"appId"`
     AppName string `json:"appName"`
     Status string `json:"status"`
+    RoomType int `json:"roomType"`
     BillType string `json:"billType"`
     CreateTime string `json:"createTime"`
 }

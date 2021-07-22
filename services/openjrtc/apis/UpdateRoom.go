@@ -121,6 +121,7 @@ type UpdateRoomResponse struct {
 type UpdateRoomResult struct {
     RoomId int64 `json:"roomId"`
     RoomName string `json:"roomName"`
+    RoomType int `json:"roomType"`
     AppId string `json:"appId"`
     PeerId int64 `json:"peerId"`
     CreateTime string `json:"createTime"`

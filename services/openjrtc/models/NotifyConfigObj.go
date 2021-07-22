@@ -17,11 +17,14 @@
 package models
 
 
-type CreateAppRequestObject struct {
+type NotifyConfigObj struct {
 
-    /* 应用名称 (Optional) */
-    AppName string `json:"appName"`
+    /* 主键-新增时不传，更新时要传 (Optional) */
+    ConfigId int64 `json:"configId"`
 
-    /* 应用创建的默认房间类型 1-小房间；2-大房间 (Optional) */
-    RoomType int `json:"roomType"`
+    /* 回调类型 1-房间回调 2-媒体回调 (Optional) */
+    NotifyType int `json:"notifyType"`
+
+    /* 回调地址 (Optional) */
+    Url string `json:"url"`
 }

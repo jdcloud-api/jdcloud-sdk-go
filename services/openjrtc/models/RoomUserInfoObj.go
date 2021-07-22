@@ -17,25 +17,28 @@
 package models
 
 
-type RoomInfoObj struct {
-
-    /* 房间ID (Optional) */
-    RoomId int64 `json:"roomId"`
-
-    /* 房间名称 (Optional) */
-    RoomName string `json:"roomName"`
-
-    /* 房间类型 1-小房间(音频单流订阅) 2-大房间(音频固定订阅) (Optional) */
-    RoomType int `json:"roomType"`
+type RoomUserInfoObj struct {
 
     /* appId (Optional) */
     AppId string `json:"appId"`
 
-    /* 用户ID(创建者ID) (Optional) */
-    PeerId int64 `json:"peerId"`
+    /* 用户定义的房间号 (Optional) */
+    UserRoomId string `json:"userRoomId"`
+
+    /* 业务接入方用户体系定义的且在JRTC系统内注册过的userId (Optional) */
+    UserId string `json:"userId"`
+
+    /* 用户房间内昵称 (Optional) */
+    NickName string `json:"nickName"`
+
+    /* 用户socketIo长连接id (Optional) */
+    ConnectId string `json:"connectId"`
+
+    /* 状态 1-在线 2-离线 (Optional) */
+    Status int `json:"status"`
 
     /* 创建时间 (Optional) */
-    CreateTime string `json:"createTime"`
+    JoinTime string `json:"joinTime"`
 
     /* 更新时间 (Optional) */
     UpdateTime string `json:"updateTime"`

@@ -25,13 +25,6 @@ type Filter struct {
     /* 过滤器操作符,默认值为 eq
 enum:
   - eq
-  - lt
-  - le
-  - gt
-  - ge
-  - ne
-  - in
-  - like
  (Optional) */
     Operator *string `json:"operator"`
 

@@ -17,11 +17,14 @@
 package models
 
 
-type Sort struct {
+type UpdateUserRoomRequestObj struct {
 
-    /* 排序属性名 (Optional) */
-    Name string `json:"name"`
+    /* 用户房间号 (Optional) */
+    UserRoomId string `json:"userRoomId"`
 
-    /* 排序方向 (Optional) */
-    Direction string `json:"direction"`
+    /* 房间名称 (Optional) */
+    RoomName string `json:"roomName"`
+
+    /* 房间类型 1-小房间；2-大房间 (Optional) */
+    RoomType int `json:"roomType"`
 }

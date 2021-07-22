@@ -17,11 +17,8 @@
 package models
 
 
-type CreateAppRequestObject struct {
+type RemoveRoomUsersInfo struct {
 
-    /* 应用名称 (Optional) */
-    AppName string `json:"appName"`
-
-    /* 应用创建的默认房间类型 1-小房间；2-大房间 (Optional) */
-    RoomType int `json:"roomType"`
+    /* peerId列表,最多支持20个peerId (Optional) */
+    PeerIds []int64 `json:"peerIds"`
 }

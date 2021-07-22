@@ -20,7 +20,7 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type DescribeRoomInfoRequest struct {
+type SendMessageToUserRequest struct {
 
     core.JDCloudRequest
 
@@ -29,6 +29,15 @@ type DescribeRoomInfoRequest struct {
 
     /* 房间ID  */
     RoomId int `json:"roomId"`
+
+    /* 事件名称 (Optional) */
+    EventName *string `json:"eventName"`
+
+    /* 自定义信令消息 (Optional) */
+    Message *string `json:"message"`
+
+    /* peerId (Optional) */
+    PeerId *int64 `json:"peerId"`
 }
 
 /*
@@ -37,15 +46,15 @@ type DescribeRoomInfoRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeRoomInfoRequest(
+func NewSendMessageToUserRequest(
     appId string,
     roomId int,
-) *DescribeRoomInfoRequest {
+) *SendMessageToUserRequest {
 
-	return &DescribeRoomInfoRequest{
+	return &SendMessageToUserRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/rooms/{appId}",
-			Method:  "GET",
+			URL:     "/message/{appId}/toUser/{roomId}",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
@@ -57,31 +66,40 @@ func NewDescribeRoomInfoRequest(
 /*
  * param appId: 应用ID (Required)
  * param roomId: 房间ID (Required)
+ * param eventName: 事件名称 (Optional)
+ * param message: 自定义信令消息 (Optional)
+ * param peerId: peerId (Optional)
  */
-func NewDescribeRoomInfoRequestWithAllParams(
+func NewSendMessageToUserRequestWithAllParams(
     appId string,
     roomId int,
-) *DescribeRoomInfoRequest {
+    eventName *string,
+    message *string,
+    peerId *int64,
+) *SendMessageToUserRequest {
 
-    return &DescribeRoomInfoRequest{
+    return &SendMessageToUserRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/rooms/{appId}",
-            Method:  "GET",
+            URL:     "/message/{appId}/toUser/{roomId}",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         AppId: appId,
         RoomId: roomId,
+        EventName: eventName,
+        Message: message,
+        PeerId: peerId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeRoomInfoRequestWithoutParam() *DescribeRoomInfoRequest {
+func NewSendMessageToUserRequestWithoutParam() *SendMessageToUserRequest {
 
-    return &DescribeRoomInfoRequest{
+    return &SendMessageToUserRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/rooms/{appId}",
-            Method:  "GET",
+            URL:     "/message/{appId}/toUser/{roomId}",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
@@ -89,33 +107,41 @@ func NewDescribeRoomInfoRequestWithoutParam() *DescribeRoomInfoRequest {
 }
 
 /* param appId: 应用ID(Required) */
-func (r *DescribeRoomInfoRequest) SetAppId(appId string) {
+func (r *SendMessageToUserRequest) SetAppId(appId string) {
     r.AppId = appId
 }
 
 /* param roomId: 房间ID(Required) */
-func (r *DescribeRoomInfoRequest) SetRoomId(roomId int) {
+func (r *SendMessageToUserRequest) SetRoomId(roomId int) {
     r.RoomId = roomId
+}
+
+/* param eventName: 事件名称(Optional) */
+func (r *SendMessageToUserRequest) SetEventName(eventName string) {
+    r.EventName = &eventName
+}
+
+/* param message: 自定义信令消息(Optional) */
+func (r *SendMessageToUserRequest) SetMessage(message string) {
+    r.Message = &message
+}
+
+/* param peerId: peerId(Optional) */
+func (r *SendMessageToUserRequest) SetPeerId(peerId int64) {
+    r.PeerId = &peerId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeRoomInfoRequest) GetRegionId() string {
+func (r SendMessageToUserRequest) GetRegionId() string {
     return ""
 }
 
-type DescribeRoomInfoResponse struct {
+type SendMessageToUserResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeRoomInfoResult `json:"result"`
+    Result SendMessageToUserResult `json:"result"`
 }
 
-type DescribeRoomInfoResult struct {
-    RoomId int64 `json:"roomId"`
-    RoomName string `json:"roomName"`
-    RoomType int `json:"roomType"`
-    AppId string `json:"appId"`
-    PeerId int64 `json:"peerId"`
-    CreateTime string `json:"createTime"`
-    UpdateTime string `json:"updateTime"`
+type SendMessageToUserResult struct {
 }

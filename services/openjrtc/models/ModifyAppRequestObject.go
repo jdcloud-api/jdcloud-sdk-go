@@ -17,11 +17,14 @@
 package models
 
 
-type CreateAppRequestObject struct {
+type ModifyAppRequestObject struct {
+
+    /* 应用ID (Optional) */
+    AppId string `json:"appId"`
 
     /* 应用名称 (Optional) */
     AppName string `json:"appName"`
 
-    /* 应用创建的默认房间类型 1-小房间；2-大房间 (Optional) */
+    /* 应用创建的默认房间类型 (Optional) */
     RoomType int `json:"roomType"`
 }

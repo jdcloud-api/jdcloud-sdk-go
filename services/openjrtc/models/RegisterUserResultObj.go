@@ -17,11 +17,14 @@
 package models
 
 
-type CreateAppRequestObject struct {
+type RegisterUserResultObj struct {
 
-    /* 应用名称 (Optional) */
-    AppName string `json:"appName"`
+    /* 应用ID (Optional) */
+    AppId string `json:"appId"`
 
-    /* 应用创建的默认房间类型 1-小房间；2-大房间 (Optional) */
-    RoomType int `json:"roomType"`
+    /* 业务接入方的用户ID (Optional) */
+    UserId string `json:"userId"`
+
+    /* jrtc系统用户ID (Optional) */
+    PeerId int64 `json:"peerId"`
 }
