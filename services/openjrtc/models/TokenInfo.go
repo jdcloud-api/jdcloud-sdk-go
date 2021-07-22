@@ -17,17 +17,29 @@
 package models
 
 
-type CreateRoomRequestObj struct {
+type TokenInfo struct {
 
-    /* 房间名称 (Optional) */
-    RoomName string `json:"roomName"`
-
-    /* 应用ID (Optional) */
+    /* appId (Optional) */
     AppId string `json:"appId"`
 
-    /* 房间类型 1-小房间(音频单流订阅) 2-大房间(音频固定订阅) (Optional) */
-    RoomType int `json:"roomType"`
+    /* appKey (Optional) */
+    AppKey string `json:"appKey"`
 
-    /* 用户ID(创建者ID) (Optional) */
-    PeerId int64 `json:"peerId"`
+    /* 业务接入方用户体系定义的且在JRTC系统内注册过的userId (Optional) */
+    UserId string `json:"userId"`
+
+    /* 业务接入方定义的且在JRTC系统内注册过的房间号 (Optional) */
+    UserRoomId string `json:"userRoomId"`
+
+    /* 随机令牌 (Optional) */
+    Nonce string `json:"nonce"`
+
+    /* 时间戳-毫秒 (Optional) */
+    Timestamp int64 `json:"timestamp"`
+
+    /* token (Optional) */
+    Token string `json:"token"`
+
+    /* 是否可用（true-可用,false-不可用） (Optional) */
+    Available bool `json:"available"`
 }

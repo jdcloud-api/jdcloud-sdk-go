@@ -17,11 +17,20 @@
 package models
 
 
-type CreateAppRequestObject struct {
+type UserInfoObj struct {
 
-    /* 应用名称 (Optional) */
-    AppName string `json:"appName"`
+    /* 用户ID (Optional) */
+    PeerId int64 `json:"peerId"`
 
-    /* 应用创建的默认房间类型 1-小房间；2-大房间 (Optional) */
-    RoomType int `json:"roomType"`
+    /* 应用ID (Optional) */
+    AppId string `json:"appId"`
+
+    /* 业务接入方的用户ID (Optional) */
+    UserId string `json:"userId"`
+
+    /* 是否临时用户 (Optional) */
+    Temporary bool `json:"temporary"`
+
+    /* 创建时间 (Optional) */
+    CreateTime string `json:"createTime"`
 }

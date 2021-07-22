@@ -20,67 +20,58 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type DescribeRoomInfoRequest struct {
+type DescribeUserByPeerRequest struct {
 
     core.JDCloudRequest
 
-    /* 应用ID  */
-    AppId string `json:"appId"`
-
-    /* 房间ID  */
-    RoomId int `json:"roomId"`
+    /* peerId  */
+    PeerId int `json:"peerId"`
 }
 
 /*
- * param appId: 应用ID (Required)
- * param roomId: 房间ID (Required)
+ * param peerId: peerId (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeRoomInfoRequest(
-    appId string,
-    roomId int,
-) *DescribeRoomInfoRequest {
+func NewDescribeUserByPeerRequest(
+    peerId int,
+) *DescribeUserByPeerRequest {
 
-	return &DescribeRoomInfoRequest{
+	return &DescribeUserByPeerRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/rooms/{appId}",
+			URL:     "/describeUserByPeer",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
-        AppId: appId,
-        RoomId: roomId,
+        PeerId: peerId,
 	}
 }
 
 /*
- * param appId: 应用ID (Required)
- * param roomId: 房间ID (Required)
+ * param peerId: peerId (Required)
  */
-func NewDescribeRoomInfoRequestWithAllParams(
-    appId string,
-    roomId int,
-) *DescribeRoomInfoRequest {
+func NewDescribeUserByPeerRequestWithAllParams(
+    peerId int,
+) *DescribeUserByPeerRequest {
 
-    return &DescribeRoomInfoRequest{
+    return &DescribeUserByPeerRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/rooms/{appId}",
+            URL:     "/describeUserByPeer",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
-        AppId: appId,
-        RoomId: roomId,
+        PeerId: peerId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeRoomInfoRequestWithoutParam() *DescribeRoomInfoRequest {
+func NewDescribeUserByPeerRequestWithoutParam() *DescribeUserByPeerRequest {
 
-    return &DescribeRoomInfoRequest{
+    return &DescribeUserByPeerRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/rooms/{appId}",
+            URL:     "/describeUserByPeer",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -88,34 +79,27 @@ func NewDescribeRoomInfoRequestWithoutParam() *DescribeRoomInfoRequest {
     }
 }
 
-/* param appId: 应用ID(Required) */
-func (r *DescribeRoomInfoRequest) SetAppId(appId string) {
-    r.AppId = appId
-}
-
-/* param roomId: 房间ID(Required) */
-func (r *DescribeRoomInfoRequest) SetRoomId(roomId int) {
-    r.RoomId = roomId
+/* param peerId: peerId(Required) */
+func (r *DescribeUserByPeerRequest) SetPeerId(peerId int) {
+    r.PeerId = peerId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeRoomInfoRequest) GetRegionId() string {
+func (r DescribeUserByPeerRequest) GetRegionId() string {
     return ""
 }
 
-type DescribeRoomInfoResponse struct {
+type DescribeUserByPeerResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeRoomInfoResult `json:"result"`
+    Result DescribeUserByPeerResult `json:"result"`
 }
 
-type DescribeRoomInfoResult struct {
-    RoomId int64 `json:"roomId"`
-    RoomName string `json:"roomName"`
-    RoomType int `json:"roomType"`
-    AppId string `json:"appId"`
+type DescribeUserByPeerResult struct {
     PeerId int64 `json:"peerId"`
+    AppId string `json:"appId"`
+    UserId string `json:"userId"`
+    Temporary bool `json:"temporary"`
     CreateTime string `json:"createTime"`
-    UpdateTime string `json:"updateTime"`
 }

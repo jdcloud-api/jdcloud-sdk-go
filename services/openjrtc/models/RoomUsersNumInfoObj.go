@@ -17,11 +17,20 @@
 package models
 
 
-type CreateAppRequestObject struct {
+type RoomUsersNumInfoObj struct {
 
-    /* 应用名称 (Optional) */
-    AppName string `json:"appName"`
+    /* appId (Optional) */
+    AppId string `json:"appId"`
 
-    /* 应用创建的默认房间类型 1-小房间；2-大房间 (Optional) */
-    RoomType int `json:"roomType"`
+    /* 用户定义的房间号 (Optional) */
+    UserRoomId string `json:"userRoomId"`
+
+    /* 在线人数 (Optional) */
+    OnlineNumber int `json:"onlineNumber"`
+
+    /* 离线人数 (Optional) */
+    OfflineNumber int `json:"offlineNumber"`
+
+    /* 合计人数 (Optional) */
+    Total int `json:"total"`
 }

@@ -17,11 +17,8 @@
 package models
 
 
-type CreateAppRequestObject struct {
+type RemoveAllRoomUsersObj struct {
 
-    /* 应用名称 (Optional) */
-    AppName string `json:"appName"`
-
-    /* 应用创建的默认房间类型 1-小房间；2-大房间 (Optional) */
-    RoomType int `json:"roomType"`
+    /* 业务接入方定义的且在JRTC系统内注册过的房间号 (Optional) */
+    UserRoomId string `json:"userRoomId"`
 }

@@ -17,11 +17,26 @@
 package models
 
 
-type CreateAppRequestObject struct {
+type ValidateTokenInfo struct {
 
-    /* 应用名称 (Optional) */
-    AppName string `json:"appName"`
+    /* appId (Optional) */
+    AppId string `json:"appId"`
 
-    /* 应用创建的默认房间类型 1-小房间；2-大房间 (Optional) */
-    RoomType int `json:"roomType"`
+    /* appKey (Optional) */
+    AppKey string `json:"appKey"`
+
+    /* 业务接入方用户体系定义的且在JRTC系统内注册过的userId (Optional) */
+    UserId string `json:"userId"`
+
+    /* 业务接入方定义的且在JRTC系统内注册过的房间号 (Optional) */
+    UserRoomId string `json:"userRoomId"`
+
+    /* 随机令牌 (Optional) */
+    Nonce string `json:"nonce"`
+
+    /* 时间戳-毫秒 (Optional) */
+    Timestamp int64 `json:"timestamp"`
+
+    /* token (Optional) */
+    Token string `json:"token"`
 }

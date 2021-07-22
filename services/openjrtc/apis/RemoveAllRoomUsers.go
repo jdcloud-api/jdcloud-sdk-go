@@ -20,7 +20,7 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type DescribeRoomInfoRequest struct {
+type RemoveAllRoomUsersRequest struct {
 
     core.JDCloudRequest
 
@@ -37,15 +37,15 @@ type DescribeRoomInfoRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeRoomInfoRequest(
+func NewRemoveAllRoomUsersRequest(
     appId string,
     roomId int,
-) *DescribeRoomInfoRequest {
+) *RemoveAllRoomUsersRequest {
 
-	return &DescribeRoomInfoRequest{
+	return &RemoveAllRoomUsersRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/rooms/{appId}",
-			Method:  "GET",
+			URL:     "/roomUser/{appId}/removeAll/{roomId}",
+			Method:  "PUT",
 			Header:  nil,
 			Version: "v1",
 		},
@@ -58,15 +58,15 @@ func NewDescribeRoomInfoRequest(
  * param appId: 应用ID (Required)
  * param roomId: 房间ID (Required)
  */
-func NewDescribeRoomInfoRequestWithAllParams(
+func NewRemoveAllRoomUsersRequestWithAllParams(
     appId string,
     roomId int,
-) *DescribeRoomInfoRequest {
+) *RemoveAllRoomUsersRequest {
 
-    return &DescribeRoomInfoRequest{
+    return &RemoveAllRoomUsersRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/rooms/{appId}",
-            Method:  "GET",
+            URL:     "/roomUser/{appId}/removeAll/{roomId}",
+            Method:  "PUT",
             Header:  nil,
             Version: "v1",
         },
@@ -76,12 +76,12 @@ func NewDescribeRoomInfoRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeRoomInfoRequestWithoutParam() *DescribeRoomInfoRequest {
+func NewRemoveAllRoomUsersRequestWithoutParam() *RemoveAllRoomUsersRequest {
 
-    return &DescribeRoomInfoRequest{
+    return &RemoveAllRoomUsersRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/rooms/{appId}",
-            Method:  "GET",
+            URL:     "/roomUser/{appId}/removeAll/{roomId}",
+            Method:  "PUT",
             Header:  nil,
             Version: "v1",
         },
@@ -89,33 +89,26 @@ func NewDescribeRoomInfoRequestWithoutParam() *DescribeRoomInfoRequest {
 }
 
 /* param appId: 应用ID(Required) */
-func (r *DescribeRoomInfoRequest) SetAppId(appId string) {
+func (r *RemoveAllRoomUsersRequest) SetAppId(appId string) {
     r.AppId = appId
 }
 
 /* param roomId: 房间ID(Required) */
-func (r *DescribeRoomInfoRequest) SetRoomId(roomId int) {
+func (r *RemoveAllRoomUsersRequest) SetRoomId(roomId int) {
     r.RoomId = roomId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeRoomInfoRequest) GetRegionId() string {
+func (r RemoveAllRoomUsersRequest) GetRegionId() string {
     return ""
 }
 
-type DescribeRoomInfoResponse struct {
+type RemoveAllRoomUsersResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeRoomInfoResult `json:"result"`
+    Result RemoveAllRoomUsersResult `json:"result"`
 }
 
-type DescribeRoomInfoResult struct {
-    RoomId int64 `json:"roomId"`
-    RoomName string `json:"roomName"`
-    RoomType int `json:"roomType"`
-    AppId string `json:"appId"`
-    PeerId int64 `json:"peerId"`
-    CreateTime string `json:"createTime"`
-    UpdateTime string `json:"updateTime"`
+type RemoveAllRoomUsersResult struct {
 }

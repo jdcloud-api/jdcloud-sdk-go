@@ -29,6 +29,9 @@ type AppInfoObject struct {
  (Optional) */
     Status string `json:"status"`
 
+    /* 应用默认创建的房间类型 1-小房间；2-大房间 (Optional) */
+    RoomType int `json:"roomType"`
+
     /* 计费类型: Duration-按时长
  (Optional) */
     BillType string `json:"billType"`

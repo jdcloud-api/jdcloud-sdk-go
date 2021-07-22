@@ -17,11 +17,17 @@
 package models
 
 
-type CreateAppRequestObject struct {
+type RegisterUserRoomRequestObj struct {
 
-    /* 应用名称 (Optional) */
-    AppName string `json:"appName"`
+    /* 业务接入方定义的房间号 (Optional) */
+    UserRoomId string `json:"userRoomId"`
 
-    /* 应用创建的默认房间类型 1-小房间；2-大房间 (Optional) */
+    /* 房间名称 (Optional) */
+    RoomName string `json:"roomName"`
+
+    /* 应用ID (Optional) */
+    AppId string `json:"appId"`
+
+    /* 房间类型 1-小房间(音频单流订阅) 2-大房间(音频固定订阅),默认取控制台APP对应的房间类型 (Optional) */
     RoomType int `json:"roomType"`
 }

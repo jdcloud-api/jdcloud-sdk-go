@@ -20,118 +20,121 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type CreateRoomRequest struct {
+type UpdateUserRoomRequest struct {
 
     core.JDCloudRequest
+
+    /* 应用ID  */
+    AppId string `json:"appId"`
+
+    /* 用户房间号 (Optional) */
+    UserRoomId *string `json:"userRoomId"`
 
     /* 房间名称 (Optional) */
     RoomName *string `json:"roomName"`
 
-    /* 应用ID (Optional) */
-    AppId *string `json:"appId"`
-
-    /* 房间类型 1-小房间(音频单流订阅) 2-大房间(音频固定订阅) (Optional) */
+    /* 房间类型 1-小房间；2-大房间 (Optional) */
     RoomType *int `json:"roomType"`
-
-    /* 用户ID(创建者ID) (Optional) */
-    PeerId *int64 `json:"peerId"`
 }
 
 /*
+ * param appId: 应用ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewCreateRoomRequest(
-) *CreateRoomRequest {
+func NewUpdateUserRoomRequest(
+    appId string,
+) *UpdateUserRoomRequest {
 
-	return &CreateRoomRequest{
+	return &UpdateUserRoomRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/createRoom",
-			Method:  "POST",
+			URL:     "/updateUserRoom/{appId}",
+			Method:  "PUT",
 			Header:  nil,
 			Version: "v1",
 		},
+        AppId: appId,
 	}
 }
 
 /*
+ * param appId: 应用ID (Required)
+ * param userRoomId: 用户房间号 (Optional)
  * param roomName: 房间名称 (Optional)
- * param appId: 应用ID (Optional)
- * param roomType: 房间类型 1-小房间(音频单流订阅) 2-大房间(音频固定订阅) (Optional)
- * param peerId: 用户ID(创建者ID) (Optional)
+ * param roomType: 房间类型 1-小房间；2-大房间 (Optional)
  */
-func NewCreateRoomRequestWithAllParams(
+func NewUpdateUserRoomRequestWithAllParams(
+    appId string,
+    userRoomId *string,
     roomName *string,
-    appId *string,
     roomType *int,
-    peerId *int64,
-) *CreateRoomRequest {
+) *UpdateUserRoomRequest {
 
-    return &CreateRoomRequest{
+    return &UpdateUserRoomRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/createRoom",
-            Method:  "POST",
+            URL:     "/updateUserRoom/{appId}",
+            Method:  "PUT",
             Header:  nil,
             Version: "v1",
         },
-        RoomName: roomName,
         AppId: appId,
+        UserRoomId: userRoomId,
+        RoomName: roomName,
         RoomType: roomType,
-        PeerId: peerId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewCreateRoomRequestWithoutParam() *CreateRoomRequest {
+func NewUpdateUserRoomRequestWithoutParam() *UpdateUserRoomRequest {
 
-    return &CreateRoomRequest{
+    return &UpdateUserRoomRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/createRoom",
-            Method:  "POST",
+            URL:     "/updateUserRoom/{appId}",
+            Method:  "PUT",
             Header:  nil,
             Version: "v1",
         },
     }
 }
 
+/* param appId: 应用ID(Required) */
+func (r *UpdateUserRoomRequest) SetAppId(appId string) {
+    r.AppId = appId
+}
+
+/* param userRoomId: 用户房间号(Optional) */
+func (r *UpdateUserRoomRequest) SetUserRoomId(userRoomId string) {
+    r.UserRoomId = &userRoomId
+}
+
 /* param roomName: 房间名称(Optional) */
-func (r *CreateRoomRequest) SetRoomName(roomName string) {
+func (r *UpdateUserRoomRequest) SetRoomName(roomName string) {
     r.RoomName = &roomName
 }
 
-/* param appId: 应用ID(Optional) */
-func (r *CreateRoomRequest) SetAppId(appId string) {
-    r.AppId = &appId
-}
-
-/* param roomType: 房间类型 1-小房间(音频单流订阅) 2-大房间(音频固定订阅)(Optional) */
-func (r *CreateRoomRequest) SetRoomType(roomType int) {
+/* param roomType: 房间类型 1-小房间；2-大房间(Optional) */
+func (r *UpdateUserRoomRequest) SetRoomType(roomType int) {
     r.RoomType = &roomType
-}
-
-/* param peerId: 用户ID(创建者ID)(Optional) */
-func (r *CreateRoomRequest) SetPeerId(peerId int64) {
-    r.PeerId = &peerId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r CreateRoomRequest) GetRegionId() string {
+func (r UpdateUserRoomRequest) GetRegionId() string {
     return ""
 }
 
-type CreateRoomResponse struct {
+type UpdateUserRoomResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result CreateRoomResult `json:"result"`
+    Result UpdateUserRoomResult `json:"result"`
 }
 
-type CreateRoomResult struct {
+type UpdateUserRoomResult struct {
     RoomId int64 `json:"roomId"`
+    UserRoomId string `json:"userRoomId"`
     RoomName string `json:"roomName"`
     RoomType int `json:"roomType"`
     AppId string `json:"appId"`
-    PeerId int64 `json:"peerId"`
     CreateTime string `json:"createTime"`
     UpdateTime string `json:"updateTime"`
 }

@@ -17,11 +17,14 @@
 package models
 
 
-type CreateAppRequestObject struct {
+type MessageToUser struct {
 
-    /* 应用名称 (Optional) */
-    AppName string `json:"appName"`
+    /* 事件名称 (Optional) */
+    EventName string `json:"eventName"`
 
-    /* 应用创建的默认房间类型 1-小房间；2-大房间 (Optional) */
-    RoomType int `json:"roomType"`
+    /* 自定义信令消息 (Optional) */
+    Message string `json:"message"`
+
+    /* peerId (Optional) */
+    PeerId int64 `json:"peerId"`
 }

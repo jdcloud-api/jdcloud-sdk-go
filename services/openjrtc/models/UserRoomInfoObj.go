@@ -17,11 +17,26 @@
 package models
 
 
-type CreateAppRequestObject struct {
+type UserRoomInfoObj struct {
 
-    /* 应用名称 (Optional) */
-    AppName string `json:"appName"`
+    /* jrtc系统房间号 (Optional) */
+    RoomId int64 `json:"roomId"`
 
-    /* 应用创建的默认房间类型 1-小房间；2-大房间 (Optional) */
+    /* 业务接入方定义的且在JRTC系统内注册过的房间号 (Optional) */
+    UserRoomId string `json:"userRoomId"`
+
+    /* 房间名称 (Optional) */
+    RoomName string `json:"roomName"`
+
+    /* 房间类型 1-小房间(音频单流订阅) 2-大房间(音频固定订阅) (Optional) */
     RoomType int `json:"roomType"`
+
+    /* appId (Optional) */
+    AppId string `json:"appId"`
+
+    /* 创建时间 (Optional) */
+    CreateTime string `json:"createTime"`
+
+    /* 更新时间 (Optional) */
+    UpdateTime string `json:"updateTime"`
 }

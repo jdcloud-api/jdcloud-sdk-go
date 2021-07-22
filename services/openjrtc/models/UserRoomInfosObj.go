@@ -17,11 +17,20 @@
 package models
 
 
-type CreateAppRequestObject struct {
+type UserRoomInfosObj struct {
 
-    /* 应用名称 (Optional) */
-    AppName string `json:"appName"`
+    /* 当前页码 (Optional) */
+    PageNumber int `json:"pageNumber"`
 
-    /* 应用创建的默认房间类型 1-小房间；2-大房间 (Optional) */
-    RoomType int `json:"roomType"`
+    /* 每页数量 (Optional) */
+    PageSize int `json:"pageSize"`
+
+    /* 查询总数 (Optional) */
+    TotalElements int `json:"totalElements"`
+
+    /* 总页数 (Optional) */
+    TotalPages int `json:"totalPages"`
+
+    /* 分页内容 (Optional) */
+    Content []UserRoomInfoObj `json:"content"`
 }

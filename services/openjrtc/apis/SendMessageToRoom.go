@@ -20,7 +20,7 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type DescribeRoomInfoRequest struct {
+type SendMessageToRoomRequest struct {
 
     core.JDCloudRequest
 
@@ -29,6 +29,12 @@ type DescribeRoomInfoRequest struct {
 
     /* 房间ID  */
     RoomId int `json:"roomId"`
+
+    /* 事件名称 (Optional) */
+    EventName *string `json:"eventName"`
+
+    /* 自定义信令消息 (Optional) */
+    Message *string `json:"message"`
 }
 
 /*
@@ -37,15 +43,15 @@ type DescribeRoomInfoRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeRoomInfoRequest(
+func NewSendMessageToRoomRequest(
     appId string,
     roomId int,
-) *DescribeRoomInfoRequest {
+) *SendMessageToRoomRequest {
 
-	return &DescribeRoomInfoRequest{
+	return &SendMessageToRoomRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/rooms/{appId}",
-			Method:  "GET",
+			URL:     "/message/{appId}/toRoom/{roomId}",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
@@ -57,31 +63,37 @@ func NewDescribeRoomInfoRequest(
 /*
  * param appId: 应用ID (Required)
  * param roomId: 房间ID (Required)
+ * param eventName: 事件名称 (Optional)
+ * param message: 自定义信令消息 (Optional)
  */
-func NewDescribeRoomInfoRequestWithAllParams(
+func NewSendMessageToRoomRequestWithAllParams(
     appId string,
     roomId int,
-) *DescribeRoomInfoRequest {
+    eventName *string,
+    message *string,
+) *SendMessageToRoomRequest {
 
-    return &DescribeRoomInfoRequest{
+    return &SendMessageToRoomRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/rooms/{appId}",
-            Method:  "GET",
+            URL:     "/message/{appId}/toRoom/{roomId}",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         AppId: appId,
         RoomId: roomId,
+        EventName: eventName,
+        Message: message,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeRoomInfoRequestWithoutParam() *DescribeRoomInfoRequest {
+func NewSendMessageToRoomRequestWithoutParam() *SendMessageToRoomRequest {
 
-    return &DescribeRoomInfoRequest{
+    return &SendMessageToRoomRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/rooms/{appId}",
-            Method:  "GET",
+            URL:     "/message/{appId}/toRoom/{roomId}",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
@@ -89,33 +101,36 @@ func NewDescribeRoomInfoRequestWithoutParam() *DescribeRoomInfoRequest {
 }
 
 /* param appId: 应用ID(Required) */
-func (r *DescribeRoomInfoRequest) SetAppId(appId string) {
+func (r *SendMessageToRoomRequest) SetAppId(appId string) {
     r.AppId = appId
 }
 
 /* param roomId: 房间ID(Required) */
-func (r *DescribeRoomInfoRequest) SetRoomId(roomId int) {
+func (r *SendMessageToRoomRequest) SetRoomId(roomId int) {
     r.RoomId = roomId
+}
+
+/* param eventName: 事件名称(Optional) */
+func (r *SendMessageToRoomRequest) SetEventName(eventName string) {
+    r.EventName = &eventName
+}
+
+/* param message: 自定义信令消息(Optional) */
+func (r *SendMessageToRoomRequest) SetMessage(message string) {
+    r.Message = &message
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeRoomInfoRequest) GetRegionId() string {
+func (r SendMessageToRoomRequest) GetRegionId() string {
     return ""
 }
 
-type DescribeRoomInfoResponse struct {
+type SendMessageToRoomResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeRoomInfoResult `json:"result"`
+    Result SendMessageToRoomResult `json:"result"`
 }
 
-type DescribeRoomInfoResult struct {
-    RoomId int64 `json:"roomId"`
-    RoomName string `json:"roomName"`
-    RoomType int `json:"roomType"`
-    AppId string `json:"appId"`
-    PeerId int64 `json:"peerId"`
-    CreateTime string `json:"createTime"`
-    UpdateTime string `json:"updateTime"`
+type SendMessageToRoomResult struct {
 }

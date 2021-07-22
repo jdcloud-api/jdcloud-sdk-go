@@ -20,67 +20,67 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type DescribeRoomInfoRequest struct {
+type DescribeUserRoomRequest struct {
 
     core.JDCloudRequest
 
     /* 应用ID  */
     AppId string `json:"appId"`
 
-    /* 房间ID  */
-    RoomId int `json:"roomId"`
+    /* 业务接入方定义的且在JRTC系统内注册过的房间号  */
+    UserRoomId string `json:"userRoomId"`
 }
 
 /*
  * param appId: 应用ID (Required)
- * param roomId: 房间ID (Required)
+ * param userRoomId: 业务接入方定义的且在JRTC系统内注册过的房间号 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeRoomInfoRequest(
+func NewDescribeUserRoomRequest(
     appId string,
-    roomId int,
-) *DescribeRoomInfoRequest {
+    userRoomId string,
+) *DescribeUserRoomRequest {
 
-	return &DescribeRoomInfoRequest{
+	return &DescribeUserRoomRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/rooms/{appId}",
+			URL:     "/describeUserRoom/{appId}",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         AppId: appId,
-        RoomId: roomId,
+        UserRoomId: userRoomId,
 	}
 }
 
 /*
  * param appId: 应用ID (Required)
- * param roomId: 房间ID (Required)
+ * param userRoomId: 业务接入方定义的且在JRTC系统内注册过的房间号 (Required)
  */
-func NewDescribeRoomInfoRequestWithAllParams(
+func NewDescribeUserRoomRequestWithAllParams(
     appId string,
-    roomId int,
-) *DescribeRoomInfoRequest {
+    userRoomId string,
+) *DescribeUserRoomRequest {
 
-    return &DescribeRoomInfoRequest{
+    return &DescribeUserRoomRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/rooms/{appId}",
+            URL:     "/describeUserRoom/{appId}",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         AppId: appId,
-        RoomId: roomId,
+        UserRoomId: userRoomId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeRoomInfoRequestWithoutParam() *DescribeRoomInfoRequest {
+func NewDescribeUserRoomRequestWithoutParam() *DescribeUserRoomRequest {
 
-    return &DescribeRoomInfoRequest{
+    return &DescribeUserRoomRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/rooms/{appId}",
+            URL:     "/describeUserRoom/{appId}",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -89,33 +89,33 @@ func NewDescribeRoomInfoRequestWithoutParam() *DescribeRoomInfoRequest {
 }
 
 /* param appId: 应用ID(Required) */
-func (r *DescribeRoomInfoRequest) SetAppId(appId string) {
+func (r *DescribeUserRoomRequest) SetAppId(appId string) {
     r.AppId = appId
 }
 
-/* param roomId: 房间ID(Required) */
-func (r *DescribeRoomInfoRequest) SetRoomId(roomId int) {
-    r.RoomId = roomId
+/* param userRoomId: 业务接入方定义的且在JRTC系统内注册过的房间号(Required) */
+func (r *DescribeUserRoomRequest) SetUserRoomId(userRoomId string) {
+    r.UserRoomId = userRoomId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeRoomInfoRequest) GetRegionId() string {
+func (r DescribeUserRoomRequest) GetRegionId() string {
     return ""
 }
 
-type DescribeRoomInfoResponse struct {
+type DescribeUserRoomResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeRoomInfoResult `json:"result"`
+    Result DescribeUserRoomResult `json:"result"`
 }
 
-type DescribeRoomInfoResult struct {
+type DescribeUserRoomResult struct {
     RoomId int64 `json:"roomId"`
+    UserRoomId string `json:"userRoomId"`
     RoomName string `json:"roomName"`
     RoomType int `json:"roomType"`
     AppId string `json:"appId"`
-    PeerId int64 `json:"peerId"`
     CreateTime string `json:"createTime"`
     UpdateTime string `json:"updateTime"`
 }
