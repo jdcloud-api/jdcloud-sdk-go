@@ -17,11 +17,8 @@
 package models
 
 
-type InstanceVpcIp struct {
+type ReqExtension struct {
 
-    /* 代理列表 (Optional) */
-    Proxies []Node `json:"proxies"`
-
-    /* 分片列表 (Optional) */
-    Shards []RedisShard `json:"shards"`
+    /* 外部访问方式，空表示关闭外部访问 (Optional) */
+    ExposeType *string `json:"exposeType"`
 }

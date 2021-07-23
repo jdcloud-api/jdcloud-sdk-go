@@ -17,11 +17,20 @@
 package models
 
 
-type InstanceVpcIp struct {
+type AvailableResource struct {
 
-    /* 代理列表 (Optional) */
-    Proxies []Node `json:"proxies"`
+    /* 架构类型，目前支持：master-slave（标准版）、cluster（基于代理的集群版） (Optional) */
+    ArchitectureType string `json:"architectureType"`
 
-    /* 分片列表 (Optional) */
-    Shards []RedisShard `json:"shards"`
+    /* 架构类型名 (Optional) */
+    ArchitectureName string `json:"architectureName"`
+
+    /* 是否推荐 (Optional) */
+    Recommended bool `json:"recommended"`
+
+    /* 是否售罄 (Optional) */
+    SoldOut bool `json:"soldOut"`
+
+    /* 引擎版本列表 (Optional) */
+    AvailableEngineVersions []AvailableEngineVersion `json:"availableEngineVersions"`
 }

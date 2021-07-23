@@ -17,11 +17,14 @@
 package models
 
 
-type InstanceVpcIp struct {
+type AzInfo struct {
 
-    /* 代理列表 (Optional) */
-    Proxies []Node `json:"proxies"`
+    /* 逻辑可用区id (Optional) */
+    AzId string `json:"azId"`
 
-    /* 分片列表 (Optional) */
-    Shards []RedisShard `json:"shards"`
+    /* 逻辑可用区名 (Optional) */
+    AzName string `json:"azName"`
+
+    /* 是否售罄 (Optional) */
+    SoldOut bool `json:"soldOut"`
 }

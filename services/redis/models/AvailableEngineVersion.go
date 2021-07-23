@@ -17,11 +17,17 @@
 package models
 
 
-type InstanceVpcIp struct {
+type AvailableEngineVersion struct {
 
-    /* 代理列表 (Optional) */
-    Proxies []Node `json:"proxies"`
+    /* redis引擎主从版本号，目前支持：2.8、4.0 (Optional) */
+    Version string `json:"version"`
 
-    /* 分片列表 (Optional) */
-    Shards []RedisShard `json:"shards"`
+    /* 是否推荐 (Optional) */
+    Recommended bool `json:"recommended"`
+
+    /* 是否售罄 (Optional) */
+    SoldOut bool `json:"soldOut"`
+
+    /* 售卖内存规格列表 (Optional) */
+    AvailableMemorySpecs []AvailableMemorySpec `json:"availableMemorySpecs"`
 }

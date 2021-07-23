@@ -17,11 +17,20 @@
 package models
 
 
-type InstanceVpcIp struct {
+type AvailableRegion struct {
 
-    /* 代理列表 (Optional) */
-    Proxies []Node `json:"proxies"`
+    /* 地域id (Optional) */
+    RegionId string `json:"regionId"`
 
-    /* 分片列表 (Optional) */
-    Shards []RedisShard `json:"shards"`
+    /* 地域名 (Optional) */
+    RegionName string `json:"regionName"`
+
+    /* 是否售罄 (Optional) */
+    SoldOut bool `json:"soldOut"`
+
+    /* 用户配额 (Optional) */
+    Quota QuotaInfo `json:"quota"`
+
+    /* 可用区列表 (Optional) */
+    AvailableZones []AzInfo `json:"availableZones"`
 }

@@ -20,8 +20,8 @@ package models
 type Tag struct {
 
     /* 标签的键 (Optional) */
-    Key string `json:"key"`
+    Key *string `json:"key"`
 
     /* 标签的值 (Optional) */
-    Value string `json:"value"`
+    Value *string `json:"value"`
 }

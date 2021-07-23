@@ -17,11 +17,17 @@
 package models
 
 
-type InstanceVpcIp struct {
+type AvailableMemorySpec struct {
 
-    /* 代理列表 (Optional) */
-    Proxies []Node `json:"proxies"`
+    /* 售卖内存（GB） (Optional) */
+    MemoryGB int `json:"memoryGB"`
 
-    /* 分片列表 (Optional) */
-    Shards []RedisShard `json:"shards"`
+    /* 是否售罄 (Optional) */
+    SoldOut bool `json:"soldOut"`
+
+    /* 可用区列表 (Optional) */
+    AvailableZones []AzInfo `json:"availableZones"`
+
+    /* 规格列表 (Optional) */
+    AvailableFlavors []AvailableFlavor `json:"availableFlavors"`
 }

@@ -17,11 +17,8 @@
 package models
 
 
-type InstanceVpcIp struct {
+type Redis struct {
 
-    /* 代理列表 (Optional) */
-    Proxies []Node `json:"proxies"`
-
-    /* 分片列表 (Optional) */
-    Shards []RedisShard `json:"shards"`
+    /*   */
+    Id string `json:"id"`
 }

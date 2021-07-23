@@ -32,7 +32,7 @@ type SpecInfo struct {
     DiskGB int `json:"diskGB"`
 
     /* 最大连接数，0表示自定义分片集群版规格，最大连接数由分片数变化 (Optional) */
-    MaxConntion int `json:"maxConntion"`
+    MaxConnection int `json:"maxConnection"`
 
     /* 带宽（Mbps)，0表示自定义分片集群版规格，带宽由分片数变化 (Optional) */
     BandwidthMbps int `json:"bandwidthMbps"`

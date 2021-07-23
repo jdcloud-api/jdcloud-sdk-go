@@ -17,11 +17,20 @@
 package models
 
 
-type InstanceVpcIp struct {
+type AvailableFlavor struct {
 
-    /* 代理列表 (Optional) */
-    Proxies []Node `json:"proxies"`
+    /* 分片数 (Optional) */
+    ShardNumber int `json:"shardNumber"`
 
-    /* 分片列表 (Optional) */
-    Shards []RedisShard `json:"shards"`
+    /* IP数 (Optional) */
+    IpNumber int `json:"ipNumber"`
+
+    /* 是否推荐 (Optional) */
+    Recommended bool `json:"recommended"`
+
+    /* 规格代码，标准版为实例的规格代码；集群版为单分片规格代码 (Optional) */
+    InstanceClasses []string `json:"instanceClasses"`
+
+    /* 规格详情 (Optional) */
+    Detail FlavorDetail `json:"detail"`
 }

@@ -17,11 +17,17 @@
 package models
 
 
-type InstanceVpcIp struct {
+type FlavorDetail struct {
 
-    /* 代理列表 (Optional) */
-    Proxies []Node `json:"proxies"`
+    /* 该规格的CPU核数 (Optional) */
+    Cpu int `json:"cpu"`
 
-    /* 分片列表 (Optional) */
-    Shards []RedisShard `json:"shards"`
+    /* 该规格的磁盘大小（GB) (Optional) */
+    DiskGB int `json:"diskGB"`
+
+    /* 该规格的最大连接数 (Optional) */
+    MaxConnection int `json:"maxConnection"`
+
+    /* 该规格的带宽（Mbps) (Optional) */
+    BandwidthMbps int `json:"bandwidthMbps"`
 }

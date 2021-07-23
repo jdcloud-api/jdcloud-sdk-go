@@ -19,12 +19,12 @@ package models
 
 type Node struct {
 
-    /*   */
-    Id int `json:"id"`
+    /*  (Optional) */
+    Id string `json:"id"`
 
-    /*   */
+    /*  (Optional) */
     Ip string `json:"ip"`
 
-    /*   */
+    /*  (Optional) */
     Port int `json:"port"`
 }
