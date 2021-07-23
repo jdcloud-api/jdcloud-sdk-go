@@ -58,7 +58,7 @@ type ConsumeBillQueryResultItem struct {
     /* 账单日期 (Optional) */
     BillTime string `json:"billTime"`
 
-    /* 账单金额 (Optional) */
+    /* 账单金额/原价 (Optional) */
     BillFee int `json:"billFee"`
 
     /* 账单总额 (Optional) */

@@ -17,23 +17,14 @@
 package models
 
 
-type ResourceOrderStatusCondition struct {
+type RefundFeeCondition struct {
 
-    /* 站点信息 0:中国 1:国际 10:专有云 (Optional) */
-    Site int `json:"site"`
+    /* 退款类型,退资源：REFUND_RESOURCE;退续费：REFUND_RENEW  */
+    RefundType string `json:"refundType"`
 
-    /* 服务编码  */
-    ServiceCode string `json:"serviceCode"`
+    /* 退款时间(格式：yyyy-MM-dd HH:mm:ss) (Optional) */
+    RefundTime string `json:"refundTime"`
 
-    /* 资源状态 1:正常 2:停服 3:删除 (Optional) */
-    Status int `json:"status"`
-
-    /* 资源id列表(最多支持传入500个)  */
-    ResourceIdList []string `json:"resourceIdList"`
-
-    /* 当前页序号 (Optional) */
-    PageIndex int `json:"pageIndex"`
-
-    /* 每页结果数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 退款资源列表  */
+    RefundResources []RefundResource `json:"refundResources"`
 }

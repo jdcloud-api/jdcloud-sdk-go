@@ -22,10 +22,10 @@ type ResourceOrderQueryCondition struct {
     /* 主键id (Optional) */
     Id int `json:"id"`
 
-    /* 用户pin (Optional) */
+    /* 用户pin(pin、resourceId、resourceIdList 必传一个) (Optional) */
     Pin string `json:"pin"`
 
-    /* 资源id (Optional) */
+    /* 资源id(pin、resourceId、resourceIdList 必传一个) (Optional) */
     ResourceId string `json:"resourceId"`
 
     /* appCode (Optional) */
@@ -43,7 +43,7 @@ type ResourceOrderQueryCondition struct {
     /* 计费类型 1:按配置 2:按用量 3:包年包月 (Optional) */
     BillingType int `json:"billingType"`
 
-    /* resourceIdList (Optional) */
+    /* resourceIdList(pin、resourceId、resourceIdList 必传一个) (Optional) */
     ResourceIdList []string `json:"resourceIdList"`
 
     /* >0: 订单还有几天到期; ==0: 订单已经到期; <0: 不管是否到期 (Optional) */

@@ -17,23 +17,20 @@
 package models
 
 
-type ResourceOrderStatusCondition struct {
+type AccountingRuleUpdate struct {
 
-    /* 站点信息 0:中国 1:国际 10:专有云 (Optional) */
+    /* 站点 (Optional) */
     Site int `json:"site"`
 
-    /* 服务编码  */
-    ServiceCode string `json:"serviceCode"`
+    /* pin (Optional) */
+    Pin string `json:"pin"`
 
-    /* 资源状态 1:正常 2:停服 3:删除 (Optional) */
-    Status int `json:"status"`
+    /* 出账类型  1：实时出账    2：定期出账 (Optional) */
+    OutAccountType int `json:"outAccountType"`
 
-    /* 资源id列表(最多支持传入500个)  */
-    ResourceIdList []string `json:"resourceIdList"`
+    /* 出账周期：限制范围 1-28 (Optional) */
+    OutAccountDay int `json:"outAccountDay"`
 
-    /* 当前页序号 (Optional) */
-    PageIndex int `json:"pageIndex"`
-
-    /* 每页结果数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 定期出账  时间表达式 (Optional) */
+    TimeCron string `json:"timeCron"`
 }

@@ -19,34 +19,34 @@ package models
 
 type OrderPriceProtocol struct {
 
-    /* 资源id (Optional) */
+    /* 资源id(新购时不传，升降配、续费必须传) (Optional) */
     ResourceId *string `json:"resourceId"`
 
     /* 业务线 (Optional) */
     AppCode *string `json:"appCode"`
 
-    /* 产品线 (Optional) */
+    /* 产品线(必传) (Optional) */
     ServiceCode *string `json:"serviceCode"`
 
     /* 站点信息 0：主站  其他：专有云 (Optional) */
     Site *int `json:"site"`
 
-    /* 地域 (Optional) */
+    /* 地域(新购、升降配必传) (Optional) */
     Region *string `json:"region"`
 
-    /* 计费类型 1:按配置 2:按用量 3:包年包月 (Optional) */
+    /* 计费类型 1:按配置 2:按用量 3:包年包月(必传) 4:按次计费 (Optional) */
     BillingType *int `json:"billingType"`
 
-    /* 时长 (Optional) */
+    /* 时长(包年包月新购、续费必传) (Optional) */
     TimeSpan *int `json:"timeSpan"`
 
-    /* 时长类型 0:无(非包年包月) 1:小时 2:天 3:月 4:年 (Optional) */
+    /* 时长类型 0:无(非包年包月) 1:小时 2:天 3:月 4:年(包年包月新购、续费必传) (Optional) */
     TimeUnit *int `json:"timeUnit"`
 
     /* 网络类型 0:non 1:非BGP  2:BGP (Optional) */
     NetworkOperator *int `json:"networkOperator"`
 
-    /* 计算公式（配置细项） (Optional) */
+    /* 计算公式（配置细项）(新购、升降配必传) (Optional) */
     Formula []Formula `json:"formula"`
 
     /* 配置细项 (Optional) */

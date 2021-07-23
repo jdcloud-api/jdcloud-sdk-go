@@ -34,7 +34,7 @@ type CalculateTotalPriceRequest struct {
     /* 计算价格的订单 (Optional) */
     OrderList []billing.OrderPriceProtocol `json:"orderList"`
 
-    /* 操作时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
+    /* 操作时间(格式为：yyyy-MM-dd HH:mm:ss) (Optional) */
     OperateTime *string `json:"operateTime"`
 
     /* 1:折扣（不需要传） 2:免费活动3:付费活动 4:推荐码 5:会员价 [{"promotionType":1,"activityCode":123},{"promotionType":2,"activityCode":}] (Optional) */
@@ -48,6 +48,15 @@ type CalculateTotalPriceRequest struct {
 
     /* 临时升配时必传，3-临时升配 (Optional) */
     ProcessType *int `json:"processType"`
+
+    /* 续费方式 0：正常续费  1：续费至统一到期日，续费时必传 (Optional) */
+    RenewMode *int `json:"renewMode"`
+
+    /* 续费统一到期日(1-28)，续费时必传 (Optional) */
+    UnifyExpireDay *int `json:"unifyExpireDay"`
+
+    /* 计算总价规则 1：计算预付费资源总价（计费类型为包年包月、按次） ；不传计算所有资源总价 (Optional) */
+    TotalPriceRule *int `json:"totalPriceRule"`
 }
 
 /*
@@ -80,11 +89,14 @@ func NewCalculateTotalPriceRequest(
  * param regionId:  (Required)
  * param cmd: 操作类型 1:创建 2:续费 3:升配 4:删除 (Required)
  * param orderList: 计算价格的订单 (Optional)
- * param operateTime: 操作时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional)
+ * param operateTime: 操作时间(格式为：yyyy-MM-dd HH:mm:ss) (Optional)
  * param promotionInfo: 1:折扣（不需要传） 2:免费活动3:付费活动 4:推荐码 5:会员价 [{"promotionType":1,"activityCode":123},{"promotionType":2,"activityCode":}] (Optional)
  * param clientType: 客户端：1.PC端；2.移动端； (Optional)
  * param packageCount: 批量购买时数量 (Required)
  * param processType: 临时升配时必传，3-临时升配 (Optional)
+ * param renewMode: 续费方式 0：正常续费  1：续费至统一到期日，续费时必传 (Optional)
+ * param unifyExpireDay: 续费统一到期日(1-28)，续费时必传 (Optional)
+ * param totalPriceRule: 计算总价规则 1：计算预付费资源总价（计费类型为包年包月、按次） ；不传计算所有资源总价 (Optional)
  */
 func NewCalculateTotalPriceRequestWithAllParams(
     regionId string,
@@ -95,6 +107,9 @@ func NewCalculateTotalPriceRequestWithAllParams(
     clientType *int,
     packageCount int,
     processType *int,
+    renewMode *int,
+    unifyExpireDay *int,
+    totalPriceRule *int,
 ) *CalculateTotalPriceRequest {
 
     return &CalculateTotalPriceRequest{
@@ -112,6 +127,9 @@ func NewCalculateTotalPriceRequestWithAllParams(
         ClientType: clientType,
         PackageCount: packageCount,
         ProcessType: processType,
+        RenewMode: renewMode,
+        UnifyExpireDay: unifyExpireDay,
+        TotalPriceRule: totalPriceRule,
     }
 }
 
@@ -143,7 +161,7 @@ func (r *CalculateTotalPriceRequest) SetOrderList(orderList []billing.OrderPrice
     r.OrderList = orderList
 }
 
-/* param operateTime: 操作时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ(Optional) */
+/* param operateTime: 操作时间(格式为：yyyy-MM-dd HH:mm:ss)(Optional) */
 func (r *CalculateTotalPriceRequest) SetOperateTime(operateTime string) {
     r.OperateTime = &operateTime
 }
@@ -166,6 +184,21 @@ func (r *CalculateTotalPriceRequest) SetPackageCount(packageCount int) {
 /* param processType: 临时升配时必传，3-临时升配(Optional) */
 func (r *CalculateTotalPriceRequest) SetProcessType(processType int) {
     r.ProcessType = &processType
+}
+
+/* param renewMode: 续费方式 0：正常续费  1：续费至统一到期日，续费时必传(Optional) */
+func (r *CalculateTotalPriceRequest) SetRenewMode(renewMode int) {
+    r.RenewMode = &renewMode
+}
+
+/* param unifyExpireDay: 续费统一到期日(1-28)，续费时必传(Optional) */
+func (r *CalculateTotalPriceRequest) SetUnifyExpireDay(unifyExpireDay int) {
+    r.UnifyExpireDay = &unifyExpireDay
+}
+
+/* param totalPriceRule: 计算总价规则 1：计算预付费资源总价（计费类型为包年包月、按次） ；不传计算所有资源总价(Optional) */
+func (r *CalculateTotalPriceRequest) SetTotalPriceRule(totalPriceRule int) {
+    r.TotalPriceRule = &totalPriceRule
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

@@ -19,16 +19,16 @@ package models
 
 type Pagination struct {
 
-    /* 当前页 (Optional) */
+    /* 当前页(默认:1) (Optional) */
     CurrPageNo int `json:"currPageNo"`
 
-    /* 页数 (Optional) */
+    /* 总页数 (Optional) */
     NumberPages int `json:"numberPages"`
 
-    /* 每页记录数 (Optional) */
+    /* 总记录数 (Optional) */
     NumberRecords int `json:"numberRecords"`
 
-    /* 页面大小 (Optional) */
+    /* 每页记录数(默认每页:10) (Optional) */
     PageSize int `json:"pageSize"`
 
     /* 起始页 (Optional) */

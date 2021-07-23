@@ -46,6 +46,12 @@ type ConsumptionProduct struct {
     /* 欠费金额 (Optional) */
     ArrearFee int `json:"arrearFee"`
 
+    /* 原价 (Optional) */
+    BillFee2 int `json:"billFee2"`
+
+    /* 优惠金额 (Optional) */
+    DiscountFee int `json:"discountFee"`
+
     /*  (Optional) */
     ProductDetails []Consumption `json:"productDetails"`
 

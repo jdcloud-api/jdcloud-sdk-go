@@ -17,23 +17,23 @@
 package models
 
 
-type ResourceOrderStatusCondition struct {
+type ResourceCountBo struct {
 
-    /* 站点信息 0:中国 1:国际 10:专有云 (Optional) */
-    Site int `json:"site"`
+    /* pin (Optional) */
+    Pin string `json:"pin"`
 
-    /* 服务编码  */
+    /* 应用码code (Optional) */
+    AppCode string `json:"appCode"`
+
+    /* 应用码名称 (Optional) */
+    AppCodeName string `json:"appCodeName"`
+
+    /* 服务码code (Optional) */
     ServiceCode string `json:"serviceCode"`
 
-    /* 资源状态 1:正常 2:停服 3:删除 (Optional) */
-    Status int `json:"status"`
+    /* 服务码名称 (Optional) */
+    ServiceCodeName string `json:"serviceCodeName"`
 
-    /* 资源id列表(最多支持传入500个)  */
-    ResourceIdList []string `json:"resourceIdList"`
-
-    /* 当前页序号 (Optional) */
-    PageIndex int `json:"pageIndex"`
-
-    /* 每页结果数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 资源数量 (Optional) */
+    Count int `json:"count"`
 }

@@ -22,13 +22,13 @@ type BillSummary struct {
     /* 用户pin (Optional) */
     Pin string `json:"pin"`
 
-    /* appCode (Optional) */
+    /* 产品线代码 (Optional) */
     AppCode string `json:"appCode"`
 
     /* 产品线代码名称 (Optional) */
     AppCodeName string `json:"appCodeName"`
 
-    /* serviceCode (Optional) */
+    /* 产品代码 (Optional) */
     ServiceCode string `json:"serviceCode"`
 
     /* 产品代码名称 (Optional) */
@@ -49,7 +49,7 @@ type BillSummary struct {
     /* 区域 (Optional) */
     Region string `json:"region"`
 
-    /* 费用类型 (Optional) */
+    /* 费用类型,仅用于查询帐单明细接口。取值:[新购、续费、配置变更、退订、按量费用] (Optional) */
     ActionTypeName string `json:"actionTypeName"`
 
     /* 规格 (Optional) */
@@ -61,7 +61,7 @@ type BillSummary struct {
     /* 计费结束时间 (Optional) */
     EndTime string `json:"endTime"`
 
-    /* 账单生成时间 (Optional) */
+    /* 账单生成时间,仅用于查询帐单明细接口 (Optional) */
     BillTime string `json:"billTime"`
 
     /* 账单总额 (Optional) */
