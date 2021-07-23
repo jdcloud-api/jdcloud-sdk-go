@@ -22,6 +22,6 @@ type RedisShard struct {
     /* master节点 (Optional) */
     Master Node `json:"master"`
 
-    /* slave列表 (Optional) */
-    Slave []Node `json:"slave"`
+    /* slave节点列表 (Optional) */
+    Slaves []Node `json:"slaves"`
 }

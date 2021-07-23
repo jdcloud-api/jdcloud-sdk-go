@@ -17,11 +17,11 @@
 package models
 
 
-type InstanceVpcIp struct {
+type QuotaInfo struct {
 
-    /* 代理列表 (Optional) */
-    Proxies []Node `json:"proxies"`
+    /* 配额上限 (Optional) */
+    Max int `json:"max"`
 
-    /* 分片列表 (Optional) */
-    Shards []RedisShard `json:"shards"`
+    /* 已使用 (Optional) */
+    Used int `json:"used"`
 }

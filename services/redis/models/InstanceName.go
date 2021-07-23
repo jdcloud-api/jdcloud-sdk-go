@@ -25,6 +25,9 @@ type InstanceName struct {
     /* 资源名称（即实例名称）  */
     ResourceName string `json:"resourceName"`
 
+    /* 资源状态：creating表示创建中，running表示运行中，error表示错误，changing表示变更规格中，deleting表示删除中，configuring表示修改参数中，restoring表示备份恢复中 (Optional) */
+    ResourceStatus string `json:"resourceStatus"`
+
     /* service code（redis）  */
     ServiceCode string `json:"serviceCode"`
 }

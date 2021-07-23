@@ -21,7 +21,7 @@ import (
     redis "github.com/jdcloud-api/jdcloud-sdk-go/services/redis/models"
 )
 
-type DescribeCacheAnalysisResultRequest struct {
+type DescribeTaskProgressListRequest struct {
 
     core.JDCloudRequest
 
@@ -31,66 +31,63 @@ type DescribeCacheAnalysisResultRequest struct {
     /* 缓存Redis实例ID，是访问实例的唯一标识  */
     CacheInstanceId string `json:"cacheInstanceId"`
 
-    /* 任务ID，即request ID  */
-    TaskId string `json:"taskId"`
+    /* 任务类型：resize表示变配，目前只有变配可以查询进度 (Optional) */
+    TaskType *string `json:"taskType"`
 }
 
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
- * param taskId: 任务ID，即request ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeCacheAnalysisResultRequest(
+func NewDescribeTaskProgressListRequest(
     regionId string,
     cacheInstanceId string,
-    taskId string,
-) *DescribeCacheAnalysisResultRequest {
+) *DescribeTaskProgressListRequest {
 
-	return &DescribeCacheAnalysisResultRequest{
+	return &DescribeTaskProgressListRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/cacheAnalysis/{taskId}",
+			URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/taskProgress",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         CacheInstanceId: cacheInstanceId,
-        TaskId: taskId,
 	}
 }
 
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
- * param taskId: 任务ID，即request ID (Required)
+ * param taskType: 任务类型：resize表示变配，目前只有变配可以查询进度 (Optional)
  */
-func NewDescribeCacheAnalysisResultRequestWithAllParams(
+func NewDescribeTaskProgressListRequestWithAllParams(
     regionId string,
     cacheInstanceId string,
-    taskId string,
-) *DescribeCacheAnalysisResultRequest {
+    taskType *string,
+) *DescribeTaskProgressListRequest {
 
-    return &DescribeCacheAnalysisResultRequest{
+    return &DescribeTaskProgressListRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/cacheAnalysis/{taskId}",
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/taskProgress",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         CacheInstanceId: cacheInstanceId,
-        TaskId: taskId,
+        TaskType: taskType,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeCacheAnalysisResultRequestWithoutParam() *DescribeCacheAnalysisResultRequest {
+func NewDescribeTaskProgressListRequestWithoutParam() *DescribeTaskProgressListRequest {
 
-    return &DescribeCacheAnalysisResultRequest{
+    return &DescribeTaskProgressListRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/cacheAnalysis/{taskId}",
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/taskProgress",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -99,41 +96,32 @@ func NewDescribeCacheAnalysisResultRequestWithoutParam() *DescribeCacheAnalysisR
 }
 
 /* param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2(Required) */
-func (r *DescribeCacheAnalysisResultRequest) SetRegionId(regionId string) {
+func (r *DescribeTaskProgressListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
-func (r *DescribeCacheAnalysisResultRequest) SetCacheInstanceId(cacheInstanceId string) {
+func (r *DescribeTaskProgressListRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
 
-/* param taskId: 任务ID，即request ID(Required) */
-func (r *DescribeCacheAnalysisResultRequest) SetTaskId(taskId string) {
-    r.TaskId = taskId
+/* param taskType: 任务类型：resize表示变配，目前只有变配可以查询进度(Optional) */
+func (r *DescribeTaskProgressListRequest) SetTaskType(taskType string) {
+    r.TaskType = &taskType
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeCacheAnalysisResultRequest) GetRegionId() string {
+func (r DescribeTaskProgressListRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeCacheAnalysisResultResponse struct {
+type DescribeTaskProgressListResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeCacheAnalysisResultResult `json:"result"`
+    Result DescribeTaskProgressListResult `json:"result"`
 }
 
-type DescribeCacheAnalysisResultResult struct {
-    StartTime string `json:"startTime"`
-    FinishTime string `json:"finishTime"`
-    AnalysisType int `json:"analysisType"`
-    StringBigKeys []redis.RedisKey `json:"stringBigKeys"`
-    OtherBigKeys []redis.RedisKey `json:"otherBigKeys"`
-    HotKeys []redis.RedisKey `json:"hotKeys"`
-    CmdCallTimesTop []redis.RedisCmd `json:"cmdCallTimesTop"`
-    CmdUseCpuTop []redis.RedisCmd `json:"cmdUseCpuTop"`
-    KeyTypeDistribution interface{} `json:"keyTypeDistribution"`
-    KeySizeDistribution interface{} `json:"keySizeDistribution"`
+type DescribeTaskProgressListResult struct {
+    TaskProgresses []redis.TaskProgress `json:"taskProgresses"`
 }

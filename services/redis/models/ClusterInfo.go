@@ -19,9 +19,12 @@ package models
 
 type ClusterInfo struct {
 
-    /* proxy列表 (Optional) */
+    /* 代理列表 (Optional) */
     Proxies []Proxy `json:"proxies"`
 
-    /* shard列表 (Optional) */
+    /* 分片列表 (Optional) */
     Shards []Shard `json:"shards"`
+
+    /* redis列表 (Optional) */
+    Redis []Redis `json:"redis"`
 }

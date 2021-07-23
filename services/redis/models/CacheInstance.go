@@ -29,7 +29,7 @@ type CacheInstance struct {
     /* 规格代码，2.8、4.0标准版是实例规格，4.0自定义分片集群版实例表示单分片规格 (Optional) */
     CacheInstanceClass string `json:"cacheInstanceClass"`
 
-    /* 实例的总内存（MB） (Optional) */
+    /* 实例的总内存（MB），表示用户购买的可使用内存 (Optional) */
     CacheInstanceMemoryMB int `json:"cacheInstanceMemoryMB"`
 
     /* 实例状态：creating表示创建中，running表示运行中，error表示错误，changing表示变更规格中，deleting表示删除中，configuring表示修改参数中，restoring表示备份恢复中 (Optional) */
@@ -82,4 +82,7 @@ type CacheInstance struct {
 
     /* 单分片内存大小（MB） (Optional) */
     MemoryMBPerShard int `json:"memoryMBPerShard"`
+
+    /* 扩展配置 (Optional) */
+    Extension RespExtension `json:"extension"`
 }

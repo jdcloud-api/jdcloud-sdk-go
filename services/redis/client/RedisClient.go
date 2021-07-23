@@ -40,7 +40,7 @@ func NewRedisClient(credential *core.Credential) *RedisClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "redis",
-            Revision:    "2.2.2",
+            Revision:    "2.5.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -68,6 +68,26 @@ func (c *RedisClient) ModifyBackupPolicy(request *redis.ModifyBackupPolicyReques
     }
 
     jdResp := &redis.ModifyBackupPolicyResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询正在执行的任务进度列表 */
+func (c *RedisClient) DescribeTaskProgressList(request *redis.DescribeTaskProgressListRequest) (*redis.DescribeTaskProgressListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &redis.DescribeTaskProgressListResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -268,6 +288,26 @@ func (c *RedisClient) DescribeCacheAnalysisList(request *redis.DescribeCacheAnal
     }
 
     jdResp := &redis.DescribeCacheAnalysisListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询支持的地域列表 */
+func (c *RedisClient) DescribeAvailableRegion(request *redis.DescribeAvailableRegionRequest) (*redis.DescribeAvailableRegionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &redis.DescribeAvailableRegionResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -513,6 +553,26 @@ func (c *RedisClient) DescribeUserQuota(request *redis.DescribeUserQuotaRequest)
     }
 
     jdResp := &redis.DescribeUserQuotaResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询支持的规格列表 */
+func (c *RedisClient) DescribeAvailableResource(request *redis.DescribeAvailableResourceRequest) (*redis.DescribeAvailableResourceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &redis.DescribeAvailableResourceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

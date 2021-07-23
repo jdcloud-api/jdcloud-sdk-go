@@ -48,4 +48,10 @@ type CacheInstanceSpec struct {
 
     /* 分片数，自定义分片规格集群版实例必须有，且大于1。每种分片规格支持的分片数可调用describeSpecConfig接口获取 (Optional) */
     ShardNumber *int `json:"shardNumber"`
+
+    /* 用户普通标签 (Optional) */
+    UserTags []Tag `json:"userTags"`
+
+    /* 扩展配置 (Optional) */
+    Extension *ReqExtension `json:"extension"`
 }
