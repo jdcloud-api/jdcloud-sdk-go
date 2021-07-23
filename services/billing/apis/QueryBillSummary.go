@@ -28,10 +28,10 @@ type QueryBillSummaryRequest struct {
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 计费开始时间  */
+    /* 账期开始时间,不支持跨月查询。格式:yyyy-MM-dd HH:mm:ss  */
     StartTime string `json:"startTime"`
 
-    /* 计费结束时间  */
+    /* 账期结束时间,不支持跨月查询。格式:yyyy-MM-dd HH:mm:ss  */
     EndTime string `json:"endTime"`
 
     /* 产品线代码 (Optional) */
@@ -40,23 +40,27 @@ type QueryBillSummaryRequest struct {
     /* 产品代码 (Optional) */
     ServiceCode *string `json:"serviceCode"`
 
-    /* 资源单id列表 (Optional) */
+    /* 资源单id列表,最多支持传入500个 (Optional) */
     ResourceIds []string `json:"resourceIds"`
 
-    /* 标签 (Optional) */
+    /* 标签,JSON格式:[{"k1":"v1"},{"k1":"v2"},{"k2":""}]
+示例:
+选择的标签为, 部门:广告部、部门:物流部、项目
+则传值为:[{"部门":"广告部"},{"部门":"物流部"},{"项目":""}]
+ (Optional) */
     Tags []interface{} `json:"tags"`
 
-    /* pageIndex (Optional) */
+    /* pageIndex 分页,默认从1开始 (Optional) */
     PageIndex *int `json:"pageIndex"`
 
-    /* pageSize (Optional) */
+    /* pageSize 每页查询数据条数,最多支持1000条 (Optional) */
     PageSize *int `json:"pageSize"`
 }
 
 /*
  * param regionId: Region ID (Required)
- * param startTime: 计费开始时间 (Required)
- * param endTime: 计费结束时间 (Required)
+ * param startTime: 账期开始时间,不支持跨月查询。格式:yyyy-MM-dd HH:mm:ss (Required)
+ * param endTime: 账期结束时间,不支持跨月查询。格式:yyyy-MM-dd HH:mm:ss (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -81,14 +85,18 @@ func NewQueryBillSummaryRequest(
 
 /*
  * param regionId: Region ID (Required)
- * param startTime: 计费开始时间 (Required)
- * param endTime: 计费结束时间 (Required)
+ * param startTime: 账期开始时间,不支持跨月查询。格式:yyyy-MM-dd HH:mm:ss (Required)
+ * param endTime: 账期结束时间,不支持跨月查询。格式:yyyy-MM-dd HH:mm:ss (Required)
  * param appCode: 产品线代码 (Optional)
  * param serviceCode: 产品代码 (Optional)
- * param resourceIds: 资源单id列表 (Optional)
- * param tags: 标签 (Optional)
- * param pageIndex: pageIndex (Optional)
- * param pageSize: pageSize (Optional)
+ * param resourceIds: 资源单id列表,最多支持传入500个 (Optional)
+ * param tags: 标签,JSON格式:[{"k1":"v1"},{"k1":"v2"},{"k2":""}]
+示例:
+选择的标签为, 部门:广告部、部门:物流部、项目
+则传值为:[{"部门":"广告部"},{"部门":"物流部"},{"项目":""}]
+ (Optional)
+ * param pageIndex: pageIndex 分页,默认从1开始 (Optional)
+ * param pageSize: pageSize 每页查询数据条数,最多支持1000条 (Optional)
  */
 func NewQueryBillSummaryRequestWithAllParams(
     regionId string,
@@ -139,12 +147,12 @@ func (r *QueryBillSummaryRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param startTime: 计费开始时间(Required) */
+/* param startTime: 账期开始时间,不支持跨月查询。格式:yyyy-MM-dd HH:mm:ss(Required) */
 func (r *QueryBillSummaryRequest) SetStartTime(startTime string) {
     r.StartTime = startTime
 }
 
-/* param endTime: 计费结束时间(Required) */
+/* param endTime: 账期结束时间,不支持跨月查询。格式:yyyy-MM-dd HH:mm:ss(Required) */
 func (r *QueryBillSummaryRequest) SetEndTime(endTime string) {
     r.EndTime = endTime
 }
@@ -159,22 +167,26 @@ func (r *QueryBillSummaryRequest) SetServiceCode(serviceCode string) {
     r.ServiceCode = &serviceCode
 }
 
-/* param resourceIds: 资源单id列表(Optional) */
+/* param resourceIds: 资源单id列表,最多支持传入500个(Optional) */
 func (r *QueryBillSummaryRequest) SetResourceIds(resourceIds []string) {
     r.ResourceIds = resourceIds
 }
 
-/* param tags: 标签(Optional) */
+/* param tags: 标签,JSON格式:[{"k1":"v1"},{"k1":"v2"},{"k2":""}]
+示例:
+选择的标签为, 部门:广告部、部门:物流部、项目
+则传值为:[{"部门":"广告部"},{"部门":"物流部"},{"项目":""}]
+(Optional) */
 func (r *QueryBillSummaryRequest) SetTags(tags []interface{}) {
     r.Tags = tags
 }
 
-/* param pageIndex: pageIndex(Optional) */
+/* param pageIndex: pageIndex 分页,默认从1开始(Optional) */
 func (r *QueryBillSummaryRequest) SetPageIndex(pageIndex int) {
     r.PageIndex = &pageIndex
 }
 
-/* param pageSize: pageSize(Optional) */
+/* param pageSize: pageSize 每页查询数据条数,最多支持1000条(Optional) */
 func (r *QueryBillSummaryRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }

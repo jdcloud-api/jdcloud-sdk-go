@@ -17,23 +17,35 @@
 package models
 
 
-type ResourceOrderStatusCondition struct {
+type ResourceOperateRecordReq struct {
 
-    /* 站点信息 0:中国 1:国际 10:专有云 (Optional) */
+    /* 站点  */
     Site int `json:"site"`
 
-    /* 服务编码  */
+    /* 产品线  */
+    AppCode string `json:"appCode"`
+
+    /* 产品编码  */
     ServiceCode string `json:"serviceCode"`
 
-    /* 资源状态 1:正常 2:停服 3:删除 (Optional) */
-    Status int `json:"status"`
+    /* 资源ID  */
+    ResourceId string `json:"resourceId"`
 
-    /* 资源id列表(最多支持传入500个)  */
-    ResourceIdList []string `json:"resourceIdList"`
+    /* 操作行为 (1:启动 2：关闭 3：变配 4：删除)  */
+    OpType int `json:"opType"`
 
-    /* 当前页序号 (Optional) */
-    PageIndex int `json:"pageIndex"`
+    /* 资源配置信息  */
+    Formula []Formula `json:"formula"`
 
-    /* 每页结果数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 操作时间(格式为：yyyy-MM-dd HH:mm:ss)  */
+    OpTime string `json:"opTime"`
+
+    /* 地域 (Optional) */
+    Region string `json:"region"`
+
+    /* 用户  */
+    Pin string `json:"pin"`
+
+    /* 释放标识，不传默认释放（1：释放 0：不释放） (Optional) */
+    Release int `json:"release"`
 }

@@ -17,23 +17,20 @@
 package models
 
 
-type ResourceOrderStatusCondition struct {
+type BatchUpdateBillingStatusReq struct {
 
-    /* 站点信息 0:中国 1:国际 10:专有云 (Optional) */
-    Site int `json:"site"`
-
-    /* 服务编码  */
+    /* 产品编码  */
     ServiceCode string `json:"serviceCode"`
 
-    /* 资源状态 1:正常 2:停服 3:删除 (Optional) */
-    Status int `json:"status"`
+    /* 主资源ID (Optional) */
+    MainResourceId string `json:"mainResourceId"`
 
-    /* 资源id列表(最多支持传入500个)  */
-    ResourceIdList []string `json:"resourceIdList"`
+    /* 资源ID列表  */
+    ResourceIds []string `json:"resourceIds"`
 
-    /* 当前页序号 (Optional) */
-    PageIndex int `json:"pageIndex"`
+    /* 操作(STOP 停止计费 ; RESTART 恢复计费)  */
+    Action string `json:"action"`
 
-    /* 每页结果数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 操作说明 (Optional) */
+    Comment string `json:"comment"`
 }

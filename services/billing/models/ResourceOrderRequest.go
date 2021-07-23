@@ -17,7 +17,7 @@
 package models
 
 
-type ResourceOrderVo struct {
+type ResourceOrderRequest struct {
 
     /* 主键id (Optional) */
     Id int `json:"id"`
@@ -91,7 +91,7 @@ type ResourceOrderVo struct {
     /* timeUnit兼容交易系统字段 (Optional) */
     ChargeUnit int `json:"chargeUnit"`
 
-    /* 欠费过期状态，1:包年包月正常 2：包年包月到期  3:按配置、按用量正常  4：按配置、按用量欠费 (Optional) */
+    /* 欠费过期状态 (Optional) */
     AeStatus int `json:"aeStatus"`
 
     /* 欠费、过期资源释放时间 (Optional) */
@@ -147,7 +147,4 @@ type ResourceOrderVo struct {
 
     /* 启服、停服、停止计费时间 (Optional) */
     OperateTime string `json:"operateTime"`
-
-    /* 欠费类型 1、无欠费，2、按配置欠费，3、按用量欠费，4、按配置和按用量都欠费 (Optional) */
-    ArrearsType int `json:"arrearsType"`
 }

@@ -17,23 +17,32 @@
 package models
 
 
-type ResourceOrderStatusCondition struct {
+type BillingRuleRequest struct {
 
-    /* 站点信息 0:中国 1:国际 10:专有云 (Optional) */
+    /* 站点  */
     Site int `json:"site"`
 
-    /* 服务编码  */
+    /* 业务线  */
+    AppCode string `json:"appCode"`
+
+    /* 产品编码  */
     ServiceCode string `json:"serviceCode"`
 
-    /* 资源状态 1:正常 2:停服 3:删除 (Optional) */
-    Status int `json:"status"`
+    /* 计费时长类型 - 0:按使用时长；1:按周期时长  */
+    Strategy int `json:"strategy"`
 
-    /* 资源id列表(最多支持传入500个)  */
-    ResourceIdList []string `json:"resourceIdList"`
+    /* 计费周期类型 - 0:按小时；1:按天  */
+    CycleType int `json:"cycleType"`
 
-    /* 当前页序号 (Optional) */
-    PageIndex int `json:"pageIndex"`
+    /* 计费模式 - 1:删除不计费；2:关机不计费  */
+    BillingMode int `json:"billingMode"`
 
-    /* 每页结果数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 最小计费时长 - 必须为大于等于0的整数 (Optional) */
+    TimeSpan int `json:"timeSpan"`
+
+    /* 区分大客户 - 1:是；0:否 (Optional) */
+    DosingMode int `json:"dosingMode"`
+
+    /* 大客户统计周期 - 0:按小时计费；1:按天计费 (Optional) */
+    DosingCycle int `json:"dosingCycle"`
 }

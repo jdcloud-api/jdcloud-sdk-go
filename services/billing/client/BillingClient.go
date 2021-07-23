@@ -40,7 +40,7 @@ func NewBillingClient(credential *core.Credential) *BillingClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "billing",
-            Revision:    "1.0.10",
+            Revision:    "1.0.33",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
