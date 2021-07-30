@@ -48,4 +48,7 @@ type CustomReq struct {
 
     /* 敏感库来源：custom自定义，feedback系统库，更新时该参数必填 (Optional) */
     Source string `json:"source"`
+
+    /* 机审策略，可以不填，为空时前端显示空即可 (Optional) */
+    BizType string `json:"bizType"`
 }

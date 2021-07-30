@@ -25,6 +25,9 @@ type AsyncAudioScanRequest struct {
 
     core.JDCloudRequest
 
+    /* 机审策略，eg: default (Optional) */
+    BizType *string `json:"bizType"`
+
     /* 指定检测场景 (Optional) */
     Scenes []string `json:"scenes"`
 
@@ -56,12 +59,14 @@ func NewAsyncAudioScanRequest(
 }
 
 /*
+ * param bizType: 机审策略，eg: default (Optional)
  * param scenes: 指定检测场景 (Optional)
  * param tasks: 检测任务列表，包含一个或多个元素。每个元素是个结构体，最多可添加10个元素，每个元素的具体结构描述见audioTask。 (Optional)
  * param callback: 异步检测结果回调通知您的URL，支持HTTP/HTTPS。该字段为空时，您必须定时检索检测结果。 (Optional)
  * param seed: 随机字符串，该值用于回调通知请求中的签名。当使用callback时，该字段必须提供。 (Optional)
  */
 func NewAsyncAudioScanRequestWithAllParams(
+    bizType *string,
     scenes []string,
     tasks []censor.AudioTask,
     callback *string,
@@ -75,6 +80,7 @@ func NewAsyncAudioScanRequestWithAllParams(
             Header:  nil,
             Version: "v1",
         },
+        BizType: bizType,
         Scenes: scenes,
         Tasks: tasks,
         Callback: callback,
@@ -93,6 +99,11 @@ func NewAsyncAudioScanRequestWithoutParam() *AsyncAudioScanRequest {
             Version: "v1",
         },
     }
+}
+
+/* param bizType: 机审策略，eg: default(Optional) */
+func (r *AsyncAudioScanRequest) SetBizType(bizType string) {
+    r.BizType = &bizType
 }
 
 /* param scenes: 指定检测场景(Optional) */

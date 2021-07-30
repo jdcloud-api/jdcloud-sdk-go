@@ -25,6 +25,9 @@ type ImageScanRequest struct {
 
     core.JDCloudRequest
 
+    /* 机审策略，eg: default (Optional) */
+    BizType *string `json:"bizType"`
+
     /* 指定检测场景 (Optional) */
     Scenes []string `json:"scenes"`
 
@@ -50,10 +53,12 @@ func NewImageScanRequest(
 }
 
 /*
+ * param bizType: 机审策略，eg: default (Optional)
  * param scenes: 指定检测场景 (Optional)
  * param tasks: 检测任务列表，包含一个或多个元素。每个元素是个结构体，最多可添加10个元素，即最多对10段文本进行检测。每个元素的具体结构描述见ImageTask。 (Optional)
  */
 func NewImageScanRequestWithAllParams(
+    bizType *string,
     scenes []string,
     tasks []censor.ImageTask,
 ) *ImageScanRequest {
@@ -65,6 +70,7 @@ func NewImageScanRequestWithAllParams(
             Header:  nil,
             Version: "v1",
         },
+        BizType: bizType,
         Scenes: scenes,
         Tasks: tasks,
     }
@@ -81,6 +87,11 @@ func NewImageScanRequestWithoutParam() *ImageScanRequest {
             Version: "v1",
         },
     }
+}
+
+/* param bizType: 机审策略，eg: default(Optional) */
+func (r *ImageScanRequest) SetBizType(bizType string) {
+    r.BizType = &bizType
 }
 
 /* param scenes: 指定检测场景(Optional) */

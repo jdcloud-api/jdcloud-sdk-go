@@ -40,7 +40,7 @@ func NewCensorClient(credential *core.Credential) *CensorClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "censor",
-            Revision:    "1.0.2",
+            Revision:    "1.0.3",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }

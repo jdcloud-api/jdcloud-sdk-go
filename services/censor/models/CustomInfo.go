@@ -40,6 +40,9 @@ type CustomInfo struct {
     /* pass 白名单，block 黑名单，review 疑似名单 (Optional) */
     Suggestion string `json:"suggestion"`
 
+    /* 机审策略，可以不填，为空时前端显示空即可 (Optional) */
+    BizType string `json:"bizType"`
+
     /* 状态 1启用，0禁用 (Optional) */
     Status int `json:"status"`
 
