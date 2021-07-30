@@ -25,6 +25,9 @@ type AsyncVideoScanRequest struct {
 
     core.JDCloudRequest
 
+    /* 机审策略，eg: default (Optional) */
+    BizType *string `json:"bizType"`
+
     /* 是否直播。默认为false，表示为普通视频检测；若是直播检测，该值必须传入true。 (Optional) */
     Live *bool `json:"live"`
 
@@ -62,6 +65,7 @@ func NewAsyncVideoScanRequest(
 }
 
 /*
+ * param bizType: 机审策略，eg: default (Optional)
  * param live: 是否直播。默认为false，表示为普通视频检测；若是直播检测，该值必须传入true。 (Optional)
  * param scenes: 指定检测场景 (Optional)
  * param audioScenes: 视频中语音的检测场景 (Optional)
@@ -70,6 +74,7 @@ func NewAsyncVideoScanRequest(
  * param seed: 随机字符串，该值用于回调通知请求中的签名。当使用callback时，该字段必须提供。 (Optional)
  */
 func NewAsyncVideoScanRequestWithAllParams(
+    bizType *string,
     live *bool,
     scenes []string,
     audioScenes []string,
@@ -85,6 +90,7 @@ func NewAsyncVideoScanRequestWithAllParams(
             Header:  nil,
             Version: "v1",
         },
+        BizType: bizType,
         Live: live,
         Scenes: scenes,
         AudioScenes: audioScenes,
@@ -105,6 +111,11 @@ func NewAsyncVideoScanRequestWithoutParam() *AsyncVideoScanRequest {
             Version: "v1",
         },
     }
+}
+
+/* param bizType: 机审策略，eg: default(Optional) */
+func (r *AsyncVideoScanRequest) SetBizType(bizType string) {
+    r.BizType = &bizType
 }
 
 /* param live: 是否直播。默认为false，表示为普通视频检测；若是直播检测，该值必须传入true。(Optional) */
