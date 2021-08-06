@@ -35,6 +35,9 @@ type RebootInstanceRequest struct {
 
     /* 是否重启备节点。<br> - 仅SQL Server 支持该参数 (Optional) */
     RebootSlave *bool `json:"rebootSlave"`
+
+    /* 是否强制重启 <br>- 仅支持MySQL (Optional) */
+    Force *bool `json:"force"`
 }
 
 /*
@@ -65,12 +68,14 @@ func NewRebootInstanceRequest(
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
  * param rebootMaster: 是否重启主节点。<br> - 仅SQL Server 支持该参数 (Optional)
  * param rebootSlave: 是否重启备节点。<br> - 仅SQL Server 支持该参数 (Optional)
+ * param force: 是否强制重启 <br>- 仅支持MySQL (Optional)
  */
 func NewRebootInstanceRequestWithAllParams(
     regionId string,
     instanceId string,
     rebootMaster *bool,
     rebootSlave *bool,
+    force *bool,
 ) *RebootInstanceRequest {
 
     return &RebootInstanceRequest{
@@ -84,6 +89,7 @@ func NewRebootInstanceRequestWithAllParams(
         InstanceId: instanceId,
         RebootMaster: rebootMaster,
         RebootSlave: rebootSlave,
+        Force: force,
     }
 }
 
@@ -118,6 +124,11 @@ func (r *RebootInstanceRequest) SetRebootMaster(rebootMaster bool) {
 /* param rebootSlave: 是否重启备节点。<br> - 仅SQL Server 支持该参数(Optional) */
 func (r *RebootInstanceRequest) SetRebootSlave(rebootSlave bool) {
     r.RebootSlave = &rebootSlave
+}
+
+/* param force: 是否强制重启 <br>- 仅支持MySQL(Optional) */
+func (r *RebootInstanceRequest) SetForce(force bool) {
+    r.Force = &force
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

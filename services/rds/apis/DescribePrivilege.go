@@ -32,6 +32,9 @@ type DescribePrivilegeRequest struct {
 
     /* RDS 实例ID，唯一标识一个RDS实例 (Optional) */
     InstanceId *string `json:"instanceId"`
+
+    /* true表示展示高权限，默认false (Optional) */
+    AllAdminPrivileges *bool `json:"allAdminPrivileges"`
 }
 
 /*
@@ -61,11 +64,13 @@ func NewDescribePrivilegeRequest(
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param engine: 设置可见的引擎类型，如 MySQL 等 (Required)
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Optional)
+ * param allAdminPrivileges: true表示展示高权限，默认false (Optional)
  */
 func NewDescribePrivilegeRequestWithAllParams(
     regionId string,
     engine string,
     instanceId *string,
+    allAdminPrivileges *bool,
 ) *DescribePrivilegeRequest {
 
     return &DescribePrivilegeRequest{
@@ -78,6 +83,7 @@ func NewDescribePrivilegeRequestWithAllParams(
         RegionId: regionId,
         Engine: engine,
         InstanceId: instanceId,
+        AllAdminPrivileges: allAdminPrivileges,
     }
 }
 
@@ -107,6 +113,11 @@ func (r *DescribePrivilegeRequest) SetEngine(engine string) {
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Optional) */
 func (r *DescribePrivilegeRequest) SetInstanceId(instanceId string) {
     r.InstanceId = &instanceId
+}
+
+/* param allAdminPrivileges: true表示展示高权限，默认false(Optional) */
+func (r *DescribePrivilegeRequest) SetAllAdminPrivileges(allAdminPrivileges bool) {
+    r.AllAdminPrivileges = &allAdminPrivileges
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

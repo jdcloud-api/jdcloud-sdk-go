@@ -25,6 +25,9 @@ type SmsTemplateVO struct {
     /* 申请状态 1申请中,2拒绝,3通过 (Optional) */
     ApplyStatus int `json:"applyStatus"`
 
+    /* 短信模板审核说明 (Optional) */
+    AuditorExplanation string `json:"auditorExplanation"`
+
     /* 创建时间 (Optional) */
     CreateTime string `json:"createTime"`
 

@@ -35,6 +35,9 @@ type DBInstanceAttribute struct {
     /* 实例引擎版本，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Optional) */
     EngineVersion string `json:"engineVersion"`
 
+    /* 实例引擎的小版本 (Optional) */
+    MinorVersion string `json:"minorVersion"`
+
     /* 实例规格代码 (Optional) */
     InstanceClass string `json:"instanceClass"`
 

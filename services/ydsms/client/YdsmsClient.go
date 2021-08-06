@@ -40,7 +40,7 @@ func NewYdsmsClient(credential *core.Credential) *YdsmsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "ydsms",
-            Revision:    "1.0.5",
+            Revision:    "1.0.6",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }

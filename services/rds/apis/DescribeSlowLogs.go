@@ -49,6 +49,9 @@ type DescribeSlowLogsRequest struct {
 
     /*  (Optional) */
     Filters []common.Filter `json:"filters"`
+
+    /* 排序参数，支持rowsExaminedSum、rowsSentSum、lockTimeSum、executionCount、executionTimeSum (Optional) */
+    Sorts []common.Sort `json:"sorts"`
 }
 
 /*
@@ -89,6 +92,7 @@ func NewDescribeSlowLogsRequest(
  * param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,1000)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页。 (Optional)
  * param pageSize: 每页显示的数据条数，默认为10，取值范围：10、20、30、50、100 (Optional)
  * param filters:  (Optional)
+ * param sorts: 排序参数，支持rowsExaminedSum、rowsSentSum、lockTimeSum、executionCount、executionTimeSum (Optional)
  */
 func NewDescribeSlowLogsRequestWithAllParams(
     regionId string,
@@ -99,6 +103,7 @@ func NewDescribeSlowLogsRequestWithAllParams(
     pageNumber *int,
     pageSize *int,
     filters []common.Filter,
+    sorts []common.Sort,
 ) *DescribeSlowLogsRequest {
 
     return &DescribeSlowLogsRequest{
@@ -116,6 +121,7 @@ func NewDescribeSlowLogsRequestWithAllParams(
         PageNumber: pageNumber,
         PageSize: pageSize,
         Filters: filters,
+        Sorts: sorts,
     }
 }
 
@@ -170,6 +176,11 @@ func (r *DescribeSlowLogsRequest) SetPageSize(pageSize int) {
 /* param filters: (Optional) */
 func (r *DescribeSlowLogsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
+}
+
+/* param sorts: 排序参数，支持rowsExaminedSum、rowsSentSum、lockTimeSum、executionCount、executionTimeSum(Optional) */
+func (r *DescribeSlowLogsRequest) SetSorts(sorts []common.Sort) {
+    r.Sorts = sorts
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

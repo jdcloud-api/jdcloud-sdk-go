@@ -31,6 +31,9 @@ type Database struct {
     /* 数据库创建时间，格式YYYY-MM-DD HH:mm:ss<br>- 仅支持SQL Server (Optional) */
     CreateTime string `json:"createTime"`
 
+    /* 数据库备注<br>- 仅支持MySQL (Optional) */
+    Comment string `json:"comment"`
+
     /* 该数据库相关账户权限列表 (Optional) */
     AccessPrivilege []DBAccessPrivilege `json:"accessPrivilege"`
 }

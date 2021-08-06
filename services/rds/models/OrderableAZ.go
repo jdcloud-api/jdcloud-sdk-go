@@ -17,17 +17,11 @@
 package models
 
 
-type DBInstanceAccountForOps struct {
+type OrderableAZ struct {
 
-    /* 运维账号的名称，默认为jcloud-ops-ro (Optional) */
-    AccountName string `json:"accountName"`
+    /* 可售卖的可用区ID，参见[地域及可用区对照表](../Enum-Definitions/Regions-AZ.md) (Optional) */
+    AzId []string `json:"azId"`
 
-    /* 运维账号创建时间，UTC时间格式 (Optional) */
-    CreateTime string `json:"createTime"`
-
-    /* 运维账号到期时间，UTC时间格式 (Optional) */
-    ExpiredTime string `json:"expiredTime"`
-
-    /* global权限 (Optional) */
-    GlobalPrivileges []string `json:"globalPrivileges"`
+    /* 可售卖的可用区状态，可能的返回值：0-售罄；1-可售卖 (Optional) */
+    AzStatus int `json:"azStatus"`
 }

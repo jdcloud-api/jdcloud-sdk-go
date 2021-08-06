@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    rds "github.com/jdcloud-api/jdcloud-sdk-go/services/rds/models"
 )
 
 type CreateROInstanceRequest struct {
@@ -62,6 +63,9 @@ type CreateROInstanceRequest struct {
 
     /* 只读代理服务的ID，缺省值为 “NULL”，表示不绑定代理服务 (Optional) */
     RoInstanceProxy *string `json:"roInstanceProxy"`
+
+    /* 标签信息 (Optional) */
+    TagSpec []rds.Tag `json:"tagSpec"`
 }
 
 /*
@@ -113,6 +117,7 @@ func NewCreateROInstanceRequest(
  * param storageEncrypted: 实例数据加密(存储类型为云硬盘才支持数据加密)。false：不加密；true：加密。缺省为false。 (Optional)
  * param count: 创建只读实例的数目,缺省为1 (Optional)
  * param roInstanceProxy: 只读代理服务的ID，缺省值为 “NULL”，表示不绑定代理服务 (Optional)
+ * param tagSpec: 标签信息 (Optional)
  */
 func NewCreateROInstanceRequestWithAllParams(
     regionId string,
@@ -128,6 +133,7 @@ func NewCreateROInstanceRequestWithAllParams(
     storageEncrypted *bool,
     count *int,
     roInstanceProxy *string,
+    tagSpec []rds.Tag,
 ) *CreateROInstanceRequest {
 
     return &CreateROInstanceRequest{
@@ -150,6 +156,7 @@ func NewCreateROInstanceRequestWithAllParams(
         StorageEncrypted: storageEncrypted,
         Count: count,
         RoInstanceProxy: roInstanceProxy,
+        TagSpec: tagSpec,
     }
 }
 
@@ -229,6 +236,11 @@ func (r *CreateROInstanceRequest) SetCount(count int) {
 /* param roInstanceProxy: 只读代理服务的ID，缺省值为 “NULL”，表示不绑定代理服务(Optional) */
 func (r *CreateROInstanceRequest) SetRoInstanceProxy(roInstanceProxy string) {
     r.RoInstanceProxy = &roInstanceProxy
+}
+
+/* param tagSpec: 标签信息(Optional) */
+func (r *CreateROInstanceRequest) SetTagSpec(tagSpec []rds.Tag) {
+    r.TagSpec = tagSpec
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
