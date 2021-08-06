@@ -20,7 +20,7 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type DescribeBackupPolicyRequest struct {
+type ModifyDatabaseCommentRequest struct {
 
     core.JDCloudRequest
 
@@ -29,59 +29,77 @@ type DescribeBackupPolicyRequest struct {
 
     /* RDS 实例ID，唯一标识一个RDS实例  */
     InstanceId string `json:"instanceId"`
+
+    /* 库名称  */
+    DbName string `json:"dbName"`
+
+    /* 数据库的备注信息，支持中午，ASCII字符，最大长度64  */
+    Comment string `json:"comment"`
 }
 
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
+ * param dbName: 库名称 (Required)
+ * param comment: 数据库的备注信息，支持中午，ASCII字符，最大长度64 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeBackupPolicyRequest(
+func NewModifyDatabaseCommentRequest(
     regionId string,
     instanceId string,
-) *DescribeBackupPolicyRequest {
+    dbName string,
+    comment string,
+) *ModifyDatabaseCommentRequest {
 
-	return &DescribeBackupPolicyRequest{
+	return &ModifyDatabaseCommentRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}:describeBackupPolicy",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/instances/{instanceId}/databases/{dbName}:modifyDatabaseComment",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         InstanceId: instanceId,
+        DbName: dbName,
+        Comment: comment,
 	}
 }
 
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
+ * param dbName: 库名称 (Required)
+ * param comment: 数据库的备注信息，支持中午，ASCII字符，最大长度64 (Required)
  */
-func NewDescribeBackupPolicyRequestWithAllParams(
+func NewModifyDatabaseCommentRequestWithAllParams(
     regionId string,
     instanceId string,
-) *DescribeBackupPolicyRequest {
+    dbName string,
+    comment string,
+) *ModifyDatabaseCommentRequest {
 
-    return &DescribeBackupPolicyRequest{
+    return &ModifyDatabaseCommentRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:describeBackupPolicy",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/instances/{instanceId}/databases/{dbName}:modifyDatabaseComment",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         InstanceId: instanceId,
+        DbName: dbName,
+        Comment: comment,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeBackupPolicyRequestWithoutParam() *DescribeBackupPolicyRequest {
+func NewModifyDatabaseCommentRequestWithoutParam() *ModifyDatabaseCommentRequest {
 
-    return &DescribeBackupPolicyRequest{
+    return &ModifyDatabaseCommentRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:describeBackupPolicy",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/instances/{instanceId}/databases/{dbName}:modifyDatabaseComment",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
@@ -89,34 +107,36 @@ func NewDescribeBackupPolicyRequestWithoutParam() *DescribeBackupPolicyRequest {
 }
 
 /* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
-func (r *DescribeBackupPolicyRequest) SetRegionId(regionId string) {
+func (r *ModifyDatabaseCommentRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
-func (r *DescribeBackupPolicyRequest) SetInstanceId(instanceId string) {
+func (r *ModifyDatabaseCommentRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
+}
+
+/* param dbName: 库名称(Required) */
+func (r *ModifyDatabaseCommentRequest) SetDbName(dbName string) {
+    r.DbName = dbName
+}
+
+/* param comment: 数据库的备注信息，支持中午，ASCII字符，最大长度64(Required) */
+func (r *ModifyDatabaseCommentRequest) SetComment(comment string) {
+    r.Comment = comment
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeBackupPolicyRequest) GetRegionId() string {
+func (r ModifyDatabaseCommentRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeBackupPolicyResponse struct {
+type ModifyDatabaseCommentResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeBackupPolicyResult `json:"result"`
+    Result ModifyDatabaseCommentResult `json:"result"`
 }
 
-type DescribeBackupPolicyResult struct {
-    StartWindow string `json:"startWindow"`
-    RetentionPeriod int `json:"retentionPeriod"`
-    BinlogRetentionPeriod int `json:"binlogRetentionPeriod"`
-    BinlogUsageLimit int `json:"binlogUsageLimit"`
-    BinlogSpaceProtection string `json:"binlogSpaceProtection"`
-    CycleMode int `json:"cycleMode"`
-    BackupBinlog string `json:"backupBinlog"`
-    EnhancedBackup string `json:"enhancedBackup"`
+type ModifyDatabaseCommentResult struct {
 }

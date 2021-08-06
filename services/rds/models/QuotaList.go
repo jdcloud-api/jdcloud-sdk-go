@@ -17,17 +17,14 @@
 package models
 
 
-type DBInstanceAccountForOps struct {
+type QuotaList struct {
 
-    /* 运维账号的名称，默认为jcloud-ops-ro (Optional) */
-    AccountName string `json:"accountName"`
+    /* 资源类型 (Optional) */
+    ResourceType string `json:"resourceType"`
 
-    /* 运维账号创建时间，UTC时间格式 (Optional) */
-    CreateTime string `json:"createTime"`
+    /* 已使用的配额数量 (Optional) */
+    Used int `json:"used"`
 
-    /* 运维账号到期时间，UTC时间格式 (Optional) */
-    ExpiredTime string `json:"expiredTime"`
-
-    /* global权限 (Optional) */
-    GlobalPrivileges []string `json:"globalPrivileges"`
+    /* 配额上限 (Optional) */
+    Max int `json:"max"`
 }

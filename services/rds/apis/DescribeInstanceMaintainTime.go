@@ -20,7 +20,7 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type DescribeBackupPolicyRequest struct {
+type DescribeInstanceMaintainTimeRequest struct {
 
     core.JDCloudRequest
 
@@ -37,14 +37,14 @@ type DescribeBackupPolicyRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeBackupPolicyRequest(
+func NewDescribeInstanceMaintainTimeRequest(
     regionId string,
     instanceId string,
-) *DescribeBackupPolicyRequest {
+) *DescribeInstanceMaintainTimeRequest {
 
-	return &DescribeBackupPolicyRequest{
+	return &DescribeInstanceMaintainTimeRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}:describeBackupPolicy",
+			URL:     "/regions/{regionId}/instances/{instanceId}:describeInstanceMaintainTime",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -58,14 +58,14 @@ func NewDescribeBackupPolicyRequest(
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
  */
-func NewDescribeBackupPolicyRequestWithAllParams(
+func NewDescribeInstanceMaintainTimeRequestWithAllParams(
     regionId string,
     instanceId string,
-) *DescribeBackupPolicyRequest {
+) *DescribeInstanceMaintainTimeRequest {
 
-    return &DescribeBackupPolicyRequest{
+    return &DescribeInstanceMaintainTimeRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:describeBackupPolicy",
+            URL:     "/regions/{regionId}/instances/{instanceId}:describeInstanceMaintainTime",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -76,11 +76,11 @@ func NewDescribeBackupPolicyRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeBackupPolicyRequestWithoutParam() *DescribeBackupPolicyRequest {
+func NewDescribeInstanceMaintainTimeRequestWithoutParam() *DescribeInstanceMaintainTimeRequest {
 
-    return &DescribeBackupPolicyRequest{
+    return &DescribeInstanceMaintainTimeRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:describeBackupPolicy",
+            URL:     "/regions/{regionId}/instances/{instanceId}:describeInstanceMaintainTime",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -89,34 +89,28 @@ func NewDescribeBackupPolicyRequestWithoutParam() *DescribeBackupPolicyRequest {
 }
 
 /* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
-func (r *DescribeBackupPolicyRequest) SetRegionId(regionId string) {
+func (r *DescribeInstanceMaintainTimeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
-func (r *DescribeBackupPolicyRequest) SetInstanceId(instanceId string) {
+func (r *DescribeInstanceMaintainTimeRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeBackupPolicyRequest) GetRegionId() string {
+func (r DescribeInstanceMaintainTimeRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeBackupPolicyResponse struct {
+type DescribeInstanceMaintainTimeResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeBackupPolicyResult `json:"result"`
+    Result DescribeInstanceMaintainTimeResult `json:"result"`
 }
 
-type DescribeBackupPolicyResult struct {
-    StartWindow string `json:"startWindow"`
-    RetentionPeriod int `json:"retentionPeriod"`
-    BinlogRetentionPeriod int `json:"binlogRetentionPeriod"`
-    BinlogUsageLimit int `json:"binlogUsageLimit"`
-    BinlogSpaceProtection string `json:"binlogSpaceProtection"`
-    CycleMode int `json:"cycleMode"`
-    BackupBinlog string `json:"backupBinlog"`
-    EnhancedBackup string `json:"enhancedBackup"`
+type DescribeInstanceMaintainTimeResult struct {
+    MaintainTime string `json:"maintainTime"`
+    MaintainPeriod []string `json:"maintainPeriod"`
 }

@@ -39,6 +39,9 @@ type ModifyBackupPolicyRequest struct {
     /* binlog本地占用空间上限，单位%，范围1-50 (Optional) */
     BinlogUsageLimit *int `json:"binlogUsageLimit"`
 
+    /* 设置空间保护，开启：on，关闭：off <br>- 仅支持MySQL (Optional) */
+    BinlogSpaceProtection *string `json:"binlogSpaceProtection"`
+
     /* 自动备份保留周期，单位天，范围7-730<br>当enhancedBackup为true时可修改<br>- 仅支持SQL Server (Optional) */
     RetentionPeriod *int `json:"retentionPeriod"`
 
@@ -75,6 +78,7 @@ func NewModifyBackupPolicyRequest(
  * param startWindow: 自动备份开始时间窗口,例如：00:00-01:00，表示0点到1点开始进行数据库自动备份，备份完成时间则跟实例大小有关，不一定在这个时间范围中<br>SQL Server:范围00:00-23:59，时间范围差不得小于30分钟。<br>MySQL,只能是以下取值:<br>00:00-01:00<br>01:00-02:00<br>......<br>23:00-24:00 (Optional)
  * param binlogRetentionPeriod: binlog本地保留周期，单位小时,范围1-168 (Optional)
  * param binlogUsageLimit: binlog本地占用空间上限，单位%，范围1-50 (Optional)
+ * param binlogSpaceProtection: 设置空间保护，开启：on，关闭：off <br>- 仅支持MySQL (Optional)
  * param retentionPeriod: 自动备份保留周期，单位天，范围7-730<br>当enhancedBackup为true时可修改<br>- 仅支持SQL Server (Optional)
  * param cycleMode: 自动备份循环模式<br>1：表示每天都是全量备份<br>2：表示自动备份按照全量、增量、增量这样的方式进行，例如第1天是全量备份，第2、3天是增量备份；第4天又是全量备份，以此类推<br>当enhancedBackup为true时可修改<br>- 仅支持SQL Server (Optional)
  */
@@ -84,6 +88,7 @@ func NewModifyBackupPolicyRequestWithAllParams(
     startWindow *string,
     binlogRetentionPeriod *int,
     binlogUsageLimit *int,
+    binlogSpaceProtection *string,
     retentionPeriod *int,
     cycleMode *int,
 ) *ModifyBackupPolicyRequest {
@@ -100,6 +105,7 @@ func NewModifyBackupPolicyRequestWithAllParams(
         StartWindow: startWindow,
         BinlogRetentionPeriod: binlogRetentionPeriod,
         BinlogUsageLimit: binlogUsageLimit,
+        BinlogSpaceProtection: binlogSpaceProtection,
         RetentionPeriod: retentionPeriod,
         CycleMode: cycleMode,
     }
@@ -141,6 +147,11 @@ func (r *ModifyBackupPolicyRequest) SetBinlogRetentionPeriod(binlogRetentionPeri
 /* param binlogUsageLimit: binlog本地占用空间上限，单位%，范围1-50(Optional) */
 func (r *ModifyBackupPolicyRequest) SetBinlogUsageLimit(binlogUsageLimit int) {
     r.BinlogUsageLimit = &binlogUsageLimit
+}
+
+/* param binlogSpaceProtection: 设置空间保护，开启：on，关闭：off <br>- 仅支持MySQL(Optional) */
+func (r *ModifyBackupPolicyRequest) SetBinlogSpaceProtection(binlogSpaceProtection string) {
+    r.BinlogSpaceProtection = &binlogSpaceProtection
 }
 
 /* param retentionPeriod: 自动备份保留周期，单位天，范围7-730<br>当enhancedBackup为true时可修改<br>- 仅支持SQL Server(Optional) */

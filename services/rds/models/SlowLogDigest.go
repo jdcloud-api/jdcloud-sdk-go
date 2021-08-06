@@ -22,6 +22,9 @@ type SlowLogDigest struct {
     /* 数据库名，表示该SQL是在哪个数据库中执行的 (Optional) */
     DbName string `json:"dbName"`
 
+    /* 数据库账号，表示该SQL是哪个数据库账号发起的 (Optional) */
+    User string `json:"user"`
+
     /* SQL语句 (Optional) */
     Sql string `json:"sql"`
 
@@ -30,6 +33,18 @@ type SlowLogDigest struct {
 
     /* SQL语句的执行次数 (Optional) */
     ExecutionCount int `json:"executionCount"`
+
+    /* 执行总时间 (Optional) */
+    ExecutionTimeSum float32 `json:"executionTimeSum"`
+
+    /* 扫描总行数 (Optional) */
+    RowsExaminedSum int `json:"rowsExaminedSum"`
+
+    /* 返回总行数 (Optional) */
+    RowsSentSum int `json:"rowsSentSum"`
+
+    /* 锁定总时间 (Optional) */
+    LockTimeSum float32 `json:"lockTimeSum"`
 
     /* SQL语句执行的时长，单位秒 (Optional) */
     ElapsedTime DigestData `json:"elapsedTime"`

@@ -61,4 +61,7 @@ type DBInstanceSpec struct {
 
     /* 实例的高可用架构。standalone：单机，cluster：主备双机架构，缺省为cluster<br>- 仅支持SQL Server (Optional) */
     InstanceType *string `json:"instanceType"`
+
+    /* 标签信息 (Optional) */
+    TagSpec []Tag `json:"tagSpec"`
 }

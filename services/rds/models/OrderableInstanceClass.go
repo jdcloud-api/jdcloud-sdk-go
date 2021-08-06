@@ -17,17 +17,23 @@
 package models
 
 
-type DBInstanceAccountForOps struct {
+type OrderableInstanceClass struct {
 
-    /* 运维账号的名称，默认为jcloud-ops-ro (Optional) */
-    AccountName string `json:"accountName"`
+    /* 可售卖的实例规格代码 (Optional) */
+    InstanceClass string `json:"instanceClass"`
 
-    /* 运维账号创建时间，UTC时间格式 (Optional) */
-    CreateTime string `json:"createTime"`
+    /* 实例规格族，可能的参数值：S1：标准型，C1：内存优化型 (Optional) */
+    InstanCluster string `json:"instanCluster"`
 
-    /* 运维账号到期时间，UTC时间格式 (Optional) */
-    ExpiredTime string `json:"expiredTime"`
+    /* cpu核数 (Optional) */
+    Cpu int `json:"cpu"`
 
-    /* global权限 (Optional) */
-    GlobalPrivileges []string `json:"globalPrivileges"`
+    /* 内存大小 (Optional) */
+    MemoryMB int `json:"memoryMB"`
+
+    /* 存储空间可取值类型；0：表示列表；1：表示区间 (Optional) */
+    InstanceStorageFieldType int `json:"instanceStorageFieldType"`
+
+    /* 磁盘，单位GB (Optional) */
+    InstanceStorageGB []int `json:"instanceStorageGB"`
 }

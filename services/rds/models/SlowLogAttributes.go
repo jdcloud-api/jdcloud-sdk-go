@@ -22,6 +22,9 @@ type SlowLogAttributes struct {
     /* 数据库名，表示该SQL是在哪个数据库中执行的 (Optional) */
     DbName string `json:"dbName"`
 
+    /* 数据库账号，表示该SQL是哪个数据库账号发起的 (Optional) */
+    User string `json:"user"`
+
     /* SQL语句 (Optional) */
     Sql string `json:"sql"`
 

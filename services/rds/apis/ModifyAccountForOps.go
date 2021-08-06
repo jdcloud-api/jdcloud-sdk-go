@@ -32,6 +32,9 @@ type ModifyAccountForOpsRequest struct {
 
     /* 运维账号到期时间，UTC时间格式 (Optional) */
     ExpiredTime *string `json:"expiredTime"`
+
+    /*  (Optional) */
+    GlobalPrivileges []string `json:"globalPrivileges"`
 }
 
 /*
@@ -61,11 +64,13 @@ func NewModifyAccountForOpsRequest(
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
  * param expiredTime: 运维账号到期时间，UTC时间格式 (Optional)
+ * param globalPrivileges:  (Optional)
  */
 func NewModifyAccountForOpsRequestWithAllParams(
     regionId string,
     instanceId string,
     expiredTime *string,
+    globalPrivileges []string,
 ) *ModifyAccountForOpsRequest {
 
     return &ModifyAccountForOpsRequest{
@@ -78,6 +83,7 @@ func NewModifyAccountForOpsRequestWithAllParams(
         RegionId: regionId,
         InstanceId: instanceId,
         ExpiredTime: expiredTime,
+        GlobalPrivileges: globalPrivileges,
     }
 }
 
@@ -107,6 +113,11 @@ func (r *ModifyAccountForOpsRequest) SetInstanceId(instanceId string) {
 /* param expiredTime: 运维账号到期时间，UTC时间格式(Optional) */
 func (r *ModifyAccountForOpsRequest) SetExpiredTime(expiredTime string) {
     r.ExpiredTime = &expiredTime
+}
+
+/* param globalPrivileges: (Optional) */
+func (r *ModifyAccountForOpsRequest) SetGlobalPrivileges(globalPrivileges []string) {
+    r.GlobalPrivileges = globalPrivileges
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

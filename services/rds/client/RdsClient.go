@@ -40,7 +40,7 @@ func NewRdsClient(credential *core.Credential) *RdsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "rds",
-            Revision:    "0.10.7",
+            Revision:    "1.1.6",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -68,6 +68,26 @@ func (c *RdsClient) DescribeAuditDownloadURL(request *rds.DescribeAuditDownloadU
     }
 
     jdResp := &rds.DescribeAuditDownloadURLResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改数据库备注，仅支持MySQL */
+func (c *RdsClient) ModifyDatabaseComment(request *rds.ModifyDatabaseCommentRequest) (*rds.ModifyDatabaseCommentResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.ModifyDatabaseCommentResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -397,6 +417,26 @@ func (c *RdsClient) ModifyInstanceSpec(request *rds.ModifyInstanceSpecRequest) (
     return jdResp, err
 }
 
+/* 修改实例的可维护时间。实例可维护时间段一般设置为业务的低峰时间段。京东云会在您设置的可维护时间段内进行实例维护，保证对业务的影响降到最低。 */
+func (c *RdsClient) ModifyInstanceMaintainTime(request *rds.ModifyInstanceMaintainTimeRequest) (*rds.ModifyInstanceMaintainTimeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.ModifyInstanceMaintainTimeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 删除一个跨地域备份同步服务。 */
 func (c *RdsClient) DeleteBackupSynchronicity(request *rds.DeleteBackupSynchronicityRequest) (*rds.DeleteBackupSynchronicityResponse, error) {
     if request == nil {
@@ -717,6 +757,26 @@ func (c *RdsClient) CreateDatabase(request *rds.CreateDatabaseRequest) (*rds.Cre
     return jdResp, err
 }
 
+/* 实例状态为变配待切换中，可执行，执行后，状态变为变配中 */
+func (c *RdsClient) SwitchForModifyingInstanceSpec(request *rds.SwitchForModifyingInstanceSpecRequest) (*rds.SwitchForModifyingInstanceSpecResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.SwitchForModifyingInstanceSpecResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 设置或取消上传文件是否共享给同一账号下的其他实例。缺省情况下，文件仅在上传的实例上可见并可导入，其他实例不可见不可导入。如果需要该文件在其他实例上也可导入，可将此文件设置为共享<br>- 仅支持SQL Server */
 func (c *RdsClient) SetImportFileShared(request *rds.SetImportFileSharedRequest) (*rds.SetImportFileSharedResponse, error) {
     if request == nil {
@@ -768,6 +828,26 @@ func (c *RdsClient) EnableSSL(request *rds.EnableSSLRequest) (*rds.EnableSSLResp
     }
 
     jdResp := &rds.EnableSSLResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取当前数据库可升级到的版本，仅支持MySQL */
+func (c *RdsClient) DescribeUpgradeVersions(request *rds.DescribeUpgradeVersionsRequest) (*rds.DescribeUpgradeVersionsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DescribeUpgradeVersionsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1957,6 +2037,26 @@ func (c *RdsClient) DescribeBackupCharge(request *rds.DescribeBackupChargeReques
     return jdResp, err
 }
 
+/* 查询实例的可维护时间 */
+func (c *RdsClient) DescribeInstanceMaintainTime(request *rds.DescribeInstanceMaintainTimeRequest) (*rds.DescribeInstanceMaintainTimeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DescribeInstanceMaintainTimeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 删除参数组<br>- 仅支持MySQL，Percona，MariaDB，PostgreSQL */
 func (c *RdsClient) DeleteParameterGroup(request *rds.DeleteParameterGroupRequest) (*rds.DeleteParameterGroupResponse, error) {
     if request == nil {
@@ -2048,6 +2148,26 @@ func (c *RdsClient) DeleteBackup(request *rds.DeleteBackupRequest) (*rds.DeleteB
     }
 
     jdResp := &rds.DeleteBackupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 升级引擎版本，例如从5.7.21 升级到5.7.24，仅支持MySQL */
+func (c *RdsClient) UpgradeEngineVersion(request *rds.UpgradeEngineVersionRequest) (*rds.UpgradeEngineVersionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.UpgradeEngineVersionResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2268,6 +2388,26 @@ func (c *RdsClient) CreateInstanceByTimeInCrossRegion(request *rds.CreateInstanc
     }
 
     jdResp := &rds.CreateInstanceByTimeInCrossRegionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询当前发起的数据库的升级计划，仅支持MySQL */
+func (c *RdsClient) DescribeUpgradePlan(request *rds.DescribeUpgradePlanRequest) (*rds.DescribeUpgradePlanResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DescribeUpgradePlanResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

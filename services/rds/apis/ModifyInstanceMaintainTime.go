@@ -20,7 +20,7 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type DescribeBackupPolicyRequest struct {
+type ModifyInstanceMaintainTimeRequest struct {
 
     core.JDCloudRequest
 
@@ -29,6 +29,12 @@ type DescribeBackupPolicyRequest struct {
 
     /* RDS 实例ID，唯一标识一个RDS实例  */
     InstanceId string `json:"instanceId"`
+
+    /* 实例的可维护时间段。格式：HH:mm-HH:mm，取值为一个小时整点 (Optional) */
+    MaintainTime *string `json:"maintainTime"`
+
+    /* 选择维护周期，可选择一周中的某一天或多天 (Optional) */
+    MaintainPeriod []string `json:"maintainPeriod"`
 }
 
 /*
@@ -37,15 +43,15 @@ type DescribeBackupPolicyRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeBackupPolicyRequest(
+func NewModifyInstanceMaintainTimeRequest(
     regionId string,
     instanceId string,
-) *DescribeBackupPolicyRequest {
+) *ModifyInstanceMaintainTimeRequest {
 
-	return &DescribeBackupPolicyRequest{
+	return &ModifyInstanceMaintainTimeRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}:describeBackupPolicy",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstanceMaintainTime",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
@@ -57,31 +63,37 @@ func NewDescribeBackupPolicyRequest(
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
+ * param maintainTime: 实例的可维护时间段。格式：HH:mm-HH:mm，取值为一个小时整点 (Optional)
+ * param maintainPeriod: 选择维护周期，可选择一周中的某一天或多天 (Optional)
  */
-func NewDescribeBackupPolicyRequestWithAllParams(
+func NewModifyInstanceMaintainTimeRequestWithAllParams(
     regionId string,
     instanceId string,
-) *DescribeBackupPolicyRequest {
+    maintainTime *string,
+    maintainPeriod []string,
+) *ModifyInstanceMaintainTimeRequest {
 
-    return &DescribeBackupPolicyRequest{
+    return &ModifyInstanceMaintainTimeRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:describeBackupPolicy",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstanceMaintainTime",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         InstanceId: instanceId,
+        MaintainTime: maintainTime,
+        MaintainPeriod: maintainPeriod,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeBackupPolicyRequestWithoutParam() *DescribeBackupPolicyRequest {
+func NewModifyInstanceMaintainTimeRequestWithoutParam() *ModifyInstanceMaintainTimeRequest {
 
-    return &DescribeBackupPolicyRequest{
+    return &ModifyInstanceMaintainTimeRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:describeBackupPolicy",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstanceMaintainTime",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
@@ -89,34 +101,36 @@ func NewDescribeBackupPolicyRequestWithoutParam() *DescribeBackupPolicyRequest {
 }
 
 /* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
-func (r *DescribeBackupPolicyRequest) SetRegionId(regionId string) {
+func (r *ModifyInstanceMaintainTimeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
-func (r *DescribeBackupPolicyRequest) SetInstanceId(instanceId string) {
+func (r *ModifyInstanceMaintainTimeRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
+}
+
+/* param maintainTime: 实例的可维护时间段。格式：HH:mm-HH:mm，取值为一个小时整点(Optional) */
+func (r *ModifyInstanceMaintainTimeRequest) SetMaintainTime(maintainTime string) {
+    r.MaintainTime = &maintainTime
+}
+
+/* param maintainPeriod: 选择维护周期，可选择一周中的某一天或多天(Optional) */
+func (r *ModifyInstanceMaintainTimeRequest) SetMaintainPeriod(maintainPeriod []string) {
+    r.MaintainPeriod = maintainPeriod
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeBackupPolicyRequest) GetRegionId() string {
+func (r ModifyInstanceMaintainTimeRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeBackupPolicyResponse struct {
+type ModifyInstanceMaintainTimeResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeBackupPolicyResult `json:"result"`
+    Result ModifyInstanceMaintainTimeResult `json:"result"`
 }
 
-type DescribeBackupPolicyResult struct {
-    StartWindow string `json:"startWindow"`
-    RetentionPeriod int `json:"retentionPeriod"`
-    BinlogRetentionPeriod int `json:"binlogRetentionPeriod"`
-    BinlogUsageLimit int `json:"binlogUsageLimit"`
-    BinlogSpaceProtection string `json:"binlogSpaceProtection"`
-    CycleMode int `json:"cycleMode"`
-    BackupBinlog string `json:"backupBinlog"`
-    EnhancedBackup string `json:"enhancedBackup"`
+type ModifyInstanceMaintainTimeResult struct {
 }

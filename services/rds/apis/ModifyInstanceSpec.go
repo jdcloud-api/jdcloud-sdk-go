@@ -44,6 +44,12 @@ type ModifyInstanceSpecRequest struct {
 
     /* 变配后的子网ID (Optional) */
     SubnetId *string `json:"subnetId"`
+
+    /* 生效时间，取值：<br>immediate：立即生效<br>maintainTime：在可维护时间段内生效。<br>postpone：延后生效。 (Optional) */
+    EffectiveTime *string `json:"effectiveTime"`
+
+    /* 延后生效的时间，单位为分钟。effectiveTime为postpone时必传，取值1-1440分钟 (Optional) */
+    PostponeTime *int `json:"postponeTime"`
 }
 
 /*
@@ -83,6 +89,8 @@ func NewModifyInstanceSpecRequest(
  * param newInstanceStorageType: 存储类型，如果不指定，默认会采用实例原存储类型. (Optional)
  * param storageEncrypted: 实例数据加密(存储类型为云硬盘才支持数据加密). false：不加密; true：加密. 如果实例从本地盘变为云硬盘，缺省为false. 如果实例本来就是使用云硬盘的，缺省和源实例保持一致 (Optional)
  * param subnetId: 变配后的子网ID (Optional)
+ * param effectiveTime: 生效时间，取值：<br>immediate：立即生效<br>maintainTime：在可维护时间段内生效。<br>postpone：延后生效。 (Optional)
+ * param postponeTime: 延后生效的时间，单位为分钟。effectiveTime为postpone时必传，取值1-1440分钟 (Optional)
  */
 func NewModifyInstanceSpecRequestWithAllParams(
     regionId string,
@@ -92,6 +100,8 @@ func NewModifyInstanceSpecRequestWithAllParams(
     newInstanceStorageType *string,
     storageEncrypted *bool,
     subnetId *string,
+    effectiveTime *string,
+    postponeTime *int,
 ) *ModifyInstanceSpecRequest {
 
     return &ModifyInstanceSpecRequest{
@@ -108,6 +118,8 @@ func NewModifyInstanceSpecRequestWithAllParams(
         NewInstanceStorageType: newInstanceStorageType,
         StorageEncrypted: storageEncrypted,
         SubnetId: subnetId,
+        EffectiveTime: effectiveTime,
+        PostponeTime: postponeTime,
     }
 }
 
@@ -157,6 +169,16 @@ func (r *ModifyInstanceSpecRequest) SetStorageEncrypted(storageEncrypted bool) {
 /* param subnetId: 变配后的子网ID(Optional) */
 func (r *ModifyInstanceSpecRequest) SetSubnetId(subnetId string) {
     r.SubnetId = &subnetId
+}
+
+/* param effectiveTime: 生效时间，取值：<br>immediate：立即生效<br>maintainTime：在可维护时间段内生效。<br>postpone：延后生效。(Optional) */
+func (r *ModifyInstanceSpecRequest) SetEffectiveTime(effectiveTime string) {
+    r.EffectiveTime = &effectiveTime
+}
+
+/* param postponeTime: 延后生效的时间，单位为分钟。effectiveTime为postpone时必传，取值1-1440分钟(Optional) */
+func (r *ModifyInstanceSpecRequest) SetPostponeTime(postponeTime int) {
+    r.PostponeTime = &postponeTime
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

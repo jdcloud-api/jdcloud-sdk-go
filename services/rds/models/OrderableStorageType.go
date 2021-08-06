@@ -17,17 +17,14 @@
 package models
 
 
-type DBInstanceAccountForOps struct {
+type OrderableStorageType struct {
 
-    /* 运维账号的名称，默认为jcloud-ops-ro (Optional) */
-    AccountName string `json:"accountName"`
+    /* 存储类型，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Optional) */
+    InstanceStorageType string `json:"instanceStorageType"`
 
-    /* 运维账号创建时间，UTC时间格式 (Optional) */
-    CreateTime string `json:"createTime"`
+    /* 存储可售卖状态。可能的返回值：0-售罄；1-可售卖 (Optional) */
+    StorageTypeStatus int `json:"storageTypeStatus"`
 
-    /* 运维账号到期时间，UTC时间格式 (Optional) */
-    ExpiredTime string `json:"expiredTime"`
-
-    /* global权限 (Optional) */
-    GlobalPrivileges []string `json:"globalPrivileges"`
+    /* 实例跨地域备份服务开启相关信息 (Optional) */
+    OrderableInstanceClasses []OrderableInstanceClass `json:"orderableInstanceClasses"`
 }
