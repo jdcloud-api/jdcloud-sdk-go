@@ -19,50 +19,65 @@ package models
 
 type InstanceTemplateSpec struct {
 
-    /* 实例规格，可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeinstancetypes">DescribeInstanceTypes</a>接口获得指定地域或可用区的规格信息。  */
+    /* 实例规格，可查询 [DescribeInstanceTypes](https://docs.jdcloud.com/virtual-machines/api/describeinstancetypes) 接口获得指定地域或可用区的规格信息。  */
     InstanceType string `json:"instanceType"`
 
-    /* 镜像ID，可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeimages">DescribeImages</a>接口获得指定地域的镜像信息。  */
+    /* 镜像ID，可查询 [DescribeImages](https://docs.jdcloud.com/virtual-machines/api/describeimages) 接口获得指定地域的镜像信息。  */
     ImageId string `json:"imageId"`
 
-    /* 密码，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional) */
+    /* 实例密码。可用于SSH登录和VNC登录。长度为8\~30个字符，必须同时包含大、小写英文字母、数字和特殊符号中的三类字符。特殊符号包括：\(\)\`~!@#$%^&\*\_-+=\|{}\[ ]:";'<>,.?/，更多密码输入要求请参见 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。
+如指定密钥且 `passwordAuth` 设置为 `true`，则密码不会生成注入，否则即使不指定密码系统也将默认自动生成随机密码，并以短信和邮件通知。
+ (Optional) */
     Password *string `json:"password"`
 
-    /* 密钥对名称；当前只支持一个 (Optional) */
+    /* 密钥对名称。仅Linux系统下该参数生效，当前仅支持输入单个密钥。 (Optional) */
     KeyNames []string `json:"keyNames"`
 
-    /* 用户自定义元数据信息，key-value 键值对数量不超过20。key、value不区分大小写。
+    /* 用户自定义元数据。以key-value键值对形式指定，可在实例系统内通过元数据服务查询获取。最多支持40对键值对，且key不超过256字符，value不超过16KB，不区分大小写。
 注意：key不要以连字符(-)结尾，否则此key不生效。
  (Optional) */
     Metadata []Metadata `json:"metadata"`
 
-    /* 元数据信息，目前只支持传入一个key为"launch-script"，表示首次启动脚本。value为base64格式。
-launch-script：linux系统支持bash和python，编码前须分别以 #!/bin/bash 和 #!/usr/bin/env python 作为内容首行;
-launch-script：windows系统支持bat和powershell，编码前须分别以 <cmd></cmd> 和 <powershell></powershell> 作为内容首、尾行。
+    /* 自定义脚本。目前仅支持启动脚本，即 `launch-script`，须 `base64` 编码且编码前数据长度不能超过16KB。
+**linux系统**：支持 `bash` 和 `python`，编码前须分别以 `#!/bin/bash` 和 `#!/usr/bin/env python` 作为内容首行。
+**Windows系统**：支持 `bat` 和 `powershell`，编码前须分别以 `<cmd></cmd>和<powershell></powershell>` 作为内容首、尾行。
  (Optional) */
     Userdata []Userdata `json:"userdata"`
 
-    /* 主网卡主IP关联的弹性IP规格 (Optional) */
+    /* 主网卡主IP关联的弹性公网IP配置。 (Optional) */
     ElasticIp *InstanceTemplateElasticIpSpec `json:"elasticIp"`
 
-    /* 主网卡配置信息  */
+    /* 主网卡配置。  */
     PrimaryNetworkInterface *InstanceTemplateNetworkInterfaceAttachmentSpec `json:"primaryNetworkInterface"`
 
-    /* 系统盘配置信息 (Optional) */
+    /* 系统盘配置。 (Optional) */
     SystemDisk *InstanceTemplateDiskAttachmentSpec `json:"systemDisk"`
 
-    /* 数据盘配置信息 (Optional) */
+    /* 数据盘配置。单实例最多可挂载云硬盘（系统盘+数据盘）的数量受实例规格的限制。 (Optional) */
     DataDisks []InstanceTemplateDiskAttachmentSpec `json:"dataDisks"`
 
-    /* 停机不计费的标志， keepCharging(默认)：关机后继续计费；stopCharging：关机后停止计费。 (Optional) */
+    /* 停机不计费模式。该参数仅对按配置计费且系统盘为云硬盘的实例生效，并且不是专有宿主机中的实例。配置停机不计费且停机后，实例部分将停止计费，且释放实例自身包含的资源（CPU/内存/GPU/本地数据盘）。
+可选值：
+`keepCharging`（默认值）：停机后保持计费，不释放资源。
+`stopCharging`：停机后停止计费，释放实例资源。
+ (Optional) */
     ChargeOnStopped *string `json:"chargeOnStopped"`
 
-    /* 自动镜像策略ID。 (Optional) */
+    /* 自动任务策略ID。 (Optional) */
     AutoImagePolicyId *string `json:"autoImagePolicyId"`
 
-    /* 当存在密钥时，是否同时使用密码登录，"yes"为使用，"no"为不使用，""默认为"yes" (Optional) */
+    /* 允许SSH密码登录。
+可选值：
+`yes`（默认值）：允许SSH密码登录。
+`no`：禁止SSH密码登录。
+仅在指定密钥时此参数有效，指定此参数后密码即使输入也将被忽略，同时会在系统内禁用SSH密码登录。
+ (Optional) */
     PassWordAuth *string `json:"passWordAuth"`
 
-    /* 继承镜像中的登录验证方式，"yes"为使用，"no"为不使用，""默认为"no" (Optional) */
+    /* 使用镜像中的登录凭证，无须再指定密码或密钥（指定无效）。
+可选值：
+`yes`：使用镜像登录凭证。
+`no`（默认值）：不使用镜像登录凭证。
+仅使用私有或共享镜像时此参数有效。 (Optional) */
     ImageInherit *string `json:"imageInherit"`
 }

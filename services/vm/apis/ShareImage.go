@@ -24,20 +24,20 @@ type ShareImageRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID  */
+    /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 镜像ID  */
+    /* 镜像ID。  */
     ImageId string `json:"imageId"`
 
-    /* 需要共享的帐户  */
+    /* 共享的目标京东云帐户列表。  */
     Pins []string `json:"pins"`
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param imageId: 镜像ID (Required)
- * param pins: 需要共享的帐户 (Required)
+ * param regionId: 地域ID。 (Required)
+ * param imageId: 镜像ID。 (Required)
+ * param pins: 共享的目标京东云帐户列表。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -61,9 +61,9 @@ func NewShareImageRequest(
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param imageId: 镜像ID (Required)
- * param pins: 需要共享的帐户 (Required)
+ * param regionId: 地域ID。 (Required)
+ * param imageId: 镜像ID。 (Required)
+ * param pins: 共享的目标京东云帐户列表。 (Required)
  */
 func NewShareImageRequestWithAllParams(
     regionId string,
@@ -97,17 +97,17 @@ func NewShareImageRequestWithoutParam() *ShareImageRequest {
     }
 }
 
-/* param regionId: 地域ID(Required) */
+/* param regionId: 地域ID。(Required) */
 func (r *ShareImageRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param imageId: 镜像ID(Required) */
+/* param imageId: 镜像ID。(Required) */
 func (r *ShareImageRequest) SetImageId(imageId string) {
     r.ImageId = imageId
 }
 
-/* param pins: 需要共享的帐户(Required) */
+/* param pins: 共享的目标京东云帐户列表。(Required) */
 func (r *ShareImageRequest) SetPins(pins []string) {
     r.Pins = pins
 }

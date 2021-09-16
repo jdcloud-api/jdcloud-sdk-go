@@ -24,16 +24,16 @@ type RebootInstanceRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID  */
+    /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 云主机ID  */
+    /* 云主机ID。  */
     InstanceId string `json:"instanceId"`
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param instanceId: 云主机ID (Required)
+ * param regionId: 地域ID。 (Required)
+ * param instanceId: 云主机ID。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -55,8 +55,8 @@ func NewRebootInstanceRequest(
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param instanceId: 云主机ID (Required)
+ * param regionId: 地域ID。 (Required)
+ * param instanceId: 云主机ID。 (Required)
  */
 func NewRebootInstanceRequestWithAllParams(
     regionId string,
@@ -88,12 +88,12 @@ func NewRebootInstanceRequestWithoutParam() *RebootInstanceRequest {
     }
 }
 
-/* param regionId: 地域ID(Required) */
+/* param regionId: 地域ID。(Required) */
 func (r *RebootInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 云主机ID(Required) */
+/* param instanceId: 云主机ID。(Required) */
 func (r *RebootInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }

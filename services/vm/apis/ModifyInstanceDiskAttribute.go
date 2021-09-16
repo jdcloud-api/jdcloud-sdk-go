@@ -25,19 +25,19 @@ type ModifyInstanceDiskAttributeRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID  */
+    /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 云主机ID  */
+    /* 云主机ID。  */
     InstanceId string `json:"instanceId"`
 
-    /* 云硬盘列表 (Optional) */
+    /* 云硬盘列表。 (Optional) */
     DataDisks []vm.InstanceDiskAttribute `json:"dataDisks"`
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param instanceId: 云主机ID (Required)
+ * param regionId: 地域ID。 (Required)
+ * param instanceId: 云主机ID。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -59,9 +59,9 @@ func NewModifyInstanceDiskAttributeRequest(
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param instanceId: 云主机ID (Required)
- * param dataDisks: 云硬盘列表 (Optional)
+ * param regionId: 地域ID。 (Required)
+ * param instanceId: 云主机ID。 (Required)
+ * param dataDisks: 云硬盘列表。 (Optional)
  */
 func NewModifyInstanceDiskAttributeRequestWithAllParams(
     regionId string,
@@ -95,17 +95,17 @@ func NewModifyInstanceDiskAttributeRequestWithoutParam() *ModifyInstanceDiskAttr
     }
 }
 
-/* param regionId: 地域ID(Required) */
+/* param regionId: 地域ID。(Required) */
 func (r *ModifyInstanceDiskAttributeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 云主机ID(Required) */
+/* param instanceId: 云主机ID。(Required) */
 func (r *ModifyInstanceDiskAttributeRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param dataDisks: 云硬盘列表(Optional) */
+/* param dataDisks: 云硬盘列表。(Optional) */
 func (r *ModifyInstanceDiskAttributeRequest) SetDataDisks(dataDisks []vm.InstanceDiskAttribute) {
     r.DataDisks = dataDisks
 }

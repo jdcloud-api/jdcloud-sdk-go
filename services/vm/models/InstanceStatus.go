@@ -19,9 +19,9 @@ package models
 
 type InstanceStatus struct {
 
-    /* 云主机ID (Optional) */
+    /* 云主机ID。 (Optional) */
     InstanceId string `json:"instanceId"`
 
-    /* <a href="http://docs.jdcloud.com/virtual-machines/api/vm_status">参考云主机状态</a> (Optional) */
+    /* 云主机状态，参考 [云主机状态](https://docs.jdcloud.com/virtual-machines/api/vm_status)。 (Optional) */
     Status string `json:"status"`
 }

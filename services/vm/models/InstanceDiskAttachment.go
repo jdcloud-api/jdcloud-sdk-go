@@ -20,27 +20,31 @@ import disk "github.com/jdcloud-api/jdcloud-sdk-go/services/disk/models"
 
 type InstanceDiskAttachment struct {
 
-    /* 磁盘分类，取值为本地盘(local)或者数据盘(cloud)。
-系统盘支持本地盘(local)或者云硬盘(cloud)。系统盘选择local类型，必须使用localDisk类型的镜像；同理系统盘选择cloud类型，必须使用cloudDisk类型的镜像。
-数据盘仅支持云硬盘(cloud)。
+    /* 磁盘类型。
+**系统盘**：取值为：`local` 本地系统盘 或 `cloud` 云盘系统盘。
+**数据盘**：取值为：`local` 本地数据盘 或 `cloud` 云盘数据盘。
  (Optional) */
     DiskCategory string `json:"diskCategory"`
 
-    /* 随云主机一起删除，删除主机时自动删除此磁盘，默认为true，本地盘(local)不能更改此值。
-如果云主机中的数据盘(cloud)是包年包月计费方式，此参数不生效。
-如果云主机中的数据盘(cloud)是共享型数据盘，此参数不生效。
+    /* 是否随实例一起删除，即删除实例时是否自动删除此磁盘。此参数仅对按配置计费的非多点挂载云硬盘生效。
+`true`：随实例删除。
+`false`：不随实例删除。
  (Optional) */
     AutoDelete bool `json:"autoDelete"`
 
-    /* 本地磁盘配置 (Optional) */
+    /* 本地磁盘配置，对应 `diskCategory=local`。 (Optional) */
     LocalDisk LocalDisk `json:"localDisk"`
 
-    /* 云硬盘配置 (Optional) */
+    /* 云硬盘配置，对应 `diskCategory=cloud`。 (Optional) */
     CloudDisk disk.Disk `json:"cloudDisk"`
 
-    /* 数据盘逻辑挂载点，取值范围：vda,vdb,vdc,vdd,vde,vdf,vdg,vdh,vdi,vmj,vdk,vdl,vdm (Optional) */
+    /* 磁盘逻辑挂载点。
+**系统盘**：默认为vda。
+**数据盘**：取值范围：`[vdb~vdbm]`。
+ (Optional) */
     DeviceName string `json:"deviceName"`
 
-    /* 数据盘挂载状态，取值范围：attaching,detaching,attached,detached,error_attach,error_detach (Optional) */
+    /* 磁盘挂载状态。
+取值范围：`attaching、detaching、attached、detached、error_attach、error_detach`。 (Optional) */
     Status string `json:"status"`
 }

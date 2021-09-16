@@ -24,25 +24,29 @@ type AttachKeypairRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID  */
+    /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 密钥名称  */
+    /* 密钥名称。  */
     KeyName string `json:"keyName"`
 
-    /* 虚机Id  */
+    /* 要绑定的云主机Id列表。  */
     InstanceIds []string `json:"instanceIds"`
 
-    /* 密码授权，绑定密钥后，根据此参数决定是否使用密码登录，"yes"为使用，"no"为不使用
+    /* 绑定密钥后，根据此参数决定是否允许使用密码登录。可选范围：
+`yes`：允许SSH密码登录。
+`no`：禁止SSH密码登录。
   */
     PassWordAuth string `json:"passWordAuth"`
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param keyName: 密钥名称 (Required)
- * param instanceIds: 虚机Id (Required)
- * param passWordAuth: 密码授权，绑定密钥后，根据此参数决定是否使用密码登录，"yes"为使用，"no"为不使用
+ * param regionId: 地域ID。 (Required)
+ * param keyName: 密钥名称。 (Required)
+ * param instanceIds: 要绑定的云主机Id列表。 (Required)
+ * param passWordAuth: 绑定密钥后，根据此参数决定是否允许使用密码登录。可选范围：
+`yes`：允许SSH密码登录。
+`no`：禁止SSH密码登录。
  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -69,10 +73,12 @@ func NewAttachKeypairRequest(
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param keyName: 密钥名称 (Required)
- * param instanceIds: 虚机Id (Required)
- * param passWordAuth: 密码授权，绑定密钥后，根据此参数决定是否使用密码登录，"yes"为使用，"no"为不使用
+ * param regionId: 地域ID。 (Required)
+ * param keyName: 密钥名称。 (Required)
+ * param instanceIds: 要绑定的云主机Id列表。 (Required)
+ * param passWordAuth: 绑定密钥后，根据此参数决定是否允许使用密码登录。可选范围：
+`yes`：允许SSH密码登录。
+`no`：禁止SSH密码登录。
  (Required)
  */
 func NewAttachKeypairRequestWithAllParams(
@@ -109,22 +115,24 @@ func NewAttachKeypairRequestWithoutParam() *AttachKeypairRequest {
     }
 }
 
-/* param regionId: 地域ID(Required) */
+/* param regionId: 地域ID。(Required) */
 func (r *AttachKeypairRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param keyName: 密钥名称(Required) */
+/* param keyName: 密钥名称。(Required) */
 func (r *AttachKeypairRequest) SetKeyName(keyName string) {
     r.KeyName = keyName
 }
 
-/* param instanceIds: 虚机Id(Required) */
+/* param instanceIds: 要绑定的云主机Id列表。(Required) */
 func (r *AttachKeypairRequest) SetInstanceIds(instanceIds []string) {
     r.InstanceIds = instanceIds
 }
 
-/* param passWordAuth: 密码授权，绑定密钥后，根据此参数决定是否使用密码登录，"yes"为使用，"no"为不使用
+/* param passWordAuth: 绑定密钥后，根据此参数决定是否允许使用密码登录。可选范围：
+`yes`：允许SSH密码登录。
+`no`：禁止SSH密码登录。
 (Required) */
 func (r *AttachKeypairRequest) SetPassWordAuth(passWordAuth string) {
     r.PassWordAuth = passWordAuth

@@ -24,20 +24,28 @@ type ModifyInstancePasswordRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID  */
+    /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 云主机ID  */
+    /* 云主机ID。  */
     InstanceId string `json:"instanceId"`
 
-    /* 密码，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。  */
+    /* 实例密码。
+可用于SSH登录和VNC登录。
+长度为8\~30个字符，必须同时包含大、小写英文字母、数字和特殊符号中的三类字符。特殊符号包括：`\(\)\`~!@#$%^&\*\_-+=\|{}\[ ]:";'<>,.?/，`。
+更多密码输入要求请参见 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。
+  */
     Password string `json:"password"`
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param instanceId: 云主机ID (Required)
- * param password: 密码，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Required)
+ * param regionId: 地域ID。 (Required)
+ * param instanceId: 云主机ID。 (Required)
+ * param password: 实例密码。
+可用于SSH登录和VNC登录。
+长度为8\~30个字符，必须同时包含大、小写英文字母、数字和特殊符号中的三类字符。特殊符号包括：`\(\)\`~!@#$%^&\*\_-+=\|{}\[ ]:";'<>,.?/，`。
+更多密码输入要求请参见 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。
+ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -61,9 +69,13 @@ func NewModifyInstancePasswordRequest(
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param instanceId: 云主机ID (Required)
- * param password: 密码，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Required)
+ * param regionId: 地域ID。 (Required)
+ * param instanceId: 云主机ID。 (Required)
+ * param password: 实例密码。
+可用于SSH登录和VNC登录。
+长度为8\~30个字符，必须同时包含大、小写英文字母、数字和特殊符号中的三类字符。特殊符号包括：`\(\)\`~!@#$%^&\*\_-+=\|{}\[ ]:";'<>,.?/，`。
+更多密码输入要求请参见 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。
+ (Required)
  */
 func NewModifyInstancePasswordRequestWithAllParams(
     regionId string,
@@ -97,17 +109,21 @@ func NewModifyInstancePasswordRequestWithoutParam() *ModifyInstancePasswordReque
     }
 }
 
-/* param regionId: 地域ID(Required) */
+/* param regionId: 地域ID。(Required) */
 func (r *ModifyInstancePasswordRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 云主机ID(Required) */
+/* param instanceId: 云主机ID。(Required) */
 func (r *ModifyInstancePasswordRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param password: 密码，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。(Required) */
+/* param password: 实例密码。
+可用于SSH登录和VNC登录。
+长度为8\~30个字符，必须同时包含大、小写英文字母、数字和特殊符号中的三类字符。特殊符号包括：`\(\)\`~!@#$%^&\*\_-+=\|{}\[ ]:";'<>,.?/，`。
+更多密码输入要求请参见 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。
+(Required) */
 func (r *ModifyInstancePasswordRequest) SetPassword(password string) {
     r.Password = password
 }

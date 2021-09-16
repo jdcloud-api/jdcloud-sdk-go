@@ -24,19 +24,25 @@ type StopInstanceRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID  */
+    /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 云主机ID  */
+    /* 云主机ID。  */
     InstanceId string `json:"instanceId"`
 
-    /* 关机模式，只支持云盘做系统盘的按配置计费云主机keepCharging：关机后继续计费；stopCharging：关机后停止计费。 (Optional) */
+    /* 停机不计费模式。
+该参数仅对按配置计费且系统盘为云硬盘的实例生效，并且不是专有宿主机中的实例。
+配置停机不计费且停机后，实例部分将停止计费，且释放实例自身包含的资源（CPU/内存/GPU/本地数据盘）。
+可选值：
+`keepCharging`：停机后保持计费，不释放资源。
+`stopCharging`：停机后停止计费，释放实例资源。默认值为空。
+ (Optional) */
     ChargeOnStopped *string `json:"chargeOnStopped"`
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param instanceId: 云主机ID (Required)
+ * param regionId: 地域ID。 (Required)
+ * param instanceId: 云主机ID。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -58,9 +64,15 @@ func NewStopInstanceRequest(
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param instanceId: 云主机ID (Required)
- * param chargeOnStopped: 关机模式，只支持云盘做系统盘的按配置计费云主机keepCharging：关机后继续计费；stopCharging：关机后停止计费。 (Optional)
+ * param regionId: 地域ID。 (Required)
+ * param instanceId: 云主机ID。 (Required)
+ * param chargeOnStopped: 停机不计费模式。
+该参数仅对按配置计费且系统盘为云硬盘的实例生效，并且不是专有宿主机中的实例。
+配置停机不计费且停机后，实例部分将停止计费，且释放实例自身包含的资源（CPU/内存/GPU/本地数据盘）。
+可选值：
+`keepCharging`：停机后保持计费，不释放资源。
+`stopCharging`：停机后停止计费，释放实例资源。默认值为空。
+ (Optional)
  */
 func NewStopInstanceRequestWithAllParams(
     regionId string,
@@ -94,17 +106,23 @@ func NewStopInstanceRequestWithoutParam() *StopInstanceRequest {
     }
 }
 
-/* param regionId: 地域ID(Required) */
+/* param regionId: 地域ID。(Required) */
 func (r *StopInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 云主机ID(Required) */
+/* param instanceId: 云主机ID。(Required) */
 func (r *StopInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param chargeOnStopped: 关机模式，只支持云盘做系统盘的按配置计费云主机keepCharging：关机后继续计费；stopCharging：关机后停止计费。(Optional) */
+/* param chargeOnStopped: 停机不计费模式。
+该参数仅对按配置计费且系统盘为云硬盘的实例生效，并且不是专有宿主机中的实例。
+配置停机不计费且停机后，实例部分将停止计费，且释放实例自身包含的资源（CPU/内存/GPU/本地数据盘）。
+可选值：
+`keepCharging`：停机后保持计费，不释放资源。
+`stopCharging`：停机后停止计费，释放实例资源。默认值为空。
+(Optional) */
 func (r *StopInstanceRequest) SetChargeOnStopped(chargeOnStopped string) {
     r.ChargeOnStopped = &chargeOnStopped
 }

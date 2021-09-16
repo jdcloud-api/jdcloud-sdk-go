@@ -25,16 +25,16 @@ type DescribeInstanceTemplateRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID  */
+    /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 启动模板ID  */
+    /* 实例模板ID。  */
     InstanceTemplateId string `json:"instanceTemplateId"`
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param instanceTemplateId: 启动模板ID (Required)
+ * param regionId: 地域ID。 (Required)
+ * param instanceTemplateId: 实例模板ID。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -56,8 +56,8 @@ func NewDescribeInstanceTemplateRequest(
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param instanceTemplateId: 启动模板ID (Required)
+ * param regionId: 地域ID。 (Required)
+ * param instanceTemplateId: 实例模板ID。 (Required)
  */
 func NewDescribeInstanceTemplateRequestWithAllParams(
     regionId string,
@@ -89,12 +89,12 @@ func NewDescribeInstanceTemplateRequestWithoutParam() *DescribeInstanceTemplateR
     }
 }
 
-/* param regionId: 地域ID(Required) */
+/* param regionId: 地域ID。(Required) */
 func (r *DescribeInstanceTemplateRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceTemplateId: 启动模板ID(Required) */
+/* param instanceTemplateId: 实例模板ID。(Required) */
 func (r *DescribeInstanceTemplateRequest) SetInstanceTemplateId(instanceTemplateId string) {
     r.InstanceTemplateId = instanceTemplateId
 }

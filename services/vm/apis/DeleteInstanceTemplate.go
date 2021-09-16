@@ -24,16 +24,16 @@ type DeleteInstanceTemplateRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID  */
+    /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 启动模板ID  */
+    /* 实例模板ID。  */
     InstanceTemplateId string `json:"instanceTemplateId"`
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param instanceTemplateId: 启动模板ID (Required)
+ * param regionId: 地域ID。 (Required)
+ * param instanceTemplateId: 实例模板ID。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -55,8 +55,8 @@ func NewDeleteInstanceTemplateRequest(
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param instanceTemplateId: 启动模板ID (Required)
+ * param regionId: 地域ID。 (Required)
+ * param instanceTemplateId: 实例模板ID。 (Required)
  */
 func NewDeleteInstanceTemplateRequestWithAllParams(
     regionId string,
@@ -88,12 +88,12 @@ func NewDeleteInstanceTemplateRequestWithoutParam() *DeleteInstanceTemplateReque
     }
 }
 
-/* param regionId: 地域ID(Required) */
+/* param regionId: 地域ID。(Required) */
 func (r *DeleteInstanceTemplateRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceTemplateId: 启动模板ID(Required) */
+/* param instanceTemplateId: 实例模板ID。(Required) */
 func (r *DeleteInstanceTemplateRequest) SetInstanceTemplateId(instanceTemplateId string) {
     r.InstanceTemplateId = instanceTemplateId
 }

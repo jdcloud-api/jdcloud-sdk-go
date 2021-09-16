@@ -24,28 +24,30 @@ type UpdateInstanceTemplateRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID  */
+    /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 启动模板ID  */
+    /* 实例模板ID。  */
     InstanceTemplateId string `json:"instanceTemplateId"`
 
-    /* 模板描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional) */
-    Description *string `json:"description"`
+    /* 实例模板的名称，参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。  */
+    Name string `json:"name"`
 
-    /* 模板名称，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional) */
-    Name *string `json:"name"`
+    /* 实例模板的描述，参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。 (Optional) */
+    Description *string `json:"description"`
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param instanceTemplateId: 启动模板ID (Required)
+ * param regionId: 地域ID。 (Required)
+ * param instanceTemplateId: 实例模板ID。 (Required)
+ * param name: 实例模板的名称，参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewUpdateInstanceTemplateRequest(
     regionId string,
     instanceTemplateId string,
+    name string,
 ) *UpdateInstanceTemplateRequest {
 
 	return &UpdateInstanceTemplateRequest{
@@ -57,20 +59,21 @@ func NewUpdateInstanceTemplateRequest(
 		},
         RegionId: regionId,
         InstanceTemplateId: instanceTemplateId,
+        Name: name,
 	}
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param instanceTemplateId: 启动模板ID (Required)
- * param description: 模板描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional)
- * param name: 模板名称，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional)
+ * param regionId: 地域ID。 (Required)
+ * param instanceTemplateId: 实例模板ID。 (Required)
+ * param name: 实例模板的名称，参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。 (Required)
+ * param description: 实例模板的描述，参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。 (Optional)
  */
 func NewUpdateInstanceTemplateRequestWithAllParams(
     regionId string,
     instanceTemplateId string,
+    name string,
     description *string,
-    name *string,
 ) *UpdateInstanceTemplateRequest {
 
     return &UpdateInstanceTemplateRequest{
@@ -82,8 +85,8 @@ func NewUpdateInstanceTemplateRequestWithAllParams(
         },
         RegionId: regionId,
         InstanceTemplateId: instanceTemplateId,
-        Description: description,
         Name: name,
+        Description: description,
     }
 }
 
@@ -100,24 +103,24 @@ func NewUpdateInstanceTemplateRequestWithoutParam() *UpdateInstanceTemplateReque
     }
 }
 
-/* param regionId: 地域ID(Required) */
+/* param regionId: 地域ID。(Required) */
 func (r *UpdateInstanceTemplateRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceTemplateId: 启动模板ID(Required) */
+/* param instanceTemplateId: 实例模板ID。(Required) */
 func (r *UpdateInstanceTemplateRequest) SetInstanceTemplateId(instanceTemplateId string) {
     r.InstanceTemplateId = instanceTemplateId
 }
 
-/* param description: 模板描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。(Optional) */
-func (r *UpdateInstanceTemplateRequest) SetDescription(description string) {
-    r.Description = &description
+/* param name: 实例模板的名称，参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。(Required) */
+func (r *UpdateInstanceTemplateRequest) SetName(name string) {
+    r.Name = name
 }
 
-/* param name: 模板名称，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。(Optional) */
-func (r *UpdateInstanceTemplateRequest) SetName(name string) {
-    r.Name = &name
+/* param description: 实例模板的描述，参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。(Optional) */
+func (r *UpdateInstanceTemplateRequest) SetDescription(description string) {
+    r.Description = &description
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

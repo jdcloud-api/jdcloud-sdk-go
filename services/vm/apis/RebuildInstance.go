@@ -25,44 +25,53 @@ type RebuildInstanceRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID  */
+    /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 云主机ID  */
+    /* 云主机ID。  */
     InstanceId string `json:"instanceId"`
 
-    /* 云主机密码，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional) */
+    /* 实例密码。
+可用于SSH登录和VNC登录。
+长度为8\~30个字符，必须同时包含大、小写英文字母、数字和特殊符号中的三类字符。特殊符号包括：`\(\)\`~!@#$%^&\*\_-+=\|{}\[ ]:";'<>,.?/，`。
+更多密码输入要求请参见 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。
+ (Optional) */
     Password *string `json:"password"`
 
-    /* 镜像ID。可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeimages">DescribeImages</a>接口获得指定地域的镜像信息。 (Optional) */
+    /* 镜像ID。
+若不指定镜像ID，默认使用当前主机的原镜像重置系统。
+可查询 [DescribeImages](https://docs.jdcloud.com/virtual-machines/api/describeimages) 接口获得指定地域的镜像信息。
+ (Optional) */
     ImageId *string `json:"imageId"`
 
-    /* 密钥对名称；当前只支持一个。仅Linux系统支持指定。 (Optional) */
+    /* 密钥对名称。仅Linux系统下该参数生效，当前仅支持输入单个密钥。
+ (Optional) */
     KeyNames []string `json:"keyNames"`
 
-    /* 云主机hostname，若不指定hostname，则hostname默认使用云主机重置前的hostname
-Windows Server系统：长度为2-15个字符，允许大小写字母、数字或连字符（-）。不能以连字符（-）开头或结尾，不能连续使用连字符（-），也不能全部使用数字。不支持点号（.）。
-Linux系统：长度为2-64个字符，允许支持多个点号，点之间为一段，每段允许使用大小写字母、数字或连字符（-），但不能连续使用点号（.）或连字符（-），不能以点号（.）或连字符（-）开头或结尾。
+    /* 实例hostname。
+若不指定hostname，则默认以实例名称`name`作为hostname，但是会以RFC 952和RFC 1123命名规范做一定转义。
+**Windows系统**：长度为2\~15个字符，允许大小写字母、数字或连字符（-），不能以连字符（-）开头或结尾，不能连续使用连字符（-），也不能全部使用数字。不支持点号（.）。
+**Linux系统**：长度为2-64个字符，允许支持多个点号，点之间为一段，每段允许使用大小写字母、数字或连字符（-），但不能连续使用点号（.）或连字符（-），不能以点号（.）或连字符（-）开头或结尾。
  (Optional) */
     Hostname *string `json:"hostname"`
 
-    /* 用户自定义元数据信息，key-value键值对总数量不超过40对，其中有效键值对数量不超过20，无效键值对数量不超过20对。不区分大小写。
-若不指定metadata，则metadata默认使用云主机重置前的metadata。
-注意：key不要以连字符(-)结尾，否则此key不生效。
+    /* 用户自定义元数据。
+以 `key-value` 键值对形式指定，可在实例系统内通过元数据服务查询获取。最多支持40对键值对，且 `key` 不超过256字符，`value` 不超过16KB，不区分大小写。
+注意：`key` 不要以连字符(-)结尾，否则此 `key` 不生效。
  (Optional) */
     Metadata []vm.Metadata `json:"metadata"`
 
-    /* 元数据信息，目前只支持传入一个key为"launch-script"，表示首次启动脚本。value为base64格式。
-若不指定userdata，则userdata默认使用云主机重置前的userdata。
-launch-script：linux系统支持bash和python，编码前须分别以 #!/bin/bash 和 #!/usr/bin/env python 作为内容首行;
-launch-script：windows系统支持bat和powershell，编码前须分别以 <cmd></cmd> 和 <powershell></powershell> 作为内容首、尾行。
+    /* 自定义脚本。
+目前仅支持启动脚本，即 `launch-script`，须Base64编码且编码前数据长度不能超过16KB。
+**linux系统**：支持bash和python，编码前须分别以 `#!/bin/bash` 和 `#!/usr/bin/env python` 作为内容首行。
+**Windows系统**：支持 `bat` 和 `powershell`，编码前须分别以 `<cmd></cmd>和<powershell></powershell>` 作为内容首、尾行。
  (Optional) */
     Userdata []vm.Userdata `json:"userdata"`
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param instanceId: 云主机ID (Required)
+ * param regionId: 地域ID。 (Required)
+ * param instanceId: 云主机ID。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -84,23 +93,32 @@ func NewRebuildInstanceRequest(
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param instanceId: 云主机ID (Required)
- * param password: 云主机密码，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional)
- * param imageId: 镜像ID。可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeimages">DescribeImages</a>接口获得指定地域的镜像信息。 (Optional)
- * param keyNames: 密钥对名称；当前只支持一个。仅Linux系统支持指定。 (Optional)
- * param hostname: 云主机hostname，若不指定hostname，则hostname默认使用云主机重置前的hostname
-Windows Server系统：长度为2-15个字符，允许大小写字母、数字或连字符（-）。不能以连字符（-）开头或结尾，不能连续使用连字符（-），也不能全部使用数字。不支持点号（.）。
-Linux系统：长度为2-64个字符，允许支持多个点号，点之间为一段，每段允许使用大小写字母、数字或连字符（-），但不能连续使用点号（.）或连字符（-），不能以点号（.）或连字符（-）开头或结尾。
+ * param regionId: 地域ID。 (Required)
+ * param instanceId: 云主机ID。 (Required)
+ * param password: 实例密码。
+可用于SSH登录和VNC登录。
+长度为8\~30个字符，必须同时包含大、小写英文字母、数字和特殊符号中的三类字符。特殊符号包括：`\(\)\`~!@#$%^&\*\_-+=\|{}\[ ]:";'<>,.?/，`。
+更多密码输入要求请参见 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。
  (Optional)
- * param metadata: 用户自定义元数据信息，key-value键值对总数量不超过40对，其中有效键值对数量不超过20，无效键值对数量不超过20对。不区分大小写。
-若不指定metadata，则metadata默认使用云主机重置前的metadata。
-注意：key不要以连字符(-)结尾，否则此key不生效。
+ * param imageId: 镜像ID。
+若不指定镜像ID，默认使用当前主机的原镜像重置系统。
+可查询 [DescribeImages](https://docs.jdcloud.com/virtual-machines/api/describeimages) 接口获得指定地域的镜像信息。
  (Optional)
- * param userdata: 元数据信息，目前只支持传入一个key为"launch-script"，表示首次启动脚本。value为base64格式。
-若不指定userdata，则userdata默认使用云主机重置前的userdata。
-launch-script：linux系统支持bash和python，编码前须分别以 #!/bin/bash 和 #!/usr/bin/env python 作为内容首行;
-launch-script：windows系统支持bat和powershell，编码前须分别以 <cmd></cmd> 和 <powershell></powershell> 作为内容首、尾行。
+ * param keyNames: 密钥对名称。仅Linux系统下该参数生效，当前仅支持输入单个密钥。
+ (Optional)
+ * param hostname: 实例hostname。
+若不指定hostname，则默认以实例名称`name`作为hostname，但是会以RFC 952和RFC 1123命名规范做一定转义。
+**Windows系统**：长度为2\~15个字符，允许大小写字母、数字或连字符（-），不能以连字符（-）开头或结尾，不能连续使用连字符（-），也不能全部使用数字。不支持点号（.）。
+**Linux系统**：长度为2-64个字符，允许支持多个点号，点之间为一段，每段允许使用大小写字母、数字或连字符（-），但不能连续使用点号（.）或连字符（-），不能以点号（.）或连字符（-）开头或结尾。
+ (Optional)
+ * param metadata: 用户自定义元数据。
+以 `key-value` 键值对形式指定，可在实例系统内通过元数据服务查询获取。最多支持40对键值对，且 `key` 不超过256字符，`value` 不超过16KB，不区分大小写。
+注意：`key` 不要以连字符(-)结尾，否则此 `key` 不生效。
+ (Optional)
+ * param userdata: 自定义脚本。
+目前仅支持启动脚本，即 `launch-script`，须Base64编码且编码前数据长度不能超过16KB。
+**linux系统**：支持bash和python，编码前须分别以 `#!/bin/bash` 和 `#!/usr/bin/env python` 作为内容首行。
+**Windows系统**：支持 `bat` 和 `powershell`，编码前须分别以 `<cmd></cmd>和<powershell></powershell>` 作为内容首、尾行。
  (Optional)
  */
 func NewRebuildInstanceRequestWithAllParams(
@@ -145,51 +163,60 @@ func NewRebuildInstanceRequestWithoutParam() *RebuildInstanceRequest {
     }
 }
 
-/* param regionId: 地域ID(Required) */
+/* param regionId: 地域ID。(Required) */
 func (r *RebuildInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 云主机ID(Required) */
+/* param instanceId: 云主机ID。(Required) */
 func (r *RebuildInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param password: 云主机密码，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。(Optional) */
+/* param password: 实例密码。
+可用于SSH登录和VNC登录。
+长度为8\~30个字符，必须同时包含大、小写英文字母、数字和特殊符号中的三类字符。特殊符号包括：`\(\)\`~!@#$%^&\*\_-+=\|{}\[ ]:";'<>,.?/，`。
+更多密码输入要求请参见 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。
+(Optional) */
 func (r *RebuildInstanceRequest) SetPassword(password string) {
     r.Password = &password
 }
 
-/* param imageId: 镜像ID。可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeimages">DescribeImages</a>接口获得指定地域的镜像信息。(Optional) */
+/* param imageId: 镜像ID。
+若不指定镜像ID，默认使用当前主机的原镜像重置系统。
+可查询 [DescribeImages](https://docs.jdcloud.com/virtual-machines/api/describeimages) 接口获得指定地域的镜像信息。
+(Optional) */
 func (r *RebuildInstanceRequest) SetImageId(imageId string) {
     r.ImageId = &imageId
 }
 
-/* param keyNames: 密钥对名称；当前只支持一个。仅Linux系统支持指定。(Optional) */
+/* param keyNames: 密钥对名称。仅Linux系统下该参数生效，当前仅支持输入单个密钥。
+(Optional) */
 func (r *RebuildInstanceRequest) SetKeyNames(keyNames []string) {
     r.KeyNames = keyNames
 }
 
-/* param hostname: 云主机hostname，若不指定hostname，则hostname默认使用云主机重置前的hostname
-Windows Server系统：长度为2-15个字符，允许大小写字母、数字或连字符（-）。不能以连字符（-）开头或结尾，不能连续使用连字符（-），也不能全部使用数字。不支持点号（.）。
-Linux系统：长度为2-64个字符，允许支持多个点号，点之间为一段，每段允许使用大小写字母、数字或连字符（-），但不能连续使用点号（.）或连字符（-），不能以点号（.）或连字符（-）开头或结尾。
+/* param hostname: 实例hostname。
+若不指定hostname，则默认以实例名称`name`作为hostname，但是会以RFC 952和RFC 1123命名规范做一定转义。
+**Windows系统**：长度为2\~15个字符，允许大小写字母、数字或连字符（-），不能以连字符（-）开头或结尾，不能连续使用连字符（-），也不能全部使用数字。不支持点号（.）。
+**Linux系统**：长度为2-64个字符，允许支持多个点号，点之间为一段，每段允许使用大小写字母、数字或连字符（-），但不能连续使用点号（.）或连字符（-），不能以点号（.）或连字符（-）开头或结尾。
 (Optional) */
 func (r *RebuildInstanceRequest) SetHostname(hostname string) {
     r.Hostname = &hostname
 }
 
-/* param metadata: 用户自定义元数据信息，key-value键值对总数量不超过40对，其中有效键值对数量不超过20，无效键值对数量不超过20对。不区分大小写。
-若不指定metadata，则metadata默认使用云主机重置前的metadata。
-注意：key不要以连字符(-)结尾，否则此key不生效。
+/* param metadata: 用户自定义元数据。
+以 `key-value` 键值对形式指定，可在实例系统内通过元数据服务查询获取。最多支持40对键值对，且 `key` 不超过256字符，`value` 不超过16KB，不区分大小写。
+注意：`key` 不要以连字符(-)结尾，否则此 `key` 不生效。
 (Optional) */
 func (r *RebuildInstanceRequest) SetMetadata(metadata []vm.Metadata) {
     r.Metadata = metadata
 }
 
-/* param userdata: 元数据信息，目前只支持传入一个key为"launch-script"，表示首次启动脚本。value为base64格式。
-若不指定userdata，则userdata默认使用云主机重置前的userdata。
-launch-script：linux系统支持bash和python，编码前须分别以 #!/bin/bash 和 #!/usr/bin/env python 作为内容首行;
-launch-script：windows系统支持bat和powershell，编码前须分别以 <cmd></cmd> 和 <powershell></powershell> 作为内容首、尾行。
+/* param userdata: 自定义脚本。
+目前仅支持启动脚本，即 `launch-script`，须Base64编码且编码前数据长度不能超过16KB。
+**linux系统**：支持bash和python，编码前须分别以 `#!/bin/bash` 和 `#!/usr/bin/env python` 作为内容首行。
+**Windows系统**：支持 `bat` 和 `powershell`，编码前须分别以 `<cmd></cmd>和<powershell></powershell>` 作为内容首、尾行。
 (Optional) */
 func (r *RebuildInstanceRequest) SetUserdata(userdata []vm.Userdata) {
     r.Userdata = userdata

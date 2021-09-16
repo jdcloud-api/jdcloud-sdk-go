@@ -19,12 +19,19 @@ package models
 
 type CustomData struct {
 
-    /* 云主机ID (Optional) */
+    /* 云主机ID。 (Optional) */
     InstanceId string `json:"instanceId"`
 
-    /* 用户自定义元数据信息 key-value对，key、value不区分大小写 (Optional) */
+    /* 用户自定义元数据。
+以key-value键值对形式指定，可在实例系统内通过元数据服务查询获取。最多支持40对键值对，且key不超过256字符，value不超过16KB，不区分大小写。
+注意：key不要以连字符(-)结尾，否则此key不生效。
+ (Optional) */
     Metadata []Metadata `json:"metadata"`
 
-    /* 元数据信息，目前只支持传入一个key为"launch-script"，表示首次启动脚本。vaule以base64编码返回 (Optional) */
+    /* 自定义脚本。
+目前仅支持启动脚本，即 `launch-script`，须 `base64` 编码且编码前数据长度不能超过16KB。
+**linux系统**：支持 `bash` 和 `python`，编码前须分别以 `#!/bin/bash` 和 `#!/usr/bin/env python` 作为内容首行。
+**Windows系统**：支持 `bat` 和 `powershell`，编码前须分别以 `<cmd></cmd>和<powershell></powershell>` 作为内容首、尾行。
+ (Optional) */
     Userdata []Userdata `json:"userdata"`
 }

@@ -25,26 +25,34 @@ type CreateImageRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID  */
+    /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 云主机ID  */
+    /* 云主机ID。  */
     InstanceId string `json:"instanceId"`
 
-    /* 镜像名称，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。  */
+    /* 镜像名称，长度为2\~32个字符，只允许中文、数字、大小写字母、英文下划线（\_）、连字符（-）及点（.）。
+  */
     Name string `json:"name"`
 
-    /* 镜像描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional) */
+    /* 镜像描述。256字符以内。
+ (Optional) */
     Description *string `json:"description"`
 
-    /* 数据盘列表，可以在实例已挂载数据盘的基础上，额外增加新的快照、空盘、或排除云主机中的数据盘。 (Optional) */
+    /* 数据盘列表。
+在不指定该参数的情况下，制作镜像的过程中会将该实例中的所有云盘数据盘制作快照，并与系统盘一起，制作成打包镜像。
+如果不希望将实例中的某个云盘数据盘制作快照，可使用 `noDevice` 的方式排除，例如：`deviceName=vdb`、`noDevice=true` 就不会将 `vdb` 制作快照。
+如果希望在打包镜像中插入一块新盘，该盘不在实例中，可通过指定新的 `deviceName` 的方式实现，例如：`deviceName=vdx` 将会在打包镜像中插入一块盘符为 `vdx` 的新盘，支持新盘使用或不使用快照都可以。
+如果使用 `deviceName` 指定了与实例中相同的盘符，那么实例中对应的云盘数据盘也不会制作快照，并使用新指定的参数进行替换。
+ (Optional) */
     DataDisks []vm.InstanceDiskAttachmentSpec `json:"dataDisks"`
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param instanceId: 云主机ID (Required)
- * param name: 镜像名称，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Required)
+ * param regionId: 地域ID。 (Required)
+ * param instanceId: 云主机ID。 (Required)
+ * param name: 镜像名称，长度为2\~32个字符，只允许中文、数字、大小写字母、英文下划线（\_）、连字符（-）及点（.）。
+ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -68,11 +76,18 @@ func NewCreateImageRequest(
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param instanceId: 云主机ID (Required)
- * param name: 镜像名称，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Required)
- * param description: 镜像描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional)
- * param dataDisks: 数据盘列表，可以在实例已挂载数据盘的基础上，额外增加新的快照、空盘、或排除云主机中的数据盘。 (Optional)
+ * param regionId: 地域ID。 (Required)
+ * param instanceId: 云主机ID。 (Required)
+ * param name: 镜像名称，长度为2\~32个字符，只允许中文、数字、大小写字母、英文下划线（\_）、连字符（-）及点（.）。
+ (Required)
+ * param description: 镜像描述。256字符以内。
+ (Optional)
+ * param dataDisks: 数据盘列表。
+在不指定该参数的情况下，制作镜像的过程中会将该实例中的所有云盘数据盘制作快照，并与系统盘一起，制作成打包镜像。
+如果不希望将实例中的某个云盘数据盘制作快照，可使用 `noDevice` 的方式排除，例如：`deviceName=vdb`、`noDevice=true` 就不会将 `vdb` 制作快照。
+如果希望在打包镜像中插入一块新盘，该盘不在实例中，可通过指定新的 `deviceName` 的方式实现，例如：`deviceName=vdx` 将会在打包镜像中插入一块盘符为 `vdx` 的新盘，支持新盘使用或不使用快照都可以。
+如果使用 `deviceName` 指定了与实例中相同的盘符，那么实例中对应的云盘数据盘也不会制作快照，并使用新指定的参数进行替换。
+ (Optional)
  */
 func NewCreateImageRequestWithAllParams(
     regionId string,
@@ -110,27 +125,34 @@ func NewCreateImageRequestWithoutParam() *CreateImageRequest {
     }
 }
 
-/* param regionId: 地域ID(Required) */
+/* param regionId: 地域ID。(Required) */
 func (r *CreateImageRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 云主机ID(Required) */
+/* param instanceId: 云主机ID。(Required) */
 func (r *CreateImageRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param name: 镜像名称，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。(Required) */
+/* param name: 镜像名称，长度为2\~32个字符，只允许中文、数字、大小写字母、英文下划线（\_）、连字符（-）及点（.）。
+(Required) */
 func (r *CreateImageRequest) SetName(name string) {
     r.Name = name
 }
 
-/* param description: 镜像描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。(Optional) */
+/* param description: 镜像描述。256字符以内。
+(Optional) */
 func (r *CreateImageRequest) SetDescription(description string) {
     r.Description = &description
 }
 
-/* param dataDisks: 数据盘列表，可以在实例已挂载数据盘的基础上，额外增加新的快照、空盘、或排除云主机中的数据盘。(Optional) */
+/* param dataDisks: 数据盘列表。
+在不指定该参数的情况下，制作镜像的过程中会将该实例中的所有云盘数据盘制作快照，并与系统盘一起，制作成打包镜像。
+如果不希望将实例中的某个云盘数据盘制作快照，可使用 `noDevice` 的方式排除，例如：`deviceName=vdb`、`noDevice=true` 就不会将 `vdb` 制作快照。
+如果希望在打包镜像中插入一块新盘，该盘不在实例中，可通过指定新的 `deviceName` 的方式实现，例如：`deviceName=vdx` 将会在打包镜像中插入一块盘符为 `vdx` 的新盘，支持新盘使用或不使用快照都可以。
+如果使用 `deviceName` 指定了与实例中相同的盘符，那么实例中对应的云盘数据盘也不会制作快照，并使用新指定的参数进行替换。
+(Optional) */
 func (r *CreateImageRequest) SetDataDisks(dataDisks []vm.InstanceDiskAttachmentSpec) {
     r.DataDisks = dataDisks
 }

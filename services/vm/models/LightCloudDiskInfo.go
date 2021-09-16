@@ -19,12 +19,12 @@ package models
 
 type LightCloudDiskInfo struct {
 
-    /* 云硬盘ID (Optional) */
+    /* 云硬盘ID。 (Optional) */
     DiskId string `json:"diskId"`
 
-    /* 云硬盘类型，取值为 ssd,premium-hdd,ssd.gp1,ssd.io1,hdd.std1 (Optional) */
+    /* 云硬盘类型。取值范围：`ssd、premium-hdd、hdd.std1、ssd.gp1、ssd.io1`。 (Optional) */
     DiskType string `json:"diskType"`
 
-    /* 云硬盘大小，单位为 GiB (Optional) */
+    /* 云硬盘大小，单位为 GiB。 (Optional) */
     DiskSizeGB int `json:"diskSizeGB"`
 }

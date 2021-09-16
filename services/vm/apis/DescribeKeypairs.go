@@ -26,22 +26,23 @@ type DescribeKeypairsRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID  */
+    /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 页码；默认为1 (Optional) */
+    /* 页码；默认为1。 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* 分页大小；默认为20；取值范围[10, 100] (Optional) */
+    /* 分页大小；<br>默认为20；取值范围[10, 100]。 (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* keyNames - 密钥对名称，精确匹配，支持多个
+    /* <b>filters 中支持使用以下关键字进行过滤</b>
+`keyNames`: 密钥对名称，精确匹配，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
 
 /*
- * param regionId: 地域ID (Required)
+ * param regionId: 地域ID。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -61,10 +62,11 @@ func NewDescribeKeypairsRequest(
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param pageNumber: 页码；默认为1 (Optional)
- * param pageSize: 分页大小；默认为20；取值范围[10, 100] (Optional)
- * param filters: keyNames - 密钥对名称，精确匹配，支持多个
+ * param regionId: 地域ID。 (Required)
+ * param pageNumber: 页码；默认为1。 (Optional)
+ * param pageSize: 分页大小；<br>默认为20；取值范围[10, 100]。 (Optional)
+ * param filters: <b>filters 中支持使用以下关键字进行过滤</b>
+`keyNames`: 密钥对名称，精确匹配，支持多个
  (Optional)
  */
 func NewDescribeKeypairsRequestWithAllParams(
@@ -101,22 +103,23 @@ func NewDescribeKeypairsRequestWithoutParam() *DescribeKeypairsRequest {
     }
 }
 
-/* param regionId: 地域ID(Required) */
+/* param regionId: 地域ID。(Required) */
 func (r *DescribeKeypairsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param pageNumber: 页码；默认为1(Optional) */
+/* param pageNumber: 页码；默认为1。(Optional) */
 func (r *DescribeKeypairsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
-/* param pageSize: 分页大小；默认为20；取值范围[10, 100](Optional) */
+/* param pageSize: 分页大小；<br>默认为20；取值范围[10, 100]。(Optional) */
 func (r *DescribeKeypairsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
-/* param filters: keyNames - 密钥对名称，精确匹配，支持多个
+/* param filters: <b>filters 中支持使用以下关键字进行过滤</b>
+`keyNames`: 密钥对名称，精确匹配，支持多个
 (Optional) */
 func (r *DescribeKeypairsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters

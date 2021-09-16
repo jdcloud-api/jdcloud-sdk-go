@@ -24,20 +24,20 @@ type DetachKeypairRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID  */
+    /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 密钥名称  */
+    /* 密钥名称。  */
     KeyName string `json:"keyName"`
 
-    /* 虚机Id  */
+    /* 要解绑的云主机实例ID列表。  */
     InstanceIds []string `json:"instanceIds"`
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param keyName: 密钥名称 (Required)
- * param instanceIds: 虚机Id (Required)
+ * param regionId: 地域ID。 (Required)
+ * param keyName: 密钥名称。 (Required)
+ * param instanceIds: 要解绑的云主机实例ID列表。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -61,9 +61,9 @@ func NewDetachKeypairRequest(
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param keyName: 密钥名称 (Required)
- * param instanceIds: 虚机Id (Required)
+ * param regionId: 地域ID。 (Required)
+ * param keyName: 密钥名称。 (Required)
+ * param instanceIds: 要解绑的云主机实例ID列表。 (Required)
  */
 func NewDetachKeypairRequestWithAllParams(
     regionId string,
@@ -97,17 +97,17 @@ func NewDetachKeypairRequestWithoutParam() *DetachKeypairRequest {
     }
 }
 
-/* param regionId: 地域ID(Required) */
+/* param regionId: 地域ID。(Required) */
 func (r *DetachKeypairRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param keyName: 密钥名称(Required) */
+/* param keyName: 密钥名称。(Required) */
 func (r *DetachKeypairRequest) SetKeyName(keyName string) {
     r.KeyName = keyName
 }
 
-/* param instanceIds: 虚机Id(Required) */
+/* param instanceIds: 要解绑的云主机实例ID列表。(Required) */
 func (r *DetachKeypairRequest) SetInstanceIds(instanceIds []string) {
     r.InstanceIds = instanceIds
 }

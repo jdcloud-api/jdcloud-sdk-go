@@ -19,12 +19,12 @@ package models
 
 type InstanceTypeState struct {
 
-    /* 可用区 (Optional) */
+    /* 可用区。 (Optional) */
     Az string `json:"az"`
 
-    /* 可售卖情况，true:可售卖、false:已售罄不可用 (Optional) */
+    /* 售卖状态，`true`：可售卖、`false`：已售罄不可用。 (Optional) */
     InStock bool `json:"inStock"`
 
-    /* 可用库存数量，预留字段，敬请期待。 (Optional) */
+    /* 可用库存数量，目前该字段为预留阶段，敬请期待。 (Optional) */
     AvailableCount int `json:"availableCount"`
 }

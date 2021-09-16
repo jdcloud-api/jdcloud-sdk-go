@@ -19,9 +19,9 @@ package models
 
 type Policy struct {
 
-    /* 策略ID。 (Optional) */
+    /* 自动任务策略ID。 (Optional) */
     PolicyId string `json:"policyId"`
 
-    /* 策略类型。 (Optional) */
+    /* 自动任务策略类型，当前只支持 `AutoImage` 自动备份镜像。 (Optional) */
     PolicyType string `json:"policyType"`
 }

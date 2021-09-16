@@ -24,10 +24,10 @@ type DetachNetworkInterfaceRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID  */
+    /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 云主机ID  */
+    /* 云主机ID。  */
     InstanceId string `json:"instanceId"`
 
     /* 弹性网卡ID  */
@@ -35,8 +35,8 @@ type DetachNetworkInterfaceRequest struct {
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param instanceId: 云主机ID (Required)
+ * param regionId: 地域ID。 (Required)
+ * param instanceId: 云主机ID。 (Required)
  * param networkInterfaceId: 弹性网卡ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -61,8 +61,8 @@ func NewDetachNetworkInterfaceRequest(
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param instanceId: 云主机ID (Required)
+ * param regionId: 地域ID。 (Required)
+ * param instanceId: 云主机ID。 (Required)
  * param networkInterfaceId: 弹性网卡ID (Required)
  */
 func NewDetachNetworkInterfaceRequestWithAllParams(
@@ -97,12 +97,12 @@ func NewDetachNetworkInterfaceRequestWithoutParam() *DetachNetworkInterfaceReque
     }
 }
 
-/* param regionId: 地域ID(Required) */
+/* param regionId: 地域ID。(Required) */
 func (r *DetachNetworkInterfaceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 云主机ID(Required) */
+/* param instanceId: 云主机ID。(Required) */
 func (r *DetachNetworkInterfaceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }

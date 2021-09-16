@@ -25,45 +25,61 @@ type DescribeImagesRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID  */
+    /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 镜像来源，如果没有指定ids参数，此参数必传；取值范围：public、shared、thirdparty、private、community (Optional) */
+    /* 镜像来源，如果没有指定 `ids` 参数，此参数必传。取值范围：
+`public`：官方镜像。
+`thirdparty`：镜像市场镜像。
+`private`：用户自己的私有镜像。
+`shared`：其他用户分享的镜像。
+`community`：社区镜像。
+ (Optional) */
     ImageSource *string `json:"imageSource"`
 
-    /* 产品线标识，非必传，不传的时候返回全部产品线镜像 (Optional) */
-    ServiceCode *string `json:"serviceCode"`
-
-    /* 是否下线，默认值为false；imageSource为public或者thirdparty时，此参数才有意义，其它情况下此参数无效；指定镜像ID查询时，此参数无效 (Optional) */
+    /* 查询已经下线的镜像时使用。
+只有查询 `官方镜像` 或者 `镜像市场镜像` 时，此参数才有意义，其它情况下此参数无效。
+指定 `ids` 查询时，此参数无效。
+ (Optional) */
     Offline *bool `json:"offline"`
 
-    /* 操作系统平台，取值范围：Windows Server、CentOS、Ubuntu (Optional) */
+    /* 根据镜像的操作系统发行版查询。
+取值范围：`Ubuntu、CentOS、Windows Server`。
+ (Optional) */
     Platform *string `json:"platform"`
 
-    /* 镜像ID列表，如果指定了此参数，其它参数可为空 (Optional) */
+    /* 指定镜像ID查询，如果指定了此参数，其它参数可以不传。
+ (Optional) */
     Ids []string `json:"ids"`
 
-    /* 根据镜像名称模糊查找 (Optional) */
+    /* 根据镜像名称模糊查询。 (Optional) */
     ImageName *string `json:"imageName"`
 
-    /* 镜像支持的系统盘类型，[localDisk,cloudDisk] (Optional) */
+    /* 根据镜像支持的系统盘类型查询。支持范围：`localDisk` 本地系统盘镜像；`cloudDisk` 云盘系统盘镜像。 (Optional) */
     RootDeviceType *string `json:"rootDeviceType"`
 
-    /* 镜像的使用权限[all, specifiedUsers，ownerOnly]，可选参数，仅当imageSource取值private时有效 (Optional) */
+    /* 根据镜像的使用权限查询，可选参数，仅当 `imageSource` 为 `private` 时有效。取值范围：
+`all`：没有限制，所有人均可以使用。
+`specifiedUsers`：只有共享用户可以使用。
+`ownerOnly`：镜像拥有者自己可以使用。
+ (Optional) */
     LaunchPermission *string `json:"launchPermission"`
 
-    /* <a href="http://docs.jdcloud.com/virtual-machines/api/image_status">参考镜像状态</a> (Optional) */
+    /* 根据镜像状态查询。参考 [镜像状态](https://docs.jdcloud.com/virtual-machines/api/image_status) (Optional) */
     Status *string `json:"status"`
 
-    /* 页码；默认为1 (Optional) */
+    /* 已废弃。 (Optional) */
+    ServiceCode *string `json:"serviceCode"`
+
+    /* 页码；默认为1。 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* 分页大小；默认为20；取值范围[10, 100] (Optional) */
+    /* 分页大小；<br>默认为20；取值范围[10, 100]。 (Optional) */
     PageSize *int `json:"pageSize"`
 }
 
 /*
- * param regionId: 地域ID (Required)
+ * param regionId: 地域ID。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -83,23 +99,38 @@ func NewDescribeImagesRequest(
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param imageSource: 镜像来源，如果没有指定ids参数，此参数必传；取值范围：public、shared、thirdparty、private、community (Optional)
- * param serviceCode: 产品线标识，非必传，不传的时候返回全部产品线镜像 (Optional)
- * param offline: 是否下线，默认值为false；imageSource为public或者thirdparty时，此参数才有意义，其它情况下此参数无效；指定镜像ID查询时，此参数无效 (Optional)
- * param platform: 操作系统平台，取值范围：Windows Server、CentOS、Ubuntu (Optional)
- * param ids: 镜像ID列表，如果指定了此参数，其它参数可为空 (Optional)
- * param imageName: 根据镜像名称模糊查找 (Optional)
- * param rootDeviceType: 镜像支持的系统盘类型，[localDisk,cloudDisk] (Optional)
- * param launchPermission: 镜像的使用权限[all, specifiedUsers，ownerOnly]，可选参数，仅当imageSource取值private时有效 (Optional)
- * param status: <a href="http://docs.jdcloud.com/virtual-machines/api/image_status">参考镜像状态</a> (Optional)
- * param pageNumber: 页码；默认为1 (Optional)
- * param pageSize: 分页大小；默认为20；取值范围[10, 100] (Optional)
+ * param regionId: 地域ID。 (Required)
+ * param imageSource: 镜像来源，如果没有指定 `ids` 参数，此参数必传。取值范围：
+`public`：官方镜像。
+`thirdparty`：镜像市场镜像。
+`private`：用户自己的私有镜像。
+`shared`：其他用户分享的镜像。
+`community`：社区镜像。
+ (Optional)
+ * param offline: 查询已经下线的镜像时使用。
+只有查询 `官方镜像` 或者 `镜像市场镜像` 时，此参数才有意义，其它情况下此参数无效。
+指定 `ids` 查询时，此参数无效。
+ (Optional)
+ * param platform: 根据镜像的操作系统发行版查询。
+取值范围：`Ubuntu、CentOS、Windows Server`。
+ (Optional)
+ * param ids: 指定镜像ID查询，如果指定了此参数，其它参数可以不传。
+ (Optional)
+ * param imageName: 根据镜像名称模糊查询。 (Optional)
+ * param rootDeviceType: 根据镜像支持的系统盘类型查询。支持范围：`localDisk` 本地系统盘镜像；`cloudDisk` 云盘系统盘镜像。 (Optional)
+ * param launchPermission: 根据镜像的使用权限查询，可选参数，仅当 `imageSource` 为 `private` 时有效。取值范围：
+`all`：没有限制，所有人均可以使用。
+`specifiedUsers`：只有共享用户可以使用。
+`ownerOnly`：镜像拥有者自己可以使用。
+ (Optional)
+ * param status: 根据镜像状态查询。参考 [镜像状态](https://docs.jdcloud.com/virtual-machines/api/image_status) (Optional)
+ * param serviceCode: 已废弃。 (Optional)
+ * param pageNumber: 页码；默认为1。 (Optional)
+ * param pageSize: 分页大小；<br>默认为20；取值范围[10, 100]。 (Optional)
  */
 func NewDescribeImagesRequestWithAllParams(
     regionId string,
     imageSource *string,
-    serviceCode *string,
     offline *bool,
     platform *string,
     ids []string,
@@ -107,6 +138,7 @@ func NewDescribeImagesRequestWithAllParams(
     rootDeviceType *string,
     launchPermission *string,
     status *string,
+    serviceCode *string,
     pageNumber *int,
     pageSize *int,
 ) *DescribeImagesRequest {
@@ -120,7 +152,6 @@ func NewDescribeImagesRequestWithAllParams(
         },
         RegionId: regionId,
         ImageSource: imageSource,
-        ServiceCode: serviceCode,
         Offline: offline,
         Platform: platform,
         Ids: ids,
@@ -128,6 +159,7 @@ func NewDescribeImagesRequestWithAllParams(
         RootDeviceType: rootDeviceType,
         LaunchPermission: launchPermission,
         Status: status,
+        ServiceCode: serviceCode,
         PageNumber: pageNumber,
         PageSize: pageSize,
     }
@@ -146,62 +178,78 @@ func NewDescribeImagesRequestWithoutParam() *DescribeImagesRequest {
     }
 }
 
-/* param regionId: 地域ID(Required) */
+/* param regionId: 地域ID。(Required) */
 func (r *DescribeImagesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param imageSource: 镜像来源，如果没有指定ids参数，此参数必传；取值范围：public、shared、thirdparty、private、community(Optional) */
+/* param imageSource: 镜像来源，如果没有指定 `ids` 参数，此参数必传。取值范围：
+`public`：官方镜像。
+`thirdparty`：镜像市场镜像。
+`private`：用户自己的私有镜像。
+`shared`：其他用户分享的镜像。
+`community`：社区镜像。
+(Optional) */
 func (r *DescribeImagesRequest) SetImageSource(imageSource string) {
     r.ImageSource = &imageSource
 }
 
-/* param serviceCode: 产品线标识，非必传，不传的时候返回全部产品线镜像(Optional) */
-func (r *DescribeImagesRequest) SetServiceCode(serviceCode string) {
-    r.ServiceCode = &serviceCode
-}
-
-/* param offline: 是否下线，默认值为false；imageSource为public或者thirdparty时，此参数才有意义，其它情况下此参数无效；指定镜像ID查询时，此参数无效(Optional) */
+/* param offline: 查询已经下线的镜像时使用。
+只有查询 `官方镜像` 或者 `镜像市场镜像` 时，此参数才有意义，其它情况下此参数无效。
+指定 `ids` 查询时，此参数无效。
+(Optional) */
 func (r *DescribeImagesRequest) SetOffline(offline bool) {
     r.Offline = &offline
 }
 
-/* param platform: 操作系统平台，取值范围：Windows Server、CentOS、Ubuntu(Optional) */
+/* param platform: 根据镜像的操作系统发行版查询。
+取值范围：`Ubuntu、CentOS、Windows Server`。
+(Optional) */
 func (r *DescribeImagesRequest) SetPlatform(platform string) {
     r.Platform = &platform
 }
 
-/* param ids: 镜像ID列表，如果指定了此参数，其它参数可为空(Optional) */
+/* param ids: 指定镜像ID查询，如果指定了此参数，其它参数可以不传。
+(Optional) */
 func (r *DescribeImagesRequest) SetIds(ids []string) {
     r.Ids = ids
 }
 
-/* param imageName: 根据镜像名称模糊查找(Optional) */
+/* param imageName: 根据镜像名称模糊查询。(Optional) */
 func (r *DescribeImagesRequest) SetImageName(imageName string) {
     r.ImageName = &imageName
 }
 
-/* param rootDeviceType: 镜像支持的系统盘类型，[localDisk,cloudDisk](Optional) */
+/* param rootDeviceType: 根据镜像支持的系统盘类型查询。支持范围：`localDisk` 本地系统盘镜像；`cloudDisk` 云盘系统盘镜像。(Optional) */
 func (r *DescribeImagesRequest) SetRootDeviceType(rootDeviceType string) {
     r.RootDeviceType = &rootDeviceType
 }
 
-/* param launchPermission: 镜像的使用权限[all, specifiedUsers，ownerOnly]，可选参数，仅当imageSource取值private时有效(Optional) */
+/* param launchPermission: 根据镜像的使用权限查询，可选参数，仅当 `imageSource` 为 `private` 时有效。取值范围：
+`all`：没有限制，所有人均可以使用。
+`specifiedUsers`：只有共享用户可以使用。
+`ownerOnly`：镜像拥有者自己可以使用。
+(Optional) */
 func (r *DescribeImagesRequest) SetLaunchPermission(launchPermission string) {
     r.LaunchPermission = &launchPermission
 }
 
-/* param status: <a href="http://docs.jdcloud.com/virtual-machines/api/image_status">参考镜像状态</a>(Optional) */
+/* param status: 根据镜像状态查询。参考 [镜像状态](https://docs.jdcloud.com/virtual-machines/api/image_status)(Optional) */
 func (r *DescribeImagesRequest) SetStatus(status string) {
     r.Status = &status
 }
 
-/* param pageNumber: 页码；默认为1(Optional) */
+/* param serviceCode: 已废弃。(Optional) */
+func (r *DescribeImagesRequest) SetServiceCode(serviceCode string) {
+    r.ServiceCode = &serviceCode
+}
+
+/* param pageNumber: 页码；默认为1。(Optional) */
 func (r *DescribeImagesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
-/* param pageSize: 分页大小；默认为20；取值范围[10, 100](Optional) */
+/* param pageSize: 分页大小；<br>默认为20；取值范围[10, 100]。(Optional) */
 func (r *DescribeImagesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }

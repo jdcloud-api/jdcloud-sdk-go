@@ -19,9 +19,9 @@ package models
 
 type Metadata struct {
 
-    /* 键，最大长度256，支持全字符 (Optional) */
+    /* key，字符长度不超过256，支持全字符。不能以连字符(-)结尾，否则此key不生效。 (Optional) */
     Key *string `json:"key"`
 
-    /* 值，最大长度16k，支持全字符 (Optional) */
+    /* value，字符长度不超过16KB，支持全字符。 (Optional) */
     Value *string `json:"value"`
 }

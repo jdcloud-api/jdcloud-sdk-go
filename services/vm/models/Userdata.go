@@ -19,9 +19,9 @@ package models
 
 type Userdata struct {
 
-    /* 键，最大长度48字符 (Optional) */
+    /* 脚本类型，当前仅支持输入 `launch-script`，即启动脚本。 (Optional) */
     Key *string `json:"key"`
 
-    /* 值，最大长度21848字符 (Optional) */
+    /* 脚本内容，须 `Base64` 编码，且编码前长度不能超过16KB。 (Optional) */
     Value *string `json:"value"`
 }

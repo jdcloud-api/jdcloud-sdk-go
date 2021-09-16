@@ -24,23 +24,25 @@ type AttachNetworkInterfaceRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID  */
+    /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 云主机ID  */
+    /* 云主机ID。  */
     InstanceId string `json:"instanceId"`
 
-    /* 弹性网卡ID  */
+    /* 弹性网卡ID。  */
     NetworkInterfaceId string `json:"networkInterfaceId"`
 
-    /* 随云主机删除而自动删除，默认为False (Optional) */
+    /* 随云主机实例自动删除，默认为False。
+受管网卡或授信网卡默认为False并且不支持修改。
+ (Optional) */
     AutoDelete *bool `json:"autoDelete"`
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param instanceId: 云主机ID (Required)
- * param networkInterfaceId: 弹性网卡ID (Required)
+ * param regionId: 地域ID。 (Required)
+ * param instanceId: 云主机ID。 (Required)
+ * param networkInterfaceId: 弹性网卡ID。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -64,10 +66,12 @@ func NewAttachNetworkInterfaceRequest(
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param instanceId: 云主机ID (Required)
- * param networkInterfaceId: 弹性网卡ID (Required)
- * param autoDelete: 随云主机删除而自动删除，默认为False (Optional)
+ * param regionId: 地域ID。 (Required)
+ * param instanceId: 云主机ID。 (Required)
+ * param networkInterfaceId: 弹性网卡ID。 (Required)
+ * param autoDelete: 随云主机实例自动删除，默认为False。
+受管网卡或授信网卡默认为False并且不支持修改。
+ (Optional)
  */
 func NewAttachNetworkInterfaceRequestWithAllParams(
     regionId string,
@@ -103,22 +107,24 @@ func NewAttachNetworkInterfaceRequestWithoutParam() *AttachNetworkInterfaceReque
     }
 }
 
-/* param regionId: 地域ID(Required) */
+/* param regionId: 地域ID。(Required) */
 func (r *AttachNetworkInterfaceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 云主机ID(Required) */
+/* param instanceId: 云主机ID。(Required) */
 func (r *AttachNetworkInterfaceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param networkInterfaceId: 弹性网卡ID(Required) */
+/* param networkInterfaceId: 弹性网卡ID。(Required) */
 func (r *AttachNetworkInterfaceRequest) SetNetworkInterfaceId(networkInterfaceId string) {
     r.NetworkInterfaceId = networkInterfaceId
 }
 
-/* param autoDelete: 随云主机删除而自动删除，默认为False(Optional) */
+/* param autoDelete: 随云主机实例自动删除，默认为False。
+受管网卡或授信网卡默认为False并且不支持修改。
+(Optional) */
 func (r *AttachNetworkInterfaceRequest) SetAutoDelete(autoDelete bool) {
     r.AutoDelete = &autoDelete
 }

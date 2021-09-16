@@ -19,18 +19,18 @@ package models
 
 type UserSysDisk struct {
 
-    /* 用户pin (Optional) */
+    /* 用户pin。 (Optional) */
     Pin string `json:"pin"`
 
-    /* 地域 (Optional) */
+    /* 地域。 (Optional) */
     Region string `json:"region"`
 
-    /* 系统类型 (Optional) */
+    /* 系统类型。支持范围：`linux、windows`。 (Optional) */
     SystemType string `json:"systemType"`
 
-    /* 默认本地盘系统盘大小 (Optional) */
+    /* 默认本地盘系统盘大小，单位GB。 (Optional) */
     SystemDiskSize int `json:"systemDiskSize"`
 
-    /* 逗号分隔的规格列表，*代表所有。 (Optional) */
+    /* 逗号分隔的规格列表，`*` 代表所有。 (Optional) */
     Flavors string `json:"flavors"`
 }

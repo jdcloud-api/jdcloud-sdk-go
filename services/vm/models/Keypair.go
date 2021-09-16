@@ -19,15 +19,15 @@ package models
 
 type Keypair struct {
 
-    /* 密钥对名称 (Optional) */
+    /* 密钥对名称。 (Optional) */
     KeyName string `json:"keyName"`
 
-    /* 密钥对的指纹，根据 RFC4716 定义的公钥指纹格式，采用 MD5 信息摘要算法。 (Optional) */
+    /* 密钥对的指纹，根据 `RFC4716` 定义的公钥指纹格式，采用 `MD5` 信息摘要算法。 (Optional) */
     KeyFingerprint string `json:"keyFingerprint"`
 
-    /* 创建时间 (Optional) */
+    /* 密钥创建时间。 (Optional) */
     CreateTime string `json:"createTime"`
 
-    /* 绑定了此密钥的所有虚机id (Optional) */
+    /* 绑定了此密钥的云主机ID列表。 (Optional) */
     InstanceIds []string `json:"instanceIds"`
 }

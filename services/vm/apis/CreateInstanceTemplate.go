@@ -25,23 +25,23 @@ type CreateInstanceTemplateRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID  */
+    /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 启动模板的数据  */
+    /* 实例模板配置信息。  */
     InstanceTemplateData *vm.InstanceTemplateSpec `json:"instanceTemplateData"`
 
-    /* 启动模板的名称，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。  */
+    /* 实例模板的名称，参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。  */
     Name string `json:"name"`
 
-    /* 启动模板的描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional) */
+    /* 实例模板的描述，参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。 (Optional) */
     Description *string `json:"description"`
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param instanceTemplateData: 启动模板的数据 (Required)
- * param name: 启动模板的名称，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Required)
+ * param regionId: 地域ID。 (Required)
+ * param instanceTemplateData: 实例模板配置信息。 (Required)
+ * param name: 实例模板的名称，参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -65,10 +65,10 @@ func NewCreateInstanceTemplateRequest(
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param instanceTemplateData: 启动模板的数据 (Required)
- * param name: 启动模板的名称，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Required)
- * param description: 启动模板的描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional)
+ * param regionId: 地域ID。 (Required)
+ * param instanceTemplateData: 实例模板配置信息。 (Required)
+ * param name: 实例模板的名称，参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。 (Required)
+ * param description: 实例模板的描述，参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。 (Optional)
  */
 func NewCreateInstanceTemplateRequestWithAllParams(
     regionId string,
@@ -104,22 +104,22 @@ func NewCreateInstanceTemplateRequestWithoutParam() *CreateInstanceTemplateReque
     }
 }
 
-/* param regionId: 地域ID(Required) */
+/* param regionId: 地域ID。(Required) */
 func (r *CreateInstanceTemplateRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceTemplateData: 启动模板的数据(Required) */
+/* param instanceTemplateData: 实例模板配置信息。(Required) */
 func (r *CreateInstanceTemplateRequest) SetInstanceTemplateData(instanceTemplateData *vm.InstanceTemplateSpec) {
     r.InstanceTemplateData = instanceTemplateData
 }
 
-/* param name: 启动模板的名称，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。(Required) */
+/* param name: 实例模板的名称，参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。(Required) */
 func (r *CreateInstanceTemplateRequest) SetName(name string) {
     r.Name = name
 }
 
-/* param description: 启动模板的描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。(Optional) */
+/* param description: 实例模板的描述，参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。(Optional) */
 func (r *CreateInstanceTemplateRequest) SetDescription(description string) {
     r.Description = &description
 }

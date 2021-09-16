@@ -19,21 +19,25 @@ package models
 
 type InstanceTemplateDiskSpec struct {
 
-    /* 云硬盘类型，取值为ssd、premium-hdd、hdd.std1、ssd.gp1、ssd.io1 (Optional) */
+    /* 云硬盘类型。取值范围：`ssd、premium-hdd、hdd.std1、ssd.gp1、ssd.io1`。 (Optional) */
     DiskType *string `json:"diskType"`
 
-    /* 云硬盘大小，单位为 GiB；ssd 类型取值范围[20,1000]GB，步长为10G，premium-hdd 类型取值范围[20,3000]GB，步长为10G，hdd.std1、ssd.gp1、ssd.io1 类型取值范围[20-16000]GB，步长为10GB (Optional) */
+    /* 云硬盘大小。单位为 GiB。
+`ssd`：取值范围[20,1000]GB，步长为10GB。
+`premium-hdd`：取值范围[20,3000]GB，步长为10GB。
+`hdd.std1、ssd.gp1、ssd.io1`：取值范围[20-16000]GB，步长为10GB。
+ (Optional) */
     DiskSizeGB *int `json:"diskSizeGB"`
 
-    /* 用于创建云硬盘的快照ID (Optional) */
+    /* 创建云硬盘的快照ID。 (Optional) */
     SnapshotId *string `json:"snapshotId"`
 
-    /* 策略ID (Optional) */
+    /* 云盘快照策略ID。 (Optional) */
     PolicyId *string `json:"policyId"`
 
-    /* 用于指定是否加密，false:(默认)不加密；true:加密，未指定快照时生效，只有打包创建2代主机的时候才允许创建加密数据盘。 (Optional) */
+    /* 是否是加密云盘。`false`：（默认）不加密。`true`：加密。 (Optional) */
     Encrypt *bool `json:"encrypt"`
 
-    /* 用于指定云硬盘的iops值，仅支持ssd.io1类型的云盘 (Optional) */
+    /* 云硬盘的最大iops。 (Optional) */
     Iops *int `json:"iops"`
 }

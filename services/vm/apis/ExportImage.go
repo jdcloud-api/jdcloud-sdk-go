@@ -24,30 +24,30 @@ type ExportImageRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID  */
+    /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 镜像ID  */
+    /* 镜像ID。  */
     ImageId string `json:"imageId"`
 
-    /* 用户创建的服务角色名称  */
+    /* 用户创建的服务角色名称。  */
     RoleName string `json:"roleName"`
 
-    /* 存储导出镜像文件的oss bucket的域名，请填写以 https:// 开头的完整url  */
+    /* 存储导出镜像文件的 `oss bucket` 的域名，请填写以 https:// 开头的完整url。  */
     OssUrl string `json:"ossUrl"`
 
-    /* 导出镜像文件名前缀，仅支持英文字母和数字，不能超过32个字符 (Optional) */
+    /* 导出镜像文件名前缀，仅支持英文字母和数字，不能超过32个字符。 (Optional) */
     OssPrefix *string `json:"ossPrefix"`
 
-    /* 用户导出镜像的幂等性保证。每次导出请传入不同的值，如果传值与某次的clientToken相同，则返还同一个请求结果，不能超过64个字符 (Optional) */
+    /* 用户导出镜像的幂等性保证。每次导出请传入不同的值，如果传值与某次的clientToken相同，则返还同一个请求结果，不能超过64个字符。 (Optional) */
     ClientToken *string `json:"clientToken"`
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param imageId: 镜像ID (Required)
- * param roleName: 用户创建的服务角色名称 (Required)
- * param ossUrl: 存储导出镜像文件的oss bucket的域名，请填写以 https:// 开头的完整url (Required)
+ * param regionId: 地域ID。 (Required)
+ * param imageId: 镜像ID。 (Required)
+ * param roleName: 用户创建的服务角色名称。 (Required)
+ * param ossUrl: 存储导出镜像文件的 `oss bucket` 的域名，请填写以 https:// 开头的完整url。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -73,12 +73,12 @@ func NewExportImageRequest(
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param imageId: 镜像ID (Required)
- * param roleName: 用户创建的服务角色名称 (Required)
- * param ossUrl: 存储导出镜像文件的oss bucket的域名，请填写以 https:// 开头的完整url (Required)
- * param ossPrefix: 导出镜像文件名前缀，仅支持英文字母和数字，不能超过32个字符 (Optional)
- * param clientToken: 用户导出镜像的幂等性保证。每次导出请传入不同的值，如果传值与某次的clientToken相同，则返还同一个请求结果，不能超过64个字符 (Optional)
+ * param regionId: 地域ID。 (Required)
+ * param imageId: 镜像ID。 (Required)
+ * param roleName: 用户创建的服务角色名称。 (Required)
+ * param ossUrl: 存储导出镜像文件的 `oss bucket` 的域名，请填写以 https:// 开头的完整url。 (Required)
+ * param ossPrefix: 导出镜像文件名前缀，仅支持英文字母和数字，不能超过32个字符。 (Optional)
+ * param clientToken: 用户导出镜像的幂等性保证。每次导出请传入不同的值，如果传值与某次的clientToken相同，则返还同一个请求结果，不能超过64个字符。 (Optional)
  */
 func NewExportImageRequestWithAllParams(
     regionId string,
@@ -118,32 +118,32 @@ func NewExportImageRequestWithoutParam() *ExportImageRequest {
     }
 }
 
-/* param regionId: 地域ID(Required) */
+/* param regionId: 地域ID。(Required) */
 func (r *ExportImageRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param imageId: 镜像ID(Required) */
+/* param imageId: 镜像ID。(Required) */
 func (r *ExportImageRequest) SetImageId(imageId string) {
     r.ImageId = imageId
 }
 
-/* param roleName: 用户创建的服务角色名称(Required) */
+/* param roleName: 用户创建的服务角色名称。(Required) */
 func (r *ExportImageRequest) SetRoleName(roleName string) {
     r.RoleName = roleName
 }
 
-/* param ossUrl: 存储导出镜像文件的oss bucket的域名，请填写以 https:// 开头的完整url(Required) */
+/* param ossUrl: 存储导出镜像文件的 `oss bucket` 的域名，请填写以 https:// 开头的完整url。(Required) */
 func (r *ExportImageRequest) SetOssUrl(ossUrl string) {
     r.OssUrl = ossUrl
 }
 
-/* param ossPrefix: 导出镜像文件名前缀，仅支持英文字母和数字，不能超过32个字符(Optional) */
+/* param ossPrefix: 导出镜像文件名前缀，仅支持英文字母和数字，不能超过32个字符。(Optional) */
 func (r *ExportImageRequest) SetOssPrefix(ossPrefix string) {
     r.OssPrefix = &ossPrefix
 }
 
-/* param clientToken: 用户导出镜像的幂等性保证。每次导出请传入不同的值，如果传值与某次的clientToken相同，则返还同一个请求结果，不能超过64个字符(Optional) */
+/* param clientToken: 用户导出镜像的幂等性保证。每次导出请传入不同的值，如果传值与某次的clientToken相同，则返还同一个请求结果，不能超过64个字符。(Optional) */
 func (r *ExportImageRequest) SetClientToken(clientToken string) {
     r.ClientToken = &clientToken
 }
