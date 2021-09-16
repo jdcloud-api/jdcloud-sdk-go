@@ -25,25 +25,27 @@ type CreateInstancesRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID  */
+    /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 描述云主机配置
+    /* 实例配置。
   */
     InstanceSpec *vm.InstanceSpec `json:"instanceSpec"`
 
-    /* 购买云主机的数量；取值范围：[1,100]，默认为1。
+    /* 创建实例的数量，不能超过用户配额。
+取值范围：[1,100]；默认值：1。
+如果在弹性网卡中指定了内网IP地址，那么单次创建 `maxCount` 只能是 1。
  (Optional) */
     MaxCount *int `json:"maxCount"`
 
-    /* 用于保证请求的幂等性。由客户端生成，长度不能超过64个字符。
+    /* 用于保证请求的幂等性。由客户端生成，并确保不同请求中该参数唯一，长度不能超过64个字符。
  (Optional) */
     ClientToken *string `json:"clientToken"`
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param instanceSpec: 描述云主机配置
+ * param regionId: 地域ID。 (Required)
+ * param instanceSpec: 实例配置。
  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -66,12 +68,14 @@ func NewCreateInstancesRequest(
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param instanceSpec: 描述云主机配置
+ * param regionId: 地域ID。 (Required)
+ * param instanceSpec: 实例配置。
  (Required)
- * param maxCount: 购买云主机的数量；取值范围：[1,100]，默认为1。
+ * param maxCount: 创建实例的数量，不能超过用户配额。
+取值范围：[1,100]；默认值：1。
+如果在弹性网卡中指定了内网IP地址，那么单次创建 `maxCount` 只能是 1。
  (Optional)
- * param clientToken: 用于保证请求的幂等性。由客户端生成，长度不能超过64个字符。
+ * param clientToken: 用于保证请求的幂等性。由客户端生成，并确保不同请求中该参数唯一，长度不能超过64个字符。
  (Optional)
  */
 func NewCreateInstancesRequestWithAllParams(
@@ -108,24 +112,26 @@ func NewCreateInstancesRequestWithoutParam() *CreateInstancesRequest {
     }
 }
 
-/* param regionId: 地域ID(Required) */
+/* param regionId: 地域ID。(Required) */
 func (r *CreateInstancesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceSpec: 描述云主机配置
+/* param instanceSpec: 实例配置。
 (Required) */
 func (r *CreateInstancesRequest) SetInstanceSpec(instanceSpec *vm.InstanceSpec) {
     r.InstanceSpec = instanceSpec
 }
 
-/* param maxCount: 购买云主机的数量；取值范围：[1,100]，默认为1。
+/* param maxCount: 创建实例的数量，不能超过用户配额。
+取值范围：[1,100]；默认值：1。
+如果在弹性网卡中指定了内网IP地址，那么单次创建 `maxCount` 只能是 1。
 (Optional) */
 func (r *CreateInstancesRequest) SetMaxCount(maxCount int) {
     r.MaxCount = &maxCount
 }
 
-/* param clientToken: 用于保证请求的幂等性。由客户端生成，长度不能超过64个字符。
+/* param clientToken: 用于保证请求的幂等性。由客户端生成，并确保不同请求中该参数唯一，长度不能超过64个字符。
 (Optional) */
 func (r *CreateInstancesRequest) SetClientToken(clientToken string) {
     r.ClientToken = &clientToken

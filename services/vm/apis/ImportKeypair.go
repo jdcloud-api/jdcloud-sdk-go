@@ -24,22 +24,24 @@ type ImportKeypairRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID  */
+    /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 密钥对名称，需要全局唯一。只允许数字、大小写字母、下划线“_”及中划线“-”，不超过32个字符。
+    /* 密钥对名称，需要全局唯一。
+只允许数字、大小写字母、下划线“_”及中划线“-”，不超过32个字符。
   */
     KeyName string `json:"keyName"`
 
-    /* 密钥对的公钥部分  */
+    /* 密钥对的公钥部分。  */
     PublicKey string `json:"publicKey"`
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param keyName: 密钥对名称，需要全局唯一。只允许数字、大小写字母、下划线“_”及中划线“-”，不超过32个字符。
+ * param regionId: 地域ID。 (Required)
+ * param keyName: 密钥对名称，需要全局唯一。
+只允许数字、大小写字母、下划线“_”及中划线“-”，不超过32个字符。
  (Required)
- * param publicKey: 密钥对的公钥部分 (Required)
+ * param publicKey: 密钥对的公钥部分。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -63,10 +65,11 @@ func NewImportKeypairRequest(
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param keyName: 密钥对名称，需要全局唯一。只允许数字、大小写字母、下划线“_”及中划线“-”，不超过32个字符。
+ * param regionId: 地域ID。 (Required)
+ * param keyName: 密钥对名称，需要全局唯一。
+只允许数字、大小写字母、下划线“_”及中划线“-”，不超过32个字符。
  (Required)
- * param publicKey: 密钥对的公钥部分 (Required)
+ * param publicKey: 密钥对的公钥部分。 (Required)
  */
 func NewImportKeypairRequestWithAllParams(
     regionId string,
@@ -100,18 +103,19 @@ func NewImportKeypairRequestWithoutParam() *ImportKeypairRequest {
     }
 }
 
-/* param regionId: 地域ID(Required) */
+/* param regionId: 地域ID。(Required) */
 func (r *ImportKeypairRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param keyName: 密钥对名称，需要全局唯一。只允许数字、大小写字母、下划线“_”及中划线“-”，不超过32个字符。
+/* param keyName: 密钥对名称，需要全局唯一。
+只允许数字、大小写字母、下划线“_”及中划线“-”，不超过32个字符。
 (Required) */
 func (r *ImportKeypairRequest) SetKeyName(keyName string) {
     r.KeyName = keyName
 }
 
-/* param publicKey: 密钥对的公钥部分(Required) */
+/* param publicKey: 密钥对的公钥部分。(Required) */
 func (r *ImportKeypairRequest) SetPublicKey(publicKey string) {
     r.PublicKey = publicKey
 }

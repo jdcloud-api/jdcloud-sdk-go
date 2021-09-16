@@ -19,12 +19,18 @@ package models
 
 type Quota struct {
 
-    /* 资源类型[instance，keypair，image，instanceTemplate] (Optional) */
+    /* 资源类型。支持范围：
+`instance`：云主机。
+`keypair`：密钥。
+`image`：镜像。
+`instanceTemplate`：实例模板。
+`imageShare`：共享镜像。
+ (Optional) */
     ResourceType string `json:"resourceType"`
 
-    /* 配额上限 (Optional) */
+    /* 配额上限。 (Optional) */
     Limit int `json:"limit"`
 
-    /* 已用配额 (Optional) */
+    /* 已用配额。 (Optional) */
     Used int `json:"used"`
 }

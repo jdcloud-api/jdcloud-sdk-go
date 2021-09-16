@@ -26,36 +26,40 @@ type DescribeInstancesRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID  */
+    /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 页码；默认为1 (Optional) */
+    /* 页码；默认为1。 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* 分页大小；默认为20；取值范围[10, 100] (Optional) */
+    /* 分页大小；<br>默认为20；取值范围[10, 100]。 (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* instanceId - 云主机ID，精确匹配，支持多个
-privateIpAddress - 主网卡内网主IP地址，模糊匹配，支持多个
-az - 可用区，精确匹配，支持多个
-vpcId - 私有网络ID，精确匹配，支持多个
-status - 云主机状态，精确匹配，支持多个，<a href="http://docs.jdcloud.com/virtual-machines/api/vm_status">参考云主机状态</a>
-name - 云主机名称，模糊匹配，支持单个
-imageId - 镜像ID，精确匹配，支持多个
-networkInterfaceId - 弹性网卡ID，精确匹配，支持多个
-subnetId - 子网ID，精确匹配，支持多个
-agId - 使用可用组id，支持单个
-faultDomain - 错误域，支持多个
-dedicatedHostId - 专有宿主机ID，精确匹配，支持多个
-dedicatedPoolId - 专有宿主机池ID，精确匹配，支持多个
-instanceType - 实例规格，精确匹配，支持多个
-elasticIpAddress - 公网IP地址，精确匹配，支持单个。该条件会将公网IP转换成networkInterfaceId进行查询，所以与networkInterfaceId为或者的关系。
+    /* Tag筛选条件。 (Optional) */
+    Tags []vm.TagFilter `json:"tags"`
+
+    /* <b>filters 中支持使用以下关键字进行过滤</b>
+`instanceId`: 云主机ID，精确匹配，支持多个
+`privateIpAddress`: 云主机挂载的网卡内网主IP地址，模糊匹配，支持多个
+`az`: 可用区，精确匹配，支持多个
+`vpcId`: 私有网络ID，精确匹配，支持多个
+`status`: 云主机状态，精确匹配，支持多个，参考 [云主机状态](https://docs.jdcloud.com/virtual-machines/api/vm_status)
+`name`: 云主机名称，模糊匹配，支持单个
+`imageId`: 镜像ID，精确匹配，支持多个
+`networkInterfaceId`: 弹性网卡ID，精确匹配，支持多个
+`subnetId`: 子网ID，精确匹配，支持多个
+`agId`: 使用可用组id，支持单个
+`faultDomain`: 错误域，支持多个
+`dedicatedHostId`: 专有宿主机ID，精确匹配，支持多个
+`dedicatedPoolId`: 专有宿主机池ID，精确匹配，支持多个
+`instanceType`: 实例规格，精确匹配，支持多个，可通过查询 [DescribeInstanceTypes](https://docs.jdcloud.com/virtual-machines/api/describeinstancetypes) 接口获得实例规格
+`elasticIpAddress`: 公网IP地址，精确匹配，支持单个。该条件会将公网IP转换成 `networkInterfaceId` 进行查询，所以与 `networkInterfaceId` 为或者的关系。
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
 
 /*
- * param regionId: 地域ID (Required)
+ * param regionId: 地域ID。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -75,30 +79,33 @@ func NewDescribeInstancesRequest(
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param pageNumber: 页码；默认为1 (Optional)
- * param pageSize: 分页大小；默认为20；取值范围[10, 100] (Optional)
- * param filters: instanceId - 云主机ID，精确匹配，支持多个
-privateIpAddress - 主网卡内网主IP地址，模糊匹配，支持多个
-az - 可用区，精确匹配，支持多个
-vpcId - 私有网络ID，精确匹配，支持多个
-status - 云主机状态，精确匹配，支持多个，<a href="http://docs.jdcloud.com/virtual-machines/api/vm_status">参考云主机状态</a>
-name - 云主机名称，模糊匹配，支持单个
-imageId - 镜像ID，精确匹配，支持多个
-networkInterfaceId - 弹性网卡ID，精确匹配，支持多个
-subnetId - 子网ID，精确匹配，支持多个
-agId - 使用可用组id，支持单个
-faultDomain - 错误域，支持多个
-dedicatedHostId - 专有宿主机ID，精确匹配，支持多个
-dedicatedPoolId - 专有宿主机池ID，精确匹配，支持多个
-instanceType - 实例规格，精确匹配，支持多个
-elasticIpAddress - 公网IP地址，精确匹配，支持单个。该条件会将公网IP转换成networkInterfaceId进行查询，所以与networkInterfaceId为或者的关系。
+ * param regionId: 地域ID。 (Required)
+ * param pageNumber: 页码；默认为1。 (Optional)
+ * param pageSize: 分页大小；<br>默认为20；取值范围[10, 100]。 (Optional)
+ * param tags: Tag筛选条件。 (Optional)
+ * param filters: <b>filters 中支持使用以下关键字进行过滤</b>
+`instanceId`: 云主机ID，精确匹配，支持多个
+`privateIpAddress`: 云主机挂载的网卡内网主IP地址，模糊匹配，支持多个
+`az`: 可用区，精确匹配，支持多个
+`vpcId`: 私有网络ID，精确匹配，支持多个
+`status`: 云主机状态，精确匹配，支持多个，参考 [云主机状态](https://docs.jdcloud.com/virtual-machines/api/vm_status)
+`name`: 云主机名称，模糊匹配，支持单个
+`imageId`: 镜像ID，精确匹配，支持多个
+`networkInterfaceId`: 弹性网卡ID，精确匹配，支持多个
+`subnetId`: 子网ID，精确匹配，支持多个
+`agId`: 使用可用组id，支持单个
+`faultDomain`: 错误域，支持多个
+`dedicatedHostId`: 专有宿主机ID，精确匹配，支持多个
+`dedicatedPoolId`: 专有宿主机池ID，精确匹配，支持多个
+`instanceType`: 实例规格，精确匹配，支持多个，可通过查询 [DescribeInstanceTypes](https://docs.jdcloud.com/virtual-machines/api/describeinstancetypes) 接口获得实例规格
+`elasticIpAddress`: 公网IP地址，精确匹配，支持单个。该条件会将公网IP转换成 `networkInterfaceId` 进行查询，所以与 `networkInterfaceId` 为或者的关系。
  (Optional)
  */
 func NewDescribeInstancesRequestWithAllParams(
     regionId string,
     pageNumber *int,
     pageSize *int,
+    tags []vm.TagFilter,
     filters []common.Filter,
 ) *DescribeInstancesRequest {
 
@@ -112,6 +119,7 @@ func NewDescribeInstancesRequestWithAllParams(
         RegionId: regionId,
         PageNumber: pageNumber,
         PageSize: pageSize,
+        Tags: tags,
         Filters: filters,
     }
 }
@@ -129,36 +137,42 @@ func NewDescribeInstancesRequestWithoutParam() *DescribeInstancesRequest {
     }
 }
 
-/* param regionId: 地域ID(Required) */
+/* param regionId: 地域ID。(Required) */
 func (r *DescribeInstancesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param pageNumber: 页码；默认为1(Optional) */
+/* param pageNumber: 页码；默认为1。(Optional) */
 func (r *DescribeInstancesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
-/* param pageSize: 分页大小；默认为20；取值范围[10, 100](Optional) */
+/* param pageSize: 分页大小；<br>默认为20；取值范围[10, 100]。(Optional) */
 func (r *DescribeInstancesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
-/* param filters: instanceId - 云主机ID，精确匹配，支持多个
-privateIpAddress - 主网卡内网主IP地址，模糊匹配，支持多个
-az - 可用区，精确匹配，支持多个
-vpcId - 私有网络ID，精确匹配，支持多个
-status - 云主机状态，精确匹配，支持多个，<a href="http://docs.jdcloud.com/virtual-machines/api/vm_status">参考云主机状态</a>
-name - 云主机名称，模糊匹配，支持单个
-imageId - 镜像ID，精确匹配，支持多个
-networkInterfaceId - 弹性网卡ID，精确匹配，支持多个
-subnetId - 子网ID，精确匹配，支持多个
-agId - 使用可用组id，支持单个
-faultDomain - 错误域，支持多个
-dedicatedHostId - 专有宿主机ID，精确匹配，支持多个
-dedicatedPoolId - 专有宿主机池ID，精确匹配，支持多个
-instanceType - 实例规格，精确匹配，支持多个
-elasticIpAddress - 公网IP地址，精确匹配，支持单个。该条件会将公网IP转换成networkInterfaceId进行查询，所以与networkInterfaceId为或者的关系。
+/* param tags: Tag筛选条件。(Optional) */
+func (r *DescribeInstancesRequest) SetTags(tags []vm.TagFilter) {
+    r.Tags = tags
+}
+
+/* param filters: <b>filters 中支持使用以下关键字进行过滤</b>
+`instanceId`: 云主机ID，精确匹配，支持多个
+`privateIpAddress`: 云主机挂载的网卡内网主IP地址，模糊匹配，支持多个
+`az`: 可用区，精确匹配，支持多个
+`vpcId`: 私有网络ID，精确匹配，支持多个
+`status`: 云主机状态，精确匹配，支持多个，参考 [云主机状态](https://docs.jdcloud.com/virtual-machines/api/vm_status)
+`name`: 云主机名称，模糊匹配，支持单个
+`imageId`: 镜像ID，精确匹配，支持多个
+`networkInterfaceId`: 弹性网卡ID，精确匹配，支持多个
+`subnetId`: 子网ID，精确匹配，支持多个
+`agId`: 使用可用组id，支持单个
+`faultDomain`: 错误域，支持多个
+`dedicatedHostId`: 专有宿主机ID，精确匹配，支持多个
+`dedicatedPoolId`: 专有宿主机池ID，精确匹配，支持多个
+`instanceType`: 实例规格，精确匹配，支持多个，可通过查询 [DescribeInstanceTypes](https://docs.jdcloud.com/virtual-machines/api/describeinstancetypes) 接口获得实例规格
+`elasticIpAddress`: 公网IP地址，精确匹配，支持单个。该条件会将公网IP转换成 `networkInterfaceId` 进行查询，所以与 `networkInterfaceId` 为或者的关系。
 (Optional) */
 func (r *DescribeInstancesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters

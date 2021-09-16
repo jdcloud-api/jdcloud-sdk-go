@@ -26,15 +26,17 @@ type DescribeInstanceTemplatesCustomdataRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID  */
+    /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* instanceTemplateId - 启动模板ID，精确匹配，支持多个，最多支持10个 (Optional) */
+    /* <b>filters 中支持使用以下关键字进行过滤</b>
+`instanceTemplateId`: 实例模板ID，精确匹配，最多支持10个
+ (Optional) */
     Filters []common.Filter `json:"filters"`
 }
 
 /*
- * param regionId: 地域ID (Required)
+ * param regionId: 地域ID。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -54,8 +56,10 @@ func NewDescribeInstanceTemplatesCustomdataRequest(
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param filters: instanceTemplateId - 启动模板ID，精确匹配，支持多个，最多支持10个 (Optional)
+ * param regionId: 地域ID。 (Required)
+ * param filters: <b>filters 中支持使用以下关键字进行过滤</b>
+`instanceTemplateId`: 实例模板ID，精确匹配，最多支持10个
+ (Optional)
  */
 func NewDescribeInstanceTemplatesCustomdataRequestWithAllParams(
     regionId string,
@@ -87,12 +91,14 @@ func NewDescribeInstanceTemplatesCustomdataRequestWithoutParam() *DescribeInstan
     }
 }
 
-/* param regionId: 地域ID(Required) */
+/* param regionId: 地域ID。(Required) */
 func (r *DescribeInstanceTemplatesCustomdataRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param filters: instanceTemplateId - 启动模板ID，精确匹配，支持多个，最多支持10个(Optional) */
+/* param filters: <b>filters 中支持使用以下关键字进行过滤</b>
+`instanceTemplateId`: 实例模板ID，精确匹配，最多支持10个
+(Optional) */
 func (r *DescribeInstanceTemplatesCustomdataRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }

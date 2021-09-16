@@ -19,9 +19,9 @@ package models
 
 type InstancePrivateIpAddress struct {
 
-    /* 云主机ID (Optional) */
+    /* 云主机ID。 (Optional) */
     InstanceId string `json:"instanceId"`
 
-    /* 主网卡内网主IP地址 (Optional) */
+    /* 内网主IP地址。 (Optional) */
     PrivateIpAddress string `json:"privateIpAddress"`
 }

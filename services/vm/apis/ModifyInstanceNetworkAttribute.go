@@ -25,25 +25,27 @@ type ModifyInstanceNetworkAttributeRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID  */
+    /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 云主机ID  */
+    /* 云主机ID。  */
     InstanceId string `json:"instanceId"`
 
-    /* 弹性网卡列表 (Optional) */
+    /* 弹性网卡列表。  */
     Networks []vm.InstanceNetworkAttribute `json:"networks"`
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param instanceId: 云主机ID (Required)
+ * param regionId: 地域ID。 (Required)
+ * param instanceId: 云主机ID。 (Required)
+ * param networks: 弹性网卡列表。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewModifyInstanceNetworkAttributeRequest(
     regionId string,
     instanceId string,
+    networks []vm.InstanceNetworkAttribute,
 ) *ModifyInstanceNetworkAttributeRequest {
 
 	return &ModifyInstanceNetworkAttributeRequest{
@@ -55,13 +57,14 @@ func NewModifyInstanceNetworkAttributeRequest(
 		},
         RegionId: regionId,
         InstanceId: instanceId,
+        Networks: networks,
 	}
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param instanceId: 云主机ID (Required)
- * param networks: 弹性网卡列表 (Optional)
+ * param regionId: 地域ID。 (Required)
+ * param instanceId: 云主机ID。 (Required)
+ * param networks: 弹性网卡列表。 (Required)
  */
 func NewModifyInstanceNetworkAttributeRequestWithAllParams(
     regionId string,
@@ -95,17 +98,17 @@ func NewModifyInstanceNetworkAttributeRequestWithoutParam() *ModifyInstanceNetwo
     }
 }
 
-/* param regionId: 地域ID(Required) */
+/* param regionId: 地域ID。(Required) */
 func (r *ModifyInstanceNetworkAttributeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 云主机ID(Required) */
+/* param instanceId: 云主机ID。(Required) */
 func (r *ModifyInstanceNetworkAttributeRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param networks: 弹性网卡列表(Optional) */
+/* param networks: 弹性网卡列表。(Required) */
 func (r *ModifyInstanceNetworkAttributeRequest) SetNetworks(networks []vm.InstanceNetworkAttribute) {
     r.Networks = networks
 }

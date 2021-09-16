@@ -26,20 +26,21 @@ type DescribeInstanceTypesRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID  */
+    /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 服务类型，取值为{vm、nc}，vm代表虚机、nc代表原生容器 (Optional) */
+    /* 产品线类型，默认为 `vm`。支持范围：`vm` 云主机，`nc` 原生容器。 (Optional) */
     ServiceName *string `json:"serviceName"`
 
-    /* instanceTypes - 实例规格，精确匹配，支持多个
-az - 可用区，精确匹配，支持多个
+    /* <b>filters 中支持使用以下关键字进行过滤</b>
+`instanceTypes`: 实例规格，精确匹配，支持多个
+`az`: 可用区，精确匹配，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
 
 /*
- * param regionId: 地域ID (Required)
+ * param regionId: 地域ID。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -59,10 +60,11 @@ func NewDescribeInstanceTypesRequest(
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param serviceName: 服务类型，取值为{vm、nc}，vm代表虚机、nc代表原生容器 (Optional)
- * param filters: instanceTypes - 实例规格，精确匹配，支持多个
-az - 可用区，精确匹配，支持多个
+ * param regionId: 地域ID。 (Required)
+ * param serviceName: 产品线类型，默认为 `vm`。支持范围：`vm` 云主机，`nc` 原生容器。 (Optional)
+ * param filters: <b>filters 中支持使用以下关键字进行过滤</b>
+`instanceTypes`: 实例规格，精确匹配，支持多个
+`az`: 可用区，精确匹配，支持多个
  (Optional)
  */
 func NewDescribeInstanceTypesRequestWithAllParams(
@@ -97,18 +99,19 @@ func NewDescribeInstanceTypesRequestWithoutParam() *DescribeInstanceTypesRequest
     }
 }
 
-/* param regionId: 地域ID(Required) */
+/* param regionId: 地域ID。(Required) */
 func (r *DescribeInstanceTypesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param serviceName: 服务类型，取值为{vm、nc}，vm代表虚机、nc代表原生容器(Optional) */
+/* param serviceName: 产品线类型，默认为 `vm`。支持范围：`vm` 云主机，`nc` 原生容器。(Optional) */
 func (r *DescribeInstanceTypesRequest) SetServiceName(serviceName string) {
     r.ServiceName = &serviceName
 }
 
-/* param filters: instanceTypes - 实例规格，精确匹配，支持多个
-az - 可用区，精确匹配，支持多个
+/* param filters: <b>filters 中支持使用以下关键字进行过滤</b>
+`instanceTypes`: 实例规格，精确匹配，支持多个
+`az`: 可用区，精确匹配，支持多个
 (Optional) */
 func (r *DescribeInstanceTypesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters

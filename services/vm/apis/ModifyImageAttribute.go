@@ -24,22 +24,22 @@ type ModifyImageAttributeRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID  */
+    /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 镜像ID  */
+    /* 镜像ID。  */
     ImageId string `json:"imageId"`
 
-    /* 名称，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional) */
+    /* 镜像名称。参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。 (Optional) */
     Name *string `json:"name"`
 
-    /* 描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional) */
+    /* 镜像描述。参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。 (Optional) */
     Description *string `json:"description"`
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param imageId: 镜像ID (Required)
+ * param regionId: 地域ID。 (Required)
+ * param imageId: 镜像ID。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -61,10 +61,10 @@ func NewModifyImageAttributeRequest(
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param imageId: 镜像ID (Required)
- * param name: 名称，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional)
- * param description: 描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional)
+ * param regionId: 地域ID。 (Required)
+ * param imageId: 镜像ID。 (Required)
+ * param name: 镜像名称。参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。 (Optional)
+ * param description: 镜像描述。参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。 (Optional)
  */
 func NewModifyImageAttributeRequestWithAllParams(
     regionId string,
@@ -100,22 +100,22 @@ func NewModifyImageAttributeRequestWithoutParam() *ModifyImageAttributeRequest {
     }
 }
 
-/* param regionId: 地域ID(Required) */
+/* param regionId: 地域ID。(Required) */
 func (r *ModifyImageAttributeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param imageId: 镜像ID(Required) */
+/* param imageId: 镜像ID。(Required) */
 func (r *ModifyImageAttributeRequest) SetImageId(imageId string) {
     r.ImageId = imageId
 }
 
-/* param name: 名称，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。(Optional) */
+/* param name: 镜像名称。参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。(Optional) */
 func (r *ModifyImageAttributeRequest) SetName(name string) {
     r.Name = &name
 }
 
-/* param description: 描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。(Optional) */
+/* param description: 镜像描述。参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。(Optional) */
 func (r *ModifyImageAttributeRequest) SetDescription(description string) {
     r.Description = &description
 }

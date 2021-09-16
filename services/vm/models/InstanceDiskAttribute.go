@@ -19,12 +19,11 @@ package models
 
 type InstanceDiskAttribute struct {
 
-    /* 云硬盘ID (Optional) */
+    /* 云硬盘ID。 (Optional) */
     DiskId *string `json:"diskId"`
 
-    /* 随云主机一起删除，删除主机时自动删除此磁盘，默认为false，本地盘(local)不能更改此值。
-如果云主机中的数据盘(cloud)是包年包月计费方式，此参数不生效。
-如果云主机中的数据盘(cloud)是共享型数据盘，此参数不生效。
- (Optional) */
+    /* 是否随实例一起删除，即删除实例时是否自动删除此磁盘。此参数仅对按配置计费的非多点挂载云硬盘生效。
+`true`：随实例删除。
+`false`（默认值）：不随实例删除。 (Optional) */
     AutoDelete *bool `json:"autoDelete"`
 }

@@ -19,9 +19,9 @@ package models
 
 type CopyImage struct {
 
-    /* 复制后的目标镜像ID (Optional) */
+    /* 跨区复制产生的目标镜像ID。 (Optional) */
     DestinationImageId string `json:"destinationImageId"`
 
-    /* 源镜像ID (Optional) */
+    /* 源镜像ID。 (Optional) */
     SourceImageId string `json:"sourceImageId"`
 }

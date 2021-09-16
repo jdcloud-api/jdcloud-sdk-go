@@ -19,33 +19,36 @@ package models
 
 type InstanceType struct {
 
-    /* 实例规格类型 (Optional) */
+    /* 实例规格族。 (Optional) */
     Family string `json:"family"`
 
-    /* 实例规格，比如g.b1.2xlarge (Optional) */
+    /* 实例规格。 (Optional) */
     InstanceType string `json:"instanceType"`
 
-    /* cpu个数 (Optional) */
+    /* cpu个数。 (Optional) */
     Cpu int `json:"cpu"`
 
-    /* 内存大小 (Optional) */
+    /* 内存大小。 (Optional) */
     MemoryMB int `json:"memoryMB"`
 
-    /* 支持弹性网卡的数量 (Optional) */
+    /* 支持绑定的弹性网卡数量，包括主网卡。 (Optional) */
     NicLimit int `json:"nicLimit"`
 
-    /* 描述 (Optional) */
+    /* 支持挂载的云硬盘数量，包括云盘系统盘。 (Optional) */
+    CloudDiskCountLimit int `json:"cloudDiskCountLimit"`
+
+    /* 实例规格描述。 (Optional) */
     Desc string `json:"desc"`
 
-    /* 规格状态 (Optional) */
+    /* 实例规格售卖状态。已售罄的实例规格无法使用。 (Optional) */
     State []InstanceTypeState `json:"state"`
 
-    /* Gpu配置 (Optional) */
+    /* GPU配置，针对GPU类型的实例规格有效。 (Optional) */
     Gpu Gpu `json:"gpu"`
 
-    /* 本地缓存盘配置，目前只有Gpu规格上才有 (Optional) */
+    /* 本地数据盘配置（缓存盘），针对GPU类型、或本地存储型的实例规格有效。 (Optional) */
     LocalDisks []LocalDisk `json:"localDisks"`
 
-    /* 实例规格代数 (Optional) */
+    /* 实例规格代数。 (Optional) */
     Generation int `json:"generation"`
 }

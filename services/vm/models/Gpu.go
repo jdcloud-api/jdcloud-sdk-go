@@ -19,9 +19,9 @@ package models
 
 type Gpu struct {
 
-    /* GPU型号 (Optional) */
+    /* GPU卡型号。 (Optional) */
     Model string `json:"model"`
 
-    /* GPU数量 (Optional) */
+    /* GPU卡数量。 (Optional) */
     Number int `json:"number"`
 }

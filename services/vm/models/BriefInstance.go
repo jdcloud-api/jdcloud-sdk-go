@@ -19,63 +19,66 @@ package models
 
 type BriefInstance struct {
 
-    /* 云主机ID (Optional) */
+    /* 云主机ID。 (Optional) */
     InstanceId string `json:"instanceId"`
 
-    /* 云主机名称 (Optional) */
+    /* 云主机名称。 (Optional) */
     InstanceName string `json:"instanceName"`
 
-    /* 实例规格 (Optional) */
+    /* 实例规格。 (Optional) */
     InstanceType string `json:"instanceType"`
 
-    /* 主网卡所属VPC的ID (Optional) */
+    /* 主网卡所属VPC的ID。 (Optional) */
     VpcId string `json:"vpcId"`
 
-    /* 主网卡所属子网的ID (Optional) */
+    /* 主网卡所属子网的ID。 (Optional) */
     SubnetId string `json:"subnetId"`
 
-    /* 主网卡主IP地址 (Optional) */
+    /* 主网卡主内网IP地址。 (Optional) */
     PrivateIpAddress string `json:"privateIpAddress"`
 
-    /* 云主机状态，<a href="http://docs.jdcloud.com/virtual-machines/api/vm_status">参考云主机状态</a> (Optional) */
+    /* 云主机状态，参考 [云主机状态](https://docs.jdcloud.com/virtual-machines/api/vm_status)。 (Optional) */
     Status string `json:"status"`
 
-    /* 云主机描述 (Optional) */
+    /* 云主机描述。 (Optional) */
     Description string `json:"description"`
 
-    /* 镜像ID (Optional) */
+    /* 云主机使用的镜像ID。 (Optional) */
     ImageId string `json:"imageId"`
 
-    /* 系统盘配置 (Optional) */
+    /* 系统盘配置。 (Optional) */
     SystemDisk BriefInstanceDiskAttachment `json:"systemDisk"`
 
-    /* 数据盘配置 (Optional) */
+    /* 数据盘配置列表。 (Optional) */
     DataDisks []BriefInstanceDiskAttachment `json:"dataDisks"`
 
-    /* 主网卡配置 (Optional) */
+    /* 主网卡配置。 (Optional) */
     PrimaryNetworkInterface BriefInstanceNetworkInterfaceAttachment `json:"primaryNetworkInterface"`
 
-    /* 辅助网卡配置 (Optional) */
+    /* 辅助网卡配置列表。 (Optional) */
     SecondaryNetworkInterfaces []BriefInstanceNetworkInterfaceAttachment `json:"secondaryNetworkInterfaces"`
 
-    /* 创建时间 (Optional) */
+    /* 云主机实例的创建时间。 (Optional) */
     LaunchTime string `json:"launchTime"`
 
-    /* 云主机所在可用区 (Optional) */
+    /* 云主机所在可用区。 (Optional) */
     Az string `json:"az"`
 
-    /* 密钥对名称 (Optional) */
+    /* 云主机使用的密钥对名称。 (Optional) */
     KeyNames []string `json:"keyNames"`
 
-    /* 高可用组中的错误域 (Optional) */
+    /* 高可用组中的错误域。 (Optional) */
     FaultDomain string `json:"faultDomain"`
 
-    /* 关机模式，只支持云盘做系统盘的按配置计费云主机。KeepCharging：关机后继续计费；StopCharging：关机后停止计费。 (Optional) */
+    /* 关机模式，只支持云盘做系统盘的按配置计费云主机。
+`keepCharging`：关机后继续计费。
+`stopCharging`：关机后停止计费。
+ (Optional) */
     ChargeOnStopped string `json:"chargeOnStopped"`
 
-    /* 实例所属的专有宿主机池 (Optional) */
+    /* 云主机所属的专有宿主机池。 (Optional) */
     DedicatedPoolId string `json:"dedicatedPoolId"`
 
-    /* 专有宿主机ID (Optional) */
+    /* 云主机所属的专有宿主机ID。 (Optional) */
     DedicatedHostId string `json:"dedicatedHostId"`
 }

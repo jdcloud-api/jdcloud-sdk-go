@@ -21,78 +21,87 @@ import disk "github.com/jdcloud-api/jdcloud-sdk-go/services/disk/models"
 
 type Instance struct {
 
-    /* 云主机ID (Optional) */
+    /* 云主机ID。 (Optional) */
     InstanceId string `json:"instanceId"`
 
-    /* 云主机名称 (Optional) */
+    /* 云主机名称。 (Optional) */
     InstanceName string `json:"instanceName"`
 
-    /* 云主机hostname (Optional) */
+    /* 云主机hostname。 (Optional) */
     Hostname string `json:"hostname"`
 
-    /* 实例规格 (Optional) */
+    /* 实例规格。 (Optional) */
     InstanceType string `json:"instanceType"`
 
-    /* 主网卡所属VPC的ID (Optional) */
+    /* 主网卡所属VPC的ID。 (Optional) */
     VpcId string `json:"vpcId"`
 
-    /* 主网卡所属子网的ID (Optional) */
+    /* 主网卡所属子网的ID。 (Optional) */
     SubnetId string `json:"subnetId"`
 
-    /* 主网卡主IP地址 (Optional) */
+    /* 主网卡主内网IP地址。 (Optional) */
     PrivateIpAddress string `json:"privateIpAddress"`
 
-    /* 主网卡主IP绑定弹性IP的ID (Optional) */
+    /* 主网卡主IP绑定弹性IP的ID。 (Optional) */
     ElasticIpId string `json:"elasticIpId"`
 
-    /* 主网卡主IP绑定弹性IP的地址 (Optional) */
+    /* 主网卡主IP绑定弹性IP的地址。 (Optional) */
     ElasticIpAddress string `json:"elasticIpAddress"`
 
-    /* 云主机状态，<a href="http://docs.jdcloud.com/virtual-machines/api/vm_status">参考云主机状态</a> (Optional) */
+    /* 云主机状态，参考 [云主机状态](https://docs.jdcloud.com/virtual-machines/api/vm_status)。 (Optional) */
     Status string `json:"status"`
 
-    /* 云主机描述 (Optional) */
+    /* 云主机描述。 (Optional) */
     Description string `json:"description"`
 
-    /* 镜像ID (Optional) */
+    /* 云主机使用的镜像ID。 (Optional) */
     ImageId string `json:"imageId"`
 
-    /* 系统盘配置 (Optional) */
+    /* 系统盘配置。 (Optional) */
     SystemDisk InstanceDiskAttachment `json:"systemDisk"`
 
-    /* 数据盘配置 (Optional) */
+    /* 数据盘配置列表。 (Optional) */
     DataDisks []InstanceDiskAttachment `json:"dataDisks"`
 
-    /* 主网卡配置 (Optional) */
+    /* 主网卡主IP关联的弹性公网IP配置。 (Optional) */
     PrimaryNetworkInterface InstanceNetworkInterfaceAttachment `json:"primaryNetworkInterface"`
 
-    /* 辅助网卡配置 (Optional) */
+    /* 辅助网卡配置列表。 (Optional) */
     SecondaryNetworkInterfaces []InstanceNetworkInterfaceAttachment `json:"secondaryNetworkInterfaces"`
 
-    /* 创建时间 (Optional) */
+    /* 云主机实例的创建时间。 (Optional) */
     LaunchTime string `json:"launchTime"`
 
-    /* 云主机所在可用区 (Optional) */
+    /* 云主机所在可用区。 (Optional) */
     Az string `json:"az"`
 
-    /* 密钥对名称 (Optional) */
+    /* 云主机使用的密钥对名称。 (Optional) */
     KeyNames []string `json:"keyNames"`
 
-    /* 计费信息 (Optional) */
+    /* 云主机的计费信息。 (Optional) */
     Charge charge.Charge `json:"charge"`
 
-    /* 高可用组，如果创建云主机使用了高可用组，此处可展示高可用组名称 (Optional) */
+    /* 云主机关联的高可用组，如果创建云主机使用了高可用组，此处可展示高可用组名称。 (Optional) */
     Ag Ag `json:"ag"`
 
-    /* 高可用组中的错误域 (Optional) */
+    /* 高可用组中的错误域。 (Optional) */
     FaultDomain string `json:"faultDomain"`
 
-    /* Tag信息 (Optional) */
+    /* Tag信息。 (Optional) */
     Tags []disk.Tag `json:"tags"`
 
-    /* 关机模式，只支持云盘做系统盘的按配置计费云主机。keepCharging：关机后继续计费；stopCharging：关机后停止计费。 (Optional) */
+    /* 停机不计费模式。该参数仅对按配置计费且系统盘为云硬盘的实例生效，并且不是专有宿主机中的实例。
+`keepCharging`：关机后继续计费。
+`stopCharging`：关机后停止计费。
+ (Optional) */
     ChargeOnStopped string `json:"chargeOnStopped"`
 
-    /* 策略信息 (Optional) */
+    /* 自动任务策略，关联了自动任务策略时可获取相应信息。 (Optional) */
     Policies []Policy `json:"policies"`
+
+    /* 云主机所属的专有宿主机池。 (Optional) */
+    DedicatedPoolId string `json:"dedicatedPoolId"`
+
+    /* 云主机所属的专有宿主机ID。 (Optional) */
+    DedicatedHostId string `json:"dedicatedHostId"`
 }

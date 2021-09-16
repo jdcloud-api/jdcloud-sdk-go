@@ -26,19 +26,22 @@ type DescribeQuotasRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID  */
+    /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* resourceTypes - 资源类型，支持多个[instance，keypair，image，instanceTemplate，imageShare]
+    /* <b>filters 中支持使用以下关键字进行过滤</b>
+`resourceTypes`: 资源类型，支持多个，可选范围：`instance、keypair、image、instanceTemplate、imageShare`
  (Optional) */
     Filters []common.Filter `json:"filters"`
 
-    /* 私有镜像Id，查询镜像共享(imageShare)配额时，此参数必传 (Optional) */
+    /* 私有镜像Id。
+查询镜像共享 `imageShare` 的配额时，此参数必传。
+ (Optional) */
     ImageId *string `json:"imageId"`
 }
 
 /*
- * param regionId: 地域ID (Required)
+ * param regionId: 地域ID。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -58,10 +61,13 @@ func NewDescribeQuotasRequest(
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param filters: resourceTypes - 资源类型，支持多个[instance，keypair，image，instanceTemplate，imageShare]
+ * param regionId: 地域ID。 (Required)
+ * param filters: <b>filters 中支持使用以下关键字进行过滤</b>
+`resourceTypes`: 资源类型，支持多个，可选范围：`instance、keypair、image、instanceTemplate、imageShare`
  (Optional)
- * param imageId: 私有镜像Id，查询镜像共享(imageShare)配额时，此参数必传 (Optional)
+ * param imageId: 私有镜像Id。
+查询镜像共享 `imageShare` 的配额时，此参数必传。
+ (Optional)
  */
 func NewDescribeQuotasRequestWithAllParams(
     regionId string,
@@ -95,18 +101,21 @@ func NewDescribeQuotasRequestWithoutParam() *DescribeQuotasRequest {
     }
 }
 
-/* param regionId: 地域ID(Required) */
+/* param regionId: 地域ID。(Required) */
 func (r *DescribeQuotasRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param filters: resourceTypes - 资源类型，支持多个[instance，keypair，image，instanceTemplate，imageShare]
+/* param filters: <b>filters 中支持使用以下关键字进行过滤</b>
+`resourceTypes`: 资源类型，支持多个，可选范围：`instance、keypair、image、instanceTemplate、imageShare`
 (Optional) */
 func (r *DescribeQuotasRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
 
-/* param imageId: 私有镜像Id，查询镜像共享(imageShare)配额时，此参数必传(Optional) */
+/* param imageId: 私有镜像Id。
+查询镜像共享 `imageShare` 的配额时，此参数必传。
+(Optional) */
 func (r *DescribeQuotasRequest) SetImageId(imageId string) {
     r.ImageId = &imageId
 }

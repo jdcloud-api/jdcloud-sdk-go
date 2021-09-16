@@ -19,21 +19,21 @@ package models
 
 type InstanceTemplate struct {
 
-    /* 启动模板ID (Optional) */
+    /* 实例模板ID (Optional) */
     Id string `json:"id"`
 
-    /* 启动模板名称 (Optional) */
+    /* 实例模板名称。 (Optional) */
     Name string `json:"name"`
 
-    /* 启动模板描述 (Optional) */
+    /* 实例模板描述。 (Optional) */
     Description string `json:"description"`
 
-    /* 启动模板的数据 (Optional) */
+    /* 实例模板详细配置。 (Optional) */
     InstanceTemplateData InstanceTemplateData `json:"instanceTemplateData"`
 
-    /* 关联的高可用组(ag)信息 (Optional) */
+    /* 关联的高可用组(ag)信息。 (Optional) */
     Ags []Ag `json:"ags"`
 
-    /* 创建时间 (Optional) */
+    /* 实例模板创建时间。 (Optional) */
     CreatedTime string `json:"createdTime"`
 }

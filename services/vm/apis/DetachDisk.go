@@ -24,23 +24,25 @@ type DetachDiskRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID  */
+    /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 云主机ID  */
+    /* 云主机ID。  */
     InstanceId string `json:"instanceId"`
 
-    /* 云硬盘ID  */
+    /* 云硬盘ID。  */
     DiskId string `json:"diskId"`
 
-    /* 强制缷载，默认False。如果此参数传值为True，代表数据盘的IO会被强制断掉。 (Optional) */
+    /* 是否强制缷载，默认False。
+如果此参数传值为True，数据盘的IO会被强制断掉。
+ (Optional) */
     Force *bool `json:"force"`
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param instanceId: 云主机ID (Required)
- * param diskId: 云硬盘ID (Required)
+ * param regionId: 地域ID。 (Required)
+ * param instanceId: 云主机ID。 (Required)
+ * param diskId: 云硬盘ID。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -64,10 +66,12 @@ func NewDetachDiskRequest(
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param instanceId: 云主机ID (Required)
- * param diskId: 云硬盘ID (Required)
- * param force: 强制缷载，默认False。如果此参数传值为True，代表数据盘的IO会被强制断掉。 (Optional)
+ * param regionId: 地域ID。 (Required)
+ * param instanceId: 云主机ID。 (Required)
+ * param diskId: 云硬盘ID。 (Required)
+ * param force: 是否强制缷载，默认False。
+如果此参数传值为True，数据盘的IO会被强制断掉。
+ (Optional)
  */
 func NewDetachDiskRequestWithAllParams(
     regionId string,
@@ -103,22 +107,24 @@ func NewDetachDiskRequestWithoutParam() *DetachDiskRequest {
     }
 }
 
-/* param regionId: 地域ID(Required) */
+/* param regionId: 地域ID。(Required) */
 func (r *DetachDiskRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: 云主机ID(Required) */
+/* param instanceId: 云主机ID。(Required) */
 func (r *DetachDiskRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
-/* param diskId: 云硬盘ID(Required) */
+/* param diskId: 云硬盘ID。(Required) */
 func (r *DetachDiskRequest) SetDiskId(diskId string) {
     r.DiskId = diskId
 }
 
-/* param force: 强制缷载，默认False。如果此参数传值为True，代表数据盘的IO会被强制断掉。(Optional) */
+/* param force: 是否强制缷载，默认False。
+如果此参数传值为True，数据盘的IO会被强制断掉。
+(Optional) */
 func (r *DetachDiskRequest) SetForce(force bool) {
     r.Force = &force
 }

@@ -25,16 +25,16 @@ type ImageTasksRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID  */
+    /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 任务种类。可选值：ImportImage， ExportImage  */
+    /* 任务操作类型。支持范围：`ImportImage、ExportImage`。  */
     TaskAction string `json:"taskAction"`
 
-    /* 任务id (Optional) */
+    /* 任务id列表。 (Optional) */
     TaskIds []int `json:"taskIds"`
 
-    /* 任务状态。可选值：pending,running,failed,finished (Optional) */
+    /* 任务状态。支持范围：`pending、running、failed、finished`。 (Optional) */
     TaskStatus *string `json:"taskStatus"`
 
     /* 任务开始时间 (Optional) */
@@ -43,16 +43,16 @@ type ImageTasksRequest struct {
     /* 任务结束时间 (Optional) */
     EndTime *string `json:"endTime"`
 
-    /* 页码；默认为1 (Optional) */
+    /* 页码；默认为1。 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* 分页大小；默认为20；取值范围[10, 100] (Optional) */
+    /* 分页大小；默认为10；取值范围[1, 10]。 (Optional) */
     PageSize *int `json:"pageSize"`
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param taskAction: 任务种类。可选值：ImportImage， ExportImage (Required)
+ * param regionId: 地域ID。 (Required)
+ * param taskAction: 任务操作类型。支持范围：`ImportImage、ExportImage`。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -74,14 +74,14 @@ func NewImageTasksRequest(
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param taskAction: 任务种类。可选值：ImportImage， ExportImage (Required)
- * param taskIds: 任务id (Optional)
- * param taskStatus: 任务状态。可选值：pending,running,failed,finished (Optional)
+ * param regionId: 地域ID。 (Required)
+ * param taskAction: 任务操作类型。支持范围：`ImportImage、ExportImage`。 (Required)
+ * param taskIds: 任务id列表。 (Optional)
+ * param taskStatus: 任务状态。支持范围：`pending、running、failed、finished`。 (Optional)
  * param startTime: 任务开始时间 (Optional)
  * param endTime: 任务结束时间 (Optional)
- * param pageNumber: 页码；默认为1 (Optional)
- * param pageSize: 分页大小；默认为20；取值范围[10, 100] (Optional)
+ * param pageNumber: 页码；默认为1。 (Optional)
+ * param pageSize: 分页大小；默认为10；取值范围[1, 10]。 (Optional)
  */
 func NewImageTasksRequestWithAllParams(
     regionId string,
@@ -125,22 +125,22 @@ func NewImageTasksRequestWithoutParam() *ImageTasksRequest {
     }
 }
 
-/* param regionId: 地域ID(Required) */
+/* param regionId: 地域ID。(Required) */
 func (r *ImageTasksRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param taskAction: 任务种类。可选值：ImportImage， ExportImage(Required) */
+/* param taskAction: 任务操作类型。支持范围：`ImportImage、ExportImage`。(Required) */
 func (r *ImageTasksRequest) SetTaskAction(taskAction string) {
     r.TaskAction = taskAction
 }
 
-/* param taskIds: 任务id(Optional) */
+/* param taskIds: 任务id列表。(Optional) */
 func (r *ImageTasksRequest) SetTaskIds(taskIds []int) {
     r.TaskIds = taskIds
 }
 
-/* param taskStatus: 任务状态。可选值：pending,running,failed,finished(Optional) */
+/* param taskStatus: 任务状态。支持范围：`pending、running、failed、finished`。(Optional) */
 func (r *ImageTasksRequest) SetTaskStatus(taskStatus string) {
     r.TaskStatus = &taskStatus
 }
@@ -155,12 +155,12 @@ func (r *ImageTasksRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
 
-/* param pageNumber: 页码；默认为1(Optional) */
+/* param pageNumber: 页码；默认为1。(Optional) */
 func (r *ImageTasksRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
-/* param pageSize: 分页大小；默认为20；取值范围[10, 100](Optional) */
+/* param pageSize: 分页大小；默认为10；取值范围[1, 10]。(Optional) */
 func (r *ImageTasksRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }

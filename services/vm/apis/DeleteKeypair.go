@@ -24,16 +24,16 @@ type DeleteKeypairRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID  */
+    /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 密钥名称  */
+    /* 密钥名称。  */
     KeyName string `json:"keyName"`
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param keyName: 密钥名称 (Required)
+ * param regionId: 地域ID。 (Required)
+ * param keyName: 密钥名称。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -55,8 +55,8 @@ func NewDeleteKeypairRequest(
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param keyName: 密钥名称 (Required)
+ * param regionId: 地域ID。 (Required)
+ * param keyName: 密钥名称。 (Required)
  */
 func NewDeleteKeypairRequestWithAllParams(
     regionId string,
@@ -88,12 +88,12 @@ func NewDeleteKeypairRequestWithoutParam() *DeleteKeypairRequest {
     }
 }
 
-/* param regionId: 地域ID(Required) */
+/* param regionId: 地域ID。(Required) */
 func (r *DeleteKeypairRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param keyName: 密钥名称(Required) */
+/* param keyName: 密钥名称。(Required) */
 func (r *DeleteKeypairRequest) SetKeyName(keyName string) {
     r.KeyName = keyName
 }

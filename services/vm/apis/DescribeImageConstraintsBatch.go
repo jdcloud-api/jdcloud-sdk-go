@@ -25,15 +25,15 @@ type DescribeImageConstraintsBatchRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID  */
+    /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 镜像ID列表 (Optional) */
+    /* 要查询的镜像ID列表，只支持官方镜像和第三方镜像。 (Optional) */
     Ids []string `json:"ids"`
 }
 
 /*
- * param regionId: 地域ID (Required)
+ * param regionId: 地域ID。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -53,8 +53,8 @@ func NewDescribeImageConstraintsBatchRequest(
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param ids: 镜像ID列表 (Optional)
+ * param regionId: 地域ID。 (Required)
+ * param ids: 要查询的镜像ID列表，只支持官方镜像和第三方镜像。 (Optional)
  */
 func NewDescribeImageConstraintsBatchRequestWithAllParams(
     regionId string,
@@ -86,12 +86,12 @@ func NewDescribeImageConstraintsBatchRequestWithoutParam() *DescribeImageConstra
     }
 }
 
-/* param regionId: 地域ID(Required) */
+/* param regionId: 地域ID。(Required) */
 func (r *DescribeImageConstraintsBatchRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param ids: 镜像ID列表(Optional) */
+/* param ids: 要查询的镜像ID列表，只支持官方镜像和第三方镜像。(Optional) */
 func (r *DescribeImageConstraintsBatchRequest) SetIds(ids []string) {
     r.Ids = ids
 }

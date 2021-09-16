@@ -25,20 +25,20 @@ type CopyImagesRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID  */
+    /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 源镜像ID  */
+    /* 要复制的私有镜像ID列表，最多支持10个。  */
     SourceImageIds []string `json:"sourceImageIds"`
 
-    /* 目标区域  */
+    /* 目标地域。  */
     DestinationRegion string `json:"destinationRegion"`
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param sourceImageIds: 源镜像ID (Required)
- * param destinationRegion: 目标区域 (Required)
+ * param regionId: 地域ID。 (Required)
+ * param sourceImageIds: 要复制的私有镜像ID列表，最多支持10个。 (Required)
+ * param destinationRegion: 目标地域。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -62,9 +62,9 @@ func NewCopyImagesRequest(
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param sourceImageIds: 源镜像ID (Required)
- * param destinationRegion: 目标区域 (Required)
+ * param regionId: 地域ID。 (Required)
+ * param sourceImageIds: 要复制的私有镜像ID列表，最多支持10个。 (Required)
+ * param destinationRegion: 目标地域。 (Required)
  */
 func NewCopyImagesRequestWithAllParams(
     regionId string,
@@ -98,17 +98,17 @@ func NewCopyImagesRequestWithoutParam() *CopyImagesRequest {
     }
 }
 
-/* param regionId: 地域ID(Required) */
+/* param regionId: 地域ID。(Required) */
 func (r *CopyImagesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param sourceImageIds: 源镜像ID(Required) */
+/* param sourceImageIds: 要复制的私有镜像ID列表，最多支持10个。(Required) */
 func (r *CopyImagesRequest) SetSourceImageIds(sourceImageIds []string) {
     r.SourceImageIds = sourceImageIds
 }
 
-/* param destinationRegion: 目标区域(Required) */
+/* param destinationRegion: 目标地域。(Required) */
 func (r *CopyImagesRequest) SetDestinationRegion(destinationRegion string) {
     r.DestinationRegion = destinationRegion
 }

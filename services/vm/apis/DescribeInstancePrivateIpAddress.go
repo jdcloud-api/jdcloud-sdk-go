@@ -26,30 +26,32 @@ type DescribeInstancePrivateIpAddressRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID  */
+    /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 页码；默认为1 (Optional) */
+    /* 页码；默认为1。 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* 分页大小；默认为20；取值范围[10, 100] (Optional) */
+    /* 分页大小；<br>默认为20；取值范围[10, 100]。 (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* instanceId - 云主机ID，精确匹配，支持多个
-privateIpAddress - 主网卡内网主IP地址，模糊匹配，支持多个
-vpcId - 私有网络ID，精确匹配，支持多个
-status - 云主机状态，精确匹配，支持多个，<a href="http://docs.jdcloud.com/virtual-machines/api/vm_status">参考云主机状态</a>
-name - 云主机名称，模糊匹配，支持单个
-imageId - 镜像ID，精确匹配，支持多个
-networkInterfaceId - 弹性网卡ID，精确匹配，支持多个
-subnetId - 子网ID，精确匹配，支持多个
-chargeOnStopped - 停机不计费标志，keepCharging、stopCharging 或者 notApplicable
+    /* <b>filters 中支持使用以下关键字进行过滤</b>
+`instanceId`: 云主机ID，精确匹配，支持多个
+`privateIpAddress`: 主网卡内网主IP地址，模糊匹配，支持多个
+`vpcId`: 私有网络ID，精确匹配，支持多个
+`status`: 云主机状态，精确匹配，支持多个，参考 [云主机状态](https://docs.jdcloud.com/virtual-machines/api/vm_status)
+`name`: 云主机名称，模糊匹配，支持单个
+`imageId`: 镜像ID，精确匹配，支持多个
+`agId`: 使用可用组id，支持单个
+`faultDomain`: 错误域，支持多个
+`networkInterfaceId`: 弹性网卡ID，精确匹配，支持多个
+`subnetId`: 子网ID，精确匹配，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
 
 /*
- * param regionId: 地域ID (Required)
+ * param regionId: 地域ID。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -69,18 +71,20 @@ func NewDescribeInstancePrivateIpAddressRequest(
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param pageNumber: 页码；默认为1 (Optional)
- * param pageSize: 分页大小；默认为20；取值范围[10, 100] (Optional)
- * param filters: instanceId - 云主机ID，精确匹配，支持多个
-privateIpAddress - 主网卡内网主IP地址，模糊匹配，支持多个
-vpcId - 私有网络ID，精确匹配，支持多个
-status - 云主机状态，精确匹配，支持多个，<a href="http://docs.jdcloud.com/virtual-machines/api/vm_status">参考云主机状态</a>
-name - 云主机名称，模糊匹配，支持单个
-imageId - 镜像ID，精确匹配，支持多个
-networkInterfaceId - 弹性网卡ID，精确匹配，支持多个
-subnetId - 子网ID，精确匹配，支持多个
-chargeOnStopped - 停机不计费标志，keepCharging、stopCharging 或者 notApplicable
+ * param regionId: 地域ID。 (Required)
+ * param pageNumber: 页码；默认为1。 (Optional)
+ * param pageSize: 分页大小；<br>默认为20；取值范围[10, 100]。 (Optional)
+ * param filters: <b>filters 中支持使用以下关键字进行过滤</b>
+`instanceId`: 云主机ID，精确匹配，支持多个
+`privateIpAddress`: 主网卡内网主IP地址，模糊匹配，支持多个
+`vpcId`: 私有网络ID，精确匹配，支持多个
+`status`: 云主机状态，精确匹配，支持多个，参考 [云主机状态](https://docs.jdcloud.com/virtual-machines/api/vm_status)
+`name`: 云主机名称，模糊匹配，支持单个
+`imageId`: 镜像ID，精确匹配，支持多个
+`agId`: 使用可用组id，支持单个
+`faultDomain`: 错误域，支持多个
+`networkInterfaceId`: 弹性网卡ID，精确匹配，支持多个
+`subnetId`: 子网ID，精确匹配，支持多个
  (Optional)
  */
 func NewDescribeInstancePrivateIpAddressRequestWithAllParams(
@@ -117,30 +121,32 @@ func NewDescribeInstancePrivateIpAddressRequestWithoutParam() *DescribeInstanceP
     }
 }
 
-/* param regionId: 地域ID(Required) */
+/* param regionId: 地域ID。(Required) */
 func (r *DescribeInstancePrivateIpAddressRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param pageNumber: 页码；默认为1(Optional) */
+/* param pageNumber: 页码；默认为1。(Optional) */
 func (r *DescribeInstancePrivateIpAddressRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
-/* param pageSize: 分页大小；默认为20；取值范围[10, 100](Optional) */
+/* param pageSize: 分页大小；<br>默认为20；取值范围[10, 100]。(Optional) */
 func (r *DescribeInstancePrivateIpAddressRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
-/* param filters: instanceId - 云主机ID，精确匹配，支持多个
-privateIpAddress - 主网卡内网主IP地址，模糊匹配，支持多个
-vpcId - 私有网络ID，精确匹配，支持多个
-status - 云主机状态，精确匹配，支持多个，<a href="http://docs.jdcloud.com/virtual-machines/api/vm_status">参考云主机状态</a>
-name - 云主机名称，模糊匹配，支持单个
-imageId - 镜像ID，精确匹配，支持多个
-networkInterfaceId - 弹性网卡ID，精确匹配，支持多个
-subnetId - 子网ID，精确匹配，支持多个
-chargeOnStopped - 停机不计费标志，keepCharging、stopCharging 或者 notApplicable
+/* param filters: <b>filters 中支持使用以下关键字进行过滤</b>
+`instanceId`: 云主机ID，精确匹配，支持多个
+`privateIpAddress`: 主网卡内网主IP地址，模糊匹配，支持多个
+`vpcId`: 私有网络ID，精确匹配，支持多个
+`status`: 云主机状态，精确匹配，支持多个，参考 [云主机状态](https://docs.jdcloud.com/virtual-machines/api/vm_status)
+`name`: 云主机名称，模糊匹配，支持单个
+`imageId`: 镜像ID，精确匹配，支持多个
+`agId`: 使用可用组id，支持单个
+`faultDomain`: 错误域，支持多个
+`networkInterfaceId`: 弹性网卡ID，精确匹配，支持多个
+`subnetId`: 子网ID，精确匹配，支持多个
 (Optional) */
 func (r *DescribeInstancePrivateIpAddressRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters

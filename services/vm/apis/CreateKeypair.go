@@ -24,17 +24,19 @@ type CreateKeypairRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域ID  */
+    /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 密钥对名称，需要全局唯一。只允许数字、大小写字母、下划线“_”及中划线“-”，不超过32个字符。
+    /* 密钥对名称，需要全局唯一。
+只允许数字、大小写字母、下划线“_”及中划线“-”，不超过32个字符。
   */
     KeyName string `json:"keyName"`
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param keyName: 密钥对名称，需要全局唯一。只允许数字、大小写字母、下划线“_”及中划线“-”，不超过32个字符。
+ * param regionId: 地域ID。 (Required)
+ * param keyName: 密钥对名称，需要全局唯一。
+只允许数字、大小写字母、下划线“_”及中划线“-”，不超过32个字符。
  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -57,8 +59,9 @@ func NewCreateKeypairRequest(
 }
 
 /*
- * param regionId: 地域ID (Required)
- * param keyName: 密钥对名称，需要全局唯一。只允许数字、大小写字母、下划线“_”及中划线“-”，不超过32个字符。
+ * param regionId: 地域ID。 (Required)
+ * param keyName: 密钥对名称，需要全局唯一。
+只允许数字、大小写字母、下划线“_”及中划线“-”，不超过32个字符。
  (Required)
  */
 func NewCreateKeypairRequestWithAllParams(
@@ -91,12 +94,13 @@ func NewCreateKeypairRequestWithoutParam() *CreateKeypairRequest {
     }
 }
 
-/* param regionId: 地域ID(Required) */
+/* param regionId: 地域ID。(Required) */
 func (r *CreateKeypairRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param keyName: 密钥对名称，需要全局唯一。只允许数字、大小写字母、下划线“_”及中划线“-”，不超过32个字符。
+/* param keyName: 密钥对名称，需要全局唯一。
+只允许数字、大小写字母、下划线“_”及中划线“-”，不超过32个字符。
 (Required) */
 func (r *CreateKeypairRequest) SetKeyName(keyName string) {
     r.KeyName = keyName

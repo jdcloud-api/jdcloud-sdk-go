@@ -19,24 +19,24 @@ package models
 
 type TaskInfo struct {
 
-    /* 任务id (Optional) */
+    /* 任务ID。 (Optional) */
     TaskId int `json:"taskId"`
 
-    /* 任务操作类型 (Optional) */
+    /* 任务操作类型。支持范围：`ImportImage、ExportImage`。 (Optional) */
     Action string `json:"action"`
 
-    /* 任务状态，pending,running,failed,finished (Optional) */
+    /* 任务状态。支持范围：`pending、running、failed、finished`。 (Optional) */
     TaskStatus string `json:"taskStatus"`
 
-    /* 任务进度，0-100 (Optional) */
+    /* 任务进度，0% - 100%。 (Optional) */
     Progress int `json:"progress"`
 
-    /* 额外信息 (Optional) */
+    /* 额外描述信息。 (Optional) */
     Message string `json:"message"`
 
-    /* 任务创建时间 (Optional) */
+    /* 任务创建时间。 (Optional) */
     CreatedTime string `json:"createdTime"`
 
-    /* 任务完成时间 (Optional) */
+    /* 任务完成时间。 (Optional) */
     FinishedTime string `json:"finishedTime"`
 }

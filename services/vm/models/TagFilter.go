@@ -19,9 +19,9 @@ package models
 
 type TagFilter struct {
 
-    /* Tag键 (Optional) */
+    /* 标签key。 (Optional) */
     Key *string `json:"key"`
 
-    /* Tag值 (Optional) */
+    /* 标签value。 (Optional) */
     Values []string `json:"values"`
 }

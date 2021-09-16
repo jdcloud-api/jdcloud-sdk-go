@@ -19,12 +19,15 @@ package models
 
 type InstanceTemplateNetworkInterfaceSpec struct {
 
-    /* 子网ID 仅支持中心可用区的子网  */
+    /* 子网ID。  */
     SubnetId string `json:"subnetId"`
 
-    /* 安全组ID列表 (Optional) */
+    /* 安全组ID列表。 (Optional) */
     SecurityGroups []string `json:"securityGroups"`
 
-    /* PortSecurity，取值为0或者1，默认为1 (Optional) */
+    /* PortSecurity，源和目标IP地址校验，取值为0或者1。 (Optional) */
     SanityCheck *int `json:"sanityCheck"`
+
+    /* 自动分配的ipv6地址数量，取值范围[0,1]，默认为0 (Optional) */
+    Ipv6AddressCount *int `json:"ipv6AddressCount"`
 }

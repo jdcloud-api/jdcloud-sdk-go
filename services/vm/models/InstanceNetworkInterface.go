@@ -20,27 +20,27 @@ import vpc "github.com/jdcloud-api/jdcloud-sdk-go/services/vpc/models"
 
 type InstanceNetworkInterface struct {
 
-    /* 弹性网卡ID (Optional) */
+    /* 弹性网卡ID。 (Optional) */
     NetworkInterfaceId string `json:"networkInterfaceId"`
 
-    /* 以太网地址 (Optional) */
+    /* 弹性网卡MAC地址。 (Optional) */
     MacAddress string `json:"macAddress"`
 
-    /* 虚拟网络ID (Optional) */
+    /* 弹性网卡所属VPC的ID。 (Optional) */
     VpcId string `json:"vpcId"`
 
-    /* 子网ID (Optional) */
+    /* 子网ID。 (Optional) */
     SubnetId string `json:"subnetId"`
 
     /*  (Optional) */
     SecurityGroups []SecurityGroupSimple `json:"securityGroups"`
 
-    /* 源和目标IP地址校验，取值为0或者1 (Optional) */
+    /* PortSecurity，源和目标IP地址校验，取值为0或者1。 (Optional) */
     SanityCheck int `json:"sanityCheck"`
 
-    /* 网卡主IP (Optional) */
+    /* 网卡主IP配置。 (Optional) */
     PrimaryIp vpc.NetworkInterfacePrivateIp `json:"primaryIp"`
 
-    /* 网卡辅IP (Optional) */
+    /* 网卡辅IP地址列表。 (Optional) */
     SecondaryIps []vpc.NetworkInterfacePrivateIp `json:"secondaryIps"`
 }
