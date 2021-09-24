@@ -27,6 +27,9 @@ type QueryHttpHeaderRequest struct {
 
     /* 用户域名  */
     Domain string `json:"domain"`
+
+    /* header生效节点，0边缘，1回源，2两者都 (Optional) */
+    EdgeType *int `json:"edgeType"`
 }
 
 /*
@@ -51,9 +54,11 @@ func NewQueryHttpHeaderRequest(
 
 /*
  * param domain: 用户域名 (Required)
+ * param edgeType: header生效节点，0边缘，1回源，2两者都 (Optional)
  */
 func NewQueryHttpHeaderRequestWithAllParams(
     domain string,
+    edgeType *int,
 ) *QueryHttpHeaderRequest {
 
     return &QueryHttpHeaderRequest{
@@ -64,6 +69,7 @@ func NewQueryHttpHeaderRequestWithAllParams(
             Version: "v1",
         },
         Domain: domain,
+        EdgeType: edgeType,
     }
 }
 
@@ -83,6 +89,11 @@ func NewQueryHttpHeaderRequestWithoutParam() *QueryHttpHeaderRequest {
 /* param domain: 用户域名(Required) */
 func (r *QueryHttpHeaderRequest) SetDomain(domain string) {
     r.Domain = domain
+}
+
+/* param edgeType: header生效节点，0边缘，1回源，2两者都(Optional) */
+func (r *QueryHttpHeaderRequest) SetEdgeType(edgeType int) {
+    r.EdgeType = &edgeType
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

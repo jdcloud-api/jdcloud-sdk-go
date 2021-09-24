@@ -27,6 +27,9 @@ type DeleteHttpHeaderRequest struct {
     /* 用户域名  */
     Domain string `json:"domain"`
 
+    /* 0表示header在边缘生效，1表示header回源生效，2表示在边缘和回源都生效，该字段不传时默认header在边缘和回源都生效 (Optional) */
+    EdgeType *int `json:"edgeType"`
+
     /* header类型[resp,req] (Optional) */
     HeaderType *string `json:"headerType"`
 
@@ -56,11 +59,13 @@ func NewDeleteHttpHeaderRequest(
 
 /*
  * param domain: 用户域名 (Required)
+ * param edgeType: 0表示header在边缘生效，1表示header回源生效，2表示在边缘和回源都生效，该字段不传时默认header在边缘和回源都生效 (Optional)
  * param headerType: header类型[resp,req] (Optional)
  * param headerName: header名 (Optional)
  */
 func NewDeleteHttpHeaderRequestWithAllParams(
     domain string,
+    edgeType *int,
     headerType *string,
     headerName *string,
 ) *DeleteHttpHeaderRequest {
@@ -73,6 +78,7 @@ func NewDeleteHttpHeaderRequestWithAllParams(
             Version: "v1",
         },
         Domain: domain,
+        EdgeType: edgeType,
         HeaderType: headerType,
         HeaderName: headerName,
     }
@@ -94,6 +100,11 @@ func NewDeleteHttpHeaderRequestWithoutParam() *DeleteHttpHeaderRequest {
 /* param domain: 用户域名(Required) */
 func (r *DeleteHttpHeaderRequest) SetDomain(domain string) {
     r.Domain = domain
+}
+
+/* param edgeType: 0表示header在边缘生效，1表示header回源生效，2表示在边缘和回源都生效，该字段不传时默认header在边缘和回源都生效(Optional) */
+func (r *DeleteHttpHeaderRequest) SetEdgeType(edgeType int) {
+    r.EdgeType = &edgeType
 }
 
 /* param headerType: header类型[resp,req](Optional) */

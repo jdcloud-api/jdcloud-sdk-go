@@ -40,7 +40,7 @@ func NewCdnClient(credential *core.Credential) *CdnClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "cdn",
-            Revision:    "0.10.27",
+            Revision:    "0.10.28",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }

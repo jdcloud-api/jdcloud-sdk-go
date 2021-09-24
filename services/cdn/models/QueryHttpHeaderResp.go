@@ -20,6 +20,9 @@ package models
 type QueryHttpHeaderResp struct {
 
     /*  (Optional) */
+    EdgeType int `json:"edgeType"`
+
+    /*  (Optional) */
     HeaderType string `json:"headerType"`
 
     /*  (Optional) */
