@@ -19,24 +19,27 @@ package models
 
 type AccountInfo struct {
 
-    /* 组织名称  */
+    /* 机构名称  */
     OrgName string `json:"orgName"`
 
-    /* 银行卡号  */
+    /* 企业银行账户  */
     BankCardNum string `json:"bankCardNum"`
+
+    /* 企业手机号 (Optional) */
+    Mobile *string `json:"mobile"`
 
     /* 银行名称  */
     BankName string `json:"bankName"`
 
-    /* 支行名称  */
+    /* 开户行所在分行网点名称  */
     BranchBankName string `json:"branchBankName"`
 
-    /* 银行代码 (Optional) */
+    /* 开户行所在的银行编码 (Optional) */
     BankCode *string `json:"bankCode"`
 
-    /* 城市代码 (Optional) */
+    /* 开户行所在的城市编码 (Optional) */
     CityCode *string `json:"cityCode"`
 
-    /* 省份代码 (Optional) */
+    /* 开户行所在的省份编码 (Optional) */
     ProvinceCode *string `json:"provinceCode"`
 }

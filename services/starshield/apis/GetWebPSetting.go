@@ -18,80 +18,85 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    starshield "github.com/jdcloud-api/jdcloud-sdk-go/services/starshield/models"
 )
 
-type ImportSecretRequest struct {
+type GetWebPSettingRequest struct {
 
     core.JDCloudRequest
 
-    /* 密钥包的内容 (Optional) */
-    SecretPackage *string `json:"secretPackage"`
+    /*   */
+    Zone_identifier string `json:"zone_identifier"`
 }
 
 /*
+ * param zone_identifier:  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewImportSecretRequest(
-) *ImportSecretRequest {
+func NewGetWebPSettingRequest(
+    zone_identifier string,
+) *GetWebPSettingRequest {
 
-	return &ImportSecretRequest{
+	return &GetWebPSettingRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/secret:import",
-			Method:  "POST",
+			URL:     "/zones/{zone_identifier}/settings$$webp",
+			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
+        Zone_identifier: zone_identifier,
 	}
 }
 
 /*
- * param secretPackage: 密钥包的内容 (Optional)
+ * param zone_identifier:  (Required)
  */
-func NewImportSecretRequestWithAllParams(
-    secretPackage *string,
-) *ImportSecretRequest {
+func NewGetWebPSettingRequestWithAllParams(
+    zone_identifier string,
+) *GetWebPSettingRequest {
 
-    return &ImportSecretRequest{
+    return &GetWebPSettingRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/secret:import",
-            Method:  "POST",
+            URL:     "/zones/{zone_identifier}/settings$$webp",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
-        SecretPackage: secretPackage,
+        Zone_identifier: zone_identifier,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewImportSecretRequestWithoutParam() *ImportSecretRequest {
+func NewGetWebPSettingRequestWithoutParam() *GetWebPSettingRequest {
 
-    return &ImportSecretRequest{
+    return &GetWebPSettingRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/secret:import",
-            Method:  "POST",
+            URL:     "/zones/{zone_identifier}/settings$$webp",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
     }
 }
 
-/* param secretPackage: 密钥包的内容(Optional) */
-func (r *ImportSecretRequest) SetSecretPackage(secretPackage string) {
-    r.SecretPackage = &secretPackage
+/* param zone_identifier: (Required) */
+func (r *GetWebPSettingRequest) SetZone_identifier(zone_identifier string) {
+    r.Zone_identifier = zone_identifier
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r ImportSecretRequest) GetRegionId() string {
+func (r GetWebPSettingRequest) GetRegionId() string {
     return ""
 }
 
-type ImportSecretResponse struct {
+type GetWebPSettingResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result ImportSecretResult `json:"result"`
+    Result GetWebPSettingResult `json:"result"`
 }
 
-type ImportSecretResult struct {
+type GetWebPSettingResult struct {
+    Data starshield.PolishWebPConversion `json:"data"`
 }

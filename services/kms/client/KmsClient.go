@@ -40,7 +40,7 @@ func NewKmsClient(credential *core.Credential) *KmsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "kms",
-            Revision:    "0.3.1",
+            Revision:    "0.3.3",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -399,26 +399,6 @@ func (c *KmsClient) Validate(request *kms.ValidateRequest) (*kms.ValidateRespons
     return jdResp, err
 }
 
-/* 导出机密 */
-func (c *KmsClient) ExportSecret(request *kms.ExportSecretRequest) (*kms.ExportSecretResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kms.ExportSecretResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 删除指定版本机密 */
 func (c *KmsClient) DeleteSecretVersion(request *kms.DeleteSecretVersionRequest) (*kms.DeleteSecretVersionResponse, error) {
     if request == nil {
@@ -450,26 +430,6 @@ func (c *KmsClient) DescribeKey(request *kms.DescribeKeyRequest) (*kms.DescribeK
     }
 
     jdResp := &kms.DescribeKeyResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 导入机密 */
-func (c *KmsClient) ImportSecret(request *kms.ImportSecretRequest) (*kms.ImportSecretResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kms.ImportSecretResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

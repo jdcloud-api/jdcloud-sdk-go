@@ -18,60 +18,61 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    starshield "github.com/jdcloud-api/jdcloud-sdk-go/services/starshield/models"
 )
 
-type ExportSecretRequest struct {
+type GetSecurityHeaderHSTSSettingRequest struct {
 
     core.JDCloudRequest
 
-    /* 机密ID  */
-    SecretId string `json:"secretId"`
+    /*   */
+    Zone_identifier string `json:"zone_identifier"`
 }
 
 /*
- * param secretId: 机密ID (Required)
+ * param zone_identifier:  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewExportSecretRequest(
-    secretId string,
-) *ExportSecretRequest {
+func NewGetSecurityHeaderHSTSSettingRequest(
+    zone_identifier string,
+) *GetSecurityHeaderHSTSSettingRequest {
 
-	return &ExportSecretRequest{
+	return &GetSecurityHeaderHSTSSettingRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/secret/{secretId}:export",
+			URL:     "/zones/{zone_identifier}/settings$$security_header",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
-        SecretId: secretId,
+        Zone_identifier: zone_identifier,
 	}
 }
 
 /*
- * param secretId: 机密ID (Required)
+ * param zone_identifier:  (Required)
  */
-func NewExportSecretRequestWithAllParams(
-    secretId string,
-) *ExportSecretRequest {
+func NewGetSecurityHeaderHSTSSettingRequestWithAllParams(
+    zone_identifier string,
+) *GetSecurityHeaderHSTSSettingRequest {
 
-    return &ExportSecretRequest{
+    return &GetSecurityHeaderHSTSSettingRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/secret/{secretId}:export",
+            URL:     "/zones/{zone_identifier}/settings$$security_header",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
-        SecretId: secretId,
+        Zone_identifier: zone_identifier,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewExportSecretRequestWithoutParam() *ExportSecretRequest {
+func NewGetSecurityHeaderHSTSSettingRequestWithoutParam() *GetSecurityHeaderHSTSSettingRequest {
 
-    return &ExportSecretRequest{
+    return &GetSecurityHeaderHSTSSettingRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/secret/{secretId}:export",
+            URL:     "/zones/{zone_identifier}/settings$$security_header",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -79,23 +80,23 @@ func NewExportSecretRequestWithoutParam() *ExportSecretRequest {
     }
 }
 
-/* param secretId: 机密ID(Required) */
-func (r *ExportSecretRequest) SetSecretId(secretId string) {
-    r.SecretId = secretId
+/* param zone_identifier: (Required) */
+func (r *GetSecurityHeaderHSTSSettingRequest) SetZone_identifier(zone_identifier string) {
+    r.Zone_identifier = zone_identifier
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r ExportSecretRequest) GetRegionId() string {
+func (r GetSecurityHeaderHSTSSettingRequest) GetRegionId() string {
     return ""
 }
 
-type ExportSecretResponse struct {
+type GetSecurityHeaderHSTSSettingResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result ExportSecretResult `json:"result"`
+    Result GetSecurityHeaderHSTSSettingResult `json:"result"`
 }
 
-type ExportSecretResult struct {
-    SecretPackage string `json:"secretPackage"`
+type GetSecurityHeaderHSTSSettingResult struct {
+    Data starshield.SecurityHeader `json:"data"`
 }

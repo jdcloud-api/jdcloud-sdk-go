@@ -22,15 +22,15 @@ type PersonalUser struct {
     /* 姓名  */
     Name string `json:"name"`
 
-    /* 身份证号码  */
-    IdCard string `json:"idCard"`
+    /* 身份证号码 (Optional) */
+    IdCard *string `json:"idCard"`
 
-    /* 银行卡号  */
-    Bankcard string `json:"bankcard"`
+    /* 银行卡号 (Optional) */
+    Bankcard *string `json:"bankcard"`
 
-    /* 手机号  */
-    Mobile string `json:"mobile"`
+    /* 手机号 (Optional) */
+    Mobile *string `json:"mobile"`
 
-    /* 人像图片  */
-    ImgBase64 string `json:"imgBase64"`
+    /* 人像图片 (Optional) */
+    ImgBase64 *string `json:"imgBase64"`
 }
