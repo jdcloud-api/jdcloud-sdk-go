@@ -31,6 +31,9 @@ type TaskInfo struct {
     /* 任务进度，0% - 100%。 (Optional) */
     Progress int `json:"progress"`
 
+    /* 任务失败的原因。 (Optional) */
+    ErrorInfo string `json:"errorInfo"`
+
     /* 额外描述信息。 (Optional) */
     Message string `json:"message"`
 
@@ -39,4 +42,19 @@ type TaskInfo struct {
 
     /* 任务完成时间。 (Optional) */
     FinishedTime string `json:"finishedTime"`
+
+    /* 镜像ID。 (Optional) */
+    ImageId string `json:"imageId"`
+
+    /* 导出镜像时有效，表示目标OSS存储地址。 (Optional) */
+    OssUrl string `json:"ossUrl"`
+
+    /* 导出镜像时有效，表示生成的ossObject名称。 (Optional) */
+    OssObject string `json:"ossObject"`
+
+    /* 导入镜像时有效，表示用户指定的镜像名称。 (Optional) */
+    ImageName string `json:"imageName"`
+
+    /* 导入镜像时有效，源OSS外链地址。 (Optional) */
+    ImageUrl string `json:"imageUrl"`
 }

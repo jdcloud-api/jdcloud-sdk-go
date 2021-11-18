@@ -25,9 +25,9 @@ type InstanceTemplateNetworkInterfaceSpec struct {
     /* 安全组ID列表。 (Optional) */
     SecurityGroups []string `json:"securityGroups"`
 
-    /* PortSecurity，源和目标IP地址校验，取值为0或者1。 (Optional) */
+    /* 参数已弃用，指定无效。 (Optional) */
     SanityCheck *int `json:"sanityCheck"`
 
-    /* 自动分配的ipv6地址数量，取值范围[0,1]，默认为0 (Optional) */
+    /* 自动分配的ipv6地址数量，取值范围[0,1]，默认为0。 (Optional) */
     Ipv6AddressCount *int `json:"ipv6AddressCount"`
 }

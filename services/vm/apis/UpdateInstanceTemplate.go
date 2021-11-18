@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    vm "github.com/jdcloud-api/jdcloud-sdk-go/services/vm/models"
 )
 
 type UpdateInstanceTemplateRequest struct {
@@ -30,24 +31,25 @@ type UpdateInstanceTemplateRequest struct {
     /* 实例模板ID。  */
     InstanceTemplateId string `json:"instanceTemplateId"`
 
-    /* 实例模板的名称，参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。  */
-    Name string `json:"name"`
+    /* 实例模板的名称，参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。 (Optional) */
+    Name *string `json:"name"`
 
     /* 实例模板的描述，参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。 (Optional) */
     Description *string `json:"description"`
+
+    /* 实例模板配置信息。 (Optional) */
+    InstanceTemplateData *vm.UpdateInstanceTemplateSpec `json:"instanceTemplateData"`
 }
 
 /*
  * param regionId: 地域ID。 (Required)
  * param instanceTemplateId: 实例模板ID。 (Required)
- * param name: 实例模板的名称，参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewUpdateInstanceTemplateRequest(
     regionId string,
     instanceTemplateId string,
-    name string,
 ) *UpdateInstanceTemplateRequest {
 
 	return &UpdateInstanceTemplateRequest{
@@ -59,21 +61,22 @@ func NewUpdateInstanceTemplateRequest(
 		},
         RegionId: regionId,
         InstanceTemplateId: instanceTemplateId,
-        Name: name,
 	}
 }
 
 /*
  * param regionId: 地域ID。 (Required)
  * param instanceTemplateId: 实例模板ID。 (Required)
- * param name: 实例模板的名称，参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。 (Required)
+ * param name: 实例模板的名称，参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。 (Optional)
  * param description: 实例模板的描述，参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。 (Optional)
+ * param instanceTemplateData: 实例模板配置信息。 (Optional)
  */
 func NewUpdateInstanceTemplateRequestWithAllParams(
     regionId string,
     instanceTemplateId string,
-    name string,
+    name *string,
     description *string,
+    instanceTemplateData *vm.UpdateInstanceTemplateSpec,
 ) *UpdateInstanceTemplateRequest {
 
     return &UpdateInstanceTemplateRequest{
@@ -87,6 +90,7 @@ func NewUpdateInstanceTemplateRequestWithAllParams(
         InstanceTemplateId: instanceTemplateId,
         Name: name,
         Description: description,
+        InstanceTemplateData: instanceTemplateData,
     }
 }
 
@@ -113,14 +117,19 @@ func (r *UpdateInstanceTemplateRequest) SetInstanceTemplateId(instanceTemplateId
     r.InstanceTemplateId = instanceTemplateId
 }
 
-/* param name: 实例模板的名称，参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。(Required) */
+/* param name: 实例模板的名称，参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。(Optional) */
 func (r *UpdateInstanceTemplateRequest) SetName(name string) {
-    r.Name = name
+    r.Name = &name
 }
 
 /* param description: 实例模板的描述，参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。(Optional) */
 func (r *UpdateInstanceTemplateRequest) SetDescription(description string) {
     r.Description = &description
+}
+
+/* param instanceTemplateData: 实例模板配置信息。(Optional) */
+func (r *UpdateInstanceTemplateRequest) SetInstanceTemplateData(instanceTemplateData *vm.UpdateInstanceTemplateSpec) {
+    r.InstanceTemplateData = instanceTemplateData
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

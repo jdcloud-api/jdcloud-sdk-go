@@ -71,6 +71,9 @@ type DescribeImagesRequest struct {
     /* 已废弃。 (Optional) */
     ServiceCode *string `json:"serviceCode"`
 
+    /* CPU架构。支持范围：`x86_64`、`aarch64`。 (Optional) */
+    Architecture *string `json:"architecture"`
+
     /* 页码；默认为1。 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
@@ -125,6 +128,7 @@ func NewDescribeImagesRequest(
  (Optional)
  * param status: 根据镜像状态查询。参考 [镜像状态](https://docs.jdcloud.com/virtual-machines/api/image_status) (Optional)
  * param serviceCode: 已废弃。 (Optional)
+ * param architecture: CPU架构。支持范围：`x86_64`、`aarch64`。 (Optional)
  * param pageNumber: 页码；默认为1。 (Optional)
  * param pageSize: 分页大小；<br>默认为20；取值范围[10, 100]。 (Optional)
  */
@@ -139,6 +143,7 @@ func NewDescribeImagesRequestWithAllParams(
     launchPermission *string,
     status *string,
     serviceCode *string,
+    architecture *string,
     pageNumber *int,
     pageSize *int,
 ) *DescribeImagesRequest {
@@ -160,6 +165,7 @@ func NewDescribeImagesRequestWithAllParams(
         LaunchPermission: launchPermission,
         Status: status,
         ServiceCode: serviceCode,
+        Architecture: architecture,
         PageNumber: pageNumber,
         PageSize: pageSize,
     }
@@ -242,6 +248,11 @@ func (r *DescribeImagesRequest) SetStatus(status string) {
 /* param serviceCode: 已废弃。(Optional) */
 func (r *DescribeImagesRequest) SetServiceCode(serviceCode string) {
     r.ServiceCode = &serviceCode
+}
+
+/* param architecture: CPU架构。支持范围：`x86_64`、`aarch64`。(Optional) */
+func (r *DescribeImagesRequest) SetArchitecture(architecture string) {
+    r.Architecture = &architecture
 }
 
 /* param pageNumber: 页码；默认为1。(Optional) */

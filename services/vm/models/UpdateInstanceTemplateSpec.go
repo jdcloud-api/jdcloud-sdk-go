@@ -17,24 +17,24 @@
 package models
 
 
-type InstanceTemplateSpec struct {
+type UpdateInstanceTemplateSpec struct {
 
-    /* 实例规格，可查询 [DescribeInstanceTypes](https://docs.jdcloud.com/virtual-machines/api/describeinstancetypes) 接口获得指定地域或可用区的规格信息。  */
-    InstanceType string `json:"instanceType"`
+    /* 实例规格，可查询 [DescribeInstanceTypes](https://docs.jdcloud.com/virtual-machines/api/describeinstancetypes) 接口获得指定地域或可用区的规格信息。 (Optional) */
+    InstanceType *string `json:"instanceType"`
 
-    /* 镜像ID，可查询 [DescribeImages](https://docs.jdcloud.com/virtual-machines/api/describeimages) 接口获得指定地域的镜像信息。  */
-    ImageId string `json:"imageId"`
+    /* 镜像ID，可查询 [DescribeImages](https://docs.jdcloud.com/virtual-machines/api/describeimages) 接口获得指定地域的镜像信息。 (Optional) */
+    ImageId *string `json:"imageId"`
 
     /* 实例密码。可用于SSH登录和VNC登录。长度为8\~30个字符，必须同时包含大、小写英文字母、数字和特殊符号中的三类字符。特殊符号包括：\(\)\`~!@#$%^&\*\_-+=\|{}\[ ]:";'<>,.?/，更多密码输入要求请参见 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。
 如指定密钥且 `passwordAuth` 设置为 `true`，则密码不会生成注入，否则即使不指定密码系统也将默认自动生成随机密码，并以短信和邮件通知。
  (Optional) */
     Password *string `json:"password"`
 
-    /* 密钥对名称。仅Linux系统下该参数生效，当前仅支持输入单个密钥。 (Optional) */
+    /* 密钥对名称。仅Linux系统下该参数生效，当前仅支持输入单个密钥。如指定了该参数则覆盖原有参数。 (Optional) */
     KeyNames []string `json:"keyNames"`
 
     /* 用户自定义元数据。以key-value键值对形式指定，可在实例系统内通过元数据服务查询获取。最多支持20对键值对，且key不超过256字符，value不超过16KB，不区分大小写。
-注意：key不要以连字符(-)结尾，否则此key不生效。
+注意：key以连字符(-)结尾，表示要删除该key。
  (Optional) */
     Metadata []Metadata `json:"metadata"`
 
@@ -44,16 +44,16 @@ type InstanceTemplateSpec struct {
  (Optional) */
     Userdata []Userdata `json:"userdata"`
 
-    /* 主网卡主IP关联的弹性公网IP配置。 (Optional) */
+    /* 主网卡主IP关联的弹性公网IP配置。如指定了该参数则覆盖原有参数。 (Optional) */
     ElasticIp *InstanceTemplateElasticIpSpec `json:"elasticIp"`
 
-    /* 主网卡配置。  */
+    /* 主网卡配置。如指定了该参数则覆盖原有参数。 (Optional) */
     PrimaryNetworkInterface *InstanceTemplateNetworkInterfaceAttachmentSpec `json:"primaryNetworkInterface"`
 
-    /* 系统盘配置。 (Optional) */
+    /* 系统盘配置。如指定了该参数则覆盖原有参数。 (Optional) */
     SystemDisk *InstanceTemplateDiskAttachmentSpec `json:"systemDisk"`
 
-    /* 数据盘配置。单实例最多可挂载云硬盘（系统盘+数据盘）的数量受实例规格的限制。 (Optional) */
+    /* 数据盘配置。单实例最多可挂载云硬盘（系统盘+数据盘）的数量受实例规格的限制。如指定了该参数则覆盖原有参数。 (Optional) */
     DataDisks []InstanceTemplateDiskAttachmentSpec `json:"dataDisks"`
 
     /* 停机不计费模式。该参数仅对按配置计费且系统盘为云硬盘的实例生效，并且不是专有宿主机中的实例。配置停机不计费且停机后，实例部分将停止计费，且释放实例自身包含的资源（CPU/内存/GPU/本地数据盘）。
@@ -76,6 +76,13 @@ type InstanceTemplateSpec struct {
     /* 是否使用镜像中的登录凭证，不再指定密码或密钥。
 `yes`：使用镜像登录凭证。
 `no`（默认值）：不使用镜像登录凭证。
-仅使用私有或共享镜像时此参数有效。若指定`imageInherit=yes`则指定的密码或密钥将无效。 (Optional) */
+仅使用私有或共享镜像时此参数有效。若指定`imageInherit=yes`则指定的密码或密钥将无效。
+ (Optional) */
     ImageInherit *string `json:"imageInherit"`
+
+    /* 传 `true` 则会清空实例模板配置的密码。 (Optional) */
+    NoPassword *bool `json:"noPassword"`
+
+    /* 传 `true` 则会清空实例模板配置的公网IP。 (Optional) */
+    NoElasticIp *bool `json:"noElasticIp"`
 }
