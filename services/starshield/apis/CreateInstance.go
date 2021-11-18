@@ -27,10 +27,24 @@ type CreateInstanceRequest struct {
     /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /* 计费模式（CONFIG、FLOW、MONTHLY、ONCE） (Optional) */
+    /* 计费模式（CONFIG、FLOW、MONTHLY、ONCE）
+CONFIG 按配置
+FLOW 按用量
+MONTHLY 包年包月
+ONCE 一次性
+ (Optional) */
     ChargeMode *string `json:"chargeMode"`
 
-    /* 套餐类型（FREE、BASIC、PROFESSIONAL、ENTERPRISE、ULTIMATE、SMB_BASIC、SMB_BUSINESS） (Optional) */
+    /* 套餐类型（BASIC、PROFESSIONAL、ENTERPRISE、ULTIMATE、SMB_EXPERIENCE、SMB_BASIC、SMB_BUSINESS）
+BASIC 包年包月 基础版
+PROFESSIONAL 包年包月 专业版
+ENTERPRISE 包年包月 企业版
+ULTIMATE 包年包月 旗舰版
+--------------------------
+SMB_EXPERIENCE 按流量 体验版
+SMB_BASIC 按流量 基础版
+SMB_BUSINESS 按流量 商业版
+ (Optional) */
     PackType *string `json:"packType"`
 
     /* 域名增量包数量 (Optional) */
@@ -77,8 +91,22 @@ func NewCreateInstanceRequest(
 
 /*
  * param regionId: 地域ID (Required)
- * param chargeMode: 计费模式（CONFIG、FLOW、MONTHLY、ONCE） (Optional)
- * param packType: 套餐类型（FREE、BASIC、PROFESSIONAL、ENTERPRISE、ULTIMATE、SMB_BASIC、SMB_BUSINESS） (Optional)
+ * param chargeMode: 计费模式（CONFIG、FLOW、MONTHLY、ONCE）
+CONFIG 按配置
+FLOW 按用量
+MONTHLY 包年包月
+ONCE 一次性
+ (Optional)
+ * param packType: 套餐类型（BASIC、PROFESSIONAL、ENTERPRISE、ULTIMATE、SMB_EXPERIENCE、SMB_BASIC、SMB_BUSINESS）
+BASIC 包年包月 基础版
+PROFESSIONAL 包年包月 专业版
+ENTERPRISE 包年包月 企业版
+ULTIMATE 包年包月 旗舰版
+--------------------------
+SMB_EXPERIENCE 按流量 体验版
+SMB_BASIC 按流量 基础版
+SMB_BUSINESS 按流量 商业版
+ (Optional)
  * param zonePackNum: 域名增量包数量 (Optional)
  * param duration: 计费时长 (Optional)
  * param durationUnit: 计费时长单位（MONTH、YEAR） (Optional)
@@ -138,12 +166,26 @@ func (r *CreateInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param chargeMode: 计费模式（CONFIG、FLOW、MONTHLY、ONCE）(Optional) */
+/* param chargeMode: 计费模式（CONFIG、FLOW、MONTHLY、ONCE）
+CONFIG 按配置
+FLOW 按用量
+MONTHLY 包年包月
+ONCE 一次性
+(Optional) */
 func (r *CreateInstanceRequest) SetChargeMode(chargeMode string) {
     r.ChargeMode = &chargeMode
 }
 
-/* param packType: 套餐类型（FREE、BASIC、PROFESSIONAL、ENTERPRISE、ULTIMATE、SMB_BASIC、SMB_BUSINESS）(Optional) */
+/* param packType: 套餐类型（BASIC、PROFESSIONAL、ENTERPRISE、ULTIMATE、SMB_EXPERIENCE、SMB_BASIC、SMB_BUSINESS）
+BASIC 包年包月 基础版
+PROFESSIONAL 包年包月 专业版
+ENTERPRISE 包年包月 企业版
+ULTIMATE 包年包月 旗舰版
+--------------------------
+SMB_EXPERIENCE 按流量 体验版
+SMB_BASIC 按流量 基础版
+SMB_BUSINESS 按流量 商业版
+(Optional) */
 func (r *CreateInstanceRequest) SetPackType(packType string) {
     r.PackType = &packType
 }

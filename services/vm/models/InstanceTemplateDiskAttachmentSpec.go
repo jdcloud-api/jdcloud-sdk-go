@@ -20,32 +20,29 @@ package models
 type InstanceTemplateDiskAttachmentSpec struct {
 
     /* 磁盘类型。
-**系统盘**：取值为：`local` 本地系统盘 或 `cloud` 云盘系统盘。
-**数据盘**：取值为：`cloud` 云盘数据盘。
+**系统盘**：此参数无须指定，其类型取决于镜像类型。
+**数据盘**：数据盘仅支持云硬盘`cloud`。
  (Optional) */
     DiskCategory *string `json:"diskCategory"`
 
     /* 是否随实例一起删除，即删除实例时是否自动删除此磁盘。此参数仅对按配置计费的非多点挂载云硬盘生效。
 `true`：随实例删除。
-`false`：不随实例删除。
+`false`（默认值）：不随实例删除。
  (Optional) */
     AutoDelete *bool `json:"autoDelete"`
 
-    /* 云硬盘配置。 (Optional) */
+    /* 磁盘详细配置。此参数仅针对云硬盘，本地系统盘无须指定且指定无效。 (Optional) */
     CloudDiskSpec *InstanceTemplateDiskSpec `json:"cloudDiskSpec"`
 
     /* 磁盘逻辑挂载点。
-**系统盘**：默认为vda。
+**系统盘**：此参数无须指定且指定无效，默认为vda。
 **数据盘**：取值范围：`[vdb~vdbm]`。
  (Optional) */
     DeviceName *string `json:"deviceName"`
 
-    /* 排除设备，使用此参数noDevice配合deviceName一起使用。
-创建镜像的场景下：使用此参数可以排除云主机实例中的云硬盘不参与制作快照。
+    /* 排除设备，使用此参数 `noDevice` 配合 `deviceName` 一起使用。
 创建实例模板的场景下：使用此参数可以排除镜像中的数据盘。
-创建云主机的场景下：使用此参数可以排除实例模板、或镜像中的数据盘。
-示例：如果镜像中除系统盘还包含一块或多块数据盘，期望仅使用镜像中的部分磁盘，可通过此参数忽略部分磁盘配置。此参数须配合 `deviceName` 一起使用。
-例：`deviceName=vdb`、`noDevice=true`，则表示在使用镜像创建实例时，忽略数据盘vdb配置，不创建磁盘。
+示例：如果镜像中除系统盘还包含一块或多块数据盘，期望仅使用镜像中的部分磁盘，配置`deviceName=vdb`、`noDevice=true`，则表示在使用实例模板创建实例时，忽略镜像中数据盘vdb配置，不创建磁盘。
  (Optional) */
     NoDevice *bool `json:"noDevice"`
 }

@@ -19,29 +19,28 @@ package models
 
 type PageRule struct {
 
-    /* API item identifier tag (Optional) */
+    /* API条目标识符标签 (Optional) */
     Id string `json:"id"`
 
-    /* Targets to evaluate on a request (Optional) */
+    /* 对请求进行评估的目标 (Optional) */
     Targets []Target `json:"targets"`
 
-    /* The set of actions to perform if the targets of this rule match the request. Actions can redirect the url to another url or override settings (but not both)
- (Optional) */
+    /* 如果此规则的目标与请求相匹配，要执行的一系列行动。行动可以将网址重定向到另一个网址或覆盖设置（但不能同时进行）。 (Optional) */
     Actions []Action `json:"actions"`
 
-    /* A number that indicates the preference for a page rule over another.
-In the case where you may have a catch-all page rule (e.g., #1.. '/images/')
-but want a rule that is more specific to take precedence (e.g., #2.. '/images/special/'),
-you'll want to specify a higher priority on the latter (#2) so it will override the first.
+    /* 一个数字，表示一个页面规则优先于另一个页面规则。
+如果您可能有一个全面页面规则（例如#1 '/images/'）
+但是想要更具体的规则优先（例如#2 '/images/special/），
+您需要在后者（#2）上指定更高的优先级，以便它将覆盖第一个优先级。
  (Optional) */
     Priority int `json:"priority"`
 
-    /* Status of the page rule (Optional) */
+    /* 页面规则的状态 (Optional) */
     Status string `json:"status"`
 
-    /* When the page rule was last modified (Optional) */
+    /* 上次修改页面规则的时间 (Optional) */
     Modified_on string `json:"modified_on"`
 
-    /* When the page rule was created (Optional) */
+    /* 创建页面规则时间 (Optional) */
     Created_on string `json:"created_on"`
 }

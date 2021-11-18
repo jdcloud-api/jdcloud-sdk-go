@@ -22,45 +22,45 @@ type DnsRecord struct {
     /*  (Optional) */
     Meta Meta `json:"meta"`
 
-    /* Whether this record can be modified/deleted (true means it's managed by JDC StarShield) (Optional) */
+    /* 此记录是否可以被修改/删除（true意味着它由星盾管理）。 (Optional) */
     Locked bool `json:"locked"`
 
     /*  (Optional) */
     Data Data `json:"data"`
 
-    /* DNS record name (Optional) */
+    /* DNS记录名称 (Optional) */
     Name string `json:"name"`
 
-    /* Time to live for DNS record. Value of 1 is 'automatic' (Optional) */
+    /* DNS记录的生存时间。值为1是 "自动"。 (Optional) */
     Ttl int `json:"ttl"`
 
-    /* Zone identifier tag (Optional) */
+    /* 域标识符标签 (Optional) */
     Zone_id string `json:"zone_id"`
 
-    /* When the record was last modified (Optional) */
+    /* 记录最近修改时间 (Optional) */
     Modified_on string `json:"modified_on"`
 
-    /* When the record was created (Optional) */
+    /* 创建记录时间 (Optional) */
     Created_on string `json:"created_on"`
 
-    /* Whether the record can be proxied by JDC StarShield or not (Optional) */
+    /* 记录是否由星盾代理 (Optional) */
     Proxiable bool `json:"proxiable"`
 
-    /* A valid IPv4 address (Optional) */
+    /* 有效的IPv4地址 (Optional) */
     Content string `json:"content"`
 
-    /* Record type (Optional) */
+    /* 记录类型 (Optional) */
     Ty_pe string `json:"ty_pe"`
 
-    /* DNS record identifier tag (Optional) */
+    /* DNS记录标识符标签 (Optional) */
     Id string `json:"id"`
 
-    /* Whether the record is receiving the performance and security benefits of JDC StarShield (Optional) */
+    /* 是否利用星盾的性能和安全优势 (Optional) */
     Proxied bool `json:"proxied"`
 
-    /* The domain of the record (Optional) */
+    /* 记录的域名 (Optional) */
     Zone_name string `json:"zone_name"`
 
-    /* Used with some records like MX and SRV to determine priority. If you do not supply a priority for an MX record, a default value of 0 will be set (Optional) */
+    /* 与一些记录如MX和SRV一起使用，以确定优先级。如果你没有为MX记录提供一个优先级，默认值为0将被设置。 (Optional) */
     Priority int `json:"priority"`
 }

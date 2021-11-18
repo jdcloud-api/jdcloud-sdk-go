@@ -96,4 +96,7 @@ type Image struct {
 
     /* 已废弃。 (Optional) */
     ServiceCode string `json:"serviceCode"`
+
+    /* 是否来自导入镜像。 (Optional) */
+    Imported bool `json:"imported"`
 }

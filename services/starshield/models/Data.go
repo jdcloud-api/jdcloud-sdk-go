@@ -19,64 +19,64 @@ package models
 
 type Data struct {
 
-    /* Size of location in meters (Optional) */
+    /* 位置的大小（米） (Optional) */
     Size int `json:"size"`
 
-    /* Altitude of location in meters (Optional) */
+    /* 位置高度（米） (Optional) */
     Altitude int `json:"altitude"`
 
-    /* Degrees of longitude (Optional) */
+    /* 经度 (Optional) */
     Long_degrees int `json:"long_degrees"`
 
-    /* Degrees of latitude (Optional) */
+    /* 纬度 (Optional) */
     Lat_degrees int `json:"lat_degrees"`
 
-    /* Horizontal precision of location (Optional) */
+    /* 水平定位精度 (Optional) */
     Precision_horz int `json:"precision_horz"`
 
-    /* Vertical precision of location (Optional) */
+    /* 垂直定位精度 (Optional) */
     Precision_vert int `json:"precision_vert"`
 
-    /* Longitude direction (Optional) */
+    /* 经度方向 (Optional) */
     Long_direction string `json:"long_direction"`
 
-    /* Minutes of longitude (Optional) */
+    /* 经度分 (Optional) */
     Long_minutes int `json:"long_minutes"`
 
-    /* Seconds of longitude (Optional) */
+    /* 经度秒 (Optional) */
     Long_seconds int `json:"long_seconds"`
 
-    /* Latitude direction (Optional) */
+    /* 纬度方向 (Optional) */
     Lat_direction string `json:"lat_direction"`
 
-    /* Minutes of latitude (Optional) */
+    /* 纬度分 (Optional) */
     Lat_minutes int `json:"lat_minutes"`
 
-    /* Seconds of latitude (Optional) */
+    /* 纬度秒 (Optional) */
     Lat_seconds int `json:"lat_seconds"`
 
-    /* A service type, prefixed with an underscore (Optional) */
+    /* 以下划线为前缀的服务类型 (Optional) */
     Service string `json:"service"`
 
-    /* A valid protocol (Optional) */
+    /* 有效的协议 (Optional) */
     Proto string `json:"proto"`
 
-    /* A valid hostname (Optional) */
+    /* 有效的主机名 (Optional) */
     Name string `json:"name"`
 
-    /* Used with some records like MX and SRV to determine priority. If you do not supply a priority for an MX record, a default value of 0 will be set (Optional) */
+    /* 与一些记录如MX和SRV一起使用，以确定优先级。如果你没有为MX记录提供一个优先级，默认值为0将被设置。 (Optional) */
     Priority int `json:"priority"`
 
-    /* The record weight (Optional) */
+    /* 记录的权重 (Optional) */
     Weight int `json:"weight"`
 
-    /* The port of the service (Optional) */
+    /* 服务的端口 (Optional) */
     Port int `json:"port"`
 
-    /* A valid hostname (Optional) */
+    /* 有效的主机名 (Optional) */
     Target string `json:"target"`
 
-    /* Type (Optional) */
+    /* 类型 (Optional) */
     Ty_pe int `json:"ty_pe"`
 
     /* Key Tag (Optional) */
@@ -85,22 +85,22 @@ type Data struct {
     /* Algorithm (Optional) */
     Algorithm int `json:"algorithm"`
 
-    /* Certificate (Optional) */
+    /* 证书 (Optional) */
     Certificate string `json:"certificate"`
 
     /* Flags (Optional) */
     Flags int `json:"flags"`
 
-    /* Protocol (Optional) */
+    /* 协议 (Optional) */
     Protocol int `json:"protocol"`
 
-    /* Public Key (Optional) */
+    /* 公钥 (Optional) */
     Public_key string `json:"public_key"`
 
-    /* Digest Type (Optional) */
+    /* 摘要类型 (Optional) */
     Digest_type int `json:"digest_type"`
 
-    /* Digest (Optional) */
+    /* 摘要 (Optional) */
     Digest string `json:"digest"`
 
     /* Order (Optional) */
@@ -124,9 +124,9 @@ type Data struct {
     /* Matching Type (Optional) */
     Matching_type int `json:"matching_type"`
 
-    /* fingerprint (Optional) */
+    /* 指纹 (Optional) */
     Fingerprint string `json:"fingerprint"`
 
-    /* The record content (Optional) */
+    /* 记录内容 (Optional) */
     Content string `json:"content"`
 }

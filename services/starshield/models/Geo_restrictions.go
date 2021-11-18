@@ -20,5 +20,5 @@ package models
 type Geo_restrictions struct {
 
     /*  (Optional) */
-    Label string `json:"label"`
+    Label *string `json:"label"`
 }

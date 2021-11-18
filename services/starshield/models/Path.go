@@ -19,6 +19,6 @@ package models
 
 type Path struct {
 
-    /* The literal uri path to be rewritten. (Optional) */
-    Value string `json:"value"`
+    /* 要重写的字面URI路径。 (Optional) */
+    Value *string `json:"value"`
 }

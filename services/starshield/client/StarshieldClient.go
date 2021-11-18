@@ -40,7 +40,7 @@ func NewStarshieldClient(credential *core.Credential) *StarshieldClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "starshield",
-            Revision:    "0.0.1",
+            Revision:    "0.0.2",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -250,6 +250,27 @@ func (c *StarshieldClient) ChangeEnableQueryStringSortSetting(request *starshiel
     return jdResp, err
 }
 
+/* 浏览器完整性检查与不良行为检查类似，寻找最常被垃圾邮件发送者滥用的常见HTTP头，并拒绝他们访问您的页面。它还会对没有用户代理或非标准用户代理（也是滥用机器人、爬虫或访客常用的）的访客提出挑战质询。
+ */
+func (c *StarshieldClient) GetBrowserCheckSetting(request *starshield.GetBrowserCheckSettingRequest) (*starshield.GetBrowserCheckSettingResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.GetBrowserCheckSettingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 对于给定域，列出所有激活的证书包 */
 func (c *StarshieldClient) ListCertificatePacks(request *starshield.ListCertificatePacksRequest) (*starshield.ListCertificatePacksResponse, error) {
     if request == nil {
@@ -322,6 +343,26 @@ func (c *StarshieldClient) GetPrefetchPreloadSetting(request *starshield.GetPref
     }
 
     jdResp := &starshield.GetPrefetchPreloadSettingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建新过滤器 */
+func (c *StarshieldClient) CreateFilters(request *starshield.CreateFiltersRequest) (*starshield.CreateFiltersResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.CreateFiltersResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -408,6 +449,26 @@ func (c *StarshieldClient) GetAlwaysOnlineSetting(request *starshield.GetAlwaysO
     }
 
     jdResp := &starshield.GetAlwaysOnlineSettingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新一个现有的筛选器。 */
+func (c *StarshieldClient) UpdateIndividualFilter(request *starshield.UpdateIndividualFilterRequest) (*starshield.UpdateIndividualFilterResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.UpdateIndividualFilterResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -750,6 +811,26 @@ func (c *StarshieldClient) GetAdvancedDDOSSetting(request *starshield.GetAdvance
     return jdResp, err
 }
 
+/* 购买流量包 */
+func (c *StarshieldClient) CreateFlowPack(request *starshield.CreateFlowPackRequest) (*starshield.CreateFlowPackResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.CreateFlowPackResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 为该域启用加密TLS 1.3功能。 */
 func (c *StarshieldClient) GetZoneEnableTLS1_3Setting(request *starshield.GetZoneEnableTLS1_3SettingRequest) (*starshield.GetZoneEnableTLS1_3SettingResponse, error) {
     if request == nil {
@@ -761,6 +842,26 @@ func (c *StarshieldClient) GetZoneEnableTLS1_3Setting(request *starshield.GetZon
     }
 
     jdResp := &starshield.GetZoneEnableTLS1_3SettingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询Bot开启状态 */
+func (c *StarshieldClient) DescribeBotStatus(request *starshield.DescribeBotStatusRequest) (*starshield.DescribeBotStatusResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.DescribeBotStatusResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -801,6 +902,26 @@ func (c *StarshieldClient) GetMinimumTLSVersionSetting(request *starshield.GetMi
     }
 
     jdResp := &starshield.GetMinimumTLSVersionSettingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 域的相关配置 */
+func (c *StarshieldClient) GetAllZoneSettings(request *starshield.GetAllZoneSettingsRequest) (*starshield.GetAllZoneSettingsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.GetAllZoneSettingsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -851,6 +972,26 @@ func (c *StarshieldClient) ChangeHTTP2EdgePrioritizationSetting(request *starshi
     return jdResp, err
 }
 
+/* 列出当前定义的所有防火墙规则。 */
+func (c *StarshieldClient) ListOfFirewallRules(request *starshield.ListOfFirewallRulesRequest) (*starshield.ListOfFirewallRulesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.ListOfFirewallRulesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 获取当前域随机加密设置 */
 func (c *StarshieldClient) GetOpportunisticEncryptionSetting(request *starshield.GetOpportunisticEncryptionSettingRequest) (*starshield.GetOpportunisticEncryptionSettingResponse, error) {
     if request == nil {
@@ -882,6 +1023,46 @@ func (c *StarshieldClient) ChangeMinimumTLSVersionSetting(request *starshield.Ch
     }
 
     jdResp := &starshield.ChangeMinimumTLSVersionSettingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新自定义页面URL */
+func (c *StarshieldClient) UpdateCustomPageURL(request *starshield.UpdateCustomPageURLRequest) (*starshield.UpdateCustomPageURLResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.UpdateCustomPageURLResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/*  */
+func (c *StarshieldClient) ListPageRules(request *starshield.ListPageRulesRequest) (*starshield.ListPageRulesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.ListPageRulesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -951,6 +1132,26 @@ func (c *StarshieldClient) ChangeIPv6Setting(request *starshield.ChangeIPv6Setti
     return jdResp, err
 }
 
+/*  */
+func (c *StarshieldClient) CreateZone(request *starshield.CreateZoneRequest) (*starshield.CreateZoneResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.CreateZoneResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 为你的网站选择适当的安全配置文件，这将自动调整每个安全设置。如果你选择定制一个单独的安全设置，该配置文件将成为自定义。
  */
 func (c *StarshieldClient) GetSecurityLevelSetting(request *starshield.GetSecurityLevelSettingRequest) (*starshield.GetSecurityLevelSettingResponse, error) {
@@ -963,6 +1164,26 @@ func (c *StarshieldClient) GetSecurityLevelSetting(request *starshield.GetSecuri
     }
 
     jdResp := &starshield.GetSecurityLevelSettingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/*  */
+func (c *StarshieldClient) ListAvailablePageRuleSetting(request *starshield.ListAvailablePageRuleSettingRequest) (*starshield.ListAvailablePageRuleSettingResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.ListAvailablePageRuleSettingResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1006,6 +1227,26 @@ func (c *StarshieldClient) GetPseudoIPv4Setting(request *starshield.GetPseudoIPv
     }
 
     jdResp := &starshield.GetPseudoIPv4SettingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 域可以使用的可用自定义页面列表 */
+func (c *StarshieldClient) ListAvailableCustomPages(request *starshield.ListAvailableCustomPagesRequest) (*starshield.ListAvailableCustomPagesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.ListAvailableCustomPagesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1090,6 +1331,26 @@ func (c *StarshieldClient) ChangeSecurityLevelSetting(request *starshield.Change
     }
 
     jdResp := &starshield.ChangeSecurityLevelSettingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 上载域的新SSL证书 */
+func (c *StarshieldClient) CreateSSLConfiguration(request *starshield.CreateSSLConfigurationRequest) (*starshield.CreateSSLConfigurationResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.CreateSSLConfigurationResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1240,6 +1501,26 @@ func (c *StarshieldClient) GetIPv6Setting(request *starshield.GetIPv6SettingRequ
     return jdResp, err
 }
 
+/* 对于一个特定域，订购一个高级证书包 */
+func (c *StarshieldClient) OrderAdvancedCertificateManagerCertificatePack(request *starshield.OrderAdvancedCertificateManagerCertificatePackRequest) (*starshield.OrderAdvancedCertificateManagerCertificatePackResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.OrderAdvancedCertificateManagerCertificatePackResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 自动优化移动设备上网站访问者的图像加载 */
 func (c *StarshieldClient) ChangeMirageSetting(request *starshield.ChangeMirageSettingRequest) (*starshield.ChangeMirageSettingResponse, error) {
     if request == nil {
@@ -1271,6 +1552,26 @@ func (c *StarshieldClient) DeleteAdvancedCertificateManagerCertificatePack(reque
     }
 
     jdResp := &starshield.DeleteAdvancedCertificateManagerCertificatePackResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修补域的通用SSL设置 */
+func (c *StarshieldClient) EditUniversalSSLSettings(request *starshield.EditUniversalSSLSettingsRequest) (*starshield.EditUniversalSSLSettingsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.EditUniversalSSLSettingsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1321,6 +1622,26 @@ func (c *StarshieldClient) GetRocketLoaderSetting(request *starshield.GetRocketL
     }
 
     jdResp := &starshield.GetRocketLoaderSettingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/*  */
+func (c *StarshieldClient) DeletePageRule(request *starshield.DeletePageRuleRequest) (*starshield.DeletePageRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.DeletePageRuleResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1412,6 +1733,26 @@ func (c *StarshieldClient) GetPrivacyPassSetting(request *starshield.GetPrivacyP
     return jdResp, err
 }
 
+/* 创建新的防火墙规则。 */
+func (c *StarshieldClient) CreateFirewallRules(request *starshield.CreateFirewallRulesRequest) (*starshield.CreateFirewallRulesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.CreateFirewallRulesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 为该域启用加密TLS 1.3功能。 */
 func (c *StarshieldClient) ChangeTLS1_3Setting(request *starshield.ChangeTLS1_3SettingRequest) (*starshield.ChangeTLS1_3SettingResponse, error) {
     if request == nil {
@@ -1443,6 +1784,26 @@ func (c *StarshieldClient) ChangeAutomaticHTTPSRewritesSetting(request *starshie
     }
 
     jdResp := &starshield.ChangeAutomaticHTTPSRewritesSettingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除现有防火墙规则。 */
+func (c *StarshieldClient) DeleteIndividualFirewallRules(request *starshield.DeleteIndividualFirewallRulesRequest) (*starshield.DeleteIndividualFirewallRulesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.DeleteIndividualFirewallRulesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1538,6 +1899,26 @@ func (c *StarshieldClient) DescribePackage(request *starshield.DescribePackageRe
     return jdResp, err
 }
 
+/*  */
+func (c *StarshieldClient) CreatePageRule(request *starshield.CreatePageRuleRequest) (*starshield.CreatePageRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.CreatePageRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* SSL对访问者的连接进行加密，并保护信用卡号码和其他进出网站的个人数据。
 SSL最多需要5分钟才能完全激活。需要在星盾激活你的根域或www域。
 Off，访客和星盾之间没有SSL，星盾和你的Web服务器之间也没有SSL（所有HTTP流量）。
@@ -1556,6 +1937,26 @@ func (c *StarshieldClient) ChangeSSLSetting(request *starshield.ChangeSSLSetting
     }
 
     jdResp := &starshield.ChangeSSLSettingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 列出、搜索、排序和筛选域的DNS记录。 */
+func (c *StarshieldClient) ListDNSRecords(request *starshield.ListDNSRecordsRequest) (*starshield.ListDNSRecordsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.ListDNSRecordsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1626,6 +2027,26 @@ func (c *StarshieldClient) GetChallengeTTLSetting(request *starshield.GetChallen
     return jdResp, err
 }
 
+/* 开启BOT */
+func (c *StarshieldClient) OpenFirewallBot(request *starshield.OpenFirewallBotRequest) (*starshield.OpenFirewallBotResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.OpenFirewallBotResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 启用IP地理定位，让星盾对您网站的访问者进行地理定位，并将国家代码传递给您。 */
 func (c *StarshieldClient) GetIPGeolocationSetting(request *starshield.GetIPGeolocationSettingRequest) (*starshield.GetIPGeolocationSettingResponse, error) {
     if request == nil {
@@ -1637,6 +2058,26 @@ func (c *StarshieldClient) GetIPGeolocationSetting(request *starshield.GetIPGeol
     }
 
     jdResp := &starshield.GetIPGeolocationSettingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/*  */
+func (c *StarshieldClient) UpdateDNSRecord(request *starshield.UpdateDNSRecordRequest) (*starshield.UpdateDNSRecordResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.UpdateDNSRecordResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1682,6 +2123,26 @@ func (c *StarshieldClient) ChangeServerSideExcludeSetting(request *starshield.Ch
     }
 
     jdResp := &starshield.ChangeServerSideExcludeSettingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更改异常检测类型WAF规则包的灵敏度和操作 */
+func (c *StarshieldClient) EditFirewallPackage(request *starshield.EditFirewallPackageRequest) (*starshield.EditFirewallPackageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.EditFirewallPackageResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1786,6 +2247,26 @@ func (c *StarshieldClient) ChangeBrowserCheckSetting(request *starshield.ChangeB
     }
 
     jdResp := &starshield.ChangeBrowserCheckSettingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/*  */
+func (c *StarshieldClient) DeleteDNSRecord(request *starshield.DeleteDNSRecordRequest) (*starshield.DeleteDNSRecordResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.DeleteDNSRecordResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1920,6 +2401,26 @@ func (c *StarshieldClient) ChangeEmailObfuscationSetting(request *starshield.Cha
     return jdResp, err
 }
 
+/* 更新一个单独的现有防火墙规则。 */
+func (c *StarshieldClient) UpdateIndividualFirewallRule(request *starshield.UpdateIndividualFirewallRuleRequest) (*starshield.UpdateIndividualFirewallRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.UpdateIndividualFirewallRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 获取有关单个防火墙包的信息 */
 func (c *StarshieldClient) FirewallPackageDetails(request *starshield.FirewallPackageDetailsRequest) (*starshield.FirewallPackageDetailsResponse, error) {
     if request == nil {
@@ -1951,6 +2452,46 @@ func (c *StarshieldClient) GetMirageSetting(request *starshield.GetMirageSetting
     }
 
     jdResp := &starshield.GetMirageSettingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 替换页面规则。最终规则将与此请求传递的数据完全匹配。 */
+func (c *StarshieldClient) UpdatePageRule(request *starshield.UpdatePageRuleRequest) (*starshield.UpdatePageRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.UpdatePageRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新规则组的状态 */
+func (c *StarshieldClient) EditRuleGroup(request *starshield.EditRuleGroupRequest) (*starshield.EditRuleGroupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.EditRuleGroupResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2158,6 +2699,26 @@ func (c *StarshieldClient) ListRuleGroups(request *starshield.ListRuleGroupsRequ
     }
 
     jdResp := &starshield.ListRuleGroupsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建DNS记录 */
+func (c *StarshieldClient) CreateDNSRecord(request *starshield.CreateDNSRecordRequest) (*starshield.CreateDNSRecordResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.CreateDNSRecordResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

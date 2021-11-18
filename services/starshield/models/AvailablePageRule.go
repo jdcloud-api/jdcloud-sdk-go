@@ -19,9 +19,9 @@ package models
 
 type AvailablePageRule struct {
 
-    /* setting name (Optional) */
+    /* 设置名称 (Optional) */
     Id string `json:"id"`
 
-    /* type of the values (Optional) */
+    /* 值的类型 (Optional) */
     Properties []string `json:"properties"`
 }
