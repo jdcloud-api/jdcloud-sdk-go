@@ -20,8 +20,8 @@ package models
 type Account struct {
 
     /* 帐户标识符标签 (Optional) */
-    Id string `json:"id"`
+    Id *string `json:"id"`
 
     /* 帐户名 (Optional) */
-    Name string `json:"name"`
+    Name *string `json:"name"`
 }

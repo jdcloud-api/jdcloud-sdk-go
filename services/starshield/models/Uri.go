@@ -20,8 +20,8 @@ package models
 type Uri struct {
 
     /*  (Optional) */
-    Path Path `json:"path"`
+    Path *Path `json:"path"`
 
     /*  (Optional) */
-    Query Query `json:"query"`
+    Query *Query `json:"query"`
 }

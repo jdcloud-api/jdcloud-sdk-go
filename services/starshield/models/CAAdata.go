@@ -20,11 +20,11 @@ package models
 type CAAdata struct {
 
     /*  (Optional) */
-    Flags int `json:"flags"`
+    Flags *int `json:"flags"`
 
     /*  (Optional) */
-    Tag string `json:"tag"`
+    Tag *string `json:"tag"`
 
     /*  (Optional) */
-    Value string `json:"value"`
+    Value *string `json:"value"`
 }

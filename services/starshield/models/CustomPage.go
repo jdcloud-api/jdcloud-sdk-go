@@ -19,27 +19,27 @@ package models
 
 type CustomPage struct {
 
-    /* The name of the Custom Page type (Optional) */
+    /* 自定义页面类型的名称 (Optional) */
     Id string `json:"id"`
 
-    /* When the Custom Page was created (Optional) */
+    /* 创建自定义页面时间 (Optional) */
     Created_on string `json:"created_on"`
 
-    /* When the Custom Page was last modified (Optional) */
+    /* 上次修改自定义页面的时间 (Optional) */
     Modified_on string `json:"modified_on"`
 
-    /* A URL that is associated with the Custom Page. (Optional) */
+    /* 与自定义页面关联的URL。 (Optional) */
     Url string `json:"url"`
 
-    /* The Custom Page state (Optional) */
+    /* 自定义页面状态 (Optional) */
     State string `json:"state"`
 
-    /* String tokens that must be present in your customized HTML page (Optional) */
+    /* 自定义HTML页面中必须存在的字符串标记 (Optional) */
     Required_tokens []string `json:"required_tokens"`
 
-    /* The 'target' needed as part of the query string when previewing the Custom Page (Optional) */
+    /* 预览自定义页面时，需要将“target”作为查询字符串的一部分 (Optional) */
     Preview_target string `json:"preview_target"`
 
-    /* A short description of the Custom Page. (Optional) */
+    /* 自定义页面的简短描述。 (Optional) */
     Description string `json:"description"`
 }

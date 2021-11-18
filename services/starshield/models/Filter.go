@@ -19,18 +19,18 @@ package models
 
 type Filter struct {
 
-    /* Filter identifier (Optional) */
-    Id string `json:"id"`
+    /* 筛选器标识符 (Optional) */
+    Id *string `json:"id"`
 
-    /* The filter expression to be used (Optional) */
-    Expression string `json:"expression"`
+    /* 要使用的筛选器表达式 (Optional) */
+    Expression *string `json:"expression"`
 
-    /* Whether this filter is currently paused (Optional) */
-    Paused bool `json:"paused"`
+    /* 此筛选器当前是否已暂停 (Optional) */
+    Paused *bool `json:"paused"`
 
-    /* A note that you can use to describe the purpose of the filter (Optional) */
-    Description string `json:"description"`
+    /* 可用于描述过滤器用途的注释 (Optional) */
+    Description *string `json:"description"`
 
-    /* Short reference tag to quickly select related rules. (Optional) */
-    Ref string `json:"ref"`
+    /* 短引用标记，用于快速选择相关规则。 (Optional) */
+    Ref *string `json:"ref"`
 }

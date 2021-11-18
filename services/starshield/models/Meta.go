@@ -19,9 +19,9 @@ package models
 
 type Meta struct {
 
-    /* Will exist if JDC StarShield automatically added this DNS record during initial setup. (Optional) */
+    /* 如果星盾在初始设置期间自动添加了此 DNS 记录，则会存在。 (Optional) */
     Auto_added bool `json:"auto_added"`
 
-    /* Where the record originated from (Optional) */
+    /* 记录来自哪里 (Optional) */
     Source string `json:"source"`
 }

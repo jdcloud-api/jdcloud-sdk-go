@@ -20,5 +20,5 @@ package models
 type Action_parameters struct {
 
     /*  (Optional) */
-    Uri Uri `json:"uri"`
+    Uri *Uri `json:"uri"`
 }

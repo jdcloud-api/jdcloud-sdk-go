@@ -22,29 +22,27 @@ type FirewallRule struct {
     /*  (Optional) */
     Products []string `json:"products"`
 
-    /* The priority of the rule to allow control of processing order.
-A lower number indicates high priority. If not provided, any rules with a priority will be sequenced before those without.
- (Optional) */
+    /* 规则的优先级，允许控制处理顺序。一个较小的数字表示高优先级。如果不提供，任何有优先权的规则将在没有优先权的规则之前排序。 (Optional) */
     Priority int `json:"priority"`
 
-    /* Whether this firewall rule is currently paused. (Optional) */
+    /* 此防火墙规则当前是否已暂停。 (Optional) */
     Paused bool `json:"paused"`
 
-    /* Short reference tag to quickly select related rules. (Optional) */
+    /* 短引用标记，用于快速选择相关规则。 (Optional) */
     Ref string `json:"ref"`
 
     /*  (Optional) */
     Action_parameters Action_parameters `json:"action_parameters"`
 
-    /* The action to apply to a matched request. Note that action "log" is only available for enterprise customers. (Optional) */
+    /* 应用于匹配请求的行动。注意，行动 "log "只适用于企业客户。 (Optional) */
     Action string `json:"action"`
 
     /*  (Optional) */
     Filter Filter `json:"filter"`
 
-    /* Firewall Rule identifier (Optional) */
+    /* 防火墙规则标识符 (Optional) */
     Id string `json:"id"`
 
-    /* A description of the rule to help identify it. (Optional) */
+    /* 对规则的描述，以帮助识别它。 (Optional) */
     Description string `json:"description"`
 }

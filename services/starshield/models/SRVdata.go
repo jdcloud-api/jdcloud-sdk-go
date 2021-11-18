@@ -20,23 +20,23 @@ package models
 type SRVdata struct {
 
     /*  (Optional) */
-    Priority int `json:"priority"`
+    Priority *int `json:"priority"`
 
     /*  (Optional) */
-    Weight int `json:"weight"`
+    Weight *int `json:"weight"`
 
     /*  (Optional) */
-    Port int `json:"port"`
+    Port *int `json:"port"`
 
     /*  (Optional) */
-    Name string `json:"name"`
+    Name *string `json:"name"`
 
     /*  (Optional) */
-    Proto string `json:"proto"`
+    Proto *string `json:"proto"`
 
     /*  (Optional) */
-    Service string `json:"service"`
+    Service *string `json:"service"`
 
     /*  (Optional) */
-    Target string `json:"target"`
+    Target *string `json:"target"`
 }
