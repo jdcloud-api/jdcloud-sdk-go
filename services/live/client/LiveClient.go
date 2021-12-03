@@ -40,7 +40,7 @@ func NewLiveClient(credential *core.Credential) *LiveClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "live",
-            Revision:    "1.0.20",
+            Revision:    "1.0.21",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -427,6 +427,27 @@ func (c *LiveClient) DescribeLiveRestartAuthKey(request *live.DescribeLiveRestar
     return jdResp, err
 }
 
+/* 查询直播拉流转推任务
+ */
+func (c *LiveClient) QueryLiveForwardTask(request *live.QueryLiveForwardTaskRequest) (*live.QueryLiveForwardTaskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.QueryLiveForwardTaskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询直播流播放人数排行 */
 func (c *LiveClient) DescribeLiveStreamPlayerRankingData(request *live.DescribeLiveStreamPlayerRankingDataRequest) (*live.DescribeLiveStreamPlayerRankingDataResponse, error) {
     if request == nil {
@@ -681,6 +702,27 @@ func (c *LiveClient) DeleteLiveStreamSnapshotNotifyConfig(request *live.DeleteLi
     return jdResp, err
 }
 
+/* 停止直播拉流转推任务
+ */
+func (c *LiveClient) StopLiveForwardTask(request *live.StopLiveForwardTaskRequest) (*live.StopLiveForwardTaskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.StopLiveForwardTaskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询时移配置 */
 func (c *LiveClient) DescribeLiveTimeshiftConfigs(request *live.DescribeLiveTimeshiftConfigsRequest) (*live.DescribeLiveTimeshiftConfigsResponse, error) {
     if request == nil {
@@ -902,6 +944,27 @@ func (c *LiveClient) DeleteCustomLiveStreamTranscodeTemplate(request *live.Delet
     }
 
     jdResp := &live.DeleteCustomLiveStreamTranscodeTemplateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除直播拉流转推任务
+ */
+func (c *LiveClient) DeleteLiveForwardTask(request *live.DeleteLiveForwardTaskRequest) (*live.DeleteLiveForwardTaskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.DeleteLiveForwardTaskResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2188,6 +2251,27 @@ func (c *LiveClient) DescribeLivePublishStreamNum(request *live.DescribeLivePubl
     return jdResp, err
 }
 
+/* 更新直播拉流转推任务
+ */
+func (c *LiveClient) UpdateLiveForwardTask(request *live.UpdateLiveForwardTaskRequest) (*live.UpdateLiveForwardTaskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.UpdateLiveForwardTaskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询系统默认转码模板列表
  */
 func (c *LiveClient) DescribeSystemLiveStreamTranscodeTemplates(request *live.DescribeSystemLiveStreamTranscodeTemplatesRequest) (*live.DescribeSystemLiveStreamTranscodeTemplatesResponse, error) {
@@ -2380,6 +2464,27 @@ func (c *LiveClient) DescribeLiveStreamSnapshotNotifyConfig(request *live.Descri
     return jdResp, err
 }
 
+/* 开始直播拉流转推任务
+ */
+func (c *LiveClient) StartLiveForwardTask(request *live.StartLiveForwardTaskRequest) (*live.StartLiveForwardTaskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.StartLiveForwardTaskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询转码模板配置
 - 转码模板配置按照 域名,应用,流 3级配置添加,以最小的粒度配置生效原则
 - 域名、应用、流 依次粒度递减 即: 域名>应用>流
@@ -2435,6 +2540,27 @@ func (c *LiveClient) DescribeLiveApp(request *live.DescribeLiveAppRequest) (*liv
     }
 
     jdResp := &live.DescribeLiveAppResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建直播拉流转推任务
+ */
+func (c *LiveClient) CreateLiveForwardTask(request *live.CreateLiveForwardTaskRequest) (*live.CreateLiveForwardTaskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &live.CreateLiveForwardTaskResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
