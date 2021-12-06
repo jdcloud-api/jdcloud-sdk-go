@@ -40,7 +40,7 @@ func NewStarshieldClient(credential *core.Credential) *StarshieldClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "starshield",
-            Revision:    "0.0.2",
+            Revision:    "0.0.3",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -405,6 +405,26 @@ func (c *StarshieldClient) ChangeDevelopmentModeSetting(request *starshield.Chan
     }
 
     jdResp := &starshield.ChangeDevelopmentModeSettingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据订单号查询套餐实例详情 */
+func (c *StarshieldClient) DescribeInstanceByOrderNo(request *starshield.DescribeInstanceByOrderNoRequest) (*starshield.DescribeInstanceByOrderNoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.DescribeInstanceByOrderNoResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1052,7 +1072,7 @@ func (c *StarshieldClient) UpdateCustomPageURL(request *starshield.UpdateCustomP
     return jdResp, err
 }
 
-/*  */
+/* 获取页面规则列表 */
 func (c *StarshieldClient) ListPageRules(request *starshield.ListPageRulesRequest) (*starshield.ListPageRulesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1132,7 +1152,7 @@ func (c *StarshieldClient) ChangeIPv6Setting(request *starshield.ChangeIPv6Setti
     return jdResp, err
 }
 
-/*  */
+/* 创建域 */
 func (c *StarshieldClient) CreateZone(request *starshield.CreateZoneRequest) (*starshield.CreateZoneResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1631,7 +1651,7 @@ func (c *StarshieldClient) GetRocketLoaderSetting(request *starshield.GetRocketL
     return jdResp, err
 }
 
-/*  */
+/* 删除页面规则 */
 func (c *StarshieldClient) DeletePageRule(request *starshield.DeletePageRuleRequest) (*starshield.DeletePageRuleResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1899,7 +1919,7 @@ func (c *StarshieldClient) DescribePackage(request *starshield.DescribePackageRe
     return jdResp, err
 }
 
-/*  */
+/* 创建页面规则 */
 func (c *StarshieldClient) CreatePageRule(request *starshield.CreatePageRuleRequest) (*starshield.CreatePageRuleResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
