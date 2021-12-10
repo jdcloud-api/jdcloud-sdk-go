@@ -37,6 +37,9 @@ type DescribeInstancesRes struct {
     /* 流量包数量 (Optional) */
     TrafficExpansion int `json:"trafficExpansion"`
 
+    /* 已使用流量（单位：Byte） (Optional) */
+    FlowUsedCnt int `json:"flowUsedCnt"`
+
     /* 剩余流量(单位：Gb) (Optional) */
     FlowRemain float64 `json:"flowRemain"`
 
