@@ -40,7 +40,7 @@ func NewLiveClient(credential *core.Credential) *LiveClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "live",
-            Revision:    "1.0.21",
+            Revision:    "1.0.22",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
