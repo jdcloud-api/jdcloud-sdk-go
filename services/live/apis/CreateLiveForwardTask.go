@@ -256,4 +256,5 @@ type CreateLiveForwardTaskResponse struct {
 }
 
 type CreateLiveForwardTaskResult struct {
+    TaskId string `json:"taskId"`
 }
