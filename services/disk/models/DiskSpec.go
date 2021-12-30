@@ -26,7 +26,7 @@ type DiskSpec struct {
     /* 云硬盘名称  */
     Name string `json:"name"`
 
-    /* 云硬盘描述 (Optional) */
+    /* 云硬盘描述,默认为空 (Optional) */
     Description *string `json:"description"`
 
     /* 云硬盘类型，取值为ssd、premium-hdd、ssd.gp1、ssd.io1、hdd.std1之一  */
@@ -35,13 +35,13 @@ type DiskSpec struct {
     /* 云硬盘大小，单位为 GiB，ssd 类型取值范围[20,1000]GB，步长为10G，premium-hdd 类型取值范围[20,3000]GB，步长为10G, ssd.gp1, ssd.io1, hdd.std1 类型取值均是范围[20,16000]GB，步长为10G  */
     DiskSizeGB int `json:"diskSizeGB"`
 
-    /* 云硬盘IOPS的大小，当且仅当云盘类型是ssd.io1型的云盘有效，步长是10. (Optional) */
+    /* 云硬盘IOPS的大小，当且仅当云盘类型是ssd.io1型的云盘有效，步长是10.默认值为容量30，最大值为容量50 (Optional) */
     Iops *int `json:"iops"`
 
-    /* 用于创建云硬盘的快照ID (Optional) */
+    /* 用于创建云硬盘的快照ID，默认为空 (Optional) */
     SnapshotId *string `json:"snapshotId"`
 
-    /* 策略ID (Optional) */
+    /* 策略ID,默认为空;当策略Id为空时,reps结果返回中policyRelations为空 (Optional) */
     PolicyId *string `json:"policyId"`
 
     /* 计费配置；如不指定，默认计费类型是后付费-按使用时常付费 (Optional) */

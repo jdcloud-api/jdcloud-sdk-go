@@ -17,23 +17,20 @@
 package models
 
 
-type Quota struct {
+type ReportTask struct {
 
-    /* 资源类型。支持范围：
-`instance`：云主机。
-`instance_cpu`：云主机的CPU。
-`instance_memory`：云主机的内存。
-`instance_local_disk`：云主机的本地盘。
-`keypair`：密钥。
-`image`：镜像。
-`instanceTemplate`：实例模板。
-`imageShare`：共享镜像。
- (Optional) */
-    ResourceType string `json:"resourceType"`
+    /* 任务ID (Optional) */
+    TaskId string `json:"taskId"`
 
-    /* 配额上限。 (Optional) */
-    Limit int `json:"limit"`
+    /* 文件名 (Optional) */
+    Filename string `json:"filename"`
 
-    /* 已用配额。 (Optional) */
-    Used int `json:"used"`
+    /* 状态。0：执行中；3：完成；4：失败 (Optional) */
+    Status int `json:"status"`
+
+    /* 创建时间 (Optional) */
+    CreatedAt string `json:"createdAt"`
+
+    /* 下载链接 (Optional) */
+    DownloadUrl string `json:"downloadUrl"`
 }

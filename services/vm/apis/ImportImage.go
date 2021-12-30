@@ -248,5 +248,5 @@ type ImportImageResponse struct {
 
 type ImportImageResult struct {
     ImageId string `json:"imageId"`
-    ImportTaskId int `json:"importTaskId"`
+    TaskId string `json:"taskId"`
 }

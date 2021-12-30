@@ -22,7 +22,7 @@ type SnapshotSpec struct {
     /* 快照名称  */
     Name string `json:"name"`
 
-    /* 快照描述 (Optional) */
+    /* 快照描述,默认为空 (Optional) */
     Description *string `json:"description"`
 
     /* 用于创建快照的云盘ID  */

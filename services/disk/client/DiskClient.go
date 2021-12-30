@@ -40,7 +40,7 @@ func NewDiskClient(credential *core.Credential) *DiskClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "disk",
-            Revision:    "0.12.6",
+            Revision:    "0.12.7",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -57,7 +57,251 @@ func (c *DiskClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
 }
 
+/* 查询某一块云硬盘的信息详情 */
+func (c *DiskClient) DescribeDisk(request *disk.DescribeDiskRequest) (*disk.DescribeDiskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &disk.DescribeDiskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* -   查询您已经创建的云硬盘。
+-   filters多个过滤条件之间是逻辑与(AND)，每个条件内部的多个取值是逻辑或(OR)
+ */
+func (c *DiskClient) DescribeVolumesIgnoreServiceCode(request *disk.DescribeVolumesIgnoreServiceCodeRequest) (*disk.DescribeVolumesIgnoreServiceCodeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &disk.DescribeVolumesIgnoreServiceCodeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改云硬盘的名字或描述信息，名字或描述信息至少要指定一个。 */
+func (c *DiskClient) ModifyDiskAttribute(request *disk.ModifyDiskAttributeRequest) (*disk.ModifyDiskAttributeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &disk.ModifyDiskAttributeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 绑定/解绑快照策略与磁盘关系 */
+func (c *DiskClient) ApplySnapshotPolicies(request *disk.ApplySnapshotPoliciesRequest) (*disk.ApplySnapshotPoliciesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &disk.ApplySnapshotPoliciesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询快照容量 */
+func (c *DiskClient) DescribeSnapshotsCapacity(request *disk.DescribeSnapshotsCapacityRequest) (*disk.DescribeSnapshotsCapacityResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &disk.DescribeSnapshotsCapacityResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询云硬盘售罄情况列表 */
+func (c *DiskClient) DescribeSoldout(request *disk.DescribeSoldoutRequest) (*disk.DescribeSoldoutResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &disk.DescribeSoldoutResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* -   创建一块或多块按配置或者按使用时长付费的云硬盘。
+-   云硬盘类型包括高效云盘(premium-hdd)、SSD云盘(ssd)、通用型SSD(ssd.gp1)、性能型SSD(ssd.io1)、容量型HDD(hdd.std1)。
+-   计费方式默认为按配置付费。
+-   创建完成后，云硬盘状态为 available。
+-   可选参数快照 ID用于从快照创建新盘。
+-   批量创建时，云硬盘的命名为 硬盘名称-数字，例如 myDisk-1，myDisk-2。
+-   maxCount为最大努力，不保证一定能达到maxCount。
+-   userTags 为创建云盘时打的标签
+ */
+func (c *DiskClient) CreateDisks(request *disk.CreateDisksRequest) (*disk.CreateDisksResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &disk.CreateDisksResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* -   仅可对制作快照的源硬盘进行数据恢复操作。
+-   仅源硬盘处于可用状态时才能使用快照进行数据恢复操作。
+-   云硬盘恢复后，当前数据将被清除，请您谨慎操作。
+ */
+func (c *DiskClient) RestoreDisk(request *disk.RestoreDiskRequest) (*disk.RestoreDiskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &disk.RestoreDiskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询快照策略 */
+func (c *DiskClient) DescribeSnapshotPolicies(request *disk.DescribeSnapshotPoliciesRequest) (*disk.DescribeSnapshotPoliciesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &disk.DescribeSnapshotPoliciesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* -   删除一块按配置计费的云硬盘，云盘类型包括高效云盘、SSD云盘、通用型SSD、性能型SSD和容量型HDD。
+-   删除云盘时，云盘的状态必须为 待挂载（Available）。
+-   云盘被删除后，云硬盘快照可以被保留。
+ */
+func (c *DiskClient) DeleteDisk(request *disk.DeleteDiskRequest) (*disk.DeleteDiskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &disk.DeleteDiskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* -   为指定云硬盘创建快照，新生成的快照的状态为creating。
+-   同一地域下单用户快照的配额为15块。
+-   为保证数据完整性，请您在创建快照之前，停止对云硬盘进行写入操作，以保证快照数据的完整性。
+-   在执行创建快照前，建议您对云硬盘进行卸载操作，创建快照后再重新挂载到云主机上。
+-   手动快照的生命周期独立于云硬盘，请您及时删除不需要的快照。
+-   创建快照所需时间取决于云硬盘容量的大小，云硬盘容量越大耗时越长。
+ */
+func (c *DiskClient) CreateSnapshot(request *disk.CreateSnapshotRequest) (*disk.CreateSnapshotResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &disk.CreateSnapshotResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* -   查询您已经创建的快照策略。
+-   filters多个过滤条件之间是逻辑与(AND)，每个条件内部的多个取值是逻辑或(OR)
+ */
 func (c *DiskClient) DescribeSnapPolices(request *disk.DescribeSnapPolicesRequest) (*disk.DescribeSnapPolicesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -200,26 +444,6 @@ func (c *DiskClient) DeleteSnapshotPolicy(request *disk.DeleteSnapshotPolicyRequ
     return jdResp, err
 }
 
-/* 查询某一块云硬盘的信息详情 */
-func (c *DiskClient) DescribeDisk(request *disk.DescribeDiskRequest) (*disk.DescribeDiskResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &disk.DescribeDiskResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* -   扩容云硬盘到指定大小，云硬盘状态必须为 available。
 -   当云硬盘正在创建快照时，不允许扩容。
  */
@@ -233,116 +457,6 @@ func (c *DiskClient) ExtendDisk(request *disk.ExtendDiskRequest) (*disk.ExtendDi
     }
 
     jdResp := &disk.ExtendDiskResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* -   查询您已经创建的云硬盘。
--   filters多个过滤条件之间是逻辑与(AND)，每个条件内部的多个取值是逻辑或(OR)
- */
-func (c *DiskClient) DescribeVolumesIgnoreServiceCode(request *disk.DescribeVolumesIgnoreServiceCodeRequest) (*disk.DescribeVolumesIgnoreServiceCodeResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &disk.DescribeVolumesIgnoreServiceCodeResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 修改云硬盘的名字或描述信息，名字或描述信息至少要指定一个。 */
-func (c *DiskClient) ModifyDiskAttribute(request *disk.ModifyDiskAttributeRequest) (*disk.ModifyDiskAttributeResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &disk.ModifyDiskAttributeResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 绑定/解绑快照策略与磁盘关系 */
-func (c *DiskClient) ApplySnapshotPolicies(request *disk.ApplySnapshotPoliciesRequest) (*disk.ApplySnapshotPoliciesResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &disk.ApplySnapshotPoliciesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询快照容量 */
-func (c *DiskClient) DescribeSnapshotsCapacity(request *disk.DescribeSnapshotsCapacityRequest) (*disk.DescribeSnapshotsCapacityResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &disk.DescribeSnapshotsCapacityResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* -   创建一块或多块按配置或者按使用时长付费的云硬盘。
--   云硬盘类型包括高效云盘(premium-hdd)、SSD云盘(ssd)、通用型SSD(ssd.gp1)、性能型SSD(ssd.io1)、容量型HDD(hdd.std1)。
--   计费方式默认为按配置付费。
--   创建完成后，云硬盘状态为 available。
--   可选参数快照 ID用于从快照创建新盘。
--   批量创建时，云硬盘的命名为 硬盘名称-数字，例如 myDisk-1，myDisk-2。
--   maxCount为最大努力，不保证一定能达到maxCount。
--   userTags 为创建云盘时打的标签
- */
-func (c *DiskClient) CreateDisks(request *disk.CreateDisksRequest) (*disk.CreateDisksResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &disk.CreateDisksResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -395,29 +509,6 @@ func (c *DiskClient) DescribeSnapshots(request *disk.DescribeSnapshotsRequest) (
     return jdResp, err
 }
 
-/* -   仅可对制作快照的源硬盘进行数据恢复操作。
--   仅源硬盘处于可用状态时才能使用快照进行数据恢复操作。
--   云硬盘恢复后，当前数据将被清除，请您谨慎操作。
- */
-func (c *DiskClient) RestoreDisk(request *disk.RestoreDiskRequest) (*disk.RestoreDiskResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &disk.RestoreDiskResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 创建快照策略 */
 func (c *DiskClient) CreateSnapshotPolicy(request *disk.CreateSnapshotPolicyRequest) (*disk.CreateSnapshotPolicyResponse, error) {
     if request == nil {
@@ -429,26 +520,6 @@ func (c *DiskClient) CreateSnapshotPolicy(request *disk.CreateSnapshotPolicyRequ
     }
 
     jdResp := &disk.CreateSnapshotPolicyResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询快照策略 */
-func (c *DiskClient) DescribeSnapshotPolicies(request *disk.DescribeSnapshotPoliciesRequest) (*disk.DescribeSnapshotPoliciesResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &disk.DescribeSnapshotPoliciesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -471,55 +542,6 @@ func (c *DiskClient) DescribeDisks(request *disk.DescribeDisksRequest) (*disk.De
     }
 
     jdResp := &disk.DescribeDisksResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* -   删除一块按配置计费的云硬盘，云盘类型包括高效云盘、SSD云盘、通用型SSD、性能型SSD和容量型HDD。
--   删除云盘时，云盘的状态必须为 待挂载（Available）。
--   云盘被删除后，云硬盘快照可以被保留。
- */
-func (c *DiskClient) DeleteDisk(request *disk.DeleteDiskRequest) (*disk.DeleteDiskResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &disk.DeleteDiskResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* -   为指定云硬盘创建快照，新生成的快照的状态为creating。
--   同一地域下单用户快照的配额为15块。
--   为保证数据完整性，请您在创建快照之前，停止对云硬盘进行写入操作，以保证快照数据的完整性。
--   在执行创建快照前，建议您对云硬盘进行卸载操作，创建快照后再重新挂载到云主机上。
--   手动快照的生命周期独立于云硬盘，请您及时删除不需要的快照。
--   创建快照所需时间取决于云硬盘容量的大小，云硬盘容量越大耗时越长。
- */
-func (c *DiskClient) CreateSnapshot(request *disk.CreateSnapshotRequest) (*disk.CreateSnapshotResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &disk.CreateSnapshotResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

@@ -104,4 +104,7 @@ type Instance struct {
 
     /* 云主机所属的专有宿主机ID。 (Optional) */
     DedicatedHostId string `json:"dedicatedHostId"`
+
+    /* 资源组ID (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
 }

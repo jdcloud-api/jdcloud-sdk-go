@@ -28,10 +28,10 @@ type DescribeSnapshotPoliciesRequest struct {
     /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /* 策略名称 (Optional) */
+    /* 策略名称,默认为空 (Optional) */
     Name *string `json:"name"`
 
-    /* 策略ID (Optional) */
+    /* 策略ID,默认为空 (Optional) */
     PolicyId []string `json:"policyId"`
 
     /* 策略状态。1: 启用 2：禁用 (Optional) */
@@ -69,8 +69,8 @@ func NewDescribeSnapshotPoliciesRequest(
 
 /*
  * param regionId: 地域ID (Required)
- * param name: 策略名称 (Optional)
- * param policyId: 策略ID (Optional)
+ * param name: 策略名称,默认为空 (Optional)
+ * param policyId: 策略ID,默认为空 (Optional)
  * param status: 策略状态。1: 启用 2：禁用 (Optional)
  * param order: 排序字段，只支持create_time和update_time字段 (Optional)
  * param pageNumber: 页码, 默认为1, 取值范围：[1,∞) (Optional)
@@ -121,12 +121,12 @@ func (r *DescribeSnapshotPoliciesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param name: 策略名称(Optional) */
+/* param name: 策略名称,默认为空(Optional) */
 func (r *DescribeSnapshotPoliciesRequest) SetName(name string) {
     r.Name = &name
 }
 
-/* param policyId: 策略ID(Optional) */
+/* param policyId: 策略ID,默认为空(Optional) */
 func (r *DescribeSnapshotPoliciesRequest) SetPolicyId(policyId []string) {
     r.PolicyId = policyId
 }

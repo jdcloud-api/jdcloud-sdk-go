@@ -20,7 +20,7 @@ package models
 type TaskInfo struct {
 
     /* 任务ID。 (Optional) */
-    TaskId int `json:"taskId"`
+    TaskId string `json:"taskId"`
 
     /* 任务操作类型。支持范围：`ImportImage、ExportImage`。 (Optional) */
     Action string `json:"action"`

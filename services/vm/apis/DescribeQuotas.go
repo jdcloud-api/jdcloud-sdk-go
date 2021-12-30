@@ -30,7 +30,7 @@ type DescribeQuotasRequest struct {
     RegionId string `json:"regionId"`
 
     /* <b>filters 中支持使用以下关键字进行过滤</b>
-`resourceTypes`: 资源类型，支持多个，可选范围：`instance、keypair、image、instanceTemplate、imageShare`
+`resourceTypes`: 资源类型，支持多个，可选范围：`instance、instance_cpu、instance_memory、instance_local_disk、keypair、image、instanceTemplate、imageShare`
  (Optional) */
     Filters []common.Filter `json:"filters"`
 
@@ -63,7 +63,7 @@ func NewDescribeQuotasRequest(
 /*
  * param regionId: 地域ID。 (Required)
  * param filters: <b>filters 中支持使用以下关键字进行过滤</b>
-`resourceTypes`: 资源类型，支持多个，可选范围：`instance、keypair、image、instanceTemplate、imageShare`
+`resourceTypes`: 资源类型，支持多个，可选范围：`instance、instance_cpu、instance_memory、instance_local_disk、keypair、image、instanceTemplate、imageShare`
  (Optional)
  * param imageId: 私有镜像Id。
 查询镜像共享 `imageShare` 的配额时，此参数必传。
@@ -107,7 +107,7 @@ func (r *DescribeQuotasRequest) SetRegionId(regionId string) {
 }
 
 /* param filters: <b>filters 中支持使用以下关键字进行过滤</b>
-`resourceTypes`: 资源类型，支持多个，可选范围：`instance、keypair、image、instanceTemplate、imageShare`
+`resourceTypes`: 资源类型，支持多个，可选范围：`instance、instance_cpu、instance_memory、instance_local_disk、keypair、image、instanceTemplate、imageShare`
 (Optional) */
 func (r *DescribeQuotasRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters

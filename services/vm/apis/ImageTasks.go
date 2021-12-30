@@ -32,7 +32,7 @@ type ImageTasksRequest struct {
     TaskAction *string `json:"taskAction"`
 
     /* 任务id列表。 (Optional) */
-    TaskIds []int `json:"taskIds"`
+    TaskIds []string `json:"taskIds"`
 
     /* 任务状态。支持范围：`pending、running、failed、finished`。 (Optional) */
     TaskStatus *string `json:"taskStatus"`
@@ -83,7 +83,7 @@ func NewImageTasksRequest(
 func NewImageTasksRequestWithAllParams(
     regionId string,
     taskAction *string,
-    taskIds []int,
+    taskIds []string,
     taskStatus *string,
     startTime *string,
     endTime *string,
@@ -133,7 +133,7 @@ func (r *ImageTasksRequest) SetTaskAction(taskAction string) {
 }
 
 /* param taskIds: 任务id列表。(Optional) */
-func (r *ImageTasksRequest) SetTaskIds(taskIds []int) {
+func (r *ImageTasksRequest) SetTaskIds(taskIds []string) {
     r.TaskIds = taskIds
 }
 
