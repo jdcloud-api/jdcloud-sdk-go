@@ -161,5 +161,5 @@ type ExportImageResponse struct {
 }
 
 type ExportImageResult struct {
-    ExportTaskId int `json:"exportTaskId"`
+    TaskId string `json:"taskId"`
 }

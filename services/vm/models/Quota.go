@@ -21,6 +21,9 @@ type Quota struct {
 
     /* 资源类型。支持范围：
 `instance`：云主机。
+`instance_cpu`：云主机的CPU。
+`instance_memory`：云主机的内存。
+`instance_local_disk`：云主机的本地盘。
 `keypair`：密钥。
 `image`：镜像。
 `instanceTemplate`：实例模板。

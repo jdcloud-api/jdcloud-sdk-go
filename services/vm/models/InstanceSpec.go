@@ -155,4 +155,7 @@ type InstanceSpec struct {
 仅使用私有或共享镜像时此参数有效。
  (Optional) */
     ImageInherit *string `json:"imageInherit"`
+
+    /* 资源组ID (Optional) */
+    ResourceGroupId *string `json:"resourceGroupId"`
 }

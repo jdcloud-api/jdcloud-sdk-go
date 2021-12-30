@@ -40,7 +40,7 @@ func NewVmClient(credential *core.Credential) *VmClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vm",
-            Revision:    "1.3.8",
+            Revision:    "1.4.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -172,6 +172,42 @@ func (c *VmClient) ShareImage(request *vm.ShareImageRequest) (*vm.ShareImageResp
     }
 
     jdResp := &vm.ShareImageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 
+存量主机加入高可用组。
+
+存量主机加入高可用组，或者主机从一个高可用组移动到另一个高可用组
+
+详细操作说明请参考帮助文档：[存量主机加入高可用组](https://docs.jdcloud.com/cn/virtual-machines/rebuild-instance)
+
+## 接口说明
+- 不支持专属宿主机上的实例调整高可用组。
+- 除GPU、vGPU（以P开头）外的一代机暂不支持调整高可用组。
+- 与该高可用组关联实例模板的VPC不同的不支持调整高可用组。
+- 与该高可用组可用区不匹配的实例不支持调整高可用组。
+- 本地系统盘机型不支持强制均衡。
+- 仅支持实例状态为已停止的实例强制均衡调整高可用组。
+- 若不强制均衡，仅支持实例状态为运行中或已停止的实例调整高可用组。
+- 若强制均衡，带本地数据盘的实例需确认清除本地盘数据。
+ */
+func (c *VmClient) ModifyInstancePlacement(request *vm.ModifyInstancePlacementRequest) (*vm.ModifyInstancePlacementResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.ModifyInstancePlacementResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -677,7 +713,7 @@ func (c *VmClient) ModifyInstanceNetworkAttribute(request *vm.ModifyInstanceNetw
 查询资源配额。
 
 ## 接口说明
-- 调用该接口可查询 `云主机`、`镜像`、`密钥`、`实例模板`、`镜像共享` 的配额。
+- 调用该接口可查询 `云主机`、`云主机的CPU`、`云主机的内存`、`云主机的本地盘`、`镜像`、`密钥`、`实例模板`、`镜像共享` 的配额。
  */
 func (c *VmClient) DescribeQuotas(request *vm.DescribeQuotasRequest) (*vm.DescribeQuotasResponse, error) {
     if request == nil {
