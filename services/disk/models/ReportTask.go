@@ -16,13 +16,21 @@
 
 package models
 
-import common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 
-type FilterGroups struct {
+type ReportTask struct {
 
-    /* policyId - 策略Id,精确匹配，支持多个
-status - 策略状态，精确匹配，支持多个
-name - 策略名称，模糊匹配，支持单个
- (Optional) */
-    Filters []common.Filter `json:"filters"`
+    /* 任务ID (Optional) */
+    TaskId string `json:"taskId"`
+
+    /* 文件名 (Optional) */
+    Filename string `json:"filename"`
+
+    /* 状态。0：执行中；3：完成；4：失败 (Optional) */
+    Status int `json:"status"`
+
+    /* 创建时间 (Optional) */
+    CreatedAt string `json:"createdAt"`
+
+    /* 下载链接 (Optional) */
+    DownloadUrl string `json:"downloadUrl"`
 }

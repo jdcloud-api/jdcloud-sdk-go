@@ -34,7 +34,7 @@ type CreateDisksRequest struct {
     /* 购买实例数量；取值范围：[1,100]  */
     MaxCount int `json:"maxCount"`
 
-    /* 用户标签 (Optional) */
+    /* 用户标签,默认为空;tag标签的限制：每个资源最多允许绑定 10 个不同的标签，同一资源每个标签“键”上只能存在1个标签“值”；标签键/值只支持中文、数字、大小写字母、空格及特殊符号_.:/=+-@;当无tags时,reps结果返回中tagmsg为空 (Optional) */
     UserTags []disk.Tag `json:"userTags"`
 
     /* 幂等性校验参数  */
@@ -74,7 +74,7 @@ func NewCreateDisksRequest(
  * param regionId: 地域ID (Required)
  * param diskSpec: 创建云硬盘规格 (Required)
  * param maxCount: 购买实例数量；取值范围：[1,100] (Required)
- * param userTags: 用户标签 (Optional)
+ * param userTags: 用户标签,默认为空;tag标签的限制：每个资源最多允许绑定 10 个不同的标签，同一资源每个标签“键”上只能存在1个标签“值”；标签键/值只支持中文、数字、大小写字母、空格及特殊符号_.:/=+-@;当无tags时,reps结果返回中tagmsg为空 (Optional)
  * param clientToken: 幂等性校验参数 (Required)
  */
 func NewCreateDisksRequestWithAllParams(
@@ -128,7 +128,7 @@ func (r *CreateDisksRequest) SetMaxCount(maxCount int) {
     r.MaxCount = maxCount
 }
 
-/* param userTags: 用户标签(Optional) */
+/* param userTags: 用户标签,默认为空;tag标签的限制：每个资源最多允许绑定 10 个不同的标签，同一资源每个标签“键”上只能存在1个标签“值”；标签键/值只支持中文、数字、大小写字母、空格及特殊符号_.:/=+-@;当无tags时,reps结果返回中tagmsg为空(Optional) */
 func (r *CreateDisksRequest) SetUserTags(userTags []disk.Tag) {
     r.UserTags = userTags
 }

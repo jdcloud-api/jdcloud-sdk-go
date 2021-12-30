@@ -22,6 +22,6 @@ type OrderItem struct {
     /* 排序字段。 (Optional) */
     Name *string `json:"name"`
 
-    /* 0:升序 1:降序，必填 (Optional) */
+    /* 0:升序 1:降序，默认不排序 (Optional) */
     Direction *int `json:"direction"`
 }

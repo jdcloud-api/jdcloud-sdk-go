@@ -33,7 +33,7 @@ type ExtendDiskRequest struct {
     /* 扩容后的云硬盘大小，单位为GiB  */
     DiskSizeGB int `json:"diskSizeGB"`
 
-    /* 修改ssd.io1型云硬盘的iops数量，当且仅当ssd.io1型的云盘类型有效，步长是10. (Optional) */
+    /* 修改ssd.io1型云硬盘的iops数量，当且仅当ssd.io1型的云盘类型有效，步长是10; 默认iops为云硬盘原有iops值 (Optional) */
     Iops *int `json:"iops"`
 }
 
@@ -67,7 +67,7 @@ func NewExtendDiskRequest(
  * param regionId: 地域ID (Required)
  * param diskId: 云硬盘ID (Required)
  * param diskSizeGB: 扩容后的云硬盘大小，单位为GiB (Required)
- * param iops: 修改ssd.io1型云硬盘的iops数量，当且仅当ssd.io1型的云盘类型有效，步长是10. (Optional)
+ * param iops: 修改ssd.io1型云硬盘的iops数量，当且仅当ssd.io1型的云盘类型有效，步长是10; 默认iops为云硬盘原有iops值 (Optional)
  */
 func NewExtendDiskRequestWithAllParams(
     regionId string,
@@ -118,7 +118,7 @@ func (r *ExtendDiskRequest) SetDiskSizeGB(diskSizeGB int) {
     r.DiskSizeGB = diskSizeGB
 }
 
-/* param iops: 修改ssd.io1型云硬盘的iops数量，当且仅当ssd.io1型的云盘类型有效，步长是10.(Optional) */
+/* param iops: 修改ssd.io1型云硬盘的iops数量，当且仅当ssd.io1型的云盘类型有效，步长是10; 默认iops为云硬盘原有iops值(Optional) */
 func (r *ExtendDiskRequest) SetIops(iops int) {
     r.Iops = &iops
 }

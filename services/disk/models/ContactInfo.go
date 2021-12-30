@@ -25,9 +25,9 @@ type ContactInfo struct {
     /* 是否发送短信。0:不发送 1:发送 (Optional) */
     Email *int `json:"email"`
 
-    /* 联系人id (Optional) */
+    /* 联系人id,默认为空 (Optional) */
     PersonIds []int `json:"personIds"`
 
-    /* 联系组id (Optional) */
+    /* 联系组id,默认为空 (Optional) */
     GroupIds []int `json:"groupIds"`
 }
