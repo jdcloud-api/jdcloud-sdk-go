@@ -40,7 +40,7 @@ func NewYdsmsClient(credential *core.Credential) *YdsmsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "ydsms",
-            Revision:    "1.0.6",
+            Revision:    "1.0.8",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -108,6 +108,26 @@ func (c *YdsmsClient) ModifyStatusUsingGET(request *ydsms.ModifyStatusUsingGETRe
     }
 
     jdResp := &ydsms.ModifyStatusUsingGETResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据加密pin发送短信 */
+func (c *YdsmsClient) SendMessagesByEncPinUsingPOST(request *ydsms.SendMessagesByEncPinUsingPOSTRequest) (*ydsms.SendMessagesByEncPinUsingPOSTResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydsms.SendMessagesByEncPinUsingPOSTResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

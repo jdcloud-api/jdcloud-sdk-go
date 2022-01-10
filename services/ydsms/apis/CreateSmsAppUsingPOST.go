@@ -27,23 +27,27 @@ type CreateSmsAppUsingPOSTRequest struct {
     /* 应用描述  */
     AppDesc string `json:"appDesc"`
 
-    /* 云鼎应用id  */
-    AppId string `json:"appId"`
+    /* 云鼎应用id (Optional) */
+    AppId *string `json:"appId"`
 
     /* 应用名称  */
     AppName string `json:"appName"`
+
+    /* accessKeyId (Optional) */
+    AccessKeyId *string `json:"accessKeyId"`
+
+    /* accessKeySecret (Optional) */
+    AccessKeySecret *string `json:"accessKeySecret"`
 }
 
 /*
  * param appDesc: 应用描述 (Required)
- * param appId: 云鼎应用id (Required)
  * param appName: 应用名称 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateSmsAppUsingPOSTRequest(
     appDesc string,
-    appId string,
     appName string,
 ) *CreateSmsAppUsingPOSTRequest {
 
@@ -55,20 +59,23 @@ func NewCreateSmsAppUsingPOSTRequest(
 			Version: "v1",
 		},
         AppDesc: appDesc,
-        AppId: appId,
         AppName: appName,
 	}
 }
 
 /*
  * param appDesc: 应用描述 (Required)
- * param appId: 云鼎应用id (Required)
+ * param appId: 云鼎应用id (Optional)
  * param appName: 应用名称 (Required)
+ * param accessKeyId: accessKeyId (Optional)
+ * param accessKeySecret: accessKeySecret (Optional)
  */
 func NewCreateSmsAppUsingPOSTRequestWithAllParams(
     appDesc string,
-    appId string,
+    appId *string,
     appName string,
+    accessKeyId *string,
+    accessKeySecret *string,
 ) *CreateSmsAppUsingPOSTRequest {
 
     return &CreateSmsAppUsingPOSTRequest{
@@ -81,6 +88,8 @@ func NewCreateSmsAppUsingPOSTRequestWithAllParams(
         AppDesc: appDesc,
         AppId: appId,
         AppName: appName,
+        AccessKeyId: accessKeyId,
+        AccessKeySecret: accessKeySecret,
     }
 }
 
@@ -102,14 +111,24 @@ func (r *CreateSmsAppUsingPOSTRequest) SetAppDesc(appDesc string) {
     r.AppDesc = appDesc
 }
 
-/* param appId: 云鼎应用id(Required) */
+/* param appId: 云鼎应用id(Optional) */
 func (r *CreateSmsAppUsingPOSTRequest) SetAppId(appId string) {
-    r.AppId = appId
+    r.AppId = &appId
 }
 
 /* param appName: 应用名称(Required) */
 func (r *CreateSmsAppUsingPOSTRequest) SetAppName(appName string) {
     r.AppName = appName
+}
+
+/* param accessKeyId: accessKeyId(Optional) */
+func (r *CreateSmsAppUsingPOSTRequest) SetAccessKeyId(accessKeyId string) {
+    r.AccessKeyId = &accessKeyId
+}
+
+/* param accessKeySecret: accessKeySecret(Optional) */
+func (r *CreateSmsAppUsingPOSTRequest) SetAccessKeySecret(accessKeySecret string) {
+    r.AccessKeySecret = &accessKeySecret
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
