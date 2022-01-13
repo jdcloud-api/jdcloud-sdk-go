@@ -31,18 +31,14 @@ type DescribeIpMonitorFlowRequest struct {
     /* 查询的结束时间, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ  */
     EndTime string `json:"endTime"`
 
-    /* DDoS 防护包已防护的公网 IP
-- 使用 <a href="http://docs.jdcloud.com/anti-ddos-protection-package/api/describeprotectediplist">describeProtectedIpList</a> 接口查询 DDoS 防护包已防护的公网 IP
-  */
+    /* DDoS 防护包已防护的公网 IP. <br>- 使用 <a href='http://docs.jdcloud.com/anti-ddos-protection-package/api/describeprotectediplist'>describeProtectedIpList</a> 接口查询 DDoS 防护包已防护的公网 IP  */
     Ip []string `json:"ip"`
 }
 
 /*
  * param startTime: 开始时间, 只能查询最近 90 天以内的数据, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
  * param endTime: 查询的结束时间, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
- * param ip: DDoS 防护包已防护的公网 IP
-- 使用 <a href="http://docs.jdcloud.com/anti-ddos-protection-package/api/describeprotectediplist">describeProtectedIpList</a> 接口查询 DDoS 防护包已防护的公网 IP
- (Required)
+ * param ip: DDoS 防护包已防护的公网 IP. <br>- 使用 <a href='http://docs.jdcloud.com/anti-ddos-protection-package/api/describeprotectediplist'>describeProtectedIpList</a> 接口查询 DDoS 防护包已防护的公网 IP (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -68,9 +64,7 @@ func NewDescribeIpMonitorFlowRequest(
 /*
  * param startTime: 开始时间, 只能查询最近 90 天以内的数据, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
  * param endTime: 查询的结束时间, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
- * param ip: DDoS 防护包已防护的公网 IP
-- 使用 <a href="http://docs.jdcloud.com/anti-ddos-protection-package/api/describeprotectediplist">describeProtectedIpList</a> 接口查询 DDoS 防护包已防护的公网 IP
- (Required)
+ * param ip: DDoS 防护包已防护的公网 IP. <br>- 使用 <a href='http://docs.jdcloud.com/anti-ddos-protection-package/api/describeprotectediplist'>describeProtectedIpList</a> 接口查询 DDoS 防护包已防护的公网 IP (Required)
  */
 func NewDescribeIpMonitorFlowRequestWithAllParams(
     startTime string,
@@ -114,9 +108,7 @@ func (r *DescribeIpMonitorFlowRequest) SetEndTime(endTime string) {
     r.EndTime = endTime
 }
 
-/* param ip: DDoS 防护包已防护的公网 IP
-- 使用 <a href="http://docs.jdcloud.com/anti-ddos-protection-package/api/describeprotectediplist">describeProtectedIpList</a> 接口查询 DDoS 防护包已防护的公网 IP
-(Required) */
+/* param ip: DDoS 防护包已防护的公网 IP. <br>- 使用 <a href='http://docs.jdcloud.com/anti-ddos-protection-package/api/describeprotectediplist'>describeProtectedIpList</a> 接口查询 DDoS 防护包已防护的公网 IP(Required) */
 func (r *DescribeIpMonitorFlowRequest) SetIp(ip []string) {
     r.Ip = ip
 }

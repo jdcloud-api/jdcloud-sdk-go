@@ -25,15 +25,21 @@ type CreateInstanceRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域编码  */
+    /* 地域 Id, DDoS 防护包目前支持华北-北京, 华东-宿迁, 华东-上海  */
     RegionId string `json:"regionId"`
 
     /* 创建防护包实例请求参数  */
     CreateInstanceSpec *antipro.CreateInstanceSpec `json:"createInstanceSpec"`
+
+    /* 自动续费配置, 默认不开通 (Optional) */
+    AutoRenewalSpec *antipro.AutoRenewalSpec `json:"autoRenewalSpec"`
+
+    /* 提交订单附加操作 (Optional) */
+    ExtraOperationSpec *antipro.ExtraOperationSpec `json:"extraOperationSpec"`
 }
 
 /*
- * param regionId: 地域编码 (Required)
+ * param regionId: 地域 Id, DDoS 防护包目前支持华北-北京, 华东-宿迁, 华东-上海 (Required)
  * param createInstanceSpec: 创建防护包实例请求参数 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -56,12 +62,16 @@ func NewCreateInstanceRequest(
 }
 
 /*
- * param regionId: 地域编码 (Required)
+ * param regionId: 地域 Id, DDoS 防护包目前支持华北-北京, 华东-宿迁, 华东-上海 (Required)
  * param createInstanceSpec: 创建防护包实例请求参数 (Required)
+ * param autoRenewalSpec: 自动续费配置, 默认不开通 (Optional)
+ * param extraOperationSpec: 提交订单附加操作 (Optional)
  */
 func NewCreateInstanceRequestWithAllParams(
     regionId string,
     createInstanceSpec *antipro.CreateInstanceSpec,
+    autoRenewalSpec *antipro.AutoRenewalSpec,
+    extraOperationSpec *antipro.ExtraOperationSpec,
 ) *CreateInstanceRequest {
 
     return &CreateInstanceRequest{
@@ -73,6 +83,8 @@ func NewCreateInstanceRequestWithAllParams(
         },
         RegionId: regionId,
         CreateInstanceSpec: createInstanceSpec,
+        AutoRenewalSpec: autoRenewalSpec,
+        ExtraOperationSpec: extraOperationSpec,
     }
 }
 
@@ -89,7 +101,7 @@ func NewCreateInstanceRequestWithoutParam() *CreateInstanceRequest {
     }
 }
 
-/* param regionId: 地域编码(Required) */
+/* param regionId: 地域 Id, DDoS 防护包目前支持华北-北京, 华东-宿迁, 华东-上海(Required) */
 func (r *CreateInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
@@ -97,6 +109,16 @@ func (r *CreateInstanceRequest) SetRegionId(regionId string) {
 /* param createInstanceSpec: 创建防护包实例请求参数(Required) */
 func (r *CreateInstanceRequest) SetCreateInstanceSpec(createInstanceSpec *antipro.CreateInstanceSpec) {
     r.CreateInstanceSpec = createInstanceSpec
+}
+
+/* param autoRenewalSpec: 自动续费配置, 默认不开通(Optional) */
+func (r *CreateInstanceRequest) SetAutoRenewalSpec(autoRenewalSpec *antipro.AutoRenewalSpec) {
+    r.AutoRenewalSpec = autoRenewalSpec
+}
+
+/* param extraOperationSpec: 提交订单附加操作(Optional) */
+func (r *CreateInstanceRequest) SetExtraOperationSpec(extraOperationSpec *antipro.ExtraOperationSpec) {
+    r.ExtraOperationSpec = extraOperationSpec
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

@@ -19,39 +19,31 @@ package models
 
 type OrderSpec struct {
 
-    /* 操作类型 1: 新购防护包, 3: 升级防护包  */
+    /* 操作类型.<br>- 1: 新购防护包<br>- 3: 升级防护包  */
     BuyType int `json:"buyType"`
 
     /* 防护包实例 Id, 升级防护包实例时必传 (Optional) */
     Id string `json:"id"`
 
-    /* 防护包实例名称, 新购防护包时必传
-长度限制为 1-80 个字符, 只允许包含中文, 字母, 数字, -, ., /, _
- (Optional) */
+    /* 防护包实例名称, 新购防护包时必传. 长度限制为 1-80 个字符, 只允许包含中文, 字母, 数字, -, ., /, _ (Optional) */
     Name string `json:"name"`
 
-    /* 套餐类型, 1: 独享 IP, 2: 共享 IP  */
+    /* 套餐类型.<br>- 1: 独享 IP<br>- 2: 共享 IP  */
     PkgType int `json:"pkgType"`
 
     /* 可防护 IP 数量, 5, 10, 50, 100 1000(不限)  */
     IpNum int `json:"ipNum"`
 
     /* 保底带宽: 10, 20, 30, 50, 单位: Gbps  */
-    Bp int `json:"bp"`
+    BpGbps int `json:"bpGbps"`
 
     /* 弹性带宽: 0, 10, 20, 单位: Gbps  */
-    Ep int `json:"ep"`
+    EpGbps int `json:"epGbps"`
 
-    /* 购买防护包时长, 新购防护包时必传
-- timeUnit 为 3 时, 可取值 1-9
-- timeUnit 为 4 时, 可取值 1-3
- (Optional) */
+    /* 购买防护包时长, 新购防护包时必传. <br>- timeUnit 为 3 时, 可取值 1-9<br>- timeUnit 为 4 时, 可取值 1-3 (Optional) */
     TimeSpan int `json:"timeSpan"`
 
-    /* 购买时长类型, 新购防护包时必传
-- 3: 月
-- 4: 年
- (Optional) */
+    /* 购买时长类型, 新购防护包时必传. <br>- 3: 月<br>- 4: 年 (Optional) */
     TimeUnit int `json:"timeUnit"`
 
     /* 回调 url  */

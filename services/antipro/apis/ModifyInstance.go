@@ -25,7 +25,7 @@ type ModifyInstanceRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域编码  */
+    /* 地域 Id, DDoS 防护包目前支持华北-北京, 华东-宿迁, 华东-上海  */
     RegionId string `json:"regionId"`
 
     /* 防护包实例 Id  */
@@ -36,7 +36,7 @@ type ModifyInstanceRequest struct {
 }
 
 /*
- * param regionId: 地域编码 (Required)
+ * param regionId: 地域 Id, DDoS 防护包目前支持华北-北京, 华东-宿迁, 华东-上海 (Required)
  * param instanceId: 防护包实例 Id (Required)
  * param modifyInstanceSpec: 升级防护包实例请求参数 (Required)
  *
@@ -62,7 +62,7 @@ func NewModifyInstanceRequest(
 }
 
 /*
- * param regionId: 地域编码 (Required)
+ * param regionId: 地域 Id, DDoS 防护包目前支持华北-北京, 华东-宿迁, 华东-上海 (Required)
  * param instanceId: 防护包实例 Id (Required)
  * param modifyInstanceSpec: 升级防护包实例请求参数 (Required)
  */
@@ -98,7 +98,7 @@ func NewModifyInstanceRequestWithoutParam() *ModifyInstanceRequest {
     }
 }
 
-/* param regionId: 地域编码(Required) */
+/* param regionId: 地域 Id, DDoS 防护包目前支持华北-北京, 华东-宿迁, 华东-上海(Required) */
 func (r *ModifyInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

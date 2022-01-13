@@ -19,18 +19,20 @@ package models
 
 type IpResource struct {
 
-    /* 公网 IP 所在区域, cn-north-1: 华北-北京, cn-east-1: 华东-宿迁, cn-east-2: 华东-上海, cn-south-1: 华南-广州 (Optional) */
+    /* 公网 IP 所在区域 (Optional) */
     Region string `json:"region"`
 
-    /* 公网 IP 类型或绑定资源类型:
-  0: 未知类型,
-  1: 弹性公网 IP(IP 为弹性公网 IP, 绑定资源类型未知),
-  10: 弹性公网 IP(IP 为弹性公网 IP, 但未绑定资源),
-  11: 云主机,
-  12: 负载均衡,
-  13: 原生容器实例,
-  14: 原生容器 Pod,
-  2: 云物理服务器,
+    /* 公网 IP 类型或绑定资源类型. 
+<br>- 0: 未知类型
+<br>- 1: 弹性公网 IP(IP 为弹性公网 IP, 绑定资源类型未知)
+<br>- 10: 弹性公网 IP(IP 为弹性公网 IP, 但未绑定资源)
+<br>- 11: 云主机
+<br>- 12: 负载均衡
+<br>- 13: 原生容器实例
+<br>- 14: 原生容器 Pod
+<br>- 2: 云物理服务器公网 IP
+<br>- 3: Web应用防火墙 IP
+<br>- 4: 托管区公网 IP
  (Optional) */
     ResourceType int `json:"resourceType"`
 
@@ -55,6 +57,6 @@ type IpResource struct {
     /* 绑定防护包名称, 为空字符串时表示未绑定防护包 (Optional) */
     InstanceName string `json:"instanceName"`
 
-    /* 安全状态, 0: 安全, 1: 清洗, 2: 黑洞 (Optional) */
+    /* 安全状态. <br>- 0: 安全 <br>- 1: 清洗 <br>- 2: 黑洞 (Optional) */
     SafeStatus int `json:"safeStatus"`
 }

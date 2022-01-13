@@ -19,9 +19,7 @@ package models
 
 type CreateInstanceSpec struct {
 
-    /* 防护包实例名称, 新购防护包时必传
-长度限制为 1-80 个字符, 只允许包含中文, 字母, 数字, -, ., /, _
-  */
+    /* 防护包实例名称, 新购防护包时必传. 长度限制为 1-80 个字符, 只允许包含中文, 字母, 数字, -, ., /, _  */
     Name string `json:"name"`
 
     /* 可防护 IP 数量, 1, 5, 10, 50, 100, 1000(不限)  */
@@ -33,14 +31,9 @@ type CreateInstanceSpec struct {
     /* 弹性带宽: 0, 10, 20, 单位: Gbps  */
     EpGbps int `json:"epGbps"`
 
-    /* 购买防护包时长, 新购防护包时必传
-- timeUnit 为 3 时, 可取值 1-9
-- timeUnit 为 4 时, 可取值 1-3
-  */
+    /* 购买防护包时长, 新购防护包时必传. <br>- timeUnit 为 3 时, 可取值 1-9<br>- timeUnit 为 4 时, 可取值 1-3  */
     TimeSpan int `json:"timeSpan"`
 
-    /* 购买时长类型, 新购防护包时必传
-- 3: 月
-- 4: 年  */
+    /* 购买时长类型, 新购防护包时必传. <br>- 3: 月<br>- 4: 年  */
     TimeUnit int `json:"timeUnit"`
 }

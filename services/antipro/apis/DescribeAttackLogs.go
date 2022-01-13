@@ -40,9 +40,7 @@ type DescribeAttackLogsRequest struct {
     /* 防护包实例 Id (Optional) */
     InstanceId *string `json:"instanceId"`
 
-    /* DDoS 防护包已防护的公网 IP
-- 使用 <a href="http://docs.jdcloud.com/anti-ddos-protection-package/api/describeprotectediplist">describeProtectedIpList</a> 接口查询 DDoS 防护包已防护的公网 IP
- (Optional) */
+    /* DDoS 防护包已防护的公网 IP. <br>- 使用 <a href='http://docs.jdcloud.com/anti-ddos-protection-package/api/describeprotectediplist'>describeProtectedIpList</a> 接口查询 DDoS 防护包已防护的公网 IP (Optional) */
     Ip []string `json:"ip"`
 }
 
@@ -75,9 +73,7 @@ func NewDescribeAttackLogsRequest(
  * param startTime: 开始时间, 只能查询最近 90 天以内的数据, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Required)
  * param endTime: 查询的结束时间, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Required)
  * param instanceId: 防护包实例 Id (Optional)
- * param ip: DDoS 防护包已防护的公网 IP
-- 使用 <a href="http://docs.jdcloud.com/anti-ddos-protection-package/api/describeprotectediplist">describeProtectedIpList</a> 接口查询 DDoS 防护包已防护的公网 IP
- (Optional)
+ * param ip: DDoS 防护包已防护的公网 IP. <br>- 使用 <a href='http://docs.jdcloud.com/anti-ddos-protection-package/api/describeprotectediplist'>describeProtectedIpList</a> 接口查询 DDoS 防护包已防护的公网 IP (Optional)
  */
 func NewDescribeAttackLogsRequestWithAllParams(
     pageNumber *int,
@@ -142,9 +138,7 @@ func (r *DescribeAttackLogsRequest) SetInstanceId(instanceId string) {
     r.InstanceId = &instanceId
 }
 
-/* param ip: DDoS 防护包已防护的公网 IP
-- 使用 <a href="http://docs.jdcloud.com/anti-ddos-protection-package/api/describeprotectediplist">describeProtectedIpList</a> 接口查询 DDoS 防护包已防护的公网 IP
-(Optional) */
+/* param ip: DDoS 防护包已防护的公网 IP. <br>- 使用 <a href='http://docs.jdcloud.com/anti-ddos-protection-package/api/describeprotectediplist'>describeProtectedIpList</a> 接口查询 DDoS 防护包已防护的公网 IP(Optional) */
 func (r *DescribeAttackLogsRequest) SetIp(ip []string) {
     r.Ip = ip
 }

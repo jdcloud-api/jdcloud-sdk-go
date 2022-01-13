@@ -19,7 +19,7 @@ package models
 
 type ProtectionRule struct {
 
-    /* 防护规则类型: 0: 默认防护包规则, 1: IP 自定义规则 (Optional) */
+    /* 防护规则类型. <br>- 0: 默认防护包规则<br>- 1: IP 自定义规则 (Optional) */
     Type int `json:"type"`
 
     /* 清洗触发值 bps (Optional) */

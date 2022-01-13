@@ -25,7 +25,7 @@ type OperationRecord struct {
     /* 防护包名称 (Optional) */
     Name string `json:"name"`
 
-    /* 操作类型:  1：套餐变更, 2：防护规则变更, 3：防护对象变更, 4：IP 地址变更, 5：防护包名称变更 (Optional) */
+    /* 操作类型.<br>- 1: 套餐变更<br>- 2: 防护规则变更<br>- 3: 防护对象变更<br>- 4: IP 地址变更<br>- 5: 防护包名称变更<br>- 6: IP地址库变更<br>- 7: 端口库变更<br>- 8: 访问控制规则变更 (Optional) */
     Action int `json:"action"`
 
     /* 操作详情 (Optional) */

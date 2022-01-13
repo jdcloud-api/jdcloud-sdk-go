@@ -25,7 +25,7 @@ type DescribeProtectionRuleRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域编码  */
+    /* 地域 Id, DDoS 防护包目前支持华北-北京, 华东-宿迁, 华东-上海  */
     RegionId string `json:"regionId"`
 
     /* 防护包实例 Id  */
@@ -36,7 +36,7 @@ type DescribeProtectionRuleRequest struct {
 }
 
 /*
- * param regionId: 地域编码 (Required)
+ * param regionId: 地域 Id, DDoS 防护包目前支持华北-北京, 华东-宿迁, 华东-上海 (Required)
  * param instanceId: 防护包实例 Id (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -59,7 +59,7 @@ func NewDescribeProtectionRuleRequest(
 }
 
 /*
- * param regionId: 地域编码 (Required)
+ * param regionId: 地域 Id, DDoS 防护包目前支持华北-北京, 华东-宿迁, 华东-上海 (Required)
  * param instanceId: 防护包实例 Id (Required)
  * param ip: 被防护 IP, 缺省时获取防护包实例的防护规则 (Optional)
  */
@@ -95,7 +95,7 @@ func NewDescribeProtectionRuleRequestWithoutParam() *DescribeProtectionRuleReque
     }
 }
 
-/* param regionId: 地域编码(Required) */
+/* param regionId: 地域 Id, DDoS 防护包目前支持华北-北京, 华东-宿迁, 华东-上海(Required) */
 func (r *DescribeProtectionRuleRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
