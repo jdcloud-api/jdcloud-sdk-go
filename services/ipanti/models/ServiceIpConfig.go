@@ -17,11 +17,8 @@
 package models
 
 
-type ServiceIp struct {
+type ServiceIpConfig struct {
 
-    /* 高防IP (Optional) */
-    ServiceIp string `json:"serviceIp"`
-
-    /* 安全状态. <br>- SAFE: 安全<br>- CLEANING: 清洗中<br>- BLOCKING: 封禁中 (Optional) */
-    SecurityStatus string `json:"securityStatus"`
+    /* 已配置的高防IP列表 (Optional) */
+    ServiceIps []ServiceIpConfigItem `json:"serviceIps"`
 }

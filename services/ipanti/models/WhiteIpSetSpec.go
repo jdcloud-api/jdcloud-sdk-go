@@ -17,11 +17,11 @@
 package models
 
 
-type ServiceIp struct {
+type WhiteIpSetSpec struct {
 
-    /* 高防IP (Optional) */
-    ServiceIp string `json:"serviceIp"`
+    /* IP 白名单名称  */
+    Name string `json:"name"`
 
-    /* 安全状态. <br>- SAFE: 安全<br>- CLEANING: 清洗中<br>- BLOCKING: 封禁中 (Optional) */
-    SecurityStatus string `json:"securityStatus"`
+    /* IP 或 IP 段的数组  */
+    Ip []string `json:"ip"`
 }

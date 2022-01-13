@@ -19,8 +19,11 @@ package models
 
 type WebRuleSpec struct {
 
-    /* 高防 IP (Optional) */
+    /* 高防 IP, serviceIps 为空时生效 (Optional) */
     ServiceIp *string `json:"serviceIp"`
+
+    /* 高防 IP 列表, 不为空时忽略 serviceIp, 传多个时后台会在高防IP封禁后随机切换其他未封禁的IP (Optional) */
+    ServiceIps []string `json:"serviceIps"`
 
     /* 子域名  */
     Domain string `json:"domain"`
@@ -73,8 +76,11 @@ type WebRuleSpec struct {
     /* SSL协议类型, protocol 选项开启 https 时生效, 可取值SSLv2,SSLv3,TLSv1.0,TLSv1.1,TLSv1.2 (Optional) */
     SslProtocols []string `json:"sslProtocols"`
 
-    /* 加密套件等级, protocol 选项开启 https 时生效, 可取值<br>- low: 低级<br>- middle: 中级<br>- high：高级 (Optional) */
+    /* 加密套件等级, protocol 选项开启 https 时生效, 可取值<br>- low: 低级<br>- middle: 中级<br>- high：高级<br>- custom：自定义 (Optional) */
     SuiteLevel *string `json:"suiteLevel"`
+
+    /* 自定义加密套件等级, suiteLevel 为 custom 是有效 (Optional) */
+    UserSuiteLevel []string `json:"userSuiteLevel"`
 
     /* 健康检查开关, 0: 关闭, 1: 开启 (Optional) */
     EnableHealthCheck *int `json:"enableHealthCheck"`

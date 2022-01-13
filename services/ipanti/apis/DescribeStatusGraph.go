@@ -18,43 +18,42 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    ipanti "github.com/jdcloud-api/jdcloud-sdk-go/services/ipanti/models"
 )
 
-type DescribeAttackTypeCountRequest struct {
+type DescribeStatusGraphRequest struct {
 
     core.JDCloudRequest
 
     /* 区域 ID, 高防不区分区域, 传 cn-north-1 即可  */
     RegionId string `json:"regionId"`
 
-    /* 开始时间, 只能查询最近 90 天以内的数据, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ  */
+    /* 开始时间, 只能查询最近 7 天以内的数据, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ  */
     StartTime string `json:"startTime"`
 
     /* 查询的结束时间, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Optional) */
     EndTime *string `json:"endTime"`
 
-    /* 高防实例 ID (Optional) */
+    /* 高防实例 Id 列表 (Optional) */
     InstanceId []string `json:"instanceId"`
 
-    /* 高防IP列表. <br>- 使用 <a href='http://docs.jdcloud.com/anti-ddos-pro/api/describeServiceIpList'>describeServiceIpList</a> 接口查询实例的高防 IP (Optional) */
-    ServiceIp []string `json:"serviceIp"`
+    /* 规则域名列表 (Optional) */
+    SubDomain []string `json:"subDomain"`
 }
 
 /*
  * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
- * param startTime: 开始时间, 只能查询最近 90 天以内的数据, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Required)
+ * param startTime: 开始时间, 只能查询最近 7 天以内的数据, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeAttackTypeCountRequest(
+func NewDescribeStatusGraphRequest(
     regionId string,
     startTime string,
-) *DescribeAttackTypeCountRequest {
+) *DescribeStatusGraphRequest {
 
-	return &DescribeAttackTypeCountRequest{
+	return &DescribeStatusGraphRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/attacklog:describeAttackTypeCount",
+			URL:     "/regions/{regionId}/charts:statusGraph",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -66,22 +65,22 @@ func NewDescribeAttackTypeCountRequest(
 
 /*
  * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
- * param startTime: 开始时间, 只能查询最近 90 天以内的数据, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Required)
+ * param startTime: 开始时间, 只能查询最近 7 天以内的数据, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Required)
  * param endTime: 查询的结束时间, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Optional)
- * param instanceId: 高防实例 ID (Optional)
- * param serviceIp: 高防IP列表. <br>- 使用 <a href='http://docs.jdcloud.com/anti-ddos-pro/api/describeServiceIpList'>describeServiceIpList</a> 接口查询实例的高防 IP (Optional)
+ * param instanceId: 高防实例 Id 列表 (Optional)
+ * param subDomain: 规则域名列表 (Optional)
  */
-func NewDescribeAttackTypeCountRequestWithAllParams(
+func NewDescribeStatusGraphRequestWithAllParams(
     regionId string,
     startTime string,
     endTime *string,
     instanceId []string,
-    serviceIp []string,
-) *DescribeAttackTypeCountRequest {
+    subDomain []string,
+) *DescribeStatusGraphRequest {
 
-    return &DescribeAttackTypeCountRequest{
+    return &DescribeStatusGraphRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/attacklog:describeAttackTypeCount",
+            URL:     "/regions/{regionId}/charts:statusGraph",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -90,16 +89,16 @@ func NewDescribeAttackTypeCountRequestWithAllParams(
         StartTime: startTime,
         EndTime: endTime,
         InstanceId: instanceId,
-        ServiceIp: serviceIp,
+        SubDomain: subDomain,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeAttackTypeCountRequestWithoutParam() *DescribeAttackTypeCountRequest {
+func NewDescribeStatusGraphRequestWithoutParam() *DescribeStatusGraphRequest {
 
-    return &DescribeAttackTypeCountRequest{
+    return &DescribeStatusGraphRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/attacklog:describeAttackTypeCount",
+            URL:     "/regions/{regionId}/charts:statusGraph",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -108,42 +107,49 @@ func NewDescribeAttackTypeCountRequestWithoutParam() *DescribeAttackTypeCountReq
 }
 
 /* param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可(Required) */
-func (r *DescribeAttackTypeCountRequest) SetRegionId(regionId string) {
+func (r *DescribeStatusGraphRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param startTime: 开始时间, 只能查询最近 90 天以内的数据, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ(Required) */
-func (r *DescribeAttackTypeCountRequest) SetStartTime(startTime string) {
+/* param startTime: 开始时间, 只能查询最近 7 天以内的数据, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ(Required) */
+func (r *DescribeStatusGraphRequest) SetStartTime(startTime string) {
     r.StartTime = startTime
 }
 
 /* param endTime: 查询的结束时间, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ(Optional) */
-func (r *DescribeAttackTypeCountRequest) SetEndTime(endTime string) {
+func (r *DescribeStatusGraphRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
 
-/* param instanceId: 高防实例 ID(Optional) */
-func (r *DescribeAttackTypeCountRequest) SetInstanceId(instanceId []string) {
+/* param instanceId: 高防实例 Id 列表(Optional) */
+func (r *DescribeStatusGraphRequest) SetInstanceId(instanceId []string) {
     r.InstanceId = instanceId
 }
 
-/* param serviceIp: 高防IP列表. <br>- 使用 <a href='http://docs.jdcloud.com/anti-ddos-pro/api/describeServiceIpList'>describeServiceIpList</a> 接口查询实例的高防 IP(Optional) */
-func (r *DescribeAttackTypeCountRequest) SetServiceIp(serviceIp []string) {
-    r.ServiceIp = serviceIp
+/* param subDomain: 规则域名列表(Optional) */
+func (r *DescribeStatusGraphRequest) SetSubDomain(subDomain []string) {
+    r.SubDomain = subDomain
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeAttackTypeCountRequest) GetRegionId() string {
+func (r DescribeStatusGraphRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeAttackTypeCountResponse struct {
+type DescribeStatusGraphResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeAttackTypeCountResult `json:"result"`
+    Result DescribeStatusGraphResult `json:"result"`
 }
 
-type DescribeAttackTypeCountResult struct {
-    DataList []ipanti.AttackTypeCount `json:"dataList"`
+type DescribeStatusGraphResult struct {
+    Status500 []int64 `json:"status500"`
+    Status502 []int64 `json:"status502"`
+    Status504 []int64 `json:"status504"`
+    Status590 []int64 `json:"status590"`
+    Status592 []int64 `json:"status592"`
+    Status594 []int64 `json:"status594"`
+    Status5xx []int64 `json:"status5xx"`
+    Time []string `json:"time"`
 }
