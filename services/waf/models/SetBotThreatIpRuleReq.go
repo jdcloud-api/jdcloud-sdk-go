@@ -26,8 +26,8 @@ type SetBotThreatIpRuleReq struct {
     BotType string `json:"botType"`
 
     /* 动作配置，默认为告警，仅支持1和4和5三种类型动作 (Optional) */
-    Action *DenyActionCfg `json:"action"`
+    Action DenyActionCfg `json:"action"`
 
     /* 1-启用 0-禁用 (Optional) */
-    Enable *int `json:"enable"`
+    Enable int `json:"enable"`
 }

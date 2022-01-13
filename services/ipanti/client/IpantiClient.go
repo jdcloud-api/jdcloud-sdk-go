@@ -40,7 +40,7 @@ func NewIpantiClient(credential *core.Credential) *IpantiClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "ipanti",
-            Revision:    "1.10.0",
+            Revision:    "1.11.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -55,6 +55,26 @@ func (c *IpantiClient) SetLogger(logger core.Logger) {
 
 func (c *IpantiClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
+}
+
+/* 高防返回客户端状态码报表 */
+func (c *IpantiClient) DescribeStatusGraph(request *ipanti.DescribeStatusGraphRequest) (*ipanti.DescribeStatusGraphResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DescribeStatusGraphResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
 }
 
 /* 更新实例弹性防护带宽 */
@@ -559,7 +579,12 @@ func (c *IpantiClient) DescribeProtectionStatistics(request *ipanti.DescribeProt
     return jdResp, err
 }
 
-/* 查询高防IP的 DDoS 攻击日志, 仅BGP实例返回的是IP级别的攻击记录, 非BGP实例返回的仍是实例级别的攻击记录(serviceIp 字段为空) */
+/* 查询高防IP的 DDoS 攻击日志, 仅BGP实例返回的是IP级别的攻击记录, 非BGP实例返回的仍是实例级别的攻击记录(serviceIp 字段为空)
+参数 serviceIp 优先级大于 instanceId.
+- 指定 serviceIp 参数时, 忽略 instanceId 参数, 查询 ip 相关攻击记录.
+- 未指定 serviceIp 时, 查询 instanceId 指定实例相关攻击记录.
+- serviceIp 和 instanceId 均未指定时, 查询用户所有攻击记录
+ */
 func (c *IpantiClient) DescribeDDoSIpAttackLogs(request *ipanti.DescribeDDoSIpAttackLogsRequest) (*ipanti.DescribeDDoSIpAttackLogsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -859,7 +884,13 @@ func (c *IpantiClient) DescribeBlackListRuleOfWebRule(request *ipanti.DescribeBl
     return jdResp, err
 }
 
-/* 查询攻击次数及流量峰值 */
+/* 查询攻击次数及流量峰值
+参数 serviceIp 优先级大于 instanceId.
+- 指定 serviceIp 参数时, 忽略 instanceId 参数, 统计 ip 相关攻击
+- 未指定 serviceIp 时, 统计 instanceId 指定实例相关攻击
+- serviceIp 和 instanceId 均未指定时, 统计用户所有攻击记录
+CC攻击为实例级别, 查询类型 type 为 cc 时, 参数 serviceIp 无效
+ */
 func (c *IpantiClient) DescribeAttackStatistics(request *ipanti.DescribeAttackStatisticsRequest) (*ipanti.DescribeAttackStatisticsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1759,7 +1790,12 @@ func (c *IpantiClient) DescribeCpsIpList(request *ipanti.DescribeCpsIpListReques
     return jdResp, err
 }
 
-/* 查询各类型攻击次数 */
+/* 查询各类型攻击次数
+参数 serviceIp 优先级大于 instanceId.
+- 指定 serviceIp 参数时, 忽略 instanceId 参数, 统计 ip 相关攻击
+- 未指定 serviceIp 时, 统计 instanceId 指定实例相关攻击
+- serviceIp 和 instanceId 均未指定时, 统计用户所有攻击记录
+ */
 func (c *IpantiClient) DescribeAttackTypeCount(request *ipanti.DescribeAttackTypeCountRequest) (*ipanti.DescribeAttackTypeCountResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -2179,7 +2215,12 @@ func (c *IpantiClient) DescribeDispatchRules(request *ipanti.DescribeDispatchRul
     return jdResp, err
 }
 
-/* 新建与并发连接数统计报表 */
+/* 新建与并发连接数统计报表        
+参数 serviceIp 优先级大于 instanceId.
+- 指定 serviceIp 参数时, 忽略 instanceId 参数, 查询 ip 相关报表
+- 未指定 serviceIp 时, 查询 instanceId 指定实例相关报表
+- serviceIp 和 instanceId 均未指定时, 查询用户所有实例报表
+ */
 func (c *IpantiClient) DescribeConnStatGraph(request *ipanti.DescribeConnStatGraphRequest) (*ipanti.DescribeConnStatGraphResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -2319,7 +2360,12 @@ func (c *IpantiClient) CreateBlackListRuleOfWebRule(request *ipanti.CreateBlackL
     return jdResp, err
 }
 
-/* DDos 防护流量报表 */
+/* DDos 防护流量报表
+参数 serviceIp 优先级大于 instanceId.
+- 指定 serviceIp 参数时, 忽略 instanceId 参数, 查询 ip 相关报表
+- 未指定 serviceIp 时, 查询 instanceId 指定实例相关报表
+- serviceIp 和 instanceId 均未指定时, 查询用户所有实例报表
+ */
 func (c *IpantiClient) DescribeDDoSGraph(request *ipanti.DescribeDDoSGraphRequest) (*ipanti.DescribeDDoSGraphResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -2370,6 +2416,26 @@ func (c *IpantiClient) DisableBlackListRuleOfForwardRule(request *ipanti.Disable
     }
 
     jdResp := &ipanti.DisableBlackListRuleOfForwardRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据高防计费资源ID查询对应的实例Id, 调用 <a href='http://docs.jdcloud.com/anti-ddos-pro/api/createInstance'>createInstance</a> 接口成功后，跟据message字段返回的计费资源Id查询对应的高防实例ID, 需要高防实例实际创建成功以后才可查询得到 */
+func (c *IpantiClient) DescribeInstanceIdByResourceId(request *ipanti.DescribeInstanceIdByResourceIdRequest) (*ipanti.DescribeInstanceIdByResourceIdResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ipanti.DescribeInstanceIdByResourceIdResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2559,7 +2625,12 @@ func (c *IpantiClient) CreateDispatchRules(request *ipanti.CreateDispatchRulesRe
     return jdResp, err
 }
 
-/* 业务流量报表 */
+/* 业务流量报表        
+参数 serviceIp 优先级大于 instanceId.
+- 指定 serviceIp 参数时, 忽略 instanceId 参数, 查询 ip 相关报表
+- 未指定 serviceIp 时, 查询 instanceId 指定实例相关报表
+- serviceIp 和 instanceId 均未指定时, 查询用户所有实例报表
+ */
 func (c *IpantiClient) DescribeBusinessGraph(request *ipanti.DescribeBusinessGraphRequest) (*ipanti.DescribeBusinessGraphResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")

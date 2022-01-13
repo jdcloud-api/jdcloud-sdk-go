@@ -34,7 +34,7 @@ type FilterCfg struct {
     /* // 匹配类型为"SQLi"/"XSS"时:""，匹配类型为"geo"时:该值为省份名称。匹配类型为"ip"时，该值为 ipv4/8/16/24/32)/ipv6/64 ipv6/128)| 匹配类型为"size"时:数字字符串 其他类型不限 (Optional) */
     ReqValue *string `json:"reqValue"`
 
-    /* 仅type为str regex SQLi XSS时可非空，取值"","lowercase","trim","base64Decode","urlDecode","htmlDecode",按先后顺序，多个时用 , 分隔 (Optional) */
+    /* 仅type为str regex SQLi XSS时可非空，取值"","lowercase","trim","base64Decode","urlDecode","htmlDecode","hexDecode","sqlTrim"按先后顺序，多个时用 , 分隔 (Optional) */
     DecodeFunc *string `json:"decodeFunc"`
 
     /* 不解码"base64Decode"解码,str时才有 (Optional) */

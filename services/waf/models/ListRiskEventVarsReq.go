@@ -26,14 +26,14 @@ type ListRiskEventVarsReq struct {
     Domain string `json:"domain"`
 
     /* 事件ID (Optional) */
-    Id *int `json:"id"`
+    Id int `json:"id"`
 
     /* 事件名称 (Optional) */
-    Name *string `json:"name"`
+    Name string `json:"name"`
 
     /* 页码，[1-100]，默认是1 (Optional) */
-    PageIndex *int `json:"pageIndex"`
+    PageIndex int `json:"pageIndex"`
 
     /* 页大小，[1-100]，默认是10 (Optional) */
-    PageSize *int `json:"pageSize"`
+    PageSize int `json:"pageSize"`
 }

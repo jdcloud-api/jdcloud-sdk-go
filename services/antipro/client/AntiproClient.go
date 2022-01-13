@@ -40,7 +40,7 @@ func NewAntiproClient(credential *core.Credential) *AntiproClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "antipro",
-            Revision:    "1.1.0",
+            Revision:    "1.2.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -53,7 +53,371 @@ func (c *AntiproClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-/* 创建防护包实例, 当前支持区域: 华北-北京, 华东-宿迁, 华东-上海 */
+func (c *AntiproClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
+}
+
+/* 查询防护包实例 */
+func (c *AntiproClient) DescribeInstance(request *antipro.DescribeInstanceRequest) (*antipro.DescribeInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &antipro.DescribeInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 添加防护包防护 IP. <br>- 防护包仅能防护防护包实例所在区域的公网 IP, 且该公网 IP 未被其他防护包防护, 如果已经被其他防护包防护, 请先调用删除防护包防护 IP 接口删除防护 IP<br>- 防护包可添加的防护 IP 个数小于等于防护包的可防护 IP 数量减去已防护的 IP 数量<br>- 使用 <a href='http://docs.jdcloud.com/anti-ddos-protection-package/api/describeelasticipresources'>describeElasticIpResources</a> 接口查询防护包可防护的弹性公网 IP<br>- 使用 <a href='http://docs.jdcloud.com/anti-ddos-protection-package/api/describecpsipresources'>describeCpsIpResources</a> 接口查询防护包可防护的云物理服务器公网 IP<br>- 使用 <a href='http://docs.jdcloud.com/anti-ddos-protection-package/api/describewafipresources'>describeWafIpResources</a> 接口查询防护包可防护的Web应用防火墙公网 IP<br>- 使用 <a href='http://docs.jdcloud.com/anti-ddos-protection-package/api/describeccsipresources'>describeCcsIpResources</a> 接口查询防护包可防护的托管区公网 IP */
+func (c *AntiproClient) AddProtectedIp(request *antipro.AddProtectedIpRequest) (*antipro.AddProtectedIpResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &antipro.AddProtectedIpResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询实例的 IP 库列表 */
+func (c *AntiproClient) DescribeIpSets(request *antipro.DescribeIpSetsRequest) (*antipro.DescribeIpSetsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &antipro.DescribeIpSetsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询 DDoS 防护包可防护的云物理服务器公网 IP(包括云物理服务器弹性公网 IP 及云物理服务器基础网络实例的公网 IP) */
+func (c *AntiproClient) DescribeCpsIpResources(request *antipro.DescribeCpsIpResourcesRequest) (*antipro.DescribeCpsIpResourcesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &antipro.DescribeCpsIpResourcesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询攻击来源 */
+func (c *AntiproClient) DescribeAttackSource(request *antipro.DescribeAttackSourceRequest) (*antipro.DescribeAttackSourceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &antipro.DescribeAttackSourceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询实例的访问控制规则总开关状态 */
+func (c *AntiproClient) DescribeInstanceAclEnable(request *antipro.DescribeInstanceAclEnableRequest) (*antipro.DescribeInstanceAclEnableResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &antipro.DescribeInstanceAclEnableResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 升级防护包实例 */
+func (c *AntiproClient) ModifyInstance(request *antipro.ModifyInstanceRequest) (*antipro.ModifyInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &antipro.ModifyInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取防护包实例或 IP 的防护规则 */
+func (c *AntiproClient) DescribeProtectionRule(request *antipro.DescribeProtectionRuleRequest) (*antipro.DescribeProtectionRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &antipro.DescribeProtectionRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改访问控制规则 */
+func (c *AntiproClient) ModifyAclPriority(request *antipro.ModifyAclPriorityRequest) (*antipro.ModifyAclPriorityResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &antipro.ModifyAclPriorityResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询防护包实例列表 */
+func (c *AntiproClient) DescribeInstances(request *antipro.DescribeInstancesRequest) (*antipro.DescribeInstancesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &antipro.DescribeInstancesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询攻击记录, 参数 ip 优先级大于 instanceId. <br>- 指定 ip 参数时, 忽略 instanceId 参数, 查询 ip 相关攻击记录. <br>- 未指定 ip 时, 查询 instanceId 指定实例相关攻击记录. <br>- ip 和 instanceId 均未指定时, 查询用户所有公网 IP 攻击记录 */
+func (c *AntiproClient) DescribeAttackLogs(request *antipro.DescribeAttackLogsRequest) (*antipro.DescribeAttackLogsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &antipro.DescribeAttackLogsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 打开实例的访问控制规则总开关 */
+func (c *AntiproClient) EnableInstanceAcl(request *antipro.EnableInstanceAclRequest) (*antipro.EnableInstanceAclResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &antipro.EnableInstanceAclResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 关闭实例的访问控制规则. 支持批量操作, 批量操作时 aclId 传多个, 以 ',' 分隔 */
+func (c *AntiproClient) DisableAcl(request *antipro.DisableAclRequest) (*antipro.DisableAclResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &antipro.DisableAclResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建实例的 IP 库 */
+func (c *AntiproClient) CreateIpSet(request *antipro.CreateIpSetRequest) (*antipro.CreateIpSetResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &antipro.CreateIpSetResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询实例的端口库 */
+func (c *AntiproClient) DescribePortSet(request *antipro.DescribePortSetRequest) (*antipro.DescribePortSetResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &antipro.DescribePortSetResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除实例的 IP 库. 支持批量操作, 批量操作时 ipSetId 传多个, 以 ',' 分隔. IP 黑白名单规则被引用时不允许删除 */
+func (c *AntiproClient) DeleteIpSet(request *antipro.DeleteIpSetRequest) (*antipro.DeleteIpSetResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &antipro.DeleteIpSetResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询 DDoS 防护包可防护的私有网络弹性公网 IP(不包括运营商级 NAT 保留地址和 IPv6) */
+func (c *AntiproClient) DescribeElasticIpResources(request *antipro.DescribeElasticIpResourcesRequest) (*antipro.DescribeElasticIpResourcesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &antipro.DescribeElasticIpResourcesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询操作日志 */
+func (c *AntiproClient) DescribeOperationRecords(request *antipro.DescribeOperationRecordsRequest) (*antipro.DescribeOperationRecordsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &antipro.DescribeOperationRecordsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建防护包实例 */
 func (c *AntiproClient) CreateInstance(request *antipro.CreateInstanceRequest) (*antipro.CreateInstanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -113,8 +477,8 @@ func (c *AntiproClient) DeleteProtectedIp(request *antipro.DeleteProtectedIpRequ
     return jdResp, err
 }
 
-/* 查询防护包实例 */
-func (c *AntiproClient) DescribeInstance(request *antipro.DescribeInstanceRequest) (*antipro.DescribeInstanceResponse, error) {
+/* 修改访问控制规则 */
+func (c *AntiproClient) ModifyAcl(request *antipro.ModifyAclRequest) (*antipro.ModifyAclResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -123,32 +487,7 @@ func (c *AntiproClient) DescribeInstance(request *antipro.DescribeInstanceReques
         return nil, err
     }
 
-    jdResp := &antipro.DescribeInstanceResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 添加防护包防护 IP.
-- 防护包仅能防护防护包实例所在区域的公网 IP, 且该公网 IP 未被其他防护包防护, 如果已经被其他防护包防护, 请先调用删除防护包防护 IP 接口删除防护 IP
-- 防护包可添加的防护 IP 个数小于等于防护包的可防护 IP 数量减去已防护的 IP 数量
-- 使用 <a href="http://docs.jdcloud.com/anti-ddos-protection-package/api/describeelasticipresources">describeElasticIpResources</a> 接口查询防护包可防护的弹性公网 IP
-- 使用 <a href="http://docs.jdcloud.com/anti-ddos-protection-package/api/describecpsipresources">describeCpsIpResources</a> 接口查询防护包可防护的云物理服务器公网 IP
- */
-func (c *AntiproClient) AddProtectedIp(request *antipro.AddProtectedIpRequest) (*antipro.AddProtectedIpResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &antipro.AddProtectedIpResponse{}
+    jdResp := &antipro.ModifyAclResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -178,26 +517,6 @@ func (c *AntiproClient) DescribeIpMonitorFlow(request *antipro.DescribeIpMonitor
     return jdResp, err
 }
 
-/* 查询 DDoS 防护包可防护的云物理服务器公网 IP(包括云物理服务器弹性公网 IP 及云物理服务器基础网络实例的公网 IP) */
-func (c *AntiproClient) DescribeCpsIpResources(request *antipro.DescribeCpsIpResourcesRequest) (*antipro.DescribeCpsIpResourcesResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &antipro.DescribeCpsIpResourcesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 查询防护规则 Geo 拦截可设置区域 */
 func (c *AntiproClient) DescribeGeoAreas(request *antipro.DescribeGeoAreasRequest) (*antipro.DescribeGeoAreasResponse, error) {
     if request == nil {
@@ -218,11 +537,7 @@ func (c *AntiproClient) DescribeGeoAreas(request *antipro.DescribeGeoAreasReques
     return jdResp, err
 }
 
-/* 攻击记录统计, 参数 ip 优先级大于 instanceId
-  - 指定 ip 参数时, 忽略 instanceId 参数, 统计 ip 的攻击情况
-  - 未指定 ip 时, 统计 instanceId 指定实例相关攻击情况
-  - ip 和 instanceId 均未指定时, 查询用户所有公网 IP 攻击情况
- */
+/* 攻击记录统计, 参数 ip 优先级大于 instanceId. <br>- 指定 ip 参数时, 忽略 instanceId 参数, 统计 ip 的攻击情况. <br>- 未指定 ip 时, 统计 instanceId 指定实例相关攻击情况. <br>- ip 和 instanceId 均未指定时, 查询用户所有公网 IP 攻击情况 */
 func (c *AntiproClient) DescribeAttackStatistics(request *antipro.DescribeAttackStatisticsRequest) (*antipro.DescribeAttackStatisticsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -242,8 +557,8 @@ func (c *AntiproClient) DescribeAttackStatistics(request *antipro.DescribeAttack
     return jdResp, err
 }
 
-/* 查询攻击来源 */
-func (c *AntiproClient) DescribeAttackSource(request *antipro.DescribeAttackSourceRequest) (*antipro.DescribeAttackSourceResponse, error) {
+/* 创建访问控制规则 */
+func (c *AntiproClient) CreateAcl(request *antipro.CreateAclRequest) (*antipro.CreateAclResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -252,7 +567,7 @@ func (c *AntiproClient) DescribeAttackSource(request *antipro.DescribeAttackSour
         return nil, err
     }
 
-    jdResp := &antipro.DescribeAttackSourceResponse{}
+    jdResp := &antipro.CreateAclResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -262,8 +577,8 @@ func (c *AntiproClient) DescribeAttackSource(request *antipro.DescribeAttackSour
     return jdResp, err
 }
 
-/* 升级防护包实例 */
-func (c *AntiproClient) ModifyInstance(request *antipro.ModifyInstanceRequest) (*antipro.ModifyInstanceResponse, error) {
+/* 删除实例的访问控制规则. 支持批量操作, 批量操作时 aclId个, 以 ',' 分隔 */
+func (c *AntiproClient) DeleteAcl(request *antipro.DeleteAclRequest) (*antipro.DeleteAclResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -272,7 +587,67 @@ func (c *AntiproClient) ModifyInstance(request *antipro.ModifyInstanceRequest) (
         return nil, err
     }
 
-    jdResp := &antipro.ModifyInstanceResponse{}
+    jdResp := &antipro.DeleteAclResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询防护包实例的访问控制列表 */
+func (c *AntiproClient) DescribeAcls(request *antipro.DescribeAclsRequest) (*antipro.DescribeAclsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &antipro.DescribeAclsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除实例的端口库. 支持批量操作, 批量操作时 ipSetId 传多个, 以 ',' 分隔. IP 黑白名单规则被引用时不允许删除 */
+func (c *AntiproClient) DeletePortSet(request *antipro.DeletePortSetRequest) (*antipro.DeletePortSetResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &antipro.DeletePortSetResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询已添加的访问控制规则数量 */
+func (c *AntiproClient) DescribeInstanceAclCnt(request *antipro.DescribeInstanceAclCntRequest) (*antipro.DescribeInstanceAclCntResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &antipro.DescribeInstanceAclCntResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -302,8 +677,8 @@ func (c *AntiproClient) DescribeProtectionOutline(request *antipro.DescribeProte
     return jdResp, err
 }
 
-/* 获取防护包实例或 IP 的防护规则 */
-func (c *AntiproClient) DescribeProtectionRule(request *antipro.DescribeProtectionRuleRequest) (*antipro.DescribeProtectionRuleResponse, error) {
+/* 创建实例的端口库 */
+func (c *AntiproClient) CreatePortSet(request *antipro.CreatePortSetRequest) (*antipro.CreatePortSetResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -312,7 +687,67 @@ func (c *AntiproClient) DescribeProtectionRule(request *antipro.DescribeProtecti
         return nil, err
     }
 
-    jdResp := &antipro.DescribeProtectionRuleResponse{}
+    jdResp := &antipro.CreatePortSetResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询 DDoS 防护包可防护的Web应用防护墙 IP */
+func (c *AntiproClient) DescribeWafIpResources(request *antipro.DescribeWafIpResourcesRequest) (*antipro.DescribeWafIpResourcesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &antipro.DescribeWafIpResourcesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询实例的 IP 库 */
+func (c *AntiproClient) DescribeIpSet(request *antipro.DescribeIpSetRequest) (*antipro.DescribeIpSetResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &antipro.DescribeIpSetResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询实例的端口库列表 */
+func (c *AntiproClient) DescribePortSets(request *antipro.DescribePortSetsRequest) (*antipro.DescribePortSetsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &antipro.DescribePortSetsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -362,8 +797,8 @@ func (c *AntiproClient) DescribeProtectedIpList(request *antipro.DescribeProtect
     return jdResp, err
 }
 
-/* 查询防护包实例列表 */
-func (c *AntiproClient) DescribeInstances(request *antipro.DescribeInstancesRequest) (*antipro.DescribeInstancesResponse, error) {
+/* 关闭实例的访问控制规则总开关 */
+func (c *AntiproClient) DisableInstanceAcl(request *antipro.DisableInstanceAclRequest) (*antipro.DisableInstanceAclResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -372,7 +807,7 @@ func (c *AntiproClient) DescribeInstances(request *antipro.DescribeInstancesRequ
         return nil, err
     }
 
-    jdResp := &antipro.DescribeInstancesResponse{}
+    jdResp := &antipro.DisableInstanceAclResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -382,12 +817,8 @@ func (c *AntiproClient) DescribeInstances(request *antipro.DescribeInstancesRequ
     return jdResp, err
 }
 
-/* 查询攻击记录, 参数 ip 优先级大于 instanceId
-  - 指定 ip 参数时, 忽略 instanceId 参数, 查询 ip 相关攻击记录
-  - 未指定 ip 时, 查询 instanceId 指定实例相关攻击记录
-  - ip 和 instanceId 均未指定时, 查询用户所有公网 IP 攻击记录
- */
-func (c *AntiproClient) DescribeAttackLogs(request *antipro.DescribeAttackLogsRequest) (*antipro.DescribeAttackLogsResponse, error) {
+/* 打开实例的访问控制规则. 支持批量操作, 批量操作时 aclId 传多个, 以 ',' 分隔 */
+func (c *AntiproClient) EnableAcl(request *antipro.EnableAclRequest) (*antipro.EnableAclResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -396,7 +827,27 @@ func (c *AntiproClient) DescribeAttackLogs(request *antipro.DescribeAttackLogsRe
         return nil, err
     }
 
-    jdResp := &antipro.DescribeAttackLogsResponse{}
+    jdResp := &antipro.EnableAclResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改实例的 IP 库 */
+func (c *AntiproClient) ModifyIpSet(request *antipro.ModifyIpSetRequest) (*antipro.ModifyIpSetResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &antipro.ModifyIpSetResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -426,11 +877,27 @@ func (c *AntiproClient) CheckInstanceName(request *antipro.CheckInstanceNameRequ
     return jdResp, err
 }
 
-/* 查询各类型攻击次数, 参数 ip 优先级大于 instanceId
-  - 指定 ip 参数时, 忽略 instanceId 参数, 查询 ip 相关攻击记录的各类型攻击次数
-  - 未指定 ip 时, 查询 instanceId 指定实例相关攻击记录的各类型攻击次数
-  - ip 和 instanceId 均未指定时, 查询用户所有公网 IP 攻击记录的各类型攻击次数
- */
+/* 修改实例的端口库 */
+func (c *AntiproClient) ModifyPortSet(request *antipro.ModifyPortSetRequest) (*antipro.ModifyPortSetResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &antipro.ModifyPortSetResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询各类型攻击次数, 参数 ip 优先级大于 instanceId. <br>- 指定 ip 参数时, 忽略 instanceId 参数, 查询 ip 相关攻击记录的各类型攻击次数<br>- 未指定 ip 时, 查询 instanceId 指定实例相关攻击记录的各类型攻击次数<br>- ip 和 instanceId 均未指定时, 查询用户所有公网 IP 攻击记录的各类型攻击次数 */
 func (c *AntiproClient) DescribeAttackTypeCount(request *antipro.DescribeAttackTypeCountRequest) (*antipro.DescribeAttackTypeCountResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -461,46 +928,6 @@ func (c *AntiproClient) ModifyProtectionRule(request *antipro.ModifyProtectionRu
     }
 
     jdResp := &antipro.ModifyProtectionRuleResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询 DDoS 防护包可防护的私有网络弹性公网 IP(不包括运营商级 NAT 保留地址和 IPv6) */
-func (c *AntiproClient) DescribeElasticIpResources(request *antipro.DescribeElasticIpResourcesRequest) (*antipro.DescribeElasticIpResourcesResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &antipro.DescribeElasticIpResourcesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询操作日志 */
-func (c *AntiproClient) DescribeOperationRecords(request *antipro.DescribeOperationRecordsRequest) (*antipro.DescribeOperationRecordsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &antipro.DescribeOperationRecordsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

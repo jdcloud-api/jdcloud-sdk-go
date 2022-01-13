@@ -22,8 +22,11 @@ type ForwardRuleSpec struct {
     /* 协议: TCP 或者 UDP  */
     Protocol string `json:"protocol"`
 
-    /* 高防 IP (Optional) */
+    /* 高防 IP, serviceIps 为空时生效 (Optional) */
     ServiceIp *string `json:"serviceIp"`
+
+    /* 高防 IP 列表, 不为空时忽略 serviceIp, 传多个时后台会在高防IP封禁后随机切换其他未封禁的IP (Optional) */
+    ServiceIps []string `json:"serviceIps"`
 
     /* 端口号, 取值范围[1, 65535]  */
     Port int `json:"port"`

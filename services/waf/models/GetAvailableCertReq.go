@@ -24,4 +24,7 @@ type GetAvailableCertReq struct {
 
     /* 域名  */
     Domain string `json:"domain"`
+
+    /* 是否国密 (Optional) */
+    IsGm *int `json:"isGm"`
 }

@@ -60,4 +60,7 @@ type UsrBotRules struct {
 
     /* 统计维度 (Optional) */
     Unit string `json:"unit"`
+
+    /* 持续时间, 单位分钟，范围[1-24*60] (Optional) */
+    BlockTime int `json:"blockTime"`
 }

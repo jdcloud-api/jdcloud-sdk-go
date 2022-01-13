@@ -27,17 +27,13 @@ type DescribeAttackSourceRequest struct {
     /* 攻击记录 Id  */
     AttackLogId string `json:"attackLogId"`
 
-    /* DDoS 防护包已防护的公网 IP
-- 使用 <a href="http://docs.jdcloud.com/anti-ddos-protection-package/api/describeprotectediplist">describeProtectedIpList</a> 接口查询 DDoS 防护包已防护的公网 IP
-  */
+    /* DDoS 防护包已防护的公网 IP. <br>- 使用 <a href='http://docs.jdcloud.com/anti-ddos-protection-package/api/describeprotectediplist'>describeProtectedIpList</a> 接口查询 DDoS 防护包已防护的公网 IP  */
     Ip string `json:"ip"`
 }
 
 /*
  * param attackLogId: 攻击记录 Id (Required)
- * param ip: DDoS 防护包已防护的公网 IP
-- 使用 <a href="http://docs.jdcloud.com/anti-ddos-protection-package/api/describeprotectediplist">describeProtectedIpList</a> 接口查询 DDoS 防护包已防护的公网 IP
- (Required)
+ * param ip: DDoS 防护包已防护的公网 IP. <br>- 使用 <a href='http://docs.jdcloud.com/anti-ddos-protection-package/api/describeprotectediplist'>describeProtectedIpList</a> 接口查询 DDoS 防护包已防护的公网 IP (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -60,9 +56,7 @@ func NewDescribeAttackSourceRequest(
 
 /*
  * param attackLogId: 攻击记录 Id (Required)
- * param ip: DDoS 防护包已防护的公网 IP
-- 使用 <a href="http://docs.jdcloud.com/anti-ddos-protection-package/api/describeprotectediplist">describeProtectedIpList</a> 接口查询 DDoS 防护包已防护的公网 IP
- (Required)
+ * param ip: DDoS 防护包已防护的公网 IP. <br>- 使用 <a href='http://docs.jdcloud.com/anti-ddos-protection-package/api/describeprotectediplist'>describeProtectedIpList</a> 接口查询 DDoS 防护包已防护的公网 IP (Required)
  */
 func NewDescribeAttackSourceRequestWithAllParams(
     attackLogId string,
@@ -99,9 +93,7 @@ func (r *DescribeAttackSourceRequest) SetAttackLogId(attackLogId string) {
     r.AttackLogId = attackLogId
 }
 
-/* param ip: DDoS 防护包已防护的公网 IP
-- 使用 <a href="http://docs.jdcloud.com/anti-ddos-protection-package/api/describeprotectediplist">describeProtectedIpList</a> 接口查询 DDoS 防护包已防护的公网 IP
-(Required) */
+/* param ip: DDoS 防护包已防护的公网 IP. <br>- 使用 <a href='http://docs.jdcloud.com/anti-ddos-protection-package/api/describeprotectediplist'>describeProtectedIpList</a> 接口查询 DDoS 防护包已防护的公网 IP(Required) */
 func (r *DescribeAttackSourceRequest) SetIp(ip string) {
     r.Ip = ip
 }

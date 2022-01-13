@@ -28,7 +28,7 @@ type ValListCfg struct {
     /* 0-使用中 1-禁用 (Optional) */
     Disable int `json:"disable"`
 
-    /* 0-5 完全匹配0  前缀匹配1 包含2 正则3 大于4 后缀5 (Optional) */
+    /* 0-5 7-8 完全匹配0  前缀匹配1 包含2 正则3 大于4 后缀5 不等于7 不包含8 (Optional) */
     MatchOp int `json:"matchOp"`
 
     /* val (Optional) */

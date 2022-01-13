@@ -36,6 +36,9 @@ type DescribeAttackStatisticsRequest struct {
     /* 高防实例 ID (Optional) */
     InstanceId []string `json:"instanceId"`
 
+    /* 高防IP列表. <br>- 使用 <a href='http://docs.jdcloud.com/anti-ddos-pro/api/describeServiceIpList'>describeServiceIpList</a> 接口查询实例的高防 IP (Optional) */
+    ServiceIp []string `json:"serviceIp"`
+
     /* 攻击类型, 0 为 DDoS, 1 为 CC  */
     Type int `json:"type"`
 }
@@ -71,6 +74,7 @@ func NewDescribeAttackStatisticsRequest(
  * param startTime: 开始时间, 只能查询最近 90 天以内的数据, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Required)
  * param endTime: 查询的结束时间, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Optional)
  * param instanceId: 高防实例 ID (Optional)
+ * param serviceIp: 高防IP列表. <br>- 使用 <a href='http://docs.jdcloud.com/anti-ddos-pro/api/describeServiceIpList'>describeServiceIpList</a> 接口查询实例的高防 IP (Optional)
  * param type_: 攻击类型, 0 为 DDoS, 1 为 CC (Required)
  */
 func NewDescribeAttackStatisticsRequestWithAllParams(
@@ -78,6 +82,7 @@ func NewDescribeAttackStatisticsRequestWithAllParams(
     startTime string,
     endTime *string,
     instanceId []string,
+    serviceIp []string,
     type_ int,
 ) *DescribeAttackStatisticsRequest {
 
@@ -92,6 +97,7 @@ func NewDescribeAttackStatisticsRequestWithAllParams(
         StartTime: startTime,
         EndTime: endTime,
         InstanceId: instanceId,
+        ServiceIp: serviceIp,
         Type: type_,
     }
 }
@@ -127,6 +133,11 @@ func (r *DescribeAttackStatisticsRequest) SetEndTime(endTime string) {
 /* param instanceId: 高防实例 ID(Optional) */
 func (r *DescribeAttackStatisticsRequest) SetInstanceId(instanceId []string) {
     r.InstanceId = instanceId
+}
+
+/* param serviceIp: 高防IP列表. <br>- 使用 <a href='http://docs.jdcloud.com/anti-ddos-pro/api/describeServiceIpList'>describeServiceIpList</a> 接口查询实例的高防 IP(Optional) */
+func (r *DescribeAttackStatisticsRequest) SetServiceIp(serviceIp []string) {
+    r.ServiceIp = serviceIp
 }
 
 /* param type_: 攻击类型, 0 为 DDoS, 1 为 CC(Required) */

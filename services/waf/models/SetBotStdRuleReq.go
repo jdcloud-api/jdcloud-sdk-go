@@ -26,8 +26,8 @@ type SetBotStdRuleReq struct {
     BotType string `json:"botType"`
 
     /* 动作配置，默认为告警，仅支持1和4和5三种类型动作 (Optional) */
-    Action *DenyActionCfg `json:"action"`
+    Action DenyActionCfg `json:"action"`
 
     /* 0-启用 1-禁用 (Optional) */
-    Disable *int `json:"disable"`
+    Disable int `json:"disable"`
 }

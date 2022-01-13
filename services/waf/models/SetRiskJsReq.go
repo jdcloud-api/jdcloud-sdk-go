@@ -20,7 +20,7 @@ package models
 type SetRiskJsReq struct {
 
     /* 规则id,新增时传0 (Optional) */
-    Id *int `json:"id"`
+    Id int `json:"id"`
 
     /* WAF实例id  */
     WafInstanceId string `json:"wafInstanceId"`
@@ -29,7 +29,7 @@ type SetRiskJsReq struct {
     Domain string `json:"domain"`
 
     /* 匹配类型   完全匹配"" 前缀匹配:"sw" (Optional) */
-    MatchOp *string `json:"matchOp"`
+    MatchOp string `json:"matchOp"`
 
     /* uri 以/开头  */
     Uri string `json:"uri"`

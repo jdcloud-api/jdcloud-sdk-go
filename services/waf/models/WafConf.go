@@ -25,8 +25,11 @@ type WafConf struct {
     /* 0表示防护，1表示预警 (Optional) */
     WafMode int `json:"wafMode"`
 
-    /* 0表示宽松，1表示正常，2表示严格 (Optional) */
+    /* 0表示宽松，1表示正常，2表示严格, 3表示自定义 (Optional) */
     WafLevel int `json:"wafLevel"`
+
+    /* 自定义规则集Id (Optional) */
+    UsrPolicy int64 `json:"usrPolicy"`
 
     /* 自定义页面名称 (Optional) */
     Redirection string `json:"redirection"`

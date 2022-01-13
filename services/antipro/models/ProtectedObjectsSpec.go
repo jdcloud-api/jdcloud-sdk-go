@@ -22,6 +22,9 @@ type ProtectedObjectsSpec struct {
     /* 是否防护弹性公网 IP  */
     Eip bool `json:"eip"`
 
-    /* 是否防护云物理服务器  */
+    /* 是否防护云物理服务器公网 IP  */
     Cps bool `json:"cps"`
+
+    /* 是否防护托管区公网 IP  */
+    Ccs bool `json:"ccs"`
 }

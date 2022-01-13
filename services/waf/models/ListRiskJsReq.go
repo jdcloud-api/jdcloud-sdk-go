@@ -29,8 +29,8 @@ type ListRiskJsReq struct {
     MatchOp string `json:"matchOp"`
 
     /* 页码，[1-100]，默认是1 (Optional) */
-    PageIndex *int `json:"pageIndex"`
+    PageIndex int `json:"pageIndex"`
 
     /* 页大小，[1-100]，默认是10 (Optional) */
-    PageSize *int `json:"pageSize"`
+    PageSize int `json:"pageSize"`
 }

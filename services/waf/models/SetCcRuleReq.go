@@ -43,7 +43,7 @@ type SetCcRuleReq struct {
     /* 阻断类型 3:封禁，2:人机交互  */
     BlockType int `json:"blockType"`
 
-    /* block 持续时间，单位为分钟 [1~9999999]  */
+    /* block 持续时间，单位为分钟 [1~24*60]  */
     BlockTime int `json:"blockTime"`
 
     /* blockType 为3 时，为自定义页面名称，缺省为default (Optional) */

@@ -20,7 +20,7 @@ package models
 type SetRiskEventVarsReq struct {
 
     /* 规则id,新增时传0 (Optional) */
-    Id *int `json:"id"`
+    Id int `json:"id"`
 
     /* WAF实例id  */
     WafInstanceId string `json:"wafInstanceId"`
@@ -29,7 +29,7 @@ type SetRiskEventVarsReq struct {
     Domain string `json:"domain"`
 
     /* 事件  */
-    Event *RiskEventCfg `json:"event"`
+    Event RiskEventCfg `json:"event"`
 
     /* 变量集  */
     Vars []RiskVarCfg `json:"vars"`

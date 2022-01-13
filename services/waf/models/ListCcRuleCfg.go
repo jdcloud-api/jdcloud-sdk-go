@@ -43,7 +43,7 @@ type ListCcRuleCfg struct {
     /* 阻断类型 3:封禁，2:人机交互 (Optional) */
     BlockType int `json:"blockType"`
 
-    /* block 持续时间，单位为分钟[1~9999999] (Optional) */
+    /* block 持续时间，单位为分钟[1~24*60] (Optional) */
     BlockTime int `json:"blockTime"`
 
     /* 更新时间，s (Optional) */

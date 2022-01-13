@@ -20,32 +20,32 @@ package models
 type RiskEventCfg struct {
 
     /* 规则id (Optional) */
-    Id *int `json:"id"`
+    Id int `json:"id"`
 
     /* WAF实例id (Optional) */
-    WafInstanceId *string `json:"wafInstanceId"`
+    WafInstanceId string `json:"wafInstanceId"`
 
     /* 域名 (Optional) */
-    Domain *string `json:"domain"`
+    Domain string `json:"domain"`
 
     /* 名称 (Optional) */
-    Name *string `json:"name"`
+    Name string `json:"name"`
 
     /* 请求uri (Optional) */
-    Uri *string `json:"uri"`
+    Uri string `json:"uri"`
 
     /* 编码信息 (Optional) */
-    Code *string `json:"code"`
+    Code string `json:"code"`
 
     /* 描述信息 (Optional) */
-    Desc *string `json:"desc"`
+    Desc string `json:"desc"`
 
     /* 已配置策略数 (Optional) */
-    PolicyCount *int `json:"policyCount"`
+    PolicyCount int `json:"policyCount"`
 
     /* 0-使用中 1-禁用 (Optional) */
-    Disable *int `json:"disable"`
+    Disable int `json:"disable"`
 
     /* 更新时间，s (Optional) */
-    UpdateTime *int `json:"updateTime"`
+    UpdateTime int `json:"updateTime"`
 }

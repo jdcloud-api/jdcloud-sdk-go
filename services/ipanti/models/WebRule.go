@@ -34,8 +34,11 @@ type WebRule struct {
     /* CNAME 解析状态, 0: 解析异常, 1: 解析正常 (Optional) */
     CnameStatus int `json:"cnameStatus"`
 
-    /* 高防 IP (Optional) */
+    /* 该规则使用中的高防 IP (Optional) */
     ServiceIp string `json:"serviceIp"`
+
+    /* 已配置的高防 IP 列表 (Optional) */
+    ServiceIpConfig ServiceIpConfig `json:"serviceIpConfig"`
 
     /*  (Optional) */
     Protocol WebRuleProtocol `json:"protocol"`
@@ -70,17 +73,20 @@ type WebRule struct {
     /* 证书状态. <br>- 0: 异常<br>- 1: 正常<br>- 2: 证书未上传 (Optional) */
     HttpCertStatus int `json:"httpCertStatus"`
 
-    /* 证书 Id (Optional) */
+    /* 证书 Id, (废弃, 绑定证书信息通过 certs 字段查看) (Optional) */
     CertId string `json:"certId"`
 
-    /* 证书名称 (Optional) */
+    /* 证书名称, (废弃, 绑定证书信息通过 certs 字段查看) (Optional) */
     CertName string `json:"certName"`
 
-    /* 证书内容 (Optional) */
+    /* 证书内容, (废弃, 绑定证书信息通过 certs 字段查看) (Optional) */
     HttpsCertContent string `json:"httpsCertContent"`
 
-    /* 证书私钥 (Optional) */
+    /* 证书私钥, (废弃, 绑定证书信息通过 certs 字段查看) (Optional) */
     HttpsRsaKey string `json:"httpsRsaKey"`
+
+    /* 网站规则绑定证书信息 (Optional) */
+    BindCerts []Cert `json:"bindCerts"`
 
     /* 是否开启 HTTPS 强制跳转, 当 protocol 为 HTTP_HTTPS 时可以配置该属性<br>- 0: 不强跳<br>- 1: 开启强跳 (Optional) */
     ForceJump int `json:"forceJump"`
@@ -112,8 +118,11 @@ type WebRule struct {
     /* SSL协议类型, protocol 选项开启 https 时生效, 可取值SSLv2,SSLv3,TLSv1.0,TLSv1.1,TLSv1.2 (Optional) */
     SslProtocols []string `json:"sslProtocols"`
 
-    /* 加密套件等级, protocol 选项开启 https 时生效, 可取值<br>- low: 低级<br>- middle: 中级<br>- high：高级 (Optional) */
+    /* 加密套件等级, protocol 选项开启 https 时生效, 可取值<br>- low: 低级<br>- middle: 中级<br>- high：高级<br>- custom：自定义 (Optional) */
     SuiteLevel string `json:"suiteLevel"`
+
+    /* 自定义加密套件等级, suiteLevel 为 custom 是有效 (Optional) */
+    UserSuiteLevel []string `json:"userSuiteLevel"`
 
     /* 是否允许在 response 中插入 JS, 0: 关闭, 1: 开启 (Optional) */
     JsFingerprintEnable int `json:"jsFingerprintEnable"`

@@ -32,9 +32,9 @@ type DescribeProtectedIpListRequest struct {
     PageSize *int `json:"pageSize"`
 
     /* 实例 Id, 缺省时查询用户所有已防护 IP (Optional) */
-    InstanceId *int `json:"instanceId"`
+    InstanceId *string `json:"instanceId"`
 
-    /* 被防护 IP类型: 0: 全部, 1: 弹性公网 IP, 2: 云物理服务器公网 IP, 4: 托管区公网 IP  */
+    /* 被防护 IP类型. <br>- 0: 全部<br>- 1: 弹性公网 IP<br>- 2: 云物理服务器公网 IP<br>- 3: Web应用防护墙公网 IP<br>- 4: 托管区公网 IP  */
     Type int `json:"type"`
 
     /* 被防护 IP, 支持模糊查询 (Optional) */
@@ -42,7 +42,7 @@ type DescribeProtectedIpListRequest struct {
 }
 
 /*
- * param type_: 被防护 IP类型: 0: 全部, 1: 弹性公网 IP, 2: 云物理服务器公网 IP, 4: 托管区公网 IP (Required)
+ * param type_: 被防护 IP类型. <br>- 0: 全部<br>- 1: 弹性公网 IP<br>- 2: 云物理服务器公网 IP<br>- 3: Web应用防护墙公网 IP<br>- 4: 托管区公网 IP (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -65,13 +65,13 @@ func NewDescribeProtectedIpListRequest(
  * param pageNumber: 页码 (Optional)
  * param pageSize: 分页大小 (Optional)
  * param instanceId: 实例 Id, 缺省时查询用户所有已防护 IP (Optional)
- * param type_: 被防护 IP类型: 0: 全部, 1: 弹性公网 IP, 2: 云物理服务器公网 IP, 4: 托管区公网 IP (Required)
+ * param type_: 被防护 IP类型. <br>- 0: 全部<br>- 1: 弹性公网 IP<br>- 2: 云物理服务器公网 IP<br>- 3: Web应用防护墙公网 IP<br>- 4: 托管区公网 IP (Required)
  * param ip: 被防护 IP, 支持模糊查询 (Optional)
  */
 func NewDescribeProtectedIpListRequestWithAllParams(
     pageNumber *int,
     pageSize *int,
-    instanceId *int,
+    instanceId *string,
     type_ int,
     ip *string,
 ) *DescribeProtectedIpListRequest {
@@ -115,11 +115,11 @@ func (r *DescribeProtectedIpListRequest) SetPageSize(pageSize int) {
 }
 
 /* param instanceId: 实例 Id, 缺省时查询用户所有已防护 IP(Optional) */
-func (r *DescribeProtectedIpListRequest) SetInstanceId(instanceId int) {
+func (r *DescribeProtectedIpListRequest) SetInstanceId(instanceId string) {
     r.InstanceId = &instanceId
 }
 
-/* param type_: 被防护 IP类型: 0: 全部, 1: 弹性公网 IP, 2: 云物理服务器公网 IP, 4: 托管区公网 IP(Required) */
+/* param type_: 被防护 IP类型. <br>- 0: 全部<br>- 1: 弹性公网 IP<br>- 2: 云物理服务器公网 IP<br>- 3: Web应用防护墙公网 IP<br>- 4: 托管区公网 IP(Required) */
 func (r *DescribeProtectedIpListRequest) SetType(type_ int) {
     r.Type = type_
 }

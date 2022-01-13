@@ -40,7 +40,7 @@ func NewBaseantiClient(credential *core.Credential) *BaseantiClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "baseanti",
-            Revision:    "1.2.3",
+            Revision:    "1.3.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -55,6 +55,26 @@ func (c *BaseantiClient) SetLogger(logger core.Logger) {
 
 func (c *BaseantiClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
+}
+
+/* 查询基础防护已防护的Web应用防火墙 IP 的安全信息 */
+func (c *BaseantiClient) DescribeWafIpResources(request *baseanti.DescribeWafIpResourcesRequest) (*baseanti.DescribeWafIpResourcesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &baseanti.DescribeWafIpResourcesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
 }
 
 /* 查询基础防护已防护公网 IP 安全信息, 支持 ipv4 和 ipv6 */

@@ -57,4 +57,7 @@ type OrderReq struct {
 
     /* 云鼎的serviceCode (Optional) */
     ServiceCode *string `json:"serviceCode"`
+
+    /* 购物车活动参数 (Optional) */
+    BuyScenario *string `json:"buyScenario"`
 }

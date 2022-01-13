@@ -37,14 +37,7 @@ type DescribeOperationRecordsRequest struct {
     /* 结束时间, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ  */
     EndTime string `json:"endTime"`
 
-    /* 操作类型, 默认查全部.
-- 0: 全部
-- 1: 套餐变更
-- 2: 防护规则变更
-- 3: 防护对象变更
-- 4: IP 地址变更
-- 5: 防护包名称变更
- (Optional) */
+    /* 操作类型, 默认查全部. <br>- 0: 全部<br>- 1: 套餐变更<br>- 2: 防护规则变更<br>- 3: 防护对象变更<br>- 4: IP 地址变更<br>- 5: 防护包名称变更<br>- 6: IP地址库变更<br>- 7: 端口库变更<br>- 8: 访问控制规则变更 (Optional) */
     Action *int `json:"action"`
 
     /* 防护包名称, 支持模糊匹配 (Optional) */
@@ -79,14 +72,7 @@ func NewDescribeOperationRecordsRequest(
  * param pageSize: 分页大小 (Optional)
  * param startTime: 开始时间, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
  * param endTime: 结束时间, UTC 时间, 格式：yyyy-MM-dd'T'HH:mm:ssZ (Required)
- * param action: 操作类型, 默认查全部.
-- 0: 全部
-- 1: 套餐变更
-- 2: 防护规则变更
-- 3: 防护对象变更
-- 4: IP 地址变更
-- 5: 防护包名称变更
- (Optional)
+ * param action: 操作类型, 默认查全部. <br>- 0: 全部<br>- 1: 套餐变更<br>- 2: 防护规则变更<br>- 3: 防护对象变更<br>- 4: IP 地址变更<br>- 5: 防护包名称变更<br>- 6: IP地址库变更<br>- 7: 端口库变更<br>- 8: 访问控制规则变更 (Optional)
  * param name: 防护包名称, 支持模糊匹配 (Optional)
  */
 func NewDescribeOperationRecordsRequestWithAllParams(
@@ -147,14 +133,7 @@ func (r *DescribeOperationRecordsRequest) SetEndTime(endTime string) {
     r.EndTime = endTime
 }
 
-/* param action: 操作类型, 默认查全部.
-- 0: 全部
-- 1: 套餐变更
-- 2: 防护规则变更
-- 3: 防护对象变更
-- 4: IP 地址变更
-- 5: 防护包名称变更
-(Optional) */
+/* param action: 操作类型, 默认查全部. <br>- 0: 全部<br>- 1: 套餐变更<br>- 2: 防护规则变更<br>- 3: 防护对象变更<br>- 4: IP 地址变更<br>- 5: 防护包名称变更<br>- 6: IP地址库变更<br>- 7: 端口库变更<br>- 8: 访问控制规则变更(Optional) */
 func (r *DescribeOperationRecordsRequest) SetAction(action int) {
     r.Action = &action
 }

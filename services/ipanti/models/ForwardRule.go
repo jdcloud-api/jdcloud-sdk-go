@@ -34,8 +34,11 @@ type ForwardRule struct {
     /* 回源类型: ip 或者 domain (Optional) */
     OriginType string `json:"originType"`
 
-    /* 高防 IP (Optional) */
+    /* 该规则使用中的高防 IP (Optional) */
     ServiceIp string `json:"serviceIp"`
+
+    /* 已配置的高防 IP 列表 (Optional) */
+    ServiceIpConfig ServiceIpConfig `json:"serviceIpConfig"`
 
     /* 端口号 (Optional) */
     Port int `json:"port"`

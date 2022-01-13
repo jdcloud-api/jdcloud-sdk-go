@@ -20,20 +20,20 @@ package models
 type RiskPolicyRuleCfg struct {
 
     /* 名称 (Optional) */
-    Name *string `json:"name"`
+    Name string `json:"name"`
 
     /* 左变量类型 (Optional) */
-    LeftType *string `json:"leftType"`
+    LeftType string `json:"leftType"`
 
     /* 左变量 (Optional) */
-    Left *string `json:"left"`
+    Left string `json:"left"`
 
     /* 操作符 (Optional) */
-    Operator *string `json:"operator"`
+    Operator string `json:"operator"`
 
     /* 右变量类型 (Optional) */
-    RightType *string `json:"rightType"`
+    RightType string `json:"rightType"`
 
     /* 右变量 (Optional) */
-    Right *string `json:"right"`
+    Right string `json:"right"`
 }

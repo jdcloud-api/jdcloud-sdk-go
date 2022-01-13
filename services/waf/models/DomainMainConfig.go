@@ -40,6 +40,15 @@ type DomainMainConfig struct {
     /* 协议状态，0：正常 (Optional) */
     HttpStatus int `json:"httpStatus"`
 
+    /* https证书绑定状态 (Optional) */
+    HttpsCertUpdateStatus int `json:"httpsCertUpdateStatus"`
+
+    /* 国密https证书绑定状态 (Optional) */
+    GmHttpsCertUpdateStatus int `json:"gmHttpsCertUpdateStatus"`
+
+    /* 是否支持国密证书 (Optional) */
+    GmCertSupport int `json:"gmCertSupport"`
+
     /* 防护状态，0：关闭 1：开启 (Optional) */
     AntiStatus AntiStatus `json:"antiStatus"`
 

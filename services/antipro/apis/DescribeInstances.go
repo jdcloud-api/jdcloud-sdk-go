@@ -25,7 +25,7 @@ type DescribeInstancesRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域编码  */
+    /* 地域 Id, DDoS 防护包目前支持华北-北京, 华东-宿迁, 华东-上海  */
     RegionId string `json:"regionId"`
 
     /* 页码 (Optional) */
@@ -39,7 +39,7 @@ type DescribeInstancesRequest struct {
 }
 
 /*
- * param regionId: 地域编码 (Required)
+ * param regionId: 地域 Id, DDoS 防护包目前支持华北-北京, 华东-宿迁, 华东-上海 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -59,7 +59,7 @@ func NewDescribeInstancesRequest(
 }
 
 /*
- * param regionId: 地域编码 (Required)
+ * param regionId: 地域 Id, DDoS 防护包目前支持华北-北京, 华东-宿迁, 华东-上海 (Required)
  * param pageNumber: 页码 (Optional)
  * param pageSize: 分页大小 (Optional)
  * param name: 防护包名称, 支持模糊匹配 (Optional)
@@ -98,7 +98,7 @@ func NewDescribeInstancesRequestWithoutParam() *DescribeInstancesRequest {
     }
 }
 
-/* param regionId: 地域编码(Required) */
+/* param regionId: 地域 Id, DDoS 防护包目前支持华北-北京, 华东-宿迁, 华东-上海(Required) */
 func (r *DescribeInstancesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

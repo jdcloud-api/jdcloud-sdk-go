@@ -28,6 +28,9 @@ type ListWebcacheUrlCfg struct {
     /* 名称 (Optional) */
     Name string `json:"name"`
 
+    /* 0 网页防篡改 1 网站防篡改 (Optional) */
+    Website int `json:"website"`
+
     /* 是否使能，0表示否 (Optional) */
     Enable int `json:"enable"`
 

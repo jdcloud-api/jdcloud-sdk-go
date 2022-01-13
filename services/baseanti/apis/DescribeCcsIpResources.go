@@ -33,6 +33,9 @@ type DescribeCcsIpResourcesRequest struct {
 
     /* 分页大小 (Optional) */
     PageSize *int `json:"pageSize"`
+
+    /* IP 模糊匹配 (Optional) */
+    Ip *string `json:"ip"`
 }
 
 /*
@@ -59,11 +62,13 @@ func NewDescribeCcsIpResourcesRequest(
  * param regionId: 地域编码. 基础防护已支持华北-北京, 华东-宿迁, 华东-上海, 华南-广州 (Required)
  * param pageNumber: 页码 (Optional)
  * param pageSize: 分页大小 (Optional)
+ * param ip: IP 模糊匹配 (Optional)
  */
 func NewDescribeCcsIpResourcesRequestWithAllParams(
     regionId string,
     pageNumber *int,
     pageSize *int,
+    ip *string,
 ) *DescribeCcsIpResourcesRequest {
 
     return &DescribeCcsIpResourcesRequest{
@@ -76,6 +81,7 @@ func NewDescribeCcsIpResourcesRequestWithAllParams(
         RegionId: regionId,
         PageNumber: pageNumber,
         PageSize: pageSize,
+        Ip: ip,
     }
 }
 
@@ -105,6 +111,11 @@ func (r *DescribeCcsIpResourcesRequest) SetPageNumber(pageNumber int) {
 /* param pageSize: 分页大小(Optional) */
 func (r *DescribeCcsIpResourcesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
+}
+
+/* param ip: IP 模糊匹配(Optional) */
+func (r *DescribeCcsIpResourcesRequest) SetIp(ip string) {
+    r.Ip = &ip
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

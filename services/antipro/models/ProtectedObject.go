@@ -19,7 +19,7 @@ package models
 
 type ProtectedObject struct {
 
-    /* 防护对象类型: eip: 弹性公网 IP, cps: 云物理服务器 (Optional) */
+    /* 防护对象类型: eip: 弹性公网 IP, cps: 云物理服务器公网 IP, waf: Web应用防护墙 IP, ccs: 托管区公网 IP (Optional) */
     Type string `json:"type"`
 
     /* 已防护 IP 个数 (Optional) */

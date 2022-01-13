@@ -20,11 +20,14 @@ package models
 type ActiveFuncReq struct {
 
     /* 实例id，代表要设置的WAF实例 (Optional) */
-    WafInstanceId string `json:"wafInstanceId"`
+    WafInstanceId *string `json:"wafInstanceId"`
 
     /* 域名  */
     Domain string `json:"domain"`
 
     /* 是否使能 0表示否 (Optional) */
-    Enable int `json:"enable"`
+    Enable *int `json:"enable"`
+
+    /* 是否国密 (Optional) */
+    IsGm *int `json:"isGm"`
 }

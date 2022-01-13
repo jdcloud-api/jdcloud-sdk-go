@@ -28,11 +28,14 @@ type Instance struct {
     /* 防护包实例地域 (Optional) */
     Region string `json:"region"`
 
-    /* 套餐类型, 1: 独享 IP, 2: 共享 IP (Optional) */
+    /* 套餐类型. <br>- 1: 独享 IP<br>- 2: 共享 IP (Optional) */
     Type int `json:"type"`
 
     /* 可防护 IP 个数 (Optional) */
     IpCount int `json:"ipCount"`
+
+    /* 可添加的访问控制规则数量 (Optional) */
+    AclLimit int `json:"aclLimit"`
 
     /* 保底带宽, 单位 Gbps (Optional) */
     BasicBandwidth int `json:"basicBandwidth"`
@@ -54,4 +57,7 @@ type Instance struct {
 
     /* 资源 Id (Optional) */
     ResourceId string `json:"resourceId"`
+
+    /* Tag信息 (Optional) */
+    Tags []Tag `json:"tags"`
 }
