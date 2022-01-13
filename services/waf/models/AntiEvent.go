@@ -67,9 +67,9 @@ type AntiEvent struct {
     /* 状态标识 (Optional) */
     UpstreamErr string `json:"upstreamErr"`
 
-    /* 是否已加入白名单 (Optional) */
+    /* 是否已加入白名单，0表示否 (Optional) */
     SkipExist int `json:"skipExist"`
 
-    /* 是否已加入黑名单 (Optional) */
+    /* 是否已加入黑名单，0表示否 (Optional) */
     DenyExist int `json:"denyExist"`
 }

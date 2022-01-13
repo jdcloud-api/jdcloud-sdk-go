@@ -37,6 +37,9 @@ type RateLimitRuleCfg struct {
     /* 限速大小 (Optional) */
     Rate int `json:"rate"`
 
+    /* 限速burst大小 (Optional) */
+    Burst int `json:"burst"`
+
     /* forbidden redirect，缺省为forbidden (Optional) */
     MatchAction string `json:"matchAction"`
 

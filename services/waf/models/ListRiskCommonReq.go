@@ -26,14 +26,14 @@ type ListRiskCommonReq struct {
     Domain string `json:"domain"`
 
     /* 请求id, 0-请求全部；1-获取指定id的UsrList (Optional) */
-    Id *int `json:"id"`
+    Id int `json:"id"`
 
     /* 过滤关键字，在id>0时对UsrList的表项进行过滤 (Optional) */
-    RulesFilter *string `json:"rulesFilter"`
+    RulesFilter string `json:"rulesFilter"`
 
     /* 页码，[1-100]，默认是1 (Optional) */
-    PageIndex *int `json:"pageIndex"`
+    PageIndex int `json:"pageIndex"`
 
     /* 页大小，[1-100]，默认是10 (Optional) */
-    PageSize *int `json:"pageSize"`
+    PageSize int `json:"pageSize"`
 }

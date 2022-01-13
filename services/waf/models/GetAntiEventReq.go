@@ -51,4 +51,7 @@ type GetAntiEventReq struct {
 
     /* 排序方式，desc-倒序 asc-增序 (Optional) */
     SortDesc *string `json:"sortDesc"`
+
+    /* false表示查询，true表示导出 (Optional) */
+    IsExport *bool `json:"isExport"`
 }

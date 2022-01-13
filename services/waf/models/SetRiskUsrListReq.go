@@ -20,7 +20,7 @@ package models
 type SetRiskUsrListReq struct {
 
     /* 规则id,新增时传0 (Optional) */
-    Id *int `json:"id"`
+    Id int `json:"id"`
 
     /* WAF实例id  */
     WafInstanceId string `json:"wafInstanceId"`
@@ -37,6 +37,9 @@ type SetRiskUsrListReq struct {
     /* 0-使用中 1-禁用  */
     Disable int `json:"disable"`
 
-    /* 策略规则, 格式：["13311112222","13211112222"]  */
+    /* 策略规则, 格式：["13311112222","13211112222"] (Optional) */
     Rules string `json:"rules"`
+
+    /* 自定义名单上传文件内容,base64编码 (Optional) */
+    Bz64File string `json:"bz64File"`
 }

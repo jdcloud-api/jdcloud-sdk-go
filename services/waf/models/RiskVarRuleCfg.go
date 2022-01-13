@@ -20,17 +20,17 @@ package models
 type RiskVarRuleCfg struct {
 
     /* 左表达式 (Optional) */
-    Left *string `json:"left"`
+    Left string `json:"left"`
 
     /* 操作符 (Optional) */
-    Operator *string `json:"operator"`
+    Operator string `json:"operator"`
 
     /* 右表达式 (Optional) */
-    Right *string `json:"right"`
+    Right string `json:"right"`
 
     /* 结果比较运算符 (Optional) */
-    ResultOpt *string `json:"resultOpt"`
+    ResultOpt string `json:"resultOpt"`
 
     /* 结果右表达式 (Optional) */
-    ResultRight *string `json:"resultRight"`
+    ResultRight string `json:"resultRight"`
 }

@@ -22,7 +22,7 @@ type ValCfg struct {
     /* 序号id,更新时需要 (Optional) */
     Id int `json:"id"`
 
-    /* 0-5 完全匹配0  前缀匹配1 包含2 正则3 大于4 后缀5 (Optional) */
+    /* 0-5 7-8 完全匹配0  前缀匹配1 包含2 正则3 大于4 后缀5 不等于7 不包含8 (Optional) */
     MatchOp int `json:"matchOp"`
 
     /* val  */

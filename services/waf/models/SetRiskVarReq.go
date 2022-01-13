@@ -20,7 +20,7 @@ package models
 type SetRiskVarReq struct {
 
     /* 规则id,新增时传0 (Optional) */
-    Id *int `json:"id"`
+    Id int `json:"id"`
 
     /* WAF实例id  */
     WafInstanceId string `json:"wafInstanceId"`
@@ -44,26 +44,26 @@ type SetRiskVarReq struct {
     VarType string `json:"varType"`
 
     /* 消耗时间 (Optional) */
-    Cost *string `json:"cost"`
+    Cost string `json:"cost"`
 
     /* 输出  */
     Output string `json:"output"`
 
     /* 属性 (Optional) */
-    Property *string `json:"property"`
+    Property string `json:"property"`
 
     /* 持续时间，单位为秒 (Optional) */
-    Dura *string `json:"dura"`
+    Dura string `json:"dura"`
 
     /* 逻辑  and \| or (Optional) */
-    Logic *string `json:"logic"`
+    Logic string `json:"logic"`
 
     /* 离线统计规则 (Optional) */
-    Rules *RiskVarRuleCfg `json:"rules"`
+    Rules RiskVarRuleCfg `json:"rules"`
 
     /* 参数获取位置 (Optional) */
-    Pos *string `json:"pos"`
+    Pos string `json:"pos"`
 
     /* 参数的key (Optional) */
-    Key *string `json:"key"`
+    Key string `json:"key"`
 }

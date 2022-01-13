@@ -49,7 +49,7 @@ type GetEsLogDetailRequest struct {
     /* 请求方法，检索字段 (Optional) */
     Request_method *string `json:"request_method"`
 
-    /* 动作，检索字段，支持类型：""(为空时，默认查询全部动作类型)，"-"(放行)，"notice"(观察)，"forbidden"(拦截)，"redirect"(浏览器跳转)，"verify"(人机交互) (Optional) */
+    /* 动作，检索字段，支持类型：""(为空时，默认查询全部动作类型)，"-"(放行)，"notice"(观察)，"forbidden OR status"(拦截)，"redirect"(浏览器跳转)，"verify"(人机交互) (Optional) */
     Action *string `json:"action"`
 
     /* 状态码，检索字段 (Optional) */
@@ -115,7 +115,7 @@ func NewGetEsLogDetailRequest(
  * param url: url，检索字段 (Optional)
  * param anti_geo: 来源地域，检索字段 (Optional)
  * param request_method: 请求方法，检索字段 (Optional)
- * param action: 动作，检索字段，支持类型：""(为空时，默认查询全部动作类型)，"-"(放行)，"notice"(观察)，"forbidden"(拦截)，"redirect"(浏览器跳转)，"verify"(人机交互) (Optional)
+ * param action: 动作，检索字段，支持类型：""(为空时，默认查询全部动作类型)，"-"(放行)，"notice"(观察)，"forbidden OR status"(拦截)，"redirect"(浏览器跳转)，"verify"(人机交互) (Optional)
  * param status: 状态码，检索字段 (Optional)
  * param logType: 日志类型，检索字段，支持类型：""(为空时，默认查询全部日志类型)，"access"(访问日志)，"waf"(wafSDK)，"acl"(自定义规则)，"skip"(白名单)，"deny"(黑名单)，"cc"(CC攻击)，"webcache"(网页防篡改)，"css"(跨站脚本攻击)，"sqli"(SQL注入攻击)，""fileinc"(文件读取/包含攻击)，"cmding"(命令/代码执行攻击)，"sdd"(敏感文件探测)，"malscan"(恶意扫描攻击)，"bckack"(恶意/后门文件攻击)，"xmli"(XML注入攻击)，"dirt"(目录遍历攻击) (Optional)
  * param logId: 日志Id，检索字段 (Optional)
@@ -222,7 +222,7 @@ func (r *GetEsLogDetailRequest) SetRequest_method(request_method string) {
     r.Request_method = &request_method
 }
 
-/* param action: 动作，检索字段，支持类型：""(为空时，默认查询全部动作类型)，"-"(放行)，"notice"(观察)，"forbidden"(拦截)，"redirect"(浏览器跳转)，"verify"(人机交互)(Optional) */
+/* param action: 动作，检索字段，支持类型：""(为空时，默认查询全部动作类型)，"-"(放行)，"notice"(观察)，"forbidden OR status"(拦截)，"redirect"(浏览器跳转)，"verify"(人机交互)(Optional) */
 func (r *GetEsLogDetailRequest) SetAction(action string) {
     r.Action = &action
 }

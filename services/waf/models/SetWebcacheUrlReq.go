@@ -28,6 +28,9 @@ type SetWebcacheUrlReq struct {
     /* 名称  */
     Name string `json:"name"`
 
+    /* 0 网页防篡改 1 网站防篡改  */
+    Website int `json:"website"`
+
     /* url  */
     Url string `json:"url"`
 }

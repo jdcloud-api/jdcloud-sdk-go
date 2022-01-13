@@ -20,7 +20,7 @@ package models
 type SetRiskPolicyReq struct {
 
     /* 规则id,新增时传0 (Optional) */
-    Id *int `json:"id"`
+    Id int `json:"id"`
 
     /* WAF实例id  */
     WafInstanceId string `json:"wafInstanceId"`
@@ -44,11 +44,11 @@ type SetRiskPolicyReq struct {
     Logic string `json:"logic"`
 
     /* 策略规则  */
-    Rules *RiskPolicyRuleCfg `json:"rules"`
+    Rules RiskPolicyRuleCfg `json:"rules"`
 
     /* 动作 支持 verify@captcha / verify@jscookie / forbidden / notice / redirect  */
     Action string `json:"action"`
 
     /* 跳转地址，Action为redirect时必须为当前实例下的域名的url，forbidden时为自定义页面名称 (Optional) */
-    Redirection *string `json:"redirection"`
+    Redirection string `json:"redirection"`
 }

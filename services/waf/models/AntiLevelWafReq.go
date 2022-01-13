@@ -25,6 +25,9 @@ type AntiLevelWafReq struct {
     /* 域名  */
     Domain string `json:"domain"`
 
-    /* 0表示宽松，1表示正常，2表示严格 (Optional) */
+    /* 0表示宽松，1表示正常，2表示严格, 3表示自定义 (Optional) */
     WafLevel *int `json:"wafLevel"`
+
+    /* 自定义规则集id，wafLevel为3时可以设置 (Optional) */
+    UsrPolicy *int64 `json:"usrPolicy"`
 }

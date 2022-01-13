@@ -27,4 +27,7 @@ type AssignCertReq struct {
 
     /* 要绑定证书的Id  */
     CertId string `json:"certId"`
+
+    /* 是否国密 (Optional) */
+    IsGm *int `json:"isGm"`
 }

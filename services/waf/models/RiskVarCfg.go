@@ -20,50 +20,50 @@ package models
 type RiskVarCfg struct {
 
     /* 规则id (Optional) */
-    Id *int `json:"id"`
+    Id int `json:"id"`
 
     /* WAF实例id (Optional) */
-    WafInstanceId *string `json:"wafInstanceId"`
+    WafInstanceId string `json:"wafInstanceId"`
 
     /* 域名 (Optional) */
-    Domain *string `json:"domain"`
+    Domain string `json:"domain"`
 
     /* 规则名称 (Optional) */
-    Name *string `json:"name"`
+    Name string `json:"name"`
 
     /* desc (Optional) */
-    Desc *string `json:"desc"`
+    Desc string `json:"desc"`
 
     /* 0-使用中 1用-禁 (Optional) */
-    Disable *int `json:"disable"`
+    Disable int `json:"disable"`
 
     /* 时间编码 (Optional) */
-    EventCode *string `json:"eventCode"`
+    EventCode string `json:"eventCode"`
 
     /* 变量类型 template \|  userDefine \|  online \| offline (Optional) */
-    VarType *string `json:"varType"`
+    VarType string `json:"varType"`
 
     /* 消耗时间 (Optional) */
-    Cost *string `json:"cost"`
+    Cost string `json:"cost"`
 
     /* 输出 (Optional) */
-    Output *string `json:"output"`
+    Output string `json:"output"`
 
     /* 属性 (Optional) */
-    Property *string `json:"property"`
+    Property string `json:"property"`
 
     /* 持续时间，单位为秒 (Optional) */
-    Dura *string `json:"dura"`
+    Dura string `json:"dura"`
 
     /* 逻辑  and \| or (Optional) */
-    Logic *string `json:"logic"`
+    Logic string `json:"logic"`
 
     /* 规则 (Optional) */
     Rules []RiskVarRuleCfg `json:"rules"`
 
     /* 参数获取位置 (Optional) */
-    Pos *string `json:"pos"`
+    Pos string `json:"pos"`
 
     /* 参数的key (Optional) */
-    Key *string `json:"key"`
+    Key string `json:"key"`
 }

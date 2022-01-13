@@ -31,7 +31,7 @@ type AddDomain struct {
     /* 使用协议，eg:["http","https"]  */
     Protocols []string `json:"protocols"`
 
-    /* ssl协议，eg:["TLSv1","TLSv1.1","TLSv1.2","SSLv2","SSLv3"] (Optional) */
+    /* ssl协议，eg:["TLSv1","TLSv1.1","TLSv1.2","SSLv2","SSLv3","TLSv1.3"] (Optional) */
     SslProtocols []string `json:"sslProtocols"`
 
     /* 负载均衡算法，eg:"rr"，"ip_hash","weight_rr"  */
@@ -49,14 +49,20 @@ type AddDomain struct {
     /* 用户服务器是否只能http回源，1为是，0为否 (Optional) */
     RsOnlySupportHttp *int `json:"rsOnlySupportHttp"`
 
+    /* 是否支持国密证书 (Optional) */
+    GmCertSupport *int `json:"gmCertSupport"`
+
     /* Waf侧支持http版本，不传时默认值为http1.1,传"http2"为http2 (Optional) */
     HttpVersion *string `json:"httpVersion"`
 
     /* 回源是否支持长链接，0为否 (Optional) */
     EnableKeepalive *int `json:"enableKeepalive"`
 
-    /* 加密套件等级，0表示默认为中级，1表示高级，2表示低级 (Optional) */
+    /* 加密套件等级，0表示默认为中级，1表示高级，2表示低级, 3表示自定义 (Optional) */
     SuiteLevel *int `json:"suiteLevel"`
+
+    /* 自定义加密套件 (Optional) */
+    UserSuiteLevel []string `json:"userSuiteLevel"`
 
     /* 请求头是否支持下划线，0-否，1-是。缺省为0 (Optional) */
     EnableUnderscores *int `json:"enableUnderscores"`

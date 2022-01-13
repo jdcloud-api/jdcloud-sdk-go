@@ -26,11 +26,11 @@ type ListRiskRulesReq struct {
     Domain string `json:"domain"`
 
     /* 场景， account_login / account_register / data_risk_control (Optional) */
-    SceneRef *string `json:"sceneRef"`
+    SceneRef string `json:"sceneRef"`
 
     /* 页码，[1-100]，默认是1 (Optional) */
-    PageIndex *int `json:"pageIndex"`
+    PageIndex int `json:"pageIndex"`
 
     /* 页大小，[1-100]，默认是10 (Optional) */
-    PageSize *int `json:"pageSize"`
+    PageSize int `json:"pageSize"`
 }

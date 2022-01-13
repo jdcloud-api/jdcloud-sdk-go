@@ -26,10 +26,10 @@ type SetIpReq struct {
     Domain string `json:"domain"`
 
     /* 0表示黑名单，1表示白名单 (Optional) */
-    Iswhite *int `json:"iswhite"`
+    Iswhite int `json:"iswhite"`
 
     /* 0默认关闭，1默认打开 (Optional) */
-    IsEnable *int `json:"isEnable"`
+    IsEnable int `json:"isEnable"`
 
     /* ip配置  */
     Ips []IpCfg `json:"ips"`

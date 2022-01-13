@@ -20,7 +20,7 @@ package models
 type SetRiskEventReq struct {
 
     /* 规则id,新增时传0 (Optional) */
-    Id *int `json:"id"`
+    Id int `json:"id"`
 
     /* WAF实例id  */
     WafInstanceId string `json:"wafInstanceId"`

@@ -23,8 +23,8 @@ type ListBotThreatIpRuleReq struct {
     Domain string `json:"domain"`
 
     /* 页面大小，默认10 (Optional) */
-    PageSize *int `json:"pageSize"`
+    PageSize int `json:"pageSize"`
 
     /* 页码，默认1 (Optional) */
-    PageIndex *int `json:"pageIndex"`
+    PageIndex int `json:"pageIndex"`
 }
