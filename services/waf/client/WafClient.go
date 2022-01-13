@@ -40,7 +40,7 @@ func NewWafClient(credential *core.Credential) *WafClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "waf",
-            Revision:    "1.0.3",
+            Revision:    "1.0.4",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
