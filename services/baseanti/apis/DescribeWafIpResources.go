@@ -21,7 +21,7 @@ import (
     baseanti "github.com/jdcloud-api/jdcloud-sdk-go/services/baseanti/models"
 )
 
-type DescribeCcsIpResourcesRequest struct {
+type DescribeWafIpResourcesRequest struct {
 
     core.JDCloudRequest
 
@@ -43,13 +43,13 @@ type DescribeCcsIpResourcesRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeCcsIpResourcesRequest(
+func NewDescribeWafIpResourcesRequest(
     regionId string,
-) *DescribeCcsIpResourcesRequest {
+) *DescribeWafIpResourcesRequest {
 
-	return &DescribeCcsIpResourcesRequest{
+	return &DescribeWafIpResourcesRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/ccsIpResources",
+			URL:     "/regions/{regionId}/wafIpResources",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -64,16 +64,16 @@ func NewDescribeCcsIpResourcesRequest(
  * param pageSize: 分页大小 (Optional)
  * param ip: IP 模糊匹配 (Optional)
  */
-func NewDescribeCcsIpResourcesRequestWithAllParams(
+func NewDescribeWafIpResourcesRequestWithAllParams(
     regionId string,
     pageNumber *int,
     pageSize *int,
     ip *string,
-) *DescribeCcsIpResourcesRequest {
+) *DescribeWafIpResourcesRequest {
 
-    return &DescribeCcsIpResourcesRequest{
+    return &DescribeWafIpResourcesRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/ccsIpResources",
+            URL:     "/regions/{regionId}/wafIpResources",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -86,11 +86,11 @@ func NewDescribeCcsIpResourcesRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeCcsIpResourcesRequestWithoutParam() *DescribeCcsIpResourcesRequest {
+func NewDescribeWafIpResourcesRequestWithoutParam() *DescribeWafIpResourcesRequest {
 
-    return &DescribeCcsIpResourcesRequest{
+    return &DescribeWafIpResourcesRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/ccsIpResources",
+            URL:     "/regions/{regionId}/wafIpResources",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -99,38 +99,38 @@ func NewDescribeCcsIpResourcesRequestWithoutParam() *DescribeCcsIpResourcesReque
 }
 
 /* param regionId: 地域编码. 基础防护已支持华北-北京, 华东-宿迁, 华东-上海, 华南-广州(Required) */
-func (r *DescribeCcsIpResourcesRequest) SetRegionId(regionId string) {
+func (r *DescribeWafIpResourcesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param pageNumber: 页码(Optional) */
-func (r *DescribeCcsIpResourcesRequest) SetPageNumber(pageNumber int) {
+func (r *DescribeWafIpResourcesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 
 /* param pageSize: 分页大小(Optional) */
-func (r *DescribeCcsIpResourcesRequest) SetPageSize(pageSize int) {
+func (r *DescribeWafIpResourcesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
 /* param ip: IP 模糊匹配(Optional) */
-func (r *DescribeCcsIpResourcesRequest) SetIp(ip string) {
+func (r *DescribeWafIpResourcesRequest) SetIp(ip string) {
     r.Ip = &ip
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeCcsIpResourcesRequest) GetRegionId() string {
+func (r DescribeWafIpResourcesRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeCcsIpResourcesResponse struct {
+type DescribeWafIpResourcesResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeCcsIpResourcesResult `json:"result"`
+    Result DescribeWafIpResourcesResult `json:"result"`
 }
 
-type DescribeCcsIpResourcesResult struct {
+type DescribeWafIpResourcesResult struct {
     DataList []baseanti.IpResource `json:"dataList"`
     CurrentCount int `json:"currentCount"`
     TotalCount int `json:"totalCount"`

@@ -17,22 +17,13 @@
 package models
 
 
-type IpResource struct {
+type JDTIpResource struct {
 
     /* 公网 IP 所在区域编码 (Optional) */
     Region string `json:"region"`
 
-    /* 公网 IP 类型或绑定资源类型. 
-<br>- 0: 未知类型
-<br>- 1: 弹性公网 IP(IP 为弹性公网 IP, 绑定资源类型未知)
-<br>- 10: 弹性公网 IP(IP 为弹性公网 IP, 但未绑定资源)
-<br>- 11: 云主机
-<br>- 12: 负载均衡
-<br>- 13: 原生容器实例
-<br>- 14: 原生容器 Pod
-<br>- 2: 云物理服务器公网 IP
-<br>- 3: Web应用防火墙公网 IP
-<br>- 4: 托管区公网 IP"
+    /* 公网 IP 类型
+<br>- 7: 京东科技公网 IP"
  (Optional) */
     ResourceType int `json:"resourceType"`
 

@@ -17,24 +17,10 @@
 package models
 
 
-type AttackLog struct {
+type InternalAttackLog struct {
 
     /* 公网 IP 地址 (Optional) */
     Ip string `json:"ip"`
-
-    /* 公网 IP 类型或绑定资源类型.
-<br>- 0: 未知类型
-<br>- 1: 弹性公网 IP(IP 为弹性公网 IP, 绑定资源类型未知)
-<br>- 10: 弹性公网 IP(IP 为弹性公网 IP, 但未绑定资源)
-<br>- 11: 云主机
-<br>- 12: 负载均衡
-<br>- 13: 原生容器实例
-<br>- 14: 原生容器 Pod
-<br>- 2: 云物理服务器
-<br>- 3: Web应用防火墙 IP
-<br>- 4: 托管区公网 IP
- (Optional) */
-    ResourceType int `json:"resourceType"`
 
     /* 攻击记录 ID (Optional) */
     AttackLogId string `json:"attackLogId"`
@@ -45,21 +31,6 @@ type AttackLog struct {
     /* 攻击结束时间, UTC 时间, 格式: yyyy-MM-dd'T'HH:mm:ssZ (Optional) */
     EndTime string `json:"endTime"`
 
-    /* 触发原因.<br>- 0: 未知,<br>- 1: 四层,<br>- 2: 七层,<br>- 3: 四层和七层 (Optional) */
-    Cause int `json:"cause"`
-
-    /* 状态. <br>- 0: 清洗完成<br>- 1: 清洗中<br>- 2: 黑洞中 (Optional) */
-    Status int `json:"status"`
-
-    /* 是否黑洞 (Optional) */
-    BlackHole bool `json:"blackHole"`
-
-    /* 攻击流量峰值 (Optional) */
-    Peak float64 `json:"peak"`
-
-    /* 攻击流量峰值单位 (Optional) */
-    Unit string `json:"unit"`
-
-    /* 攻击类型 (Optional) */
-    AttackType []string `json:"attackType"`
+    /* normal: 正常, unregister: 未备案, illegalmail: 非法邮件, clean: 超阈值, blackhole: 黑洞 (Optional) */
+    AttackStatus []string `json:"attackStatus"`
 }

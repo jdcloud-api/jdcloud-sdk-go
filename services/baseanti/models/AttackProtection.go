@@ -17,39 +17,19 @@
 package models
 
 
-type IpResource struct {
+type AttackProtection struct {
 
     /* 公网 IP 所在区域编码 (Optional) */
     Region string `json:"region"`
 
-    /* 公网 IP 类型或绑定资源类型. 
-<br>- 0: 未知类型
-<br>- 1: 弹性公网 IP(IP 为弹性公网 IP, 绑定资源类型未知)
-<br>- 10: 弹性公网 IP(IP 为弹性公网 IP, 但未绑定资源)
-<br>- 11: 云主机
-<br>- 12: 负载均衡
-<br>- 13: 原生容器实例
-<br>- 14: 原生容器 Pod
-<br>- 2: 云物理服务器公网 IP
-<br>- 3: Web应用防火墙公网 IP
-<br>- 4: 托管区公网 IP"
- (Optional) */
-    ResourceType int `json:"resourceType"`
-
     /* 公网 IP 地址 (Optional) */
     Ip string `json:"ip"`
 
-    /* 带宽上限, 单位 Mbps (Optional) */
-    Bandwidth int64 `json:"bandwidth"`
+    /* 防护能力 (Optional) */
+    ProtectionAbility float64 `json:"protectionAbility"`
 
-    /* 每秒请求流量 (Optional) */
-    CleanThresholdBps int64 `json:"cleanThresholdBps"`
-
-    /* 每秒报文请求数 (Optional) */
-    CleanThresholdPps int64 `json:"cleanThresholdPps"`
-
-    /* 黑洞阈值 (Optional) */
-    BlackHoleThreshold int64 `json:"blackHoleThreshold"`
+    /* 防护能力单位 (Optional) */
+    ProtectionAbilityUnit string `json:"protectionAbilityUnit"`
 
     /* 绑定防护包 ID, 为空字符串时表示未绑定防护包 (Optional) */
     InstanceId string `json:"instanceId"`
@@ -62,4 +42,10 @@ type IpResource struct {
 
     /* 安全状态. <br>- 0: 安全<br>- 1: 清洗<br>- 2: 黑洞 (Optional) */
     SafeStatus int `json:"safeStatus"`
+
+    /* 7天内攻击流量峰值 (Optional) */
+    AttackPeak7Day float64 `json:"attackPeak7Day"`
+
+    /* 7天内攻击流量峰值单位 (Optional) */
+    AttackUnit7Day string `json:"attackUnit7Day"`
 }
