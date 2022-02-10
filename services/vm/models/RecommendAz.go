@@ -17,20 +17,14 @@
 package models
 
 
-type Quota struct {
+type RecommendAz struct {
 
-    /* 资源类型。支持范围：
-`instance`：云主机。
-`keypair`：密钥。
-`image`：镜像。
-`instanceTemplate`：实例模板。
-`imageShare`：共享镜像。
- (Optional) */
-    ResourceType string `json:"resourceType"`
+    /* 云主机所在可用区。 (Optional) */
+    Az string `json:"az"`
 
-    /* 配额上限。 (Optional) */
-    Limit int `json:"limit"`
+    /* 实例规格族。 (Optional) */
+    Family string `json:"family"`
 
-    /* 已用配额。 (Optional) */
-    Used int `json:"used"`
+    /* 地域信息 (Optional) */
+    Region string `json:"region"`
 }

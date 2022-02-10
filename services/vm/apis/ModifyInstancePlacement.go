@@ -156,5 +156,4 @@ type ModifyInstancePlacementResponse struct {
 }
 
 type ModifyInstancePlacementResult struct {
-    Status string `json:"status"`
 }
