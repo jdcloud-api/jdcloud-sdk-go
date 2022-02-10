@@ -23,7 +23,7 @@ type OridbwTableItem struct {
     GroupByname string `json:"groupByname"`
 
     /*  (Optional) */
-    DomainTyep string `json:"domainTyep"`
+    DomainType string `json:"domainType"`
 
     /*  (Optional) */
     OriflowPercent string `json:"oriflowPercent"`

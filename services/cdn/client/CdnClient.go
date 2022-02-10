@@ -40,7 +40,7 @@ func NewCdnClient(credential *core.Credential) *CdnClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "cdn",
-            Revision:    "0.10.28",
+            Revision:    "0.10.29",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -1037,6 +1037,26 @@ func (c *CdnClient) DeleteForbiddenStream(request *cdn.DeleteForbiddenStreamRequ
     return jdResp, err
 }
 
+/* 回源改写批量配置 */
+func (c *CdnClient) ConfigBackSourceRules(request *cdn.ConfigBackSourceRulesRequest) (*cdn.ConfigBackSourceRulesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.ConfigBackSourceRulesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 设置WAF白名单开关 */
 func (c *CdnClient) SetWafWhiteRuleSwitch(request *cdn.SetWafWhiteRuleSwitchRequest) (*cdn.SetWafWhiteRuleSwitchResponse, error) {
     if request == nil {
@@ -1157,7 +1177,7 @@ func (c *CdnClient) SetHttpHeader(request *cdn.SetHttpHeaderRequest) (*cdn.SetHt
     return jdResp, err
 }
 
-/* 获取所有上层节点的ip，仅支持中国境内上层节点IP地址查询 */
+/* 查询IP归属，适用于查询边缘节点，仅支持中国境内IP地址查询 */
 func (c *CdnClient) CheckWhetherIpBelongToJCloud(request *cdn.CheckWhetherIpBelongToJCloudRequest) (*cdn.CheckWhetherIpBelongToJCloudResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -3328,6 +3348,26 @@ func (c *CdnClient) DeleteWafBlackRules(request *cdn.DeleteWafBlackRulesRequest)
     }
 
     jdResp := &cdn.DeleteWafBlackRulesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询回源改写批量配置 */
+func (c *CdnClient) QueryBackSourceRules(request *cdn.QueryBackSourceRulesRequest) (*cdn.QueryBackSourceRulesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryBackSourceRulesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
