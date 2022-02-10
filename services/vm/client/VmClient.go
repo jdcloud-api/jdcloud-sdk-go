@@ -40,7 +40,7 @@ func NewVmClient(credential *core.Credential) *VmClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vm",
-            Revision:    "1.4.0",
+            Revision:    "1.4.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -713,7 +713,7 @@ func (c *VmClient) ModifyInstanceNetworkAttribute(request *vm.ModifyInstanceNetw
 查询资源配额。
 
 ## 接口说明
-- 调用该接口可查询 `云主机`、`云主机的CPU`、`云主机的内存`、`云主机的本地盘`、`镜像`、`密钥`、`实例模板`、`镜像共享` 的配额。
+- 调用该接口可查询 `云主机`、`镜像`、`密钥`、`实例模板`、`镜像共享` 的配额。
  */
 func (c *VmClient) DescribeQuotas(request *vm.DescribeQuotasRequest) (*vm.DescribeQuotasResponse, error) {
     if request == nil {
