@@ -17,17 +17,14 @@
 package models
 
 
-type TemplateEnd struct {
+type AgResource struct {
 
-    /* UID (Optional) */
-    UID string `json:"uID"`
+    /* 高可用组 id (Optional) */
+    AgId *string `json:"agId"`
 
-    /* 是否展示实列列表 (Optional) */
-    DisableTable int64 `json:"disableTable"`
+    /* 高可用组 name (Optional) */
+    AgName *string `json:"agName"`
 
-    /* 模板名称 (Optional) */
-    Name string `json:"name"`
-
-    /* 是否是特殊模式的系统日志 (Optional) */
-    SpecialMode int64 `json:"specialMode"`
+    /* 区域 (Optional) */
+    Region *string `json:"region"`
 }

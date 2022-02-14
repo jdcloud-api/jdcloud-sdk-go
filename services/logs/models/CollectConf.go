@@ -28,12 +28,12 @@ type CollectConf struct {
     /* filters 过滤器V1：多个词之间为or的关系 (Optional) */
     Filters []string `json:"filters"`
 
+    /* logsetUID 日志集UID (Optional) */
+    LogsetUID string `json:"logsetUID"`
+
     /* logtopicUID 日志主题UID (Optional) */
     LogtopicUID string `json:"logtopicUID"`
 
     /* 采集文件路径，支持通配 (Optional) */
     Path string `json:"path"`
-
-    /* 用户 PIN (Optional) */
-    Pin string `json:"pin"`
 }

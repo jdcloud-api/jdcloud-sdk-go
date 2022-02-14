@@ -18,69 +18,88 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    logs "github.com/jdcloud-api/jdcloud-sdk-go/services/logs/models"
 )
 
-type DescribeLogtopicRequest struct {
+type DescribeMetricTaskRequest struct {
 
     core.JDCloudRequest
 
     /* 地域 Id  */
     RegionId string `json:"regionId"`
 
+    /* 日志集 UID  */
+    LogsetUID string `json:"logsetUID"`
+
     /* 日志主题 UID  */
     LogtopicUID string `json:"logtopicUID"`
+
+    /*   */
+    LogmetrictaskUID string `json:"logmetrictaskUID"`
 }
 
 /*
  * param regionId: 地域 Id (Required)
+ * param logsetUID: 日志集 UID (Required)
  * param logtopicUID: 日志主题 UID (Required)
+ * param logmetrictaskUID:  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeLogtopicRequest(
+func NewDescribeMetricTaskRequest(
     regionId string,
+    logsetUID string,
     logtopicUID string,
-) *DescribeLogtopicRequest {
+    logmetrictaskUID string,
+) *DescribeMetricTaskRequest {
 
-	return &DescribeLogtopicRequest{
+	return &DescribeMetricTaskRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/logtopics/{logtopicUID}",
+			URL:     "/regions/{regionId}/logsets/{logsetUID}/logtopics/{logtopicUID}/metrictasks/{logmetrictaskUID}",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
+        LogsetUID: logsetUID,
         LogtopicUID: logtopicUID,
+        LogmetrictaskUID: logmetrictaskUID,
 	}
 }
 
 /*
  * param regionId: 地域 Id (Required)
+ * param logsetUID: 日志集 UID (Required)
  * param logtopicUID: 日志主题 UID (Required)
+ * param logmetrictaskUID:  (Required)
  */
-func NewDescribeLogtopicRequestWithAllParams(
+func NewDescribeMetricTaskRequestWithAllParams(
     regionId string,
+    logsetUID string,
     logtopicUID string,
-) *DescribeLogtopicRequest {
+    logmetrictaskUID string,
+) *DescribeMetricTaskRequest {
 
-    return &DescribeLogtopicRequest{
+    return &DescribeMetricTaskRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/logtopics/{logtopicUID}",
+            URL:     "/regions/{regionId}/logsets/{logsetUID}/logtopics/{logtopicUID}/metrictasks/{logmetrictaskUID}",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
+        LogsetUID: logsetUID,
         LogtopicUID: logtopicUID,
+        LogmetrictaskUID: logmetrictaskUID,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeLogtopicRequestWithoutParam() *DescribeLogtopicRequest {
+func NewDescribeMetricTaskRequestWithoutParam() *DescribeMetricTaskRequest {
 
-    return &DescribeLogtopicRequest{
+    return &DescribeMetricTaskRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/logtopics/{logtopicUID}",
+            URL:     "/regions/{regionId}/logsets/{logsetUID}/logtopics/{logtopicUID}/metrictasks/{logmetrictaskUID}",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -89,37 +108,37 @@ func NewDescribeLogtopicRequestWithoutParam() *DescribeLogtopicRequest {
 }
 
 /* param regionId: 地域 Id(Required) */
-func (r *DescribeLogtopicRequest) SetRegionId(regionId string) {
+func (r *DescribeMetricTaskRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param logsetUID: 日志集 UID(Required) */
+func (r *DescribeMetricTaskRequest) SetLogsetUID(logsetUID string) {
+    r.LogsetUID = logsetUID
+}
+
 /* param logtopicUID: 日志主题 UID(Required) */
-func (r *DescribeLogtopicRequest) SetLogtopicUID(logtopicUID string) {
+func (r *DescribeMetricTaskRequest) SetLogtopicUID(logtopicUID string) {
     r.LogtopicUID = logtopicUID
+}
+
+/* param logmetrictaskUID: (Required) */
+func (r *DescribeMetricTaskRequest) SetLogmetrictaskUID(logmetrictaskUID string) {
+    r.LogmetrictaskUID = logmetrictaskUID
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeLogtopicRequest) GetRegionId() string {
+func (r DescribeMetricTaskRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeLogtopicResponse struct {
+type DescribeMetricTaskResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeLogtopicResult `json:"result"`
+    Result DescribeMetricTaskResult `json:"result"`
 }
 
-type DescribeLogtopicResult struct {
-    UID string `json:"uID"`
-    AppCode string `json:"appCode"`
-    AppName string `json:"appName"`
-    CollectInfoUID string `json:"collectInfoUID"`
-    CreateTime string `json:"createTime"`
-    Description string `json:"description"`
-    LogsetName string `json:"logsetName"`
-    LogsetUID string `json:"logsetUID"`
-    Name string `json:"name"`
-    PrePattern string `json:"prePattern"`
-    Region string `json:"region"`
+type DescribeMetricTaskResult struct {
+    Data logs.MetrictaskDetailEnd `json:"data"`
 }

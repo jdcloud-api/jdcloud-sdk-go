@@ -17,17 +17,14 @@
 package models
 
 
-type TemplateEnd struct {
+type AnalysisMetaData struct {
 
-    /* UID (Optional) */
-    UID string `json:"uID"`
+    /* 统计字段 (Optional) */
+    Agg []string `json:"agg"`
 
-    /* 是否展示实列列表 (Optional) */
-    DisableTable int64 `json:"disableTable"`
+    /* 分组字段 (Optional) */
+    Group []string `json:"group"`
 
-    /* 模板名称 (Optional) */
-    Name string `json:"name"`
-
-    /* 是否是特殊模式的系统日志 (Optional) */
-    SpecialMode int64 `json:"specialMode"`
+    /* 时间字段 (Optional) */
+    Time []string `json:"time"`
 }

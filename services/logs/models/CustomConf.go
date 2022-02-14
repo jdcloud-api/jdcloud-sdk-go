@@ -17,17 +17,11 @@
 package models
 
 
-type TemplateEnd struct {
+type CustomConf struct {
 
-    /* UID (Optional) */
-    UID string `json:"uID"`
+    /* 自定义目的地配置 (Optional) */
+    Conf string `json:"conf"`
 
-    /* 是否展示实列列表 (Optional) */
-    DisableTable int64 `json:"disableTable"`
-
-    /* 模板名称 (Optional) */
-    Name string `json:"name"`
-
-    /* 是否是特殊模式的系统日志 (Optional) */
-    SpecialMode int64 `json:"specialMode"`
+    /* 自定义目的地类型，支持kafka，es (Optional) */
+    DestType string `json:"destType"`
 }

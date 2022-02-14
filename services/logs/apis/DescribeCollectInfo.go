@@ -113,14 +113,20 @@ type DescribeCollectInfoResponse struct {
 
 type DescribeCollectInfoResult struct {
     UID string `json:"uID"`
+    AgResource []logs.AgResourceEnd `json:"agResource"`
     AppCode string `json:"appCode"`
     Detail logs.CollectTempalteEnd `json:"detail"`
     Enabled int64 `json:"enabled"`
     HasResource bool `json:"hasResource"`
+    LogCustomTarget string `json:"logCustomTarget"`
+    LogCustomTargetConf interface{} `json:"logCustomTargetConf"`
     LogsetUID string `json:"logsetUID"`
+    LogtopicEnabled bool `json:"logtopicEnabled"`
     LogtopicUID string `json:"logtopicUID"`
+    ResourceMode int64 `json:"resourceMode"`
     ResourceType string `json:"resourceType"`
     ServiceCode string `json:"serviceCode"`
+    TagResource logs.TagResourceEnd `json:"tagResource"`
     TemplateName string `json:"templateName"`
     TemplateUID string `json:"templateUID"`
 }

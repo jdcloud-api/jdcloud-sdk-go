@@ -21,7 +21,7 @@ import (
     logs "github.com/jdcloud-api/jdcloud-sdk-go/services/logs/models"
 )
 
-type SearchRequest struct {
+type GetLogsRequest struct {
 
     core.JDCloudRequest
 
@@ -34,26 +34,17 @@ type SearchRequest struct {
     /* 日志主题ID  */
     LogtopicUID string `json:"logtopicUID"`
 
-    /* "preview"表示预览, "fulltext"表示全文检索, "advance"表示按照搜索语句检索  */
-    Action string `json:"action"`
+    /* 扫描任务ID。 第一次调用传入空值即可。后续调用需传入该任务ID，以连续读取剩余日志。 (Optional) */
+    TaskID *string `json:"taskID"`
 
     /* Base64编码的搜索表达式, (Optional) */
     Expr *string `json:"expr"`
 
-    /* 搜索关键字大小写敏感， 默认false (Optional) */
-    CaseSensitive *bool `json:"caseSensitive"`
-
-    /* 开始时间。格式 “YYYY-MM-DDThh:mm:ssTZD”, 比如 “2018-11-09T15:34:46+0800”.当action != preview时，必填 (Optional) */
+    /* 开始时间。格式 “YYYY-MM-DDThh:mm:ssTZD”, 比如 “2018-11-09T15:34:46+0800”.必填 (Optional) */
     StartTime *string `json:"startTime"`
 
-    /* 结束时间。格式 “YYYY-MM-DDThh:mm:ssTZD”, 比如 “2018-11-09T15:34:46+0800”.当action != preview时，必填 (Optional) */
+    /* 结束时间。格式 “YYYY-MM-DDThh:mm:ssTZD”, 比如 “2018-11-09T15:34:46+0800”.必填 (Optional) */
     EndTime *string `json:"endTime"`
-
-    /* 页数。 最小为1，最大为99 (Optional) */
-    PageNumber *int `json:"pageNumber"`
-
-    /* 每页个数。默认为10，最大100 (Optional) */
-    PageSize *int `json:"pageSize"`
 
     /* 返回排序,不填或者为空，默认为desc，"asc":按照时间正序返回结果，"desc":按照时间倒序返回结果 (Optional) */
     Sort *string `json:"sort"`
@@ -66,20 +57,18 @@ type SearchRequest struct {
  * param regionId: 地域 Id (Required)
  * param logsetUID: 日志集ID (Required)
  * param logtopicUID: 日志主题ID (Required)
- * param action: "preview"表示预览, "fulltext"表示全文检索, "advance"表示按照搜索语句检索 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewSearchRequest(
+func NewGetLogsRequest(
     regionId string,
     logsetUID string,
     logtopicUID string,
-    action string,
-) *SearchRequest {
+) *GetLogsRequest {
 
-	return &SearchRequest{
+	return &GetLogsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/logsets/{logsetUID}/logtopics/{logtopicUID}/search",
+			URL:     "/regions/{regionId}/logsets/{logsetUID}/logtopics/{logtopicUID}/scan",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -87,7 +76,6 @@ func NewSearchRequest(
         RegionId: regionId,
         LogsetUID: logsetUID,
         LogtopicUID: logtopicUID,
-        Action: action,
 	}
 }
 
@@ -95,34 +83,28 @@ func NewSearchRequest(
  * param regionId: 地域 Id (Required)
  * param logsetUID: 日志集ID (Required)
  * param logtopicUID: 日志主题ID (Required)
- * param action: "preview"表示预览, "fulltext"表示全文检索, "advance"表示按照搜索语句检索 (Required)
+ * param taskID: 扫描任务ID。 第一次调用传入空值即可。后续调用需传入该任务ID，以连续读取剩余日志。 (Optional)
  * param expr: Base64编码的搜索表达式, (Optional)
- * param caseSensitive: 搜索关键字大小写敏感， 默认false (Optional)
- * param startTime: 开始时间。格式 “YYYY-MM-DDThh:mm:ssTZD”, 比如 “2018-11-09T15:34:46+0800”.当action != preview时，必填 (Optional)
- * param endTime: 结束时间。格式 “YYYY-MM-DDThh:mm:ssTZD”, 比如 “2018-11-09T15:34:46+0800”.当action != preview时，必填 (Optional)
- * param pageNumber: 页数。 最小为1，最大为99 (Optional)
- * param pageSize: 每页个数。默认为10，最大100 (Optional)
+ * param startTime: 开始时间。格式 “YYYY-MM-DDThh:mm:ssTZD”, 比如 “2018-11-09T15:34:46+0800”.必填 (Optional)
+ * param endTime: 结束时间。格式 “YYYY-MM-DDThh:mm:ssTZD”, 比如 “2018-11-09T15:34:46+0800”.必填 (Optional)
  * param sort: 返回排序,不填或者为空，默认为desc，"asc":按照时间正序返回结果，"desc":按照时间倒序返回结果 (Optional)
  * param filters: 指定返回字段，只对系统日志生效，不填默认按照产品线配置返回字段，Name支持：key，Values填入返回字段 (Optional)
  */
-func NewSearchRequestWithAllParams(
+func NewGetLogsRequestWithAllParams(
     regionId string,
     logsetUID string,
     logtopicUID string,
-    action string,
+    taskID *string,
     expr *string,
-    caseSensitive *bool,
     startTime *string,
     endTime *string,
-    pageNumber *int,
-    pageSize *int,
     sort *string,
     filters []logs.Filter,
-) *SearchRequest {
+) *GetLogsRequest {
 
-    return &SearchRequest{
+    return &GetLogsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/logsets/{logsetUID}/logtopics/{logtopicUID}/search",
+            URL:     "/regions/{regionId}/logsets/{logsetUID}/logtopics/{logtopicUID}/scan",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -130,24 +112,21 @@ func NewSearchRequestWithAllParams(
         RegionId: regionId,
         LogsetUID: logsetUID,
         LogtopicUID: logtopicUID,
-        Action: action,
+        TaskID: taskID,
         Expr: expr,
-        CaseSensitive: caseSensitive,
         StartTime: startTime,
         EndTime: endTime,
-        PageNumber: pageNumber,
-        PageSize: pageSize,
         Sort: sort,
         Filters: filters,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewSearchRequestWithoutParam() *SearchRequest {
+func NewGetLogsRequestWithoutParam() *GetLogsRequest {
 
-    return &SearchRequest{
+    return &GetLogsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/logsets/{logsetUID}/logtopics/{logtopicUID}/search",
+            URL:     "/regions/{regionId}/logsets/{logsetUID}/logtopics/{logtopicUID}/scan",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -156,79 +135,66 @@ func NewSearchRequestWithoutParam() *SearchRequest {
 }
 
 /* param regionId: 地域 Id(Required) */
-func (r *SearchRequest) SetRegionId(regionId string) {
+func (r *GetLogsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param logsetUID: 日志集ID(Required) */
-func (r *SearchRequest) SetLogsetUID(logsetUID string) {
+func (r *GetLogsRequest) SetLogsetUID(logsetUID string) {
     r.LogsetUID = logsetUID
 }
 
 /* param logtopicUID: 日志主题ID(Required) */
-func (r *SearchRequest) SetLogtopicUID(logtopicUID string) {
+func (r *GetLogsRequest) SetLogtopicUID(logtopicUID string) {
     r.LogtopicUID = logtopicUID
 }
 
-/* param action: "preview"表示预览, "fulltext"表示全文检索, "advance"表示按照搜索语句检索(Required) */
-func (r *SearchRequest) SetAction(action string) {
-    r.Action = action
+/* param taskID: 扫描任务ID。 第一次调用传入空值即可。后续调用需传入该任务ID，以连续读取剩余日志。(Optional) */
+func (r *GetLogsRequest) SetTaskID(taskID string) {
+    r.TaskID = &taskID
 }
 
 /* param expr: Base64编码的搜索表达式,(Optional) */
-func (r *SearchRequest) SetExpr(expr string) {
+func (r *GetLogsRequest) SetExpr(expr string) {
     r.Expr = &expr
 }
 
-/* param caseSensitive: 搜索关键字大小写敏感， 默认false(Optional) */
-func (r *SearchRequest) SetCaseSensitive(caseSensitive bool) {
-    r.CaseSensitive = &caseSensitive
-}
-
-/* param startTime: 开始时间。格式 “YYYY-MM-DDThh:mm:ssTZD”, 比如 “2018-11-09T15:34:46+0800”.当action != preview时，必填(Optional) */
-func (r *SearchRequest) SetStartTime(startTime string) {
+/* param startTime: 开始时间。格式 “YYYY-MM-DDThh:mm:ssTZD”, 比如 “2018-11-09T15:34:46+0800”.必填(Optional) */
+func (r *GetLogsRequest) SetStartTime(startTime string) {
     r.StartTime = &startTime
 }
 
-/* param endTime: 结束时间。格式 “YYYY-MM-DDThh:mm:ssTZD”, 比如 “2018-11-09T15:34:46+0800”.当action != preview时，必填(Optional) */
-func (r *SearchRequest) SetEndTime(endTime string) {
+/* param endTime: 结束时间。格式 “YYYY-MM-DDThh:mm:ssTZD”, 比如 “2018-11-09T15:34:46+0800”.必填(Optional) */
+func (r *GetLogsRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
 
-/* param pageNumber: 页数。 最小为1，最大为99(Optional) */
-func (r *SearchRequest) SetPageNumber(pageNumber int) {
-    r.PageNumber = &pageNumber
-}
-
-/* param pageSize: 每页个数。默认为10，最大100(Optional) */
-func (r *SearchRequest) SetPageSize(pageSize int) {
-    r.PageSize = &pageSize
-}
-
 /* param sort: 返回排序,不填或者为空，默认为desc，"asc":按照时间正序返回结果，"desc":按照时间倒序返回结果(Optional) */
-func (r *SearchRequest) SetSort(sort string) {
+func (r *GetLogsRequest) SetSort(sort string) {
     r.Sort = &sort
 }
 
 /* param filters: 指定返回字段，只对系统日志生效，不填默认按照产品线配置返回字段，Name支持：key，Values填入返回字段(Optional) */
-func (r *SearchRequest) SetFilters(filters []logs.Filter) {
+func (r *GetLogsRequest) SetFilters(filters []logs.Filter) {
     r.Filters = filters
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r SearchRequest) GetRegionId() string {
+func (r GetLogsRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type SearchResponse struct {
+type GetLogsResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result SearchResult `json:"result"`
+    Result GetLogsResult `json:"result"`
 }
 
-type SearchResult struct {
+type GetLogsResult struct {
     Data []interface{} `json:"data"`
     SearchFields logs.SearchFields `json:"searchFields"`
+    TaskID string `json:"taskID"`
+    TaskStatus string `json:"taskStatus"`
     Total int64 `json:"total"`
 }

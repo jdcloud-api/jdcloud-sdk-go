@@ -23,7 +23,7 @@ type MetrictaskDetailEnd struct {
     Aggregate string `json:"aggregate"`
 
     /*  (Optional) */
-    CretedTime string `json:"cretedTime"`
+    CreatedTime string `json:"createdTime"`
 
     /* 开启自定义单位 (Optional) */
     CustomUnit string `json:"customUnit"`
@@ -51,6 +51,12 @@ type MetrictaskDetailEnd struct {
 
     /* 监控任务名称 (Optional) */
     Name string `json:"name"`
+
+    /* 配置方式:枚举值 visual，sql；分别代表可视化配置及sql配置方式 (Optional) */
+    SettingType string `json:"settingType"`
+
+    /*  (Optional) */
+    SqlSpec MetricTaskSqlSpec `json:"sqlSpec"`
 
     /* 单位 (Optional) */
     Unit string `json:"unit"`

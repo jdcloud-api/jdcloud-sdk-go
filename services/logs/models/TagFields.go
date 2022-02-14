@@ -17,17 +17,11 @@
 package models
 
 
-type TemplateEnd struct {
+type TagFields struct {
 
-    /* UID (Optional) */
-    UID string `json:"uID"`
+    /*  (Optional) */
+    Tagk string `json:"tagk"`
 
-    /* 是否展示实列列表 (Optional) */
-    DisableTable int64 `json:"disableTable"`
-
-    /* 模板名称 (Optional) */
-    Name string `json:"name"`
-
-    /* 是否是特殊模式的系统日志 (Optional) */
-    SpecialMode int64 `json:"specialMode"`
+    /*  (Optional) */
+    Tagv interface{} `json:"tagv"`
 }

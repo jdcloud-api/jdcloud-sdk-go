@@ -30,4 +30,7 @@ type CollectTempalteEnd struct {
 
     /* 日志路径 (Optional) */
     LogPath string `json:"logPath"`
+
+    /* 首行正则 (Optional) */
+    RegexpStr string `json:"regexpStr"`
 }

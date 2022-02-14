@@ -20,67 +20,67 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type DescribeLogdCARequest struct {
+type DescribeParserRequest struct {
 
     core.JDCloudRequest
 
-    /* region  */
+    /* 地域 Id  */
     RegionId string `json:"regionId"`
 
-    /* instanceId  */
-    InstanceId string `json:"instanceId"`
+    /* 日志主题 UID  */
+    LogtopicUID string `json:"logtopicUID"`
 }
 
 /*
- * param regionId: region (Required)
- * param instanceId: instanceId (Required)
+ * param regionId: 地域 Id (Required)
+ * param logtopicUID: 日志主题 UID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeLogdCARequest(
+func NewDescribeParserRequest(
     regionId string,
-    instanceId string,
-) *DescribeLogdCARequest {
+    logtopicUID string,
+) *DescribeParserRequest {
 
-	return &DescribeLogdCARequest{
+	return &DescribeParserRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/ca",
+			URL:     "/regions/{regionId}/logtopics/{logtopicUID}/describeParser",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        InstanceId: instanceId,
+        LogtopicUID: logtopicUID,
 	}
 }
 
 /*
- * param regionId: region (Required)
- * param instanceId: instanceId (Required)
+ * param regionId: 地域 Id (Required)
+ * param logtopicUID: 日志主题 UID (Required)
  */
-func NewDescribeLogdCARequestWithAllParams(
+func NewDescribeParserRequestWithAllParams(
     regionId string,
-    instanceId string,
-) *DescribeLogdCARequest {
+    logtopicUID string,
+) *DescribeParserRequest {
 
-    return &DescribeLogdCARequest{
+    return &DescribeParserRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/ca",
+            URL:     "/regions/{regionId}/logtopics/{logtopicUID}/describeParser",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        InstanceId: instanceId,
+        LogtopicUID: logtopicUID,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeLogdCARequestWithoutParam() *DescribeLogdCARequest {
+func NewDescribeParserRequestWithoutParam() *DescribeParserRequest {
 
-    return &DescribeLogdCARequest{
+    return &DescribeParserRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/ca",
+            URL:     "/regions/{regionId}/logtopics/{logtopicUID}/describeParser",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -88,30 +88,27 @@ func NewDescribeLogdCARequestWithoutParam() *DescribeLogdCARequest {
     }
 }
 
-/* param regionId: region(Required) */
-func (r *DescribeLogdCARequest) SetRegionId(regionId string) {
+/* param regionId: 地域 Id(Required) */
+func (r *DescribeParserRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param instanceId: instanceId(Required) */
-func (r *DescribeLogdCARequest) SetInstanceId(instanceId string) {
-    r.InstanceId = instanceId
+/* param logtopicUID: 日志主题 UID(Required) */
+func (r *DescribeParserRequest) SetLogtopicUID(logtopicUID string) {
+    r.LogtopicUID = logtopicUID
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeLogdCARequest) GetRegionId() string {
+func (r DescribeParserRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeLogdCAResponse struct {
+type DescribeParserResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeLogdCAResult `json:"result"`
+    Result DescribeParserResult `json:"result"`
 }
 
-type DescribeLogdCAResult struct {
-    Cert string `json:"cert"`
-    ExpiryDate int64 `json:"expiryDate"`
-    PrivateKey string `json:"privateKey"`
+type DescribeParserResult struct {
 }

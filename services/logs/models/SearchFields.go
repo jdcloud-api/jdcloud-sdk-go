@@ -17,17 +17,11 @@
 package models
 
 
-type TemplateEnd struct {
+type SearchFields struct {
 
-    /* UID (Optional) */
-    UID string `json:"uID"`
+    /*  (Optional) */
+    ContentFields []string `json:"contentFields"`
 
-    /* 是否展示实列列表 (Optional) */
-    DisableTable int64 `json:"disableTable"`
-
-    /* 模板名称 (Optional) */
-    Name string `json:"name"`
-
-    /* 是否是特殊模式的系统日志 (Optional) */
-    SpecialMode int64 `json:"specialMode"`
+    /*  (Optional) */
+    TagFields []TagFields `json:"tagFields"`
 }

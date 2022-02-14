@@ -20,12 +20,15 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type DescribeLogtopicRequest struct {
+type CreateSubscribeRequest struct {
 
     core.JDCloudRequest
 
     /* 地域 Id  */
     RegionId string `json:"regionId"`
+
+    /* 日志集 UID  */
+    LogsetUID string `json:"logsetUID"`
 
     /* 日志主题 UID  */
     LogtopicUID string `json:"logtopicUID"`
@@ -33,55 +36,61 @@ type DescribeLogtopicRequest struct {
 
 /*
  * param regionId: 地域 Id (Required)
+ * param logsetUID: 日志集 UID (Required)
  * param logtopicUID: 日志主题 UID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeLogtopicRequest(
+func NewCreateSubscribeRequest(
     regionId string,
+    logsetUID string,
     logtopicUID string,
-) *DescribeLogtopicRequest {
+) *CreateSubscribeRequest {
 
-	return &DescribeLogtopicRequest{
+	return &CreateSubscribeRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/logtopics/{logtopicUID}",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/logsets/{logsetUID}/logtopics/{logtopicUID}/subscribe",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
+        LogsetUID: logsetUID,
         LogtopicUID: logtopicUID,
 	}
 }
 
 /*
  * param regionId: 地域 Id (Required)
+ * param logsetUID: 日志集 UID (Required)
  * param logtopicUID: 日志主题 UID (Required)
  */
-func NewDescribeLogtopicRequestWithAllParams(
+func NewCreateSubscribeRequestWithAllParams(
     regionId string,
+    logsetUID string,
     logtopicUID string,
-) *DescribeLogtopicRequest {
+) *CreateSubscribeRequest {
 
-    return &DescribeLogtopicRequest{
+    return &CreateSubscribeRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/logtopics/{logtopicUID}",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/logsets/{logsetUID}/logtopics/{logtopicUID}/subscribe",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
+        LogsetUID: logsetUID,
         LogtopicUID: logtopicUID,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeLogtopicRequestWithoutParam() *DescribeLogtopicRequest {
+func NewCreateSubscribeRequestWithoutParam() *CreateSubscribeRequest {
 
-    return &DescribeLogtopicRequest{
+    return &CreateSubscribeRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/logtopics/{logtopicUID}",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/logsets/{logsetUID}/logtopics/{logtopicUID}/subscribe",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
@@ -89,37 +98,31 @@ func NewDescribeLogtopicRequestWithoutParam() *DescribeLogtopicRequest {
 }
 
 /* param regionId: 地域 Id(Required) */
-func (r *DescribeLogtopicRequest) SetRegionId(regionId string) {
+func (r *CreateSubscribeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param logsetUID: 日志集 UID(Required) */
+func (r *CreateSubscribeRequest) SetLogsetUID(logsetUID string) {
+    r.LogsetUID = logsetUID
+}
+
 /* param logtopicUID: 日志主题 UID(Required) */
-func (r *DescribeLogtopicRequest) SetLogtopicUID(logtopicUID string) {
+func (r *CreateSubscribeRequest) SetLogtopicUID(logtopicUID string) {
     r.LogtopicUID = logtopicUID
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeLogtopicRequest) GetRegionId() string {
+func (r CreateSubscribeRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeLogtopicResponse struct {
+type CreateSubscribeResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeLogtopicResult `json:"result"`
+    Result CreateSubscribeResult `json:"result"`
 }
 
-type DescribeLogtopicResult struct {
-    UID string `json:"uID"`
-    AppCode string `json:"appCode"`
-    AppName string `json:"appName"`
-    CollectInfoUID string `json:"collectInfoUID"`
-    CreateTime string `json:"createTime"`
-    Description string `json:"description"`
-    LogsetName string `json:"logsetName"`
-    LogsetUID string `json:"logsetUID"`
-    Name string `json:"name"`
-    PrePattern string `json:"prePattern"`
-    Region string `json:"region"`
+type CreateSubscribeResult struct {
 }

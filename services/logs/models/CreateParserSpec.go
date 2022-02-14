@@ -17,17 +17,17 @@
 package models
 
 
-type TemplateEnd struct {
+type CreateParserSpec struct {
 
-    /* UID (Optional) */
-    UID string `json:"uID"`
+    /*   */
+    ParserFields []ParserField `json:"parserFields"`
 
-    /* 是否展示实列列表 (Optional) */
-    DisableTable int64 `json:"disableTable"`
+    /* 解析类型。oneline - 单行，split - 分割， json - json， regexp - regexp  */
+    ParserMode string `json:"parserMode"`
 
-    /* 模板名称 (Optional) */
-    Name string `json:"name"`
+    /* 解析语法 (Optional) */
+    ParserPattern string `json:"parserPattern"`
 
-    /* 是否是特殊模式的系统日志 (Optional) */
-    SpecialMode int64 `json:"specialMode"`
+    /* 日志样例 (Optional) */
+    ParserSample string `json:"parserSample"`
 }

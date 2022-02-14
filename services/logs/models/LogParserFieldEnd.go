@@ -17,17 +17,17 @@
 package models
 
 
-type TemplateEnd struct {
+type LogParserFieldEnd struct {
 
-    /* UID (Optional) */
-    UID string `json:"uID"`
+    /*  (Optional) */
+    FieldFormat string `json:"fieldFormat"`
 
-    /* 是否展示实列列表 (Optional) */
-    DisableTable int64 `json:"disableTable"`
+    /*  (Optional) */
+    FieldName string `json:"fieldName"`
 
-    /* 模板名称 (Optional) */
-    Name string `json:"name"`
+    /*  (Optional) */
+    FieldType string `json:"fieldType"`
 
-    /* 是否是特殊模式的系统日志 (Optional) */
-    SpecialMode int64 `json:"specialMode"`
+    /*  (Optional) */
+    Index int64 `json:"index"`
 }
