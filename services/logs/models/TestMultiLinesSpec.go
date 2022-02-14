@@ -17,17 +17,11 @@
 package models
 
 
-type TemplateEnd struct {
+type TestMultiLinesSpec struct {
 
-    /* UID (Optional) */
-    UID string `json:"uID"`
+    /* 需要验证的多行日志 (Optional) */
+    Content string `json:"content"`
 
-    /* 是否展示实列列表 (Optional) */
-    DisableTable int64 `json:"disableTable"`
-
-    /* 模板名称 (Optional) */
-    Name string `json:"name"`
-
-    /* 是否是特殊模式的系统日志 (Optional) */
-    SpecialMode int64 `json:"specialMode"`
+    /* 首行正则表达式 (Optional) */
+    RegexpStr string `json:"regexpStr"`
 }

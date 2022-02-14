@@ -17,17 +17,11 @@
 package models
 
 
-type TemplateEnd struct {
+type JdcloudSpec struct {
 
-    /* UID (Optional) */
-    UID string `json:"uID"`
+    /* 产品线,当日志来源为jdcloud时，必填  */
+    ServiceCode string `json:"serviceCode"`
 
-    /* 是否展示实列列表 (Optional) */
-    DisableTable int64 `json:"disableTable"`
-
-    /* 模板名称 (Optional) */
-    Name string `json:"name"`
-
-    /* 是否是特殊模式的系统日志 (Optional) */
-    SpecialMode int64 `json:"specialMode"`
+    /* 日志类型。当appcode为jdcloud时为必填 (Optional) */
+    TemplateUID string `json:"templateUID"`
 }

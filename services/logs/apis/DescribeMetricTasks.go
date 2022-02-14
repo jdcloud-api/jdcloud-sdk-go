@@ -21,7 +21,7 @@ import (
     logs "github.com/jdcloud-api/jdcloud-sdk-go/services/logs/models"
 )
 
-type DescribeLogtopicsRequest struct {
+type DescribeMetricTasksRequest struct {
 
     core.JDCloudRequest
 
@@ -31,81 +31,82 @@ type DescribeLogtopicsRequest struct {
     /* 日志集 UID  */
     LogsetUID string `json:"logsetUID"`
 
-    /* 当前所在页，默认为1 (Optional) */
-    PageNumber *int `json:"pageNumber"`
+    /* 日志主题 UID  */
+    LogtopicUID string `json:"logtopicUID"`
 
-    /* 页面大小，默认为20；取值范围[1, 100] (Optional) */
-    PageSize *int `json:"pageSize"`
+    /* 当前所在页，默认为1
+in: query (Optional) */
+    PageNumber *int64 `json:"pageNumber"`
 
-    /* 日志主题名称 (Optional) */
-    Name *string `json:"name"`
-
-    /* 日志主题采集的日志类型 (Optional) */
-    AppName *string `json:"appName"`
+    /* 页面大小，默认为20；取值范围[1, 100]
+in: query (Optional) */
+    PageSize *int64 `json:"pageSize"`
 }
 
 /*
  * param regionId: 地域 Id (Required)
  * param logsetUID: 日志集 UID (Required)
+ * param logtopicUID: 日志主题 UID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeLogtopicsRequest(
+func NewDescribeMetricTasksRequest(
     regionId string,
     logsetUID string,
-) *DescribeLogtopicsRequest {
+    logtopicUID string,
+) *DescribeMetricTasksRequest {
 
-	return &DescribeLogtopicsRequest{
+	return &DescribeMetricTasksRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/logsets/{logsetUID}/logtopics",
+			URL:     "/regions/{regionId}/logsets/{logsetUID}/logtopics/{logtopicUID}/metrictasks",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         LogsetUID: logsetUID,
+        LogtopicUID: logtopicUID,
 	}
 }
 
 /*
  * param regionId: 地域 Id (Required)
  * param logsetUID: 日志集 UID (Required)
- * param pageNumber: 当前所在页，默认为1 (Optional)
- * param pageSize: 页面大小，默认为20；取值范围[1, 100] (Optional)
- * param name: 日志主题名称 (Optional)
- * param appName: 日志主题采集的日志类型 (Optional)
+ * param logtopicUID: 日志主题 UID (Required)
+ * param pageNumber: 当前所在页，默认为1
+in: query (Optional)
+ * param pageSize: 页面大小，默认为20；取值范围[1, 100]
+in: query (Optional)
  */
-func NewDescribeLogtopicsRequestWithAllParams(
+func NewDescribeMetricTasksRequestWithAllParams(
     regionId string,
     logsetUID string,
-    pageNumber *int,
-    pageSize *int,
-    name *string,
-    appName *string,
-) *DescribeLogtopicsRequest {
+    logtopicUID string,
+    pageNumber *int64,
+    pageSize *int64,
+) *DescribeMetricTasksRequest {
 
-    return &DescribeLogtopicsRequest{
+    return &DescribeMetricTasksRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/logsets/{logsetUID}/logtopics",
+            URL:     "/regions/{regionId}/logsets/{logsetUID}/logtopics/{logtopicUID}/metrictasks",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         LogsetUID: logsetUID,
+        LogtopicUID: logtopicUID,
         PageNumber: pageNumber,
         PageSize: pageSize,
-        Name: name,
-        AppName: appName,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeLogtopicsRequestWithoutParam() *DescribeLogtopicsRequest {
+func NewDescribeMetricTasksRequestWithoutParam() *DescribeMetricTasksRequest {
 
-    return &DescribeLogtopicsRequest{
+    return &DescribeMetricTasksRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/logsets/{logsetUID}/logtopics",
+            URL:     "/regions/{regionId}/logsets/{logsetUID}/logtopics/{logtopicUID}/metrictasks",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -114,49 +115,46 @@ func NewDescribeLogtopicsRequestWithoutParam() *DescribeLogtopicsRequest {
 }
 
 /* param regionId: 地域 Id(Required) */
-func (r *DescribeLogtopicsRequest) SetRegionId(regionId string) {
+func (r *DescribeMetricTasksRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param logsetUID: 日志集 UID(Required) */
-func (r *DescribeLogtopicsRequest) SetLogsetUID(logsetUID string) {
+func (r *DescribeMetricTasksRequest) SetLogsetUID(logsetUID string) {
     r.LogsetUID = logsetUID
 }
 
-/* param pageNumber: 当前所在页，默认为1(Optional) */
-func (r *DescribeLogtopicsRequest) SetPageNumber(pageNumber int) {
+/* param logtopicUID: 日志主题 UID(Required) */
+func (r *DescribeMetricTasksRequest) SetLogtopicUID(logtopicUID string) {
+    r.LogtopicUID = logtopicUID
+}
+
+/* param pageNumber: 当前所在页，默认为1
+in: query(Optional) */
+func (r *DescribeMetricTasksRequest) SetPageNumber(pageNumber int64) {
     r.PageNumber = &pageNumber
 }
 
-/* param pageSize: 页面大小，默认为20；取值范围[1, 100](Optional) */
-func (r *DescribeLogtopicsRequest) SetPageSize(pageSize int) {
+/* param pageSize: 页面大小，默认为20；取值范围[1, 100]
+in: query(Optional) */
+func (r *DescribeMetricTasksRequest) SetPageSize(pageSize int64) {
     r.PageSize = &pageSize
-}
-
-/* param name: 日志主题名称(Optional) */
-func (r *DescribeLogtopicsRequest) SetName(name string) {
-    r.Name = &name
-}
-
-/* param appName: 日志主题采集的日志类型(Optional) */
-func (r *DescribeLogtopicsRequest) SetAppName(appName string) {
-    r.AppName = &appName
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeLogtopicsRequest) GetRegionId() string {
+func (r DescribeMetricTasksRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeLogtopicsResponse struct {
+type DescribeMetricTasksResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeLogtopicsResult `json:"result"`
+    Result DescribeMetricTasksResult `json:"result"`
 }
 
-type DescribeLogtopicsResult struct {
-    Data []logs.LogtopicDetailEnd `json:"data"`
+type DescribeMetricTasksResult struct {
+    Data []logs.MetrictaskDetailEnd `json:"data"`
     NumberPages int64 `json:"numberPages"`
     NumberRecords int64 `json:"numberRecords"`
     PageNumber int64 `json:"pageNumber"`

@@ -25,6 +25,12 @@ type LogtopicDetailEnd struct {
     /* UID (Optional) */
     UID string `json:"uID"`
 
+    /* 日志来源,只在查询单个日志主题并且创建了采集配置时返回值 (Optional) */
+    AppCode string `json:"appCode"`
+
+    /* 日志主题采集的日志类型 (Optional) */
+    AppName string `json:"appName"`
+
     /* 采集配置UID (Optional) */
     CollectInfoUID string `json:"collectInfoUID"`
 
@@ -45,6 +51,9 @@ type LogtopicDetailEnd struct {
 
     /* 日志主题名称 (Optional) */
     Name string `json:"name"`
+
+    /* 预处理模式 (Optional) */
+    PrePattern string `json:"prePattern"`
 
     /* 地域信息 (Optional) */
     Region string `json:"region"`

@@ -17,17 +17,8 @@
 package models
 
 
-type TemplateEnd struct {
+type UpdateSubscribeSpec struct {
 
-    /* UID (Optional) */
-    UID string `json:"uID"`
-
-    /* 是否展示实列列表 (Optional) */
-    DisableTable int64 `json:"disableTable"`
-
-    /* 模板名称 (Optional) */
-    Name string `json:"name"`
-
-    /* 是否是特殊模式的系统日志 (Optional) */
-    SpecialMode int64 `json:"specialMode"`
+    /* 日志订阅状态，0表示未创建，1表示刚创建，2表示开启，3表示关闭 (Optional) */
+    Status int64 `json:"status"`
 }

@@ -20,68 +20,83 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type DescribeLogtopicRequest struct {
+type UpdateSubscribeRequest struct {
 
     core.JDCloudRequest
 
     /* 地域 Id  */
     RegionId string `json:"regionId"`
 
+    /* 日志集 UID  */
+    LogsetUID string `json:"logsetUID"`
+
     /* 日志主题 UID  */
     LogtopicUID string `json:"logtopicUID"`
+
+    /* 日志订阅状态，0表示未创建，1表示刚创建，2表示开启，3表示关闭 (Optional) */
+    Status *int64 `json:"status"`
 }
 
 /*
  * param regionId: 地域 Id (Required)
+ * param logsetUID: 日志集 UID (Required)
  * param logtopicUID: 日志主题 UID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeLogtopicRequest(
+func NewUpdateSubscribeRequest(
     regionId string,
+    logsetUID string,
     logtopicUID string,
-) *DescribeLogtopicRequest {
+) *UpdateSubscribeRequest {
 
-	return &DescribeLogtopicRequest{
+	return &UpdateSubscribeRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/logtopics/{logtopicUID}",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/logsets/{logsetUID}/logtopics/{logtopicUID}/subscribe",
+			Method:  "PATCH",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
+        LogsetUID: logsetUID,
         LogtopicUID: logtopicUID,
 	}
 }
 
 /*
  * param regionId: 地域 Id (Required)
+ * param logsetUID: 日志集 UID (Required)
  * param logtopicUID: 日志主题 UID (Required)
+ * param status: 日志订阅状态，0表示未创建，1表示刚创建，2表示开启，3表示关闭 (Optional)
  */
-func NewDescribeLogtopicRequestWithAllParams(
+func NewUpdateSubscribeRequestWithAllParams(
     regionId string,
+    logsetUID string,
     logtopicUID string,
-) *DescribeLogtopicRequest {
+    status *int64,
+) *UpdateSubscribeRequest {
 
-    return &DescribeLogtopicRequest{
+    return &UpdateSubscribeRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/logtopics/{logtopicUID}",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/logsets/{logsetUID}/logtopics/{logtopicUID}/subscribe",
+            Method:  "PATCH",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
+        LogsetUID: logsetUID,
         LogtopicUID: logtopicUID,
+        Status: status,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeLogtopicRequestWithoutParam() *DescribeLogtopicRequest {
+func NewUpdateSubscribeRequestWithoutParam() *UpdateSubscribeRequest {
 
-    return &DescribeLogtopicRequest{
+    return &UpdateSubscribeRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/logtopics/{logtopicUID}",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/logsets/{logsetUID}/logtopics/{logtopicUID}/subscribe",
+            Method:  "PATCH",
             Header:  nil,
             Version: "v1",
         },
@@ -89,37 +104,36 @@ func NewDescribeLogtopicRequestWithoutParam() *DescribeLogtopicRequest {
 }
 
 /* param regionId: 地域 Id(Required) */
-func (r *DescribeLogtopicRequest) SetRegionId(regionId string) {
+func (r *UpdateSubscribeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
+/* param logsetUID: 日志集 UID(Required) */
+func (r *UpdateSubscribeRequest) SetLogsetUID(logsetUID string) {
+    r.LogsetUID = logsetUID
+}
+
 /* param logtopicUID: 日志主题 UID(Required) */
-func (r *DescribeLogtopicRequest) SetLogtopicUID(logtopicUID string) {
+func (r *UpdateSubscribeRequest) SetLogtopicUID(logtopicUID string) {
     r.LogtopicUID = logtopicUID
+}
+
+/* param status: 日志订阅状态，0表示未创建，1表示刚创建，2表示开启，3表示关闭(Optional) */
+func (r *UpdateSubscribeRequest) SetStatus(status int64) {
+    r.Status = &status
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeLogtopicRequest) GetRegionId() string {
+func (r UpdateSubscribeRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeLogtopicResponse struct {
+type UpdateSubscribeResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeLogtopicResult `json:"result"`
+    Result UpdateSubscribeResult `json:"result"`
 }
 
-type DescribeLogtopicResult struct {
-    UID string `json:"uID"`
-    AppCode string `json:"appCode"`
-    AppName string `json:"appName"`
-    CollectInfoUID string `json:"collectInfoUID"`
-    CreateTime string `json:"createTime"`
-    Description string `json:"description"`
-    LogsetName string `json:"logsetName"`
-    LogsetUID string `json:"logsetUID"`
-    Name string `json:"name"`
-    PrePattern string `json:"prePattern"`
-    Region string `json:"region"`
+type UpdateSubscribeResult struct {
 }

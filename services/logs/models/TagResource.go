@@ -17,17 +17,14 @@
 package models
 
 
-type TemplateEnd struct {
+type TagResource struct {
 
-    /* UID (Optional) */
-    UID string `json:"uID"`
+    /* 区域 (Optional) */
+    Region *string `json:"region"`
 
-    /* 是否展示实列列表 (Optional) */
-    DisableTable int64 `json:"disableTable"`
+    /* 标签 key (Optional) */
+    TagKey *string `json:"tagKey"`
 
-    /* 模板名称 (Optional) */
-    Name string `json:"name"`
-
-    /* 是否是特殊模式的系统日志 (Optional) */
-    SpecialMode int64 `json:"specialMode"`
+    /* 标签 value (Optional) */
+    TagValue *string `json:"tagValue"`
 }

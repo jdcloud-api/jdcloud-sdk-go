@@ -17,17 +17,8 @@
 package models
 
 
-type TemplateEnd struct {
+type CreateParserEnd struct {
 
-    /* UID (Optional) */
-    UID string `json:"uID"`
-
-    /* 是否展示实列列表 (Optional) */
-    DisableTable int64 `json:"disableTable"`
-
-    /* 模板名称 (Optional) */
-    Name string `json:"name"`
-
-    /* 是否是特殊模式的系统日志 (Optional) */
-    SpecialMode int64 `json:"specialMode"`
+    /*  (Optional) */
+    Status string `json:"status"`
 }

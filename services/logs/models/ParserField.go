@@ -17,17 +17,20 @@
 package models
 
 
-type TemplateEnd struct {
+type ParserField struct {
 
-    /* UID (Optional) */
-    UID string `json:"uID"`
+    /*  (Optional) */
+    FieldFormat *string `json:"fieldFormat"`
 
-    /* 是否展示实列列表 (Optional) */
-    DisableTable int64 `json:"disableTable"`
+    /*   */
+    FieldType string `json:"fieldType"`
 
-    /* 模板名称 (Optional) */
+    /*   */
+    FieldValue string `json:"fieldValue"`
+
+    /*  (Optional) */
+    Index *int64 `json:"index"`
+
+    /*   */
     Name string `json:"name"`
-
-    /* 是否是特殊模式的系统日志 (Optional) */
-    SpecialMode int64 `json:"specialMode"`
 }

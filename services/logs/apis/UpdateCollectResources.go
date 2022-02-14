@@ -34,7 +34,7 @@ type UpdateCollectResourcesRequest struct {
     /* action  */
     Action string `json:"action"`
 
-    /* 采集实例列表（系统日志存在上限限制20） (Optional) */
+    /* 采集实例列表（系统日志存在上限限制） (Optional) */
     Resources []logs.Resource `json:"resources"`
 }
 
@@ -68,7 +68,7 @@ func NewUpdateCollectResourcesRequest(
  * param regionId: 地域 Id (Required)
  * param collectInfoUID: 采集配置 UID (Required)
  * param action: action (Required)
- * param resources: 采集实例列表（系统日志存在上限限制20） (Optional)
+ * param resources: 采集实例列表（系统日志存在上限限制） (Optional)
  */
 func NewUpdateCollectResourcesRequestWithAllParams(
     regionId string,
@@ -119,7 +119,7 @@ func (r *UpdateCollectResourcesRequest) SetAction(action string) {
     r.Action = action
 }
 
-/* param resources: 采集实例列表（系统日志存在上限限制20）(Optional) */
+/* param resources: 采集实例列表（系统日志存在上限限制）(Optional) */
 func (r *UpdateCollectResourcesRequest) SetResources(resources []logs.Resource) {
     r.Resources = resources
 }
