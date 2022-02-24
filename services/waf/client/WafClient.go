@@ -40,7 +40,7 @@ func NewWafClient(credential *core.Credential) *WafClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "waf",
-            Revision:    "1.0.4",
+            Revision:    "1.0.5",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -88,6 +88,26 @@ func (c *WafClient) GetQpsData(request *waf.GetQpsDataRequest) (*waf.GetQpsDataR
     }
 
     jdResp := &waf.GetQpsDataResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取网站在一定时间内的状态码报表信息。 */
+func (c *WafClient) GetStatusCodeInfo(request *waf.GetStatusCodeInfoRequest) (*waf.GetStatusCodeInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &waf.GetStatusCodeInfoResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -668,6 +688,26 @@ func (c *WafClient) ListWafConditions(request *waf.ListWafConditionsRequest) (*w
     }
 
     jdResp := &waf.ListWafConditionsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取网站在一定时间内主要的防护信息,新接口，无url响应时间分布。 */
+func (c *WafClient) GetMainAntiInfoNew(request *waf.GetMainAntiInfoNewRequest) (*waf.GetMainAntiInfoNewResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &waf.GetMainAntiInfoNewResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
