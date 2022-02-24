@@ -34,8 +34,14 @@ type Listener struct {
     /* Listener所属负载均衡类型，取值为：alb、nlb、dnlb (Optional) */
     LoadBalancerType string `json:"loadBalancerType"`
 
-    /* 监听协议, 取值为Tcp, Tls, Http, Https <br>【alb】支持Http, Https，Tcp和Tls <br>【nlb】支持Tcp  <br>【dnlb】支持Tcp (Optional) */
+    /* 监听协议, 取值为Tcp, Tls, Http, Https, Udp <br>【alb】支持Http, Https, Tcp, Tls和Udp <br>【nlb】支持Tcp, Udp  <br>【dnlb】支持Tcp, Udp (Optional) */
     Protocol string `json:"protocol"`
+
+    /* 【alb使用https时支持】是否开启HSTS，True(开启)， False(关闭) (Optional) */
+    HstsEnable bool `json:"hstsEnable"`
+
+    /* 【alb使用https时支持】HSTS过期时间(秒)，取值范围为[1, 94608000(3年)] (Optional) */
+    HstsMaxAge int `json:"hstsMaxAge"`
 
     /* 监听端口，取值范围为[1, 65535] (Optional) */
     Port int `json:"port"`
@@ -49,10 +55,10 @@ type Listener struct {
     /* 【alb Https和Http协议】转发规则组Id (Optional) */
     UrlMapId string `json:"urlMapId"`
 
-    /* 【alb、nlb】空闲连接超时时间, 范围为[1,86400]。 <br>（Tcp和Tls协议）默认为：1800s <br>（Http和Https协议）默认为：60s <br>【dnlb】不支持 (Optional) */
+    /* 【alb、nlb】空闲连接超时时间, 范围为[1,86400]。 <br>（Tcp和Tls协议）默认为：1800s <br>（Udp协议）默认为：300s <br>（Http和Https协议）默认为：60s <br>【dnlb】不支持 (Optional) */
     ConnectionIdleTimeSeconds int `json:"connectionIdleTimeSeconds"`
 
-    /* 【alb Https和Tls协议】Listener绑定的默认证书，只支持一个 (Optional) */
+    /* 【alb Https和Tls协议】Listener绑定的默认证书，最多支持两个，两个证书的加密算法需要不同 (Optional) */
     CertificateSpecs []CertificateSpec `json:"certificateSpecs"`
 
     /* Listener的描述信息 (Optional) */

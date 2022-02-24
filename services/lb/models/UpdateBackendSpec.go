@@ -34,7 +34,7 @@ type UpdateBackendSpec struct {
     /* 高可用组的Id列表，目前只支持一个，且与targetGroupIds不能同时存在 (Optional) */
     AgIds []string `json:"agIds"`
 
-    /* 【alb Tcp协议】是否启用Proxy ProtocolV1协议获取真实源ip, 取值为false(不开启)或者true(开启), 默认为false (Optional) */
+    /* 【alb Tcp、Udp协议】是否启用Proxy ProtocolV1协议获取真实源ip, 取值为false(不开启)或者true(开启), 默认为false (Optional) */
     ProxyProtocol bool `json:"proxyProtocol"`
 
     /* 描述,允许输入UTF-8编码下的全部字符，不超过256字符 (Optional) */
@@ -63,6 +63,9 @@ type UpdateBackendSpec struct {
 
     /* 【alb Http协议】获取负载均衡的vip, 取值为False(不获取)或True(获取) (Optional) */
     HttpForwardedVip bool `json:"httpForwardedVip"`
+
+    /* 【alb Http协议】获取请求端使用的端口, 取值为False(不获取)或True(获取) (Optional) */
+    HttpForwardedClientPort bool `json:"httpForwardedClientPort"`
 
     /* 【alb,dnlb】关闭健康检查，取值为false(不关闭)或true(关闭) (Optional) */
     CloseHealthCheck bool `json:"closeHealthCheck"`

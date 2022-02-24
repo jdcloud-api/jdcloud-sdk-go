@@ -30,7 +30,7 @@ type CreateLoadBalancerSpec struct {
     /* LoadBalancer的类型，取值：alb、nlb、dnlb，默认为alb (Optional) */
     Type string `json:"type"`
 
-    /* 【alb，nlb】LoadBalancer所属availability Zone列表,对于alb,nlb是必选参数 <br>【dnlb】全可用区可用，不必传该参数  */
+    /* 【alb，nlb】LoadBalancer所属availability Zone列表,对于alb,nlb是必选参数，可用区个数不能超过2个 <br>【dnlb】全可用区可用，不必传该参数 (Optional) */
     Azs []string `json:"azs"`
 
     /* 【alb】支持按用量计费，默认为按用量。【nlb】支持按用量计费。【dnlb】支持按配置计费 (Optional) */
@@ -39,11 +39,17 @@ type CreateLoadBalancerSpec struct {
     /* 负载均衡关联的弹性IP规格 (Optional) */
     ElasticIp vpc.ElasticIpSpec `json:"elasticIp"`
 
+    /* 指定LoadBalancer的VIP(内网IPv4地址)，需要属于指定的子网并且未被占用 (Optional) */
+    PrivateIpAddress string `json:"privateIpAddress"`
+
     /* 【alb】 安全组 ID列表 (Optional) */
     SecurityGroupIds []string `json:"securityGroupIds"`
 
     /* LoadBalancer的描述信息,允许输入UTF-8编码下的全部字符，不超过256字符 (Optional) */
     Description string `json:"description"`
+
+    /* 是否绑定域名，包括外网和内网，缺省为False(关闭) (Optional) */
+    DomainEnable bool `json:"domainEnable"`
 
     /* 删除保护，取值为True(开启)或False(关闭)，默认为False (Optional) */
     DeleteProtection bool `json:"deleteProtection"`

@@ -39,8 +39,14 @@ type UpdateLoadBalancerRequest struct {
     /* LoadBalancer的描述信息,允许输入UTF-8编码下的全部字符，不超过256字符 (Optional) */
     Description *string `json:"description"`
 
+    /* 是否绑定域名，包括外网和内网，缺省为不改变原值 (Optional) */
+    DomainEnable *bool `json:"domainEnable"`
+
     /* 删除保护，取值为True(开启)或False(关闭)，默认为False (Optional) */
     DeleteProtection *bool `json:"deleteProtection"`
+
+    /* 变更loadBalancer的vip地址，新地址只允许是loadBalancer本子网中的空闲ip地址，缺省为不改变原值 (Optional) */
+    PrivateIpAddress *string `json:"privateIpAddress"`
 }
 
 /*
@@ -72,7 +78,9 @@ func NewUpdateLoadBalancerRequest(
  * param loadBalancerName: LoadBalancer的名称,只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符 (Optional)
  * param action: 启用或停止LoadBalancer，取值为Start(启用)或Stop(停止) (Optional)
  * param description: LoadBalancer的描述信息,允许输入UTF-8编码下的全部字符，不超过256字符 (Optional)
+ * param domainEnable: 是否绑定域名，包括外网和内网，缺省为不改变原值 (Optional)
  * param deleteProtection: 删除保护，取值为True(开启)或False(关闭)，默认为False (Optional)
+ * param privateIpAddress: 变更loadBalancer的vip地址，新地址只允许是loadBalancer本子网中的空闲ip地址，缺省为不改变原值 (Optional)
  */
 func NewUpdateLoadBalancerRequestWithAllParams(
     regionId string,
@@ -80,7 +88,9 @@ func NewUpdateLoadBalancerRequestWithAllParams(
     loadBalancerName *string,
     action *string,
     description *string,
+    domainEnable *bool,
     deleteProtection *bool,
+    privateIpAddress *string,
 ) *UpdateLoadBalancerRequest {
 
     return &UpdateLoadBalancerRequest{
@@ -95,7 +105,9 @@ func NewUpdateLoadBalancerRequestWithAllParams(
         LoadBalancerName: loadBalancerName,
         Action: action,
         Description: description,
+        DomainEnable: domainEnable,
         DeleteProtection: deleteProtection,
+        PrivateIpAddress: privateIpAddress,
     }
 }
 
@@ -137,9 +149,19 @@ func (r *UpdateLoadBalancerRequest) SetDescription(description string) {
     r.Description = &description
 }
 
+/* param domainEnable: 是否绑定域名，包括外网和内网，缺省为不改变原值(Optional) */
+func (r *UpdateLoadBalancerRequest) SetDomainEnable(domainEnable bool) {
+    r.DomainEnable = &domainEnable
+}
+
 /* param deleteProtection: 删除保护，取值为True(开启)或False(关闭)，默认为False(Optional) */
 func (r *UpdateLoadBalancerRequest) SetDeleteProtection(deleteProtection bool) {
     r.DeleteProtection = &deleteProtection
+}
+
+/* param privateIpAddress: 变更loadBalancer的vip地址，新地址只允许是loadBalancer本子网中的空闲ip地址，缺省为不改变原值(Optional) */
+func (r *UpdateLoadBalancerRequest) SetPrivateIpAddress(privateIpAddress string) {
+    r.PrivateIpAddress = &privateIpAddress
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
