@@ -31,7 +31,7 @@ type Backend struct {
     /* 后端服务所属负载均衡类型，取值为：alb、nlb、dnlb (Optional) */
     LoadBalancerType string `json:"loadBalancerType"`
 
-    /* 后端服务的协议 <br>【alb】包括Http，Tcp <br>【nlb】包括Tcp <br>【dnlb】包括Tcp (Optional) */
+    /* 后端服务的协议 <br>【alb】包括Http，Tcp <br>【nlb】包括Tcp，Udp <br>【dnlb】包括Tcp，Udp (Optional) */
     Protocol string `json:"protocol"`
 
     /* 后端服务的端口，取值范围为[1, 65535] (Optional) */
@@ -46,7 +46,7 @@ type Backend struct {
     /* 高可用组的Id列表，目前只支持一个，且与targetGroupIds不能同时存在 (Optional) */
     AgIds []string `json:"agIds"`
 
-    /* 【alb tcp协议】通过Proxy Protocol协议获取真实ip, 取值为False(不获取)或者True(获取,支持v1版本) (Optional) */
+    /* 【alb Tcp/Udp协议】通过Proxy Protocol协议获取真实ip, 取值为False(不获取)或者True(获取,支持v1版本) (Optional) */
     ProxyProtocol bool `json:"proxyProtocol"`
 
     /* 后端服务的描述信息 (Optional) */
@@ -75,6 +75,9 @@ type Backend struct {
 
     /* 【alb http协议】获取负载均衡的vip, 取值为False(不获取)或True(获取) (Optional) */
     HttpForwardedVip bool `json:"httpForwardedVip"`
+
+    /* 【alb Http协议】获取请求端使用的端口, 取值为False(不获取)或True(获取) (Optional) */
+    HttpForwardedClientPort bool `json:"httpForwardedClientPort"`
 
     /* 健康检查,数据结构：<br>protocol（string）健康检查协议,【ALB、NLB】取值为Http, Tcp，【DNLB】取值为Tcp;<br>healthyThresholdCount（integer）健康阀值，取值范围为[1,5]，默认为3;<br>unhealthyThresholdCount（integer）不健康阀值，取值范围为[1,5], 默认为3;<br>checkTimeoutSeconds（integer）响应超时时间, 取值范围为[2,60]，默认为3s;<br>intervalSeconds（integer）健康检查间隔, 范围为[5,300], 默认为5s;<br>port（integer）检查端口, 取值范围为[0,65535], 默认为0，默认端口为每个后端服务器接收负载均衡流量的端口;<br>httpDomain（string）【Http协议】检查域名;<br>httpPath（string）【Http协议】检查路径, 健康检查的目标路径，必须以"/"开头，允许输入具体的文件路径，默认为根目录;<br>httpCode（[]string）【Http协议】检查来自后端服务器的成功响应时，要使用的HTTP状态码。您可以指定：单个数值（例如："200"，取值范围200-499）、一段连续数值（例如："201-205"，取值范围范围200-499，且前面的参数小于后面）和一类连续数值缩写（例如："3xx"，等价于"300-399"，取值范围2xx、3xx和4xx）。多个数值之间通过","分割（例如："200,202-207,302,4xx"）。目前仅支持2xx、3xx、4xx。 (Optional) */
     HealthCheck interface{} `json:"healthCheck"`

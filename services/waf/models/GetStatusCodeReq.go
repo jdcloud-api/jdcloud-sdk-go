@@ -20,10 +20,10 @@ package models
 type GetStatusCodeReq struct {
 
     /* 实例id，代表要查询的WAF实例，为空时表示当前用户下的所有实例 (Optional) */
-    WafInstanceId string `json:"wafInstanceId"`
+    WafInstanceId *string `json:"wafInstanceId"`
 
     /* 域名，为空时表示当前实例下的所有域名 (Optional) */
-    Domain string `json:"domain"`
+    Domain *string `json:"domain"`
 
     /* 开始时间戳，单位秒，时间间隔要求大于5分钟，小于30天。  */
     Start int `json:"start"`
@@ -35,5 +35,5 @@ type GetStatusCodeReq struct {
     StatusCode []string `json:"statusCode"`
 
     /* true表示获取状态码统计图、占比图。 (Optional) */
-    IsStaCode bool `json:"isStaCode"`
+    IsStaCode *bool `json:"isStaCode"`
 }

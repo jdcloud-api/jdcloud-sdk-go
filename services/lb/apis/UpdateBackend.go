@@ -46,7 +46,7 @@ type UpdateBackendRequest struct {
     /* 高可用组的Id列表，目前只支持一个，且与targetGroupIds不能同时存在 (Optional) */
     AgIds []string `json:"agIds"`
 
-    /* 【alb Tcp协议】是否启用Proxy ProtocolV1协议获取真实源ip, 取值为false(不开启)或者true(开启), 默认为false (Optional) */
+    /* 【alb Tcp、Udp协议】是否启用Proxy ProtocolV1协议获取真实源ip, 取值为false(不开启)或者true(开启), 默认为false (Optional) */
     ProxyProtocol *bool `json:"proxyProtocol"`
 
     /* 描述,允许输入UTF-8编码下的全部字符，不超过256字符 (Optional) */
@@ -75,6 +75,9 @@ type UpdateBackendRequest struct {
 
     /* 【alb Http协议】获取负载均衡的vip, 取值为False(不获取)或True(获取) (Optional) */
     HttpForwardedVip *bool `json:"httpForwardedVip"`
+
+    /* 【alb Http协议】获取请求端使用的端口, 取值为False(不获取)或True(获取) (Optional) */
+    HttpForwardedClientPort *bool `json:"httpForwardedClientPort"`
 
     /* 【alb,dnlb】关闭健康检查，取值为false(不关闭)或true(关闭) (Optional) */
     CloseHealthCheck *bool `json:"closeHealthCheck"`
@@ -111,7 +114,7 @@ func NewUpdateBackendRequest(
  * param algorithm: 调度算法 <br>【alb,nlb】取值范围为[IpHash, RoundRobin, LeastConn]（含义分别为：加权源Ip哈希，加权轮询和加权最小连接） <br>【dnlb】取值范围为[IpHash, QuintupleHash]（含义分别为：加权源Ip哈希和加权五元组哈希） (Optional)
  * param targetGroupIds: 虚拟服务器组的Id列表，目前只支持一个，且与agIds不能同时存在 (Optional)
  * param agIds: 高可用组的Id列表，目前只支持一个，且与targetGroupIds不能同时存在 (Optional)
- * param proxyProtocol: 【alb Tcp协议】是否启用Proxy ProtocolV1协议获取真实源ip, 取值为false(不开启)或者true(开启), 默认为false (Optional)
+ * param proxyProtocol: 【alb Tcp、Udp协议】是否启用Proxy ProtocolV1协议获取真实源ip, 取值为false(不开启)或者true(开启), 默认为false (Optional)
  * param description: 描述,允许输入UTF-8编码下的全部字符，不超过256字符 (Optional)
  * param sessionStickiness: 会话保持, 取值为false(不开启)或者true(开启)，默认为false <br>【alb Http协议，RoundRobin算法】支持基于cookie的会话保持 <br>【nlb】支持基于报文源目的IP的会话保持 (Optional)
  * param sessionStickyTimeout: 【nlb】会话保持超时时间，sessionStickiness开启时生效, 取值范围[1-3600] (Optional)
@@ -121,6 +124,7 @@ func NewUpdateBackendRequest(
  * param httpForwardedPort: 【alb Http协议】获取负载均衡的端口, 取值为False(不获取)或True(获取) (Optional)
  * param httpForwardedHost: 【alb Http协议】获取负载均衡的host信息, 取值为False(不获取)或True(获取) (Optional)
  * param httpForwardedVip: 【alb Http协议】获取负载均衡的vip, 取值为False(不获取)或True(获取) (Optional)
+ * param httpForwardedClientPort: 【alb Http协议】获取请求端使用的端口, 取值为False(不获取)或True(获取) (Optional)
  * param closeHealthCheck: 【alb,dnlb】关闭健康检查，取值为false(不关闭)或true(关闭) (Optional)
  */
 func NewUpdateBackendRequestWithAllParams(
@@ -141,6 +145,7 @@ func NewUpdateBackendRequestWithAllParams(
     httpForwardedPort *bool,
     httpForwardedHost *bool,
     httpForwardedVip *bool,
+    httpForwardedClientPort *bool,
     closeHealthCheck *bool,
 ) *UpdateBackendRequest {
 
@@ -168,6 +173,7 @@ func NewUpdateBackendRequestWithAllParams(
         HttpForwardedPort: httpForwardedPort,
         HttpForwardedHost: httpForwardedHost,
         HttpForwardedVip: httpForwardedVip,
+        HttpForwardedClientPort: httpForwardedClientPort,
         CloseHealthCheck: closeHealthCheck,
     }
 }
@@ -220,7 +226,7 @@ func (r *UpdateBackendRequest) SetAgIds(agIds []string) {
     r.AgIds = agIds
 }
 
-/* param proxyProtocol: 【alb Tcp协议】是否启用Proxy ProtocolV1协议获取真实源ip, 取值为false(不开启)或者true(开启), 默认为false(Optional) */
+/* param proxyProtocol: 【alb Tcp、Udp协议】是否启用Proxy ProtocolV1协议获取真实源ip, 取值为false(不开启)或者true(开启), 默认为false(Optional) */
 func (r *UpdateBackendRequest) SetProxyProtocol(proxyProtocol bool) {
     r.ProxyProtocol = &proxyProtocol
 }
@@ -268,6 +274,11 @@ func (r *UpdateBackendRequest) SetHttpForwardedHost(httpForwardedHost bool) {
 /* param httpForwardedVip: 【alb Http协议】获取负载均衡的vip, 取值为False(不获取)或True(获取)(Optional) */
 func (r *UpdateBackendRequest) SetHttpForwardedVip(httpForwardedVip bool) {
     r.HttpForwardedVip = &httpForwardedVip
+}
+
+/* param httpForwardedClientPort: 【alb Http协议】获取请求端使用的端口, 取值为False(不获取)或True(获取)(Optional) */
+func (r *UpdateBackendRequest) SetHttpForwardedClientPort(httpForwardedClientPort bool) {
+    r.HttpForwardedClientPort = &httpForwardedClientPort
 }
 
 /* param closeHealthCheck: 【alb,dnlb】关闭健康检查，取值为false(不关闭)或true(关闭)(Optional) */

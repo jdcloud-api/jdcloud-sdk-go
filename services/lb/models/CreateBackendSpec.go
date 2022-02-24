@@ -25,7 +25,7 @@ type CreateBackendSpec struct {
     /* 后端服务所属负载均衡的Id  */
     LoadBalancerId string `json:"loadBalancerId"`
 
-    /* 后端服务的协议 <br>【alb】取值范围：Http、Tcp <br>【nlb】取值范围：Tcp <br>【dnlb】取值范围：Tcp  */
+    /* 后端服务的协议 <br>【alb】取值范围：Http、Tcp、Udp <br>【nlb】取值范围：Tcp、Udp <br>【dnlb】取值范围：Tcp、Udp  */
     Protocol string `json:"protocol"`
 
     /* 后端服务的端口，取值范围为[1, 65535]，如指定了TargetSpec中的port，实际按照target指定的port进行转发  */
@@ -43,7 +43,7 @@ type CreateBackendSpec struct {
     /* 高可用组的Id列表，目前只支持一个，且与targetGroupIds不能同时存在 (Optional) */
     AgIds []string `json:"agIds"`
 
-    /* 【alb Tcp协议】获取真实ip, 取值为False(不获取)或者True(获取,支持Proxy Protocol v1版本)，默认为False (Optional) */
+    /* 【alb Tcp、Udp协议】获取真实ip, 取值为False(不获取)或者True(获取,支持Proxy Protocol v1版本)，默认为False (Optional) */
     ProxyProtocol bool `json:"proxyProtocol"`
 
     /* 描述,允许输入UTF-8编码下的全部字符，不超过256字符 (Optional) */
@@ -72,4 +72,7 @@ type CreateBackendSpec struct {
 
     /* 【alb Http协议】获取负载均衡的vip, 取值为False(不获取)或True(获取), 默认为False (Optional) */
     HttpForwardedVip bool `json:"httpForwardedVip"`
+
+    /* 【alb Http协议】获取请求端使用的端口, 取值为False(不获取)或True(获取), 默认为False (Optional) */
+    HttpForwardedClientPort bool `json:"httpForwardedClientPort"`
 }

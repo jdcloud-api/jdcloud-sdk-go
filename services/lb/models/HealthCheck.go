@@ -19,7 +19,7 @@ package models
 
 type HealthCheck struct {
 
-    /* 健康检查协议 <br>【alb、nlb】取值为Http, Tcp <br>【dnlb】取值为Tcp (Optional) */
+    /* 健康检查协议 <br>【alb、nlb】取值为Http, Tcp, Icmp(仅支持alb/nlb的Udp的Backend) <br>【dnlb】取值为Tcp, Icmp(仅支持dnlb的Udp的Backend) (Optional) */
     Protocol string `json:"protocol"`
 
     /* 健康阀值，>=1，默认为3 (Optional) */
@@ -34,7 +34,7 @@ type HealthCheck struct {
     /* 健康检查间隔, 范围为[5,300], 默认为5s (Optional) */
     IntervalSeconds int `json:"intervalSeconds"`
 
-    /* 检查端口, 取值范围为[0,65535], 默认为0，默认端口为每个后端实例接收负载均衡流量的端口 (Optional) */
+    /* 检查端口, 取值范围为[0,65535], 默认为0，默认端口为每个后端实例接收负载均衡流量的端口，Icmp不支持端口 (Optional) */
     Port int `json:"port"`
 
     /* 【Http协议】检查域名，支持输入域名和IP地址。如果输入域名，仅支持大小写字母、数字、英文中划线"-"和点"."，不区分大小写，且不超过255个字符。默认为空，表示健康检查不携带域名 (Optional) */

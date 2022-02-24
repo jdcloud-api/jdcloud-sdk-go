@@ -34,7 +34,7 @@ type CreateBackendRequest struct {
     /* 后端服务所属负载均衡的Id  */
     LoadBalancerId string `json:"loadBalancerId"`
 
-    /* 后端服务的协议 <br>【alb】取值范围：Http、Tcp <br>【nlb】取值范围：Tcp <br>【dnlb】取值范围：Tcp  */
+    /* 后端服务的协议 <br>【alb】取值范围：Http、Tcp、Udp <br>【nlb】取值范围：Tcp、Udp <br>【dnlb】取值范围：Tcp、Udp  */
     Protocol string `json:"protocol"`
 
     /* 后端服务的端口，取值范围为[1, 65535]，如指定了TargetSpec中的port，实际按照target指定的port进行转发  */
@@ -52,7 +52,7 @@ type CreateBackendRequest struct {
     /* 高可用组的Id列表，目前只支持一个，且与targetGroupIds不能同时存在 (Optional) */
     AgIds []string `json:"agIds"`
 
-    /* 【alb Tcp协议】获取真实ip, 取值为False(不获取)或者True(获取,支持Proxy Protocol v1版本)，默认为False (Optional) */
+    /* 【alb Tcp、Udp协议】获取真实ip, 取值为False(不获取)或者True(获取,支持Proxy Protocol v1版本)，默认为False (Optional) */
     ProxyProtocol *bool `json:"proxyProtocol"`
 
     /* 描述,允许输入UTF-8编码下的全部字符，不超过256字符 (Optional) */
@@ -81,13 +81,16 @@ type CreateBackendRequest struct {
 
     /* 【alb Http协议】获取负载均衡的vip, 取值为False(不获取)或True(获取), 默认为False (Optional) */
     HttpForwardedVip *bool `json:"httpForwardedVip"`
+
+    /* 【alb Http协议】获取请求端使用的端口, 取值为False(不获取)或True(获取), 默认为False (Optional) */
+    HttpForwardedClientPort *bool `json:"httpForwardedClientPort"`
 }
 
 /*
  * param regionId: Region ID (Required)
  * param backendName: 后端服务名字,只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符 (Required)
  * param loadBalancerId: 后端服务所属负载均衡的Id (Required)
- * param protocol: 后端服务的协议 <br>【alb】取值范围：Http、Tcp <br>【nlb】取值范围：Tcp <br>【dnlb】取值范围：Tcp (Required)
+ * param protocol: 后端服务的协议 <br>【alb】取值范围：Http、Tcp、Udp <br>【nlb】取值范围：Tcp、Udp <br>【dnlb】取值范围：Tcp、Udp (Required)
  * param port: 后端服务的端口，取值范围为[1, 65535]，如指定了TargetSpec中的port，实际按照target指定的port进行转发 (Required)
  * param healthCheckSpec: 健康检查信息 (Required)
  *
@@ -122,13 +125,13 @@ func NewCreateBackendRequest(
  * param regionId: Region ID (Required)
  * param backendName: 后端服务名字,只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符 (Required)
  * param loadBalancerId: 后端服务所属负载均衡的Id (Required)
- * param protocol: 后端服务的协议 <br>【alb】取值范围：Http、Tcp <br>【nlb】取值范围：Tcp <br>【dnlb】取值范围：Tcp (Required)
+ * param protocol: 后端服务的协议 <br>【alb】取值范围：Http、Tcp、Udp <br>【nlb】取值范围：Tcp、Udp <br>【dnlb】取值范围：Tcp、Udp (Required)
  * param port: 后端服务的端口，取值范围为[1, 65535]，如指定了TargetSpec中的port，实际按照target指定的port进行转发 (Required)
  * param healthCheckSpec: 健康检查信息 (Required)
  * param algorithm: 调度算法 <br>【alb,nlb】取值范围为[IpHash, RoundRobin, LeastConn]（取值范围的含义：加权源Ip哈希，加权轮询和加权最小连接），alb和nlb默认为加权轮询 <br>【dnlb】取值范围为[IpHash, QuintupleHash]（取值范围的含义分别为：加权源Ip哈希和加权五元组哈希），dnlb默认为加权源Ip哈希 (Optional)
  * param targetGroupIds: 虚拟服务器组的Id列表，目前只支持一个，且与agIds不能同时存在 (Optional)
  * param agIds: 高可用组的Id列表，目前只支持一个，且与targetGroupIds不能同时存在 (Optional)
- * param proxyProtocol: 【alb Tcp协议】获取真实ip, 取值为False(不获取)或者True(获取,支持Proxy Protocol v1版本)，默认为False (Optional)
+ * param proxyProtocol: 【alb Tcp、Udp协议】获取真实ip, 取值为False(不获取)或者True(获取,支持Proxy Protocol v1版本)，默认为False (Optional)
  * param description: 描述,允许输入UTF-8编码下的全部字符，不超过256字符 (Optional)
  * param sessionStickiness: 会话保持, 取值为false(不开启)或者true(开启)，默认为false <br>【alb Http协议，RoundRobin算法】支持基于cookie的会话保持 <br>【nlb】支持基于报文源目的IP的会话保持 (Optional)
  * param sessionStickyTimeout: 【nlb】会话保持超时时间，sessionStickiness开启时生效，默认300s, 取值范围[1-3600] (Optional)
@@ -138,6 +141,7 @@ func NewCreateBackendRequest(
  * param httpForwardedPort: 【alb Http协议】获取负载均衡的端口, 取值为False(不获取)或True(获取), 默认为False (Optional)
  * param httpForwardedHost: 【alb Http协议】获取负载均衡的host信息, 取值为False(不获取)或True(获取), 默认为False (Optional)
  * param httpForwardedVip: 【alb Http协议】获取负载均衡的vip, 取值为False(不获取)或True(获取), 默认为False (Optional)
+ * param httpForwardedClientPort: 【alb Http协议】获取请求端使用的端口, 取值为False(不获取)或True(获取), 默认为False (Optional)
  */
 func NewCreateBackendRequestWithAllParams(
     regionId string,
@@ -159,6 +163,7 @@ func NewCreateBackendRequestWithAllParams(
     httpForwardedPort *bool,
     httpForwardedHost *bool,
     httpForwardedVip *bool,
+    httpForwardedClientPort *bool,
 ) *CreateBackendRequest {
 
     return &CreateBackendRequest{
@@ -187,6 +192,7 @@ func NewCreateBackendRequestWithAllParams(
         HttpForwardedPort: httpForwardedPort,
         HttpForwardedHost: httpForwardedHost,
         HttpForwardedVip: httpForwardedVip,
+        HttpForwardedClientPort: httpForwardedClientPort,
     }
 }
 
@@ -218,7 +224,7 @@ func (r *CreateBackendRequest) SetLoadBalancerId(loadBalancerId string) {
     r.LoadBalancerId = loadBalancerId
 }
 
-/* param protocol: 后端服务的协议 <br>【alb】取值范围：Http、Tcp <br>【nlb】取值范围：Tcp <br>【dnlb】取值范围：Tcp(Required) */
+/* param protocol: 后端服务的协议 <br>【alb】取值范围：Http、Tcp、Udp <br>【nlb】取值范围：Tcp、Udp <br>【dnlb】取值范围：Tcp、Udp(Required) */
 func (r *CreateBackendRequest) SetProtocol(protocol string) {
     r.Protocol = protocol
 }
@@ -248,7 +254,7 @@ func (r *CreateBackendRequest) SetAgIds(agIds []string) {
     r.AgIds = agIds
 }
 
-/* param proxyProtocol: 【alb Tcp协议】获取真实ip, 取值为False(不获取)或者True(获取,支持Proxy Protocol v1版本)，默认为False(Optional) */
+/* param proxyProtocol: 【alb Tcp、Udp协议】获取真实ip, 取值为False(不获取)或者True(获取,支持Proxy Protocol v1版本)，默认为False(Optional) */
 func (r *CreateBackendRequest) SetProxyProtocol(proxyProtocol bool) {
     r.ProxyProtocol = &proxyProtocol
 }
@@ -296,6 +302,11 @@ func (r *CreateBackendRequest) SetHttpForwardedHost(httpForwardedHost bool) {
 /* param httpForwardedVip: 【alb Http协议】获取负载均衡的vip, 取值为False(不获取)或True(获取), 默认为False(Optional) */
 func (r *CreateBackendRequest) SetHttpForwardedVip(httpForwardedVip bool) {
     r.HttpForwardedVip = &httpForwardedVip
+}
+
+/* param httpForwardedClientPort: 【alb Http协议】获取请求端使用的端口, 取值为False(不获取)或True(获取), 默认为False(Optional) */
+func (r *CreateBackendRequest) SetHttpForwardedClientPort(httpForwardedClientPort bool) {
+    r.HttpForwardedClientPort = &httpForwardedClientPort
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

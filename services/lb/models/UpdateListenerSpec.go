@@ -25,7 +25,13 @@ type UpdateListenerSpec struct {
     /* Listener状态, 取值为On或者为Off (Optional) */
     Status string `json:"status"`
 
-    /* 【alb Https和Tls协议】Listener绑定的默认证书，只支持一个证书 (Optional) */
+    /* 【alb使用https时支持】是否开启HSTS，True(开启)， False(关闭)，缺省为不改变原值 (Optional) */
+    HstsEnable bool `json:"hstsEnable"`
+
+    /* 【alb使用https时支持】HSTS过期时间(秒)，取值范围为[1, 94608000(3年)]，缺省为不改变原值 (Optional) */
+    HstsMaxAge int `json:"hstsMaxAge"`
+
+    /* 【alb Https和Tls协议】Listener绑定的默认证书，最多支持两个，两个证书的加密算法需要不同 (Optional) */
     CertificateSpecs []CertificateSpec `json:"certificateSpecs"`
 
     /* 【alb、nlb】空闲连接超时时间, 范围为[1,86400]。 <br>（Tcp和Tls协议）默认为：1800s <br>（Http和Https协议）默认为：60s <br>【dnlb】不支持该功能 (Optional) */

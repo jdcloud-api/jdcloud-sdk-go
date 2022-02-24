@@ -39,6 +39,8 @@ type DescribeLoadBalancersRequest struct {
 loadBalancerIds - 负载均衡ID列表，支持多个
 loadBalancerNames - 负载均衡名称列表，支持多个
 vpcId - 负载均衡所在Vpc的Id，支持单个
+azType - 负载均衡az类型，取值：all(全部类型)，standard(标准负载均衡)，edge(边缘负载均衡)，支持单个
+azs - 可用区，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
 
@@ -74,6 +76,8 @@ func NewDescribeLoadBalancersRequest(
 loadBalancerIds - 负载均衡ID列表，支持多个
 loadBalancerNames - 负载均衡名称列表，支持多个
 vpcId - 负载均衡所在Vpc的Id，支持单个
+azType - 负载均衡az类型，取值：all(全部类型)，standard(标准负载均衡)，edge(边缘负载均衡)，支持单个
+azs - 可用区，支持多个
  (Optional)
  * param tags: Tag筛选条件 (Optional)
  */
@@ -132,6 +136,8 @@ func (r *DescribeLoadBalancersRequest) SetPageSize(pageSize int) {
 loadBalancerIds - 负载均衡ID列表，支持多个
 loadBalancerNames - 负载均衡名称列表，支持多个
 vpcId - 负载均衡所在Vpc的Id，支持单个
+azType - 负载均衡az类型，取值：all(全部类型)，standard(标准负载均衡)，edge(边缘负载均衡)，支持单个
+azs - 可用区，支持多个
 (Optional) */
 func (r *DescribeLoadBalancersRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters

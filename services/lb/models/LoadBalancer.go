@@ -56,9 +56,21 @@ type LoadBalancer struct {
     /* LoadBalancer的描述信息 (Optional) */
     Description string `json:"description"`
 
+    /* 是否绑定域名，包括外网和内网，取值为True(开启)或False(关闭) (Optional) */
+    DomainEnable bool `json:"domainEnable"`
+
+    /* 内网域名，域名绑定开启时为空，表示还没有正常绑定 (Optional) */
+    InternalDomain string `json:"internalDomain"`
+
+    /* 外网域名，域名绑定开启时为空，表示还没有正常绑定 (Optional) */
+    InternetDomain string `json:"internetDomain"`
+
     /* 删除保护，取值为True(开启)或False(关闭) (Optional) */
     DeleteProtection bool `json:"deleteProtection"`
 
     /* LoadBalancer的创建时间 (Optional) */
     CreatedTime string `json:"createdTime"`
+
+    /* lb所在位置类型，取值：standard(标准负载均衡)，edge(边缘负载均衡) (Optional) */
+    AzType string `json:"azType"`
 }
