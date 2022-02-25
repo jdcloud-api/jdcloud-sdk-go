@@ -39,7 +39,7 @@ type CreateLoadBalancerRequest struct {
     /* LoadBalancer的类型，取值：alb、nlb、dnlb，默认为alb (Optional) */
     Type *string `json:"type"`
 
-    /* 【alb，nlb】LoadBalancer所属availability Zone列表,对于alb,nlb是必选参数，可用区个数不能超过2个 <br>【dnlb】全可用区可用，不必传该参数 (Optional) */
+    /* 【alb，nlb】LoadBalancer所属availability Zone列表,对于alb,nlb是必选参数，可用区个数不能超过2个 <br>【dnlb】中心可用区，dnlb不需要传该参数，全可用区可用；边缘可用区，仅支持传入单可用区 (Optional) */
     Azs []string `json:"azs"`
 
     /* 【alb】支持按用量计费，默认为按用量。【nlb】支持按用量计费。【dnlb】支持按配置计费 (Optional) */
@@ -56,9 +56,6 @@ type CreateLoadBalancerRequest struct {
 
     /* LoadBalancer的描述信息,允许输入UTF-8编码下的全部字符，不超过256字符 (Optional) */
     Description *string `json:"description"`
-
-    /* 是否绑定域名，包括外网和内网，缺省为False(关闭) (Optional) */
-    DomainEnable *bool `json:"domainEnable"`
 
     /* 删除保护，取值为True(开启)或False(关闭)，默认为False (Optional) */
     DeleteProtection *bool `json:"deleteProtection"`
@@ -98,13 +95,12 @@ func NewCreateLoadBalancerRequest(
  * param loadBalancerName: LoadBalancer的名称,只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符 (Required)
  * param subnetId: LoadBalancer所属子网的Id (Required)
  * param type_: LoadBalancer的类型，取值：alb、nlb、dnlb，默认为alb (Optional)
- * param azs: 【alb，nlb】LoadBalancer所属availability Zone列表,对于alb,nlb是必选参数，可用区个数不能超过2个 <br>【dnlb】全可用区可用，不必传该参数 (Optional)
+ * param azs: 【alb，nlb】LoadBalancer所属availability Zone列表,对于alb,nlb是必选参数，可用区个数不能超过2个 <br>【dnlb】中心可用区，dnlb不需要传该参数，全可用区可用；边缘可用区，仅支持传入单可用区 (Optional)
  * param chargeSpec: 【alb】支持按用量计费，默认为按用量。【nlb】支持按用量计费。【dnlb】支持按配置计费 (Optional)
  * param elasticIp: 负载均衡关联的弹性IP规格 (Optional)
  * param privateIpAddress: 指定LoadBalancer的VIP(内网IPv4地址)，需要属于指定的子网并且未被占用 (Optional)
  * param securityGroupIds: 【alb】 安全组 ID列表 (Optional)
  * param description: LoadBalancer的描述信息,允许输入UTF-8编码下的全部字符，不超过256字符 (Optional)
- * param domainEnable: 是否绑定域名，包括外网和内网，缺省为False(关闭) (Optional)
  * param deleteProtection: 删除保护，取值为True(开启)或False(关闭)，默认为False (Optional)
  * param userTags: 用户tag 信息 (Optional)
  */
@@ -119,7 +115,6 @@ func NewCreateLoadBalancerRequestWithAllParams(
     privateIpAddress *string,
     securityGroupIds []string,
     description *string,
-    domainEnable *bool,
     deleteProtection *bool,
     userTags []lb.Tag,
 ) *CreateLoadBalancerRequest {
@@ -141,7 +136,6 @@ func NewCreateLoadBalancerRequestWithAllParams(
         PrivateIpAddress: privateIpAddress,
         SecurityGroupIds: securityGroupIds,
         Description: description,
-        DomainEnable: domainEnable,
         DeleteProtection: deleteProtection,
         UserTags: userTags,
     }
@@ -180,7 +174,7 @@ func (r *CreateLoadBalancerRequest) SetType(type_ string) {
     r.Type = &type_
 }
 
-/* param azs: 【alb，nlb】LoadBalancer所属availability Zone列表,对于alb,nlb是必选参数，可用区个数不能超过2个 <br>【dnlb】全可用区可用，不必传该参数(Optional) */
+/* param azs: 【alb，nlb】LoadBalancer所属availability Zone列表,对于alb,nlb是必选参数，可用区个数不能超过2个 <br>【dnlb】中心可用区，dnlb不需要传该参数，全可用区可用；边缘可用区，仅支持传入单可用区(Optional) */
 func (r *CreateLoadBalancerRequest) SetAzs(azs []string) {
     r.Azs = azs
 }
@@ -208,11 +202,6 @@ func (r *CreateLoadBalancerRequest) SetSecurityGroupIds(securityGroupIds []strin
 /* param description: LoadBalancer的描述信息,允许输入UTF-8编码下的全部字符，不超过256字符(Optional) */
 func (r *CreateLoadBalancerRequest) SetDescription(description string) {
     r.Description = &description
-}
-
-/* param domainEnable: 是否绑定域名，包括外网和内网，缺省为False(关闭)(Optional) */
-func (r *CreateLoadBalancerRequest) SetDomainEnable(domainEnable bool) {
-    r.DomainEnable = &domainEnable
 }
 
 /* param deleteProtection: 删除保护，取值为True(开启)或False(关闭)，默认为False(Optional) */

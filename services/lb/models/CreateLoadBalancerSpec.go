@@ -30,7 +30,7 @@ type CreateLoadBalancerSpec struct {
     /* LoadBalancer的类型，取值：alb、nlb、dnlb，默认为alb (Optional) */
     Type string `json:"type"`
 
-    /* 【alb，nlb】LoadBalancer所属availability Zone列表,对于alb,nlb是必选参数，可用区个数不能超过2个 <br>【dnlb】全可用区可用，不必传该参数 (Optional) */
+    /* 【alb，nlb】LoadBalancer所属availability Zone列表,对于alb,nlb是必选参数，可用区个数不能超过2个 <br>【dnlb】中心可用区，dnlb不需要传该参数，全可用区可用；边缘可用区，仅支持传入单可用区 (Optional) */
     Azs []string `json:"azs"`
 
     /* 【alb】支持按用量计费，默认为按用量。【nlb】支持按用量计费。【dnlb】支持按配置计费 (Optional) */
@@ -47,9 +47,6 @@ type CreateLoadBalancerSpec struct {
 
     /* LoadBalancer的描述信息,允许输入UTF-8编码下的全部字符，不超过256字符 (Optional) */
     Description string `json:"description"`
-
-    /* 是否绑定域名，包括外网和内网，缺省为False(关闭) (Optional) */
-    DomainEnable bool `json:"domainEnable"`
 
     /* 删除保护，取值为True(开启)或False(关闭)，默认为False (Optional) */
     DeleteProtection bool `json:"deleteProtection"`
