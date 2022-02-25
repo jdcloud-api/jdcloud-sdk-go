@@ -40,7 +40,7 @@ func NewLbClient(credential *core.Credential) *LbClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "lb",
-            Revision:    "0.5.6",
+            Revision:    "0.5.7",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -55,46 +55,6 @@ func (c *LbClient) SetLogger(logger core.Logger) {
 
 func (c *LbClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
-}
-
-/* 创建负载均衡列表导出任务 */
-func (c *LbClient) ExportLoadBalancers(request *lb.ExportLoadBalancersRequest) (*lb.ExportLoadBalancersResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &lb.ExportLoadBalancersResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询负载均衡导出任务列表 */
-func (c *LbClient) DescribeLoadBalancersExportTasks(request *lb.DescribeLoadBalancersExportTasksRequest) (*lb.DescribeLoadBalancersExportTasksResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &lb.DescribeLoadBalancersExportTasksResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
 }
 
 /* 查询监听器列表 */
