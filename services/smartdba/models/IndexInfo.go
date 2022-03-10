@@ -17,20 +17,14 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type IndexInfo struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 索引名称 (Optional) */
+    IndexName string `json:"indexName"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 库名 (Optional) */
+    Db string `json:"db"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
-
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
-
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 表名 (Optional) */
+    TableName string `json:"tableName"`
 }

@@ -18,50 +18,47 @@ package client
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    openjrtc "github.com/jdcloud-api/jdcloud-sdk-go/services/openjrtc/apis"
+    dbs "github.com/jdcloud-api/jdcloud-sdk-go/services/dbs/apis"
     "encoding/json"
     "errors"
 )
 
-type OpenjrtcClient struct {
+type DbsClient struct {
     core.JDCloudClient
 }
 
-func NewOpenjrtcClient(credential *core.Credential) *OpenjrtcClient {
+func NewDbsClient(credential *core.Credential) *DbsClient {
     if credential == nil {
         return nil
     }
 
     config := core.NewConfig()
-    config.SetEndpoint("openjrtc.jdcloud-api.com")
+    config.SetEndpoint("dbs.jdcloud-api.com")
 
-    return &OpenjrtcClient{
+    return &DbsClient{
         core.JDCloudClient{
             Credential:  *credential,
             Config:      *config,
-            ServiceName: "openjrtc",
-            Revision:    "1.1.5",
+            ServiceName: "dbs",
+            Revision:    "2.0.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
 
-func (c *OpenjrtcClient) SetConfig(config *core.Config) {
+func (c *DbsClient) SetConfig(config *core.Config) {
     c.Config = *config
 }
 
-func (c *OpenjrtcClient) SetLogger(logger core.Logger) {
+func (c *DbsClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-func (c *OpenjrtcClient) DisableLogger() {
+func (c *DbsClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
 }
 
-/* 查询应用下的房间列表
-允许通过条件过滤查询，支持的过滤字段如下：
-           - appId[eq] 按应用ID查询
- */
-func (c *OpenjrtcClient) DescribeRooms(request *openjrtc.DescribeRoomsRequest) (*openjrtc.DescribeRoomsResponse, error) {
+/* 删除备份计划 */
+func (c *DbsClient) DeleteBackupPlan(request *dbs.DeleteBackupPlanRequest) (*dbs.DeleteBackupPlanResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -70,7 +67,7 @@ func (c *OpenjrtcClient) DescribeRooms(request *openjrtc.DescribeRoomsRequest) (
         return nil, err
     }
 
-    jdResp := &openjrtc.DescribeRoomsResponse{}
+    jdResp := &dbs.DeleteBackupPlanResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -80,13 +77,8 @@ func (c *OpenjrtcClient) DescribeRooms(request *openjrtc.DescribeRoomsRequest) (
     return jdResp, err
 }
 
-/* 查询房间内人员列表
-允许通过条件过滤查询，支持的过滤字段如下：
-           - status[eq] 在线状态 1-在线 2-离线
-           - startTime[eq] 用户加入时间段开始时间-UTC时间  startTime,endTime同时有值时生效
-           - endTime[eq] 用户加入时间段结束时间-UTC时间    startTime,endTime同时有值时生效
- */
-func (c *OpenjrtcClient) DescribeRoomUsers(request *openjrtc.DescribeRoomUsersRequest) (*openjrtc.DescribeRoomUsersResponse, error) {
+/* 初始化备份策略 */
+func (c *DbsClient) InitBackupPlan(request *dbs.InitBackupPlanRequest) (*dbs.InitBackupPlanResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -95,7 +87,7 @@ func (c *OpenjrtcClient) DescribeRoomUsers(request *openjrtc.DescribeRoomUsersRe
         return nil, err
     }
 
-    jdResp := &openjrtc.DescribeRoomUsersResponse{}
+    jdResp := &dbs.InitBackupPlanResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -105,9 +97,8 @@ func (c *OpenjrtcClient) DescribeRoomUsers(request *openjrtc.DescribeRoomUsersRe
     return jdResp, err
 }
 
-/* 下发混流任务
- */
-func (c *OpenjrtcClient) StartMcuTranscode(request *openjrtc.StartMcuTranscodeRequest) (*openjrtc.StartMcuTranscodeResponse, error) {
+/* 上传备份文件信息 */
+func (c *DbsClient) BackupFile(request *dbs.BackupFileRequest) (*dbs.BackupFileResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -116,7 +107,7 @@ func (c *OpenjrtcClient) StartMcuTranscode(request *openjrtc.StartMcuTranscodeRe
         return nil, err
     }
 
-    jdResp := &openjrtc.StartMcuTranscodeResponse{}
+    jdResp := &dbs.BackupFileResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -126,9 +117,8 @@ func (c *OpenjrtcClient) StartMcuTranscode(request *openjrtc.StartMcuTranscodeRe
     return jdResp, err
 }
 
-/* 统计房间内人数
- */
-func (c *OpenjrtcClient) DescribeRoomUsersNum(request *openjrtc.DescribeRoomUsersNumRequest) (*openjrtc.DescribeRoomUsersNumResponse, error) {
+/* 查询所有的物理备份结果 */
+func (c *DbsClient) DescribePhysicalBackups(request *dbs.DescribePhysicalBackupsRequest) (*dbs.DescribePhysicalBackupsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -137,7 +127,7 @@ func (c *OpenjrtcClient) DescribeRoomUsersNum(request *openjrtc.DescribeRoomUser
         return nil, err
     }
 
-    jdResp := &openjrtc.DescribeRoomUsersNumResponse{}
+    jdResp := &dbs.DescribePhysicalBackupsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -147,9 +137,8 @@ func (c *OpenjrtcClient) DescribeRoomUsersNum(request *openjrtc.DescribeRoomUser
     return jdResp, err
 }
 
-/* 创建房间
- */
-func (c *OpenjrtcClient) CreateRoom(request *openjrtc.CreateRoomRequest) (*openjrtc.CreateRoomResponse, error) {
+/* 查询已经注册的所有的 DBS agent */
+func (c *DbsClient) DescribeAgents(request *dbs.DescribeAgentsRequest) (*dbs.DescribeAgentsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -158,7 +147,7 @@ func (c *OpenjrtcClient) CreateRoom(request *openjrtc.CreateRoomRequest) (*openj
         return nil, err
     }
 
-    jdResp := &openjrtc.CreateRoomResponse{}
+    jdResp := &dbs.DescribeAgentsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -168,9 +157,8 @@ func (c *OpenjrtcClient) CreateRoom(request *openjrtc.CreateRoomRequest) (*openj
     return jdResp, err
 }
 
-/* 查询注册用户
- */
-func (c *OpenjrtcClient) DescribeRegisterUser(request *openjrtc.DescribeRegisterUserRequest) (*openjrtc.DescribeRegisterUserResponse, error) {
+/* 设置超过保留时长的备份文件的状态为已删除 */
+func (c *DbsClient) UpdateShouldDelBackups(request *dbs.UpdateShouldDelBackupsRequest) (*dbs.UpdateShouldDelBackupsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -179,7 +167,7 @@ func (c *OpenjrtcClient) DescribeRegisterUser(request *openjrtc.DescribeRegister
         return nil, err
     }
 
-    jdResp := &openjrtc.DescribeRegisterUserResponse{}
+    jdResp := &dbs.UpdateShouldDelBackupsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -189,9 +177,8 @@ func (c *OpenjrtcClient) DescribeRegisterUser(request *openjrtc.DescribeRegister
     return jdResp, err
 }
 
-/* 修改房间
- */
-func (c *OpenjrtcClient) UpdateUserRoom(request *openjrtc.UpdateUserRoomRequest) (*openjrtc.UpdateUserRoomResponse, error) {
+/* 获取超过保留时长即需要删除的备份文件 */
+func (c *DbsClient) GetShouldDelBackups(request *dbs.GetShouldDelBackupsRequest) (*dbs.GetShouldDelBackupsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -200,7 +187,7 @@ func (c *OpenjrtcClient) UpdateUserRoom(request *openjrtc.UpdateUserRoomRequest)
         return nil, err
     }
 
-    jdResp := &openjrtc.UpdateUserRoomResponse{}
+    jdResp := &dbs.GetShouldDelBackupsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -210,9 +197,8 @@ func (c *OpenjrtcClient) UpdateUserRoom(request *openjrtc.UpdateUserRoomRequest)
     return jdResp, err
 }
 
-/* 添加录制规则
- */
-func (c *OpenjrtcClient) AddRecordRule(request *openjrtc.AddRecordRuleRequest) (*openjrtc.AddRecordRuleResponse, error) {
+/* 根据逻辑备份进行全量恢复 */
+func (c *DbsClient) RestoreLogicalBackup(request *dbs.RestoreLogicalBackupRequest) (*dbs.RestoreLogicalBackupResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -221,7 +207,7 @@ func (c *OpenjrtcClient) AddRecordRule(request *openjrtc.AddRecordRuleRequest) (
         return nil, err
     }
 
-    jdResp := &openjrtc.AddRecordRuleResponse{}
+    jdResp := &dbs.RestoreLogicalBackupResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -231,12 +217,8 @@ func (c *OpenjrtcClient) AddRecordRule(request *openjrtc.AddRecordRuleRequest) (
     return jdResp, err
 }
 
-/* 查询注册房间号列表
-允许通过条件过滤查询，支持的过滤字段如下：
-           - startTime[eq] 房间注册时间段开始时间-UTC时间 startTime,endTime同时有值时生效
-           - endTime[eq] 房间注册时间段结束时间-UTC时间   startTime,endTime同时有值时生效
- */
-func (c *OpenjrtcClient) DescribeUserRooms(request *openjrtc.DescribeUserRoomsRequest) (*openjrtc.DescribeUserRoomsResponse, error) {
+/* 查询所有的逻辑备份结果 */
+func (c *DbsClient) DescribeLogicalBackups(request *dbs.DescribeLogicalBackupsRequest) (*dbs.DescribeLogicalBackupsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -245,7 +227,7 @@ func (c *OpenjrtcClient) DescribeUserRooms(request *openjrtc.DescribeUserRoomsRe
         return nil, err
     }
 
-    jdResp := &openjrtc.DescribeUserRoomsResponse{}
+    jdResp := &dbs.DescribeLogicalBackupsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -255,9 +237,8 @@ func (c *OpenjrtcClient) DescribeUserRooms(request *openjrtc.DescribeUserRoomsRe
     return jdResp, err
 }
 
-/* 查询应用appKey
- */
-func (c *OpenjrtcClient) DescribeAppKey(request *openjrtc.DescribeAppKeyRequest) (*openjrtc.DescribeAppKeyResponse, error) {
+/* 上报预检查结果 */
+func (c *DbsClient) ReportPrecheck(request *dbs.ReportPrecheckRequest) (*dbs.ReportPrecheckResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -266,7 +247,7 @@ func (c *OpenjrtcClient) DescribeAppKey(request *openjrtc.DescribeAppKeyRequest)
         return nil, err
     }
 
-    jdResp := &openjrtc.DescribeAppKeyResponse{}
+    jdResp := &dbs.ReportPrecheckResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -276,8 +257,8 @@ func (c *OpenjrtcClient) DescribeAppKey(request *openjrtc.DescribeAppKeyRequest)
     return jdResp, err
 }
 
-/* 发送自定义信令给房间内的人员 */
-func (c *OpenjrtcClient) SendMessageToUser(request *openjrtc.SendMessageToUserRequest) (*openjrtc.SendMessageToUserResponse, error) {
+/* 查询预检查任务详情 */
+func (c *DbsClient) DescribePreCheck(request *dbs.DescribePreCheckRequest) (*dbs.DescribePreCheckResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -286,7 +267,7 @@ func (c *OpenjrtcClient) SendMessageToUser(request *openjrtc.SendMessageToUserRe
         return nil, err
     }
 
-    jdResp := &openjrtc.SendMessageToUserResponse{}
+    jdResp := &dbs.DescribePreCheckResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -296,9 +277,8 @@ func (c *OpenjrtcClient) SendMessageToUser(request *openjrtc.SendMessageToUserRe
     return jdResp, err
 }
 
-/* 修改房间
- */
-func (c *OpenjrtcClient) UpdateRoom(request *openjrtc.UpdateRoomRequest) (*openjrtc.UpdateRoomResponse, error) {
+/* 根据物理备份进行全量恢复 */
+func (c *DbsClient) RestorePhysicalBackup(request *dbs.RestorePhysicalBackupRequest) (*dbs.RestorePhysicalBackupResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -307,7 +287,7 @@ func (c *OpenjrtcClient) UpdateRoom(request *openjrtc.UpdateRoomRequest) (*openj
         return nil, err
     }
 
-    jdResp := &openjrtc.UpdateRoomResponse{}
+    jdResp := &dbs.RestorePhysicalBackupResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -317,9 +297,8 @@ func (c *OpenjrtcClient) UpdateRoom(request *openjrtc.UpdateRoomRequest) (*openj
     return jdResp, err
 }
 
-/* 生成token-用户加入房间时携带token校验通过后方能加入
- */
-func (c *OpenjrtcClient) CreateToken(request *openjrtc.CreateTokenRequest) (*openjrtc.CreateTokenResponse, error) {
+/* 启动备份计划 */
+func (c *DbsClient) StartBackupPlan(request *dbs.StartBackupPlanRequest) (*dbs.StartBackupPlanResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -328,7 +307,7 @@ func (c *OpenjrtcClient) CreateToken(request *openjrtc.CreateTokenRequest) (*ope
         return nil, err
     }
 
-    jdResp := &openjrtc.CreateTokenResponse{}
+    jdResp := &dbs.StartBackupPlanResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -338,9 +317,8 @@ func (c *OpenjrtcClient) CreateToken(request *openjrtc.CreateTokenRequest) (*ope
     return jdResp, err
 }
 
-/* 注册用户房间号-将业务接入方定义的userRoomId注册为jrtc系统内可识别和流转的房间号
- */
-func (c *OpenjrtcClient) RegisterUserRoom(request *openjrtc.RegisterUserRoomRequest) (*openjrtc.RegisterUserRoomResponse, error) {
+/* 修改备份策略 */
+func (c *DbsClient) ModifyBackupPolicy(request *dbs.ModifyBackupPolicyRequest) (*dbs.ModifyBackupPolicyResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -349,7 +327,7 @@ func (c *OpenjrtcClient) RegisterUserRoom(request *openjrtc.RegisterUserRoomRequ
         return nil, err
     }
 
-    jdResp := &openjrtc.RegisterUserRoomResponse{}
+    jdResp := &dbs.ModifyBackupPolicyResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -359,9 +337,8 @@ func (c *OpenjrtcClient) RegisterUserRoom(request *openjrtc.RegisterUserRoomRequ
     return jdResp, err
 }
 
-/* 注册用户-将业务接入方用户体系的userId注册为jrtc系统内可识别和流转的用户id
- */
-func (c *OpenjrtcClient) RegisterUser(request *openjrtc.RegisterUserRequest) (*openjrtc.RegisterUserResponse, error) {
+/* 手动触发逻辑备份 */
+func (c *DbsClient) CreateLogicalBackup(request *dbs.CreateLogicalBackupRequest) (*dbs.CreateLogicalBackupResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -370,7 +347,7 @@ func (c *OpenjrtcClient) RegisterUser(request *openjrtc.RegisterUserRequest) (*o
         return nil, err
     }
 
-    jdResp := &openjrtc.RegisterUserResponse{}
+    jdResp := &dbs.CreateLogicalBackupResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -380,9 +357,8 @@ func (c *OpenjrtcClient) RegisterUser(request *openjrtc.RegisterUserRequest) (*o
     return jdResp, err
 }
 
-/* 关闭房间内的指定流
- */
-func (c *OpenjrtcClient) CloseRoomUserStream(request *openjrtc.CloseRoomUserStreamRequest) (*openjrtc.CloseRoomUserStreamResponse, error) {
+/* 修改任务状态 */
+func (c *DbsClient) ModifyTask(request *dbs.ModifyTaskRequest) (*dbs.ModifyTaskResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -391,7 +367,7 @@ func (c *OpenjrtcClient) CloseRoomUserStream(request *openjrtc.CloseRoomUserStre
         return nil, err
     }
 
-    jdResp := &openjrtc.CloseRoomUserStreamResponse{}
+    jdResp := &dbs.ModifyTaskResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -401,8 +377,8 @@ func (c *OpenjrtcClient) CloseRoomUserStream(request *openjrtc.CloseRoomUserStre
     return jdResp, err
 }
 
-/* 发送自定义信令给房间 */
-func (c *OpenjrtcClient) SendMessageToRoom(request *openjrtc.SendMessageToRoomRequest) (*openjrtc.SendMessageToRoomResponse, error) {
+/* 查询 agent 详细信息 */
+func (c *DbsClient) DescribeAgentAttributes(request *dbs.DescribeAgentAttributesRequest) (*dbs.DescribeAgentAttributesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -411,7 +387,7 @@ func (c *OpenjrtcClient) SendMessageToRoom(request *openjrtc.SendMessageToRoomRe
         return nil, err
     }
 
-    jdResp := &openjrtc.SendMessageToRoomResponse{}
+    jdResp := &dbs.DescribeAgentAttributesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -421,9 +397,8 @@ func (c *OpenjrtcClient) SendMessageToRoom(request *openjrtc.SendMessageToRoomRe
     return jdResp, err
 }
 
-/* 查询peer对应的用户信息
- */
-func (c *OpenjrtcClient) DescribeUserByPeer(request *openjrtc.DescribeUserByPeerRequest) (*openjrtc.DescribeUserByPeerResponse, error) {
+/* 创建备份计划 */
+func (c *DbsClient) CreateBackupPlan(request *dbs.CreateBackupPlanRequest) (*dbs.CreateBackupPlanResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -432,7 +407,7 @@ func (c *OpenjrtcClient) DescribeUserByPeer(request *openjrtc.DescribeUserByPeer
         return nil, err
     }
 
-    jdResp := &openjrtc.DescribeUserByPeerResponse{}
+    jdResp := &dbs.CreateBackupPlanResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -442,9 +417,8 @@ func (c *OpenjrtcClient) DescribeUserByPeer(request *openjrtc.DescribeUserByPeer
     return jdResp, err
 }
 
-/* 查询房间实时在线人数
- */
-func (c *OpenjrtcClient) DescribeRoomOnlineUserNum(request *openjrtc.DescribeRoomOnlineUserNumRequest) (*openjrtc.DescribeRoomOnlineUserNumResponse, error) {
+/* 获取agent的备份计划 */
+func (c *DbsClient) AgentPlans(request *dbs.AgentPlansRequest) (*dbs.AgentPlansResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -453,7 +427,7 @@ func (c *OpenjrtcClient) DescribeRoomOnlineUserNum(request *openjrtc.DescribeRoo
         return nil, err
     }
 
-    jdResp := &openjrtc.DescribeRoomOnlineUserNumResponse{}
+    jdResp := &dbs.AgentPlansResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -463,9 +437,8 @@ func (c *OpenjrtcClient) DescribeRoomOnlineUserNum(request *openjrtc.DescribeRoo
     return jdResp, err
 }
 
-/* 中止混流任务
- */
-func (c *OpenjrtcClient) StopMcuTranscode(request *openjrtc.StopMcuTranscodeRequest) (*openjrtc.StopMcuTranscodeResponse, error) {
+/* 删除手动触发生成的备份文件 */
+func (c *DbsClient) DeleteBackup(request *dbs.DeleteBackupRequest) (*dbs.DeleteBackupResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -474,7 +447,7 @@ func (c *OpenjrtcClient) StopMcuTranscode(request *openjrtc.StopMcuTranscodeRequ
         return nil, err
     }
 
-    jdResp := &openjrtc.StopMcuTranscodeResponse{}
+    jdResp := &dbs.DeleteBackupResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -484,8 +457,8 @@ func (c *OpenjrtcClient) StopMcuTranscode(request *openjrtc.StopMcuTranscodeRequ
     return jdResp, err
 }
 
-/* 发送自定义信令给房间内的人员 */
-func (c *OpenjrtcClient) PostMessageToUser(request *openjrtc.PostMessageToUserRequest) (*openjrtc.PostMessageToUserResponse, error) {
+/* 获取该备份计划最近备份成功的 binlog 文件 */
+func (c *DbsClient) GetLastBackupBinlog(request *dbs.GetLastBackupBinlogRequest) (*dbs.GetLastBackupBinlogResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -494,7 +467,7 @@ func (c *OpenjrtcClient) PostMessageToUser(request *openjrtc.PostMessageToUserRe
         return nil, err
     }
 
-    jdResp := &openjrtc.PostMessageToUserResponse{}
+    jdResp := &dbs.GetLastBackupBinlogResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -504,9 +477,8 @@ func (c *OpenjrtcClient) PostMessageToUser(request *openjrtc.PostMessageToUserRe
     return jdResp, err
 }
 
-/* 查询用户应用列表信息
- */
-func (c *OpenjrtcClient) DescribeApps(request *openjrtc.DescribeAppsRequest) (*openjrtc.DescribeAppsResponse, error) {
+/* 查询备份计划概要 */
+func (c *DbsClient) DescribeBackupPlans(request *dbs.DescribeBackupPlansRequest) (*dbs.DescribeBackupPlansResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -515,7 +487,7 @@ func (c *OpenjrtcClient) DescribeApps(request *openjrtc.DescribeAppsRequest) (*o
         return nil, err
     }
 
-    jdResp := &openjrtc.DescribeAppsResponse{}
+    jdResp := &dbs.DescribeBackupPlansResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -525,9 +497,8 @@ func (c *OpenjrtcClient) DescribeApps(request *openjrtc.DescribeAppsRequest) (*o
     return jdResp, err
 }
 
-/* 删除房间
- */
-func (c *OpenjrtcClient) DeleteRoom(request *openjrtc.DeleteRoomRequest) (*openjrtc.DeleteRoomResponse, error) {
+/* 查询当前备份计划下最近1年的恢复任务，按创建任务时间倒序排列 */
+func (c *DbsClient) DescribeRestoreTasks(request *dbs.DescribeRestoreTasksRequest) (*dbs.DescribeRestoreTasksResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -536,7 +507,7 @@ func (c *OpenjrtcClient) DeleteRoom(request *openjrtc.DeleteRoomRequest) (*openj
         return nil, err
     }
 
-    jdResp := &openjrtc.DeleteRoomResponse{}
+    jdResp := &dbs.DescribeRestoreTasksResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -546,12 +517,8 @@ func (c *OpenjrtcClient) DeleteRoom(request *openjrtc.DeleteRoomRequest) (*openj
     return jdResp, err
 }
 
-/* 查询注册用户列表
-允许通过条件过滤查询，支持的过滤字段如下：
-           - startTime[eq] 用户注册时间段开始时间-UTC时间 startTime,endTime同时有值时生效
-           - endTime[eq] 用户注册时间段结束时间-UTC时间 startTime,endTime同时有值时生效
- */
-func (c *OpenjrtcClient) DescribeRegisterUsers(request *openjrtc.DescribeRegisterUsersRequest) (*openjrtc.DescribeRegisterUsersResponse, error) {
+/* 将数据库实例根据物理备份和binlog备份恢复到指定的时间点。 */
+func (c *DbsClient) RestoreToTime(request *dbs.RestoreToTimeRequest) (*dbs.RestoreToTimeResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -560,7 +527,7 @@ func (c *OpenjrtcClient) DescribeRegisterUsers(request *openjrtc.DescribeRegiste
         return nil, err
     }
 
-    jdResp := &openjrtc.DescribeRegisterUsersResponse{}
+    jdResp := &dbs.RestoreToTimeResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -570,8 +537,8 @@ func (c *OpenjrtcClient) DescribeRegisterUsers(request *openjrtc.DescribeRegiste
     return jdResp, err
 }
 
-/* 发送自定义信令给房间 */
-func (c *OpenjrtcClient) PostMessageToUserRoom(request *openjrtc.PostMessageToUserRoomRequest) (*openjrtc.PostMessageToUserRoomResponse, error) {
+/* 查询备份计划详细信息 */
+func (c *DbsClient) DescribeBackupPlanAttributes(request *dbs.DescribeBackupPlanAttributesRequest) (*dbs.DescribeBackupPlanAttributesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -580,7 +547,7 @@ func (c *OpenjrtcClient) PostMessageToUserRoom(request *openjrtc.PostMessageToUs
         return nil, err
     }
 
-    jdResp := &openjrtc.PostMessageToUserRoomResponse{}
+    jdResp := &dbs.DescribeBackupPlanAttributesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -590,9 +557,8 @@ func (c *OpenjrtcClient) PostMessageToUserRoom(request *openjrtc.PostMessageToUs
     return jdResp, err
 }
 
-/* 移除房间内所有人员
- */
-func (c *OpenjrtcClient) RemoveAllUsersByUserRoomId(request *openjrtc.RemoveAllUsersByUserRoomIdRequest) (*openjrtc.RemoveAllUsersByUserRoomIdResponse, error) {
+/* 查询所有的binlog备份结果 */
+func (c *DbsClient) DescribeBinlogBackups(request *dbs.DescribeBinlogBackupsRequest) (*dbs.DescribeBinlogBackupsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -601,7 +567,7 @@ func (c *OpenjrtcClient) RemoveAllUsersByUserRoomId(request *openjrtc.RemoveAllU
         return nil, err
     }
 
-    jdResp := &openjrtc.RemoveAllUsersByUserRoomIdResponse{}
+    jdResp := &dbs.DescribeBinlogBackupsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -611,9 +577,8 @@ func (c *OpenjrtcClient) RemoveAllUsersByUserRoomId(request *openjrtc.RemoveAllU
     return jdResp, err
 }
 
-/* 移除房间内人员
- */
-func (c *OpenjrtcClient) RemoveRoomUser(request *openjrtc.RemoveRoomUserRequest) (*openjrtc.RemoveRoomUserResponse, error) {
+/* Agent 注册接口 */
+func (c *DbsClient) AgentRegister(request *dbs.AgentRegisterRequest) (*dbs.AgentRegisterResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -622,7 +587,7 @@ func (c *OpenjrtcClient) RemoveRoomUser(request *openjrtc.RemoveRoomUserRequest)
         return nil, err
     }
 
-    jdResp := &openjrtc.RemoveRoomUserResponse{}
+    jdResp := &dbs.AgentRegisterResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -632,9 +597,8 @@ func (c *OpenjrtcClient) RemoveRoomUser(request *openjrtc.RemoveRoomUserRequest)
     return jdResp, err
 }
 
-/* 移除房间内人员
- */
-func (c *OpenjrtcClient) RemoveUserByUserRoomId(request *openjrtc.RemoveUserByUserRoomIdRequest) (*openjrtc.RemoveUserByUserRoomIdResponse, error) {
+/* 获取agent的任务 */
+func (c *DbsClient) AgentTasks(request *dbs.AgentTasksRequest) (*dbs.AgentTasksResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -643,7 +607,7 @@ func (c *OpenjrtcClient) RemoveUserByUserRoomId(request *openjrtc.RemoveUserByUs
         return nil, err
     }
 
-    jdResp := &openjrtc.RemoveUserByUserRoomIdResponse{}
+    jdResp := &dbs.AgentTasksResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -653,9 +617,8 @@ func (c *OpenjrtcClient) RemoveUserByUserRoomId(request *openjrtc.RemoveUserByUs
     return jdResp, err
 }
 
-/* 添加推流规则
- */
-func (c *OpenjrtcClient) AddPushStreamRule(request *openjrtc.AddPushStreamRuleRequest) (*openjrtc.AddPushStreamRuleResponse, error) {
+/* 手动触发物理备份 */
+func (c *DbsClient) CreatePhysicalBackup(request *dbs.CreatePhysicalBackupRequest) (*dbs.CreatePhysicalBackupResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -664,7 +627,7 @@ func (c *OpenjrtcClient) AddPushStreamRule(request *openjrtc.AddPushStreamRuleRe
         return nil, err
     }
 
-    jdResp := &openjrtc.AddPushStreamRuleResponse{}
+    jdResp := &dbs.CreatePhysicalBackupResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -674,9 +637,8 @@ func (c *OpenjrtcClient) AddPushStreamRule(request *openjrtc.AddPushStreamRuleRe
     return jdResp, err
 }
 
-/* 获取房间信息
- */
-func (c *OpenjrtcClient) DescribeRoomInfo(request *openjrtc.DescribeRoomInfoRequest) (*openjrtc.DescribeRoomInfoResponse, error) {
+/* 修改备份策略之逻辑备份的库表 */
+func (c *DbsClient) ModifyBackupObjects(request *dbs.ModifyBackupObjectsRequest) (*dbs.ModifyBackupObjectsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -685,7 +647,7 @@ func (c *OpenjrtcClient) DescribeRoomInfo(request *openjrtc.DescribeRoomInfoRequ
         return nil, err
     }
 
-    jdResp := &openjrtc.DescribeRoomInfoResponse{}
+    jdResp := &dbs.ModifyBackupObjectsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -695,9 +657,8 @@ func (c *OpenjrtcClient) DescribeRoomInfo(request *openjrtc.DescribeRoomInfoRequ
     return jdResp, err
 }
 
-/* 查询应用信息:
- */
-func (c *OpenjrtcClient) DescribeApp(request *openjrtc.DescribeAppRequest) (*openjrtc.DescribeAppResponse, error) {
+/* 停止备份计划 */
+func (c *DbsClient) StopBackupPlan(request *dbs.StopBackupPlanRequest) (*dbs.StopBackupPlanResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -706,7 +667,7 @@ func (c *OpenjrtcClient) DescribeApp(request *openjrtc.DescribeAppRequest) (*ope
         return nil, err
     }
 
-    jdResp := &openjrtc.DescribeAppResponse{}
+    jdResp := &dbs.StopBackupPlanResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -716,9 +677,8 @@ func (c *OpenjrtcClient) DescribeApp(request *openjrtc.DescribeAppRequest) (*ope
     return jdResp, err
 }
 
-/* 移除房间内所有人员
- */
-func (c *OpenjrtcClient) RemoveAllRoomUsers(request *openjrtc.RemoveAllRoomUsersRequest) (*openjrtc.RemoveAllRoomUsersResponse, error) {
+/* 修改备份策略之数据源的账号密码等 */
+func (c *DbsClient) ModifySourceEndpoint(request *dbs.ModifySourceEndpointRequest) (*dbs.ModifySourceEndpointResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -727,7 +687,7 @@ func (c *OpenjrtcClient) RemoveAllRoomUsers(request *openjrtc.RemoveAllRoomUsers
         return nil, err
     }
 
-    jdResp := &openjrtc.RemoveAllRoomUsersResponse{}
+    jdResp := &dbs.ModifySourceEndpointResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -737,9 +697,8 @@ func (c *OpenjrtcClient) RemoveAllRoomUsers(request *openjrtc.RemoveAllRoomUsers
     return jdResp, err
 }
 
-/* 查询注册房间号
- */
-func (c *OpenjrtcClient) DescribeUserRoom(request *openjrtc.DescribeUserRoomRequest) (*openjrtc.DescribeUserRoomResponse, error) {
+/* 上报任务的状态 */
+func (c *DbsClient) ReportTask(request *dbs.ReportTaskRequest) (*dbs.ReportTaskResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -748,28 +707,7 @@ func (c *OpenjrtcClient) DescribeUserRoom(request *openjrtc.DescribeUserRoomRequ
         return nil, err
     }
 
-    jdResp := &openjrtc.DescribeUserRoomResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 创建用户
- */
-func (c *OpenjrtcClient) CreateUser(request *openjrtc.CreateUserRequest) (*openjrtc.CreateUserResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &openjrtc.CreateUserResponse{}
+    jdResp := &dbs.ReportTaskResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

@@ -17,20 +17,20 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type ModifyTask struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /*   */
+    Progress int `json:"progress"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /*  (Optional) */
+    StartTime string `json:"startTime"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
+    /*  (Optional) */
+    EndTime string `json:"endTime"`
 
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
+    /*   */
+    Success bool `json:"success"`
 
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /*  (Optional) */
+    ErrorMessage string `json:"errorMessage"`
 }

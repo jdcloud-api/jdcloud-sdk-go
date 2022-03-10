@@ -17,20 +17,23 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type SourceEndpoint struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 源数据库的网络类型 PublicAccess 和 RDS  */
+    NetworkType string `json:"networkType"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 源数据库的端口  */
+    Port int `json:"port"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
+    /* 备份代理的ID，仅初始化时可设置，设置完成并开始备份后，不可修改  */
+    BackupAgentId string `json:"backupAgentId"`
 
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
+    /* 源数据库的账号  */
+    AccountName string `json:"accountName"`
 
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 源数据库的密码  */
+    Password string `json:"password"`
+
+    /* 不同数据库引擎独有的配置参数  */
+    EngineRelatedConfig *EngineRelatedConfig `json:"engineRelatedConfig"`
 }

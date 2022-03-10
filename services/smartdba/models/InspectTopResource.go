@@ -17,20 +17,17 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type InspectTopResource struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 诊断分值 (Optional) */
+    Score int64 `json:"score"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 实例id (Optional) */
+    InstanceId string `json:"instanceId"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
+    /* 实例名称 (Optional) */
+    InstanceName string `json:"instanceName"`
 
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
-
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 实例规格 (Optional) */
+    InstanceClass string `json:"instanceClass"`
 }

@@ -17,20 +17,23 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type BackupPlan struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 备份计划名称 (Optional) */
+    BackupPlanName string `json:"backupPlanName"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 备份计划Id (Optional) */
+    BackupPlanId string `json:"backupPlanId"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
+    /* 备份计划状态 (Optional) */
+    BackupPlanStatus string `json:"backupPlanStatus"`
 
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
+    /* 源实例引擎类型 (Optional) */
+    SourceEngine string `json:"sourceEngine"`
 
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 备份计划创建时间, UTC 时间格式 (Optional) */
+    CreateTime string `json:"createTime"`
+
+    /* 计费信息 (Optional) */
+    Charge Charge `json:"charge"`
 }

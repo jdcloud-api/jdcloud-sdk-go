@@ -17,20 +17,26 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type SlowDigestLog struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 执行时间 (Optional) */
+    ExecTime Statistic `json:"execTime"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 锁等待时间 (Optional) */
+    LockTime Statistic `json:"lockTime"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
+    /* 返回行数 (Optional) */
+    RowsSent StatisticInt `json:"rowsSent"`
 
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
+    /* 扫描行数 (Optional) */
+    RowsExamined StatisticInt `json:"rowsExamined"`
 
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* sql模板 (Optional) */
+    Sql string `json:"sql"`
+
+    /* 数据库 (Optional) */
+    Database string `json:"database"`
+
+    /* 执行次数 (Optional) */
+    QueryCount int `json:"queryCount"`
 }

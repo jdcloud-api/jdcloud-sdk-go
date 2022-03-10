@@ -17,20 +17,11 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type ModifyBackupObjects struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 数据库名称 (Optional) */
+    Database string `json:"database"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
-
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
-
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
-
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 表名, 如果不填或者为空，表示对整个数据库进行备份 (Optional) */
+    Objects []string `json:"objects"`
 }

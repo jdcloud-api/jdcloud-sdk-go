@@ -17,20 +17,14 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type ShouldDelBackups struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /*  (Optional) */
+    BackupType string `json:"backupType"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /*  (Optional) */
+    TotalCount int `json:"totalCount"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
-
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
-
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /*  (Optional) */
+    BackupFiles []BackupBriefInfo `json:"backupFiles"`
 }

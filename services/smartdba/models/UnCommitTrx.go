@@ -17,20 +17,23 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type UnCommitTrx struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 会话用户 (Optional) */
+    User string `json:"user"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 数据库 (Optional) */
+    Db string `json:"db"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
+    /* 会话源端IP (Optional) */
+    Host string `json:"host"`
 
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
+    /* 当前状态 (Optional) */
+    State string `json:"state"`
 
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* session开始时间 (Optional) */
+    StartTime int `json:"startTime"`
+
+    /* 最后执行的sql (Optional) */
+    LastSql string `json:"lastSql"`
 }

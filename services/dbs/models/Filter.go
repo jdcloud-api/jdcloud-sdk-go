@@ -17,20 +17,14 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type Filter struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 过滤条件的名称  */
+    Name string `json:"name"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 过滤条件的操作符，默认eq (Optional) */
+    Operator *string `json:"operator"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
-
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
-
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 过滤条件的值  */
+    Values []string `json:"values"`
 }

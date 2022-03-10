@@ -17,20 +17,20 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type ConnectView struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 活跃连接数 (Optional) */
+    Running StatisticString `json:"running"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 总连接数 (Optional) */
+    Total StatisticString `json:"total"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
+    /* 最大连接数 (Optional) */
+    Max string `json:"max"`
 
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
+    /* 连接使用率 (Optional) */
+    Ratio StatisticString `json:"ratio"`
 
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 扣分说明 (Optional) */
+    Message string `json:"message"`
 }

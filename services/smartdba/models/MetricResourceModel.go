@@ -17,20 +17,20 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type MetricResourceModel struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 实例id (Optional) */
+    InstanceId string `json:"instanceId"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 实例名称 (Optional) */
+    InstanceName string `json:"instanceName"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
+    /* 数据库版本, 如:MySQL 5.7 (Optional) */
+    EngineVersion string `json:"engineVersion"`
 
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
+    /* 实例规格 (Optional) */
+    InstanceClass string `json:"instanceClass"`
 
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 值 (Optional) */
+    Value string `json:"value"`
 }

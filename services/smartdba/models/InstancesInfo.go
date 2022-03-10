@@ -17,20 +17,29 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type InstancesInfo struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* rds实例id (Optional) */
+    ClusterGid string `json:"clusterGid"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 端口号 (Optional) */
+    Port int `json:"port"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
+    /* rds实例名称 (Optional) */
+    Name string `json:"name"`
 
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
+    /* 数据库版本, 如： MySQL (Optional) */
+    EngineVersion string `json:"engineVersion"`
 
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 实例类型，如：cluster，standalone (Optional) */
+    InstanceType string `json:"instanceType"`
+
+    /* 接入状态 (Optional) */
+    InstanceStatus string `json:"instanceStatus"`
+
+    /* 接入状态描述 (Optional) */
+    Message string `json:"message"`
+
+    /* 接入来源，目前默认rds (Optional) */
+    Source string `json:"source"`
 }

@@ -17,17 +17,17 @@
 package models
 
 
-type UserNumInfoObj struct {
+type DBStatistic struct {
 
-    /* 应用ID (Optional) */
-    AppId string `json:"appId"`
+    /* 数据库 (Optional) */
+    Db string `json:"db"`
 
-    /* 房间ID (Optional) */
-    RoomId int64 `json:"roomId"`
+    /* 活跃会话总数 (Optional) */
+    ActiveCount int `json:"activeCount"`
 
-    /* 房间在线人数 (Optional) */
-    Number int `json:"number"`
+    /* 会话id列表 (Optional) */
+    ThreadIdList string `json:"threadIdList"`
 
-    /* 创建时间UTC (Optional) */
-    CreateTime string `json:"createTime"`
+    /* 会话总数 (Optional) */
+    TotalCount int `json:"totalCount"`
 }

@@ -17,20 +17,17 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type DeadLockOverview struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 锁诊断id (Optional) */
+    AnalyseId string `json:"analyseId"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 诊断时间 (Optional) */
+    CreateTime string `json:"createTime"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
+    /* 发生时间 (Optional) */
+    OccurTime string `json:"occurTime"`
 
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
-
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 是否发现死锁 (Optional) */
+    Occured string `json:"occured"`
 }

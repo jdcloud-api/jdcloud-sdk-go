@@ -17,20 +17,14 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type BufferPoolInfo struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 脏页比例，如 0.999923456 (Optional) */
+    DirtyPagePct float32 `json:"dirtyPagePct"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 空闲页比例，如 0.999923456 (Optional) */
+    FreePagePct float32 `json:"freePagePct"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
-
-    /* 总页数 (Optional) */
+    /* buffer pool 总页数 (Optional) */
     TotalPages int `json:"totalPages"`
-
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
 }

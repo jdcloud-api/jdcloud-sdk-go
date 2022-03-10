@@ -17,20 +17,20 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type DiskView struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 总空间 (Optional) */
+    TotalSize string `json:"totalSize"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 已用空间 (Optional) */
+    UsedSize string `json:"usedSize"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
+    /* 日增空间 (Optional) */
+    DayIncrease string `json:"dayIncrease"`
 
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
+    /* 空间日增率 (Optional) */
+    DayRatio string `json:"dayRatio"`
 
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 扣分说明 (Optional) */
+    Message string `json:"message"`
 }

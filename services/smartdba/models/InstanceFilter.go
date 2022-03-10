@@ -17,20 +17,17 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type InstanceFilter struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 实例gid (Optional) */
+    Gid string `json:"gid"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 实例名称 (Optional) */
+    InstanceName string `json:"instanceName"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
+    /* 接入来源 (Optional) */
+    DbSource string `json:"dbSource"`
 
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
-
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 实例状态 (Optional) */
+    Status string `json:"status"`
 }

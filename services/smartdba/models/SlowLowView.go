@@ -17,20 +17,11 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type SlowLowView struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /*  (Optional) */
+    Items []SlowDigestLog `json:"items"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
-
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
-
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
-
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 扣分说明 (Optional) */
+    Message string `json:"message"`
 }

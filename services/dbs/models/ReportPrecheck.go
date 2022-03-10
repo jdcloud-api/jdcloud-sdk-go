@@ -17,20 +17,23 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type ReportPrecheck struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /*   */
+    Plan interface{} `json:"plan"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 预检查任务项  */
+    CheckItem string `json:"checkItem"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
+    /* 是否成功  */
+    Success bool `json:"success"`
 
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
+    /* 错误信息，仅sucess为false时返回 (Optional) */
+    ErrorMessages string `json:"errorMessages"`
 
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /*   */
+    StartTime string `json:"startTime"`
+
+    /*   */
+    EndTime string `json:"endTime"`
 }

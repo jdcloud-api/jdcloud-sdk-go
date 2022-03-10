@@ -17,20 +17,20 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type AgentAttributes struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* agent Id (Optional) */
+    AgentId string `json:"agentId"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 主机名称 (Optional) */
+    HostName string `json:"hostName"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
+    /* 主机IP (Optional) */
+    Ip string `json:"ip"`
 
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
+    /* agent 的状态 (Optional) */
+    AgentStatus string `json:"agentStatus"`
 
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 该Agent管理的数据源的具体信息，同一个Agent可以支持多种不同的数据源类型 (Optional) */
+    DataSource []DataSourceEntry `json:"dataSource"`
 }

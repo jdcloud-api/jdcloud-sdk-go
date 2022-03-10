@@ -17,20 +17,20 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type DataSourceEntry struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 引擎类型 MySQL5  MySQL8  MariaDB  Percona (Optional) */
+    SourceEngine string `json:"sourceEngine"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 源数据库的网络类型 PublicAccess 和 RDS (Optional) */
+    NetworkType string `json:"networkType"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
+    /* 源数据库的端口 (Optional) */
+    Port int `json:"port"`
 
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
+    /* 数据库的账号 (Optional) */
+    AccountNames []string `json:"accountNames"`
 
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 不同数据库引擎独有的配置参数 (Optional) */
+    EngineRelatedConfig EngineRelatedConfig `json:"engineRelatedConfig"`
 }

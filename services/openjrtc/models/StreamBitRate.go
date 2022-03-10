@@ -17,20 +17,11 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type StreamBitRate struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 时间戳-毫秒 (Optional) */
+    Date int64 `json:"date"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
-
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
-
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
-
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 码率 (Optional) */
+    Bitrate int64 `json:"bitrate"`
 }

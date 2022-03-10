@@ -17,20 +17,14 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type AddPushStreamConfigReqObj struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 应用ID (Optional) */
+    AppId string `json:"appId"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 转推类型  1-全局自动 2-指定流转推 (Optional) */
+    PushType int `json:"pushType"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
-
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
-
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 推流域名 (Optional) */
+    PushDomain string `json:"pushDomain"`
 }

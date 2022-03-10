@@ -17,20 +17,14 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type RestoreFullBackup struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 用于恢复的备份Id，仅限于本备份计划生成的备份  */
+    BackupId string `json:"backupId"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 备份实例的数据源信息  */
+    SourceEndpoint RestoreSourceEndpoint `json:"sourceEndpoint"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
-
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
-
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 是否是新建数据源；true：是；false：不是  */
+    CreateNewEndpoint bool `json:"createNewEndpoint"`
 }

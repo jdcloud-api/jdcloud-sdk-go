@@ -17,20 +17,17 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type Metric struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 单位 (Optional) */
+    CalculateUnit string `json:"calculateUnit"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* metric名称 (Optional) */
+    Metric string `json:"metric"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
+    /* metric中文名称 (Optional) */
+    MetricName string `json:"metricName"`
 
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
-
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* metric功能描述 (Optional) */
+    MetricDescribe string `json:"metricDescribe"`
 }

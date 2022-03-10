@@ -17,20 +17,14 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type CreateBackupPlan struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 备份计划名称，支持中文、数字、大小写字母、英文下划线“_”、减号“-”，且不少于2字符不超过64字符  */
+    Name string `json:"name"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* DBS服务包类型是枚举值， dbs.common.package 表示基础服务包，不含备份流量  */
+    ServicePackage string `json:"servicePackage"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
-
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
-
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 购买规格  */
+    ChargeSpec ChargeSpec `json:"chargeSpec"`
 }

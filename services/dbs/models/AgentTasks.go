@@ -17,20 +17,14 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type AgentTasks struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /*  (Optional) */
+    Id string `json:"id"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /*  (Optional) */
+    Args string `json:"args"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
-
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
-
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /*  (Optional) */
+    TaskType string `json:"taskType"`
 }

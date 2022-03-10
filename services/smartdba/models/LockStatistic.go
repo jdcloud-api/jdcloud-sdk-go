@@ -17,20 +17,23 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type LockStatistic struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 表 (Optional) */
+    Table string `json:"table"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 持有锁的会话ID (Optional) */
+    HoldLock int `json:"holdLock"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
+    /* 等待锁的会话ID (Optional) */
+    WaitLock string `json:"waitLock"`
 
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
+    /* 事务开始时间 (Optional) */
+    StartTime string `json:"startTime"`
 
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 总等待时长 (Optional) */
+    WaitTime int `json:"waitTime"`
+
+    /* 等待锁的sql (Optional) */
+    WaitSql string `json:"waitSql"`
 }

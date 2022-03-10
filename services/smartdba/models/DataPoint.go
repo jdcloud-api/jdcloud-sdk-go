@@ -17,20 +17,11 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type DataPoint struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 时间戳，精确到毫秒，如：1606836371000。 (Optional) */
+    Timestamp int64 `json:"timestamp"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
-
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
-
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
-
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 值 (Optional) */
+    Value interface{} `json:"value"`
 }

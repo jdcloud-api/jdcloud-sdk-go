@@ -17,20 +17,14 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type RestoreTimePoint struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 数据库实例要恢复到的时间点，UTC时间格式：YYYY-MM-DDTHH:mm:ssZ  */
+    RestoreTime string `json:"restoreTime"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 备份实例的数据源信息  */
+    SourceEndpoint RestoreSourceEndpoint `json:"sourceEndpoint"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
-
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
-
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 是否是新建数据源；true：是；false：不是  */
+    CreateNewEndpoint bool `json:"createNewEndpoint"`
 }

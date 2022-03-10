@@ -17,20 +17,14 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type SessionForKill struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 地域代码，取值范围参见[《各地域及可用区对照表》] (Optional) */
+    RegionId string `json:"regionId"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* rds实例id (Optional) */
+    InstanceId string `json:"instanceId"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
-
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
-
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 需要kill的session id列表 (Optional) */
+    SessionList []int `json:"sessionList"`
 }

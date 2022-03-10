@@ -17,20 +17,11 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type ServerInfo struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 版本信息 (Optional) */
+    Version string `json:"version"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
-
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
-
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
-
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 实例已运行时长 (Optional) */
+    Uptime string `json:"uptime"`
 }

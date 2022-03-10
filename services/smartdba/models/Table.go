@@ -17,20 +17,23 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type Table struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 诊断类型id (Optional) */
+    TypeId int64 `json:"typeId"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 诊断名称 (Optional) */
+    Title string `json:"title"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
+    /* 问题与建议 (Optional) */
+    Message string `json:"message"`
 
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
+    /* 其他信息提示，如："mysql 5.5 5.6 mariadb不支持" (Optional) */
+    Note string `json:"note"`
 
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 受影响表 表头 (Optional) */
+    FormHeader []Point `json:"formHeader"`
+
+    /* 问题数量 (Optional) */
+    Count int64 `json:"count"`
 }

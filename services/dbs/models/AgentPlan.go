@@ -17,20 +17,26 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type AgentPlan struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /*  (Optional) */
+    Id string `json:"id"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 备份方式 (Optional) */
+    BackupType string `json:"backupType"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
+    /*  (Optional) */
+    Schedule AgentBackupSchedule `json:"schedule"`
 
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
+    /*  (Optional) */
+    Datasource AgentDataSource `json:"datasource"`
 
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /*  (Optional) */
+    Databases []string `json:"databases"`
+
+    /*  (Optional) */
+    Tables []string `json:"tables"`
+
+    /*  (Optional) */
+    UseBinlog bool `json:"useBinlog"`
 }

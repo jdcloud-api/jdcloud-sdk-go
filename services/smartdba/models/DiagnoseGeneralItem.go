@@ -17,20 +17,14 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type DiagnoseGeneralItem struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 名称 (Optional) */
+    Name string `json:"name"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 诊断结果，正常or异常 (Optional) */
+    Result string `json:"result"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
-
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
-
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 诊断缘由 (Optional) */
+    Message string `json:"message"`
 }

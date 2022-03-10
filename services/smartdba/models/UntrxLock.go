@@ -17,20 +17,29 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type UntrxLock struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 会话id (Optional) */
+    Id int `json:"id"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 会话用户 (Optional) */
+    User string `json:"user"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
+    /* 会话源端IP (Optional) */
+    Host string `json:"host"`
 
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
+    /* 数据库 (Optional) */
+    Db string `json:"db"`
 
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* session命令 (Optional) */
+    Command string `json:"command"`
+
+    /* 会话活跃时间 (Optional) */
+    Time int `json:"time"`
+
+    /* 会话状态 (Optional) */
+    State string `json:"state"`
+
+    /* 正在执行的sql (Optional) */
+    Info string `json:"info"`
 }

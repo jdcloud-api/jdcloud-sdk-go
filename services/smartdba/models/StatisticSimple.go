@@ -17,20 +17,17 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type StatisticSimple struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 平均值 (Optional) */
+    Avg float32 `json:"avg"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 最大值 (Optional) */
+    Max float32 `json:"max"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
+    /* 和 (Optional) */
+    Sum float32 `json:"sum"`
 
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
-
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 总个数 (Optional) */
+    Count int `json:"count"`
 }

@@ -17,20 +17,17 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type Agent struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* agent的ID (Optional) */
+    AgentId string `json:"agentId"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* agent的名字 (Optional) */
+    AgentName string `json:"agentName"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
+    /* agent的IP (Optional) */
+    Ip string `json:"ip"`
 
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
-
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* agent的hostname (Optional) */
+    HostName string `json:"hostName"`
 }

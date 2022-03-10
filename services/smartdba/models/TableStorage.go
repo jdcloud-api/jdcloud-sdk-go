@@ -17,20 +17,32 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type TableStorage struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 表名 (Optional) */
+    TableName string `json:"tableName"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 数据库名 (Optional) */
+    DbName string `json:"dbName"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
+    /* 引擎类型 (Optional) */
+    Engine string `json:"engine"`
 
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
+    /* 表空间 (Optional) */
+    TotalSize string `json:"totalSize"`
 
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 表空间占比，如 40% (Optional) */
+    Percentage string `json:"percentage"`
+
+    /* 数据空间 (Optional) */
+    DataSize string `json:"dataSize"`
+
+    /* 索引空间 (Optional) */
+    IdxSize string `json:"idxSize"`
+
+    /* 碎片率，如 0.99% (Optional) */
+    Fragment string `json:"fragment"`
+
+    /* 表行数 (Optional) */
+    DataRows int `json:"dataRows"`
 }

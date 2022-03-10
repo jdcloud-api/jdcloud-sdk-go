@@ -17,20 +17,20 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type PrecheckPlan struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 预检查任务Id (Optional) */
+    JobId string `json:"jobId"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 预检查任务项 (Optional) */
+    CheckItem string `json:"checkItem"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
+    /* 预检查任务项的描述 (Optional) */
+    Description string `json:"description"`
 
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
+    /* 是否成功 (Optional) */
+    Success bool `json:"success"`
 
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 错误信息，仅sucess为false时返回 (Optional) */
+    ErrorMessages string `json:"errorMessages"`
 }

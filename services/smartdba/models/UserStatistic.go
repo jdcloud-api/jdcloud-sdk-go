@@ -17,20 +17,17 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type UserStatistic struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 会话用户 (Optional) */
+    User string `json:"user"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 活跃会话总数 (Optional) */
+    ActiveCount int `json:"activeCount"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
+    /* 会话id列表 (Optional) */
+    ThreadIdList string `json:"threadIdList"`
 
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
-
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 会话总数 (Optional) */
+    TotalCount int `json:"totalCount"`
 }

@@ -40,7 +40,7 @@ func NewVmClient(credential *core.Credential) *VmClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vm",
-            Revision:    "1.4.1",
+            Revision:    "1.4.2",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -185,8 +185,6 @@ func (c *VmClient) ShareImage(request *vm.ShareImageRequest) (*vm.ShareImageResp
 存量主机加入高可用组。
 
 存量主机加入高可用组，或者主机从一个高可用组移动到另一个高可用组
-
-详细操作说明请参考帮助文档：[存量主机加入高可用组](https://docs.jdcloud.com/cn/virtual-machines/rebuild-instance)
 
 ## 接口说明
 - 不支持专属宿主机上的实例调整高可用组。

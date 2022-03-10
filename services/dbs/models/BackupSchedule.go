@@ -17,20 +17,14 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type BackupSchedule struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 周期类型，目前仅支持weekly  */
+    Period string `json:"period"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 进行全量备份的日期, 备份周期为 weekly 时可以取 0-6 分别对应的是周日到周六  */
+    Days []int `json:"days"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
-
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
-
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 全量备份的开始时间，精确到分,UTC时间格式，例如：23:30Z  */
+    StartTime string `json:"startTime"`
 }
