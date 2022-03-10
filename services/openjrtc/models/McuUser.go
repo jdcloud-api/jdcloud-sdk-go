@@ -17,20 +17,8 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type McuUser struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
-
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
-
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
-
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
-
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 业务接入方用户体系定义的且在JRTC系统内注册过的userId (Optional) */
+    UserId *string `json:"userId"`
 }

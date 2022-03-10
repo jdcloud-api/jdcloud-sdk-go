@@ -17,20 +17,11 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type PushStreamRule struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 业务接入方定义的且在JRTC系统内注册过的房间号 (Optional) */
+    UserRoomId *string `json:"userRoomId"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
-
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
-
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
-
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 业务接入方用户体系定义的且在JRTC系统内注册过的userId,当前不支持混流，且只支持一个userId,不指定时，默认录转推房间内所有userId的单路音视频流 (Optional) */
+    McuUsers *string `json:"mcuUsers"`
 }

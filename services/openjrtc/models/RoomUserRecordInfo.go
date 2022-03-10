@@ -17,7 +17,7 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type RoomUserRecordInfo struct {
 
     /* 当前页码 (Optional) */
     PageNumber int `json:"pageNumber"`
@@ -32,5 +32,5 @@ type RoomUserNumInfos struct {
     TotalPages int `json:"totalPages"`
 
     /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    Content []RoomUserRecord `json:"content"`
 }

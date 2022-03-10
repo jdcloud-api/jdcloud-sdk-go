@@ -17,20 +17,23 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type UpdateRecordConfigReqObj struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 应用ID (Optional) */
+    AppId string `json:"appId"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 录制类型 1-全局录制 2-指定录制 (Optional) */
+    RecordType int `json:"recordType"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
+    /* 存储位置 (Optional) */
+    Bucket string `json:"bucket"`
 
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
+    /* 录制文件类型 (Optional) */
+    FileType string `json:"fileType"`
 
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 回调地址 (Optional) */
+    CallbackUrl string `json:"callbackUrl"`
+
+    /* 回调token (Optional) */
+    CallbackToken string `json:"callbackToken"`
 }

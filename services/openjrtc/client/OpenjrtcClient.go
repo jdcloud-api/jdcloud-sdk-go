@@ -40,7 +40,7 @@ func NewOpenjrtcClient(credential *core.Credential) *OpenjrtcClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "openjrtc",
-            Revision:    "1.1.2",
+            Revision:    "1.1.5",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -96,6 +96,27 @@ func (c *OpenjrtcClient) DescribeRoomUsers(request *openjrtc.DescribeRoomUsersRe
     }
 
     jdResp := &openjrtc.DescribeRoomUsersResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 下发混流任务
+ */
+func (c *OpenjrtcClient) StartMcuTranscode(request *openjrtc.StartMcuTranscodeRequest) (*openjrtc.StartMcuTranscodeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &openjrtc.StartMcuTranscodeResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -180,6 +201,27 @@ func (c *OpenjrtcClient) UpdateUserRoom(request *openjrtc.UpdateUserRoomRequest)
     }
 
     jdResp := &openjrtc.UpdateUserRoomResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 添加录制规则
+ */
+func (c *OpenjrtcClient) AddRecordRule(request *openjrtc.AddRecordRuleRequest) (*openjrtc.AddRecordRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &openjrtc.AddRecordRuleResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -338,6 +380,27 @@ func (c *OpenjrtcClient) RegisterUser(request *openjrtc.RegisterUserRequest) (*o
     return jdResp, err
 }
 
+/* 关闭房间内的指定流
+ */
+func (c *OpenjrtcClient) CloseRoomUserStream(request *openjrtc.CloseRoomUserStreamRequest) (*openjrtc.CloseRoomUserStreamResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &openjrtc.CloseRoomUserStreamResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 发送自定义信令给房间 */
 func (c *OpenjrtcClient) SendMessageToRoom(request *openjrtc.SendMessageToRoomRequest) (*openjrtc.SendMessageToRoomResponse, error) {
     if request == nil {
@@ -391,6 +454,27 @@ func (c *OpenjrtcClient) DescribeRoomOnlineUserNum(request *openjrtc.DescribeRoo
     }
 
     jdResp := &openjrtc.DescribeRoomOnlineUserNumResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 中止混流任务
+ */
+func (c *OpenjrtcClient) StopMcuTranscode(request *openjrtc.StopMcuTranscodeRequest) (*openjrtc.StopMcuTranscodeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &openjrtc.StopMcuTranscodeResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -560,6 +644,27 @@ func (c *OpenjrtcClient) RemoveUserByUserRoomId(request *openjrtc.RemoveUserByUs
     }
 
     jdResp := &openjrtc.RemoveUserByUserRoomIdResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 添加推流规则
+ */
+func (c *OpenjrtcClient) AddPushStreamRule(request *openjrtc.AddPushStreamRuleRequest) (*openjrtc.AddPushStreamRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &openjrtc.AddPushStreamRuleResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

@@ -17,20 +17,23 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type UserNumInfo struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 应用ID (Optional) */
+    AppId string `json:"appId"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 应用名称 (Optional) */
+    AppName string `json:"appName"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
+    /* 业务接入方定义的且在JRTC系统内注册过的房间号 (Optional) */
+    UserRoomId string `json:"userRoomId"`
 
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
+    /* 房间在线人数 (Optional) */
+    Number int `json:"number"`
 
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 持续时长-minute (Optional) */
+    Duration int64 `json:"duration"`
+
+    /* 创建时间UTC (Optional) */
+    CreateTime string `json:"createTime"`
 }

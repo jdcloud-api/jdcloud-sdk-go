@@ -17,20 +17,20 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type PushStreamConfigInfo struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 主键 (Optional) */
+    Id int64 `json:"id"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 应用ID (Optional) */
+    AppId string `json:"appId"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
+    /* 旁路转推开关 1-开启;0关闭 (Optional) */
+    PushStatus int `json:"pushStatus"`
 
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
+    /* 转推类型  1-全局自动 2-指定流转推 (Optional) */
+    PushType int `json:"pushType"`
 
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 推流域名 (Optional) */
+    PushDomain string `json:"pushDomain"`
 }

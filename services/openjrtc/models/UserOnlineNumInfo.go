@@ -17,20 +17,17 @@
 package models
 
 
-type RoomUserNumInfos struct {
+type UserOnlineNumInfo struct {
 
-    /* 当前页码 (Optional) */
-    PageNumber int `json:"pageNumber"`
+    /* 应用ID (Optional) */
+    AppId string `json:"appId"`
 
-    /* 每页数量 (Optional) */
-    PageSize int `json:"pageSize"`
+    /* 房间ID (Optional) */
+    RoomId int64 `json:"roomId"`
 
-    /* 查询总数 (Optional) */
-    TotalElements int `json:"totalElements"`
+    /* 房间在线人数 (Optional) */
+    Number int `json:"number"`
 
-    /* 总页数 (Optional) */
-    TotalPages int `json:"totalPages"`
-
-    /* 分页内容 (Optional) */
-    Content []UserNumInfo `json:"content"`
+    /* 创建时间UTC (Optional) */
+    CreateTime string `json:"createTime"`
 }
