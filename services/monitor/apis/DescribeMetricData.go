@@ -37,13 +37,22 @@ type DescribeMetricDataRequest struct {
     /* 采样方式，用于在时间轴维度上将聚合周期内的数据聚合为一个点。可选值参考：sum(聚合周期内的数据求和)、avg(求平均)、last(最新值)、min(最小值)、max(最大值) (Optional) */
     DownSampleType *string `json:"downSampleType"`
 
-    /* 查询时间范围的开始时间， UTC时间，格式：2016-12-11T00:00:00+0800（注意在url中+要转译为%2B故url中为2016-12-11T00:00:00%2B0800） (Optional) */
+    /* 查询时间范围的开始时间， UTC时间，格式：2016-12-11T00:00:00+0800（注意在url中+要转译为%2B故url中为2016-12-11T00:00:00%2B0800）
+开始时间不得晚于当前时间,开始时间不得早于 30 天前
+ (Optional) */
     StartTime *string `json:"startTime"`
 
-    /* 查询时间范围的结束时间， UTC时间，格式：2016-12-11T00:00:00+0800（为空时，将由startTime与timeInterval计算得出）（注意在url中+要转译为%2B故url中为2016-12-11T00:00:00%2B0800） (Optional) */
+    /* 查询时间范围的结束时间, UTC时间，格式：2016-12-11T00:00:00+0800（为空时，将由startTime与timeInterval计算得出）（注意在url中+要转译为%2B故url中为2016-12-11T00:00:00%2B0800）
+默认为当前时间,结束时间不得晚于当前时间. 如果晚于, 会被默认设成当前时间, 结束时间不得早于 30 天前.
+ (Optional) */
     EndTime *string `json:"endTime"`
 
-    /* 时间间隔：1h，6h，12h，1d，3d，7d，14d，固定时间间隔，timeInterval默认为1h，当前时间往 前1h (Optional) */
+    /* 时间间隔：1h，6h，12h，1d，3d，7d，14d，固定时间间隔，timeInterval默认为1h，当前时间往 前1h
+如果指定了 startTime 和 endTime,可以不用设置. 默认的,三个参数都不设置查询 1h 内数据.
+timeInterval 默认值 1h
+endTime 默认值, 当前时间
+startTime 默认值,  endTime - timeInterval
+ (Optional) */
     TimeInterval *string `json:"timeInterval"`
 
     /* 监控指标数据的维度信息,根据tags来筛选指标数据不同的维度 (Optional) */
@@ -52,7 +61,7 @@ type DescribeMetricDataRequest struct {
     /* 是否对查询的tags分组 (Optional) */
     GroupBy *bool `json:"groupBy"`
 
-    /* 是否求速率。仅对累积类型指标有意义 (Optional) */
+    /* 是否求速率。仅对累积类型指标有意义, 默认 false (Optional) */
     Rate *bool `json:"rate"`
 
     /* 资源的类型，取值vm, lb, ip, database 等,<a href="https://docs.jdcloud.com/cn/monitoring/api/describeservices?content=API&SOP=JDCloud">describeServices</a>：查询己接入云监控的产品线列表 (Optional) */
@@ -96,12 +105,21 @@ func NewDescribeMetricDataRequest(
  * param metric: 监控项英文标识(id) (Required)
  * param aggrType: 聚合方式，用于不同时间轴上的聚合。如balance产品同一个resourceId下存在port=80和port=8080等多种维度。可选值参考:sum、avg、min、max (Optional)
  * param downSampleType: 采样方式，用于在时间轴维度上将聚合周期内的数据聚合为一个点。可选值参考：sum(聚合周期内的数据求和)、avg(求平均)、last(最新值)、min(最小值)、max(最大值) (Optional)
- * param startTime: 查询时间范围的开始时间， UTC时间，格式：2016-12-11T00:00:00+0800（注意在url中+要转译为%2B故url中为2016-12-11T00:00:00%2B0800） (Optional)
- * param endTime: 查询时间范围的结束时间， UTC时间，格式：2016-12-11T00:00:00+0800（为空时，将由startTime与timeInterval计算得出）（注意在url中+要转译为%2B故url中为2016-12-11T00:00:00%2B0800） (Optional)
- * param timeInterval: 时间间隔：1h，6h，12h，1d，3d，7d，14d，固定时间间隔，timeInterval默认为1h，当前时间往 前1h (Optional)
+ * param startTime: 查询时间范围的开始时间， UTC时间，格式：2016-12-11T00:00:00+0800（注意在url中+要转译为%2B故url中为2016-12-11T00:00:00%2B0800）
+开始时间不得晚于当前时间,开始时间不得早于 30 天前
+ (Optional)
+ * param endTime: 查询时间范围的结束时间, UTC时间，格式：2016-12-11T00:00:00+0800（为空时，将由startTime与timeInterval计算得出）（注意在url中+要转译为%2B故url中为2016-12-11T00:00:00%2B0800）
+默认为当前时间,结束时间不得晚于当前时间. 如果晚于, 会被默认设成当前时间, 结束时间不得早于 30 天前.
+ (Optional)
+ * param timeInterval: 时间间隔：1h，6h，12h，1d，3d，7d，14d，固定时间间隔，timeInterval默认为1h，当前时间往 前1h
+如果指定了 startTime 和 endTime,可以不用设置. 默认的,三个参数都不设置查询 1h 内数据.
+timeInterval 默认值 1h
+endTime 默认值, 当前时间
+startTime 默认值,  endTime - timeInterval
+ (Optional)
  * param tags: 监控指标数据的维度信息,根据tags来筛选指标数据不同的维度 (Optional)
  * param groupBy: 是否对查询的tags分组 (Optional)
- * param rate: 是否求速率。仅对累积类型指标有意义 (Optional)
+ * param rate: 是否求速率。仅对累积类型指标有意义, 默认 false (Optional)
  * param serviceCode: 资源的类型，取值vm, lb, ip, database 等,<a href="https://docs.jdcloud.com/cn/monitoring/api/describeservices?content=API&SOP=JDCloud">describeServices</a>：查询己接入云监控的产品线列表 (Optional)
  * param dimension: 资源的维度。查询serviceCode下可用的维度请使用describeServices接口 (Optional)
  * param resourceId: 资源的uuid (Required)
@@ -178,17 +196,26 @@ func (r *DescribeMetricDataRequest) SetDownSampleType(downSampleType string) {
     r.DownSampleType = &downSampleType
 }
 
-/* param startTime: 查询时间范围的开始时间， UTC时间，格式：2016-12-11T00:00:00+0800（注意在url中+要转译为%2B故url中为2016-12-11T00:00:00%2B0800）(Optional) */
+/* param startTime: 查询时间范围的开始时间， UTC时间，格式：2016-12-11T00:00:00+0800（注意在url中+要转译为%2B故url中为2016-12-11T00:00:00%2B0800）
+开始时间不得晚于当前时间,开始时间不得早于 30 天前
+(Optional) */
 func (r *DescribeMetricDataRequest) SetStartTime(startTime string) {
     r.StartTime = &startTime
 }
 
-/* param endTime: 查询时间范围的结束时间， UTC时间，格式：2016-12-11T00:00:00+0800（为空时，将由startTime与timeInterval计算得出）（注意在url中+要转译为%2B故url中为2016-12-11T00:00:00%2B0800）(Optional) */
+/* param endTime: 查询时间范围的结束时间, UTC时间，格式：2016-12-11T00:00:00+0800（为空时，将由startTime与timeInterval计算得出）（注意在url中+要转译为%2B故url中为2016-12-11T00:00:00%2B0800）
+默认为当前时间,结束时间不得晚于当前时间. 如果晚于, 会被默认设成当前时间, 结束时间不得早于 30 天前.
+(Optional) */
 func (r *DescribeMetricDataRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
 
-/* param timeInterval: 时间间隔：1h，6h，12h，1d，3d，7d，14d，固定时间间隔，timeInterval默认为1h，当前时间往 前1h(Optional) */
+/* param timeInterval: 时间间隔：1h，6h，12h，1d，3d，7d，14d，固定时间间隔，timeInterval默认为1h，当前时间往 前1h
+如果指定了 startTime 和 endTime,可以不用设置. 默认的,三个参数都不设置查询 1h 内数据.
+timeInterval 默认值 1h
+endTime 默认值, 当前时间
+startTime 默认值,  endTime - timeInterval
+(Optional) */
 func (r *DescribeMetricDataRequest) SetTimeInterval(timeInterval string) {
     r.TimeInterval = &timeInterval
 }
@@ -203,7 +230,7 @@ func (r *DescribeMetricDataRequest) SetGroupBy(groupBy bool) {
     r.GroupBy = &groupBy
 }
 
-/* param rate: 是否求速率。仅对累积类型指标有意义(Optional) */
+/* param rate: 是否求速率。仅对累积类型指标有意义, 默认 false(Optional) */
 func (r *DescribeMetricDataRequest) SetRate(rate bool) {
     r.Rate = &rate
 }

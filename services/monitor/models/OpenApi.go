@@ -17,37 +17,52 @@
 package models
 
 
-type Chart struct {
+type OpenApi struct {
 
     /* 自增id (Optional) */
     Id int `json:"id"`
 
-    /* serviceCode (Optional) */
+    /* 业务线代码 (Optional) */
     ServiceCode string `json:"serviceCode"`
 
-    /* groupCode (Optional) */
+    /* 代码 (Optional) */
     GroupCode string `json:"groupCode"`
 
-    /* chartNameCH (Optional) */
-    ChartNameCH string `json:"chartNameCH"`
+    /* 网关业务线代码 (Optional) */
+    GwServiceCode string `json:"gwServiceCode"`
 
-    /* chartNameEN (Optional) */
-    ChartNameEN string `json:"chartNameEN"`
+    /* 接口标识 (Optional) */
+    InterfaceName string `json:"interfaceName"`
 
-    /* chartUnitCH (Optional) */
-    ChartUnitCH string `json:"chartUnitCH"`
+    /* 请求地址 (Optional) */
+    ReqUrl string `json:"reqUrl"`
 
-    /* chartUnitEN (Optional) */
-    ChartUnitEN string `json:"chartUnitEN"`
+    /* 请求方式 (Optional) */
+    ReqMethod string `json:"reqMethod"`
 
-    /* chartIndex (Optional) */
-    ChartIndex int `json:"chartIndex"`
+    /* 请求接口版本 (Optional) */
+    ReqVersion string `json:"reqVersion"`
 
-    /* metrics (Optional) */
-    Metrics string `json:"metrics"`
+    /* 资源 (Optional) */
+    ParamResourceIds string `json:"paramResourceIds"`
 
-    /* metricIds (Optional) */
-    MetricIds []int `json:"metricIds"`
+    /* 地域 (Optional) */
+    ParamRegion string `json:"paramRegion"`
+
+    /* 响应实例 (Optional) */
+    RespResourceId string `json:"respResourceId"`
+
+    /* 响应实例名 (Optional) */
+    RespResourceName string `json:"respResourceName"`
+
+    /* 测试用户 (Optional) */
+    TestCasePin string `json:"testCasePin"`
+
+    /* 测试地域 (Optional) */
+    TestCaseRegion string `json:"testCaseRegion"`
+
+    /* 测试ids (Optional) */
+    TestCaseIds string `json:"testCaseIds"`
 
     /* 排序字段 (Optional) */
     Column string `json:"column"`

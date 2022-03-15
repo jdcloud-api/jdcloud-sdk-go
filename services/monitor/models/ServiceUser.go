@@ -17,17 +17,32 @@
 package models
 
 
-type ResourceOption struct {
+type ServiceUser struct {
 
-    /* 指定具体资源ID设置报警规则，每次最多100个。优先resourceItems生效 (Optional) */
-    ResourceItems []ResourceItem `json:"resourceItems"`
+    /* 自增id (Optional) */
+    Id int `json:"id"`
 
-    /*  (Optional) */
-    TagsOption *TagsOption `json:"tagsOption"`
+    /* erp (Optional) */
+    Erp string `json:"erp"`
 
-    /* 指定资源组设置报警规则 (Optional) */
-    ResourceGroups []string `json:"resourceGroups"`
+    /* 是否为管理员 (Optional) */
+    IsAdmin bool `json:"isAdmin"`
 
-    /* 资源筛选的类型,1:指定具体资源 2:标签筛选 3:资源组筛选 (Optional) */
-    ResourceFilterType *int64 `json:"resourceFilterType"`
+    /* 业务线代码 (Optional) */
+    ServiceCode string `json:"serviceCode"`
+
+    /* 业务线代码 (Optional) */
+    ServiceCodes []string `json:"serviceCodes"`
+
+    /* 排序字段 (Optional) */
+    Column string `json:"column"`
+
+    /* 排序方式 (Optional) */
+    Dir string `json:"dir"`
+
+    /* 页码 (Optional) */
+    Number int `json:"number"`
+
+    /* 查询条数 (Optional) */
+    Size int `json:"size"`
 }

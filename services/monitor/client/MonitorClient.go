@@ -40,7 +40,7 @@ func NewMonitorClient(credential *core.Credential) *MonitorClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "monitor",
-            Revision:    "2.4.5",
+            Revision:    "2.5.12",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -77,7 +77,11 @@ func (c *MonitorClient) CreateAlarm(request *monitor.CreateAlarmRequest) (*monit
     return jdResp, err
 }
 
-/* 查看某资源单个监控项数据，metric介绍：<a href="https://docs.jdcloud.com/cn/monitoring/metrics">Metrics</a>，可以使用接口<a href="https://docs.jdcloud.com/cn/monitoring/metrics">describeMetrics</a>：查询产品线可用的metric列表。 */
+/* 查看某资源单个监控项数据.
+metric介绍: <a href="https://docs.jdcloud.com/cn/monitoring/metrics">Metrics</a>
+可以使用接口:<a href="https://docs.jdcloud.com/cn/monitoring/metrics">describeMetrics</a>:查询产品线可用的metric列表。
+查询起止时间统一向下对齐10s, 举例:开始时间为 08:45:45 会对齐到08:45:40
+ */
 func (c *MonitorClient) DescribeMetricData(request *monitor.DescribeMetricDataRequest) (*monitor.DescribeMetricDataResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -108,6 +112,26 @@ func (c *MonitorClient) DescribeServices(request *monitor.DescribeServicesReques
     }
 
     jdResp := &monitor.DescribeServicesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 监控数据上报。 */
+func (c *MonitorClient) PutProductMetricData(request *monitor.PutProductMetricDataRequest) (*monitor.PutProductMetricDataResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &monitor.PutProductMetricDataResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -188,6 +212,26 @@ func (c *MonitorClient) DescribeAlarm(request *monitor.DescribeAlarmRequest) (*m
     }
 
     jdResp := &monitor.DescribeAlarmResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 监控数据上报。 */
+func (c *MonitorClient) Put(request *monitor.PutRequest) (*monitor.PutResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &monitor.PutResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

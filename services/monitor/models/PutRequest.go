@@ -17,17 +17,23 @@
 package models
 
 
-type ResourceOption struct {
+type PutRequest struct {
 
-    /* 指定具体资源ID设置报警规则，每次最多100个。优先resourceItems生效 (Optional) */
-    ResourceItems []ResourceItem `json:"resourceItems"`
+    /* 目前统一用jcloud  */
+    AppCode string `json:"appCode"`
 
     /*  (Optional) */
-    TagsOption *TagsOption `json:"tagsOption"`
+    DataCenter string `json:"dataCenter"`
 
-    /* 指定资源组设置报警规则 (Optional) */
-    ResourceGroups []string `json:"resourceGroups"`
+    /* 监控数据点  */
+    DataPoints []PutPoint `json:"dataPoints"`
 
-    /* 资源筛选的类型,1:指定具体资源 2:标签筛选 3:资源组筛选 (Optional) */
-    ResourceFilterType *int64 `json:"resourceFilterType"`
+    /* 地域信息，如 cn-north-1 等  */
+    Region string `json:"region"`
+
+    /*  (Optional) */
+    RequestId string `json:"requestId"`
+
+    /* 资源的类型，取值vm,ip,database,storage,disk,cdn,redis,balance,nat_gw,db_ro,vpn,ddos等,新接入的产品要求与opentapi命名的产品线名称一致  */
+    ServiceCode string `json:"serviceCode"`
 }
