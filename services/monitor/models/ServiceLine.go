@@ -17,37 +17,40 @@
 package models
 
 
-type Chart struct {
+type ServiceLine struct {
 
     /* 自增id (Optional) */
     Id int `json:"id"`
 
-    /* serviceCode (Optional) */
+    /* 业务线代码 (Optional) */
     ServiceCode string `json:"serviceCode"`
 
-    /* groupCode (Optional) */
-    GroupCode string `json:"groupCode"`
+    /* 业务线中文名 (Optional) */
+    ServiceNameCH string `json:"serviceNameCH"`
 
-    /* chartNameCH (Optional) */
-    ChartNameCH string `json:"chartNameCH"`
+    /* 业务线中文名 (Optional) */
+    ServiceNameEN string `json:"serviceNameEN"`
 
-    /* chartNameEN (Optional) */
-    ChartNameEN string `json:"chartNameEN"`
+    /* 数据上报延迟时间，单位s (Optional) */
+    MetricsTimeDelay int `json:"metricsTimeDelay"`
 
-    /* chartUnitCH (Optional) */
-    ChartUnitCH string `json:"chartUnitCH"`
+    /* 数据上报时间间隔，单位s (Optional) */
+    TimeInterval int `json:"timeInterval"`
 
-    /* chartUnitEN (Optional) */
-    ChartUnitEN string `json:"chartUnitEN"`
+    /* 维护者erp (Optional) */
+    Owner string `json:"owner"`
 
-    /* chartIndex (Optional) */
-    ChartIndex int `json:"chartIndex"`
+    /* 是否禁用报警 (Optional) */
+    DisableAlarmGroup int `json:"disableAlarmGroup"`
 
-    /* metrics (Optional) */
-    Metrics string `json:"metrics"`
+    /* 提交id (Optional) */
+    CommitId string `json:"commitId"`
 
-    /* metricIds (Optional) */
-    MetricIds []int `json:"metricIds"`
+    /* 分组 (Optional) */
+    Groups string `json:"groups"`
+
+    /* 分组 (Optional) */
+    GroupList []MetricGroup `json:"groupList"`
 
     /* 排序字段 (Optional) */
     Column string `json:"column"`

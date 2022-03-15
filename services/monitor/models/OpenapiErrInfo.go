@@ -17,17 +17,14 @@
 package models
 
 
-type ResourceOption struct {
-
-    /* 指定具体资源ID设置报警规则，每次最多100个。优先resourceItems生效 (Optional) */
-    ResourceItems []ResourceItem `json:"resourceItems"`
+type OpenapiErrInfo struct {
 
     /*  (Optional) */
-    TagsOption *TagsOption `json:"tagsOption"`
+    Code int `json:"code"`
 
-    /* 指定资源组设置报警规则 (Optional) */
-    ResourceGroups []string `json:"resourceGroups"`
+    /*  (Optional) */
+    Message string `json:"message"`
 
-    /* 资源筛选的类型,1:指定具体资源 2:标签筛选 3:资源组筛选 (Optional) */
-    ResourceFilterType *int64 `json:"resourceFilterType"`
+    /*  (Optional) */
+    Status string `json:"status"`
 }

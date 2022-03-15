@@ -17,7 +17,7 @@
 package models
 
 
-type Chart struct {
+type MetricGroup struct {
 
     /* 自增id (Optional) */
     Id int `json:"id"`
@@ -28,26 +28,32 @@ type Chart struct {
     /* groupCode (Optional) */
     GroupCode string `json:"groupCode"`
 
-    /* chartNameCH (Optional) */
-    ChartNameCH string `json:"chartNameCH"`
+    /* groupNameCH (Optional) */
+    GroupNameCH string `json:"groupNameCH"`
 
-    /* chartNameEN (Optional) */
-    ChartNameEN string `json:"chartNameEN"`
+    /* groupNameEN (Optional) */
+    GroupNameEN string `json:"groupNameEN"`
 
-    /* chartUnitCH (Optional) */
-    ChartUnitCH string `json:"chartUnitCH"`
+    /* webCode (Optional) */
+    WebCode string `json:"webCode"`
 
-    /* chartUnitEN (Optional) */
-    ChartUnitEN string `json:"chartUnitEN"`
+    /* mainTag (Optional) */
+    MainTag string `json:"mainTag"`
 
-    /* chartIndex (Optional) */
-    ChartIndex int `json:"chartIndex"`
+    /* tags (Optional) */
+    Tags string `json:"tags"`
 
-    /* metrics (Optional) */
-    Metrics string `json:"metrics"`
+    /* parent (Optional) */
+    Parent int `json:"parent"`
 
-    /* metricIds (Optional) */
-    MetricIds []int `json:"metricIds"`
+    /* hasChildren (Optional) */
+    HasChildren bool `json:"hasChildren"`
+
+    /* deletable (Optional) */
+    Deletable bool `json:"deletable"`
+
+    /* 业务线代码 (Optional) */
+    ServiceCodes []string `json:"serviceCodes"`
 
     /* 排序字段 (Optional) */
     Column string `json:"column"`
