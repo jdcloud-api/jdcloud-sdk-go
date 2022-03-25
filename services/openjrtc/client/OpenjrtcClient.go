@@ -40,7 +40,7 @@ func NewOpenjrtcClient(credential *core.Credential) *OpenjrtcClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "openjrtc",
-            Revision:    "1.1.5",
+            Revision:    "1.1.6",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -96,6 +96,27 @@ func (c *OpenjrtcClient) DescribeRoomUsers(request *openjrtc.DescribeRoomUsersRe
     }
 
     jdResp := &openjrtc.DescribeRoomUsersResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 开启语音识别功能
+ */
+func (c *OpenjrtcClient) StartAsrTask(request *openjrtc.StartAsrTaskRequest) (*openjrtc.StartAsrTaskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &openjrtc.StartAsrTaskResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -231,6 +252,54 @@ func (c *OpenjrtcClient) AddRecordRule(request *openjrtc.AddRecordRuleRequest) (
     return jdResp, err
 }
 
+/* 关闭语音识别功能
+ */
+func (c *OpenjrtcClient) StopAsrTask(request *openjrtc.StopAsrTaskRequest) (*openjrtc.StopAsrTaskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &openjrtc.StopAsrTaskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询房间用户记录,最大支持查询7天的数据
+允许通过条件过滤查询，支持的过滤字段如下：
+           - appId[eq] 按应用ID精确查询 (必填)
+           - startTime[eq] 开始时间 UTC格式 (必填)
+           - endTime[eq] 截止时间 UTC格式 (必填)
+           - userRoomId[eq] 按房间ID精确查询(必填)
+           - userId[eq] 按用户ID精确查询
+ */
+func (c *OpenjrtcClient) DescribeUserRecordByRoom(request *openjrtc.DescribeUserRecordByRoomRequest) (*openjrtc.DescribeUserRecordByRoomResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &openjrtc.DescribeUserRecordByRoomResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询注册房间号列表
 允许通过条件过滤查询，支持的过滤字段如下：
            - startTime[eq] 房间注册时间段开始时间-UTC时间 startTime,endTime同时有值时生效
@@ -350,6 +419,27 @@ func (c *OpenjrtcClient) RegisterUserRoom(request *openjrtc.RegisterUserRoomRequ
     }
 
     jdResp := &openjrtc.RegisterUserRoomResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取历史音频、区分视频码率通讯时长
+ */
+func (c *OpenjrtcClient) DescribeCallDurationByCodeRate(request *openjrtc.DescribeCallDurationByCodeRateRequest) (*openjrtc.DescribeCallDurationByCodeRateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &openjrtc.DescribeCallDurationByCodeRateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -674,6 +764,32 @@ func (c *OpenjrtcClient) AddPushStreamRule(request *openjrtc.AddPushStreamRuleRe
     return jdResp, err
 }
 
+/* 查询房间人数，通讯时长，最大支持查询7天的数据
+允许通过条件过滤查询，支持的过滤字段如下：
+           - appId[eq] 按应用ID精确查询(必填)
+           - userRoomId[eq] 按房间ID精确查询(必填)
+           - startTime[eq] 开始时间 UTC格式(必填)
+           - endTime[eq] 截止时间 UTC格式 (必填)
+ */
+func (c *OpenjrtcClient) DescribeOnlineUserNum(request *openjrtc.DescribeOnlineUserNumRequest) (*openjrtc.DescribeOnlineUserNumResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &openjrtc.DescribeOnlineUserNumResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 获取房间信息
  */
 func (c *OpenjrtcClient) DescribeRoomInfo(request *openjrtc.DescribeRoomInfoRequest) (*openjrtc.DescribeRoomInfoResponse, error) {
@@ -758,6 +874,27 @@ func (c *OpenjrtcClient) DescribeUserRoom(request *openjrtc.DescribeUserRoomRequ
     return jdResp, err
 }
 
+/* 获取近7天通讯时长
+ */
+func (c *OpenjrtcClient) DescribeDailyCallDuration(request *openjrtc.DescribeDailyCallDurationRequest) (*openjrtc.DescribeDailyCallDurationResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &openjrtc.DescribeDailyCallDurationResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 创建用户
  */
 func (c *OpenjrtcClient) CreateUser(request *openjrtc.CreateUserRequest) (*openjrtc.CreateUserResponse, error) {
@@ -770,6 +907,27 @@ func (c *OpenjrtcClient) CreateUser(request *openjrtc.CreateUserRequest) (*openj
     }
 
     jdResp := &openjrtc.CreateUserResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询用户端到端推流码率
+ */
+func (c *OpenjrtcClient) DescribeP2pStreamBitRate(request *openjrtc.DescribeP2pStreamBitRateRequest) (*openjrtc.DescribeP2pStreamBitRateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &openjrtc.DescribeP2pStreamBitRateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
