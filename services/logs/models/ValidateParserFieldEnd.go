@@ -20,6 +20,9 @@ package models
 type ValidateParserFieldEnd struct {
 
     /*  (Optional) */
+    FieldType string `json:"fieldType"`
+
+    /*  (Optional) */
     FieldValue string `json:"fieldValue"`
 
     /*  (Optional) */

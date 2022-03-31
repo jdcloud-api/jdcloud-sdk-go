@@ -23,11 +23,11 @@ type Entry struct {
     Content string `json:"content"`
 
     /* 日志流标识符,不传则使用全局日志流标识符 (Optional) */
-    Stream *string `json:"stream"`
+    Stream string `json:"stream"`
 
     /* 标签，不传则取全局标签 map[string]string (Optional) */
-    Tags *interface{} `json:"tags"`
+    Tags interface{} `json:"tags"`
 
     /* 时间戳，UTC格式，最多支持到纳秒级别，不传入则取全局时间戳。如 2019-04-08T03:08:04.437670934Z、2019-04-08T03:08:04Z、2019-04-08T03:08:04.123Z (Optional) */
-    Timestamp *string `json:"timestamp"`
+    Timestamp string `json:"timestamp"`
 }

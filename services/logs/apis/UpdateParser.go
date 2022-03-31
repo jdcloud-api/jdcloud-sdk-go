@@ -42,6 +42,9 @@ type UpdateParserRequest struct {
 
     /* 日志样例 (Optional) */
     ParserSample *string `json:"parserSample"`
+
+    /* 预处理任务列表。按照数组的顺序执行。 (Optional) */
+    Pipelines []logs.PipelineSpec `json:"pipelines"`
 }
 
 /*
@@ -80,6 +83,7 @@ func NewUpdateParserRequest(
  * param parserMode: 解析类型。oneline - 单行，split - 分割， json - json， regexp - regexp (Required)
  * param parserPattern: 解析语法 (Optional)
  * param parserSample: 日志样例 (Optional)
+ * param pipelines: 预处理任务列表。按照数组的顺序执行。 (Optional)
  */
 func NewUpdateParserRequestWithAllParams(
     regionId string,
@@ -88,6 +92,7 @@ func NewUpdateParserRequestWithAllParams(
     parserMode string,
     parserPattern *string,
     parserSample *string,
+    pipelines []logs.PipelineSpec,
 ) *UpdateParserRequest {
 
     return &UpdateParserRequest{
@@ -103,6 +108,7 @@ func NewUpdateParserRequestWithAllParams(
         ParserMode: parserMode,
         ParserPattern: parserPattern,
         ParserSample: parserSample,
+        Pipelines: pipelines,
     }
 }
 
@@ -147,6 +153,11 @@ func (r *UpdateParserRequest) SetParserPattern(parserPattern string) {
 /* param parserSample: 日志样例(Optional) */
 func (r *UpdateParserRequest) SetParserSample(parserSample string) {
     r.ParserSample = &parserSample
+}
+
+/* param pipelines: 预处理任务列表。按照数组的顺序执行。(Optional) */
+func (r *UpdateParserRequest) SetPipelines(pipelines []logs.PipelineSpec) {
+    r.Pipelines = pipelines
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
