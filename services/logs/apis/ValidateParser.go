@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    logs "github.com/jdcloud-api/jdcloud-sdk-go/services/logs/models"
 )
 
 type ValidateParserRequest struct {
@@ -32,6 +33,9 @@ type ValidateParserRequest struct {
 
     /* 日志样例 (Optional) */
     ParserSample *string `json:"parserSample"`
+
+    /* 预处理任务列表。按照数组的顺序执行。 (Optional) */
+    Pipelines []logs.PipelineSpec `json:"pipelines"`
 }
 
 /*
@@ -58,11 +62,13 @@ func NewValidateParserRequest(
  * param parserMode: 解析类型。oneline - 单行，split - 分割， json - json， regexp - regexp (Required)
  * param parserPattern: 解析语法 (Optional)
  * param parserSample: 日志样例 (Optional)
+ * param pipelines: 预处理任务列表。按照数组的顺序执行。 (Optional)
  */
 func NewValidateParserRequestWithAllParams(
     parserMode string,
     parserPattern *string,
     parserSample *string,
+    pipelines []logs.PipelineSpec,
 ) *ValidateParserRequest {
 
     return &ValidateParserRequest{
@@ -75,6 +81,7 @@ func NewValidateParserRequestWithAllParams(
         ParserMode: parserMode,
         ParserPattern: parserPattern,
         ParserSample: parserSample,
+        Pipelines: pipelines,
     }
 }
 
@@ -104,6 +111,11 @@ func (r *ValidateParserRequest) SetParserPattern(parserPattern string) {
 /* param parserSample: 日志样例(Optional) */
 func (r *ValidateParserRequest) SetParserSample(parserSample string) {
     r.ParserSample = &parserSample
+}
+
+/* param pipelines: 预处理任务列表。按照数组的顺序执行。(Optional) */
+func (r *ValidateParserRequest) SetPipelines(pipelines []logs.PipelineSpec) {
+    r.Pipelines = pipelines
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

@@ -30,4 +30,7 @@ type UpdateParserSpec struct {
 
     /* 日志样例 (Optional) */
     ParserSample string `json:"parserSample"`
+
+    /* 预处理任务列表。按照数组的顺序执行。 (Optional) */
+    Pipelines []PipelineSpec `json:"pipelines"`
 }

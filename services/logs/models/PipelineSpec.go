@@ -17,20 +17,20 @@
 package models
 
 
-type CreateParserSpec struct {
+type PipelineSpec struct {
 
-    /*   */
-    ParserFields []ParserField `json:"parserFields"`
+    /* 字段名称  */
+    Field string `json:"field"`
 
-    /* 解析类型。oneline - 单行，split - 分割， json - json， regexp - regexp  */
+    /* 字段类型。 system, custom。 不填写默认为custom (Optional) */
+    FieldType *string `json:"fieldType"`
+
+    /* 解析类型。目前仅支持 regexp。  */
     ParserMode string `json:"parserMode"`
 
     /* 解析语法 (Optional) */
-    ParserPattern string `json:"parserPattern"`
+    ParserPattern *string `json:"parserPattern"`
 
     /* 日志样例 (Optional) */
-    ParserSample string `json:"parserSample"`
-
-    /* 预处理任务列表。按照数组的顺序执行。 (Optional) */
-    Pipelines []PipelineSpec `json:"pipelines"`
+    ParserSample *string `json:"parserSample"`
 }

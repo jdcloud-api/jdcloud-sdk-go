@@ -40,7 +40,7 @@ func NewLogsClient(credential *core.Credential) *LogsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "logs",
-            Revision:    "1.2.10",
+            Revision:    "1.2.12",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -197,26 +197,6 @@ func (c *LogsClient) DescribeMetricTask(request *logs.DescribeMetricTaskRequest)
     return jdResp, err
 }
 
-/* 自定义日志上报。 */
-func (c *LogsClient) Put(request *logs.PutRequest) (*logs.PutResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &logs.PutResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 创建日志消费 */
 func (c *LogsClient) CreateSubscribe(request *logs.CreateSubscribeRequest) (*logs.CreateSubscribeResponse, error) {
     if request == nil {
@@ -317,26 +297,6 @@ func (c *LogsClient) DescribeLogset(request *logs.DescribeLogsetRequest) (*logs.
     return jdResp, err
 }
 
-/* 自定义日志上报。 */
-func (c *LogsClient) Push(request *logs.PushRequest) (*logs.PushResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &logs.PushResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 更新日志消费 */
 func (c *LogsClient) UpdateSubscribe(request *logs.UpdateSubscribeRequest) (*logs.UpdateSubscribeResponse, error) {
     if request == nil {
@@ -408,6 +368,26 @@ func (c *LogsClient) CreateMetricTask(request *logs.CreateMetricTaskRequest) (*l
     }
 
     jdResp := &logs.CreateMetricTaskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 日志检索结果直方图 */
+func (c *LogsClient) Histograms(request *logs.HistogramsRequest) (*logs.HistogramsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &logs.HistogramsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
