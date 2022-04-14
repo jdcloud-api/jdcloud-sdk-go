@@ -58,4 +58,13 @@ type ElasticIp struct {
 
     /* 弹性公网IP的IP类型，取值：standard(标准弹性IP)、edge(边缘弹性IP) (Optional) */
     IpType string `json:"ipType"`
+
+    /* 加入的共享带宽包ID，如果没有加入共享带宽包该值为空 (Optional) */
+    BandwidthPackageId string `json:"bandwidthPackageId"`
+
+    /* IP是否被绑定，取值：ASSOCIATED（被绑定）、NOT_ASSOCIATED（未被绑定） (Optional) */
+    Status string `json:"status"`
+
+    /* 资源所属资源组ID (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
 }

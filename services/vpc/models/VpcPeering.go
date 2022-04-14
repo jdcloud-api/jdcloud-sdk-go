@@ -34,6 +34,12 @@ type VpcPeering struct {
     /* 发起VpcPeering的Vpc信息 (Optional) */
     VpcInfo VpcPeeringVpcInfo `json:"vpcInfo"`
 
+    /* VPC az类型，取值：standard(标准VPC)，edge(边缘VPC) (Optional) */
+    AzType string `json:"azType"`
+
+    /* VPC可用区，边缘VPC非空，标准VPC为"" (Optional) */
+    Az string `json:"az"`
+
     /* 对端的Vpc信息 (Optional) */
     RemoteVpcInfo VpcPeeringVpcInfo `json:"remoteVpcInfo"`
 

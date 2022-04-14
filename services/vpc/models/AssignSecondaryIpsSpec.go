@@ -19,7 +19,7 @@ package models
 
 type AssignSecondaryIpsSpec struct {
 
-    /* secondary ip被其他接口占用时，是否抢占。false：非抢占重分配，true：抢占重分配，默认抢占重分配。默认值：true (Optional) */
+    /* secondary ip被其他接口占用时，是否抢占。false：非抢占重分配，true：抢占重分配；按网段分配时，默认非抢占重分配，指定IP或者个数时，默认抢占重分配。 (Optional) */
     Force bool `json:"force"`
 
     /* 指定分配的secondaryIp地址 (Optional) */
@@ -27,4 +27,10 @@ type AssignSecondaryIpsSpec struct {
 
     /* 指定自动分配的secondaryIp个数 (Optional) */
     SecondaryIpCount int `json:"secondaryIpCount"`
+
+    /* 指定分配的网段掩码长度, 支持24-28位掩码长度，不能与secondaryIpCount或secondaryIps同时指定，不支持抢占重分配 (Optional) */
+    SecondaryIpMaskLen int `json:"secondaryIpMaskLen"`
+
+    /* 指定分配的网段中第一个secondaryIp地址，不能与secondaryIpCount或secondaryIps同时指定，secondaryIpAddress与secondaryIpMaskLen需要保持一致，否则无法创建 (Optional) */
+    SecondaryIpAddress string `json:"secondaryIpAddress"`
 }

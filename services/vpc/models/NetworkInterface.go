@@ -25,7 +25,10 @@ type NetworkInterface struct {
     /* 弹性网卡ID (Optional) */
     NetworkInterfaceId string `json:"networkInterfaceId"`
 
-    /* 可用区名称，该参数无效，不建议使用 (Optional) */
+    /* 网卡所在az类型，取值：standard(标准Az)，edge(边缘Az) (Optional) */
+    AzType string `json:"azType"`
+
+    /* 网卡所在Az, 标准为""， 边缘为边缘az (Optional) */
     Az string `json:"az"`
 
     /* 网卡角色，取值范围：Primary（主网卡）、Secondary（辅助网卡） (Optional) */
@@ -51,6 +54,9 @@ type NetworkInterface struct {
 
     /* 网卡附属IP列表 (Optional) */
     SecondaryIps []NetworkInterfacePrivateIp `json:"secondaryIps"`
+
+    /* 网卡附属IP网段 (Optional) */
+    SecondaryCidrs []string `json:"secondaryCidrs"`
 
     /* 关联实例类型，取值范围：vm (Optional) */
     InstanceType string `json:"instanceType"`

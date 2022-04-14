@@ -26,9 +26,9 @@ type AzIpSpec struct {
     /* 公网IP可用区属性  */
     Az string `json:"az"`
 
-    /* 公网IP的限速（单位：Mbps），取值范围为[1-1000]  */
+    /* NAT网关公网IP的限速（单位：Mbps）。计费类型为按配置时，取值范围为[1-1000]；计费类型为按流量时，取值范围为[1-200]  */
     BandwidthMbps int `json:"bandwidthMbps"`
 
-    /* 计费配置,仅支持按配置，默认按配置 (Optional) */
+    /* 计费配置,支持按配置、按用量，默认按配置 (Optional) */
     IpCharge charge.ChargeSpec `json:"ipCharge"`
 }

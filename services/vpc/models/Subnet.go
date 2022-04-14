@@ -34,6 +34,9 @@ type Subnet struct {
     /* 子网可用ip数量 (Optional) */
     AvailableIpCount int `json:"availableIpCount"`
 
+    /* 子网内预留网段掩码长度，此网段IP地址按照单个申请，子网内其余部分IP地址以网段形式分配。此参数非必选，缺省值为0，代表子网内所有IP地址都按照单个申请 (Optional) */
+    IpMaskLen int `json:"ipMaskLen"`
+
     /* 子网描述信息 (Optional) */
     Description string `json:"description"`
 

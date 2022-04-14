@@ -35,7 +35,7 @@ type RouteTableRule struct {
     AddressPrefix string `json:"addressPrefix"`
 
     /* 路由类型，propagated:传播、static:静态 (Optional) */
-    RouteType string `json:"routeType"`
+    Origin string `json:"origin"`
 
     /* 路由描述，允许输入UTF-8编码下的全部字符，不超过256字符。 (Optional) */
     Description string `json:"description"`

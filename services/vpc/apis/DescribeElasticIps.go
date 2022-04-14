@@ -40,11 +40,16 @@ elasticIpAddress - eip的IP地址，支持单个
 chargeStatus	- eip的费用支付状态,normal(正常状态) or overdue(预付费已到期) or arrear(欠费状态)，支持单个
 ipType - eip类型，取值：all(所有类型)、standard(标准弹性IP)、edge(边缘弹性IP)，默认standard，支持单个
 azs - eip可用区，支持多个
+bandwidthPackageId - 共享带宽包ID，支持单个
+status - IP是否被绑定，取值：ASSOCIATED（被绑定）、NOT_ASSOCIATED（未被绑定）、ALL（全部）。支持单个
  (Optional) */
     Filters []common.Filter `json:"filters"`
 
     /* Tag筛选条件 (Optional) */
     Tags []vpc.TagFilter `json:"tags"`
+
+    /* 资源组筛选条件 (Optional) */
+    ResourceGroupIds []string `json:"resourceGroupIds"`
 }
 
 /*
@@ -76,8 +81,11 @@ elasticIpAddress - eip的IP地址，支持单个
 chargeStatus	- eip的费用支付状态,normal(正常状态) or overdue(预付费已到期) or arrear(欠费状态)，支持单个
 ipType - eip类型，取值：all(所有类型)、standard(标准弹性IP)、edge(边缘弹性IP)，默认standard，支持单个
 azs - eip可用区，支持多个
+bandwidthPackageId - 共享带宽包ID，支持单个
+status - IP是否被绑定，取值：ASSOCIATED（被绑定）、NOT_ASSOCIATED（未被绑定）、ALL（全部）。支持单个
  (Optional)
  * param tags: Tag筛选条件 (Optional)
+ * param resourceGroupIds: 资源组筛选条件 (Optional)
  */
 func NewDescribeElasticIpsRequestWithAllParams(
     regionId string,
@@ -85,6 +93,7 @@ func NewDescribeElasticIpsRequestWithAllParams(
     pageSize *int,
     filters []common.Filter,
     tags []vpc.TagFilter,
+    resourceGroupIds []string,
 ) *DescribeElasticIpsRequest {
 
     return &DescribeElasticIpsRequest{
@@ -99,6 +108,7 @@ func NewDescribeElasticIpsRequestWithAllParams(
         PageSize: pageSize,
         Filters: filters,
         Tags: tags,
+        ResourceGroupIds: resourceGroupIds,
     }
 }
 
@@ -135,6 +145,8 @@ elasticIpAddress - eip的IP地址，支持单个
 chargeStatus	- eip的费用支付状态,normal(正常状态) or overdue(预付费已到期) or arrear(欠费状态)，支持单个
 ipType - eip类型，取值：all(所有类型)、standard(标准弹性IP)、edge(边缘弹性IP)，默认standard，支持单个
 azs - eip可用区，支持多个
+bandwidthPackageId - 共享带宽包ID，支持单个
+status - IP是否被绑定，取值：ASSOCIATED（被绑定）、NOT_ASSOCIATED（未被绑定）、ALL（全部）。支持单个
 (Optional) */
 func (r *DescribeElasticIpsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
@@ -143,6 +155,11 @@ func (r *DescribeElasticIpsRequest) SetFilters(filters []common.Filter) {
 /* param tags: Tag筛选条件(Optional) */
 func (r *DescribeElasticIpsRequest) SetTags(tags []vpc.TagFilter) {
     r.Tags = tags
+}
+
+/* param resourceGroupIds: 资源组筛选条件(Optional) */
+func (r *DescribeElasticIpsRequest) SetResourceGroupIds(resourceGroupIds []string) {
+    r.ResourceGroupIds = resourceGroupIds
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

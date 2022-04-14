@@ -35,6 +35,9 @@ type ModifySubnetRequest struct {
 
     /* 子网描述信息，允许输入UTF-8编码下的全部字符，不超过256字符。 (Optional) */
     Description *string `json:"description"`
+
+    /* 子网内预留网段掩码长度，此网段IP地址按照单个申请，子网内其余部分IP地址以网段形式分配。此参数非必选，缺省值为0，代表子网内所有IP地址都按照单个申请 (Optional) */
+    IpMaskLen *int `json:"ipMaskLen"`
 }
 
 /*
@@ -65,12 +68,14 @@ func NewModifySubnetRequest(
  * param subnetId: Subnet ID (Required)
  * param subnetName: 子网名称,只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符。 (Optional)
  * param description: 子网描述信息，允许输入UTF-8编码下的全部字符，不超过256字符。 (Optional)
+ * param ipMaskLen: 子网内预留网段掩码长度，此网段IP地址按照单个申请，子网内其余部分IP地址以网段形式分配。此参数非必选，缺省值为0，代表子网内所有IP地址都按照单个申请 (Optional)
  */
 func NewModifySubnetRequestWithAllParams(
     regionId string,
     subnetId string,
     subnetName *string,
     description *string,
+    ipMaskLen *int,
 ) *ModifySubnetRequest {
 
     return &ModifySubnetRequest{
@@ -84,6 +89,7 @@ func NewModifySubnetRequestWithAllParams(
         SubnetId: subnetId,
         SubnetName: subnetName,
         Description: description,
+        IpMaskLen: ipMaskLen,
     }
 }
 
@@ -118,6 +124,11 @@ func (r *ModifySubnetRequest) SetSubnetName(subnetName string) {
 /* param description: 子网描述信息，允许输入UTF-8编码下的全部字符，不超过256字符。(Optional) */
 func (r *ModifySubnetRequest) SetDescription(description string) {
     r.Description = &description
+}
+
+/* param ipMaskLen: 子网内预留网段掩码长度，此网段IP地址按照单个申请，子网内其余部分IP地址以网段形式分配。此参数非必选，缺省值为0，代表子网内所有IP地址都按照单个申请(Optional) */
+func (r *ModifySubnetRequest) SetIpMaskLen(ipMaskLen int) {
+    r.IpMaskLen = &ipMaskLen
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
