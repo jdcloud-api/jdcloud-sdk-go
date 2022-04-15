@@ -43,6 +43,12 @@ type RouteTable struct {
     /* 路由表绑定的子网列表 (Optional) */
     SubnetIds []string `json:"subnetIds"`
 
+    /* 路由表az类型，取值：standard(标准路由表)，edge(边缘路由表) (Optional) */
+    AzType string `json:"azType"`
+
+    /* 路由表可用区 (Optional) */
+    Az string `json:"az"`
+
     /* 路由表创建时间 (Optional) */
     CreatedTime string `json:"createdTime"`
 }

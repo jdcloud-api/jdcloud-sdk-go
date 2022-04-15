@@ -27,4 +27,10 @@ type VpcPeeringVpcInfo struct {
 
     /* 如果为空，则不限制网段，如果不为空，10.0.0.0/8、172.16.0.0/12和192.168.0.0/16及它们包含的子网，且子网掩码长度为16-28之间 (Optional) */
     AddressPrefix []string `json:"addressPrefix"`
+
+    /* VPC az类型，取值：standard(标准VPC)，edge(边缘VPC) (Optional) */
+    AzType string `json:"azType"`
+
+    /* VPC可用区，中心VPC为"" (Optional) */
+    Az string `json:"az"`
 }

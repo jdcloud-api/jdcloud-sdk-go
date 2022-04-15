@@ -24,4 +24,7 @@ type ModifySubnetSpec struct {
 
     /* 子网描述信息，允许输入UTF-8编码下的全部字符，不超过256字符。 (Optional) */
     Description string `json:"description"`
+
+    /* 子网内预留网段掩码长度，此网段IP地址按照单个申请，子网内其余部分IP地址以网段形式分配。此参数非必选，缺省值为0，代表子网内所有IP地址都按照单个申请 (Optional) */
+    IpMaskLen int `json:"ipMaskLen"`
 }

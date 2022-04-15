@@ -33,4 +33,10 @@ type CreateElasticIpSpec struct {
 
     /* 弹性ip类型，取值：standard(标准公网IP)，edge(边缘公网IP)，默认为standard (Optional) */
     IpType string `json:"ipType"`
+
+    /* 资源所属资源组ID (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
+
+    /* 预检标识，默认false，dryRun为true时只作检查，不做变更 (Optional) */
+    DryRun bool `json:"dryRun"`
 }

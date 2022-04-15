@@ -35,9 +35,9 @@ type DescribeNetworkAclsRequest struct {
     /* 分页大小，默认为20，取值范围：[10,100] (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* networkAclIds - 弹性网卡ID列表，支持多个
-networkAclNames - 弹性网卡名称列表，支持多个
-vpcId - 弹性网卡所属vpc Id，支持单个
+    /* networkAclIds - networkAcl ID列表，支持多个
+networkAclNames - networkAcl名称列表，支持多个
+vpcId - networkAcl所属vpc Id，支持单个
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
@@ -66,9 +66,9 @@ func NewDescribeNetworkAclsRequest(
  * param regionId: Region ID (Required)
  * param pageNumber: 页码, 默认为1, 取值范围：[1,∞), 页码超过总页数时, 显示最后一页 (Optional)
  * param pageSize: 分页大小，默认为20，取值范围：[10,100] (Optional)
- * param filters: networkAclIds - 弹性网卡ID列表，支持多个
-networkAclNames - 弹性网卡名称列表，支持多个
-vpcId - 弹性网卡所属vpc Id，支持单个
+ * param filters: networkAclIds - networkAcl ID列表，支持多个
+networkAclNames - networkAcl名称列表，支持多个
+vpcId - networkAcl所属vpc Id，支持单个
  (Optional)
  */
 func NewDescribeNetworkAclsRequestWithAllParams(
@@ -120,9 +120,9 @@ func (r *DescribeNetworkAclsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
-/* param filters: networkAclIds - 弹性网卡ID列表，支持多个
-networkAclNames - 弹性网卡名称列表，支持多个
-vpcId - 弹性网卡所属vpc Id，支持单个
+/* param filters: networkAclIds - networkAcl ID列表，支持多个
+networkAclNames - networkAcl名称列表，支持多个
+vpcId - networkAcl所属vpc Id，支持单个
 (Optional) */
 func (r *DescribeNetworkAclsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters

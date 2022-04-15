@@ -40,7 +40,7 @@ func NewVpcClient(credential *core.Credential) *VpcClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vpc",
-            Revision:    "0.9.2",
+            Revision:    "1.0.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -57,7 +57,7 @@ func (c *VpcClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
 }
 
-/* 删除弹性公网IP */
+/* 删除弹性公网IP，已加入共享带宽包的公网IP不能删除，需要先从共享带宽包移出 */
 func (c *VpcClient) DeleteElasticIp(request *vpc.DeleteElasticIpRequest) (*vpc.DeleteElasticIpResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -97,7 +97,66 @@ func (c *VpcClient) ModifyVpcPeering(request *vpc.ModifyVpcPeeringRequest) (*vpc
     return jdResp, err
 }
 
-/* 修改弹性公网IP */
+/* 
+共享带宽包资源信息详情
+
+## 接口说明
+
+- 该接口与查询共享带宽包列表返回的信息一致。
+
+- 只需要查询单个共享带宽包详细信息的时候可以调用该接口。
+ */
+func (c *VpcClient) DescribeBandwidthPackage(request *vpc.DescribeBandwidthPackageRequest) (*vpc.DescribeBandwidthPackageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.DescribeBandwidthPackageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 指定地域创建共享带宽包实例。
+
+## 接口说明
+
+- 需要接口完成实名认证、支付方式确认、计费类型选择等准备工作。
+
+- 各地域下包年包月和按配置计费的共享带宽包不受配额限制，按用量计费的共享带宽包可创建数量受配额限制，创建前请通过 [DescribeQuotas](https://docs.jdcloud.com/cn/shared-bandwidth-package/api/describequotas?content=API) 确认配额，如须提升请[提交工单](https://ticket.jdcloud.com/applyorder/submit)或联系京东云客服。
+
+- 通过本接口创建包年包月资源时将自动从账户扣款（代金券优先），如需使用第三方支付方式请通过控制台创建。
+
+- 按用量计费模式需提工单申请使用权限，默认支持增强95消峰计费。
+ */
+func (c *VpcClient) CreateBandwidthPackage(request *vpc.CreateBandwidthPackageRequest) (*vpc.CreateBandwidthPackageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.CreateBandwidthPackageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改弹性公网IP，当弹性公网IP加入共享带宽包后，此公网IP限速需要调用共享带宽包的接口（修改共享带宽包内公网IP带宽上限） */
 func (c *VpcClient) ModifyElasticIp(request *vpc.ModifyElasticIpRequest) (*vpc.ModifyElasticIpResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -188,6 +247,34 @@ func (c *VpcClient) DescribeSubnets(request *vpc.DescribeSubnetsRequest) (*vpc.D
     }
 
     jdResp := &vpc.DescribeSubnetsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 
+从共享带宽包内移除公网IP
+
+## 接口说明
+
+-  弹性公网IP从共享带宽包中移除后，恢复原有的计费模式和带宽上限。
+
+-  共享带宽包是否计费与共享带宽包中有无弹性公网IP无关，如共享带宽包中无弹性公网IP资源时请及时删除资源，避免产生额外费用
+ */
+func (c *VpcClient) RemoveBandwidthPackageIP(request *vpc.RemoveBandwidthPackageIPRequest) (*vpc.RemoveBandwidthPackageIPResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.RemoveBandwidthPackageIPResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -417,6 +504,34 @@ func (c *VpcClient) DescribeVpcPeerings(request *vpc.DescribeVpcPeeringsRequest)
     return jdResp, err
 }
 
+/* 
+修改共享带宽包信息，包括带宽上限及共享带宽包名称、描述信息。
+
+## 接口说明
+
+- 如共享带宽包中的弹性公网 IP 有单独限速。共享带宽包的带宽上限值不能低于其包含任一弹性公网IP的带宽上限值。
+
+- 欠费或到期的共享带宽包资源不支持修改带宽上限。
+ */
+func (c *VpcClient) ModifyBandwidthPackage(request *vpc.ModifyBandwidthPackageRequest) (*vpc.ModifyBandwidthPackageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.ModifyBandwidthPackageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询Acl列表 */
 func (c *VpcClient) DescribeNetworkAcls(request *vpc.DescribeNetworkAclsRequest) (*vpc.DescribeNetworkAclsResponse, error) {
     if request == nil {
@@ -448,6 +563,31 @@ func (c *VpcClient) DescribeSubnet(request *vpc.DescribeSubnetRequest) (*vpc.Des
     }
 
     jdResp := &vpc.DescribeSubnetResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除共享带宽包
+
+## 接口说明
+
+- 当共享带宽包内有公网IP存在时、包年包月类型的共享带宽包未到期时、按用量计费的共享带宽包使用时长未满一个完整的自然月时均不支持删除共享带宽包
+ */
+func (c *VpcClient) DeleteBandwidthPackage(request *vpc.DeleteBandwidthPackageRequest) (*vpc.DeleteBandwidthPackageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.DeleteBandwidthPackageResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -497,7 +637,7 @@ func (c *VpcClient) DescribeNetworkSecurityGroups(request *vpc.DescribeNetworkSe
     return jdResp, err
 }
 
-/* 查询Vpc信息详情 */
+/* 查询虚拟网络信息详情 */
 func (c *VpcClient) DescribeVpc(request *vpc.DescribeVpcRequest) (*vpc.DescribeVpcResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -508,6 +648,44 @@ func (c *VpcClient) DescribeVpc(request *vpc.DescribeVpcRequest) (*vpc.DescribeV
     }
 
     jdResp := &vpc.DescribeVpcResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 
+向共享带宽包内增加公网IP
+
+## 接口说明 
+
+- 确保已有至少一个共享带宽包资源。
+
+- 添加弹性公网IP前，需确保弹性公网IP所在地域与共享带宽包地域和线路相同，弹性公网IP的计费模式为按配置或按用量计费，且未加入其他的共享带宽包资源。
+
+- 已欠费的、包年包月的公网IP不能加入共享带宽包。
+
+- 一个公网IP同时只能加入一个共享带宽包。
+
+- 共享带宽包中可添加的弹性公网IP受配额限制，添加前请通过 [DescribeQuotas](https://docs.jdcloud.com/cn/shared-bandwidth-package/api/describequotas?content=API) 确认配额，如须提升请[提交工单](https://ticket.jdcloud.com/applyorder/submit)或联系京东云客服。
+
+- 弹性公网IP加入共享带宽包后，弹性公网 IP 会原有的计费和带宽上限暂时失效，已共享带宽包进行计费，带宽上限默认为共享带宽包的带宽上限，可通过[modifyBandwidthPackageIpBandwidth](https://docs.jdcloud.com/cn/shared-bandwidth-package/api/modifybandwidthpackageIpbandwidth)进行修改。
+
+- 共享带宽包欠费或到期停服后不支持添加弹性公网IP。
+ */
+func (c *VpcClient) AddBandwidthPackageIP(request *vpc.AddBandwidthPackageIPRequest) (*vpc.AddBandwidthPackageIPResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.AddBandwidthPackageIPResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -737,7 +915,7 @@ func (c *VpcClient) CreateVpcPeering(request *vpc.CreateVpcPeeringRequest) (*vpc
     return jdResp, err
 }
 
-/* 给网卡分配secondaryIp接口 */
+/* 给网卡分配secondaryIp */
 func (c *VpcClient) AssignSecondaryIps(request *vpc.AssignSecondaryIpsRequest) (*vpc.AssignSecondaryIpsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -777,7 +955,7 @@ func (c *VpcClient) DescribeRouteTables(request *vpc.DescribeRouteTablesRequest)
     return jdResp, err
 }
 
-/* 修改弹性网卡接口 */
+/* 修改弹性网卡信息 */
 func (c *VpcClient) ModifyNetworkInterface(request *vpc.ModifyNetworkInterfaceRequest) (*vpc.ModifyNetworkInterfaceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -917,6 +1095,66 @@ func (c *VpcClient) DeleteVpcPeering(request *vpc.DeleteVpcPeeringRequest) (*vpc
     return jdResp, err
 }
 
+/* 
+修改共享带宽包内弹性公网 IP 的带宽上限。
+
+## 接口说明
+
+- 共享带宽包中弹性公网IP的带宽上限不能高于共享带宽包的带宽上限。
+ */
+func (c *VpcClient) ModifyBandwidthPackageIpBandwidth(request *vpc.ModifyBandwidthPackageIpBandwidthRequest) (*vpc.ModifyBandwidthPackageIpBandwidthResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.ModifyBandwidthPackageIpBandwidthResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 
+查询共享带宽包列表
+
+## 接口说明
+
+- 使用 `filters` 过滤器进行条件筛选，每个 `filter` 之间的关系为逻辑与（AND）的关系。
+
+- 如果使用子帐号查询，只会查询到该子帐号有权限的云主机实例。关于资源权限请参考 [IAM概述](https://docs.jdcloud.com/cn/iam/product-overview)。
+
+- 单次查询最大可查询100条共享带宽包数据。
+
+- 尽量一次调用接口查询多条数据，不建议使用该批量查询接口一次查询一条数据，如果使用不当导致查询过于密集，可能导致网关触发限流。
+
+- 由于该接口为 `GET` 方式请求，最终参数会转换为 `URL` 上的参数，但是 `HTTP` 协议下的 `GET` 请求参数长度是有大小限制的，使用者需要注意参数超长的问题。
+ */
+func (c *VpcClient) DescribeBandwidthPackages(request *vpc.DescribeBandwidthPackagesRequest) (*vpc.DescribeBandwidthPackagesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.DescribeBandwidthPackagesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 创建网卡接口，只能创建辅助网卡 */
 func (c *VpcClient) CreateNetworkInterface(request *vpc.CreateNetworkInterfaceRequest) (*vpc.CreateNetworkInterfaceResponse, error) {
     if request == nil {
@@ -1017,7 +1255,7 @@ func (c *VpcClient) DescribeElasticIp(request *vpc.DescribeElasticIpRequest) (*v
     return jdResp, err
 }
 
-/* 给网卡删除secondaryIp接口 */
+/* 给网卡删除secondaryIp */
 func (c *VpcClient) UnassignSecondaryIps(request *vpc.UnassignSecondaryIpsRequest) (*vpc.UnassignSecondaryIpsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1177,7 +1415,7 @@ func (c *VpcClient) CreateElasticIps(request *vpc.CreateElasticIpsRequest) (*vpc
     return jdResp, err
 }
 
-/* 删除弹性网卡接口 */
+/* 删除弹性网卡 */
 func (c *VpcClient) DeleteNetworkInterface(request *vpc.DeleteNetworkInterfaceRequest) (*vpc.DeleteNetworkInterfaceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")

@@ -21,4 +21,7 @@ type UnassignSecondaryIpsSpec struct {
 
     /* 指定删除的secondaryIp地址 (Optional) */
     SecondaryIps []string `json:"secondaryIps"`
+
+    /* 指定删除的secondaryIp网段 (Optional) */
+    SecondaryCidrs []string `json:"secondaryCidrs"`
 }

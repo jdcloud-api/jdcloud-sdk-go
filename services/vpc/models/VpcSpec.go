@@ -27,4 +27,10 @@ type VpcSpec struct {
 
     /* vpc描述，允许输入UTF-8编码下的全部字符，不超过256字符。 (Optional) */
     Description string `json:"description"`
+
+    /* VPC az类型，取值：standard(标准VPC)，edge(边缘VPC) (Optional) */
+    AzType string `json:"azType"`
+
+    /* VPC可用区，边缘VPC必须指定可用区 (Optional) */
+    Az string `json:"az"`
 }

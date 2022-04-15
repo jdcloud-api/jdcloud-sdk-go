@@ -52,4 +52,7 @@ type NatGateway struct {
 
     /* NAT网关创建时间 (Optional) */
     CreatedTime string `json:"createdTime"`
+
+    /* Tag信息 (Optional) */
+    Tags []Tag `json:"tags"`
 }

@@ -25,7 +25,7 @@ type ModifyNatGatewaySpec struct {
     /* 描述,允许输入UTF-8编码下的全部字符，不超过256字符 (Optional) */
     Description string `json:"description"`
 
-    /* 公网IP的限速（单位：Mbps），取值范围为[1-1000] (Optional) */
+    /* NAT网关公网IP的限速（单位：Mbps）。计费类型为按配置时，取值范围为[1-1000]；计费类型为按流量时，取值范围为[1-200] (Optional) */
     BandwidthMbps int `json:"bandwidthMbps"`
 
     /* NAT网关规格，取值small（100万并发连接数）,medium(300万并发连接数),large（1000万并发连接数） (Optional) */

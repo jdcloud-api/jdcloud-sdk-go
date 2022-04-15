@@ -42,6 +42,12 @@ type CreateElasticIpsRequest struct {
 
     /* 弹性ip类型，取值：standard(标准公网IP)，edge(边缘公网IP)，默认为standard (Optional) */
     IpType *string `json:"ipType"`
+
+    /* 资源所属资源组ID (Optional) */
+    ResourceGroupId *string `json:"resourceGroupId"`
+
+    /* 预检标识，默认false，dryRun为true时只作检查，不做变更 (Optional) */
+    DryRun *bool `json:"dryRun"`
 }
 
 /*
@@ -77,6 +83,8 @@ func NewCreateElasticIpsRequest(
  * param elasticIpSpec: 弹性ip规格 (Required)
  * param userTags: 用户标签 (Optional)
  * param ipType: 弹性ip类型，取值：standard(标准公网IP)，edge(边缘公网IP)，默认为standard (Optional)
+ * param resourceGroupId: 资源所属资源组ID (Optional)
+ * param dryRun: 预检标识，默认false，dryRun为true时只作检查，不做变更 (Optional)
  */
 func NewCreateElasticIpsRequestWithAllParams(
     regionId string,
@@ -85,6 +93,8 @@ func NewCreateElasticIpsRequestWithAllParams(
     elasticIpSpec *vpc.ElasticIpSpec,
     userTags []vpc.Tag,
     ipType *string,
+    resourceGroupId *string,
+    dryRun *bool,
 ) *CreateElasticIpsRequest {
 
     return &CreateElasticIpsRequest{
@@ -100,6 +110,8 @@ func NewCreateElasticIpsRequestWithAllParams(
         ElasticIpSpec: elasticIpSpec,
         UserTags: userTags,
         IpType: ipType,
+        ResourceGroupId: resourceGroupId,
+        DryRun: dryRun,
     }
 }
 
@@ -144,6 +156,16 @@ func (r *CreateElasticIpsRequest) SetUserTags(userTags []vpc.Tag) {
 /* param ipType: 弹性ip类型，取值：standard(标准公网IP)，edge(边缘公网IP)，默认为standard(Optional) */
 func (r *CreateElasticIpsRequest) SetIpType(ipType string) {
     r.IpType = &ipType
+}
+
+/* param resourceGroupId: 资源所属资源组ID(Optional) */
+func (r *CreateElasticIpsRequest) SetResourceGroupId(resourceGroupId string) {
+    r.ResourceGroupId = &resourceGroupId
+}
+
+/* param dryRun: 预检标识，默认false，dryRun为true时只作检查，不做变更(Optional) */
+func (r *CreateElasticIpsRequest) SetDryRun(dryRun bool) {
+    r.DryRun = &dryRun
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
