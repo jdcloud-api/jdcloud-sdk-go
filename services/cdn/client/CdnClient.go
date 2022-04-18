@@ -40,7 +40,7 @@ func NewCdnClient(credential *core.Credential) *CdnClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "cdn",
-            Revision:    "0.10.29",
+            Revision:    "0.10.31",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -1137,6 +1137,26 @@ func (c *CdnClient) QueryDomainAllConfigClassify(request *cdn.QueryDomainAllConf
     return jdResp, err
 }
 
+/* 设置回源OSS鉴权 */
+func (c *CdnClient) ConfigBackSourceOss(request *cdn.ConfigBackSourceOssRequest) (*cdn.ConfigBackSourceOssResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.ConfigBackSourceOssResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 带宽查询接口 */
 func (c *CdnClient) QueryBand(request *cdn.QueryBandRequest) (*cdn.QueryBandResponse, error) {
     if request == nil {
@@ -1508,6 +1528,26 @@ func (c *CdnClient) QueryWafRegions(request *cdn.QueryWafRegionsRequest) (*cdn.Q
     }
 
     jdResp := &cdn.QueryWafRegionsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询回源OSS鉴权配置 */
+func (c *CdnClient) QueryBackSourceOss(request *cdn.QueryBackSourceOssRequest) (*cdn.QueryBackSourceOssResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryBackSourceOssResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
