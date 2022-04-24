@@ -17,23 +17,20 @@
 package models
 
 
-type CallDurationByCodeRate struct {
+type StreamRecordContent struct {
 
-    /* 应用ID (Optional) */
-    AppId string `json:"appId"`
+    /* 当前页码 (Optional) */
+    PageNumber int `json:"pageNumber"`
 
-    /* 时间戳毫秒 (Optional) */
-    Date int64 `json:"date"`
+    /* 每页数量 (Optional) */
+    PageSize int `json:"pageSize"`
 
-    /* 音频通讯时长-second (Optional) */
-    Audio int64 `json:"audio"`
+    /* 查询总数 (Optional) */
+    TotalElements int `json:"totalElements"`
 
-    /* (0,480p]通讯时长-second (Optional) */
-    Lte_480 int64 `json:"lte_480"`
+    /* 总页数 (Optional) */
+    TotalPages int `json:"totalPages"`
 
-    /* (480p,720p]通讯时长-second (Optional) */
-    Gt_480_lte_720 int64 `json:"gt_480_lte_720"`
-
-    /* (720p,1080p]通讯时长-second (Optional) */
-    Gte_720 int64 `json:"gte_720"`
+    /* 推流历史记录列表 (Optional) */
+    Content []StreamRecordInfo `json:"content"`
 }
