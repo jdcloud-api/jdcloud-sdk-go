@@ -17,23 +17,20 @@
 package models
 
 
-type CallDurationByCodeRate struct {
+type ResourceInfo struct {
 
-    /* 应用ID (Optional) */
-    AppId string `json:"appId"`
+    /* 实例id (Optional) */
+    ResourceId string `json:"resourceId"`
 
-    /* 时间戳毫秒 (Optional) */
-    Date int64 `json:"date"`
+    /* 实例名称 (Optional) */
+    ResourceName string `json:"resourceName"`
 
-    /* 音频通讯时长-second (Optional) */
-    Audio int64 `json:"audio"`
+    /* 备注 (Optional) */
+    Remark string `json:"remark"`
 
-    /* (0,480p]通讯时长-second (Optional) */
-    Lte_480 int64 `json:"lte_480"`
+    /* serivceCode (Optional) */
+    ServiceCode string `json:"serviceCode"`
 
-    /* (480p,720p]通讯时长-second (Optional) */
-    Gt_480_lte_720 int64 `json:"gt_480_lte_720"`
-
-    /* (720p,1080p]通讯时长-second (Optional) */
-    Gte_720 int64 `json:"gte_720"`
+    /* 绑定实例信息列表 (Optional) */
+    Bind []ResourceInfo `json:"bind"`
 }

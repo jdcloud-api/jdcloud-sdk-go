@@ -40,7 +40,7 @@ func NewOpenjrtcClient(credential *core.Credential) *OpenjrtcClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "openjrtc",
-            Revision:    "1.1.6",
+            Revision:    "1.1.7",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -117,6 +117,27 @@ func (c *OpenjrtcClient) StartAsrTask(request *openjrtc.StartAsrTaskRequest) (*o
     }
 
     jdResp := &openjrtc.StartAsrTaskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询指定用户在房间内的推流信息
+ */
+func (c *OpenjrtcClient) DescribeStreamInfosByUserId(request *openjrtc.DescribeStreamInfosByUserIdRequest) (*openjrtc.DescribeStreamInfosByUserIdResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &openjrtc.DescribeStreamInfosByUserIdResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -574,6 +595,27 @@ func (c *OpenjrtcClient) StopMcuTranscode(request *openjrtc.StopMcuTranscodeRequ
     return jdResp, err
 }
 
+/* 根据流ID查询推流信息
+ */
+func (c *OpenjrtcClient) DescribeStreamInfoByStreamId(request *openjrtc.DescribeStreamInfoByStreamIdRequest) (*openjrtc.DescribeStreamInfoByStreamIdResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &openjrtc.DescribeStreamInfoByStreamIdResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 发送自定义信令给房间内的人员 */
 func (c *OpenjrtcClient) PostMessageToUser(request *openjrtc.PostMessageToUserRequest) (*openjrtc.PostMessageToUserResponse, error) {
     if request == nil {
@@ -585,6 +627,32 @@ func (c *OpenjrtcClient) PostMessageToUser(request *openjrtc.PostMessageToUserRe
     }
 
     jdResp := &openjrtc.PostMessageToUserResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询房间内推流信息列表
+允许通过条件过滤查询，支持的过滤字段如下：
+           - status[eq] 在线状态 1-在线 2-离线
+           - kind[eq] 在线状态 1-音频流 2-视频流 100-数据流
+           - startTime[eq] 用户推流开始时间-UTC时间  startTime,endTime同时指定时生效
+           - endTime[eq]   用户推流结束时间-UTC时间  startTime,endTime同时指定时生效
+ */
+func (c *OpenjrtcClient) DescribeStreamInfosByUserRoomId(request *openjrtc.DescribeStreamInfosByUserRoomIdRequest) (*openjrtc.DescribeStreamInfosByUserRoomIdResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &openjrtc.DescribeStreamInfosByUserRoomIdResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -713,6 +781,30 @@ func (c *OpenjrtcClient) RemoveRoomUser(request *openjrtc.RemoveRoomUserRequest)
     }
 
     jdResp := &openjrtc.RemoveRoomUserResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据流ID查询推流历史记录
+允许通过条件过滤查询，支持的过滤字段如下：
+           - startTime[eq] 用户推流开始时间-UTC时间  startTime,endTime同时指定时生效
+           - endTime[eq]   用户推流结束时间-UTC时间  startTime,endTime同时指定时生效
+ */
+func (c *OpenjrtcClient) DescribeStreamRecordsByStreamId(request *openjrtc.DescribeStreamRecordsByStreamIdRequest) (*openjrtc.DescribeStreamRecordsByStreamIdResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &openjrtc.DescribeStreamRecordsByStreamIdResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -865,6 +957,31 @@ func (c *OpenjrtcClient) DescribeUserRoom(request *openjrtc.DescribeUserRoomRequ
     }
 
     jdResp := &openjrtc.DescribeUserRoomResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询指定用户在房间内的推流历史记录
+允许通过条件过滤查询，支持的过滤字段如下：
+           - kind[eq] 在线状态 1-音频流 2-视频流 100-数据流
+           - startTime[eq] 用户推流开始时间-UTC时间  startTime,endTime同时指定时生效
+           - endTime[eq]   用户推流结束时间-UTC时间  startTime,endTime同时指定时生效
+ */
+func (c *OpenjrtcClient) DescribeStreamRecordsByUserId(request *openjrtc.DescribeStreamRecordsByUserIdRequest) (*openjrtc.DescribeStreamRecordsByUserIdResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &openjrtc.DescribeStreamRecordsByUserIdResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
