@@ -28,6 +28,9 @@ type CreateRoomRequestObj struct {
     /* 房间类型 1-小房间(音频单流订阅) 2-大房间(音频固定订阅) (Optional) */
     RoomType int `json:"roomType"`
 
+    /* 会议类型 0-即时会议 1-预约会议 (Optional) */
+    MeetingType int `json:"meetingType"`
+
     /* 用户ID(创建者ID) (Optional) */
     PeerId int64 `json:"peerId"`
 }

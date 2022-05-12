@@ -40,7 +40,7 @@ func NewOpenjrtcClient(credential *core.Credential) *OpenjrtcClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "openjrtc",
-            Revision:    "1.1.7",
+            Revision:    "1.1.8",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -586,6 +586,27 @@ func (c *OpenjrtcClient) StopMcuTranscode(request *openjrtc.StopMcuTranscodeRequ
     }
 
     jdResp := &openjrtc.StopMcuTranscodeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询房间内的人员信息
+ */
+func (c *OpenjrtcClient) DescribeRoomUser(request *openjrtc.DescribeRoomUserRequest) (*openjrtc.DescribeRoomUserResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &openjrtc.DescribeRoomUserResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

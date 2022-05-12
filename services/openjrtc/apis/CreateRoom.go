@@ -33,6 +33,9 @@ type CreateRoomRequest struct {
     /* 房间类型 1-小房间(音频单流订阅) 2-大房间(音频固定订阅) (Optional) */
     RoomType *int `json:"roomType"`
 
+    /* 会议类型 0-即时会议 1-预约会议 (Optional) */
+    MeetingType *int `json:"meetingType"`
+
     /* 用户ID(创建者ID) (Optional) */
     PeerId *int64 `json:"peerId"`
 }
@@ -58,12 +61,14 @@ func NewCreateRoomRequest(
  * param roomName: 房间名称 (Optional)
  * param appId: 应用ID (Optional)
  * param roomType: 房间类型 1-小房间(音频单流订阅) 2-大房间(音频固定订阅) (Optional)
+ * param meetingType: 会议类型 0-即时会议 1-预约会议 (Optional)
  * param peerId: 用户ID(创建者ID) (Optional)
  */
 func NewCreateRoomRequestWithAllParams(
     roomName *string,
     appId *string,
     roomType *int,
+    meetingType *int,
     peerId *int64,
 ) *CreateRoomRequest {
 
@@ -77,6 +82,7 @@ func NewCreateRoomRequestWithAllParams(
         RoomName: roomName,
         AppId: appId,
         RoomType: roomType,
+        MeetingType: meetingType,
         PeerId: peerId,
     }
 }
@@ -107,6 +113,11 @@ func (r *CreateRoomRequest) SetAppId(appId string) {
 /* param roomType: 房间类型 1-小房间(音频单流订阅) 2-大房间(音频固定订阅)(Optional) */
 func (r *CreateRoomRequest) SetRoomType(roomType int) {
     r.RoomType = &roomType
+}
+
+/* param meetingType: 会议类型 0-即时会议 1-预约会议(Optional) */
+func (r *CreateRoomRequest) SetMeetingType(meetingType int) {
+    r.MeetingType = &meetingType
 }
 
 /* param peerId: 用户ID(创建者ID)(Optional) */
