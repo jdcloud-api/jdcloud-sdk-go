@@ -40,7 +40,7 @@ func NewIpantiClient(credential *core.Credential) *IpantiClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "ipanti",
-            Revision:    "1.11.0",
+            Revision:    "1.12.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
