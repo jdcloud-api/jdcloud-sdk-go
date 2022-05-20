@@ -33,6 +33,9 @@ type CreateInstanceRequest struct {
 
     /* 自动续费配置, 默认不开通, 仅新购实例时可设置 (Optional) */
     AutoRenewalSpec *ipanti.AutoRenewalSpec `json:"autoRenewalSpec"`
+
+    /* 自动支付标识 (Optional) */
+    AutoPay *bool `json:"autoPay"`
 }
 
 /*
@@ -62,11 +65,13 @@ func NewCreateInstanceRequest(
  * param regionId: 区域 ID, 高防不区分区域, 传 cn-north-1 即可 (Required)
  * param createInstanceSpec: 新购或升级实例请求参数 (Required)
  * param autoRenewalSpec: 自动续费配置, 默认不开通, 仅新购实例时可设置 (Optional)
+ * param autoPay: 自动支付标识 (Optional)
  */
 func NewCreateInstanceRequestWithAllParams(
     regionId string,
     createInstanceSpec *ipanti.CreateInstanceSpec,
     autoRenewalSpec *ipanti.AutoRenewalSpec,
+    autoPay *bool,
 ) *CreateInstanceRequest {
 
     return &CreateInstanceRequest{
@@ -79,6 +84,7 @@ func NewCreateInstanceRequestWithAllParams(
         RegionId: regionId,
         CreateInstanceSpec: createInstanceSpec,
         AutoRenewalSpec: autoRenewalSpec,
+        AutoPay: autoPay,
     }
 }
 
@@ -110,6 +116,11 @@ func (r *CreateInstanceRequest) SetAutoRenewalSpec(autoRenewalSpec *ipanti.AutoR
     r.AutoRenewalSpec = autoRenewalSpec
 }
 
+/* param autoPay: 自动支付标识(Optional) */
+func (r *CreateInstanceRequest) SetAutoPay(autoPay bool) {
+    r.AutoPay = &autoPay
+}
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r CreateInstanceRequest) GetRegionId() string {
@@ -125,4 +136,5 @@ type CreateInstanceResponse struct {
 type CreateInstanceResult struct {
     Code int `json:"code"`
     Message string `json:"message"`
+    OrderNumber string `json:"orderNumber"`
 }
