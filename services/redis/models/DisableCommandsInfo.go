@@ -17,17 +17,11 @@
 package models
 
 
-type AvailableEngineVersion struct {
+type DisableCommandsInfo struct {
 
-    /* redis引擎主从版本号，目前支持：2.8、4.0 (Optional) */
-    Version string `json:"version"`
+    /* 命令名称 (Optional) */
+    CommandName string `json:"commandName"`
 
-    /* 是否推荐 (Optional) */
-    Recommended bool `json:"recommended"`
-
-    /* 是否售罄 (Optional) */
-    SoldOut bool `json:"soldOut"`
-
-    /* 售卖CPU架构列表 (Optional) */
-    AvailableCPUArchs []AvailableCPUArch `json:"availableCPUArchs"`
+    /* 命令禁用时间 (Optional) */
+    DisableTime string `json:"disableTime"`
 }

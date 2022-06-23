@@ -17,17 +17,17 @@
 package models
 
 
-type AvailableEngineVersion struct {
+type Accounts struct {
 
-    /* redis引擎主从版本号，目前支持：2.8、4.0 (Optional) */
-    Version string `json:"version"`
+    /* 账号名称 (Optional) */
+    AccountName string `json:"accountName"`
 
-    /* 是否推荐 (Optional) */
-    Recommended bool `json:"recommended"`
+    /* 账号类型。如果为default则为默认账号；如果为normal则为普通账号 (Optional) */
+    AccountType string `json:"accountType"`
 
-    /* 是否售罄 (Optional) */
-    SoldOut bool `json:"soldOut"`
+    /* 账号权限 (Optional) */
+    AccountPrivilege string `json:"accountPrivilege"`
 
-    /* 售卖CPU架构列表 (Optional) */
-    AvailableCPUArchs []AvailableCPUArch `json:"availableCPUArchs"`
+    /* 账号描述 (Optional) */
+    AccountDescription string `json:"accountDescription"`
 }

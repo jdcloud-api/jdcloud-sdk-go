@@ -18,10 +18,4 @@ package models
 
 
 type RespExtension struct {
-
-    /* 外部访问方式，空表示关闭外部访问 (Optional) */
-    ExposeType string `json:"exposeType"`
-
-    /* 外部访问域名 (Optional) */
-    ExposeDomain string `json:"exposeDomain"`
 }

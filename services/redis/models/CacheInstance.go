@@ -32,7 +32,7 @@ type CacheInstance struct {
     /* 实例的总内存（MB），表示用户购买的可使用内存 (Optional) */
     CacheInstanceMemoryMB int `json:"cacheInstanceMemoryMB"`
 
-    /* 实例状态：creating表示创建中，running表示运行中，error表示错误，changing表示变更规格中，deleting表示删除中，configuring表示修改参数中，restoring表示备份恢复中 (Optional) */
+    /* 实例状态：creating表示创建中，running表示运行中，error表示错误，changing表示变更规格中，deleting表示删除中，configuring表示修改参数中，restoring表示备份恢复中，upgrading表示升级中 (Optional) */
     CacheInstanceStatus string `json:"cacheInstanceStatus"`
 
     /* 实例描述 (Optional) */
@@ -68,7 +68,7 @@ type CacheInstance struct {
     /* 创建实例时选择的引擎版本：目前支持2.8和4.0 (Optional) */
     RedisVersion string `json:"redisVersion"`
 
-    /* 实例类型：master-slave表示主从版，cluster表示集群版 (Optional) */
+    /* 实例类型：master-slave（标准版）、cluster（代理集群版）、native-cluster（cluster集群版） (Optional) */
     CacheInstanceType string `json:"cacheInstanceType"`
 
     /* 是否支持IPv6，0表示不支持（只能用IPv4），1表示支持 (Optional) */
@@ -76,6 +76,9 @@ type CacheInstance struct {
 
     /* 标签信息 (Optional) */
     Tags []Tag `json:"tags"`
+
+    /* 实例所属资源组ID (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
 
     /* 实例分片数，标准版固定为1，自定义分片集群版实例分片数由用户创建时选择，其他实例为固定分片数 (Optional) */
     ShardNumber int `json:"shardNumber"`
@@ -85,4 +88,25 @@ type CacheInstance struct {
 
     /* 扩展配置 (Optional) */
     Extension RespExtension `json:"extension"`
+
+    /* 实例其他访问域名列表 (Optional) */
+    OtherDomains []InstanceDomain `json:"otherDomains"`
+
+    /* 从节点aof开关 (Optional) */
+    SlaveAppendonly string `json:"slaveAppendonly"`
+
+    /* db数量 (Optional) */
+    DatabaseNum string `json:"databaseNum"`
+
+    /* 淘汰策略 (Optional) */
+    MaxmemoryPolicy string `json:"maxmemoryPolicy"`
+
+    /* 副本数，含主副本 (Optional) */
+    ReplicaNumber int `json:"replicaNumber"`
+
+    /* 实例是否开启SmartProxy，当架构类型为native-cluster时才有效，1表示开启，0表示不开启 (Optional) */
+    EnableSmartProxy int `json:"enableSmartProxy"`
+
+    /* cpu架构类型:arm64、amd64 (Optional) */
+    CpuArchType string `json:"cpuArchType"`
 }

@@ -17,17 +17,35 @@
 package models
 
 
-type AvailableEngineVersion struct {
+type TpStat struct {
 
-    /* redis引擎主从版本号，目前支持：2.8、4.0 (Optional) */
-    Version string `json:"version"`
+    /* 时间 (Optional) */
+    Ts string `json:"ts"`
 
-    /* 是否推荐 (Optional) */
-    Recommended bool `json:"recommended"`
+    /* TP999 (Optional) */
+    Tp999 int `json:"tp999"`
 
-    /* 是否售罄 (Optional) */
-    SoldOut bool `json:"soldOut"`
+    /* TP99 (Optional) */
+    Tp99 int `json:"tp99"`
 
-    /* 售卖CPU架构列表 (Optional) */
-    AvailableCPUArchs []AvailableCPUArch `json:"availableCPUArchs"`
+    /* TP90 (Optional) */
+    Tp90 int `json:"tp90"`
+
+    /* TP50 (Optional) */
+    Tp50 int `json:"tp50"`
+
+    /* 最大延时 (Optional) */
+    Max int `json:"max"`
+
+    /* 最小延时 (Optional) */
+    Min int `json:"min"`
+
+    /* 成功数 (Optional) */
+    Success int `json:"success"`
+
+    /* 错误数 (Optional) */
+    Error int `json:"error"`
+
+    /* 重定向数 (Optional) */
+    Redirection int `json:"redirection"`
 }

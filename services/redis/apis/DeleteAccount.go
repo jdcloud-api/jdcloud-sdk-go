@@ -18,10 +18,9 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    redis "github.com/jdcloud-api/jdcloud-sdk-go/services/redis/models"
 )
 
-type DescribeInstanceConfigRequest struct {
+type DeleteAccountRequest struct {
 
     core.JDCloudRequest
 
@@ -30,59 +29,68 @@ type DescribeInstanceConfigRequest struct {
 
     /* 缓存Redis实例ID，是访问实例的唯一标识  */
     CacheInstanceId string `json:"cacheInstanceId"`
+
+    /* 账号名称  */
+    AccountName string `json:"accountName"`
 }
 
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
+ * param accountName: 账号名称 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeInstanceConfigRequest(
+func NewDeleteAccountRequest(
     regionId string,
     cacheInstanceId string,
-) *DescribeInstanceConfigRequest {
+    accountName string,
+) *DeleteAccountRequest {
 
-	return &DescribeInstanceConfigRequest{
+	return &DeleteAccountRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/instanceConfig",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/account",
+			Method:  "DELETE",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         CacheInstanceId: cacheInstanceId,
+        AccountName: accountName,
 	}
 }
 
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
+ * param accountName: 账号名称 (Required)
  */
-func NewDescribeInstanceConfigRequestWithAllParams(
+func NewDeleteAccountRequestWithAllParams(
     regionId string,
     cacheInstanceId string,
-) *DescribeInstanceConfigRequest {
+    accountName string,
+) *DeleteAccountRequest {
 
-    return &DescribeInstanceConfigRequest{
+    return &DeleteAccountRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/instanceConfig",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/account",
+            Method:  "DELETE",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         CacheInstanceId: cacheInstanceId,
+        AccountName: accountName,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeInstanceConfigRequestWithoutParam() *DescribeInstanceConfigRequest {
+func NewDeleteAccountRequestWithoutParam() *DeleteAccountRequest {
 
-    return &DescribeInstanceConfigRequest{
+    return &DeleteAccountRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/instanceConfig",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/account",
+            Method:  "DELETE",
             Header:  nil,
             Version: "v1",
         },
@@ -90,28 +98,31 @@ func NewDescribeInstanceConfigRequestWithoutParam() *DescribeInstanceConfigReque
 }
 
 /* param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2(Required) */
-func (r *DescribeInstanceConfigRequest) SetRegionId(regionId string) {
+func (r *DeleteAccountRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
-func (r *DescribeInstanceConfigRequest) SetCacheInstanceId(cacheInstanceId string) {
+func (r *DeleteAccountRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
+}
+
+/* param accountName: 账号名称(Required) */
+func (r *DeleteAccountRequest) SetAccountName(accountName string) {
+    r.AccountName = accountName
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeInstanceConfigRequest) GetRegionId() string {
+func (r DeleteAccountRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeInstanceConfigResponse struct {
+type DeleteAccountResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeInstanceConfigResult `json:"result"`
+    Result DeleteAccountResult `json:"result"`
 }
 
-type DescribeInstanceConfigResult struct {
-    UnSupportConfigs []string `json:"unSupportConfigs"`
-    InstanceConfig []redis.ConfigItem `json:"instanceConfig"`
+type DeleteAccountResult struct {
 }

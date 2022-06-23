@@ -21,7 +21,7 @@ import (
     redis "github.com/jdcloud-api/jdcloud-sdk-go/services/redis/models"
 )
 
-type DescribeInstanceConfigRequest struct {
+type FilteredClientPerfDataRequest struct {
 
     core.JDCloudRequest
 
@@ -30,58 +30,112 @@ type DescribeInstanceConfigRequest struct {
 
     /* 缓存Redis实例ID，是访问实例的唯一标识  */
     CacheInstanceId string `json:"cacheInstanceId"`
+
+    /* 客户端ip  */
+    Ip string `json:"ip"`
+
+    /* 客户端uuid  */
+    Uuid string `json:"uuid"`
+
+    /* tp999  */
+    Tp999 int `json:"tp999"`
+
+    /* tp99  */
+    Tp99 int `json:"tp99"`
+
+    /* tp90  */
+    Tp90 int `json:"tp90"`
+
+    /* tp50  */
+    Tp50 int `json:"tp50"`
 }
 
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
+ * param ip: 客户端ip (Required)
+ * param uuid: 客户端uuid (Required)
+ * param tp999: tp999 (Required)
+ * param tp99: tp99 (Required)
+ * param tp90: tp90 (Required)
+ * param tp50: tp50 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeInstanceConfigRequest(
+func NewFilteredClientPerfDataRequest(
     regionId string,
     cacheInstanceId string,
-) *DescribeInstanceConfigRequest {
+    ip string,
+    uuid string,
+    tp999 int,
+    tp99 int,
+    tp90 int,
+    tp50 int,
+) *FilteredClientPerfDataRequest {
 
-	return &DescribeInstanceConfigRequest{
+	return &FilteredClientPerfDataRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/instanceConfig",
+			URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/filteredClientPerfData",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         CacheInstanceId: cacheInstanceId,
+        Ip: ip,
+        Uuid: uuid,
+        Tp999: tp999,
+        Tp99: tp99,
+        Tp90: tp90,
+        Tp50: tp50,
 	}
 }
 
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
+ * param ip: 客户端ip (Required)
+ * param uuid: 客户端uuid (Required)
+ * param tp999: tp999 (Required)
+ * param tp99: tp99 (Required)
+ * param tp90: tp90 (Required)
+ * param tp50: tp50 (Required)
  */
-func NewDescribeInstanceConfigRequestWithAllParams(
+func NewFilteredClientPerfDataRequestWithAllParams(
     regionId string,
     cacheInstanceId string,
-) *DescribeInstanceConfigRequest {
+    ip string,
+    uuid string,
+    tp999 int,
+    tp99 int,
+    tp90 int,
+    tp50 int,
+) *FilteredClientPerfDataRequest {
 
-    return &DescribeInstanceConfigRequest{
+    return &FilteredClientPerfDataRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/instanceConfig",
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/filteredClientPerfData",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         CacheInstanceId: cacheInstanceId,
+        Ip: ip,
+        Uuid: uuid,
+        Tp999: tp999,
+        Tp99: tp99,
+        Tp90: tp90,
+        Tp50: tp50,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeInstanceConfigRequestWithoutParam() *DescribeInstanceConfigRequest {
+func NewFilteredClientPerfDataRequestWithoutParam() *FilteredClientPerfDataRequest {
 
-    return &DescribeInstanceConfigRequest{
+    return &FilteredClientPerfDataRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/instanceConfig",
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/filteredClientPerfData",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -90,28 +144,57 @@ func NewDescribeInstanceConfigRequestWithoutParam() *DescribeInstanceConfigReque
 }
 
 /* param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2(Required) */
-func (r *DescribeInstanceConfigRequest) SetRegionId(regionId string) {
+func (r *FilteredClientPerfDataRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
-func (r *DescribeInstanceConfigRequest) SetCacheInstanceId(cacheInstanceId string) {
+func (r *FilteredClientPerfDataRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
+}
+
+/* param ip: 客户端ip(Required) */
+func (r *FilteredClientPerfDataRequest) SetIp(ip string) {
+    r.Ip = ip
+}
+
+/* param uuid: 客户端uuid(Required) */
+func (r *FilteredClientPerfDataRequest) SetUuid(uuid string) {
+    r.Uuid = uuid
+}
+
+/* param tp999: tp999(Required) */
+func (r *FilteredClientPerfDataRequest) SetTp999(tp999 int) {
+    r.Tp999 = tp999
+}
+
+/* param tp99: tp99(Required) */
+func (r *FilteredClientPerfDataRequest) SetTp99(tp99 int) {
+    r.Tp99 = tp99
+}
+
+/* param tp90: tp90(Required) */
+func (r *FilteredClientPerfDataRequest) SetTp90(tp90 int) {
+    r.Tp90 = tp90
+}
+
+/* param tp50: tp50(Required) */
+func (r *FilteredClientPerfDataRequest) SetTp50(tp50 int) {
+    r.Tp50 = tp50
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeInstanceConfigRequest) GetRegionId() string {
+func (r FilteredClientPerfDataRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeInstanceConfigResponse struct {
+type FilteredClientPerfDataResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeInstanceConfigResult `json:"result"`
+    Result FilteredClientPerfDataResult `json:"result"`
 }
 
-type DescribeInstanceConfigResult struct {
-    UnSupportConfigs []string `json:"unSupportConfigs"`
-    InstanceConfig []redis.ConfigItem `json:"instanceConfig"`
+type FilteredClientPerfDataResult struct {
+    PerformanceData []redis.PerformanceDataMsg `json:"performanceData"`
 }

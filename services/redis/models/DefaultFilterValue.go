@@ -17,17 +17,17 @@
 package models
 
 
-type AvailableEngineVersion struct {
+type DefaultFilterValue struct {
 
-    /* redis引擎主从版本号，目前支持：2.8、4.0 (Optional) */
-    Version string `json:"version"`
+    /* tp999 (Optional) */
+    Tp999 int `json:"tp999"`
 
-    /* 是否推荐 (Optional) */
-    Recommended bool `json:"recommended"`
+    /* tp99 (Optional) */
+    Tp99 int `json:"tp99"`
 
-    /* 是否售罄 (Optional) */
-    SoldOut bool `json:"soldOut"`
+    /* tp90 (Optional) */
+    Tp90 int `json:"tp90"`
 
-    /* 售卖CPU架构列表 (Optional) */
-    AvailableCPUArchs []AvailableCPUArch `json:"availableCPUArchs"`
+    /* tp50 (Optional) */
+    Tp50 int `json:"tp50"`
 }

@@ -111,6 +111,7 @@ type DescribeBackupPolicyResponse struct {
 }
 
 type DescribeBackupPolicyResult struct {
+    AutoBackup bool `json:"autoBackup"`
     BackupPeriod string `json:"backupPeriod"`
     BackupTime string `json:"backupTime"`
     NextBackupTime string `json:"nextBackupTime"`

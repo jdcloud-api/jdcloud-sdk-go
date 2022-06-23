@@ -21,7 +21,7 @@ import (
     redis "github.com/jdcloud-api/jdcloud-sdk-go/services/redis/models"
 )
 
-type DescribeInstanceConfigRequest struct {
+type StartClearDataRequest struct {
 
     core.JDCloudRequest
 
@@ -30,59 +30,86 @@ type DescribeInstanceConfigRequest struct {
 
     /* 缓存Redis实例ID，是访问实例的唯一标识  */
     CacheInstanceId string `json:"cacheInstanceId"`
+
+    /* 数据清理任务类型  */
+    ClearType string `json:"clearType"`
+
+    /* 匹配模式, 如: test*、*test、ab*cc*, 当节点为AllData、ExpiredData时可以忽略此参数 (Optional) */
+    KeyPattern *string `json:"keyPattern"`
+
+    /* key的过滤条件, 当节点为AllData、ExpiredData时可以忽略此参数 (Optional) */
+    KeyFilter []redis.KeyFilter `json:"keyFilter"`
+
+    /* 数据遍历的速率 (Optional) */
+    QpsLimit *int `json:"qpsLimit"`
 }
 
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
+ * param clearType: 数据清理任务类型 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeInstanceConfigRequest(
+func NewStartClearDataRequest(
     regionId string,
     cacheInstanceId string,
-) *DescribeInstanceConfigRequest {
+    clearType string,
+) *StartClearDataRequest {
 
-	return &DescribeInstanceConfigRequest{
+	return &StartClearDataRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/instanceConfig",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/startClearData",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         CacheInstanceId: cacheInstanceId,
+        ClearType: clearType,
 	}
 }
 
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
+ * param clearType: 数据清理任务类型 (Required)
+ * param keyPattern: 匹配模式, 如: test*、*test、ab*cc*, 当节点为AllData、ExpiredData时可以忽略此参数 (Optional)
+ * param keyFilter: key的过滤条件, 当节点为AllData、ExpiredData时可以忽略此参数 (Optional)
+ * param qpsLimit: 数据遍历的速率 (Optional)
  */
-func NewDescribeInstanceConfigRequestWithAllParams(
+func NewStartClearDataRequestWithAllParams(
     regionId string,
     cacheInstanceId string,
-) *DescribeInstanceConfigRequest {
+    clearType string,
+    keyPattern *string,
+    keyFilter []redis.KeyFilter,
+    qpsLimit *int,
+) *StartClearDataRequest {
 
-    return &DescribeInstanceConfigRequest{
+    return &StartClearDataRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/instanceConfig",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/startClearData",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         CacheInstanceId: cacheInstanceId,
+        ClearType: clearType,
+        KeyPattern: keyPattern,
+        KeyFilter: keyFilter,
+        QpsLimit: qpsLimit,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeInstanceConfigRequestWithoutParam() *DescribeInstanceConfigRequest {
+func NewStartClearDataRequestWithoutParam() *StartClearDataRequest {
 
-    return &DescribeInstanceConfigRequest{
+    return &StartClearDataRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/instanceConfig",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/startClearData",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
@@ -90,28 +117,46 @@ func NewDescribeInstanceConfigRequestWithoutParam() *DescribeInstanceConfigReque
 }
 
 /* param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2(Required) */
-func (r *DescribeInstanceConfigRequest) SetRegionId(regionId string) {
+func (r *StartClearDataRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
-func (r *DescribeInstanceConfigRequest) SetCacheInstanceId(cacheInstanceId string) {
+func (r *StartClearDataRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
+}
+
+/* param clearType: 数据清理任务类型(Required) */
+func (r *StartClearDataRequest) SetClearType(clearType string) {
+    r.ClearType = clearType
+}
+
+/* param keyPattern: 匹配模式, 如: test*、*test、ab*cc*, 当节点为AllData、ExpiredData时可以忽略此参数(Optional) */
+func (r *StartClearDataRequest) SetKeyPattern(keyPattern string) {
+    r.KeyPattern = &keyPattern
+}
+
+/* param keyFilter: key的过滤条件, 当节点为AllData、ExpiredData时可以忽略此参数(Optional) */
+func (r *StartClearDataRequest) SetKeyFilter(keyFilter []redis.KeyFilter) {
+    r.KeyFilter = keyFilter
+}
+
+/* param qpsLimit: 数据遍历的速率(Optional) */
+func (r *StartClearDataRequest) SetQpsLimit(qpsLimit int) {
+    r.QpsLimit = &qpsLimit
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeInstanceConfigRequest) GetRegionId() string {
+func (r StartClearDataRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeInstanceConfigResponse struct {
+type StartClearDataResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeInstanceConfigResult `json:"result"`
+    Result StartClearDataResult `json:"result"`
 }
 
-type DescribeInstanceConfigResult struct {
-    UnSupportConfigs []string `json:"unSupportConfigs"`
-    InstanceConfig []redis.ConfigItem `json:"instanceConfig"`
+type StartClearDataResult struct {
 }

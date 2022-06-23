@@ -17,17 +17,23 @@
 package models
 
 
-type AvailableEngineVersion struct {
+type ClientInfo struct {
 
-    /* redis引擎主从版本号，目前支持：2.8、4.0 (Optional) */
+    /* 实例名称 (Optional) */
+    InstanceName string `json:"instanceName"`
+
+    /* 客户端版本号 (Optional) */
     Version string `json:"version"`
 
-    /* 是否推荐 (Optional) */
-    Recommended bool `json:"recommended"`
+    /* 客户端ip (Optional) */
+    Ip string `json:"ip"`
 
-    /* 是否售罄 (Optional) */
-    SoldOut bool `json:"soldOut"`
+    /* 进程pid/tid/随机数 (Optional) */
+    Pid string `json:"pid"`
 
-    /* 售卖CPU架构列表 (Optional) */
-    AvailableCPUArchs []AvailableCPUArch `json:"availableCPUArchs"`
+    /* UUID (Optional) */
+    Uuid string `json:"uuid"`
+
+    /* 客户端启动时间 (Optional) */
+    StartTime string `json:"startTime"`
 }

@@ -19,7 +19,7 @@ package models
 
 type AvailableResource struct {
 
-    /* 架构类型，目前支持：master-slave（标准版）、cluster（基于代理的集群版） (Optional) */
+    /* 架构类型，目前支持：master-slave（标准版）、cluster（代理集群版）、native-cluster（cluster集群版） (Optional) */
     ArchitectureType string `json:"architectureType"`
 
     /* 架构类型名 (Optional) */
@@ -30,6 +30,24 @@ type AvailableResource struct {
 
     /* 是否售罄 (Optional) */
     SoldOut bool `json:"soldOut"`
+
+    /* 支持的最大副本数 (Optional) */
+    SupportedMaxReplicas int `json:"supportedMaxReplicas"`
+
+    /* 支持的最小副本数 (Optional) */
+    SupportedMinReplicas int `json:"supportedMinReplicas"`
+
+    /* 支持的AZ指定方式：SpecifyByReplicaGroup表示按副本组指定，SpecifyByCluster表示按整个集群指定 (Optional) */
+    SupportedAzSpecifyType []string `json:"supportedAzSpecifyType"`
+
+    /* 按集群指定AZ时，需要指定的最小AZ个数 (Optional) */
+    MinAzLimitForCluster int `json:"minAzLimitForCluster"`
+
+    /* 支持的外部访问方式：NodePort、LoadBalancer (Optional) */
+    SupportedExposeType []string `json:"supportedExposeType"`
+
+    /* 是否支持SmartProxy (Optional) */
+    SupportSmartProxy bool `json:"supportSmartProxy"`
 
     /* 引擎版本列表 (Optional) */
     AvailableEngineVersions []AvailableEngineVersion `json:"availableEngineVersions"`

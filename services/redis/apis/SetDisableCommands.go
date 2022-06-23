@@ -21,7 +21,7 @@ import (
     redis "github.com/jdcloud-api/jdcloud-sdk-go/services/redis/models"
 )
 
-type DescribeInstanceConfigRequest struct {
+type SetDisableCommandsRequest struct {
 
     core.JDCloudRequest
 
@@ -30,59 +30,68 @@ type DescribeInstanceConfigRequest struct {
 
     /* 缓存Redis实例ID，是访问实例的唯一标识  */
     CacheInstanceId string `json:"cacheInstanceId"`
+
+    /* 禁用命令列表  */
+    DisableCommands []redis.DisableCommands `json:"disableCommands"`
 }
 
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
+ * param disableCommands: 禁用命令列表 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeInstanceConfigRequest(
+func NewSetDisableCommandsRequest(
     regionId string,
     cacheInstanceId string,
-) *DescribeInstanceConfigRequest {
+    disableCommands []redis.DisableCommands,
+) *SetDisableCommandsRequest {
 
-	return &DescribeInstanceConfigRequest{
+	return &SetDisableCommandsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/instanceConfig",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/disableCommands",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         CacheInstanceId: cacheInstanceId,
+        DisableCommands: disableCommands,
 	}
 }
 
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
+ * param disableCommands: 禁用命令列表 (Required)
  */
-func NewDescribeInstanceConfigRequestWithAllParams(
+func NewSetDisableCommandsRequestWithAllParams(
     regionId string,
     cacheInstanceId string,
-) *DescribeInstanceConfigRequest {
+    disableCommands []redis.DisableCommands,
+) *SetDisableCommandsRequest {
 
-    return &DescribeInstanceConfigRequest{
+    return &SetDisableCommandsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/instanceConfig",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/disableCommands",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         CacheInstanceId: cacheInstanceId,
+        DisableCommands: disableCommands,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeInstanceConfigRequestWithoutParam() *DescribeInstanceConfigRequest {
+func NewSetDisableCommandsRequestWithoutParam() *SetDisableCommandsRequest {
 
-    return &DescribeInstanceConfigRequest{
+    return &SetDisableCommandsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/instanceConfig",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/disableCommands",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
@@ -90,28 +99,31 @@ func NewDescribeInstanceConfigRequestWithoutParam() *DescribeInstanceConfigReque
 }
 
 /* param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2(Required) */
-func (r *DescribeInstanceConfigRequest) SetRegionId(regionId string) {
+func (r *SetDisableCommandsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
-func (r *DescribeInstanceConfigRequest) SetCacheInstanceId(cacheInstanceId string) {
+func (r *SetDisableCommandsRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
+}
+
+/* param disableCommands: 禁用命令列表(Required) */
+func (r *SetDisableCommandsRequest) SetDisableCommands(disableCommands []redis.DisableCommands) {
+    r.DisableCommands = disableCommands
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeInstanceConfigRequest) GetRegionId() string {
+func (r SetDisableCommandsRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeInstanceConfigResponse struct {
+type SetDisableCommandsResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeInstanceConfigResult `json:"result"`
+    Result SetDisableCommandsResult `json:"result"`
 }
 
-type DescribeInstanceConfigResult struct {
-    UnSupportConfigs []string `json:"unSupportConfigs"`
-    InstanceConfig []redis.ConfigItem `json:"instanceConfig"`
+type SetDisableCommandsResult struct {
 }

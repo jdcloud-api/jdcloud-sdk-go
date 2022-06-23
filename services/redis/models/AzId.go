@@ -19,9 +19,15 @@ package models
 
 type AzId struct {
 
-    /* 缓存Redis主实例所在区域的可用区ID (Optional) */
+    /* AZ指定方式，SpecifyByReplicaGroup表示按副本组指定，SpecifyByCluster表示按整个集群指定 (Optional) */
+    AzSpecifyType string `json:"azSpecifyType"`
+
+    /* 为集群指定的AZ范围，按集群指定AZ时生效 (Optional) */
+    AzsForCluster []string `json:"azsForCluster"`
+
+    /* 缓存Redis主实例所在区域的可用区ID，按副本组指定AZ时生效 (Optional) */
     Master string `json:"master"`
 
-    /* 缓存Redis从实例所在区域的可用区ID (Optional) */
+    /* 缓存Redis从实例所在区域的可用区ID，按副本组指定AZ时生效 (Optional) */
     Slave string `json:"slave"`
 }

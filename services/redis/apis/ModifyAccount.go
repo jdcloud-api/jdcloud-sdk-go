@@ -18,10 +18,9 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    redis "github.com/jdcloud-api/jdcloud-sdk-go/services/redis/models"
 )
 
-type DescribeInstanceConfigRequest struct {
+type ModifyAccountRequest struct {
 
     core.JDCloudRequest
 
@@ -30,59 +29,86 @@ type DescribeInstanceConfigRequest struct {
 
     /* 缓存Redis实例ID，是访问实例的唯一标识  */
     CacheInstanceId string `json:"cacheInstanceId"`
+
+    /* 账号名称  */
+    AccountName string `json:"accountName"`
+
+    /* 账号密码 (Optional) */
+    AccountPassword *string `json:"accountPassword"`
+
+    /* 账号权限。支持RoleReadOnly（只读权限）、RoleReadWrite（读写权限） (Optional) */
+    AccountPrivilege *string `json:"accountPrivilege"`
+
+    /* 账号备注 (Optional) */
+    AccountDescription *string `json:"accountDescription"`
 }
 
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
+ * param accountName: 账号名称 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeInstanceConfigRequest(
+func NewModifyAccountRequest(
     regionId string,
     cacheInstanceId string,
-) *DescribeInstanceConfigRequest {
+    accountName string,
+) *ModifyAccountRequest {
 
-	return &DescribeInstanceConfigRequest{
+	return &ModifyAccountRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/instanceConfig",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/account",
+			Method:  "PATCH",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         CacheInstanceId: cacheInstanceId,
+        AccountName: accountName,
 	}
 }
 
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
+ * param accountName: 账号名称 (Required)
+ * param accountPassword: 账号密码 (Optional)
+ * param accountPrivilege: 账号权限。支持RoleReadOnly（只读权限）、RoleReadWrite（读写权限） (Optional)
+ * param accountDescription: 账号备注 (Optional)
  */
-func NewDescribeInstanceConfigRequestWithAllParams(
+func NewModifyAccountRequestWithAllParams(
     regionId string,
     cacheInstanceId string,
-) *DescribeInstanceConfigRequest {
+    accountName string,
+    accountPassword *string,
+    accountPrivilege *string,
+    accountDescription *string,
+) *ModifyAccountRequest {
 
-    return &DescribeInstanceConfigRequest{
+    return &ModifyAccountRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/instanceConfig",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/account",
+            Method:  "PATCH",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         CacheInstanceId: cacheInstanceId,
+        AccountName: accountName,
+        AccountPassword: accountPassword,
+        AccountPrivilege: accountPrivilege,
+        AccountDescription: accountDescription,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeInstanceConfigRequestWithoutParam() *DescribeInstanceConfigRequest {
+func NewModifyAccountRequestWithoutParam() *ModifyAccountRequest {
 
-    return &DescribeInstanceConfigRequest{
+    return &ModifyAccountRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/instanceConfig",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/account",
+            Method:  "PATCH",
             Header:  nil,
             Version: "v1",
         },
@@ -90,28 +116,46 @@ func NewDescribeInstanceConfigRequestWithoutParam() *DescribeInstanceConfigReque
 }
 
 /* param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2(Required) */
-func (r *DescribeInstanceConfigRequest) SetRegionId(regionId string) {
+func (r *ModifyAccountRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
-func (r *DescribeInstanceConfigRequest) SetCacheInstanceId(cacheInstanceId string) {
+func (r *ModifyAccountRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
+}
+
+/* param accountName: 账号名称(Required) */
+func (r *ModifyAccountRequest) SetAccountName(accountName string) {
+    r.AccountName = accountName
+}
+
+/* param accountPassword: 账号密码(Optional) */
+func (r *ModifyAccountRequest) SetAccountPassword(accountPassword string) {
+    r.AccountPassword = &accountPassword
+}
+
+/* param accountPrivilege: 账号权限。支持RoleReadOnly（只读权限）、RoleReadWrite（读写权限）(Optional) */
+func (r *ModifyAccountRequest) SetAccountPrivilege(accountPrivilege string) {
+    r.AccountPrivilege = &accountPrivilege
+}
+
+/* param accountDescription: 账号备注(Optional) */
+func (r *ModifyAccountRequest) SetAccountDescription(accountDescription string) {
+    r.AccountDescription = &accountDescription
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeInstanceConfigRequest) GetRegionId() string {
+func (r ModifyAccountRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeInstanceConfigResponse struct {
+type ModifyAccountResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeInstanceConfigResult `json:"result"`
+    Result ModifyAccountResult `json:"result"`
 }
 
-type DescribeInstanceConfigResult struct {
-    UnSupportConfigs []string `json:"unSupportConfigs"`
-    InstanceConfig []redis.ConfigItem `json:"instanceConfig"`
+type ModifyAccountResult struct {
 }

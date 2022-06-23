@@ -31,7 +31,7 @@ type DescribeTaskProgressListRequest struct {
     /* 缓存Redis实例ID，是访问实例的唯一标识  */
     CacheInstanceId string `json:"cacheInstanceId"`
 
-    /* 任务类型：resize表示变配，目前只有变配可以查询进度 (Optional) */
+    /* 任务类型：resize表示变配，upgrade表示升级 (Optional) */
     TaskType *string `json:"taskType"`
 }
 
@@ -61,7 +61,7 @@ func NewDescribeTaskProgressListRequest(
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
- * param taskType: 任务类型：resize表示变配，目前只有变配可以查询进度 (Optional)
+ * param taskType: 任务类型：resize表示变配，upgrade表示升级 (Optional)
  */
 func NewDescribeTaskProgressListRequestWithAllParams(
     regionId string,
@@ -105,7 +105,7 @@ func (r *DescribeTaskProgressListRequest) SetCacheInstanceId(cacheInstanceId str
     r.CacheInstanceId = cacheInstanceId
 }
 
-/* param taskType: 任务类型：resize表示变配，目前只有变配可以查询进度(Optional) */
+/* param taskType: 任务类型：resize表示变配，upgrade表示升级(Optional) */
 func (r *DescribeTaskProgressListRequest) SetTaskType(taskType string) {
     r.TaskType = &taskType
 }

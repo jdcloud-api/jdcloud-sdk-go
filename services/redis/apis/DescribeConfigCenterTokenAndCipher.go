@@ -18,10 +18,9 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    redis "github.com/jdcloud-api/jdcloud-sdk-go/services/redis/models"
 )
 
-type DescribeInstanceConfigRequest struct {
+type DescribeConfigCenterTokenAndCipherRequest struct {
 
     core.JDCloudRequest
 
@@ -38,14 +37,14 @@ type DescribeInstanceConfigRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeInstanceConfigRequest(
+func NewDescribeConfigCenterTokenAndCipherRequest(
     regionId string,
     cacheInstanceId string,
-) *DescribeInstanceConfigRequest {
+) *DescribeConfigCenterTokenAndCipherRequest {
 
-	return &DescribeInstanceConfigRequest{
+	return &DescribeConfigCenterTokenAndCipherRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/instanceConfig",
+			URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/configCenter",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -59,14 +58,14 @@ func NewDescribeInstanceConfigRequest(
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
  */
-func NewDescribeInstanceConfigRequestWithAllParams(
+func NewDescribeConfigCenterTokenAndCipherRequestWithAllParams(
     regionId string,
     cacheInstanceId string,
-) *DescribeInstanceConfigRequest {
+) *DescribeConfigCenterTokenAndCipherRequest {
 
-    return &DescribeInstanceConfigRequest{
+    return &DescribeConfigCenterTokenAndCipherRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/instanceConfig",
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/configCenter",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -77,11 +76,11 @@ func NewDescribeInstanceConfigRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeInstanceConfigRequestWithoutParam() *DescribeInstanceConfigRequest {
+func NewDescribeConfigCenterTokenAndCipherRequestWithoutParam() *DescribeConfigCenterTokenAndCipherRequest {
 
-    return &DescribeInstanceConfigRequest{
+    return &DescribeConfigCenterTokenAndCipherRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/instanceConfig",
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/configCenter",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -90,28 +89,28 @@ func NewDescribeInstanceConfigRequestWithoutParam() *DescribeInstanceConfigReque
 }
 
 /* param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2(Required) */
-func (r *DescribeInstanceConfigRequest) SetRegionId(regionId string) {
+func (r *DescribeConfigCenterTokenAndCipherRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
-func (r *DescribeInstanceConfigRequest) SetCacheInstanceId(cacheInstanceId string) {
+func (r *DescribeConfigCenterTokenAndCipherRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeInstanceConfigRequest) GetRegionId() string {
+func (r DescribeConfigCenterTokenAndCipherRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeInstanceConfigResponse struct {
+type DescribeConfigCenterTokenAndCipherResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeInstanceConfigResult `json:"result"`
+    Result DescribeConfigCenterTokenAndCipherResult `json:"result"`
 }
 
-type DescribeInstanceConfigResult struct {
-    UnSupportConfigs []string `json:"unSupportConfigs"`
-    InstanceConfig []redis.ConfigItem `json:"instanceConfig"`
+type DescribeConfigCenterTokenAndCipherResult struct {
+    Token string `json:"token"`
+    Cipher string `json:"cipher"`
 }

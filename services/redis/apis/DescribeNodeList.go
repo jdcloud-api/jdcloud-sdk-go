@@ -21,7 +21,7 @@ import (
     redis "github.com/jdcloud-api/jdcloud-sdk-go/services/redis/models"
 )
 
-type DescribeInstanceConfigRequest struct {
+type DescribeNodeListRequest struct {
 
     core.JDCloudRequest
 
@@ -30,6 +30,18 @@ type DescribeInstanceConfigRequest struct {
 
     /* 缓存Redis实例ID，是访问实例的唯一标识  */
     CacheInstanceId string `json:"cacheInstanceId"`
+
+    /* 页码；默认为1 (Optional) */
+    PageNumber *int `json:"pageNumber"`
+
+    /* 分页大小；默认为10；取值范围[10, 100] (Optional) */
+    PageSize *int `json:"pageSize"`
+
+    /* 分片id (Optional) */
+    ShardId *string `json:"shardId"`
+
+    /* 节点角色 (Optional) */
+    Role *string `json:"role"`
 }
 
 /*
@@ -38,14 +50,14 @@ type DescribeInstanceConfigRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeInstanceConfigRequest(
+func NewDescribeNodeListRequest(
     regionId string,
     cacheInstanceId string,
-) *DescribeInstanceConfigRequest {
+) *DescribeNodeListRequest {
 
-	return &DescribeInstanceConfigRequest{
+	return &DescribeNodeListRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/instanceConfig",
+			URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/node",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -58,30 +70,42 @@ func NewDescribeInstanceConfigRequest(
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
+ * param pageNumber: 页码；默认为1 (Optional)
+ * param pageSize: 分页大小；默认为10；取值范围[10, 100] (Optional)
+ * param shardId: 分片id (Optional)
+ * param role: 节点角色 (Optional)
  */
-func NewDescribeInstanceConfigRequestWithAllParams(
+func NewDescribeNodeListRequestWithAllParams(
     regionId string,
     cacheInstanceId string,
-) *DescribeInstanceConfigRequest {
+    pageNumber *int,
+    pageSize *int,
+    shardId *string,
+    role *string,
+) *DescribeNodeListRequest {
 
-    return &DescribeInstanceConfigRequest{
+    return &DescribeNodeListRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/instanceConfig",
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/node",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         CacheInstanceId: cacheInstanceId,
+        PageNumber: pageNumber,
+        PageSize: pageSize,
+        ShardId: shardId,
+        Role: role,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeInstanceConfigRequestWithoutParam() *DescribeInstanceConfigRequest {
+func NewDescribeNodeListRequestWithoutParam() *DescribeNodeListRequest {
 
-    return &DescribeInstanceConfigRequest{
+    return &DescribeNodeListRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/instanceConfig",
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/node",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -90,28 +114,48 @@ func NewDescribeInstanceConfigRequestWithoutParam() *DescribeInstanceConfigReque
 }
 
 /* param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2(Required) */
-func (r *DescribeInstanceConfigRequest) SetRegionId(regionId string) {
+func (r *DescribeNodeListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
-func (r *DescribeInstanceConfigRequest) SetCacheInstanceId(cacheInstanceId string) {
+func (r *DescribeNodeListRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
+}
+
+/* param pageNumber: 页码；默认为1(Optional) */
+func (r *DescribeNodeListRequest) SetPageNumber(pageNumber int) {
+    r.PageNumber = &pageNumber
+}
+
+/* param pageSize: 分页大小；默认为10；取值范围[10, 100](Optional) */
+func (r *DescribeNodeListRequest) SetPageSize(pageSize int) {
+    r.PageSize = &pageSize
+}
+
+/* param shardId: 分片id(Optional) */
+func (r *DescribeNodeListRequest) SetShardId(shardId string) {
+    r.ShardId = &shardId
+}
+
+/* param role: 节点角色(Optional) */
+func (r *DescribeNodeListRequest) SetRole(role string) {
+    r.Role = &role
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeInstanceConfigRequest) GetRegionId() string {
+func (r DescribeNodeListRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeInstanceConfigResponse struct {
+type DescribeNodeListResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeInstanceConfigResult `json:"result"`
+    Result DescribeNodeListResult `json:"result"`
 }
 
-type DescribeInstanceConfigResult struct {
-    UnSupportConfigs []string `json:"unSupportConfigs"`
-    InstanceConfig []redis.ConfigItem `json:"instanceConfig"`
+type DescribeNodeListResult struct {
+    NodeList []redis.RedisNode `json:"nodeList"`
+    TotalCount int `json:"totalCount"`
 }
