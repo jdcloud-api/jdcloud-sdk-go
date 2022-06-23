@@ -17,11 +17,11 @@
 package models
 
 
-type TableFilter struct {
+type DmsSql struct {
 
-    /* 表名。 (Optional) */
-    TableName *string `json:"tableName"`
+    /* SQL语句。 (Optional) */
+    Sql string `json:"sql"`
 
-    /* 查询条件。 (Optional) */
-    Filter *string `json:"filter"`
+    /* SQL类型：CREATE_VIEW，DROP_VIEW， ALTER_VIEW，CREATE_PROCEDURE，DROP_PROCEDURE， ALTER_PROCEDURE，CREATE_FUNCTION，DROP_FUNCTION， ALTER_FUNCTION，CREATE_TRIGGER，ALTER_TRIGGER，DROP_TRIGGER，CREATE_EVENT，ALTER_EVENT，DROP_EVENT。 (Optional) */
+    SqlTypeEnum string `json:"sqlTypeEnum"`
 }

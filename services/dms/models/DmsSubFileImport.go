@@ -17,11 +17,26 @@
 package models
 
 
-type TableFilter struct {
+type DmsSubFileImport struct {
 
-    /* 表名。 (Optional) */
-    TableName *string `json:"tableName"`
+    /* id (Optional) */
+    Id int `json:"id"`
 
-    /* 查询条件。 (Optional) */
-    Filter *string `json:"filter"`
+    /* parentId (Optional) */
+    ParentId int `json:"parentId"`
+
+    /* 分片号 (Optional) */
+    FileIndex int `json:"fileIndex"`
+
+    /* 上传状态 (Optional) */
+    UploadStatus string `json:"uploadStatus"`
+
+    /* MD5 (Optional) */
+    ChkSumMd5 string `json:"chkSumMd5"`
+
+    /* 开始时间 (Optional) */
+    BeginDate string `json:"beginDate"`
+
+    /* 完成时间 (Optional) */
+    FinishDate string `json:"finishDate"`
 }

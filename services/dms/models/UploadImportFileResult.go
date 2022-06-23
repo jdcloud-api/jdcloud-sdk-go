@@ -17,11 +17,11 @@
 package models
 
 
-type TableFilter struct {
+type UploadImportFileResult struct {
 
-    /* 表名。 (Optional) */
-    TableName *string `json:"tableName"`
+    /* 是否全部上传完成 (Optional) */
+    Finish bool `json:"finish"`
 
-    /* 查询条件。 (Optional) */
-    Filter *string `json:"filter"`
+    /* 当前分片信息。 (Optional) */
+    CurrentChunkInfo DmsSubFileImport `json:"currentChunkInfo"`
 }
