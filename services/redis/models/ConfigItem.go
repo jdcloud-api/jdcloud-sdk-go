@@ -50,4 +50,22 @@ slowlog-log-slower-than（redis 2.8和redis 4.0的默认值都为10000）：[0-1
 notify-keyspace-events（redis 4.0的默认值为空，redis 2.8不支持）：[K , E , g , $ , l , s , h , z , x , e , A]字母的组合，区分大小写，或为空
   */
     ConfigValue string `json:"configValue"`
+
+    /* 参数默认值 (Optional) */
+    ConfigDefaultValue *string `json:"configDefaultValue"`
+
+    /* 参数值类型，目前有int、string、outputBuffer、byteArray这四种 (Optional) */
+    ConfigValueType *string `json:"configValueType"`
+
+    /* 参数值的最小值，在configValueType为int时有效 (Optional) */
+    ConfigValueMin *int `json:"configValueMin"`
+
+    /* 参数值的最大值，在configValueType为int时有效 (Optional) */
+    ConfigValueMax *int `json:"configValueMax"`
+
+    /* 参数值的可选值，在configValueType为string或byteArray时有效 (Optional) */
+    ConfigValueOptional []string `json:"configValueOptional"`
+
+    /* configValueType为outputBuffer时的参数值规则 (Optional) */
+    ConfigValueOutputBuffer *string `json:"configValueOutputBuffer"`
 }

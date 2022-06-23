@@ -23,5 +23,5 @@ type MatchOpValCfg struct {
     MatchOp int `json:"matchOp"`
 
     /* 匹配值  */
-    Val int `json:"val"`
+    Val string `json:"val"`
 }

@@ -112,5 +112,6 @@ type DescribeInstanceConfigResponse struct {
 }
 
 type DescribeInstanceConfigResult struct {
+    UnSupportConfigs []string `json:"unSupportConfigs"`
     InstanceConfig []redis.ConfigItem `json:"instanceConfig"`
 }

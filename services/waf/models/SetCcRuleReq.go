@@ -40,7 +40,7 @@ type SetCcRuleReq struct {
     /* ip访问次数，[1~9999999]  */
     SingleIpLimit int `json:"singleIpLimit"`
 
-    /* 阻断类型 3:封禁，2:人机交互  */
+    /* 阻断类型 1:302跳转到指定页面 2:验证码 3:拦截返回自定义页面 4:js跳转 5:观察 6:重定向  */
     BlockType int `json:"blockType"`
 
     /* block 持续时间，单位为分钟 [1~24*60]  */

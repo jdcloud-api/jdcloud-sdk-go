@@ -25,6 +25,6 @@ type GeoCfg struct {
     /* geo名称  */
     Val string `json:"val"`
 
-    /* action配置  */
+    /* 动作配置,旗舰版全部支持,其它套餐不支持观察  */
     AtCfg AtCfg `json:"atCfg"`
 }

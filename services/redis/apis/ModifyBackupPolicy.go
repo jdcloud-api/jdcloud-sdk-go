@@ -30,7 +30,10 @@ type ModifyBackupPolicyRequest struct {
     /* 缓存Redis实例ID，是访问实例的唯一标识  */
     CacheInstanceId string `json:"cacheInstanceId"`
 
-    /* 设置自动备份时间，格式为：HH:mm-HH:mm 时区，例如"01:00-02:00 +0800"，表示东八区的1点到2点,'-'表示关闭自动备份  */
+    /* 是否开启自动备份，true表示开启，false表示关闭 (Optional) */
+    AutoBackup *bool `json:"autoBackup"`
+
+    /* 设置自动备份时间，格式为：HH:mm-HH:mm 时区，例如"01:00-02:00 +0800"，表示东八区的1点到2点  */
     BackupTime string `json:"backupTime"`
 
     /* 备份周期，包括：Monday，Tuesday，Wednesday，Thursday，Friday，Saturday，Sunday，多个用逗号分隔  */
@@ -40,7 +43,7 @@ type ModifyBackupPolicyRequest struct {
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
- * param backupTime: 设置自动备份时间，格式为：HH:mm-HH:mm 时区，例如"01:00-02:00 +0800"，表示东八区的1点到2点,'-'表示关闭自动备份 (Required)
+ * param backupTime: 设置自动备份时间，格式为：HH:mm-HH:mm 时区，例如"01:00-02:00 +0800"，表示东八区的1点到2点 (Required)
  * param backupPeriod: 备份周期，包括：Monday，Tuesday，Wednesday，Thursday，Friday，Saturday，Sunday，多个用逗号分隔 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -69,12 +72,14 @@ func NewModifyBackupPolicyRequest(
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
- * param backupTime: 设置自动备份时间，格式为：HH:mm-HH:mm 时区，例如"01:00-02:00 +0800"，表示东八区的1点到2点,'-'表示关闭自动备份 (Required)
+ * param autoBackup: 是否开启自动备份，true表示开启，false表示关闭 (Optional)
+ * param backupTime: 设置自动备份时间，格式为：HH:mm-HH:mm 时区，例如"01:00-02:00 +0800"，表示东八区的1点到2点 (Required)
  * param backupPeriod: 备份周期，包括：Monday，Tuesday，Wednesday，Thursday，Friday，Saturday，Sunday，多个用逗号分隔 (Required)
  */
 func NewModifyBackupPolicyRequestWithAllParams(
     regionId string,
     cacheInstanceId string,
+    autoBackup *bool,
     backupTime string,
     backupPeriod string,
 ) *ModifyBackupPolicyRequest {
@@ -88,6 +93,7 @@ func NewModifyBackupPolicyRequestWithAllParams(
         },
         RegionId: regionId,
         CacheInstanceId: cacheInstanceId,
+        AutoBackup: autoBackup,
         BackupTime: backupTime,
         BackupPeriod: backupPeriod,
     }
@@ -116,7 +122,12 @@ func (r *ModifyBackupPolicyRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
 
-/* param backupTime: 设置自动备份时间，格式为：HH:mm-HH:mm 时区，例如"01:00-02:00 +0800"，表示东八区的1点到2点,'-'表示关闭自动备份(Required) */
+/* param autoBackup: 是否开启自动备份，true表示开启，false表示关闭(Optional) */
+func (r *ModifyBackupPolicyRequest) SetAutoBackup(autoBackup bool) {
+    r.AutoBackup = &autoBackup
+}
+
+/* param backupTime: 设置自动备份时间，格式为：HH:mm-HH:mm 时区，例如"01:00-02:00 +0800"，表示东八区的1点到2点(Required) */
 func (r *ModifyBackupPolicyRequest) SetBackupTime(backupTime string) {
     r.BackupTime = backupTime
 }

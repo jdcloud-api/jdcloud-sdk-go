@@ -52,7 +52,7 @@ type RiskPolicyCfg struct {
     /* rules (Optional) */
     Rules string `json:"rules"`
 
-    /* 动作 支持 verify@captcha / verify@jscookie / forbidden / notice / redirect (Optional) */
+    /* 匹配动作, 拦截:forbidden,redirect 人机识别:verify@jscookie,verify@captcha,verify@rdtcookie 观察:notice (Optional) */
     Action string `json:"action"`
 
     /* 跳转地址，Action为redirect时必须为当前实例下的域名的url，forbidden时为自定义页面名称 (Optional) */

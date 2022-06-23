@@ -52,6 +52,9 @@ createTime - 按创建时间排序(asc表示按时间正序，desc表示按时�
 
     /* 标签的过滤条件 (Optional) */
     TagFilters []common.TagFilter `json:"tagFilters"`
+
+    /*  (Optional) */
+    ResourceGroupIds []string `json:"resourceGroupIds"`
 }
 
 /*
@@ -90,6 +93,7 @@ chargeMode - 计费类型，精确匹配（prepaid_by_duration表示包年包月
 createTime - 按创建时间排序(asc表示按时间正序，desc表示按时间倒序)
  (Optional)
  * param tagFilters: 标签的过滤条件 (Optional)
+ * param resourceGroupIds:  (Optional)
  */
 func NewDescribeCacheInstancesRequestWithAllParams(
     regionId string,
@@ -98,6 +102,7 @@ func NewDescribeCacheInstancesRequestWithAllParams(
     filters []common.Filter,
     sorts []common.Sort,
     tagFilters []common.TagFilter,
+    resourceGroupIds []string,
 ) *DescribeCacheInstancesRequest {
 
     return &DescribeCacheInstancesRequest{
@@ -113,6 +118,7 @@ func NewDescribeCacheInstancesRequestWithAllParams(
         Filters: filters,
         Sorts: sorts,
         TagFilters: tagFilters,
+        ResourceGroupIds: resourceGroupIds,
     }
 }
 
@@ -166,6 +172,11 @@ func (r *DescribeCacheInstancesRequest) SetSorts(sorts []common.Sort) {
 /* param tagFilters: 标签的过滤条件(Optional) */
 func (r *DescribeCacheInstancesRequest) SetTagFilters(tagFilters []common.TagFilter) {
     r.TagFilters = tagFilters
+}
+
+/* param resourceGroupIds: (Optional) */
+func (r *DescribeCacheInstancesRequest) SetResourceGroupIds(resourceGroupIds []string) {
+    r.ResourceGroupIds = resourceGroupIds
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

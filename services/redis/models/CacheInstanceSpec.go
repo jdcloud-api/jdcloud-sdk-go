@@ -52,6 +52,33 @@ type CacheInstanceSpec struct {
     /* 用户普通标签 (Optional) */
     UserTags []Tag `json:"userTags"`
 
+    /* 缓存Redis实例所属的资源组ID (Optional) */
+    ResourceGroupId *string `json:"resourceGroupId"`
+
+    /* db数量，默认为16，参数范围为16~256 (Optional) */
+    DbNum *int `json:"dbNum"`
+
+    /* slave节点是否开启持久化 (Optional) */
+    SlaveAppendonly *string `json:"slaveAppendonly"`
+
+    /* 内存淘汰策略 (Optional) */
+    MaxmemoryPolicy *string `json:"maxmemoryPolicy"`
+
+    /* 缓存Redis实例类型，目前支持：master-slave（标准版）、cluster（代理集群版）、native-cluster（cluster集群版） (Optional) */
+    CacheInstanceType *string `json:"cacheInstanceType"`
+
+    /* 副本数，含主副本 (Optional) */
+    ReplicaNumber *int `json:"replicaNumber"`
+
+    /* 实例是否开启SmartProxy，当架构类型为native-cluster时才有效，1表示开启，0表示不开启 (Optional) */
+    EnableSmartProxy *int `json:"enableSmartProxy"`
+
+    /* 缓存Redis实例访问端口 (Optional) */
+    Port *int `json:"port"`
+
     /* 扩展配置 (Optional) */
     Extension *ReqExtension `json:"extension"`
+
+    /* cpu架构类型:arm64、amd64 (Optional) */
+    CpuArchType *string `json:"cpuArchType"`
 }

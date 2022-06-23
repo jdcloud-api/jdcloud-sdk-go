@@ -25,12 +25,9 @@ type SetIpbanReq struct {
     /* 域名  */
     Domain string `json:"domain"`
 
-    /* 检测时间 单位秒， 限制[60-600]  */
-    DetectTime int `json:"detectTime"`
+    /* 防护模式 1宽松模式，2正常模式，3严格模式  */
+    IpbanMode int `json:"ipbanMode"`
 
-    /* 封禁阈值，限制[1-20000]  */
-    Threshold int `json:"threshold"`
-
-    /* 封禁时间，限制[1-86400]  */
-    BanTime int `json:"banTime"`
+    /* 动作配置  */
+    Action DenyActionCfg `json:"action"`
 }

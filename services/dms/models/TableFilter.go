@@ -20,8 +20,8 @@ package models
 type TableFilter struct {
 
     /* 表名。 (Optional) */
-    TableName string `json:"tableName"`
+    TableName *string `json:"tableName"`
 
     /* 查询条件。 (Optional) */
-    Filter string `json:"filter"`
+    Filter *string `json:"filter"`
 }

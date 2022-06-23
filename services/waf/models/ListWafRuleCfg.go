@@ -25,10 +25,10 @@ type ListWafRuleCfg struct {
     /* 规则id (Optional) */
     Id int `json:"id"`
 
-    /* 匹配动作 (Optional) */
+    /* 匹配动作, 拦截:forbidden,redirect 人机识别:verify@jscookie,verify@captcha,verify@rdtcookie 观察:notice (Optional) */
     MatchAction string `json:"matchAction"`
 
-    /* 重定向连接 (Optional) */
+    /* 跳转地址，matchAction为redirect时必须为当前实例下的域名的url，forbidden时为自定义页面名称 (Optional) */
     Redirection string `json:"redirection"`
 
     /* 规则名称 (Optional) */

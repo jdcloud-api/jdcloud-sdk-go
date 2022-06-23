@@ -18,7 +18,4 @@ package models
 
 
 type ReqExtension struct {
-
-    /* 外部访问方式，空表示关闭外部访问 (Optional) */
-    ExposeType *string `json:"exposeType"`
 }

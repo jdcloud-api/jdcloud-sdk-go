@@ -34,7 +34,7 @@ type GetPriceReq struct {
     /* 实例id，除新建必传 (Optional) */
     WafInstanceId string `json:"wafInstanceId"`
 
-    /* 套餐类型 1:高级版, 2:企业版 3:旗舰版 4:基础版  */
+    /* 套餐类型 1:高级版, 2:企业版 3:旗舰版 4:基础版(仅支持新用户)  */
     PackageType int `json:"packageType"`
 
     /* 额外的域名扩展包  */

@@ -32,7 +32,7 @@ type RiskEventVarsCfg struct {
     Event RiskEventCfg `json:"event"`
 
     /* 变量信息 (Optional) */
-    Vars RiskVarCfg `json:"vars"`
+    Vars []RiskVarCfg `json:"vars"`
 
     /* 策略信息 (Optional) */
     Policys []RiskPolicyCfg `json:"policys"`

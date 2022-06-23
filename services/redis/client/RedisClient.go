@@ -40,7 +40,7 @@ func NewRedisClient(credential *core.Credential) *RedisClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "redis",
-            Revision:    "2.5.0",
+            Revision:    "2.6.16",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -57,6 +57,26 @@ func (c *RedisClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
 }
 
+/* 查询账号信息 */
+func (c *RedisClient) DescribeAccounts(request *redis.DescribeAccountsRequest) (*redis.DescribeAccountsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &redis.DescribeAccountsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 开启或更新缓存Redis实例的自动备份策略，可修改备份周期和备份时间 */
 func (c *RedisClient) ModifyBackupPolicy(request *redis.ModifyBackupPolicyRequest) (*redis.ModifyBackupPolicyResponse, error) {
     if request == nil {
@@ -68,6 +88,26 @@ func (c *RedisClient) ModifyBackupPolicy(request *redis.ModifyBackupPolicyReques
     }
 
     jdResp := &redis.ModifyBackupPolicyResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询数据清理任务进度 */
+func (c *RedisClient) DescribeClearData(request *redis.DescribeClearDataRequest) (*redis.DescribeClearDataResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &redis.DescribeClearDataResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -117,6 +157,26 @@ func (c *RedisClient) DescribeIpWhiteList(request *redis.DescribeIpWhiteListRequ
     return jdResp, err
 }
 
+/* 获取缓存Redis实例的节点列表，可分页、可搜索 */
+func (c *RedisClient) DescribeNodeList(request *redis.DescribeNodeListRequest) (*redis.DescribeNodeListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &redis.DescribeNodeListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 修改缓存Redis实例的密码，可为空 */
 func (c *RedisClient) ResetCacheInstancePassword(request *redis.ResetCacheInstancePasswordRequest) (*redis.ResetCacheInstancePasswordResponse, error) {
     if request == nil {
@@ -148,6 +208,26 @@ func (c *RedisClient) CreateCacheAnalysis(request *redis.CreateCacheAnalysisRequ
     }
 
     jdResp := &redis.CreateCacheAnalysisResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据客户端ip和uuid查询客户端性能日志数据 */
+func (c *RedisClient) DescribeClientPerfData(request *redis.DescribeClientPerfDataRequest) (*redis.DescribeClientPerfDataResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &redis.DescribeClientPerfDataResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -197,6 +277,26 @@ func (c *RedisClient) DescribeDownloadUrl(request *redis.DescribeDownloadUrlRequ
     return jdResp, err
 }
 
+/* 停止数据清理任务 */
+func (c *RedisClient) StopClearData(request *redis.StopClearDataRequest) (*redis.StopClearDataResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &redis.StopClearDataResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询缓存Redis实例列表，可分页、可排序、可搜索、可过滤 */
 func (c *RedisClient) DescribeCacheInstances(request *redis.DescribeCacheInstancesRequest) (*redis.DescribeCacheInstancesResponse, error) {
     if request == nil {
@@ -208,6 +308,26 @@ func (c *RedisClient) DescribeCacheInstances(request *redis.DescribeCacheInstanc
     }
 
     jdResp := &redis.DescribeCacheInstancesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建数据清理任务 */
+func (c *RedisClient) StartClearData(request *redis.StartClearDataRequest) (*redis.StartClearDataResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &redis.StartClearDataResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -297,6 +417,26 @@ func (c *RedisClient) DescribeCacheAnalysisList(request *redis.DescribeCacheAnal
     return jdResp, err
 }
 
+/* 创建账号 */
+func (c *RedisClient) CreateAccount(request *redis.CreateAccountRequest) (*redis.CreateAccountResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &redis.CreateAccountResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询支持的地域列表 */
 func (c *RedisClient) DescribeAvailableRegion(request *redis.DescribeAvailableRegionRequest) (*redis.DescribeAvailableRegionResponse, error) {
     if request == nil {
@@ -308,6 +448,26 @@ func (c *RedisClient) DescribeAvailableRegion(request *redis.DescribeAvailableRe
     }
 
     jdResp := &redis.DescribeAvailableRegionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据客户端ip、uuid以及用户指定的过滤条件，查询客户端性能日志数据 */
+func (c *RedisClient) FilteredClientPerfData(request *redis.FilteredClientPerfDataRequest) (*redis.FilteredClientPerfDataResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &redis.FilteredClientPerfDataResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -418,6 +578,26 @@ func (c *RedisClient) DescribeCacheAnalysisResult(request *redis.DescribeCacheAn
     return jdResp, err
 }
 
+/* 删除账号 */
+func (c *RedisClient) DeleteAccount(request *redis.DeleteAccountRequest) (*redis.DeleteAccountResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &redis.DeleteAccountResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询缓存Redis实例的自动备份策略 */
 func (c *RedisClient) DescribeBackupPolicy(request *redis.DescribeBackupPolicyRequest) (*redis.DescribeBackupPolicyResponse, error) {
     if request == nil {
@@ -429,6 +609,26 @@ func (c *RedisClient) DescribeBackupPolicy(request *redis.DescribeBackupPolicyRe
     }
 
     jdResp := &redis.DescribeBackupPolicyResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改账号信息 */
+func (c *RedisClient) ModifyAccount(request *redis.ModifyAccountRequest) (*redis.ModifyAccountResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &redis.ModifyAccountResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -501,6 +701,26 @@ func (c *RedisClient) DescribeSlowLog(request *redis.DescribeSlowLogRequest) (*r
     return jdResp, err
 }
 
+/* 获取禁用命令列表 */
+func (c *RedisClient) GetDisableCommands(request *redis.GetDisableCommandsRequest) (*redis.GetDisableCommandsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &redis.GetDisableCommandsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 创建一个指定配置的缓存Redis实例：可选择版本、类型、规格（按CPU核数、内存容量、磁盘容量、带宽等划分），自定义分片规格可通过describeSpecConfig接口获取，老规格代码请参考，https://docs.jdcloud.com/cn/jcs-for-redis/specifications
  */
 func (c *RedisClient) CreateCacheInstance(request *redis.CreateCacheInstanceRequest) (*redis.CreateCacheInstanceResponse, error) {
@@ -542,6 +762,26 @@ func (c *RedisClient) RestoreInstance(request *redis.RestoreInstanceRequest) (*r
     return jdResp, err
 }
 
+/* 查询通过配置中心接入所需token与秘钥 */
+func (c *RedisClient) DescribeConfigCenterTokenAndCipher(request *redis.DescribeConfigCenterTokenAndCipherRequest) (*redis.DescribeConfigCenterTokenAndCipherResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &redis.DescribeConfigCenterTokenAndCipherResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询账户的缓存Redis配额信息 */
 func (c *RedisClient) DescribeUserQuota(request *redis.DescribeUserQuotaRequest) (*redis.DescribeUserQuotaResponse, error) {
     if request == nil {
@@ -562,6 +802,46 @@ func (c *RedisClient) DescribeUserQuota(request *redis.DescribeUserQuotaRequest)
     return jdResp, err
 }
 
+/* 查询通过r2m java客户端接入的客户端数量 */
+func (c *RedisClient) DescribeClientSumUseR2MJavaClient(request *redis.DescribeClientSumUseR2MJavaClientRequest) (*redis.DescribeClientSumUseR2MJavaClientResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &redis.DescribeClientSumUseR2MJavaClientResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询通过r2m java客户端接入的客户端详细信息，并统计使用的各版本客户端数量 */
+func (c *RedisClient) DescribeClientDetailUseR2MJavaClient(request *redis.DescribeClientDetailUseR2MJavaClientRequest) (*redis.DescribeClientDetailUseR2MJavaClientResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &redis.DescribeClientDetailUseR2MJavaClientResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询支持的规格列表 */
 func (c *RedisClient) DescribeAvailableResource(request *redis.DescribeAvailableResourceRequest) (*redis.DescribeAvailableResourceResponse, error) {
     if request == nil {
@@ -573,6 +853,26 @@ func (c *RedisClient) DescribeAvailableResource(request *redis.DescribeAvailable
     }
 
     jdResp := &redis.DescribeAvailableResourceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 禁用redis命令 */
+func (c *RedisClient) SetDisableCommands(request *redis.SetDisableCommandsRequest) (*redis.SetDisableCommandsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &redis.SetDisableCommandsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

@@ -37,7 +37,7 @@ type OrderReq struct {
     /* 实例id，除新建必传 (Optional) */
     WafInstanceId *string `json:"wafInstanceId"`
 
-    /* 套餐类型 1:高级版, 2:企业版 3:旗舰版 4:基础版  */
+    /* 套餐类型 1:高级版, 2:企业版 3:旗舰版 4:基础版(仅支持新用户)  */
     PackageType int `json:"packageType"`
 
     /* 额外的域名扩展包  */
@@ -60,4 +60,7 @@ type OrderReq struct {
 
     /* 购物车活动参数 (Optional) */
     BuyScenario *string `json:"buyScenario"`
+
+    /* true表示支持autoPay (Optional) */
+    NeedPay *bool `json:"needPay"`
 }

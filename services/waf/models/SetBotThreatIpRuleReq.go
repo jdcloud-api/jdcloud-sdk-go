@@ -25,7 +25,7 @@ type SetBotThreatIpRuleReq struct {
     /* 要设置的bot威胁情报库类型，list列表中的值en  */
     BotType string `json:"botType"`
 
-    /* 动作配置，默认为告警，仅支持1和4和5三种类型动作 (Optional) */
+    /* 动作配置 (Optional) */
     Action DenyActionCfg `json:"action"`
 
     /* 1-启用 0-禁用 (Optional) */

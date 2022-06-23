@@ -129,5 +129,5 @@ type ListBotStdRulesResult struct {
     PageIndex int `json:"pageIndex"`
     PageSize int `json:"pageSize"`
     TotalCount int `json:"totalCount"`
-    List waf.StdBotRules `json:"list"`
+    List []waf.StdBotRules `json:"list"`
 }

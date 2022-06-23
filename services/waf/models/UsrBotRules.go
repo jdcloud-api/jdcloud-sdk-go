@@ -34,7 +34,7 @@ type UsrBotRules struct {
     /* 匹配条件集,总长度不能超过4096 (Optional) */
     MatchItems []BotMatchItem `json:"matchItems"`
 
-    /* 动作配置，默认为告警 (Optional) */
+    /* 动作配置 (Optional) */
     Action DenyActionCfg `json:"action"`
 
     /* 0-使用中 1-禁用 (Optional) */

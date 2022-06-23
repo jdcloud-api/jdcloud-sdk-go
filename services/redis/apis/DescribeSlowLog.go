@@ -45,6 +45,9 @@ type DescribeSlowLogRequest struct {
 
     /* 分片id (Optional) */
     ShardId *string `json:"shardId"`
+
+    /* 分片地址 (Optional) */
+    ShardAddr *string `json:"shardAddr"`
 }
 
 /*
@@ -78,6 +81,7 @@ func NewDescribeSlowLogRequest(
  * param startTime: 开始时间 (Optional)
  * param endTime: 结束时间 (Optional)
  * param shardId: 分片id (Optional)
+ * param shardAddr: 分片地址 (Optional)
  */
 func NewDescribeSlowLogRequestWithAllParams(
     regionId string,
@@ -87,6 +91,7 @@ func NewDescribeSlowLogRequestWithAllParams(
     startTime *string,
     endTime *string,
     shardId *string,
+    shardAddr *string,
 ) *DescribeSlowLogRequest {
 
     return &DescribeSlowLogRequest{
@@ -103,6 +108,7 @@ func NewDescribeSlowLogRequestWithAllParams(
         StartTime: startTime,
         EndTime: endTime,
         ShardId: shardId,
+        ShardAddr: shardAddr,
     }
 }
 
@@ -152,6 +158,11 @@ func (r *DescribeSlowLogRequest) SetEndTime(endTime string) {
 /* param shardId: 分片id(Optional) */
 func (r *DescribeSlowLogRequest) SetShardId(shardId string) {
     r.ShardId = &shardId
+}
+
+/* param shardAddr: 分片地址(Optional) */
+func (r *DescribeSlowLogRequest) SetShardAddr(shardAddr string) {
+    r.ShardAddr = &shardAddr
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
