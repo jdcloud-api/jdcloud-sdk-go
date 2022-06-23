@@ -46,11 +46,14 @@ type DomainConfig struct {
     /* 网站恶意ip防护配置 (Optional) */
     IpbanConf IpbanConf `json:"ipbanConf"`
 
+    /* 网站恶意ip自定义防护配置 (Optional) */
+    IpbanUsrConf IpbanConf `json:"ipbanUsrConf"`
+
     /* 网站过去两天攻击情况 (Optional) */
     LastAttackReport LastAttackReport `json:"lastAttackReport"`
 
     /* 网站防爬虫防护配置 (Optional) */
-    AntispiderConf EnableConf `json:"antispiderConf"`
+    AntispiderConf SpiderConf `json:"antispiderConf"`
 
     /* 网站防篡改防护配置 (Optional) */
     WebcacheConf EnableConf `json:"webcacheConf"`

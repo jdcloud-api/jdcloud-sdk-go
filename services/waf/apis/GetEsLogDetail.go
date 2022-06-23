@@ -61,6 +61,9 @@ type GetEsLogDetailRequest struct {
     /* 日志Id，检索字段 (Optional) */
     LogId *string `json:"logId"`
 
+    /* 请求Id，检索字段 (Optional) */
+    Request_id *string `json:"request_id"`
+
     /* 开始时间戳，单位秒，时间间隔要求大于5分钟，小于30天。  */
     Start int `json:"start"`
 
@@ -119,6 +122,7 @@ func NewGetEsLogDetailRequest(
  * param status: 状态码，检索字段 (Optional)
  * param logType: 日志类型，检索字段，支持类型：""(为空时，默认查询全部日志类型)，"access"(访问日志)，"waf"(wafSDK)，"acl"(自定义规则)，"skip"(白名单)，"deny"(黑名单)，"cc"(CC攻击)，"webcache"(网页防篡改)，"css"(跨站脚本攻击)，"sqli"(SQL注入攻击)，""fileinc"(文件读取/包含攻击)，"cmding"(命令/代码执行攻击)，"sdd"(敏感文件探测)，"malscan"(恶意扫描攻击)，"bckack"(恶意/后门文件攻击)，"xmli"(XML注入攻击)，"dirt"(目录遍历攻击) (Optional)
  * param logId: 日志Id，检索字段 (Optional)
+ * param request_id: 请求Id，检索字段 (Optional)
  * param start: 开始时间戳，单位秒，时间间隔要求大于5分钟，小于30天。 (Required)
  * param end: 结束时间戳，单位秒，时间间隔要求大于5分钟，小于30天。 (Required)
  * param pageSize: 每页显示的个数，默认是10。 (Required)
@@ -137,6 +141,7 @@ func NewGetEsLogDetailRequestWithAllParams(
     status *string,
     logType []string,
     logId *string,
+    request_id *string,
     start int,
     end int,
     pageSize int,
@@ -162,6 +167,7 @@ func NewGetEsLogDetailRequestWithAllParams(
         Status: status,
         LogType: logType,
         LogId: logId,
+        Request_id: request_id,
         Start: start,
         End: end,
         PageSize: pageSize,
@@ -240,6 +246,11 @@ func (r *GetEsLogDetailRequest) SetLogType(logType []string) {
 /* param logId: 日志Id，检索字段(Optional) */
 func (r *GetEsLogDetailRequest) SetLogId(logId string) {
     r.LogId = &logId
+}
+
+/* param request_id: 请求Id，检索字段(Optional) */
+func (r *GetEsLogDetailRequest) SetRequest_id(request_id string) {
+    r.Request_id = &request_id
 }
 
 /* param start: 开始时间戳，单位秒，时间间隔要求大于5分钟，小于30天。(Required) */

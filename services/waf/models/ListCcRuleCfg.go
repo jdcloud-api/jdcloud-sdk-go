@@ -52,7 +52,7 @@ type ListCcRuleCfg struct {
     /* 0-使用中 1-禁用 (Optional) */
     Disable int `json:"disable"`
 
-    /* blockType 为3 时，为自定义页面名称，缺省为default (Optional) */
+    /* 跳转地址，blockType为1时必须为当前实例下的域名的url，为2时为自定义页面名称 (Optional) */
     Redirection string `json:"redirection"`
 
     /* cc 统计维度，ip或cookie (Optional) */

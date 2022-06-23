@@ -129,5 +129,5 @@ type ListWafConditionsResult struct {
     PageIndex int `json:"pageIndex"`
     PageSize int `json:"pageSize"`
     TotalCount int `json:"totalCount"`
-    List waf.ListWafConditionCfg `json:"list"`
+    List []waf.ListWafConditionCfg `json:"list"`
 }

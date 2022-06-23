@@ -129,5 +129,5 @@ type ListWafRulesResult struct {
     PageIndex int `json:"pageIndex"`
     PageSize int `json:"pageSize"`
     TotalCount int `json:"totalCount"`
-    Data waf.ListWafRuleCfg `json:"data"`
+    List []waf.ListWafRuleCfg `json:"list"`
 }

@@ -126,10 +126,4 @@ type DisableRulesResponse struct {
 }
 
 type DisableRulesResult struct {
-    WafInstanceId string `json:"wafInstanceId"`
-    List []waf.DomainMainConfig `json:"list"`
-    PageIndex int `json:"pageIndex"`
-    PageSize int `json:"pageSize"`
-    TotalCount int `json:"totalCount"`
-    MaxLimit int `json:"maxLimit"`
 }

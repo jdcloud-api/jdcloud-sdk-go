@@ -129,11 +129,12 @@ type GetDomainAntiConfigResult struct {
     Domain string `json:"domain"`
     DisableWaf int `json:"disableWaf"`
     AclConf waf.AclConf `json:"aclConf"`
-    AntispiderConf waf.EnableConf `json:"antispiderConf"`
+    AntispiderConf waf.SpiderConf `json:"antispiderConf"`
     CcConf waf.CcConf `json:"ccConf"`
     DenyConf waf.DenyConf `json:"denyConf"`
     IntSemConf waf.IntSemConf `json:"intSemConf"`
     IpbanConf waf.IpbanConf `json:"ipbanConf"`
+    IpbanUsrConf waf.IpbanUsrConf `json:"ipbanUsrConf"`
     RatelimitConf waf.RatelimitConf `json:"ratelimitConf"`
     ThreatinfoConf waf.EnableConf `json:"threatinfoConf"`
     UserDefPageConf waf.UserDefPageConf `json:"userDefPageConf"`

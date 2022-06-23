@@ -22,12 +22,9 @@ type IpbanConf struct {
     /* 是否使能 0表示否 (Optional) */
     Enable int `json:"enable"`
 
-    /* 封禁时间，秒 (Optional) */
-    BanTime int `json:"banTime"`
+    /* 防护模式 (Optional) */
+    IpbanMode int `json:"ipbanMode"`
 
-    /* 检测时间，秒 (Optional) */
-    DetectTime int `json:"detectTime"`
-
-    /* 封禁阈值 (Optional) */
-    Threshold int `json:"threshold"`
+    /* 动作配置 (Optional) */
+    Action DenyActionCfg `json:"action"`
 }

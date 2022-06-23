@@ -25,6 +25,9 @@ type AntiSpiderConfReq struct {
     /* 域名  */
     Domain string `json:"domain"`
 
-    /* action配置, 只支持 1，2，5 atOp (Optional) */
+    /* 防护模式 1宽松模式，2正常模式，3严格模式 (Optional) */
+    SpiderMode int `json:"spiderMode"`
+
+    /* 动作配置 (Optional) */
     Action DenyActionCfg `json:"action"`
 }

@@ -31,7 +31,7 @@ type SetWafRuleReq struct {
     /* 规则名称  */
     RuleName string `json:"ruleName"`
 
-    /* 匹配动作, forbidden redirect verify@jscookie verify@captcha notice  */
+    /* 匹配动作, 拦截:forbidden,redirect 人机识别:verify@jscookie,verify@captcha,verify@rdtcookie 观察:notice  */
     MatchAction string `json:"matchAction"`
 
     /* 跳转地址，matchAction为redirect时必须为当前实例下的域名的url，forbidden时为自定义页面名称  */

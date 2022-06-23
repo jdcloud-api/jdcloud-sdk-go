@@ -128,4 +128,5 @@ type UpgradeInstanceResponse struct {
 type UpgradeInstanceResult struct {
     BuyId string `json:"buyId"`
     WafInstanceId string `json:"wafInstanceId"`
+    OrderNumber string `json:"orderNumber"`
 }

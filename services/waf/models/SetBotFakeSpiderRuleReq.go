@@ -25,7 +25,7 @@ type SetBotFakeSpiderRuleReq struct {
     /* 要设置的bot伪造蜘蛛类型，list列表中的值  */
     Name string `json:"name"`
 
-    /* 动作配置，默认为告警，仅支持1和5 op (Optional) */
+    /* 动作配置 (Optional) */
     Action DenyActionCfg `json:"action"`
 
     /* 1-启用 0-禁用 (Optional) */

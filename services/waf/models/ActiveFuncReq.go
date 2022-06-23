@@ -27,7 +27,4 @@ type ActiveFuncReq struct {
 
     /* 是否使能 0表示否 (Optional) */
     Enable *int `json:"enable"`
-
-    /* 是否国密 (Optional) */
-    IsGm *int `json:"isGm"`
 }

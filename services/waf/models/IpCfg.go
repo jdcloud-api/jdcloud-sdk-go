@@ -25,6 +25,9 @@ type IpCfg struct {
     /* 支持 ipv4/8 ipv4/16 ipv4/24 ipv4/32 ipv6/64  */
     Val string `json:"val"`
 
-    /* action配置  */
+    /* 动作配置,旗舰版全部支持,其它套餐不支持观察  */
     AtCfg AtCfg `json:"atCfg"`
+
+    /* 备注 (Optional) */
+    Tag string `json:"tag"`
 }

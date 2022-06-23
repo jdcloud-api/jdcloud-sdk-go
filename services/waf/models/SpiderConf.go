@@ -17,17 +17,14 @@
 package models
 
 
-type SetBotThreatIpRuleReq struct {
+type SpiderConf struct {
 
-    /* 域名  */
-    Domain string `json:"domain"`
-
-    /* 要设置的bot威胁情报库类型，list列表中的值en  */
-    BotType string `json:"botType"`
-
-    /* 动作配置 (Optional) */
-    Action DenyActionCfg `json:"action"`
-
-    /* 1-启用 0-禁用 (Optional) */
+    /* 是否使能 0表示否 (Optional) */
     Enable int `json:"enable"`
+
+    /* 防护模式 (Optional) */
+    SpiderMode int `json:"spiderMode"`
+
+    /* 动作配置，默认为告警，支持1，2，5四种类型动作 (Optional) */
+    Action DenyActionCfg `json:"action"`
 }

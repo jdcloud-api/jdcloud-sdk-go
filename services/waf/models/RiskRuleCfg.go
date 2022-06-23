@@ -34,7 +34,7 @@ type RiskRuleCfg struct {
     /* uri 以/开头 (Optional) */
     Uri string `json:"uri"`
 
-    /* 动作 支持notice / verify@captcha (Optional) */
+    /* 匹配动作, 拦截:forbidden,redirect 人机识别:verify@jscookie,verify@captcha,verify@rdtcookie 观察:notice (Optional) */
     Action string `json:"action"`
 
     /* 请求方法 支持 POST:1,GET:1,PUT:1 (Optional) */

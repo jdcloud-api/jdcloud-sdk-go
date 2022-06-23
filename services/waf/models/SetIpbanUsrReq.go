@@ -17,10 +17,7 @@
 package models
 
 
-type SetRiskPolicyReq struct {
-
-    /* 规则id,新增时传0 (Optional) */
-    Id int `json:"id"`
+type SetIpbanUsrReq struct {
 
     /* WAF实例id  */
     WafInstanceId string `json:"wafInstanceId"`
@@ -28,27 +25,21 @@ type SetRiskPolicyReq struct {
     /* 域名  */
     Domain string `json:"domain"`
 
-    /* 规则名称  */
-    Name string `json:"name"`
+    /* 规则名  */
+    RuleName string `json:"ruleName"`
 
-    /* eventCode  */
-    EventCode string `json:"eventCode"`
+    /* 检测时间 单位秒， 限制[60-600]  */
+    DetectTime int `json:"detectTime"`
 
-    /* desc  */
-    Desc string `json:"desc"`
+    /* 封禁阈值，限制[1-20000]  */
+    Threshold int `json:"threshold"`
+
+    /* 封禁时间，限制[1-86400]  */
+    IpbanTime int `json:"ipbanTime"`
 
     /* 0-使用中 1-禁用  */
     Disable int `json:"disable"`
 
-    /* 策略编排逻辑, 格式：1&2&(3\|4\|5)  */
-    Logic string `json:"logic"`
-
-    /* 策略规则  */
-    Rules RiskPolicyRuleCfg `json:"rules"`
-
-    /* 匹配动作, 拦截:forbidden,redirect 人机识别:verify@jscookie,verify@captcha,verify@rdtcookie 观察:notice  */
-    Action string `json:"action"`
-
-    /* 跳转地址，Action为redirect时必须为当前实例下的域名的url，forbidden时为自定义页面名称 (Optional) */
-    Redirection string `json:"redirection"`
+    /* 动作配置  */
+    Action DenyActionCfg `json:"action"`
 }

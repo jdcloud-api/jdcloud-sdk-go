@@ -37,7 +37,7 @@ type SetBotUsrRuleReq struct {
     /* 匹配条件集,总长度不能超过4096  */
     MatchItems []BotMatchItem `json:"matchItems"`
 
-    /* 动作配置，默认为告警,仅支持1和4和5三种动作  */
+    /* 动作配置  */
     Action DenyActionCfg `json:"action"`
 
     /* 规则类型，general-通用规则，advanced-高级规则，evaluate-智能规则 缺省为general (Optional) */

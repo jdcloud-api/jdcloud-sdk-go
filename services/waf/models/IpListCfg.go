@@ -33,4 +33,7 @@ type IpListCfg struct {
 
     /* action配置 (Optional) */
     AtCfg AtCfg `json:"atCfg"`
+
+    /* 备注 (Optional) */
+    Tag string `json:"tag"`
 }

@@ -22,11 +22,8 @@ type CcConf struct {
     /* 是否使能 0表示否 (Optional) */
     Enable int `json:"enable"`
 
-    /* 0表示正常，1表示攻击紧急 (Optional) */
+    /* 防护模式 (Optional) */
     CcMode int `json:"ccMode"`
-
-    /* qps配置 (Optional) */
-    Qps int `json:"qps"`
 
     /* 是否支持自定义cc，0表示否 (Optional) */
     EnableUserDefine int `json:"enableUserDefine"`

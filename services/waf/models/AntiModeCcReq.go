@@ -25,12 +25,9 @@ type AntiModeCcReq struct {
     /* 域名  */
     Domain string `json:"domain"`
 
-    /* 0表示正常，1表示攻击紧急，2全局模式 3单ip模式 (Optional) */
+    /* 防护模式 1宽松模式，2正常模式 3严格模式  */
     CcMode int `json:"ccMode"`
 
-    /* cc qps配置，ccMode 为0/1时， 该字段传0， 表示不可配；  ccMode为2/3时，qps限制[1-20000] (Optional) */
-    Qps int `json:"qps"`
-
-    /* 动作配置，默认为告警，支持1，2，3, 5, 7五种类型动作 (Optional) */
+    /* 动作配置  */
     Action DenyActionCfg `json:"action"`
 }

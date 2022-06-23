@@ -17,17 +17,20 @@
 package models
 
 
-type SetBotThreatIpRuleReq struct {
+type IpbanUsrConf struct {
 
-    /* 域名  */
-    Domain string `json:"domain"`
+    /* 是否使能 0表示否 (Optional) */
+    Enable int `json:"enable"`
 
-    /* 要设置的bot威胁情报库类型，list列表中的值en  */
-    BotType string `json:"botType"`
+    /* 封禁时间，秒 (Optional) */
+    IpbanTime int `json:"ipbanTime"`
+
+    /* 检测时间，秒 (Optional) */
+    DetectTime int `json:"detectTime"`
+
+    /* 封禁阈值 (Optional) */
+    Threshold int `json:"threshold"`
 
     /* 动作配置 (Optional) */
     Action DenyActionCfg `json:"action"`
-
-    /* 1-启用 0-禁用 (Optional) */
-    Enable int `json:"enable"`
 }
