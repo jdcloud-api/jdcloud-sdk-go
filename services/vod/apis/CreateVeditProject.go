@@ -25,21 +25,25 @@ type CreateVeditProjectRequest struct {
 
     core.JDCloudRequest
 
-    /* 工程名称 (Optional) */
-    ProjectName *string `json:"projectName"`
+    /* 工程名称  */
+    ProjectName string `json:"projectName"`
 
     /* 工程描述 (Optional) */
     Description *string `json:"description"`
 
-    /* 时间线信息 (Optional) */
+    /* 时间线信息  */
     Timeline *vod.Timeline `json:"timeline"`
 }
 
 /*
+ * param projectName: 工程名称 (Required)
+ * param timeline: 时间线信息 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateVeditProjectRequest(
+    projectName string,
+    timeline *vod.Timeline,
 ) *CreateVeditProjectRequest {
 
 	return &CreateVeditProjectRequest{
@@ -49,16 +53,18 @@ func NewCreateVeditProjectRequest(
 			Header:  nil,
 			Version: "v1",
 		},
+        ProjectName: projectName,
+        Timeline: timeline,
 	}
 }
 
 /*
- * param projectName: 工程名称 (Optional)
+ * param projectName: 工程名称 (Required)
  * param description: 工程描述 (Optional)
- * param timeline: 时间线信息 (Optional)
+ * param timeline: 时间线信息 (Required)
  */
 func NewCreateVeditProjectRequestWithAllParams(
-    projectName *string,
+    projectName string,
     description *string,
     timeline *vod.Timeline,
 ) *CreateVeditProjectRequest {
@@ -89,9 +95,9 @@ func NewCreateVeditProjectRequestWithoutParam() *CreateVeditProjectRequest {
     }
 }
 
-/* param projectName: 工程名称(Optional) */
+/* param projectName: 工程名称(Required) */
 func (r *CreateVeditProjectRequest) SetProjectName(projectName string) {
-    r.ProjectName = &projectName
+    r.ProjectName = projectName
 }
 
 /* param description: 工程描述(Optional) */
@@ -99,7 +105,7 @@ func (r *CreateVeditProjectRequest) SetDescription(description string) {
     r.Description = &description
 }
 
-/* param timeline: 时间线信息(Optional) */
+/* param timeline: 时间线信息(Required) */
 func (r *CreateVeditProjectRequest) SetTimeline(timeline *vod.Timeline) {
     r.Timeline = timeline
 }

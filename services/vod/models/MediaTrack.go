@@ -19,9 +19,15 @@ package models
 
 type MediaTrack struct {
 
-    /* 轨类型。当前只支持 video (Optional) */
-    TrackType *string `json:"trackType"`
+    /* 轨类型。目前只支持的有：video，audio，text
+- video：视频轨
+- audio：音频轨
+- text：文字轨
+* 视频轨为空时，音频轨必须非空。
+* 音频轨为空时，视频轨必须非空
+  */
+    TrackType string `json:"trackType"`
 
-    /*  (Optional) */
+    /* 视频剪辑素材片段。一个Timeline中的所有MediaClip，总共不能超过20个。  */
     Clips []MediaClip `json:"clips"`
 }

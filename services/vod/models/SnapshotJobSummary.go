@@ -17,20 +17,28 @@
 package models
 
 
-type UpdateSnapshotTemplateRequestInfo struct {
+type SnapshotJobSummary struct {
 
-    /* 模板标题。长度不超过 128 个字节。UTF-8 编码。 (Optional) */
-    TemplateName string `json:"templateName"`
+    /* job ID (Optional) */
+    JobId string `json:"jobId"`
 
-    /* 模板类型。取值范围：
-  sample - 采样截图模板
-  sprite - 雪碧图模板
+    /* 视频ID (Optional) */
+    VideoId string `json:"videoId"`
+
+    /* 任务状态。
+- submitted
+- processing
+- succeeded
+- failed
  (Optional) */
-    SnapshotType string `json:"snapshotType"`
+    Status string `json:"status"`
 
-    /* 采样截图模板配置 (Optional) */
-    ImageSampleConfig ImageSampleConfig `json:"imageSampleConfig"`
+    /* 任务列表 (Optional) */
+    Tasks []TaskSummary `json:"tasks"`
 
-    /* 雪碧图模板配置 (Optional) */
-    ImageSpriteConfig ImageSpriteConfig `json:"imageSpriteConfig"`
+    /* 创建时间 (Optional) */
+    CreateTime string `json:"createTime"`
+
+    /* 修改时间 (Optional) */
+    UpdateTime string `json:"updateTime"`
 }

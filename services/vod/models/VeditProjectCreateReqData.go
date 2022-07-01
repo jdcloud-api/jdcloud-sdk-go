@@ -19,12 +19,12 @@ package models
 
 type VeditProjectCreateReqData struct {
 
-    /* 工程名称 (Optional) */
+    /* 工程名称  */
     ProjectName string `json:"projectName"`
 
     /* 工程描述 (Optional) */
     Description string `json:"description"`
 
-    /* 时间线信息 (Optional) */
+    /* 时间线信息  */
     Timeline Timeline `json:"timeline"`
 }

@@ -18,45 +18,36 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    vod "github.com/jdcloud-api/jdcloud-sdk-go/services/vod/models"
 )
 
 type CreateSnapshotTemplateRequest struct {
 
     core.JDCloudRequest
 
-    /* 模板名称  */
+    /* 模板标题。长度不超过 128 个字节。UTF-8 编码。  */
     TemplateName string `json:"templateName"`
 
     /* 模板类型。取值范围：
   sample - 采样截图模板
   sprite - 雪碧图模板
-  */
-    TemplateType string `json:"templateType"`
+ (Optional) */
+    SnapshotType *string `json:"snapshotType"`
 
-    /* 模板配置，JSON格式的字符串
-若 templateType 取值 sample，则JSON字符串须符合 SnapshotTemplateSampleConfigInfo 格式
-若 templateType 取值 sprite，则JSON字符串须符合 SnapshotTemplateSpriteConfigInfo 格式
-  */
-    TemplateConfig string `json:"templateConfig"`
+    /* 采样截图模板配置 (Optional) */
+    ImageSampleConfig *vod.ImageSampleConfig `json:"imageSampleConfig"`
+
+    /* 雪碧图模板配置 (Optional) */
+    ImageSpriteConfig *vod.ImageSpriteConfig `json:"imageSpriteConfig"`
 }
 
 /*
- * param templateName: 模板名称 (Required)
- * param templateType: 模板类型。取值范围：
-  sample - 采样截图模板
-  sprite - 雪碧图模板
- (Required)
- * param templateConfig: 模板配置，JSON格式的字符串
-若 templateType 取值 sample，则JSON字符串须符合 SnapshotTemplateSampleConfigInfo 格式
-若 templateType 取值 sprite，则JSON字符串须符合 SnapshotTemplateSpriteConfigInfo 格式
- (Required)
+ * param templateName: 模板标题。长度不超过 128 个字节。UTF-8 编码。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateSnapshotTemplateRequest(
     templateName string,
-    templateType string,
-    templateConfig string,
 ) *CreateSnapshotTemplateRequest {
 
 	return &CreateSnapshotTemplateRequest{
@@ -67,26 +58,23 @@ func NewCreateSnapshotTemplateRequest(
 			Version: "v1",
 		},
         TemplateName: templateName,
-        TemplateType: templateType,
-        TemplateConfig: templateConfig,
 	}
 }
 
 /*
- * param templateName: 模板名称 (Required)
- * param templateType: 模板类型。取值范围：
+ * param templateName: 模板标题。长度不超过 128 个字节。UTF-8 编码。 (Required)
+ * param snapshotType: 模板类型。取值范围：
   sample - 采样截图模板
   sprite - 雪碧图模板
- (Required)
- * param templateConfig: 模板配置，JSON格式的字符串
-若 templateType 取值 sample，则JSON字符串须符合 SnapshotTemplateSampleConfigInfo 格式
-若 templateType 取值 sprite，则JSON字符串须符合 SnapshotTemplateSpriteConfigInfo 格式
- (Required)
+ (Optional)
+ * param imageSampleConfig: 采样截图模板配置 (Optional)
+ * param imageSpriteConfig: 雪碧图模板配置 (Optional)
  */
 func NewCreateSnapshotTemplateRequestWithAllParams(
     templateName string,
-    templateType string,
-    templateConfig string,
+    snapshotType *string,
+    imageSampleConfig *vod.ImageSampleConfig,
+    imageSpriteConfig *vod.ImageSpriteConfig,
 ) *CreateSnapshotTemplateRequest {
 
     return &CreateSnapshotTemplateRequest{
@@ -97,8 +85,9 @@ func NewCreateSnapshotTemplateRequestWithAllParams(
             Version: "v1",
         },
         TemplateName: templateName,
-        TemplateType: templateType,
-        TemplateConfig: templateConfig,
+        SnapshotType: snapshotType,
+        ImageSampleConfig: imageSampleConfig,
+        ImageSpriteConfig: imageSpriteConfig,
     }
 }
 
@@ -115,25 +104,27 @@ func NewCreateSnapshotTemplateRequestWithoutParam() *CreateSnapshotTemplateReque
     }
 }
 
-/* param templateName: 模板名称(Required) */
+/* param templateName: 模板标题。长度不超过 128 个字节。UTF-8 编码。(Required) */
 func (r *CreateSnapshotTemplateRequest) SetTemplateName(templateName string) {
     r.TemplateName = templateName
 }
 
-/* param templateType: 模板类型。取值范围：
+/* param snapshotType: 模板类型。取值范围：
   sample - 采样截图模板
   sprite - 雪碧图模板
-(Required) */
-func (r *CreateSnapshotTemplateRequest) SetTemplateType(templateType string) {
-    r.TemplateType = templateType
+(Optional) */
+func (r *CreateSnapshotTemplateRequest) SetSnapshotType(snapshotType string) {
+    r.SnapshotType = &snapshotType
 }
 
-/* param templateConfig: 模板配置，JSON格式的字符串
-若 templateType 取值 sample，则JSON字符串须符合 SnapshotTemplateSampleConfigInfo 格式
-若 templateType 取值 sprite，则JSON字符串须符合 SnapshotTemplateSpriteConfigInfo 格式
-(Required) */
-func (r *CreateSnapshotTemplateRequest) SetTemplateConfig(templateConfig string) {
-    r.TemplateConfig = templateConfig
+/* param imageSampleConfig: 采样截图模板配置(Optional) */
+func (r *CreateSnapshotTemplateRequest) SetImageSampleConfig(imageSampleConfig *vod.ImageSampleConfig) {
+    r.ImageSampleConfig = imageSampleConfig
+}
+
+/* param imageSpriteConfig: 雪碧图模板配置(Optional) */
+func (r *CreateSnapshotTemplateRequest) SetImageSpriteConfig(imageSpriteConfig *vod.ImageSpriteConfig) {
+    r.ImageSpriteConfig = imageSpriteConfig
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,
@@ -151,8 +142,9 @@ type CreateSnapshotTemplateResponse struct {
 type CreateSnapshotTemplateResult struct {
     TemplateId string `json:"templateId"`
     TemplateName string `json:"templateName"`
-    TemplateType string `json:"templateType"`
-    TemplateConfig string `json:"templateConfig"`
+    SnapshotType string `json:"snapshotType"`
+    ImageSampleConfig vod.ImageSampleConfig `json:"imageSampleConfig"`
+    ImageSpriteConfig vod.ImageSpriteConfig `json:"imageSpriteConfig"`
     CreateTime string `json:"createTime"`
     UpdateTime string `json:"updateTime"`
 }

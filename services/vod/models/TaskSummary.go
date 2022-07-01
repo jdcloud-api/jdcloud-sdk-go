@@ -17,10 +17,10 @@
 package models
 
 
-type UpdateSnapshotTemplateRequestInfo struct {
+type TaskSummary struct {
 
-    /* 模板标题。长度不超过 128 个字节。UTF-8 编码。 (Optional) */
-    TemplateName string `json:"templateName"`
+    /* 任务ID (Optional) */
+    TaskId string `json:"taskId"`
 
     /* 模板类型。取值范围：
   sample - 采样截图模板
@@ -28,9 +28,23 @@ type UpdateSnapshotTemplateRequestInfo struct {
  (Optional) */
     SnapshotType string `json:"snapshotType"`
 
-    /* 采样截图模板配置 (Optional) */
-    ImageSampleConfig ImageSampleConfig `json:"imageSampleConfig"`
+    /* 任务状态。
+- submitted
+- processing
+- succeeded
+- failed
+ (Optional) */
+    Status string `json:"status"`
 
-    /* 雪碧图模板配置 (Optional) */
-    ImageSpriteConfig ImageSpriteConfig `json:"imageSpriteConfig"`
+    /* 错误码 (Optional) */
+    ErrorCode string `json:"errorCode"`
+
+    /* 错误信息 (Optional) */
+    ErrorMessage string `json:"errorMessage"`
+
+    /* 创建时间 (Optional) */
+    CreateTime string `json:"createTime"`
+
+    /* 修改时间 (Optional) */
+    UpdateTime string `json:"updateTime"`
 }

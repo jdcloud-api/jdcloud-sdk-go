@@ -40,7 +40,7 @@ func NewVodClient(credential *core.Credential) *VodClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vod",
-            Revision:    "1.2.0",
+            Revision:    "1.2.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -522,9 +522,36 @@ func (c *VodClient) GetDomain(request *vod.GetDomainRequest) (*vod.GetDomainResp
     return jdResp, err
 }
 
+/* 查询视频截图任务列表
+支持过滤查询：
+  - createTime,ge 最早任务创建时间
+  - createTime,le 最晚任务创建时间
+  - status,in 任务状态IN查询
+  - taskId,eq 任务ID精确查询
+ */
+func (c *VodClient) ListSnapshotTasks(request *vod.ListSnapshotTasksRequest) (*vod.ListSnapshotTasksResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vod.ListSnapshotTasksResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询截图模板列表。
 允许通过条件过滤查询，支持的过滤字段如下：
-  - templateType[eq] 按模板类型精确查询
+  - snapshotType[eq] 按模板类型精确查询
+  - templateId[eq] 按模板ID精确查询
  */
 func (c *VodClient) ListSnapshotTemplates(request *vod.ListSnapshotTemplatesRequest) (*vod.ListSnapshotTemplatesResponse, error) {
     if request == nil {
@@ -1478,6 +1505,27 @@ func (c *VodClient) EnableDomain(request *vod.EnableDomainRequest) (*vod.EnableD
     return jdResp, err
 }
 
+/* 提交截图作业
+ */
+func (c *VodClient) SubmitSnapshotTask(request *vod.SubmitSnapshotTaskRequest) (*vod.SubmitSnapshotTaskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vod.SubmitSnapshotTaskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 设置CDN域名SSL配置 */
 func (c *VodClient) SetHttpSsl(request *vod.SetHttpSslRequest) (*vod.SetHttpSslResponse, error) {
     if request == nil {
@@ -1489,6 +1537,26 @@ func (c *VodClient) SetHttpSsl(request *vod.SetHttpSslRequest) (*vod.SetHttpSslR
     }
 
     jdResp := &vod.SetHttpSslResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询所有分类 */
+func (c *VodClient) ListAllCategories(request *vod.ListAllCategoriesRequest) (*vod.ListAllCategoriesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vod.ListAllCategoriesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
