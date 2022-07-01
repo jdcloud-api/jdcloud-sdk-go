@@ -25,21 +25,28 @@ type SubmitVeditJobRequest struct {
 
     core.JDCloudRequest
 
-    /* 工程ID (Optional) */
-    ProjectId *int64 `json:"projectId"`
+    /* 工程ID  */
+    ProjectId int64 `json:"projectId"`
 
     /* 合成媒资元数据 (Optional) */
     MediaMetadata *vod.MediaMetadata `json:"mediaMetadata"`
 
-    /* 用户数据，JSON格式字符串 (Optional) */
+    /* 用户数据，JSON格式的字符串。
+在Timeline中的所有MediaClip中，若有2个或以上的不同MediaId，即素材片段来源于2个或以上不同视频，则在提交剪辑作业时，必须在UserData中指明合并后的视频画面的宽高。
+如 {\"extendData\": {\"width\": 720, \"height\": 500}}，其中width和height必须为[16, 4096]之间的偶数
+videoMode 支持 normal 普通模式 screen_record 屏幕录制模式 两种模式，默认为 normal。
+如 "{\"extendData\":{\"videoMode\":\"screen_record\"}}"
+ (Optional) */
     UserData *string `json:"userData"`
 }
 
 /*
+ * param projectId: 工程ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewSubmitVeditJobRequest(
+    projectId int64,
 ) *SubmitVeditJobRequest {
 
 	return &SubmitVeditJobRequest{
@@ -49,16 +56,22 @@ func NewSubmitVeditJobRequest(
 			Header:  nil,
 			Version: "v1",
 		},
+        ProjectId: projectId,
 	}
 }
 
 /*
- * param projectId: 工程ID (Optional)
+ * param projectId: 工程ID (Required)
  * param mediaMetadata: 合成媒资元数据 (Optional)
- * param userData: 用户数据，JSON格式字符串 (Optional)
+ * param userData: 用户数据，JSON格式的字符串。
+在Timeline中的所有MediaClip中，若有2个或以上的不同MediaId，即素材片段来源于2个或以上不同视频，则在提交剪辑作业时，必须在UserData中指明合并后的视频画面的宽高。
+如 {\"extendData\": {\"width\": 720, \"height\": 500}}，其中width和height必须为[16, 4096]之间的偶数
+videoMode 支持 normal 普通模式 screen_record 屏幕录制模式 两种模式，默认为 normal。
+如 "{\"extendData\":{\"videoMode\":\"screen_record\"}}"
+ (Optional)
  */
 func NewSubmitVeditJobRequestWithAllParams(
-    projectId *int64,
+    projectId int64,
     mediaMetadata *vod.MediaMetadata,
     userData *string,
 ) *SubmitVeditJobRequest {
@@ -89,9 +102,9 @@ func NewSubmitVeditJobRequestWithoutParam() *SubmitVeditJobRequest {
     }
 }
 
-/* param projectId: 工程ID(Optional) */
+/* param projectId: 工程ID(Required) */
 func (r *SubmitVeditJobRequest) SetProjectId(projectId int64) {
-    r.ProjectId = &projectId
+    r.ProjectId = projectId
 }
 
 /* param mediaMetadata: 合成媒资元数据(Optional) */
@@ -99,7 +112,12 @@ func (r *SubmitVeditJobRequest) SetMediaMetadata(mediaMetadata *vod.MediaMetadat
     r.MediaMetadata = mediaMetadata
 }
 
-/* param userData: 用户数据，JSON格式字符串(Optional) */
+/* param userData: 用户数据，JSON格式的字符串。
+在Timeline中的所有MediaClip中，若有2个或以上的不同MediaId，即素材片段来源于2个或以上不同视频，则在提交剪辑作业时，必须在UserData中指明合并后的视频画面的宽高。
+如 {\"extendData\": {\"width\": 720, \"height\": 500}}，其中width和height必须为[16, 4096]之间的偶数
+videoMode 支持 normal 普通模式 screen_record 屏幕录制模式 两种模式，默认为 normal。
+如 "{\"extendData\":{\"videoMode\":\"screen_record\"}}"
+(Optional) */
 func (r *SubmitVeditJobRequest) SetUserData(userData string) {
     r.UserData = &userData
 }

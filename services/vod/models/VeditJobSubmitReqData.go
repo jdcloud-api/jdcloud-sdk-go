@@ -19,12 +19,17 @@ package models
 
 type VeditJobSubmitReqData struct {
 
-    /* 工程ID (Optional) */
+    /* 工程ID  */
     ProjectId int64 `json:"projectId"`
 
     /* 合成媒资元数据 (Optional) */
     MediaMetadata MediaMetadata `json:"mediaMetadata"`
 
-    /* 用户数据，JSON格式字符串 (Optional) */
+    /* 用户数据，JSON格式的字符串。
+在Timeline中的所有MediaClip中，若有2个或以上的不同MediaId，即素材片段来源于2个或以上不同视频，则在提交剪辑作业时，必须在UserData中指明合并后的视频画面的宽高。
+如 {\"extendData\": {\"width\": 720, \"height\": 500}}，其中width和height必须为[16, 4096]之间的偶数
+videoMode 支持 normal 普通模式 screen_record 屏幕录制模式 两种模式，默认为 normal。
+如 "{\"extendData\":{\"videoMode\":\"screen_record\"}}"
+ (Optional) */
     UserData string `json:"userData"`
 }

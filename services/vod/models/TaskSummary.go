@@ -17,17 +17,34 @@
 package models
 
 
-type CropParams struct {
+type TaskSummary struct {
 
-    /* 剪裁图像横坐标 (Optional) */
-    X int `json:"x"`
+    /* 任务ID (Optional) */
+    TaskId string `json:"taskId"`
 
-    /* 剪裁图像纵坐标 (Optional) */
-    Y int `json:"y"`
+    /* 模板类型。取值范围：
+  sample - 采样截图模板
+  sprite - 雪碧图模板
+ (Optional) */
+    SnapshotType string `json:"snapshotType"`
 
-    /* 剪裁图像宽度 (Optional) */
-    Width int `json:"width"`
+    /* 任务状态。
+- submitted
+- processing
+- succeeded
+- failed
+ (Optional) */
+    Status string `json:"status"`
 
-    /* 剪裁图像高度 (Optional) */
-    Height int `json:"height"`
+    /* 错误码 (Optional) */
+    ErrorCode string `json:"errorCode"`
+
+    /* 错误信息 (Optional) */
+    ErrorMessage string `json:"errorMessage"`
+
+    /* 创建时间 (Optional) */
+    CreateTime string `json:"createTime"`
+
+    /* 修改时间 (Optional) */
+    UpdateTime string `json:"updateTime"`
 }

@@ -19,9 +19,23 @@ package models
 
 type ClipOperation struct {
 
-    /* 操作类型，当前支持 crop,transparent,volume (Optional) */
+    /* 操作类型（素材类型不同，操作类型取值不同）
+- 操作类型为video时支持的操作类型有：scale（缩放），volume（音量），rotate（旋转）
+- 操作类型为image时支持的操作类型有：scale（缩放），rotate（旋转）
+- 操作类型为audio时支持的操作类型有：volume（音量）
+如：volume
+ (Optional) */
     OpType *string `json:"opType"`
 
-    /* 操作参数，JSON对象，如 CropParams, TransparentParams, AudioVolumeParams (Optional) */
+    /* 操作参数，JSON对象。不同的操作类型对应不同的JSON对象的key，JSON对象的value即为key对应的值。
+* scale对应的key取值有：width，height。
+  - width：视频缩放后宽度，整型，偶数，如果只填一边，则另一边跟随源宽高比变换。
+  - height：视频缩放后高度，整型，偶数，如果只填一边，则另一边跟随源宽高比变换。
+* volume对应的key取值有：gain。
+  - gain：音量大小，浮点型，取值[0,10]；0表示静音，1表示原音
+* rotate对应的key取值有：angle
+  - angle：顺时针旋转角度，整型，取值[0,360]
+如：{"gain":1.5}
+ (Optional) */
     Params *interface{} `json:"params"`
 }

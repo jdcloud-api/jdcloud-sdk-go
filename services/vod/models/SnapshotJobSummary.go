@@ -17,8 +17,28 @@
 package models
 
 
-type AudioVolumeParams struct {
+type SnapshotJobSummary struct {
 
-    /* 音量值，取值0-100之间的整数 (Optional) */
-    Value int `json:"value"`
+    /* job ID (Optional) */
+    JobId string `json:"jobId"`
+
+    /* 视频ID (Optional) */
+    VideoId string `json:"videoId"`
+
+    /* 任务状态。
+- submitted
+- processing
+- succeeded
+- failed
+ (Optional) */
+    Status string `json:"status"`
+
+    /* 任务列表 (Optional) */
+    Tasks []TaskSummary `json:"tasks"`
+
+    /* 创建时间 (Optional) */
+    CreateTime string `json:"createTime"`
+
+    /* 修改时间 (Optional) */
+    UpdateTime string `json:"updateTime"`
 }

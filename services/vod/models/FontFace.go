@@ -17,8 +17,14 @@
 package models
 
 
-type TransparentParams struct {
+type FontFace struct {
 
-    /* 透明度 (Optional) */
-    Alpha int `json:"alpha"`
+    /* 加粗 (Optional) */
+    Bold *bool `json:"bold"`
+
+    /* 斜体 (Optional) */
+    Italic *bool `json:"italic"`
+
+    /* 下划线 (Optional) */
+    Underline *bool `json:"underline"`
 }

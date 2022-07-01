@@ -25,7 +25,7 @@ type DeleteSnapshotTemplateRequest struct {
     core.JDCloudRequest
 
     /* 模板ID  */
-    TemplateId int `json:"templateId"`
+    TemplateId string `json:"templateId"`
 }
 
 /*
@@ -34,7 +34,7 @@ type DeleteSnapshotTemplateRequest struct {
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDeleteSnapshotTemplateRequest(
-    templateId int,
+    templateId string,
 ) *DeleteSnapshotTemplateRequest {
 
 	return &DeleteSnapshotTemplateRequest{
@@ -52,7 +52,7 @@ func NewDeleteSnapshotTemplateRequest(
  * param templateId: 模板ID (Required)
  */
 func NewDeleteSnapshotTemplateRequestWithAllParams(
-    templateId int,
+    templateId string,
 ) *DeleteSnapshotTemplateRequest {
 
     return &DeleteSnapshotTemplateRequest{
@@ -80,7 +80,7 @@ func NewDeleteSnapshotTemplateRequestWithoutParam() *DeleteSnapshotTemplateReque
 }
 
 /* param templateId: 模板ID(Required) */
-func (r *DeleteSnapshotTemplateRequest) SetTemplateId(templateId int) {
+func (r *DeleteSnapshotTemplateRequest) SetTemplateId(templateId string) {
     r.TemplateId = templateId
 }
 

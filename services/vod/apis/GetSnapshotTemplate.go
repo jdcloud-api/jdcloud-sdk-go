@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    vod "github.com/jdcloud-api/jdcloud-sdk-go/services/vod/models"
 )
 
 type GetSnapshotTemplateRequest struct {
@@ -25,7 +26,7 @@ type GetSnapshotTemplateRequest struct {
     core.JDCloudRequest
 
     /* 模板ID  */
-    TemplateId int `json:"templateId"`
+    TemplateId string `json:"templateId"`
 }
 
 /*
@@ -34,7 +35,7 @@ type GetSnapshotTemplateRequest struct {
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewGetSnapshotTemplateRequest(
-    templateId int,
+    templateId string,
 ) *GetSnapshotTemplateRequest {
 
 	return &GetSnapshotTemplateRequest{
@@ -52,7 +53,7 @@ func NewGetSnapshotTemplateRequest(
  * param templateId: 模板ID (Required)
  */
 func NewGetSnapshotTemplateRequestWithAllParams(
-    templateId int,
+    templateId string,
 ) *GetSnapshotTemplateRequest {
 
     return &GetSnapshotTemplateRequest{
@@ -80,7 +81,7 @@ func NewGetSnapshotTemplateRequestWithoutParam() *GetSnapshotTemplateRequest {
 }
 
 /* param templateId: 模板ID(Required) */
-func (r *GetSnapshotTemplateRequest) SetTemplateId(templateId int) {
+func (r *GetSnapshotTemplateRequest) SetTemplateId(templateId string) {
     r.TemplateId = templateId
 }
 
@@ -99,8 +100,9 @@ type GetSnapshotTemplateResponse struct {
 type GetSnapshotTemplateResult struct {
     TemplateId string `json:"templateId"`
     TemplateName string `json:"templateName"`
-    TemplateType string `json:"templateType"`
-    TemplateConfig string `json:"templateConfig"`
+    SnapshotType string `json:"snapshotType"`
+    ImageSampleConfig vod.ImageSampleConfig `json:"imageSampleConfig"`
+    ImageSpriteConfig vod.ImageSpriteConfig `json:"imageSpriteConfig"`
     CreateTime string `json:"createTime"`
     UpdateTime string `json:"updateTime"`
 }

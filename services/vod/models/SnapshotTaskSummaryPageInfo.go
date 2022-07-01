@@ -17,20 +17,20 @@
 package models
 
 
-type UpdateSnapshotTemplateRequestInfo struct {
+type SnapshotTaskSummaryPageInfo struct {
 
-    /* 模板标题。长度不超过 128 个字节。UTF-8 编码。 (Optional) */
-    TemplateName string `json:"templateName"`
+    /* 当前页码 (Optional) */
+    PageNumber int `json:"pageNumber"`
 
-    /* 模板类型。取值范围：
-  sample - 采样截图模板
-  sprite - 雪碧图模板
- (Optional) */
-    SnapshotType string `json:"snapshotType"`
+    /* 每页数量 (Optional) */
+    PageSize int `json:"pageSize"`
 
-    /* 采样截图模板配置 (Optional) */
-    ImageSampleConfig ImageSampleConfig `json:"imageSampleConfig"`
+    /* 查询总数 (Optional) */
+    TotalElements int `json:"totalElements"`
 
-    /* 雪碧图模板配置 (Optional) */
-    ImageSpriteConfig ImageSpriteConfig `json:"imageSpriteConfig"`
+    /* 总页数 (Optional) */
+    TotalPages int `json:"totalPages"`
+
+    /* 分页内容 (Optional) */
+    Content []SnapshotTaskSummary `json:"content"`
 }

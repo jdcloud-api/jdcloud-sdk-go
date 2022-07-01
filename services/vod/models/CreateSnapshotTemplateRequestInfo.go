@@ -19,18 +19,18 @@ package models
 
 type CreateSnapshotTemplateRequestInfo struct {
 
-    /* 模板名称  */
+    /* 模板标题。长度不超过 128 个字节。UTF-8 编码。  */
     TemplateName string `json:"templateName"`
 
     /* 模板类型。取值范围：
   sample - 采样截图模板
   sprite - 雪碧图模板
-  */
-    TemplateType string `json:"templateType"`
+ (Optional) */
+    SnapshotType string `json:"snapshotType"`
 
-    /* 模板配置，JSON格式的字符串
-若 templateType 取值 sample，则JSON字符串须符合 SnapshotTemplateSampleConfigInfo 格式
-若 templateType 取值 sprite，则JSON字符串须符合 SnapshotTemplateSpriteConfigInfo 格式
-  */
-    TemplateConfig string `json:"templateConfig"`
+    /* 采样截图模板配置 (Optional) */
+    ImageSampleConfig ImageSampleConfig `json:"imageSampleConfig"`
+
+    /* 雪碧图模板配置 (Optional) */
+    ImageSpriteConfig ImageSpriteConfig `json:"imageSpriteConfig"`
 }
