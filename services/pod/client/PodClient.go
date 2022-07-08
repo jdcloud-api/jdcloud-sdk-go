@@ -40,7 +40,7 @@ func NewPodClient(credential *core.Credential) *PodClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "pod",
-            Revision:    "2.2.5",
+            Revision:    "2.3.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -183,6 +183,27 @@ func (c *PodClient) DisassociateElasticIp(request *pod.DisassociateElasticIpRequ
     return jdResp, err
 }
 
+/* 创建一个 configFile，存放文件内容（键值对）。
+ */
+func (c *PodClient) CreateConfigFile(request *pod.CreateConfigFileRequest) (*pod.CreateConfigFileResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &pod.CreateConfigFileResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 设置TTY大小 */
 func (c *PodClient) ResizeTTY(request *pod.ResizeTTYRequest) (*pod.ResizeTTYResponse, error) {
     if request == nil {
@@ -310,6 +331,11 @@ func (c *PodClient) ExecGetExitCode(request *pod.ExecGetExitCodeRequest) (*pod.E
 
 /* 创建一台或多台 pod
 - 创建pod需要通过实名认证
+- 可用区
+    - Pod所属的可用区
+    - 创建Pod，需要使用中心可用区的相关资源：
+        - 具有中心可用区属性的子网
+        - 公网IP服务商
 - hostname规范
     - 支持两种方式：以标签方式书写或以完整主机名方式书写
     - 标签规范
@@ -332,6 +358,7 @@ func (c *PodClient) ExecGetExitCode(request *pod.ExecGetExitCodeRequest) (*pod.E
 - 存储
     - volume分为container system disk和pod data volume，container system disk的挂载目录是/，data volume的挂载目录可以随意指定
     - container system disk
+        - 支持cloud和local
         - 云硬盘类型可以选择hdd.std1、ssd.gp1、ssd.io1
         - 磁盘大小
             - 所有类型：范围[20,100]GB，步长为10G
@@ -339,14 +366,20 @@ func (c *PodClient) ExecGetExitCode(request *pod.ExecGetExitCodeRequest) (*pod.E
             - 默认自动删除
         - 可以选择已存在的云硬盘
     - data volume
-        - 当前只能选择cloud类别
-        - 云硬盘类型可以选择hdd.std1、ssd.gp1、ssd.io1
-        - 磁盘大小
-            - 所有类型：范围[20,2000]GB，步长为10G
-        - 自动删除
-            - 默认自动删除
-        - 可以选择已存在的云硬盘
-        - 可以从快照创建磁盘
+        -cloudDisk
+          - 云硬盘类型可以选择hdd.std1、ssd.gp1、ssd.io1
+          - 磁盘大小
+              - 所有类型：范围[20,2000]GB，步长为10G
+          - 自动删除
+              - 默认自动删除
+          - 可以选择已存在的云硬盘
+          - 可以从快照创建磁盘
+        -CFS
+          - 从zbs去获取数据，挂载到当前的volume
+        -configFile
+          - 提前创建好configFile相关数据，然后挂载到volume
+
+
 - pod 容器日志
     - default：默认在本地分配10MB的存储空间，自动rotate
 - DNS-1123 label规范
@@ -390,6 +423,48 @@ func (c *PodClient) CheckPodName(request *pod.CheckPodNameRequest) (*pod.CheckPo
     }
 
     jdResp := &pod.CheckPodNameResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除单个 configFile
+ */
+func (c *PodClient) DeleteConfigFile(request *pod.DeleteConfigFileRequest) (*pod.DeleteConfigFileResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &pod.DeleteConfigFileResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新configFile信息
+ */
+func (c *PodClient) UpdateConfigFile(request *pod.UpdateConfigFileRequest) (*pod.UpdateConfigFileResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &pod.UpdateConfigFileResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -453,6 +528,27 @@ func (c *PodClient) ModifyPodAttribute(request *pod.ModifyPodAttributeRequest) (
     }
 
     jdResp := &pod.ModifyPodAttributeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询单个 configFile 详情
+ */
+func (c *PodClient) DescribeConfigFile(request *pod.DescribeConfigFileRequest) (*pod.DescribeConfigFileResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &pod.DescribeConfigFileResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

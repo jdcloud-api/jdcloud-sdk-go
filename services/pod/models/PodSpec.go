@@ -38,7 +38,7 @@ type PodSpec struct {
     /* 实例类型；参考[文档](https://www.jdcloud.com/help/detail/1992/isCatalog/1)  */
     InstanceType string `json:"instanceType"`
 
-    /* 容器所属可用区  */
+    /* Pod所属可用区，指定agId时非必传<br> Pod、已有云盘的az必须相同，且包含在AG中  */
     Az string `json:"az"`
 
     /* pod内容器的/etc/resolv.conf配置 (Optional) */
