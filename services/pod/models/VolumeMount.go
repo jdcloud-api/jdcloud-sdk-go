@@ -27,4 +27,7 @@ type VolumeMount struct {
 
     /* 是否以只读方式挂载。 (Optional) */
     ReadOnly bool `json:"readOnly"`
+
+    /* configFile挂载子目录 新增 (Optional) */
+    SubPath string `json:"subPath"`
 }

@@ -35,6 +35,9 @@ type Pod struct {
     /* 主机名 (Optional) */
     Hostname string `json:"hostname"`
 
+    /* 高可用组 (Optional) */
+    Ag AvailablityGroup `json:"ag"`
+
     /* pod 所需的计算资源规格 (Optional) */
     InstanceType string `json:"instanceType"`
 

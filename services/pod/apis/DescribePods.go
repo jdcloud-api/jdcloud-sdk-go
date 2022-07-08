@@ -42,6 +42,7 @@ vpcId - 私有网络ID，精确匹配，支持多个
 phase - pod 状态，精确匹配，支持多个
 name - 实例名称，模糊匹配，支持单个
 subnetId - 镜像ID，精确匹配，支持多个
+agId - 镜像ID，精确匹配，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
 
@@ -80,6 +81,7 @@ vpcId - 私有网络ID，精确匹配，支持多个
 phase - pod 状态，精确匹配，支持多个
 name - 实例名称，模糊匹配，支持单个
 subnetId - 镜像ID，精确匹配，支持多个
+agId - 镜像ID，精确匹配，支持多个
  (Optional)
  * param tags: Tag筛选条件 (Optional)
  */
@@ -141,6 +143,7 @@ vpcId - 私有网络ID，精确匹配，支持多个
 phase - pod 状态，精确匹配，支持多个
 name - 实例名称，模糊匹配，支持单个
 subnetId - 镜像ID，精确匹配，支持多个
+agId - 镜像ID，精确匹配，支持多个
 (Optional) */
 func (r *DescribePodsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters

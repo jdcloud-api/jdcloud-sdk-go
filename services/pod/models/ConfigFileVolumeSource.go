@@ -17,17 +17,14 @@
 package models
 
 
-type VolumeMountSpec struct {
+type ConfigFileVolumeSource struct {
 
-    /* 要挂载的云盘，必须使用pod volumeSpec.name。  */
+    /* configFile名字 (Optional) */
     Name string `json:"name"`
 
-    /* 容器内挂载点，绝对路径，不得重复和嵌套挂载，不得挂载到根目录("/")。长度范围：[1-1024]  */
-    MountPath string `json:"mountPath"`
+    /* 默认文件目录权限 (Optional) */
+    DefaultMode string `json:"defaultMode"`
 
-    /* 是否以只读方式挂载。默认 读写模式 (Optional) */
-    ReadOnly *bool `json:"readOnly"`
-
-    /* configFile挂载子目录 新增 (Optional) */
-    SubPath *string `json:"subPath"`
+    /* 提供给Pod的configFile. (Optional) */
+    FileToPath []ConfigFileToPathSource `json:"fileToPath"`
 }

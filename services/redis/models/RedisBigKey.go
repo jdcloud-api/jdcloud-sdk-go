@@ -17,17 +17,14 @@
 package models
 
 
-type VolumeMountSpec struct {
+type RedisBigKey struct {
 
-    /* 要挂载的云盘，必须使用pod volumeSpec.name。  */
+    /* key名称  */
     Name string `json:"name"`
 
-    /* 容器内挂载点，绝对路径，不得重复和嵌套挂载，不得挂载到根目录("/")。长度范围：[1-1024]  */
-    MountPath string `json:"mountPath"`
+    /* key所在的db号  */
+    Db int `json:"db"`
 
-    /* 是否以只读方式挂载。默认 读写模式 (Optional) */
-    ReadOnly *bool `json:"readOnly"`
-
-    /* configFile挂载子目录 新增 (Optional) */
-    SubPath *string `json:"subPath"`
+    /* key占用的内存，单位：字节  */
+    Size int `json:"size"`
 }
