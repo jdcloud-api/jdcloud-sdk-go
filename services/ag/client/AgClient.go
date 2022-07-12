@@ -40,7 +40,7 @@ func NewAgClient(credential *core.Credential) *AgClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "ag",
-            Revision:    "0.4.0",
+            Revision:    "0.5.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -51,6 +51,10 @@ func (c *AgClient) SetConfig(config *core.Config) {
 
 func (c *AgClient) SetLogger(logger core.Logger) {
     c.Logger = logger
+}
+
+func (c *AgClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
 }
 
 /* 修改一个高可用组的信息 */
@@ -73,7 +77,7 @@ func (c *AgClient) UpdateAg(request *ag.UpdateAgRequest) (*ag.UpdateAgResponse, 
     return jdResp, err
 }
 
-/* 根据 id 删除高可用组，需确保 AG 中云主机实例已全部删除 */
+/* 根据 ID 删除高可用组，需确保 AG 中云主机实例已全部删除 */
 func (c *AgClient) DeleteAg(request *ag.DeleteAgRequest) (*ag.DeleteAgResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -93,7 +97,7 @@ func (c *AgClient) DeleteAg(request *ag.DeleteAgRequest) (*ag.DeleteAgResponse, 
     return jdResp, err
 }
 
-/* 修改高可用组的实例模板 */
+/* 修改高可用组的实例模板<br>- 对于更换实例模板来说，如果已经关联负载均衡，则VPC不可以更改。<br>- 自定义配置型不可更改实例模板。 */
 func (c *AgClient) SetInstanceTemplate(request *ag.SetInstanceTemplateRequest) (*ag.SetInstanceTemplateResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -173,7 +177,7 @@ func (c *AgClient) CreateAg(request *ag.CreateAgRequest) (*ag.CreateAgResponse, 
     return jdResp, err
 }
 
-/* 根据 id 查询高可用组详情 */
+/* 根据 ID 查询高可用组详情 */
 func (c *AgClient) DescribeAg(request *ag.DescribeAgRequest) (*ag.DescribeAgResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
