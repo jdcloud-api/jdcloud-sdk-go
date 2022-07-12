@@ -30,14 +30,14 @@ type AbandonInstancesRequest struct {
     /* 高可用组 ID  */
     AgId string `json:"agId"`
 
-    /* 准备剔除出高可用组的实例 id  */
+    /* 准备剔除出高可用组的实例 ID  */
     InstanceIds []string `json:"instanceIds"`
 }
 
 /*
  * param regionId: 地域 (Required)
  * param agId: 高可用组 ID (Required)
- * param instanceIds: 准备剔除出高可用组的实例 id (Required)
+ * param instanceIds: 准备剔除出高可用组的实例 ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -63,7 +63,7 @@ func NewAbandonInstancesRequest(
 /*
  * param regionId: 地域 (Required)
  * param agId: 高可用组 ID (Required)
- * param instanceIds: 准备剔除出高可用组的实例 id (Required)
+ * param instanceIds: 准备剔除出高可用组的实例 ID (Required)
  */
 func NewAbandonInstancesRequestWithAllParams(
     regionId string,
@@ -107,7 +107,7 @@ func (r *AbandonInstancesRequest) SetAgId(agId string) {
     r.AgId = agId
 }
 
-/* param instanceIds: 准备剔除出高可用组的实例 id(Required) */
+/* param instanceIds: 准备剔除出高可用组的实例 ID(Required) */
 func (r *AbandonInstancesRequest) SetInstanceIds(instanceIds []string) {
     r.InstanceIds = instanceIds
 }

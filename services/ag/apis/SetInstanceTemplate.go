@@ -30,14 +30,14 @@ type SetInstanceTemplateRequest struct {
     /* 高可用组 ID  */
     AgId string `json:"agId"`
 
-    /* 实例模板 id  */
+    /* 实例模板 ID  */
     InstanceTemplateId string `json:"instanceTemplateId"`
 }
 
 /*
  * param regionId: 地域 (Required)
  * param agId: 高可用组 ID (Required)
- * param instanceTemplateId: 实例模板 id (Required)
+ * param instanceTemplateId: 实例模板 ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -63,7 +63,7 @@ func NewSetInstanceTemplateRequest(
 /*
  * param regionId: 地域 (Required)
  * param agId: 高可用组 ID (Required)
- * param instanceTemplateId: 实例模板 id (Required)
+ * param instanceTemplateId: 实例模板 ID (Required)
  */
 func NewSetInstanceTemplateRequestWithAllParams(
     regionId string,
@@ -107,7 +107,7 @@ func (r *SetInstanceTemplateRequest) SetAgId(agId string) {
     r.AgId = agId
 }
 
-/* param instanceTemplateId: 实例模板 id(Required) */
+/* param instanceTemplateId: 实例模板 ID(Required) */
 func (r *SetInstanceTemplateRequest) SetInstanceTemplateId(instanceTemplateId string) {
     r.InstanceTemplateId = instanceTemplateId
 }

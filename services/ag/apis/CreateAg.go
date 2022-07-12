@@ -33,21 +33,24 @@ type CreateAgRequest struct {
     /* 高可用组名称，只支持中文、数字、大小写字母、英文下划线 “_” 及中划线 “-”，且不能超过 32 字符  */
     AgName string `json:"agName"`
 
-    /* 高可用组类型，支持vm (Optional) */
+    /* 高可用组资源类型，支持vm (Optional) */
     AgType *string `json:"agType"`
 
-    /* 实例模板的Id  */
+    /* 实例模板的ID  */
     InstanceTemplateId string `json:"instanceTemplateId"`
 
     /* 描述，长度不超过 256 字符 (Optional) */
     Description *string `json:"description"`
+
+    /* 高可用组配置类型，支持strict(关联模板型)、loose(自定义配置型) (Optional) */
+    ConfigurationType *string `json:"configurationType"`
 }
 
 /*
  * param regionId: 地域 (Required)
  * param azs: 支持的可用区，最少一个 (Required)
  * param agName: 高可用组名称，只支持中文、数字、大小写字母、英文下划线 “_” 及中划线 “-”，且不能超过 32 字符 (Required)
- * param instanceTemplateId: 实例模板的Id (Required)
+ * param instanceTemplateId: 实例模板的ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -76,9 +79,10 @@ func NewCreateAgRequest(
  * param regionId: 地域 (Required)
  * param azs: 支持的可用区，最少一个 (Required)
  * param agName: 高可用组名称，只支持中文、数字、大小写字母、英文下划线 “_” 及中划线 “-”，且不能超过 32 字符 (Required)
- * param agType: 高可用组类型，支持vm (Optional)
- * param instanceTemplateId: 实例模板的Id (Required)
+ * param agType: 高可用组资源类型，支持vm (Optional)
+ * param instanceTemplateId: 实例模板的ID (Required)
  * param description: 描述，长度不超过 256 字符 (Optional)
+ * param configurationType: 高可用组配置类型，支持strict(关联模板型)、loose(自定义配置型) (Optional)
  */
 func NewCreateAgRequestWithAllParams(
     regionId string,
@@ -87,6 +91,7 @@ func NewCreateAgRequestWithAllParams(
     agType *string,
     instanceTemplateId string,
     description *string,
+    configurationType *string,
 ) *CreateAgRequest {
 
     return &CreateAgRequest{
@@ -102,6 +107,7 @@ func NewCreateAgRequestWithAllParams(
         AgType: agType,
         InstanceTemplateId: instanceTemplateId,
         Description: description,
+        ConfigurationType: configurationType,
     }
 }
 
@@ -133,12 +139,12 @@ func (r *CreateAgRequest) SetAgName(agName string) {
     r.AgName = agName
 }
 
-/* param agType: 高可用组类型，支持vm(Optional) */
+/* param agType: 高可用组资源类型，支持vm(Optional) */
 func (r *CreateAgRequest) SetAgType(agType string) {
     r.AgType = &agType
 }
 
-/* param instanceTemplateId: 实例模板的Id(Required) */
+/* param instanceTemplateId: 实例模板的ID(Required) */
 func (r *CreateAgRequest) SetInstanceTemplateId(instanceTemplateId string) {
     r.InstanceTemplateId = instanceTemplateId
 }
@@ -146,6 +152,11 @@ func (r *CreateAgRequest) SetInstanceTemplateId(instanceTemplateId string) {
 /* param description: 描述，长度不超过 256 字符(Optional) */
 func (r *CreateAgRequest) SetDescription(description string) {
     r.Description = &description
+}
+
+/* param configurationType: 高可用组配置类型，支持strict(关联模板型)、loose(自定义配置型)(Optional) */
+func (r *CreateAgRequest) SetConfigurationType(configurationType string) {
+    r.ConfigurationType = &configurationType
 }
 
 // GetRegionId returns path parameter 'regionId' if exist,

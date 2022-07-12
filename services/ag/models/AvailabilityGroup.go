@@ -19,30 +19,33 @@ package models
 
 type AvailabilityGroup struct {
 
-    /* 可用组id (Optional) */
+    /* 高可用组ID (Optional) */
     Id string `json:"id"`
 
-    /* 可用组name (Optional) */
+    /* 高可用组名称 (Optional) */
     Name string `json:"name"`
 
-    /* 描述，length:0-256 (Optional) */
+    /* 描述 (Optional) */
     Description string `json:"description"`
 
-    /* 实例模板的Id (Optional) */
+    /* 实例模板的ID (Optional) */
     InstanceTemplateId string `json:"instanceTemplateId"`
 
     /* 可用区域 (Optional) */
     Azs []string `json:"azs"`
 
-    /* 可用组类型，支持vm (Optional) */
+    /* 高可用组资源类型 (Optional) */
     AgType string `json:"agType"`
 
     /* 创建时间 (Optional) */
     CreateTime string `json:"createTime"`
 
-    /* 可用组中实例的数量 (Optional) */
+    /* 高可用组中实例的数量 (Optional) */
     Count int `json:"count"`
 
     /* 是否开启自动伸缩 (Optional) */
     AutoScaling bool `json:"autoScaling"`
+
+    /* 高可用组配置类型 (Optional) */
+    ConfigurationType string `json:"configurationType"`
 }
