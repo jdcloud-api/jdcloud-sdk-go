@@ -40,7 +40,7 @@ func NewIotlinkClient(credential *core.Credential) *IotlinkClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "iotlink",
-            Revision:    "1.0.5",
+            Revision:    "1.0.6",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -328,6 +328,46 @@ func (c *IotlinkClient) GprsRealtimeInfoByIMSI(request *iotlink.GprsRealtimeInfo
     }
 
     jdResp := &iotlink.GprsRealtimeInfoByIMSIResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据物联网卡iccid查询该卡的实名认证信息 */
+func (c *IotlinkClient) RealNameQueryIot(request *iotlink.RealNameQueryIotRequest) (*iotlink.RealNameQueryIotResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotlink.RealNameQueryIotResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据物联网卡iccid查询该卡的基本信息 */
+func (c *IotlinkClient) CardInfo(request *iotlink.CardInfoRequest) (*iotlink.CardInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotlink.CardInfoResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
