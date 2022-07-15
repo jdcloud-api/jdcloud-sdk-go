@@ -36,8 +36,8 @@ type CreateAgRequest struct {
     /* 高可用组资源类型，支持vm (Optional) */
     AgType *string `json:"agType"`
 
-    /* 实例模板的ID  */
-    InstanceTemplateId string `json:"instanceTemplateId"`
+    /* 实例模板的ID (Optional) */
+    InstanceTemplateId *string `json:"instanceTemplateId"`
 
     /* 描述，长度不超过 256 字符 (Optional) */
     Description *string `json:"description"`
@@ -50,7 +50,6 @@ type CreateAgRequest struct {
  * param regionId: 地域 (Required)
  * param azs: 支持的可用区，最少一个 (Required)
  * param agName: 高可用组名称，只支持中文、数字、大小写字母、英文下划线 “_” 及中划线 “-”，且不能超过 32 字符 (Required)
- * param instanceTemplateId: 实例模板的ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -58,7 +57,6 @@ func NewCreateAgRequest(
     regionId string,
     azs []string,
     agName string,
-    instanceTemplateId string,
 ) *CreateAgRequest {
 
 	return &CreateAgRequest{
@@ -71,7 +69,6 @@ func NewCreateAgRequest(
         RegionId: regionId,
         Azs: azs,
         AgName: agName,
-        InstanceTemplateId: instanceTemplateId,
 	}
 }
 
@@ -80,7 +77,7 @@ func NewCreateAgRequest(
  * param azs: 支持的可用区，最少一个 (Required)
  * param agName: 高可用组名称，只支持中文、数字、大小写字母、英文下划线 “_” 及中划线 “-”，且不能超过 32 字符 (Required)
  * param agType: 高可用组资源类型，支持vm (Optional)
- * param instanceTemplateId: 实例模板的ID (Required)
+ * param instanceTemplateId: 实例模板的ID (Optional)
  * param description: 描述，长度不超过 256 字符 (Optional)
  * param configurationType: 高可用组配置类型，支持strict(关联模板型)、loose(自定义配置型) (Optional)
  */
@@ -89,7 +86,7 @@ func NewCreateAgRequestWithAllParams(
     azs []string,
     agName string,
     agType *string,
-    instanceTemplateId string,
+    instanceTemplateId *string,
     description *string,
     configurationType *string,
 ) *CreateAgRequest {
@@ -144,9 +141,9 @@ func (r *CreateAgRequest) SetAgType(agType string) {
     r.AgType = &agType
 }
 
-/* param instanceTemplateId: 实例模板的ID(Required) */
+/* param instanceTemplateId: 实例模板的ID(Optional) */
 func (r *CreateAgRequest) SetInstanceTemplateId(instanceTemplateId string) {
-    r.InstanceTemplateId = instanceTemplateId
+    r.InstanceTemplateId = &instanceTemplateId
 }
 
 /* param description: 描述，长度不超过 256 字符(Optional) */
