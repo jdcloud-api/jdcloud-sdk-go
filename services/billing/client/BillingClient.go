@@ -17,103 +17,106 @@
 package client
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    billing "github.com/jdcloud-api/jdcloud-sdk-go/services/billing/apis"
-    "encoding/json"
-    "errors"
+	"encoding/json"
+	"errors"
+
+	"github.com/jdcloud-api/jdcloud-sdk-go/core"
+	billing "github.com/jdcloud-api/jdcloud-sdk-go/services/billing/apis"
 )
 
 type BillingClient struct {
-    core.JDCloudClient
+	core.JDCloudClient
 }
 
 func NewBillingClient(credential *core.Credential) *BillingClient {
-    if credential == nil {
-        return nil
-    }
+	if credential == nil {
+		return nil
+	}
 
-    config := core.NewConfig()
-    config.SetEndpoint("billing.jdcloud-api.com")
+	config := core.NewConfig()
+	config.SetEndpoint("billing.jdcloud-api.com")
 
-    return &BillingClient{
-        core.JDCloudClient{
-            Credential:  *credential,
-            Config:      *config,
-            ServiceName: "billing",
-            Revision:    "1.0.33",
-            Logger:      core.NewDefaultLogger(core.LogInfo),
-        }}
+	return &BillingClient{
+		core.JDCloudClient{
+			Credential:  *credential,
+			Config:      *config,
+			ServiceName: "billing",
+			Revision:    "1.0.33",
+			Logger:      core.NewDefaultLogger(core.LogInfo),
+		}}
 }
 
 func (c *BillingClient) SetConfig(config *core.Config) {
-    c.Config = *config
+	c.Config = *config
 }
 
 func (c *BillingClient) SetLogger(logger core.Logger) {
-    c.Logger = logger
+	c.Logger = logger
 }
 
 func (c *BillingClient) DisableLogger() {
-    c.Logger = core.NewDummyLogger()
+	c.Logger = core.NewDummyLogger()
 }
 
 /* 查询计费价格信息 */
 func (c *BillingClient) CalculateTotalPrice(request *billing.CalculateTotalPriceRequest) (*billing.CalculateTotalPriceResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
+	if request == nil {
+		return nil, errors.New("Request object is nil. ")
+	}
+	resp, err := c.Send(request, c.ServiceName)
+	if err != nil {
+		return nil, err
+	}
 
-    jdResp := &billing.CalculateTotalPriceResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
+	jdResp := &billing.CalculateTotalPriceResponse{}
+	err = json.Unmarshal(resp, jdResp)
+	if err != nil {
+		c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+		return nil, err
+	}
 
-    return jdResp, err
+	return jdResp, err
 }
 
 /* 查询账单资源汇总数据 */
 func (c *BillingClient) QueryBillSummary(request *billing.QueryBillSummaryRequest) (*billing.QueryBillSummaryResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
+	if request == nil {
+		return nil, errors.New("Request object is nil. ")
+	}
+	resp, err := c.Send(request, c.ServiceName)
+	if err != nil {
+		return nil, err
+	}
 
-    jdResp := &billing.QueryBillSummaryResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
+	jdResp := &billing.QueryBillSummaryResponse{}
+	err = json.Unmarshal(resp, jdResp)
+	if err != nil {
+		c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+		return nil, err
+	}
 
-    return jdResp, err
+	return jdResp, err
 }
 
 /* 查询账单明细数据 */
-func (c *BillingClient) QueryBillDetail(request *billing.QueryBillDetailRequest) (*billing.QueryBillDetailResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
+func (c *BillingClient) QueryBillDetail(request *billing.QueryBillDetailRequest) ([]byte, error) {
+	if request == nil {
+		return nil, errors.New("Request object is nil. ")
+	}
+	resp, err := c.Send(request, c.ServiceName)
+	if err != nil {
+		return nil, err
+	}
 
-    jdResp := &billing.QueryBillDetailResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
+	return resp, err
 
-    return jdResp, err
+	//返回给用户不需要在库里序列化
+	// jdResp := &billing.QueryBillDetailResponse{}
+	// err = json.Unmarshal(resp, jdResp)
+	// if err != nil {
+	// 	c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+	// 	return nil, err
+	// }
+
+	// return jdResp, err
 }
-
