@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    privatezone "github.com/jdcloud-api/jdcloud-sdk-go/services/privatezone/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    privatezone "github.com/lshuining/jdcloud-sdk-go/services/privatezone/models"
 )
 
 type DescribeInstancesRequest struct {

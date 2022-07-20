@@ -17,9 +17,9 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    kafka "github.com/jdcloud-api/jdcloud-sdk-go/services/kafka/models"
-    charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    kafka "github.com/lshuining/jdcloud-sdk-go/services/kafka/models"
+    charge "github.com/lshuining/jdcloud-sdk-go/services/charge/models"
 )
 
 type CreateInstanceRequest struct {

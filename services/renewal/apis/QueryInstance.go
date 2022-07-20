@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    renewal "github.com/jdcloud-api/jdcloud-sdk-go/services/renewal/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    renewal "github.com/lshuining/jdcloud-sdk-go/services/renewal/models"
 )
 
 type QueryInstanceRequest struct {

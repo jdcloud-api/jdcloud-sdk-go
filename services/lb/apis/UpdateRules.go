@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    lb "github.com/jdcloud-api/jdcloud-sdk-go/services/lb/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    lb "github.com/lshuining/jdcloud-sdk-go/services/lb/models"
 )
 
 type UpdateRulesRequest struct {

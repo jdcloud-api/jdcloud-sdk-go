@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    dbs "github.com/jdcloud-api/jdcloud-sdk-go/services/dbs/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    dbs "github.com/lshuining/jdcloud-sdk-go/services/dbs/models"
 )
 
 type GetLastBackupBinlogRequest struct {

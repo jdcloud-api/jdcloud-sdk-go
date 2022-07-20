@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    edcps "github.com/jdcloud-api/jdcloud-sdk-go/services/edcps/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    edcps "github.com/lshuining/jdcloud-sdk-go/services/edcps/models"
 )
 
 type DescribeDeviceStockRequest struct {

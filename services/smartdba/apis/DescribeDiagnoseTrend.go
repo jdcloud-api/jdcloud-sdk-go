@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    smartdba "github.com/jdcloud-api/jdcloud-sdk-go/services/smartdba/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    smartdba "github.com/lshuining/jdcloud-sdk-go/services/smartdba/models"
 )
 
 type DescribeDiagnoseTrendRequest struct {

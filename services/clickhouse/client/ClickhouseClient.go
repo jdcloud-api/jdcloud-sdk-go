@@ -17,8 +17,8 @@
 package client
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    clickhouse "github.com/jdcloud-api/jdcloud-sdk-go/services/clickhouse/apis"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    clickhouse "github.com/lshuining/jdcloud-sdk-go/services/clickhouse/apis"
     "encoding/json"
     "errors"
 )

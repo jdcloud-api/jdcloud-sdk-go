@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    datastar "github.com/jdcloud-api/jdcloud-sdk-go/services/datastar/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    datastar "github.com/lshuining/jdcloud-sdk-go/services/datastar/models"
 )
 
 type TestWelcomeRequest struct {

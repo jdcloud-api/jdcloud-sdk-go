@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    monitor "github.com/jdcloud-api/jdcloud-sdk-go/services/monitor/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    monitor "github.com/lshuining/jdcloud-sdk-go/services/monitor/models"
 )
 
 type DescribeAlarmContactsRequest struct {

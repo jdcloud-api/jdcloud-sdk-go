@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    clouddnsservice "github.com/jdcloud-api/jdcloud-sdk-go/services/clouddnsservice/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    clouddnsservice "github.com/lshuining/jdcloud-sdk-go/services/clouddnsservice/models"
 )
 
 type DelUserViewIPRequest struct {

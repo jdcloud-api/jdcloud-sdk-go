@@ -17,8 +17,8 @@
 package client
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    datastar "github.com/jdcloud-api/jdcloud-sdk-go/services/datastar/apis"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    datastar "github.com/lshuining/jdcloud-sdk-go/services/datastar/apis"
     "encoding/json"
     "errors"
 )

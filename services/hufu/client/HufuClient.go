@@ -17,8 +17,8 @@
 package client
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    hufu "github.com/jdcloud-api/jdcloud-sdk-go/services/hufu/apis"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    hufu "github.com/lshuining/jdcloud-sdk-go/services/hufu/apis"
     "encoding/json"
     "errors"
 )

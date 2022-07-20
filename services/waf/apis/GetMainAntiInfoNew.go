@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    waf "github.com/jdcloud-api/jdcloud-sdk-go/services/waf/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    waf "github.com/lshuining/jdcloud-sdk-go/services/waf/models"
 )
 
 type GetMainAntiInfoNewRequest struct {

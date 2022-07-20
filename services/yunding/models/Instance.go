@@ -16,9 +16,9 @@
 
 package models
 
-import vm "github.com/jdcloud-api/jdcloud-sdk-go/services/vm/models"
-import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
-import disk "github.com/jdcloud-api/jdcloud-sdk-go/services/disk/models"
+import vm "github.com/lshuining/jdcloud-sdk-go/services/vm/models"
+import charge "github.com/lshuining/jdcloud-sdk-go/services/charge/models"
+import disk "github.com/lshuining/jdcloud-sdk-go/services/disk/models"
 
 type Instance struct {
 

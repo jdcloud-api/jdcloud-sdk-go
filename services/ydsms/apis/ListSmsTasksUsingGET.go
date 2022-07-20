@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    ydsms "github.com/jdcloud-api/jdcloud-sdk-go/services/ydsms/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    ydsms "github.com/lshuining/jdcloud-sdk-go/services/ydsms/models"
 )
 
 type ListSmsTasksUsingGETRequest struct {

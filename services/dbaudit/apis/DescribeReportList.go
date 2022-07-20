@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    dbaudit "github.com/jdcloud-api/jdcloud-sdk-go/services/dbaudit/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    dbaudit "github.com/lshuining/jdcloud-sdk-go/services/dbaudit/models"
 )
 
 type DescribeReportListRequest struct {

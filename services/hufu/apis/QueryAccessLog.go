@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    hufu "github.com/jdcloud-api/jdcloud-sdk-go/services/hufu/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    hufu "github.com/lshuining/jdcloud-sdk-go/services/hufu/models"
 )
 
 type QueryAccessLogRequest struct {

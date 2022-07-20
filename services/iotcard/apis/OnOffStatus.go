@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    iotcard "github.com/jdcloud-api/jdcloud-sdk-go/services/iotcard/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    iotcard "github.com/lshuining/jdcloud-sdk-go/services/iotcard/models"
 )
 
 type OnOffStatusRequest struct {

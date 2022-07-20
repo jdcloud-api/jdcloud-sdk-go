@@ -17,8 +17,8 @@
 package client
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    nativecontainer "github.com/jdcloud-api/jdcloud-sdk-go/services/nativecontainer/apis"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    nativecontainer "github.com/lshuining/jdcloud-sdk-go/services/nativecontainer/apis"
     "encoding/json"
     "errors"
 )

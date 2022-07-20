@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    vm "github.com/jdcloud-api/jdcloud-sdk-go/services/vm/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    vm "github.com/lshuining/jdcloud-sdk-go/services/vm/models"
 )
 
 type ModifyInstanceDiskAttributeRequest struct {

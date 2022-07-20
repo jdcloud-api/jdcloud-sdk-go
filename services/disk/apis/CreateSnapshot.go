@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    disk "github.com/jdcloud-api/jdcloud-sdk-go/services/disk/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    disk "github.com/lshuining/jdcloud-sdk-go/services/disk/models"
 )
 
 type CreateSnapshotRequest struct {

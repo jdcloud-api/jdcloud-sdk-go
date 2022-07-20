@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    nc "github.com/jdcloud-api/jdcloud-sdk-go/services/nc/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    nc "github.com/lshuining/jdcloud-sdk-go/services/nc/models"
 )
 
 type CreateContainersRequest struct {

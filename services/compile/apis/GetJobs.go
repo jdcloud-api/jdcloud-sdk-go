@@ -17,9 +17,9 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    compile "github.com/jdcloud-api/jdcloud-sdk-go/services/compile/models"
-    common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    compile "github.com/lshuining/jdcloud-sdk-go/services/compile/models"
+    common "github.com/lshuining/jdcloud-sdk-go/services/common/models"
 )
 
 type GetJobsRequest struct {

@@ -16,8 +16,8 @@
 
 package models
 
-import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
-import vpc "github.com/jdcloud-api/jdcloud-sdk-go/services/vpc/models"
+import charge "github.com/lshuining/jdcloud-sdk-go/services/charge/models"
+import vpc "github.com/lshuining/jdcloud-sdk-go/services/vpc/models"
 
 type CreateLoadBalancerSpec struct {
 

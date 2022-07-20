@@ -16,9 +16,9 @@
 
 package models
 
-import vpc "github.com/jdcloud-api/jdcloud-sdk-go/services/vpc/models"
-import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
-import disk "github.com/jdcloud-api/jdcloud-sdk-go/services/disk/models"
+import vpc "github.com/lshuining/jdcloud-sdk-go/services/vpc/models"
+import charge "github.com/lshuining/jdcloud-sdk-go/services/charge/models"
+import disk "github.com/lshuining/jdcloud-sdk-go/services/disk/models"
 
 type InstanceSpec struct {
 

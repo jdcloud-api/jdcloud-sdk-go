@@ -17,8 +17,8 @@
 package client
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    disk "github.com/jdcloud-api/jdcloud-sdk-go/services/disk/apis"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    disk "github.com/lshuining/jdcloud-sdk-go/services/disk/apis"
     "encoding/json"
     "errors"
 )

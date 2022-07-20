@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    jdro "github.com/jdcloud-api/jdcloud-sdk-go/services/jdro/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    jdro "github.com/lshuining/jdcloud-sdk-go/services/jdro/models"
 )
 
 type DescribeResourceTypeListRequest struct {

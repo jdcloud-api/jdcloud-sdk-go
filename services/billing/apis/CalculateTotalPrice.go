@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    billing "github.com/jdcloud-api/jdcloud-sdk-go/services/billing/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    billing "github.com/lshuining/jdcloud-sdk-go/services/billing/models"
 )
 
 type CalculateTotalPriceRequest struct {

@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    iv "github.com/jdcloud-api/jdcloud-sdk-go/services/iv/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    iv "github.com/lshuining/jdcloud-sdk-go/services/iv/models"
 )
 
 type ListViTemplatesRequest struct {

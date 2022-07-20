@@ -17,8 +17,8 @@
 package client
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    antipro "github.com/jdcloud-api/jdcloud-sdk-go/services/antipro/apis"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    antipro "github.com/lshuining/jdcloud-sdk-go/services/antipro/apis"
     "encoding/json"
     "errors"
 )

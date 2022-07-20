@@ -17,8 +17,8 @@
 package client
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    streambus "github.com/jdcloud-api/jdcloud-sdk-go/services/streambus/apis"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    streambus "github.com/lshuining/jdcloud-sdk-go/services/streambus/apis"
     "encoding/json"
     "errors"
 )

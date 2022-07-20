@@ -17,9 +17,9 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    mongodb "github.com/jdcloud-api/jdcloud-sdk-go/services/mongodb/models"
-    charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    mongodb "github.com/lshuining/jdcloud-sdk-go/services/mongodb/models"
+    charge "github.com/lshuining/jdcloud-sdk-go/services/charge/models"
 )
 
 type CreateShardingInstanceRequest struct {

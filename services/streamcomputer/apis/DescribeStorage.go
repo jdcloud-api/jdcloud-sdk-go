@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    streamcomputer "github.com/jdcloud-api/jdcloud-sdk-go/services/streamcomputer/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    streamcomputer "github.com/lshuining/jdcloud-sdk-go/services/streamcomputer/models"
 )
 
 type DescribeStorageRequest struct {

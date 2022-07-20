@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    bri "github.com/jdcloud-api/jdcloud-sdk-go/services/bri/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    bri "github.com/lshuining/jdcloud-sdk-go/services/bri/models"
 )
 
 type CreditScoreRequest struct {

@@ -17,8 +17,8 @@
 package client
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    iotedge "github.com/jdcloud-api/jdcloud-sdk-go/services/iotedge/apis"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    iotedge "github.com/lshuining/jdcloud-sdk-go/services/iotedge/apis"
     "encoding/json"
     "errors"
 )

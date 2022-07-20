@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    httpdns "github.com/jdcloud-api/jdcloud-sdk-go/services/httpdns/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    httpdns "github.com/lshuining/jdcloud-sdk-go/services/httpdns/models"
 )
 
 type GetDomainsRequest struct {

@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    ams "github.com/jdcloud-api/jdcloud-sdk-go/services/ams/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    ams "github.com/lshuining/jdcloud-sdk-go/services/ams/models"
 )
 
 type DescribeStreamsInputRequest struct {

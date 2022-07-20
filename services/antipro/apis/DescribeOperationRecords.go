@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    antipro "github.com/jdcloud-api/jdcloud-sdk-go/services/antipro/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    antipro "github.com/lshuining/jdcloud-sdk-go/services/antipro/models"
 )
 
 type DescribeOperationRecordsRequest struct {

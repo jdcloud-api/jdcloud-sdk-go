@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    instancevoucher "github.com/jdcloud-api/jdcloud-sdk-go/services/instancevoucher/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    instancevoucher "github.com/lshuining/jdcloud-sdk-go/services/instancevoucher/models"
 )
 
 type CreateInstanceVoucherRequest struct {

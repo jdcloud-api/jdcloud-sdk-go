@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    rms "github.com/jdcloud-api/jdcloud-sdk-go/services/rms/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    rms "github.com/lshuining/jdcloud-sdk-go/services/rms/models"
 )
 
 type SendBatchMsgRequest struct {

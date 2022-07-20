@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    cr "github.com/jdcloud-api/jdcloud-sdk-go/services/cr/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    cr "github.com/lshuining/jdcloud-sdk-go/services/cr/models"
 )
 
 type CreateRegistryRequest struct {

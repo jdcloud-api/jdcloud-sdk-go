@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    refund "github.com/jdcloud-api/jdcloud-sdk-go/services/refund/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    refund "github.com/lshuining/jdcloud-sdk-go/services/refund/models"
 )
 
 type DescirbeRefundStatusRequest struct {

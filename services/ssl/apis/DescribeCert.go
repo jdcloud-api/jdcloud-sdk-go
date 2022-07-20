@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    ssl "github.com/jdcloud-api/jdcloud-sdk-go/services/ssl/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    ssl "github.com/lshuining/jdcloud-sdk-go/services/ssl/models"
 )
 
 type DescribeCertRequest struct {

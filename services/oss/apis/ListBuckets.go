@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    oss "github.com/jdcloud-api/jdcloud-sdk-go/services/oss/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    oss "github.com/lshuining/jdcloud-sdk-go/services/oss/models"
 )
 
 type ListBucketsRequest struct {

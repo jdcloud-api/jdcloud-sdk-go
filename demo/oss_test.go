@@ -3,9 +3,9 @@ package demo
 import (
 	"fmt"
 	"testing"
-	. "github.com/jdcloud-api/jdcloud-sdk-go/core"
-	"github.com/jdcloud-api/jdcloud-sdk-go/services/oss/client"
-	"github.com/jdcloud-api/jdcloud-sdk-go/services/oss/apis"
+	. "github.com/lshuining/jdcloud-sdk-go/core"
+	"github.com/lshuining/jdcloud-sdk-go/services/oss/client"
+	"github.com/lshuining/jdcloud-sdk-go/services/oss/apis"
 )
 
 func initOssClient() *client.OssClient {

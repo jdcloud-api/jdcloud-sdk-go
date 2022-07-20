@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    iotcore "github.com/jdcloud-api/jdcloud-sdk-go/services/iotcore/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    iotcore "github.com/lshuining/jdcloud-sdk-go/services/iotcore/models"
 )
 
 type QueryDevicePageRequest struct {

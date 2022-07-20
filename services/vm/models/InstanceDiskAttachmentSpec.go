@@ -16,7 +16,7 @@
 
 package models
 
-import disk "github.com/jdcloud-api/jdcloud-sdk-go/services/disk/models"
+import disk "github.com/lshuining/jdcloud-sdk-go/services/disk/models"
 
 type InstanceDiskAttachmentSpec struct {
 

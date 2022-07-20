@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    partner "github.com/jdcloud-api/jdcloud-sdk-go/services/partner/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    partner "github.com/lshuining/jdcloud-sdk-go/services/partner/models"
 )
 
 type GetEachConsumptionRequest struct {

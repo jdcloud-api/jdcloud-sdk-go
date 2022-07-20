@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    dcap "github.com/jdcloud-api/jdcloud-sdk-go/services/dcap/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    dcap "github.com/lshuining/jdcloud-sdk-go/services/dcap/models"
 )
 
 type ModifyDataSourceTableFieldTagRequest struct {

@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    logs "github.com/jdcloud-api/jdcloud-sdk-go/services/logs/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    logs "github.com/lshuining/jdcloud-sdk-go/services/logs/models"
 )
 
 type DescribeLogsetsRequest struct {

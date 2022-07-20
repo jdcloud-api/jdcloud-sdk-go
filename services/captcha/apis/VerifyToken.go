@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    captcha "github.com/jdcloud-api/jdcloud-sdk-go/services/captcha/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    captcha "github.com/lshuining/jdcloud-sdk-go/services/captcha/models"
 )
 
 type VerifyTokenRequest struct {

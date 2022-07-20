@@ -17,8 +17,8 @@
 package client
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    yundingdatapush "github.com/jdcloud-api/jdcloud-sdk-go/services/yundingdatapush/apis"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    yundingdatapush "github.com/lshuining/jdcloud-sdk-go/services/yundingdatapush/apis"
     "encoding/json"
     "errors"
 )

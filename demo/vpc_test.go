@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"testing"
 
-	. "github.com/jdcloud-api/jdcloud-sdk-go/core"
-	. "github.com/jdcloud-api/jdcloud-sdk-go/services/vpc/apis"
-	. "github.com/jdcloud-api/jdcloud-sdk-go/services/vpc/client"
-	vpc "github.com/jdcloud-api/jdcloud-sdk-go/services/vpc/models"
+	. "github.com/lshuining/jdcloud-sdk-go/core"
+	. "github.com/lshuining/jdcloud-sdk-go/services/vpc/apis"
+	. "github.com/lshuining/jdcloud-sdk-go/services/vpc/client"
+	vpc "github.com/lshuining/jdcloud-sdk-go/services/vpc/models"
 )
 
 const (

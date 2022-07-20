@@ -16,8 +16,8 @@
 
 package models
 
-import rds "github.com/jdcloud-api/jdcloud-sdk-go/services/rds/models"
-import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
+import rds "github.com/lshuining/jdcloud-sdk-go/services/rds/models"
+import charge "github.com/lshuining/jdcloud-sdk-go/services/charge/models"
 
 type DBInstance struct {
 

@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    elite "github.com/jdcloud-api/jdcloud-sdk-go/services/elite/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    elite "github.com/lshuining/jdcloud-sdk-go/services/elite/models"
 )
 
 type JdxQueryDeliveryInfoRequest struct {

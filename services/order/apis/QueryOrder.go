@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    order "github.com/jdcloud-api/jdcloud-sdk-go/services/order/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    order "github.com/lshuining/jdcloud-sdk-go/services/order/models"
 )
 
 type QueryOrderRequest struct {

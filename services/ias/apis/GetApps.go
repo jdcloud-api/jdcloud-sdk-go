@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    ias "github.com/jdcloud-api/jdcloud-sdk-go/services/ias/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    ias "github.com/lshuining/jdcloud-sdk-go/services/ias/models"
 )
 
 type GetAppsRequest struct {

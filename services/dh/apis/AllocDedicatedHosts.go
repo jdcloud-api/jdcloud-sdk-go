@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    dh "github.com/jdcloud-api/jdcloud-sdk-go/services/dh/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    dh "github.com/lshuining/jdcloud-sdk-go/services/dh/models"
 )
 
 type AllocDedicatedHostsRequest struct {

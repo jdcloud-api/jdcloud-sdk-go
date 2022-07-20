@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    domain "github.com/jdcloud-api/jdcloud-sdk-go/services/domain/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    domain "github.com/lshuining/jdcloud-sdk-go/services/domain/models"
 )
 
 type TransferinDomainRequest struct {

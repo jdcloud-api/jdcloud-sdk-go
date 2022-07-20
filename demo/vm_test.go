@@ -4,12 +4,12 @@ import (
 	"time"
 	"fmt"
 	"testing"
-	. "github.com/jdcloud-api/jdcloud-sdk-go/services/vm/apis"
-	. "github.com/jdcloud-api/jdcloud-sdk-go/services/vm/client"
-	. "github.com/jdcloud-api/jdcloud-sdk-go/core"
-	"github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
-	vm "github.com/jdcloud-api/jdcloud-sdk-go/services/vm/models"
-	vpc "github.com/jdcloud-api/jdcloud-sdk-go/services/vpc/models"
+	. "github.com/lshuining/jdcloud-sdk-go/services/vm/apis"
+	. "github.com/lshuining/jdcloud-sdk-go/services/vm/client"
+	. "github.com/lshuining/jdcloud-sdk-go/core"
+	"github.com/lshuining/jdcloud-sdk-go/services/common/models"
+	vm "github.com/lshuining/jdcloud-sdk-go/services/vm/models"
+	vpc "github.com/lshuining/jdcloud-sdk-go/services/vpc/models"
 )
 
 func initVmClient() *VmClient {

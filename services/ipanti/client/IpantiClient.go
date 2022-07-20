@@ -17,8 +17,8 @@
 package client
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    ipanti "github.com/jdcloud-api/jdcloud-sdk-go/services/ipanti/apis"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    ipanti "github.com/lshuining/jdcloud-sdk-go/services/ipanti/apis"
     "encoding/json"
     "errors"
 )
