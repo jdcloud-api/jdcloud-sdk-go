@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    cps "github.com/jdcloud-api/jdcloud-sdk-go/services/cps/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    cps "github.com/lshuining/jdcloud-sdk-go/services/cps/models"
 )
 
 type ApplyElasticIpsRequest struct {

@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    domainservice "github.com/jdcloud-api/jdcloud-sdk-go/services/domainservice/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    domainservice "github.com/lshuining/jdcloud-sdk-go/services/domainservice/models"
 )
 
 type DescribeViewTreeRequest struct {

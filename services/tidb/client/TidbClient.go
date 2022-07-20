@@ -17,8 +17,8 @@
 package client
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    tidb "github.com/jdcloud-api/jdcloud-sdk-go/services/tidb/apis"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    tidb "github.com/lshuining/jdcloud-sdk-go/services/tidb/apis"
     "encoding/json"
     "errors"
 )

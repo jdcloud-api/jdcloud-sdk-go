@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    quota "github.com/jdcloud-api/jdcloud-sdk-go/services/quota/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    quota "github.com/lshuining/jdcloud-sdk-go/services/quota/models"
 )
 
 type VerifyUserQuotaRequest struct {

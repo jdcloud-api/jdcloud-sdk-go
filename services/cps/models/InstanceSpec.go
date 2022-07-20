@@ -16,8 +16,8 @@
 
 package models
 
-import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
-import resourcetag "github.com/jdcloud-api/jdcloud-sdk-go/services/resourcetag/models"
+import charge "github.com/lshuining/jdcloud-sdk-go/services/charge/models"
+import resourcetag "github.com/lshuining/jdcloud-sdk-go/services/resourcetag/models"
 
 type InstanceSpec struct {
 

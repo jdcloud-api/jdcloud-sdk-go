@@ -17,8 +17,8 @@
 package client
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    starshield "github.com/jdcloud-api/jdcloud-sdk-go/services/starshield/apis"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    starshield "github.com/lshuining/jdcloud-sdk-go/services/starshield/apis"
     "encoding/json"
     "errors"
 )

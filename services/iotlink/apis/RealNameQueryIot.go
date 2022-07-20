@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    iotlink "github.com/jdcloud-api/jdcloud-sdk-go/services/iotlink/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    iotlink "github.com/lshuining/jdcloud-sdk-go/services/iotlink/models"
 )
 
 type RealNameQueryIotRequest struct {

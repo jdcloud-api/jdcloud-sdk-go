@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    yunding "github.com/jdcloud-api/jdcloud-sdk-go/services/yunding/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    yunding "github.com/lshuining/jdcloud-sdk-go/services/yunding/models"
 )
 
 type DescribeRdsInstanceRequest struct {

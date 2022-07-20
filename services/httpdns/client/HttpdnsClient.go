@@ -17,8 +17,8 @@
 package client
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    httpdns "github.com/jdcloud-api/jdcloud-sdk-go/services/httpdns/apis"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    httpdns "github.com/lshuining/jdcloud-sdk-go/services/httpdns/apis"
     "encoding/json"
     "errors"
 )

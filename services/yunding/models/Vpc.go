@@ -16,7 +16,7 @@
 
 package models
 
-import vpc "github.com/jdcloud-api/jdcloud-sdk-go/services/vpc/models"
+import vpc "github.com/lshuining/jdcloud-sdk-go/services/vpc/models"
 
 type Vpc struct {
 

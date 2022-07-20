@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    resourcetag "github.com/jdcloud-api/jdcloud-sdk-go/services/resourcetag/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    resourcetag "github.com/lshuining/jdcloud-sdk-go/services/resourcetag/models"
 )
 
 type TagResourcesRequest struct {

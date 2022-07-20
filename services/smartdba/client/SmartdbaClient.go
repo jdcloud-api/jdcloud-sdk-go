@@ -17,8 +17,8 @@
 package client
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    smartdba "github.com/jdcloud-api/jdcloud-sdk-go/services/smartdba/apis"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    smartdba "github.com/lshuining/jdcloud-sdk-go/services/smartdba/apis"
     "encoding/json"
     "errors"
 )

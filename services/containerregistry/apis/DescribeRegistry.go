@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    containerregistry "github.com/jdcloud-api/jdcloud-sdk-go/services/containerregistry/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    containerregistry "github.com/lshuining/jdcloud-sdk-go/services/containerregistry/models"
 )
 
 type DescribeRegistryRequest struct {

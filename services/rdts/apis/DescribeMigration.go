@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    rdts "github.com/jdcloud-api/jdcloud-sdk-go/services/rdts/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    rdts "github.com/lshuining/jdcloud-sdk-go/services/rdts/models"
 )
 
 type DescribeMigrationRequest struct {

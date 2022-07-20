@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    jdfusion "github.com/jdcloud-api/jdcloud-sdk-go/services/jdfusion/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    jdfusion "github.com/lshuining/jdcloud-sdk-go/services/jdfusion/models"
 )
 
 type GetRegionsRequest struct {

@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    cloudauth "github.com/jdcloud-api/jdcloud-sdk-go/services/cloudauth/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    cloudauth "github.com/lshuining/jdcloud-sdk-go/services/cloudauth/models"
 )
 
 type CheckLegalPersonAndAgentRequest struct {

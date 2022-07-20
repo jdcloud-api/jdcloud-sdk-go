@@ -17,10 +17,10 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
-    vpc "github.com/jdcloud-api/jdcloud-sdk-go/services/vpc/models"
-    lb "github.com/jdcloud-api/jdcloud-sdk-go/services/lb/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    charge "github.com/lshuining/jdcloud-sdk-go/services/charge/models"
+    vpc "github.com/lshuining/jdcloud-sdk-go/services/vpc/models"
+    lb "github.com/lshuining/jdcloud-sdk-go/services/lb/models"
 )
 
 type CreateLoadBalancerRequest struct {

@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    function "github.com/jdcloud-api/jdcloud-sdk-go/services/function/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    function "github.com/lshuining/jdcloud-sdk-go/services/function/models"
 )
 
 type UpdateAliasRequest struct {

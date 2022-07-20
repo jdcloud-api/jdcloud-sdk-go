@@ -17,7 +17,7 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    "github.com/lshuining/jdcloud-sdk-go/core"
 )
 
 type DecryptRequest struct {

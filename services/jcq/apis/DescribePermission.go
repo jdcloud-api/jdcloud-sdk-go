@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    jcq "github.com/jdcloud-api/jdcloud-sdk-go/services/jcq/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    jcq "github.com/lshuining/jdcloud-sdk-go/services/jcq/models"
 )
 
 type DescribePermissionRequest struct {

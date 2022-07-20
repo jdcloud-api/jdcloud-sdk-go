@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    sop "github.com/jdcloud-api/jdcloud-sdk-go/services/sop/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    sop "github.com/lshuining/jdcloud-sdk-go/services/sop/models"
 )
 
 type GetSecurityTokenRequest struct {

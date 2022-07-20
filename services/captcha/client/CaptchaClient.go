@@ -17,8 +17,8 @@
 package client
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    captcha "github.com/jdcloud-api/jdcloud-sdk-go/services/captcha/apis"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    captcha "github.com/lshuining/jdcloud-sdk-go/services/captcha/apis"
     "encoding/json"
     "errors"
 )

@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    pod "github.com/jdcloud-api/jdcloud-sdk-go/services/pod/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    pod "github.com/lshuining/jdcloud-sdk-go/services/pod/models"
 )
 
 type RebuildPodRequest struct {

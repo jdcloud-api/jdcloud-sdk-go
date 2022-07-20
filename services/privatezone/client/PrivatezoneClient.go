@@ -17,8 +17,8 @@
 package client
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    privatezone "github.com/jdcloud-api/jdcloud-sdk-go/services/privatezone/apis"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    privatezone "github.com/lshuining/jdcloud-sdk-go/services/privatezone/apis"
     "encoding/json"
     "errors"
 )

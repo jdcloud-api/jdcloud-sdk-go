@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    vpc "github.com/jdcloud-api/jdcloud-sdk-go/services/vpc/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    vpc "github.com/lshuining/jdcloud-sdk-go/services/vpc/models"
 )
 
 type AddRouteTableRulesRequest struct {

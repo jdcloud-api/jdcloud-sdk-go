@@ -17,8 +17,8 @@
 package client
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    quota "github.com/jdcloud-api/jdcloud-sdk-go/services/quota/apis"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    quota "github.com/lshuining/jdcloud-sdk-go/services/quota/apis"
     "encoding/json"
     "errors"
 )

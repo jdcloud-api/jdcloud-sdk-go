@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    apigateway "github.com/jdcloud-api/jdcloud-sdk-go/services/apigateway/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    apigateway "github.com/lshuining/jdcloud-sdk-go/services/apigateway/models"
 )
 
 type CreateApisRequest struct {

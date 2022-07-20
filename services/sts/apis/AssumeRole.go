@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    sts "github.com/jdcloud-api/jdcloud-sdk-go/services/sts/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    sts "github.com/lshuining/jdcloud-sdk-go/services/sts/models"
 )
 
 type AssumeRoleRequest struct {

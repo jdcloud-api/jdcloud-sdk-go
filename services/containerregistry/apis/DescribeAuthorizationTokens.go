@@ -17,9 +17,9 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    containerregistry "github.com/jdcloud-api/jdcloud-sdk-go/services/containerregistry/models"
-    common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    containerregistry "github.com/lshuining/jdcloud-sdk-go/services/containerregistry/models"
+    common "github.com/lshuining/jdcloud-sdk-go/services/common/models"
 )
 
 type DescribeAuthorizationTokensRequest struct {

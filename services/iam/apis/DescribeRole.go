@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    iam "github.com/jdcloud-api/jdcloud-sdk-go/services/iam/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    iam "github.com/lshuining/jdcloud-sdk-go/services/iam/models"
 )
 
 type DescribeRoleRequest struct {

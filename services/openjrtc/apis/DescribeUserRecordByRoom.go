@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    openjrtc "github.com/jdcloud-api/jdcloud-sdk-go/services/openjrtc/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    openjrtc "github.com/lshuining/jdcloud-sdk-go/services/openjrtc/models"
 )
 
 type DescribeUserRecordByRoomRequest struct {

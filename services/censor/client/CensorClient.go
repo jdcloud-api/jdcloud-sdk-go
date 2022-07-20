@@ -17,8 +17,8 @@
 package client
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    censor "github.com/jdcloud-api/jdcloud-sdk-go/services/censor/apis"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    censor "github.com/lshuining/jdcloud-sdk-go/services/censor/apis"
     "encoding/json"
     "errors"
 )

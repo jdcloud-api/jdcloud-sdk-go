@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    jdccs "github.com/jdcloud-api/jdcloud-sdk-go/services/jdccs/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    jdccs "github.com/lshuining/jdcloud-sdk-go/services/jdccs/models"
 )
 
 type DescribeBandwidthRequest struct {

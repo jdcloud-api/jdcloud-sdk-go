@@ -17,8 +17,8 @@
 package client
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    renewal "github.com/jdcloud-api/jdcloud-sdk-go/services/renewal/apis"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    renewal "github.com/lshuining/jdcloud-sdk-go/services/renewal/apis"
     "encoding/json"
     "errors"
 )

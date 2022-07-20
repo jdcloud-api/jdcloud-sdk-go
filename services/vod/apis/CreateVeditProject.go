@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    vod "github.com/jdcloud-api/jdcloud-sdk-go/services/vod/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    vod "github.com/lshuining/jdcloud-sdk-go/services/vod/models"
 )
 
 type CreateVeditProjectRequest struct {

@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    sms "github.com/jdcloud-api/jdcloud-sdk-go/services/sms/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    sms "github.com/lshuining/jdcloud-sdk-go/services/sms/models"
 )
 
 type ReplyRequest struct {

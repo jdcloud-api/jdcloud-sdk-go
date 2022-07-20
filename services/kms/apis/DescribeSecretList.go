@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    kms "github.com/jdcloud-api/jdcloud-sdk-go/services/kms/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    kms "github.com/lshuining/jdcloud-sdk-go/services/kms/models"
 )
 
 type DescribeSecretListRequest struct {

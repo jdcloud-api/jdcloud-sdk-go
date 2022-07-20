@@ -16,7 +16,7 @@
 
 package models
 
-import common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
+import common "github.com/lshuining/jdcloud-sdk-go/services/common/models"
 
 type FilterGroup struct {
 

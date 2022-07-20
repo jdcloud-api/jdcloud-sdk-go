@@ -17,9 +17,9 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    waf "github.com/jdcloud-api/jdcloud-sdk-go/services/waf/models"
-    common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    waf "github.com/lshuining/jdcloud-sdk-go/services/waf/models"
+    common "github.com/lshuining/jdcloud-sdk-go/services/common/models"
 )
 
 type GetWafInstanceRequest struct {

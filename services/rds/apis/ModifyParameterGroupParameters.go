@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    rds "github.com/jdcloud-api/jdcloud-sdk-go/services/rds/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    rds "github.com/lshuining/jdcloud-sdk-go/services/rds/models"
 )
 
 type ModifyParameterGroupParametersRequest struct {

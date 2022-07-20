@@ -17,8 +17,8 @@
 package client
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    cloudauth "github.com/jdcloud-api/jdcloud-sdk-go/services/cloudauth/apis"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    cloudauth "github.com/lshuining/jdcloud-sdk-go/services/cloudauth/apis"
     "encoding/json"
     "errors"
 )

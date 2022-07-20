@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    detection "github.com/jdcloud-api/jdcloud-sdk-go/services/detection/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    detection "github.com/lshuining/jdcloud-sdk-go/services/detection/models"
 )
 
 type EnableSiteMonitorRequest struct {

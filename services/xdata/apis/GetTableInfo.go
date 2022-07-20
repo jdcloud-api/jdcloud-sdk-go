@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    xdata "github.com/jdcloud-api/jdcloud-sdk-go/services/xdata/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    xdata "github.com/lshuining/jdcloud-sdk-go/services/xdata/models"
 )
 
 type GetTableInfoRequest struct {

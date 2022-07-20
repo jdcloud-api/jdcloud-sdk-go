@@ -17,8 +17,8 @@
 package client
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    instancevoucher "github.com/jdcloud-api/jdcloud-sdk-go/services/instancevoucher/apis"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    instancevoucher "github.com/lshuining/jdcloud-sdk-go/services/instancevoucher/apis"
     "encoding/json"
     "errors"
 )

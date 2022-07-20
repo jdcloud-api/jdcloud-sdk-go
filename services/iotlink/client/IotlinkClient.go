@@ -17,8 +17,8 @@
 package client
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    iotlink "github.com/jdcloud-api/jdcloud-sdk-go/services/iotlink/apis"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    iotlink "github.com/lshuining/jdcloud-sdk-go/services/iotlink/apis"
     "encoding/json"
     "errors"
 )

@@ -17,8 +17,8 @@
 package client
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    zfs "github.com/jdcloud-api/jdcloud-sdk-go/services/zfs/apis"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    zfs "github.com/lshuining/jdcloud-sdk-go/services/zfs/apis"
     "encoding/json"
     "errors"
 )

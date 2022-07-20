@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    cloudsign "github.com/jdcloud-api/jdcloud-sdk-go/services/cloudsign/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    cloudsign "github.com/lshuining/jdcloud-sdk-go/services/cloudsign/models"
 )
 
 type VerifyContractRequest struct {

@@ -17,8 +17,8 @@
 package apis
 
 import (
-    "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    live "github.com/jdcloud-api/jdcloud-sdk-go/services/live/models"
+    "github.com/lshuining/jdcloud-sdk-go/core"
+    live "github.com/lshuining/jdcloud-sdk-go/services/live/models"
 )
 
 type DescribeLivePublishStreamNumRequest struct {
