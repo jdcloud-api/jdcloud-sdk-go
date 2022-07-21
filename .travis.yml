@@ -10,4 +10,4 @@ go:
   - master
 script:
   - go build ./...
-go_import_path: github.com/jdcloud-api/jdcloud-sdk-go
+go_import_path: github.com/lshuining/jdcloud-sdk-go
