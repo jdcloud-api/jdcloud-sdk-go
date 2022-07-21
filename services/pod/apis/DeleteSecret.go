@@ -29,6 +29,7 @@ type DeleteSecretRequest struct {
 
     /* Secret Name  */
     Name string `json:"name"`
+
 }
 
 /*
@@ -97,6 +98,7 @@ func (r *DeleteSecretRequest) SetRegionId(regionId string) {
 func (r *DeleteSecretRequest) SetName(name string) {
     r.Name = name
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

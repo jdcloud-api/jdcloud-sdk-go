@@ -35,6 +35,7 @@ type ExecStartRequest struct {
 
     /*   */
     ExecId string `json:"execId"`
+
 }
 
 /*
@@ -125,6 +126,7 @@ func (r *ExecStartRequest) SetContainerName(containerName string) {
 func (r *ExecStartRequest) SetExecId(execId string) {
     r.ExecId = execId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

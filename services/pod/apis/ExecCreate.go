@@ -38,6 +38,7 @@ type ExecCreateRequest struct {
 
     /* 执行命令是否分配tty。默认不分配 (Optional) */
     Tty *bool `json:"tty"`
+
 }
 
 /*
@@ -136,6 +137,7 @@ func (r *ExecCreateRequest) SetCommand(command []string) {
 func (r *ExecCreateRequest) SetTty(tty bool) {
     r.Tty = &tty
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

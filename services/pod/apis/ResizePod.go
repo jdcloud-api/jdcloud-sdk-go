@@ -36,6 +36,7 @@ type ResizePodRequest struct {
 
     /* 新实例类型，不可与原实例类型相同 (Optional) */
     ContainerResources []pod.ContainerResourceSpec `json:"containerResources"`
+
 }
 
 /*
@@ -123,6 +124,7 @@ func (r *ResizePodRequest) SetInstanceType(instanceType string) {
 func (r *ResizePodRequest) SetContainerResources(containerResources []pod.ContainerResourceSpec) {
     r.ContainerResources = containerResources
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

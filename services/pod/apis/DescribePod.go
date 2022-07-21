@@ -30,6 +30,7 @@ type DescribePodRequest struct {
 
     /* Pod ID  */
     PodId string `json:"podId"`
+
 }
 
 /*
@@ -98,6 +99,7 @@ func (r *DescribePodRequest) SetRegionId(regionId string) {
 func (r *DescribePodRequest) SetPodId(podId string) {
     r.PodId = podId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

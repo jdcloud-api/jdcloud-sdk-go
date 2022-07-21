@@ -33,6 +33,7 @@ type DescribeInstanceTypesRequest struct {
 az - 可用区，精确匹配，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
+
 }
 
 /*
@@ -102,6 +103,7 @@ az - 可用区，精确匹配，支持多个
 func (r *DescribeInstanceTypesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -35,6 +35,7 @@ type ExecGetExitCodeRequest struct {
 
     /*   */
     ExecId string `json:"execId"`
+
 }
 
 /*
@@ -125,6 +126,7 @@ func (r *ExecGetExitCodeRequest) SetContainerName(containerName string) {
 func (r *ExecGetExitCodeRequest) SetExecId(execId string) {
     r.ExecId = execId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

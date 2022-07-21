@@ -23,5 +23,5 @@ type CFSVolumeSourceSpec struct {
     MountTargetId string `json:"mountTargetId"`
 
     /* 子目录 (Optional) */
-    Path string `json:"path"`
+    Path *string `json:"path"`
 }

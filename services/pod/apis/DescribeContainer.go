@@ -33,6 +33,7 @@ type DescribeContainerRequest struct {
 
     /* container name  */
     ContainerName string `json:"containerName"`
+
 }
 
 /*
@@ -112,6 +113,7 @@ func (r *DescribeContainerRequest) SetPodId(podId string) {
 func (r *DescribeContainerRequest) SetContainerName(containerName string) {
     r.ContainerName = containerName
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

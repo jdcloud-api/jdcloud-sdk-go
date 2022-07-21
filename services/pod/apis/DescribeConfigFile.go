@@ -30,6 +30,7 @@ type DescribeConfigFileRequest struct {
 
     /* Name  */
     Name string `json:"name"`
+
 }
 
 /*
@@ -98,6 +99,7 @@ func (r *DescribeConfigFileRequest) SetRegionId(regionId string) {
 func (r *DescribeConfigFileRequest) SetName(name string) {
     r.Name = name
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

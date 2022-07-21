@@ -32,6 +32,7 @@ type ModifyPodAttributeRequest struct {
 
     /* 修改后的描述 (Optional) */
     Description *string `json:"description"`
+
 }
 
 /*
@@ -108,6 +109,7 @@ func (r *ModifyPodAttributeRequest) SetPodId(podId string) {
 func (r *ModifyPodAttributeRequest) SetDescription(description string) {
     r.Description = &description
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

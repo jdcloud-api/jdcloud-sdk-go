@@ -30,6 +30,7 @@ type DescribeSecretRequest struct {
 
     /* Secret Name  */
     Name string `json:"name"`
+
 }
 
 /*
@@ -98,6 +99,7 @@ func (r *DescribeSecretRequest) SetRegionId(regionId string) {
 func (r *DescribeSecretRequest) SetName(name string) {
     r.Name = name
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

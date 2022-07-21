@@ -33,6 +33,7 @@ type RebuildPodRequest struct {
 
     /* 重置容器相关参数  */
     Containers []pod.RebuildContainerSpec `json:"containers"`
+
 }
 
 /*
@@ -112,6 +113,7 @@ func (r *RebuildPodRequest) SetPodId(podId string) {
 func (r *RebuildPodRequest) SetContainers(containers []pod.RebuildContainerSpec) {
     r.Containers = containers
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

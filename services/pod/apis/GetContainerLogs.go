@@ -53,6 +53,7 @@ type GetContainerLogsRequest struct {
     /* 日志时间下限，不传表示不限时间
  (Optional) */
     EndTime *string `json:"endTime"`
+
 }
 
 /*
@@ -182,6 +183,7 @@ func (r *GetContainerLogsRequest) SetStartTime(startTime string) {
 func (r *GetContainerLogsRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -42,6 +42,7 @@ value 是 Base64 编码的字符串，不能包含换行符（在 linux 下使�
 必须包含server、username、password 字段，email 字段是可选的。<br>
   */
     Data *pod.DockerRegistryData `json:"data"`
+
 }
 
 /*
@@ -150,6 +151,7 @@ value 是 Base64 编码的字符串，不能包含换行符（在 linux 下使�
 func (r *CreateSecretRequest) SetData(data *pod.DockerRegistryData) {
     r.Data = data
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

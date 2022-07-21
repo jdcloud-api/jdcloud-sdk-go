@@ -48,6 +48,7 @@ agId - 镜像ID，精确匹配，支持多个
 
     /* Tag筛选条件 (Optional) */
     Tags []pod.TagFilter `json:"tags"`
+
 }
 
 /*
@@ -153,6 +154,7 @@ func (r *DescribePodsRequest) SetFilters(filters []common.Filter) {
 func (r *DescribePodsRequest) SetTags(tags []pod.TagFilter) {
     r.Tags = tags
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
