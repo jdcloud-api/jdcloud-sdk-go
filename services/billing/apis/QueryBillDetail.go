@@ -114,8 +114,8 @@ func NewQueryBillDetailRequestWithAllParams(
 	billingType *int,
 	resourceIds []string,
 	tags []interface{},
-	pageIndex *int,
-	pageSize *int,
+	pageIndex int,
+	pageSize int,
 ) *QueryBillDetailRequest {
 
 	return &QueryBillDetailRequest{
