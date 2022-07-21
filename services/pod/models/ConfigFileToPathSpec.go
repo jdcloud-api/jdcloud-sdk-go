@@ -23,8 +23,8 @@ type ConfigFileToPathSpec struct {
     Key string `json:"key"`
 
     /* 相关文件路径 (Optional) */
-    Path string `json:"path"`
+    Path *string `json:"path"`
 
     /* 文件目录权限 (Optional) */
-    Mode string `json:"mode"`
+    Mode *string `json:"mode"`
 }

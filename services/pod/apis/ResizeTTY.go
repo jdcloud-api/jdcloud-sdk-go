@@ -41,6 +41,7 @@ type ResizeTTYRequest struct {
 
     /* exec ID (Optional) */
     ExecId *string `json:"execId"`
+
 }
 
 /*
@@ -150,6 +151,7 @@ func (r *ResizeTTYRequest) SetWidth(width int) {
 func (r *ResizeTTYRequest) SetExecId(execId string) {
     r.ExecId = &execId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

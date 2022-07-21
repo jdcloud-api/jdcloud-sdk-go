@@ -32,6 +32,7 @@ type AttachRequest struct {
 
     /* container name  */
     ContainerName string `json:"containerName"`
+
 }
 
 /*
@@ -111,6 +112,7 @@ func (r *AttachRequest) SetPodId(podId string) {
 func (r *AttachRequest) SetContainerName(containerName string) {
     r.ContainerName = containerName
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

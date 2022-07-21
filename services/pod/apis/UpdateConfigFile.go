@@ -35,6 +35,7 @@ type UpdateConfigFileRequest struct {
 value 每个value长度上限为32KB，整个data的长度不能超过1M; <br>
   */
     Data []pod.FileToPath `json:"data"`
+
 }
 
 /*
@@ -120,6 +121,7 @@ value 每个value长度上限为32KB，整个data的长度不能超过1M; <br>
 func (r *UpdateConfigFileRequest) SetData(data []pod.FileToPath) {
     r.Data = data
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

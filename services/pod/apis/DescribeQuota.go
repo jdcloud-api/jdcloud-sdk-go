@@ -31,6 +31,7 @@ type DescribeQuotaRequest struct {
     /* resourceType - 资源类型，支持 [container, pod, secret]
   */
     ResourceType string `json:"resourceType"`
+
 }
 
 /*
@@ -102,6 +103,7 @@ func (r *DescribeQuotaRequest) SetRegionId(regionId string) {
 func (r *DescribeQuotaRequest) SetResourceType(resourceType string) {
     r.ResourceType = resourceType
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

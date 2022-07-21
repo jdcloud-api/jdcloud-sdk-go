@@ -32,6 +32,7 @@ type CheckPodNameRequest struct {
 
     /* 需要创建的 pod 总数，默认创建一个，不同的总数会对校验结果产生影响。 (Optional) */
     MaxCount *int `json:"maxCount"`
+
 }
 
 /*
@@ -108,6 +109,7 @@ func (r *CheckPodNameRequest) SetPodName(podName string) {
 func (r *CheckPodNameRequest) SetMaxCount(maxCount int) {
     r.MaxCount = &maxCount
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

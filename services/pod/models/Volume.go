@@ -24,4 +24,10 @@ type Volume struct {
 
     /* 提供给Pod的cloud disk. (Optional) */
     JdcloudDisk JDCloudVolumeSource `json:"jdcloudDisk"`
+
+    /* 提供给Pod的CFS. (Optional) */
+    Cfs CFSVolumeSource `json:"cfs"`
+
+    /* 提供给Pod的ConfigFile. (Optional) */
+    ConfigFile ConfigFileVolumeSource `json:"configFile"`
 }

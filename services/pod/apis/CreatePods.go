@@ -36,6 +36,7 @@ type CreatePodsRequest struct {
 
     /* 保证请求幂等性的字符串；最大长度64个ASCII字符 (Optional) */
     ClientToken *string `json:"clientToken"`
+
 }
 
 /*
@@ -123,6 +124,7 @@ func (r *CreatePodsRequest) SetMaxCount(maxCount int) {
 func (r *CreatePodsRequest) SetClientToken(clientToken string) {
     r.ClientToken = &clientToken
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

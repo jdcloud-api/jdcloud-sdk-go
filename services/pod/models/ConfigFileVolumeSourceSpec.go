@@ -20,10 +20,10 @@ package models
 type ConfigFileVolumeSourceSpec struct {
 
     /* configFile名字 (Optional) */
-    Name string `json:"name"`
+    Name *string `json:"name"`
 
     /* 默认文件目录权限 (Optional) */
-    DefaultMode string `json:"defaultMode"`
+    DefaultMode *string `json:"defaultMode"`
 
     /* 提供给Pod的configFile. (Optional) */
     FileToPath []ConfigFileToPathSpec `json:"fileToPath"`

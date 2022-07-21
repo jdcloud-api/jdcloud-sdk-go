@@ -38,6 +38,7 @@ type DescribeSecretsRequest struct {
     /* name - secret名称，支持模糊搜索
  (Optional) */
     Filters []common.Filter `json:"filters"`
+
 }
 
 /*
@@ -121,6 +122,7 @@ func (r *DescribeSecretsRequest) SetPageSize(pageSize int) {
 func (r *DescribeSecretsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
