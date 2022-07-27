@@ -48,6 +48,7 @@ type DescribeSlowLogRequest struct {
 
     /* 分片地址 (Optional) */
     ShardAddr *string `json:"shardAddr"`
+
 }
 
 /*
@@ -164,6 +165,7 @@ func (r *DescribeSlowLogRequest) SetShardId(shardId string) {
 func (r *DescribeSlowLogRequest) SetShardAddr(shardAddr string) {
     r.ShardAddr = &shardAddr
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -32,6 +32,7 @@ type ResetCacheInstancePasswordRequest struct {
 
     /* 密码，为空即为免密，不少于8字符不超过16字符 (Optional) */
     Password *string `json:"password"`
+
 }
 
 /*
@@ -108,6 +109,7 @@ func (r *ResetCacheInstancePasswordRequest) SetCacheInstanceId(cacheInstanceId s
 func (r *ResetCacheInstancePasswordRequest) SetPassword(password string) {
     r.Password = &password
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

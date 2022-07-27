@@ -35,6 +35,7 @@ type ModifyCacheInstanceAttributeRequest struct {
 
     /* 实例的描述，不能超过256个字符 (Optional) */
     CacheInstanceDescription *string `json:"cacheInstanceDescription"`
+
 }
 
 /*
@@ -119,6 +120,7 @@ func (r *ModifyCacheInstanceAttributeRequest) SetCacheInstanceName(cacheInstance
 func (r *ModifyCacheInstanceAttributeRequest) SetCacheInstanceDescription(cacheInstanceDescription string) {
     r.CacheInstanceDescription = &cacheInstanceDescription
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

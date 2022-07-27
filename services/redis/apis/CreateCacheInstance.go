@@ -34,6 +34,7 @@ type CreateCacheInstanceRequest struct {
 
     /* 实例的计费类型 (Optional) */
     Charge *charge.ChargeSpec `json:"charge"`
+
 }
 
 /*
@@ -110,6 +111,7 @@ func (r *CreateCacheInstanceRequest) SetCacheInstance(cacheInstance *redis.Cache
 func (r *CreateCacheInstanceRequest) SetCharge(charge *charge.ChargeSpec) {
     r.Charge = charge
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

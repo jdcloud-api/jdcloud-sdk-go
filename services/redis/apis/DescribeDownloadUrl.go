@@ -33,6 +33,7 @@ type DescribeDownloadUrlRequest struct {
 
     /* 备份任务ID  */
     BaseId string `json:"baseId"`
+
 }
 
 /*
@@ -112,6 +113,7 @@ func (r *DescribeDownloadUrlRequest) SetCacheInstanceId(cacheInstanceId string) 
 func (r *DescribeDownloadUrlRequest) SetBaseId(baseId string) {
     r.BaseId = baseId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

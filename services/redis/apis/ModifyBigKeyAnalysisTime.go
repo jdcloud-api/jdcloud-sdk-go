@@ -32,6 +32,7 @@ type ModifyBigKeyAnalysisTimeRequest struct {
 
     /* -表示关闭，否则为：HH:mm-HH:mm 时区，例如"01:00-02:00 +0800"，表示东八区的1点到2点  */
     AnalysisTime string `json:"analysisTime"`
+
 }
 
 /*
@@ -111,6 +112,7 @@ func (r *ModifyBigKeyAnalysisTimeRequest) SetCacheInstanceId(cacheInstanceId str
 func (r *ModifyBigKeyAnalysisTimeRequest) SetAnalysisTime(analysisTime string) {
     r.AnalysisTime = analysisTime
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

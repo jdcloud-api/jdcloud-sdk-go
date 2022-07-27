@@ -55,6 +55,7 @@ createTime - 按创建时间排序(asc表示按时间正序，desc表示按时�
 
     /*  (Optional) */
     ResourceGroupIds []string `json:"resourceGroupIds"`
+
 }
 
 /*
@@ -178,6 +179,7 @@ func (r *DescribeCacheInstancesRequest) SetTagFilters(tagFilters []common.TagFil
 func (r *DescribeCacheInstancesRequest) SetResourceGroupIds(resourceGroupIds []string) {
     r.ResourceGroupIds = resourceGroupIds
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

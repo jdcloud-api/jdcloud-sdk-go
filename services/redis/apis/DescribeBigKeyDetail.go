@@ -33,6 +33,7 @@ type DescribeBigKeyDetailRequest struct {
 
     /* 任务id  */
     TaskId string `json:"taskId"`
+
 }
 
 /*
@@ -112,6 +113,7 @@ func (r *DescribeBigKeyDetailRequest) SetCacheInstanceId(cacheInstanceId string)
 func (r *DescribeBigKeyDetailRequest) SetTaskId(taskId string) {
     r.TaskId = taskId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

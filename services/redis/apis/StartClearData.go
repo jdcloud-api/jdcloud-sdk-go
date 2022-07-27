@@ -42,6 +42,7 @@ type StartClearDataRequest struct {
 
     /* 数据遍历的速率 (Optional) */
     QpsLimit *int `json:"qpsLimit"`
+
 }
 
 /*
@@ -145,6 +146,7 @@ func (r *StartClearDataRequest) SetKeyFilter(keyFilter []redis.KeyFilter) {
 func (r *StartClearDataRequest) SetQpsLimit(qpsLimit int) {
     r.QpsLimit = &qpsLimit
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

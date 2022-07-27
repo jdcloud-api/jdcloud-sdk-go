@@ -35,6 +35,7 @@ type CreateBackupRequest struct {
 
     /* 备份类型：手动备份为1，只能为手动备份  */
     BackupType int `json:"backupType"`
+
 }
 
 /*
@@ -125,6 +126,7 @@ func (r *CreateBackupRequest) SetFileName(fileName string) {
 func (r *CreateBackupRequest) SetBackupType(backupType int) {
     r.BackupType = backupType
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

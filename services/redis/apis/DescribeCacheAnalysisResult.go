@@ -33,6 +33,7 @@ type DescribeCacheAnalysisResultRequest struct {
 
     /* 任务ID，即request ID  */
     TaskId string `json:"taskId"`
+
 }
 
 /*
@@ -112,6 +113,7 @@ func (r *DescribeCacheAnalysisResultRequest) SetCacheInstanceId(cacheInstanceId 
 func (r *DescribeCacheAnalysisResultRequest) SetTaskId(taskId string) {
     r.TaskId = taskId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

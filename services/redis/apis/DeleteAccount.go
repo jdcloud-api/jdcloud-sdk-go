@@ -32,6 +32,7 @@ type DeleteAccountRequest struct {
 
     /* 账号名称  */
     AccountName string `json:"accountName"`
+
 }
 
 /*
@@ -111,6 +112,7 @@ func (r *DeleteAccountRequest) SetCacheInstanceId(cacheInstanceId string) {
 func (r *DeleteAccountRequest) SetAccountName(accountName string) {
     r.AccountName = accountName
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -33,6 +33,7 @@ type ModifyInstanceConfigRequest struct {
 
     /* 配置参数名和参数值  */
     InstanceConfig []redis.ConfigItem `json:"instanceConfig"`
+
 }
 
 /*
@@ -112,6 +113,7 @@ func (r *ModifyInstanceConfigRequest) SetCacheInstanceId(cacheInstanceId string)
 func (r *ModifyInstanceConfigRequest) SetInstanceConfig(instanceConfig []redis.ConfigItem) {
     r.InstanceConfig = instanceConfig
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
