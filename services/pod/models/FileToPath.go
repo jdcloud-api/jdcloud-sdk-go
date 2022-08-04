@@ -19,9 +19,9 @@ package models
 
 type FileToPath struct {
 
-    /* configFile 键  */
+    /* 键名称，不能重复，最大长度不超过128（字母、数字、-、_和.）  */
     Key string `json:"key"`
 
-    /* configFile 值  */
+    /* 内容（base64） 每个value长度上限为32KB，整个data的长度不能超过1M;  */
     Value string `json:"value"`
 }

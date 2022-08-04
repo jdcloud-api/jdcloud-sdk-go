@@ -19,9 +19,9 @@ package models
 
 type CFSVolumeSourceSpec struct {
 
-    /* 共享目录id  */
+    /* 挂载目标 ID  */
     MountTargetId string `json:"mountTargetId"`
 
-    /* 子目录 (Optional) */
+    /* 云文件系统所在容器内的目录 (Optional) */
     Path *string `json:"path"`
 }

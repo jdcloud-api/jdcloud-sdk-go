@@ -31,8 +31,7 @@ type UpdateConfigFileRequest struct {
     /* Name  */
     Name string `json:"name"`
 
-    /* key 的有效字符包括字母、数字、-、_和.; <br>
-value 每个value长度上限为32KB，整个data的长度不能超过1M; <br>
+    /* configFile数据，个数不超过32个
   */
     Data []pod.FileToPath `json:"data"`
 
@@ -41,8 +40,7 @@ value 每个value长度上限为32KB，整个data的长度不能超过1M; <br>
 /*
  * param regionId: Region ID (Required)
  * param name: Name (Required)
- * param data: key 的有效字符包括字母、数字、-、_和.; <br>
-value 每个value长度上限为32KB，整个data的长度不能超过1M; <br>
+ * param data: configFile数据，个数不超过32个
  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -69,8 +67,7 @@ func NewUpdateConfigFileRequest(
 /*
  * param regionId: Region ID (Required)
  * param name: Name (Required)
- * param data: key 的有效字符包括字母、数字、-、_和.; <br>
-value 每个value长度上限为32KB，整个data的长度不能超过1M; <br>
+ * param data: configFile数据，个数不超过32个
  (Required)
  */
 func NewUpdateConfigFileRequestWithAllParams(
@@ -115,8 +112,7 @@ func (r *UpdateConfigFileRequest) SetName(name string) {
     r.Name = name
 }
 
-/* param data: key 的有效字符包括字母、数字、-、_和.; <br>
-value 每个value长度上限为32KB，整个data的长度不能超过1M; <br>
+/* param data: configFile数据，个数不超过32个
 (Required) */
 func (r *UpdateConfigFileRequest) SetData(data []pod.FileToPath) {
     r.Data = data
