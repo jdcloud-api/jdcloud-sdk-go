@@ -38,6 +38,7 @@ type AttachKeypairRequest struct {
 `no`：禁止SSH密码登录。
   */
     PassWordAuth string `json:"passWordAuth"`
+
 }
 
 /*
@@ -137,6 +138,7 @@ func (r *AttachKeypairRequest) SetInstanceIds(instanceIds []string) {
 func (r *AttachKeypairRequest) SetPassWordAuth(passWordAuth string) {
     r.PassWordAuth = passWordAuth
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

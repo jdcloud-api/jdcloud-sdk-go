@@ -30,6 +30,7 @@ type DescribeInstanceRequest struct {
 
     /* 云主机ID。  */
     InstanceId string `json:"instanceId"`
+
 }
 
 /*
@@ -98,6 +99,7 @@ func (r *DescribeInstanceRequest) SetRegionId(regionId string) {
 func (r *DescribeInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

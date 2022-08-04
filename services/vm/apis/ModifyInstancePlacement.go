@@ -42,6 +42,7 @@ type ModifyInstancePlacementRequest struct {
     /* 是否确认清除本地盘数据，默认 false
  (Optional) */
     ClearLocalDisk *bool `json:"clearLocalDisk"`
+
 }
 
 /*
@@ -142,6 +143,7 @@ func (r *ModifyInstancePlacementRequest) SetBalance(balance bool) {
 func (r *ModifyInstancePlacementRequest) SetClearLocalDisk(clearLocalDisk bool) {
     r.ClearLocalDisk = &clearLocalDisk
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

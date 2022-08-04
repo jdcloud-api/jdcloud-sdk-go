@@ -33,6 +33,7 @@ type CopyImagesRequest struct {
 
     /* 目标地域。  */
     DestinationRegion string `json:"destinationRegion"`
+
 }
 
 /*
@@ -112,6 +113,7 @@ func (r *CopyImagesRequest) SetSourceImageIds(sourceImageIds []string) {
 func (r *CopyImagesRequest) SetDestinationRegion(destinationRegion string) {
     r.DestinationRegion = destinationRegion
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -17,23 +17,11 @@
 package models
 
 
-type Quota struct {
+type InstanceTypeBurstInfo struct {
 
-    /* 资源类型。支持范围：
-`instance`：云主机。
-`instance_cpu`：云主机的CPU。
-`instance_memory`：云主机的内存。
-`instance_local_disk`：云主机的本地盘。
-`keypair`：密钥。
-`image`：镜像。
-`instanceTemplate`：实例模板。
-`imageShare`：共享镜像。
- (Optional) */
-    ResourceType string `json:"resourceType"`
+    /* 每小时获得的积分数 (Optional) */
+    CreditsEarnedPerHour float32 `json:"creditsEarnedPerHour"`
 
-    /* 配额上限。 (Optional) */
-    Limit int `json:"limit"`
-
-    /* 已用配额。 (Optional) */
-    Used int `json:"used"`
+    /* 基准性能倍率 (Optional) */
+    BasePerformance float32 `json:"basePerformance"`
 }

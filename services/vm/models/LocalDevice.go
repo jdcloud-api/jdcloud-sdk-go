@@ -17,23 +17,20 @@
 package models
 
 
-type Quota struct {
+type LocalDevice struct {
 
-    /* 资源类型。支持范围：
-`instance`：云主机。
-`instance_cpu`：云主机的CPU。
-`instance_memory`：云主机的内存。
-`instance_local_disk`：云主机的本地盘。
-`keypair`：密钥。
-`image`：镜像。
-`instanceTemplate`：实例模板。
-`imageShare`：共享镜像。
- (Optional) */
-    ResourceType string `json:"resourceType"`
+    /* 设备类型。 (Optional) */
+    DeviceType string `json:"deviceType"`
 
-    /* 配额上限。 (Optional) */
-    Limit int `json:"limit"`
+    /* 设备的型号。 (Optional) */
+    ProductModel string `json:"productModel"`
 
-    /* 已用配额。 (Optional) */
-    Used int `json:"used"`
+    /* 设备ID。 (Optional) */
+    DeviceId string `json:"deviceId"`
+
+    /* 挂载状态，attached、attaching、detaching。 (Optional) */
+    AttachState string `json:"attachState"`
+
+    /* 配置信息。 (Optional) */
+    Setting interface{} `json:"setting"`
 }

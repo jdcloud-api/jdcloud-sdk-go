@@ -32,6 +32,7 @@ type DisassociateElasticIpRequest struct {
 
     /* 弹性公网IP的ID。  */
     ElasticIpId string `json:"elasticIpId"`
+
 }
 
 /*
@@ -111,6 +112,7 @@ func (r *DisassociateElasticIpRequest) SetInstanceId(instanceId string) {
 func (r *DisassociateElasticIpRequest) SetElasticIpId(elasticIpId string) {
     r.ElasticIpId = elasticIpId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

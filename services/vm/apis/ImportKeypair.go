@@ -34,6 +34,7 @@ type ImportKeypairRequest struct {
 
     /* 密钥对的公钥部分。  */
     PublicKey string `json:"publicKey"`
+
 }
 
 /*
@@ -119,6 +120,7 @@ func (r *ImportKeypairRequest) SetKeyName(keyName string) {
 func (r *ImportKeypairRequest) SetPublicKey(publicKey string) {
     r.PublicKey = publicKey
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

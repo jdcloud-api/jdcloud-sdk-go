@@ -37,6 +37,7 @@ type DetachDiskRequest struct {
 如果此参数传值为True，数据盘的IO会被强制断掉。
  (Optional) */
     Force *bool `json:"force"`
+
 }
 
 /*
@@ -128,6 +129,7 @@ func (r *DetachDiskRequest) SetDiskId(diskId string) {
 func (r *DetachDiskRequest) SetForce(force bool) {
     r.Force = &force
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

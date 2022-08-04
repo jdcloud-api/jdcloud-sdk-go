@@ -30,6 +30,7 @@ type DescribeInstanceTemplateRequest struct {
 
     /* 实例模板ID。  */
     InstanceTemplateId string `json:"instanceTemplateId"`
+
 }
 
 /*
@@ -98,6 +99,7 @@ func (r *DescribeInstanceTemplateRequest) SetRegionId(regionId string) {
 func (r *DescribeInstanceTemplateRequest) SetInstanceTemplateId(instanceTemplateId string) {
     r.InstanceTemplateId = instanceTemplateId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

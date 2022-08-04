@@ -29,6 +29,7 @@ type DescribeInstanceVncUrlRequest struct {
 
     /* 云主机ID。  */
     InstanceId string `json:"instanceId"`
+
 }
 
 /*
@@ -97,6 +98,7 @@ func (r *DescribeInstanceVncUrlRequest) SetRegionId(regionId string) {
 func (r *DescribeInstanceVncUrlRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -22,6 +22,12 @@ import disk "github.com/jdcloud-api/jdcloud-sdk-go/services/disk/models"
 
 type InstanceSpec struct {
 
+    /* 实例所属的专有宿主机池，如果指定了dedicatedHostId,则此参数无效 (Optional) */
+    DedicatedPoolId *string `json:"dedicatedPoolId"`
+
+    /* 专有宿主机ID (Optional) */
+    DedicatedHostId *string `json:"dedicatedHostId"`
+
     /* 高可用组ID。指定此参数后，将默认使用高可用组关联的实例模板创建实例，实例模板中的参数不可覆盖替换。实例模板以外的参数（内网IPv4/Ipv6分配方式、名称、描述、标签）可指定。
  (Optional) */
     AgId *string `json:"agId"`
@@ -40,6 +46,9 @@ type InstanceSpec struct {
 如不指定 `agId` 或 `instanceTemplateId` 以使用实例模板中配置的规格，此参数为必选。
  (Optional) */
     InstanceType *string `json:"instanceType"`
+
+    /* 突发型实例参数配置 (Optional) */
+    BurstSpec *BurstSpec `json:"burstSpec"`
 
     /* 镜像ID。可通过 [DescribeImages](https://docs.jdcloud.com/virtual-machines/api/describeimages) 接口获得指定地域的镜像信息。
 如不指定 `agId` 或 `instanceTemplateId` 以使用实例模板中配置的镜像，此参数为必选。

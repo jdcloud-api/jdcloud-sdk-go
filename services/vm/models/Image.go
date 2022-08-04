@@ -33,7 +33,7 @@ type Image struct {
     /* 镜像的操作系统版本。 (Optional) */
     OsVersion string `json:"osVersion"`
 
-    /* 镜像架构。取值范围：`x86_64、i386`。 (Optional) */
+    /* 镜像架构。取值范围：`x86_64、arm64`。 (Optional) */
     Architecture string `json:"architecture"`
 
     /* 镜像系统盘大小。 (Optional) */

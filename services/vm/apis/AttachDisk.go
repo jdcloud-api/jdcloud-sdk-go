@@ -45,6 +45,7 @@ type AttachDiskRequest struct {
 `false`（默认值）：不随实例删除。
  (Optional) */
     AutoDelete *bool `json:"autoDelete"`
+
 }
 
 /*
@@ -154,6 +155,7 @@ func (r *AttachDiskRequest) SetDeviceName(deviceName string) {
 func (r *AttachDiskRequest) SetAutoDelete(autoDelete bool) {
     r.AutoDelete = &autoDelete
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

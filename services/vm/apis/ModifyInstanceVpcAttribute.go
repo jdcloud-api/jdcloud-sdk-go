@@ -48,6 +48,7 @@ type ModifyInstanceVpcAttributeRequest struct {
 不更换 `vpc` 时不可以指定安全组。
  (Optional) */
     SecurityGroups []string `json:"securityGroups"`
+
 }
 
 /*
@@ -165,6 +166,7 @@ func (r *ModifyInstanceVpcAttributeRequest) SetPrivateIpAddress(privateIpAddress
 func (r *ModifyInstanceVpcAttributeRequest) SetSecurityGroups(securityGroups []string) {
     r.SecurityGroups = securityGroups
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

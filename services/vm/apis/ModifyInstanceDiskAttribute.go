@@ -33,6 +33,7 @@ type ModifyInstanceDiskAttributeRequest struct {
 
     /* 云硬盘列表。 (Optional) */
     DataDisks []vm.InstanceDiskAttribute `json:"dataDisks"`
+
 }
 
 /*
@@ -109,6 +110,7 @@ func (r *ModifyInstanceDiskAttributeRequest) SetInstanceId(instanceId string) {
 func (r *ModifyInstanceDiskAttributeRequest) SetDataDisks(dataDisks []vm.InstanceDiskAttribute) {
     r.DataDisks = dataDisks
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

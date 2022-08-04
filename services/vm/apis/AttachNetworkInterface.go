@@ -37,6 +37,7 @@ type AttachNetworkInterfaceRequest struct {
 受管网卡或授信网卡默认为False并且不支持修改。
  (Optional) */
     AutoDelete *bool `json:"autoDelete"`
+
 }
 
 /*
@@ -128,6 +129,7 @@ func (r *AttachNetworkInterfaceRequest) SetNetworkInterfaceId(networkInterfaceId
 func (r *AttachNetworkInterfaceRequest) SetAutoDelete(autoDelete bool) {
     r.AutoDelete = &autoDelete
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

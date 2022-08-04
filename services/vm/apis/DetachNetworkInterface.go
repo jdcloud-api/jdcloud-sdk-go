@@ -32,6 +32,7 @@ type DetachNetworkInterfaceRequest struct {
 
     /* 弹性网卡ID  */
     NetworkInterfaceId string `json:"networkInterfaceId"`
+
 }
 
 /*
@@ -111,6 +112,7 @@ func (r *DetachNetworkInterfaceRequest) SetInstanceId(instanceId string) {
 func (r *DetachNetworkInterfaceRequest) SetNetworkInterfaceId(networkInterfaceId string) {
     r.NetworkInterfaceId = networkInterfaceId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -35,6 +35,7 @@ type ResizeInstanceRequest struct {
 
     /* 是否强制调配，默认为 `false`。如果指定为 `true`, 将会清除本地数据盘。 (Optional) */
     Force *bool `json:"force"`
+
 }
 
 /*
@@ -122,6 +123,7 @@ func (r *ResizeInstanceRequest) SetInstanceType(instanceType string) {
 func (r *ResizeInstanceRequest) SetForce(force bool) {
     r.Force = &force
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

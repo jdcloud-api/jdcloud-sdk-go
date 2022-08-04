@@ -41,6 +41,7 @@ type ExportImageRequest struct {
 
     /* 用户导出镜像的幂等性保证。每次导出请传入不同的值，如果传值与某次的clientToken相同，则返还同一个请求结果，不能超过64个字符。 (Optional) */
     ClientToken *string `json:"clientToken"`
+
 }
 
 /*
@@ -147,6 +148,7 @@ func (r *ExportImageRequest) SetOssPrefix(ossPrefix string) {
 func (r *ExportImageRequest) SetClientToken(clientToken string) {
     r.ClientToken = &clientToken
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

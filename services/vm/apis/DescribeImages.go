@@ -71,7 +71,7 @@ type DescribeImagesRequest struct {
     /* 已废弃。 (Optional) */
     ServiceCode *string `json:"serviceCode"`
 
-    /* CPU架构。支持范围：`x86_64`、`aarch64`。 (Optional) */
+    /* CPU架构。支持范围：`x86_64`、`arm64`。 (Optional) */
     Architecture *string `json:"architecture"`
 
     /* 页码；默认为1。 (Optional) */
@@ -79,6 +79,7 @@ type DescribeImagesRequest struct {
 
     /* 分页大小；<br>默认为20；取值范围[10, 100]。 (Optional) */
     PageSize *int `json:"pageSize"`
+
 }
 
 /*
@@ -128,7 +129,7 @@ func NewDescribeImagesRequest(
  (Optional)
  * param status: 根据镜像状态查询。参考 [镜像状态](https://docs.jdcloud.com/virtual-machines/api/image_status) (Optional)
  * param serviceCode: 已废弃。 (Optional)
- * param architecture: CPU架构。支持范围：`x86_64`、`aarch64`。 (Optional)
+ * param architecture: CPU架构。支持范围：`x86_64`、`arm64`。 (Optional)
  * param pageNumber: 页码；默认为1。 (Optional)
  * param pageSize: 分页大小；<br>默认为20；取值范围[10, 100]。 (Optional)
  */
@@ -250,7 +251,7 @@ func (r *DescribeImagesRequest) SetServiceCode(serviceCode string) {
     r.ServiceCode = &serviceCode
 }
 
-/* param architecture: CPU架构。支持范围：`x86_64`、`aarch64`。(Optional) */
+/* param architecture: CPU架构。支持范围：`x86_64`、`arm64`。(Optional) */
 func (r *DescribeImagesRequest) SetArchitecture(architecture string) {
     r.Architecture = &architecture
 }
@@ -264,6 +265,7 @@ func (r *DescribeImagesRequest) SetPageNumber(pageNumber int) {
 func (r *DescribeImagesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

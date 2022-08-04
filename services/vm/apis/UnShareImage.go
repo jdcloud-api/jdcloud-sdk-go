@@ -32,6 +32,7 @@ type UnShareImageRequest struct {
 
     /* 需要取消的京东云帐户列表。  */
     Pins []string `json:"pins"`
+
 }
 
 /*
@@ -111,6 +112,7 @@ func (r *UnShareImageRequest) SetImageId(imageId string) {
 func (r *UnShareImageRequest) SetPins(pins []string) {
     r.Pins = pins
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

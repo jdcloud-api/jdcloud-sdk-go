@@ -31,6 +31,7 @@ type CreateKeypairRequest struct {
 只允许数字、大小写字母、下划线“_”及中划线“-”，不超过32个字符。
   */
     KeyName string `json:"keyName"`
+
 }
 
 /*
@@ -105,6 +106,7 @@ func (r *CreateKeypairRequest) SetRegionId(regionId string) {
 func (r *CreateKeypairRequest) SetKeyName(keyName string) {
     r.KeyName = keyName
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

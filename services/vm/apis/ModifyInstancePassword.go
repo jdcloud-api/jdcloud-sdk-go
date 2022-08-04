@@ -36,6 +36,7 @@ type ModifyInstancePasswordRequest struct {
 更多密码输入要求请参见 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。
   */
     Password string `json:"password"`
+
 }
 
 /*
@@ -127,6 +128,7 @@ func (r *ModifyInstancePasswordRequest) SetInstanceId(instanceId string) {
 func (r *ModifyInstancePasswordRequest) SetPassword(password string) {
     r.Password = password
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

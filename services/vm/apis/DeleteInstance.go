@@ -29,6 +29,7 @@ type DeleteInstanceRequest struct {
 
     /* 云主机ID。  */
     InstanceId string `json:"instanceId"`
+
 }
 
 /*
@@ -97,6 +98,7 @@ func (r *DeleteInstanceRequest) SetRegionId(regionId string) {
 func (r *DeleteInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

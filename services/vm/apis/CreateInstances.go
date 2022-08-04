@@ -41,6 +41,7 @@ type CreateInstancesRequest struct {
     /* 用于保证请求的幂等性。由客户端生成，并确保不同请求中该参数唯一，长度不能超过64个字符。
  (Optional) */
     ClientToken *string `json:"clientToken"`
+
 }
 
 /*
@@ -136,6 +137,7 @@ func (r *CreateInstancesRequest) SetMaxCount(maxCount int) {
 func (r *CreateInstancesRequest) SetClientToken(clientToken string) {
     r.ClientToken = &clientToken
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
