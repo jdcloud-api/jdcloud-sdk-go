@@ -29,6 +29,7 @@ type RebootInstanceRequest struct {
 
     /* 云主机ID。  */
     InstanceId string `json:"instanceId"`
+
 }
 
 /*
@@ -97,6 +98,7 @@ func (r *RebootInstanceRequest) SetRegionId(regionId string) {
 func (r *RebootInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -32,6 +32,7 @@ type ModifyIpWhiteListRequest struct {
 
     /* 修改后的IP白名单列表，IP格式为CIDR表示法（x.x.x.x/x），0.0.0.0/0表示任何IP、网络都可以访问  */
     IpWhiteList []string `json:"ipWhiteList"`
+
 }
 
 /*
@@ -111,6 +112,7 @@ func (r *ModifyIpWhiteListRequest) SetCacheInstanceId(cacheInstanceId string) {
 func (r *ModifyIpWhiteListRequest) SetIpWhiteList(ipWhiteList []string) {
     r.IpWhiteList = ipWhiteList
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

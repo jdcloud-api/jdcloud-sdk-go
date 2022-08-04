@@ -45,6 +45,7 @@ type DescribeBackupsRequest struct {
 
     /* 备份任务ID (Optional) */
     BaseId *string `json:"baseId"`
+
 }
 
 /*
@@ -153,6 +154,7 @@ func (r *DescribeBackupsRequest) SetEndTime(endTime string) {
 func (r *DescribeBackupsRequest) SetBaseId(baseId string) {
     r.BaseId = &baseId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

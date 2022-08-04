@@ -35,6 +35,7 @@ type ModifyImageAttributeRequest struct {
 
     /* 镜像描述。参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。 (Optional) */
     Description *string `json:"description"`
+
 }
 
 /*
@@ -119,6 +120,7 @@ func (r *ModifyImageAttributeRequest) SetName(name string) {
 func (r *ModifyImageAttributeRequest) SetDescription(description string) {
     r.Description = &description
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

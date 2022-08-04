@@ -27,6 +27,7 @@ type DescribeUserQuotaRequest struct {
 
     /* 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2  */
     RegionId string `json:"regionId"`
+
 }
 
 /*
@@ -84,6 +85,7 @@ func NewDescribeUserQuotaRequestWithoutParam() *DescribeUserQuotaRequest {
 func (r *DescribeUserQuotaRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

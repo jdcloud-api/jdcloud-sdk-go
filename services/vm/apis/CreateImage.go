@@ -46,6 +46,7 @@ type CreateImageRequest struct {
 如果使用 `deviceName` 指定了与实例中相同的盘符，那么实例中对应的云盘数据盘也不会制作快照，并使用新指定的参数进行替换。
  (Optional) */
     DataDisks []vm.InstanceDiskAttachmentSpec `json:"dataDisks"`
+
 }
 
 /*
@@ -156,6 +157,7 @@ func (r *CreateImageRequest) SetDescription(description string) {
 func (r *CreateImageRequest) SetDataDisks(dataDisks []vm.InstanceDiskAttachmentSpec) {
     r.DataDisks = dataDisks
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

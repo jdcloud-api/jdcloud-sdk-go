@@ -33,6 +33,7 @@ type DescribeTaskProgressListRequest struct {
 
     /* 任务类型：resize表示变配，upgrade表示升级 (Optional) */
     TaskType *string `json:"taskType"`
+
 }
 
 /*
@@ -109,6 +110,7 @@ func (r *DescribeTaskProgressListRequest) SetCacheInstanceId(cacheInstanceId str
 func (r *DescribeTaskProgressListRequest) SetTaskType(taskType string) {
     r.TaskType = &taskType
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -65,6 +65,10 @@ type InstanceTemplateData struct {
     /* 使用镜像中的登录凭证，无须再指定密码或密钥（指定无效）。
 `yes`：使用镜像登录凭证。
 `no`：不使用镜像登录凭证。
-仅使用私有或共享镜像时此参数有效。 (Optional) */
+仅使用私有或共享镜像时此参数有效。
+ (Optional) */
     ImageInherit string `json:"imageInherit"`
+
+    /* 突发型实例参数信息 (Optional) */
+    BurstInfo InstanceTemplateBurstInfo `json:"burstInfo"`
 }

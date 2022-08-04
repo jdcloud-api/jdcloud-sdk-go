@@ -33,6 +33,7 @@ type DescribeCacheAnalysisListRequest struct {
 
     /* 格式:yyyy-MM-dd,表示查询某一天的缓存分析列表  */
     Date string `json:"date"`
+
 }
 
 /*
@@ -112,6 +113,7 @@ func (r *DescribeCacheAnalysisListRequest) SetCacheInstanceId(cacheInstanceId st
 func (r *DescribeCacheAnalysisListRequest) SetDate(date string) {
     r.Date = date
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

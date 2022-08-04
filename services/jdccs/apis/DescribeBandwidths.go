@@ -35,9 +35,6 @@ type DescribeBandwidthsRequest struct {
     /* 分页大小，默认为20 (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* 是否查询全部，默认分页 (Optional) */
-    All *int `json:"all"`
-
     /* 线路类型 dynamicBGP:动态BGP thirdLineBGP:三线BGP telecom:电信单线 unicom:联通单线 mobile:移动单线 (Optional) */
     LineType *string `json:"lineType"`
 
@@ -56,6 +53,7 @@ type DescribeBandwidthsRequest struct {
 
     /* null (Optional) */
     Sorts []common.Sort `json:"sorts"`
+
 }
 
 /*
@@ -82,7 +80,6 @@ func NewDescribeBandwidthsRequest(
  * param idc: IDC机房ID (Required)
  * param pageNumber: 页码, 默认为1 (Optional)
  * param pageSize: 分页大小，默认为20 (Optional)
- * param all: 是否查询全部，默认分页 (Optional)
  * param lineType: 线路类型 dynamicBGP:动态BGP thirdLineBGP:三线BGP telecom:电信单线 unicom:联通单线 mobile:移动单线 (Optional)
  * param chargeType: 计费方式 fixedBandwidth:固定带宽 95thPercentile:95峰值 merge95thPercentile:合并95峰值 (Optional)
  * param bandwidthName: 带宽（出口）名称 (Optional)
@@ -95,7 +92,6 @@ func NewDescribeBandwidthsRequestWithAllParams(
     idc string,
     pageNumber *int,
     pageSize *int,
-    all *int,
     lineType *string,
     chargeType *string,
     bandwidthName *string,
@@ -114,7 +110,6 @@ func NewDescribeBandwidthsRequestWithAllParams(
         Idc: idc,
         PageNumber: pageNumber,
         PageSize: pageSize,
-        All: all,
         LineType: lineType,
         ChargeType: chargeType,
         BandwidthName: bandwidthName,
@@ -152,11 +147,6 @@ func (r *DescribeBandwidthsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
-/* param all: 是否查询全部，默认分页(Optional) */
-func (r *DescribeBandwidthsRequest) SetAll(all int) {
-    r.All = &all
-}
-
 /* param lineType: 线路类型 dynamicBGP:动态BGP thirdLineBGP:三线BGP telecom:电信单线 unicom:联通单线 mobile:移动单线(Optional) */
 func (r *DescribeBandwidthsRequest) SetLineType(lineType string) {
     r.LineType = &lineType
@@ -187,6 +177,7 @@ func (r *DescribeBandwidthsRequest) SetFilters(filters []common.Filter) {
 func (r *DescribeBandwidthsRequest) SetSorts(sorts []common.Sort) {
     r.Sorts = sorts
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

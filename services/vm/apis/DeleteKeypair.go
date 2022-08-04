@@ -29,6 +29,7 @@ type DeleteKeypairRequest struct {
 
     /* 密钥名称。  */
     KeyName string `json:"keyName"`
+
 }
 
 /*
@@ -97,6 +98,7 @@ func (r *DeleteKeypairRequest) SetRegionId(regionId string) {
 func (r *DeleteKeypairRequest) SetKeyName(keyName string) {
     r.KeyName = keyName
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

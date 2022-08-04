@@ -67,6 +67,16 @@ type RebuildInstanceRequest struct {
 **Windows系统**：支持 `bat` 和 `powershell`，编码前须分别以 `<cmd></cmd>和<powershell></powershell>` 作为内容首、尾行。
  (Optional) */
     Userdata []vm.Userdata `json:"userdata"`
+
+    /* 密码授权，若存在密匙，则根据此参数决定是否使用密码，若没有密匙，此参数无效，会强制使用密码。
+若不使用密码，且密匙对解绑后，用户需重置密码，方可使用密码登录。
+此参数在windows系统中必须为yes。
+ (Optional) */
+    PassWordAuth *string `json:"passWordAuth"`
+
+    /* 继承镜像中的登录验证方式，"yes"为使用，"no"为不使用，""默认为"no" (Optional) */
+    ImageInherit *string `json:"imageInherit"`
+
 }
 
 /*
@@ -120,6 +130,11 @@ func NewRebuildInstanceRequest(
 **linux系统**：支持bash和python，编码前须分别以 `#!/bin/bash` 和 `#!/usr/bin/env python` 作为内容首行。
 **Windows系统**：支持 `bat` 和 `powershell`，编码前须分别以 `<cmd></cmd>和<powershell></powershell>` 作为内容首、尾行。
  (Optional)
+ * param passWordAuth: 密码授权，若存在密匙，则根据此参数决定是否使用密码，若没有密匙，此参数无效，会强制使用密码。
+若不使用密码，且密匙对解绑后，用户需重置密码，方可使用密码登录。
+此参数在windows系统中必须为yes。
+ (Optional)
+ * param imageInherit: 继承镜像中的登录验证方式，"yes"为使用，"no"为不使用，""默认为"no" (Optional)
  */
 func NewRebuildInstanceRequestWithAllParams(
     regionId string,
@@ -130,6 +145,8 @@ func NewRebuildInstanceRequestWithAllParams(
     hostname *string,
     metadata []vm.Metadata,
     userdata []vm.Userdata,
+    passWordAuth *string,
+    imageInherit *string,
 ) *RebuildInstanceRequest {
 
     return &RebuildInstanceRequest{
@@ -147,6 +164,8 @@ func NewRebuildInstanceRequestWithAllParams(
         Hostname: hostname,
         Metadata: metadata,
         Userdata: userdata,
+        PassWordAuth: passWordAuth,
+        ImageInherit: imageInherit,
     }
 }
 
@@ -221,6 +240,20 @@ func (r *RebuildInstanceRequest) SetMetadata(metadata []vm.Metadata) {
 func (r *RebuildInstanceRequest) SetUserdata(userdata []vm.Userdata) {
     r.Userdata = userdata
 }
+
+/* param passWordAuth: 密码授权，若存在密匙，则根据此参数决定是否使用密码，若没有密匙，此参数无效，会强制使用密码。
+若不使用密码，且密匙对解绑后，用户需重置密码，方可使用密码登录。
+此参数在windows系统中必须为yes。
+(Optional) */
+func (r *RebuildInstanceRequest) SetPassWordAuth(passWordAuth string) {
+    r.PassWordAuth = &passWordAuth
+}
+
+/* param imageInherit: 继承镜像中的登录验证方式，"yes"为使用，"no"为不使用，""默认为"no"(Optional) */
+func (r *RebuildInstanceRequest) SetImageInherit(imageInherit string) {
+    r.ImageInherit = &imageInherit
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

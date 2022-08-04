@@ -57,6 +57,7 @@ type ModifyInstanceAttributeRequest struct {
 **Windows系统**：支持 `bat` 和 `powershell` ，编码前须分别以 `<cmd></cmd>和<powershell></powershell>` 作为内容首、尾行。
  (Optional) */
     Userdata []vm.Userdata `json:"userdata"`
+
 }
 
 /*
@@ -189,6 +190,7 @@ func (r *ModifyInstanceAttributeRequest) SetMetadata(metadata []vm.Metadata) {
 func (r *ModifyInstanceAttributeRequest) SetUserdata(userdata []vm.Userdata) {
     r.Userdata = userdata
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

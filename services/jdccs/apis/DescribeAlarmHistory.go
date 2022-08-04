@@ -42,6 +42,7 @@ type DescribeAlarmHistoryRequest struct {
 
     /* 查询时间范围的结束时间， UNIX时间戳 (Optional) */
     EndTime *int `json:"endTime"`
+
 }
 
 /*
@@ -136,6 +137,7 @@ func (r *DescribeAlarmHistoryRequest) SetStartTime(startTime int) {
 func (r *DescribeAlarmHistoryRequest) SetEndTime(endTime int) {
     r.EndTime = &endTime
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

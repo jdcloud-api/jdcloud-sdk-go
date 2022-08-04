@@ -40,6 +40,7 @@ type DescribeInstanceTemplatesRequest struct {
 `instanceTemplateId`: 实例模板ID，精确匹配，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
+
 }
 
 /*
@@ -127,6 +128,7 @@ func (r *DescribeInstanceTemplatesRequest) SetPageSize(pageSize int) {
 func (r *DescribeInstanceTemplatesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

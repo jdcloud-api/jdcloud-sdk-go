@@ -41,6 +41,7 @@ type ModifyAccountRequest struct {
 
     /* 账号备注 (Optional) */
     AccountDescription *string `json:"accountDescription"`
+
 }
 
 /*
@@ -144,6 +145,7 @@ func (r *ModifyAccountRequest) SetAccountPrivilege(accountPrivilege string) {
 func (r *ModifyAccountRequest) SetAccountDescription(accountDescription string) {
     r.AccountDescription = &accountDescription
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

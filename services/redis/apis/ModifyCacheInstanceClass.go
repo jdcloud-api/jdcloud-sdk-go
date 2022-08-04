@@ -35,6 +35,7 @@ type ModifyCacheInstanceClassRequest struct {
 
     /* 自定义分片数，只对自定义分片规格实例有效 (Optional) */
     ShardNumber *int `json:"shardNumber"`
+
 }
 
 /*
@@ -122,6 +123,7 @@ func (r *ModifyCacheInstanceClassRequest) SetCacheInstanceClass(cacheInstanceCla
 func (r *ModifyCacheInstanceClassRequest) SetShardNumber(shardNumber int) {
     r.ShardNumber = &shardNumber
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

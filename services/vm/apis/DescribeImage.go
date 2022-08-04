@@ -30,6 +30,7 @@ type DescribeImageRequest struct {
 
     /* 镜像ID。  */
     ImageId string `json:"imageId"`
+
 }
 
 /*
@@ -98,6 +99,7 @@ func (r *DescribeImageRequest) SetRegionId(regionId string) {
 func (r *DescribeImageRequest) SetImageId(imageId string) {
     r.ImageId = imageId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

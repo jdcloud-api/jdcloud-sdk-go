@@ -36,6 +36,7 @@ type CreateInstanceTemplateRequest struct {
 
     /* 实例模板的描述，参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。 (Optional) */
     Description *string `json:"description"`
+
 }
 
 /*
@@ -123,6 +124,7 @@ func (r *CreateInstanceTemplateRequest) SetName(name string) {
 func (r *CreateInstanceTemplateRequest) SetDescription(description string) {
     r.Description = &description
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

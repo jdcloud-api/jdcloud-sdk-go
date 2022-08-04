@@ -27,7 +27,7 @@ type ImportImageRequest struct {
     /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 镜像架构。取值范围：`x86_64、i386`。  */
+    /* 镜像架构。取值范围：`x86_64、arm64`。  */
     Architecture string `json:"architecture"`
 
     /* 镜像的操作系统类型。取值范围：`windows、linux`。  */
@@ -61,11 +61,12 @@ type ImportImageRequest struct {
 
     /* 用户导出镜像的幂等性保证。每次导出请传入不同的值，如果传值与某次的clientToken相同，则返还同一个请求结果，不能超过64个字符。 (Optional) */
     ClientToken *string `json:"clientToken"`
+
 }
 
 /*
  * param regionId: 地域ID。 (Required)
- * param architecture: 镜像架构。取值范围：`x86_64、i386`。 (Required)
+ * param architecture: 镜像架构。取值范围：`x86_64、arm64`。 (Required)
  * param osType: 镜像的操作系统类型。取值范围：`windows、linux`。 (Required)
  * param platform: 镜像的操作系统平台名称。
 取值范围：`Ubuntu、CentOS、Windows Server、Other Linux、Other Windows`。
@@ -108,7 +109,7 @@ func NewImportImageRequest(
 
 /*
  * param regionId: 地域ID。 (Required)
- * param architecture: 镜像架构。取值范围：`x86_64、i386`。 (Required)
+ * param architecture: 镜像架构。取值范围：`x86_64、arm64`。 (Required)
  * param osType: 镜像的操作系统类型。取值范围：`windows、linux`。 (Required)
  * param platform: 镜像的操作系统平台名称。
 取值范围：`Ubuntu、CentOS、Windows Server、Other Linux、Other Windows`。
@@ -177,7 +178,7 @@ func (r *ImportImageRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param architecture: 镜像架构。取值范围：`x86_64、i386`。(Required) */
+/* param architecture: 镜像架构。取值范围：`x86_64、arm64`。(Required) */
 func (r *ImportImageRequest) SetArchitecture(architecture string) {
     r.Architecture = architecture
 }
@@ -233,6 +234,7 @@ func (r *ImportImageRequest) SetForceImport(forceImport bool) {
 func (r *ImportImageRequest) SetClientToken(clientToken string) {
     r.ClientToken = &clientToken
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

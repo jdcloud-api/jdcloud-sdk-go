@@ -33,6 +33,7 @@ type DescribeClientIpDetailRequest struct {
 
     /* 客户端IP  */
     Ip string `json:"ip"`
+
 }
 
 /*
@@ -112,6 +113,7 @@ func (r *DescribeClientIpDetailRequest) SetCacheInstanceId(cacheInstanceId strin
 func (r *DescribeClientIpDetailRequest) SetIp(ip string) {
     r.Ip = ip
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

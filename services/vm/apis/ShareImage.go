@@ -32,6 +32,7 @@ type ShareImageRequest struct {
 
     /* 共享的目标京东云帐户列表。  */
     Pins []string `json:"pins"`
+
 }
 
 /*
@@ -111,6 +112,7 @@ func (r *ShareImageRequest) SetImageId(imageId string) {
 func (r *ShareImageRequest) SetPins(pins []string) {
     r.Pins = pins
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

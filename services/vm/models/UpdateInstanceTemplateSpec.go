@@ -85,4 +85,7 @@ type UpdateInstanceTemplateSpec struct {
 
     /* 传 `true` 则会清空实例模板配置的公网IP。 (Optional) */
     NoElasticIp *bool `json:"noElasticIp"`
+
+    /* 突发型实例参数配置。传入 `null` 表示忽略，否则以新传入的为准。如指定了该参数则覆盖原有参数。 (Optional) */
+    BurstSpec *InstanceTemplateBurstSpec `json:"burstSpec"`
 }

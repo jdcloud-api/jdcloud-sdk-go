@@ -56,6 +56,7 @@ type DescribeInstancesRequest struct {
 `elasticIpAddress`: 公网IP地址，精确匹配，支持单个。该条件会将公网IP转换成 `networkInterfaceId` 进行查询，所以与 `networkInterfaceId` 为或者的关系。
  (Optional) */
     Filters []common.Filter `json:"filters"`
+
 }
 
 /*
@@ -177,6 +178,7 @@ func (r *DescribeInstancesRequest) SetTags(tags []vm.TagFilter) {
 func (r *DescribeInstancesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

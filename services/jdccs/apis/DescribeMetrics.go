@@ -24,6 +24,7 @@ import (
 type DescribeMetricsRequest struct {
 
     core.JDCloudRequest
+
 }
 
 /*
@@ -70,6 +71,7 @@ func NewDescribeMetricsRequestWithoutParam() *DescribeMetricsRequest {
         },
     }
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

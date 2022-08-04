@@ -29,6 +29,7 @@ type SwitchAlarmRequest struct {
 
     /* 规则状态 disabled:禁用 enabled:启用 (Optional) */
     Status *string `json:"status"`
+
 }
 
 /*
@@ -94,6 +95,7 @@ func (r *SwitchAlarmRequest) SetAlarmId(alarmId string) {
 func (r *SwitchAlarmRequest) SetStatus(status string) {
     r.Status = &status
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

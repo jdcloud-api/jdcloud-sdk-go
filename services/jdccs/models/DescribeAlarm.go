@@ -69,10 +69,4 @@ type DescribeAlarm struct {
 
     /* 交换机信息 (Optional) */
     Switchboard []Switchboard `json:"switchboard"`
-
-    /* 通知对象用户ID,若多个用逗号分隔 (Optional) */
-    UserId string `json:"userId"`
-
-    /* 通知对象组ID (Optional) */
-    GroupId string `json:"groupId"`
 }

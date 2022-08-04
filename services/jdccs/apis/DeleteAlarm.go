@@ -26,6 +26,7 @@ type DeleteAlarmRequest struct {
 
     /* 报警规则ID  */
     AlarmId string `json:"alarmId"`
+
 }
 
 /*
@@ -83,6 +84,7 @@ func NewDeleteAlarmRequestWithoutParam() *DeleteAlarmRequest {
 func (r *DeleteAlarmRequest) SetAlarmId(alarmId string) {
     r.AlarmId = alarmId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

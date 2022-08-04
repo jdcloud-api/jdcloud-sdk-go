@@ -33,6 +33,7 @@ type SetDisableCommandsRequest struct {
 
     /* 禁用命令列表  */
     DisableCommands []redis.DisableCommands `json:"disableCommands"`
+
 }
 
 /*
@@ -112,6 +113,7 @@ func (r *SetDisableCommandsRequest) SetCacheInstanceId(cacheInstanceId string) {
 func (r *SetDisableCommandsRequest) SetDisableCommands(disableCommands []redis.DisableCommands) {
     r.DisableCommands = disableCommands
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

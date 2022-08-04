@@ -76,6 +76,10 @@ type InstanceTemplateSpec struct {
     /* 是否使用镜像中的登录凭证，不再指定密码或密钥。
 `yes`：使用镜像登录凭证。
 `no`（默认值）：不使用镜像登录凭证。
-仅使用私有或共享镜像时此参数有效。若指定`imageInherit=yes`则指定的密码或密钥将无效。 (Optional) */
+仅使用私有或共享镜像时此参数有效。若指定`imageInherit=yes`则指定的密码或密钥将无效。
+ (Optional) */
     ImageInherit *string `json:"imageInherit"`
+
+    /* 突发型实例参数配置 (Optional) */
+    BurstSpec *InstanceTemplateBurstSpec `json:"burstSpec"`
 }

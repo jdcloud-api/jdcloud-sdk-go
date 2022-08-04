@@ -33,6 +33,7 @@ type DescribeTrafficSamplingRequest struct {
 
     /* 查询时间范围的结束时间， UNIX时间戳，（支持查询最近30分钟数据且时间范围不超过5分钟）  */
     EndTime int `json:"endTime"`
+
 }
 
 /*
@@ -112,6 +113,7 @@ func (r *DescribeTrafficSamplingRequest) SetStartTime(startTime int) {
 func (r *DescribeTrafficSamplingRequest) SetEndTime(endTime int) {
     r.EndTime = endTime
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

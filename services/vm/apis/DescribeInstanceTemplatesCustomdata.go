@@ -33,6 +33,7 @@ type DescribeInstanceTemplatesCustomdataRequest struct {
 `instanceTemplateId`: 实例模板ID，精确匹配，最多支持10个
  (Optional) */
     Filters []common.Filter `json:"filters"`
+
 }
 
 /*
@@ -102,6 +103,7 @@ func (r *DescribeInstanceTemplatesCustomdataRequest) SetRegionId(regionId string
 func (r *DescribeInstanceTemplatesCustomdataRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -47,6 +47,7 @@ type CreateBigKeyAnalysisRequest struct {
 
     /* top值，范围10~1000 (Optional) */
     Top *int `json:"top"`
+
 }
 
 /*
@@ -163,6 +164,7 @@ func (r *CreateBigKeyAnalysisRequest) SetZsetSize(zsetSize int) {
 func (r *CreateBigKeyAnalysisRequest) SetTop(top int) {
     r.Top = &top
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

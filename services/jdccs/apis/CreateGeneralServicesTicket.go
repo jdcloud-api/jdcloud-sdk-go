@@ -54,6 +54,7 @@ type CreateGeneralServicesTicketRequest struct {
 
     /* 附件 (Optional) */
     Attach []jdccs.Attach `json:"attach"`
+
 }
 
 /*
@@ -180,6 +181,7 @@ func (r *CreateGeneralServicesTicketRequest) SetRemarks(remarks string) {
 func (r *CreateGeneralServicesTicketRequest) SetAttach(attach []jdccs.Attach) {
     r.Attach = attach
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

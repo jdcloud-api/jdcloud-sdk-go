@@ -71,6 +71,7 @@ type CreateAlarmRequest struct {
 
     /* 通知对象组ID (Optional) */
     GroupId *string `json:"groupId"`
+
 }
 
 /*
@@ -245,6 +246,7 @@ func (r *CreateAlarmRequest) SetUserId(userId string) {
 func (r *CreateAlarmRequest) SetGroupId(groupId string) {
     r.GroupId = &groupId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

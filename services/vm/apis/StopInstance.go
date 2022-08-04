@@ -38,6 +38,7 @@ type StopInstanceRequest struct {
 `stopCharging`：停机后停止计费，释放实例资源。默认值为空。
  (Optional) */
     ChargeOnStopped *string `json:"chargeOnStopped"`
+
 }
 
 /*
@@ -126,6 +127,7 @@ func (r *StopInstanceRequest) SetInstanceId(instanceId string) {
 func (r *StopInstanceRequest) SetChargeOnStopped(chargeOnStopped string) {
     r.ChargeOnStopped = &chargeOnStopped
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

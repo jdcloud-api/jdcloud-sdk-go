@@ -48,6 +48,7 @@ type ImageTasksRequest struct {
 
     /* 分页大小；取值范围[10, 100]。 (Optional) */
     PageSize *int `json:"pageSize"`
+
 }
 
 /*
@@ -161,6 +162,7 @@ func (r *ImageTasksRequest) SetPageNumber(pageNumber int) {
 func (r *ImageTasksRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

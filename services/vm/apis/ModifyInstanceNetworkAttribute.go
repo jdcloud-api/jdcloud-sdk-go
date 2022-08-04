@@ -33,6 +33,7 @@ type ModifyInstanceNetworkAttributeRequest struct {
 
     /* 弹性网卡列表。  */
     Networks []vm.InstanceNetworkAttribute `json:"networks"`
+
 }
 
 /*
@@ -112,6 +113,7 @@ func (r *ModifyInstanceNetworkAttributeRequest) SetInstanceId(instanceId string)
 func (r *ModifyInstanceNetworkAttributeRequest) SetNetworks(networks []vm.InstanceNetworkAttribute) {
     r.Networks = networks
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

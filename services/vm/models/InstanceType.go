@@ -28,6 +28,9 @@ type InstanceType struct {
     /* cpu个数。 (Optional) */
     Cpu int `json:"cpu"`
 
+    /* 镜像架构。取值范围：`x86_64、arm64`。 (Optional) */
+    Architecture string `json:"architecture"`
+
     /* 内存大小。 (Optional) */
     MemoryMB int `json:"memoryMB"`
 
@@ -51,4 +54,7 @@ type InstanceType struct {
 
     /* 实例规格代数。 (Optional) */
     Generation int `json:"generation"`
+
+    /* 突发型规格信息 (Optional) */
+    BurstInfo InstanceTypeBurstInfo `json:"burstInfo"`
 }

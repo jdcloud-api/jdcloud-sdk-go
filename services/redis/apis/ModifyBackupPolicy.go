@@ -38,6 +38,7 @@ type ModifyBackupPolicyRequest struct {
 
     /* 备份周期，包括：Monday，Tuesday，Wednesday，Thursday，Friday，Saturday，Sunday，多个用逗号分隔  */
     BackupPeriod string `json:"backupPeriod"`
+
 }
 
 /*
@@ -136,6 +137,7 @@ func (r *ModifyBackupPolicyRequest) SetBackupTime(backupTime string) {
 func (r *ModifyBackupPolicyRequest) SetBackupPeriod(backupPeriod string) {
     r.BackupPeriod = backupPeriod
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -32,6 +32,7 @@ type DetachKeypairRequest struct {
 
     /* 要解绑的云主机实例ID列表。  */
     InstanceIds []string `json:"instanceIds"`
+
 }
 
 /*
@@ -111,6 +112,7 @@ func (r *DetachKeypairRequest) SetKeyName(keyName string) {
 func (r *DetachKeypairRequest) SetInstanceIds(instanceIds []string) {
     r.InstanceIds = instanceIds
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

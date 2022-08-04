@@ -39,6 +39,7 @@ type UpdateInstanceTemplateRequest struct {
 
     /* 实例模板配置信息。 (Optional) */
     InstanceTemplateData *vm.UpdateInstanceTemplateSpec `json:"instanceTemplateData"`
+
 }
 
 /*
@@ -131,6 +132,7 @@ func (r *UpdateInstanceTemplateRequest) SetDescription(description string) {
 func (r *UpdateInstanceTemplateRequest) SetInstanceTemplateData(instanceTemplateData *vm.UpdateInstanceTemplateSpec) {
     r.InstanceTemplateData = instanceTemplateData
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

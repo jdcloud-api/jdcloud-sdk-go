@@ -27,6 +27,7 @@ type DescribeIdcOverviewRequest struct {
 
     /* IDC机房ID  */
     Idc string `json:"idc"`
+
 }
 
 /*
@@ -84,6 +85,7 @@ func NewDescribeIdcOverviewRequestWithoutParam() *DescribeIdcOverviewRequest {
 func (r *DescribeIdcOverviewRequest) SetIdc(idc string) {
     r.Idc = idc
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

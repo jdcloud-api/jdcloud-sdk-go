@@ -35,9 +35,6 @@ type DescribeCabinetsRequest struct {
     /* 分页大小，默认为20 (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* 是否查询全部，默认分页 (Optional) */
-    All *int `json:"all"`
-
     /* 机柜类型 formal:正式机柜 reserved:预留机柜 (Optional) */
     CabinetType *string `json:"cabinetType"`
 
@@ -46,9 +43,6 @@ type DescribeCabinetsRequest struct {
 
     /* 机柜编码 (Optional) */
     CabinetNo *string `json:"cabinetNo"`
-
-    /* 机柜关电工单使用 yes (Optional) */
-    DeviceMustBeEmpty *string `json:"deviceMustBeEmpty"`
 
     /* roomNo - 房间号，精确匹配，支持多个
 cabinetId - 机柜ID，精确匹配，支持多个
@@ -59,6 +53,7 @@ cabinetOpenStatus - 机柜开通状态，精确匹配，支持多个
 
     /* cabinetNo - 机柜编码 roomNo - 房间号 (Optional) */
     Sorts []common.Sort `json:"sorts"`
+
 }
 
 /*
@@ -85,11 +80,9 @@ func NewDescribeCabinetsRequest(
  * param idc: IDC机房ID (Required)
  * param pageNumber: 页码, 默认为1 (Optional)
  * param pageSize: 分页大小，默认为20 (Optional)
- * param all: 是否查询全部，默认分页 (Optional)
  * param cabinetType: 机柜类型 formal:正式机柜 reserved:预留机柜 (Optional)
  * param cabinetOpenStatus: 机柜开通状态 disabled:未开通 enabling:开通中 enabled:已开通 disabling:关电中 (Optional)
  * param cabinetNo: 机柜编码 (Optional)
- * param deviceMustBeEmpty: 机柜关电工单使用 yes (Optional)
  * param filters: roomNo - 房间号，精确匹配，支持多个
 cabinetId - 机柜ID，精确匹配，支持多个
 cabinetNo - 机柜编码，精确匹配，支持多个
@@ -101,11 +94,9 @@ func NewDescribeCabinetsRequestWithAllParams(
     idc string,
     pageNumber *int,
     pageSize *int,
-    all *int,
     cabinetType *string,
     cabinetOpenStatus *string,
     cabinetNo *string,
-    deviceMustBeEmpty *string,
     filters []common.Filter,
     sorts []common.Sort,
 ) *DescribeCabinetsRequest {
@@ -120,11 +111,9 @@ func NewDescribeCabinetsRequestWithAllParams(
         Idc: idc,
         PageNumber: pageNumber,
         PageSize: pageSize,
-        All: all,
         CabinetType: cabinetType,
         CabinetOpenStatus: cabinetOpenStatus,
         CabinetNo: cabinetNo,
-        DeviceMustBeEmpty: deviceMustBeEmpty,
         Filters: filters,
         Sorts: sorts,
     }
@@ -158,11 +147,6 @@ func (r *DescribeCabinetsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
-/* param all: 是否查询全部，默认分页(Optional) */
-func (r *DescribeCabinetsRequest) SetAll(all int) {
-    r.All = &all
-}
-
 /* param cabinetType: 机柜类型 formal:正式机柜 reserved:预留机柜(Optional) */
 func (r *DescribeCabinetsRequest) SetCabinetType(cabinetType string) {
     r.CabinetType = &cabinetType
@@ -178,11 +162,6 @@ func (r *DescribeCabinetsRequest) SetCabinetNo(cabinetNo string) {
     r.CabinetNo = &cabinetNo
 }
 
-/* param deviceMustBeEmpty: 机柜关电工单使用 yes(Optional) */
-func (r *DescribeCabinetsRequest) SetDeviceMustBeEmpty(deviceMustBeEmpty string) {
-    r.DeviceMustBeEmpty = &deviceMustBeEmpty
-}
-
 /* param filters: roomNo - 房间号，精确匹配，支持多个
 cabinetId - 机柜ID，精确匹配，支持多个
 cabinetNo - 机柜编码，精确匹配，支持多个
@@ -196,6 +175,7 @@ func (r *DescribeCabinetsRequest) SetFilters(filters []common.Filter) {
 func (r *DescribeCabinetsRequest) SetSorts(sorts []common.Sort) {
     r.Sorts = sorts
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

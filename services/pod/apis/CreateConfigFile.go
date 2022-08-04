@@ -28,12 +28,12 @@ type CreateConfigFileRequest struct {
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* configFile名字，不能重复
+    /* ConfigFile 的名字，名称不能重复
+长度不超过63（命名字母小写，数字和-）
   */
     Name string `json:"name"`
 
-    /* key 的有效字符包括字母、数字、-、_和.; <br>
-value 每个value长度上限为32KB，整个data的长度不能超过1M; <br>
+    /* configFile数据，个数不超过32个
   */
     Data []pod.FileToPath `json:"data"`
 
@@ -41,10 +41,10 @@ value 每个value长度上限为32KB，整个data的长度不能超过1M; <br>
 
 /*
  * param regionId: Region ID (Required)
- * param name: configFile名字，不能重复
+ * param name: ConfigFile 的名字，名称不能重复
+长度不超过63（命名字母小写，数字和-）
  (Required)
- * param data: key 的有效字符包括字母、数字、-、_和.; <br>
-value 每个value长度上限为32KB，整个data的长度不能超过1M; <br>
+ * param data: configFile数据，个数不超过32个
  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -70,10 +70,10 @@ func NewCreateConfigFileRequest(
 
 /*
  * param regionId: Region ID (Required)
- * param name: configFile名字，不能重复
+ * param name: ConfigFile 的名字，名称不能重复
+长度不超过63（命名字母小写，数字和-）
  (Required)
- * param data: key 的有效字符包括字母、数字、-、_和.; <br>
-value 每个value长度上限为32KB，整个data的长度不能超过1M; <br>
+ * param data: configFile数据，个数不超过32个
  (Required)
  */
 func NewCreateConfigFileRequestWithAllParams(
@@ -113,14 +113,14 @@ func (r *CreateConfigFileRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 
-/* param name: configFile名字，不能重复
+/* param name: ConfigFile 的名字，名称不能重复
+长度不超过63（命名字母小写，数字和-）
 (Required) */
 func (r *CreateConfigFileRequest) SetName(name string) {
     r.Name = name
 }
 
-/* param data: key 的有效字符包括字母、数字、-、_和.; <br>
-value 每个value长度上限为32KB，整个data的长度不能超过1M; <br>
+/* param data: configFile数据，个数不超过32个
 (Required) */
 func (r *CreateConfigFileRequest) SetData(data []pod.FileToPath) {
     r.Data = data

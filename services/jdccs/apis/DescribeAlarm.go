@@ -27,6 +27,7 @@ type DescribeAlarmRequest struct {
 
     /* 报警规则ID  */
     AlarmId string `json:"alarmId"`
+
 }
 
 /*
@@ -84,6 +85,7 @@ func NewDescribeAlarmRequestWithoutParam() *DescribeAlarmRequest {
 func (r *DescribeAlarmRequest) SetAlarmId(alarmId string) {
     r.AlarmId = alarmId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
