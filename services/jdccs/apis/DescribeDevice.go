@@ -30,6 +30,7 @@ type DescribeDeviceRequest struct {
 
     /* 设备实例ID  */
     DeviceId string `json:"deviceId"`
+
 }
 
 /*
@@ -98,6 +99,7 @@ func (r *DescribeDeviceRequest) SetIdc(idc string) {
 func (r *DescribeDeviceRequest) SetDeviceId(deviceId string) {
     r.DeviceId = deviceId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -40,7 +40,7 @@ func NewJdccsClient(credential *core.Credential) *JdccsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "jdccs",
-            Revision:    "1.1.2",
+            Revision:    "1.1.4",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -68,6 +68,26 @@ func (c *JdccsClient) CreateAlarm(request *jdccs.CreateAlarmRequest) (*jdccs.Cre
     }
 
     jdResp := &jdccs.CreateAlarmResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 按照时间段查询单个机柜AB路电流 */
+func (c *JdccsClient) DescribeRangetimeCabinetCurrent(request *jdccs.DescribeRangetimeCabinetCurrentRequest) (*jdccs.DescribeRangetimeCabinetCurrentResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdccs.DescribeRangetimeCabinetCurrentResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -488,6 +508,26 @@ func (c *JdccsClient) UpdateAlarm(request *jdccs.UpdateAlarmRequest) (*jdccs.Upd
     }
 
     jdResp := &jdccs.UpdateAlarmResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询多个机柜AB路实时电流 */
+func (c *JdccsClient) DescribeRealtimeCabinetCurrent(request *jdccs.DescribeRealtimeCabinetCurrentRequest) (*jdccs.DescribeRealtimeCabinetCurrentResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdccs.DescribeRealtimeCabinetCurrentResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

@@ -21,68 +21,68 @@ import (
     jdccs "github.com/jdcloud-api/jdcloud-sdk-go/services/jdccs/models"
 )
 
-type DescribeBandwidthTrafficRequest struct {
+type DescribeRealtimeCabinetCurrentRequest struct {
 
     core.JDCloudRequest
 
     /* IDC机房ID  */
     Idc string `json:"idc"`
 
-    /* 带宽（出口）实例ID  */
-    BandwidthId string `json:"bandwidthId"`
+    /* 资源ID，支持多个resourceId批量查询，每个id用英文竖线分隔  */
+    ResourceId string `json:"resourceId"`
 
 }
 
 /*
  * param idc: IDC机房ID (Required)
- * param bandwidthId: 带宽（出口）实例ID (Required)
+ * param resourceId: 资源ID，支持多个resourceId批量查询，每个id用英文竖线分隔 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeBandwidthTrafficRequest(
+func NewDescribeRealtimeCabinetCurrentRequest(
     idc string,
-    bandwidthId string,
-) *DescribeBandwidthTrafficRequest {
+    resourceId string,
+) *DescribeRealtimeCabinetCurrentRequest {
 
-	return &DescribeBandwidthTrafficRequest{
+	return &DescribeRealtimeCabinetCurrentRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/idcs/{idc}/bandwidthTraffics/{bandwidthId}",
+			URL:     "/idcs/{idc}/realtimeCabinetCurrent",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         Idc: idc,
-        BandwidthId: bandwidthId,
+        ResourceId: resourceId,
 	}
 }
 
 /*
  * param idc: IDC机房ID (Required)
- * param bandwidthId: 带宽（出口）实例ID (Required)
+ * param resourceId: 资源ID，支持多个resourceId批量查询，每个id用英文竖线分隔 (Required)
  */
-func NewDescribeBandwidthTrafficRequestWithAllParams(
+func NewDescribeRealtimeCabinetCurrentRequestWithAllParams(
     idc string,
-    bandwidthId string,
-) *DescribeBandwidthTrafficRequest {
+    resourceId string,
+) *DescribeRealtimeCabinetCurrentRequest {
 
-    return &DescribeBandwidthTrafficRequest{
+    return &DescribeRealtimeCabinetCurrentRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/idcs/{idc}/bandwidthTraffics/{bandwidthId}",
+            URL:     "/idcs/{idc}/realtimeCabinetCurrent",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         Idc: idc,
-        BandwidthId: bandwidthId,
+        ResourceId: resourceId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeBandwidthTrafficRequestWithoutParam() *DescribeBandwidthTrafficRequest {
+func NewDescribeRealtimeCabinetCurrentRequestWithoutParam() *DescribeRealtimeCabinetCurrentRequest {
 
-    return &DescribeBandwidthTrafficRequest{
+    return &DescribeRealtimeCabinetCurrentRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/idcs/{idc}/bandwidthTraffics/{bandwidthId}",
+            URL:     "/idcs/{idc}/realtimeCabinetCurrent",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -91,28 +91,28 @@ func NewDescribeBandwidthTrafficRequestWithoutParam() *DescribeBandwidthTrafficR
 }
 
 /* param idc: IDC机房ID(Required) */
-func (r *DescribeBandwidthTrafficRequest) SetIdc(idc string) {
+func (r *DescribeRealtimeCabinetCurrentRequest) SetIdc(idc string) {
     r.Idc = idc
 }
 
-/* param bandwidthId: 带宽（出口）实例ID(Required) */
-func (r *DescribeBandwidthTrafficRequest) SetBandwidthId(bandwidthId string) {
-    r.BandwidthId = bandwidthId
+/* param resourceId: 资源ID，支持多个resourceId批量查询，每个id用英文竖线分隔(Required) */
+func (r *DescribeRealtimeCabinetCurrentRequest) SetResourceId(resourceId string) {
+    r.ResourceId = resourceId
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeBandwidthTrafficRequest) GetRegionId() string {
+func (r DescribeRealtimeCabinetCurrentRequest) GetRegionId() string {
     return ""
 }
 
-type DescribeBandwidthTrafficResponse struct {
+type DescribeRealtimeCabinetCurrentResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeBandwidthTrafficResult `json:"result"`
+    Result DescribeRealtimeCabinetCurrentResult `json:"result"`
 }
 
-type DescribeBandwidthTrafficResult struct {
-    BandwidthTraffic jdccs.BandwidthTraffic `json:"bandwidthTraffic"`
+type DescribeRealtimeCabinetCurrentResult struct {
+    Data []jdccs.CabinetCurrentRespItem `json:"data"`
 }

@@ -27,6 +27,7 @@ type DescribeTicketRequest struct {
 
     /* 工单编号  */
     TicketNo string `json:"ticketNo"`
+
 }
 
 /*
@@ -84,6 +85,7 @@ func NewDescribeTicketRequestWithoutParam() *DescribeTicketRequest {
 func (r *DescribeTicketRequest) SetTicketNo(ticketNo string) {
     r.TicketNo = ticketNo
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

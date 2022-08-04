@@ -17,14 +17,20 @@
 package models
 
 
-type Idc struct {
+type CabinetCurrentRespItem struct {
 
-    /* 机房英文标识 (Optional) */
-    Idc string `json:"idc"`
+    /* 资源ID (Optional) */
+    ResourceId string `json:"resourceId"`
 
-    /* 机房名称 (Optional) */
-    IdcName string `json:"idcName"`
+    /* UNIX时间戳 (Optional) */
+    Timestamp int `json:"timestamp"`
 
-    /* 是否是商业化外部机房 (Optional) */
-    IsExternalIdc bool `json:"isExternalIdc"`
+    /* A路电流 (Optional) */
+    AValue float64 `json:"aValue"`
+
+    /* B路电流 (Optional) */
+    BValue float64 `json:"bValue"`
+
+    /* 总电流 (Optional) */
+    Value float64 `json:"value"`
 }

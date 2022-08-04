@@ -34,11 +34,9 @@ type DescribeBandwidthTrafficsRequest struct {
     /* 分页大小，默认为20 (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* 是否查询全部，默认分页 (Optional) */
-    All *int `json:"all"`
-
     /* 带宽（出口）名称 (Optional) */
     BandwidthName *string `json:"bandwidthName"`
+
 }
 
 /*
@@ -65,14 +63,12 @@ func NewDescribeBandwidthTrafficsRequest(
  * param idc: IDC机房ID (Required)
  * param pageNumber: 页码, 默认为1 (Optional)
  * param pageSize: 分页大小，默认为20 (Optional)
- * param all: 是否查询全部，默认分页 (Optional)
  * param bandwidthName: 带宽（出口）名称 (Optional)
  */
 func NewDescribeBandwidthTrafficsRequestWithAllParams(
     idc string,
     pageNumber *int,
     pageSize *int,
-    all *int,
     bandwidthName *string,
 ) *DescribeBandwidthTrafficsRequest {
 
@@ -86,7 +82,6 @@ func NewDescribeBandwidthTrafficsRequestWithAllParams(
         Idc: idc,
         PageNumber: pageNumber,
         PageSize: pageSize,
-        All: all,
         BandwidthName: bandwidthName,
     }
 }
@@ -119,15 +114,11 @@ func (r *DescribeBandwidthTrafficsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
-/* param all: 是否查询全部，默认分页(Optional) */
-func (r *DescribeBandwidthTrafficsRequest) SetAll(all int) {
-    r.All = &all
-}
-
 /* param bandwidthName: 带宽（出口）名称(Optional) */
 func (r *DescribeBandwidthTrafficsRequest) SetBandwidthName(bandwidthName string) {
     r.BandwidthName = &bandwidthName
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

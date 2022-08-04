@@ -30,6 +30,7 @@ type DescribeCabinetRequest struct {
 
     /* 机柜实例ID  */
     CabinetId string `json:"cabinetId"`
+
 }
 
 /*
@@ -98,6 +99,7 @@ func (r *DescribeCabinetRequest) SetIdc(idc string) {
 func (r *DescribeCabinetRequest) SetCabinetId(cabinetId string) {
     r.CabinetId = cabinetId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

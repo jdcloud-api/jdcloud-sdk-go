@@ -48,6 +48,7 @@ type DescribeMetricDataRequest struct {
 
     /* 端口，指定port时须同时指定ip (Optional) */
     Port *string `json:"port"`
+
 }
 
 /*
@@ -173,6 +174,7 @@ func (r *DescribeMetricDataRequest) SetIp(ip string) {
 func (r *DescribeMetricDataRequest) SetPort(port string) {
     r.Port = &port
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

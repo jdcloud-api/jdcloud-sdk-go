@@ -36,6 +36,7 @@ type DescribeIdcsRequest struct {
 
     /* 是否强制包含外部机房 yes/no (Optional) */
     IncludeExternalIdc *string `json:"includeExternalIdc"`
+
 }
 
 /*
@@ -114,6 +115,7 @@ func (r *DescribeIdcsRequest) SetAll(all int) {
 func (r *DescribeIdcsRequest) SetIncludeExternalIdc(includeExternalIdc string) {
     r.IncludeExternalIdc = &includeExternalIdc
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

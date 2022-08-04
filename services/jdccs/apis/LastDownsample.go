@@ -33,6 +33,7 @@ type LastDownsampleRequest struct {
 
     /* 资源ID，支持多个resourceId批量查询，每个id用英文竖线分隔  */
     ResourceId string `json:"resourceId"`
+
 }
 
 /*
@@ -112,6 +113,7 @@ func (r *LastDownsampleRequest) SetMetric(metric string) {
 func (r *LastDownsampleRequest) SetResourceId(resourceId string) {
     r.ResourceId = resourceId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

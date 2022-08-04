@@ -32,17 +32,11 @@ type DescribeTicketsRequest struct {
     /* 分页大小，默认为20 (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* 是否查询全部，默认分页 (Optional) */
-    All *int `json:"all"`
-
     /* 工单TAB类型 pendingProcess:待我处理 pendingReview:待审核 processing:处理中 all:全部(默认) (Optional) */
     Type *string `json:"type"`
 
     /* 工单类型 (Optional) */
     TicketTypeName *string `json:"ticketTypeName"`
-
-    /* 工单类型ID (Optional) */
-    TicketTypeId *int `json:"ticketTypeId"`
 
     /* 工单状态 pendingReview:待审核 revoked:已撤销 processing:处理中 pendingVerification:待核验 pendingClose:待关单 rejected:已拒绝 completed:已完成 cancelled:已取消 draft:草稿中 (Optional) */
     Status *string `json:"status"`
@@ -62,15 +56,13 @@ type DescribeTicketsRequest struct {
     /* 创建结束时间，遵循ISO8601标准，使用UTC时间，格式为：yyyy-MM-ddTHH:mm:ssZ (Optional) */
     EndTime *string `json:"endTime"`
 
-    /* 提交账号 (Optional) */
-    SubmitAccount *string `json:"submitAccount"`
-
     /* ticketNo - 工单编号，精确匹配，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
 
     /* createdTime - 创建时间 closedTime - 关闭时间 (Optional) */
     Sorts []common.Sort `json:"sorts"`
+
 }
 
 /*
@@ -93,17 +85,14 @@ func NewDescribeTicketsRequest(
 /*
  * param pageNumber: 页码, 默认为1 (Optional)
  * param pageSize: 分页大小，默认为20 (Optional)
- * param all: 是否查询全部，默认分页 (Optional)
  * param type_: 工单TAB类型 pendingProcess:待我处理 pendingReview:待审核 processing:处理中 all:全部(默认) (Optional)
  * param ticketTypeName: 工单类型 (Optional)
- * param ticketTypeId: 工单类型ID (Optional)
  * param status: 工单状态 pendingReview:待审核 revoked:已撤销 processing:处理中 pendingVerification:待核验 pendingClose:待关单 rejected:已拒绝 completed:已完成 cancelled:已取消 draft:草稿中 (Optional)
  * param ticketNo: 工单编号 (Optional)
  * param ticketTemplateName: 工单名称 (Optional)
  * param description: 描述 (Optional)
  * param startTime: 创建开始时间，遵循ISO8601标准，使用UTC时间，格式为：yyyy-MM-ddTHH:mm:ssZ (Optional)
  * param endTime: 创建结束时间，遵循ISO8601标准，使用UTC时间，格式为：yyyy-MM-ddTHH:mm:ssZ (Optional)
- * param submitAccount: 提交账号 (Optional)
  * param filters: ticketNo - 工单编号，精确匹配，支持多个
  (Optional)
  * param sorts: createdTime - 创建时间 closedTime - 关闭时间 (Optional)
@@ -111,17 +100,14 @@ func NewDescribeTicketsRequest(
 func NewDescribeTicketsRequestWithAllParams(
     pageNumber *int,
     pageSize *int,
-    all *int,
     type_ *string,
     ticketTypeName *string,
-    ticketTypeId *int,
     status *string,
     ticketNo *string,
     ticketTemplateName *string,
     description *string,
     startTime *string,
     endTime *string,
-    submitAccount *string,
     filters []common.Filter,
     sorts []common.Sort,
 ) *DescribeTicketsRequest {
@@ -135,17 +121,14 @@ func NewDescribeTicketsRequestWithAllParams(
         },
         PageNumber: pageNumber,
         PageSize: pageSize,
-        All: all,
         Type: type_,
         TicketTypeName: ticketTypeName,
-        TicketTypeId: ticketTypeId,
         Status: status,
         TicketNo: ticketNo,
         TicketTemplateName: ticketTemplateName,
         Description: description,
         StartTime: startTime,
         EndTime: endTime,
-        SubmitAccount: submitAccount,
         Filters: filters,
         Sorts: sorts,
     }
@@ -174,11 +157,6 @@ func (r *DescribeTicketsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
-/* param all: 是否查询全部，默认分页(Optional) */
-func (r *DescribeTicketsRequest) SetAll(all int) {
-    r.All = &all
-}
-
 /* param type_: 工单TAB类型 pendingProcess:待我处理 pendingReview:待审核 processing:处理中 all:全部(默认)(Optional) */
 func (r *DescribeTicketsRequest) SetType(type_ string) {
     r.Type = &type_
@@ -187,11 +165,6 @@ func (r *DescribeTicketsRequest) SetType(type_ string) {
 /* param ticketTypeName: 工单类型(Optional) */
 func (r *DescribeTicketsRequest) SetTicketTypeName(ticketTypeName string) {
     r.TicketTypeName = &ticketTypeName
-}
-
-/* param ticketTypeId: 工单类型ID(Optional) */
-func (r *DescribeTicketsRequest) SetTicketTypeId(ticketTypeId int) {
-    r.TicketTypeId = &ticketTypeId
 }
 
 /* param status: 工单状态 pendingReview:待审核 revoked:已撤销 processing:处理中 pendingVerification:待核验 pendingClose:待关单 rejected:已拒绝 completed:已完成 cancelled:已取消 draft:草稿中(Optional) */
@@ -224,11 +197,6 @@ func (r *DescribeTicketsRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
 
-/* param submitAccount: 提交账号(Optional) */
-func (r *DescribeTicketsRequest) SetSubmitAccount(submitAccount string) {
-    r.SubmitAccount = &submitAccount
-}
-
 /* param filters: ticketNo - 工单编号，精确匹配，支持多个
 (Optional) */
 func (r *DescribeTicketsRequest) SetFilters(filters []common.Filter) {
@@ -239,6 +207,7 @@ func (r *DescribeTicketsRequest) SetFilters(filters []common.Filter) {
 func (r *DescribeTicketsRequest) SetSorts(sorts []common.Sort) {
     r.Sorts = sorts
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

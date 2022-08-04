@@ -30,6 +30,7 @@ type DescribeOpenDevicesDataRequest struct {
 
     /* 设备类型  */
     DeviceType string `json:"deviceType"`
+
 }
 
 /*
@@ -95,6 +96,7 @@ func (r *DescribeOpenDevicesDataRequest) SetDeviceCodes(deviceCodes string) {
 func (r *DescribeOpenDevicesDataRequest) SetDeviceType(deviceType string) {
     r.DeviceType = deviceType
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -32,9 +32,6 @@ type DescribeAlarmsRequest struct {
     /* 分页大小，默认为20 (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* 是否查询全部，默认分页 (Optional) */
-    All *int `json:"all"`
-
     /* 资源类型 bandwidth:带宽 (Optional) */
     ResourceType *string `json:"resourceType"`
 
@@ -50,6 +47,7 @@ type DescribeAlarmsRequest struct {
     /* alarmId - 规则实施ID，精确匹配，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
+
 }
 
 /*
@@ -72,7 +70,6 @@ func NewDescribeAlarmsRequest(
 /*
  * param pageNumber: 页码, 默认为1 (Optional)
  * param pageSize: 分页大小，默认为20 (Optional)
- * param all: 是否查询全部，默认分页 (Optional)
  * param resourceType: 资源类型 bandwidth:带宽 (Optional)
  * param resourceId: 资源ID，指定resourceId时须指定resourceType (Optional)
  * param idc: 机房英文标识 (Optional)
@@ -83,7 +80,6 @@ func NewDescribeAlarmsRequest(
 func NewDescribeAlarmsRequestWithAllParams(
     pageNumber *int,
     pageSize *int,
-    all *int,
     resourceType *string,
     resourceId *string,
     idc *string,
@@ -100,7 +96,6 @@ func NewDescribeAlarmsRequestWithAllParams(
         },
         PageNumber: pageNumber,
         PageSize: pageSize,
-        All: all,
         ResourceType: resourceType,
         ResourceId: resourceId,
         Idc: idc,
@@ -132,11 +127,6 @@ func (r *DescribeAlarmsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
-/* param all: 是否查询全部，默认分页(Optional) */
-func (r *DescribeAlarmsRequest) SetAll(all int) {
-    r.All = &all
-}
-
 /* param resourceType: 资源类型 bandwidth:带宽(Optional) */
 func (r *DescribeAlarmsRequest) SetResourceType(resourceType string) {
     r.ResourceType = &resourceType
@@ -162,6 +152,7 @@ func (r *DescribeAlarmsRequest) SetStatus(status string) {
 func (r *DescribeAlarmsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -30,6 +30,7 @@ type DescribeBandwidthRequest struct {
 
     /* 带宽（出口）实例ID  */
     BandwidthId string `json:"bandwidthId"`
+
 }
 
 /*
@@ -98,6 +99,7 @@ func (r *DescribeBandwidthRequest) SetIdc(idc string) {
 func (r *DescribeBandwidthRequest) SetBandwidthId(bandwidthId string) {
     r.BandwidthId = bandwidthId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
