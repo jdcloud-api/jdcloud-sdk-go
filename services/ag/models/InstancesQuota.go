@@ -17,11 +17,14 @@
 package models
 
 
-type SizeByte struct {
+type InstancesQuota struct {
 
-    /* 时间戳 (Optional) */
-    Timestamp string `json:"timestamp"`
+    /* az (Optional) */
+    Az string `json:"az"`
 
-    /* 文件系统使用量，单位为:Byte (Optional) */
-    Value int64 `json:"value"`
+    /* 配额上限 (Optional) */
+    Limit int `json:"limit"`
+
+    /* 已用配额 (Optional) */
+    Used int `json:"used"`
 }

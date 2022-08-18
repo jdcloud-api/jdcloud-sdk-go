@@ -39,6 +39,7 @@ type DescribeMountTargetsRequest struct {
 mountTargetId - 挂载目标ID，精确匹配，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
+
 }
 
 /*
@@ -124,6 +125,7 @@ mountTargetId - 挂载目标ID，精确匹配，支持多个
 func (r *DescribeMountTargetsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

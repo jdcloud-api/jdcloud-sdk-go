@@ -38,6 +38,10 @@ type CreateFileSystemRequest struct {
 
     /* 文件系统类型(通用型:gp1,容量型:std1),默认为通用型 (Optional) */
     FileSystemType *string `json:"fileSystemType"`
+
+    /* 文件系统的serviceCode，默认为zfs (Optional) */
+    ServiceCode *string `json:"serviceCode"`
+
 }
 
 /*
@@ -75,6 +79,7 @@ func NewCreateFileSystemRequest(
  * param description: 文件系统描述 (Required)
  * param clientToken: 幂等性参数(只支持数字、大小写字母，且不能超过64字符) (Required)
  * param fileSystemType: 文件系统类型(通用型:gp1,容量型:std1),默认为通用型 (Optional)
+ * param serviceCode: 文件系统的serviceCode，默认为zfs (Optional)
  */
 func NewCreateFileSystemRequestWithAllParams(
     regionId string,
@@ -82,6 +87,7 @@ func NewCreateFileSystemRequestWithAllParams(
     description string,
     clientToken string,
     fileSystemType *string,
+    serviceCode *string,
 ) *CreateFileSystemRequest {
 
     return &CreateFileSystemRequest{
@@ -96,6 +102,7 @@ func NewCreateFileSystemRequestWithAllParams(
         Description: description,
         ClientToken: clientToken,
         FileSystemType: fileSystemType,
+        ServiceCode: serviceCode,
     }
 }
 
@@ -136,6 +143,12 @@ func (r *CreateFileSystemRequest) SetClientToken(clientToken string) {
 func (r *CreateFileSystemRequest) SetFileSystemType(fileSystemType string) {
     r.FileSystemType = &fileSystemType
 }
+
+/* param serviceCode: 文件系统的serviceCode，默认为zfs(Optional) */
+func (r *CreateFileSystemRequest) SetServiceCode(serviceCode string) {
+    r.ServiceCode = &serviceCode
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

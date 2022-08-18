@@ -37,6 +37,9 @@ type MountTarget struct {
     /* vpcID (Optional) */
     VpcId string `json:"vpcId"`
 
+    /* 安全组ID (Optional) */
+    SecurityGroupId string `json:"securityGroupId"`
+
     /* 创建时间 (Optional) */
     CreateTime string `json:"createTime"`
 

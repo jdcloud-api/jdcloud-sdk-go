@@ -35,7 +35,7 @@ type CreateConfigFileRequest struct {
 
     /* configFile数据，个数不超过32个
   */
-    Data []pod.FileToPath `json:"data"`
+    Data []pod.ConfigFileData `json:"data"`
 
 }
 
@@ -52,7 +52,7 @@ type CreateConfigFileRequest struct {
 func NewCreateConfigFileRequest(
     regionId string,
     name string,
-    data []pod.FileToPath,
+    data []pod.ConfigFileData,
 ) *CreateConfigFileRequest {
 
 	return &CreateConfigFileRequest{
@@ -79,7 +79,7 @@ func NewCreateConfigFileRequest(
 func NewCreateConfigFileRequestWithAllParams(
     regionId string,
     name string,
-    data []pod.FileToPath,
+    data []pod.ConfigFileData,
 ) *CreateConfigFileRequest {
 
     return &CreateConfigFileRequest{
@@ -122,7 +122,7 @@ func (r *CreateConfigFileRequest) SetName(name string) {
 
 /* param data: configFile数据，个数不超过32个
 (Required) */
-func (r *CreateConfigFileRequest) SetData(data []pod.FileToPath) {
+func (r *CreateConfigFileRequest) SetData(data []pod.ConfigFileData) {
     r.Data = data
 }
 

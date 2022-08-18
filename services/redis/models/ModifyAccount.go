@@ -17,11 +17,17 @@
 package models
 
 
-type SizeByte struct {
+type ModifyAccount struct {
 
-    /* 时间戳 (Optional) */
-    Timestamp string `json:"timestamp"`
+    /* 账号名称  */
+    AccountName string `json:"accountName"`
 
-    /* 文件系统使用量，单位为:Byte (Optional) */
-    Value int64 `json:"value"`
+    /* 账号密码 (Optional) */
+    AccountPassword *string `json:"accountPassword"`
+
+    /* 账号权限。支持RoleReadOnly（只读权限）、RoleReadWrite（读写权限） (Optional) */
+    AccountPrivilege *string `json:"accountPrivilege"`
+
+    /* 账号描述 (Optional) */
+    AccountDescription *string `json:"accountDescription"`
 }

@@ -17,11 +17,26 @@
 package models
 
 
-type SizeByte struct {
+type BigKeyAnalysisNode struct {
 
-    /* 时间戳 (Optional) */
-    Timestamp string `json:"timestamp"`
+    /* 节点id (Optional) */
+    NodeId string `json:"nodeId"`
 
-    /* 文件系统使用量，单位为:Byte (Optional) */
-    Value int64 `json:"value"`
+    /* 节点角色，master/slave (Optional) */
+    NodeRole string `json:"nodeRole"`
+
+    /* String类型大key数量 (Optional) */
+    StringTypeNum string `json:"stringTypeNum"`
+
+    /* List类型大key数量 (Optional) */
+    ListTypeNum string `json:"listTypeNum"`
+
+    /* Set类型大key数量 (Optional) */
+    SetTypeNum int `json:"setTypeNum"`
+
+    /* Hash类型大key数量 (Optional) */
+    HashTypeNum int `json:"hashTypeNum"`
+
+    /* Zset类型大key数量 (Optional) */
+    ZsetTypeNum int `json:"zsetTypeNum"`
 }

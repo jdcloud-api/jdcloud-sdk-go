@@ -41,6 +41,7 @@ type CreateMountTargetRequest struct {
 
     /* 幂等性参数(只支持数字、大小写字母，且不能超过64字符)  */
     ClientToken string `json:"clientToken"`
+
 }
 
 /*
@@ -150,6 +151,7 @@ func (r *CreateMountTargetRequest) SetSecurityGroupId(securityGroupId string) {
 func (r *CreateMountTargetRequest) SetClientToken(clientToken string) {
     r.ClientToken = clientToken
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

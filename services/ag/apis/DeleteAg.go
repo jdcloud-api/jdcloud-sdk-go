@@ -29,6 +29,7 @@ type DeleteAgRequest struct {
 
     /* 高可用组 ID  */
     AgId string `json:"agId"`
+
 }
 
 /*
@@ -97,6 +98,7 @@ func (r *DeleteAgRequest) SetRegionId(regionId string) {
 func (r *DeleteAgRequest) SetAgId(agId string) {
     r.AgId = agId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

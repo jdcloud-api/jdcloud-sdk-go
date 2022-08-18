@@ -40,7 +40,7 @@ func NewAgClient(credential *core.Credential) *AgClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "ag",
-            Revision:    "0.6.0",
+            Revision:    "0.7.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }

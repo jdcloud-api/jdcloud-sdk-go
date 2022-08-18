@@ -23,5 +23,5 @@ type ConfigFile struct {
     Name string `json:"name"`
 
     /* configFile数据 (Optional) */
-    Data []FileToPath `json:"data"`
+    Data []ConfigFileData `json:"data"`
 }

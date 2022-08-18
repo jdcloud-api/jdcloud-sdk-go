@@ -17,11 +17,14 @@
 package models
 
 
-type SizeByte struct {
+type RedisHotKey struct {
 
-    /* 时间戳 (Optional) */
-    Timestamp string `json:"timestamp"`
+    /* key名称  */
+    Key string `json:"key"`
 
-    /* 文件系统使用量，单位为:Byte (Optional) */
-    Value int64 `json:"value"`
+    /* 统计时间  */
+    AccessTime string `json:"accessTime"`
+
+    /* 访问频率  */
+    AccessCount int `json:"accessCount"`
 }

@@ -29,6 +29,7 @@ type DeleteFileSystemRequest struct {
 
     /* 文件系统ID  */
     FileSystemId string `json:"fileSystemId"`
+
 }
 
 /*
@@ -97,6 +98,7 @@ func (r *DeleteFileSystemRequest) SetRegionId(regionId string) {
 func (r *DeleteFileSystemRequest) SetFileSystemId(fileSystemId string) {
     r.FileSystemId = fileSystemId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

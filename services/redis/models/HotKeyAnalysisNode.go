@@ -17,11 +17,14 @@
 package models
 
 
-type SizeByte struct {
+type HotKeyAnalysisNode struct {
 
-    /* 时间戳 (Optional) */
-    Timestamp string `json:"timestamp"`
+    /* 节点id"  */
+    NodeId string `json:"nodeId"`
 
-    /* 文件系统使用量，单位为:Byte (Optional) */
-    Value int64 `json:"value"`
+    /* 节点角色，master/slave  */
+    NodeRole string `json:"nodeRole"`
+
+    /* 热key数量  */
+    HotKeyNum int `json:"hotKeyNum"`
 }

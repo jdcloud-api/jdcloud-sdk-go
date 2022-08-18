@@ -35,6 +35,7 @@ type UpdateAgRequest struct {
 
     /* 高可用组名称，只支持中文、数字、大小写字母、英文下划线 “_” 及中划线 “-”，且不能超过 32 字符 (Optional) */
     Name *string `json:"name"`
+
 }
 
 /*
@@ -119,6 +120,7 @@ func (r *UpdateAgRequest) SetDescription(description string) {
 func (r *UpdateAgRequest) SetName(name string) {
     r.Name = &name
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

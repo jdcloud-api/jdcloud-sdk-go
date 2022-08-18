@@ -17,11 +17,20 @@
 package models
 
 
-type SizeByte struct {
+type ClusterCacheAnalysis struct {
 
-    /* 时间戳 (Optional) */
-    Timestamp string `json:"timestamp"`
+    /* 缓存分析的开始时间,rfc3339格式  */
+    AnalysisTime string `json:"analysisTime"`
 
-    /* 文件系统使用量，单位为:Byte (Optional) */
-    Value int64 `json:"value"`
+    /* 缓存分析的任务ID  */
+    TaskId string `json:"taskId"`
+
+    /* 缓存分析的分析时长  */
+    AnalysisDuration string `json:"analysisDuration"`
+
+    /* 缓存分析的结果下载地址  */
+    DownloadUrl string `json:"downloadUrl"`
+
+    /* 缓存分析任务状态, running, success, error, 只有sucess状态，才能根据taskId查询到结果  */
+    Status string `json:"status"`
 }

@@ -35,6 +35,7 @@ type ModifyFileSystemAttributeRequest struct {
 
     /* 文件系统描述(参数规则：不能超过256字符) (Optional) */
     Description *string `json:"description"`
+
 }
 
 /*
@@ -119,6 +120,7 @@ func (r *ModifyFileSystemAttributeRequest) SetName(name string) {
 func (r *ModifyFileSystemAttributeRequest) SetDescription(description string) {
     r.Description = &description
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

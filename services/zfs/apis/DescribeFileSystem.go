@@ -30,6 +30,7 @@ type DescribeFileSystemRequest struct {
 
     /* 文件系统ID  */
     FileSystemId string `json:"fileSystemId"`
+
 }
 
 /*
@@ -98,6 +99,7 @@ func (r *DescribeFileSystemRequest) SetRegionId(regionId string) {
 func (r *DescribeFileSystemRequest) SetFileSystemId(fileSystemId string) {
     r.FileSystemId = fileSystemId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
