@@ -32,6 +32,7 @@ type SetInstanceTemplateRequest struct {
 
     /* 实例模板 ID  */
     InstanceTemplateId string `json:"instanceTemplateId"`
+
 }
 
 /*
@@ -111,6 +112,7 @@ func (r *SetInstanceTemplateRequest) SetAgId(agId string) {
 func (r *SetInstanceTemplateRequest) SetInstanceTemplateId(instanceTemplateId string) {
     r.InstanceTemplateId = instanceTemplateId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -39,8 +39,10 @@ type DescribeAgsRequest struct {
 agId - ag id，精确匹配
 instanceTemplateId - 实例模板id，精确匹配
 vpcId - vpc id，精确匹配
+placementType - placement type，放置策略
  (Optional) */
     Filters []common.Filter `json:"filters"`
+
 }
 
 /*
@@ -71,6 +73,7 @@ func NewDescribeAgsRequest(
 agId - ag id，精确匹配
 instanceTemplateId - 实例模板id，精确匹配
 vpcId - vpc id，精确匹配
+placementType - placement type，放置策略
  (Optional)
  */
 func NewDescribeAgsRequestWithAllParams(
@@ -126,10 +129,12 @@ func (r *DescribeAgsRequest) SetPageSize(pageSize int) {
 agId - ag id，精确匹配
 instanceTemplateId - 实例模板id，精确匹配
 vpcId - vpc id，精确匹配
+placementType - placement type，放置策略
 (Optional) */
 func (r *DescribeAgsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -32,6 +32,7 @@ type AbandonInstancesRequest struct {
 
     /* 准备剔除出高可用组的实例 ID  */
     InstanceIds []string `json:"instanceIds"`
+
 }
 
 /*
@@ -111,6 +112,7 @@ func (r *AbandonInstancesRequest) SetAgId(agId string) {
 func (r *AbandonInstancesRequest) SetInstanceIds(instanceIds []string) {
     r.InstanceIds = instanceIds
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

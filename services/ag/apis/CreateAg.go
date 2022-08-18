@@ -44,6 +44,10 @@ type CreateAgRequest struct {
 
     /* 高可用组配置类型，支持strict(关联模板型)、loose(自定义配置型) (Optional) */
     ConfigurationType *string `json:"configurationType"`
+
+    /* 高可用资源放置类型，支持fd、switch、host (Optional) */
+    PlacementType *string `json:"placementType"`
+
 }
 
 /*
@@ -80,6 +84,7 @@ func NewCreateAgRequest(
  * param instanceTemplateId: 实例模板的ID (Optional)
  * param description: 描述，长度不超过 256 字符 (Optional)
  * param configurationType: 高可用组配置类型，支持strict(关联模板型)、loose(自定义配置型) (Optional)
+ * param placementType: 高可用资源放置类型，支持fd、switch、host (Optional)
  */
 func NewCreateAgRequestWithAllParams(
     regionId string,
@@ -89,6 +94,7 @@ func NewCreateAgRequestWithAllParams(
     instanceTemplateId *string,
     description *string,
     configurationType *string,
+    placementType *string,
 ) *CreateAgRequest {
 
     return &CreateAgRequest{
@@ -105,6 +111,7 @@ func NewCreateAgRequestWithAllParams(
         InstanceTemplateId: instanceTemplateId,
         Description: description,
         ConfigurationType: configurationType,
+        PlacementType: placementType,
     }
 }
 
@@ -155,6 +162,12 @@ func (r *CreateAgRequest) SetDescription(description string) {
 func (r *CreateAgRequest) SetConfigurationType(configurationType string) {
     r.ConfigurationType = &configurationType
 }
+
+/* param placementType: 高可用资源放置类型，支持fd、switch、host(Optional) */
+func (r *CreateAgRequest) SetPlacementType(placementType string) {
+    r.PlacementType = &placementType
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

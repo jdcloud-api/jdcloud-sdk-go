@@ -48,4 +48,10 @@ type AvailabilityGroup struct {
 
     /* 高可用组配置类型 (Optional) */
     ConfigurationType string `json:"configurationType"`
+
+    /* 高可用组放置类型 (Optional) */
+    PlacementType string `json:"placementType"`
+
+    /* 高可用组中实例数量的限制。 (Optional) */
+    InstancesQuotas []InstancesQuota `json:"instancesQuotas"`
 }

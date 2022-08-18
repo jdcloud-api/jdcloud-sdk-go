@@ -30,6 +30,7 @@ type DescribeAgRequest struct {
 
     /* 高可用组 ID  */
     AgId string `json:"agId"`
+
 }
 
 /*
@@ -98,6 +99,7 @@ func (r *DescribeAgRequest) SetRegionId(regionId string) {
 func (r *DescribeAgRequest) SetAgId(agId string) {
     r.AgId = agId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

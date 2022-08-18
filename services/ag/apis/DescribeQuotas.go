@@ -32,6 +32,7 @@ type DescribeQuotasRequest struct {
     /* resourceTypes - 资源类型，暂时只支持[ag]
  (Optional) */
     Filters []common.Filter `json:"filters"`
+
 }
 
 /*
@@ -99,6 +100,7 @@ func (r *DescribeQuotasRequest) SetRegionId(regionId string) {
 func (r *DescribeQuotasRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
