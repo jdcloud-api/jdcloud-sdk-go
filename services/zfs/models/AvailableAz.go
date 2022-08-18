@@ -17,11 +17,11 @@
 package models
 
 
-type SizeByte struct {
+type AvailableAz struct {
 
-    /* 时间戳 (Optional) */
-    Timestamp string `json:"timestamp"`
+    /* 文件系统类型(通用型:gp1,容量型:std1) (Optional) */
+    FileSystemType string `json:"fileSystemType"`
 
-    /* 文件系统使用量，单位为:Byte (Optional) */
-    Value int64 `json:"value"`
+    /* 可用az列表 (Optional) */
+    Azs []string `json:"azs"`
 }

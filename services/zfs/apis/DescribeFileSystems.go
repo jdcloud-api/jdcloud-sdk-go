@@ -43,6 +43,7 @@ name - 文件系统名称，模糊匹配，支持单个
 status - 文件系统状态，精确匹配，支持多个 FileSystem Status/creating、available、in-use
  (Optional) */
     Filters []common.Filter `json:"filters"`
+
 }
 
 /*
@@ -138,6 +139,7 @@ status - 文件系统状态，精确匹配，支持多个 FileSystem Status/crea
 func (r *DescribeFileSystemsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

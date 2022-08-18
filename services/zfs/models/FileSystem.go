@@ -40,6 +40,9 @@ type FileSystem struct {
     /* 文件系统类型(通用型:gp1,容量型:std1) (Optional) */
     FileSystemType string `json:"fileSystemType"`
 
+    /* 文件系统所属的可用区 (Optional) */
+    Az string `json:"az"`
+
     /* 创建时间 (Optional) */
     CreateTime string `json:"createTime"`
 

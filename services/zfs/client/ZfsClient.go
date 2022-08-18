@@ -40,7 +40,7 @@ func NewZfsClient(credential *core.Credential) *ZfsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "zfs",
-            Revision:    "1.0.5",
+            Revision:    "1.0.8",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
