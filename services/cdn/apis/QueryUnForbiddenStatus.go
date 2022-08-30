@@ -105,26 +105,23 @@ func NewQueryUnForbiddenStatusRequestWithoutParam() *QueryUnForbiddenStatusReque
 func (r *QueryUnForbiddenStatusRequest) SetDomain(domain string) {
     r.Domain = &domain
 }
-
 /* param url: 根据url进行匹配(Optional) */
 func (r *QueryUnForbiddenStatusRequest) SetUrl(url string) {
     r.Url = &url
 }
-
 /* param taskId: 解封的任务id(Optional) */
 func (r *QueryUnForbiddenStatusRequest) SetTaskId(taskId string) {
     r.TaskId = &taskId
 }
-
 /* param pageNumber: pageNumber,默认值1(Optional) */
 func (r *QueryUnForbiddenStatusRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: pageSize,最大值50,默认值10(Optional) */
 func (r *QueryUnForbiddenStatusRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

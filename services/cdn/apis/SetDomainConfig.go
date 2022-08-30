@@ -119,36 +119,31 @@ func NewSetDomainConfigRequestWithoutParam() *SetDomainConfigRequest {
 func (r *SetDomainConfigRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param httpType: http类型,只能为http或者https(Optional) */
 func (r *SetDomainConfigRequest) SetHttpType(httpType string) {
     r.HttpType = &httpType
 }
-
 /* param backSourceType: 回源类型(Optional) */
 func (r *SetDomainConfigRequest) SetBackSourceType(backSourceType string) {
     r.BackSourceType = &backSourceType
 }
-
 /* param jumpType: 有三种类型：default、http、https(Optional) */
 func (r *SetDomainConfigRequest) SetJumpType(jumpType string) {
     r.JumpType = &jumpType
 }
-
 /* param jcdnTimeAnti: dash鉴权相关配置(Optional) */
 func (r *SetDomainConfigRequest) SetJcdnTimeAnti(jcdnTimeAnti string) {
     r.JcdnTimeAnti = &jcdnTimeAnti
 }
-
 /* param hdrCtrl: 回源鉴权相关配置(Optional) */
 func (r *SetDomainConfigRequest) SetHdrCtrl(hdrCtrl string) {
     r.HdrCtrl = &hdrCtrl
 }
-
 /* param toutiaoHeader: 头条header配置(Optional) */
 func (r *SetDomainConfigRequest) SetToutiaoHeader(toutiaoHeader string) {
     r.ToutiaoHeader = &toutiaoHeader
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

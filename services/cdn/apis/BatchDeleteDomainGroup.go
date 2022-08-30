@@ -84,6 +84,7 @@ func (r *BatchDeleteDomainGroupRequest) SetIds(ids []int64) {
     r.Ids = ids
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r BatchDeleteDomainGroupRequest) GetRegionId() string {

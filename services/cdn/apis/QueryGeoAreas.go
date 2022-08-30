@@ -71,6 +71,8 @@ func NewQueryGeoAreasRequestWithoutParam() *QueryGeoAreasRequest {
     }
 }
 
+
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r QueryGeoAreasRequest) GetRegionId() string {

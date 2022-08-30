@@ -165,76 +165,63 @@ func NewQueryLiveTrafficGroupSumRequestWithoutParam() *QueryLiveTrafficGroupSumR
 func (r *QueryLiveTrafficGroupSumRequest) SetStartTime(startTime string) {
     r.StartTime = &startTime
 }
-
 /* param endTime: 查询截止时间,UTC时间，格式为:yyyy-MM-dd'T'HH:mm:ss'Z'，示例:2018-10-21T10:00:00Z(Optional) */
 func (r *QueryLiveTrafficGroupSumRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
-
 /* param domain: 需要查询的域名, 必须为用户pin下有权限的域名(Optional) */
 func (r *QueryLiveTrafficGroupSumRequest) SetDomain(domain string) {
     r.Domain = &domain
 }
-
 /* param subDomain: 查询泛域名时，指定的子域名列表，多个用逗号分隔。非泛域名时，传入空即可(Optional) */
 func (r *QueryLiveTrafficGroupSumRequest) SetSubDomain(subDomain string) {
     r.SubDomain = &subDomain
 }
-
 /* param appName: 查询的App名称，多个用逗号分隔。(Optional) */
 func (r *QueryLiveTrafficGroupSumRequest) SetAppName(appName string) {
     r.AppName = &appName
 }
-
 /* param streamName: 查询的流名称，多个用逗号分隔。(Optional) */
 func (r *QueryLiveTrafficGroupSumRequest) SetStreamName(streamName string) {
     r.StreamName = &streamName
 }
-
 /* param fields: 需要查询的字段(Optional) */
 func (r *QueryLiveTrafficGroupSumRequest) SetFields(fields string) {
     r.Fields = &fields
 }
-
 /* param area: 查询的区域，如beijing,shanghai。多个用逗号分隔(Optional) */
 func (r *QueryLiveTrafficGroupSumRequest) SetArea(area string) {
     r.Area = &area
 }
-
 /* param isp: 查询的运营商，cmcc,cnc,ct，表示移动、联通、电信。多个用逗号分隔(Optional) */
 func (r *QueryLiveTrafficGroupSumRequest) SetIsp(isp string) {
     r.Isp = &isp
 }
-
 /* param scheme: 查询的流协议，取值范围："rtmp,hdl,hls"，多个用逗号分隔，默认为空，表示查询所有协议。(Optional) */
 func (r *QueryLiveTrafficGroupSumRequest) SetScheme(scheme string) {
     r.Scheme = &scheme
 }
-
 /* param period: 时间粒度，可选值:[oneMin,fiveMin,followTime],followTime只会返回一个汇总后的数据(Optional) */
 func (r *QueryLiveTrafficGroupSumRequest) SetPeriod(period string) {
     r.Period = &period
 }
-
 /* param groupBy: 分组依据，可选值：[appname,streamname,domain,area,isp,scheme](Optional) */
 func (r *QueryLiveTrafficGroupSumRequest) SetGroupBy(groupBy string) {
     r.GroupBy = &groupBy
 }
-
 /* param reqMethod: 当前取值范围("GET,HEAD,forward,forward-hls,ingest,play,publish,detour-ingest,Forward-Origin")(Optional) */
 func (r *QueryLiveTrafficGroupSumRequest) SetReqMethod(reqMethod string) {
     r.ReqMethod = &reqMethod
 }
-
 /* param cacheLevel: cacheLevel，可选值：[L1,L2,L3](Optional) */
 func (r *QueryLiveTrafficGroupSumRequest) SetCacheLevel(cacheLevel string) {
     r.CacheLevel = &cacheLevel
 }
-
 /* param cacheType: 查询节点层级，可选值:[all,edge,mid],默认查询all,edge边缘 mid中间(Optional) */
 func (r *QueryLiveTrafficGroupSumRequest) SetCacheType(cacheType string) {
     r.CacheType = &cacheType
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -92,16 +92,15 @@ func NewCreateLiveDomainPrefecthTaskRequestWithoutParam() *CreateLiveDomainPrefe
 func (r *CreateLiveDomainPrefecthTaskRequest) SetUrlList(urlList []string) {
     r.UrlList = urlList
 }
-
 /* param prefetchTime: 预热时长(Optional) */
 func (r *CreateLiveDomainPrefecthTaskRequest) SetPrefetchTime(prefetchTime int) {
     r.PrefetchTime = &prefetchTime
 }
-
 /* param action: 操作类型只能是[start,stop]中的一种(Optional) */
 func (r *CreateLiveDomainPrefecthTaskRequest) SetAction(action string) {
     r.Action = &action
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -107,21 +107,19 @@ func NewUploadCertRequestWithoutParam() *UploadCertRequest {
 func (r *UploadCertRequest) SetCertName(certName string) {
     r.CertName = certName
 }
-
 /* param keyFile: 私钥(Required) */
 func (r *UploadCertRequest) SetKeyFile(keyFile string) {
     r.KeyFile = keyFile
 }
-
 /* param certFile: 证书(Required) */
 func (r *UploadCertRequest) SetCertFile(certFile string) {
     r.CertFile = certFile
 }
-
 /* param aliasName: 证书别名(Optional) */
 func (r *UploadCertRequest) SetAliasName(aliasName string) {
     r.AliasName = &aliasName
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

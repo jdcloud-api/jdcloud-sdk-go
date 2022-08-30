@@ -82,6 +82,7 @@ func (r *BatCreatePrefetchTaskRequest) SetTasks(tasks []cdn.VodPrefetchTaskItem)
     r.Tasks = tasks
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r BatCreatePrefetchTaskRequest) GetRegionId() string {

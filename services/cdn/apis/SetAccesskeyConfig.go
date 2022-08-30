@@ -101,21 +101,19 @@ func NewSetAccesskeyConfigRequestWithoutParam() *SetAccesskeyConfigRequest {
 func (r *SetAccesskeyConfigRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param accesskeyType: 鉴权类型，0表示无鉴权，1表示参数鉴权，2表示路径鉴权(Optional) */
 func (r *SetAccesskeyConfigRequest) SetAccesskeyType(accesskeyType int) {
     r.AccesskeyType = &accesskeyType
 }
-
 /* param accesskeyKey: 密码，长度为8到32(Optional) */
 func (r *SetAccesskeyConfigRequest) SetAccesskeyKey(accesskeyKey string) {
     r.AccesskeyKey = &accesskeyKey
 }
-
 /* param accesskeyKeep: 是否是回源鉴权 0表示是 1表示否(Optional) */
 func (r *SetAccesskeyConfigRequest) SetAccesskeyKeep(accesskeyKeep int) {
     r.AccesskeyKeep = &accesskeyKeep
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

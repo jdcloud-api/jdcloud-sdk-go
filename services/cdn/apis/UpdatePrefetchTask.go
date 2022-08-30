@@ -98,21 +98,19 @@ func NewUpdatePrefetchTaskRequestWithoutParam() *UpdatePrefetchTaskRequest {
 func (r *UpdatePrefetchTaskRequest) SetUrl(url string) {
     r.Url = &url
 }
-
 /* param region: 地区[huabei huadong dongbei huazhong huanan xinan xibei gangaotai]中的一个(Optional) */
 func (r *UpdatePrefetchTaskRequest) SetRegion(region string) {
     r.Region = &region
 }
-
 /* param isp: 运营商[ct uni cm]中的一个,分别代表电信 联通 移动(Optional) */
 func (r *UpdatePrefetchTaskRequest) SetIsp(isp string) {
     r.Isp = &isp
 }
-
 /* param copyNum: 副本数,介于1-1000之间(Optional) */
 func (r *UpdatePrefetchTaskRequest) SetCopyNum(copyNum int) {
     r.CopyNum = &copyNum
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

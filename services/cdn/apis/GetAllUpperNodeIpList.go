@@ -70,6 +70,8 @@ func NewGetAllUpperNodeIpListRequestWithoutParam() *GetAllUpperNodeIpListRequest
     }
 }
 
+
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r GetAllUpperNodeIpListRequest) GetRegionId() string {

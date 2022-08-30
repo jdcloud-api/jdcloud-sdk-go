@@ -98,21 +98,19 @@ func NewSetRefreshLimitRequestWithoutParam() *SetRefreshLimitRequest {
 func (r *SetRefreshLimitRequest) SetSubUsers(subUsers []string) {
     r.SubUsers = subUsers
 }
-
 /* param refreshCount: 刷新个数，如果是首次设置，不传默认是2000；已经设置，再次设置是更新，不传表示不进行更新(Optional) */
 func (r *SetRefreshLimitRequest) SetRefreshCount(refreshCount int64) {
     r.RefreshCount = &refreshCount
 }
-
 /* param prefetchCount: 刷新个数，如果是首次设置，不传默认是2000；已经设置，再次设置是更新，不传表示不进行更新(Optional) */
 func (r *SetRefreshLimitRequest) SetPrefetchCount(prefetchCount int64) {
     r.PrefetchCount = &prefetchCount
 }
-
 /* param dirCount: 刷新个数，如果是首次设置，不传默认是50；已经设置，再次设置是更新，不传表示不进行更新(Optional) */
 func (r *SetRefreshLimitRequest) SetDirCount(dirCount int64) {
     r.DirCount = &dirCount
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

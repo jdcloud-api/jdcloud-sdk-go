@@ -113,31 +113,27 @@ func NewUpdateCacheRuleRequestWithoutParam() *UpdateCacheRuleRequest {
 func (r *UpdateCacheRuleRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param weight: 此条配置的权重值, 取值范围为1-10,1最大(Optional) */
 func (r *UpdateCacheRuleRequest) SetWeight(weight int) {
     r.Weight = &weight
 }
-
 /* param ttl: 缓存时间,单位秒，中国境内加速域名最长可配置2年，中国境外/全球加速域名最长可配置1年(Optional) */
 func (r *UpdateCacheRuleRequest) SetTtl(ttl int64) {
     r.Ttl = &ttl
 }
-
 /* param contents: 规则内容。其他类型只能以/或者.开头，如/a/b或.jpg(Optional) */
 func (r *UpdateCacheRuleRequest) SetContents(contents string) {
     r.Contents = &contents
 }
-
 /* param cacheType: 缓存方式：0、不缓存，1自定义(Optional) */
 func (r *UpdateCacheRuleRequest) SetCacheType(cacheType int) {
     r.CacheType = &cacheType
 }
-
 /* param configId: 缓存规则配置ID(Optional) */
 func (r *UpdateCacheRuleRequest) SetConfigId(configId int64) {
     r.ConfigId = &configId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

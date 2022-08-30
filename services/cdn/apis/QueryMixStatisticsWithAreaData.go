@@ -48,6 +48,9 @@ type QueryMixStatisticsWithAreaDataRequest struct {
 
     /* 查询节点层级，可选值:[all,edge,mid],默认查询all,edge边缘 mid中间 (Optional) */
     CacheType *string `json:"cacheType"`
+
+    /* 查询IP类型，可选值:[,ipv4,ipv6],默认查询all (Optional) */
+    IpType *string `json:"ipType"`
 }
 
 /*
@@ -76,6 +79,7 @@ func NewQueryMixStatisticsWithAreaDataRequest(
  * param isp: 查询的运营商，cmcc,cnc,ct，表示移动、联通、电信。多个用逗号分隔 (Optional)
  * param period: 时间粒度，可选值:[oneMin,fiveMin,followTime],followTime只会返回一个汇总后的数据 (Optional)
  * param cacheType: 查询节点层级，可选值:[all,edge,mid],默认查询all,edge边缘 mid中间 (Optional)
+ * param ipType: 查询IP类型，可选值:[,ipv4,ipv6],默认查询all (Optional)
  */
 func NewQueryMixStatisticsWithAreaDataRequestWithAllParams(
     startTime *string,
@@ -86,6 +90,7 @@ func NewQueryMixStatisticsWithAreaDataRequestWithAllParams(
     isp *string,
     period *string,
     cacheType *string,
+    ipType *string,
 ) *QueryMixStatisticsWithAreaDataRequest {
 
     return &QueryMixStatisticsWithAreaDataRequest{
@@ -103,6 +108,7 @@ func NewQueryMixStatisticsWithAreaDataRequestWithAllParams(
         Isp: isp,
         Period: period,
         CacheType: cacheType,
+        IpType: ipType,
     }
 }
 
@@ -123,41 +129,39 @@ func NewQueryMixStatisticsWithAreaDataRequestWithoutParam() *QueryMixStatisticsW
 func (r *QueryMixStatisticsWithAreaDataRequest) SetStartTime(startTime string) {
     r.StartTime = &startTime
 }
-
 /* param endTime: 查询截止时间,UTC时间，格式为:yyyy-MM-dd'T'HH:mm:ss'Z'，示例:2018-10-21T10:00:00Z(Optional) */
 func (r *QueryMixStatisticsWithAreaDataRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
-
 /* param domain: 需要查询的域名, 必须为用户pin下有权限的域名(Optional) */
 func (r *QueryMixStatisticsWithAreaDataRequest) SetDomain(domain string) {
     r.Domain = &domain
 }
-
 /* param fields: 需要查询的字段(Optional) */
 func (r *QueryMixStatisticsWithAreaDataRequest) SetFields(fields string) {
     r.Fields = &fields
 }
-
 /* param area: 查询的区域，如beijing,shanghai。多个用逗号分隔(Optional) */
 func (r *QueryMixStatisticsWithAreaDataRequest) SetArea(area string) {
     r.Area = &area
 }
-
 /* param isp: 查询的运营商，cmcc,cnc,ct，表示移动、联通、电信。多个用逗号分隔(Optional) */
 func (r *QueryMixStatisticsWithAreaDataRequest) SetIsp(isp string) {
     r.Isp = &isp
 }
-
 /* param period: 时间粒度，可选值:[oneMin,fiveMin,followTime],followTime只会返回一个汇总后的数据(Optional) */
 func (r *QueryMixStatisticsWithAreaDataRequest) SetPeriod(period string) {
     r.Period = &period
 }
-
 /* param cacheType: 查询节点层级，可选值:[all,edge,mid],默认查询all,edge边缘 mid中间(Optional) */
 func (r *QueryMixStatisticsWithAreaDataRequest) SetCacheType(cacheType string) {
     r.CacheType = &cacheType
 }
+/* param ipType: 查询IP类型，可选值:[,ipv4,ipv6],默认查询all(Optional) */
+func (r *QueryMixStatisticsWithAreaDataRequest) SetIpType(ipType string) {
+    r.IpType = &ipType
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

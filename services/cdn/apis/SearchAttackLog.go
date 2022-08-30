@@ -111,31 +111,27 @@ func NewSearchAttackLogRequestWithoutParam() *SearchAttackLogRequest {
 func (r *SearchAttackLogRequest) SetStartTime(startTime string) {
     r.StartTime = &startTime
 }
-
 /* param endTime: 查询截止时间,UTC时间，格式为:yyyy-MM-dd'T'HH:mm:ss'Z'，示例:2019-08-16T07:00:00Z(Optional) */
 func (r *SearchAttackLogRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
-
 /* param pageNumber: 页码(Optional) */
 func (r *SearchAttackLogRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页条数(Optional) */
 func (r *SearchAttackLogRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param sortField: 排序字段，默认传avgbandwidth(Optional) */
 func (r *SearchAttackLogRequest) SetSortField(sortField string) {
     r.SortField = &sortField
 }
-
 /* param sortRule: 排序规则，默认是降序排序，传值asc或者desc(Optional) */
 func (r *SearchAttackLogRequest) SetSortRule(sortRule string) {
     r.SortRule = &sortRule
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

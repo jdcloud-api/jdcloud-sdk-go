@@ -120,31 +120,27 @@ func NewQueryJBoxAvgBandwidthRequestWithoutParam() *QueryJBoxAvgBandwidthRequest
 func (r *QueryJBoxAvgBandwidthRequest) SetStarttime(starttime string) {
     r.Starttime = starttime
 }
-
 /* param stoptime: 指定查询结束时间(格式:201906011100)，返回数据不包含该时间点(Required) */
 func (r *QueryJBoxAvgBandwidthRequest) SetStoptime(stoptime string) {
     r.Stoptime = stoptime
 }
-
 /* param pluginPin: 插件pin,多个用,隔开(Required) */
 func (r *QueryJBoxAvgBandwidthRequest) SetPluginPin(pluginPin string) {
     r.PluginPin = pluginPin
 }
-
 /* param clientid: 按照设备ID查询设备带宽,即macaddr,多个用,隔开(Optional) */
 func (r *QueryJBoxAvgBandwidthRequest) SetClientid(clientid string) {
     r.Clientid = &clientid
 }
-
 /* param page: 用于支持分页查询，默认为1，表示第几页。(Optional) */
 func (r *QueryJBoxAvgBandwidthRequest) SetPage(page int) {
     r.Page = &page
 }
-
 /* param size: 用于支持分页查询，表示每页返回多少条数据，默认每页返回10条数据，size必须是10的整数倍，并且最大值是100。(Optional) */
 func (r *QueryJBoxAvgBandwidthRequest) SetSize(size int) {
     r.Size = &size
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

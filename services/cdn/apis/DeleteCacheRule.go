@@ -89,11 +89,11 @@ func NewDeleteCacheRuleRequestWithoutParam() *DeleteCacheRuleRequest {
 func (r *DeleteCacheRuleRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param configId: 缓存规则配置ID(Optional) */
 func (r *DeleteCacheRuleRequest) SetConfigId(configId int64) {
     r.ConfigId = &configId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

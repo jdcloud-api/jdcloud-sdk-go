@@ -107,26 +107,23 @@ func NewSetHttpHeaderRequestWithoutParam() *SetHttpHeaderRequest {
 func (r *SetHttpHeaderRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param edgeType: 0表示header在边缘生效，1表示header回源生效，2表示在边缘和回源都生效，该字段不传时默认header在边缘和回源都生效(Optional) */
 func (r *SetHttpHeaderRequest) SetEdgeType(edgeType int) {
     r.EdgeType = &edgeType
 }
-
 /* param headerType: header类型[resp,req],resp：配置响应头，req：配置请求头(Optional) */
 func (r *SetHttpHeaderRequest) SetHeaderType(headerType string) {
     r.HeaderType = &headerType
 }
-
 /* param headerName: header名，例如：Content-Disposition，可自定义，长度不能超过256个字符，不能包含中文字符，不能包含$和_，不支持设置如下头名：["Content-Length","Date","Host","Content-Encoding","If-Modified-Since","If-Range","Content-Type","Transfer-Encoding","Cache-Control","Last-Modified","Connection", "Content-Range","ETag","Age","Authentication-Info","Proxy-Authenticate","Retry-After","Set-Cookie","Vary","Content-Location","Meter","Allow","Error","X-Trace", "Proxy-Connection"](Optional) */
 func (r *SetHttpHeaderRequest) SetHeaderName(headerName string) {
     r.HeaderName = &headerName
 }
-
 /* param headerValue: header值，不能包含($,_,#)，不能超过256个字符(Optional) */
 func (r *SetHttpHeaderRequest) SetHeaderValue(headerValue string) {
     r.HeaderValue = &headerValue
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

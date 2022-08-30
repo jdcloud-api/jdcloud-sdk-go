@@ -84,6 +84,7 @@ func (r *QueryDeviceStatusForPCdnRequest) SetMacAddr(macAddr string) {
     r.MacAddr = macAddr
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r QueryDeviceStatusForPCdnRequest) GetRegionId() string {

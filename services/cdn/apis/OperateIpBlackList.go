@@ -89,11 +89,11 @@ func NewOperateIpBlackListRequestWithoutParam() *OperateIpBlackListRequest {
 func (r *OperateIpBlackListRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param status: ip黑名单状态取值[on,off](Optional) */
 func (r *OperateIpBlackListRequest) SetStatus(status string) {
     r.Status = &status
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

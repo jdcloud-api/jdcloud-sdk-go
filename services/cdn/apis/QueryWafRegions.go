@@ -85,6 +85,7 @@ func (r *QueryWafRegionsRequest) SetSkipType(skipType string) {
     r.SkipType = skipType
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r QueryWafRegionsRequest) GetRegionId() string {

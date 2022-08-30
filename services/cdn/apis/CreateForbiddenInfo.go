@@ -116,36 +116,31 @@ func NewCreateForbiddenInfoRequestWithoutParam() *CreateForbiddenInfoRequest {
 func (r *CreateForbiddenInfoRequest) SetForbiddenType(forbiddenType string) {
     r.ForbiddenType = &forbiddenType
 }
-
 /* param forbiddenDomain: 封禁域名(Optional) */
 func (r *CreateForbiddenInfoRequest) SetForbiddenDomain(forbiddenDomain string) {
     r.ForbiddenDomain = &forbiddenDomain
 }
-
 /* param forbiddenUrl: 封禁url,多个以;隔开(Optional) */
 func (r *CreateForbiddenInfoRequest) SetForbiddenUrl(forbiddenUrl string) {
     r.ForbiddenUrl = &forbiddenUrl
 }
-
 /* param reason: 封禁原因(Optional) */
 func (r *CreateForbiddenInfoRequest) SetReason(reason string) {
     r.Reason = &reason
 }
-
 /* param linkOther: y,n y表示是，n表示否(Optional) */
 func (r *CreateForbiddenInfoRequest) SetLinkOther(linkOther string) {
     r.LinkOther = &linkOther
 }
-
 /* param shareCacheDomainFlag: 是否同步操作共享缓存域名,0:仅操作本域名,1:同步操作共享缓存域名,默认为0(Optional) */
 func (r *CreateForbiddenInfoRequest) SetShareCacheDomainFlag(shareCacheDomainFlag string) {
     r.ShareCacheDomainFlag = &shareCacheDomainFlag
 }
-
 /* param token: 用于封禁前缀识别的URL,应为单个特殊字符，如：~(Optional) */
 func (r *CreateForbiddenInfoRequest) SetToken(token string) {
     r.Token = &token
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

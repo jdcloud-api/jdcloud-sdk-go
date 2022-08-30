@@ -129,46 +129,39 @@ func NewQueryPrefetchTaskRequestWithoutParam() *QueryPrefetchTaskRequest {
 func (r *QueryPrefetchTaskRequest) SetUrl(url string) {
     r.Url = &url
 }
-
 /* param region: 地区[huabei huadong dongbei huazhong huanan xinan xibei gangaotai]中的一个(Optional) */
 func (r *QueryPrefetchTaskRequest) SetRegion(region string) {
     r.Region = &region
 }
-
 /* param isp: 运营商[ct uni cm]中的一个,分别代表电信 联通 移动(Optional) */
 func (r *QueryPrefetchTaskRequest) SetIsp(isp string) {
     r.Isp = &isp
 }
-
 /* param status: 查询状态 1:active维护预热中，2:表示purge中暂时停止预热(Optional) */
 func (r *QueryPrefetchTaskRequest) SetStatus(status int) {
     r.Status = &status
 }
-
 /* param fileId: 同url，系统内部url对应id（url和file_id同时存在时以url为准）(Optional) */
 func (r *QueryPrefetchTaskRequest) SetFileId(fileId string) {
     r.FileId = &fileId
 }
-
 /* param pageNumber: 页码数,最小为1(Optional) */
 func (r *QueryPrefetchTaskRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 每页大小,默认10(Optional) */
 func (r *QueryPrefetchTaskRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param taskType: 1:代表控制台下发的预热任务2:代表热度计算下发的预热任务3:代表控制台、热度计算共同下发的任务(Optional) */
 func (r *QueryPrefetchTaskRequest) SetTaskType(taskType int) {
     r.TaskType = &taskType
 }
-
 /* param domain: 域名(Optional) */
 func (r *QueryPrefetchTaskRequest) SetDomain(domain string) {
     r.Domain = &domain
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

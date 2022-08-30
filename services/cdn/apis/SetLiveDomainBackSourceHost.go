@@ -89,11 +89,11 @@ func NewSetLiveDomainBackSourceHostRequestWithoutParam() *SetLiveDomainBackSourc
 func (r *SetLiveDomainBackSourceHostRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param sourceHost: 默认回源host(Optional) */
 func (r *SetLiveDomainBackSourceHostRequest) SetSourceHost(sourceHost string) {
     r.SourceHost = &sourceHost
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

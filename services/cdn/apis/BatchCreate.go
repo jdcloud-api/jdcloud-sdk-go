@@ -177,86 +177,71 @@ func NewBatchCreateRequestWithoutParam() *BatchCreateRequest {
 func (r *BatchCreateRequest) SetDomains(domains []string) {
     r.Domains = domains
 }
-
 /* param sourceType: 回源类型只能是[ips,domain,oss]中的一种(Optional) */
 func (r *BatchCreateRequest) SetSourceType(sourceType string) {
     r.SourceType = &sourceType
 }
-
 /* param cdnType: 点播域名的类型只能是[vod,download,web]中的一种(Optional) */
 func (r *BatchCreateRequest) SetCdnType(cdnType string) {
     r.CdnType = &cdnType
 }
-
 /* param backSourceType: 回源方式,只能是[https,http]中的一种,默认http(Optional) */
 func (r *BatchCreateRequest) SetBackSourceType(backSourceType string) {
     r.BackSourceType = &backSourceType
 }
-
 /* param dailyBandWidth: 日带宽(Mbps)(Optional) */
 func (r *BatchCreateRequest) SetDailyBandWidth(dailyBandWidth int64) {
     r.DailyBandWidth = &dailyBandWidth
 }
-
 /* param quaility: 服务质量,只能是[good,general]中的一种,默认为good(Optional) */
 func (r *BatchCreateRequest) SetQuaility(quaility string) {
     r.Quaility = &quaility
 }
-
 /* param maxFileSize: (Optional) */
 func (r *BatchCreateRequest) SetMaxFileSize(maxFileSize int64) {
     r.MaxFileSize = &maxFileSize
 }
-
 /* param minFileSize: (Optional) */
 func (r *BatchCreateRequest) SetMinFileSize(minFileSize int64) {
     r.MinFileSize = &minFileSize
 }
-
 /* param sumFileSize: (Optional) */
 func (r *BatchCreateRequest) SetSumFileSize(sumFileSize int64) {
     r.SumFileSize = &sumFileSize
 }
-
 /* param avgFileSize: (Optional) */
 func (r *BatchCreateRequest) SetAvgFileSize(avgFileSize int64) {
     r.AvgFileSize = &avgFileSize
 }
-
 /* param defaultSourceHost: (Optional) */
 func (r *BatchCreateRequest) SetDefaultSourceHost(defaultSourceHost string) {
     r.DefaultSourceHost = &defaultSourceHost
 }
-
 /* param httpType: (Optional) */
 func (r *BatchCreateRequest) SetHttpType(httpType string) {
     r.HttpType = &httpType
 }
-
 /* param ipSource: (Optional) */
 func (r *BatchCreateRequest) SetIpSource(ipSource []cdn.IpSourceInfo) {
     r.IpSource = ipSource
 }
-
 /* param domainSource: (Optional) */
 func (r *BatchCreateRequest) SetDomainSource(domainSource []cdn.DomainSourceInfo) {
     r.DomainSource = domainSource
 }
-
 /* param ossSource: (Optional) */
 func (r *BatchCreateRequest) SetOssSource(ossSource string) {
     r.OssSource = &ossSource
 }
-
 /* param accelerateRegion: 加速区域 (mainLand:中国大陆，nonMainLand:海外加港澳台，all:全球)默认为中国大陆(Optional) */
 func (r *BatchCreateRequest) SetAccelerateRegion(accelerateRegion string) {
     r.AccelerateRegion = &accelerateRegion
 }
-
 /* param tempInstId: (Optional) */
 func (r *BatchCreateRequest) SetTempInstId(tempInstId int64) {
     r.TempInstId = &tempInstId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

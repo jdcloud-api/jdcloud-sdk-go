@@ -111,26 +111,23 @@ func NewQuerywafWhiteRulesRequestWithoutParam() *QuerywafWhiteRulesRequest {
 func (r *QuerywafWhiteRulesRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param ruleType: ruleType, valid values [ip, geo, uri](Required) */
 func (r *QuerywafWhiteRulesRequest) SetRuleType(ruleType string) {
     r.RuleType = ruleType
 }
-
 /* param id: ruleId, defalut empty(Optional) */
 func (r *QuerywafWhiteRulesRequest) SetId(id string) {
     r.Id = &id
 }
-
 /* param pageSize: page size , default 0 to query all(Optional) */
 func (r *QuerywafWhiteRulesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param pageIndex: page index , default 0 to query all(Optional) */
 func (r *QuerywafWhiteRulesRequest) SetPageIndex(pageIndex int) {
     r.PageIndex = &pageIndex
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

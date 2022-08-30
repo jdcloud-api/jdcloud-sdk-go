@@ -90,11 +90,11 @@ func NewDeleteForbiddenStreamRequestWithoutParam() *DeleteForbiddenStreamRequest
 func (r *DeleteForbiddenStreamRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param deleteStreams: 要删除的禁播流(Optional) */
 func (r *DeleteForbiddenStreamRequest) SetDeleteStreams(deleteStreams []cdn.DeleteStream) {
     r.DeleteStreams = deleteStreams
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

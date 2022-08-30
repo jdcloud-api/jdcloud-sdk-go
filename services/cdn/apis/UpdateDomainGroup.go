@@ -107,26 +107,23 @@ func NewUpdateDomainGroupRequestWithoutParam() *UpdateDomainGroupRequest {
 func (r *UpdateDomainGroupRequest) SetId(id int) {
     r.Id = id
 }
-
 /* param domains: 域名组内域名，包含主域名(Optional) */
 func (r *UpdateDomainGroupRequest) SetDomains(domains []string) {
     r.Domains = domains
 }
-
 /* param primaryDomain: 主域名,开启共享缓存时必传(Optional) */
 func (r *UpdateDomainGroupRequest) SetPrimaryDomain(primaryDomain string) {
     r.PrimaryDomain = &primaryDomain
 }
-
 /* param shareCache: 是否共享内存，共享缓存仅对中国境内加速域名生效(Optional) */
 func (r *UpdateDomainGroupRequest) SetShareCache(shareCache string) {
     r.ShareCache = &shareCache
 }
-
 /* param domainGroupName: (Optional) */
 func (r *UpdateDomainGroupRequest) SetDomainGroupName(domainGroupName string) {
     r.DomainGroupName = &domainGroupName
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

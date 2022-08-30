@@ -105,26 +105,23 @@ func NewQueryDomainGroupListRequestWithoutParam() *QueryDomainGroupListRequest {
 func (r *QueryDomainGroupListRequest) SetShareCache(shareCache string) {
     r.ShareCache = &shareCache
 }
-
 /* param pageNumber: pageNumber(Optional) */
 func (r *QueryDomainGroupListRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: pageSize(Optional) */
 func (r *QueryDomainGroupListRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param primaryDomain: 根据主域名模糊查询(Optional) */
 func (r *QueryDomainGroupListRequest) SetPrimaryDomain(primaryDomain string) {
     r.PrimaryDomain = &primaryDomain
 }
-
 /* param domainGroupName: 根据域名组模糊查询(Optional) */
 func (r *QueryDomainGroupListRequest) SetDomainGroupName(domainGroupName string) {
     r.DomainGroupName = &domainGroupName
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

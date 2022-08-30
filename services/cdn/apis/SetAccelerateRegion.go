@@ -89,11 +89,11 @@ func NewSetAccelerateRegionRequestWithoutParam() *SetAccelerateRegionRequest {
 func (r *SetAccelerateRegionRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param accelerateRegion: 加速区域,取值[mainland,nonMainland,all](Optional) */
 func (r *SetAccelerateRegionRequest) SetAccelerateRegion(accelerateRegion string) {
     r.AccelerateRegion = &accelerateRegion
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

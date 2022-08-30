@@ -82,6 +82,7 @@ func (r *QueryServiceIpRequest) SetDomainList(domainList []string) {
     r.DomainList = domainList
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r QueryServiceIpRequest) GetRegionId() string {

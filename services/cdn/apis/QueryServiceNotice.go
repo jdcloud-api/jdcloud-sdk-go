@@ -87,11 +87,11 @@ func NewQueryServiceNoticeRequestWithoutParam() *QueryServiceNoticeRequest {
 func (r *QueryServiceNoticeRequest) SetNoticeType(noticeType string) {
     r.NoticeType = &noticeType
 }
-
 /* param noticeWay: 通知方式,取值[mail],mail:邮件.(Optional) */
 func (r *QueryServiceNoticeRequest) SetNoticeWay(noticeWay string) {
     r.NoticeWay = &noticeWay
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

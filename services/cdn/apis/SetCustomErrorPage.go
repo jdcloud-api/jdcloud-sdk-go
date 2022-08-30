@@ -90,11 +90,11 @@ func NewSetCustomErrorPageRequestWithoutParam() *SetCustomErrorPageRequest {
 func (r *SetCustomErrorPageRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param errorPageConfigs: 自定义错误页面配置(Optional) */
 func (r *SetCustomErrorPageRequest) SetErrorPageConfigs(errorPageConfigs []cdn.ErrorPageConfigs) {
     r.ErrorPageConfigs = errorPageConfigs
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

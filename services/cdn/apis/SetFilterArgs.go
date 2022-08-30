@@ -95,16 +95,15 @@ func NewSetFilterArgsRequestWithoutParam() *SetFilterArgsRequest {
 func (r *SetFilterArgsRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param retainArgs: 保留参数，多个用;隔开(Optional) */
 func (r *SetFilterArgsRequest) SetRetainArgs(retainArgs string) {
     r.RetainArgs = &retainArgs
 }
-
 /* param status: 忽略参数开关，取值：on or off(Optional) */
 func (r *SetFilterArgsRequest) SetStatus(status string) {
     r.Status = &status
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

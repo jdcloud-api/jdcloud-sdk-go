@@ -135,51 +135,43 @@ func NewBatchCreateLiveDomainRequestWithoutParam() *BatchCreateLiveDomainRequest
 func (r *BatchCreateLiveDomainRequest) SetPlayDomain(playDomain string) {
     r.PlayDomain = &playDomain
 }
-
 /* param publishDomain: 创建推流域名时，必传推流域名(Optional) */
 func (r *BatchCreateLiveDomainRequest) SetPublishDomain(publishDomain string) {
     r.PublishDomain = &publishDomain
 }
-
 /* param sourceType: 回源类型只能是[ips,domain]中的一种(Optional) */
 func (r *BatchCreateLiveDomainRequest) SetSourceType(sourceType string) {
     r.SourceType = &sourceType
 }
-
 /* param backHttpType: (Optional) */
 func (r *BatchCreateLiveDomainRequest) SetBackHttpType(backHttpType string) {
     r.BackHttpType = &backHttpType
 }
-
 /* param defaultSourceHost: 默认回源host(Optional) */
 func (r *BatchCreateLiveDomainRequest) SetDefaultSourceHost(defaultSourceHost string) {
     r.DefaultSourceHost = &defaultSourceHost
 }
-
 /* param siteType: 站点类型pull(拉流)push(推流)(Optional) */
 func (r *BatchCreateLiveDomainRequest) SetSiteType(siteType string) {
     r.SiteType = &siteType
 }
-
 /* param backSourceType: 回源类型，目前只能为rtmp(Optional) */
 func (r *BatchCreateLiveDomainRequest) SetBackSourceType(backSourceType string) {
     r.BackSourceType = &backSourceType
 }
-
 /* param ipSource: (Optional) */
 func (r *BatchCreateLiveDomainRequest) SetIpSource(ipSource []cdn.IpSourceInfo) {
     r.IpSource = ipSource
 }
-
 /* param domainSource: (Optional) */
 func (r *BatchCreateLiveDomainRequest) SetDomainSource(domainSource []cdn.DomainSourceInfo) {
     r.DomainSource = domainSource
 }
-
 /* param accelerateRegion: 加速区域(mainLand:中国大陆，nonMainLand:海外加港澳台，all:全球)默认为中国大陆(Optional) */
 func (r *BatchCreateLiveDomainRequest) SetAccelerateRegion(accelerateRegion string) {
     r.AccelerateRegion = &accelerateRegion
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

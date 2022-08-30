@@ -111,31 +111,27 @@ func NewQueryPurgeTaskRequestWithoutParam() *QueryPurgeTaskRequest {
 func (r *QueryPurgeTaskRequest) SetUrl(url string) {
     r.Url = &url
 }
-
 /* param status: 查询状态 1:进行中 2:已完成(Optional) */
 func (r *QueryPurgeTaskRequest) SetStatus(status int) {
     r.Status = &status
 }
-
 /* param fileId: 同url,系统内部url对应id（url和file_id同时存在时以url为准）(Optional) */
 func (r *QueryPurgeTaskRequest) SetFileId(fileId string) {
     r.FileId = &fileId
 }
-
 /* param pageNumber: 页码数,最小为1(Optional) */
 func (r *QueryPurgeTaskRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 每页大小,默认10(Optional) */
 func (r *QueryPurgeTaskRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param domain: 域名(Optional) */
 func (r *QueryPurgeTaskRequest) SetDomain(domain string) {
     r.Domain = &domain
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

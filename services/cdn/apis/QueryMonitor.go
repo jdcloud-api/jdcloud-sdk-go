@@ -84,6 +84,7 @@ func (r *QueryMonitorRequest) SetDomain(domain string) {
     r.Domain = domain
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r QueryMonitorRequest) GetRegionId() string {

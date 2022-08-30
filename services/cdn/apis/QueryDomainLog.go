@@ -120,36 +120,31 @@ func NewQueryDomainLogRequestWithoutParam() *QueryDomainLogRequest {
 func (r *QueryDomainLogRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param startTime: 查询起始时间,UTC时间，格式为:yyyy-MM-dd'T'HH:mm:ss'Z'，示例:2018-10-21T10:00:00Z(Optional) */
 func (r *QueryDomainLogRequest) SetStartTime(startTime string) {
     r.StartTime = &startTime
 }
-
 /* param endTime: 查询截止时间,UTC时间，格式为:yyyy-MM-dd'T'HH:mm:ss'Z'，示例:2018-10-21T10:00:00Z(Optional) */
 func (r *QueryDomainLogRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
-
 /* param interval: 时间间隔，取值(hour，day，fiveMin)，不传默认小时。(Optional) */
 func (r *QueryDomainLogRequest) SetInterval(interval string) {
     r.Interval = &interval
 }
-
 /* param logType: 日志类型，取值(log，zip,gz)，不传默认gz。(Optional) */
 func (r *QueryDomainLogRequest) SetLogType(logType string) {
     r.LogType = &logType
 }
-
 /* param pageSize: 页面大小，默认值10(Optional) */
 func (r *QueryDomainLogRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param pageNumber: 分页页数，默认值1(Optional) */
 func (r *QueryDomainLogRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

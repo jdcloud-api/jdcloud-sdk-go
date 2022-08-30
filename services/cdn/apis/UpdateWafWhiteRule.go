@@ -116,31 +116,27 @@ func NewUpdateWafWhiteRuleRequestWithoutParam() *UpdateWafWhiteRuleRequest {
 func (r *UpdateWafWhiteRuleRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param id: 需要修改的白名单ID(Required) */
 func (r *UpdateWafWhiteRuleRequest) SetId(id string) {
     r.Id = id
 }
-
 /* param ruleType: 白名单类型， uri ip geo(Optional) */
 func (r *UpdateWafWhiteRuleRequest) SetRuleType(ruleType string) {
     r.RuleType = &ruleType
 }
-
 /* param matchOp: 匹配模式,uri类型有效，0=完全匹配  1=前缀匹配 2=包含 3=正则 4=大于 5=后缀(Optional) */
 func (r *UpdateWafWhiteRuleRequest) SetMatchOp(matchOp int) {
     r.MatchOp = &matchOp
 }
-
 /* param val: 匹配值(Optional) */
 func (r *UpdateWafWhiteRuleRequest) SetVal(val string) {
     r.Val = &val
 }
-
 /* param actions: 后续处理 "waf" "cc" "deny"自由组合，空表示跳过后续所有阶段(Optional) */
 func (r *UpdateWafWhiteRuleRequest) SetActions(actions []string) {
     r.Actions = actions
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

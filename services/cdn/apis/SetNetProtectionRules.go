@@ -128,46 +128,39 @@ func NewSetNetProtectionRulesRequestWithoutParam() *SetNetProtectionRulesRequest
 func (r *SetNetProtectionRulesRequest) SetSrcNewConnLimitEnable(srcNewConnLimitEnable string) {
     r.SrcNewConnLimitEnable = &srcNewConnLimitEnable
 }
-
 /* param dstNewConnLimitEnable: 目的新建连接，取值on,off，其中on开启，off关闭(Optional) */
 func (r *SetNetProtectionRulesRequest) SetDstNewConnLimitEnable(dstNewConnLimitEnable string) {
     r.DstNewConnLimitEnable = &dstNewConnLimitEnable
 }
-
 /* param datagramRangeMin: 报文最小长度（包最小长度）,取值：1-1500(Optional) */
 func (r *SetNetProtectionRulesRequest) SetDatagramRangeMin(datagramRangeMin int64) {
     r.DatagramRangeMin = &datagramRangeMin
 }
-
 /* param datagramRangeMax: 报文最大长度（包最大长度）,取值：1-1500(Optional) */
 func (r *SetNetProtectionRulesRequest) SetDatagramRangeMax(datagramRangeMax int64) {
     r.DatagramRangeMax = &datagramRangeMax
 }
-
 /* param dstNewConnLimitValue: 目的新建连接限速值，取值：0-4294967295(Optional) */
 func (r *SetNetProtectionRulesRequest) SetDstNewConnLimitValue(dstNewConnLimitValue int64) {
     r.DstNewConnLimitValue = &dstNewConnLimitValue
 }
-
 /* param srcNewConnLimitValue: 源新建连接限速值，取值：0-4294967295(Optional) */
 func (r *SetNetProtectionRulesRequest) SetSrcNewConnLimitValue(srcNewConnLimitValue int64) {
     r.SrcNewConnLimitValue = &srcNewConnLimitValue
 }
-
 /* param geoBlack: 地域黑名单（GEO IP拦截）(Optional) */
 func (r *SetNetProtectionRulesRequest) SetGeoBlack(geoBlack []string) {
     r.GeoBlack = geoBlack
 }
-
 /* param ipBlack: ip 黑名单(Optional) */
 func (r *SetNetProtectionRulesRequest) SetIpBlack(ipBlack []string) {
     r.IpBlack = ipBlack
 }
-
 /* param ipWhite: ip 白名单(Optional) */
 func (r *SetNetProtectionRulesRequest) SetIpWhite(ipWhite []string) {
     r.IpWhite = ipWhite
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

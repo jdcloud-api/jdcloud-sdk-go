@@ -84,6 +84,7 @@ func (r *QueryDomainGroupDetailRequest) SetId(id int) {
     r.Id = id
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r QueryDomainGroupDetailRequest) GetRegionId() string {

@@ -89,11 +89,11 @@ func NewSpeedLimitRequestWithoutParam() *SpeedLimitRequest {
 func (r *SpeedLimitRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param limitRate: 限速值,单位为KB/s,取值范围[1,20480](Optional) */
 func (r *SpeedLimitRequest) SetLimitRate(limitRate int) {
     r.LimitRate = &limitRate
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

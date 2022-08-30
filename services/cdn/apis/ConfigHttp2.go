@@ -89,11 +89,11 @@ func NewConfigHttp2RequestWithoutParam() *ConfigHttp2Request {
 func (r *ConfigHttp2Request) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param status: HTTP2功能开关，取值on/off(Optional) */
 func (r *ConfigHttp2Request) SetStatus(status string) {
     r.Status = &status
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

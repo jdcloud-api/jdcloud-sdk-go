@@ -125,41 +125,35 @@ func NewSetAuthConfigRequestWithoutParam() *SetAuthConfigRequest {
 func (r *SetAuthConfigRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param enableUrlAuth: 是否开启鉴权[on,off](Optional) */
 func (r *SetAuthConfigRequest) SetEnableUrlAuth(enableUrlAuth string) {
     r.EnableUrlAuth = &enableUrlAuth
 }
-
 /* param authKey: 鉴权key(Optional) */
 func (r *SetAuthConfigRequest) SetAuthKey(authKey string) {
     r.AuthKey = &authKey
 }
-
 /* param age: 鉴权时间戳过期时间，默认为0(Optional) */
 func (r *SetAuthConfigRequest) SetAge(age int) {
     r.Age = &age
 }
-
 /* param encAlgorithm: 鉴权参数加密算法，默认为md5且只支持md5(Optional) */
 func (r *SetAuthConfigRequest) SetEncAlgorithm(encAlgorithm string) {
     r.EncAlgorithm = &encAlgorithm
 }
-
 /* param timeFormat: 时间戳格式[hex,dec](Optional) */
 func (r *SetAuthConfigRequest) SetTimeFormat(timeFormat string) {
     r.TimeFormat = &timeFormat
 }
-
 /* param uriType: 加密算法版本[dash,dashv2,video],默认dashv2(Optional) */
 func (r *SetAuthConfigRequest) SetUriType(uriType string) {
     r.UriType = &uriType
 }
-
 /* param rule: 鉴权key生成顺序(Optional) */
 func (r *SetAuthConfigRequest) SetRule(rule string) {
     r.Rule = &rule
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -51,6 +51,9 @@ type QueryMixTrafficGroupSumRequest struct {
 
     /* 查询节点层级，可选值:[all,edge,mid],默认查询all,edge边缘 mid中间 (Optional) */
     CacheType *string `json:"cacheType"`
+
+    /* 查询IP类型，可选值:[,ipv4,ipv6],默认查询all (Optional) */
+    IpType *string `json:"ipType"`
 }
 
 /*
@@ -80,6 +83,7 @@ func NewQueryMixTrafficGroupSumRequest(
  * param period: 时间粒度，可选值:[oneMin,fiveMin,followTime],followTime只会返回一个汇总后的数据 (Optional)
  * param groupBy: 分组依据,只能按域名[domain]分组 (Optional)
  * param cacheType: 查询节点层级，可选值:[all,edge,mid],默认查询all,edge边缘 mid中间 (Optional)
+ * param ipType: 查询IP类型，可选值:[,ipv4,ipv6],默认查询all (Optional)
  */
 func NewQueryMixTrafficGroupSumRequestWithAllParams(
     startTime *string,
@@ -91,6 +95,7 @@ func NewQueryMixTrafficGroupSumRequestWithAllParams(
     period *string,
     groupBy *string,
     cacheType *string,
+    ipType *string,
 ) *QueryMixTrafficGroupSumRequest {
 
     return &QueryMixTrafficGroupSumRequest{
@@ -109,6 +114,7 @@ func NewQueryMixTrafficGroupSumRequestWithAllParams(
         Period: period,
         GroupBy: groupBy,
         CacheType: cacheType,
+        IpType: ipType,
     }
 }
 
@@ -129,46 +135,43 @@ func NewQueryMixTrafficGroupSumRequestWithoutParam() *QueryMixTrafficGroupSumReq
 func (r *QueryMixTrafficGroupSumRequest) SetStartTime(startTime string) {
     r.StartTime = &startTime
 }
-
 /* param endTime: 查询截止时间,UTC时间，格式为:yyyy-MM-dd'T'HH:mm:ss'Z'，示例:2018-10-21T10:00:00Z(Optional) */
 func (r *QueryMixTrafficGroupSumRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
-
 /* param domain: 需要查询的域名, 必须为用户pin下有权限的域名(Optional) */
 func (r *QueryMixTrafficGroupSumRequest) SetDomain(domain string) {
     r.Domain = &domain
 }
-
 /* param fields: 需要查询的字段(Optional) */
 func (r *QueryMixTrafficGroupSumRequest) SetFields(fields string) {
     r.Fields = &fields
 }
-
 /* param area: 查询的区域，如beijing,shanghai。多个用逗号分隔(Optional) */
 func (r *QueryMixTrafficGroupSumRequest) SetArea(area string) {
     r.Area = &area
 }
-
 /* param isp: 查询的运营商，cmcc,cnc,ct，表示移动、联通、电信。多个用逗号分隔(Optional) */
 func (r *QueryMixTrafficGroupSumRequest) SetIsp(isp string) {
     r.Isp = &isp
 }
-
 /* param period: 时间粒度，可选值:[oneMin,fiveMin,followTime],followTime只会返回一个汇总后的数据(Optional) */
 func (r *QueryMixTrafficGroupSumRequest) SetPeriod(period string) {
     r.Period = &period
 }
-
 /* param groupBy: 分组依据,只能按域名[domain]分组(Optional) */
 func (r *QueryMixTrafficGroupSumRequest) SetGroupBy(groupBy string) {
     r.GroupBy = &groupBy
 }
-
 /* param cacheType: 查询节点层级，可选值:[all,edge,mid],默认查询all,edge边缘 mid中间(Optional) */
 func (r *QueryMixTrafficGroupSumRequest) SetCacheType(cacheType string) {
     r.CacheType = &cacheType
 }
+/* param ipType: 查询IP类型，可选值:[,ipv4,ipv6],默认查询all(Optional) */
+func (r *QueryMixTrafficGroupSumRequest) SetIpType(ipType string) {
+    r.IpType = &ipType
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

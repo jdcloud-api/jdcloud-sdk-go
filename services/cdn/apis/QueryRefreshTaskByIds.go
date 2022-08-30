@@ -87,11 +87,11 @@ func NewQueryRefreshTaskByIdsRequestWithoutParam() *QueryRefreshTaskByIdsRequest
 func (r *QueryRefreshTaskByIdsRequest) SetTaskIds(taskIds []string) {
     r.TaskIds = taskIds
 }
-
 /* param keyword: url的模糊查询关键字(Optional) */
 func (r *QueryRefreshTaskByIdsRequest) SetKeyword(keyword string) {
     r.Keyword = &keyword
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

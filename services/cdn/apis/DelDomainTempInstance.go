@@ -84,6 +84,7 @@ func (r *DelDomainTempInstanceRequest) SetInstId(instId int) {
     r.InstId = instId
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r DelDomainTempInstanceRequest) GetRegionId() string {

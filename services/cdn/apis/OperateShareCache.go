@@ -89,11 +89,11 @@ func NewOperateShareCacheRequestWithoutParam() *OperateShareCacheRequest {
 func (r *OperateShareCacheRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param status: 共享缓存只能是off或者on(Optional) */
 func (r *OperateShareCacheRequest) SetStatus(status string) {
     r.Status = &status
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

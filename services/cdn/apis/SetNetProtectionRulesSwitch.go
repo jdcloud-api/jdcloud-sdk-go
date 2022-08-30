@@ -81,6 +81,7 @@ func (r *SetNetProtectionRulesSwitchRequest) SetSwitchStatus(switchStatus string
     r.SwitchStatus = &switchStatus
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r SetNetProtectionRulesSwitchRequest) GetRegionId() string {

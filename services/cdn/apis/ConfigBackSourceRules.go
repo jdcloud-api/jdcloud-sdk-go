@@ -96,16 +96,15 @@ func NewConfigBackSourceRulesRequestWithoutParam() *ConfigBackSourceRulesRequest
 func (r *ConfigBackSourceRulesRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param status: on/off，若为off则数组需为空，若为on则数组不可为空(Optional) */
 func (r *ConfigBackSourceRulesRequest) SetStatus(status string) {
     r.Status = &status
 }
-
 /* param rules: (Optional) */
 func (r *ConfigBackSourceRulesRequest) SetRules(rules []cdn.BackSourceRule) {
     r.Rules = rules
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

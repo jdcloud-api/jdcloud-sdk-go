@@ -84,6 +84,7 @@ func (r *QueryDomainConfigStatusRequest) SetTaskId(taskId string) {
     r.TaskId = taskId
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r QueryDomainConfigStatusRequest) GetRegionId() string {

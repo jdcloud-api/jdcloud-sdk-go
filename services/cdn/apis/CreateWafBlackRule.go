@@ -113,31 +113,27 @@ func NewCreateWafBlackRuleRequestWithoutParam() *CreateWafBlackRuleRequest {
 func (r *CreateWafBlackRuleRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param ruleType: 黑名单类型， uri ip geo(Optional) */
 func (r *CreateWafBlackRuleRequest) SetRuleType(ruleType string) {
     r.RuleType = &ruleType
 }
-
 /* param matchOp: 匹配模式,uri类型有效，0=完全匹配  1=前缀匹配 2=包含 3=正则 4=大于 5=后缀(Optional) */
 func (r *CreateWafBlackRuleRequest) SetMatchOp(matchOp int) {
     r.MatchOp = &matchOp
 }
-
 /* param val: 匹配值(Optional) */
 func (r *CreateWafBlackRuleRequest) SetVal(val string) {
     r.Val = &val
 }
-
 /* param atOp: 1：forbidden，493封禁并返回自定义页面 2：redirect，302跳转 3： verify@captcha 4： verify@jscookie(Optional) */
 func (r *CreateWafBlackRuleRequest) SetAtOp(atOp int) {
     r.AtOp = &atOp
 }
-
 /* param atVal: action为1时为自定义页面名称,空值或缺省值default为默认页面，2时为跳转url，其他时无效(Optional) */
 func (r *CreateWafBlackRuleRequest) SetAtVal(atVal string) {
     r.AtVal = &atVal
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
