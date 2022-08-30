@@ -126,41 +126,35 @@ func NewSetProtocolConvertRequestWithoutParam() *SetProtocolConvertRequest {
 func (r *SetProtocolConvertRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param certificate: https证书,转https格式时必传(Optional) */
 func (r *SetProtocolConvertRequest) SetCertificate(certificate string) {
     r.Certificate = &certificate
 }
-
 /* param rsaKey: https私钥，转https格式时必传(Optional) */
 func (r *SetProtocolConvertRequest) SetRsaKey(rsaKey string) {
     r.RsaKey = &rsaKey
 }
-
 /* param certFrom: 证书来源有两种类型：default,ssl(Optional) */
 func (r *SetProtocolConvertRequest) SetCertFrom(certFrom string) {
     r.CertFrom = &certFrom
 }
-
 /* param sslCertId: ssl证书id(Optional) */
 func (r *SetProtocolConvertRequest) SetSslCertId(sslCertId string) {
     r.SslCertId = &sslCertId
 }
-
 /* param syncToSsl: 是否同步到ssl,boolean值，取值true或者false(Optional) */
 func (r *SetProtocolConvertRequest) SetSyncToSsl(syncToSsl bool) {
     r.SyncToSsl = &syncToSsl
 }
-
 /* param certName: syncToSsl是true时，certName是必填项(Optional) */
 func (r *SetProtocolConvertRequest) SetCertName(certName string) {
     r.CertName = &certName
 }
-
 /* param protocolConverts: (Optional) */
 func (r *SetProtocolConvertRequest) SetProtocolConverts(protocolConverts []cdn.ProtocolConvert) {
     r.ProtocolConverts = protocolConverts
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

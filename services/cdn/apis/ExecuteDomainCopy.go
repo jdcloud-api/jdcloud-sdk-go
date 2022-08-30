@@ -93,16 +93,15 @@ func NewExecuteDomainCopyRequestWithoutParam() *ExecuteDomainCopyRequest {
 func (r *ExecuteDomainCopyRequest) SetDomain(domain string) {
     r.Domain = &domain
 }
-
 /* param copyDomains: 待复制的域名列表,多个以","分隔,且不超过20个(Optional) */
 func (r *ExecuteDomainCopyRequest) SetCopyDomains(copyDomains string) {
     r.CopyDomains = &copyDomains
 }
-
 /* param configKeys: 待复制的配置项名字,区分大小写.配置项的含义：originConfig：回源配置信息;refererConfig：referer防盗链;urlAuthConfig：URL鉴权;userAgentConfig：UA访问控制;ipBlackListConfig：IP黑名单;cacheConfig：缓存配置;schemeFollowOriConfig：协议跟随回源;oriFollowRedirectConfig：回源跟随302;filterParamsConfig：过滤参数;rangeConfig：range回源;videoDraftConfig：视频拖拽;httpsConfig：Https配置;httpHeaderConfig：HttpHeader设置;otherConfig：其他配置(Optional) */
 func (r *ExecuteDomainCopyRequest) SetConfigKeys(configKeys string) {
     r.ConfigKeys = &configKeys
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

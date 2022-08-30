@@ -95,16 +95,15 @@ func NewSetIpBlackListRequestWithoutParam() *SetIpBlackListRequest {
 func (r *SetIpBlackListRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param ips: ip名单,ips中url不能超过50条，中国境外/全球加速域名暂不支持传IP段(Optional) */
 func (r *SetIpBlackListRequest) SetIps(ips []string) {
     r.Ips = ips
 }
-
 /* param ipListType: ip黑白名单类型，black:黑名单,white:白名单(Optional) */
 func (r *SetIpBlackListRequest) SetIpListType(ipListType string) {
     r.IpListType = &ipListType
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

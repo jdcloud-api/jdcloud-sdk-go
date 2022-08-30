@@ -101,21 +101,19 @@ func NewSetLiveDomainAccessKeyRequestWithoutParam() *SetLiveDomainAccessKeyReque
 func (r *SetLiveDomainAccessKeyRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param accesskeyType: url鉴权开启1关闭0(Optional) */
 func (r *SetLiveDomainAccessKeyRequest) SetAccesskeyType(accesskeyType int) {
     r.AccesskeyType = &accesskeyType
 }
-
 /* param accesskeyKey: url鉴权开启时必传(Optional) */
 func (r *SetLiveDomainAccessKeyRequest) SetAccesskeyKey(accesskeyKey string) {
     r.AccesskeyKey = &accesskeyKey
 }
-
 /* param authLifeTime: 开启时默认值为300s,关闭时为0(Optional) */
 func (r *SetLiveDomainAccessKeyRequest) SetAuthLifeTime(authLifeTime int) {
     r.AuthLifeTime = &authLifeTime
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

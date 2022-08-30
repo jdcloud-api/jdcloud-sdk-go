@@ -95,16 +95,15 @@ func NewConfigBackSourceRuleRequestWithoutParam() *ConfigBackSourceRuleRequest {
 func (r *ConfigBackSourceRuleRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param beforeRegex: 回源改写之前的正则表达式(Optional) */
 func (r *ConfigBackSourceRuleRequest) SetBeforeRegex(beforeRegex string) {
     r.BeforeRegex = &beforeRegex
 }
-
 /* param afterRegex: 回源改写之后的正则表达式(Optional) */
 func (r *ConfigBackSourceRuleRequest) SetAfterRegex(afterRegex string) {
     r.AfterRegex = &afterRegex
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

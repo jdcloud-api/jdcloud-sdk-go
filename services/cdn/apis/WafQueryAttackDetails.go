@@ -117,36 +117,31 @@ func NewWafQueryAttackDetailsRequestWithoutParam() *WafQueryAttackDetailsRequest
 func (r *WafQueryAttackDetailsRequest) SetStartTime(startTime string) {
     r.StartTime = &startTime
 }
-
 /* param endTime: 查询截止时间,UTC时间，格式为:yyyy-MM-dd'T'HH:mm:ss'Z'，示例:2018-10-21T10:00:00Z(Optional) */
 func (r *WafQueryAttackDetailsRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
-
 /* param domain: 需要查询的域名, 必须为用户pin下有权限的域名(Optional) */
 func (r *WafQueryAttackDetailsRequest) SetDomain(domain string) {
     r.Domain = &domain
 }
-
 /* param sortField: 排序字段(Optional) */
 func (r *WafQueryAttackDetailsRequest) SetSortField(sortField string) {
     r.SortField = &sortField
 }
-
 /* param sortRule: 排序规则：desc，asc(Optional) */
 func (r *WafQueryAttackDetailsRequest) SetSortRule(sortRule string) {
     r.SortRule = &sortRule
 }
-
 /* param pageNumber: 页码，从1开始(Optional) */
 func (r *WafQueryAttackDetailsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 页大小，默认20(Optional) */
 func (r *WafQueryAttackDetailsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

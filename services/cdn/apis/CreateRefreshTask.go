@@ -86,11 +86,11 @@ func NewCreateRefreshTaskRequestWithoutParam() *CreateRefreshTaskRequest {
 func (r *CreateRefreshTaskRequest) SetTaskType(taskType string) {
     r.TaskType = &taskType
 }
-
 /* param urls: (Optional) */
 func (r *CreateRefreshTaskRequest) SetUrls(urls []string) {
     r.Urls = urls
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

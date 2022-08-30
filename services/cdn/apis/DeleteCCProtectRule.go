@@ -92,11 +92,11 @@ func NewDeleteCCProtectRuleRequestWithoutParam() *DeleteCCProtectRuleRequest {
 func (r *DeleteCCProtectRuleRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param ids: (Required) */
 func (r *DeleteCCProtectRuleRequest) SetIds(ids string) {
     r.Ids = ids
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

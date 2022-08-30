@@ -85,6 +85,7 @@ func (r *QueryBackSourcePathRequest) SetDomain(domain string) {
     r.Domain = domain
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r QueryBackSourcePathRequest) GetRegionId() string {

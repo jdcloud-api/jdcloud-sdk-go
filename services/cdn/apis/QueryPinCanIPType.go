@@ -20,84 +20,70 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type QueryHttp2Request struct {
+type QueryPinCanIPTypeRequest struct {
 
     core.JDCloudRequest
-
-    /* 用户域名  */
-    Domain string `json:"domain"`
 }
 
 /*
- * param domain: 用户域名 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewQueryHttp2Request(
-    domain string,
-) *QueryHttp2Request {
+func NewQueryPinCanIPTypeRequest(
+) *QueryPinCanIPTypeRequest {
 
-	return &QueryHttp2Request{
+	return &QueryPinCanIPTypeRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/domain/{domain}/queryHttp2",
-			Method:  "GET",
+			URL:     "/mix:queryPinCanIPType",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
-        Domain: domain,
 	}
 }
 
 /*
- * param domain: 用户域名 (Required)
  */
-func NewQueryHttp2RequestWithAllParams(
-    domain string,
-) *QueryHttp2Request {
+func NewQueryPinCanIPTypeRequestWithAllParams(
+) *QueryPinCanIPTypeRequest {
 
-    return &QueryHttp2Request{
+    return &QueryPinCanIPTypeRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/domain/{domain}/queryHttp2",
-            Method:  "GET",
+            URL:     "/mix:queryPinCanIPType",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
-        Domain: domain,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewQueryHttp2RequestWithoutParam() *QueryHttp2Request {
+func NewQueryPinCanIPTypeRequestWithoutParam() *QueryPinCanIPTypeRequest {
 
-    return &QueryHttp2Request{
+    return &QueryPinCanIPTypeRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/domain/{domain}/queryHttp2",
-            Method:  "GET",
+            URL:     "/mix:queryPinCanIPType",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
     }
 }
 
-/* param domain: 用户域名(Required) */
-func (r *QueryHttp2Request) SetDomain(domain string) {
-    r.Domain = domain
-}
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r QueryHttp2Request) GetRegionId() string {
+func (r QueryPinCanIPTypeRequest) GetRegionId() string {
     return ""
 }
 
-type QueryHttp2Response struct {
+type QueryPinCanIPTypeResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result QueryHttp2Result `json:"result"`
+    Result QueryPinCanIPTypeResult `json:"result"`
 }
 
-type QueryHttp2Result struct {
-    Domain string `json:"domain"`
-    Status string `json:"status"`
+type QueryPinCanIPTypeResult struct {
+    CanIPType bool `json:"canIPType"`
 }

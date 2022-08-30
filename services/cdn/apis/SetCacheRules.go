@@ -90,11 +90,11 @@ func NewSetCacheRulesRequestWithoutParam() *SetCacheRulesRequest {
 func (r *SetCacheRulesRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param cacheRules: (Optional) */
 func (r *SetCacheRulesRequest) SetCacheRules(cacheRules []cdn.CacheRuleVo) {
     r.CacheRules = cacheRules
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

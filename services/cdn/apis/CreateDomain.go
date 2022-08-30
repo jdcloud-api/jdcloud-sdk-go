@@ -180,86 +180,71 @@ func NewCreateDomainRequestWithoutParam() *CreateDomainRequest {
 func (r *CreateDomainRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param sourceType: 回源类型只能是[ips,domain,oss]中的一种(Optional) */
 func (r *CreateDomainRequest) SetSourceType(sourceType string) {
     r.SourceType = &sourceType
 }
-
 /* param cdnType: 点播域名的类型只能是[vod,download,web]中的一种(Optional) */
 func (r *CreateDomainRequest) SetCdnType(cdnType string) {
     r.CdnType = &cdnType
 }
-
 /* param backSourceType: 回源方式,只能是[https,http]中的一种,默认http(Optional) */
 func (r *CreateDomainRequest) SetBackSourceType(backSourceType string) {
     r.BackSourceType = &backSourceType
 }
-
 /* param dailyBandWidth: 日带宽(Mbps)(Optional) */
 func (r *CreateDomainRequest) SetDailyBandWidth(dailyBandWidth int64) {
     r.DailyBandWidth = &dailyBandWidth
 }
-
 /* param quaility: 服务质量,只能是[good,general]中的一种,默认为good(Optional) */
 func (r *CreateDomainRequest) SetQuaility(quaility string) {
     r.Quaility = &quaility
 }
-
 /* param maxFileSize: (Optional) */
 func (r *CreateDomainRequest) SetMaxFileSize(maxFileSize int64) {
     r.MaxFileSize = &maxFileSize
 }
-
 /* param minFileSize: (Optional) */
 func (r *CreateDomainRequest) SetMinFileSize(minFileSize int64) {
     r.MinFileSize = &minFileSize
 }
-
 /* param sumFileSize: (Optional) */
 func (r *CreateDomainRequest) SetSumFileSize(sumFileSize int64) {
     r.SumFileSize = &sumFileSize
 }
-
 /* param avgFileSize: (Optional) */
 func (r *CreateDomainRequest) SetAvgFileSize(avgFileSize int64) {
     r.AvgFileSize = &avgFileSize
 }
-
 /* param defaultSourceHost: (Optional) */
 func (r *CreateDomainRequest) SetDefaultSourceHost(defaultSourceHost string) {
     r.DefaultSourceHost = &defaultSourceHost
 }
-
 /* param httpType: (Optional) */
 func (r *CreateDomainRequest) SetHttpType(httpType string) {
     r.HttpType = &httpType
 }
-
 /* param ipSource: (Optional) */
 func (r *CreateDomainRequest) SetIpSource(ipSource []cdn.IpSourceInfo) {
     r.IpSource = ipSource
 }
-
 /* param domainSource: (Optional) */
 func (r *CreateDomainRequest) SetDomainSource(domainSource []cdn.DomainSourceInfo) {
     r.DomainSource = domainSource
 }
-
 /* param ossSource: (Optional) */
 func (r *CreateDomainRequest) SetOssSource(ossSource string) {
     r.OssSource = &ossSource
 }
-
 /* param accelerateRegion: 加速区域:(mainLand:中国大陆，nonMainLand:海外加港澳台，all:全球)默认为中国大陆(Optional) */
 func (r *CreateDomainRequest) SetAccelerateRegion(accelerateRegion string) {
     r.AccelerateRegion = &accelerateRegion
 }
-
 /* param tempInstId: (Optional) */
 func (r *CreateDomainRequest) SetTempInstId(tempInstId int64) {
     r.TempInstId = &tempInstId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

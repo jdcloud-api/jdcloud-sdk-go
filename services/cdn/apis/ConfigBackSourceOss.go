@@ -119,36 +119,31 @@ func NewConfigBackSourceOssRequestWithoutParam() *ConfigBackSourceOssRequest {
 func (r *ConfigBackSourceOssRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param status: on/off，若为on则以下必传参数不可为空[accessKey,secretKey,bucket,domain2],若为off则以下参数均不能有值[accessKey,secretKey,bucket,suffix,domain2](Optional) */
 func (r *ConfigBackSourceOssRequest) SetStatus(status string) {
     r.Status = &status
 }
-
 /* param accessKey: status 为on时必填(Optional) */
 func (r *ConfigBackSourceOssRequest) SetAccessKey(accessKey string) {
     r.AccessKey = &accessKey
 }
-
 /* param secretKey: status 为on时必填(Optional) */
 func (r *ConfigBackSourceOssRequest) SetSecretKey(secretKey string) {
     r.SecretKey = &secretKey
 }
-
 /* param bucket: oss桶名,status 为on时必填(Optional) */
 func (r *ConfigBackSourceOssRequest) SetBucket(bucket string) {
     r.Bucket = &bucket
 }
-
 /* param suffix: oss后缀,status 为on时选填(Optional) */
 func (r *ConfigBackSourceOssRequest) SetSuffix(suffix string) {
     r.Suffix = &suffix
 }
-
 /* param domain2: status 为on时必填(Optional) */
 func (r *ConfigBackSourceOssRequest) SetDomain2(domain2 string) {
     r.Domain2 = &domain2
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -126,41 +126,35 @@ func NewSetSourceRequestWithoutParam() *SetSourceRequest {
 func (r *SetSourceRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param sourceType: 回源类型只能是[ips,domain,oss]中的一种(Optional) */
 func (r *SetSourceRequest) SetSourceType(sourceType string) {
     r.SourceType = &sourceType
 }
-
 /* param backSourceType: 回源方式,只能是[https,http]中的一种,默认http(Optional) */
 func (r *SetSourceRequest) SetBackSourceType(backSourceType string) {
     r.BackSourceType = &backSourceType
 }
-
 /* param accelerateRegion: 加速区域,必须是[mainland,nonMainland,all]中的一种,分别代表大陆,海外+中国港澳台,全球(Optional) */
 func (r *SetSourceRequest) SetAccelerateRegion(accelerateRegion string) {
     r.AccelerateRegion = &accelerateRegion
 }
-
 /* param ipSource: (Optional) */
 func (r *SetSourceRequest) SetIpSource(ipSource []cdn.IpSourceInfo) {
     r.IpSource = ipSource
 }
-
 /* param domainSource: (Optional) */
 func (r *SetSourceRequest) SetDomainSource(domainSource []cdn.DomainSourceInfo) {
     r.DomainSource = domainSource
 }
-
 /* param ossSource: oss回源域名(Optional) */
 func (r *SetSourceRequest) SetOssSource(ossSource string) {
     r.OssSource = &ossSource
 }
-
 /* param defaultSourceHost: 默认回源host(Optional) */
 func (r *SetSourceRequest) SetDefaultSourceHost(defaultSourceHost string) {
     r.DefaultSourceHost = &defaultSourceHost
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

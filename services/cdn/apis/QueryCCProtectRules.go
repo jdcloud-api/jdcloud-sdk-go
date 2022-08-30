@@ -102,21 +102,19 @@ func NewQueryCCProtectRulesRequestWithoutParam() *QueryCCProtectRulesRequest {
 func (r *QueryCCProtectRulesRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param id: ruleId, defalut empty(Optional) */
 func (r *QueryCCProtectRulesRequest) SetId(id string) {
     r.Id = &id
 }
-
 /* param pageSize: page size , default 0 to query all(Optional) */
 func (r *QueryCCProtectRulesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param pageIndex: page index , default 0 to query all(Optional) */
 func (r *QueryCCProtectRulesRequest) SetPageIndex(pageIndex int) {
     r.PageIndex = &pageIndex
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

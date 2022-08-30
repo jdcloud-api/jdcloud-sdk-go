@@ -111,31 +111,27 @@ func NewQueryBandRequestWithoutParam() *QueryBandRequest {
 func (r *QueryBandRequest) SetStartTime(startTime string) {
     r.StartTime = &startTime
 }
-
 /* param endTime: 查询截止时间,UTC时间，格式为:yyyy-MM-dd'T'HH:mm:ss'Z'，示例:2018-10-21T10:00:00Z(Optional) */
 func (r *QueryBandRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
-
 /* param domain: 需要查询的域名, 必须为用户pin下有权限的域名(Optional) */
 func (r *QueryBandRequest) SetDomain(domain string) {
     r.Domain = &domain
 }
-
 /* param area: 地域(Optional) */
 func (r *QueryBandRequest) SetArea(area string) {
     r.Area = &area
 }
-
 /* param isp: 运营商(Optional) */
 func (r *QueryBandRequest) SetIsp(isp string) {
     r.Isp = &isp
 }
-
 /* param period: 查询周期(Optional) */
 func (r *QueryBandRequest) SetPeriod(period string) {
     r.Period = &period
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

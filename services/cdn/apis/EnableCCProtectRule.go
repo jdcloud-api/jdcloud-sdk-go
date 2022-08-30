@@ -89,11 +89,11 @@ func NewEnableCCProtectRuleRequestWithoutParam() *EnableCCProtectRuleRequest {
 func (r *EnableCCProtectRuleRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param ids: (Optional) */
 func (r *EnableCCProtectRuleRequest) SetIds(ids []string) {
     r.Ids = ids
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

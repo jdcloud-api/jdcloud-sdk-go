@@ -90,11 +90,11 @@ func NewQueryHttpHeaderRequestWithoutParam() *QueryHttpHeaderRequest {
 func (r *QueryHttpHeaderRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param edgeType: header生效节点，0边缘，1回源，2两者都(Optional) */
 func (r *QueryHttpHeaderRequest) SetEdgeType(edgeType int) {
     r.EdgeType = &edgeType
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

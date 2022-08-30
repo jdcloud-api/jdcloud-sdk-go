@@ -98,21 +98,19 @@ func NewModifyDomainTempInstRequestWithoutParam() *ModifyDomainTempInstRequest {
 func (r *ModifyDomainTempInstRequest) SetTempId(tempId int64) {
     r.TempId = &tempId
 }
-
 /* param instId: 模板实例id，修改时必传(Optional) */
 func (r *ModifyDomainTempInstRequest) SetInstId(instId int64) {
     r.InstId = &instId
 }
-
 /* param instName: 模板实例名称(Optional) */
 func (r *ModifyDomainTempInstRequest) SetInstName(instName string) {
     r.InstName = &instName
 }
-
 /* param instProInfoMap: 查询结果,类型为Map<String,Map<String,Object>>(Optional) */
 func (r *ModifyDomainTempInstRequest) SetInstProInfoMap(instProInfoMap interface{}) {
     r.InstProInfoMap = &instProInfoMap
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

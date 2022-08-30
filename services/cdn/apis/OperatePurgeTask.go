@@ -86,11 +86,11 @@ func NewOperatePurgeTaskRequestWithoutParam() *OperatePurgeTaskRequest {
 func (r *OperatePurgeTaskRequest) SetUrls(urls []string) {
     r.Urls = urls
 }
-
 /* param optType: 操作类型:add代表创建刷新任务,stop代表停止刷新任务(Optional) */
 func (r *OperatePurgeTaskRequest) SetOptType(optType string) {
     r.OptType = &optType
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

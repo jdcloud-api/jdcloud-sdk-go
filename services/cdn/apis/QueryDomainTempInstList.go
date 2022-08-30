@@ -93,16 +93,15 @@ func NewQueryDomainTempInstListRequestWithoutParam() *QueryDomainTempInstListReq
 func (r *QueryDomainTempInstListRequest) SetInstName(instName string) {
     r.InstName = &instName
 }
-
 /* param pageNumber: pageNumber,默认值1(Optional) */
 func (r *QueryDomainTempInstListRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: pageSize,最大值50,默认值20(Optional) */
 func (r *QueryDomainTempInstListRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -99,21 +99,19 @@ func NewQueryForbiddenInfoListRequestWithoutParam() *QueryForbiddenInfoListReque
 func (r *QueryForbiddenInfoListRequest) SetQueryDomain(queryDomain string) {
     r.QueryDomain = &queryDomain
 }
-
 /* param forbiddenUrl: 封禁url,精确查询(Optional) */
 func (r *QueryForbiddenInfoListRequest) SetForbiddenUrl(forbiddenUrl string) {
     r.ForbiddenUrl = &forbiddenUrl
 }
-
 /* param pageNumber: 页码数(Optional) */
 func (r *QueryForbiddenInfoListRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 每页size(Optional) */
 func (r *QueryForbiddenInfoListRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

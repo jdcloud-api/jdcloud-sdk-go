@@ -120,36 +120,31 @@ func NewQueryStreamInfoRequestWithoutParam() *QueryStreamInfoRequest {
 func (r *QueryStreamInfoRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param startTime: 查询起始时间,UTC时间，格式为:yyyy-MM-dd'T'HH:mm:ss'Z'，示例:2018-10-21T10:00:00Z(Optional) */
 func (r *QueryStreamInfoRequest) SetStartTime(startTime string) {
     r.StartTime = &startTime
 }
-
 /* param endTime: 查询截止时间,UTC时间，格式为:yyyy-MM-dd'T'HH:mm:ss'Z'，示例:2018-10-21T10:00:00Z(Optional) */
 func (r *QueryStreamInfoRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
-
 /* param appName: app名(Optional) */
 func (r *QueryStreamInfoRequest) SetAppName(appName string) {
     r.AppName = &appName
 }
-
 /* param streamName: 流名(Optional) */
 func (r *QueryStreamInfoRequest) SetStreamName(streamName string) {
     r.StreamName = &streamName
 }
-
 /* param pageNum: 页码，不传默认1(Optional) */
 func (r *QueryStreamInfoRequest) SetPageNum(pageNum int) {
     r.PageNum = &pageNum
 }
-
 /* param pageSize: 页size,不传默认100,最大值1000(Optional) */
 func (r *QueryStreamInfoRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

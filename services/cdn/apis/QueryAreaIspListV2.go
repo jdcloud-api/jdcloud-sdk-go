@@ -71,6 +71,8 @@ func NewQueryAreaIspListV2RequestWithoutParam() *QueryAreaIspListV2Request {
     }
 }
 
+
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r QueryAreaIspListV2Request) GetRegionId() string {

@@ -95,16 +95,15 @@ func NewDisableWafWhiteRulesRequestWithoutParam() *DisableWafWhiteRulesRequest {
 func (r *DisableWafWhiteRulesRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param ids: (Optional) */
 func (r *DisableWafWhiteRulesRequest) SetIds(ids []string) {
     r.Ids = ids
 }
-
 /* param ruleType: (Optional) */
 func (r *DisableWafWhiteRulesRequest) SetRuleType(ruleType string) {
     r.RuleType = &ruleType
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

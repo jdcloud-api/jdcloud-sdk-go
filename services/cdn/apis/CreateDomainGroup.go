@@ -98,21 +98,19 @@ func NewCreateDomainGroupRequestWithoutParam() *CreateDomainGroupRequest {
 func (r *CreateDomainGroupRequest) SetShareCache(shareCache string) {
     r.ShareCache = &shareCache
 }
-
 /* param primaryDomain: 主域名,开启共享缓存时必传(Optional) */
 func (r *CreateDomainGroupRequest) SetPrimaryDomain(primaryDomain string) {
     r.PrimaryDomain = &primaryDomain
 }
-
 /* param domainGroupName: 域名组名称(Optional) */
 func (r *CreateDomainGroupRequest) SetDomainGroupName(domainGroupName string) {
     r.DomainGroupName = &domainGroupName
 }
-
 /* param domains: 域名组内域名包含主域名(Optional) */
 func (r *CreateDomainGroupRequest) SetDomains(domains []string) {
     r.Domains = domains
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

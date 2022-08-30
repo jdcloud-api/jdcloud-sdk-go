@@ -107,26 +107,23 @@ func NewSetLiveDomainReferRequestWithoutParam() *SetLiveDomainReferRequest {
 func (r *SetLiveDomainReferRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param referType: refer类型，取值：block（黑名单），allow（白名单）默认为block(Optional) */
 func (r *SetLiveDomainReferRequest) SetReferType(referType string) {
     r.ReferType = &referType
 }
-
 /* param referList: 逗号隔开的域名列表，如果referList传空则为删除(Optional) */
 func (r *SetLiveDomainReferRequest) SetReferList(referList []string) {
     r.ReferList = referList
 }
-
 /* param allowNoReferHeader: 是否允许空refer访问，默认为“on”(Optional) */
 func (r *SetLiveDomainReferRequest) SetAllowNoReferHeader(allowNoReferHeader string) {
     r.AllowNoReferHeader = &allowNoReferHeader
 }
-
 /* param allowNullReferHeader: 是否允许无ua访问，默认为“on”(Optional) */
 func (r *SetLiveDomainReferRequest) SetAllowNullReferHeader(allowNullReferHeader string) {
     r.AllowNullReferHeader = &allowNullReferHeader
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

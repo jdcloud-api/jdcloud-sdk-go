@@ -101,21 +101,19 @@ func NewUpdateWebProtectSettingsRequestWithoutParam() *UpdateWebProtectSettingsR
 func (r *UpdateWebProtectSettingsRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param wafMode: 0：拦截模式 (阻断forbidden 493跳到自定义页面) ，1-检测模式(观察notice)(Optional) */
 func (r *UpdateWebProtectSettingsRequest) SetWafMode(wafMode string) {
     r.WafMode = &wafMode
 }
-
 /* param wafLevel: 规则策略等级 0为宽松, 1为正常, 2为严格(Optional) */
 func (r *UpdateWebProtectSettingsRequest) SetWafLevel(wafLevel int) {
     r.WafLevel = &wafLevel
 }
-
 /* param redirection: 拦截模式跳转的自定义页面名称, 缺省或default返回默认页面(Optional) */
 func (r *UpdateWebProtectSettingsRequest) SetRedirection(redirection string) {
     r.Redirection = &redirection
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

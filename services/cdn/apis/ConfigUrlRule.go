@@ -95,16 +95,15 @@ func NewConfigUrlRuleRequestWithoutParam() *ConfigUrlRuleRequest {
 func (r *ConfigUrlRuleRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param beforeRegex: url改写之前的正则表达式(Optional) */
 func (r *ConfigUrlRuleRequest) SetBeforeRegex(beforeRegex string) {
     r.BeforeRegex = &beforeRegex
 }
-
 /* param afterRegex: url改写之后的正则表达式(Optional) */
 func (r *ConfigUrlRuleRequest) SetAfterRegex(afterRegex string) {
     r.AfterRegex = &afterRegex
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

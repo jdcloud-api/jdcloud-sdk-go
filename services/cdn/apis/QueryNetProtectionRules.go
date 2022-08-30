@@ -71,6 +71,8 @@ func NewQueryNetProtectionRulesRequestWithoutParam() *QueryNetProtectionRulesReq
     }
 }
 
+
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r QueryNetProtectionRulesRequest) GetRegionId() string {

@@ -81,6 +81,7 @@ func (r *SetOnlineBillingTypeRequest) SetAllType(allType int) {
     r.AllType = &allType
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r SetOnlineBillingTypeRequest) GetRegionId() string {

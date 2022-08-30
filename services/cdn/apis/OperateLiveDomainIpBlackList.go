@@ -89,11 +89,11 @@ func NewOperateLiveDomainIpBlackListRequestWithoutParam() *OperateLiveDomainIpBl
 func (r *OperateLiveDomainIpBlackListRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param blackIpsEnable: (Optional) */
 func (r *OperateLiveDomainIpBlackListRequest) SetBlackIpsEnable(blackIpsEnable string) {
     r.BlackIpsEnable = &blackIpsEnable
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

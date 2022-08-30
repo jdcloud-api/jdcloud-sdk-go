@@ -89,11 +89,11 @@ func NewSetWebProtectSwitchRequestWithoutParam() *SetWebProtectSwitchRequest {
 func (r *SetWebProtectSwitchRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param switchStatus: 开关状态, on:开启,off:关闭(Optional) */
 func (r *SetWebProtectSwitchRequest) SetSwitchStatus(switchStatus string) {
     r.SwitchStatus = &switchStatus
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

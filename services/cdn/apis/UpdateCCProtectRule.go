@@ -122,36 +122,31 @@ func NewUpdateCCProtectRuleRequestWithoutParam() *UpdateCCProtectRuleRequest {
 func (r *UpdateCCProtectRuleRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param id: 需要修改的规则ID(Required) */
 func (r *UpdateCCProtectRuleRequest) SetId(id string) {
     r.Id = id
 }
-
 /* param uri: null(Optional) */
 func (r *UpdateCCProtectRuleRequest) SetUri(uri string) {
     r.Uri = &uri
 }
-
 /* param detectPeriod: null(Optional) */
 func (r *UpdateCCProtectRuleRequest) SetDetectPeriod(detectPeriod int) {
     r.DetectPeriod = &detectPeriod
 }
-
 /* param singleIpLimit: null(Optional) */
 func (r *UpdateCCProtectRuleRequest) SetSingleIpLimit(singleIpLimit int) {
     r.SingleIpLimit = &singleIpLimit
 }
-
 /* param blockType: null(Optional) */
 func (r *UpdateCCProtectRuleRequest) SetBlockType(blockType int) {
     r.BlockType = &blockType
 }
-
 /* param blockTime: null(Optional) */
 func (r *UpdateCCProtectRuleRequest) SetBlockTime(blockTime int) {
     r.BlockTime = &blockTime
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

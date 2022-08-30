@@ -84,6 +84,7 @@ func (r *GetSslCertDetailRequest) SetSslCertId(sslCertId string) {
     r.SslCertId = sslCertId
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r GetSslCertDetailRequest) GetRegionId() string {

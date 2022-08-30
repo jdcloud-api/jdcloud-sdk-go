@@ -101,16 +101,15 @@ func NewDeleteWafBlackRulesRequestWithoutParam() *DeleteWafBlackRulesRequest {
 func (r *DeleteWafBlackRulesRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param ids: (Required) */
 func (r *DeleteWafBlackRulesRequest) SetIds(ids string) {
     r.Ids = ids
 }
-
 /* param ruleType: (Required) */
 func (r *DeleteWafBlackRulesRequest) SetRuleType(ruleType string) {
     r.RuleType = ruleType
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

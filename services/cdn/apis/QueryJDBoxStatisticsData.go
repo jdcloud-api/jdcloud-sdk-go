@@ -129,46 +129,39 @@ func NewQueryJDBoxStatisticsDataRequestWithoutParam() *QueryJDBoxStatisticsDataR
 func (r *QueryJDBoxStatisticsDataRequest) SetStartTime(startTime int64) {
     r.StartTime = &startTime
 }
-
 /* param endTime: 查询截止时间,时间戳(Optional) */
 func (r *QueryJDBoxStatisticsDataRequest) SetEndTime(endTime int64) {
     r.EndTime = &endTime
 }
-
 /* param fields: 查询的字段，取值范围(avgbandwidth,pv,flow)。多个用逗号分隔。默认为空，表示查询带宽流量(Optional) */
 func (r *QueryJDBoxStatisticsDataRequest) SetFields(fields string) {
     r.Fields = &fields
 }
-
 /* param area: (Optional) */
 func (r *QueryJDBoxStatisticsDataRequest) SetArea(area string) {
     r.Area = &area
 }
-
 /* param isp: (Optional) */
 func (r *QueryJDBoxStatisticsDataRequest) SetIsp(isp string) {
     r.Isp = &isp
 }
-
 /* param period: 查询周期，当前取值范围：“oneMin,fiveMin”，分别表示1min，5min。默认为空，表示fiveMin(Optional) */
 func (r *QueryJDBoxStatisticsDataRequest) SetPeriod(period string) {
     r.Period = &period
 }
-
 /* param category: 业务类型(Optional) */
 func (r *QueryJDBoxStatisticsDataRequest) SetCategory(category string) {
     r.Category = &category
 }
-
 /* param macAddr: 设备id(Optional) */
 func (r *QueryJDBoxStatisticsDataRequest) SetMacAddr(macAddr string) {
     r.MacAddr = &macAddr
 }
-
 /* param pluginPin: 插件pin(Optional) */
 func (r *QueryJDBoxStatisticsDataRequest) SetPluginPin(pluginPin string) {
     r.PluginPin = &pluginPin
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

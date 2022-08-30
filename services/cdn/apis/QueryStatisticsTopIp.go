@@ -111,31 +111,27 @@ func NewQueryStatisticsTopIpRequestWithoutParam() *QueryStatisticsTopIpRequest {
 func (r *QueryStatisticsTopIpRequest) SetStartTime(startTime string) {
     r.StartTime = &startTime
 }
-
 /* param endTime: 查询截止时间,UTC时间，格式为:yyyy-MM-dd'T'HH:mm:ss'Z'，示例:2018-10-21T10:00:00Z(Optional) */
 func (r *QueryStatisticsTopIpRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
-
 /* param domain: 需要查询的域名, 必须为用户pin下有权限的域名(Optional) */
 func (r *QueryStatisticsTopIpRequest) SetDomain(domain string) {
     r.Domain = &domain
 }
-
 /* param subDomain: 待查询的子域名,查询泛域名时，指定的子域名列表，多个用逗号分隔。非泛域名时，传入空即可(Optional) */
 func (r *QueryStatisticsTopIpRequest) SetSubDomain(subDomain string) {
     r.SubDomain = &subDomain
 }
-
 /* param size: 查询的topN的条数，取值范围：1-100，默认为20(Optional) */
 func (r *QueryStatisticsTopIpRequest) SetSize(size int) {
     r.Size = &size
 }
-
 /* param topBy: 排序依据,当前可选：pv,flow, 分别表示按pv、按流量topN ip，默认为"pv"(Optional) */
 func (r *QueryStatisticsTopIpRequest) SetTopBy(topBy string) {
     r.TopBy = &topBy
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

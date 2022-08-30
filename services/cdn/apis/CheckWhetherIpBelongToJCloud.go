@@ -82,6 +82,7 @@ func (r *CheckWhetherIpBelongToJCloudRequest) SetIps(ips []string) {
     r.Ips = ips
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r CheckWhetherIpBelongToJCloudRequest) GetRegionId() string {

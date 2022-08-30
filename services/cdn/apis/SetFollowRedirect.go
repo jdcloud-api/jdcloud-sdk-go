@@ -89,11 +89,11 @@ func NewSetFollowRedirectRequestWithoutParam() *SetFollowRedirectRequest {
 func (r *SetFollowRedirectRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param status: 开关取值[on,off](Optional) */
 func (r *SetFollowRedirectRequest) SetStatus(status string) {
     r.Status = &status
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

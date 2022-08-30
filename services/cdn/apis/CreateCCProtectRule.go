@@ -113,31 +113,27 @@ func NewCreateCCProtectRuleRequestWithoutParam() *CreateCCProtectRuleRequest {
 func (r *CreateCCProtectRuleRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param uri: null(Optional) */
 func (r *CreateCCProtectRuleRequest) SetUri(uri string) {
     r.Uri = &uri
 }
-
 /* param detectPeriod: null(Optional) */
 func (r *CreateCCProtectRuleRequest) SetDetectPeriod(detectPeriod int) {
     r.DetectPeriod = &detectPeriod
 }
-
 /* param singleIpLimit: null(Optional) */
 func (r *CreateCCProtectRuleRequest) SetSingleIpLimit(singleIpLimit int) {
     r.SingleIpLimit = &singleIpLimit
 }
-
 /* param blockType: null(Optional) */
 func (r *CreateCCProtectRuleRequest) SetBlockType(blockType int) {
     r.BlockType = &blockType
 }
-
 /* param blockTime: null(Optional) */
 func (r *CreateCCProtectRuleRequest) SetBlockTime(blockTime int) {
     r.BlockTime = &blockTime
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

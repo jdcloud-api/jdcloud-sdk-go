@@ -101,21 +101,19 @@ func NewQueryPushDomainORAppOrStreamRequestWithoutParam() *QueryPushDomainORAppO
 func (r *QueryPushDomainORAppOrStreamRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param app: app名，传appName查询流名列表(Optional) */
 func (r *QueryPushDomainORAppOrStreamRequest) SetApp(app string) {
     r.App = &app
 }
-
 /* param stream: 流名模糊查询(Optional) */
 func (r *QueryPushDomainORAppOrStreamRequest) SetStream(stream string) {
     r.Stream = &stream
 }
-
 /* param limit: 指定app/流名列表大小，默认50(Optional) */
 func (r *QueryPushDomainORAppOrStreamRequest) SetLimit(limit int) {
     r.Limit = &limit
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

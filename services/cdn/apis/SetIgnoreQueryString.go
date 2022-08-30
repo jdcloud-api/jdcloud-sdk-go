@@ -89,11 +89,11 @@ func NewSetIgnoreQueryStringRequestWithoutParam() *SetIgnoreQueryStringRequest {
 func (r *SetIgnoreQueryStringRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param status: 开关取值[on,off](Optional) */
 func (r *SetIgnoreQueryStringRequest) SetStatus(status string) {
     r.Status = &status
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

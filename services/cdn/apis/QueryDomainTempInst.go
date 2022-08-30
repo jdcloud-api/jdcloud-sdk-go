@@ -84,6 +84,7 @@ func (r *QueryDomainTempInstRequest) SetInstId(instId int) {
     r.InstId = instId
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r QueryDomainTempInstRequest) GetRegionId() string {

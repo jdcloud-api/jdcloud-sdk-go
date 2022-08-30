@@ -89,11 +89,11 @@ func NewPreviewCertificateRequestWithoutParam() *PreviewCertificateRequest {
 func (r *PreviewCertificateRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param content: (Optional) */
 func (r *PreviewCertificateRequest) SetContent(content string) {
     r.Content = &content
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

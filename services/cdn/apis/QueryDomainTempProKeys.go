@@ -70,6 +70,8 @@ func NewQueryDomainTempProKeysRequestWithoutParam() *QueryDomainTempProKeysReque
     }
 }
 
+
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r QueryDomainTempProKeysRequest) GetRegionId() string {

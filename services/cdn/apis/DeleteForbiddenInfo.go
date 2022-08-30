@@ -104,26 +104,23 @@ func NewDeleteForbiddenInfoRequestWithoutParam() *DeleteForbiddenInfoRequest {
 func (r *DeleteForbiddenInfoRequest) SetForbiddenType(forbiddenType string) {
     r.ForbiddenType = &forbiddenType
 }
-
 /* param forbiddenDomain: 封禁域名(Optional) */
 func (r *DeleteForbiddenInfoRequest) SetForbiddenDomain(forbiddenDomain string) {
     r.ForbiddenDomain = &forbiddenDomain
 }
-
 /* param forbiddenUrl: 封禁url,多个以;隔开(Optional) */
 func (r *DeleteForbiddenInfoRequest) SetForbiddenUrl(forbiddenUrl string) {
     r.ForbiddenUrl = &forbiddenUrl
 }
-
 /* param shareCacheDomainFlag: 是否同步操作共享缓存域名,0:仅操作本域名,1:同步操作共享缓存域名,默认为0(Optional) */
 func (r *DeleteForbiddenInfoRequest) SetShareCacheDomainFlag(shareCacheDomainFlag string) {
     r.ShareCacheDomainFlag = &shareCacheDomainFlag
 }
-
 /* param token: 用于封禁前缀识别的URL,应为单个特殊字符，如：~(Optional) */
 func (r *DeleteForbiddenInfoRequest) SetToken(token string) {
     r.Token = &token
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

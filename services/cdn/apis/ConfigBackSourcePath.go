@@ -90,11 +90,11 @@ func NewConfigBackSourcePathRequestWithoutParam() *ConfigBackSourcePathRequest {
 func (r *ConfigBackSourcePathRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param configs: (Optional) */
 func (r *ConfigBackSourcePathRequest) SetConfigs(configs []cdn.ConfigBackSourcePathItems) {
     r.Configs = configs
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -105,26 +105,23 @@ func NewQueryDomainsLogRequestWithoutParam() *QueryDomainsLogRequest {
 func (r *QueryDomainsLogRequest) SetDomains(domains []string) {
     r.Domains = domains
 }
-
 /* param startTime: 查询起始时间,UTC时间，格式为:yyyy-MM-dd'T'HH:mm:ss'Z'，示例:2018-10-21T10:00:00Z(Optional) */
 func (r *QueryDomainsLogRequest) SetStartTime(startTime string) {
     r.StartTime = &startTime
 }
-
 /* param endTime: 查询截止时间,UTC时间，格式为:yyyy-MM-dd'T'HH:mm:ss'Z'，示例:2018-10-21T10:00:00Z(Optional) */
 func (r *QueryDomainsLogRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
-
 /* param interval: 时间间隔，取值(hour，day，fiveMin)，不传默认小时。(Optional) */
 func (r *QueryDomainsLogRequest) SetInterval(interval string) {
     r.Interval = &interval
 }
-
 /* param logType: 日志类型，取值(log，zip,gz)，不传默认gz。(Optional) */
 func (r *QueryDomainsLogRequest) SetLogType(logType string) {
     r.LogType = &logType
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

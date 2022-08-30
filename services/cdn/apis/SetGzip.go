@@ -95,16 +95,15 @@ func NewSetGzipRequestWithoutParam() *SetGzipRequest {
 func (r *SetGzipRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param status: 开关取值[on,off](Optional) */
 func (r *SetGzipRequest) SetStatus(status string) {
     r.Status = &status
 }
-
 /* param gzipTypes: gzip类型,如application/x-javascript,application/xml(Optional) */
 func (r *SetGzipRequest) SetGzipTypes(gzipTypes string) {
     r.GzipTypes = &gzipTypes
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

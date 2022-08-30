@@ -87,11 +87,11 @@ func NewCreateRefreshTaskForCallbackRequestWithoutParam() *CreateRefreshTaskForC
 func (r *CreateRefreshTaskForCallbackRequest) SetTaskType(taskType string) {
     r.TaskType = &taskType
 }
-
 /* param urlItems: (Optional) */
 func (r *CreateRefreshTaskForCallbackRequest) SetUrlItems(urlItems []cdn.UrlItem) {
     r.UrlItems = urlItems
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

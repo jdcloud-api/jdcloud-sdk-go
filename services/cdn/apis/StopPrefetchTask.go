@@ -92,16 +92,15 @@ func NewStopPrefetchTaskRequestWithoutParam() *StopPrefetchTaskRequest {
 func (r *StopPrefetchTaskRequest) SetUrls(urls []string) {
     r.Urls = urls
 }
-
 /* param region: 地区[huabei huadong dongbei huazhong huanan xinan xibei gangaotai]中的一个(Optional) */
 func (r *StopPrefetchTaskRequest) SetRegion(region string) {
     r.Region = &region
 }
-
 /* param isp: 运营商[ct uni cm]中的一个,分别代表电信 联通 移动(Optional) */
 func (r *StopPrefetchTaskRequest) SetIsp(isp string) {
     r.Isp = &isp
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

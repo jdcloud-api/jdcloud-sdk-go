@@ -114,31 +114,27 @@ func NewSetLiveDomainBackSourceRequestWithoutParam() *SetLiveDomainBackSourceReq
 func (r *SetLiveDomainBackSourceRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param sourceType: 回源类型只能为[ips,domain]中的一种(Optional) */
 func (r *SetLiveDomainBackSourceRequest) SetSourceType(sourceType string) {
     r.SourceType = &sourceType
 }
-
 /* param backSourceType: (Optional) */
 func (r *SetLiveDomainBackSourceRequest) SetBackSourceType(backSourceType string) {
     r.BackSourceType = &backSourceType
 }
-
 /* param defaultSourceHost: 默认回源host(Optional) */
 func (r *SetLiveDomainBackSourceRequest) SetDefaultSourceHost(defaultSourceHost string) {
     r.DefaultSourceHost = &defaultSourceHost
 }
-
 /* param domainSource: (Optional) */
 func (r *SetLiveDomainBackSourceRequest) SetDomainSource(domainSource []cdn.DomainSourceInfo) {
     r.DomainSource = domainSource
 }
-
 /* param ipSource: (Optional) */
 func (r *SetLiveDomainBackSourceRequest) SetIpSource(ipSource []cdn.IpSourceInfo) {
     r.IpSource = ipSource
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

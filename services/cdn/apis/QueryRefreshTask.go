@@ -135,51 +135,43 @@ func NewQueryRefreshTaskRequestWithoutParam() *QueryRefreshTaskRequest {
 func (r *QueryRefreshTaskRequest) SetStartTime(startTime string) {
     r.StartTime = &startTime
 }
-
 /* param endTime: 查询截止时间,UTC时间，格式为:yyyy-MM-dd'T'HH:mm:ss'Z'，示例:2018-10-21T10:00:00Z(Optional) */
 func (r *QueryRefreshTaskRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
-
 /* param keyword: url或者目录的模糊查询关键字(Optional) */
 func (r *QueryRefreshTaskRequest) SetKeyword(keyword string) {
     r.Keyword = &keyword
 }
-
 /* param taskId: 任务id(Optional) */
 func (r *QueryRefreshTaskRequest) SetTaskId(taskId string) {
     r.TaskId = &taskId
 }
-
 /* param taskStatus: null(Optional) */
 func (r *QueryRefreshTaskRequest) SetTaskStatus(taskStatus string) {
     r.TaskStatus = &taskStatus
 }
-
 /* param taskType: null(Optional) */
 func (r *QueryRefreshTaskRequest) SetTaskType(taskType string) {
     r.TaskType = &taskType
 }
-
 /* param pageNumber: 分页页数,默认值1(Optional) */
 func (r *QueryRefreshTaskRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页页面大小,默认值50(Optional) */
 func (r *QueryRefreshTaskRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param accountType: 查询的账号范围(Optional) */
 func (r *QueryRefreshTaskRequest) SetAccountType(accountType string) {
     r.AccountType = &accountType
 }
-
 /* param subUsers: 查询的子账号，多个用逗号隔开(Optional) */
 func (r *QueryRefreshTaskRequest) SetSubUsers(subUsers string) {
     r.SubUsers = &subUsers
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

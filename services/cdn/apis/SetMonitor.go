@@ -101,21 +101,19 @@ func NewSetMonitorRequestWithoutParam() *SetMonitorRequest {
 func (r *SetMonitorRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param cycle: 探测周期，取值1和5，单位为分钟(Optional) */
 func (r *SetMonitorRequest) SetCycle(cycle int) {
     r.Cycle = &cycle
 }
-
 /* param monitorPath: 探测路径(Optional) */
 func (r *SetMonitorRequest) SetMonitorPath(monitorPath string) {
     r.MonitorPath = &monitorPath
 }
-
 /* param httpRequestHeader: http请求头(Optional) */
 func (r *SetMonitorRequest) SetHttpRequestHeader(httpRequestHeader interface{}) {
     r.HttpRequestHeader = &httpRequestHeader
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

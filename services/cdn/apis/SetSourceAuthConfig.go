@@ -114,31 +114,27 @@ func NewSetSourceAuthConfigRequestWithoutParam() *SetSourceAuthConfigRequest {
 func (r *SetSourceAuthConfigRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param enable: 是否开启鉴权[on,off](Optional) */
 func (r *SetSourceAuthConfigRequest) SetEnable(enable string) {
     r.Enable = &enable
 }
-
 /* param originRole: 回源为主/备[master,slave](Optional) */
 func (r *SetSourceAuthConfigRequest) SetOriginRole(originRole string) {
     r.OriginRole = &originRole
 }
-
 /* param authType: 鉴权类型[oss,aws,tos],aws暂不支持(Optional) */
 func (r *SetSourceAuthConfigRequest) SetAuthType(authType string) {
     r.AuthType = &authType
 }
-
 /* param tosAuthInfo: tos类型鉴权参数,authType为tos是不能为空(Optional) */
 func (r *SetSourceAuthConfigRequest) SetTosAuthInfo(tosAuthInfo *cdn.TOSAuthInfo) {
     r.TosAuthInfo = tosAuthInfo
 }
-
 /* param ossAuthInfo: oss类型鉴权参数,authType为oss是不能为空(Optional) */
 func (r *SetSourceAuthConfigRequest) SetOssAuthInfo(ossAuthInfo *cdn.OSSAuthInfo) {
     r.OssAuthInfo = ossAuthInfo
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -93,16 +93,15 @@ func NewQueryRefreshLimitRequestWithoutParam() *QueryRefreshLimitRequest {
 func (r *QueryRefreshLimitRequest) SetSubUsers(subUsers []string) {
     r.SubUsers = subUsers
 }
-
 /* param pageNumber: 默认为1(Optional) */
 func (r *QueryRefreshLimitRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 默认为10，最大100(Optional) */
 func (r *QueryRefreshLimitRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

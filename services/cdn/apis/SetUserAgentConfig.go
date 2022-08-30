@@ -95,16 +95,15 @@ func NewSetUserAgentConfigRequestWithoutParam() *SetUserAgentConfigRequest {
 func (r *SetUserAgentConfigRequest) SetDomain(domain string) {
     r.Domain = domain
 }
-
 /* param userAgentType: userAgent类型,取值：block（黑名单）,allow（白名单）,默认为block(Optional) */
 func (r *SetUserAgentConfigRequest) SetUserAgentType(userAgentType string) {
     r.UserAgentType = &userAgentType
 }
-
 /* param userAgentList: UA列表,如果userAgentList为空,则为全部删除(Optional) */
 func (r *SetUserAgentConfigRequest) SetUserAgentList(userAgentList []string) {
     r.UserAgentList = userAgentList
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

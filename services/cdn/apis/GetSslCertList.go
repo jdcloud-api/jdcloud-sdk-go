@@ -93,16 +93,15 @@ func NewGetSslCertListRequestWithoutParam() *GetSslCertListRequest {
 func (r *GetSslCertListRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 每页显示的数目(Optional) */
 func (r *GetSslCertListRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param domain: 域名，支持按照域名检索证书(Optional) */
 func (r *GetSslCertListRequest) SetDomain(domain string) {
     r.Domain = &domain
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

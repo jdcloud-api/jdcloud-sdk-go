@@ -123,41 +123,35 @@ func NewGetDomainListByFilterRequestWithoutParam() *GetDomainListByFilterRequest
 func (r *GetDomainListByFilterRequest) SetKeyWord(keyWord string) {
     r.KeyWord = &keyWord
 }
-
 /* param pageNumber: pageNumber,默认值为1(Optional) */
 func (r *GetDomainListByFilterRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: pageSize,默认值为20,最大值为50(Optional) */
 func (r *GetDomainListByFilterRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param status: 根据域名状态查询, 可选值[offline, online, configuring, auditing, audit_reject](Optional) */
 func (r *GetDomainListByFilterRequest) SetStatus(status string) {
     r.Status = &status
 }
-
 /* param type_: 域名类型，(web:静态小文件，download:大文件加速，vod:视频加速，live:直播加速),不传查所有(Optional) */
 func (r *GetDomainListByFilterRequest) SetType(type_ string) {
     r.Type = &type_
 }
-
 /* param accelerateRegion: 加速区域，(mainLand:中国大陆，nonMainLand:海外加港澳台，all:全球),不传为全球(Optional) */
 func (r *GetDomainListByFilterRequest) SetAccelerateRegion(accelerateRegion string) {
     r.AccelerateRegion = &accelerateRegion
 }
-
 /* param filterBy: 筛选依据（0：根据域名筛选，1：根据回源信息筛选），默认按照域名进行筛选(Optional) */
 func (r *GetDomainListByFilterRequest) SetFilterBy(filterBy int) {
     r.FilterBy = &filterBy
 }
-
 /* param tagFilters: 标签过滤条件(Optional) */
 func (r *GetDomainListByFilterRequest) SetTagFilters(tagFilters []cdn.TagFilter) {
     r.TagFilters = tagFilters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

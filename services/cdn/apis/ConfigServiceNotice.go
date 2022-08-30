@@ -122,41 +122,35 @@ func NewConfigServiceNoticeRequestWithoutParam() *ConfigServiceNoticeRequest {
 func (r *ConfigServiceNoticeRequest) SetId(id int64) {
     r.Id = &id
 }
-
 /* param noticeType: 通知类型,取值[reportForm],reportForm:报表.(Optional) */
 func (r *ConfigServiceNoticeRequest) SetNoticeType(noticeType string) {
     r.NoticeType = &noticeType
 }
-
 /* param noticeWay: 通知方式,取值[mail],mail:邮件.(Optional) */
 func (r *ConfigServiceNoticeRequest) SetNoticeWay(noticeWay string) {
     r.NoticeWay = &noticeWay
 }
-
 /* param noticeTo: 通知接收人,多个用逗号隔开.(Optional) */
 func (r *ConfigServiceNoticeRequest) SetNoticeTo(noticeTo string) {
     r.NoticeTo = &noticeTo
 }
-
 /* param noticeCC: 通知抄送人,多个用逗号隔开.(Optional) */
 func (r *ConfigServiceNoticeRequest) SetNoticeCC(noticeCC string) {
     r.NoticeCC = &noticeCC
 }
-
 /* param noticeContent: 通知正文.(Optional) */
 func (r *ConfigServiceNoticeRequest) SetNoticeContent(noticeContent string) {
     r.NoticeContent = &noticeContent
 }
-
 /* param noticePeriod: 通知周期,取值[daily,weekly,monthly].(Optional) */
 func (r *ConfigServiceNoticeRequest) SetNoticePeriod(noticePeriod []string) {
     r.NoticePeriod = noticePeriod
 }
-
 /* param noticeStatus: 通知状态，取值[init,start,stop](Optional) */
 func (r *ConfigServiceNoticeRequest) SetNoticeStatus(noticeStatus string) {
     r.NoticeStatus = &noticeStatus
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

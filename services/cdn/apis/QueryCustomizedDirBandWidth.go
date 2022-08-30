@@ -99,21 +99,19 @@ func NewQueryCustomizedDirBandWidthRequestWithoutParam() *QueryCustomizedDirBand
 func (r *QueryCustomizedDirBandWidthRequest) SetStartTime(startTime string) {
     r.StartTime = &startTime
 }
-
 /* param endTime: 查询截止时间,UTC时间，格式为:yyyy-MM-dd'T'HH:mm:ss'Z'，示例:2020-12-07T16:20:00Z，开始时间和结束时间跨度 不能超过4个小时(Optional) */
 func (r *QueryCustomizedDirBandWidthRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
-
 /* param domain: 需要查询的域名, 必须为用户pin下有权限的域名，该接口仅支持单域名查询(Optional) */
 func (r *QueryCustomizedDirBandWidthRequest) SetDomain(domain string) {
     r.Domain = &domain
 }
-
 /* param dir: 需要过滤的目录，以正斜线(/)开头，不填表示查询所有目录。查询目录同时需要以正斜线(/)结尾。 如:/path1/path2/path3/(Optional) */
 func (r *QueryCustomizedDirBandWidthRequest) SetDir(dir string) {
     r.Dir = &dir
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

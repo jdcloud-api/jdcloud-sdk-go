@@ -82,6 +82,7 @@ func (r *QueryLivePrefetchTaskRequest) SetUrlList(urlList []string) {
     r.UrlList = urlList
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r QueryLivePrefetchTaskRequest) GetRegionId() string {
