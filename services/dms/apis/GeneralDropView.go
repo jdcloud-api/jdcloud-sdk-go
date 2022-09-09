@@ -102,21 +102,19 @@ func NewGeneralDropViewRequestWithoutParam() *GeneralDropViewRequest {
 func (r *GeneralDropViewRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param dataSourceId: 数据源id(Optional) */
 func (r *GeneralDropViewRequest) SetDataSourceId(dataSourceId int) {
     r.DataSourceId = &dataSourceId
 }
-
 /* param dbName: 数据库名称。(Optional) */
 func (r *GeneralDropViewRequest) SetDbName(dbName string) {
     r.DbName = &dbName
 }
-
 /* param viewName: 视图名称。(Optional) */
 func (r *GeneralDropViewRequest) SetViewName(viewName string) {
     r.ViewName = &viewName
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

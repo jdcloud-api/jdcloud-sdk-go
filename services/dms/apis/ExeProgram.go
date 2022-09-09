@@ -102,21 +102,19 @@ func NewExeProgramRequestWithoutParam() *ExeProgramRequest {
 func (r *ExeProgramRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param dataSourceId: 数据源id(Optional) */
 func (r *ExeProgramRequest) SetDataSourceId(dataSourceId int) {
     r.DataSourceId = &dataSourceId
 }
-
 /* param dbName: 数据库名称。(Optional) */
 func (r *ExeProgramRequest) SetDbName(dbName string) {
     r.DbName = &dbName
 }
-
 /* param dmsSqls: SQL列表。(Optional) */
 func (r *ExeProgramRequest) SetDmsSqls(dmsSqls []dms.DmsSql) {
     r.DmsSqls = dmsSqls
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

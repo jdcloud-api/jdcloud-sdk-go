@@ -125,41 +125,35 @@ func NewCreateStructureFlowRequestWithoutParam() *CreateStructureFlowRequest {
 func (r *CreateStructureFlowRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param dataSourceId: 数据库id(Optional) */
 func (r *CreateStructureFlowRequest) SetDataSourceId(dataSourceId int) {
     r.DataSourceId = &dataSourceId
 }
-
 /* param dbName: 数据库名称(Optional) */
 func (r *CreateStructureFlowRequest) SetDbName(dbName string) {
     r.DbName = &dbName
 }
-
 /* param taskPlanTypeEnum: 执行方式，AUTO("AUTO", 0), BY_CREATOR("BY_CREATOR", 1)(Optional) */
 func (r *CreateStructureFlowRequest) SetTaskPlanTypeEnum(taskPlanTypeEnum string) {
     r.TaskPlanTypeEnum = &taskPlanTypeEnum
 }
-
 /* param dbaApproveTypeEnum: DBA审批方式，AUTO("AUTO", 0), MANUAL("MANUAL", 1)(Optional) */
 func (r *CreateStructureFlowRequest) SetDbaApproveTypeEnum(dbaApproveTypeEnum string) {
     r.DbaApproveTypeEnum = &dbaApproveTypeEnum
 }
-
 /* param memo: 申请原因(Optional) */
 func (r *CreateStructureFlowRequest) SetMemo(memo string) {
     r.Memo = &memo
 }
-
 /* param sqlText: SQL文本，变更SQL选择文本时，必填(Optional) */
 func (r *CreateStructureFlowRequest) SetSqlText(sqlText string) {
     r.SqlText = &sqlText
 }
-
 /* param sqlFileTaskId: SQL附件导入任务Id(Optional) */
 func (r *CreateStructureFlowRequest) SetSqlFileTaskId(sqlFileTaskId string) {
     r.SqlFileTaskId = &sqlFileTaskId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -89,11 +89,11 @@ func NewDatabaseListRequestWithoutParam() *DatabaseListRequest {
 func (r *DatabaseListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param dataSourceId: 数据源id(Optional) */
 func (r *DatabaseListRequest) SetDataSourceId(dataSourceId int) {
     r.DataSourceId = &dataSourceId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

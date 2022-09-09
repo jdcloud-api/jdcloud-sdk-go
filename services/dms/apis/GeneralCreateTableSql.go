@@ -126,41 +126,35 @@ func NewGeneralCreateTableSqlRequestWithoutParam() *GeneralCreateTableSqlRequest
 func (r *GeneralCreateTableSqlRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param dataSourceId: 数据源id(Optional) */
 func (r *GeneralCreateTableSqlRequest) SetDataSourceId(dataSourceId int) {
     r.DataSourceId = &dataSourceId
 }
-
 /* param dbName: 数据库名(Optional) */
 func (r *GeneralCreateTableSqlRequest) SetDbName(dbName string) {
     r.DbName = &dbName
 }
-
 /* param tableName: 表名(Optional) */
 func (r *GeneralCreateTableSqlRequest) SetTableName(tableName string) {
     r.TableName = &tableName
 }
-
 /* param metaTableInfo: 表元信息。(Optional) */
 func (r *GeneralCreateTableSqlRequest) SetMetaTableInfo(metaTableInfo *dms.MetaTableInfo) {
     r.MetaTableInfo = metaTableInfo
 }
-
 /* param columnInfos: 列信息。(Optional) */
 func (r *GeneralCreateTableSqlRequest) SetColumnInfos(columnInfos []dms.ColumnInfo) {
     r.ColumnInfos = columnInfos
 }
-
 /* param indexInfos: 索引信息。(Optional) */
 func (r *GeneralCreateTableSqlRequest) SetIndexInfos(indexInfos []dms.IndexInfo) {
     r.IndexInfos = indexInfos
 }
-
 /* param extraTableInfo: 分表信息，stardb数据源中使用。(Optional) */
 func (r *GeneralCreateTableSqlRequest) SetExtraTableInfo(extraTableInfo *dms.ExtraTableInfo) {
     r.ExtraTableInfo = extraTableInfo
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -108,26 +108,23 @@ func NewUploadImportFileTaskRequestWithoutParam() *UploadImportFileTaskRequest {
 func (r *UploadImportFileTaskRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param taskId: 上传文件任务id(Optional) */
 func (r *UploadImportFileTaskRequest) SetTaskId(taskId string) {
     r.TaskId = &taskId
 }
-
 /* param chunkNumber: 上传文件分片号(Optional) */
 func (r *UploadImportFileTaskRequest) SetChunkNumber(chunkNumber int) {
     r.ChunkNumber = &chunkNumber
 }
-
 /* param identifier: 分片文件MD5(Optional) */
 func (r *UploadImportFileTaskRequest) SetIdentifier(identifier string) {
     r.Identifier = &identifier
 }
-
 /* param file: 分片文件(Optional) */
 func (r *UploadImportFileTaskRequest) SetFile(file []int) {
     r.File = file
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

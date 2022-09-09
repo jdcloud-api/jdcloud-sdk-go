@@ -95,16 +95,15 @@ func NewTableListRequestWithoutParam() *TableListRequest {
 func (r *TableListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param dataSourceId: 数据源id(Optional) */
 func (r *TableListRequest) SetDataSourceId(dataSourceId int) {
     r.DataSourceId = &dataSourceId
 }
-
 /* param dbName: 数据库名称(Optional) */
 func (r *TableListRequest) SetDbName(dbName string) {
     r.DbName = &dbName
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -89,11 +89,11 @@ func NewDeletePersonalSqlRequestWithoutParam() *DeletePersonalSqlRequest {
 func (r *DeletePersonalSqlRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param id: 主键id(Optional) */
 func (r *DeletePersonalSqlRequest) SetId(id int) {
     r.Id = &id
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

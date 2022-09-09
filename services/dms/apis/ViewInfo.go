@@ -101,21 +101,19 @@ func NewViewInfoRequestWithoutParam() *ViewInfoRequest {
 func (r *ViewInfoRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param dataSourceId: 数据源id(Optional) */
 func (r *ViewInfoRequest) SetDataSourceId(dataSourceId int) {
     r.DataSourceId = &dataSourceId
 }
-
 /* param dbName: 数据库名称。(Optional) */
 func (r *ViewInfoRequest) SetDbName(dbName string) {
     r.DbName = &dbName
 }
-
 /* param viewName: 视图名称。(Optional) */
 func (r *ViewInfoRequest) SetViewName(viewName string) {
     r.ViewName = &viewName
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

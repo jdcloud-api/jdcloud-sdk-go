@@ -102,21 +102,19 @@ func NewConsoleSqlRequestWithoutParam() *ConsoleSqlRequest {
 func (r *ConsoleSqlRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param dataSourceId: 数据源id(Optional) */
 func (r *ConsoleSqlRequest) SetDataSourceId(dataSourceId int) {
     r.DataSourceId = &dataSourceId
 }
-
 /* param dbName: 数据库名称(Optional) */
 func (r *ConsoleSqlRequest) SetDbName(dbName string) {
     r.DbName = &dbName
 }
-
 /* param sqls: sql语句。(Optional) */
 func (r *ConsoleSqlRequest) SetSqls(sqls string) {
     r.Sqls = &sqls
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

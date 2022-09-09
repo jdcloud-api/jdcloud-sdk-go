@@ -40,7 +40,7 @@ func NewDmsClient(credential *core.Credential) *DmsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "dms",
-            Revision:    "1.2.0",
+            Revision:    "1.3.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -57,7 +57,7 @@ func (c *DmsClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
 }
 
-/* 任务执行 */
+/* 任务执行，支持Stardb */
 func (c *DmsClient) StartFlow(request *dms.StartFlowRequest) (*dms.StartFlowResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -68,6 +68,26 @@ func (c *DmsClient) StartFlow(request *dms.StartFlowRequest) (*dms.StartFlowResp
     }
 
     jdResp := &dms.StartFlowResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取函数列表，支持Mysql */
+func (c *DmsClient) FunctionList(request *dms.FunctionListRequest) (*dms.FunctionListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &dms.FunctionListResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -97,27 +117,7 @@ func (c *DmsClient) QueryInstance(request *dms.QueryInstanceRequest) (*dms.Query
     return jdResp, err
 }
 
-/* 执行sql语句 */
-func (c *DmsClient) ConsoleSql(request *dms.ConsoleSqlRequest) (*dms.ConsoleSqlResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &dms.ConsoleSqlResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 获取视图详情 */
+/* 获取视图详情，支持Mysql */
 func (c *DmsClient) ViewInfo(request *dms.ViewInfoRequest) (*dms.ViewInfoResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -137,7 +137,7 @@ func (c *DmsClient) ViewInfo(request *dms.ViewInfoRequest) (*dms.ViewInfoRespons
     return jdResp, err
 }
 
-/* 执行编程对象sql */
+/* 执行编程对象sql，支持Mysql */
 func (c *DmsClient) ExeProgram(request *dms.ExeProgramRequest) (*dms.ExeProgramResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -157,8 +157,8 @@ func (c *DmsClient) ExeProgram(request *dms.ExeProgramRequest) (*dms.ExeProgramR
     return jdResp, err
 }
 
-/* 执行sql语句 */
-func (c *DmsClient) OpenTable(request *dms.OpenTableRequest) (*dms.OpenTableResponse, error) {
+/* 生成删除触发器sql语句，支持Mysql */
+func (c *DmsClient) GeneralDropTrigger(request *dms.GeneralDropTriggerRequest) (*dms.GeneralDropTriggerResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -167,7 +167,7 @@ func (c *DmsClient) OpenTable(request *dms.OpenTableRequest) (*dms.OpenTableResp
         return nil, err
     }
 
-    jdResp := &dms.OpenTableResponse{}
+    jdResp := &dms.GeneralDropTriggerResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -177,47 +177,7 @@ func (c *DmsClient) OpenTable(request *dms.OpenTableRequest) (*dms.OpenTableResp
     return jdResp, err
 }
 
-/* sql格式化 */
-func (c *DmsClient) FormatSql(request *dms.FormatSqlRequest) (*dms.FormatSqlResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &dms.FormatSqlResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 生产创建视图SQL语句 */
-func (c *DmsClient) GeneralCreateView(request *dms.GeneralCreateViewRequest) (*dms.GeneralCreateViewResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &dms.GeneralCreateViewResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 获取表元数据 */
+/* 获取表元数据，支持Mysql，Stardb，Tidb，ClickHouse */
 func (c *DmsClient) TableInfo(request *dms.TableInfoRequest) (*dms.TableInfoResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -237,7 +197,7 @@ func (c *DmsClient) TableInfo(request *dms.TableInfoRequest) (*dms.TableInfoResp
     return jdResp, err
 }
 
-/* 创建导入文件任务 */
+/* 创建导入文件任务，支持Stardb */
 func (c *DmsClient) CreateImportFileTask(request *dms.CreateImportFileTaskRequest) (*dms.CreateImportFileTaskResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -257,7 +217,7 @@ func (c *DmsClient) CreateImportFileTask(request *dms.CreateImportFileTaskReques
     return jdResp, err
 }
 
-/* 创建数据导出工单 */
+/* 创建数据导出工单，支持Stardb */
 func (c *DmsClient) CreateExportFlow(request *dms.CreateExportFlowRequest) (*dms.CreateExportFlowResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -277,8 +237,8 @@ func (c *DmsClient) CreateExportFlow(request *dms.CreateExportFlowRequest) (*dms
     return jdResp, err
 }
 
-/* sql导入 */
-func (c *DmsClient) ImportDdlDml(request *dms.ImportDdlDmlRequest) (*dms.ImportDdlDmlResponse, error) {
+/* 生成修改触发器sql语句，支持Mysql */
+func (c *DmsClient) GeneralAlterTrigger(request *dms.GeneralAlterTriggerRequest) (*dms.GeneralAlterTriggerResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -287,7 +247,7 @@ func (c *DmsClient) ImportDdlDml(request *dms.ImportDdlDmlRequest) (*dms.ImportD
         return nil, err
     }
 
-    jdResp := &dms.ImportDdlDmlResponse{}
+    jdResp := &dms.GeneralAlterTriggerResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -297,8 +257,8 @@ func (c *DmsClient) ImportDdlDml(request *dms.ImportDdlDmlRequest) (*dms.ImportD
     return jdResp, err
 }
 
-/* 打开实例 */
-func (c *DmsClient) Open(request *dms.OpenRequest) (*dms.OpenResponse, error) {
+/* 生产创建函数过程SQL语句，支持Mysql */
+func (c *DmsClient) GeneralCreateFunction(request *dms.GeneralCreateFunctionRequest) (*dms.GeneralCreateFunctionResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -307,7 +267,7 @@ func (c *DmsClient) Open(request *dms.OpenRequest) (*dms.OpenResponse, error) {
         return nil, err
     }
 
-    jdResp := &dms.OpenResponse{}
+    jdResp := &dms.GeneralCreateFunctionResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -317,8 +277,8 @@ func (c *DmsClient) Open(request *dms.OpenRequest) (*dms.OpenResponse, error) {
     return jdResp, err
 }
 
-/* 批量建表 */
-func (c *DmsClient) CreateTableBatch(request *dms.CreateTableBatchRequest) (*dms.CreateTableBatchResponse, error) {
+/* 生成修改函数sql语句，支持Mysql */
+func (c *DmsClient) GeneralAlterFunction(request *dms.GeneralAlterFunctionRequest) (*dms.GeneralAlterFunctionResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -327,7 +287,7 @@ func (c *DmsClient) CreateTableBatch(request *dms.CreateTableBatchRequest) (*dms
         return nil, err
     }
 
-    jdResp := &dms.CreateTableBatchResponse{}
+    jdResp := &dms.GeneralAlterFunctionResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -337,7 +297,7 @@ func (c *DmsClient) CreateTableBatch(request *dms.CreateTableBatchRequest) (*dms
     return jdResp, err
 }
 
-/* 获取数据库中的表列表 */
+/* 获取数据库中的表列表，支持Mysql，Stardb，Tidb，ClickHouse */
 func (c *DmsClient) TableList(request *dms.TableListRequest) (*dms.TableListResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -348,6 +308,26 @@ func (c *DmsClient) TableList(request *dms.TableListRequest) (*dms.TableListResp
     }
 
     jdResp := &dms.TableListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取事件详情，支持Mysql */
+func (c *DmsClient) EventInfo(request *dms.EventInfoRequest) (*dms.EventInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &dms.EventInfoResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -377,27 +357,7 @@ func (c *DmsClient) Logout(request *dms.LogoutRequest) (*dms.LogoutResponse, err
     return jdResp, err
 }
 
-/* 数据导出 */
-func (c *DmsClient) ExportData(request *dms.ExportDataRequest) (*dms.ExportDataResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &dms.ExportDataResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 生成删除视图sql语句 */
+/* 生成删除视图sql语句，支持Mysql */
 func (c *DmsClient) GeneralDropView(request *dms.GeneralDropViewRequest) (*dms.GeneralDropViewResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -417,47 +377,7 @@ func (c *DmsClient) GeneralDropView(request *dms.GeneralDropViewRequest) (*dms.G
     return jdResp, err
 }
 
-/* 获取当前实例用户查询sql历史 */
-func (c *DmsClient) HistorySql(request *dms.HistorySqlRequest) (*dms.HistorySqlResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &dms.HistorySqlResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 获取数据导出Id */
-func (c *DmsClient) GetExportDataId(request *dms.GetExportDataIdRequest) (*dms.GetExportDataIdResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &dms.GetExportDataIdResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 执行计划 */
+/* 执行计划，支持Mysql，Stardb */
 func (c *DmsClient) ConsoleExplain(request *dms.ConsoleExplainRequest) (*dms.ConsoleExplainResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -477,27 +397,7 @@ func (c *DmsClient) ConsoleExplain(request *dms.ConsoleExplainRequest) (*dms.Con
     return jdResp, err
 }
 
-/* 获取sql中建表语句，表中列信息 */
-func (c *DmsClient) SqlTableInfo(request *dms.SqlTableInfoRequest) (*dms.SqlTableInfoResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &dms.SqlTableInfoResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 创建数据变更工单 */
+/* 创建数据变更工单，支持Stardb */
 func (c *DmsClient) CreateDataFlow(request *dms.CreateDataFlowRequest) (*dms.CreateDataFlowResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -537,7 +437,7 @@ func (c *DmsClient) DeletePersonalSql(request *dms.DeletePersonalSqlRequest) (*d
     return jdResp, err
 }
 
-/* 获取数据库实例的库列表 */
+/* 获取数据库实例的库列表，支持Mysql，Stardb，Tidb，ClickHouse */
 func (c *DmsClient) DatabaseList(request *dms.DatabaseListRequest) (*dms.DatabaseListResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -577,8 +477,8 @@ func (c *DmsClient) Login(request *dms.LoginRequest) (*dms.LoginResponse, error)
     return jdResp, err
 }
 
-/* 表结构数据导出文件下载 */
-func (c *DmsClient) DownloadExportFile(request *dms.DownloadExportFileRequest) (*dms.DownloadExportFileResponse, error) {
+/* 生成修改存储过程sql语句，支持Mysql */
+func (c *DmsClient) GeneralAlterProcedure(request *dms.GeneralAlterProcedureRequest) (*dms.GeneralAlterProcedureResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -587,7 +487,7 @@ func (c *DmsClient) DownloadExportFile(request *dms.DownloadExportFileRequest) (
         return nil, err
     }
 
-    jdResp := &dms.DownloadExportFileResponse{}
+    jdResp := &dms.GeneralAlterProcedureResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -597,7 +497,27 @@ func (c *DmsClient) DownloadExportFile(request *dms.DownloadExportFileRequest) (
     return jdResp, err
 }
 
-/* 上传文件 */
+/* 生成创建触发器SQL语句，支持Mysql */
+func (c *DmsClient) GeneralCreateTrigger(request *dms.GeneralCreateTriggerRequest) (*dms.GeneralCreateTriggerResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &dms.GeneralCreateTriggerResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 上传文件，支持Stardb，只支持前端页面使用 */
 func (c *DmsClient) UploadImportFileTask(request *dms.UploadImportFileTaskRequest) (*dms.UploadImportFileTaskResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -617,7 +537,467 @@ func (c *DmsClient) UploadImportFileTask(request *dms.UploadImportFileTaskReques
     return jdResp, err
 }
 
-/* 生成修改表结构语句sql */
+/* 更新收藏sql */
+func (c *DmsClient) UpdatePersonalSql(request *dms.UpdatePersonalSqlRequest) (*dms.UpdatePersonalSqlResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &dms.UpdatePersonalSqlResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询用户数据类型实例 */
+func (c *DmsClient) QueryTypeInstance(request *dms.QueryTypeInstanceRequest) (*dms.QueryTypeInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &dms.QueryTypeInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取批量建表sql，仅供前端使用，支持Stardb */
+func (c *DmsClient) GetCreateTableBatchSql(request *dms.GetCreateTableBatchSqlRequest) (*dms.GetCreateTableBatchSqlResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &dms.GetCreateTableBatchSqlResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建结构变更工单，支持Stardb */
+func (c *DmsClient) CreateStructureFlow(request *dms.CreateStructureFlowRequest) (*dms.CreateStructureFlowResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &dms.CreateStructureFlowResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 生成建表语句sql，支持Mysql，Stardb */
+func (c *DmsClient) GeneralCreateTableSql(request *dms.GeneralCreateTableSqlRequest) (*dms.GeneralCreateTableSqlResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &dms.GeneralCreateTableSqlResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 生产创建存储过程SQL语句，支持Mysql */
+func (c *DmsClient) GeneralCreateProcedure(request *dms.GeneralCreateProcedureRequest) (*dms.GeneralCreateProcedureResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &dms.GeneralCreateProcedureResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取触发器列表，支持Mysql */
+func (c *DmsClient) TriggerList(request *dms.TriggerListRequest) (*dms.TriggerListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &dms.TriggerListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 执行sql语句，支持Mysql，Stardb，Tidb，ClickHouse */
+func (c *DmsClient) ConsoleSql(request *dms.ConsoleSqlRequest) (*dms.ConsoleSqlResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &dms.ConsoleSqlResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* sql格式化，支持Mysql，Stardb */
+func (c *DmsClient) FormatSql(request *dms.FormatSqlRequest) (*dms.FormatSqlResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &dms.FormatSqlResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 生成删除函数sql语句，支持Mysql */
+func (c *DmsClient) GeneralDropFunction(request *dms.GeneralDropFunctionRequest) (*dms.GeneralDropFunctionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &dms.GeneralDropFunctionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 生产创建视图SQL语句，支持Mysql */
+func (c *DmsClient) GeneralCreateView(request *dms.GeneralCreateViewRequest) (*dms.GeneralCreateViewResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &dms.GeneralCreateViewResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 生产创建事件SQL语句，支持Mysql */
+func (c *DmsClient) GeneralCreateEvent(request *dms.GeneralCreateEventRequest) (*dms.GeneralCreateEventResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &dms.GeneralCreateEventResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 打开实例 */
+func (c *DmsClient) Open(request *dms.OpenRequest) (*dms.OpenResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &dms.OpenResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 批量建表，支持Stardb */
+func (c *DmsClient) CreateTableBatch(request *dms.CreateTableBatchRequest) (*dms.CreateTableBatchResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &dms.CreateTableBatchResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 生成删除存储过程sql语句，支持Mysql */
+func (c *DmsClient) GeneralDropProcedure(request *dms.GeneralDropProcedureRequest) (*dms.GeneralDropProcedureResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &dms.GeneralDropProcedureResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 调用函数，支持Mysql */
+func (c *DmsClient) FunctionInvoke(request *dms.FunctionInvokeRequest) (*dms.FunctionInvokeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &dms.FunctionInvokeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 执行存储过程，支持Mysql */
+func (c *DmsClient) ProcedureInvoke(request *dms.ProcedureInvokeRequest) (*dms.ProcedureInvokeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &dms.ProcedureInvokeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取当前实例用户查询sql历史 */
+func (c *DmsClient) HistorySql(request *dms.HistorySqlRequest) (*dms.HistorySqlResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &dms.HistorySqlResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取sql中建表语句，表中列信息，支持Mysql，Stardb，Tidb，ClickHouse */
+func (c *DmsClient) SqlTableInfo(request *dms.SqlTableInfoRequest) (*dms.SqlTableInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &dms.SqlTableInfoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取存储过程列表，支持Mysql */
+func (c *DmsClient) ProcedureList(request *dms.ProcedureListRequest) (*dms.ProcedureListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &dms.ProcedureListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 生成修改事件sql语句，支持Mysql */
+func (c *DmsClient) GeneralAlterEvent(request *dms.GeneralAlterEventRequest) (*dms.GeneralAlterEventResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &dms.GeneralAlterEventResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取函数详情，支持Mysql */
+func (c *DmsClient) FunctionInfo(request *dms.FunctionInfoRequest) (*dms.FunctionInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &dms.FunctionInfoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取触发器详情，支持Mysql */
+func (c *DmsClient) TriggerInfo(request *dms.TriggerInfoRequest) (*dms.TriggerInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &dms.TriggerInfoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 生成修改表结构语句sql，支持Mysql，Stardb */
 func (c *DmsClient) GeneralAlterTableSql(request *dms.GeneralAlterTableSqlRequest) (*dms.GeneralAlterTableSqlResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -628,26 +1008,6 @@ func (c *DmsClient) GeneralAlterTableSql(request *dms.GeneralAlterTableSqlReques
     }
 
     jdResp := &dms.GeneralAlterTableSqlResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 表结构导出 */
-func (c *DmsClient) ExportStruct(request *dms.ExportStructRequest) (*dms.ExportStructResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &dms.ExportStructResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -697,8 +1057,8 @@ func (c *DmsClient) AddPersonalSql(request *dms.AddPersonalSqlRequest) (*dms.Add
     return jdResp, err
 }
 
-/* 更新收藏sql */
-func (c *DmsClient) UpdatePersonalSql(request *dms.UpdatePersonalSqlRequest) (*dms.UpdatePersonalSqlResponse, error) {
+/* 获取存储过程详情，支持Mysql */
+func (c *DmsClient) ProcedureInfo(request *dms.ProcedureInfoRequest) (*dms.ProcedureInfoResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -707,7 +1067,7 @@ func (c *DmsClient) UpdatePersonalSql(request *dms.UpdatePersonalSqlRequest) (*d
         return nil, err
     }
 
-    jdResp := &dms.UpdatePersonalSqlResponse{}
+    jdResp := &dms.ProcedureInfoResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -717,7 +1077,7 @@ func (c *DmsClient) UpdatePersonalSql(request *dms.UpdatePersonalSqlRequest) (*d
     return jdResp, err
 }
 
-/* 生成数据 */
+/* 生成数据，支持Mysql，Stardb */
 func (c *DmsClient) ConsoleGeneralData(request *dms.ConsoleGeneralDataRequest) (*dms.ConsoleGeneralDataResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -728,26 +1088,6 @@ func (c *DmsClient) ConsoleGeneralData(request *dms.ConsoleGeneralDataRequest) (
     }
 
     jdResp := &dms.ConsoleGeneralDataResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 生成表结构数据导出下载Id */
-func (c *DmsClient) GetExportId(request *dms.GetExportIdRequest) (*dms.GetExportIdResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &dms.GetExportIdResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -777,7 +1117,7 @@ func (c *DmsClient) QueryPersonalSqls(request *dms.QueryPersonalSqlsRequest) (*d
     return jdResp, err
 }
 
-/* 获取视图列表 */
+/* 获取视图列表，支持Mysql */
 func (c *DmsClient) ProgramList(request *dms.ProgramListRequest) (*dms.ProgramListResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -797,27 +1137,7 @@ func (c *DmsClient) ProgramList(request *dms.ProgramListRequest) (*dms.ProgramLi
     return jdResp, err
 }
 
-/* 获取批量建表sql */
-func (c *DmsClient) GetCreateTableBatchSql(request *dms.GetCreateTableBatchSqlRequest) (*dms.GetCreateTableBatchSqlResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &dms.GetCreateTableBatchSqlResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 获取Dms域名 */
+/* 获取Dms域名，仅供前端使用 */
 func (c *DmsClient) GetDmsDomain(request *dms.GetDmsDomainRequest) (*dms.GetDmsDomainResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -837,7 +1157,7 @@ func (c *DmsClient) GetDmsDomain(request *dms.GetDmsDomainRequest) (*dms.GetDmsD
     return jdResp, err
 }
 
-/* 生成修改视图sql语句 */
+/* 生成修改视图sql语句，支持Mysql */
 func (c *DmsClient) GeneralAlterView(request *dms.GeneralAlterViewRequest) (*dms.GeneralAlterViewResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -857,8 +1177,8 @@ func (c *DmsClient) GeneralAlterView(request *dms.GeneralAlterViewRequest) (*dms
     return jdResp, err
 }
 
-/* 创建结构变更工单 */
-func (c *DmsClient) CreateStructureFlow(request *dms.CreateStructureFlowRequest) (*dms.CreateStructureFlowResponse, error) {
+/* 生成删除事件sql语句，支持Mysql */
+func (c *DmsClient) GeneralDropEvent(request *dms.GeneralDropEventRequest) (*dms.GeneralDropEventResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -867,27 +1187,7 @@ func (c *DmsClient) CreateStructureFlow(request *dms.CreateStructureFlowRequest)
         return nil, err
     }
 
-    jdResp := &dms.CreateStructureFlowResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 生成建表语句sql */
-func (c *DmsClient) GeneralCreateTableSql(request *dms.GeneralCreateTableSqlRequest) (*dms.GeneralCreateTableSqlResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &dms.GeneralCreateTableSqlResponse{}
+    jdResp := &dms.GeneralDropEventResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

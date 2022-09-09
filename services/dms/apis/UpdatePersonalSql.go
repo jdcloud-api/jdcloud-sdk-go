@@ -101,21 +101,19 @@ func NewUpdatePersonalSqlRequestWithoutParam() *UpdatePersonalSqlRequest {
 func (r *UpdatePersonalSqlRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param id: 主键id(Optional) */
 func (r *UpdatePersonalSqlRequest) SetId(id int) {
     r.Id = &id
 }
-
 /* param hint: sql备注(Optional) */
 func (r *UpdatePersonalSqlRequest) SetHint(hint string) {
     r.Hint = &hint
 }
-
 /* param sqlStr: sql内容(Optional) */
 func (r *UpdatePersonalSqlRequest) SetSqlStr(sqlStr string) {
     r.SqlStr = &sqlStr
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

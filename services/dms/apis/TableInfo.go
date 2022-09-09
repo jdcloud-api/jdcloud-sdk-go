@@ -102,21 +102,19 @@ func NewTableInfoRequestWithoutParam() *TableInfoRequest {
 func (r *TableInfoRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param dataSourceId: 数据源id(Optional) */
 func (r *TableInfoRequest) SetDataSourceId(dataSourceId int) {
     r.DataSourceId = &dataSourceId
 }
-
 /* param dbName: 库名。(Optional) */
 func (r *TableInfoRequest) SetDbName(dbName string) {
     r.DbName = &dbName
 }
-
 /* param tableName: 表名。(Optional) */
 func (r *TableInfoRequest) SetTableName(tableName string) {
     r.TableName = &tableName
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

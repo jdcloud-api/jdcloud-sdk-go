@@ -126,41 +126,35 @@ func NewQueryInstanceRequestWithoutParam() *QueryInstanceRequest {
 func (r *QueryInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceQueryTypeEnum: 查询分类方式：LOGIN_STATUS，DB_TYPE。(Optional) */
 func (r *QueryInstanceRequest) SetInstanceQueryTypeEnum(instanceQueryTypeEnum string) {
     r.InstanceQueryTypeEnum = &instanceQueryTypeEnum
 }
-
 /* param instanceStatus: 实例状态，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md)。(Optional) */
 func (r *QueryInstanceRequest) SetInstanceStatus(instanceStatus string) {
     r.InstanceStatus = &instanceStatus
 }
-
 /* param dbInfoEnum: 数据库类型：MYSQL_INS，DRDS_INS(Optional) */
 func (r *QueryInstanceRequest) SetDbInfoEnum(dbInfoEnum string) {
     r.DbInfoEnum = &dbInfoEnum
 }
-
 /* param pageNumber: 显示数据的页码，取值范围：[1,∞)。pageNumber为Null时，返回所有数据页码；超过总页数时，无数据。(Optional) */
 func (r *QueryInstanceRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 每页显示的数据条数，用于查询列表的接口。(Optional) */
 func (r *QueryInstanceRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param uniqId: 实例Id。(Optional) */
 func (r *QueryInstanceRequest) SetUniqId(uniqId string) {
     r.UniqId = &uniqId
 }
-
 /* param dbName: 打开数据库名称。(Optional) */
 func (r *QueryInstanceRequest) SetDbName(dbName string) {
     r.DbName = &dbName
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

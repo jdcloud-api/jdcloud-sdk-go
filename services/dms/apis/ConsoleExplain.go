@@ -102,21 +102,19 @@ func NewConsoleExplainRequestWithoutParam() *ConsoleExplainRequest {
 func (r *ConsoleExplainRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param dataSourceId: 数据源id(Optional) */
 func (r *ConsoleExplainRequest) SetDataSourceId(dataSourceId int) {
     r.DataSourceId = &dataSourceId
 }
-
 /* param dbName: 数据库名称(Optional) */
 func (r *ConsoleExplainRequest) SetDbName(dbName string) {
     r.DbName = &dbName
 }
-
 /* param sqls: sql语句。(Optional) */
 func (r *ConsoleExplainRequest) SetSqls(sqls string) {
     r.Sqls = &sqls
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
