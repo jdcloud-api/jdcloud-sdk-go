@@ -111,21 +111,19 @@ func NewCreateDataMigrationRequestWithoutParam() *CreateDataMigrationRequest {
 func (r *CreateDataMigrationRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 实例ID(Required) */
 func (r *CreateDataMigrationRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param migrationType: 迁移任务类型，支持以下类型（大小写不敏感）：-FULL_IMPORT:全量数据导入(Required) */
 func (r *CreateDataMigrationRequest) SetMigrationType(migrationType string) {
     r.MigrationType = migrationType
 }
-
 /* param importTask: 使用 TiDB Lightning 进行的数据迁移任务(Required) */
 func (r *CreateDataMigrationRequest) SetImportTask(importTask *tidb.FullImportTask) {
     r.ImportTask = importTask
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

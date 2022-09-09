@@ -137,51 +137,43 @@ func NewCreateDataFlowRequestWithoutParam() *CreateDataFlowRequest {
 func (r *CreateDataFlowRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param dataSourceId: 数据库id(Optional) */
 func (r *CreateDataFlowRequest) SetDataSourceId(dataSourceId int) {
     r.DataSourceId = &dataSourceId
 }
-
 /* param dbName: 数据库名称(Optional) */
 func (r *CreateDataFlowRequest) SetDbName(dbName string) {
     r.DbName = &dbName
 }
-
 /* param taskPlanTypeEnum: 执行方式，AUTO("AUTO", 0), BY_CREATOR("BY_CREATOR", 1)(Optional) */
 func (r *CreateDataFlowRequest) SetTaskPlanTypeEnum(taskPlanTypeEnum string) {
     r.TaskPlanTypeEnum = &taskPlanTypeEnum
 }
-
 /* param dbaApproveTypeEnum: DBA审批方式，AUTO("AUTO", 0), MANUAL("MANUAL", 1)(Optional) */
 func (r *CreateDataFlowRequest) SetDbaApproveTypeEnum(dbaApproveTypeEnum string) {
     r.DbaApproveTypeEnum = &dbaApproveTypeEnum
 }
-
 /* param memo: 申请原因(Optional) */
 func (r *CreateDataFlowRequest) SetMemo(memo string) {
     r.Memo = &memo
 }
-
 /* param sqlText: SQL文本，变更SQL选择文本时，必填(Optional) */
 func (r *CreateDataFlowRequest) SetSqlText(sqlText string) {
     r.SqlText = &sqlText
 }
-
 /* param sqlFileTaskId: SQL附件导入任务Id(Optional) */
 func (r *CreateDataFlowRequest) SetSqlFileTaskId(sqlFileTaskId string) {
     r.SqlFileTaskId = &sqlFileTaskId
 }
-
 /* param rollbackSqlText: 回滚SQL文本，选填(Optional) */
 func (r *CreateDataFlowRequest) SetRollbackSqlText(rollbackSqlText string) {
     r.RollbackSqlText = &rollbackSqlText
 }
-
 /* param rollbackFileTaskId: 回滚SQL附件导入任务Id(Optional) */
 func (r *CreateDataFlowRequest) SetRollbackFileTaskId(rollbackFileTaskId string) {
     r.RollbackFileTaskId = &rollbackFileTaskId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -110,21 +110,19 @@ func NewCreateAccountRequestWithoutParam() *CreateAccountRequest {
 func (r *CreateAccountRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 实例ID(Required) */
 func (r *CreateAccountRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param accountName: 账号名，在同一个实例中，账号名不能重复(Required) */
 func (r *CreateAccountRequest) SetAccountName(accountName string) {
     r.AccountName = accountName
 }
-
 /* param accountPassword: 密码(Required) */
 func (r *CreateAccountRequest) SetAccountPassword(accountPassword string) {
     r.AccountPassword = accountPassword
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

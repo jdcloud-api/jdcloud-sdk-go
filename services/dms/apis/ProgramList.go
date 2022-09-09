@@ -101,21 +101,19 @@ func NewProgramListRequestWithoutParam() *ProgramListRequest {
 func (r *ProgramListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param dataSourceId: 数据源id(Optional) */
 func (r *ProgramListRequest) SetDataSourceId(dataSourceId int) {
     r.DataSourceId = &dataSourceId
 }
-
 /* param dbName: 数据库名称。(Optional) */
 func (r *ProgramListRequest) SetDbName(dbName string) {
     r.DbName = &dbName
 }
-
 /* param filter: 过滤条件。(Optional) */
 func (r *ProgramListRequest) SetFilter(filter string) {
     r.Filter = &filter
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

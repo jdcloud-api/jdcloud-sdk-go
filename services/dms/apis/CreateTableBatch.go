@@ -102,21 +102,19 @@ func NewCreateTableBatchRequestWithoutParam() *CreateTableBatchRequest {
 func (r *CreateTableBatchRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param dataSourceId: 数据源id(Optional) */
 func (r *CreateTableBatchRequest) SetDataSourceId(dataSourceId int) {
     r.DataSourceId = &dataSourceId
 }
-
 /* param dbName: 数据库名称(Optional) */
 func (r *CreateTableBatchRequest) SetDbName(dbName string) {
     r.DbName = &dbName
 }
-
 /* param createTableInfos: 查询结果。(Optional) */
 func (r *CreateTableBatchRequest) SetCreateTableInfos(createTableInfos []dms.CreateTableInfo) {
     r.CreateTableInfos = createTableInfos
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -101,16 +101,15 @@ func NewModifyInstanceNameRequestWithoutParam() *ModifyInstanceNameRequest {
 func (r *ModifyInstanceNameRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 实例ID(Required) */
 func (r *ModifyInstanceNameRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param instanceName: 实例名称，名称支持中文，实例名的具体规则可参见帮助中心文档(Required) */
 func (r *ModifyInstanceNameRequest) SetInstanceName(instanceName string) {
     r.InstanceName = instanceName
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

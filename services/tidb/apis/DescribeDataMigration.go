@@ -99,16 +99,15 @@ func NewDescribeDataMigrationRequestWithoutParam() *DescribeDataMigrationRequest
 func (r *DescribeDataMigrationRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 实例ID(Required) */
 func (r *DescribeDataMigrationRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param queryStartTime: 查询迁移任务的起始时间，结束时间为当前时间。按任务开始时间查询，默认查询7天（包含当天）(Optional) */
 func (r *DescribeDataMigrationRequest) SetQueryStartTime(queryStartTime string) {
     r.QueryStartTime = &queryStartTime
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

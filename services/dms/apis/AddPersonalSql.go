@@ -101,21 +101,19 @@ func NewAddPersonalSqlRequestWithoutParam() *AddPersonalSqlRequest {
 func (r *AddPersonalSqlRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param dataSourceId: 数据源id(Optional) */
 func (r *AddPersonalSqlRequest) SetDataSourceId(dataSourceId int) {
     r.DataSourceId = &dataSourceId
 }
-
 /* param sqlStr: 收藏的sql语句。(Optional) */
 func (r *AddPersonalSqlRequest) SetSqlStr(sqlStr string) {
     r.SqlStr = &sqlStr
 }
-
 /* param hint: 备注。(Optional) */
 func (r *AddPersonalSqlRequest) SetHint(hint string) {
     r.Hint = &hint
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

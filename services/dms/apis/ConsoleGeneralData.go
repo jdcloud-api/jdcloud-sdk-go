@@ -108,26 +108,23 @@ func NewConsoleGeneralDataRequestWithoutParam() *ConsoleGeneralDataRequest {
 func (r *ConsoleGeneralDataRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param dataSourceId: 数据源id(Optional) */
 func (r *ConsoleGeneralDataRequest) SetDataSourceId(dataSourceId int) {
     r.DataSourceId = &dataSourceId
 }
-
 /* param dbName: 数据库名称(Optional) */
 func (r *ConsoleGeneralDataRequest) SetDbName(dbName string) {
     r.DbName = &dbName
 }
-
 /* param tableName: 表名。(Optional) */
 func (r *ConsoleGeneralDataRequest) SetTableName(tableName string) {
     r.TableName = &tableName
 }
-
 /* param count: 生成数据行数。(Optional) */
 func (r *ConsoleGeneralDataRequest) SetCount(count int) {
     r.Count = &count
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

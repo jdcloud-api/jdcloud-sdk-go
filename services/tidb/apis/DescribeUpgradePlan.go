@@ -92,11 +92,11 @@ func NewDescribeUpgradePlanRequestWithoutParam() *DescribeUpgradePlanRequest {
 func (r *DescribeUpgradePlanRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 实例ID(Required) */
 func (r *DescribeUpgradePlanRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

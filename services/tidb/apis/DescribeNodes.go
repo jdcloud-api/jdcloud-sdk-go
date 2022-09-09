@@ -128,22 +128,18 @@ func NewDescribeNodesRequestWithoutParam() *DescribeNodesRequest {
 func (r *DescribeNodesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 实例ID(Required) */
 func (r *DescribeNodesRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页;(Optional) */
 func (r *DescribeNodesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 每页显示的数据条数，默认为50，取值范围：[50,100]，用于查询列表的接口(Optional) */
 func (r *DescribeNodesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param sorts: cpuUtil - CPU使用率
 memeryUtil - 内存使用率
 diskUsage - 磁盘使用率
@@ -151,13 +147,13 @@ diskUsage - 磁盘使用率
 func (r *DescribeNodesRequest) SetSorts(sorts []common.Sort) {
     r.Sorts = sorts
 }
-
 /* param filters: nodeType, 支持operator选项：eq,ne
 nodeStatus, 支持operator选项：eq ne
 (Optional) */
 func (r *DescribeNodesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

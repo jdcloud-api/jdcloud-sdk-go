@@ -101,16 +101,15 @@ func NewVerifyFilefromOSSRequestWithoutParam() *VerifyFilefromOSSRequest {
 func (r *VerifyFilefromOSSRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 实例ID(Required) */
 func (r *VerifyFilefromOSSRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param ossLink: 要校验的文件bucket及路径,例如Bucket为db_bak,文件路径为test_server/db1/20181013.bak,则ossLink为db_bak/test_server/db1/20181013.bak(Required) */
 func (r *VerifyFilefromOSSRequest) SetOssLink(ossLink string) {
     r.OssLink = ossLink
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -40,7 +40,7 @@ func NewTidbClient(credential *core.Credential) *TidbClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "tidb",
-            Revision:    "1.0.0",
+            Revision:    "1.0.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -55,6 +55,26 @@ func (c *TidbClient) SetLogger(logger core.Logger) {
 
 func (c *TidbClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
+}
+
+/* 关闭TiDB服务的公网访问域名 */
+func (c *TidbClient) DisableInternetAccess(request *tidb.DisableInternetAccessRequest) (*tidb.DisableInternetAccessResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &tidb.DisableInternetAccessResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
 }
 
 /* 创建数据库账号，用户可以使用客户端，应用程序等通过该账号和密码登录数据库实例。 */
@@ -97,6 +117,26 @@ func (c *TidbClient) DeleteWhiteListGroup(request *tidb.DeleteWhiteListGroupRequ
     return jdResp, err
 }
 
+/* 查看TiCDC复制任务列表 */
+func (c *TidbClient) DescribeReplications(request *tidb.DescribeReplicationsRequest) (*tidb.DescribeReplicationsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &tidb.DescribeReplicationsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 升级TiDB引擎版本，例如从4.0.6 升级到4.0.8. 目前支持小版本的升级，可升级到平台支持的最新的小版本 */
 func (c *TidbClient) UpgradeEngineVersion(request *tidb.UpgradeEngineVersionRequest) (*tidb.UpgradeEngineVersionResponse, error) {
     if request == nil {
@@ -108,6 +148,26 @@ func (c *TidbClient) UpgradeEngineVersion(request *tidb.UpgradeEngineVersionRequ
     }
 
     jdResp := &tidb.UpgradeEngineVersionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改复制任务 */
+func (c *TidbClient) ModifyReplication(request *tidb.ModifyReplicationRequest) (*tidb.ModifyReplicationResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &tidb.ModifyReplicationResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -148,26 +208,6 @@ func (c *TidbClient) VerifyFilefromOSS(request *tidb.VerifyFilefromOSSRequest) (
     }
 
     jdResp := &tidb.VerifyFilefromOSSResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 获取可用区 */
-func (c *TidbClient) DescribeAvailableZones(request *tidb.DescribeAvailableZonesRequest) (*tidb.DescribeAvailableZonesResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &tidb.DescribeAvailableZonesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -417,6 +457,26 @@ func (c *TidbClient) DescribeAccounts(request *tidb.DescribeAccountsRequest) (*t
     return jdResp, err
 }
 
+/* 开启TiDB服务的公网访问域名 */
+func (c *TidbClient) EnableInternetAccess(request *tidb.EnableInternetAccessRequest) (*tidb.EnableInternetAccessResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &tidb.EnableInternetAccessResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 根据源实例全量备份创建一个新实例 */
 func (c *TidbClient) CreateInstanceFromBackup(request *tidb.CreateInstanceFromBackupRequest) (*tidb.CreateInstanceFromBackupResponse, error) {
     if request == nil {
@@ -537,6 +597,26 @@ func (c *TidbClient) ModifyWhiteList(request *tidb.ModifyWhiteListRequest) (*tid
     return jdResp, err
 }
 
+/* 删除复制任务 */
+func (c *TidbClient) DeleteReplication(request *tidb.DeleteReplicationRequest) (*tidb.DeleteReplicationResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &tidb.DeleteReplicationResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 创建数据库账号，用户可以使用客户端，应用程序等通过该账号和密码登录RDS数据库实例。 */
 func (c *TidbClient) ResetPassword(request *tidb.ResetPasswordRequest) (*tidb.ResetPasswordResponse, error) {
     if request == nil {
@@ -617,6 +697,86 @@ func (c *TidbClient) CreateInstance(request *tidb.CreateInstanceRequest) (*tidb.
     return jdResp, err
 }
 
+/* 查询TiDB实例的ssl状态 */
+func (c *TidbClient) DescribeSSL(request *tidb.DescribeSSLRequest) (*tidb.DescribeSSLResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &tidb.DescribeSSLResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 暂停复制任务 */
+func (c *TidbClient) StopReplication(request *tidb.StopReplicationRequest) (*tidb.StopReplicationResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &tidb.StopReplicationResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 关闭TiDB和MySQL客户端之间的SSL功能 */
+func (c *TidbClient) DisableSSL(request *tidb.DisableSSLRequest) (*tidb.DisableSSLResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &tidb.DisableSSLResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建一个TiCDC */
+func (c *TidbClient) CreateReplication(request *tidb.CreateReplicationRequest) (*tidb.CreateReplicationResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &tidb.CreateReplicationResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 获取当前用户售罄信息 */
 func (c *TidbClient) DescribeOrderableInstanceType(request *tidb.DescribeOrderableInstanceTypeRequest) (*tidb.DescribeOrderableInstanceTypeResponse, error) {
     if request == nil {
@@ -628,6 +788,46 @@ func (c *TidbClient) DescribeOrderableInstanceType(request *tidb.DescribeOrderab
     }
 
     jdResp := &tidb.DescribeOrderableInstanceTypeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 启动复制任务 */
+func (c *TidbClient) ResumeReplication(request *tidb.ResumeReplicationRequest) (*tidb.ResumeReplicationResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &tidb.ResumeReplicationResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 开启TiDB和MySQL客户端之间的SSL功能 */
+func (c *TidbClient) EnableSSL(request *tidb.EnableSSLRequest) (*tidb.EnableSSLResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &tidb.EnableSSLResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

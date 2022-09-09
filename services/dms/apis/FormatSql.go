@@ -95,16 +95,15 @@ func NewFormatSqlRequestWithoutParam() *FormatSqlRequest {
 func (r *FormatSqlRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param dataSourceId: 数据源id(Optional) */
 func (r *FormatSqlRequest) SetDataSourceId(dataSourceId int) {
     r.DataSourceId = &dataSourceId
 }
-
 /* param sqlStr: 需要格式化的sql(Optional) */
 func (r *FormatSqlRequest) SetSqlStr(sqlStr string) {
     r.SqlStr = &sqlStr
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -20,59 +20,68 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type DescribeAvailableZonesRequest struct {
+type EnableSSLRequest struct {
 
     core.JDCloudRequest
 
     /* 地域代码  */
     RegionId string `json:"regionId"`
+
+    /* 实例ID  */
+    InstanceId string `json:"instanceId"`
 }
 
 /*
  * param regionId: 地域代码 (Required)
+ * param instanceId: 实例ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeAvailableZonesRequest(
+func NewEnableSSLRequest(
     regionId string,
-) *DescribeAvailableZonesRequest {
+    instanceId string,
+) *EnableSSLRequest {
 
-	return &DescribeAvailableZonesRequest{
+	return &EnableSSLRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/azs",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/instances/{instanceId}/ssl:enableSSL",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
+        InstanceId: instanceId,
 	}
 }
 
 /*
  * param regionId: 地域代码 (Required)
+ * param instanceId: 实例ID (Required)
  */
-func NewDescribeAvailableZonesRequestWithAllParams(
+func NewEnableSSLRequestWithAllParams(
     regionId string,
-) *DescribeAvailableZonesRequest {
+    instanceId string,
+) *EnableSSLRequest {
 
-    return &DescribeAvailableZonesRequest{
+    return &EnableSSLRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/azs",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/instances/{instanceId}/ssl:enableSSL",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
+        InstanceId: instanceId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeAvailableZonesRequestWithoutParam() *DescribeAvailableZonesRequest {
+func NewEnableSSLRequestWithoutParam() *EnableSSLRequest {
 
-    return &DescribeAvailableZonesRequest{
+    return &EnableSSLRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/azs",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/instances/{instanceId}/ssl:enableSSL",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
@@ -80,22 +89,26 @@ func NewDescribeAvailableZonesRequestWithoutParam() *DescribeAvailableZonesReque
 }
 
 /* param regionId: 地域代码(Required) */
-func (r *DescribeAvailableZonesRequest) SetRegionId(regionId string) {
+func (r *EnableSSLRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
+/* param instanceId: 实例ID(Required) */
+func (r *EnableSSLRequest) SetInstanceId(instanceId string) {
+    r.InstanceId = instanceId
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeAvailableZonesRequest) GetRegionId() string {
+func (r EnableSSLRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeAvailableZonesResponse struct {
+type EnableSSLResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeAvailableZonesResult `json:"result"`
+    Result EnableSSLResult `json:"result"`
 }
 
-type DescribeAvailableZonesResult struct {
-    AvailableZones []string `json:"availableZones"`
+type EnableSSLResult struct {
 }

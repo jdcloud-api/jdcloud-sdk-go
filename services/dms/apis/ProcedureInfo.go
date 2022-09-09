@@ -21,7 +21,7 @@ import (
     dms "github.com/jdcloud-api/jdcloud-sdk-go/services/dms/models"
 )
 
-type ExportStructRequest struct {
+type ProcedureInfoRequest struct {
 
     core.JDCloudRequest
 
@@ -31,14 +31,11 @@ type ExportStructRequest struct {
     /* 数据源id (Optional) */
     DataSourceId *int `json:"dataSourceId"`
 
-    /* 数据库名称 (Optional) */
+    /* 数据库名称。 (Optional) */
     DbName *string `json:"dbName"`
 
-    /* 导出表名，为空时导出库中所有表 (Optional) */
-    TableName *string `json:"tableName"`
-
-    /* 导出文件字符编码 (Optional) */
-    Charset *string `json:"charset"`
+    /* 存储过程名称。 (Optional) */
+    ProcedureName *string `json:"procedureName"`
 }
 
 /*
@@ -46,13 +43,13 @@ type ExportStructRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewExportStructRequest(
+func NewProcedureInfoRequest(
     regionId string,
-) *ExportStructRequest {
+) *ProcedureInfoRequest {
 
-	return &ExportStructRequest{
+	return &ProcedureInfoRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/console:exportStruct",
+			URL:     "/regions/{regionId}/procedure:info",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -64,21 +61,19 @@ func NewExportStructRequest(
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param dataSourceId: 数据源id (Optional)
- * param dbName: 数据库名称 (Optional)
- * param tableName: 导出表名，为空时导出库中所有表 (Optional)
- * param charset: 导出文件字符编码 (Optional)
+ * param dbName: 数据库名称。 (Optional)
+ * param procedureName: 存储过程名称。 (Optional)
  */
-func NewExportStructRequestWithAllParams(
+func NewProcedureInfoRequestWithAllParams(
     regionId string,
     dataSourceId *int,
     dbName *string,
-    tableName *string,
-    charset *string,
-) *ExportStructRequest {
+    procedureName *string,
+) *ProcedureInfoRequest {
 
-    return &ExportStructRequest{
+    return &ProcedureInfoRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/console:exportStruct",
+            URL:     "/regions/{regionId}/procedure:info",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -86,17 +81,16 @@ func NewExportStructRequestWithAllParams(
         RegionId: regionId,
         DataSourceId: dataSourceId,
         DbName: dbName,
-        TableName: tableName,
-        Charset: charset,
+        ProcedureName: procedureName,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewExportStructRequestWithoutParam() *ExportStructRequest {
+func NewProcedureInfoRequestWithoutParam() *ProcedureInfoRequest {
 
-    return &ExportStructRequest{
+    return &ProcedureInfoRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/console:exportStruct",
+            URL:     "/regions/{regionId}/procedure:info",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -105,42 +99,44 @@ func NewExportStructRequestWithoutParam() *ExportStructRequest {
 }
 
 /* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
-func (r *ExportStructRequest) SetRegionId(regionId string) {
+func (r *ProcedureInfoRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param dataSourceId: 数据源id(Optional) */
-func (r *ExportStructRequest) SetDataSourceId(dataSourceId int) {
+func (r *ProcedureInfoRequest) SetDataSourceId(dataSourceId int) {
     r.DataSourceId = &dataSourceId
 }
-
-/* param dbName: 数据库名称(Optional) */
-func (r *ExportStructRequest) SetDbName(dbName string) {
+/* param dbName: 数据库名称。(Optional) */
+func (r *ProcedureInfoRequest) SetDbName(dbName string) {
     r.DbName = &dbName
 }
-
-/* param tableName: 导出表名，为空时导出库中所有表(Optional) */
-func (r *ExportStructRequest) SetTableName(tableName string) {
-    r.TableName = &tableName
+/* param procedureName: 存储过程名称。(Optional) */
+func (r *ProcedureInfoRequest) SetProcedureName(procedureName string) {
+    r.ProcedureName = &procedureName
 }
 
-/* param charset: 导出文件字符编码(Optional) */
-func (r *ExportStructRequest) SetCharset(charset string) {
-    r.Charset = &charset
-}
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r ExportStructRequest) GetRegionId() string {
+func (r ProcedureInfoRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type ExportStructResponse struct {
+type ProcedureInfoResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result ExportStructResult `json:"result"`
+    Result ProcedureInfoResult `json:"result"`
 }
 
-type ExportStructResult struct {
-    TableStructs []dms.TableStruct `json:"tableStructs"`
+type ProcedureInfoResult struct {
+    DbName string `json:"dbName"`
+    ProcedureName string `json:"procedureName"`
+    Definer string `json:"definer"`
+    ProcedureSecurity string `json:"procedureSecurity"`
+    DataAccess string `json:"dataAccess"`
+    Deterministic bool `json:"deterministic"`
+    DefinitionSql string `json:"definitionSql"`
+    CompleteSql string `json:"completeSql"`
+    Parameters []dms.Parameter `json:"parameters"`
+    Comment string `json:"comment"`
 }

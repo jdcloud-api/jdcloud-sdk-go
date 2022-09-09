@@ -102,16 +102,15 @@ func NewModifyParametersRequestWithoutParam() *ModifyParametersRequest {
 func (r *ModifyParametersRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 实例ID(Required) */
 func (r *ModifyParametersRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param parameters: (Required) */
 func (r *ModifyParametersRequest) SetParameters(parameters []tidb.ModifyParam) {
     r.Parameters = parameters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

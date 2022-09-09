@@ -93,11 +93,11 @@ func NewDescribeInstanceClassesRequestWithoutParam() *DescribeInstanceClassesReq
 func (r *DescribeInstanceClassesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param storageType: 存储类型,目前只支持本地SSD;(Required) */
 func (r *DescribeInstanceClassesRequest) SetStorageType(storageType string) {
     r.StorageType = storageType
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

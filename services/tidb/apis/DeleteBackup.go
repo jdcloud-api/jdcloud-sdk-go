@@ -92,11 +92,11 @@ func NewDeleteBackupRequestWithoutParam() *DeleteBackupRequest {
 func (r *DeleteBackupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param backupId: 备份ID(Required) */
 func (r *DeleteBackupRequest) SetBackupId(backupId string) {
     r.BackupId = backupId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

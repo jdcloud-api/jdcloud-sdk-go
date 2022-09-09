@@ -93,11 +93,11 @@ func NewCreateInstanceRequestWithoutParam() *CreateInstanceRequest {
 func (r *CreateInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceSpec: 新建实例规格(Required) */
 func (r *CreateInstanceRequest) SetInstanceSpec(instanceSpec *tidb.TidbInstanceSpec) {
     r.InstanceSpec = instanceSpec
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

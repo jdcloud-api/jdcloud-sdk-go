@@ -102,16 +102,15 @@ func NewCreateInstanceFromBackupRequestWithoutParam() *CreateInstanceFromBackupR
 func (r *CreateInstanceFromBackupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param backupId: 要恢复的备份的ID(Required) */
 func (r *CreateInstanceFromBackupRequest) SetBackupId(backupId string) {
     r.BackupId = backupId
 }
-
 /* param instanceSpec: 新建实例规格(Required) */
 func (r *CreateInstanceFromBackupRequest) SetInstanceSpec(instanceSpec *tidb.TidbInstanceSpec) {
     r.InstanceSpec = instanceSpec
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

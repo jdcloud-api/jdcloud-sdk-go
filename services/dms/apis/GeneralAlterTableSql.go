@@ -120,36 +120,31 @@ func NewGeneralAlterTableSqlRequestWithoutParam() *GeneralAlterTableSqlRequest {
 func (r *GeneralAlterTableSqlRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param dataSourceId: 数据源Id(Optional) */
 func (r *GeneralAlterTableSqlRequest) SetDataSourceId(dataSourceId int) {
     r.DataSourceId = &dataSourceId
 }
-
 /* param dbName: 数据库名(Optional) */
 func (r *GeneralAlterTableSqlRequest) SetDbName(dbName string) {
     r.DbName = &dbName
 }
-
 /* param tableName: 表名(Optional) */
 func (r *GeneralAlterTableSqlRequest) SetTableName(tableName string) {
     r.TableName = &tableName
 }
-
 /* param metaTableInfo: 表元信息。(Optional) */
 func (r *GeneralAlterTableSqlRequest) SetMetaTableInfo(metaTableInfo *dms.MetaTableInfo) {
     r.MetaTableInfo = metaTableInfo
 }
-
 /* param columnInfos: 列信息。(Optional) */
 func (r *GeneralAlterTableSqlRequest) SetColumnInfos(columnInfos []dms.ColumnInfo) {
     r.ColumnInfos = columnInfos
 }
-
 /* param indexInfos: 索引信息。(Optional) */
 func (r *GeneralAlterTableSqlRequest) SetIndexInfos(indexInfos []dms.IndexInfo) {
     r.IndexInfos = indexInfos
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

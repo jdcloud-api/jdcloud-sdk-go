@@ -101,16 +101,15 @@ func NewDeleteWhiteListGroupRequestWithoutParam() *DeleteWhiteListGroupRequest {
 func (r *DeleteWhiteListGroupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 实例ID(Required) */
 func (r *DeleteWhiteListGroupRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param name: 白名单分组名(Required) */
 func (r *DeleteWhiteListGroupRequest) SetName(name string) {
     r.Name = name
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

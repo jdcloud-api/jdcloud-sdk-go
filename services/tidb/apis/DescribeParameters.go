@@ -93,11 +93,11 @@ func NewDescribeParametersRequestWithoutParam() *DescribeParametersRequest {
 func (r *DescribeParametersRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 实例ID(Required) */
 func (r *DescribeParametersRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

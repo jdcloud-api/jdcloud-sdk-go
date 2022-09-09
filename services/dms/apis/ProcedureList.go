@@ -20,7 +20,7 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type ImportDdlDmlRequest struct {
+type ProcedureListRequest struct {
 
     core.JDCloudRequest
 
@@ -30,17 +30,11 @@ type ImportDdlDmlRequest struct {
     /* 数据源id (Optional) */
     DataSourceId *int `json:"dataSourceId"`
 
-    /* 数据库名称 (Optional) */
+    /* 数据库名称。 (Optional) */
     DbName *string `json:"dbName"`
 
-    /* 上传文件编码 (Optional) */
-    Charset *string `json:"charset"`
-
-    /* sql语句 (Optional) */
-    Sqls *string `json:"sqls"`
-
-    /* sql类型, CREATE("CREATE", 0), ALTER_DATA("ALTER_DATA", 1), ALTER_STRUCT("ALTER_STRUCT", 2), DROP("DROP", 4), CONSOLE("CONSOLE", 5), BATCH_CREATE("BATCH_CREATE", 6), IMPORT_DATA("IMPORT_DATA", 7), EXPORT_STRUCT_DATA("EXPORT_STRUCT_DATA", 8); (Optional) */
-    SqlConsoleTypeEnum *string `json:"sqlConsoleTypeEnum"`
+    /* 过滤条件。 (Optional) */
+    Filter *string `json:"filter"`
 }
 
 /*
@@ -48,13 +42,13 @@ type ImportDdlDmlRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewImportDdlDmlRequest(
+func NewProcedureListRequest(
     regionId string,
-) *ImportDdlDmlRequest {
+) *ProcedureListRequest {
 
-	return &ImportDdlDmlRequest{
+	return &ProcedureListRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/console:import",
+			URL:     "/regions/{regionId}/procedure:list",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -66,23 +60,19 @@ func NewImportDdlDmlRequest(
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param dataSourceId: 数据源id (Optional)
- * param dbName: 数据库名称 (Optional)
- * param charset: 上传文件编码 (Optional)
- * param sqls: sql语句 (Optional)
- * param sqlConsoleTypeEnum: sql类型, CREATE("CREATE", 0), ALTER_DATA("ALTER_DATA", 1), ALTER_STRUCT("ALTER_STRUCT", 2), DROP("DROP", 4), CONSOLE("CONSOLE", 5), BATCH_CREATE("BATCH_CREATE", 6), IMPORT_DATA("IMPORT_DATA", 7), EXPORT_STRUCT_DATA("EXPORT_STRUCT_DATA", 8); (Optional)
+ * param dbName: 数据库名称。 (Optional)
+ * param filter: 过滤条件。 (Optional)
  */
-func NewImportDdlDmlRequestWithAllParams(
+func NewProcedureListRequestWithAllParams(
     regionId string,
     dataSourceId *int,
     dbName *string,
-    charset *string,
-    sqls *string,
-    sqlConsoleTypeEnum *string,
-) *ImportDdlDmlRequest {
+    filter *string,
+) *ProcedureListRequest {
 
-    return &ImportDdlDmlRequest{
+    return &ProcedureListRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/console:import",
+            URL:     "/regions/{regionId}/procedure:list",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -90,18 +80,16 @@ func NewImportDdlDmlRequestWithAllParams(
         RegionId: regionId,
         DataSourceId: dataSourceId,
         DbName: dbName,
-        Charset: charset,
-        Sqls: sqls,
-        SqlConsoleTypeEnum: sqlConsoleTypeEnum,
+        Filter: filter,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewImportDdlDmlRequestWithoutParam() *ImportDdlDmlRequest {
+func NewProcedureListRequestWithoutParam() *ProcedureListRequest {
 
-    return &ImportDdlDmlRequest{
+    return &ProcedureListRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/console:import",
+            URL:     "/regions/{regionId}/procedure:list",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -110,46 +98,35 @@ func NewImportDdlDmlRequestWithoutParam() *ImportDdlDmlRequest {
 }
 
 /* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
-func (r *ImportDdlDmlRequest) SetRegionId(regionId string) {
+func (r *ProcedureListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param dataSourceId: 数据源id(Optional) */
-func (r *ImportDdlDmlRequest) SetDataSourceId(dataSourceId int) {
+func (r *ProcedureListRequest) SetDataSourceId(dataSourceId int) {
     r.DataSourceId = &dataSourceId
 }
-
-/* param dbName: 数据库名称(Optional) */
-func (r *ImportDdlDmlRequest) SetDbName(dbName string) {
+/* param dbName: 数据库名称。(Optional) */
+func (r *ProcedureListRequest) SetDbName(dbName string) {
     r.DbName = &dbName
 }
-
-/* param charset: 上传文件编码(Optional) */
-func (r *ImportDdlDmlRequest) SetCharset(charset string) {
-    r.Charset = &charset
+/* param filter: 过滤条件。(Optional) */
+func (r *ProcedureListRequest) SetFilter(filter string) {
+    r.Filter = &filter
 }
 
-/* param sqls: sql语句(Optional) */
-func (r *ImportDdlDmlRequest) SetSqls(sqls string) {
-    r.Sqls = &sqls
-}
-
-/* param sqlConsoleTypeEnum: sql类型, CREATE("CREATE", 0), ALTER_DATA("ALTER_DATA", 1), ALTER_STRUCT("ALTER_STRUCT", 2), DROP("DROP", 4), CONSOLE("CONSOLE", 5), BATCH_CREATE("BATCH_CREATE", 6), IMPORT_DATA("IMPORT_DATA", 7), EXPORT_STRUCT_DATA("EXPORT_STRUCT_DATA", 8);(Optional) */
-func (r *ImportDdlDmlRequest) SetSqlConsoleTypeEnum(sqlConsoleTypeEnum string) {
-    r.SqlConsoleTypeEnum = &sqlConsoleTypeEnum
-}
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r ImportDdlDmlRequest) GetRegionId() string {
+func (r ProcedureListRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type ImportDdlDmlResponse struct {
+type ProcedureListResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result ImportDdlDmlResult `json:"result"`
+    Result ProcedureListResult `json:"result"`
 }
 
-type ImportDdlDmlResult struct {
+type ProcedureListResult struct {
+    ProcedureNames []string `json:"procedureNames"`
 }

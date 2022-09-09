@@ -107,26 +107,23 @@ func NewCreateImportFileTaskRequestWithoutParam() *CreateImportFileTaskRequest {
 func (r *CreateImportFileTaskRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param filename: 文件名称(Optional) */
 func (r *CreateImportFileTaskRequest) SetFilename(filename string) {
     r.Filename = &filename
 }
-
 /* param totalSize: 文件总大小(Optional) */
 func (r *CreateImportFileTaskRequest) SetTotalSize(totalSize int) {
     r.TotalSize = &totalSize
 }
-
 /* param chunkSize: 文件分片大小(Optional) */
 func (r *CreateImportFileTaskRequest) SetChunkSize(chunkSize int) {
     r.ChunkSize = &chunkSize
 }
-
 /* param totalChunks: 文件分片数(Optional) */
 func (r *CreateImportFileTaskRequest) SetTotalChunks(totalChunks int) {
     r.TotalChunks = &totalChunks
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

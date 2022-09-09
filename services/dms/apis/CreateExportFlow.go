@@ -162,71 +162,59 @@ func NewCreateExportFlowRequestWithoutParam() *CreateExportFlowRequest {
 func (r *CreateExportFlowRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param dataSourceId: 数据库id(Optional) */
 func (r *CreateExportFlowRequest) SetDataSourceId(dataSourceId int) {
     r.DataSourceId = &dataSourceId
 }
-
 /* param dbName: 数据库名称(Optional) */
 func (r *CreateExportFlowRequest) SetDbName(dbName string) {
     r.DbName = &dbName
 }
-
 /* param taskPlanTypeEnum: 执行方式，AUTO("AUTO", 0), BY_CREATOR("BY_CREATOR", 1)(Optional) */
 func (r *CreateExportFlowRequest) SetTaskPlanTypeEnum(taskPlanTypeEnum string) {
     r.TaskPlanTypeEnum = &taskPlanTypeEnum
 }
-
 /* param dbaApproveTypeEnum: DBA审批方式，AUTO("AUTO", 0), MANUAL("MANUAL", 1)(Optional) */
 func (r *CreateExportFlowRequest) SetDbaApproveTypeEnum(dbaApproveTypeEnum string) {
     r.DbaApproveTypeEnum = &dbaApproveTypeEnum
 }
-
 /* param memo: 申请原因(Optional) */
 func (r *CreateExportFlowRequest) SetMemo(memo string) {
     r.Memo = &memo
 }
-
 /* param exportTypeEnum: 导出类型， RESULT_SET("RESULT_SET", 0), DB("DB", 1)(Optional) */
 func (r *CreateExportFlowRequest) SetExportTypeEnum(exportTypeEnum string) {
     r.ExportTypeEnum = &exportTypeEnum
 }
-
 /* param exportFileTypeEnum: 导出格式，CSV("CSV", 0), SQL("SQL", 1)(Optional) */
 func (r *CreateExportFlowRequest) SetExportFileTypeEnum(exportFileTypeEnum string) {
     r.ExportFileTypeEnum = &exportFileTypeEnum
 }
-
 /* param rowsNum: 影响行数，导出类型为结果集导出时，必填(Optional) */
 func (r *CreateExportFlowRequest) SetRowsNum(rowsNum int) {
     r.RowsNum = &rowsNum
 }
-
 /* param ignoreError: 是否跳过检验，导出类型为结果集导出时，必填(Optional) */
 func (r *CreateExportFlowRequest) SetIgnoreError(ignoreError bool) {
     r.IgnoreError = &ignoreError
 }
-
 /* param ignoreReason: 跳过检验原因，ignoreError为true时，必填(Optional) */
 func (r *CreateExportFlowRequest) SetIgnoreReason(ignoreReason string) {
     r.IgnoreReason = &ignoreReason
 }
-
 /* param exportSqlText: 导出SQL文本，导出类型为结果集导出时，必填(Optional) */
 func (r *CreateExportFlowRequest) SetExportSqlText(exportSqlText string) {
     r.ExportSqlText = &exportSqlText
 }
-
 /* param tableFilters: 导出表及过滤条件，为空时导出全部表。导出类型为数据库导出时，必填(Optional) */
 func (r *CreateExportFlowRequest) SetTableFilters(tableFilters *dms.TableFilter) {
     r.TableFilters = tableFilters
 }
-
 /* param exportContentTypeEnum: 导出内容，DATA("DATA", 0), STRUCT("STRUCT", 1), STRUCT_DATA("STRUCT_DATA", 2)，导出类型为数据库导出时，必填(Optional) */
 func (r *CreateExportFlowRequest) SetExportContentTypeEnum(exportContentTypeEnum string) {
     r.ExportContentTypeEnum = &exportContentTypeEnum
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

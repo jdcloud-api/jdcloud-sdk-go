@@ -21,7 +21,7 @@ import (
     dms "github.com/jdcloud-api/jdcloud-sdk-go/services/dms/models"
 )
 
-type OpenTableRequest struct {
+type GeneralDropEventRequest struct {
 
     core.JDCloudRequest
 
@@ -31,17 +31,11 @@ type OpenTableRequest struct {
     /* 数据源id (Optional) */
     DataSourceId *int `json:"dataSourceId"`
 
-    /* 数据库名称 (Optional) */
+    /* 数据库名称。 (Optional) */
     DbName *string `json:"dbName"`
 
-    /* sql语句。 (Optional) */
-    TableName *string `json:"tableName"`
-
-    /* 显示数据的页码，取值范围：[1,∞)。 (Optional) */
-    PageNumber *int `json:"pageNumber"`
-
-    /* 每页显示的数据条数，用于查询列表的接口。 (Optional) */
-    PageSize *int `json:"pageSize"`
+    /* 事件名称。 (Optional) */
+    EventName *string `json:"eventName"`
 }
 
 /*
@@ -49,13 +43,13 @@ type OpenTableRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewOpenTableRequest(
+func NewGeneralDropEventRequest(
     regionId string,
-) *OpenTableRequest {
+) *GeneralDropEventRequest {
 
-	return &OpenTableRequest{
+	return &GeneralDropEventRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/console:openTable",
+			URL:     "/regions/{regionId}/event:generalDrop",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -67,23 +61,19 @@ func NewOpenTableRequest(
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param dataSourceId: 数据源id (Optional)
- * param dbName: 数据库名称 (Optional)
- * param tableName: sql语句。 (Optional)
- * param pageNumber: 显示数据的页码，取值范围：[1,∞)。 (Optional)
- * param pageSize: 每页显示的数据条数，用于查询列表的接口。 (Optional)
+ * param dbName: 数据库名称。 (Optional)
+ * param eventName: 事件名称。 (Optional)
  */
-func NewOpenTableRequestWithAllParams(
+func NewGeneralDropEventRequestWithAllParams(
     regionId string,
     dataSourceId *int,
     dbName *string,
-    tableName *string,
-    pageNumber *int,
-    pageSize *int,
-) *OpenTableRequest {
+    eventName *string,
+) *GeneralDropEventRequest {
 
-    return &OpenTableRequest{
+    return &GeneralDropEventRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/console:openTable",
+            URL:     "/regions/{regionId}/event:generalDrop",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -91,18 +81,16 @@ func NewOpenTableRequestWithAllParams(
         RegionId: regionId,
         DataSourceId: dataSourceId,
         DbName: dbName,
-        TableName: tableName,
-        PageNumber: pageNumber,
-        PageSize: pageSize,
+        EventName: eventName,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewOpenTableRequestWithoutParam() *OpenTableRequest {
+func NewGeneralDropEventRequestWithoutParam() *GeneralDropEventRequest {
 
-    return &OpenTableRequest{
+    return &GeneralDropEventRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/console:openTable",
+            URL:     "/regions/{regionId}/event:generalDrop",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -111,48 +99,35 @@ func NewOpenTableRequestWithoutParam() *OpenTableRequest {
 }
 
 /* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
-func (r *OpenTableRequest) SetRegionId(regionId string) {
+func (r *GeneralDropEventRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param dataSourceId: 数据源id(Optional) */
-func (r *OpenTableRequest) SetDataSourceId(dataSourceId int) {
+func (r *GeneralDropEventRequest) SetDataSourceId(dataSourceId int) {
     r.DataSourceId = &dataSourceId
 }
-
-/* param dbName: 数据库名称(Optional) */
-func (r *OpenTableRequest) SetDbName(dbName string) {
+/* param dbName: 数据库名称。(Optional) */
+func (r *GeneralDropEventRequest) SetDbName(dbName string) {
     r.DbName = &dbName
 }
-
-/* param tableName: sql语句。(Optional) */
-func (r *OpenTableRequest) SetTableName(tableName string) {
-    r.TableName = &tableName
+/* param eventName: 事件名称。(Optional) */
+func (r *GeneralDropEventRequest) SetEventName(eventName string) {
+    r.EventName = &eventName
 }
 
-/* param pageNumber: 显示数据的页码，取值范围：[1,∞)。(Optional) */
-func (r *OpenTableRequest) SetPageNumber(pageNumber int) {
-    r.PageNumber = &pageNumber
-}
-
-/* param pageSize: 每页显示的数据条数，用于查询列表的接口。(Optional) */
-func (r *OpenTableRequest) SetPageSize(pageSize int) {
-    r.PageSize = &pageSize
-}
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r OpenTableRequest) GetRegionId() string {
+func (r GeneralDropEventRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type OpenTableResponse struct {
+type GeneralDropEventResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result OpenTableResult `json:"result"`
+    Result GeneralDropEventResult `json:"result"`
 }
 
-type OpenTableResult struct {
-    DmsSqlResults []dms.DmsSqlResult `json:"dmsSqlResults"`
-    Count int `json:"count"`
+type GeneralDropEventResult struct {
+    DmsSqls []dms.DmsSql `json:"dmsSqls"`
 }

@@ -132,46 +132,39 @@ func NewGeneralCreateViewRequestWithoutParam() *GeneralCreateViewRequest {
 func (r *GeneralCreateViewRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param dataSourceId: 数据源id。(Optional) */
 func (r *GeneralCreateViewRequest) SetDataSourceId(dataSourceId int) {
     r.DataSourceId = &dataSourceId
 }
-
 /* param dbName: 数据库名称。(Optional) */
 func (r *GeneralCreateViewRequest) SetDbName(dbName string) {
     r.DbName = &dbName
 }
-
 /* param viewName: 视图名称。(Optional) */
 func (r *GeneralCreateViewRequest) SetViewName(viewName string) {
     r.ViewName = &viewName
 }
-
 /* param viewAlgorithm: 视图算法，DEFAULT("DEFAULT", 1),UNDEFINED("UNDEFINED", 2), MERGE("MERGE", 3), TEMPTABLE("TEMPTABLE", 4);(Optional) */
 func (r *GeneralCreateViewRequest) SetViewAlgorithm(viewAlgorithm string) {
     r.ViewAlgorithm = &viewAlgorithm
 }
-
 /* param definer: 定义者。(Optional) */
 func (r *GeneralCreateViewRequest) SetDefiner(definer string) {
     r.Definer = &definer
 }
-
 /* param viewSecurity: 安全性，DEFAULT("DEFAULT", 1),DEFINER("DEFINER", 2), INVOKER("INVOKER", 3);(Optional) */
 func (r *GeneralCreateViewRequest) SetViewSecurity(viewSecurity string) {
     r.ViewSecurity = &viewSecurity
 }
-
 /* param viewCheckOption: 检查选项，DEFAULT("DEFAULT", 1),LOCAL("LOCAL", 2), CASCADED("CASCADED", 3);;(Optional) */
 func (r *GeneralCreateViewRequest) SetViewCheckOption(viewCheckOption string) {
     r.ViewCheckOption = &viewCheckOption
 }
-
 /* param definitionSql: 视图定义。(Optional) */
 func (r *GeneralCreateViewRequest) SetDefinitionSql(definitionSql string) {
     r.DefinitionSql = &definitionSql
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

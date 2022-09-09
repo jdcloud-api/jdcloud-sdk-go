@@ -20,58 +20,67 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type DownloadExportFileRequest struct {
+type DescribeSSLRequest struct {
 
     core.JDCloudRequest
 
-    /* 文件下载id  */
-    ExportId string `json:"exportId"`
+    /* 地域代码  */
+    RegionId string `json:"regionId"`
+
+    /* 实例ID  */
+    InstanceId string `json:"instanceId"`
 }
 
 /*
- * param exportId: 文件下载id (Required)
+ * param regionId: 地域代码 (Required)
+ * param instanceId: 实例ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDownloadExportFileRequest(
-    exportId string,
-) *DownloadExportFileRequest {
+func NewDescribeSSLRequest(
+    regionId string,
+    instanceId string,
+) *DescribeSSLRequest {
 
-	return &DownloadExportFileRequest{
+	return &DescribeSSLRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/console:downloadExportFile",
+			URL:     "/regions/{regionId}/instances/{instanceId}/ssl",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
-        ExportId: exportId,
+        RegionId: regionId,
+        InstanceId: instanceId,
 	}
 }
 
 /*
- * param exportId: 文件下载id (Required)
+ * param regionId: 地域代码 (Required)
+ * param instanceId: 实例ID (Required)
  */
-func NewDownloadExportFileRequestWithAllParams(
-    exportId string,
-) *DownloadExportFileRequest {
+func NewDescribeSSLRequestWithAllParams(
+    regionId string,
+    instanceId string,
+) *DescribeSSLRequest {
 
-    return &DownloadExportFileRequest{
+    return &DescribeSSLRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/console:downloadExportFile",
+            URL:     "/regions/{regionId}/instances/{instanceId}/ssl",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
-        ExportId: exportId,
+        RegionId: regionId,
+        InstanceId: instanceId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDownloadExportFileRequestWithoutParam() *DownloadExportFileRequest {
+func NewDescribeSSLRequestWithoutParam() *DescribeSSLRequest {
 
-    return &DownloadExportFileRequest{
+    return &DescribeSSLRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/console:downloadExportFile",
+            URL:     "/regions/{regionId}/instances/{instanceId}/ssl",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -79,22 +88,28 @@ func NewDownloadExportFileRequestWithoutParam() *DownloadExportFileRequest {
     }
 }
 
-/* param exportId: 文件下载id(Required) */
-func (r *DownloadExportFileRequest) SetExportId(exportId string) {
-    r.ExportId = exportId
+/* param regionId: 地域代码(Required) */
+func (r *DescribeSSLRequest) SetRegionId(regionId string) {
+    r.RegionId = regionId
 }
+/* param instanceId: 实例ID(Required) */
+func (r *DescribeSSLRequest) SetInstanceId(instanceId string) {
+    r.InstanceId = instanceId
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DownloadExportFileRequest) GetRegionId() string {
-    return ""
+func (r DescribeSSLRequest) GetRegionId() string {
+    return r.RegionId
 }
 
-type DownloadExportFileResponse struct {
+type DescribeSSLResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DownloadExportFileResult `json:"result"`
+    Result DescribeSSLResult `json:"result"`
 }
 
-type DownloadExportFileResult struct {
+type DescribeSSLResult struct {
+    Available bool `json:"available"`
 }
