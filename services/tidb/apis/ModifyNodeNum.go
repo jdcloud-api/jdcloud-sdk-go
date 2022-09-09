@@ -123,36 +123,31 @@ func NewModifyNodeNumRequestWithoutParam() *ModifyNodeNumRequest {
 func (r *ModifyNodeNumRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 实例ID(Required) */
 func (r *ModifyNodeNumRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param tidbNodeNum: 调整后的tidb节点数(Optional) */
 func (r *ModifyNodeNumRequest) SetTidbNodeNum(tidbNodeNum int) {
     r.TidbNodeNum = &tidbNodeNum
 }
-
 /* param tikvNodeNum: 调整后的tikv节点数(Optional) */
 func (r *ModifyNodeNumRequest) SetTikvNodeNum(tikvNodeNum int) {
     r.TikvNodeNum = &tikvNodeNum
 }
-
 /* param pdNodeNum: 调整后的pd节点数(Optional) */
 func (r *ModifyNodeNumRequest) SetPdNodeNum(pdNodeNum int) {
     r.PdNodeNum = &pdNodeNum
 }
-
 /* param tiflashNodeSpec: TiFlash节点规格和数目(Optional) */
 func (r *ModifyNodeNumRequest) SetTiflashNodeSpec(tiflashNodeSpec *tidb.NodeSpec) {
     r.TiflashNodeSpec = tiflashNodeSpec
 }
-
 /* param ticdcNodeSpec: Ticdc节点规格和数目(Optional) */
 func (r *ModifyNodeNumRequest) SetTicdcNodeSpec(ticdcNodeSpec *tidb.NodeSpec) {
     r.TicdcNodeSpec = ticdcNodeSpec
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

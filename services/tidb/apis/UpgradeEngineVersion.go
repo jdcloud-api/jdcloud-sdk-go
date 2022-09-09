@@ -104,21 +104,19 @@ func NewUpgradeEngineVersionRequestWithoutParam() *UpgradeEngineVersionRequest {
 func (r *UpgradeEngineVersionRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 实例ID(Required) */
 func (r *UpgradeEngineVersionRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param version: 升级后的版本号(Optional) */
 func (r *UpgradeEngineVersionRequest) SetVersion(version string) {
     r.Version = &version
 }
-
 /* param timing: 版本升级的时间点,时间格式yyyy-mm-dd hh:mm:ss。不传或者传入空表示取消升级(Optional) */
 func (r *UpgradeEngineVersionRequest) SetTiming(timing string) {
     r.Timing = &timing
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

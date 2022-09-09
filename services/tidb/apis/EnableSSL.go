@@ -20,7 +20,7 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type ModifyInstanceNameRequest struct {
+type EnableSSLRequest struct {
 
     core.JDCloudRequest
 
@@ -29,67 +29,58 @@ type ModifyInstanceNameRequest struct {
 
     /* 实例ID  */
     InstanceId string `json:"instanceId"`
-
-    /* 实例名称，名称支持中文，实例名的具体规则可参见帮助中心文档  */
-    InstanceName string `json:"instanceName"`
 }
 
 /*
  * param regionId: 地域代码 (Required)
  * param instanceId: 实例ID (Required)
- * param instanceName: 实例名称，名称支持中文，实例名的具体规则可参见帮助中心文档 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewModifyInstanceNameRequest(
+func NewEnableSSLRequest(
     regionId string,
     instanceId string,
-    instanceName string,
-) *ModifyInstanceNameRequest {
+) *EnableSSLRequest {
 
-	return &ModifyInstanceNameRequest{
+	return &EnableSSLRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstanceName",
+			URL:     "/regions/{regionId}/instances/{instanceId}/ssl:enableSSL",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         InstanceId: instanceId,
-        InstanceName: instanceName,
 	}
 }
 
 /*
  * param regionId: 地域代码 (Required)
  * param instanceId: 实例ID (Required)
- * param instanceName: 实例名称，名称支持中文，实例名的具体规则可参见帮助中心文档 (Required)
  */
-func NewModifyInstanceNameRequestWithAllParams(
+func NewEnableSSLRequestWithAllParams(
     regionId string,
     instanceId string,
-    instanceName string,
-) *ModifyInstanceNameRequest {
+) *EnableSSLRequest {
 
-    return &ModifyInstanceNameRequest{
+    return &EnableSSLRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstanceName",
+            URL:     "/regions/{regionId}/instances/{instanceId}/ssl:enableSSL",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         InstanceId: instanceId,
-        InstanceName: instanceName,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewModifyInstanceNameRequestWithoutParam() *ModifyInstanceNameRequest {
+func NewEnableSSLRequestWithoutParam() *EnableSSLRequest {
 
-    return &ModifyInstanceNameRequest{
+    return &EnableSSLRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstanceName",
+            URL:     "/regions/{regionId}/instances/{instanceId}/ssl:enableSSL",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -98,30 +89,26 @@ func NewModifyInstanceNameRequestWithoutParam() *ModifyInstanceNameRequest {
 }
 
 /* param regionId: 地域代码(Required) */
-func (r *ModifyInstanceNameRequest) SetRegionId(regionId string) {
+func (r *EnableSSLRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 /* param instanceId: 实例ID(Required) */
-func (r *ModifyInstanceNameRequest) SetInstanceId(instanceId string) {
+func (r *EnableSSLRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
-}
-/* param instanceName: 实例名称，名称支持中文，实例名的具体规则可参见帮助中心文档(Required) */
-func (r *ModifyInstanceNameRequest) SetInstanceName(instanceName string) {
-    r.InstanceName = instanceName
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r ModifyInstanceNameRequest) GetRegionId() string {
+func (r EnableSSLRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type ModifyInstanceNameResponse struct {
+type EnableSSLResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result ModifyInstanceNameResult `json:"result"`
+    Result EnableSSLResult `json:"result"`
 }
 
-type ModifyInstanceNameResult struct {
+type EnableSSLResult struct {
 }

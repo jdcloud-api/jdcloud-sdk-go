@@ -101,16 +101,15 @@ func NewAddWhiteListGroupRequestWithoutParam() *AddWhiteListGroupRequest {
 func (r *AddWhiteListGroupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 实例ID(Required) */
 func (r *AddWhiteListGroupRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param name: 白名单分组名(Required) */
 func (r *AddWhiteListGroupRequest) SetName(name string) {
     r.Name = name
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

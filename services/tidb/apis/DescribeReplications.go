@@ -18,9 +18,10 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    tidb "github.com/jdcloud-api/jdcloud-sdk-go/services/tidb/models"
 )
 
-type ModifyInstanceNameRequest struct {
+type DescribeReplicationsRequest struct {
 
     core.JDCloudRequest
 
@@ -29,68 +30,59 @@ type ModifyInstanceNameRequest struct {
 
     /* 实例ID  */
     InstanceId string `json:"instanceId"`
-
-    /* 实例名称，名称支持中文，实例名的具体规则可参见帮助中心文档  */
-    InstanceName string `json:"instanceName"`
 }
 
 /*
  * param regionId: 地域代码 (Required)
  * param instanceId: 实例ID (Required)
- * param instanceName: 实例名称，名称支持中文，实例名的具体规则可参见帮助中心文档 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewModifyInstanceNameRequest(
+func NewDescribeReplicationsRequest(
     regionId string,
     instanceId string,
-    instanceName string,
-) *ModifyInstanceNameRequest {
+) *DescribeReplicationsRequest {
 
-	return &ModifyInstanceNameRequest{
+	return &DescribeReplicationsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstanceName",
-			Method:  "POST",
+			URL:     "/regions/{regionId}/instances/{instanceId}/replications",
+			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         InstanceId: instanceId,
-        InstanceName: instanceName,
 	}
 }
 
 /*
  * param regionId: 地域代码 (Required)
  * param instanceId: 实例ID (Required)
- * param instanceName: 实例名称，名称支持中文，实例名的具体规则可参见帮助中心文档 (Required)
  */
-func NewModifyInstanceNameRequestWithAllParams(
+func NewDescribeReplicationsRequestWithAllParams(
     regionId string,
     instanceId string,
-    instanceName string,
-) *ModifyInstanceNameRequest {
+) *DescribeReplicationsRequest {
 
-    return &ModifyInstanceNameRequest{
+    return &DescribeReplicationsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstanceName",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/instances/{instanceId}/replications",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         InstanceId: instanceId,
-        InstanceName: instanceName,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewModifyInstanceNameRequestWithoutParam() *ModifyInstanceNameRequest {
+func NewDescribeReplicationsRequestWithoutParam() *DescribeReplicationsRequest {
 
-    return &ModifyInstanceNameRequest{
+    return &DescribeReplicationsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstanceName",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/instances/{instanceId}/replications",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
@@ -98,30 +90,28 @@ func NewModifyInstanceNameRequestWithoutParam() *ModifyInstanceNameRequest {
 }
 
 /* param regionId: 地域代码(Required) */
-func (r *ModifyInstanceNameRequest) SetRegionId(regionId string) {
+func (r *DescribeReplicationsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 /* param instanceId: 实例ID(Required) */
-func (r *ModifyInstanceNameRequest) SetInstanceId(instanceId string) {
+func (r *DescribeReplicationsRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
-}
-/* param instanceName: 实例名称，名称支持中文，实例名的具体规则可参见帮助中心文档(Required) */
-func (r *ModifyInstanceNameRequest) SetInstanceName(instanceName string) {
-    r.InstanceName = instanceName
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r ModifyInstanceNameRequest) GetRegionId() string {
+func (r DescribeReplicationsRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type ModifyInstanceNameResponse struct {
+type DescribeReplicationsResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result ModifyInstanceNameResult `json:"result"`
+    Result DescribeReplicationsResult `json:"result"`
 }
 
-type ModifyInstanceNameResult struct {
+type DescribeReplicationsResult struct {
+    TotalCount int `json:"totalCount"`
+    Replications []tidb.ReplicationTask `json:"replications"`
 }

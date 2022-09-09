@@ -20,35 +20,35 @@ package models
 type ReplicationSpec struct {
 
     /* 复制的起始时间戳 (Optional) */
-    StartTS string `json:"startTS"`
+    StartTS *string `json:"startTS"`
 
     /* 要复制的对象列表 (Optional) */
     ReplicationObjects []string `json:"replicationObjects"`
 
     /* 目标实例类型 (Optional) */
-    TargetType string `json:"targetType"`
+    TargetType *string `json:"targetType"`
 
     /* 目标实例IP (Optional) */
-    TargetIP string `json:"targetIP"`
+    TargetIP *string `json:"targetIP"`
 
     /* 目标实例端口 (Optional) */
-    TargetPort string `json:"targetPort"`
+    TargetPort *string `json:"targetPort"`
 
     /* 目标实例备注说明 (Optional) */
-    TargetComment string `json:"targetComment"`
+    TargetComment *string `json:"targetComment"`
 
     /* 目标类型为TiDB或MySQL时，连接目标实例的用户名 (Optional) */
-    TargetUser string `json:"targetUser"`
+    TargetUser *string `json:"targetUser"`
 
     /* 目标类型为TiDB或MySQL时，连接目标实例的密码 (Optional) */
-    TargetPassword string `json:"targetPassword"`
+    TargetPassword *string `json:"targetPassword"`
 
     /* Kafka的Topic (Optional) */
-    KafkaTopic string `json:"kafkaTopic"`
+    KafkaTopic *string `json:"kafkaTopic"`
 
     /* Kafka的版本 (Optional) */
-    KafkaVersion string `json:"kafkaVersion"`
+    KafkaVersion *string `json:"kafkaVersion"`
 
     /* 消息的格式 (Optional) */
-    KafkaProtocol string `json:"kafkaProtocol"`
+    KafkaProtocol *string `json:"kafkaProtocol"`
 }

@@ -20,7 +20,7 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type ModifyInstanceNameRequest struct {
+type DisableInternetAccessRequest struct {
 
     core.JDCloudRequest
 
@@ -30,66 +30,66 @@ type ModifyInstanceNameRequest struct {
     /* 实例ID  */
     InstanceId string `json:"instanceId"`
 
-    /* 实例名称，名称支持中文，实例名的具体规则可参见帮助中心文档  */
-    InstanceName string `json:"instanceName"`
+    /* 按照service type (database pd monitor)关闭公网域名  */
+    ServiceType string `json:"serviceType"`
 }
 
 /*
  * param regionId: 地域代码 (Required)
  * param instanceId: 实例ID (Required)
- * param instanceName: 实例名称，名称支持中文，实例名的具体规则可参见帮助中心文档 (Required)
+ * param serviceType: 按照service type (database pd monitor)关闭公网域名 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewModifyInstanceNameRequest(
+func NewDisableInternetAccessRequest(
     regionId string,
     instanceId string,
-    instanceName string,
-) *ModifyInstanceNameRequest {
+    serviceType string,
+) *DisableInternetAccessRequest {
 
-	return &ModifyInstanceNameRequest{
+	return &DisableInternetAccessRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstanceName",
+			URL:     "/regions/{regionId}/instances/{instanceId}:disableInternetAccess",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         InstanceId: instanceId,
-        InstanceName: instanceName,
+        ServiceType: serviceType,
 	}
 }
 
 /*
  * param regionId: 地域代码 (Required)
  * param instanceId: 实例ID (Required)
- * param instanceName: 实例名称，名称支持中文，实例名的具体规则可参见帮助中心文档 (Required)
+ * param serviceType: 按照service type (database pd monitor)关闭公网域名 (Required)
  */
-func NewModifyInstanceNameRequestWithAllParams(
+func NewDisableInternetAccessRequestWithAllParams(
     regionId string,
     instanceId string,
-    instanceName string,
-) *ModifyInstanceNameRequest {
+    serviceType string,
+) *DisableInternetAccessRequest {
 
-    return &ModifyInstanceNameRequest{
+    return &DisableInternetAccessRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstanceName",
+            URL:     "/regions/{regionId}/instances/{instanceId}:disableInternetAccess",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         InstanceId: instanceId,
-        InstanceName: instanceName,
+        ServiceType: serviceType,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewModifyInstanceNameRequestWithoutParam() *ModifyInstanceNameRequest {
+func NewDisableInternetAccessRequestWithoutParam() *DisableInternetAccessRequest {
 
-    return &ModifyInstanceNameRequest{
+    return &DisableInternetAccessRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstanceName",
+            URL:     "/regions/{regionId}/instances/{instanceId}:disableInternetAccess",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -98,30 +98,30 @@ func NewModifyInstanceNameRequestWithoutParam() *ModifyInstanceNameRequest {
 }
 
 /* param regionId: 地域代码(Required) */
-func (r *ModifyInstanceNameRequest) SetRegionId(regionId string) {
+func (r *DisableInternetAccessRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 /* param instanceId: 实例ID(Required) */
-func (r *ModifyInstanceNameRequest) SetInstanceId(instanceId string) {
+func (r *DisableInternetAccessRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-/* param instanceName: 实例名称，名称支持中文，实例名的具体规则可参见帮助中心文档(Required) */
-func (r *ModifyInstanceNameRequest) SetInstanceName(instanceName string) {
-    r.InstanceName = instanceName
+/* param serviceType: 按照service type (database pd monitor)关闭公网域名(Required) */
+func (r *DisableInternetAccessRequest) SetServiceType(serviceType string) {
+    r.ServiceType = serviceType
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r ModifyInstanceNameRequest) GetRegionId() string {
+func (r DisableInternetAccessRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type ModifyInstanceNameResponse struct {
+type DisableInternetAccessResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result ModifyInstanceNameResult `json:"result"`
+    Result DisableInternetAccessResult `json:"result"`
 }
 
-type ModifyInstanceNameResult struct {
+type DisableInternetAccessResult struct {
 }

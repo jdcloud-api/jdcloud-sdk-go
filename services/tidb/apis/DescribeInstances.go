@@ -45,6 +45,9 @@ instanceStatus, 支持operator选项：eq,ne
 
     /* 资源标签 (Optional) */
     TagFilters []common.TagFilter `json:"tagFilters"`
+
+    /* 资源组id (Optional) */
+    ResourceGroupIds []string `json:"resourceGroupIds"`
 }
 
 /*
@@ -78,6 +81,7 @@ instanceName, 支持operator选项：eq,ne,like
 instanceStatus, 支持operator选项：eq,ne
  (Optional)
  * param tagFilters: 资源标签 (Optional)
+ * param resourceGroupIds: 资源组id (Optional)
  */
 func NewDescribeInstancesRequestWithAllParams(
     regionId string,
@@ -85,6 +89,7 @@ func NewDescribeInstancesRequestWithAllParams(
     pageSize *int,
     filters []common.Filter,
     tagFilters []common.TagFilter,
+    resourceGroupIds []string,
 ) *DescribeInstancesRequest {
 
     return &DescribeInstancesRequest{
@@ -99,6 +104,7 @@ func NewDescribeInstancesRequestWithAllParams(
         PageSize: pageSize,
         Filters: filters,
         TagFilters: tagFilters,
+        ResourceGroupIds: resourceGroupIds,
     }
 }
 
@@ -119,17 +125,14 @@ func NewDescribeInstancesRequestWithoutParam() *DescribeInstancesRequest {
 func (r *DescribeInstancesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页;(Optional) */
 func (r *DescribeInstancesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 每页显示的数据条数，默认为100，取值范围：[10,100]，用于查询列表的接口(Optional) */
 func (r *DescribeInstancesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param filters: 过滤参数，多个过滤参数之间的关系为“与”(and)
 支持以下属性的过滤：
 instanceId, 支持operator选项：eq,ne
@@ -139,11 +142,15 @@ instanceStatus, 支持operator选项：eq,ne
 func (r *DescribeInstancesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
-
 /* param tagFilters: 资源标签(Optional) */
 func (r *DescribeInstancesRequest) SetTagFilters(tagFilters []common.TagFilter) {
     r.TagFilters = tagFilters
 }
+/* param resourceGroupIds: 资源组id(Optional) */
+func (r *DescribeInstancesRequest) SetResourceGroupIds(resourceGroupIds []string) {
+    r.ResourceGroupIds = resourceGroupIds
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

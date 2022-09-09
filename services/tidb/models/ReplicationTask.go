@@ -25,6 +25,9 @@ type ReplicationTask struct {
     /* 目标实例类型 (Optional) */
     TargetType string `json:"targetType"`
 
+    /* 复制的对象，格式为"库名.表名”，支持?* 通配符，例如 db1.* 、 db2.tab? ，*.* 表示复制整个实例 (Optional) */
+    ReplicationObjects string `json:"replicationObjects"`
+
     /* 目标实例IP (Optional) */
     TargetIP string `json:"targetIP"`
 

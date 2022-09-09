@@ -101,16 +101,15 @@ func NewRebootPodRequestWithoutParam() *RebootPodRequest {
 func (r *RebootPodRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 实例ID(Required) */
 func (r *RebootPodRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param nodeType: 重启指定类型的pod,支持Tikv,TiDB,PD,TiFlash(Required) */
 func (r *RebootPodRequest) SetNodeType(nodeType []string) {
     r.NodeType = nodeType
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

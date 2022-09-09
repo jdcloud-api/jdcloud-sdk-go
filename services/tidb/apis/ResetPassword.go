@@ -110,21 +110,19 @@ func NewResetPasswordRequestWithoutParam() *ResetPasswordRequest {
 func (r *ResetPasswordRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 实例ID(Required) */
 func (r *ResetPasswordRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param accountName: 账号名，在同一个实例中账号名不能重复(Required) */
 func (r *ResetPasswordRequest) SetAccountName(accountName string) {
     r.AccountName = accountName
 }
-
 /* param accountPassword: 新密码(Required) */
 func (r *ResetPasswordRequest) SetAccountPassword(accountPassword string) {
     r.AccountPassword = accountPassword
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

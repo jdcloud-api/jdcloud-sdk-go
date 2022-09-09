@@ -110,21 +110,19 @@ func NewModifyWhiteListRequestWithoutParam() *ModifyWhiteListRequest {
 func (r *ModifyWhiteListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 实例ID(Required) */
 func (r *ModifyWhiteListRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param ips: IP或IP段，不同的IP/IP段之间用英文逗号分隔，例如0.0.0.0/0,192.168.0.10(Required) */
 func (r *ModifyWhiteListRequest) SetIps(ips string) {
     r.Ips = ips
 }
-
 /* param name: 白名单分组名(Required) */
 func (r *ModifyWhiteListRequest) SetName(name string) {
     r.Name = name
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
