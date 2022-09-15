@@ -47,7 +47,6 @@ type ModifyAnalysisThresholdRequest struct {
 
     /* top值，范围10~1000 (Optional) */
     Top *int `json:"top"`
-
 }
 
 /*
@@ -129,37 +128,30 @@ func NewModifyAnalysisThresholdRequestWithoutParam() *ModifyAnalysisThresholdReq
 func (r *ModifyAnalysisThresholdRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
 func (r *ModifyAnalysisThresholdRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
-
 /* param stringSize: String类型阈值(Optional) */
 func (r *ModifyAnalysisThresholdRequest) SetStringSize(stringSize int) {
     r.StringSize = &stringSize
 }
-
 /* param listSize: List类型阈值(Optional) */
 func (r *ModifyAnalysisThresholdRequest) SetListSize(listSize int) {
     r.ListSize = &listSize
 }
-
 /* param hashSize: Hash类型阈值(Optional) */
 func (r *ModifyAnalysisThresholdRequest) SetHashSize(hashSize int) {
     r.HashSize = &hashSize
 }
-
 /* param setSize: Set类型阈值(Optional) */
 func (r *ModifyAnalysisThresholdRequest) SetSetSize(setSize int) {
     r.SetSize = &setSize
 }
-
 /* param zsetSize: Zset类型阈值(Optional) */
 func (r *ModifyAnalysisThresholdRequest) SetZsetSize(zsetSize int) {
     r.ZsetSize = &zsetSize
 }
-
 /* param top: top值，范围10~1000(Optional) */
 func (r *ModifyAnalysisThresholdRequest) SetTop(top int) {
     r.Top = &top

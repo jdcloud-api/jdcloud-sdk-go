@@ -33,7 +33,6 @@ type DescribeCacheAnalysisResultRequest struct {
 
     /* 任务ID，即request ID  */
     TaskId string `json:"taskId"`
-
 }
 
 /*
@@ -103,12 +102,10 @@ func NewDescribeCacheAnalysisResultRequestWithoutParam() *DescribeCacheAnalysisR
 func (r *DescribeCacheAnalysisResultRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
 func (r *DescribeCacheAnalysisResultRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
-
 /* param taskId: 任务ID，即request ID(Required) */
 func (r *DescribeCacheAnalysisResultRequest) SetTaskId(taskId string) {
     r.TaskId = taskId

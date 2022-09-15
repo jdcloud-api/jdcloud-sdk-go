@@ -55,7 +55,6 @@ createTime - 按创建时间排序(asc表示按时间正序，desc表示按时�
 
     /*  (Optional) */
     ResourceGroupIds []string `json:"resourceGroupIds"`
-
 }
 
 /*
@@ -140,17 +139,14 @@ func NewDescribeCacheInstancesRequestWithoutParam() *DescribeCacheInstancesReque
 func (r *DescribeCacheInstancesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param pageNumber: 页码：取值范围[1,∞)，默认为1(Optional) */
 func (r *DescribeCacheInstancesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小：取值范围[10, 100]，默认为10(Optional) */
 func (r *DescribeCacheInstancesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param filters: 过滤属性：
 cacheInstanceId - 实例Id，精确匹配，可选择多个
 cacheInstanceName - 实例名称，模糊匹配
@@ -162,19 +158,16 @@ chargeMode - 计费类型，精确匹配（prepaid_by_duration表示包年包月
 func (r *DescribeCacheInstancesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
-
 /* param sorts: 排序属性：
 createTime - 按创建时间排序(asc表示按时间正序，desc表示按时间倒序)
 (Optional) */
 func (r *DescribeCacheInstancesRequest) SetSorts(sorts []common.Sort) {
     r.Sorts = sorts
 }
-
 /* param tagFilters: 标签的过滤条件(Optional) */
 func (r *DescribeCacheInstancesRequest) SetTagFilters(tagFilters []common.TagFilter) {
     r.TagFilters = tagFilters
 }
-
 /* param resourceGroupIds: (Optional) */
 func (r *DescribeCacheInstancesRequest) SetResourceGroupIds(resourceGroupIds []string) {
     r.ResourceGroupIds = resourceGroupIds

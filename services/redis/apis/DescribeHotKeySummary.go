@@ -18,9 +18,10 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    redis "github.com/jdcloud-api/jdcloud-sdk-go/services/redis/models"
 )
 
-type ResetCacheInstancePasswordRequest struct {
+type DescribeHotKeySummaryRequest struct {
 
     core.JDCloudRequest
 
@@ -30,8 +31,11 @@ type ResetCacheInstancePasswordRequest struct {
     /* 缓存Redis实例ID，是访问实例的唯一标识  */
     CacheInstanceId string `json:"cacheInstanceId"`
 
-    /* 密码，为空即为免密，不少于8字符不超过16字符 (Optional) */
-    Password *string `json:"password"`
+    /* 开始时间，RFC3339格式，最多可以查询30天内的数据 (Optional) */
+    StartTime *string `json:"startTime"`
+
+    /* 结束时间，RFC3339格式，查询时间范围最多7天 (Optional) */
+    EndTime *string `json:"endTime"`
 }
 
 /*
@@ -40,15 +44,15 @@ type ResetCacheInstancePasswordRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewResetCacheInstancePasswordRequest(
+func NewDescribeHotKeySummaryRequest(
     regionId string,
     cacheInstanceId string,
-) *ResetCacheInstancePasswordRequest {
+) *DescribeHotKeySummaryRequest {
 
-	return &ResetCacheInstancePasswordRequest{
+	return &DescribeHotKeySummaryRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}:resetCacheInstancePassword",
-			Method:  "POST",
+			URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/hotKeyAnalysisSummary",
+			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
@@ -60,34 +64,37 @@ func NewResetCacheInstancePasswordRequest(
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
- * param password: 密码，为空即为免密，不少于8字符不超过16字符 (Optional)
+ * param startTime: 开始时间，RFC3339格式，最多可以查询30天内的数据 (Optional)
+ * param endTime: 结束时间，RFC3339格式，查询时间范围最多7天 (Optional)
  */
-func NewResetCacheInstancePasswordRequestWithAllParams(
+func NewDescribeHotKeySummaryRequestWithAllParams(
     regionId string,
     cacheInstanceId string,
-    password *string,
-) *ResetCacheInstancePasswordRequest {
+    startTime *string,
+    endTime *string,
+) *DescribeHotKeySummaryRequest {
 
-    return &ResetCacheInstancePasswordRequest{
+    return &DescribeHotKeySummaryRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}:resetCacheInstancePassword",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/hotKeyAnalysisSummary",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         CacheInstanceId: cacheInstanceId,
-        Password: password,
+        StartTime: startTime,
+        EndTime: endTime,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewResetCacheInstancePasswordRequestWithoutParam() *ResetCacheInstancePasswordRequest {
+func NewDescribeHotKeySummaryRequestWithoutParam() *DescribeHotKeySummaryRequest {
 
-    return &ResetCacheInstancePasswordRequest{
+    return &DescribeHotKeySummaryRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}:resetCacheInstancePassword",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/hotKeyAnalysisSummary",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
@@ -95,30 +102,35 @@ func NewResetCacheInstancePasswordRequestWithoutParam() *ResetCacheInstancePassw
 }
 
 /* param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2(Required) */
-func (r *ResetCacheInstancePasswordRequest) SetRegionId(regionId string) {
+func (r *DescribeHotKeySummaryRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
-func (r *ResetCacheInstancePasswordRequest) SetCacheInstanceId(cacheInstanceId string) {
+func (r *DescribeHotKeySummaryRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
-/* param password: 密码，为空即为免密，不少于8字符不超过16字符(Optional) */
-func (r *ResetCacheInstancePasswordRequest) SetPassword(password string) {
-    r.Password = &password
+/* param startTime: 开始时间，RFC3339格式，最多可以查询30天内的数据(Optional) */
+func (r *DescribeHotKeySummaryRequest) SetStartTime(startTime string) {
+    r.StartTime = &startTime
+}
+/* param endTime: 结束时间，RFC3339格式，查询时间范围最多7天(Optional) */
+func (r *DescribeHotKeySummaryRequest) SetEndTime(endTime string) {
+    r.EndTime = &endTime
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r ResetCacheInstancePasswordRequest) GetRegionId() string {
+func (r DescribeHotKeySummaryRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type ResetCacheInstancePasswordResponse struct {
+type DescribeHotKeySummaryResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result ResetCacheInstancePasswordResult `json:"result"`
+    Result DescribeHotKeySummaryResult `json:"result"`
 }
 
-type ResetCacheInstancePasswordResult struct {
+type DescribeHotKeySummaryResult struct {
+    HotKeyAnalysisNodesList []redis.HotKeyAnalysisNode `json:"hotKeyAnalysisNodesList"`
 }

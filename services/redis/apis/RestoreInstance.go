@@ -32,7 +32,6 @@ type RestoreInstanceRequest struct {
 
     /* 备份任务ID  */
     BaseId string `json:"baseId"`
-
 }
 
 /*
@@ -102,12 +101,10 @@ func NewRestoreInstanceRequestWithoutParam() *RestoreInstanceRequest {
 func (r *RestoreInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
 func (r *RestoreInstanceRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
-
 /* param baseId: 备份任务ID(Required) */
 func (r *RestoreInstanceRequest) SetBaseId(baseId string) {
     r.BaseId = baseId

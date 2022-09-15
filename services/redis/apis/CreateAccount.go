@@ -41,7 +41,6 @@ type CreateAccountRequest struct {
 
     /* 账号描述 (Optional) */
     AccountDescription *string `json:"accountDescription"`
-
 }
 
 /*
@@ -123,27 +122,22 @@ func NewCreateAccountRequestWithoutParam() *CreateAccountRequest {
 func (r *CreateAccountRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
 func (r *CreateAccountRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
-
 /* param accountName: 账号名称(Required) */
 func (r *CreateAccountRequest) SetAccountName(accountName string) {
     r.AccountName = accountName
 }
-
 /* param accountPassword: 账号密码(Required) */
 func (r *CreateAccountRequest) SetAccountPassword(accountPassword string) {
     r.AccountPassword = accountPassword
 }
-
 /* param accountPrivilege: 账号权限，默认为读写权限。支持RoleReadOnly（只读权限）、RoleReadWrite（读写权限）(Optional) */
 func (r *CreateAccountRequest) SetAccountPrivilege(accountPrivilege string) {
     r.AccountPrivilege = &accountPrivilege
 }
-
 /* param accountDescription: 账号描述(Optional) */
 func (r *CreateAccountRequest) SetAccountDescription(accountDescription string) {
     r.AccountDescription = &accountDescription

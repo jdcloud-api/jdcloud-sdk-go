@@ -35,7 +35,6 @@ type ModifyCacheInstanceClassRequest struct {
 
     /* 自定义分片数，只对自定义分片规格实例有效 (Optional) */
     ShardNumber *int `json:"shardNumber"`
-
 }
 
 /*
@@ -108,17 +107,14 @@ func NewModifyCacheInstanceClassRequestWithoutParam() *ModifyCacheInstanceClassR
 func (r *ModifyCacheInstanceClassRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
 func (r *ModifyCacheInstanceClassRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
-
 /* param cacheInstanceClass: 新规格(Required) */
 func (r *ModifyCacheInstanceClassRequest) SetCacheInstanceClass(cacheInstanceClass string) {
     r.CacheInstanceClass = cacheInstanceClass
 }
-
 /* param shardNumber: 自定义分片数，只对自定义分片规格实例有效(Optional) */
 func (r *ModifyCacheInstanceClassRequest) SetShardNumber(shardNumber int) {
     r.ShardNumber = &shardNumber

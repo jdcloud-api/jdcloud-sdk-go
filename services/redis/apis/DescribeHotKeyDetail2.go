@@ -39,7 +39,6 @@ type DescribeHotKeyDetail2Request struct {
 
     /* 分页大小；默认为10；取值范围[10, 100] (Optional) */
     PageSize *int `json:"pageSize"`
-
 }
 
 /*
@@ -115,22 +114,18 @@ func NewDescribeHotKeyDetail2RequestWithoutParam() *DescribeHotKeyDetail2Request
 func (r *DescribeHotKeyDetail2Request) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
 func (r *DescribeHotKeyDetail2Request) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
-
 /* param nodeId: 节点id(Required) */
 func (r *DescribeHotKeyDetail2Request) SetNodeId(nodeId string) {
     r.NodeId = nodeId
 }
-
 /* param pageNumber: 页码；默认为1(Optional) */
 func (r *DescribeHotKeyDetail2Request) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小；默认为10；取值范围[10, 100](Optional) */
 func (r *DescribeHotKeyDetail2Request) SetPageSize(pageSize int) {
     r.PageSize = &pageSize

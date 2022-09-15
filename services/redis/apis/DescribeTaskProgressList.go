@@ -33,7 +33,6 @@ type DescribeTaskProgressListRequest struct {
 
     /* 任务类型：resize表示变配，upgrade表示升级 (Optional) */
     TaskType *string `json:"taskType"`
-
 }
 
 /*
@@ -100,12 +99,10 @@ func NewDescribeTaskProgressListRequestWithoutParam() *DescribeTaskProgressListR
 func (r *DescribeTaskProgressListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
 func (r *DescribeTaskProgressListRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
-
 /* param taskType: 任务类型：resize表示变配，upgrade表示升级(Optional) */
 func (r *DescribeTaskProgressListRequest) SetTaskType(taskType string) {
     r.TaskType = &taskType

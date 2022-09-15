@@ -35,7 +35,6 @@ type ModifyCacheInstanceAttributeRequest struct {
 
     /* 实例的描述，不能超过256个字符 (Optional) */
     CacheInstanceDescription *string `json:"cacheInstanceDescription"`
-
 }
 
 /*
@@ -105,17 +104,14 @@ func NewModifyCacheInstanceAttributeRequestWithoutParam() *ModifyCacheInstanceAt
 func (r *ModifyCacheInstanceAttributeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
 func (r *ModifyCacheInstanceAttributeRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
-
 /* param cacheInstanceName: 实例的名称，名称只支持数字、字母、英文下划线、中文，且不少于2字符不超过32字符(Optional) */
 func (r *ModifyCacheInstanceAttributeRequest) SetCacheInstanceName(cacheInstanceName string) {
     r.CacheInstanceName = &cacheInstanceName
 }
-
 /* param cacheInstanceDescription: 实例的描述，不能超过256个字符(Optional) */
 func (r *ModifyCacheInstanceAttributeRequest) SetCacheInstanceDescription(cacheInstanceDescription string) {
     r.CacheInstanceDescription = &cacheInstanceDescription

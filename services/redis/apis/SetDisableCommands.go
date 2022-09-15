@@ -33,7 +33,6 @@ type SetDisableCommandsRequest struct {
 
     /* 禁用命令列表  */
     DisableCommands []redis.DisableCommands `json:"disableCommands"`
-
 }
 
 /*
@@ -103,12 +102,10 @@ func NewSetDisableCommandsRequestWithoutParam() *SetDisableCommandsRequest {
 func (r *SetDisableCommandsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
 func (r *SetDisableCommandsRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
-
 /* param disableCommands: 禁用命令列表(Required) */
 func (r *SetDisableCommandsRequest) SetDisableCommands(disableCommands []redis.DisableCommands) {
     r.DisableCommands = disableCommands

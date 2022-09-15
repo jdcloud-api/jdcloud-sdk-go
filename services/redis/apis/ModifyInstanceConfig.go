@@ -33,7 +33,6 @@ type ModifyInstanceConfigRequest struct {
 
     /* 配置参数名和参数值  */
     InstanceConfig []redis.ConfigItem `json:"instanceConfig"`
-
 }
 
 /*
@@ -103,12 +102,10 @@ func NewModifyInstanceConfigRequestWithoutParam() *ModifyInstanceConfigRequest {
 func (r *ModifyInstanceConfigRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
 func (r *ModifyInstanceConfigRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
-
 /* param instanceConfig: 配置参数名和参数值(Required) */
 func (r *ModifyInstanceConfigRequest) SetInstanceConfig(instanceConfig []redis.ConfigItem) {
     r.InstanceConfig = instanceConfig

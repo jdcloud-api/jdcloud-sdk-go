@@ -38,7 +38,6 @@ type ModifyBackupPolicyRequest struct {
 
     /* 备份周期，包括：Monday，Tuesday，Wednesday，Thursday，Friday，Saturday，Sunday，多个用逗号分隔  */
     BackupPeriod string `json:"backupPeriod"`
-
 }
 
 /*
@@ -117,22 +116,18 @@ func NewModifyBackupPolicyRequestWithoutParam() *ModifyBackupPolicyRequest {
 func (r *ModifyBackupPolicyRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
 func (r *ModifyBackupPolicyRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
-
 /* param autoBackup: 是否开启自动备份，true表示开启，false表示关闭(Optional) */
 func (r *ModifyBackupPolicyRequest) SetAutoBackup(autoBackup bool) {
     r.AutoBackup = &autoBackup
 }
-
 /* param backupTime: 设置自动备份时间，格式为：HH:mm-HH:mm 时区，例如"01:00-02:00 +0800"，表示东八区的1点到2点(Required) */
 func (r *ModifyBackupPolicyRequest) SetBackupTime(backupTime string) {
     r.BackupTime = backupTime
 }
-
 /* param backupPeriod: 备份周期，包括：Monday，Tuesday，Wednesday，Thursday，Friday，Saturday，Sunday，多个用逗号分隔(Required) */
 func (r *ModifyBackupPolicyRequest) SetBackupPeriod(backupPeriod string) {
     r.BackupPeriod = backupPeriod
