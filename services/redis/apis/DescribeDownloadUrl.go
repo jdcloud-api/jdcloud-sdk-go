@@ -33,7 +33,6 @@ type DescribeDownloadUrlRequest struct {
 
     /* 备份任务ID  */
     BaseId string `json:"baseId"`
-
 }
 
 /*
@@ -103,12 +102,10 @@ func NewDescribeDownloadUrlRequestWithoutParam() *DescribeDownloadUrlRequest {
 func (r *DescribeDownloadUrlRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
 func (r *DescribeDownloadUrlRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
-
 /* param baseId: 备份任务ID(Required) */
 func (r *DescribeDownloadUrlRequest) SetBaseId(baseId string) {
     r.BaseId = baseId

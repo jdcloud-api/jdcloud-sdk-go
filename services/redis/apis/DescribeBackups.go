@@ -45,7 +45,6 @@ type DescribeBackupsRequest struct {
 
     /* 备份任务ID (Optional) */
     BaseId *string `json:"baseId"`
-
 }
 
 /*
@@ -124,32 +123,26 @@ func NewDescribeBackupsRequestWithoutParam() *DescribeBackupsRequest {
 func (r *DescribeBackupsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
 func (r *DescribeBackupsRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
-
 /* param pageNumber: 页码；默认为1(Optional) */
 func (r *DescribeBackupsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小；默认为10；取值范围[10, 100](Optional) */
 func (r *DescribeBackupsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param startTime: 开始时间(Optional) */
 func (r *DescribeBackupsRequest) SetStartTime(startTime string) {
     r.StartTime = &startTime
 }
-
 /* param endTime: 结束时间(Optional) */
 func (r *DescribeBackupsRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
-
 /* param baseId: 备份任务ID(Optional) */
 func (r *DescribeBackupsRequest) SetBaseId(baseId string) {
     r.BaseId = &baseId

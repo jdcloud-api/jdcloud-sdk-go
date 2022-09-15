@@ -30,7 +30,6 @@ type DescribeClearDataRequest struct {
 
     /* 缓存Redis实例ID，是访问实例的唯一标识  */
     CacheInstanceId string `json:"cacheInstanceId"`
-
 }
 
 /*
@@ -94,7 +93,6 @@ func NewDescribeClearDataRequestWithoutParam() *DescribeClearDataRequest {
 func (r *DescribeClearDataRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
 func (r *DescribeClearDataRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId

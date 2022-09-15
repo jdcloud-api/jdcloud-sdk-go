@@ -30,7 +30,6 @@ type DescribeInstanceClassRequest struct {
 
     /* 缓存Redis的版本号：目前有2.8和4.0，默认为2.8 (Optional) */
     RedisVersion *string `json:"redisVersion"`
-
 }
 
 /*
@@ -91,7 +90,6 @@ func NewDescribeInstanceClassRequestWithoutParam() *DescribeInstanceClassRequest
 func (r *DescribeInstanceClassRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param redisVersion: 缓存Redis的版本号：目前有2.8和4.0，默认为2.8(Optional) */
 func (r *DescribeInstanceClassRequest) SetRedisVersion(redisVersion string) {
     r.RedisVersion = &redisVersion

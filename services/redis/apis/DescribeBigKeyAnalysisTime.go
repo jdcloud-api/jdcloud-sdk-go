@@ -29,7 +29,6 @@ type DescribeBigKeyAnalysisTimeRequest struct {
 
     /* 缓存Redis实例ID，是访问实例的唯一标识  */
     CacheInstanceId string `json:"cacheInstanceId"`
-
 }
 
 /*
@@ -93,7 +92,6 @@ func NewDescribeBigKeyAnalysisTimeRequestWithoutParam() *DescribeBigKeyAnalysisT
 func (r *DescribeBigKeyAnalysisTimeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
 func (r *DescribeBigKeyAnalysisTimeRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId

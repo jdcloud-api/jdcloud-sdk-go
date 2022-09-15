@@ -44,7 +44,6 @@ type CreateBigKeyAnalysis2Request struct {
 
     /* Zset类型阈值，最小1000 (Optional) */
     ZsetSize *int `json:"zsetSize"`
-
 }
 
 /*
@@ -123,32 +122,26 @@ func NewCreateBigKeyAnalysis2RequestWithoutParam() *CreateBigKeyAnalysis2Request
 func (r *CreateBigKeyAnalysis2Request) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
 func (r *CreateBigKeyAnalysis2Request) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
-
 /* param stringSize: String类型阈值，最小10240(Optional) */
 func (r *CreateBigKeyAnalysis2Request) SetStringSize(stringSize int) {
     r.StringSize = &stringSize
 }
-
 /* param listSize: List类型阈值，最小1000(Optional) */
 func (r *CreateBigKeyAnalysis2Request) SetListSize(listSize int) {
     r.ListSize = &listSize
 }
-
 /* param hashSize: Hash类型阈值，最小1000(Optional) */
 func (r *CreateBigKeyAnalysis2Request) SetHashSize(hashSize int) {
     r.HashSize = &hashSize
 }
-
 /* param setSize: Set类型阈值，最小1000(Optional) */
 func (r *CreateBigKeyAnalysis2Request) SetSetSize(setSize int) {
     r.SetSize = &setSize
 }
-
 /* param zsetSize: Zset类型阈值，最小1000(Optional) */
 func (r *CreateBigKeyAnalysis2Request) SetZsetSize(zsetSize int) {
     r.ZsetSize = &zsetSize

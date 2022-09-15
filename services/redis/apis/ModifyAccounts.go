@@ -33,7 +33,6 @@ type ModifyAccountsRequest struct {
 
     /* 要修改的账号列表  */
     Accounts []redis.ModifyAccount `json:"accounts"`
-
 }
 
 /*
@@ -103,12 +102,10 @@ func NewModifyAccountsRequestWithoutParam() *ModifyAccountsRequest {
 func (r *ModifyAccountsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
 func (r *ModifyAccountsRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
-
 /* param accounts: 要修改的账号列表(Required) */
 func (r *ModifyAccountsRequest) SetAccounts(accounts []redis.ModifyAccount) {
     r.Accounts = accounts

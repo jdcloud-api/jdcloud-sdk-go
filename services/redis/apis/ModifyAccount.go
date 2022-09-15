@@ -41,7 +41,6 @@ type ModifyAccountRequest struct {
 
     /* 账号备注 (Optional) */
     AccountDescription *string `json:"accountDescription"`
-
 }
 
 /*
@@ -120,27 +119,22 @@ func NewModifyAccountRequestWithoutParam() *ModifyAccountRequest {
 func (r *ModifyAccountRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
 func (r *ModifyAccountRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
-
 /* param accountName: 账号名称(Required) */
 func (r *ModifyAccountRequest) SetAccountName(accountName string) {
     r.AccountName = accountName
 }
-
 /* param accountPassword: 账号密码(Optional) */
 func (r *ModifyAccountRequest) SetAccountPassword(accountPassword string) {
     r.AccountPassword = &accountPassword
 }
-
 /* param accountPrivilege: 账号权限。支持RoleReadOnly（只读权限）、RoleReadWrite（读写权限）(Optional) */
 func (r *ModifyAccountRequest) SetAccountPrivilege(accountPrivilege string) {
     r.AccountPrivilege = &accountPrivilege
 }
-
 /* param accountDescription: 账号备注(Optional) */
 func (r *ModifyAccountRequest) SetAccountDescription(accountDescription string) {
     r.AccountDescription = &accountDescription

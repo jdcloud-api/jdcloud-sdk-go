@@ -32,7 +32,6 @@ type DeleteAccountRequest struct {
 
     /* 账号名称  */
     AccountName string `json:"accountName"`
-
 }
 
 /*
@@ -102,12 +101,10 @@ func NewDeleteAccountRequestWithoutParam() *DeleteAccountRequest {
 func (r *DeleteAccountRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
 func (r *DeleteAccountRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
-
 /* param accountName: 账号名称(Required) */
 func (r *DeleteAccountRequest) SetAccountName(accountName string) {
     r.AccountName = accountName

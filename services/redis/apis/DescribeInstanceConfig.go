@@ -30,7 +30,6 @@ type DescribeInstanceConfigRequest struct {
 
     /* 缓存Redis实例ID，是访问实例的唯一标识  */
     CacheInstanceId string `json:"cacheInstanceId"`
-
 }
 
 /*
@@ -94,7 +93,6 @@ func NewDescribeInstanceConfigRequestWithoutParam() *DescribeInstanceConfigReque
 func (r *DescribeInstanceConfigRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
 func (r *DescribeInstanceConfigRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId

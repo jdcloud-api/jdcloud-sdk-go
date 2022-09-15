@@ -33,7 +33,6 @@ type DescribeCacheAnalysisListRequest struct {
 
     /* 格式:yyyy-MM-dd,表示查询某一天的缓存分析列表  */
     Date string `json:"date"`
-
 }
 
 /*
@@ -103,12 +102,10 @@ func NewDescribeCacheAnalysisListRequestWithoutParam() *DescribeCacheAnalysisLis
 func (r *DescribeCacheAnalysisListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
 func (r *DescribeCacheAnalysisListRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
-
 /* param date: 格式:yyyy-MM-dd,表示查询某一天的缓存分析列表(Required) */
 func (r *DescribeCacheAnalysisListRequest) SetDate(date string) {
     r.Date = date

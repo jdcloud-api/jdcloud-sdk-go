@@ -35,7 +35,6 @@ type CreateBackupRequest struct {
 
     /* 备份类型：手动备份为1，只能为手动备份  */
     BackupType int `json:"backupType"`
-
 }
 
 /*
@@ -111,17 +110,14 @@ func NewCreateBackupRequestWithoutParam() *CreateBackupRequest {
 func (r *CreateBackupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
 func (r *CreateBackupRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
-
 /* param fileName: 备份文件名称，只支持英文数字和下划线的组合，长度不超过32个字符(Required) */
 func (r *CreateBackupRequest) SetFileName(fileName string) {
     r.FileName = fileName
 }
-
 /* param backupType: 备份类型：手动备份为1，只能为手动备份(Required) */
 func (r *CreateBackupRequest) SetBackupType(backupType int) {
     r.BackupType = backupType

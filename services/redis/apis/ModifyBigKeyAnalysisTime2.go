@@ -32,7 +32,6 @@ type ModifyBigKeyAnalysisTime2Request struct {
 
     /* -表示关闭，否则为：HH:mm-HH:mm 时区，例如"01:00-02:00 +0800"，表示东八区的1点到2点  */
     AnalysisTime string `json:"analysisTime"`
-
 }
 
 /*
@@ -102,12 +101,10 @@ func NewModifyBigKeyAnalysisTime2RequestWithoutParam() *ModifyBigKeyAnalysisTime
 func (r *ModifyBigKeyAnalysisTime2Request) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
 func (r *ModifyBigKeyAnalysisTime2Request) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
-
 /* param analysisTime: -表示关闭，否则为：HH:mm-HH:mm 时区，例如"01:00-02:00 +0800"，表示东八区的1点到2点(Required) */
 func (r *ModifyBigKeyAnalysisTime2Request) SetAnalysisTime(analysisTime string) {
     r.AnalysisTime = analysisTime

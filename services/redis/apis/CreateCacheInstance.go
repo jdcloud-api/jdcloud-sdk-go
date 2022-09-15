@@ -34,7 +34,6 @@ type CreateCacheInstanceRequest struct {
 
     /* 实例的计费类型 (Optional) */
     Charge *charge.ChargeSpec `json:"charge"`
-
 }
 
 /*
@@ -101,12 +100,10 @@ func NewCreateCacheInstanceRequestWithoutParam() *CreateCacheInstanceRequest {
 func (r *CreateCacheInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param cacheInstance: 实例的创建参数(Required) */
 func (r *CreateCacheInstanceRequest) SetCacheInstance(cacheInstance *redis.CacheInstanceSpec) {
     r.CacheInstance = cacheInstance
 }
-
 /* param charge: 实例的计费类型(Optional) */
 func (r *CreateCacheInstanceRequest) SetCharge(charge *charge.ChargeSpec) {
     r.Charge = charge

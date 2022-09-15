@@ -29,7 +29,6 @@ type DescribeBackupPolicyRequest struct {
 
     /* 缓存Redis实例ID，是访问实例的唯一标识  */
     CacheInstanceId string `json:"cacheInstanceId"`
-
 }
 
 /*
@@ -93,7 +92,6 @@ func NewDescribeBackupPolicyRequestWithoutParam() *DescribeBackupPolicyRequest {
 func (r *DescribeBackupPolicyRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
 func (r *DescribeBackupPolicyRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId

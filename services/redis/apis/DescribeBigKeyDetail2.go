@@ -33,7 +33,6 @@ type DescribeBigKeyDetail2Request struct {
 
     /* 任务id  */
     TaskId string `json:"taskId"`
-
 }
 
 /*
@@ -103,12 +102,10 @@ func NewDescribeBigKeyDetail2RequestWithoutParam() *DescribeBigKeyDetail2Request
 func (r *DescribeBigKeyDetail2Request) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
 func (r *DescribeBigKeyDetail2Request) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
-
 /* param taskId: 任务id(Required) */
 func (r *DescribeBigKeyDetail2Request) SetTaskId(taskId string) {
     r.TaskId = taskId

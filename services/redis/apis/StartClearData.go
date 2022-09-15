@@ -42,7 +42,6 @@ type StartClearDataRequest struct {
 
     /* 数据遍历的速率 (Optional) */
     QpsLimit *int `json:"qpsLimit"`
-
 }
 
 /*
@@ -121,27 +120,22 @@ func NewStartClearDataRequestWithoutParam() *StartClearDataRequest {
 func (r *StartClearDataRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
 func (r *StartClearDataRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
-
 /* param clearType: 数据清理任务类型(Required) */
 func (r *StartClearDataRequest) SetClearType(clearType string) {
     r.ClearType = clearType
 }
-
 /* param keyPattern: 匹配模式, 如: test*、*test、ab*cc*, 当节点为AllData、ExpiredData时可以忽略此参数(Optional) */
 func (r *StartClearDataRequest) SetKeyPattern(keyPattern string) {
     r.KeyPattern = &keyPattern
 }
-
 /* param keyFilter: key的过滤条件, 当节点为AllData、ExpiredData时可以忽略此参数(Optional) */
 func (r *StartClearDataRequest) SetKeyFilter(keyFilter []redis.KeyFilter) {
     r.KeyFilter = keyFilter
 }
-
 /* param qpsLimit: 数据遍历的速率(Optional) */
 func (r *StartClearDataRequest) SetQpsLimit(qpsLimit int) {
     r.QpsLimit = &qpsLimit

@@ -33,7 +33,6 @@ type DescribeClientIpDetailRequest struct {
 
     /* 客户端IP  */
     Ip string `json:"ip"`
-
 }
 
 /*
@@ -103,12 +102,10 @@ func NewDescribeClientIpDetailRequestWithoutParam() *DescribeClientIpDetailReque
 func (r *DescribeClientIpDetailRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
 func (r *DescribeClientIpDetailRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
-
 /* param ip: 客户端IP(Required) */
 func (r *DescribeClientIpDetailRequest) SetIp(ip string) {
     r.Ip = ip

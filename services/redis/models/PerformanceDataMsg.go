@@ -19,9 +19,33 @@ package models
 
 type PerformanceDataMsg struct {
 
-    /* 客户端ip (Optional) */
-    Ip string `json:"ip"`
+    /* 时间 (Optional) */
+    Ts string `json:"ts"`
 
-    /* 客户端性能日志数据 (Optional) */
-    TpStat TpStat `json:"tpStat"`
+    /* TP999 (Optional) */
+    Tp999 int `json:"tp999"`
+
+    /* TP99 (Optional) */
+    Tp99 int `json:"tp99"`
+
+    /* TP90 (Optional) */
+    Tp90 int `json:"tp90"`
+
+    /* TP50 (Optional) */
+    Tp50 int `json:"tp50"`
+
+    /* 最大延时 (Optional) */
+    Max int `json:"max"`
+
+    /* 最小延时 (Optional) */
+    Min int `json:"min"`
+
+    /* 成功数 (Optional) */
+    Success int `json:"success"`
+
+    /* 错误数 (Optional) */
+    Error int `json:"error"`
+
+    /* 重定向数 (Optional) */
+    Redirection int `json:"redirection"`
 }
