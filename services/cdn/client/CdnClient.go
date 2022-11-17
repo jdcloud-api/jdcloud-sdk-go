@@ -40,7 +40,7 @@ func NewCdnClient(credential *core.Credential) *CdnClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "cdn",
-            Revision:    "0.10.35",
+            Revision:    "0.10.36",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -2568,6 +2568,26 @@ func (c *CdnClient) QueryLiveDomainApps(request *cdn.QueryLiveDomainAppsRequest)
     }
 
     jdResp := &cdn.QueryLiveDomainAppsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询域名cname标签 */
+func (c *CdnClient) QueryDomainCnameTag(request *cdn.QueryDomainCnameTagRequest) (*cdn.QueryDomainCnameTagResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryDomainCnameTagResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
