@@ -20,76 +20,67 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type OperateRequest struct {
+type QueryDayHistoryTrafficRequest struct {
 
     core.JDCloudRequest
 
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 物联网卡操作请求类型  */
-    RequestType string `json:"requestType"`
-
-    /* 物联网卡操作请求参数json串  */
+    /* 物联网卡日历史流量查询请求参数  */
     RequestParam string `json:"requestParam"`
 }
 
 /*
  * param regionId: Region ID (Required)
- * param requestType: 物联网卡操作请求类型 (Required)
- * param requestParam: 物联网卡操作请求参数json串 (Required)
+ * param requestParam: 物联网卡日历史流量查询请求参数 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewOperateRequest(
+func NewQueryDayHistoryTrafficRequest(
     regionId string,
-    requestType string,
     requestParam string,
-) *OperateRequest {
+) *QueryDayHistoryTrafficRequest {
 
-	return &OperateRequest{
+	return &QueryDayHistoryTrafficRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/operate",
+			URL:     "/regions/{regionId}/queryDayHistoryTraffic",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        RequestType: requestType,
         RequestParam: requestParam,
 	}
 }
 
 /*
  * param regionId: Region ID (Required)
- * param requestType: 物联网卡操作请求类型 (Required)
- * param requestParam: 物联网卡操作请求参数json串 (Required)
+ * param requestParam: 物联网卡日历史流量查询请求参数 (Required)
  */
-func NewOperateRequestWithAllParams(
+func NewQueryDayHistoryTrafficRequestWithAllParams(
     regionId string,
-    requestType string,
     requestParam string,
-) *OperateRequest {
+) *QueryDayHistoryTrafficRequest {
 
-    return &OperateRequest{
+    return &QueryDayHistoryTrafficRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/operate",
+            URL:     "/regions/{regionId}/queryDayHistoryTraffic",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        RequestType: requestType,
         RequestParam: requestParam,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewOperateRequestWithoutParam() *OperateRequest {
+func NewQueryDayHistoryTrafficRequestWithoutParam() *QueryDayHistoryTrafficRequest {
 
-    return &OperateRequest{
+    return &QueryDayHistoryTrafficRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/operate",
+            URL:     "/regions/{regionId}/queryDayHistoryTraffic",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -98,33 +89,29 @@ func NewOperateRequestWithoutParam() *OperateRequest {
 }
 
 /* param regionId: Region ID(Required) */
-func (r *OperateRequest) SetRegionId(regionId string) {
+func (r *QueryDayHistoryTrafficRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-/* param requestType: 物联网卡操作请求类型(Required) */
-func (r *OperateRequest) SetRequestType(requestType string) {
-    r.RequestType = requestType
-}
-/* param requestParam: 物联网卡操作请求参数json串(Required) */
-func (r *OperateRequest) SetRequestParam(requestParam string) {
+/* param requestParam: 物联网卡日历史流量查询请求参数(Required) */
+func (r *QueryDayHistoryTrafficRequest) SetRequestParam(requestParam string) {
     r.RequestParam = requestParam
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r OperateRequest) GetRegionId() string {
+func (r QueryDayHistoryTrafficRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type OperateResponse struct {
+type QueryDayHistoryTrafficResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result OperateResult `json:"result"`
+    Result QueryDayHistoryTrafficResult `json:"result"`
 }
 
-type OperateResult struct {
+type QueryDayHistoryTrafficResult struct {
     Status string `json:"status"`
     Message string `json:"message"`
-    Result string `json:"result"`
+    Result []interface{} `json:"result"`
 }

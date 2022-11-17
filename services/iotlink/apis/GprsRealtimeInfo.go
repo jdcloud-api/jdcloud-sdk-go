@@ -93,11 +93,11 @@ func NewGprsRealtimeInfoRequestWithoutParam() *GprsRealtimeInfoRequest {
 func (r *GprsRealtimeInfoRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param iccid: 物联网卡iccid(Required) */
 func (r *GprsRealtimeInfoRequest) SetIccid(iccid string) {
     r.Iccid = iccid
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

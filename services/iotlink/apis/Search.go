@@ -101,16 +101,15 @@ func NewSearchRequestWithoutParam() *SearchRequest {
 func (r *SearchRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param requestType: 物联网卡查询请求类型(Required) */
 func (r *SearchRequest) SetRequestType(requestType string) {
     r.RequestType = requestType
 }
-
 /* param requestParam: 物联网卡查询请求参数json串(Required) */
 func (r *SearchRequest) SetRequestParam(requestParam string) {
     r.RequestParam = requestParam
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

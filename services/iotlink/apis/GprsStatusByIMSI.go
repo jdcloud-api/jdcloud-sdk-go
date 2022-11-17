@@ -93,11 +93,11 @@ func NewGprsStatusByIMSIRequestWithoutParam() *GprsStatusByIMSIRequest {
 func (r *GprsStatusByIMSIRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param imsi: 物联网卡IMSI(Required) */
 func (r *GprsStatusByIMSIRequest) SetImsi(imsi string) {
     r.Imsi = imsi
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

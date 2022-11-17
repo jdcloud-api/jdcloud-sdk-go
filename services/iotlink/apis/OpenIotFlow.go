@@ -93,11 +93,11 @@ func NewOpenIotFlowRequestWithoutParam() *OpenIotFlowRequest {
 func (r *OpenIotFlowRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param iccids: 物联网卡号码列表(单次提交最多不超过200个号码)(Required) */
 func (r *OpenIotFlowRequest) SetIccids(iccids []string) {
     r.Iccids = iccids
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

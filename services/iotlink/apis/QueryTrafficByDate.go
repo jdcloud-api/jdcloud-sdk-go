@@ -20,76 +20,67 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type OperateRequest struct {
+type QueryTrafficByDateRequest struct {
 
     core.JDCloudRequest
 
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 物联网卡操作请求类型  */
-    RequestType string `json:"requestType"`
-
-    /* 物联网卡操作请求参数json串  */
+    /* 物联网卡流量查询（时间段）查询请求参数  */
     RequestParam string `json:"requestParam"`
 }
 
 /*
  * param regionId: Region ID (Required)
- * param requestType: 物联网卡操作请求类型 (Required)
- * param requestParam: 物联网卡操作请求参数json串 (Required)
+ * param requestParam: 物联网卡流量查询（时间段）查询请求参数 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewOperateRequest(
+func NewQueryTrafficByDateRequest(
     regionId string,
-    requestType string,
     requestParam string,
-) *OperateRequest {
+) *QueryTrafficByDateRequest {
 
-	return &OperateRequest{
+	return &QueryTrafficByDateRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/operate",
+			URL:     "/regions/{regionId}/queryTrafficByDate",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        RequestType: requestType,
         RequestParam: requestParam,
 	}
 }
 
 /*
  * param regionId: Region ID (Required)
- * param requestType: 物联网卡操作请求类型 (Required)
- * param requestParam: 物联网卡操作请求参数json串 (Required)
+ * param requestParam: 物联网卡流量查询（时间段）查询请求参数 (Required)
  */
-func NewOperateRequestWithAllParams(
+func NewQueryTrafficByDateRequestWithAllParams(
     regionId string,
-    requestType string,
     requestParam string,
-) *OperateRequest {
+) *QueryTrafficByDateRequest {
 
-    return &OperateRequest{
+    return &QueryTrafficByDateRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/operate",
+            URL:     "/regions/{regionId}/queryTrafficByDate",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        RequestType: requestType,
         RequestParam: requestParam,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewOperateRequestWithoutParam() *OperateRequest {
+func NewQueryTrafficByDateRequestWithoutParam() *QueryTrafficByDateRequest {
 
-    return &OperateRequest{
+    return &QueryTrafficByDateRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/operate",
+            URL:     "/regions/{regionId}/queryTrafficByDate",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -98,32 +89,28 @@ func NewOperateRequestWithoutParam() *OperateRequest {
 }
 
 /* param regionId: Region ID(Required) */
-func (r *OperateRequest) SetRegionId(regionId string) {
+func (r *QueryTrafficByDateRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-/* param requestType: 物联网卡操作请求类型(Required) */
-func (r *OperateRequest) SetRequestType(requestType string) {
-    r.RequestType = requestType
-}
-/* param requestParam: 物联网卡操作请求参数json串(Required) */
-func (r *OperateRequest) SetRequestParam(requestParam string) {
+/* param requestParam: 物联网卡流量查询（时间段）查询请求参数(Required) */
+func (r *QueryTrafficByDateRequest) SetRequestParam(requestParam string) {
     r.RequestParam = requestParam
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r OperateRequest) GetRegionId() string {
+func (r QueryTrafficByDateRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type OperateResponse struct {
+type QueryTrafficByDateResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result OperateResult `json:"result"`
+    Result QueryTrafficByDateResult `json:"result"`
 }
 
-type OperateResult struct {
+type QueryTrafficByDateResult struct {
     Status string `json:"status"`
     Message string `json:"message"`
     Result string `json:"result"`
