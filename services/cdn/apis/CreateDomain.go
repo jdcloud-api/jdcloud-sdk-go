@@ -75,6 +75,9 @@ type CreateDomainRequest struct {
 
     /*  (Optional) */
     TempInstId *int64 `json:"tempInstId"`
+
+    /* cname标签,使用时通过queryDomainCnameTag接口获取 (Optional) */
+    DomainCnameTag *string `json:"domainCnameTag"`
 }
 
 /*
@@ -115,6 +118,7 @@ func NewCreateDomainRequest(
  * param ossSource:  (Optional)
  * param accelerateRegion: 加速区域:(mainLand:中国大陆，nonMainLand:海外加港澳台，all:全球)默认为中国大陆 (Optional)
  * param tempInstId:  (Optional)
+ * param domainCnameTag: cname标签,使用时通过queryDomainCnameTag接口获取 (Optional)
  */
 func NewCreateDomainRequestWithAllParams(
     domain string,
@@ -134,6 +138,7 @@ func NewCreateDomainRequestWithAllParams(
     ossSource *string,
     accelerateRegion *string,
     tempInstId *int64,
+    domainCnameTag *string,
 ) *CreateDomainRequest {
 
     return &CreateDomainRequest{
@@ -160,6 +165,7 @@ func NewCreateDomainRequestWithAllParams(
         OssSource: ossSource,
         AccelerateRegion: accelerateRegion,
         TempInstId: tempInstId,
+        DomainCnameTag: domainCnameTag,
     }
 }
 
@@ -243,6 +249,10 @@ func (r *CreateDomainRequest) SetAccelerateRegion(accelerateRegion string) {
 /* param tempInstId: (Optional) */
 func (r *CreateDomainRequest) SetTempInstId(tempInstId int64) {
     r.TempInstId = &tempInstId
+}
+/* param domainCnameTag: cname标签,使用时通过queryDomainCnameTag接口获取(Optional) */
+func (r *CreateDomainRequest) SetDomainCnameTag(domainCnameTag string) {
+    r.DomainCnameTag = &domainCnameTag
 }
 
 
