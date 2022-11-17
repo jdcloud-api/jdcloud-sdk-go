@@ -18,78 +18,70 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    iotlink "github.com/jdcloud-api/jdcloud-sdk-go/services/iotlink/models"
 )
 
-type OperateRequest struct {
+type QueryValidPeriodForNBRequest struct {
 
     core.JDCloudRequest
 
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 物联网卡操作请求类型  */
-    RequestType string `json:"requestType"`
-
-    /* 物联网卡操作请求参数json串  */
+    /* 物联网卡NB卡有效期查询请求参数  */
     RequestParam string `json:"requestParam"`
 }
 
 /*
  * param regionId: Region ID (Required)
- * param requestType: 物联网卡操作请求类型 (Required)
- * param requestParam: 物联网卡操作请求参数json串 (Required)
+ * param requestParam: 物联网卡NB卡有效期查询请求参数 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewOperateRequest(
+func NewQueryValidPeriodForNBRequest(
     regionId string,
-    requestType string,
     requestParam string,
-) *OperateRequest {
+) *QueryValidPeriodForNBRequest {
 
-	return &OperateRequest{
+	return &QueryValidPeriodForNBRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/operate",
+			URL:     "/regions/{regionId}/queryValidPeriodForNB",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        RequestType: requestType,
         RequestParam: requestParam,
 	}
 }
 
 /*
  * param regionId: Region ID (Required)
- * param requestType: 物联网卡操作请求类型 (Required)
- * param requestParam: 物联网卡操作请求参数json串 (Required)
+ * param requestParam: 物联网卡NB卡有效期查询请求参数 (Required)
  */
-func NewOperateRequestWithAllParams(
+func NewQueryValidPeriodForNBRequestWithAllParams(
     regionId string,
-    requestType string,
     requestParam string,
-) *OperateRequest {
+) *QueryValidPeriodForNBRequest {
 
-    return &OperateRequest{
+    return &QueryValidPeriodForNBRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/operate",
+            URL:     "/regions/{regionId}/queryValidPeriodForNB",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        RequestType: requestType,
         RequestParam: requestParam,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewOperateRequestWithoutParam() *OperateRequest {
+func NewQueryValidPeriodForNBRequestWithoutParam() *QueryValidPeriodForNBRequest {
 
-    return &OperateRequest{
+    return &QueryValidPeriodForNBRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/operate",
+            URL:     "/regions/{regionId}/queryValidPeriodForNB",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -98,33 +90,29 @@ func NewOperateRequestWithoutParam() *OperateRequest {
 }
 
 /* param regionId: Region ID(Required) */
-func (r *OperateRequest) SetRegionId(regionId string) {
+func (r *QueryValidPeriodForNBRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-/* param requestType: 物联网卡操作请求类型(Required) */
-func (r *OperateRequest) SetRequestType(requestType string) {
-    r.RequestType = requestType
-}
-/* param requestParam: 物联网卡操作请求参数json串(Required) */
-func (r *OperateRequest) SetRequestParam(requestParam string) {
+/* param requestParam: 物联网卡NB卡有效期查询请求参数(Required) */
+func (r *QueryValidPeriodForNBRequest) SetRequestParam(requestParam string) {
     r.RequestParam = requestParam
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r OperateRequest) GetRegionId() string {
+func (r QueryValidPeriodForNBRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type OperateResponse struct {
+type QueryValidPeriodForNBResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result OperateResult `json:"result"`
+    Result QueryValidPeriodForNBResult `json:"result"`
 }
 
-type OperateResult struct {
+type QueryValidPeriodForNBResult struct {
     Status string `json:"status"`
     Message string `json:"message"`
-    Result string `json:"result"`
+    Result []iotlink.QueryValidPeriodForNBResp `json:"result"`
 }

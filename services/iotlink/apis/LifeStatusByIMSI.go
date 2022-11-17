@@ -93,11 +93,11 @@ func NewLifeStatusByIMSIRequestWithoutParam() *LifeStatusByIMSIRequest {
 func (r *LifeStatusByIMSIRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param imsi: 物联网卡imsi(Required) */
 func (r *LifeStatusByIMSIRequest) SetImsi(imsi string) {
     r.Imsi = imsi
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
