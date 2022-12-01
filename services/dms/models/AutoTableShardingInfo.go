@@ -17,14 +17,20 @@
 package models
 
 
-type MetaTableInfo struct {
+type AutoTableShardingInfo struct {
 
     /* 表名。 (Optional) */
     TableName *string `json:"tableName"`
 
-    /* 表注释。 (Optional) */
-    TableComment *string `json:"tableComment"`
+    /* 切分列。 (Optional) */
+    ShardingColumn *string `json:"shardingColumn"`
 
-    /* 表字符编码（非必须，opengauss不传）。 (Optional) */
-    TableCharset *string `json:"tableCharset"`
+    /* 分片算法配置。 (Optional) */
+    OgShardingAlgorithmProperties *OgShardingAlgorithmProperties `json:"ogShardingAlgorithmProperties"`
+
+    /* 主键名称。 (Optional) */
+    PrimaryKeyName *string `json:"primaryKeyName"`
+
+    /* 主键策略 UUID:UUID,SNOWFLAKE:SNOWFLAKE。 (Optional) */
+    PrimaryKeyStrategy *string `json:"primaryKeyStrategy"`
 }

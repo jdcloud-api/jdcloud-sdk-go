@@ -17,14 +17,14 @@
 package models
 
 
-type MetaTableInfo struct {
+type DmsOperationType struct {
 
-    /* 表名。 (Optional) */
-    TableName *string `json:"tableName"`
+    /* 操作类型key (Optional) */
+    Key string `json:"key"`
 
-    /* 表注释。 (Optional) */
-    TableComment *string `json:"tableComment"`
+    /* 操作类型label (Optional) */
+    Label string `json:"label"`
 
-    /* 表字符编码（非必须，opengauss不传）。 (Optional) */
-    TableCharset *string `json:"tableCharset"`
+    /* 控制台功能列表 (Optional) */
+    Children []DmsOperationType `json:"children"`
 }

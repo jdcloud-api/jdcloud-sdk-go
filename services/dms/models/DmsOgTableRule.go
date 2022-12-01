@@ -17,14 +17,11 @@
 package models
 
 
-type MetaTableInfo struct {
+type DmsOgTableRule struct {
 
-    /* 表名。 (Optional) */
-    TableName *string `json:"tableName"`
+    /* 自动分表信息。 (Optional) */
+    AutoTableShardingInfo *AutoTableShardingInfo `json:"autoTableShardingInfo"`
 
-    /* 表注释。 (Optional) */
-    TableComment *string `json:"tableComment"`
-
-    /* 表字符编码（非必须，opengauss不传）。 (Optional) */
-    TableCharset *string `json:"tableCharset"`
+    /* 分表信息。 (Optional) */
+    TableShardingInfo *TableShardingInfo `json:"tableShardingInfo"`
 }

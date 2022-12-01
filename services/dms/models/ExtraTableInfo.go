@@ -19,9 +19,12 @@ package models
 
 type ExtraTableInfo struct {
 
-    /* ORIGIN:原始表, STARDB_SPLIT:stardb切分表, STARDB_ISOLATE:stardb孤立表, STARDB_BROADCAST:stardb广播表。 (Optional) */
+    /* ORIGIN:原始表, STARDB_SPLIT:stardb切分表, STARDB_ISOLATE:stardb孤立表, STARDB_BROADCAST:stardb广播表,ORIGIN_OG:og原始表, OG_SPLIT:og切分表, OG_ISOLATE:og孤立表, OG_BROADCAST:og广播表。 (Optional) */
     TableTypeEnum *string `json:"tableTypeEnum"`
 
-    /* tableTypeEnum为切分表时的切分信息内容。 (Optional) */
+    /* tableTypeEnum为stardb切分表时的切分信息内容。 (Optional) */
     StardbSplitInfo *StardbSplitInfo `json:"stardbSplitInfo"`
+
+    /* sharding opengause切分规则。 (Optional) */
+    DmsOgTableRule *DmsOgTableRule `json:"dmsOgTableRule"`
 }

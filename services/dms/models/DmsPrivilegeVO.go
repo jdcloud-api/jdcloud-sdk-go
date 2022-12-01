@@ -49,14 +49,14 @@ type DmsPrivilegeVO struct {
     /* 授权状态。 (Optional) */
     AuthStatus string `json:"authStatus"`
 
-    /* 用户的添加时间，格式为：YYYY-MM-DD HH:mm:ss。 (Optional) */
+    /* 授权时间 (Optional) */
     AuthDate string `json:"authDate"`
 
-    /* 用户的添加时间，格式为：YYYY-MM-DD HH:mm:ss。 (Optional) */
+    /* 过期时间 (Optional) */
     ExpireDate string `json:"expireDate"`
 
     /* 权限是否已经释放。 (Optional) */
-    ReleaseStatus string `json:"releaseStatus"`
+    ReleaseStatus bool `json:"releaseStatus"`
 
     /* 实例类型。 (Optional) */
     InstanceType string `json:"instanceType"`

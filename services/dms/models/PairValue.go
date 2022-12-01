@@ -17,14 +17,11 @@
 package models
 
 
-type MetaTableInfo struct {
+type PairValue struct {
 
-    /* 表名。 (Optional) */
-    TableName *string `json:"tableName"`
+    /* 显示值。 (Optional) */
+    Label string `json:"label"`
 
-    /* 表注释。 (Optional) */
-    TableComment *string `json:"tableComment"`
-
-    /* 表字符编码（非必须，opengauss不传）。 (Optional) */
-    TableCharset *string `json:"tableCharset"`
+    /* 传递值。 (Optional) */
+    Value string `json:"value"`
 }

@@ -29,7 +29,7 @@ type DmsUserVO struct {
     MasterPin string `json:"masterPin"`
 
     /* 用户是否是主账号。 (Optional) */
-    IsMaster string `json:"isMaster"`
+    IsMaster bool `json:"isMaster"`
 
     /* 用户账号Id。 (Optional) */
     AccountId int64 `json:"accountId"`
@@ -46,16 +46,16 @@ type DmsUserVO struct {
     /* 用户的删除状态。 (Optional) */
     DeleteStatus string `json:"deleteStatus"`
 
-    /* 用户的添加时间，格式为：YYYY-MM-DD HH:mm:ss。 (Optional) */
+    /* 用户的添加时间，格式为：yyyy-MM-dd'T'HH:mm:ss (Optional) */
     AddDate string `json:"addDate"`
 
-    /* 用户的添加时间，格式为：YYYY-MM-DD HH:mm:ss。 (Optional) */
+    /* 用户的登录时间，格式为：yyyy-MM-dd'T'HH:mm:ss (Optional) */
     LoginDate string `json:"loginDate"`
 
-    /* 用户的添加时间，格式为：YYYY-MM-DD HH:mm:ss。 (Optional) */
+    /* 用户的创建时间，格式为：yyyy-MM-dd'T'HH:mm:ss (Optional) */
     CreateDate string `json:"createDate"`
 
-    /* 用户的添加时间，格式为：YYYY-MM-DD HH:mm:ss。 (Optional) */
+    /* 用户的修改时间，格式为：yyyy-MM-dd'T'HH:mm:ss (Optional) */
     ModifiedDate string `json:"modifiedDate"`
 
     /* 用户角色列表。 (Optional) */

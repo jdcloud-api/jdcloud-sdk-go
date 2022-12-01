@@ -17,14 +17,20 @@
 package models
 
 
-type MetaTableInfo struct {
+type OgFrontInfo struct {
 
-    /* 表名。 (Optional) */
-    TableName *string `json:"tableName"`
+    /* 主键类型。 (Optional) */
+    OgShardingPrimaryKeys []PairValue `json:"ogShardingPrimaryKeys"`
 
-    /* 表注释。 (Optional) */
-    TableComment *string `json:"tableComment"`
+    /* 算法类型。 (Optional) */
+    OgAutoAlgorithms []PairValue `json:"ogAutoAlgorithms"`
 
-    /* 表字符编码（非必须，opengauss不传）。 (Optional) */
-    TableCharset *string `json:"tableCharset"`
+    /* 表类型。 (Optional) */
+    TableTypes []PairValue `json:"tableTypes"`
+
+    /* 主键数据类型。 (Optional) */
+    PrimaryKeyDataType []PairValue `json:"primaryKeyDataType"`
+
+    /* opengauss字段数据类型。 (Optional) */
+    ColumnTypes []string `json:"columnTypes"`
 }
