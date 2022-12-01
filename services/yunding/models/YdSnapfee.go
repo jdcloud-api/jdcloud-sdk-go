@@ -17,17 +17,17 @@
 package models
 
 
-type YdUser struct {
-
-    /* 云鼎pin (Optional) */
-    YdPin string `json:"ydPin"`
+type YdSnapfee struct {
 
     /* 京东云pin (Optional) */
     JdcloudPin string `json:"jdcloudPin"`
 
-    /* 云鼎pin-子账号pin (Optional) */
-    YdSubPin string `json:"ydSubPin"`
+    /* 资源id（计费侧） (Optional) */
+    ResourceId string `json:"resourceId"`
 
-    /* 京东云pin-子账号pin (Optional) */
-    JdcloudSubPin string `json:"jdcloudSubPin"`
+    /* 云鼎pin (Optional) */
+    YdPin string `json:"ydPin"`
+
+    /* 云鼎资源id（产研侧） (Optional) */
+    YdResourceId string `json:"ydResourceId"`
 }

@@ -93,11 +93,11 @@ func NewDescribeSubnetRequestWithoutParam() *DescribeSubnetRequest {
 func (r *DescribeSubnetRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param subnetId: Subnet ID(Required) */
 func (r *DescribeSubnetRequest) SetSubnetId(subnetId string) {
     r.SubnetId = subnetId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

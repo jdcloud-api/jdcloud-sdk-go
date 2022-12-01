@@ -17,17 +17,14 @@
 package models
 
 
-type YdUser struct {
+type YdSnapfeeState struct {
 
     /* 云鼎pin (Optional) */
     YdPin string `json:"ydPin"`
 
-    /* 京东云pin (Optional) */
-    JdcloudPin string `json:"jdcloudPin"`
+    /* 云鼎资源id（产研侧） (Optional) */
+    ResourceId string `json:"resourceId"`
 
-    /* 云鼎pin-子账号pin (Optional) */
-    YdSubPin string `json:"ydSubPin"`
-
-    /* 京东云pin-子账号pin (Optional) */
-    JdcloudSubPin string `json:"jdcloudSubPin"`
+    /* 状态 1：正常，3：欠费停服，4：欠费删除，13：到期停服/退款删除，14：到期删除，24：运营删除，34:用户删除 (Optional) */
+    State int `json:"state"`
 }

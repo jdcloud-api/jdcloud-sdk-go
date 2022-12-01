@@ -20,95 +20,108 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type DeleteNetworkInterfaceRequest struct {
+type DetachNetworkInterfaceRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /* networkInterface ID  */
+    /* 云主机ID  */
+    InstanceId string `json:"instanceId"`
+
+    /* 弹性网卡ID  */
     NetworkInterfaceId string `json:"networkInterfaceId"`
 }
 
 /*
- * param regionId: Region ID (Required)
- * param networkInterfaceId: networkInterface ID (Required)
+ * param regionId: 地域ID (Required)
+ * param instanceId: 云主机ID (Required)
+ * param networkInterfaceId: 弹性网卡ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDeleteNetworkInterfaceRequest(
+func NewDetachNetworkInterfaceRequest(
     regionId string,
+    instanceId string,
     networkInterfaceId string,
-) *DeleteNetworkInterfaceRequest {
+) *DetachNetworkInterfaceRequest {
 
-	return &DeleteNetworkInterfaceRequest{
+	return &DetachNetworkInterfaceRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/ydNetworkInterfaces/{networkInterfaceId}",
-			Method:  "DELETE",
+			URL:     "/regions/{regionId}/ydVmInstances/{instanceId}:detachNetworkInterface",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v2",
 		},
         RegionId: regionId,
+        InstanceId: instanceId,
         NetworkInterfaceId: networkInterfaceId,
 	}
 }
 
 /*
- * param regionId: Region ID (Required)
- * param networkInterfaceId: networkInterface ID (Required)
+ * param regionId: 地域ID (Required)
+ * param instanceId: 云主机ID (Required)
+ * param networkInterfaceId: 弹性网卡ID (Required)
  */
-func NewDeleteNetworkInterfaceRequestWithAllParams(
+func NewDetachNetworkInterfaceRequestWithAllParams(
     regionId string,
+    instanceId string,
     networkInterfaceId string,
-) *DeleteNetworkInterfaceRequest {
+) *DetachNetworkInterfaceRequest {
 
-    return &DeleteNetworkInterfaceRequest{
+    return &DetachNetworkInterfaceRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/ydNetworkInterfaces/{networkInterfaceId}",
-            Method:  "DELETE",
+            URL:     "/regions/{regionId}/ydVmInstances/{instanceId}:detachNetworkInterface",
+            Method:  "POST",
             Header:  nil,
             Version: "v2",
         },
         RegionId: regionId,
+        InstanceId: instanceId,
         NetworkInterfaceId: networkInterfaceId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDeleteNetworkInterfaceRequestWithoutParam() *DeleteNetworkInterfaceRequest {
+func NewDetachNetworkInterfaceRequestWithoutParam() *DetachNetworkInterfaceRequest {
 
-    return &DeleteNetworkInterfaceRequest{
+    return &DetachNetworkInterfaceRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/ydNetworkInterfaces/{networkInterfaceId}",
-            Method:  "DELETE",
+            URL:     "/regions/{regionId}/ydVmInstances/{instanceId}:detachNetworkInterface",
+            Method:  "POST",
             Header:  nil,
             Version: "v2",
         },
     }
 }
 
-/* param regionId: Region ID(Required) */
-func (r *DeleteNetworkInterfaceRequest) SetRegionId(regionId string) {
+/* param regionId: 地域ID(Required) */
+func (r *DetachNetworkInterfaceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-/* param networkInterfaceId: networkInterface ID(Required) */
-func (r *DeleteNetworkInterfaceRequest) SetNetworkInterfaceId(networkInterfaceId string) {
+/* param instanceId: 云主机ID(Required) */
+func (r *DetachNetworkInterfaceRequest) SetInstanceId(instanceId string) {
+    r.InstanceId = instanceId
+}
+/* param networkInterfaceId: 弹性网卡ID(Required) */
+func (r *DetachNetworkInterfaceRequest) SetNetworkInterfaceId(networkInterfaceId string) {
     r.NetworkInterfaceId = networkInterfaceId
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DeleteNetworkInterfaceRequest) GetRegionId() string {
+func (r DetachNetworkInterfaceRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DeleteNetworkInterfaceResponse struct {
+type DetachNetworkInterfaceResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DeleteNetworkInterfaceResult `json:"result"`
+    Result DetachNetworkInterfaceResult `json:"result"`
 }
 
-type DeleteNetworkInterfaceResult struct {
+type DetachNetworkInterfaceResult struct {
 }

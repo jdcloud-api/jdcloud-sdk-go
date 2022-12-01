@@ -93,11 +93,11 @@ func NewDescribeYdRdsInstancesRequestWithoutParam() *DescribeYdRdsInstancesReque
 func (r *DescribeYdRdsInstancesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param appKey: 应用appKey;(Required) */
 func (r *DescribeYdRdsInstancesRequest) SetAppKey(appKey string) {
     r.AppKey = appKey
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

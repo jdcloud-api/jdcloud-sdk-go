@@ -21,31 +21,31 @@ import (
     yunding "github.com/jdcloud-api/jdcloud-sdk-go/services/yunding/models"
 )
 
-type DescribeRdsInstanceRequest struct {
+type DescribeVmInstanceRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)  */
+    /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /* RDS 实例ID，唯一标识一个RDS实例  */
+    /* 云主机ID  */
     InstanceId string `json:"instanceId"`
 }
 
 /*
- * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
- * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
+ * param regionId: 地域ID (Required)
+ * param instanceId: 云主机ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeRdsInstanceRequest(
+func NewDescribeVmInstanceRequest(
     regionId string,
     instanceId string,
-) *DescribeRdsInstanceRequest {
+) *DescribeVmInstanceRequest {
 
-	return &DescribeRdsInstanceRequest{
+	return &DescribeVmInstanceRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/ydRdsInstances/{instanceId}",
+			URL:     "/regions/{regionId}/ydVmInstances/{instanceId}",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v2",
@@ -56,17 +56,17 @@ func NewDescribeRdsInstanceRequest(
 }
 
 /*
- * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
- * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
+ * param regionId: 地域ID (Required)
+ * param instanceId: 云主机ID (Required)
  */
-func NewDescribeRdsInstanceRequestWithAllParams(
+func NewDescribeVmInstanceRequestWithAllParams(
     regionId string,
     instanceId string,
-) *DescribeRdsInstanceRequest {
+) *DescribeVmInstanceRequest {
 
-    return &DescribeRdsInstanceRequest{
+    return &DescribeVmInstanceRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/ydRdsInstances/{instanceId}",
+            URL:     "/regions/{regionId}/ydVmInstances/{instanceId}",
             Method:  "GET",
             Header:  nil,
             Version: "v2",
@@ -77,11 +77,11 @@ func NewDescribeRdsInstanceRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeRdsInstanceRequestWithoutParam() *DescribeRdsInstanceRequest {
+func NewDescribeVmInstanceRequestWithoutParam() *DescribeVmInstanceRequest {
 
-    return &DescribeRdsInstanceRequest{
+    return &DescribeVmInstanceRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/ydRdsInstances/{instanceId}",
+            URL:     "/regions/{regionId}/ydVmInstances/{instanceId}",
             Method:  "GET",
             Header:  nil,
             Version: "v2",
@@ -89,28 +89,28 @@ func NewDescribeRdsInstanceRequestWithoutParam() *DescribeRdsInstanceRequest {
     }
 }
 
-/* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
-func (r *DescribeRdsInstanceRequest) SetRegionId(regionId string) {
+/* param regionId: 地域ID(Required) */
+func (r *DescribeVmInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-/* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
-func (r *DescribeRdsInstanceRequest) SetInstanceId(instanceId string) {
+/* param instanceId: 云主机ID(Required) */
+func (r *DescribeVmInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeRdsInstanceRequest) GetRegionId() string {
+func (r DescribeVmInstanceRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeRdsInstanceResponse struct {
+type DescribeVmInstanceResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeRdsInstanceResult `json:"result"`
+    Result DescribeVmInstanceResult `json:"result"`
 }
 
-type DescribeRdsInstanceResult struct {
-    DbInstanceAttributes yunding.DBInstanceAttribute `json:"dbInstanceAttributes"`
+type DescribeVmInstanceResult struct {
+    Instance yunding.Instance `json:"instance"`
 }

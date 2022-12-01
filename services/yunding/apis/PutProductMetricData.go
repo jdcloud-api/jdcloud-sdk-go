@@ -129,31 +129,27 @@ func NewPutProductMetricDataRequestWithoutParam() *PutProductMetricDataRequest {
 func (r *PutProductMetricDataRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param appCode: 目前统一用jcloud(Required) */
 func (r *PutProductMetricDataRequest) SetAppCode(appCode string) {
     r.AppCode = appCode
 }
-
 /* param serviceCode: 资源的类型，取值vm,ip,database,storage,disk,cdn,redis,balance,nat_gw,db_ro,vpn,ddos等,新接入的产品要求与opentapi命名的产品线名称一致(Required) */
 func (r *PutProductMetricDataRequest) SetServiceCode(serviceCode string) {
     r.ServiceCode = serviceCode
 }
-
 /* param region: 地域信息，如 cn-north-1 等(Required) */
 func (r *PutProductMetricDataRequest) SetRegion(region string) {
     r.Region = region
 }
-
 /* param resourceId: 资源的唯一表示，一般为uuid(Required) */
 func (r *PutProductMetricDataRequest) SetResourceId(resourceId string) {
     r.ResourceId = resourceId
 }
-
 /* param dataPoints: 监控数据点(Required) */
 func (r *PutProductMetricDataRequest) SetDataPoints(dataPoints []monitor.DataPointX) {
     r.DataPoints = dataPoints
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
