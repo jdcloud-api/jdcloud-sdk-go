@@ -18,9 +18,10 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    kubernetes "github.com/jdcloud-api/jdcloud-sdk-go/services/kubernetes/models"
 )
 
-type DeleteClusterRequest struct {
+type DescribeServerlessClusterRequest struct {
 
     core.JDCloudRequest
 
@@ -29,9 +30,6 @@ type DeleteClusterRequest struct {
 
     /* 集群 ID  */
     ClusterId string `json:"clusterId"`
-
-    /* 替换路由表id (Optional) */
-    RouteTableId *string `json:"routeTableId"`
 }
 
 /*
@@ -40,15 +38,15 @@ type DeleteClusterRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDeleteClusterRequest(
+func NewDescribeServerlessClusterRequest(
     regionId string,
     clusterId string,
-) *DeleteClusterRequest {
+) *DescribeServerlessClusterRequest {
 
-	return &DeleteClusterRequest{
+	return &DescribeServerlessClusterRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/clusters/{clusterId}",
-			Method:  "DELETE",
+			URL:     "/regions/{regionId}/serverless-clusters/{clusterId}",
+			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
@@ -60,34 +58,31 @@ func NewDeleteClusterRequest(
 /*
  * param regionId: 地域 ID (Required)
  * param clusterId: 集群 ID (Required)
- * param routeTableId: 替换路由表id (Optional)
  */
-func NewDeleteClusterRequestWithAllParams(
+func NewDescribeServerlessClusterRequestWithAllParams(
     regionId string,
     clusterId string,
-    routeTableId *string,
-) *DeleteClusterRequest {
+) *DescribeServerlessClusterRequest {
 
-    return &DeleteClusterRequest{
+    return &DescribeServerlessClusterRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/clusters/{clusterId}",
-            Method:  "DELETE",
+            URL:     "/regions/{regionId}/serverless-clusters/{clusterId}",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         ClusterId: clusterId,
-        RouteTableId: routeTableId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDeleteClusterRequestWithoutParam() *DeleteClusterRequest {
+func NewDescribeServerlessClusterRequestWithoutParam() *DescribeServerlessClusterRequest {
 
-    return &DeleteClusterRequest{
+    return &DescribeServerlessClusterRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/clusters/{clusterId}",
-            Method:  "DELETE",
+            URL:     "/regions/{regionId}/serverless-clusters/{clusterId}",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
@@ -95,30 +90,27 @@ func NewDeleteClusterRequestWithoutParam() *DeleteClusterRequest {
 }
 
 /* param regionId: 地域 ID(Required) */
-func (r *DeleteClusterRequest) SetRegionId(regionId string) {
+func (r *DescribeServerlessClusterRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 /* param clusterId: 集群 ID(Required) */
-func (r *DeleteClusterRequest) SetClusterId(clusterId string) {
+func (r *DescribeServerlessClusterRequest) SetClusterId(clusterId string) {
     r.ClusterId = clusterId
-}
-/* param routeTableId: 替换路由表id(Optional) */
-func (r *DeleteClusterRequest) SetRouteTableId(routeTableId string) {
-    r.RouteTableId = &routeTableId
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DeleteClusterRequest) GetRegionId() string {
+func (r DescribeServerlessClusterRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DeleteClusterResponse struct {
+type DescribeServerlessClusterResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DeleteClusterResult `json:"result"`
+    Result DescribeServerlessClusterResult `json:"result"`
 }
 
-type DeleteClusterResult struct {
+type DescribeServerlessClusterResult struct {
+    Cluster kubernetes.ServerlessCluster `json:"cluster"`
 }

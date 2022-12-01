@@ -28,7 +28,7 @@ type DescribeVersionsRequest struct {
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 集群的大版本，如 1.12.4-jcs.1 (Optional) */
+    /* 集群的大版本，如 1.16.4-jcs.3 (Optional) */
     MasterVersion *string `json:"masterVersion"`
 }
 
@@ -54,7 +54,7 @@ func NewDescribeVersionsRequest(
 
 /*
  * param regionId: Region ID (Required)
- * param masterVersion: 集群的大版本，如 1.12.4-jcs.1 (Optional)
+ * param masterVersion: 集群的大版本，如 1.16.4-jcs.3 (Optional)
  */
 func NewDescribeVersionsRequestWithAllParams(
     regionId string,
@@ -90,11 +90,11 @@ func NewDescribeVersionsRequestWithoutParam() *DescribeVersionsRequest {
 func (r *DescribeVersionsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
-/* param masterVersion: 集群的大版本，如 1.12.4-jcs.1(Optional) */
+/* param masterVersion: 集群的大版本，如 1.16.4-jcs.3(Optional) */
 func (r *DescribeVersionsRequest) SetMasterVersion(masterVersion string) {
     r.MasterVersion = &masterVersion
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

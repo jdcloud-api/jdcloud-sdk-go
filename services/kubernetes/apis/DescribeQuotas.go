@@ -29,7 +29,7 @@ type DescribeQuotasRequest struct {
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* resourceTypes - 资源类型，暂时只支持[kubernetes]
+    /* resourceTypes - 资源类型，暂时只支持[kubernetes、serverless-kubernetes]
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
@@ -56,7 +56,7 @@ func NewDescribeQuotasRequest(
 
 /*
  * param regionId: Region ID (Required)
- * param filters: resourceTypes - 资源类型，暂时只支持[kubernetes]
+ * param filters: resourceTypes - 资源类型，暂时只支持[kubernetes、serverless-kubernetes]
  (Optional)
  */
 func NewDescribeQuotasRequestWithAllParams(
@@ -93,12 +93,12 @@ func NewDescribeQuotasRequestWithoutParam() *DescribeQuotasRequest {
 func (r *DescribeQuotasRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
-/* param filters: resourceTypes - 资源类型，暂时只支持[kubernetes]
+/* param filters: resourceTypes - 资源类型，暂时只支持[kubernetes、serverless-kubernetes]
 (Optional) */
 func (r *DescribeQuotasRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

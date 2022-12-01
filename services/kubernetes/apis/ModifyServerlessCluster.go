@@ -20,7 +20,7 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type DeleteClusterRequest struct {
+type ModifyServerlessClusterRequest struct {
 
     core.JDCloudRequest
 
@@ -30,8 +30,11 @@ type DeleteClusterRequest struct {
     /* 集群 ID  */
     ClusterId string `json:"clusterId"`
 
-    /* 替换路由表id (Optional) */
-    RouteTableId *string `json:"routeTableId"`
+    /* 集群名称 (Optional) */
+    Name *string `json:"name"`
+
+    /* 集群描述 (Optional) */
+    Description *string `json:"description"`
 }
 
 /*
@@ -40,15 +43,15 @@ type DeleteClusterRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDeleteClusterRequest(
+func NewModifyServerlessClusterRequest(
     regionId string,
     clusterId string,
-) *DeleteClusterRequest {
+) *ModifyServerlessClusterRequest {
 
-	return &DeleteClusterRequest{
+	return &ModifyServerlessClusterRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/clusters/{clusterId}",
-			Method:  "DELETE",
+			URL:     "/regions/{regionId}/serverless-clusters/{clusterId}",
+			Method:  "PATCH",
 			Header:  nil,
 			Version: "v1",
 		},
@@ -60,34 +63,37 @@ func NewDeleteClusterRequest(
 /*
  * param regionId: 地域 ID (Required)
  * param clusterId: 集群 ID (Required)
- * param routeTableId: 替换路由表id (Optional)
+ * param name: 集群名称 (Optional)
+ * param description: 集群描述 (Optional)
  */
-func NewDeleteClusterRequestWithAllParams(
+func NewModifyServerlessClusterRequestWithAllParams(
     regionId string,
     clusterId string,
-    routeTableId *string,
-) *DeleteClusterRequest {
+    name *string,
+    description *string,
+) *ModifyServerlessClusterRequest {
 
-    return &DeleteClusterRequest{
+    return &ModifyServerlessClusterRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/clusters/{clusterId}",
-            Method:  "DELETE",
+            URL:     "/regions/{regionId}/serverless-clusters/{clusterId}",
+            Method:  "PATCH",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         ClusterId: clusterId,
-        RouteTableId: routeTableId,
+        Name: name,
+        Description: description,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDeleteClusterRequestWithoutParam() *DeleteClusterRequest {
+func NewModifyServerlessClusterRequestWithoutParam() *ModifyServerlessClusterRequest {
 
-    return &DeleteClusterRequest{
+    return &ModifyServerlessClusterRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/clusters/{clusterId}",
-            Method:  "DELETE",
+            URL:     "/regions/{regionId}/serverless-clusters/{clusterId}",
+            Method:  "PATCH",
             Header:  nil,
             Version: "v1",
         },
@@ -95,30 +101,34 @@ func NewDeleteClusterRequestWithoutParam() *DeleteClusterRequest {
 }
 
 /* param regionId: 地域 ID(Required) */
-func (r *DeleteClusterRequest) SetRegionId(regionId string) {
+func (r *ModifyServerlessClusterRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 /* param clusterId: 集群 ID(Required) */
-func (r *DeleteClusterRequest) SetClusterId(clusterId string) {
+func (r *ModifyServerlessClusterRequest) SetClusterId(clusterId string) {
     r.ClusterId = clusterId
 }
-/* param routeTableId: 替换路由表id(Optional) */
-func (r *DeleteClusterRequest) SetRouteTableId(routeTableId string) {
-    r.RouteTableId = &routeTableId
+/* param name: 集群名称(Optional) */
+func (r *ModifyServerlessClusterRequest) SetName(name string) {
+    r.Name = &name
+}
+/* param description: 集群描述(Optional) */
+func (r *ModifyServerlessClusterRequest) SetDescription(description string) {
+    r.Description = &description
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DeleteClusterRequest) GetRegionId() string {
+func (r ModifyServerlessClusterRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DeleteClusterResponse struct {
+type ModifyServerlessClusterResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DeleteClusterResult `json:"result"`
+    Result ModifyServerlessClusterResult `json:"result"`
 }
 
-type DeleteClusterResult struct {
+type ModifyServerlessClusterResult struct {
 }

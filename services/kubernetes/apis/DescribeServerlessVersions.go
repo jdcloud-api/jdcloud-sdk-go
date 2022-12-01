@@ -18,76 +18,68 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    kubernetes "github.com/jdcloud-api/jdcloud-sdk-go/services/kubernetes/models"
 )
 
-type DeleteClusterRequest struct {
+type DescribeServerlessVersionsRequest struct {
 
     core.JDCloudRequest
 
     /* 地域 ID  */
     RegionId string `json:"regionId"`
 
-    /* 集群 ID  */
-    ClusterId string `json:"clusterId"`
-
-    /* 替换路由表id (Optional) */
-    RouteTableId *string `json:"routeTableId"`
+    /*  (Optional) */
+    MasterVersion *string `json:"masterVersion"`
 }
 
 /*
  * param regionId: 地域 ID (Required)
- * param clusterId: 集群 ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDeleteClusterRequest(
+func NewDescribeServerlessVersionsRequest(
     regionId string,
-    clusterId string,
-) *DeleteClusterRequest {
+) *DescribeServerlessVersionsRequest {
 
-	return &DeleteClusterRequest{
+	return &DescribeServerlessVersionsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/clusters/{clusterId}",
-			Method:  "DELETE",
+			URL:     "/regions/{regionId}/serverless-versions",
+			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        ClusterId: clusterId,
 	}
 }
 
 /*
  * param regionId: 地域 ID (Required)
- * param clusterId: 集群 ID (Required)
- * param routeTableId: 替换路由表id (Optional)
+ * param masterVersion:  (Optional)
  */
-func NewDeleteClusterRequestWithAllParams(
+func NewDescribeServerlessVersionsRequestWithAllParams(
     regionId string,
-    clusterId string,
-    routeTableId *string,
-) *DeleteClusterRequest {
+    masterVersion *string,
+) *DescribeServerlessVersionsRequest {
 
-    return &DeleteClusterRequest{
+    return &DescribeServerlessVersionsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/clusters/{clusterId}",
-            Method:  "DELETE",
+            URL:     "/regions/{regionId}/serverless-versions",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        ClusterId: clusterId,
-        RouteTableId: routeTableId,
+        MasterVersion: masterVersion,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDeleteClusterRequestWithoutParam() *DeleteClusterRequest {
+func NewDescribeServerlessVersionsRequestWithoutParam() *DescribeServerlessVersionsRequest {
 
-    return &DeleteClusterRequest{
+    return &DescribeServerlessVersionsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/clusters/{clusterId}",
-            Method:  "DELETE",
+            URL:     "/regions/{regionId}/serverless-versions",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
@@ -95,30 +87,27 @@ func NewDeleteClusterRequestWithoutParam() *DeleteClusterRequest {
 }
 
 /* param regionId: 地域 ID(Required) */
-func (r *DeleteClusterRequest) SetRegionId(regionId string) {
+func (r *DescribeServerlessVersionsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-/* param clusterId: 集群 ID(Required) */
-func (r *DeleteClusterRequest) SetClusterId(clusterId string) {
-    r.ClusterId = clusterId
-}
-/* param routeTableId: 替换路由表id(Optional) */
-func (r *DeleteClusterRequest) SetRouteTableId(routeTableId string) {
-    r.RouteTableId = &routeTableId
+/* param masterVersion: (Optional) */
+func (r *DescribeServerlessVersionsRequest) SetMasterVersion(masterVersion string) {
+    r.MasterVersion = &masterVersion
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DeleteClusterRequest) GetRegionId() string {
+func (r DescribeServerlessVersionsRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DeleteClusterResponse struct {
+type DescribeServerlessVersionsResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DeleteClusterResult `json:"result"`
+    Result DescribeServerlessVersionsResult `json:"result"`
 }
 
-type DeleteClusterResult struct {
+type DescribeServerlessVersionsResult struct {
+    MasterVersions []kubernetes.ServerlessMasterVersion `json:"masterVersions"`
 }

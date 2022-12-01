@@ -67,9 +67,6 @@ type NodeGroup struct {
     /* 状态变更原因 (Optional) */
     StateMessage string `json:"stateMessage"`
 
-    /* 是否开启自动修复 (Optional) */
-    AutoRepair bool `json:"autoRepair"`
-
     /* 控制节点操作进度 (Optional) */
     Progress NodeGroupProgress `json:"progress"`
 

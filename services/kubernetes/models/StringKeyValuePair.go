@@ -17,14 +17,11 @@
 package models
 
 
-type Quota struct {
+type StringKeyValuePair struct {
 
-    /* 资源类型[kubernetes、serverless-kubernetes] (Optional) */
-    ResourceType string `json:"resourceType"`
+    /* key  */
+    Key string `json:"key"`
 
-    /* 可用资源上限 (Optional) */
-    Limit int `json:"limit"`
-
-    /* 已用资源数量 (Optional) */
-    Used int `json:"used"`
+    /* value  */
+    Value string `json:"value"`
 }

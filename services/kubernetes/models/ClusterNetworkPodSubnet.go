@@ -17,7 +17,7 @@
 package models
 
 
-type ClusterSubnet struct {
+type ClusterNetworkPodSubnet struct {
 
     /* 子网 ID (Optional) */
     SubnetId string `json:"subnetId"`
@@ -25,18 +25,24 @@ type ClusterSubnet struct {
     /* 子网类型，可取值为：pod_subnet/lb_subnet/node_subnet (Optional) */
     SubnetType string `json:"subnetType"`
 
-    /* 子网是否启用，仅pod子网可用。 (Optional) */
+    /* 子网是否启用，仅pod子网可用 (Optional) */
     Enabled bool `json:"enabled"`
 
-    /* 子网是否自动删除，用户自定义子网不会自动删除 (Optional) */
+    /* 是否允许自动删除 (Optional) */
     AutoDelete bool `json:"autoDelete"`
 
-    /* 子网CIDR (Optional) */
-    Cidr string `json:"cidr"`
+    /* ip mask of subnet view (Optional) */
+    IpMaskLen int `json:"ipMaskLen"`
 
-    /* 子网中可用的IP数量 (Optional) */
-    AvailableIpNum int `json:"availableIpNum"`
+    /* 可用的node数量 (Optional) */
+    AvailableCidrCount int `json:"availableCidrCount"`
 
-    /* 子网名称 (Optional) */
-    SubnetName string `json:"subnetName"`
+    /* ip count of each cidr. defined by user (Optional) */
+    EniLen int `json:"eniLen"`
+
+    /* ipam policy. defined by user (Optional) */
+    IpamPolicy string `json:"ipamPolicy"`
+
+    /* tell if runtime subnet has error (Optional) */
+    RuntimeError string `json:"runtimeError"`
 }

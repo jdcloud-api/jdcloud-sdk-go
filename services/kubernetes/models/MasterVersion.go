@@ -31,9 +31,9 @@ type MasterVersion struct {
     /* 版本状态 (Optional) */
     VersionStatus string `json:"versionStatus"`
 
-    /* node 节点的配置 (Optional) */
-    NodeVersions []NodeVersion `json:"nodeVersions"`
-
     /* node节点操作系统类型列表，以 "," 分割，目前支持 CentOS|Windows (Optional) */
     NodeOsTypes string `json:"nodeOsTypes"`
+
+    /* 该版本可安装的addons (Optional) */
+    ClusterAddons []ClusterAddon `json:"clusterAddons"`
 }

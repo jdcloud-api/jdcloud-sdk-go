@@ -17,14 +17,11 @@
 package models
 
 
-type Quota struct {
+type UserScriptSpec struct {
 
-    /* 资源类型[kubernetes、serverless-kubernetes] (Optional) */
-    ResourceType string `json:"resourceType"`
+    /* 脚本名称，最大长度暂定为100 byte，目前支持值为 launch-script，表示云主机启动脚本。 (Optional) */
+    Key *string `json:"key"`
 
-    /* 可用资源上限 (Optional) */
-    Limit int `json:"limit"`
-
-    /* 已用资源数量 (Optional) */
-    Used int `json:"used"`
+    /* 脚本详情，启动脚本（key为launch-script时对应的value）内容经过base64编码，编码前数据不能大于2KB（2048 byte）,编码后数据不大于2768 byte，只支持bash脚本，编码前内容必须以 "#!/bin/bash" 作为首行。 (Optional) */
+    Value *string `json:"value"`
 }

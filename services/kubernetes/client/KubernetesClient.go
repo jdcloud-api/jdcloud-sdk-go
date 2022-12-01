@@ -40,7 +40,7 @@ func NewKubernetesClient(credential *core.Credential) *KubernetesClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "kubernetes",
-            Revision:    "0.8.0",
+            Revision:    "1.2.2",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -97,6 +97,26 @@ func (c *KubernetesClient) DeleteNodeInstances(request *kubernetes.DeleteNodeIns
     return jdResp, err
 }
 
+/* 查询Serverless集群版本列表 */
+func (c *KubernetesClient) DescribeServerlessVersions(request *kubernetes.DescribeServerlessVersionsRequest) (*kubernetes.DescribeServerlessVersionsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &kubernetes.DescribeServerlessVersionsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询工作节点组列表 */
 func (c *KubernetesClient) DescribeNodeGroups(request *kubernetes.DescribeNodeGroupsRequest) (*kubernetes.DescribeNodeGroupsResponse, error) {
     if request == nil {
@@ -117,8 +137,8 @@ func (c *KubernetesClient) DescribeNodeGroups(request *kubernetes.DescribeNodeGr
     return jdResp, err
 }
 
-/* 查询可升级的节点版本 */
-func (c *KubernetesClient) DescribeUpgradableNodeVersions(request *kubernetes.DescribeUpgradableNodeVersionsRequest) (*kubernetes.DescribeUpgradableNodeVersionsResponse, error) {
+/* 查询Serverless集群列表 */
+func (c *KubernetesClient) DescribeServerlessClusters(request *kubernetes.DescribeServerlessClustersRequest) (*kubernetes.DescribeServerlessClustersResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -127,7 +147,7 @@ func (c *KubernetesClient) DescribeUpgradableNodeVersions(request *kubernetes.De
         return nil, err
     }
 
-    jdResp := &kubernetes.DescribeUpgradableNodeVersionsResponse{}
+    jdResp := &kubernetes.DescribeServerlessClustersResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -137,8 +157,8 @@ func (c *KubernetesClient) DescribeUpgradableNodeVersions(request *kubernetes.De
     return jdResp, err
 }
 
-/* 设置集群组件 */
-func (c *KubernetesClient) SetAddons(request *kubernetes.SetAddonsRequest) (*kubernetes.SetAddonsResponse, error) {
+/* 修改Serverless集群的 名称 和 描述。<br>集群 name 和 description 必须要指定一个 */
+func (c *KubernetesClient) ModifyServerlessCluster(request *kubernetes.ModifyServerlessClusterRequest) (*kubernetes.ModifyServerlessClusterResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -147,7 +167,7 @@ func (c *KubernetesClient) SetAddons(request *kubernetes.SetAddonsRequest) (*kub
         return nil, err
     }
 
-    jdResp := &kubernetes.SetAddonsResponse{}
+    jdResp := &kubernetes.ModifyServerlessClusterResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -219,8 +239,8 @@ func (c *KubernetesClient) ModifyNodeGroup(request *kubernetes.ModifyNodeGroupRe
     return jdResp, err
 }
 
-/* Deprecated 建议使用 setAddons 接口 <br>设置用户自定义监控状态 */
-func (c *KubernetesClient) SetUserMetrics(request *kubernetes.SetUserMetricsRequest) (*kubernetes.SetUserMetricsResponse, error) {
+/* 删除Serverless集群，以及集群的所有网络，云盘等所有资源。 */
+func (c *KubernetesClient) DeleteServerlessCluster(request *kubernetes.DeleteServerlessClusterRequest) (*kubernetes.DeleteServerlessClusterResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -229,287 +249,7 @@ func (c *KubernetesClient) SetUserMetrics(request *kubernetes.SetUserMetricsRequ
         return nil, err
     }
 
-    jdResp := &kubernetes.SetUserMetricsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 调整工作节点组实例数量 */
-func (c *KubernetesClient) SetNodeGroupSize(request *kubernetes.SetNodeGroupSizeRequest) (*kubernetes.SetNodeGroupSizeResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kubernetes.SetNodeGroupSizeResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询 kubernetes 集群服务配置信息 */
-func (c *KubernetesClient) DescribeServerConfig(request *kubernetes.DescribeServerConfigRequest) (*kubernetes.DescribeServerConfigResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kubernetes.DescribeServerConfigResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 触发升级 */
-func (c *KubernetesClient) UpgradeCluster(request *kubernetes.UpgradeClusterRequest) (*kubernetes.UpgradeClusterResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kubernetes.UpgradeClusterResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询版本信息 */
-func (c *KubernetesClient) DescribeVersions(request *kubernetes.DescribeVersionsRequest) (*kubernetes.DescribeVersionsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kubernetes.DescribeVersionsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 设置工作节点组的自动修复 */
-func (c *KubernetesClient) SetAutoRepair(request *kubernetes.SetAutoRepairRequest) (*kubernetes.SetAutoRepairResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kubernetes.SetAutoRepairResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 设置工作节点组自动扩容 */
-func (c *KubernetesClient) SetNodeGroupCA(request *kubernetes.SetNodeGroupCARequest) (*kubernetes.SetNodeGroupCAResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kubernetes.SetNodeGroupCAResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询 kubernetes 集群配额 */
-func (c *KubernetesClient) DescribeQuotas(request *kubernetes.DescribeQuotasRequest) (*kubernetes.DescribeQuotasResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kubernetes.DescribeQuotasResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询单个工作节点组详情 */
-func (c *KubernetesClient) DescribeNodeGroup(request *kubernetes.DescribeNodeGroupRequest) (*kubernetes.DescribeNodeGroupResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kubernetes.DescribeNodeGroupResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询集群操作进度 */
-func (c *KubernetesClient) DescribeProgress(request *kubernetes.DescribeProgressRequest) (*kubernetes.DescribeProgressResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kubernetes.DescribeProgressResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询节点版本 */
-func (c *KubernetesClient) DescribeNodeVersion(request *kubernetes.DescribeNodeVersionRequest) (*kubernetes.DescribeNodeVersionResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kubernetes.DescribeNodeVersionResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 回滚未升级完的工作节点组 */
-func (c *KubernetesClient) RollbackNodeGroupUpgrade(request *kubernetes.RollbackNodeGroupUpgradeRequest) (*kubernetes.RollbackNodeGroupUpgradeResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kubernetes.RollbackNodeGroupUpgradeResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 终止升级 */
-func (c *KubernetesClient) AbortUpgrade(request *kubernetes.AbortUpgradeRequest) (*kubernetes.AbortUpgradeResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kubernetes.AbortUpgradeResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询可升级的控制节点版本 */
-func (c *KubernetesClient) DescribeUpgradableMasterVersions(request *kubernetes.DescribeUpgradableMasterVersionsRequest) (*kubernetes.DescribeUpgradableMasterVersionsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kubernetes.DescribeUpgradableMasterVersionsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 设置自动升级 */
-func (c *KubernetesClient) SetAutoUpgrade(request *kubernetes.SetAutoUpgradeRequest) (*kubernetes.SetAutoUpgradeResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &kubernetes.SetAutoUpgradeResponse{}
+    jdResp := &kubernetes.DeleteServerlessClusterResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -546,6 +286,26 @@ func (c *KubernetesClient) CreateCluster(request *kubernetes.CreateClusterReques
     }
 
     jdResp := &kubernetes.CreateClusterResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 调整工作节点组实例数量 */
+func (c *KubernetesClient) SetNodeGroupSize(request *kubernetes.SetNodeGroupSizeRequest) (*kubernetes.SetNodeGroupSizeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &kubernetes.SetNodeGroupSizeResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -595,6 +355,86 @@ func (c *KubernetesClient) ModifyCluster(request *kubernetes.ModifyClusterReques
     return jdResp, err
 }
 
+/* 查询版本信息 */
+func (c *KubernetesClient) DescribeVersions(request *kubernetes.DescribeVersionsRequest) (*kubernetes.DescribeVersionsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &kubernetes.DescribeVersionsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设置工作节点组自动扩容缩容 */
+func (c *KubernetesClient) SetNodeGroupCA(request *kubernetes.SetNodeGroupCARequest) (*kubernetes.SetNodeGroupCAResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &kubernetes.SetNodeGroupCAResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询 kubernetes 集群配额 */
+func (c *KubernetesClient) DescribeQuotas(request *kubernetes.DescribeQuotasRequest) (*kubernetes.DescribeQuotasResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &kubernetes.DescribeQuotasResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询单个集群详情。 */
+func (c *KubernetesClient) DescribeServerlessCluster(request *kubernetes.DescribeServerlessClusterRequest) (*kubernetes.DescribeServerlessClusterResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &kubernetes.DescribeServerlessClusterResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询集群列表 */
 func (c *KubernetesClient) DescribeClusters(request *kubernetes.DescribeClustersRequest) (*kubernetes.DescribeClustersResponse, error) {
     if request == nil {
@@ -606,6 +446,54 @@ func (c *KubernetesClient) DescribeClusters(request *kubernetes.DescribeClusters
     }
 
     jdResp := &kubernetes.DescribeClustersResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* - 创建Serverless集群
+- 证书
+  - 关于kubernetes的证书，默认生成，不需要用户传入。
+- 状态限制
+  - pending,reconciling,deleting状态不可以操作更新接口
+  - running状态可以操作cluster所有接口
+  - error状态只可以查询，删除
+  - delete状态的cluster在十五分钟内可以查询，十五分钟后无法查询到
+ */
+func (c *KubernetesClient) CreateServerlessCluster(request *kubernetes.CreateServerlessClusterRequest) (*kubernetes.CreateServerlessClusterResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &kubernetes.CreateServerlessClusterResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询单个工作节点组详情 */
+func (c *KubernetesClient) DescribeNodeGroup(request *kubernetes.DescribeNodeGroupRequest) (*kubernetes.DescribeNodeGroupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &kubernetes.DescribeNodeGroupResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

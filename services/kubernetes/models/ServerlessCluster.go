@@ -17,7 +17,7 @@
 package models
 
 
-type Cluster struct {
+type ServerlessCluster struct {
 
     /* 集群id (Optional) */
     ClusterId string `json:"clusterId"`
@@ -34,9 +34,6 @@ type Cluster struct {
     /* 集群所在的az (Optional) */
     Azs []string `json:"azs"`
 
-    /* 节点组列表 (Optional) */
-    NodeGroups []NodeGroup `json:"nodeGroups"`
-
     /* k8s的cluster的cidr (Optional) */
     ClusterCidr string `json:"clusterCidr"`
 
@@ -48,12 +45,6 @@ type Cluster struct {
 
     /* 状态变更原因 (Optional) */
     StateMessage string `json:"stateMessage"`
-
-    /* 更新时间 (Optional) */
-    UpdateTime string `json:"updateTime"`
-
-    /* 创建时间 (Optional) */
-    CreateTime string `json:"createTime"`
 
     /* 用户的AccessKey，插件调用open-api时的认证凭证 (Optional) */
     AccessKey string `json:"accessKey"`
@@ -85,20 +76,14 @@ type Cluster struct {
     /* 集群组件配置信息 (Optional) */
     AddonsConfig []AddonConfig `json:"addonsConfig"`
 
-    /* 是否开启集群自动升级，true 表示开启，false 表示未开启 (Optional) */
-    AutoUpgrade bool `json:"autoUpgrade"`
-
-    /* 配置集群维护策略 (Optional) */
-    MaintenanceWindow MaintenanceWindow `json:"maintenanceWindow"`
-
-    /* 集群升级计划信息, 仅展示最新一条升级计划信息 (Optional) */
-    UpgradePlan UpgradePlan `json:"upgradePlan"`
-
     /* 控制节点操作进度 (Optional) */
     MasterProgress MaintenanceWindow `json:"masterProgress"`
 
     /* 网络配置信息 (Optional) */
-    ClusterNetwork ClusterNetwork `json:"clusterNetwork"`
+    ClusterNetwork ServerlessClusterNetworkConfig `json:"clusterNetwork"`
+
+    /* 创建时间 (Optional) */
+    CreateTime string `json:"createTime"`
 
     /* 集群网络类型,可取值为auto和customized (Optional) */
     NetworkMode string `json:"networkMode"`

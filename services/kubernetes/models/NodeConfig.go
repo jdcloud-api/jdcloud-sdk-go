@@ -42,4 +42,16 @@ type NodeConfig struct {
 
     /* 工作节点组标签 (Optional) */
     Labels []LabelSpec `json:"labels"`
+
+    /* 云主机脚本，目前支持启动脚本，key为launch-script。 (Optional) */
+    UserScripts []UserScriptSpec `json:"userScripts"`
+
+    /* 数据盘配置信息 (Optional) */
+    DataDiskSpec []DataDiskSpec `json:"dataDiskSpec"`
+
+    /* 数据盘配置信息 (Optional) */
+    SystemDiskSpec DiskSpec `json:"systemDiskSpec"`
+
+    /* 工作节点组的安全组配置，为空则使用默认安全组 (Optional) */
+    SecurityGroup string `json:"securityGroup"`
 }

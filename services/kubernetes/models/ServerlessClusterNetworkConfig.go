@@ -17,7 +17,7 @@
 package models
 
 
-type ClusterNetwork struct {
+type ServerlessClusterNetworkConfig struct {
 
     /* kube-apiserver是否可公网访问，false则kube-apiserver不绑定公网地址，true绑定公网地址 (Optional) */
     PublicApiServer bool `json:"publicApiServer"`
@@ -34,12 +34,9 @@ type ClusterNetwork struct {
     /* 集群Pod子网信息 (Optional) */
     PodSubnets []ClusterNetworkPodSubnet `json:"podSubnets"`
 
-    /* 集群子网信息 (Optional) */
-    ClusterSubnets []ClusterNetworkSubnet `json:"clusterSubnets"`
+    /* 集群lb子网信息 (Optional) */
+    LbSubnets []ClusterNetworkSubnet `json:"lbSubnets"`
 
     /* nat网关配置 (Optional) */
-    NatGateway []NatGateway `json:"natGateway"`
-
-    /* 节点公网IP的配置，如果设置了节点公网IP，此项不为空 (Optional) */
-    NodeElasticIpSpec NodeElasticIpSpec `json:"nodeElasticIpSpec"`
+    NatGateways []NatGateway `json:"natGateways"`
 }

@@ -21,7 +21,7 @@ import (
     kubernetes "github.com/jdcloud-api/jdcloud-sdk-go/services/kubernetes/models"
 )
 
-type CreateClusterRequest struct {
+type CreateServerlessClusterRequest struct {
 
     core.JDCloudRequest
 
@@ -37,14 +37,8 @@ type CreateClusterRequest struct {
     /* kubernetes的版本 (Optional) */
     Version *string `json:"version"`
 
-    /* 是否是边缘计算集群 (Optional) */
-    IsEdge *bool `json:"isEdge"`
-
     /* 集群所在的az  */
     Azs []string `json:"azs"`
-
-    /* 集群节点组  */
-    NodeGroup *kubernetes.NodeGroupSpec `json:"nodeGroup"`
 
     /* 用户的AccessKey，插件调用open-api时的认证凭证  */
     AccessKey string `json:"accessKey"`
@@ -55,14 +49,8 @@ type CreateClusterRequest struct {
     /* 集群组件配置 (Optional) */
     AddonsConfig []kubernetes.AddonConfigSpec `json:"addonsConfig"`
 
-    /* 集群网络配置类型，取值：auto，customized，创建集群接口合并，原CreateCusomizedCluster接口废弃 (Optional) */
-    ClusterNetworkType *string `json:"clusterNetworkType"`
-
-    /* clusterNetworkType为【auto】时，此配置必须要配置 (Optional) */
-    AutoClusterNetworkSpec *kubernetes.AutoClusterNetworkSpec `json:"autoClusterNetworkSpec"`
-
-    /* clusterNetworkType为【customized】时，此配置必须要配置 (Optional) */
-    CustomizedClusterNetworkSpec *kubernetes.CustomizedClusterNetworkSpec `json:"customizedClusterNetworkSpec"`
+    /* 集群网络配置  */
+    ClusterNetworkSpec *kubernetes.ServerlessClusterNetworkSpec `json:"clusterNetworkSpec"`
 
     /* 用户自定义的集群的环境信息，会影响到创建集群时的组件模版的渲染 (Optional) */
     ClusterEnvironments []kubernetes.StringKeyValuePair `json:"clusterEnvironments"`
@@ -72,24 +60,24 @@ type CreateClusterRequest struct {
  * param regionId: 地域 ID (Required)
  * param name: 名称（同一用户的 cluster 允许重名） (Required)
  * param azs: 集群所在的az (Required)
- * param nodeGroup: 集群节点组 (Required)
  * param accessKey: 用户的AccessKey，插件调用open-api时的认证凭证 (Required)
  * param secretKey: 用户的SecretKey，插件调用open-api时的认证凭证 (Required)
+ * param clusterNetworkSpec: 集群网络配置 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewCreateClusterRequest(
+func NewCreateServerlessClusterRequest(
     regionId string,
     name string,
     azs []string,
-    nodeGroup *kubernetes.NodeGroupSpec,
     accessKey string,
     secretKey string,
-) *CreateClusterRequest {
+    clusterNetworkSpec *kubernetes.ServerlessClusterNetworkSpec,
+) *CreateServerlessClusterRequest {
 
-	return &CreateClusterRequest{
+	return &CreateServerlessClusterRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/clusters",
+			URL:     "/regions/{regionId}/serverless-clusters",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -97,9 +85,9 @@ func NewCreateClusterRequest(
         RegionId: regionId,
         Name: name,
         Azs: azs,
-        NodeGroup: nodeGroup,
         AccessKey: accessKey,
         SecretKey: secretKey,
+        ClusterNetworkSpec: clusterNetworkSpec,
 	}
 }
 
@@ -108,37 +96,29 @@ func NewCreateClusterRequest(
  * param name: 名称（同一用户的 cluster 允许重名） (Required)
  * param description: 描述 (Optional)
  * param version: kubernetes的版本 (Optional)
- * param isEdge: 是否是边缘计算集群 (Optional)
  * param azs: 集群所在的az (Required)
- * param nodeGroup: 集群节点组 (Required)
  * param accessKey: 用户的AccessKey，插件调用open-api时的认证凭证 (Required)
  * param secretKey: 用户的SecretKey，插件调用open-api时的认证凭证 (Required)
  * param addonsConfig: 集群组件配置 (Optional)
- * param clusterNetworkType: 集群网络配置类型，取值：auto，customized，创建集群接口合并，原CreateCusomizedCluster接口废弃 (Optional)
- * param autoClusterNetworkSpec: clusterNetworkType为【auto】时，此配置必须要配置 (Optional)
- * param customizedClusterNetworkSpec: clusterNetworkType为【customized】时，此配置必须要配置 (Optional)
+ * param clusterNetworkSpec: 集群网络配置 (Required)
  * param clusterEnvironments: 用户自定义的集群的环境信息，会影响到创建集群时的组件模版的渲染 (Optional)
  */
-func NewCreateClusterRequestWithAllParams(
+func NewCreateServerlessClusterRequestWithAllParams(
     regionId string,
     name string,
     description *string,
     version *string,
-    isEdge *bool,
     azs []string,
-    nodeGroup *kubernetes.NodeGroupSpec,
     accessKey string,
     secretKey string,
     addonsConfig []kubernetes.AddonConfigSpec,
-    clusterNetworkType *string,
-    autoClusterNetworkSpec *kubernetes.AutoClusterNetworkSpec,
-    customizedClusterNetworkSpec *kubernetes.CustomizedClusterNetworkSpec,
+    clusterNetworkSpec *kubernetes.ServerlessClusterNetworkSpec,
     clusterEnvironments []kubernetes.StringKeyValuePair,
-) *CreateClusterRequest {
+) *CreateServerlessClusterRequest {
 
-    return &CreateClusterRequest{
+    return &CreateServerlessClusterRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/clusters",
+            URL:     "/regions/{regionId}/serverless-clusters",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -147,25 +127,21 @@ func NewCreateClusterRequestWithAllParams(
         Name: name,
         Description: description,
         Version: version,
-        IsEdge: isEdge,
         Azs: azs,
-        NodeGroup: nodeGroup,
         AccessKey: accessKey,
         SecretKey: secretKey,
         AddonsConfig: addonsConfig,
-        ClusterNetworkType: clusterNetworkType,
-        AutoClusterNetworkSpec: autoClusterNetworkSpec,
-        CustomizedClusterNetworkSpec: customizedClusterNetworkSpec,
+        ClusterNetworkSpec: clusterNetworkSpec,
         ClusterEnvironments: clusterEnvironments,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewCreateClusterRequestWithoutParam() *CreateClusterRequest {
+func NewCreateServerlessClusterRequestWithoutParam() *CreateServerlessClusterRequest {
 
-    return &CreateClusterRequest{
+    return &CreateServerlessClusterRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/clusters",
+            URL:     "/regions/{regionId}/serverless-clusters",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -174,75 +150,59 @@ func NewCreateClusterRequestWithoutParam() *CreateClusterRequest {
 }
 
 /* param regionId: 地域 ID(Required) */
-func (r *CreateClusterRequest) SetRegionId(regionId string) {
+func (r *CreateServerlessClusterRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 /* param name: 名称（同一用户的 cluster 允许重名）(Required) */
-func (r *CreateClusterRequest) SetName(name string) {
+func (r *CreateServerlessClusterRequest) SetName(name string) {
     r.Name = name
 }
 /* param description: 描述(Optional) */
-func (r *CreateClusterRequest) SetDescription(description string) {
+func (r *CreateServerlessClusterRequest) SetDescription(description string) {
     r.Description = &description
 }
 /* param version: kubernetes的版本(Optional) */
-func (r *CreateClusterRequest) SetVersion(version string) {
+func (r *CreateServerlessClusterRequest) SetVersion(version string) {
     r.Version = &version
 }
-/* param isEdge: 是否是边缘计算集群(Optional) */
-func (r *CreateClusterRequest) SetIsEdge(isEdge bool) {
-    r.IsEdge = &isEdge
-}
 /* param azs: 集群所在的az(Required) */
-func (r *CreateClusterRequest) SetAzs(azs []string) {
+func (r *CreateServerlessClusterRequest) SetAzs(azs []string) {
     r.Azs = azs
 }
-/* param nodeGroup: 集群节点组(Required) */
-func (r *CreateClusterRequest) SetNodeGroup(nodeGroup *kubernetes.NodeGroupSpec) {
-    r.NodeGroup = nodeGroup
-}
 /* param accessKey: 用户的AccessKey，插件调用open-api时的认证凭证(Required) */
-func (r *CreateClusterRequest) SetAccessKey(accessKey string) {
+func (r *CreateServerlessClusterRequest) SetAccessKey(accessKey string) {
     r.AccessKey = accessKey
 }
 /* param secretKey: 用户的SecretKey，插件调用open-api时的认证凭证(Required) */
-func (r *CreateClusterRequest) SetSecretKey(secretKey string) {
+func (r *CreateServerlessClusterRequest) SetSecretKey(secretKey string) {
     r.SecretKey = secretKey
 }
 /* param addonsConfig: 集群组件配置(Optional) */
-func (r *CreateClusterRequest) SetAddonsConfig(addonsConfig []kubernetes.AddonConfigSpec) {
+func (r *CreateServerlessClusterRequest) SetAddonsConfig(addonsConfig []kubernetes.AddonConfigSpec) {
     r.AddonsConfig = addonsConfig
 }
-/* param clusterNetworkType: 集群网络配置类型，取值：auto，customized，创建集群接口合并，原CreateCusomizedCluster接口废弃(Optional) */
-func (r *CreateClusterRequest) SetClusterNetworkType(clusterNetworkType string) {
-    r.ClusterNetworkType = &clusterNetworkType
-}
-/* param autoClusterNetworkSpec: clusterNetworkType为【auto】时，此配置必须要配置(Optional) */
-func (r *CreateClusterRequest) SetAutoClusterNetworkSpec(autoClusterNetworkSpec *kubernetes.AutoClusterNetworkSpec) {
-    r.AutoClusterNetworkSpec = autoClusterNetworkSpec
-}
-/* param customizedClusterNetworkSpec: clusterNetworkType为【customized】时，此配置必须要配置(Optional) */
-func (r *CreateClusterRequest) SetCustomizedClusterNetworkSpec(customizedClusterNetworkSpec *kubernetes.CustomizedClusterNetworkSpec) {
-    r.CustomizedClusterNetworkSpec = customizedClusterNetworkSpec
+/* param clusterNetworkSpec: 集群网络配置(Required) */
+func (r *CreateServerlessClusterRequest) SetClusterNetworkSpec(clusterNetworkSpec *kubernetes.ServerlessClusterNetworkSpec) {
+    r.ClusterNetworkSpec = clusterNetworkSpec
 }
 /* param clusterEnvironments: 用户自定义的集群的环境信息，会影响到创建集群时的组件模版的渲染(Optional) */
-func (r *CreateClusterRequest) SetClusterEnvironments(clusterEnvironments []kubernetes.StringKeyValuePair) {
+func (r *CreateServerlessClusterRequest) SetClusterEnvironments(clusterEnvironments []kubernetes.StringKeyValuePair) {
     r.ClusterEnvironments = clusterEnvironments
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r CreateClusterRequest) GetRegionId() string {
+func (r CreateServerlessClusterRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type CreateClusterResponse struct {
+type CreateServerlessClusterResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result CreateClusterResult `json:"result"`
+    Result CreateServerlessClusterResult `json:"result"`
 }
 
-type CreateClusterResult struct {
+type CreateServerlessClusterResult struct {
     ClusterId string `json:"clusterId"`
 }

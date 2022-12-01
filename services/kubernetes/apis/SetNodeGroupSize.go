@@ -101,16 +101,15 @@ func NewSetNodeGroupSizeRequestWithoutParam() *SetNodeGroupSizeRequest {
 func (r *SetNodeGroupSizeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param nodeGroupId: 工作节点组 ID(Required) */
 func (r *SetNodeGroupSizeRequest) SetNodeGroupId(nodeGroupId string) {
     r.NodeGroupId = nodeGroupId
 }
-
 /* param expectCount: 预期目标节点数量(Required) */
 func (r *SetNodeGroupSizeRequest) SetExpectCount(expectCount int) {
     r.ExpectCount = expectCount
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

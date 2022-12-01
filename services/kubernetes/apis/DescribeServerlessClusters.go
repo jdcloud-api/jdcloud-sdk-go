@@ -22,7 +22,7 @@ import (
     common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
 
-type DescribeNodeGroupsRequest struct {
+type DescribeServerlessClustersRequest struct {
 
     core.JDCloudRequest
 
@@ -35,13 +35,8 @@ type DescribeNodeGroupsRequest struct {
     /* 分页大小；默认为20；取值范围[10, 100] (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* Tag筛选条件 (Optional) */
-    Tags []kubernetes.TagFilter `json:"tags"`
-
-    /* name - 节点组名称，模糊匹配，支持单个
-id - 节点组 id，支持多个
-clusterId - 根据 clusterId 查询
-clusterName - 根据 cluster 名称查询
+    /* name - 集群名称，模糊匹配，仅支持单个   
+id - id，支持多个   
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
@@ -51,13 +46,13 @@ clusterName - 根据 cluster 名称查询
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeNodeGroupsRequest(
+func NewDescribeServerlessClustersRequest(
     regionId string,
-) *DescribeNodeGroupsRequest {
+) *DescribeServerlessClustersRequest {
 
-	return &DescribeNodeGroupsRequest{
+	return &DescribeServerlessClustersRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/nodeGroups",
+			URL:     "/regions/{regionId}/serverless-clusters",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -70,24 +65,20 @@ func NewDescribeNodeGroupsRequest(
  * param regionId: 地域 ID (Required)
  * param pageNumber: 页码；默认为1 (Optional)
  * param pageSize: 分页大小；默认为20；取值范围[10, 100] (Optional)
- * param tags: Tag筛选条件 (Optional)
- * param filters: name - 节点组名称，模糊匹配，支持单个
-id - 节点组 id，支持多个
-clusterId - 根据 clusterId 查询
-clusterName - 根据 cluster 名称查询
+ * param filters: name - 集群名称，模糊匹配，仅支持单个   
+id - id，支持多个   
  (Optional)
  */
-func NewDescribeNodeGroupsRequestWithAllParams(
+func NewDescribeServerlessClustersRequestWithAllParams(
     regionId string,
     pageNumber *int,
     pageSize *int,
-    tags []kubernetes.TagFilter,
     filters []common.Filter,
-) *DescribeNodeGroupsRequest {
+) *DescribeServerlessClustersRequest {
 
-    return &DescribeNodeGroupsRequest{
+    return &DescribeServerlessClustersRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/nodeGroups",
+            URL:     "/regions/{regionId}/serverless-clusters",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -95,17 +86,16 @@ func NewDescribeNodeGroupsRequestWithAllParams(
         RegionId: regionId,
         PageNumber: pageNumber,
         PageSize: pageSize,
-        Tags: tags,
         Filters: filters,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeNodeGroupsRequestWithoutParam() *DescribeNodeGroupsRequest {
+func NewDescribeServerlessClustersRequestWithoutParam() *DescribeServerlessClustersRequest {
 
-    return &DescribeNodeGroupsRequest{
+    return &DescribeServerlessClustersRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/nodeGroups",
+            URL:     "/regions/{regionId}/serverless-clusters",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -114,44 +104,38 @@ func NewDescribeNodeGroupsRequestWithoutParam() *DescribeNodeGroupsRequest {
 }
 
 /* param regionId: 地域 ID(Required) */
-func (r *DescribeNodeGroupsRequest) SetRegionId(regionId string) {
+func (r *DescribeServerlessClustersRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 /* param pageNumber: 页码；默认为1(Optional) */
-func (r *DescribeNodeGroupsRequest) SetPageNumber(pageNumber int) {
+func (r *DescribeServerlessClustersRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 /* param pageSize: 分页大小；默认为20；取值范围[10, 100](Optional) */
-func (r *DescribeNodeGroupsRequest) SetPageSize(pageSize int) {
+func (r *DescribeServerlessClustersRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-/* param tags: Tag筛选条件(Optional) */
-func (r *DescribeNodeGroupsRequest) SetTags(tags []kubernetes.TagFilter) {
-    r.Tags = tags
-}
-/* param filters: name - 节点组名称，模糊匹配，支持单个
-id - 节点组 id，支持多个
-clusterId - 根据 clusterId 查询
-clusterName - 根据 cluster 名称查询
+/* param filters: name - 集群名称，模糊匹配，仅支持单个   
+id - id，支持多个   
 (Optional) */
-func (r *DescribeNodeGroupsRequest) SetFilters(filters []common.Filter) {
+func (r *DescribeServerlessClustersRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeNodeGroupsRequest) GetRegionId() string {
+func (r DescribeServerlessClustersRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeNodeGroupsResponse struct {
+type DescribeServerlessClustersResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeNodeGroupsResult `json:"result"`
+    Result DescribeServerlessClustersResult `json:"result"`
 }
 
-type DescribeNodeGroupsResult struct {
-    NodeGroups []kubernetes.NodeGroup `json:"nodeGroups"`
+type DescribeServerlessClustersResult struct {
+    Clusters []kubernetes.ServerlessCluster `json:"clusters"`
     TotalCount int `json:"totalCount"`
 }

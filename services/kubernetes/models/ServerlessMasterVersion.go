@@ -17,14 +17,17 @@
 package models
 
 
-type Quota struct {
+type ServerlessMasterVersion struct {
 
-    /* 资源类型[kubernetes、serverless-kubernetes] (Optional) */
-    ResourceType string `json:"resourceType"`
+    /* 版本号 (Optional) */
+    Version string `json:"version"`
 
-    /* 可用资源上限 (Optional) */
-    Limit int `json:"limit"`
+    /* 是否默认版本 (Optional) */
+    IsDefault bool `json:"isDefault"`
 
-    /* 已用资源数量 (Optional) */
-    Used int `json:"used"`
+    /* 版本状态 (Optional) */
+    VersionStatus string `json:"versionStatus"`
+
+    /* 该版本可以安装的组件列表 (Optional) */
+    ClusterAddons []ClusterAddon `json:"clusterAddons"`
 }

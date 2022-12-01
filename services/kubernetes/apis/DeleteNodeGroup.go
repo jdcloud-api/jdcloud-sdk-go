@@ -92,11 +92,11 @@ func NewDeleteNodeGroupRequestWithoutParam() *DeleteNodeGroupRequest {
 func (r *DeleteNodeGroupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param nodeGroupId: 工作节点组 ID(Required) */
 func (r *DeleteNodeGroupRequest) SetNodeGroupId(nodeGroupId string) {
     r.NodeGroupId = nodeGroupId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

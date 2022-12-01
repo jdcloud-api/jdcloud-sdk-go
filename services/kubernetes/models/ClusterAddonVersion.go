@@ -17,14 +17,23 @@
 package models
 
 
-type Quota struct {
+type ClusterAddonVersion struct {
 
-    /* 资源类型[kubernetes、serverless-kubernetes] (Optional) */
-    ResourceType string `json:"resourceType"`
+    /* 组件名称 (Optional) */
+    Name string `json:"name"`
 
-    /* 可用资源上限 (Optional) */
-    Limit int `json:"limit"`
+    /* 组件版本，非必须 (Optional) */
+    Version string `json:"version"`
 
-    /* 已用资源数量 (Optional) */
-    Used int `json:"used"`
+    /* 组件版本简要说明 (Optional) */
+    Description string `json:"description"`
+
+    /* 组件版本发布说明 (Optional) */
+    ReleaseNote string `json:"releaseNote"`
+
+    /* 适配的k8s最低版本，如 1.12 (Optional) */
+    MinAdaptedK8sVersion string `json:"minAdaptedK8sVersion"`
+
+    /* 适配的k8s最高版本，如 1.18 (Optional) */
+    MaxAdaptedK8sVersion string `json:"maxAdaptedK8sVersion"`
 }

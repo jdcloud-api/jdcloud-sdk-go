@@ -17,14 +17,14 @@
 package models
 
 
-type Quota struct {
+type NodeElasticIpSpec struct {
 
-    /* 资源类型[kubernetes、serverless-kubernetes] (Optional) */
-    ResourceType string `json:"resourceType"`
+    /* 公网IP带宽【1-200】  */
+    BandWidthMbps int `json:"bandWidthMbps"`
 
-    /* 可用资源上限 (Optional) */
-    Limit int `json:"limit"`
+    /* 公网IP的provider：BGP  */
+    Provider string `json:"provider"`
 
-    /* 已用资源数量 (Optional) */
-    Used int `json:"used"`
+    /* 公网IP计费类型：flow流量计费,bandwith带宽计费  */
+    ChargeMode string `json:"chargeMode"`
 }

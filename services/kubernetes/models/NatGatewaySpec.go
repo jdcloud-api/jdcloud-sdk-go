@@ -20,8 +20,11 @@ package models
 type NatGatewaySpec struct {
 
     /* nat的类型，nat_vm/nat_gw/nat_none (Optional) */
-    NatType string `json:"natType"`
+    NatType *string `json:"natType"`
 
     /* nat虚机id，或者nat网关的实例id (Optional) */
-    NatId string `json:"natId"`
+    NatId *string `json:"natId"`
+
+    /* Nat实例对应的公网IP的配置，只有nat_vm时才生效 (Optional) */
+    ElasticIpSpec *NodeElasticIpSpec `json:"elasticIpSpec"`
 }

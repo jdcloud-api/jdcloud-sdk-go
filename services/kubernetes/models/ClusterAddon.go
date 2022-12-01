@@ -17,14 +17,17 @@
 package models
 
 
-type Quota struct {
+type ClusterAddon struct {
 
-    /* 资源类型[kubernetes、serverless-kubernetes] (Optional) */
-    ResourceType string `json:"resourceType"`
+    /* 组件名称 (Optional) */
+    Name string `json:"name"`
 
-    /* 可用资源上限 (Optional) */
-    Limit int `json:"limit"`
+    /* 组件是否必需开启 (Optional) */
+    Required bool `json:"required"`
 
-    /* 已用资源数量 (Optional) */
-    Used int `json:"used"`
+    /* 组件说明 (Optional) */
+    Description string `json:"description"`
+
+    /*  (Optional) */
+    AvailableVersions []ClusterAddonVersion `json:"availableVersions"`
 }

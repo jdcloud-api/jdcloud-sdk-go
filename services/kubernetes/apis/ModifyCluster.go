@@ -104,21 +104,19 @@ func NewModifyClusterRequestWithoutParam() *ModifyClusterRequest {
 func (r *ModifyClusterRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param clusterId: 集群 ID(Required) */
 func (r *ModifyClusterRequest) SetClusterId(clusterId string) {
     r.ClusterId = clusterId
 }
-
 /* param name: 集群名称(Optional) */
 func (r *ModifyClusterRequest) SetName(name string) {
     r.Name = &name
 }
-
 /* param description: 集群描述(Optional) */
 func (r *ModifyClusterRequest) SetDescription(description string) {
     r.Description = &description
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
