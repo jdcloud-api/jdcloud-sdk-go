@@ -28,6 +28,9 @@ type ClusterSubnet struct {
     /* 子网是否启用，仅pod子网可用。 (Optional) */
     Enabled bool `json:"enabled"`
 
+    /* 子网是否自动删除，用户自定义子网不会自动删除 (Optional) */
+    AutoDelete bool `json:"autoDelete"`
+
     /* 子网CIDR (Optional) */
     Cidr string `json:"cidr"`
 

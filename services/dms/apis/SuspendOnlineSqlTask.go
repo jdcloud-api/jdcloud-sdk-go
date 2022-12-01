@@ -20,67 +20,64 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type RollbackNodeGroupUpgradeRequest struct {
+type SuspendOnlineSqlTaskRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域 ID  */
+    /* 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)  */
     RegionId string `json:"regionId"`
 
-    /* 工作节点组 ID  */
-    NodeGroupId string `json:"nodeGroupId"`
+    /* 任务id (Optional) */
+    TaskId *int `json:"taskId"`
 }
 
 /*
- * param regionId: 地域 ID (Required)
- * param nodeGroupId: 工作节点组 ID (Required)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewRollbackNodeGroupUpgradeRequest(
+func NewSuspendOnlineSqlTaskRequest(
     regionId string,
-    nodeGroupId string,
-) *RollbackNodeGroupUpgradeRequest {
+) *SuspendOnlineSqlTaskRequest {
 
-	return &RollbackNodeGroupUpgradeRequest{
+	return &SuspendOnlineSqlTaskRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/nodeGroups/{nodeGroupId}:rollbackNodeGroupUpgrade",
+			URL:     "/regions/{regionId}/sqltask:suspend",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        NodeGroupId: nodeGroupId,
 	}
 }
 
 /*
- * param regionId: 地域 ID (Required)
- * param nodeGroupId: 工作节点组 ID (Required)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
+ * param taskId: 任务id (Optional)
  */
-func NewRollbackNodeGroupUpgradeRequestWithAllParams(
+func NewSuspendOnlineSqlTaskRequestWithAllParams(
     regionId string,
-    nodeGroupId string,
-) *RollbackNodeGroupUpgradeRequest {
+    taskId *int,
+) *SuspendOnlineSqlTaskRequest {
 
-    return &RollbackNodeGroupUpgradeRequest{
+    return &SuspendOnlineSqlTaskRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/nodeGroups/{nodeGroupId}:rollbackNodeGroupUpgrade",
+            URL:     "/regions/{regionId}/sqltask:suspend",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        NodeGroupId: nodeGroupId,
+        TaskId: taskId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewRollbackNodeGroupUpgradeRequestWithoutParam() *RollbackNodeGroupUpgradeRequest {
+func NewSuspendOnlineSqlTaskRequestWithoutParam() *SuspendOnlineSqlTaskRequest {
 
-    return &RollbackNodeGroupUpgradeRequest{
+    return &SuspendOnlineSqlTaskRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/nodeGroups/{nodeGroupId}:rollbackNodeGroupUpgrade",
+            URL:     "/regions/{regionId}/sqltask:suspend",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -88,27 +85,27 @@ func NewRollbackNodeGroupUpgradeRequestWithoutParam() *RollbackNodeGroupUpgradeR
     }
 }
 
-/* param regionId: 地域 ID(Required) */
-func (r *RollbackNodeGroupUpgradeRequest) SetRegionId(regionId string) {
+/* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
+func (r *SuspendOnlineSqlTaskRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
-/* param nodeGroupId: 工作节点组 ID(Required) */
-func (r *RollbackNodeGroupUpgradeRequest) SetNodeGroupId(nodeGroupId string) {
-    r.NodeGroupId = nodeGroupId
+/* param taskId: 任务id(Optional) */
+func (r *SuspendOnlineSqlTaskRequest) SetTaskId(taskId int) {
+    r.TaskId = &taskId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r RollbackNodeGroupUpgradeRequest) GetRegionId() string {
+func (r SuspendOnlineSqlTaskRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type RollbackNodeGroupUpgradeResponse struct {
+type SuspendOnlineSqlTaskResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result RollbackNodeGroupUpgradeResult `json:"result"`
+    Result SuspendOnlineSqlTaskResult `json:"result"`
 }
 
-type RollbackNodeGroupUpgradeResult struct {
+type SuspendOnlineSqlTaskResult struct {
 }

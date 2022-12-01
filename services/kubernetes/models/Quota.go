@@ -19,7 +19,7 @@ package models
 
 type Quota struct {
 
-    /* 资源类型[kubernetes] (Optional) */
+    /* 资源类型[kubernetes、serverless-kubernetes] (Optional) */
     ResourceType string `json:"resourceType"`
 
     /* 可用资源上限 (Optional) */

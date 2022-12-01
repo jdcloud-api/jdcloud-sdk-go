@@ -102,16 +102,15 @@ func NewSetNodeGroupCARequestWithoutParam() *SetNodeGroupCARequest {
 func (r *SetNodeGroupCARequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param nodeGroupId: 工作节点组 ID(Required) */
 func (r *SetNodeGroupCARequest) SetNodeGroupId(nodeGroupId string) {
     r.NodeGroupId = nodeGroupId
 }
-
 /* param caConfig: 自动伸缩配置，其中 enable 必须指定(Required) */
 func (r *SetNodeGroupCARequest) SetCaConfig(caConfig *kubernetes.CAConfigSpec) {
     r.CaConfig = caConfig
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

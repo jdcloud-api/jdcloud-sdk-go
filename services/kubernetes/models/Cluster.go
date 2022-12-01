@@ -64,8 +64,14 @@ type Cluster struct {
     /* 证书验证方式 (Optional) */
     ClientCertificate bool `json:"clientCertificate"`
 
+    /* 用户访问的内网ip (Optional) */
+    PrivateEndpoint string `json:"privateEndpoint"`
+
     /* 用户访问的ip (Optional) */
     Endpoint string `json:"endpoint"`
+
+    /* IPv6地址 (Optional) */
+    EndpointIPV6 string `json:"endpointIPV6"`
 
     /* endpoint的port (Optional) */
     EndpointPort string `json:"endpointPort"`
@@ -96,4 +102,10 @@ type Cluster struct {
 
     /* 集群网络类型,可取值为auto和customized (Optional) */
     NetworkMode string `json:"networkMode"`
+
+    /* 用户自定义的集群的环境信息，会影响到创建集群时的组件模版的渲染 (Optional) */
+    ClusterEnvironments []StringKeyValuePair `json:"clusterEnvironments"`
+
+    /* 是否是边缘计算集群 (Optional) */
+    IsEdge bool `json:"isEdge"`
 }

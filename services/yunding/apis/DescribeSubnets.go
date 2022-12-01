@@ -119,22 +119,18 @@ func NewDescribeSubnetsRequestWithoutParam() *DescribeSubnetsRequest {
 func (r *DescribeSubnetsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param pageNumber: 页码, 默认为1, 取值范围：[1,∞), 页码超过总页数时, 显示最后一页(Optional) */
 func (r *DescribeSubnetsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小，默认为20，取值范围：[10,100](Optional) */
 func (r *DescribeSubnetsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param type_: 子网类型，主机等资源子网：1；LB子网：2；数据库子网：3(Optional) */
 func (r *DescribeSubnetsRequest) SetType(type_ int) {
     r.Type = &type_
 }
-
 /* param filters: subnetIds - subnet ID列表，支持多个
 subnetNames - subnet名称列表，支持多个
 routeTableId	- 子网关联路由表Id，支持单个
@@ -144,6 +140,7 @@ vpcId - 子网所属VPC Id，支持单个
 func (r *DescribeSubnetsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

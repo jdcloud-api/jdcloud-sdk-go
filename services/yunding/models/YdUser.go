@@ -24,4 +24,10 @@ type YdUser struct {
 
     /* 京东云pin (Optional) */
     JdcloudPin string `json:"jdcloudPin"`
+
+    /* 云鼎pin-子账号pin (Optional) */
+    YdSubPin string `json:"ydSubPin"`
+
+    /* 京东云pin-子账号pin (Optional) */
+    JdcloudSubPin string `json:"jdcloudSubPin"`
 }

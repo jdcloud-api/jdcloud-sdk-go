@@ -110,21 +110,19 @@ func NewRevokePrivilegeRequestWithoutParam() *RevokePrivilegeRequest {
 func (r *RevokePrivilegeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *RevokePrivilegeRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param accountName: 账号名，在同一个实例中账号名不能重复(Required) */
 func (r *RevokePrivilegeRequest) SetAccountName(accountName string) {
     r.AccountName = accountName
 }
-
 /* param dbNames: 需要取消授权的数据库的名称。权限取消后，该账号将不能访问此数据库(Required) */
 func (r *RevokePrivilegeRequest) SetDbNames(dbNames []string) {
     r.DbNames = dbNames
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

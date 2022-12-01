@@ -18,38 +18,40 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    kubernetes "github.com/jdcloud-api/jdcloud-sdk-go/services/kubernetes/models"
 )
 
-type DescribeUpgradableNodeVersionsRequest struct {
+type ModifyServerlessClusterRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域 ID  */
     RegionId string `json:"regionId"`
 
     /* 集群 ID  */
     ClusterId string `json:"clusterId"`
 
-    /* 节点组 id (Optional) */
-    NodeGroupIds []string `json:"nodeGroupIds"`
+    /* 集群名称 (Optional) */
+    Name *string `json:"name"`
+
+    /* 集群描述 (Optional) */
+    Description *string `json:"description"`
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 地域 ID (Required)
  * param clusterId: 集群 ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeUpgradableNodeVersionsRequest(
+func NewModifyServerlessClusterRequest(
     regionId string,
     clusterId string,
-) *DescribeUpgradableNodeVersionsRequest {
+) *ModifyServerlessClusterRequest {
 
-	return &DescribeUpgradableNodeVersionsRequest{
+	return &ModifyServerlessClusterRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/clusters/{clusterId}/upgradableNodeVersions",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/serverless-clusters/{clusterId}",
+			Method:  "PATCH",
 			Header:  nil,
 			Version: "v1",
 		},
@@ -59,69 +61,74 @@ func NewDescribeUpgradableNodeVersionsRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 地域 ID (Required)
  * param clusterId: 集群 ID (Required)
- * param nodeGroupIds: 节点组 id (Optional)
+ * param name: 集群名称 (Optional)
+ * param description: 集群描述 (Optional)
  */
-func NewDescribeUpgradableNodeVersionsRequestWithAllParams(
+func NewModifyServerlessClusterRequestWithAllParams(
     regionId string,
     clusterId string,
-    nodeGroupIds []string,
-) *DescribeUpgradableNodeVersionsRequest {
+    name *string,
+    description *string,
+) *ModifyServerlessClusterRequest {
 
-    return &DescribeUpgradableNodeVersionsRequest{
+    return &ModifyServerlessClusterRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/clusters/{clusterId}/upgradableNodeVersions",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/serverless-clusters/{clusterId}",
+            Method:  "PATCH",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         ClusterId: clusterId,
-        NodeGroupIds: nodeGroupIds,
+        Name: name,
+        Description: description,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeUpgradableNodeVersionsRequestWithoutParam() *DescribeUpgradableNodeVersionsRequest {
+func NewModifyServerlessClusterRequestWithoutParam() *ModifyServerlessClusterRequest {
 
-    return &DescribeUpgradableNodeVersionsRequest{
+    return &ModifyServerlessClusterRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/clusters/{clusterId}/upgradableNodeVersions",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/serverless-clusters/{clusterId}",
+            Method:  "PATCH",
             Header:  nil,
             Version: "v1",
         },
     }
 }
 
-/* param regionId: Region ID(Required) */
-func (r *DescribeUpgradableNodeVersionsRequest) SetRegionId(regionId string) {
+/* param regionId: 地域 ID(Required) */
+func (r *ModifyServerlessClusterRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param clusterId: 集群 ID(Required) */
-func (r *DescribeUpgradableNodeVersionsRequest) SetClusterId(clusterId string) {
+func (r *ModifyServerlessClusterRequest) SetClusterId(clusterId string) {
     r.ClusterId = clusterId
 }
-
-/* param nodeGroupIds: 节点组 id(Optional) */
-func (r *DescribeUpgradableNodeVersionsRequest) SetNodeGroupIds(nodeGroupIds []string) {
-    r.NodeGroupIds = nodeGroupIds
+/* param name: 集群名称(Optional) */
+func (r *ModifyServerlessClusterRequest) SetName(name string) {
+    r.Name = &name
 }
+/* param description: 集群描述(Optional) */
+func (r *ModifyServerlessClusterRequest) SetDescription(description string) {
+    r.Description = &description
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeUpgradableNodeVersionsRequest) GetRegionId() string {
+func (r ModifyServerlessClusterRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeUpgradableNodeVersionsResponse struct {
+type ModifyServerlessClusterResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeUpgradableNodeVersionsResult `json:"result"`
+    Result ModifyServerlessClusterResult `json:"result"`
 }
 
-type DescribeUpgradableNodeVersionsResult struct {
-    NdoeVersions []kubernetes.NodeVersion `json:"ndoeVersions"`
+type ModifyServerlessClusterResult struct {
 }

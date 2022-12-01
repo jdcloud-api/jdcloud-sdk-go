@@ -20,73 +20,64 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type SetUserMetricsRequest struct {
+type RestartOnlineSqlTaskRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域 ID  */
+    /* 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)  */
     RegionId string `json:"regionId"`
 
-    /* 集群 ID  */
-    ClusterId string `json:"clusterId"`
-
-    /* 是否开启自定义监控 (Optional) */
-    Enabled *bool `json:"enabled"`
+    /* 任务id (Optional) */
+    TaskId *int `json:"taskId"`
 }
 
 /*
- * param regionId: 地域 ID (Required)
- * param clusterId: 集群 ID (Required)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewSetUserMetricsRequest(
+func NewRestartOnlineSqlTaskRequest(
     regionId string,
-    clusterId string,
-) *SetUserMetricsRequest {
+) *RestartOnlineSqlTaskRequest {
 
-	return &SetUserMetricsRequest{
+	return &RestartOnlineSqlTaskRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/clusters/{clusterId}:setUserMetrics",
+			URL:     "/regions/{regionId}/sqltask:restart",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        ClusterId: clusterId,
 	}
 }
 
 /*
- * param regionId: 地域 ID (Required)
- * param clusterId: 集群 ID (Required)
- * param enabled: 是否开启自定义监控 (Optional)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
+ * param taskId: 任务id (Optional)
  */
-func NewSetUserMetricsRequestWithAllParams(
+func NewRestartOnlineSqlTaskRequestWithAllParams(
     regionId string,
-    clusterId string,
-    enabled *bool,
-) *SetUserMetricsRequest {
+    taskId *int,
+) *RestartOnlineSqlTaskRequest {
 
-    return &SetUserMetricsRequest{
+    return &RestartOnlineSqlTaskRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/clusters/{clusterId}:setUserMetrics",
+            URL:     "/regions/{regionId}/sqltask:restart",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        ClusterId: clusterId,
-        Enabled: enabled,
+        TaskId: taskId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewSetUserMetricsRequestWithoutParam() *SetUserMetricsRequest {
+func NewRestartOnlineSqlTaskRequestWithoutParam() *RestartOnlineSqlTaskRequest {
 
-    return &SetUserMetricsRequest{
+    return &RestartOnlineSqlTaskRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/clusters/{clusterId}:setUserMetrics",
+            URL:     "/regions/{regionId}/sqltask:restart",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -94,32 +85,27 @@ func NewSetUserMetricsRequestWithoutParam() *SetUserMetricsRequest {
     }
 }
 
-/* param regionId: 地域 ID(Required) */
-func (r *SetUserMetricsRequest) SetRegionId(regionId string) {
+/* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
+func (r *RestartOnlineSqlTaskRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
-/* param clusterId: 集群 ID(Required) */
-func (r *SetUserMetricsRequest) SetClusterId(clusterId string) {
-    r.ClusterId = clusterId
+/* param taskId: 任务id(Optional) */
+func (r *RestartOnlineSqlTaskRequest) SetTaskId(taskId int) {
+    r.TaskId = &taskId
 }
 
-/* param enabled: 是否开启自定义监控(Optional) */
-func (r *SetUserMetricsRequest) SetEnabled(enabled bool) {
-    r.Enabled = &enabled
-}
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r SetUserMetricsRequest) GetRegionId() string {
+func (r RestartOnlineSqlTaskRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type SetUserMetricsResponse struct {
+type RestartOnlineSqlTaskResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result SetUserMetricsResult `json:"result"`
+    Result RestartOnlineSqlTaskResult `json:"result"`
 }
 
-type SetUserMetricsResult struct {
+type RestartOnlineSqlTaskResult struct {
 }

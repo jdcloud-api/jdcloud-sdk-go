@@ -34,15 +34,6 @@ type NodeGroupSpec struct {
     /* 工作节点组初始化大小，至少为1个  */
     InitialNodeCount int `json:"initialNodeCount"`
 
-    /* 工作节点组运行的vpc  */
-    VpcId string `json:"vpcId"`
-
-    /* 工作节点组的cidr (Optional) */
-    NodeCidr *string `json:"nodeCidr"`
-
-    /* 是否开启自动修复，默认不开启。 (Optional) */
-    AutoRepair *bool `json:"autoRepair"`
-
     /* 自动伸缩配置 (Optional) */
     CaConfig *CAConfigSpec `json:"caConfig"`
 }

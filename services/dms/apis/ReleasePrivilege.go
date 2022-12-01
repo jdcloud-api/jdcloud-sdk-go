@@ -20,67 +20,55 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type AbortUpgradeRequest struct {
+type ReleasePrivilegeRequest struct {
 
     core.JDCloudRequest
 
-    /* 地域 ID  */
-    RegionId string `json:"regionId"`
-
-    /* 集群 ID  */
-    ClusterId string `json:"clusterId"`
+    /* 授权实例记录对应的主键ID (Optional) */
+    IdList []int64 `json:"idList"`
 }
 
 /*
- * param regionId: 地域 ID (Required)
- * param clusterId: 集群 ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewAbortUpgradeRequest(
-    regionId string,
-    clusterId string,
-) *AbortUpgradeRequest {
+func NewReleasePrivilegeRequest(
+) *ReleasePrivilegeRequest {
 
-	return &AbortUpgradeRequest{
+	return &ReleasePrivilegeRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/clusters/{clusterId}:abortUpgrade",
+			URL:     "/management:releasePrivilege",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
-        RegionId: regionId,
-        ClusterId: clusterId,
 	}
 }
 
 /*
- * param regionId: 地域 ID (Required)
- * param clusterId: 集群 ID (Required)
+ * param idList: 授权实例记录对应的主键ID (Optional)
  */
-func NewAbortUpgradeRequestWithAllParams(
-    regionId string,
-    clusterId string,
-) *AbortUpgradeRequest {
+func NewReleasePrivilegeRequestWithAllParams(
+    idList []int64,
+) *ReleasePrivilegeRequest {
 
-    return &AbortUpgradeRequest{
+    return &ReleasePrivilegeRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/clusters/{clusterId}:abortUpgrade",
+            URL:     "/management:releasePrivilege",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
-        RegionId: regionId,
-        ClusterId: clusterId,
+        IdList: idList,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewAbortUpgradeRequestWithoutParam() *AbortUpgradeRequest {
+func NewReleasePrivilegeRequestWithoutParam() *ReleasePrivilegeRequest {
 
-    return &AbortUpgradeRequest{
+    return &ReleasePrivilegeRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/clusters/{clusterId}:abortUpgrade",
+            URL:     "/management:releasePrivilege",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -88,27 +76,23 @@ func NewAbortUpgradeRequestWithoutParam() *AbortUpgradeRequest {
     }
 }
 
-/* param regionId: 地域 ID(Required) */
-func (r *AbortUpgradeRequest) SetRegionId(regionId string) {
-    r.RegionId = regionId
+/* param idList: 授权实例记录对应的主键ID(Optional) */
+func (r *ReleasePrivilegeRequest) SetIdList(idList []int64) {
+    r.IdList = idList
 }
 
-/* param clusterId: 集群 ID(Required) */
-func (r *AbortUpgradeRequest) SetClusterId(clusterId string) {
-    r.ClusterId = clusterId
-}
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r AbortUpgradeRequest) GetRegionId() string {
-    return r.RegionId
+func (r ReleasePrivilegeRequest) GetRegionId() string {
+    return ""
 }
 
-type AbortUpgradeResponse struct {
+type ReleasePrivilegeResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result AbortUpgradeResult `json:"result"`
+    Result ReleasePrivilegeResult `json:"result"`
 }
 
-type AbortUpgradeResult struct {
+type ReleasePrivilegeResult struct {
 }

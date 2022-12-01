@@ -40,7 +40,7 @@ func NewYundingClient(credential *core.Credential) *YundingClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "yunding",
-            Revision:    "2.0.4",
+            Revision:    "2.0.7",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -298,6 +298,31 @@ func (c *YundingClient) DescribeNetworkInterface(request *yunding.DescribeNetwor
     return jdResp, err
 }
 
+/* 云主机绑定一块弹性网卡。<br>
+云主机状态必须为<b>running</b>或<b>stopped</b>状态，并且没有正在进行中的任务才可操作。<br>
+弹性网卡上如果绑定了弹性公网IP，那么其所在az需要与云主机的az保持一致，或者为全可用区型弹性公网IP，才可挂载该网卡。<br>
+云主机挂载弹性网卡的数量，不能超过实例规格的限制。可查询<a href="http://docs.jdcloud.com/virtual-machines/api/describeinstancetypes">DescribeInstanceTypes</a>接口获得指定规格可挂载弹性网卡的数量上限。<br>
+弹性网卡与云主机必须在相同vpc下。
+ */
+func (c *YundingClient) AttachNetworkInterface(request *yunding.AttachNetworkInterfaceRequest) (*yunding.AttachNetworkInterfaceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yunding.AttachNetworkInterfaceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 监控数据上报。 */
 func (c *YundingClient) Put(request *yunding.PutRequest) (*yunding.PutResponse, error) {
     if request == nil {
@@ -438,6 +463,26 @@ func (c *YundingClient) GrantRdsPrivilege(request *yunding.GrantRdsPrivilegeRequ
     return jdResp, err
 }
 
+/* 批量查询云主机列表信息<br>此接口支持分页查询，默认每页20条。 */
+func (c *YundingClient) DescribeVmInstances(request *yunding.DescribeVmInstancesRequest) (*yunding.DescribeVmInstancesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yunding.DescribeVmInstancesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 创建网卡接口，只能创建辅助网卡 */
 func (c *YundingClient) CreateNetworkInterface(request *yunding.CreateNetworkInterfaceRequest) (*yunding.CreateNetworkInterfaceResponse, error) {
     if request == nil {
@@ -469,6 +514,29 @@ func (c *YundingClient) DescribeSubnet(request *yunding.DescribeSubnetRequest) (
     }
 
     jdResp := &yunding.DescribeSubnetResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 云主机缷载一块弹性网卡。<br>
+云主机状态必须为<b>running</b>或<b>stopped</b>状态，并且没有正在进行中的任务才可操作。<br>
+不能缷载主网卡。
+ */
+func (c *YundingClient) DetachNetworkInterface(request *yunding.DetachNetworkInterfaceRequest) (*yunding.DetachNetworkInterfaceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yunding.DetachNetworkInterfaceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -529,6 +597,26 @@ func (c *YundingClient) DescribeInstanceInfo(request *yunding.DescribeInstanceIn
     }
 
     jdResp := &yunding.DescribeInstanceInfoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询一台云主机的详细信息 */
+func (c *YundingClient) DescribeVmInstance(request *yunding.DescribeVmInstanceRequest) (*yunding.DescribeVmInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yunding.DescribeVmInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

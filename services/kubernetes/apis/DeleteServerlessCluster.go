@@ -20,7 +20,7 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type UpgradeClusterRequest struct {
+type DeleteServerlessClusterRequest struct {
 
     core.JDCloudRequest
 
@@ -30,82 +30,64 @@ type UpgradeClusterRequest struct {
     /* 集群 ID  */
     ClusterId string `json:"clusterId"`
 
-    /* 升级范围  */
-    Scope string `json:"scope"`
-
-    /* 节点组 id (Optional) */
-    NodeGroupIds []string `json:"nodeGroupIds"`
-
-    /* 指定升级到的版本  */
-    Version string `json:"version"`
+    /* 替换路由表id (Optional) */
+    RouteTableId *string `json:"routeTableId"`
 }
 
 /*
  * param regionId: 地域 ID (Required)
  * param clusterId: 集群 ID (Required)
- * param scope: 升级范围 (Required)
- * param version: 指定升级到的版本 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewUpgradeClusterRequest(
+func NewDeleteServerlessClusterRequest(
     regionId string,
     clusterId string,
-    scope string,
-    version string,
-) *UpgradeClusterRequest {
+) *DeleteServerlessClusterRequest {
 
-	return &UpgradeClusterRequest{
+	return &DeleteServerlessClusterRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/clusters/{clusterId}:upgradeCluster",
-			Method:  "POST",
+			URL:     "/regions/{regionId}/serverless-clusters/{clusterId}",
+			Method:  "DELETE",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         ClusterId: clusterId,
-        Scope: scope,
-        Version: version,
 	}
 }
 
 /*
  * param regionId: 地域 ID (Required)
  * param clusterId: 集群 ID (Required)
- * param scope: 升级范围 (Required)
- * param nodeGroupIds: 节点组 id (Optional)
- * param version: 指定升级到的版本 (Required)
+ * param routeTableId: 替换路由表id (Optional)
  */
-func NewUpgradeClusterRequestWithAllParams(
+func NewDeleteServerlessClusterRequestWithAllParams(
     regionId string,
     clusterId string,
-    scope string,
-    nodeGroupIds []string,
-    version string,
-) *UpgradeClusterRequest {
+    routeTableId *string,
+) *DeleteServerlessClusterRequest {
 
-    return &UpgradeClusterRequest{
+    return &DeleteServerlessClusterRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/clusters/{clusterId}:upgradeCluster",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/serverless-clusters/{clusterId}",
+            Method:  "DELETE",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         ClusterId: clusterId,
-        Scope: scope,
-        NodeGroupIds: nodeGroupIds,
-        Version: version,
+        RouteTableId: routeTableId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewUpgradeClusterRequestWithoutParam() *UpgradeClusterRequest {
+func NewDeleteServerlessClusterRequestWithoutParam() *DeleteServerlessClusterRequest {
 
-    return &UpgradeClusterRequest{
+    return &DeleteServerlessClusterRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/clusters/{clusterId}:upgradeCluster",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/serverless-clusters/{clusterId}",
+            Method:  "DELETE",
             Header:  nil,
             Version: "v1",
         },
@@ -113,41 +95,30 @@ func NewUpgradeClusterRequestWithoutParam() *UpgradeClusterRequest {
 }
 
 /* param regionId: 地域 ID(Required) */
-func (r *UpgradeClusterRequest) SetRegionId(regionId string) {
+func (r *DeleteServerlessClusterRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param clusterId: 集群 ID(Required) */
-func (r *UpgradeClusterRequest) SetClusterId(clusterId string) {
+func (r *DeleteServerlessClusterRequest) SetClusterId(clusterId string) {
     r.ClusterId = clusterId
 }
-
-/* param scope: 升级范围(Required) */
-func (r *UpgradeClusterRequest) SetScope(scope string) {
-    r.Scope = scope
+/* param routeTableId: 替换路由表id(Optional) */
+func (r *DeleteServerlessClusterRequest) SetRouteTableId(routeTableId string) {
+    r.RouteTableId = &routeTableId
 }
 
-/* param nodeGroupIds: 节点组 id(Optional) */
-func (r *UpgradeClusterRequest) SetNodeGroupIds(nodeGroupIds []string) {
-    r.NodeGroupIds = nodeGroupIds
-}
-
-/* param version: 指定升级到的版本(Required) */
-func (r *UpgradeClusterRequest) SetVersion(version string) {
-    r.Version = version
-}
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r UpgradeClusterRequest) GetRegionId() string {
+func (r DeleteServerlessClusterRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type UpgradeClusterResponse struct {
+type DeleteServerlessClusterResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result UpgradeClusterResult `json:"result"`
+    Result DeleteServerlessClusterResult `json:"result"`
 }
 
-type UpgradeClusterResult struct {
+type DeleteServerlessClusterResult struct {
 }

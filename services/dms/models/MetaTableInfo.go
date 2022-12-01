@@ -25,6 +25,6 @@ type MetaTableInfo struct {
     /* 表注释。 (Optional) */
     TableComment *string `json:"tableComment"`
 
-    /* 表字符编码。 (Optional) */
+    /* 表字符编码（非必须，opengauss不传）。 (Optional) */
     TableCharset *string `json:"tableCharset"`
 }

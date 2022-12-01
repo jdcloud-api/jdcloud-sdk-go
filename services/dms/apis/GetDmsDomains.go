@@ -18,61 +18,51 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    kubernetes "github.com/jdcloud-api/jdcloud-sdk-go/services/kubernetes/models"
 )
 
-type DescribeServerConfigRequest struct {
+type GetDmsDomainsRequest struct {
 
     core.JDCloudRequest
-
-    /* Region ID  */
-    RegionId string `json:"regionId"`
 }
 
 /*
- * param regionId: Region ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeServerConfigRequest(
-    regionId string,
-) *DescribeServerConfigRequest {
+func NewGetDmsDomainsRequest(
+) *GetDmsDomainsRequest {
 
-	return &DescribeServerConfigRequest{
+	return &GetDmsDomainsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/serverConfig",
+			URL:     "/getDmsDomain",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
-        RegionId: regionId,
 	}
 }
 
 /*
- * param regionId: Region ID (Required)
  */
-func NewDescribeServerConfigRequestWithAllParams(
-    regionId string,
-) *DescribeServerConfigRequest {
+func NewGetDmsDomainsRequestWithAllParams(
+) *GetDmsDomainsRequest {
 
-    return &DescribeServerConfigRequest{
+    return &GetDmsDomainsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/serverConfig",
+            URL:     "/getDmsDomain",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
-        RegionId: regionId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeServerConfigRequestWithoutParam() *DescribeServerConfigRequest {
+func NewGetDmsDomainsRequestWithoutParam() *GetDmsDomainsRequest {
 
-    return &DescribeServerConfigRequest{
+    return &GetDmsDomainsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/serverConfig",
+            URL:     "/getDmsDomain",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -80,23 +70,20 @@ func NewDescribeServerConfigRequestWithoutParam() *DescribeServerConfigRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
-func (r *DescribeServerConfigRequest) SetRegionId(regionId string) {
-    r.RegionId = regionId
-}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeServerConfigRequest) GetRegionId() string {
-    return r.RegionId
+func (r GetDmsDomainsRequest) GetRegionId() string {
+    return ""
 }
 
-type DescribeServerConfigResponse struct {
+type GetDmsDomainsResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeServerConfigResult `json:"result"`
+    Result GetDmsDomainsResult `json:"result"`
 }
 
-type DescribeServerConfigResult struct {
-    ServerConfig kubernetes.ServerConfig `json:"serverConfig"`
+type GetDmsDomainsResult struct {
+    Domains interface{} `json:"domains"`
 }

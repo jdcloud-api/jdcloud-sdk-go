@@ -140,51 +140,43 @@ func NewCreateNetworkInterfaceRequestWithoutParam() *CreateNetworkInterfaceReque
 func (r *CreateNetworkInterfaceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param subnetId: 子网ID(Required) */
 func (r *CreateNetworkInterfaceRequest) SetSubnetId(subnetId string) {
     r.SubnetId = subnetId
 }
-
 /* param az: 可用区，用户的默认可用区，该参数无效，不建议使用(Optional) */
 func (r *CreateNetworkInterfaceRequest) SetAz(az string) {
     r.Az = &az
 }
-
 /* param networkInterfaceName: 网卡名称，只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符。(Optional) */
 func (r *CreateNetworkInterfaceRequest) SetNetworkInterfaceName(networkInterfaceName string) {
     r.NetworkInterfaceName = &networkInterfaceName
 }
-
 /* param primaryIpAddress: 网卡主IP，如果不指定，会自动从子网中分配(Optional) */
 func (r *CreateNetworkInterfaceRequest) SetPrimaryIpAddress(primaryIpAddress string) {
     r.PrimaryIpAddress = &primaryIpAddress
 }
-
 /* param secondaryIpAddresses: SecondaryIp列表(Optional) */
 func (r *CreateNetworkInterfaceRequest) SetSecondaryIpAddresses(secondaryIpAddresses []string) {
     r.SecondaryIpAddresses = secondaryIpAddresses
 }
-
 /* param secondaryIpCount: 自动分配的SecondaryIp数量(Optional) */
 func (r *CreateNetworkInterfaceRequest) SetSecondaryIpCount(secondaryIpCount int) {
     r.SecondaryIpCount = &secondaryIpCount
 }
-
 /* param securityGroups: 要绑定的安全组ID列表，最多指定5个安全组(Optional) */
 func (r *CreateNetworkInterfaceRequest) SetSecurityGroups(securityGroups []string) {
     r.SecurityGroups = securityGroups
 }
-
 /* param sanityCheck: 源和目标IP地址校验，取值为0或者1,默认为1(Optional) */
 func (r *CreateNetworkInterfaceRequest) SetSanityCheck(sanityCheck int) {
     r.SanityCheck = &sanityCheck
 }
-
 /* param description: 描述,​ 允许输入UTF-8编码下的全部字符，不超过256字符(Optional) */
 func (r *CreateNetworkInterfaceRequest) SetDescription(description string) {
     r.Description = &description
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

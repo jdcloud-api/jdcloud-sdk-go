@@ -23,5 +23,5 @@ type DmsUserEnableVO struct {
     Pin string `json:"pin"`
 
     /* 用户的启用/禁用状态。 (Optional) */
-    ActiveStatus string `json:"activeStatus"`
+    ActiveStatus bool `json:"activeStatus"`
 }

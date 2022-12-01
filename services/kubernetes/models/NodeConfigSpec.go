@@ -22,9 +22,6 @@ type NodeConfigSpec struct {
     /* 实例类型  */
     InstanceType string `json:"instanceType"`
 
-    /* 工作节点版本，不指定则使用默认版本 (Optional) */
-    Version *string `json:"version"`
-
     /* 云主机密码，默认为集群密码，密码规范参考：[公共参数规范](https://docs.jdcloud.com/cn/virtual-machines/api/general_parameters) (Optional) */
     Password *string `json:"password"`
 
@@ -36,4 +33,13 @@ type NodeConfigSpec struct {
 
     /* 工作节点组标签，最多支持 10 个 (Optional) */
     Labels []LabelSpec `json:"labels"`
+
+    /* 云主机脚本，暂定最多支持5个脚本，目前支持脚本类型为启动脚本，key为launch-script。 (Optional) */
+    UserScripts []UserScriptSpec `json:"userScripts"`
+
+    /* 云主机数据盘配置信息 (Optional) */
+    DataDiskSpec []DataDiskSpec `json:"dataDiskSpec"`
+
+    /* 工作节点组的安全组配置，为空则使用默认安全组 (Optional) */
+    SecurityGroup *string `json:"securityGroup"`
 }

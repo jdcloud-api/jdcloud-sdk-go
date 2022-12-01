@@ -18,70 +18,69 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    kubernetes "github.com/jdcloud-api/jdcloud-sdk-go/services/kubernetes/models"
 )
 
-type DescribeNodeVersionRequest struct {
+type CheckInstanceRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)  */
     RegionId string `json:"regionId"`
 
-    /* 节点版本  */
-    NodeVersion string `json:"nodeVersion"`
+    /* 实例id  */
+    InstanceId string `json:"instanceId"`
 }
 
 /*
- * param regionId: Region ID (Required)
- * param nodeVersion: 节点版本 (Required)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
+ * param instanceId: 实例id (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeNodeVersionRequest(
+func NewCheckInstanceRequest(
     regionId string,
-    nodeVersion string,
-) *DescribeNodeVersionRequest {
+    instanceId string,
+) *CheckInstanceRequest {
 
-	return &DescribeNodeVersionRequest{
+	return &CheckInstanceRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/nodeVersions/{nodeVersion}",
+			URL:     "/regions/{regionId}/instances/{instanceId}:check",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        NodeVersion: nodeVersion,
+        InstanceId: instanceId,
 	}
 }
 
 /*
- * param regionId: Region ID (Required)
- * param nodeVersion: 节点版本 (Required)
+ * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
+ * param instanceId: 实例id (Required)
  */
-func NewDescribeNodeVersionRequestWithAllParams(
+func NewCheckInstanceRequestWithAllParams(
     regionId string,
-    nodeVersion string,
-) *DescribeNodeVersionRequest {
+    instanceId string,
+) *CheckInstanceRequest {
 
-    return &DescribeNodeVersionRequest{
+    return &CheckInstanceRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/nodeVersions/{nodeVersion}",
+            URL:     "/regions/{regionId}/instances/{instanceId}:check",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        NodeVersion: nodeVersion,
+        InstanceId: instanceId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeNodeVersionRequestWithoutParam() *DescribeNodeVersionRequest {
+func NewCheckInstanceRequestWithoutParam() *CheckInstanceRequest {
 
-    return &DescribeNodeVersionRequest{
+    return &CheckInstanceRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/nodeVersions/{nodeVersion}",
+            URL:     "/regions/{regionId}/instances/{instanceId}:check",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -89,28 +88,27 @@ func NewDescribeNodeVersionRequestWithoutParam() *DescribeNodeVersionRequest {
     }
 }
 
-/* param regionId: Region ID(Required) */
-func (r *DescribeNodeVersionRequest) SetRegionId(regionId string) {
+/* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
+func (r *CheckInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
-/* param nodeVersion: 节点版本(Required) */
-func (r *DescribeNodeVersionRequest) SetNodeVersion(nodeVersion string) {
-    r.NodeVersion = nodeVersion
+/* param instanceId: 实例id(Required) */
+func (r *CheckInstanceRequest) SetInstanceId(instanceId string) {
+    r.InstanceId = instanceId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeNodeVersionRequest) GetRegionId() string {
+func (r CheckInstanceRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeNodeVersionResponse struct {
+type CheckInstanceResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeNodeVersionResult `json:"result"`
+    Result CheckInstanceResult `json:"result"`
 }
 
-type DescribeNodeVersionResult struct {
-    NodeVersion kubernetes.NodeVersion `json:"nodeVersion"`
+type CheckInstanceResult struct {
 }

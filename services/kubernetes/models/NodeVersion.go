@@ -19,7 +19,7 @@ package models
 
 type NodeVersion struct {
 
-    /* 节点版本号 (Optional) */
+    /* 节点版本 (Optional) */
     Version string `json:"version"`
 
     /* 镜像操作系统 (Optional) */

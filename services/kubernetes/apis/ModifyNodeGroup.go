@@ -104,21 +104,19 @@ func NewModifyNodeGroupRequestWithoutParam() *ModifyNodeGroupRequest {
 func (r *ModifyNodeGroupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param nodeGroupId: 工作节点组 ID(Required) */
 func (r *ModifyNodeGroupRequest) SetNodeGroupId(nodeGroupId string) {
     r.NodeGroupId = nodeGroupId
 }
-
 /* param name: 工作节点组名称(Optional) */
 func (r *ModifyNodeGroupRequest) SetName(name string) {
     r.Name = &name
 }
-
 /* param description: 工作节点组描述(Optional) */
 func (r *ModifyNodeGroupRequest) SetDescription(description string) {
     r.Description = &description
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

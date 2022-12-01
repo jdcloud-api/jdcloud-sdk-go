@@ -107,23 +107,21 @@ func NewDescribeClustersRequestWithoutParam() *DescribeClustersRequest {
 func (r *DescribeClustersRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param pageNumber: 页码；默认为1(Optional) */
 func (r *DescribeClustersRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小；默认为20；取值范围[10, 100](Optional) */
 func (r *DescribeClustersRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param filters: name - 集群名称，模糊匹配，仅支持单个   
 id - id，支持多个   
 (Optional) */
 func (r *DescribeClustersRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

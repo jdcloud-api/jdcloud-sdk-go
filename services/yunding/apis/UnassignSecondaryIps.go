@@ -32,6 +32,9 @@ type UnassignSecondaryIpsRequest struct {
 
     /* 指定删除的secondaryIp地址 (Optional) */
     SecondaryIps []string `json:"secondaryIps"`
+
+    /* 指定删除的secondaryIp网段 (Optional) */
+    SecondaryCidrs []string `json:"secondaryCidrs"`
 }
 
 /*
@@ -61,11 +64,13 @@ func NewUnassignSecondaryIpsRequest(
  * param regionId: Region ID (Required)
  * param networkInterfaceId: networkInterface ID (Required)
  * param secondaryIps: 指定删除的secondaryIp地址 (Optional)
+ * param secondaryCidrs: 指定删除的secondaryIp网段 (Optional)
  */
 func NewUnassignSecondaryIpsRequestWithAllParams(
     regionId string,
     networkInterfaceId string,
     secondaryIps []string,
+    secondaryCidrs []string,
 ) *UnassignSecondaryIpsRequest {
 
     return &UnassignSecondaryIpsRequest{
@@ -78,6 +83,7 @@ func NewUnassignSecondaryIpsRequestWithAllParams(
         RegionId: regionId,
         NetworkInterfaceId: networkInterfaceId,
         SecondaryIps: secondaryIps,
+        SecondaryCidrs: secondaryCidrs,
     }
 }
 
@@ -98,16 +104,19 @@ func NewUnassignSecondaryIpsRequestWithoutParam() *UnassignSecondaryIpsRequest {
 func (r *UnassignSecondaryIpsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param networkInterfaceId: networkInterface ID(Required) */
 func (r *UnassignSecondaryIpsRequest) SetNetworkInterfaceId(networkInterfaceId string) {
     r.NetworkInterfaceId = networkInterfaceId
 }
-
 /* param secondaryIps: 指定删除的secondaryIp地址(Optional) */
 func (r *UnassignSecondaryIpsRequest) SetSecondaryIps(secondaryIps []string) {
     r.SecondaryIps = secondaryIps
 }
+/* param secondaryCidrs: 指定删除的secondaryIp网段(Optional) */
+func (r *UnassignSecondaryIpsRequest) SetSecondaryCidrs(secondaryCidrs []string) {
+    r.SecondaryCidrs = secondaryCidrs
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

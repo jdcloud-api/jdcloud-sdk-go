@@ -31,9 +31,15 @@ type ClusterNetwork struct {
     /* 用户侧承载node和pod的vpc id (Optional) */
     VpcId string `json:"vpcId"`
 
+    /* 集群Pod子网信息 (Optional) */
+    PodSubnets []ClusterNetworkPodSubnet `json:"podSubnets"`
+
     /* 集群子网信息 (Optional) */
     ClusterSubnets []ClusterNetworkSubnet `json:"clusterSubnets"`
 
     /* nat网关配置 (Optional) */
     NatGateway []NatGateway `json:"natGateway"`
+
+    /* 节点公网IP的配置，如果设置了节点公网IP，此项不为空 (Optional) */
+    NodeElasticIpSpec NodeElasticIpSpec `json:"nodeElasticIpSpec"`
 }

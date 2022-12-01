@@ -92,11 +92,11 @@ func NewDeleteNetworkInterfaceRequestWithoutParam() *DeleteNetworkInterfaceReque
 func (r *DeleteNetworkInterfaceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param networkInterfaceId: networkInterface ID(Required) */
 func (r *DeleteNetworkInterfaceRequest) SetNetworkInterfaceId(networkInterfaceId string) {
     r.NetworkInterfaceId = networkInterfaceId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

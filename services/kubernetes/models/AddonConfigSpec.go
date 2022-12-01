@@ -22,6 +22,15 @@ type AddonConfigSpec struct {
     /* 组件名称，目前支持customMetrics、logging  */
     Name string `json:"name"`
 
+    /* 组件版本，非必须 (Optional) */
+    Version *string `json:"version"`
+
     /* 是否开启该组件，默认为false。 (Optional) */
     Enabled *bool `json:"enabled"`
+
+    /* 组件参数(deprecated) (Optional) */
+    Params *interface{} `json:"params"`
+
+    /* 组件的额外参数（新） (Optional) */
+    Parameters []StringKeyValuePair `json:"parameters"`
 }

@@ -22,6 +22,21 @@ type AddonConfig struct {
     /* 组件名称 (Optional) */
     Name string `json:"name"`
 
+    /* 组件版本，非必须，未安装时填充为默认版本号 (Optional) */
+    Version string `json:"version"`
+
     /* 组件是否开启 (Optional) */
     Enabled bool `json:"enabled"`
+
+    /* 组件安装状态 not_installed,installed,installing,uninstalling,error_installed (Optional) */
+    State string `json:"state"`
+
+    /* 组件的额外参数(deprecated) (Optional) */
+    Params interface{} `json:"params"`
+
+    /* 组件的额外参数（新） (Optional) */
+    Parameters []StringKeyValuePair `json:"parameters"`
+
+    /* 可安装的addons (Optional) */
+    AddonDetail ClusterAddon `json:"addonDetail"`
 }

@@ -34,14 +34,11 @@ type CreateClusterRequest struct {
     /* 描述 (Optional) */
     Description *string `json:"description"`
 
-    /* 默认开启 basicAuth与clientCertificate最少选择一个 (Optional) */
-    BasicAuth *bool `json:"basicAuth"`
-
-    /* 默认开启 clientCertificate (Optional) */
-    ClientCertificate *bool `json:"clientCertificate"`
-
     /* kubernetes的版本 (Optional) */
     Version *string `json:"version"`
+
+    /* 是否是边缘计算集群 (Optional) */
+    IsEdge *bool `json:"isEdge"`
 
     /* 集群所在的az  */
     Azs []string `json:"azs"`
@@ -49,20 +46,26 @@ type CreateClusterRequest struct {
     /* 集群节点组  */
     NodeGroup *kubernetes.NodeGroupSpec `json:"nodeGroup"`
 
-    /* k8s的master的cidr  */
-    MasterCidr string `json:"masterCidr"`
-
     /* 用户的AccessKey，插件调用open-api时的认证凭证  */
     AccessKey string `json:"accessKey"`
 
     /* 用户的SecretKey，插件调用open-api时的认证凭证  */
     SecretKey string `json:"secretKey"`
 
-    /* deprecated 在addonsConfig中同时指定，将被addonsConfig的设置覆盖 <br>是否启用用户自定义监控 (Optional) */
-    UserMetrics *bool `json:"userMetrics"`
-
     /* 集群组件配置 (Optional) */
     AddonsConfig []kubernetes.AddonConfigSpec `json:"addonsConfig"`
+
+    /* 集群网络配置类型，取值：auto，customized，创建集群接口合并，原CreateCusomizedCluster接口废弃 (Optional) */
+    ClusterNetworkType *string `json:"clusterNetworkType"`
+
+    /* clusterNetworkType为【auto】时，此配置必须要配置 (Optional) */
+    AutoClusterNetworkSpec *kubernetes.AutoClusterNetworkSpec `json:"autoClusterNetworkSpec"`
+
+    /* clusterNetworkType为【customized】时，此配置必须要配置 (Optional) */
+    CustomizedClusterNetworkSpec *kubernetes.CustomizedClusterNetworkSpec `json:"customizedClusterNetworkSpec"`
+
+    /* 用户自定义的集群的环境信息，会影响到创建集群时的组件模版的渲染 (Optional) */
+    ClusterEnvironments []kubernetes.StringKeyValuePair `json:"clusterEnvironments"`
 }
 
 /*
@@ -70,7 +73,6 @@ type CreateClusterRequest struct {
  * param name: 名称（同一用户的 cluster 允许重名） (Required)
  * param azs: 集群所在的az (Required)
  * param nodeGroup: 集群节点组 (Required)
- * param masterCidr: k8s的master的cidr (Required)
  * param accessKey: 用户的AccessKey，插件调用open-api时的认证凭证 (Required)
  * param secretKey: 用户的SecretKey，插件调用open-api时的认证凭证 (Required)
  *
@@ -81,7 +83,6 @@ func NewCreateClusterRequest(
     name string,
     azs []string,
     nodeGroup *kubernetes.NodeGroupSpec,
-    masterCidr string,
     accessKey string,
     secretKey string,
 ) *CreateClusterRequest {
@@ -97,7 +98,6 @@ func NewCreateClusterRequest(
         Name: name,
         Azs: azs,
         NodeGroup: nodeGroup,
-        MasterCidr: masterCidr,
         AccessKey: accessKey,
         SecretKey: secretKey,
 	}
@@ -107,31 +107,33 @@ func NewCreateClusterRequest(
  * param regionId: 地域 ID (Required)
  * param name: 名称（同一用户的 cluster 允许重名） (Required)
  * param description: 描述 (Optional)
- * param basicAuth: 默认开启 basicAuth与clientCertificate最少选择一个 (Optional)
- * param clientCertificate: 默认开启 clientCertificate (Optional)
  * param version: kubernetes的版本 (Optional)
+ * param isEdge: 是否是边缘计算集群 (Optional)
  * param azs: 集群所在的az (Required)
  * param nodeGroup: 集群节点组 (Required)
- * param masterCidr: k8s的master的cidr (Required)
  * param accessKey: 用户的AccessKey，插件调用open-api时的认证凭证 (Required)
  * param secretKey: 用户的SecretKey，插件调用open-api时的认证凭证 (Required)
- * param userMetrics: deprecated 在addonsConfig中同时指定，将被addonsConfig的设置覆盖 <br>是否启用用户自定义监控 (Optional)
  * param addonsConfig: 集群组件配置 (Optional)
+ * param clusterNetworkType: 集群网络配置类型，取值：auto，customized，创建集群接口合并，原CreateCusomizedCluster接口废弃 (Optional)
+ * param autoClusterNetworkSpec: clusterNetworkType为【auto】时，此配置必须要配置 (Optional)
+ * param customizedClusterNetworkSpec: clusterNetworkType为【customized】时，此配置必须要配置 (Optional)
+ * param clusterEnvironments: 用户自定义的集群的环境信息，会影响到创建集群时的组件模版的渲染 (Optional)
  */
 func NewCreateClusterRequestWithAllParams(
     regionId string,
     name string,
     description *string,
-    basicAuth *bool,
-    clientCertificate *bool,
     version *string,
+    isEdge *bool,
     azs []string,
     nodeGroup *kubernetes.NodeGroupSpec,
-    masterCidr string,
     accessKey string,
     secretKey string,
-    userMetrics *bool,
     addonsConfig []kubernetes.AddonConfigSpec,
+    clusterNetworkType *string,
+    autoClusterNetworkSpec *kubernetes.AutoClusterNetworkSpec,
+    customizedClusterNetworkSpec *kubernetes.CustomizedClusterNetworkSpec,
+    clusterEnvironments []kubernetes.StringKeyValuePair,
 ) *CreateClusterRequest {
 
     return &CreateClusterRequest{
@@ -144,16 +146,17 @@ func NewCreateClusterRequestWithAllParams(
         RegionId: regionId,
         Name: name,
         Description: description,
-        BasicAuth: basicAuth,
-        ClientCertificate: clientCertificate,
         Version: version,
+        IsEdge: isEdge,
         Azs: azs,
         NodeGroup: nodeGroup,
-        MasterCidr: masterCidr,
         AccessKey: accessKey,
         SecretKey: secretKey,
-        UserMetrics: userMetrics,
         AddonsConfig: addonsConfig,
+        ClusterNetworkType: clusterNetworkType,
+        AutoClusterNetworkSpec: autoClusterNetworkSpec,
+        CustomizedClusterNetworkSpec: customizedClusterNetworkSpec,
+        ClusterEnvironments: clusterEnvironments,
     }
 }
 
@@ -174,66 +177,59 @@ func NewCreateClusterRequestWithoutParam() *CreateClusterRequest {
 func (r *CreateClusterRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param name: 名称（同一用户的 cluster 允许重名）(Required) */
 func (r *CreateClusterRequest) SetName(name string) {
     r.Name = name
 }
-
 /* param description: 描述(Optional) */
 func (r *CreateClusterRequest) SetDescription(description string) {
     r.Description = &description
 }
-
-/* param basicAuth: 默认开启 basicAuth与clientCertificate最少选择一个(Optional) */
-func (r *CreateClusterRequest) SetBasicAuth(basicAuth bool) {
-    r.BasicAuth = &basicAuth
-}
-
-/* param clientCertificate: 默认开启 clientCertificate(Optional) */
-func (r *CreateClusterRequest) SetClientCertificate(clientCertificate bool) {
-    r.ClientCertificate = &clientCertificate
-}
-
 /* param version: kubernetes的版本(Optional) */
 func (r *CreateClusterRequest) SetVersion(version string) {
     r.Version = &version
 }
-
+/* param isEdge: 是否是边缘计算集群(Optional) */
+func (r *CreateClusterRequest) SetIsEdge(isEdge bool) {
+    r.IsEdge = &isEdge
+}
 /* param azs: 集群所在的az(Required) */
 func (r *CreateClusterRequest) SetAzs(azs []string) {
     r.Azs = azs
 }
-
 /* param nodeGroup: 集群节点组(Required) */
 func (r *CreateClusterRequest) SetNodeGroup(nodeGroup *kubernetes.NodeGroupSpec) {
     r.NodeGroup = nodeGroup
 }
-
-/* param masterCidr: k8s的master的cidr(Required) */
-func (r *CreateClusterRequest) SetMasterCidr(masterCidr string) {
-    r.MasterCidr = masterCidr
-}
-
 /* param accessKey: 用户的AccessKey，插件调用open-api时的认证凭证(Required) */
 func (r *CreateClusterRequest) SetAccessKey(accessKey string) {
     r.AccessKey = accessKey
 }
-
 /* param secretKey: 用户的SecretKey，插件调用open-api时的认证凭证(Required) */
 func (r *CreateClusterRequest) SetSecretKey(secretKey string) {
     r.SecretKey = secretKey
 }
-
-/* param userMetrics: deprecated 在addonsConfig中同时指定，将被addonsConfig的设置覆盖 <br>是否启用用户自定义监控(Optional) */
-func (r *CreateClusterRequest) SetUserMetrics(userMetrics bool) {
-    r.UserMetrics = &userMetrics
-}
-
 /* param addonsConfig: 集群组件配置(Optional) */
 func (r *CreateClusterRequest) SetAddonsConfig(addonsConfig []kubernetes.AddonConfigSpec) {
     r.AddonsConfig = addonsConfig
 }
+/* param clusterNetworkType: 集群网络配置类型，取值：auto，customized，创建集群接口合并，原CreateCusomizedCluster接口废弃(Optional) */
+func (r *CreateClusterRequest) SetClusterNetworkType(clusterNetworkType string) {
+    r.ClusterNetworkType = &clusterNetworkType
+}
+/* param autoClusterNetworkSpec: clusterNetworkType为【auto】时，此配置必须要配置(Optional) */
+func (r *CreateClusterRequest) SetAutoClusterNetworkSpec(autoClusterNetworkSpec *kubernetes.AutoClusterNetworkSpec) {
+    r.AutoClusterNetworkSpec = autoClusterNetworkSpec
+}
+/* param customizedClusterNetworkSpec: clusterNetworkType为【customized】时，此配置必须要配置(Optional) */
+func (r *CreateClusterRequest) SetCustomizedClusterNetworkSpec(customizedClusterNetworkSpec *kubernetes.CustomizedClusterNetworkSpec) {
+    r.CustomizedClusterNetworkSpec = customizedClusterNetworkSpec
+}
+/* param clusterEnvironments: 用户自定义的集群的环境信息，会影响到创建集群时的组件模版的渲染(Optional) */
+func (r *CreateClusterRequest) SetClusterEnvironments(clusterEnvironments []kubernetes.StringKeyValuePair) {
+    r.ClusterEnvironments = clusterEnvironments
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

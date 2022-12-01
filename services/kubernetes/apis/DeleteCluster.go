@@ -29,6 +29,9 @@ type DeleteClusterRequest struct {
 
     /* 集群 ID  */
     ClusterId string `json:"clusterId"`
+
+    /* 替换路由表id (Optional) */
+    RouteTableId *string `json:"routeTableId"`
 }
 
 /*
@@ -57,10 +60,12 @@ func NewDeleteClusterRequest(
 /*
  * param regionId: 地域 ID (Required)
  * param clusterId: 集群 ID (Required)
+ * param routeTableId: 替换路由表id (Optional)
  */
 func NewDeleteClusterRequestWithAllParams(
     regionId string,
     clusterId string,
+    routeTableId *string,
 ) *DeleteClusterRequest {
 
     return &DeleteClusterRequest{
@@ -72,6 +77,7 @@ func NewDeleteClusterRequestWithAllParams(
         },
         RegionId: regionId,
         ClusterId: clusterId,
+        RouteTableId: routeTableId,
     }
 }
 
@@ -92,11 +98,15 @@ func NewDeleteClusterRequestWithoutParam() *DeleteClusterRequest {
 func (r *DeleteClusterRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param clusterId: 集群 ID(Required) */
 func (r *DeleteClusterRequest) SetClusterId(clusterId string) {
     r.ClusterId = clusterId
 }
+/* param routeTableId: 替换路由表id(Optional) */
+func (r *DeleteClusterRequest) SetRouteTableId(routeTableId string) {
+    r.RouteTableId = &routeTableId
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -93,11 +93,11 @@ func NewDescribeClusterRequestWithoutParam() *DescribeClusterRequest {
 func (r *DescribeClusterRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param clusterId: 集群 ID(Required) */
 func (r *DescribeClusterRequest) SetClusterId(clusterId string) {
     r.ClusterId = clusterId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

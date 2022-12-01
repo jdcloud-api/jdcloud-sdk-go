@@ -101,16 +101,15 @@ func NewDeleteRdsDatabaseRequestWithoutParam() *DeleteRdsDatabaseRequest {
 func (r *DeleteRdsDatabaseRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *DeleteRdsDatabaseRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param dbName: 库名称(Required) */
 func (r *DeleteRdsDatabaseRequest) SetDbName(dbName string) {
     r.DbName = dbName
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

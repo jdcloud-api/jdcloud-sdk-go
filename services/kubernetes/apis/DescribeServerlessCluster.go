@@ -21,11 +21,11 @@ import (
     kubernetes "github.com/jdcloud-api/jdcloud-sdk-go/services/kubernetes/models"
 )
 
-type DescribeUpgradableMasterVersionsRequest struct {
+type DescribeServerlessClusterRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域 ID  */
     RegionId string `json:"regionId"`
 
     /* 集群 ID  */
@@ -33,19 +33,19 @@ type DescribeUpgradableMasterVersionsRequest struct {
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 地域 ID (Required)
  * param clusterId: 集群 ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeUpgradableMasterVersionsRequest(
+func NewDescribeServerlessClusterRequest(
     regionId string,
     clusterId string,
-) *DescribeUpgradableMasterVersionsRequest {
+) *DescribeServerlessClusterRequest {
 
-	return &DescribeUpgradableMasterVersionsRequest{
+	return &DescribeServerlessClusterRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/clusters/{clusterId}/upgradableMasterVersions",
+			URL:     "/regions/{regionId}/serverless-clusters/{clusterId}",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -56,17 +56,17 @@ func NewDescribeUpgradableMasterVersionsRequest(
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 地域 ID (Required)
  * param clusterId: 集群 ID (Required)
  */
-func NewDescribeUpgradableMasterVersionsRequestWithAllParams(
+func NewDescribeServerlessClusterRequestWithAllParams(
     regionId string,
     clusterId string,
-) *DescribeUpgradableMasterVersionsRequest {
+) *DescribeServerlessClusterRequest {
 
-    return &DescribeUpgradableMasterVersionsRequest{
+    return &DescribeServerlessClusterRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/clusters/{clusterId}/upgradableMasterVersions",
+            URL:     "/regions/{regionId}/serverless-clusters/{clusterId}",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -77,11 +77,11 @@ func NewDescribeUpgradableMasterVersionsRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeUpgradableMasterVersionsRequestWithoutParam() *DescribeUpgradableMasterVersionsRequest {
+func NewDescribeServerlessClusterRequestWithoutParam() *DescribeServerlessClusterRequest {
 
-    return &DescribeUpgradableMasterVersionsRequest{
+    return &DescribeServerlessClusterRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/clusters/{clusterId}/upgradableMasterVersions",
+            URL:     "/regions/{regionId}/serverless-clusters/{clusterId}",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -89,28 +89,28 @@ func NewDescribeUpgradableMasterVersionsRequestWithoutParam() *DescribeUpgradabl
     }
 }
 
-/* param regionId: Region ID(Required) */
-func (r *DescribeUpgradableMasterVersionsRequest) SetRegionId(regionId string) {
+/* param regionId: 地域 ID(Required) */
+func (r *DescribeServerlessClusterRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param clusterId: 集群 ID(Required) */
-func (r *DescribeUpgradableMasterVersionsRequest) SetClusterId(clusterId string) {
+func (r *DescribeServerlessClusterRequest) SetClusterId(clusterId string) {
     r.ClusterId = clusterId
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeUpgradableMasterVersionsRequest) GetRegionId() string {
+func (r DescribeServerlessClusterRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeUpgradableMasterVersionsResponse struct {
+type DescribeServerlessClusterResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeUpgradableMasterVersionsResult `json:"result"`
+    Result DescribeServerlessClusterResult `json:"result"`
 }
 
-type DescribeUpgradableMasterVersionsResult struct {
-    MasterVersions []kubernetes.MasterVersion `json:"masterVersions"`
+type DescribeServerlessClusterResult struct {
+    Cluster kubernetes.ServerlessCluster `json:"cluster"`
 }

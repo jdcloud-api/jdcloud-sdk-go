@@ -107,18 +107,17 @@ func NewDeleteNodeInstancesRequestWithoutParam() *DeleteNodeInstancesRequest {
 func (r *DeleteNodeInstancesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param nodeGroupId: 工作节点组 ID(Required) */
 func (r *DeleteNodeInstancesRequest) SetNodeGroupId(nodeGroupId string) {
     r.NodeGroupId = nodeGroupId
 }
-
 /* param instanceIds: 需要从工作节点组中删除的实例
 - 不可将一个集群中的实例全部删除
 (Required) */
 func (r *DeleteNodeInstancesRequest) SetInstanceIds(instanceIds []string) {
     r.InstanceIds = instanceIds
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

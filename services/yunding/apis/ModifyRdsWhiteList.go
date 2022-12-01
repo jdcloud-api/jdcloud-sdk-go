@@ -101,16 +101,15 @@ func NewModifyRdsWhiteListRequestWithoutParam() *ModifyRdsWhiteListRequest {
 func (r *ModifyRdsWhiteListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *ModifyRdsWhiteListRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param ips: IP或IP段，不同的IP/IP段之间用英文逗号分隔，例如0.0.0.0/0,192.168.0.10(Required) */
 func (r *ModifyRdsWhiteListRequest) SetIps(ips string) {
     r.Ips = ips
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

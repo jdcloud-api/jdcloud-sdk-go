@@ -20,18 +20,18 @@ package models
 type MaintenanceWindowSpec struct {
 
     /* daily, weekly, monthly， 默认 weekly (Optional) */
-    PeriodType *string `json:"periodType"`
+    PeriodType string `json:"periodType"`
 
     /* 维护操作开始具体日期, 仅对 periodType 取值为 weekly 或 monthly 时有效, periodType 为 weekly 时可以取 1-7, periodType 为 monthly 时可取 1-28
  (Optional) */
-    StartDay *int `json:"startDay"`
+    StartDay int `json:"startDay"`
 
     /* 维护操作开始具体时间. 时间格式符合RFC3339，并使用 UTC 时间，精确到分钟，例如 23:27  */
     StartTime string `json:"startTime"`
 
     /* 时区，使用 IANA 数据格式，例如："Asia/Shanghai" 或 "America/Los_Angeles"，默认 "UTC" (Optional) */
-    TimeZone *string `json:"timeZone"`
+    TimeZone string `json:"timeZone"`
 
     /* 维护运行时长: 4-24 小时，步长 1 小时， 默认为： 4小时 (Optional) */
-    Duration *int `json:"duration"`
+    Duration int `json:"duration"`
 }

@@ -85,6 +85,7 @@ func (r *DescribeTasksRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r DescribeTasksRequest) GetRegionId() string {

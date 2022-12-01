@@ -19,21 +19,6 @@ package models
 
 type NodeNetwork struct {
 
-    /* pod子网的id (Optional) */
-    PodSubnetId string `json:"podSubnetId"`
-
     /* node子网的id (Optional) */
     NodeSubnetId string `json:"nodeSubnetId"`
-
-    /* service子网的id (Optional) */
-    ServiceSubnetId string `json:"serviceSubnetId"`
-
-    /* service关联LB的具有公网访问能力的子网id (Optional) */
-    ServicePublicSubnetId string `json:"servicePublicSubnetId"`
-
-    /* node的cidr (Optional) */
-    NodeNetworkCidr string `json:"nodeNetworkCidr"`
-
-    /* vpc id (Optional) */
-    VpcId string `json:"vpcId"`
 }

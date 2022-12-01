@@ -21,77 +21,65 @@ import (
     kubernetes "github.com/jdcloud-api/jdcloud-sdk-go/services/kubernetes/models"
 )
 
-type SetAddonsRequest struct {
+type DescribeServerlessVersionsRequest struct {
 
     core.JDCloudRequest
 
     /* 地域 ID  */
     RegionId string `json:"regionId"`
 
-    /* 集群 ID  */
-    ClusterId string `json:"clusterId"`
-
-    /* 需要设置的集群组件配置  */
-    AddonsConfig []kubernetes.AddonConfigSpec `json:"addonsConfig"`
+    /*  (Optional) */
+    MasterVersion *string `json:"masterVersion"`
 }
 
 /*
  * param regionId: 地域 ID (Required)
- * param clusterId: 集群 ID (Required)
- * param addonsConfig: 需要设置的集群组件配置 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewSetAddonsRequest(
+func NewDescribeServerlessVersionsRequest(
     regionId string,
-    clusterId string,
-    addonsConfig []kubernetes.AddonConfigSpec,
-) *SetAddonsRequest {
+) *DescribeServerlessVersionsRequest {
 
-	return &SetAddonsRequest{
+	return &DescribeServerlessVersionsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/clusters/{clusterId}:setAddons",
-			Method:  "POST",
+			URL:     "/regions/{regionId}/serverless-versions",
+			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        ClusterId: clusterId,
-        AddonsConfig: addonsConfig,
 	}
 }
 
 /*
  * param regionId: 地域 ID (Required)
- * param clusterId: 集群 ID (Required)
- * param addonsConfig: 需要设置的集群组件配置 (Required)
+ * param masterVersion:  (Optional)
  */
-func NewSetAddonsRequestWithAllParams(
+func NewDescribeServerlessVersionsRequestWithAllParams(
     regionId string,
-    clusterId string,
-    addonsConfig []kubernetes.AddonConfigSpec,
-) *SetAddonsRequest {
+    masterVersion *string,
+) *DescribeServerlessVersionsRequest {
 
-    return &SetAddonsRequest{
+    return &DescribeServerlessVersionsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/clusters/{clusterId}:setAddons",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/serverless-versions",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        ClusterId: clusterId,
-        AddonsConfig: addonsConfig,
+        MasterVersion: masterVersion,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewSetAddonsRequestWithoutParam() *SetAddonsRequest {
+func NewDescribeServerlessVersionsRequestWithoutParam() *DescribeServerlessVersionsRequest {
 
-    return &SetAddonsRequest{
+    return &DescribeServerlessVersionsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/clusters/{clusterId}:setAddons",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/serverless-versions",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
@@ -99,31 +87,27 @@ func NewSetAddonsRequestWithoutParam() *SetAddonsRequest {
 }
 
 /* param regionId: 地域 ID(Required) */
-func (r *SetAddonsRequest) SetRegionId(regionId string) {
+func (r *DescribeServerlessVersionsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
-/* param clusterId: 集群 ID(Required) */
-func (r *SetAddonsRequest) SetClusterId(clusterId string) {
-    r.ClusterId = clusterId
+/* param masterVersion: (Optional) */
+func (r *DescribeServerlessVersionsRequest) SetMasterVersion(masterVersion string) {
+    r.MasterVersion = &masterVersion
 }
 
-/* param addonsConfig: 需要设置的集群组件配置(Required) */
-func (r *SetAddonsRequest) SetAddonsConfig(addonsConfig []kubernetes.AddonConfigSpec) {
-    r.AddonsConfig = addonsConfig
-}
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r SetAddonsRequest) GetRegionId() string {
+func (r DescribeServerlessVersionsRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type SetAddonsResponse struct {
+type DescribeServerlessVersionsResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result SetAddonsResult `json:"result"`
+    Result DescribeServerlessVersionsResult `json:"result"`
 }
 
-type SetAddonsResult struct {
+type DescribeServerlessVersionsResult struct {
+    MasterVersions []kubernetes.ServerlessMasterVersion `json:"masterVersions"`
 }
