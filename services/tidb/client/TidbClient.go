@@ -40,7 +40,7 @@ func NewTidbClient(credential *core.Credential) *TidbClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "tidb",
-            Revision:    "1.0.1",
+            Revision:    "1.0.2",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -57,7 +57,7 @@ func (c *TidbClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
 }
 
-/* 关闭TiDB服务的公网访问域名 */
+/* 关闭 TiDB 实例的 Internet 公网服务。 关闭后，将不能在 VPC 外访问 TiDB 实例。 */
 func (c *TidbClient) DisableInternetAccess(request *tidb.DisableInternetAccessRequest) (*tidb.DisableInternetAccessResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -77,7 +77,7 @@ func (c *TidbClient) DisableInternetAccess(request *tidb.DisableInternetAccessRe
     return jdResp, err
 }
 
-/* 创建数据库账号，用户可以使用客户端，应用程序等通过该账号和密码登录数据库实例。 */
+/* 创建数据库的高权限管理账号，用户可以使用客户端、应用程序等通过该账号和密码登录 TiDB 实例，然后通过SQL创建数据库和其他用户。一个数据库实例只能创建一个高权限账号。 */
 func (c *TidbClient) CreateAccount(request *tidb.CreateAccountRequest) (*tidb.CreateAccountResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -97,7 +97,7 @@ func (c *TidbClient) CreateAccount(request *tidb.CreateAccountRequest) (*tidb.Cr
     return jdResp, err
 }
 
-/* 删除白名单分组。 */
+/* 删除指定的白名单分组。 */
 func (c *TidbClient) DeleteWhiteListGroup(request *tidb.DeleteWhiteListGroupRequest) (*tidb.DeleteWhiteListGroupResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -117,7 +117,7 @@ func (c *TidbClient) DeleteWhiteListGroup(request *tidb.DeleteWhiteListGroupRequ
     return jdResp, err
 }
 
-/* 查看TiCDC复制任务列表 */
+/* 查询当前实例下所有的复制任务。 */
 func (c *TidbClient) DescribeReplications(request *tidb.DescribeReplicationsRequest) (*tidb.DescribeReplicationsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -137,7 +137,7 @@ func (c *TidbClient) DescribeReplications(request *tidb.DescribeReplicationsRequ
     return jdResp, err
 }
 
-/* 升级TiDB引擎版本，例如从4.0.6 升级到4.0.8. 目前支持小版本的升级，可升级到平台支持的最新的小版本 */
+/* 升级TiDB引擎版本，例如从4.0.8 升级到 5.4.0等。 */
 func (c *TidbClient) UpgradeEngineVersion(request *tidb.UpgradeEngineVersionRequest) (*tidb.UpgradeEngineVersionResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -157,7 +157,7 @@ func (c *TidbClient) UpgradeEngineVersion(request *tidb.UpgradeEngineVersionRequ
     return jdResp, err
 }
 
-/* 修改复制任务 */
+/* 修改复制任务，修改前需要先暂停复制任务。为保证复制任务的可靠性，目前仅允许修改部分配置。 */
 func (c *TidbClient) ModifyReplication(request *tidb.ModifyReplicationRequest) (*tidb.ModifyReplicationResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -177,7 +177,7 @@ func (c *TidbClient) ModifyReplication(request *tidb.ModifyReplicationRequest) (
     return jdResp, err
 }
 
-/* 修改实例名称，可支持中文，实例名的具体规则可参见帮助中心文档 */
+/* 修改实例名称，可支持中文，实例名的具体规则可参见帮助中心文档。 */
 func (c *TidbClient) ModifyInstanceName(request *tidb.ModifyInstanceNameRequest) (*tidb.ModifyInstanceNameResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -197,7 +197,7 @@ func (c *TidbClient) ModifyInstanceName(request *tidb.ModifyInstanceNameRequest)
     return jdResp, err
 }
 
-/* 校验需要导入的备份文件在OSS上是否存在，需要的读取权限是否具备 */
+/* 校验需要导入的备份文件在OSS上是否存在，需要的读取权限是否具备。 */
 func (c *TidbClient) VerifyFilefromOSS(request *tidb.VerifyFilefromOSSRequest) (*tidb.VerifyFilefromOSSResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -217,7 +217,7 @@ func (c *TidbClient) VerifyFilefromOSS(request *tidb.VerifyFilefromOSSRequest) (
     return jdResp, err
 }
 
-/* 创建一个实例全量备份，可以对整个实例所有的数据库进行全量备份。同一时间点，只能有一个正在运行的备份任务 */
+/* 进行 TiDB 实例的全量备份，对实例中所有的数据库进行备份。同一时间，只能有一个正在运行的备份任务。 */
 func (c *TidbClient) CreateBackup(request *tidb.CreateBackupRequest) (*tidb.CreateBackupResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -237,7 +237,7 @@ func (c *TidbClient) CreateBackup(request *tidb.CreateBackupRequest) (*tidb.Crea
     return jdResp, err
 }
 
-/* 修改TiDB实例备份策略。 */
+/* 修改 TiDB 实例备份策略，例如全量备份的日期，时间等。 */
 func (c *TidbClient) ModifyBackupPolicy(request *tidb.ModifyBackupPolicyRequest) (*tidb.ModifyBackupPolicyResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -257,7 +257,7 @@ func (c *TidbClient) ModifyBackupPolicy(request *tidb.ModifyBackupPolicyRequest)
     return jdResp, err
 }
 
-/* 查看该实例下所有备份的详细信息 */
+/* 查看该实例下所有备份的详细信息。 */
 func (c *TidbClient) DescribeBackups(request *tidb.DescribeBackupsRequest) (*tidb.DescribeBackupsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -277,7 +277,7 @@ func (c *TidbClient) DescribeBackups(request *tidb.DescribeBackupsRequest) (*tid
     return jdResp, err
 }
 
-/* 查询 TiDB 数据迁移任务的信息 */
+/* 查询 TiDB 数据迁移任务的详细信息，例如任务的开始、完成时间，任务状态等等。 */
 func (c *TidbClient) DescribeDataMigration(request *tidb.DescribeDataMigrationRequest) (*tidb.DescribeDataMigrationResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -297,7 +297,7 @@ func (c *TidbClient) DescribeDataMigration(request *tidb.DescribeDataMigrationRe
     return jdResp, err
 }
 
-/* 删除一个TiDB实例 */
+/* 删除指定的 TiDB 实例。实例删除后，数据不可恢复，请谨慎使用。 */
 func (c *TidbClient) DeleteInstance(request *tidb.DeleteInstanceRequest) (*tidb.DeleteInstanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -317,7 +317,7 @@ func (c *TidbClient) DeleteInstance(request *tidb.DeleteInstanceRequest) (*tidb.
     return jdResp, err
 }
 
-/* 修改TiDB实例的配置参数。部分参数修改后，需要重启才能生效，具体可以参考PingCAP的相关文档 */
+/* 修改TiDB实例的配置参数。部分参数修改后，需要重启才能生效，具体可以参考PingCAP的相关文档。 */
 func (c *TidbClient) ModifyParameters(request *tidb.ModifyParametersRequest) (*tidb.ModifyParametersResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -337,7 +337,7 @@ func (c *TidbClient) ModifyParameters(request *tidb.ModifyParametersRequest) (*t
     return jdResp, err
 }
 
-/* 查询 TiDB 数据迁移任务的信息 */
+/* 创建一个数据迁移任务，可以将对象存储 OSS 中的数据导入到 TiDB 实例中，具体可以参考帮助文档。 */
 func (c *TidbClient) CreateDataMigration(request *tidb.CreateDataMigrationRequest) (*tidb.CreateDataMigrationResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -357,7 +357,7 @@ func (c *TidbClient) CreateDataMigration(request *tidb.CreateDataMigrationReques
     return jdResp, err
 }
 
-/* 查询实例列表 */
+/* 查询当前账号下所有的 TiDB 实例。 */
 func (c *TidbClient) DescribeInstances(request *tidb.DescribeInstancesRequest) (*tidb.DescribeInstancesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -377,7 +377,7 @@ func (c *TidbClient) DescribeInstances(request *tidb.DescribeInstancesRequest) (
     return jdResp, err
 }
 
-/* 增加白名单分组。 */
+/* 增加白名单分组，用于用户管理不同类型或者来源的 IP 白名单。 */
 func (c *TidbClient) AddWhiteListGroup(request *tidb.AddWhiteListGroupRequest) (*tidb.AddWhiteListGroupResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -397,7 +397,7 @@ func (c *TidbClient) AddWhiteListGroup(request *tidb.AddWhiteListGroupRequest) (
     return jdResp, err
 }
 
-/* 增加实例的节点数量。 */
+/* 修改 TiDB 实例中各类节点的数量。如果当前实例无TiFlash和TiCDC节点，那么在增加TiFlash和TiCDC节点数目时，可同时指定其规格。 */
 func (c *TidbClient) ModifyNodeNum(request *tidb.ModifyNodeNumRequest) (*tidb.ModifyNodeNumResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -417,7 +417,7 @@ func (c *TidbClient) ModifyNodeNum(request *tidb.ModifyNodeNumRequest) (*tidb.Mo
     return jdResp, err
 }
 
-/* 查看TiDB实例的配置参数 */
+/* 查看TiDB实例的主要配置参数。 */
 func (c *TidbClient) DescribeParameters(request *tidb.DescribeParametersRequest) (*tidb.DescribeParametersResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -437,7 +437,7 @@ func (c *TidbClient) DescribeParameters(request *tidb.DescribeParametersRequest)
     return jdResp, err
 }
 
-/* 查看某个实例下的账号信息 */
+/* 查看当前实例下的账号信息。 */
 func (c *TidbClient) DescribeAccounts(request *tidb.DescribeAccountsRequest) (*tidb.DescribeAccountsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -457,7 +457,7 @@ func (c *TidbClient) DescribeAccounts(request *tidb.DescribeAccountsRequest) (*t
     return jdResp, err
 }
 
-/* 开启TiDB服务的公网访问域名 */
+/* 开启 TiDB 实例的 Internet 公网服务。开启后，并配置 IP 白名单后，可以在 VPC 外通过公网域名访问 TiDB 实例。 */
 func (c *TidbClient) EnableInternetAccess(request *tidb.EnableInternetAccessRequest) (*tidb.EnableInternetAccessResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -477,7 +477,7 @@ func (c *TidbClient) EnableInternetAccess(request *tidb.EnableInternetAccessRequ
     return jdResp, err
 }
 
-/* 根据源实例全量备份创建一个新实例 */
+/* 创建一个新的 TiDB 实例，并将指定的备份恢复到该实例上。 */
 func (c *TidbClient) CreateInstanceFromBackup(request *tidb.CreateInstanceFromBackupRequest) (*tidb.CreateInstanceFromBackupResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -497,7 +497,7 @@ func (c *TidbClient) CreateInstanceFromBackup(request *tidb.CreateInstanceFromBa
     return jdResp, err
 }
 
-/* 修改实例规格，包含节点的水平扩容与垂直扩容 */
+/* 修改 TiDB 实例中各类节点中的数目与规格。支持 TiDB 节点和 Monitor 节点数目和规格的同时调整。 如果当前实例无 TiFlash 和 TiCDC 节点，那么在增加 TiFlash 和 TiCDC 节点数目时，可同时指定其规格。 */
 func (c *TidbClient) ModifyInstanceSpec(request *tidb.ModifyInstanceSpecRequest) (*tidb.ModifyInstanceSpecResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -537,7 +537,7 @@ func (c *TidbClient) DescribeWhiteList(request *tidb.DescribeWhiteListRequest) (
     return jdResp, err
 }
 
-/* 获取TiDB产品提供的所有版本 */
+/* 查询指定地域下 TiDB 服务支持的数据库版本。 */
 func (c *TidbClient) DescribeVersions(request *tidb.DescribeVersionsRequest) (*tidb.DescribeVersionsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -557,7 +557,7 @@ func (c *TidbClient) DescribeVersions(request *tidb.DescribeVersionsRequest) (*t
     return jdResp, err
 }
 
-/* 规格获取接口 */
+/* 获取各种 TiDB 节点支持的具体规格。 */
 func (c *TidbClient) DescribeInstanceClasses(request *tidb.DescribeInstanceClassesRequest) (*tidb.DescribeInstanceClassesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -597,7 +597,7 @@ func (c *TidbClient) ModifyWhiteList(request *tidb.ModifyWhiteListRequest) (*tid
     return jdResp, err
 }
 
-/* 删除复制任务 */
+/* 删除指定的复制任务。 */
 func (c *TidbClient) DeleteReplication(request *tidb.DeleteReplicationRequest) (*tidb.DeleteReplicationResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -617,7 +617,7 @@ func (c *TidbClient) DeleteReplication(request *tidb.DeleteReplicationRequest) (
     return jdResp, err
 }
 
-/* 创建数据库账号，用户可以使用客户端，应用程序等通过该账号和密码登录RDS数据库实例。 */
+/* 重置 TiDB 实例的高权限账号的密码。 */
 func (c *TidbClient) ResetPassword(request *tidb.ResetPasswordRequest) (*tidb.ResetPasswordResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -637,7 +637,7 @@ func (c *TidbClient) ResetPassword(request *tidb.ResetPasswordRequest) (*tidb.Re
     return jdResp, err
 }
 
-/* 重启实例的pod */
+/* 重启实例的某类节点。重启采用滚动重启的方式，如果该类节点有多个，通常不会中断实例的服务。 */
 func (c *TidbClient) RebootPod(request *tidb.RebootPodRequest) (*tidb.RebootPodResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -657,7 +657,7 @@ func (c *TidbClient) RebootPod(request *tidb.RebootPodRequest) (*tidb.RebootPodR
     return jdResp, err
 }
 
-/* 查看实例当前的备份备份策略。 */
+/* 查看实例当前的备份策略。 */
 func (c *TidbClient) DescribeBackupPolicy(request *tidb.DescribeBackupPolicyRequest) (*tidb.DescribeBackupPolicyResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -677,7 +677,7 @@ func (c *TidbClient) DescribeBackupPolicy(request *tidb.DescribeBackupPolicyRequ
     return jdResp, err
 }
 
-/* 创建一个TiDB实例 */
+/* 创建一个 TiDB 实例。创建时需要指定 TiDB 各类节点的数目，规格，存储空间等。 TiFlash和TiCDC节点在创建时不是必须的，可以在需要时，通过扩容的功能创建TiFlash和TiCDC节点。 */
 func (c *TidbClient) CreateInstance(request *tidb.CreateInstanceRequest) (*tidb.CreateInstanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -697,7 +697,7 @@ func (c *TidbClient) CreateInstance(request *tidb.CreateInstanceRequest) (*tidb.
     return jdResp, err
 }
 
-/* 查询TiDB实例的ssl状态 */
+/* 查询 TiDB 实例的 SSL 的开启状态。 */
 func (c *TidbClient) DescribeSSL(request *tidb.DescribeSSLRequest) (*tidb.DescribeSSLResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -717,7 +717,7 @@ func (c *TidbClient) DescribeSSL(request *tidb.DescribeSSLRequest) (*tidb.Descri
     return jdResp, err
 }
 
-/* 暂停复制任务 */
+/* 暂停指定的复制任务。注意：如果暂停的时间过长，会导致 TiCDC 节点的磁盘空间写满，导致复制任务错误或失败。 */
 func (c *TidbClient) StopReplication(request *tidb.StopReplicationRequest) (*tidb.StopReplicationResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -737,7 +737,7 @@ func (c *TidbClient) StopReplication(request *tidb.StopReplicationRequest) (*tid
     return jdResp, err
 }
 
-/* 关闭TiDB和MySQL客户端之间的SSL功能 */
+/* 关闭 TiDB 和 MySQL 客户端之间的 SSL 连接功能。 */
 func (c *TidbClient) DisableSSL(request *tidb.DisableSSLRequest) (*tidb.DisableSSLResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -757,7 +757,7 @@ func (c *TidbClient) DisableSSL(request *tidb.DisableSSLRequest) (*tidb.DisableS
     return jdResp, err
 }
 
-/* 创建一个TiCDC */
+/* 创建一个数据复制任务，可以将 TiDB 的增量数据同步到下游的 MySQL， TiDB 或者 Kafka 中。 */
 func (c *TidbClient) CreateReplication(request *tidb.CreateReplicationRequest) (*tidb.CreateReplicationResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -777,7 +777,7 @@ func (c *TidbClient) CreateReplication(request *tidb.CreateReplicationRequest) (
     return jdResp, err
 }
 
-/* 获取当前用户售罄信息 */
+/* 获取当前用户售罄信息。 */
 func (c *TidbClient) DescribeOrderableInstanceType(request *tidb.DescribeOrderableInstanceTypeRequest) (*tidb.DescribeOrderableInstanceTypeResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -797,7 +797,7 @@ func (c *TidbClient) DescribeOrderableInstanceType(request *tidb.DescribeOrderab
     return jdResp, err
 }
 
-/* 启动复制任务 */
+/* 继续处于“暂停”状态的复制任务。 */
 func (c *TidbClient) ResumeReplication(request *tidb.ResumeReplicationRequest) (*tidb.ResumeReplicationResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -817,7 +817,7 @@ func (c *TidbClient) ResumeReplication(request *tidb.ResumeReplicationRequest) (
     return jdResp, err
 }
 
-/* 开启TiDB和MySQL客户端之间的SSL功能 */
+/* 开启 TiDB 和 MySQL 客户端之间的 SSL 连接功能。 */
 func (c *TidbClient) EnableSSL(request *tidb.EnableSSLRequest) (*tidb.EnableSSLResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -837,7 +837,7 @@ func (c *TidbClient) EnableSSL(request *tidb.EnableSSLRequest) (*tidb.EnableSSLR
     return jdResp, err
 }
 
-/* 获取某个实例下的节点信息 */
+/* 获取某个实例下的所有节点的主要性能信息，如CPU，内存，存储空间等。 该性能信息从云监控获取，为上一个监控周期的数据。 */
 func (c *TidbClient) DescribeNodes(request *tidb.DescribeNodesRequest) (*tidb.DescribeNodesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -857,7 +857,7 @@ func (c *TidbClient) DescribeNodes(request *tidb.DescribeNodesRequest) (*tidb.De
     return jdResp, err
 }
 
-/* 删除TiDB的备份，仅允许删除用户生成的备份，系统自动备份不允许删除。 */
+/* 删除TiDB的备份，仅允许删除用户创建的备份，系统的自动备份不允许删除。 */
 func (c *TidbClient) DeleteBackup(request *tidb.DeleteBackupRequest) (*tidb.DeleteBackupResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -877,7 +877,7 @@ func (c *TidbClient) DeleteBackup(request *tidb.DeleteBackupRequest) (*tidb.Dele
     return jdResp, err
 }
 
-/* 查询 TiDB 实例的详细信息 */
+/* 查询 TiDB 实例的详细信息，例如TiDB的具体版本号，各个节点的规格、存储空间以及连接信息等等。 */
 func (c *TidbClient) DescribeInstanceAttributes(request *tidb.DescribeInstanceAttributesRequest) (*tidb.DescribeInstanceAttributesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -897,7 +897,7 @@ func (c *TidbClient) DescribeInstanceAttributes(request *tidb.DescribeInstanceAt
     return jdResp, err
 }
 
-/* 查询TiDB数据库的升级计划 */
+/* 查询当前 TiDB 实例的升级计划。 */
 func (c *TidbClient) DescribeUpgradePlan(request *tidb.DescribeUpgradePlanRequest) (*tidb.DescribeUpgradePlanResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -917,7 +917,7 @@ func (c *TidbClient) DescribeUpgradePlan(request *tidb.DescribeUpgradePlanReques
     return jdResp, err
 }
 
-/* 获取TiDB数据库可升级到的版本 */
+/* 获取当前 TiDB 实例可升级到的目标版本。 */
 func (c *TidbClient) DescribeUpgradeVersions(request *tidb.DescribeUpgradeVersionsRequest) (*tidb.DescribeUpgradeVersionsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")

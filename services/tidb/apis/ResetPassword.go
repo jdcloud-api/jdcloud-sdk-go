@@ -30,7 +30,7 @@ type ResetPasswordRequest struct {
     /* 实例ID  */
     InstanceId string `json:"instanceId"`
 
-    /* 账号名，在同一个实例中账号名不能重复  */
+    /* 账号名  */
     AccountName string `json:"accountName"`
 
     /* 新密码  */
@@ -40,7 +40,7 @@ type ResetPasswordRequest struct {
 /*
  * param regionId: 地域代码 (Required)
  * param instanceId: 实例ID (Required)
- * param accountName: 账号名，在同一个实例中账号名不能重复 (Required)
+ * param accountName: 账号名 (Required)
  * param accountPassword: 新密码 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -69,7 +69,7 @@ func NewResetPasswordRequest(
 /*
  * param regionId: 地域代码 (Required)
  * param instanceId: 实例ID (Required)
- * param accountName: 账号名，在同一个实例中账号名不能重复 (Required)
+ * param accountName: 账号名 (Required)
  * param accountPassword: 新密码 (Required)
  */
 func NewResetPasswordRequestWithAllParams(
@@ -114,7 +114,7 @@ func (r *ResetPasswordRequest) SetRegionId(regionId string) {
 func (r *ResetPasswordRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-/* param accountName: 账号名，在同一个实例中账号名不能重复(Required) */
+/* param accountName: 账号名(Required) */
 func (r *ResetPasswordRequest) SetAccountName(accountName string) {
     r.AccountName = accountName
 }
