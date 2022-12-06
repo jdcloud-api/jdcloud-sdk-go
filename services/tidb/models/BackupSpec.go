@@ -19,6 +19,6 @@ package models
 
 type BackupSpec struct {
 
-    /* 备份名称最长支持64个英文字符或等长的中文字符  */
+    /* 备份名称，最长支持64个英文字符或等长的中文字符  */
     BackupName string `json:"backupName"`
 }

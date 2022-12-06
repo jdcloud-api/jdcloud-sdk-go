@@ -31,14 +31,14 @@ type CreateReplicationRequest struct {
     /* 实例ID  */
     InstanceId string `json:"instanceId"`
 
-    /* 新建TiCDC复制任务  */
+    /* 数据复制任务的详细信息  */
     Replication *tidb.ReplicationSpec `json:"replication"`
 }
 
 /*
  * param regionId: 地域代码 (Required)
  * param instanceId: 实例ID (Required)
- * param replication: 新建TiCDC复制任务 (Required)
+ * param replication: 数据复制任务的详细信息 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -64,7 +64,7 @@ func NewCreateReplicationRequest(
 /*
  * param regionId: 地域代码 (Required)
  * param instanceId: 实例ID (Required)
- * param replication: 新建TiCDC复制任务 (Required)
+ * param replication: 数据复制任务的详细信息 (Required)
  */
 func NewCreateReplicationRequestWithAllParams(
     regionId string,
@@ -106,7 +106,7 @@ func (r *CreateReplicationRequest) SetRegionId(regionId string) {
 func (r *CreateReplicationRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-/* param replication: 新建TiCDC复制任务(Required) */
+/* param replication: 数据复制任务的详细信息(Required) */
 func (r *CreateReplicationRequest) SetReplication(replication *tidb.ReplicationSpec) {
     r.Replication = replication
 }
@@ -125,4 +125,5 @@ type CreateReplicationResponse struct {
 }
 
 type CreateReplicationResult struct {
+    ReplicationId string `json:"replicationId"`
 }

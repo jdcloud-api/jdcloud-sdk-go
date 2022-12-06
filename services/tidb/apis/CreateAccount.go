@@ -30,7 +30,7 @@ type CreateAccountRequest struct {
     /* 实例ID  */
     InstanceId string `json:"instanceId"`
 
-    /* 账号名，在同一个实例中，账号名不能重复  */
+    /* 账号名  */
     AccountName string `json:"accountName"`
 
     /* 密码  */
@@ -40,7 +40,7 @@ type CreateAccountRequest struct {
 /*
  * param regionId: 地域代码 (Required)
  * param instanceId: 实例ID (Required)
- * param accountName: 账号名，在同一个实例中，账号名不能重复 (Required)
+ * param accountName: 账号名 (Required)
  * param accountPassword: 密码 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -69,7 +69,7 @@ func NewCreateAccountRequest(
 /*
  * param regionId: 地域代码 (Required)
  * param instanceId: 实例ID (Required)
- * param accountName: 账号名，在同一个实例中，账号名不能重复 (Required)
+ * param accountName: 账号名 (Required)
  * param accountPassword: 密码 (Required)
  */
 func NewCreateAccountRequestWithAllParams(
@@ -114,7 +114,7 @@ func (r *CreateAccountRequest) SetRegionId(regionId string) {
 func (r *CreateAccountRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-/* param accountName: 账号名，在同一个实例中，账号名不能重复(Required) */
+/* param accountName: 账号名(Required) */
 func (r *CreateAccountRequest) SetAccountName(accountName string) {
     r.AccountName = accountName
 }

@@ -31,7 +31,7 @@ type CreateDataMigrationRequest struct {
     /* 实例ID  */
     InstanceId string `json:"instanceId"`
 
-    /* 迁移任务类型，支持以下类型（大小写不敏感）：-FULL_IMPORT:全量数据导入  */
+    /* 迁移任务类型，支持以下类型（大小写不敏感）：<br>-FULL_IMPORT:全量数据导入  */
     MigrationType string `json:"migrationType"`
 
     /* 使用 TiDB Lightning 进行的数据迁移任务  */
@@ -41,7 +41,7 @@ type CreateDataMigrationRequest struct {
 /*
  * param regionId: 地域代码 (Required)
  * param instanceId: 实例ID (Required)
- * param migrationType: 迁移任务类型，支持以下类型（大小写不敏感）：-FULL_IMPORT:全量数据导入 (Required)
+ * param migrationType: 迁移任务类型，支持以下类型（大小写不敏感）：<br>-FULL_IMPORT:全量数据导入 (Required)
  * param importTask: 使用 TiDB Lightning 进行的数据迁移任务 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -70,7 +70,7 @@ func NewCreateDataMigrationRequest(
 /*
  * param regionId: 地域代码 (Required)
  * param instanceId: 实例ID (Required)
- * param migrationType: 迁移任务类型，支持以下类型（大小写不敏感）：-FULL_IMPORT:全量数据导入 (Required)
+ * param migrationType: 迁移任务类型，支持以下类型（大小写不敏感）：<br>-FULL_IMPORT:全量数据导入 (Required)
  * param importTask: 使用 TiDB Lightning 进行的数据迁移任务 (Required)
  */
 func NewCreateDataMigrationRequestWithAllParams(
@@ -115,7 +115,7 @@ func (r *CreateDataMigrationRequest) SetRegionId(regionId string) {
 func (r *CreateDataMigrationRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-/* param migrationType: 迁移任务类型，支持以下类型（大小写不敏感）：-FULL_IMPORT:全量数据导入(Required) */
+/* param migrationType: 迁移任务类型，支持以下类型（大小写不敏感）：<br>-FULL_IMPORT:全量数据导入(Required) */
 func (r *CreateDataMigrationRequest) SetMigrationType(migrationType string) {
     r.MigrationType = migrationType
 }
