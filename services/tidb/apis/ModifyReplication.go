@@ -47,6 +47,9 @@ type ModifyReplicationRequest struct {
 
     /* Kafka的版本 (Optional) */
     KafkaVersion *string `json:"kafkaVersion"`
+
+    /* 过滤规则列表 (Optional) */
+    ReplicationObjects []string `json:"replicationObjects"`
 }
 
 /*
@@ -84,6 +87,7 @@ func NewModifyReplicationRequest(
  * param targetPassword: 目标类型为TiDB或MySQL时，连接目标实例的密码 (Optional)
  * param kafkaTopic: Kafka的Topic (Optional)
  * param kafkaVersion: Kafka的版本 (Optional)
+ * param replicationObjects: 过滤规则列表 (Optional)
  */
 func NewModifyReplicationRequestWithAllParams(
     regionId string,
@@ -94,6 +98,7 @@ func NewModifyReplicationRequestWithAllParams(
     targetPassword *string,
     kafkaTopic *string,
     kafkaVersion *string,
+    replicationObjects []string,
 ) *ModifyReplicationRequest {
 
     return &ModifyReplicationRequest{
@@ -111,6 +116,7 @@ func NewModifyReplicationRequestWithAllParams(
         TargetPassword: targetPassword,
         KafkaTopic: kafkaTopic,
         KafkaVersion: kafkaVersion,
+        ReplicationObjects: replicationObjects,
     }
 }
 
@@ -158,6 +164,10 @@ func (r *ModifyReplicationRequest) SetKafkaTopic(kafkaTopic string) {
 /* param kafkaVersion: Kafka的版本(Optional) */
 func (r *ModifyReplicationRequest) SetKafkaVersion(kafkaVersion string) {
     r.KafkaVersion = &kafkaVersion
+}
+/* param replicationObjects: 过滤规则列表(Optional) */
+func (r *ModifyReplicationRequest) SetReplicationObjects(replicationObjects []string) {
+    r.ReplicationObjects = replicationObjects
 }
 
 
