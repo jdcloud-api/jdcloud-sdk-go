@@ -28,6 +28,9 @@ type Flavor struct {
     /* 内存大小，单位GB (Optional) */
     MemoryGB int `json:"memoryGB"`
 
+    /* 默认存储规格，单位GB (Optional) */
+    DefaultStorageGB int `json:"defaultStorageGB"`
+
     /* 该规格支持的存储空间，单位GB (Optional) */
     StorageGB []int `json:"storageGB"`
 }

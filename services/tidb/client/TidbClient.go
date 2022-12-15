@@ -40,7 +40,7 @@ func NewTidbClient(credential *core.Credential) *TidbClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "tidb",
-            Revision:    "1.0.2",
+            Revision:    "1.0.4",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
