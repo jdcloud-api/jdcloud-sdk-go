@@ -40,7 +40,7 @@ func NewCdnClient(credential *core.Credential) *CdnClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "cdn",
-            Revision:    "0.10.36",
+            Revision:    "0.10.39",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -468,6 +468,26 @@ func (c *CdnClient) DisableWafWhiteRules(request *cdn.DisableWafWhiteRulesReques
     }
 
     jdResp := &cdn.DisableWafWhiteRulesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除封禁信息 */
+func (c *CdnClient) DeleteForbiddenInfoCommon(request *cdn.DeleteForbiddenInfoCommonRequest) (*cdn.DeleteForbiddenInfoCommonResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.DeleteForbiddenInfoCommonResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1808,6 +1828,26 @@ func (c *CdnClient) QueryDomainTempInstList(request *cdn.QueryDomainTempInstList
     }
 
     jdResp := &cdn.QueryDomainTempInstListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设置封禁 */
+func (c *CdnClient) CreateForbiddenInfoCommon(request *cdn.CreateForbiddenInfoCommonRequest) (*cdn.CreateForbiddenInfoCommonResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.CreateForbiddenInfoCommonResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -3328,6 +3368,26 @@ func (c *CdnClient) SetNetProtectionRules(request *cdn.SetNetProtectionRulesRequ
     }
 
     jdResp := &cdn.SetNetProtectionRulesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询封禁解封信息 */
+func (c *CdnClient) QueryForbiddenInfoListCommon(request *cdn.QueryForbiddenInfoListCommonRequest) (*cdn.QueryForbiddenInfoListCommonResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryForbiddenInfoListCommonResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
