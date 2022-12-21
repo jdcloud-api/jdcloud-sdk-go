@@ -93,11 +93,11 @@ func NewCreateProbeTaskRequestWithoutParam() *CreateProbeTaskRequest {
 func (r *CreateProbeTaskRequest) SetClientToken(clientToken string) {
     r.ClientToken = clientToken
 }
-
 /* param createProbeTaskSpec: (Required) */
 func (r *CreateProbeTaskRequest) SetCreateProbeTaskSpec(createProbeTaskSpec *detection.CreateProbeTaskParam) {
     r.CreateProbeTaskSpec = createProbeTaskSpec
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

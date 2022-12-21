@@ -81,6 +81,7 @@ func (r *ValidateSiteMonitorAddressRequest) SetAddress(address string) {
     r.Address = &address
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r ValidateSiteMonitorAddressRequest) GetRegionId() string {

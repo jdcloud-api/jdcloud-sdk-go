@@ -82,6 +82,7 @@ func (r *EnableSiteMonitorRequest) SetList(list []detection.EnableSiteMonitorReq
     r.List = list
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r EnableSiteMonitorRequest) GetRegionId() string {

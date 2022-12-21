@@ -71,6 +71,8 @@ func NewGetSiteMonitorSourceRequestWithoutParam() *GetSiteMonitorSourceRequest {
     }
 }
 
+
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r GetSiteMonitorSourceRequest) GetRegionId() string {

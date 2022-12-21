@@ -234,121 +234,99 @@ func NewTestSiteMonitorRequestWithoutParam() *TestSiteMonitorRequest {
 func (r *TestSiteMonitorRequest) SetAddress(address string) {
     r.Address = address
 }
-
 /* param advanceChecked: (Optional) */
 func (r *TestSiteMonitorRequest) SetAdvanceChecked(advanceChecked string) {
     r.AdvanceChecked = &advanceChecked
 }
-
 /* param createdTime: (Optional) */
 func (r *TestSiteMonitorRequest) SetCreatedTime(createdTime int64) {
     r.CreatedTime = &createdTime
 }
-
 /* param cycle: 探测频率(Required) */
 func (r *TestSiteMonitorRequest) SetCycle(cycle int64) {
     r.Cycle = cycle
 }
-
 /* param defaultSource: (Optional) */
 func (r *TestSiteMonitorRequest) SetDefaultSource(defaultSource string) {
     r.DefaultSource = &defaultSource
 }
-
 /* param dnsOption: (Optional) */
 func (r *TestSiteMonitorRequest) SetDnsOption(dnsOption *detection.SiteMonitorDnsOption) {
     r.DnsOption = dnsOption
 }
-
 /* param enabled: (Optional) */
 func (r *TestSiteMonitorRequest) SetEnabled(enabled string) {
     r.Enabled = &enabled
 }
-
 /* param ftpOption: (Optional) */
 func (r *TestSiteMonitorRequest) SetFtpOption(ftpOption *detection.SiteMonitorFtpOption) {
     r.FtpOption = ftpOption
 }
-
 /* param hawkeyeId: (Optional) */
 func (r *TestSiteMonitorRequest) SetHawkeyeId(hawkeyeId int64) {
     r.HawkeyeId = &hawkeyeId
 }
-
 /* param httpOption: (Optional) */
 func (r *TestSiteMonitorRequest) SetHttpOption(httpOption *detection.SiteMonitorHttpOption) {
     r.HttpOption = httpOption
 }
-
 /* param id: (Optional) */
 func (r *TestSiteMonitorRequest) SetId(id string) {
     r.Id = &id
 }
-
 /* param isDeleted: (Optional) */
 func (r *TestSiteMonitorRequest) SetIsDeleted(isDeleted string) {
     r.IsDeleted = &isDeleted
 }
-
 /* param name: 任务名称(Required) */
 func (r *TestSiteMonitorRequest) SetName(name string) {
     r.Name = name
 }
-
 /* param pin: (Optional) */
 func (r *TestSiteMonitorRequest) SetPin(pin string) {
     r.Pin = &pin
 }
-
 /* param pingOption: (Optional) */
 func (r *TestSiteMonitorRequest) SetPingOption(pingOption *detection.SiteMonitorPingOption) {
     r.PingOption = pingOption
 }
-
 /* param pop3Option: (Optional) */
 func (r *TestSiteMonitorRequest) SetPop3Option(pop3Option *detection.SiteMonitorPop3Option) {
     r.Pop3Option = pop3Option
 }
-
 /* param port: 端口(Optional) */
 func (r *TestSiteMonitorRequest) SetPort(port string) {
     r.Port = &port
 }
-
 /* param smtpOption: (Optional) */
 func (r *TestSiteMonitorRequest) SetSmtpOption(smtpOption *detection.SiteMonitorSmtpOption) {
     r.SmtpOption = smtpOption
 }
-
 /* param source: 探测源(Required) */
 func (r *TestSiteMonitorRequest) SetSource(source []detection.SiteMonitorSource) {
     r.Source = source
 }
-
 /* param stats: (Optional) */
 func (r *TestSiteMonitorRequest) SetStats(stats interface{}) {
     r.Stats = &stats
 }
-
 /* param taskType: 任务类型，可选值：HTTP、PING 、TCP 、UDP、DNS、SMTP、POP3和FTP(Required) */
 func (r *TestSiteMonitorRequest) SetTaskType(taskType string) {
     r.TaskType = taskType
 }
-
 /* param tcpOption: (Optional) */
 func (r *TestSiteMonitorRequest) SetTcpOption(tcpOption *detection.SiteMonitorTcpOption) {
     r.TcpOption = tcpOption
 }
-
 /* param udpOption: (Optional) */
 func (r *TestSiteMonitorRequest) SetUdpOption(udpOption *detection.SiteMonitorUdpOption) {
     r.UdpOption = udpOption
 }
-
 /* param updatedTime: (Optional) */
 func (r *TestSiteMonitorRequest) SetUpdatedTime(updatedTime int64) {
     r.UpdatedTime = &updatedTime
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

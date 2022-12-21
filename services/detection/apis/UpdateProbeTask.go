@@ -123,36 +123,31 @@ func NewUpdateProbeTaskRequestWithoutParam() *UpdateProbeTaskRequest {
 func (r *UpdateProbeTaskRequest) SetProbeTaskID(probeTaskID string) {
     r.ProbeTaskID = probeTaskID
 }
-
 /* param httpBody: http body：选择探测类型为1=http时有效，最长不超过1024字节(Optional) */
 func (r *UpdateProbeTaskRequest) SetHttpBody(httpBody string) {
     r.HttpBody = &httpBody
 }
-
 /* param httpCookie: http cookie：选择探测类型为1=http时有效，最大允许20个key、value对，最长不超过1024字节(Optional) */
 func (r *UpdateProbeTaskRequest) SetHttpCookie(httpCookie []detection.KeyValue) {
     r.HttpCookie = httpCookie
 }
-
 /* param httpHeader: http header：选择探测类型为1=http时有效，最大允许20个key、value对，最长不超过1024字节(Optional) */
 func (r *UpdateProbeTaskRequest) SetHttpHeader(httpHeader []detection.KeyValue) {
     r.HttpHeader = httpHeader
 }
-
 /* param httpType: http探测方法,可选值：1:get、2:post、3:head(Optional) */
 func (r *UpdateProbeTaskRequest) SetHttpType(httpType int64) {
     r.HttpType = &httpType
 }
-
 /* param name: task名称，不允许重复，长度不超过32字符，只允许中英文、数字、下划线_、中划线-, [0-9][a-z] [A-Z] [- _ ](Optional) */
 func (r *UpdateProbeTaskRequest) SetName(name string) {
     r.Name = &name
 }
-
 /* param probes: 探测源（发起对探测目标探测的云主机，需安装相应的agent才能探测）(Required) */
 func (r *UpdateProbeTaskRequest) SetProbes(probes []detection.Probe) {
     r.Probes = probes
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

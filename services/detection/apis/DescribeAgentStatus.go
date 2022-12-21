@@ -89,6 +89,7 @@ func (r *DescribeAgentStatusRequest) SetFilters(filters []detection.Filter) {
     r.Filters = filters
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r DescribeAgentStatusRequest) GetRegionId() string {

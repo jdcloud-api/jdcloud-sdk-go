@@ -82,6 +82,7 @@ func (r *DeleteSiteMonitorRequest) SetFilters(filters []detection.Filter) {
     r.Filters = filters
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r DeleteSiteMonitorRequest) GetRegionId() string {
