@@ -89,11 +89,11 @@ func NewProbeTaskEnableRequestWithoutParam() *ProbeTaskEnableRequest {
 func (r *ProbeTaskEnableRequest) SetEnabled(enabled bool) {
     r.Enabled = &enabled
 }
-
 /* param taskId: 要启用或禁用的探测任务的task_id列表，列表长度[1，100)(Required) */
 func (r *ProbeTaskEnableRequest) SetTaskId(taskId []string) {
     r.TaskId = taskId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

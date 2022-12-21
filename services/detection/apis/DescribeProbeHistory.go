@@ -105,21 +105,19 @@ func NewDescribeProbeHistoryRequestWithoutParam() *DescribeProbeHistoryRequest {
 func (r *DescribeProbeHistoryRequest) SetProbeTaskID(probeTaskID string) {
     r.ProbeTaskID = probeTaskID
 }
-
 /* param probeID: 探测源id，  id长度（0,50](Required) */
 func (r *DescribeProbeHistoryRequest) SetProbeID(probeID string) {
     r.ProbeID = probeID
 }
-
 /* param startTime: 查询时间范围的开始时间， UTC时间，格式：2016-12-11T00:00:00+0800（默认为当前时间往前三天，早于3d时，将被重置为3d）（注意在url中+要转译为%2B故url中为2016-12-11T00:00:00%2B0800）(Optional) */
 func (r *DescribeProbeHistoryRequest) SetStartTime(startTime string) {
     r.StartTime = &startTime
 }
-
 /* param endTime: 查询时间范围的结束时间， UTC时间，格式：2016-12-11T00:00:00+0800（为空时，默认为当前时间）（注意在url中+要转译为%2B故url中为2016-12-11T00:00:00%2B0800）(Optional) */
 func (r *DescribeProbeHistoryRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

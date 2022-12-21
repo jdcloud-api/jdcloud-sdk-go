@@ -93,16 +93,15 @@ func NewGetSiteMonitorDataPointsRequestWithoutParam() *GetSiteMonitorDataPointsR
 func (r *GetSiteMonitorDataPointsRequest) SetId(id string) {
     r.Id = &id
 }
-
 /* param startTime: (Optional) */
 func (r *GetSiteMonitorDataPointsRequest) SetStartTime(startTime string) {
     r.StartTime = &startTime
 }
-
 /* param endTime: (Optional) */
 func (r *GetSiteMonitorDataPointsRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

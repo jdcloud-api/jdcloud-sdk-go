@@ -85,6 +85,7 @@ func (r *DescribeProbeTaskRequest) SetProbeTaskID(probeTaskID string) {
     r.ProbeTaskID = probeTaskID
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r DescribeProbeTaskRequest) GetRegionId() string {

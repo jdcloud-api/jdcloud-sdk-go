@@ -102,21 +102,19 @@ func NewDescribeMetricDataAmRequestWithoutParam() *DescribeMetricDataAmRequest {
 func (r *DescribeMetricDataAmRequest) SetResourceId(resourceId string) {
     r.ResourceId = resourceId
 }
-
 /* param startTime: 查询时间范围的开始时间， UTC时间，格式：2016-12-11T00:00:00+0800（早于30d时，将被重置为30d）（注意在url中+要转译为%2B故url中为2016-12-11T00:00:00%2B0800）(Optional) */
 func (r *DescribeMetricDataAmRequest) SetStartTime(startTime string) {
     r.StartTime = &startTime
 }
-
 /* param endTime: 查询时间范围的结束时间， UTC时间，格式：2016-12-11T00:00:00+0800（为空时，将由startTime与timeInterval计算得出）（注意在url中+要转译为%2B故url中为2016-12-11T00:00:00%2B0800）(Optional) */
 func (r *DescribeMetricDataAmRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
-
 /* param timeInterval: 时间间隔：1h，6h，12h，1d，3d，7d，14d，固定时间间隔，timeInterval 与 endTime 至少填一项(Optional) */
 func (r *DescribeMetricDataAmRequest) SetTimeInterval(timeInterval string) {
     r.TimeInterval = &timeInterval
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

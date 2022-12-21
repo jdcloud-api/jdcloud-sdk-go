@@ -135,51 +135,43 @@ func NewGetSiteMonitorRequestWithoutParam() *GetSiteMonitorRequest {
 func (r *GetSiteMonitorRequest) SetNameOrAddr(nameOrAddr string) {
     r.NameOrAddr = &nameOrAddr
 }
-
 /* param name: (Optional) */
 func (r *GetSiteMonitorRequest) SetName(name string) {
     r.Name = &name
 }
-
 /* param id: (Optional) */
 func (r *GetSiteMonitorRequest) SetId(id []string) {
     r.Id = id
 }
-
 /* param taskType: (Optional) */
 func (r *GetSiteMonitorRequest) SetTaskType(taskType string) {
     r.TaskType = &taskType
 }
-
 /* param pageNumber: (Optional) */
 func (r *GetSiteMonitorRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: (Optional) */
 func (r *GetSiteMonitorRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param withStats: (Optional) */
 func (r *GetSiteMonitorRequest) SetWithStats(withStats string) {
     r.WithStats = &withStats
 }
-
 /* param withDeleted: 1:包含删除对象，默认：0(Optional) */
 func (r *GetSiteMonitorRequest) SetWithDeleted(withDeleted string) {
     r.WithDeleted = &withDeleted
 }
-
 /* param timeInterval: 查询的可用率、响应时间的时间间隔，最大不超过30天，支持分钟级别,小时级别，天级别，例如：1m、1h、1d(Optional) */
 func (r *GetSiteMonitorRequest) SetTimeInterval(timeInterval string) {
     r.TimeInterval = &timeInterval
 }
-
 /* param filters: name为'id' - 站点监控id(Optional) */
 func (r *GetSiteMonitorRequest) SetFilters(filters []detection.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

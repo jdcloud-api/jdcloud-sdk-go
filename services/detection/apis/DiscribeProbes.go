@@ -90,11 +90,11 @@ func NewDiscribeProbesRequestWithoutParam() *DiscribeProbesRequest {
 func (r *DiscribeProbesRequest) SetProbeTaskID(probeTaskID string) {
     r.ProbeTaskID = probeTaskID
 }
-
 /* param filters: 自定义标签(Optional) */
 func (r *DiscribeProbesRequest) SetFilters(filters []detection.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

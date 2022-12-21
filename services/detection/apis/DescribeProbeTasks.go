@@ -131,47 +131,40 @@ func NewDescribeProbeTasksRequestWithoutParam() *DescribeProbeTasksRequest {
 func (r *DescribeProbeTasksRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 页面大小，默认为20；取值范围[1, 100](Optional) */
 func (r *DescribeProbeTasksRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param name: 根据探测任务的名称查询，支持模糊查询(Optional) */
 func (r *DescribeProbeTasksRequest) SetName(name string) {
     r.Name = &name
 }
-
 /* param type_: 根据探测任务的类型查询，1、http 2、telnet(Optional) */
 func (r *DescribeProbeTasksRequest) SetType(type_ int) {
     r.Type = &type_
 }
-
 /* param timeInterval: 查询的可用率、响应时间的时间间隔，为空时默认查询最新点,最大不超过30天，支持分钟级别,小时级别，天级别，例如：1m、1h、1d(Optional) */
 func (r *DescribeProbeTasksRequest) SetTimeInterval(timeInterval string) {
     r.TimeInterval = &timeInterval
 }
-
 /* param withStats: 是否查询可用率、响应时间(Optional) */
 func (r *DescribeProbeTasksRequest) SetWithStats(withStats bool) {
     r.WithStats = &withStats
 }
-
 /* param withDeleted: 是否包含被删除的task(Optional) */
 func (r *DescribeProbeTasksRequest) SetWithDeleted(withDeleted bool) {
     r.WithDeleted = &withDeleted
 }
-
 /* param enabled: 任务状态：1为启用，0为禁用。默认为查所有的(Optional) */
 func (r *DescribeProbeTasksRequest) SetEnabled(enabled int) {
     r.Enabled = &enabled
 }
-
 /* param filters: taskId - taskId，精确匹配，支持多个
 name - task名称或探测地址，糊模匹配，支持单个(Optional) */
 func (r *DescribeProbeTasksRequest) SetFilters(filters []detection.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
