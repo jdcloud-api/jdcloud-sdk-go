@@ -20,7 +20,7 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type ModifyCacheInstanceClassRequest struct {
+type ClientKillRequest struct {
 
     core.JDCloudRequest
 
@@ -30,78 +30,99 @@ type ModifyCacheInstanceClassRequest struct {
     /* 缓存Redis实例ID，是访问实例的唯一标识  */
     CacheInstanceId string `json:"cacheInstanceId"`
 
-    /* 新规格  */
-    CacheInstanceClass string `json:"cacheInstanceClass"`
+    /* 关闭属性, 支持addr/type/db三种属性
+addr - 根据客户端地址关闭连接
+type - 根据链接类型关闭连接
+db - 根据db关闭连接
+  */
+    Option string `json:"option"`
 
-    /* 自定义分片数，只对自定义分片规格实例有效 (Optional) */
-    ShardNumber *int `json:"shardNumber"`
-
-    /* 是否开启4.0集群并行变配 (Optional) */
-    Parallel *bool `json:"parallel"`
+    /* 筛选条件
+属性是addr时 - ip:port, port空表示此ip所有port
+属性是type时 - 支持normal/pubsub/all三种条件
+属性是db时 - db列表, 0,1,2..
+  */
+    Value string `json:"value"`
 }
 
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
- * param cacheInstanceClass: 新规格 (Required)
+ * param option: 关闭属性, 支持addr/type/db三种属性
+addr - 根据客户端地址关闭连接
+type - 根据链接类型关闭连接
+db - 根据db关闭连接
+ (Required)
+ * param value: 筛选条件
+属性是addr时 - ip:port, port空表示此ip所有port
+属性是type时 - 支持normal/pubsub/all三种条件
+属性是db时 - db列表, 0,1,2..
+ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewModifyCacheInstanceClassRequest(
+func NewClientKillRequest(
     regionId string,
     cacheInstanceId string,
-    cacheInstanceClass string,
-) *ModifyCacheInstanceClassRequest {
+    option string,
+    value string,
+) *ClientKillRequest {
 
-	return &ModifyCacheInstanceClassRequest{
+	return &ClientKillRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}:modifyCacheInstanceClass",
+			URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/clientKill",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         CacheInstanceId: cacheInstanceId,
-        CacheInstanceClass: cacheInstanceClass,
+        Option: option,
+        Value: value,
 	}
 }
 
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
- * param cacheInstanceClass: 新规格 (Required)
- * param shardNumber: 自定义分片数，只对自定义分片规格实例有效 (Optional)
- * param parallel: 是否开启4.0集群并行变配 (Optional)
+ * param option: 关闭属性, 支持addr/type/db三种属性
+addr - 根据客户端地址关闭连接
+type - 根据链接类型关闭连接
+db - 根据db关闭连接
+ (Required)
+ * param value: 筛选条件
+属性是addr时 - ip:port, port空表示此ip所有port
+属性是type时 - 支持normal/pubsub/all三种条件
+属性是db时 - db列表, 0,1,2..
+ (Required)
  */
-func NewModifyCacheInstanceClassRequestWithAllParams(
+func NewClientKillRequestWithAllParams(
     regionId string,
     cacheInstanceId string,
-    cacheInstanceClass string,
-    shardNumber *int,
-    parallel *bool,
-) *ModifyCacheInstanceClassRequest {
+    option string,
+    value string,
+) *ClientKillRequest {
 
-    return &ModifyCacheInstanceClassRequest{
+    return &ClientKillRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}:modifyCacheInstanceClass",
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/clientKill",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         CacheInstanceId: cacheInstanceId,
-        CacheInstanceClass: cacheInstanceClass,
-        ShardNumber: shardNumber,
-        Parallel: parallel,
+        Option: option,
+        Value: value,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewModifyCacheInstanceClassRequestWithoutParam() *ModifyCacheInstanceClassRequest {
+func NewClientKillRequestWithoutParam() *ClientKillRequest {
 
-    return &ModifyCacheInstanceClassRequest{
+    return &ClientKillRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}:modifyCacheInstanceClass",
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/clientKill",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -110,40 +131,42 @@ func NewModifyCacheInstanceClassRequestWithoutParam() *ModifyCacheInstanceClassR
 }
 
 /* param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2(Required) */
-func (r *ModifyCacheInstanceClassRequest) SetRegionId(regionId string) {
+func (r *ClientKillRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
-func (r *ModifyCacheInstanceClassRequest) SetCacheInstanceId(cacheInstanceId string) {
+func (r *ClientKillRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
-/* param cacheInstanceClass: 新规格(Required) */
-func (r *ModifyCacheInstanceClassRequest) SetCacheInstanceClass(cacheInstanceClass string) {
-    r.CacheInstanceClass = cacheInstanceClass
+/* param option: 关闭属性, 支持addr/type/db三种属性
+addr - 根据客户端地址关闭连接
+type - 根据链接类型关闭连接
+db - 根据db关闭连接
+(Required) */
+func (r *ClientKillRequest) SetOption(option string) {
+    r.Option = option
 }
-/* param shardNumber: 自定义分片数，只对自定义分片规格实例有效(Optional) */
-func (r *ModifyCacheInstanceClassRequest) SetShardNumber(shardNumber int) {
-    r.ShardNumber = &shardNumber
-}
-/* param parallel: 是否开启4.0集群并行变配(Optional) */
-func (r *ModifyCacheInstanceClassRequest) SetParallel(parallel bool) {
-    r.Parallel = &parallel
+/* param value: 筛选条件
+属性是addr时 - ip:port, port空表示此ip所有port
+属性是type时 - 支持normal/pubsub/all三种条件
+属性是db时 - db列表, 0,1,2..
+(Required) */
+func (r *ClientKillRequest) SetValue(value string) {
+    r.Value = value
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r ModifyCacheInstanceClassRequest) GetRegionId() string {
+func (r ClientKillRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type ModifyCacheInstanceClassResponse struct {
+type ClientKillResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result ModifyCacheInstanceClassResult `json:"result"`
+    Result ClientKillResult `json:"result"`
 }
 
-type ModifyCacheInstanceClassResult struct {
-    OrderNum string `json:"orderNum"`
-    BuyId string `json:"buyId"`
+type ClientKillResult struct {
 }

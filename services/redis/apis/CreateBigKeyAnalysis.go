@@ -47,6 +47,9 @@ type CreateBigKeyAnalysisRequest struct {
 
     /* top值，范围10~1000 (Optional) */
     Top *int `json:"top"`
+
+    /* 计算大key的方式。若为“elementCounts”，则使用元素个数计算大key；若为“memorySize”，则使用内存大小计算大key。默认为“elementCounts”。 (Optional) */
+    SizeMode *string `json:"sizeMode"`
 }
 
 /*
@@ -81,6 +84,7 @@ func NewCreateBigKeyAnalysisRequest(
  * param setSize: Set类型阈值 (Optional)
  * param zsetSize: Zset类型阈值 (Optional)
  * param top: top值，范围10~1000 (Optional)
+ * param sizeMode: 计算大key的方式。若为“elementCounts”，则使用元素个数计算大key；若为“memorySize”，则使用内存大小计算大key。默认为“elementCounts”。 (Optional)
  */
 func NewCreateBigKeyAnalysisRequestWithAllParams(
     regionId string,
@@ -91,6 +95,7 @@ func NewCreateBigKeyAnalysisRequestWithAllParams(
     setSize *int,
     zsetSize *int,
     top *int,
+    sizeMode *string,
 ) *CreateBigKeyAnalysisRequest {
 
     return &CreateBigKeyAnalysisRequest{
@@ -108,6 +113,7 @@ func NewCreateBigKeyAnalysisRequestWithAllParams(
         SetSize: setSize,
         ZsetSize: zsetSize,
         Top: top,
+        SizeMode: sizeMode,
     }
 }
 
@@ -155,6 +161,10 @@ func (r *CreateBigKeyAnalysisRequest) SetZsetSize(zsetSize int) {
 /* param top: top值，范围10~1000(Optional) */
 func (r *CreateBigKeyAnalysisRequest) SetTop(top int) {
     r.Top = &top
+}
+/* param sizeMode: 计算大key的方式。若为“elementCounts”，则使用元素个数计算大key；若为“memorySize”，则使用内存大小计算大key。默认为“elementCounts”。(Optional) */
+func (r *CreateBigKeyAnalysisRequest) SetSizeMode(sizeMode string) {
+    r.SizeMode = &sizeMode
 }
 
 

@@ -41,8 +41,8 @@ type RedisNode struct {
     Slots int `json:"slots"`
 
     /* 节点已使用内存，单位Byte (Optional) */
-    UsedMemory int `json:"usedMemory"`
+    UsedMemory int64 `json:"usedMemory"`
 
     /* 节点总内存，单位Byte (Optional) */
-    MaxMemory int `json:"maxMemory"`
+    MaxMemory int64 `json:"maxMemory"`
 }

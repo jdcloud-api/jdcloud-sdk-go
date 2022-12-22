@@ -65,6 +65,9 @@ type CacheInstance struct {
     /* 连接实例时，是否需要密码认证，false表示无密码 (Optional) */
     Auth bool `json:"auth"`
 
+    /* 实例是否允许修改为免密 (Optional) */
+    IsAllowNoAuth bool `json:"isAllowNoAuth"`
+
     /* 创建实例时选择的引擎版本：目前支持2.8和4.0 (Optional) */
     RedisVersion string `json:"redisVersion"`
 
