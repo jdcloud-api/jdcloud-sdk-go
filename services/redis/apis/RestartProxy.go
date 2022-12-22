@@ -20,7 +20,7 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type ModifyCacheInstanceClassRequest struct {
+type RestartProxyRequest struct {
 
     core.JDCloudRequest
 
@@ -30,78 +30,66 @@ type ModifyCacheInstanceClassRequest struct {
     /* 缓存Redis实例ID，是访问实例的唯一标识  */
     CacheInstanceId string `json:"cacheInstanceId"`
 
-    /* 新规格  */
-    CacheInstanceClass string `json:"cacheInstanceClass"`
-
-    /* 自定义分片数，只对自定义分片规格实例有效 (Optional) */
-    ShardNumber *int `json:"shardNumber"`
-
-    /* 是否开启4.0集群并行变配 (Optional) */
-    Parallel *bool `json:"parallel"`
+    /* proxy节点id列表  */
+    ProxyIds []int `json:"proxyIds"`
 }
 
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
- * param cacheInstanceClass: 新规格 (Required)
+ * param proxyIds: proxy节点id列表 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewModifyCacheInstanceClassRequest(
+func NewRestartProxyRequest(
     regionId string,
     cacheInstanceId string,
-    cacheInstanceClass string,
-) *ModifyCacheInstanceClassRequest {
+    proxyIds []int,
+) *RestartProxyRequest {
 
-	return &ModifyCacheInstanceClassRequest{
+	return &RestartProxyRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}:modifyCacheInstanceClass",
+			URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/restartProxy",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         CacheInstanceId: cacheInstanceId,
-        CacheInstanceClass: cacheInstanceClass,
+        ProxyIds: proxyIds,
 	}
 }
 
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
- * param cacheInstanceClass: 新规格 (Required)
- * param shardNumber: 自定义分片数，只对自定义分片规格实例有效 (Optional)
- * param parallel: 是否开启4.0集群并行变配 (Optional)
+ * param proxyIds: proxy节点id列表 (Required)
  */
-func NewModifyCacheInstanceClassRequestWithAllParams(
+func NewRestartProxyRequestWithAllParams(
     regionId string,
     cacheInstanceId string,
-    cacheInstanceClass string,
-    shardNumber *int,
-    parallel *bool,
-) *ModifyCacheInstanceClassRequest {
+    proxyIds []int,
+) *RestartProxyRequest {
 
-    return &ModifyCacheInstanceClassRequest{
+    return &RestartProxyRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}:modifyCacheInstanceClass",
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/restartProxy",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         CacheInstanceId: cacheInstanceId,
-        CacheInstanceClass: cacheInstanceClass,
-        ShardNumber: shardNumber,
-        Parallel: parallel,
+        ProxyIds: proxyIds,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewModifyCacheInstanceClassRequestWithoutParam() *ModifyCacheInstanceClassRequest {
+func NewRestartProxyRequestWithoutParam() *RestartProxyRequest {
 
-    return &ModifyCacheInstanceClassRequest{
+    return &RestartProxyRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}:modifyCacheInstanceClass",
+            URL:     "/regions/{regionId}/cacheInstance/{cacheInstanceId}/restartProxy",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -110,40 +98,30 @@ func NewModifyCacheInstanceClassRequestWithoutParam() *ModifyCacheInstanceClassR
 }
 
 /* param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2(Required) */
-func (r *ModifyCacheInstanceClassRequest) SetRegionId(regionId string) {
+func (r *RestartProxyRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
-func (r *ModifyCacheInstanceClassRequest) SetCacheInstanceId(cacheInstanceId string) {
+func (r *RestartProxyRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
-/* param cacheInstanceClass: 新规格(Required) */
-func (r *ModifyCacheInstanceClassRequest) SetCacheInstanceClass(cacheInstanceClass string) {
-    r.CacheInstanceClass = cacheInstanceClass
-}
-/* param shardNumber: 自定义分片数，只对自定义分片规格实例有效(Optional) */
-func (r *ModifyCacheInstanceClassRequest) SetShardNumber(shardNumber int) {
-    r.ShardNumber = &shardNumber
-}
-/* param parallel: 是否开启4.0集群并行变配(Optional) */
-func (r *ModifyCacheInstanceClassRequest) SetParallel(parallel bool) {
-    r.Parallel = &parallel
+/* param proxyIds: proxy节点id列表(Required) */
+func (r *RestartProxyRequest) SetProxyIds(proxyIds []int) {
+    r.ProxyIds = proxyIds
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r ModifyCacheInstanceClassRequest) GetRegionId() string {
+func (r RestartProxyRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type ModifyCacheInstanceClassResponse struct {
+type RestartProxyResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result ModifyCacheInstanceClassResult `json:"result"`
+    Result RestartProxyResult `json:"result"`
 }
 
-type ModifyCacheInstanceClassResult struct {
-    OrderNum string `json:"orderNum"`
-    BuyId string `json:"buyId"`
+type RestartProxyResult struct {
 }

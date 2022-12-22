@@ -27,4 +27,7 @@ type RedisHotKey struct {
 
     /* 访问频率  */
     AccessCount int `json:"accessCount"`
+
+    /* key所在的db号 (Optional) */
+    Db int `json:"db"`
 }

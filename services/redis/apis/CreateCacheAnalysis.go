@@ -29,6 +29,9 @@ type CreateCacheAnalysisRequest struct {
 
     /* 缓存Redis实例ID，是访问实例的唯一标识  */
     CacheInstanceId string `json:"cacheInstanceId"`
+
+    /* 计算大key的方式。若为elementCounts，则使用元素个数计算大key；若为memorySize，则使用内存大小计算大key。默认为memorySize。 (Optional) */
+    SizeMode *string `json:"sizeMode"`
 }
 
 /*
@@ -57,10 +60,12 @@ func NewCreateCacheAnalysisRequest(
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
+ * param sizeMode: 计算大key的方式。若为elementCounts，则使用元素个数计算大key；若为memorySize，则使用内存大小计算大key。默认为memorySize。 (Optional)
  */
 func NewCreateCacheAnalysisRequestWithAllParams(
     regionId string,
     cacheInstanceId string,
+    sizeMode *string,
 ) *CreateCacheAnalysisRequest {
 
     return &CreateCacheAnalysisRequest{
@@ -72,6 +77,7 @@ func NewCreateCacheAnalysisRequestWithAllParams(
         },
         RegionId: regionId,
         CacheInstanceId: cacheInstanceId,
+        SizeMode: sizeMode,
     }
 }
 
@@ -95,6 +101,10 @@ func (r *CreateCacheAnalysisRequest) SetRegionId(regionId string) {
 /* param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识(Required) */
 func (r *CreateCacheAnalysisRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
+}
+/* param sizeMode: 计算大key的方式。若为elementCounts，则使用元素个数计算大key；若为memorySize，则使用内存大小计算大key。默认为memorySize。(Optional) */
+func (r *CreateCacheAnalysisRequest) SetSizeMode(sizeMode string) {
+    r.SizeMode = &sizeMode
 }
 
 

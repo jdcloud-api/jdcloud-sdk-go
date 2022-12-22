@@ -40,7 +40,7 @@ func NewRedisClient(credential *core.Credential) *RedisClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "redis",
-            Revision:    "2.6.24",
+            Revision:    "2.6.32",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -958,6 +958,47 @@ func (c *RedisClient) DescribeBigKeyDetail2(request *redis.DescribeBigKeyDetail2
     return jdResp, err
 }
 
+/* 查询缓存Red4.0实例是否支持新变配功能，是否支持并行变配, 变配需要的IP数量及变配预估时间
+ */
+func (c *RedisClient) DescribeResizeModeIpTimeInfo(request *redis.DescribeResizeModeIpTimeInfoRequest) (*redis.DescribeResizeModeIpTimeInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &redis.DescribeResizeModeIpTimeInfoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 关闭4.0实例客户端连接 */
+func (c *RedisClient) ClientKill(request *redis.ClientKillRequest) (*redis.ClientKillResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &redis.ClientKillResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 获取自动缓存分析时间 */
 func (c *RedisClient) DescribeAnalysisTime(request *redis.DescribeAnalysisTimeRequest) (*redis.DescribeAnalysisTimeResponse, error) {
     if request == nil {
@@ -1133,6 +1174,26 @@ func (c *RedisClient) DeleteCacheInstance(request *redis.DeleteCacheInstanceRequ
     }
 
     jdResp := &redis.DeleteCacheInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 重启4.0实例代理 */
+func (c *RedisClient) RestartProxy(request *redis.RestartProxyRequest) (*redis.RestartProxyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &redis.RestartProxyResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
