@@ -40,7 +40,7 @@ func NewCdnClient(credential *core.Credential) *CdnClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "cdn",
-            Revision:    "0.10.39",
+            Revision:    "0.10.40",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -108,6 +108,26 @@ func (c *CdnClient) QueryDeviceStatusForPCdn(request *cdn.QueryDeviceStatusForPC
     }
 
     jdResp := &cdn.QueryDeviceStatusForPCdnResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 批量域名查询日志-pin维度 */
+func (c *CdnClient) QueryDomainsLogForJd(request *cdn.QueryDomainsLogForJdRequest) (*cdn.QueryDomainsLogForJdResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryDomainsLogForJdResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
