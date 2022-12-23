@@ -84,6 +84,7 @@ func (r *DownloadTemplatesRequest) SetTemplateId(templateId string) {
     r.TemplateId = templateId
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r DownloadTemplatesRequest) GetRegionId() string {

@@ -84,6 +84,7 @@ func (r *DeleteStampRequest) SetStampId(stampId string) {
     r.StampId = stampId
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r DeleteStampRequest) GetRegionId() string {

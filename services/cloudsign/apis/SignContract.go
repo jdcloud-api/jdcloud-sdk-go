@@ -85,6 +85,7 @@ func (r *SignContractRequest) SetContractSpec(contractSpec *cloudsign.ContractSp
     r.ContractSpec = contractSpec
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r SignContractRequest) GetRegionId() string {

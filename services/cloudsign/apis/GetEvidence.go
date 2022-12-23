@@ -21,58 +21,67 @@ import (
     cloudsign "github.com/jdcloud-api/jdcloud-sdk-go/services/cloudsign/models"
 )
 
-type DownloadContractsRequest struct {
+type GetEvidenceRequest struct {
 
     core.JDCloudRequest
 
-    /* 合同ID  */
-    ContractId string `json:"contractId"`
+    /* 业务流水号  */
+    BusinessId string `json:"businessId"`
+
+    /* 存证编号  */
+    EvidenceId string `json:"evidenceId"`
 }
 
 /*
- * param contractId: 合同ID (Required)
+ * param businessId: 业务流水号 (Required)
+ * param evidenceId: 存证编号 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDownloadContractsRequest(
-    contractId string,
-) *DownloadContractsRequest {
+func NewGetEvidenceRequest(
+    businessId string,
+    evidenceId string,
+) *GetEvidenceRequest {
 
-	return &DownloadContractsRequest{
+	return &GetEvidenceRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/contract/{contractId}",
+			URL:     "/evidence:evidenceGetEvidence",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
-        ContractId: contractId,
+        BusinessId: businessId,
+        EvidenceId: evidenceId,
 	}
 }
 
 /*
- * param contractId: 合同ID (Required)
+ * param businessId: 业务流水号 (Required)
+ * param evidenceId: 存证编号 (Required)
  */
-func NewDownloadContractsRequestWithAllParams(
-    contractId string,
-) *DownloadContractsRequest {
+func NewGetEvidenceRequestWithAllParams(
+    businessId string,
+    evidenceId string,
+) *GetEvidenceRequest {
 
-    return &DownloadContractsRequest{
+    return &GetEvidenceRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/contract/{contractId}",
+            URL:     "/evidence:evidenceGetEvidence",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
-        ContractId: contractId,
+        BusinessId: businessId,
+        EvidenceId: evidenceId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDownloadContractsRequestWithoutParam() *DownloadContractsRequest {
+func NewGetEvidenceRequestWithoutParam() *GetEvidenceRequest {
 
-    return &DownloadContractsRequest{
+    return &GetEvidenceRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/contract/{contractId}",
+            URL:     "/evidence:evidenceGetEvidence",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -80,25 +89,31 @@ func NewDownloadContractsRequestWithoutParam() *DownloadContractsRequest {
     }
 }
 
-/* param contractId: 合同ID(Required) */
-func (r *DownloadContractsRequest) SetContractId(contractId string) {
-    r.ContractId = contractId
+/* param businessId: 业务流水号(Required) */
+func (r *GetEvidenceRequest) SetBusinessId(businessId string) {
+    r.BusinessId = businessId
+}
+/* param evidenceId: 存证编号(Required) */
+func (r *GetEvidenceRequest) SetEvidenceId(evidenceId string) {
+    r.EvidenceId = evidenceId
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DownloadContractsRequest) GetRegionId() string {
+func (r GetEvidenceRequest) GetRegionId() string {
     return ""
 }
 
-type DownloadContractsResponse struct {
+type GetEvidenceResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DownloadContractsResult `json:"result"`
+    Result GetEvidenceResult `json:"result"`
 }
 
-type DownloadContractsResult struct {
-    ContractList []cloudsign.ContractInfo `json:"contractList"`
-    TotalCount int `json:"totalCount"`
+type GetEvidenceResult struct {
+    Code string `json:"code"`
+    Message string `json:"message"`
+    Success bool `json:"success"`
+    Data cloudsign.GetEvidenceResp `json:"data"`
 }

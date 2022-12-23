@@ -84,6 +84,7 @@ func (r *DeleteTemplateRequest) SetTemplateId(templateId string) {
     r.TemplateId = templateId
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r DeleteTemplateRequest) GetRegionId() string {

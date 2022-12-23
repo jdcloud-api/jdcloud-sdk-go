@@ -70,6 +70,8 @@ func NewEnableContractSaveRequestWithoutParam() *EnableContractSaveRequest {
     }
 }
 
+
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r EnableContractSaveRequest) GetRegionId() string {

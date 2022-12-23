@@ -93,16 +93,15 @@ func NewDescribeContractListRequestWithoutParam() *DescribeContractListRequest {
 func (r *DescribeContractListRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小, 默认为10, 取值范围[10, 100](Optional) */
 func (r *DescribeContractListRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param contractTitle: 合同标题(Optional) */
 func (r *DescribeContractListRequest) SetContractTitle(contractTitle string) {
     r.ContractTitle = &contractTitle
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

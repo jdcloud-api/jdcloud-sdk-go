@@ -40,7 +40,7 @@ func NewCloudsignClient(credential *core.Credential) *CloudsignClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "cloudsign",
-            Revision:    "1.1.2",
+            Revision:    "2.0.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -55,6 +55,26 @@ func (c *CloudsignClient) SetLogger(logger core.Logger) {
 
 func (c *CloudsignClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
+}
+
+/* 带主体标记的取证接口 */
+func (c *CloudsignClient) GetMultiEvidence(request *cloudsign.GetMultiEvidenceRequest) (*cloudsign.GetMultiEvidenceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cloudsign.GetMultiEvidenceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
 }
 
 /* 查询服务开通状态 */
@@ -199,6 +219,26 @@ func (c *CloudsignClient) PaddingTemplate(request *cloudsign.PaddingTemplateRequ
     return jdResp, err
 }
 
+/* 多证据链存证接口 */
+func (c *CloudsignClient) SaveMultiEvidence(request *cloudsign.SaveMultiEvidenceRequest) (*cloudsign.SaveMultiEvidenceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cloudsign.SaveMultiEvidenceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 合同签章四种方式：
 1. 合同文件 + 印章文件：contractContent + stampContent
 2. 合同文件 + 印章ID：contractContent + stampId
@@ -215,6 +255,26 @@ func (c *CloudsignClient) SignContract(request *cloudsign.SignContractRequest) (
     }
 
     jdResp := &cloudsign.SignContractResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 单证据链取证接口 */
+func (c *CloudsignClient) GetEvidence(request *cloudsign.GetEvidenceRequest) (*cloudsign.GetEvidenceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cloudsign.GetEvidenceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -319,6 +379,26 @@ func (c *CloudsignClient) DeleteTemplate(request *cloudsign.DeleteTemplateReques
     }
 
     jdResp := &cloudsign.DeleteTemplateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 单证据链存证接口 */
+func (c *CloudsignClient) SaveEvidence(request *cloudsign.SaveEvidenceRequest) (*cloudsign.SaveEvidenceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cloudsign.SaveEvidenceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

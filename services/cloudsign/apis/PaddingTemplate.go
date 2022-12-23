@@ -93,11 +93,11 @@ func NewPaddingTemplateRequestWithoutParam() *PaddingTemplateRequest {
 func (r *PaddingTemplateRequest) SetTemplateId(templateId string) {
     r.TemplateId = templateId
 }
-
 /* param paddingSpec: (Required) */
 func (r *PaddingTemplateRequest) SetPaddingSpec(paddingSpec *cloudsign.PaddingSpec) {
     r.PaddingSpec = paddingSpec
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

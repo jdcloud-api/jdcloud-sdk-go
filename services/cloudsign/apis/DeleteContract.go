@@ -84,6 +84,7 @@ func (r *DeleteContractRequest) SetContractId(contractId string) {
     r.ContractId = contractId
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r DeleteContractRequest) GetRegionId() string {

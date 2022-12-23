@@ -85,6 +85,7 @@ func (r *UploadStampRequest) SetStampSpec(stampSpec *cloudsign.StampSpec) {
     r.StampSpec = stampSpec
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r UploadStampRequest) GetRegionId() string {

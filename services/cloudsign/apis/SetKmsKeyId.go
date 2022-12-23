@@ -81,6 +81,7 @@ func (r *SetKmsKeyIdRequest) SetKeyId(keyId string) {
     r.KeyId = &keyId
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r SetKmsKeyIdRequest) GetRegionId() string {
