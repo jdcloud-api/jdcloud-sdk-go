@@ -21,58 +21,67 @@ import (
     cloudsign "github.com/jdcloud-api/jdcloud-sdk-go/services/cloudsign/models"
 )
 
-type UploadTemplateRequest struct {
+type SaveEvidenceRequest struct {
 
     core.JDCloudRequest
 
-    /*   */
-    TemplateSpec *cloudsign.TemplateSpec `json:"templateSpec"`
+    /* 业务流水号  */
+    BusinessId string `json:"businessId"`
+
+    /* 存证数据json字符串的Base64  */
+    File string `json:"file"`
 }
 
 /*
- * param templateSpec:  (Required)
+ * param businessId: 业务流水号 (Required)
+ * param file: 存证数据json字符串的Base64 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewUploadTemplateRequest(
-    templateSpec *cloudsign.TemplateSpec,
-) *UploadTemplateRequest {
+func NewSaveEvidenceRequest(
+    businessId string,
+    file string,
+) *SaveEvidenceRequest {
 
-	return &UploadTemplateRequest{
+	return &SaveEvidenceRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/template",
+			URL:     "/evidence:evidenceSave",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
-        TemplateSpec: templateSpec,
+        BusinessId: businessId,
+        File: file,
 	}
 }
 
 /*
- * param templateSpec:  (Required)
+ * param businessId: 业务流水号 (Required)
+ * param file: 存证数据json字符串的Base64 (Required)
  */
-func NewUploadTemplateRequestWithAllParams(
-    templateSpec *cloudsign.TemplateSpec,
-) *UploadTemplateRequest {
+func NewSaveEvidenceRequestWithAllParams(
+    businessId string,
+    file string,
+) *SaveEvidenceRequest {
 
-    return &UploadTemplateRequest{
+    return &SaveEvidenceRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/template",
+            URL:     "/evidence:evidenceSave",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
-        TemplateSpec: templateSpec,
+        BusinessId: businessId,
+        File: file,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewUploadTemplateRequestWithoutParam() *UploadTemplateRequest {
+func NewSaveEvidenceRequestWithoutParam() *SaveEvidenceRequest {
 
-    return &UploadTemplateRequest{
+    return &SaveEvidenceRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/template",
+            URL:     "/evidence:evidenceSave",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -80,24 +89,31 @@ func NewUploadTemplateRequestWithoutParam() *UploadTemplateRequest {
     }
 }
 
-/* param templateSpec: (Required) */
-func (r *UploadTemplateRequest) SetTemplateSpec(templateSpec *cloudsign.TemplateSpec) {
-    r.TemplateSpec = templateSpec
+/* param businessId: 业务流水号(Required) */
+func (r *SaveEvidenceRequest) SetBusinessId(businessId string) {
+    r.BusinessId = businessId
+}
+/* param file: 存证数据json字符串的Base64(Required) */
+func (r *SaveEvidenceRequest) SetFile(file string) {
+    r.File = file
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r UploadTemplateRequest) GetRegionId() string {
+func (r SaveEvidenceRequest) GetRegionId() string {
     return ""
 }
 
-type UploadTemplateResponse struct {
+type SaveEvidenceResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result UploadTemplateResult `json:"result"`
+    Result SaveEvidenceResult `json:"result"`
 }
 
-type UploadTemplateResult struct {
-    TemplateId string `json:"templateId"`
+type SaveEvidenceResult struct {
+    Code string `json:"code"`
+    Message string `json:"message"`
+    Success bool `json:"success"`
+    Data cloudsign.SaveEvidenceResp `json:"data"`
 }

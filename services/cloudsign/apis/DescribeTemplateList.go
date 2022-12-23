@@ -99,21 +99,19 @@ func NewDescribeTemplateListRequestWithoutParam() *DescribeTemplateListRequest {
 func (r *DescribeTemplateListRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小, 默认为10, 取值范围[10, 100](Optional) */
 func (r *DescribeTemplateListRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param templateNameOrTitle: 合同模板名称或者标题(Optional) */
 func (r *DescribeTemplateListRequest) SetTemplateNameOrTitle(templateNameOrTitle string) {
     r.TemplateNameOrTitle = &templateNameOrTitle
 }
-
 /* param templateType: 模板类型 pdf,word,pdf-auto(不传查所有类型)(Optional) */
 func (r *DescribeTemplateListRequest) SetTemplateType(templateType string) {
     r.TemplateType = &templateType
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

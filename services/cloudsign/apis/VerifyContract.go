@@ -93,11 +93,11 @@ func NewVerifyContractRequestWithoutParam() *VerifyContractRequest {
 func (r *VerifyContractRequest) SetContractId(contractId string) {
     r.ContractId = contractId
 }
-
 /* param contractVerifySpec: (Required) */
 func (r *VerifyContractRequest) SetContractVerifySpec(contractVerifySpec *cloudsign.ContractVerifySpec) {
     r.ContractVerifySpec = contractVerifySpec
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -93,16 +93,15 @@ func NewDescribeStampListRequestWithoutParam() *DescribeStampListRequest {
 func (r *DescribeStampListRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小, 默认为10, 取值范围[10, 100](Optional) */
 func (r *DescribeStampListRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param stampName: 印章名称(Optional) */
 func (r *DescribeStampListRequest) SetStampName(stampName string) {
     r.StampName = &stampName
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
