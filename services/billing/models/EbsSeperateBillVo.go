@@ -58,7 +58,7 @@ type EbsSeperateBillVo struct {
     /* 部门 (Optional) */
     DeptNo string `json:"deptNo"`
 
-    /* 部门 (Optional) */
+    /*  (Optional) */
     SourceId string `json:"sourceId"`
 
     /* 返回编码0成功 (Optional) */

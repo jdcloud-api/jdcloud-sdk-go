@@ -28,7 +28,7 @@ type CalculateTotalPriceRequest struct {
     /*   */
     RegionId string `json:"regionId"`
 
-    /* 操作类型 1:创建 2:续费 3:升配 4:删除  */
+    /* 操作类型 1:新购 2:续费 3:变配  */
     Cmd int `json:"cmd"`
 
     /* 计算价格的订单 (Optional) */
@@ -61,7 +61,7 @@ type CalculateTotalPriceRequest struct {
 
 /*
  * param regionId:  (Required)
- * param cmd: 操作类型 1:创建 2:续费 3:升配 4:删除 (Required)
+ * param cmd: 操作类型 1:新购 2:续费 3:变配 (Required)
  * param packageCount: 批量购买时数量 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -87,7 +87,7 @@ func NewCalculateTotalPriceRequest(
 
 /*
  * param regionId:  (Required)
- * param cmd: 操作类型 1:创建 2:续费 3:升配 4:删除 (Required)
+ * param cmd: 操作类型 1:新购 2:续费 3:变配 (Required)
  * param orderList: 计算价格的订单 (Optional)
  * param operateTime: 操作时间(格式为：yyyy-MM-dd HH:mm:ss) (Optional)
  * param promotionInfo: 1:折扣（不需要传） 2:免费活动3:付费活动 4:推荐码 5:会员价 [{"promotionType":1,"activityCode":123},{"promotionType":2,"activityCode":}] (Optional)
@@ -150,56 +150,47 @@ func NewCalculateTotalPriceRequestWithoutParam() *CalculateTotalPriceRequest {
 func (r *CalculateTotalPriceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
-/* param cmd: 操作类型 1:创建 2:续费 3:升配 4:删除(Required) */
+/* param cmd: 操作类型 1:新购 2:续费 3:变配(Required) */
 func (r *CalculateTotalPriceRequest) SetCmd(cmd int) {
     r.Cmd = cmd
 }
-
 /* param orderList: 计算价格的订单(Optional) */
 func (r *CalculateTotalPriceRequest) SetOrderList(orderList []billing.OrderPriceProtocol) {
     r.OrderList = orderList
 }
-
 /* param operateTime: 操作时间(格式为：yyyy-MM-dd HH:mm:ss)(Optional) */
 func (r *CalculateTotalPriceRequest) SetOperateTime(operateTime string) {
     r.OperateTime = &operateTime
 }
-
 /* param promotionInfo: 1:折扣（不需要传） 2:免费活动3:付费活动 4:推荐码 5:会员价 [{"promotionType":1,"activityCode":123},{"promotionType":2,"activityCode":}](Optional) */
 func (r *CalculateTotalPriceRequest) SetPromotionInfo(promotionInfo string) {
     r.PromotionInfo = &promotionInfo
 }
-
 /* param clientType: 客户端：1.PC端；2.移动端；(Optional) */
 func (r *CalculateTotalPriceRequest) SetClientType(clientType int) {
     r.ClientType = &clientType
 }
-
 /* param packageCount: 批量购买时数量(Required) */
 func (r *CalculateTotalPriceRequest) SetPackageCount(packageCount int) {
     r.PackageCount = packageCount
 }
-
 /* param processType: 临时升配时必传，3-临时升配(Optional) */
 func (r *CalculateTotalPriceRequest) SetProcessType(processType int) {
     r.ProcessType = &processType
 }
-
 /* param renewMode: 续费方式 0：正常续费  1：续费至统一到期日，续费时必传(Optional) */
 func (r *CalculateTotalPriceRequest) SetRenewMode(renewMode int) {
     r.RenewMode = &renewMode
 }
-
 /* param unifyExpireDay: 续费统一到期日(1-28)，续费时必传(Optional) */
 func (r *CalculateTotalPriceRequest) SetUnifyExpireDay(unifyExpireDay int) {
     r.UnifyExpireDay = &unifyExpireDay
 }
-
 /* param totalPriceRule: 计算总价规则 1：计算预付费资源总价（计费类型为包年包月、按次） ；不传计算所有资源总价(Optional) */
 func (r *CalculateTotalPriceRequest) SetTotalPriceRule(totalPriceRule int) {
     r.TotalPriceRule = &totalPriceRule
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
@@ -218,9 +209,15 @@ type CalculateTotalPriceResult struct {
     TotalPriceScale4 int `json:"totalPriceScale4"`
     DiscountedTotalPrice int `json:"discountedTotalPrice"`
     TotalDiscount int `json:"totalDiscount"`
+    AfterFavorableTotalPrice float64 `json:"afterFavorableTotalPrice"`
+    EraseTotalPrice float64 `json:"eraseTotalPrice"`
     List []billing.OrderPriceDetail `json:"list"`
     TotalOriginalPrice int `json:"totalOriginalPrice"`
     FavorableInfos string `json:"favorableInfos"`
     Remark string `json:"remark"`
     TotalUnitPrice int `json:"totalUnitPrice"`
+    RefundTotalPrice float64 `json:"refundTotalPrice"`
+    CashRefundTotalPrice float64 `json:"cashRefundTotalPrice"`
+    BalanceRefundTotalPrice float64 `json:"balanceRefundTotalPrice"`
+    CouponRefundTotalPrice float64 `json:"couponRefundTotalPrice"`
 }

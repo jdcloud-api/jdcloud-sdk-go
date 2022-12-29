@@ -40,7 +40,7 @@ func NewBillingClient(credential *core.Credential) *BillingClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "billing",
-            Revision:    "1.0.33",
+            Revision:    "1.1.4",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -57,6 +57,26 @@ func (c *BillingClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
 }
 
+/* 查询计费项账单月汇总数据 */
+func (c *BillingClient) DescribeFormulaSummaryList(request *billing.DescribeFormulaSummaryListRequest) (*billing.DescribeFormulaSummaryListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &billing.DescribeFormulaSummaryListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询计费价格信息 */
 func (c *BillingClient) CalculateTotalPrice(request *billing.CalculateTotalPriceRequest) (*billing.CalculateTotalPriceResponse, error) {
     if request == nil {
@@ -68,6 +88,26 @@ func (c *BillingClient) CalculateTotalPrice(request *billing.CalculateTotalPrice
     }
 
     jdResp := &billing.CalculateTotalPriceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询账单明细数据V2版本 */
+func (c *BillingClient) DescribeBillDetails(request *billing.DescribeBillDetailsRequest) (*billing.DescribeBillDetailsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &billing.DescribeBillDetailsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -108,6 +148,26 @@ func (c *BillingClient) QueryBillDetail(request *billing.QueryBillDetailRequest)
     }
 
     jdResp := &billing.QueryBillDetailResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询账单资源汇总数据V2版本 */
+func (c *BillingClient) DescribeBillSummarys(request *billing.DescribeBillSummarysRequest) (*billing.DescribeBillSummarysResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &billing.DescribeBillSummarysResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

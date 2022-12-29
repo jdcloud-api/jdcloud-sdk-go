@@ -152,37 +152,30 @@ func NewQueryBillDetailRequestWithoutParam() *QueryBillDetailRequest {
 func (r *QueryBillDetailRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param startTime: 账期开始时间,不支持跨月查询。格式:yyyy-MM-dd HH:mm:ss(Required) */
 func (r *QueryBillDetailRequest) SetStartTime(startTime string) {
     r.StartTime = startTime
 }
-
 /* param endTime: 账期结束时间,不支持跨月查询。格式:yyyy-MM-dd HH:mm:ss(Required) */
 func (r *QueryBillDetailRequest) SetEndTime(endTime string) {
     r.EndTime = endTime
 }
-
 /* param appCode: 产品线代码(Optional) */
 func (r *QueryBillDetailRequest) SetAppCode(appCode string) {
     r.AppCode = &appCode
 }
-
 /* param serviceCode: 产品代码(Optional) */
 func (r *QueryBillDetailRequest) SetServiceCode(serviceCode string) {
     r.ServiceCode = &serviceCode
 }
-
 /* param billingType: 计费类型 1、按配置 2、按用量 3、包年包月 4、按次(Optional) */
 func (r *QueryBillDetailRequest) SetBillingType(billingType int) {
     r.BillingType = &billingType
 }
-
 /* param resourceIds: 资源单id列表,最多支持传入500个(Optional) */
 func (r *QueryBillDetailRequest) SetResourceIds(resourceIds []string) {
     r.ResourceIds = resourceIds
 }
-
 /* param tags: 标签,JSON格式:[{"k1":"v1"},{"k1":"v2"},{"k2":""}]
 示例:
 选择的标签为, 部门:广告部、部门:物流部、项目
@@ -191,16 +184,15 @@ func (r *QueryBillDetailRequest) SetResourceIds(resourceIds []string) {
 func (r *QueryBillDetailRequest) SetTags(tags []interface{}) {
     r.Tags = tags
 }
-
 /* param pageIndex: pageIndex 分页,默认从1开始(Optional) */
 func (r *QueryBillDetailRequest) SetPageIndex(pageIndex int) {
     r.PageIndex = &pageIndex
 }
-
 /* param pageSize: pageSize 每页查询数据条数,最多支持1000条(Optional) */
 func (r *QueryBillDetailRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

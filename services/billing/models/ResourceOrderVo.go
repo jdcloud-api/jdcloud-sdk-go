@@ -150,4 +150,7 @@ type ResourceOrderVo struct {
 
     /* 欠费类型 1、无欠费，2、按配置欠费，3、按用量欠费，4、按配置和按用量都欠费 (Optional) */
     ArrearsType int `json:"arrearsType"`
+
+    /* 欠费、过期资源释放时间-仅面向资源回收站使用 (Optional) */
+    RecycleBinReleasingTime string `json:"recycleBinReleasingTime"`
 }
