@@ -19,17 +19,23 @@ package models
 
 type OrderPriceDetail struct {
 
-    /* 折扣前总价 (Optional) */
+    /* 原价(6位，原价为每个计费项原价之和) (Optional) */
     Price int `json:"price"`
 
-    /* 四位小数价格 (Optional) */
+    /* 原价(6位，与price一致，兼容之前4位原价保留字段) (Optional) */
     PriceScale4 int `json:"priceScale4"`
 
-    /* 折扣金额 (Optional) */
+    /* 折扣金额（6位，折扣金额为每个计费项折扣金额之和） (Optional) */
     Discount int `json:"discount"`
 
-    /* 折扣后订单金额 (Optional) */
+    /* 应付金额（2位，应付金额=折扣后金额舍位保留2位小数) (Optional) */
     DiscountedPrice int `json:"discountedPrice"`
+
+    /* 折扣后金额（6位，折扣后金额为每个计费项折扣后金额之和) (Optional) */
+    AfterFavorablePrice float64 `json:"afterFavorablePrice"`
+
+    /* 抹零金额（6位，抹零金额=折扣后金额-应付金额) (Optional) */
+    ErasePrice float64 `json:"erasePrice"`
 
     /* 订单原价 包年时 一年原价为12个月价格，totalPrice为10个月价格 (Optional) */
     OriginalPrice int `json:"originalPrice"`
@@ -82,9 +88,27 @@ type OrderPriceDetail struct {
     /* 结束时间 (Optional) */
     EndTime string `json:"endTime"`
 
-    /* 变配明细（1-升配补差价，2-降配延时，3-临时升配） (Optional) */
+    /* 变配明细（1-升配补差价，2-降配延时，3-临时升配，9-降配退款） (Optional) */
     ProcessType int `json:"processType"`
 
     /* 交易单模块sourceId (Optional) */
     SourceId string `json:"sourceId"`
+
+    /* 资源退款金额 (Optional) */
+    RefundPrice float64 `json:"refundPrice"`
+
+    /* 资源现金退款金额 (Optional) */
+    CashRefundPrice float64 `json:"cashRefundPrice"`
+
+    /* 资源余额退款金额 (Optional) */
+    BalanceRefundPrice float64 `json:"balanceRefundPrice"`
+
+    /* 资源代金券退款金额 (Optional) */
+    CouponRefundPrice float64 `json:"couponRefundPrice"`
+
+    /* 退款订单列表 (Optional) */
+    RefundOrderList []RefundOrder `json:"refundOrderList"`
+
+    /* 计费项价格列表 (Optional) */
+    BillingItemPriceList []BillingItemPrice `json:"billingItemPriceList"`
 }

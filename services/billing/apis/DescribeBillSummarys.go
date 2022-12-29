@@ -21,7 +21,7 @@ import (
     billing "github.com/jdcloud-api/jdcloud-sdk-go/services/billing/models"
 )
 
-type QueryBillSummaryRequest struct {
+type DescribeBillSummarysRequest struct {
 
     core.JDCloudRequest
 
@@ -64,15 +64,15 @@ type QueryBillSummaryRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewQueryBillSummaryRequest(
+func NewDescribeBillSummarysRequest(
     regionId string,
     startTime string,
     endTime string,
-) *QueryBillSummaryRequest {
+) *DescribeBillSummarysRequest {
 
-	return &QueryBillSummaryRequest{
+	return &DescribeBillSummarysRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/billSummary:list",
+			URL:     "/regions/{regionId}/describeBillSummarys",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -98,7 +98,7 @@ func NewQueryBillSummaryRequest(
  * param pageIndex: pageIndex 分页,默认从1开始 (Optional)
  * param pageSize: pageSize 每页查询数据条数,最多支持1000条 (Optional)
  */
-func NewQueryBillSummaryRequestWithAllParams(
+func NewDescribeBillSummarysRequestWithAllParams(
     regionId string,
     startTime string,
     endTime string,
@@ -108,11 +108,11 @@ func NewQueryBillSummaryRequestWithAllParams(
     tags []interface{},
     pageIndex *int,
     pageSize *int,
-) *QueryBillSummaryRequest {
+) *DescribeBillSummarysRequest {
 
-    return &QueryBillSummaryRequest{
+    return &DescribeBillSummarysRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/billSummary:list",
+            URL:     "/regions/{regionId}/describeBillSummarys",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -130,11 +130,11 @@ func NewQueryBillSummaryRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewQueryBillSummaryRequestWithoutParam() *QueryBillSummaryRequest {
+func NewDescribeBillSummarysRequestWithoutParam() *DescribeBillSummarysRequest {
 
-    return &QueryBillSummaryRequest{
+    return &DescribeBillSummarysRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/billSummary:list",
+            URL:     "/regions/{regionId}/describeBillSummarys",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -143,27 +143,27 @@ func NewQueryBillSummaryRequestWithoutParam() *QueryBillSummaryRequest {
 }
 
 /* param regionId: Region ID(Required) */
-func (r *QueryBillSummaryRequest) SetRegionId(regionId string) {
+func (r *DescribeBillSummarysRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 /* param startTime: 账期开始时间,不支持跨月查询。格式:yyyy-MM-dd HH:mm:ss(Required) */
-func (r *QueryBillSummaryRequest) SetStartTime(startTime string) {
+func (r *DescribeBillSummarysRequest) SetStartTime(startTime string) {
     r.StartTime = startTime
 }
 /* param endTime: 账期结束时间,不支持跨月查询。格式:yyyy-MM-dd HH:mm:ss(Required) */
-func (r *QueryBillSummaryRequest) SetEndTime(endTime string) {
+func (r *DescribeBillSummarysRequest) SetEndTime(endTime string) {
     r.EndTime = endTime
 }
 /* param appCode: 产品线代码(Optional) */
-func (r *QueryBillSummaryRequest) SetAppCode(appCode string) {
+func (r *DescribeBillSummarysRequest) SetAppCode(appCode string) {
     r.AppCode = &appCode
 }
 /* param serviceCode: 产品代码(Optional) */
-func (r *QueryBillSummaryRequest) SetServiceCode(serviceCode string) {
+func (r *DescribeBillSummarysRequest) SetServiceCode(serviceCode string) {
     r.ServiceCode = &serviceCode
 }
 /* param resourceIds: 资源单id列表,最多支持传入500个(Optional) */
-func (r *QueryBillSummaryRequest) SetResourceIds(resourceIds []string) {
+func (r *DescribeBillSummarysRequest) SetResourceIds(resourceIds []string) {
     r.ResourceIds = resourceIds
 }
 /* param tags: 标签,JSON格式:[{"k1":"v1"},{"k1":"v2"},{"k2":""}]
@@ -171,32 +171,32 @@ func (r *QueryBillSummaryRequest) SetResourceIds(resourceIds []string) {
 选择的标签为, 部门:广告部、部门:物流部、项目
 则传值为:[{"部门":"广告部"},{"部门":"物流部"},{"项目":""}]
 (Optional) */
-func (r *QueryBillSummaryRequest) SetTags(tags []interface{}) {
+func (r *DescribeBillSummarysRequest) SetTags(tags []interface{}) {
     r.Tags = tags
 }
 /* param pageIndex: pageIndex 分页,默认从1开始(Optional) */
-func (r *QueryBillSummaryRequest) SetPageIndex(pageIndex int) {
+func (r *DescribeBillSummarysRequest) SetPageIndex(pageIndex int) {
     r.PageIndex = &pageIndex
 }
 /* param pageSize: pageSize 每页查询数据条数,最多支持1000条(Optional) */
-func (r *QueryBillSummaryRequest) SetPageSize(pageSize int) {
+func (r *DescribeBillSummarysRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r QueryBillSummaryRequest) GetRegionId() string {
+func (r DescribeBillSummarysRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type QueryBillSummaryResponse struct {
+type DescribeBillSummarysResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result QueryBillSummaryResult `json:"result"`
+    Result DescribeBillSummarysResult `json:"result"`
 }
 
-type QueryBillSummaryResult struct {
+type DescribeBillSummarysResult struct {
     Pagination billing.Pagination `json:"pagination"`
-    Result []billing.BillSummary `json:"result"`
+    Result []billing.BillSummaryV2 `json:"result"`
 }
