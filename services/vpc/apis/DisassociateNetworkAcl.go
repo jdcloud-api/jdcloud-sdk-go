@@ -101,16 +101,15 @@ func NewDisassociateNetworkAclRequestWithoutParam() *DisassociateNetworkAclReque
 func (r *DisassociateNetworkAclRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param networkAclId: networkAclId ID(Required) */
 func (r *DisassociateNetworkAclRequest) SetNetworkAclId(networkAclId string) {
     r.NetworkAclId = networkAclId
 }
-
 /* param subnetId: networkAcl要解绑的子网ID(Required) */
 func (r *DisassociateNetworkAclRequest) SetSubnetId(subnetId string) {
     r.SubnetId = subnetId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -132,41 +132,35 @@ func NewCreateElasticIpsRequestWithoutParam() *CreateElasticIpsRequest {
 func (r *CreateElasticIpsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param maxCount: 购买弹性ip数量；取值范围：[1,100](Required) */
 func (r *CreateElasticIpsRequest) SetMaxCount(maxCount int) {
     r.MaxCount = maxCount
 }
-
 /* param elasticIpAddress: 指定弹性ip地址进行创建，当申请创建多个弹性ip时，必须为空(Optional) */
 func (r *CreateElasticIpsRequest) SetElasticIpAddress(elasticIpAddress string) {
     r.ElasticIpAddress = &elasticIpAddress
 }
-
 /* param elasticIpSpec: 弹性ip规格(Required) */
 func (r *CreateElasticIpsRequest) SetElasticIpSpec(elasticIpSpec *vpc.ElasticIpSpec) {
     r.ElasticIpSpec = elasticIpSpec
 }
-
 /* param userTags: 用户标签(Optional) */
 func (r *CreateElasticIpsRequest) SetUserTags(userTags []vpc.Tag) {
     r.UserTags = userTags
 }
-
 /* param ipType: 弹性ip类型，取值：standard(标准公网IP)，edge(边缘公网IP)，默认为standard(Optional) */
 func (r *CreateElasticIpsRequest) SetIpType(ipType string) {
     r.IpType = &ipType
 }
-
 /* param resourceGroupId: 资源所属资源组ID(Optional) */
 func (r *CreateElasticIpsRequest) SetResourceGroupId(resourceGroupId string) {
     r.ResourceGroupId = &resourceGroupId
 }
-
 /* param dryRun: 预检标识，默认false，dryRun为true时只作检查，不做变更(Optional) */
 func (r *CreateElasticIpsRequest) SetDryRun(dryRun bool) {
     r.DryRun = &dryRun
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

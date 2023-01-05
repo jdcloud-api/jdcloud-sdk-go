@@ -76,7 +76,6 @@ type RebuildInstanceRequest struct {
 
     /* 继承镜像中的登录验证方式，"yes"为使用，"no"为不使用，""默认为"no" (Optional) */
     ImageInherit *string `json:"imageInherit"`
-
 }
 
 /*
@@ -186,12 +185,10 @@ func NewRebuildInstanceRequestWithoutParam() *RebuildInstanceRequest {
 func (r *RebuildInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 云主机ID。(Required) */
 func (r *RebuildInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param password: 实例密码。
 可用于SSH登录和VNC登录。
 长度为8\~30个字符，必须同时包含大、小写英文字母、数字和特殊符号中的三类字符。特殊符号包括：`\(\)\`~!@#$%^&\*\_-+=\|{}\[ ]:";'<>,.?/，`。
@@ -200,7 +197,6 @@ func (r *RebuildInstanceRequest) SetInstanceId(instanceId string) {
 func (r *RebuildInstanceRequest) SetPassword(password string) {
     r.Password = &password
 }
-
 /* param imageId: 镜像ID。
 若不指定镜像ID，默认使用当前主机的原镜像重置系统。
 可查询 [DescribeImages](https://docs.jdcloud.com/virtual-machines/api/describeimages) 接口获得指定地域的镜像信息。
@@ -208,13 +204,11 @@ func (r *RebuildInstanceRequest) SetPassword(password string) {
 func (r *RebuildInstanceRequest) SetImageId(imageId string) {
     r.ImageId = &imageId
 }
-
 /* param keyNames: 密钥对名称。仅Linux系统下该参数生效，当前仅支持输入单个密钥。
 (Optional) */
 func (r *RebuildInstanceRequest) SetKeyNames(keyNames []string) {
     r.KeyNames = keyNames
 }
-
 /* param hostname: 实例hostname。
 若不指定hostname，则默认以实例名称`name`作为hostname，但是会以RFC 952和RFC 1123命名规范做一定转义。
 **Windows系统**：长度为2\~15个字符，允许大小写字母、数字或连字符（-），不能以连字符（-）开头或结尾，不能连续使用连字符（-），也不能全部使用数字。不支持点号（.）。
@@ -223,7 +217,6 @@ func (r *RebuildInstanceRequest) SetKeyNames(keyNames []string) {
 func (r *RebuildInstanceRequest) SetHostname(hostname string) {
     r.Hostname = &hostname
 }
-
 /* param metadata: 用户自定义元数据。
 以 `key-value` 键值对形式指定，可在实例系统内通过元数据服务查询获取。最多支持40对键值对，且 `key` 不超过256字符，`value` 不超过16KB，不区分大小写。
 注意：`key` 不要以连字符(-)结尾，否则此 `key` 不生效。
@@ -231,7 +224,6 @@ func (r *RebuildInstanceRequest) SetHostname(hostname string) {
 func (r *RebuildInstanceRequest) SetMetadata(metadata []vm.Metadata) {
     r.Metadata = metadata
 }
-
 /* param userdata: 自定义脚本。
 目前仅支持启动脚本，即 `launch-script`，须Base64编码且编码前数据长度不能超过16KB。
 **linux系统**：支持bash和python，编码前须分别以 `#!/bin/bash` 和 `#!/usr/bin/env python` 作为内容首行。
@@ -240,7 +232,6 @@ func (r *RebuildInstanceRequest) SetMetadata(metadata []vm.Metadata) {
 func (r *RebuildInstanceRequest) SetUserdata(userdata []vm.Userdata) {
     r.Userdata = userdata
 }
-
 /* param passWordAuth: 密码授权，若存在密匙，则根据此参数决定是否使用密码，若没有密匙，此参数无效，会强制使用密码。
 若不使用密码，且密匙对解绑后，用户需重置密码，方可使用密码登录。
 此参数在windows系统中必须为yes。
@@ -248,7 +239,6 @@ func (r *RebuildInstanceRequest) SetUserdata(userdata []vm.Userdata) {
 func (r *RebuildInstanceRequest) SetPassWordAuth(passWordAuth string) {
     r.PassWordAuth = &passWordAuth
 }
-
 /* param imageInherit: 继承镜像中的登录验证方式，"yes"为使用，"no"为不使用，""默认为"no"(Optional) */
 func (r *RebuildInstanceRequest) SetImageInherit(imageInherit string) {
     r.ImageInherit = &imageInherit

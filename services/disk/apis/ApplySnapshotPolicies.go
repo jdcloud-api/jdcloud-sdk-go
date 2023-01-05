@@ -90,11 +90,11 @@ func NewApplySnapshotPoliciesRequestWithoutParam() *ApplySnapshotPoliciesRequest
 func (r *ApplySnapshotPoliciesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param relations: 绑定/解绑操作(Optional) */
 func (r *ApplySnapshotPoliciesRequest) SetRelations(relations []disk.PolicyDiskRelationOp) {
     r.Relations = relations
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

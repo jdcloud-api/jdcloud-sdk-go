@@ -104,21 +104,19 @@ func NewModifyVpcRequestWithoutParam() *ModifyVpcRequest {
 func (r *ModifyVpcRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param vpcId: Vpc ID(Required) */
 func (r *ModifyVpcRequest) SetVpcId(vpcId string) {
     r.VpcId = vpcId
 }
-
 /* param vpcName: 私有网络名称,只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符。(Optional) */
 func (r *ModifyVpcRequest) SetVpcName(vpcName string) {
     r.VpcName = &vpcName
 }
-
 /* param description: vpc描述，允许输入UTF-8编码下的全部字符，不超过256字符。(Optional) */
 func (r *ModifyVpcRequest) SetDescription(description string) {
     r.Description = &description
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

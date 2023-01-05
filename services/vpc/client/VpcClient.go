@@ -40,7 +40,7 @@ func NewVpcClient(credential *core.Credential) *VpcClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vpc",
-            Revision:    "1.0.1",
+            Revision:    "1.1.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -88,6 +88,26 @@ func (c *VpcClient) ModifyVpcPeering(request *vpc.ModifyVpcPeeringRequest) (*vpc
     }
 
     jdResp := &vpc.ModifyVpcPeeringResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建VpcPolicy接口 */
+func (c *VpcClient) CreateVpcPolicy(request *vpc.CreateVpcPolicyRequest) (*vpc.CreateVpcPolicyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.CreateVpcPolicyResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -295,6 +315,26 @@ func (c *VpcClient) DescribeNetworkInterfaces(request *vpc.DescribeNetworkInterf
     }
 
     jdResp := &vpc.DescribeNetworkInterfacesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询VpcPolicy资源详情 */
+func (c *VpcClient) DescribeVpcPolicy(request *vpc.DescribeVpcPolicyRequest) (*vpc.DescribeVpcPolicyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.DescribeVpcPolicyResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -660,7 +700,7 @@ func (c *VpcClient) DescribeVpc(request *vpc.DescribeVpcRequest) (*vpc.DescribeV
 /* 
 向共享带宽包内增加公网IP
 
-## 接口说明 
+## 接口说明
 
 - 确保已有至少一个共享带宽包资源。
 
@@ -875,6 +915,26 @@ func (c *VpcClient) DescribeVpcPeering(request *vpc.DescribeVpcPeeringRequest) (
     return jdResp, err
 }
 
+/* 删除VpcPolicy接口 */
+func (c *VpcClient) DeleteVpcPolicy(request *vpc.DeleteVpcPolicyRequest) (*vpc.DeleteVpcPolicyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.DeleteVpcPolicyResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 移除路由表规则 */
 func (c *VpcClient) RemoveRouteTableRules(request *vpc.RemoveRouteTableRulesRequest) (*vpc.RemoveRouteTableRulesResponse, error) {
     if request == nil {
@@ -886,6 +946,26 @@ func (c *VpcClient) RemoveRouteTableRules(request *vpc.RemoveRouteTableRulesRequ
     }
 
     jdResp := &vpc.RemoveRouteTableRulesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改VPC Policy接口 */
+func (c *VpcClient) ModifyVpcPolicy(request *vpc.ModifyVpcPolicyRequest) (*vpc.ModifyVpcPolicyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.ModifyVpcPolicyResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

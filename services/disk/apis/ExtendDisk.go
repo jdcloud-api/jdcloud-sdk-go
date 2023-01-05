@@ -107,21 +107,19 @@ func NewExtendDiskRequestWithoutParam() *ExtendDiskRequest {
 func (r *ExtendDiskRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param diskId: 云硬盘ID(Required) */
 func (r *ExtendDiskRequest) SetDiskId(diskId string) {
     r.DiskId = diskId
 }
-
 /* param diskSizeGB: 扩容后的云硬盘大小，单位为GiB(Required) */
 func (r *ExtendDiskRequest) SetDiskSizeGB(diskSizeGB int) {
     r.DiskSizeGB = diskSizeGB
 }
-
 /* param iops: 修改ssd.io1型云硬盘的iops数量，当且仅当ssd.io1型的云盘类型有效，步长是10; 默认iops为云硬盘原有iops值(Optional) */
 func (r *ExtendDiskRequest) SetIops(iops int) {
     r.Iops = &iops
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

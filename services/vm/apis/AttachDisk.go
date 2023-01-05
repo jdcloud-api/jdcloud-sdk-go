@@ -45,7 +45,6 @@ type AttachDiskRequest struct {
 `false`（默认值）：不随实例删除。
  (Optional) */
     AutoDelete *bool `json:"autoDelete"`
-
 }
 
 /*
@@ -128,17 +127,14 @@ func NewAttachDiskRequestWithoutParam() *AttachDiskRequest {
 func (r *AttachDiskRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 云主机ID。(Required) */
 func (r *AttachDiskRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param diskId: 云硬盘ID。(Required) */
 func (r *AttachDiskRequest) SetDiskId(diskId string) {
     r.DiskId = diskId
 }
-
 /* param deviceName: 磁盘逻辑挂载点。
 **系统盘**：必须指定并且只能是vda。
 **数据盘**：取值范围：`[vdb~vdbm]`。
@@ -146,7 +142,6 @@ func (r *AttachDiskRequest) SetDiskId(diskId string) {
 func (r *AttachDiskRequest) SetDeviceName(deviceName string) {
     r.DeviceName = &deviceName
 }
-
 /* param autoDelete: 是否随实例一起删除，即删除实例时是否自动删除此磁盘。此参数仅对按配置计费的非多点挂载云硬盘生效。
 可选值：
 `true`：随实例删除。

@@ -101,16 +101,15 @@ func NewDisassociateRouteTableRequestWithoutParam() *DisassociateRouteTableReque
 func (r *DisassociateRouteTableRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param routeTableId: RouteTable ID(Required) */
 func (r *DisassociateRouteTableRequest) SetRouteTableId(routeTableId string) {
     r.RouteTableId = routeTableId
 }
-
 /* param subnetId: 路由表要解绑的子网ID，解绑后子网绑定默认路由表(Required) */
 func (r *DisassociateRouteTableRequest) SetSubnetId(subnetId string) {
     r.SubnetId = subnetId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

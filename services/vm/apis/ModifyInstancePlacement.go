@@ -42,7 +42,6 @@ type ModifyInstancePlacementRequest struct {
     /* 是否确认清除本地盘数据，默认 false
  (Optional) */
     ClearLocalDisk *bool `json:"clearLocalDisk"`
-
 }
 
 /*
@@ -119,25 +118,21 @@ func NewModifyInstancePlacementRequestWithoutParam() *ModifyInstancePlacementReq
 func (r *ModifyInstancePlacementRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 云主机ID。(Required) */
 func (r *ModifyInstancePlacementRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param agId: 高可用组Id，必填项。
 可查询 [DescribeAgs](https://docs.jdcloud.com/cn/availability-group/api/describeags) 接口获得高可用组信息。
 (Optional) */
 func (r *ModifyInstancePlacementRequest) SetAgId(agId string) {
     r.AgId = &agId
 }
-
 /* param balance: 是否强制均衡，默认 false
 (Optional) */
 func (r *ModifyInstancePlacementRequest) SetBalance(balance bool) {
     r.Balance = &balance
 }
-
 /* param clearLocalDisk: 是否确认清除本地盘数据，默认 false
 (Optional) */
 func (r *ModifyInstancePlacementRequest) SetClearLocalDisk(clearLocalDisk bool) {

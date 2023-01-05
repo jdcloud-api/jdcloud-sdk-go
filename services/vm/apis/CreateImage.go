@@ -46,7 +46,6 @@ type CreateImageRequest struct {
 如果使用 `deviceName` 指定了与实例中相同的盘符，那么实例中对应的云盘数据盘也不会制作快照，并使用新指定的参数进行替换。
  (Optional) */
     DataDisks []vm.InstanceDiskAttachmentSpec `json:"dataDisks"`
-
 }
 
 /*
@@ -130,24 +129,20 @@ func NewCreateImageRequestWithoutParam() *CreateImageRequest {
 func (r *CreateImageRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 云主机ID。(Required) */
 func (r *CreateImageRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param name: 镜像名称，长度为2\~32个字符，只允许中文、数字、大小写字母、英文下划线（\_）、连字符（-）及点（.）。
 (Required) */
 func (r *CreateImageRequest) SetName(name string) {
     r.Name = name
 }
-
 /* param description: 镜像描述。256字符以内。
 (Optional) */
 func (r *CreateImageRequest) SetDescription(description string) {
     r.Description = &description
 }
-
 /* param dataDisks: 数据盘列表。
 在不指定该参数的情况下，制作镜像的过程中会将该实例中的所有云盘数据盘制作快照，并与系统盘一起，制作成打包镜像。
 如果不希望将实例中的某个云盘数据盘制作快照，可使用 `noDevice` 的方式排除，例如：`deviceName=vdb`、`noDevice=true` 就不会将 `vdb` 制作快照。

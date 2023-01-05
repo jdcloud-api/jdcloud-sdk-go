@@ -120,36 +120,31 @@ func NewDescribeSnapshotPoliciesRequestWithoutParam() *DescribeSnapshotPoliciesR
 func (r *DescribeSnapshotPoliciesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param name: 策略名称,默认为空(Optional) */
 func (r *DescribeSnapshotPoliciesRequest) SetName(name string) {
     r.Name = &name
 }
-
 /* param policyId: 策略ID,默认为空(Optional) */
 func (r *DescribeSnapshotPoliciesRequest) SetPolicyId(policyId []string) {
     r.PolicyId = policyId
 }
-
 /* param status: 策略状态。1: 启用 2：禁用(Optional) */
 func (r *DescribeSnapshotPoliciesRequest) SetStatus(status []int) {
     r.Status = status
 }
-
 /* param order: 排序字段，只支持create_time和update_time字段(Optional) */
 func (r *DescribeSnapshotPoliciesRequest) SetOrder(order *disk.OrderItem) {
     r.Order = order
 }
-
 /* param pageNumber: 页码, 默认为1, 取值范围：[1,∞)(Optional) */
 func (r *DescribeSnapshotPoliciesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小，默认为20，取值范围：[10,100](Optional) */
 func (r *DescribeSnapshotPoliciesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

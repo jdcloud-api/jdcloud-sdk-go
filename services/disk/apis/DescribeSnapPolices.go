@@ -108,26 +108,23 @@ func NewDescribeSnapPolicesRequestWithoutParam() *DescribeSnapPolicesRequest {
 func (r *DescribeSnapPolicesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param filterGroups: 过滤条件(Optional) */
 func (r *DescribeSnapPolicesRequest) SetFilterGroups(filterGroups []disk.FilterGroups) {
     r.FilterGroups = filterGroups
 }
-
 /* param order: 排序字段，只支持create_time和update_time字段(Optional) */
 func (r *DescribeSnapPolicesRequest) SetOrder(order *disk.OrderItem) {
     r.Order = order
 }
-
 /* param pageNumber: 页码, 默认为1, 取值范围：[1,∞)(Optional) */
 func (r *DescribeSnapPolicesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小，默认为20，取值范围：[10,100](Optional) */
 func (r *DescribeSnapPolicesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

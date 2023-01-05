@@ -93,11 +93,11 @@ func NewDescribeVpcRequestWithoutParam() *DescribeVpcRequest {
 func (r *DescribeVpcRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param vpcId: Vpc ID(Required) */
 func (r *DescribeVpcRequest) SetVpcId(vpcId string) {
     r.VpcId = vpcId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

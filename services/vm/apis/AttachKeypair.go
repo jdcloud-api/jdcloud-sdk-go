@@ -38,7 +38,6 @@ type AttachKeypairRequest struct {
 `no`：禁止SSH密码登录。
   */
     PassWordAuth string `json:"passWordAuth"`
-
 }
 
 /*
@@ -120,17 +119,14 @@ func NewAttachKeypairRequestWithoutParam() *AttachKeypairRequest {
 func (r *AttachKeypairRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param keyName: 密钥名称。(Required) */
 func (r *AttachKeypairRequest) SetKeyName(keyName string) {
     r.KeyName = keyName
 }
-
 /* param instanceIds: 要绑定的云主机Id列表。(Required) */
 func (r *AttachKeypairRequest) SetInstanceIds(instanceIds []string) {
     r.InstanceIds = instanceIds
 }
-
 /* param passWordAuth: 绑定密钥后，根据此参数决定是否允许使用密码登录。可选范围：
 `yes`：允许SSH密码登录。
 `no`：禁止SSH密码登录。

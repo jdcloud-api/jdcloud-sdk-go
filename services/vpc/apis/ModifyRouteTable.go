@@ -104,21 +104,19 @@ func NewModifyRouteTableRequestWithoutParam() *ModifyRouteTableRequest {
 func (r *ModifyRouteTableRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param routeTableId: RouteTable ID(Required) */
 func (r *ModifyRouteTableRequest) SetRouteTableId(routeTableId string) {
     r.RouteTableId = routeTableId
 }
-
 /* param routeTableName: 路由表的名字。名称取值范围：1-32个中文、英文大小写的字母、数字和下划线分隔符(Optional) */
 func (r *ModifyRouteTableRequest) SetRouteTableName(routeTableName string) {
     r.RouteTableName = &routeTableName
 }
-
 /* param description: 路由表的描述，取值范围：0-256个UTF-8编码下的全部字符(Optional) */
 func (r *ModifyRouteTableRequest) SetDescription(description string) {
     r.Description = &description
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -44,6 +44,9 @@ type CreateSubnetRequest struct {
 
     /* 子网内预留网段掩码长度，此网段IP地址按照单个申请，子网内其余部分IP地址以网段形式分配。此参数非必选，缺省值为0，代表子网内所有IP地址都按照单个申请 (Optional) */
     IpMaskLen *int `json:"ipMaskLen"`
+
+    /* 是否只预检此次请求。true：不会创建子网，只会对参数进行校验；false：正常的创建请求。默认为false。 (Optional) */
+    DryRun *bool `json:"dryRun"`
 }
 
 /*
@@ -83,6 +86,7 @@ func NewCreateSubnetRequest(
  * param routeTableId: 子网关联的路由表Id, 默认为vpc的默认路由表,子网关联路由表需检查路由表中已绑定的子网与本子网类型是否一致（一致标准为：或者都为标准子网，或者都为相同边缘可用区的边缘子网） (Optional)
  * param description: 子网描述信息,允许输入UTF-8编码下的全部字符，不超过256字符。 (Optional)
  * param ipMaskLen: 子网内预留网段掩码长度，此网段IP地址按照单个申请，子网内其余部分IP地址以网段形式分配。此参数非必选，缺省值为0，代表子网内所有IP地址都按照单个申请 (Optional)
+ * param dryRun: 是否只预检此次请求。true：不会创建子网，只会对参数进行校验；false：正常的创建请求。默认为false。 (Optional)
  */
 func NewCreateSubnetRequestWithAllParams(
     regionId string,
@@ -92,6 +96,7 @@ func NewCreateSubnetRequestWithAllParams(
     routeTableId *string,
     description *string,
     ipMaskLen *int,
+    dryRun *bool,
 ) *CreateSubnetRequest {
 
     return &CreateSubnetRequest{
@@ -108,6 +113,7 @@ func NewCreateSubnetRequestWithAllParams(
         RouteTableId: routeTableId,
         Description: description,
         IpMaskLen: ipMaskLen,
+        DryRun: dryRun,
     }
 }
 
@@ -128,36 +134,35 @@ func NewCreateSubnetRequestWithoutParam() *CreateSubnetRequest {
 func (r *CreateSubnetRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param vpcId: 子网所属vpc的Id(Required) */
 func (r *CreateSubnetRequest) SetVpcId(vpcId string) {
     r.VpcId = vpcId
 }
-
 /* param subnetName: 子网名称,只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符。(Required) */
 func (r *CreateSubnetRequest) SetSubnetName(subnetName string) {
     r.SubnetName = subnetName
 }
-
 /* param addressPrefix: 子网网段，vpc内子网网段不能重叠，cidr的取值范围：10.0.0.0/8、172.16.0.0/12和192.168.0.0/16及它们包含的子网，且子网掩码长度为16-28之间，如果vpc含有cidr，则必须为vpc所在cidr的子网(Required) */
 func (r *CreateSubnetRequest) SetAddressPrefix(addressPrefix string) {
     r.AddressPrefix = addressPrefix
 }
-
 /* param routeTableId: 子网关联的路由表Id, 默认为vpc的默认路由表,子网关联路由表需检查路由表中已绑定的子网与本子网类型是否一致（一致标准为：或者都为标准子网，或者都为相同边缘可用区的边缘子网）(Optional) */
 func (r *CreateSubnetRequest) SetRouteTableId(routeTableId string) {
     r.RouteTableId = &routeTableId
 }
-
 /* param description: 子网描述信息,允许输入UTF-8编码下的全部字符，不超过256字符。(Optional) */
 func (r *CreateSubnetRequest) SetDescription(description string) {
     r.Description = &description
 }
-
 /* param ipMaskLen: 子网内预留网段掩码长度，此网段IP地址按照单个申请，子网内其余部分IP地址以网段形式分配。此参数非必选，缺省值为0，代表子网内所有IP地址都按照单个申请(Optional) */
 func (r *CreateSubnetRequest) SetIpMaskLen(ipMaskLen int) {
     r.IpMaskLen = &ipMaskLen
 }
+/* param dryRun: 是否只预检此次请求。true：不会创建子网，只会对参数进行校验；false：正常的创建请求。默认为false。(Optional) */
+func (r *CreateSubnetRequest) SetDryRun(dryRun bool) {
+    r.DryRun = &dryRun
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -102,16 +102,15 @@ func NewAddRouteTableRulesRequestWithoutParam() *AddRouteTableRulesRequest {
 func (r *AddRouteTableRulesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param routeTableId: RouteTable ID(Required) */
 func (r *AddRouteTableRulesRequest) SetRouteTableId(routeTableId string) {
     r.RouteTableId = routeTableId
 }
-
 /* param routeTableRuleSpecs: 路由表规则信息(Required) */
 func (r *AddRouteTableRulesRequest) SetRouteTableRuleSpecs(routeTableRuleSpecs []vpc.AddRouteTableRules) {
     r.RouteTableRuleSpecs = routeTableRuleSpecs
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

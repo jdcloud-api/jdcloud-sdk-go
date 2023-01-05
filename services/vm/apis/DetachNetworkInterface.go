@@ -32,7 +32,6 @@ type DetachNetworkInterfaceRequest struct {
 
     /* 弹性网卡ID  */
     NetworkInterfaceId string `json:"networkInterfaceId"`
-
 }
 
 /*
@@ -102,12 +101,10 @@ func NewDetachNetworkInterfaceRequestWithoutParam() *DetachNetworkInterfaceReque
 func (r *DetachNetworkInterfaceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 云主机ID。(Required) */
 func (r *DetachNetworkInterfaceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param networkInterfaceId: 弹性网卡ID(Required) */
 func (r *DetachNetworkInterfaceRequest) SetNetworkInterfaceId(networkInterfaceId string) {
     r.NetworkInterfaceId = networkInterfaceId

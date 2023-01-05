@@ -93,11 +93,11 @@ func NewDescribeNetworkInterfaceRequestWithoutParam() *DescribeNetworkInterfaceR
 func (r *DescribeNetworkInterfaceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param networkInterfaceId: networkInterface ID(Required) */
 func (r *DescribeNetworkInterfaceRequest) SetNetworkInterfaceId(networkInterfaceId string) {
     r.NetworkInterfaceId = networkInterfaceId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

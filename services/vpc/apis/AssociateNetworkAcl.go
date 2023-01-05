@@ -101,16 +101,15 @@ func NewAssociateNetworkAclRequestWithoutParam() *AssociateNetworkAclRequest {
 func (r *AssociateNetworkAclRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param networkAclId: networkAclId ID(Required) */
 func (r *AssociateNetworkAclRequest) SetNetworkAclId(networkAclId string) {
     r.NetworkAclId = networkAclId
 }
-
 /* param subnetIds: networkAcl要绑定的子网ID列表, subnet已被其他networkAcl绑定时，自动解绑(Required) */
 func (r *AssociateNetworkAclRequest) SetSubnetIds(subnetIds []string) {
     r.SubnetIds = subnetIds
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

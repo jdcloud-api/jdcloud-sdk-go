@@ -29,7 +29,6 @@ type UnReleaseImageRequest struct {
 
     /* 镜像ID。  */
     ImageId string `json:"imageId"`
-
 }
 
 /*
@@ -93,7 +92,6 @@ func NewUnReleaseImageRequestWithoutParam() *UnReleaseImageRequest {
 func (r *UnReleaseImageRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param imageId: 镜像ID。(Required) */
 func (r *UnReleaseImageRequest) SetImageId(imageId string) {
     r.ImageId = imageId

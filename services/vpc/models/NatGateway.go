@@ -47,7 +47,13 @@ type NatGateway struct {
     /* 子网ID (Optional) */
     SubnetId string `json:"subnetId"`
 
-    /* NAT网关的IP可用区属性 (Optional) */
+    /* NAT网关私有IP地址 (Optional) */
+    PrivateIpAddress string `json:"privateIpAddress"`
+
+    /* NAT网关公网IP (Optional) */
+    ElasticIps []NatGatewayElasticIp `json:"elasticIps"`
+
+    /* NAT网关的IP可用区属性,即将废弃 (Optional) */
     AzIp []AzIp `json:"azIp"`
 
     /* NAT网关创建时间 (Optional) */
@@ -55,4 +61,7 @@ type NatGateway struct {
 
     /* Tag信息 (Optional) */
     Tags []Tag `json:"tags"`
+
+    /* 包含下一跳为本NAT网关路由的子网路由表id列表 (Optional) */
+    RouteTableIds []string `json:"routeTableIds"`
 }

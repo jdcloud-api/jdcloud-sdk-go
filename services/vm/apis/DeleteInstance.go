@@ -30,6 +30,12 @@ type DeleteInstanceRequest struct {
     /* 云主机ID。  */
     InstanceId string `json:"instanceId"`
 
+    /* 是否删除主机的主网卡绑定的所有弹性公网IP，默认为否。可选值：`true`，`false`。
+当回收站功能关闭的时候，此参数生效。
+当回收站功能开启的时候，且参数 `destroy` 为 `true` 的时候，此参数生效。
+当回收站功能开启的时候，且参数 `destroy` 为 `false` 的时候，此参数不生效。
+ (Optional) */
+    DeletePrimaryNetworkInterfaceAllElasticIp *bool `json:"deletePrimaryNetworkInterfaceAllElasticIp"`
 }
 
 /*
@@ -58,10 +64,16 @@ func NewDeleteInstanceRequest(
 /*
  * param regionId: 地域ID。 (Required)
  * param instanceId: 云主机ID。 (Required)
+ * param deletePrimaryNetworkInterfaceAllElasticIp: 是否删除主机的主网卡绑定的所有弹性公网IP，默认为否。可选值：`true`，`false`。
+当回收站功能关闭的时候，此参数生效。
+当回收站功能开启的时候，且参数 `destroy` 为 `true` 的时候，此参数生效。
+当回收站功能开启的时候，且参数 `destroy` 为 `false` 的时候，此参数不生效。
+ (Optional)
  */
 func NewDeleteInstanceRequestWithAllParams(
     regionId string,
     instanceId string,
+    deletePrimaryNetworkInterfaceAllElasticIp *bool,
 ) *DeleteInstanceRequest {
 
     return &DeleteInstanceRequest{
@@ -73,6 +85,7 @@ func NewDeleteInstanceRequestWithAllParams(
         },
         RegionId: regionId,
         InstanceId: instanceId,
+        DeletePrimaryNetworkInterfaceAllElasticIp: deletePrimaryNetworkInterfaceAllElasticIp,
     }
 }
 
@@ -93,10 +106,17 @@ func NewDeleteInstanceRequestWithoutParam() *DeleteInstanceRequest {
 func (r *DeleteInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 云主机ID。(Required) */
 func (r *DeleteInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
+}
+/* param deletePrimaryNetworkInterfaceAllElasticIp: 是否删除主机的主网卡绑定的所有弹性公网IP，默认为否。可选值：`true`，`false`。
+当回收站功能关闭的时候，此参数生效。
+当回收站功能开启的时候，且参数 `destroy` 为 `true` 的时候，此参数生效。
+当回收站功能开启的时候，且参数 `destroy` 为 `false` 的时候，此参数不生效。
+(Optional) */
+func (r *DeleteInstanceRequest) SetDeletePrimaryNetworkInterfaceAllElasticIp(deletePrimaryNetworkInterfaceAllElasticIp bool) {
+    r.DeletePrimaryNetworkInterfaceAllElasticIp = &deletePrimaryNetworkInterfaceAllElasticIp
 }
 
 

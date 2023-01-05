@@ -93,11 +93,11 @@ func NewDescribeElasticIpRequestWithoutParam() *DescribeElasticIpRequest {
 func (r *DescribeElasticIpRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param elasticIpId: ElasticIp ID(Required) */
 func (r *DescribeElasticIpRequest) SetElasticIpId(elasticIpId string) {
     r.ElasticIpId = elasticIpId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

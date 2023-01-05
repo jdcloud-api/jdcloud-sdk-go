@@ -29,7 +29,6 @@ type DescribeImageMembersRequest struct {
 
     /* 镜像ID。  */
     ImageId string `json:"imageId"`
-
 }
 
 /*
@@ -93,7 +92,6 @@ func NewDescribeImageMembersRequestWithoutParam() *DescribeImageMembersRequest {
 func (r *DescribeImageMembersRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param imageId: 镜像ID。(Required) */
 func (r *DescribeImageMembersRequest) SetImageId(imageId string) {
     r.ImageId = imageId

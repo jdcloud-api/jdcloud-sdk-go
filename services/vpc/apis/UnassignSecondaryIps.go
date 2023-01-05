@@ -104,21 +104,19 @@ func NewUnassignSecondaryIpsRequestWithoutParam() *UnassignSecondaryIpsRequest {
 func (r *UnassignSecondaryIpsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param networkInterfaceId: networkInterface ID(Required) */
 func (r *UnassignSecondaryIpsRequest) SetNetworkInterfaceId(networkInterfaceId string) {
     r.NetworkInterfaceId = networkInterfaceId
 }
-
 /* param secondaryIps: 指定删除的secondaryIp地址(Optional) */
 func (r *UnassignSecondaryIpsRequest) SetSecondaryIps(secondaryIps []string) {
     r.SecondaryIps = secondaryIps
 }
-
 /* param secondaryCidrs: 指定删除的secondaryIp网段(Optional) */
 func (r *UnassignSecondaryIpsRequest) SetSecondaryCidrs(secondaryCidrs []string) {
     r.SecondaryCidrs = secondaryCidrs
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -117,22 +117,18 @@ func NewDescribeSnapshotsRequestWithoutParam() *DescribeSnapshotsRequest {
 func (r *DescribeSnapshotsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param pageNumber: 页码, 默认为1, 取值范围：[1,∞)(Optional) */
 func (r *DescribeSnapshotsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小，默认为20，取值范围：[10,100](Optional) */
 func (r *DescribeSnapshotsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param snapshotSource: 查找快照的类型，可以为private，others，shared，默认为private(Optional) */
 func (r *DescribeSnapshotsRequest) SetSnapshotSource(snapshotSource string) {
     r.SnapshotSource = &snapshotSource
 }
-
 /* param filters: snapshotId - 云硬盘快照ID，支持多个
 diskId - 生成快照的云硬盘ID，支持多个
 status - 快照状态，精确匹配，支持多个,取值为 creating、available、copying、deleting、error_create、error_delete
@@ -141,6 +137,7 @@ name - 快照名称，模糊匹配，支持单个
 func (r *DescribeSnapshotsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

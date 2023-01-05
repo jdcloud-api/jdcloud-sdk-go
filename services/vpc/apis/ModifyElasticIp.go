@@ -101,16 +101,15 @@ func NewModifyElasticIpRequestWithoutParam() *ModifyElasticIpRequest {
 func (r *ModifyElasticIpRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param elasticIpId: ElasticIp ID(Required) */
 func (r *ModifyElasticIpRequest) SetElasticIpId(elasticIpId string) {
     r.ElasticIpId = elasticIpId
 }
-
 /* param bandwidthMbps: 弹性公网IP的限速（单位：Mbps），取值范围为[1-200](Required) */
 func (r *ModifyElasticIpRequest) SetBandwidthMbps(bandwidthMbps int) {
     r.BandwidthMbps = bandwidthMbps
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

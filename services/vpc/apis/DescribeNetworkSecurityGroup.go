@@ -93,11 +93,11 @@ func NewDescribeNetworkSecurityGroupRequestWithoutParam() *DescribeNetworkSecuri
 func (r *DescribeNetworkSecurityGroupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param networkSecurityGroupId: NetworkSecurityGroup ID(Required) */
 func (r *DescribeNetworkSecurityGroupRequest) SetNetworkSecurityGroupId(networkSecurityGroupId string) {
     r.NetworkSecurityGroupId = networkSecurityGroupId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

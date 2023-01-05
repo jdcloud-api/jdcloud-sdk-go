@@ -102,16 +102,15 @@ func NewModifyNetworkSecurityGroupRulesRequestWithoutParam() *ModifyNetworkSecur
 func (r *ModifyNetworkSecurityGroupRulesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param networkSecurityGroupId: NetworkSecurityGroup ID(Required) */
 func (r *ModifyNetworkSecurityGroupRulesRequest) SetNetworkSecurityGroupId(networkSecurityGroupId string) {
     r.NetworkSecurityGroupId = networkSecurityGroupId
 }
-
 /* param modifySecurityGroupRuleSpecs: 安全组规则信息(Required) */
 func (r *ModifyNetworkSecurityGroupRulesRequest) SetModifySecurityGroupRuleSpecs(modifySecurityGroupRuleSpecs []vpc.ModifySecurityGroupRules) {
     r.ModifySecurityGroupRuleSpecs = modifySecurityGroupRuleSpecs
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

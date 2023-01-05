@@ -104,21 +104,19 @@ func NewModifyNetworkSecurityGroupRequestWithoutParam() *ModifyNetworkSecurityGr
 func (r *ModifyNetworkSecurityGroupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param networkSecurityGroupId: NetworkSecurityGroup ID(Required) */
 func (r *ModifyNetworkSecurityGroupRequest) SetNetworkSecurityGroupId(networkSecurityGroupId string) {
     r.NetworkSecurityGroupId = networkSecurityGroupId
 }
-
 /* param networkSecurityGroupName: 安全组的名字。名称取值范围：1-32个中文、英文大小写的字母、数字和下划线分隔符(Optional) */
 func (r *ModifyNetworkSecurityGroupRequest) SetNetworkSecurityGroupName(networkSecurityGroupName string) {
     r.NetworkSecurityGroupName = &networkSecurityGroupName
 }
-
 /* param description: 安全组的描述，取值范围：0-256个UTF-8编码下的全部字符(Optional) */
 func (r *ModifyNetworkSecurityGroupRequest) SetDescription(description string) {
     r.Description = &description
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

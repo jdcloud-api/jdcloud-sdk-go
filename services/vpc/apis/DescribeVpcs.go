@@ -37,7 +37,7 @@ type DescribeVpcsRequest struct {
 
     /* vpcIds - vpc ID列表，支持多个
 vpcNames - vpc名称列表,支持多个
-azType - VPC az类型，取值：all(全部类型)，standard(标准VPC)，edge(边缘VPC)，默认standard ，支持单个
+azType - VPC az类型，取值：all(全部类型)，standard(标准VPC)，edge(边缘VPC)，默认all，支持单个
 azs - 可用区，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
@@ -69,7 +69,7 @@ func NewDescribeVpcsRequest(
  * param pageSize: 分页大小，默认为20，取值范围：[10,100] (Optional)
  * param filters: vpcIds - vpc ID列表，支持多个
 vpcNames - vpc名称列表,支持多个
-azType - VPC az类型，取值：all(全部类型)，standard(标准VPC)，edge(边缘VPC)，默认standard ，支持单个
+azType - VPC az类型，取值：all(全部类型)，standard(标准VPC)，edge(边缘VPC)，默认all，支持单个
 azs - 可用区，支持多个
  (Optional)
  */
@@ -111,25 +111,23 @@ func NewDescribeVpcsRequestWithoutParam() *DescribeVpcsRequest {
 func (r *DescribeVpcsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param pageNumber: 页码, 默认为1, 取值范围：[1,∞), 页码超过总页数时, 显示最后一页(Optional) */
 func (r *DescribeVpcsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小，默认为20，取值范围：[10,100](Optional) */
 func (r *DescribeVpcsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param filters: vpcIds - vpc ID列表，支持多个
 vpcNames - vpc名称列表,支持多个
-azType - VPC az类型，取值：all(全部类型)，standard(标准VPC)，edge(边缘VPC)，默认standard ，支持单个
+azType - VPC az类型，取值：all(全部类型)，standard(标准VPC)，edge(边缘VPC)，默认all，支持单个
 azs - 可用区，支持多个
 (Optional) */
 func (r *DescribeVpcsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

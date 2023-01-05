@@ -30,7 +30,6 @@ type DescribeInstanceTemplateRequest struct {
 
     /* 实例模板ID。  */
     InstanceTemplateId string `json:"instanceTemplateId"`
-
 }
 
 /*
@@ -94,7 +93,6 @@ func NewDescribeInstanceTemplateRequestWithoutParam() *DescribeInstanceTemplateR
 func (r *DescribeInstanceTemplateRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceTemplateId: 实例模板ID。(Required) */
 func (r *DescribeInstanceTemplateRequest) SetInstanceTemplateId(instanceTemplateId string) {
     r.InstanceTemplateId = instanceTemplateId

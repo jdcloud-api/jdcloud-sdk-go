@@ -48,4 +48,7 @@ type Vpc struct {
 
     /* VPC可用区, 标准VPC为""， 边缘VPC为边缘az (Optional) */
     Az string `json:"az"`
+
+    /* VPC关联的策略Id (Optional) */
+    VpcPolicyId string `json:"vpcPolicyId"`
 }

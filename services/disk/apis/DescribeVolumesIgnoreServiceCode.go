@@ -130,22 +130,18 @@ func NewDescribeVolumesIgnoreServiceCodeRequestWithoutParam() *DescribeVolumesIg
 func (r *DescribeVolumesIgnoreServiceCodeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param pageNumber: 页码, 默认为1, 取值范围：[1,∞)(Optional) */
 func (r *DescribeVolumesIgnoreServiceCodeRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小，默认为20，取值范围：[10,100](Optional) */
 func (r *DescribeVolumesIgnoreServiceCodeRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param tags: Tag筛选条件(Optional) */
 func (r *DescribeVolumesIgnoreServiceCodeRequest) SetTags(tags []disk.TagFilter) {
     r.Tags = tags
 }
-
 /* param filterGroups: diskId - 云硬盘ID，精确匹配，支持多个
 diskType - 云硬盘类型，精确匹配，支持多个，取值为 ssd,premium-hdd,ssd.io1,ssd.gp1,hdd.std1
 instanceId - 云硬盘所挂载主机的ID，精确匹配，支持多个
@@ -161,6 +157,7 @@ notPolicyId - 未绑定policyId的云硬盘，精确匹配，支持多个
 func (r *DescribeVolumesIgnoreServiceCodeRequest) SetFilterGroups(filterGroups []disk.FilterGroups) {
     r.FilterGroups = filterGroups
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

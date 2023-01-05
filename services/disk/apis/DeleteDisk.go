@@ -29,6 +29,9 @@ type DeleteDiskRequest struct {
 
     /* 云硬盘ID  */
     DiskId string `json:"diskId"`
+
+    /* true 加入回收站 false 或者不传直接删除 (Optional) */
+    PutInRecycleBin *bool `json:"putInRecycleBin"`
 }
 
 /*
@@ -57,10 +60,12 @@ func NewDeleteDiskRequest(
 /*
  * param regionId: 地域ID (Required)
  * param diskId: 云硬盘ID (Required)
+ * param putInRecycleBin: true 加入回收站 false 或者不传直接删除 (Optional)
  */
 func NewDeleteDiskRequestWithAllParams(
     regionId string,
     diskId string,
+    putInRecycleBin *bool,
 ) *DeleteDiskRequest {
 
     return &DeleteDiskRequest{
@@ -72,6 +77,7 @@ func NewDeleteDiskRequestWithAllParams(
         },
         RegionId: regionId,
         DiskId: diskId,
+        PutInRecycleBin: putInRecycleBin,
     }
 }
 
@@ -92,11 +98,15 @@ func NewDeleteDiskRequestWithoutParam() *DeleteDiskRequest {
 func (r *DeleteDiskRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param diskId: 云硬盘ID(Required) */
 func (r *DeleteDiskRequest) SetDiskId(diskId string) {
     r.DiskId = diskId
 }
+/* param putInRecycleBin: true 加入回收站 false 或者不传直接删除(Optional) */
+func (r *DeleteDiskRequest) SetPutInRecycleBin(putInRecycleBin bool) {
+    r.PutInRecycleBin = &putInRecycleBin
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

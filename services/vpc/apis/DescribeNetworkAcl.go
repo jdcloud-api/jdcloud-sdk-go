@@ -93,11 +93,11 @@ func NewDescribeNetworkAclRequestWithoutParam() *DescribeNetworkAclRequest {
 func (r *DescribeNetworkAclRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param networkAclId: networkAclId ID(Required) */
 func (r *DescribeNetworkAclRequest) SetNetworkAclId(networkAclId string) {
     r.NetworkAclId = networkAclId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

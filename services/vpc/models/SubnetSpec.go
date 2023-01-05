@@ -36,4 +36,7 @@ type SubnetSpec struct {
 
     /* 子网内预留网段掩码长度，此网段IP地址按照单个申请，子网内其余部分IP地址以网段形式分配。此参数非必选，缺省值为0，代表子网内所有IP地址都按照单个申请 (Optional) */
     IpMaskLen int `json:"ipMaskLen"`
+
+    /* 是否只预检此次请求。true：不会创建子网，只会对参数进行校验；false：正常的创建请求。默认为false。 (Optional) */
+    DryRun bool `json:"dryRun"`
 }

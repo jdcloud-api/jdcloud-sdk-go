@@ -102,16 +102,15 @@ func NewAddNetworkSecurityGroupRulesRequestWithoutParam() *AddNetworkSecurityGro
 func (r *AddNetworkSecurityGroupRulesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param networkSecurityGroupId: NetworkSecurityGroup ID(Required) */
 func (r *AddNetworkSecurityGroupRulesRequest) SetNetworkSecurityGroupId(networkSecurityGroupId string) {
     r.NetworkSecurityGroupId = networkSecurityGroupId
 }
-
 /* param networkSecurityGroupRuleSpecs: 安全组规则信息(Required) */
 func (r *AddNetworkSecurityGroupRulesRequest) SetNetworkSecurityGroupRuleSpecs(networkSecurityGroupRuleSpecs []vpc.AddSecurityGroupRules) {
     r.NetworkSecurityGroupRuleSpecs = networkSecurityGroupRuleSpecs
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
@@ -126,4 +125,5 @@ type AddNetworkSecurityGroupRulesResponse struct {
 }
 
 type AddNetworkSecurityGroupRulesResult struct {
+    SecurityGroupRules []vpc.SecurityGroupRule `json:"securityGroupRules"`
 }

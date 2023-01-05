@@ -104,21 +104,19 @@ func NewDisassociateElasticIpRequestWithoutParam() *DisassociateElasticIpRequest
 func (r *DisassociateElasticIpRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param networkInterfaceId: networkInterface ID(Required) */
 func (r *DisassociateElasticIpRequest) SetNetworkInterfaceId(networkInterfaceId string) {
     r.NetworkInterfaceId = networkInterfaceId
 }
-
 /* param elasticIpId: 指定解绑的弹性Ip Id(Optional) */
 func (r *DisassociateElasticIpRequest) SetElasticIpId(elasticIpId string) {
     r.ElasticIpId = &elasticIpId
 }
-
 /* param elasticIpAddress: 指定解绑的弹性Ip地址(Optional) */
 func (r *DisassociateElasticIpRequest) SetElasticIpAddress(elasticIpAddress string) {
     r.ElasticIpAddress = &elasticIpAddress
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

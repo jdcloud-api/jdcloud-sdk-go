@@ -104,21 +104,19 @@ func NewModifyDiskAttributeRequestWithoutParam() *ModifyDiskAttributeRequest {
 func (r *ModifyDiskAttributeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param diskId: 云硬盘ID(Required) */
 func (r *ModifyDiskAttributeRequest) SetDiskId(diskId string) {
     r.DiskId = diskId
 }
-
 /* param name: 云硬盘名称，只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符。(Optional) */
 func (r *ModifyDiskAttributeRequest) SetName(name string) {
     r.Name = &name
 }
-
 /* param description: 云硬盘描述，允许输入UTF-8编码下的全部字符，不超过256字符。(Optional) */
 func (r *ModifyDiskAttributeRequest) SetDescription(description string) {
     r.Description = &description
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

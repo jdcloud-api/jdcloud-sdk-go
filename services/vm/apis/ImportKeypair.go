@@ -34,7 +34,6 @@ type ImportKeypairRequest struct {
 
     /* 密钥对的公钥部分。  */
     PublicKey string `json:"publicKey"`
-
 }
 
 /*
@@ -108,14 +107,12 @@ func NewImportKeypairRequestWithoutParam() *ImportKeypairRequest {
 func (r *ImportKeypairRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param keyName: 密钥对名称，需要全局唯一。
 只允许数字、大小写字母、下划线“_”及中划线“-”，不超过32个字符。
 (Required) */
 func (r *ImportKeypairRequest) SetKeyName(keyName string) {
     r.KeyName = keyName
 }
-
 /* param publicKey: 密钥对的公钥部分。(Required) */
 func (r *ImportKeypairRequest) SetPublicKey(publicKey string) {
     r.PublicKey = publicKey

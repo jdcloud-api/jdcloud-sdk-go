@@ -48,7 +48,6 @@ type DescribeInstanceStatusRequest struct {
 `subnetId`: 子网ID，精确匹配，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
-
 }
 
 /*
@@ -126,17 +125,14 @@ func NewDescribeInstanceStatusRequestWithoutParam() *DescribeInstanceStatusReque
 func (r *DescribeInstanceStatusRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param pageNumber: 页码；默认为1。(Optional) */
 func (r *DescribeInstanceStatusRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小；<br>默认为20；取值范围[10, 100]。(Optional) */
 func (r *DescribeInstanceStatusRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param filters: <b>filters 中支持使用以下关键字进行过滤</b>
 `instanceId`: 云主机ID，精确匹配，支持多个
 `privateIpAddress`: 主网卡内网主IP地址，模糊匹配，支持多个

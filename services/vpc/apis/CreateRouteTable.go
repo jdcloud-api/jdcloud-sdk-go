@@ -33,8 +33,11 @@ type CreateRouteTableRequest struct {
     /* 路由表名称，只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符。  */
     RouteTableName string `json:"routeTableName"`
 
-    /* 描述,​ 允许输入UTF-8编码下的全部字符，不超过256字符 (Optional) */
+    /* 描述，允许输入UTF-8编码下的全部字符，不超过256字符 (Optional) */
     Description *string `json:"description"`
+
+    /* 绑定资源类型，取值：subnet(缺省时默认值)，gateway (Optional) */
+    AssociateType *string `json:"associateType"`
 }
 
 /*
@@ -67,13 +70,15 @@ func NewCreateRouteTableRequest(
  * param regionId: Region ID (Required)
  * param vpcId: 路由表所属的私有网络ID (Required)
  * param routeTableName: 路由表名称，只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符。 (Required)
- * param description: 描述,​ 允许输入UTF-8编码下的全部字符，不超过256字符 (Optional)
+ * param description: 描述，允许输入UTF-8编码下的全部字符，不超过256字符 (Optional)
+ * param associateType: 绑定资源类型，取值：subnet(缺省时默认值)，gateway (Optional)
  */
 func NewCreateRouteTableRequestWithAllParams(
     regionId string,
     vpcId string,
     routeTableName string,
     description *string,
+    associateType *string,
 ) *CreateRouteTableRequest {
 
     return &CreateRouteTableRequest{
@@ -87,6 +92,7 @@ func NewCreateRouteTableRequestWithAllParams(
         VpcId: vpcId,
         RouteTableName: routeTableName,
         Description: description,
+        AssociateType: associateType,
     }
 }
 
@@ -107,21 +113,23 @@ func NewCreateRouteTableRequestWithoutParam() *CreateRouteTableRequest {
 func (r *CreateRouteTableRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param vpcId: 路由表所属的私有网络ID(Required) */
 func (r *CreateRouteTableRequest) SetVpcId(vpcId string) {
     r.VpcId = vpcId
 }
-
 /* param routeTableName: 路由表名称，只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符。(Required) */
 func (r *CreateRouteTableRequest) SetRouteTableName(routeTableName string) {
     r.RouteTableName = routeTableName
 }
-
-/* param description: 描述,​ 允许输入UTF-8编码下的全部字符，不超过256字符(Optional) */
+/* param description: 描述，允许输入UTF-8编码下的全部字符，不超过256字符(Optional) */
 func (r *CreateRouteTableRequest) SetDescription(description string) {
     r.Description = &description
 }
+/* param associateType: 绑定资源类型，取值：subnet(缺省时默认值)，gateway(Optional) */
+func (r *CreateRouteTableRequest) SetAssociateType(associateType string) {
+    r.AssociateType = &associateType
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -115,17 +115,14 @@ func NewDescribeVpcPeeringsRequestWithoutParam() *DescribeVpcPeeringsRequest {
 func (r *DescribeVpcPeeringsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param pageNumber: 页码, 默认为1, 取值范围：[1,∞), 页码超过总页数时, 显示最后一页(Optional) */
 func (r *DescribeVpcPeeringsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小，默认为20，取值范围：[10,100](Optional) */
 func (r *DescribeVpcPeeringsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param filters: vpcPeeringIds - vpcPeering ID，支持多个
 vpcPeeringNames - vpcPeering名称列表，支持多个
 vpcId	- vpcPeering本端Vpc Id，支持单个
@@ -136,6 +133,7 @@ azs - vpcPeering本端VPC可用区，支持多个
 func (r *DescribeVpcPeeringsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

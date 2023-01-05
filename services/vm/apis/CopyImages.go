@@ -33,7 +33,6 @@ type CopyImagesRequest struct {
 
     /* 目标地域。  */
     DestinationRegion string `json:"destinationRegion"`
-
 }
 
 /*
@@ -103,12 +102,10 @@ func NewCopyImagesRequestWithoutParam() *CopyImagesRequest {
 func (r *CopyImagesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param sourceImageIds: 要复制的私有镜像ID列表，最多支持10个。(Required) */
 func (r *CopyImagesRequest) SetSourceImageIds(sourceImageIds []string) {
     r.SourceImageIds = sourceImageIds
 }
-
 /* param destinationRegion: 目标地域。(Required) */
 func (r *CopyImagesRequest) SetDestinationRegion(destinationRegion string) {
     r.DestinationRegion = destinationRegion

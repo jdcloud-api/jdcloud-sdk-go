@@ -29,7 +29,7 @@ type DiskSpec struct {
     /* 云硬盘描述,默认为空 (Optional) */
     Description *string `json:"description"`
 
-    /* 云硬盘类型，取值为ssd、premium-hdd、ssd.gp1、ssd.io1、hdd.std1之一  */
+    /* 云硬盘类型，取值为ssd、premium-hdd、ssd.gp1、ssd.io1、hdd.std1、ssd.io2、ssd.gp2之一  */
     DiskType string `json:"diskType"`
 
     /* 云硬盘大小，单位为 GiB，ssd 类型取值范围[20,1000]GB，步长为10G，premium-hdd 类型取值范围[20,3000]GB，步长为10G, ssd.gp1, ssd.io1, hdd.std1 类型取值均是范围[20,16000]GB，步长为10G  */

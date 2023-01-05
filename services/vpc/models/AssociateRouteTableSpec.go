@@ -19,6 +19,6 @@ package models
 
 type AssociateRouteTableSpec struct {
 
-    /* 路由表要绑定的子网ID列表, subnet已被其他路由表绑定时，自动解绑。路由表绑定的子网属性要相同，或者都是标准子网，或者都是相同边缘可用区的边缘子网。  */
+    /* 路由表要绑定的子网ID列表, 只有associateType是subnet类型的路由表才支持绑定；subnet已被其他路由表绑定时，自动解绑。路由表绑定的子网属性要相同，或者都是标准子网，或者都是相同边缘可用区的边缘子网。  */
     SubnetIds []string `json:"subnetIds"`
 }

@@ -107,21 +107,19 @@ func NewCreateNetworkSecurityGroupRequestWithoutParam() *CreateNetworkSecurityGr
 func (r *CreateNetworkSecurityGroupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param vpcId: 私有网络ID(Required) */
 func (r *CreateNetworkSecurityGroupRequest) SetVpcId(vpcId string) {
     r.VpcId = vpcId
 }
-
 /* param networkSecurityGroupName: 安全组名称，只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符。(Required) */
 func (r *CreateNetworkSecurityGroupRequest) SetNetworkSecurityGroupName(networkSecurityGroupName string) {
     r.NetworkSecurityGroupName = networkSecurityGroupName
 }
-
 /* param description: 描述,​ 允许输入UTF-8编码下的全部字符，不超过256字符(Optional) */
 func (r *CreateNetworkSecurityGroupRequest) SetDescription(description string) {
     r.Description = &description
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

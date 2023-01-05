@@ -92,11 +92,11 @@ func NewDeleteVpcRequestWithoutParam() *DeleteVpcRequest {
 func (r *DeleteVpcRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param vpcId: Vpc ID(Required) */
 func (r *DeleteVpcRequest) SetVpcId(vpcId string) {
     r.VpcId = vpcId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

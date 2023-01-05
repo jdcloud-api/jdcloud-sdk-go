@@ -30,7 +30,6 @@ type DescribeImageConstraintsRequest struct {
 
     /* 镜像ID。  */
     ImageId string `json:"imageId"`
-
 }
 
 /*
@@ -94,7 +93,6 @@ func NewDescribeImageConstraintsRequestWithoutParam() *DescribeImageConstraintsR
 func (r *DescribeImageConstraintsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param imageId: 镜像ID。(Required) */
 func (r *DescribeImageConstraintsRequest) SetImageId(imageId string) {
     r.ImageId = imageId

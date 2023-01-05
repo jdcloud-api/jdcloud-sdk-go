@@ -44,7 +44,7 @@ type Disk struct {
     /* 该云硬盘实际应用的吞吐量的数值 (Optional) */
     Throughput int `json:"throughput"`
 
-    /* 云硬盘状态，取值为 creating、available、in-use、extending、restoring、deleting、deleted、error_create、error_delete、error_restore、error_extend 之一 (Optional) */
+    /* 云硬盘状态，取值为 creating、available、in-use、extending、restoring、deleting、deleted、error_create、error_delete、error_restore、error_extend、in-recyclebin 之一 (Optional) */
     Status string `json:"status"`
 
     /* 挂载信息 (Optional) */
@@ -73,4 +73,13 @@ type Disk struct {
 
     /*  (Optional) */
     SnapshotPolicies []SnapshotPolicy `json:"snapshotPolicies"`
+
+    /* 资源组ID (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
+
+    /* 云盘是否可以加入回收站 (Optional) */
+    CanPutInRecycleBin bool `json:"canPutInRecycleBin"`
+
+    /* 加入回收站的时间 (Optional) */
+    TrashTime string `json:"trashTime"`
 }

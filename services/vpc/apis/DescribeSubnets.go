@@ -42,7 +42,7 @@ aclId - 子网关联acl Id，支持单个
 vpcId - 子网所属VPC Id，支持单个
 subnetType - 子网类型，取值：all(全部类型)，standard(标准子网)，edge(边缘子网)，默认standard ，支持单个
 azs - 可用区，支持多个
-azType - VPC az类型，取值：all(全部类型)，standard(标准可用区子网)，edge(边缘可用区子网)，默认standard ，支持单个
+azType - VPC az类型，取值：all(全部类型)，standard(标准可用区子网)，edge(边缘可用区子网)，默认all，支持单个
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
@@ -78,7 +78,7 @@ aclId - 子网关联acl Id，支持单个
 vpcId - 子网所属VPC Id，支持单个
 subnetType - 子网类型，取值：all(全部类型)，standard(标准子网)，edge(边缘子网)，默认standard ，支持单个
 azs - 可用区，支持多个
-azType - VPC az类型，取值：all(全部类型)，standard(标准可用区子网)，edge(边缘可用区子网)，默认standard ，支持单个
+azType - VPC az类型，取值：all(全部类型)，standard(标准可用区子网)，edge(边缘可用区子网)，默认all，支持单个
  (Optional)
  */
 func NewDescribeSubnetsRequestWithAllParams(
@@ -119,17 +119,14 @@ func NewDescribeSubnetsRequestWithoutParam() *DescribeSubnetsRequest {
 func (r *DescribeSubnetsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param pageNumber: 页码, 默认为1, 取值范围：[1,∞), 页码超过总页数时, 显示最后一页(Optional) */
 func (r *DescribeSubnetsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小，默认为20，取值范围：[10,100](Optional) */
 func (r *DescribeSubnetsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param filters: subnetIds - subnet ID列表，支持多个
 subnetNames - subnet名称列表，支持多个
 routeTableId	- 子网关联路由表Id，支持单个
@@ -137,11 +134,12 @@ aclId - 子网关联acl Id，支持单个
 vpcId - 子网所属VPC Id，支持单个
 subnetType - 子网类型，取值：all(全部类型)，standard(标准子网)，edge(边缘子网)，默认standard ，支持单个
 azs - 可用区，支持多个
-azType - VPC az类型，取值：all(全部类型)，standard(标准可用区子网)，edge(边缘可用区子网)，默认standard ，支持单个
+azType - VPC az类型，取值：all(全部类型)，standard(标准可用区子网)，edge(边缘可用区子网)，默认all，支持单个
 (Optional) */
 func (r *DescribeSubnetsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

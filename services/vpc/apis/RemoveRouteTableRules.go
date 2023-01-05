@@ -101,16 +101,15 @@ func NewRemoveRouteTableRulesRequestWithoutParam() *RemoveRouteTableRulesRequest
 func (r *RemoveRouteTableRulesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param routeTableId: RouteTable ID(Required) */
 func (r *RemoveRouteTableRulesRequest) SetRouteTableId(routeTableId string) {
     r.RouteTableId = routeTableId
 }
-
 /* param ruleIds: 路由表规则Id列表(Required) */
 func (r *RemoveRouteTableRulesRequest) SetRuleIds(ruleIds []string) {
     r.RuleIds = ruleIds
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

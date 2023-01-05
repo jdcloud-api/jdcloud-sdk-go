@@ -32,8 +32,20 @@ type NatGatewaySpec struct {
     /* 子网ID  */
     SubnetId string `json:"subnetId"`
 
-    /* NAT网关的可用区属性，目前仅支持一个  */
+    /* NAT网关的可用区属性，即将废弃 (Optional) */
     AzIpSpecs []AzIpSpec `json:"azIpSpecs"`
+
+    /* NAT网关可用区 (Optional) */
+    Azs []string `json:"azs"`
+
+    /* 选择已有公网IP列表。选择已有和新购公网IP可以同时配置，也可以配置其一 (Optional) */
+    ElasticIpIds []string `json:"elasticIpIds"`
+
+    /* 新购公网IP数量 (Optional) */
+    ElasticIpCount int `json:"elasticIpCount"`
+
+    /* 新购公网IP配置。NAT网关仅支持打包创建标准公网IP，不支持边缘公网IP。且标准公网IP仅支持按配置、按用量两种计费模式。 (Optional) */
+    ElasticIpSpec ElasticIpSpec `json:"elasticIpSpec"`
 
     /* 计费配置，仅支持按配置，默认按配置 (Optional) */
     NatGatewayCharge charge.ChargeSpec `json:"natGatewayCharge"`

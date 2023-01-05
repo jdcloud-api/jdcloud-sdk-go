@@ -102,16 +102,15 @@ func NewModifyNetworkAclRulesRequestWithoutParam() *ModifyNetworkAclRulesRequest
 func (r *ModifyNetworkAclRulesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param networkAclId: networkAclId ID(Required) */
 func (r *ModifyNetworkAclRulesRequest) SetNetworkAclId(networkAclId string) {
     r.NetworkAclId = networkAclId
 }
-
 /* param modifyNetworkAclRuleSpecs: networkAcl规则列表(Required) */
 func (r *ModifyNetworkAclRulesRequest) SetModifyNetworkAclRuleSpecs(modifyNetworkAclRuleSpecs []vpc.ModifyNetworkAclRuleSpec) {
     r.ModifyNetworkAclRuleSpecs = modifyNetworkAclRuleSpecs
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -114,31 +114,27 @@ func NewDescribeSnapshotPolicyDiskRelationsRequestWithoutParam() *DescribeSnapsh
 func (r *DescribeSnapshotPolicyDiskRelationsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param diskId: 磁盘ID(Optional) */
 func (r *DescribeSnapshotPolicyDiskRelationsRequest) SetDiskId(diskId []string) {
     r.DiskId = diskId
 }
-
 /* param diskRegion: 磁盘地域ID(Optional) */
 func (r *DescribeSnapshotPolicyDiskRelationsRequest) SetDiskRegion(diskRegion []string) {
     r.DiskRegion = diskRegion
 }
-
 /* param policyId: 策略ID(Optional) */
 func (r *DescribeSnapshotPolicyDiskRelationsRequest) SetPolicyId(policyId []string) {
     r.PolicyId = policyId
 }
-
 /* param pageNumber: 页码, 默认为1, 取值范围：[1,∞)(Optional) */
 func (r *DescribeSnapshotPolicyDiskRelationsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小，默认为20，取值范围：[10,100](Optional) */
 func (r *DescribeSnapshotPolicyDiskRelationsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

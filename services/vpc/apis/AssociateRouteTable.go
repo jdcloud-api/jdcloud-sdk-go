@@ -30,14 +30,14 @@ type AssociateRouteTableRequest struct {
     /* RouteTable ID  */
     RouteTableId string `json:"routeTableId"`
 
-    /* 路由表要绑定的子网ID列表, subnet已被其他路由表绑定时，自动解绑。路由表绑定的子网属性要相同，或者都是标准子网，或者都是相同边缘可用区的边缘子网。  */
+    /* 路由表要绑定的子网ID列表, 只有associateType是subnet类型的路由表才支持绑定；subnet已被其他路由表绑定时，自动解绑。路由表绑定的子网属性要相同，或者都是标准子网，或者都是相同边缘可用区的边缘子网。  */
     SubnetIds []string `json:"subnetIds"`
 }
 
 /*
  * param regionId: Region ID (Required)
  * param routeTableId: RouteTable ID (Required)
- * param subnetIds: 路由表要绑定的子网ID列表, subnet已被其他路由表绑定时，自动解绑。路由表绑定的子网属性要相同，或者都是标准子网，或者都是相同边缘可用区的边缘子网。 (Required)
+ * param subnetIds: 路由表要绑定的子网ID列表, 只有associateType是subnet类型的路由表才支持绑定；subnet已被其他路由表绑定时，自动解绑。路由表绑定的子网属性要相同，或者都是标准子网，或者都是相同边缘可用区的边缘子网。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -63,7 +63,7 @@ func NewAssociateRouteTableRequest(
 /*
  * param regionId: Region ID (Required)
  * param routeTableId: RouteTable ID (Required)
- * param subnetIds: 路由表要绑定的子网ID列表, subnet已被其他路由表绑定时，自动解绑。路由表绑定的子网属性要相同，或者都是标准子网，或者都是相同边缘可用区的边缘子网。 (Required)
+ * param subnetIds: 路由表要绑定的子网ID列表, 只有associateType是subnet类型的路由表才支持绑定；subnet已被其他路由表绑定时，自动解绑。路由表绑定的子网属性要相同，或者都是标准子网，或者都是相同边缘可用区的边缘子网。 (Required)
  */
 func NewAssociateRouteTableRequestWithAllParams(
     regionId string,
@@ -101,16 +101,15 @@ func NewAssociateRouteTableRequestWithoutParam() *AssociateRouteTableRequest {
 func (r *AssociateRouteTableRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param routeTableId: RouteTable ID(Required) */
 func (r *AssociateRouteTableRequest) SetRouteTableId(routeTableId string) {
     r.RouteTableId = routeTableId
 }
-
-/* param subnetIds: 路由表要绑定的子网ID列表, subnet已被其他路由表绑定时，自动解绑。路由表绑定的子网属性要相同，或者都是标准子网，或者都是相同边缘可用区的边缘子网。(Required) */
+/* param subnetIds: 路由表要绑定的子网ID列表, 只有associateType是subnet类型的路由表才支持绑定；subnet已被其他路由表绑定时，自动解绑。路由表绑定的子网属性要相同，或者都是标准子网，或者都是相同边缘可用区的边缘子网。(Required) */
 func (r *AssociateRouteTableRequest) SetSubnetIds(subnetIds []string) {
     r.SubnetIds = subnetIds
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

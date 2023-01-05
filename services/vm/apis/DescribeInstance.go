@@ -30,7 +30,6 @@ type DescribeInstanceRequest struct {
 
     /* 云主机ID。  */
     InstanceId string `json:"instanceId"`
-
 }
 
 /*
@@ -94,7 +93,6 @@ func NewDescribeInstanceRequestWithoutParam() *DescribeInstanceRequest {
 func (r *DescribeInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 云主机ID。(Required) */
 func (r *DescribeInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
