@@ -48,7 +48,6 @@ type ModifyInstanceVpcAttributeRequest struct {
 不更换 `vpc` 时不可以指定安全组。
  (Optional) */
     SecurityGroups []string `json:"securityGroups"`
-
 }
 
 /*
@@ -134,31 +133,26 @@ func NewModifyInstanceVpcAttributeRequestWithoutParam() *ModifyInstanceVpcAttrib
 func (r *ModifyInstanceVpcAttributeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 云主机ID。(Required) */
 func (r *ModifyInstanceVpcAttributeRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param subnetId: 子网Id。(Required) */
 func (r *ModifyInstanceVpcAttributeRequest) SetSubnetId(subnetId string) {
     r.SubnetId = subnetId
 }
-
 /* param assignIpv6: `true`: 分配IPV6地址。
 `false`: 不分配IPV6地址。
 (Optional) */
 func (r *ModifyInstanceVpcAttributeRequest) SetAssignIpv6(assignIpv6 bool) {
     r.AssignIpv6 = &assignIpv6
 }
-
 /* param privateIpAddress: Ipv4地址。
 不变更 `vpc` 及子网时必须指定Ipv4地址
 (Optional) */
 func (r *ModifyInstanceVpcAttributeRequest) SetPrivateIpAddress(privateIpAddress string) {
     r.PrivateIpAddress = &privateIpAddress
 }
-
 /* param securityGroups: 安全组列表。
 更换 `vpc` 时必须指定新的安全组。
 不更换 `vpc` 时不可以指定安全组。

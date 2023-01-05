@@ -33,7 +33,6 @@ type ModifyInstanceDiskAttributeRequest struct {
 
     /* 云硬盘列表。 (Optional) */
     DataDisks []vm.InstanceDiskAttribute `json:"dataDisks"`
-
 }
 
 /*
@@ -100,12 +99,10 @@ func NewModifyInstanceDiskAttributeRequestWithoutParam() *ModifyInstanceDiskAttr
 func (r *ModifyInstanceDiskAttributeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 云主机ID。(Required) */
 func (r *ModifyInstanceDiskAttributeRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param dataDisks: 云硬盘列表。(Optional) */
 func (r *ModifyInstanceDiskAttributeRequest) SetDataDisks(dataDisks []vm.InstanceDiskAttribute) {
     r.DataDisks = dataDisks

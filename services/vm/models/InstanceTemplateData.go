@@ -16,6 +16,7 @@
 
 package models
 
+import disk "github.com/jdcloud-api/jdcloud-sdk-go/services/disk/models"
 
 type InstanceTemplateData struct {
 
@@ -71,4 +72,7 @@ type InstanceTemplateData struct {
 
     /* 突发型实例参数信息 (Optional) */
     BurstInfo InstanceTemplateBurstInfo `json:"burstInfo"`
+
+    /* 自定义实例标签。 (Optional) */
+    InstanceTags []disk.Tag `json:"instanceTags"`
 }

@@ -38,7 +38,6 @@ type DescribeInstanceTypesRequest struct {
 `architecture`: CPU架构，精确匹配，支持单个，可选范围:x86_64或arm64
  (Optional) */
     Filters []common.Filter `json:"filters"`
-
 }
 
 /*
@@ -106,12 +105,10 @@ func NewDescribeInstanceTypesRequestWithoutParam() *DescribeInstanceTypesRequest
 func (r *DescribeInstanceTypesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param serviceName: 产品线类型，默认为 `vm`。支持范围：`vm` 云主机，`nc` 原生容器。(Optional) */
 func (r *DescribeInstanceTypesRequest) SetServiceName(serviceName string) {
     r.ServiceName = &serviceName
 }
-
 /* param filters: <b>filters 中支持使用以下关键字进行过滤</b>
 `instanceTypes`: 实例规格，精确匹配，支持多个
 `az`: 可用区，精确匹配，支持多个

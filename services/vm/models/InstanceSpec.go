@@ -98,6 +98,7 @@ type InstanceSpec struct {
 云主机不支持按用量方式计费，默认为按配置计费。
 打包创建数据盘的情况下，数据盘的计费方式只能与云主机保持一致。
 打包创建弹性公网IP的情况下，若公网IP的计费方式没有指定为按用量计费，那么公网IP计费方式只能与云主机保持一致。
+autoChangeChargeMode和autoChangeChargeModeDate字段只有在按配置计费按时间自动转包年包月的场景下有效
  (Optional) */
     Charge *charge.ChargeSpec `json:"charge"`
 
@@ -134,6 +135,11 @@ type InstanceSpec struct {
  (Optional) */
     NoElasticIp *bool `json:"noElasticIp"`
 
+    /* 使用实例模板创建实例时，如模板中已设置自定义实例标签，期望不使用自定义实例标签时，可通过此参数（`true`）实现。
+仅在指定 `agId` 或指定 `instanceTemplateId`，且 `userTags` 为空时，此参数(`true`)生效。
+ (Optional) */
+    NoInstanceTags *bool `json:"noInstanceTags"`
+
     /* 自定义实例标签。以key-value键值对形式指定，最多支持10个标签。key不能以 "jrn:" 或“jdc-”开头，仅支持中文、大/小写英文、数字及如下符号：`\_.,:\/=+-@`。
  (Optional) */
     UserTags []disk.Tag `json:"userTags"`
@@ -167,4 +173,7 @@ type InstanceSpec struct {
 
     /* 资源组ID (Optional) */
     ResourceGroupId *string `json:"resourceGroupId"`
+
+    /* 虚机CPU拓扑 (Optional) */
+    CpuTopology *CpuTopology `json:"cpuTopology"`
 }

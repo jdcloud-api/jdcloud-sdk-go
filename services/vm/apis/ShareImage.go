@@ -32,7 +32,6 @@ type ShareImageRequest struct {
 
     /* 共享的目标京东云帐户列表。  */
     Pins []string `json:"pins"`
-
 }
 
 /*
@@ -102,12 +101,10 @@ func NewShareImageRequestWithoutParam() *ShareImageRequest {
 func (r *ShareImageRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param imageId: 镜像ID。(Required) */
 func (r *ShareImageRequest) SetImageId(imageId string) {
     r.ImageId = imageId
 }
-
 /* param pins: 共享的目标京东云帐户列表。(Required) */
 func (r *ShareImageRequest) SetPins(pins []string) {
     r.Pins = pins

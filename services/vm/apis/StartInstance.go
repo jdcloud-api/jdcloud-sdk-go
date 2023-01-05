@@ -29,7 +29,6 @@ type StartInstanceRequest struct {
 
     /* 云主机ID。  */
     InstanceId string `json:"instanceId"`
-
 }
 
 /*
@@ -93,7 +92,6 @@ func NewStartInstanceRequestWithoutParam() *StartInstanceRequest {
 func (r *StartInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 云主机ID。(Required) */
 func (r *StartInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId

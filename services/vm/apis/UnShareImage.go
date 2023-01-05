@@ -32,7 +32,6 @@ type UnShareImageRequest struct {
 
     /* 需要取消的京东云帐户列表。  */
     Pins []string `json:"pins"`
-
 }
 
 /*
@@ -102,12 +101,10 @@ func NewUnShareImageRequestWithoutParam() *UnShareImageRequest {
 func (r *UnShareImageRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param imageId: 镜像ID。(Required) */
 func (r *UnShareImageRequest) SetImageId(imageId string) {
     r.ImageId = imageId
 }
-
 /* param pins: 需要取消的京东云帐户列表。(Required) */
 func (r *UnShareImageRequest) SetPins(pins []string) {
     r.Pins = pins

@@ -37,7 +37,6 @@ type AttachNetworkInterfaceRequest struct {
 受管网卡或授信网卡默认为False并且不支持修改。
  (Optional) */
     AutoDelete *bool `json:"autoDelete"`
-
 }
 
 /*
@@ -112,17 +111,14 @@ func NewAttachNetworkInterfaceRequestWithoutParam() *AttachNetworkInterfaceReque
 func (r *AttachNetworkInterfaceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 云主机ID。(Required) */
 func (r *AttachNetworkInterfaceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param networkInterfaceId: 弹性网卡ID。(Required) */
 func (r *AttachNetworkInterfaceRequest) SetNetworkInterfaceId(networkInterfaceId string) {
     r.NetworkInterfaceId = networkInterfaceId
 }
-
 /* param autoDelete: 随云主机实例自动删除，默认为False。
 受管网卡或授信网卡默认为False并且不支持修改。
 (Optional) */

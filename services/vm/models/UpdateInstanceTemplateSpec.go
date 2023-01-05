@@ -16,6 +16,7 @@
 
 package models
 
+import disk "github.com/jdcloud-api/jdcloud-sdk-go/services/disk/models"
 
 type UpdateInstanceTemplateSpec struct {
 
@@ -88,4 +89,11 @@ type UpdateInstanceTemplateSpec struct {
 
     /* 突发型实例参数配置。传入 `null` 表示忽略，否则以新传入的为准。如指定了该参数则覆盖原有参数。 (Optional) */
     BurstSpec *InstanceTemplateBurstSpec `json:"burstSpec"`
+
+    /* 自定义实例标签。以key-value键值对形式指定，最多支持10个标签。key不能以 "jrn:" 或“jdc-”开头，仅支持中文、大/小写英文、数字及如下符号：`\_.,:\/=+-@`。
+ (Optional) */
+    InstanceTags []disk.Tag `json:"instanceTags"`
+
+    /* 移除模板中的自定义实例标签。指定要移除标签的key。 (Optional) */
+    RemoveInstanceTags []string `json:"removeInstanceTags"`
 }

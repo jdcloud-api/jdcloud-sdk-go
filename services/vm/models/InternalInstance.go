@@ -87,4 +87,7 @@ type InternalInstance struct {
 
     /* 实例所在机架信息。 (Optional) */
     Rack string `json:"rack"`
+
+    /* 实例所在的逻辑机架信息 (Optional) */
+    Tor string `json:"tor"`
 }

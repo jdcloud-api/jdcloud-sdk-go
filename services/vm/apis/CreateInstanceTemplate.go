@@ -36,7 +36,6 @@ type CreateInstanceTemplateRequest struct {
 
     /* 实例模板的描述，参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。 (Optional) */
     Description *string `json:"description"`
-
 }
 
 /*
@@ -109,17 +108,14 @@ func NewCreateInstanceTemplateRequestWithoutParam() *CreateInstanceTemplateReque
 func (r *CreateInstanceTemplateRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceTemplateData: 实例模板配置信息。(Required) */
 func (r *CreateInstanceTemplateRequest) SetInstanceTemplateData(instanceTemplateData *vm.InstanceTemplateSpec) {
     r.InstanceTemplateData = instanceTemplateData
 }
-
 /* param name: 实例模板的名称，参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。(Required) */
 func (r *CreateInstanceTemplateRequest) SetName(name string) {
     r.Name = name
 }
-
 /* param description: 实例模板的描述，参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。(Optional) */
 func (r *CreateInstanceTemplateRequest) SetDescription(description string) {
     r.Description = &description

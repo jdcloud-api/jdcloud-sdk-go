@@ -33,7 +33,6 @@ type ModifyInstanceNetworkAttributeRequest struct {
 
     /* 弹性网卡列表。  */
     Networks []vm.InstanceNetworkAttribute `json:"networks"`
-
 }
 
 /*
@@ -103,12 +102,10 @@ func NewModifyInstanceNetworkAttributeRequestWithoutParam() *ModifyInstanceNetwo
 func (r *ModifyInstanceNetworkAttributeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 云主机ID。(Required) */
 func (r *ModifyInstanceNetworkAttributeRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param networks: 弹性网卡列表。(Required) */
 func (r *ModifyInstanceNetworkAttributeRequest) SetNetworks(networks []vm.InstanceNetworkAttribute) {
     r.Networks = networks

@@ -33,7 +33,6 @@ type DescribeInstanceTemplatesCustomdataRequest struct {
 `instanceTemplateId`: 实例模板ID，精确匹配，最多支持10个
  (Optional) */
     Filters []common.Filter `json:"filters"`
-
 }
 
 /*
@@ -96,7 +95,6 @@ func NewDescribeInstanceTemplatesCustomdataRequestWithoutParam() *DescribeInstan
 func (r *DescribeInstanceTemplatesCustomdataRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param filters: <b>filters 中支持使用以下关键字进行过滤</b>
 `instanceTemplateId`: 实例模板ID，精确匹配，最多支持10个
 (Optional) */

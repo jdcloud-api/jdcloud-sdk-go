@@ -38,7 +38,6 @@ type StopInstanceRequest struct {
 `stopCharging`：停机后停止计费，释放实例资源。默认值为空。
  (Optional) */
     ChargeOnStopped *string `json:"chargeOnStopped"`
-
 }
 
 /*
@@ -111,12 +110,10 @@ func NewStopInstanceRequestWithoutParam() *StopInstanceRequest {
 func (r *StopInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 云主机ID。(Required) */
 func (r *StopInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param chargeOnStopped: 停机不计费模式。
 该参数仅对按配置计费且系统盘为云硬盘的实例生效，并且不是专有宿主机中的实例。
 配置停机不计费且停机后，实例部分将停止计费，且释放实例自身包含的资源（CPU/内存/GPU/本地数据盘）。

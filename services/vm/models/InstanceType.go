@@ -57,4 +57,7 @@ type InstanceType struct {
 
     /* 突发型规格信息 (Optional) */
     BurstInfo InstanceTypeBurstInfo `json:"burstInfo"`
+
+    /* 支持的云盘类型 (Optional) */
+    CloudDiskTypes []string `json:"cloudDiskTypes"`
 }

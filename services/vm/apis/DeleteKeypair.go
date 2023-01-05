@@ -29,7 +29,6 @@ type DeleteKeypairRequest struct {
 
     /* 密钥名称。  */
     KeyName string `json:"keyName"`
-
 }
 
 /*
@@ -93,7 +92,6 @@ func NewDeleteKeypairRequestWithoutParam() *DeleteKeypairRequest {
 func (r *DeleteKeypairRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param keyName: 密钥名称。(Required) */
 func (r *DeleteKeypairRequest) SetKeyName(keyName string) {
     r.KeyName = keyName

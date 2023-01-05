@@ -30,7 +30,6 @@ type DescribeImageConstraintsBatchRequest struct {
 
     /* 要查询的镜像ID列表，只支持官方镜像和第三方镜像。 (Optional) */
     Ids []string `json:"ids"`
-
 }
 
 /*
@@ -91,7 +90,6 @@ func NewDescribeImageConstraintsBatchRequestWithoutParam() *DescribeImageConstra
 func (r *DescribeImageConstraintsBatchRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param ids: 要查询的镜像ID列表，只支持官方镜像和第三方镜像。(Optional) */
 func (r *DescribeImageConstraintsBatchRequest) SetIds(ids []string) {
     r.Ids = ids

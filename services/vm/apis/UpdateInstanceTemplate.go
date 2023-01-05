@@ -39,7 +39,6 @@ type UpdateInstanceTemplateRequest struct {
 
     /* 实例模板配置信息。 (Optional) */
     InstanceTemplateData *vm.UpdateInstanceTemplateSpec `json:"instanceTemplateData"`
-
 }
 
 /*
@@ -112,22 +111,18 @@ func NewUpdateInstanceTemplateRequestWithoutParam() *UpdateInstanceTemplateReque
 func (r *UpdateInstanceTemplateRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceTemplateId: 实例模板ID。(Required) */
 func (r *UpdateInstanceTemplateRequest) SetInstanceTemplateId(instanceTemplateId string) {
     r.InstanceTemplateId = instanceTemplateId
 }
-
 /* param name: 实例模板的名称，参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。(Optional) */
 func (r *UpdateInstanceTemplateRequest) SetName(name string) {
     r.Name = &name
 }
-
 /* param description: 实例模板的描述，参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。(Optional) */
 func (r *UpdateInstanceTemplateRequest) SetDescription(description string) {
     r.Description = &description
 }
-
 /* param instanceTemplateData: 实例模板配置信息。(Optional) */
 func (r *UpdateInstanceTemplateRequest) SetInstanceTemplateData(instanceTemplateData *vm.UpdateInstanceTemplateSpec) {
     r.InstanceTemplateData = instanceTemplateData

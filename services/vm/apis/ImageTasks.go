@@ -48,7 +48,6 @@ type ImageTasksRequest struct {
 
     /* 分页大小；取值范围[10, 100]。 (Optional) */
     PageSize *int `json:"pageSize"`
-
 }
 
 /*
@@ -127,37 +126,30 @@ func NewImageTasksRequestWithoutParam() *ImageTasksRequest {
 func (r *ImageTasksRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param taskAction: 任务操作类型。支持范围：`ImportImage、ExportImage`。(Optional) */
 func (r *ImageTasksRequest) SetTaskAction(taskAction string) {
     r.TaskAction = &taskAction
 }
-
 /* param taskIds: 任务id列表。(Optional) */
 func (r *ImageTasksRequest) SetTaskIds(taskIds []string) {
     r.TaskIds = taskIds
 }
-
 /* param taskStatus: 任务状态。支持范围：`pending、running、failed、finished`。(Optional) */
 func (r *ImageTasksRequest) SetTaskStatus(taskStatus string) {
     r.TaskStatus = &taskStatus
 }
-
 /* param startTime: 任务开始时间(Optional) */
 func (r *ImageTasksRequest) SetStartTime(startTime string) {
     r.StartTime = &startTime
 }
-
 /* param endTime: 任务结束时间(Optional) */
 func (r *ImageTasksRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
-
 /* param pageNumber: 页码；默认为1。(Optional) */
 func (r *ImageTasksRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小；取值范围[10, 100]。(Optional) */
 func (r *ImageTasksRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize

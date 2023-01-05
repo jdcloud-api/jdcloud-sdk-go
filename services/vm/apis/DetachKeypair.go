@@ -32,7 +32,6 @@ type DetachKeypairRequest struct {
 
     /* 要解绑的云主机实例ID列表。  */
     InstanceIds []string `json:"instanceIds"`
-
 }
 
 /*
@@ -102,12 +101,10 @@ func NewDetachKeypairRequestWithoutParam() *DetachKeypairRequest {
 func (r *DetachKeypairRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param keyName: 密钥名称。(Required) */
 func (r *DetachKeypairRequest) SetKeyName(keyName string) {
     r.KeyName = keyName
 }
-
 /* param instanceIds: 要解绑的云主机实例ID列表。(Required) */
 func (r *DetachKeypairRequest) SetInstanceIds(instanceIds []string) {
     r.InstanceIds = instanceIds

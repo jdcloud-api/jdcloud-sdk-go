@@ -36,7 +36,6 @@ type ModifyInstancePasswordRequest struct {
 更多密码输入要求请参见 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。
   */
     Password string `json:"password"`
-
 }
 
 /*
@@ -114,12 +113,10 @@ func NewModifyInstancePasswordRequestWithoutParam() *ModifyInstancePasswordReque
 func (r *ModifyInstancePasswordRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 云主机ID。(Required) */
 func (r *ModifyInstancePasswordRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param password: 实例密码。
 可用于SSH登录和VNC登录。
 长度为8\~30个字符，必须同时包含大、小写英文字母、数字和特殊符号中的三类字符。特殊符号包括：`\(\)\`~!@#$%^&\*\_-+=\|{}\[ ]:";'<>,.?/，`。

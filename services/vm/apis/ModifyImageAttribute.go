@@ -35,7 +35,6 @@ type ModifyImageAttributeRequest struct {
 
     /* 镜像描述。参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。 (Optional) */
     Description *string `json:"description"`
-
 }
 
 /*
@@ -105,17 +104,14 @@ func NewModifyImageAttributeRequestWithoutParam() *ModifyImageAttributeRequest {
 func (r *ModifyImageAttributeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param imageId: 镜像ID。(Required) */
 func (r *ModifyImageAttributeRequest) SetImageId(imageId string) {
     r.ImageId = imageId
 }
-
 /* param name: 镜像名称。参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。(Optional) */
 func (r *ModifyImageAttributeRequest) SetName(name string) {
     r.Name = &name
 }
-
 /* param description: 镜像描述。参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。(Optional) */
 func (r *ModifyImageAttributeRequest) SetDescription(description string) {
     r.Description = &description

@@ -61,7 +61,6 @@ type ImportImageRequest struct {
 
     /* 用户导出镜像的幂等性保证。每次导出请传入不同的值，如果传值与某次的clientToken相同，则返还同一个请求结果，不能超过64个字符。 (Optional) */
     ClientToken *string `json:"clientToken"`
-
 }
 
 /*
@@ -177,59 +176,48 @@ func NewImportImageRequestWithoutParam() *ImportImageRequest {
 func (r *ImportImageRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param architecture: 镜像架构。取值范围：`x86_64、arm64`。(Required) */
 func (r *ImportImageRequest) SetArchitecture(architecture string) {
     r.Architecture = architecture
 }
-
 /* param osType: 镜像的操作系统类型。取值范围：`windows、linux`。(Required) */
 func (r *ImportImageRequest) SetOsType(osType string) {
     r.OsType = osType
 }
-
 /* param platform: 镜像的操作系统平台名称。
 取值范围：`Ubuntu、CentOS、Windows Server、Other Linux、Other Windows`。
 (Required) */
 func (r *ImportImageRequest) SetPlatform(platform string) {
     r.Platform = platform
 }
-
 /* param diskFormat: 磁盘格式，取值范围：`qcow2、vhd、vmdk、raw`。(Required) */
 func (r *ImportImageRequest) SetDiskFormat(diskFormat string) {
     r.DiskFormat = diskFormat
 }
-
 /* param systemDiskSizeGB: 以此镜像需要制作的系统盘的默认大小，单位GB。最小值40，最大值500，要求值是10的整数倍。(Required) */
 func (r *ImportImageRequest) SetSystemDiskSizeGB(systemDiskSizeGB int) {
     r.SystemDiskSizeGB = systemDiskSizeGB
 }
-
 /* param imageUrl: 要导入镜像的对象存储外链地址。(Required) */
 func (r *ImportImageRequest) SetImageUrl(imageUrl string) {
     r.ImageUrl = imageUrl
 }
-
 /* param osVersion: 镜像的操作系统版本。(Optional) */
 func (r *ImportImageRequest) SetOsVersion(osVersion string) {
     r.OsVersion = &osVersion
 }
-
 /* param imageName: 导入镜像的自定义名称。参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。(Required) */
 func (r *ImportImageRequest) SetImageName(imageName string) {
     r.ImageName = imageName
 }
-
 /* param description: 导入镜像的描述信息。参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。(Optional) */
 func (r *ImportImageRequest) SetDescription(description string) {
     r.Description = &description
 }
-
 /* param forceImport: 是否强制导入。强制导入会忽略镜像的合规性检测。默认为false。(Optional) */
 func (r *ImportImageRequest) SetForceImport(forceImport bool) {
     r.ForceImport = &forceImport
 }
-
 /* param clientToken: 用户导出镜像的幂等性保证。每次导出请传入不同的值，如果传值与某次的clientToken相同，则返还同一个请求结果，不能超过64个字符。(Optional) */
 func (r *ImportImageRequest) SetClientToken(clientToken string) {
     r.ClientToken = &clientToken

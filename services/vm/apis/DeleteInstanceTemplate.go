@@ -29,7 +29,6 @@ type DeleteInstanceTemplateRequest struct {
 
     /* 实例模板ID。  */
     InstanceTemplateId string `json:"instanceTemplateId"`
-
 }
 
 /*
@@ -93,7 +92,6 @@ func NewDeleteInstanceTemplateRequestWithoutParam() *DeleteInstanceTemplateReque
 func (r *DeleteInstanceTemplateRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceTemplateId: 实例模板ID。(Required) */
 func (r *DeleteInstanceTemplateRequest) SetInstanceTemplateId(instanceTemplateId string) {
     r.InstanceTemplateId = instanceTemplateId

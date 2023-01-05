@@ -35,7 +35,6 @@ type ResizeInstanceRequest struct {
 
     /* 是否强制调配，默认为 `false`。如果指定为 `true`, 将会清除本地数据盘。 (Optional) */
     Force *bool `json:"force"`
-
 }
 
 /*
@@ -108,17 +107,14 @@ func NewResizeInstanceRequestWithoutParam() *ResizeInstanceRequest {
 func (r *ResizeInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 云主机ID。(Required) */
 func (r *ResizeInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param instanceType: 实例规格，可查询 [DescribeInstanceTypes](https://docs.jdcloud.com/virtual-machines/api/describeinstancetypes) 接口获得指定地域或可用区的规格信息。(Required) */
 func (r *ResizeInstanceRequest) SetInstanceType(instanceType string) {
     r.InstanceType = instanceType
 }
-
 /* param force: 是否强制调配，默认为 `false`。如果指定为 `true`, 将会清除本地数据盘。(Optional) */
 func (r *ResizeInstanceRequest) SetForce(force bool) {
     r.Force = &force

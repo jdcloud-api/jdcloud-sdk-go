@@ -41,7 +41,6 @@ type CreateInstancesRequest struct {
     /* 用于保证请求的幂等性。由客户端生成，并确保不同请求中该参数唯一，长度不能超过64个字符。
  (Optional) */
     ClientToken *string `json:"clientToken"`
-
 }
 
 /*
@@ -117,13 +116,11 @@ func NewCreateInstancesRequestWithoutParam() *CreateInstancesRequest {
 func (r *CreateInstancesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceSpec: 实例配置。
 (Required) */
 func (r *CreateInstancesRequest) SetInstanceSpec(instanceSpec *vm.InstanceSpec) {
     r.InstanceSpec = instanceSpec
 }
-
 /* param maxCount: 创建实例的数量，不能超过用户配额。
 取值范围：[1,100]；默认值：1。
 如果在弹性网卡中指定了内网IP地址，那么单次创建 `maxCount` 只能是 1。
@@ -131,7 +128,6 @@ func (r *CreateInstancesRequest) SetInstanceSpec(instanceSpec *vm.InstanceSpec) 
 func (r *CreateInstancesRequest) SetMaxCount(maxCount int) {
     r.MaxCount = &maxCount
 }
-
 /* param clientToken: 用于保证请求的幂等性。由客户端生成，并确保不同请求中该参数唯一，长度不能超过64个字符。
 (Optional) */
 func (r *CreateInstancesRequest) SetClientToken(clientToken string) {

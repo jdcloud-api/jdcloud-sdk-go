@@ -37,7 +37,6 @@ type DetachDiskRequest struct {
 如果此参数传值为True，数据盘的IO会被强制断掉。
  (Optional) */
     Force *bool `json:"force"`
-
 }
 
 /*
@@ -112,17 +111,14 @@ func NewDetachDiskRequestWithoutParam() *DetachDiskRequest {
 func (r *DetachDiskRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 云主机ID。(Required) */
 func (r *DetachDiskRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param diskId: 云硬盘ID。(Required) */
 func (r *DetachDiskRequest) SetDiskId(diskId string) {
     r.DiskId = diskId
 }
-
 /* param force: 是否强制缷载，默认False。
 如果此参数传值为True，数据盘的IO会被强制断掉。
 (Optional) */

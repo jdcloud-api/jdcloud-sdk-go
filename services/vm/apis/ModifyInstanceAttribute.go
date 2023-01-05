@@ -57,7 +57,6 @@ type ModifyInstanceAttributeRequest struct {
 **Windows系统**：支持 `bat` 和 `powershell` ，编码前须分别以 `<cmd></cmd>和<powershell></powershell>` 作为内容首、尾行。
  (Optional) */
     Userdata []vm.Userdata `json:"userdata"`
-
 }
 
 /*
@@ -148,24 +147,20 @@ func NewModifyInstanceAttributeRequestWithoutParam() *ModifyInstanceAttributeReq
 func (r *ModifyInstanceAttributeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 云主机ID。(Required) */
 func (r *ModifyInstanceAttributeRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param name: 实例名称。长度为2\~128个字符，只允许中文、数字、大小写字母、英文下划线（\_）、连字符（-）及点（.），不能以（.）作为首尾。
 (Optional) */
 func (r *ModifyInstanceAttributeRequest) SetName(name string) {
     r.Name = &name
 }
-
 /* param description: 实例描述。256字符以内。
 (Optional) */
 func (r *ModifyInstanceAttributeRequest) SetDescription(description string) {
     r.Description = &description
 }
-
 /* param hostname: 实例hostname。
 **Windows系统**：长度为2\~15个字符，允许大小写字母、数字或连字符（-），不能以连字符（-）开头或结尾，不能连续使用连字符（-），也不能全部使用数字。不支持点号（.）。
 **Linux系统**：长度为2-64个字符，允许支持多个点号，点之间为一段，每段允许使用大小写字母、数字或连字符（-），但不能连续使用点号（.）或连字符（-），不能以点号（.）或连字符（-）开头或结尾。
@@ -173,7 +168,6 @@ func (r *ModifyInstanceAttributeRequest) SetDescription(description string) {
 func (r *ModifyInstanceAttributeRequest) SetHostname(hostname string) {
     r.Hostname = &hostname
 }
-
 /* param metadata: 用户自定义元数据。
 以 `key-value` 键值对形式指定，可在实例系统内通过元数据服务查询获取。最多支持40对键值对，且 `key` 不超过256字符，`value` 不超过16KB，不区分大小写。
 注意：`key` 不要以连字符(-)结尾，否则此 `key` 不生效。
@@ -181,7 +175,6 @@ func (r *ModifyInstanceAttributeRequest) SetHostname(hostname string) {
 func (r *ModifyInstanceAttributeRequest) SetMetadata(metadata []vm.Metadata) {
     r.Metadata = metadata
 }
-
 /* param userdata: 自定义脚本。
 目前仅支持启动脚本，即 `launch-script`，须Base64编码且编码前数据长度不能超过16KB。
 **linux系统**：支持bash和python，编码前须分别以 `#!/bin/bash` 和 `#!/usr/bin/env python` 作为内容首行。

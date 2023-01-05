@@ -110,4 +110,10 @@ type Instance struct {
 
     /* 资源组ID (Optional) */
     ResourceGroupId string `json:"resourceGroupId"`
+
+    /* 云主机操作系统类型，如linux或者windows (Optional) */
+    OsType string `json:"osType"`
+
+    /* 虚机CPU拓扑 (Optional) */
+    CpuTopology CpuTopology `json:"cpuTopology"`
 }
