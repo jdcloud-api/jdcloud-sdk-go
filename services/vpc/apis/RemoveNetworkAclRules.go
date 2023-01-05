@@ -101,16 +101,15 @@ func NewRemoveNetworkAclRulesRequestWithoutParam() *RemoveNetworkAclRulesRequest
 func (r *RemoveNetworkAclRulesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param networkAclId: networkAclId ID(Required) */
 func (r *RemoveNetworkAclRulesRequest) SetNetworkAclId(networkAclId string) {
     r.NetworkAclId = networkAclId
 }
-
 /* param ruleIds: networkAcl规则ID列表(Required) */
 func (r *RemoveNetworkAclRulesRequest) SetRuleIds(ruleIds []string) {
     r.RuleIds = ruleIds
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

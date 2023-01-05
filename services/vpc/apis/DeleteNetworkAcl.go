@@ -92,11 +92,11 @@ func NewDeleteNetworkAclRequestWithoutParam() *DeleteNetworkAclRequest {
 func (r *DeleteNetworkAclRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param networkAclId: networkAclId ID(Required) */
 func (r *DeleteNetworkAclRequest) SetNetworkAclId(networkAclId string) {
     r.NetworkAclId = networkAclId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

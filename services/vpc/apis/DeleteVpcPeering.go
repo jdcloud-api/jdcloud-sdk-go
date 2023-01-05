@@ -92,11 +92,11 @@ func NewDeleteVpcPeeringRequestWithoutParam() *DeleteVpcPeeringRequest {
 func (r *DeleteVpcPeeringRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param vpcPeeringId: vpcPeeringId ID(Required) */
 func (r *DeleteVpcPeeringRequest) SetVpcPeeringId(vpcPeeringId string) {
     r.VpcPeeringId = vpcPeeringId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

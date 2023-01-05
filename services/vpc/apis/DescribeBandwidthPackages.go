@@ -119,33 +119,29 @@ func NewDescribeBandwidthPackagesRequestWithoutParam() *DescribeBandwidthPackage
 func (r *DescribeBandwidthPackagesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param pageNumber: 页码, 默认为1, 取值范围：[1,∞), 页码超过总页数时, 显示最后一页(Optional) */
 func (r *DescribeBandwidthPackagesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小，默认为20，取值范围为[10,100](Optional) */
 func (r *DescribeBandwidthPackagesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param filters: bwpIds - 共享带宽包ID，支持多个进行精确搜索
 name - 共享带宽包名称，支持单个进行精确搜索
 (Optional) */
 func (r *DescribeBandwidthPackagesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
-
 /* param tags: Tag筛选条件(Optional) */
 func (r *DescribeBandwidthPackagesRequest) SetTags(tags []vpc.TagFilter) {
     r.Tags = tags
 }
-
 /* param resourceGroupIds: 资源组筛选条件(Optional) */
 func (r *DescribeBandwidthPackagesRequest) SetResourceGroupIds(resourceGroupIds []string) {
     r.ResourceGroupIds = resourceGroupIds
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

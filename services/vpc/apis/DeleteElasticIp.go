@@ -92,11 +92,11 @@ func NewDeleteElasticIpRequestWithoutParam() *DeleteElasticIpRequest {
 func (r *DeleteElasticIpRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param elasticIpId: ElasticIp ID(Required) */
 func (r *DeleteElasticIpRequest) SetElasticIpId(elasticIpId string) {
     r.ElasticIpId = elasticIpId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

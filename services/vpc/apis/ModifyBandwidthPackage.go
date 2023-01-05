@@ -110,26 +110,23 @@ func NewModifyBandwidthPackageRequestWithoutParam() *ModifyBandwidthPackageReque
 func (r *ModifyBandwidthPackageRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param bandwidthPackageId: 共享带宽包ID(Required) */
 func (r *ModifyBandwidthPackageRequest) SetBandwidthPackageId(bandwidthPackageId string) {
     r.BandwidthPackageId = bandwidthPackageId
 }
-
 /* param bandwidthMbps: 共享带宽包带宽上限，取值范围200-5000，单位为Mbps，且不能低于共享带宽包内公网IP带宽上限(Optional) */
 func (r *ModifyBandwidthPackageRequest) SetBandwidthMbps(bandwidthMbps int) {
     r.BandwidthMbps = &bandwidthMbps
 }
-
 /* param name: 名称，只支持中文、数字、大小写字母、英文下划线“_”及中划线“-”，且长度不超过32个字符(Optional) */
 func (r *ModifyBandwidthPackageRequest) SetName(name string) {
     r.Name = &name
 }
-
 /* param description: 描述，长度不超过256个字符(Optional) */
 func (r *ModifyBandwidthPackageRequest) SetDescription(description string) {
     r.Description = &description
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

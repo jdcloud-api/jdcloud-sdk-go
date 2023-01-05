@@ -53,7 +53,7 @@ type BandwidthPackage struct {
     /* 按用量计费模式的保底带宽，-1代表无效值，保底带宽 = 共享带宽包带宽上限 * 20% (Optional) */
     GuaranteedBandwidth int `json:"guaranteedBandwidth"`
 
-    /* 是否欠费停服，UP正常，DOWN停服 (Optional) */
+    /* 是否欠费停服，UP正常，DOWN停服，PROCESSING处理中 (Optional) */
     AdminStatus string `json:"adminStatus"`
 
     /* Tag信息 (Optional) */

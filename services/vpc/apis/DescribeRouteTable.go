@@ -93,11 +93,11 @@ func NewDescribeRouteTableRequestWithoutParam() *DescribeRouteTableRequest {
 func (r *DescribeRouteTableRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param routeTableId: RouteTable ID(Required) */
 func (r *DescribeRouteTableRequest) SetRouteTableId(routeTableId string) {
     r.RouteTableId = routeTableId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

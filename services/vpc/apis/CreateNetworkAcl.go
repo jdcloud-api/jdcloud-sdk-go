@@ -107,21 +107,19 @@ func NewCreateNetworkAclRequestWithoutParam() *CreateNetworkAclRequest {
 func (r *CreateNetworkAclRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param vpcId: 私有网络id(Required) */
 func (r *CreateNetworkAclRequest) SetVpcId(vpcId string) {
     r.VpcId = vpcId
 }
-
 /* param networkAclName: networkAcl名称(Required) */
 func (r *CreateNetworkAclRequest) SetNetworkAclName(networkAclName string) {
     r.NetworkAclName = networkAclName
 }
-
 /* param description: 描述,允许输入UTF-8编码下的全部字符，不超过256字符(Optional) */
 func (r *CreateNetworkAclRequest) SetDescription(description string) {
     r.Description = &description
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

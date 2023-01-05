@@ -101,16 +101,15 @@ func NewRemoveNetworkSecurityGroupRulesRequestWithoutParam() *RemoveNetworkSecur
 func (r *RemoveNetworkSecurityGroupRulesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param networkSecurityGroupId: NetworkSecurityGroup ID(Required) */
 func (r *RemoveNetworkSecurityGroupRulesRequest) SetNetworkSecurityGroupId(networkSecurityGroupId string) {
     r.NetworkSecurityGroupId = networkSecurityGroupId
 }
-
 /* param ruleIds: 安全组规则Id列表(Required) */
 func (r *RemoveNetworkSecurityGroupRulesRequest) SetRuleIds(ruleIds []string) {
     r.RuleIds = ruleIds
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

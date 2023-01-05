@@ -133,41 +133,35 @@ func NewCreateBandwidthPackageRequestWithoutParam() *CreateBandwidthPackageReque
 func (r *CreateBandwidthPackageRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param name: 名称，只支持中文、数字、大小写字母、英文下划线“_”及中划线“-”，且长度不超过32个字符(Required) */
 func (r *CreateBandwidthPackageRequest) SetName(name string) {
     r.Name = name
 }
-
 /* param description: 描述，长度不超过256个字符(Optional) */
 func (r *CreateBandwidthPackageRequest) SetDescription(description string) {
     r.Description = &description
 }
-
 /* param bandwidthMbps: 共享带宽包带宽上限，取值范围200-5000，单位为Mbps，保底带宽 = 共享带宽包带宽上限 * 20%(Required) */
 func (r *CreateBandwidthPackageRequest) SetBandwidthMbps(bandwidthMbps int) {
     r.BandwidthMbps = bandwidthMbps
 }
-
 /* param provider: 线路信息，默认bgp，目前只支持中心节点的BGP线路(Optional) */
 func (r *CreateBandwidthPackageRequest) SetProvider(provider string) {
     r.Provider = &provider
 }
-
 /* param chargeSpec: 计费配置。支持包年包月、按配置、按用量计费模式(Optional) */
 func (r *CreateBandwidthPackageRequest) SetChargeSpec(chargeSpec *charge.ChargeSpec) {
     r.ChargeSpec = chargeSpec
 }
-
 /* param userTags: 用户标签(Optional) */
 func (r *CreateBandwidthPackageRequest) SetUserTags(userTags []vpc.Tag) {
     r.UserTags = userTags
 }
-
 /* param resourceGroupId: 资源所属资源组ID(Optional) */
 func (r *CreateBandwidthPackageRequest) SetResourceGroupId(resourceGroupId string) {
     r.ResourceGroupId = &resourceGroupId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

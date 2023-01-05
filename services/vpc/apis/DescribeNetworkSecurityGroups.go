@@ -109,17 +109,14 @@ func NewDescribeNetworkSecurityGroupsRequestWithoutParam() *DescribeNetworkSecur
 func (r *DescribeNetworkSecurityGroupsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param pageNumber: 页码, 默认为1, 取值范围：[1,∞), 页码超过总页数时, 显示最后一页(Optional) */
 func (r *DescribeNetworkSecurityGroupsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小，默认为20，取值范围：[10,100](Optional) */
 func (r *DescribeNetworkSecurityGroupsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param filters: networkSecurityGroupIds - 安全组ID列表，支持多个
 networkSecurityGroupNames - 安全组名称列表，支持多个
 vpcId	- 安全组所属vpc Id，支持单个
@@ -127,6 +124,7 @@ vpcId	- 安全组所属vpc Id，支持单个
 func (r *DescribeNetworkSecurityGroupsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

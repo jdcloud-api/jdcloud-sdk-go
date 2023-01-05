@@ -41,7 +41,7 @@ type ElasticIp struct {
     /* 实例Id (Optional) */
     InstanceId string `json:"instanceId"`
 
-    /* 实例类型,取值为：compute、lb、container、pod (Optional) */
+    /* 实例类型,取值为：compute、lb、container、pod、natgw (Optional) */
     InstanceType string `json:"instanceType"`
 
     /* 计费配置 (Optional) */
@@ -64,6 +64,9 @@ type ElasticIp struct {
 
     /* IP是否被绑定，取值：ASSOCIATED（被绑定）、NOT_ASSOCIATED（未被绑定） (Optional) */
     Status string `json:"status"`
+
+    /* IP是否变更，取值：UP（正常使用）、DOWN（停止使用）、PROCESSING（配置变更中） (Optional) */
+    State string `json:"state"`
 
     /* 资源所属资源组ID (Optional) */
     ResourceGroupId string `json:"resourceGroupId"`

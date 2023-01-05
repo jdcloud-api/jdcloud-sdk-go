@@ -92,11 +92,11 @@ func NewDeleteRouteTableRequestWithoutParam() *DeleteRouteTableRequest {
 func (r *DeleteRouteTableRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param routeTableId: RouteTable ID(Required) */
 func (r *DeleteRouteTableRequest) SetRouteTableId(routeTableId string) {
     r.RouteTableId = routeTableId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

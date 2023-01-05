@@ -102,16 +102,15 @@ func NewRemoveBandwidthPackageIPRequestWithoutParam() *RemoveBandwidthPackageIPR
 func (r *RemoveBandwidthPackageIPRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param bandwidthPackageId: 共享带宽包ID(Required) */
 func (r *RemoveBandwidthPackageIPRequest) SetBandwidthPackageId(bandwidthPackageId string) {
     r.BandwidthPackageId = bandwidthPackageId
 }
-
 /* param bandwidthPackageIPSpecs: 公网IP列表(Required) */
 func (r *RemoveBandwidthPackageIPRequest) SetBandwidthPackageIPSpecs(bandwidthPackageIPSpecs []vpc.RemoveBandwidthPackageIPSpec) {
     r.BandwidthPackageIPSpecs = bandwidthPackageIPSpecs
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

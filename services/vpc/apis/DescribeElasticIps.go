@@ -129,17 +129,14 @@ func NewDescribeElasticIpsRequestWithoutParam() *DescribeElasticIpsRequest {
 func (r *DescribeElasticIpsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param pageNumber: 页码, 默认为1, 取值范围：[1,∞), 页码超过总页数时, 显示最后一页(Optional) */
 func (r *DescribeElasticIpsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小，默认为20，取值范围：[10,100](Optional) */
 func (r *DescribeElasticIpsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param filters: elasticIpIds - elasticip id数组条件，支持多个
 elasticIpAddress - eip的IP地址，支持单个
 chargeStatus	- eip的费用支付状态,normal(正常状态) or overdue(预付费已到期) or arrear(欠费状态)，支持单个
@@ -151,16 +148,15 @@ status - IP是否被绑定，取值：ASSOCIATED（被绑定）、NOT_ASSOCIATED
 func (r *DescribeElasticIpsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
-
 /* param tags: Tag筛选条件(Optional) */
 func (r *DescribeElasticIpsRequest) SetTags(tags []vpc.TagFilter) {
     r.Tags = tags
 }
-
 /* param resourceGroupIds: 资源组筛选条件(Optional) */
 func (r *DescribeElasticIpsRequest) SetResourceGroupIds(resourceGroupIds []string) {
     r.ResourceGroupIds = resourceGroupIds
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

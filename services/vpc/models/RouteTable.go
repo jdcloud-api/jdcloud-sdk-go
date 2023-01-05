@@ -28,6 +28,9 @@ type RouteTable struct {
     /* 路由表类型，default：默认路由表，custom：自定义路由表 (Optional) */
     RouteTableType string `json:"routeTableType"`
 
+    /* 绑定资源类型，取值：subnet，gateway (Optional) */
+    AssociateType string `json:"associateType"`
+
     /* 路由表描述信息，允许输入UTF-8编码下的全部字符，不超过256字符。 (Optional) */
     Description string `json:"description"`
 

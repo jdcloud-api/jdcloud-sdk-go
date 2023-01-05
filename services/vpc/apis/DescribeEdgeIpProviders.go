@@ -113,17 +113,14 @@ func NewDescribeEdgeIpProvidersRequestWithoutParam() *DescribeEdgeIpProvidersReq
 func (r *DescribeEdgeIpProvidersRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param pageNumber: 页码, 默认为1, 取值范围：[1,∞), 页码超过总页数时, 显示最后一页(Optional) */
 func (r *DescribeEdgeIpProvidersRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小，默认为20，取值范围：[10,100](Optional) */
 func (r *DescribeEdgeIpProvidersRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param filters: providers - 边缘公网IP的线路，命名规则：[线路接入区].[资源关联范围].[服务类型]，示例如cn-n1-jinan1.ez.bgp，支持多个
 pointsOfAccess - 边缘公网IP的线路接入区，提供线路接入区具体位置信息，支持多个
 associationScope	- 边缘公网IP的资源关联范围，取值ez(边缘可用区)和az(中心可用区，暂不支持),支持单个
@@ -133,6 +130,7 @@ azs - 边缘公网IP的可用区，分为全可用区（暂不支持）和边缘
 func (r *DescribeEdgeIpProvidersRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

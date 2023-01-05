@@ -92,11 +92,11 @@ func NewDeleteBandwidthPackageRequestWithoutParam() *DeleteBandwidthPackageReque
 func (r *DeleteBandwidthPackageRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param bandwidthPackageId: 共享带宽包ID(Required) */
 func (r *DeleteBandwidthPackageRequest) SetBandwidthPackageId(bandwidthPackageId string) {
     r.BandwidthPackageId = bandwidthPackageId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

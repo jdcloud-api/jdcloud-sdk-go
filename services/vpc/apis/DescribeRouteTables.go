@@ -39,6 +39,7 @@ type DescribeRouteTablesRequest struct {
 routeTableNames - 路由表名称列表，支持多个
 vpcId	- 路由表所属vpc Id，支持单个
 azType - 路由表az类型，取值：all(全部类型)，standard(标准路由表)，edge(边缘路由表)，默认standard ，支持单个
+associateType - 绑定资源类型，取值：subnet，gateway，支持单个
 azs - 可用区，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
@@ -72,6 +73,7 @@ func NewDescribeRouteTablesRequest(
 routeTableNames - 路由表名称列表，支持多个
 vpcId	- 路由表所属vpc Id，支持单个
 azType - 路由表az类型，取值：all(全部类型)，standard(标准路由表)，edge(边缘路由表)，默认standard ，支持单个
+associateType - 绑定资源类型，取值：subnet，gateway，支持单个
 azs - 可用区，支持多个
  (Optional)
  */
@@ -113,26 +115,25 @@ func NewDescribeRouteTablesRequestWithoutParam() *DescribeRouteTablesRequest {
 func (r *DescribeRouteTablesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param pageNumber: 页码, 默认为1, 取值范围：[1,∞), 页码超过总页数时, 显示最后一页(Optional) */
 func (r *DescribeRouteTablesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小，默认为20，取值范围：[10,100](Optional) */
 func (r *DescribeRouteTablesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param filters: routeTableIds - 路由表ID列表，支持多个
 routeTableNames - 路由表名称列表，支持多个
 vpcId	- 路由表所属vpc Id，支持单个
 azType - 路由表az类型，取值：all(全部类型)，standard(标准路由表)，edge(边缘路由表)，默认standard ，支持单个
+associateType - 绑定资源类型，取值：subnet，gateway，支持单个
 azs - 可用区，支持多个
 (Optional) */
 func (r *DescribeRouteTablesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

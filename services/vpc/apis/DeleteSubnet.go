@@ -92,11 +92,11 @@ func NewDeleteSubnetRequestWithoutParam() *DeleteSubnetRequest {
 func (r *DeleteSubnetRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param subnetId: Subnet ID(Required) */
 func (r *DeleteSubnetRequest) SetSubnetId(subnetId string) {
     r.SubnetId = subnetId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

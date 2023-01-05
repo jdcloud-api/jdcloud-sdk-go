@@ -122,36 +122,31 @@ func NewAssignSecondaryIpsRequestWithoutParam() *AssignSecondaryIpsRequest {
 func (r *AssignSecondaryIpsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param networkInterfaceId: networkInterface ID(Required) */
 func (r *AssignSecondaryIpsRequest) SetNetworkInterfaceId(networkInterfaceId string) {
     r.NetworkInterfaceId = networkInterfaceId
 }
-
 /* param force: secondary ip被其他接口占用时，是否抢占。false：非抢占重分配，true：抢占重分配；按网段分配时，默认非抢占重分配，指定IP或者个数时，默认抢占重分配。(Optional) */
 func (r *AssignSecondaryIpsRequest) SetForce(force bool) {
     r.Force = &force
 }
-
 /* param secondaryIps: 指定分配的secondaryIp地址(Optional) */
 func (r *AssignSecondaryIpsRequest) SetSecondaryIps(secondaryIps []string) {
     r.SecondaryIps = secondaryIps
 }
-
 /* param secondaryIpCount: 指定自动分配的secondaryIp个数(Optional) */
 func (r *AssignSecondaryIpsRequest) SetSecondaryIpCount(secondaryIpCount int) {
     r.SecondaryIpCount = &secondaryIpCount
 }
-
 /* param secondaryIpMaskLen: 指定分配的网段掩码长度, 支持24-28位掩码长度，不能与secondaryIpCount或secondaryIps同时指定，不支持抢占重分配(Optional) */
 func (r *AssignSecondaryIpsRequest) SetSecondaryIpMaskLen(secondaryIpMaskLen int) {
     r.SecondaryIpMaskLen = &secondaryIpMaskLen
 }
-
 /* param secondaryIpAddress: 指定分配的网段中第一个secondaryIp地址，不能与secondaryIpCount或secondaryIps同时指定，secondaryIpAddress与secondaryIpMaskLen需要保持一致，否则无法创建(Optional) */
 func (r *AssignSecondaryIpsRequest) SetSecondaryIpAddress(secondaryIpAddress string) {
     r.SecondaryIpAddress = &secondaryIpAddress
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
