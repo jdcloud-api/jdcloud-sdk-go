@@ -112,5 +112,7 @@ type VerifyContractResponse struct {
 }
 
 type VerifyContractResult struct {
-    VerifyInfo cloudsign.VerifyInfo `json:"verifyInfo"`
+    Success bool `json:"success"`
+    Message string `json:"message"`
+    Results []cloudsign.StampResult `json:"results"`
 }
