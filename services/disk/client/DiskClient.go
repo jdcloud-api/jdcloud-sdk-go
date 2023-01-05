@@ -40,7 +40,7 @@ func NewDiskClient(credential *core.Credential) *DiskClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "disk",
-            Revision:    "0.12.7",
+            Revision:    "0.12.8",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -55,6 +55,27 @@ func (c *DiskClient) SetLogger(logger core.Logger) {
 
 func (c *DiskClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
+}
+
+/* -   从回收站中恢复云盘，云盘的状态必须为in-recyclebin。
+ */
+func (c *DiskClient) RecoverDisk(request *disk.RecoverDiskRequest) (*disk.RecoverDiskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &disk.RecoverDiskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
 }
 
 /* 查询某一块云硬盘的信息详情 */

@@ -93,11 +93,11 @@ func NewDescribeDiskRequestWithoutParam() *DescribeDiskRequest {
 func (r *DescribeDiskRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param diskId: 云硬盘ID(Required) */
 func (r *DescribeDiskRequest) SetDiskId(diskId string) {
     r.DiskId = diskId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

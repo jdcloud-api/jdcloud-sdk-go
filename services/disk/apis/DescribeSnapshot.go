@@ -93,11 +93,11 @@ func NewDescribeSnapshotRequestWithoutParam() *DescribeSnapshotRequest {
 func (r *DescribeSnapshotRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param snapshotId: 快照ID(Required) */
 func (r *DescribeSnapshotRequest) SetSnapshotId(snapshotId string) {
     r.SnapshotId = snapshotId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

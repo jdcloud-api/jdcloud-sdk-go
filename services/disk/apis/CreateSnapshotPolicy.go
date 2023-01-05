@@ -135,36 +135,31 @@ func NewCreateSnapshotPolicyRequestWithoutParam() *CreateSnapshotPolicyRequest {
 func (r *CreateSnapshotPolicyRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param name: 策略名称(Required) */
 func (r *CreateSnapshotPolicyRequest) SetName(name string) {
     r.Name = name
 }
-
 /* param interval: 策略执行周期，单位:秒，不小于12小时(Required) */
 func (r *CreateSnapshotPolicyRequest) SetInterval(interval int) {
     r.Interval = interval
 }
-
 /* param effectiveTime: 策略生效时间，格式`YYYY-MM-DDTHH:mm:ss+xx:xx`。如`2020-02-02T20:02:00+08:00`(Required) */
 func (r *CreateSnapshotPolicyRequest) SetEffectiveTime(effectiveTime string) {
     r.EffectiveTime = effectiveTime
 }
-
 /* param snapshotLifecycle: 快照保留时间，单位:秒，0:表示不删除(Required) */
 func (r *CreateSnapshotPolicyRequest) SetSnapshotLifecycle(snapshotLifecycle int) {
     r.SnapshotLifecycle = snapshotLifecycle
 }
-
 /* param contactInfo: 联系人信息(Optional) */
 func (r *CreateSnapshotPolicyRequest) SetContactInfo(contactInfo *disk.ContactInfo) {
     r.ContactInfo = contactInfo
 }
-
 /* param status: 策略状态。1:启用 2:禁用(Required) */
 func (r *CreateSnapshotPolicyRequest) SetStatus(status int) {
     r.Status = status
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

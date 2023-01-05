@@ -29,6 +29,11 @@ type DescribeDisksRequest struct {
     /* 地域ID  */
     RegionId string `json:"regionId"`
 
+    /* name - 排序字段，只支持create_time和trash_time字段
+direction - 排序规则
+ (Optional) */
+    Orders []disk.Sort `json:"orders"`
+
     /* 页码, 默认为1, 取值范围：[1,∞) (Optional) */
     PageNumber *int `json:"pageNumber"`
 
@@ -51,6 +56,9 @@ policyId - 绑定policyId的云硬盘，精确匹配，支持多个
 notPolicyId - 未绑定policyId的云硬盘，精确匹配，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
+
+    /* 资源组筛选条件 (Optional) */
+    ResourceGroupIds []string `json:"resourceGroupIds"`
 }
 
 /*
@@ -75,6 +83,9 @@ func NewDescribeDisksRequest(
 
 /*
  * param regionId: 地域ID (Required)
+ * param orders: name - 排序字段，只支持create_time和trash_time字段
+direction - 排序规则
+ (Optional)
  * param pageNumber: 页码, 默认为1, 取值范围：[1,∞) (Optional)
  * param pageSize: 分页大小，默认为20，取值范围：[10,100] (Optional)
  * param tags: Tag筛选条件 (Optional)
@@ -90,13 +101,16 @@ encrypted - 云硬盘是否加密，精确匹配，支持单个
 policyId - 绑定policyId的云硬盘，精确匹配，支持多个
 notPolicyId - 未绑定policyId的云硬盘，精确匹配，支持多个
  (Optional)
+ * param resourceGroupIds: 资源组筛选条件 (Optional)
  */
 func NewDescribeDisksRequestWithAllParams(
     regionId string,
+    orders []disk.Sort,
     pageNumber *int,
     pageSize *int,
     tags []disk.TagFilter,
     filters []common.Filter,
+    resourceGroupIds []string,
 ) *DescribeDisksRequest {
 
     return &DescribeDisksRequest{
@@ -107,10 +121,12 @@ func NewDescribeDisksRequestWithAllParams(
             Version: "v1",
         },
         RegionId: regionId,
+        Orders: orders,
         PageNumber: pageNumber,
         PageSize: pageSize,
         Tags: tags,
         Filters: filters,
+        ResourceGroupIds: resourceGroupIds,
     }
 }
 
@@ -131,22 +147,24 @@ func NewDescribeDisksRequestWithoutParam() *DescribeDisksRequest {
 func (r *DescribeDisksRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
+/* param orders: name - 排序字段，只支持create_time和trash_time字段
+direction - 排序规则
+(Optional) */
+func (r *DescribeDisksRequest) SetOrders(orders []disk.Sort) {
+    r.Orders = orders
+}
 /* param pageNumber: 页码, 默认为1, 取值范围：[1,∞)(Optional) */
 func (r *DescribeDisksRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小，默认为20，取值范围：[10,100](Optional) */
 func (r *DescribeDisksRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param tags: Tag筛选条件(Optional) */
 func (r *DescribeDisksRequest) SetTags(tags []disk.TagFilter) {
     r.Tags = tags
 }
-
 /* param filters: diskId - 云硬盘ID，精确匹配，支持多个
 diskType - 云硬盘类型，精确匹配，支持多个，取值为 ssd,premium-hdd,ssd.io1,ssd.gp1,hdd.std1
 instanceId - 云硬盘所挂载主机的ID，精确匹配，支持多个
@@ -162,6 +180,11 @@ notPolicyId - 未绑定policyId的云硬盘，精确匹配，支持多个
 func (r *DescribeDisksRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
+/* param resourceGroupIds: 资源组筛选条件(Optional) */
+func (r *DescribeDisksRequest) SetResourceGroupIds(resourceGroupIds []string) {
+    r.ResourceGroupIds = resourceGroupIds
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

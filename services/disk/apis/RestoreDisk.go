@@ -101,16 +101,15 @@ func NewRestoreDiskRequestWithoutParam() *RestoreDiskRequest {
 func (r *RestoreDiskRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param diskId: 云硬盘ID(Required) */
 func (r *RestoreDiskRequest) SetDiskId(diskId string) {
     r.DiskId = diskId
 }
-
 /* param snapshotId: 用于恢复云盘的快照ID(Required) */
 func (r *RestoreDiskRequest) SetSnapshotId(snapshotId string) {
     r.SnapshotId = snapshotId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -95,16 +95,15 @@ func NewDescribeSnapshotChainRequestWithoutParam() *DescribeSnapshotChainRequest
 func (r *DescribeSnapshotChainRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param diskId: 云硬盘ID(Optional) */
 func (r *DescribeSnapshotChainRequest) SetDiskId(diskId string) {
     r.DiskId = &diskId
 }
-
 /* param snapshotId: 快照ID(Optional) */
 func (r *DescribeSnapshotChainRequest) SetSnapshotId(snapshotId string) {
     r.SnapshotId = &snapshotId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

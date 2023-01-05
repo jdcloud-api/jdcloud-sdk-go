@@ -92,11 +92,11 @@ func NewDeleteSnapshotRequestWithoutParam() *DeleteSnapshotRequest {
 func (r *DeleteSnapshotRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param snapshotId: 快照ID(Required) */
 func (r *DeleteSnapshotRequest) SetSnapshotId(snapshotId string) {
     r.SnapshotId = snapshotId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

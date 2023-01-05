@@ -92,11 +92,11 @@ func NewDeleteSnapshotPolicyRequestWithoutParam() *DeleteSnapshotPolicyRequest {
 func (r *DeleteSnapshotPolicyRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param policyId: 策略ID(Required) */
 func (r *DeleteSnapshotPolicyRequest) SetPolicyId(policyId string) {
     r.PolicyId = policyId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

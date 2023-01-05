@@ -18,67 +18,69 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    disk "github.com/jdcloud-api/jdcloud-sdk-go/services/disk/models"
 )
 
-type ApplySnapshotPoliciesRequest struct {
+type RecoverDiskRequest struct {
 
     core.JDCloudRequest
 
     /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /* 绑定/解绑操作 (Optional) */
-    Relations []disk.PolicyDiskRelationOp `json:"relations"`
+    /* 云硬盘ID  */
+    DiskId string `json:"diskId"`
 }
 
 /*
  * param regionId: 地域ID (Required)
+ * param diskId: 云硬盘ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewApplySnapshotPoliciesRequest(
+func NewRecoverDiskRequest(
     regionId string,
-) *ApplySnapshotPoliciesRequest {
+    diskId string,
+) *RecoverDiskRequest {
 
-	return &ApplySnapshotPoliciesRequest{
+	return &RecoverDiskRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/snapshotPolicies:apply",
+			URL:     "/regions/{regionId}/disks/{diskId}:recover",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
+        DiskId: diskId,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param relations: 绑定/解绑操作 (Optional)
+ * param diskId: 云硬盘ID (Required)
  */
-func NewApplySnapshotPoliciesRequestWithAllParams(
+func NewRecoverDiskRequestWithAllParams(
     regionId string,
-    relations []disk.PolicyDiskRelationOp,
-) *ApplySnapshotPoliciesRequest {
+    diskId string,
+) *RecoverDiskRequest {
 
-    return &ApplySnapshotPoliciesRequest{
+    return &RecoverDiskRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/snapshotPolicies:apply",
+            URL:     "/regions/{regionId}/disks/{diskId}:recover",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        Relations: relations,
+        DiskId: diskId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewApplySnapshotPoliciesRequestWithoutParam() *ApplySnapshotPoliciesRequest {
+func NewRecoverDiskRequestWithoutParam() *RecoverDiskRequest {
 
-    return &ApplySnapshotPoliciesRequest{
+    return &RecoverDiskRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/snapshotPolicies:apply",
+            URL:     "/regions/{regionId}/disks/{diskId}:recover",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -87,27 +89,26 @@ func NewApplySnapshotPoliciesRequestWithoutParam() *ApplySnapshotPoliciesRequest
 }
 
 /* param regionId: 地域ID(Required) */
-func (r *ApplySnapshotPoliciesRequest) SetRegionId(regionId string) {
+func (r *RecoverDiskRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-/* param relations: 绑定/解绑操作(Optional) */
-func (r *ApplySnapshotPoliciesRequest) SetRelations(relations []disk.PolicyDiskRelationOp) {
-    r.Relations = relations
+/* param diskId: 云硬盘ID(Required) */
+func (r *RecoverDiskRequest) SetDiskId(diskId string) {
+    r.DiskId = diskId
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r ApplySnapshotPoliciesRequest) GetRegionId() string {
+func (r RecoverDiskRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type ApplySnapshotPoliciesResponse struct {
+type RecoverDiskResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result ApplySnapshotPoliciesResult `json:"result"`
+    Result RecoverDiskResult `json:"result"`
 }
 
-type ApplySnapshotPoliciesResult struct {
-    OpResults []disk.PolicyDiskRelationOpResult `json:"opResults"`
+type RecoverDiskResult struct {
 }

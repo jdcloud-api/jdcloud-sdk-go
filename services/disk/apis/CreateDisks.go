@@ -39,6 +39,9 @@ type CreateDisksRequest struct {
 
     /* 幂等性校验参数  */
     ClientToken string `json:"clientToken"`
+
+    /* 资源组ID (Optional) */
+    ResourceGroupId *string `json:"resourceGroupId"`
 }
 
 /*
@@ -76,6 +79,7 @@ func NewCreateDisksRequest(
  * param maxCount: 购买实例数量；取值范围：[1,100] (Required)
  * param userTags: 用户标签,默认为空;tag标签的限制：每个资源最多允许绑定 10 个不同的标签，同一资源每个标签“键”上只能存在1个标签“值”；标签键/值只支持中文、数字、大小写字母、空格及特殊符号_.:/=+-@;当无tags时,reps结果返回中tagmsg为空 (Optional)
  * param clientToken: 幂等性校验参数 (Required)
+ * param resourceGroupId: 资源组ID (Optional)
  */
 func NewCreateDisksRequestWithAllParams(
     regionId string,
@@ -83,6 +87,7 @@ func NewCreateDisksRequestWithAllParams(
     maxCount int,
     userTags []disk.Tag,
     clientToken string,
+    resourceGroupId *string,
 ) *CreateDisksRequest {
 
     return &CreateDisksRequest{
@@ -97,6 +102,7 @@ func NewCreateDisksRequestWithAllParams(
         MaxCount: maxCount,
         UserTags: userTags,
         ClientToken: clientToken,
+        ResourceGroupId: resourceGroupId,
     }
 }
 
@@ -117,26 +123,27 @@ func NewCreateDisksRequestWithoutParam() *CreateDisksRequest {
 func (r *CreateDisksRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param diskSpec: 创建云硬盘规格(Required) */
 func (r *CreateDisksRequest) SetDiskSpec(diskSpec *disk.DiskSpec) {
     r.DiskSpec = diskSpec
 }
-
 /* param maxCount: 购买实例数量；取值范围：[1,100](Required) */
 func (r *CreateDisksRequest) SetMaxCount(maxCount int) {
     r.MaxCount = maxCount
 }
-
 /* param userTags: 用户标签,默认为空;tag标签的限制：每个资源最多允许绑定 10 个不同的标签，同一资源每个标签“键”上只能存在1个标签“值”；标签键/值只支持中文、数字、大小写字母、空格及特殊符号_.:/=+-@;当无tags时,reps结果返回中tagmsg为空(Optional) */
 func (r *CreateDisksRequest) SetUserTags(userTags []disk.Tag) {
     r.UserTags = userTags
 }
-
 /* param clientToken: 幂等性校验参数(Required) */
 func (r *CreateDisksRequest) SetClientToken(clientToken string) {
     r.ClientToken = clientToken
 }
+/* param resourceGroupId: 资源组ID(Optional) */
+func (r *CreateDisksRequest) SetResourceGroupId(resourceGroupId string) {
+    r.ResourceGroupId = &resourceGroupId
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -17,11 +17,11 @@
 package models
 
 
-type OrderItem struct {
+type Sort struct {
 
-    /* 排序字段。 (Optional) */
+    /* 排序条件的名称 (Optional) */
     Name *string `json:"name"`
 
-    /* 0:升序 1:降序 (Optional) */
+    /* 排序条件的方向 0:升序 1:降序 (Optional) */
     Direction *int `json:"direction"`
 }

@@ -110,26 +110,23 @@ func NewModifySnapshotAttributeRequestWithoutParam() *ModifySnapshotAttributeReq
 func (r *ModifySnapshotAttributeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param snapshotId: 快照ID(Required) */
 func (r *ModifySnapshotAttributeRequest) SetSnapshotId(snapshotId string) {
     r.SnapshotId = snapshotId
 }
-
 /* param name: 快照名称(Optional) */
 func (r *ModifySnapshotAttributeRequest) SetName(name string) {
     r.Name = &name
 }
-
 /* param description: 快照描述(Optional) */
 func (r *ModifySnapshotAttributeRequest) SetDescription(description string) {
     r.Description = &description
 }
-
 /* param expireTime: 快照过期时间，三者至少指定一个(Optional) */
 func (r *ModifySnapshotAttributeRequest) SetExpireTime(expireTime string) {
     r.ExpireTime = &expireTime
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

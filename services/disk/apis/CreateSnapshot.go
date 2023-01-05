@@ -102,16 +102,15 @@ func NewCreateSnapshotRequestWithoutParam() *CreateSnapshotRequest {
 func (r *CreateSnapshotRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param snapshotSpec: 创建快照规格(Required) */
 func (r *CreateSnapshotRequest) SetSnapshotSpec(snapshotSpec *disk.SnapshotSpec) {
     r.SnapshotSpec = snapshotSpec
 }
-
 /* param clientToken: 幂等性校验参数(Required) */
 func (r *CreateSnapshotRequest) SetClientToken(clientToken string) {
     r.ClientToken = clientToken
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
