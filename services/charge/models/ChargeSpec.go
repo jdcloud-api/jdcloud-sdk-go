@@ -19,17 +19,23 @@ package models
 
 type ChargeSpec struct {
 
-    /* 计费模式，取值为：prepaid_by_duration，postpaid_by_usage或postpaid_by_duration，prepaid_by_duration表示预付费，postpaid_by_usage表示按用量后付费，postpaid_by_duration表示按配置后付费，默认为postpaid_by_duration.请参阅具体产品线帮助文档确认该产品线支持的计费类型 (Optional) */
+    /* 计费模式，取值为：prepaid_by_duration，postpaid_by_usage或postpaid_by_duration，prepaid_by_duration表示预付费，postpaid_by_usage表示按用量后付费，postpaid_by_duration表示按配置后付费，默认为postpaid_by_duration。请参阅具体产品线帮助文档确认该产品线支持的计费类型 (Optional) */
     ChargeMode *string `json:"chargeMode"`
 
-    /* 预付费计费单位，预付费必填，当chargeMode为prepaid_by_duration时有效，取值为：month、year，默认为month (Optional) */
+    /* 包年包月付费单位或按配置/按用量计费模式定时转换为包年包月付费单位。仅chargeMode=prepaid_by_duration或chargeMode=postpaid_by_duration且autoChangeChargeMode=true时此参数有效。取值为：month、year，默认为month (Optional) */
     ChargeUnit *string `json:"chargeUnit"`
 
-    /* 预付费计费时长，预付费必填，当chargeMode取值为prepaid_by_duration时有效。当chargeUnit为month时取值为：1~9，当chargeUnit为year时取值为：1、2、3 (Optional) */
+    /* 包年包月付费时长或按配置/按用量计费模式定时转换为包年包月付费时长。chargeMode=prepaid_by_duration或chargeMode=postpaid_by_duration且autoChangeChargeMode=true时此参数有效。当chargeUnit为month时取值为：1~9，当chargeUnit为year时取值为：1、2、3 (Optional) */
     ChargeDuration *int `json:"chargeDuration"`
 
-    /* True=：OPEN——开通自动续费、False=CLOSE—— 不开通自动续费，默认为CLOSE (Optional) */
+    /* 自动续费。true为开通自动续费，false为不开通自动续费，默认为false，仅对包年包月资源有效。开通后，将以本次创建时的购买时长作为自动续费周期，自动续费周期可在续费管理功能中进行修改。 (Optional) */
     AutoRenew *bool `json:"autoRenew"`
+
+    /* 计费模式定时转换，支持在某一时间内从按配置/按用量计费转换为包年包月计费。true为开通转换，false为不开通转换，默认false。且只有按配置/按用量计费支持开启。请参阅具体产品线帮助文档确认该产品线支持的计费类型转换。 (Optional) */
+    AutoChangeChargeMode *bool `json:"autoChangeChargeMode"`
+
+    /* 计费模式定时转换日期，格式"yyyy-MM-dd" ,例"2022-12-18"。指定日期的0点开始执行转换 ,autoChangeChargeMode为true时必填。 (Optional) */
+    AutoChangeChargeModeDate *string `json:"autoChangeChargeModeDate"`
 
     /* 产品线统一活动凭证JSON字符串，需要BASE64编码，目前要求编码前格式为 {"activity":{"activityType":必填字段, "activityIdentifier":必填字段}} (Optional) */
     BuyScenario *string `json:"buyScenario"`
