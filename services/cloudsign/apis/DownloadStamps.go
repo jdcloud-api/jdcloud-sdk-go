@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    cloudsign "github.com/jdcloud-api/jdcloud-sdk-go/services/cloudsign/models"
 )
 
 type DownloadStampsRequest struct {
@@ -98,4 +99,5 @@ type DownloadStampsResponse struct {
 }
 
 type DownloadStampsResult struct {
+    StampInfo cloudsign.StampInfo `json:"stampInfo"`
 }

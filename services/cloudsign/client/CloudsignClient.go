@@ -40,7 +40,7 @@ func NewCloudsignClient(credential *core.Credential) *CloudsignClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "cloudsign",
-            Revision:    "2.0.0",
+            Revision:    "2.0.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
