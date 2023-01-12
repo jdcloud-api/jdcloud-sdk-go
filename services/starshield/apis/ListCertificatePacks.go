@@ -90,11 +90,11 @@ func NewListCertificatePacksRequestWithoutParam() *ListCertificatePacksRequest {
 func (r *ListCertificatePacksRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
 /* param status: 包括所有状态的证书包，而不仅仅是激活状态的证书包。(Optional) */
 func (r *ListCertificatePacksRequest) SetStatus(status string) {
     r.Status = &status
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

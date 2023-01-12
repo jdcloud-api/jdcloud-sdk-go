@@ -120,36 +120,31 @@ func NewListOfFirewallRulesRequestWithoutParam() *ListOfFirewallRulesRequest {
 func (r *ListOfFirewallRulesRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
 /* param id: 防火墙规则标识符(Optional) */
 func (r *ListOfFirewallRulesRequest) SetId(id string) {
     r.Id = &id
 }
-
 /* param description: 描述中不区分大小写的搜索(Optional) */
 func (r *ListOfFirewallRulesRequest) SetDescription(description string) {
     r.Description = &description
 }
-
 /* param action: 规则操作上的精确匹配(Optional) */
 func (r *ListOfFirewallRulesRequest) SetAction(action string) {
     r.Action = &action
 }
-
 /* param paused: 此防火墙规则当前是否已暂停。(Optional) */
 func (r *ListOfFirewallRulesRequest) SetPaused(paused bool) {
     r.Paused = &paused
 }
-
 /* param page: 分页结果的页码(Optional) */
 func (r *ListOfFirewallRulesRequest) SetPage(page int) {
     r.Page = &page
 }
-
 /* param per_page: 每页的防火墙规则数(Optional) */
 func (r *ListOfFirewallRulesRequest) SetPer_page(per_page int) {
     r.Per_page = &per_page
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

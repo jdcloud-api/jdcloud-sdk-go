@@ -40,7 +40,7 @@ func NewStarshieldClient(credential *core.Credential) *StarshieldClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "starshield",
-            Revision:    "0.0.3",
+            Revision:    "0.0.4",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -147,6 +147,28 @@ func (c *StarshieldClient) ChangeEnableErrorPagesOnSetting(request *starshield.C
     return jdResp, err
 }
 
+/* 上传SSL证书的新私钥和/或PEM/CRT。
+注意，更新sni_custom证书的配置将导致返回新的资源id，并删除之前的资源id。
+ */
+func (c *StarshieldClient) EditSSLConfiguration(request *starshield.EditSSLConfigurationRequest) (*starshield.EditSSLConfigurationResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.EditSSLConfigurationResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 批量更新域的设置 */
 func (c *StarshieldClient) EditZoneSettingsInfo(request *starshield.EditZoneSettingsInfoRequest) (*starshield.EditZoneSettingsInfoResponse, error) {
     if request == nil {
@@ -189,7 +211,8 @@ func (c *StarshieldClient) ChangeHotlinkProtectionSetting(request *starshield.Ch
     return jdResp, err
 }
 
-/* 创建套餐实例 */
+/* 创建套餐实例，调用成功，将自动扣费（请保证账户充足，否则无法成功创建实例）。
+ */
 func (c *StarshieldClient) CreateInstance(request *starshield.CreateInstanceRequest) (*starshield.CreateInstanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -831,7 +854,8 @@ func (c *StarshieldClient) GetAdvancedDDOSSetting(request *starshield.GetAdvance
     return jdResp, err
 }
 
-/* 购买流量包 */
+/* 购买流量包，调用成功，将自动扣费（请保证账户充足，否则无法成功创建流量包）。
+ */
 func (c *StarshieldClient) CreateFlowPack(request *starshield.CreateFlowPackRequest) (*starshield.CreateFlowPackResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")

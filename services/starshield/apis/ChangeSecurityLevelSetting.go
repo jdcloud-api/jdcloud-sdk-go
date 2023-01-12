@@ -90,11 +90,11 @@ func NewChangeSecurityLevelSettingRequestWithoutParam() *ChangeSecurityLevelSett
 func (r *ChangeSecurityLevelSettingRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
 /* param value: 该设置的有效值(Optional) */
 func (r *ChangeSecurityLevelSettingRequest) SetValue(value string) {
     r.Value = &value
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

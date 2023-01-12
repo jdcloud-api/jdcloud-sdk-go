@@ -92,11 +92,11 @@ func NewDeleteDNSRecordRequestWithoutParam() *DeleteDNSRecordRequest {
 func (r *DeleteDNSRecordRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
 /* param identifier: (Required) */
 func (r *DeleteDNSRecordRequest) SetIdentifier(identifier string) {
     r.Identifier = identifier
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

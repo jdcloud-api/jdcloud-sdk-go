@@ -35,7 +35,18 @@ type CustomSSL struct {
     /* 域标识符标签 (Optional) */
     Zone_id string `json:"zone_id"`
 
-    /* 域的自定义SSL的状态 (Optional) */
+    /* 域的自定义SSL的状态，
+active              激活
+expired             已过期
+deleted             已删除
+pending             待处理
+pending_validation  待验证
+pending_issuance    待签发
+pending_deployment  待部署
+holding_deployment  等待部署
+initializing        初始化
+inactive            未激活
+ (Optional) */
     Status string `json:"status"`
 
     /*  (Optional) */
@@ -56,9 +67,10 @@ type CustomSSL struct {
     /* 证书上载到星盾的时间 (Optional) */
     Uploaded_on string `json:"uploaded_on"`
 
-    /* SSL泛捆绑在各处有着最高的概率被验证，甚至能被使用过时的或不寻常的信任存储的客户端验证。
-最佳捆绑使用最短的认证链和最新的中间证书。
-而强制捆绑会验证证书链，但不以其他方式修改证书链。
+    /* 合法值ubiquitous/optimal/force，默认值ubiquitous。
+ubiquitous：SSL泛捆绑在各处有着最高的概率被验证，甚至能被使用过时的或不寻常的信任存储的客户端验证。
+optimal：最佳捆绑使用最短的认证链和最新的中间证书。
+force：强制捆绑会验证证书链，但不以其他方式修改证书链。
  (Optional) */
     Bundle_method string `json:"bundle_method"`
 }

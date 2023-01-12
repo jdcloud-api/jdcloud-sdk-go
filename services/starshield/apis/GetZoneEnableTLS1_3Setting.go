@@ -85,6 +85,7 @@ func (r *GetZoneEnableTLS1_3SettingRequest) SetZone_identifier(zone_identifier s
     r.Zone_identifier = zone_identifier
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r GetZoneEnableTLS1_3SettingRequest) GetRegionId() string {

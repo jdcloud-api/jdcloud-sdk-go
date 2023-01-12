@@ -67,6 +67,9 @@ SMB_BUSINESS 按流量 商业版
 
     /* 支付成功返回路径 (Optional) */
     ReturnUrl *string `json:"returnUrl"`
+
+    /* 购买上下文JSON字符串 (Optional) */
+    BuyScenario *string `json:"buyScenario"`
 }
 
 /*
@@ -114,6 +117,7 @@ SMB_BUSINESS 按流量 商业版
  * param instanceName: 实例名称 (Optional)
  * param memo: 备注 (Optional)
  * param returnUrl: 支付成功返回路径 (Optional)
+ * param buyScenario: 购买上下文JSON字符串 (Optional)
  */
 func NewCreateInstanceRequestWithAllParams(
     regionId string,
@@ -126,6 +130,7 @@ func NewCreateInstanceRequestWithAllParams(
     instanceName *string,
     memo *string,
     returnUrl *string,
+    buyScenario *string,
 ) *CreateInstanceRequest {
 
     return &CreateInstanceRequest{
@@ -145,6 +150,7 @@ func NewCreateInstanceRequestWithAllParams(
         InstanceName: instanceName,
         Memo: memo,
         ReturnUrl: returnUrl,
+        BuyScenario: buyScenario,
     }
 }
 
@@ -165,7 +171,6 @@ func NewCreateInstanceRequestWithoutParam() *CreateInstanceRequest {
 func (r *CreateInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param chargeMode: 计费模式（CONFIG、FLOW、MONTHLY、ONCE）
 CONFIG 按配置
 FLOW 按用量
@@ -175,7 +180,6 @@ ONCE 一次性
 func (r *CreateInstanceRequest) SetChargeMode(chargeMode string) {
     r.ChargeMode = &chargeMode
 }
-
 /* param packType: 套餐类型（BASIC、PROFESSIONAL、ENTERPRISE、ULTIMATE、SMB_EXPERIENCE、SMB_BASIC、SMB_BUSINESS）
 BASIC 包年包月 基础版
 PROFESSIONAL 包年包月 专业版
@@ -189,41 +193,39 @@ SMB_BUSINESS 按流量 商业版
 func (r *CreateInstanceRequest) SetPackType(packType string) {
     r.PackType = &packType
 }
-
 /* param zonePackNum: 域名增量包数量(Optional) */
 func (r *CreateInstanceRequest) SetZonePackNum(zonePackNum int) {
     r.ZonePackNum = &zonePackNum
 }
-
 /* param duration: 计费时长(Optional) */
 func (r *CreateInstanceRequest) SetDuration(duration int) {
     r.Duration = &duration
 }
-
 /* param durationUnit: 计费时长单位（MONTH、YEAR）(Optional) */
 func (r *CreateInstanceRequest) SetDurationUnit(durationUnit string) {
     r.DurationUnit = &durationUnit
 }
-
 /* param autoRenewStatus: 自动续费状态(OPEN->开通自动续费 CLOSE->关闭自动续费)(Optional) */
 func (r *CreateInstanceRequest) SetAutoRenewStatus(autoRenewStatus string) {
     r.AutoRenewStatus = &autoRenewStatus
 }
-
 /* param instanceName: 实例名称(Optional) */
 func (r *CreateInstanceRequest) SetInstanceName(instanceName string) {
     r.InstanceName = &instanceName
 }
-
 /* param memo: 备注(Optional) */
 func (r *CreateInstanceRequest) SetMemo(memo string) {
     r.Memo = &memo
 }
-
 /* param returnUrl: 支付成功返回路径(Optional) */
 func (r *CreateInstanceRequest) SetReturnUrl(returnUrl string) {
     r.ReturnUrl = &returnUrl
 }
+/* param buyScenario: 购买上下文JSON字符串(Optional) */
+func (r *CreateInstanceRequest) SetBuyScenario(buyScenario string) {
+    r.BuyScenario = &buyScenario
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -85,6 +85,7 @@ func (r *GetRocketLoaderSettingRequest) SetZone_identifier(zone_identifier strin
     r.Zone_identifier = zone_identifier
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r GetRocketLoaderSettingRequest) GetRegionId() string {

@@ -105,21 +105,19 @@ func NewUpdateCustomPageURLRequestWithoutParam() *UpdateCustomPageURLRequest {
 func (r *UpdateCustomPageURLRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
 /* param identifier: (Required) */
 func (r *UpdateCustomPageURLRequest) SetIdentifier(identifier string) {
     r.Identifier = identifier
 }
-
 /* param url: 与自定义页面关联的URL。(Optional) */
 func (r *UpdateCustomPageURLRequest) SetUrl(url string) {
     r.Url = &url
 }
-
 /* param state: 自定义页面状态(Optional) */
 func (r *UpdateCustomPageURLRequest) SetState(state string) {
     r.State = &state
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

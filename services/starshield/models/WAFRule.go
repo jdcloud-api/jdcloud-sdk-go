@@ -37,6 +37,9 @@ type WAFRule struct {
     /* 定义触发规则时规则交互方式的可用模式。 (Optional) */
     Allowed_modes []string `json:"allowed_modes"`
 
+    /* 规则的默认模式。 (Optional) */
+    Default_mode string `json:"default_mode"`
+
     /* 评估请求时是否使用基于异常的规则。 (Optional) */
     Mode string `json:"mode"`
 }

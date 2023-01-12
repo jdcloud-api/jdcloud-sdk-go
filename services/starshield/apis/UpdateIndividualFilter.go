@@ -117,31 +117,27 @@ func NewUpdateIndividualFilterRequestWithoutParam() *UpdateIndividualFilterReque
 func (r *UpdateIndividualFilterRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
 /* param id: (Required) */
 func (r *UpdateIndividualFilterRequest) SetId(id string) {
     r.Id = id
 }
-
 /* param expression: 要使用的筛选器表达式(Optional) */
 func (r *UpdateIndividualFilterRequest) SetExpression(expression string) {
     r.Expression = &expression
 }
-
 /* param paused: 此筛选器当前是否已暂停(Optional) */
 func (r *UpdateIndividualFilterRequest) SetPaused(paused bool) {
     r.Paused = &paused
 }
-
 /* param description: 可用于描述过滤器用途的注释(Optional) */
 func (r *UpdateIndividualFilterRequest) SetDescription(description string) {
     r.Description = &description
 }
-
 /* param ref: 短引用标记，用于快速选择相关规则。(Optional) */
 func (r *UpdateIndividualFilterRequest) SetRef(ref string) {
     r.Ref = &ref
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

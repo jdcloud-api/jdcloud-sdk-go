@@ -105,21 +105,19 @@ func NewEditFirewallPackageRequestWithoutParam() *EditFirewallPackageRequest {
 func (r *EditFirewallPackageRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
 /* param identifier: (Required) */
 func (r *EditFirewallPackageRequest) SetIdentifier(identifier string) {
     r.Identifier = identifier
 }
-
 /* param sensitivity: 防火墙包的敏感度。(Optional) */
 func (r *EditFirewallPackageRequest) SetSensitivity(sensitivity string) {
     r.Sensitivity = &sensitivity
 }
-
 /* param action_mode: 将对防火墙包下的规则执行的默认操作。(Optional) */
 func (r *EditFirewallPackageRequest) SetAction_mode(action_mode string) {
     r.Action_mode = &action_mode
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

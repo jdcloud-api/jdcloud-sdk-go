@@ -92,11 +92,11 @@ func NewDeleteAdvancedCertificateManagerCertificatePackRequestWithoutParam() *De
 func (r *DeleteAdvancedCertificateManagerCertificatePackRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
 /* param identifier: (Required) */
 func (r *DeleteAdvancedCertificateManagerCertificatePackRequest) SetIdentifier(identifier string) {
     r.Identifier = identifier
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

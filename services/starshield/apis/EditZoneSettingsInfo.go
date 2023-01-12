@@ -90,11 +90,11 @@ func NewEditZoneSettingsInfoRequestWithoutParam() *EditZoneSettingsInfoRequest {
 func (r *EditZoneSettingsInfoRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
 /* param items: 一或多个域配置对象。必须包含ID和值。(Optional) */
 func (r *EditZoneSettingsInfoRequest) SetItems(items []starshield.Item) {
     r.Items = items
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

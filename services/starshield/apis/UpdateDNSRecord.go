@@ -150,51 +150,43 @@ func NewUpdateDNSRecordRequestWithoutParam() *UpdateDNSRecordRequest {
 func (r *UpdateDNSRecordRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
 /* param identifier: (Required) */
 func (r *UpdateDNSRecordRequest) SetIdentifier(identifier string) {
     r.Identifier = identifier
 }
-
 /* param ty_pe: DNS记录类型(Optional) */
 func (r *UpdateDNSRecordRequest) SetTy_pe(ty_pe string) {
     r.Ty_pe = &ty_pe
 }
-
 /* param name: DNS记录名称(Required) */
 func (r *UpdateDNSRecordRequest) SetName(name string) {
     r.Name = name
 }
-
 /* param content: DNS记录内容(Required) */
 func (r *UpdateDNSRecordRequest) SetContent(content string) {
     r.Content = content
 }
-
 /* param ttl: DNS记录的生存时间。值为1是 "自动"。(Required) */
 func (r *UpdateDNSRecordRequest) SetTtl(ttl int) {
     r.Ttl = ttl
 }
-
 /* param proxied: 是否利用星盾的性能和安全优势(Optional) */
 func (r *UpdateDNSRecordRequest) SetProxied(proxied bool) {
     r.Proxied = &proxied
 }
-
 /* param priority: 如果是MX记录，该属性是必需的(Optional) */
 func (r *UpdateDNSRecordRequest) SetPriority(priority int) {
     r.Priority = &priority
 }
-
 /* param srvData: (Optional) */
 func (r *UpdateDNSRecordRequest) SetSrvData(srvData *starshield.SRVdata) {
     r.SrvData = srvData
 }
-
 /* param caaData: (Optional) */
 func (r *UpdateDNSRecordRequest) SetCaaData(caaData *starshield.CAAdata) {
     r.CaaData = caaData
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

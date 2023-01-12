@@ -102,21 +102,19 @@ func NewDescribeInstancesRequestWithoutParam() *DescribeInstancesRequest {
 func (r *DescribeInstancesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param pageSize: 页容量，默认10, 范围（1-100）(Optional) */
 func (r *DescribeInstancesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param pageNumber: 页序号，默认1，不能小于1(Optional) */
 func (r *DescribeInstancesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param instanceName: 实例名称(Optional) */
 func (r *DescribeInstancesRequest) SetInstanceName(instanceName string) {
     r.InstanceName = &instanceName
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

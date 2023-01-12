@@ -85,6 +85,7 @@ func (r *GetEmailObfuscationSettingRequest) SetZone_identifier(zone_identifier s
     r.Zone_identifier = zone_identifier
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r GetEmailObfuscationSettingRequest) GetRegionId() string {

@@ -90,11 +90,11 @@ func NewChangeBrowserCacheTTLSettingRequestWithoutParam() *ChangeBrowserCacheTTL
 func (r *ChangeBrowserCacheTTLSettingRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
 /* param value: 该设置的有效值(Optional) */
 func (r *ChangeBrowserCacheTTLSettingRequest) SetValue(value int) {
     r.Value = &value
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

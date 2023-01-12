@@ -25,13 +25,13 @@ type DescribeZonesRes struct {
     /* zone name (Optional) */
     Name string `json:"name"`
 
-    /* zone状态 (Optional) */
+    /* zone状态(active->已激活 deleted->已删除 pending->未激活) (Optional) */
     Status string `json:"status"`
 
     /* 是否暂停 (Optional) */
     Paused bool `json:"paused"`
 
-    /* zone接入类型 (Optional) */
+    /* zone接入类型(full->全接入 partial->半接入) (Optional) */
     Ty_pe string `json:"ty_pe"`
 
     /* 开发者模式 (Optional) */

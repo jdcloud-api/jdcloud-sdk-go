@@ -28,7 +28,7 @@ type ChangeSSLSettingRequest struct {
     /*   */
     Zone_identifier string `json:"zone_identifier"`
 
-    /* 该设置的有效值 (Optional) */
+    /* 该设置的有效值，off/flexible/full/strict (Optional) */
     Value *string `json:"value"`
 }
 
@@ -54,7 +54,7 @@ func NewChangeSSLSettingRequest(
 
 /*
  * param zone_identifier:  (Required)
- * param value: 该设置的有效值 (Optional)
+ * param value: 该设置的有效值，off/flexible/full/strict (Optional)
  */
 func NewChangeSSLSettingRequestWithAllParams(
     zone_identifier string,
@@ -90,11 +90,11 @@ func NewChangeSSLSettingRequestWithoutParam() *ChangeSSLSettingRequest {
 func (r *ChangeSSLSettingRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
-/* param value: 该设置的有效值(Optional) */
+/* param value: 该设置的有效值，off/flexible/full/strict(Optional) */
 func (r *ChangeSSLSettingRequest) SetValue(value string) {
     r.Value = &value
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -90,11 +90,11 @@ func NewChangeMinimumTLSVersionSettingRequestWithoutParam() *ChangeMinimumTLSVer
 func (r *ChangeMinimumTLSVersionSettingRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
 /* param value: TLS协议版本(Optional) */
 func (r *ChangeMinimumTLSVersionSettingRequest) SetValue(value string) {
     r.Value = &value
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

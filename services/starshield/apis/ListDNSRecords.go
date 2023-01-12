@@ -138,51 +138,43 @@ func NewListDNSRecordsRequestWithoutParam() *ListDNSRecordsRequest {
 func (r *ListDNSRecordsRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
 /* param match: 是否匹配所有搜索要求或至少一个（任何）(Optional) */
 func (r *ListDNSRecordsRequest) SetMatch(match string) {
     r.Match = &match
 }
-
 /* param name: DNS record name(Optional) */
 func (r *ListDNSRecordsRequest) SetName(name string) {
     r.Name = &name
 }
-
 /* param order: 用于排序的字段(Optional) */
 func (r *ListDNSRecordsRequest) SetOrder(order string) {
     r.Order = &order
 }
-
 /* param page: 分页结果的页码(Optional) */
 func (r *ListDNSRecordsRequest) SetPage(page int) {
     r.Page = &page
 }
-
 /* param per_page: 每页的DNS记录数(Optional) */
 func (r *ListDNSRecordsRequest) SetPer_page(per_page int) {
     r.Per_page = &per_page
 }
-
 /* param content: DNS记录内容(Optional) */
 func (r *ListDNSRecordsRequest) SetContent(content string) {
     r.Content = &content
 }
-
 /* param type_: DNS记录类型(Optional) */
 func (r *ListDNSRecordsRequest) SetType(type_ string) {
     r.Type = &type_
 }
-
 /* param proxied: DNS记录代理状态(Optional) */
 func (r *ListDNSRecordsRequest) SetProxied(proxied bool) {
     r.Proxied = &proxied
 }
-
 /* param direction: asc - 升序；desc - 降序(Optional) */
 func (r *ListDNSRecordsRequest) SetDirection(direction string) {
     r.Direction = &direction
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -19,9 +19,9 @@ package models
 
 type Group struct {
 
-    /* WAF group identifier tag (Optional) */
+    /* WAF组标识符标签 (Optional) */
     Id string `json:"id"`
 
-    /* Name of the firewall rule group (Optional) */
+    /* 防火墙规则组的名称 (Optional) */
     Name string `json:"name"`
 }

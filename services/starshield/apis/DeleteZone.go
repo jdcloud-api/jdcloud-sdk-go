@@ -85,6 +85,7 @@ func (r *DeleteZoneRequest) SetIdentifier(identifier string) {
     r.Identifier = identifier
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r DeleteZoneRequest) GetRegionId() string {

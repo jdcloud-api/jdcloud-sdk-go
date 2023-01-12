@@ -92,11 +92,11 @@ func NewSelectDetailListRequestWithoutParam() *SelectDetailListRequest {
 func (r *SelectDetailListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param resourceList: 资源列表(Required) */
 func (r *SelectDetailListRequest) SetResourceList(resourceList string) {
     r.ResourceList = resourceList
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

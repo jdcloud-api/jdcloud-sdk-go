@@ -108,26 +108,23 @@ func NewListPageRulesRequestWithoutParam() *ListPageRulesRequest {
 func (r *ListPageRulesRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
 /* param status: 页面规则的状态(Optional) */
 func (r *ListPageRulesRequest) SetStatus(status string) {
     r.Status = &status
 }
-
 /* param order: 用于按顺序排列页面规则的字段(Optional) */
 func (r *ListPageRulesRequest) SetOrder(order string) {
     r.Order = &order
 }
-
 /* param direction: asc - 升序；desc - 降序(Optional) */
 func (r *ListPageRulesRequest) SetDirection(direction string) {
     r.Direction = &direction
 }
-
 /* param match: 是否匹配所有搜索要求或至少一个（任何）(Optional) */
 func (r *ListPageRulesRequest) SetMatch(match string) {
     r.Match = &match
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

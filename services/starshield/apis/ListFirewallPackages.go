@@ -120,36 +120,31 @@ func NewListFirewallPackagesRequestWithoutParam() *ListFirewallPackagesRequest {
 func (r *ListFirewallPackagesRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
 /* param name: Name of the firewall package(Optional) */
 func (r *ListFirewallPackagesRequest) SetName(name string) {
     r.Name = &name
 }
-
 /* param page: Page number of paginated results(Optional) */
 func (r *ListFirewallPackagesRequest) SetPage(page int) {
     r.Page = &page
 }
-
 /* param per_page: 每页的包数(Optional) */
 func (r *ListFirewallPackagesRequest) SetPer_page(per_page int) {
     r.Per_page = &per_page
 }
-
 /* param order: 按字段对包排序(Optional) */
 func (r *ListFirewallPackagesRequest) SetOrder(order string) {
     r.Order = &order
 }
-
 /* param direction: asc - 升序；desc - 降序(Optional) */
 func (r *ListFirewallPackagesRequest) SetDirection(direction string) {
     r.Direction = &direction
 }
-
 /* param match: 是否匹配所有搜索要求或至少一个（任何）(Optional) */
 func (r *ListFirewallPackagesRequest) SetMatch(match string) {
     r.Match = &match
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

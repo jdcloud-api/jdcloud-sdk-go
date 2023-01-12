@@ -92,11 +92,11 @@ func NewCheckInstancesNameRequestWithoutParam() *CheckInstancesNameRequest {
 func (r *CheckInstancesNameRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceName: 实例名称(Required) */
 func (r *CheckInstancesNameRequest) SetInstanceName(instanceName string) {
     r.InstanceName = instanceName
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -90,11 +90,11 @@ func NewCreateFirewallRulesRequestWithoutParam() *CreateFirewallRulesRequest {
 func (r *CreateFirewallRulesRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
 /* param firewallRules: (Optional) */
 func (r *CreateFirewallRulesRequest) SetFirewallRules(firewallRules []starshield.FirewallRule) {
     r.FirewallRules = firewallRules
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

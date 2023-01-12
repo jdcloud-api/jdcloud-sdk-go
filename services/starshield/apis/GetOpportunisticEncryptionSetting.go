@@ -85,6 +85,7 @@ func (r *GetOpportunisticEncryptionSettingRequest) SetZone_identifier(zone_ident
     r.Zone_identifier = zone_identifier
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r GetOpportunisticEncryptionSettingRequest) GetRegionId() string {

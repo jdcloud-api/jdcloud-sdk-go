@@ -90,11 +90,11 @@ func NewChangeMaxUploadSettingRequestWithoutParam() *ChangeMaxUploadSettingReque
 func (r *ChangeMaxUploadSettingRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
 /* param value: (Optional) */
 func (r *ChangeMaxUploadSettingRequest) SetValue(value int) {
     r.Value = &value
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

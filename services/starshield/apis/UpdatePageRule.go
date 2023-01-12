@@ -125,22 +125,18 @@ func NewUpdatePageRuleRequestWithoutParam() *UpdatePageRuleRequest {
 func (r *UpdatePageRuleRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
 /* param identifier: (Required) */
 func (r *UpdatePageRuleRequest) SetIdentifier(identifier string) {
     r.Identifier = identifier
 }
-
 /* param targets: 根据请求评估的目标(Optional) */
 func (r *UpdatePageRuleRequest) SetTargets(targets []starshield.Target) {
     r.Targets = targets
 }
-
 /* param actions: 如果此规则的目标与请求匹配，则要执行的操作集。操作可以将url重定向到另一个url或覆盖设置（但不能同时覆盖两者）(Optional) */
 func (r *UpdatePageRuleRequest) SetActions(actions []starshield.Action) {
     r.Actions = actions
 }
-
 /* param priority: 一个数字，表示一个页面规则优先于另一个页面规则。
 如果您可能有一个全面的页面规则（例如#1 “/images/”）
 但是想要更具体的规则优先（例如#2 '/images/special/'），
@@ -149,11 +145,11 @@ func (r *UpdatePageRuleRequest) SetActions(actions []starshield.Action) {
 func (r *UpdatePageRuleRequest) SetPriority(priority int) {
     r.Priority = &priority
 }
-
 /* param status: 页面规则的状态(Optional) */
 func (r *UpdatePageRuleRequest) SetStatus(status string) {
     r.Status = &status
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

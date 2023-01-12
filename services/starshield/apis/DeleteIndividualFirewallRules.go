@@ -99,16 +99,15 @@ func NewDeleteIndividualFirewallRulesRequestWithoutParam() *DeleteIndividualFire
 func (r *DeleteIndividualFirewallRulesRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
 /* param id: (Required) */
 func (r *DeleteIndividualFirewallRulesRequest) SetId(id string) {
     r.Id = id
 }
-
 /* param delete_filter_if_unused: (Optional) */
 func (r *DeleteIndividualFirewallRulesRequest) SetDelete_filter_if_unused(delete_filter_if_unused bool) {
     r.Delete_filter_if_unused = &delete_filter_if_unused
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

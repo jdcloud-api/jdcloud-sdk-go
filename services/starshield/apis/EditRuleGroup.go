@@ -108,21 +108,19 @@ func NewEditRuleGroupRequestWithoutParam() *EditRuleGroupRequest {
 func (r *EditRuleGroupRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
 /* param package_identifier: (Required) */
 func (r *EditRuleGroupRequest) SetPackage_identifier(package_identifier string) {
     r.Package_identifier = package_identifier
 }
-
 /* param identifier: (Required) */
 func (r *EditRuleGroupRequest) SetIdentifier(identifier string) {
     r.Identifier = identifier
 }
-
 /* param mode: 该组中包含的规则是否可配置/可使用(Optional) */
 func (r *EditRuleGroupRequest) SetMode(mode string) {
     r.Mode = &mode
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

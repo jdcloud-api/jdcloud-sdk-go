@@ -102,16 +102,15 @@ func NewRuleGroupDetailsRequestWithoutParam() *RuleGroupDetailsRequest {
 func (r *RuleGroupDetailsRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
 /* param package_identifier: (Required) */
 func (r *RuleGroupDetailsRequest) SetPackage_identifier(package_identifier string) {
     r.Package_identifier = package_identifier
 }
-
 /* param identifier: (Required) */
 func (r *RuleGroupDetailsRequest) SetIdentifier(identifier string) {
     r.Identifier = identifier
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

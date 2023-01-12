@@ -90,11 +90,11 @@ func NewChangeWebSocketsSettingRequestWithoutParam() *ChangeWebSocketsSettingReq
 func (r *ChangeWebSocketsSettingRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
 /* param value: on - 开启；off - 关闭(Optional) */
 func (r *ChangeWebSocketsSettingRequest) SetValue(value string) {
     r.Value = &value
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

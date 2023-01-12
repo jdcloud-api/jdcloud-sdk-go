@@ -22,7 +22,11 @@ type CertificatePack struct {
     /* 证书包的唯一标识符 (Optional) */
     Id string `json:"id"`
 
-    /* 证书包的类型 (Optional) */
+    /* 证书包的类型，有效值universal/sni_custom/advanced
+universal    通用
+sni_custom   自定义
+advanced     专用
+ (Optional) */
     Ty_pe string `json:"ty_pe"`
 
     /* 证书包的有效主机名的逗号分隔列表。必须包含域的顶级域名，不能包含超过50个主机，并且不能为空。 (Optional) */

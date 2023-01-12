@@ -93,11 +93,11 @@ func NewDescribePackageRequestWithoutParam() *DescribePackageRequest {
 func (r *DescribePackageRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param packType: 套餐类型(Required) */
 func (r *DescribePackageRequest) SetPackType(packType int) {
     r.PackType = packType
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -108,26 +108,23 @@ func NewListSSLConfigurationsRequestWithoutParam() *ListSSLConfigurationsRequest
 func (r *ListSSLConfigurationsRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
 /* param status: 域的自定义SSL的状态(Optional) */
 func (r *ListSSLConfigurationsRequest) SetStatus(status string) {
     r.Status = &status
 }
-
 /* param page: 分页结果的页码(Optional) */
 func (r *ListSSLConfigurationsRequest) SetPage(page int) {
     r.Page = &page
 }
-
 /* param per_page: 每页的域数(Optional) */
 func (r *ListSSLConfigurationsRequest) SetPer_page(per_page int) {
     r.Per_page = &per_page
 }
-
 /* param match: 是否匹配所有搜索要求或至少一个（任何）(Optional) */
 func (r *ListSSLConfigurationsRequest) SetMatch(match string) {
     r.Match = &match
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

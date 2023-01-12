@@ -90,11 +90,11 @@ func NewChangeMinifySettingRequestWithoutParam() *ChangeMinifySettingRequest {
 func (r *ChangeMinifySettingRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
 /* param value: (Optional) */
 func (r *ChangeMinifySettingRequest) SetValue(value *starshield.Value_0_0) {
     r.Value = value
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

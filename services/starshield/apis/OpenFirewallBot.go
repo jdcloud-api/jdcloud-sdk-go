@@ -84,6 +84,7 @@ func (r *OpenFirewallBotRequest) SetZoneId(zoneId string) {
     r.ZoneId = zoneId
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r OpenFirewallBotRequest) GetRegionId() string {

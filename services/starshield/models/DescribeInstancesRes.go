@@ -43,6 +43,15 @@ type DescribeInstancesRes struct {
     /* 剩余流量(单位：Gb) (Optional) */
     FlowRemain float64 `json:"flowRemain"`
 
+    /* 套餐总流量 (Optional) */
+    TotalFlowStr string `json:"totalFlowStr"`
+
+    /* 套餐已使用流量 (Optional) */
+    UsedFlowStr string `json:"usedFlowStr"`
+
+    /* 套餐剩余流量 (Optional) */
+    RemainingFlowStr string `json:"remainingFlowStr"`
+
     /* 套餐模式(BASE->基础套餐 FLOW->流量套餐) (Optional) */
     PackMode string `json:"packMode"`
 
