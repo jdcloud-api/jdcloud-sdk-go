@@ -99,4 +99,7 @@ type Image struct {
 
     /* 是否来自导入镜像。 (Optional) */
     Imported bool `json:"imported"`
+
+    /* 镜像过期时间，空表示永久有效。 (Optional) */
+    ExpiredTime string `json:"expiredTime"`
 }
