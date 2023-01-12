@@ -90,11 +90,11 @@ func NewChangeIPv6SettingRequestWithoutParam() *ChangeIPv6SettingRequest {
 func (r *ChangeIPv6SettingRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
 /* param value: on - 开启；off - 关闭(Optional) */
 func (r *ChangeIPv6SettingRequest) SetValue(value string) {
     r.Value = &value
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

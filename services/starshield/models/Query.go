@@ -20,5 +20,5 @@ package models
 type Query struct {
 
     /* 要重写的字面URI查询字符串。 (Optional) */
-    Value *string `json:"value"`
+    Value string `json:"value"`
 }

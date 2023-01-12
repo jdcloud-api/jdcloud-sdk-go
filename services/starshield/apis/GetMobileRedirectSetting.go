@@ -85,6 +85,7 @@ func (r *GetMobileRedirectSettingRequest) SetZone_identifier(zone_identifier str
     r.Zone_identifier = zone_identifier
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r GetMobileRedirectSettingRequest) GetRegionId() string {

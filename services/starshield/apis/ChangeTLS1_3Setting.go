@@ -90,11 +90,11 @@ func NewChangeTLS1_3SettingRequestWithoutParam() *ChangeTLS1_3SettingRequest {
 func (r *ChangeTLS1_3SettingRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
 /* param value: 该设置的有效值(Optional) */
 func (r *ChangeTLS1_3SettingRequest) SetValue(value string) {
     r.Value = &value
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

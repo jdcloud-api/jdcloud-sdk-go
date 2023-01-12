@@ -147,56 +147,47 @@ func NewListRulesRequestWithoutParam() *ListRulesRequest {
 func (r *ListRulesRequest) SetZone_id(zone_id string) {
     r.Zone_id = zone_id
 }
-
 /* param package_id: (Required) */
 func (r *ListRulesRequest) SetPackage_id(package_id string) {
     r.Package_id = package_id
 }
-
 /* param mode: 已将规则覆盖到的设置(Optional) */
 func (r *ListRulesRequest) SetMode(mode string) {
     r.Mode = &mode
 }
-
 /* param priority: 在相关组中执行单个规则的顺序(Optional) */
 func (r *ListRulesRequest) SetPriority(priority string) {
     r.Priority = &priority
 }
-
 /* param match: 是否匹配所有搜索要求或至少一个（任何）(Optional) */
 func (r *ListRulesRequest) SetMatch(match string) {
     r.Match = &match
 }
-
 /* param order: 按指定字段排序(Optional) */
 func (r *ListRulesRequest) SetOrder(order string) {
     r.Order = &order
 }
-
 /* param page: 分页结果的页码(Optional) */
 func (r *ListRulesRequest) SetPage(page int) {
     r.Page = &page
 }
-
 /* param per_page: 每页的规则数(Optional) */
 func (r *ListRulesRequest) SetPer_page(per_page int) {
     r.Per_page = &per_page
 }
-
 /* param group_id: WAF组标识符标签(Optional) */
 func (r *ListRulesRequest) SetGroup_id(group_id string) {
     r.Group_id = &group_id
 }
-
 /* param description: 规则的公开说明(Optional) */
 func (r *ListRulesRequest) SetDescription(description string) {
     r.Description = &description
 }
-
 /* param direction: asc-升序；desc-降序(Optional) */
 func (r *ListRulesRequest) SetDirection(direction string) {
     r.Direction = &direction
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

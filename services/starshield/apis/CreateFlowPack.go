@@ -30,11 +30,20 @@ type CreateFlowPackRequest struct {
     /* 实例ID  */
     InstanceId string `json:"instanceId"`
 
-    /* 流量包数量 (Optional) */
+    /* 定量流量包类型(1->10TB 2->50TB 3->200TB 4->1PB 5->5PB) (Optional) */
+    FixedFlowPackType *int `json:"fixedFlowPackType"`
+
+    /* 定量流量包数量 (Optional) */
+    FixedFlowPackNum *int `json:"fixedFlowPackNum"`
+
+    /* 按需购买流量包数量 (Optional) */
     FlowPackNum *int `json:"flowPackNum"`
 
     /* 支付成功返回路径 (Optional) */
     ReturnUrl *string `json:"returnUrl"`
+
+    /* 购买上下文JSON字符串 (Optional) */
+    BuyScenario *string `json:"buyScenario"`
 }
 
 /*
@@ -63,14 +72,20 @@ func NewCreateFlowPackRequest(
 /*
  * param regionId: 地域ID (Required)
  * param instanceId: 实例ID (Required)
- * param flowPackNum: 流量包数量 (Optional)
+ * param fixedFlowPackType: 定量流量包类型(1->10TB 2->50TB 3->200TB 4->1PB 5->5PB) (Optional)
+ * param fixedFlowPackNum: 定量流量包数量 (Optional)
+ * param flowPackNum: 按需购买流量包数量 (Optional)
  * param returnUrl: 支付成功返回路径 (Optional)
+ * param buyScenario: 购买上下文JSON字符串 (Optional)
  */
 func NewCreateFlowPackRequestWithAllParams(
     regionId string,
     instanceId string,
+    fixedFlowPackType *int,
+    fixedFlowPackNum *int,
     flowPackNum *int,
     returnUrl *string,
+    buyScenario *string,
 ) *CreateFlowPackRequest {
 
     return &CreateFlowPackRequest{
@@ -82,8 +97,11 @@ func NewCreateFlowPackRequestWithAllParams(
         },
         RegionId: regionId,
         InstanceId: instanceId,
+        FixedFlowPackType: fixedFlowPackType,
+        FixedFlowPackNum: fixedFlowPackNum,
         FlowPackNum: flowPackNum,
         ReturnUrl: returnUrl,
+        BuyScenario: buyScenario,
     }
 }
 
@@ -104,21 +122,31 @@ func NewCreateFlowPackRequestWithoutParam() *CreateFlowPackRequest {
 func (r *CreateFlowPackRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 实例ID(Required) */
 func (r *CreateFlowPackRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
-/* param flowPackNum: 流量包数量(Optional) */
+/* param fixedFlowPackType: 定量流量包类型(1->10TB 2->50TB 3->200TB 4->1PB 5->5PB)(Optional) */
+func (r *CreateFlowPackRequest) SetFixedFlowPackType(fixedFlowPackType int) {
+    r.FixedFlowPackType = &fixedFlowPackType
+}
+/* param fixedFlowPackNum: 定量流量包数量(Optional) */
+func (r *CreateFlowPackRequest) SetFixedFlowPackNum(fixedFlowPackNum int) {
+    r.FixedFlowPackNum = &fixedFlowPackNum
+}
+/* param flowPackNum: 按需购买流量包数量(Optional) */
 func (r *CreateFlowPackRequest) SetFlowPackNum(flowPackNum int) {
     r.FlowPackNum = &flowPackNum
 }
-
 /* param returnUrl: 支付成功返回路径(Optional) */
 func (r *CreateFlowPackRequest) SetReturnUrl(returnUrl string) {
     r.ReturnUrl = &returnUrl
 }
+/* param buyScenario: 购买上下文JSON字符串(Optional) */
+func (r *CreateFlowPackRequest) SetBuyScenario(buyScenario string) {
+    r.BuyScenario = &buyScenario
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -90,11 +90,11 @@ func NewCreateFiltersRequestWithoutParam() *CreateFiltersRequest {
 func (r *CreateFiltersRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
 /* param filters: (Optional) */
 func (r *CreateFiltersRequest) SetFilters(filters []starshield.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

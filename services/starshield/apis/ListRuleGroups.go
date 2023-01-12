@@ -141,51 +141,43 @@ func NewListRuleGroupsRequestWithoutParam() *ListRuleGroupsRequest {
 func (r *ListRuleGroupsRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
 /* param package_identifier: (Required) */
 func (r *ListRuleGroupsRequest) SetPackage_identifier(package_identifier string) {
     r.Package_identifier = package_identifier
 }
-
 /* param name: 防火墙规则组名称(Optional) */
 func (r *ListRuleGroupsRequest) SetName(name string) {
     r.Name = &name
 }
-
 /* param mode: 此组中包含的规则是否可配置/可用(Optional) */
 func (r *ListRuleGroupsRequest) SetMode(mode string) {
     r.Mode = &mode
 }
-
 /* param rules_count: 此组中包含多少条规则(Optional) */
 func (r *ListRuleGroupsRequest) SetRules_count(rules_count int) {
     r.Rules_count = &rules_count
 }
-
 /* param page: 分页结果的页码(Optional) */
 func (r *ListRuleGroupsRequest) SetPage(page int) {
     r.Page = &page
 }
-
 /* param per_page: 每页的组数(Optional) */
 func (r *ListRuleGroupsRequest) SetPer_page(per_page int) {
     r.Per_page = &per_page
 }
-
 /* param order: 按字段对组进行排序(Optional) */
 func (r *ListRuleGroupsRequest) SetOrder(order string) {
     r.Order = &order
 }
-
 /* param direction: asc-升序；desc-降序(Optional) */
 func (r *ListRuleGroupsRequest) SetDirection(direction string) {
     r.Direction = &direction
 }
-
 /* param match: 是否匹配所有搜索要求或至少一个（任何）(Optional) */
 func (r *ListRuleGroupsRequest) SetMatch(match string) {
     r.Match = &match
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

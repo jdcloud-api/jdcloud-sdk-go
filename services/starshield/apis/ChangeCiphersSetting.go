@@ -89,11 +89,11 @@ func NewChangeCiphersSettingRequestWithoutParam() *ChangeCiphersSettingRequest {
 func (r *ChangeCiphersSettingRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
 /* param value: 该设置的值(Optional) */
 func (r *ChangeCiphersSettingRequest) SetValue(value []string) {
     r.Value = value
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

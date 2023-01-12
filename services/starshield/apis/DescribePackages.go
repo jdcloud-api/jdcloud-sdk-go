@@ -96,16 +96,15 @@ func NewDescribePackagesRequestWithoutParam() *DescribePackagesRequest {
 func (r *DescribePackagesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param pageSize: 页容量，默认10, 范围（1-100）(Optional) */
 func (r *DescribePackagesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param pageNumber: 页序号，默认1，不能小于1(Optional) */
 func (r *DescribePackagesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

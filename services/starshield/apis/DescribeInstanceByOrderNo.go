@@ -93,11 +93,11 @@ func NewDescribeInstanceByOrderNoRequestWithoutParam() *DescribeInstanceByOrderN
 func (r *DescribeInstanceByOrderNoRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param orderNumber: (Required) */
 func (r *DescribeInstanceByOrderNoRequest) SetOrderNumber(orderNumber string) {
     r.OrderNumber = orderNumber
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

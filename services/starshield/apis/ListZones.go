@@ -129,46 +129,39 @@ func NewListZonesRequestWithoutParam() *ListZonesRequest {
 func (r *ListZonesRequest) SetMatch(match string) {
     r.Match = &match
 }
-
 /* param name: 域名(Optional) */
 func (r *ListZonesRequest) SetName(name string) {
     r.Name = &name
 }
-
 /* param __account__name: 帐户名(Optional) */
 func (r *ListZonesRequest) Set__account__name(__account__name string) {
     r.__account__name = &__account__name
 }
-
 /* param order: 按字段对域进行排序(Optional) */
 func (r *ListZonesRequest) SetOrder(order string) {
     r.Order = &order
 }
-
 /* param page: 分页结果的页码(Optional) */
 func (r *ListZonesRequest) SetPage(page int) {
     r.Page = &page
 }
-
 /* param per_page: 每页的域数(Optional) */
 func (r *ListZonesRequest) SetPer_page(per_page int) {
     r.Per_page = &per_page
 }
-
 /* param status: 域的状态(Optional) */
 func (r *ListZonesRequest) SetStatus(status string) {
     r.Status = &status
 }
-
 /* param __account__id: 帐户标识符标签(Optional) */
 func (r *ListZonesRequest) Set__account__id(__account__id string) {
     r.__account__id = &__account__id
 }
-
 /* param direction: asc - 升序；desc - 降序(Optional) */
 func (r *ListZonesRequest) SetDirection(direction string) {
     r.Direction = &direction
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

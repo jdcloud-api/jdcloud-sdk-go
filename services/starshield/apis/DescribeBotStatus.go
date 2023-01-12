@@ -84,6 +84,7 @@ func (r *DescribeBotStatusRequest) SetZoneId(zoneId string) {
     r.ZoneId = zoneId
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r DescribeBotStatusRequest) GetRegionId() string {

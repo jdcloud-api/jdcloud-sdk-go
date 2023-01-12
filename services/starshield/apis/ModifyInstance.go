@@ -38,6 +38,9 @@ type ModifyInstanceRequest struct {
 
     /* 支付成功后返回到该路径 (Optional) */
     ReturnUrl *string `json:"returnUrl"`
+
+    /* 购买上下文JSON字符串 (Optional) */
+    BuyScenario *string `json:"buyScenario"`
 }
 
 /*
@@ -69,6 +72,7 @@ func NewModifyInstanceRequest(
  * param packType: 套餐类型 (Optional)
  * param zonePackNum: 域名增量包数量 (Optional)
  * param returnUrl: 支付成功后返回到该路径 (Optional)
+ * param buyScenario: 购买上下文JSON字符串 (Optional)
  */
 func NewModifyInstanceRequestWithAllParams(
     regionId string,
@@ -76,6 +80,7 @@ func NewModifyInstanceRequestWithAllParams(
     packType *string,
     zonePackNum *int,
     returnUrl *string,
+    buyScenario *string,
 ) *ModifyInstanceRequest {
 
     return &ModifyInstanceRequest{
@@ -90,6 +95,7 @@ func NewModifyInstanceRequestWithAllParams(
         PackType: packType,
         ZonePackNum: zonePackNum,
         ReturnUrl: returnUrl,
+        BuyScenario: buyScenario,
     }
 }
 
@@ -110,26 +116,27 @@ func NewModifyInstanceRequestWithoutParam() *ModifyInstanceRequest {
 func (r *ModifyInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 实例ID(Required) */
 func (r *ModifyInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param packType: 套餐类型(Optional) */
 func (r *ModifyInstanceRequest) SetPackType(packType string) {
     r.PackType = &packType
 }
-
 /* param zonePackNum: 域名增量包数量(Optional) */
 func (r *ModifyInstanceRequest) SetZonePackNum(zonePackNum int) {
     r.ZonePackNum = &zonePackNum
 }
-
 /* param returnUrl: 支付成功后返回到该路径(Optional) */
 func (r *ModifyInstanceRequest) SetReturnUrl(returnUrl string) {
     r.ReturnUrl = &returnUrl
 }
+/* param buyScenario: 购买上下文JSON字符串(Optional) */
+func (r *ModifyInstanceRequest) SetBuyScenario(buyScenario string) {
+    r.BuyScenario = &buyScenario
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

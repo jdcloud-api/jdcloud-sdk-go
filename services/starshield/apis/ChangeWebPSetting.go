@@ -90,11 +90,11 @@ func NewChangeWebPSettingRequestWithoutParam() *ChangeWebPSettingRequest {
 func (r *ChangeWebPSettingRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
 /* param value: on - 开启；off - 关闭(Optional) */
 func (r *ChangeWebPSettingRequest) SetValue(value string) {
     r.Value = &value
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

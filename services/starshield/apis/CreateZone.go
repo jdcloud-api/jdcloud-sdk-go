@@ -105,21 +105,19 @@ func NewCreateZoneRequestWithoutParam() *CreateZoneRequest {
 func (r *CreateZoneRequest) SetName(name string) {
     r.Name = name
 }
-
 /* param account: (Required) */
 func (r *CreateZoneRequest) SetAccount(account *starshield.Account) {
     r.Account = account
 }
-
 /* param jump_start: 自动尝试获取现有DNS记录(Optional) */
 func (r *CreateZoneRequest) SetJump_start(jump_start bool) {
     r.Jump_start = &jump_start
 }
-
 /* param ty_pe: 全接入域意味着DNS由星盾托管。半接入域通常是合作伙伴托管的域或CNAME设置。(Optional) */
 func (r *CreateZoneRequest) SetTy_pe(ty_pe string) {
     r.Ty_pe = &ty_pe
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

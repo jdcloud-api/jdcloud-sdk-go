@@ -141,51 +141,43 @@ func NewUpdateIndividualFirewallRuleRequestWithoutParam() *UpdateIndividualFirew
 func (r *UpdateIndividualFirewallRuleRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
 /* param id: (Required) */
 func (r *UpdateIndividualFirewallRuleRequest) SetId(id string) {
     r.Id = id
 }
-
 /* param action: 应用于匹配请求的行动。注意，行动 "log "只适用于企业客户。(Optional) */
 func (r *UpdateIndividualFirewallRuleRequest) SetAction(action string) {
     r.Action = &action
 }
-
 /* param filter: (Optional) */
 func (r *UpdateIndividualFirewallRuleRequest) SetFilter(filter *starshield.Filter) {
     r.Filter = filter
 }
-
 /* param products: (Optional) */
 func (r *UpdateIndividualFirewallRuleRequest) SetProducts(products []string) {
     r.Products = products
 }
-
 /* param priority: 规则的优先级，允许控制处理顺序。一个较小的数字表示高优先级。如果不提供，任何有优先权的规则将在没有优先权的规则之前排序。(Optional) */
 func (r *UpdateIndividualFirewallRuleRequest) SetPriority(priority int) {
     r.Priority = &priority
 }
-
 /* param paused: 此防火墙规则当前是否已暂停。(Optional) */
 func (r *UpdateIndividualFirewallRuleRequest) SetPaused(paused bool) {
     r.Paused = &paused
 }
-
 /* param ref: 短引用标记，用于快速选择相关规则。(Optional) */
 func (r *UpdateIndividualFirewallRuleRequest) SetRef(ref string) {
     r.Ref = &ref
 }
-
 /* param action_parameters: (Optional) */
 func (r *UpdateIndividualFirewallRuleRequest) SetAction_parameters(action_parameters *starshield.Action_parameters) {
     r.Action_parameters = action_parameters
 }
-
 /* param description: 对规则的描述，以帮助识别它。(Optional) */
 func (r *UpdateIndividualFirewallRuleRequest) SetDescription(description string) {
     r.Description = &description
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

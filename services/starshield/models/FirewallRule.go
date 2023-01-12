@@ -34,7 +34,13 @@ type FirewallRule struct {
     /*  (Optional) */
     Action_parameters Action_parameters `json:"action_parameters"`
 
-    /* 应用于匹配请求的行动。注意，行动 "log "只适用于企业客户。 (Optional) */
+    /* 对匹配到的请求采取的措施。有效值：js_challenge/block/challenge/allow/bypass
+js_challenge表示Js挑战
+block表示阻止
+challenge表示验证码
+allow表示允许
+bypass表示绕过
+ (Optional) */
     Action string `json:"action"`
 
     /*  (Optional) */

@@ -85,6 +85,7 @@ func (r *Get0_RTTSessionResumptionSettingRequest) SetZone_identifier(zone_identi
     r.Zone_identifier = zone_identifier
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r Get0_RTTSessionResumptionSettingRequest) GetRegionId() string {

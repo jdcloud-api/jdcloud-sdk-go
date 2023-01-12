@@ -99,13 +99,13 @@ func NewPurgeAllFilesRequestWithoutParam() *PurgeAllFilesRequest {
 func (r *PurgeAllFilesRequest) SetIdentifier(identifier string) {
     r.Identifier = identifier
 }
-
 /* param purge_everything: 指示星盾缓存中的所有资源都应该删除的标志。
 注意，执行此操作后，可能会对源服务器负载产生显著影响。
 (Required) */
 func (r *PurgeAllFilesRequest) SetPurge_everything(purge_everything bool) {
     r.Purge_everything = purge_everything
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

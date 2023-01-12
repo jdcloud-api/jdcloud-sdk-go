@@ -85,6 +85,7 @@ func (r *GetSecurityHeaderHSTSSettingRequest) SetZone_identifier(zone_identifier
     r.Zone_identifier = zone_identifier
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r GetSecurityHeaderHSTSSettingRequest) GetRegionId() string {

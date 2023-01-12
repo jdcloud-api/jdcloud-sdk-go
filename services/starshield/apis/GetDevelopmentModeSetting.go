@@ -85,6 +85,7 @@ func (r *GetDevelopmentModeSettingRequest) SetZone_identifier(zone_identifier st
     r.Zone_identifier = zone_identifier
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r GetDevelopmentModeSettingRequest) GetRegionId() string {

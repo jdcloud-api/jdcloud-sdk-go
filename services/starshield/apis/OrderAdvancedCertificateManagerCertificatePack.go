@@ -126,27 +126,22 @@ func NewOrderAdvancedCertificateManagerCertificatePackRequestWithoutParam() *Ord
 func (r *OrderAdvancedCertificateManagerCertificatePackRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
 /* param ty_pe: 证书包的类型(Optional) */
 func (r *OrderAdvancedCertificateManagerCertificatePackRequest) SetTy_pe(ty_pe string) {
     r.Ty_pe = &ty_pe
 }
-
 /* param hosts: 以逗号分隔的证书包的有效主机名称列表。必须包含域的顶级域名，不得包含50个以上的主机，也不得为空。(Optional) */
 func (r *OrderAdvancedCertificateManagerCertificatePackRequest) SetHosts(hosts []string) {
     r.Hosts = hosts
 }
-
 /* param validation_method: 为订阅选择的验证方法(Optional) */
 func (r *OrderAdvancedCertificateManagerCertificatePackRequest) SetValidation_method(validation_method string) {
     r.Validation_method = &validation_method
 }
-
 /* param validity_days: 为订阅选择的有效日期(Optional) */
 func (r *OrderAdvancedCertificateManagerCertificatePackRequest) SetValidity_days(validity_days int) {
     r.Validity_days = &validity_days
 }
-
 /* param certificate_authority: 为该订阅选择的证书颁发机构。选择Let's Encrypt将减少对其他字段的定制。
 validation_method必须是'txt'，validity_days必须是90，cloudflare_branding必须省略，hosts必须只包含两个条目。
 一个是域名，一个是域名的子域通配符（例如 example.com, *.example.com）。
@@ -154,11 +149,11 @@ validation_method必须是'txt'，validity_days必须是90，cloudflare_branding
 func (r *OrderAdvancedCertificateManagerCertificatePackRequest) SetCertificate_authority(certificate_authority string) {
     r.Certificate_authority = &certificate_authority
 }
-
 /* param cloudflare_branding: 是否为订阅添加星盾品牌。(Optional) */
 func (r *OrderAdvancedCertificateManagerCertificatePackRequest) SetCloudflare_branding(cloudflare_branding bool) {
     r.Cloudflare_branding = &cloudflare_branding
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

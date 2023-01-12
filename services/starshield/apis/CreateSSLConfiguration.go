@@ -28,22 +28,27 @@ type CreateSSLConfigurationRequest struct {
     /*   */
     Zone_identifier string `json:"zone_identifier"`
 
-    /* 域的SSL证书或证书以及中间层 (Optional) */
+    /* 域的SSL证书或证书以及中间证书 (Optional) */
     Certificate *string `json:"certificate"`
 
     /* 域的私钥 (Optional) */
     Private_key *string `json:"private_key"`
 
-    /* SSL泛捆绑在各处有着最高的概率被验证，甚至能被使用过时的或不寻常的信任存储的客户端验证。
-最佳捆绑使用最短的认证链和最新的中间证书。
-而强制捆绑会验证证书链，但不以其他方式修改证书链。
+    /* 合法值ubiquitous/optimal/force，默认值ubiquitous。
+ubiquitous：SSL泛捆绑在各处有着最高的概率被验证，甚至能被使用过时的或不寻常的信任存储的客户端验证。
+optimal：最佳捆绑使用最短的认证链和最新的中间证书。
+force：强制捆绑会验证证书链，但不以其他方式修改证书链。
  (Optional) */
     Bundle_method *string `json:"bundle_method"`
 
     /*  (Optional) */
     Geo_restrictions *starshield.Geo_restrictions `json:"geo_restrictions"`
 
-    /* “legacy_custom”类型支持在TLS握手中不包含SNI的传统客户端。 (Optional) */
+    /* “legacy_custom”类型支持在TLS握手中不包含SNI的传统客户端。
+合法值：
+legacy_custom
+sni_custom
+ (Optional) */
     Ty_pe *string `json:"ty_pe"`
 }
 
@@ -69,14 +74,19 @@ func NewCreateSSLConfigurationRequest(
 
 /*
  * param zone_identifier:  (Required)
- * param certificate: 域的SSL证书或证书以及中间层 (Optional)
+ * param certificate: 域的SSL证书或证书以及中间证书 (Optional)
  * param private_key: 域的私钥 (Optional)
- * param bundle_method: SSL泛捆绑在各处有着最高的概率被验证，甚至能被使用过时的或不寻常的信任存储的客户端验证。
-最佳捆绑使用最短的认证链和最新的中间证书。
-而强制捆绑会验证证书链，但不以其他方式修改证书链。
+ * param bundle_method: 合法值ubiquitous/optimal/force，默认值ubiquitous。
+ubiquitous：SSL泛捆绑在各处有着最高的概率被验证，甚至能被使用过时的或不寻常的信任存储的客户端验证。
+optimal：最佳捆绑使用最短的认证链和最新的中间证书。
+force：强制捆绑会验证证书链，但不以其他方式修改证书链。
  (Optional)
  * param geo_restrictions:  (Optional)
- * param ty_pe: “legacy_custom”类型支持在TLS握手中不包含SNI的传统客户端。 (Optional)
+ * param ty_pe: “legacy_custom”类型支持在TLS握手中不包含SNI的传统客户端。
+合法值：
+legacy_custom
+sni_custom
+ (Optional)
  */
 func NewCreateSSLConfigurationRequestWithAllParams(
     zone_identifier string,
@@ -120,34 +130,35 @@ func NewCreateSSLConfigurationRequestWithoutParam() *CreateSSLConfigurationReque
 func (r *CreateSSLConfigurationRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
-/* param certificate: 域的SSL证书或证书以及中间层(Optional) */
+/* param certificate: 域的SSL证书或证书以及中间证书(Optional) */
 func (r *CreateSSLConfigurationRequest) SetCertificate(certificate string) {
     r.Certificate = &certificate
 }
-
 /* param private_key: 域的私钥(Optional) */
 func (r *CreateSSLConfigurationRequest) SetPrivate_key(private_key string) {
     r.Private_key = &private_key
 }
-
-/* param bundle_method: SSL泛捆绑在各处有着最高的概率被验证，甚至能被使用过时的或不寻常的信任存储的客户端验证。
-最佳捆绑使用最短的认证链和最新的中间证书。
-而强制捆绑会验证证书链，但不以其他方式修改证书链。
+/* param bundle_method: 合法值ubiquitous/optimal/force，默认值ubiquitous。
+ubiquitous：SSL泛捆绑在各处有着最高的概率被验证，甚至能被使用过时的或不寻常的信任存储的客户端验证。
+optimal：最佳捆绑使用最短的认证链和最新的中间证书。
+force：强制捆绑会验证证书链，但不以其他方式修改证书链。
 (Optional) */
 func (r *CreateSSLConfigurationRequest) SetBundle_method(bundle_method string) {
     r.Bundle_method = &bundle_method
 }
-
 /* param geo_restrictions: (Optional) */
 func (r *CreateSSLConfigurationRequest) SetGeo_restrictions(geo_restrictions *starshield.Geo_restrictions) {
     r.Geo_restrictions = geo_restrictions
 }
-
-/* param ty_pe: “legacy_custom”类型支持在TLS握手中不包含SNI的传统客户端。(Optional) */
+/* param ty_pe: “legacy_custom”类型支持在TLS握手中不包含SNI的传统客户端。
+合法值：
+legacy_custom
+sni_custom
+(Optional) */
 func (r *CreateSSLConfigurationRequest) SetTy_pe(ty_pe string) {
     r.Ty_pe = &ty_pe
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

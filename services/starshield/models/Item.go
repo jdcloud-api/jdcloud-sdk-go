@@ -19,10 +19,14 @@ package models
 
 type Item struct {
 
-    /*  (Optional) */
+    /* 项的名称 (Optional) */
     Name string `json:"name"`
 
-    /*  (Optional) */
+    /* 项的值。
+如果是带宽，值的单位是bps（bit per second）
+如果是流量，值的单位是Byte
+如果是请求量，值的单位是次数
+ (Optional) */
     Value int `json:"value"`
 
     /*  (Optional) */

@@ -25,8 +25,14 @@ type DescribeDomainAlarmRes struct {
     /* 规则名称 (Optional) */
     RuleName string `json:"ruleName"`
 
-    /* 告警类型 WEB_ATTACK->网站攻击 CC_ATTACK->CC攻击 DDOS_ATTACK->DDOS攻击 STATUS_CODE_ERROR->状态码错误 (Optional) */
+    /* 告警类型 WEB_ATTACK->网站攻击 CC_ATTACK->CC攻击 DDOS_ATTACK->DDOS攻击 STATUS_CODE_ERROR->状态码错误 UPSTREAM_STATUS->回源IP异常告警 (Optional) */
     AlarmType string `json:"alarmType"`
+
+    /* warnType为statusCode时为要检测的状态码 (Optional) */
+    DetectItems []string `json:"detectItems"`
+
+    /* 阈值单位，""-个数，"percent"-百分比。缺省为个数 (Optional) */
+    Unit string `json:"unit"`
 
     /* 统计周期 (Optional) */
     StatCycle int `json:"statCycle"`

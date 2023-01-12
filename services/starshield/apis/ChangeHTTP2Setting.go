@@ -90,11 +90,11 @@ func NewChangeHTTP2SettingRequestWithoutParam() *ChangeHTTP2SettingRequest {
 func (r *ChangeHTTP2SettingRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
 /* param value: on - 开启；off - 关闭(Optional) */
 func (r *ChangeHTTP2SettingRequest) SetValue(value string) {
     r.Value = &value
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

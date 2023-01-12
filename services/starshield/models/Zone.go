@@ -76,4 +76,7 @@ type Zone struct {
 
     /* 切换到星盾时的域注册商 (Optional) */
     Original_registrar string `json:"original_registrar"`
+
+    /* cname解析状态。0为解析到云端VIP，1为解析到回源地址 (Optional) */
+    EnableCname2Rs int `json:"enableCname2Rs"`
 }

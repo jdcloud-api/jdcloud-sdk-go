@@ -19,15 +19,22 @@ package models
 
 type DateHistogram struct {
 
-    /*  (Optional) */
+    /* 项的名称 (Optional) */
     Name string `json:"name"`
 
-    /*  (Optional) */
+    /* 数据点集合。
+如果是带宽，数据点的单位是bps（bit per second）
+如果是流量，数据点的单位是Byte
+如果是请求量，数据点的单位是次数
+ (Optional) */
     Timeseries []int `json:"timeseries"`
 
     /*  (Optional) */
     Unit string `json:"unit"`
 
-    /*  (Optional) */
+    /* 如果是带宽，它的单位是bps（bit per second），代表数据点中的最大值。
+如果是流量，它的单位是Byte，代表数据点流量之和。
+如果是请求量，它的单位是次数，代表数据点请求量之和。
+ (Optional) */
     Total int `json:"total"`
 }

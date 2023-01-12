@@ -90,11 +90,11 @@ func NewChangeMobileRedirectSettingRequestWithoutParam() *ChangeMobileRedirectSe
 func (r *ChangeMobileRedirectSettingRequest) SetZone_identifier(zone_identifier string) {
     r.Zone_identifier = zone_identifier
 }
-
 /* param value: (Optional) */
 func (r *ChangeMobileRedirectSettingRequest) SetValue(value *starshield.Value_0) {
     r.Value = value
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

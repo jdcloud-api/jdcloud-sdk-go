@@ -85,6 +85,7 @@ func (r *GetSecurityLevelSettingRequest) SetZone_identifier(zone_identifier stri
     r.Zone_identifier = zone_identifier
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r GetSecurityLevelSettingRequest) GetRegionId() string {

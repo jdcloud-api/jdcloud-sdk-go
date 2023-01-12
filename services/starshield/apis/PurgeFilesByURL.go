@@ -90,11 +90,11 @@ func NewPurgeFilesByURLRequestWithoutParam() *PurgeFilesByURLRequest {
 func (r *PurgeFilesByURLRequest) SetIdentifier(identifier string) {
     r.Identifier = identifier
 }
-
 /* param files: 应从缓存中删除的URL数组(Optional) */
 func (r *PurgeFilesByURLRequest) SetFiles(files []string) {
     r.Files = files
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
