@@ -16,9 +16,8 @@
 
 package models
 
-import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
 
-type DedicatedHost struct {
+type DedicatedHostInternal struct {
 
     /* 专有宿主机ID (Optional) */
     DedicatedHostId string `json:"dedicatedHostId"`
@@ -53,19 +52,16 @@ type DedicatedHost struct {
     /* 专有宿主机上的云主机ID (Optional) */
     InstanceIds []string `json:"instanceIds"`
 
-    /* 计费信息 (Optional) */
-    Charge charge.Charge `json:"charge"`
-
     /* 创建时间 (Optional) */
     CreateTime string `json:"createTime"`
 
-    /* 专有宿主机cpu拓扑。
+    /* 本地设备列表。
  (Optional) */
+    LocalDevices []LocalDevice `json:"localDevices"`
+
+    /* CPU拓扑信息 (Optional) */
     CpuTopology CpuTopology `json:"cpuTopology"`
 
-    /* Tag信息。 (Optional) */
-    Tags []Tag `json:"tags"`
-
-    /* 资源组ID (Optional) */
-    ResourceGroupId string `json:"resourceGroupId"`
+    /* 机架信息 (Optional) */
+    Rack string `json:"rack"`
 }

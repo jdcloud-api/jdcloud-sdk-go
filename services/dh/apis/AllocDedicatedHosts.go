@@ -43,6 +43,10 @@ type AllocDedicatedHostsRequest struct {
     /* 用于保证请求的幂等性。由客户端生成，长度不能超过64个字符。
  (Optional) */
     ClientToken *string `json:"clientToken"`
+
+    /* 是否开启cpu拓扑，true:开启，false:关闭，只有宿主机是非超卖模式，且没有资源的时候才能开启；开启后，该宿主机上的虚机可以配置cpu拓扑和NUMA映射等。
+ (Optional) */
+    EnableCpuTopology *bool `json:"enableCpuTopology"`
 }
 
 /*
@@ -79,6 +83,8 @@ func NewAllocDedicatedHostsRequest(
  (Optional)
  * param clientToken: 用于保证请求的幂等性。由客户端生成，长度不能超过64个字符。
  (Optional)
+ * param enableCpuTopology: 是否开启cpu拓扑，true:开启，false:关闭，只有宿主机是非超卖模式，且没有资源的时候才能开启；开启后，该宿主机上的虚机可以配置cpu拓扑和NUMA映射等。
+ (Optional)
  */
 func NewAllocDedicatedHostsRequestWithAllParams(
     regionId string,
@@ -86,6 +92,7 @@ func NewAllocDedicatedHostsRequestWithAllParams(
     deployPolicy *string,
     maxCount *int,
     clientToken *string,
+    enableCpuTopology *bool,
 ) *AllocDedicatedHostsRequest {
 
     return &AllocDedicatedHostsRequest{
@@ -100,6 +107,7 @@ func NewAllocDedicatedHostsRequestWithAllParams(
         DeployPolicy: deployPolicy,
         MaxCount: maxCount,
         ClientToken: clientToken,
+        EnableCpuTopology: enableCpuTopology,
     }
 }
 
@@ -120,30 +128,32 @@ func NewAllocDedicatedHostsRequestWithoutParam() *AllocDedicatedHostsRequest {
 func (r *AllocDedicatedHostsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param dedicatedHostSpec: 描述专有宿主机配置
 (Required) */
 func (r *AllocDedicatedHostsRequest) SetDedicatedHostSpec(dedicatedHostSpec *dh.DedicatedHostSpec) {
     r.DedicatedHostSpec = dedicatedHostSpec
 }
-
 /* param deployPolicy: 是否支持AZ内专有宿主机强制均衡，默认为preferred--非强制，取值[preferred--非强制,required--强制]
 (Optional) */
 func (r *AllocDedicatedHostsRequest) SetDeployPolicy(deployPolicy string) {
     r.DeployPolicy = &deployPolicy
 }
-
 /* param maxCount: 购买云主机的数量；取值范围：[1,100]，默认为1。
 (Optional) */
 func (r *AllocDedicatedHostsRequest) SetMaxCount(maxCount int) {
     r.MaxCount = &maxCount
 }
-
 /* param clientToken: 用于保证请求的幂等性。由客户端生成，长度不能超过64个字符。
 (Optional) */
 func (r *AllocDedicatedHostsRequest) SetClientToken(clientToken string) {
     r.ClientToken = &clientToken
 }
+/* param enableCpuTopology: 是否开启cpu拓扑，true:开启，false:关闭，只有宿主机是非超卖模式，且没有资源的时候才能开启；开启后，该宿主机上的虚机可以配置cpu拓扑和NUMA映射等。
+(Optional) */
+func (r *AllocDedicatedHostsRequest) SetEnableCpuTopology(enableCpuTopology bool) {
+    r.EnableCpuTopology = &enableCpuTopology
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

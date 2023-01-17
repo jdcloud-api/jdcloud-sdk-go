@@ -115,30 +115,27 @@ func NewAllocDedicatedPoolRequestWithoutParam() *AllocDedicatedPoolRequest {
 func (r *AllocDedicatedPoolRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param dedicatedHostType: 支持的专有宿主机机型，每个专有宿主机池只能且必须指定一个专有宿主机机型
 (Optional) */
 func (r *AllocDedicatedPoolRequest) SetDedicatedHostType(dedicatedHostType string) {
     r.DedicatedHostType = &dedicatedHostType
 }
-
 /* param name: 专有宿主机池名称
 (Optional) */
 func (r *AllocDedicatedPoolRequest) SetName(name string) {
     r.Name = &name
 }
-
 /* param az: 指定专有宿主机池支持的可用区，可指定多个。
 (Optional) */
 func (r *AllocDedicatedPoolRequest) SetAz(az []string) {
     r.Az = az
 }
-
 /* param description: 专有宿主机池的描述信息。
 (Optional) */
 func (r *AllocDedicatedPoolRequest) SetDescription(description string) {
     r.Description = &description
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -40,7 +40,7 @@ func NewDhClient(credential *core.Credential) *DhClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "dh",
-            Revision:    "1.0.0",
+            Revision:    "1.1.3",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }

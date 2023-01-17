@@ -92,11 +92,11 @@ func NewReleaseDedicatedHostRequestWithoutParam() *ReleaseDedicatedHostRequest {
 func (r *ReleaseDedicatedHostRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param dedicatedHostId: 专有宿主机ID(Required) */
 func (r *ReleaseDedicatedHostRequest) SetDedicatedHostId(dedicatedHostId string) {
     r.DedicatedHostId = dedicatedHostId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

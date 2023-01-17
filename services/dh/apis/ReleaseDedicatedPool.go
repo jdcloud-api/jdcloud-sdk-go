@@ -92,11 +92,11 @@ func NewReleaseDedicatedPoolRequestWithoutParam() *ReleaseDedicatedPoolRequest {
 func (r *ReleaseDedicatedPoolRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param dedicatedPoolId: 专有宿主机ID(Required) */
 func (r *ReleaseDedicatedPoolRequest) SetDedicatedPoolId(dedicatedPoolId string) {
     r.DedicatedPoolId = dedicatedPoolId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
