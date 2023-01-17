@@ -95,13 +95,13 @@ func NewDescribeDedicatedHostTypeRequestWithoutParam() *DescribeDedicatedHostTyp
 func (r *DescribeDedicatedHostTypeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param filters: dedicatedHostType - 专有宿主机机型，精确匹配，支持多个
 az - 可用区，精确匹配，支持多个
 (Optional) */
 func (r *DescribeDedicatedHostTypeRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

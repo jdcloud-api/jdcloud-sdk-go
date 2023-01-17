@@ -109,17 +109,14 @@ func NewDescribeDedicatedPoolsRequestWithoutParam() *DescribeDedicatedPoolsReque
 func (r *DescribeDedicatedPoolsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param pageNumber: 页码；默认为1(Optional) */
 func (r *DescribeDedicatedPoolsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小；默认为20；取值范围[10, 100](Optional) */
 func (r *DescribeDedicatedPoolsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param filters: dedicatedPoolId - 专有宿主机池ID，精确匹配，支持多个
 name - 专有宿主机名称，模糊匹配，支持单个
 dedicatedHostType - 专有宿主机机型，精确匹配，支持多个
@@ -127,6 +124,7 @@ dedicatedHostType - 专有宿主机机型，精确匹配，支持多个
 func (r *DescribeDedicatedPoolsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

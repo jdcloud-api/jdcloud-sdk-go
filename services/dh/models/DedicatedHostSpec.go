@@ -33,6 +33,14 @@ type DedicatedHostSpec struct {
     Description *string `json:"description"`
 
     /* 计费配置。
-专有宿主机不支持按用量方式计费，默认为按配置计费。 (Optional) */
+专有宿主机不支持按用量方式计费，默认为按配置计费。
+ (Optional) */
     Charge *charge.ChargeSpec `json:"charge"`
+
+    /* 自定义实例标签。以key-value键值对形式指定，最多支持10个标签。key不能以 "jrn:" 或“jdc-”开头，仅支持中文、大/小写英文、数字及如下符号：`\_.,:\/=+-@`。
+ (Optional) */
+    UserTags []Tag `json:"userTags"`
+
+    /* 资源组ID (Optional) */
+    ResourceGroupId *string `json:"resourceGroupId"`
 }

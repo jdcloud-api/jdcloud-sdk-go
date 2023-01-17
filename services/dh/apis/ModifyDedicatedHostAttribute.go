@@ -35,6 +35,10 @@ type ModifyDedicatedHostAttributeRequest struct {
 
     /* 描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional) */
     Description *string `json:"description"`
+
+    /* 是否开启cpu拓扑，true:开启，false:关闭，只有宿主机是非超卖模式，且没有资源的时候才能开启；开启后，该宿主机上的虚机可以配置cpu拓扑和NUMA映射等。
+ (Optional) */
+    EnableCpuTopology *bool `json:"enableCpuTopology"`
 }
 
 /*
@@ -65,12 +69,15 @@ func NewModifyDedicatedHostAttributeRequest(
  * param dedicatedHostId: 专有宿主机ID (Required)
  * param name: 名称，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional)
  * param description: 描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。 (Optional)
+ * param enableCpuTopology: 是否开启cpu拓扑，true:开启，false:关闭，只有宿主机是非超卖模式，且没有资源的时候才能开启；开启后，该宿主机上的虚机可以配置cpu拓扑和NUMA映射等。
+ (Optional)
  */
 func NewModifyDedicatedHostAttributeRequestWithAllParams(
     regionId string,
     dedicatedHostId string,
     name *string,
     description *string,
+    enableCpuTopology *bool,
 ) *ModifyDedicatedHostAttributeRequest {
 
     return &ModifyDedicatedHostAttributeRequest{
@@ -84,6 +91,7 @@ func NewModifyDedicatedHostAttributeRequestWithAllParams(
         DedicatedHostId: dedicatedHostId,
         Name: name,
         Description: description,
+        EnableCpuTopology: enableCpuTopology,
     }
 }
 
@@ -104,21 +112,24 @@ func NewModifyDedicatedHostAttributeRequestWithoutParam() *ModifyDedicatedHostAt
 func (r *ModifyDedicatedHostAttributeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param dedicatedHostId: 专有宿主机ID(Required) */
 func (r *ModifyDedicatedHostAttributeRequest) SetDedicatedHostId(dedicatedHostId string) {
     r.DedicatedHostId = dedicatedHostId
 }
-
 /* param name: 名称，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。(Optional) */
 func (r *ModifyDedicatedHostAttributeRequest) SetName(name string) {
     r.Name = &name
 }
-
 /* param description: 描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。(Optional) */
 func (r *ModifyDedicatedHostAttributeRequest) SetDescription(description string) {
     r.Description = &description
 }
+/* param enableCpuTopology: 是否开启cpu拓扑，true:开启，false:关闭，只有宿主机是非超卖模式，且没有资源的时候才能开启；开启后，该宿主机上的虚机可以配置cpu拓扑和NUMA映射等。
+(Optional) */
+func (r *ModifyDedicatedHostAttributeRequest) SetEnableCpuTopology(enableCpuTopology bool) {
+    r.EnableCpuTopology = &enableCpuTopology
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

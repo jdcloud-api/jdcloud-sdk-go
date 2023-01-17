@@ -93,12 +93,12 @@ func NewDescribeQuotasRequestWithoutParam() *DescribeQuotasRequest {
 func (r *DescribeQuotasRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param filters: resourceTypes - 资源类型，支持多个[dedicatedHost，dedicatedPool]
 (Optional) */
 func (r *DescribeQuotasRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

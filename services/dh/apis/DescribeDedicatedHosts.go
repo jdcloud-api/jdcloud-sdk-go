@@ -35,6 +35,9 @@ type DescribeDedicatedHostsRequest struct {
     /* 分页大小；默认为20；取值范围[10, 100] (Optional) */
     PageSize *int `json:"pageSize"`
 
+    /* Tag筛选条件。 (Optional) */
+    Tags []dh.TagFilter `json:"tags"`
+
     /* dedicatedHostId - 专有宿主机ID，精确匹配，支持多个
 az - 可用区，精确匹配，支持多个
 status - 专有宿主机状态，精确匹配，支持多个，<a href="http://docs.jdcloud.com/dedicated-hosts/api/dh_status">参考专有宿主机状态</a>
@@ -69,6 +72,7 @@ func NewDescribeDedicatedHostsRequest(
  * param regionId: 地域ID (Required)
  * param pageNumber: 页码；默认为1 (Optional)
  * param pageSize: 分页大小；默认为20；取值范围[10, 100] (Optional)
+ * param tags: Tag筛选条件。 (Optional)
  * param filters: dedicatedHostId - 专有宿主机ID，精确匹配，支持多个
 az - 可用区，精确匹配，支持多个
 status - 专有宿主机状态，精确匹配，支持多个，<a href="http://docs.jdcloud.com/dedicated-hosts/api/dh_status">参考专有宿主机状态</a>
@@ -81,6 +85,7 @@ func NewDescribeDedicatedHostsRequestWithAllParams(
     regionId string,
     pageNumber *int,
     pageSize *int,
+    tags []dh.TagFilter,
     filters []common.Filter,
 ) *DescribeDedicatedHostsRequest {
 
@@ -94,6 +99,7 @@ func NewDescribeDedicatedHostsRequestWithAllParams(
         RegionId: regionId,
         PageNumber: pageNumber,
         PageSize: pageSize,
+        Tags: tags,
         Filters: filters,
     }
 }
@@ -115,17 +121,18 @@ func NewDescribeDedicatedHostsRequestWithoutParam() *DescribeDedicatedHostsReque
 func (r *DescribeDedicatedHostsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param pageNumber: 页码；默认为1(Optional) */
 func (r *DescribeDedicatedHostsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小；默认为20；取值范围[10, 100](Optional) */
 func (r *DescribeDedicatedHostsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
+/* param tags: Tag筛选条件。(Optional) */
+func (r *DescribeDedicatedHostsRequest) SetTags(tags []dh.TagFilter) {
+    r.Tags = tags
+}
 /* param filters: dedicatedHostId - 专有宿主机ID，精确匹配，支持多个
 az - 可用区，精确匹配，支持多个
 status - 专有宿主机状态，精确匹配，支持多个，<a href="http://docs.jdcloud.com/dedicated-hosts/api/dh_status">参考专有宿主机状态</a>
@@ -136,6 +143,7 @@ dedicatedHostType - 专有宿主机机型，精确匹配，支持多个
 func (r *DescribeDedicatedHostsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

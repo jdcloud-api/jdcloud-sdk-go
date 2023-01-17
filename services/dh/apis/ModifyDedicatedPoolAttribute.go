@@ -114,28 +114,25 @@ func NewModifyDedicatedPoolAttributeRequestWithoutParam() *ModifyDedicatedPoolAt
 func (r *ModifyDedicatedPoolAttributeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param dedicatedPoolId: 专有宿主机ID(Required) */
 func (r *ModifyDedicatedPoolAttributeRequest) SetDedicatedPoolId(dedicatedPoolId string) {
     r.DedicatedPoolId = dedicatedPoolId
 }
-
 /* param name: 名称，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。(Optional) */
 func (r *ModifyDedicatedPoolAttributeRequest) SetName(name string) {
     r.Name = &name
 }
-
 /* param description: 描述，<a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">参考公共参数规范</a>。(Optional) */
 func (r *ModifyDedicatedPoolAttributeRequest) SetDescription(description string) {
     r.Description = &description
 }
-
 /* param az: 指定宿主机池申请专有宿主机时默认继承的可用区。<br>
 修改可用区时旧可用区必须是新可用区的子集，即可用区只能添加，不能减少。
 (Optional) */
 func (r *ModifyDedicatedPoolAttributeRequest) SetAz(az []string) {
     r.Az = az
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
