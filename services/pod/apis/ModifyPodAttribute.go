@@ -32,7 +32,6 @@ type ModifyPodAttributeRequest struct {
 
     /* 修改后的描述 (Optional) */
     Description *string `json:"description"`
-
 }
 
 /*
@@ -99,12 +98,10 @@ func NewModifyPodAttributeRequestWithoutParam() *ModifyPodAttributeRequest {
 func (r *ModifyPodAttributeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param podId: Pod ID(Required) */
 func (r *ModifyPodAttributeRequest) SetPodId(podId string) {
     r.PodId = podId
 }
-
 /* param description: 修改后的描述(Optional) */
 func (r *ModifyPodAttributeRequest) SetDescription(description string) {
     r.Description = &description

@@ -39,4 +39,7 @@ type InstanceType struct {
 
     /* 规格状态 (Optional) */
     State []InstanceTypeState `json:"state"`
+
+    /* 支持的云盘类型 (Optional) */
+    CloudDiskTypes []string `json:"cloudDiskTypes"`
 }

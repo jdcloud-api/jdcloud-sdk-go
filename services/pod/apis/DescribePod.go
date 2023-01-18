@@ -30,7 +30,6 @@ type DescribePodRequest struct {
 
     /* Pod ID  */
     PodId string `json:"podId"`
-
 }
 
 /*
@@ -94,7 +93,6 @@ func NewDescribePodRequestWithoutParam() *DescribePodRequest {
 func (r *DescribePodRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param podId: Pod ID(Required) */
 func (r *DescribePodRequest) SetPodId(podId string) {
     r.PodId = podId

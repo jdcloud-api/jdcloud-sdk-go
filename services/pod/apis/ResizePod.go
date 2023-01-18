@@ -36,7 +36,6 @@ type ResizePodRequest struct {
 
     /* 新实例类型，不可与原实例类型相同 (Optional) */
     ContainerResources []pod.ContainerResourceSpec `json:"containerResources"`
-
 }
 
 /*
@@ -109,17 +108,14 @@ func NewResizePodRequestWithoutParam() *ResizePodRequest {
 func (r *ResizePodRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param podId: Pod ID(Required) */
 func (r *ResizePodRequest) SetPodId(podId string) {
     r.PodId = podId
 }
-
 /* param instanceType: 新实例类型，不可与原实例类型相同(Required) */
 func (r *ResizePodRequest) SetInstanceType(instanceType string) {
     r.InstanceType = instanceType
 }
-
 /* param containerResources: 新实例类型，不可与原实例类型相同(Optional) */
 func (r *ResizePodRequest) SetContainerResources(containerResources []pod.ContainerResourceSpec) {
     r.ContainerResources = containerResources

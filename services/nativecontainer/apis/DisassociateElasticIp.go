@@ -101,16 +101,15 @@ func NewDisassociateElasticIpRequestWithoutParam() *DisassociateElasticIpRequest
 func (r *DisassociateElasticIpRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param containerId: Container ID(Required) */
 func (r *DisassociateElasticIpRequest) SetContainerId(containerId string) {
     r.ContainerId = containerId
 }
-
 /* param elasticIpId: 弹性IP ID(Required) */
 func (r *DisassociateElasticIpRequest) SetElasticIpId(elasticIpId string) {
     r.ElasticIpId = elasticIpId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

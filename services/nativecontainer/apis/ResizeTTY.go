@@ -116,26 +116,23 @@ func NewResizeTTYRequestWithoutParam() *ResizeTTYRequest {
 func (r *ResizeTTYRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param containerId: Container ID(Required) */
 func (r *ResizeTTYRequest) SetContainerId(containerId string) {
     r.ContainerId = containerId
 }
-
 /* param height: tty row(Required) */
 func (r *ResizeTTYRequest) SetHeight(height int) {
     r.Height = height
 }
-
 /* param width: tty column(Required) */
 func (r *ResizeTTYRequest) SetWidth(width int) {
     r.Width = width
 }
-
 /* param execId: exec ID(Optional) */
 func (r *ResizeTTYRequest) SetExecId(execId string) {
     r.ExecId = &execId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

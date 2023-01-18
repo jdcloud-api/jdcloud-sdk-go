@@ -93,11 +93,11 @@ func NewDescribeContainerRequestWithoutParam() *DescribeContainerRequest {
 func (r *DescribeContainerRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param containerId: Container ID(Required) */
 func (r *DescribeContainerRequest) SetContainerId(containerId string) {
     r.ContainerId = containerId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

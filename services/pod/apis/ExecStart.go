@@ -35,7 +35,6 @@ type ExecStartRequest struct {
 
     /*   */
     ExecId string `json:"execId"`
-
 }
 
 /*
@@ -111,17 +110,14 @@ func NewExecStartRequestWithoutParam() *ExecStartRequest {
 func (r *ExecStartRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param podId: Pod ID(Required) */
 func (r *ExecStartRequest) SetPodId(podId string) {
     r.PodId = podId
 }
-
 /* param containerName: container name(Required) */
 func (r *ExecStartRequest) SetContainerName(containerName string) {
     r.ContainerName = containerName
 }
-
 /* param execId: (Required) */
 func (r *ExecStartRequest) SetExecId(execId string) {
     r.ExecId = execId

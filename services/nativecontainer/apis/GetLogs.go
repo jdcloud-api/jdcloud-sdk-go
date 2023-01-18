@@ -116,29 +116,26 @@ func NewGetLogsRequestWithoutParam() *GetLogsRequest {
 func (r *GetLogsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param containerId: Container ID(Required) */
 func (r *GetLogsRequest) SetContainerId(containerId string) {
     r.ContainerId = containerId
 }
-
 /* param tailLines: 返回日志文件中倒数 tailLines 行，如不指定，默认从容器启动时或 sinceSeconds 指定的时间读取。
 (Optional) */
 func (r *GetLogsRequest) SetTailLines(tailLines int) {
     r.TailLines = &tailLines
 }
-
 /* param sinceSeconds: 返回相对于当前时间之前sinceSeconds之内的日志。
 (Optional) */
 func (r *GetLogsRequest) SetSinceSeconds(sinceSeconds int) {
     r.SinceSeconds = &sinceSeconds
 }
-
 /* param limitBytes: 限制返回的日志文件内容字节数，取值范围 [1-4]KB，最大 4KB.
 (Optional) */
 func (r *GetLogsRequest) SetLimitBytes(limitBytes int) {
     r.LimitBytes = &limitBytes
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

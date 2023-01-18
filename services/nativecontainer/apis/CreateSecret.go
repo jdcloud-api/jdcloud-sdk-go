@@ -123,25 +123,23 @@ func NewCreateSecretRequestWithoutParam() *CreateSecretRequest {
 func (r *CreateSecretRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param name: 镜像仓库认证信息名称，不能重复
 (Required) */
 func (r *CreateSecretRequest) SetName(name string) {
     r.Name = name
 }
-
 /* param secretType: 镜像仓库认证信息类型，目前仅支持：docker-registry 类型，用来和docker registry认证的类型。
 (Required) */
 func (r *CreateSecretRequest) SetSecretType(secretType string) {
     r.SecretType = secretType
 }
-
 /* param data: 镜像仓库认证信息数据。<br>
 必须包含server、username、password 字段，email 字段是可选的。<br>
 (Required) */
 func (r *CreateSecretRequest) SetData(data *nativecontainer.DockerRegistryData) {
     r.Data = data
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

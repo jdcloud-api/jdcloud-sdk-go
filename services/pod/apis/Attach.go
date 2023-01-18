@@ -32,7 +32,6 @@ type AttachRequest struct {
 
     /* container name  */
     ContainerName string `json:"containerName"`
-
 }
 
 /*
@@ -102,12 +101,10 @@ func NewAttachRequestWithoutParam() *AttachRequest {
 func (r *AttachRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param podId: Pod ID(Required) */
 func (r *AttachRequest) SetPodId(podId string) {
     r.PodId = podId
 }
-
 /* param containerName: container name(Required) */
 func (r *AttachRequest) SetContainerName(containerName string) {
     r.ContainerName = containerName

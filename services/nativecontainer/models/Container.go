@@ -41,6 +41,9 @@ type Container struct {
     /* 主机名 (Optional) */
     Hostname string `json:"hostname"`
 
+    /* 高可用组 (Optional) */
+    Ag AvailablityGroup `json:"ag"`
+
     /* 容器执行命令 (Optional) */
     Command []string `json:"command"`
 
@@ -106,4 +109,7 @@ type Container struct {
 
     /* 容器描述 (Optional) */
     Description string `json:"description"`
+
+    /* 资源组ID (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
 }

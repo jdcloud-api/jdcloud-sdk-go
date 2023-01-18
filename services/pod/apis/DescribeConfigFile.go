@@ -30,7 +30,6 @@ type DescribeConfigFileRequest struct {
 
     /* Name  */
     Name string `json:"name"`
-
 }
 
 /*
@@ -94,7 +93,6 @@ func NewDescribeConfigFileRequestWithoutParam() *DescribeConfigFileRequest {
 func (r *DescribeConfigFileRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param name: Name(Required) */
 func (r *DescribeConfigFileRequest) SetName(name string) {
     r.Name = name

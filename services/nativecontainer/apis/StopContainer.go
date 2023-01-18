@@ -92,11 +92,11 @@ func NewStopContainerRequestWithoutParam() *StopContainerRequest {
 func (r *StopContainerRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param containerId: Container ID(Required) */
 func (r *StopContainerRequest) SetContainerId(containerId string) {
     r.ContainerId = containerId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

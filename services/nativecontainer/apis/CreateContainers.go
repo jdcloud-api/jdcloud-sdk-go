@@ -108,21 +108,19 @@ func NewCreateContainersRequestWithoutParam() *CreateContainersRequest {
 func (r *CreateContainersRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param containerSpec: 创建容器规格(Required) */
 func (r *CreateContainersRequest) SetContainerSpec(containerSpec *nativecontainer.ContainerSpec) {
     r.ContainerSpec = containerSpec
 }
-
 /* param maxCount: 购买实例数量；取值范围：[1,100](Required) */
 func (r *CreateContainersRequest) SetMaxCount(maxCount int) {
     r.MaxCount = maxCount
 }
-
 /* param clientToken: 保证请求幂等性(Optional) */
 func (r *CreateContainersRequest) SetClientToken(clientToken string) {
     r.ClientToken = &clientToken
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

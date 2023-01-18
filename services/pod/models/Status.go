@@ -17,14 +17,11 @@
 package models
 
 
-type ContainerNetworkInterfaceAttachmentSpec struct {
+type Status struct {
 
-    /* 指明删除容器时是否删除网卡，默认True；当前只能是True (Optional) */
-    AutoDelete *bool `json:"autoDelete"`
+    /* 资源ID (Optional) */
+    ResourceId string `json:"resourceId"`
 
-    /* 设备Index，主网卡为1，暂不提供辅助网卡index (Optional) */
-    DeviceIndex *int `json:"deviceIndex"`
-
-    /* 网卡接口规范  */
-    NetworkInterface *NetworkInterfaceSpec `json:"networkInterface"`
+    /* 资源有效性 (Optional) */
+    Validity bool `json:"validity"`
 }

@@ -138,46 +138,39 @@ func NewRebuildContainerRequestWithoutParam() *RebuildContainerRequest {
 func (r *RebuildContainerRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param containerId: Container ID(Required) */
 func (r *RebuildContainerRequest) SetContainerId(containerId string) {
     r.ContainerId = containerId
 }
-
 /* param image: 镜像名称 </br> 1. Docker Hub官方镜像通过类似nginx, mysql/mysql-server的名字指定 </br> </br> repository长度最大256个字符，tag最大128个字符，registry最大255个字符 </br> 下载镜像超时时间：10分钟(Required) */
 func (r *RebuildContainerRequest) SetImage(image string) {
     r.Image = image
 }
-
 /* param secret: 镜像仓库认证信息；使用Docker Hub和京东云CR的镜像不需要secret(Optional) */
 func (r *RebuildContainerRequest) SetSecret(secret string) {
     r.Secret = &secret
 }
-
 /* param command: 容器启动执行的命令, 如果不指定默认是镜像的ENTRYPOINT. 数组字符总长度范围：[0-256](Optional) */
 func (r *RebuildContainerRequest) SetCommand(command []string) {
     r.Command = command
 }
-
 /* param args: 容器启动执行命令的参数, 如果不指定默认是镜像的CMD. 数组字符总长度范围：[0-2048](Optional) */
 func (r *RebuildContainerRequest) SetArgs(args []string) {
     r.Args = args
 }
-
 /* param tty: 容器是否分配tty。默认不分配(Optional) */
 func (r *RebuildContainerRequest) SetTty(tty bool) {
     r.Tty = &tty
 }
-
 /* param workingDir: 容器的工作目录。如果不指定，默认是根目录（/），必须是绝对路径。字符长度范围：[0-1024](Optional) */
 func (r *RebuildContainerRequest) SetWorkingDir(workingDir string) {
     r.WorkingDir = &workingDir
 }
-
 /* param envs: 容器执行的环境变量；如果和镜像中的环境变量Key相同，会覆盖镜像中的值；</br> 最大100对(Optional) */
 func (r *RebuildContainerRequest) SetEnvs(envs []nativecontainer.EnvVar) {
     r.Envs = envs
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
