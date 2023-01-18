@@ -105,22 +105,20 @@ func NewDescribeSecretsRequestWithoutParam() *DescribeSecretsRequest {
 func (r *DescribeSecretsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param pageNumber: 页码；默认为1(Optional) */
 func (r *DescribeSecretsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小；默认为20；取值范围[10, 100](Optional) */
 func (r *DescribeSecretsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param filters: name - secret名称，支持模糊搜索
 (Optional) */
 func (r *DescribeSecretsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -22,7 +22,7 @@ type InstanceNetworkInterfaceAttachment struct {
     /* 指明删除实例时是否删除网卡 (Optional) */
     AutoDelete bool `json:"autoDelete"`
 
-    /* 设备Index (Optional) */
+    /* 设备Index，暂不提供辅助网卡index (Optional) */
     DeviceIndex int `json:"deviceIndex"`
 
     /* 绑定状态 (Optional) */

@@ -101,16 +101,15 @@ func NewResizeContainerRequestWithoutParam() *ResizeContainerRequest {
 func (r *ResizeContainerRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param containerId: Container ID(Required) */
 func (r *ResizeContainerRequest) SetContainerId(containerId string) {
     r.ContainerId = containerId
 }
-
 /* param instanceType: 新实例类型，不可与原实例类型相同(Required) */
 func (r *ResizeContainerRequest) SetInstanceType(instanceType string) {
     r.InstanceType = instanceType
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

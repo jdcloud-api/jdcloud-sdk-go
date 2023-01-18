@@ -42,6 +42,7 @@ vpcId - 私有网络ID，精确匹配，支持多个
 status - 容器状态，精确匹配，支持多个
 name - 容器名称，模糊匹配，支持单个
 subnetId - 子网ID，精确匹配，支持多个
+agId - 镜像ID，精确匹配，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
 
@@ -80,6 +81,7 @@ vpcId - 私有网络ID，精确匹配，支持多个
 status - 容器状态，精确匹配，支持多个
 name - 容器名称，模糊匹配，支持单个
 subnetId - 子网ID，精确匹配，支持多个
+agId - 镜像ID，精确匹配，支持多个
  (Optional)
  * param tags: Tag筛选条件 (Optional)
  */
@@ -123,17 +125,14 @@ func NewDescribeContainersRequestWithoutParam() *DescribeContainersRequest {
 func (r *DescribeContainersRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param pageNumber: 页码；默认为1(Optional) */
 func (r *DescribeContainersRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小；默认为20；取值范围[10, 100](Optional) */
 func (r *DescribeContainersRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param filters: containerId - 实例ID，精确匹配，支持多个
 privateIpAddress - 主网卡IP地址，模糊匹配，支持单个
 az - 可用区，精确匹配，支持多个
@@ -141,15 +140,16 @@ vpcId - 私有网络ID，精确匹配，支持多个
 status - 容器状态，精确匹配，支持多个
 name - 容器名称，模糊匹配，支持单个
 subnetId - 子网ID，精确匹配，支持多个
+agId - 镜像ID，精确匹配，支持多个
 (Optional) */
 func (r *DescribeContainersRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
-
 /* param tags: Tag筛选条件(Optional) */
 func (r *DescribeContainersRequest) SetTags(tags []nativecontainer.TagFilter) {
     r.Tags = tags
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

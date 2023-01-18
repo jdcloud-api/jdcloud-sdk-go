@@ -93,11 +93,11 @@ func NewDescribeSecretRequestWithoutParam() *DescribeSecretRequest {
 func (r *DescribeSecretRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param name: Secret Name(Required) */
 func (r *DescribeSecretRequest) SetName(name string) {
     r.Name = name
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

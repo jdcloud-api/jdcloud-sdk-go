@@ -104,21 +104,19 @@ func NewModifyContainerAttributeRequestWithoutParam() *ModifyContainerAttributeR
 func (r *ModifyContainerAttributeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param containerId: Container ID(Required) */
 func (r *ModifyContainerAttributeRequest) SetContainerId(containerId string) {
     r.ContainerId = containerId
 }
-
 /* param name: 容器名称(Optional) */
 func (r *ModifyContainerAttributeRequest) SetName(name string) {
     r.Name = &name
 }
-
 /* param description: 容器描述(Optional) */
 func (r *ModifyContainerAttributeRequest) SetDescription(description string) {
     r.Description = &description
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

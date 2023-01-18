@@ -101,16 +101,15 @@ func NewExecGetExitCodeRequestWithoutParam() *ExecGetExitCodeRequest {
 func (r *ExecGetExitCodeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param containerId: Container ID(Required) */
 func (r *ExecGetExitCodeRequest) SetContainerId(containerId string) {
     r.ContainerId = containerId
 }
-
 /* param execId: exec ID(Required) */
 func (r *ExecGetExitCodeRequest) SetExecId(execId string) {
     r.ExecId = execId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

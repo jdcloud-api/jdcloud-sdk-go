@@ -107,21 +107,19 @@ func NewExecCreateRequestWithoutParam() *ExecCreateRequest {
 func (r *ExecCreateRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param containerId: Container ID(Required) */
 func (r *ExecCreateRequest) SetContainerId(containerId string) {
     r.ContainerId = containerId
 }
-
 /* param command: 执行命令(Required) */
 func (r *ExecCreateRequest) SetCommand(command []string) {
     r.Command = command
 }
-
 /* param tty: 执行命令是否添加tty(Optional) */
 func (r *ExecCreateRequest) SetTty(tty bool) {
     r.Tty = &tty
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

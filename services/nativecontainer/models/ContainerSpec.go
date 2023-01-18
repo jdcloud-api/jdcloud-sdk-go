@@ -23,7 +23,7 @@ type ContainerSpec struct {
     /* 实例类型；参考[文档](https://www.jdcloud.com/help/detail/1992/isCatalog/1)  */
     InstanceType string `json:"instanceType"`
 
-    /* 容器所属可用区  */
+    /* 容器所属可用区，指定agId时非必传<br> 容器、已有云盘的az必须相同，且包含在AG中  */
     Az string `json:"az"`
 
     /* 容器名称，不可为空，只支持中文、数字、大小写字母、英文下划线“_”及中划线“-”，且不能超过32字符  */
@@ -79,4 +79,7 @@ type ContainerSpec struct {
 
     /* 用户普通标签集合 (Optional) */
     UserTags []Tag `json:"userTags"`
+
+    /* 资源组ID (Optional) */
+    ResourceGroupId *string `json:"resourceGroupId"`
 }
