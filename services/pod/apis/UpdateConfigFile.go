@@ -34,7 +34,6 @@ type UpdateConfigFileRequest struct {
     /* configFile数据，个数不超过32个
   */
     Data []pod.ConfigFileData `json:"data"`
-
 }
 
 /*
@@ -106,12 +105,10 @@ func NewUpdateConfigFileRequestWithoutParam() *UpdateConfigFileRequest {
 func (r *UpdateConfigFileRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param name: Name(Required) */
 func (r *UpdateConfigFileRequest) SetName(name string) {
     r.Name = name
 }
-
 /* param data: configFile数据，个数不超过32个
 (Required) */
 func (r *UpdateConfigFileRequest) SetData(data []pod.ConfigFileData) {

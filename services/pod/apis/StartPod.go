@@ -29,7 +29,6 @@ type StartPodRequest struct {
 
     /* Pod ID  */
     PodId string `json:"podId"`
-
 }
 
 /*
@@ -93,7 +92,6 @@ func NewStartPodRequestWithoutParam() *StartPodRequest {
 func (r *StartPodRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param podId: Pod ID(Required) */
 func (r *StartPodRequest) SetPodId(podId string) {
     r.PodId = podId

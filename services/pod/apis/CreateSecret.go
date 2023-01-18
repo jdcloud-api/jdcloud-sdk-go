@@ -42,7 +42,6 @@ value 是 Base64 编码的字符串，不能包含换行符（在 linux 下使�
 必须包含server、username、password 字段，email 字段是可选的。<br>
   */
     Data *pod.DockerRegistryData `json:"data"`
-
 }
 
 /*
@@ -130,19 +129,16 @@ func NewCreateSecretRequestWithoutParam() *CreateSecretRequest {
 func (r *CreateSecretRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param name: 机密数据名称，不能重复
 (Required) */
 func (r *CreateSecretRequest) SetName(name string) {
     r.Name = name
 }
-
 /* param secretType: 机密数据的类型，目前仅支持：docker-registry 类型，用来和docker registry认证的类型。
 (Required) */
 func (r *CreateSecretRequest) SetSecretType(secretType string) {
     r.SecretType = secretType
 }
-
 /* param data: 机密的数据。<br>
 key 的有效字符包括字母、数字、-、_和.； <br>
 value 是 Base64 编码的字符串，不能包含换行符（在 linux 下使用 base64 -w 0选项），每个value长度上限为4KB，整个data的长度不能超过256KB; <br>

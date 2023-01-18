@@ -36,7 +36,6 @@ type CreateConfigFileRequest struct {
     /* configFile数据，个数不超过32个
   */
     Data []pod.ConfigFileData `json:"data"`
-
 }
 
 /*
@@ -112,14 +111,12 @@ func NewCreateConfigFileRequestWithoutParam() *CreateConfigFileRequest {
 func (r *CreateConfigFileRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param name: ConfigFile 的名字，名称不能重复
 长度不超过63（命名字母小写，数字和-）
 (Required) */
 func (r *CreateConfigFileRequest) SetName(name string) {
     r.Name = name
 }
-
 /* param data: configFile数据，个数不超过32个
 (Required) */
 func (r *CreateConfigFileRequest) SetData(data []pod.ConfigFileData) {

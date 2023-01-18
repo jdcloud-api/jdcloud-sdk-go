@@ -32,7 +32,6 @@ type CheckPodNameRequest struct {
 
     /* 需要创建的 pod 总数，默认创建一个，不同的总数会对校验结果产生影响。 (Optional) */
     MaxCount *int `json:"maxCount"`
-
 }
 
 /*
@@ -99,12 +98,10 @@ func NewCheckPodNameRequestWithoutParam() *CheckPodNameRequest {
 func (r *CheckPodNameRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param podName: 用户定义的 pod 名称，符合 DNS-1123 subdomain 规范。(Required) */
 func (r *CheckPodNameRequest) SetPodName(podName string) {
     r.PodName = podName
 }
-
 /* param maxCount: 需要创建的 pod 总数，默认创建一个，不同的总数会对校验结果产生影响。(Optional) */
 func (r *CheckPodNameRequest) SetMaxCount(maxCount int) {
     r.MaxCount = &maxCount

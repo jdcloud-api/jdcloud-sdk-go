@@ -33,7 +33,6 @@ type DescribeInstanceTypesRequest struct {
 az - 可用区，精确匹配，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
-
 }
 
 /*
@@ -96,7 +95,6 @@ func NewDescribeInstanceTypesRequestWithoutParam() *DescribeInstanceTypesRequest
 func (r *DescribeInstanceTypesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param filters: instanceTypes - 实例规格，精确匹配，支持多个
 az - 可用区，精确匹配，支持多个
 (Optional) */

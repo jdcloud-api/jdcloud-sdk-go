@@ -67,4 +67,7 @@ type PodSpec struct {
 
     /* 用户普通标签集合 (Optional) */
     UserTags []Tag `json:"userTags"`
+
+    /* 资源组ID (Optional) */
+    ResourceGroupId *string `json:"resourceGroupId"`
 }

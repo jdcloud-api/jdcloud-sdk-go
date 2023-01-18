@@ -36,7 +36,6 @@ type CreatePodsRequest struct {
 
     /* 保证请求幂等性的字符串；最大长度64个ASCII字符 (Optional) */
     ClientToken *string `json:"clientToken"`
-
 }
 
 /*
@@ -109,17 +108,14 @@ func NewCreatePodsRequestWithoutParam() *CreatePodsRequest {
 func (r *CreatePodsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param podSpec: pod 创建参数(Required) */
 func (r *CreatePodsRequest) SetPodSpec(podSpec *pod.PodSpec) {
     r.PodSpec = podSpec
 }
-
 /* param maxCount: 购买实例数量；取值范围：[1,100](Required) */
 func (r *CreatePodsRequest) SetMaxCount(maxCount int) {
     r.MaxCount = maxCount
 }
-
 /* param clientToken: 保证请求幂等性的字符串；最大长度64个ASCII字符(Optional) */
 func (r *CreatePodsRequest) SetClientToken(clientToken string) {
     r.ClientToken = &clientToken

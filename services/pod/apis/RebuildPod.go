@@ -33,7 +33,6 @@ type RebuildPodRequest struct {
 
     /* 重置容器相关参数  */
     Containers []pod.RebuildContainerSpec `json:"containers"`
-
 }
 
 /*
@@ -103,12 +102,10 @@ func NewRebuildPodRequestWithoutParam() *RebuildPodRequest {
 func (r *RebuildPodRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param podId: Pod ID(Required) */
 func (r *RebuildPodRequest) SetPodId(podId string) {
     r.PodId = podId
 }
-
 /* param containers: 重置容器相关参数(Required) */
 func (r *RebuildPodRequest) SetContainers(containers []pod.RebuildContainerSpec) {
     r.Containers = containers

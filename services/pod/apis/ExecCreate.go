@@ -38,7 +38,6 @@ type ExecCreateRequest struct {
 
     /* 执行命令是否分配tty。默认不分配 (Optional) */
     Tty *bool `json:"tty"`
-
 }
 
 /*
@@ -117,22 +116,18 @@ func NewExecCreateRequestWithoutParam() *ExecCreateRequest {
 func (r *ExecCreateRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param podId: Pod ID(Required) */
 func (r *ExecCreateRequest) SetPodId(podId string) {
     r.PodId = podId
 }
-
 /* param containerName: container name(Required) */
 func (r *ExecCreateRequest) SetContainerName(containerName string) {
     r.ContainerName = containerName
 }
-
 /* param command: 执行的命令(Required) */
 func (r *ExecCreateRequest) SetCommand(command []string) {
     r.Command = command
 }
-
 /* param tty: 执行命令是否分配tty。默认不分配(Optional) */
 func (r *ExecCreateRequest) SetTty(tty bool) {
     r.Tty = &tty

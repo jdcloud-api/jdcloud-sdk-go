@@ -32,7 +32,6 @@ type DisassociateElasticIpRequest struct {
 
     /* 弹性IP ID  */
     ElasticIpId string `json:"elasticIpId"`
-
 }
 
 /*
@@ -102,12 +101,10 @@ func NewDisassociateElasticIpRequestWithoutParam() *DisassociateElasticIpRequest
 func (r *DisassociateElasticIpRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param podId: Pod ID(Required) */
 func (r *DisassociateElasticIpRequest) SetPodId(podId string) {
     r.PodId = podId
 }
-
 /* param elasticIpId: 弹性IP ID(Required) */
 func (r *DisassociateElasticIpRequest) SetElasticIpId(elasticIpId string) {
     r.ElasticIpId = elasticIpId

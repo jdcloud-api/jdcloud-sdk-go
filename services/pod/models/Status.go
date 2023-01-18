@@ -17,29 +17,11 @@
 package models
 
 
-type InstanceType struct {
+type Status struct {
 
-    /* 实例规格类型 (Optional) */
-    Family string `json:"family"`
+    /* 资源ID (Optional) */
+    ResourceId string `json:"resourceId"`
 
-    /* 实例规格，比如g.b1.2xlarge (Optional) */
-    InstanceType string `json:"instanceType"`
-
-    /* cpu个数 (Optional) */
-    Cpu int `json:"cpu"`
-
-    /* 内存大小 (Optional) */
-    MemoryMB int `json:"memoryMB"`
-
-    /* 支持弹性网卡的数量 (Optional) */
-    NicLimit int `json:"nicLimit"`
-
-    /* 描述 (Optional) */
-    Desc string `json:"desc"`
-
-    /* 规格状态 (Optional) */
-    State []InstanceTypeState `json:"state"`
-
-    /* 支持的云盘类型 (Optional) */
-    CloudDiskTypes []string `json:"cloudDiskTypes"`
+    /* 资源有效性 (Optional) */
+    Validity bool `json:"validity"`
 }

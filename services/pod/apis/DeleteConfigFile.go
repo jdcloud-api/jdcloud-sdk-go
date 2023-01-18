@@ -29,7 +29,6 @@ type DeleteConfigFileRequest struct {
 
     /* Name  */
     Name string `json:"name"`
-
 }
 
 /*
@@ -93,7 +92,6 @@ func NewDeleteConfigFileRequestWithoutParam() *DeleteConfigFileRequest {
 func (r *DeleteConfigFileRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param name: Name(Required) */
 func (r *DeleteConfigFileRequest) SetName(name string) {
     r.Name = name

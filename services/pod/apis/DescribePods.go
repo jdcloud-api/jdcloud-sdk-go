@@ -48,7 +48,6 @@ agId - 镜像ID，精确匹配，支持多个
 
     /* Tag筛选条件 (Optional) */
     Tags []pod.TagFilter `json:"tags"`
-
 }
 
 /*
@@ -126,17 +125,14 @@ func NewDescribePodsRequestWithoutParam() *DescribePodsRequest {
 func (r *DescribePodsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param pageNumber: 页码；默认为1(Optional) */
 func (r *DescribePodsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小；默认为20；取值范围[10, 100](Optional) */
 func (r *DescribePodsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param filters: podId - pod ID，精确匹配，支持多个
 privateIpAddress - 主网卡IP地址，模糊匹配，支持单个
 az - 可用区，精确匹配，支持多个
@@ -149,7 +145,6 @@ agId - 镜像ID，精确匹配，支持多个
 func (r *DescribePodsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
-
 /* param tags: Tag筛选条件(Optional) */
 func (r *DescribePodsRequest) SetTags(tags []pod.TagFilter) {
     r.Tags = tags

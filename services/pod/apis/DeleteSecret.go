@@ -29,7 +29,6 @@ type DeleteSecretRequest struct {
 
     /* Secret Name  */
     Name string `json:"name"`
-
 }
 
 /*
@@ -93,7 +92,6 @@ func NewDeleteSecretRequestWithoutParam() *DeleteSecretRequest {
 func (r *DeleteSecretRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param name: Secret Name(Required) */
 func (r *DeleteSecretRequest) SetName(name string) {
     r.Name = name

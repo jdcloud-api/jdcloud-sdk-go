@@ -53,7 +53,6 @@ type GetContainerLogsRequest struct {
     /* 日志时间下限，不传表示不限时间
  (Optional) */
     EndTime *string `json:"endTime"`
-
 }
 
 /*
@@ -143,41 +142,34 @@ func NewGetContainerLogsRequestWithoutParam() *GetContainerLogsRequest {
 func (r *GetContainerLogsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param podId: Pod ID(Required) */
 func (r *GetContainerLogsRequest) SetPodId(podId string) {
     r.PodId = podId
 }
-
 /* param containerName: container name(Required) */
 func (r *GetContainerLogsRequest) SetContainerName(containerName string) {
     r.ContainerName = containerName
 }
-
 /* param tailLines: 返回日志文件中倒数 tailLines 行，如不指定，默认从容器启动时或 sinceSeconds 指定的时间读取。
 (Optional) */
 func (r *GetContainerLogsRequest) SetTailLines(tailLines int) {
     r.TailLines = &tailLines
 }
-
 /* param sinceSeconds: 返回相对于当前时间之前sinceSeconds之内的日志。
 (Optional) */
 func (r *GetContainerLogsRequest) SetSinceSeconds(sinceSeconds int) {
     r.SinceSeconds = &sinceSeconds
 }
-
 /* param limitBytes: 限制返回的日志文件内容字节数，取值范围 [1-4]KB，最大 4KB.
 (Optional) */
 func (r *GetContainerLogsRequest) SetLimitBytes(limitBytes int) {
     r.LimitBytes = &limitBytes
 }
-
 /* param startTime: 日志时间上限，不传表示不限时间
 (Optional) */
 func (r *GetContainerLogsRequest) SetStartTime(startTime string) {
     r.StartTime = &startTime
 }
-
 /* param endTime: 日志时间下限，不传表示不限时间
 (Optional) */
 func (r *GetContainerLogsRequest) SetEndTime(endTime string) {

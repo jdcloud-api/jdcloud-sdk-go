@@ -88,4 +88,7 @@ type Pod struct {
 
     /* Pod创建时间 (Optional) */
     CreateTime string `json:"createTime"`
+
+    /* 资源组ID (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
 }

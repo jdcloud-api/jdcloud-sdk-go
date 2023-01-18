@@ -41,7 +41,6 @@ type ResizeTTYRequest struct {
 
     /* exec ID (Optional) */
     ExecId *string `json:"execId"`
-
 }
 
 /*
@@ -126,27 +125,22 @@ func NewResizeTTYRequestWithoutParam() *ResizeTTYRequest {
 func (r *ResizeTTYRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param podId: Pod ID(Required) */
 func (r *ResizeTTYRequest) SetPodId(podId string) {
     r.PodId = podId
 }
-
 /* param containerName: container name(Required) */
 func (r *ResizeTTYRequest) SetContainerName(containerName string) {
     r.ContainerName = containerName
 }
-
 /* param height: tty row，取值范围：[10, 2000](Required) */
 func (r *ResizeTTYRequest) SetHeight(height int) {
     r.Height = height
 }
-
 /* param width: tty column，取值范围：[10, 1000](Required) */
 func (r *ResizeTTYRequest) SetWidth(width int) {
     r.Width = width
 }
-
 /* param execId: exec ID(Optional) */
 func (r *ResizeTTYRequest) SetExecId(execId string) {
     r.ExecId = &execId

@@ -30,7 +30,6 @@ type DescribeSecretRequest struct {
 
     /* Secret Name  */
     Name string `json:"name"`
-
 }
 
 /*
@@ -94,7 +93,6 @@ func NewDescribeSecretRequestWithoutParam() *DescribeSecretRequest {
 func (r *DescribeSecretRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param name: Secret Name(Required) */
 func (r *DescribeSecretRequest) SetName(name string) {
     r.Name = name

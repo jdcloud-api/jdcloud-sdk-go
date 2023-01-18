@@ -33,7 +33,6 @@ type DescribeContainerRequest struct {
 
     /* container name  */
     ContainerName string `json:"containerName"`
-
 }
 
 /*
@@ -103,12 +102,10 @@ func NewDescribeContainerRequestWithoutParam() *DescribeContainerRequest {
 func (r *DescribeContainerRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param podId: Pod ID(Required) */
 func (r *DescribeContainerRequest) SetPodId(podId string) {
     r.PodId = podId
 }
-
 /* param containerName: container name(Required) */
 func (r *DescribeContainerRequest) SetContainerName(containerName string) {
     r.ContainerName = containerName

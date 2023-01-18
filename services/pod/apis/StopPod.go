@@ -29,7 +29,6 @@ type StopPodRequest struct {
 
     /* Pod ID  */
     PodId string `json:"podId"`
-
 }
 
 /*
@@ -93,7 +92,6 @@ func NewStopPodRequestWithoutParam() *StopPodRequest {
 func (r *StopPodRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param podId: Pod ID(Required) */
 func (r *StopPodRequest) SetPodId(podId string) {
     r.PodId = podId

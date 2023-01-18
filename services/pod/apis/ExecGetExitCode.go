@@ -35,7 +35,6 @@ type ExecGetExitCodeRequest struct {
 
     /*   */
     ExecId string `json:"execId"`
-
 }
 
 /*
@@ -111,17 +110,14 @@ func NewExecGetExitCodeRequestWithoutParam() *ExecGetExitCodeRequest {
 func (r *ExecGetExitCodeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param podId: Pod ID(Required) */
 func (r *ExecGetExitCodeRequest) SetPodId(podId string) {
     r.PodId = podId
 }
-
 /* param containerName: container name(Required) */
 func (r *ExecGetExitCodeRequest) SetContainerName(containerName string) {
     r.ContainerName = containerName
 }
-
 /* param execId: (Required) */
 func (r *ExecGetExitCodeRequest) SetExecId(execId string) {
     r.ExecId = execId

@@ -29,7 +29,6 @@ type DeletePodRequest struct {
 
     /* Pod ID  */
     PodId string `json:"podId"`
-
 }
 
 /*
@@ -93,7 +92,6 @@ func NewDeletePodRequestWithoutParam() *DeletePodRequest {
 func (r *DeletePodRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param podId: Pod ID(Required) */
 func (r *DeletePodRequest) SetPodId(podId string) {
     r.PodId = podId
