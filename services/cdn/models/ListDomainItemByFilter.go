@@ -49,6 +49,9 @@ type ListDomainItemByFilter struct {
     /*  (Optional) */
     AccelerateRegion string `json:"accelerateRegion"`
 
+    /* 海外状态(-1:不涉及海外加速,0:未激活,1:已激活,2:域名在cf不存在) (Optional) */
+    OverseaStatus int64 `json:"overseaStatus"`
+
     /*  (Optional) */
     Tags []Tag `json:"tags"`
 }

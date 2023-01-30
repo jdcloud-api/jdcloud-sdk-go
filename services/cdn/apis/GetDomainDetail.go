@@ -134,4 +134,5 @@ type GetDomainDetailResult struct {
     SslCertEndTime string `json:"sslCertEndTime"`
     AccelerateRegion string `json:"accelerateRegion"`
     Txt string `json:"txt"`
+    OverseaStatus int64 `json:"overseaStatus"`
 }

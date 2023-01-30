@@ -48,6 +48,9 @@ type GetDomainListByFilterRequest struct {
 
     /* 标签过滤条件 (Optional) */
     TagFilters []cdn.TagFilter `json:"tagFilters"`
+
+    /* 筛选依据（false不需要查询, true 需要查询海外状态)默认false (Optional) */
+    WithThirdPartyStatus *bool `json:"withThirdPartyStatus"`
 }
 
 /*
@@ -76,6 +79,7 @@ func NewGetDomainListByFilterRequest(
  * param accelerateRegion: 加速区域，(mainLand:中国大陆，nonMainLand:海外加港澳台，all:全球),不传为全球 (Optional)
  * param filterBy: 筛选依据（0：根据域名筛选，1：根据回源信息筛选），默认按照域名进行筛选 (Optional)
  * param tagFilters: 标签过滤条件 (Optional)
+ * param withThirdPartyStatus: 筛选依据（false不需要查询, true 需要查询海外状态)默认false (Optional)
  */
 func NewGetDomainListByFilterRequestWithAllParams(
     keyWord *string,
@@ -86,6 +90,7 @@ func NewGetDomainListByFilterRequestWithAllParams(
     accelerateRegion *string,
     filterBy *int,
     tagFilters []cdn.TagFilter,
+    withThirdPartyStatus *bool,
 ) *GetDomainListByFilterRequest {
 
     return &GetDomainListByFilterRequest{
@@ -103,6 +108,7 @@ func NewGetDomainListByFilterRequestWithAllParams(
         AccelerateRegion: accelerateRegion,
         FilterBy: filterBy,
         TagFilters: tagFilters,
+        WithThirdPartyStatus: withThirdPartyStatus,
     }
 }
 
@@ -150,6 +156,10 @@ func (r *GetDomainListByFilterRequest) SetFilterBy(filterBy int) {
 /* param tagFilters: 标签过滤条件(Optional) */
 func (r *GetDomainListByFilterRequest) SetTagFilters(tagFilters []cdn.TagFilter) {
     r.TagFilters = tagFilters
+}
+/* param withThirdPartyStatus: 筛选依据（false不需要查询, true 需要查询海外状态)默认false(Optional) */
+func (r *GetDomainListByFilterRequest) SetWithThirdPartyStatus(withThirdPartyStatus bool) {
+    r.WithThirdPartyStatus = &withThirdPartyStatus
 }
 
 
