@@ -24,7 +24,10 @@ type BatchIpBlackListRequest struct {
 
     core.JDCloudRequest
 
-    /* 域名列表。最多30个 (Optional) */
+    /* 可选值。表示域名操作范围，可指定为all代表操作该账号下全量域名,全量域名个数应<=单次可批量操作的域名个数(默认50) (Optional) */
+    OperateDomainRange *string `json:"operateDomainRange"`
+
+    /* 可选值。待操作的域名列表,个数默认限制50个。注意operateDomainRange和domains至少指定一个参数。operateDomainRange为all时该参数不生效. (Optional) */
     Domains []string `json:"domains"`
 
     /* ip列表。最多50个 (Optional) */
@@ -55,12 +58,14 @@ func NewBatchIpBlackListRequest(
 }
 
 /*
- * param domains: 域名列表。最多30个 (Optional)
+ * param operateDomainRange: 可选值。表示域名操作范围，可指定为all代表操作该账号下全量域名,全量域名个数应<=单次可批量操作的域名个数(默认50) (Optional)
+ * param domains: 可选值。待操作的域名列表,个数默认限制50个。注意operateDomainRange和domains至少指定一个参数。operateDomainRange为all时该参数不生效. (Optional)
  * param ipList: ip列表。最多50个 (Optional)
  * param forbidTime: 封禁时长，单位分钟。默认1440 (Optional)
  * param action: forbid or resume.代表封禁和解封。 (Optional)
  */
 func NewBatchIpBlackListRequestWithAllParams(
+    operateDomainRange *string,
     domains []string,
     ipList []string,
     forbidTime *int64,
@@ -74,6 +79,7 @@ func NewBatchIpBlackListRequestWithAllParams(
             Header:  nil,
             Version: "v1",
         },
+        OperateDomainRange: operateDomainRange,
         Domains: domains,
         IpList: ipList,
         ForbidTime: forbidTime,
@@ -94,7 +100,11 @@ func NewBatchIpBlackListRequestWithoutParam() *BatchIpBlackListRequest {
     }
 }
 
-/* param domains: 域名列表。最多30个(Optional) */
+/* param operateDomainRange: 可选值。表示域名操作范围，可指定为all代表操作该账号下全量域名,全量域名个数应<=单次可批量操作的域名个数(默认50)(Optional) */
+func (r *BatchIpBlackListRequest) SetOperateDomainRange(operateDomainRange string) {
+    r.OperateDomainRange = &operateDomainRange
+}
+/* param domains: 可选值。待操作的域名列表,个数默认限制50个。注意operateDomainRange和domains至少指定一个参数。operateDomainRange为all时该参数不生效.(Optional) */
 func (r *BatchIpBlackListRequest) SetDomains(domains []string) {
     r.Domains = domains
 }
