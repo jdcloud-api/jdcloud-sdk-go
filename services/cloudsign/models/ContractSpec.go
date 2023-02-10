@@ -39,4 +39,7 @@ type ContractSpec struct {
 
     /* 证书类型 (Optional) */
     CaType *string `json:"caType"`
+
+    /* 自定义签章类型（如需增加时间戳，此字段传time） (Optional) */
+    StampStyle *string `json:"stampStyle"`
 }
