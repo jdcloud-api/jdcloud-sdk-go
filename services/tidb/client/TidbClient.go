@@ -40,7 +40,7 @@ func NewTidbClient(credential *core.Credential) *TidbClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "tidb",
-            Revision:    "1.0.4",
+            Revision:    "1.0.6",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -128,6 +128,26 @@ func (c *TidbClient) DescribeReplications(request *tidb.DescribeReplicationsRequ
     }
 
     jdResp := &tidb.DescribeReplicationsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取实例按时间点创建时间，可选择的最早时间和最晚时间 */
+func (c *TidbClient) DescribeRestoreTimeInterval(request *tidb.DescribeRestoreTimeIntervalRequest) (*tidb.DescribeRestoreTimeIntervalResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &tidb.DescribeRestoreTimeIntervalResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -388,6 +408,26 @@ func (c *TidbClient) AddWhiteListGroup(request *tidb.AddWhiteListGroupRequest) (
     }
 
     jdResp := &tidb.AddWhiteListGroupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据日志备份创建一个新的 TiDB 实例 */
+func (c *TidbClient) CreateInstanceByTime(request *tidb.CreateInstanceByTimeRequest) (*tidb.CreateInstanceByTimeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &tidb.CreateInstanceByTimeResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -928,6 +968,26 @@ func (c *TidbClient) DescribeUpgradeVersions(request *tidb.DescribeUpgradeVersio
     }
 
     jdResp := &tidb.DescribeUpgradeVersionsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询 TiDB支持的基本信息。 */
+func (c *TidbClient) DescribeAvailableDBInfoInternel(request *tidb.DescribeAvailableDBInfoInternelRequest) (*tidb.DescribeAvailableDBInfoInternelResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &tidb.DescribeAvailableDBInfoInternelResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

@@ -62,7 +62,7 @@ func NewDescribeInstancesRequest(
 	return &DescribeInstancesRequest{
         JDCloudRequest: core.JDCloudRequest{
 			URL:     "/regions/{regionId}/instances:describeInstances",
-			Method:  "POST",
+			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
@@ -95,7 +95,7 @@ func NewDescribeInstancesRequestWithAllParams(
     return &DescribeInstancesRequest{
         JDCloudRequest: core.JDCloudRequest{
             URL:     "/regions/{regionId}/instances:describeInstances",
-            Method:  "POST",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
@@ -114,7 +114,7 @@ func NewDescribeInstancesRequestWithoutParam() *DescribeInstancesRequest {
     return &DescribeInstancesRequest{
             JDCloudRequest: core.JDCloudRequest{
             URL:     "/regions/{regionId}/instances:describeInstances",
-            Method:  "POST",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },

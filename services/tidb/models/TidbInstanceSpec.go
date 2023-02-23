@@ -26,6 +26,9 @@ type TidbInstanceSpec struct {
     /* TiDB引擎版本 (Optional) */
     EngineVersion *string `json:"engineVersion"`
 
+    /* CPU架构  */
+    Architecture string `json:"architecture"`
+
     /* TiDB节点规格和数目  */
     TidbNodeSpec *NodeSpec `json:"tidbNodeSpec"`
 
