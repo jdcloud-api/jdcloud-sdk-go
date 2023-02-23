@@ -25,6 +25,9 @@ type Qps struct {
     /* waf防护统计数据 (Optional) */
     WafAnti ChartItemValue `json:"wafAnti"`
 
+    /* bot防护统计数据 (Optional) */
+    BotAnti ChartItemValue `json:"botAnti"`
+
     /* cc防护统计数据 (Optional) */
     CcAnti ChartItemValue `json:"ccAnti"`
 
