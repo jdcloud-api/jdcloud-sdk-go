@@ -29,6 +29,9 @@ type Instance struct {
     /* 实例引擎版本 (Optional) */
     EngineVersion string `json:"engineVersion"`
 
+    /* CPU架构 (Optional) */
+    Architecture string `json:"architecture"`
+
     /* 实例引擎版本的详细版本号 (Optional) */
     MinorVersion string `json:"minorVersion"`
 
