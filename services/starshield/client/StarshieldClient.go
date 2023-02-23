@@ -40,7 +40,7 @@ func NewStarshieldClient(credential *core.Credential) *StarshieldClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "starshield",
-            Revision:    "0.0.4",
+            Revision:    "0.0.5",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -273,6 +273,26 @@ func (c *StarshieldClient) ChangeEnableQueryStringSortSetting(request *starshiel
     return jdResp, err
 }
 
+/* TopK域名的带宽图。查询范围最近6个月、查询最大跨度1个月。 */
+func (c *StarshieldClient) BandwidthDateHistogramTopK(request *starshield.BandwidthDateHistogramTopKRequest) (*starshield.BandwidthDateHistogramTopKResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.BandwidthDateHistogramTopKResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 浏览器完整性检查与不良行为检查类似，寻找最常被垃圾邮件发送者滥用的常见HTTP头，并拒绝他们访问您的页面。它还会对没有用户代理或非标准用户代理（也是滥用机器人、爬虫或访客常用的）的访客提出挑战质询。
  */
 func (c *StarshieldClient) GetBrowserCheckSetting(request *starshield.GetBrowserCheckSettingRequest) (*starshield.GetBrowserCheckSettingResponse, error) {
@@ -294,6 +314,26 @@ func (c *StarshieldClient) GetBrowserCheckSetting(request *starshield.GetBrowser
     return jdResp, err
 }
 
+/* 更新规则在域上触发时将执行的操作 */
+func (c *StarshieldClient) EditRule(request *starshield.EditRuleRequest) (*starshield.EditRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.EditRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 对于给定域，列出所有激活的证书包 */
 func (c *StarshieldClient) ListCertificatePacks(request *starshield.ListCertificatePacksRequest) (*starshield.ListCertificatePacksResponse, error) {
     if request == nil {
@@ -305,6 +345,26 @@ func (c *StarshieldClient) ListCertificatePacks(request *starshield.ListCertific
     }
 
     jdResp := &starshield.ListCertificatePacksResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 95峰值带宽。查询范围最近6个月、查询最大跨度1个月。 */
+func (c *StarshieldClient) ZoneBandwidthP95(request *starshield.ZoneBandwidthP95Request) (*starshield.ZoneBandwidthP95Response, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.ZoneBandwidthP95Response{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -355,6 +415,26 @@ func (c *StarshieldClient) DeleteZone(request *starshield.DeleteZoneRequest) (*s
     return jdResp, err
 }
 
+/* 带宽图。查询范围最近6个月、查询最大跨度1个月。 */
+func (c *StarshieldClient) ZoneBandwidthDateHistogram(request *starshield.ZoneBandwidthDateHistogramRequest) (*starshield.ZoneBandwidthDateHistogramResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.ZoneBandwidthDateHistogramResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 星盾将预取包含在响应标头中的任何 URL。这只限于企业级域。 */
 func (c *StarshieldClient) GetPrefetchPreloadSetting(request *starshield.GetPrefetchPreloadSettingRequest) (*starshield.GetPrefetchPreloadSettingResponse, error) {
     if request == nil {
@@ -386,6 +466,26 @@ func (c *StarshieldClient) CreateFilters(request *starshield.CreateFiltersReques
     }
 
     jdResp := &starshield.CreateFiltersResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* bps on Zone */
+func (c *StarshieldClient) BpsZone(request *starshield.BpsZoneRequest) (*starshield.BpsZoneResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.BpsZoneResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -457,6 +557,46 @@ func (c *StarshieldClient) DescribeInstanceByOrderNo(request *starshield.Describ
     return jdResp, err
 }
 
+/* 流量图。查询范围最近6个月、查询最大跨度1个月。 */
+func (c *StarshieldClient) InstanceTrafficDateHistogram(request *starshield.InstanceTrafficDateHistogramRequest) (*starshield.InstanceTrafficDateHistogramResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.InstanceTrafficDateHistogramResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除日志推送作业 */
+func (c *StarshieldClient) DeleteLogpushJob(request *starshield.DeleteLogpushJobRequest) (*starshield.DeleteLogpushJobResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.DeleteLogpushJobResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 缓存级别的功能是基于设置的级别。
 basic设置将缓存大多数静态资源（即css、图片和JavaScript）。
 simplified设置将在提供缓存的资源时忽略查询字符串。
@@ -472,6 +612,66 @@ func (c *StarshieldClient) ChangeCacheLevelSetting(request *starshield.ChangeCac
     }
 
     jdResp := &starshield.ChangeCacheLevelSettingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 按响应带宽统计，返回日期直方图. */
+func (c *StarshieldClient) DateHistogramBandwidth(request *starshield.DateHistogramBandwidthRequest) (*starshield.DateHistogramBandwidthResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.DateHistogramBandwidthResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 请求量图。查询范围最近6个月、查询最大跨度1个月。 */
+func (c *StarshieldClient) InstanceRequestDateHistogram(request *starshield.InstanceRequestDateHistogramRequest) (*starshield.InstanceRequestDateHistogramResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.InstanceRequestDateHistogramResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 按域名的TopK总请求量。查询范围最近6个月、查询最大跨度1个月。 */
+func (c *StarshieldClient) RequestTopK(request *starshield.RequestTopKRequest) (*starshield.RequestTopKResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.RequestTopKResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -512,6 +712,46 @@ func (c *StarshieldClient) UpdateIndividualFilter(request *starshield.UpdateIndi
     }
 
     jdResp := &starshield.UpdateIndividualFilterResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 多指标的请求量图。查询范围最近6个月、查询最大跨度1个月。 */
+func (c *StarshieldClient) ZoneRequestMultiDateHistogram(request *starshield.ZoneRequestMultiDateHistogramRequest) (*starshield.ZoneRequestMultiDateHistogramResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.ZoneRequestMultiDateHistogramResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* Individual information about a rule */
+func (c *StarshieldClient) RuleDetails(request *starshield.RuleDetailsRequest) (*starshield.RuleDetailsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.RuleDetailsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -600,6 +840,26 @@ func (c *StarshieldClient) GetHTTP2EdgePrioritizationSetting(request *starshield
     }
 
     jdResp := &starshield.GetHTTP2EdgePrioritizationSettingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 按请求次数统计，返回日期直方图. */
+func (c *StarshieldClient) CacheDateHistogram(request *starshield.CacheDateHistogramRequest) (*starshield.CacheDateHistogramResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.CacheDateHistogramResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -833,6 +1093,26 @@ func (c *StarshieldClient) GetAutomaticHTTPSRewritesSetting(request *starshield.
     return jdResp, err
 }
 
+/* 95峰值带宽。查询范围最近6个月、查询最大跨度1个月。 */
+func (c *StarshieldClient) InstanceBandwidthP95(request *starshield.InstanceBandwidthP95Request) (*starshield.InstanceBandwidthP95Response, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.InstanceBandwidthP95Response{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 对您的网站进行高级保护，防止分布式拒绝服务（DDoS）攻击。这是一个不可编辑的值。
  */
 func (c *StarshieldClient) GetAdvancedDDOSSetting(request *starshield.GetAdvancedDDOSSettingRequest) (*starshield.GetAdvancedDDOSSettingResponse, error) {
@@ -866,6 +1146,26 @@ func (c *StarshieldClient) CreateFlowPack(request *starshield.CreateFlowPackRequ
     }
 
     jdResp := &starshield.CreateFlowPackResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 带宽峰值。查询范围最近6个月、查询最大跨度1个月。 */
+func (c *StarshieldClient) ZoneBandwidthMax(request *starshield.ZoneBandwidthMaxRequest) (*starshield.ZoneBandwidthMaxResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.ZoneBandwidthMaxResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -926,6 +1226,46 @@ func (c *StarshieldClient) ChangeMaxUploadSetting(request *starshield.ChangeMaxU
     }
 
     jdResp := &starshield.ChangeMaxUploadSettingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 带宽图。查询范围最近6个月、查询最大跨度1个月。 */
+func (c *StarshieldClient) InstanceBandwidthDateHistogram(request *starshield.InstanceBandwidthDateHistogramRequest) (*starshield.InstanceBandwidthDateHistogramResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.InstanceBandwidthDateHistogramResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* qps */
+func (c *StarshieldClient) QpsInstance(request *starshield.QpsInstanceRequest) (*starshield.QpsInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.QpsInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1076,6 +1416,26 @@ func (c *StarshieldClient) ChangeMinimumTLSVersionSetting(request *starshield.Ch
     return jdResp, err
 }
 
+/* 域的每秒指标，request/bandwidth/waf/l7ddos/firewallRules */
+func (c *StarshieldClient) Xps(request *starshield.XpsRequest) (*starshield.XpsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.XpsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 更新自定义页面URL */
 func (c *StarshieldClient) UpdateCustomPageURL(request *starshield.UpdateCustomPageURLRequest) (*starshield.UpdateCustomPageURLResponse, error) {
     if request == nil {
@@ -1087,6 +1447,26 @@ func (c *StarshieldClient) UpdateCustomPageURL(request *starshield.UpdateCustomP
     }
 
     jdResp := &starshield.UpdateCustomPageURLResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 请求量图。查询范围最近6个月、查询最大跨度1个月。 */
+func (c *StarshieldClient) ZoneRequestDateHistogram(request *starshield.ZoneRequestDateHistogramRequest) (*starshield.ZoneRequestDateHistogramResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.ZoneRequestDateHistogramResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1217,6 +1597,26 @@ func (c *StarshieldClient) GetSecurityLevelSetting(request *starshield.GetSecuri
     return jdResp, err
 }
 
+/* 按域名的TopK峰值带宽。查询范围最近6个月、查询最大跨度1个月。 */
+func (c *StarshieldClient) BandwidthTopK(request *starshield.BandwidthTopKRequest) (*starshield.BandwidthTopKResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.BandwidthTopKResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /*  */
 func (c *StarshieldClient) ListAvailablePageRuleSetting(request *starshield.ListAvailablePageRuleSettingRequest) (*starshield.ListAvailablePageRuleSettingResponse, error) {
     if request == nil {
@@ -1260,6 +1660,26 @@ func (c *StarshieldClient) ChangeRocketLoaderSetting(request *starshield.ChangeR
     return jdResp, err
 }
 
+/* 更新日志推送作业 */
+func (c *StarshieldClient) UpdateLogpushJob(request *starshield.UpdateLogpushJobRequest) (*starshield.UpdateLogpushJobResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.UpdateLogpushJobResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 获取Pseudo IPv4(IPv6到IPv4的转换服务)的设置 */
 func (c *StarshieldClient) GetPseudoIPv4Setting(request *starshield.GetPseudoIPv4SettingRequest) (*starshield.GetPseudoIPv4SettingResponse, error) {
     if request == nil {
@@ -1271,6 +1691,26 @@ func (c *StarshieldClient) GetPseudoIPv4Setting(request *starshield.GetPseudoIPv
     }
 
     jdResp := &starshield.GetPseudoIPv4SettingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 域名带宽列表，按带宽降序排列。查询范围最近6个月、查询最大跨度1个月。 */
+func (c *StarshieldClient) InstanceBandwidthList(request *starshield.InstanceBandwidthListRequest) (*starshield.InstanceBandwidthListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.InstanceBandwidthListResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1363,6 +1803,26 @@ func (c *StarshieldClient) GetEnableErrorPagesOnSetting(request *starshield.GetE
     return jdResp, err
 }
 
+/* 平均峰值带宽。查询范围最近6个月、查询最大跨度1个月。 */
+func (c *StarshieldClient) InstanceBandwidthAvg(request *starshield.InstanceBandwidthAvgRequest) (*starshield.InstanceBandwidthAvgResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.InstanceBandwidthAvgResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 为你的网站选择适当的安全配置文件，这将自动调整每个安全设置。如果你选择定制一个单独的安全设置，该配置文件将成为自定义。
  */
 func (c *StarshieldClient) ChangeSecurityLevelSetting(request *starshield.ChangeSecurityLevelSettingRequest) (*starshield.ChangeSecurityLevelSettingResponse, error) {
@@ -1395,6 +1855,26 @@ func (c *StarshieldClient) CreateSSLConfiguration(request *starshield.CreateSSLC
     }
 
     jdResp := &starshield.CreateSSLConfigurationResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* TopK域名的请求量图。查询范围最近6个月、查询最大跨度1个月。 */
+func (c *StarshieldClient) RequestDateHistogramTopK(request *starshield.RequestDateHistogramTopKRequest) (*starshield.RequestDateHistogramTopKResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.RequestDateHistogramTopKResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1444,6 +1924,26 @@ func (c *StarshieldClient) UniversalSSLSettingsDetails(request *starshield.Unive
     return jdResp, err
 }
 
+/* 为域创建新的日志推送作业 */
+func (c *StarshieldClient) CreateLogpushJob(request *starshield.CreateLogpushJobRequest) (*starshield.CreateLogpushJobResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.CreateLogpushJobResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 在你的网页上对电子邮件地址进行加密，以防止机器人入侵，同时保持它们对人类可见。 */
 func (c *StarshieldClient) GetEmailObfuscationSetting(request *starshield.GetEmailObfuscationSettingRequest) (*starshield.GetEmailObfuscationSettingResponse, error) {
     if request == nil {
@@ -1455,6 +1955,26 @@ func (c *StarshieldClient) GetEmailObfuscationSetting(request *starshield.GetEma
     }
 
     jdResp := &starshield.GetEmailObfuscationSettingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 总流量。查询范围最近6个月、查询最大跨度1个月。 */
+func (c *StarshieldClient) ZoneTrafficSum(request *starshield.ZoneTrafficSumRequest) (*starshield.ZoneTrafficSumResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.ZoneTrafficSumResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1504,6 +2024,26 @@ func (c *StarshieldClient) ChangeMobileRedirectSetting(request *starshield.Chang
     return jdResp, err
 }
 
+/* 总流量。查询范围最近6个月、查询最大跨度1个月。 */
+func (c *StarshieldClient) InstanceTrafficSum(request *starshield.InstanceTrafficSumRequest) (*starshield.InstanceTrafficSumResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.InstanceTrafficSumResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 星盾将把具有相同查询字符串的文件视为缓存中的同一个文件，而不管查询字符串的顺序如何。这只限于企业级域。
  */
 func (c *StarshieldClient) GetEnableQueryStringSortSetting(request *starshield.GetEnableQueryStringSortSettingRequest) (*starshield.GetEnableQueryStringSortSettingResponse, error) {
@@ -1525,6 +2065,26 @@ func (c *StarshieldClient) GetEnableQueryStringSortSetting(request *starshield.G
     return jdResp, err
 }
 
+/* 多指标的流量图。查询范围最近6个月、查询最大跨度1个月。 */
+func (c *StarshieldClient) InstanceTrafficMultiDateHistogram(request *starshield.InstanceTrafficMultiDateHistogramRequest) (*starshield.InstanceTrafficMultiDateHistogramResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.InstanceTrafficMultiDateHistogramResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 在所有启用星盾的子域上启用 IPv6。 */
 func (c *StarshieldClient) GetIPv6Setting(request *starshield.GetIPv6SettingRequest) (*starshield.GetIPv6SettingResponse, error) {
     if request == nil {
@@ -1536,6 +2096,26 @@ func (c *StarshieldClient) GetIPv6Setting(request *starshield.GetIPv6SettingRequ
     }
 
     jdResp := &starshield.GetIPv6SettingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* The dashboard view provides both totals and timeseries data for the given zone and time period across the entire scdn network. */
+func (c *StarshieldClient) Dashboard(request *starshield.DashboardRequest) (*starshield.DashboardResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.DashboardResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1585,6 +2165,26 @@ func (c *StarshieldClient) ChangeMirageSetting(request *starshield.ChangeMirageS
     return jdResp, err
 }
 
+/* TopK域名的流量图。查询范围最近6个月、查询最大跨度1个月。 */
+func (c *StarshieldClient) TrafficDateHistogramTopK(request *starshield.TrafficDateHistogramTopKRequest) (*starshield.TrafficDateHistogramTopKResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.TrafficDateHistogramTopKResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 对于给定域，删除高级证书包 */
 func (c *StarshieldClient) DeleteAdvancedCertificateManagerCertificatePack(request *starshield.DeleteAdvancedCertificateManagerCertificatePackRequest) (*starshield.DeleteAdvancedCertificateManagerCertificatePackResponse, error) {
     if request == nil {
@@ -1625,6 +2225,26 @@ func (c *StarshieldClient) EditUniversalSSLSettings(request *starshield.EditUniv
     return jdResp, err
 }
 
+/* 多指标的带宽图。查询范围最近6个月、查询最大跨度1个月。 */
+func (c *StarshieldClient) ZoneBandwidthMultiDateHistogram(request *starshield.ZoneBandwidthMultiDateHistogramRequest) (*starshield.ZoneBandwidthMultiDateHistogramResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.ZoneBandwidthMultiDateHistogramResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* SSL对访问者的连接进行加密，并保护信用卡号码和其他进出网站的个人数据。
 SSL最多需要5分钟才能完全激活。需要在星盾激活你的根域或www域。
 Off，访客和星盾之间没有SSL，星盾和你的Web服务器之间也没有SSL（所有HTTP流量）。
@@ -1643,6 +2263,86 @@ func (c *StarshieldClient) GetSSLSetting(request *starshield.GetSSLSettingReques
     }
 
     jdResp := &starshield.GetSSLSettingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* qps on Zone */
+func (c *StarshieldClient) QpsZone(request *starshield.QpsZoneRequest) (*starshield.QpsZoneResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.QpsZoneResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 数据集可用的所有字段的列表。 */
+func (c *StarshieldClient) Fields(request *starshield.FieldsRequest) (*starshield.FieldsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.FieldsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 按防火墙事件数量统计，返回日期直方图. */
+func (c *StarshieldClient) FirewallDateHistogram(request *starshield.FirewallDateHistogramRequest) (*starshield.FirewallDateHistogramResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.FirewallDateHistogramResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 分组统计。 */
+func (c *StarshieldClient) GroupBy(request *starshield.GroupByRequest) (*starshield.GroupByResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.GroupByResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1715,6 +2415,26 @@ func (c *StarshieldClient) ChangeBrotliSetting(request *starshield.ChangeBrotliS
     return jdResp, err
 }
 
+/* 数据集可用的所有默认字段列表。 */
+func (c *StarshieldClient) FieldsDefault(request *starshield.FieldsDefaultRequest) (*starshield.FieldsDefaultResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.FieldsDefaultResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 启用IP地理定位，让星盾对您网站的访问者进行地理定位，并将国家代码传递给您。 */
 func (c *StarshieldClient) ChangeIPGeolocationSetting(request *starshield.ChangeIPGeolocationSettingRequest) (*starshield.ChangeIPGeolocationSettingResponse, error) {
     if request == nil {
@@ -1777,6 +2497,26 @@ func (c *StarshieldClient) GetPrivacyPassSetting(request *starshield.GetPrivacyP
     return jdResp, err
 }
 
+/* 按请求次数统计。获取国家/地区的请求分布情况；获取路径、主机、设备类型的TopK. */
+func (c *StarshieldClient) TopK(request *starshield.TopKRequest) (*starshield.TopKResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.TopKResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 创建新的防火墙规则。 */
 func (c *StarshieldClient) CreateFirewallRules(request *starshield.CreateFirewallRulesRequest) (*starshield.CreateFirewallRulesResponse, error) {
     if request == nil {
@@ -1788,6 +2528,26 @@ func (c *StarshieldClient) CreateFirewallRules(request *starshield.CreateFirewal
     }
 
     jdResp := &starshield.CreateFirewallRulesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 按响应带宽统计。获取内容类型、路径、主机、设备类型、国家/地区、状态代码的TopK. */
+func (c *StarshieldClient) CacheBandwidthTopK(request *starshield.CacheBandwidthTopKRequest) (*starshield.CacheBandwidthTopKResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.CacheBandwidthTopKResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1837,6 +2597,46 @@ func (c *StarshieldClient) ChangeAutomaticHTTPSRewritesSetting(request *starshie
     return jdResp, err
 }
 
+/* 按域名的TopK总流量。查询范围最近6个月、查询最大跨度1个月。 */
+func (c *StarshieldClient) TrafficTopK(request *starshield.TrafficTopKRequest) (*starshield.TrafficTopKResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.TrafficTopKResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 平均峰值带宽。查询范围最近6个月、查询最大跨度1个月。 */
+func (c *StarshieldClient) ZoneBandwidthAvg(request *starshield.ZoneBandwidthAvgRequest) (*starshield.ZoneBandwidthAvgResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.ZoneBandwidthAvgResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 删除现有防火墙规则。 */
 func (c *StarshieldClient) DeleteIndividualFirewallRules(request *starshield.DeleteIndividualFirewallRulesRequest) (*starshield.DeleteIndividualFirewallRulesResponse, error) {
     if request == nil {
@@ -1848,6 +2648,26 @@ func (c *StarshieldClient) DeleteIndividualFirewallRules(request *starshield.Del
     }
 
     jdResp := &starshield.DeleteIndividualFirewallRulesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 总请求量。查询范围最近6个月、查询最大跨度1个月。 */
+func (c *StarshieldClient) InstanceRequestSum(request *starshield.InstanceRequestSumRequest) (*starshield.InstanceRequestSumResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.InstanceRequestSumResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1893,6 +2713,26 @@ func (c *StarshieldClient) Change0_RTTSessionResumptionSetting(request *starshie
     }
 
     jdResp := &starshield.Change0_RTTSessionResumptionSettingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 多指标的带宽图。查询范围最近6个月、查询最大跨度1个月。 */
+func (c *StarshieldClient) InstanceBandwidthMultiDateHistogram(request *starshield.InstanceBandwidthMultiDateHistogramRequest) (*starshield.InstanceBandwidthMultiDateHistogramResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.InstanceBandwidthMultiDateHistogramResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2111,6 +2951,26 @@ func (c *StarshieldClient) GetIPGeolocationSetting(request *starshield.GetIPGeol
     return jdResp, err
 }
 
+/* 列出域的日志推送作业 */
+func (c *StarshieldClient) ListLogpushJobs(request *starshield.ListLogpushJobsRequest) (*starshield.ListLogpushJobsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.ListLogpushJobsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /*  */
 func (c *StarshieldClient) UpdateDNSRecord(request *starshield.UpdateDNSRecordRequest) (*starshield.UpdateDNSRecordResponse, error) {
     if request == nil {
@@ -2131,6 +2991,26 @@ func (c *StarshieldClient) UpdateDNSRecord(request *starshield.UpdateDNSRecordRe
     return jdResp, err
 }
 
+/* 访问日志. */
+func (c *StarshieldClient) AccessLog(request *starshield.AccessLogRequest) (*starshield.AccessLogResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.AccessLogResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* Value of the 0-RTT setting */
 func (c *StarshieldClient) Get0_RTTSessionResumptionSetting(request *starshield.Get0_RTTSessionResumptionSettingRequest) (*starshield.Get0_RTTSessionResumptionSettingResponse, error) {
     if request == nil {
@@ -2142,6 +3022,26 @@ func (c *StarshieldClient) Get0_RTTSessionResumptionSetting(request *starshield.
     }
 
     jdResp := &starshield.Get0_RTTSessionResumptionSettingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 按请求或响应带宽统计，返回日期直方图. */
+func (c *StarshieldClient) BandwidthTrend(request *starshield.BandwidthTrendRequest) (*starshield.BandwidthTrendResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.BandwidthTrendResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2196,6 +3096,46 @@ func (c *StarshieldClient) EditFirewallPackage(request *starshield.EditFirewallP
     return jdResp, err
 }
 
+/* 按防火墙事件数量统计。获取IP地址、用户代理、路径、主机、国家/地区、HTTP方法的TopK。 */
+func (c *StarshieldClient) FirewallTopK(request *starshield.FirewallTopKRequest) (*starshield.FirewallTopKResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.FirewallTopKResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 总请求量。查询范围最近6个月、查询最大跨度1个月。 */
+func (c *StarshieldClient) ZoneRequestSum(request *starshield.ZoneRequestSumRequest) (*starshield.ZoneRequestSumResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.ZoneRequestSumResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 通过指定主机、关联的缓存标记或前缀，从星盾的缓存中精确删除一个或多个文件。
 注意，缓存标记、主机和前缀清除每24小时的速率限制为30000次清除API调用。一次API调用最多可以清除30个标记、主机或前缀。
 对于需要以更大容量进行清除的客户，可以提高此速率限制。
@@ -2210,6 +3150,26 @@ func (c *StarshieldClient) PurgeFilesByCache_TagsAndHostOrPrefix(request *starsh
     }
 
     jdResp := &starshield.PurgeFilesByCache_TagsAndHostOrPrefixResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 活动日志. */
+func (c *StarshieldClient) FirewallActivityLog(request *starshield.FirewallActivityLogRequest) (*starshield.FirewallActivityLogResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.FirewallActivityLogResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2259,6 +3219,26 @@ func (c *StarshieldClient) PurgeAllFiles(request *starshield.PurgeAllFilesReques
     return jdResp, err
 }
 
+/* 按请求次数统计，返回日期直方图. */
+func (c *StarshieldClient) DateHistogram(request *starshield.DateHistogramRequest) (*starshield.DateHistogramResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.DateHistogramResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 开启/关闭HTTP3 */
 func (c *StarshieldClient) ChangeHTTP3Setting(request *starshield.ChangeHTTP3SettingRequest) (*starshield.ChangeHTTP3SettingResponse, error) {
     if request == nil {
@@ -2270,6 +3250,26 @@ func (c *StarshieldClient) ChangeHTTP3Setting(request *starshield.ChangeHTTP3Set
     }
 
     jdResp := &starshield.ChangeHTTP3SettingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 按响应带宽统计，返回日期直方图。 */
+func (c *StarshieldClient) CacheDateHistogramBandwidth(request *starshield.CacheDateHistogramBandwidthRequest) (*starshield.CacheDateHistogramBandwidthResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.CacheDateHistogramBandwidthResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2331,6 +3331,26 @@ func (c *StarshieldClient) DescribePackages(request *starshield.DescribePackages
     }
 
     jdResp := &starshield.DescribePackagesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 多指标的流量图。查询范围最近6个月、查询最大跨度1个月。 */
+func (c *StarshieldClient) ZoneTrafficMultiDateHistogram(request *starshield.ZoneTrafficMultiDateHistogramRequest) (*starshield.ZoneTrafficMultiDateHistogramResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.ZoneTrafficMultiDateHistogramResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2445,6 +3465,26 @@ func (c *StarshieldClient) ChangeEmailObfuscationSetting(request *starshield.Cha
     return jdResp, err
 }
 
+/* 按请求次数统计。获取内容类型、路径、主机、设备类型、国家/地区、状态代码的TopK. */
+func (c *StarshieldClient) CacheTopK(request *starshield.CacheTopKRequest) (*starshield.CacheTopKResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.CacheTopKResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 更新一个单独的现有防火墙规则。 */
 func (c *StarshieldClient) UpdateIndividualFirewallRule(request *starshield.UpdateIndividualFirewallRuleRequest) (*starshield.UpdateIndividualFirewallRuleResponse, error) {
     if request == nil {
@@ -2496,6 +3536,26 @@ func (c *StarshieldClient) GetMirageSetting(request *starshield.GetMirageSetting
     }
 
     jdResp := &starshield.GetMirageSettingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 带宽峰值。查询范围最近6个月、查询最大跨度1个月。 */
+func (c *StarshieldClient) InstanceBandwidthMax(request *starshield.InstanceBandwidthMaxRequest) (*starshield.InstanceBandwidthMaxResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.InstanceBandwidthMaxResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2585,6 +3645,26 @@ func (c *StarshieldClient) ChangeCiphersSetting(request *starshield.ChangeCipher
     return jdResp, err
 }
 
+/* bps */
+func (c *StarshieldClient) BpsInstance(request *starshield.BpsInstanceRequest) (*starshield.BpsInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.BpsInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 当请求图像的客户端支持WebP图像编解码器时。当WebP比原始图像格式具有性能优势时，星盾将提供WebP版本的图像。
  */
 func (c *StarshieldClient) GetWebPSetting(request *starshield.GetWebPSettingRequest) (*starshield.GetWebPSettingResponse, error) {
@@ -2597,6 +3677,26 @@ func (c *StarshieldClient) GetWebPSetting(request *starshield.GetWebPSettingRequ
     }
 
     jdResp := &starshield.GetWebPSettingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 流量图。查询范围最近6个月、查询最大跨度1个月。 */
+func (c *StarshieldClient) ZoneTrafficDateHistogram(request *starshield.ZoneTrafficDateHistogramRequest) (*starshield.ZoneTrafficDateHistogramResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.ZoneTrafficDateHistogramResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2752,6 +3852,26 @@ func (c *StarshieldClient) ListRuleGroups(request *starshield.ListRuleGroupsRequ
     return jdResp, err
 }
 
+/* 检查是否存在作业，处理该目标。 */
+func (c *StarshieldClient) CheckDestinationExists(request *starshield.CheckDestinationExistsRequest) (*starshield.CheckDestinationExistsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.CheckDestinationExistsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 创建DNS记录 */
 func (c *StarshieldClient) CreateDNSRecord(request *starshield.CreateDNSRecordRequest) (*starshield.CreateDNSRecordResponse, error) {
     if request == nil {
@@ -2772,6 +3892,26 @@ func (c *StarshieldClient) CreateDNSRecord(request *starshield.CreateDNSRecordRe
     return jdResp, err
 }
 
+/* 多指标的请求量图。查询范围最近6个月、查询最大跨度1个月。 */
+func (c *StarshieldClient) InstanceRequestMultiDateHistogram(request *starshield.InstanceRequestMultiDateHistogramRequest) (*starshield.InstanceRequestMultiDateHistogramResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.InstanceRequestMultiDateHistogramResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 获取HTTP3设置的状态 */
 func (c *StarshieldClient) GetHTTP3Setting(request *starshield.GetHTTP3SettingRequest) (*starshield.GetHTTP3SettingResponse, error) {
     if request == nil {
@@ -2783,6 +3923,26 @@ func (c *StarshieldClient) GetHTTP3Setting(request *starshield.GetHTTP3SettingRe
     }
 
     jdResp := &starshield.GetHTTP3SettingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 星盾节点信息 */
+func (c *StarshieldClient) Ips(request *starshield.IpsRequest) (*starshield.IpsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.IpsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
