@@ -40,7 +40,7 @@ func NewVmClient(credential *core.Credential) *VmClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vm",
-            Revision:    "1.5.10",
+            Revision:    "1.5.13",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -873,6 +873,33 @@ func (c *VmClient) ImportImage(request *vm.ImportImageRequest) (*vm.ImportImageR
 }
 
 /* 
+重新部署主机实例。
+
+详细操作说明请参考帮助文档：[重新部署实例](https://docs.jdcloud.com/cn/virtual-machines/redeploy-instance)
+
+## 接口说明
+- 必须是已隔离的实例，推荐关机状态。
+ */
+func (c *VmClient) RedeployInstance(request *vm.RedeployInstanceRequest) (*vm.RedeployInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.RedeployInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 
 创建实例模板。
 
 实例模板是创建云主机实例的配置信息模板，包括镜像、实例规格、系统盘及数据盘类型和容量、私有网络及子网配置、安全组及登录信息等。实例模板可用于创建实例及用于配置高可用组（创建高可用组时必须指定实例模板）。使用实例模板创建实例时，无需重新指定实例模板已包括的参数，缩短您的部署时间。
@@ -987,6 +1014,34 @@ func (c *VmClient) DisassociateElasticIp(request *vm.DisassociateElasticIpReques
     }
 
     jdResp := &vm.DisassociateElasticIpResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 
+基于快照制作私有镜像，支持指定单个快照创建系统盘镜像；指定多个快照组合创建整机镜像
+
+## 接口说明
+- 快照须为可用状态，且需有指定快照的权限，快照数量为1-8块。
+- 单块快照创建镜像，设备名必须为vda；多块快照创建镜像，设备名必须包含vda。
+- 设置云盘的容量需大于快照容量。
+- 调用接口后，需要等待镜像状态变为 ready 后，才能正常使用镜像。
+ */
+func (c *VmClient) CreateImageFromSnapshots(request *vm.CreateImageFromSnapshotsRequest) (*vm.CreateImageFromSnapshotsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.CreateImageFromSnapshotsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
