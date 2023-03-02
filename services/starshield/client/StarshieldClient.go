@@ -40,7 +40,7 @@ func NewStarshieldClient(credential *core.Credential) *StarshieldClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "starshield",
-            Revision:    "0.0.5",
+            Revision:    "0.0.8",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -3230,6 +3230,26 @@ func (c *StarshieldClient) DateHistogram(request *starshield.DateHistogramReques
     }
 
     jdResp := &starshield.DateHistogramResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 关闭BOT */
+func (c *StarshieldClient) CloseFirewallBot(request *starshield.CloseFirewallBotRequest) (*starshield.CloseFirewallBotResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &starshield.CloseFirewallBotResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

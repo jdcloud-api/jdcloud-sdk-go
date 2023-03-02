@@ -50,6 +50,9 @@ type DnsRecord struct {
     Content string `json:"content"`
 
     /* 记录类型 (Optional) */
+    Type string `json:"type"`
+
+    /* 记录类型(值同type) (Optional) */
     Ty_pe string `json:"ty_pe"`
 
     /* DNS记录标识符标签 (Optional) */

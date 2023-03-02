@@ -182,5 +182,5 @@ type InstanceBandwidthListResponse struct {
 
 type InstanceBandwidthListResult struct {
     Total int `json:"total"`
-    DataList []starshield.CdnZoneBandwidth `json:"dataList"`
+    CdnZoneBandwidths []starshield.CdnZoneBandwidth `json:"cdnZoneBandwidths"`
 }

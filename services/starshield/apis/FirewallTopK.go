@@ -149,5 +149,19 @@ type FirewallTopKResponse struct {
 }
 
 type FirewallTopKResult struct {
-    TopkAnalytics starshield.TopkAnalytics `json:"topkAnalytics"`
+    Countries []starshield.Item `json:"countries"`
+    TopCountries []starshield.Item `json:"topCountries"`
+    TopDeviceTypes []starshield.Item `json:"topDeviceTypes"`
+    TopHosts []starshield.Item `json:"topHosts"`
+    TopPaths []starshield.Item `json:"topPaths"`
+    TopContentTypes []starshield.Item `json:"topContentTypes"`
+    TopStatusCodes []starshield.Item `json:"topStatusCodes"`
+    TopIPs []starshield.Item `json:"topIPs"`
+    TopUserAgents []starshield.Item `json:"topUserAgents"`
+    TopHttpMethods []starshield.Item `json:"topHttpMethods"`
+    TopASNs []starshield.Item `json:"topASNs"`
+    TopFirewallRuleIds []starshield.Item `json:"topFirewallRuleIds"`
+    TopFirewallRules []starshield.Item `json:"topFirewallRules"`
+    TopWafRuleIds []starshield.Item `json:"topWafRuleIds"`
+    TopWafRules []starshield.Item `json:"topWafRules"`
 }

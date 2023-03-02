@@ -18,7 +18,6 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    starshield "github.com/jdcloud-api/jdcloud-sdk-go/services/starshield/models"
 )
 
 type InstanceBandwidthP95Request struct {
@@ -158,5 +157,5 @@ type InstanceBandwidthP95Response struct {
 }
 
 type InstanceBandwidthP95Result struct {
-    Data starshield.CdnSingleMetric `json:"data"`
+    Value int `json:"value"`
 }
