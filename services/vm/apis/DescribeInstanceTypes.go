@@ -32,6 +32,9 @@ type DescribeInstanceTypesRequest struct {
     /* 产品线类型，默认为 `vm`。支持范围：`vm` 云主机，`nc` 原生容器。 (Optional) */
     ServiceName *string `json:"serviceName"`
 
+    /* 目前支持postpaid_by_spot：抢占式实例(后付费)。 (Optional) */
+    ChargeMode *string `json:"chargeMode"`
+
     /* <b>filters 中支持使用以下关键字进行过滤</b>
 `instanceTypes`: 实例规格，精确匹配，支持多个
 `az`: 可用区，精确匹配，支持多个
@@ -63,6 +66,7 @@ func NewDescribeInstanceTypesRequest(
 /*
  * param regionId: 地域ID。 (Required)
  * param serviceName: 产品线类型，默认为 `vm`。支持范围：`vm` 云主机，`nc` 原生容器。 (Optional)
+ * param chargeMode: 目前支持postpaid_by_spot：抢占式实例(后付费)。 (Optional)
  * param filters: <b>filters 中支持使用以下关键字进行过滤</b>
 `instanceTypes`: 实例规格，精确匹配，支持多个
 `az`: 可用区，精确匹配，支持多个
@@ -72,6 +76,7 @@ func NewDescribeInstanceTypesRequest(
 func NewDescribeInstanceTypesRequestWithAllParams(
     regionId string,
     serviceName *string,
+    chargeMode *string,
     filters []common.Filter,
 ) *DescribeInstanceTypesRequest {
 
@@ -84,6 +89,7 @@ func NewDescribeInstanceTypesRequestWithAllParams(
         },
         RegionId: regionId,
         ServiceName: serviceName,
+        ChargeMode: chargeMode,
         Filters: filters,
     }
 }
@@ -108,6 +114,10 @@ func (r *DescribeInstanceTypesRequest) SetRegionId(regionId string) {
 /* param serviceName: 产品线类型，默认为 `vm`。支持范围：`vm` 云主机，`nc` 原生容器。(Optional) */
 func (r *DescribeInstanceTypesRequest) SetServiceName(serviceName string) {
     r.ServiceName = &serviceName
+}
+/* param chargeMode: 目前支持postpaid_by_spot：抢占式实例(后付费)。(Optional) */
+func (r *DescribeInstanceTypesRequest) SetChargeMode(chargeMode string) {
+    r.ChargeMode = &chargeMode
 }
 /* param filters: <b>filters 中支持使用以下关键字进行过滤</b>
 `instanceTypes`: 实例规格，精确匹配，支持多个

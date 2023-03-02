@@ -81,6 +81,9 @@ type Instance struct {
     /* 云主机的计费信息。 (Optional) */
     Charge charge.Charge `json:"charge"`
 
+    /* 抢占实例状态机 (Optional) */
+    SpotStatus string `json:"spotStatus"`
+
     /* 云主机关联的高可用组，如果创建云主机使用了高可用组，此处可展示高可用组名称。 (Optional) */
     Ag Ag `json:"ag"`
 
@@ -116,4 +119,13 @@ type Instance struct {
 
     /* 虚机CPU拓扑 (Optional) */
     CpuTopology CpuTopology `json:"cpuTopology"`
+
+    /* 云主机操作系统版本，如7.6 (Optional) */
+    OsVersion string `json:"osVersion"`
+
+    /* 具体操作系统CentOS (Optional) */
+    Platform string `json:"platform"`
+
+    /* 架构信息，如x86_64 (Optional) */
+    Architecture string `json:"architecture"`
 }

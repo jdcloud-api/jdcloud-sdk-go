@@ -49,8 +49,11 @@ type TaskInfo struct {
     /* 导出镜像时有效，表示目标OSS存储地址。 (Optional) */
     OssUrl string `json:"ossUrl"`
 
-    /* 导出镜像时有效，表示生成的ossObject名称。 (Optional) */
+    /* 导出镜像时有效，表示生成的系统盘对应的ossObject名称。 (Optional) */
     OssObject string `json:"ossObject"`
+
+    /* 导出镜像时有效，表示生成的系统盘和数据盘对应的ossObject名称列表。 (Optional) */
+    OssObjects []string `json:"ossObjects"`
 
     /* 导入镜像时有效，表示用户指定的镜像名称。 (Optional) */
     ImageName string `json:"imageName"`

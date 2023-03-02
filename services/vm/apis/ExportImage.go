@@ -41,6 +41,9 @@ type ExportImageRequest struct {
 
     /* 用户导出镜像的幂等性保证。每次导出请传入不同的值，如果传值与某次的clientToken相同，则返还同一个请求结果，不能超过64个字符。 (Optional) */
     ClientToken *string `json:"clientToken"`
+
+    /* 是否导出整机镜像（包含数据盘），默认为false，仅导出系统盘。 (Optional) */
+    IsAllDisk *bool `json:"isAllDisk"`
 }
 
 /*
@@ -79,6 +82,7 @@ func NewExportImageRequest(
  * param ossUrl: 存储导出镜像文件的 `oss bucket` 的域名，请填写以 https:// 开头的完整url。 (Required)
  * param ossPrefix: 导出镜像文件名前缀，仅支持英文字母和数字，不能超过32个字符。 (Optional)
  * param clientToken: 用户导出镜像的幂等性保证。每次导出请传入不同的值，如果传值与某次的clientToken相同，则返还同一个请求结果，不能超过64个字符。 (Optional)
+ * param isAllDisk: 是否导出整机镜像（包含数据盘），默认为false，仅导出系统盘。 (Optional)
  */
 func NewExportImageRequestWithAllParams(
     regionId string,
@@ -87,6 +91,7 @@ func NewExportImageRequestWithAllParams(
     ossUrl string,
     ossPrefix *string,
     clientToken *string,
+    isAllDisk *bool,
 ) *ExportImageRequest {
 
     return &ExportImageRequest{
@@ -102,6 +107,7 @@ func NewExportImageRequestWithAllParams(
         OssUrl: ossUrl,
         OssPrefix: ossPrefix,
         ClientToken: clientToken,
+        IsAllDisk: isAllDisk,
     }
 }
 
@@ -141,6 +147,10 @@ func (r *ExportImageRequest) SetOssPrefix(ossPrefix string) {
 /* param clientToken: 用户导出镜像的幂等性保证。每次导出请传入不同的值，如果传值与某次的clientToken相同，则返还同一个请求结果，不能超过64个字符。(Optional) */
 func (r *ExportImageRequest) SetClientToken(clientToken string) {
     r.ClientToken = &clientToken
+}
+/* param isAllDisk: 是否导出整机镜像（包含数据盘），默认为false，仅导出系统盘。(Optional) */
+func (r *ExportImageRequest) SetIsAllDisk(isAllDisk bool) {
+    r.IsAllDisk = &isAllDisk
 }
 
 
