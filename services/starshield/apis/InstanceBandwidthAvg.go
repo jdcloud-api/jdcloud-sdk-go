@@ -18,7 +18,6 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    starshield "github.com/jdcloud-api/jdcloud-sdk-go/services/starshield/models"
 )
 
 type InstanceBandwidthAvgRequest struct {
@@ -158,5 +157,5 @@ type InstanceBandwidthAvgResponse struct {
 }
 
 type InstanceBandwidthAvgResult struct {
-    Data starshield.CdnSingleMetric `json:"data"`
+    Value int `json:"value"`
 }

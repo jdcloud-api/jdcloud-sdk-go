@@ -18,7 +18,6 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    starshield "github.com/jdcloud-api/jdcloud-sdk-go/services/starshield/models"
 )
 
 type InstanceTrafficSumRequest struct {
@@ -158,5 +157,5 @@ type InstanceTrafficSumResponse struct {
 }
 
 type InstanceTrafficSumResult struct {
-    Data starshield.CdnSingleMetric `json:"data"`
+    Value int `json:"value"`
 }

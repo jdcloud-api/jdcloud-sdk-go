@@ -18,7 +18,6 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    starshield "github.com/jdcloud-api/jdcloud-sdk-go/services/starshield/models"
 )
 
 type ZoneBandwidthMaxRequest struct {
@@ -171,5 +170,6 @@ type ZoneBandwidthMaxResponse struct {
 }
 
 type ZoneBandwidthMaxResult struct {
-    Data starshield.CdnBandwidthMax `json:"data"`
+    Value float64 `json:"value"`
+    Timestamp int `json:"timestamp"`
 }

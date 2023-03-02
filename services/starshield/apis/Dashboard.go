@@ -158,5 +158,6 @@ type DashboardResponse struct {
 }
 
 type DashboardResult struct {
-    ZoneAnalytics starshield.ZoneAnalytics `json:"zoneAnalytics"`
+    Totals starshield.Totals `json:"totals"`
+    Timeseries []starshield.Totals `json:"timeseries"`
 }

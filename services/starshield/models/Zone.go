@@ -79,4 +79,7 @@ type Zone struct {
 
     /* cname解析状态。0为解析到云端VIP，1为解析到回源地址 (Optional) */
     EnableCname2Rs int `json:"enableCname2Rs"`
+
+    /* CNAME后缀 (Optional) */
+    Cname_suffix string `json:"cname_suffix"`
 }
