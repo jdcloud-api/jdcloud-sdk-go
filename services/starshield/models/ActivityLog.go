@@ -51,4 +51,10 @@ type ActivityLog struct {
 
     /*  (Optional) */
     RuleId string `json:"ruleId"`
+
+    /*  (Optional) */
+    Group string `json:"group"`
+
+    /*  (Optional) */
+    RuleMessage string `json:"ruleMessage"`
 }

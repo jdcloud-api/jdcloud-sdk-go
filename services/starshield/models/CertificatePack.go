@@ -27,6 +27,14 @@ universal    通用
 sni_custom   自定义
 advanced     专用
  (Optional) */
+    Type string `json:"type"`
+
+    /* 证书包的类型，有效值universal/sni_custom/advanced
+universal    通用
+sni_custom   自定义
+advanced     专用
+(值同type)
+ (Optional) */
     Ty_pe string `json:"ty_pe"`
 
     /* 证书包的有效主机名的逗号分隔列表。必须包含域的顶级域名，不能包含超过50个主机，并且不能为空。 (Optional) */

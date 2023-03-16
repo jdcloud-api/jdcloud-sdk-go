@@ -40,7 +40,7 @@ func NewStarshieldClient(credential *core.Credential) *StarshieldClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "starshield",
-            Revision:    "0.0.8",
+            Revision:    "0.0.9",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
