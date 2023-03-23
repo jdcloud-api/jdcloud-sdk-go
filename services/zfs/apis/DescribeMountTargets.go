@@ -39,7 +39,6 @@ type DescribeMountTargetsRequest struct {
 mountTargetId - 挂载目标ID，精确匹配，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
-
 }
 
 /*
@@ -108,17 +107,14 @@ func NewDescribeMountTargetsRequestWithoutParam() *DescribeMountTargetsRequest {
 func (r *DescribeMountTargetsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param pageNumber: 页码, 默认为1, 取值范围：[1,∞)(Optional) */
 func (r *DescribeMountTargetsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小，默认为20，取值范围：[10,100](Optional) */
 func (r *DescribeMountTargetsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param filters: fileSystemId - 文件系统ID，精确匹配，支持多个
 mountTargetId - 挂载目标ID，精确匹配，支持多个
 (Optional) */

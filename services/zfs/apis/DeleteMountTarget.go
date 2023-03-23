@@ -29,7 +29,6 @@ type DeleteMountTargetRequest struct {
 
     /* 挂载目标ID  */
     MountTargetId string `json:"mountTargetId"`
-
 }
 
 /*
@@ -93,7 +92,6 @@ func NewDeleteMountTargetRequestWithoutParam() *DeleteMountTargetRequest {
 func (r *DeleteMountTargetRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param mountTargetId: 挂载目标ID(Required) */
 func (r *DeleteMountTargetRequest) SetMountTargetId(mountTargetId string) {
     r.MountTargetId = mountTargetId

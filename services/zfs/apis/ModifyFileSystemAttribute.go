@@ -35,7 +35,6 @@ type ModifyFileSystemAttributeRequest struct {
 
     /* 文件系统描述(参数规则：不能超过256字符) (Optional) */
     Description *string `json:"description"`
-
 }
 
 /*
@@ -105,17 +104,14 @@ func NewModifyFileSystemAttributeRequestWithoutParam() *ModifyFileSystemAttribut
 func (r *ModifyFileSystemAttributeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param fileSystemId: 文件系统ID(Required) */
 func (r *ModifyFileSystemAttributeRequest) SetFileSystemId(fileSystemId string) {
     r.FileSystemId = fileSystemId
 }
-
 /* param name: 文件系统名称(参数规则：不可为空，只支持中文、数字、大小写字母、英文下划线“_”及中划线“-”，且不能超过32字符)(Optional) */
 func (r *ModifyFileSystemAttributeRequest) SetName(name string) {
     r.Name = &name
 }
-
 /* param description: 文件系统描述(参数规则：不能超过256字符)(Optional) */
 func (r *ModifyFileSystemAttributeRequest) SetDescription(description string) {
     r.Description = &description

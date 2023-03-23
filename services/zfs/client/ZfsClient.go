@@ -40,7 +40,7 @@ func NewZfsClient(credential *core.Credential) *ZfsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "zfs",
-            Revision:    "1.0.8",
+            Revision:    "1.0.9",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -70,6 +70,26 @@ func (c *ZfsClient) CreateMountTarget(request *zfs.CreateMountTargetRequest) (*z
     }
 
     jdResp := &zfs.CreateMountTargetResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询挂载客户端IP */
+func (c *ZfsClient) DescribeMountedClients(request *zfs.DescribeMountedClientsRequest) (*zfs.DescribeMountedClientsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &zfs.DescribeMountedClientsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

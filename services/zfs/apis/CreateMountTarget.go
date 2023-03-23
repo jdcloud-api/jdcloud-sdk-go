@@ -41,7 +41,6 @@ type CreateMountTargetRequest struct {
 
     /* 幂等性参数(只支持数字、大小写字母，且不能超过64字符)  */
     ClientToken string `json:"clientToken"`
-
 }
 
 /*
@@ -126,27 +125,22 @@ func NewCreateMountTargetRequestWithoutParam() *CreateMountTargetRequest {
 func (r *CreateMountTargetRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param fileSystemId: 创建挂载目标的文件系统(Required) */
 func (r *CreateMountTargetRequest) SetFileSystemId(fileSystemId string) {
     r.FileSystemId = fileSystemId
 }
-
 /* param subnetId: 子网id(Required) */
 func (r *CreateMountTargetRequest) SetSubnetId(subnetId string) {
     r.SubnetId = subnetId
 }
-
 /* param vpcId: vpcId(Required) */
 func (r *CreateMountTargetRequest) SetVpcId(vpcId string) {
     r.VpcId = vpcId
 }
-
 /* param securityGroupId: 安全组id(Optional) */
 func (r *CreateMountTargetRequest) SetSecurityGroupId(securityGroupId string) {
     r.SecurityGroupId = &securityGroupId
 }
-
 /* param clientToken: 幂等性参数(只支持数字、大小写字母，且不能超过64字符)(Required) */
 func (r *CreateMountTargetRequest) SetClientToken(clientToken string) {
     r.ClientToken = clientToken
