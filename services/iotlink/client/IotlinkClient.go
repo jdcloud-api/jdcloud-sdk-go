@@ -40,7 +40,7 @@ func NewIotlinkClient(credential *core.Credential) *IotlinkClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "iotlink",
-            Revision:    "1.0.7",
+            Revision:    "1.0.8",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -55,46 +55,6 @@ func (c *IotlinkClient) SetLogger(logger core.Logger) {
 
 func (c *IotlinkClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
-}
-
-/* 根据物联网卡iccid查询该卡的开关机状态信息 */
-func (c *IotlinkClient) OnOffStatus(request *iotlink.OnOffStatusRequest) (*iotlink.OnOffStatusResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &iotlink.OnOffStatusResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 根据物联网卡imsi查询该卡的生命周期信息 */
-func (c *IotlinkClient) LifeStatusByIMSI(request *iotlink.LifeStatusByIMSIRequest) (*iotlink.LifeStatusByIMSIResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &iotlink.LifeStatusByIMSIResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
 }
 
 /* 物联网卡停机操作 */
@@ -137,46 +97,6 @@ func (c *IotlinkClient) Operate(request *iotlink.OperateRequest) (*iotlink.Opera
     return jdResp, err
 }
 
-/* 根据物联网卡iccid查询该卡的生命周期信息 */
-func (c *IotlinkClient) LifeStatus(request *iotlink.LifeStatusRequest) (*iotlink.LifeStatusResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &iotlink.LifeStatusResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 物联网卡停流量操作 */
-func (c *IotlinkClient) CloseIotFlow(request *iotlink.CloseIotFlowRequest) (*iotlink.CloseIotFlowResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &iotlink.CloseIotFlowResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 根据物联网卡iccid查询该卡的gprs状态信息 */
 func (c *IotlinkClient) GprsStatus(request *iotlink.GprsStatusRequest) (*iotlink.GprsStatusResponse, error) {
     if request == nil {
@@ -188,26 +108,6 @@ func (c *IotlinkClient) GprsStatus(request *iotlink.GprsStatusRequest) (*iotlink
     }
 
     jdResp := &iotlink.GprsStatusResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 根据物联网卡IMSI查询该卡的GPRS状态信息 */
-func (c *IotlinkClient) GprsStatusByIMSI(request *iotlink.GprsStatusByIMSIRequest) (*iotlink.GprsStatusByIMSIResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &iotlink.GprsStatusByIMSIResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -257,26 +157,6 @@ func (c *IotlinkClient) OpenIotFlow(request *iotlink.OpenIotFlowRequest) (*iotli
     return jdResp, err
 }
 
-/* 根据物联网卡imsi查询该卡的开关机状态信息 */
-func (c *IotlinkClient) OnOffStatusByIMSI(request *iotlink.OnOffStatusByIMSIRequest) (*iotlink.OnOffStatusByIMSIResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &iotlink.OnOffStatusByIMSIResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 根据物联网卡iccid查询该卡的当月套餐内的GPRS实时使用量 */
 func (c *IotlinkClient) GprsRealtimeInfo(request *iotlink.GprsRealtimeInfoRequest) (*iotlink.GprsRealtimeInfoResponse, error) {
     if request == nil {
@@ -288,26 +168,6 @@ func (c *IotlinkClient) GprsRealtimeInfo(request *iotlink.GprsRealtimeInfoReques
     }
 
     jdResp := &iotlink.GprsRealtimeInfoResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 物联网卡日历史流量查询接口 */
-func (c *IotlinkClient) QueryDayHistoryTraffic(request *iotlink.QueryDayHistoryTrafficRequest) (*iotlink.QueryDayHistoryTrafficResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &iotlink.QueryDayHistoryTrafficResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -348,6 +208,206 @@ func (c *IotlinkClient) OpenIotCard(request *iotlink.OpenIotCardRequest) (*iotli
     }
 
     jdResp := &iotlink.OpenIotCardResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 物联网卡实名制信息清除 */
+func (c *IotlinkClient) OrdinaryRealNameClear(request *iotlink.OrdinaryRealNameClearRequest) (*iotlink.OrdinaryRealNameClearResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotlink.OrdinaryRealNameClearResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据物联网卡iccid查询该卡的基本信息 */
+func (c *IotlinkClient) CardInfo(request *iotlink.CardInfoRequest) (*iotlink.CardInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotlink.CardInfoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据物联网卡iccid查询该卡的开关机状态信息 */
+func (c *IotlinkClient) OnOffStatus(request *iotlink.OnOffStatusRequest) (*iotlink.OnOffStatusResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotlink.OnOffStatusResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据物联网卡imsi查询该卡的生命周期信息 */
+func (c *IotlinkClient) LifeStatusByIMSI(request *iotlink.LifeStatusByIMSIRequest) (*iotlink.LifeStatusByIMSIResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotlink.LifeStatusByIMSIResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据物联网卡iccid查询该卡的生命周期信息 */
+func (c *IotlinkClient) LifeStatus(request *iotlink.LifeStatusRequest) (*iotlink.LifeStatusResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotlink.LifeStatusResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 物联网卡停流量操作 */
+func (c *IotlinkClient) CloseIotFlow(request *iotlink.CloseIotFlowRequest) (*iotlink.CloseIotFlowResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotlink.CloseIotFlowResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据物联网卡IMSI查询该卡的GPRS状态信息 */
+func (c *IotlinkClient) GprsStatusByIMSI(request *iotlink.GprsStatusByIMSIRequest) (*iotlink.GprsStatusByIMSIResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotlink.GprsStatusByIMSIResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据物联网卡imsi查询该卡的开关机状态信息 */
+func (c *IotlinkClient) OnOffStatusByIMSI(request *iotlink.OnOffStatusByIMSIRequest) (*iotlink.OnOffStatusByIMSIResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotlink.OnOffStatusByIMSIResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 在线状态和会话信息查询 */
+func (c *IotlinkClient) GetOnlineStatus(request *iotlink.GetOnlineStatusRequest) (*iotlink.GetOnlineStatusResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotlink.GetOnlineStatusResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 物联网卡日历史流量查询接口 */
+func (c *IotlinkClient) QueryDayHistoryTraffic(request *iotlink.QueryDayHistoryTrafficRequest) (*iotlink.QueryDayHistoryTrafficResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iotlink.QueryDayHistoryTrafficResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -457,8 +517,8 @@ func (c *IotlinkClient) QueryTrafficByDate(request *iotlink.QueryTrafficByDateRe
     return jdResp, err
 }
 
-/* 根据物联网卡iccid查询该卡的基本信息 */
-func (c *IotlinkClient) CardInfo(request *iotlink.CardInfoRequest) (*iotlink.CardInfoResponse, error) {
+/* 机卡分离状态查询 */
+func (c *IotlinkClient) CardBindStatus(request *iotlink.CardBindStatusRequest) (*iotlink.CardBindStatusResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -467,7 +527,7 @@ func (c *IotlinkClient) CardInfo(request *iotlink.CardInfoRequest) (*iotlink.Car
         return nil, err
     }
 
-    jdResp := &iotlink.CardInfoResponse{}
+    jdResp := &iotlink.CardBindStatusResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
