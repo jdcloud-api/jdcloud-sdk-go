@@ -30,7 +30,6 @@ type DescribeMountTargetRequest struct {
 
     /* 挂载目标ID  */
     MountTargetId string `json:"mountTargetId"`
-
 }
 
 /*
@@ -94,7 +93,6 @@ func NewDescribeMountTargetRequestWithoutParam() *DescribeMountTargetRequest {
 func (r *DescribeMountTargetRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param mountTargetId: 挂载目标ID(Required) */
 func (r *DescribeMountTargetRequest) SetMountTargetId(mountTargetId string) {
     r.MountTargetId = mountTargetId
