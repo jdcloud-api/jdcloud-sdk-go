@@ -25,23 +25,17 @@ type GetMultiEvidenceRequest struct {
 
     core.JDCloudRequest
 
-    /* 业务流水号  */
-    BusinessId string `json:"businessId"`
+    /* 业务流水号 (Optional) */
+    BusinessId *string `json:"businessId"`
 
-    /* 存证编号  */
-    EvidenceId string `json:"evidenceId"`
+    /* 存证编号 (Optional) */
+    EvidenceId *string `json:"evidenceId"`
 
-    /* 申请取证主体的ID类型  */
-    ApplicantIdType string `json:"applicantIdType"`
+    /* 申请取证主体的ID类型 (Optional) */
+    ApplicantIdType *string `json:"applicantIdType"`
 
-    /* 申请取证主体的ID  */
-    ApplicantIdNum string `json:"applicantIdNum"`
-
-    /* 证据链代码 (Optional) */
-    BusinessCode *string `json:"businessCode"`
-
-    /* 业务token (Optional) */
-    Token *string `json:"token"`
+    /* 申请取证主体的ID (Optional) */
+    ApplicantIdNum *string `json:"applicantIdNum"`
 
     /* 请求流水号 (Optional) */
     MessageId *string `json:"messageId"`
@@ -57,18 +51,10 @@ type GetMultiEvidenceRequest struct {
 }
 
 /*
- * param businessId: 业务流水号 (Required)
- * param evidenceId: 存证编号 (Required)
- * param applicantIdType: 申请取证主体的ID类型 (Required)
- * param applicantIdNum: 申请取证主体的ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewGetMultiEvidenceRequest(
-    businessId string,
-    evidenceId string,
-    applicantIdType string,
-    applicantIdNum string,
 ) *GetMultiEvidenceRequest {
 
 	return &GetMultiEvidenceRequest{
@@ -78,32 +64,24 @@ func NewGetMultiEvidenceRequest(
 			Header:  nil,
 			Version: "v1",
 		},
-        BusinessId: businessId,
-        EvidenceId: evidenceId,
-        ApplicantIdType: applicantIdType,
-        ApplicantIdNum: applicantIdNum,
 	}
 }
 
 /*
- * param businessId: 业务流水号 (Required)
- * param evidenceId: 存证编号 (Required)
- * param applicantIdType: 申请取证主体的ID类型 (Required)
- * param applicantIdNum: 申请取证主体的ID (Required)
- * param businessCode: 证据链代码 (Optional)
- * param token: 业务token (Optional)
+ * param businessId: 业务流水号 (Optional)
+ * param evidenceId: 存证编号 (Optional)
+ * param applicantIdType: 申请取证主体的ID类型 (Optional)
+ * param applicantIdNum: 申请取证主体的ID (Optional)
  * param messageId: 请求流水号 (Optional)
  * param evidenceType: 业务类型 (Optional)
  * param messageDate: 请求时间 (Optional)
  * param evidenceMessageId: 存证时的请求流水 (Optional)
  */
 func NewGetMultiEvidenceRequestWithAllParams(
-    businessId string,
-    evidenceId string,
-    applicantIdType string,
-    applicantIdNum string,
-    businessCode *string,
-    token *string,
+    businessId *string,
+    evidenceId *string,
+    applicantIdType *string,
+    applicantIdNum *string,
     messageId *string,
     evidenceType *string,
     messageDate *string,
@@ -121,8 +99,6 @@ func NewGetMultiEvidenceRequestWithAllParams(
         EvidenceId: evidenceId,
         ApplicantIdType: applicantIdType,
         ApplicantIdNum: applicantIdNum,
-        BusinessCode: businessCode,
-        Token: token,
         MessageId: messageId,
         EvidenceType: evidenceType,
         MessageDate: messageDate,
@@ -143,29 +119,21 @@ func NewGetMultiEvidenceRequestWithoutParam() *GetMultiEvidenceRequest {
     }
 }
 
-/* param businessId: 业务流水号(Required) */
+/* param businessId: 业务流水号(Optional) */
 func (r *GetMultiEvidenceRequest) SetBusinessId(businessId string) {
-    r.BusinessId = businessId
+    r.BusinessId = &businessId
 }
-/* param evidenceId: 存证编号(Required) */
+/* param evidenceId: 存证编号(Optional) */
 func (r *GetMultiEvidenceRequest) SetEvidenceId(evidenceId string) {
-    r.EvidenceId = evidenceId
+    r.EvidenceId = &evidenceId
 }
-/* param applicantIdType: 申请取证主体的ID类型(Required) */
+/* param applicantIdType: 申请取证主体的ID类型(Optional) */
 func (r *GetMultiEvidenceRequest) SetApplicantIdType(applicantIdType string) {
-    r.ApplicantIdType = applicantIdType
+    r.ApplicantIdType = &applicantIdType
 }
-/* param applicantIdNum: 申请取证主体的ID(Required) */
+/* param applicantIdNum: 申请取证主体的ID(Optional) */
 func (r *GetMultiEvidenceRequest) SetApplicantIdNum(applicantIdNum string) {
-    r.ApplicantIdNum = applicantIdNum
-}
-/* param businessCode: 证据链代码(Optional) */
-func (r *GetMultiEvidenceRequest) SetBusinessCode(businessCode string) {
-    r.BusinessCode = &businessCode
-}
-/* param token: 业务token(Optional) */
-func (r *GetMultiEvidenceRequest) SetToken(token string) {
-    r.Token = &token
+    r.ApplicantIdNum = &applicantIdNum
 }
 /* param messageId: 请求流水号(Optional) */
 func (r *GetMultiEvidenceRequest) SetMessageId(messageId string) {

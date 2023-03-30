@@ -31,11 +31,8 @@ type SaveMultiEvidenceRequest struct {
     /* 存证数据json字符串的Base64  */
     File string `json:"file"`
 
-    /* 证据链代码  */
-    BusinessCode string `json:"businessCode"`
-
-    /* 业务token (Optional) */
-    Token *string `json:"token"`
+    /* 证据链代码 (Optional) */
+    BusinessCode *string `json:"businessCode"`
 
     /* 资方信息（借钱传：ZY；票据传 PJ_SHOUXIN--授信,PJ_JIEKUAN--借款） (Optional) */
     Lender *string `json:"lender"`
@@ -53,14 +50,12 @@ type SaveMultiEvidenceRequest struct {
 /*
  * param businessId: 业务流水号 (Required)
  * param file: 存证数据json字符串的Base64 (Required)
- * param businessCode: 证据链代码 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewSaveMultiEvidenceRequest(
     businessId string,
     file string,
-    businessCode string,
 ) *SaveMultiEvidenceRequest {
 
 	return &SaveMultiEvidenceRequest{
@@ -72,15 +67,13 @@ func NewSaveMultiEvidenceRequest(
 		},
         BusinessId: businessId,
         File: file,
-        BusinessCode: businessCode,
 	}
 }
 
 /*
  * param businessId: 业务流水号 (Required)
  * param file: 存证数据json字符串的Base64 (Required)
- * param businessCode: 证据链代码 (Required)
- * param token: 业务token (Optional)
+ * param businessCode: 证据链代码 (Optional)
  * param lender: 资方信息（借钱传：ZY；票据传 PJ_SHOUXIN--授信,PJ_JIEKUAN--借款） (Optional)
  * param messageId: 请求流水号 (Optional)
  * param evidenceType: 业务类型（JIEQIAN–借钱；PIAOJU--票据） (Optional)
@@ -89,8 +82,7 @@ func NewSaveMultiEvidenceRequest(
 func NewSaveMultiEvidenceRequestWithAllParams(
     businessId string,
     file string,
-    businessCode string,
-    token *string,
+    businessCode *string,
     lender *string,
     messageId *string,
     evidenceType *string,
@@ -107,7 +99,6 @@ func NewSaveMultiEvidenceRequestWithAllParams(
         BusinessId: businessId,
         File: file,
         BusinessCode: businessCode,
-        Token: token,
         Lender: lender,
         MessageId: messageId,
         EvidenceType: evidenceType,
@@ -136,13 +127,9 @@ func (r *SaveMultiEvidenceRequest) SetBusinessId(businessId string) {
 func (r *SaveMultiEvidenceRequest) SetFile(file string) {
     r.File = file
 }
-/* param businessCode: 证据链代码(Required) */
+/* param businessCode: 证据链代码(Optional) */
 func (r *SaveMultiEvidenceRequest) SetBusinessCode(businessCode string) {
-    r.BusinessCode = businessCode
-}
-/* param token: 业务token(Optional) */
-func (r *SaveMultiEvidenceRequest) SetToken(token string) {
-    r.Token = &token
+    r.BusinessCode = &businessCode
 }
 /* param lender: 资方信息（借钱传：ZY；票据传 PJ_SHOUXIN--授信,PJ_JIEKUAN--借款）(Optional) */
 func (r *SaveMultiEvidenceRequest) SetLender(lender string) {
