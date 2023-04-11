@@ -42,6 +42,9 @@ type GetDomainListRequest struct {
 
     /* 加速区域，(mainLand:中国大陆，nonMainLand:海外加港澳台，all:全球),不传为全球 (Optional) */
     AccelerateRegion *string `json:"accelerateRegion"`
+
+    /* 筛选依据（false不需要查询, true 需要查询海外状态)默认false (Optional) */
+    WithThirdPartyStatus *bool `json:"withThirdPartyStatus"`
 }
 
 /*
@@ -68,6 +71,7 @@ func NewGetDomainListRequest(
  * param status: 根据域名状态查询, 可选值[offline, online, configuring, auditing, audit_reject] (Optional)
  * param type_: 域名类型，(web:静态小文件，download:大文件加速，vod:视频加速，live:直播加速),不传查所有 (Optional)
  * param accelerateRegion: 加速区域，(mainLand:中国大陆，nonMainLand:海外加港澳台，all:全球),不传为全球 (Optional)
+ * param withThirdPartyStatus: 筛选依据（false不需要查询, true 需要查询海外状态)默认false (Optional)
  */
 func NewGetDomainListRequestWithAllParams(
     keyWord *string,
@@ -76,6 +80,7 @@ func NewGetDomainListRequestWithAllParams(
     status *string,
     type_ *string,
     accelerateRegion *string,
+    withThirdPartyStatus *bool,
 ) *GetDomainListRequest {
 
     return &GetDomainListRequest{
@@ -91,6 +96,7 @@ func NewGetDomainListRequestWithAllParams(
         Status: status,
         Type: type_,
         AccelerateRegion: accelerateRegion,
+        WithThirdPartyStatus: withThirdPartyStatus,
     }
 }
 
@@ -130,6 +136,10 @@ func (r *GetDomainListRequest) SetType(type_ string) {
 /* param accelerateRegion: 加速区域，(mainLand:中国大陆，nonMainLand:海外加港澳台，all:全球),不传为全球(Optional) */
 func (r *GetDomainListRequest) SetAccelerateRegion(accelerateRegion string) {
     r.AccelerateRegion = &accelerateRegion
+}
+/* param withThirdPartyStatus: 筛选依据（false不需要查询, true 需要查询海外状态)默认false(Optional) */
+func (r *GetDomainListRequest) SetWithThirdPartyStatus(withThirdPartyStatus bool) {
+    r.WithThirdPartyStatus = &withThirdPartyStatus
 }
 
 
