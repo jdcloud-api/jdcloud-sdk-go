@@ -40,7 +40,7 @@ func NewCdnClient(credential *core.Credential) *CdnClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "cdn",
-            Revision:    "0.10.42",
+            Revision:    "0.10.45",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -2437,6 +2437,26 @@ func (c *CdnClient) DisableWafBlackRules(request *cdn.DisableWafBlackRulesReques
     return jdResp, err
 }
 
+/* 域名txt记录生成 */
+func (c *CdnClient) DomainTxtGenerate(request *cdn.DomainTxtGenerateRequest) (*cdn.DomainTxtGenerateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.DomainTxtGenerateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询web防护开关 */
 func (c *CdnClient) QueryWebProtectSettings(request *cdn.QueryWebProtectSettingsRequest) (*cdn.QueryWebProtectSettingsResponse, error) {
     if request == nil {
@@ -2768,6 +2788,26 @@ func (c *CdnClient) ConfigBackSourceRules(request *cdn.ConfigBackSourceRulesRequ
     }
 
     jdResp := &cdn.ConfigBackSourceRulesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 域名txt校验 */
+func (c *CdnClient) DomainTxtValidate(request *cdn.DomainTxtValidateRequest) (*cdn.DomainTxtValidateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.DomainTxtValidateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
