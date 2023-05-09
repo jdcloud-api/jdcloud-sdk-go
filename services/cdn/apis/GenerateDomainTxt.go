@@ -20,7 +20,7 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type DomainTxtGenerateRequest struct {
+type GenerateDomainTxtRequest struct {
 
     core.JDCloudRequest
 
@@ -32,12 +32,12 @@ type DomainTxtGenerateRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDomainTxtGenerateRequest(
-) *DomainTxtGenerateRequest {
+func NewGenerateDomainTxtRequest(
+) *GenerateDomainTxtRequest {
 
-	return &DomainTxtGenerateRequest{
+	return &GenerateDomainTxtRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/domainTxtGenerate",
+			URL:     "/generateDomainTxt",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -48,13 +48,13 @@ func NewDomainTxtGenerateRequest(
 /*
  * param domain: 域名 (Optional)
  */
-func NewDomainTxtGenerateRequestWithAllParams(
+func NewGenerateDomainTxtRequestWithAllParams(
     domain *string,
-) *DomainTxtGenerateRequest {
+) *GenerateDomainTxtRequest {
 
-    return &DomainTxtGenerateRequest{
+    return &GenerateDomainTxtRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/domainTxtGenerate",
+            URL:     "/generateDomainTxt",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -64,11 +64,11 @@ func NewDomainTxtGenerateRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDomainTxtGenerateRequestWithoutParam() *DomainTxtGenerateRequest {
+func NewGenerateDomainTxtRequestWithoutParam() *GenerateDomainTxtRequest {
 
-    return &DomainTxtGenerateRequest{
+    return &GenerateDomainTxtRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/domainTxtGenerate",
+            URL:     "/generateDomainTxt",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -77,22 +77,23 @@ func NewDomainTxtGenerateRequestWithoutParam() *DomainTxtGenerateRequest {
 }
 
 /* param domain: 域名(Optional) */
-func (r *DomainTxtGenerateRequest) SetDomain(domain string) {
+func (r *GenerateDomainTxtRequest) SetDomain(domain string) {
     r.Domain = &domain
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DomainTxtGenerateRequest) GetRegionId() string {
+func (r GenerateDomainTxtRequest) GetRegionId() string {
     return ""
 }
 
-type DomainTxtGenerateResponse struct {
+type GenerateDomainTxtResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DomainTxtGenerateResult `json:"result"`
+    Result GenerateDomainTxtResult `json:"result"`
 }
 
-type DomainTxtGenerateResult struct {
+type GenerateDomainTxtResult struct {
+    Txt string `json:"txt"`
 }
