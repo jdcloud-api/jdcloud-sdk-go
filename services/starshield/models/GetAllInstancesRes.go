@@ -17,12 +17,11 @@
 package models
 
 
-type CdnSingleMetric struct {
+type GetAllInstancesRes struct {
 
-    /* 单指标的值
-如果是带宽，值的单位是bps（bit per second）
-如果是流量，值的单位是Byte
-如果是请求量，值的单位是次数
- (Optional) */
-    Value float64 `json:"value"`
+    /* 实例id (Optional) */
+    InstanceId string `json:"instanceId"`
+
+    /* 实例名称 (Optional) */
+    InstanceName string `json:"instanceName"`
 }

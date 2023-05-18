@@ -157,5 +157,5 @@ type InstanceBandwidthP95Response struct {
 }
 
 type InstanceBandwidthP95Result struct {
-    Value int `json:"value"`
+    Value float64 `json:"value"`
 }

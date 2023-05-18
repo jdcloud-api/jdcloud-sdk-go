@@ -170,5 +170,5 @@ type ZoneBandwidthAvgResponse struct {
 }
 
 type ZoneBandwidthAvgResult struct {
-    Value int `json:"value"`
+    Value float64 `json:"value"`
 }

@@ -17,12 +17,20 @@
 package models
 
 
-type CdnSingleMetric struct {
+type SameContentZones struct {
 
-    /* 单指标的值
-如果是带宽，值的单位是bps（bit per second）
-如果是流量，值的单位是Byte
-如果是请求量，值的单位是次数
- (Optional) */
-    Value float64 `json:"value"`
+    /* zoneId (Optional) */
+    ZoneId string `json:"zoneId"`
+
+    /* zoneName (Optional) */
+    ZoneName string `json:"zoneName"`
+
+    /* instanceId (Optional) */
+    InstanceId string `json:"instanceId"`
+
+    /* instanceName (Optional) */
+    InstanceName string `json:"instanceName"`
+
+    /* pin (Optional) */
+    Pin string `json:"pin"`
 }

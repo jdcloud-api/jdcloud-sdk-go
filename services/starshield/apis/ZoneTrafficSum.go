@@ -170,5 +170,5 @@ type ZoneTrafficSumResponse struct {
 }
 
 type ZoneTrafficSumResult struct {
-    Value int `json:"value"`
+    Value float64 `json:"value"`
 }
