@@ -157,5 +157,5 @@ type InstanceRequestSumResponse struct {
 }
 
 type InstanceRequestSumResult struct {
-    Value int `json:"value"`
+    Value float64 `json:"value"`
 }

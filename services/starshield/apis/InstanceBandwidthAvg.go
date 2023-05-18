@@ -157,5 +157,5 @@ type InstanceBandwidthAvgResponse struct {
 }
 
 type InstanceBandwidthAvgResult struct {
-    Value int `json:"value"`
+    Value float64 `json:"value"`
 }

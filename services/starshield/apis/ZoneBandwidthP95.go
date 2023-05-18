@@ -170,5 +170,5 @@ type ZoneBandwidthP95Response struct {
 }
 
 type ZoneBandwidthP95Result struct {
-    Value int `json:"value"`
+    Value float64 `json:"value"`
 }
