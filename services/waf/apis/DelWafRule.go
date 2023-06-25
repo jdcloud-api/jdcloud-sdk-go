@@ -102,16 +102,15 @@ func NewDelWafRuleRequestWithoutParam() *DelWafRuleRequest {
 func (r *DelWafRuleRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param wafInstanceId: 实例Id(Required) */
 func (r *DelWafRuleRequest) SetWafInstanceId(wafInstanceId string) {
     r.WafInstanceId = wafInstanceId
 }
-
 /* param req: 请求(Required) */
 func (r *DelWafRuleRequest) SetReq(req *waf.DelRulesReq) {
     r.Req = req
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

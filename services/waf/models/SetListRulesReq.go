@@ -31,6 +31,9 @@ type SetListRulesReq struct {
     /* 黑白名单类型，目前支持"method"  */
     ListType string `json:"listType"`
 
+    /* 白名单不检查指定Web防护规则id, 多个逗号分隔 (Optional) */
+    SkipRuleId string `json:"skipRuleId"`
+
     /* 黑白名单规则  */
     ListRules []ListRuleCfg `json:"listRules"`
 }

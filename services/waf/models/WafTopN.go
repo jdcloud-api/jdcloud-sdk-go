@@ -27,7 +27,4 @@ type WafTopN struct {
 
     /* web攻击来源top50,当请求字段isWafRule为false时返回 (Optional) */
     Area_top50 []TopValue `json:"area_top50"`
-
-    /* web攻击规则个数,当请求字段isWafRule为true时返回 (Optional) */
-    Waf_rule_sum []TopValue `json:"waf_rule_sum"`
 }

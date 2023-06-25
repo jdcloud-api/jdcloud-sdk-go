@@ -29,5 +29,5 @@ type LogReportReq struct {
     LogId string `json:"logId"`
 
     /* 产生时间  */
-    AccessTime int `json:"accessTime"`
+    AccessTime int64 `json:"accessTime"`
 }

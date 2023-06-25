@@ -102,16 +102,15 @@ func NewGetDomainAntiConfigRequestWithoutParam() *GetDomainAntiConfigRequest {
 func (r *GetDomainAntiConfigRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param wafInstanceId: 实例Id(Required) */
 func (r *GetDomainAntiConfigRequest) SetWafInstanceId(wafInstanceId string) {
     r.WafInstanceId = wafInstanceId
 }
-
 /* param req: 请求(Required) */
 func (r *GetDomainAntiConfigRequest) SetReq(req *waf.CommonReq) {
     r.Req = req
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
@@ -128,6 +127,7 @@ type GetDomainAntiConfigResponse struct {
 type GetDomainAntiConfigResult struct {
     Domain string `json:"domain"`
     DisableWaf int `json:"disableWaf"`
+    EnableJs int `json:"enableJs"`
     AclConf waf.AclConf `json:"aclConf"`
     AntispiderConf waf.SpiderConf `json:"antispiderConf"`
     CcConf waf.CcConf `json:"ccConf"`

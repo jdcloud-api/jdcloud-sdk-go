@@ -93,11 +93,11 @@ func NewGetStatusCodeInfoRequestWithoutParam() *GetStatusCodeInfoRequest {
 func (r *GetStatusCodeInfoRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param req: 请求(Required) */
 func (r *GetStatusCodeInfoRequest) SetReq(req *waf.GetStatusCodeReq) {
     r.Req = req
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

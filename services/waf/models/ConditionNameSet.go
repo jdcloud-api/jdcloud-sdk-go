@@ -19,9 +19,18 @@ package models
 
 type ConditionNameSet struct {
 
+    /* 条件id (Optional) */
+    ConditionId int `json:"conditionId"`
+
     /* 条件名称 (Optional) */
     ConditionName string `json:"conditionName"`
 
+    /* 条件类型 (Optional) */
+    ConditionType string `json:"conditionType"`
+
     /* 对条件结果的取反操作，does不取反，doesnot取反 (Optional) */
     Opposite string `json:"opposite"`
+
+    /* 与或逻辑 (Optional) */
+    Nand string `json:"nand"`
 }

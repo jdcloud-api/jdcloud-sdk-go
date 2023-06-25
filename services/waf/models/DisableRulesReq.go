@@ -31,6 +31,6 @@ type DisableRulesReq struct {
     /* 操作的规则id, ruleType非"waf"时必填 (Optional) */
     Ids []int `json:"ids"`
 
-    /* 操作的规则类型，"waf":waf总体防护开关，"cc":cc规则，"ratelimit"：限速，"usrdefCookie":cookie类型的黑白名单，"usrdefGeo":geo类型的黑白名单，"usrdefHeaders":header类型的黑白名单，"usrdefIP":ip类型的黑白名单，"usrdefURI":uri类型的黑白名单，"filterReqresp":请求头类型的流量管理，"filterSenseinfo":敏感信息防泄漏，"usrdefWaf":waf自定义规则,"rewriteRule":重写规则（目前是uri重写规则）,"listRule":黑白名单规则（目前指method黑白名单）,"proxycache":url缓存，"botUsr":自定义类型BOT规则,"risk":风险防护规则,"riskEvent":风险控制事件,"riskUsrList":风险控制用户自定义名单  */
+    /* 操作的规则类型，"waf":waf总体防护开关，"cc":cc规则，"ratelimit"：限速，"usrdefCookie":cookie类型的黑白名单，"usrdefGeo":geo类型的黑白名单，"usrdefOwner":owner类型的黑白名单,"usrdefHeaders":header类型的黑白名单，"usrdefIP":ip类型的黑白名单，"usrdefURI":uri类型的黑白名单，"filterReqresp":请求头类型的流量管理，"filterSenseinfo":敏感信息防泄漏，"usrdefWaf":waf自定义规则,"rewriteRule":重写规则（目前是uri重写规则）,"listRule":黑白名单规则（目前指method黑白名单）,"proxycache":url缓存，"botUsr":自定义类型BOT规则,"risk":风险防护规则,"riskEvent":风险控制事件,"riskUsrList":风险控制用户自定义名单  */
     RuleType string `json:"ruleType"`
 }

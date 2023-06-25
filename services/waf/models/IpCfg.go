@@ -22,7 +22,7 @@ type IpCfg struct {
     /* 序号id,更新时需要 (Optional) */
     Id int `json:"id"`
 
-    /* 支持 ipv4/8 ipv4/16 ipv4/24 ipv4/32 ipv6/64  */
+    /* ruleType为0时,支持ipv4/8,ipv4/16,ipv4/24,ipv4/32,ipv6/64;ruleType为1时,为ip集名称  */
     Val string `json:"val"`
 
     /* 动作配置,旗舰版全部支持,其它套餐不支持观察  */

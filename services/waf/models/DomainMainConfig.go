@@ -52,6 +52,9 @@ type DomainMainConfig struct {
     /* 防护状态，0：关闭 1：开启 (Optional) */
     AntiStatus AntiStatus `json:"antiStatus"`
 
+    /* 防护模式 (Optional) */
+    AntiMode AntiMode `json:"antiMode"`
+
     /* 1：bypass 0：防护模式 (Optional) */
     DisableWaf int `json:"disableWaf"`
 

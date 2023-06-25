@@ -93,11 +93,11 @@ func NewGetAntiEventRequestWithoutParam() *GetAntiEventRequest {
 func (r *GetAntiEventRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param req: 请求(Required) */
 func (r *GetAntiEventRequest) SetReq(req *waf.GetAntiEventReq) {
     r.Req = req
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

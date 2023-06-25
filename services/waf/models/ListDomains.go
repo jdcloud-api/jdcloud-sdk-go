@@ -28,6 +28,6 @@ type ListDomains struct {
     /* 页码，[1-100]，默认为1 (Optional) */
     PageIndex *int `json:"pageIndex"`
 
-    /* 页大小，[1-100]，默认为10 (Optional) */
+    /* 页大小，[1-100]，默认为20 (Optional) */
     PageSize *int `json:"pageSize"`
 }

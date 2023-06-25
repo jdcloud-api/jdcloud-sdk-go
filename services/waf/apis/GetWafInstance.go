@@ -115,31 +115,27 @@ func NewGetWafInstanceRequestWithoutParam() *GetWafInstanceRequest {
 func (r *GetWafInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param idc: 所属地区， 模糊匹配(Optional) */
 func (r *GetWafInstanceRequest) SetIdc(idc string) {
     r.Idc = &idc
 }
-
 /* param pageNumber: 页码(Optional) */
 func (r *GetWafInstanceRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小(Optional) */
 func (r *GetWafInstanceRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param filters: wafInstanceId - 实例id(Optional) */
 func (r *GetWafInstanceRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
-
 /* param sourceIds: 资源id 多个时，以逗号,分隔。(Optional) */
 func (r *GetWafInstanceRequest) SetSourceIds(sourceIds string) {
     r.SourceIds = &sourceIds
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

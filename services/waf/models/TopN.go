@@ -20,20 +20,20 @@ package models
 type TopN struct {
 
     /*  (Optional) */
-    Addr_top10 TopValue `json:"addr_top10"`
+    Addr_top10 []TopValue `json:"addr_top10"`
 
     /*  (Optional) */
-    Area_top10 TopValue `json:"area_top10"`
+    Area_top10 []TopValue `json:"area_top10"`
 
     /*  (Optional) */
-    Url_top10 TopValue `json:"url_top10"`
+    Url_top10 []TopValue `json:"url_top10"`
 
     /*  (Optional) */
-    Ua_top10 TopValue `json:"ua_top10"`
+    Ua_top10 []TopValue `json:"ua_top10"`
 
     /*  (Optional) */
-    Domain_anti_top10 TopAntiValue `json:"domain_anti_top10"`
+    Domain_anti_top10 []TopAntiValue `json:"domain_anti_top10"`
 
     /*  (Optional) */
-    Url_anti_top10 TopAntiValue `json:"url_anti_top10"`
+    Url_anti_top10 []TopAntiValue `json:"url_anti_top10"`
 }

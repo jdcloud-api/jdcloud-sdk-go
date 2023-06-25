@@ -102,16 +102,15 @@ func NewListBotStdRulesRequestWithoutParam() *ListBotStdRulesRequest {
 func (r *ListBotStdRulesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param wafInstanceId: 实例Id(Required) */
 func (r *ListBotStdRulesRequest) SetWafInstanceId(wafInstanceId string) {
     r.WafInstanceId = wafInstanceId
 }
-
 /* param req: 请求(Required) */
 func (r *ListBotStdRulesRequest) SetReq(req *waf.ListBotStdRuleReq) {
     r.Req = req
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

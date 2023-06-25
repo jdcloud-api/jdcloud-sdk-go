@@ -32,7 +32,7 @@ type ListWafRulesRequest struct {
     WafInstanceId string `json:"wafInstanceId"`
 
     /* 请求  */
-    Req *waf.ListRulesReq `json:"req"`
+    Req *waf.ListWafRulesReq `json:"req"`
 }
 
 /*
@@ -45,7 +45,7 @@ type ListWafRulesRequest struct {
 func NewListWafRulesRequest(
     regionId string,
     wafInstanceId string,
-    req *waf.ListRulesReq,
+    req *waf.ListWafRulesReq,
 ) *ListWafRulesRequest {
 
 	return &ListWafRulesRequest{
@@ -69,7 +69,7 @@ func NewListWafRulesRequest(
 func NewListWafRulesRequestWithAllParams(
     regionId string,
     wafInstanceId string,
-    req *waf.ListRulesReq,
+    req *waf.ListWafRulesReq,
 ) *ListWafRulesRequest {
 
     return &ListWafRulesRequest{
@@ -102,16 +102,15 @@ func NewListWafRulesRequestWithoutParam() *ListWafRulesRequest {
 func (r *ListWafRulesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param wafInstanceId: 实例Id(Required) */
 func (r *ListWafRulesRequest) SetWafInstanceId(wafInstanceId string) {
     r.WafInstanceId = wafInstanceId
 }
-
 /* param req: 请求(Required) */
-func (r *ListWafRulesRequest) SetReq(req *waf.ListRulesReq) {
+func (r *ListWafRulesRequest) SetReq(req *waf.ListWafRulesReq) {
     r.Req = req
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

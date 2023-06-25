@@ -102,16 +102,15 @@ func NewEnableCname2RsExternalRequestWithoutParam() *EnableCname2RsExternalReque
 func (r *EnableCname2RsExternalRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param wafInstanceId: 实例Id(Required) */
 func (r *EnableCname2RsExternalRequest) SetWafInstanceId(wafInstanceId string) {
     r.WafInstanceId = wafInstanceId
 }
-
 /* param req: 请求(Required) */
 func (r *EnableCname2RsExternalRequest) SetReq(req *waf.ActiveFuncReq) {
     r.Req = req
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

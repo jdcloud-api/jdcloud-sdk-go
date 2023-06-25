@@ -34,6 +34,9 @@ type LbConf struct {
     /* 是否使用前置代理，0为未使用，1为使用 (Optional) */
     PureClient int `json:"pureClient"`
 
+    /* 是否可对ssl配置进行修改，0为不可修改，1可修改 (Optional) */
+    SslModify int `json:"sslModify"`
+
     /* 1为跳转 0为不跳转 (Optional) */
     HttpsRedirect int `json:"httpsRedirect"`
 

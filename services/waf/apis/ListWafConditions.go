@@ -102,16 +102,15 @@ func NewListWafConditionsRequestWithoutParam() *ListWafConditionsRequest {
 func (r *ListWafConditionsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param wafInstanceId: 实例Id(Required) */
 func (r *ListWafConditionsRequest) SetWafInstanceId(wafInstanceId string) {
     r.WafInstanceId = wafInstanceId
 }
-
 /* param req: 请求(Required) */
 func (r *ListWafConditionsRequest) SetReq(req *waf.ListWafConditionsReq) {
     r.Req = req
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

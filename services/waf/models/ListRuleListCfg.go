@@ -36,4 +36,7 @@ type ListRuleListCfg struct {
 
     /* action配置 (Optional) */
     AtCfg AtCfg `json:"atCfg"`
+
+    /* 白名单不检查指定Web防护规则id, 多个逗号分隔 (Optional) */
+    SkipRuleId string `json:"skipRuleId"`
 }

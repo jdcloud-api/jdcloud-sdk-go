@@ -20,7 +20,7 @@ package models
 type Contactor struct {
 
     /* 联系人/群组Id (Optional) */
-    ContactId int `json:"contactId"`
+    ContactId string `json:"contactId"`
 
     /* 是否选中，1-选中，0-未选中 (Optional) */
     Selected int `json:"selected"`

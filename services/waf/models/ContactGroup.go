@@ -20,7 +20,7 @@ package models
 type ContactGroup struct {
 
     /* 联系群组Id (Optional) */
-    ContactId int `json:"contactId"`
+    ContactId string `json:"contactId"`
 
     /* 联系群组名 (Optional) */
     Name string `json:"name"`

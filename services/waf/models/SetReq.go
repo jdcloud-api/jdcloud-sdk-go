@@ -39,4 +39,40 @@ type SetReq struct {
 
     /* 检测时长单位，hour/minute,缺省为hour (Optional) */
     DetectUnit string `json:"detectUnit"`
+
+    /* 检测周期  */
+    DetectSpan int `json:"detectSpan"`
+
+    /* 告警阈值  */
+    DetectThreshold int `json:"detectThreshold"`
+
+    /* warnType为statusCode时为要检测的状态码 (Optional) */
+    DetectItems []string `json:"detectItems"`
+
+    /* 告警方式 (Optional) */
+    ContactWays []string `json:"contactWays"`
+
+    /* 告警通知人 (Optional) */
+    ContactorPersons []ContactPerson `json:"contactorPersons"`
+
+    /* 告警通知群组 (Optional) */
+    ContactorGroups []ContactGroup `json:"contactorGroups"`
+
+    /* 是否生效，0-不生效，1-生效 (Optional) */
+    Enable int `json:"enable"`
+
+    /* 全局告警状态 (Optional) */
+    GlbDisable int `json:"glbDisable"`
+
+    /* 自定义告警状态 (Optional) */
+    UsrDisable int `json:"usrDisable"`
+
+    /* 全局告警globle 自定义告警userdefine ,默认是全局告警 (Optional) */
+    RuleType string `json:"ruleType"`
+
+    /* 产品类型, 0waf, 1scdn (Optional) */
+    Mode int `json:"mode"`
+
+    /* scdn用户名 (Optional) */
+    UserPinScdn string `json:"userPinScdn"`
 }

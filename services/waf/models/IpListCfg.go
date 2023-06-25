@@ -28,12 +28,18 @@ type IpListCfg struct {
     /* 0-使用中 1-禁用 (Optional) */
     Disable int `json:"disable"`
 
-    /* 支持 ipv4/8 ipv4/16 ipv4/24 ipv4/32 ipv6/64 (Optional) */
-    Ip string `json:"ip"`
+    /* ruleType为0时,支持ipv4/8,ipv4/16,ipv4/24,ipv4/32,ipv6/64;ruleType为1时,为ip集名称 (Optional) */
+    Val string `json:"val"`
+
+    /* 0-单ip 1-ip集 (Optional) */
+    RuleType int `json:"ruleType"`
 
     /* action配置 (Optional) */
     AtCfg AtCfg `json:"atCfg"`
 
     /* 备注 (Optional) */
     Tag string `json:"tag"`
+
+    /* 白名单不检查指定Web防护规则id, 多个逗号分隔 (Optional) */
+    SkipRuleId string `json:"skipRuleId"`
 }

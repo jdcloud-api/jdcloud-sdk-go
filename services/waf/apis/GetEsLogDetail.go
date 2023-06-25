@@ -192,86 +192,71 @@ func NewGetEsLogDetailRequestWithoutParam() *GetEsLogDetailRequest {
 func (r *GetEsLogDetailRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param wafInstanceId: 实例id，代表要查询的WAF实例，为空时表示当前用户下的所有实例(Optional) */
 func (r *GetEsLogDetailRequest) SetWafInstanceId(wafInstanceId string) {
     r.WafInstanceId = &wafInstanceId
 }
-
 /* param domain: 域名，为空时表示当前实例下的所有域名(Optional) */
 func (r *GetEsLogDetailRequest) SetDomain(domain string) {
     r.Domain = &domain
 }
-
 /* param remote_addr: 来源ip，检索字段(Optional) */
 func (r *GetEsLogDetailRequest) SetRemote_addr(remote_addr string) {
     r.Remote_addr = &remote_addr
 }
-
 /* param document_uri: URI，检索字段(Optional) */
 func (r *GetEsLogDetailRequest) SetDocument_uri(document_uri string) {
     r.Document_uri = &document_uri
 }
-
 /* param url: url，检索字段(Optional) */
 func (r *GetEsLogDetailRequest) SetUrl(url string) {
     r.Url = &url
 }
-
 /* param anti_geo: 来源地域，检索字段(Optional) */
 func (r *GetEsLogDetailRequest) SetAnti_geo(anti_geo string) {
     r.Anti_geo = &anti_geo
 }
-
 /* param request_method: 请求方法，检索字段(Optional) */
 func (r *GetEsLogDetailRequest) SetRequest_method(request_method string) {
     r.Request_method = &request_method
 }
-
 /* param action: 动作，检索字段，支持类型：""(为空时，默认查询全部动作类型)，"-"(放行)，"notice"(观察)，"forbidden OR status"(拦截)，"redirect"(浏览器跳转)，"verify"(人机交互)(Optional) */
 func (r *GetEsLogDetailRequest) SetAction(action string) {
     r.Action = &action
 }
-
 /* param status: 状态码，检索字段(Optional) */
 func (r *GetEsLogDetailRequest) SetStatus(status string) {
     r.Status = &status
 }
-
 /* param logType: 日志类型，检索字段，支持类型：""(为空时，默认查询全部日志类型)，"access"(访问日志)，"waf"(wafSDK)，"acl"(自定义规则)，"skip"(白名单)，"deny"(黑名单)，"cc"(CC攻击)，"webcache"(网页防篡改)，"css"(跨站脚本攻击)，"sqli"(SQL注入攻击)，""fileinc"(文件读取/包含攻击)，"cmding"(命令/代码执行攻击)，"sdd"(敏感文件探测)，"malscan"(恶意扫描攻击)，"bckack"(恶意/后门文件攻击)，"xmli"(XML注入攻击)，"dirt"(目录遍历攻击)(Optional) */
 func (r *GetEsLogDetailRequest) SetLogType(logType []string) {
     r.LogType = logType
 }
-
 /* param logId: 日志Id，检索字段(Optional) */
 func (r *GetEsLogDetailRequest) SetLogId(logId string) {
     r.LogId = &logId
 }
-
 /* param request_id: 请求Id，检索字段(Optional) */
 func (r *GetEsLogDetailRequest) SetRequest_id(request_id string) {
     r.Request_id = &request_id
 }
-
 /* param start: 开始时间戳，单位秒，时间间隔要求大于5分钟，小于30天。(Required) */
 func (r *GetEsLogDetailRequest) SetStart(start int) {
     r.Start = start
 }
-
 /* param end: 结束时间戳，单位秒，时间间隔要求大于5分钟，小于30天。(Required) */
 func (r *GetEsLogDetailRequest) SetEnd(end int) {
     r.End = end
 }
-
 /* param pageSize: 每页显示的个数，默认是10。(Required) */
 func (r *GetEsLogDetailRequest) SetPageSize(pageSize int) {
     r.PageSize = pageSize
 }
-
 /* param pageIndex: 页数，默认是1。(Required) */
 func (r *GetEsLogDetailRequest) SetPageIndex(pageIndex int) {
     r.PageIndex = pageIndex
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
