@@ -20,7 +20,7 @@ package models
 type EsLogEvent struct {
 
     /* 产生时间 (Optional) */
-    AccessTime int `json:"accessTime"`
+    AccessTime int64 `json:"accessTime"`
 
     /* 源ip (Optional) */
     RemoteAddr string `json:"remoteAddr"`

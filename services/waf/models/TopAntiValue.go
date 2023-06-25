@@ -28,6 +28,6 @@ type TopAntiValue struct {
     /* 统计值 (Optional) */
     Pv int `json:"pv"`
 
-    /*  (Optional) */
-    Count []KVPair `json:"count"`
+    /* 攻击分布 (Optional) */
+    Count AntiValue `json:"count"`
 }

@@ -28,6 +28,9 @@ type SetGeoReq struct {
     /* 0表示黑名单，1表示白名单 (Optional) */
     Iswhite int `json:"iswhite"`
 
+    /* 白名单不检查指定Web防护规则id, 多个逗号分隔 (Optional) */
+    SkipRuleId string `json:"skipRuleId"`
+
     /* geo配置  */
     Geos []GeoCfg `json:"geos"`
 }

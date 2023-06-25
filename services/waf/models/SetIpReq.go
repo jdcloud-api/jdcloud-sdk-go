@@ -31,6 +31,12 @@ type SetIpReq struct {
     /* 0默认关闭，1默认打开 (Optional) */
     IsEnable int `json:"isEnable"`
 
+    /* 0-单ip，1-ip集 (Optional) */
+    RuleType int `json:"ruleType"`
+
+    /* 白名单不检查指定Web防护规则id, 多个逗号分隔 (Optional) */
+    SkipRuleId string `json:"skipRuleId"`
+
     /* ip配置  */
     Ips []IpCfg `json:"ips"`
 }

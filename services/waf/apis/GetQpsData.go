@@ -93,11 +93,11 @@ func NewGetQpsDataRequestWithoutParam() *GetQpsDataRequest {
 func (r *GetQpsDataRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param req: 请求(Required) */
 func (r *GetQpsDataRequest) SetReq(req *waf.GetChartReq) {
     r.Req = req
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

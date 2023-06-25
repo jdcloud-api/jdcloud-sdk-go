@@ -17,23 +17,17 @@
 package models
 
 
-type ValListCfg struct {
+type ListMainFactor struct {
 
-    /* 序号id (Optional) */
-    Id int `json:"id"`
+    /* WAF实例id  */
+    WafInstanceId string `json:"wafInstanceId"`
 
-    /* 规则更新时间，秒级时间戳, 0 表示历史数据无记录 (Optional) */
-    UpdateTime int `json:"updateTime"`
+    /* 页码，[1-100]，默认为1 (Optional) */
+    PageIndex *int `json:"pageIndex"`
 
-    /* 0-使用中 1-禁用 (Optional) */
-    Disable int `json:"disable"`
+    /* 页大小，[1-100]，默认为20 (Optional) */
+    PageSize *int `json:"pageSize"`
 
-    /* 0-5 7-8 完全匹配0  前缀匹配1 包含2 正则3 大于4 后缀5 不等于7 不包含8 (Optional) */
-    MatchOp int `json:"matchOp"`
-
-    /* val (Optional) */
-    Val string `json:"val"`
-
-    /* action配置 (Optional) */
-    AtCfg AtCfg `json:"atCfg"`
+    /* 筛选条件 (Optional) */
+    Factor []KeyPair `json:"factor"`
 }

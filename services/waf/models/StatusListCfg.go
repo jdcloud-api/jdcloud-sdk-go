@@ -19,6 +19,9 @@ package models
 
 type StatusListCfg struct {
 
+    /* id (Optional) */
+    Id int `json:"id"`
+
     /* 规则名称 (Optional) */
     Name string `json:"name"`
 

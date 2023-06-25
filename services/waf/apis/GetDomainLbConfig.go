@@ -102,16 +102,15 @@ func NewGetDomainLbConfigRequestWithoutParam() *GetDomainLbConfigRequest {
 func (r *GetDomainLbConfigRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param wafInstanceId: 实例Id(Required) */
 func (r *GetDomainLbConfigRequest) SetWafInstanceId(wafInstanceId string) {
     r.WafInstanceId = wafInstanceId
 }
-
 /* param req: 请求(Required) */
 func (r *GetDomainLbConfigRequest) SetReq(req *waf.CommonReq) {
     r.Req = req
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

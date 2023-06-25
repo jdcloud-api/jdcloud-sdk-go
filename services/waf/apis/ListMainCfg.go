@@ -102,16 +102,15 @@ func NewListMainCfgRequestWithoutParam() *ListMainCfgRequest {
 func (r *ListMainCfgRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param wafInstanceId: 实例Id(Required) */
 func (r *ListMainCfgRequest) SetWafInstanceId(wafInstanceId string) {
     r.WafInstanceId = wafInstanceId
 }
-
 /* param req: 请求(Required) */
 func (r *ListMainCfgRequest) SetReq(req *waf.ListDomains) {
     r.Req = req
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
@@ -131,4 +130,10 @@ type ListMainCfgResult struct {
     PageIndex int `json:"pageIndex"`
     PageSize int `json:"pageSize"`
     MaxLimit int `json:"maxLimit"`
+    TotalCount int `json:"totalCount"`
+    TldLimit int `json:"tldLimit"`
+    TldNum int `json:"tldNum"`
+    Count int `json:"count"`
+    InvalidRegion []string `json:"invalidRegion"`
+    InvalidIpv6 int `json:"invalidIpv6"`
 }

@@ -102,16 +102,15 @@ func NewDisableRulesRequestWithoutParam() *DisableRulesRequest {
 func (r *DisableRulesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param wafInstanceId: 实例Id(Required) */
 func (r *DisableRulesRequest) SetWafInstanceId(wafInstanceId string) {
     r.WafInstanceId = wafInstanceId
 }
-
 /* param req: 请求(Required) */
 func (r *DisableRulesRequest) SetReq(req *waf.DisableRulesReq) {
     r.Req = req
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

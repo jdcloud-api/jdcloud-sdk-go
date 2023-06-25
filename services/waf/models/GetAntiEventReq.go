@@ -32,7 +32,7 @@ type GetAntiEventReq struct {
     RemoteAddr *string `json:"remoteAddr"`
 
     /* 状态码，检索字段 (Optional) */
-    AntiStatus *string `json:"antiStatus"`
+    Status *string `json:"status"`
 
     /* 开始时间戳，单位秒，时间间隔要求大于5分钟，小于30天。  */
     Start int `json:"start"`

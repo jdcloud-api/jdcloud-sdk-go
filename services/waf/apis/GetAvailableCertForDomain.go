@@ -102,16 +102,15 @@ func NewGetAvailableCertForDomainRequestWithoutParam() *GetAvailableCertForDomai
 func (r *GetAvailableCertForDomainRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param wafInstanceId: 实例Id(Required) */
 func (r *GetAvailableCertForDomainRequest) SetWafInstanceId(wafInstanceId string) {
     r.WafInstanceId = wafInstanceId
 }
-
 /* param req: 请求(Required) */
 func (r *GetAvailableCertForDomainRequest) SetReq(req *waf.GetAvailableCertReq) {
     r.Req = req
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

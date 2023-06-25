@@ -17,10 +17,10 @@
 package models
 
 
-type Abnormal struct {
+type Exception struct {
 
     /*  (Optional) */
-    NoResp ChartItemValue `json:"noResp"`
+    S499 ChartItemValue `json:"s499"`
 
     /*  (Optional) */
     S503 ChartItemValue `json:"s503"`

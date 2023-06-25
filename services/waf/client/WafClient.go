@@ -40,7 +40,7 @@ func NewWafClient(credential *core.Credential) *WafClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "waf",
-            Revision:    "1.0.6",
+            Revision:    "1.0.7",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -277,6 +277,26 @@ func (c *WafClient) ListMainCfg(request *waf.ListMainCfgRequest) (*waf.ListMainC
     return jdResp, err
 }
 
+/* 激活 js 验证 */
+func (c *WafClient) EnableJs(request *waf.EnableJsRequest) (*waf.EnableJsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &waf.EnableJsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* cname解析到回源 */
 func (c *WafClient) EnableCname2RsExternal(request *waf.EnableCname2RsExternalRequest) (*waf.EnableCname2RsExternalResponse, error) {
     if request == nil {
@@ -377,6 +397,26 @@ func (c *WafClient) DisableRules(request *waf.DisableRulesRequest) (*waf.Disable
     return jdResp, err
 }
 
+/* 刷新某条防篡改条目 */
+func (c *WafClient) RefreshUrlCache(request *waf.RefreshUrlCacheRequest) (*waf.RefreshUrlCacheResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &waf.RefreshUrlCacheResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 获取网站lb配置 */
 func (c *WafClient) GetDomainLbConfig(request *waf.GetDomainLbConfigRequest) (*waf.GetDomainLbConfigResponse, error) {
     if request == nil {
@@ -388,6 +428,26 @@ func (c *WafClient) GetDomainLbConfig(request *waf.GetDomainLbConfigRequest) (*w
     }
 
     jdResp := &waf.GetDomainLbConfigResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 新增网站scdn专属 */
+func (c *WafClient) AddDomainScdn(request *waf.AddDomainScdnRequest) (*waf.AddDomainScdnResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &waf.AddDomainScdnResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -468,6 +528,26 @@ func (c *WafClient) GetEsLogDetail(request *waf.GetEsLogDetailRequest) (*waf.Get
     }
 
     jdResp := &waf.GetEsLogDetailResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取网站 */
+func (c *WafClient) ListMainCfgFactor(request *waf.ListMainCfgFactorRequest) (*waf.ListMainCfgFactorResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &waf.ListMainCfgFactorResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -688,6 +768,26 @@ func (c *WafClient) ListWafConditions(request *waf.ListWafConditionsRequest) (*w
     }
 
     jdResp := &waf.ListWafConditionsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新网站scdn专属 */
+func (c *WafClient) UpdateDomainScdn(request *waf.UpdateDomainScdnRequest) (*waf.UpdateDomainScdnResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &waf.UpdateDomainScdnResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

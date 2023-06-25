@@ -25,6 +25,9 @@ type SignatureRules struct {
     /* 规则名称 (Optional) */
     RuleName string `json:"ruleName"`
 
+    /* 规则类型 (Optional) */
+    RuleType string `json:"ruleType"`
+
     /* 规则等级 (Optional) */
     RuleLevel int `json:"ruleLevel"`
 

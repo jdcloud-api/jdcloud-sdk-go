@@ -93,11 +93,11 @@ func NewCreateInstanceRequestWithoutParam() *CreateInstanceRequest {
 func (r *CreateInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param req: 请求(Required) */
 func (r *CreateInstanceRequest) SetReq(req *waf.OrderReq) {
     r.Req = req
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

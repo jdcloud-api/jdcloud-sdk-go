@@ -66,4 +66,10 @@ type WarningCfg struct {
 
     /* warnType为statusCode时为要检测的状态码 (Optional) */
     DetectItems []string `json:"detectItems"`
+
+    /* 产品类型, 0waf, 1scdn (Optional) */
+    Mode int `json:"mode"`
+
+    /* scdn用户名 (Optional) */
+    UserPinScdn string `json:"userPinScdn"`
 }

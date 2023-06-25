@@ -102,16 +102,15 @@ func NewDeleteDomainRequestWithoutParam() *DeleteDomainRequest {
 func (r *DeleteDomainRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param wafInstanceId: 实例Id(Required) */
 func (r *DeleteDomainRequest) SetWafInstanceId(wafInstanceId string) {
     r.WafInstanceId = wafInstanceId
 }
-
 /* param req: 请求(Required) */
 func (r *DeleteDomainRequest) SetReq(req *waf.CommonReq) {
     r.Req = req
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

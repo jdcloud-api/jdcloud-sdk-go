@@ -17,17 +17,17 @@
 package models
 
 
-type ValCfg struct {
+type SetSslConfigReq struct {
 
-    /* 序号id,更新时需要 (Optional) */
-    Id int `json:"id"`
+    /* 实例id，代表要设置的WAF实例 (Optional) */
+    WafInstanceId string `json:"wafInstanceId"`
 
-    /* 0-5 7-8 完全匹配0  前缀匹配1 包含2 正则3 大于4 后缀5 不等于7 不包含8 (Optional) */
-    MatchOp int `json:"matchOp"`
+    /* ssl协议，eg:["TLSv1","TLSv1.1","TLSv1.2","SSLv2","SSLv3","TLSv1.3"]  */
+    SslProtocols []string `json:"sslProtocols"`
 
-    /* val  */
-    Val string `json:"val"`
+    /* 加密套件等级，0表示默认为中级，1表示高级，2表示低级, 3表示自定义  */
+    SuiteLevel int `json:"suiteLevel"`
 
-    /* 动作配置,旗舰版全部支持,其它套餐不支持观察  */
-    AtCfg AtCfg `json:"atCfg"`
+    /* 自定义加密套件 (Optional) */
+    UserSuiteLevel []string `json:"userSuiteLevel"`
 }

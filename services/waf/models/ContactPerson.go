@@ -20,7 +20,7 @@ package models
 type ContactPerson struct {
 
     /* 联系人Id (Optional) */
-    ContactId int `json:"contactId"`
+    ContactId string `json:"contactId"`
 
     /* 联系人姓名 (Optional) */
     Name string `json:"name"`

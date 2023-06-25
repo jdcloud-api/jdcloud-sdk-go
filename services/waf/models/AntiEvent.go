@@ -32,7 +32,7 @@ type AntiEvent struct {
     Area string `json:"area"`
 
     /* 产生时间 (Optional) */
-    AccessTime int `json:"accessTime"`
+    AccessTime int64 `json:"accessTime"`
 
     /* 方法 (Optional) */
     Method string `json:"method"`
@@ -62,7 +62,7 @@ type AntiEvent struct {
     WafInstanceId string `json:"wafInstanceId"`
 
     /* 状态码 (Optional) */
-    AntiStatus string `json:"antiStatus"`
+    Status string `json:"status"`
 
     /* 状态标识 (Optional) */
     UpstreamErr string `json:"upstreamErr"`
@@ -72,4 +72,7 @@ type AntiEvent struct {
 
     /* 是否已加入黑名单，0表示否 (Optional) */
     DenyExist int `json:"denyExist"`
+
+    /* 攻击详情 (Optional) */
+    AntiReqRaw string `json:"antiReqRaw"`
 }

@@ -102,16 +102,15 @@ func NewUpgradeInstanceRequestWithoutParam() *UpgradeInstanceRequest {
 func (r *UpgradeInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param wafInstanceId: 实例Id(Required) */
 func (r *UpgradeInstanceRequest) SetWafInstanceId(wafInstanceId string) {
     r.WafInstanceId = wafInstanceId
 }
-
 /* param req: 请求(Required) */
 func (r *UpgradeInstanceRequest) SetReq(req *waf.OrderReq) {
     r.Req = req
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -20,5 +20,5 @@ package models
 type ChartItemValue struct {
 
     /*  (Optional) */
-    Value []int `json:"value"`
+    Value []int64 `json:"value"`
 }

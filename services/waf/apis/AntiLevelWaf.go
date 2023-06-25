@@ -102,16 +102,15 @@ func NewAntiLevelWafRequestWithoutParam() *AntiLevelWafRequest {
 func (r *AntiLevelWafRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param wafInstanceId: 实例Id(Required) */
 func (r *AntiLevelWafRequest) SetWafInstanceId(wafInstanceId string) {
     r.WafInstanceId = wafInstanceId
 }
-
 /* param req: 请求(Required) */
 func (r *AntiLevelWafRequest) SetReq(req *waf.AntiLevelWafReq) {
     r.Req = req
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
