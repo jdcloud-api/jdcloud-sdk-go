@@ -21,7 +21,7 @@ import (
     waf "github.com/jdcloud-api/jdcloud-sdk-go/services/waf/models"
 )
 
-type EnableJsRequest struct {
+type ListIpsRequest struct {
 
     core.JDCloudRequest
 
@@ -32,7 +32,7 @@ type EnableJsRequest struct {
     WafInstanceId string `json:"wafInstanceId"`
 
     /* 请求  */
-    Req *waf.EnableReq `json:"req"`
+    Req *waf.ListDenySkipRulesReq `json:"req"`
 }
 
 /*
@@ -42,15 +42,15 @@ type EnableJsRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewEnableJsRequest(
+func NewListIpsRequest(
     regionId string,
     wafInstanceId string,
-    req *waf.EnableReq,
-) *EnableJsRequest {
+    req *waf.ListDenySkipRulesReq,
+) *ListIpsRequest {
 
-	return &EnableJsRequest{
+	return &ListIpsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/wafInstanceIds/{wafInstanceId}/waf:enableJs",
+			URL:     "/regions/{regionId}/wafInstanceIds/{wafInstanceId}/userdefine:listIps",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -66,15 +66,15 @@ func NewEnableJsRequest(
  * param wafInstanceId: 实例Id (Required)
  * param req: 请求 (Required)
  */
-func NewEnableJsRequestWithAllParams(
+func NewListIpsRequestWithAllParams(
     regionId string,
     wafInstanceId string,
-    req *waf.EnableReq,
-) *EnableJsRequest {
+    req *waf.ListDenySkipRulesReq,
+) *ListIpsRequest {
 
-    return &EnableJsRequest{
+    return &ListIpsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/wafInstanceIds/{wafInstanceId}/waf:enableJs",
+            URL:     "/regions/{regionId}/wafInstanceIds/{wafInstanceId}/userdefine:listIps",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -86,11 +86,11 @@ func NewEnableJsRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewEnableJsRequestWithoutParam() *EnableJsRequest {
+func NewListIpsRequestWithoutParam() *ListIpsRequest {
 
-    return &EnableJsRequest{
+    return &ListIpsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/wafInstanceIds/{wafInstanceId}/waf:enableJs",
+            URL:     "/regions/{regionId}/wafInstanceIds/{wafInstanceId}/userdefine:listIps",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -99,30 +99,37 @@ func NewEnableJsRequestWithoutParam() *EnableJsRequest {
 }
 
 /* param regionId: 实例所属的地域ID(Required) */
-func (r *EnableJsRequest) SetRegionId(regionId string) {
+func (r *ListIpsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 /* param wafInstanceId: 实例Id(Required) */
-func (r *EnableJsRequest) SetWafInstanceId(wafInstanceId string) {
+func (r *ListIpsRequest) SetWafInstanceId(wafInstanceId string) {
     r.WafInstanceId = wafInstanceId
 }
 /* param req: 请求(Required) */
-func (r *EnableJsRequest) SetReq(req *waf.EnableReq) {
+func (r *ListIpsRequest) SetReq(req *waf.ListDenySkipRulesReq) {
     r.Req = req
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r EnableJsRequest) GetRegionId() string {
+func (r ListIpsRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type EnableJsResponse struct {
+type ListIpsResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result EnableJsResult `json:"result"`
+    Result ListIpsResult `json:"result"`
 }
 
-type EnableJsResult struct {
+type ListIpsResult struct {
+    WafInstanceId string `json:"wafInstanceId"`
+    Domain string `json:"domain"`
+    Iswhite string `json:"iswhite"`
+    PageIndex int `json:"pageIndex"`
+    PageSize int `json:"pageSize"`
+    Count int `json:"count"`
+    Data []waf.IpListCfg `json:"data"`
 }

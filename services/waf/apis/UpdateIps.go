@@ -21,7 +21,7 @@ import (
     waf "github.com/jdcloud-api/jdcloud-sdk-go/services/waf/models"
 )
 
-type ListMainCfgFactorRequest struct {
+type UpdateIpsRequest struct {
 
     core.JDCloudRequest
 
@@ -32,7 +32,7 @@ type ListMainCfgFactorRequest struct {
     WafInstanceId string `json:"wafInstanceId"`
 
     /* 请求  */
-    Req *waf.ListMainFactor `json:"req"`
+    Req *waf.SetIpReq `json:"req"`
 }
 
 /*
@@ -42,15 +42,15 @@ type ListMainCfgFactorRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewListMainCfgFactorRequest(
+func NewUpdateIpsRequest(
     regionId string,
     wafInstanceId string,
-    req *waf.ListMainFactor,
-) *ListMainCfgFactorRequest {
+    req *waf.SetIpReq,
+) *UpdateIpsRequest {
 
-	return &ListMainCfgFactorRequest{
+	return &UpdateIpsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/wafInstanceIds/{wafInstanceId}/domain:listMainCfgFactor",
+			URL:     "/regions/{regionId}/wafInstanceIds/{wafInstanceId}/userdefine:updateIps",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -66,15 +66,15 @@ func NewListMainCfgFactorRequest(
  * param wafInstanceId: 实例Id (Required)
  * param req: 请求 (Required)
  */
-func NewListMainCfgFactorRequestWithAllParams(
+func NewUpdateIpsRequestWithAllParams(
     regionId string,
     wafInstanceId string,
-    req *waf.ListMainFactor,
-) *ListMainCfgFactorRequest {
+    req *waf.SetIpReq,
+) *UpdateIpsRequest {
 
-    return &ListMainCfgFactorRequest{
+    return &UpdateIpsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/wafInstanceIds/{wafInstanceId}/domain:listMainCfgFactor",
+            URL:     "/regions/{regionId}/wafInstanceIds/{wafInstanceId}/userdefine:updateIps",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -86,11 +86,11 @@ func NewListMainCfgFactorRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewListMainCfgFactorRequestWithoutParam() *ListMainCfgFactorRequest {
+func NewUpdateIpsRequestWithoutParam() *UpdateIpsRequest {
 
-    return &ListMainCfgFactorRequest{
+    return &UpdateIpsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/wafInstanceIds/{wafInstanceId}/domain:listMainCfgFactor",
+            URL:     "/regions/{regionId}/wafInstanceIds/{wafInstanceId}/userdefine:updateIps",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -99,41 +99,30 @@ func NewListMainCfgFactorRequestWithoutParam() *ListMainCfgFactorRequest {
 }
 
 /* param regionId: 实例所属的地域ID(Required) */
-func (r *ListMainCfgFactorRequest) SetRegionId(regionId string) {
+func (r *UpdateIpsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 /* param wafInstanceId: 实例Id(Required) */
-func (r *ListMainCfgFactorRequest) SetWafInstanceId(wafInstanceId string) {
+func (r *UpdateIpsRequest) SetWafInstanceId(wafInstanceId string) {
     r.WafInstanceId = wafInstanceId
 }
 /* param req: 请求(Required) */
-func (r *ListMainCfgFactorRequest) SetReq(req *waf.ListMainFactor) {
+func (r *UpdateIpsRequest) SetReq(req *waf.SetIpReq) {
     r.Req = req
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r ListMainCfgFactorRequest) GetRegionId() string {
+func (r UpdateIpsRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type ListMainCfgFactorResponse struct {
+type UpdateIpsResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result ListMainCfgFactorResult `json:"result"`
+    Result UpdateIpsResult `json:"result"`
 }
 
-type ListMainCfgFactorResult struct {
-    WafInstanceId string `json:"wafInstanceId"`
-    List []waf.DomainMainConfig `json:"list"`
-    PageIndex int `json:"pageIndex"`
-    PageSize int `json:"pageSize"`
-    MaxLimit int `json:"maxLimit"`
-    TotalCount int `json:"totalCount"`
-    TldLimit int `json:"tldLimit"`
-    TldNum int `json:"tldNum"`
-    Count int `json:"count"`
-    InvalidRegion []string `json:"invalidRegion"`
-    InvalidIpv6 int `json:"invalidIpv6"`
+type UpdateIpsResult struct {
 }

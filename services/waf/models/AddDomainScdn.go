@@ -38,41 +38,41 @@ type AddDomainScdn struct {
     LbType string `json:"lbType"`
 
     /* 真实回源配置  */
-    RsConfig *RsConfig `json:"rsConfig"`
+    RsConfig RsConfig `json:"rsConfig"`
 
     /* 是否使用前置代理，0为未使用，1为使用 (Optional) */
-    PureClient *int `json:"pureClient"`
+    PureClient int `json:"pureClient"`
 
     /* 1为跳转 0为不跳转 (Optional) */
-    HttpsRedirect *int `json:"httpsRedirect"`
+    HttpsRedirect int `json:"httpsRedirect"`
 
     /* 用户服务器是否只能http回源，1为是，0为否 (Optional) */
-    RsOnlySupportHttp *int `json:"rsOnlySupportHttp"`
+    RsOnlySupportHttp int `json:"rsOnlySupportHttp"`
 
     /* 是否支持国密证书 (Optional) */
-    GmCertSupport *int `json:"gmCertSupport"`
+    GmCertSupport int `json:"gmCertSupport"`
 
     /* Waf侧支持http版本，不传时默认值为http1.1,传"http2"为http2 (Optional) */
-    HttpVersion *string `json:"httpVersion"`
+    HttpVersion string `json:"httpVersion"`
 
     /* 回源是否支持长链接，0为否 (Optional) */
-    EnableKeepalive *int `json:"enableKeepalive"`
+    EnableKeepalive int `json:"enableKeepalive"`
 
     /* 加密套件等级，0表示默认为中级，1表示高级，2表示低级, 3表示自定义 (Optional) */
-    SuiteLevel *int `json:"suiteLevel"`
+    SuiteLevel int `json:"suiteLevel"`
 
     /* 自定义加密套件 (Optional) */
     UserSuiteLevel []string `json:"userSuiteLevel"`
 
     /* 请求头是否支持下划线，0-否，1-是。缺省为0 (Optional) */
-    EnableUnderscores *int `json:"enableUnderscores"`
+    EnableUnderscores int `json:"enableUnderscores"`
 
     /* 禁用被动健康检查，缺省为0-否 (Optional) */
-    DisableHealthCheck *int `json:"disableHealthCheck"`
+    DisableHealthCheck int `json:"disableHealthCheck"`
 
     /* 连接超时时间，3-60s (Optional) */
-    ProxyConnectTimeout *int `json:"proxyConnectTimeout"`
+    ProxyConnectTimeout int `json:"proxyConnectTimeout"`
 
     /* 过waf后回源方向，0真实源站,1cdn边缘节点 (Optional) */
-    BackSource *int `json:"backSource"`
+    BackSource int `json:"backSource"`
 }

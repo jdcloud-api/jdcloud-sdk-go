@@ -23,10 +23,10 @@ type ListMainFactor struct {
     WafInstanceId string `json:"wafInstanceId"`
 
     /* 页码，[1-100]，默认为1 (Optional) */
-    PageIndex *int `json:"pageIndex"`
+    PageIndex int `json:"pageIndex"`
 
     /* 页大小，[1-100]，默认为20 (Optional) */
-    PageSize *int `json:"pageSize"`
+    PageSize int `json:"pageSize"`
 
     /* 筛选条件 (Optional) */
     Factor []KeyPair `json:"factor"`

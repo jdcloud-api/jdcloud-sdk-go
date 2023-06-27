@@ -26,16 +26,16 @@ type SetIpReq struct {
     Domain string `json:"domain"`
 
     /* 0表示黑名单，1表示白名单 (Optional) */
-    Iswhite int `json:"iswhite"`
+    Iswhite *int `json:"iswhite"`
 
     /* 0默认关闭，1默认打开 (Optional) */
-    IsEnable int `json:"isEnable"`
+    IsEnable *int `json:"isEnable"`
 
     /* 0-单ip，1-ip集 (Optional) */
-    RuleType int `json:"ruleType"`
+    RuleType *int `json:"ruleType"`
 
     /* 白名单不检查指定Web防护规则id, 多个逗号分隔 (Optional) */
-    SkipRuleId string `json:"skipRuleId"`
+    SkipRuleId *string `json:"skipRuleId"`
 
     /* ip配置  */
     Ips []IpCfg `json:"ips"`

@@ -20,14 +20,14 @@ package models
 type IpCfg struct {
 
     /* 序号id,更新时需要 (Optional) */
-    Id int `json:"id"`
+    Id *int `json:"id"`
 
     /* ruleType为0时,支持ipv4/8,ipv4/16,ipv4/24,ipv4/32,ipv6/64;ruleType为1时,为ip集名称  */
     Val string `json:"val"`
 
     /* 动作配置,旗舰版全部支持,其它套餐不支持观察  */
-    AtCfg AtCfg `json:"atCfg"`
+    AtCfg *AtCfg `json:"atCfg"`
 
     /* 备注 (Optional) */
-    Tag string `json:"tag"`
+    Tag *string `json:"tag"`
 }

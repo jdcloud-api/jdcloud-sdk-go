@@ -21,7 +21,7 @@ import (
     waf "github.com/jdcloud-api/jdcloud-sdk-go/services/waf/models"
 )
 
-type AddDomainScdnRequest struct {
+type AddWebcacheUrlRequest struct {
 
     core.JDCloudRequest
 
@@ -32,7 +32,7 @@ type AddDomainScdnRequest struct {
     WafInstanceId string `json:"wafInstanceId"`
 
     /* 请求  */
-    Req *waf.AddDomainScdn `json:"req"`
+    Req *waf.SetWebcacheUrlReq `json:"req"`
 }
 
 /*
@@ -42,15 +42,15 @@ type AddDomainScdnRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewAddDomainScdnRequest(
+func NewAddWebcacheUrlRequest(
     regionId string,
     wafInstanceId string,
-    req *waf.AddDomainScdn,
-) *AddDomainScdnRequest {
+    req *waf.SetWebcacheUrlReq,
+) *AddWebcacheUrlRequest {
 
-	return &AddDomainScdnRequest{
+	return &AddWebcacheUrlRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/wafInstanceIds/{wafInstanceId}/domain:addScdn",
+			URL:     "/regions/{regionId}/wafInstanceIds/{wafInstanceId}/webcache:addWebcacheUrl",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -66,15 +66,15 @@ func NewAddDomainScdnRequest(
  * param wafInstanceId: 实例Id (Required)
  * param req: 请求 (Required)
  */
-func NewAddDomainScdnRequestWithAllParams(
+func NewAddWebcacheUrlRequestWithAllParams(
     regionId string,
     wafInstanceId string,
-    req *waf.AddDomainScdn,
-) *AddDomainScdnRequest {
+    req *waf.SetWebcacheUrlReq,
+) *AddWebcacheUrlRequest {
 
-    return &AddDomainScdnRequest{
+    return &AddWebcacheUrlRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/wafInstanceIds/{wafInstanceId}/domain:addScdn",
+            URL:     "/regions/{regionId}/wafInstanceIds/{wafInstanceId}/webcache:addWebcacheUrl",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -86,11 +86,11 @@ func NewAddDomainScdnRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewAddDomainScdnRequestWithoutParam() *AddDomainScdnRequest {
+func NewAddWebcacheUrlRequestWithoutParam() *AddWebcacheUrlRequest {
 
-    return &AddDomainScdnRequest{
+    return &AddWebcacheUrlRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/wafInstanceIds/{wafInstanceId}/domain:addScdn",
+            URL:     "/regions/{regionId}/wafInstanceIds/{wafInstanceId}/webcache:addWebcacheUrl",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -99,30 +99,30 @@ func NewAddDomainScdnRequestWithoutParam() *AddDomainScdnRequest {
 }
 
 /* param regionId: 实例所属的地域ID(Required) */
-func (r *AddDomainScdnRequest) SetRegionId(regionId string) {
+func (r *AddWebcacheUrlRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 /* param wafInstanceId: 实例Id(Required) */
-func (r *AddDomainScdnRequest) SetWafInstanceId(wafInstanceId string) {
+func (r *AddWebcacheUrlRequest) SetWafInstanceId(wafInstanceId string) {
     r.WafInstanceId = wafInstanceId
 }
 /* param req: 请求(Required) */
-func (r *AddDomainScdnRequest) SetReq(req *waf.AddDomainScdn) {
+func (r *AddWebcacheUrlRequest) SetReq(req *waf.SetWebcacheUrlReq) {
     r.Req = req
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r AddDomainScdnRequest) GetRegionId() string {
+func (r AddWebcacheUrlRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type AddDomainScdnResponse struct {
+type AddWebcacheUrlResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result AddDomainScdnResult `json:"result"`
+    Result AddWebcacheUrlResult `json:"result"`
 }
 
-type AddDomainScdnResult struct {
+type AddWebcacheUrlResult struct {
 }

@@ -21,7 +21,7 @@ import (
     waf "github.com/jdcloud-api/jdcloud-sdk-go/services/waf/models"
 )
 
-type UpdateDomainScdnRequest struct {
+type DelIpsRequest struct {
 
     core.JDCloudRequest
 
@@ -32,7 +32,7 @@ type UpdateDomainScdnRequest struct {
     WafInstanceId string `json:"wafInstanceId"`
 
     /* 请求  */
-    Req *waf.AddDomainScdn `json:"req"`
+    Req *waf.DelRulesReq `json:"req"`
 }
 
 /*
@@ -42,15 +42,15 @@ type UpdateDomainScdnRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewUpdateDomainScdnRequest(
+func NewDelIpsRequest(
     regionId string,
     wafInstanceId string,
-    req *waf.AddDomainScdn,
-) *UpdateDomainScdnRequest {
+    req *waf.DelRulesReq,
+) *DelIpsRequest {
 
-	return &UpdateDomainScdnRequest{
+	return &DelIpsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/wafInstanceIds/{wafInstanceId}/domain:updateScdn",
+			URL:     "/regions/{regionId}/wafInstanceIds/{wafInstanceId}/userdefine:delIps",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -66,15 +66,15 @@ func NewUpdateDomainScdnRequest(
  * param wafInstanceId: 实例Id (Required)
  * param req: 请求 (Required)
  */
-func NewUpdateDomainScdnRequestWithAllParams(
+func NewDelIpsRequestWithAllParams(
     regionId string,
     wafInstanceId string,
-    req *waf.AddDomainScdn,
-) *UpdateDomainScdnRequest {
+    req *waf.DelRulesReq,
+) *DelIpsRequest {
 
-    return &UpdateDomainScdnRequest{
+    return &DelIpsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/wafInstanceIds/{wafInstanceId}/domain:updateScdn",
+            URL:     "/regions/{regionId}/wafInstanceIds/{wafInstanceId}/userdefine:delIps",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -86,11 +86,11 @@ func NewUpdateDomainScdnRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewUpdateDomainScdnRequestWithoutParam() *UpdateDomainScdnRequest {
+func NewDelIpsRequestWithoutParam() *DelIpsRequest {
 
-    return &UpdateDomainScdnRequest{
+    return &DelIpsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/wafInstanceIds/{wafInstanceId}/domain:updateScdn",
+            URL:     "/regions/{regionId}/wafInstanceIds/{wafInstanceId}/userdefine:delIps",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -99,30 +99,30 @@ func NewUpdateDomainScdnRequestWithoutParam() *UpdateDomainScdnRequest {
 }
 
 /* param regionId: 实例所属的地域ID(Required) */
-func (r *UpdateDomainScdnRequest) SetRegionId(regionId string) {
+func (r *DelIpsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 /* param wafInstanceId: 实例Id(Required) */
-func (r *UpdateDomainScdnRequest) SetWafInstanceId(wafInstanceId string) {
+func (r *DelIpsRequest) SetWafInstanceId(wafInstanceId string) {
     r.WafInstanceId = wafInstanceId
 }
 /* param req: 请求(Required) */
-func (r *UpdateDomainScdnRequest) SetReq(req *waf.AddDomainScdn) {
+func (r *DelIpsRequest) SetReq(req *waf.DelRulesReq) {
     r.Req = req
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r UpdateDomainScdnRequest) GetRegionId() string {
+func (r DelIpsRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type UpdateDomainScdnResponse struct {
+type DelIpsResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result UpdateDomainScdnResult `json:"result"`
+    Result DelIpsResult `json:"result"`
 }
 
-type UpdateDomainScdnResult struct {
+type DelIpsResult struct {
 }
