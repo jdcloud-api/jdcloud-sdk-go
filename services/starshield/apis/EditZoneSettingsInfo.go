@@ -29,7 +29,7 @@ type EditZoneSettingsInfoRequest struct {
     Zone_identifier string `json:"zone_identifier"`
 
     /* 一或多个域配置对象。必须包含ID和值。 (Optional) */
-    Items []starshield.Item `json:"items"`
+    Items []starshield.ZoneConfItem `json:"items"`
 }
 
 /*
@@ -58,7 +58,7 @@ func NewEditZoneSettingsInfoRequest(
  */
 func NewEditZoneSettingsInfoRequestWithAllParams(
     zone_identifier string,
-    items []starshield.Item,
+    items []starshield.ZoneConfItem,
 ) *EditZoneSettingsInfoRequest {
 
     return &EditZoneSettingsInfoRequest{
@@ -91,7 +91,7 @@ func (r *EditZoneSettingsInfoRequest) SetZone_identifier(zone_identifier string)
     r.Zone_identifier = zone_identifier
 }
 /* param items: 一或多个域配置对象。必须包含ID和值。(Optional) */
-func (r *EditZoneSettingsInfoRequest) SetItems(items []starshield.Item) {
+func (r *EditZoneSettingsInfoRequest) SetItems(items []starshield.ZoneConfItem) {
     r.Items = items
 }
 

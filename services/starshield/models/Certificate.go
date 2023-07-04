@@ -32,7 +32,7 @@ type Certificate struct {
     /* 域标识符标签 (Optional) */
     Zone_id string `json:"zone_id"`
 
-    /* 域的自定义SSL的状态 (Optional) */
+    /* 证书的状态，值active/expired/deleted/pending/initializing (Optional) */
     Status string `json:"status"`
 
     /*  (Optional) */
