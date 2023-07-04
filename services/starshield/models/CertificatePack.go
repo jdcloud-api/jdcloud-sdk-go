@@ -19,6 +19,12 @@ package models
 
 type CertificatePack struct {
 
+    /* 证书颁发机构 (Optional) */
+    Certificate_authority string `json:"certificate_authority"`
+
+    /* 创建时间 (Optional) */
+    Created_on string `json:"created_on"`
+
     /* 证书包的唯一标识符 (Optional) */
     Id string `json:"id"`
 
@@ -36,6 +42,18 @@ advanced     专用
 (值同type)
  (Optional) */
     Ty_pe string `json:"ty_pe"`
+
+    /* 证书包的状态，active/expired/deleted/pending/initializing (Optional) */
+    Status string `json:"status"`
+
+    /* 校验方式，http/txt (Optional) */
+    Validation_method string `json:"validation_method"`
+
+    /*  (Optional) */
+    Validation_records []Validation_record `json:"validation_records"`
+
+    /* 有效期 (Optional) */
+    Validity_days int `json:"validity_days"`
 
     /* 证书包的有效主机名的逗号分隔列表。必须包含域的顶级域名，不能包含超过50个主机，并且不能为空。 (Optional) */
     Hosts []string `json:"hosts"`
