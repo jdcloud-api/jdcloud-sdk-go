@@ -32,7 +32,6 @@ type SetInstanceTemplateRequest struct {
 
     /* 实例模板 ID  */
     InstanceTemplateId string `json:"instanceTemplateId"`
-
 }
 
 /*
@@ -102,12 +101,10 @@ func NewSetInstanceTemplateRequestWithoutParam() *SetInstanceTemplateRequest {
 func (r *SetInstanceTemplateRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param agId: 高可用组 ID(Required) */
 func (r *SetInstanceTemplateRequest) SetAgId(agId string) {
     r.AgId = agId
 }
-
 /* param instanceTemplateId: 实例模板 ID(Required) */
 func (r *SetInstanceTemplateRequest) SetInstanceTemplateId(instanceTemplateId string) {
     r.InstanceTemplateId = instanceTemplateId

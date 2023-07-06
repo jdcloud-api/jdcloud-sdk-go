@@ -18,9 +18,10 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    ag "github.com/jdcloud-api/jdcloud-sdk-go/services/ag/models"
 )
 
-type AbandonInstancesRequest struct {
+type UpdateAutoScalingRequest struct {
 
     core.JDCloudRequest
 
@@ -30,66 +31,66 @@ type AbandonInstancesRequest struct {
     /* 高可用组 ID  */
     AgId string `json:"agId"`
 
-    /* 准备剔除出高可用组的实例 ID  */
-    InstanceIds []string `json:"instanceIds"`
+    /* 伸缩组详细信息  */
+    AutoscalingSpec *ag.AutoscalingSpecByUpdate `json:"autoscalingSpec"`
 }
 
 /*
  * param regionId: 地域 (Required)
  * param agId: 高可用组 ID (Required)
- * param instanceIds: 准备剔除出高可用组的实例 ID (Required)
+ * param autoscalingSpec: 伸缩组详细信息 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewAbandonInstancesRequest(
+func NewUpdateAutoScalingRequest(
     regionId string,
     agId string,
-    instanceIds []string,
-) *AbandonInstancesRequest {
+    autoscalingSpec *ag.AutoscalingSpecByUpdate,
+) *UpdateAutoScalingRequest {
 
-	return &AbandonInstancesRequest{
+	return &UpdateAutoScalingRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/availabilityGroups/{agId}:abandonInstances",
+			URL:     "/regions/{regionId}/autoScaling/{agId}:updateAutoScaling",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         AgId: agId,
-        InstanceIds: instanceIds,
+        AutoscalingSpec: autoscalingSpec,
 	}
 }
 
 /*
  * param regionId: 地域 (Required)
  * param agId: 高可用组 ID (Required)
- * param instanceIds: 准备剔除出高可用组的实例 ID (Required)
+ * param autoscalingSpec: 伸缩组详细信息 (Required)
  */
-func NewAbandonInstancesRequestWithAllParams(
+func NewUpdateAutoScalingRequestWithAllParams(
     regionId string,
     agId string,
-    instanceIds []string,
-) *AbandonInstancesRequest {
+    autoscalingSpec *ag.AutoscalingSpecByUpdate,
+) *UpdateAutoScalingRequest {
 
-    return &AbandonInstancesRequest{
+    return &UpdateAutoScalingRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/availabilityGroups/{agId}:abandonInstances",
+            URL:     "/regions/{regionId}/autoScaling/{agId}:updateAutoScaling",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         AgId: agId,
-        InstanceIds: instanceIds,
+        AutoscalingSpec: autoscalingSpec,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewAbandonInstancesRequestWithoutParam() *AbandonInstancesRequest {
+func NewUpdateAutoScalingRequestWithoutParam() *UpdateAutoScalingRequest {
 
-    return &AbandonInstancesRequest{
+    return &UpdateAutoScalingRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/availabilityGroups/{agId}:abandonInstances",
+            URL:     "/regions/{regionId}/autoScaling/{agId}:updateAutoScaling",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -98,30 +99,30 @@ func NewAbandonInstancesRequestWithoutParam() *AbandonInstancesRequest {
 }
 
 /* param regionId: 地域(Required) */
-func (r *AbandonInstancesRequest) SetRegionId(regionId string) {
+func (r *UpdateAutoScalingRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 /* param agId: 高可用组 ID(Required) */
-func (r *AbandonInstancesRequest) SetAgId(agId string) {
+func (r *UpdateAutoScalingRequest) SetAgId(agId string) {
     r.AgId = agId
 }
-/* param instanceIds: 准备剔除出高可用组的实例 ID(Required) */
-func (r *AbandonInstancesRequest) SetInstanceIds(instanceIds []string) {
-    r.InstanceIds = instanceIds
+/* param autoscalingSpec: 伸缩组详细信息(Required) */
+func (r *UpdateAutoScalingRequest) SetAutoscalingSpec(autoscalingSpec *ag.AutoscalingSpecByUpdate) {
+    r.AutoscalingSpec = autoscalingSpec
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r AbandonInstancesRequest) GetRegionId() string {
+func (r UpdateAutoScalingRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type AbandonInstancesResponse struct {
+type UpdateAutoScalingResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result AbandonInstancesResult `json:"result"`
+    Result UpdateAutoScalingResult `json:"result"`
 }
 
-type AbandonInstancesResult struct {
+type UpdateAutoScalingResult struct {
 }

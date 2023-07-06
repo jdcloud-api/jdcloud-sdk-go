@@ -40,7 +40,7 @@ func NewAgClient(credential *core.Credential) *AgClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "ag",
-            Revision:    "0.7.0",
+            Revision:    "0.8.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -77,8 +77,11 @@ func (c *AgClient) UpdateAg(request *ag.UpdateAgRequest) (*ag.UpdateAgResponse, 
     return jdResp, err
 }
 
-/* 根据 ID 删除高可用组，需确保 AG 中云主机实例已全部删除 */
-func (c *AgClient) DeleteAg(request *ag.DeleteAgRequest) (*ag.DeleteAgResponse, error) {
+/* 禁用定时任务
+- 所有参数取值为字符串类型的都严格区分大小写
+- 伸缩功能开启或者关闭的情况下，都支持调用此接口
+ */
+func (c *AgClient) DisableAsCron(request *ag.DisableAsCronRequest) (*ag.DisableAsCronResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -87,7 +90,7 @@ func (c *AgClient) DeleteAg(request *ag.DeleteAgRequest) (*ag.DeleteAgResponse, 
         return nil, err
     }
 
-    jdResp := &ag.DeleteAgResponse{}
+    jdResp := &ag.DisableAsCronResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -97,8 +100,11 @@ func (c *AgClient) DeleteAg(request *ag.DeleteAgRequest) (*ag.DeleteAgResponse, 
     return jdResp, err
 }
 
-/* 修改高可用组的实例模板<br>- 对于更换实例模板来说，如果已经关联负载均衡，则VPC不可以更改。<br>- 自定义配置型不可更改实例模板。 */
-func (c *AgClient) SetInstanceTemplate(request *ag.SetInstanceTemplateRequest) (*ag.SetInstanceTemplateResponse, error) {
+/* 启用定时任务
+- 所有参数取值为字符串类型的都严格区分大小写
+- 伸缩功能关闭的情况下，不支持调用此接口
+ */
+func (c *AgClient) EnableAsCron(request *ag.EnableAsCronRequest) (*ag.EnableAsCronResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -107,47 +113,7 @@ func (c *AgClient) SetInstanceTemplate(request *ag.SetInstanceTemplateRequest) (
         return nil, err
     }
 
-    jdResp := &ag.SetInstanceTemplateResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询(ag)配额 */
-func (c *AgClient) DescribeQuotas(request *ag.DescribeQuotasRequest) (*ag.DescribeQuotasResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ag.DescribeQuotasResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 从高可用组中剔除实例 */
-func (c *AgClient) AbandonInstances(request *ag.AbandonInstancesRequest) (*ag.AbandonInstancesResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ag.AbandonInstancesResponse{}
+    jdResp := &ag.EnableAsCronResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -197,6 +163,394 @@ func (c *AgClient) DescribeAg(request *ag.DescribeAgRequest) (*ag.DescribeAgResp
     return jdResp, err
 }
 
+/* 查看告警任务
+- 所有参数取值为字符串类型的都严格区分大小写
+- 伸缩功能开启或者关闭的情况下，都支持调用此接口
+ */
+func (c *AgClient) DescribeAsAlarms(request *ag.DescribeAsAlarmsRequest) (*ag.DescribeAsAlarmsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ag.DescribeAsAlarmsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 执行伸缩规则
+- 所有参数取值为字符串类型的都严格区分大小写
+- 只支持手动执行简单规则
+- 伸缩功能关闭的情况下，不支持调用此接口
+ */
+func (c *AgClient) ExecuteAsRule(request *ag.ExecuteAsRuleRequest) (*ag.ExecuteAsRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ag.ExecuteAsRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改告警任务
+- 所有参数取值为字符串类型的都严格区分大小写
+- 所有告警任务不允许修改高可用组
+- 所有告警任务不允许修改监控类型
+- 目标跟踪规则生成的告警任务不允许修改任何内容
+- 监控类型为自定义监控的告警任务不允许修改命名空间
+- 步进规则绑定的告警任务不允许修改报警指标相关内容
+- 所有参数都为非必传，但是至少需要传入一个参数，否则报错
+- 伸缩功能开启或者关闭的情况下，都支持调用此接口
+ */
+func (c *AgClient) UpdateAsAlarm(request *ag.UpdateAsAlarmRequest) (*ag.UpdateAsAlarmResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ag.UpdateAsAlarmResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 使用过滤条件查询一个或多个弹性伸缩活动 */
+func (c *AgClient) DescribeScalingActivities(request *ag.DescribeScalingActivitiesRequest) (*ag.DescribeScalingActivitiesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ag.DescribeScalingActivitiesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建伸缩规则
+- 所有参数取值为字符串类型的都严格区分大小写
+- 伸缩功能关闭的情况下，不支持调用此接口
+- 目标跟踪规则创建后会自动生成两个告警任务，分别用于扩容和缩容
+- 步进规则必须绑定一个告警任务
+ */
+func (c *AgClient) CreateAsRule(request *ag.CreateAsRuleRequest) (*ag.CreateAsRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ag.CreateAsRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改定时任务
+- 所有参数取值为字符串类型的都严格区分大小写
+- 定时任务换绑高可用组，如果目前伸缩方式是执行简单规则，那么需要重新从新的高可用组中选择一个简单规则
+- 伸缩功能开启或者关闭的情况下，都支持调用此接口
+ */
+func (c *AgClient) UpdateAsCron(request *ag.UpdateAsCronRequest) (*ag.UpdateAsCronResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ag.UpdateAsCronResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查看伸缩规则
+- 所有参数取值为字符串类型的都严格区分大小写
+- 伸缩功能开启或者关闭的情况下，都支持调用此接口
+ */
+func (c *AgClient) DescribeAsRules(request *ag.DescribeAsRulesRequest) (*ag.DescribeAsRulesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ag.DescribeAsRulesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建告警任务
+- 所有参数取值为字符串类型的都严格区分大小写
+- 伸缩功能关闭的情况下，不支持调用此接口
+- 创建告警可以不选择简单伸缩规则，但是最终一个告警只允许关联一个简单规则和一个步进规则，步进规则优先级高于简单规则
+ */
+func (c *AgClient) CreateAsAlarm(request *ag.CreateAsAlarmRequest) (*ag.CreateAsAlarmResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ag.CreateAsAlarmResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 启用告警任务
+- 所有参数取值为字符串类型的都严格区分大小写
+- 伸缩功能关闭的情况下，不支持调用此接口
+ */
+func (c *AgClient) EnableAsAlarm(request *ag.EnableAsAlarmRequest) (*ag.EnableAsAlarmResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ag.EnableAsAlarmResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询(ag)配额 */
+func (c *AgClient) DescribeQuotas(request *ag.DescribeQuotasRequest) (*ag.DescribeQuotasResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ag.DescribeQuotasResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 开启弹性伸缩功能 */
+func (c *AgClient) EnableAutoScaling(request *ag.EnableAutoScalingRequest) (*ag.EnableAutoScalingResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ag.EnableAutoScalingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建定时任务
+- 所有参数取值为字符串类型的都严格区分大小写
+- 伸缩功能关闭的情况下，不支持调用此接口
+- 定时任务如果关联伸缩规则，只能关联简单规则，且一个定时任务只能关联一个简单规则
+ */
+func (c *AgClient) CreateAsCron(request *ag.CreateAsCronRequest) (*ag.CreateAsCronResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ag.CreateAsCronResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据 ID 删除高可用组，需确保 AG 中云主机实例已全部删除 */
+func (c *AgClient) DeleteAg(request *ag.DeleteAgRequest) (*ag.DeleteAgResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ag.DeleteAgResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 禁用告警任务
+- 所有参数取值为字符串类型的都严格区分大小写
+- 伸缩功能开启或者关闭的情况下，都支持调用此接口
+ */
+func (c *AgClient) DisableAsAlarm(request *ag.DisableAsAlarmRequest) (*ag.DisableAsAlarmResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ag.DisableAsAlarmResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新弹性伸缩组 */
+func (c *AgClient) UpdateAutoScaling(request *ag.UpdateAutoScalingRequest) (*ag.UpdateAutoScalingResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ag.UpdateAutoScalingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改高可用组的实例模板<br>- 对于更换实例模板来说，如果已经关联负载均衡，则VPC不可以更改。<br>- 自定义配置型不可更改实例模板。 */
+func (c *AgClient) SetInstanceTemplate(request *ag.SetInstanceTemplateRequest) (*ag.SetInstanceTemplateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ag.SetInstanceTemplateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除伸缩规则
+- 所有参数取值为字符串类型的都严格区分大小写
+- 伸缩功能开启或者关闭的情况下，都支持调用此接口
+- 删除目标跟踪规则后，会自动删除目标跟踪规则下的所有告警规则
+- 删除步进规则后，关联的告警规则会保留
+- 简单规则关联告警任务或者定时任务时，不允许删除简单规则
+ */
+func (c *AgClient) DeleteAsRule(request *ag.DeleteAsRuleRequest) (*ag.DeleteAsRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ag.DeleteAsRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 使用过滤条件查询一个或多个高可用组 */
 func (c *AgClient) DescribeAgs(request *ag.DescribeAgsRequest) (*ag.DescribeAgsResponse, error) {
     if request == nil {
@@ -208,6 +562,148 @@ func (c *AgClient) DescribeAgs(request *ag.DescribeAgsRequest) (*ag.DescribeAgsR
     }
 
     jdResp := &ag.DescribeAgsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查看定时任务
+- 所有参数取值为字符串类型的都严格区分大小写
+- 所有参数都为非必传，但是至少需要传入一个参数，否则报错
+- 伸缩功能开启或者关闭的情况下，都支持调用此接口
+- 定时任务如果关联伸缩规则，只能关联简单规则，且一个定时任务只能关联一个简单规则
+ */
+func (c *AgClient) DescribeAsCrons(request *ag.DescribeAsCronsRequest) (*ag.DescribeAsCronsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ag.DescribeAsCronsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除定时任务
+- 所有参数取值为字符串类型的都严格区分大小写
+- 伸缩功能开启或者关闭的情况下，都支持调用此接口
+- 定时任务关联简单规则，定时任务可以删除
+ */
+func (c *AgClient) DeleteAsCron(request *ag.DeleteAsCronRequest) (*ag.DeleteAsCronResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ag.DeleteAsCronResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 关闭弹性伸缩组 */
+func (c *AgClient) DisableAutoScaling(request *ag.DisableAutoScalingRequest) (*ag.DisableAutoScalingResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ag.DisableAutoScalingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改伸缩规则
+- 所有参数取值为字符串类型的都严格区分大小写
+- 所有伸缩规则不允许更换高可用组
+- 所有伸缩规则不允许修改伸缩规则类型
+- 步进规则不允许修改监控类型
+- 所有参数都为非必传，但是至少需要传入一个参数，否则报错
+- 伸缩功能开启或者关闭的情况下，都支持调用此接口
+ */
+func (c *AgClient) UpdateAsRule(request *ag.UpdateAsRuleRequest) (*ag.UpdateAsRuleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ag.UpdateAsRuleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 从高可用组中剔除实例 */
+func (c *AgClient) AbandonInstances(request *ag.AbandonInstancesRequest) (*ag.AbandonInstancesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ag.AbandonInstancesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除告警任务
+- 所有参数取值为字符串类型的都严格区分大小写
+- 伸缩功能开启或者关闭的情况下，都支持调用此接口
+- 目标跟踪规则生成的告警任务不允许删除
+- 告警任务关联简单规则，告警任务可以删除
+- 告警任务关联步进规则，告警任务不允许删除，但是可以删除步进规则，删除步进规则后，关联的告警任务会保留
+ */
+func (c *AgClient) DeleteAsAlarm(request *ag.DeleteAsAlarmRequest) (*ag.DeleteAsAlarmResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ag.DeleteAsAlarmResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

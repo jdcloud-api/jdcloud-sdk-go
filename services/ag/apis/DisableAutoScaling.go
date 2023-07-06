@@ -20,7 +20,7 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type AbandonInstancesRequest struct {
+type DisableAutoScalingRequest struct {
 
     core.JDCloudRequest
 
@@ -29,68 +29,59 @@ type AbandonInstancesRequest struct {
 
     /* 高可用组 ID  */
     AgId string `json:"agId"`
-
-    /* 准备剔除出高可用组的实例 ID  */
-    InstanceIds []string `json:"instanceIds"`
 }
 
 /*
  * param regionId: 地域 (Required)
  * param agId: 高可用组 ID (Required)
- * param instanceIds: 准备剔除出高可用组的实例 ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewAbandonInstancesRequest(
+func NewDisableAutoScalingRequest(
     regionId string,
     agId string,
-    instanceIds []string,
-) *AbandonInstancesRequest {
+) *DisableAutoScalingRequest {
 
-	return &AbandonInstancesRequest{
+	return &DisableAutoScalingRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/availabilityGroups/{agId}:abandonInstances",
-			Method:  "POST",
+			URL:     "/regions/{regionId}/autoScaling/{agId}:disable",
+			Method:  "PUT",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         AgId: agId,
-        InstanceIds: instanceIds,
 	}
 }
 
 /*
  * param regionId: 地域 (Required)
  * param agId: 高可用组 ID (Required)
- * param instanceIds: 准备剔除出高可用组的实例 ID (Required)
  */
-func NewAbandonInstancesRequestWithAllParams(
+func NewDisableAutoScalingRequestWithAllParams(
     regionId string,
     agId string,
-    instanceIds []string,
-) *AbandonInstancesRequest {
+) *DisableAutoScalingRequest {
 
-    return &AbandonInstancesRequest{
+    return &DisableAutoScalingRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/availabilityGroups/{agId}:abandonInstances",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/autoScaling/{agId}:disable",
+            Method:  "PUT",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         AgId: agId,
-        InstanceIds: instanceIds,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewAbandonInstancesRequestWithoutParam() *AbandonInstancesRequest {
+func NewDisableAutoScalingRequestWithoutParam() *DisableAutoScalingRequest {
 
-    return &AbandonInstancesRequest{
+    return &DisableAutoScalingRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/availabilityGroups/{agId}:abandonInstances",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/autoScaling/{agId}:disable",
+            Method:  "PUT",
             Header:  nil,
             Version: "v1",
         },
@@ -98,30 +89,26 @@ func NewAbandonInstancesRequestWithoutParam() *AbandonInstancesRequest {
 }
 
 /* param regionId: 地域(Required) */
-func (r *AbandonInstancesRequest) SetRegionId(regionId string) {
+func (r *DisableAutoScalingRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 /* param agId: 高可用组 ID(Required) */
-func (r *AbandonInstancesRequest) SetAgId(agId string) {
+func (r *DisableAutoScalingRequest) SetAgId(agId string) {
     r.AgId = agId
-}
-/* param instanceIds: 准备剔除出高可用组的实例 ID(Required) */
-func (r *AbandonInstancesRequest) SetInstanceIds(instanceIds []string) {
-    r.InstanceIds = instanceIds
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r AbandonInstancesRequest) GetRegionId() string {
+func (r DisableAutoScalingRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type AbandonInstancesResponse struct {
+type DisableAutoScalingResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result AbandonInstancesResult `json:"result"`
+    Result DisableAutoScalingResult `json:"result"`
 }
 
-type AbandonInstancesResult struct {
+type DisableAutoScalingResult struct {
 }

@@ -54,4 +54,10 @@ type AvailabilityGroup struct {
 
     /* 高可用组中实例数量的限制。 (Optional) */
     InstancesQuotas []InstancesQuota `json:"instancesQuotas"`
+
+    /*  (Optional) */
+    Instances []InstanceSpec `json:"instances"`
+
+    /*  (Optional) */
+    AutoscalingSpec AutoscalingSpec `json:"autoscalingSpec"`
 }
