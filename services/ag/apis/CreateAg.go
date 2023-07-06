@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    ag "github.com/jdcloud-api/jdcloud-sdk-go/services/ag/models"
 )
 
 type CreateAgRequest struct {
@@ -48,6 +49,8 @@ type CreateAgRequest struct {
     /* 高可用资源放置类型，支持fd、switch、host (Optional) */
     PlacementType *string `json:"placementType"`
 
+    /* 伸缩组详细信息，当创建时选择打开弹性伸缩功能时需要传该参数 (Optional) */
+    AutoscalingSpec *ag.AutoscalingSpec `json:"autoscalingSpec"`
 }
 
 /*
@@ -85,6 +88,7 @@ func NewCreateAgRequest(
  * param description: 描述，长度不超过 256 字符 (Optional)
  * param configurationType: 高可用组配置类型，支持strict(关联模板型)、loose(自定义配置型) (Optional)
  * param placementType: 高可用资源放置类型，支持fd、switch、host (Optional)
+ * param autoscalingSpec: 伸缩组详细信息，当创建时选择打开弹性伸缩功能时需要传该参数 (Optional)
  */
 func NewCreateAgRequestWithAllParams(
     regionId string,
@@ -95,6 +99,7 @@ func NewCreateAgRequestWithAllParams(
     description *string,
     configurationType *string,
     placementType *string,
+    autoscalingSpec *ag.AutoscalingSpec,
 ) *CreateAgRequest {
 
     return &CreateAgRequest{
@@ -112,6 +117,7 @@ func NewCreateAgRequestWithAllParams(
         Description: description,
         ConfigurationType: configurationType,
         PlacementType: placementType,
+        AutoscalingSpec: autoscalingSpec,
     }
 }
 
@@ -132,40 +138,37 @@ func NewCreateAgRequestWithoutParam() *CreateAgRequest {
 func (r *CreateAgRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param azs: 支持的可用区，最少一个(Required) */
 func (r *CreateAgRequest) SetAzs(azs []string) {
     r.Azs = azs
 }
-
 /* param agName: 高可用组名称，只支持中文、数字、大小写字母、英文下划线 “_” 及中划线 “-”，且不能超过 32 字符(Required) */
 func (r *CreateAgRequest) SetAgName(agName string) {
     r.AgName = agName
 }
-
 /* param agType: 高可用组资源类型，支持vm(Optional) */
 func (r *CreateAgRequest) SetAgType(agType string) {
     r.AgType = &agType
 }
-
 /* param instanceTemplateId: 实例模板的ID(Optional) */
 func (r *CreateAgRequest) SetInstanceTemplateId(instanceTemplateId string) {
     r.InstanceTemplateId = &instanceTemplateId
 }
-
 /* param description: 描述，长度不超过 256 字符(Optional) */
 func (r *CreateAgRequest) SetDescription(description string) {
     r.Description = &description
 }
-
 /* param configurationType: 高可用组配置类型，支持strict(关联模板型)、loose(自定义配置型)(Optional) */
 func (r *CreateAgRequest) SetConfigurationType(configurationType string) {
     r.ConfigurationType = &configurationType
 }
-
 /* param placementType: 高可用资源放置类型，支持fd、switch、host(Optional) */
 func (r *CreateAgRequest) SetPlacementType(placementType string) {
     r.PlacementType = &placementType
+}
+/* param autoscalingSpec: 伸缩组详细信息，当创建时选择打开弹性伸缩功能时需要传该参数(Optional) */
+func (r *CreateAgRequest) SetAutoscalingSpec(autoscalingSpec *ag.AutoscalingSpec) {
+    r.AutoscalingSpec = autoscalingSpec
 }
 
 

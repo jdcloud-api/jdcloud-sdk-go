@@ -29,7 +29,6 @@ type DeleteAgRequest struct {
 
     /* 高可用组 ID  */
     AgId string `json:"agId"`
-
 }
 
 /*
@@ -93,7 +92,6 @@ func NewDeleteAgRequestWithoutParam() *DeleteAgRequest {
 func (r *DeleteAgRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param agId: 高可用组 ID(Required) */
 func (r *DeleteAgRequest) SetAgId(agId string) {
     r.AgId = agId

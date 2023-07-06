@@ -18,100 +18,97 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    ag "github.com/jdcloud-api/jdcloud-sdk-go/services/ag/models"
-    common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
 
-type DescribeQuotasRequest struct {
+type DisableAsCronRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /* resourceTypes - 资源类型，暂时只支持[ag]
- (Optional) */
-    Filters []common.Filter `json:"filters"`
+    /* 定时任务ID  */
+    AsCronId string `json:"asCronId"`
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 地域ID (Required)
+ * param asCronId: 定时任务ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeQuotasRequest(
+func NewDisableAsCronRequest(
     regionId string,
-) *DescribeQuotasRequest {
+    asCronId string,
+) *DisableAsCronRequest {
 
-	return &DescribeQuotasRequest{
+	return &DisableAsCronRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/quotas",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/asCrons/{asCronId}:disable",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
+        AsCronId: asCronId,
 	}
 }
 
 /*
- * param regionId: Region ID (Required)
- * param filters: resourceTypes - 资源类型，暂时只支持[ag]
- (Optional)
+ * param regionId: 地域ID (Required)
+ * param asCronId: 定时任务ID (Required)
  */
-func NewDescribeQuotasRequestWithAllParams(
+func NewDisableAsCronRequestWithAllParams(
     regionId string,
-    filters []common.Filter,
-) *DescribeQuotasRequest {
+    asCronId string,
+) *DisableAsCronRequest {
 
-    return &DescribeQuotasRequest{
+    return &DisableAsCronRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/quotas",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/asCrons/{asCronId}:disable",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        Filters: filters,
+        AsCronId: asCronId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeQuotasRequestWithoutParam() *DescribeQuotasRequest {
+func NewDisableAsCronRequestWithoutParam() *DisableAsCronRequest {
 
-    return &DescribeQuotasRequest{
+    return &DisableAsCronRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/quotas",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/asCrons/{asCronId}:disable",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
     }
 }
 
-/* param regionId: Region ID(Required) */
-func (r *DescribeQuotasRequest) SetRegionId(regionId string) {
+/* param regionId: 地域ID(Required) */
+func (r *DisableAsCronRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-/* param filters: resourceTypes - 资源类型，暂时只支持[ag]
-(Optional) */
-func (r *DescribeQuotasRequest) SetFilters(filters []common.Filter) {
-    r.Filters = filters
+/* param asCronId: 定时任务ID(Required) */
+func (r *DisableAsCronRequest) SetAsCronId(asCronId string) {
+    r.AsCronId = asCronId
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeQuotasRequest) GetRegionId() string {
+func (r DisableAsCronRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeQuotasResponse struct {
+type DisableAsCronResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeQuotasResult `json:"result"`
+    Result DisableAsCronResult `json:"result"`
 }
 
-type DescribeQuotasResult struct {
-    Quotas []ag.Quota `json:"quotas"`
+type DisableAsCronResult struct {
 }

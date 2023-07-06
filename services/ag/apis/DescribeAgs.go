@@ -42,7 +42,6 @@ vpcId - vpc id，精确匹配
 placementType - placement type，放置策略
  (Optional) */
     Filters []common.Filter `json:"filters"`
-
 }
 
 /*
@@ -114,17 +113,14 @@ func NewDescribeAgsRequestWithoutParam() *DescribeAgsRequest {
 func (r *DescribeAgsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param pageNumber: 页码；默认为1(Optional) */
 func (r *DescribeAgsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小；默认为20；取值范围[10, 100](Optional) */
 func (r *DescribeAgsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param filters: agName - ag名字，支持模糊匹配
 agId - ag id，精确匹配
 instanceTemplateId - 实例模板id，精确匹配

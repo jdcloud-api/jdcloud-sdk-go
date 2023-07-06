@@ -18,100 +18,97 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    ag "github.com/jdcloud-api/jdcloud-sdk-go/services/ag/models"
-    common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
 
-type DescribeQuotasRequest struct {
+type DeleteAsRuleRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /* resourceTypes - 资源类型，暂时只支持[ag]
- (Optional) */
-    Filters []common.Filter `json:"filters"`
+    /* 伸缩规则ID  */
+    AsRuleId string `json:"asRuleId"`
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 地域ID (Required)
+ * param asRuleId: 伸缩规则ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeQuotasRequest(
+func NewDeleteAsRuleRequest(
     regionId string,
-) *DescribeQuotasRequest {
+    asRuleId string,
+) *DeleteAsRuleRequest {
 
-	return &DescribeQuotasRequest{
+	return &DeleteAsRuleRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/quotas",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/asRules/{asRuleId}",
+			Method:  "DELETE",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
+        AsRuleId: asRuleId,
 	}
 }
 
 /*
- * param regionId: Region ID (Required)
- * param filters: resourceTypes - 资源类型，暂时只支持[ag]
- (Optional)
+ * param regionId: 地域ID (Required)
+ * param asRuleId: 伸缩规则ID (Required)
  */
-func NewDescribeQuotasRequestWithAllParams(
+func NewDeleteAsRuleRequestWithAllParams(
     regionId string,
-    filters []common.Filter,
-) *DescribeQuotasRequest {
+    asRuleId string,
+) *DeleteAsRuleRequest {
 
-    return &DescribeQuotasRequest{
+    return &DeleteAsRuleRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/quotas",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/asRules/{asRuleId}",
+            Method:  "DELETE",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        Filters: filters,
+        AsRuleId: asRuleId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeQuotasRequestWithoutParam() *DescribeQuotasRequest {
+func NewDeleteAsRuleRequestWithoutParam() *DeleteAsRuleRequest {
 
-    return &DescribeQuotasRequest{
+    return &DeleteAsRuleRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/quotas",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/asRules/{asRuleId}",
+            Method:  "DELETE",
             Header:  nil,
             Version: "v1",
         },
     }
 }
 
-/* param regionId: Region ID(Required) */
-func (r *DescribeQuotasRequest) SetRegionId(regionId string) {
+/* param regionId: 地域ID(Required) */
+func (r *DeleteAsRuleRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-/* param filters: resourceTypes - 资源类型，暂时只支持[ag]
-(Optional) */
-func (r *DescribeQuotasRequest) SetFilters(filters []common.Filter) {
-    r.Filters = filters
+/* param asRuleId: 伸缩规则ID(Required) */
+func (r *DeleteAsRuleRequest) SetAsRuleId(asRuleId string) {
+    r.AsRuleId = asRuleId
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeQuotasRequest) GetRegionId() string {
+func (r DeleteAsRuleRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeQuotasResponse struct {
+type DeleteAsRuleResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeQuotasResult `json:"result"`
+    Result DeleteAsRuleResult `json:"result"`
 }
 
-type DescribeQuotasResult struct {
-    Quotas []ag.Quota `json:"quotas"`
+type DeleteAsRuleResult struct {
 }

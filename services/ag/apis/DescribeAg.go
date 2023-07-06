@@ -30,7 +30,6 @@ type DescribeAgRequest struct {
 
     /* 高可用组 ID  */
     AgId string `json:"agId"`
-
 }
 
 /*
@@ -94,7 +93,6 @@ func NewDescribeAgRequestWithoutParam() *DescribeAgRequest {
 func (r *DescribeAgRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param agId: 高可用组 ID(Required) */
 func (r *DescribeAgRequest) SetAgId(agId string) {
     r.AgId = agId

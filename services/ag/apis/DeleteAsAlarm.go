@@ -18,100 +18,97 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    ag "github.com/jdcloud-api/jdcloud-sdk-go/services/ag/models"
-    common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
 
-type DescribeQuotasRequest struct {
+type DeleteAsAlarmRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID  */
+    /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /* resourceTypes - 资源类型，暂时只支持[ag]
- (Optional) */
-    Filters []common.Filter `json:"filters"`
+    /* 告警任务ID  */
+    AsAlarmId string `json:"asAlarmId"`
 }
 
 /*
- * param regionId: Region ID (Required)
+ * param regionId: 地域ID (Required)
+ * param asAlarmId: 告警任务ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeQuotasRequest(
+func NewDeleteAsAlarmRequest(
     regionId string,
-) *DescribeQuotasRequest {
+    asAlarmId string,
+) *DeleteAsAlarmRequest {
 
-	return &DescribeQuotasRequest{
+	return &DeleteAsAlarmRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/quotas",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/asAlarms/{asAlarmId}",
+			Method:  "DELETE",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
+        AsAlarmId: asAlarmId,
 	}
 }
 
 /*
- * param regionId: Region ID (Required)
- * param filters: resourceTypes - 资源类型，暂时只支持[ag]
- (Optional)
+ * param regionId: 地域ID (Required)
+ * param asAlarmId: 告警任务ID (Required)
  */
-func NewDescribeQuotasRequestWithAllParams(
+func NewDeleteAsAlarmRequestWithAllParams(
     regionId string,
-    filters []common.Filter,
-) *DescribeQuotasRequest {
+    asAlarmId string,
+) *DeleteAsAlarmRequest {
 
-    return &DescribeQuotasRequest{
+    return &DeleteAsAlarmRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/quotas",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/asAlarms/{asAlarmId}",
+            Method:  "DELETE",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        Filters: filters,
+        AsAlarmId: asAlarmId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeQuotasRequestWithoutParam() *DescribeQuotasRequest {
+func NewDeleteAsAlarmRequestWithoutParam() *DeleteAsAlarmRequest {
 
-    return &DescribeQuotasRequest{
+    return &DeleteAsAlarmRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/quotas",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/asAlarms/{asAlarmId}",
+            Method:  "DELETE",
             Header:  nil,
             Version: "v1",
         },
     }
 }
 
-/* param regionId: Region ID(Required) */
-func (r *DescribeQuotasRequest) SetRegionId(regionId string) {
+/* param regionId: 地域ID(Required) */
+func (r *DeleteAsAlarmRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-/* param filters: resourceTypes - 资源类型，暂时只支持[ag]
-(Optional) */
-func (r *DescribeQuotasRequest) SetFilters(filters []common.Filter) {
-    r.Filters = filters
+/* param asAlarmId: 告警任务ID(Required) */
+func (r *DeleteAsAlarmRequest) SetAsAlarmId(asAlarmId string) {
+    r.AsAlarmId = asAlarmId
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeQuotasRequest) GetRegionId() string {
+func (r DeleteAsAlarmRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeQuotasResponse struct {
+type DeleteAsAlarmResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeQuotasResult `json:"result"`
+    Result DeleteAsAlarmResult `json:"result"`
 }
 
-type DescribeQuotasResult struct {
-    Quotas []ag.Quota `json:"quotas"`
+type DeleteAsAlarmResult struct {
 }
