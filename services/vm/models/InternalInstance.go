@@ -82,6 +82,9 @@ type InternalInstance struct {
     /* 云主机所属的专有宿主机ID。 (Optional) */
     DedicatedHostId string `json:"dedicatedHostId"`
 
+    /* 虚机CPU拓扑 (Optional) */
+    CpuTopology CpuTopology `json:"cpuTopology"`
+
     /* 实例所在的物理机IP地址。 (Optional) */
     HostIp string `json:"hostIp"`
 

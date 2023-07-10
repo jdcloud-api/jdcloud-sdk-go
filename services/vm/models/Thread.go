@@ -23,5 +23,5 @@ type Thread struct {
     Id *int `json:"id"`
 
     /* physical cpu pinned to (Optional) */
-    Pin *int `json:"pin"`
+    Pin *string `json:"pin"`
 }
