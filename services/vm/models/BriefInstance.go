@@ -81,4 +81,7 @@ type BriefInstance struct {
 
     /* 云主机所属的专有宿主机ID。 (Optional) */
     DedicatedHostId string `json:"dedicatedHostId"`
+
+    /* 虚机CPU拓扑 (Optional) */
+    CpuTopology CpuTopology `json:"cpuTopology"`
 }

@@ -42,6 +42,10 @@ type ModifyInstancePlacementRequest struct {
     /* 是否确认清除本地盘数据，默认 false
  (Optional) */
     ClearLocalDisk *bool `json:"clearLocalDisk"`
+
+    /* 是否托管实例的生命周期，默认为false；若为包年包月实例，可加入但不支持托管；该字段仅AG开启AS时生效。托管实例将在缩容或健康检查失败时被删除，非托管实例仅移出伸缩组
+ (Optional) */
+    IsManaged *bool `json:"isManaged"`
 }
 
 /*
@@ -77,6 +81,8 @@ func NewModifyInstancePlacementRequest(
  (Optional)
  * param clearLocalDisk: 是否确认清除本地盘数据，默认 false
  (Optional)
+ * param isManaged: 是否托管实例的生命周期，默认为false；若为包年包月实例，可加入但不支持托管；该字段仅AG开启AS时生效。托管实例将在缩容或健康检查失败时被删除，非托管实例仅移出伸缩组
+ (Optional)
  */
 func NewModifyInstancePlacementRequestWithAllParams(
     regionId string,
@@ -84,6 +90,7 @@ func NewModifyInstancePlacementRequestWithAllParams(
     agId *string,
     balance *bool,
     clearLocalDisk *bool,
+    isManaged *bool,
 ) *ModifyInstancePlacementRequest {
 
     return &ModifyInstancePlacementRequest{
@@ -98,6 +105,7 @@ func NewModifyInstancePlacementRequestWithAllParams(
         AgId: agId,
         Balance: balance,
         ClearLocalDisk: clearLocalDisk,
+        IsManaged: isManaged,
     }
 }
 
@@ -137,6 +145,11 @@ func (r *ModifyInstancePlacementRequest) SetBalance(balance bool) {
 (Optional) */
 func (r *ModifyInstancePlacementRequest) SetClearLocalDisk(clearLocalDisk bool) {
     r.ClearLocalDisk = &clearLocalDisk
+}
+/* param isManaged: 是否托管实例的生命周期，默认为false；若为包年包月实例，可加入但不支持托管；该字段仅AG开启AS时生效。托管实例将在缩容或健康检查失败时被删除，非托管实例仅移出伸缩组
+(Optional) */
+func (r *ModifyInstancePlacementRequest) SetIsManaged(isManaged bool) {
+    r.IsManaged = &isManaged
 }
 
 
