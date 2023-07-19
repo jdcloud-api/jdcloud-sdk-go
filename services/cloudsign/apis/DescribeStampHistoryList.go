@@ -21,67 +21,70 @@ import (
     cloudsign "github.com/jdcloud-api/jdcloud-sdk-go/services/cloudsign/models"
 )
 
-type DescribeStampListRequest struct {
+type DescribeStampHistoryListRequest struct {
 
     core.JDCloudRequest
-
-    /* 页码, 默认为1 (Optional) */
-    PageNumber *int `json:"pageNumber"`
 
     /* 分页大小, 默认为10, 取值范围[10, 100] (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* 印章名称 (Optional) */
-    StampName *string `json:"stampName"`
+    /* 页码, 默认为1 (Optional) */
+    PageNumber *int `json:"pageNumber"`
+
+    /* 印章ID  */
+    StampId string `json:"stampId"`
 }
 
 /*
+ * param stampId: 印章ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeStampListRequest(
-) *DescribeStampListRequest {
+func NewDescribeStampHistoryListRequest(
+    stampId string,
+) *DescribeStampHistoryListRequest {
 
-	return &DescribeStampListRequest{
+	return &DescribeStampHistoryListRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/smqStamp:describeStampList",
+			URL:     "/smqStamphistory:describeStampHistoryList",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
+        StampId: stampId,
 	}
 }
 
 /*
- * param pageNumber: 页码, 默认为1 (Optional)
  * param pageSize: 分页大小, 默认为10, 取值范围[10, 100] (Optional)
- * param stampName: 印章名称 (Optional)
+ * param pageNumber: 页码, 默认为1 (Optional)
+ * param stampId: 印章ID (Required)
  */
-func NewDescribeStampListRequestWithAllParams(
-    pageNumber *int,
+func NewDescribeStampHistoryListRequestWithAllParams(
     pageSize *int,
-    stampName *string,
-) *DescribeStampListRequest {
+    pageNumber *int,
+    stampId string,
+) *DescribeStampHistoryListRequest {
 
-    return &DescribeStampListRequest{
+    return &DescribeStampHistoryListRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/smqStamp:describeStampList",
+            URL:     "/smqStamphistory:describeStampHistoryList",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
-        PageNumber: pageNumber,
         PageSize: pageSize,
-        StampName: stampName,
+        PageNumber: pageNumber,
+        StampId: stampId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeStampListRequestWithoutParam() *DescribeStampListRequest {
+func NewDescribeStampHistoryListRequestWithoutParam() *DescribeStampHistoryListRequest {
 
-    return &DescribeStampListRequest{
+    return &DescribeStampHistoryListRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/smqStamp:describeStampList",
+            URL:     "/smqStamphistory:describeStampHistoryList",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -89,35 +92,35 @@ func NewDescribeStampListRequestWithoutParam() *DescribeStampListRequest {
     }
 }
 
-/* param pageNumber: 页码, 默认为1(Optional) */
-func (r *DescribeStampListRequest) SetPageNumber(pageNumber int) {
-    r.PageNumber = &pageNumber
-}
 /* param pageSize: 分页大小, 默认为10, 取值范围[10, 100](Optional) */
-func (r *DescribeStampListRequest) SetPageSize(pageSize int) {
+func (r *DescribeStampHistoryListRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-/* param stampName: 印章名称(Optional) */
-func (r *DescribeStampListRequest) SetStampName(stampName string) {
-    r.StampName = &stampName
+/* param pageNumber: 页码, 默认为1(Optional) */
+func (r *DescribeStampHistoryListRequest) SetPageNumber(pageNumber int) {
+    r.PageNumber = &pageNumber
+}
+/* param stampId: 印章ID(Required) */
+func (r *DescribeStampHistoryListRequest) SetStampId(stampId string) {
+    r.StampId = stampId
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeStampListRequest) GetRegionId() string {
+func (r DescribeStampHistoryListRequest) GetRegionId() string {
     return ""
 }
 
-type DescribeStampListResponse struct {
+type DescribeStampHistoryListResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeStampListResult `json:"result"`
+    Result DescribeStampHistoryListResult `json:"result"`
 }
 
-type DescribeStampListResult struct {
-    StampList []cloudsign.StampInfo `json:"stampList"`
-    TotalCount int `json:"totalCount"`
-    PageNumber int `json:"pageNumber"`
-    PageSize int `json:"pageSize"`
+type DescribeStampHistoryListResult struct {
+    Success bool `json:"success"`
+    Message string `json:"message"`
+    Code string `json:"code"`
+    Data cloudsign.PageStampHistoryResp `json:"data"`
 }

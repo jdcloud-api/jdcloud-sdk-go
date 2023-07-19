@@ -39,7 +39,7 @@ func NewDeleteTemplateRequest(
 
 	return &DeleteTemplateRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/template/{templateId}",
+			URL:     "/smqTmplate/{templateId}:deleteTemplate",
 			Method:  "DELETE",
 			Header:  nil,
 			Version: "v1",
@@ -57,7 +57,7 @@ func NewDeleteTemplateRequestWithAllParams(
 
     return &DeleteTemplateRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/template/{templateId}",
+            URL:     "/smqTmplate/{templateId}:deleteTemplate",
             Method:  "DELETE",
             Header:  nil,
             Version: "v1",
@@ -71,7 +71,7 @@ func NewDeleteTemplateRequestWithoutParam() *DeleteTemplateRequest {
 
     return &DeleteTemplateRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/template/{templateId}",
+            URL:     "/smqTmplate/{templateId}:deleteTemplate",
             Method:  "DELETE",
             Header:  nil,
             Version: "v1",

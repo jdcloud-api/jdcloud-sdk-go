@@ -17,25 +17,26 @@
 package models
 
 
-type TemplateSpec struct {
+type ReadySignContractResp struct {
 
-    /* 合同模板文件（base64） (Optional) */
-    TemplateContent *string `json:"templateContent"`
+    /* 合同信息 (Optional) */
+    PageInfos []PdfPageInfo `json:"pageInfos"`
 
-    /* 合同模板名称 (Optional) */
-    TemplateName *string `json:"templateName"`
+    /* 印章信息 (Optional) */
+    SignStamps []SignStampInfo `json:"signStamps"`
 
-    /* 合同模板标题 (Optional) */
-    TemplateTitle *string `json:"templateTitle"`
+    /* 合同名称 (Optional) */
+    FileName string `json:"fileName"`
 
-    /* 模板类型 pdf,word (word为可编辑模板) (Optional) */
-    TemplateType *string `json:"templateType"`
+    /* 接收短信验证码手机号(意愿验证手机号) (Optional) */
+    Mobile string `json:"mobile"`
 
-    /* 备注 (Optional) */
-    Note *string `json:"note"`
+    /* 合同发起人 (Optional) */
+    SenderName string `json:"senderName"`
 
-    /* 占位符关键字,templateType为word时必传
-在word文档中为双大括号里的内容, 比如{{单位名称}}
- (Optional) */
-    HoldingKeys []string `json:"holdingKeys"`
+    /* 当前签署人 (Optional) */
+    SigningName string `json:"signingName"`
+
+    /* 0:坐标盖章 1:关键字盖章 (Optional) */
+    SignPositionType int `json:"signPositionType"`
 }

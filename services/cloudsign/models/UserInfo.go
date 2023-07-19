@@ -17,25 +17,23 @@
 package models
 
 
-type TemplateSpec struct {
+type UserInfo struct {
 
-    /* 合同模板文件（base64） (Optional) */
-    TemplateContent *string `json:"templateContent"`
+    /* 姓名 或 企业名 (Optional) */
+    Name string `json:"name"`
 
-    /* 合同模板名称 (Optional) */
-    TemplateName *string `json:"templateName"`
+    /* 手机号（个人信息需要设置） (Optional) */
+    Mobile string `json:"mobile"`
 
-    /* 合同模板标题 (Optional) */
-    TemplateTitle *string `json:"templateTitle"`
+    /* 身份证号（个人信息需要设置） (Optional) */
+    IdCardNum string `json:"idCardNum"`
 
-    /* 模板类型 pdf,word (word为可编辑模板) (Optional) */
-    TemplateType *string `json:"templateType"`
+    /* 签署序号 (Optional) */
+    SignOrder int `json:"signOrder"`
 
-    /* 备注 (Optional) */
-    Note *string `json:"note"`
+    /* 用户类型 （0 个人用户，1 企业用户 ） (Optional) */
+    UserType int `json:"userType"`
 
-    /* 占位符关键字,templateType为word时必传
-在word文档中为双大括号里的内容, 比如{{单位名称}}
- (Optional) */
-    HoldingKeys []string `json:"holdingKeys"`
+    /* 关键字签署时，需要设置盖章关键字 (Optional) */
+    Keyword string `json:"keyword"`
 }

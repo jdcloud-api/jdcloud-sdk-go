@@ -17,25 +17,14 @@
 package models
 
 
-type TemplateSpec struct {
+type UserCenterInfo struct {
 
-    /* 合同模板文件（base64） (Optional) */
-    TemplateContent *string `json:"templateContent"`
+    /* 个人用户-姓名,企业用户-法人姓名 (Optional) */
+    Name string `json:"name"`
 
-    /* 合同模板名称 (Optional) */
-    TemplateName *string `json:"templateName"`
+    /* 个人用户-身份证号,企业用户-法人身份证号 (Optional) */
+    IdCardNum string `json:"idCardNum"`
 
-    /* 合同模板标题 (Optional) */
-    TemplateTitle *string `json:"templateTitle"`
-
-    /* 模板类型 pdf,word (word为可编辑模板) (Optional) */
-    TemplateType *string `json:"templateType"`
-
-    /* 备注 (Optional) */
-    Note *string `json:"note"`
-
-    /* 占位符关键字,templateType为word时必传
-在word文档中为双大括号里的内容, 比如{{单位名称}}
- (Optional) */
-    HoldingKeys []string `json:"holdingKeys"`
+    /* 个人用户-个人手机号,企业用户-法人手机号 (Optional) */
+    Mobile string `json:"mobile"`
 }
