@@ -33,4 +33,10 @@ type StampInfo struct {
 
     /* 印章上传时间 (Optional) */
     CreateTime string `json:"createTime"`
+
+    /* 印章下载地址 (Optional) */
+    StampUrl string `json:"stampUrl"`
+
+    /* 印章属性 (Optional) */
+    StampAttributes string `json:"stampAttributes"`
 }

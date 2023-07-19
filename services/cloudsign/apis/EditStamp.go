@@ -18,61 +18,63 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    cloudsign "github.com/jdcloud-api/jdcloud-sdk-go/services/cloudsign/models"
 )
 
-type UploadTemplateRequest struct {
+type EditStampRequest struct {
 
     core.JDCloudRequest
 
-    /*   */
-    TemplateSpec *cloudsign.TemplateSpec `json:"templateSpec"`
+    /* 印章ID (Optional) */
+    StampId *string `json:"stampId"`
+
+    /* 印章名称 (Optional) */
+    StampName *string `json:"stampName"`
 }
 
 /*
- * param templateSpec:  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewUploadTemplateRequest(
-    templateSpec *cloudsign.TemplateSpec,
-) *UploadTemplateRequest {
+func NewEditStampRequest(
+) *EditStampRequest {
 
-	return &UploadTemplateRequest{
+	return &EditStampRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/smqTmplate:uploadTemplate",
+			URL:     "/smqStamp:editStamp",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
-        TemplateSpec: templateSpec,
 	}
 }
 
 /*
- * param templateSpec:  (Required)
+ * param stampId: 印章ID (Optional)
+ * param stampName: 印章名称 (Optional)
  */
-func NewUploadTemplateRequestWithAllParams(
-    templateSpec *cloudsign.TemplateSpec,
-) *UploadTemplateRequest {
+func NewEditStampRequestWithAllParams(
+    stampId *string,
+    stampName *string,
+) *EditStampRequest {
 
-    return &UploadTemplateRequest{
+    return &EditStampRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/smqTmplate:uploadTemplate",
+            URL:     "/smqStamp:editStamp",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
-        TemplateSpec: templateSpec,
+        StampId: stampId,
+        StampName: stampName,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewUploadTemplateRequestWithoutParam() *UploadTemplateRequest {
+func NewEditStampRequestWithoutParam() *EditStampRequest {
 
-    return &UploadTemplateRequest{
+    return &EditStampRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/smqTmplate:uploadTemplate",
+            URL:     "/smqStamp:editStamp",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -80,24 +82,30 @@ func NewUploadTemplateRequestWithoutParam() *UploadTemplateRequest {
     }
 }
 
-/* param templateSpec: (Required) */
-func (r *UploadTemplateRequest) SetTemplateSpec(templateSpec *cloudsign.TemplateSpec) {
-    r.TemplateSpec = templateSpec
+/* param stampId: 印章ID(Optional) */
+func (r *EditStampRequest) SetStampId(stampId string) {
+    r.StampId = &stampId
+}
+/* param stampName: 印章名称(Optional) */
+func (r *EditStampRequest) SetStampName(stampName string) {
+    r.StampName = &stampName
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r UploadTemplateRequest) GetRegionId() string {
+func (r EditStampRequest) GetRegionId() string {
     return ""
 }
 
-type UploadTemplateResponse struct {
+type EditStampResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result UploadTemplateResult `json:"result"`
+    Result EditStampResult `json:"result"`
 }
 
-type UploadTemplateResult struct {
-    TemplateId string `json:"templateId"`
+type EditStampResult struct {
+    Success bool `json:"success"`
+    Message string `json:"message"`
+    Code string `json:"code"`
 }

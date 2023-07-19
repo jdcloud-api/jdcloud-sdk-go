@@ -17,25 +17,20 @@
 package models
 
 
-type TemplateSpec struct {
+type SignContractSpec struct {
 
-    /* 合同模板文件（base64） (Optional) */
-    TemplateContent *string `json:"templateContent"`
+    /* 合同记录Id (Optional) */
+    ContractRecordId string `json:"contractRecordId"`
 
-    /* 合同模板名称 (Optional) */
-    TemplateName *string `json:"templateName"`
+    /* 短信验证码 (Optional) */
+    SmsCode string `json:"smsCode"`
 
-    /* 合同模板标题 (Optional) */
-    TemplateTitle *string `json:"templateTitle"`
+    /* 手机号 (Optional) */
+    Mobile string `json:"mobile"`
 
-    /* 模板类型 pdf,word (word为可编辑模板) (Optional) */
-    TemplateType *string `json:"templateType"`
+    /* 印章id （关键字盖章使用的印章，不传使用默认印章） (Optional) */
+    StampId string `json:"stampId"`
 
-    /* 备注 (Optional) */
-    Note *string `json:"note"`
-
-    /* 占位符关键字,templateType为word时必传
-在word文档中为双大括号里的内容, 比如{{单位名称}}
- (Optional) */
-    HoldingKeys []string `json:"holdingKeys"`
+    /* 坐标盖章印章信息 (Optional) */
+    Signatures []SignatureInfo `json:"signatures"`
 }

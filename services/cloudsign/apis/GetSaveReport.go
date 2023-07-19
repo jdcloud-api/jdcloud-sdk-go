@@ -18,61 +18,66 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    cloudsign "github.com/jdcloud-api/jdcloud-sdk-go/services/cloudsign/models"
 )
 
-type DownloadTemplatesRequest struct {
+type GetSaveReportRequest struct {
 
     core.JDCloudRequest
 
-    /* 合同模板ID  */
-    TemplateId string `json:"templateId"`
+    /* 业务流水号  */
+    BusinessId string `json:"businessId"`
+
+    /* 业务代码 (Optional) */
+    ChainCode *string `json:"chainCode"`
 }
 
 /*
- * param templateId: 合同模板ID (Required)
+ * param businessId: 业务流水号 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDownloadTemplatesRequest(
-    templateId string,
-) *DownloadTemplatesRequest {
+func NewGetSaveReportRequest(
+    businessId string,
+) *GetSaveReportRequest {
 
-	return &DownloadTemplatesRequest{
+	return &GetSaveReportRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/smqTmplate/{templateId}:downloadTemplates",
+			URL:     "/evidence:evidenceGetSaveReport",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
-        TemplateId: templateId,
+        BusinessId: businessId,
 	}
 }
 
 /*
- * param templateId: 合同模板ID (Required)
+ * param businessId: 业务流水号 (Required)
+ * param chainCode: 业务代码 (Optional)
  */
-func NewDownloadTemplatesRequestWithAllParams(
-    templateId string,
-) *DownloadTemplatesRequest {
+func NewGetSaveReportRequestWithAllParams(
+    businessId string,
+    chainCode *string,
+) *GetSaveReportRequest {
 
-    return &DownloadTemplatesRequest{
+    return &GetSaveReportRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/smqTmplate/{templateId}:downloadTemplates",
+            URL:     "/evidence:evidenceGetSaveReport",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
-        TemplateId: templateId,
+        BusinessId: businessId,
+        ChainCode: chainCode,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDownloadTemplatesRequestWithoutParam() *DownloadTemplatesRequest {
+func NewGetSaveReportRequestWithoutParam() *GetSaveReportRequest {
 
-    return &DownloadTemplatesRequest{
+    return &GetSaveReportRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/smqTmplate/{templateId}:downloadTemplates",
+            URL:     "/evidence:evidenceGetSaveReport",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -80,24 +85,31 @@ func NewDownloadTemplatesRequestWithoutParam() *DownloadTemplatesRequest {
     }
 }
 
-/* param templateId: 合同模板ID(Required) */
-func (r *DownloadTemplatesRequest) SetTemplateId(templateId string) {
-    r.TemplateId = templateId
+/* param businessId: 业务流水号(Required) */
+func (r *GetSaveReportRequest) SetBusinessId(businessId string) {
+    r.BusinessId = businessId
+}
+/* param chainCode: 业务代码(Optional) */
+func (r *GetSaveReportRequest) SetChainCode(chainCode string) {
+    r.ChainCode = &chainCode
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DownloadTemplatesRequest) GetRegionId() string {
+func (r GetSaveReportRequest) GetRegionId() string {
     return ""
 }
 
-type DownloadTemplatesResponse struct {
+type GetSaveReportResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DownloadTemplatesResult `json:"result"`
+    Result GetSaveReportResult `json:"result"`
 }
 
-type DownloadTemplatesResult struct {
-    TemplateList []cloudsign.TemplateInfo `json:"templateList"`
+type GetSaveReportResult struct {
+    Code string `json:"code"`
+    Message string `json:"message"`
+    Success bool `json:"success"`
+    Data interface{} `json:"data"`
 }

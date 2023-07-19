@@ -17,25 +17,23 @@
 package models
 
 
-type TemplateSpec struct {
+type StampHistoryInfo struct {
 
-    /* 合同模板文件（base64） (Optional) */
-    TemplateContent *string `json:"templateContent"`
+    /* 印章操作记录ID (Optional) */
+    Id string `json:"id"`
 
-    /* 合同模板名称 (Optional) */
-    TemplateName *string `json:"templateName"`
+    /* 操作主体 (Optional) */
+    CreatedBy string `json:"createdBy"`
 
-    /* 合同模板标题 (Optional) */
-    TemplateTitle *string `json:"templateTitle"`
+    /* 联系方式 (Optional) */
+    OperatorPhone string `json:"operatorPhone"`
 
-    /* 模板类型 pdf,word (word为可编辑模板) (Optional) */
-    TemplateType *string `json:"templateType"`
+    /* 操作时间 (Optional) */
+    CreateTime string `json:"createTime"`
 
-    /* 备注 (Optional) */
-    Note *string `json:"note"`
+    /* 操作类型：创建印章、编辑印章、删除印章、加盖印章 (Optional) */
+    OperatorType string `json:"operatorType"`
 
-    /* 占位符关键字,templateType为word时必传
-在word文档中为双大括号里的内容, 比如{{单位名称}}
- (Optional) */
-    HoldingKeys []string `json:"holdingKeys"`
+    /* 备注——合同信息 (Optional) */
+    Note string `json:"note"`
 }

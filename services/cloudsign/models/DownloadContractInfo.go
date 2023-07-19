@@ -17,25 +17,20 @@
 package models
 
 
-type TemplateSpec struct {
+type DownloadContractInfo struct {
 
-    /* 合同模板文件（base64） (Optional) */
-    TemplateContent *string `json:"templateContent"`
+    /* 合同id (Optional) */
+    ContractId string `json:"contractId"`
 
-    /* 合同模板名称 (Optional) */
-    TemplateName *string `json:"templateName"`
+    /* 合同名称 (Optional) */
+    ContractName string `json:"contractName"`
 
-    /* 合同模板标题 (Optional) */
-    TemplateTitle *string `json:"templateTitle"`
+    /* 合同base64 (Optional) */
+    ContractContent string `json:"contractContent"`
 
-    /* 模板类型 pdf,word (word为可编辑模板) (Optional) */
-    TemplateType *string `json:"templateType"`
+    /* 合同hash (Optional) */
+    ContractDigest string `json:"contractDigest"`
 
-    /* 备注 (Optional) */
-    Note *string `json:"note"`
-
-    /* 占位符关键字,templateType为word时必传
-在word文档中为双大括号里的内容, 比如{{单位名称}}
- (Optional) */
-    HoldingKeys []string `json:"holdingKeys"`
+    /* 操作时间 格式：yyyy-MM-dd HH:mm:ss (Optional) */
+    CreateTime string `json:"createTime"`
 }

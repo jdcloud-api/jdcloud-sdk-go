@@ -17,25 +17,8 @@
 package models
 
 
-type TemplateSpec struct {
+type SmsSpec struct {
 
-    /* 合同模板文件（base64） (Optional) */
-    TemplateContent *string `json:"templateContent"`
-
-    /* 合同模板名称 (Optional) */
-    TemplateName *string `json:"templateName"`
-
-    /* 合同模板标题 (Optional) */
-    TemplateTitle *string `json:"templateTitle"`
-
-    /* 模板类型 pdf,word (word为可编辑模板) (Optional) */
-    TemplateType *string `json:"templateType"`
-
-    /* 备注 (Optional) */
-    Note *string `json:"note"`
-
-    /* 占位符关键字,templateType为word时必传
-在word文档中为双大括号里的内容, 比如{{单位名称}}
- (Optional) */
-    HoldingKeys []string `json:"holdingKeys"`
+    /* 合同记录Id (Optional) */
+    ContractRecordId string `json:"contractRecordId"`
 }

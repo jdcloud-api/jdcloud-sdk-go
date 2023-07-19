@@ -47,7 +47,7 @@ func NewDescribeTemplateListRequest(
 
 	return &DescribeTemplateListRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/template",
+			URL:     "/smqTmplate:describeTemplateList",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -70,7 +70,7 @@ func NewDescribeTemplateListRequestWithAllParams(
 
     return &DescribeTemplateListRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/template",
+            URL:     "/smqTmplate:describeTemplateList",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -87,7 +87,7 @@ func NewDescribeTemplateListRequestWithoutParam() *DescribeTemplateListRequest {
 
     return &DescribeTemplateListRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/template",
+            URL:     "/smqTmplate:describeTemplateList",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -128,4 +128,6 @@ type DescribeTemplateListResponse struct {
 type DescribeTemplateListResult struct {
     TemplateList []cloudsign.TemplateInfo `json:"templateList"`
     TotalCount int `json:"totalCount"`
+    PageNumber int `json:"pageNumber"`
+    PageSize int `json:"pageSize"`
 }

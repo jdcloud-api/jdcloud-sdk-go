@@ -17,25 +17,14 @@
 package models
 
 
-type TemplateSpec struct {
+type PageAgentSpec struct {
 
-    /* 合同模板文件（base64） (Optional) */
-    TemplateContent *string `json:"templateContent"`
+    /* 授权人姓名 (Optional) */
+    AgentName string `json:"agentName"`
 
-    /* 合同模板名称 (Optional) */
-    TemplateName *string `json:"templateName"`
+    /* 手机号 (Optional) */
+    AgentPhone string `json:"agentPhone"`
 
-    /* 合同模板标题 (Optional) */
-    TemplateTitle *string `json:"templateTitle"`
-
-    /* 模板类型 pdf,word (word为可编辑模板) (Optional) */
-    TemplateType *string `json:"templateType"`
-
-    /* 备注 (Optional) */
-    Note *string `json:"note"`
-
-    /* 占位符关键字,templateType为word时必传
-在word文档中为双大括号里的内容, 比如{{单位名称}}
- (Optional) */
-    HoldingKeys []string `json:"holdingKeys"`
+    /* 身份证号 (Optional) */
+    AgentIdCardNum string `json:"agentIdCardNum"`
 }
