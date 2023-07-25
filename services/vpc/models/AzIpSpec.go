@@ -21,7 +21,7 @@ import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
 type AzIpSpec struct {
 
     /* IP线路类型，仅支持bgp，默认值bgp (Optional) */
-    Provider string `json:"provider"`
+    Provider *string `json:"provider"`
 
     /* 公网IP可用区属性  */
     Az string `json:"az"`
@@ -30,5 +30,5 @@ type AzIpSpec struct {
     BandwidthMbps int `json:"bandwidthMbps"`
 
     /* 计费配置,支持按配置、按用量，默认按配置 (Optional) */
-    IpCharge charge.ChargeSpec `json:"ipCharge"`
+    IpCharge *charge.ChargeSpec `json:"ipCharge"`
 }

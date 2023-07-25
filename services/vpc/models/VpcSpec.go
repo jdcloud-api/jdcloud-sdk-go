@@ -28,6 +28,9 @@ type VpcSpec struct {
     /* vpc描述，允许输入UTF-8编码下的全部字符，不超过256字符。 (Optional) */
     Description string `json:"description"`
 
+    /* 取值包括true、false，默认为false，不开启组播。 (Optional) */
+    EnableMulticast bool `json:"enableMulticast"`
+
     /* VPC az类型，取值：standard(标准VPC)，edge(边缘VPC) (Optional) */
     AzType string `json:"azType"`
 

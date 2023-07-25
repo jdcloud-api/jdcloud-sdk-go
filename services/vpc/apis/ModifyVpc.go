@@ -35,6 +35,9 @@ type ModifyVpcRequest struct {
 
     /* vpc描述，允许输入UTF-8编码下的全部字符，不超过256字符。 (Optional) */
     Description *string `json:"description"`
+
+    /* 取值包括true、false，默认为false，不开启组播。 (Optional) */
+    EnableMulticast *bool `json:"enableMulticast"`
 }
 
 /*
@@ -65,12 +68,14 @@ func NewModifyVpcRequest(
  * param vpcId: Vpc ID (Required)
  * param vpcName: 私有网络名称,只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符。 (Optional)
  * param description: vpc描述，允许输入UTF-8编码下的全部字符，不超过256字符。 (Optional)
+ * param enableMulticast: 取值包括true、false，默认为false，不开启组播。 (Optional)
  */
 func NewModifyVpcRequestWithAllParams(
     regionId string,
     vpcId string,
     vpcName *string,
     description *string,
+    enableMulticast *bool,
 ) *ModifyVpcRequest {
 
     return &ModifyVpcRequest{
@@ -84,6 +89,7 @@ func NewModifyVpcRequestWithAllParams(
         VpcId: vpcId,
         VpcName: vpcName,
         Description: description,
+        EnableMulticast: enableMulticast,
     }
 }
 
@@ -115,6 +121,10 @@ func (r *ModifyVpcRequest) SetVpcName(vpcName string) {
 /* param description: vpc描述，允许输入UTF-8编码下的全部字符，不超过256字符。(Optional) */
 func (r *ModifyVpcRequest) SetDescription(description string) {
     r.Description = &description
+}
+/* param enableMulticast: 取值包括true、false，默认为false，不开启组播。(Optional) */
+func (r *ModifyVpcRequest) SetEnableMulticast(enableMulticast bool) {
+    r.EnableMulticast = &enableMulticast
 }
 
 

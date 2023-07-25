@@ -63,4 +63,10 @@ type Subnet struct {
 
     /* 子网是否为外部子网（即子网路由表中存在下一跳为internet的路由）。true表示外部子网，false表示内部子网 (Optional) */
     PublicSubnet bool `json:"publicSubnet"`
+
+    /* 域名后缀，不限制个数。总长度最长254个字符，仅支持字母，数字，中划线，下划线和点。 (Optional) */
+    DomainNames []string `json:"domainNames"`
+
+    /* 域名服务器地址。最多支持5个IPv4地址，不同IPv4地址使用逗号分隔。如不输入，默认使用京东云默认DNS域名服务器地址。如不添加默认DNS域名服务器，可能会导致您无法访问京东云云上基础服务，请谨慎操作 (Optional) */
+    DomainNameServers []string `json:"domainNameServers"`
 }

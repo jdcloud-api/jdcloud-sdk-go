@@ -53,9 +53,6 @@ type NatGateway struct {
     /* NAT网关公网IP (Optional) */
     ElasticIps []NatGatewayElasticIp `json:"elasticIps"`
 
-    /* NAT网关的IP可用区属性,即将废弃 (Optional) */
-    AzIp []AzIp `json:"azIp"`
-
     /* NAT网关创建时间 (Optional) */
     CreatedTime string `json:"createdTime"`
 
