@@ -49,6 +49,6 @@ type NetworkAclRule struct {
     /* networkAclRule创建时间 (Optional) */
     CreatedTime string `json:"createdTime"`
 
-    /* 规则类型，default：默认规则，custom：自定义规则 (Optional) */
+    /* 规则类型，default：默认规则，custom：自定义规则，service：服务创建规则 (Optional) */
     RuleType string `json:"ruleType"`
 }

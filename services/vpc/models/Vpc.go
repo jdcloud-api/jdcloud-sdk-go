@@ -51,4 +51,7 @@ type Vpc struct {
 
     /* VPC关联的策略Id (Optional) */
     VpcPolicyId string `json:"vpcPolicyId"`
+
+    /* 取值包括true、false，是否开启组播。 (Optional) */
+    EnableMulticast bool `json:"enableMulticast"`
 }

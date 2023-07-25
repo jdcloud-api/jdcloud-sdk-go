@@ -32,9 +32,6 @@ type NatGatewaySpec struct {
     /* 子网ID  */
     SubnetId string `json:"subnetId"`
 
-    /* NAT网关的可用区属性，即将废弃 (Optional) */
-    AzIpSpecs []AzIpSpec `json:"azIpSpecs"`
-
     /* NAT网关可用区 (Optional) */
     Azs []string `json:"azs"`
 

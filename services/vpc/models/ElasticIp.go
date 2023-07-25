@@ -41,7 +41,7 @@ type ElasticIp struct {
     /* 实例Id (Optional) */
     InstanceId string `json:"instanceId"`
 
-    /* 实例类型,取值为：compute、lb、container、pod、natgw (Optional) */
+    /* 实例类型,取值为：compute、lb、container、pod、natgw、havip (Optional) */
     InstanceType string `json:"instanceType"`
 
     /* 计费配置 (Optional) */

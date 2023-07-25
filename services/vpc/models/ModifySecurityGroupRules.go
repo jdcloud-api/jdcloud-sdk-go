@@ -25,6 +25,12 @@ type ModifySecurityGroupRules struct {
     /* 规则限定协议。300:All; 6:TCP; 17:UDP; 1:ICMP (Optional) */
     Protocol *int `json:"protocol"`
 
+    /* 访问控制策略：allow:允许，deny：拒绝 (Optional) */
+    RuleAction *string `json:"ruleAction"`
+
+    /* 规则匹配优先级，取值范围为[1,100]，优先级数字越小优先级越高 (Optional) */
+    Priority *int `json:"priority"`
+
     /* 安全组规则的起始端口。取值范围：1-65535 (Optional) */
     FromPort *int `json:"fromPort"`
 

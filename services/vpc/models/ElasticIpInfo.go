@@ -19,9 +19,9 @@ package models
 
 type ElasticIpInfo struct {
 
-    /* 弹性公网IP的Ip地址 (Optional) */
-    ElasticIpAddress string `json:"elasticIpAddress"`
+    /* 高可用虚拟ip绑定的公网id (Optional) */
+    ElasticIpId string `json:"elasticIpId"`
 
-    /* 是否存在且属于jd池 (Optional) */
-    IsJDEip bool `json:"isJDEip"`
+    /* 高可用虚拟ip绑定的公网ip (Optional) */
+    ElasticIpAddress string `json:"elasticIpAddress"`
 }

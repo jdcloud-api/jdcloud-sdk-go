@@ -36,6 +36,9 @@ type CreateVpcRequest struct {
     /* vpc描述，允许输入UTF-8编码下的全部字符，不超过256字符。 (Optional) */
     Description *string `json:"description"`
 
+    /* 取值包括true、false，默认为false，不开启组播。 (Optional) */
+    EnableMulticast *bool `json:"enableMulticast"`
+
     /* VPC az类型，取值：standard(标准VPC)，edge(边缘VPC) (Optional) */
     AzType *string `json:"azType"`
 
@@ -71,6 +74,7 @@ func NewCreateVpcRequest(
  * param vpcName: 私有网络名称,只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符。 (Required)
  * param addressPrefix: 如果为空，则不限制网段，如果不为空，10.0.0.0/8、172.16.0.0/12和192.168.0.0/16及它们包含的子网，且子网掩码长度为16-28之间 (Optional)
  * param description: vpc描述，允许输入UTF-8编码下的全部字符，不超过256字符。 (Optional)
+ * param enableMulticast: 取值包括true、false，默认为false，不开启组播。 (Optional)
  * param azType: VPC az类型，取值：standard(标准VPC)，edge(边缘VPC) (Optional)
  * param az: VPC可用区，边缘VPC必须指定可用区 (Optional)
  */
@@ -79,6 +83,7 @@ func NewCreateVpcRequestWithAllParams(
     vpcName string,
     addressPrefix *string,
     description *string,
+    enableMulticast *bool,
     azType *string,
     az *string,
 ) *CreateVpcRequest {
@@ -94,6 +99,7 @@ func NewCreateVpcRequestWithAllParams(
         VpcName: vpcName,
         AddressPrefix: addressPrefix,
         Description: description,
+        EnableMulticast: enableMulticast,
         AzType: azType,
         Az: az,
     }
@@ -127,6 +133,10 @@ func (r *CreateVpcRequest) SetAddressPrefix(addressPrefix string) {
 /* param description: vpc描述，允许输入UTF-8编码下的全部字符，不超过256字符。(Optional) */
 func (r *CreateVpcRequest) SetDescription(description string) {
     r.Description = &description
+}
+/* param enableMulticast: 取值包括true、false，默认为false，不开启组播。(Optional) */
+func (r *CreateVpcRequest) SetEnableMulticast(enableMulticast bool) {
+    r.EnableMulticast = &enableMulticast
 }
 /* param azType: VPC az类型，取值：standard(标准VPC)，edge(边缘VPC)(Optional) */
 func (r *CreateVpcRequest) SetAzType(azType string) {

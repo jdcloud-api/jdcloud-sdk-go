@@ -40,7 +40,7 @@ func NewVpcClient(credential *core.Credential) *VpcClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vpc",
-            Revision:    "1.1.0",
+            Revision:    "1.1.5",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -236,6 +236,26 @@ func (c *VpcClient) DeleteNetworkAcl(request *vpc.DeleteNetworkAclRequest) (*vpc
     return jdResp, err
 }
 
+/* 解绑NAT网关上的公网IP接口 */
+func (c *VpcClient) DisassociateElasticIps(request *vpc.DisassociateElasticIpsRequest) (*vpc.DisassociateElasticIpsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.DisassociateElasticIpsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 删除子网 */
 func (c *VpcClient) DeleteSubnet(request *vpc.DeleteSubnetRequest) (*vpc.DeleteSubnetResponse, error) {
     if request == nil {
@@ -295,6 +315,26 @@ func (c *VpcClient) RemoveBandwidthPackageIP(request *vpc.RemoveBandwidthPackage
     }
 
     jdResp := &vpc.RemoveBandwidthPackageIPResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* NAT网关绑定已有公网IP接口，NAT网关支持绑定一个或多个公网IP。当NAT网关绑定多个公网IP时，同一内网服务器的业务流量出公网将随机选取其中一个公网IP。由于每个内网服务器的业务流量大小不同，可能出现NAT多公网IP流量不均的情况。建议将多公网IP加入同一个共享带宽包，避免因业务流量达到单公网IP带宽上限，影响业务转发。 */
+func (c *VpcClient) AssociateElasticIps(request *vpc.AssociateElasticIpsRequest) (*vpc.AssociateElasticIpsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.AssociateElasticIpsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -384,6 +424,26 @@ func (c *VpcClient) ModifyNetworkSecurityGroup(request *vpc.ModifyNetworkSecurit
     return jdResp, err
 }
 
+/* 查询NAT网关信息详情接口 */
+func (c *VpcClient) DescribeNatGateway(request *vpc.DescribeNatGatewayRequest) (*vpc.DescribeNatGatewayResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.DescribeNatGatewayResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 添加安全组规则 */
 func (c *VpcClient) AddNetworkSecurityGroupRules(request *vpc.AddNetworkSecurityGroupRulesRequest) (*vpc.AddNetworkSecurityGroupRulesResponse, error) {
     if request == nil {
@@ -415,6 +475,26 @@ func (c *VpcClient) CreateNetworkAcl(request *vpc.CreateNetworkAclRequest) (*vpc
     }
 
     jdResp := &vpc.CreateNetworkAclResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 启动NAT网关接口，欠费停服客户不允许启动 */
+func (c *VpcClient) StartNatGateway(request *vpc.StartNatGatewayRequest) (*vpc.StartNatGatewayResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.StartNatGatewayResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -775,6 +855,26 @@ func (c *VpcClient) DescribeEdgeIpProviders(request *vpc.DescribeEdgeIpProviders
     return jdResp, err
 }
 
+/* 删除NAT网关接口，NAT网关需要先停止再删除 */
+func (c *VpcClient) DeleteNatGateway(request *vpc.DeleteNatGatewayRequest) (*vpc.DeleteNatGatewayResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.DeleteNatGatewayResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 移除networkAcl规则 */
 func (c *VpcClient) RemoveNetworkAclRules(request *vpc.RemoveNetworkAclRulesRequest) (*vpc.RemoveNetworkAclRulesResponse, error) {
     if request == nil {
@@ -786,6 +886,26 @@ func (c *VpcClient) RemoveNetworkAclRules(request *vpc.RemoveNetworkAclRulesRequ
     }
 
     jdResp := &vpc.RemoveNetworkAclRulesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设置NAT网关已绑定的公网IP状态接口 */
+func (c *VpcClient) SetElasticIpStatus(request *vpc.SetElasticIpStatusRequest) (*vpc.SetElasticIpStatusResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.SetElasticIpStatusResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -846,6 +966,26 @@ func (c *VpcClient) CreateNetworkSecurityGroup(request *vpc.CreateNetworkSecurit
     }
 
     jdResp := &vpc.CreateNetworkSecurityGroupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建NAT网关接口 */
+func (c *VpcClient) CreateNatGateway(request *vpc.CreateNatGatewayRequest) (*vpc.CreateNatGatewayResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.CreateNatGatewayResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1275,6 +1415,26 @@ func (c *VpcClient) CreateVpc(request *vpc.CreateVpcRequest) (*vpc.CreateVpcResp
     return jdResp, err
 }
 
+/* 查询NAT网关列表接口 */
+func (c *VpcClient) DescribeNatGateways(request *vpc.DescribeNatGatewaysRequest) (*vpc.DescribeNatGatewaysResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.DescribeNatGatewaysResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 修改路由表规则 */
 func (c *VpcClient) ModifyRouteTableRules(request *vpc.ModifyRouteTableRulesRequest) (*vpc.ModifyRouteTableRulesResponse, error) {
     if request == nil {
@@ -1366,6 +1526,26 @@ func (c *VpcClient) ModifyRouteTable(request *vpc.ModifyRouteTableRequest) (*vpc
     }
 
     jdResp := &vpc.ModifyRouteTableResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 停止NAT网关接口，非欠费停服，由客户自己停止的NAT网关继续计费 */
+func (c *VpcClient) StopNatGateway(request *vpc.StopNatGatewayRequest) (*vpc.StopNatGatewayResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.StopNatGatewayResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1506,6 +1686,26 @@ func (c *VpcClient) DeleteNetworkInterface(request *vpc.DeleteNetworkInterfaceRe
     }
 
     jdResp := &vpc.DeleteNetworkInterfaceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改NAT网关接口，修改网关规格或带宽需要先停止网关 */
+func (c *VpcClient) ModifyNatGateway(request *vpc.ModifyNatGatewayRequest) (*vpc.ModifyNatGatewayResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.ModifyNatGatewayResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
