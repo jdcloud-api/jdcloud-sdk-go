@@ -18,7 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    rds "github.com/jdcloud-api/jdcloud-sdk-go/services/rds/models"
+    yunding "github.com/jdcloud-api/jdcloud-sdk-go/services/yunding/models"
 )
 
 type DescribeRdsDatabasesRequest struct {
@@ -142,6 +142,6 @@ type DescribeRdsDatabasesResponse struct {
 }
 
 type DescribeRdsDatabasesResult struct {
-    Databases []rds.Database `json:"databases"`
+    Databases []yunding.Database `json:"databases"`
     TotalCount int `json:"totalCount"`
 }

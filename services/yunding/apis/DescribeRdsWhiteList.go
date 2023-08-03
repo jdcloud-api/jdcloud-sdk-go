@@ -18,7 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    rds "github.com/jdcloud-api/jdcloud-sdk-go/services/rds/models"
+    yunding "github.com/jdcloud-api/jdcloud-sdk-go/services/yunding/models"
 )
 
 type DescribeRdsWhiteListRequest struct {
@@ -112,5 +112,5 @@ type DescribeRdsWhiteListResponse struct {
 }
 
 type DescribeRdsWhiteListResult struct {
-    WhiteLists []rds.WhiteList `json:"whiteLists"`
+    WhiteLists []yunding.WhiteList `json:"whiteLists"`
 }

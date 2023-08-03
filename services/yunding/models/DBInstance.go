@@ -16,7 +16,6 @@
 
 package models
 
-import rds "github.com/jdcloud-api/jdcloud-sdk-go/services/rds/models"
 import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
 
 type DBInstance struct {
@@ -67,13 +66,13 @@ type DBInstance struct {
     CreateTime string `json:"createTime"`
 
     /* 实例跨地域备份服务开启相关信息 (Optional) */
-    BackupSynchronicity []rds.BackupSynchronicityAbstract `json:"backupSynchronicity"`
+    BackupSynchronicity []BackupSynchronicityAbstract `json:"backupSynchronicity"`
 
     /* 计费配置 (Optional) */
     Charge charge.Charge `json:"charge"`
 
     /* 标签信息 (Optional) */
-    Tags []rds.Tag `json:"tags"`
+    Tags []Tag `json:"tags"`
 
     /* MySQL只读实例对应的主实例ID (Optional) */
     SourceInstanceId string `json:"sourceInstanceId"`
