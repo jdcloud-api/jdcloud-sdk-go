@@ -40,7 +40,7 @@ func NewYundingClient(credential *core.Credential) *YundingClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "yunding",
-            Revision:    "2.0.7",
+            Revision:    "2.0.8",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -443,6 +443,26 @@ func (c *YundingClient) CreateRdsDatabase(request *yunding.CreateRdsDatabaseRequ
     return jdResp, err
 }
 
+/* 查看某资源单个监控项数据，metric介绍：<a href="https://docs.jdcloud.com/cn/monitoring/metrics">Metrics</a>，可以使用接口<a href="https://docs.jdcloud.com/cn/monitoring/metrics">describeMetrics</a>：查询产品线可用的metric列表。 */
+func (c *YundingClient) DescribeMetricData(request *yunding.DescribeMetricDataRequest) (*yunding.DescribeMetricDataResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yunding.DescribeMetricDataResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 授予账号的数据库访问权限，即该账号对数据库拥有什么权限。一个账号可以对多个数据库具有访问权限。<br>为便于管理，RDS对权限进行了归类，目前提供以下两种权限<br>- ro：只读权限，用户只能读取数据库中的数据，不能进行创建、插入、删除、更改等操作。<br>- rw：读写权限，用户可以对数据库进行增删改查等操作 */
 func (c *YundingClient) GrantRdsPrivilege(request *yunding.GrantRdsPrivilegeRequest) (*yunding.GrantRdsPrivilegeResponse, error) {
     if request == nil {
@@ -537,6 +557,26 @@ func (c *YundingClient) DetachNetworkInterface(request *yunding.DetachNetworkInt
     }
 
     jdResp := &yunding.DetachNetworkInterfaceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查看某资源多个监控项数据，metric介绍：<a href="https://docs.jdcloud.com/cn/monitoring/metrics">Metrics</a>，可以使用接口<a href="https://docs.jdcloud.com/cn/monitoring/metrics">describeMetrics</a>：查询产品线可用的metric列表。 */
+func (c *YundingClient) BatchDescribeMetricData(request *yunding.BatchDescribeMetricDataRequest) (*yunding.BatchDescribeMetricDataResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yunding.BatchDescribeMetricDataResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -646,6 +686,26 @@ func (c *YundingClient) CreateRdsAccount(request *yunding.CreateRdsAccountReques
     return jdResp, err
 }
 
+/* 根据不同的聚合方式将metric的数据聚合为一个点。downAggrType：last(最后一个点)、max(最大值)、min(最小值)、avg(平均值)。该接口返回值为上报metric的原始值，没有做单位转换。metric介绍：<a href="https://docs.jdcloud.com/cn/monitoring/metrics">Metrics</a> */
+func (c *YundingClient) LastDownsample(request *yunding.LastDownsampleRequest) (*yunding.LastDownsampleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yunding.LastDownsampleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查看RDS实例当前白名单。白名单是允许访问当前实例的IP/IP段列表，缺省情况下，白名单对本VPC开放。如果用户开启了外网访问的功能，还需要对外网的IP配置白名单。 */
 func (c *YundingClient) DescribeRdsWhiteList(request *yunding.DescribeRdsWhiteListRequest) (*yunding.DescribeRdsWhiteListResponse, error) {
     if request == nil {
@@ -677,6 +737,26 @@ func (c *YundingClient) DeleteRdsAccount(request *yunding.DeleteRdsAccountReques
     }
 
     jdResp := &yunding.DeleteRdsAccountResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询监控图可用的产品线列表 */
+func (c *YundingClient) DescribeServices(request *yunding.DescribeServicesRequest) (*yunding.DescribeServicesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &yunding.DescribeServicesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

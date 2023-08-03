@@ -17,7 +17,6 @@
 package models
 
 import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
-import rds "github.com/jdcloud-api/jdcloud-sdk-go/services/rds/models"
 
 type DBInstanceAttribute struct {
 
@@ -106,13 +105,13 @@ type DBInstanceAttribute struct {
     RoInstanceIds []string `json:"roInstanceIds"`
 
     /* 高可用集群中主节点的信息<br>- 仅支持SQL Server (Optional) */
-    PrimaryNode rds.DBInstanceNode `json:"primaryNode"`
+    PrimaryNode DBInstanceNode `json:"primaryNode"`
 
     /* 高可用集群中从节点的信息<br>- 仅支持SQL Server (Optional) */
-    SecondaryNode rds.DBInstanceNode `json:"secondaryNode"`
+    SecondaryNode DBInstanceNode `json:"secondaryNode"`
 
     /* 标签信息 (Optional) */
-    Tags []rds.Tag `json:"tags"`
+    Tags []Tag `json:"tags"`
 
     /* vpc名称 (Optional) */
     VpcName string `json:"vpcName"`

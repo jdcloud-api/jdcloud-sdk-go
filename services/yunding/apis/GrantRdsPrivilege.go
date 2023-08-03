@@ -18,7 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    rds "github.com/jdcloud-api/jdcloud-sdk-go/services/rds/models"
+    yunding "github.com/jdcloud-api/jdcloud-sdk-go/services/yunding/models"
 )
 
 type GrantRdsPrivilegeRequest struct {
@@ -35,7 +35,7 @@ type GrantRdsPrivilegeRequest struct {
     AccountName string `json:"accountName"`
 
     /* 账号的访问权限  */
-    AccountPrivileges []rds.AccountPrivilege `json:"accountPrivileges"`
+    AccountPrivileges []yunding.AccountPrivilege `json:"accountPrivileges"`
 }
 
 /*
@@ -50,7 +50,7 @@ func NewGrantRdsPrivilegeRequest(
     regionId string,
     instanceId string,
     accountName string,
-    accountPrivileges []rds.AccountPrivilege,
+    accountPrivileges []yunding.AccountPrivilege,
 ) *GrantRdsPrivilegeRequest {
 
 	return &GrantRdsPrivilegeRequest{
@@ -77,7 +77,7 @@ func NewGrantRdsPrivilegeRequestWithAllParams(
     regionId string,
     instanceId string,
     accountName string,
-    accountPrivileges []rds.AccountPrivilege,
+    accountPrivileges []yunding.AccountPrivilege,
 ) *GrantRdsPrivilegeRequest {
 
     return &GrantRdsPrivilegeRequest{
@@ -120,7 +120,7 @@ func (r *GrantRdsPrivilegeRequest) SetAccountName(accountName string) {
     r.AccountName = accountName
 }
 /* param accountPrivileges: 账号的访问权限(Required) */
-func (r *GrantRdsPrivilegeRequest) SetAccountPrivileges(accountPrivileges []rds.AccountPrivilege) {
+func (r *GrantRdsPrivilegeRequest) SetAccountPrivileges(accountPrivileges []yunding.AccountPrivilege) {
     r.AccountPrivileges = accountPrivileges
 }
 
