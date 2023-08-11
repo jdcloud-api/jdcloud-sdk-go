@@ -100,4 +100,7 @@ type ListAvailablePageRuleSettingResponse struct {
 
 type ListAvailablePageRuleSettingResult struct {
     DataList []starshield.AvailablePageRule `json:"dataList"`
+    CurrentCount int `json:"currentCount"`
+    TotalCount int `json:"totalCount"`
+    TotalPage int `json:"totalPage"`
 }

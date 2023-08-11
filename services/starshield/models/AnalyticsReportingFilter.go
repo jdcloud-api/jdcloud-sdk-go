@@ -22,7 +22,7 @@ type AnalyticsReportingFilter struct {
     /* 过滤条件的名称。有效值：
 HttpHost/URI/ResponseStatusCode/ClientDeviceType/
 ServedBy/CacheStatus/ClientHttpMethod/ResponseContentType/
-ASN/IP/ClientHttpProtocol/FirewallSource/UserAgent
+ASN/IP/ClientHttpProtocol/FirewallSource/UserAgent/RuleId
  (Optional) */
     Name string `json:"name"`
 

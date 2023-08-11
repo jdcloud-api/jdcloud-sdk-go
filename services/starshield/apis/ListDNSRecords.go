@@ -190,4 +190,7 @@ type ListDNSRecordsResponse struct {
 
 type ListDNSRecordsResult struct {
     DataList []starshield.DnsRecord `json:"dataList"`
+    CurrentCount int `json:"currentCount"`
+    TotalCount int `json:"totalCount"`
+    TotalPage int `json:"totalPage"`
 }

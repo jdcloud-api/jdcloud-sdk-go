@@ -28,6 +28,12 @@ type DescribeOssRes struct {
     /* 文件名称(oss key日期) (Optional) */
     FileName string `json:"fileName"`
 
+    /* 数据集类型(0-默认 1-logpush) (Optional) */
+    DatasetType int `json:"datasetType"`
+
+    /* 数据集事件(0-http事件 1-firewall事件) (Optional) */
+    Event int `json:"event"`
+
     /* 时间间隔类型(0->天 1->小时) (Optional) */
     IntervalType int `json:"intervalType"`
 

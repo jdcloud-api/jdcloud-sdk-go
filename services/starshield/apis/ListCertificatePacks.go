@@ -30,6 +30,12 @@ type ListCertificatePacksRequest struct {
 
     /* 包括所有状态的证书包，而不仅仅是激活状态的证书包。 (Optional) */
     Status *string `json:"status"`
+
+    /* 分页结果的页码 (Optional) */
+    Page *int `json:"page"`
+
+    /* 每页的域数 (Optional) */
+    Per_page *int `json:"per_page"`
 }
 
 /*
@@ -55,10 +61,14 @@ func NewListCertificatePacksRequest(
 /*
  * param zone_identifier:  (Required)
  * param status: 包括所有状态的证书包，而不仅仅是激活状态的证书包。 (Optional)
+ * param page: 分页结果的页码 (Optional)
+ * param per_page: 每页的域数 (Optional)
  */
 func NewListCertificatePacksRequestWithAllParams(
     zone_identifier string,
     status *string,
+    page *int,
+    per_page *int,
 ) *ListCertificatePacksRequest {
 
     return &ListCertificatePacksRequest{
@@ -70,6 +80,8 @@ func NewListCertificatePacksRequestWithAllParams(
         },
         Zone_identifier: zone_identifier,
         Status: status,
+        Page: page,
+        Per_page: per_page,
     }
 }
 
@@ -94,6 +106,14 @@ func (r *ListCertificatePacksRequest) SetZone_identifier(zone_identifier string)
 func (r *ListCertificatePacksRequest) SetStatus(status string) {
     r.Status = &status
 }
+/* param page: 分页结果的页码(Optional) */
+func (r *ListCertificatePacksRequest) SetPage(page int) {
+    r.Page = &page
+}
+/* param per_page: 每页的域数(Optional) */
+func (r *ListCertificatePacksRequest) SetPer_page(per_page int) {
+    r.Per_page = &per_page
+}
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
@@ -110,4 +130,7 @@ type ListCertificatePacksResponse struct {
 
 type ListCertificatePacksResult struct {
     DataList []starshield.CertificatePack `json:"dataList"`
+    CurrentCount int `json:"currentCount"`
+    TotalCount int `json:"totalCount"`
+    TotalPage int `json:"totalPage"`
 }
