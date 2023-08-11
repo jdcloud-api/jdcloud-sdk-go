@@ -28,13 +28,13 @@ type DescribePackRes struct {
     /* 套餐流量 (Optional) */
     FlowLimit int64 `json:"flowLimit"`
 
-    /* 可用域名数 (Optional) */
+    /* 可添加域名总数 (Optional) */
     AvailableZoneNum int `json:"availableZoneNum"`
 
-    /* cdn加速流量 (Optional) */
+    /* 业务带宽 (Optional) */
     CdnSpeedTraffic int `json:"cdnSpeedTraffic"`
 
-    /* DDoS保底防护 (Optional) */
+    /* DDoS攻击防护（L4） (Optional) */
     DdosBaseProtect int `json:"ddosBaseProtect"`
 
     /* 是否支持DDoS弹性防护 (Optional) */
@@ -67,7 +67,7 @@ type DescribePackRes struct {
     /* 域名专用证书数 (Optional) */
     SpecialCertNum int `json:"specialCertNum"`
 
-    /* 是否支持TrueCLientIp (Optional) */
+    /* 是否支持True-Client-IP标头 (Optional) */
     TrueClientIp bool `json:"trueClientIp"`
 
     /* 是否支持RriginErrorPagePass (Optional) */
@@ -94,7 +94,7 @@ type DescribePackRes struct {
     /* 是否支持基于URL预取 (Optional) */
     UrlPrefetch bool `json:"urlPrefetch"`
 
-    /* 页面规则数量 (Optional) */
+    /* 自定义页面规则 (Optional) */
     PageRuleNum int `json:"pageRuleNum"`
 
     /* 是否支持页面优化 (Optional) */
@@ -112,7 +112,7 @@ type DescribePackRes struct {
     /* 是否支持自定义名称服务器（忽略） (Optional) */
     CustomNameServer bool `json:"customNameServer"`
 
-    /* 是否支持通用证书 (Optional) */
+    /* 是否支持免费通用证书 (Optional) */
     GeneralCert bool `json:"generalCert"`
 
     /* 自定义证书数量 (Optional) */
@@ -139,9 +139,42 @@ type DescribePackRes struct {
     /* 是否支持内置预定义规则 (Optional) */
     BuiltInPredefinedRule bool `json:"builtInPredefinedRule"`
 
-    /* 防火墙规则数量 (Optional) */
+    /* WAF自定义规则 (Optional) */
     FirewallRuleNum int `json:"firewallRuleNum"`
 
     /* 是否支持防火墙正则表达式规则 (Optional) */
     FirewalRegularRule bool `json:"firewalRegularRule"`
+
+    /* 单域名解析记录数量上限 (Optional) */
+    AvailableDnsRecordNum int `json:"availableDnsRecordNum"`
+
+    /* 域名接入方式 1->CNAME 2->NS 3->IP(Spectrum) 逗号拼接(1,2) (Optional) */
+    ZoneAccessType string `json:"zoneAccessType"`
+
+    /* 速率限制Ratelimit数量 0->不支持 大于0->N条 (Optional) */
+    RateLimit int `json:"rateLimit"`
+
+    /* 日志推送服务 False->不支持 True->支持 (Optional) */
+    LogPush bool `json:"logPush"`
+
+    /* 支持的协议类型 1->HTTP 2->HTTPS 3->HTTP2 4->HTTP3 5->TCP 逗号拼接(1,2) (Optional) */
+    Protocol string `json:"protocol"`
+
+    /* 应用攻击防护 False->不支持 True->支持 (Optional) */
+    AppAttackProtection bool `json:"appAttackProtection"`
+
+    /* CC攻击标准防护 False->不支持 True->自动防护 (Optional) */
+    CcAttackStandardProtection bool `json:"ccAttackStandardProtection"`
+
+    /* CC攻击高级防护 False->不支持 True->BOT+Rate Limiting (Optional) */
+    CcAttackAdvancedProtection bool `json:"ccAttackAdvancedProtection"`
+
+    /* 技术支持 1->客服工单 2->产品技术专家 逗号拼接(1,2) (Optional) */
+    TechnicalSupport string `json:"technicalSupport"`
+
+    /* 域名扩展包 False->不支持 True->支持 (Optional) */
+    ZoneExtPack bool `json:"zoneExtPack"`
+
+    /* Websocket False->不支持 True->支持 (Optional) */
+    Websocket bool `json:"websocket"`
 }

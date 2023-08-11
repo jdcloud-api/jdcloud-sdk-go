@@ -100,4 +100,7 @@ type ListAvailableCustomPagesResponse struct {
 
 type ListAvailableCustomPagesResult struct {
     DataList []starshield.CustomPage `json:"dataList"`
+    CurrentCount int `json:"currentCount"`
+    TotalCount int `json:"totalCount"`
+    TotalPage int `json:"totalPage"`
 }

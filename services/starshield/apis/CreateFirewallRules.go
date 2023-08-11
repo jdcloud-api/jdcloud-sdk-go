@@ -110,4 +110,7 @@ type CreateFirewallRulesResponse struct {
 
 type CreateFirewallRulesResult struct {
     DataList []starshield.FirewallRule `json:"dataList"`
+    CurrentCount int `json:"currentCount"`
+    TotalCount int `json:"totalCount"`
+    TotalPage int `json:"totalPage"`
 }

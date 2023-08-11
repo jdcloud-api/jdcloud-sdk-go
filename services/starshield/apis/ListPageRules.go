@@ -140,4 +140,7 @@ type ListPageRulesResponse struct {
 
 type ListPageRulesResult struct {
     DataList []starshield.PageRule `json:"dataList"`
+    CurrentCount int `json:"currentCount"`
+    TotalCount int `json:"totalCount"`
+    TotalPage int `json:"totalPage"`
 }
