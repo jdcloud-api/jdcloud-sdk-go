@@ -32,6 +32,9 @@ type DeleteFunctionRequest struct {
 
     /* Function Name  */
     FunctionName string `json:"functionName"`
+
+    /* 触发器是否随函数删除 (Optional) */
+    DeleteTrigger *bool `json:"deleteTrigger"`
 }
 
 /*
@@ -64,11 +67,13 @@ func NewDeleteFunctionRequest(
  * param regionId: Region ID (Required)
  * param serviceName: Service Name (Required)
  * param functionName: Function Name (Required)
+ * param deleteTrigger: 触发器是否随函数删除 (Optional)
  */
 func NewDeleteFunctionRequestWithAllParams(
     regionId string,
     serviceName string,
     functionName string,
+    deleteTrigger *bool,
 ) *DeleteFunctionRequest {
 
     return &DeleteFunctionRequest{
@@ -81,6 +86,7 @@ func NewDeleteFunctionRequestWithAllParams(
         RegionId: regionId,
         ServiceName: serviceName,
         FunctionName: functionName,
+        DeleteTrigger: deleteTrigger,
     }
 }
 
@@ -108,6 +114,10 @@ func (r *DeleteFunctionRequest) SetServiceName(serviceName string) {
 /* param functionName: Function Name(Required) */
 func (r *DeleteFunctionRequest) SetFunctionName(functionName string) {
     r.FunctionName = functionName
+}
+/* param deleteTrigger: 触发器是否随函数删除(Optional) */
+func (r *DeleteFunctionRequest) SetDeleteTrigger(deleteTrigger bool) {
+    r.DeleteTrigger = &deleteTrigger
 }
 
 

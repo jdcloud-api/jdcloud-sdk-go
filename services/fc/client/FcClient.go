@@ -40,7 +40,7 @@ func NewFcClient(credential *core.Credential) *FcClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "fc",
-            Revision:    "1.0.1",
+            Revision:    "1.0.2",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -79,29 +79,7 @@ func (c *FcClient) DescribeFunctions(request *fc.DescribeFunctionsRequest) (*fc.
     return jdResp, err
 }
 
-/* functionName 名称校验。
- */
-func (c *FcClient) CheckFunction(request *fc.CheckFunctionRequest) (*fc.CheckFunctionResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &fc.CheckFunctionResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 删除function
-function 状态必须为 active、failed状态。 <br>
  [MFA enabled] */
 func (c *FcClient) DeleteFunction(request *fc.DeleteFunctionRequest) (*fc.DeleteFunctionResponse, error) {
     if request == nil {
@@ -113,27 +91,6 @@ func (c *FcClient) DeleteFunction(request *fc.DeleteFunctionRequest) (*fc.Delete
     }
 
     jdResp := &fc.DeleteFunctionResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 内部创建函数
- */
-func (c *FcClient) InternalCreateFunction(request *fc.InternalCreateFunctionRequest) (*fc.InternalCreateFunctionResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &fc.InternalCreateFunctionResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -268,27 +225,6 @@ func (c *FcClient) DeleteTrigger(request *fc.DeleteTriggerRequest) (*fc.DeleteTr
     }
 
     jdResp := &fc.DeleteTriggerResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 修改 function
- */
-func (c *FcClient) InternalUpdateFunction(request *fc.InternalUpdateFunctionRequest) (*fc.InternalUpdateFunctionResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &fc.InternalUpdateFunctionResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -515,28 +451,6 @@ func (c *FcClient) DeleteService(request *fc.DeleteServiceRequest) (*fc.DeleteSe
     return jdResp, err
 }
 
-/* 批量查询 function 的详细信息<br>
-此接口支持分页查询，默认每页20条。
- */
-func (c *FcClient) DescribeAllFunctions(request *fc.DescribeAllFunctionsRequest) (*fc.DescribeAllFunctionsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &fc.DescribeAllFunctionsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 批量查询 service 的详细信息<br>
 此接口支持分页查询，默认每页20条。
  */
@@ -550,27 +464,6 @@ func (c *FcClient) DescribeServices(request *fc.DescribeServicesRequest) (*fc.De
     }
 
     jdResp := &fc.DescribeServicesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* serviceName 名称校验。
- */
-func (c *FcClient) CheckService(request *fc.CheckServiceRequest) (*fc.CheckServiceResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &fc.CheckServiceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

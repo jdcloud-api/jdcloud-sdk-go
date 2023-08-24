@@ -23,10 +23,10 @@ type InternalFunctionSpec struct {
     FunctionName string `json:"functionName"`
 
     /* 函数代码  */
-    Code *InternalCode `json:"code"`
+    Code InternalCode `json:"code"`
 
     /* 函数运行的超时时间，单位为秒，默认为60，取值范围为1-900；。函数超过这个时间后会被终止执行。 (Optional) */
-    Timeout *int `json:"timeout"`
+    Timeout int `json:"timeout"`
 
     /* 函数运行的语言环境，目前支持nodejs16。  */
     Runtime string `json:"runtime"`
@@ -35,17 +35,17 @@ type InternalFunctionSpec struct {
     Handler string `json:"handler"`
 
     /* 描述信息，默认为空；允许输入UTF-8编码下的全部字符，不超过256字符。 (Optional) */
-    Description *string `json:"description"`
+    Description string `json:"description"`
 
     /* 容器执行的环境变量；如果和使用中的环境变量Key相同，会覆镜像, 不能和镜像环境变量的key相同；</br> 最大50对 (Optional) */
     Envs []Environment `json:"envs"`
 
     /* vCPU：单位为核，默认选中1，支持选择0.15、0.75、1 (Optional) */
-    Cpu *int `json:"cpu"`
+    Cpu int `json:"cpu"`
 
     /* 内存：单位为MB，默认选中1024，与vCPU联动：vCPU选择0.15时，内存仅支持选择0.25* 1024，vCPU选择0.75时，内存仅支持选择1*1024｜ (Optional) */
-    MemorySize *int `json:"memorySize"`
+    MemorySize int `json:"memorySize"`
 
     /* 硬盘：单位为MB，默认选中0.5*1024，支持选择0.5 * 1024 (Optional) */
-    DiskSize *int `json:"diskSize"`
+    DiskSize int `json:"diskSize"`
 }
