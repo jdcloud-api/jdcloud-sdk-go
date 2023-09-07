@@ -101,16 +101,15 @@ func NewModifyConnectionModeRequestWithoutParam() *ModifyConnectionModeRequest {
 func (r *ModifyConnectionModeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *ModifyConnectionModeRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param connectionMode: 连接模式<br> - standard：标准模式(缺省)，响应时间短，但没有 SQL 审计和拦截的能力 <br>- security：高安全模式，具备一定的 SQL注入拦截能力，并可开启 SQL 审计，但会增加一定的响应时间(Required) */
 func (r *ModifyConnectionModeRequest) SetConnectionMode(connectionMode string) {
     r.ConnectionMode = connectionMode
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

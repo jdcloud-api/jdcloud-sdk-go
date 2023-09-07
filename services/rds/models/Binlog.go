@@ -33,4 +33,16 @@ type Binlog struct {
 
     /* binlog结束时间,格式为：YYYY-MM-DD HH:mm:ss (Optional) */
     BinlogEndTime string `json:"binlogEndTime"`
+
+    /* 加密秘钥 (Optional) */
+    Descriptionkey string `json:"descriptionkey"`
+
+    /* binlog所属实例ID (Optional) */
+    InstanceId string `json:"instanceId"`
+
+    /* 备份所属实例名称 (Optional) */
+    InstanceName string `json:"instanceName"`
+
+    /* serverId (Optional) */
+    ServerId string `json:"serverId"`
 }

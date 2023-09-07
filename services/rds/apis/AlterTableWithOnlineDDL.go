@@ -119,26 +119,23 @@ func NewAlterTableWithOnlineDDLRequestWithoutParam() *AlterTableWithOnlineDDLReq
 func (r *AlterTableWithOnlineDDLRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *AlterTableWithOnlineDDLRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param database: DDL命令修改的库名(Required) */
 func (r *AlterTableWithOnlineDDLRequest) SetDatabase(database string) {
     r.Database = database
 }
-
 /* param table: DDL命令修改的表名(Required) */
 func (r *AlterTableWithOnlineDDLRequest) SetTable(table string) {
     r.Table = table
 }
-
 /* param command: 需要执行的的DDL命令(Required) */
 func (r *AlterTableWithOnlineDDLRequest) SetCommand(command string) {
     r.Command = command
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

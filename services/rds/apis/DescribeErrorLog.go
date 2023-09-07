@@ -31,27 +31,27 @@ type DescribeErrorLogRequest struct {
     /* RDS 实例ID，唯一标识一个RDS实例  */
     InstanceId string `json:"instanceId"`
 
-    /* 慢日志开始时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到当前时间不能大于 7 天，开始时间不能大于结束时间，结束时间不能大于当前时间  */
+    /* 错误日志开始时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到当前时间不能大于 7 天，开始时间不能大于结束时间，结束时间不能大于当前时间  */
     StartTime string `json:"startTime"`
 
-    /* 慢日志结束时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到当前时间不能大于 7 天，开始时间不能大于结束时间，结束时间不能大于当前时间  */
+    /* 错误日志结束时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到当前时间不能大于 7 天，开始时间不能大于结束时间，结束时间不能大于当前时间  */
     EndTime string `json:"endTime"`
 
-    /* 查询哪个数据库的慢日志，不填表示返回所有数据库的慢日志 (Optional) */
+    /* 查询哪个数据库的慢日志，不填表示返回所有数据库的错误日志。<br>- MySQL不支持 (Optional) */
     DbName *string `json:"dbName"`
 
-    /* 显示数据的页码，默认为1，取值范围：[-1,1000)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页。 (Optional) */
+    /* 显示数据的页码，默认为1，取值范围：[-1,∞]。pageNumber为-1时，返回所有数据页码； (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* 每页显示的数据条数，默认为10，取值范围：10、20、30、50、100 (Optional) */
+    /* 每页显示的数据条数，默认为50，取值范围：[1,100]，只能为10的倍数 (Optional) */
     PageSize *int `json:"pageSize"`
 }
 
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
- * param startTime: 慢日志开始时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到当前时间不能大于 7 天，开始时间不能大于结束时间，结束时间不能大于当前时间 (Required)
- * param endTime: 慢日志结束时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到当前时间不能大于 7 天，开始时间不能大于结束时间，结束时间不能大于当前时间 (Required)
+ * param startTime: 错误日志开始时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到当前时间不能大于 7 天，开始时间不能大于结束时间，结束时间不能大于当前时间 (Required)
+ * param endTime: 错误日志结束时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到当前时间不能大于 7 天，开始时间不能大于结束时间，结束时间不能大于当前时间 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -79,11 +79,11 @@ func NewDescribeErrorLogRequest(
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
- * param startTime: 慢日志开始时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到当前时间不能大于 7 天，开始时间不能大于结束时间，结束时间不能大于当前时间 (Required)
- * param endTime: 慢日志结束时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到当前时间不能大于 7 天，开始时间不能大于结束时间，结束时间不能大于当前时间 (Required)
- * param dbName: 查询哪个数据库的慢日志，不填表示返回所有数据库的慢日志 (Optional)
- * param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,1000)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页。 (Optional)
- * param pageSize: 每页显示的数据条数，默认为10，取值范围：10、20、30、50、100 (Optional)
+ * param startTime: 错误日志开始时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到当前时间不能大于 7 天，开始时间不能大于结束时间，结束时间不能大于当前时间 (Required)
+ * param endTime: 错误日志结束时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到当前时间不能大于 7 天，开始时间不能大于结束时间，结束时间不能大于当前时间 (Required)
+ * param dbName: 查询哪个数据库的慢日志，不填表示返回所有数据库的错误日志。<br>- MySQL不支持 (Optional)
+ * param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞]。pageNumber为-1时，返回所有数据页码； (Optional)
+ * param pageSize: 每页显示的数据条数，默认为50，取值范围：[1,100]，只能为10的倍数 (Optional)
  */
 func NewDescribeErrorLogRequestWithAllParams(
     regionId string,
@@ -129,36 +129,31 @@ func NewDescribeErrorLogRequestWithoutParam() *DescribeErrorLogRequest {
 func (r *DescribeErrorLogRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *DescribeErrorLogRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
-/* param startTime: 慢日志开始时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到当前时间不能大于 7 天，开始时间不能大于结束时间，结束时间不能大于当前时间(Required) */
+/* param startTime: 错误日志开始时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到当前时间不能大于 7 天，开始时间不能大于结束时间，结束时间不能大于当前时间(Required) */
 func (r *DescribeErrorLogRequest) SetStartTime(startTime string) {
     r.StartTime = startTime
 }
-
-/* param endTime: 慢日志结束时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到当前时间不能大于 7 天，开始时间不能大于结束时间，结束时间不能大于当前时间(Required) */
+/* param endTime: 错误日志结束时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到当前时间不能大于 7 天，开始时间不能大于结束时间，结束时间不能大于当前时间(Required) */
 func (r *DescribeErrorLogRequest) SetEndTime(endTime string) {
     r.EndTime = endTime
 }
-
-/* param dbName: 查询哪个数据库的慢日志，不填表示返回所有数据库的慢日志(Optional) */
+/* param dbName: 查询哪个数据库的慢日志，不填表示返回所有数据库的错误日志。<br>- MySQL不支持(Optional) */
 func (r *DescribeErrorLogRequest) SetDbName(dbName string) {
     r.DbName = &dbName
 }
-
-/* param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,1000)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页。(Optional) */
+/* param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞]。pageNumber为-1时，返回所有数据页码；(Optional) */
 func (r *DescribeErrorLogRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
-/* param pageSize: 每页显示的数据条数，默认为10，取值范围：10、20、30、50、100(Optional) */
+/* param pageSize: 每页显示的数据条数，默认为50，取值范围：[1,100]，只能为10的倍数(Optional) */
 func (r *DescribeErrorLogRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

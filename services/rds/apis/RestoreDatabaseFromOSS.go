@@ -110,21 +110,19 @@ func NewRestoreDatabaseFromOSSRequestWithoutParam() *RestoreDatabaseFromOSSReque
 func (r *RestoreDatabaseFromOSSRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *RestoreDatabaseFromOSSRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param dbName: 库名称(Required) */
 func (r *RestoreDatabaseFromOSSRequest) SetDbName(dbName string) {
     r.DbName = dbName
 }
-
 /* param ossURL: 用户上传到对象存储OSS上的备份文件的路径。<br>例如用户备份上传的bucket为db_backup，文件为test_server/db1.bak，那么ossULR为db_backup/test_server/db1.bak。<br>**授权说明**：需要授予账户ID：785455908940，对这个bucket的读取权限，具体步骤可以查看[文档](https://docs.jdcloud.com/cn/object-storage-service/set-bucket-policy-2)。(Required) */
 func (r *RestoreDatabaseFromOSSRequest) SetOssURL(ossURL string) {
     r.OssURL = ossURL
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

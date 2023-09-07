@@ -19,6 +19,7 @@ package apis
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
     rds "github.com/jdcloud-api/jdcloud-sdk-go/services/rds/models"
+    charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
 )
 
 type CreateROInstanceRequest struct {
@@ -66,6 +67,12 @@ type CreateROInstanceRequest struct {
 
     /* 标签信息 (Optional) */
     TagSpec []rds.Tag `json:"tagSpec"`
+
+    /* 资源组id (Optional) */
+    ResourceGroupId *string `json:"resourceGroupId"`
+
+    /* 计费规格，包括计费类型，计费周期等 (Optional) */
+    ChargeSpec *charge.ChargeSpec `json:"chargeSpec"`
 }
 
 /*
@@ -118,6 +125,8 @@ func NewCreateROInstanceRequest(
  * param count: 创建只读实例的数目,缺省为1 (Optional)
  * param roInstanceProxy: 只读代理服务的ID，缺省值为 “NULL”，表示不绑定代理服务 (Optional)
  * param tagSpec: 标签信息 (Optional)
+ * param resourceGroupId: 资源组id (Optional)
+ * param chargeSpec: 计费规格，包括计费类型，计费周期等 (Optional)
  */
 func NewCreateROInstanceRequestWithAllParams(
     regionId string,
@@ -134,6 +143,8 @@ func NewCreateROInstanceRequestWithAllParams(
     count *int,
     roInstanceProxy *string,
     tagSpec []rds.Tag,
+    resourceGroupId *string,
+    chargeSpec *charge.ChargeSpec,
 ) *CreateROInstanceRequest {
 
     return &CreateROInstanceRequest{
@@ -157,6 +168,8 @@ func NewCreateROInstanceRequestWithAllParams(
         Count: count,
         RoInstanceProxy: roInstanceProxy,
         TagSpec: tagSpec,
+        ResourceGroupId: resourceGroupId,
+        ChargeSpec: chargeSpec,
     }
 }
 
@@ -177,71 +190,67 @@ func NewCreateROInstanceRequestWithoutParam() *CreateROInstanceRequest {
 func (r *CreateROInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *CreateROInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param instanceName: 实例名称，具体规则可参见帮助中心文档:[名称及密码限制](../../../documentation/Database-and-Cache-Service/RDS/Introduction/Restrictions/SQLServer-Restrictions.md)(Required) */
 func (r *CreateROInstanceRequest) SetInstanceName(instanceName string) {
     r.InstanceName = instanceName
 }
-
 /* param instanceClass: 只读实例规格FlavorId(Required) */
 func (r *CreateROInstanceRequest) SetInstanceClass(instanceClass string) {
     r.InstanceClass = instanceClass
 }
-
 /* param instanceStorageType: 存储类型，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md)，缺省值为：LOCAL_SSD(Optional) */
 func (r *CreateROInstanceRequest) SetInstanceStorageType(instanceStorageType string) {
     r.InstanceStorageType = &instanceStorageType
 }
-
 /* param instanceStorageGB: 磁盘空间(Required) */
 func (r *CreateROInstanceRequest) SetInstanceStorageGB(instanceStorageGB int) {
     r.InstanceStorageGB = instanceStorageGB
 }
-
 /* param azId: 可用区ID(Required) */
 func (r *CreateROInstanceRequest) SetAzId(azId string) {
     r.AzId = azId
 }
-
 /* param vpcId: VPC的ID，如果没有填写就保持和常规实例一样的VPC(Optional) */
 func (r *CreateROInstanceRequest) SetVpcId(vpcId string) {
     r.VpcId = &vpcId
 }
-
 /* param subnetId: 子网ID，如果没有填写就保持和常规实例一样的subnet(Optional) */
 func (r *CreateROInstanceRequest) SetSubnetId(subnetId string) {
     r.SubnetId = &subnetId
 }
-
 /* param parameterGroup: 参数组ID，缺省采用和常规实例一样的参数组(Optional) */
 func (r *CreateROInstanceRequest) SetParameterGroup(parameterGroup string) {
     r.ParameterGroup = &parameterGroup
 }
-
 /* param storageEncrypted: 实例数据加密(存储类型为云硬盘才支持数据加密)。false：不加密；true：加密。缺省为false。(Optional) */
 func (r *CreateROInstanceRequest) SetStorageEncrypted(storageEncrypted bool) {
     r.StorageEncrypted = &storageEncrypted
 }
-
 /* param count: 创建只读实例的数目,缺省为1(Optional) */
 func (r *CreateROInstanceRequest) SetCount(count int) {
     r.Count = &count
 }
-
 /* param roInstanceProxy: 只读代理服务的ID，缺省值为 “NULL”，表示不绑定代理服务(Optional) */
 func (r *CreateROInstanceRequest) SetRoInstanceProxy(roInstanceProxy string) {
     r.RoInstanceProxy = &roInstanceProxy
 }
-
 /* param tagSpec: 标签信息(Optional) */
 func (r *CreateROInstanceRequest) SetTagSpec(tagSpec []rds.Tag) {
     r.TagSpec = tagSpec
 }
+/* param resourceGroupId: 资源组id(Optional) */
+func (r *CreateROInstanceRequest) SetResourceGroupId(resourceGroupId string) {
+    r.ResourceGroupId = &resourceGroupId
+}
+/* param chargeSpec: 计费规格，包括计费类型，计费周期等(Optional) */
+func (r *CreateROInstanceRequest) SetChargeSpec(chargeSpec *charge.ChargeSpec) {
+    r.ChargeSpec = chargeSpec
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -91,4 +91,13 @@ type DBInstance struct {
 
     /* 应用访问端口<br>- 仅支持MySQL (Optional) */
     InstancePort string `json:"instancePort"`
+
+    /* 可用区类型<br>- 仅支持MySQL (Optional) */
+    AzType int `json:"azType"`
+
+    /* 资源组id (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
+
+    /* 资源组名称 (Optional) */
+    ResourceGroupName string `json:"resourceGroupName"`
 }

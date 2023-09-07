@@ -102,16 +102,15 @@ func NewModifyParameterGroupParametersRequestWithoutParam() *ModifyParameterGrou
 func (r *ModifyParameterGroupParametersRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param parameterGroupId: Parameter Group ID(Required) */
 func (r *ModifyParameterGroupParametersRequest) SetParameterGroupId(parameterGroupId string) {
     r.ParameterGroupId = parameterGroupId
 }
-
 /* param parameters: 修改的参数(Required) */
 func (r *ModifyParameterGroupParametersRequest) SetParameters(parameters []rds.Parameter) {
     r.Parameters = parameters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

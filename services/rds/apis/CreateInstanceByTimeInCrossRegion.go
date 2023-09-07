@@ -111,21 +111,19 @@ func NewCreateInstanceByTimeInCrossRegionRequestWithoutParam() *CreateInstanceBy
 func (r *CreateInstanceByTimeInCrossRegionRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param restoreTime: 根据源实例的哪个时间点创建新实例(Required) */
 func (r *CreateInstanceByTimeInCrossRegionRequest) SetRestoreTime(restoreTime string) {
     r.RestoreTime = restoreTime
 }
-
 /* param serviceId: 跨地域备份同步服务ID(Required) */
 func (r *CreateInstanceByTimeInCrossRegionRequest) SetServiceId(serviceId string) {
     r.ServiceId = serviceId
 }
-
 /* param instanceSpec: 新建实例规格(Required) */
 func (r *CreateInstanceByTimeInCrossRegionRequest) SetInstanceSpec(instanceSpec *rds.RestoredNewDBInstanceSpec) {
     r.InstanceSpec = instanceSpec
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

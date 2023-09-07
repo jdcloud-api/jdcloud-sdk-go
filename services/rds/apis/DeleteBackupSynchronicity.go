@@ -92,11 +92,11 @@ func NewDeleteBackupSynchronicityRequestWithoutParam() *DeleteBackupSynchronicit
 func (r *DeleteBackupSynchronicityRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param serviceId: 跨地域备份同步服务ID(Required) */
 func (r *DeleteBackupSynchronicityRequest) SetServiceId(serviceId string) {
     r.ServiceId = serviceId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

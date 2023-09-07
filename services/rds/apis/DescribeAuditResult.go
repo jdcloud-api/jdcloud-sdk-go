@@ -32,27 +32,30 @@ type DescribeAuditResultRequest struct {
     /* RDS 实例ID，唯一标识一个RDS实例  */
     InstanceId string `json:"instanceId"`
 
-    /* 查询开始时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间不能早于当前时间30天  */
+    /* 查询开始时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间不能早于当前时间3天  */
     StartTime string `json:"startTime"`
 
     /* 查询截止时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到结束时间不能超过3天  */
     EndTime string `json:"endTime"`
 
-    /* 数据库名 (Optional) */
+    /* 废弃，使用filter，数据库名 (Optional) */
     DbName *string `json:"dbName"`
 
-    /* 账号名 (Optional) */
+    /* 废弃，使用filter，账号名 (Optional) */
     AccountName *string `json:"accountName"`
 
     /* 显示数据的页码，默认为1，取值范围：[-1,∞) (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* 每页显示的数据条数，默认为10，取值范围：10、20、50 (Optional) */
+    /* 每页显示的数据条数，默认为10，取值范围：[10,100] (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* 过滤参数，多个过滤参数之间的关系为“与”(and)
-支持以下属性的过滤：
-operation
+    /* 过滤参数，多个过滤参数之间的关系为“与”(and支持以下属性的过滤(默认等值)：)
+- operation：仅第一个value生效，语句类型【create/alter/drop/truncate/select/insert/update/delete/replace/ddl/dml/disconnect/connect/failed_connect/query】,operator仅支持eq或者in
+- account：实例账号名，operator仅支持eq或者in
+- keyword：SQL 关键词，模糊查询，operator仅支持eq或者in
+- database：实例库名，operator仅支持eq或者in
+- threadId：会话id，operator仅支持eq或者in
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
@@ -60,7 +63,7 @@ operation
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
- * param startTime: 查询开始时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间不能早于当前时间30天 (Required)
+ * param startTime: 查询开始时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间不能早于当前时间3天 (Required)
  * param endTime: 查询截止时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到结束时间不能超过3天 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -89,15 +92,18 @@ func NewDescribeAuditResultRequest(
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
- * param startTime: 查询开始时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间不能早于当前时间30天 (Required)
+ * param startTime: 查询开始时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间不能早于当前时间3天 (Required)
  * param endTime: 查询截止时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到结束时间不能超过3天 (Required)
- * param dbName: 数据库名 (Optional)
- * param accountName: 账号名 (Optional)
+ * param dbName: 废弃，使用filter，数据库名 (Optional)
+ * param accountName: 废弃，使用filter，账号名 (Optional)
  * param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞) (Optional)
- * param pageSize: 每页显示的数据条数，默认为10，取值范围：10、20、50 (Optional)
- * param filters: 过滤参数，多个过滤参数之间的关系为“与”(and)
-支持以下属性的过滤：
-operation
+ * param pageSize: 每页显示的数据条数，默认为10，取值范围：[10,100] (Optional)
+ * param filters: 过滤参数，多个过滤参数之间的关系为“与”(and支持以下属性的过滤(默认等值)：)
+- operation：仅第一个value生效，语句类型【create/alter/drop/truncate/select/insert/update/delete/replace/ddl/dml/disconnect/connect/failed_connect/query】,operator仅支持eq或者in
+- account：实例账号名，operator仅支持eq或者in
+- keyword：SQL 关键词，模糊查询，operator仅支持eq或者in
+- database：实例库名，operator仅支持eq或者in
+- threadId：会话id，operator仅支持eq或者in
  (Optional)
  */
 func NewDescribeAuditResultRequestWithAllParams(
@@ -148,49 +154,45 @@ func NewDescribeAuditResultRequestWithoutParam() *DescribeAuditResultRequest {
 func (r *DescribeAuditResultRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *DescribeAuditResultRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
-/* param startTime: 查询开始时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间不能早于当前时间30天(Required) */
+/* param startTime: 查询开始时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间不能早于当前时间3天(Required) */
 func (r *DescribeAuditResultRequest) SetStartTime(startTime string) {
     r.StartTime = startTime
 }
-
 /* param endTime: 查询截止时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到结束时间不能超过3天(Required) */
 func (r *DescribeAuditResultRequest) SetEndTime(endTime string) {
     r.EndTime = endTime
 }
-
-/* param dbName: 数据库名(Optional) */
+/* param dbName: 废弃，使用filter，数据库名(Optional) */
 func (r *DescribeAuditResultRequest) SetDbName(dbName string) {
     r.DbName = &dbName
 }
-
-/* param accountName: 账号名(Optional) */
+/* param accountName: 废弃，使用filter，账号名(Optional) */
 func (r *DescribeAuditResultRequest) SetAccountName(accountName string) {
     r.AccountName = &accountName
 }
-
 /* param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞)(Optional) */
 func (r *DescribeAuditResultRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
-/* param pageSize: 每页显示的数据条数，默认为10，取值范围：10、20、50(Optional) */
+/* param pageSize: 每页显示的数据条数，默认为10，取值范围：[10,100](Optional) */
 func (r *DescribeAuditResultRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
-/* param filters: 过滤参数，多个过滤参数之间的关系为“与”(and)
-支持以下属性的过滤：
-operation
+/* param filters: 过滤参数，多个过滤参数之间的关系为“与”(and支持以下属性的过滤(默认等值)：)
+- operation：仅第一个value生效，语句类型【create/alter/drop/truncate/select/insert/update/delete/replace/ddl/dml/disconnect/connect/failed_connect/query】,operator仅支持eq或者in
+- account：实例账号名，operator仅支持eq或者in
+- keyword：SQL 关键词，模糊查询，operator仅支持eq或者in
+- database：实例库名，operator仅支持eq或者in
+- threadId：会话id，operator仅支持eq或者in
 (Optional) */
 func (r *DescribeAuditResultRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

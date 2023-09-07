@@ -17,20 +17,20 @@
 package models
 
 
-type ErrorLogDigest struct {
+type SwitchLog struct {
 
-    /* 错误日志开始执行时间 (Optional) */
+    /* 切换事件ID (Optional) */
+    Id string `json:"id"`
+
+    /* 切换开始时间 (Optional) */
     StartTime string `json:"startTime"`
 
-    /* 数据库名，表示该SQL是在哪个数据库中执行的<br>- MySQL不支持 (Optional) */
-    DbName string `json:"dbName"`
+    /* 实例结束时间 (Optional) */
+    EndTime string `json:"endTime"`
 
-    /* 数据库账号，表示该数据库在哪个账号下面<br>- MySQL不支持 (Optional) */
-    DbNameAccount string `json:"dbNameAccount"`
+    /* 切换类型 (Optional) */
+    CauseCode string `json:"causeCode"`
 
-    /* 错误日志信息 (Optional) */
-    ErrorLogInformation string `json:"errorLogInformation"`
-
-    /* 错误日志级别<br>- MySQL不支持 (Optional) */
-    ErrorSeverity string `json:"errorSeverity"`
+    /* 切换具体原因 (Optional) */
+    CauseDetail string `json:"causeDetail"`
 }

@@ -114,26 +114,23 @@ func NewGrantAccountPrivilegeRequestWithoutParam() *GrantAccountPrivilegeRequest
 func (r *GrantAccountPrivilegeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *GrantAccountPrivilegeRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param accountName: 账号名，在同一个实例中账号名不能重复(Required) */
 func (r *GrantAccountPrivilegeRequest) SetAccountName(accountName string) {
     r.AccountName = accountName
 }
-
 /* param databasePrivileges: 设置数据库细粒度权限内容(Optional) */
 func (r *GrantAccountPrivilegeRequest) SetDatabasePrivileges(databasePrivileges []rds.DatabasePrivilege) {
     r.DatabasePrivileges = databasePrivileges
 }
-
 /* param globalPrivileges: 设置全局权限，权限的具体定义参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md)(Optional) */
 func (r *GrantAccountPrivilegeRequest) SetGlobalPrivileges(globalPrivileges []string) {
     r.GlobalPrivileges = globalPrivileges
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

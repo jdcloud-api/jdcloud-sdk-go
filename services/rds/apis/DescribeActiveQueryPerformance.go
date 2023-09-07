@@ -37,7 +37,7 @@ type DescribeActiveQueryPerformanceRequest struct {
     /* 返回执行时间大于等于threshold的记录，默认10，单位秒 (Optional) */
     Threshold *int `json:"threshold"`
 
-    /* 显示数据的页码，默认为1，取值范围：[-1,1000)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页。 (Optional) */
+    /* 显示数据的页码，默认为1，取值范围：[-1,∞]。pageNumber为-1时，返回所有数据页码； (Optional) */
     PageNumber *int `json:"pageNumber"`
 
     /* 每页显示的数据条数，默认为50，取值范围：[1,100]，只能为10的倍数 (Optional) */
@@ -72,7 +72,7 @@ func NewDescribeActiveQueryPerformanceRequest(
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
  * param db: 需要查询的数据库名，多个数据库名之间用英文逗号分隔，默认所有数据库 (Optional)
  * param threshold: 返回执行时间大于等于threshold的记录，默认10，单位秒 (Optional)
- * param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,1000)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页。 (Optional)
+ * param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞]。pageNumber为-1时，返回所有数据页码； (Optional)
  * param pageSize: 每页显示的数据条数，默认为50，取值范围：[1,100]，只能为10的倍数 (Optional)
  */
 func NewDescribeActiveQueryPerformanceRequestWithAllParams(
@@ -117,31 +117,27 @@ func NewDescribeActiveQueryPerformanceRequestWithoutParam() *DescribeActiveQuery
 func (r *DescribeActiveQueryPerformanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *DescribeActiveQueryPerformanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param db: 需要查询的数据库名，多个数据库名之间用英文逗号分隔，默认所有数据库(Optional) */
 func (r *DescribeActiveQueryPerformanceRequest) SetDb(db string) {
     r.Db = &db
 }
-
 /* param threshold: 返回执行时间大于等于threshold的记录，默认10，单位秒(Optional) */
 func (r *DescribeActiveQueryPerformanceRequest) SetThreshold(threshold int) {
     r.Threshold = &threshold
 }
-
-/* param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,1000)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页。(Optional) */
+/* param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞]。pageNumber为-1时，返回所有数据页码；(Optional) */
 func (r *DescribeActiveQueryPerformanceRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 每页显示的数据条数，默认为50，取值范围：[1,100]，只能为10的倍数(Optional) */
 func (r *DescribeActiveQueryPerformanceRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

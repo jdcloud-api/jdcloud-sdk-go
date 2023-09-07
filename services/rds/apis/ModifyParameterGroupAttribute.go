@@ -107,21 +107,19 @@ func NewModifyParameterGroupAttributeRequestWithoutParam() *ModifyParameterGroup
 func (r *ModifyParameterGroupAttributeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param parameterGroupId: Parameter Group ID(Required) */
 func (r *ModifyParameterGroupAttributeRequest) SetParameterGroupId(parameterGroupId string) {
     r.ParameterGroupId = parameterGroupId
 }
-
 /* param parameterGroupName: 参数组名称(Required) */
 func (r *ModifyParameterGroupAttributeRequest) SetParameterGroupName(parameterGroupName string) {
     r.ParameterGroupName = parameterGroupName
 }
-
 /* param description: 参数组描述(Optional) */
 func (r *ModifyParameterGroupAttributeRequest) SetDescription(description string) {
     r.Description = &description
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -110,21 +110,19 @@ func NewCreateSuperAccountRequestWithoutParam() *CreateSuperAccountRequest {
 func (r *CreateSuperAccountRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *CreateSuperAccountRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param accountName: 账号名，在同一个RDS实例中，账号名不能重复。账号名的具体规则可参见帮助中心文档:[名称及密码限制](../../../documentation/Database-and-Cache-Service/RDS/Introduction/Restrictions/SQLServer-Restrictions.md)(Required) */
 func (r *CreateSuperAccountRequest) SetAccountName(accountName string) {
     r.AccountName = accountName
 }
-
 /* param accountPassword: 密码,密码的具体规则可参见帮助中心文档:[名称及密码限制](../../../documentation/Database-and-Cache-Service/RDS/Introduction/Restrictions/SQLServer-Restrictions.md)(Required) */
 func (r *CreateSuperAccountRequest) SetAccountPassword(accountPassword string) {
     r.AccountPassword = accountPassword
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

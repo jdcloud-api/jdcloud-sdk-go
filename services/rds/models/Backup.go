@@ -28,13 +28,16 @@ type Backup struct {
     /* 备份所属实例ID (Optional) */
     InstanceId string `json:"instanceId"`
 
+    /* 备份所属实例名称 (Optional) */
+    InstanceName string `json:"instanceName"`
+
     /* 备份状态，请查看[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Optional) */
     BackupStatus string `json:"backupStatus"`
 
     /* 备份开始时间，格式为：YYYY-MM-DD HH:mm:ss (Optional) */
     BackupStartTime string `json:"backupStartTime"`
 
-    /* 备份结束时间，格式为：YYYY-MM-DD HH:mm:ss<br>- **SQL Server支持**<br>- **MySQL不支持** (Optional) */
+    /* 备份结束时间，格式为：YYYY-MM-DD HH:mm:ss<br>- **SQL Server、MySQL支持**<br> (Optional) */
     BackupEndTime string `json:"backupEndTime"`
 
     /* 备份类型，全量备份或增量备份，请查看[枚举参数定义](../Enum-Definitions/Enum-Definitions.md)<br>- **SQL Server支持**<br>- **MySQL不支持** (Optional) */
@@ -54,4 +57,19 @@ type Backup struct {
 
     /* 整个备份集大小，单位：Byte (Optional) */
     BackupSizeByte int64 `json:"backupSizeByte"`
+
+    /* 加密秘钥 (Optional) */
+    Descriptionkey string `json:"descriptionkey"`
+
+    /* 备份上传的可用区 (Optional) */
+    AvailabilityZone string `json:"availabilityZone"`
+
+    /* 实例引擎类型，如MySQL等，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Optional) */
+    Engine string `json:"engine"`
+
+    /* 备份是否支持下载，0为不支持，1为支持<br>- **仅PostgreSQL支持** (Optional) */
+    IfSupportDownload int `json:"ifSupportDownload"`
+
+    /* serverId (Optional) */
+    ServerId string `json:"serverId"`
 }

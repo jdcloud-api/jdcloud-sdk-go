@@ -40,7 +40,7 @@ func NewRdsClient(credential *core.Credential) *RdsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "rds",
-            Revision:    "1.1.6",
+            Revision:    "1.3.4",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -277,7 +277,7 @@ func (c *RdsClient) GrantPrivilege(request *rds.GrantPrivilegeRequest) (*rds.Gra
     return jdResp, err
 }
 
-/* 关闭读写分离代理服务的外网访问功能。关闭后，用户无法通过 Internet 连接读写分离代理服务，但可以在京东云内网通过内网域名连接<br>- 仅支持MySQL */
+/* 关闭读写分离代理服务的外网访问功能。关闭后，用户无法通过 Internet 连接读写分离代理服务，但可以在京东云内网通过内网域名连接<br>- 仅支持MySQL、PostgreSQL */
 func (c *RdsClient) DisableReadWriteProxyInternetAccess(request *rds.DisableReadWriteProxyInternetAccessRequest) (*rds.DisableReadWriteProxyInternetAccessResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -297,7 +297,27 @@ func (c *RdsClient) DisableReadWriteProxyInternetAccess(request *rds.DisableRead
     return jdResp, err
 }
 
-/* 查看指定RDS读写分离代理详情<br>- 仅支持MySQL */
+/* 创建一个白名单分组并设置白名单允许访问的IP，仅MySQL、Percona、MariaDB支持。修改允许访问实例的IP白名单。白名单是允许访问当前实例的IP/IP段列表，缺省情况下，白名单对本VPC开放。如果用户开启了外网访问的功能，还需要对外网的IP配置白名单。 */
+func (c *RdsClient) CreateWhiteListGroup(request *rds.CreateWhiteListGroupRequest) (*rds.CreateWhiteListGroupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.CreateWhiteListGroupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查看指定RDS读写分离代理详情<br>- 仅支持MySQL、PostgreSQL */
 func (c *RdsClient) DescribeReadWriteProxyAttribute(request *rds.DescribeReadWriteProxyAttributeRequest) (*rds.DescribeReadWriteProxyAttributeResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -468,6 +488,26 @@ func (c *RdsClient) DeleteImportFile(request *rds.DeleteImportFileRequest) (*rds
     }
 
     jdResp := &rds.DeleteImportFileResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取MySQL实例的binlog的内网下载链接<br>- 仅支持 MySQL, Percona, MariaDB */
+func (c *RdsClient) DescribeBinlogDownloadInternalURL(request *rds.DescribeBinlogDownloadInternalURLRequest) (*rds.DescribeBinlogDownloadInternalURLResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DescribeBinlogDownloadInternalURLResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -657,7 +697,7 @@ func (c *RdsClient) DescribeLogDownloadURL(request *rds.DescribeLogDownloadURLRe
     return jdResp, err
 }
 
-/* 查询PostgreSQL实例的错误日志的概要信息。<br>- 仅支持PostgreSQL */
+/* 查询错误日志的概要信息 */
 func (c *RdsClient) DescribeErrorLog(request *rds.DescribeErrorLogRequest) (*rds.DescribeErrorLogResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -977,7 +1017,7 @@ func (c *RdsClient) EnableAudit(request *rds.EnableAuditRequest) (*rds.EnableAud
     return jdResp, err
 }
 
-/* 开启读写分离代理服务的外网访问功能。开启后，用户可以通过 internet 连接读写分离代理服务<br>- 仅支持MySQL */
+/* 开启读写分离代理服务的外网访问功能。开启后，用户可以通过 internet 连接读写分离代理服务<br>- 仅支持MySQL、PostgreSQL */
 func (c *RdsClient) EnableReadWriteProxyInternetAccess(request *rds.EnableReadWriteProxyInternetAccessRequest) (*rds.EnableReadWriteProxyInternetAccessResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1137,7 +1177,7 @@ func (c *RdsClient) RestoreDatabaseFromBackup(request *rds.RestoreDatabaseFromBa
     return jdResp, err
 }
 
-/* 创建数据库读写分离代理服务<br>- 仅支持MySQL */
+/* 创建数据库读写分离代理服务<br>- 仅支持MySQL、PostgreSQL */
 func (c *RdsClient) CreateReadWriteProxy(request *rds.CreateReadWriteProxyRequest) (*rds.CreateReadWriteProxyResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1677,6 +1717,26 @@ func (c *RdsClient) DescribeParameterGroupAttachedInstances(request *rds.Describ
     return jdResp, err
 }
 
+/* 当该白名单分组用户无需使用时，可进行删除。仅适用于MySQL、Percona、MariaDB。 */
+func (c *RdsClient) DeleteWhiteListGroup(request *rds.DeleteWhiteListGroupRequest) (*rds.DeleteWhiteListGroupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &rds.DeleteWhiteListGroupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查看当前实例是否开启TDE */
 func (c *RdsClient) DescribeTde(request *rds.DescribeTdeRequest) (*rds.DescribeTdeResponse, error) {
     if request == nil {
@@ -1757,7 +1817,7 @@ func (c *RdsClient) ModifyParameterGroupAttribute(request *rds.ModifyParameterGr
     return jdResp, err
 }
 
-/* 仅支持查看MySQL实例的审计内容<br>- 仅支持 MySQL 5.6, MySQL 5.7, Percona, MariaDB, PostgreSQL */
+/* 查看RDS实例的审计内容<br>- 仅支持 MySQL 5.6, MySQL 5.7, Percona, MariaDB, PostgreSQL */
 func (c *RdsClient) DescribeAuditResult(request *rds.DescribeAuditResultRequest) (*rds.DescribeAuditResultResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1977,7 +2037,7 @@ func (c *RdsClient) DescribeSSL(request *rds.DescribeSSLRequest) (*rds.DescribeS
     return jdResp, err
 }
 
-/* 查看RDS读写分离代理列表<br>- 仅支持MySQL */
+/* 查看RDS读写分离代理列表<br>- 仅支持MySQL、PostgreSQL */
 func (c *RdsClient) DescribeReadWriteProxies(request *rds.DescribeReadWriteProxiesRequest) (*rds.DescribeReadWriteProxiesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -2237,7 +2297,7 @@ func (c *RdsClient) DescribeBackupSpace(request *rds.DescribeBackupSpaceRequest)
     return jdResp, err
 }
 
-/* 修改数据库读写分离代理服务配置<br>- 仅支持MySQL */
+/* 修改数据库读写分离代理服务配置<br>- 仅支持MySQL、PostgreSQL */
 func (c *RdsClient) ModifyReadWriteProxy(request *rds.ModifyReadWriteProxyRequest) (*rds.ModifyReadWriteProxyResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")

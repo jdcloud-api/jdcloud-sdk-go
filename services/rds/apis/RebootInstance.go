@@ -110,26 +110,23 @@ func NewRebootInstanceRequestWithoutParam() *RebootInstanceRequest {
 func (r *RebootInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *RebootInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param rebootMaster: 是否重启主节点。<br> - 仅SQL Server 支持该参数(Optional) */
 func (r *RebootInstanceRequest) SetRebootMaster(rebootMaster bool) {
     r.RebootMaster = &rebootMaster
 }
-
 /* param rebootSlave: 是否重启备节点。<br> - 仅SQL Server 支持该参数(Optional) */
 func (r *RebootInstanceRequest) SetRebootSlave(rebootSlave bool) {
     r.RebootSlave = &rebootSlave
 }
-
 /* param force: 是否强制重启 <br>- 仅支持MySQL(Optional) */
 func (r *RebootInstanceRequest) SetForce(force bool) {
     r.Force = &force
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

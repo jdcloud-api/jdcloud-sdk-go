@@ -19,6 +19,7 @@ package apis
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
     rds "github.com/jdcloud-api/jdcloud-sdk-go/services/rds/models"
+    common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
 
 type DescribeBackupsRequest struct {
@@ -46,18 +47,28 @@ type DescribeBackupsRequest struct {
     /* 返回备份开始时间小于等于该时间的备份列表<br>**- 测试参数，仅支持SQL Server，后续可能被其他参数取代** (Optional) */
     BackupTimeRangeEndFilter *string `json:"backupTimeRangeEndFilter"`
 
-    /* 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页。  */
+    /* 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；  */
     PageNumber int `json:"pageNumber"`
 
-    /* 每页显示的数据条数，默认为10，取值范围：10、20、30、50、100  */
+    /* 每页显示的数据条数，默认为10，取值范围：[10,100]  */
     PageSize int `json:"pageSize"`
+
+    /* 过滤参数，多个过滤参数之间的关系为“与”(and支持以下属性的过滤(默认等值)：)
+- instanceId：RDS实例ID，唯一标识一个实例，operator仅支持eq
+- instanceName：RDS实例名称，模糊搜索，operator仅支持eq、like
+- backupId：备份ID，唯一标识一个备份，operator仅支持eq
+- backupName：备份名称，模糊搜索，operator仅支持eq、like
+- auto：备份类型，0为手动备份，1为自动备份，operator仅支持eq
+- backupMethod：返回backupMethod等于指定值的备份列表，physical为物理备份，snapshot为快照备份备注，operator仅支持eq
+ (Optional) */
+    Filters []common.Filter `json:"filters"`
 }
 
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param instanceId: RDS实例ID，唯一标识一个实例 (Required)
- * param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页。 (Required)
- * param pageSize: 每页显示的数据条数，默认为10，取值范围：10、20、30、50、100 (Required)
+ * param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码； (Required)
+ * param pageSize: 每页显示的数据条数，默认为10，取值范围：[10,100] (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -90,8 +101,16 @@ func NewDescribeBackupsRequest(
  * param dbNameFilter: 返回dbName等于指定值的备份列表，不传或为空返回全部<br>**- 测试参数，仅支持SQL Server，后续可能被其他参数取代** (Optional)
  * param backupTimeRangeStartFilter: 返回备份开始时间大于该时间的备份列表<br>**- 测试参数，仅支持SQL Server，后续可能被其他参数取代** (Optional)
  * param backupTimeRangeEndFilter: 返回备份开始时间小于等于该时间的备份列表<br>**- 测试参数，仅支持SQL Server，后续可能被其他参数取代** (Optional)
- * param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页。 (Required)
- * param pageSize: 每页显示的数据条数，默认为10，取值范围：10、20、30、50、100 (Required)
+ * param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码； (Required)
+ * param pageSize: 每页显示的数据条数，默认为10，取值范围：[10,100] (Required)
+ * param filters: 过滤参数，多个过滤参数之间的关系为“与”(and支持以下属性的过滤(默认等值)：)
+- instanceId：RDS实例ID，唯一标识一个实例，operator仅支持eq
+- instanceName：RDS实例名称，模糊搜索，operator仅支持eq、like
+- backupId：备份ID，唯一标识一个备份，operator仅支持eq
+- backupName：备份名称，模糊搜索，operator仅支持eq、like
+- auto：备份类型，0为手动备份，1为自动备份，operator仅支持eq
+- backupMethod：返回backupMethod等于指定值的备份列表，physical为物理备份，snapshot为快照备份备注，operator仅支持eq
+ (Optional)
  */
 func NewDescribeBackupsRequestWithAllParams(
     regionId string,
@@ -103,6 +122,7 @@ func NewDescribeBackupsRequestWithAllParams(
     backupTimeRangeEndFilter *string,
     pageNumber int,
     pageSize int,
+    filters []common.Filter,
 ) *DescribeBackupsRequest {
 
     return &DescribeBackupsRequest{
@@ -121,6 +141,7 @@ func NewDescribeBackupsRequestWithAllParams(
         BackupTimeRangeEndFilter: backupTimeRangeEndFilter,
         PageNumber: pageNumber,
         PageSize: pageSize,
+        Filters: filters,
     }
 }
 
@@ -141,46 +162,50 @@ func NewDescribeBackupsRequestWithoutParam() *DescribeBackupsRequest {
 func (r *DescribeBackupsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS实例ID，唯一标识一个实例(Required) */
 func (r *DescribeBackupsRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param auto: 查询备份类型，0为手动备份，1为自动备份，不传表示全部. <br>**- 测试参数，仅支持SQL Server，后续可能被其他参数取代**(Optional) */
 func (r *DescribeBackupsRequest) SetAuto(auto int) {
     r.Auto = &auto
 }
-
 /* param backupTypeFilter: 返回backupType等于指定值的备份列表。full为全量备份，diff为增量备份<br>**- 测试参数，仅支持SQL Server，后续可能被其他参数取代**(Optional) */
 func (r *DescribeBackupsRequest) SetBackupTypeFilter(backupTypeFilter string) {
     r.BackupTypeFilter = &backupTypeFilter
 }
-
 /* param dbNameFilter: 返回dbName等于指定值的备份列表，不传或为空返回全部<br>**- 测试参数，仅支持SQL Server，后续可能被其他参数取代**(Optional) */
 func (r *DescribeBackupsRequest) SetDbNameFilter(dbNameFilter string) {
     r.DbNameFilter = &dbNameFilter
 }
-
 /* param backupTimeRangeStartFilter: 返回备份开始时间大于该时间的备份列表<br>**- 测试参数，仅支持SQL Server，后续可能被其他参数取代**(Optional) */
 func (r *DescribeBackupsRequest) SetBackupTimeRangeStartFilter(backupTimeRangeStartFilter string) {
     r.BackupTimeRangeStartFilter = &backupTimeRangeStartFilter
 }
-
 /* param backupTimeRangeEndFilter: 返回备份开始时间小于等于该时间的备份列表<br>**- 测试参数，仅支持SQL Server，后续可能被其他参数取代**(Optional) */
 func (r *DescribeBackupsRequest) SetBackupTimeRangeEndFilter(backupTimeRangeEndFilter string) {
     r.BackupTimeRangeEndFilter = &backupTimeRangeEndFilter
 }
-
-/* param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页。(Required) */
+/* param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；(Required) */
 func (r *DescribeBackupsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = pageNumber
 }
-
-/* param pageSize: 每页显示的数据条数，默认为10，取值范围：10、20、30、50、100(Required) */
+/* param pageSize: 每页显示的数据条数，默认为10，取值范围：[10,100](Required) */
 func (r *DescribeBackupsRequest) SetPageSize(pageSize int) {
     r.PageSize = pageSize
 }
+/* param filters: 过滤参数，多个过滤参数之间的关系为“与”(and支持以下属性的过滤(默认等值)：)
+- instanceId：RDS实例ID，唯一标识一个实例，operator仅支持eq
+- instanceName：RDS实例名称，模糊搜索，operator仅支持eq、like
+- backupId：备份ID，唯一标识一个备份，operator仅支持eq
+- backupName：备份名称，模糊搜索，operator仅支持eq、like
+- auto：备份类型，0为手动备份，1为自动备份，operator仅支持eq
+- backupMethod：返回backupMethod等于指定值的备份列表，physical为物理备份，snapshot为快照备份备注，operator仅支持eq
+(Optional) */
+func (r *DescribeBackupsRequest) SetFilters(filters []common.Filter) {
+    r.Filters = filters
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

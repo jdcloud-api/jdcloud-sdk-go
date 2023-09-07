@@ -20,7 +20,7 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type ModifyInstanceAzRequest struct {
+type CreateWhiteListGroupRequest struct {
 
     core.JDCloudRequest
 
@@ -30,66 +30,75 @@ type ModifyInstanceAzRequest struct {
     /* RDS 实例ID，唯一标识一个RDS实例  */
     InstanceId string `json:"instanceId"`
 
-    /* 新可用区ID。 如果是单机实例，只需输入一个可用区；如果是主备实例，则必须输入两个可用区ID：第一个为主节点所在可用区，第二个为备节点所在可用区。主备两个可用区可以相同，也可以不同  */
-    NewAzId []string `json:"newAzId"`
+    /* 白名单名称  */
+    WhiteListName string `json:"whiteListName"`
+
+    /* IP或IP段，不同的IP/IP段之间用英文逗号分隔，例如0.0.0.0/0,192.168.0.10  */
+    Ips string `json:"ips"`
 }
 
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
- * param newAzId: 新可用区ID。 如果是单机实例，只需输入一个可用区；如果是主备实例，则必须输入两个可用区ID：第一个为主节点所在可用区，第二个为备节点所在可用区。主备两个可用区可以相同，也可以不同 (Required)
+ * param whiteListName: 白名单名称 (Required)
+ * param ips: IP或IP段，不同的IP/IP段之间用英文逗号分隔，例如0.0.0.0/0,192.168.0.10 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewModifyInstanceAzRequest(
+func NewCreateWhiteListGroupRequest(
     regionId string,
     instanceId string,
-    newAzId []string,
-) *ModifyInstanceAzRequest {
+    whiteListName string,
+    ips string,
+) *CreateWhiteListGroupRequest {
 
-	return &ModifyInstanceAzRequest{
+	return &CreateWhiteListGroupRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstanceAz",
+			URL:     "/regions/{regionId}/instances/{instanceId}/whiteList",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         InstanceId: instanceId,
-        NewAzId: newAzId,
+        WhiteListName: whiteListName,
+        Ips: ips,
 	}
 }
 
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
- * param newAzId: 新可用区ID。 如果是单机实例，只需输入一个可用区；如果是主备实例，则必须输入两个可用区ID：第一个为主节点所在可用区，第二个为备节点所在可用区。主备两个可用区可以相同，也可以不同 (Required)
+ * param whiteListName: 白名单名称 (Required)
+ * param ips: IP或IP段，不同的IP/IP段之间用英文逗号分隔，例如0.0.0.0/0,192.168.0.10 (Required)
  */
-func NewModifyInstanceAzRequestWithAllParams(
+func NewCreateWhiteListGroupRequestWithAllParams(
     regionId string,
     instanceId string,
-    newAzId []string,
-) *ModifyInstanceAzRequest {
+    whiteListName string,
+    ips string,
+) *CreateWhiteListGroupRequest {
 
-    return &ModifyInstanceAzRequest{
+    return &CreateWhiteListGroupRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstanceAz",
+            URL:     "/regions/{regionId}/instances/{instanceId}/whiteList",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         InstanceId: instanceId,
-        NewAzId: newAzId,
+        WhiteListName: whiteListName,
+        Ips: ips,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewModifyInstanceAzRequestWithoutParam() *ModifyInstanceAzRequest {
+func NewCreateWhiteListGroupRequestWithoutParam() *CreateWhiteListGroupRequest {
 
-    return &ModifyInstanceAzRequest{
+    return &CreateWhiteListGroupRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}:modifyInstanceAz",
+            URL:     "/regions/{regionId}/instances/{instanceId}/whiteList",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -98,30 +107,34 @@ func NewModifyInstanceAzRequestWithoutParam() *ModifyInstanceAzRequest {
 }
 
 /* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
-func (r *ModifyInstanceAzRequest) SetRegionId(regionId string) {
+func (r *CreateWhiteListGroupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
-func (r *ModifyInstanceAzRequest) SetInstanceId(instanceId string) {
+func (r *CreateWhiteListGroupRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-/* param newAzId: 新可用区ID。 如果是单机实例，只需输入一个可用区；如果是主备实例，则必须输入两个可用区ID：第一个为主节点所在可用区，第二个为备节点所在可用区。主备两个可用区可以相同，也可以不同(Required) */
-func (r *ModifyInstanceAzRequest) SetNewAzId(newAzId []string) {
-    r.NewAzId = newAzId
+/* param whiteListName: 白名单名称(Required) */
+func (r *CreateWhiteListGroupRequest) SetWhiteListName(whiteListName string) {
+    r.WhiteListName = whiteListName
+}
+/* param ips: IP或IP段，不同的IP/IP段之间用英文逗号分隔，例如0.0.0.0/0,192.168.0.10(Required) */
+func (r *CreateWhiteListGroupRequest) SetIps(ips string) {
+    r.Ips = ips
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r ModifyInstanceAzRequest) GetRegionId() string {
+func (r CreateWhiteListGroupRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type ModifyInstanceAzResponse struct {
+type CreateWhiteListGroupResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result ModifyInstanceAzResult `json:"result"`
+    Result CreateWhiteListGroupResult `json:"result"`
 }
 
-type ModifyInstanceAzResult struct {
+type CreateWhiteListGroupResult struct {
 }

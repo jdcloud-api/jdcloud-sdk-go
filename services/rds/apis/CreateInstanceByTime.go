@@ -111,21 +111,19 @@ func NewCreateInstanceByTimeRequestWithoutParam() *CreateInstanceByTimeRequest {
 func (r *CreateInstanceByTimeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *CreateInstanceByTimeRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param restoreTime: 根据源实例的哪个时间点创建新实例(Required) */
 func (r *CreateInstanceByTimeRequest) SetRestoreTime(restoreTime string) {
     r.RestoreTime = restoreTime
 }
-
 /* param instanceSpec: 新建实例规格(Required) */
 func (r *CreateInstanceByTimeRequest) SetInstanceSpec(instanceSpec *rds.RestoredNewDBInstanceSpec) {
     r.InstanceSpec = instanceSpec
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

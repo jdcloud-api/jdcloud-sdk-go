@@ -116,26 +116,23 @@ func NewCreateParameterGroupRequestWithoutParam() *CreateParameterGroupRequest {
 func (r *CreateParameterGroupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param engine: 实例引擎类型，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md)(Required) */
 func (r *CreateParameterGroupRequest) SetEngine(engine string) {
     r.Engine = engine
 }
-
 /* param engineVersion: 实例引擎版本，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md)(Required) */
 func (r *CreateParameterGroupRequest) SetEngineVersion(engineVersion string) {
     r.EngineVersion = engineVersion
 }
-
 /* param parameterGroupName: 参数组的名字(Required) */
 func (r *CreateParameterGroupRequest) SetParameterGroupName(parameterGroupName string) {
     r.ParameterGroupName = parameterGroupName
 }
-
 /* param description: 参数组的描述(Optional) */
 func (r *CreateParameterGroupRequest) SetDescription(description string) {
     r.Description = &description
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

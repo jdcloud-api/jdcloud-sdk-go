@@ -92,11 +92,11 @@ func NewDisableReadWriteProxyInternetAccessRequestWithoutParam() *DisableReadWri
 func (r *DisableReadWriteProxyInternetAccessRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param readWriteProxyId: 读写分离代理服务ID(Required) */
 func (r *DisableReadWriteProxyInternetAccessRequest) SetReadWriteProxyId(readWriteProxyId string) {
     r.ReadWriteProxyId = readWriteProxyId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

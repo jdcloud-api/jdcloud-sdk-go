@@ -104,21 +104,19 @@ func NewDescribeBackupDownloadURLRequestWithoutParam() *DescribeBackupDownloadUR
 func (r *DescribeBackupDownloadURLRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param backupId: 备份ID(Required) */
 func (r *DescribeBackupDownloadURLRequest) SetBackupId(backupId string) {
     r.BackupId = backupId
 }
-
 /* param fileName: 文件名称<br>- MySQL：不支持该参数<br>- SQL Server：必须输入该参数，指定该备份中需要获取下载链接的文件名称。备份中的文件名（不包括后缀）即为备份的数据库名。例如文件名为my_test_db.bak，表示该文件是my_test_db数据库的备份(Optional) */
 func (r *DescribeBackupDownloadURLRequest) SetFileName(fileName string) {
     r.FileName = &fileName
 }
-
 /* param urlExpirationSecond: 指定下载链接的过期时间，单位秒, 取值范围为 1 ~ 86400 秒；支持 SQL Server：缺省为 86400 秒。支持 MySQL, Percona, MariaDB：缺省为 300 秒。(Optional) */
 func (r *DescribeBackupDownloadURLRequest) SetUrlExpirationSecond(urlExpirationSecond string) {
     r.UrlExpirationSecond = &urlExpirationSecond
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

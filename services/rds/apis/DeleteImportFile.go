@@ -107,21 +107,19 @@ func NewDeleteImportFileRequestWithoutParam() *DeleteImportFileRequest {
 func (r *DeleteImportFileRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *DeleteImportFileRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param fileName: 单库上云文件名(Required) */
 func (r *DeleteImportFileRequest) SetFileName(fileName string) {
     r.FileName = fileName
 }
-
 /* param sharedFileGid: 共享文件的全局ID，可从上传文件查询接口describeImportFiles中获取；如果该文件不是共享文件，则无须输入该字段(Optional) */
 func (r *DeleteImportFileRequest) SetSharedFileGid(sharedFileGid string) {
     r.SharedFileGid = &sharedFileGid
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

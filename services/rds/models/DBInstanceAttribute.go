@@ -133,4 +133,13 @@ type DBInstanceAttribute struct {
 
     /* 实例内网域名解析到的内网IP地址<br>仅支持MySQL, Percona, MariaDB (Optional) */
     InstanceVip string `json:"instanceVip"`
+
+    /* 可用区类型，1为标准子网，2为边缘子网 (Optional) */
+    AzType int `json:"azType"`
+
+    /* 资源组id (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
+
+    /* 资源组名称 (Optional) */
+    ResourceGroupName string `json:"resourceGroupName"`
 }

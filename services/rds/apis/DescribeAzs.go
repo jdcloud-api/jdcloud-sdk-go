@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    rds "github.com/jdcloud-api/jdcloud-sdk-go/services/rds/models"
 )
 
 type DescribeAzsRequest struct {
@@ -92,11 +93,11 @@ func NewDescribeAzsRequestWithoutParam() *DescribeAzsRequest {
 func (r *DescribeAzsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param engine: RDS引擎类型，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md)(Required) */
 func (r *DescribeAzsRequest) SetEngine(engine string) {
     r.Engine = engine
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
@@ -112,4 +113,5 @@ type DescribeAzsResponse struct {
 
 type DescribeAzsResult struct {
     Azs []string `json:"azs"`
+    AzInfos []rds.AzInfo `json:"azInfos"`
 }

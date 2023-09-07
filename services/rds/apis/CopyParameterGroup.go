@@ -107,21 +107,19 @@ func NewCopyParameterGroupRequestWithoutParam() *CopyParameterGroupRequest {
 func (r *CopyParameterGroupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param parameterGroupId: 参数组ID(Required) */
 func (r *CopyParameterGroupRequest) SetParameterGroupId(parameterGroupId string) {
     r.ParameterGroupId = parameterGroupId
 }
-
 /* param parameterGroupName: 参数组的名字(Required) */
 func (r *CopyParameterGroupRequest) SetParameterGroupName(parameterGroupName string) {
     r.ParameterGroupName = parameterGroupName
 }
-
 /* param description: 参数组的描述(Optional) */
 func (r *CopyParameterGroupRequest) SetDescription(description string) {
     r.Description = &description
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

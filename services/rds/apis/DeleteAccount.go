@@ -101,16 +101,15 @@ func NewDeleteAccountRequestWithoutParam() *DeleteAccountRequest {
 func (r *DeleteAccountRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *DeleteAccountRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param accountName: 账号名，在同一个实例中账号名不能重复(Required) */
 func (r *DeleteAccountRequest) SetAccountName(accountName string) {
     r.AccountName = accountName
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

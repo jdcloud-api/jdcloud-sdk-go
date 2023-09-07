@@ -116,26 +116,23 @@ func NewRestoreDatabaseFromFileRequestWithoutParam() *RestoreDatabaseFromFileReq
 func (r *RestoreDatabaseFromFileRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *RestoreDatabaseFromFileRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param dbName: 库名称(Required) */
 func (r *RestoreDatabaseFromFileRequest) SetDbName(dbName string) {
     r.DbName = dbName
 }
-
 /* param sharedFileGid: 共享文件的全局ID，可从上传文件查询接口[describeImportFiles](../Cloud-on-Single-Database/describeImportFiles.md)获取；如果该文件不是共享文件，则不用输入该参数(Optional) */
 func (r *RestoreDatabaseFromFileRequest) SetSharedFileGid(sharedFileGid string) {
     r.SharedFileGid = &sharedFileGid
 }
-
 /* param fileName: 用户上传的备份文件名称（包括文件后缀名），例如mydb1.bak(Required) */
 func (r *RestoreDatabaseFromFileRequest) SetFileName(fileName string) {
     r.FileName = fileName
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

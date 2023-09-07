@@ -31,8 +31,11 @@ type ModifyReadWriteProxyRequest struct {
     /* 读写分离代理服务ID  */
     ReadWriteProxyId string `json:"readWriteProxyId"`
 
-    /* 延迟阈值，范围是0~1000，单位：秒，默认为100 (Optional) */
+    /* 延迟阈值，范围是1~1000，单位：秒，默认为100，仅MySQL (Optional) */
     DelayThreshold *int `json:"delayThreshold"`
+
+    /* wal日志延迟阈值，范围是1~1024，单位：MB，默认为200，仅PostgreSQL (Optional) */
+    WalDelayThreshold *int `json:"walDelayThreshold"`
 
     /* 读写分离代理后端实例负载均衡策略，默认值为LEAST_CURRENT_OPERATIONS；当前支持的负载均衡策略请查看[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Optional) */
     LoadBalancerPolicy *string `json:"loadBalancerPolicy"`
@@ -67,7 +70,8 @@ func NewModifyReadWriteProxyRequest(
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param readWriteProxyId: 读写分离代理服务ID (Required)
- * param delayThreshold: 延迟阈值，范围是0~1000，单位：秒，默认为100 (Optional)
+ * param delayThreshold: 延迟阈值，范围是1~1000，单位：秒，默认为100，仅MySQL (Optional)
+ * param walDelayThreshold: wal日志延迟阈值，范围是1~1024，单位：MB，默认为200，仅PostgreSQL (Optional)
  * param loadBalancerPolicy: 读写分离代理后端实例负载均衡策略，默认值为LEAST_CURRENT_OPERATIONS；当前支持的负载均衡策略请查看[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Optional)
  * param healthCheckSpec: 后端实例健康检查配置 (Optional)
  */
@@ -75,6 +79,7 @@ func NewModifyReadWriteProxyRequestWithAllParams(
     regionId string,
     readWriteProxyId string,
     delayThreshold *int,
+    walDelayThreshold *int,
     loadBalancerPolicy *string,
     healthCheckSpec *rds.HealthCheckSpec,
 ) *ModifyReadWriteProxyRequest {
@@ -89,6 +94,7 @@ func NewModifyReadWriteProxyRequestWithAllParams(
         RegionId: regionId,
         ReadWriteProxyId: readWriteProxyId,
         DelayThreshold: delayThreshold,
+        WalDelayThreshold: walDelayThreshold,
         LoadBalancerPolicy: loadBalancerPolicy,
         HealthCheckSpec: healthCheckSpec,
     }
@@ -111,26 +117,27 @@ func NewModifyReadWriteProxyRequestWithoutParam() *ModifyReadWriteProxyRequest {
 func (r *ModifyReadWriteProxyRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param readWriteProxyId: 读写分离代理服务ID(Required) */
 func (r *ModifyReadWriteProxyRequest) SetReadWriteProxyId(readWriteProxyId string) {
     r.ReadWriteProxyId = readWriteProxyId
 }
-
-/* param delayThreshold: 延迟阈值，范围是0~1000，单位：秒，默认为100(Optional) */
+/* param delayThreshold: 延迟阈值，范围是1~1000，单位：秒，默认为100，仅MySQL(Optional) */
 func (r *ModifyReadWriteProxyRequest) SetDelayThreshold(delayThreshold int) {
     r.DelayThreshold = &delayThreshold
 }
-
+/* param walDelayThreshold: wal日志延迟阈值，范围是1~1024，单位：MB，默认为200，仅PostgreSQL(Optional) */
+func (r *ModifyReadWriteProxyRequest) SetWalDelayThreshold(walDelayThreshold int) {
+    r.WalDelayThreshold = &walDelayThreshold
+}
 /* param loadBalancerPolicy: 读写分离代理后端实例负载均衡策略，默认值为LEAST_CURRENT_OPERATIONS；当前支持的负载均衡策略请查看[枚举参数定义](../Enum-Definitions/Enum-Definitions.md)(Optional) */
 func (r *ModifyReadWriteProxyRequest) SetLoadBalancerPolicy(loadBalancerPolicy string) {
     r.LoadBalancerPolicy = &loadBalancerPolicy
 }
-
 /* param healthCheckSpec: 后端实例健康检查配置(Optional) */
 func (r *ModifyReadWriteProxyRequest) SetHealthCheckSpec(healthCheckSpec *rds.HealthCheckSpec) {
     r.HealthCheckSpec = healthCheckSpec
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -110,21 +110,19 @@ func NewCreateDatabaseRequestWithoutParam() *CreateDatabaseRequest {
 func (r *CreateDatabaseRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *CreateDatabaseRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param dbName: 数据库名，数据库名称的限制请参考[帮助中心文档](../../../documentation/Database-and-Cache-Service/RDS/Introduction/Restrictions/SQLServer-Restrictions.md)(Required) */
 func (r *CreateDatabaseRequest) SetDbName(dbName string) {
     r.DbName = dbName
 }
-
 /* param characterSetName: 数据库的字符集名，当前支持的字符集请查看[枚举参数定义](../Enum-Definitions/Enum-Definitions.md)(Required) */
 func (r *CreateDatabaseRequest) SetCharacterSetName(characterSetName string) {
     r.CharacterSetName = characterSetName
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

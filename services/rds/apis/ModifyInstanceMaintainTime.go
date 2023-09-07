@@ -104,21 +104,19 @@ func NewModifyInstanceMaintainTimeRequestWithoutParam() *ModifyInstanceMaintainT
 func (r *ModifyInstanceMaintainTimeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *ModifyInstanceMaintainTimeRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param maintainTime: 实例的可维护时间段。格式：HH:mm-HH:mm，取值为一个小时整点(Optional) */
 func (r *ModifyInstanceMaintainTimeRequest) SetMaintainTime(maintainTime string) {
     r.MaintainTime = &maintainTime
 }
-
 /* param maintainPeriod: 选择维护周期，可选择一周中的某一天或多天(Optional) */
 func (r *ModifyInstanceMaintainTimeRequest) SetMaintainPeriod(maintainPeriod []string) {
     r.MaintainPeriod = maintainPeriod
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
