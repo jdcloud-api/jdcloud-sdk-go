@@ -31,7 +31,7 @@ type DescribeParameterModifyRecordsRequest struct {
     /* Parameter Group ID  */
     ParameterGroupId string `json:"parameterGroupId"`
 
-    /* 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页; (Optional) */
+    /* 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码； (Optional) */
     PageNumber *int `json:"pageNumber"`
 
     /* 每页显示的数据条数，默认为10，取值范围：[10,100]，且为10的整数倍 (Optional) */
@@ -70,7 +70,7 @@ func NewDescribeParameterModifyRecordsRequest(
 /*
  * param regionId: Region ID (Required)
  * param parameterGroupId: Parameter Group ID (Required)
- * param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页; (Optional)
+ * param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码； (Optional)
  * param pageSize: 每页显示的数据条数，默认为10，取值范围：[10,100]，且为10的整数倍 (Optional)
  * param startTime: 查询开始时间，格式为：YYYY-MM-DD HH:mm:ss (Optional)
  * param endTime: 查询结束时间，格式为：YYYY-MM-DD HH:mm:ss (Optional)
@@ -117,31 +117,27 @@ func NewDescribeParameterModifyRecordsRequestWithoutParam() *DescribeParameterMo
 func (r *DescribeParameterModifyRecordsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param parameterGroupId: Parameter Group ID(Required) */
 func (r *DescribeParameterModifyRecordsRequest) SetParameterGroupId(parameterGroupId string) {
     r.ParameterGroupId = parameterGroupId
 }
-
-/* param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页;(Optional) */
+/* param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；(Optional) */
 func (r *DescribeParameterModifyRecordsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 每页显示的数据条数，默认为10，取值范围：[10,100]，且为10的整数倍(Optional) */
 func (r *DescribeParameterModifyRecordsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param startTime: 查询开始时间，格式为：YYYY-MM-DD HH:mm:ss(Optional) */
 func (r *DescribeParameterModifyRecordsRequest) SetStartTime(startTime string) {
     r.StartTime = &startTime
 }
-
 /* param endTime: 查询结束时间，格式为：YYYY-MM-DD HH:mm:ss(Optional) */
 func (r *DescribeParameterModifyRecordsRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

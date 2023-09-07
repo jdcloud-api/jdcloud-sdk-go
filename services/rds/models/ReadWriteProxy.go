@@ -37,8 +37,11 @@ type ReadWriteProxy struct {
     /* 读写分离代理服务访问端口 (Optional) */
     Port string `json:"port"`
 
-    /* 延迟阈值 (Optional) */
+    /* 延迟阈值，仅MySQL (Optional) */
     DelayThreshold int `json:"delayThreshold"`
+
+    /* WAL日志延迟阈值，仅PostgreSQL (Optional) */
+    WalDelayThreshold int `json:"walDelayThreshold"`
 
     /* 读写分离代理后端实例负载均衡策略；当前支持的负载均衡策略请查看[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Optional) */
     LoadBalancerPolicy string `json:"loadBalancerPolicy"`

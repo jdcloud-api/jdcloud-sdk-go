@@ -101,16 +101,15 @@ func NewCreateBackupSynchronicityRequestWithoutParam() *CreateBackupSynchronicit
 func (r *CreateBackupSynchronicityRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: 源实例ID(Required) */
 func (r *CreateBackupSynchronicityRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param destRegion: 备份同步的目标地域(Required) */
 func (r *CreateBackupSynchronicityRequest) SetDestRegion(destRegion string) {
     r.DestRegion = destRegion
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

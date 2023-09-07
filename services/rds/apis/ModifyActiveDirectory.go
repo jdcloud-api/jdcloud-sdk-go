@@ -110,21 +110,19 @@ func NewModifyActiveDirectoryRequestWithoutParam() *ModifyActiveDirectoryRequest
 func (r *ModifyActiveDirectoryRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *ModifyActiveDirectoryRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param adResourceId: 目录服务的资源ID<br>- 加入目录服务：要加入的目录服务的资源ID<br>- 修改目录服务：新目录服务的资源ID<br>- 移除目录服务：传入字符串“none”，不区分大小写(Required) */
 func (r *ModifyActiveDirectoryRequest) SetAdResourceId(adResourceId string) {
     r.AdResourceId = adResourceId
 }
-
 /* param forceRestart: 修改后，是否强制重启实例，使修改生效。<br> - true 修改后立即重启<br>- false：默认值，修改后不重启，需用户自行重启(Required) */
 func (r *ModifyActiveDirectoryRequest) SetForceRestart(forceRestart string) {
     r.ForceRestart = forceRestart
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

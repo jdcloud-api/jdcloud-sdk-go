@@ -42,4 +42,7 @@ type SlowLogAttributes struct {
 
     /* SQL语句返回的行数 (Optional) */
     RowsReturned int `json:"rowsReturned"`
+
+    /* 客户端IP (Optional) */
+    ClientIp string `json:"clientIp"`
 }

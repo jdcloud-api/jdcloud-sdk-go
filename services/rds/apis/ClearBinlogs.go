@@ -92,11 +92,11 @@ func NewClearBinlogsRequestWithoutParam() *ClearBinlogsRequest {
 func (r *ClearBinlogsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *ClearBinlogsRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

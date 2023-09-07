@@ -104,21 +104,19 @@ func NewDescribePrivilegeRequestWithoutParam() *DescribePrivilegeRequest {
 func (r *DescribePrivilegeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param engine: 设置可见的引擎类型，如 MySQL 等(Required) */
 func (r *DescribePrivilegeRequest) SetEngine(engine string) {
     r.Engine = engine
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Optional) */
 func (r *DescribePrivilegeRequest) SetInstanceId(instanceId string) {
     r.InstanceId = &instanceId
 }
-
 /* param allAdminPrivileges: true表示展示高权限，默认false(Optional) */
 func (r *DescribePrivilegeRequest) SetAllAdminPrivileges(allAdminPrivileges bool) {
     r.AllAdminPrivileges = &allAdminPrivileges
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

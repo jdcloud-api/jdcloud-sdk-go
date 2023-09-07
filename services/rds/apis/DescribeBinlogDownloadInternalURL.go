@@ -20,7 +20,7 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type UpdateLogDownloadURLInternalRequest struct {
+type DescribeBinlogDownloadInternalURLRequest struct {
 
     core.JDCloudRequest
 
@@ -30,76 +30,73 @@ type UpdateLogDownloadURLInternalRequest struct {
     /* RDS 实例ID，唯一标识一个RDS实例  */
     InstanceId string `json:"instanceId"`
 
-    /* 日志文件ID  */
-    LogId string `json:"logId"`
+    /* binlog的备份ID，可以通过describeBinlogs获得  */
+    BinlogBackupId string `json:"binlogBackupId"`
 
-    /* 设置链接地址的过期时间，单位是秒，最长不能超过取值范围为 1 ~ 86400 秒  */
-    Seconds int `json:"seconds"`
+    /* 设置链接地址的过期时间，单位是秒，默认值是 300 秒，最长不能超过取值范围为 1 ~ 86400 秒 (Optional) */
+    Seconds *int `json:"seconds"`
 }
 
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
- * param logId: 日志文件ID (Required)
- * param seconds: 设置链接地址的过期时间，单位是秒，最长不能超过取值范围为 1 ~ 86400 秒 (Required)
+ * param binlogBackupId: binlog的备份ID，可以通过describeBinlogs获得 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewUpdateLogDownloadURLInternalRequest(
+func NewDescribeBinlogDownloadInternalURLRequest(
     regionId string,
     instanceId string,
-    logId string,
-    seconds int,
-) *UpdateLogDownloadURLInternalRequest {
+    binlogBackupId string,
+) *DescribeBinlogDownloadInternalURLRequest {
 
-	return &UpdateLogDownloadURLInternalRequest{
+	return &DescribeBinlogDownloadInternalURLRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances/{instanceId}/log/{logId}:updateLogDownloadURLInternal",
-			Method:  "POST",
+			URL:     "/regions/{regionId}/instances/{instanceId}/binlogs/{binlogBackupId}:describeBinlogDownloadInternalURL",
+			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         InstanceId: instanceId,
-        LogId: logId,
-        Seconds: seconds,
+        BinlogBackupId: binlogBackupId,
 	}
 }
 
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
- * param logId: 日志文件ID (Required)
- * param seconds: 设置链接地址的过期时间，单位是秒，最长不能超过取值范围为 1 ~ 86400 秒 (Required)
+ * param binlogBackupId: binlog的备份ID，可以通过describeBinlogs获得 (Required)
+ * param seconds: 设置链接地址的过期时间，单位是秒，默认值是 300 秒，最长不能超过取值范围为 1 ~ 86400 秒 (Optional)
  */
-func NewUpdateLogDownloadURLInternalRequestWithAllParams(
+func NewDescribeBinlogDownloadInternalURLRequestWithAllParams(
     regionId string,
     instanceId string,
-    logId string,
-    seconds int,
-) *UpdateLogDownloadURLInternalRequest {
+    binlogBackupId string,
+    seconds *int,
+) *DescribeBinlogDownloadInternalURLRequest {
 
-    return &UpdateLogDownloadURLInternalRequest{
+    return &DescribeBinlogDownloadInternalURLRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/log/{logId}:updateLogDownloadURLInternal",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/instances/{instanceId}/binlogs/{binlogBackupId}:describeBinlogDownloadInternalURL",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         InstanceId: instanceId,
-        LogId: logId,
+        BinlogBackupId: binlogBackupId,
         Seconds: seconds,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewUpdateLogDownloadURLInternalRequestWithoutParam() *UpdateLogDownloadURLInternalRequest {
+func NewDescribeBinlogDownloadInternalURLRequestWithoutParam() *DescribeBinlogDownloadInternalURLRequest {
 
-    return &UpdateLogDownloadURLInternalRequest{
+    return &DescribeBinlogDownloadInternalURLRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances/{instanceId}/log/{logId}:updateLogDownloadURLInternal",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/instances/{instanceId}/binlogs/{binlogBackupId}:describeBinlogDownloadInternalURL",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
@@ -107,36 +104,35 @@ func NewUpdateLogDownloadURLInternalRequestWithoutParam() *UpdateLogDownloadURLI
 }
 
 /* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
-func (r *UpdateLogDownloadURLInternalRequest) SetRegionId(regionId string) {
+func (r *DescribeBinlogDownloadInternalURLRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
-func (r *UpdateLogDownloadURLInternalRequest) SetInstanceId(instanceId string) {
+func (r *DescribeBinlogDownloadInternalURLRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-/* param logId: 日志文件ID(Required) */
-func (r *UpdateLogDownloadURLInternalRequest) SetLogId(logId string) {
-    r.LogId = logId
+/* param binlogBackupId: binlog的备份ID，可以通过describeBinlogs获得(Required) */
+func (r *DescribeBinlogDownloadInternalURLRequest) SetBinlogBackupId(binlogBackupId string) {
+    r.BinlogBackupId = binlogBackupId
 }
-/* param seconds: 设置链接地址的过期时间，单位是秒，最长不能超过取值范围为 1 ~ 86400 秒(Required) */
-func (r *UpdateLogDownloadURLInternalRequest) SetSeconds(seconds int) {
-    r.Seconds = seconds
+/* param seconds: 设置链接地址的过期时间，单位是秒，默认值是 300 秒，最长不能超过取值范围为 1 ~ 86400 秒(Optional) */
+func (r *DescribeBinlogDownloadInternalURLRequest) SetSeconds(seconds int) {
+    r.Seconds = &seconds
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r UpdateLogDownloadURLInternalRequest) GetRegionId() string {
+func (r DescribeBinlogDownloadInternalURLRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type UpdateLogDownloadURLInternalResponse struct {
+type DescribeBinlogDownloadInternalURLResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result UpdateLogDownloadURLInternalResult `json:"result"`
+    Result DescribeBinlogDownloadInternalURLResult `json:"result"`
 }
 
-type UpdateLogDownloadURLInternalResult struct {
-    PublicURL string `json:"publicURL"`
+type DescribeBinlogDownloadInternalURLResult struct {
     InternalURL string `json:"internalURL"`
 }

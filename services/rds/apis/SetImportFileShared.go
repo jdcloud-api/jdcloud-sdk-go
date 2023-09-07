@@ -110,21 +110,19 @@ func NewSetImportFileSharedRequestWithoutParam() *SetImportFileSharedRequest {
 func (r *SetImportFileSharedRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *SetImportFileSharedRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param fileName: 单库上云文件名(Required) */
 func (r *SetImportFileSharedRequest) SetFileName(fileName string) {
     r.FileName = fileName
 }
-
 /* param shared: 文件是否共享<br>true:共享<br>false:不共享(Required) */
 func (r *SetImportFileSharedRequest) SetShared(shared string) {
     r.Shared = shared
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

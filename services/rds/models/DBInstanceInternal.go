@@ -36,4 +36,19 @@ type DBInstanceInternal struct {
 
     /* 实例的网络状态；0表示实例的网络处于中断状态，1表示实例的网络处于正常状态 (Optional) */
     AccessibleStatus int `json:"accessibleStatus"`
+
+    /* 物理机IP (Optional) */
+    HostIp string `json:"hostIp"`
+
+    /* 实例ip (Optional) */
+    UserIp string `json:"userIp"`
+
+    /* 云主机ID (Optional) */
+    VmId string `json:"vmId"`
+
+    /* 实例内网域名 (Optional) */
+    InternalDomainName string `json:"internalDomainName"`
+
+    /* 应用访问端口 (Optional) */
+    InstancePort string `json:"instancePort"`
 }

@@ -111,21 +111,19 @@ func NewCreateInstanceFromBackupRequestWithoutParam() *CreateInstanceFromBackupR
 func (r *CreateInstanceFromBackupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param backupId: 备份ID(Required) */
 func (r *CreateInstanceFromBackupRequest) SetBackupId(backupId string) {
     r.BackupId = backupId
 }
-
 /* param engine: 标识是创建什么类型的实例，例如MySQL，SQL Server等,具体可参见文档[枚举参数定义](../Enum-Definitions/Enum-Definitions.md)<br>**注意：备份来源实例的engine和要创建的实例的engine必须一致**(Required) */
 func (r *CreateInstanceFromBackupRequest) SetEngine(engine string) {
     r.Engine = engine
 }
-
 /* param instanceSpec: 新建实例规格(Required) */
 func (r *CreateInstanceFromBackupRequest) SetInstanceSpec(instanceSpec *rds.RestoredNewDBInstanceSpec) {
     r.InstanceSpec = instanceSpec
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

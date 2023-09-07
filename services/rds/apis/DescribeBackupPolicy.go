@@ -92,11 +92,11 @@ func NewDescribeBackupPolicyRequestWithoutParam() *DescribeBackupPolicyRequest {
 func (r *DescribeBackupPolicyRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *DescribeBackupPolicyRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
@@ -119,4 +119,7 @@ type DescribeBackupPolicyResult struct {
     CycleMode int `json:"cycleMode"`
     BackupBinlog string `json:"backupBinlog"`
     EnhancedBackup string `json:"enhancedBackup"`
+    ReleasedKeepPolicy string `json:"releasedKeepPolicy"`
+    BackupPeriod []string `json:"backupPeriod"`
+    BinlogRetentionNumber int `json:"binlogRetentionNumber"`
 }

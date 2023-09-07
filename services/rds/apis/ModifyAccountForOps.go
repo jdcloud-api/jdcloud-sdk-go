@@ -104,21 +104,19 @@ func NewModifyAccountForOpsRequestWithoutParam() *ModifyAccountForOpsRequest {
 func (r *ModifyAccountForOpsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *ModifyAccountForOpsRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param expiredTime: 运维账号到期时间，UTC时间格式(Optional) */
 func (r *ModifyAccountForOpsRequest) SetExpiredTime(expiredTime string) {
     r.ExpiredTime = &expiredTime
 }
-
 /* param globalPrivileges: (Optional) */
 func (r *ModifyAccountForOpsRequest) SetGlobalPrivileges(globalPrivileges []string) {
     r.GlobalPrivileges = globalPrivileges
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

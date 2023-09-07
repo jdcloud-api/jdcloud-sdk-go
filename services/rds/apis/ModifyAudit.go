@@ -104,21 +104,19 @@ func NewModifyAuditRequestWithoutParam() *ModifyAuditRequest {
 func (r *ModifyAuditRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *ModifyAuditRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param add: 在原有审计项基础上，增加新的审计项，多个审计项之间用英文逗号，分号或空格分隔，例如DATABASE_OBJECT_ACCESS_GROUP,ACKUP_RESTORE_GROUP(Optional) */
 func (r *ModifyAuditRequest) SetAdd(add string) {
     r.Add = &add
 }
-
 /* param drop: 删除审计项，多个审计项之间用英文逗号，分号或空格分隔，例如DATABASE_OBJECT_ACCESS_GROUP,ACKUP_RESTORE_GROUP<br>如删除了所有审计项，则审计自动关闭(Optional) */
 func (r *ModifyAuditRequest) SetDrop(drop string) {
     r.Drop = &drop
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

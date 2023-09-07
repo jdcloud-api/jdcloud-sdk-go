@@ -93,11 +93,11 @@ func NewDescribeBackupChargeRequestWithoutParam() *DescribeBackupChargeRequest {
 func (r *DescribeBackupChargeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param engine: 实例引擎类型(Required) */
 func (r *DescribeBackupChargeRequest) SetEngine(engine string) {
     r.Engine = engine
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

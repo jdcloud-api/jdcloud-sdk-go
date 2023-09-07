@@ -101,16 +101,15 @@ func NewExchangeInstanceDnsRequestWithoutParam() *ExchangeInstanceDnsRequest {
 func (r *ExchangeInstanceDnsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *ExchangeInstanceDnsRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param targetInstanceId: 要交换的实例ID(Required) */
 func (r *ExchangeInstanceDnsRequest) SetTargetInstanceId(targetInstanceId string) {
     r.TargetInstanceId = targetInstanceId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

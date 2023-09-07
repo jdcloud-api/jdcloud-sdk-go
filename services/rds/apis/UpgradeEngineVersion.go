@@ -107,21 +107,19 @@ func NewUpgradeEngineVersionRequestWithoutParam() *UpgradeEngineVersionRequest {
 func (r *UpgradeEngineVersionRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *UpgradeEngineVersionRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param upgradeSchedule: 计划开始升级的时间，1：立即开始升级，2：维护时间窗口升级，0：取消升级(Required) */
 func (r *UpgradeEngineVersionRequest) SetUpgradeSchedule(upgradeSchedule int) {
     r.UpgradeSchedule = upgradeSchedule
 }
-
 /* param newVersion: 升级到的新版本，默认为当前实例可升级到的最新版本(Optional) */
 func (r *UpgradeEngineVersionRequest) SetNewVersion(newVersion string) {
     r.NewVersion = &newVersion
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

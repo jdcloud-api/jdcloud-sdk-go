@@ -98,16 +98,15 @@ func NewRestoreInstanceRequestWithoutParam() *RestoreInstanceRequest {
 func (r *RestoreInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *RestoreInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param backupId: 用于恢复的备份Id，仅限于本实例生成的备份(Optional) */
 func (r *RestoreInstanceRequest) SetBackupId(backupId string) {
     r.BackupId = &backupId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

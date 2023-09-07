@@ -19,6 +19,7 @@ package apis
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
     rds "github.com/jdcloud-api/jdcloud-sdk-go/services/rds/models"
+    common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
 
 type DescribeBinlogsRequest struct {
@@ -31,17 +32,25 @@ type DescribeBinlogsRequest struct {
     /* RDS 实例ID，唯一标识一个RDS实例  */
     InstanceId string `json:"instanceId"`
 
-    /* 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页。 (Optional) */
+    /* 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码； (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* 每页显示的数据条数，默认为10，取值范围：10、20、30、50、100 (Optional) */
+    /* 每页显示的数据条数，默认为10，取值范围：[10,100] (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* 查询开始时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到结束时间不超过三天 (Optional) */
+    /* 查询开始时间，格式为：YYYY-MM-DDTHH:mm:ssZ，开始时间到结束时间不超过7天 (Optional) */
     StartTime *string `json:"startTime"`
 
-    /* 查询结束时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到结束时间不超过三天 (Optional) */
+    /* 查询结束时间，格式为：YYYY-MM-DDTHH:mm:ssZ，开始时间到结束时间不超过7天 (Optional) */
     EndTime *string `json:"endTime"`
+
+    /* 过滤参数，多个过滤参数之间的关系为“与”(and支持以下属性的过滤(默认等值)：)
+- instanceId：RDS实例ID，唯一标识一个实例，operator仅支持eq
+- instanceName：RDS实例名称，模糊搜索，operator仅支持eq、like
+- binlogId：Binlog ID，唯一标识一个备份，operator仅支持eq
+- binlogName：Binlog名称，模糊搜索，operator仅支持eq、like
+ (Optional) */
+    Filters []common.Filter `json:"filters"`
 }
 
 /*
@@ -70,10 +79,16 @@ func NewDescribeBinlogsRequest(
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
- * param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页。 (Optional)
- * param pageSize: 每页显示的数据条数，默认为10，取值范围：10、20、30、50、100 (Optional)
- * param startTime: 查询开始时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到结束时间不超过三天 (Optional)
- * param endTime: 查询结束时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到结束时间不超过三天 (Optional)
+ * param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码； (Optional)
+ * param pageSize: 每页显示的数据条数，默认为10，取值范围：[10,100] (Optional)
+ * param startTime: 查询开始时间，格式为：YYYY-MM-DDTHH:mm:ssZ，开始时间到结束时间不超过7天 (Optional)
+ * param endTime: 查询结束时间，格式为：YYYY-MM-DDTHH:mm:ssZ，开始时间到结束时间不超过7天 (Optional)
+ * param filters: 过滤参数，多个过滤参数之间的关系为“与”(and支持以下属性的过滤(默认等值)：)
+- instanceId：RDS实例ID，唯一标识一个实例，operator仅支持eq
+- instanceName：RDS实例名称，模糊搜索，operator仅支持eq、like
+- binlogId：Binlog ID，唯一标识一个备份，operator仅支持eq
+- binlogName：Binlog名称，模糊搜索，operator仅支持eq、like
+ (Optional)
  */
 func NewDescribeBinlogsRequestWithAllParams(
     regionId string,
@@ -82,6 +97,7 @@ func NewDescribeBinlogsRequestWithAllParams(
     pageSize *int,
     startTime *string,
     endTime *string,
+    filters []common.Filter,
 ) *DescribeBinlogsRequest {
 
     return &DescribeBinlogsRequest{
@@ -97,6 +113,7 @@ func NewDescribeBinlogsRequestWithAllParams(
         PageSize: pageSize,
         StartTime: startTime,
         EndTime: endTime,
+        Filters: filters,
     }
 }
 
@@ -117,31 +134,36 @@ func NewDescribeBinlogsRequestWithoutParam() *DescribeBinlogsRequest {
 func (r *DescribeBinlogsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *DescribeBinlogsRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
-/* param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页。(Optional) */
+/* param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；(Optional) */
 func (r *DescribeBinlogsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
-/* param pageSize: 每页显示的数据条数，默认为10，取值范围：10、20、30、50、100(Optional) */
+/* param pageSize: 每页显示的数据条数，默认为10，取值范围：[10,100](Optional) */
 func (r *DescribeBinlogsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
-/* param startTime: 查询开始时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到结束时间不超过三天(Optional) */
+/* param startTime: 查询开始时间，格式为：YYYY-MM-DDTHH:mm:ssZ，开始时间到结束时间不超过7天(Optional) */
 func (r *DescribeBinlogsRequest) SetStartTime(startTime string) {
     r.StartTime = &startTime
 }
-
-/* param endTime: 查询结束时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到结束时间不超过三天(Optional) */
+/* param endTime: 查询结束时间，格式为：YYYY-MM-DDTHH:mm:ssZ，开始时间到结束时间不超过7天(Optional) */
 func (r *DescribeBinlogsRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
+/* param filters: 过滤参数，多个过滤参数之间的关系为“与”(and支持以下属性的过滤(默认等值)：)
+- instanceId：RDS实例ID，唯一标识一个实例，operator仅支持eq
+- instanceName：RDS实例名称，模糊搜索，operator仅支持eq、like
+- binlogId：Binlog ID，唯一标识一个备份，operator仅支持eq
+- binlogName：Binlog名称，模糊搜索，operator仅支持eq、like
+(Optional) */
+func (r *DescribeBinlogsRequest) SetFilters(filters []common.Filter) {
+    r.Filters = filters
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

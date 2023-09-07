@@ -18,71 +18,79 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    rds "github.com/jdcloud-api/jdcloud-sdk-go/services/rds/models"
 )
 
-type CreateInstanceRequest struct {
+type DeleteWhiteListGroupRequest struct {
 
     core.JDCloudRequest
 
     /* 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)  */
     RegionId string `json:"regionId"`
 
-    /* 新建实例规格  */
-    InstanceSpec *rds.DBInstanceSpec `json:"instanceSpec"`
+    /* RDS 实例ID，唯一标识一个RDS实例  */
+    InstanceId string `json:"instanceId"`
+
+    /* 白名单名称  */
+    WhiteListName string `json:"whiteListName"`
 }
 
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
- * param instanceSpec: 新建实例规格 (Required)
+ * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
+ * param whiteListName: 白名单名称 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewCreateInstanceRequest(
+func NewDeleteWhiteListGroupRequest(
     regionId string,
-    instanceSpec *rds.DBInstanceSpec,
-) *CreateInstanceRequest {
+    instanceId string,
+    whiteListName string,
+) *DeleteWhiteListGroupRequest {
 
-	return &CreateInstanceRequest{
+	return &DeleteWhiteListGroupRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances",
-			Method:  "POST",
+			URL:     "/regions/{regionId}/instances/{instanceId}/whiteList",
+			Method:  "DELETE",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        InstanceSpec: instanceSpec,
+        InstanceId: instanceId,
+        WhiteListName: whiteListName,
 	}
 }
 
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
- * param instanceSpec: 新建实例规格 (Required)
+ * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
+ * param whiteListName: 白名单名称 (Required)
  */
-func NewCreateInstanceRequestWithAllParams(
+func NewDeleteWhiteListGroupRequestWithAllParams(
     regionId string,
-    instanceSpec *rds.DBInstanceSpec,
-) *CreateInstanceRequest {
+    instanceId string,
+    whiteListName string,
+) *DeleteWhiteListGroupRequest {
 
-    return &CreateInstanceRequest{
+    return &DeleteWhiteListGroupRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/instances/{instanceId}/whiteList",
+            Method:  "DELETE",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        InstanceSpec: instanceSpec,
+        InstanceId: instanceId,
+        WhiteListName: whiteListName,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewCreateInstanceRequestWithoutParam() *CreateInstanceRequest {
+func NewDeleteWhiteListGroupRequestWithoutParam() *DeleteWhiteListGroupRequest {
 
-    return &CreateInstanceRequest{
+    return &DeleteWhiteListGroupRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances",
-            Method:  "POST",
+            URL:     "/regions/{regionId}/instances/{instanceId}/whiteList",
+            Method:  "DELETE",
             Header:  nil,
             Version: "v1",
         },
@@ -90,28 +98,30 @@ func NewCreateInstanceRequestWithoutParam() *CreateInstanceRequest {
 }
 
 /* param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)(Required) */
-func (r *CreateInstanceRequest) SetRegionId(regionId string) {
+func (r *DeleteWhiteListGroupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-/* param instanceSpec: 新建实例规格(Required) */
-func (r *CreateInstanceRequest) SetInstanceSpec(instanceSpec *rds.DBInstanceSpec) {
-    r.InstanceSpec = instanceSpec
+/* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
+func (r *DeleteWhiteListGroupRequest) SetInstanceId(instanceId string) {
+    r.InstanceId = instanceId
+}
+/* param whiteListName: 白名单名称(Required) */
+func (r *DeleteWhiteListGroupRequest) SetWhiteListName(whiteListName string) {
+    r.WhiteListName = whiteListName
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r CreateInstanceRequest) GetRegionId() string {
+func (r DeleteWhiteListGroupRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type CreateInstanceResponse struct {
+type DeleteWhiteListGroupResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result CreateInstanceResult `json:"result"`
+    Result DeleteWhiteListGroupResult `json:"result"`
 }
 
-type CreateInstanceResult struct {
-    InstanceId string `json:"instanceId"`
-    OrderId string `json:"orderId"`
+type DeleteWhiteListGroupResult struct {
 }

@@ -111,21 +111,19 @@ func NewRestoreInstanceByTimeRequestWithoutParam() *RestoreInstanceByTimeRequest
 func (r *RestoreInstanceByTimeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *RestoreInstanceByTimeRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param restoreTime: 根据源实例的哪个时间点创建新实例(Required) */
 func (r *RestoreInstanceByTimeRequest) SetRestoreTime(restoreTime string) {
     r.RestoreTime = restoreTime
 }
-
 /* param restoreSchema: 需要进行单库，单表恢复的概要信息(Required) */
 func (r *RestoreInstanceByTimeRequest) SetRestoreSchema(restoreSchema []rds.Schema) {
     r.RestoreSchema = restoreSchema
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

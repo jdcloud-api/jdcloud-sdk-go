@@ -92,11 +92,11 @@ func NewDescribeInterceptRequestWithoutParam() *DescribeInterceptRequest {
 func (r *DescribeInterceptRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: Instance ID(Required) */
 func (r *DescribeInterceptRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

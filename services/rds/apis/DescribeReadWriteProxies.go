@@ -93,11 +93,11 @@ func NewDescribeReadWriteProxiesRequestWithoutParam() *DescribeReadWriteProxiesR
 func (r *DescribeReadWriteProxiesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS实例ID，唯一标识一个实例(Required) */
 func (r *DescribeReadWriteProxiesRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

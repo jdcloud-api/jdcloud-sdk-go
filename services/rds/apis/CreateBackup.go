@@ -96,16 +96,15 @@ func NewCreateBackupRequestWithoutParam() *CreateBackupRequest {
 func (r *CreateBackupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS实例ID，唯一标识一个实例(Optional) */
 func (r *CreateBackupRequest) SetInstanceId(instanceId string) {
     r.InstanceId = &instanceId
 }
-
 /* param backupSpec: 备份规格(Optional) */
 func (r *CreateBackupRequest) SetBackupSpec(backupSpec *rds.BackupSpec) {
     r.BackupSpec = backupSpec
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

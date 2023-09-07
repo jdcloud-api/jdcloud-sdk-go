@@ -32,22 +32,25 @@ type DescribeSlowLogsRequest struct {
     /* RDS 实例ID，唯一标识一个RDS实例  */
     InstanceId string `json:"instanceId"`
 
-    /* 慢日志开始时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到当前时间不能大于 7 天，开始时间不能大于结束时间，结束时间不能大于当前时间  */
+    /* 慢日志开始时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到当前时间不能大于 7 天，开始时间不能大于结束时间  */
     StartTime string `json:"startTime"`
 
-    /* 慢日志结束时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到当前时间不能大于 7 天，开始时间不能大于结束时间，结束时间不能大于当前时间  */
+    /* 慢日志结束时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到当前时间不能大于 7 天，开始时间不能大于结束时间  */
     EndTime string `json:"endTime"`
 
-    /* 查询哪个数据库的慢日志，不填表示返回所有数据库的慢日志 (Optional) */
+    /* 废弃字段，查询哪个数据库的慢日志，不填表示返回所有数据库的慢日志 (Optional) */
     DbName *string `json:"dbName"`
 
-    /* 显示数据的页码，默认为1，取值范围：[-1,1000)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页。 (Optional) */
+    /* 显示数据的页码，默认为1，取值范围：[-1,∞]。pageNumber为-1时，返回所有数据页码； (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* 每页显示的数据条数，默认为10，取值范围：10、20、30、50、100 (Optional) */
+    /* 每页显示的数据条数，默认为10，取值范围：[10,100] (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /*  (Optional) */
+    /* 过滤参数，多个过滤参数之间的关系为“与”(and支持以下属性的过滤(默认等值)：)
+- account：实例账号名，operator仅支持eq或者in
+- keyword：SQL 关键词，模糊查询，operator仅支持eq或者in
+ (Optional) */
     Filters []common.Filter `json:"filters"`
 
     /* 排序参数，支持rowsExaminedSum、rowsSentSum、lockTimeSum、executionCount、executionTimeSum (Optional) */
@@ -57,8 +60,8 @@ type DescribeSlowLogsRequest struct {
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
- * param startTime: 慢日志开始时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到当前时间不能大于 7 天，开始时间不能大于结束时间，结束时间不能大于当前时间 (Required)
- * param endTime: 慢日志结束时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到当前时间不能大于 7 天，开始时间不能大于结束时间，结束时间不能大于当前时间 (Required)
+ * param startTime: 慢日志开始时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到当前时间不能大于 7 天，开始时间不能大于结束时间 (Required)
+ * param endTime: 慢日志结束时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到当前时间不能大于 7 天，开始时间不能大于结束时间 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -86,12 +89,15 @@ func NewDescribeSlowLogsRequest(
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
- * param startTime: 慢日志开始时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到当前时间不能大于 7 天，开始时间不能大于结束时间，结束时间不能大于当前时间 (Required)
- * param endTime: 慢日志结束时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到当前时间不能大于 7 天，开始时间不能大于结束时间，结束时间不能大于当前时间 (Required)
- * param dbName: 查询哪个数据库的慢日志，不填表示返回所有数据库的慢日志 (Optional)
- * param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,1000)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页。 (Optional)
- * param pageSize: 每页显示的数据条数，默认为10，取值范围：10、20、30、50、100 (Optional)
- * param filters:  (Optional)
+ * param startTime: 慢日志开始时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到当前时间不能大于 7 天，开始时间不能大于结束时间 (Required)
+ * param endTime: 慢日志结束时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到当前时间不能大于 7 天，开始时间不能大于结束时间 (Required)
+ * param dbName: 废弃字段，查询哪个数据库的慢日志，不填表示返回所有数据库的慢日志 (Optional)
+ * param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞]。pageNumber为-1时，返回所有数据页码； (Optional)
+ * param pageSize: 每页显示的数据条数，默认为10，取值范围：[10,100] (Optional)
+ * param filters: 过滤参数，多个过滤参数之间的关系为“与”(and支持以下属性的过滤(默认等值)：)
+- account：实例账号名，operator仅支持eq或者in
+- keyword：SQL 关键词，模糊查询，operator仅支持eq或者in
+ (Optional)
  * param sorts: 排序参数，支持rowsExaminedSum、rowsSentSum、lockTimeSum、executionCount、executionTimeSum (Optional)
  */
 func NewDescribeSlowLogsRequestWithAllParams(
@@ -142,46 +148,42 @@ func NewDescribeSlowLogsRequestWithoutParam() *DescribeSlowLogsRequest {
 func (r *DescribeSlowLogsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *DescribeSlowLogsRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
-/* param startTime: 慢日志开始时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到当前时间不能大于 7 天，开始时间不能大于结束时间，结束时间不能大于当前时间(Required) */
+/* param startTime: 慢日志开始时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到当前时间不能大于 7 天，开始时间不能大于结束时间(Required) */
 func (r *DescribeSlowLogsRequest) SetStartTime(startTime string) {
     r.StartTime = startTime
 }
-
-/* param endTime: 慢日志结束时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到当前时间不能大于 7 天，开始时间不能大于结束时间，结束时间不能大于当前时间(Required) */
+/* param endTime: 慢日志结束时间，格式为：YYYY-MM-DD HH:mm:ss，开始时间到当前时间不能大于 7 天，开始时间不能大于结束时间(Required) */
 func (r *DescribeSlowLogsRequest) SetEndTime(endTime string) {
     r.EndTime = endTime
 }
-
-/* param dbName: 查询哪个数据库的慢日志，不填表示返回所有数据库的慢日志(Optional) */
+/* param dbName: 废弃字段，查询哪个数据库的慢日志，不填表示返回所有数据库的慢日志(Optional) */
 func (r *DescribeSlowLogsRequest) SetDbName(dbName string) {
     r.DbName = &dbName
 }
-
-/* param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,1000)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页。(Optional) */
+/* param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞]。pageNumber为-1时，返回所有数据页码；(Optional) */
 func (r *DescribeSlowLogsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
-/* param pageSize: 每页显示的数据条数，默认为10，取值范围：10、20、30、50、100(Optional) */
+/* param pageSize: 每页显示的数据条数，默认为10，取值范围：[10,100](Optional) */
 func (r *DescribeSlowLogsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
-/* param filters: (Optional) */
+/* param filters: 过滤参数，多个过滤参数之间的关系为“与”(and支持以下属性的过滤(默认等值)：)
+- account：实例账号名，operator仅支持eq或者in
+- keyword：SQL 关键词，模糊查询，operator仅支持eq或者in
+(Optional) */
 func (r *DescribeSlowLogsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
-
 /* param sorts: 排序参数，支持rowsExaminedSum、rowsSentSum、lockTimeSum、executionCount、executionTimeSum(Optional) */
 func (r *DescribeSlowLogsRequest) SetSorts(sorts []common.Sort) {
     r.Sorts = sorts
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

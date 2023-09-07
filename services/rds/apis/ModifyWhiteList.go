@@ -30,6 +30,9 @@ type ModifyWhiteListRequest struct {
     /* RDS 实例ID，唯一标识一个RDS实例  */
     InstanceId string `json:"instanceId"`
 
+    /* 白名单名称，默认Default (Optional) */
+    WhiteListName *string `json:"whiteListName"`
+
     /* IP或IP段，不同的IP/IP段之间用英文逗号分隔，例如0.0.0.0/0,192.168.0.10  */
     Ips string `json:"ips"`
 }
@@ -63,11 +66,13 @@ func NewModifyWhiteListRequest(
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
  * param instanceId: RDS 实例ID，唯一标识一个RDS实例 (Required)
+ * param whiteListName: 白名单名称，默认Default (Optional)
  * param ips: IP或IP段，不同的IP/IP段之间用英文逗号分隔，例如0.0.0.0/0,192.168.0.10 (Required)
  */
 func NewModifyWhiteListRequestWithAllParams(
     regionId string,
     instanceId string,
+    whiteListName *string,
     ips string,
 ) *ModifyWhiteListRequest {
 
@@ -80,6 +85,7 @@ func NewModifyWhiteListRequestWithAllParams(
         },
         RegionId: regionId,
         InstanceId: instanceId,
+        WhiteListName: whiteListName,
         Ips: ips,
     }
 }
@@ -101,16 +107,19 @@ func NewModifyWhiteListRequestWithoutParam() *ModifyWhiteListRequest {
 func (r *ModifyWhiteListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *ModifyWhiteListRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
+/* param whiteListName: 白名单名称，默认Default(Optional) */
+func (r *ModifyWhiteListRequest) SetWhiteListName(whiteListName string) {
+    r.WhiteListName = &whiteListName
+}
 /* param ips: IP或IP段，不同的IP/IP段之间用英文逗号分隔，例如0.0.0.0/0,192.168.0.10(Required) */
 func (r *ModifyWhiteListRequest) SetIps(ips string) {
     r.Ips = ips
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

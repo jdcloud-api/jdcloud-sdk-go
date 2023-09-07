@@ -107,21 +107,19 @@ func NewDescribeBinlogDownloadURLRequestWithoutParam() *DescribeBinlogDownloadUR
 func (r *DescribeBinlogDownloadURLRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *DescribeBinlogDownloadURLRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param binlogBackupId: binlog的备份ID，可以通过describeBinlogs获得(Required) */
 func (r *DescribeBinlogDownloadURLRequest) SetBinlogBackupId(binlogBackupId string) {
     r.BinlogBackupId = binlogBackupId
 }
-
 /* param seconds: 设置链接地址的过期时间，单位是秒，默认值是 300 秒，最长不能超过取值范围为 1 ~ 86400 秒(Optional) */
 func (r *DescribeBinlogDownloadURLRequest) SetSeconds(seconds int) {
     r.Seconds = &seconds
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

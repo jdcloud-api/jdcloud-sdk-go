@@ -119,26 +119,23 @@ func NewRestoreDatabaseFromBackupRequestWithoutParam() *RestoreDatabaseFromBacku
 func (r *RestoreDatabaseFromBackupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *RestoreDatabaseFromBackupRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param dbName: 库名称(Required) */
 func (r *RestoreDatabaseFromBackupRequest) SetDbName(dbName string) {
     r.DbName = dbName
 }
-
 /* param backupId: 备份ID，可从备份查询接口describeBackups获取(Required) */
 func (r *RestoreDatabaseFromBackupRequest) SetBackupId(backupId string) {
     r.BackupId = backupId
 }
-
 /* param backupFileName: 指定该备份中用于恢复数据库的文件名称。通常情况下文件名（不包括后缀）即为备份的数据库名。例如文件名为my_test_db.bak，表示该文件是my_test_db数据库的备份(Required) */
 func (r *RestoreDatabaseFromBackupRequest) SetBackupFileName(backupFileName string) {
     r.BackupFileName = backupFileName
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

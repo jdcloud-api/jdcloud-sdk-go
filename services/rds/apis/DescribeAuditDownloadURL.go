@@ -101,16 +101,15 @@ func NewDescribeAuditDownloadURLRequestWithoutParam() *DescribeAuditDownloadURLR
 func (r *DescribeAuditDownloadURLRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *DescribeAuditDownloadURLRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param fileName: 审计文件名(Required) */
 func (r *DescribeAuditDownloadURLRequest) SetFileName(fileName string) {
     r.FileName = fileName
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -28,7 +28,7 @@ type DescribeBackupSynchronicitiesRequest struct {
     /* 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)  */
     RegionId string `json:"regionId"`
 
-    /* 显示数据的页码，默认为1，取值范围：[1,∞)，页码超过总页数时，显示最后一页，用于查询列表的接口 (Optional) */
+    /* 显示数据的页码，默认为1，取值范围：[1,∞)，用于查询列表的接口 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
     /* 每页显示的数据条数，默认为10，取值范围：10、20、30、50、100 (Optional) */
@@ -57,7 +57,7 @@ func NewDescribeBackupSynchronicitiesRequest(
 
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
- * param pageNumber: 显示数据的页码，默认为1，取值范围：[1,∞)，页码超过总页数时，显示最后一页，用于查询列表的接口 (Optional)
+ * param pageNumber: 显示数据的页码，默认为1，取值范围：[1,∞)，用于查询列表的接口 (Optional)
  * param pageSize: 每页显示的数据条数，默认为10，取值范围：10、20、30、50、100 (Optional)
  */
 func NewDescribeBackupSynchronicitiesRequestWithAllParams(
@@ -96,16 +96,15 @@ func NewDescribeBackupSynchronicitiesRequestWithoutParam() *DescribeBackupSynchr
 func (r *DescribeBackupSynchronicitiesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
-/* param pageNumber: 显示数据的页码，默认为1，取值范围：[1,∞)，页码超过总页数时，显示最后一页，用于查询列表的接口(Optional) */
+/* param pageNumber: 显示数据的页码，默认为1，取值范围：[1,∞)，用于查询列表的接口(Optional) */
 func (r *DescribeBackupSynchronicitiesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 每页显示的数据条数，默认为10，取值范围：10、20、30、50、100(Optional) */
 func (r *DescribeBackupSynchronicitiesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

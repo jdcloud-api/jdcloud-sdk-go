@@ -29,7 +29,7 @@ type DescribeInstancesRequest struct {
     /* 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md)  */
     RegionId string `json:"regionId"`
 
-    /* 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页; (Optional) */
+    /* 显示数据的页码，默认为1，取值范围：[-1,∞]。pageNumber为-1时，返回所有数据页码； (Optional) */
     PageNumber *int `json:"pageNumber"`
 
     /* 每页显示的数据条数，默认为10，取值范围：[10,100]，且为10的整数倍 (Optional) */
@@ -46,11 +46,16 @@ vpcId, 支持operator选项：eq
 instanceType, 支持operator选项：eq
 internalDomainName, 支持operator选项：eq
 publicDomainName, 支持operator选项：eq
+roInstanceProxyInternalDomainName, 支持operator选项：like
+readWriteProxyInternalDomainName, 支持operator选项：like
  (Optional) */
     Filters []common.Filter `json:"filters"`
 
     /* 资源标签 (Optional) */
     TagFilters []common.TagFilter `json:"tagFilters"`
+
+    /* 资源组id (Optional) */
+    ResourceGroupIds []string `json:"resourceGroupIds"`
 }
 
 /*
@@ -75,7 +80,7 @@ func NewDescribeInstancesRequest(
 
 /*
  * param regionId: 地域代码，取值范围参见[《各地域及可用区对照表》](../Enum-Definitions/Regions-AZ.md) (Required)
- * param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页; (Optional)
+ * param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞]。pageNumber为-1时，返回所有数据页码； (Optional)
  * param pageSize: 每页显示的数据条数，默认为10，取值范围：[10,100]，且为10的整数倍 (Optional)
  * param filters: 过滤参数，多个过滤参数之间的关系为“与”(and)
 支持以下属性的过滤：
@@ -88,8 +93,11 @@ vpcId, 支持operator选项：eq
 instanceType, 支持operator选项：eq
 internalDomainName, 支持operator选项：eq
 publicDomainName, 支持operator选项：eq
+roInstanceProxyInternalDomainName, 支持operator选项：like
+readWriteProxyInternalDomainName, 支持operator选项：like
  (Optional)
  * param tagFilters: 资源标签 (Optional)
+ * param resourceGroupIds: 资源组id (Optional)
  */
 func NewDescribeInstancesRequestWithAllParams(
     regionId string,
@@ -97,6 +105,7 @@ func NewDescribeInstancesRequestWithAllParams(
     pageSize *int,
     filters []common.Filter,
     tagFilters []common.TagFilter,
+    resourceGroupIds []string,
 ) *DescribeInstancesRequest {
 
     return &DescribeInstancesRequest{
@@ -111,6 +120,7 @@ func NewDescribeInstancesRequestWithAllParams(
         PageSize: pageSize,
         Filters: filters,
         TagFilters: tagFilters,
+        ResourceGroupIds: resourceGroupIds,
     }
 }
 
@@ -131,17 +141,14 @@ func NewDescribeInstancesRequestWithoutParam() *DescribeInstancesRequest {
 func (r *DescribeInstancesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
-/* param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页;(Optional) */
+/* param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞]。pageNumber为-1时，返回所有数据页码；(Optional) */
 func (r *DescribeInstancesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 每页显示的数据条数，默认为10，取值范围：[10,100]，且为10的整数倍(Optional) */
 func (r *DescribeInstancesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param filters: 过滤参数，多个过滤参数之间的关系为“与”(and)
 支持以下属性的过滤：
 instanceId, 支持operator选项：eq
@@ -153,15 +160,21 @@ vpcId, 支持operator选项：eq
 instanceType, 支持operator选项：eq
 internalDomainName, 支持operator选项：eq
 publicDomainName, 支持operator选项：eq
+roInstanceProxyInternalDomainName, 支持operator选项：like
+readWriteProxyInternalDomainName, 支持operator选项：like
 (Optional) */
 func (r *DescribeInstancesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
-
 /* param tagFilters: 资源标签(Optional) */
 func (r *DescribeInstancesRequest) SetTagFilters(tagFilters []common.TagFilter) {
     r.TagFilters = tagFilters
 }
+/* param resourceGroupIds: 资源组id(Optional) */
+func (r *DescribeInstancesRequest) SetResourceGroupIds(resourceGroupIds []string) {
+    r.ResourceGroupIds = resourceGroupIds
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

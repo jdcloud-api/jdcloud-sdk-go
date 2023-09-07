@@ -53,9 +53,12 @@ type RestoredNewDBInstanceSpec struct {
     /* 实例数据加密(存储类型为云硬盘才支持数据加密)。false：不加密，true：加密，缺省为false<br>- 仅支持MySQL (Optional) */
     StorageEncrypted *bool `json:"storageEncrypted"`
 
-    /* 实例的高可用架构。standalone：单机，cluster：主备双机架构，缺省为cluster<br>- 仅支持SQL Server (Optional) */
+    /* 实例的高可用架构。standalone：单机，cluster：主备双机架构，缺省为cluster，multi-replica：三副本<br>- 仅支持SQL Server (Optional) */
     InstanceType *string `json:"instanceType"`
 
     /* 标签信息 (Optional) */
     TagSpec []Tag `json:"tagSpec"`
+
+    /* 资源组id (Optional) */
+    ResourceGroupId *string `json:"resourceGroupId"`
 }

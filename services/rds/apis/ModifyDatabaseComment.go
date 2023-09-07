@@ -110,21 +110,19 @@ func NewModifyDatabaseCommentRequestWithoutParam() *ModifyDatabaseCommentRequest
 func (r *ModifyDatabaseCommentRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instanceId: RDS 实例ID，唯一标识一个RDS实例(Required) */
 func (r *ModifyDatabaseCommentRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
 /* param dbName: 库名称(Required) */
 func (r *ModifyDatabaseCommentRequest) SetDbName(dbName string) {
     r.DbName = dbName
 }
-
 /* param comment: 数据库的备注信息，支持中午，ASCII字符，最大长度64(Required) */
 func (r *ModifyDatabaseCommentRequest) SetComment(comment string) {
     r.Comment = comment
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

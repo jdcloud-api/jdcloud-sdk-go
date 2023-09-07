@@ -17,20 +17,14 @@
 package models
 
 
-type ErrorLogDigest struct {
+type AzInfo struct {
 
-    /* 错误日志开始执行时间 (Optional) */
-    StartTime string `json:"startTime"`
+    /* 逻辑可用区 (Optional) */
+    Laz string `json:"laz"`
 
-    /* 数据库名，表示该SQL是在哪个数据库中执行的<br>- MySQL不支持 (Optional) */
-    DbName string `json:"dbName"`
+    /* 物理可用区 (Optional) */
+    Paz string `json:"paz"`
 
-    /* 数据库账号，表示该数据库在哪个账号下面<br>- MySQL不支持 (Optional) */
-    DbNameAccount string `json:"dbNameAccount"`
-
-    /* 错误日志信息 (Optional) */
-    ErrorLogInformation string `json:"errorLogInformation"`
-
-    /* 错误日志级别<br>- MySQL不支持 (Optional) */
-    ErrorSeverity string `json:"errorSeverity"`
+    /* 可用区类型，1为标准子网，2为边缘子网 (Optional) */
+    AzType int `json:"azType"`
 }

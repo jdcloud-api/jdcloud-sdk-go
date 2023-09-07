@@ -31,7 +31,7 @@ type DescribeParameterGroupAttachedInstancesRequest struct {
     /* Parameter Group ID  */
     ParameterGroupId string `json:"parameterGroupId"`
 
-    /* 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页 (Optional) */
+    /* 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码； (Optional) */
     PageNumber *int `json:"pageNumber"`
 
     /* 每页显示的数据条数，默认为10，取值范围：[10,100]，且为10的整数倍 (Optional) */
@@ -64,7 +64,7 @@ func NewDescribeParameterGroupAttachedInstancesRequest(
 /*
  * param regionId: Region ID (Required)
  * param parameterGroupId: Parameter Group ID (Required)
- * param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页 (Optional)
+ * param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码； (Optional)
  * param pageSize: 每页显示的数据条数，默认为10，取值范围：[10,100]，且为10的整数倍 (Optional)
  */
 func NewDescribeParameterGroupAttachedInstancesRequestWithAllParams(
@@ -105,21 +105,19 @@ func NewDescribeParameterGroupAttachedInstancesRequestWithoutParam() *DescribePa
 func (r *DescribeParameterGroupAttachedInstancesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param parameterGroupId: Parameter Group ID(Required) */
 func (r *DescribeParameterGroupAttachedInstancesRequest) SetParameterGroupId(parameterGroupId string) {
     r.ParameterGroupId = parameterGroupId
 }
-
-/* param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页(Optional) */
+/* param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；(Optional) */
 func (r *DescribeParameterGroupAttachedInstancesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 每页显示的数据条数，默认为10，取值范围：[10,100]，且为10的整数倍(Optional) */
 func (r *DescribeParameterGroupAttachedInstancesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
