@@ -205,7 +205,7 @@ type CalculateTotalPriceResponse struct {
 }
 
 type CalculateTotalPriceResult struct {
-    TotalPrice int `json:"totalPrice"`
+    TotalPrice float32 `json:"totalPrice"`
     TotalPriceScale4 int `json:"totalPriceScale4"`
     DiscountedTotalPrice int `json:"discountedTotalPrice"`
     TotalDiscount int `json:"totalDiscount"`
