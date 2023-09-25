@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    cloudsign "github.com/jdcloud-api/jdcloud-sdk-go/services/cloudsign/models"
 )
 
 type GetSaveReportRequest struct {
@@ -111,5 +112,5 @@ type GetSaveReportResult struct {
     Code string `json:"code"`
     Message string `json:"message"`
     Success bool `json:"success"`
-    Data interface{} `json:"data"`
+    Data cloudsign.EvidenceFile `json:"data"`
 }

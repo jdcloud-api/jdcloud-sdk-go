@@ -24,7 +24,4 @@ type StampSpec struct {
 
     /* 印章名称 (Optional) */
     StampName *string `json:"stampName"`
-
-    /* 备注 (Optional) */
-    Note *string `json:"note"`
 }

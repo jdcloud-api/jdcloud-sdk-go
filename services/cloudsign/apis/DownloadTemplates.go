@@ -18,7 +18,6 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    cloudsign "github.com/jdcloud-api/jdcloud-sdk-go/services/cloudsign/models"
 )
 
 type DownloadTemplatesRequest struct {
@@ -40,7 +39,7 @@ func NewDownloadTemplatesRequest(
 
 	return &DownloadTemplatesRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/smqTmplate/{templateId}:downloadTemplates",
+			URL:     "/template/{templateId}",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -58,7 +57,7 @@ func NewDownloadTemplatesRequestWithAllParams(
 
     return &DownloadTemplatesRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/smqTmplate/{templateId}:downloadTemplates",
+            URL:     "/template/{templateId}",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -72,7 +71,7 @@ func NewDownloadTemplatesRequestWithoutParam() *DownloadTemplatesRequest {
 
     return &DownloadTemplatesRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/smqTmplate/{templateId}:downloadTemplates",
+            URL:     "/template/{templateId}",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -99,5 +98,4 @@ type DownloadTemplatesResponse struct {
 }
 
 type DownloadTemplatesResult struct {
-    TemplateList []cloudsign.TemplateInfo `json:"templateList"`
 }

@@ -17,20 +17,14 @@
 package models
 
 
-type StampInfo struct {
+type EvidenceFile struct {
 
-    /* 印章ID (Optional) */
-    StampId string `json:"stampId"`
+    /* 文件类型 (Optional) */
+    FileType string `json:"fileType"`
 
-    /* 印章名称 (Optional) */
-    StampName string `json:"stampName"`
+    /* 文件名称 (Optional) */
+    FileName string `json:"fileName"`
 
-    /* 印章图片（base64） (Optional) */
-    StampContent string `json:"stampContent"`
-
-    /* 印章摘要 (Optional) */
-    StampDigest string `json:"stampDigest"`
-
-    /* 印章上传时间 (Optional) */
-    CreateTime string `json:"createTime"`
+    /* 文件的base64 (Optional) */
+    FileContent string `json:"fileContent"`
 }
