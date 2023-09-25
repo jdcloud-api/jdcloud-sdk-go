@@ -45,7 +45,7 @@ func NewPaddingTemplateRequest(
 
 	return &PaddingTemplateRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/smqTmplate/{templateId}:paddingTemplate",
+			URL:     "/template/{templateId}",
 			Method:  "PATCH",
 			Header:  nil,
 			Version: "v1",
@@ -66,7 +66,7 @@ func NewPaddingTemplateRequestWithAllParams(
 
     return &PaddingTemplateRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/smqTmplate/{templateId}:paddingTemplate",
+            URL:     "/template/{templateId}",
             Method:  "PATCH",
             Header:  nil,
             Version: "v1",
@@ -81,7 +81,7 @@ func NewPaddingTemplateRequestWithoutParam() *PaddingTemplateRequest {
 
     return &PaddingTemplateRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/smqTmplate/{templateId}:paddingTemplate",
+            URL:     "/template/{templateId}",
             Method:  "PATCH",
             Header:  nil,
             Version: "v1",

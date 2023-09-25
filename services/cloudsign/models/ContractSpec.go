@@ -43,15 +43,9 @@ type ContractSpec struct {
     /* 自定义签章类型（如需增加时间戳，此字段传time） (Optional) */
     StampStyle *string `json:"stampStyle"`
 
-    /* 0：普通证书 1：事件证书（默认为0，普通证书） (Optional) */
-    CertExpire *int `json:"certExpire"`
+    /* 部门信息 (Optional) */
+    Dept *string `json:"dept"`
 
-    /* 证书类型 (Optional) */
-    BusinessId *string `json:"businessId"`
-
-    /* 签署完的合同是否在京东云存储（默认为false，不存储） (Optional) */
-    NeedStorage *bool `json:"needStorage"`
-
-    /* 是否需要返回已签署的合同（默认为true） (Optional) */
-    NeedContract *bool `json:"needContract"`
+    /* 盖章范围 (Optional) */
+    PageRange *string `json:"pageRange"`
 }

@@ -40,7 +40,7 @@ func NewUploadStampRequest(
 
 	return &UploadStampRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/smqStamp:uploadStamp",
+			URL:     "/stamp",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -58,7 +58,7 @@ func NewUploadStampRequestWithAllParams(
 
     return &UploadStampRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/smqStamp:uploadStamp",
+            URL:     "/stamp",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -72,7 +72,7 @@ func NewUploadStampRequestWithoutParam() *UploadStampRequest {
 
     return &UploadStampRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/smqStamp:uploadStamp",
+            URL:     "/stamp",
             Method:  "POST",
             Header:  nil,
             Version: "v1",

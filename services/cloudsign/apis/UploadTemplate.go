@@ -40,7 +40,7 @@ func NewUploadTemplateRequest(
 
 	return &UploadTemplateRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/smqTmplate:uploadTemplate",
+			URL:     "/template",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -58,7 +58,7 @@ func NewUploadTemplateRequestWithAllParams(
 
     return &UploadTemplateRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/smqTmplate:uploadTemplate",
+            URL:     "/template",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -72,7 +72,7 @@ func NewUploadTemplateRequestWithoutParam() *UploadTemplateRequest {
 
     return &UploadTemplateRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/smqTmplate:uploadTemplate",
+            URL:     "/template",
             Method:  "POST",
             Header:  nil,
             Version: "v1",

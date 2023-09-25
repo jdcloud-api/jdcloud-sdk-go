@@ -29,5 +29,5 @@ type GetEvidenceResp struct {
     EvidenceMessageId string `json:"evidenceMessageId"`
 
     /* 取证结果文件 (Optional) */
-    EvidenceFileList []interface{} `json:"evidenceFileList"`
+    EvidenceFileList []EvidenceFile `json:"evidenceFileList"`
 }
