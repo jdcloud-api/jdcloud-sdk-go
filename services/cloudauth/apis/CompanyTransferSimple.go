@@ -21,58 +21,58 @@ import (
     cloudauth "github.com/jdcloud-api/jdcloud-sdk-go/services/cloudauth/models"
 )
 
-type CheckAgentRequest struct {
+type CompanyTransferSimpleRequest struct {
 
     core.JDCloudRequest
 
     /*   */
-    AgentSpec *cloudauth.AgentSpec `json:"agentSpec"`
+    AccountInfo *cloudauth.AccountInfoSimple `json:"accountInfo"`
 }
 
 /*
- * param agentSpec:  (Required)
+ * param accountInfo:  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewCheckAgentRequest(
-    agentSpec *cloudauth.AgentSpec,
-) *CheckAgentRequest {
+func NewCompanyTransferSimpleRequest(
+    accountInfo *cloudauth.AccountInfoSimple,
+) *CompanyTransferSimpleRequest {
 
-	return &CheckAgentRequest{
+	return &CompanyTransferSimpleRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/company:agent",
+			URL:     "/company:transferSimple",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
-        AgentSpec: agentSpec,
+        AccountInfo: accountInfo,
 	}
 }
 
 /*
- * param agentSpec:  (Required)
+ * param accountInfo:  (Required)
  */
-func NewCheckAgentRequestWithAllParams(
-    agentSpec *cloudauth.AgentSpec,
-) *CheckAgentRequest {
+func NewCompanyTransferSimpleRequestWithAllParams(
+    accountInfo *cloudauth.AccountInfoSimple,
+) *CompanyTransferSimpleRequest {
 
-    return &CheckAgentRequest{
+    return &CompanyTransferSimpleRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/company:agent",
+            URL:     "/company:transferSimple",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
-        AgentSpec: agentSpec,
+        AccountInfo: accountInfo,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewCheckAgentRequestWithoutParam() *CheckAgentRequest {
+func NewCompanyTransferSimpleRequestWithoutParam() *CompanyTransferSimpleRequest {
 
-    return &CheckAgentRequest{
+    return &CompanyTransferSimpleRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/company:agent",
+            URL:     "/company:transferSimple",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -80,24 +80,25 @@ func NewCheckAgentRequestWithoutParam() *CheckAgentRequest {
     }
 }
 
-/* param agentSpec: (Required) */
-func (r *CheckAgentRequest) SetAgentSpec(agentSpec *cloudauth.AgentSpec) {
-    r.AgentSpec = agentSpec
+/* param accountInfo: (Required) */
+func (r *CompanyTransferSimpleRequest) SetAccountInfo(accountInfo *cloudauth.AccountInfoSimple) {
+    r.AccountInfo = accountInfo
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r CheckAgentRequest) GetRegionId() string {
+func (r CompanyTransferSimpleRequest) GetRegionId() string {
     return ""
 }
 
-type CheckAgentResponse struct {
+type CompanyTransferSimpleResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result CheckAgentResult `json:"result"`
+    Result CompanyTransferSimpleResult `json:"result"`
 }
 
-type CheckAgentResult struct {
+type CompanyTransferSimpleResult struct {
     Success bool `json:"success"`
     HasException bool `json:"hasException"`
     Code string `json:"code"`

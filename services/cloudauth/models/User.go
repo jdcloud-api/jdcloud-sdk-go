@@ -17,24 +17,20 @@
 package models
 
 
-type AgentSpec struct {
+type User struct {
 
-    /* 企业类型：
-0: 企业(ET_PE_QiYe)
-1: 个体工商户(ET_SE_GeTiGongShangHu)
-2: 政府机构/事业单位(ET_OU_ZhengFu_ShiYeDanWei)
-  */
-    CompanyType int `json:"companyType"`
+    /* pin (Optional) */
+    Pin string `json:"pin"`
 
-    /* 企业名称  */
-    CompanyName string `json:"companyName"`
+    /* 状态（0  未开通；1 开通中；2 已开通；3 停服） (Optional) */
+    Status int `json:"status"`
 
-    /* 统一社会信用代码或营业执照注册号  */
-    IdCode string `json:"idCode"`
+    /* 资源id (Optional) */
+    ResourceId string `json:"resourceId"`
 
-    /* 代理人姓名  */
-    AgentName string `json:"agentName"`
+    /* 开通时间 (Optional) */
+    ApplyTime string `json:"applyTime"`
 
-    /* 代理人身份证号  */
-    AgentId string `json:"agentId"`
+    /* 实名信息 (Optional) */
+    Name string `json:"name"`
 }

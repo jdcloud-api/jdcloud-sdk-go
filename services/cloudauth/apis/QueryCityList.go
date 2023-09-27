@@ -84,6 +84,7 @@ func (r *QueryCityListRequest) SetProvinceCode(provinceCode string) {
     r.ProvinceCode = provinceCode
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r QueryCityListRequest) GetRegionId() string {

@@ -85,6 +85,7 @@ func (r *CheckLegalPersonRequest) SetLegalPersonSpec(legalPersonSpec *cloudauth.
     r.LegalPersonSpec = legalPersonSpec
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r CheckLegalPersonRequest) GetRegionId() string {

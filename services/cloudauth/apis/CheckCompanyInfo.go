@@ -85,6 +85,7 @@ func (r *CheckCompanyInfoRequest) SetCompanyInfo(companyInfo *cloudauth.CompanyI
     r.CompanyInfo = companyInfo
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r CheckCompanyInfoRequest) GetRegionId() string {
