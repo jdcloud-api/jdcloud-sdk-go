@@ -85,6 +85,7 @@ func (r *PersonalAuthRequest) SetPersonalSpec(personalSpec *cloudauth.PersonalSp
     r.PersonalSpec = personalSpec
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r PersonalAuthRequest) GetRegionId() string {

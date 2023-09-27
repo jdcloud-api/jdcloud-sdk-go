@@ -17,20 +17,11 @@
 package models
 
 
-type PersonalUser struct {
+type CodeDescription struct {
 
-    /* 姓名  */
-    Name string `json:"name"`
+    /* code (Optional) */
+    Code int `json:"code"`
 
-    /* 身份证号码 (Optional) */
-    IdCard *string `json:"idCard"`
-
-    /* 银行卡号 (Optional) */
-    Bankcard *string `json:"bankcard"`
-
-    /* 手机号 (Optional) */
-    Mobile *string `json:"mobile"`
-
-    /* 人像图片(5-150k) (Optional) */
-    ImgBase64 *string `json:"imgBase64"`
+    /* 描述 (Optional) */
+    Description string `json:"description"`
 }

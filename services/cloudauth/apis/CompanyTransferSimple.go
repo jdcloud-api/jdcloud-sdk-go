@@ -18,73 +18,87 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    cloudauth "github.com/jdcloud-api/jdcloud-sdk-go/services/cloudauth/models"
 )
 
-type QueryProvinceListRequest struct {
+type CompanyTransferSimpleRequest struct {
 
     core.JDCloudRequest
+
+    /*   */
+    AccountInfo *cloudauth.AccountInfoSimple `json:"accountInfo"`
 }
 
 /*
+ * param accountInfo:  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewQueryProvinceListRequest(
-) *QueryProvinceListRequest {
+func NewCompanyTransferSimpleRequest(
+    accountInfo *cloudauth.AccountInfoSimple,
+) *CompanyTransferSimpleRequest {
 
-	return &QueryProvinceListRequest{
+	return &CompanyTransferSimpleRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/query:provinceList",
-			Method:  "GET",
+			URL:     "/company:transferSimple",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
+        AccountInfo: accountInfo,
 	}
 }
 
 /*
+ * param accountInfo:  (Required)
  */
-func NewQueryProvinceListRequestWithAllParams(
-) *QueryProvinceListRequest {
+func NewCompanyTransferSimpleRequestWithAllParams(
+    accountInfo *cloudauth.AccountInfoSimple,
+) *CompanyTransferSimpleRequest {
 
-    return &QueryProvinceListRequest{
+    return &CompanyTransferSimpleRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/query:provinceList",
-            Method:  "GET",
+            URL:     "/company:transferSimple",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
+        AccountInfo: accountInfo,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewQueryProvinceListRequestWithoutParam() *QueryProvinceListRequest {
+func NewCompanyTransferSimpleRequestWithoutParam() *CompanyTransferSimpleRequest {
 
-    return &QueryProvinceListRequest{
+    return &CompanyTransferSimpleRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/query:provinceList",
-            Method:  "GET",
+            URL:     "/company:transferSimple",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
     }
 }
 
+/* param accountInfo: (Required) */
+func (r *CompanyTransferSimpleRequest) SetAccountInfo(accountInfo *cloudauth.AccountInfoSimple) {
+    r.AccountInfo = accountInfo
+}
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r QueryProvinceListRequest) GetRegionId() string {
+func (r CompanyTransferSimpleRequest) GetRegionId() string {
     return ""
 }
 
-type QueryProvinceListResponse struct {
+type CompanyTransferSimpleResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result QueryProvinceListResult `json:"result"`
+    Result CompanyTransferSimpleResult `json:"result"`
 }
 
-type QueryProvinceListResult struct {
+type CompanyTransferSimpleResult struct {
     Success bool `json:"success"`
     HasException bool `json:"hasException"`
     Code string `json:"code"`

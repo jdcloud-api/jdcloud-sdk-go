@@ -17,20 +17,14 @@
 package models
 
 
-type PersonalUser struct {
+type AccountInfoSimple struct {
 
-    /* 姓名  */
-    Name string `json:"name"`
+    /* 机构名称  */
+    OrgName string `json:"orgName"`
 
-    /* 身份证号码 (Optional) */
-    IdCard *string `json:"idCard"`
+    /* 企业银行账户  */
+    BankCardNum string `json:"bankCardNum"`
 
-    /* 银行卡号 (Optional) */
-    Bankcard *string `json:"bankcard"`
-
-    /* 手机号 (Optional) */
-    Mobile *string `json:"mobile"`
-
-    /* 人像图片(5-150k) (Optional) */
-    ImgBase64 *string `json:"imgBase64"`
+    /* 开户行所在的银行编码  */
+    BankCode string `json:"bankCode"`
 }

@@ -85,6 +85,7 @@ func (r *CheckCompanyTransferRequest) SetCheckInfo(checkInfo *cloudauth.CheckInf
     r.CheckInfo = checkInfo
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r CheckCompanyTransferRequest) GetRegionId() string {

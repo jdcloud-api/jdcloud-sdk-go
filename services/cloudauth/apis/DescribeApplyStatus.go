@@ -70,6 +70,8 @@ func NewDescribeApplyStatusRequestWithoutParam() *DescribeApplyStatusRequest {
     }
 }
 
+
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r DescribeApplyStatusRequest) GetRegionId() string {

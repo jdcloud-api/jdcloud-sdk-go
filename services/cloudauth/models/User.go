@@ -17,20 +17,20 @@
 package models
 
 
-type PersonalUser struct {
+type User struct {
 
-    /* 姓名  */
+    /* pin (Optional) */
+    Pin string `json:"pin"`
+
+    /* 状态（0  未开通；1 开通中；2 已开通；3 停服） (Optional) */
+    Status int `json:"status"`
+
+    /* 资源id (Optional) */
+    ResourceId string `json:"resourceId"`
+
+    /* 开通时间 (Optional) */
+    ApplyTime string `json:"applyTime"`
+
+    /* 实名信息 (Optional) */
     Name string `json:"name"`
-
-    /* 身份证号码 (Optional) */
-    IdCard *string `json:"idCard"`
-
-    /* 银行卡号 (Optional) */
-    Bankcard *string `json:"bankcard"`
-
-    /* 手机号 (Optional) */
-    Mobile *string `json:"mobile"`
-
-    /* 人像图片(5-150k) (Optional) */
-    ImgBase64 *string `json:"imgBase64"`
 }

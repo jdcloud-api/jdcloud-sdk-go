@@ -92,11 +92,11 @@ func NewQueryBankBranchListRequestWithoutParam() *QueryBankBranchListRequest {
 func (r *QueryBankBranchListRequest) SetBankCode(bankCode string) {
     r.BankCode = bankCode
 }
-
 /* param cityCode: 城市代码(Required) */
 func (r *QueryBankBranchListRequest) SetCityCode(cityCode string) {
     r.CityCode = cityCode
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
