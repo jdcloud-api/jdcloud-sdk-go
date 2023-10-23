@@ -29,6 +29,10 @@ type DeletePodRequest struct {
 
     /* Pod ID  */
     PodId string `json:"podId"`
+
+    /* 是否删除主机的主网卡绑定的所有弹性公网IP，默认为否。可选值：`true`，`false`。
+ (Optional) */
+    DeletePrimaryNetworkInterfaceAllElasticIp *bool `json:"deletePrimaryNetworkInterfaceAllElasticIp"`
 }
 
 /*
@@ -57,10 +61,13 @@ func NewDeletePodRequest(
 /*
  * param regionId: Region ID (Required)
  * param podId: Pod ID (Required)
+ * param deletePrimaryNetworkInterfaceAllElasticIp: 是否删除主机的主网卡绑定的所有弹性公网IP，默认为否。可选值：`true`，`false`。
+ (Optional)
  */
 func NewDeletePodRequestWithAllParams(
     regionId string,
     podId string,
+    deletePrimaryNetworkInterfaceAllElasticIp *bool,
 ) *DeletePodRequest {
 
     return &DeletePodRequest{
@@ -72,6 +79,7 @@ func NewDeletePodRequestWithAllParams(
         },
         RegionId: regionId,
         PodId: podId,
+        DeletePrimaryNetworkInterfaceAllElasticIp: deletePrimaryNetworkInterfaceAllElasticIp,
     }
 }
 
@@ -95,6 +103,11 @@ func (r *DeletePodRequest) SetRegionId(regionId string) {
 /* param podId: Pod ID(Required) */
 func (r *DeletePodRequest) SetPodId(podId string) {
     r.PodId = podId
+}
+/* param deletePrimaryNetworkInterfaceAllElasticIp: 是否删除主机的主网卡绑定的所有弹性公网IP，默认为否。可选值：`true`，`false`。
+(Optional) */
+func (r *DeletePodRequest) SetDeletePrimaryNetworkInterfaceAllElasticIp(deletePrimaryNetworkInterfaceAllElasticIp bool) {
+    r.DeletePrimaryNetworkInterfaceAllElasticIp = &deletePrimaryNetworkInterfaceAllElasticIp
 }
 
 

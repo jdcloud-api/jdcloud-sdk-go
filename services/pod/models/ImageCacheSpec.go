@@ -16,16 +16,18 @@
 
 package models
 
-import vpc "github.com/jdcloud-api/jdcloud-sdk-go/services/vpc/models"
 
-type NetworkInterfaceAttachmentSpec struct {
+type ImageCacheSpec struct {
 
-    /* 指明删除pod时是否删除网卡，主网卡默认是true,辅助网卡默认false (Optional) */
-    AutoDelete *bool `json:"autoDelete"`
+    /* 镜像地址  */
+    Image string `json:"image"`
 
-    /* 设备Index，目前pod只支持一个网卡，所以只能设置为1 (Optional) */
-    DeviceIndex *int `json:"deviceIndex"`
+    /* 镜像仓库认证信息；使用Docker Hub和京东云CR的镜像不需要secret (Optional) */
+    Secret *string `json:"secret"`
 
-    /* 网卡接口规范  */
-    NetworkInterface *vpc.NetworkInterfaceSpec `json:"networkInterface"`
+    /* 创建镜像缓存使用的云盘大小 (Optional) */
+    Size *int `json:"size"`
+
+    /* 保留天数，传0为永不过期 (Optional) */
+    RetentionDays *int `json:"retentionDays"`
 }

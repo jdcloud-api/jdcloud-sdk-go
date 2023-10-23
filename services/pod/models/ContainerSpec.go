@@ -35,8 +35,8 @@ type ContainerSpec struct {
 容器镜像名字。 nginx:latest。长度范围：[1-639]
 1. Docker Hub官方镜像通过类似nginx, mysql/mysql-server的名字指定 </br> 
 2. repository长度最大256个字符，tag最大128个字符，registry最大255个字符 </br> 
-  */
-    Image string `json:"image"`
+ (Optional) */
+    Image *string `json:"image"`
 
     /* 镜像仓库认证信息。如果目前不传，默认选择dockerHub镜像 (Optional) */
     Secret *string `json:"secret"`
@@ -61,4 +61,7 @@ type ContainerSpec struct {
 
     /* 云盘挂载信息 (Optional) */
     VolumeMounts []VolumeMountSpec `json:"volumeMounts"`
+
+    /* 镜像缓存ID，与镜像名称至少指定一个 (Optional) */
+    ImageCacheId *string `json:"imageCacheId"`
 }

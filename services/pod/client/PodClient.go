@@ -40,7 +40,7 @@ func NewPodClient(credential *core.Credential) *PodClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "pod",
-            Revision:    "2.3.4",
+            Revision:    "2.5.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -57,7 +57,7 @@ func (c *PodClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
 }
 
-/* 查询资源的配额，支持：原生容器 pod 和 secret.
+/* 查询资源的配额，支持：原生容器,pod,secret,镜像缓存
  */
 func (c *PodClient) DescribeQuota(request *pod.DescribeQuotaRequest) (*pod.DescribeQuotaResponse, error) {
     if request == nil {
@@ -69,6 +69,27 @@ func (c *PodClient) DescribeQuota(request *pod.DescribeQuotaRequest) (*pod.Descr
     }
 
     jdResp := &pod.DescribeQuotaResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改镜像缓存的属性。
+ */
+func (c *PodClient) UpdateImageCache(request *pod.UpdateImageCacheRequest) (*pod.UpdateImageCacheResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &pod.UpdateImageCacheResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -204,6 +225,27 @@ func (c *PodClient) CreateConfigFile(request *pod.CreateConfigFileRequest) (*pod
     return jdResp, err
 }
 
+/* 删除镜像缓存，镜像缓存状态必须为Ready或Error状态。
+ */
+func (c *PodClient) DeleteImageCache(request *pod.DeleteImageCacheRequest) (*pod.DeleteImageCacheResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &pod.DeleteImageCacheResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 设置TTY大小 */
 func (c *PodClient) ResizeTTY(request *pod.ResizeTTYRequest) (*pod.ResizeTTYResponse, error) {
     if request == nil {
@@ -215,6 +257,47 @@ func (c *PodClient) ResizeTTY(request *pod.ResizeTTYRequest) (*pod.ResizeTTYResp
     }
 
     jdResp := &pod.ResizeTTYResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 批量查询镜像缓存。支持分页查询，默认每页20条。 */
+func (c *PodClient) DescribeImageCaches(request *pod.DescribeImageCachesRequest) (*pod.DescribeImageCachesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &pod.DescribeImageCachesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据镜像信息匹配镜像缓存，根据镜像缓存的体积（体积小的优先）和创建时间（创建时间晚的优先）进行匹配
+ */
+func (c *PodClient) GetMostSuitableImageCache(request *pod.GetMostSuitableImageCacheRequest) (*pod.GetMostSuitableImageCacheResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &pod.GetMostSuitableImageCacheResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -320,6 +403,27 @@ func (c *PodClient) ExecGetExitCode(request *pod.ExecGetExitCodeRequest) (*pod.E
     }
 
     jdResp := &pod.ExecGetExitCodeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询镜像缓存的详细信息
+ */
+func (c *PodClient) DescribeImageCache(request *pod.DescribeImageCacheRequest) (*pod.DescribeImageCacheResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &pod.DescribeImageCacheResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -444,6 +548,49 @@ func (c *PodClient) DeleteConfigFile(request *pod.DeleteConfigFileRequest) (*pod
     }
 
     jdResp := &pod.DeleteConfigFileResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建一个镜像缓存信息。镜像缓存加速是将镜像预先拉取到一个云盘中并制作为云盘快照，
+用户在创建Pod/NC时，若使用的镜像已经有镜像缓存，则可以直接基于该镜像缓存对应的快照制作云盘，并挂载为该容器的系统盘，避免重复拉取镜像并加快创建速度。
+ */
+func (c *PodClient) CreateImageCache(request *pod.CreateImageCacheRequest) (*pod.CreateImageCacheResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &pod.CreateImageCacheResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 批量创建镜像缓存。
+ */
+func (c *PodClient) CreateImageCaches(request *pod.CreateImageCachesRequest) (*pod.CreateImageCachesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &pod.CreateImageCachesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
