@@ -21,71 +21,76 @@ import (
     pod "github.com/jdcloud-api/jdcloud-sdk-go/services/pod/models"
 )
 
-type DescribeQuotaRequest struct {
+type CreateImageCachesRequest struct {
 
     core.JDCloudRequest
 
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* resourceType - 资源类型，支持 [container, pod, secret, imageCache]
-  */
-    ResourceType string `json:"resourceType"`
+    /* 镜像缓存名称
+ (Optional) */
+    Name *string `json:"name"`
+
+    /* 镜像缓存创建参数  */
+    ImageCacheSpecs []pod.ImageCacheSpec `json:"imageCacheSpecs"`
 }
 
 /*
  * param regionId: Region ID (Required)
- * param resourceType: resourceType - 资源类型，支持 [container, pod, secret, imageCache]
- (Required)
+ * param imageCacheSpecs: 镜像缓存创建参数 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeQuotaRequest(
+func NewCreateImageCachesRequest(
     regionId string,
-    resourceType string,
-) *DescribeQuotaRequest {
+    imageCacheSpecs []pod.ImageCacheSpec,
+) *CreateImageCachesRequest {
 
-	return &DescribeQuotaRequest{
+	return &CreateImageCachesRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/quotas",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/imageCaches",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        ResourceType: resourceType,
+        ImageCacheSpecs: imageCacheSpecs,
 	}
 }
 
 /*
  * param regionId: Region ID (Required)
- * param resourceType: resourceType - 资源类型，支持 [container, pod, secret, imageCache]
- (Required)
+ * param name: 镜像缓存名称
+ (Optional)
+ * param imageCacheSpecs: 镜像缓存创建参数 (Required)
  */
-func NewDescribeQuotaRequestWithAllParams(
+func NewCreateImageCachesRequestWithAllParams(
     regionId string,
-    resourceType string,
-) *DescribeQuotaRequest {
+    name *string,
+    imageCacheSpecs []pod.ImageCacheSpec,
+) *CreateImageCachesRequest {
 
-    return &DescribeQuotaRequest{
+    return &CreateImageCachesRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/quotas",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/imageCaches",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        ResourceType: resourceType,
+        Name: name,
+        ImageCacheSpecs: imageCacheSpecs,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeQuotaRequestWithoutParam() *DescribeQuotaRequest {
+func NewCreateImageCachesRequestWithoutParam() *CreateImageCachesRequest {
 
-    return &DescribeQuotaRequest{
+    return &CreateImageCachesRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/quotas",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/imageCaches",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
@@ -93,28 +98,32 @@ func NewDescribeQuotaRequestWithoutParam() *DescribeQuotaRequest {
 }
 
 /* param regionId: Region ID(Required) */
-func (r *DescribeQuotaRequest) SetRegionId(regionId string) {
+func (r *CreateImageCachesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-/* param resourceType: resourceType - 资源类型，支持 [container, pod, secret, imageCache]
-(Required) */
-func (r *DescribeQuotaRequest) SetResourceType(resourceType string) {
-    r.ResourceType = resourceType
+/* param name: 镜像缓存名称
+(Optional) */
+func (r *CreateImageCachesRequest) SetName(name string) {
+    r.Name = &name
+}
+/* param imageCacheSpecs: 镜像缓存创建参数(Required) */
+func (r *CreateImageCachesRequest) SetImageCacheSpecs(imageCacheSpecs []pod.ImageCacheSpec) {
+    r.ImageCacheSpecs = imageCacheSpecs
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeQuotaRequest) GetRegionId() string {
+func (r CreateImageCachesRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeQuotaResponse struct {
+type CreateImageCachesResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeQuotaResult `json:"result"`
+    Result CreateImageCachesResult `json:"result"`
 }
 
-type DescribeQuotaResult struct {
-    Quota pod.Quota `json:"quota"`
+type CreateImageCachesResult struct {
+    ImageCacheId []string `json:"imageCacheId"`
 }

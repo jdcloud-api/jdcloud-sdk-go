@@ -65,9 +65,18 @@ type PodSpec struct {
     /* 主网卡配置信息  */
     PrimaryNetworkInterface *NetworkInterfaceAttachmentSpec `json:"primaryNetworkInterface"`
 
+    /* 辅助网卡配置信息 (Optional) */
+    SecondaryNetworkInterfaces []NetworkInterfaceAttachmentSpec `json:"secondaryNetworkInterfaces"`
+
     /* 用户普通标签集合 (Optional) */
     UserTags []Tag `json:"userTags"`
 
     /* 资源组ID (Optional) */
     ResourceGroupId *string `json:"resourceGroupId"`
+
+    /* 是否自动匹配镜像缓存，默认不开启。 (Optional) */
+    AutoMatchImageCache *bool `json:"autoMatchImageCache"`
+
+    /* 匹配失败后，是否自动创建镜像缓存，默认不创建。 (Optional) */
+    AutoCreateImageCache *bool `json:"autoCreateImageCache"`
 }

@@ -44,8 +44,8 @@ type ContainerSpec struct {
     /* 容器执行的环境变量；如果和镜像中的环境变量Key相同，会覆盖镜像中的值；</br> 最大100对 (Optional) */
     Envs []EnvVar `json:"envs"`
 
-    /* 镜像名称 </br> 1. Docker Hub官方镜像通过类似nginx, mysql/mysql-server的名字指定 </br> </br> repository长度最大256个字符，tag最大128个字符，registry最大255个字符  */
-    Image string `json:"image"`
+    /* 镜像名称 </br> 1. Docker Hub官方镜像通过类似nginx, mysql/mysql-server的名字指定 </br> </br> repository长度最大256个字符，tag最大128个字符，registry最大255个字符 (Optional) */
+    Image *string `json:"image"`
 
     /* 镜像仓库认证信息；使用Docker Hub和京东云CR的镜像不需要secret (Optional) */
     Secret *string `json:"secret"`
@@ -82,4 +82,13 @@ type ContainerSpec struct {
 
     /* 资源组ID (Optional) */
     ResourceGroupId *string `json:"resourceGroupId"`
+
+    /* 镜像缓存ID,与镜像名称至少指定一个 (Optional) */
+    ImageCacheId *string `json:"imageCacheId"`
+
+    /* 是否自动匹配镜像缓存，默认不开启 (Optional) */
+    AutoMatchImageCache *bool `json:"autoMatchImageCache"`
+
+    /* 匹配失败后，是否自动创建镜像缓存，默认不创建 (Optional) */
+    AutoCreateImageCache *bool `json:"autoCreateImageCache"`
 }

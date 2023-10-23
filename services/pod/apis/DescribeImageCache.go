@@ -21,70 +21,67 @@ import (
     pod "github.com/jdcloud-api/jdcloud-sdk-go/services/pod/models"
 )
 
-type DescribeQuotaRequest struct {
+type DescribeImageCacheRequest struct {
 
     core.JDCloudRequest
 
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* resourceType - 资源类型，支持 [container, pod, secret, imageCache]
-  */
-    ResourceType string `json:"resourceType"`
+    /* imageCacheId  */
+    ImageCacheId string `json:"imageCacheId"`
 }
 
 /*
  * param regionId: Region ID (Required)
- * param resourceType: resourceType - 资源类型，支持 [container, pod, secret, imageCache]
- (Required)
+ * param imageCacheId: imageCacheId (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeQuotaRequest(
+func NewDescribeImageCacheRequest(
     regionId string,
-    resourceType string,
-) *DescribeQuotaRequest {
+    imageCacheId string,
+) *DescribeImageCacheRequest {
 
-	return &DescribeQuotaRequest{
+	return &DescribeImageCacheRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/quotas",
+			URL:     "/regions/{regionId}/imageCache/{imageCacheId}",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        ResourceType: resourceType,
+        ImageCacheId: imageCacheId,
 	}
 }
 
 /*
  * param regionId: Region ID (Required)
- * param resourceType: resourceType - 资源类型，支持 [container, pod, secret, imageCache]
- (Required)
+ * param imageCacheId: imageCacheId (Required)
  */
-func NewDescribeQuotaRequestWithAllParams(
+func NewDescribeImageCacheRequestWithAllParams(
     regionId string,
-    resourceType string,
-) *DescribeQuotaRequest {
+    imageCacheId string,
+) *DescribeImageCacheRequest {
 
-    return &DescribeQuotaRequest{
+    return &DescribeImageCacheRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/quotas",
+            URL:     "/regions/{regionId}/imageCache/{imageCacheId}",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        ResourceType: resourceType,
+        ImageCacheId: imageCacheId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeQuotaRequestWithoutParam() *DescribeQuotaRequest {
+func NewDescribeImageCacheRequestWithoutParam() *DescribeImageCacheRequest {
 
-    return &DescribeQuotaRequest{
+    return &DescribeImageCacheRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/quotas",
+            URL:     "/regions/{regionId}/imageCache/{imageCacheId}",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -93,28 +90,27 @@ func NewDescribeQuotaRequestWithoutParam() *DescribeQuotaRequest {
 }
 
 /* param regionId: Region ID(Required) */
-func (r *DescribeQuotaRequest) SetRegionId(regionId string) {
+func (r *DescribeImageCacheRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-/* param resourceType: resourceType - 资源类型，支持 [container, pod, secret, imageCache]
-(Required) */
-func (r *DescribeQuotaRequest) SetResourceType(resourceType string) {
-    r.ResourceType = resourceType
+/* param imageCacheId: imageCacheId(Required) */
+func (r *DescribeImageCacheRequest) SetImageCacheId(imageCacheId string) {
+    r.ImageCacheId = imageCacheId
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeQuotaRequest) GetRegionId() string {
+func (r DescribeImageCacheRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeQuotaResponse struct {
+type DescribeImageCacheResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeQuotaResult `json:"result"`
+    Result DescribeImageCacheResult `json:"result"`
 }
 
-type DescribeQuotaResult struct {
-    Quota pod.Quota `json:"quota"`
+type DescribeImageCacheResult struct {
+    ImageCache pod.ImageCache `json:"imageCache"`
 }

@@ -40,7 +40,7 @@ func NewNativecontainerClient(credential *core.Credential) *NativecontainerClien
             Credential:  *credential,
             Config:      *config,
             ServiceName: "nativecontainer",
-            Revision:    "2.2.6",
+            Revision:    "2.3.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -120,7 +120,7 @@ func (c *NativecontainerClient) DeleteSecret(request *nativecontainer.DeleteSecr
     return jdResp, err
 }
 
-/* 查询一台原生容器的详细信息
+/* "查询一台原生容器的详细信息"
  */
 func (c *NativecontainerClient) DescribeContainer(request *nativecontainer.DescribeContainerRequest) (*nativecontainer.DescribeContainerResponse, error) {
     if request == nil {
