@@ -17,24 +17,8 @@
 package models
 
 
-type LegalPersonSpec struct {
+type PersonalMobileSpec struct {
 
-    /* 企业类型：
-0: 企业(ET_PE_QiYe)
-1: 个体工商户(ET_SE_GeTiGongShangHu)
-2: 政府机构/事业单位(ET_OU_ZhengFu_ShiYeDanWei)
- (Optional) */
-    CompanyType *int `json:"companyType"`
-
-    /* 企业名称  */
-    CompanyName string `json:"companyName"`
-
-    /* 统一社会信用代码或营业执照注册号  */
-    IdCode string `json:"idCode"`
-
-    /* 法定代表人姓名  */
-    LegalPersonName string `json:"legalPersonName"`
-
-    /* 法定代表人身份证号  */
-    LegalPersonId string `json:"legalPersonId"`
+    /* 认证要素信息  */
+    PersonalUser *PersonalMobile3 `json:"personalUser"`
 }

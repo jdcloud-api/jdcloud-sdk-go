@@ -23,8 +23,8 @@ type CompanyInfo struct {
 0: 企业(ET_PE_QiYe)
 1: 个体工商户(ET_SE_GeTiGongShangHu)
 2: 政府机构/事业单位(ET_OU_ZhengFu_ShiYeDanWei)
-  */
-    CompanyType int `json:"companyType"`
+ (Optional) */
+    CompanyType *int `json:"companyType"`
 
     /* 企业名称  */
     CompanyName string `json:"companyName"`

@@ -17,24 +17,17 @@
 package models
 
 
-type LegalPersonSpec struct {
+type AliveUrlInfo struct {
 
-    /* 企业类型：
-0: 企业(ET_PE_QiYe)
-1: 个体工商户(ET_SE_GeTiGongShangHu)
-2: 政府机构/事业单位(ET_OU_ZhengFu_ShiYeDanWei)
- (Optional) */
-    CompanyType *int `json:"companyType"`
+    /* 状态码 (Optional) */
+    Code string `json:"code"`
 
-    /* 企业名称  */
-    CompanyName string `json:"companyName"`
+    /* 状态信息 (Optional) */
+    Message string `json:"message"`
 
-    /* 统一社会信用代码或营业执照注册号  */
-    IdCode string `json:"idCode"`
+    /* 采集页面URL (Optional) */
+    Url string `json:"url"`
 
-    /* 法定代表人姓名  */
-    LegalPersonName string `json:"legalPersonName"`
-
-    /* 法定代表人身份证号  */
-    LegalPersonId string `json:"legalPersonId"`
+    /* token(获取检测结果时需要用到) (Optional) */
+    Token string `json:"token"`
 }

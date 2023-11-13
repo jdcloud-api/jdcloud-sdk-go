@@ -17,24 +17,26 @@
 package models
 
 
-type LegalPersonSpec struct {
+type AliveResultInfo struct {
 
-    /* 企业类型：
-0: 企业(ET_PE_QiYe)
-1: 个体工商户(ET_SE_GeTiGongShangHu)
-2: 政府机构/事业单位(ET_OU_ZhengFu_ShiYeDanWei)
- (Optional) */
-    CompanyType *int `json:"companyType"`
+    /* 人脸照片 (Optional) */
+    FaceImage string `json:"faceImage"`
 
-    /* 企业名称  */
-    CompanyName string `json:"companyName"`
+    /* 场景照片 (Optional) */
+    SceneImage string `json:"sceneImage"`
 
-    /* 统一社会信用代码或营业执照注册号  */
-    IdCode string `json:"idCode"`
+    /* H5活体检测结果 (Optional) */
+    H5Result string `json:"h5Result"`
 
-    /* 法定代表人姓名  */
-    LegalPersonName string `json:"legalPersonName"`
+    /* 实名认证检测结果 (Optional) */
+    SmResult string `json:"smResult"`
 
-    /* 法定代表人身份证号  */
-    LegalPersonId string `json:"legalPersonId"`
+    /* 人像对比结果 (Optional) */
+    RxResult string `json:"rxResult"`
+
+    /* 人像对比相似度 (Optional) */
+    Score string `json:"score"`
+
+    /* 描述 (Optional) */
+    Desc string `json:"desc"`
 }

@@ -17,14 +17,7 @@
 package models
 
 
-type LegalPersonSpec struct {
-
-    /* 企业类型：
-0: 企业(ET_PE_QiYe)
-1: 个体工商户(ET_SE_GeTiGongShangHu)
-2: 政府机构/事业单位(ET_OU_ZhengFu_ShiYeDanWei)
- (Optional) */
-    CompanyType *int `json:"companyType"`
+type CompanyInfo3Spec struct {
 
     /* 企业名称  */
     CompanyName string `json:"companyName"`
@@ -34,7 +27,4 @@ type LegalPersonSpec struct {
 
     /* 法定代表人姓名  */
     LegalPersonName string `json:"legalPersonName"`
-
-    /* 法定代表人身份证号  */
-    LegalPersonId string `json:"legalPersonId"`
 }
