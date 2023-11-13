@@ -130,4 +130,7 @@ type IDCardResult struct {
     IdNumber string `json:"idNumber"`
     Birthday string `json:"birthday"`
     Gender string `json:"gender"`
+    Authority string `json:"authority"`
+    IssueTime string `json:"issueTime"`
+    DueTime string `json:"dueTime"`
 }

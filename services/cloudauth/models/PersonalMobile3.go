@@ -17,35 +17,14 @@
 package models
 
 
-type OCRInfo struct {
+type PersonalMobile3 struct {
 
-    /* 识别状态 (Optional) */
-    Status string `json:"status"`
-
-    /* 姓名 (Optional) */
+    /* 姓名  */
     Name string `json:"name"`
 
-    /* 民族 (Optional) */
-    Nation string `json:"nation"`
+    /* 身份证号码  */
+    IdCard string `json:"idCard"`
 
-    /* 住址 (Optional) */
-    Address string `json:"address"`
-
-    /* 身份证号 (Optional) */
-    IdNumber string `json:"idNumber"`
-
-    /* 出生日期 (Optional) */
-    Birthday string `json:"birthday"`
-
-    /* 性别 (Optional) */
-    Gender string `json:"gender"`
-
-    /* 签发机构 (Optional) */
-    Authority string `json:"authority"`
-
-    /* 签发时间 (Optional) */
-    IssueTime string `json:"issueTime"`
-
-    /* 到期时间 (Optional) */
-    DueTime string `json:"dueTime"`
+    /* 手机号  */
+    Mobile string `json:"mobile"`
 }
