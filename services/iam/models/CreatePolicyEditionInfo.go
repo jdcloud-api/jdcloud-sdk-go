@@ -19,9 +19,16 @@ package models
 
 type CreatePolicyEditionInfo struct {
 
-    /* 策略文档，最多6144个字符  */
+    /* 权限策略文档，最多6144个字符  */
     PolicyDocument string `json:"policyDocument"`
 
-    /* 是否设置当前策略文档为默认版本  */
+    /* 是否设置当前权限策略文档为默认权限策略，默认值为false (Optional) */
     SetAsDefault bool `json:"setAsDefault"`
+
+    /* 权限策略版本自动化轮转机制，可以删除历史权限策略版本。
+  ·None：关闭轮转机制
+  ·DeleteOldestNonDefaultVersionWhenLimitExceeded：当权限策略版本数量超限时，删除最早且非活跃的版本
+默认值为None
+ (Optional) */
+    RotateStrategy string `json:"rotateStrategy"`
 }

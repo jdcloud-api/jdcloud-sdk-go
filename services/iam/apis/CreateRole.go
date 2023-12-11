@@ -85,6 +85,7 @@ func (r *CreateRoleRequest) SetCreateRoleInfo(createRoleInfo *iam.CreateRoleInfo
     r.CreateRoleInfo = createRoleInfo
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r CreateRoleRequest) GetRegionId() string {

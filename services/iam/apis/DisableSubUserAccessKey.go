@@ -92,11 +92,11 @@ func NewDisableSubUserAccessKeyRequestWithoutParam() *DisableSubUserAccessKeyReq
 func (r *DisableSubUserAccessKeyRequest) SetSubUser(subUser string) {
     r.SubUser = subUser
 }
-
 /* param accessKey: accessKey(Required) */
 func (r *DisableSubUserAccessKeyRequest) SetAccessKey(accessKey string) {
     r.AccessKey = accessKey
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

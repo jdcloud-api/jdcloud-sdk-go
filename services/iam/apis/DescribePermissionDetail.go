@@ -93,11 +93,11 @@ func NewDescribePermissionDetailRequestWithoutParam() *DescribePermissionDetailR
 func (r *DescribePermissionDetailRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param permissionId: 权限id(Required) */
 func (r *DescribePermissionDetailRequest) SetPermissionId(permissionId int) {
     r.PermissionId = permissionId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

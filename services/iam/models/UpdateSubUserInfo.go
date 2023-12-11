@@ -27,4 +27,7 @@ type UpdateSubUserInfo struct {
 
     /* 邮箱 (Optional) */
     Email *string `json:"email"`
+
+    /* 姓名 (Optional) */
+    NickName *string `json:"nickName"`
 }

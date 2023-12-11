@@ -101,16 +101,15 @@ func NewRemovePermissionOfSubUserRequestWithoutParam() *RemovePermissionOfSubUse
 func (r *RemovePermissionOfSubUserRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param permissionId: 权限id(Required) */
 func (r *RemovePermissionOfSubUserRequest) SetPermissionId(permissionId int) {
     r.PermissionId = permissionId
 }
-
 /* param subUser: 子用户用户名(Required) */
 func (r *RemovePermissionOfSubUserRequest) SetSubUser(subUser string) {
     r.SubUser = subUser
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

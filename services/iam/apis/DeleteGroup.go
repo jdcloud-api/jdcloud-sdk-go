@@ -84,6 +84,7 @@ func (r *DeleteGroupRequest) SetGroupName(groupName string) {
     r.GroupName = groupName
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r DeleteGroupRequest) GetRegionId() string {

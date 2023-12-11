@@ -23,8 +23,11 @@ type PolicyEdition struct {
     IsDefaultEdition bool `json:"isDefaultEdition"`
 
     /* 策略文档版本 (Optional) */
-    Edition int `json:"edition"`
+    Edition string `json:"edition"`
 
-    /* 策略创建时间 (Optional) */
+    /* 权限策略内容 (Optional) */
+    PolicyDocument string `json:"policyDocument"`
+
+    /* 创建时间 (Optional) */
     CreateTime string `json:"createTime"`
 }

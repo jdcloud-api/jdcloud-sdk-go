@@ -92,11 +92,11 @@ func NewDeleteUserAccessKeyRequestWithoutParam() *DeleteUserAccessKeyRequest {
 func (r *DeleteUserAccessKeyRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param accessKey: accessKey(Required) */
 func (r *DeleteUserAccessKeyRequest) SetAccessKey(accessKey string) {
     r.AccessKey = accessKey
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

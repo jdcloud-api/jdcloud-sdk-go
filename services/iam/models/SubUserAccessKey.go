@@ -28,9 +28,18 @@ type SubUserAccessKey struct {
     /* 创建时间 (Optional) */
     CreateTime string `json:"createTime"`
 
+    /* 最近一次使用AK访问时间 (Optional) */
+    LastVisitTime string `json:"lastVisitTime"`
+
+    /* 最近一次使用AK访问事件 (Optional) */
+    LastVisitEvent string `json:"lastVisitEvent"`
+
     /* 禁用/启用状态[0-禁用,1-启用] (Optional) */
     Status int `json:"status"`
 
     /* 删除/有效状态[0-删除,1-有效] (Optional) */
     Yn int `json:"yn"`
+
+    /* AK备注信息 (Optional) */
+    Remark string `json:"remark"`
 }

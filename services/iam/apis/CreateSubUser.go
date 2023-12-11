@@ -85,6 +85,7 @@ func (r *CreateSubUserRequest) SetCreateSubUserInfo(createSubUserInfo *iam.Creat
     r.CreateSubUserInfo = createSubUserInfo
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r CreateSubUserRequest) GetRegionId() string {

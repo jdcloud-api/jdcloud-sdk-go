@@ -93,11 +93,11 @@ func NewUpdateGroupRequestWithoutParam() *UpdateGroupRequest {
 func (r *UpdateGroupRequest) SetGroupName(groupName string) {
     r.GroupName = groupName
 }
-
 /* param updateGroupInfo: (Required) */
 func (r *UpdateGroupRequest) SetUpdateGroupInfo(updateGroupInfo *iam.UpdateGroupInfo) {
     r.UpdateGroupInfo = updateGroupInfo
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -28,6 +28,9 @@ type CreateSubUserRes struct {
     /* 邮箱 (Optional) */
     Email string `json:"email"`
 
+    /* 手机号码 (Optional) */
+    Phone string `json:"phone"`
+
     /* accessKey (Optional) */
     AccessKey string `json:"accessKey"`
 
@@ -39,4 +42,7 @@ type CreateSubUserRes struct {
 
     /* 更新时间 (Optional) */
     UpdateTime string `json:"updateTime"`
+
+    /* 姓名 (Optional) */
+    NickName string `json:"nickName"`
 }

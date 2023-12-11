@@ -85,6 +85,7 @@ func (r *DescribeSubUserRequest) SetSubUser(subUser string) {
     r.SubUser = subUser
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r DescribeSubUserRequest) GetRegionId() string {

@@ -84,6 +84,7 @@ func (r *DeleteRoleRequest) SetRoleName(roleName string) {
     r.RoleName = roleName
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r DeleteRoleRequest) GetRegionId() string {

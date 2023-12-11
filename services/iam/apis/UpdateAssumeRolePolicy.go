@@ -93,11 +93,11 @@ func NewUpdateAssumeRolePolicyRequestWithoutParam() *UpdateAssumeRolePolicyReque
 func (r *UpdateAssumeRolePolicyRequest) SetRoleName(roleName string) {
     r.RoleName = roleName
 }
-
 /* param updateAssumeRolePolicyInfo: 角色权限信息(Required) */
 func (r *UpdateAssumeRolePolicyRequest) SetUpdateAssumeRolePolicyInfo(updateAssumeRolePolicyInfo *iam.UpdateAssumeRolePolicyInfo) {
     r.UpdateAssumeRolePolicyInfo = updateAssumeRolePolicyInfo
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

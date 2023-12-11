@@ -19,6 +19,9 @@ package models
 
 type SubUser struct {
 
+    /* 用户pin (Optional) */
+    Pin string `json:"pin"`
+
     /* 用户名 (Optional) */
     Name string `json:"name"`
 
@@ -39,4 +42,7 @@ type SubUser struct {
 
     /* 用户更新时间 (Optional) */
     UpdateTime string `json:"updateTime"`
+
+    /* 姓名 (Optional) */
+    NickName string `json:"nickName"`
 }

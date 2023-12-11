@@ -105,26 +105,23 @@ func NewDescribeRolesRequestWithoutParam() *DescribeRolesRequest {
 func (r *DescribeRolesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小，默认50，取值范围[10, 100](Optional) */
 func (r *DescribeRolesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param roleName: 角色名称关键词(Optional) */
 func (r *DescribeRolesRequest) SetRoleName(roleName string) {
     r.RoleName = &roleName
 }
-
 /* param type_: 角色类型，默认查找所有类型，2-服务相关角色，3-服务角色，4-用户角色(Optional) */
 func (r *DescribeRolesRequest) SetType(type_ int) {
     r.Type = &type_
 }
-
 /* param sort: 排序策略,0-按创建时间顺序排序,1-按创建时间倒序排序(Optional) */
 func (r *DescribeRolesRequest) SetSort(sort int) {
     r.Sort = &sort
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

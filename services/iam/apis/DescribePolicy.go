@@ -85,6 +85,7 @@ func (r *DescribePolicyRequest) SetPolicyName(policyName string) {
     r.PolicyName = policyName
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r DescribePolicyRequest) GetRegionId() string {
@@ -99,4 +100,5 @@ type DescribePolicyResponse struct {
 
 type DescribePolicyResult struct {
     Policy iam.PolicyDetail `json:"policy"`
+    DefaultPolicyEdition iam.PolicyEdition `json:"defaultPolicyEdition"`
 }

@@ -28,11 +28,14 @@ type CreateSubUserInfo struct {
     /* 按照密码策略设置，默认8~20位，至少包含一个小写字母、大写字母和数字  */
     Password string `json:"password"`
 
-    /* 手机号码，区号-手机号  */
-    Phone string `json:"phone"`
+    /* 手机号码，区号-手机号 (Optional) */
+    Phone *string `json:"phone"`
 
-    /* 邮箱  */
-    Email string `json:"email"`
+    /* 邮箱 (Optional) */
+    Email *string `json:"email"`
+
+    /* 姓名 (Optional) */
+    NickName *string `json:"nickName"`
 
     /* 是否创建accessKey，默认false (Optional) */
     CreateAk *bool `json:"createAk"`
@@ -45,4 +48,7 @@ type CreateSubUserInfo struct {
 
     /* 是否自动生成密码，默认false (Optional) */
     AutoGeneratePassword *bool `json:"autoGeneratePassword"`
+
+    /* 是否作为联系人，默认false,为true时手机和邮箱必需 (Optional) */
+    ContactTag *bool `json:"contactTag"`
 }

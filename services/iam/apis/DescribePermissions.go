@@ -117,26 +117,23 @@ func NewDescribePermissionsRequestWithoutParam() *DescribePermissionsRequest {
 func (r *DescribePermissionsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param pageNumber: 页码(Required) */
 func (r *DescribePermissionsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = pageNumber
 }
-
 /* param pageSize: 每页显示数目(Required) */
 func (r *DescribePermissionsRequest) SetPageSize(pageSize int) {
     r.PageSize = pageSize
 }
-
 /* param keyword: 关键字(Optional) */
 func (r *DescribePermissionsRequest) SetKeyword(keyword string) {
     r.Keyword = &keyword
 }
-
 /* param queryType: 权限类型,0-全部，1-系统权限，2-自定义权限(Required) */
 func (r *DescribePermissionsRequest) SetQueryType(queryType int) {
     r.QueryType = queryType
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -92,11 +92,11 @@ func NewDisabledUserAccessKeyRequestWithoutParam() *DisabledUserAccessKeyRequest
 func (r *DisabledUserAccessKeyRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param accessKey: accessKey(Required) */
 func (r *DisabledUserAccessKeyRequest) SetAccessKey(accessKey string) {
     r.AccessKey = accessKey
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

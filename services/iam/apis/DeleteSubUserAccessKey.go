@@ -92,11 +92,11 @@ func NewDeleteSubUserAccessKeyRequestWithoutParam() *DeleteSubUserAccessKeyReque
 func (r *DeleteSubUserAccessKeyRequest) SetSubUser(subUser string) {
     r.SubUser = subUser
 }
-
 /* param accessKey: accessKey(Required) */
 func (r *DeleteSubUserAccessKeyRequest) SetAccessKey(accessKey string) {
     r.AccessKey = accessKey
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
