@@ -84,6 +84,7 @@ func (r *DeletePolicyRequest) SetPolicyName(policyName string) {
     r.PolicyName = policyName
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r DeletePolicyRequest) GetRegionId() string {

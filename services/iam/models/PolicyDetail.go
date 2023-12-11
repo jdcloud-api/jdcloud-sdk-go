@@ -37,10 +37,10 @@ type PolicyDetail struct {
     /* 策略版本号 (Optional) */
     Version string `json:"version"`
 
-    /* 默认策略文档版本 (Optional) */
-    DefaultEdition int `json:"defaultEdition"`
+    /* 当前默认策略文档版本 (Optional) */
+    CurrentDefaultEdition string `json:"currentDefaultEdition"`
 
-    /* 策略文档 (Optional) */
+    /* 权限策略内容（已废弃） (Optional) */
     Content string `json:"content"`
 
     /* 策略创建时间 (Optional) */

@@ -92,11 +92,11 @@ func NewAddSubUserToGroupRequestWithoutParam() *AddSubUserToGroupRequest {
 func (r *AddSubUserToGroupRequest) SetGroupName(groupName string) {
     r.GroupName = groupName
 }
-
 /* param subUser: 子用户名(Required) */
 func (r *AddSubUserToGroupRequest) SetSubUser(subUser string) {
     r.SubUser = subUser
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -105,26 +105,23 @@ func NewDescribePoliciesRequestWithoutParam() *DescribePoliciesRequest {
 func (r *DescribePoliciesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小，默认50，取值范围[10, 100](Optional) */
 func (r *DescribePoliciesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param keyword: 关键字(Optional) */
 func (r *DescribePoliciesRequest) SetKeyword(keyword string) {
     r.Keyword = &keyword
 }
-
 /* param queryType: 策略类型：0-全部（默认），1-系统策略，2-自定义策略(Optional) */
 func (r *DescribePoliciesRequest) SetQueryType(queryType int) {
     r.QueryType = &queryType
 }
-
 /* param sort: 排序规则：0-创建时间顺序排序，1-创建时间倒序排序(Optional) */
 func (r *DescribePoliciesRequest) SetSort(sort int) {
     r.Sort = &sort
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

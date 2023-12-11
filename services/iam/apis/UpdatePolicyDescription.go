@@ -93,11 +93,11 @@ func NewUpdatePolicyDescriptionRequestWithoutParam() *UpdatePolicyDescriptionReq
 func (r *UpdatePolicyDescriptionRequest) SetPolicyName(policyName string) {
     r.PolicyName = policyName
 }
-
 /* param updatePolicyDescriptionInfo: 策略描述信息(Required) */
 func (r *UpdatePolicyDescriptionRequest) SetUpdatePolicyDescriptionInfo(updatePolicyDescriptionInfo *iam.UpdatePolicyDescriptionInfo) {
     r.UpdatePolicyDescriptionInfo = updatePolicyDescriptionInfo
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -96,16 +96,15 @@ func NewDescribeGroupSubUsersRequestWithoutParam() *DescribeGroupSubUsersRequest
 func (r *DescribeGroupSubUsersRequest) SetGroupName(groupName string) {
     r.GroupName = groupName
 }
-
 /* param pageNumber: 页码，默认1(Optional) */
 func (r *DescribeGroupSubUsersRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小，默认50，取值范围[10, 100](Optional) */
 func (r *DescribeGroupSubUsersRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

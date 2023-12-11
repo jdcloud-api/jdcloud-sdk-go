@@ -36,6 +36,21 @@ type DescribeSubUsersRequest struct {
 
     /* 排序规则：0-创建时间顺序排序，1-创建时间倒序排序 (Optional) */
     Sort *int `json:"sort"`
+
+    /* 手机号，和keyword互斥，不要都传 (Optional) */
+    Phone *string `json:"phone"`
+
+    /* 邮箱，和keyword互斥，不要都传 (Optional) */
+    Email *string `json:"email"`
+
+    /* 用户姓名，和keyword互斥，不要都传 (Optional) */
+    Description *string `json:"description"`
+
+    /* 子用户别名 (Optional) */
+    NickName *string `json:"nickName"`
+
+    /* 子用户姓名 (Optional) */
+    Name *string `json:"name"`
 }
 
 /*
@@ -60,12 +75,22 @@ func NewDescribeSubUsersRequest(
  * param pageSize: 分页大小，默认50，取值范围[10, 100] (Optional)
  * param keyword: 关键字 (Optional)
  * param sort: 排序规则：0-创建时间顺序排序，1-创建时间倒序排序 (Optional)
+ * param phone: 手机号，和keyword互斥，不要都传 (Optional)
+ * param email: 邮箱，和keyword互斥，不要都传 (Optional)
+ * param description: 用户姓名，和keyword互斥，不要都传 (Optional)
+ * param nickName: 子用户别名 (Optional)
+ * param name: 子用户姓名 (Optional)
  */
 func NewDescribeSubUsersRequestWithAllParams(
     pageNumber *int,
     pageSize *int,
     keyword *string,
     sort *int,
+    phone *string,
+    email *string,
+    description *string,
+    nickName *string,
+    name *string,
 ) *DescribeSubUsersRequest {
 
     return &DescribeSubUsersRequest{
@@ -79,6 +104,11 @@ func NewDescribeSubUsersRequestWithAllParams(
         PageSize: pageSize,
         Keyword: keyword,
         Sort: sort,
+        Phone: phone,
+        Email: email,
+        Description: description,
+        NickName: nickName,
+        Name: name,
     }
 }
 
@@ -99,21 +129,39 @@ func NewDescribeSubUsersRequestWithoutParam() *DescribeSubUsersRequest {
 func (r *DescribeSubUsersRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小，默认50，取值范围[10, 100](Optional) */
 func (r *DescribeSubUsersRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param keyword: 关键字(Optional) */
 func (r *DescribeSubUsersRequest) SetKeyword(keyword string) {
     r.Keyword = &keyword
 }
-
 /* param sort: 排序规则：0-创建时间顺序排序，1-创建时间倒序排序(Optional) */
 func (r *DescribeSubUsersRequest) SetSort(sort int) {
     r.Sort = &sort
 }
+/* param phone: 手机号，和keyword互斥，不要都传(Optional) */
+func (r *DescribeSubUsersRequest) SetPhone(phone string) {
+    r.Phone = &phone
+}
+/* param email: 邮箱，和keyword互斥，不要都传(Optional) */
+func (r *DescribeSubUsersRequest) SetEmail(email string) {
+    r.Email = &email
+}
+/* param description: 用户姓名，和keyword互斥，不要都传(Optional) */
+func (r *DescribeSubUsersRequest) SetDescription(description string) {
+    r.Description = &description
+}
+/* param nickName: 子用户别名(Optional) */
+func (r *DescribeSubUsersRequest) SetNickName(nickName string) {
+    r.NickName = &nickName
+}
+/* param name: 子用户姓名(Optional) */
+func (r *DescribeSubUsersRequest) SetName(name string) {
+    r.Name = &name
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -19,7 +19,7 @@ package models
 
 type AzSaleStatusVo struct {
 
-    /* null (Optional) */
+    /*  (Optional) */
     Az string `json:"az"`
 
     /* 是否售罄 (0未售罄 1售罄) (Optional) */
@@ -27,4 +27,7 @@ type AzSaleStatusVo struct {
 
     /* 是否可见(1可见 0不可见) (Optional) */
     Visible int `json:"visible"`
+
+    /* 可用区类别:AZ-center EZ-edge (Optional) */
+    ZoneType string `json:"zoneType"`
 }

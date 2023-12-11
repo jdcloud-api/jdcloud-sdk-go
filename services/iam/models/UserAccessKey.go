@@ -28,9 +28,21 @@ type UserAccessKey struct {
     /* 创建时间 (Optional) */
     CreateTime string `json:"createTime"`
 
+    /* 修改时间 (Optional) */
+    Modified string `json:"modified"`
+
+    /* 最近一次使用AK访问时间 (Optional) */
+    LastVisitTime string `json:"lastVisitTime"`
+
+    /* 最近一次使用AK访问事件 (Optional) */
+    LastVisitEvent string `json:"lastVisitEvent"`
+
     /* 禁用/启用状态[0-禁用,1-启用] (Optional) */
     State int `json:"state"`
 
     /* 删除/有效状态[0-删除,1-有效] (Optional) */
     Yn int `json:"yn"`
+
+    /* AK备注信息 (Optional) */
+    Remark string `json:"remark"`
 }

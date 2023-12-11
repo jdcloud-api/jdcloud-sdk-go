@@ -40,7 +40,7 @@ func NewIamClient(credential *core.Credential) *IamClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "iam",
-            Revision:    "0.2.1",
+            Revision:    "0.3.6",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -53,24 +53,8 @@ func (c *IamClient) SetLogger(logger core.Logger) {
     c.Logger = logger
 }
 
-/* 查询子用户策略列表 */
-func (c *IamClient) DescribeSubUserPermissions(request *iam.DescribeSubUserPermissionsRequest) (*iam.DescribeSubUserPermissionsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &iam.DescribeSubUserPermissionsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
+func (c *IamClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
 }
 
 /* 删除子用户信息 */
@@ -84,46 +68,6 @@ func (c *IamClient) DeleteSubUser(request *iam.DeleteSubUserRequest) (*iam.Delet
     }
 
     jdResp := &iam.DeleteSubUserResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 修改策略 */
-func (c *IamClient) UpdatePermission(request *iam.UpdatePermissionRequest) (*iam.UpdatePermissionResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &iam.UpdatePermissionResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 为子用户绑定策略 */
-func (c *IamClient) AttachSubUserPolicy(request *iam.AttachSubUserPolicyRequest) (*iam.AttachSubUserPolicyResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &iam.AttachSubUserPolicyResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -153,26 +97,6 @@ func (c *IamClient) DescribeGroups(request *iam.DescribeGroupsRequest) (*iam.Des
     return jdResp, err
 }
 
-/* 查询子用户列表 */
-func (c *IamClient) DescribeSubUsers(request *iam.DescribeSubUsersRequest) (*iam.DescribeSubUsersResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &iam.DescribeSubUsersResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 列举用户组的策略 */
 func (c *IamClient) DescribeAttachedGroupPolicies(request *iam.DescribeAttachedGroupPoliciesRequest) (*iam.DescribeAttachedGroupPoliciesResponse, error) {
     if request == nil {
@@ -193,7 +117,9 @@ func (c *IamClient) DescribeAttachedGroupPolicies(request *iam.DescribeAttachedG
     return jdResp, err
 }
 
-/* 创建子用户 */
+/* 创建子用户, <br>
+请访问<a href="https://docs.jdcloud.com/cn/iam/subuser-management">子用户管理</a>了解更多 <br>
+ */
 func (c *IamClient) CreateSubUser(request *iam.CreateSubUserRequest) (*iam.CreateSubUserResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -233,26 +159,6 @@ func (c *IamClient) DeletePolicy(request *iam.DeletePolicyRequest) (*iam.DeleteP
     return jdResp, err
 }
 
-/* 禁用子用户的AccessKey */
-func (c *IamClient) DisableSubUserAccessKey(request *iam.DisableSubUserAccessKeyRequest) (*iam.DisableSubUserAccessKeyResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &iam.DisableSubUserAccessKeyResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 为角色绑定策略 */
 func (c *IamClient) DetachRolePolicy(request *iam.DetachRolePolicyRequest) (*iam.DetachRolePolicyResponse, error) {
     if request == nil {
@@ -273,8 +179,8 @@ func (c *IamClient) DetachRolePolicy(request *iam.DetachRolePolicyRequest) (*iam
     return jdResp, err
 }
 
-/* 查询策略列表 */
-func (c *IamClient) DescribePolicies(request *iam.DescribePoliciesRequest) (*iam.DescribePoliciesResponse, error) {
+/* 根据AccessKey或者AccountId获取用户Pin */
+func (c *IamClient) DescribeUserPin(request *iam.DescribeUserPinRequest) (*iam.DescribeUserPinResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -283,7 +189,7 @@ func (c *IamClient) DescribePolicies(request *iam.DescribePoliciesRequest) (*iam
         return nil, err
     }
 
-    jdResp := &iam.DescribePoliciesResponse{}
+    jdResp := &iam.DescribeUserPinResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -313,46 +219,6 @@ func (c *IamClient) DescribeSubUserGroups(request *iam.DescribeSubUserGroupsRequ
     return jdResp, err
 }
 
-/* 查询策略列表 */
-func (c *IamClient) DescribePermissions(request *iam.DescribePermissionsRequest) (*iam.DescribePermissionsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &iam.DescribePermissionsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 创建策略 */
-func (c *IamClient) CreatePolicy(request *iam.CreatePolicyRequest) (*iam.CreatePolicyResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &iam.CreatePolicyResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 查询用户组详情 */
 func (c *IamClient) DescribeGroup(request *iam.DescribeGroupRequest) (*iam.DescribeGroupResponse, error) {
     if request == nil {
@@ -364,6 +230,26 @@ func (c *IamClient) DescribeGroup(request *iam.DescribeGroupRequest) (*iam.Descr
     }
 
     jdResp := &iam.DescribeGroupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询角色授权策略列表 */
+func (c *IamClient) DescribeRolePoliciesScope(request *iam.DescribeRolePoliciesScopeRequest) (*iam.DescribeRolePoliciesScopeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.DescribeRolePoliciesScopeResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -413,47 +299,8 @@ func (c *IamClient) UpdatePolicyDescription(request *iam.UpdatePolicyDescription
     return jdResp, err
 }
 
-/* 查询角色授权策略列表 */
-func (c *IamClient) DescribeRolePolicies(request *iam.DescribeRolePoliciesRequest) (*iam.DescribeRolePoliciesResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &iam.DescribeRolePoliciesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 删除AccessKey */
-func (c *IamClient) DeleteUserAccessKey(request *iam.DeleteUserAccessKeyRequest) (*iam.DeleteUserAccessKeyResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &iam.DeleteUserAccessKeyResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 启用主账号AccessKey */
+/* 启用主账号AccessKey, <br> 启用后accessKey的状态变成 1 <b>启用</b>
+ */
 func (c *IamClient) EnabledUserAccessKey(request *iam.EnabledUserAccessKeyRequest) (*iam.EnabledUserAccessKeyResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -464,26 +311,6 @@ func (c *IamClient) EnabledUserAccessKey(request *iam.EnabledUserAccessKeyReques
     }
 
     jdResp := &iam.EnabledUserAccessKeyResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 为子用户解绑策略 */
-func (c *IamClient) DetachSubUserPolicy(request *iam.DetachSubUserPolicyRequest) (*iam.DetachSubUserPolicyResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &iam.DetachSubUserPolicyResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -513,6 +340,46 @@ func (c *IamClient) UpdateGroup(request *iam.UpdateGroupRequest) (*iam.UpdateGro
     return jdResp, err
 }
 
+/* 解绑虚拟MFA设备 */
+func (c *IamClient) UnbindMFADevice(request *iam.UnbindMFADeviceRequest) (*iam.UnbindMFADeviceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.UnbindMFADeviceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 列举用户组的策略的资源组列表 */
+func (c *IamClient) DescribeAttachedGroupPoliciesScope(request *iam.DescribeAttachedGroupPoliciesScopeRequest) (*iam.DescribeAttachedGroupPoliciesScopeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.DescribeAttachedGroupPoliciesScopeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 为子用户解绑策略 */
 func (c *IamClient) RemovePermissionOfSubUser(request *iam.RemovePermissionOfSubUserRequest) (*iam.RemovePermissionOfSubUserResponse, error) {
     if request == nil {
@@ -533,7 +400,541 @@ func (c *IamClient) RemovePermissionOfSubUser(request *iam.RemovePermissionOfSub
     return jdResp, err
 }
 
-/* 查询主账号AccessKey列表 */
+/* 查询子用户绑定的策略列表 */
+func (c *IamClient) DescribeAttachedSubUserPolicies(request *iam.DescribeAttachedSubUserPoliciesRequest) (*iam.DescribeAttachedSubUserPoliciesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.DescribeAttachedSubUserPoliciesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 初始化虚拟MFA设备 */
+func (c *IamClient) CreateVirtualMFADevice(request *iam.CreateVirtualMFADeviceRequest) (*iam.CreateVirtualMFADeviceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.CreateVirtualMFADeviceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改权限策略 */
+func (c *IamClient) UpdatePolicy(request *iam.UpdatePolicyRequest) (*iam.UpdatePolicyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.UpdatePolicyResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 添加子用户到用户组中 */
+func (c *IamClient) AddSubUserToGroup(request *iam.AddSubUserToGroupRequest) (*iam.AddSubUserToGroupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.AddSubUserToGroupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建用户组, <br>
+可访问<a href="https://docs.jdcloud.com/cn/iam/group-management">用户组管理</a>了解更多<br>
+ */
+func (c *IamClient) CreateGroup(request *iam.CreateGroupRequest) (*iam.CreateGroupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.CreateGroupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建子用户, <br>
+请访问<a href="https://docs.jdcloud.com/cn/iam/subuser-management">子用户管理</a>了解更多 <br>
+ */
+func (c *IamClient) CreateSubUserInner(request *iam.CreateSubUserInnerRequest) (*iam.CreateSubUserInnerResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.CreateSubUserInnerResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询虚拟MFA设备状态 */
+func (c *IamClient) DescribeVirtualMFA(request *iam.DescribeVirtualMFARequest) (*iam.DescribeVirtualMFAResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.DescribeVirtualMFAResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除子用户的AccessKey
+ */
+func (c *IamClient) DeleteSubUserAccessKey(request *iam.DeleteSubUserAccessKeyRequest) (*iam.DeleteSubUserAccessKeyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.DeleteSubUserAccessKeyResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 为角色绑定策略 */
+func (c *IamClient) AttachRolePolicy(request *iam.AttachRolePolicyRequest) (*iam.AttachRolePolicyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.AttachRolePolicyResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 禁用主账号AccessKey, <br> 禁用后accessKey的状态变成 0 <b>禁用</b>
+ */
+func (c *IamClient) DisabledUserAccessKey(request *iam.DisabledUserAccessKeyRequest) (*iam.DisabledUserAccessKeyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.DisabledUserAccessKeyResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建角色 <br>
+关于角色的详细介绍，请请参考 <a href="https://docs.jdcloud.com/cn/iam/role-overview">角色概览</a> <br>
+ */
+func (c *IamClient) CreateRole(request *iam.CreateRoleRequest) (*iam.CreateRoleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.CreateRoleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 新建组织用户关联关系 */
+func (c *IamClient) AddOrganizationUserRelation(request *iam.AddOrganizationUserRelationRequest) (*iam.AddOrganizationUserRelationResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.AddOrganizationUserRelationResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询子用户策略列表 */
+func (c *IamClient) DescribeSubUserPermissions(request *iam.DescribeSubUserPermissionsRequest) (*iam.DescribeSubUserPermissionsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.DescribeSubUserPermissionsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改策略 */
+func (c *IamClient) UpdatePermission(request *iam.UpdatePermissionRequest) (*iam.UpdatePermissionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.UpdatePermissionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 为子用户绑定策略 */
+func (c *IamClient) AttachSubUserPolicy(request *iam.AttachSubUserPolicyRequest) (*iam.AttachSubUserPolicyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.AttachSubUserPolicyResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询子用户列表 */
+func (c *IamClient) DescribeSubUsers(request *iam.DescribeSubUsersRequest) (*iam.DescribeSubUsersResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.DescribeSubUsersResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 禁用子用户的AccessKey <br>, 禁用后accessKey 的状态变成 0 <b>禁用</b>
+ */
+func (c *IamClient) DisableSubUserAccessKey(request *iam.DisableSubUserAccessKeyRequest) (*iam.DisableSubUserAccessKeyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.DisableSubUserAccessKeyResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询策略列表 */
+func (c *IamClient) DescribePolicies(request *iam.DescribePoliciesRequest) (*iam.DescribePoliciesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.DescribePoliciesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 绑定虚拟MFA设备（一组动态密码） */
+func (c *IamClient) BindMFADeviceByOneCode(request *iam.BindMFADeviceByOneCodeRequest) (*iam.BindMFADeviceByOneCodeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.BindMFADeviceByOneCodeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询策略列表 */
+func (c *IamClient) DescribePermissions(request *iam.DescribePermissionsRequest) (*iam.DescribePermissionsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.DescribePermissionsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建策略, <br>
+访问 <a href="https://docs.jdcloud.com/cn/iam/policy-overview">策略管理</a> 了解更多内容 <br>
+ */
+func (c *IamClient) CreatePolicy(request *iam.CreatePolicyRequest) (*iam.CreatePolicyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.CreatePolicyResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 绑定虚拟MFA设备 */
+func (c *IamClient) BindMFADevice(request *iam.BindMFADeviceRequest) (*iam.BindMFADeviceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.BindMFADeviceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询角色授权策略列表 */
+func (c *IamClient) DescribeRolePolicies(request *iam.DescribeRolePoliciesRequest) (*iam.DescribeRolePoliciesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.DescribeRolePoliciesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询子用户绑定的策略对应资源组列表 */
+func (c *IamClient) DescribeAttachedSubUserPoliciesScope(request *iam.DescribeAttachedSubUserPoliciesScopeRequest) (*iam.DescribeAttachedSubUserPoliciesScopeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.DescribeAttachedSubUserPoliciesScopeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除主账号AccessKey, <br>
+ */
+func (c *IamClient) DeleteUserAccessKey(request *iam.DeleteUserAccessKeyRequest) (*iam.DeleteUserAccessKeyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.DeleteUserAccessKeyResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 为子用户解绑策略 */
+func (c *IamClient) DetachSubUserPolicy(request *iam.DetachSubUserPolicyRequest) (*iam.DetachSubUserPolicyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.DetachSubUserPolicyResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询主账号AccessKey列表 <br>
+关于AccessKey的介绍和使用，请参考 <a href="https://docs.jdcloud.com/cn/account-management/accesskey-management">Accesskey管理</a> <br>
+ */
 func (c *IamClient) DescribeUserAccessKeys(request *iam.DescribeUserAccessKeysRequest) (*iam.DescribeUserAccessKeysResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -573,26 +974,6 @@ func (c *IamClient) AttachGroupPolicy(request *iam.AttachGroupPolicyRequest) (*i
     return jdResp, err
 }
 
-/* 查询子用户绑定的策略列表 */
-func (c *IamClient) DescribeAttachedSubUserPolicies(request *iam.DescribeAttachedSubUserPoliciesRequest) (*iam.DescribeAttachedSubUserPoliciesResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &iam.DescribeAttachedSubUserPoliciesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 修改子用户信息 */
 func (c *IamClient) UpdateSubUser(request *iam.UpdateSubUserRequest) (*iam.UpdateSubUserResponse, error) {
     if request == nil {
@@ -604,6 +985,26 @@ func (c *IamClient) UpdateSubUser(request *iam.UpdateSubUserRequest) (*iam.Updat
     }
 
     jdResp := &iam.UpdateSubUserResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 复制角色 */
+func (c *IamClient) CopyRole(request *iam.CopyRoleRequest) (*iam.CopyRoleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.CopyRoleResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -633,7 +1034,9 @@ func (c *IamClient) DescribeGroupSubUsers(request *iam.DescribeGroupSubUsersRequ
     return jdResp, err
 }
 
-/* 创建策略 */
+/* 创建策略 <br>
+关于策略的详细介绍，可以查询<a href="https://docs.jdcloud.com/cn/iam/policy-overview">策略概览</a> <br>
+ */
 func (c *IamClient) CreatePermission(request *iam.CreatePermissionRequest) (*iam.CreatePermissionResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -693,26 +1096,6 @@ func (c *IamClient) DescribeRole(request *iam.DescribeRoleRequest) (*iam.Describ
     return jdResp, err
 }
 
-/* 添加子用户到用户组中 */
-func (c *IamClient) AddSubUserToGroup(request *iam.AddSubUserToGroupRequest) (*iam.AddSubUserToGroupResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &iam.AddSubUserToGroupResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 修改角色内置policy */
 func (c *IamClient) UpdateAssumeRolePolicy(request *iam.UpdateAssumeRolePolicyRequest) (*iam.UpdateAssumeRolePolicyResponse, error) {
     if request == nil {
@@ -744,26 +1127,6 @@ func (c *IamClient) DescribeRoles(request *iam.DescribeRolesRequest) (*iam.Descr
     }
 
     jdResp := &iam.DescribeRolesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 创建用户组 */
-func (c *IamClient) CreateGroup(request *iam.CreateGroupRequest) (*iam.CreateGroupResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &iam.CreateGroupResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -853,67 +1216,8 @@ func (c *IamClient) DescribePolicy(request *iam.DescribePolicyRequest) (*iam.Des
     return jdResp, err
 }
 
-/* 删除子用户的AccessKey */
-func (c *IamClient) DeleteSubUserAccessKey(request *iam.DeleteSubUserAccessKeyRequest) (*iam.DeleteSubUserAccessKeyResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &iam.DeleteSubUserAccessKeyResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 为角色绑定策略 */
-func (c *IamClient) AttachRolePolicy(request *iam.AttachRolePolicyRequest) (*iam.AttachRolePolicyResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &iam.AttachRolePolicyResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 禁用主账号AccessKey */
-func (c *IamClient) DisabledUserAccessKey(request *iam.DisabledUserAccessKeyRequest) (*iam.DisabledUserAccessKeyResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &iam.DisabledUserAccessKeyResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 创建主账号AccessKey */
+/* 创建主账号AccessKey, <br> 最多可创建5个
+ */
 func (c *IamClient) CreateUserAccessKey(request *iam.CreateUserAccessKeyRequest) (*iam.CreateUserAccessKeyResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -953,7 +1257,8 @@ func (c *IamClient) RemoveSubUserFromGroup(request *iam.RemoveSubUserFromGroupRe
     return jdResp, err
 }
 
-/* 启用子用户AccessKey */
+/* 启用子用户AccessKey <br>, 启用后accessKey 的状态变成 1 <b>启用</b>
+ */
 func (c *IamClient) EnableSubUserAccessKey(request *iam.EnableSubUserAccessKeyRequest) (*iam.EnableSubUserAccessKeyResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -964,26 +1269,6 @@ func (c *IamClient) EnableSubUserAccessKey(request *iam.EnableSubUserAccessKeyRe
     }
 
     jdResp := &iam.EnableSubUserAccessKeyResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 创建角色 */
-func (c *IamClient) CreateRole(request *iam.CreateRoleRequest) (*iam.CreateRoleResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &iam.CreateRoleResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

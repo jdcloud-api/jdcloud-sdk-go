@@ -111,21 +111,19 @@ func NewDescribeSubUserPermissionsRequestWithoutParam() *DescribeSubUserPermissi
 func (r *DescribeSubUserPermissionsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param subUser: 子用户用户名(Required) */
 func (r *DescribeSubUserPermissionsRequest) SetSubUser(subUser string) {
     r.SubUser = subUser
 }
-
 /* param pageNumber: 页码(Required) */
 func (r *DescribeSubUserPermissionsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = pageNumber
 }
-
 /* param pageSize: 每页显示数目(Required) */
 func (r *DescribeSubUserPermissionsRequest) SetPageSize(pageSize int) {
     r.PageSize = pageSize
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -34,7 +34,7 @@ type PasswordPolicy struct {
     /* 1小时内使用错误密码最多(1~16)次  */
     RetryTimes int `json:"retryTimes"`
 
-    /*   */
+    /* 登录有效期（分钟），15~720  */
     ValidLoginDuration int `json:"validLoginDuration"`
 
     /* 密码字符类型，至少包含一种  */

@@ -99,21 +99,19 @@ func NewDescribeGroupsRequestWithoutParam() *DescribeGroupsRequest {
 func (r *DescribeGroupsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小，默认50，取值范围[10, 100](Optional) */
 func (r *DescribeGroupsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param keyword: 关键字(Optional) */
 func (r *DescribeGroupsRequest) SetKeyword(keyword string) {
     r.Keyword = &keyword
 }
-
 /* param sort: 排序规则：0-创建时间顺序排序，1-创建时间倒序排序(Optional) */
 func (r *DescribeGroupsRequest) SetSort(sort int) {
     r.Sort = &sort
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

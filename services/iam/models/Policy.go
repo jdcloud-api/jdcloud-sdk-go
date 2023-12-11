@@ -32,17 +32,20 @@ type Policy struct {
     Description string `json:"description"`
 
     /* 策略类型：0-系统策略，1-用户策略 (Optional) */
-    PolicyType string `json:"policyType"`
+    PolicyType int `json:"policyType"`
 
     /* 策略版本号 (Optional) */
     Version string `json:"version"`
 
-    /* 默认策略文档版本 (Optional) */
-    DefaultEdition int `json:"defaultEdition"`
+    /* 当前默认策略文档版本 (Optional) */
+    CurrentDefaultEdition string `json:"currentDefaultEdition"`
 
     /* 策略创建时间 (Optional) */
     CreateTime string `json:"createTime"`
 
     /* 策略更新时间 (Optional) */
     UpdateTime string `json:"updateTime"`
+
+    /* 授权范围类型：1-全部资源，2-指定资源 (Optional) */
+    ScopeType int `json:"scopeType"`
 }

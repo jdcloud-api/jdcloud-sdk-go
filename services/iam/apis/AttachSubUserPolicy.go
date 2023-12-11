@@ -29,6 +29,12 @@ type AttachSubUserPolicyRequest struct {
 
     /* 策略名称  */
     PolicyName string `json:"policyName"`
+
+    /* 资源组id (Optional) */
+    ScopeId *string `json:"scopeId"`
+
+    /* 允许添加策略绑定："Deny" 不允许，Allow 允许，空情况默认允许，兼容历史数据 (Optional) */
+    AllowAddPolicy *string `json:"allowAddPolicy"`
 }
 
 /*
@@ -57,10 +63,14 @@ func NewAttachSubUserPolicyRequest(
 /*
  * param subUser: 子用户名 (Required)
  * param policyName: 策略名称 (Required)
+ * param scopeId: 资源组id (Optional)
+ * param allowAddPolicy: 允许添加策略绑定："Deny" 不允许，Allow 允许，空情况默认允许，兼容历史数据 (Optional)
  */
 func NewAttachSubUserPolicyRequestWithAllParams(
     subUser string,
     policyName string,
+    scopeId *string,
+    allowAddPolicy *string,
 ) *AttachSubUserPolicyRequest {
 
     return &AttachSubUserPolicyRequest{
@@ -72,6 +82,8 @@ func NewAttachSubUserPolicyRequestWithAllParams(
         },
         SubUser: subUser,
         PolicyName: policyName,
+        ScopeId: scopeId,
+        AllowAddPolicy: allowAddPolicy,
     }
 }
 
@@ -92,11 +104,19 @@ func NewAttachSubUserPolicyRequestWithoutParam() *AttachSubUserPolicyRequest {
 func (r *AttachSubUserPolicyRequest) SetSubUser(subUser string) {
     r.SubUser = subUser
 }
-
 /* param policyName: 策略名称(Required) */
 func (r *AttachSubUserPolicyRequest) SetPolicyName(policyName string) {
     r.PolicyName = policyName
 }
+/* param scopeId: 资源组id(Optional) */
+func (r *AttachSubUserPolicyRequest) SetScopeId(scopeId string) {
+    r.ScopeId = &scopeId
+}
+/* param allowAddPolicy: 允许添加策略绑定："Deny" 不允许，Allow 允许，空情况默认允许，兼容历史数据(Optional) */
+func (r *AttachSubUserPolicyRequest) SetAllowAddPolicy(allowAddPolicy string) {
+    r.AllowAddPolicy = &allowAddPolicy
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

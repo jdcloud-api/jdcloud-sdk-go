@@ -102,16 +102,15 @@ func NewAddPermissionsToSubUserRequestWithoutParam() *AddPermissionsToSubUserReq
 func (r *AddPermissionsToSubUserRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param subUser: 子用户用户名(Required) */
 func (r *AddPermissionsToSubUserRequest) SetSubUser(subUser string) {
     r.SubUser = subUser
 }
-
 /* param addPermissionsInfo: 权限信息(Required) */
 func (r *AddPermissionsToSubUserRequest) SetAddPermissionsInfo(addPermissionsInfo *iam.AddPermissionsInfo) {
     r.AddPermissionsInfo = addPermissionsInfo
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -85,6 +85,7 @@ func (r *CreatePolicyRequest) SetCreatePolicyInfo(createPolicyInfo *iam.CreatePo
     r.CreatePolicyInfo = createPolicyInfo
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r CreatePolicyRequest) GetRegionId() string {

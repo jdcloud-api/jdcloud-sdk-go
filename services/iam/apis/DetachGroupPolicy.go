@@ -29,6 +29,12 @@ type DetachGroupPolicyRequest struct {
 
     /* 策略名称  */
     PolicyName string `json:"policyName"`
+
+    /* 资源组id (Optional) */
+    ScopeId *string `json:"scopeId"`
+
+    /* 允许解除策略："Deny" 不允许，Allow 允许，空情况默认允许，兼容历史数据 (Optional) */
+    AllowDetachAddPolicy *string `json:"allowDetachAddPolicy"`
 }
 
 /*
@@ -57,10 +63,14 @@ func NewDetachGroupPolicyRequest(
 /*
  * param groupName: 用户组名称 (Required)
  * param policyName: 策略名称 (Required)
+ * param scopeId: 资源组id (Optional)
+ * param allowDetachAddPolicy: 允许解除策略："Deny" 不允许，Allow 允许，空情况默认允许，兼容历史数据 (Optional)
  */
 func NewDetachGroupPolicyRequestWithAllParams(
     groupName string,
     policyName string,
+    scopeId *string,
+    allowDetachAddPolicy *string,
 ) *DetachGroupPolicyRequest {
 
     return &DetachGroupPolicyRequest{
@@ -72,6 +82,8 @@ func NewDetachGroupPolicyRequestWithAllParams(
         },
         GroupName: groupName,
         PolicyName: policyName,
+        ScopeId: scopeId,
+        AllowDetachAddPolicy: allowDetachAddPolicy,
     }
 }
 
@@ -92,11 +104,19 @@ func NewDetachGroupPolicyRequestWithoutParam() *DetachGroupPolicyRequest {
 func (r *DetachGroupPolicyRequest) SetGroupName(groupName string) {
     r.GroupName = groupName
 }
-
 /* param policyName: 策略名称(Required) */
 func (r *DetachGroupPolicyRequest) SetPolicyName(policyName string) {
     r.PolicyName = policyName
 }
+/* param scopeId: 资源组id(Optional) */
+func (r *DetachGroupPolicyRequest) SetScopeId(scopeId string) {
+    r.ScopeId = &scopeId
+}
+/* param allowDetachAddPolicy: 允许解除策略："Deny" 不允许，Allow 允许，空情况默认允许，兼容历史数据(Optional) */
+func (r *DetachGroupPolicyRequest) SetAllowDetachAddPolicy(allowDetachAddPolicy string) {
+    r.AllowDetachAddPolicy = &allowDetachAddPolicy
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

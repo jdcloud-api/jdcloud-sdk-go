@@ -111,26 +111,23 @@ func NewDescribeRolePoliciesRequestWithoutParam() *DescribeRolePoliciesRequest {
 func (r *DescribeRolePoliciesRequest) SetRoleName(roleName string) {
     r.RoleName = roleName
 }
-
 /* param pageNumber: 页码(Optional) */
 func (r *DescribeRolePoliciesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 每页显示数目[10~100] 默认50条(Optional) */
 func (r *DescribeRolePoliciesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param keyword: 关键字(Optional) */
 func (r *DescribeRolePoliciesRequest) SetKeyword(keyword string) {
     r.Keyword = &keyword
 }
-
 /* param sort: 排序策略,0-按创建时间顺序排序  1-按创建时间倒序(Required) */
 func (r *DescribeRolePoliciesRequest) SetSort(sort int) {
     r.Sort = sort
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

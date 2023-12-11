@@ -102,16 +102,15 @@ func NewUpdatePermissionRequestWithoutParam() *UpdatePermissionRequest {
 func (r *UpdatePermissionRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param permissionId: 权限id(Required) */
 func (r *UpdatePermissionRequest) SetPermissionId(permissionId int) {
     r.PermissionId = permissionId
 }
-
 /* param updatePermissionInfo: 权限信息(Required) */
 func (r *UpdatePermissionRequest) SetUpdatePermissionInfo(updatePermissionInfo *iam.UpdatePermissionInfo) {
     r.UpdatePermissionInfo = updatePermissionInfo
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

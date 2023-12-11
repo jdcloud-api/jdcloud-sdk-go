@@ -93,11 +93,11 @@ func NewCreatePermissionRequestWithoutParam() *CreatePermissionRequest {
 func (r *CreatePermissionRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param createPermissionInfo: 权限信息(Required) */
 func (r *CreatePermissionRequest) SetCreatePermissionInfo(createPermissionInfo *iam.CreatePermissionInfo) {
     r.CreatePermissionInfo = createPermissionInfo
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

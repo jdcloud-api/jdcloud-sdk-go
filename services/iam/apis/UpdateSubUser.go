@@ -93,11 +93,11 @@ func NewUpdateSubUserRequestWithoutParam() *UpdateSubUserRequest {
 func (r *UpdateSubUserRequest) SetSubUser(subUser string) {
     r.SubUser = subUser
 }
-
 /* param updateSubUserInfo: 子用户信息(Required) */
 func (r *UpdateSubUserRequest) SetUpdateSubUserInfo(updateSubUserInfo *iam.UpdateSubUserInfo) {
     r.UpdateSubUserInfo = updateSubUserInfo
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -22,24 +22,24 @@ type EmailSmsInfo struct {
     /* 用户pin  */
     CreatePin string `json:"createPin"`
 
-    /* 邮件标题 (Optional) */
+    /* 邮件标题，短信不填 (Optional) */
     Title string `json:"title"`
 
     /* 发送类型 1 发邮件 2 发短信  */
     SendType int `json:"sendType"`
 
-    /* 邮件内容 (Optional) */
+    /* 邮件内容，短信不填 (Optional) */
     Content string `json:"content"`
 
     /* 接收人  */
     Receives []string `json:"receives"`
 
-    /* 模版code  */
+    /* 模版code，短信必填，邮件不填  */
     TemplateId int `json:"templateId"`
 
-    /* 模版参数  */
+    /* 模版参数，短信必填，邮件不填  */
     TemplateParam []string `json:"templateParam"`
 
-    /* 业务编码(和产品申请)  */
+    /* 业务编码(和产品申请),短信必填，邮件不填  */
     SmsMessageSource string `json:"smsMessageSource"`
 }
