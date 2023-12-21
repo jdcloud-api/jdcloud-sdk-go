@@ -30,4 +30,7 @@ type AliveUrlInfo struct {
 
     /* token(获取检测结果时需要用到) (Optional) */
     Token string `json:"token"`
+
+    /* 1收费，0不收费 (Optional) */
+    ChargeFlag string `json:"chargeFlag"`
 }

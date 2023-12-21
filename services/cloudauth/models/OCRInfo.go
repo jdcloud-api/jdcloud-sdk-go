@@ -48,4 +48,7 @@ type OCRInfo struct {
 
     /* 到期时间 (Optional) */
     DueTime string `json:"dueTime"`
+
+    /* 1收费，0不收费 (Optional) */
+    ChargeFlag string `json:"chargeFlag"`
 }

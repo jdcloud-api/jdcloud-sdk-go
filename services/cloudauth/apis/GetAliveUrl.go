@@ -122,4 +122,5 @@ type GetAliveUrlResult struct {
     Message string `json:"message"`
     Url string `json:"url"`
     Token string `json:"token"`
+    ChargeFlag string `json:"chargeFlag"`
 }
