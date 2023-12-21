@@ -19,10 +19,10 @@ package models
 
 type AliveResultInfo struct {
 
-    /* 人脸照片 (Optional) */
+    /* 人脸照片base64 (Optional) */
     FaceImage string `json:"faceImage"`
 
-    /* 场景照片 (Optional) */
+    /* 场景照片base64 (Optional) */
     SceneImage string `json:"sceneImage"`
 
     /* H5活体检测结果 (Optional) */

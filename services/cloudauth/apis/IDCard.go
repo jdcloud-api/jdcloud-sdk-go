@@ -133,4 +133,5 @@ type IDCardResult struct {
     Authority string `json:"authority"`
     IssueTime string `json:"issueTime"`
     DueTime string `json:"dueTime"`
+    ChargeFlag string `json:"chargeFlag"`
 }
