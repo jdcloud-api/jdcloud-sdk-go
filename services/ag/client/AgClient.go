@@ -40,7 +40,7 @@ func NewAgClient(credential *core.Credential) *AgClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "ag",
-            Revision:    "0.8.4",
+            Revision:    "0.8.5",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -57,7 +57,7 @@ func (c *AgClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
 }
 
-/* 弹性伸缩组内资源是否托管修改 */
+/* 弹性伸缩组内资源托管设置 */
 func (c *AgClient) ModifyInstancesManaged(request *ag.ModifyInstancesManagedRequest) (*ag.ModifyInstancesManagedResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -88,6 +88,26 @@ func (c *AgClient) UpdateAg(request *ag.UpdateAgRequest) (*ag.UpdateAgResponse, 
     }
 
     jdResp := &ag.UpdateAgResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 弹性伸缩组内资源保护设置 */
+func (c *AgClient) ModifyInstancesProtected(request *ag.ModifyInstancesProtectedRequest) (*ag.ModifyInstancesProtectedResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ag.ModifyInstancesProtectedResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
