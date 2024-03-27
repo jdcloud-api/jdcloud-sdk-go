@@ -36,11 +36,11 @@ type DescribeCommandsRequest struct {
  (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* 命令Id
+    /* 命令Id，最多可传入100个命令Id
  (Optional) */
     CommandIds []string `json:"commandIds"`
 
-    /* 命令名称，长度为1\~128个字符，只允许中文、数字、大小写字母、英文下划线（\_）、连字符（-）及点（.）。
+    /* 命令名称，长度为1\~128个字符，只允许中文、数字、大小写字母、英文下划线（\_）、连字符（-）及点（.）。最多可传入100个命令名称。
  (Optional) */
     CommandNames []string `json:"commandNames"`
 
@@ -83,9 +83,9 @@ func NewDescribeCommandsRequest(
  (Optional)
  * param pageSize: 每页命令数，默认为20，最大为100
  (Optional)
- * param commandIds: 命令Id
+ * param commandIds: 命令Id，最多可传入100个命令Id
  (Optional)
- * param commandNames: 命令名称，长度为1\~128个字符，只允许中文、数字、大小写字母、英文下划线（\_）、连字符（-）及点（.）。
+ * param commandNames: 命令名称，长度为1\~128个字符，只允许中文、数字、大小写字母、英文下划线（\_）、连字符（-）及点（.）。最多可传入100个命令名称。
  (Optional)
  * param commandTypes: 命令类型，可选值：shell和powershell，默认shell
  (Optional)
@@ -150,12 +150,12 @@ func (r *DescribeCommandsRequest) SetPageNumber(pageNumber int) {
 func (r *DescribeCommandsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-/* param commandIds: 命令Id
+/* param commandIds: 命令Id，最多可传入100个命令Id
 (Optional) */
 func (r *DescribeCommandsRequest) SetCommandIds(commandIds []string) {
     r.CommandIds = commandIds
 }
-/* param commandNames: 命令名称，长度为1\~128个字符，只允许中文、数字、大小写字母、英文下划线（\_）、连字符（-）及点（.）。
+/* param commandNames: 命令名称，长度为1\~128个字符，只允许中文、数字、大小写字母、英文下划线（\_）、连字符（-）及点（.）。最多可传入100个命令名称。
 (Optional) */
 func (r *DescribeCommandsRequest) SetCommandNames(commandNames []string) {
     r.CommandNames = commandNames

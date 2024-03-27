@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
     assistant "github.com/jdcloud-api/jdcloud-sdk-go/services/assistant/models"
 )
 
@@ -32,9 +33,17 @@ type InvokeCommandRequest struct {
   */
     CommandId string `json:"commandId"`
 
-    /* 运行该命令的云主机，最多云主机数50
-  */
+    /* 运行该命令的云主机，与tags查到云主机取并集，一次最多云主机数50
+ (Optional) */
     Instances []string `json:"instances"`
+
+    /* 根据tags确定运行该命令的云主机，与指定instances云主机取并集，一次最多云主机数50
+ (Optional) */
+    Tags []common.TagFilter `json:"tags"`
+
+    /* 配置运行该命令的时刻，格式`yyyy-MM-dd HH:mm:ss`。不传该参数，立即执行命令。默认为空，可配置的时间范围为`当前时间+10minute`~`当前时间+6month`。
+ (Optional) */
+    ExecTime *string `json:"execTime"`
 
     /* 超时时间，取值范围：[10, 86400], 超过该时间后，尚未执行完的命令会置为失败。默认60s
  (Optional) */
@@ -65,15 +74,12 @@ type InvokeCommandRequest struct {
  * param regionId: 地域ID。 (Required)
  * param commandId: 命令Id
  (Required)
- * param instances: 运行该命令的云主机，最多云主机数50
- (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewInvokeCommandRequest(
     regionId string,
     commandId string,
-    instances []string,
 ) *InvokeCommandRequest {
 
 	return &InvokeCommandRequest{
@@ -85,7 +91,6 @@ func NewInvokeCommandRequest(
 		},
         RegionId: regionId,
         CommandId: commandId,
-        Instances: instances,
 	}
 }
 
@@ -93,8 +98,12 @@ func NewInvokeCommandRequest(
  * param regionId: 地域ID。 (Required)
  * param commandId: 命令Id
  (Required)
- * param instances: 运行该命令的云主机，最多云主机数50
- (Required)
+ * param instances: 运行该命令的云主机，与tags查到云主机取并集，一次最多云主机数50
+ (Optional)
+ * param tags: 根据tags确定运行该命令的云主机，与指定instances云主机取并集，一次最多云主机数50
+ (Optional)
+ * param execTime: 配置运行该命令的时刻，格式`yyyy-MM-dd HH:mm:ss`。不传该参数，立即执行命令。默认为空，可配置的时间范围为`当前时间+10minute`~`当前时间+6month`。
+ (Optional)
  * param timeout: 超时时间，取值范围：[10, 86400], 超过该时间后，尚未执行完的命令会置为失败。默认60s
  (Optional)
  * param username: 用户名，执行该命令时的用户身份。在linux上默认是root，windows上默认是administrator。长度小于256
@@ -112,6 +121,8 @@ func NewInvokeCommandRequestWithAllParams(
     regionId string,
     commandId string,
     instances []string,
+    tags []common.TagFilter,
+    execTime *string,
     timeout *int,
     username *string,
     workdir *string,
@@ -130,6 +141,8 @@ func NewInvokeCommandRequestWithAllParams(
         RegionId: regionId,
         CommandId: commandId,
         Instances: instances,
+        Tags: tags,
+        ExecTime: execTime,
         Timeout: timeout,
         Username: username,
         Workdir: workdir,
@@ -161,10 +174,20 @@ func (r *InvokeCommandRequest) SetRegionId(regionId string) {
 func (r *InvokeCommandRequest) SetCommandId(commandId string) {
     r.CommandId = commandId
 }
-/* param instances: 运行该命令的云主机，最多云主机数50
-(Required) */
+/* param instances: 运行该命令的云主机，与tags查到云主机取并集，一次最多云主机数50
+(Optional) */
 func (r *InvokeCommandRequest) SetInstances(instances []string) {
     r.Instances = instances
+}
+/* param tags: 根据tags确定运行该命令的云主机，与指定instances云主机取并集，一次最多云主机数50
+(Optional) */
+func (r *InvokeCommandRequest) SetTags(tags []common.TagFilter) {
+    r.Tags = tags
+}
+/* param execTime: 配置运行该命令的时刻，格式`yyyy-MM-dd HH:mm:ss`。不传该参数，立即执行命令。默认为空，可配置的时间范围为`当前时间+10minute`~`当前时间+6month`。
+(Optional) */
+func (r *InvokeCommandRequest) SetExecTime(execTime string) {
+    r.ExecTime = &execTime
 }
 /* param timeout: 超时时间，取值范围：[10, 86400], 超过该时间后，尚未执行完的命令会置为失败。默认60s
 (Optional) */

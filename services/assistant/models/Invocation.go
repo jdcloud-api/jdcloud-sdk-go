@@ -16,10 +16,11 @@
 
 package models
 
+import common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 
 type Invocation struct {
 
-    /* 命令执行状态,取值为：[pending,running,stopping,failed,partial_failed,stopped,finished] (Optional) */
+    /* 命令执行状态,取值为：[`waiting`,`pending`,`running`,`stopping`,`failed`,`partial_failed`,`stopped`,`finish`] (Optional) */
     Status string `json:"status"`
 
     /* 命令Id (Optional) */
@@ -28,8 +29,20 @@ type Invocation struct {
     /* 命令名称 (Optional) */
     CommandName string `json:"commandName"`
 
+    /* 命令来源，[`jdcloud`:公共命令, `self`:私有命令] (Optional) */
+    SourceType string `json:"sourceType"`
+
     /* 命令内容调用Id (Optional) */
     InvokeId string `json:"invokeId"`
+
+    /* 请求执行命令的云主机Id (Optional) */
+    Instances []string `json:"instances"`
+
+    /* 请求执行命令的云主机标签 (Optional) */
+    Tags []common.TagFilter `json:"tags"`
+
+    /* 执行命令的云主机 (Optional) */
+    InvokeInstances []string `json:"invokeInstances"`
 
     /* 命令类型 (Optional) */
     CommandType string `json:"commandType"`
@@ -55,6 +68,12 @@ type Invocation struct {
     /* 命令执行路径 (Optional) */
     Workdir string `json:"workdir"`
 
+    /* 命令调用的错误信息 (Optional) */
+    ErrorInfo string `json:"errorInfo"`
+
     /* 该次命令调用的开始时间 (Optional) */
     CreateTime string `json:"createTime"`
+
+    /* 该次命令配置的定时执行时间 (Optional) */
+    ExecTime string `json:"execTime"`
 }

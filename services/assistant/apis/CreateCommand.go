@@ -35,7 +35,7 @@ type CreateCommandRequest struct {
  (Optional) */
     CommandType *string `json:"commandType"`
 
-    /* 以base64编码的命令内容，编码后长度小于16KB
+    /* 以base64编码的命令内容，编码后长度小于36KB
   */
     CommandContent string `json:"commandContent"`
 
@@ -63,7 +63,7 @@ type CreateCommandRequest struct {
  * param regionId: 地域ID。 (Required)
  * param commandName: 命令名称，长度为1\~128个字符，只允许中文、数字、大小写字母、英文下划线（\_）、连字符（-）及点（.）。
  (Required)
- * param commandContent: 以base64编码的命令内容，编码后长度小于16KB
+ * param commandContent: 以base64编码的命令内容，编码后长度小于36KB
  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -93,7 +93,7 @@ func NewCreateCommandRequest(
  (Required)
  * param commandType: 命令类型，可选值：shell和powershell，默认shell
  (Optional)
- * param commandContent: 以base64编码的命令内容，编码后长度小于16KB
+ * param commandContent: 以base64编码的命令内容，编码后长度小于36KB
  (Required)
  * param timeout: 超时时间，取值范围：[10, 86400], 超过该时间后，尚未执行完的命令会置为失败。默认60s
  (Optional)
@@ -163,7 +163,7 @@ func (r *CreateCommandRequest) SetCommandName(commandName string) {
 func (r *CreateCommandRequest) SetCommandType(commandType string) {
     r.CommandType = &commandType
 }
-/* param commandContent: 以base64编码的命令内容，编码后长度小于16KB
+/* param commandContent: 以base64编码的命令内容，编码后长度小于36KB
 (Required) */
 func (r *CreateCommandRequest) SetCommandContent(commandContent string) {
     r.CommandContent = commandContent
