@@ -40,7 +40,7 @@ func NewAssistantClient(credential *core.Credential) *AssistantClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "assistant",
-            Revision:    "1.0.0",
+            Revision:    "1.0.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -55,141 +55,6 @@ func (c *AssistantClient) SetLogger(logger core.Logger) {
 
 func (c *AssistantClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
-}
-
-/* 
-修改用户自定义命令。
-
-详细操作说明请参考帮助文档：[用户自定义命令概述](https://docs.jdcloud.com/cn/virtual-machines/assistant-overview)
-
-## 接口说明
-- 该接口用于修改用户自定义命令。
- */
-func (c *AssistantClient) ModifyCommand(request *assistant.ModifyCommandRequest) (*assistant.ModifyCommandResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &assistant.ModifyCommandResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 
-查询命令调用。
-
-详细操作说明请参考帮助文档：[用户自定义命令概述](https://docs.jdcloud.com/cn/virtual-machines/assistant-overview)
-
-## 接口说明
-- 该接口用于查询命令调用。
- */
-func (c *AssistantClient) DescribeInvocations(request *assistant.DescribeInvocationsRequest) (*assistant.DescribeInvocationsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &assistant.DescribeInvocationsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 
-删除用户自定义命令。
-
-详细操作说明请参考帮助文档：[用户自定义命令概述](https://docs.jdcloud.com/cn/virtual-machines/assistant-overview)
-
-## 接口说明
-- 该接口用于删除用户自定义命令。
- */
-func (c *AssistantClient) DeleteCommands(request *assistant.DeleteCommandsRequest) (*assistant.DeleteCommandsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &assistant.DeleteCommandsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 
-配置用户日志信息。
-
-详细操作说明请参考帮助文档：[用户自定义命令概述](https://docs.jdcloud.com/cn/virtual-machines/assistant-overview)
-
-## 接口说明
-- 该接口用于配置用户日志信息。
- */
-func (c *AssistantClient) ModifyLogConfig(request *assistant.ModifyLogConfigRequest) (*assistant.ModifyLogConfigResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &assistant.ModifyLogConfigResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 
-查询云助手客户端状态。
-
-详细操作说明请参考帮助文档：[用户自定义命令概述](https://docs.jdcloud.com/cn/virtual-machines/assistant-overview)
-
-## 接口说明
-- 该接口用于查询云助手客户端状态。
- */
-func (c *AssistantClient) DescribeAssistants(request *assistant.DescribeAssistantsRequest) (*assistant.DescribeAssistantsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &assistant.DescribeAssistantsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
 }
 
 /* 
@@ -247,14 +112,14 @@ func (c *AssistantClient) AddLogConfig(request *assistant.AddLogConfigRequest) (
 }
 
 /* 
-执行用户保存的自定义命令。
+查询命令调用。
 
 详细操作说明请参考帮助文档：[用户自定义命令概述](https://docs.jdcloud.com/cn/virtual-machines/assistant-overview)
 
 ## 接口说明
-- 该接口用于执行用户保存的自定义命令。
+- 该接口用于查询命令调用。
  */
-func (c *AssistantClient) RunCommand(request *assistant.RunCommandRequest) (*assistant.RunCommandResponse, error) {
+func (c *AssistantClient) DescribeInvocations(request *assistant.DescribeInvocationsRequest) (*assistant.DescribeInvocationsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -263,35 +128,7 @@ func (c *AssistantClient) RunCommand(request *assistant.RunCommandRequest) (*ass
         return nil, err
     }
 
-    jdResp := &assistant.RunCommandResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 
-停止执行命令。
-
-详细操作说明请参考帮助文档：[用户自定义命令概述](https://docs.jdcloud.com/cn/virtual-machines/assistant-overview)
-
-## 接口说明
-- 该接口用于停止执行命令。
-- 对于已经开始执行的命令，有可能会停止失败
- */
-func (c *AssistantClient) StopInvocation(request *assistant.StopInvocationRequest) (*assistant.StopInvocationResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &assistant.StopInvocationResponse{}
+    jdResp := &assistant.DescribeInvocationsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -319,6 +156,33 @@ func (c *AssistantClient) DescribeCommands(request *assistant.DescribeCommandsRe
     }
 
     jdResp := &assistant.DescribeCommandsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 
+删除用户自定义命令。
+
+详细操作说明请参考帮助文档：[用户自定义命令概述](https://docs.jdcloud.com/cn/virtual-machines/assistant-overview)
+
+## 接口说明
+- 该接口用于删除用户自定义命令。
+ */
+func (c *AssistantClient) DeleteCommands(request *assistant.DeleteCommandsRequest) (*assistant.DeleteCommandsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &assistant.DeleteCommandsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
