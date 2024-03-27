@@ -17,18 +17,20 @@
 package models
 
 
-type CompanyInfo struct {
+type PersonalBankcardOther struct {
 
-    /* 企业类型：
-0: 企业(ET_PE_QiYe)
-1: 个体工商户(ET_SE_GeTiGongShangHu)
-2: 政府机构/事业单位(ET_OU_ZhengFu_ShiYeDanWei)
- (Optional) */
-    CompanyType *int `json:"companyType"`
+    /* 姓名  */
+    Name string `json:"name"`
 
-    /* 企业名称  */
-    CompanyName string `json:"companyName"`
+    /* 证件号码  */
+    IdCard string `json:"idCard"`
 
-    /* 统一社会信用代码或营业执照注册号  */
-    IdCode string `json:"idCode"`
+    /* 银行卡号  */
+    BankCard string `json:"bankCard"`
+
+    /* 手机号 (Optional) */
+    Mobile *string `json:"mobile"`
+
+    /* 证件类型（02护照，03港澳证，04台胞证，05军官证，06警官证，07士兵证，11回乡证，12港澳居民居住证，13台湾居民居住证，X其他证件）  */
+    IdType string `json:"idType"`
 }
