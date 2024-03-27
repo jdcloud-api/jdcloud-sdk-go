@@ -26,26 +26,15 @@ type IDCardRequest struct {
 
     /* 身份证图像base64(支持base64编码后小于4M，分辨率不高于4096x4096的图像)  */
     ImageData string `json:"imageData"`
-
-    /* front：身份证含照片的一面
-back：身份证带国徽的一面
-自动检测身份证正反面，如果传参指定方向与图片相反，支持正常识别，返回参数image_status字段为"reversed_side"
-  */
-    Side string `json:"side"`
 }
 
 /*
  * param imageData: 身份证图像base64(支持base64编码后小于4M，分辨率不高于4096x4096的图像) (Required)
- * param side: front：身份证含照片的一面
-back：身份证带国徽的一面
-自动检测身份证正反面，如果传参指定方向与图片相反，支持正常识别，返回参数image_status字段为"reversed_side"
- (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewIDCardRequest(
     imageData string,
-    side string,
 ) *IDCardRequest {
 
 	return &IDCardRequest{
@@ -56,20 +45,14 @@ func NewIDCardRequest(
 			Version: "v1",
 		},
         ImageData: imageData,
-        Side: side,
 	}
 }
 
 /*
  * param imageData: 身份证图像base64(支持base64编码后小于4M，分辨率不高于4096x4096的图像) (Required)
- * param side: front：身份证含照片的一面
-back：身份证带国徽的一面
-自动检测身份证正反面，如果传参指定方向与图片相反，支持正常识别，返回参数image_status字段为"reversed_side"
- (Required)
  */
 func NewIDCardRequestWithAllParams(
     imageData string,
-    side string,
 ) *IDCardRequest {
 
     return &IDCardRequest{
@@ -80,7 +63,6 @@ func NewIDCardRequestWithAllParams(
             Version: "v1",
         },
         ImageData: imageData,
-        Side: side,
     }
 }
 
@@ -100,13 +82,6 @@ func NewIDCardRequestWithoutParam() *IDCardRequest {
 /* param imageData: 身份证图像base64(支持base64编码后小于4M，分辨率不高于4096x4096的图像)(Required) */
 func (r *IDCardRequest) SetImageData(imageData string) {
     r.ImageData = imageData
-}
-/* param side: front：身份证含照片的一面
-back：身份证带国徽的一面
-自动检测身份证正反面，如果传参指定方向与图片相反，支持正常识别，返回参数image_status字段为"reversed_side"
-(Required) */
-func (r *IDCardRequest) SetSide(side string) {
-    r.Side = side
 }
 
 
