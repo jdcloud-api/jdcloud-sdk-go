@@ -49,9 +49,15 @@ type CreateListenerSpec struct {
     /* 【alb Https和Tls协议】Listener绑定的默认证书，最多支持两个，两个证书的加密算法需要不同 (Optional) */
     CertificateSpecs []CertificateSpec `json:"certificateSpecs"`
 
+    /* 【仅ALB支持】限速配置 (Optional) */
+    Limitation LimitationSpec `json:"limitation"`
+
     /* 【alb、nlb】空闲连接超时时间, 范围为[1,86400]。 <br>（Tcp和Tls协议）默认为：1800s <br>（Udp协议）默认为：300s <br>（Http和Https协议）默认为：60s <br>【dnlb】不支持 (Optional) */
     ConnectionIdleTimeSeconds int `json:"connectionIdleTimeSeconds"`
 
     /* 描述,允许输入UTF-8编码下的全部字符，不超过256字符 (Optional) */
     Description string `json:"description"`
+
+    /* 绑定的安全策略id，仅支持应用负载均衡的HTTPS、TLS监听配置，不传默认使用默认安全策略 (Optional) */
+    SecurityPolicyId string `json:"securityPolicyId"`
 }

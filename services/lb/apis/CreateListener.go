@@ -58,11 +58,17 @@ type CreateListenerRequest struct {
     /* 【alb Https和Tls协议】Listener绑定的默认证书，最多支持两个，两个证书的加密算法需要不同 (Optional) */
     CertificateSpecs []lb.CertificateSpec `json:"certificateSpecs"`
 
+    /* 【仅ALB支持】限速配置 (Optional) */
+    Limitation *lb.LimitationSpec `json:"limitation"`
+
     /* 【alb、nlb】空闲连接超时时间, 范围为[1,86400]。 <br>（Tcp和Tls协议）默认为：1800s <br>（Udp协议）默认为：300s <br>（Http和Https协议）默认为：60s <br>【dnlb】不支持 (Optional) */
     ConnectionIdleTimeSeconds *int `json:"connectionIdleTimeSeconds"`
 
     /* 描述,允许输入UTF-8编码下的全部字符，不超过256字符 (Optional) */
     Description *string `json:"description"`
+
+    /* 绑定的安全策略id，仅支持应用负载均衡的HTTPS、TLS监听配置，不传默认使用默认安全策略 (Optional) */
+    SecurityPolicyId *string `json:"securityPolicyId"`
 }
 
 /*
@@ -112,8 +118,10 @@ func NewCreateListenerRequest(
  * param urlMapId: 【alb Https和Http协议】转发规则组Id (Optional)
  * param action: 默认后端服务的转发策略,取值为Forward或Redirect, 现只支持Forward, 默认为Forward (Optional)
  * param certificateSpecs: 【alb Https和Tls协议】Listener绑定的默认证书，最多支持两个，两个证书的加密算法需要不同 (Optional)
+ * param limitation: 【仅ALB支持】限速配置 (Optional)
  * param connectionIdleTimeSeconds: 【alb、nlb】空闲连接超时时间, 范围为[1,86400]。 <br>（Tcp和Tls协议）默认为：1800s <br>（Udp协议）默认为：300s <br>（Http和Https协议）默认为：60s <br>【dnlb】不支持 (Optional)
  * param description: 描述,允许输入UTF-8编码下的全部字符，不超过256字符 (Optional)
+ * param securityPolicyId: 绑定的安全策略id，仅支持应用负载均衡的HTTPS、TLS监听配置，不传默认使用默认安全策略 (Optional)
  */
 func NewCreateListenerRequestWithAllParams(
     regionId string,
@@ -127,8 +135,10 @@ func NewCreateListenerRequestWithAllParams(
     urlMapId *string,
     action *string,
     certificateSpecs []lb.CertificateSpec,
+    limitation *lb.LimitationSpec,
     connectionIdleTimeSeconds *int,
     description *string,
+    securityPolicyId *string,
 ) *CreateListenerRequest {
 
     return &CreateListenerRequest{
@@ -149,8 +159,10 @@ func NewCreateListenerRequestWithAllParams(
         UrlMapId: urlMapId,
         Action: action,
         CertificateSpecs: certificateSpecs,
+        Limitation: limitation,
         ConnectionIdleTimeSeconds: connectionIdleTimeSeconds,
         Description: description,
+        SecurityPolicyId: securityPolicyId,
     }
 }
 
@@ -171,66 +183,63 @@ func NewCreateListenerRequestWithoutParam() *CreateListenerRequest {
 func (r *CreateListenerRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param listenerName: Listener的名字,只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符(Required) */
 func (r *CreateListenerRequest) SetListenerName(listenerName string) {
     r.ListenerName = listenerName
 }
-
 /* param protocol: 监听协议, 取值为Tcp, Tls, Http, Https, Udp <br>【alb】支持Http, Https，Tcp、Tls和Udp <br>【nlb】支持Tcp, Udp  <br>【dnlb】支持Tcp, Udp(Required) */
 func (r *CreateListenerRequest) SetProtocol(protocol string) {
     r.Protocol = protocol
 }
-
 /* param hstsEnable: 【alb使用https时支持】是否开启HSTS，True(开启)， False(关闭)，缺省为False(Optional) */
 func (r *CreateListenerRequest) SetHstsEnable(hstsEnable bool) {
     r.HstsEnable = &hstsEnable
 }
-
 /* param hstsMaxAge: 【alb使用https时支持】HSTS过期时间(秒)，取值范围为[1, 94608000(3年)]，缺省为31536000(1年)(Optional) */
 func (r *CreateListenerRequest) SetHstsMaxAge(hstsMaxAge int) {
     r.HstsMaxAge = &hstsMaxAge
 }
-
 /* param port: 监听端口，取值范围为[1, 65535](Required) */
 func (r *CreateListenerRequest) SetPort(port int) {
     r.Port = port
 }
-
 /* param backendId: 默认的后端服务Id(Required) */
 func (r *CreateListenerRequest) SetBackendId(backendId string) {
     r.BackendId = backendId
 }
-
 /* param loadBalancerId: Listener所属loadBalancer的Id(Required) */
 func (r *CreateListenerRequest) SetLoadBalancerId(loadBalancerId string) {
     r.LoadBalancerId = loadBalancerId
 }
-
 /* param urlMapId: 【alb Https和Http协议】转发规则组Id(Optional) */
 func (r *CreateListenerRequest) SetUrlMapId(urlMapId string) {
     r.UrlMapId = &urlMapId
 }
-
 /* param action: 默认后端服务的转发策略,取值为Forward或Redirect, 现只支持Forward, 默认为Forward(Optional) */
 func (r *CreateListenerRequest) SetAction(action string) {
     r.Action = &action
 }
-
 /* param certificateSpecs: 【alb Https和Tls协议】Listener绑定的默认证书，最多支持两个，两个证书的加密算法需要不同(Optional) */
 func (r *CreateListenerRequest) SetCertificateSpecs(certificateSpecs []lb.CertificateSpec) {
     r.CertificateSpecs = certificateSpecs
 }
-
+/* param limitation: 【仅ALB支持】限速配置(Optional) */
+func (r *CreateListenerRequest) SetLimitation(limitation *lb.LimitationSpec) {
+    r.Limitation = limitation
+}
 /* param connectionIdleTimeSeconds: 【alb、nlb】空闲连接超时时间, 范围为[1,86400]。 <br>（Tcp和Tls协议）默认为：1800s <br>（Udp协议）默认为：300s <br>（Http和Https协议）默认为：60s <br>【dnlb】不支持(Optional) */
 func (r *CreateListenerRequest) SetConnectionIdleTimeSeconds(connectionIdleTimeSeconds int) {
     r.ConnectionIdleTimeSeconds = &connectionIdleTimeSeconds
 }
-
 /* param description: 描述,允许输入UTF-8编码下的全部字符，不超过256字符(Optional) */
 func (r *CreateListenerRequest) SetDescription(description string) {
     r.Description = &description
 }
+/* param securityPolicyId: 绑定的安全策略id，仅支持应用负载均衡的HTTPS、TLS监听配置，不传默认使用默认安全策略(Optional) */
+func (r *CreateListenerRequest) SetSecurityPolicyId(securityPolicyId string) {
+    r.SecurityPolicyId = &securityPolicyId
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

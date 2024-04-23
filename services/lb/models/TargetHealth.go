@@ -42,4 +42,7 @@ type TargetHealth struct {
 
     /* Target的IP地址。当Target type为vm或container时，表示vm或container的私网IP；当Target type为ip时，表示注册Target时指定的IP地址 (Optional) */
     IpAddress string `json:"ipAddress"`
+
+    /* 健康异常结构 (Optional) */
+    UnhealthReason UnhealthReason `json:"unhealthReason"`
 }

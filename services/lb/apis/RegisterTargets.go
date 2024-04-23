@@ -102,16 +102,15 @@ func NewRegisterTargetsRequestWithoutParam() *RegisterTargetsRequest {
 func (r *RegisterTargetsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param targetGroupId: TargetGroup Id(Required) */
 func (r *RegisterTargetsRequest) SetTargetGroupId(targetGroupId string) {
     r.TargetGroupId = targetGroupId
 }
-
 /* param targetSpecs: 注册Target列表(Required) */
 func (r *RegisterTargetsRequest) SetTargetSpecs(targetSpecs []lb.TargetSpec) {
     r.TargetSpecs = targetSpecs
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

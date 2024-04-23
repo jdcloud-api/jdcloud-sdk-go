@@ -29,6 +29,9 @@ type DeleteLoadBalancerRequest struct {
 
     /* LB ID  */
     LoadBalancerId string `json:"loadBalancerId"`
+
+    /* 是否打包删除弹性公网IP，取值范围：true、false，默认false。true表示删除负载均衡时打包删除其绑定的弹性公网IP；false表示删除负载均衡时不删除其绑定的弹性公网IP。包年包月和无计费信息的弹性公网IP不支持打包删除 (Optional) */
+    DeleteElasticIp *bool `json:"deleteElasticIp"`
 }
 
 /*
@@ -57,10 +60,12 @@ func NewDeleteLoadBalancerRequest(
 /*
  * param regionId: Region ID (Required)
  * param loadBalancerId: LB ID (Required)
+ * param deleteElasticIp: 是否打包删除弹性公网IP，取值范围：true、false，默认false。true表示删除负载均衡时打包删除其绑定的弹性公网IP；false表示删除负载均衡时不删除其绑定的弹性公网IP。包年包月和无计费信息的弹性公网IP不支持打包删除 (Optional)
  */
 func NewDeleteLoadBalancerRequestWithAllParams(
     regionId string,
     loadBalancerId string,
+    deleteElasticIp *bool,
 ) *DeleteLoadBalancerRequest {
 
     return &DeleteLoadBalancerRequest{
@@ -72,6 +77,7 @@ func NewDeleteLoadBalancerRequestWithAllParams(
         },
         RegionId: regionId,
         LoadBalancerId: loadBalancerId,
+        DeleteElasticIp: deleteElasticIp,
     }
 }
 
@@ -92,11 +98,15 @@ func NewDeleteLoadBalancerRequestWithoutParam() *DeleteLoadBalancerRequest {
 func (r *DeleteLoadBalancerRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param loadBalancerId: LB ID(Required) */
 func (r *DeleteLoadBalancerRequest) SetLoadBalancerId(loadBalancerId string) {
     r.LoadBalancerId = loadBalancerId
 }
+/* param deleteElasticIp: 是否打包删除弹性公网IP，取值范围：true、false，默认false。true表示删除负载均衡时打包删除其绑定的弹性公网IP；false表示删除负载均衡时不删除其绑定的弹性公网IP。包年包月和无计费信息的弹性公网IP不支持打包删除(Optional) */
+func (r *DeleteLoadBalancerRequest) SetDeleteElasticIp(deleteElasticIp bool) {
+    r.DeleteElasticIp = &deleteElasticIp
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

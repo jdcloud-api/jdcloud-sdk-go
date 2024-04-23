@@ -101,16 +101,15 @@ func NewAssociateElasticIpRequestWithoutParam() *AssociateElasticIpRequest {
 func (r *AssociateElasticIpRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param loadBalancerId: LB ID(Required) */
 func (r *AssociateElasticIpRequest) SetLoadBalancerId(loadBalancerId string) {
     r.LoadBalancerId = loadBalancerId
 }
-
 /* param elasticIpId: 弹性公网IP ID(Required) */
 func (r *AssociateElasticIpRequest) SetElasticIpId(elasticIpId string) {
     r.ElasticIpId = elasticIpId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

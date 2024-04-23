@@ -93,11 +93,11 @@ func NewDescribeListenerRequestWithoutParam() *DescribeListenerRequest {
 func (r *DescribeListenerRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param listenerId: 监听器ID(Required) */
 func (r *DescribeListenerRequest) SetListenerId(listenerId string) {
     r.ListenerId = listenerId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

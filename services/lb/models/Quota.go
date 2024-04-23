@@ -19,10 +19,10 @@ package models
 
 type Quota struct {
 
-    /* 资源类型，取值范围：loadbalancer、listener、target_group、target、backend、urlMap(仅alb支持)、rules(仅alb支持)、extensionCertificate(仅alb支持) (Optional) */
+    /* 资源类型，取值范围：loadbalancer、listener、target_group、target、backend、urlMap(仅alb支持)、rules(仅alb支持)、extensionCertificate(仅alb支持)、customizedConfiguration、securityPolicy (Optional) */
     Type string `json:"type"`
 
-    /* type为loadbalancer不设置, type为listener、backend、target_group、urlMap设置为loadbalancerId, type为target设置为targetGroupId, type为rules设置为urlMapId，type为extensionCertificate设置为listenerId (Optional) */
+    /* type为loadbalancer、customizedConfiguration、securityPolicy不设置, type为listener、backend、target_group、urlMap设置为loadbalancerId, type为target设置为targetGroupId, type为rules设置为urlMapId，type为extensionCertificate设置为listenerId (Optional) */
     ParentResourceId string `json:"parentResourceId"`
 
     /* 配额大小 (Optional) */

@@ -93,11 +93,11 @@ func NewDescribeTargetGroupRequestWithoutParam() *DescribeTargetGroupRequest {
 func (r *DescribeTargetGroupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param targetGroupId: TargetGroup Id(Required) */
 func (r *DescribeTargetGroupRequest) SetTargetGroupId(targetGroupId string) {
     r.TargetGroupId = targetGroupId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

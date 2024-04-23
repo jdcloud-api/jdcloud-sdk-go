@@ -115,17 +115,14 @@ func NewDescribeBackendsRequestWithoutParam() *DescribeBackendsRequest {
 func (r *DescribeBackendsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param pageNumber: 页码, 默认为1, 取值范围：[1,∞), 页码超过总页数时, 显示最后一页(Optional) */
 func (r *DescribeBackendsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小，默认为20，取值范围：[10,100](Optional) */
 func (r *DescribeBackendsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param filters: backendIds - 后端服务Id列表，支持多个
 backendNames - 后端服务名字列表，支持多个
 loadBalancerId - 负载均衡器Id，支持单个
@@ -136,6 +133,7 @@ protocol - 后端服务的协议【alb】支持Http、Tcp和Udp，【nlb】支�
 func (r *DescribeBackendsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

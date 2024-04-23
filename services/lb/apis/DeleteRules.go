@@ -101,16 +101,15 @@ func NewDeleteRulesRequestWithoutParam() *DeleteRulesRequest {
 func (r *DeleteRulesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param urlMapId: 转发规则组Id(Required) */
 func (r *DeleteRulesRequest) SetUrlMapId(urlMapId string) {
     r.UrlMapId = urlMapId
 }
-
 /* param ruleIds: rule Id列表(Required) */
 func (r *DeleteRulesRequest) SetRuleIds(ruleIds []string) {
     r.RuleIds = ruleIds
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

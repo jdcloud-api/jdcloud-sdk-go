@@ -34,6 +34,9 @@ type UpdateBackendSpec struct {
     /* 高可用组的Id列表，目前只支持一个，且与targetGroupIds不能同时存在 (Optional) */
     AgIds []string `json:"agIds"`
 
+    /* 高可用组属性设置:1.defatult_weight:默认权重, 优先级 agInfoSpec > agIds (Optional) */
+    AgInfoSpec []AgInfoSpec `json:"agInfoSpec"`
+
     /* 【alb Tcp、Udp协议】是否启用Proxy ProtocolV1协议获取真实源ip, 取值为false(不开启)或者true(开启), 默认为false (Optional) */
     ProxyProtocol bool `json:"proxyProtocol"`
 

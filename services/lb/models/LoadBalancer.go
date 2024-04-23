@@ -64,4 +64,7 @@ type LoadBalancer struct {
 
     /* 负载均衡所在可用区类型，取值包括：standard(标准可用区)、edge(边缘可用区) (Optional) */
     AzType string `json:"azType"`
+
+    /* 负载均衡绑定的个性化配置id (Optional) */
+    CustomizedConfigurationId string `json:"customizedConfigurationId"`
 }

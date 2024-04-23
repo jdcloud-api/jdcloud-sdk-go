@@ -101,16 +101,15 @@ func NewDeleteListenerCertificatesRequestWithoutParam() *DeleteListenerCertifica
 func (r *DeleteListenerCertificatesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param listenerId: 监听器ID(Required) */
 func (r *DeleteListenerCertificatesRequest) SetListenerId(listenerId string) {
     r.ListenerId = listenerId
 }
-
 /* param certificateBindIds: 【alb Https和Tls协议】扩展证书绑定Id(Required) */
 func (r *DeleteListenerCertificatesRequest) SetCertificateBindIds(certificateBindIds []string) {
     r.CertificateBindIds = certificateBindIds
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -102,16 +102,15 @@ func NewUpdateTargetsRequestWithoutParam() *UpdateTargetsRequest {
 func (r *UpdateTargetsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param targetGroupId: TargetGroup Id(Required) */
 func (r *UpdateTargetsRequest) SetTargetGroupId(targetGroupId string) {
     r.TargetGroupId = targetGroupId
 }
-
 /* param targetUpdateSpecs: 修改target信息(Required) */
 func (r *UpdateTargetsRequest) SetTargetUpdateSpecs(targetUpdateSpecs []lb.TargetUpdateSpec) {
     r.TargetUpdateSpecs = targetUpdateSpecs
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

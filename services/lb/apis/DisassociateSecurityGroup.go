@@ -101,16 +101,15 @@ func NewDisassociateSecurityGroupRequestWithoutParam() *DisassociateSecurityGrou
 func (r *DisassociateSecurityGroupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param loadBalancerId: LB ID(Required) */
 func (r *DisassociateSecurityGroupRequest) SetLoadBalancerId(loadBalancerId string) {
     r.LoadBalancerId = loadBalancerId
 }
-
 /* param securityGroupIds: 安全组 ID列表(Required) */
 func (r *DisassociateSecurityGroupRequest) SetSecurityGroupIds(securityGroupIds []string) {
     r.SecurityGroupIds = securityGroupIds
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

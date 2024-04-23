@@ -46,6 +46,9 @@ type UpdateBackendRequest struct {
     /* 高可用组的Id列表，目前只支持一个，且与targetGroupIds不能同时存在 (Optional) */
     AgIds []string `json:"agIds"`
 
+    /* 高可用组属性设置:1.defatult_weight:默认权重, 优先级 agInfoSpec > agIds (Optional) */
+    AgInfoSpec []lb.AgInfoSpec `json:"agInfoSpec"`
+
     /* 【alb Tcp、Udp协议】是否启用Proxy ProtocolV1协议获取真实源ip, 取值为false(不开启)或者true(开启), 默认为false (Optional) */
     ProxyProtocol *bool `json:"proxyProtocol"`
 
@@ -114,6 +117,7 @@ func NewUpdateBackendRequest(
  * param algorithm: 调度算法 <br>【alb,nlb】取值范围为[IpHash, RoundRobin, LeastConn]（含义分别为：加权源Ip哈希，加权轮询和加权最小连接） <br>【dnlb】取值范围为[IpHash, QuintupleHash]（含义分别为：加权源Ip哈希和加权五元组哈希） (Optional)
  * param targetGroupIds: 虚拟服务器组的Id列表，目前只支持一个，且与agIds不能同时存在 (Optional)
  * param agIds: 高可用组的Id列表，目前只支持一个，且与targetGroupIds不能同时存在 (Optional)
+ * param agInfoSpec: 高可用组属性设置:1.defatult_weight:默认权重, 优先级 agInfoSpec > agIds (Optional)
  * param proxyProtocol: 【alb Tcp、Udp协议】是否启用Proxy ProtocolV1协议获取真实源ip, 取值为false(不开启)或者true(开启), 默认为false (Optional)
  * param description: 描述,允许输入UTF-8编码下的全部字符，不超过256字符 (Optional)
  * param sessionStickiness: 会话保持, 取值为false(不开启)或者true(开启)，默认为false <br>【alb Http协议，RoundRobin算法】支持基于cookie的会话保持 <br>【nlb】支持基于报文源目的IP的会话保持 (Optional)
@@ -135,6 +139,7 @@ func NewUpdateBackendRequestWithAllParams(
     algorithm *string,
     targetGroupIds []string,
     agIds []string,
+    agInfoSpec []lb.AgInfoSpec,
     proxyProtocol *bool,
     description *string,
     sessionStickiness *bool,
@@ -163,6 +168,7 @@ func NewUpdateBackendRequestWithAllParams(
         Algorithm: algorithm,
         TargetGroupIds: targetGroupIds,
         AgIds: agIds,
+        AgInfoSpec: agInfoSpec,
         ProxyProtocol: proxyProtocol,
         Description: description,
         SessionStickiness: sessionStickiness,
@@ -195,96 +201,83 @@ func NewUpdateBackendRequestWithoutParam() *UpdateBackendRequest {
 func (r *UpdateBackendRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param backendId: Backend Id(Required) */
 func (r *UpdateBackendRequest) SetBackendId(backendId string) {
     r.BackendId = backendId
 }
-
 /* param backendName: 后端服务名称,只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符(Optional) */
 func (r *UpdateBackendRequest) SetBackendName(backendName string) {
     r.BackendName = &backendName
 }
-
 /* param healthCheckSpec: 健康检查信息(Optional) */
 func (r *UpdateBackendRequest) SetHealthCheckSpec(healthCheckSpec *lb.HealthCheckSpec) {
     r.HealthCheckSpec = healthCheckSpec
 }
-
 /* param algorithm: 调度算法 <br>【alb,nlb】取值范围为[IpHash, RoundRobin, LeastConn]（含义分别为：加权源Ip哈希，加权轮询和加权最小连接） <br>【dnlb】取值范围为[IpHash, QuintupleHash]（含义分别为：加权源Ip哈希和加权五元组哈希）(Optional) */
 func (r *UpdateBackendRequest) SetAlgorithm(algorithm string) {
     r.Algorithm = &algorithm
 }
-
 /* param targetGroupIds: 虚拟服务器组的Id列表，目前只支持一个，且与agIds不能同时存在(Optional) */
 func (r *UpdateBackendRequest) SetTargetGroupIds(targetGroupIds []string) {
     r.TargetGroupIds = targetGroupIds
 }
-
 /* param agIds: 高可用组的Id列表，目前只支持一个，且与targetGroupIds不能同时存在(Optional) */
 func (r *UpdateBackendRequest) SetAgIds(agIds []string) {
     r.AgIds = agIds
 }
-
+/* param agInfoSpec: 高可用组属性设置:1.defatult_weight:默认权重, 优先级 agInfoSpec > agIds(Optional) */
+func (r *UpdateBackendRequest) SetAgInfoSpec(agInfoSpec []lb.AgInfoSpec) {
+    r.AgInfoSpec = agInfoSpec
+}
 /* param proxyProtocol: 【alb Tcp、Udp协议】是否启用Proxy ProtocolV1协议获取真实源ip, 取值为false(不开启)或者true(开启), 默认为false(Optional) */
 func (r *UpdateBackendRequest) SetProxyProtocol(proxyProtocol bool) {
     r.ProxyProtocol = &proxyProtocol
 }
-
 /* param description: 描述,允许输入UTF-8编码下的全部字符，不超过256字符(Optional) */
 func (r *UpdateBackendRequest) SetDescription(description string) {
     r.Description = &description
 }
-
 /* param sessionStickiness: 会话保持, 取值为false(不开启)或者true(开启)，默认为false <br>【alb Http协议，RoundRobin算法】支持基于cookie的会话保持 <br>【nlb】支持基于报文源目的IP的会话保持(Optional) */
 func (r *UpdateBackendRequest) SetSessionStickiness(sessionStickiness bool) {
     r.SessionStickiness = &sessionStickiness
 }
-
 /* param sessionStickyTimeout: 【nlb】会话保持超时时间，sessionStickiness开启时生效, 取值范围[1-3600](Optional) */
 func (r *UpdateBackendRequest) SetSessionStickyTimeout(sessionStickyTimeout int) {
     r.SessionStickyTimeout = &sessionStickyTimeout
 }
-
 /* param connectionDrainingSeconds: 【nlb】连接耗尽超时，移除target前，连接的最大保持时间，默认300s，取值范围[0-3600](Optional) */
 func (r *UpdateBackendRequest) SetConnectionDrainingSeconds(connectionDrainingSeconds int) {
     r.ConnectionDrainingSeconds = &connectionDrainingSeconds
 }
-
 /* param httpCookieExpireSeconds: 【alb Http协议】cookie的过期时间,sessionStickiness开启时生效，取值范围为[0-86400], 0表示cookie与浏览器同生命周期(Optional) */
 func (r *UpdateBackendRequest) SetHttpCookieExpireSeconds(httpCookieExpireSeconds int) {
     r.HttpCookieExpireSeconds = &httpCookieExpireSeconds
 }
-
 /* param httpForwardedProtocol: 【alb Http协议】获取负载均衡的协议, 取值为False(不获取)或True(获取)(Optional) */
 func (r *UpdateBackendRequest) SetHttpForwardedProtocol(httpForwardedProtocol bool) {
     r.HttpForwardedProtocol = &httpForwardedProtocol
 }
-
 /* param httpForwardedPort: 【alb Http协议】获取负载均衡的端口, 取值为False(不获取)或True(获取)(Optional) */
 func (r *UpdateBackendRequest) SetHttpForwardedPort(httpForwardedPort bool) {
     r.HttpForwardedPort = &httpForwardedPort
 }
-
 /* param httpForwardedHost: 【alb Http协议】获取负载均衡的host信息, 取值为False(不获取)或True(获取)(Optional) */
 func (r *UpdateBackendRequest) SetHttpForwardedHost(httpForwardedHost bool) {
     r.HttpForwardedHost = &httpForwardedHost
 }
-
 /* param httpForwardedVip: 【alb Http协议】获取负载均衡的vip, 取值为False(不获取)或True(获取)(Optional) */
 func (r *UpdateBackendRequest) SetHttpForwardedVip(httpForwardedVip bool) {
     r.HttpForwardedVip = &httpForwardedVip
 }
-
 /* param httpForwardedClientPort: 【alb Http协议】获取请求端使用的端口, 取值为False(不获取)或True(获取)(Optional) */
 func (r *UpdateBackendRequest) SetHttpForwardedClientPort(httpForwardedClientPort bool) {
     r.HttpForwardedClientPort = &httpForwardedClientPort
 }
-
 /* param closeHealthCheck: 【alb,dnlb】关闭健康检查，取值为false(不关闭)或true(关闭)(Optional) */
 func (r *UpdateBackendRequest) SetCloseHealthCheck(closeHealthCheck bool) {
     r.CloseHealthCheck = &closeHealthCheck
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
