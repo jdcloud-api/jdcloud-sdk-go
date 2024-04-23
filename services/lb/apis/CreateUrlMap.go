@@ -107,21 +107,19 @@ func NewCreateUrlMapRequestWithoutParam() *CreateUrlMapRequest {
 func (r *CreateUrlMapRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param urlMapName: 转发规则组名称，同一个负载均衡下，名称不能重复,只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符(Required) */
 func (r *CreateUrlMapRequest) SetUrlMapName(urlMapName string) {
     r.UrlMapName = urlMapName
 }
-
 /* param loadBalancerId: 转发规则组所属负载均衡的Id(Required) */
 func (r *CreateUrlMapRequest) SetLoadBalancerId(loadBalancerId string) {
     r.LoadBalancerId = loadBalancerId
 }
-
 /* param description: 描述,允许输入UTF-8编码下的全部字符，不超过256字符(Optional) */
 func (r *CreateUrlMapRequest) SetDescription(description string) {
     r.Description = &description
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

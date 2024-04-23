@@ -30,6 +30,12 @@ type DescribeTargetHealthRequest struct {
 
     /* Backend Id  */
     BackendId string `json:"backendId"`
+
+    /* 页码, 默认为1,取值范围：[1,∞), 页码超过总页数时, 显示最后一页 (Optional) */
+    PageNumber *int `json:"pageNumber"`
+
+    /* 分页大小，默认返回全部，取值范围：[10,100] (Optional) */
+    PageSize *int `json:"pageSize"`
 }
 
 /*
@@ -58,10 +64,14 @@ func NewDescribeTargetHealthRequest(
 /*
  * param regionId: Region ID (Required)
  * param backendId: Backend Id (Required)
+ * param pageNumber: 页码, 默认为1,取值范围：[1,∞), 页码超过总页数时, 显示最后一页 (Optional)
+ * param pageSize: 分页大小，默认返回全部，取值范围：[10,100] (Optional)
  */
 func NewDescribeTargetHealthRequestWithAllParams(
     regionId string,
     backendId string,
+    pageNumber *int,
+    pageSize *int,
 ) *DescribeTargetHealthRequest {
 
     return &DescribeTargetHealthRequest{
@@ -73,6 +83,8 @@ func NewDescribeTargetHealthRequestWithAllParams(
         },
         RegionId: regionId,
         BackendId: backendId,
+        PageNumber: pageNumber,
+        PageSize: pageSize,
     }
 }
 
@@ -93,11 +105,19 @@ func NewDescribeTargetHealthRequestWithoutParam() *DescribeTargetHealthRequest {
 func (r *DescribeTargetHealthRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param backendId: Backend Id(Required) */
 func (r *DescribeTargetHealthRequest) SetBackendId(backendId string) {
     r.BackendId = backendId
 }
+/* param pageNumber: 页码, 默认为1,取值范围：[1,∞), 页码超过总页数时, 显示最后一页(Optional) */
+func (r *DescribeTargetHealthRequest) SetPageNumber(pageNumber int) {
+    r.PageNumber = &pageNumber
+}
+/* param pageSize: 分页大小，默认返回全部，取值范围：[10,100](Optional) */
+func (r *DescribeTargetHealthRequest) SetPageSize(pageSize int) {
+    r.PageSize = &pageSize
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
@@ -113,4 +133,5 @@ type DescribeTargetHealthResponse struct {
 
 type DescribeTargetHealthResult struct {
     TargetHealths []lb.TargetHealth `json:"targetHealths"`
+    TotalCount int `json:"totalCount"`
 }

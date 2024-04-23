@@ -92,11 +92,11 @@ func NewDeleteUrlMapRequestWithoutParam() *DeleteUrlMapRequest {
 func (r *DeleteUrlMapRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param urlMapId: 转发规则组Id(Required) */
 func (r *DeleteUrlMapRequest) SetUrlMapId(urlMapId string) {
     r.UrlMapId = urlMapId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

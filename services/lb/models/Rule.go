@@ -36,4 +36,10 @@ type Rule struct {
 
     /* 重定向的相关参数。当action选择Redirect时显示相关参数 (Optional) */
     RedirectAction RedirectAction `json:"redirectAction"`
+
+    /* 负载均衡将客户端流量向后端服务器转发时的前置动作配置 (Optional) */
+    PreActions []PreAction `json:"preActions"`
+
+    /* 负载均衡将后端服务器应答流量转发给客户端时的后置动作配置 (Optional) */
+    PostActions []PostAction `json:"postActions"`
 }

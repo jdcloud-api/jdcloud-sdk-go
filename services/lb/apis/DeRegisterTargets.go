@@ -101,16 +101,15 @@ func NewDeRegisterTargetsRequestWithoutParam() *DeRegisterTargetsRequest {
 func (r *DeRegisterTargetsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param targetGroupId: TargetGroup Id(Required) */
 func (r *DeRegisterTargetsRequest) SetTargetGroupId(targetGroupId string) {
     r.TargetGroupId = targetGroupId
 }
-
 /* param targetIds: Target Id列表(Required) */
 func (r *DeRegisterTargetsRequest) SetTargetIds(targetIds []string) {
     r.TargetIds = targetIds
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

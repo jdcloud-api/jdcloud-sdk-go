@@ -111,17 +111,14 @@ func NewDescribeTargetGroupsRequestWithoutParam() *DescribeTargetGroupsRequest {
 func (r *DescribeTargetGroupsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param pageNumber: 页码, 默认为1, 取值范围：[1,∞), 页码超过总页数时, 显示最后一页(Optional) */
 func (r *DescribeTargetGroupsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小，默认为20，取值范围：[10,100](Optional) */
 func (r *DescribeTargetGroupsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param filters: targetGroupIds - TargetGroup ID列表，支持多个
 targetGroupNames - TargetGroup名称列表，支持多个
 loadBalancerId － TargetGroup所属负载均衡的Id，支持单个
@@ -130,6 +127,7 @@ loadBalancerType - 负载均衡类型，取值为：alb、nlb、dnlb，默认alb
 func (r *DescribeTargetGroupsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

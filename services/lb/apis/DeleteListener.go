@@ -92,11 +92,11 @@ func NewDeleteListenerRequestWithoutParam() *DeleteListenerRequest {
 func (r *DeleteListenerRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param listenerId: 监听器ID(Required) */
 func (r *DeleteListenerRequest) SetListenerId(listenerId string) {
     r.ListenerId = listenerId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

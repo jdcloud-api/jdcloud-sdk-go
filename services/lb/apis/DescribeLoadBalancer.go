@@ -93,11 +93,11 @@ func NewDescribeLoadBalancerRequestWithoutParam() *DescribeLoadBalancerRequest {
 func (r *DescribeLoadBalancerRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param loadBalancerId: LB ID(Required) */
 func (r *DescribeLoadBalancerRequest) SetLoadBalancerId(loadBalancerId string) {
     r.LoadBalancerId = loadBalancerId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

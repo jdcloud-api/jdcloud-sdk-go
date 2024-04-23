@@ -102,16 +102,15 @@ func NewAddRulesRequestWithoutParam() *AddRulesRequest {
 func (r *AddRulesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param urlMapId: 转发规则组Id(Required) */
 func (r *AddRulesRequest) SetUrlMapId(urlMapId string) {
     r.UrlMapId = urlMapId
 }
-
 /* param ruleSpecs: 转发规则的信息(Required) */
 func (r *AddRulesRequest) SetRuleSpecs(ruleSpecs []lb.RuleSpec) {
     r.RuleSpecs = ruleSpecs
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

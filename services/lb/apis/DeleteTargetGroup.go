@@ -92,11 +92,11 @@ func NewDeleteTargetGroupRequestWithoutParam() *DeleteTargetGroupRequest {
 func (r *DeleteTargetGroupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param targetGroupId: TargetGroup Id(Required) */
 func (r *DeleteTargetGroupRequest) SetTargetGroupId(targetGroupId string) {
     r.TargetGroupId = targetGroupId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

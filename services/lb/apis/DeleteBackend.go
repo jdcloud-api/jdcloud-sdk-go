@@ -92,11 +92,11 @@ func NewDeleteBackendRequestWithoutParam() *DeleteBackendRequest {
 func (r *DeleteBackendRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param backendId: Backend Id(Required) */
 func (r *DeleteBackendRequest) SetBackendId(backendId string) {
     r.BackendId = backendId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

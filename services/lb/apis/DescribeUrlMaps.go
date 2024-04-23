@@ -109,17 +109,14 @@ func NewDescribeUrlMapsRequestWithoutParam() *DescribeUrlMapsRequest {
 func (r *DescribeUrlMapsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param pageNumber: 页码, 默认为1, 取值范围：[1,∞), 页码超过总页数时, 显示最后一页(Optional) */
 func (r *DescribeUrlMapsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小，默认为20，取值范围：[10,100](Optional) */
 func (r *DescribeUrlMapsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param filters: urlMapIds - 转发规则组Id列表，支持多个
 urlMapNames -转发规则组名称列表，支持多个
 loadBalancerId - 负载均衡器Id，支持单个
@@ -127,6 +124,7 @@ loadBalancerId - 负载均衡器Id，支持单个
 func (r *DescribeUrlMapsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -61,6 +61,9 @@ type Listener struct {
     /* 【alb Https和Tls协议】Listener绑定的默认证书，最多支持两个，两个证书的加密算法需要不同 (Optional) */
     CertificateSpecs []CertificateSpec `json:"certificateSpecs"`
 
+    /* 【仅ALB支持】限速配置 (Optional) */
+    Limitation LimitationSpec `json:"limitation"`
+
     /* Listener的描述信息 (Optional) */
     Description string `json:"description"`
 
@@ -69,4 +72,7 @@ type Listener struct {
 
     /* 【alb Https和Tls协议】Listener绑定的扩展证书列表 (Optional) */
     ExtensionCertificateSpecs []ExtensionCertificateSpec `json:"extensionCertificateSpecs"`
+
+    /* 绑定的安全策略id，仅支持应用负载均衡的HTTPS、TLS监听配置 (Optional) */
+    SecurityPolicyId string `json:"securityPolicyId"`
 }

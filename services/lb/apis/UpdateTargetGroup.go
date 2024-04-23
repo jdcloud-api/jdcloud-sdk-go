@@ -104,21 +104,19 @@ func NewUpdateTargetGroupRequestWithoutParam() *UpdateTargetGroupRequest {
 func (r *UpdateTargetGroupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param targetGroupId: TargetGroup Id(Required) */
 func (r *UpdateTargetGroupRequest) SetTargetGroupId(targetGroupId string) {
     r.TargetGroupId = targetGroupId
 }
-
 /* param description: 虚拟服务器组描述,允许输入UTF-8编码下的全部字符，不超过256字符(Optional) */
 func (r *UpdateTargetGroupRequest) SetDescription(description string) {
     r.Description = &description
 }
-
 /* param targetGroupName: 虚拟服务器组名称,只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符(Optional) */
 func (r *UpdateTargetGroupRequest) SetTargetGroupName(targetGroupName string) {
     r.TargetGroupName = &targetGroupName
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

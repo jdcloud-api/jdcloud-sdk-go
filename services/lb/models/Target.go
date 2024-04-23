@@ -22,8 +22,11 @@ type Target struct {
     /* Target的Id (Optional) */
     TargetId string `json:"targetId"`
 
-    /* TargetGroup的Id (Optional) */
+    /* TargetGroup的Id, target 属于 targetGroup 或者 AG, target 从属于 AG 时,该字段无用 (Optional) */
     TargetGroupId string `json:"targetGroupId"`
+
+    /* 高可用组(ag)的id, target 属于 targetGroup 或者 AG, target 从属于 targetGroup 时,该字段无用 (Optional) */
+    AgId string `json:"agId"`
 
     /* Target的类型，取值为vm、container或ip, 默认为vm (Optional) */
     Type string `json:"type"`

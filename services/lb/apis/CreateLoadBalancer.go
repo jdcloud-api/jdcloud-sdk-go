@@ -158,61 +158,51 @@ func NewCreateLoadBalancerRequestWithoutParam() *CreateLoadBalancerRequest {
 func (r *CreateLoadBalancerRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param loadBalancerName: LoadBalancer的名称,只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符(Required) */
 func (r *CreateLoadBalancerRequest) SetLoadBalancerName(loadBalancerName string) {
     r.LoadBalancerName = loadBalancerName
 }
-
 /* param subnetId: LoadBalancer所属子网的Id(Required) */
 func (r *CreateLoadBalancerRequest) SetSubnetId(subnetId string) {
     r.SubnetId = subnetId
 }
-
 /* param type_: LoadBalancer的类型，取值：alb、nlb、dnlb，默认为alb(Optional) */
 func (r *CreateLoadBalancerRequest) SetType(type_ string) {
     r.Type = &type_
 }
-
 /* param azs: 【alb，nlb】LoadBalancer所属availability Zone列表,对于alb,nlb是必选参数，可用区个数不能超过2个 <br>【dnlb】中心可用区，dnlb不需要传该参数，全可用区可用；边缘可用区，仅支持传入单可用区(Optional) */
 func (r *CreateLoadBalancerRequest) SetAzs(azs []string) {
     r.Azs = azs
 }
-
 /* param chargeSpec: 【alb】支持按用量计费，默认为按用量。【nlb】支持按用量计费。【dnlb】支持按配置计费(Optional) */
 func (r *CreateLoadBalancerRequest) SetChargeSpec(chargeSpec *charge.ChargeSpec) {
     r.ChargeSpec = chargeSpec
 }
-
 /* param elasticIp: 负载均衡关联的弹性IP规格(Optional) */
 func (r *CreateLoadBalancerRequest) SetElasticIp(elasticIp *vpc.ElasticIpSpec) {
     r.ElasticIp = elasticIp
 }
-
 /* param privateIpAddress: 指定LoadBalancer的VIP(内网IPv4地址)，需要属于指定的子网并且未被占用(Optional) */
 func (r *CreateLoadBalancerRequest) SetPrivateIpAddress(privateIpAddress string) {
     r.PrivateIpAddress = &privateIpAddress
 }
-
 /* param securityGroupIds: 【alb】 安全组 ID列表(Optional) */
 func (r *CreateLoadBalancerRequest) SetSecurityGroupIds(securityGroupIds []string) {
     r.SecurityGroupIds = securityGroupIds
 }
-
 /* param description: LoadBalancer的描述信息,允许输入UTF-8编码下的全部字符，不超过256字符(Optional) */
 func (r *CreateLoadBalancerRequest) SetDescription(description string) {
     r.Description = &description
 }
-
 /* param deleteProtection: 删除保护，取值为True(开启)或False(关闭)，默认为False(Optional) */
 func (r *CreateLoadBalancerRequest) SetDeleteProtection(deleteProtection bool) {
     r.DeleteProtection = &deleteProtection
 }
-
 /* param userTags: 用户tag 信息(Optional) */
 func (r *CreateLoadBalancerRequest) SetUserTags(userTags []lb.Tag) {
     r.UserTags = userTags
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -32,6 +32,9 @@ type DisassociateElasticIpRequest struct {
 
     /* 弹性公网IP ID  */
     ElasticIpId string `json:"elasticIpId"`
+
+    /* 解绑时是否同时删除弹性公网IP，取值范围：true、false，默认false。true表示解绑弹性公网IP时删除该弹性公网IP；false表示解绑弹性公网IP时不删除该弹性公网IP。包年包月和无计费信息的弹性公网IP不支持解绑时删除 (Optional) */
+    DeleteElasticIp *bool `json:"deleteElasticIp"`
 }
 
 /*
@@ -64,11 +67,13 @@ func NewDisassociateElasticIpRequest(
  * param regionId: Region ID (Required)
  * param loadBalancerId: LB ID (Required)
  * param elasticIpId: 弹性公网IP ID (Required)
+ * param deleteElasticIp: 解绑时是否同时删除弹性公网IP，取值范围：true、false，默认false。true表示解绑弹性公网IP时删除该弹性公网IP；false表示解绑弹性公网IP时不删除该弹性公网IP。包年包月和无计费信息的弹性公网IP不支持解绑时删除 (Optional)
  */
 func NewDisassociateElasticIpRequestWithAllParams(
     regionId string,
     loadBalancerId string,
     elasticIpId string,
+    deleteElasticIp *bool,
 ) *DisassociateElasticIpRequest {
 
     return &DisassociateElasticIpRequest{
@@ -81,6 +86,7 @@ func NewDisassociateElasticIpRequestWithAllParams(
         RegionId: regionId,
         LoadBalancerId: loadBalancerId,
         ElasticIpId: elasticIpId,
+        DeleteElasticIp: deleteElasticIp,
     }
 }
 
@@ -101,16 +107,19 @@ func NewDisassociateElasticIpRequestWithoutParam() *DisassociateElasticIpRequest
 func (r *DisassociateElasticIpRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param loadBalancerId: LB ID(Required) */
 func (r *DisassociateElasticIpRequest) SetLoadBalancerId(loadBalancerId string) {
     r.LoadBalancerId = loadBalancerId
 }
-
 /* param elasticIpId: 弹性公网IP ID(Required) */
 func (r *DisassociateElasticIpRequest) SetElasticIpId(elasticIpId string) {
     r.ElasticIpId = elasticIpId
 }
+/* param deleteElasticIp: 解绑时是否同时删除弹性公网IP，取值范围：true、false，默认false。true表示解绑弹性公网IP时删除该弹性公网IP；false表示解绑弹性公网IP时不删除该弹性公网IP。包年包月和无计费信息的弹性公网IP不支持解绑时删除(Optional) */
+func (r *DisassociateElasticIpRequest) SetDeleteElasticIp(deleteElasticIp bool) {
+    r.DeleteElasticIp = &deleteElasticIp
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

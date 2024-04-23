@@ -102,16 +102,15 @@ func NewUpdateListenerCertificatesRequestWithoutParam() *UpdateListenerCertifica
 func (r *UpdateListenerCertificatesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param listenerId: 监听器ID(Required) */
 func (r *UpdateListenerCertificatesRequest) SetListenerId(listenerId string) {
     r.ListenerId = listenerId
 }
-
 /* param certificates: 【alb Https和Tls协议】Listener绑定的扩展证书列表(Required) */
 func (r *UpdateListenerCertificatesRequest) SetCertificates(certificates []lb.ExtCertificateUpdateSpec) {
     r.Certificates = certificates
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

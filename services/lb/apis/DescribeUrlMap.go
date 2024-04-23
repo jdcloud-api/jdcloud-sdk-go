@@ -93,11 +93,11 @@ func NewDescribeUrlMapRequestWithoutParam() *DescribeUrlMapRequest {
 func (r *DescribeUrlMapRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param urlMapId: 转发规则组Id(Required) */
 func (r *DescribeUrlMapRequest) SetUrlMapId(urlMapId string) {
     r.UrlMapId = urlMapId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

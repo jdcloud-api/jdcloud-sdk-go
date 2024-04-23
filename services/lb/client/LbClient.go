@@ -40,7 +40,7 @@ func NewLbClient(credential *core.Credential) *LbClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "lb",
-            Revision:    "0.5.7",
+            Revision:    "0.6.4",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -57,8 +57,8 @@ func (c *LbClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
 }
 
-/* 查询监听器列表 */
-func (c *LbClient) DescribeListeners(request *lb.DescribeListenersRequest) (*lb.DescribeListenersResponse, error) {
+/* 查询安全策略支持Cipher列表详情 */
+func (c *LbClient) DescribeSupportedCiphers(request *lb.DescribeSupportedCiphersRequest) (*lb.DescribeSupportedCiphersResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -67,27 +67,7 @@ func (c *LbClient) DescribeListeners(request *lb.DescribeListenersRequest) (*lb.
         return nil, err
     }
 
-    jdResp := &lb.DescribeListenersResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询后端服务详情 */
-func (c *LbClient) DescribeBackend(request *lb.DescribeBackendRequest) (*lb.DescribeBackendResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &lb.DescribeBackendResponse{}
+    jdResp := &lb.DescribeSupportedCiphersResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -108,26 +88,6 @@ func (c *LbClient) RegisterTargets(request *lb.RegisterTargetsRequest) (*lb.Regi
     }
 
     jdResp := &lb.RegisterTargetsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询转发规则组详情 */
-func (c *LbClient) DescribeUrlMap(request *lb.DescribeUrlMapRequest) (*lb.DescribeUrlMapResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &lb.DescribeUrlMapResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -237,6 +197,26 @@ func (c *LbClient) DescribeTargetGroup(request *lb.DescribeTargetGroupRequest) (
     return jdResp, err
 }
 
+/* 修改后端服务-高可用组(ag)下target信息 */
+func (c *LbClient) UpdateAgTargets(request *lb.UpdateAgTargetsRequest) (*lb.UpdateAgTargetsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &lb.UpdateAgTargetsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 删除一个后端服务 */
 func (c *LbClient) DeleteBackend(request *lb.DeleteBackendRequest) (*lb.DeleteBackendResponse, error) {
     if request == nil {
@@ -268,46 +248,6 @@ func (c *LbClient) DeleteListenerCertificates(request *lb.DeleteListenerCertific
     }
 
     jdResp := &lb.DeleteListenerCertificatesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 往转发规则组加入转发规则 */
-func (c *LbClient) AddRules(request *lb.AddRulesRequest) (*lb.AddRulesResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &lb.AddRulesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 修改转发规则组 */
-func (c *LbClient) UpdateUrlMap(request *lb.UpdateUrlMapRequest) (*lb.UpdateUrlMapResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &lb.UpdateUrlMapResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -357,26 +297,6 @@ func (c *LbClient) AssociateElasticIp(request *lb.AssociateElasticIpRequest) (*l
     return jdResp, err
 }
 
-/* 创建转发规则组,仅alb支持 */
-func (c *LbClient) CreateUrlMap(request *lb.CreateUrlMapRequest) (*lb.CreateUrlMapResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &lb.CreateUrlMapResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 创建一个后端服务 */
 func (c *LbClient) CreateBackend(request *lb.CreateBackendRequest) (*lb.CreateBackendResponse, error) {
     if request == nil {
@@ -417,26 +337,6 @@ func (c *LbClient) CreateTargetGroup(request *lb.CreateTargetGroupRequest) (*lb.
     return jdResp, err
 }
 
-/* 修改一个虚拟服务器组的信息 */
-func (c *LbClient) UpdateTargetGroup(request *lb.UpdateTargetGroupRequest) (*lb.UpdateTargetGroupResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &lb.UpdateTargetGroupResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 查询负载均衡详情 */
 func (c *LbClient) DescribeLoadBalancer(request *lb.DescribeLoadBalancerRequest) (*lb.DescribeLoadBalancerResponse, error) {
     if request == nil {
@@ -448,6 +348,26 @@ func (c *LbClient) DescribeLoadBalancer(request *lb.DescribeLoadBalancerRequest)
     }
 
     jdResp := &lb.DescribeLoadBalancerResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除一个安全策略 */
+func (c *LbClient) DeleteSecurityPolicy(request *lb.DeleteSecurityPolicyRequest) (*lb.DeleteSecurityPolicyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &lb.DeleteSecurityPolicyResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -477,6 +397,26 @@ func (c *LbClient) UpdateListener(request *lb.UpdateListenerRequest) (*lb.Update
     return jdResp, err
 }
 
+/* 查询安全组绑定负载均衡列表 */
+func (c *LbClient) DescribeLoadBalancersBySecurityGroup(request *lb.DescribeLoadBalancersBySecurityGroupRequest) (*lb.DescribeLoadBalancersBySecurityGroupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &lb.DescribeLoadBalancersBySecurityGroupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询监听器详情 */
 func (c *LbClient) DescribeListener(request *lb.DescribeListenerRequest) (*lb.DescribeListenerResponse, error) {
     if request == nil {
@@ -497,26 +437,6 @@ func (c *LbClient) DescribeListener(request *lb.DescribeListenerRequest) (*lb.De
     return jdResp, err
 }
 
-/* 查询虚拟服务器组列表详情，返回target详情功能3个月后将会下线，建议用户直接使用describeTargets接口查询target详情 */
-func (c *LbClient) DescribeTargetGroups(request *lb.DescribeTargetGroupsRequest) (*lb.DescribeTargetGroupsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &lb.DescribeTargetGroupsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 删除负载均衡，负载均衡下的监听器，转发规则组(仅alb支持)，后端服务，服务器组会一起删除 */
 func (c *LbClient) DeleteLoadBalancer(request *lb.DeleteLoadBalancerRequest) (*lb.DeleteLoadBalancerResponse, error) {
     if request == nil {
@@ -528,6 +448,46 @@ func (c *LbClient) DeleteLoadBalancer(request *lb.DeleteLoadBalancerRequest) (*l
     }
 
     jdResp := &lb.DeleteLoadBalancerResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改一个个性化配置的信息 */
+func (c *LbClient) UpdateCustomizedConfiguration(request *lb.UpdateCustomizedConfigurationRequest) (*lb.UpdateCustomizedConfigurationResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &lb.UpdateCustomizedConfigurationResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除一个个性化配置 */
+func (c *LbClient) DeleteCustomizedConfiguration(request *lb.DeleteCustomizedConfigurationRequest) (*lb.DeleteCustomizedConfigurationResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &lb.DeleteCustomizedConfigurationResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -577,46 +537,6 @@ func (c *LbClient) DescribeBackends(request *lb.DescribeBackendsRequest) (*lb.De
     return jdResp, err
 }
 
-/* 负载均衡绑定安全组 */
-func (c *LbClient) AssociateSecurityGroup(request *lb.AssociateSecurityGroupRequest) (*lb.AssociateSecurityGroupResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &lb.AssociateSecurityGroupResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 从TargetGroup中移除一个或多个Target，失败则全部回滚。 成功移除的target将不会再接收来自loadbalancer新建连接的流量 */
-func (c *LbClient) DeRegisterTargets(request *lb.DeRegisterTargetsRequest) (*lb.DeRegisterTargetsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &lb.DeRegisterTargetsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 查询Target列表详情 */
 func (c *LbClient) DescribeTargets(request *lb.DescribeTargetsRequest) (*lb.DescribeTargetsResponse, error) {
     if request == nil {
@@ -637,6 +557,26 @@ func (c *LbClient) DescribeTargets(request *lb.DescribeTargetsRequest) (*lb.Desc
     return jdResp, err
 }
 
+/* 查询个性化配置详情 */
+func (c *LbClient) DescribeCustomizedConfiguration(request *lb.DescribeCustomizedConfigurationRequest) (*lb.DescribeCustomizedConfigurationResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &lb.DescribeCustomizedConfigurationResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 创建负载均衡 */
 func (c *LbClient) CreateLoadBalancer(request *lb.CreateLoadBalancerRequest) (*lb.CreateLoadBalancerResponse, error) {
     if request == nil {
@@ -648,6 +588,426 @@ func (c *LbClient) CreateLoadBalancer(request *lb.CreateLoadBalancerRequest) (*l
     }
 
     jdResp := &lb.CreateLoadBalancerResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除一个虚拟服务器组 */
+func (c *LbClient) DeleteTargetGroup(request *lb.DeleteTargetGroupRequest) (*lb.DeleteTargetGroupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &lb.DeleteTargetGroupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除一个监听器 */
+func (c *LbClient) DeleteListener(request *lb.DeleteListenerRequest) (*lb.DeleteListenerResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &lb.DeleteListenerResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询监听器列表 */
+func (c *LbClient) DescribeListeners(request *lb.DescribeListenersRequest) (*lb.DescribeListenersResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &lb.DescribeListenersResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询后端服务详情 */
+func (c *LbClient) DescribeBackend(request *lb.DescribeBackendRequest) (*lb.DescribeBackendResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &lb.DescribeBackendResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询转发规则组详情 */
+func (c *LbClient) DescribeUrlMap(request *lb.DescribeUrlMapRequest) (*lb.DescribeUrlMapResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &lb.DescribeUrlMapResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建一个个性化配置 */
+func (c *LbClient) CreateCustomizedConfiguration(request *lb.CreateCustomizedConfigurationRequest) (*lb.CreateCustomizedConfigurationResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &lb.CreateCustomizedConfigurationResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询 后端服务-高可用组 Target列表详情 */
+func (c *LbClient) DescribeAgTargets(request *lb.DescribeAgTargetsRequest) (*lb.DescribeAgTargetsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &lb.DescribeAgTargetsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 往转发规则组加入转发规则 */
+func (c *LbClient) AddRules(request *lb.AddRulesRequest) (*lb.AddRulesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &lb.AddRulesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改转发规则组 */
+func (c *LbClient) UpdateUrlMap(request *lb.UpdateUrlMapRequest) (*lb.UpdateUrlMapResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &lb.UpdateUrlMapResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建一个安全策略 */
+func (c *LbClient) CreateSecurityPolicy(request *lb.CreateSecurityPolicyRequest) (*lb.CreateSecurityPolicyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &lb.CreateSecurityPolicyResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询个性化配置列表详情 */
+func (c *LbClient) DescribeCustomizedConfigurations(request *lb.DescribeCustomizedConfigurationsRequest) (*lb.DescribeCustomizedConfigurationsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &lb.DescribeCustomizedConfigurationsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建转发规则组,仅alb支持 */
+func (c *LbClient) CreateUrlMap(request *lb.CreateUrlMapRequest) (*lb.CreateUrlMapResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &lb.CreateUrlMapResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改一个安全策略的信息 */
+func (c *LbClient) UpdateSecurityPolicy(request *lb.UpdateSecurityPolicyRequest) (*lb.UpdateSecurityPolicyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &lb.UpdateSecurityPolicyResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改一个虚拟服务器组的信息 */
+func (c *LbClient) UpdateTargetGroup(request *lb.UpdateTargetGroupRequest) (*lb.UpdateTargetGroupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &lb.UpdateTargetGroupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询安全策略列表详情 */
+func (c *LbClient) DescribeSecurityPolicies(request *lb.DescribeSecurityPoliciesRequest) (*lb.DescribeSecurityPoliciesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &lb.DescribeSecurityPoliciesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 给资源绑定个性化配置 */
+func (c *LbClient) AssociateCustomizedConfiguration(request *lb.AssociateCustomizedConfigurationRequest) (*lb.AssociateCustomizedConfigurationResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &lb.AssociateCustomizedConfigurationResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询虚拟服务器组列表详情，返回target详情功能3个月后将会下线，建议用户直接使用describeTargets接口查询target详情 */
+func (c *LbClient) DescribeTargetGroups(request *lb.DescribeTargetGroupsRequest) (*lb.DescribeTargetGroupsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &lb.DescribeTargetGroupsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 给资源解绑个性化配置 */
+func (c *LbClient) DisassociateCustomizedConfiguration(request *lb.DisassociateCustomizedConfigurationRequest) (*lb.DisassociateCustomizedConfigurationResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &lb.DisassociateCustomizedConfigurationResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 负载均衡绑定安全组 */
+func (c *LbClient) AssociateSecurityGroup(request *lb.AssociateSecurityGroupRequest) (*lb.AssociateSecurityGroupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &lb.AssociateSecurityGroupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询安全策略详情 */
+func (c *LbClient) DescribeSecurityPolicy(request *lb.DescribeSecurityPolicyRequest) (*lb.DescribeSecurityPolicyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &lb.DescribeSecurityPolicyResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 从TargetGroup中移除一个或多个Target，失败则全部回滚。 成功移除的target将不会再接收来自loadbalancer新建连接的流量 */
+func (c *LbClient) DeRegisterTargets(request *lb.DeRegisterTargetsRequest) (*lb.DeRegisterTargetsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &lb.DeRegisterTargetsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -688,26 +1048,6 @@ func (c *LbClient) DeleteUrlMap(request *lb.DeleteUrlMapRequest) (*lb.DeleteUrlM
     }
 
     jdResp := &lb.DeleteUrlMapResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 删除一个虚拟服务器组 */
-func (c *LbClient) DeleteTargetGroup(request *lb.DeleteTargetGroupRequest) (*lb.DeleteTargetGroupResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &lb.DeleteTargetGroupResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -808,26 +1148,6 @@ func (c *LbClient) UpdateListenerCertificates(request *lb.UpdateListenerCertific
     }
 
     jdResp := &lb.UpdateListenerCertificatesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 删除一个监听器 */
-func (c *LbClient) DeleteListener(request *lb.DeleteListenerRequest) (*lb.DeleteListenerResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &lb.DeleteListenerResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

@@ -40,6 +40,7 @@ listenerIds - 监听器Id列表，支持多个
 loadBalancerId - 负载均衡器Id，支持单个
 loadBalancerType - 负载均衡类型，取值为：alb、nlb、dnlb，默认alb，支持单个
 urlMapIds - 【仅alb支持】转发规则组Id列表，支持多个
+securityPolicyIds - 监听器绑定的安全策略ID，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
@@ -73,6 +74,7 @@ listenerIds - 监听器Id列表，支持多个
 loadBalancerId - 负载均衡器Id，支持单个
 loadBalancerType - 负载均衡类型，取值为：alb、nlb、dnlb，默认alb，支持单个
 urlMapIds - 【仅alb支持】转发规则组Id列表，支持多个
+securityPolicyIds - 监听器绑定的安全策略ID，支持多个
  (Optional)
  */
 func NewDescribeListenersRequestWithAllParams(
@@ -113,26 +115,25 @@ func NewDescribeListenersRequestWithoutParam() *DescribeListenersRequest {
 func (r *DescribeListenersRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param pageNumber: 页码, 默认为1, 取值范围：[1,∞), 页码超过总页数时, 显示最后一页(Optional) */
 func (r *DescribeListenersRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小，默认为20，取值范围：[10,100](Optional) */
 func (r *DescribeListenersRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param filters: listenerNames - 监听器名称列表，支持多个
 listenerIds - 监听器Id列表，支持多个
 loadBalancerId - 负载均衡器Id，支持单个
 loadBalancerType - 负载均衡类型，取值为：alb、nlb、dnlb，默认alb，支持单个
 urlMapIds - 【仅alb支持】转发规则组Id列表，支持多个
+securityPolicyIds - 监听器绑定的安全策略ID，支持多个
 (Optional) */
 func (r *DescribeListenersRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
