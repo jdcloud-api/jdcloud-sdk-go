@@ -40,7 +40,7 @@ func NewLbClient(credential *core.Credential) *LbClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "lb",
-            Revision:    "0.6.4",
+            Revision:    "0.6.5",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
