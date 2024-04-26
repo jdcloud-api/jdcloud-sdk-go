@@ -32,7 +32,7 @@ type UpdateAgTargetsRequest struct {
     BackendId string `json:"backendId"`
 
     /* 修改ag target信息  */
-    TargetUpdateSpecs []lb.TargetUpdateSpec `json:"targetUpdateSpecs"`
+    TargetUpdateSpecs []lb.AgTargetUpdateSpec `json:"targetUpdateSpecs"`
 }
 
 /*
@@ -45,7 +45,7 @@ type UpdateAgTargetsRequest struct {
 func NewUpdateAgTargetsRequest(
     regionId string,
     backendId string,
-    targetUpdateSpecs []lb.TargetUpdateSpec,
+    targetUpdateSpecs []lb.AgTargetUpdateSpec,
 ) *UpdateAgTargetsRequest {
 
 	return &UpdateAgTargetsRequest{
@@ -69,7 +69,7 @@ func NewUpdateAgTargetsRequest(
 func NewUpdateAgTargetsRequestWithAllParams(
     regionId string,
     backendId string,
-    targetUpdateSpecs []lb.TargetUpdateSpec,
+    targetUpdateSpecs []lb.AgTargetUpdateSpec,
 ) *UpdateAgTargetsRequest {
 
     return &UpdateAgTargetsRequest{
@@ -107,7 +107,7 @@ func (r *UpdateAgTargetsRequest) SetBackendId(backendId string) {
     r.BackendId = backendId
 }
 /* param targetUpdateSpecs: 修改ag target信息(Required) */
-func (r *UpdateAgTargetsRequest) SetTargetUpdateSpecs(targetUpdateSpecs []lb.TargetUpdateSpec) {
+func (r *UpdateAgTargetsRequest) SetTargetUpdateSpecs(targetUpdateSpecs []lb.AgTargetUpdateSpec) {
     r.TargetUpdateSpecs = targetUpdateSpecs
 }
 
