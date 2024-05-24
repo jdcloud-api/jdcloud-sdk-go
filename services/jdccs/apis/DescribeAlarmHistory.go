@@ -42,7 +42,6 @@ type DescribeAlarmHistoryRequest struct {
 
     /* 查询时间范围的结束时间， UNIX时间戳 (Optional) */
     EndTime *int `json:"endTime"`
-
 }
 
 /*
@@ -112,27 +111,22 @@ func NewDescribeAlarmHistoryRequestWithoutParam() *DescribeAlarmHistoryRequest {
 func (r *DescribeAlarmHistoryRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小，默认为20(Optional) */
 func (r *DescribeAlarmHistoryRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param alarmId: 报警规则ID(Optional) */
 func (r *DescribeAlarmHistoryRequest) SetAlarmId(alarmId string) {
     r.AlarmId = &alarmId
 }
-
 /* param idc: 机房英文标识(Optional) */
 func (r *DescribeAlarmHistoryRequest) SetIdc(idc string) {
     r.Idc = &idc
 }
-
 /* param startTime: 查询时间范围的开始时间， UNIX时间戳(Optional) */
 func (r *DescribeAlarmHistoryRequest) SetStartTime(startTime int) {
     r.StartTime = &startTime
 }
-
 /* param endTime: 查询时间范围的结束时间， UNIX时间戳(Optional) */
 func (r *DescribeAlarmHistoryRequest) SetEndTime(endTime int) {
     r.EndTime = &endTime

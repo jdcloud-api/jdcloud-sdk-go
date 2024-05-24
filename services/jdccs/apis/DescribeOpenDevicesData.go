@@ -30,7 +30,6 @@ type DescribeOpenDevicesDataRequest struct {
 
     /* 设备类型  */
     DeviceType string `json:"deviceType"`
-
 }
 
 /*
@@ -91,7 +90,6 @@ func NewDescribeOpenDevicesDataRequestWithoutParam() *DescribeOpenDevicesDataReq
 func (r *DescribeOpenDevicesDataRequest) SetDeviceCodes(deviceCodes string) {
     r.DeviceCodes = &deviceCodes
 }
-
 /* param deviceType: 设备类型(Required) */
 func (r *DescribeOpenDevicesDataRequest) SetDeviceType(deviceType string) {
     r.DeviceType = deviceType

@@ -48,7 +48,6 @@ type DescribeMetricDataRequest struct {
 
     /* 端口，指定port时须同时指定ip (Optional) */
     Port *string `json:"port"`
-
 }
 
 /*
@@ -139,37 +138,30 @@ func NewDescribeMetricDataRequestWithoutParam() *DescribeMetricDataRequest {
 func (r *DescribeMetricDataRequest) SetIdc(idc string) {
     r.Idc = idc
 }
-
 /* param metric: 监控项英文标识(id)(Required) */
 func (r *DescribeMetricDataRequest) SetMetric(metric string) {
     r.Metric = metric
 }
-
 /* param resourceId: 资源ID(Required) */
 func (r *DescribeMetricDataRequest) SetResourceId(resourceId string) {
     r.ResourceId = resourceId
 }
-
 /* param startTime: 查询时间范围的开始时间， UNIX时间戳，（机柜电流最多支持最近90天数据查询、带宽流量最多支持最近30天数据查询）(Required) */
 func (r *DescribeMetricDataRequest) SetStartTime(startTime int) {
     r.StartTime = startTime
 }
-
 /* param endTime: 查询时间范围的结束时间， UNIX时间戳，（机柜电流最多支持最近90天数据查询、带宽流量最多支持最近30天数据查询）(Required) */
 func (r *DescribeMetricDataRequest) SetEndTime(endTime int) {
     r.EndTime = endTime
 }
-
 /* param timeInterval: 时间间隔：分钟m、小时h、天d，如： 10分钟=10m、1小时=1h，3天=3d；默认5m，最小支持5m，最大90d 目前带宽上、下行流量查询，时间间隔：1m、5m，默认5m。1m时间间隔支持的最大时间范围为2小时(Optional) */
 func (r *DescribeMetricDataRequest) SetTimeInterval(timeInterval string) {
     r.TimeInterval = &timeInterval
 }
-
 /* param ip: 交换机IP，指定ip时须同时指定port(Optional) */
 func (r *DescribeMetricDataRequest) SetIp(ip string) {
     r.Ip = &ip
 }
-
 /* param port: 端口，指定port时须同时指定ip(Optional) */
 func (r *DescribeMetricDataRequest) SetPort(port string) {
     r.Port = &port

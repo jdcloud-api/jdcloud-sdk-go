@@ -50,7 +50,6 @@ type DescribeIpsRequest struct {
 
     /* null (Optional) */
     Sorts []common.Sort `json:"sorts"`
-
 }
 
 /*
@@ -130,38 +129,31 @@ func NewDescribeIpsRequestWithoutParam() *DescribeIpsRequest {
 func (r *DescribeIpsRequest) SetIdc(idc string) {
     r.Idc = idc
 }
-
 /* param pageNumber: 页码, 默认为1(Optional) */
 func (r *DescribeIpsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小，默认为20(Optional) */
 func (r *DescribeIpsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param lineType: 线路类型 dynamicBGP:动态BGP thirdLineBGP:三线BGP telecom:电信单线 unicom:联通单线 mobile:移动单线(Optional) */
 func (r *DescribeIpsRequest) SetLineType(lineType string) {
     r.LineType = &lineType
 }
-
 /* param status: 状态 normal:正常 abnormal:异常(Optional) */
 func (r *DescribeIpsRequest) SetStatus(status string) {
     r.Status = &status
 }
-
 /* param cidrAddr: IP地址段(Optional) */
 func (r *DescribeIpsRequest) SetCidrAddr(cidrAddr string) {
     r.CidrAddr = &cidrAddr
 }
-
 /* param filters: ipId - 公网IP实例ID，精确匹配，支持多个
 (Optional) */
 func (r *DescribeIpsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
-
 /* param sorts: null(Optional) */
 func (r *DescribeIpsRequest) SetSorts(sorts []common.Sort) {
     r.Sorts = sorts

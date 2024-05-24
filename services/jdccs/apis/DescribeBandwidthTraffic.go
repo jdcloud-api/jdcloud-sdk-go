@@ -30,7 +30,6 @@ type DescribeBandwidthTrafficRequest struct {
 
     /* 带宽（出口）实例ID  */
     BandwidthId string `json:"bandwidthId"`
-
 }
 
 /*
@@ -94,7 +93,6 @@ func NewDescribeBandwidthTrafficRequestWithoutParam() *DescribeBandwidthTrafficR
 func (r *DescribeBandwidthTrafficRequest) SetIdc(idc string) {
     r.Idc = idc
 }
-
 /* param bandwidthId: 带宽（出口）实例ID(Required) */
 func (r *DescribeBandwidthTrafficRequest) SetBandwidthId(bandwidthId string) {
     r.BandwidthId = bandwidthId

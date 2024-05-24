@@ -18,10 +18,9 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    jdccs "github.com/jdcloud-api/jdcloud-sdk-go/services/jdccs/models"
 )
 
-type DescribeRangetimeCabinetCurrentRequest struct {
+type DescribeRangetimeCabinetOriCurrentRequest struct {
 
     core.JDCloudRequest
 
@@ -36,9 +35,6 @@ type DescribeRangetimeCabinetCurrentRequest struct {
 
     /* 查询时间范围的结束时间， UNIX时间戳，（最多支持最近90天数据查询）  */
     EndTime int `json:"endTime"`
-
-    /* 时间间隔：分钟m、小时h、天d，如： 10分钟=10m、1小时=1h，3天=3d；默认5m，最小支持5m，最大90d 目前带宽上、下行流量查询，时间间隔：1m、5m，默认5m。时间间隔支持的最大时间范围为2小时 (Optional) */
-    TimeInterval *string `json:"timeInterval"`
 }
 
 /*
@@ -49,16 +45,16 @@ type DescribeRangetimeCabinetCurrentRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeRangetimeCabinetCurrentRequest(
+func NewDescribeRangetimeCabinetOriCurrentRequest(
     idc string,
     resourceId string,
     startTime int,
     endTime int,
-) *DescribeRangetimeCabinetCurrentRequest {
+) *DescribeRangetimeCabinetOriCurrentRequest {
 
-	return &DescribeRangetimeCabinetCurrentRequest{
+	return &DescribeRangetimeCabinetOriCurrentRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/idcs/{idc}/rangetimeCabinetCurrent",
+			URL:     "/idcs/{idc}/rangetimeCabinetOriCurrent",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -75,19 +71,17 @@ func NewDescribeRangetimeCabinetCurrentRequest(
  * param resourceId: 机柜资源ID (Required)
  * param startTime: 查询时间范围的开始时间， UNIX时间戳，（最多支持最近90天数据查询） (Required)
  * param endTime: 查询时间范围的结束时间， UNIX时间戳，（最多支持最近90天数据查询） (Required)
- * param timeInterval: 时间间隔：分钟m、小时h、天d，如： 10分钟=10m、1小时=1h，3天=3d；默认5m，最小支持5m，最大90d 目前带宽上、下行流量查询，时间间隔：1m、5m，默认5m。时间间隔支持的最大时间范围为2小时 (Optional)
  */
-func NewDescribeRangetimeCabinetCurrentRequestWithAllParams(
+func NewDescribeRangetimeCabinetOriCurrentRequestWithAllParams(
     idc string,
     resourceId string,
     startTime int,
     endTime int,
-    timeInterval *string,
-) *DescribeRangetimeCabinetCurrentRequest {
+) *DescribeRangetimeCabinetOriCurrentRequest {
 
-    return &DescribeRangetimeCabinetCurrentRequest{
+    return &DescribeRangetimeCabinetOriCurrentRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/idcs/{idc}/rangetimeCabinetCurrent",
+            URL:     "/idcs/{idc}/rangetimeCabinetOriCurrent",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -96,16 +90,15 @@ func NewDescribeRangetimeCabinetCurrentRequestWithAllParams(
         ResourceId: resourceId,
         StartTime: startTime,
         EndTime: endTime,
-        TimeInterval: timeInterval,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeRangetimeCabinetCurrentRequestWithoutParam() *DescribeRangetimeCabinetCurrentRequest {
+func NewDescribeRangetimeCabinetOriCurrentRequestWithoutParam() *DescribeRangetimeCabinetOriCurrentRequest {
 
-    return &DescribeRangetimeCabinetCurrentRequest{
+    return &DescribeRangetimeCabinetOriCurrentRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/idcs/{idc}/rangetimeCabinetCurrent",
+            URL:     "/idcs/{idc}/rangetimeCabinetOriCurrent",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -114,39 +107,35 @@ func NewDescribeRangetimeCabinetCurrentRequestWithoutParam() *DescribeRangetimeC
 }
 
 /* param idc: IDC机房ID(Required) */
-func (r *DescribeRangetimeCabinetCurrentRequest) SetIdc(idc string) {
+func (r *DescribeRangetimeCabinetOriCurrentRequest) SetIdc(idc string) {
     r.Idc = idc
 }
 /* param resourceId: 机柜资源ID(Required) */
-func (r *DescribeRangetimeCabinetCurrentRequest) SetResourceId(resourceId string) {
+func (r *DescribeRangetimeCabinetOriCurrentRequest) SetResourceId(resourceId string) {
     r.ResourceId = resourceId
 }
 /* param startTime: 查询时间范围的开始时间， UNIX时间戳，（最多支持最近90天数据查询）(Required) */
-func (r *DescribeRangetimeCabinetCurrentRequest) SetStartTime(startTime int) {
+func (r *DescribeRangetimeCabinetOriCurrentRequest) SetStartTime(startTime int) {
     r.StartTime = startTime
 }
 /* param endTime: 查询时间范围的结束时间， UNIX时间戳，（最多支持最近90天数据查询）(Required) */
-func (r *DescribeRangetimeCabinetCurrentRequest) SetEndTime(endTime int) {
+func (r *DescribeRangetimeCabinetOriCurrentRequest) SetEndTime(endTime int) {
     r.EndTime = endTime
-}
-/* param timeInterval: 时间间隔：分钟m、小时h、天d，如： 10分钟=10m、1小时=1h，3天=3d；默认5m，最小支持5m，最大90d 目前带宽上、下行流量查询，时间间隔：1m、5m，默认5m。时间间隔支持的最大时间范围为2小时(Optional) */
-func (r *DescribeRangetimeCabinetCurrentRequest) SetTimeInterval(timeInterval string) {
-    r.TimeInterval = &timeInterval
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeRangetimeCabinetCurrentRequest) GetRegionId() string {
+func (r DescribeRangetimeCabinetOriCurrentRequest) GetRegionId() string {
     return ""
 }
 
-type DescribeRangetimeCabinetCurrentResponse struct {
+type DescribeRangetimeCabinetOriCurrentResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeRangetimeCabinetCurrentResult `json:"result"`
+    Result DescribeRangetimeCabinetOriCurrentResult `json:"result"`
 }
 
-type DescribeRangetimeCabinetCurrentResult struct {
-    Data []jdccs.CabinetCurrentRespItem `json:"data"`
+type DescribeRangetimeCabinetOriCurrentResult struct {
+    Data interface{} `json:"data"`
 }

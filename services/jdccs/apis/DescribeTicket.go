@@ -27,7 +27,6 @@ type DescribeTicketRequest struct {
 
     /* 工单编号  */
     TicketNo string `json:"ticketNo"`
-
 }
 
 /*

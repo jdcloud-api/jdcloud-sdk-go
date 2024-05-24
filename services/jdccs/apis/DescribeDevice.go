@@ -30,7 +30,6 @@ type DescribeDeviceRequest struct {
 
     /* 设备实例ID  */
     DeviceId string `json:"deviceId"`
-
 }
 
 /*
@@ -94,7 +93,6 @@ func NewDescribeDeviceRequestWithoutParam() *DescribeDeviceRequest {
 func (r *DescribeDeviceRequest) SetIdc(idc string) {
     r.Idc = idc
 }
-
 /* param deviceId: 设备实例ID(Required) */
 func (r *DescribeDeviceRequest) SetDeviceId(deviceId string) {
     r.DeviceId = deviceId

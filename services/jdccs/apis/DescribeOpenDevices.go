@@ -24,7 +24,6 @@ import (
 type DescribeOpenDevicesRequest struct {
 
     core.JDCloudRequest
-
 }
 
 /*
@@ -71,6 +70,7 @@ func NewDescribeOpenDevicesRequestWithoutParam() *DescribeOpenDevicesRequest {
         },
     }
 }
+
 
 
 // GetRegionId returns path parameter 'regionId' if exist,

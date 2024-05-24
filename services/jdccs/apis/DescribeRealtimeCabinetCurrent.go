@@ -30,7 +30,6 @@ type DescribeRealtimeCabinetCurrentRequest struct {
 
     /* 资源ID，支持多个resourceId批量查询，每个id用英文竖线分隔  */
     ResourceId string `json:"resourceId"`
-
 }
 
 /*
@@ -94,7 +93,6 @@ func NewDescribeRealtimeCabinetCurrentRequestWithoutParam() *DescribeRealtimeCab
 func (r *DescribeRealtimeCabinetCurrentRequest) SetIdc(idc string) {
     r.Idc = idc
 }
-
 /* param resourceId: 资源ID，支持多个resourceId批量查询，每个id用英文竖线分隔(Required) */
 func (r *DescribeRealtimeCabinetCurrentRequest) SetResourceId(resourceId string) {
     r.ResourceId = resourceId

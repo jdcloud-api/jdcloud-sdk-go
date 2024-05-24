@@ -36,7 +36,6 @@ type DescribeBandwidthTrafficsRequest struct {
 
     /* 带宽（出口）名称 (Optional) */
     BandwidthName *string `json:"bandwidthName"`
-
 }
 
 /*
@@ -103,17 +102,14 @@ func NewDescribeBandwidthTrafficsRequestWithoutParam() *DescribeBandwidthTraffic
 func (r *DescribeBandwidthTrafficsRequest) SetIdc(idc string) {
     r.Idc = idc
 }
-
 /* param pageNumber: 页码, 默认为1(Optional) */
 func (r *DescribeBandwidthTrafficsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小，默认为20(Optional) */
 func (r *DescribeBandwidthTrafficsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param bandwidthName: 带宽（出口）名称(Optional) */
 func (r *DescribeBandwidthTrafficsRequest) SetBandwidthName(bandwidthName string) {
     r.BandwidthName = &bandwidthName
