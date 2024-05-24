@@ -27,7 +27,6 @@ type DescribeIdcOverviewRequest struct {
 
     /* IDC机房ID  */
     Idc string `json:"idc"`
-
 }
 
 /*

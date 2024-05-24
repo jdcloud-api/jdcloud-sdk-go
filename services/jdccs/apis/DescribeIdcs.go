@@ -36,7 +36,6 @@ type DescribeIdcsRequest struct {
 
     /* 是否强制包含外部机房 yes/no (Optional) */
     IncludeExternalIdc *string `json:"includeExternalIdc"`
-
 }
 
 /*
@@ -100,17 +99,14 @@ func NewDescribeIdcsRequestWithoutParam() *DescribeIdcsRequest {
 func (r *DescribeIdcsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小，默认为20(Optional) */
 func (r *DescribeIdcsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param all: 是否查询全部，默认分页(Optional) */
 func (r *DescribeIdcsRequest) SetAll(all int) {
     r.All = &all
 }
-
 /* param includeExternalIdc: 是否强制包含外部机房 yes/no(Optional) */
 func (r *DescribeIdcsRequest) SetIncludeExternalIdc(includeExternalIdc string) {
     r.IncludeExternalIdc = &includeExternalIdc

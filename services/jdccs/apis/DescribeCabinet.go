@@ -30,7 +30,6 @@ type DescribeCabinetRequest struct {
 
     /* 机柜实例ID  */
     CabinetId string `json:"cabinetId"`
-
 }
 
 /*
@@ -94,7 +93,6 @@ func NewDescribeCabinetRequestWithoutParam() *DescribeCabinetRequest {
 func (r *DescribeCabinetRequest) SetIdc(idc string) {
     r.Idc = idc
 }
-
 /* param cabinetId: 机柜实例ID(Required) */
 func (r *DescribeCabinetRequest) SetCabinetId(cabinetId string) {
     r.CabinetId = cabinetId

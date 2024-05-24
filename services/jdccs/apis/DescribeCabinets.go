@@ -53,7 +53,6 @@ cabinetOpenStatus - 机柜开通状态，精确匹配，支持多个
 
     /* cabinetNo - 机柜编码 roomNo - 房间号 (Optional) */
     Sorts []common.Sort `json:"sorts"`
-
 }
 
 /*
@@ -136,32 +135,26 @@ func NewDescribeCabinetsRequestWithoutParam() *DescribeCabinetsRequest {
 func (r *DescribeCabinetsRequest) SetIdc(idc string) {
     r.Idc = idc
 }
-
 /* param pageNumber: 页码, 默认为1(Optional) */
 func (r *DescribeCabinetsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小，默认为20(Optional) */
 func (r *DescribeCabinetsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param cabinetType: 机柜类型 formal:正式机柜 reserved:预留机柜(Optional) */
 func (r *DescribeCabinetsRequest) SetCabinetType(cabinetType string) {
     r.CabinetType = &cabinetType
 }
-
 /* param cabinetOpenStatus: 机柜开通状态 disabled:未开通 enabling:开通中 enabled:已开通 disabling:关电中(Optional) */
 func (r *DescribeCabinetsRequest) SetCabinetOpenStatus(cabinetOpenStatus string) {
     r.CabinetOpenStatus = &cabinetOpenStatus
 }
-
 /* param cabinetNo: 机柜编码(Optional) */
 func (r *DescribeCabinetsRequest) SetCabinetNo(cabinetNo string) {
     r.CabinetNo = &cabinetNo
 }
-
 /* param filters: roomNo - 房间号，精确匹配，支持多个
 cabinetId - 机柜ID，精确匹配，支持多个
 cabinetNo - 机柜编码，精确匹配，支持多个
@@ -170,7 +163,6 @@ cabinetOpenStatus - 机柜开通状态，精确匹配，支持多个
 func (r *DescribeCabinetsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
-
 /* param sorts: cabinetNo - 机柜编码 roomNo - 房间号(Optional) */
 func (r *DescribeCabinetsRequest) SetSorts(sorts []common.Sort) {
     r.Sorts = sorts

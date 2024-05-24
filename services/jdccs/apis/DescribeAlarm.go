@@ -27,7 +27,6 @@ type DescribeAlarmRequest struct {
 
     /* 报警规则ID  */
     AlarmId string `json:"alarmId"`
-
 }
 
 /*

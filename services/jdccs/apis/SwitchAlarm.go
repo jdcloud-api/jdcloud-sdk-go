@@ -29,7 +29,6 @@ type SwitchAlarmRequest struct {
 
     /* 规则状态 disabled:禁用 enabled:启用 (Optional) */
     Status *string `json:"status"`
-
 }
 
 /*
@@ -90,7 +89,6 @@ func NewSwitchAlarmRequestWithoutParam() *SwitchAlarmRequest {
 func (r *SwitchAlarmRequest) SetAlarmId(alarmId string) {
     r.AlarmId = alarmId
 }
-
 /* param status: 规则状态 disabled:禁用 enabled:启用(Optional) */
 func (r *SwitchAlarmRequest) SetStatus(status string) {
     r.Status = &status

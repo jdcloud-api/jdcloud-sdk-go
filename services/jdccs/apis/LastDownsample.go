@@ -33,7 +33,6 @@ type LastDownsampleRequest struct {
 
     /* 资源ID，支持多个resourceId批量查询，每个id用英文竖线分隔  */
     ResourceId string `json:"resourceId"`
-
 }
 
 /*
@@ -103,12 +102,10 @@ func NewLastDownsampleRequestWithoutParam() *LastDownsampleRequest {
 func (r *LastDownsampleRequest) SetIdc(idc string) {
     r.Idc = idc
 }
-
 /* param metric: 监控项英文标识(id)(Required) */
 func (r *LastDownsampleRequest) SetMetric(metric string) {
     r.Metric = metric
 }
-
 /* param resourceId: 资源ID，支持多个resourceId批量查询，每个id用英文竖线分隔(Required) */
 func (r *LastDownsampleRequest) SetResourceId(resourceId string) {
     r.ResourceId = resourceId

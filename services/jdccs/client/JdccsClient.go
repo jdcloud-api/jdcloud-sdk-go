@@ -40,7 +40,7 @@ func NewJdccsClient(credential *core.Credential) *JdccsClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "jdccs",
-            Revision:    "1.1.4",
+            Revision:    "1.1.5",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -428,6 +428,26 @@ func (c *JdccsClient) DescribeAlarms(request *jdccs.DescribeAlarmsRequest) (*jdc
     }
 
     jdResp := &jdccs.DescribeAlarmsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 按照时间段查询单个机柜AB路电流-原始数据 */
+func (c *JdccsClient) DescribeRangetimeCabinetOriCurrent(request *jdccs.DescribeRangetimeCabinetOriCurrentRequest) (*jdccs.DescribeRangetimeCabinetOriCurrentResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdccs.DescribeRangetimeCabinetOriCurrentResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

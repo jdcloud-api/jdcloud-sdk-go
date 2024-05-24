@@ -54,7 +54,6 @@ type CreateGeneralServicesTicketRequest struct {
 
     /* 附件 (Optional) */
     Attach []jdccs.Attach `json:"attach"`
-
 }
 
 /*
@@ -136,47 +135,38 @@ func NewCreateGeneralServicesTicketRequestWithoutParam() *CreateGeneralServicesT
 func (r *CreateGeneralServicesTicketRequest) SetPhone(phone string) {
     r.Phone = &phone
 }
-
 /* param email: 提单人邮箱(Optional) */
 func (r *CreateGeneralServicesTicketRequest) SetEmail(email string) {
     r.Email = &email
 }
-
 /* param idc: idc机房实例id(Optional) */
 func (r *CreateGeneralServicesTicketRequest) SetIdc(idc string) {
     r.Idc = &idc
 }
-
 /* param isExternalIdc: 是否是商业化外部机房(Optional) */
 func (r *CreateGeneralServicesTicketRequest) SetIsExternalIdc(isExternalIdc bool) {
     r.IsExternalIdc = &isExternalIdc
 }
-
 /* param count: 数量(Optional) */
 func (r *CreateGeneralServicesTicketRequest) SetCount(count int) {
     r.Count = &count
 }
-
 /* param externalIdcAddress: 外部机房地址(Optional) */
 func (r *CreateGeneralServicesTicketRequest) SetExternalIdcAddress(externalIdcAddress string) {
     r.ExternalIdcAddress = &externalIdcAddress
 }
-
 /* param externalIdcContactPerson: 外部机房联系人(Optional) */
 func (r *CreateGeneralServicesTicketRequest) SetExternalIdcContactPerson(externalIdcContactPerson string) {
     r.ExternalIdcContactPerson = &externalIdcContactPerson
 }
-
 /* param externalIdcContactPhone: 外部机房联系电话(Optional) */
 func (r *CreateGeneralServicesTicketRequest) SetExternalIdcContactPhone(externalIdcContactPhone string) {
     r.ExternalIdcContactPhone = &externalIdcContactPhone
 }
-
 /* param remarks: 描述(Optional) */
 func (r *CreateGeneralServicesTicketRequest) SetRemarks(remarks string) {
     r.Remarks = &remarks
 }
-
 /* param attach: 附件(Optional) */
 func (r *CreateGeneralServicesTicketRequest) SetAttach(attach []jdccs.Attach) {
     r.Attach = attach

@@ -47,7 +47,6 @@ type DescribeAlarmsRequest struct {
     /* alarmId - 规则实施ID，精确匹配，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
-
 }
 
 /*
@@ -121,32 +120,26 @@ func NewDescribeAlarmsRequestWithoutParam() *DescribeAlarmsRequest {
 func (r *DescribeAlarmsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小，默认为20(Optional) */
 func (r *DescribeAlarmsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param resourceType: 资源类型 bandwidth:带宽(Optional) */
 func (r *DescribeAlarmsRequest) SetResourceType(resourceType string) {
     r.ResourceType = &resourceType
 }
-
 /* param resourceId: 资源ID，指定resourceId时须指定resourceType(Optional) */
 func (r *DescribeAlarmsRequest) SetResourceId(resourceId string) {
     r.ResourceId = &resourceId
 }
-
 /* param idc: 机房英文标识(Optional) */
 func (r *DescribeAlarmsRequest) SetIdc(idc string) {
     r.Idc = &idc
 }
-
 /* param status: 规则状态 disabled:禁用 enabled:启用(Optional) */
 func (r *DescribeAlarmsRequest) SetStatus(status string) {
     r.Status = &status
 }
-
 /* param filters: alarmId - 规则实施ID，精确匹配，支持多个
 (Optional) */
 func (r *DescribeAlarmsRequest) SetFilters(filters []common.Filter) {

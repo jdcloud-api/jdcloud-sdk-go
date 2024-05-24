@@ -62,7 +62,6 @@ type DescribeTicketsRequest struct {
 
     /* createdTime - 创建时间 closedTime - 关闭时间 (Optional) */
     Sorts []common.Sort `json:"sorts"`
-
 }
 
 /*
@@ -151,58 +150,47 @@ func NewDescribeTicketsRequestWithoutParam() *DescribeTicketsRequest {
 func (r *DescribeTicketsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小，默认为20(Optional) */
 func (r *DescribeTicketsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param type_: 工单TAB类型 pendingProcess:待我处理 pendingReview:待审核 processing:处理中 all:全部(默认)(Optional) */
 func (r *DescribeTicketsRequest) SetType(type_ string) {
     r.Type = &type_
 }
-
 /* param ticketTypeName: 工单类型(Optional) */
 func (r *DescribeTicketsRequest) SetTicketTypeName(ticketTypeName string) {
     r.TicketTypeName = &ticketTypeName
 }
-
 /* param status: 工单状态 pendingReview:待审核 revoked:已撤销 processing:处理中 pendingVerification:待核验 pendingClose:待关单 rejected:已拒绝 completed:已完成 cancelled:已取消 draft:草稿中(Optional) */
 func (r *DescribeTicketsRequest) SetStatus(status string) {
     r.Status = &status
 }
-
 /* param ticketNo: 工单编号(Optional) */
 func (r *DescribeTicketsRequest) SetTicketNo(ticketNo string) {
     r.TicketNo = &ticketNo
 }
-
 /* param ticketTemplateName: 工单名称(Optional) */
 func (r *DescribeTicketsRequest) SetTicketTemplateName(ticketTemplateName string) {
     r.TicketTemplateName = &ticketTemplateName
 }
-
 /* param description: 描述(Optional) */
 func (r *DescribeTicketsRequest) SetDescription(description string) {
     r.Description = &description
 }
-
 /* param startTime: 创建开始时间，遵循ISO8601标准，使用UTC时间，格式为：yyyy-MM-ddTHH:mm:ssZ(Optional) */
 func (r *DescribeTicketsRequest) SetStartTime(startTime string) {
     r.StartTime = &startTime
 }
-
 /* param endTime: 创建结束时间，遵循ISO8601标准，使用UTC时间，格式为：yyyy-MM-ddTHH:mm:ssZ(Optional) */
 func (r *DescribeTicketsRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
-
 /* param filters: ticketNo - 工单编号，精确匹配，支持多个
 (Optional) */
 func (r *DescribeTicketsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
-
 /* param sorts: createdTime - 创建时间 closedTime - 关闭时间(Optional) */
 func (r *DescribeTicketsRequest) SetSorts(sorts []common.Sort) {
     r.Sorts = sorts

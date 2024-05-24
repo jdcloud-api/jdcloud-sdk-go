@@ -33,7 +33,6 @@ type DescribeTrafficSamplingRequest struct {
 
     /* 查询时间范围的结束时间， UNIX时间戳，（支持查询最近30分钟数据且时间范围不超过5分钟）  */
     EndTime int `json:"endTime"`
-
 }
 
 /*
@@ -103,12 +102,10 @@ func NewDescribeTrafficSamplingRequestWithoutParam() *DescribeTrafficSamplingReq
 func (r *DescribeTrafficSamplingRequest) SetResourceId(resourceId string) {
     r.ResourceId = resourceId
 }
-
 /* param startTime: 查询时间范围的开始时间， UNIX时间戳，（支持查询最近30分钟数据且时间范围不超过5分钟）(Required) */
 func (r *DescribeTrafficSamplingRequest) SetStartTime(startTime int) {
     r.StartTime = startTime
 }
-
 /* param endTime: 查询时间范围的结束时间， UNIX时间戳，（支持查询最近30分钟数据且时间范围不超过5分钟）(Required) */
 func (r *DescribeTrafficSamplingRequest) SetEndTime(endTime int) {
     r.EndTime = endTime
