@@ -19,6 +19,10 @@ package models
 
 type Command struct {
 
+    /* 命令Id
+ (Optional) */
+    CommandId string `json:"commandId"`
+
     /* 命令名称，长度为1\~128个字符，只允许中文、数字、大小写字母、英文下划线（\_）、连字符（-）及点（.）。
  (Optional) */
     CommandName string `json:"commandName"`

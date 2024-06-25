@@ -40,7 +40,7 @@ func NewAssistantClient(credential *core.Credential) *AssistantClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "assistant",
-            Revision:    "1.0.1",
+            Revision:    "1.0.2",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
