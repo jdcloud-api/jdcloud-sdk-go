@@ -34,6 +34,9 @@ type ReturnBillResult struct {
     /* 渠道商类型 (Optional) */
     DistributorType int `json:"distributorType"`
 
+    /* pin (Optional) */
+    Pin string `json:"pin"`
+
     /* month (Optional) */
     Month string `json:"month"`
 
@@ -45,6 +48,12 @@ type ReturnBillResult struct {
 
     /* 结束时间 (Optional) */
     BillEnd string `json:"billEnd"`
+
+    /* 产品类型(0公有云1云市场2Elite) (Optional) */
+    ProductType string `json:"productType"`
+
+    /* 产品类型名称(公有云 云市场 Elite) (Optional) */
+    ProductTypeName string `json:"productTypeName"`
 
     /* 周期类型 (Optional) */
     CircleType int `json:"circleType"`
@@ -108,4 +117,7 @@ type ReturnBillResult struct {
 
     /* 返还单状态 (Optional) */
     ReturnBillStatusList []ReturnBillStatusResult `json:"returnBillStatusList"`
+
+    /* 调账记录 (Optional) */
+    DistributorBillReturnRecordList []DistributorBillReturnRecord `json:"distributorBillReturnRecordList"`
 }

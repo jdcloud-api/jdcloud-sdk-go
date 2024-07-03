@@ -126,31 +126,27 @@ func NewDescribeCustomerBillByProductRequestWithoutParam() *DescribeCustomerBill
 func (r *DescribeCustomerBillByProductRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param pin: pin(Optional) */
 func (r *DescribeCustomerBillByProductRequest) SetPin(pin string) {
     r.Pin = &pin
 }
-
 /* param startTime: 按月查询开始时间（yyyy-MM-dd）,不可跨月(Required) */
 func (r *DescribeCustomerBillByProductRequest) SetStartTime(startTime string) {
     r.StartTime = startTime
 }
-
 /* param endTime: 按月查询结束时间（yyyy-MM-dd）,不可跨月(Required) */
 func (r *DescribeCustomerBillByProductRequest) SetEndTime(endTime string) {
     r.EndTime = endTime
 }
-
 /* param pageSize: 每页条数,不超过100(Required) */
 func (r *DescribeCustomerBillByProductRequest) SetPageSize(pageSize int) {
     r.PageSize = pageSize
 }
-
 /* param pageIndex: 第几页(Required) */
 func (r *DescribeCustomerBillByProductRequest) SetPageIndex(pageIndex int) {
     r.PageIndex = pageIndex
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

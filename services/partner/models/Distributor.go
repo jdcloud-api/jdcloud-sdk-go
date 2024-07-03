@@ -81,4 +81,7 @@ type Distributor struct {
 
     /* 京东云负责人(京东云人员erp或名称) (Optional) */
     Erp string `json:"erp"`
+
+    /* 是否享受折扣(1享受2不享受) (Optional) */
+    DiscountFlag int `json:"discountFlag"`
 }

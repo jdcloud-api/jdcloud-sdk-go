@@ -126,31 +126,27 @@ func NewGetEachConsumptionRequestWithoutParam() *GetEachConsumptionRequest {
 func (r *GetEachConsumptionRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param startTime: 按月查询开始时间（yyyy/MM/dd）(Required) */
 func (r *GetEachConsumptionRequest) SetStartTime(startTime string) {
     r.StartTime = startTime
 }
-
 /* param endTime: 按月查询结束时间（yyyy/MM/dd）(Required) */
 func (r *GetEachConsumptionRequest) SetEndTime(endTime string) {
     r.EndTime = endTime
 }
-
 /* param pin: pin(Optional) */
 func (r *GetEachConsumptionRequest) SetPin(pin string) {
     r.Pin = &pin
 }
-
 /* param pageSize: 每页条数(Required) */
 func (r *GetEachConsumptionRequest) SetPageSize(pageSize int) {
     r.PageSize = pageSize
 }
-
 /* param pageIndex: 第几页(Required) */
 func (r *GetEachConsumptionRequest) SetPageIndex(pageIndex int) {
     r.PageIndex = pageIndex
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

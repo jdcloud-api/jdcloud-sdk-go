@@ -70,8 +70,14 @@ type CustomerVo struct {
     /* 账户类型 (Optional) */
     AccountTypeName string `json:"accountTypeName"`
 
+    /* 账户类型（1个人2企业） (Optional) */
+    AccountType int `json:"accountType"`
+
     /* 实名标识名称 (Optional) */
     RealName string `json:"realName"`
+
+    /* 实名标识 (Optional) */
+    RealNameFlag int `json:"realNameFlag"`
 
     /* 名称 (Optional) */
     Name string `json:"name"`

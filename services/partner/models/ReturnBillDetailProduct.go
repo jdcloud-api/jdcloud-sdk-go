@@ -26,7 +26,7 @@ type ReturnBillDetailProduct struct {
     ReturnBillDetailId int `json:"returnBillDetailId"`
 
     /* 产品类型 (Optional) */
-    ProductType int `json:"productType"`
+    ProductType string `json:"productType"`
 
     /* 产品ID (Optional) */
     ProductId string `json:"productId"`

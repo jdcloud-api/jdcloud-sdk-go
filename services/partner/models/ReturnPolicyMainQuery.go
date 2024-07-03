@@ -37,6 +37,9 @@ type ReturnPolicyMainQuery struct {
     /* 返还政策主名称like (Optional) */
     ReturnPolicyNameLike string `json:"returnPolicyNameLike"`
 
+    /* 产品类型(0公有云1云市场2Elite) (Optional) */
+    ProductType string `json:"productType"`
+
     /* 备注 (Optional) */
     Remark string `json:"remark"`
 

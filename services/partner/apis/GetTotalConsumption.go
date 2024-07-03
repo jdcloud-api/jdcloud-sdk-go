@@ -102,16 +102,15 @@ func NewGetTotalConsumptionRequestWithoutParam() *GetTotalConsumptionRequest {
 func (r *GetTotalConsumptionRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param startTime: 按月查询开始时间（yyyy/MM/dd）(Required) */
 func (r *GetTotalConsumptionRequest) SetStartTime(startTime string) {
     r.StartTime = startTime
 }
-
 /* param endTime: 按月查询结束时间（yyyy/MM/dd）(Required) */
 func (r *GetTotalConsumptionRequest) SetEndTime(endTime string) {
     r.EndTime = endTime
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

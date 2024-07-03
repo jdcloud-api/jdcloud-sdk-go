@@ -88,6 +88,15 @@ type DistributorDTO struct {
     /* 开户行支行联行号 (Optional) */
     BankBranchNo string `json:"bankBranchNo"`
 
+    /* 税务识别号 (Optional) */
+    TaxNumber string `json:"taxNumber"`
+
+    /* 发票抬头 (Optional) */
+    InvoiceTitle string `json:"invoiceTitle"`
+
+    /* 1 全强代付,2 全自付, 3 自选 (Optional) */
+    PayType int `json:"payType"`
+
     /* 合同主体 (Optional) */
     ContractSubject string `json:"contractSubject"`
 
@@ -99,6 +108,12 @@ type DistributorDTO struct {
 
     /* 返还政策ID (Optional) */
     ReturnPolicyId string `json:"returnPolicyId"`
+
+    /*  (Optional) */
+    DistributorPolicyList []DistributorPolicyDTO `json:"distributorPolicyList"`
+
+    /*  (Optional) */
+    SubDistributorPolicyList []DistributorPolicyDTO `json:"subDistributorPolicyList"`
 
     /*  (Optional) */
     DistributorProductList []DistributorProductDTO `json:"distributorProductList"`
@@ -126,4 +141,28 @@ type DistributorDTO struct {
 
     /* 京东云负责人(京东云人员erp或名称) (Optional) */
     Erp string `json:"erp"`
+
+    /* 京东云负责人姓名 (Optional) */
+    ErpName string `json:"erpName"`
+
+    /* 京东云负责人部门 (Optional) */
+    ErpDept string `json:"erpDept"`
+
+    /* 服务商级别 (Optional) */
+    Grade int `json:"grade"`
+
+    /* 服务期限（开始时间） (Optional) */
+    EffectiveDate string `json:"effectiveDate"`
+
+    /* 服务期限（结束时间） (Optional) */
+    ExpirationDate string `json:"expirationDate"`
+
+    /* 电子合同编号 (Optional) */
+    EContractNo string `json:"eContractNo"`
+
+    /* EBS合同编号 (Optional) */
+    EbsContractNo string `json:"ebsContractNo"`
+
+    /* 是否享受折扣(1享受2不享受) (Optional) */
+    DiscountFlag int `json:"discountFlag"`
 }

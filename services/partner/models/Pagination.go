@@ -25,7 +25,7 @@ type Pagination struct {
     /* 页数 (Optional) */
     NumberPages int `json:"numberPages"`
 
-    /* 每页记录数 (Optional) */
+    /* 总记录数 (Optional) */
     NumberRecords int `json:"numberRecords"`
 
     /* 页面大小 (Optional) */

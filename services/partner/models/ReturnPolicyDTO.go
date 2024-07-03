@@ -22,43 +22,45 @@ type ReturnPolicyDTO struct {
     /* ID (Optional) */
     Id int `json:"id"`
 
-    /* 部门ID (Optional) */
+    /* 部门ID  */
     DeptId int `json:"deptId"`
 
     /* 部门名称 (Optional) */
     DeptName string `json:"deptName"`
 
-    /* 渠道商类型 (Optional) */
+    /* 渠道商类型  */
     DistributorType int `json:"distributorType"`
 
     /* 返还类型 (Optional) */
     ReturnType int `json:"returnType"`
 
-    /* 返还政策主ID (Optional) */
+    /* 返还政策主ID  */
     ReturnPolicyId int `json:"returnPolicyId"`
 
     /* 返还政策主名称 (Optional) */
     ReturnPolicyName string `json:"returnPolicyName"`
 
-    /* 项目编码 (Optional) */
+    /* 项目编码  */
     ItemId int `json:"itemId"`
 
     /* 项目名称 (Optional) */
     ItemName string `json:"itemName"`
 
-    /* 返还依据类型 (Optional) */
+    /* 返还依据类型  */
     ReturnRuleType int `json:"returnRuleType"`
 
-    /* 产品ID (Optional) */
-    ProductId string `json:"productId"`
-
-    /* 产品类型 (Optional) */
-    ProductType int `json:"productType"`
+    /* 审批邮件附件id，取上传邮件附件接口返回的approveFileId值  */
+    ApproveFileId string `json:"approveFileId"`
 
     /*  (Optional) */
     ReturnPolicyProductDTOList []ReturnPolicyProductDTO `json:"returnPolicyProductDTOList"`
 
-    /* 周期类型 (Optional) */
+    /* 选择的产品列表
+例："returnPolicyProductMap": {"1": ["500138","500139"],"2": ["719","720"]}
+ (Optional) */
+    ReturnPolicyProductMap interface{} `json:"returnPolicyProductMap"`
+
+    /* 周期类型  */
     CircleType int `json:"circleType"`
 
     /* 周期名称 (Optional) */
@@ -71,13 +73,7 @@ type ReturnPolicyDTO struct {
     CircleValue int `json:"circleValue"`
 
     /*  (Optional) */
-    Condition []ReturnConditionOperatorDTO `json:"condition"`
-
-    /* 说明 (Optional) */
-    ConditionRemark string `json:"conditionRemark"`
-
-    /* 返还比例 (Optional) */
-    ReturnRatio int `json:"returnRatio"`
+    Conditions []ReturnConditionDTO `json:"conditions"`
 
     /* 状态 (Optional) */
     Status int `json:"status"`

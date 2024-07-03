@@ -28,6 +28,9 @@ type Customer struct {
     /* 账户名 (Optional) */
     LoginName string `json:"loginName"`
 
+    /* 账户ID (Optional) */
+    AccountingId int64 `json:"accountingId"`
+
     /* 渠道商ID (Optional) */
     DistributorId string `json:"distributorId"`
 
@@ -73,11 +76,17 @@ type Customer struct {
     /* 修改人 (Optional) */
     UpdateUser string `json:"updateUser"`
 
-    /* 账户类型 (Optional) */
+    /* 账户类型名称（1个人2企业） (Optional) */
     AccountTypeName string `json:"accountTypeName"`
+
+    /* 账户类型（1个人2企业） (Optional) */
+    AccountType int `json:"accountType"`
 
     /* 实名标识名称 (Optional) */
     RealName string `json:"realName"`
+
+    /* 实名标识 (Optional) */
+    RealNameFlag int `json:"realNameFlag"`
 
     /* 名称 (Optional) */
     Name string `json:"name"`
