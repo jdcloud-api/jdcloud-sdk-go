@@ -40,7 +40,7 @@ func NewPartnerClient(credential *core.Credential) *PartnerClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "partner",
-            Revision:    "1.1.4",
+            Revision:    "1.3.13",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -57,8 +57,8 @@ func (c *PartnerClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
 }
 
-/* 查询客户信息 */
-func (c *PartnerClient) QueryMyCustomerList(request *partner.QueryMyCustomerListRequest) (*partner.QueryMyCustomerListResponse, error) {
+/* 删除合同附件 */
+func (c *PartnerClient) DeleteFile(request *partner.DeleteFileRequest) (*partner.DeleteFileResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -67,7 +67,7 @@ func (c *PartnerClient) QueryMyCustomerList(request *partner.QueryMyCustomerList
         return nil, err
     }
 
-    jdResp := &partner.QueryMyCustomerListResponse{}
+    jdResp := &partner.DeleteFileResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -77,8 +77,8 @@ func (c *PartnerClient) QueryMyCustomerList(request *partner.QueryMyCustomerList
     return jdResp, err
 }
 
-/* 查询服务商下每个客户总消费数据 */
-func (c *PartnerClient) GetEachConsumption(request *partner.GetEachConsumptionRequest) (*partner.GetEachConsumptionResponse, error) {
+/* 编辑字典 */
+func (c *PartnerClient) ModifyDicDetail(request *partner.ModifyDicDetailRequest) (*partner.ModifyDicDetailResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -87,7 +87,47 @@ func (c *PartnerClient) GetEachConsumption(request *partner.GetEachConsumptionRe
         return nil, err
     }
 
-    jdResp := &partner.GetEachConsumptionResponse{}
+    jdResp := &partner.ModifyDicDetailResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 添加合作产品 */
+func (c *PartnerClient) AddCoProduct(request *partner.AddCoProductRequest) (*partner.AddCoProductResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &partner.AddCoProductResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 合作产品详情 */
+func (c *PartnerClient) DescribeCoProduct(request *partner.DescribeCoProductRequest) (*partner.DescribeCoProductResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &partner.DescribeCoProductResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -117,6 +157,106 @@ func (c *PartnerClient) DescribeCustomerBillByProduct(request *partner.DescribeC
     return jdResp, err
 }
 
+/* 获取伙伴账单 */
+func (c *PartnerClient) DescribePartnerBills(request *partner.DescribePartnerBillsRequest) (*partner.DescribePartnerBillsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &partner.DescribePartnerBillsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 合作产品列表导出 */
+func (c *PartnerClient) ExportCoProducts(request *partner.ExportCoProductsRequest) (*partner.ExportCoProductsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &partner.ExportCoProductsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 添加合同信息 */
+func (c *PartnerClient) AddContract(request *partner.AddContractRequest) (*partner.AddContractResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &partner.AddContractResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询服务商下每个客户总消费数据 */
+func (c *PartnerClient) GetEachConsumption(request *partner.GetEachConsumptionRequest) (*partner.GetEachConsumptionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &partner.GetEachConsumptionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询合作产品列表 */
+func (c *PartnerClient) DescribeCoProducts(request *partner.DescribeCoProductsRequest) (*partner.DescribeCoProductsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &partner.DescribeCoProductsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询服务商相关的总消费数据 */
 func (c *PartnerClient) GetTotalConsumption(request *partner.GetTotalConsumptionRequest) (*partner.GetTotalConsumptionResponse, error) {
     if request == nil {
@@ -128,6 +268,86 @@ func (c *PartnerClient) GetTotalConsumption(request *partner.GetTotalConsumption
     }
 
     jdResp := &partner.GetTotalConsumptionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询渠道用户信息 */
+func (c *PartnerClient) GetPartnerUserList(request *partner.GetPartnerUserListRequest) (*partner.GetPartnerUserListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &partner.GetPartnerUserListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 编辑合作产品 */
+func (c *PartnerClient) ModifyCoProduct(request *partner.ModifyCoProductRequest) (*partner.ModifyCoProductResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &partner.ModifyCoProductResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询客户信息 */
+func (c *PartnerClient) QueryMyCustomerList(request *partner.QueryMyCustomerListRequest) (*partner.QueryMyCustomerListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &partner.QueryMyCustomerListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 编辑合同信息 */
+func (c *PartnerClient) ModifyContract(request *partner.ModifyContractRequest) (*partner.ModifyContractResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &partner.ModifyContractResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

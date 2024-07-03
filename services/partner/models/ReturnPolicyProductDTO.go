@@ -25,13 +25,13 @@ type ReturnPolicyProductDTO struct {
     /* 返还政策明细ID (Optional) */
     ReturnPolicyId int `json:"returnPolicyId"`
 
-    /* 返还规则类型 (Optional) */
+    /* 返还规则类型  */
     ReturnRuleType int `json:"returnRuleType"`
 
-    /* 产品类型 (Optional) */
-    ProductType int `json:"productType"`
+    /* 产品类型  */
+    ProductType string `json:"productType"`
 
-    /* 产品ID (Optional) */
+    /* 产品ID  */
     ProductId string `json:"productId"`
 
     /* 产品名称 (Optional) */

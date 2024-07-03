@@ -49,8 +49,8 @@ type ReturnPolicyQuery struct {
     /* 产品ID (Optional) */
     ProductId string `json:"productId"`
 
-    /* 产品类型 (Optional) */
-    ProductType int `json:"productType"`
+    /* 产品类型（多个产品类型，分开） (Optional) */
+    ProductType string `json:"productType"`
 
     /* 周期类型 (Optional) */
     CircleType int `json:"circleType"`

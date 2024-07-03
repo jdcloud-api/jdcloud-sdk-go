@@ -64,6 +64,15 @@ type ReturnBillQuery struct {
     /* 返还方式 (Optional) */
     ReturnMode int `json:"returnMode"`
 
+    /* 产品分类(0公有云1云市场2Elite，多个逗号分开) (Optional) */
+    ProductType string `json:"productType"`
+
+    /* 查询月(格式：2023-10) (Optional) */
+    QueryMonth string `json:"queryMonth"`
+
+    /* 产品编码 (Optional) */
+    ServiceCode string `json:"serviceCode"`
+
     /* 状态 (Optional) */
     Status int `json:"status"`
 

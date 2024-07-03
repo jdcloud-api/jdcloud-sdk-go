@@ -31,8 +31,14 @@ type QueryMyCustomerListRequest struct {
     /* 客户pin (Optional) */
     CustomerPin *string `json:"customerPin"`
 
-    /* 客户昵称 (Optional) */
+    /*  (Optional) */
     AliasName *string `json:"aliasName"`
+
+    /* 客户名称 (Optional) */
+    NameLike *string `json:"nameLike"`
+
+    /* 账户类型（1个人2企业） (Optional) */
+    AccountType *int `json:"accountType"`
 
     /* 帐户名 (Optional) */
     LoginName *string `json:"loginName"`
@@ -73,7 +79,9 @@ func NewQueryMyCustomerListRequest(
 /*
  * param regionId:  (Required)
  * param customerPin: 客户pin (Optional)
- * param aliasName: 客户昵称 (Optional)
+ * param aliasName:  (Optional)
+ * param nameLike: 客户名称 (Optional)
+ * param accountType: 账户类型（1个人2企业） (Optional)
  * param loginName: 帐户名 (Optional)
  * param startRelTime: 关联开始时间（格式：yyyy-MM-dd HH:mm:ss） (Optional)
  * param endRelTime: 关联结束时间（格式：yyyy-MM-dd HH:mm:ss） (Optional)
@@ -84,6 +92,8 @@ func NewQueryMyCustomerListRequestWithAllParams(
     regionId string,
     customerPin *string,
     aliasName *string,
+    nameLike *string,
+    accountType *int,
     loginName *string,
     startRelTime *string,
     endRelTime *string,
@@ -101,6 +111,8 @@ func NewQueryMyCustomerListRequestWithAllParams(
         RegionId: regionId,
         CustomerPin: customerPin,
         AliasName: aliasName,
+        NameLike: nameLike,
+        AccountType: accountType,
         LoginName: loginName,
         StartRelTime: startRelTime,
         EndRelTime: endRelTime,
@@ -126,41 +138,43 @@ func NewQueryMyCustomerListRequestWithoutParam() *QueryMyCustomerListRequest {
 func (r *QueryMyCustomerListRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param customerPin: 客户pin(Optional) */
 func (r *QueryMyCustomerListRequest) SetCustomerPin(customerPin string) {
     r.CustomerPin = &customerPin
 }
-
-/* param aliasName: 客户昵称(Optional) */
+/* param aliasName: (Optional) */
 func (r *QueryMyCustomerListRequest) SetAliasName(aliasName string) {
     r.AliasName = &aliasName
 }
-
+/* param nameLike: 客户名称(Optional) */
+func (r *QueryMyCustomerListRequest) SetNameLike(nameLike string) {
+    r.NameLike = &nameLike
+}
+/* param accountType: 账户类型（1个人2企业）(Optional) */
+func (r *QueryMyCustomerListRequest) SetAccountType(accountType int) {
+    r.AccountType = &accountType
+}
 /* param loginName: 帐户名(Optional) */
 func (r *QueryMyCustomerListRequest) SetLoginName(loginName string) {
     r.LoginName = &loginName
 }
-
 /* param startRelTime: 关联开始时间（格式：yyyy-MM-dd HH:mm:ss）(Optional) */
 func (r *QueryMyCustomerListRequest) SetStartRelTime(startRelTime string) {
     r.StartRelTime = &startRelTime
 }
-
 /* param endRelTime: 关联结束时间（格式：yyyy-MM-dd HH:mm:ss）(Optional) */
 func (r *QueryMyCustomerListRequest) SetEndRelTime(endRelTime string) {
     r.EndRelTime = &endRelTime
 }
-
 /* param pageIndex: 当前页序号(Optional) */
 func (r *QueryMyCustomerListRequest) SetPageIndex(pageIndex int) {
     r.PageIndex = &pageIndex
 }
-
 /* param pageSize: 当前条数(Optional) */
 func (r *QueryMyCustomerListRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

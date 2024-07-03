@@ -37,11 +37,35 @@ type ApplyDistributor struct {
     /* 联系邮箱 (Optional) */
     Email string `json:"email"`
 
+    /* 职位 (Optional) */
+    Position string `json:"position"`
+
+    /* 联系人微信号 (Optional) */
+    WechatNo string `json:"wechatNo"`
+
     /* 合作类型 (Optional) */
     CooperateType string `json:"cooperateType"`
 
     /* 合作类型名称 (Optional) */
     CooperateTypeName string `json:"cooperateTypeName"`
+
+    /* 与京东智联云合作的诉求 (Optional) */
+    CooperateRequest string `json:"cooperateRequest"`
+
+    /* UUID (Optional) */
+    Uuid string `json:"uuid"`
+
+    /* 活动ID (Optional) */
+    ActivityId int `json:"activityId"`
+
+    /* 活动名称 (Optional) */
+    ActivityName string `json:"activityName"`
+
+    /* 合作领域 (Optional) */
+    CooperateArea string `json:"cooperateArea"`
+
+    /* 合作内容 (Optional) */
+    CooperateContent string `json:"cooperateContent"`
 
     /* 公司名称 (Optional) */
     CompanyName string `json:"companyName"`
@@ -49,14 +73,14 @@ type ApplyDistributor struct {
     /* 公司规模 (Optional) */
     CompanyScale string `json:"companyScale"`
 
-    /* 公司规模 (Optional) */
+    /* 公司规模名称 (Optional) */
     CompanyScaleName string `json:"companyScaleName"`
 
     /* 业务区域 (Optional) */
     Region string `json:"region"`
 
-    /* 业务区域 (Optional) */
-    RegionName string `json:"regionName"`
+    /* 城市 (Optional) */
+    City string `json:"city"`
 
     /* 公司网址 (Optional) */
     WebSite string `json:"webSite"`
@@ -66,4 +90,25 @@ type ApplyDistributor struct {
 
     /* 状态 (Optional) */
     StatusName string `json:"statusName"`
+
+    /* 跟进人 (Optional) */
+    FollowPerson string `json:"followPerson"`
+
+    /* 跟进说明 (Optional) */
+    FollowRemark string `json:"followRemark"`
+
+    /* 跟进记录列表 (Optional) */
+    FollowRecordList []FollowRecordDTO `json:"followRecordList"`
+
+    /* 状态变更列表 (Optional) */
+    PartnerStatusList []PartnerStatus `json:"partnerStatusList"`
+
+    /* 附件信息 (Optional) */
+    Files []FileVo `json:"files"`
+
+    /* 合作伙伴申请来源 1-官网招募 2-SaaS加速器 (Optional) */
+    ApplySource int `json:"applySource"`
+
+    /* 合作伙伴申请来源 (Optional) */
+    ApplySourceName string `json:"applySourceName"`
 }

@@ -65,7 +65,7 @@ type ReturnPolicyResult struct {
     ProductName string `json:"productName"`
 
     /* 产品类型 (Optional) */
-    ProductType int `json:"productType"`
+    ProductType string `json:"productType"`
 
     /* 产品类型名称 (Optional) */
     ProductTypeName int `json:"productTypeName"`
