@@ -27,4 +27,7 @@ type UserCenterInfo struct {
 
     /* 个人用户-个人手机号,企业用户-法人手机号 (Optional) */
     Mobile string `json:"mobile"`
+
+    /* 用户类型 0个人用户 1企业用户 (Optional) */
+    UserType int `json:"userType"`
 }

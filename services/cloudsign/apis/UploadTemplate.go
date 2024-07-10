@@ -25,32 +25,29 @@ type UploadTemplateRequest struct {
 
     core.JDCloudRequest
 
-    /*   */
+    /*  (Optional) */
     TemplateSpec *cloudsign.TemplateSpec `json:"templateSpec"`
 }
 
 /*
- * param templateSpec:  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewUploadTemplateRequest(
-    templateSpec *cloudsign.TemplateSpec,
 ) *UploadTemplateRequest {
 
 	return &UploadTemplateRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/template",
+			URL:     "/smqTemplate:uploadTemplate",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
-        TemplateSpec: templateSpec,
 	}
 }
 
 /*
- * param templateSpec:  (Required)
+ * param templateSpec:  (Optional)
  */
 func NewUploadTemplateRequestWithAllParams(
     templateSpec *cloudsign.TemplateSpec,
@@ -58,7 +55,7 @@ func NewUploadTemplateRequestWithAllParams(
 
     return &UploadTemplateRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/template",
+            URL:     "/smqTemplate:uploadTemplate",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -72,7 +69,7 @@ func NewUploadTemplateRequestWithoutParam() *UploadTemplateRequest {
 
     return &UploadTemplateRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/template",
+            URL:     "/smqTemplate:uploadTemplate",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -80,7 +77,7 @@ func NewUploadTemplateRequestWithoutParam() *UploadTemplateRequest {
     }
 }
 
-/* param templateSpec: (Required) */
+/* param templateSpec: (Optional) */
 func (r *UploadTemplateRequest) SetTemplateSpec(templateSpec *cloudsign.TemplateSpec) {
     r.TemplateSpec = templateSpec
 }

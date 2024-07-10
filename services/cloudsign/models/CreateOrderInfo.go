@@ -27,4 +27,7 @@ type CreateOrderInfo struct {
 
     /* 合同存储buyId (Optional) */
     StorageBuyId string `json:"storageBuyId"`
+
+    /* 实名类型 0个人实名 1企业实名 -1未实名 (Optional) */
+    UserType int `json:"userType"`
 }

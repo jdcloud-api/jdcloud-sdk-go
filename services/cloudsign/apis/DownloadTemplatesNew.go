@@ -18,9 +18,10 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    cloudsign "github.com/jdcloud-api/jdcloud-sdk-go/services/cloudsign/models"
 )
 
-type DownloadTemplatesRequest struct {
+type DownloadTemplatesNewRequest struct {
 
     core.JDCloudRequest
 
@@ -33,13 +34,13 @@ type DownloadTemplatesRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDownloadTemplatesRequest(
+func NewDownloadTemplatesNewRequest(
     templateId string,
-) *DownloadTemplatesRequest {
+) *DownloadTemplatesNewRequest {
 
-	return &DownloadTemplatesRequest{
+	return &DownloadTemplatesNewRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/smqTemplate/{templateId}:downloadTemplates",
+			URL:     "/smqTemplateApi/{templateId}:downloadTemplates",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -51,13 +52,13 @@ func NewDownloadTemplatesRequest(
 /*
  * param templateId: 合同模板ID (Required)
  */
-func NewDownloadTemplatesRequestWithAllParams(
+func NewDownloadTemplatesNewRequestWithAllParams(
     templateId string,
-) *DownloadTemplatesRequest {
+) *DownloadTemplatesNewRequest {
 
-    return &DownloadTemplatesRequest{
+    return &DownloadTemplatesNewRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/smqTemplate/{templateId}:downloadTemplates",
+            URL:     "/smqTemplateApi/{templateId}:downloadTemplates",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -67,11 +68,11 @@ func NewDownloadTemplatesRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDownloadTemplatesRequestWithoutParam() *DownloadTemplatesRequest {
+func NewDownloadTemplatesNewRequestWithoutParam() *DownloadTemplatesNewRequest {
 
-    return &DownloadTemplatesRequest{
+    return &DownloadTemplatesNewRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/smqTemplate/{templateId}:downloadTemplates",
+            URL:     "/smqTemplateApi/{templateId}:downloadTemplates",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -80,22 +81,23 @@ func NewDownloadTemplatesRequestWithoutParam() *DownloadTemplatesRequest {
 }
 
 /* param templateId: 合同模板ID(Required) */
-func (r *DownloadTemplatesRequest) SetTemplateId(templateId string) {
+func (r *DownloadTemplatesNewRequest) SetTemplateId(templateId string) {
     r.TemplateId = templateId
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DownloadTemplatesRequest) GetRegionId() string {
+func (r DownloadTemplatesNewRequest) GetRegionId() string {
     return ""
 }
 
-type DownloadTemplatesResponse struct {
+type DownloadTemplatesNewResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DownloadTemplatesResult `json:"result"`
+    Result DownloadTemplatesNewResult `json:"result"`
 }
 
-type DownloadTemplatesResult struct {
+type DownloadTemplatesNewResult struct {
+    TemplateList []cloudsign.TemplateInfo `json:"templateList"`
 }

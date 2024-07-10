@@ -18,84 +18,89 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    cloudsign "github.com/jdcloud-api/jdcloud-sdk-go/services/cloudsign/models"
 )
 
-type DownloadTemplatesRequest struct {
+type ApplyCertRequest struct {
 
     core.JDCloudRequest
 
-    /* 合同模板ID  */
-    TemplateId string `json:"templateId"`
+    /*   */
+    CertSpec *cloudsign.CertSpec `json:"certSpec"`
 }
 
 /*
- * param templateId: 合同模板ID (Required)
+ * param certSpec:  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDownloadTemplatesRequest(
-    templateId string,
-) *DownloadTemplatesRequest {
+func NewApplyCertRequest(
+    certSpec *cloudsign.CertSpec,
+) *ApplyCertRequest {
 
-	return &DownloadTemplatesRequest{
+	return &ApplyCertRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/smqTemplate/{templateId}:downloadTemplates",
-			Method:  "GET",
+			URL:     "/smqCert:applyCert",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
-        TemplateId: templateId,
+        CertSpec: certSpec,
 	}
 }
 
 /*
- * param templateId: 合同模板ID (Required)
+ * param certSpec:  (Required)
  */
-func NewDownloadTemplatesRequestWithAllParams(
-    templateId string,
-) *DownloadTemplatesRequest {
+func NewApplyCertRequestWithAllParams(
+    certSpec *cloudsign.CertSpec,
+) *ApplyCertRequest {
 
-    return &DownloadTemplatesRequest{
+    return &ApplyCertRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/smqTemplate/{templateId}:downloadTemplates",
-            Method:  "GET",
+            URL:     "/smqCert:applyCert",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
-        TemplateId: templateId,
+        CertSpec: certSpec,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDownloadTemplatesRequestWithoutParam() *DownloadTemplatesRequest {
+func NewApplyCertRequestWithoutParam() *ApplyCertRequest {
 
-    return &DownloadTemplatesRequest{
+    return &ApplyCertRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/smqTemplate/{templateId}:downloadTemplates",
-            Method:  "GET",
+            URL:     "/smqCert:applyCert",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
     }
 }
 
-/* param templateId: 合同模板ID(Required) */
-func (r *DownloadTemplatesRequest) SetTemplateId(templateId string) {
-    r.TemplateId = templateId
+/* param certSpec: (Required) */
+func (r *ApplyCertRequest) SetCertSpec(certSpec *cloudsign.CertSpec) {
+    r.CertSpec = certSpec
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DownloadTemplatesRequest) GetRegionId() string {
+func (r ApplyCertRequest) GetRegionId() string {
     return ""
 }
 
-type DownloadTemplatesResponse struct {
+type ApplyCertResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DownloadTemplatesResult `json:"result"`
+    Result ApplyCertResult `json:"result"`
 }
 
-type DownloadTemplatesResult struct {
+type ApplyCertResult struct {
+    Success bool `json:"success"`
+    Message string `json:"message"`
+    Code string `json:"code"`
+    Data cloudsign.CertResp `json:"data"`
 }

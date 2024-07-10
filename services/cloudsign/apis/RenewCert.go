@@ -18,84 +18,89 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    cloudsign "github.com/jdcloud-api/jdcloud-sdk-go/services/cloudsign/models"
 )
 
-type DownloadTemplatesRequest struct {
+type RenewCertRequest struct {
 
     core.JDCloudRequest
 
-    /* 合同模板ID  */
-    TemplateId string `json:"templateId"`
+    /*   */
+    RenewCertSpec *cloudsign.RenewCertSpec `json:"renewCertSpec"`
 }
 
 /*
- * param templateId: 合同模板ID (Required)
+ * param renewCertSpec:  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDownloadTemplatesRequest(
-    templateId string,
-) *DownloadTemplatesRequest {
+func NewRenewCertRequest(
+    renewCertSpec *cloudsign.RenewCertSpec,
+) *RenewCertRequest {
 
-	return &DownloadTemplatesRequest{
+	return &RenewCertRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/smqTemplate/{templateId}:downloadTemplates",
-			Method:  "GET",
+			URL:     "/smqCert:renewCert",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
-        TemplateId: templateId,
+        RenewCertSpec: renewCertSpec,
 	}
 }
 
 /*
- * param templateId: 合同模板ID (Required)
+ * param renewCertSpec:  (Required)
  */
-func NewDownloadTemplatesRequestWithAllParams(
-    templateId string,
-) *DownloadTemplatesRequest {
+func NewRenewCertRequestWithAllParams(
+    renewCertSpec *cloudsign.RenewCertSpec,
+) *RenewCertRequest {
 
-    return &DownloadTemplatesRequest{
+    return &RenewCertRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/smqTemplate/{templateId}:downloadTemplates",
-            Method:  "GET",
+            URL:     "/smqCert:renewCert",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
-        TemplateId: templateId,
+        RenewCertSpec: renewCertSpec,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDownloadTemplatesRequestWithoutParam() *DownloadTemplatesRequest {
+func NewRenewCertRequestWithoutParam() *RenewCertRequest {
 
-    return &DownloadTemplatesRequest{
+    return &RenewCertRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/smqTemplate/{templateId}:downloadTemplates",
-            Method:  "GET",
+            URL:     "/smqCert:renewCert",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
     }
 }
 
-/* param templateId: 合同模板ID(Required) */
-func (r *DownloadTemplatesRequest) SetTemplateId(templateId string) {
-    r.TemplateId = templateId
+/* param renewCertSpec: (Required) */
+func (r *RenewCertRequest) SetRenewCertSpec(renewCertSpec *cloudsign.RenewCertSpec) {
+    r.RenewCertSpec = renewCertSpec
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DownloadTemplatesRequest) GetRegionId() string {
+func (r RenewCertRequest) GetRegionId() string {
     return ""
 }
 
-type DownloadTemplatesResponse struct {
+type RenewCertResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DownloadTemplatesResult `json:"result"`
+    Result RenewCertResult `json:"result"`
 }
 
-type DownloadTemplatesResult struct {
+type RenewCertResult struct {
+    Success bool `json:"success"`
+    Message string `json:"message"`
+    Code string `json:"code"`
+    Data cloudsign.CertResp `json:"data"`
 }

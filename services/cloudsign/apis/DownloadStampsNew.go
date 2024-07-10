@@ -18,60 +18,61 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    cloudsign "github.com/jdcloud-api/jdcloud-sdk-go/services/cloudsign/models"
 )
 
-type DownloadTemplatesRequest struct {
+type DownloadStampsNewRequest struct {
 
     core.JDCloudRequest
 
-    /* 合同模板ID  */
-    TemplateId string `json:"templateId"`
+    /* 印章ID  */
+    StampId string `json:"stampId"`
 }
 
 /*
- * param templateId: 合同模板ID (Required)
+ * param stampId: 印章ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDownloadTemplatesRequest(
-    templateId string,
-) *DownloadTemplatesRequest {
+func NewDownloadStampsNewRequest(
+    stampId string,
+) *DownloadStampsNewRequest {
 
-	return &DownloadTemplatesRequest{
+	return &DownloadStampsNewRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/smqTemplate/{templateId}:downloadTemplates",
+			URL:     "/smqStampApi/{stampId}:downloadStamps",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
-        TemplateId: templateId,
+        StampId: stampId,
 	}
 }
 
 /*
- * param templateId: 合同模板ID (Required)
+ * param stampId: 印章ID (Required)
  */
-func NewDownloadTemplatesRequestWithAllParams(
-    templateId string,
-) *DownloadTemplatesRequest {
+func NewDownloadStampsNewRequestWithAllParams(
+    stampId string,
+) *DownloadStampsNewRequest {
 
-    return &DownloadTemplatesRequest{
+    return &DownloadStampsNewRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/smqTemplate/{templateId}:downloadTemplates",
+            URL:     "/smqStampApi/{stampId}:downloadStamps",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
-        TemplateId: templateId,
+        StampId: stampId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDownloadTemplatesRequestWithoutParam() *DownloadTemplatesRequest {
+func NewDownloadStampsNewRequestWithoutParam() *DownloadStampsNewRequest {
 
-    return &DownloadTemplatesRequest{
+    return &DownloadStampsNewRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/smqTemplate/{templateId}:downloadTemplates",
+            URL:     "/smqStampApi/{stampId}:downloadStamps",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -79,23 +80,24 @@ func NewDownloadTemplatesRequestWithoutParam() *DownloadTemplatesRequest {
     }
 }
 
-/* param templateId: 合同模板ID(Required) */
-func (r *DownloadTemplatesRequest) SetTemplateId(templateId string) {
-    r.TemplateId = templateId
+/* param stampId: 印章ID(Required) */
+func (r *DownloadStampsNewRequest) SetStampId(stampId string) {
+    r.StampId = stampId
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DownloadTemplatesRequest) GetRegionId() string {
+func (r DownloadStampsNewRequest) GetRegionId() string {
     return ""
 }
 
-type DownloadTemplatesResponse struct {
+type DownloadStampsNewResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DownloadTemplatesResult `json:"result"`
+    Result DownloadStampsNewResult `json:"result"`
 }
 
-type DownloadTemplatesResult struct {
+type DownloadStampsNewResult struct {
+    StampList []cloudsign.StampInfo `json:"stampList"`
 }

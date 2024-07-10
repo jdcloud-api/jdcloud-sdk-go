@@ -39,7 +39,7 @@ func NewDeleteStampRequest(
 
 	return &DeleteStampRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/stamp/{stampId}",
+			URL:     "/smqStamp/{stampId}:deleteStamp",
 			Method:  "DELETE",
 			Header:  nil,
 			Version: "v1",
@@ -57,7 +57,7 @@ func NewDeleteStampRequestWithAllParams(
 
     return &DeleteStampRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/stamp/{stampId}",
+            URL:     "/smqStamp/{stampId}:deleteStamp",
             Method:  "DELETE",
             Header:  nil,
             Version: "v1",
@@ -71,7 +71,7 @@ func NewDeleteStampRequestWithoutParam() *DeleteStampRequest {
 
     return &DeleteStampRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/stamp/{stampId}",
+            URL:     "/smqStamp/{stampId}:deleteStamp",
             Method:  "DELETE",
             Header:  nil,
             Version: "v1",

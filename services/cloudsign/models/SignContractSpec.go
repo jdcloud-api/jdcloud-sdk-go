@@ -25,11 +25,14 @@ type SignContractSpec struct {
     /* 短信验证码 (Optional) */
     SmsCode string `json:"smsCode"`
 
-    /* 手机号 (Optional) */
+    /* 手机号(不需要回传手机号，字段暂留) (Optional) */
     Mobile string `json:"mobile"`
 
     /* 印章id （关键字盖章使用的印章，不传使用默认印章） (Optional) */
     StampId string `json:"stampId"`
+
+    /* 待签署文件hash (Optional) */
+    Hash string `json:"hash"`
 
     /* 坐标盖章印章信息 (Optional) */
     Signatures []SignatureInfo `json:"signatures"`

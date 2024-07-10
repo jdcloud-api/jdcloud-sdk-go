@@ -19,6 +19,9 @@ package models
 
 type ReadySignContractResp struct {
 
+    /* 关键字设置 (Optional) */
+    KeywordInfos []KeywordInfo `json:"keywordInfos"`
+
     /* 合同信息 (Optional) */
     PageInfos []PdfPageInfo `json:"pageInfos"`
 
@@ -27,6 +30,9 @@ type ReadySignContractResp struct {
 
     /* 合同名称 (Optional) */
     FileName string `json:"fileName"`
+
+    /* 《电子认证服务协议》（文本形式） (Optional) */
+    CertificationAgreement string `json:"certificationAgreement"`
 
     /* 接收短信验证码手机号(意愿验证手机号) (Optional) */
     Mobile string `json:"mobile"`
@@ -39,4 +45,7 @@ type ReadySignContractResp struct {
 
     /* 0:坐标盖章 1:关键字盖章 (Optional) */
     SignPositionType int `json:"signPositionType"`
+
+    /* 待签署文件hash (Optional) */
+    Hash string `json:"hash"`
 }

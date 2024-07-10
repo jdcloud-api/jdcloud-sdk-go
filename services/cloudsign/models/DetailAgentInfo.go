@@ -34,6 +34,6 @@ type DetailAgentInfo struct {
     /* 授权书名称 (Optional) */
     AgentFileName string `json:"agentFileName"`
 
-    /* 授权书（base64）--pdf格式 (Optional) */
-    AgentAuthFile string `json:"agentAuthFile"`
+    /* 授权书信息 (Optional) */
+    AgentPageInfos []PdfPageInfo `json:"agentPageInfos"`
 }

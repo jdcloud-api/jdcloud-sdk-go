@@ -18,84 +18,88 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    cloudsign "github.com/jdcloud-api/jdcloud-sdk-go/services/cloudsign/models"
 )
 
-type DownloadTemplatesRequest struct {
+type RevokeCertRequest struct {
 
     core.JDCloudRequest
 
-    /* 合同模板ID  */
-    TemplateId string `json:"templateId"`
+    /*   */
+    RevokeCertSpec *cloudsign.RevokeCertSpec `json:"revokeCertSpec"`
 }
 
 /*
- * param templateId: 合同模板ID (Required)
+ * param revokeCertSpec:  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDownloadTemplatesRequest(
-    templateId string,
-) *DownloadTemplatesRequest {
+func NewRevokeCertRequest(
+    revokeCertSpec *cloudsign.RevokeCertSpec,
+) *RevokeCertRequest {
 
-	return &DownloadTemplatesRequest{
+	return &RevokeCertRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/smqTemplate/{templateId}:downloadTemplates",
-			Method:  "GET",
+			URL:     "/smqCert:revokeCert",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
-        TemplateId: templateId,
+        RevokeCertSpec: revokeCertSpec,
 	}
 }
 
 /*
- * param templateId: 合同模板ID (Required)
+ * param revokeCertSpec:  (Required)
  */
-func NewDownloadTemplatesRequestWithAllParams(
-    templateId string,
-) *DownloadTemplatesRequest {
+func NewRevokeCertRequestWithAllParams(
+    revokeCertSpec *cloudsign.RevokeCertSpec,
+) *RevokeCertRequest {
 
-    return &DownloadTemplatesRequest{
+    return &RevokeCertRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/smqTemplate/{templateId}:downloadTemplates",
-            Method:  "GET",
+            URL:     "/smqCert:revokeCert",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
-        TemplateId: templateId,
+        RevokeCertSpec: revokeCertSpec,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDownloadTemplatesRequestWithoutParam() *DownloadTemplatesRequest {
+func NewRevokeCertRequestWithoutParam() *RevokeCertRequest {
 
-    return &DownloadTemplatesRequest{
+    return &RevokeCertRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/smqTemplate/{templateId}:downloadTemplates",
-            Method:  "GET",
+            URL:     "/smqCert:revokeCert",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
     }
 }
 
-/* param templateId: 合同模板ID(Required) */
-func (r *DownloadTemplatesRequest) SetTemplateId(templateId string) {
-    r.TemplateId = templateId
+/* param revokeCertSpec: (Required) */
+func (r *RevokeCertRequest) SetRevokeCertSpec(revokeCertSpec *cloudsign.RevokeCertSpec) {
+    r.RevokeCertSpec = revokeCertSpec
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DownloadTemplatesRequest) GetRegionId() string {
+func (r RevokeCertRequest) GetRegionId() string {
     return ""
 }
 
-type DownloadTemplatesResponse struct {
+type RevokeCertResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DownloadTemplatesResult `json:"result"`
+    Result RevokeCertResult `json:"result"`
 }
 
-type DownloadTemplatesResult struct {
+type RevokeCertResult struct {
+    Success bool `json:"success"`
+    Message string `json:"message"`
+    Code string `json:"code"`
 }
