@@ -22,6 +22,9 @@ type AgentInfo struct {
     /* 授权信息ID (Optional) */
     Id string `json:"id"`
 
+    /* 授权企业 (Optional) */
+    CompanyName string `json:"companyName"`
+
     /* 被授权人 (Optional) */
     AgentName string `json:"agentName"`
 

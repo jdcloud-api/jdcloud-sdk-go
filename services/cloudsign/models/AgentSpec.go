@@ -33,7 +33,4 @@ type AgentSpec struct {
 
     /* 授权书名称 (Optional) */
     AgentFileName string `json:"agentFileName"`
-
-    /* 备注 (Optional) */
-    Note string `json:"note"`
 }

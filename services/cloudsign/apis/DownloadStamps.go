@@ -18,7 +18,6 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    cloudsign "github.com/jdcloud-api/jdcloud-sdk-go/services/cloudsign/models"
 )
 
 type DownloadStampsRequest struct {
@@ -40,7 +39,7 @@ func NewDownloadStampsRequest(
 
 	return &DownloadStampsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/stamp/{stampId}",
+			URL:     "/smqStamp/{stampId}:downloadStamps",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -58,7 +57,7 @@ func NewDownloadStampsRequestWithAllParams(
 
     return &DownloadStampsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/stamp/{stampId}",
+            URL:     "/smqStamp/{stampId}:downloadStamps",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -72,7 +71,7 @@ func NewDownloadStampsRequestWithoutParam() *DownloadStampsRequest {
 
     return &DownloadStampsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/stamp/{stampId}",
+            URL:     "/smqStamp/{stampId}:downloadStamps",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -99,5 +98,4 @@ type DownloadStampsResponse struct {
 }
 
 type DownloadStampsResult struct {
-    StampInfo cloudsign.StampInfo `json:"stampInfo"`
 }

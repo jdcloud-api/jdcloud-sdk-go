@@ -19,6 +19,12 @@ package models
 
 type UserCenterInfoSpec struct {
 
+    /* 个人用户-姓名,企业用户-法人姓名 (Optional) */
+    Name string `json:"name"`
+
+    /* 个人用户-身份证号,企业用户-法人身份证号 (Optional) */
+    IdCardNum string `json:"idCardNum"`
+
     /* 短信验证码 (Optional) */
     SmsCode string `json:"smsCode"`
 

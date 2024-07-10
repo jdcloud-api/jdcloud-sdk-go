@@ -36,4 +36,7 @@ type ContractInfo struct {
 
     /* 合同签章时间 (Optional) */
     CreateTime string `json:"createTime"`
+
+    /* 业务流水号 (Optional) */
+    BusinessId string `json:"businessId"`
 }

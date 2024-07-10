@@ -25,32 +25,29 @@ type UploadStampRequest struct {
 
     core.JDCloudRequest
 
-    /*   */
+    /*  (Optional) */
     StampSpec *cloudsign.StampSpec `json:"stampSpec"`
 }
 
 /*
- * param stampSpec:  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewUploadStampRequest(
-    stampSpec *cloudsign.StampSpec,
 ) *UploadStampRequest {
 
 	return &UploadStampRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/stamp",
+			URL:     "/smqStamp:uploadStamp",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
-        StampSpec: stampSpec,
 	}
 }
 
 /*
- * param stampSpec:  (Required)
+ * param stampSpec:  (Optional)
  */
 func NewUploadStampRequestWithAllParams(
     stampSpec *cloudsign.StampSpec,
@@ -58,7 +55,7 @@ func NewUploadStampRequestWithAllParams(
 
     return &UploadStampRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/stamp",
+            URL:     "/smqStamp:uploadStamp",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -72,7 +69,7 @@ func NewUploadStampRequestWithoutParam() *UploadStampRequest {
 
     return &UploadStampRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/stamp",
+            URL:     "/smqStamp:uploadStamp",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -80,7 +77,7 @@ func NewUploadStampRequestWithoutParam() *UploadStampRequest {
     }
 }
 
-/* param stampSpec: (Required) */
+/* param stampSpec: (Optional) */
 func (r *UploadStampRequest) SetStampSpec(stampSpec *cloudsign.StampSpec) {
     r.StampSpec = stampSpec
 }

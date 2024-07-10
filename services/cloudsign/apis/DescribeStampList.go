@@ -44,7 +44,7 @@ func NewDescribeStampListRequest(
 
 	return &DescribeStampListRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/stamp",
+			URL:     "/smqStamp:describeStampList",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -65,7 +65,7 @@ func NewDescribeStampListRequestWithAllParams(
 
     return &DescribeStampListRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/stamp",
+            URL:     "/smqStamp:describeStampList",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -81,7 +81,7 @@ func NewDescribeStampListRequestWithoutParam() *DescribeStampListRequest {
 
     return &DescribeStampListRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/stamp",
+            URL:     "/smqStamp:describeStampList",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -118,4 +118,6 @@ type DescribeStampListResponse struct {
 type DescribeStampListResult struct {
     StampList []cloudsign.StampInfo `json:"stampList"`
     TotalCount int `json:"totalCount"`
+    PageNumber int `json:"pageNumber"`
+    PageSize int `json:"pageSize"`
 }

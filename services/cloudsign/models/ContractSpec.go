@@ -19,10 +19,10 @@ package models
 
 type ContractSpec struct {
 
-    /* 个人用户盖章信息 (Optional) */
+    /* 个人用户盖章信息(个人用户盖章信息、企业用户盖章信息 至少存在一项) (Optional) */
     PersonStamps []PerStamp `json:"personStamps"`
 
-    /* 企业用户盖章信息 (Optional) */
+    /* 企业用户盖章信息(个人用户盖章信息、企业用户盖章信息 至少存在一项) (Optional) */
     CompanyStamps []ComStamp `json:"companyStamps"`
 
     /* 合同文件（base64） (Optional) */
@@ -43,9 +43,21 @@ type ContractSpec struct {
     /* 自定义签章类型（如需增加时间戳，此字段传time） (Optional) */
     StampStyle *string `json:"stampStyle"`
 
+    /* 0：普通证书 1：事件证书（默认为0，普通证书） (Optional) */
+    CertExpire *int `json:"certExpire"`
+
+    /* 证书类型 (Optional) */
+    BusinessId *string `json:"businessId"`
+
+    /* 签署完的合同是否在京东云存储（默认为false，不存储） (Optional) */
+    NeedStorage *bool `json:"needStorage"`
+
+    /* 是否需要返回已签署的合同（默认为true） (Optional) */
+    NeedContract *bool `json:"needContract"`
+
     /* 部门信息 (Optional) */
     Dept *string `json:"dept"`
 
-    /* 盖章范围 (Optional) */
+    /* 页范围，仅在坐标签章生效(personStamps,companyStamps中的该属性优先生效) 1. all，表示所有页码;2. 数字以逗号分隔，形如："1,2,3""1,2,3";3. 以短横线：以短横线'-'分隔的两个数字，会被扩展为⼀段范围，形如："2-4";4：规则2和3可以混用，形如："2-4,7" (Optional) */
     PageRange *string `json:"pageRange"`
 }
