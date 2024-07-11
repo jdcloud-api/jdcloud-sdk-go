@@ -40,7 +40,7 @@ func NewCdnClient(credential *core.Credential) *CdnClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "cdn",
-            Revision:    "0.10.46",
+            Revision:    "0.10.47",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -3637,6 +3637,26 @@ func (c *CdnClient) QueryDefaultHttpHeaderKey(request *cdn.QueryDefaultHttpHeade
     return jdResp, err
 }
 
+/* 查询回源IP类型 */
+func (c *CdnClient) QueryBackSourceIpVersion(request *cdn.QueryBackSourceIpVersionRequest) (*cdn.QueryBackSourceIpVersionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.QueryBackSourceIpVersionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 回源鉴权设置 */
 func (c *CdnClient) SetSourceAuthConfig(request *cdn.SetSourceAuthConfigRequest) (*cdn.SetSourceAuthConfigResponse, error) {
     if request == nil {
@@ -3788,6 +3808,26 @@ func (c *CdnClient) QueryDomainsNotInGroup(request *cdn.QueryDomainsNotInGroupRe
     }
 
     jdResp := &cdn.QueryDomainsNotInGroupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设置回源IP类型 */
+func (c *CdnClient) ConfigBackSourceIpVersion(request *cdn.ConfigBackSourceIpVersionRequest) (*cdn.ConfigBackSourceIpVersionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cdn.ConfigBackSourceIpVersionResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
