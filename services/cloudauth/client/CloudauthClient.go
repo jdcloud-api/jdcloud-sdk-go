@@ -40,7 +40,7 @@ func NewCloudauthClient(credential *core.Credential) *CloudauthClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "cloudauth",
-            Revision:    "1.0.11",
+            Revision:    "1.0.12",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -77,66 +77,6 @@ func (c *CloudauthClient) DescribeApplyStatus(request *cloudauth.DescribeApplySt
     return jdResp, err
 }
 
-/* 个人银行卡四要素非身份证版 */
-func (c *CloudauthClient) PersonalBankcard4Other(request *cloudauth.PersonalBankcard4OtherRequest) (*cloudauth.PersonalBankcard4OtherResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &cloudauth.PersonalBankcard4OtherResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* H5活体检测结果 */
-func (c *CloudauthClient) GetAliveResult(request *cloudauth.GetAliveResultRequest) (*cloudauth.GetAliveResultResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &cloudauth.GetAliveResultResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* H5活体检测获取采集页面链接 */
-func (c *CloudauthClient) GetAliveUrl(request *cloudauth.GetAliveUrlRequest) (*cloudauth.GetAliveUrlResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &cloudauth.GetAliveUrlResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 个人手机号三要素详版 */
 func (c *CloudauthClient) PersonalMobile(request *cloudauth.PersonalMobileRequest) (*cloudauth.PersonalMobileResponse, error) {
     if request == nil {
@@ -157,26 +97,6 @@ func (c *CloudauthClient) PersonalMobile(request *cloudauth.PersonalMobileReques
     return jdResp, err
 }
 
-/* 对公银行账户打款(随机小额)——简单版 */
-func (c *CloudauthClient) CompanyTransferSimple(request *cloudauth.CompanyTransferSimpleRequest) (*cloudauth.CompanyTransferSimpleResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &cloudauth.CompanyTransferSimpleResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 个人银行卡四要素详版 */
 func (c *CloudauthClient) PersonalBankcard4Detail(request *cloudauth.PersonalBankcard4DetailRequest) (*cloudauth.PersonalBankcard4DetailResponse, error) {
     if request == nil {
@@ -188,46 +108,6 @@ func (c *CloudauthClient) PersonalBankcard4Detail(request *cloudauth.PersonalBan
     }
 
     jdResp := &cloudauth.PersonalBankcard4DetailResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 对公打款验证 */
-func (c *CloudauthClient) CheckCompanyTransfer(request *cloudauth.CheckCompanyTransferRequest) (*cloudauth.CheckCompanyTransferResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &cloudauth.CheckCompanyTransferResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 企业基础信息核验 */
-func (c *CloudauthClient) CheckCompanyInfo(request *cloudauth.CheckCompanyInfoRequest) (*cloudauth.CheckCompanyInfoResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &cloudauth.CheckCompanyInfoResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -268,46 +148,6 @@ func (c *CloudauthClient) OneClick(request *cloudauth.OneClickRequest) (*cloudau
     }
 
     jdResp := &cloudauth.OneClickResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 个人银行卡三要素非身份证版 */
-func (c *CloudauthClient) PersonalBankcard3Other(request *cloudauth.PersonalBankcard3OtherRequest) (*cloudauth.PersonalBankcard3OtherResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &cloudauth.PersonalBankcard3OtherResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 法人信息校验 */
-func (c *CloudauthClient) CheckLegalPerson(request *cloudauth.CheckLegalPersonRequest) (*cloudauth.CheckLegalPersonResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &cloudauth.CheckLegalPersonResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -377,8 +217,8 @@ func (c *CloudauthClient) IDCard(request *cloudauth.IDCardRequest) (*cloudauth.I
     return jdResp, err
 }
 
-/* 对公银行账户打款(随机小额) */
-func (c *CloudauthClient) CompanyTransfer(request *cloudauth.CompanyTransferRequest) (*cloudauth.CompanyTransferResponse, error) {
+/* H5活体检测结果新版 */
+func (c *CloudauthClient) GetAliveResultNew(request *cloudauth.GetAliveResultNewRequest) (*cloudauth.GetAliveResultNewResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -387,27 +227,7 @@ func (c *CloudauthClient) CompanyTransfer(request *cloudauth.CompanyTransferRequ
         return nil, err
     }
 
-    jdResp := &cloudauth.CompanyTransferResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 对公打款状态查询 */
-func (c *CloudauthClient) QueryCompanyTransfer(request *cloudauth.QueryCompanyTransferRequest) (*cloudauth.QueryCompanyTransferResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &cloudauth.QueryCompanyTransferResponse{}
+    jdResp := &cloudauth.GetAliveResultNewResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -457,8 +277,8 @@ func (c *CloudauthClient) PersonalBankcard3Detail(request *cloudauth.PersonalBan
     return jdResp, err
 }
 
-/* 法人信息校验(详版) */
-func (c *CloudauthClient) CheckLegalPersonDetail(request *cloudauth.CheckLegalPersonDetailRequest) (*cloudauth.CheckLegalPersonDetailResponse, error) {
+/* 失联地址识别状态查询 */
+func (c *CloudauthClient) AddressInfo(request *cloudauth.AddressInfoRequest) (*cloudauth.AddressInfoResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -467,7 +287,7 @@ func (c *CloudauthClient) CheckLegalPersonDetail(request *cloudauth.CheckLegalPe
         return nil, err
     }
 
-    jdResp := &cloudauth.CheckLegalPersonDetailResponse{}
+    jdResp := &cloudauth.AddressInfoResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -488,6 +308,266 @@ func (c *CloudauthClient) CheckCompanyInfo3(request *cloudauth.CheckCompanyInfo3
     }
 
     jdResp := &cloudauth.CheckCompanyInfo3Response{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 个人银行卡四要素非身份证版 */
+func (c *CloudauthClient) PersonalBankcard4Other(request *cloudauth.PersonalBankcard4OtherRequest) (*cloudauth.PersonalBankcard4OtherResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cloudauth.PersonalBankcard4OtherResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* H5活体检测结果 */
+func (c *CloudauthClient) GetAliveResult(request *cloudauth.GetAliveResultRequest) (*cloudauth.GetAliveResultResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cloudauth.GetAliveResultResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* H5活体检测获取采集页面链接 */
+func (c *CloudauthClient) GetAliveUrl(request *cloudauth.GetAliveUrlRequest) (*cloudauth.GetAliveUrlResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cloudauth.GetAliveUrlResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 对公银行账户打款(随机小额)——简单版 */
+func (c *CloudauthClient) CompanyTransferSimple(request *cloudauth.CompanyTransferSimpleRequest) (*cloudauth.CompanyTransferSimpleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cloudauth.CompanyTransferSimpleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 对公打款验证 */
+func (c *CloudauthClient) CheckCompanyTransfer(request *cloudauth.CheckCompanyTransferRequest) (*cloudauth.CheckCompanyTransferResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cloudauth.CheckCompanyTransferResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* H5活体检测获取采集页面链接新版 */
+func (c *CloudauthClient) GetAliveUrlNew(request *cloudauth.GetAliveUrlNewRequest) (*cloudauth.GetAliveUrlNewResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cloudauth.GetAliveUrlNewResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 企业基础信息核验 */
+func (c *CloudauthClient) CheckCompanyInfo(request *cloudauth.CheckCompanyInfoRequest) (*cloudauth.CheckCompanyInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cloudauth.CheckCompanyInfoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 个人银行卡三要素非身份证版 */
+func (c *CloudauthClient) PersonalBankcard3Other(request *cloudauth.PersonalBankcard3OtherRequest) (*cloudauth.PersonalBankcard3OtherResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cloudauth.PersonalBankcard3OtherResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 法人信息校验 */
+func (c *CloudauthClient) CheckLegalPerson(request *cloudauth.CheckLegalPersonRequest) (*cloudauth.CheckLegalPersonResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cloudauth.CheckLegalPersonResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 失联地址识别结果 */
+func (c *CloudauthClient) AddressDetail(request *cloudauth.AddressDetailRequest) (*cloudauth.AddressDetailResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cloudauth.AddressDetailResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 对公银行账户打款(随机小额) */
+func (c *CloudauthClient) CompanyTransfer(request *cloudauth.CompanyTransferRequest) (*cloudauth.CompanyTransferResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cloudauth.CompanyTransferResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 对公打款状态查询 */
+func (c *CloudauthClient) QueryCompanyTransfer(request *cloudauth.QueryCompanyTransferRequest) (*cloudauth.QueryCompanyTransferResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cloudauth.QueryCompanyTransferResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 法人信息校验(详版) */
+func (c *CloudauthClient) CheckLegalPersonDetail(request *cloudauth.CheckLegalPersonDetailRequest) (*cloudauth.CheckLegalPersonDetailResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cloudauth.CheckLegalPersonDetailResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
