@@ -82,6 +82,9 @@ type BillVo struct {
     /* 付费代金券金额，2位精度 (Optional) */
     PayCashCouponFee int `json:"payCashCouponFee"`
 
+    /* 电汇金额，2位精度 (Optional) */
+    Wire int `json:"wire"`
+
     /* 消费时间 (Optional) */
     ConsumeTime string `json:"consumeTime"`
 
@@ -96,6 +99,12 @@ type BillVo struct {
 
     /* 组织机构代码 (Optional) */
     Org string `json:"org"`
+
+    /* 组织机构名称 (Optional) */
+    OrgName string `json:"orgName"`
+
+    /* 合同编码 (Optional) */
+    ContractNumber string `json:"contractNumber"`
 
     /* 交易类型 1、使用 2、 新购 3、续费 4、配置变更 5、退款，不可修改 (Optional) */
     TradeType int `json:"tradeType"`

@@ -91,6 +91,9 @@ type Bill struct {
     /* 付费代金券金额，2位精度 (Optional) */
     PayCashCouponFee int `json:"payCashCouponFee"`
 
+    /* 电汇金额，2位精度 (Optional) */
+    Wire int `json:"wire"`
+
     /* 消费时间 (Optional) */
     ConsumeTime string `json:"consumeTime"`
 

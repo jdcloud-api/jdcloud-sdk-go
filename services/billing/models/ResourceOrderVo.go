@@ -31,7 +31,7 @@ type ResourceOrderVo struct {
     /* 计费类型 1:按配置 2:按用量 3:包年包月 4:一次性 (Optional) */
     BillingType int `json:"billingType"`
 
-    /* 时长类型 1:小时 2:天 3:月 4:年 (Optional) */
+    /* 时长类型 1:小时 2:天 3:月 4:年 5:周 (Optional) */
     TimeUnit int `json:"timeUnit"`
 
     /* 时长字段，与timeUnit字段构成具体时长 (Optional) */

@@ -28,11 +28,29 @@ type BillAdjustRecord struct {
     /* 资源ID (Optional) */
     ResourceId string `json:"resourceId"`
 
+    /* 原价 (Optional) */
+    BillFee float64 `json:"billFee"`
+
+    /* 优惠金额 (Optional) */
+    DiscountFee float64 `json:"discountFee"`
+
     /* 应付金额 (Optional) */
     ActualFee float64 `json:"actualFee"`
 
     /* 调整金额 (Optional) */
     AdjustFee float64 `json:"adjustFee"`
+
+    /* 调整现金金额 (Optional) */
+    CashPayFee float64 `json:"cashPayFee"`
+
+    /* 调整余额金额 (Optional) */
+    BalancePayFee float64 `json:"balancePayFee"`
+
+    /* 调整代金券金额 (Optional) */
+    CashCouponFee float64 `json:"cashCouponFee"`
+
+    /* 代金券券码 (Optional) */
+    CouponNumber string `json:"couponNumber"`
 
     /* 计费项 (Optional) */
     Property string `json:"property"`

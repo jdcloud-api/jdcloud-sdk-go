@@ -17,29 +17,11 @@
 package models
 
 
-type RefundResourceFee struct {
+type ResourceOrderSnapshotsVo struct {
 
     /* 资源id (Optional) */
     ResourceId string `json:"resourceId"`
 
-    /* 状态: 1-成功 2-失败 (Optional) */
-    Status int `json:"status"`
-
-    /* 失败信息 (Optional) */
-    Message string `json:"message"`
-
-    /* 资源退款金额 (Optional) */
-    Fee float64 `json:"fee"`
-
-    /* 现金退款金额 (Optional) */
-    CashFee float64 `json:"cashFee"`
-
-    /* 余额退款金额 (Optional) */
-    BalanceFee float64 `json:"balanceFee"`
-
-    /* 代金券退款金额 (Optional) */
-    CouponFee float64 `json:"couponFee"`
-
-    /* 退款订单列表 (Optional) */
-    OrderFees []RefundOrderFee `json:"orderFees"`
+    /* 资源单快照列表 (Optional) */
+    ResourceOrderSnapshotVos []ResourceOrderSnapshotVo `json:"resourceOrderSnapshotVos"`
 }
