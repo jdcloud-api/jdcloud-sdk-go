@@ -70,6 +70,6 @@ type ResourceAeVo struct {
     /* 资源预计释放时间 (Optional) */
     ToDeleteTime string `json:"toDeleteTime"`
 
-    /*  (Optional) */
+    /* 用于中间层判断的状态标识 1:正常(重启) 3:欠费停服 4:欠费删除 13：到期停服 14：到期删除、退款删除 24：运营删除 34:用户删除 (Optional) */
     CapState int `json:"capState"`
 }

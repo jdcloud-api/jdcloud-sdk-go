@@ -205,17 +205,17 @@ type CalculateTotalPriceResponse struct {
 }
 
 type CalculateTotalPriceResult struct {
-    TotalPrice int `json:"totalPrice"`
-    TotalPriceScale4 int `json:"totalPriceScale4"`
-    DiscountedTotalPrice int `json:"discountedTotalPrice"`
-    TotalDiscount int `json:"totalDiscount"`
+    TotalPrice float64 `json:"totalPrice"`
+    TotalPriceScale4 float64 `json:"totalPriceScale4"`
+    DiscountedTotalPrice float64 `json:"discountedTotalPrice"`
+    TotalDiscount float64 `json:"totalDiscount"`
     AfterFavorableTotalPrice float64 `json:"afterFavorableTotalPrice"`
     EraseTotalPrice float64 `json:"eraseTotalPrice"`
     List []billing.OrderPriceDetail `json:"list"`
-    TotalOriginalPrice int `json:"totalOriginalPrice"`
+    TotalOriginalPrice float64 `json:"totalOriginalPrice"`
     FavorableInfos string `json:"favorableInfos"`
     Remark string `json:"remark"`
-    TotalUnitPrice int `json:"totalUnitPrice"`
+    TotalUnitPrice float64 `json:"totalUnitPrice"`
     RefundTotalPrice float64 `json:"refundTotalPrice"`
     CashRefundTotalPrice float64 `json:"cashRefundTotalPrice"`
     BalanceRefundTotalPrice float64 `json:"balanceRefundTotalPrice"`

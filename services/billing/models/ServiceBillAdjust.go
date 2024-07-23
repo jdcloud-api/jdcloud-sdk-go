@@ -34,6 +34,24 @@ type ServiceBillAdjust struct {
     /* 计费类型 1按配置 2按用量 3包年包月 4按次  */
     BillingType int `json:"billingType"`
 
-    /* 调整金额  */
+    /* 原价 (Optional) */
+    BillFee float64 `json:"billFee"`
+
+    /* 优惠金额 (Optional) */
+    DiscountFee float64 `json:"discountFee"`
+
+    /* 调整金额 (Optional) */
     AdjustFee float64 `json:"adjustFee"`
+
+    /* 调整现金金额 (Optional) */
+    CashPayFee float64 `json:"cashPayFee"`
+
+    /* 调整余额金额 (Optional) */
+    BalancePayFee float64 `json:"balancePayFee"`
+
+    /* 调整代金券金额 (Optional) */
+    CashCouponFee float64 `json:"cashCouponFee"`
+
+    /* 代金券券码 (Optional) */
+    CouponNumber string `json:"couponNumber"`
 }

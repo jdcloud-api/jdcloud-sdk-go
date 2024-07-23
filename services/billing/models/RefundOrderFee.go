@@ -33,4 +33,7 @@ type RefundOrderFee struct {
 
     /* 代金券退款金额 (Optional) */
     CouponFee float64 `json:"couponFee"`
+
+    /* 退款代金券列表 (Optional) */
+    CouponList []RefundCoupon `json:"couponList"`
 }

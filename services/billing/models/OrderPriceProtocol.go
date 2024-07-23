@@ -40,7 +40,7 @@ type OrderPriceProtocol struct {
     /* 时长(包年包月新购、续费必传) (Optional) */
     TimeSpan *int `json:"timeSpan"`
 
-    /* 时长类型 0:无(非包年包月) 1:小时 2:天 3:月 4:年(包年包月新购、续费必传) (Optional) */
+    /* 时长类型 0:无(非包年包月) 1:小时 2:天 3:月 4:年 5:周(包年包月新购、续费必传) (Optional) */
     TimeUnit *int `json:"timeUnit"`
 
     /* 网络类型 0:non 1:非BGP  2:BGP (Optional) */
@@ -69,4 +69,10 @@ type OrderPriceProtocol struct {
 
     /* 交易单模块sourceId (Optional) */
     SourceId *string `json:"sourceId"`
+
+    /* 可用区 (Optional) */
+    Az *string `json:"az"`
+
+    /* 抢占式计费类型设置保护期，默认：0（未设置保护期） (Optional) */
+    ProtectionPeriod *int `json:"protectionPeriod"`
 }

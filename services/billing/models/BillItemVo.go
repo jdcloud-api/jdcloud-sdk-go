@@ -64,6 +64,9 @@ type BillItemVo struct {
     /* 现金支付金额：2位精度 (Optional) */
     CashPayFee float64 `json:"cashPayFee"`
 
+    /* 电汇金额，2位精度 (Optional) */
+    Wire int `json:"wire"`
+
     /* 单价 (Optional) */
     UnitPrice float64 `json:"unitPrice"`
 

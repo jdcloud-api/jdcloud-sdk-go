@@ -17,29 +17,38 @@
 package models
 
 
-type RefundResourceFee struct {
+type OrderFee struct {
 
-    /* 资源id (Optional) */
-    ResourceId string `json:"resourceId"`
+    /* 订单编号 (Optional) */
+    TransactionNo string `json:"transactionNo"`
 
-    /* 状态: 1-成功 2-失败 (Optional) */
-    Status int `json:"status"`
-
-    /* 失败信息 (Optional) */
-    Message string `json:"message"`
-
-    /* 资源退款金额 (Optional) */
-    Fee float64 `json:"fee"`
+    /* 订单退款金额 (Optional) */
+    ActualFee float64 `json:"actualFee"`
 
     /* 现金退款金额 (Optional) */
-    CashFee float64 `json:"cashFee"`
+    CashPayFee float64 `json:"cashPayFee"`
 
     /* 余额退款金额 (Optional) */
-    BalanceFee float64 `json:"balanceFee"`
+    BalancePayFee float64 `json:"balancePayFee"`
 
     /* 代金券退款金额 (Optional) */
-    CouponFee float64 `json:"couponFee"`
+    CashCouponFee float64 `json:"cashCouponFee"`
 
-    /* 退款订单列表 (Optional) */
-    OrderFees []RefundOrderFee `json:"orderFees"`
+    /* 开始时间 (Optional) */
+    StartTime string `json:"startTime"`
+
+    /* 开始时间 (Optional) */
+    EndTime string `json:"endTime"`
+
+    /* 规格 (Optional) */
+    Formula string `json:"formula"`
+
+    /* 时间单位 (Optional) */
+    TimeUnit int `json:"timeUnit"`
+
+    /* 单位长度 (Optional) */
+    TimeSpan int `json:"timeSpan"`
+
+    /* 退款代金券列表 (Optional) */
+    RefundCouponList []RefundCoupon `json:"refundCouponList"`
 }

@@ -20,16 +20,16 @@ package models
 type OrderPriceDetail struct {
 
     /* 原价(6位，原价为每个计费项原价之和) (Optional) */
-    Price int `json:"price"`
+    Price float64 `json:"price"`
 
     /* 原价(6位，与price一致，兼容之前4位原价保留字段) (Optional) */
-    PriceScale4 int `json:"priceScale4"`
+    PriceScale4 float64 `json:"priceScale4"`
 
     /* 折扣金额（6位，折扣金额为每个计费项折扣金额之和） (Optional) */
-    Discount int `json:"discount"`
+    Discount float64 `json:"discount"`
 
     /* 应付金额（2位，应付金额=折扣后金额舍位保留2位小数) (Optional) */
-    DiscountedPrice int `json:"discountedPrice"`
+    DiscountedPrice float64 `json:"discountedPrice"`
 
     /* 折扣后金额（6位，折扣后金额为每个计费项折扣后金额之和) (Optional) */
     AfterFavorablePrice float64 `json:"afterFavorablePrice"`
@@ -38,7 +38,7 @@ type OrderPriceDetail struct {
     ErasePrice float64 `json:"erasePrice"`
 
     /* 订单原价 包年时 一年原价为12个月价格，totalPrice为10个月价格 (Optional) */
-    OriginalPrice int `json:"originalPrice"`
+    OriginalPrice float64 `json:"originalPrice"`
 
     /* 资源id (Optional) */
     ResourceId string `json:"resourceId"`
@@ -55,13 +55,16 @@ type OrderPriceDetail struct {
     /* 地域 (Optional) */
     Region string `json:"region"`
 
-    /* 计费类型1:按配置2:按用量3:包年包月 (Optional) */
+    /* 可用区 (Optional) */
+    Az string `json:"az"`
+
+    /* 计费类型1:按配置2:按用量3:包年包月4:一次性5:抢占式 (Optional) */
     BillingType int `json:"billingType"`
 
     /* 时长 (Optional) */
     TimeSpan int `json:"timeSpan"`
 
-    /* 时长类型 1:小时2:天3:月4:年 (Optional) */
+    /* 时长类型 1:小时2:天3:月4:年 5:周 (Optional) */
     TimeUnit int `json:"timeUnit"`
 
     /* 网络类型 0:non1:非BGP2:BGP (Optional) */
