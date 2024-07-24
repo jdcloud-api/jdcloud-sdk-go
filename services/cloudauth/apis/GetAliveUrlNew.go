@@ -32,6 +32,9 @@ type GetAliveUrlNewRequest struct {
 
     /* 采集结束后自动跳转的目标地址（须以http或https开头，长度不超过128字符）  */
     ReturnUrl string `json:"returnUrl"`
+
+    /* 指定动作，逗号隔开。（LookLeft 向左，LookRight 向右，OpenMouth 张嘴，BlinkEye 眨眼，ShakeHead 摇头，NodHead 点头） (Optional) */
+    Actions *string `json:"actions"`
 }
 
 /*
@@ -58,11 +61,13 @@ func NewGetAliveUrlNewRequest(
  * param name: 姓名（需要进行身份核验时传递此参数） (Optional)
  * param idcard: 身份证号（需要进行身份核验时传递此参数） (Optional)
  * param returnUrl: 采集结束后自动跳转的目标地址（须以http或https开头，长度不超过128字符） (Required)
+ * param actions: 指定动作，逗号隔开。（LookLeft 向左，LookRight 向右，OpenMouth 张嘴，BlinkEye 眨眼，ShakeHead 摇头，NodHead 点头） (Optional)
  */
 func NewGetAliveUrlNewRequestWithAllParams(
     name *string,
     idcard *string,
     returnUrl string,
+    actions *string,
 ) *GetAliveUrlNewRequest {
 
     return &GetAliveUrlNewRequest{
@@ -75,6 +80,7 @@ func NewGetAliveUrlNewRequestWithAllParams(
         Name: name,
         Idcard: idcard,
         ReturnUrl: returnUrl,
+        Actions: actions,
     }
 }
 
@@ -102,6 +108,10 @@ func (r *GetAliveUrlNewRequest) SetIdcard(idcard string) {
 /* param returnUrl: 采集结束后自动跳转的目标地址（须以http或https开头，长度不超过128字符）(Required) */
 func (r *GetAliveUrlNewRequest) SetReturnUrl(returnUrl string) {
     r.ReturnUrl = returnUrl
+}
+/* param actions: 指定动作，逗号隔开。（LookLeft 向左，LookRight 向右，OpenMouth 张嘴，BlinkEye 眨眼，ShakeHead 摇头，NodHead 点头）(Optional) */
+func (r *GetAliveUrlNewRequest) SetActions(actions string) {
+    r.Actions = &actions
 }
 
 

@@ -40,7 +40,7 @@ func NewCloudauthClient(credential *core.Credential) *CloudauthClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "cloudauth",
-            Revision:    "1.0.12",
+            Revision:    "1.0.13",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
