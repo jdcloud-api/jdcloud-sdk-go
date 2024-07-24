@@ -25,6 +25,9 @@ type AliveResultInfo struct {
     /* 场景照片base64 (Optional) */
     SceneImage string `json:"sceneImage"`
 
+    /* 现场视频base64 (Optional) */
+    Video string `json:"video"`
+
     /* H5活体检测结果 (Optional) */
     H5Result string `json:"h5Result"`
 

@@ -100,6 +100,7 @@ type GetAliveResultResponse struct {
 type GetAliveResultResult struct {
     FaceImage string `json:"faceImage"`
     SceneImage string `json:"sceneImage"`
+    Video string `json:"video"`
     H5Result string `json:"h5Result"`
     SmResult string `json:"smResult"`
     RxResult string `json:"rxResult"`
