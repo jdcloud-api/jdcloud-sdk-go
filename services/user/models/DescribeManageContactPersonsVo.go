@@ -17,17 +17,20 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type DescribeManageContactPersonsVo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* pin (Optional) */
+    Pin string `json:"pin"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
+    /* 个人姓名 (Optional) */
+    UserName string `json:"userName"`
 
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
+    /* 所在联系人组 (Optional) */
+    ContactGroups string `json:"contactGroups"`
 
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* 手机 (Optional) */
+    Mobile string `json:"mobile"`
+
+    /* 邮箱 (Optional) */
+    Email string `json:"email"`
 }

@@ -17,17 +17,17 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type PageInfo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /*  (Optional) */
+    CurrentPage int `json:"currentPage"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
+    /*  (Optional) */
+    PageSize int `json:"pageSize"`
 
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
+    /*  (Optional) */
+    TotalRecord int `json:"totalRecord"`
 
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /*  (Optional) */
+    TotalPage int `json:"totalPage"`
 }

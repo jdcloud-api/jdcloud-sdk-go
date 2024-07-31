@@ -17,17 +17,11 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type IpProtectAddressList struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* pin (Optional) */
+    Pin string `json:"pin"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
-
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
-
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* ip集合 (Optional) */
+    Ip []string `json:"ip"`
 }

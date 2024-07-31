@@ -17,17 +17,14 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type AutoUserReportResVo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* 总记录数 (Optional) */
+    TotalCount int `json:"totalCount"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
+    /* 新增成功的个数 (Optional) */
+    SuccessCount int `json:"successCount"`
 
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
-
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* 记录新增失败的实体和原因 (Optional) */
+    FailureVos interface{} `json:"failureVos"`
 }

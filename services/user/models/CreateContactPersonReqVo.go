@@ -17,17 +17,17 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type CreateContactPersonReqVo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* 联系人姓名  */
+    UserName string `json:"userName"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
+    /* 邮箱 (Optional) */
+    Email string `json:"email"`
 
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
+    /* 手机号  */
+    Mobile string `json:"mobile"`
 
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* 接收消息类型：1账户消息 2产品消息 3故障消息 4活动消息（可多个，英文逗号隔开） (Optional) */
+    SubscriptionType string `json:"subscriptionType"`
 }

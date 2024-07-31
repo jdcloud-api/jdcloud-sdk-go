@@ -20,22 +20,25 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type DescribeUserRequest struct {
+type CreateTicketRequest struct {
 
     core.JDCloudRequest
+
+    /* 有效期（默认24，最小1，最大24，单位小时） (Optional) */
+    Expire *int64 `json:"expire"`
 }
 
 /*
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeUserRequest(
-) *DescribeUserRequest {
+func NewCreateTicketRequest(
+) *CreateTicketRequest {
 
-	return &DescribeUserRequest{
+	return &CreateTicketRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/describeUser",
-			Method:  "GET",
+			URL:     "/user:createTicket",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
@@ -43,50 +46,54 @@ func NewDescribeUserRequest(
 }
 
 /*
+ * param expire: 有效期（默认24，最小1，最大24，单位小时） (Optional)
  */
-func NewDescribeUserRequestWithAllParams(
-) *DescribeUserRequest {
+func NewCreateTicketRequestWithAllParams(
+    expire *int64,
+) *CreateTicketRequest {
 
-    return &DescribeUserRequest{
+    return &CreateTicketRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/describeUser",
-            Method:  "GET",
+            URL:     "/user:createTicket",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
+        Expire: expire,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeUserRequestWithoutParam() *DescribeUserRequest {
+func NewCreateTicketRequestWithoutParam() *CreateTicketRequest {
 
-    return &DescribeUserRequest{
+    return &CreateTicketRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/describeUser",
-            Method:  "GET",
+            URL:     "/user:createTicket",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
     }
 }
 
+/* param expire: 有效期（默认24，最小1，最大24，单位小时）(Optional) */
+func (r *CreateTicketRequest) SetExpire(expire int64) {
+    r.Expire = &expire
+}
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeUserRequest) GetRegionId() string {
+func (r CreateTicketRequest) GetRegionId() string {
     return ""
 }
 
-type DescribeUserResponse struct {
+type CreateTicketResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeUserResult `json:"result"`
+    Result CreateTicketResult `json:"result"`
 }
 
-type DescribeUserResult struct {
-    Pin string `json:"pin"`
-    LoginName string `json:"loginName"`
-    AccountId string `json:"accountId"`
-    UserAuth int `json:"userAuth"`
+type CreateTicketResult struct {
+    Ticket string `json:"ticket"`
 }

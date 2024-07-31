@@ -17,17 +17,11 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type CreateAllotUserSellerVo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* 失败pin (Optional) */
+    AllotFail []string `json:"allotFail"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
-
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
-
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* 成功pin (Optional) */
+    AllotSuccess []string `json:"allotSuccess"`
 }

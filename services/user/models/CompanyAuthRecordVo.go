@@ -17,17 +17,20 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type CompanyAuthRecordVo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* 用户pin (Optional) */
+    Pin string `json:"pin"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
+    /* 操作类型：0，认证，1，取消认证，2，实名过期 (Optional) */
+    Type int `json:"type"`
 
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
+    /* 操作人 (Optional) */
+    Operator string `json:"operator"`
 
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* 备注 (Optional) */
+    Remark string `json:"remark"`
+
+    /* 操作时间 (Optional) */
+    CreateTime string `json:"createTime"`
 }

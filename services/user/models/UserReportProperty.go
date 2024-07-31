@@ -19,7 +19,7 @@ package models
 
 type UserReportProperty struct {
 
-    /* 用户归属（集团-1、外部-2、云内部-3) (Optional) */
+    /* 用户归属（集团-1、外部-2、京东科技内部-3) (Optional) */
     Affiliation string `json:"affiliation"`
 
     /* 用户归属索引 (Optional) */
@@ -37,7 +37,10 @@ type UserReportProperty struct {
     /* 业务线索引 (Optional) */
     BusinessLineIndex int `json:"businessLineIndex"`
 
-    /* 用户分组(自然流量-1、内部测试-2、内部重点-3、渠道用户-4、合作伙伴-5、直接用户-6、ISV-7、内部高级-8、代理用户-9、服务商-10、集采大客户-11、京东云Lab-12、汇桔网-21) (Optional) */
+    /* 业务线三级部门 (Optional) */
+    SubBusinessLine string `json:"subBusinessLine"`
+
+    /* 用户分组(自然流量-1、内部测试-2、内部重点-3、渠道分销-4、合作伙伴-5、直接用户-6、ISV-7、内部高级-8、渠道代理-9、服务商-10、集采大客户-11、京东云Lab-12、汇桔网-21) (Optional) */
     UserGroup string `json:"userGroup"`
 
     /* 用户分组索引 (Optional) */
@@ -51,4 +54,43 @@ type UserReportProperty struct {
 
     /* 归属为集团，事业部名称 (Optional) */
     DeptName string `json:"deptName"`
+
+    /* 客户级别 (Optional) */
+    ClientType string `json:"clientType"`
+
+    /* 客户级别索引 (Optional) */
+    ClientIndex int `json:"clientIndex"`
+
+    /* 是否白名单 (Optional) */
+    WhiteList bool `json:"whiteList"`
+
+    /* 报备名称 (Optional) */
+    ReportName string `json:"reportName"`
+
+    /* 是否允许IAM用户自定义创建子用户：1-允许 0-不允许 (Optional) */
+    SelfDefinitionForIAMUser int `json:"selfDefinitionForIAMUser"`
+
+    /* 集团费用部门编码 (Optional) */
+    CostDepartmentCode string `json:"costDepartmentCode"`
+
+    /* 集团费用部门名称 (Optional) */
+    CostDepartmentName string `json:"costDepartmentName"`
+
+    /* 财务计收归属：（集团-1、外部-2、云内部-3） (Optional) */
+    AccountAffiliation int `json:"accountAffiliation"`
+
+    /* 财务计收归属子属性 (Optional) */
+    AccountAffiliationCode string `json:"accountAffiliationCode"`
+
+    /* pin (Optional) */
+    Pin string `json:"pin"`
+
+    /* 账号名 (Optional) */
+    LoginName string `json:"loginName"`
+
+    /* 报备状态0未报备，1已报备 (Optional) */
+    Status int `json:"status"`
+
+    /* 销售erp (Optional) */
+    SellerErp string `json:"sellerErp"`
 }

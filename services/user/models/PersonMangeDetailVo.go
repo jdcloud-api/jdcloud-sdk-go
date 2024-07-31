@@ -17,17 +17,29 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type PersonMangeDetailVo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* pin (Optional) */
+    Pin string `json:"pin"`
 
-    /* 用户资源池类型name (Optional) */
+    /* 个人姓名 (Optional) */
     Name string `json:"name"`
 
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
+    /* 身份证号 (Optional) */
+    Cnumber string `json:"cnumber"`
 
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* 新老实名 (Optional) */
+    OldOrNewUser int `json:"oldOrNewUser"`
+
+    /* 认证时间 (Optional) */
+    AuthTime string `json:"authTime"`
+
+    /* 认证方式 (Optional) */
+    AuthType int `json:"authType"`
+
+    /* 认证状态 (Optional) */
+    PersonStatus int `json:"personStatus"`
+
+    /* 认证渠道 (Optional) */
+    AuthChannel string `json:"authChannel"`
 }

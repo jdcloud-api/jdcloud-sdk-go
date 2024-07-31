@@ -17,17 +17,14 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type OpenBindsVo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* 站点 (Optional) */
+    Site string `json:"site"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
+    /* 昵称 (Optional) */
+    NickName string `json:"nickName"`
 
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
-
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* 站点名 (Optional) */
+    SiteName string `json:"siteName"`
 }

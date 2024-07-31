@@ -17,17 +17,17 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type PersonAuthInfoVo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* 身份证号 (Optional) */
+    License string `json:"license"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
+    /* 个人认证方式 (Optional) */
+    AuthWay string `json:"authWay"`
 
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
+    /* 姓名 (Optional) */
+    UserName string `json:"userName"`
 
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* 认证时间 (Optional) */
+    Time string `json:"time"`
 }

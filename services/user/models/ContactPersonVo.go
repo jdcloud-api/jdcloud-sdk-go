@@ -17,16 +17,13 @@
 package models
 
 
-type ContactPerson struct {
+type ContactPersonVo struct {
 
-    /* 用户id (Optional) */
-    Id int64 `json:"id"`
+    /* 联系人ID (Optional) */
+    PersonId int64 `json:"personId"`
 
     /* 用户pin(创建人) (Optional) */
     Pin string `json:"pin"`
-
-    /* 子用户名 (Optional) */
-    SubName string `json:"subName"`
 
     /* 用户名 (Optional) */
     UserName string `json:"userName"`
@@ -37,24 +34,18 @@ type ContactPerson struct {
     /* 手机号 (Optional) */
     Mobile string `json:"mobile"`
 
-    /* 用户邮箱有效 (Optional) */
+    /* 用户手机号是否有效（1-有效 0-无效） (Optional) */
+    MobileValid int `json:"mobileValid"`
+
+    /* 用户邮箱是否有效（1-有效 0-无效） (Optional) */
     EmailValid int `json:"emailValid"`
 
     /* 是否为主联系人 (Optional) */
     IsMain int `json:"isMain"`
 
-    /* 创建时间 (Optional) */
-    Created string `json:"created"`
-
-    /* 修改时间 (Optional) */
-    Modified string `json:"modified"`
-
-    /* 是否正常：0表示删除，1表示正常 (Optional) */
-    Yn int `json:"yn"`
-
     /* 1:账号联系人;2:非账号联系人 (Optional) */
     IsSelf int `json:"isSelf"`
 
-    /* 0:旧数据;1:新数据(子账号数据) (Optional) */
-    IsSubUser int `json:"isSubUser"`
+    /*  (Optional) */
+    ContactGroups []ContactGroupVo `json:"contactGroups"`
 }

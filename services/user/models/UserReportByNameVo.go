@@ -17,17 +17,20 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type UserReportByNameVo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* pin (Optional) */
+    Pin string `json:"pin"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
+    /* 报备名称 (Optional) */
+    ReportName string `json:"reportName"`
 
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
+    /* 财务计收归属：（集团-1、外部-2、云内部-3） (Optional) */
+    AccountAffiliation int `json:"accountAffiliation"`
 
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* 财务计收归属子属性 (Optional) */
+    AccountAffiliationCode string `json:"accountAffiliationCode"`
+
+    /* 销售员erp (Optional) */
+    SellerErp string `json:"sellerErp"`
 }

@@ -17,17 +17,20 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type SaveIpSetUpReq struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* 标题 (Optional) */
+    Title string `json:"title"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
+    /* 配置方式-0ip白名单，1固定ip白名单 (Optional) */
+    Type int `json:"type"`
 
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
+    /* pin集合 (Optional) */
+    Pin []string `json:"pin"`
 
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* ip集合 (Optional) */
+    Ip []string `json:"ip"`
+
+    /* 是否控制网关sdk：0否，1是 (Optional) */
+    IsApi int `json:"isApi"`
 }

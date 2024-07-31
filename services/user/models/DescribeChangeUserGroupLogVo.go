@@ -17,17 +17,23 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type DescribeChangeUserGroupLogVo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* 操作人 (Optional) */
+    Operator string `json:"operator"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
+    /* pin (Optional) */
+    Pin string `json:"pin"`
 
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
+    /* 创建时间 (Optional) */
+    CreateTime string `json:"createTime"`
 
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* 用分组 (Optional) */
+    UserGroup int `json:"userGroup"`
+
+    /* 状态 (Optional) */
+    Status string `json:"status"`
+
+    /* 修改时间 (Optional) */
+    UpdateTime string `json:"updateTime"`
 }

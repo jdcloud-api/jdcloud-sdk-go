@@ -17,17 +17,23 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type DescribeActiveLogsVo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* 操作人 (Optional) */
+    OperatorErp string `json:"operatorErp"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
+    /* pin (Optional) */
+    Pin string `json:"pin"`
 
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
+    /* 激活时间 (Optional) */
+    ActiveTime string `json:"activeTime"`
 
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* 是否激活成功：0否1是 (Optional) */
+    Status string `json:"status"`
+
+    /* 创建时间 (Optional) */
+    CreateTime string `json:"createTime"`
+
+    /* 批量号 (Optional) */
+    BatchNo int `json:"batchNo"`
 }

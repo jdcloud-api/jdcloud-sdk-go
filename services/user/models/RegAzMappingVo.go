@@ -17,17 +17,11 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type RegAzMappingVo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* 物理可用区 (Optional) */
+    PAz string `json:"pAz"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
-
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
-
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* 权重 (Optional) */
+    Weight float64 `json:"weight"`
 }

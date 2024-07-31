@@ -40,7 +40,7 @@ func NewUserClient(credential *core.Credential) *UserClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "user",
-            Revision:    "0.1.5",
+            Revision:    "0.2.8",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -55,6 +55,26 @@ func (c *UserClient) SetLogger(logger core.Logger) {
 
 func (c *UserClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
+}
+
+/* 创建免登录ticket */
+func (c *UserClient) CreateTicket(request *user.CreateTicketRequest) (*user.CreateTicketResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &user.CreateTicketResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
 }
 
 /* 查询用户信息 */

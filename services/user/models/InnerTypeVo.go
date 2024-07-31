@@ -17,17 +17,14 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type InnerTypeVo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* 编码 (Optional) */
+    Code int `json:"code"`
 
-    /* 用户资源池类型name (Optional) */
+    /* 描述 (Optional) */
+    Desc string `json:"desc"`
+
+    /* 名称 (Optional) */
     Name string `json:"name"`
-
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
-
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
 }

@@ -17,17 +17,14 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type SubAccountReqVo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* 主账号  */
+    Account string `json:"account"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
+    /* 子账号  */
+    SubUser string `json:"subUser"`
 
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
-
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* 密码  */
+    Password string `json:"password"`
 }

@@ -17,17 +17,11 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type SendVerificationVo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* 联系人ID (Optional) */
+    PersonId int64 `json:"personId"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
-
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
-
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* 验证方式：email | mobile (Optional) */
+    VerifyType string `json:"verifyType"`
 }

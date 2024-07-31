@@ -17,38 +17,59 @@
 package models
 
 
-type UserAttachment struct {
+type AttachmentVo struct {
 
-    /* 备注信息 (Optional) */
+    /* null (Optional) */
+    Id int `json:"id"`
+
+    /* pin (Optional) */
+    Pin string `json:"pin"`
+
+    /* 运营给用户填写的备注 (Optional) */
     Remark string `json:"remark"`
 
-    /* 主营行业 (Optional) */
+    /* 行业属性 (Optional) */
     Industry string `json:"industry"`
 
-    /* 主营行业子选项 (Optional) */
+    /* 子行业属性 (Optional) */
     SubIndustry string `json:"subIndustry"`
 
     /* 主营业务 (Optional) */
     Business string `json:"business"`
 
-    /* 网站 (Optional) */
+    /* 推荐码 (Optional) */
+    RecommendCode string `json:"recommendCode"`
+
+    /* 老用户-邮箱是否修改 (Optional) */
+    OldUserMailModified string `json:"oldUserMailModified"`
+
+    /* 老用户-手机是否修改 (Optional) */
+    OldUserPhoneModified string `json:"oldUserPhoneModified"`
+
+    /* 联系人 (Optional) */
+    CpName string `json:"cpName"`
+
+    /* 网址 (Optional) */
     Website string `json:"website"`
 
-    /* 国家 (Optional) */
+    /* 联系人国家 (Optional) */
     CpState string `json:"cpState"`
 
-    /* 省 (Optional) */
+    /* 联系人省份 (Optional) */
     CpProvince string `json:"cpProvince"`
 
-    /* 市 (Optional) */
+    /* 联系人城市 (Optional) */
     CpCity string `json:"cpCity"`
 
-    /* 区县 (Optional) */
+    /* 主营业务 (Optional) */
     CpCountry string `json:"cpCountry"`
 
-    /* 详细地址 (Optional) */
+    /* 联系人国家 (Optional) */
     CpAddress string `json:"cpAddress"`
 
-    /* 联系手机 (Optional) */
+    /* 联系人联系电话 (Optional) */
     CpTelphone string `json:"cpTelphone"`
+
+    /* 商户号 (Optional) */
+    MerchantId string `json:"merchantId"`
 }

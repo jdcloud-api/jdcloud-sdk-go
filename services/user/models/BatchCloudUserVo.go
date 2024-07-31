@@ -17,17 +17,26 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type BatchCloudUserVo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* 是否成功 (Optional) */
+    Success bool `json:"success"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
+    /* 原因 (Optional) */
+    Message string `json:"message"`
 
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
+    /* 用户名 (Optional) */
+    LoginName string `json:"loginName"`
 
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* pin (Optional) */
+    Pin string `json:"pin"`
+
+    /* 密码 (Optional) */
+    Password string `json:"password"`
+
+    /* 邮箱 (Optional) */
+    Email string `json:"email"`
+
+    /* 手机 (Optional) */
+    Phone string `json:"phone"`
 }

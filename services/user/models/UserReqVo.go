@@ -58,9 +58,9 @@ type UserReqVo struct {
     /* 渠道等级;1普通用户2测试用户4VIP用户8其他VIP用户16boss迁移账户 (Optional) */
     Tag int `json:"tag"`
 
-    /* 页大小(必传) (Optional) */
+    /* 页大小(必传)  */
     PageSize int `json:"pageSize"`
 
-    /* 当前页(必传) (Optional) */
+    /* 当前页(必传)  */
     CurrentPage int `json:"currentPage"`
 }

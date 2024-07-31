@@ -17,17 +17,23 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type ErpLoginableUserInfo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* 用户pin (Optional) */
+    Pin string `json:"pin"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
+    /* 账号名 (Optional) */
+    LoginName string `json:"loginName"`
 
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
+    /* 用户归属（集团-1、京东科技内部-3) (Optional) */
+    UserReportType int `json:"userReportType"`
 
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* 是否禁止其他登录方式，包括京东、APP扫码、微信、账密登录（禁止-1、不禁止-0) (Optional) */
+    DisableOtherLogin int `json:"disableOtherLogin"`
+
+    /* 关联的ERP列表 (Optional) */
+    Erps []string `json:"erps"`
+
+    /* 用户资源池类型 (Optional) */
+    UserResourceType string `json:"userResourceType"`
 }
