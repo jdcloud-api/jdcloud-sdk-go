@@ -17,17 +17,11 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type IpSetUpPageVo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* 总记录数 (Optional) */
+    TotalCount int `json:"totalCount"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
-
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
-
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /*  (Optional) */
+    IpSetUpVos []IpSetUpVo `json:"ipSetUpVos"`
 }

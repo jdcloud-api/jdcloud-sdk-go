@@ -17,17 +17,23 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type QueryUserAzDetailVo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* 物理可用区 (Optional) */
+    Paz string `json:"paz"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
+    /* 逻辑可用区 (Optional) */
+    Laz string `json:"laz"`
 
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
+    /* 云厂商 (Optional) */
+    CloudManufacturer string `json:"cloudManufacturer"`
 
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* 是否失效 0未失效1失效 (Optional) */
+    IsInvalid int `json:"isInvalid"`
+
+    /* 是否用户可用区 0 否 1是 (Optional) */
+    IsTick int `json:"isTick"`
+
+    /* 是否注册开通 0否 1是 (Optional) */
+    IsReg int `json:"isReg"`
 }

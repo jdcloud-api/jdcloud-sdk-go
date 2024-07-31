@@ -17,17 +17,26 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type SubUsers struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* 用户pin (Optional) */
+    Pin string `json:"pin"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
+    /* 昵称 (Optional) */
+    NickName string `json:"nickName"`
 
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
+    /* 用户名 (Optional) */
+    LoginName string `json:"loginName"`
 
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* 手机号码 (Optional) */
+    Mobile string `json:"mobile"`
+
+    /* 邮箱 (Optional) */
+    Email string `json:"email"`
+
+    /* 主账号 (Optional) */
+    Account string `json:"account"`
+
+    /* 是否联系人 0否1是 (Optional) */
+    IsContact int `json:"isContact"`
 }

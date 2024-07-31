@@ -17,17 +17,23 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type QueryUserRegionDetailVo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* 地域 例：cn-north-1 (Optional) */
+    Region string `json:"region"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
+    /* 地域 例：cn-north-1(京东云) (Optional) */
+    RegionProvider string `json:"regionProvider"`
 
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
+    /* 云厂商 (Optional) */
+    CloudManufacturer string `json:"cloudManufacturer"`
 
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /*  (Optional) */
+    Alias string `json:"alias"`
+
+    /* 是否注册开通 0否，1是 (Optional) */
+    IsReg int `json:"isReg"`
+
+    /* 可用区集合 (Optional) */
+    Mapping []QueryUserAzDetailVo `json:"mapping"`
 }

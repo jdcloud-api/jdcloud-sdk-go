@@ -17,17 +17,35 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type DescribeCustomerVo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* pin (Optional) */
+    Pin string `json:"pin"`
 
-    /* 用户资源池类型name (Optional) */
+    /* 用户分组 (Optional) */
+    Group int `json:"group"`
+
+    /* 姓名 (Optional) */
     Name string `json:"name"`
 
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
+    /* 企业名 (Optional) */
+    CompanyName string `json:"companyName"`
 
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* 邮箱 (Optional) */
+    Email string `json:"email"`
+
+    /* 手机 (Optional) */
+    Phone string `json:"phone"`
+
+    /* 激活时间 (Optional) */
+    ActiveTime string `json:"activeTime"`
+
+    /* 计费状态 (Optional) */
+    CostDay string `json:"costDay"`
+
+    /* 欠费时间 (Optional) */
+    ArrearageTime string `json:"arrearageTime"`
+
+    /* 用户类型 (Optional) */
+    UserType string `json:"userType"`
 }

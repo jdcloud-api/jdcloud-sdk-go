@@ -17,17 +17,29 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type UserGroupListVo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
-
-    /* 用户资源池类型name (Optional) */
+    /* 名称 (Optional) */
     Name string `json:"name"`
 
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
+    /* 编码 (Optional) */
+    Code string `json:"code"`
 
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* 操作人 (Optional) */
+    Operator string `json:"operator"`
+
+    /* 创建人 (Optional) */
+    CreateBy string `json:"createBy"`
+
+    /* 创建时间 (Optional) */
+    CreateTime string `json:"createTime"`
+
+    /* 修改时间 (Optional) */
+    UpdateTime string `json:"updateTime"`
+
+    /* 状态 (Optional) */
+    Status string `json:"status"`
+
+    /* 枚举编码 (Optional) */
+    State string `json:"state"`
 }

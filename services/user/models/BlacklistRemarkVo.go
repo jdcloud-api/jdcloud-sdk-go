@@ -17,17 +17,14 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type BlacklistRemarkVo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* 黑名单操作记录 (Optional) */
+    Add string `json:"add"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
+    /* 黑名单操作记录 (Optional) */
+    Modify string `json:"modify"`
 
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
-
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* 黑名单操作记录 (Optional) */
+    Remove string `json:"remove"`
 }

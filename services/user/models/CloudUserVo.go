@@ -17,17 +17,14 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type CloudUserVo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* 账号名 (Optional) */
+    LoginName string `json:"loginName"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
+    /* 注册来源 (Optional) */
+    RegisterSource string `json:"registerSource"`
 
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
-
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* 是否新账号 (Optional) */
+    IsCloudUser bool `json:"isCloudUser"`
 }

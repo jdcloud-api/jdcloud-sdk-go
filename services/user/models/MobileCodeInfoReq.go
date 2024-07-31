@@ -17,17 +17,14 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type MobileCodeInfoReq struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* uid (Optional) */
+    Uid string `json:"uid"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
+    /* 场景 (Optional) */
+    Source string `json:"source"`
 
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
-
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* 签名 (Optional) */
+    Sign string `json:"sign"`
 }

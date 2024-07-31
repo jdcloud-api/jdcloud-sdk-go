@@ -17,17 +17,14 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type RevocationVo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* pin  */
+    Pin string `json:"pin"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
+    /* 放弃余额话术 (Optional) */
+    BalanceScript string `json:"balanceScript"`
 
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
-
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* 放弃代金券话术 (Optional) */
+    CouponScript string `json:"couponScript"`
 }

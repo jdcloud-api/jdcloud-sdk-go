@@ -17,17 +17,11 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type UserTypeAndNameVo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* 用户类型 (Optional) */
+    UserType int `json:"userType"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
-
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
-
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* 认证名称 (Optional) */
+    AuthName string `json:"authName"`
 }

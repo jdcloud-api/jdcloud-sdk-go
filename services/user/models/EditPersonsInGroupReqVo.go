@@ -17,17 +17,14 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type EditPersonsInGroupReqVo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* 联系组ID (Optional) */
+    GroupId int64 `json:"groupId"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
+    /* 联系人ID（可多个，英文逗号隔开） (Optional) */
+    PersonIds string `json:"personIds"`
 
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
-
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* 是否是账号联系人：1-账号联系人 2-非账号联系人（可多个，英文逗号隔开，与personIds相对应） (Optional) */
+    IsSelfs string `json:"isSelfs"`
 }

@@ -17,17 +17,11 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type CreateTagForUserInfo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* 用户特征标签键，打标签前需确定好是否已经允许打此标签键  */
+    Label string `json:"label"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
-
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
-
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* 用户特征标签值，范围[0，1000] (Optional) */
+    LabelValue int `json:"labelValue"`
 }

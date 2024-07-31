@@ -17,17 +17,26 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type ModifyIpSetUpVo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* 标题 (Optional) */
+    Title string `json:"title"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
+    /* 标题编码 用户ip白名单为空 (Optional) */
+    TitleCode string `json:"titleCode"`
 
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
+    /* 配置方式-0ip白名单，1固定ip白名单 (Optional) */
+    Type int `json:"type"`
 
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* pin集合 固定ip白名单入参 (Optional) */
+    Pins []string `json:"pins"`
+
+    /* pin集合 ip白名单入参 (Optional) */
+    Pin string `json:"pin"`
+
+    /* ip集合 (Optional) */
+    Ip []string `json:"ip"`
+
+    /* 是否控制网关sdk：0否，1是 (Optional) */
+    IsApi int `json:"isApi"`
 }

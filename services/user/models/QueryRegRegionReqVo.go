@@ -17,17 +17,14 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type QueryRegRegionReqVo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* 地域 (Optional) */
+    Region string `json:"region"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
+    /* 操作人 (Optional) */
+    UpdateUser string `json:"updateUser"`
 
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
-
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* 操作时间 (Optional) */
+    UpdateTime string `json:"updateTime"`
 }

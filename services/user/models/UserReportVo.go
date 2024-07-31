@@ -22,7 +22,10 @@ type UserReportVo struct {
     /* 用户pin (Optional) */
     Pin string `json:"pin"`
 
-    /* 用户归属（集团-1、外部-2、云内部-3) (Optional) */
+    /* 报备名称 (Optional) */
+    ReportName string `json:"reportName"`
+
+    /* 用户归属（集团-1、外部-2、京东科技内部-3) (Optional) */
     Affiliation string `json:"affiliation"`
 
     /* 报备为集团时，业务联系人erp (Optional) */

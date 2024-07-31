@@ -17,17 +17,17 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type DescribeUserRecordVo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* 旧记录 (Optional) */
+    OldRecord string `json:"oldRecord"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
+    /* 新记录 (Optional) */
+    NewRecord string `json:"newRecord"`
 
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
+    /* 创建时间 (Optional) */
+    CreateTime string `json:"createTime"`
 
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* 是否注册邮箱手机 (Optional) */
+    IsRegister int `json:"isRegister"`
 }

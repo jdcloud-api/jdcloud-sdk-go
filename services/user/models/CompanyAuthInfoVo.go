@@ -17,17 +17,23 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type CompanyAuthInfoVo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* 统一社会信用代码 (Optional) */
+    License string `json:"license"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
+    /* 企业认证方式 (Optional) */
+    AuthWay string `json:"authWay"`
 
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
+    /* 企业名 (Optional) */
+    CompanyName string `json:"companyName"`
 
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* 认证时间 (Optional) */
+    Time string `json:"time"`
+
+    /* 是否允许更新认证 (Optional) */
+    SupportUpdateCompanyAuth bool `json:"supportUpdateCompanyAuth"`
+
+    /* 到期时间 (Optional) */
+    ExpireTime string `json:"expireTime"`
 }

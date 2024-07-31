@@ -17,17 +17,23 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type UserDetailVo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* 用户pin (Optional) */
+    Pin string `json:"pin"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
+    /* 启用禁用 (Optional) */
+    Enabled bool `json:"enabled"`
 
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
+    /* 手机 (Optional) */
+    CscPhone string `json:"cscPhone"`
 
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* 邮箱 (Optional) */
+    CscEmail string `json:"cscEmail"`
+
+    /* accountId (Optional) */
+    AccountId string `json:"accountId"`
+
+    /* 分组 (Optional) */
+    UserGroup int `json:"userGroup"`
 }

@@ -17,17 +17,29 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type IpSetUpVo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* 标题 (Optional) */
+    Title string `json:"title"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
+    /* 标题编码 用户ip白名单为空 (Optional) */
+    TitleCode string `json:"titleCode"`
 
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
+    /* ip (Optional) */
+    Ip string `json:"ip"`
 
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* 账号名 (Optional) */
+    Account string `json:"account"`
+
+    /* pin (Optional) */
+    Pin string `json:"pin"`
+
+    /* 创建人 (Optional) */
+    CreateBy string `json:"createBy"`
+
+    /* 创建时间 (Optional) */
+    CreateTime string `json:"createTime"`
+
+    /* 修改时间 (Optional) */
+    UpdateTime string `json:"updateTime"`
 }

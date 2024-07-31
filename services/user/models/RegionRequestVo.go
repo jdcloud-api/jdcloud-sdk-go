@@ -17,17 +17,14 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type RegionRequestVo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* 地域  */
+    Region string `json:"region"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
+    /* 别名  */
+    Alias string `json:"alias"`
 
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
-
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /*   */
+    Mapping []AzRequest `json:"mapping"`
 }

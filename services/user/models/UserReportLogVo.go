@@ -17,17 +17,20 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type UserReportLogVo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* id (Optional) */
+    Id int `json:"id"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
+    /* pin (Optional) */
+    Pin string `json:"pin"`
 
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
+    /* 历史版本 (Optional) */
+    UpdateTime string `json:"updateTime"`
 
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* 操作人 (Optional) */
+    Operator string `json:"operator"`
+
+    /* 备注 (Optional) */
+    Remark string `json:"remark"`
 }

@@ -17,17 +17,23 @@
 package models
 
 
-type UserResourceTypeInfo struct {
+type UserInfo struct {
 
-    /* 用户资源池类型code (Optional) */
-    Code string `json:"code"`
+    /* 用户pin (Optional) */
+    Pin string `json:"pin"`
 
-    /* 用户资源池类型name (Optional) */
-    Name string `json:"name"`
+    /* 用户id (Optional) */
+    AccountId string `json:"accountId"`
 
-    /* 用户网络专区属性code (Optional) */
-    NetworkZoneCode string `json:"networkZoneCode"`
+    /* 用户名 (Optional) */
+    LoginName string `json:"loginName"`
 
-    /* 用户网络专区属性name (Optional) */
-    NetworkZoneName string `json:"networkZoneName"`
+    /* 手机 (Optional) */
+    Phone string `json:"phone"`
+
+    /* 邮箱 (Optional) */
+    Email string `json:"email"`
+
+    /* 京东登录名 (Optional) */
+    JdLoginName string `json:"jdLoginName"`
 }
