@@ -22,7 +22,7 @@ type RuleSet struct {
     /* 规则集的标识。 (Optional) */
     Id string `json:"id"`
 
-    /* 规则集的名称。 (Optional) */
+    /* 规则集的名称，例如default。 (Optional) */
     Name string `json:"name"`
 
     /* 规则集的描述。 (Optional) */
@@ -31,7 +31,7 @@ type RuleSet struct {
     /* 规则集的类型，有效值zone。 (Optional) */
     Kind string `json:"kind"`
 
-    /* 执行规则集的阶段，有效值http_ratelimit。 (Optional) */
+    /* 执行规则集的阶段，有效值http_ratelimit/http_request_late_transform/http_request_firewall_custom/http_request_firewall_managed。 (Optional) */
     Phase string `json:"phase"`
 
     /* 规则集最近修改时间。 (Optional) */

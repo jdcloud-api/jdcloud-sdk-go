@@ -17,23 +17,11 @@
 package models
 
 
-type Response struct {
+type BotScoreHistogram struct {
 
-    /* 仅当规则action为block时可用。
-允许您定义由于速率限制而阻止请求时,返回的HTTP响应体。
-最大大小为30 KB。
- (Optional) */
-    Content *string `json:"content"`
+    /* Bot分数集合。最小值1，最大值99。 (Optional) */
+    ScoreSeries []int `json:"scoreSeries"`
 
-    /* 仅当规则action为block时可用。
-允许您定义阻止请求时,响应的内容类型。
-有效值application/json, text/html, text/xml, text/plain
- (Optional) */
-    Content_type *string `json:"content_type"`
-
-    /* 仅当规则action为block时可用。
-允许您定义阻止请求时,返回给访问者的HTTP状态代码。
-您必须输入一个介于400和499之间的值。
- (Optional) */
-    Status_code *int `json:"status_code"`
+    /* 请求次数集合。与Bot分数一一对应。 (Optional) */
+    CountSeries []int `json:"countSeries"`
 }

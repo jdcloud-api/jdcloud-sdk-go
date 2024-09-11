@@ -177,4 +177,7 @@ type ListZonesResponse struct {
 
 type ListZonesResult struct {
     DataList []starshield.Zone `json:"dataList"`
+    CurrentCount int `json:"currentCount"`
+    TotalCount int `json:"totalCount"`
+    TotalPage int `json:"totalPage"`
 }

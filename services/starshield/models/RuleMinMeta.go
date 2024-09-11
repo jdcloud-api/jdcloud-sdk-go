@@ -17,23 +17,17 @@
 package models
 
 
-type Response struct {
+type RuleMinMeta struct {
 
-    /* 仅当规则action为block时可用。
-允许您定义由于速率限制而阻止请求时,返回的HTTP响应体。
-最大大小为30 KB。
- (Optional) */
-    Content *string `json:"content"`
+    /* 规则标识。 (Optional) */
+    Id *string `json:"id"`
 
-    /* 仅当规则action为block时可用。
-允许您定义阻止请求时,响应的内容类型。
-有效值application/json, text/html, text/xml, text/plain
- (Optional) */
-    Content_type *string `json:"content_type"`
+    /* 命中规则的操作。 (Optional) */
+    Action *string `json:"action"`
 
-    /* 仅当规则action为block时可用。
-允许您定义阻止请求时,返回给访问者的HTTP状态代码。
-您必须输入一个介于400和499之间的值。
- (Optional) */
-    Status_code *int `json:"status_code"`
+    /* 规则是否开启。 (Optional) */
+    Enabled *bool `json:"enabled"`
+
+    /* OWASP 异常情况分数阈值。 (Optional) */
+    Score_threshold *int `json:"score_threshold"`
 }
