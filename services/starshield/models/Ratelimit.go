@@ -38,24 +38,25 @@ JA3指纹-----------cf.bot_management.ja3_hash
     Characteristics []string `json:"characteristics"`
 
     /* 在一段时间内触发规则的请求数。 (Optional) */
-    Requests_per_period int `json:"requests_per_period"`
+    Requests_per_period *int `json:"requests_per_period"`
 
     /* 评估请求速率时要考虑的时间段（以秒为单位）。
 有效值10/60/120/300/600/3600，即10, 60 (1分钟), 120 (2分钟), 300 (5分钟), 600 (10分钟), or 3600 (1小时)。
  (Optional) */
-    Period int `json:"period"`
+    Period *int `json:"period"`
 
     /* 一旦达到速率，速率限制规则将在该时间段内（以秒为单位）生效。
 使用质询操作之一时，无法定义持续时间。在这种情况下，当访问者通过质询时，其相应的请求计数器设置为零。当规则特征值相同的访问者发出足够的请求再次触发限速规则时，他们将收到新的质询。
 有效值30/60/600/3600/86400，即30, 60 (1分钟), 600 (10分钟), 3600 (1小时), or 86400 (1天)。
 当action的值为managed_challenge/js_challenge/challenge时，你必须设置mitigation_timeout的值为0。
  (Optional) */
-    Mitigation_timeout int `json:"mitigation_timeout"`
+    Mitigation_timeout *int `json:"mitigation_timeout"`
 
     /* true代表,在确定请求速率时，只考虑发往源站的请求（即未缓存的请求）。 (Optional) */
-    Requests_to_origin bool `json:"requests_to_origin"`
+    Requests_to_origin *bool `json:"requests_to_origin"`
 
     /* 定义用于确定请求速率的标准。默认情况下，计数表达式与规则表达式相同。将此字段设置为空字符串（“”）时，也会应用默认值。
-计数表达式可以包括HTTP响应字段。当计数表达式中有响应字段时，计数将在发送响应后进行。 (Optional) */
-    Counting_expression string `json:"counting_expression"`
+计数表达式可以包括HTTP响应字段。当计数表达式中有响应字段时，计数将在发送响应后进行。
+ (Optional) */
+    Counting_expression *string `json:"counting_expression"`
 }

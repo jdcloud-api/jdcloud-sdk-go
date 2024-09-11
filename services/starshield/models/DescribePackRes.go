@@ -151,6 +151,9 @@ type DescribePackRes struct {
     /* 域名接入方式 1->CNAME 2->NS 3->IP(Spectrum) 逗号拼接(1,2) (Optional) */
     ZoneAccessType string `json:"zoneAccessType"`
 
+    /* spectrum IP数量 (Optional) */
+    SpectrumIpNum int `json:"spectrumIpNum"`
+
     /* 速率限制Ratelimit数量 0->不支持 大于0->N条 (Optional) */
     RateLimit int `json:"rateLimit"`
 
@@ -177,4 +180,10 @@ type DescribePackRes struct {
 
     /* Websocket False->不支持 True->支持 (Optional) */
     Websocket bool `json:"websocket"`
+
+    /* 转换规则数量 0->不支持 大于0->N条 (Optional) */
+    TransformRuleNum int `json:"transformRuleNum"`
+
+    /* 实例是否支持创建域名 False->不支持 True->支持 (Optional) */
+    IsCreateZone bool `json:"isCreateZone"`
 }

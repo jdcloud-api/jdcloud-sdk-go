@@ -17,23 +17,14 @@
 package models
 
 
-type Response struct {
+type OpInstanceZoneRes struct {
 
-    /* 仅当规则action为block时可用。
-允许您定义由于速率限制而阻止请求时,返回的HTTP响应体。
-最大大小为30 KB。
- (Optional) */
-    Content *string `json:"content"`
+    /* 域名id (Optional) */
+    ZoneId string `json:"zoneId"`
 
-    /* 仅当规则action为block时可用。
-允许您定义阻止请求时,响应的内容类型。
-有效值application/json, text/html, text/xml, text/plain
- (Optional) */
-    Content_type *string `json:"content_type"`
+    /* 域名 (Optional) */
+    ZoneName string `json:"zoneName"`
 
-    /* 仅当规则action为block时可用。
-允许您定义阻止请求时,返回给访问者的HTTP状态代码。
-您必须输入一个介于400和499之间的值。
- (Optional) */
-    Status_code *int `json:"status_code"`
+    /* 域名状态(pending->待激活 active->已激活) (Optional) */
+    ZoneStatus string `json:"zoneStatus"`
 }

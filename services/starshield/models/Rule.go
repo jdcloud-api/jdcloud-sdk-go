@@ -33,6 +33,7 @@ type Rule struct {
 
     /* 表达式。
 UI字段==============API字段==================UI运算符================================================================
+SSL/HTTPS------------ssl------------------------------等于
 ASN----------------ip.geoip.asnum----------------------等于/不等于/大于/小于/大于或等于/小于或等于/包含以下各项/不包含以下各项
 Cookie-------------http.cookie-------------------------等于/不等于/包含/不包含/与正则表达式匹配/与正则表达式不匹配
 国家/地区-----------ip.geoip.country--------------------等于/不等于/包含以下各项/不包含以下各项
@@ -74,7 +75,7 @@ UI运算符============================API运算符
  (Optional) */
     Expression string `json:"expression"`
 
-    /* 当表达式匹配时，采取的措施。有效值block/challenge/js_challenge/managed_challenge/log。 (Optional) */
+    /* 当表达式匹配时，采取的措施。有效值block/challenge/js_challenge/managed_challenge/log/rewrite。 (Optional) */
     Action string `json:"action"`
 
     /*  (Optional) */
@@ -82,4 +83,19 @@ UI运算符============================API运算符
 
     /* 规则中的速率限制规则。 (Optional) */
     Ratelimit Ratelimit `json:"ratelimit"`
+
+    /* 规则匹配时的日志行为。 (Optional) */
+    Logging Logging `json:"logging"`
+
+    /* 规则最近修改时间。 (Optional) */
+    Last_updated string `json:"last_updated"`
+
+    /* 规则引用（默认是规则标识）。 (Optional) */
+    Ref string `json:"ref"`
+
+    /*  (Optional) */
+    Categories []string `json:"categories"`
+
+    /* OWASP 异常情况分数阈值。 (Optional) */
+    Score_threshold int `json:"score_threshold"`
 }

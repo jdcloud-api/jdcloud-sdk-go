@@ -40,6 +40,12 @@ type ZoneBandwidth struct {
     /* 查询时间段内的峰值带宽，单位bit per second (Optional) */
     Bps int `json:"bps"`
 
+    /* 查询时间段内的业务峰值带宽，单位bit per second (Optional) */
+    NormalBps int `json:"normalBps"`
+
+    /* 查询时间段内的攻击峰值带宽，单位bit per second (Optional) */
+    MitigationBps int `json:"mitigationBps"`
+
     /* 套餐总流量 (Optional) */
     TotalFlowStr string `json:"totalFlowStr"`
 

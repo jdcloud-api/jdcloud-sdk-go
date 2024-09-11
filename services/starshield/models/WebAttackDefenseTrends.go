@@ -17,23 +17,14 @@
 package models
 
 
-type Response struct {
+type WebAttackDefenseTrends struct {
 
-    /* 仅当规则action为block时可用。
-允许您定义由于速率限制而阻止请求时,返回的HTTP响应体。
-最大大小为30 KB。
- (Optional) */
-    Content *string `json:"content"`
+    /* 时间 (Optional) */
+    Date string `json:"date"`
 
-    /* 仅当规则action为block时可用。
-允许您定义阻止请求时,响应的内容类型。
-有效值application/json, text/html, text/xml, text/plain
- (Optional) */
-    Content_type *string `json:"content_type"`
+    /* 总流量 (Optional) */
+    AllTrafficSum float64 `json:"allTrafficSum"`
 
-    /* 仅当规则action为block时可用。
-允许您定义阻止请求时,返回给访问者的HTTP状态代码。
-您必须输入一个介于400和499之间的值。
- (Optional) */
-    Status_code *int `json:"status_code"`
+    /* 清洁流量、正常流量 (Optional) */
+    NormalTrafficSum float64 `json:"normalTrafficSum"`
 }

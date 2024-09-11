@@ -17,23 +17,25 @@
 package models
 
 
-type Response struct {
+type RequestBotGroup struct {
 
-    /* 仅当规则action为block时可用。
-允许您定义由于速率限制而阻止请求时,返回的HTTP响应体。
-最大大小为30 KB。
+    /* 已通过验证的自动程序
+运行正常的自动流量。用于支持搜索引擎和其他服务。
  (Optional) */
-    Content *string `json:"content"`
+    VerifiedBot int `json:"verifiedBot"`
 
-    /* 仅当规则action为block时可用。
-允许您定义阻止请求时,响应的内容类型。
-有效值application/json, text/html, text/xml, text/plain
+    /* 自动
+自动程序分数为 1 的流量。可能是不需要的自动流量。
  (Optional) */
-    Content_type *string `json:"content_type"`
+    Automated int `json:"automated"`
 
-    /* 仅当规则action为block时可用。
-允许您定义阻止请求时,返回给访问者的HTTP状态代码。
-您必须输入一个介于400和499之间的值。
+    /* 可能自动
+自动程序分数为 2-29 的流量。可能是自动流量，但可能包含需要的流量。
  (Optional) */
-    Status_code *int `json:"status_code"`
+    LikelyAutomated int `json:"likelyAutomated"`
+
+    /* 可能人工
+自动程序分数为 30-99 的流量。可能有人向您的服务请求资源。
+ (Optional) */
+    LikelyHuman int `json:"likelyHuman"`
 }
