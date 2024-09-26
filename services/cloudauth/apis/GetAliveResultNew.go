@@ -106,4 +106,6 @@ type GetAliveResultNewResult struct {
     RxResult string `json:"rxResult"`
     Score string `json:"score"`
     Desc string `json:"desc"`
+    H5ChargeFlag int `json:"h5ChargeFlag"`
+    RxChargeFlag int `json:"rxChargeFlag"`
 }
