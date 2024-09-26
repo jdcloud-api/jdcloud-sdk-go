@@ -42,4 +42,10 @@ type AliveResultInfo struct {
 
     /* 描述 (Optional) */
     Desc string `json:"desc"`
+
+    /* 活体检测是否收费：0不收费，1收费 (Optional) */
+    H5ChargeFlag int `json:"h5ChargeFlag"`
+
+    /* 活体检测是否收费：0不收费，1收费 (Optional) */
+    RxChargeFlag int `json:"rxChargeFlag"`
 }

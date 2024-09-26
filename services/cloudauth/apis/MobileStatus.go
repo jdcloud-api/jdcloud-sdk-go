@@ -20,58 +20,58 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type GetAliveResultRequest struct {
+type MobileStatusRequest struct {
 
     core.JDCloudRequest
 
-    /* 检测token  */
-    Token string `json:"token"`
+    /* 手机号码  */
+    Mobile string `json:"mobile"`
 }
 
 /*
- * param token: 检测token (Required)
+ * param mobile: 手机号码 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewGetAliveResultRequest(
-    token string,
-) *GetAliveResultRequest {
+func NewMobileStatusRequest(
+    mobile string,
+) *MobileStatusRequest {
 
-	return &GetAliveResultRequest{
+	return &MobileStatusRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/alive:getResult",
+			URL:     "/mobile:status",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
-        Token: token,
+        Mobile: mobile,
 	}
 }
 
 /*
- * param token: 检测token (Required)
+ * param mobile: 手机号码 (Required)
  */
-func NewGetAliveResultRequestWithAllParams(
-    token string,
-) *GetAliveResultRequest {
+func NewMobileStatusRequestWithAllParams(
+    mobile string,
+) *MobileStatusRequest {
 
-    return &GetAliveResultRequest{
+    return &MobileStatusRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/alive:getResult",
+            URL:     "/mobile:status",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
-        Token: token,
+        Mobile: mobile,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewGetAliveResultRequestWithoutParam() *GetAliveResultRequest {
+func NewMobileStatusRequestWithoutParam() *MobileStatusRequest {
 
-    return &GetAliveResultRequest{
+    return &MobileStatusRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/alive:getResult",
+            URL:     "/mobile:status",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -79,33 +79,30 @@ func NewGetAliveResultRequestWithoutParam() *GetAliveResultRequest {
     }
 }
 
-/* param token: 检测token(Required) */
-func (r *GetAliveResultRequest) SetToken(token string) {
-    r.Token = token
+/* param mobile: 手机号码(Required) */
+func (r *MobileStatusRequest) SetMobile(mobile string) {
+    r.Mobile = mobile
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r GetAliveResultRequest) GetRegionId() string {
+func (r MobileStatusRequest) GetRegionId() string {
     return ""
 }
 
-type GetAliveResultResponse struct {
+type MobileStatusResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result GetAliveResultResult `json:"result"`
+    Result MobileStatusResult `json:"result"`
 }
 
-type GetAliveResultResult struct {
-    FaceImage string `json:"faceImage"`
-    SceneImage string `json:"sceneImage"`
-    Video string `json:"video"`
-    H5Result string `json:"h5Result"`
-    SmResult string `json:"smResult"`
-    RxResult string `json:"rxResult"`
-    Score string `json:"score"`
-    Desc string `json:"desc"`
-    H5ChargeFlag int `json:"h5ChargeFlag"`
-    RxChargeFlag int `json:"rxChargeFlag"`
+type MobileStatusResult struct {
+    Code string `json:"code"`
+    Message string `json:"message"`
+    ChargeFlag string `json:"chargeFlag"`
+    Area string `json:"area"`
+    Operator string `json:"operator"`
+    Status string `json:"status"`
+    MnpStatus string `json:"mnpStatus"`
 }
