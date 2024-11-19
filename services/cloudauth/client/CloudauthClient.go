@@ -40,7 +40,7 @@ func NewCloudauthClient(credential *core.Credential) *CloudauthClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "cloudauth",
-            Revision:    "1.0.15",
+            Revision:    "1.0.16",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -337,6 +337,26 @@ func (c *CloudauthClient) CheckCompanyInfo3(request *cloudauth.CheckCompanyInfo3
     return jdResp, err
 }
 
+/* 营业执照OCR */
+func (c *CloudauthClient) BusinessOCR(request *cloudauth.BusinessOCRRequest) (*cloudauth.BusinessOCRResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cloudauth.BusinessOCRResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 个人银行卡四要素非身份证版 */
 func (c *CloudauthClient) PersonalBankcard4Other(request *cloudauth.PersonalBankcard4OtherRequest) (*cloudauth.PersonalBankcard4OtherResponse, error) {
     if request == nil {
@@ -368,6 +388,26 @@ func (c *CloudauthClient) GetAliveResult(request *cloudauth.GetAliveResultReques
     }
 
     jdResp := &cloudauth.GetAliveResultResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 银行卡OCR */
+func (c *CloudauthClient) BankCardOCR(request *cloudauth.BankCardOCRRequest) (*cloudauth.BankCardOCRResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cloudauth.BankCardOCRResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
