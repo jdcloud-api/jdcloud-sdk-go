@@ -35,6 +35,15 @@ type GetAliveUrlNewRequest struct {
 
     /* 指定动作，逗号隔开。（LookLeft 向左，LookRight 向右，OpenMouth 张嘴，BlinkEye 眨眼，ShakeHead 摇头，NodHead 点头） (Optional) */
     Actions *string `json:"actions"`
+
+    /* 是否展示失败结果页面 (Optional) */
+    ShowFail *bool `json:"showFail"`
+
+    /* 自有源照片（不超过2M） (Optional) */
+    Photo *string `json:"photo"`
+
+    /* 自有源照片对比通过阈值（0-1000） (Optional) */
+    PhotoThresh *int `json:"photoThresh"`
 }
 
 /*
@@ -62,12 +71,18 @@ func NewGetAliveUrlNewRequest(
  * param idcard: 身份证号（需要进行身份核验时传递此参数） (Optional)
  * param returnUrl: 采集结束后自动跳转的目标地址（须以http或https开头，长度不超过128字符） (Required)
  * param actions: 指定动作，逗号隔开。（LookLeft 向左，LookRight 向右，OpenMouth 张嘴，BlinkEye 眨眼，ShakeHead 摇头，NodHead 点头） (Optional)
+ * param showFail: 是否展示失败结果页面 (Optional)
+ * param photo: 自有源照片（不超过2M） (Optional)
+ * param photoThresh: 自有源照片对比通过阈值（0-1000） (Optional)
  */
 func NewGetAliveUrlNewRequestWithAllParams(
     name *string,
     idcard *string,
     returnUrl string,
     actions *string,
+    showFail *bool,
+    photo *string,
+    photoThresh *int,
 ) *GetAliveUrlNewRequest {
 
     return &GetAliveUrlNewRequest{
@@ -81,6 +96,9 @@ func NewGetAliveUrlNewRequestWithAllParams(
         Idcard: idcard,
         ReturnUrl: returnUrl,
         Actions: actions,
+        ShowFail: showFail,
+        Photo: photo,
+        PhotoThresh: photoThresh,
     }
 }
 
@@ -112,6 +130,18 @@ func (r *GetAliveUrlNewRequest) SetReturnUrl(returnUrl string) {
 /* param actions: 指定动作，逗号隔开。（LookLeft 向左，LookRight 向右，OpenMouth 张嘴，BlinkEye 眨眼，ShakeHead 摇头，NodHead 点头）(Optional) */
 func (r *GetAliveUrlNewRequest) SetActions(actions string) {
     r.Actions = &actions
+}
+/* param showFail: 是否展示失败结果页面(Optional) */
+func (r *GetAliveUrlNewRequest) SetShowFail(showFail bool) {
+    r.ShowFail = &showFail
+}
+/* param photo: 自有源照片（不超过2M）(Optional) */
+func (r *GetAliveUrlNewRequest) SetPhoto(photo string) {
+    r.Photo = &photo
+}
+/* param photoThresh: 自有源照片对比通过阈值（0-1000）(Optional) */
+func (r *GetAliveUrlNewRequest) SetPhotoThresh(photoThresh int) {
+    r.PhotoThresh = &photoThresh
 }
 
 
