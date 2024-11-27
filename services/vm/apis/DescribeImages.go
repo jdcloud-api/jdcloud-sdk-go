@@ -79,6 +79,12 @@ type DescribeImagesRequest struct {
 
     /* 分页大小；<br>默认为20；取值范围[10, 100]。 (Optional) */
     PageSize *int `json:"pageSize"`
+
+    /* 虚机ID， 精确匹配 (Optional) */
+    InstanceIds []string `json:"instanceIds"`
+
+    /* 镜像启动模式，默认bios，支持范围：`bios`、`uefi`。 (Optional) */
+    BootMode *string `json:"bootMode"`
 }
 
 /*
@@ -131,6 +137,8 @@ func NewDescribeImagesRequest(
  * param architecture: CPU架构。支持范围：`x86_64`、`arm64`。 (Optional)
  * param pageNumber: 页码；默认为1。 (Optional)
  * param pageSize: 分页大小；<br>默认为20；取值范围[10, 100]。 (Optional)
+ * param instanceIds: 虚机ID， 精确匹配 (Optional)
+ * param bootMode: 镜像启动模式，默认bios，支持范围：`bios`、`uefi`。 (Optional)
  */
 func NewDescribeImagesRequestWithAllParams(
     regionId string,
@@ -146,6 +154,8 @@ func NewDescribeImagesRequestWithAllParams(
     architecture *string,
     pageNumber *int,
     pageSize *int,
+    instanceIds []string,
+    bootMode *string,
 ) *DescribeImagesRequest {
 
     return &DescribeImagesRequest{
@@ -168,6 +178,8 @@ func NewDescribeImagesRequestWithAllParams(
         Architecture: architecture,
         PageNumber: pageNumber,
         PageSize: pageSize,
+        InstanceIds: instanceIds,
+        BootMode: bootMode,
     }
 }
 
@@ -251,6 +263,14 @@ func (r *DescribeImagesRequest) SetPageNumber(pageNumber int) {
 /* param pageSize: 分页大小；<br>默认为20；取值范围[10, 100]。(Optional) */
 func (r *DescribeImagesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
+}
+/* param instanceIds: 虚机ID， 精确匹配(Optional) */
+func (r *DescribeImagesRequest) SetInstanceIds(instanceIds []string) {
+    r.InstanceIds = instanceIds
+}
+/* param bootMode: 镜像启动模式，默认bios，支持范围：`bios`、`uefi`。(Optional) */
+func (r *DescribeImagesRequest) SetBootMode(bootMode string) {
+    r.BootMode = &bootMode
 }
 
 

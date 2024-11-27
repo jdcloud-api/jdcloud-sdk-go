@@ -40,7 +40,7 @@ func NewVmClient(credential *core.Credential) *VmClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vm",
-            Revision:    "1.5.14",
+            Revision:    "1.6.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -143,6 +143,28 @@ func (c *VmClient) CreateInstances(request *vm.CreateInstancesRequest) (*vm.Crea
     }
 
     jdResp := &vm.CreateInstancesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 
+暂停云主机实例。
+ */
+func (c *VmClient) SuspendInstance(request *vm.SuspendInstanceRequest) (*vm.SuspendInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.SuspendInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -595,6 +617,28 @@ func (c *VmClient) DescribeImage(request *vm.DescribeImageRequest) (*vm.Describe
 }
 
 /* 
+恢复云主机实例。
+ */
+func (c *VmClient) ResumeInstance(request *vm.ResumeInstanceRequest) (*vm.ResumeInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.ResumeInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 
 导入密钥。
 
 与创建密钥不同的是，导入的密钥是由用户生成的。生成之后将公钥部分导入到京东云。
@@ -624,12 +668,15 @@ func (c *VmClient) ImportKeypair(request *vm.ImportKeypairRequest) (*vm.ImportKe
 }
 
 /* 
-镜像跨地域复制。
+镜像复制。
 
 详细操作说明请参考帮助文档：[镜像复制](https://docs.jdcloud.com/cn/virtual-machines/copy-image)
 
 ## 接口说明
-- 调用该接口将私有镜像复制到其它地域下。
+- 调用该接口可以复制私有或共享镜像。
+- 复制私有镜像时，只允许镜像拥有者进行复制。
+- 复制共享镜像时，允许共享的用户将镜像复制为私有镜像。
+- 支持同地域复制镜像。
 - 只支持云盘系统盘的镜像。
 - 不支持带有加密快照的镜像。
  */
@@ -850,8 +897,7 @@ func (c *VmClient) DetachDisk(request *vm.DetachDiskRequest) (*vm.DetachDiskResp
 详细操作说明请参考帮助文档：[导入私有镜像](https://docs.jdcloud.com/cn/virtual-machines/import-private-image)
 
 ## 接口说明
-- 当前仅支持导入系统盘镜像。
-- 导入后的镜像将以 `云硬盘系统盘镜像` 格式作为私有镜像使用，同时会自动生成一个与导入镜像关联的快照。
+- 导入后的镜像将以 `云硬盘系统盘镜像` 格式作为私有镜像使用，同时会自动生成与导入镜像关联的快照。
  */
 func (c *VmClient) ImportImage(request *vm.ImportImageRequest) (*vm.ImportImageResponse, error) {
     if request == nil {
@@ -1334,6 +1380,27 @@ func (c *VmClient) ResizeInstance(request *vm.ResizeInstanceRequest) (*vm.Resize
     return jdResp, err
 }
 
+/* 更改云主机定时删除信息。
+ */
+func (c *VmClient) ModifyInstanceReleaseTime(request *vm.ModifyInstanceReleaseTimeRequest) (*vm.ModifyInstanceReleaseTimeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vm.ModifyInstanceReleaseTimeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 
 删除一个私有镜像。
 
@@ -1665,7 +1732,7 @@ func (c *VmClient) DeleteInstance(request *vm.DeleteInstanceRequest) (*vm.Delete
 - 调该接口之前实例必须处于停止 `stopped` 状态。
 - 修改VPC及子网
   - 内网IPv4：可指定或由系统分配。
-  - IPv6：如新子网支持IPv6，可选是否分配，如分配仅支持系统分配。
+  - IPv6：如新子网支持IPv6，可选是否分配，如果选择分配但不指定Ipv6地址，系统会自动分配。
   - 安全组：须指定新VPC下的安全组。
 - 不修改VPC，仅修改子网
   - 内网IPv4：可指定或由系统分配。

@@ -17,20 +17,11 @@
 package models
 
 
-type InstanceNetworkInterfaceAttachmentSpec struct {
+type Rdma struct {
 
-    /* 网卡设备Index。创建实例时此参数无须指定且指定无效。
-对于主网卡默认Index为1，辅助网卡自动分配。
- (Optional) */
-    DeviceIndex *int `json:"deviceIndex"`
+    /* RDMA网卡个数。 (Optional) */
+    Count int `json:"count"`
 
-    /* 是否随实例一起删除。
-`true`：随实例删除。
-`false`（默认值）：不随实例删除。
- (Optional) */
-    AutoDelete *bool `json:"autoDelete"`
-
-    /* 网卡设备详细配置。
- (Optional) */
-    NetworkInterface *NetworkInterfaceSpec `json:"networkInterface"`
+    /* RDMA网卡带宽。 (Optional) */
+    BandwidthGbps int `json:"bandwidthGbps"`
 }

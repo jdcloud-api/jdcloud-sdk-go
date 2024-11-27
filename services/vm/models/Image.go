@@ -66,6 +66,9 @@ type Image struct {
     /* 该镜像拥有者的用户PIN。 (Optional) */
     OwnerPin string `json:"ownerPin"`
 
+    /* 该镜像拥有者的用户云账号。 (Optional) */
+    LoginName string `json:"loginName"`
+
     /* 镜像的使用权限。取值范围：
 `all`：没有限制，所有人均可以使用。
 `specifiedUsers`：只有共享用户可以使用。
@@ -102,4 +105,13 @@ type Image struct {
 
     /* 镜像过期时间，空表示永久有效。 (Optional) */
     ExpiredTime string `json:"expiredTime"`
+
+    /* 实例Id (Optional) */
+    InstanceId string `json:"instanceId"`
+
+    /* 启动模式，默认bios (Optional) */
+    BootMode string `json:"bootMode"`
+
+    /* 镜像计费配置。 (Optional) */
+    ChargeInfo ImageChargeInfo `json:"chargeInfo"`
 }

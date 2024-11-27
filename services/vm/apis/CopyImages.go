@@ -33,6 +33,18 @@ type CopyImagesRequest struct {
 
     /* 目标地域。  */
     DestinationRegion string `json:"destinationRegion"`
+
+    /* 复制出新镜像的名称，长度为1\~32个字符，只允许中文、数字、大小写字母、英文下划线（\_）、连字符（-）及点（.）。
+指定该参数时，所有复制出的镜像都设置相同的名称。
+不指定该参数时，复制的镜像使用源镜像名称。
+ (Optional) */
+    Name *string `json:"name"`
+
+    /* 复制出新镜像的描述，不超过256个字符。
+指定该参数时，所有复制出的镜像都设置相同的描述。
+不指定该参数时，复制的镜像使用系统生成的描述信息。
+ (Optional) */
+    Description *string `json:"description"`
 }
 
 /*
@@ -65,11 +77,21 @@ func NewCopyImagesRequest(
  * param regionId: 地域ID。 (Required)
  * param sourceImageIds: 要复制的私有镜像ID列表，最多支持10个。 (Required)
  * param destinationRegion: 目标地域。 (Required)
+ * param name: 复制出新镜像的名称，长度为1\~32个字符，只允许中文、数字、大小写字母、英文下划线（\_）、连字符（-）及点（.）。
+指定该参数时，所有复制出的镜像都设置相同的名称。
+不指定该参数时，复制的镜像使用源镜像名称。
+ (Optional)
+ * param description: 复制出新镜像的描述，不超过256个字符。
+指定该参数时，所有复制出的镜像都设置相同的描述。
+不指定该参数时，复制的镜像使用系统生成的描述信息。
+ (Optional)
  */
 func NewCopyImagesRequestWithAllParams(
     regionId string,
     sourceImageIds []string,
     destinationRegion string,
+    name *string,
+    description *string,
 ) *CopyImagesRequest {
 
     return &CopyImagesRequest{
@@ -82,6 +104,8 @@ func NewCopyImagesRequestWithAllParams(
         RegionId: regionId,
         SourceImageIds: sourceImageIds,
         DestinationRegion: destinationRegion,
+        Name: name,
+        Description: description,
     }
 }
 
@@ -109,6 +133,20 @@ func (r *CopyImagesRequest) SetSourceImageIds(sourceImageIds []string) {
 /* param destinationRegion: 目标地域。(Required) */
 func (r *CopyImagesRequest) SetDestinationRegion(destinationRegion string) {
     r.DestinationRegion = destinationRegion
+}
+/* param name: 复制出新镜像的名称，长度为1\~32个字符，只允许中文、数字、大小写字母、英文下划线（\_）、连字符（-）及点（.）。
+指定该参数时，所有复制出的镜像都设置相同的名称。
+不指定该参数时，复制的镜像使用源镜像名称。
+(Optional) */
+func (r *CopyImagesRequest) SetName(name string) {
+    r.Name = &name
+}
+/* param description: 复制出新镜像的描述，不超过256个字符。
+指定该参数时，所有复制出的镜像都设置相同的描述。
+不指定该参数时，复制的镜像使用系统生成的描述信息。
+(Optional) */
+func (r *CopyImagesRequest) SetDescription(description string) {
+    r.Description = &description
 }
 
 

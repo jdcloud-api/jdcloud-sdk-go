@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    vm "github.com/jdcloud-api/jdcloud-sdk-go/services/vm/models"
 )
 
 type ImportImageRequest struct {
@@ -59,8 +60,15 @@ type ImportImageRequest struct {
     /* 是否强制导入。强制导入会忽略镜像的合规性检测。默认为false。 (Optional) */
     ForceImport *bool `json:"forceImport"`
 
+    /* 云盘快照信息。
+ (Optional) */
+    DataDisks []vm.DataDiskSpec `json:"dataDisks"`
+
     /* 用户导出镜像的幂等性保证。每次导出请传入不同的值，如果传值与某次的clientToken相同，则返还同一个请求结果，不能超过64个字符。 (Optional) */
     ClientToken *string `json:"clientToken"`
+
+    /* 镜像启动模式，默认bios，支持范围：`bios`、`uefi`。 (Optional) */
+    BootMode *string `json:"bootMode"`
 }
 
 /*
@@ -120,7 +128,10 @@ func NewImportImageRequest(
  * param imageName: 导入镜像的自定义名称。参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。 (Required)
  * param description: 导入镜像的描述信息。参考 [公共参数规范](https://docs.jdcloud.com/virtual-machines/api/general_parameters)。 (Optional)
  * param forceImport: 是否强制导入。强制导入会忽略镜像的合规性检测。默认为false。 (Optional)
+ * param dataDisks: 云盘快照信息。
+ (Optional)
  * param clientToken: 用户导出镜像的幂等性保证。每次导出请传入不同的值，如果传值与某次的clientToken相同，则返还同一个请求结果，不能超过64个字符。 (Optional)
+ * param bootMode: 镜像启动模式，默认bios，支持范围：`bios`、`uefi`。 (Optional)
  */
 func NewImportImageRequestWithAllParams(
     regionId string,
@@ -134,7 +145,9 @@ func NewImportImageRequestWithAllParams(
     imageName string,
     description *string,
     forceImport *bool,
+    dataDisks []vm.DataDiskSpec,
     clientToken *string,
+    bootMode *string,
 ) *ImportImageRequest {
 
     return &ImportImageRequest{
@@ -155,7 +168,9 @@ func NewImportImageRequestWithAllParams(
         ImageName: imageName,
         Description: description,
         ForceImport: forceImport,
+        DataDisks: dataDisks,
         ClientToken: clientToken,
+        BootMode: bootMode,
     }
 }
 
@@ -218,9 +233,18 @@ func (r *ImportImageRequest) SetDescription(description string) {
 func (r *ImportImageRequest) SetForceImport(forceImport bool) {
     r.ForceImport = &forceImport
 }
+/* param dataDisks: 云盘快照信息。
+(Optional) */
+func (r *ImportImageRequest) SetDataDisks(dataDisks []vm.DataDiskSpec) {
+    r.DataDisks = dataDisks
+}
 /* param clientToken: 用户导出镜像的幂等性保证。每次导出请传入不同的值，如果传值与某次的clientToken相同，则返还同一个请求结果，不能超过64个字符。(Optional) */
 func (r *ImportImageRequest) SetClientToken(clientToken string) {
     r.ClientToken = &clientToken
+}
+/* param bootMode: 镜像启动模式，默认bios，支持范围：`bios`、`uefi`。(Optional) */
+func (r *ImportImageRequest) SetBootMode(bootMode string) {
+    r.BootMode = &bootMode
 }
 
 

@@ -20,7 +20,7 @@ package models
 type ImageInstanceTypeConstraint struct {
 
     /* 对实例规格的限制类型。取值范围：
-`excludes`：不支持的实例规格，当前只支持 excludes 一种数据。
+`excludes`：不支持的实例规格。
 `includes`：支持的实例规格。
  (Optional) */
     ConstraintsType string `json:"constraintsType"`

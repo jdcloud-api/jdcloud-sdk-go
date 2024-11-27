@@ -55,6 +55,10 @@ type CreateImageFromSnapshotsRequest struct {
     /* 用于保证请求的幂等性。由客户端生成，并确保不同请求中该参数唯一，长度不能超过64个字符。
  (Optional) */
     ClientToken *string `json:"clientToken"`
+
+    /* 启动模式，支持uefi、bios。   
+  */
+    BootMode string `json:"bootMode"`
 }
 
 /*
@@ -65,6 +69,8 @@ type CreateImageFromSnapshotsRequest struct {
  (Required)
  * param architecture: 操作系统架构, 可选值：x86_64、arm64。
  (Required)
+ * param bootMode: 启动模式，支持uefi、bios。   
+ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -73,6 +79,7 @@ func NewCreateImageFromSnapshotsRequest(
     name string,
     platform string,
     architecture string,
+    bootMode string,
 ) *CreateImageFromSnapshotsRequest {
 
 	return &CreateImageFromSnapshotsRequest{
@@ -86,6 +93,7 @@ func NewCreateImageFromSnapshotsRequest(
         Name: name,
         Platform: platform,
         Architecture: architecture,
+        BootMode: bootMode,
 	}
 }
 
@@ -105,6 +113,8 @@ func NewCreateImageFromSnapshotsRequest(
  (Optional)
  * param clientToken: 用于保证请求的幂等性。由客户端生成，并确保不同请求中该参数唯一，长度不能超过64个字符。
  (Optional)
+ * param bootMode: 启动模式，支持uefi、bios。   
+ (Required)
  */
 func NewCreateImageFromSnapshotsRequestWithAllParams(
     regionId string,
@@ -115,6 +125,7 @@ func NewCreateImageFromSnapshotsRequestWithAllParams(
     architecture string,
     cloudDisks []vm.CloudDiskSpec,
     clientToken *string,
+    bootMode string,
 ) *CreateImageFromSnapshotsRequest {
 
     return &CreateImageFromSnapshotsRequest{
@@ -132,6 +143,7 @@ func NewCreateImageFromSnapshotsRequestWithAllParams(
         Architecture: architecture,
         CloudDisks: cloudDisks,
         ClientToken: clientToken,
+        BootMode: bootMode,
     }
 }
 
@@ -186,6 +198,11 @@ func (r *CreateImageFromSnapshotsRequest) SetCloudDisks(cloudDisks []vm.CloudDis
 (Optional) */
 func (r *CreateImageFromSnapshotsRequest) SetClientToken(clientToken string) {
     r.ClientToken = &clientToken
+}
+/* param bootMode: 启动模式，支持uefi、bios。   
+(Required) */
+func (r *CreateImageFromSnapshotsRequest) SetBootMode(bootMode string) {
+    r.BootMode = bootMode
 }
 
 

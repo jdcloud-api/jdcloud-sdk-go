@@ -17,20 +17,14 @@
 package models
 
 
-type InstanceNetworkInterfaceAttachmentSpec struct {
+type DataDiskSpec struct {
 
-    /* 网卡设备Index。创建实例时此参数无须指定且指定无效。
-对于主网卡默认Index为1，辅助网卡自动分配。
- (Optional) */
-    DeviceIndex *int `json:"deviceIndex"`
+    /* 镜像数据盘格式，支持vhd、vmdk、qcow2、raw格式，默认为qcow2。 (Optional) */
+    DiskFormat *string `json:"diskFormat"`
 
-    /* 是否随实例一起删除。
-`true`：随实例删除。
-`false`（默认值）：不随实例删除。
- (Optional) */
-    AutoDelete *bool `json:"autoDelete"`
+    /* 镜像数据盘大小。  */
+    DataDiskSizeGB int `json:"dataDiskSizeGB"`
 
-    /* 网卡设备详细配置。
- (Optional) */
-    NetworkInterface *NetworkInterfaceSpec `json:"networkInterface"`
+    /* 要导入镜像的对象存储外链地址。  */
+    ImageUrl string `json:"imageUrl"`
 }

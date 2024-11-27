@@ -38,6 +38,10 @@ type ModifyInstanceVpcAttributeRequest struct {
  (Optional) */
     AssignIpv6 *bool `json:"assignIpv6"`
 
+    /* 切换子网后的IPV6地址，不可与assignIpv6同时指定。
+ (Optional) */
+    Ipv6Address *string `json:"ipv6Address"`
+
     /* Ipv4地址。
 不变更 `vpc` 及子网时必须指定Ipv4地址
  (Optional) */
@@ -83,6 +87,8 @@ func NewModifyInstanceVpcAttributeRequest(
  * param assignIpv6: `true`: 分配IPV6地址。
 `false`: 不分配IPV6地址。
  (Optional)
+ * param ipv6Address: 切换子网后的IPV6地址，不可与assignIpv6同时指定。
+ (Optional)
  * param privateIpAddress: Ipv4地址。
 不变更 `vpc` 及子网时必须指定Ipv4地址
  (Optional)
@@ -96,6 +102,7 @@ func NewModifyInstanceVpcAttributeRequestWithAllParams(
     instanceId string,
     subnetId string,
     assignIpv6 *bool,
+    ipv6Address *string,
     privateIpAddress *string,
     securityGroups []string,
 ) *ModifyInstanceVpcAttributeRequest {
@@ -111,6 +118,7 @@ func NewModifyInstanceVpcAttributeRequestWithAllParams(
         InstanceId: instanceId,
         SubnetId: subnetId,
         AssignIpv6: assignIpv6,
+        Ipv6Address: ipv6Address,
         PrivateIpAddress: privateIpAddress,
         SecurityGroups: securityGroups,
     }
@@ -146,6 +154,11 @@ func (r *ModifyInstanceVpcAttributeRequest) SetSubnetId(subnetId string) {
 (Optional) */
 func (r *ModifyInstanceVpcAttributeRequest) SetAssignIpv6(assignIpv6 bool) {
     r.AssignIpv6 = &assignIpv6
+}
+/* param ipv6Address: 切换子网后的IPV6地址，不可与assignIpv6同时指定。
+(Optional) */
+func (r *ModifyInstanceVpcAttributeRequest) SetIpv6Address(ipv6Address string) {
+    r.Ipv6Address = &ipv6Address
 }
 /* param privateIpAddress: Ipv4地址。
 不变更 `vpc` 及子网时必须指定Ipv4地址

@@ -58,6 +58,9 @@ type InternalInstance struct {
     /* 辅助网卡配置列表。 (Optional) */
     SecondaryNetworkInterfaces []BriefInstanceNetworkInterfaceAttachment `json:"secondaryNetworkInterfaces"`
 
+    /* RDMA网卡配置列表。 (Optional) */
+    RdmaNetworkInterfaces []RdmaNetworkInterface `json:"rdmaNetworkInterfaces"`
+
     /* 云主机实例的创建时间。 (Optional) */
     LaunchTime string `json:"launchTime"`
 
@@ -85,6 +88,9 @@ type InternalInstance struct {
     /* 虚机CPU拓扑 (Optional) */
     CpuTopology CpuTopology `json:"cpuTopology"`
 
+    /* 云主机所属的主机组信息 (Optional) */
+    HostGroup HostGroup `json:"hostGroup"`
+
     /* 实例所在的物理机IP地址。 (Optional) */
     HostIp string `json:"hostIp"`
 
@@ -93,4 +99,10 @@ type InternalInstance struct {
 
     /* 实例所在的逻辑机架信息 (Optional) */
     Tor string `json:"tor"`
+
+    /* 启动模式，支持 bios uefi (Optional) */
+    BootMode string `json:"bootMode"`
+
+    /* 定时删除时间，例如:"2025-01-01 00:00:00"。 (Optional) */
+    AutoReleaseTime string `json:"autoReleaseTime"`
 }
