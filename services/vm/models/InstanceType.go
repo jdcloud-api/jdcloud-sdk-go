@@ -46,8 +46,8 @@ type InstanceType struct {
     /* 实例规格售卖状态。已售罄的实例规格无法使用。 (Optional) */
     State []InstanceTypeState `json:"state"`
 
-    /* GPU配置，针对GPU类型的实例规格有效。 (Optional) */
-    Gpu Gpu `json:"gpu"`
+    /* RDMA配置，针对HPC类型的实例规格有效。 (Optional) */
+    Rdma Rdma `json:"rdma"`
 
     /* 本地数据盘配置（缓存盘），针对GPU类型、或本地存储型的实例规格有效。 (Optional) */
     LocalDisks []LocalDisk `json:"localDisks"`

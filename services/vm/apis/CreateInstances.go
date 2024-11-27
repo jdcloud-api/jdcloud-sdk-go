@@ -34,17 +34,12 @@ type CreateInstancesRequest struct {
 
     /* 创建实例的数量，不能超过用户配额。
 取值范围：[1,100]；默认值：1。
-如果在弹性网卡中指定了内网IP地址，那么单次创建 `maxCount` 只能是 1。
  (Optional) */
     MaxCount *int `json:"maxCount"`
 
     /* 用于保证请求的幂等性。由客户端生成，并确保不同请求中该参数唯一，长度不能超过64个字符。
  (Optional) */
     ClientToken *string `json:"clientToken"`
-
-    /* 是否托管实例的生命周期，默认为false；若为包年包月实例，可加入但不支持托管；该字段仅AG开启AS时生效。托管实例将在缩容或健康检查失败时被删除，非托管实例仅移出伸缩组
- (Optional) */
-    IsManaged *bool `json:"isManaged"`
 }
 
 /*
@@ -77,11 +72,8 @@ func NewCreateInstancesRequest(
  (Required)
  * param maxCount: 创建实例的数量，不能超过用户配额。
 取值范围：[1,100]；默认值：1。
-如果在弹性网卡中指定了内网IP地址，那么单次创建 `maxCount` 只能是 1。
  (Optional)
  * param clientToken: 用于保证请求的幂等性。由客户端生成，并确保不同请求中该参数唯一，长度不能超过64个字符。
- (Optional)
- * param isManaged: 是否托管实例的生命周期，默认为false；若为包年包月实例，可加入但不支持托管；该字段仅AG开启AS时生效。托管实例将在缩容或健康检查失败时被删除，非托管实例仅移出伸缩组
  (Optional)
  */
 func NewCreateInstancesRequestWithAllParams(
@@ -89,7 +81,6 @@ func NewCreateInstancesRequestWithAllParams(
     instanceSpec *vm.InstanceSpec,
     maxCount *int,
     clientToken *string,
-    isManaged *bool,
 ) *CreateInstancesRequest {
 
     return &CreateInstancesRequest{
@@ -103,7 +94,6 @@ func NewCreateInstancesRequestWithAllParams(
         InstanceSpec: instanceSpec,
         MaxCount: maxCount,
         ClientToken: clientToken,
-        IsManaged: isManaged,
     }
 }
 
@@ -131,7 +121,6 @@ func (r *CreateInstancesRequest) SetInstanceSpec(instanceSpec *vm.InstanceSpec) 
 }
 /* param maxCount: 创建实例的数量，不能超过用户配额。
 取值范围：[1,100]；默认值：1。
-如果在弹性网卡中指定了内网IP地址，那么单次创建 `maxCount` 只能是 1。
 (Optional) */
 func (r *CreateInstancesRequest) SetMaxCount(maxCount int) {
     r.MaxCount = &maxCount
@@ -140,11 +129,6 @@ func (r *CreateInstancesRequest) SetMaxCount(maxCount int) {
 (Optional) */
 func (r *CreateInstancesRequest) SetClientToken(clientToken string) {
     r.ClientToken = &clientToken
-}
-/* param isManaged: 是否托管实例的生命周期，默认为false；若为包年包月实例，可加入但不支持托管；该字段仅AG开启AS时生效。托管实例将在缩容或健康检查失败时被删除，非托管实例仅移出伸缩组
-(Optional) */
-func (r *CreateInstancesRequest) SetIsManaged(isManaged bool) {
-    r.IsManaged = &isManaged
 }
 
 

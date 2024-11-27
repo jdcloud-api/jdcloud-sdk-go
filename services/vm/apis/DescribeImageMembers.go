@@ -112,4 +112,5 @@ type DescribeImageMembersResponse struct {
 
 type DescribeImageMembersResult struct {
     Pins []string `json:"pins"`
+    LoginNames []string `json:"loginNames"`
 }

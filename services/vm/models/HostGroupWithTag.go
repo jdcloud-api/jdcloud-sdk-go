@@ -17,20 +17,14 @@
 package models
 
 
-type InstanceNetworkInterfaceAttachmentSpec struct {
+type HostGroupWithTag struct {
 
-    /* 网卡设备Index。创建实例时此参数无须指定且指定无效。
-对于主网卡默认Index为1，辅助网卡自动分配。
- (Optional) */
-    DeviceIndex *int `json:"deviceIndex"`
+    /* 主机组ID (Optional) */
+    HostGroupId string `json:"hostGroupId"`
 
-    /* 是否随实例一起删除。
-`true`：随实例删除。
-`false`（默认值）：不随实例删除。
- (Optional) */
-    AutoDelete *bool `json:"autoDelete"`
+    /* 主机组名称 (Optional) */
+    HostGroupName string `json:"hostGroupName"`
 
-    /* 网卡设备详细配置。
- (Optional) */
-    NetworkInterface *NetworkInterfaceSpec `json:"networkInterface"`
+    /* 主机组tag (Optional) */
+    Tag string `json:"tag"`
 }

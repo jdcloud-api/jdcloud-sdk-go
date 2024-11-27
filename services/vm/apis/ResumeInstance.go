@@ -20,79 +20,67 @@ import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
 )
 
-type ShareImageRequest struct {
+type ResumeInstanceRequest struct {
 
     core.JDCloudRequest
 
     /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 镜像ID。  */
-    ImageId string `json:"imageId"`
-
-    /* 共享的目标用户pin列表。 (Optional) */
-    Pins []string `json:"pins"`
-
-    /* 共享的目标京东云帐户列表。 (Optional) */
-    LoginNames []string `json:"loginNames"`
+    /* 云主机ID。  */
+    InstanceId string `json:"instanceId"`
 }
 
 /*
  * param regionId: 地域ID。 (Required)
- * param imageId: 镜像ID。 (Required)
+ * param instanceId: 云主机ID。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewShareImageRequest(
+func NewResumeInstanceRequest(
     regionId string,
-    imageId string,
-) *ShareImageRequest {
+    instanceId string,
+) *ResumeInstanceRequest {
 
-	return &ShareImageRequest{
+	return &ResumeInstanceRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/images/{imageId}:share",
+			URL:     "/regions/{regionId}/instances/{instanceId}:resumeInstance",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        ImageId: imageId,
+        InstanceId: instanceId,
 	}
 }
 
 /*
  * param regionId: 地域ID。 (Required)
- * param imageId: 镜像ID。 (Required)
- * param pins: 共享的目标用户pin列表。 (Optional)
- * param loginNames: 共享的目标京东云帐户列表。 (Optional)
+ * param instanceId: 云主机ID。 (Required)
  */
-func NewShareImageRequestWithAllParams(
+func NewResumeInstanceRequestWithAllParams(
     regionId string,
-    imageId string,
-    pins []string,
-    loginNames []string,
-) *ShareImageRequest {
+    instanceId string,
+) *ResumeInstanceRequest {
 
-    return &ShareImageRequest{
+    return &ResumeInstanceRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/images/{imageId}:share",
+            URL:     "/regions/{regionId}/instances/{instanceId}:resumeInstance",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        ImageId: imageId,
-        Pins: pins,
-        LoginNames: loginNames,
+        InstanceId: instanceId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewShareImageRequestWithoutParam() *ShareImageRequest {
+func NewResumeInstanceRequestWithoutParam() *ResumeInstanceRequest {
 
-    return &ShareImageRequest{
+    return &ResumeInstanceRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/images/{imageId}:share",
+            URL:     "/regions/{regionId}/instances/{instanceId}:resumeInstance",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -101,34 +89,26 @@ func NewShareImageRequestWithoutParam() *ShareImageRequest {
 }
 
 /* param regionId: 地域ID。(Required) */
-func (r *ShareImageRequest) SetRegionId(regionId string) {
+func (r *ResumeInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-/* param imageId: 镜像ID。(Required) */
-func (r *ShareImageRequest) SetImageId(imageId string) {
-    r.ImageId = imageId
-}
-/* param pins: 共享的目标用户pin列表。(Optional) */
-func (r *ShareImageRequest) SetPins(pins []string) {
-    r.Pins = pins
-}
-/* param loginNames: 共享的目标京东云帐户列表。(Optional) */
-func (r *ShareImageRequest) SetLoginNames(loginNames []string) {
-    r.LoginNames = loginNames
+/* param instanceId: 云主机ID。(Required) */
+func (r *ResumeInstanceRequest) SetInstanceId(instanceId string) {
+    r.InstanceId = instanceId
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r ShareImageRequest) GetRegionId() string {
+func (r ResumeInstanceRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type ShareImageResponse struct {
+type ResumeInstanceResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result ShareImageResult `json:"result"`
+    Result ResumeInstanceResult `json:"result"`
 }
 
-type ShareImageResult struct {
+type ResumeInstanceResult struct {
 }

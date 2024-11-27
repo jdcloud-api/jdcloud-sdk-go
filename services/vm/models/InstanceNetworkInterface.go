@@ -16,7 +16,6 @@
 
 package models
 
-import vpc "github.com/jdcloud-api/jdcloud-sdk-go/services/vpc/models"
 
 type InstanceNetworkInterface struct {
 
@@ -39,8 +38,11 @@ type InstanceNetworkInterface struct {
     SanityCheck int `json:"sanityCheck"`
 
     /* 网卡主IP配置。 (Optional) */
-    PrimaryIp vpc.NetworkInterfacePrivateIp `json:"primaryIp"`
+    PrimaryIp NetworkInterfacePrivateIp `json:"primaryIp"`
 
     /* 网卡辅IP地址列表。 (Optional) */
-    SecondaryIps []vpc.NetworkInterfacePrivateIp `json:"secondaryIps"`
+    SecondaryIps []NetworkInterfacePrivateIp `json:"secondaryIps"`
+
+    /* 弹性网卡的ipv6地址对象列表。 (Optional) */
+    Ipv6Addresses []NetworkInterfaceIpv6Address `json:"ipv6Addresses"`
 }

@@ -30,21 +30,22 @@ type UnShareImageRequest struct {
     /* 镜像ID。  */
     ImageId string `json:"imageId"`
 
-    /* 需要取消的京东云帐户列表。  */
+    /* 需要取消的用户pin列表。 (Optional) */
     Pins []string `json:"pins"`
+
+    /* 需要取消的京东云帐户列表。 (Optional) */
+    LoginNames []string `json:"loginNames"`
 }
 
 /*
  * param regionId: 地域ID。 (Required)
  * param imageId: 镜像ID。 (Required)
- * param pins: 需要取消的京东云帐户列表。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewUnShareImageRequest(
     regionId string,
     imageId string,
-    pins []string,
 ) *UnShareImageRequest {
 
 	return &UnShareImageRequest{
@@ -56,19 +57,20 @@ func NewUnShareImageRequest(
 		},
         RegionId: regionId,
         ImageId: imageId,
-        Pins: pins,
 	}
 }
 
 /*
  * param regionId: 地域ID。 (Required)
  * param imageId: 镜像ID。 (Required)
- * param pins: 需要取消的京东云帐户列表。 (Required)
+ * param pins: 需要取消的用户pin列表。 (Optional)
+ * param loginNames: 需要取消的京东云帐户列表。 (Optional)
  */
 func NewUnShareImageRequestWithAllParams(
     regionId string,
     imageId string,
     pins []string,
+    loginNames []string,
 ) *UnShareImageRequest {
 
     return &UnShareImageRequest{
@@ -81,6 +83,7 @@ func NewUnShareImageRequestWithAllParams(
         RegionId: regionId,
         ImageId: imageId,
         Pins: pins,
+        LoginNames: loginNames,
     }
 }
 
@@ -105,9 +108,13 @@ func (r *UnShareImageRequest) SetRegionId(regionId string) {
 func (r *UnShareImageRequest) SetImageId(imageId string) {
     r.ImageId = imageId
 }
-/* param pins: 需要取消的京东云帐户列表。(Required) */
+/* param pins: 需要取消的用户pin列表。(Optional) */
 func (r *UnShareImageRequest) SetPins(pins []string) {
     r.Pins = pins
+}
+/* param loginNames: 需要取消的京东云帐户列表。(Optional) */
+func (r *UnShareImageRequest) SetLoginNames(loginNames []string) {
+    r.LoginNames = loginNames
 }
 
 

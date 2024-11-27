@@ -69,6 +69,9 @@ type Instance struct {
     /* 辅助网卡配置列表。 (Optional) */
     SecondaryNetworkInterfaces []InstanceNetworkInterfaceAttachment `json:"secondaryNetworkInterfaces"`
 
+    /* RDMA网卡配置列表。 (Optional) */
+    RdmaNetworkInterfaces []RdmaNetworkInterface `json:"rdmaNetworkInterfaces"`
+
     /* 云主机实例的创建时间。 (Optional) */
     LaunchTime string `json:"launchTime"`
 
@@ -80,6 +83,9 @@ type Instance struct {
 
     /* 云主机的计费信息。 (Optional) */
     Charge charge.Charge `json:"charge"`
+
+    /* 云主机使用镜像的计费配置与信息。 (Optional) */
+    ImageCharge ImageCharge `json:"imageCharge"`
 
     /* 抢占实例状态机 (Optional) */
     SpotStatus string `json:"spotStatus"`
@@ -128,4 +134,13 @@ type Instance struct {
 
     /* 架构信息，如x86_64 (Optional) */
     Architecture string `json:"architecture"`
+
+    /* 主机组详情 (Optional) */
+    HostGroup HostGroup `json:"hostGroup"`
+
+    /* 定时删除时间，例如:"2025-01-01 00:00:00" (Optional) */
+    AutoReleaseTime string `json:"autoReleaseTime"`
+
+    /* 启动模式，支持 bios uefi (Optional) */
+    BootMode string `json:"bootMode"`
 }

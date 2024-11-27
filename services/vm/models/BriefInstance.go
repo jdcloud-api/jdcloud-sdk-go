@@ -64,6 +64,9 @@ type BriefInstance struct {
     /* 云主机所在可用区。 (Optional) */
     Az string `json:"az"`
 
+    /* 云主机所在逻辑可用区。 (Optional) */
+    PAz string `json:"pAz"`
+
     /* 云主机使用的密钥对名称。 (Optional) */
     KeyNames []string `json:"keyNames"`
 
@@ -84,4 +87,10 @@ type BriefInstance struct {
 
     /* 虚机CPU拓扑 (Optional) */
     CpuTopology CpuTopology `json:"cpuTopology"`
+
+    /* 启动模式支持，取值范围[bios uefi]。 (Optional) */
+    BootMode string `json:"bootMode"`
+
+    /* 定时删除时间，例如:"2025-01-01 00:00:00"。 (Optional) */
+    AutoReleaseTime string `json:"autoReleaseTime"`
 }

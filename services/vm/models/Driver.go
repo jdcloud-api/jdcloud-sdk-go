@@ -17,20 +17,20 @@
 package models
 
 
-type InstanceNetworkInterfaceAttachmentSpec struct {
+type Driver struct {
 
-    /* 网卡设备Index。创建实例时此参数无须指定且指定无效。
-对于主网卡默认Index为1，辅助网卡自动分配。
- (Optional) */
-    DeviceIndex *int `json:"deviceIndex"`
+    /* GPU驱动id (Optional) */
+    GpuDriverId string `json:"gpuDriverId"`
 
-    /* 是否随实例一起删除。
-`true`：随实例删除。
-`false`（默认值）：不随实例删除。
- (Optional) */
-    AutoDelete *bool `json:"autoDelete"`
+    /* GPU卡型号。 (Optional) */
+    GpuModel string `json:"gpuModel"`
 
-    /* 网卡设备详细配置。
- (Optional) */
-    NetworkInterface *NetworkInterfaceSpec `json:"networkInterface"`
+    /* 操作系统。 (Optional) */
+    OsName string `json:"osName"`
+
+    /* cuda版本。 (Optional) */
+    CudaVersion string `json:"cudaVersion"`
+
+    /* 驱动版本。 (Optional) */
+    DriverVersion string `json:"driverVersion"`
 }

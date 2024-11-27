@@ -16,7 +16,6 @@
 
 package models
 
-import vpc "github.com/jdcloud-api/jdcloud-sdk-go/services/vpc/models"
 import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
 import disk "github.com/jdcloud-api/jdcloud-sdk-go/services/disk/models"
 
@@ -31,6 +30,10 @@ type InstanceSpec struct {
     /* 高可用组ID。指定此参数后，将默认使用高可用组关联的实例模板创建实例，实例模板中的参数不可覆盖替换。实例模板以外的参数（内网IPv4/Ipv6分配方式、名称、描述、标签）可指定。
  (Optional) */
     AgId *string `json:"agId"`
+
+    /* 是否托管实例的生命周期，默认为false；若为包年包月实例，可加入但不支持托管；该字段仅AG开启AS时生效。托管实例将在缩容或健康检查失败时被删除，非托管实例仅移出伸缩组
+ (Optional) */
+    IsManaged *bool `json:"isManaged"`
 
     /* 实例模板ID。指定此参数后，如实例模板中参数不另行指定将默认以模板配置创建实例，如指定则以指定值为准创建。
 指定 `agId` 时此参数无效。
@@ -80,7 +83,7 @@ type InstanceSpec struct {
 
     /* 主网卡主IP关联的弹性公网IP配置。
  (Optional) */
-    ElasticIp *vpc.ElasticIpSpec `json:"elasticIp"`
+    ElasticIp *ElasticIpSpec `json:"elasticIp"`
 
     /* 主网卡配置。
  (Optional) */
