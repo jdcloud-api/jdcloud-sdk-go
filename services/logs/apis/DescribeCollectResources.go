@@ -105,21 +105,19 @@ func NewDescribeCollectResourcesRequestWithoutParam() *DescribeCollectResourcesR
 func (r *DescribeCollectResourcesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param collectInfoUID: 采集配置 UID(Required) */
 func (r *DescribeCollectResourcesRequest) SetCollectInfoUID(collectInfoUID string) {
     r.CollectInfoUID = collectInfoUID
 }
-
 /* param pageNumber: 当前所在页，默认为1(Optional) */
 func (r *DescribeCollectResourcesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 页面大小，默认为20；取值范围[1, 100](Optional) */
 func (r *DescribeCollectResourcesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -118,28 +118,25 @@ func NewDescribeMetricTasksRequestWithoutParam() *DescribeMetricTasksRequest {
 func (r *DescribeMetricTasksRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param logsetUID: 日志集 UID(Required) */
 func (r *DescribeMetricTasksRequest) SetLogsetUID(logsetUID string) {
     r.LogsetUID = logsetUID
 }
-
 /* param logtopicUID: 日志主题 UID(Required) */
 func (r *DescribeMetricTasksRequest) SetLogtopicUID(logtopicUID string) {
     r.LogtopicUID = logtopicUID
 }
-
 /* param pageNumber: 当前所在页，默认为1
 in: query(Optional) */
 func (r *DescribeMetricTasksRequest) SetPageNumber(pageNumber int64) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 页面大小，默认为20；取值范围[1, 100]
 in: query(Optional) */
 func (r *DescribeMetricTasksRequest) SetPageSize(pageSize int64) {
     r.PageSize = &pageSize
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

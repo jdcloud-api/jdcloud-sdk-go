@@ -138,46 +138,39 @@ func NewGetLogsRequestWithoutParam() *GetLogsRequest {
 func (r *GetLogsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param logsetUID: 日志集ID(Required) */
 func (r *GetLogsRequest) SetLogsetUID(logsetUID string) {
     r.LogsetUID = logsetUID
 }
-
 /* param logtopicUID: 日志主题ID(Required) */
 func (r *GetLogsRequest) SetLogtopicUID(logtopicUID string) {
     r.LogtopicUID = logtopicUID
 }
-
 /* param taskID: 扫描任务ID。 第一次调用传入空值即可。后续调用需传入该任务ID，以连续读取剩余日志。(Optional) */
 func (r *GetLogsRequest) SetTaskID(taskID string) {
     r.TaskID = &taskID
 }
-
 /* param expr: Base64编码的搜索表达式,(Optional) */
 func (r *GetLogsRequest) SetExpr(expr string) {
     r.Expr = &expr
 }
-
 /* param startTime: 开始时间。格式 “YYYY-MM-DDThh:mm:ssTZD”, 比如 “2018-11-09T15:34:46+0800”.必填(Optional) */
 func (r *GetLogsRequest) SetStartTime(startTime string) {
     r.StartTime = &startTime
 }
-
 /* param endTime: 结束时间。格式 “YYYY-MM-DDThh:mm:ssTZD”, 比如 “2018-11-09T15:34:46+0800”.必填(Optional) */
 func (r *GetLogsRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
-
 /* param sort: 返回排序,不填或者为空，默认为desc，"asc":按照时间正序返回结果，"desc":按照时间倒序返回结果(Optional) */
 func (r *GetLogsRequest) SetSort(sort string) {
     r.Sort = &sort
 }
-
 /* param filters: 指定返回字段，只对系统日志生效，不填默认按照产品线配置返回字段，Name支持：key，Values填入返回字段(Optional) */
 func (r *GetLogsRequest) SetFilters(filters []logs.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

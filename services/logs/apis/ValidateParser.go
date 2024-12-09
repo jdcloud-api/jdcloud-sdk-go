@@ -36,6 +36,9 @@ type ValidateParserRequest struct {
 
     /* 预处理任务列表。按照数组的顺序执行。 (Optional) */
     Pipelines []logs.PipelineSpec `json:"pipelines"`
+
+    /* 是否保留原始内容字段 (Optional) */
+    ReserveOriginContent *bool `json:"reserveOriginContent"`
 }
 
 /*
@@ -63,12 +66,14 @@ func NewValidateParserRequest(
  * param parserPattern: 解析语法 (Optional)
  * param parserSample: 日志样例 (Optional)
  * param pipelines: 预处理任务列表。按照数组的顺序执行。 (Optional)
+ * param reserveOriginContent: 是否保留原始内容字段 (Optional)
  */
 func NewValidateParserRequestWithAllParams(
     parserMode string,
     parserPattern *string,
     parserSample *string,
     pipelines []logs.PipelineSpec,
+    reserveOriginContent *bool,
 ) *ValidateParserRequest {
 
     return &ValidateParserRequest{
@@ -82,6 +87,7 @@ func NewValidateParserRequestWithAllParams(
         ParserPattern: parserPattern,
         ParserSample: parserSample,
         Pipelines: pipelines,
+        ReserveOriginContent: reserveOriginContent,
     }
 }
 
@@ -102,21 +108,23 @@ func NewValidateParserRequestWithoutParam() *ValidateParserRequest {
 func (r *ValidateParserRequest) SetParserMode(parserMode string) {
     r.ParserMode = parserMode
 }
-
 /* param parserPattern: 解析语法(Optional) */
 func (r *ValidateParserRequest) SetParserPattern(parserPattern string) {
     r.ParserPattern = &parserPattern
 }
-
 /* param parserSample: 日志样例(Optional) */
 func (r *ValidateParserRequest) SetParserSample(parserSample string) {
     r.ParserSample = &parserSample
 }
-
 /* param pipelines: 预处理任务列表。按照数组的顺序执行。(Optional) */
 func (r *ValidateParserRequest) SetPipelines(pipelines []logs.PipelineSpec) {
     r.Pipelines = pipelines
 }
+/* param reserveOriginContent: 是否保留原始内容字段(Optional) */
+func (r *ValidateParserRequest) SetReserveOriginContent(reserveOriginContent bool) {
+    r.ReserveOriginContent = &reserveOriginContent
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

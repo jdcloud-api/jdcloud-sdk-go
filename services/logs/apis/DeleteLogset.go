@@ -92,11 +92,11 @@ func NewDeleteLogsetRequestWithoutParam() *DeleteLogsetRequest {
 func (r *DeleteLogsetRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param logsetUIDs: 日志集ID，多个日志集ID以逗号分割(Required) */
 func (r *DeleteLogsetRequest) SetLogsetUIDs(logsetUIDs string) {
     r.LogsetUIDs = logsetUIDs
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

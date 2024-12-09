@@ -30,8 +30,17 @@ type UpdateLogtopicRequest struct {
     /* 日志主题 UID  */
     LogtopicUID string `json:"logtopicUID"`
 
+    /* 日志主题名称 (Optional) */
+    Name *string `json:"name"`
+
     /* 日志主题描述  */
     Description string `json:"description"`
+
+    /* 保存周期，只能是 7， 15， 30 (Optional) */
+    LifeCycle *int `json:"lifeCycle"`
+
+    /* 保序 (Optional) */
+    InOrder *bool `json:"inOrder"`
 }
 
 /*
@@ -63,12 +72,18 @@ func NewUpdateLogtopicRequest(
 /*
  * param regionId: 地域 Id (Required)
  * param logtopicUID: 日志主题 UID (Required)
+ * param name: 日志主题名称 (Optional)
  * param description: 日志主题描述 (Required)
+ * param lifeCycle: 保存周期，只能是 7， 15， 30 (Optional)
+ * param inOrder: 保序 (Optional)
  */
 func NewUpdateLogtopicRequestWithAllParams(
     regionId string,
     logtopicUID string,
+    name *string,
     description string,
+    lifeCycle *int,
+    inOrder *bool,
 ) *UpdateLogtopicRequest {
 
     return &UpdateLogtopicRequest{
@@ -80,7 +95,10 @@ func NewUpdateLogtopicRequestWithAllParams(
         },
         RegionId: regionId,
         LogtopicUID: logtopicUID,
+        Name: name,
         Description: description,
+        LifeCycle: lifeCycle,
+        InOrder: inOrder,
     }
 }
 
@@ -101,16 +119,27 @@ func NewUpdateLogtopicRequestWithoutParam() *UpdateLogtopicRequest {
 func (r *UpdateLogtopicRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param logtopicUID: 日志主题 UID(Required) */
 func (r *UpdateLogtopicRequest) SetLogtopicUID(logtopicUID string) {
     r.LogtopicUID = logtopicUID
 }
-
+/* param name: 日志主题名称(Optional) */
+func (r *UpdateLogtopicRequest) SetName(name string) {
+    r.Name = &name
+}
 /* param description: 日志主题描述(Required) */
 func (r *UpdateLogtopicRequest) SetDescription(description string) {
     r.Description = description
 }
+/* param lifeCycle: 保存周期，只能是 7， 15， 30(Optional) */
+func (r *UpdateLogtopicRequest) SetLifeCycle(lifeCycle int) {
+    r.LifeCycle = &lifeCycle
+}
+/* param inOrder: 保序(Optional) */
+func (r *UpdateLogtopicRequest) SetInOrder(inOrder bool) {
+    r.InOrder = &inOrder
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

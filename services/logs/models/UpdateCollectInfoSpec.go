@@ -22,17 +22,17 @@ type UpdateCollectInfoSpec struct {
     /* 高可用组资源 (Optional) */
     AgResource []AgResource `json:"agResource"`
 
+    /*  (Optional) */
+    BinlogSpec BinlogSpec `json:"binlogSpec"`
+
     /* 采集状态，0-禁用，1-启用  */
     Enabled bool `json:"enabled"`
 
     /* 过滤器是否启用。当appcode为custom时必填 (Optional) */
     FilterEnabled bool `json:"filterEnabled"`
 
-    /* 自定义日志转发目的地, 只支持业务应用日志。支持类型："kafka"，"es" (Optional) */
-    LogCustomTarget string `json:"logCustomTarget"`
-
-    /* 自定义日志转发目的地配置，KV 结构，具体配置参考 LogCustomTargetKafkaConf 和 LogCustomTargetEsConf (Optional) */
-    LogCustomTargetConf interface{} `json:"logCustomTargetConf"`
+    /*  (Optional) */
+    K8sSpec K8sSpec `json:"k8sSpec"`
 
     /* 日志文件名。当appcode为custom时为必填。日志文件名支持正则表达式。 (Optional) */
     LogFile string `json:"logFile"`
@@ -46,16 +46,19 @@ type UpdateCollectInfoSpec struct {
     /* 目的地是否是日志服务logtopic，只支持业务应用日志 (Optional) */
     LogtopicEnabled bool `json:"logtopicEnabled"`
 
+    /* 采集配置名称 (Optional) */
+    Name string `json:"name"`
+
     /* 首行正则 (Optional) */
     RegexpStr string `json:"regexpStr"`
 
     /* 采集资源时选择的模式，1.正常的选择实例模式（默认模式）；2.选择标签tag模式 3.选择高可用组ag模式 (Optional) */
     ResourceMode int64 `json:"resourceMode"`
 
-    /* 采集实例类型, 只能是 all/part  当选择all时，传入的实例列表无效  */
+    /* 采集实例类型, 只能是 all/part  当选择all时，传入的实例列表无效；custom类型的采集配置目前仅支持part方式，即用户指定实例列表；  */
     ResourceType string `json:"resourceType"`
 
-    /* 采集实例列表（存在上限限制） (Optional) */
+    /* 采集实例列表：jdcloud类型最多添加20个资源；custom类型支持的资源数量不限； (Optional) */
     Resources []Resource `json:"resources"`
 
     /*  (Optional) */

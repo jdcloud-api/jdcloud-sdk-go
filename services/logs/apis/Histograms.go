@@ -135,41 +135,35 @@ func NewHistogramsRequestWithoutParam() *HistogramsRequest {
 func (r *HistogramsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param logsetUID: 日志集ID(Required) */
 func (r *HistogramsRequest) SetLogsetUID(logsetUID string) {
     r.LogsetUID = logsetUID
 }
-
 /* param logtopicUID: 日志主题ID(Required) */
 func (r *HistogramsRequest) SetLogtopicUID(logtopicUID string) {
     r.LogtopicUID = logtopicUID
 }
-
 /* param action: "preview"表示预览, "fulltext"表示全文检索, "advance"表示按照搜索语句检索(Required) */
 func (r *HistogramsRequest) SetAction(action string) {
     r.Action = action
 }
-
 /* param expr: Base64编码的搜索表达式,(Optional) */
 func (r *HistogramsRequest) SetExpr(expr string) {
     r.Expr = &expr
 }
-
 /* param caseSensitive: 搜索关键字大小写敏感， 默认false(Optional) */
 func (r *HistogramsRequest) SetCaseSensitive(caseSensitive bool) {
     r.CaseSensitive = &caseSensitive
 }
-
 /* param startTime: 开始时间。格式 “YYYY-MM-DDThh:mm:ssTZD”, 比如 “2018-11-09T15:34:46+0800”.当action != preview时，必填(Optional) */
 func (r *HistogramsRequest) SetStartTime(startTime string) {
     r.StartTime = &startTime
 }
-
 /* param endTime: 结束时间。格式 “YYYY-MM-DDThh:mm:ssTZD”, 比如 “2018-11-09T15:34:46+0800”.当action != preview时，必填(Optional) */
 func (r *HistogramsRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

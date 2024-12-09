@@ -19,6 +19,9 @@ package models
 
 type ParserField struct {
 
+    /* 是否开启统计。开启则改字段支持键值检索，统计分析。如果字段的值的长度可能大于1KB，则必须禁用统计功能，否则会导致数据写入失败。 (Optional) */
+    EnableStatistics *bool `json:"enableStatistics"`
+
     /*  (Optional) */
     FieldFormat *string `json:"fieldFormat"`
 

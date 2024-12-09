@@ -40,8 +40,14 @@ type LogtopicDetailEnd struct {
     /* 描述信息 (Optional) */
     Description string `json:"description"`
 
+    /* 保序标识 (Optional) */
+    InOrder bool `json:"inOrder"`
+
     /* 最新日志上报时间 (Optional) */
     LastRecordTime string `json:"lastRecordTime"`
+
+    /* 生命周期 (Optional) */
+    LifeCycle int64 `json:"lifeCycle"`
 
     /* 所属日志集名称 (Optional) */
     LogsetName string `json:"logsetName"`
@@ -57,4 +63,10 @@ type LogtopicDetailEnd struct {
 
     /* 地域信息 (Optional) */
     Region string `json:"region"`
+
+    /* 产品线serviceCode (Optional) */
+    ServiceCode string `json:"serviceCode"`
+
+    /* 标签列表 (Optional) */
+    Tags []Tag `json:"tags"`
 }

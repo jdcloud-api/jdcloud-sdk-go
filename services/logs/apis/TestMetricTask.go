@@ -159,61 +159,51 @@ func NewTestMetricTaskRequestWithoutParam() *TestMetricTaskRequest {
 func (r *TestMetricTaskRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param logsetUID: 日志集 UID(Required) */
 func (r *TestMetricTaskRequest) SetLogsetUID(logsetUID string) {
     r.LogsetUID = logsetUID
 }
-
 /* param logtopicUID: 日志主题 UID(Required) */
 func (r *TestMetricTaskRequest) SetLogtopicUID(logtopicUID string) {
     r.LogtopicUID = logtopicUID
 }
-
 /* param aggregate: 聚合函数,支持 count sum max min avg; 配置方式(SettingType) 为 空或visual 时，必填；(Optional) */
 func (r *TestMetricTaskRequest) SetAggregate(aggregate string) {
     r.Aggregate = &aggregate
 }
-
 /* param content: 测试内容(Required) */
 func (r *TestMetricTaskRequest) SetContent(content []string) {
     r.Content = content
 }
-
 /* param dataField: 查询字段,支持 英文字母 数字 下划线 中划线 点（中文日志原文和各产品线的key）; 配置方式(SettingType) 为 空或visual 时，必填；(Optional) */
 func (r *TestMetricTaskRequest) SetDataField(dataField string) {
     r.DataField = &dataField
 }
-
 /* param filterContent: 过滤语法，可以为空(Optional) */
 func (r *TestMetricTaskRequest) SetFilterContent(filterContent string) {
     r.FilterContent = &filterContent
 }
-
 /* param filterOpen: 是否打开过滤; 配置方式(SettingType) 为 空或visual 时，必填；(Optional) */
 func (r *TestMetricTaskRequest) SetFilterOpen(filterOpen string) {
     r.FilterOpen = &filterOpen
 }
-
 /* param filterType: 过滤类型，只能是fulltext和 advance; 配置方式(SettingType) 为 空或visual 时，必填；(Optional) */
 func (r *TestMetricTaskRequest) SetFilterType(filterType string) {
     r.FilterType = &filterType
 }
-
 /* param metric: 监控项 , 支持大小写英文字母 下划线 数字 点，且不超过255byte（不支持中划线）; 配置方式(SettingType) 为 空或visual 时，必填；(Optional) */
 func (r *TestMetricTaskRequest) SetMetric(metric string) {
     r.Metric = &metric
 }
-
 /* param settingType: 配置方式: 可选参数；枚举值 visual，sql；分别代表可视化配置及sql配置方式，传空表示可视化配置；(Optional) */
 func (r *TestMetricTaskRequest) SetSettingType(settingType string) {
     r.SettingType = &settingType
 }
-
 /* param sqlSpec: (Optional) */
 func (r *TestMetricTaskRequest) SetSqlSpec(sqlSpec *logs.MetricTaskSqlSpec) {
     r.SqlSpec = sqlSpec
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

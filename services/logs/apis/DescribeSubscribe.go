@@ -101,16 +101,15 @@ func NewDescribeSubscribeRequestWithoutParam() *DescribeSubscribeRequest {
 func (r *DescribeSubscribeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param logsetUID: 日志集 UID(Required) */
 func (r *DescribeSubscribeRequest) SetLogsetUID(logsetUID string) {
     r.LogsetUID = logsetUID
 }
-
 /* param logtopicUID: 日志主题 UID(Required) */
 func (r *DescribeSubscribeRequest) SetLogtopicUID(logtopicUID string) {
     r.LogtopicUID = logtopicUID
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

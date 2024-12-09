@@ -159,61 +159,51 @@ func NewSearchRequestWithoutParam() *SearchRequest {
 func (r *SearchRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param logsetUID: 日志集ID(Required) */
 func (r *SearchRequest) SetLogsetUID(logsetUID string) {
     r.LogsetUID = logsetUID
 }
-
 /* param logtopicUID: 日志主题ID(Required) */
 func (r *SearchRequest) SetLogtopicUID(logtopicUID string) {
     r.LogtopicUID = logtopicUID
 }
-
 /* param action: "preview"表示预览, "fulltext"表示全文检索, "advance"表示按照搜索语句检索(Required) */
 func (r *SearchRequest) SetAction(action string) {
     r.Action = action
 }
-
 /* param expr: Base64编码的搜索表达式,(Optional) */
 func (r *SearchRequest) SetExpr(expr string) {
     r.Expr = &expr
 }
-
 /* param caseSensitive: 搜索关键字大小写敏感， 默认false(Optional) */
 func (r *SearchRequest) SetCaseSensitive(caseSensitive bool) {
     r.CaseSensitive = &caseSensitive
 }
-
 /* param startTime: 开始时间。格式 “YYYY-MM-DDThh:mm:ssTZD”, 比如 “2018-11-09T15:34:46+0800”.当action != preview时，必填(Optional) */
 func (r *SearchRequest) SetStartTime(startTime string) {
     r.StartTime = &startTime
 }
-
 /* param endTime: 结束时间。格式 “YYYY-MM-DDThh:mm:ssTZD”, 比如 “2018-11-09T15:34:46+0800”.当action != preview时，必填(Optional) */
 func (r *SearchRequest) SetEndTime(endTime string) {
     r.EndTime = &endTime
 }
-
 /* param pageNumber: 页数。 最小为1，最大为99(Optional) */
 func (r *SearchRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 每页个数。默认为10，最大100(Optional) */
 func (r *SearchRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param sort: 返回排序,不填或者为空，默认为desc，"asc":按照时间正序返回结果，"desc":按照时间倒序返回结果(Optional) */
 func (r *SearchRequest) SetSort(sort string) {
     r.Sort = &sort
 }
-
 /* param filters: 指定返回字段，只对系统日志生效，不填默认按照产品线配置返回字段，Name支持：key，Values填入返回字段(Optional) */
 func (r *SearchRequest) SetFilters(filters []logs.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

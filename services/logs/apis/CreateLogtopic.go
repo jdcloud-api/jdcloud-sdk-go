@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    logs "github.com/jdcloud-api/jdcloud-sdk-go/services/logs/models"
 )
 
 type CreateLogtopicRequest struct {
@@ -35,6 +36,15 @@ type CreateLogtopicRequest struct {
 
     /* 日志集描述 (Optional) */
     Description *string `json:"description"`
+
+    /* 保序 (Optional) */
+    InOrder *bool `json:"inOrder"`
+
+    /* 保存周期，只能是 7， 15， 30 (Optional) */
+    LifeCycle *int `json:"lifeCycle"`
+
+    /* 标签列表 (Optional) */
+    Tags []logs.Tag `json:"tags"`
 }
 
 /*
@@ -68,12 +78,18 @@ func NewCreateLogtopicRequest(
  * param logsetUID: 日志集 UID (Required)
  * param name: 日志主题名称 (Required)
  * param description: 日志集描述 (Optional)
+ * param inOrder: 保序 (Optional)
+ * param lifeCycle: 保存周期，只能是 7， 15， 30 (Optional)
+ * param tags: 标签列表 (Optional)
  */
 func NewCreateLogtopicRequestWithAllParams(
     regionId string,
     logsetUID string,
     name string,
     description *string,
+    inOrder *bool,
+    lifeCycle *int,
+    tags []logs.Tag,
 ) *CreateLogtopicRequest {
 
     return &CreateLogtopicRequest{
@@ -87,6 +103,9 @@ func NewCreateLogtopicRequestWithAllParams(
         LogsetUID: logsetUID,
         Name: name,
         Description: description,
+        InOrder: inOrder,
+        LifeCycle: lifeCycle,
+        Tags: tags,
     }
 }
 
@@ -107,21 +126,31 @@ func NewCreateLogtopicRequestWithoutParam() *CreateLogtopicRequest {
 func (r *CreateLogtopicRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param logsetUID: 日志集 UID(Required) */
 func (r *CreateLogtopicRequest) SetLogsetUID(logsetUID string) {
     r.LogsetUID = logsetUID
 }
-
 /* param name: 日志主题名称(Required) */
 func (r *CreateLogtopicRequest) SetName(name string) {
     r.Name = name
 }
-
 /* param description: 日志集描述(Optional) */
 func (r *CreateLogtopicRequest) SetDescription(description string) {
     r.Description = &description
 }
+/* param inOrder: 保序(Optional) */
+func (r *CreateLogtopicRequest) SetInOrder(inOrder bool) {
+    r.InOrder = &inOrder
+}
+/* param lifeCycle: 保存周期，只能是 7， 15， 30(Optional) */
+func (r *CreateLogtopicRequest) SetLifeCycle(lifeCycle int) {
+    r.LifeCycle = &lifeCycle
+}
+/* param tags: 标签列表(Optional) */
+func (r *CreateLogtopicRequest) SetTags(tags []logs.Tag) {
+    r.Tags = tags
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

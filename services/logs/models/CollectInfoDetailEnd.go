@@ -28,20 +28,20 @@ type CollectInfoDetailEnd struct {
     /* 日志来源 (Optional) */
     AppCode string `json:"appCode"`
 
+    /* binlog规格 (Optional) */
+    BinlogSpec interface{} `json:"binlogSpec"`
+
     /*  (Optional) */
     Detail CollectTempalteEnd `json:"detail"`
 
     /*  (Optional) */
     Enabled int64 `json:"enabled"`
 
-    /* 自定义日志转发目的地, 只支持业务应用日志。支持类型："kafka"，"es" (Optional) */
-    LogCustomTarget string `json:"logCustomTarget"`
+    /* k8s规格 (Optional) */
+    K8sSpec interface{} `json:"k8sSpec"`
 
-    /* 自定义日志转发目的地配置，KV 结构，具体配置参考 LogCustomTargetKafkaConf 和 LogCustomTargetEsConf (Optional) */
-    LogCustomTargetConf interface{} `json:"logCustomTargetConf"`
-
-    /* 目的地是否是日志服务logtopic，只支持业务应用日志。默认是 (Optional) */
-    LogtopicEnabled bool `json:"logtopicEnabled"`
+    /* 采集配置名称 (Optional) */
+    Name string `json:"name"`
 
     /* 采集资源时选择的模式，1.正常的选择实例模式（默认模式）；2.选择标签tag模式 3.选择高可用组ag模式 (Optional) */
     ResourceMode int64 `json:"resourceMode"`

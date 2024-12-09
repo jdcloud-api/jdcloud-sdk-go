@@ -28,6 +28,9 @@ type TemplateEnd struct {
     /* 模板名称 (Optional) */
     Name string `json:"name"`
 
+    /* serviceCode (Optional) */
+    ServiceCode string `json:"serviceCode"`
+
     /* 是否是特殊模式的系统日志 (Optional) */
     SpecialMode int64 `json:"specialMode"`
 }

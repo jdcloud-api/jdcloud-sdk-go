@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    logs "github.com/jdcloud-api/jdcloud-sdk-go/services/logs/models"
 )
 
 type UpdateLogsetRequest struct {
@@ -30,22 +31,30 @@ type UpdateLogsetRequest struct {
     /* 日志集 UID  */
     LogsetUID string `json:"logsetUID"`
 
+    /* 日志集名称  */
+    Name string `json:"name"`
+
     /* 日志集描述 (Optional) */
     Description *string `json:"description"`
 
     /* 保存周期，只能是 7， 15， 30 (Optional) */
     LifeCycle *int `json:"lifeCycle"`
+
+    /* 标签列表 (Optional) */
+    Tags []logs.Tag `json:"tags"`
 }
 
 /*
  * param regionId: 地域 Id (Required)
  * param logsetUID: 日志集 UID (Required)
+ * param name: 日志集名称 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewUpdateLogsetRequest(
     regionId string,
     logsetUID string,
+    name string,
 ) *UpdateLogsetRequest {
 
 	return &UpdateLogsetRequest{
@@ -57,20 +66,25 @@ func NewUpdateLogsetRequest(
 		},
         RegionId: regionId,
         LogsetUID: logsetUID,
+        Name: name,
 	}
 }
 
 /*
  * param regionId: 地域 Id (Required)
  * param logsetUID: 日志集 UID (Required)
+ * param name: 日志集名称 (Required)
  * param description: 日志集描述 (Optional)
  * param lifeCycle: 保存周期，只能是 7， 15， 30 (Optional)
+ * param tags: 标签列表 (Optional)
  */
 func NewUpdateLogsetRequestWithAllParams(
     regionId string,
     logsetUID string,
+    name string,
     description *string,
     lifeCycle *int,
+    tags []logs.Tag,
 ) *UpdateLogsetRequest {
 
     return &UpdateLogsetRequest{
@@ -82,8 +96,10 @@ func NewUpdateLogsetRequestWithAllParams(
         },
         RegionId: regionId,
         LogsetUID: logsetUID,
+        Name: name,
         Description: description,
         LifeCycle: lifeCycle,
+        Tags: tags,
     }
 }
 
@@ -104,21 +120,27 @@ func NewUpdateLogsetRequestWithoutParam() *UpdateLogsetRequest {
 func (r *UpdateLogsetRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param logsetUID: 日志集 UID(Required) */
 func (r *UpdateLogsetRequest) SetLogsetUID(logsetUID string) {
     r.LogsetUID = logsetUID
 }
-
+/* param name: 日志集名称(Required) */
+func (r *UpdateLogsetRequest) SetName(name string) {
+    r.Name = name
+}
 /* param description: 日志集描述(Optional) */
 func (r *UpdateLogsetRequest) SetDescription(description string) {
     r.Description = &description
 }
-
 /* param lifeCycle: 保存周期，只能是 7， 15， 30(Optional) */
 func (r *UpdateLogsetRequest) SetLifeCycle(lifeCycle int) {
     r.LifeCycle = &lifeCycle
 }
+/* param tags: 标签列表(Optional) */
+func (r *UpdateLogsetRequest) SetTags(tags []logs.Tag) {
+    r.Tags = tags
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

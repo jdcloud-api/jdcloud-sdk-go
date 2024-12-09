@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    logs "github.com/jdcloud-api/jdcloud-sdk-go/services/logs/models"
 )
 
 type CreateLogsetRequest struct {
@@ -33,21 +34,28 @@ type CreateLogsetRequest struct {
     /* 日志集描述 (Optional) */
     Description *string `json:"description"`
 
-    /* 保存周期，只能是 7， 15， 30  */
-    LifeCycle int `json:"lifeCycle"`
+    /* 保存周期，只能是 7， 15， 30 (Optional) */
+    LifeCycle *int `json:"lifeCycle"`
+
+    /* 标签列表 (Optional) */
+    Tags []logs.Tag `json:"tags"`
+
+    /* 资源组信息 (Optional) */
+    ResourceGroupUID *string `json:"resourceGroupUID"`
+
+    /* 是否是内部资源。 设置为 true，则外部租户不可见。 (Optional) */
+    Inner *bool `json:"inner"`
 }
 
 /*
  * param regionId: 地域 Id (Required)
  * param name: 日志集名称 (Required)
- * param lifeCycle: 保存周期，只能是 7， 15， 30 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateLogsetRequest(
     regionId string,
     name string,
-    lifeCycle int,
 ) *CreateLogsetRequest {
 
 	return &CreateLogsetRequest{
@@ -59,7 +67,6 @@ func NewCreateLogsetRequest(
 		},
         RegionId: regionId,
         Name: name,
-        LifeCycle: lifeCycle,
 	}
 }
 
@@ -67,13 +74,19 @@ func NewCreateLogsetRequest(
  * param regionId: 地域 Id (Required)
  * param name: 日志集名称 (Required)
  * param description: 日志集描述 (Optional)
- * param lifeCycle: 保存周期，只能是 7， 15， 30 (Required)
+ * param lifeCycle: 保存周期，只能是 7， 15， 30 (Optional)
+ * param tags: 标签列表 (Optional)
+ * param resourceGroupUID: 资源组信息 (Optional)
+ * param inner: 是否是内部资源。 设置为 true，则外部租户不可见。 (Optional)
  */
 func NewCreateLogsetRequestWithAllParams(
     regionId string,
     name string,
     description *string,
-    lifeCycle int,
+    lifeCycle *int,
+    tags []logs.Tag,
+    resourceGroupUID *string,
+    inner *bool,
 ) *CreateLogsetRequest {
 
     return &CreateLogsetRequest{
@@ -87,6 +100,9 @@ func NewCreateLogsetRequestWithAllParams(
         Name: name,
         Description: description,
         LifeCycle: lifeCycle,
+        Tags: tags,
+        ResourceGroupUID: resourceGroupUID,
+        Inner: inner,
     }
 }
 
@@ -107,21 +123,31 @@ func NewCreateLogsetRequestWithoutParam() *CreateLogsetRequest {
 func (r *CreateLogsetRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param name: 日志集名称(Required) */
 func (r *CreateLogsetRequest) SetName(name string) {
     r.Name = name
 }
-
 /* param description: 日志集描述(Optional) */
 func (r *CreateLogsetRequest) SetDescription(description string) {
     r.Description = &description
 }
-
-/* param lifeCycle: 保存周期，只能是 7， 15， 30(Required) */
+/* param lifeCycle: 保存周期，只能是 7， 15， 30(Optional) */
 func (r *CreateLogsetRequest) SetLifeCycle(lifeCycle int) {
-    r.LifeCycle = lifeCycle
+    r.LifeCycle = &lifeCycle
 }
+/* param tags: 标签列表(Optional) */
+func (r *CreateLogsetRequest) SetTags(tags []logs.Tag) {
+    r.Tags = tags
+}
+/* param resourceGroupUID: 资源组信息(Optional) */
+func (r *CreateLogsetRequest) SetResourceGroupUID(resourceGroupUID string) {
+    r.ResourceGroupUID = &resourceGroupUID
+}
+/* param inner: 是否是内部资源。 设置为 true，则外部租户不可见。(Optional) */
+func (r *CreateLogsetRequest) SetInner(inner bool) {
+    r.Inner = &inner
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

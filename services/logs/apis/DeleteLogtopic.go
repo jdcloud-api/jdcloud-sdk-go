@@ -101,16 +101,15 @@ func NewDeleteLogtopicRequestWithoutParam() *DeleteLogtopicRequest {
 func (r *DeleteLogtopicRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param logsetUID: 日志集 UID(Required) */
 func (r *DeleteLogtopicRequest) SetLogsetUID(logsetUID string) {
     r.LogsetUID = logsetUID
 }
-
 /* param logtopicUIDs: 日志主题ID，多个日志主题ID以逗号分割(Required) */
 func (r *DeleteLogtopicRequest) SetLogtopicUIDs(logtopicUIDs string) {
     r.LogtopicUIDs = logtopicUIDs
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
