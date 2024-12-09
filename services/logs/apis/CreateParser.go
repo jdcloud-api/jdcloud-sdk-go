@@ -31,6 +31,9 @@ type CreateParserRequest struct {
     /* 日志主题 UID  */
     LogtopicUID string `json:"logtopicUID"`
 
+    /* 行级索引分词符。 Rune 数组 (Optional) */
+    IndexToken []string `json:"indexToken"`
+
     /*   */
     ParserFields []logs.ParserField `json:"parserFields"`
 
@@ -45,6 +48,9 @@ type CreateParserRequest struct {
 
     /* 预处理任务列表。按照数组的顺序执行。 (Optional) */
     Pipelines []logs.PipelineSpec `json:"pipelines"`
+
+    /* 是否保留原始内容字段 (Optional) */
+    ReserveOriginContent *bool `json:"reserveOriginContent"`
 }
 
 /*
@@ -79,20 +85,24 @@ func NewCreateParserRequest(
 /*
  * param regionId: 地域 Id (Required)
  * param logtopicUID: 日志主题 UID (Required)
+ * param indexToken: 行级索引分词符。 Rune 数组 (Optional)
  * param parserFields:  (Required)
  * param parserMode: 解析类型。oneline - 单行，split - 分割， json - json， regexp - regexp (Required)
  * param parserPattern: 解析语法 (Optional)
  * param parserSample: 日志样例 (Optional)
  * param pipelines: 预处理任务列表。按照数组的顺序执行。 (Optional)
+ * param reserveOriginContent: 是否保留原始内容字段 (Optional)
  */
 func NewCreateParserRequestWithAllParams(
     regionId string,
     logtopicUID string,
+    indexToken []string,
     parserFields []logs.ParserField,
     parserMode string,
     parserPattern *string,
     parserSample *string,
     pipelines []logs.PipelineSpec,
+    reserveOriginContent *bool,
 ) *CreateParserRequest {
 
     return &CreateParserRequest{
@@ -104,11 +114,13 @@ func NewCreateParserRequestWithAllParams(
         },
         RegionId: regionId,
         LogtopicUID: logtopicUID,
+        IndexToken: indexToken,
         ParserFields: parserFields,
         ParserMode: parserMode,
         ParserPattern: parserPattern,
         ParserSample: parserSample,
         Pipelines: pipelines,
+        ReserveOriginContent: reserveOriginContent,
     }
 }
 
@@ -129,36 +141,39 @@ func NewCreateParserRequestWithoutParam() *CreateParserRequest {
 func (r *CreateParserRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param logtopicUID: 日志主题 UID(Required) */
 func (r *CreateParserRequest) SetLogtopicUID(logtopicUID string) {
     r.LogtopicUID = logtopicUID
 }
-
+/* param indexToken: 行级索引分词符。 Rune 数组(Optional) */
+func (r *CreateParserRequest) SetIndexToken(indexToken []string) {
+    r.IndexToken = indexToken
+}
 /* param parserFields: (Required) */
 func (r *CreateParserRequest) SetParserFields(parserFields []logs.ParserField) {
     r.ParserFields = parserFields
 }
-
 /* param parserMode: 解析类型。oneline - 单行，split - 分割， json - json， regexp - regexp(Required) */
 func (r *CreateParserRequest) SetParserMode(parserMode string) {
     r.ParserMode = parserMode
 }
-
 /* param parserPattern: 解析语法(Optional) */
 func (r *CreateParserRequest) SetParserPattern(parserPattern string) {
     r.ParserPattern = &parserPattern
 }
-
 /* param parserSample: 日志样例(Optional) */
 func (r *CreateParserRequest) SetParserSample(parserSample string) {
     r.ParserSample = &parserSample
 }
-
 /* param pipelines: 预处理任务列表。按照数组的顺序执行。(Optional) */
 func (r *CreateParserRequest) SetPipelines(pipelines []logs.PipelineSpec) {
     r.Pipelines = pipelines
 }
+/* param reserveOriginContent: 是否保留原始内容字段(Optional) */
+func (r *CreateParserRequest) SetReserveOriginContent(reserveOriginContent bool) {
+    r.ReserveOriginContent = &reserveOriginContent
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

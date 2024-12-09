@@ -92,11 +92,11 @@ func NewDescribeLogtopicRequestWithoutParam() *DescribeLogtopicRequest {
 func (r *DescribeLogtopicRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param logtopicUID: 日志主题 UID(Required) */
 func (r *DescribeLogtopicRequest) SetLogtopicUID(logtopicUID string) {
     r.LogtopicUID = logtopicUID
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
@@ -117,9 +117,12 @@ type DescribeLogtopicResult struct {
     CollectInfoUID string `json:"collectInfoUID"`
     CreateTime string `json:"createTime"`
     Description string `json:"description"`
+    InOrder bool `json:"inOrder"`
+    LifeCycle int64 `json:"lifeCycle"`
     LogsetName string `json:"logsetName"`
     LogsetUID string `json:"logsetUID"`
     Name string `json:"name"`
     PrePattern string `json:"prePattern"`
     Region string `json:"region"`
+    ServiceCode string `json:"serviceCode"`
 }

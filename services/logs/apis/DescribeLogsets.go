@@ -31,11 +31,20 @@ type DescribeLogsetsRequest struct {
     /* 当前所在页，默认为1 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* 页面大小，默认为20；取值范围[1, 100] (Optional) */
+    /* 页面大小，默认为20；取值范围[1, 200] (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* 日志集名称 (Optional) */
+    /* 日志集名称. 已废弃，需要通过filter传递 (Optional) */
     Name *string `json:"name"`
+
+    /* 过滤条件，key，Values。 支持的key:  name (Optional) */
+    Filters []logs.Filter `json:"filters"`
+
+    /* 标签过滤条件，key，Values (Optional) */
+    Tags []logs.TagFilter `json:"tags"`
+
+    /* 资源组过滤条件 (Optional) */
+    ResourceGroupIds []string `json:"resourceGroupIds"`
 }
 
 /*
@@ -61,14 +70,20 @@ func NewDescribeLogsetsRequest(
 /*
  * param regionId: 地域 Id (Required)
  * param pageNumber: 当前所在页，默认为1 (Optional)
- * param pageSize: 页面大小，默认为20；取值范围[1, 100] (Optional)
- * param name: 日志集名称 (Optional)
+ * param pageSize: 页面大小，默认为20；取值范围[1, 200] (Optional)
+ * param name: 日志集名称. 已废弃，需要通过filter传递 (Optional)
+ * param filters: 过滤条件，key，Values。 支持的key:  name (Optional)
+ * param tags: 标签过滤条件，key，Values (Optional)
+ * param resourceGroupIds: 资源组过滤条件 (Optional)
  */
 func NewDescribeLogsetsRequestWithAllParams(
     regionId string,
     pageNumber *int,
     pageSize *int,
     name *string,
+    filters []logs.Filter,
+    tags []logs.TagFilter,
+    resourceGroupIds []string,
 ) *DescribeLogsetsRequest {
 
     return &DescribeLogsetsRequest{
@@ -82,6 +97,9 @@ func NewDescribeLogsetsRequestWithAllParams(
         PageNumber: pageNumber,
         PageSize: pageSize,
         Name: name,
+        Filters: filters,
+        Tags: tags,
+        ResourceGroupIds: resourceGroupIds,
     }
 }
 
@@ -102,21 +120,31 @@ func NewDescribeLogsetsRequestWithoutParam() *DescribeLogsetsRequest {
 func (r *DescribeLogsetsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param pageNumber: 当前所在页，默认为1(Optional) */
 func (r *DescribeLogsetsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
-/* param pageSize: 页面大小，默认为20；取值范围[1, 100](Optional) */
+/* param pageSize: 页面大小，默认为20；取值范围[1, 200](Optional) */
 func (r *DescribeLogsetsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
-/* param name: 日志集名称(Optional) */
+/* param name: 日志集名称. 已废弃，需要通过filter传递(Optional) */
 func (r *DescribeLogsetsRequest) SetName(name string) {
     r.Name = &name
 }
+/* param filters: 过滤条件，key，Values。 支持的key:  name(Optional) */
+func (r *DescribeLogsetsRequest) SetFilters(filters []logs.Filter) {
+    r.Filters = filters
+}
+/* param tags: 标签过滤条件，key，Values(Optional) */
+func (r *DescribeLogsetsRequest) SetTags(tags []logs.TagFilter) {
+    r.Tags = tags
+}
+/* param resourceGroupIds: 资源组过滤条件(Optional) */
+func (r *DescribeLogsetsRequest) SetResourceGroupIds(resourceGroupIds []string) {
+    r.ResourceGroupIds = resourceGroupIds
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

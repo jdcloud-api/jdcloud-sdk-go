@@ -92,11 +92,11 @@ func NewDescribeParserRequestWithoutParam() *DescribeParserRequest {
 func (r *DescribeParserRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param logtopicUID: 日志主题 UID(Required) */
 func (r *DescribeParserRequest) SetLogtopicUID(logtopicUID string) {
     r.LogtopicUID = logtopicUID
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

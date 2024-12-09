@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    logs "github.com/jdcloud-api/jdcloud-sdk-go/services/logs/models"
 )
 
 type DescribeLogsetRequest struct {
@@ -92,11 +93,11 @@ func NewDescribeLogsetRequestWithoutParam() *DescribeLogsetRequest {
 func (r *DescribeLogsetRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param logsetUID: 日志集 UID(Required) */
 func (r *DescribeLogsetRequest) SetLogsetUID(logsetUID string) {
     r.LogsetUID = logsetUID
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
@@ -118,4 +119,6 @@ type DescribeLogsetResult struct {
     LifeCycle int64 `json:"lifeCycle"`
     Name string `json:"name"`
     Region string `json:"region"`
+    ResourceGroupUID string `json:"resourceGroupUID"`
+    Tags []logs.Tag `json:"tags"`
 }

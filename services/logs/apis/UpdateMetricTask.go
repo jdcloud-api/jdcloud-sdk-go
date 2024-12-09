@@ -186,76 +186,63 @@ func NewUpdateMetricTaskRequestWithoutParam() *UpdateMetricTaskRequest {
 func (r *UpdateMetricTaskRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param logsetUID: 日志集 UID(Required) */
 func (r *UpdateMetricTaskRequest) SetLogsetUID(logsetUID string) {
     r.LogsetUID = logsetUID
 }
-
 /* param logtopicUID: 日志主题 UID(Required) */
 func (r *UpdateMetricTaskRequest) SetLogtopicUID(logtopicUID string) {
     r.LogtopicUID = logtopicUID
 }
-
 /* param logmetrictaskUID: (Required) */
 func (r *UpdateMetricTaskRequest) SetLogmetrictaskUID(logmetrictaskUID string) {
     r.LogmetrictaskUID = logmetrictaskUID
 }
-
 /* param aggregate: 聚合函数,支持 count sum max min avg; 配置方式(SettingType) 为 空或visual 时，必填；(Optional) */
 func (r *UpdateMetricTaskRequest) SetAggregate(aggregate string) {
     r.Aggregate = &aggregate
 }
-
 /* param customUnit: 自定义单位(Required) */
 func (r *UpdateMetricTaskRequest) SetCustomUnit(customUnit string) {
     r.CustomUnit = customUnit
 }
-
 /* param dataField: 查询字段,支持 英文字母 数字 下划线 中划线 点（中文日志原文和各产品线的key）; 配置方式(SettingType) 为 空或visual 时，必填；(Optional) */
 func (r *UpdateMetricTaskRequest) SetDataField(dataField string) {
     r.DataField = &dataField
 }
-
 /* param filterContent: 过滤语法，可以为空(Optional) */
 func (r *UpdateMetricTaskRequest) SetFilterContent(filterContent string) {
     r.FilterContent = &filterContent
 }
-
 /* param filterOpen: 是否打开过滤; 配置方式(SettingType) 为 空或visual 时，必填；(Optional) */
 func (r *UpdateMetricTaskRequest) SetFilterOpen(filterOpen string) {
     r.FilterOpen = &filterOpen
 }
-
 /* param filterType: 过滤类型，只能是fulltext和 advance; 配置方式(SettingType) 为 空或visual 时，必填；(Optional) */
 func (r *UpdateMetricTaskRequest) SetFilterType(filterType string) {
     r.FilterType = &filterType
 }
-
 /* param metric: 监控项 , 支持大小写英文字母 下划线 数字 点，且不超过255byte（不支持中划线）; 配置方式(SettingType) 为 空或visual 时，必填；(Optional) */
 func (r *UpdateMetricTaskRequest) SetMetric(metric string) {
     r.Metric = &metric
 }
-
 /* param name: 监控任务名称,同一日志主题下唯一，支持中文 大小写英文字母 下划线 中划线 数字，且不超过32(Required) */
 func (r *UpdateMetricTaskRequest) SetName(name string) {
     r.Name = name
 }
-
 /* param settingType: 配置方式: 可选参数；枚举值 visual，sql；分别代表可视化配置及sql配置方式，传空表示可视化配置；(Optional) */
 func (r *UpdateMetricTaskRequest) SetSettingType(settingType string) {
     r.SettingType = &settingType
 }
-
 /* param sqlSpec: (Optional) */
 func (r *UpdateMetricTaskRequest) SetSqlSpec(sqlSpec *logs.MetricTaskSqlSpec) {
     r.SqlSpec = sqlSpec
 }
-
 /* param unit: 单位(Required) */
 func (r *UpdateMetricTaskRequest) SetUnit(unit string) {
     r.Unit = unit
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

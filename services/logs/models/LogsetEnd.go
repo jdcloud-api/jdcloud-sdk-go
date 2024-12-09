@@ -39,4 +39,10 @@ type LogsetEnd struct {
 
     /* 地域信息 (Optional) */
     Region string `json:"region"`
+
+    /* 资源组 (Optional) */
+    ResourceGroupUID string `json:"resourceGroupUID"`
+
+    /* 标签列表 (Optional) */
+    Tags []Tag `json:"tags"`
 }

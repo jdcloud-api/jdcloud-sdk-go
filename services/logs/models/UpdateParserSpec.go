@@ -19,6 +19,9 @@ package models
 
 type UpdateParserSpec struct {
 
+    /* 行级索引分词符。 Rune 数组 (Optional) */
+    IndexToken []string `json:"indexToken"`
+
     /*   */
     ParserFields []ParserField `json:"parserFields"`
 
@@ -33,4 +36,7 @@ type UpdateParserSpec struct {
 
     /* 预处理任务列表。按照数组的顺序执行。 (Optional) */
     Pipelines []PipelineSpec `json:"pipelines"`
+
+    /* 是否保留原始内容字段 (Optional) */
+    ReserveOriginContent bool `json:"reserveOriginContent"`
 }

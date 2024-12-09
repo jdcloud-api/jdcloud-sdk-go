@@ -20,6 +20,9 @@ package models
 type LogParserFieldEnd struct {
 
     /*  (Optional) */
+    EnableStatistics bool `json:"enableStatistics"`
+
+    /*  (Optional) */
     FieldFormat string `json:"fieldFormat"`
 
     /*  (Optional) */

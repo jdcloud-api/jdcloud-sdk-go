@@ -22,6 +22,9 @@ type CollectTempalteEnd struct {
     /* 过滤器是否启用 (Optional) */
     FilterEnabled bool `json:"filterEnabled"`
 
+    /* 采集配置规格 (Optional) */
+    Formula string `json:"formula"`
+
     /* 日志文件 (Optional) */
     LogFile string `json:"logFile"`
 

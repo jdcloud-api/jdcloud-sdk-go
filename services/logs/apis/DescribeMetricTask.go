@@ -111,21 +111,19 @@ func NewDescribeMetricTaskRequestWithoutParam() *DescribeMetricTaskRequest {
 func (r *DescribeMetricTaskRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param logsetUID: 日志集 UID(Required) */
 func (r *DescribeMetricTaskRequest) SetLogsetUID(logsetUID string) {
     r.LogsetUID = logsetUID
 }
-
 /* param logtopicUID: 日志主题 UID(Required) */
 func (r *DescribeMetricTaskRequest) SetLogtopicUID(logtopicUID string) {
     r.LogtopicUID = logtopicUID
 }
-
 /* param logmetrictaskUID: (Required) */
 func (r *DescribeMetricTaskRequest) SetLogmetrictaskUID(logmetrictaskUID string) {
     r.LogmetrictaskUID = logmetrictaskUID
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

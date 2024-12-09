@@ -34,7 +34,7 @@ type DescribeLogtopicsRequest struct {
     /* 当前所在页，默认为1 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
-    /* 页面大小，默认为20；取值范围[1, 100] (Optional) */
+    /* 页面大小，默认为20；取值范围[1, 200] (Optional) */
     PageSize *int `json:"pageSize"`
 
     /* 日志主题名称 (Optional) */
@@ -42,6 +42,12 @@ type DescribeLogtopicsRequest struct {
 
     /* 日志主题采集的日志类型 (Optional) */
     AppName *string `json:"appName"`
+
+    /* 过滤条件，key，Values (Optional) */
+    Filters []logs.Filter `json:"filters"`
+
+    /* 过滤条件，key，Values (Optional) */
+    Tags []logs.TagFilter `json:"tags"`
 }
 
 /*
@@ -71,9 +77,11 @@ func NewDescribeLogtopicsRequest(
  * param regionId: 地域 Id (Required)
  * param logsetUID: 日志集 UID (Required)
  * param pageNumber: 当前所在页，默认为1 (Optional)
- * param pageSize: 页面大小，默认为20；取值范围[1, 100] (Optional)
+ * param pageSize: 页面大小，默认为20；取值范围[1, 200] (Optional)
  * param name: 日志主题名称 (Optional)
  * param appName: 日志主题采集的日志类型 (Optional)
+ * param filters: 过滤条件，key，Values (Optional)
+ * param tags: 过滤条件，key，Values (Optional)
  */
 func NewDescribeLogtopicsRequestWithAllParams(
     regionId string,
@@ -82,6 +90,8 @@ func NewDescribeLogtopicsRequestWithAllParams(
     pageSize *int,
     name *string,
     appName *string,
+    filters []logs.Filter,
+    tags []logs.TagFilter,
 ) *DescribeLogtopicsRequest {
 
     return &DescribeLogtopicsRequest{
@@ -97,6 +107,8 @@ func NewDescribeLogtopicsRequestWithAllParams(
         PageSize: pageSize,
         Name: name,
         AppName: appName,
+        Filters: filters,
+        Tags: tags,
     }
 }
 
@@ -117,31 +129,35 @@ func NewDescribeLogtopicsRequestWithoutParam() *DescribeLogtopicsRequest {
 func (r *DescribeLogtopicsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param logsetUID: 日志集 UID(Required) */
 func (r *DescribeLogtopicsRequest) SetLogsetUID(logsetUID string) {
     r.LogsetUID = logsetUID
 }
-
 /* param pageNumber: 当前所在页，默认为1(Optional) */
 func (r *DescribeLogtopicsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
-/* param pageSize: 页面大小，默认为20；取值范围[1, 100](Optional) */
+/* param pageSize: 页面大小，默认为20；取值范围[1, 200](Optional) */
 func (r *DescribeLogtopicsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param name: 日志主题名称(Optional) */
 func (r *DescribeLogtopicsRequest) SetName(name string) {
     r.Name = &name
 }
-
 /* param appName: 日志主题采集的日志类型(Optional) */
 func (r *DescribeLogtopicsRequest) SetAppName(appName string) {
     r.AppName = &appName
 }
+/* param filters: 过滤条件，key，Values(Optional) */
+func (r *DescribeLogtopicsRequest) SetFilters(filters []logs.Filter) {
+    r.Filters = filters
+}
+/* param tags: 过滤条件，key，Values(Optional) */
+func (r *DescribeLogtopicsRequest) SetTags(tags []logs.TagFilter) {
+    r.Tags = tags
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -107,21 +107,19 @@ func NewUpdateSubscribeRequestWithoutParam() *UpdateSubscribeRequest {
 func (r *UpdateSubscribeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param logsetUID: 日志集 UID(Required) */
 func (r *UpdateSubscribeRequest) SetLogsetUID(logsetUID string) {
     r.LogsetUID = logsetUID
 }
-
 /* param logtopicUID: 日志主题 UID(Required) */
 func (r *UpdateSubscribeRequest) SetLogtopicUID(logtopicUID string) {
     r.LogtopicUID = logtopicUID
 }
-
 /* param status: 日志订阅状态，0表示未创建，1表示刚创建，2表示开启，3表示关闭(Optional) */
 func (r *UpdateSubscribeRequest) SetStatus(status int64) {
     r.Status = &status
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

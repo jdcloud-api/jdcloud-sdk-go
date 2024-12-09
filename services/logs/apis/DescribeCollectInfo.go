@@ -93,11 +93,11 @@ func NewDescribeCollectInfoRequestWithoutParam() *DescribeCollectInfoRequest {
 func (r *DescribeCollectInfoRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param collectInfoUID: 采集配置 UID(Required) */
 func (r *DescribeCollectInfoRequest) SetCollectInfoUID(collectInfoUID string) {
     r.CollectInfoUID = collectInfoUID
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
@@ -115,14 +115,14 @@ type DescribeCollectInfoResult struct {
     UID string `json:"uID"`
     AgResource []logs.AgResourceEnd `json:"agResource"`
     AppCode string `json:"appCode"`
+    BinlogSpec interface{} `json:"binlogSpec"`
     Detail logs.CollectTempalteEnd `json:"detail"`
     Enabled int64 `json:"enabled"`
     HasResource bool `json:"hasResource"`
-    LogCustomTarget string `json:"logCustomTarget"`
-    LogCustomTargetConf interface{} `json:"logCustomTargetConf"`
+    K8sSpec interface{} `json:"k8sSpec"`
     LogsetUID string `json:"logsetUID"`
-    LogtopicEnabled bool `json:"logtopicEnabled"`
     LogtopicUID string `json:"logtopicUID"`
+    Name string `json:"name"`
     ResourceMode int64 `json:"resourceMode"`
     ResourceType string `json:"resourceType"`
     ServiceCode string `json:"serviceCode"`

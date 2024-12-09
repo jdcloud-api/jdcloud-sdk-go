@@ -108,21 +108,19 @@ func NewUpdateCollectResourcesRequestWithoutParam() *UpdateCollectResourcesReque
 func (r *UpdateCollectResourcesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param collectInfoUID: 采集配置 UID(Required) */
 func (r *UpdateCollectResourcesRequest) SetCollectInfoUID(collectInfoUID string) {
     r.CollectInfoUID = collectInfoUID
 }
-
 /* param action: action(Required) */
 func (r *UpdateCollectResourcesRequest) SetAction(action string) {
     r.Action = action
 }
-
 /* param resources: 采集实例列表（系统日志存在上限限制）(Optional) */
 func (r *UpdateCollectResourcesRequest) SetResources(resources []logs.Resource) {
     r.Resources = resources
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -37,17 +37,17 @@ type CreateCollectInfoRequest struct {
     /* 日志来源，只能是 custom/jdcloud  */
     AppCode string `json:"appCode"`
 
+    /*  (Optional) */
+    BinlogSpec *logs.BinlogSpec `json:"binlogSpec"`
+
     /* 采集状态，0-禁用，1-启用  */
     Enabled bool `json:"enabled"`
 
     /* 过滤器是否启用。当appcode为custom时必填 (Optional) */
     FilterEnabled *bool `json:"filterEnabled"`
 
-    /* 自定义日志转发目的地, 只支持业务应用日志。支持类型："kafka"，"es"，默认为空:不进行自定义目的上报 (Optional) */
-    LogCustomTarget *string `json:"logCustomTarget"`
-
-    /* 自定义日志转发目的地配置，KV 结构，具体配置参考 LogCustomTargetKafkaConf 和 LogCustomTargetEsConf (Optional) */
-    LogCustomTargetConf *interface{} `json:"logCustomTargetConf"`
+    /*  (Optional) */
+    K8sSpec *logs.K8sSpec `json:"k8sSpec"`
 
     /* 日志文件名。当appcode为custom时为必填。日志文件名支持正则表达式。 (Optional) */
     LogFile *string `json:"logFile"`
@@ -61,6 +61,9 @@ type CreateCollectInfoRequest struct {
     /* 目的地是否是日志服务logtopic，只支持业务应用日志 (Optional) */
     LogtopicEnabled *bool `json:"logtopicEnabled"`
 
+    /* 采集配置名称 (Optional) */
+    Name *string `json:"name"`
+
     /* 首行正则 (Optional) */
     RegexpStr *string `json:"regexpStr"`
 
@@ -73,7 +76,7 @@ type CreateCollectInfoRequest struct {
     /* 采集实例列表：jdcloud类型最多添加20个资源；custom类型支持的资源数量不限； (Optional) */
     Resources []logs.Resource `json:"resources"`
 
-    /* 产品线,当日志来源为jdcloud时，必填  */
+    /* 产品线,当日志来源为jdcloud时,填写云产品serviceCode。否则填写自定义日志类型：vm,k8s,binlog,etc  */
     ServiceCode string `json:"serviceCode"`
 
     /*  (Optional) */
@@ -89,7 +92,7 @@ type CreateCollectInfoRequest struct {
  * param appCode: 日志来源，只能是 custom/jdcloud (Required)
  * param enabled: 采集状态，0-禁用，1-启用 (Required)
  * param resourceType: 采集实例类型, 只能是 all/part  当选择all时，传入的实例列表无效；custom类型的采集配置目前仅支持part方式，即用户指定实例列表； (Required)
- * param serviceCode: 产品线,当日志来源为jdcloud时，必填 (Required)
+ * param serviceCode: 产品线,当日志来源为jdcloud时,填写云产品serviceCode。否则填写自定义日志类型：vm,k8s,binlog,etc (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -123,19 +126,20 @@ func NewCreateCollectInfoRequest(
  * param logtopicUID: 日志主题 UID (Required)
  * param agResource: 高可用组资源 (Optional)
  * param appCode: 日志来源，只能是 custom/jdcloud (Required)
+ * param binlogSpec:  (Optional)
  * param enabled: 采集状态，0-禁用，1-启用 (Required)
  * param filterEnabled: 过滤器是否启用。当appcode为custom时必填 (Optional)
- * param logCustomTarget: 自定义日志转发目的地, 只支持业务应用日志。支持类型："kafka"，"es"，默认为空:不进行自定义目的上报 (Optional)
- * param logCustomTargetConf: 自定义日志转发目的地配置，KV 结构，具体配置参考 LogCustomTargetKafkaConf 和 LogCustomTargetEsConf (Optional)
+ * param k8sSpec:  (Optional)
  * param logFile: 日志文件名。当appcode为custom时为必填。日志文件名支持正则表达式。 (Optional)
  * param logFilters: 过滤器。设置过滤器后可根据用户设定的关键词采集部分日志，如仅采集 Error 的日志。目前最大允许5个。 (Optional)
  * param logPath: 日志路径。当appcode为custom时为必填。目前仅支持对 Linux 云主机上的日志进行采集，路径支持通配符“*”和“？”，文件路径应符合 Linux 的文件路径规则 (Optional)
  * param logtopicEnabled: 目的地是否是日志服务logtopic，只支持业务应用日志 (Optional)
+ * param name: 采集配置名称 (Optional)
  * param regexpStr: 首行正则 (Optional)
  * param resourceMode: 采集资源时选择的模式，1.正常的选择实例模式（默认模式）；2.选择标签tag模式 3.选择高可用组ag模式 (Optional)
  * param resourceType: 采集实例类型, 只能是 all/part  当选择all时，传入的实例列表无效；custom类型的采集配置目前仅支持part方式，即用户指定实例列表； (Required)
  * param resources: 采集实例列表：jdcloud类型最多添加20个资源；custom类型支持的资源数量不限； (Optional)
- * param serviceCode: 产品线,当日志来源为jdcloud时，必填 (Required)
+ * param serviceCode: 产品线,当日志来源为jdcloud时,填写云产品serviceCode。否则填写自定义日志类型：vm,k8s,binlog,etc (Required)
  * param tagResource:  (Optional)
  * param templateUID: 日志类型。当appcode为jdcloud时为必填 (Optional)
  */
@@ -144,14 +148,15 @@ func NewCreateCollectInfoRequestWithAllParams(
     logtopicUID string,
     agResource []logs.AgResource,
     appCode string,
+    binlogSpec *logs.BinlogSpec,
     enabled bool,
     filterEnabled *bool,
-    logCustomTarget *string,
-    logCustomTargetConf *interface{},
+    k8sSpec *logs.K8sSpec,
     logFile *string,
     logFilters []string,
     logPath *string,
     logtopicEnabled *bool,
+    name *string,
     regexpStr *string,
     resourceMode *int64,
     resourceType string,
@@ -172,14 +177,15 @@ func NewCreateCollectInfoRequestWithAllParams(
         LogtopicUID: logtopicUID,
         AgResource: agResource,
         AppCode: appCode,
+        BinlogSpec: binlogSpec,
         Enabled: enabled,
         FilterEnabled: filterEnabled,
-        LogCustomTarget: logCustomTarget,
-        LogCustomTargetConf: logCustomTargetConf,
+        K8sSpec: k8sSpec,
         LogFile: logFile,
         LogFilters: logFilters,
         LogPath: logPath,
         LogtopicEnabled: logtopicEnabled,
+        Name: name,
         RegexpStr: regexpStr,
         ResourceMode: resourceMode,
         ResourceType: resourceType,
@@ -207,96 +213,83 @@ func NewCreateCollectInfoRequestWithoutParam() *CreateCollectInfoRequest {
 func (r *CreateCollectInfoRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param logtopicUID: 日志主题 UID(Required) */
 func (r *CreateCollectInfoRequest) SetLogtopicUID(logtopicUID string) {
     r.LogtopicUID = logtopicUID
 }
-
 /* param agResource: 高可用组资源(Optional) */
 func (r *CreateCollectInfoRequest) SetAgResource(agResource []logs.AgResource) {
     r.AgResource = agResource
 }
-
 /* param appCode: 日志来源，只能是 custom/jdcloud(Required) */
 func (r *CreateCollectInfoRequest) SetAppCode(appCode string) {
     r.AppCode = appCode
 }
-
+/* param binlogSpec: (Optional) */
+func (r *CreateCollectInfoRequest) SetBinlogSpec(binlogSpec *logs.BinlogSpec) {
+    r.BinlogSpec = binlogSpec
+}
 /* param enabled: 采集状态，0-禁用，1-启用(Required) */
 func (r *CreateCollectInfoRequest) SetEnabled(enabled bool) {
     r.Enabled = enabled
 }
-
 /* param filterEnabled: 过滤器是否启用。当appcode为custom时必填(Optional) */
 func (r *CreateCollectInfoRequest) SetFilterEnabled(filterEnabled bool) {
     r.FilterEnabled = &filterEnabled
 }
-
-/* param logCustomTarget: 自定义日志转发目的地, 只支持业务应用日志。支持类型："kafka"，"es"，默认为空:不进行自定义目的上报(Optional) */
-func (r *CreateCollectInfoRequest) SetLogCustomTarget(logCustomTarget string) {
-    r.LogCustomTarget = &logCustomTarget
+/* param k8sSpec: (Optional) */
+func (r *CreateCollectInfoRequest) SetK8sSpec(k8sSpec *logs.K8sSpec) {
+    r.K8sSpec = k8sSpec
 }
-
-/* param logCustomTargetConf: 自定义日志转发目的地配置，KV 结构，具体配置参考 LogCustomTargetKafkaConf 和 LogCustomTargetEsConf(Optional) */
-func (r *CreateCollectInfoRequest) SetLogCustomTargetConf(logCustomTargetConf interface{}) {
-    r.LogCustomTargetConf = &logCustomTargetConf
-}
-
 /* param logFile: 日志文件名。当appcode为custom时为必填。日志文件名支持正则表达式。(Optional) */
 func (r *CreateCollectInfoRequest) SetLogFile(logFile string) {
     r.LogFile = &logFile
 }
-
 /* param logFilters: 过滤器。设置过滤器后可根据用户设定的关键词采集部分日志，如仅采集 Error 的日志。目前最大允许5个。(Optional) */
 func (r *CreateCollectInfoRequest) SetLogFilters(logFilters []string) {
     r.LogFilters = logFilters
 }
-
 /* param logPath: 日志路径。当appcode为custom时为必填。目前仅支持对 Linux 云主机上的日志进行采集，路径支持通配符“*”和“？”，文件路径应符合 Linux 的文件路径规则(Optional) */
 func (r *CreateCollectInfoRequest) SetLogPath(logPath string) {
     r.LogPath = &logPath
 }
-
 /* param logtopicEnabled: 目的地是否是日志服务logtopic，只支持业务应用日志(Optional) */
 func (r *CreateCollectInfoRequest) SetLogtopicEnabled(logtopicEnabled bool) {
     r.LogtopicEnabled = &logtopicEnabled
 }
-
+/* param name: 采集配置名称(Optional) */
+func (r *CreateCollectInfoRequest) SetName(name string) {
+    r.Name = &name
+}
 /* param regexpStr: 首行正则(Optional) */
 func (r *CreateCollectInfoRequest) SetRegexpStr(regexpStr string) {
     r.RegexpStr = &regexpStr
 }
-
 /* param resourceMode: 采集资源时选择的模式，1.正常的选择实例模式（默认模式）；2.选择标签tag模式 3.选择高可用组ag模式(Optional) */
 func (r *CreateCollectInfoRequest) SetResourceMode(resourceMode int64) {
     r.ResourceMode = &resourceMode
 }
-
 /* param resourceType: 采集实例类型, 只能是 all/part  当选择all时，传入的实例列表无效；custom类型的采集配置目前仅支持part方式，即用户指定实例列表；(Required) */
 func (r *CreateCollectInfoRequest) SetResourceType(resourceType string) {
     r.ResourceType = resourceType
 }
-
 /* param resources: 采集实例列表：jdcloud类型最多添加20个资源；custom类型支持的资源数量不限；(Optional) */
 func (r *CreateCollectInfoRequest) SetResources(resources []logs.Resource) {
     r.Resources = resources
 }
-
-/* param serviceCode: 产品线,当日志来源为jdcloud时，必填(Required) */
+/* param serviceCode: 产品线,当日志来源为jdcloud时,填写云产品serviceCode。否则填写自定义日志类型：vm,k8s,binlog,etc(Required) */
 func (r *CreateCollectInfoRequest) SetServiceCode(serviceCode string) {
     r.ServiceCode = serviceCode
 }
-
 /* param tagResource: (Optional) */
 func (r *CreateCollectInfoRequest) SetTagResource(tagResource *logs.TagResource) {
     r.TagResource = tagResource
 }
-
 /* param templateUID: 日志类型。当appcode为jdcloud时为必填(Optional) */
 func (r *CreateCollectInfoRequest) SetTemplateUID(templateUID string) {
     r.TemplateUID = &templateUID
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -25,17 +25,17 @@ type CreateCollectInfoSpec struct {
     /* 日志来源，只能是 custom/jdcloud  */
     AppCode string `json:"appCode"`
 
+    /*  (Optional) */
+    BinlogSpec BinlogSpec `json:"binlogSpec"`
+
     /* 采集状态，0-禁用，1-启用  */
     Enabled bool `json:"enabled"`
 
     /* 过滤器是否启用。当appcode为custom时必填 (Optional) */
     FilterEnabled bool `json:"filterEnabled"`
 
-    /* 自定义日志转发目的地, 只支持业务应用日志。支持类型："kafka"，"es"，默认为空:不进行自定义目的上报 (Optional) */
-    LogCustomTarget string `json:"logCustomTarget"`
-
-    /* 自定义日志转发目的地配置，KV 结构，具体配置参考 LogCustomTargetKafkaConf 和 LogCustomTargetEsConf (Optional) */
-    LogCustomTargetConf interface{} `json:"logCustomTargetConf"`
+    /*  (Optional) */
+    K8sSpec K8sSpec `json:"k8sSpec"`
 
     /* 日志文件名。当appcode为custom时为必填。日志文件名支持正则表达式。 (Optional) */
     LogFile string `json:"logFile"`
@@ -49,6 +49,9 @@ type CreateCollectInfoSpec struct {
     /* 目的地是否是日志服务logtopic，只支持业务应用日志 (Optional) */
     LogtopicEnabled bool `json:"logtopicEnabled"`
 
+    /* 采集配置名称 (Optional) */
+    Name string `json:"name"`
+
     /* 首行正则 (Optional) */
     RegexpStr string `json:"regexpStr"`
 
@@ -61,7 +64,7 @@ type CreateCollectInfoSpec struct {
     /* 采集实例列表：jdcloud类型最多添加20个资源；custom类型支持的资源数量不限； (Optional) */
     Resources []Resource `json:"resources"`
 
-    /* 产品线,当日志来源为jdcloud时，必填  */
+    /* 产品线,当日志来源为jdcloud时,填写云产品serviceCode。否则填写自定义日志类型：vm,k8s,binlog,etc  */
     ServiceCode string `json:"serviceCode"`
 
     /*  (Optional) */
