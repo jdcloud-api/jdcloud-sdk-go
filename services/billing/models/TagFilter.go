@@ -17,14 +17,11 @@
 package models
 
 
-type CouponVo struct {
+type TagFilter struct {
 
-    /* 券编号  */
-    CouponNumber string `json:"couponNumber"`
+    /* 标签键 (Optional) */
+    Key string `json:"key"`
 
-    /* 支付金额  */
-    Fee int `json:"fee"`
-
-    /* 支付方式 0、免费代金券 1、付费代金券  */
-    PayType int `json:"payType"`
+    /* 标签值列表 (Optional) */
+    Values []string `json:"values"`
 }

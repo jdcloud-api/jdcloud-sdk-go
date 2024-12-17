@@ -17,14 +17,14 @@
 package models
 
 
-type CouponVo struct {
+type RenewlResourceSearchServiceVo struct {
 
-    /* 券编号  */
-    CouponNumber string `json:"couponNumber"`
+    /* serviceCode (Optional) */
+    ServiceCode string `json:"serviceCode"`
 
-    /* 支付金额  */
-    Fee int `json:"fee"`
+    /* 产品名称 (Optional) */
+    ServiceName string `json:"serviceName"`
 
-    /* 支付方式 0、免费代金券 1、付费代金券  */
-    PayType int `json:"payType"`
+    /* 资源总数 (Optional) */
+    Count int `json:"count"`
 }

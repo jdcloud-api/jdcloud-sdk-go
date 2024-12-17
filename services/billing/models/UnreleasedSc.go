@@ -17,14 +17,23 @@
 package models
 
 
-type CouponVo struct {
+type UnreleasedSc struct {
 
-    /* 券编号  */
-    CouponNumber string `json:"couponNumber"`
+    /* 类型  1:可一键处理 2:需手动处理 (Optional) */
+    AccessType int `json:"accessType"`
 
-    /* 支付金额  */
-    Fee int `json:"fee"`
+    /* 产品编码 (Optional) */
+    ServiceCode string `json:"serviceCode"`
 
-    /* 支付方式 0、免费代金券 1、付费代金券  */
-    PayType int `json:"payType"`
+    /* 产品名称 (Optional) */
+    ServiceCodeName string `json:"serviceCodeName"`
+
+    /* 描述 (Optional) */
+    Desc string `json:"desc"`
+
+    /* 控制台链接 (Optional) */
+    ScUrl string `json:"scUrl"`
+
+    /* 实例数量 (Optional) */
+    ResourceCount string `json:"resourceCount"`
 }

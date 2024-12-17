@@ -17,14 +17,23 @@
 package models
 
 
-type CouponVo struct {
+type RenewResourceSearchCondition struct {
 
-    /* 券编号  */
-    CouponNumber string `json:"couponNumber"`
+    /* 产品 (Optional) */
+    ServiceCode string `json:"serviceCode"`
 
-    /* 支付金额  */
-    Fee int `json:"fee"`
+    /* 用户pin (Optional) */
+    Pin string `json:"pin"`
 
-    /* 支付方式 0、免费代金券 1、付费代金券  */
-    PayType int `json:"payType"`
+    /* 开始时间（到期时间范围开始时间） (Optional) */
+    StartTime string `json:"startTime"`
+
+    /* 结束时间（到期时间范围结束时间） (Optional) */
+    EndTime string `json:"endTime"`
+
+    /* 地域 (Optional) */
+    Region string `json:"region"`
+
+    /* >0: 订单还有几天到期; ==0: 订单已经到期; <0: 不管是否到期 (Optional) */
+    ExpireInDays int `json:"expireInDays"`
 }
