@@ -17,14 +17,14 @@
 package models
 
 
-type CouponVo struct {
+type RenewlResourceSearchExpireDateVo struct {
 
-    /* 券编号  */
-    CouponNumber string `json:"couponNumber"`
+    /* 到期天数 (Optional) */
+    ExpireInDays int `json:"expireInDays"`
 
-    /* 支付金额  */
-    Fee int `json:"fee"`
+    /* 时间 (Optional) */
+    ExpireName string `json:"expireName"`
 
-    /* 支付方式 0、免费代金券 1、付费代金券  */
-    PayType int `json:"payType"`
+    /* 资源总数 (Optional) */
+    Count int `json:"count"`
 }
