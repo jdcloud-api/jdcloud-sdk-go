@@ -17,14 +17,14 @@
 package models
 
 
-type NetworkInterfaceAttachmentSpec struct {
+type PodTemplateElasticIp struct {
 
-    /* 指明删除pod时是否删除网卡，主网卡默认是true,辅助网卡默认false (Optional) */
-    AutoDelete *bool `json:"autoDelete"`
+    /* 弹性公网IP的限速（单位：MB） (Optional) */
+    BandwidthMbps int `json:"bandwidthMbps"`
 
-    /* 设备Index。 (Optional) */
-    DeviceIndex *int `json:"deviceIndex"`
+    /* IP服务商 (Optional) */
+    Provider string `json:"provider"`
 
-    /* 网卡接口规范  */
-    NetworkInterface *NetworkInterfaceSpec `json:"networkInterface"`
+    /* 弹性公网IP计费模式 (Optional) */
+    ChargeMode string `json:"chargeMode"`
 }

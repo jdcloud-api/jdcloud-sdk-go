@@ -17,14 +17,14 @@
 package models
 
 
-type NetworkInterfaceAttachmentSpec struct {
+type PodTemplateNetworkInterface struct {
 
-    /* 指明删除pod时是否删除网卡，主网卡默认是true,辅助网卡默认false (Optional) */
-    AutoDelete *bool `json:"autoDelete"`
+    /* 子网ID (Optional) */
+    SubnetId string `json:"subnetId"`
 
-    /* 设备Index。 (Optional) */
-    DeviceIndex *int `json:"deviceIndex"`
+    /* 安全组ID列表 (Optional) */
+    SecurityGroups []string `json:"securityGroups"`
 
-    /* 网卡接口规范  */
-    NetworkInterface *NetworkInterfaceSpec `json:"networkInterface"`
+    /* 自动分配的ipv6地址数量 (Optional) */
+    Ipv6AddressCount int `json:"ipv6AddressCount"`
 }

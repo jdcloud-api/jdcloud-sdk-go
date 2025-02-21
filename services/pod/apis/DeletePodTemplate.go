@@ -18,74 +18,70 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    pod "github.com/jdcloud-api/jdcloud-sdk-go/services/pod/models"
 )
 
-type DescribeQuotaRequest struct {
+type DeletePodTemplateRequest struct {
 
     core.JDCloudRequest
 
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* resourceType - 资源类型，支持 [container, pod, secret, imageCache,podTemplate]
-  */
-    ResourceType string `json:"resourceType"`
+    /* Pod模板ID  */
+    PodTemplateId string `json:"podTemplateId"`
 }
 
 /*
  * param regionId: Region ID (Required)
- * param resourceType: resourceType - 资源类型，支持 [container, pod, secret, imageCache,podTemplate]
- (Required)
+ * param podTemplateId: Pod模板ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeQuotaRequest(
+func NewDeletePodTemplateRequest(
     regionId string,
-    resourceType string,
-) *DescribeQuotaRequest {
+    podTemplateId string,
+) *DeletePodTemplateRequest {
 
-	return &DescribeQuotaRequest{
+	return &DeletePodTemplateRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/quotas",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/podTemplates/{podTemplateId}",
+			Method:  "DELETE",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        ResourceType: resourceType,
+        PodTemplateId: podTemplateId,
 	}
 }
 
 /*
  * param regionId: Region ID (Required)
- * param resourceType: resourceType - 资源类型，支持 [container, pod, secret, imageCache,podTemplate]
- (Required)
+ * param podTemplateId: Pod模板ID (Required)
  */
-func NewDescribeQuotaRequestWithAllParams(
+func NewDeletePodTemplateRequestWithAllParams(
     regionId string,
-    resourceType string,
-) *DescribeQuotaRequest {
+    podTemplateId string,
+) *DeletePodTemplateRequest {
 
-    return &DescribeQuotaRequest{
+    return &DeletePodTemplateRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/quotas",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/podTemplates/{podTemplateId}",
+            Method:  "DELETE",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        ResourceType: resourceType,
+        PodTemplateId: podTemplateId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeQuotaRequestWithoutParam() *DescribeQuotaRequest {
+func NewDeletePodTemplateRequestWithoutParam() *DeletePodTemplateRequest {
 
-    return &DescribeQuotaRequest{
+    return &DeletePodTemplateRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/quotas",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/podTemplates/{podTemplateId}",
+            Method:  "DELETE",
             Header:  nil,
             Version: "v1",
         },
@@ -93,28 +89,26 @@ func NewDescribeQuotaRequestWithoutParam() *DescribeQuotaRequest {
 }
 
 /* param regionId: Region ID(Required) */
-func (r *DescribeQuotaRequest) SetRegionId(regionId string) {
+func (r *DeletePodTemplateRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-/* param resourceType: resourceType - 资源类型，支持 [container, pod, secret, imageCache,podTemplate]
-(Required) */
-func (r *DescribeQuotaRequest) SetResourceType(resourceType string) {
-    r.ResourceType = resourceType
+/* param podTemplateId: Pod模板ID(Required) */
+func (r *DeletePodTemplateRequest) SetPodTemplateId(podTemplateId string) {
+    r.PodTemplateId = podTemplateId
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeQuotaRequest) GetRegionId() string {
+func (r DeletePodTemplateRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeQuotaResponse struct {
+type DeletePodTemplateResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeQuotaResult `json:"result"`
+    Result DeletePodTemplateResult `json:"result"`
 }
 
-type DescribeQuotaResult struct {
-    Quota pod.Quota `json:"quota"`
+type DeletePodTemplateResult struct {
 }

@@ -48,4 +48,7 @@ type InstanceNetworkInterface struct {
 
     /* 网卡IPv6地址 (Optional) */
     Ipv6Addresses []string `json:"ipv6Addresses"`
+
+    /* ipv6地址信息 (Optional) */
+    Ipv6AddressesInfo []NetworkInterfaceIpv6Address `json:"ipv6AddressesInfo"`
 }

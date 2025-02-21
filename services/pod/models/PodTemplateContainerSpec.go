@@ -17,7 +17,7 @@
 package models
 
 
-type ContainerSpec struct {
+type PodTemplateContainerSpec struct {
 
     /* 容器名称，符合DNS-1123 label规范，在一个Pod内不可重复、不支持修改  */
     Name string `json:"name"`
@@ -34,7 +34,7 @@ type ContainerSpec struct {
     /* 镜像名称 </br>
 容器镜像名字。 nginx:latest。长度范围：[1-639]
 1. Docker Hub官方镜像通过类似nginx, mysql/mysql-server的名字指定 </br> 
-2. repository长度最大256个字符，tag最大128个字符，registry最大255个字符 </br> 
+2. repository长度最大256个字符，tag最大128个字符，registry最大255个字符 </br>
  (Optional) */
     Image *string `json:"image"`
 
@@ -60,7 +60,7 @@ type ContainerSpec struct {
     Resources *ResourceRequestsSpec `json:"resources"`
 
     /* 容器计算资源配置  */
-    SystemDisk *CloudDiskSpec `json:"systemDisk"`
+    SystemDisk *PodTemplateCloudDiskSpec `json:"systemDisk"`
 
     /* 云盘挂载信息 (Optional) */
     VolumeMounts []VolumeMountSpec `json:"volumeMounts"`
