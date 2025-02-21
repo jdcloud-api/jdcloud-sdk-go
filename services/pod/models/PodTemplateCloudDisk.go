@@ -17,14 +17,23 @@
 package models
 
 
-type NetworkInterfaceAttachmentSpec struct {
+type PodTemplateCloudDisk struct {
 
-    /* 指明删除pod时是否删除网卡，主网卡默认是true,辅助网卡默认false (Optional) */
-    AutoDelete *bool `json:"autoDelete"`
+    /* 云盘快照id (Optional) */
+    SnapshotId string `json:"snapshotId"`
 
-    /* 设备Index。 (Optional) */
-    DeviceIndex *int `json:"deviceIndex"`
+    /* 云盘类型：hdd.std1,ssd.gp1,ssd.io1 (Optional) */
+    DiskType string `json:"diskType"`
 
-    /* 网卡接口规范  */
-    NetworkInterface *NetworkInterfaceSpec `json:"networkInterface"`
+    /* 云盘size,单位 GB (Optional) */
+    SizeGB int `json:"sizeGB"`
+
+    /* 指定volume文件系统类型，目前支持[xfs, ext4]；如果新创建的盘，不指定文件系统类型默认格式化成xfs。 (Optional) */
+    FsType string `json:"fsType"`
+
+    /* 云盘的 iops 值，目前只有 ssd.io1 类型有效。 (Optional) */
+    Iops int `json:"iops"`
+
+    /* 是否随pod删除。默认：true (Optional) */
+    AutoDelete bool `json:"autoDelete"`
 }

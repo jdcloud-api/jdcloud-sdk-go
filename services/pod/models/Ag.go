@@ -17,14 +17,11 @@
 package models
 
 
-type NetworkInterfaceAttachmentSpec struct {
+type Ag struct {
 
-    /* 指明删除pod时是否删除网卡，主网卡默认是true,辅助网卡默认false (Optional) */
-    AutoDelete *bool `json:"autoDelete"`
+    /* 高可用组名称。 (Optional) */
+    Name string `json:"name"`
 
-    /* 设备Index。 (Optional) */
-    DeviceIndex *int `json:"deviceIndex"`
-
-    /* 网卡接口规范  */
-    NetworkInterface *NetworkInterfaceSpec `json:"networkInterface"`
+    /* 高可用组 ID (Optional) */
+    Id string `json:"id"`
 }

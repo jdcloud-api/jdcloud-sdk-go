@@ -17,11 +17,32 @@
 package models
 
 
-type PodDnsConfigOptionSpec struct {
+type BriefPodStatus struct {
 
-    /* 长度范围：[1-63]，需满足linux resolver限制。可选值：`debug`,`rotate`,`no-check-names`,`inet6`,`ip6-bytestring`,`ip6-dotint`,`no-ip6-dotint`,`edns0`,`single-request`,`single-request-reopen`,`no-tld-query`,`use-vc`,`ndots`,`timeout`,`attempts`  */
+    /* Pod ID (Optional) */
+    PodId string `json:"podId"`
+
+    /* 名称 (Optional) */
     Name string `json:"name"`
 
-    /* 长度范围：[0-100]，仅限timeout, attempts, ndots (Optional) */
-    Value *string `json:"value"`
+    /* 描述信息，默认为空 (Optional) */
+    Description string `json:"description"`
+
+    /* az信息 (Optional) */
+    Az string `json:"az"`
+
+    /* 高可用组 (Optional) */
+    Ag AvailablityGroup `json:"ag"`
+
+    /* pod的实例规格 (Optional) */
+    InstanceType string `json:"instanceType"`
+
+    /* pod状态信息 (Optional) */
+    PodStatus PodStatus `json:"podStatus"`
+
+    /* pod内的容器信息 (Optional) */
+    Containers []Container `json:"containers"`
+
+    /* pod创建时间 (Optional) */
+    CreateTime string `json:"createTime"`
 }

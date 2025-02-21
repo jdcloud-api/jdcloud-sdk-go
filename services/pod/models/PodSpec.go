@@ -41,6 +41,9 @@ type PodSpec struct {
     /* Pod所属可用区，指定agId时非必传<br> Pod、已有云盘的az必须相同，且包含在AG中  */
     Az string `json:"az"`
 
+    /* 高可用组ID, 指定该参数后，将使用高可用组关联的实例模板创建实例。 (Optional) */
+    AgId *string `json:"agId"`
+
     /* pod内容器的/etc/resolv.conf配置 (Optional) */
     DnsConfig *DnsConfigSpec `json:"dnsConfig"`
 

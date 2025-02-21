@@ -22,32 +22,23 @@ import (
     common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
 
-type DescribePodsRequest struct {
+type DescribePodTemplatesRequest struct {
 
     core.JDCloudRequest
 
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 页码；默认为1 (Optional) */
+    /* 页码；默认为1。取值范围：[1,∞) (Optional) */
     PageNumber *int `json:"pageNumber"`
 
     /* 分页大小；默认为20；取值范围[10, 100] (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* podId - pod ID，精确匹配，支持多个
-privateIpAddress - 主网卡IP地址，模糊匹配，支持单个
-az - 可用区，精确匹配，支持多个
-vpcId - 私有网络ID，精确匹配，支持多个
-phase - pod 状态，精确匹配，支持多个
-name - 实例名称，模糊匹配，支持单个
-subnetId - 镜像ID，精确匹配，支持多个
-agId - 高可用组ID，精确匹配，支持多个
+    /* podTemplateIds - podTemplate ID，精确匹配，支持多个
+name - pod模板名称，模糊匹配，支持单个
  (Optional) */
     Filters []common.Filter `json:"filters"`
-
-    /* Tag筛选条件 (Optional) */
-    Tags []pod.TagFilter `json:"tags"`
 }
 
 /*
@@ -55,13 +46,13 @@ agId - 高可用组ID，精确匹配，支持多个
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribePodsRequest(
+func NewDescribePodTemplatesRequest(
     regionId string,
-) *DescribePodsRequest {
+) *DescribePodTemplatesRequest {
 
-	return &DescribePodsRequest{
+	return &DescribePodTemplatesRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/pods",
+			URL:     "/regions/{regionId}/podTemplates",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -72,30 +63,22 @@ func NewDescribePodsRequest(
 
 /*
  * param regionId: Region ID (Required)
- * param pageNumber: 页码；默认为1 (Optional)
+ * param pageNumber: 页码；默认为1。取值范围：[1,∞) (Optional)
  * param pageSize: 分页大小；默认为20；取值范围[10, 100] (Optional)
- * param filters: podId - pod ID，精确匹配，支持多个
-privateIpAddress - 主网卡IP地址，模糊匹配，支持单个
-az - 可用区，精确匹配，支持多个
-vpcId - 私有网络ID，精确匹配，支持多个
-phase - pod 状态，精确匹配，支持多个
-name - 实例名称，模糊匹配，支持单个
-subnetId - 镜像ID，精确匹配，支持多个
-agId - 高可用组ID，精确匹配，支持多个
+ * param filters: podTemplateIds - podTemplate ID，精确匹配，支持多个
+name - pod模板名称，模糊匹配，支持单个
  (Optional)
- * param tags: Tag筛选条件 (Optional)
  */
-func NewDescribePodsRequestWithAllParams(
+func NewDescribePodTemplatesRequestWithAllParams(
     regionId string,
     pageNumber *int,
     pageSize *int,
     filters []common.Filter,
-    tags []pod.TagFilter,
-) *DescribePodsRequest {
+) *DescribePodTemplatesRequest {
 
-    return &DescribePodsRequest{
+    return &DescribePodTemplatesRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/pods",
+            URL:     "/regions/{regionId}/podTemplates",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -104,16 +87,15 @@ func NewDescribePodsRequestWithAllParams(
         PageNumber: pageNumber,
         PageSize: pageSize,
         Filters: filters,
-        Tags: tags,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribePodsRequestWithoutParam() *DescribePodsRequest {
+func NewDescribePodTemplatesRequestWithoutParam() *DescribePodTemplatesRequest {
 
-    return &DescribePodsRequest{
+    return &DescribePodTemplatesRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/pods",
+            URL:     "/regions/{regionId}/podTemplates",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -122,48 +104,38 @@ func NewDescribePodsRequestWithoutParam() *DescribePodsRequest {
 }
 
 /* param regionId: Region ID(Required) */
-func (r *DescribePodsRequest) SetRegionId(regionId string) {
+func (r *DescribePodTemplatesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-/* param pageNumber: 页码；默认为1(Optional) */
-func (r *DescribePodsRequest) SetPageNumber(pageNumber int) {
+/* param pageNumber: 页码；默认为1。取值范围：[1,∞)(Optional) */
+func (r *DescribePodTemplatesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 /* param pageSize: 分页大小；默认为20；取值范围[10, 100](Optional) */
-func (r *DescribePodsRequest) SetPageSize(pageSize int) {
+func (r *DescribePodTemplatesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-/* param filters: podId - pod ID，精确匹配，支持多个
-privateIpAddress - 主网卡IP地址，模糊匹配，支持单个
-az - 可用区，精确匹配，支持多个
-vpcId - 私有网络ID，精确匹配，支持多个
-phase - pod 状态，精确匹配，支持多个
-name - 实例名称，模糊匹配，支持单个
-subnetId - 镜像ID，精确匹配，支持多个
-agId - 高可用组ID，精确匹配，支持多个
+/* param filters: podTemplateIds - podTemplate ID，精确匹配，支持多个
+name - pod模板名称，模糊匹配，支持单个
 (Optional) */
-func (r *DescribePodsRequest) SetFilters(filters []common.Filter) {
+func (r *DescribePodTemplatesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
-}
-/* param tags: Tag筛选条件(Optional) */
-func (r *DescribePodsRequest) SetTags(tags []pod.TagFilter) {
-    r.Tags = tags
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribePodsRequest) GetRegionId() string {
+func (r DescribePodTemplatesRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribePodsResponse struct {
+type DescribePodTemplatesResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribePodsResult `json:"result"`
+    Result DescribePodTemplatesResult `json:"result"`
 }
 
-type DescribePodsResult struct {
-    Pods []pod.Pod `json:"pods"`
+type DescribePodTemplatesResult struct {
+    PodTemplates []pod.PodTemplate `json:"podTemplates"`
     TotalCount int `json:"totalCount"`
 }

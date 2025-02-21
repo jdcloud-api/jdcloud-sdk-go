@@ -40,7 +40,7 @@ func NewPodClient(credential *core.Credential) *PodClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "pod",
-            Revision:    "2.5.1",
+            Revision:    "2.6.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -57,7 +57,7 @@ func (c *PodClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
 }
 
-/* 查询资源的配额，支持：原生容器,pod,secret,镜像缓存
+/* 查询资源的配额，支持：原生容器,pod,secret,镜像缓存,Pod模板
  */
 func (c *PodClient) DescribeQuota(request *pod.DescribeQuotaRequest) (*pod.DescribeQuotaResponse, error) {
     if request == nil {
@@ -204,6 +204,46 @@ func (c *PodClient) DisassociateElasticIp(request *pod.DisassociateElasticIpRequ
     return jdResp, err
 }
 
+/* 查询Pod模板的详细信息 */
+func (c *PodClient) DescribePodTemplate(request *pod.DescribePodTemplateRequest) (*pod.DescribePodTemplateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &pod.DescribePodTemplateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改Pod模板的配置 */
+func (c *PodClient) UpdatePodTemplate(request *pod.UpdatePodTemplateRequest) (*pod.UpdatePodTemplateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &pod.UpdatePodTemplateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 创建一个 configFile，存放文件内容（键值对）。
  */
 func (c *PodClient) CreateConfigFile(request *pod.CreateConfigFileRequest) (*pod.CreateConfigFileResponse, error) {
@@ -339,6 +379,30 @@ func (c *PodClient) ExecStart(request *pod.ExecStartRequest) (*pod.ExecStartResp
     }
 
     jdResp := &pod.ExecStartResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 校验pod模板的有效性。
+
+## 接口说明
+- 调用该接口可以校验Pod模板是否有效，例如某些关联资源（如子网、镜像等）已经被删除了。
+ */
+func (c *PodClient) VerifyPodTemplate(request *pod.VerifyPodTemplateRequest) (*pod.VerifyPodTemplateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &pod.VerifyPodTemplateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -579,6 +643,26 @@ func (c *PodClient) CreateImageCache(request *pod.CreateImageCacheRequest) (*pod
     return jdResp, err
 }
 
+/* 删除单个pod模板 */
+func (c *PodClient) DeletePodTemplate(request *pod.DeletePodTemplateRequest) (*pod.DeletePodTemplateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &pod.DeletePodTemplateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 批量创建镜像缓存。
  */
 func (c *PodClient) CreateImageCaches(request *pod.CreateImageCachesRequest) (*pod.CreateImageCachesResponse, error) {
@@ -600,6 +684,26 @@ func (c *PodClient) CreateImageCaches(request *pod.CreateImageCachesRequest) (*p
     return jdResp, err
 }
 
+/* 批量查询Pod模板。支持分页查询，默认每页20条。 */
+func (c *PodClient) DescribePodTemplates(request *pod.DescribePodTemplatesRequest) (*pod.DescribePodTemplatesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &pod.DescribePodTemplatesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 更新configFile信息
  */
 func (c *PodClient) UpdateConfigFile(request *pod.UpdateConfigFileRequest) (*pod.UpdateConfigFileResponse, error) {
@@ -612,6 +716,28 @@ func (c *PodClient) UpdateConfigFile(request *pod.UpdateConfigFileRequest) (*pod
     }
 
     jdResp := &pod.UpdateConfigFileResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 批量查询 pod 的状态信息<br>
+此接口支持分页查询，默认每页20条。
+ */
+func (c *PodClient) DescribePodsStatus(request *pod.DescribePodsStatusRequest) (*pod.DescribePodsStatusResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &pod.DescribePodsStatusResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -654,6 +780,26 @@ func (c *PodClient) DescribeInstanceTypes(request *pod.DescribeInstanceTypesRequ
     }
 
     jdResp := &pod.DescribeInstanceTypesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建Pod模板 */
+func (c *PodClient) CreatePodTemplate(request *pod.CreatePodTemplateRequest) (*pod.CreatePodTemplateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &pod.CreatePodTemplateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

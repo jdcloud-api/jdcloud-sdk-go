@@ -18,73 +18,69 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    pod "github.com/jdcloud-api/jdcloud-sdk-go/services/pod/models"
 )
 
-type DescribeQuotaRequest struct {
+type VerifyPodTemplateRequest struct {
 
     core.JDCloudRequest
 
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* resourceType - 资源类型，支持 [container, pod, secret, imageCache,podTemplate]
-  */
-    ResourceType string `json:"resourceType"`
+    /* Pod模板ID  */
+    PodTemplateId string `json:"podTemplateId"`
 }
 
 /*
  * param regionId: Region ID (Required)
- * param resourceType: resourceType - 资源类型，支持 [container, pod, secret, imageCache,podTemplate]
- (Required)
+ * param podTemplateId: Pod模板ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeQuotaRequest(
+func NewVerifyPodTemplateRequest(
     regionId string,
-    resourceType string,
-) *DescribeQuotaRequest {
+    podTemplateId string,
+) *VerifyPodTemplateRequest {
 
-	return &DescribeQuotaRequest{
+	return &VerifyPodTemplateRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/quotas",
+			URL:     "/regions/{regionId}/podTemplates/{podTemplateId}:verify",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        ResourceType: resourceType,
+        PodTemplateId: podTemplateId,
 	}
 }
 
 /*
  * param regionId: Region ID (Required)
- * param resourceType: resourceType - 资源类型，支持 [container, pod, secret, imageCache,podTemplate]
- (Required)
+ * param podTemplateId: Pod模板ID (Required)
  */
-func NewDescribeQuotaRequestWithAllParams(
+func NewVerifyPodTemplateRequestWithAllParams(
     regionId string,
-    resourceType string,
-) *DescribeQuotaRequest {
+    podTemplateId string,
+) *VerifyPodTemplateRequest {
 
-    return &DescribeQuotaRequest{
+    return &VerifyPodTemplateRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/quotas",
+            URL:     "/regions/{regionId}/podTemplates/{podTemplateId}:verify",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        ResourceType: resourceType,
+        PodTemplateId: podTemplateId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeQuotaRequestWithoutParam() *DescribeQuotaRequest {
+func NewVerifyPodTemplateRequestWithoutParam() *VerifyPodTemplateRequest {
 
-    return &DescribeQuotaRequest{
+    return &VerifyPodTemplateRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/quotas",
+            URL:     "/regions/{regionId}/podTemplates/{podTemplateId}:verify",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -93,28 +89,26 @@ func NewDescribeQuotaRequestWithoutParam() *DescribeQuotaRequest {
 }
 
 /* param regionId: Region ID(Required) */
-func (r *DescribeQuotaRequest) SetRegionId(regionId string) {
+func (r *VerifyPodTemplateRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-/* param resourceType: resourceType - 资源类型，支持 [container, pod, secret, imageCache,podTemplate]
-(Required) */
-func (r *DescribeQuotaRequest) SetResourceType(resourceType string) {
-    r.ResourceType = resourceType
+/* param podTemplateId: Pod模板ID(Required) */
+func (r *VerifyPodTemplateRequest) SetPodTemplateId(podTemplateId string) {
+    r.PodTemplateId = podTemplateId
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeQuotaRequest) GetRegionId() string {
+func (r VerifyPodTemplateRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeQuotaResponse struct {
+type VerifyPodTemplateResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeQuotaResult `json:"result"`
+    Result VerifyPodTemplateResult `json:"result"`
 }
 
-type DescribeQuotaResult struct {
-    Quota pod.Quota `json:"quota"`
+type VerifyPodTemplateResult struct {
 }
