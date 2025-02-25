@@ -22,6 +22,9 @@ type Container struct {
     /* 容器名称 (Optional) */
     Name string `json:"name"`
 
+    /* 容器类型，如果是init则为initContainer (Optional) */
+    Type string `json:"type"`
+
     /* 容器执行的命令。 (Optional) */
     Command []string `json:"command"`
 

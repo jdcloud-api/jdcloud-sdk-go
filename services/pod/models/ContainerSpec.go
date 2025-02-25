@@ -64,4 +64,7 @@ type ContainerSpec struct {
 
     /* 云盘挂载信息 (Optional) */
     VolumeMounts []VolumeMountSpec `json:"volumeMounts"`
+
+    /* 容器类型，取值 init 表示 InitContainer (Optional) */
+    Type *string `json:"type"`
 }
