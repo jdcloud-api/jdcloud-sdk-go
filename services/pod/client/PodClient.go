@@ -40,7 +40,7 @@ func NewPodClient(credential *core.Credential) *PodClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "pod",
-            Revision:    "2.6.1",
+            Revision:    "2.7.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }

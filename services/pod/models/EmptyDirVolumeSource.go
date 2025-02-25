@@ -17,20 +17,8 @@
 package models
 
 
-type Volume struct {
+type EmptyDirVolumeSource struct {
 
-    /* volume名字，在一个Pod唯一。 (Optional) */
-    Name string `json:"name"`
-
-    /* 提供给Pod的cloud disk. (Optional) */
-    JdcloudDisk JDCloudVolumeSource `json:"jdcloudDisk"`
-
-    /* 提供给Pod的CFS. (Optional) */
-    Cfs CFSVolumeSource `json:"cfs"`
-
-    /* 提供给Pod的ConfigFile. (Optional) */
-    ConfigFile ConfigFileVolumeSource `json:"configFile"`
-
-    /* EmptyDir卷源 (Optional) */
-    EmptyDir EmptyDirVolumeSource `json:"emptyDir"`
+    /* 卷大小，单位MB (Optional) */
+    SizeMB int `json:"sizeMB"`
 }

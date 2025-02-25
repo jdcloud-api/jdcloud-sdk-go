@@ -30,4 +30,7 @@ type VolumeSpec struct {
 
     /* 提供给Pod的ConfigFile. (Optional) */
     ConfigFile *ConfigFileVolumeSourceSpec `json:"configFile"`
+
+    /* 提供给Pod的EmptyDir. (Optional) */
+    EmptyDir *EmptyDirVolumeSourceSpec `json:"emptyDir"`
 }
