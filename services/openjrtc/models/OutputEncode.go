@@ -22,7 +22,7 @@ type OutputEncode struct {
     /* 混流类型：1：音频 2：视频  3：音视频 (Optional) */
     OutputKind *int `json:"outputKind"`
 
-    /* 音频采样率 (Optional) */
+    /* 混流-输出流音频采样率。取值为[48000, 44100, 32000, 24000, 16000, 8000]，单位Hz。 (Optional) */
     AudioSampleRate *int `json:"audioSampleRate"`
 
     /* 音频比特率：取值范围[8,500] (Optional) */

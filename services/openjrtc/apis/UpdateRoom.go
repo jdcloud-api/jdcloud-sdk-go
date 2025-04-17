@@ -95,16 +95,15 @@ func NewUpdateRoomRequestWithoutParam() *UpdateRoomRequest {
 func (r *UpdateRoomRequest) SetAppId(appId string) {
     r.AppId = appId
 }
-
 /* param roomId: 房间ID(Optional) */
 func (r *UpdateRoomRequest) SetRoomId(roomId int64) {
     r.RoomId = &roomId
 }
-
 /* param roomName: 房间名称(Optional) */
 func (r *UpdateRoomRequest) SetRoomName(roomName string) {
     r.RoomName = &roomName
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

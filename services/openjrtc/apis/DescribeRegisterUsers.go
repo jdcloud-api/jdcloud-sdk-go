@@ -108,17 +108,14 @@ func NewDescribeRegisterUsersRequestWithoutParam() *DescribeRegisterUsersRequest
 func (r *DescribeRegisterUsersRequest) SetAppId(appId string) {
     r.AppId = appId
 }
-
 /* param pageNumber: 页码；默认值为 1(Optional) */
 func (r *DescribeRegisterUsersRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小；默认值为 10；取值范围 [10, 100](Optional) */
 func (r *DescribeRegisterUsersRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param filters: 传参字段描述:
   startTime[eq]:   用户注册时间段开始时间-UTC时间 startTime,endTime同时有值时生效
   endTime[eq]:     用户注册时间段结束时间-UTC时间 startTime,endTime同时有值时生效
@@ -126,6 +123,7 @@ func (r *DescribeRegisterUsersRequest) SetPageSize(pageSize int) {
 func (r *DescribeRegisterUsersRequest) SetFilters(filters []openjrtc.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -117,22 +117,18 @@ func NewDescribeStreamRecordsByStreamIdRequestWithoutParam() *DescribeStreamReco
 func (r *DescribeStreamRecordsByStreamIdRequest) SetAppId(appId string) {
     r.AppId = appId
 }
-
 /* param pageNumber: 页码；默认值为 1(Optional) */
 func (r *DescribeStreamRecordsByStreamIdRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小；默认值为 10；取值范围 [10, 100](Optional) */
 func (r *DescribeStreamRecordsByStreamIdRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param streamId: 流ID(Required) */
 func (r *DescribeStreamRecordsByStreamIdRequest) SetStreamId(streamId string) {
     r.StreamId = streamId
 }
-
 /* param filters: 传参字段描述:
 - startTime[eq] 用户推流开始时间-UTC时间  startTime,endTime同时指定时生效
 - endTime[eq]   用户推流结束时间-UTC时间  startTime,endTime同时指定时生效
@@ -140,6 +136,7 @@ func (r *DescribeStreamRecordsByStreamIdRequest) SetStreamId(streamId string) {
 func (r *DescribeStreamRecordsByStreamIdRequest) SetFilters(filters []openjrtc.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

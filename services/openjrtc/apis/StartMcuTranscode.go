@@ -31,23 +31,41 @@ type StartMcuTranscodeRequest struct {
     /* 业务接入方定义的且在JRTC系统内注册过的房间号 (Optional) */
     UserRoomId *string `json:"userRoomId"`
 
-    /* 布局模板-支持参数1 (Optional) */
+    /* 布局模板 1-九宫格 2-左右屏幕分享 3-上下屏幕分享 4-画中画 (Optional) */
     LayoutTemplate *int `json:"layoutTemplate"`
 
     /* 主人员userId (Optional) */
     MainUserId *string `json:"mainUserId"`
 
+    /* 1:摄像头  2：屏幕分享 (Optional) */
+    MainVideoStreamType *int `json:"mainVideoStreamType"`
+
+    /* 是否显示音频图标 0：不显示  1:显示 (Optional) */
+    ShowAudioIcon *int `json:"showAudioIcon"`
+
+    /* 是否显示昵称  0：不显示  1:显示 (Optional) */
+    ShowNickName *int `json:"showNickName"`
+
     /* 输出类型 1：录制 2：旁路转推 (Optional) */
     OutputType *int `json:"outputType"`
 
-    /* 输出名称 (Optional) */
+    /* 输出录制文件的名称 (Optional) */
     OutputName *string `json:"outputName"`
 
-    /* 参与混流人员参数 (Optional) */
+    /* 输出录制文件的格式：mp4、flv、m3u8；为空时默认m3u8。 (Optional) */
+    OutputRecordFormat *string `json:"outputRecordFormat"`
+
+    /* 转推直播地址（outputType=2生效） (Optional) */
+    PushLiveUrl *string `json:"pushLiveUrl"`
+
+    /* 参与混流人员参数；为空时，默认使用房间参会人进行混流 (Optional) */
     McuUserInfos []openjrtc.McuUser `json:"mcuUserInfos"`
 
     /* 输出格式 (Optional) */
     OutputEncode *openjrtc.OutputEncode `json:"outputEncode"`
+
+    /* 水印信息 (Optional) */
+    WaterMarkInfo *openjrtc.WaterMarkInfo `json:"waterMarkInfo"`
 }
 
 /*
@@ -70,22 +88,34 @@ func NewStartMcuTranscodeRequest(
 /*
  * param appId: 应用ID (Optional)
  * param userRoomId: 业务接入方定义的且在JRTC系统内注册过的房间号 (Optional)
- * param layoutTemplate: 布局模板-支持参数1 (Optional)
+ * param layoutTemplate: 布局模板 1-九宫格 2-左右屏幕分享 3-上下屏幕分享 4-画中画 (Optional)
  * param mainUserId: 主人员userId (Optional)
+ * param mainVideoStreamType: 1:摄像头  2：屏幕分享 (Optional)
+ * param showAudioIcon: 是否显示音频图标 0：不显示  1:显示 (Optional)
+ * param showNickName: 是否显示昵称  0：不显示  1:显示 (Optional)
  * param outputType: 输出类型 1：录制 2：旁路转推 (Optional)
- * param outputName: 输出名称 (Optional)
- * param mcuUserInfos: 参与混流人员参数 (Optional)
+ * param outputName: 输出录制文件的名称 (Optional)
+ * param outputRecordFormat: 输出录制文件的格式：mp4、flv、m3u8；为空时默认m3u8。 (Optional)
+ * param pushLiveUrl: 转推直播地址（outputType=2生效） (Optional)
+ * param mcuUserInfos: 参与混流人员参数；为空时，默认使用房间参会人进行混流 (Optional)
  * param outputEncode: 输出格式 (Optional)
+ * param waterMarkInfo: 水印信息 (Optional)
  */
 func NewStartMcuTranscodeRequestWithAllParams(
     appId *string,
     userRoomId *string,
     layoutTemplate *int,
     mainUserId *string,
+    mainVideoStreamType *int,
+    showAudioIcon *int,
+    showNickName *int,
     outputType *int,
     outputName *string,
+    outputRecordFormat *string,
+    pushLiveUrl *string,
     mcuUserInfos []openjrtc.McuUser,
     outputEncode *openjrtc.OutputEncode,
+    waterMarkInfo *openjrtc.WaterMarkInfo,
 ) *StartMcuTranscodeRequest {
 
     return &StartMcuTranscodeRequest{
@@ -99,10 +129,16 @@ func NewStartMcuTranscodeRequestWithAllParams(
         UserRoomId: userRoomId,
         LayoutTemplate: layoutTemplate,
         MainUserId: mainUserId,
+        MainVideoStreamType: mainVideoStreamType,
+        ShowAudioIcon: showAudioIcon,
+        ShowNickName: showNickName,
         OutputType: outputType,
         OutputName: outputName,
+        OutputRecordFormat: outputRecordFormat,
+        PushLiveUrl: pushLiveUrl,
         McuUserInfos: mcuUserInfos,
         OutputEncode: outputEncode,
+        WaterMarkInfo: waterMarkInfo,
     }
 }
 
@@ -123,41 +159,59 @@ func NewStartMcuTranscodeRequestWithoutParam() *StartMcuTranscodeRequest {
 func (r *StartMcuTranscodeRequest) SetAppId(appId string) {
     r.AppId = &appId
 }
-
 /* param userRoomId: 业务接入方定义的且在JRTC系统内注册过的房间号(Optional) */
 func (r *StartMcuTranscodeRequest) SetUserRoomId(userRoomId string) {
     r.UserRoomId = &userRoomId
 }
-
-/* param layoutTemplate: 布局模板-支持参数1(Optional) */
+/* param layoutTemplate: 布局模板 1-九宫格 2-左右屏幕分享 3-上下屏幕分享 4-画中画(Optional) */
 func (r *StartMcuTranscodeRequest) SetLayoutTemplate(layoutTemplate int) {
     r.LayoutTemplate = &layoutTemplate
 }
-
 /* param mainUserId: 主人员userId(Optional) */
 func (r *StartMcuTranscodeRequest) SetMainUserId(mainUserId string) {
     r.MainUserId = &mainUserId
 }
-
+/* param mainVideoStreamType: 1:摄像头  2：屏幕分享(Optional) */
+func (r *StartMcuTranscodeRequest) SetMainVideoStreamType(mainVideoStreamType int) {
+    r.MainVideoStreamType = &mainVideoStreamType
+}
+/* param showAudioIcon: 是否显示音频图标 0：不显示  1:显示(Optional) */
+func (r *StartMcuTranscodeRequest) SetShowAudioIcon(showAudioIcon int) {
+    r.ShowAudioIcon = &showAudioIcon
+}
+/* param showNickName: 是否显示昵称  0：不显示  1:显示(Optional) */
+func (r *StartMcuTranscodeRequest) SetShowNickName(showNickName int) {
+    r.ShowNickName = &showNickName
+}
 /* param outputType: 输出类型 1：录制 2：旁路转推(Optional) */
 func (r *StartMcuTranscodeRequest) SetOutputType(outputType int) {
     r.OutputType = &outputType
 }
-
-/* param outputName: 输出名称(Optional) */
+/* param outputName: 输出录制文件的名称(Optional) */
 func (r *StartMcuTranscodeRequest) SetOutputName(outputName string) {
     r.OutputName = &outputName
 }
-
-/* param mcuUserInfos: 参与混流人员参数(Optional) */
+/* param outputRecordFormat: 输出录制文件的格式：mp4、flv、m3u8；为空时默认m3u8。(Optional) */
+func (r *StartMcuTranscodeRequest) SetOutputRecordFormat(outputRecordFormat string) {
+    r.OutputRecordFormat = &outputRecordFormat
+}
+/* param pushLiveUrl: 转推直播地址（outputType=2生效）(Optional) */
+func (r *StartMcuTranscodeRequest) SetPushLiveUrl(pushLiveUrl string) {
+    r.PushLiveUrl = &pushLiveUrl
+}
+/* param mcuUserInfos: 参与混流人员参数；为空时，默认使用房间参会人进行混流(Optional) */
 func (r *StartMcuTranscodeRequest) SetMcuUserInfos(mcuUserInfos []openjrtc.McuUser) {
     r.McuUserInfos = mcuUserInfos
 }
-
 /* param outputEncode: 输出格式(Optional) */
 func (r *StartMcuTranscodeRequest) SetOutputEncode(outputEncode *openjrtc.OutputEncode) {
     r.OutputEncode = outputEncode
 }
+/* param waterMarkInfo: 水印信息(Optional) */
+func (r *StartMcuTranscodeRequest) SetWaterMarkInfo(waterMarkInfo *openjrtc.WaterMarkInfo) {
+    r.WaterMarkInfo = waterMarkInfo
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
@@ -172,4 +226,5 @@ type StartMcuTranscodeResponse struct {
 }
 
 type StartMcuTranscodeResult struct {
+    TaskId string `json:"taskId"`
 }

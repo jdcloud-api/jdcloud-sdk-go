@@ -101,16 +101,15 @@ func NewDescribeRoomUserRequestWithoutParam() *DescribeRoomUserRequest {
 func (r *DescribeRoomUserRequest) SetAppId(appId string) {
     r.AppId = appId
 }
-
 /* param userRoomId: 业务接入方定义的且在JRTC系统内注册过的房间号(Required) */
 func (r *DescribeRoomUserRequest) SetUserRoomId(userRoomId string) {
     r.UserRoomId = userRoomId
 }
-
 /* param userId: 业务接入方用户体系定义的且在JRTC系统内注册过的userId(Required) */
 func (r *DescribeRoomUserRequest) SetUserId(userId string) {
     r.UserId = userId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

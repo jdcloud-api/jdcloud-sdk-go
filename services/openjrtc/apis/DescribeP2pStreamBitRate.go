@@ -147,46 +147,39 @@ func NewDescribeP2pStreamBitRateRequestWithoutParam() *DescribeP2pStreamBitRateR
 func (r *DescribeP2pStreamBitRateRequest) SetAppId(appId string) {
     r.AppId = appId
 }
-
 /* param userRoomId: 业务接入方定义的且在JRTC系统内注册过的用户房间号(Required) */
 func (r *DescribeP2pStreamBitRateRequest) SetUserRoomId(userRoomId string) {
     r.UserRoomId = userRoomId
 }
-
 /* param userId: 业务接入方定义的且在JRTC系统内注册过的用户id(Required) */
 func (r *DescribeP2pStreamBitRateRequest) SetUserId(userId string) {
     r.UserId = userId
 }
-
 /* param kind: audio/video(Required) */
 func (r *DescribeP2pStreamBitRateRequest) SetKind(kind string) {
     r.Kind = kind
 }
-
 /* param type_: producer 发布流 consumer 订阅流(Required) */
 func (r *DescribeP2pStreamBitRateRequest) SetType(type_ string) {
     r.Type = type_
 }
-
 /* param joinTime: 加入时间 UTC格式(Required) */
 func (r *DescribeP2pStreamBitRateRequest) SetJoinTime(joinTime string) {
     r.JoinTime = joinTime
 }
-
 /* param leaveTime: 离开时间 UTC格式(Optional) */
 func (r *DescribeP2pStreamBitRateRequest) SetLeaveTime(leaveTime string) {
     r.LeaveTime = &leaveTime
 }
-
 /* param fromUserId: 业务接入方定义的且在JRTC系统内注册过的用户id type=consumer时选择发送端用户id切换码率(Optional) */
 func (r *DescribeP2pStreamBitRateRequest) SetFromUserId(fromUserId string) {
     r.FromUserId = &fromUserId
 }
-
 /* param period: 粒度 支持 1m 1h 1d(Optional) */
 func (r *DescribeP2pStreamBitRateRequest) SetPeriod(period string) {
     r.Period = &period
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

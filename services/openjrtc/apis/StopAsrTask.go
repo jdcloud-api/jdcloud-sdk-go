@@ -30,7 +30,7 @@ type StopAsrTaskRequest struct {
     /* 业务接入方定义的且在JRTC系统内注册过的房间号 (Optional) */
     UserRoomId *string `json:"userRoomId"`
 
-    /* 语音识别场景 0-全部识别转文字 (Optional) */
+    /* 语音任务类型 0-转写 1-翻译 (Optional) */
     AsrTaskType *int `json:"asrTaskType"`
 }
 
@@ -54,7 +54,7 @@ func NewStopAsrTaskRequest(
 /*
  * param appId: 应用ID (Optional)
  * param userRoomId: 业务接入方定义的且在JRTC系统内注册过的房间号 (Optional)
- * param asrTaskType: 语音识别场景 0-全部识别转文字 (Optional)
+ * param asrTaskType: 语音任务类型 0-转写 1-翻译 (Optional)
  */
 func NewStopAsrTaskRequestWithAllParams(
     appId *string,
@@ -92,16 +92,15 @@ func NewStopAsrTaskRequestWithoutParam() *StopAsrTaskRequest {
 func (r *StopAsrTaskRequest) SetAppId(appId string) {
     r.AppId = &appId
 }
-
 /* param userRoomId: 业务接入方定义的且在JRTC系统内注册过的房间号(Optional) */
 func (r *StopAsrTaskRequest) SetUserRoomId(userRoomId string) {
     r.UserRoomId = &userRoomId
 }
-
-/* param asrTaskType: 语音识别场景 0-全部识别转文字(Optional) */
+/* param asrTaskType: 语音任务类型 0-转写 1-翻译(Optional) */
 func (r *StopAsrTaskRequest) SetAsrTaskType(asrTaskType int) {
     r.AsrTaskType = &asrTaskType
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -25,6 +25,15 @@ type StartAsrTask struct {
     /* 业务接入方定义的且在JRTC系统内注册过的房间号 (Optional) */
     UserRoomId string `json:"userRoomId"`
 
-    /* 语音识别场景 0-全部识别转文字 (Optional) */
+    /* 语音任务类型 0-转写 1-翻译； asrTaskType =0 Subtitle不生效；asrTaskType =1 Subtitle.enableTranslate=true(转写+翻译)Subtitle.enableTranslate=false(只转写) (Optional) */
     AsrTaskType int `json:"asrTaskType"`
+
+    /* ai模型 (Optional) */
+    AiModel string `json:"aiModel"`
+
+    /* 附加参数 (Optional) */
+    ExtInfo string `json:"extInfo"`
+
+    /* 字幕配置 (Optional) */
+    Subtitle Subtitle `json:"subtitle"`
 }

@@ -84,6 +84,7 @@ func (r *DescribeAppRequest) SetAppId(appId string) {
     r.AppId = appId
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r DescribeAppRequest) GetRegionId() string {

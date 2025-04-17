@@ -119,22 +119,18 @@ func NewDescribeRoomUsersRequestWithoutParam() *DescribeRoomUsersRequest {
 func (r *DescribeRoomUsersRequest) SetAppId(appId string) {
     r.AppId = appId
 }
-
 /* param pageNumber: 页码；默认值为 1(Optional) */
 func (r *DescribeRoomUsersRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小；默认值为 10；取值范围 [10, 100](Optional) */
 func (r *DescribeRoomUsersRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param userRoomId: 业务接入方定义的且在JRTC系统内注册过的房间号(Required) */
 func (r *DescribeRoomUsersRequest) SetUserRoomId(userRoomId string) {
     r.UserRoomId = userRoomId
 }
-
 /* param filters: 传参字段描述:
 - status[eq] 在线状态 1-在线 2-离线
 - startTime[eq] 用户加入时间段开始时间-UTC时间 startTime,endTime同时有值时生效
@@ -143,6 +139,7 @@ func (r *DescribeRoomUsersRequest) SetUserRoomId(userRoomId string) {
 func (r *DescribeRoomUsersRequest) SetFilters(filters []openjrtc.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

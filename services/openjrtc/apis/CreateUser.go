@@ -33,6 +33,9 @@ type CreateUserRequest struct {
     /* 业务接入方的用户ID (Optional) */
     UserId *string `json:"userId"`
 
+    /* 用户头像url (Optional) */
+    PortraitUrl *string `json:"portraitUrl"`
+
     /* 是否临时用户 (Optional) */
     Temporary *bool `json:"temporary"`
 }
@@ -58,12 +61,14 @@ func NewCreateUserRequest(
  * param appId: 应用ID (Optional)
  * param userName: 用户名称 (Optional)
  * param userId: 业务接入方的用户ID (Optional)
+ * param portraitUrl: 用户头像url (Optional)
  * param temporary: 是否临时用户 (Optional)
  */
 func NewCreateUserRequestWithAllParams(
     appId *string,
     userName *string,
     userId *string,
+    portraitUrl *string,
     temporary *bool,
 ) *CreateUserRequest {
 
@@ -77,6 +82,7 @@ func NewCreateUserRequestWithAllParams(
         AppId: appId,
         UserName: userName,
         UserId: userId,
+        PortraitUrl: portraitUrl,
         Temporary: temporary,
     }
 }
@@ -98,21 +104,23 @@ func NewCreateUserRequestWithoutParam() *CreateUserRequest {
 func (r *CreateUserRequest) SetAppId(appId string) {
     r.AppId = &appId
 }
-
 /* param userName: 用户名称(Optional) */
 func (r *CreateUserRequest) SetUserName(userName string) {
     r.UserName = &userName
 }
-
 /* param userId: 业务接入方的用户ID(Optional) */
 func (r *CreateUserRequest) SetUserId(userId string) {
     r.UserId = &userId
 }
-
+/* param portraitUrl: 用户头像url(Optional) */
+func (r *CreateUserRequest) SetPortraitUrl(portraitUrl string) {
+    r.PortraitUrl = &portraitUrl
+}
 /* param temporary: 是否临时用户(Optional) */
 func (r *CreateUserRequest) SetTemporary(temporary bool) {
     r.Temporary = &temporary
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

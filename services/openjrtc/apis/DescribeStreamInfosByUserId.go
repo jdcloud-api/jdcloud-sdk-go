@@ -102,16 +102,15 @@ func NewDescribeStreamInfosByUserIdRequestWithoutParam() *DescribeStreamInfosByU
 func (r *DescribeStreamInfosByUserIdRequest) SetAppId(appId string) {
     r.AppId = appId
 }
-
 /* param userRoomId: 业务接入方定义的且在JRTC系统内注册过的房间号(Required) */
 func (r *DescribeStreamInfosByUserIdRequest) SetUserRoomId(userRoomId string) {
     r.UserRoomId = userRoomId
 }
-
 /* param userId: 业务接入方用户体系定义的且在JRTC系统内注册过的userId(Required) */
 func (r *DescribeStreamInfosByUserIdRequest) SetUserId(userId string) {
     r.UserId = userId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

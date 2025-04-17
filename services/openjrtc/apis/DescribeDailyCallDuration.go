@@ -71,6 +71,8 @@ func NewDescribeDailyCallDurationRequestWithoutParam() *DescribeDailyCallDuratio
     }
 }
 
+
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r DescribeDailyCallDurationRequest) GetRegionId() string {

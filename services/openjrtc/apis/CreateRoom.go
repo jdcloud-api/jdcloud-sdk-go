@@ -104,26 +104,23 @@ func NewCreateRoomRequestWithoutParam() *CreateRoomRequest {
 func (r *CreateRoomRequest) SetRoomName(roomName string) {
     r.RoomName = &roomName
 }
-
 /* param appId: 应用ID(Optional) */
 func (r *CreateRoomRequest) SetAppId(appId string) {
     r.AppId = &appId
 }
-
 /* param roomType: 房间类型 1-小房间(音频单流订阅) 2-大房间(音频固定订阅)(Optional) */
 func (r *CreateRoomRequest) SetRoomType(roomType int) {
     r.RoomType = &roomType
 }
-
 /* param meetingType: 会议类型 0-即时会议 1-预约会议(Optional) */
 func (r *CreateRoomRequest) SetMeetingType(meetingType int) {
     r.MeetingType = &meetingType
 }
-
 /* param peerId: 用户ID(创建者ID)(Optional) */
 func (r *CreateRoomRequest) SetPeerId(peerId int64) {
     r.PeerId = &peerId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

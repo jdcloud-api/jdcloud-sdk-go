@@ -84,6 +84,7 @@ func (r *DescribeUserByPeerRequest) SetPeerId(peerId int) {
     r.PeerId = peerId
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r DescribeUserByPeerRequest) GetRegionId() string {

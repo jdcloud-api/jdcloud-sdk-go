@@ -28,6 +28,9 @@ type CreateUserRequestObj struct {
     /* 业务接入方的用户ID (Optional) */
     UserId string `json:"userId"`
 
+    /* 用户头像url (Optional) */
+    PortraitUrl string `json:"portraitUrl"`
+
     /* 是否临时用户 (Optional) */
     Temporary bool `json:"temporary"`
 }

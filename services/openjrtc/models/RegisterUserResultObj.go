@@ -22,7 +22,7 @@ type RegisterUserResultObj struct {
     /* 应用ID (Optional) */
     AppId string `json:"appId"`
 
-    /* 业务接入方的用户ID (Optional) */
+    /* 业务接入方用户体系定义的userId (Optional) */
     UserId string `json:"userId"`
 
     /* jrtc系统用户ID (Optional) */

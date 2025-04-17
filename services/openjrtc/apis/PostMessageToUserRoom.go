@@ -98,21 +98,19 @@ func NewPostMessageToUserRoomRequestWithoutParam() *PostMessageToUserRoomRequest
 func (r *PostMessageToUserRoomRequest) SetAppId(appId string) {
     r.AppId = &appId
 }
-
 /* param userRoomId: 业务接入方定义的且在JRTC系统内注册过的房间号(Optional) */
 func (r *PostMessageToUserRoomRequest) SetUserRoomId(userRoomId string) {
     r.UserRoomId = &userRoomId
 }
-
 /* param eventName: 事件名称(Optional) */
 func (r *PostMessageToUserRoomRequest) SetEventName(eventName string) {
     r.EventName = &eventName
 }
-
 /* param message: 自定义信令消息(Optional) */
 func (r *PostMessageToUserRoomRequest) SetMessage(message string) {
     r.Message = &message
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

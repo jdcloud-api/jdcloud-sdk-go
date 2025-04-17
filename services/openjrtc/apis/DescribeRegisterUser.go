@@ -92,11 +92,11 @@ func NewDescribeRegisterUserRequestWithoutParam() *DescribeRegisterUserRequest {
 func (r *DescribeRegisterUserRequest) SetAppId(appId string) {
     r.AppId = appId
 }
-
 /* param userId: 业务接入方用户体系定义的且在JRTC系统内注册过的userId(Required) */
 func (r *DescribeRegisterUserRequest) SetUserId(userId string) {
     r.UserId = userId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

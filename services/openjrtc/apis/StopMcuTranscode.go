@@ -29,6 +29,9 @@ type StopMcuTranscodeRequest struct {
 
     /* 业务接入方定义的且在JRTC系统内注册过的房间号 (Optional) */
     UserRoomId *string `json:"userRoomId"`
+
+    /* 混流任务ID (Optional) */
+    TaskId *string `json:"taskId"`
 }
 
 /*
@@ -51,10 +54,12 @@ func NewStopMcuTranscodeRequest(
 /*
  * param appId: 应用ID (Optional)
  * param userRoomId: 业务接入方定义的且在JRTC系统内注册过的房间号 (Optional)
+ * param taskId: 混流任务ID (Optional)
  */
 func NewStopMcuTranscodeRequestWithAllParams(
     appId *string,
     userRoomId *string,
+    taskId *string,
 ) *StopMcuTranscodeRequest {
 
     return &StopMcuTranscodeRequest{
@@ -66,6 +71,7 @@ func NewStopMcuTranscodeRequestWithAllParams(
         },
         AppId: appId,
         UserRoomId: userRoomId,
+        TaskId: taskId,
     }
 }
 
@@ -86,11 +92,15 @@ func NewStopMcuTranscodeRequestWithoutParam() *StopMcuTranscodeRequest {
 func (r *StopMcuTranscodeRequest) SetAppId(appId string) {
     r.AppId = &appId
 }
-
 /* param userRoomId: 业务接入方定义的且在JRTC系统内注册过的房间号(Optional) */
 func (r *StopMcuTranscodeRequest) SetUserRoomId(userRoomId string) {
     r.UserRoomId = &userRoomId
 }
+/* param taskId: 混流任务ID(Optional) */
+func (r *StopMcuTranscodeRequest) SetTaskId(taskId string) {
+    r.TaskId = &taskId
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -98,16 +98,15 @@ func NewRemoveRoomUserRequestWithoutParam() *RemoveRoomUserRequest {
 func (r *RemoveRoomUserRequest) SetAppId(appId string) {
     r.AppId = appId
 }
-
 /* param roomId: 房间ID(Required) */
 func (r *RemoveRoomUserRequest) SetRoomId(roomId int) {
     r.RoomId = roomId
 }
-
 /* param peerIds: peerId列表,最多支持20个peerId(Optional) */
 func (r *RemoveRoomUserRequest) SetPeerIds(peerIds []int64) {
     r.PeerIds = peerIds
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

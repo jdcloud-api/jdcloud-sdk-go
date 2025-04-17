@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    openjrtc "github.com/jdcloud-api/jdcloud-sdk-go/services/openjrtc/models"
 )
 
 type StartAsrTaskRequest struct {
@@ -30,8 +31,17 @@ type StartAsrTaskRequest struct {
     /* 业务接入方定义的且在JRTC系统内注册过的房间号 (Optional) */
     UserRoomId *string `json:"userRoomId"`
 
-    /* 语音识别场景 0-全部识别转文字 (Optional) */
+    /* 语音任务类型 0-转写 1-翻译； asrTaskType =0 Subtitle不生效；asrTaskType =1 Subtitle.enableTranslate=true(转写+翻译)Subtitle.enableTranslate=false(只转写) (Optional) */
     AsrTaskType *int `json:"asrTaskType"`
+
+    /* ai模型 (Optional) */
+    AiModel *string `json:"aiModel"`
+
+    /* 附加参数 (Optional) */
+    ExtInfo *string `json:"extInfo"`
+
+    /* 字幕配置 (Optional) */
+    Subtitle *openjrtc.Subtitle `json:"subtitle"`
 }
 
 /*
@@ -54,12 +64,18 @@ func NewStartAsrTaskRequest(
 /*
  * param appId: 应用ID (Optional)
  * param userRoomId: 业务接入方定义的且在JRTC系统内注册过的房间号 (Optional)
- * param asrTaskType: 语音识别场景 0-全部识别转文字 (Optional)
+ * param asrTaskType: 语音任务类型 0-转写 1-翻译； asrTaskType =0 Subtitle不生效；asrTaskType =1 Subtitle.enableTranslate=true(转写+翻译)Subtitle.enableTranslate=false(只转写) (Optional)
+ * param aiModel: ai模型 (Optional)
+ * param extInfo: 附加参数 (Optional)
+ * param subtitle: 字幕配置 (Optional)
  */
 func NewStartAsrTaskRequestWithAllParams(
     appId *string,
     userRoomId *string,
     asrTaskType *int,
+    aiModel *string,
+    extInfo *string,
+    subtitle *openjrtc.Subtitle,
 ) *StartAsrTaskRequest {
 
     return &StartAsrTaskRequest{
@@ -72,6 +88,9 @@ func NewStartAsrTaskRequestWithAllParams(
         AppId: appId,
         UserRoomId: userRoomId,
         AsrTaskType: asrTaskType,
+        AiModel: aiModel,
+        ExtInfo: extInfo,
+        Subtitle: subtitle,
     }
 }
 
@@ -92,16 +111,27 @@ func NewStartAsrTaskRequestWithoutParam() *StartAsrTaskRequest {
 func (r *StartAsrTaskRequest) SetAppId(appId string) {
     r.AppId = &appId
 }
-
 /* param userRoomId: 业务接入方定义的且在JRTC系统内注册过的房间号(Optional) */
 func (r *StartAsrTaskRequest) SetUserRoomId(userRoomId string) {
     r.UserRoomId = &userRoomId
 }
-
-/* param asrTaskType: 语音识别场景 0-全部识别转文字(Optional) */
+/* param asrTaskType: 语音任务类型 0-转写 1-翻译； asrTaskType =0 Subtitle不生效；asrTaskType =1 Subtitle.enableTranslate=true(转写+翻译)Subtitle.enableTranslate=false(只转写)(Optional) */
 func (r *StartAsrTaskRequest) SetAsrTaskType(asrTaskType int) {
     r.AsrTaskType = &asrTaskType
 }
+/* param aiModel: ai模型(Optional) */
+func (r *StartAsrTaskRequest) SetAiModel(aiModel string) {
+    r.AiModel = &aiModel
+}
+/* param extInfo: 附加参数(Optional) */
+func (r *StartAsrTaskRequest) SetExtInfo(extInfo string) {
+    r.ExtInfo = &extInfo
+}
+/* param subtitle: 字幕配置(Optional) */
+func (r *StartAsrTaskRequest) SetSubtitle(subtitle *openjrtc.Subtitle) {
+    r.Subtitle = subtitle
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
@@ -116,4 +146,8 @@ type StartAsrTaskResponse struct {
 }
 
 type StartAsrTaskResult struct {
+    AppId string `json:"appId"`
+    UserRoomId string `json:"userRoomId"`
+    AsrTaskType int `json:"asrTaskType"`
+    RoomType int `json:"roomType"`
 }

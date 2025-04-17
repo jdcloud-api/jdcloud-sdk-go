@@ -101,21 +101,19 @@ func NewUpdateUserRoomRequestWithoutParam() *UpdateUserRoomRequest {
 func (r *UpdateUserRoomRequest) SetAppId(appId string) {
     r.AppId = appId
 }
-
 /* param userRoomId: 用户房间号(Optional) */
 func (r *UpdateUserRoomRequest) SetUserRoomId(userRoomId string) {
     r.UserRoomId = &userRoomId
 }
-
 /* param roomName: 房间名称(Optional) */
 func (r *UpdateUserRoomRequest) SetRoomName(roomName string) {
     r.RoomName = &roomName
 }
-
 /* param roomType: 房间类型 1-小房间；2-大房间(Optional) */
 func (r *UpdateUserRoomRequest) SetRoomType(roomType int) {
     r.RoomType = &roomType
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

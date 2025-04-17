@@ -19,21 +19,18 @@ package models
 
 type CallDurationByCodeRate struct {
 
-    /* 应用ID (Optional) */
-    AppId string `json:"appId"`
-
     /* 时间戳毫秒 (Optional) */
     Date int64 `json:"date"`
 
-    /* 音频通讯时长-second (Optional) */
+    /* 音频通讯时长-分钟 (Optional) */
     Audio int64 `json:"audio"`
 
-    /* (0,480p]通讯时长-second (Optional) */
+    /* (0,480p]通讯时长-分钟 (Optional) */
     Lte_480 int64 `json:"lte_480"`
 
-    /* (480p,720p]通讯时长-second (Optional) */
+    /* (480p,720p]通讯时长-分钟 (Optional) */
     Gt_480_lte_720 int64 `json:"gt_480_lte_720"`
 
-    /* (720p,1080p]通讯时长-second (Optional) */
+    /* (720p,1080p]通讯时长-分钟 (Optional) */
     Gte_720 int64 `json:"gte_720"`
 }

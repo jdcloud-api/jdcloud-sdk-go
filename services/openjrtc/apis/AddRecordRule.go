@@ -87,11 +87,11 @@ func NewAddRecordRuleRequestWithoutParam() *AddRecordRuleRequest {
 func (r *AddRecordRuleRequest) SetAppId(appId string) {
     r.AppId = &appId
 }
-
 /* param rules: 录制规则(Optional) */
 func (r *AddRecordRuleRequest) SetRules(rules []openjrtc.RecordRule) {
     r.Rules = rules
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

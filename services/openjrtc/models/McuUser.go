@@ -21,4 +21,16 @@ type McuUser struct {
 
     /* 业务接入方用户体系定义的且在JRTC系统内注册过的userId (Optional) */
     UserId *string `json:"userId"`
+
+    /* 昵称 (Optional) */
+    NickName *string `json:"nickName"`
+
+    /* 占位图URL (Optional) */
+    PlaceImageUrl *string `json:"placeImageUrl"`
+
+    /* 角色名称 (Optional) */
+    RoleName *string `json:"roleName"`
+
+    /* 是否严格保持数组顺序  0：不保持  1：保持 (Optional) */
+    KeepOrder *int `json:"keepOrder"`
 }

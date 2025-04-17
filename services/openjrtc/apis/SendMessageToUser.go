@@ -110,26 +110,23 @@ func NewSendMessageToUserRequestWithoutParam() *SendMessageToUserRequest {
 func (r *SendMessageToUserRequest) SetAppId(appId string) {
     r.AppId = appId
 }
-
 /* param roomId: 房间ID(Required) */
 func (r *SendMessageToUserRequest) SetRoomId(roomId int) {
     r.RoomId = roomId
 }
-
 /* param eventName: 事件名称(Optional) */
 func (r *SendMessageToUserRequest) SetEventName(eventName string) {
     r.EventName = &eventName
 }
-
 /* param message: 自定义信令消息(Optional) */
 func (r *SendMessageToUserRequest) SetMessage(message string) {
     r.Message = &message
 }
-
 /* param peerId: peerId(Optional) */
 func (r *SendMessageToUserRequest) SetPeerId(peerId int64) {
     r.PeerId = &peerId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

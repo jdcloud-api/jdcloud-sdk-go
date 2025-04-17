@@ -98,21 +98,19 @@ func NewRegisterUserRoomRequestWithoutParam() *RegisterUserRoomRequest {
 func (r *RegisterUserRoomRequest) SetUserRoomId(userRoomId string) {
     r.UserRoomId = &userRoomId
 }
-
 /* param roomName: 房间名称(Optional) */
 func (r *RegisterUserRoomRequest) SetRoomName(roomName string) {
     r.RoomName = &roomName
 }
-
 /* param appId: 应用ID(Optional) */
 func (r *RegisterUserRoomRequest) SetAppId(appId string) {
     r.AppId = &appId
 }
-
 /* param roomType: 房间类型 1-小房间(音频单流订阅) 2-大房间(音频固定订阅),默认取控制台APP对应的房间类型(Optional) */
 func (r *RegisterUserRoomRequest) SetRoomType(roomType int) {
     r.RoomType = &roomType
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
