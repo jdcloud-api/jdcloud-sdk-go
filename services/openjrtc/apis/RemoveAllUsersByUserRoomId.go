@@ -89,11 +89,11 @@ func NewRemoveAllUsersByUserRoomIdRequestWithoutParam() *RemoveAllUsersByUserRoo
 func (r *RemoveAllUsersByUserRoomIdRequest) SetAppId(appId string) {
     r.AppId = appId
 }
-
 /* param userRoomId: 业务接入方定义的且在JRTC系统内注册过的房间号(Optional) */
 func (r *RemoveAllUsersByUserRoomIdRequest) SetUserRoomId(userRoomId string) {
     r.UserRoomId = &userRoomId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

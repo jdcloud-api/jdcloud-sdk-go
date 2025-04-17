@@ -92,11 +92,11 @@ func NewDeleteRoomRequestWithoutParam() *DeleteRoomRequest {
 func (r *DeleteRoomRequest) SetAppId(appId string) {
     r.AppId = appId
 }
-
 /* param roomId: 房间ID(Required) */
 func (r *DeleteRoomRequest) SetRoomId(roomId int) {
     r.RoomId = roomId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

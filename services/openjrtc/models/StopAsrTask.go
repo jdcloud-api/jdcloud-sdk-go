@@ -25,6 +25,6 @@ type StopAsrTask struct {
     /* 业务接入方定义的且在JRTC系统内注册过的房间号 (Optional) */
     UserRoomId string `json:"userRoomId"`
 
-    /* 语音识别场景 0-全部识别转文字 (Optional) */
+    /* 语音任务类型 0-转写 1-翻译 (Optional) */
     AsrTaskType int `json:"asrTaskType"`
 }

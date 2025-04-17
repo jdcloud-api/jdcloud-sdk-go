@@ -97,18 +97,17 @@ func NewDescribeRoomsRequestWithoutParam() *DescribeRoomsRequest {
 func (r *DescribeRoomsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小；默认值为 10；取值范围 [10, 100](Optional) */
 func (r *DescribeRoomsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param filters: 传参字段描述:
   appId:   应用ID
 (Optional) */
 func (r *DescribeRoomsRequest) SetFilters(filters []openjrtc.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

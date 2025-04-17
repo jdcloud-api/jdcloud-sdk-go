@@ -25,21 +25,39 @@ type StartMcuTranscode struct {
     /* 业务接入方定义的且在JRTC系统内注册过的房间号 (Optional) */
     UserRoomId string `json:"userRoomId"`
 
-    /* 布局模板-支持参数1 (Optional) */
+    /* 布局模板 1-九宫格 2-左右屏幕分享 3-上下屏幕分享 4-画中画 (Optional) */
     LayoutTemplate int `json:"layoutTemplate"`
 
     /* 主人员userId (Optional) */
     MainUserId string `json:"mainUserId"`
 
+    /* 1:摄像头  2：屏幕分享 (Optional) */
+    MainVideoStreamType int `json:"mainVideoStreamType"`
+
+    /* 是否显示音频图标 0：不显示  1:显示 (Optional) */
+    ShowAudioIcon int `json:"showAudioIcon"`
+
+    /* 是否显示昵称  0：不显示  1:显示 (Optional) */
+    ShowNickName int `json:"showNickName"`
+
     /* 输出类型 1：录制 2：旁路转推 (Optional) */
     OutputType int `json:"outputType"`
 
-    /* 输出名称 (Optional) */
+    /* 输出录制文件的名称 (Optional) */
     OutputName string `json:"outputName"`
 
-    /* 参与混流人员参数 (Optional) */
+    /* 输出录制文件的格式：mp4、flv、m3u8；为空时默认m3u8。 (Optional) */
+    OutputRecordFormat string `json:"outputRecordFormat"`
+
+    /* 转推直播地址（outputType=2生效） (Optional) */
+    PushLiveUrl string `json:"pushLiveUrl"`
+
+    /* 参与混流人员参数；为空时，默认使用房间参会人进行混流 (Optional) */
     McuUserInfos []McuUser `json:"mcuUserInfos"`
 
     /* 输出格式 (Optional) */
     OutputEncode OutputEncode `json:"outputEncode"`
+
+    /* 水印信息 (Optional) */
+    WaterMarkInfo WaterMarkInfo `json:"waterMarkInfo"`
 }

@@ -92,11 +92,11 @@ func NewDescribeRoomInfoRequestWithoutParam() *DescribeRoomInfoRequest {
 func (r *DescribeRoomInfoRequest) SetAppId(appId string) {
     r.AppId = appId
 }
-
 /* param roomId: 房间ID(Required) */
 func (r *DescribeRoomInfoRequest) SetRoomId(roomId int) {
     r.RoomId = roomId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -104,26 +104,23 @@ func NewCreateTokenRequestWithoutParam() *CreateTokenRequest {
 func (r *CreateTokenRequest) SetAppId(appId string) {
     r.AppId = &appId
 }
-
 /* param appKey: appKey(Optional) */
 func (r *CreateTokenRequest) SetAppKey(appKey string) {
     r.AppKey = &appKey
 }
-
 /* param userId: 用户id(Optional) */
 func (r *CreateTokenRequest) SetUserId(userId string) {
     r.UserId = &userId
 }
-
 /* param userRoomId: 业务接入方定义的且在JRTC系统内注册过的房间号(Optional) */
 func (r *CreateTokenRequest) SetUserRoomId(userRoomId string) {
     r.UserRoomId = &userRoomId
 }
-
 /* param timestamp: 时间戳-毫秒(Optional) */
 func (r *CreateTokenRequest) SetTimestamp(timestamp int64) {
     r.Timestamp = &timestamp
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

@@ -87,11 +87,11 @@ func NewAddPushStreamRuleRequestWithoutParam() *AddPushStreamRuleRequest {
 func (r *AddPushStreamRuleRequest) SetAppId(appId string) {
     r.AppId = &appId
 }
-
 /* param rules: 推流规则(Optional) */
 func (r *AddPushStreamRuleRequest) SetRules(rules []openjrtc.PushStreamRule) {
     r.Rules = rules
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

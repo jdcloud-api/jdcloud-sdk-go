@@ -87,11 +87,11 @@ func NewDescribeAppsRequestWithoutParam() *DescribeAppsRequest {
 func (r *DescribeAppsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小；默认值为 10；取值范围 [10, 100](Optional) */
 func (r *DescribeAppsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

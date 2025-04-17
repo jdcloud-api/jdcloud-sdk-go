@@ -31,17 +31,19 @@ type DescribeCallDurationByCodeRateRequest struct {
     /* 开始时间 UTC格式  */
     StartTime string `json:"startTime"`
 
-    /* 结束时间 UTC格式 (Optional) */
-    EndTime *string `json:"endTime"`
+    /* 结束时间 UTC格式  */
+    EndTime string `json:"endTime"`
 }
 
 /*
  * param startTime: 开始时间 UTC格式 (Required)
+ * param endTime: 结束时间 UTC格式 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeCallDurationByCodeRateRequest(
     startTime string,
+    endTime string,
 ) *DescribeCallDurationByCodeRateRequest {
 
 	return &DescribeCallDurationByCodeRateRequest{
@@ -52,18 +54,19 @@ func NewDescribeCallDurationByCodeRateRequest(
 			Version: "v1",
 		},
         StartTime: startTime,
+        EndTime: endTime,
 	}
 }
 
 /*
  * param appId: 应用ID (Optional)
  * param startTime: 开始时间 UTC格式 (Required)
- * param endTime: 结束时间 UTC格式 (Optional)
+ * param endTime: 结束时间 UTC格式 (Required)
  */
 func NewDescribeCallDurationByCodeRateRequestWithAllParams(
     appId *string,
     startTime string,
-    endTime *string,
+    endTime string,
 ) *DescribeCallDurationByCodeRateRequest {
 
     return &DescribeCallDurationByCodeRateRequest{
@@ -96,16 +99,15 @@ func NewDescribeCallDurationByCodeRateRequestWithoutParam() *DescribeCallDuratio
 func (r *DescribeCallDurationByCodeRateRequest) SetAppId(appId string) {
     r.AppId = &appId
 }
-
 /* param startTime: 开始时间 UTC格式(Required) */
 func (r *DescribeCallDurationByCodeRateRequest) SetStartTime(startTime string) {
     r.StartTime = startTime
 }
-
-/* param endTime: 结束时间 UTC格式(Optional) */
+/* param endTime: 结束时间 UTC格式(Required) */
 func (r *DescribeCallDurationByCodeRateRequest) SetEndTime(endTime string) {
-    r.EndTime = &endTime
+    r.EndTime = endTime
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

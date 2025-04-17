@@ -111,12 +111,10 @@ func NewDescribeOnlineUserNumRequestWithoutParam() *DescribeOnlineUserNumRequest
 func (r *DescribeOnlineUserNumRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小；默认值为 10；取值范围 [10, 100](Optional) */
 func (r *DescribeOnlineUserNumRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param filters: 传参字段描述:
   appId:   应用ID (必填)
   userRoomId：业务接入方定义的且在JRTC系统内注册过的房间号(必填)
@@ -126,6 +124,7 @@ func (r *DescribeOnlineUserNumRequest) SetPageSize(pageSize int) {
 func (r *DescribeOnlineUserNumRequest) SetFilters(filters []openjrtc.Filter) {
     r.Filters = filters
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

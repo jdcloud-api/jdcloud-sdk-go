@@ -92,11 +92,11 @@ func NewDescribeStreamInfoByStreamIdRequestWithoutParam() *DescribeStreamInfoByS
 func (r *DescribeStreamInfoByStreamIdRequest) SetAppId(appId string) {
     r.AppId = appId
 }
-
 /* param streamId: 流ID(Required) */
 func (r *DescribeStreamInfoByStreamIdRequest) SetStreamId(streamId string) {
     r.StreamId = streamId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

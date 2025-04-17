@@ -101,21 +101,19 @@ func NewCloseRoomUserStreamRequestWithoutParam() *CloseRoomUserStreamRequest {
 func (r *CloseRoomUserStreamRequest) SetAppId(appId string) {
     r.AppId = appId
 }
-
 /* param userRoomId: 业务接入方定义的且在JRTC系统内注册过的房间号(Optional) */
 func (r *CloseRoomUserStreamRequest) SetUserRoomId(userRoomId string) {
     r.UserRoomId = &userRoomId
 }
-
 /* param userId: 业务接入方用户体系定义的且在JRTC系统内注册过的userId(Optional) */
 func (r *CloseRoomUserStreamRequest) SetUserId(userId string) {
     r.UserId = &userId
 }
-
 /* param streamId: 要关闭的流ID(Optional) */
 func (r *CloseRoomUserStreamRequest) SetStreamId(streamId string) {
     r.StreamId = &streamId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

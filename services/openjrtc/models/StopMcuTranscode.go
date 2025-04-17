@@ -24,4 +24,7 @@ type StopMcuTranscode struct {
 
     /* 业务接入方定义的且在JRTC系统内注册过的房间号 (Optional) */
     UserRoomId string `json:"userRoomId"`
+
+    /* 混流任务ID (Optional) */
+    TaskId string `json:"taskId"`
 }

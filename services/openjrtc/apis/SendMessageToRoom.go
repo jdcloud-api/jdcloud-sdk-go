@@ -104,21 +104,19 @@ func NewSendMessageToRoomRequestWithoutParam() *SendMessageToRoomRequest {
 func (r *SendMessageToRoomRequest) SetAppId(appId string) {
     r.AppId = appId
 }
-
 /* param roomId: 房间ID(Required) */
 func (r *SendMessageToRoomRequest) SetRoomId(roomId int) {
     r.RoomId = roomId
 }
-
 /* param eventName: 事件名称(Optional) */
 func (r *SendMessageToRoomRequest) SetEventName(eventName string) {
     r.EventName = &eventName
 }
-
 /* param message: 自定义信令消息(Optional) */
 func (r *SendMessageToRoomRequest) SetMessage(message string) {
     r.Message = &message
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

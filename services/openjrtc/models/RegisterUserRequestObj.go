@@ -28,6 +28,9 @@ type RegisterUserRequestObj struct {
     /* 业务接入方用户体系定义的userId (Optional) */
     UserId string `json:"userId"`
 
+    /* 用户头像url (Optional) */
+    PortraitUrl string `json:"portraitUrl"`
+
     /* 是否临时用户 (Optional) */
     Temporary bool `json:"temporary"`
 }
