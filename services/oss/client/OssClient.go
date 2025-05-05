@@ -137,3 +137,8 @@ func (c *OssClient) PutBucket(request *oss.PutBucketRequest) (*oss.PutBucketResp
     return jdResp, err
 }
 
+/* 关闭日志输出
+ */
+func (c *OssClient) DisableLogger() {
+    c.Logger = core.NewDummyLogger()
+}
