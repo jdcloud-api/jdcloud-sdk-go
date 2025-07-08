@@ -40,7 +40,7 @@ func NewCloudauthClient(credential *core.Credential) *CloudauthClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "cloudauth",
-            Revision:    "1.0.16",
+            Revision:    "1.0.17",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -55,6 +55,26 @@ func (c *CloudauthClient) SetLogger(logger core.Logger) {
 
 func (c *CloudauthClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
+}
+
+/* 手动发票查验 */
+func (c *CloudauthClient) VerifyInvoice(request *cloudauth.VerifyInvoiceRequest) (*cloudauth.VerifyInvoiceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cloudauth.VerifyInvoiceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
 }
 
 /* 查询服务开通状态 */
@@ -188,6 +208,26 @@ func (c *CloudauthClient) PersonalAuth(request *cloudauth.PersonalAuthRequest) (
     }
 
     jdResp := &cloudauth.PersonalAuthResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 通用印刷体OCR识别 */
+func (c *CloudauthClient) GeneralYinShuaTi(request *cloudauth.GeneralYinShuaTiRequest) (*cloudauth.GeneralYinShuaTiResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cloudauth.GeneralYinShuaTiResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -408,6 +448,26 @@ func (c *CloudauthClient) BankCardOCR(request *cloudauth.BankCardOCRRequest) (*c
     }
 
     jdResp := &cloudauth.BankCardOCRResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 通用票据OCR识别及查验 */
+func (c *CloudauthClient) GeneralPiaoJu(request *cloudauth.GeneralPiaoJuRequest) (*cloudauth.GeneralPiaoJuResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cloudauth.GeneralPiaoJuResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
