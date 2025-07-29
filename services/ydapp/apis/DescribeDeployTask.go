@@ -52,7 +52,7 @@ func NewDescribeDeployTaskRequest(
 			URL:     "/app/{appId}/group/{groupId}/deploy/{deployId}",
 			Method:  "GET",
 			Header:  nil,
-			Version: "2.0.0",
+			Version: "v1",
 		},
         AppId: appId,
         DeployId: deployId,
@@ -76,7 +76,7 @@ func NewDescribeDeployTaskRequestWithAllParams(
             URL:     "/app/{appId}/group/{groupId}/deploy/{deployId}",
             Method:  "GET",
             Header:  nil,
-            Version: "2.0.0",
+            Version: "v1",
         },
         AppId: appId,
         DeployId: deployId,
@@ -92,7 +92,7 @@ func NewDescribeDeployTaskRequestWithoutParam() *DescribeDeployTaskRequest {
             URL:     "/app/{appId}/group/{groupId}/deploy/{deployId}",
             Method:  "GET",
             Header:  nil,
-            Version: "2.0.0",
+            Version: "v1",
         },
     }
 }

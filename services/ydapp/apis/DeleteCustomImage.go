@@ -47,7 +47,7 @@ func NewDeleteCustomImageRequest(
 			URL:     "/app/{appId}/customImage/{imageDigest}",
 			Method:  "DELETE",
 			Header:  nil,
-			Version: "2.0.0",
+			Version: "v1",
 		},
         AppId: appId,
         ImageDigest: imageDigest,
@@ -68,7 +68,7 @@ func NewDeleteCustomImageRequestWithAllParams(
             URL:     "/app/{appId}/customImage/{imageDigest}",
             Method:  "DELETE",
             Header:  nil,
-            Version: "2.0.0",
+            Version: "v1",
         },
         AppId: appId,
         ImageDigest: imageDigest,
@@ -83,7 +83,7 @@ func NewDeleteCustomImageRequestWithoutParam() *DeleteCustomImageRequest {
             URL:     "/app/{appId}/customImage/{imageDigest}",
             Method:  "DELETE",
             Header:  nil,
-            Version: "2.0.0",
+            Version: "v1",
         },
     }
 }
