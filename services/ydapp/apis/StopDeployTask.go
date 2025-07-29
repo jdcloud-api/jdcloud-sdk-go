@@ -52,7 +52,7 @@ func NewStopDeployTaskRequest(
 			URL:     "/app/{appId}/group/{groupId}/deploy/{deployId}:stop",
 			Method:  "POST",
 			Header:  nil,
-			Version: "2.0.0",
+			Version: "v1",
 		},
         AppId: appId,
         GroupId: groupId,
@@ -76,7 +76,7 @@ func NewStopDeployTaskRequestWithAllParams(
             URL:     "/app/{appId}/group/{groupId}/deploy/{deployId}:stop",
             Method:  "POST",
             Header:  nil,
-            Version: "2.0.0",
+            Version: "v1",
         },
         AppId: appId,
         GroupId: groupId,
@@ -92,7 +92,7 @@ func NewStopDeployTaskRequestWithoutParam() *StopDeployTaskRequest {
             URL:     "/app/{appId}/group/{groupId}/deploy/{deployId}:stop",
             Method:  "POST",
             Header:  nil,
-            Version: "2.0.0",
+            Version: "v1",
         },
     }
 }

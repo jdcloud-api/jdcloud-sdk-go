@@ -48,7 +48,7 @@ func NewDescribeCustomRegistryTokenRequest(
 			URL:     "/app/{appId}:customRegistryToken",
 			Method:  "GET",
 			Header:  nil,
-			Version: "2.0.0",
+			Version: "v1",
 		},
         AppId: appId,
 	}
@@ -70,7 +70,7 @@ func NewDescribeCustomRegistryTokenRequestWithAllParams(
             URL:     "/app/{appId}:customRegistryToken",
             Method:  "GET",
             Header:  nil,
-            Version: "2.0.0",
+            Version: "v1",
         },
         AppId: appId,
         Renew: renew,
@@ -85,7 +85,7 @@ func NewDescribeCustomRegistryTokenRequestWithoutParam() *DescribeCustomRegistry
             URL:     "/app/{appId}:customRegistryToken",
             Method:  "GET",
             Header:  nil,
-            Version: "2.0.0",
+            Version: "v1",
         },
     }
 }

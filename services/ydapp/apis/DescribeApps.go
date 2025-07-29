@@ -44,7 +44,7 @@ func NewDescribeAppsRequest(
 			URL:     "/apps",
 			Method:  "GET",
 			Header:  nil,
-			Version: "2.0.0",
+			Version: "v1",
 		},
 	}
 }
@@ -63,7 +63,7 @@ func NewDescribeAppsRequestWithAllParams(
             URL:     "/apps",
             Method:  "GET",
             Header:  nil,
-            Version: "2.0.0",
+            Version: "v1",
         },
         PageNum: pageNum,
         PageSize: pageSize,
@@ -78,7 +78,7 @@ func NewDescribeAppsRequestWithoutParam() *DescribeAppsRequest {
             URL:     "/apps",
             Method:  "GET",
             Header:  nil,
-            Version: "2.0.0",
+            Version: "v1",
         },
     }
 }

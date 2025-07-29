@@ -49,7 +49,7 @@ func NewDescribeGroupsRequest(
 			URL:     "/app/{appId}/groups",
 			Method:  "GET",
 			Header:  nil,
-			Version: "2.0.0",
+			Version: "v1",
 		},
         AppId: appId,
 	}
@@ -71,7 +71,7 @@ func NewDescribeGroupsRequestWithAllParams(
             URL:     "/app/{appId}/groups",
             Method:  "GET",
             Header:  nil,
-            Version: "2.0.0",
+            Version: "v1",
         },
         AppId: appId,
         PageNum: pageNum,
@@ -87,7 +87,7 @@ func NewDescribeGroupsRequestWithoutParam() *DescribeGroupsRequest {
             URL:     "/app/{appId}/groups",
             Method:  "GET",
             Header:  nil,
-            Version: "2.0.0",
+            Version: "v1",
         },
     }
 }

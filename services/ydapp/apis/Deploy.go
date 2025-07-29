@@ -62,7 +62,7 @@ func NewDeployRequest(
 			URL:     "/app/{appId}/group/{groupId}/deploy",
 			Method:  "POST",
 			Header:  nil,
-			Version: "2.0.0",
+			Version: "v1",
 		},
         AppId: appId,
         GroupId: groupId,
@@ -93,7 +93,7 @@ func NewDeployRequestWithAllParams(
             URL:     "/app/{appId}/group/{groupId}/deploy",
             Method:  "POST",
             Header:  nil,
-            Version: "2.0.0",
+            Version: "v1",
         },
         AppId: appId,
         GroupId: groupId,
@@ -113,7 +113,7 @@ func NewDeployRequestWithoutParam() *DeployRequest {
             URL:     "/app/{appId}/group/{groupId}/deploy",
             Method:  "POST",
             Header:  nil,
-            Version: "2.0.0",
+            Version: "v1",
         },
     }
 }

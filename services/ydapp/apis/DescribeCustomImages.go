@@ -52,7 +52,7 @@ func NewDescribeCustomImagesRequest(
 			URL:     "/app/{appId}/customImages",
 			Method:  "GET",
 			Header:  nil,
-			Version: "2.0.0",
+			Version: "v1",
 		},
         AppId: appId,
 	}
@@ -76,7 +76,7 @@ func NewDescribeCustomImagesRequestWithAllParams(
             URL:     "/app/{appId}/customImages",
             Method:  "GET",
             Header:  nil,
-            Version: "2.0.0",
+            Version: "v1",
         },
         AppId: appId,
         PageNum: pageNum,
@@ -93,7 +93,7 @@ func NewDescribeCustomImagesRequestWithoutParam() *DescribeCustomImagesRequest {
             URL:     "/app/{appId}/customImages",
             Method:  "GET",
             Header:  nil,
-            Version: "2.0.0",
+            Version: "v1",
         },
     }
 }
