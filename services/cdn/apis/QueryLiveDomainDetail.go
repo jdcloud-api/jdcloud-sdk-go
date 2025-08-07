@@ -155,4 +155,5 @@ type QueryLiveDomainDetailResult struct {
     SslCertStartTime string `json:"sslCertStartTime"`
     SslCertEndTime string `json:"sslCertEndTime"`
     AccelerateRegion string `json:"accelerateRegion"`
+    Rtc string `json:"rtc"`
 }
