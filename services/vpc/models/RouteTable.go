@@ -25,7 +25,7 @@ type RouteTable struct {
     /* 路由表名称，只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符。 (Optional) */
     RouteTableName string `json:"routeTableName"`
 
-    /* 路由表类型，default：默认路由表，custom：自定义路由表 (Optional) */
+    /* 路由表类型，default：默认路由表，custom：自定义路由表，system：系统路由表 (Optional) */
     RouteTableType string `json:"routeTableType"`
 
     /* 绑定资源类型，取值：subnet，gateway (Optional) */
@@ -46,12 +46,12 @@ type RouteTable struct {
     /* 路由表绑定的子网列表 (Optional) */
     SubnetIds []string `json:"subnetIds"`
 
-    /* 路由表az类型，取值：standard(标准路由表)，edge(边缘路由表) (Optional) */
-    AzType string `json:"azType"`
-
-    /* 路由表可用区 (Optional) */
-    Az string `json:"az"`
-
     /* 路由表创建时间 (Optional) */
     CreatedTime string `json:"createdTime"`
+
+    /* Tag信息 (Optional) */
+    Tags []Tag `json:"tags"`
+
+    /* 资源所属资源组ID (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
 }

@@ -23,6 +23,9 @@ type ElasticIpInternal struct {
     /* 弹性公网IP的Id (Optional) */
     ElasticIpId string `json:"elasticIpId"`
 
+    /* 弹性公网IP的名称 (Optional) */
+    ElasticIpName string `json:"elasticIpName"`
+
     /* 弹性公网IP的地址 (Optional) */
     ElasticIpAddress string `json:"elasticIpAddress"`
 
@@ -41,7 +44,7 @@ type ElasticIpInternal struct {
     /* 实例Id (Optional) */
     InstanceId string `json:"instanceId"`
 
-    /* 实例类型,取值为：compute、lb、container、pod、natgw (Optional) */
+    /* 实例类型,取值为：compute、lb、container、pod、natgw、redis (Optional) */
     InstanceType string `json:"instanceType"`
 
     /* 计费配置 (Optional) */

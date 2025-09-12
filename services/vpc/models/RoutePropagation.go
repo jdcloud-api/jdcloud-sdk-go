@@ -22,9 +22,15 @@ type RoutePropagation struct {
     /* 路由传播Id (Optional) */
     PropagationId string `json:"propagationId"`
 
+    /* 传播路由的优先级，取值范围[101,255]，默认为150。当路由规则子网掩码不同时，路由最长匹配优先；当路由规则子网掩码相同时, 按照优先级匹配转发, 优先级数字越小优先级越高，路由规则子网掩码相同、优先级相同、下一跳不同时，形成等价路由，不同下一跳负载均担。 (Optional) */
+    Priority int `json:"priority"`
+
     /* 边界网关Id (Optional) */
     BgwId string `json:"bgwId"`
 
-    /* 路由传播范围，指定路由传播网段，CIDR格式，多个CIDR之间以英文逗号“,”分隔，0.0.0.0/0表示接受所有传播路由，设置特定网段就只能接收该网段范围内或子网段的路由传播 (Optional) */
+    /* 匹配地址前缀类型, 取值范围为CIDR、PREFIXLIST (Optional) */
+    PropagationCidrType string `json:"propagationCidrType"`
+
+    /* 路由传播范围，指定路由传播网段，CIDR格式，多个CIDR之间以英文逗号“,”分隔，0.0.0.0/0表示接受所有传播路由，设置特定网段就只能接收该网段范围内或子网段的路由传播, propagationCidrType为CIDR时，为网段，如：10.0.0.0/24,192.168.0.0/24; propagationCidrType为PREFIXLIST时，为前缀列表ID，如：pl-bkh3jumsqk (Optional) */
     PropagationCidrs string `json:"propagationCidrs"`
 }

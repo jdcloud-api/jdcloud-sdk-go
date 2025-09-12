@@ -43,6 +43,12 @@ azType - vpcPeering本端VPC az类型，取值：all(全部类型)，standard(�
 azs - vpcPeering本端VPC可用区，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
+
+    /* Tag筛选条件 (Optional) */
+    Tags []vpc.TagFilter `json:"tags"`
+
+    /* 资源组筛选条件 (Optional) */
+    ResourceGroupIds []string `json:"resourceGroupIds"`
 }
 
 /*
@@ -76,12 +82,16 @@ remoteVpcId - vpcPeering对端Vpc Id，支持单个
 azType - vpcPeering本端VPC az类型，取值：all(全部类型)，standard(标准VPC)，edge(边缘VPC)，默认standard ，支持单个
 azs - vpcPeering本端VPC可用区，支持多个
  (Optional)
+ * param tags: Tag筛选条件 (Optional)
+ * param resourceGroupIds: 资源组筛选条件 (Optional)
  */
 func NewDescribeVpcPeeringsRequestWithAllParams(
     regionId string,
     pageNumber *int,
     pageSize *int,
     filters []common.Filter,
+    tags []vpc.TagFilter,
+    resourceGroupIds []string,
 ) *DescribeVpcPeeringsRequest {
 
     return &DescribeVpcPeeringsRequest{
@@ -95,6 +105,8 @@ func NewDescribeVpcPeeringsRequestWithAllParams(
         PageNumber: pageNumber,
         PageSize: pageSize,
         Filters: filters,
+        Tags: tags,
+        ResourceGroupIds: resourceGroupIds,
     }
 }
 
@@ -132,6 +144,14 @@ azs - vpcPeering本端VPC可用区，支持多个
 (Optional) */
 func (r *DescribeVpcPeeringsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
+}
+/* param tags: Tag筛选条件(Optional) */
+func (r *DescribeVpcPeeringsRequest) SetTags(tags []vpc.TagFilter) {
+    r.Tags = tags
+}
+/* param resourceGroupIds: 资源组筛选条件(Optional) */
+func (r *DescribeVpcPeeringsRequest) SetResourceGroupIds(resourceGroupIds []string) {
+    r.ResourceGroupIds = resourceGroupIds
 }
 
 

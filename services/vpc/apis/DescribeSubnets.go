@@ -45,6 +45,12 @@ azs - 可用区，支持多个
 azType - VPC az类型，取值：all(全部类型)，standard(标准可用区子网)，edge(边缘可用区子网)，默认all，支持单个
  (Optional) */
     Filters []common.Filter `json:"filters"`
+
+    /* Tag筛选条件 (Optional) */
+    Tags []vpc.TagFilter `json:"tags"`
+
+    /* 资源组筛选条件 (Optional) */
+    ResourceGroupIds []string `json:"resourceGroupIds"`
 }
 
 /*
@@ -80,12 +86,16 @@ subnetType - 子网类型，取值：all(全部类型)，standard(标准子网)�
 azs - 可用区，支持多个
 azType - VPC az类型，取值：all(全部类型)，standard(标准可用区子网)，edge(边缘可用区子网)，默认all，支持单个
  (Optional)
+ * param tags: Tag筛选条件 (Optional)
+ * param resourceGroupIds: 资源组筛选条件 (Optional)
  */
 func NewDescribeSubnetsRequestWithAllParams(
     regionId string,
     pageNumber *int,
     pageSize *int,
     filters []common.Filter,
+    tags []vpc.TagFilter,
+    resourceGroupIds []string,
 ) *DescribeSubnetsRequest {
 
     return &DescribeSubnetsRequest{
@@ -99,6 +109,8 @@ func NewDescribeSubnetsRequestWithAllParams(
         PageNumber: pageNumber,
         PageSize: pageSize,
         Filters: filters,
+        Tags: tags,
+        ResourceGroupIds: resourceGroupIds,
     }
 }
 
@@ -138,6 +150,14 @@ azType - VPC az类型，取值：all(全部类型)，standard(标准可用区子
 (Optional) */
 func (r *DescribeSubnetsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
+}
+/* param tags: Tag筛选条件(Optional) */
+func (r *DescribeSubnetsRequest) SetTags(tags []vpc.TagFilter) {
+    r.Tags = tags
+}
+/* param resourceGroupIds: 资源组筛选条件(Optional) */
+func (r *DescribeSubnetsRequest) SetResourceGroupIds(resourceGroupIds []string) {
+    r.ResourceGroupIds = resourceGroupIds
 }
 
 

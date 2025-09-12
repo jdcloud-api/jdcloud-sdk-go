@@ -40,7 +40,7 @@ func NewVpcClient(credential *core.Credential) *VpcClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "vpc",
-            Revision:    "1.1.5",
+            Revision:    "1.1.32",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -296,6 +296,26 @@ func (c *VpcClient) DescribeSubnets(request *vpc.DescribeSubnetsRequest) (*vpc.D
     return jdResp, err
 }
 
+/* 查询子网绑定的预分配Cidr ip信息详情 */
+func (c *VpcClient) DescribeSubnetCidrIps(request *vpc.DescribeSubnetCidrIpsRequest) (*vpc.DescribeSubnetCidrIpsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.DescribeSubnetCidrIpsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 
 从共享带宽包内移除公网IP
 
@@ -315,6 +335,26 @@ func (c *VpcClient) RemoveBandwidthPackageIP(request *vpc.RemoveBandwidthPackage
     }
 
     jdResp := &vpc.RemoveBandwidthPackageIPResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 导出公网IP记录 */
+func (c *VpcClient) ExportElasticIps(request *vpc.ExportElasticIpsRequest) (*vpc.ExportElasticIpsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.ExportElasticIpsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -384,6 +424,26 @@ func (c *VpcClient) DescribeVpcPolicy(request *vpc.DescribeVpcPolicyRequest) (*v
     return jdResp, err
 }
 
+/* 查询弹性公网IP池资源信息详情 */
+func (c *VpcClient) DescribeElasticIpPool(request *vpc.DescribeElasticIpPoolRequest) (*vpc.DescribeElasticIpPoolResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.DescribeElasticIpPoolResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 移除安全组规则 */
 func (c *VpcClient) RemoveNetworkSecurityGroupRules(request *vpc.RemoveNetworkSecurityGroupRulesRequest) (*vpc.RemoveNetworkSecurityGroupRulesResponse, error) {
     if request == nil {
@@ -415,6 +475,26 @@ func (c *VpcClient) ModifyNetworkSecurityGroup(request *vpc.ModifyNetworkSecurit
     }
 
     jdResp := &vpc.ModifyNetworkSecurityGroupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询安全组规则列表 */
+func (c *VpcClient) DescribeNetworkSecurityGroupRules(request *vpc.DescribeNetworkSecurityGroupRulesRequest) (*vpc.DescribeNetworkSecurityGroupRulesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.DescribeNetworkSecurityGroupRulesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -535,6 +615,26 @@ func (c *VpcClient) CreateRouteTable(request *vpc.CreateRouteTableRequest) (*vpc
     }
 
     jdResp := &vpc.CreateRouteTableResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除弹性公网IP池。目标弹性公网IP池需要确保无IP资源分配 */
+func (c *VpcClient) DeleteElasticIpPool(request *vpc.DeleteElasticIpPoolRequest) (*vpc.DeleteElasticIpPoolResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.DeleteElasticIpPoolResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -683,6 +783,46 @@ func (c *VpcClient) DescribeSubnet(request *vpc.DescribeSubnetRequest) (*vpc.Des
     }
 
     jdResp := &vpc.DescribeSubnetResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询Acl rule列表 */
+func (c *VpcClient) DescribeNetworkAclRules(request *vpc.DescribeNetworkAclRulesRequest) (*vpc.DescribeNetworkAclRulesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.DescribeNetworkAclRulesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建弹性公网IP池 */
+func (c *VpcClient) CreateElasticIpPool(request *vpc.CreateElasticIpPoolRequest) (*vpc.CreateElasticIpPoolResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.CreateElasticIpPoolResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -895,26 +1035,6 @@ func (c *VpcClient) RemoveNetworkAclRules(request *vpc.RemoveNetworkAclRulesRequ
     return jdResp, err
 }
 
-/* 设置NAT网关已绑定的公网IP状态接口 */
-func (c *VpcClient) SetElasticIpStatus(request *vpc.SetElasticIpStatusRequest) (*vpc.SetElasticIpStatusResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &vpc.SetElasticIpStatusResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 路由表绑定子网接口 */
 func (c *VpcClient) AssociateRouteTable(request *vpc.AssociateRouteTableRequest) (*vpc.AssociateRouteTableResponse, error) {
     if request == nil {
@@ -966,6 +1086,26 @@ func (c *VpcClient) CreateNetworkSecurityGroup(request *vpc.CreateNetworkSecurit
     }
 
     jdResp := &vpc.CreateNetworkSecurityGroupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询路由表 rule 列表 */
+func (c *VpcClient) DescribeRouteTableRules(request *vpc.DescribeRouteTableRulesRequest) (*vpc.DescribeRouteTableRulesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.DescribeRouteTableRulesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1086,6 +1226,26 @@ func (c *VpcClient) RemoveRouteTableRules(request *vpc.RemoveRouteTableRulesRequ
     }
 
     jdResp := &vpc.RemoveRouteTableRulesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询弹性网卡cidr信息详情 */
+func (c *VpcClient) DescribeNetworkInterfaceCidrIps(request *vpc.DescribeNetworkInterfaceCidrIpsRequest) (*vpc.DescribeNetworkInterfaceCidrIpsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.DescribeNetworkInterfaceCidrIpsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1266,6 +1426,26 @@ func (c *VpcClient) DescribeNetworkInterface(request *vpc.DescribeNetworkInterfa
     }
 
     jdResp := &vpc.DescribeNetworkInterfaceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询弹性公网IP池列表 */
+func (c *VpcClient) DescribeElasticIpPools(request *vpc.DescribeElasticIpPoolsRequest) (*vpc.DescribeElasticIpPoolsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.DescribeElasticIpPoolsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1726,6 +1906,26 @@ func (c *VpcClient) DescribeNetworkAcl(request *vpc.DescribeNetworkAclRequest) (
     }
 
     jdResp := &vpc.DescribeNetworkAclResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改弹性公网IP池 */
+func (c *VpcClient) ModifyElasticIpPool(request *vpc.ModifyElasticIpPoolRequest) (*vpc.ModifyElasticIpPoolResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &vpc.ModifyElasticIpPoolResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

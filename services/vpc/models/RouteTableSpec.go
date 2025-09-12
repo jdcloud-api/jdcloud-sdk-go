@@ -30,4 +30,10 @@ type RouteTableSpec struct {
 
     /* 绑定资源类型，取值：subnet(缺省时默认值)，gateway (Optional) */
     AssociateType string `json:"associateType"`
+
+    /* 用户标签 (Optional) */
+    UserTags []Tag `json:"userTags"`
+
+    /* 资源所属资源组ID (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
 }

@@ -31,7 +31,10 @@ type ModifyNetworkAclRuleSpec struct {
     /* 规则限定终止传输层端口, 取值范围:1-65535, 若protocol为传输层协议，默认值为65535，若protocol不是传输层协议，设置无效，恒为0。如果规则只限定一个端口号，fromPort和toPort填写同一个值 (Optional) */
     ToPort *int `json:"toPort"`
 
-    /* 匹配地址前缀 (Optional) */
+    /* 匹配地址前缀类型, 取值范围为CIDR、PREFIXLIST (Optional) */
+    AddressPrefixType *string `json:"addressPrefixType"`
+
+    /* addressPrefix不允许重复, 匹配地址前缀, 源/目的IP. addressPrefixType为CIDR时，传IP地址或网段，如：10.0.0.0/24; addressPrefixType为PREFIXLIST时，传前缀列表ID，如：pl-bkh3jumsqk (Optional) */
     AddressPrefix *string `json:"addressPrefix"`
 
     /* 访问控制策略：allow:允许，deny：拒绝 (Optional) */

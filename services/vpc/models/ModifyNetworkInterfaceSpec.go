@@ -27,4 +27,7 @@ type ModifyNetworkInterfaceSpec struct {
 
     /* 以覆盖原有安全组的方式更新的安全组。如果更新安全组ID列表，最多5个安全组 (Optional) */
     SecurityGroups []string `json:"securityGroups"`
+
+    /* 弹性网卡mac地址，不超过32字符 (Optional) */
+    MacAddress string `json:"macAddress"`
 }

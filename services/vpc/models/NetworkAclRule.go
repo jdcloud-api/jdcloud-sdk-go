@@ -34,7 +34,10 @@ type NetworkAclRule struct {
     /* networkAcl规则方向。ingress：入规则; egress：出规则 (Optional) */
     Direction string `json:"direction"`
 
-    /* 匹配地址前缀 (Optional) */
+    /* 匹配地址前缀类型, 取值范围为CIDR、PREFIXLIST (Optional) */
+    AddressPrefixType string `json:"addressPrefixType"`
+
+    /* addressPrefix不允许重复, 匹配地址前缀, 源/目的IP. addressPrefixType为CIDR时，为网段，如：10.0.0.0/24; addressPrefixType为PREFIXLIST时，为前缀列表ID，如：pl-bkh3jumsqk (Optional) */
     AddressPrefix string `json:"addressPrefix"`
 
     /* 访问控制策略：allow:允许，deny：拒绝 (Optional) */

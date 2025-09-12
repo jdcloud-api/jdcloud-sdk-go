@@ -29,11 +29,14 @@ type BandwidthPackage struct {
     /* 描述 (Optional) */
     Description string `json:"description"`
 
-    /* 共享带宽包带宽上限，取值范围200-5000，单位为Mbps，按用量计费模式的保底带宽 = 共享带宽包带宽上限 * 20% (Optional) */
+    /* 共享带宽包带宽上限，单位为Mbps，按用量计费模式的保底带宽 = 共享带宽包带宽上限 * 20% (Optional) */
     BandwidthMbps int `json:"bandwidthMbps"`
 
     /* 线路信息 (Optional) */
     Provider string `json:"provider"`
+
+    /* 线路中文信息 (Optional) */
+    ProviderNameCN string `json:"providerNameCN"`
 
     /* 计费配置 (Optional) */
     Charge charge.Charge `json:"charge"`

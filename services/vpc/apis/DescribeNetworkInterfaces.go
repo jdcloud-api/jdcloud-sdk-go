@@ -44,6 +44,12 @@ azType - 网卡 az类型，取值：all(全部类型)，standard(标准Az网卡)
 azs - 可用区 az名，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
+
+    /* Tag筛选条件 (Optional) */
+    Tags []vpc.TagFilter `json:"tags"`
+
+    /* 资源组筛选条件 (Optional) */
+    ResourceGroupIds []string `json:"resourceGroupIds"`
 }
 
 /*
@@ -78,12 +84,16 @@ role - 网卡角色，取值范围：Primary（主网卡）、Secondary（辅助
 azType - 网卡 az类型，取值：all(全部类型)，standard(标准Az网卡)，edge(边缘Az网卡)，默认为all，支持单个
 azs - 可用区 az名，支持多个
  (Optional)
+ * param tags: Tag筛选条件 (Optional)
+ * param resourceGroupIds: 资源组筛选条件 (Optional)
  */
 func NewDescribeNetworkInterfacesRequestWithAllParams(
     regionId string,
     pageNumber *int,
     pageSize *int,
     filters []common.Filter,
+    tags []vpc.TagFilter,
+    resourceGroupIds []string,
 ) *DescribeNetworkInterfacesRequest {
 
     return &DescribeNetworkInterfacesRequest{
@@ -97,6 +107,8 @@ func NewDescribeNetworkInterfacesRequestWithAllParams(
         PageNumber: pageNumber,
         PageSize: pageSize,
         Filters: filters,
+        Tags: tags,
+        ResourceGroupIds: resourceGroupIds,
     }
 }
 
@@ -135,6 +147,14 @@ azs - 可用区 az名，支持多个
 (Optional) */
 func (r *DescribeNetworkInterfacesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
+}
+/* param tags: Tag筛选条件(Optional) */
+func (r *DescribeNetworkInterfacesRequest) SetTags(tags []vpc.TagFilter) {
+    r.Tags = tags
+}
+/* param resourceGroupIds: 资源组筛选条件(Optional) */
+func (r *DescribeNetworkInterfacesRequest) SetResourceGroupIds(resourceGroupIds []string) {
+    r.ResourceGroupIds = resourceGroupIds
 }
 
 

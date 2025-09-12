@@ -47,6 +47,9 @@ subnetId - NAT网关所属子网ID，支持单个
 
     /* Tag筛选条件 (Optional) */
     Tags []vpc.TagFilter `json:"tags"`
+
+    /* 资源组筛选条件 (Optional) */
+    ResourceGroupIds []string `json:"resourceGroupIds"`
 }
 
 /*
@@ -82,6 +85,7 @@ vpcId - NAT网关所属VPC ID，支持单个
 subnetId - NAT网关所属子网ID，支持单个
  (Optional)
  * param tags: Tag筛选条件 (Optional)
+ * param resourceGroupIds: 资源组筛选条件 (Optional)
  */
 func NewDescribeNatGatewaysRequestWithAllParams(
     regionId string,
@@ -89,6 +93,7 @@ func NewDescribeNatGatewaysRequestWithAllParams(
     pageSize *int,
     filters []common.Filter,
     tags []vpc.TagFilter,
+    resourceGroupIds []string,
 ) *DescribeNatGatewaysRequest {
 
     return &DescribeNatGatewaysRequest{
@@ -103,6 +108,7 @@ func NewDescribeNatGatewaysRequestWithAllParams(
         PageSize: pageSize,
         Filters: filters,
         Tags: tags,
+        ResourceGroupIds: resourceGroupIds,
     }
 }
 
@@ -145,6 +151,10 @@ func (r *DescribeNatGatewaysRequest) SetFilters(filters []common.Filter) {
 /* param tags: Tag筛选条件(Optional) */
 func (r *DescribeNatGatewaysRequest) SetTags(tags []vpc.TagFilter) {
     r.Tags = tags
+}
+/* param resourceGroupIds: 资源组筛选条件(Optional) */
+func (r *DescribeNatGatewaysRequest) SetResourceGroupIds(resourceGroupIds []string) {
+    r.ResourceGroupIds = resourceGroupIds
 }
 
 

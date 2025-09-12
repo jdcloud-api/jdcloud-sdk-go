@@ -59,6 +59,9 @@ type NatGateway struct {
     /* Tag信息 (Optional) */
     Tags []Tag `json:"tags"`
 
+    /* 资源所属资源组ID (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
+
     /* 包含下一跳为本NAT网关路由的子网路由表id列表 (Optional) */
     RouteTableIds []string `json:"routeTableIds"`
 }

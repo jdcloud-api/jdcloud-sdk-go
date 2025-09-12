@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    vpc "github.com/jdcloud-api/jdcloud-sdk-go/services/vpc/models"
 )
 
 type CreateRouteTableRequest struct {
@@ -38,6 +39,12 @@ type CreateRouteTableRequest struct {
 
     /* 绑定资源类型，取值：subnet(缺省时默认值)，gateway (Optional) */
     AssociateType *string `json:"associateType"`
+
+    /* 用户标签 (Optional) */
+    UserTags []vpc.Tag `json:"userTags"`
+
+    /* 资源所属资源组ID (Optional) */
+    ResourceGroupId *string `json:"resourceGroupId"`
 }
 
 /*
@@ -72,6 +79,8 @@ func NewCreateRouteTableRequest(
  * param routeTableName: 路由表名称，只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符。 (Required)
  * param description: 描述，允许输入UTF-8编码下的全部字符，不超过256字符 (Optional)
  * param associateType: 绑定资源类型，取值：subnet(缺省时默认值)，gateway (Optional)
+ * param userTags: 用户标签 (Optional)
+ * param resourceGroupId: 资源所属资源组ID (Optional)
  */
 func NewCreateRouteTableRequestWithAllParams(
     regionId string,
@@ -79,6 +88,8 @@ func NewCreateRouteTableRequestWithAllParams(
     routeTableName string,
     description *string,
     associateType *string,
+    userTags []vpc.Tag,
+    resourceGroupId *string,
 ) *CreateRouteTableRequest {
 
     return &CreateRouteTableRequest{
@@ -93,6 +104,8 @@ func NewCreateRouteTableRequestWithAllParams(
         RouteTableName: routeTableName,
         Description: description,
         AssociateType: associateType,
+        UserTags: userTags,
+        ResourceGroupId: resourceGroupId,
     }
 }
 
@@ -128,6 +141,14 @@ func (r *CreateRouteTableRequest) SetDescription(description string) {
 /* param associateType: 绑定资源类型，取值：subnet(缺省时默认值)，gateway(Optional) */
 func (r *CreateRouteTableRequest) SetAssociateType(associateType string) {
     r.AssociateType = &associateType
+}
+/* param userTags: 用户标签(Optional) */
+func (r *CreateRouteTableRequest) SetUserTags(userTags []vpc.Tag) {
+    r.UserTags = userTags
+}
+/* param resourceGroupId: 资源所属资源组ID(Optional) */
+func (r *CreateRouteTableRequest) SetResourceGroupId(resourceGroupId string) {
+    r.ResourceGroupId = &resourceGroupId
 }
 
 

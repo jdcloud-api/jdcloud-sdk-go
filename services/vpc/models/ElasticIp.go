@@ -23,14 +23,23 @@ type ElasticIp struct {
     /* 弹性公网IP的Id (Optional) */
     ElasticIpId string `json:"elasticIpId"`
 
+    /* 弹性公网IP的名称 (Optional) */
+    ElasticIpName string `json:"elasticIpName"`
+
     /* 弹性公网IP的地址 (Optional) */
     ElasticIpAddress string `json:"elasticIpAddress"`
+
+    /* 弹性公网IP池ID (Optional) */
+    ElasticIpPoolId string `json:"elasticIpPoolId"`
 
     /* 弹性公网IP的限速（单位：Mbps) (Optional) */
     BandwidthMbps int `json:"bandwidthMbps"`
 
-    /* 弹性公网IP的线路，标准公网IP的线路、取值为bgp或no_bgp；边缘公网IP的线路、可通过describeEdgeIpProviders接口获取 (Optional) */
+    /* 弹性公网IP的线路信息 (Optional) */
     Provider string `json:"provider"`
+
+    /* 弹性公网IP线路中文名称 (Optional) */
+    ProviderNameCN string `json:"providerNameCN"`
 
     /* 私有IP的IPV4地址 (Optional) */
     PrivateIpAddress string `json:"privateIpAddress"`
@@ -41,7 +50,7 @@ type ElasticIp struct {
     /* 实例Id (Optional) */
     InstanceId string `json:"instanceId"`
 
-    /* 实例类型,取值为：compute、lb、container、pod、natgw、havip (Optional) */
+    /* 实例类型,取值为：compute、lb、container、pod、natgw、havip、redis (Optional) */
     InstanceType string `json:"instanceType"`
 
     /* 计费配置 (Optional) */

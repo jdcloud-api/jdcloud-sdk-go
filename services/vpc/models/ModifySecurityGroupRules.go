@@ -25,7 +25,7 @@ type ModifySecurityGroupRules struct {
     /* 规则限定协议。300:All; 6:TCP; 17:UDP; 1:ICMP (Optional) */
     Protocol *int `json:"protocol"`
 
-    /* 访问控制策略：allow:允许，deny：拒绝 (Optional) */
+    /* 访问控制策略：ALLOW:允许，DENY：拒绝 (Optional) */
     RuleAction *string `json:"ruleAction"`
 
     /* 规则匹配优先级，取值范围为[1,100]，优先级数字越小优先级越高 (Optional) */
@@ -36,6 +36,9 @@ type ModifySecurityGroupRules struct {
 
     /* 安全组规则的终端口。取值范围：1-65535 (Optional) */
     ToPort *int `json:"toPort"`
+
+    /* 匹配地址前缀类型, 取值范围为CIDR、PREFIXLIST, 默认保持规则原类型 (Optional) */
+    AddressPrefixType *string `json:"addressPrefixType"`
 
     /* 安全组规则前缀，取值范围：正确的CIDR (Optional) */
     AddressPrefix *string `json:"addressPrefix"`

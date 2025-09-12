@@ -35,6 +35,9 @@ type UnassignSecondaryIpsRequest struct {
 
     /* 指定删除的secondaryIp网段 (Optional) */
     SecondaryCidrs []string `json:"secondaryCidrs"`
+
+    /* 公网是否同步删除 (Optional) */
+    DeleteElasticIp *bool `json:"deleteElasticIp"`
 }
 
 /*
@@ -65,12 +68,14 @@ func NewUnassignSecondaryIpsRequest(
  * param networkInterfaceId: networkInterface ID (Required)
  * param secondaryIps: 指定删除的secondaryIp地址 (Optional)
  * param secondaryCidrs: 指定删除的secondaryIp网段 (Optional)
+ * param deleteElasticIp: 公网是否同步删除 (Optional)
  */
 func NewUnassignSecondaryIpsRequestWithAllParams(
     regionId string,
     networkInterfaceId string,
     secondaryIps []string,
     secondaryCidrs []string,
+    deleteElasticIp *bool,
 ) *UnassignSecondaryIpsRequest {
 
     return &UnassignSecondaryIpsRequest{
@@ -84,6 +89,7 @@ func NewUnassignSecondaryIpsRequestWithAllParams(
         NetworkInterfaceId: networkInterfaceId,
         SecondaryIps: secondaryIps,
         SecondaryCidrs: secondaryCidrs,
+        DeleteElasticIp: deleteElasticIp,
     }
 }
 
@@ -115,6 +121,10 @@ func (r *UnassignSecondaryIpsRequest) SetSecondaryIps(secondaryIps []string) {
 /* param secondaryCidrs: 指定删除的secondaryIp网段(Optional) */
 func (r *UnassignSecondaryIpsRequest) SetSecondaryCidrs(secondaryCidrs []string) {
     r.SecondaryCidrs = secondaryCidrs
+}
+/* param deleteElasticIp: 公网是否同步删除(Optional) */
+func (r *UnassignSecondaryIpsRequest) SetDeleteElasticIp(deleteElasticIp bool) {
+    r.DeleteElasticIp = &deleteElasticIp
 }
 
 

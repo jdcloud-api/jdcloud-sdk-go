@@ -19,10 +19,10 @@ package models
 
 type Quota struct {
 
-    /* 资源类型，取值范围：vpc、elastic_ip、subnet、security_group、vpcpeering、network_interface（配额只统计辅助网卡）、acl、aclRule、routeTable、staticRoute、propagatedRoute、securityGroupRule、network_interface_cidr、natGateway、natGatewayFip、trafficMirrorSession、trafficMirrorFilter、trafficMirrorFilterRule、trafficMirrorSource (Optional) */
+    /* 资源类型，取值范围：vpc、elastic_ip、ipAddressPool、subnet、security_group、vpcpeering、network_interface（配额只统计辅助网卡）、acl、aclRule、routeTable、staticRoute、propagatedRoute、securityGroupRule、network_interface_cidr、natGateway、natGatewayFip、trafficMirrorSession、trafficMirrorFilter、trafficMirrorFilterRule、trafficMirrorSource、prefixList、portIpv6ip、eipPriorExcludeDestCidr (Optional) */
     Type string `json:"type"`
 
-    /* vpc、elastic_ip、network_interface、natGateway、trafficMirrorSession、trafficMirrorFilter为空, subnet、security_group、vpcpeering、acl、routeTable为vpcId, aclRule为aclId，staticRoute、propagatedRoute为routeTableId, securityGroupRule为securityGroupId, network_interface_cidr为networkInterfaceId，natGatewayFip为natGatewayId,trafficMirrorFilterRule设置为trafficMirrorFilterId,trafficMirrorSource设置为trafficMirrorSessionId (Optional) */
+    /* vpc、elastic_ip、ipAddressPool、network_interface、natGateway、trafficMirrorSession、trafficMirrorFilter、prefixList为空, subnet、security_group、vpcpeering、acl、routeTable为vpcId, aclRule为aclId，staticRoute、propagatedRoute为routeTableId, securityGroupRule为securityGroupId, network_interface_cidr为networkInterfaceId，natGatewayFip为natGatewayId,trafficMirrorFilterRule设置为trafficMirrorFilterId,trafficMirrorSource设置为trafficMirrorSessionId,type为secondaryIp设置为networkInterfaceId，type为portIpv6ip设置为networkInterfaceId，type为eipPriorExcludeDestCidr设置为subnetId; (Optional) */
     ParentResourceId string `json:"parentResourceId"`
 
     /* 配额大小 (Optional) */
