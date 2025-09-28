@@ -43,15 +43,12 @@ type Vpc struct {
     /* vpc创建时间 (Optional) */
     CreatedTime string `json:"createdTime"`
 
-    /* VPC az类型，取值：standard(标准VPC)，edge(边缘VPC) (Optional) */
-    AzType string `json:"azType"`
-
-    /* VPC可用区, 标准VPC为""， 边缘VPC为边缘az (Optional) */
-    Az string `json:"az"`
-
     /* VPC关联的策略Id (Optional) */
     VpcPolicyId string `json:"vpcPolicyId"`
 
-    /* 取值包括true、false，是否开启组播。 (Optional) */
-    EnableMulticast bool `json:"enableMulticast"`
+    /* Tag信息 (Optional) */
+    Tags []Tag `json:"tags"`
+
+    /* 资源所属资源组ID (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
 }

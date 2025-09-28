@@ -30,21 +30,25 @@ type ModifyElasticIpRequest struct {
     /* ElasticIp ID  */
     ElasticIpId string `json:"elasticIpId"`
 
-    /* 弹性公网IP的限速（单位：Mbps），取值范围为[1-200]  */
-    BandwidthMbps int `json:"bandwidthMbps"`
+    /* 弹性公网IP的限速（单位：Mbps），取值范围为[1-200] (Optional) */
+    BandwidthMbps *int `json:"bandwidthMbps"`
+
+    /* 包月资源临时升配还原到基础配置的时间，仅包月资源临时升配时有效，时间格式：yyyy-MM-dd HH:mm:ss (Optional) */
+    TempUpgradeEndTime *string `json:"tempUpgradeEndTime"`
+
+    /* 弹性公网ip的名称，只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不超过32字符。 (Optional) */
+    ElasticIpName *string `json:"elasticIpName"`
 }
 
 /*
  * param regionId: Region ID (Required)
  * param elasticIpId: ElasticIp ID (Required)
- * param bandwidthMbps: 弹性公网IP的限速（单位：Mbps），取值范围为[1-200] (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewModifyElasticIpRequest(
     regionId string,
     elasticIpId string,
-    bandwidthMbps int,
 ) *ModifyElasticIpRequest {
 
 	return &ModifyElasticIpRequest{
@@ -56,19 +60,22 @@ func NewModifyElasticIpRequest(
 		},
         RegionId: regionId,
         ElasticIpId: elasticIpId,
-        BandwidthMbps: bandwidthMbps,
 	}
 }
 
 /*
  * param regionId: Region ID (Required)
  * param elasticIpId: ElasticIp ID (Required)
- * param bandwidthMbps: 弹性公网IP的限速（单位：Mbps），取值范围为[1-200] (Required)
+ * param bandwidthMbps: 弹性公网IP的限速（单位：Mbps），取值范围为[1-200] (Optional)
+ * param tempUpgradeEndTime: 包月资源临时升配还原到基础配置的时间，仅包月资源临时升配时有效，时间格式：yyyy-MM-dd HH:mm:ss (Optional)
+ * param elasticIpName: 弹性公网ip的名称，只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不超过32字符。 (Optional)
  */
 func NewModifyElasticIpRequestWithAllParams(
     regionId string,
     elasticIpId string,
-    bandwidthMbps int,
+    bandwidthMbps *int,
+    tempUpgradeEndTime *string,
+    elasticIpName *string,
 ) *ModifyElasticIpRequest {
 
     return &ModifyElasticIpRequest{
@@ -81,6 +88,8 @@ func NewModifyElasticIpRequestWithAllParams(
         RegionId: regionId,
         ElasticIpId: elasticIpId,
         BandwidthMbps: bandwidthMbps,
+        TempUpgradeEndTime: tempUpgradeEndTime,
+        ElasticIpName: elasticIpName,
     }
 }
 
@@ -105,9 +114,17 @@ func (r *ModifyElasticIpRequest) SetRegionId(regionId string) {
 func (r *ModifyElasticIpRequest) SetElasticIpId(elasticIpId string) {
     r.ElasticIpId = elasticIpId
 }
-/* param bandwidthMbps: 弹性公网IP的限速（单位：Mbps），取值范围为[1-200](Required) */
+/* param bandwidthMbps: 弹性公网IP的限速（单位：Mbps），取值范围为[1-200](Optional) */
 func (r *ModifyElasticIpRequest) SetBandwidthMbps(bandwidthMbps int) {
-    r.BandwidthMbps = bandwidthMbps
+    r.BandwidthMbps = &bandwidthMbps
+}
+/* param tempUpgradeEndTime: 包月资源临时升配还原到基础配置的时间，仅包月资源临时升配时有效，时间格式：yyyy-MM-dd HH:mm:ss(Optional) */
+func (r *ModifyElasticIpRequest) SetTempUpgradeEndTime(tempUpgradeEndTime string) {
+    r.TempUpgradeEndTime = &tempUpgradeEndTime
+}
+/* param elasticIpName: 弹性公网ip的名称，只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不超过32字符。(Optional) */
+func (r *ModifyElasticIpRequest) SetElasticIpName(elasticIpName string) {
+    r.ElasticIpName = &elasticIpName
 }
 
 

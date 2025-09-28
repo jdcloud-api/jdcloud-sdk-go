@@ -59,8 +59,14 @@ type CreateNatGatewayRequest struct {
     /* 计费配置，仅支持按配置，默认按配置 (Optional) */
     NatGatewayCharge *charge.ChargeSpec `json:"natGatewayCharge"`
 
-    /* 描述,​ 允许输入UTF-8编码下的全部字符，不超过256字符 (Optional) */
+    /* 描述, 允许输入UTF-8编码下的全部字符，不超过256字符 (Optional) */
     Description *string `json:"description"`
+
+    /* 用户标签 (Optional) */
+    UserTags []vpc.Tag `json:"userTags"`
+
+    /* 资源所属资源组ID (Optional) */
+    ResourceGroupId *string `json:"resourceGroupId"`
 }
 
 /*
@@ -104,7 +110,9 @@ func NewCreateNatGatewayRequest(
  * param elasticIpCount: 新购公网IP数量 (Optional)
  * param elasticIpSpec: 新购公网IP配置。NAT网关仅支持打包创建标准公网IP，不支持边缘公网IP。且标准公网IP仅支持按配置、按用量两种计费模式。 (Optional)
  * param natGatewayCharge: 计费配置，仅支持按配置，默认按配置 (Optional)
- * param description: 描述,​ 允许输入UTF-8编码下的全部字符，不超过256字符 (Optional)
+ * param description: 描述, 允许输入UTF-8编码下的全部字符，不超过256字符 (Optional)
+ * param userTags: 用户标签 (Optional)
+ * param resourceGroupId: 资源所属资源组ID (Optional)
  */
 func NewCreateNatGatewayRequestWithAllParams(
     regionId string,
@@ -119,6 +127,8 @@ func NewCreateNatGatewayRequestWithAllParams(
     elasticIpSpec *vpc.ElasticIpSpec,
     natGatewayCharge *charge.ChargeSpec,
     description *string,
+    userTags []vpc.Tag,
+    resourceGroupId *string,
 ) *CreateNatGatewayRequest {
 
     return &CreateNatGatewayRequest{
@@ -140,6 +150,8 @@ func NewCreateNatGatewayRequestWithAllParams(
         ElasticIpSpec: elasticIpSpec,
         NatGatewayCharge: natGatewayCharge,
         Description: description,
+        UserTags: userTags,
+        ResourceGroupId: resourceGroupId,
     }
 }
 
@@ -200,9 +212,17 @@ func (r *CreateNatGatewayRequest) SetElasticIpSpec(elasticIpSpec *vpc.ElasticIpS
 func (r *CreateNatGatewayRequest) SetNatGatewayCharge(natGatewayCharge *charge.ChargeSpec) {
     r.NatGatewayCharge = natGatewayCharge
 }
-/* param description: 描述,​ 允许输入UTF-8编码下的全部字符，不超过256字符(Optional) */
+/* param description: 描述, 允许输入UTF-8编码下的全部字符，不超过256字符(Optional) */
 func (r *CreateNatGatewayRequest) SetDescription(description string) {
     r.Description = &description
+}
+/* param userTags: 用户标签(Optional) */
+func (r *CreateNatGatewayRequest) SetUserTags(userTags []vpc.Tag) {
+    r.UserTags = userTags
+}
+/* param resourceGroupId: 资源所属资源组ID(Optional) */
+func (r *CreateNatGatewayRequest) SetResourceGroupId(resourceGroupId string) {
+    r.ResourceGroupId = &resourceGroupId
 }
 
 

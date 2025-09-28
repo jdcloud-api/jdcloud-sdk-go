@@ -41,6 +41,12 @@ azType - VPC az类型，取值：all(全部类型)，standard(标准VPC)，edge(
 azs - 可用区，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
+
+    /* Tag筛选条件 (Optional) */
+    Tags []vpc.TagFilter `json:"tags"`
+
+    /* 资源组筛选条件 (Optional) */
+    ResourceGroupIds []string `json:"resourceGroupIds"`
 }
 
 /*
@@ -72,12 +78,16 @@ vpcNames - vpc名称列表,支持多个
 azType - VPC az类型，取值：all(全部类型)，standard(标准VPC)，edge(边缘VPC)，默认all，支持单个
 azs - 可用区，支持多个
  (Optional)
+ * param tags: Tag筛选条件 (Optional)
+ * param resourceGroupIds: 资源组筛选条件 (Optional)
  */
 func NewDescribeVpcsRequestWithAllParams(
     regionId string,
     pageNumber *int,
     pageSize *int,
     filters []common.Filter,
+    tags []vpc.TagFilter,
+    resourceGroupIds []string,
 ) *DescribeVpcsRequest {
 
     return &DescribeVpcsRequest{
@@ -91,6 +101,8 @@ func NewDescribeVpcsRequestWithAllParams(
         PageNumber: pageNumber,
         PageSize: pageSize,
         Filters: filters,
+        Tags: tags,
+        ResourceGroupIds: resourceGroupIds,
     }
 }
 
@@ -126,6 +138,14 @@ azs - 可用区，支持多个
 (Optional) */
 func (r *DescribeVpcsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
+}
+/* param tags: Tag筛选条件(Optional) */
+func (r *DescribeVpcsRequest) SetTags(tags []vpc.TagFilter) {
+    r.Tags = tags
+}
+/* param resourceGroupIds: 资源组筛选条件(Optional) */
+func (r *DescribeVpcsRequest) SetResourceGroupIds(resourceGroupIds []string) {
+    r.ResourceGroupIds = resourceGroupIds
 }
 
 

@@ -27,10 +27,4 @@ type ModifySubnetSpec struct {
 
     /* 子网内预留网段掩码长度，此网段IP地址按照单个申请，子网内其余部分IP地址以网段形式分配。此参数非必选，缺省值为0，代表子网内所有IP地址都按照单个申请 (Optional) */
     IpMaskLen int `json:"ipMaskLen"`
-
-    /* 域名后缀，不限制个数。总长度最长254个字符，仅支持字母，数字，中划线，下划线和点。 (Optional) */
-    DomainNames []string `json:"domainNames"`
-
-    /* 域名服务器地址。最多支持5个IPv4地址，不同IPv4地址使用逗号分隔。如输入空数组，默认使用京东云默认DNS域名服务器地址。如不添加默认DNS域名服务器，可能会导致您无法访问京东云云上基础服务，请谨慎操作 (Optional) */
-    DomainNameServers []string `json:"domainNameServers"`
 }

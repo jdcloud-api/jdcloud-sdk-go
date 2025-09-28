@@ -25,13 +25,16 @@ type ModifyRouteTableRules struct {
     /* 规则匹配优先级，取值范围[1,255]。当路由规则子网掩码不同时，路由最长匹配优先；当路由规则子网掩码相同时, 按照优先级匹配转发, 优先级数字越小优先级越高，路由规则子网掩码相同、优先级相同、下一跳不同时，形成等价路由，不同下一跳负载均担。 (Optional) */
     Priority *int `json:"priority"`
 
-    /* 下一跳类型, 取值范围:instance:云主机, internet:公网, vpc_peering:vpc对等连接, bgw:边界网关, natgw:NAT网关, elastic_network_interface:弹性网卡(主网卡不允许), havip:高可用虚拟ip (Optional) */
+    /* 下一跳类型, 取值范围:instance:云主机, internet:公网, vpc_peering:vpc对等连接, bgw:边界网关, natgw:NAT网关, elastic_network_interface:弹性网卡(主网卡不允许), havip:高可用虚拟ip, l2gw:二层网关 (Optional) */
     NextHopType *string `json:"nextHopType"`
 
     /* 下一跳id (Optional) */
     NextHopId *string `json:"nextHopId"`
 
-    /* 路由表规则前缀, internet类型路由跟其他类型的路由，addressPrefix不允许重复 (Optional) */
+    /* 匹配地址前缀类型, 取值范围为CIDR、PREFIXLIST, 默认CIDR (Optional) */
+    AddressPrefixType *string `json:"addressPrefixType"`
+
+    /* addressPrefix不允许重复, 匹配地址前缀, 源/目的IP. addressPrefixType为CIDR时，为网段，如：10.0.0.0/24; addressPrefixType为PREFIXLIST时，为前缀列表ID，如：pl-bkh3jumsqk (Optional) */
     AddressPrefix *string `json:"addressPrefix"`
 
     /* 描述,允许输入UTF-8编码下的全部字符，不超过256字符 (Optional) */

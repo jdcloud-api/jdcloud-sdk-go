@@ -24,4 +24,25 @@ type NetworkOperator struct {
 
     /* network operator序号 (Optional) */
     NetworkOperator int `json:"networkOperator"`
+
+    /* 按用量流量费计费项 (Optional) */
+    FlowType string `json:"flowType"`
+
+    /* 按用量占用费计费项 (Optional) */
+    ConfigType string `json:"configType"`
+
+    /* 包年包月/按配置计费项 (Optional) */
+    BillItem string `json:"billItem"`
+
+    /* 网络底层的provider (Optional) */
+    CcProvider string `json:"ccProvider"`
+
+    /* provider类型，standard（中心）、edge（边缘） (Optional) */
+    ProviderType string `json:"providerType"`
+
+    /* provider中文名称 (Optional) */
+    ProviderNameCN string `json:"providerNameCN"`
+
+    /* 带宽限制 (Optional) */
+    BandwidthLimits []BandwidthLimit `json:"bandwidthLimits"`
 }

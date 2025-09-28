@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    vpc "github.com/jdcloud-api/jdcloud-sdk-go/services/vpc/models"
 )
 
 type CreateSubnetRequest struct {
@@ -51,8 +52,17 @@ type CreateSubnetRequest struct {
     /* 域名服务器地址。最多支持5个IPv4地址，不同IPv4地址使用逗号分隔。如不输入或输入空数组，默认使用京东云默认DNS域名服务器地址。如不添加默认DNS域名服务器，可能会导致您无法访问京东云云上基础服务，请谨慎操作 (Optional) */
     DomainNameServers []string `json:"domainNameServers"`
 
+    /* 用户网段，绑定EIP的云资源访问用户网段还是走子网关联的路由策略，只在eipPriorEnable为true时参数有效。 (Optional) */
+    EipPriorExcludeDestCidrs []string `json:"eipPriorExcludeDestCidrs"`
+
     /* 是否只预检此次请求。true：不会创建子网，只会对参数进行校验；false：正常的创建请求。默认为false。 (Optional) */
     DryRun *bool `json:"dryRun"`
+
+    /* 用户标签 (Optional) */
+    UserTags []vpc.Tag `json:"userTags"`
+
+    /* 资源所属资源组ID (Optional) */
+    ResourceGroupId *string `json:"resourceGroupId"`
 }
 
 /*
@@ -94,7 +104,10 @@ func NewCreateSubnetRequest(
  * param ipMaskLen: 子网内预留网段掩码长度，此网段IP地址按照单个申请，子网内其余部分IP地址以网段形式分配。此参数非必选，缺省值为0，代表子网内所有IP地址都按照单个申请 (Optional)
  * param domainNames: 域名后缀，不限制个数。总长度最长254个字符，仅支持字母，数字，中划线，下划线和点。 (Optional)
  * param domainNameServers: 域名服务器地址。最多支持5个IPv4地址，不同IPv4地址使用逗号分隔。如不输入或输入空数组，默认使用京东云默认DNS域名服务器地址。如不添加默认DNS域名服务器，可能会导致您无法访问京东云云上基础服务，请谨慎操作 (Optional)
+ * param eipPriorExcludeDestCidrs: 用户网段，绑定EIP的云资源访问用户网段还是走子网关联的路由策略，只在eipPriorEnable为true时参数有效。 (Optional)
  * param dryRun: 是否只预检此次请求。true：不会创建子网，只会对参数进行校验；false：正常的创建请求。默认为false。 (Optional)
+ * param userTags: 用户标签 (Optional)
+ * param resourceGroupId: 资源所属资源组ID (Optional)
  */
 func NewCreateSubnetRequestWithAllParams(
     regionId string,
@@ -106,7 +119,10 @@ func NewCreateSubnetRequestWithAllParams(
     ipMaskLen *int,
     domainNames []string,
     domainNameServers []string,
+    eipPriorExcludeDestCidrs []string,
     dryRun *bool,
+    userTags []vpc.Tag,
+    resourceGroupId *string,
 ) *CreateSubnetRequest {
 
     return &CreateSubnetRequest{
@@ -125,7 +141,10 @@ func NewCreateSubnetRequestWithAllParams(
         IpMaskLen: ipMaskLen,
         DomainNames: domainNames,
         DomainNameServers: domainNameServers,
+        EipPriorExcludeDestCidrs: eipPriorExcludeDestCidrs,
         DryRun: dryRun,
+        UserTags: userTags,
+        ResourceGroupId: resourceGroupId,
     }
 }
 
@@ -178,9 +197,21 @@ func (r *CreateSubnetRequest) SetDomainNames(domainNames []string) {
 func (r *CreateSubnetRequest) SetDomainNameServers(domainNameServers []string) {
     r.DomainNameServers = domainNameServers
 }
+/* param eipPriorExcludeDestCidrs: 用户网段，绑定EIP的云资源访问用户网段还是走子网关联的路由策略，只在eipPriorEnable为true时参数有效。(Optional) */
+func (r *CreateSubnetRequest) SetEipPriorExcludeDestCidrs(eipPriorExcludeDestCidrs []string) {
+    r.EipPriorExcludeDestCidrs = eipPriorExcludeDestCidrs
+}
 /* param dryRun: 是否只预检此次请求。true：不会创建子网，只会对参数进行校验；false：正常的创建请求。默认为false。(Optional) */
 func (r *CreateSubnetRequest) SetDryRun(dryRun bool) {
     r.DryRun = &dryRun
+}
+/* param userTags: 用户标签(Optional) */
+func (r *CreateSubnetRequest) SetUserTags(userTags []vpc.Tag) {
+    r.UserTags = userTags
+}
+/* param resourceGroupId: 资源所属资源组ID(Optional) */
+func (r *CreateSubnetRequest) SetResourceGroupId(resourceGroupId string) {
+    r.ResourceGroupId = &resourceGroupId
 }
 
 

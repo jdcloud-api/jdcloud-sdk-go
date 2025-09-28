@@ -25,6 +25,6 @@ type ModifyVpcSpec struct {
     /* vpc描述，允许输入UTF-8编码下的全部字符，不超过256字符。 (Optional) */
     Description string `json:"description"`
 
-    /* 取值包括true、false，默认为false，不开启组播。 (Optional) */
-    EnableMulticast bool `json:"enableMulticast"`
+    /* 仅支持""，表示修改为不限制网段的vpc (Optional) */
+    AddressPrefix string `json:"addressPrefix"`
 }

@@ -19,9 +19,15 @@ package models
 
 type AddRoutePropagationSpec struct {
 
+    /* 匹配地址前缀类型, 取值范围为CIDR、PREFIXLIST (Optional) */
+    PropagationCidrType string `json:"propagationCidrType"`
+
     /* 允许路由表学习的网段范围，多个网段通过","分隔  */
     PropagationCidrs string `json:"propagationCidrs"`
 
     /* 传播的bgw ID  */
     BgwId string `json:"bgwId"`
+
+    /* 规则匹配优先级，取值范围[101,255]，默认为150。当路由规则子网掩码不同时，路由最长匹配优先；当路由规则子网掩码相同时, 按照优先级匹配转发, 优先级数字越小优先级越高，路由规则子网掩码相同、优先级相同、下一跳不同时，形成等价路由，不同下一跳负载均担。 (Optional) */
+    Priority int `json:"priority"`
 }

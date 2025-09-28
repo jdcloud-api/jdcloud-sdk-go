@@ -22,8 +22,14 @@ type CreateElasticIpSpec struct {
     /* 购买弹性ip数量；取值范围：[1,100]  */
     MaxCount int `json:"maxCount"`
 
+    /* 弹性公网ip的名称，只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不超过32字符。 (Optional) */
+    ElasticIpName string `json:"elasticIpName"`
+
     /* 指定弹性ip地址进行创建，当申请创建多个弹性ip时，必须为空 (Optional) */
     ElasticIpAddress string `json:"elasticIpAddress"`
+
+    /* 弹性ip池id。若值不为空，则会在指定的弹性公网ip池内分配ip (Optional) */
+    ElasticIpPoolId string `json:"elasticIpPoolId"`
 
     /* 弹性ip规格  */
     ElasticIpSpec ElasticIpSpec `json:"elasticIpSpec"`

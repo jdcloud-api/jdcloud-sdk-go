@@ -19,9 +19,12 @@ package models
 
 type OpModifyElasticIpSpec struct {
 
-    /* 弹性公网IP的限速（单位：Mbps），取值范围为[1-3000]  */
+    /* 弹性公网IP的限速（单位：Mbps），取值范围为[1-3000] (Optional) */
     BandwidthMbps int `json:"bandwidthMbps"`
 
     /* 资源所属的用户pin  */
     UserPin string `json:"userPin"`
+
+    /* 弹性公网ip的名称，只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不超过32字符。 (Optional) */
+    ElasticIpName string `json:"elasticIpName"`
 }

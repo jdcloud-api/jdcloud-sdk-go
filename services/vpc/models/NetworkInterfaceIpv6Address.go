@@ -19,6 +19,9 @@ package models
 
 type NetworkInterfaceIpv6Address struct {
 
+    /* 弹性网卡ipv6的ID (Optional) */
+    Ipv6Id string `json:"ipv6Id"`
+
     /* 弹性网卡ipv6地址 (Optional) */
     Ipv6Address string `json:"ipv6Address"`
 }

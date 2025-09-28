@@ -39,6 +39,12 @@ type CreateVpcPeeringRequest struct {
 
     /* VpcPeering 描述，取值范围：0-256个中文、英文大小写的字母、数字和下划线分隔符 (Optional) */
     Description *string `json:"description"`
+
+    /* 用户标签 (Optional) */
+    UserTags []vpc.Tag `json:"userTags"`
+
+    /* 资源所属资源组ID (Optional) */
+    ResourceGroupId *string `json:"resourceGroupId"`
 }
 
 /*
@@ -76,6 +82,8 @@ func NewCreateVpcPeeringRequest(
  * param vpcId: VpcPeering本端Vpc的Id (Required)
  * param remoteVpcId: VpcPeering对端Vpc的Id (Required)
  * param description: VpcPeering 描述，取值范围：0-256个中文、英文大小写的字母、数字和下划线分隔符 (Optional)
+ * param userTags: 用户标签 (Optional)
+ * param resourceGroupId: 资源所属资源组ID (Optional)
  */
 func NewCreateVpcPeeringRequestWithAllParams(
     regionId string,
@@ -83,6 +91,8 @@ func NewCreateVpcPeeringRequestWithAllParams(
     vpcId string,
     remoteVpcId string,
     description *string,
+    userTags []vpc.Tag,
+    resourceGroupId *string,
 ) *CreateVpcPeeringRequest {
 
     return &CreateVpcPeeringRequest{
@@ -97,6 +107,8 @@ func NewCreateVpcPeeringRequestWithAllParams(
         VpcId: vpcId,
         RemoteVpcId: remoteVpcId,
         Description: description,
+        UserTags: userTags,
+        ResourceGroupId: resourceGroupId,
     }
 }
 
@@ -132,6 +144,14 @@ func (r *CreateVpcPeeringRequest) SetRemoteVpcId(remoteVpcId string) {
 /* param description: VpcPeering 描述，取值范围：0-256个中文、英文大小写的字母、数字和下划线分隔符(Optional) */
 func (r *CreateVpcPeeringRequest) SetDescription(description string) {
     r.Description = &description
+}
+/* param userTags: 用户标签(Optional) */
+func (r *CreateVpcPeeringRequest) SetUserTags(userTags []vpc.Tag) {
+    r.UserTags = userTags
+}
+/* param resourceGroupId: 资源所属资源组ID(Optional) */
+func (r *CreateVpcPeeringRequest) SetResourceGroupId(resourceGroupId string) {
+    r.ResourceGroupId = &resourceGroupId
 }
 
 

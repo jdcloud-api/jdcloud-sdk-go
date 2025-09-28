@@ -24,4 +24,7 @@ type UnassignSecondaryIpsSpec struct {
 
     /* 指定删除的secondaryIp网段 (Optional) */
     SecondaryCidrs []string `json:"secondaryCidrs"`
+
+    /* 公网是否同步删除 (Optional) */
+    DeleteElasticIp bool `json:"deleteElasticIp"`
 }

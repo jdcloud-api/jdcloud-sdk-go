@@ -26,10 +26,17 @@ type CreateBandwidthPackageSpec struct {
     /* 描述，长度不超过256个字符 (Optional) */
     Description string `json:"description"`
 
-    /* 共享带宽包带宽上限，取值范围200-5000，单位为Mbps，保底带宽 = 共享带宽包带宽上限 * 20%  */
+    /* 共享带宽包带宽上限，单位为Mbps，保底带宽 = 共享带宽包带宽上限 * 20%
+chargeMode=postpaid_by_duration，范围支50～5000
+chargeMode=prepaid_by_duration，范围支持100～5000
+chargeMode=postpaid_by_usage，范围支持200～5000
+  */
     BandwidthMbps int `json:"bandwidthMbps"`
 
-    /* 线路信息，默认bgp，目前只支持中心节点的BGP线路 (Optional) */
+    /* 按用量计费类型，当chargeSpec为按用量时有效，0代表按增强95，1代表按95消峰，2代表按主流量计费，缺省不填写时为增强95 (Optional) */
+    ChargeType int `json:"chargeType"`
+
+    /* 线路信息，默认bgp，可以通过describeUserProviders接口获取 (Optional) */
     Provider string `json:"provider"`
 
     /* 计费配置。支持包年包月、按配置、按用量计费模式 (Optional) */

@@ -30,4 +30,10 @@ type CreateVpcPeeringSpec struct {
 
     /* VpcPeering 描述，取值范围：0-256个中文、英文大小写的字母、数字和下划线分隔符 (Optional) */
     Description string `json:"description"`
+
+    /* 用户标签 (Optional) */
+    UserTags []Tag `json:"userTags"`
+
+    /* 资源所属资源组ID (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
 }

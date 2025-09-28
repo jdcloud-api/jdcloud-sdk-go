@@ -31,8 +31,14 @@ type CreateElasticIpsRequest struct {
     /* 购买弹性ip数量；取值范围：[1,100]  */
     MaxCount int `json:"maxCount"`
 
+    /* 弹性公网ip的名称，只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不超过32字符。 (Optional) */
+    ElasticIpName *string `json:"elasticIpName"`
+
     /* 指定弹性ip地址进行创建，当申请创建多个弹性ip时，必须为空 (Optional) */
     ElasticIpAddress *string `json:"elasticIpAddress"`
+
+    /* 弹性ip池id。若值不为空，则会在指定的弹性公网ip池内分配ip (Optional) */
+    ElasticIpPoolId *string `json:"elasticIpPoolId"`
 
     /* 弹性ip规格  */
     ElasticIpSpec *vpc.ElasticIpSpec `json:"elasticIpSpec"`
@@ -79,7 +85,9 @@ func NewCreateElasticIpsRequest(
 /*
  * param regionId: Region ID (Required)
  * param maxCount: 购买弹性ip数量；取值范围：[1,100] (Required)
+ * param elasticIpName: 弹性公网ip的名称，只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不超过32字符。 (Optional)
  * param elasticIpAddress: 指定弹性ip地址进行创建，当申请创建多个弹性ip时，必须为空 (Optional)
+ * param elasticIpPoolId: 弹性ip池id。若值不为空，则会在指定的弹性公网ip池内分配ip (Optional)
  * param elasticIpSpec: 弹性ip规格 (Required)
  * param userTags: 用户标签 (Optional)
  * param ipType: 弹性ip类型，取值：standard(标准公网IP)，edge(边缘公网IP)，默认为standard (Optional)
@@ -89,7 +97,9 @@ func NewCreateElasticIpsRequest(
 func NewCreateElasticIpsRequestWithAllParams(
     regionId string,
     maxCount int,
+    elasticIpName *string,
     elasticIpAddress *string,
+    elasticIpPoolId *string,
     elasticIpSpec *vpc.ElasticIpSpec,
     userTags []vpc.Tag,
     ipType *string,
@@ -106,7 +116,9 @@ func NewCreateElasticIpsRequestWithAllParams(
         },
         RegionId: regionId,
         MaxCount: maxCount,
+        ElasticIpName: elasticIpName,
         ElasticIpAddress: elasticIpAddress,
+        ElasticIpPoolId: elasticIpPoolId,
         ElasticIpSpec: elasticIpSpec,
         UserTags: userTags,
         IpType: ipType,
@@ -136,9 +148,17 @@ func (r *CreateElasticIpsRequest) SetRegionId(regionId string) {
 func (r *CreateElasticIpsRequest) SetMaxCount(maxCount int) {
     r.MaxCount = maxCount
 }
+/* param elasticIpName: 弹性公网ip的名称，只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不超过32字符。(Optional) */
+func (r *CreateElasticIpsRequest) SetElasticIpName(elasticIpName string) {
+    r.ElasticIpName = &elasticIpName
+}
 /* param elasticIpAddress: 指定弹性ip地址进行创建，当申请创建多个弹性ip时，必须为空(Optional) */
 func (r *CreateElasticIpsRequest) SetElasticIpAddress(elasticIpAddress string) {
     r.ElasticIpAddress = &elasticIpAddress
+}
+/* param elasticIpPoolId: 弹性ip池id。若值不为空，则会在指定的弹性公网ip池内分配ip(Optional) */
+func (r *CreateElasticIpsRequest) SetElasticIpPoolId(elasticIpPoolId string) {
+    r.ElasticIpPoolId = &elasticIpPoolId
 }
 /* param elasticIpSpec: 弹性ip规格(Required) */
 func (r *CreateElasticIpsRequest) SetElasticIpSpec(elasticIpSpec *vpc.ElasticIpSpec) {

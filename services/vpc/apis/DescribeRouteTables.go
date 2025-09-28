@@ -43,6 +43,12 @@ associateType - 绑定资源类型，取值：subnet，gateway，支持单个
 azs - 可用区，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
+
+    /* Tag筛选条件 (Optional) */
+    Tags []vpc.TagFilter `json:"tags"`
+
+    /* 资源组筛选条件 (Optional) */
+    ResourceGroupIds []string `json:"resourceGroupIds"`
 }
 
 /*
@@ -76,12 +82,16 @@ azType - 路由表az类型，取值：all(全部类型)，standard(标准路由�
 associateType - 绑定资源类型，取值：subnet，gateway，支持单个
 azs - 可用区，支持多个
  (Optional)
+ * param tags: Tag筛选条件 (Optional)
+ * param resourceGroupIds: 资源组筛选条件 (Optional)
  */
 func NewDescribeRouteTablesRequestWithAllParams(
     regionId string,
     pageNumber *int,
     pageSize *int,
     filters []common.Filter,
+    tags []vpc.TagFilter,
+    resourceGroupIds []string,
 ) *DescribeRouteTablesRequest {
 
     return &DescribeRouteTablesRequest{
@@ -95,6 +105,8 @@ func NewDescribeRouteTablesRequestWithAllParams(
         PageNumber: pageNumber,
         PageSize: pageSize,
         Filters: filters,
+        Tags: tags,
+        ResourceGroupIds: resourceGroupIds,
     }
 }
 
@@ -132,6 +144,14 @@ azs - 可用区，支持多个
 (Optional) */
 func (r *DescribeRouteTablesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
+}
+/* param tags: Tag筛选条件(Optional) */
+func (r *DescribeRouteTablesRequest) SetTags(tags []vpc.TagFilter) {
+    r.Tags = tags
+}
+/* param resourceGroupIds: 资源组筛选条件(Optional) */
+func (r *DescribeRouteTablesRequest) SetResourceGroupIds(resourceGroupIds []string) {
+    r.ResourceGroupIds = resourceGroupIds
 }
 
 

@@ -27,16 +27,16 @@ type DescribeQuotaRequest struct {
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* 资源类型，取值范围：vpc、elastic_ip、subnet、security_group、vpcpeering、network_interface（配额只统计辅助网卡）、acl、aclRule、routeTable、staticRoute、propagatedRoute、securityGroupRule、network_interface_cidr、bwpByUsage、bandwidthPackageIp、natGateway、natGatewayFip、trafficMirrorSession、trafficMirrorFilter、trafficMirrorFilterRule、trafficMirrorSource,haVip,haVipBinding  */
+    /* 资源类型、取值范围：vpc、elastic_ip、ipAddressPool、subnet、security_group、vpcpeering、network_interface（配额只统计辅助网卡）、acl、aclRule、routeTable、staticRoute、propagatedRoute、securityGroupRule、network_interface_cidr、bwpByUsage、bandwidthPackageIp、natGateway、natGatewayFip、natGatewaySnat、trafficMirrorSession、trafficMirrorFilter、trafficMirrorFilterRule、trafficMirrorSource、haVip、haVipBinding、prefixList、secondaryIp、eniIpv6Address、ipv6PublicAddress、eipPriorExcludeDestCidr  */
     Type string `json:"type"`
 
-    /* type为vpc、elastic_ip、network_interface、bwpByUsage、natGateway、trafficMirrorSession、trafficMirrorFilter不设置, type为subnet、security_group、vpcpeering、acl、routeTable设置为vpcId, type为aclRule设置为aclId, type为staticRoute、propagatedRoute设置为routeTableId, type为securityGroupRule为securityGroupId, type为network_interface_cidr设置为networkInterfaceId，type为bandwidthPackageIp设置为bandwidthPackageId，natGatewayFip设置为natGatewayId,trafficMirrorFilterRule设置为trafficMirrorFilterId,trafficMirrorSource设置为trafficMirrorSessionId,haVip设置为vpcId,haVipBinding设置为haVipId (Optional) */
+    /* type为vpc、elastic_ip、ipAddressPool、ipv6PublicAddress、network_interface、bwpByUsage、natGateway、trafficMirrorSession、trafficMirrorFilter、prefixList不设置、type为subnet、security_group、vpcpeering、acl、routeTable设置为vpcId、type为aclRule设置为aclId、type为staticRoute、propagatedRoute设置为routeTableId、type为securityGroupRule为securityGroupId、type为network_interface_cidr设置为networkInterfaceId、type为bandwidthPackageIp设置为bandwidthPackageId、natGatewayFip和natGatewaySnat设置为natGatewayId、trafficMirrorFilterRule设置为trafficMirrorFilterId、trafficMirrorSource设置为trafficMirrorSessionId、haVip设置为vpcId、haVipBinding设置为haVipId、type为secondaryIp设置为networkInterfaceId、type为eniIpv6Address设置为networkInterfaceId、type为eipPriorExcludeDestCidr设置为subnetId (Optional) */
     ParentResourceId *string `json:"parentResourceId"`
 }
 
 /*
  * param regionId: Region ID (Required)
- * param type_: 资源类型，取值范围：vpc、elastic_ip、subnet、security_group、vpcpeering、network_interface（配额只统计辅助网卡）、acl、aclRule、routeTable、staticRoute、propagatedRoute、securityGroupRule、network_interface_cidr、bwpByUsage、bandwidthPackageIp、natGateway、natGatewayFip、trafficMirrorSession、trafficMirrorFilter、trafficMirrorFilterRule、trafficMirrorSource,haVip,haVipBinding (Required)
+ * param type_: 资源类型、取值范围：vpc、elastic_ip、ipAddressPool、subnet、security_group、vpcpeering、network_interface（配额只统计辅助网卡）、acl、aclRule、routeTable、staticRoute、propagatedRoute、securityGroupRule、network_interface_cidr、bwpByUsage、bandwidthPackageIp、natGateway、natGatewayFip、natGatewaySnat、trafficMirrorSession、trafficMirrorFilter、trafficMirrorFilterRule、trafficMirrorSource、haVip、haVipBinding、prefixList、secondaryIp、eniIpv6Address、ipv6PublicAddress、eipPriorExcludeDestCidr (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -59,8 +59,8 @@ func NewDescribeQuotaRequest(
 
 /*
  * param regionId: Region ID (Required)
- * param type_: 资源类型，取值范围：vpc、elastic_ip、subnet、security_group、vpcpeering、network_interface（配额只统计辅助网卡）、acl、aclRule、routeTable、staticRoute、propagatedRoute、securityGroupRule、network_interface_cidr、bwpByUsage、bandwidthPackageIp、natGateway、natGatewayFip、trafficMirrorSession、trafficMirrorFilter、trafficMirrorFilterRule、trafficMirrorSource,haVip,haVipBinding (Required)
- * param parentResourceId: type为vpc、elastic_ip、network_interface、bwpByUsage、natGateway、trafficMirrorSession、trafficMirrorFilter不设置, type为subnet、security_group、vpcpeering、acl、routeTable设置为vpcId, type为aclRule设置为aclId, type为staticRoute、propagatedRoute设置为routeTableId, type为securityGroupRule为securityGroupId, type为network_interface_cidr设置为networkInterfaceId，type为bandwidthPackageIp设置为bandwidthPackageId，natGatewayFip设置为natGatewayId,trafficMirrorFilterRule设置为trafficMirrorFilterId,trafficMirrorSource设置为trafficMirrorSessionId,haVip设置为vpcId,haVipBinding设置为haVipId (Optional)
+ * param type_: 资源类型、取值范围：vpc、elastic_ip、ipAddressPool、subnet、security_group、vpcpeering、network_interface（配额只统计辅助网卡）、acl、aclRule、routeTable、staticRoute、propagatedRoute、securityGroupRule、network_interface_cidr、bwpByUsage、bandwidthPackageIp、natGateway、natGatewayFip、natGatewaySnat、trafficMirrorSession、trafficMirrorFilter、trafficMirrorFilterRule、trafficMirrorSource、haVip、haVipBinding、prefixList、secondaryIp、eniIpv6Address、ipv6PublicAddress、eipPriorExcludeDestCidr (Required)
+ * param parentResourceId: type为vpc、elastic_ip、ipAddressPool、ipv6PublicAddress、network_interface、bwpByUsage、natGateway、trafficMirrorSession、trafficMirrorFilter、prefixList不设置、type为subnet、security_group、vpcpeering、acl、routeTable设置为vpcId、type为aclRule设置为aclId、type为staticRoute、propagatedRoute设置为routeTableId、type为securityGroupRule为securityGroupId、type为network_interface_cidr设置为networkInterfaceId、type为bandwidthPackageIp设置为bandwidthPackageId、natGatewayFip和natGatewaySnat设置为natGatewayId、trafficMirrorFilterRule设置为trafficMirrorFilterId、trafficMirrorSource设置为trafficMirrorSessionId、haVip设置为vpcId、haVipBinding设置为haVipId、type为secondaryIp设置为networkInterfaceId、type为eniIpv6Address设置为networkInterfaceId、type为eipPriorExcludeDestCidr设置为subnetId (Optional)
  */
 func NewDescribeQuotaRequestWithAllParams(
     regionId string,
@@ -98,11 +98,11 @@ func NewDescribeQuotaRequestWithoutParam() *DescribeQuotaRequest {
 func (r *DescribeQuotaRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-/* param type_: 资源类型，取值范围：vpc、elastic_ip、subnet、security_group、vpcpeering、network_interface（配额只统计辅助网卡）、acl、aclRule、routeTable、staticRoute、propagatedRoute、securityGroupRule、network_interface_cidr、bwpByUsage、bandwidthPackageIp、natGateway、natGatewayFip、trafficMirrorSession、trafficMirrorFilter、trafficMirrorFilterRule、trafficMirrorSource,haVip,haVipBinding(Required) */
+/* param type_: 资源类型、取值范围：vpc、elastic_ip、ipAddressPool、subnet、security_group、vpcpeering、network_interface（配额只统计辅助网卡）、acl、aclRule、routeTable、staticRoute、propagatedRoute、securityGroupRule、network_interface_cidr、bwpByUsage、bandwidthPackageIp、natGateway、natGatewayFip、natGatewaySnat、trafficMirrorSession、trafficMirrorFilter、trafficMirrorFilterRule、trafficMirrorSource、haVip、haVipBinding、prefixList、secondaryIp、eniIpv6Address、ipv6PublicAddress、eipPriorExcludeDestCidr(Required) */
 func (r *DescribeQuotaRequest) SetType(type_ string) {
     r.Type = type_
 }
-/* param parentResourceId: type为vpc、elastic_ip、network_interface、bwpByUsage、natGateway、trafficMirrorSession、trafficMirrorFilter不设置, type为subnet、security_group、vpcpeering、acl、routeTable设置为vpcId, type为aclRule设置为aclId, type为staticRoute、propagatedRoute设置为routeTableId, type为securityGroupRule为securityGroupId, type为network_interface_cidr设置为networkInterfaceId，type为bandwidthPackageIp设置为bandwidthPackageId，natGatewayFip设置为natGatewayId,trafficMirrorFilterRule设置为trafficMirrorFilterId,trafficMirrorSource设置为trafficMirrorSessionId,haVip设置为vpcId,haVipBinding设置为haVipId(Optional) */
+/* param parentResourceId: type为vpc、elastic_ip、ipAddressPool、ipv6PublicAddress、network_interface、bwpByUsage、natGateway、trafficMirrorSession、trafficMirrorFilter、prefixList不设置、type为subnet、security_group、vpcpeering、acl、routeTable设置为vpcId、type为aclRule设置为aclId、type为staticRoute、propagatedRoute设置为routeTableId、type为securityGroupRule为securityGroupId、type为network_interface_cidr设置为networkInterfaceId、type为bandwidthPackageIp设置为bandwidthPackageId、natGatewayFip和natGatewaySnat设置为natGatewayId、trafficMirrorFilterRule设置为trafficMirrorFilterId、trafficMirrorSource设置为trafficMirrorSessionId、haVip设置为vpcId、haVipBinding设置为haVipId、type为secondaryIp设置为networkInterfaceId、type为eniIpv6Address设置为networkInterfaceId、type为eipPriorExcludeDestCidr设置为subnetId(Optional) */
 func (r *DescribeQuotaRequest) SetParentResourceId(parentResourceId string) {
     r.ParentResourceId = &parentResourceId
 }

@@ -38,6 +38,9 @@ type ModifyNetworkInterfaceRequest struct {
 
     /* 以覆盖原有安全组的方式更新的安全组。如果更新安全组ID列表，最多5个安全组 (Optional) */
     SecurityGroups []string `json:"securityGroups"`
+
+    /* 弹性网卡mac地址，不超过32字符 (Optional) */
+    MacAddress *string `json:"macAddress"`
 }
 
 /*
@@ -69,6 +72,7 @@ func NewModifyNetworkInterfaceRequest(
  * param networkInterfaceName: 弹性网卡名称,只允许输入中文、数字、大小写字母、英文下划线“_”及中划线“-”，不允许为空且不超过32字符 (Optional)
  * param description: 描述,允许输入UTF-8编码下的全部字符，不超过256字符 (Optional)
  * param securityGroups: 以覆盖原有安全组的方式更新的安全组。如果更新安全组ID列表，最多5个安全组 (Optional)
+ * param macAddress: 弹性网卡mac地址，不超过32字符 (Optional)
  */
 func NewModifyNetworkInterfaceRequestWithAllParams(
     regionId string,
@@ -76,6 +80,7 @@ func NewModifyNetworkInterfaceRequestWithAllParams(
     networkInterfaceName *string,
     description *string,
     securityGroups []string,
+    macAddress *string,
 ) *ModifyNetworkInterfaceRequest {
 
     return &ModifyNetworkInterfaceRequest{
@@ -90,6 +95,7 @@ func NewModifyNetworkInterfaceRequestWithAllParams(
         NetworkInterfaceName: networkInterfaceName,
         Description: description,
         SecurityGroups: securityGroups,
+        MacAddress: macAddress,
     }
 }
 
@@ -125,6 +131,10 @@ func (r *ModifyNetworkInterfaceRequest) SetDescription(description string) {
 /* param securityGroups: 以覆盖原有安全组的方式更新的安全组。如果更新安全组ID列表，最多5个安全组(Optional) */
 func (r *ModifyNetworkInterfaceRequest) SetSecurityGroups(securityGroups []string) {
     r.SecurityGroups = securityGroups
+}
+/* param macAddress: 弹性网卡mac地址，不超过32字符(Optional) */
+func (r *ModifyNetworkInterfaceRequest) SetMacAddress(macAddress string) {
+    r.MacAddress = &macAddress
 }
 
 

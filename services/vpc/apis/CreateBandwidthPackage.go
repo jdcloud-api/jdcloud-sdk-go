@@ -35,10 +35,17 @@ type CreateBandwidthPackageRequest struct {
     /* 描述，长度不超过256个字符 (Optional) */
     Description *string `json:"description"`
 
-    /* 共享带宽包带宽上限，取值范围200-5000，单位为Mbps，保底带宽 = 共享带宽包带宽上限 * 20%  */
+    /* 共享带宽包带宽上限，单位为Mbps，保底带宽 = 共享带宽包带宽上限 * 20%
+chargeMode=postpaid_by_duration，范围支50～5000
+chargeMode=prepaid_by_duration，范围支持100～5000
+chargeMode=postpaid_by_usage，范围支持200～5000
+  */
     BandwidthMbps int `json:"bandwidthMbps"`
 
-    /* 线路信息，默认bgp，目前只支持中心节点的BGP线路 (Optional) */
+    /* 按用量计费类型，当chargeSpec为按用量时有效，0代表按增强95，1代表按95消峰，2代表按主流量计费，缺省不填写时为增强95 (Optional) */
+    ChargeType *int `json:"chargeType"`
+
+    /* 线路信息，默认bgp，可以通过describeUserProviders接口获取 (Optional) */
     Provider *string `json:"provider"`
 
     /* 计费配置。支持包年包月、按配置、按用量计费模式 (Optional) */
@@ -54,7 +61,11 @@ type CreateBandwidthPackageRequest struct {
 /*
  * param regionId: Region ID (Required)
  * param name: 名称，只支持中文、数字、大小写字母、英文下划线“_”及中划线“-”，且长度不超过32个字符 (Required)
- * param bandwidthMbps: 共享带宽包带宽上限，取值范围200-5000，单位为Mbps，保底带宽 = 共享带宽包带宽上限 * 20% (Required)
+ * param bandwidthMbps: 共享带宽包带宽上限，单位为Mbps，保底带宽 = 共享带宽包带宽上限 * 20%
+chargeMode=postpaid_by_duration，范围支50～5000
+chargeMode=prepaid_by_duration，范围支持100～5000
+chargeMode=postpaid_by_usage，范围支持200～5000
+ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -81,8 +92,13 @@ func NewCreateBandwidthPackageRequest(
  * param regionId: Region ID (Required)
  * param name: 名称，只支持中文、数字、大小写字母、英文下划线“_”及中划线“-”，且长度不超过32个字符 (Required)
  * param description: 描述，长度不超过256个字符 (Optional)
- * param bandwidthMbps: 共享带宽包带宽上限，取值范围200-5000，单位为Mbps，保底带宽 = 共享带宽包带宽上限 * 20% (Required)
- * param provider: 线路信息，默认bgp，目前只支持中心节点的BGP线路 (Optional)
+ * param bandwidthMbps: 共享带宽包带宽上限，单位为Mbps，保底带宽 = 共享带宽包带宽上限 * 20%
+chargeMode=postpaid_by_duration，范围支50～5000
+chargeMode=prepaid_by_duration，范围支持100～5000
+chargeMode=postpaid_by_usage，范围支持200～5000
+ (Required)
+ * param chargeType: 按用量计费类型，当chargeSpec为按用量时有效，0代表按增强95，1代表按95消峰，2代表按主流量计费，缺省不填写时为增强95 (Optional)
+ * param provider: 线路信息，默认bgp，可以通过describeUserProviders接口获取 (Optional)
  * param chargeSpec: 计费配置。支持包年包月、按配置、按用量计费模式 (Optional)
  * param userTags: 用户标签 (Optional)
  * param resourceGroupId: 资源所属资源组ID (Optional)
@@ -92,6 +108,7 @@ func NewCreateBandwidthPackageRequestWithAllParams(
     name string,
     description *string,
     bandwidthMbps int,
+    chargeType *int,
     provider *string,
     chargeSpec *charge.ChargeSpec,
     userTags []vpc.Tag,
@@ -109,6 +126,7 @@ func NewCreateBandwidthPackageRequestWithAllParams(
         Name: name,
         Description: description,
         BandwidthMbps: bandwidthMbps,
+        ChargeType: chargeType,
         Provider: provider,
         ChargeSpec: chargeSpec,
         UserTags: userTags,
@@ -141,11 +159,19 @@ func (r *CreateBandwidthPackageRequest) SetName(name string) {
 func (r *CreateBandwidthPackageRequest) SetDescription(description string) {
     r.Description = &description
 }
-/* param bandwidthMbps: 共享带宽包带宽上限，取值范围200-5000，单位为Mbps，保底带宽 = 共享带宽包带宽上限 * 20%(Required) */
+/* param bandwidthMbps: 共享带宽包带宽上限，单位为Mbps，保底带宽 = 共享带宽包带宽上限 * 20%
+chargeMode=postpaid_by_duration，范围支50～5000
+chargeMode=prepaid_by_duration，范围支持100～5000
+chargeMode=postpaid_by_usage，范围支持200～5000
+(Required) */
 func (r *CreateBandwidthPackageRequest) SetBandwidthMbps(bandwidthMbps int) {
     r.BandwidthMbps = bandwidthMbps
 }
-/* param provider: 线路信息，默认bgp，目前只支持中心节点的BGP线路(Optional) */
+/* param chargeType: 按用量计费类型，当chargeSpec为按用量时有效，0代表按增强95，1代表按95消峰，2代表按主流量计费，缺省不填写时为增强95(Optional) */
+func (r *CreateBandwidthPackageRequest) SetChargeType(chargeType int) {
+    r.ChargeType = &chargeType
+}
+/* param provider: 线路信息，默认bgp，可以通过describeUserProviders接口获取(Optional) */
 func (r *CreateBandwidthPackageRequest) SetProvider(provider string) {
     r.Provider = &provider
 }

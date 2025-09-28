@@ -47,6 +47,12 @@ type NatGatewaySpec struct {
     /* 计费配置，仅支持按配置，默认按配置 (Optional) */
     NatGatewayCharge charge.ChargeSpec `json:"natGatewayCharge"`
 
-    /* 描述,​ 允许输入UTF-8编码下的全部字符，不超过256字符 (Optional) */
+    /* 描述, 允许输入UTF-8编码下的全部字符，不超过256字符 (Optional) */
     Description string `json:"description"`
+
+    /* 用户标签 (Optional) */
+    UserTags []Tag `json:"userTags"`
+
+    /* 资源所属资源组ID (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
 }

@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    vpc "github.com/jdcloud-api/jdcloud-sdk-go/services/vpc/models"
 )
 
 type CreateNetworkInterfaceRequest struct {
@@ -53,6 +54,15 @@ type CreateNetworkInterfaceRequest struct {
 
     /* 描述,​ 允许输入UTF-8编码下的全部字符，不超过256字符 (Optional) */
     Description *string `json:"description"`
+
+    /* ipv6地址列表 (Optional) */
+    Ipv6Addresses []string `json:"ipv6Addresses"`
+
+    /* 用户标签 (Optional) */
+    UserTags []vpc.Tag `json:"userTags"`
+
+    /* 资源所属资源组ID (Optional) */
+    ResourceGroupId *string `json:"resourceGroupId"`
 }
 
 /*
@@ -89,6 +99,9 @@ func NewCreateNetworkInterfaceRequest(
  * param securityGroups: 要绑定的安全组ID列表，最多指定5个安全组 (Optional)
  * param sanityCheck: 源和目标IP地址校验，取值为0或者1,默认为1 (Optional)
  * param description: 描述,​ 允许输入UTF-8编码下的全部字符，不超过256字符 (Optional)
+ * param ipv6Addresses: ipv6地址列表 (Optional)
+ * param userTags: 用户标签 (Optional)
+ * param resourceGroupId: 资源所属资源组ID (Optional)
  */
 func NewCreateNetworkInterfaceRequestWithAllParams(
     regionId string,
@@ -101,6 +114,9 @@ func NewCreateNetworkInterfaceRequestWithAllParams(
     securityGroups []string,
     sanityCheck *int,
     description *string,
+    ipv6Addresses []string,
+    userTags []vpc.Tag,
+    resourceGroupId *string,
 ) *CreateNetworkInterfaceRequest {
 
     return &CreateNetworkInterfaceRequest{
@@ -120,6 +136,9 @@ func NewCreateNetworkInterfaceRequestWithAllParams(
         SecurityGroups: securityGroups,
         SanityCheck: sanityCheck,
         Description: description,
+        Ipv6Addresses: ipv6Addresses,
+        UserTags: userTags,
+        ResourceGroupId: resourceGroupId,
     }
 }
 
@@ -175,6 +194,18 @@ func (r *CreateNetworkInterfaceRequest) SetSanityCheck(sanityCheck int) {
 /* param description: 描述,​ 允许输入UTF-8编码下的全部字符，不超过256字符(Optional) */
 func (r *CreateNetworkInterfaceRequest) SetDescription(description string) {
     r.Description = &description
+}
+/* param ipv6Addresses: ipv6地址列表(Optional) */
+func (r *CreateNetworkInterfaceRequest) SetIpv6Addresses(ipv6Addresses []string) {
+    r.Ipv6Addresses = ipv6Addresses
+}
+/* param userTags: 用户标签(Optional) */
+func (r *CreateNetworkInterfaceRequest) SetUserTags(userTags []vpc.Tag) {
+    r.UserTags = userTags
+}
+/* param resourceGroupId: 资源所属资源组ID(Optional) */
+func (r *CreateNetworkInterfaceRequest) SetResourceGroupId(resourceGroupId string) {
+    r.ResourceGroupId = &resourceGroupId
 }
 
 

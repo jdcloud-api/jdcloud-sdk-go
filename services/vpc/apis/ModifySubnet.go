@@ -44,6 +44,9 @@ type ModifySubnetRequest struct {
 
     /* 域名服务器地址。最多支持5个IPv4地址，不同IPv4地址使用逗号分隔。如输入空数组，默认使用京东云默认DNS域名服务器地址。如不添加默认DNS域名服务器，可能会导致您无法访问京东云云上基础服务，请谨慎操作 (Optional) */
     DomainNameServers []string `json:"domainNameServers"`
+
+    /* 更新用户网段，绑定EIP的云资源访问用户网段还是走子网关联的路由策略，仅在eipPriorEnable为true时参数有效。 (Optional) */
+    EipPriorExcludeDestCidrs []string `json:"eipPriorExcludeDestCidrs"`
 }
 
 /*
@@ -77,6 +80,7 @@ func NewModifySubnetRequest(
  * param ipMaskLen: 子网内预留网段掩码长度，此网段IP地址按照单个申请，子网内其余部分IP地址以网段形式分配。此参数非必选，缺省值为0，代表子网内所有IP地址都按照单个申请 (Optional)
  * param domainNames: 域名后缀，不限制个数。总长度最长254个字符，仅支持字母，数字，中划线，下划线和点。 (Optional)
  * param domainNameServers: 域名服务器地址。最多支持5个IPv4地址，不同IPv4地址使用逗号分隔。如输入空数组，默认使用京东云默认DNS域名服务器地址。如不添加默认DNS域名服务器，可能会导致您无法访问京东云云上基础服务，请谨慎操作 (Optional)
+ * param eipPriorExcludeDestCidrs: 更新用户网段，绑定EIP的云资源访问用户网段还是走子网关联的路由策略，仅在eipPriorEnable为true时参数有效。 (Optional)
  */
 func NewModifySubnetRequestWithAllParams(
     regionId string,
@@ -86,6 +90,7 @@ func NewModifySubnetRequestWithAllParams(
     ipMaskLen *int,
     domainNames []string,
     domainNameServers []string,
+    eipPriorExcludeDestCidrs []string,
 ) *ModifySubnetRequest {
 
     return &ModifySubnetRequest{
@@ -102,6 +107,7 @@ func NewModifySubnetRequestWithAllParams(
         IpMaskLen: ipMaskLen,
         DomainNames: domainNames,
         DomainNameServers: domainNameServers,
+        EipPriorExcludeDestCidrs: eipPriorExcludeDestCidrs,
     }
 }
 
@@ -145,6 +151,10 @@ func (r *ModifySubnetRequest) SetDomainNames(domainNames []string) {
 /* param domainNameServers: 域名服务器地址。最多支持5个IPv4地址，不同IPv4地址使用逗号分隔。如输入空数组，默认使用京东云默认DNS域名服务器地址。如不添加默认DNS域名服务器，可能会导致您无法访问京东云云上基础服务，请谨慎操作(Optional) */
 func (r *ModifySubnetRequest) SetDomainNameServers(domainNameServers []string) {
     r.DomainNameServers = domainNameServers
+}
+/* param eipPriorExcludeDestCidrs: 更新用户网段，绑定EIP的云资源访问用户网段还是走子网关联的路由策略，仅在eipPriorEnable为true时参数有效。(Optional) */
+func (r *ModifySubnetRequest) SetEipPriorExcludeDestCidrs(eipPriorExcludeDestCidrs []string) {
+    r.EipPriorExcludeDestCidrs = eipPriorExcludeDestCidrs
 }
 
 
