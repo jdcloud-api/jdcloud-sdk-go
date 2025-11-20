@@ -101,16 +101,15 @@ func NewDeleteDatapushVenderRequestWithoutParam() *DeleteDatapushVenderRequest {
 func (r *DeleteDatapushVenderRequest) SetAppkey(appkey string) {
     r.Appkey = appkey
 }
-
 /* param ydRdsInstanceId: 云鼎数据库实例ID(Required) */
 func (r *DeleteDatapushVenderRequest) SetYdRdsInstanceId(ydRdsInstanceId string) {
     r.YdRdsInstanceId = ydRdsInstanceId
 }
-
 /* param venderId: 商家ID(Required) */
 func (r *DeleteDatapushVenderRequest) SetVenderId(venderId string) {
     r.VenderId = venderId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

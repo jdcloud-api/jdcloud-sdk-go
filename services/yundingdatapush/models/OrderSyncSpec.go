@@ -25,6 +25,9 @@ type OrderSyncSpec struct {
     /* 商家ID  */
     VenderId string `json:"venderId"`
 
+    /* 商家类型，支持：POP(默认)，DROPSHIP (Optional) */
+    VenderType *string `json:"venderType"`
+
     /* 同步天数  */
     Days int `json:"days"`
 }

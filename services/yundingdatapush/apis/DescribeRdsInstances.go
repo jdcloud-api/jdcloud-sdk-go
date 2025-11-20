@@ -85,6 +85,7 @@ func (r *DescribeRdsInstancesRequest) SetAppkey(appkey string) {
     r.Appkey = appkey
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r DescribeRdsInstancesRequest) GetRegionId() string {

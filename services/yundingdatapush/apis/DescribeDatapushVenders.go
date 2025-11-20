@@ -120,36 +120,31 @@ func NewDescribeDatapushVendersRequestWithoutParam() *DescribeDatapushVendersReq
 func (r *DescribeDatapushVendersRequest) SetAppkey(appkey string) {
     r.Appkey = appkey
 }
-
 /* param pageNumber: 页码(Optional) */
 func (r *DescribeDatapushVendersRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 页大小(Optional) */
 func (r *DescribeDatapushVendersRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param ydRdsInstanceId: 云鼎数据库实例ID(Optional) */
 func (r *DescribeDatapushVendersRequest) SetYdRdsInstanceId(ydRdsInstanceId string) {
     r.YdRdsInstanceId = &ydRdsInstanceId
 }
-
 /* param rdsInstanceName: 数据库实例名称(Optional) */
 func (r *DescribeDatapushVendersRequest) SetRdsInstanceName(rdsInstanceName string) {
     r.RdsInstanceName = &rdsInstanceName
 }
-
 /* param venderId: 商家ID(Optional) */
 func (r *DescribeDatapushVendersRequest) SetVenderId(venderId string) {
     r.VenderId = &venderId
 }
-
 /* param venderName: 商家店铺名称(Optional) */
 func (r *DescribeDatapushVendersRequest) SetVenderName(venderName string) {
     r.VenderName = &venderName
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
