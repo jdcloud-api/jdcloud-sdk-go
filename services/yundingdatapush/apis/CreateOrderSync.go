@@ -89,6 +89,7 @@ func (r *CreateOrderSyncRequest) SetOrderSyncSpec(orderSyncSpec *yundingdatapush
     r.OrderSyncSpec = orderSyncSpec
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r CreateOrderSyncRequest) GetRegionId() string {

@@ -89,6 +89,7 @@ func (r *AddDatapushVenderRequest) SetDatapushVender(datapushVender *yundingdata
     r.DatapushVender = datapushVender
 }
 
+
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
 func (r AddDatapushVenderRequest) GetRegionId() string {
