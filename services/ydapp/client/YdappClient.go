@@ -57,69 +57,6 @@ func (c *YdappClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
 }
 
-/* <p>申请6小时有效期的令牌。 使用<code>docker</code> CLI push和pull镜像。</p>
-<p><code>authorizationToken</code>为每个registry返回一个base64编码的字符串，解码后<code>docker login</code>命令
-可完成指定registry的鉴权。</p>
- */
-func (c *YdappClient) DescribeCustomRegistryToken(request *ydapp.DescribeCustomRegistryTokenRequest) (*ydapp.DescribeCustomRegistryTokenResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ydapp.DescribeCustomRegistryTokenResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 根据应用ID、分组ID和部署ID查询指定的部署任务详情 */
-func (c *YdappClient) DescribeDeployTask(request *ydapp.DescribeDeployTaskRequest) (*ydapp.DescribeDeployTaskResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ydapp.DescribeDeployTaskResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 分页获取指定应用下的应用组列表 */
-func (c *YdappClient) DescribeGroups(request *ydapp.DescribeGroupsRequest) (*ydapp.DescribeGroupsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &ydapp.DescribeGroupsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 分页获取应用信息列表 */
 func (c *YdappClient) DescribeApps(request *ydapp.DescribeAppsRequest) (*ydapp.DescribeAppsResponse, error) {
     if request == nil {
@@ -160,6 +97,146 @@ func (c *YdappClient) Deploy(request *ydapp.DeployRequest) (*ydapp.DeployRespons
     return jdResp, err
 }
 
+/* 更新分组的容器环境变量配置 */
+func (c *YdappClient) UpdateGroupEnvironment(request *ydapp.UpdateGroupEnvironmentRequest) (*ydapp.UpdateGroupEnvironmentResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.UpdateGroupEnvironmentResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询分组配置 */
+func (c *YdappClient) DescribeGroupConfig(request *ydapp.DescribeGroupConfigRequest) (*ydapp.DescribeGroupConfigResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.DescribeGroupConfigResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取分组的容器配置文件列表 */
+func (c *YdappClient) DescribeGroupConfigFiles(request *ydapp.DescribeGroupConfigFilesRequest) (*ydapp.DescribeGroupConfigFilesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.DescribeGroupConfigFilesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 将分组回滚到指定的历史部署版本 */
+func (c *YdappClient) Rollback(request *ydapp.RollbackRequest) (*ydapp.RollbackResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.RollbackResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新分组的容器配置文件 */
+func (c *YdappClient) UpdateConfigFile(request *ydapp.UpdateConfigFileRequest) (*ydapp.UpdateConfigFileResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.UpdateConfigFileResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 分页获取指定应用下的应用组列表 */
+func (c *YdappClient) DescribeGroups(request *ydapp.DescribeGroupsRequest) (*ydapp.DescribeGroupsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.DescribeGroupsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 设置分组的容器反亲和性配置，控制Pod调度策略 */
+func (c *YdappClient) ContainerAntiAffinity(request *ydapp.ContainerAntiAffinityRequest) (*ydapp.ContainerAntiAffinityResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.ContainerAntiAffinityResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 根据镜像摘要删除指定的镜像 */
 func (c *YdappClient) DeleteCustomImage(request *ydapp.DeleteCustomImageRequest) (*ydapp.DeleteCustomImageResponse, error) {
     if request == nil {
@@ -180,6 +257,149 @@ func (c *YdappClient) DeleteCustomImage(request *ydapp.DeleteCustomImageRequest)
     return jdResp, err
 }
 
+/* 重建分组中的指定Pod实例 */
+func (c *YdappClient) Rebuild(request *ydapp.RebuildRequest) (*ydapp.RebuildResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.RebuildResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新分组的名称、CPU和内存配置等基本信息 */
+func (c *YdappClient) UpdateBaseInfo(request *ydapp.UpdateBaseInfoRequest) (*ydapp.UpdateBaseInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.UpdateBaseInfoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* <p>申请6小时有效期的令牌。 使用<code>docker</code> CLI push和pull镜像。</p>
+<p><code>authorizationToken</code>为每个registry返回一个base64编码的字符串，解码后<code>docker login</code>命令
+可完成指定registry的鉴权。</p>
+ */
+func (c *YdappClient) DescribeCustomRegistryToken(request *ydapp.DescribeCustomRegistryTokenRequest) (*ydapp.DescribeCustomRegistryTokenResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.DescribeCustomRegistryTokenResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 调整分组的容器实例数量 */
+func (c *YdappClient) Scale(request *ydapp.ScaleRequest) (*ydapp.ScaleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.ScaleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新分组的容器启动命令配置 */
+func (c *YdappClient) UpdateStartCmd(request *ydapp.UpdateStartCmdRequest) (*ydapp.UpdateStartCmdResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.UpdateStartCmdResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除分组的容器配置文件 */
+func (c *YdappClient) DeleteConfigFile(request *ydapp.DeleteConfigFileRequest) (*ydapp.DeleteConfigFileResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.DeleteConfigFileResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 支持分页查询的Pod列表获取 */
+func (c *YdappClient) DescribePods(request *ydapp.DescribePodsRequest) (*ydapp.DescribePodsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.DescribePodsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 支持分页查询和版本过滤的镜像列表获取 */
 func (c *YdappClient) DescribeCustomImages(request *ydapp.DescribeCustomImagesRequest) (*ydapp.DescribeCustomImagesResponse, error) {
     if request == nil {
@@ -191,6 +411,126 @@ func (c *YdappClient) DescribeCustomImages(request *ydapp.DescribeCustomImagesRe
     }
 
     jdResp := &ydapp.DescribeCustomImagesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据应用ID、分组ID和部署ID查询指定的部署任务详情 */
+func (c *YdappClient) DescribeDeployTask(request *ydapp.DescribeDeployTaskRequest) (*ydapp.DescribeDeployTaskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.DescribeDeployTaskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新分组的容器健康检查配置 */
+func (c *YdappClient) UpdateHealthCheck(request *ydapp.UpdateHealthCheckRequest) (*ydapp.UpdateHealthCheckResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.UpdateHealthCheckResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新分组的容器生命周期配置 */
+func (c *YdappClient) UpdateLifeCycle(request *ydapp.UpdateLifeCycleRequest) (*ydapp.UpdateLifeCycleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.UpdateLifeCycleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取分组的容器环境变量配置列表 */
+func (c *YdappClient) DescribeGroupEnvironments(request *ydapp.DescribeGroupEnvironmentsRequest) (*ydapp.DescribeGroupEnvironmentsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.DescribeGroupEnvironmentsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取分组的历史部署任务列表，支持分页查询 */
+func (c *YdappClient) DescribeDeploys(request *ydapp.DescribeDeploysRequest) (*ydapp.DescribeDeploysResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.DescribeDeploysResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 重启分组中的所有容器实例 */
+func (c *YdappClient) Restart(request *ydapp.RestartRequest) (*ydapp.RestartResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.RestartResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
