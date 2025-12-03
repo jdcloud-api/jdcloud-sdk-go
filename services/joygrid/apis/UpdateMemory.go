@@ -31,19 +31,40 @@ type UpdateMemoryRequest struct {
     /* 内存id  */
     MemoryId string `json:"memoryId"`
 
+    /* x-jdcloud-erp   base64(username)
+in: header (Optional) */
+    ErpAccount *string `json:"erpAccount"`
+
+    /* 用户（主、子）账号。base64编码。格式为：base64(subuser-pin) @ base64(owner-pin)。@前后有空格。若不支持主子账号，则不需要@，格式为 base64(owner-pin)
+in: header  */
+    Pin string `json:"pin"`
+
+    /* 请求ID
+in: header  */
+    RequestId string `json:"requestId"`
+
     /*  (Optional) */
-    Body *joygrid.UpdateMemorySpec `json:"body"`
+    Description *string `json:"description"`
+
+    /*  (Optional) */
+    Name *string `json:"name"`
 }
 
 /*
  * param regionId: 地域 Id (Required)
  * param memoryId: 内存id (Required)
+ * param pin: 用户（主、子）账号。base64编码。格式为：base64(subuser-pin) @ base64(owner-pin)。@前后有空格。若不支持主子账号，则不需要@，格式为 base64(owner-pin)
+in: header (Required)
+ * param requestId: 请求ID
+in: header (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewUpdateMemoryRequest(
     regionId string,
     memoryId string,
+    pin string,
+    requestId string,
 ) *UpdateMemoryRequest {
 
 	return &UpdateMemoryRequest{
@@ -55,18 +76,31 @@ func NewUpdateMemoryRequest(
 		},
         RegionId: regionId,
         MemoryId: memoryId,
+        Pin: pin,
+        RequestId: requestId,
 	}
 }
 
 /*
  * param regionId: 地域 Id (Required)
  * param memoryId: 内存id (Required)
- * param body:  (Optional)
+ * param erpAccount: x-jdcloud-erp   base64(username)
+in: header (Optional)
+ * param pin: 用户（主、子）账号。base64编码。格式为：base64(subuser-pin) @ base64(owner-pin)。@前后有空格。若不支持主子账号，则不需要@，格式为 base64(owner-pin)
+in: header (Required)
+ * param requestId: 请求ID
+in: header (Required)
+ * param description:  (Optional)
+ * param name:  (Optional)
  */
 func NewUpdateMemoryRequestWithAllParams(
     regionId string,
     memoryId string,
-    body *joygrid.UpdateMemorySpec,
+    erpAccount *string,
+    pin string,
+    requestId string,
+    description *string,
+    name *string,
 ) *UpdateMemoryRequest {
 
     return &UpdateMemoryRequest{
@@ -78,7 +112,11 @@ func NewUpdateMemoryRequestWithAllParams(
         },
         RegionId: regionId,
         MemoryId: memoryId,
-        Body: body,
+        ErpAccount: erpAccount,
+        Pin: pin,
+        RequestId: requestId,
+        Description: description,
+        Name: name,
     }
 }
 
@@ -103,9 +141,28 @@ func (r *UpdateMemoryRequest) SetRegionId(regionId string) {
 func (r *UpdateMemoryRequest) SetMemoryId(memoryId string) {
     r.MemoryId = memoryId
 }
-/* param body: (Optional) */
-func (r *UpdateMemoryRequest) SetBody(body *joygrid.UpdateMemorySpec) {
-    r.Body = body
+/* param erpAccount: x-jdcloud-erp   base64(username)
+in: header(Optional) */
+func (r *UpdateMemoryRequest) SetErpAccount(erpAccount string) {
+    r.ErpAccount = &erpAccount
+}
+/* param pin: 用户（主、子）账号。base64编码。格式为：base64(subuser-pin) @ base64(owner-pin)。@前后有空格。若不支持主子账号，则不需要@，格式为 base64(owner-pin)
+in: header(Required) */
+func (r *UpdateMemoryRequest) SetPin(pin string) {
+    r.Pin = pin
+}
+/* param requestId: 请求ID
+in: header(Required) */
+func (r *UpdateMemoryRequest) SetRequestId(requestId string) {
+    r.RequestId = requestId
+}
+/* param description: (Optional) */
+func (r *UpdateMemoryRequest) SetDescription(description string) {
+    r.Description = &description
+}
+/* param name: (Optional) */
+func (r *UpdateMemoryRequest) SetName(name string) {
+    r.Name = &name
 }
 
 

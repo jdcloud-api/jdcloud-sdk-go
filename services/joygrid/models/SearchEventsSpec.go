@@ -26,5 +26,5 @@ type SearchEventsSpec struct {
     Query string `json:"query"`
 
     /* 会话ID (Optional) */
-    SessionId *string `json:"sessionId"`
+    SessionId string `json:"sessionId"`
 }

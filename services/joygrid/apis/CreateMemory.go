@@ -28,17 +28,38 @@ type CreateMemoryRequest struct {
     /* 地域 Id  */
     RegionId string `json:"regionId"`
 
+    /* x-jdcloud-erp   base64(username)
+in: header (Optional) */
+    ErpAccount *string `json:"erpAccount"`
+
+    /* 用户（主、子）账号。base64编码。格式为：base64(subuser-pin) @ base64(owner-pin)。@前后有空格。若不支持主子账号，则不需要@，格式为 base64(owner-pin)
+in: header  */
+    Pin string `json:"pin"`
+
+    /* 请求ID
+in: header  */
+    RequestId string `json:"requestId"`
+
     /*  (Optional) */
-    Body *joygrid.CreateMemorySpec `json:"body"`
+    Description *string `json:"description"`
+
+    /*  (Optional) */
+    Name *string `json:"name"`
 }
 
 /*
  * param regionId: 地域 Id (Required)
+ * param pin: 用户（主、子）账号。base64编码。格式为：base64(subuser-pin) @ base64(owner-pin)。@前后有空格。若不支持主子账号，则不需要@，格式为 base64(owner-pin)
+in: header (Required)
+ * param requestId: 请求ID
+in: header (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateMemoryRequest(
     regionId string,
+    pin string,
+    requestId string,
 ) *CreateMemoryRequest {
 
 	return &CreateMemoryRequest{
@@ -49,16 +70,29 @@ func NewCreateMemoryRequest(
 			Version: "v1",
 		},
         RegionId: regionId,
+        Pin: pin,
+        RequestId: requestId,
 	}
 }
 
 /*
  * param regionId: 地域 Id (Required)
- * param body:  (Optional)
+ * param erpAccount: x-jdcloud-erp   base64(username)
+in: header (Optional)
+ * param pin: 用户（主、子）账号。base64编码。格式为：base64(subuser-pin) @ base64(owner-pin)。@前后有空格。若不支持主子账号，则不需要@，格式为 base64(owner-pin)
+in: header (Required)
+ * param requestId: 请求ID
+in: header (Required)
+ * param description:  (Optional)
+ * param name:  (Optional)
  */
 func NewCreateMemoryRequestWithAllParams(
     regionId string,
-    body *joygrid.CreateMemorySpec,
+    erpAccount *string,
+    pin string,
+    requestId string,
+    description *string,
+    name *string,
 ) *CreateMemoryRequest {
 
     return &CreateMemoryRequest{
@@ -69,7 +103,11 @@ func NewCreateMemoryRequestWithAllParams(
             Version: "v1",
         },
         RegionId: regionId,
-        Body: body,
+        ErpAccount: erpAccount,
+        Pin: pin,
+        RequestId: requestId,
+        Description: description,
+        Name: name,
     }
 }
 
@@ -90,9 +128,28 @@ func NewCreateMemoryRequestWithoutParam() *CreateMemoryRequest {
 func (r *CreateMemoryRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-/* param body: (Optional) */
-func (r *CreateMemoryRequest) SetBody(body *joygrid.CreateMemorySpec) {
-    r.Body = body
+/* param erpAccount: x-jdcloud-erp   base64(username)
+in: header(Optional) */
+func (r *CreateMemoryRequest) SetErpAccount(erpAccount string) {
+    r.ErpAccount = &erpAccount
+}
+/* param pin: 用户（主、子）账号。base64编码。格式为：base64(subuser-pin) @ base64(owner-pin)。@前后有空格。若不支持主子账号，则不需要@，格式为 base64(owner-pin)
+in: header(Required) */
+func (r *CreateMemoryRequest) SetPin(pin string) {
+    r.Pin = pin
+}
+/* param requestId: 请求ID
+in: header(Required) */
+func (r *CreateMemoryRequest) SetRequestId(requestId string) {
+    r.RequestId = requestId
+}
+/* param description: (Optional) */
+func (r *CreateMemoryRequest) SetDescription(description string) {
+    r.Description = &description
+}
+/* param name: (Optional) */
+func (r *CreateMemoryRequest) SetName(name string) {
+    r.Name = &name
 }
 
 

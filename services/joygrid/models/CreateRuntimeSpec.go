@@ -20,11 +20,11 @@ package models
 type CreateRuntimeSpec struct {
 
     /*   */
-    AgentRuntimeArtifact *AgentRuntimeArtifact `json:"agentRuntimeArtifact"`
+    AgentRuntimeArtifact AgentRuntimeArtifact `json:"agentRuntimeArtifact"`
 
     /* 名称  */
     AgentRuntimeName string `json:"agentRuntimeName"`
 
     /* 描述 (Optional) */
-    Description *string `json:"description"`
+    Description string `json:"description"`
 }
