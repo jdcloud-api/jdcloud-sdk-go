@@ -21,7 +21,7 @@ import (
     joygrid "github.com/jdcloud-api/jdcloud-sdk-go/services/joygrid/models"
 )
 
-type CreateCodeInterpreterRequest struct {
+type CreateEventRequest struct {
 
     core.JDCloudRequest
 
@@ -40,11 +40,20 @@ in: header  */
 in: header  */
     RequestId string `json:"requestId"`
 
-    /*  (Optional) */
-    Description *string `json:"description"`
+    /* 触发用户  */
+    Actor string `json:"actor"`
 
-    /*  (Optional) */
-    Name *string `json:"name"`
+    /* 是否进行推理并保存长期记忆。 默认为 true。 (Optional) */
+    Infer *bool `json:"infer"`
+
+    /* 内存id  */
+    MemoryId string `json:"memoryId"`
+
+    /* 消息内容  */
+    Messages []joygrid.Message `json:"messages"`
+
+    /* 会话ID： 传入会话 ID 的，会保存为临时记忆 (Optional) */
+    SessionId *string `json:"sessionId"`
 }
 
 /*
@@ -53,18 +62,24 @@ in: header  */
 in: header (Required)
  * param requestId: 请求ID
 in: header (Required)
+ * param actor: 触发用户 (Required)
+ * param memoryId: 内存id (Required)
+ * param messages: 消息内容 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewCreateCodeInterpreterRequest(
+func NewCreateEventRequest(
     regionId string,
     pin string,
     requestId string,
-) *CreateCodeInterpreterRequest {
+    actor string,
+    memoryId string,
+    messages []joygrid.Message,
+) *CreateEventRequest {
 
-	return &CreateCodeInterpreterRequest{
+	return &CreateEventRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/codeinterpreters",
+			URL:     "/regions/{regionId}/memories/{memoryId}/events",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -72,6 +87,9 @@ func NewCreateCodeInterpreterRequest(
         RegionId: regionId,
         Pin: pin,
         RequestId: requestId,
+        Actor: actor,
+        MemoryId: memoryId,
+        Messages: messages,
 	}
 }
 
@@ -83,21 +101,27 @@ in: header (Optional)
 in: header (Required)
  * param requestId: 请求ID
 in: header (Required)
- * param description:  (Optional)
- * param name:  (Optional)
+ * param actor: 触发用户 (Required)
+ * param infer: 是否进行推理并保存长期记忆。 默认为 true。 (Optional)
+ * param memoryId: 内存id (Required)
+ * param messages: 消息内容 (Required)
+ * param sessionId: 会话ID： 传入会话 ID 的，会保存为临时记忆 (Optional)
  */
-func NewCreateCodeInterpreterRequestWithAllParams(
+func NewCreateEventRequestWithAllParams(
     regionId string,
     erpAccount *string,
     pin string,
     requestId string,
-    description *string,
-    name *string,
-) *CreateCodeInterpreterRequest {
+    actor string,
+    infer *bool,
+    memoryId string,
+    messages []joygrid.Message,
+    sessionId *string,
+) *CreateEventRequest {
 
-    return &CreateCodeInterpreterRequest{
+    return &CreateEventRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/codeinterpreters",
+            URL:     "/regions/{regionId}/memories/{memoryId}/events",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -106,17 +130,20 @@ func NewCreateCodeInterpreterRequestWithAllParams(
         ErpAccount: erpAccount,
         Pin: pin,
         RequestId: requestId,
-        Description: description,
-        Name: name,
+        Actor: actor,
+        Infer: infer,
+        MemoryId: memoryId,
+        Messages: messages,
+        SessionId: sessionId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewCreateCodeInterpreterRequestWithoutParam() *CreateCodeInterpreterRequest {
+func NewCreateEventRequestWithoutParam() *CreateEventRequest {
 
-    return &CreateCodeInterpreterRequest{
+    return &CreateEventRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/codeinterpreters",
+            URL:     "/regions/{regionId}/memories/{memoryId}/events",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -125,45 +152,57 @@ func NewCreateCodeInterpreterRequestWithoutParam() *CreateCodeInterpreterRequest
 }
 
 /* param regionId: 地域 Id(Required) */
-func (r *CreateCodeInterpreterRequest) SetRegionId(regionId string) {
+func (r *CreateEventRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 /* param erpAccount: x-jdcloud-erp   base64(username)
 in: header(Optional) */
-func (r *CreateCodeInterpreterRequest) SetErpAccount(erpAccount string) {
+func (r *CreateEventRequest) SetErpAccount(erpAccount string) {
     r.ErpAccount = &erpAccount
 }
 /* param pin: 用户（主、子）账号。base64编码。格式为：base64(subuser-pin) @ base64(owner-pin)。@前后有空格。若不支持主子账号，则不需要@，格式为 base64(owner-pin)
 in: header(Required) */
-func (r *CreateCodeInterpreterRequest) SetPin(pin string) {
+func (r *CreateEventRequest) SetPin(pin string) {
     r.Pin = pin
 }
 /* param requestId: 请求ID
 in: header(Required) */
-func (r *CreateCodeInterpreterRequest) SetRequestId(requestId string) {
+func (r *CreateEventRequest) SetRequestId(requestId string) {
     r.RequestId = requestId
 }
-/* param description: (Optional) */
-func (r *CreateCodeInterpreterRequest) SetDescription(description string) {
-    r.Description = &description
+/* param actor: 触发用户(Required) */
+func (r *CreateEventRequest) SetActor(actor string) {
+    r.Actor = actor
 }
-/* param name: (Optional) */
-func (r *CreateCodeInterpreterRequest) SetName(name string) {
-    r.Name = &name
+/* param infer: 是否进行推理并保存长期记忆。 默认为 true。(Optional) */
+func (r *CreateEventRequest) SetInfer(infer bool) {
+    r.Infer = &infer
+}
+/* param memoryId: 内存id(Required) */
+func (r *CreateEventRequest) SetMemoryId(memoryId string) {
+    r.MemoryId = memoryId
+}
+/* param messages: 消息内容(Required) */
+func (r *CreateEventRequest) SetMessages(messages []joygrid.Message) {
+    r.Messages = messages
+}
+/* param sessionId: 会话ID： 传入会话 ID 的，会保存为临时记忆(Optional) */
+func (r *CreateEventRequest) SetSessionId(sessionId string) {
+    r.SessionId = &sessionId
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r CreateCodeInterpreterRequest) GetRegionId() string {
+func (r CreateEventRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type CreateCodeInterpreterResponse struct {
+type CreateEventResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result CreateCodeInterpreterResult `json:"result"`
+    Result CreateEventResult `json:"result"`
 }
 
-type CreateCodeInterpreterResult struct {
+type CreateEventResult struct {
 }

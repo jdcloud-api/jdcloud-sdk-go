@@ -30,9 +30,6 @@ type InvokeRuntimeRequest struct {
     /* Runtime ID  */
     AgentRuntimeId string `json:"agentRuntimeId"`
 
-    /* proxy path  */
-    ProxyPath string `json:"proxyPath"`
-
     /* session id (Optional) */
     SessionId *string `json:"sessionId"`
 }
@@ -40,52 +37,46 @@ type InvokeRuntimeRequest struct {
 /*
  * param regionId: 地域 Id (Required)
  * param agentRuntimeId: Runtime ID (Required)
- * param proxyPath: proxy path (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewInvokeRuntimeRequest(
     regionId string,
     agentRuntimeId string,
-    proxyPath string,
 ) *InvokeRuntimeRequest {
 
 	return &InvokeRuntimeRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/runtimes/{agentRuntimeId}/invocations/{proxyPath}",
+			URL:     "/regions/{regionId}/runtimes/{agentRuntimeId}/invocations",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         AgentRuntimeId: agentRuntimeId,
-        ProxyPath: proxyPath,
 	}
 }
 
 /*
  * param regionId: 地域 Id (Required)
  * param agentRuntimeId: Runtime ID (Required)
- * param proxyPath: proxy path (Required)
  * param sessionId: session id (Optional)
  */
 func NewInvokeRuntimeRequestWithAllParams(
     regionId string,
     agentRuntimeId string,
-    proxyPath string,
     sessionId *string,
 ) *InvokeRuntimeRequest {
 
     return &InvokeRuntimeRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/runtimes/{agentRuntimeId}/invocations/{proxyPath}",
+            URL:     "/regions/{regionId}/runtimes/{agentRuntimeId}/invocations",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         AgentRuntimeId: agentRuntimeId,
-        ProxyPath: proxyPath,
         SessionId: sessionId,
     }
 }
@@ -95,7 +86,7 @@ func NewInvokeRuntimeRequestWithoutParam() *InvokeRuntimeRequest {
 
     return &InvokeRuntimeRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/runtimes/{agentRuntimeId}/invocations/{proxyPath}",
+            URL:     "/regions/{regionId}/runtimes/{agentRuntimeId}/invocations",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -110,10 +101,6 @@ func (r *InvokeRuntimeRequest) SetRegionId(regionId string) {
 /* param agentRuntimeId: Runtime ID(Required) */
 func (r *InvokeRuntimeRequest) SetAgentRuntimeId(agentRuntimeId string) {
     r.AgentRuntimeId = agentRuntimeId
-}
-/* param proxyPath: proxy path(Required) */
-func (r *InvokeRuntimeRequest) SetProxyPath(proxyPath string) {
-    r.ProxyPath = proxyPath
 }
 /* param sessionId: session id(Optional) */
 func (r *InvokeRuntimeRequest) SetSessionId(sessionId string) {

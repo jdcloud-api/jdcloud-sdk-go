@@ -31,19 +31,29 @@ type SearchEventsRequest struct {
     /* 内存id  */
     MemoryId string `json:"memoryId"`
 
-    /*  (Optional) */
-    Body *joygrid.SearchEventsSpec `json:"body"`
+    /* 触发用户  */
+    Actor string `json:"actor"`
+
+    /* 查询条件  */
+    Query string `json:"query"`
+
+    /* 会话ID (Optional) */
+    SessionId *string `json:"sessionId"`
 }
 
 /*
  * param regionId: 地域 Id (Required)
  * param memoryId: 内存id (Required)
+ * param actor: 触发用户 (Required)
+ * param query: 查询条件 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewSearchEventsRequest(
     regionId string,
     memoryId string,
+    actor string,
+    query string,
 ) *SearchEventsRequest {
 
 	return &SearchEventsRequest{
@@ -55,18 +65,24 @@ func NewSearchEventsRequest(
 		},
         RegionId: regionId,
         MemoryId: memoryId,
+        Actor: actor,
+        Query: query,
 	}
 }
 
 /*
  * param regionId: 地域 Id (Required)
  * param memoryId: 内存id (Required)
- * param body:  (Optional)
+ * param actor: 触发用户 (Required)
+ * param query: 查询条件 (Required)
+ * param sessionId: 会话ID (Optional)
  */
 func NewSearchEventsRequestWithAllParams(
     regionId string,
     memoryId string,
-    body *joygrid.SearchEventsSpec,
+    actor string,
+    query string,
+    sessionId *string,
 ) *SearchEventsRequest {
 
     return &SearchEventsRequest{
@@ -78,7 +94,9 @@ func NewSearchEventsRequestWithAllParams(
         },
         RegionId: regionId,
         MemoryId: memoryId,
-        Body: body,
+        Actor: actor,
+        Query: query,
+        SessionId: sessionId,
     }
 }
 
@@ -103,9 +121,17 @@ func (r *SearchEventsRequest) SetRegionId(regionId string) {
 func (r *SearchEventsRequest) SetMemoryId(memoryId string) {
     r.MemoryId = memoryId
 }
-/* param body: (Optional) */
-func (r *SearchEventsRequest) SetBody(body *joygrid.SearchEventsSpec) {
-    r.Body = body
+/* param actor: 触发用户(Required) */
+func (r *SearchEventsRequest) SetActor(actor string) {
+    r.Actor = actor
+}
+/* param query: 查询条件(Required) */
+func (r *SearchEventsRequest) SetQuery(query string) {
+    r.Query = query
+}
+/* param sessionId: 会话ID(Optional) */
+func (r *SearchEventsRequest) SetSessionId(sessionId string) {
+    r.SessionId = &sessionId
 }
 
 

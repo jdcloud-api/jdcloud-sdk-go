@@ -40,7 +40,7 @@ func NewJoygridClient(credential *core.Credential) *JoygridClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "joygrid",
-            Revision:    "1.0.0",
+            Revision:    "1.0.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -77,26 +77,6 @@ func (c *JoygridClient) DescribeMemories(request *joygrid.DescribeMemoriesReques
     return jdResp, err
 }
 
-/* 查询指定codeInterpreter的详细信息 */
-func (c *JoygridClient) DescribeCodeInterpreter(request *joygrid.DescribeCodeInterpreterRequest) (*joygrid.DescribeCodeInterpreterResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &joygrid.DescribeCodeInterpreterResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 创建一个codeInterpreter服务 */
 func (c *JoygridClient) CreateCodeInterpreter(request *joygrid.CreateCodeInterpreterRequest) (*joygrid.CreateCodeInterpreterResponse, error) {
     if request == nil {
@@ -108,46 +88,6 @@ func (c *JoygridClient) CreateCodeInterpreter(request *joygrid.CreateCodeInterpr
     }
 
     jdResp := &joygrid.CreateCodeInterpreterResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询codeInterpreter sessions 列表 */
-func (c *JoygridClient) DescribeCodeInterpreterSessions(request *joygrid.DescribeCodeInterpreterSessionsRequest) (*joygrid.DescribeCodeInterpreterSessionsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &joygrid.DescribeCodeInterpreterSessionsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 删除指定的codeInterpreter */
-func (c *JoygridClient) DeleteCodeInterpreter(request *joygrid.DeleteCodeInterpreterRequest) (*joygrid.DeleteCodeInterpreterResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &joygrid.DeleteCodeInterpreterResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -277,66 +217,6 @@ func (c *JoygridClient) DeleteMemory(request *joygrid.DeleteMemoryRequest) (*joy
     return jdResp, err
 }
 
-/* 更新指定Agent运行时环境的信息 */
-func (c *JoygridClient) UpdateRuntime(request *joygrid.UpdateRuntimeRequest) (*joygrid.UpdateRuntimeResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &joygrid.UpdateRuntimeResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询codeInterpreter列表 */
-func (c *JoygridClient) DescribeCodeInterpreters(request *joygrid.DescribeCodeInterpretersRequest) (*joygrid.DescribeCodeInterpretersResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &joygrid.DescribeCodeInterpretersResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 创建一个Agent运行时环境 */
-func (c *JoygridClient) CreateRuntime(request *joygrid.CreateRuntimeRequest) (*joygrid.CreateRuntimeResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &joygrid.CreateRuntimeResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 删除一个 event */
 func (c *JoygridClient) DeleteEvent(request *joygrid.DeleteEventRequest) (*joygrid.DeleteEventResponse, error) {
     if request == nil {
@@ -397,26 +277,6 @@ func (c *JoygridClient) InvokeCodeInterpreter(request *joygrid.InvokeCodeInterpr
     return jdResp, err
 }
 
-/* 创建一个memory服务 */
-func (c *JoygridClient) CreateMemory(request *joygrid.CreateMemoryRequest) (*joygrid.CreateMemoryResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &joygrid.CreateMemoryResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 调用运行时 */
 func (c *JoygridClient) InvokeRuntime(request *joygrid.InvokeRuntimeRequest) (*joygrid.InvokeRuntimeResponse, error) {
     if request == nil {
@@ -457,26 +317,6 @@ func (c *JoygridClient) UpdateCodeInterpreter(request *joygrid.UpdateCodeInterpr
     return jdResp, err
 }
 
-/* 查询指定 event 的详细信息 */
-func (c *JoygridClient) DescribeEvent(request *joygrid.DescribeEventRequest) (*joygrid.DescribeEventResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &joygrid.DescribeEventResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 搜索 event */
 func (c *JoygridClient) SearchEvents(request *joygrid.SearchEventsRequest) (*joygrid.SearchEventsResponse, error) {
     if request == nil {
@@ -497,6 +337,26 @@ func (c *JoygridClient) SearchEvents(request *joygrid.SearchEventsRequest) (*joy
     return jdResp, err
 }
 
+/* 创建一个 event */
+func (c *JoygridClient) CreateEvent(request *joygrid.CreateEventRequest) (*joygrid.CreateEventResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &joygrid.CreateEventResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询指定Agent运行时环境的详细信息 */
 func (c *JoygridClient) DescribeRuntime(request *joygrid.DescribeRuntimeRequest) (*joygrid.DescribeRuntimeResponse, error) {
     if request == nil {
@@ -508,6 +368,166 @@ func (c *JoygridClient) DescribeRuntime(request *joygrid.DescribeRuntimeRequest)
     }
 
     jdResp := &joygrid.DescribeRuntimeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询指定codeInterpreter的详细信息 */
+func (c *JoygridClient) DescribeCodeInterpreter(request *joygrid.DescribeCodeInterpreterRequest) (*joygrid.DescribeCodeInterpreterResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &joygrid.DescribeCodeInterpreterResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询codeInterpreter sessions 列表 */
+func (c *JoygridClient) DescribeCodeInterpreterSessions(request *joygrid.DescribeCodeInterpreterSessionsRequest) (*joygrid.DescribeCodeInterpreterSessionsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &joygrid.DescribeCodeInterpreterSessionsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除指定的codeInterpreter */
+func (c *JoygridClient) DeleteCodeInterpreter(request *joygrid.DeleteCodeInterpreterRequest) (*joygrid.DeleteCodeInterpreterResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &joygrid.DeleteCodeInterpreterResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新指定Agent运行时环境的信息 */
+func (c *JoygridClient) UpdateRuntime(request *joygrid.UpdateRuntimeRequest) (*joygrid.UpdateRuntimeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &joygrid.UpdateRuntimeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询codeInterpreter列表 */
+func (c *JoygridClient) DescribeCodeInterpreters(request *joygrid.DescribeCodeInterpretersRequest) (*joygrid.DescribeCodeInterpretersResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &joygrid.DescribeCodeInterpretersResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建一个Agent运行时环境 */
+func (c *JoygridClient) CreateRuntime(request *joygrid.CreateRuntimeRequest) (*joygrid.CreateRuntimeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &joygrid.CreateRuntimeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建一个memory服务 */
+func (c *JoygridClient) CreateMemory(request *joygrid.CreateMemoryRequest) (*joygrid.CreateMemoryResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &joygrid.CreateMemoryResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询指定 event 的详细信息 */
+func (c *JoygridClient) DescribeEvent(request *joygrid.DescribeEventRequest) (*joygrid.DescribeEventResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &joygrid.DescribeEventResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

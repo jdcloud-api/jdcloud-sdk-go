@@ -17,26 +17,12 @@
 package models
 
 
-type CreateCodeInterpreterSpec struct {
+type EventOperateLog struct {
 
-    /* x-jdcloud-erp   base64(username)
-in: header (Optional) */
-    ErpAccount string `json:"erpAccount"`
+    /* 运维事件操作时间
+ (Optional) */
+    OperateTime string `json:"operateTime"`
 
-    /* 用户（主、子）账号。base64编码。格式为：base64(subuser-pin) @ base64(owner-pin)。@前后有空格。若不支持主子账号，则不需要@，格式为 base64(owner-pin)
-in: header  */
-    Pin string `json:"pin"`
-
-    /* 请求ID
-in: header  */
-    RequestId string `json:"requestId"`
-
-    /*  (Optional) */
-    Description string `json:"description"`
-
-    /*  (Optional) */
-    Name string `json:"name"`
-
-    /* 地域 Id  */
-    RegionId string `json:"regionId"`
+    /* 运维策略快照 (Optional) */
+    MaintenancePolicySnapshot MaintenancePolicy `json:"maintenancePolicySnapshot"`
 }

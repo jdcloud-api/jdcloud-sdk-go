@@ -28,17 +28,27 @@ type CreateRuntimeRequest struct {
     /* 地域 Id  */
     RegionId string `json:"regionId"`
 
-    /*  (Optional) */
-    Body *joygrid.CreateRuntimeSpec `json:"body"`
+    /*   */
+    AgentRuntimeArtifact *joygrid.AgentRuntimeArtifact `json:"agentRuntimeArtifact"`
+
+    /* 名称  */
+    AgentRuntimeName string `json:"agentRuntimeName"`
+
+    /* 描述 (Optional) */
+    Description *string `json:"description"`
 }
 
 /*
  * param regionId: 地域 Id (Required)
+ * param agentRuntimeArtifact:  (Required)
+ * param agentRuntimeName: 名称 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateRuntimeRequest(
     regionId string,
+    agentRuntimeArtifact *joygrid.AgentRuntimeArtifact,
+    agentRuntimeName string,
 ) *CreateRuntimeRequest {
 
 	return &CreateRuntimeRequest{
@@ -49,16 +59,22 @@ func NewCreateRuntimeRequest(
 			Version: "v1",
 		},
         RegionId: regionId,
+        AgentRuntimeArtifact: agentRuntimeArtifact,
+        AgentRuntimeName: agentRuntimeName,
 	}
 }
 
 /*
  * param regionId: 地域 Id (Required)
- * param body:  (Optional)
+ * param agentRuntimeArtifact:  (Required)
+ * param agentRuntimeName: 名称 (Required)
+ * param description: 描述 (Optional)
  */
 func NewCreateRuntimeRequestWithAllParams(
     regionId string,
-    body *joygrid.CreateRuntimeSpec,
+    agentRuntimeArtifact *joygrid.AgentRuntimeArtifact,
+    agentRuntimeName string,
+    description *string,
 ) *CreateRuntimeRequest {
 
     return &CreateRuntimeRequest{
@@ -69,7 +85,9 @@ func NewCreateRuntimeRequestWithAllParams(
             Version: "v1",
         },
         RegionId: regionId,
-        Body: body,
+        AgentRuntimeArtifact: agentRuntimeArtifact,
+        AgentRuntimeName: agentRuntimeName,
+        Description: description,
     }
 }
 
@@ -90,9 +108,17 @@ func NewCreateRuntimeRequestWithoutParam() *CreateRuntimeRequest {
 func (r *CreateRuntimeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-/* param body: (Optional) */
-func (r *CreateRuntimeRequest) SetBody(body *joygrid.CreateRuntimeSpec) {
-    r.Body = body
+/* param agentRuntimeArtifact: (Required) */
+func (r *CreateRuntimeRequest) SetAgentRuntimeArtifact(agentRuntimeArtifact *joygrid.AgentRuntimeArtifact) {
+    r.AgentRuntimeArtifact = agentRuntimeArtifact
+}
+/* param agentRuntimeName: 名称(Required) */
+func (r *CreateRuntimeRequest) SetAgentRuntimeName(agentRuntimeName string) {
+    r.AgentRuntimeName = agentRuntimeName
+}
+/* param description: 描述(Optional) */
+func (r *CreateRuntimeRequest) SetDescription(description string) {
+    r.Description = &description
 }
 
 

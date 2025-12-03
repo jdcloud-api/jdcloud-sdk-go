@@ -60,7 +60,7 @@ func NewDescribeEventsRequest(
 	return &DescribeEventsRequest{
         JDCloudRequest: core.JDCloudRequest{
 			URL:     "/regions/{regionId}/memories/{memoryId}/events",
-			Method:  "POST",
+			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
@@ -90,7 +90,7 @@ func NewDescribeEventsRequestWithAllParams(
     return &DescribeEventsRequest{
         JDCloudRequest: core.JDCloudRequest{
             URL:     "/regions/{regionId}/memories/{memoryId}/events",
-            Method:  "POST",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
@@ -109,7 +109,7 @@ func NewDescribeEventsRequestWithoutParam() *DescribeEventsRequest {
     return &DescribeEventsRequest{
             JDCloudRequest: core.JDCloudRequest{
             URL:     "/regions/{regionId}/memories/{memoryId}/events",
-            Method:  "POST",
+            Method:  "GET",
             Header:  nil,
             Version: "v1",
         },

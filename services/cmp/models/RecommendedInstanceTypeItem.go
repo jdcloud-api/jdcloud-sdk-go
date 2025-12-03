@@ -17,26 +17,11 @@
 package models
 
 
-type CreateCodeInterpreterSpec struct {
+type RecommendedInstanceTypeItem struct {
 
-    /* x-jdcloud-erp   base64(username)
-in: header (Optional) */
-    ErpAccount string `json:"erpAccount"`
+    /* 实例规格 (Optional) */
+    InstanceType string `json:"instanceType"`
 
-    /* 用户（主、子）账号。base64编码。格式为：base64(subuser-pin) @ base64(owner-pin)。@前后有空格。若不支持主子账号，则不需要@，格式为 base64(owner-pin)
-in: header  */
-    Pin string `json:"pin"`
-
-    /* 请求ID
-in: header  */
-    RequestId string `json:"requestId"`
-
-    /*  (Optional) */
-    Description string `json:"description"`
-
-    /*  (Optional) */
-    Name string `json:"name"`
-
-    /* 地域 Id  */
-    RegionId string `json:"regionId"`
+    /* 推荐的实例规格 (Optional) */
+    RecommendedInstanceType string `json:"recommendedInstanceType"`
 }
