@@ -48,6 +48,15 @@ type DescribeSlowLogRequest struct {
 
     /* 分片地址 (Optional) */
     ShardAddr *string `json:"shardAddr"`
+
+    /* 命令匹配模式(正则)，仅支持tpaas (Optional) */
+    CmdPattern *string `json:"cmdPattern"`
+
+    /* 查询的耗时阈值，单位是微妙，仅支持tpaas (Optional) */
+    ExecTimeThreshold *int `json:"execTimeThreshold"`
+
+    /* redis节点的角色(master或者slave)，仅支持tpaas (Optional) */
+    Role *string `json:"role"`
 }
 
 /*
@@ -82,6 +91,9 @@ func NewDescribeSlowLogRequest(
  * param endTime: 结束时间 (Optional)
  * param shardId: 分片id (Optional)
  * param shardAddr: 分片地址 (Optional)
+ * param cmdPattern: 命令匹配模式(正则)，仅支持tpaas (Optional)
+ * param execTimeThreshold: 查询的耗时阈值，单位是微妙，仅支持tpaas (Optional)
+ * param role: redis节点的角色(master或者slave)，仅支持tpaas (Optional)
  */
 func NewDescribeSlowLogRequestWithAllParams(
     regionId string,
@@ -92,6 +104,9 @@ func NewDescribeSlowLogRequestWithAllParams(
     endTime *string,
     shardId *string,
     shardAddr *string,
+    cmdPattern *string,
+    execTimeThreshold *int,
+    role *string,
 ) *DescribeSlowLogRequest {
 
     return &DescribeSlowLogRequest{
@@ -109,6 +124,9 @@ func NewDescribeSlowLogRequestWithAllParams(
         EndTime: endTime,
         ShardId: shardId,
         ShardAddr: shardAddr,
+        CmdPattern: cmdPattern,
+        ExecTimeThreshold: execTimeThreshold,
+        Role: role,
     }
 }
 
@@ -156,6 +174,18 @@ func (r *DescribeSlowLogRequest) SetShardId(shardId string) {
 /* param shardAddr: 分片地址(Optional) */
 func (r *DescribeSlowLogRequest) SetShardAddr(shardAddr string) {
     r.ShardAddr = &shardAddr
+}
+/* param cmdPattern: 命令匹配模式(正则)，仅支持tpaas(Optional) */
+func (r *DescribeSlowLogRequest) SetCmdPattern(cmdPattern string) {
+    r.CmdPattern = &cmdPattern
+}
+/* param execTimeThreshold: 查询的耗时阈值，单位是微妙，仅支持tpaas(Optional) */
+func (r *DescribeSlowLogRequest) SetExecTimeThreshold(execTimeThreshold int) {
+    r.ExecTimeThreshold = &execTimeThreshold
+}
+/* param role: redis节点的角色(master或者slave)，仅支持tpaas(Optional) */
+func (r *DescribeSlowLogRequest) SetRole(role string) {
+    r.Role = &role
 }
 
 

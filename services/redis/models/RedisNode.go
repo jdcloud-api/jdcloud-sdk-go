@@ -34,6 +34,9 @@ type RedisNode struct {
     /* 节点所属AZ (Optional) */
     Az string `json:"az"`
 
+    /* 节点的node group索引 (Optional) */
+    Ng string `json:"ng"`
+
     /* 节点状态，running表示节点正常，error表示节点异常 (Optional) */
     Status string `json:"status"`
 

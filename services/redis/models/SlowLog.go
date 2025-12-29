@@ -30,4 +30,10 @@ type SlowLog struct {
 
     /* 执行命令的分片id (Optional) */
     ShardId string `json:"shardId"`
+
+    /* client的地址，包括ip和端口号  */
+    ClientAddr string `json:"clientAddr"`
+
+    /* client名称，无则为空  */
+    ClientName string `json:"clientName"`
 }

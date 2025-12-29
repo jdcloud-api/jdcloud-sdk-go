@@ -31,7 +31,7 @@ type StartClearDataRequest struct {
     /* 缓存Redis实例ID，是访问实例的唯一标识  */
     CacheInstanceId string `json:"cacheInstanceId"`
 
-    /* 数据清理任务类型  */
+    /* 数据清理任务类型. AllData:清理全部数据, ExpiredData:清理过期数据, SpecifiedData:清理匹配的数据  */
     ClearType string `json:"clearType"`
 
     /* 匹配模式, 如: test*、*test、ab*cc*, 当节点为AllData、ExpiredData时可以忽略此参数 (Optional) */
@@ -47,7 +47,7 @@ type StartClearDataRequest struct {
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
- * param clearType: 数据清理任务类型 (Required)
+ * param clearType: 数据清理任务类型. AllData:清理全部数据, ExpiredData:清理过期数据, SpecifiedData:清理匹配的数据 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -73,7 +73,7 @@ func NewStartClearDataRequest(
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
- * param clearType: 数据清理任务类型 (Required)
+ * param clearType: 数据清理任务类型. AllData:清理全部数据, ExpiredData:清理过期数据, SpecifiedData:清理匹配的数据 (Required)
  * param keyPattern: 匹配模式, 如: test*、*test、ab*cc*, 当节点为AllData、ExpiredData时可以忽略此参数 (Optional)
  * param keyFilter: key的过滤条件, 当节点为AllData、ExpiredData时可以忽略此参数 (Optional)
  * param qpsLimit: 数据遍历的速率 (Optional)
@@ -124,7 +124,7 @@ func (r *StartClearDataRequest) SetRegionId(regionId string) {
 func (r *StartClearDataRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
-/* param clearType: 数据清理任务类型(Required) */
+/* param clearType: 数据清理任务类型. AllData:清理全部数据, ExpiredData:清理过期数据, SpecifiedData:清理匹配的数据(Required) */
 func (r *StartClearDataRequest) SetClearType(clearType string) {
     r.ClearType = clearType
 }

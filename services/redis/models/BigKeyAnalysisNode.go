@@ -26,10 +26,10 @@ type BigKeyAnalysisNode struct {
     NodeRole string `json:"nodeRole"`
 
     /* String类型大key数量 (Optional) */
-    StringTypeNum string `json:"stringTypeNum"`
+    StringTypeNum int `json:"stringTypeNum"`
 
     /* List类型大key数量 (Optional) */
-    ListTypeNum string `json:"listTypeNum"`
+    ListTypeNum int `json:"listTypeNum"`
 
     /* Set类型大key数量 (Optional) */
     SetTypeNum int `json:"setTypeNum"`

@@ -30,4 +30,7 @@ type AzId struct {
 
     /* 缓存Redis从实例所在区域的可用区ID，按副本组指定AZ时生效 (Optional) */
     Slave string `json:"slave"`
+
+    /* 代理AZ范围 (Optional) */
+    AzsForProxy []string `json:"azsForProxy"`
 }

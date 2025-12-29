@@ -43,6 +43,12 @@ type Backup struct {
     /* 备份任务状态状态，0表示备份中，1表示失败，2表示成功  */
     BackupStatus int `json:"backupStatus"`
 
+    /* 备份时刻分片的内存规格 (Optional) */
+    BackupShardMemoryMB int `json:"backupShardMemoryMB"`
+
+    /* 备份分片数 (Optional) */
+    BackupShardNum int `json:"backupShardNum"`
+
     /* 备份文件下载地址（已废弃，调用获取备份文件下载地址接口获取）  */
     BackupDownloadURL string `json:"backupDownloadURL"`
 }

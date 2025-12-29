@@ -41,6 +41,12 @@ type CacheInstance struct {
     /* 创建时间（ISO 8601标准的UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ） (Optional) */
     CreateTime string `json:"createTime"`
 
+    /* 软删除时间，即实例进入回收站的时间（ISO 8601标准的UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ） (Optional) */
+    SoftDeletedTime string `json:"softDeletedTime"`
+
+    /* 回收站实例的过期时间（ISO 8601标准的UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ） (Optional) */
+    RetainExpireTime string `json:"retainExpireTime"`
+
     /* az信息 (Optional) */
     AzId AzId `json:"azId"`
 
@@ -59,8 +65,11 @@ type CacheInstance struct {
     /* 实例的计费信息 (Optional) */
     Charge charge.Charge `json:"charge"`
 
-    /* 实例的详细版本号，形如x.x-x.x (Optional) */
+    /* 实例Redis的详细版本号，形如x.x-x.x (Optional) */
     InstanceVersion string `json:"instanceVersion"`
+
+    /* 实例Proxy的详细版本号，形如x.x-x.x (Optional) */
+    InstanceProxyVersion string `json:"instanceProxyVersion"`
 
     /* 连接实例时，是否需要密码认证，false表示无密码 (Optional) */
     Auth bool `json:"auth"`
@@ -112,4 +121,19 @@ type CacheInstance struct {
 
     /* cpu架构类型:arm64、amd64 (Optional) */
     CpuArchType string `json:"cpuArchType"`
+
+    /* 可维护时间段的开始时间，格式为HH:mmZ（UTC时间） (Optional) */
+    MaintenanceStartTime string `json:"maintenanceStartTime"`
+
+    /* 可维护时间段的结束时间，格式为HH:mmZ（UTC时间） (Optional) */
+    MaintenanceEndTime string `json:"maintenanceEndTime"`
+
+    /* 实例待执行的任务 (Optional) */
+    ToBeExecutedTaskType []int `json:"toBeExecutedTaskType"`
+
+    /* 是否支持绑定弹性公网IP (Optional) */
+    SupportAssociateEIP bool `json:"supportAssociateEIP"`
+
+    /* 平台 (Optional) */
+    Platform string `json:"platform"`
 }

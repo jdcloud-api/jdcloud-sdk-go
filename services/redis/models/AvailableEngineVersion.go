@@ -28,6 +28,9 @@ type AvailableEngineVersion struct {
     /* 是否售罄 (Optional) */
     SoldOut bool `json:"soldOut"`
 
+    /* 是否必须有代理 (Optional) */
+    MustEnableSmartProxy bool `json:"mustEnableSmartProxy"`
+
     /* 售卖CPU架构列表 (Optional) */
     AvailableCPUArchs []AvailableCPUArch `json:"availableCPUArchs"`
 }

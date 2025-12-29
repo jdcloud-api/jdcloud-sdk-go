@@ -30,6 +30,9 @@ type DescribeClusterInfoRequest struct {
 
     /* 缓存Redis实例ID，是访问实例的唯一标识  */
     CacheInstanceId string `json:"cacheInstanceId"`
+
+    /* 是否查询拓扑详情 (Optional) */
+    Detail *bool `json:"detail"`
 }
 
 /*
@@ -58,10 +61,12 @@ func NewDescribeClusterInfoRequest(
 /*
  * param regionId: 缓存Redis实例所在区域的Region ID。目前有华北-北京、华南-广州、华东-上海三个区域，Region ID分别为cn-north-1、cn-south-1、cn-east-2 (Required)
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
+ * param detail: 是否查询拓扑详情 (Optional)
  */
 func NewDescribeClusterInfoRequestWithAllParams(
     regionId string,
     cacheInstanceId string,
+    detail *bool,
 ) *DescribeClusterInfoRequest {
 
     return &DescribeClusterInfoRequest{
@@ -73,6 +78,7 @@ func NewDescribeClusterInfoRequestWithAllParams(
         },
         RegionId: regionId,
         CacheInstanceId: cacheInstanceId,
+        Detail: detail,
     }
 }
 
@@ -97,6 +103,10 @@ func (r *DescribeClusterInfoRequest) SetRegionId(regionId string) {
 func (r *DescribeClusterInfoRequest) SetCacheInstanceId(cacheInstanceId string) {
     r.CacheInstanceId = cacheInstanceId
 }
+/* param detail: 是否查询拓扑详情(Optional) */
+func (r *DescribeClusterInfoRequest) SetDetail(detail bool) {
+    r.Detail = &detail
+}
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
@@ -113,4 +123,5 @@ type DescribeClusterInfoResponse struct {
 
 type DescribeClusterInfoResult struct {
     Info redis.ClusterInfo `json:"info"`
+    Topo redis.TopoInfo `json:"topo"`
 }
