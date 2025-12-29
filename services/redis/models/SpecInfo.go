@@ -22,6 +22,9 @@ type SpecInfo struct {
     /* 内存大小（GB） (Optional) */
     MemoryGB int `json:"memoryGB"`
 
+    /* 内存大小（MB） (Optional) */
+    MemoryMB int `json:"memoryMB"`
+
     /* 实例规格，标准版不为空，4.0 自定义分片集群版规格为空，具体规格参考单分片规格 (Optional) */
     InstanceClass string `json:"instanceClass"`
 

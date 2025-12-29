@@ -36,8 +36,20 @@ type ModifyCacheInstanceClassRequest struct {
     /* 自定义分片数，只对自定义分片规格实例有效 (Optional) */
     ShardNumber *int `json:"shardNumber"`
 
+    /* 副本数 (Optional) */
+    ReplicaNumber *int `json:"replicaNumber"`
+
+    /* 增加副本时指定az (Optional) */
+    ReplicaAzs2Add []string `json:"replicaAzs2Add"`
+
     /* 是否开启4.0集群并行变配 (Optional) */
     Parallel *bool `json:"parallel"`
+
+    /* 任务执行时间:
+Immediately - 任务立即执行，默认值
+MaintainTime - 任务在运维时间内执行
+ (Optional) */
+    EffectiveTime *string `json:"effectiveTime"`
 }
 
 /*
@@ -71,14 +83,23 @@ func NewModifyCacheInstanceClassRequest(
  * param cacheInstanceId: 缓存Redis实例ID，是访问实例的唯一标识 (Required)
  * param cacheInstanceClass: 新规格 (Required)
  * param shardNumber: 自定义分片数，只对自定义分片规格实例有效 (Optional)
+ * param replicaNumber: 副本数 (Optional)
+ * param replicaAzs2Add: 增加副本时指定az (Optional)
  * param parallel: 是否开启4.0集群并行变配 (Optional)
+ * param effectiveTime: 任务执行时间:
+Immediately - 任务立即执行，默认值
+MaintainTime - 任务在运维时间内执行
+ (Optional)
  */
 func NewModifyCacheInstanceClassRequestWithAllParams(
     regionId string,
     cacheInstanceId string,
     cacheInstanceClass string,
     shardNumber *int,
+    replicaNumber *int,
+    replicaAzs2Add []string,
     parallel *bool,
+    effectiveTime *string,
 ) *ModifyCacheInstanceClassRequest {
 
     return &ModifyCacheInstanceClassRequest{
@@ -92,7 +113,10 @@ func NewModifyCacheInstanceClassRequestWithAllParams(
         CacheInstanceId: cacheInstanceId,
         CacheInstanceClass: cacheInstanceClass,
         ShardNumber: shardNumber,
+        ReplicaNumber: replicaNumber,
+        ReplicaAzs2Add: replicaAzs2Add,
         Parallel: parallel,
+        EffectiveTime: effectiveTime,
     }
 }
 
@@ -125,9 +149,24 @@ func (r *ModifyCacheInstanceClassRequest) SetCacheInstanceClass(cacheInstanceCla
 func (r *ModifyCacheInstanceClassRequest) SetShardNumber(shardNumber int) {
     r.ShardNumber = &shardNumber
 }
+/* param replicaNumber: 副本数(Optional) */
+func (r *ModifyCacheInstanceClassRequest) SetReplicaNumber(replicaNumber int) {
+    r.ReplicaNumber = &replicaNumber
+}
+/* param replicaAzs2Add: 增加副本时指定az(Optional) */
+func (r *ModifyCacheInstanceClassRequest) SetReplicaAzs2Add(replicaAzs2Add []string) {
+    r.ReplicaAzs2Add = replicaAzs2Add
+}
 /* param parallel: 是否开启4.0集群并行变配(Optional) */
 func (r *ModifyCacheInstanceClassRequest) SetParallel(parallel bool) {
     r.Parallel = &parallel
+}
+/* param effectiveTime: 任务执行时间:
+Immediately - 任务立即执行，默认值
+MaintainTime - 任务在运维时间内执行
+(Optional) */
+func (r *ModifyCacheInstanceClassRequest) SetEffectiveTime(effectiveTime string) {
+    r.EffectiveTime = &effectiveTime
 }
 
 

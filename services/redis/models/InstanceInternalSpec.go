@@ -25,6 +25,9 @@ type InstanceInternalSpec struct {
     /* 实例总内存（GB） (Optional) */
     InstanceMemoryGB int `json:"instanceMemoryGB"`
 
+    /* 实例总内存（MB） (Optional) */
+    InstanceMemoryMB int `json:"instanceMemoryMB"`
+
     /* 内部节点角色列表 (Optional) */
     NodeRoles []NodeRole `json:"nodeRoles"`
 }

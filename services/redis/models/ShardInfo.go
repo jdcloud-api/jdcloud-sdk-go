@@ -19,15 +19,9 @@ package models
 
 type ShardInfo struct {
 
-    /* 默认分片数 (Optional) */
-    DefaultShardNumber int `json:"defaultShardNumber"`
+    /* master信息 (Optional) */
+    Master RedisNode `json:"master"`
 
-    /* 默认单分片规格代码 (Optional) */
-    DefaultShardClass string `json:"defaultShardClass"`
-
-    /* 分片数列表 (Optional) */
-    ShardNumberList []int `json:"shardNumberList"`
-
-    /* 需要的IP数列表 (Optional) */
-    IpNumberList []int `json:"ipNumberList"`
+    /* replica信息 (Optional) */
+    Replicas []RedisNode `json:"replicas"`
 }

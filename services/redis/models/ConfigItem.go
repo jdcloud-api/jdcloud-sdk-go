@@ -68,4 +68,10 @@ notify-keyspace-events（redis 4.0的默认值为空，redis 2.8不支持）：[
 
     /* configValueType为outputBuffer时的参数值规则 (Optional) */
     ConfigValueOutputBuffer *string `json:"configValueOutputBuffer"`
+
+    /* 参数说明 (Optional) */
+    ConfigDescription *string `json:"configDescription"`
+
+    /* 配置项是否不支持 (Optional) */
+    ConfigUnSupport *bool `json:"configUnSupport"`
 }

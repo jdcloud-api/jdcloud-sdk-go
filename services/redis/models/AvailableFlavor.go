@@ -25,6 +25,9 @@ type AvailableFlavor struct {
     /* IP数 (Optional) */
     IpNumber int `json:"ipNumber"`
 
+    /* 不同副本的IP数 (Optional) */
+    IpNumbers interface{} `json:"ipNumbers"`
+
     /* 是否推荐 (Optional) */
     Recommended bool `json:"recommended"`
 

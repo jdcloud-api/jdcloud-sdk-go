@@ -38,7 +38,7 @@ db - 根据db关闭连接
     Option string `json:"option"`
 
     /* 筛选条件
-属性是addr时 - ip:port, port空表示此ip所有port
+属性是addr时 - ip:port, 支持传入多个addr，中间以','分割
 属性是type时 - 支持normal/pubsub/all三种条件
 属性是db时 - db列表, 0,1,2..
   */
@@ -54,7 +54,7 @@ type - 根据链接类型关闭连接
 db - 根据db关闭连接
  (Required)
  * param value: 筛选条件
-属性是addr时 - ip:port, port空表示此ip所有port
+属性是addr时 - ip:port, 支持传入多个addr，中间以','分割
 属性是type时 - 支持normal/pubsub/all三种条件
 属性是db时 - db列表, 0,1,2..
  (Required)
@@ -91,7 +91,7 @@ type - 根据链接类型关闭连接
 db - 根据db关闭连接
  (Required)
  * param value: 筛选条件
-属性是addr时 - ip:port, port空表示此ip所有port
+属性是addr时 - ip:port, 支持传入多个addr，中间以','分割
 属性是type时 - 支持normal/pubsub/all三种条件
 属性是db时 - db列表, 0,1,2..
  (Required)
@@ -147,7 +147,7 @@ func (r *ClientKillRequest) SetOption(option string) {
     r.Option = option
 }
 /* param value: 筛选条件
-属性是addr时 - ip:port, port空表示此ip所有port
+属性是addr时 - ip:port, 支持传入多个addr，中间以','分割
 属性是type时 - 支持normal/pubsub/all三种条件
 属性是db时 - db列表, 0,1,2..
 (Required) */

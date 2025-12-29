@@ -22,6 +22,9 @@ type AvailableMemorySpec struct {
     /* 售卖内存（GB） (Optional) */
     MemoryGB int `json:"memoryGB"`
 
+    /* 售卖内存（MB） (Optional) */
+    MemoryMB int `json:"memoryMB"`
+
     /* 是否售罄 (Optional) */
     SoldOut bool `json:"soldOut"`
 

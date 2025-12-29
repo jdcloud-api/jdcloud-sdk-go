@@ -25,6 +25,9 @@ type NodeSpec struct {
     /* 内存大小（GB） (Optional) */
     MemoryGBs int `json:"memoryGBs"`
 
+    /* 内存大小（MB） (Optional) */
+    MemoryMBs int `json:"memoryMBs"`
+
     /* 总磁盘大小（GB） (Optional) */
     TotalDiskGBs int `json:"totalDiskGBs"`
 

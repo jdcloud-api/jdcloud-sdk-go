@@ -81,4 +81,16 @@ type CacheInstanceSpec struct {
 
     /* cpu架构类型:arm64、amd64 (Optional) */
     CpuArchType *string `json:"cpuArchType"`
+
+    /* 从备份克隆实例时，指定备份的baseId,需要与srcInstanceId同时指定 (Optional) */
+    BackupId *string `json:"backupId"`
+
+    /* 从备份克隆实例时，指定的备份实例的instanceId,需要与backupId同时指定 (Optional) */
+    SrcInstanceId *string `json:"srcInstanceId"`
+
+    /* 配置模板ID (Optional) */
+    ConfigTemplateId *string `json:"configTemplateId"`
+
+    /* 容器标签信息 (Optional) */
+    OpsTags []OpsTag `json:"opsTags"`
 }

@@ -28,6 +28,9 @@ type ShardSpec struct {
     /* 单分片内存大小（GB） (Optional) */
     MemoryGB int `json:"memoryGB"`
 
+    /* 单分片内存大小（MB） (Optional) */
+    MemoryMB int `json:"memoryMB"`
+
     /* 单分片磁盘大小（GB） (Optional) */
     DiskGB int `json:"diskGB"`
 
