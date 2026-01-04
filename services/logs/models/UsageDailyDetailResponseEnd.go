@@ -17,23 +17,20 @@
 package models
 
 
-type TemplateEnd struct {
+type UsageDailyDetailResponseEnd struct {
 
-    /* UID (Optional) */
-    UID string `json:"uID"`
+    /*  (Optional) */
+    Data []UsageDailyDetail `json:"data"`
 
-    /* 是否展示实列列表 (Optional) */
-    DisableTable int64 `json:"disableTable"`
+    /* 总页数 (Optional) */
+    NumberPages int64 `json:"numberPages"`
 
-    /* 模板名称 (Optional) */
-    Name string `json:"name"`
+    /* 总记录数 (Optional) */
+    NumberRecords int64 `json:"numberRecords"`
 
-    /* serviceCode (Optional) */
-    ServiceCode string `json:"serviceCode"`
+    /* 当前页码 (Optional) */
+    PageNumber int64 `json:"pageNumber"`
 
-    /* 是否是特殊模式的系统日志 (Optional) */
-    SpecialMode int64 `json:"specialMode"`
-
-    /* 实例描述信息 (Optional) */
-    InstanceDescription string `json:"instanceDescription"`
+    /* 分页大小 (Optional) */
+    PageSize int64 `json:"pageSize"`
 }

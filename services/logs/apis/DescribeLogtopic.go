@@ -114,6 +114,7 @@ type DescribeLogtopicResult struct {
     UID string `json:"uID"`
     AppCode string `json:"appCode"`
     AppName string `json:"appName"`
+    ChargeStatus string `json:"chargeStatus"`
     CollectInfoUID string `json:"collectInfoUID"`
     CreateTime string `json:"createTime"`
     Description string `json:"description"`
@@ -125,4 +126,5 @@ type DescribeLogtopicResult struct {
     PrePattern string `json:"prePattern"`
     Region string `json:"region"`
     ServiceCode string `json:"serviceCode"`
+    Status string `json:"status"`
 }

@@ -21,7 +21,7 @@ import (
     logs "github.com/jdcloud-api/jdcloud-sdk-go/services/logs/models"
 )
 
-type CreateCollectInfoRequest struct {
+type CreateCPCollectInfoRequest struct {
 
     core.JDCloudRequest
 
@@ -102,18 +102,18 @@ type CreateCollectInfoRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewCreateCollectInfoRequest(
+func NewCreateCPCollectInfoRequest(
     regionId string,
     logtopicUID string,
     appCode string,
     enabled bool,
     resourceType string,
     serviceCode string,
-) *CreateCollectInfoRequest {
+) *CreateCPCollectInfoRequest {
 
-	return &CreateCollectInfoRequest{
+	return &CreateCPCollectInfoRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/logtopics/{logtopicUID}/collectinfos",
+			URL:     "/regions/{regionId}/logtopics/{logtopicUID}/cpCollectinfos",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -151,7 +151,7 @@ func NewCreateCollectInfoRequest(
  * param tagResource:  (Optional)
  * param templateUID: 日志类型。当appcode为jdcloud时为必填 (Optional)
  */
-func NewCreateCollectInfoRequestWithAllParams(
+func NewCreateCPCollectInfoRequestWithAllParams(
     regionId string,
     logtopicUID string,
     agResource []logs.AgResource,
@@ -174,11 +174,11 @@ func NewCreateCollectInfoRequestWithAllParams(
     serviceCode string,
     tagResource *logs.TagResource,
     templateUID *string,
-) *CreateCollectInfoRequest {
+) *CreateCPCollectInfoRequest {
 
-    return &CreateCollectInfoRequest{
+    return &CreateCPCollectInfoRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/logtopics/{logtopicUID}/collectinfos",
+            URL:     "/regions/{regionId}/logtopics/{logtopicUID}/cpCollectinfos",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -209,11 +209,11 @@ func NewCreateCollectInfoRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewCreateCollectInfoRequestWithoutParam() *CreateCollectInfoRequest {
+func NewCreateCPCollectInfoRequestWithoutParam() *CreateCPCollectInfoRequest {
 
-    return &CreateCollectInfoRequest{
+    return &CreateCPCollectInfoRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/logtopics/{logtopicUID}/collectinfos",
+            URL:     "/regions/{regionId}/logtopics/{logtopicUID}/cpCollectinfos",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -222,107 +222,107 @@ func NewCreateCollectInfoRequestWithoutParam() *CreateCollectInfoRequest {
 }
 
 /* param regionId: 地域 Id(Required) */
-func (r *CreateCollectInfoRequest) SetRegionId(regionId string) {
+func (r *CreateCPCollectInfoRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 /* param logtopicUID: 日志主题 UID(Required) */
-func (r *CreateCollectInfoRequest) SetLogtopicUID(logtopicUID string) {
+func (r *CreateCPCollectInfoRequest) SetLogtopicUID(logtopicUID string) {
     r.LogtopicUID = logtopicUID
 }
 /* param agResource: 高可用组资源(Optional) */
-func (r *CreateCollectInfoRequest) SetAgResource(agResource []logs.AgResource) {
+func (r *CreateCPCollectInfoRequest) SetAgResource(agResource []logs.AgResource) {
     r.AgResource = agResource
 }
 /* param agentMeta: (Optional) */
-func (r *CreateCollectInfoRequest) SetAgentMeta(agentMeta *logs.AgentMeta) {
+func (r *CreateCPCollectInfoRequest) SetAgentMeta(agentMeta *logs.AgentMeta) {
     r.AgentMeta = agentMeta
 }
 /* param appCode: 日志来源，只能是 custom/jdcloud(Required) */
-func (r *CreateCollectInfoRequest) SetAppCode(appCode string) {
+func (r *CreateCPCollectInfoRequest) SetAppCode(appCode string) {
     r.AppCode = appCode
 }
 /* param binlogSpec: (Optional) */
-func (r *CreateCollectInfoRequest) SetBinlogSpec(binlogSpec *logs.BinlogSpec) {
+func (r *CreateCPCollectInfoRequest) SetBinlogSpec(binlogSpec *logs.BinlogSpec) {
     r.BinlogSpec = binlogSpec
 }
 /* param enabled: 采集状态，0-禁用，1-启用(Required) */
-func (r *CreateCollectInfoRequest) SetEnabled(enabled bool) {
+func (r *CreateCPCollectInfoRequest) SetEnabled(enabled bool) {
     r.Enabled = enabled
 }
 /* param filterEnabled: 过滤器是否启用。当appcode为custom时必填(Optional) */
-func (r *CreateCollectInfoRequest) SetFilterEnabled(filterEnabled bool) {
+func (r *CreateCPCollectInfoRequest) SetFilterEnabled(filterEnabled bool) {
     r.FilterEnabled = &filterEnabled
 }
 /* param k8sSpec: (Optional) */
-func (r *CreateCollectInfoRequest) SetK8sSpec(k8sSpec *logs.K8sSpec) {
+func (r *CreateCPCollectInfoRequest) SetK8sSpec(k8sSpec *logs.K8sSpec) {
     r.K8sSpec = k8sSpec
 }
 /* param logFile: 日志文件名。当appcode为custom时为必填。日志文件名支持正则表达式。(Optional) */
-func (r *CreateCollectInfoRequest) SetLogFile(logFile string) {
+func (r *CreateCPCollectInfoRequest) SetLogFile(logFile string) {
     r.LogFile = &logFile
 }
 /* param logFilters: 过滤器。设置过滤器后可根据用户设定的关键词采集部分日志，如仅采集 Error 的日志。目前最大允许5个。(Optional) */
-func (r *CreateCollectInfoRequest) SetLogFilters(logFilters []string) {
+func (r *CreateCPCollectInfoRequest) SetLogFilters(logFilters []string) {
     r.LogFilters = logFilters
 }
 /* param logPath: 日志路径。当appcode为custom时为必填。目前仅支持对 Linux 云主机上的日志进行采集，路径支持通配符“*”和“？”，文件路径应符合 Linux 的文件路径规则(Optional) */
-func (r *CreateCollectInfoRequest) SetLogPath(logPath string) {
+func (r *CreateCPCollectInfoRequest) SetLogPath(logPath string) {
     r.LogPath = &logPath
 }
 /* param logtopicEnabled: 目的地是否是日志服务logtopic，只支持业务应用日志(Optional) */
-func (r *CreateCollectInfoRequest) SetLogtopicEnabled(logtopicEnabled bool) {
+func (r *CreateCPCollectInfoRequest) SetLogtopicEnabled(logtopicEnabled bool) {
     r.LogtopicEnabled = &logtopicEnabled
 }
 /* param name: 采集配置名称(Optional) */
-func (r *CreateCollectInfoRequest) SetName(name string) {
+func (r *CreateCPCollectInfoRequest) SetName(name string) {
     r.Name = &name
 }
 /* param readFromHead: 开启全量采集(Optional) */
-func (r *CreateCollectInfoRequest) SetReadFromHead(readFromHead bool) {
+func (r *CreateCPCollectInfoRequest) SetReadFromHead(readFromHead bool) {
     r.ReadFromHead = &readFromHead
 }
 /* param regexpStr: 首行正则(Optional) */
-func (r *CreateCollectInfoRequest) SetRegexpStr(regexpStr string) {
+func (r *CreateCPCollectInfoRequest) SetRegexpStr(regexpStr string) {
     r.RegexpStr = &regexpStr
 }
 /* param resourceMode: 采集资源时选择的模式，1.正常的选择实例模式（默认模式）；2.选择标签tag模式 3.选择高可用组ag模式(Optional) */
-func (r *CreateCollectInfoRequest) SetResourceMode(resourceMode int64) {
+func (r *CreateCPCollectInfoRequest) SetResourceMode(resourceMode int64) {
     r.ResourceMode = &resourceMode
 }
 /* param resourceType: 采集实例类型, 只能是 all/part  当选择all时，传入的实例列表无效；custom类型的采集配置目前仅支持part方式，即用户指定实例列表；(Required) */
-func (r *CreateCollectInfoRequest) SetResourceType(resourceType string) {
+func (r *CreateCPCollectInfoRequest) SetResourceType(resourceType string) {
     r.ResourceType = resourceType
 }
 /* param resources: 采集实例列表：jdcloud类型最多添加20个资源；custom类型支持的资源数量不限；(Optional) */
-func (r *CreateCollectInfoRequest) SetResources(resources []logs.Resource) {
+func (r *CreateCPCollectInfoRequest) SetResources(resources []logs.Resource) {
     r.Resources = resources
 }
 /* param serviceCode: 产品线,当日志来源为jdcloud时,填写云产品serviceCode。否则填写自定义日志类型：vm,k8s,binlog,etc(Required) */
-func (r *CreateCollectInfoRequest) SetServiceCode(serviceCode string) {
+func (r *CreateCPCollectInfoRequest) SetServiceCode(serviceCode string) {
     r.ServiceCode = serviceCode
 }
 /* param tagResource: (Optional) */
-func (r *CreateCollectInfoRequest) SetTagResource(tagResource *logs.TagResource) {
+func (r *CreateCPCollectInfoRequest) SetTagResource(tagResource *logs.TagResource) {
     r.TagResource = tagResource
 }
 /* param templateUID: 日志类型。当appcode为jdcloud时为必填(Optional) */
-func (r *CreateCollectInfoRequest) SetTemplateUID(templateUID string) {
+func (r *CreateCPCollectInfoRequest) SetTemplateUID(templateUID string) {
     r.TemplateUID = &templateUID
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r CreateCollectInfoRequest) GetRegionId() string {
+func (r CreateCPCollectInfoRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type CreateCollectInfoResponse struct {
+type CreateCPCollectInfoResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result CreateCollectInfoResult `json:"result"`
+    Result CreateCPCollectInfoResult `json:"result"`
 }
 
-type CreateCollectInfoResult struct {
+type CreateCPCollectInfoResult struct {
     UID string `json:"uID"`
 }

@@ -28,7 +28,7 @@ type DescribeLogtopicsGlobalRequest struct {
     /* 地域 Id  */
     RegionId string `json:"regionId"`
 
-    /* 过滤条件，key，Values， 合法的key：logtopicName， logtopicUID， logsetName， logsetUID (Optional) */
+    /* 过滤条件，key，Values， 合法的key：logtopicName， logtopicUID， logsetName， logsetUID，regionId (Optional) */
     Filters []logs.Filter `json:"filters"`
 
     /* 过滤条件，key，Values (Optional) */
@@ -49,7 +49,7 @@ func NewDescribeLogtopicsGlobalRequest(
 
 	return &DescribeLogtopicsGlobalRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/logtopics",
+			URL:     "/describeLogtopicsGlobal",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -60,7 +60,7 @@ func NewDescribeLogtopicsGlobalRequest(
 
 /*
  * param regionId: 地域 Id (Required)
- * param filters: 过滤条件，key，Values， 合法的key：logtopicName， logtopicUID， logsetName， logsetUID (Optional)
+ * param filters: 过滤条件，key，Values， 合法的key：logtopicName， logtopicUID， logsetName， logsetUID，regionId (Optional)
  * param tags: 过滤条件，key，Values (Optional)
  * param appName: 日志主题采集的日志类型 (Optional)
  */
@@ -73,7 +73,7 @@ func NewDescribeLogtopicsGlobalRequestWithAllParams(
 
     return &DescribeLogtopicsGlobalRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/logtopics",
+            URL:     "/describeLogtopicsGlobal",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -90,7 +90,7 @@ func NewDescribeLogtopicsGlobalRequestWithoutParam() *DescribeLogtopicsGlobalReq
 
     return &DescribeLogtopicsGlobalRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/logtopics",
+            URL:     "/describeLogtopicsGlobal",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -102,7 +102,7 @@ func NewDescribeLogtopicsGlobalRequestWithoutParam() *DescribeLogtopicsGlobalReq
 func (r *DescribeLogtopicsGlobalRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-/* param filters: 过滤条件，key，Values， 合法的key：logtopicName， logtopicUID， logsetName， logsetUID(Optional) */
+/* param filters: 过滤条件，key，Values， 合法的key：logtopicName， logtopicUID， logsetName， logsetUID，regionId(Optional) */
 func (r *DescribeLogtopicsGlobalRequest) SetFilters(filters []logs.Filter) {
     r.Filters = filters
 }

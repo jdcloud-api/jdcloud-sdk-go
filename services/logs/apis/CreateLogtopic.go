@@ -45,6 +45,9 @@ type CreateLogtopicRequest struct {
 
     /* 标签列表 (Optional) */
     Tags []logs.Tag `json:"tags"`
+
+    /* push接口上报的业务日志 (Optional) */
+    IsPushedCustomLog *bool `json:"isPushedCustomLog"`
 }
 
 /*
@@ -81,6 +84,7 @@ func NewCreateLogtopicRequest(
  * param inOrder: 保序 (Optional)
  * param lifeCycle: 保存周期，只能是 7， 15， 30 (Optional)
  * param tags: 标签列表 (Optional)
+ * param isPushedCustomLog: push接口上报的业务日志 (Optional)
  */
 func NewCreateLogtopicRequestWithAllParams(
     regionId string,
@@ -90,6 +94,7 @@ func NewCreateLogtopicRequestWithAllParams(
     inOrder *bool,
     lifeCycle *int,
     tags []logs.Tag,
+    isPushedCustomLog *bool,
 ) *CreateLogtopicRequest {
 
     return &CreateLogtopicRequest{
@@ -106,6 +111,7 @@ func NewCreateLogtopicRequestWithAllParams(
         InOrder: inOrder,
         LifeCycle: lifeCycle,
         Tags: tags,
+        IsPushedCustomLog: isPushedCustomLog,
     }
 }
 
@@ -149,6 +155,10 @@ func (r *CreateLogtopicRequest) SetLifeCycle(lifeCycle int) {
 /* param tags: 标签列表(Optional) */
 func (r *CreateLogtopicRequest) SetTags(tags []logs.Tag) {
     r.Tags = tags
+}
+/* param isPushedCustomLog: push接口上报的业务日志(Optional) */
+func (r *CreateLogtopicRequest) SetIsPushedCustomLog(isPushedCustomLog bool) {
+    r.IsPushedCustomLog = &isPushedCustomLog
 }
 
 

@@ -22,6 +22,9 @@ type CreateCollectInfoSpec struct {
     /* 高可用组资源 (Optional) */
     AgResource []AgResource `json:"agResource"`
 
+    /*  (Optional) */
+    AgentMeta AgentMeta `json:"agentMeta"`
+
     /* 日志来源，只能是 custom/jdcloud  */
     AppCode string `json:"appCode"`
 
@@ -51,6 +54,9 @@ type CreateCollectInfoSpec struct {
 
     /* 采集配置名称 (Optional) */
     Name string `json:"name"`
+
+    /* 开启全量采集 (Optional) */
+    ReadFromHead bool `json:"readFromHead"`
 
     /* 首行正则 (Optional) */
     RegexpStr string `json:"regexpStr"`

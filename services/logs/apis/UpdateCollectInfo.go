@@ -35,6 +35,9 @@ type UpdateCollectInfoRequest struct {
     AgResource []logs.AgResource `json:"agResource"`
 
     /*  (Optional) */
+    AgentMeta *logs.AgentMeta `json:"agentMeta"`
+
+    /*  (Optional) */
     BinlogSpec *logs.BinlogSpec `json:"binlogSpec"`
 
     /* 采集状态，0-禁用，1-启用  */
@@ -60,6 +63,9 @@ type UpdateCollectInfoRequest struct {
 
     /* 采集配置名称 (Optional) */
     Name *string `json:"name"`
+
+    /* 开启全量采集 (Optional) */
+    ReadFromHead *bool `json:"readFromHead"`
 
     /* 首行正则 (Optional) */
     RegexpStr *string `json:"regexpStr"`
@@ -110,6 +116,7 @@ func NewUpdateCollectInfoRequest(
  * param regionId: 地域 Id (Required)
  * param collectInfoUID: 采集配置 UID (Required)
  * param agResource: 高可用组资源 (Optional)
+ * param agentMeta:  (Optional)
  * param binlogSpec:  (Optional)
  * param enabled: 采集状态，0-禁用，1-启用 (Required)
  * param filterEnabled: 过滤器是否启用。当appcode为custom时必填 (Optional)
@@ -119,6 +126,7 @@ func NewUpdateCollectInfoRequest(
  * param logPath: 日志路径。当appcode为custom时为必填。目前仅支持对 Linux 云主机上的日志进行采集，路径支持通配符“*”和“？”，文件路径应符合 Linux 的文件路径规则 (Optional)
  * param logtopicEnabled: 目的地是否是日志服务logtopic，只支持业务应用日志 (Optional)
  * param name: 采集配置名称 (Optional)
+ * param readFromHead: 开启全量采集 (Optional)
  * param regexpStr: 首行正则 (Optional)
  * param resourceMode: 采集资源时选择的模式，1.正常的选择实例模式（默认模式）；2.选择标签tag模式 3.选择高可用组ag模式 (Optional)
  * param resourceType: 采集实例类型, 只能是 all/part  当选择all时，传入的实例列表无效；custom类型的采集配置目前仅支持part方式，即用户指定实例列表； (Required)
@@ -129,6 +137,7 @@ func NewUpdateCollectInfoRequestWithAllParams(
     regionId string,
     collectInfoUID string,
     agResource []logs.AgResource,
+    agentMeta *logs.AgentMeta,
     binlogSpec *logs.BinlogSpec,
     enabled bool,
     filterEnabled *bool,
@@ -138,6 +147,7 @@ func NewUpdateCollectInfoRequestWithAllParams(
     logPath *string,
     logtopicEnabled *bool,
     name *string,
+    readFromHead *bool,
     regexpStr *string,
     resourceMode *int64,
     resourceType string,
@@ -155,6 +165,7 @@ func NewUpdateCollectInfoRequestWithAllParams(
         RegionId: regionId,
         CollectInfoUID: collectInfoUID,
         AgResource: agResource,
+        AgentMeta: agentMeta,
         BinlogSpec: binlogSpec,
         Enabled: enabled,
         FilterEnabled: filterEnabled,
@@ -164,6 +175,7 @@ func NewUpdateCollectInfoRequestWithAllParams(
         LogPath: logPath,
         LogtopicEnabled: logtopicEnabled,
         Name: name,
+        ReadFromHead: readFromHead,
         RegexpStr: regexpStr,
         ResourceMode: resourceMode,
         ResourceType: resourceType,
@@ -196,6 +208,10 @@ func (r *UpdateCollectInfoRequest) SetCollectInfoUID(collectInfoUID string) {
 /* param agResource: 高可用组资源(Optional) */
 func (r *UpdateCollectInfoRequest) SetAgResource(agResource []logs.AgResource) {
     r.AgResource = agResource
+}
+/* param agentMeta: (Optional) */
+func (r *UpdateCollectInfoRequest) SetAgentMeta(agentMeta *logs.AgentMeta) {
+    r.AgentMeta = agentMeta
 }
 /* param binlogSpec: (Optional) */
 func (r *UpdateCollectInfoRequest) SetBinlogSpec(binlogSpec *logs.BinlogSpec) {
@@ -232,6 +248,10 @@ func (r *UpdateCollectInfoRequest) SetLogtopicEnabled(logtopicEnabled bool) {
 /* param name: 采集配置名称(Optional) */
 func (r *UpdateCollectInfoRequest) SetName(name string) {
     r.Name = &name
+}
+/* param readFromHead: 开启全量采集(Optional) */
+func (r *UpdateCollectInfoRequest) SetReadFromHead(readFromHead bool) {
+    r.ReadFromHead = &readFromHead
 }
 /* param regexpStr: 首行正则(Optional) */
 func (r *UpdateCollectInfoRequest) SetRegexpStr(regexpStr string) {

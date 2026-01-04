@@ -21,7 +21,7 @@ import (
     logs "github.com/jdcloud-api/jdcloud-sdk-go/services/logs/models"
 )
 
-type DescribeCollectInfoRequest struct {
+type DescribeCPCollectInfoRequest struct {
 
     core.JDCloudRequest
 
@@ -38,14 +38,14 @@ type DescribeCollectInfoRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeCollectInfoRequest(
+func NewDescribeCPCollectInfoRequest(
     regionId string,
     collectInfoUID string,
-) *DescribeCollectInfoRequest {
+) *DescribeCPCollectInfoRequest {
 
-	return &DescribeCollectInfoRequest{
+	return &DescribeCPCollectInfoRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/collectinfos/{collectInfoUID}",
+			URL:     "/regions/{regionId}/cpCollectinfos/{collectInfoUID}",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -59,14 +59,14 @@ func NewDescribeCollectInfoRequest(
  * param regionId: 地域 Id (Required)
  * param collectInfoUID: 采集配置 UID (Required)
  */
-func NewDescribeCollectInfoRequestWithAllParams(
+func NewDescribeCPCollectInfoRequestWithAllParams(
     regionId string,
     collectInfoUID string,
-) *DescribeCollectInfoRequest {
+) *DescribeCPCollectInfoRequest {
 
-    return &DescribeCollectInfoRequest{
+    return &DescribeCPCollectInfoRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/collectinfos/{collectInfoUID}",
+            URL:     "/regions/{regionId}/cpCollectinfos/{collectInfoUID}",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -77,11 +77,11 @@ func NewDescribeCollectInfoRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeCollectInfoRequestWithoutParam() *DescribeCollectInfoRequest {
+func NewDescribeCPCollectInfoRequestWithoutParam() *DescribeCPCollectInfoRequest {
 
-    return &DescribeCollectInfoRequest{
+    return &DescribeCPCollectInfoRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/collectinfos/{collectInfoUID}",
+            URL:     "/regions/{regionId}/cpCollectinfos/{collectInfoUID}",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -90,28 +90,28 @@ func NewDescribeCollectInfoRequestWithoutParam() *DescribeCollectInfoRequest {
 }
 
 /* param regionId: 地域 Id(Required) */
-func (r *DescribeCollectInfoRequest) SetRegionId(regionId string) {
+func (r *DescribeCPCollectInfoRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 /* param collectInfoUID: 采集配置 UID(Required) */
-func (r *DescribeCollectInfoRequest) SetCollectInfoUID(collectInfoUID string) {
+func (r *DescribeCPCollectInfoRequest) SetCollectInfoUID(collectInfoUID string) {
     r.CollectInfoUID = collectInfoUID
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeCollectInfoRequest) GetRegionId() string {
+func (r DescribeCPCollectInfoRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeCollectInfoResponse struct {
+type DescribeCPCollectInfoResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeCollectInfoResult `json:"result"`
+    Result DescribeCPCollectInfoResult `json:"result"`
 }
 
-type DescribeCollectInfoResult struct {
+type DescribeCPCollectInfoResult struct {
     UID string `json:"uID"`
     AgResource []logs.AgResourceEnd `json:"agResource"`
     AgentMeta interface{} `json:"agentMeta"`

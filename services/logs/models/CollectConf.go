@@ -22,18 +22,36 @@ type CollectConf struct {
     /* collectTemplateUID (Optional) */
     CollectTemplateUID string `json:"collectTemplateUID"`
 
+    /* 采集配置类型, 默认为vm，可支持binlog (Optional) */
+    CollectType string `json:"collectType"`
+
+    /*  (Optional) */
+    Destination DestConf `json:"destination"`
+
+    /* other Spec (Optional) */
+    ExtSpec interface{} `json:"extSpec"`
+
     /* 采集文件名称，支持通配 (Optional) */
     File string `json:"file"`
 
     /* filters 过滤器V1：多个词之间为or的关系 (Optional) */
     Filters []string `json:"filters"`
 
-    /* logsetUID 日志集UID (Optional) */
-    LogsetUID string `json:"logsetUID"`
-
     /* logtopicUID 日志主题UID (Optional) */
     LogtopicUID string `json:"logtopicUID"`
 
     /* 采集文件路径，支持通配 (Optional) */
     Path string `json:"path"`
+
+    /* 用户 PIN (Optional) */
+    Pin string `json:"pin"`
+
+    /* 是否开启从头采集 (Optional) */
+    ReadFromHead bool `json:"readFromHead"`
+
+    /* 首行正则表达式 (Optional) */
+    RegexpStr string `json:"regexpStr"`
+
+    /* agent元信息 (Optional) */
+    AgentMeta interface{} `json:"agentMeta"`
 }

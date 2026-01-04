@@ -18,10 +18,9 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    logs "github.com/jdcloud-api/jdcloud-sdk-go/services/logs/models"
 )
 
-type DescribeCollectInfoRequest struct {
+type DeleteCPCollectInfoRequest struct {
 
     core.JDCloudRequest
 
@@ -38,15 +37,15 @@ type DescribeCollectInfoRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeCollectInfoRequest(
+func NewDeleteCPCollectInfoRequest(
     regionId string,
     collectInfoUID string,
-) *DescribeCollectInfoRequest {
+) *DeleteCPCollectInfoRequest {
 
-	return &DescribeCollectInfoRequest{
+	return &DeleteCPCollectInfoRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/collectinfos/{collectInfoUID}",
-			Method:  "GET",
+			URL:     "/regions/{regionId}/cpCollectinfos/{collectInfoUID}",
+			Method:  "DELETE",
 			Header:  nil,
 			Version: "v1",
 		},
@@ -59,15 +58,15 @@ func NewDescribeCollectInfoRequest(
  * param regionId: 地域 Id (Required)
  * param collectInfoUID: 采集配置 UID (Required)
  */
-func NewDescribeCollectInfoRequestWithAllParams(
+func NewDeleteCPCollectInfoRequestWithAllParams(
     regionId string,
     collectInfoUID string,
-) *DescribeCollectInfoRequest {
+) *DeleteCPCollectInfoRequest {
 
-    return &DescribeCollectInfoRequest{
+    return &DeleteCPCollectInfoRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/collectinfos/{collectInfoUID}",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/cpCollectinfos/{collectInfoUID}",
+            Method:  "DELETE",
             Header:  nil,
             Version: "v1",
         },
@@ -77,12 +76,12 @@ func NewDescribeCollectInfoRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeCollectInfoRequestWithoutParam() *DescribeCollectInfoRequest {
+func NewDeleteCPCollectInfoRequestWithoutParam() *DeleteCPCollectInfoRequest {
 
-    return &DescribeCollectInfoRequest{
+    return &DeleteCPCollectInfoRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/collectinfos/{collectInfoUID}",
-            Method:  "GET",
+            URL:     "/regions/{regionId}/cpCollectinfos/{collectInfoUID}",
+            Method:  "DELETE",
             Header:  nil,
             Version: "v1",
         },
@@ -90,44 +89,26 @@ func NewDescribeCollectInfoRequestWithoutParam() *DescribeCollectInfoRequest {
 }
 
 /* param regionId: 地域 Id(Required) */
-func (r *DescribeCollectInfoRequest) SetRegionId(regionId string) {
+func (r *DeleteCPCollectInfoRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 /* param collectInfoUID: 采集配置 UID(Required) */
-func (r *DescribeCollectInfoRequest) SetCollectInfoUID(collectInfoUID string) {
+func (r *DeleteCPCollectInfoRequest) SetCollectInfoUID(collectInfoUID string) {
     r.CollectInfoUID = collectInfoUID
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeCollectInfoRequest) GetRegionId() string {
+func (r DeleteCPCollectInfoRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeCollectInfoResponse struct {
+type DeleteCPCollectInfoResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeCollectInfoResult `json:"result"`
+    Result DeleteCPCollectInfoResult `json:"result"`
 }
 
-type DescribeCollectInfoResult struct {
-    UID string `json:"uID"`
-    AgResource []logs.AgResourceEnd `json:"agResource"`
-    AgentMeta interface{} `json:"agentMeta"`
-    AppCode string `json:"appCode"`
-    BinlogSpec interface{} `json:"binlogSpec"`
-    Detail logs.CollectTempalteEnd `json:"detail"`
-    Enabled int64 `json:"enabled"`
-    HasResource bool `json:"hasResource"`
-    K8sSpec interface{} `json:"k8sSpec"`
-    LogsetUID string `json:"logsetUID"`
-    LogtopicUID string `json:"logtopicUID"`
-    Name string `json:"name"`
-    ResourceMode int64 `json:"resourceMode"`
-    ResourceType string `json:"resourceType"`
-    ServiceCode string `json:"serviceCode"`
-    TagResource logs.TagResourceEnd `json:"tagResource"`
-    TemplateName string `json:"templateName"`
-    TemplateUID string `json:"templateUID"`
+type DeleteCPCollectInfoResult struct {
 }

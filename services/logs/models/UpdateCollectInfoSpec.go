@@ -23,6 +23,9 @@ type UpdateCollectInfoSpec struct {
     AgResource []AgResource `json:"agResource"`
 
     /*  (Optional) */
+    AgentMeta AgentMeta `json:"agentMeta"`
+
+    /*  (Optional) */
     BinlogSpec BinlogSpec `json:"binlogSpec"`
 
     /* 采集状态，0-禁用，1-启用  */
@@ -48,6 +51,9 @@ type UpdateCollectInfoSpec struct {
 
     /* 采集配置名称 (Optional) */
     Name string `json:"name"`
+
+    /* 开启全量采集 (Optional) */
+    ReadFromHead bool `json:"readFromHead"`
 
     /* 首行正则 (Optional) */
     RegexpStr string `json:"regexpStr"`
