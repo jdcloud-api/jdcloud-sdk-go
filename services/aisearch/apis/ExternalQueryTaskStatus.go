@@ -21,88 +21,76 @@ import (
     aisearch "github.com/jdcloud-api/jdcloud-sdk-go/services/aisearch/models"
 )
 
-type ExternalWebSearchRequest struct {
+type ExternalQueryTaskStatusRequest struct {
 
     core.JDCloudRequest
 
     /* api key编号  */
     ApiKey string `json:"apiKey"`
 
-    /* 请求id,api key下唯一  */
+    /* 请求id，api key下唯一  */
     RequestId string `json:"requestId"`
 
-    /* 查询内容  */
-    Query string `json:"query"`
-
-    /* page 默认1 (Optional) */
-    Page *int `json:"page"`
-
-    /* pageSize 默认10 (Optional) */
-    PageSize *int `json:"pageSize"`
+    /* 任务ID  */
+    TaskId string `json:"taskId"`
 }
 
 /*
  * param apiKey: api key编号 (Required)
- * param requestId: 请求id,api key下唯一 (Required)
- * param query: 查询内容 (Required)
+ * param requestId: 请求id，api key下唯一 (Required)
+ * param taskId: 任务ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewExternalWebSearchRequest(
+func NewExternalQueryTaskStatusRequest(
     apiKey string,
     requestId string,
-    query string,
-) *ExternalWebSearchRequest {
+    taskId string,
+) *ExternalQueryTaskStatusRequest {
 
-	return &ExternalWebSearchRequest{
+	return &ExternalQueryTaskStatusRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/external:webSearch",
+			URL:     "/external:queryTaskStatus",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         ApiKey: apiKey,
         RequestId: requestId,
-        Query: query,
+        TaskId: taskId,
 	}
 }
 
 /*
  * param apiKey: api key编号 (Required)
- * param requestId: 请求id,api key下唯一 (Required)
- * param query: 查询内容 (Required)
- * param page: page 默认1 (Optional)
- * param pageSize: pageSize 默认10 (Optional)
+ * param requestId: 请求id，api key下唯一 (Required)
+ * param taskId: 任务ID (Required)
  */
-func NewExternalWebSearchRequestWithAllParams(
+func NewExternalQueryTaskStatusRequestWithAllParams(
     apiKey string,
     requestId string,
-    query string,
-    page *int,
-    pageSize *int,
-) *ExternalWebSearchRequest {
+    taskId string,
+) *ExternalQueryTaskStatusRequest {
 
-    return &ExternalWebSearchRequest{
+    return &ExternalQueryTaskStatusRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/external:webSearch",
+            URL:     "/external:queryTaskStatus",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         ApiKey: apiKey,
         RequestId: requestId,
-        Query: query,
-        Page: page,
-        PageSize: pageSize,
+        TaskId: taskId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewExternalWebSearchRequestWithoutParam() *ExternalWebSearchRequest {
+func NewExternalQueryTaskStatusRequestWithoutParam() *ExternalQueryTaskStatusRequest {
 
-    return &ExternalWebSearchRequest{
+    return &ExternalQueryTaskStatusRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/external:webSearch",
+            URL:     "/external:queryTaskStatus",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -111,42 +99,34 @@ func NewExternalWebSearchRequestWithoutParam() *ExternalWebSearchRequest {
 }
 
 /* param apiKey: api key编号(Required) */
-func (r *ExternalWebSearchRequest) SetApiKey(apiKey string) {
+func (r *ExternalQueryTaskStatusRequest) SetApiKey(apiKey string) {
     r.ApiKey = apiKey
 }
-/* param requestId: 请求id,api key下唯一(Required) */
-func (r *ExternalWebSearchRequest) SetRequestId(requestId string) {
+/* param requestId: 请求id，api key下唯一(Required) */
+func (r *ExternalQueryTaskStatusRequest) SetRequestId(requestId string) {
     r.RequestId = requestId
 }
-/* param query: 查询内容(Required) */
-func (r *ExternalWebSearchRequest) SetQuery(query string) {
-    r.Query = query
-}
-/* param page: page 默认1(Optional) */
-func (r *ExternalWebSearchRequest) SetPage(page int) {
-    r.Page = &page
-}
-/* param pageSize: pageSize 默认10(Optional) */
-func (r *ExternalWebSearchRequest) SetPageSize(pageSize int) {
-    r.PageSize = &pageSize
+/* param taskId: 任务ID(Required) */
+func (r *ExternalQueryTaskStatusRequest) SetTaskId(taskId string) {
+    r.TaskId = taskId
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r ExternalWebSearchRequest) GetRegionId() string {
+func (r ExternalQueryTaskStatusRequest) GetRegionId() string {
     return ""
 }
 
-type ExternalWebSearchResponse struct {
+type ExternalQueryTaskStatusResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result ExternalWebSearchResult `json:"result"`
+    Result ExternalQueryTaskStatusResult `json:"result"`
 }
 
-type ExternalWebSearchResult struct {
+type ExternalQueryTaskStatusResult struct {
     RequestId string `json:"requestId"`
     Code string `json:"code"`
     Msg string `json:"msg"`
-    Data aisearch.CloudWebSearchResponseVo `json:"data"`
+    Data aisearch.CloudTaskStatusResponseVo `json:"data"`
 }

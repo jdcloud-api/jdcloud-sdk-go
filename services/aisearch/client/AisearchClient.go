@@ -40,7 +40,7 @@ func NewAisearchClient(credential *core.Credential) *AisearchClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "aisearch",
-            Revision:    "1.0.0",
+            Revision:    "0.2.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -57,6 +57,66 @@ func (c *AisearchClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
 }
 
+/* 提交方图转长图任务 */
+func (c *AisearchClient) ExternalSubmitSquareToLongTaskBase64(request *aisearch.ExternalSubmitSquareToLongTaskBase64Request) (*aisearch.ExternalSubmitSquareToLongTaskBase64Response, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &aisearch.ExternalSubmitSquareToLongTaskBase64Response{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 下载图片 */
+func (c *AisearchClient) ExternalDownloadImage(request *aisearch.ExternalDownloadImageRequest) (*aisearch.ExternalDownloadImageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &aisearch.ExternalDownloadImageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询任务状态 */
+func (c *AisearchClient) ExternalQueryTaskStatus(request *aisearch.ExternalQueryTaskStatusRequest) (*aisearch.ExternalQueryTaskStatusResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &aisearch.ExternalQueryTaskStatusResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* webSearch */
 func (c *AisearchClient) ExternalWebSearch(request *aisearch.ExternalWebSearchRequest) (*aisearch.ExternalWebSearchResponse, error) {
     if request == nil {
@@ -68,6 +128,26 @@ func (c *AisearchClient) ExternalWebSearch(request *aisearch.ExternalWebSearchRe
     }
 
     jdResp := &aisearch.ExternalWebSearchResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 提交虚拟试衣任务 */
+func (c *AisearchClient) ExternalSubmitVirtualTryOnTaskBase64(request *aisearch.ExternalSubmitVirtualTryOnTaskBase64Request) (*aisearch.ExternalSubmitVirtualTryOnTaskBase64Response, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &aisearch.ExternalSubmitVirtualTryOnTaskBase64Response{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

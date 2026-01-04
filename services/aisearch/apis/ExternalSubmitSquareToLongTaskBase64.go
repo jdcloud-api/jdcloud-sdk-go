@@ -21,88 +21,76 @@ import (
     aisearch "github.com/jdcloud-api/jdcloud-sdk-go/services/aisearch/models"
 )
 
-type ExternalWebSearchRequest struct {
+type ExternalSubmitSquareToLongTaskBase64Request struct {
 
     core.JDCloudRequest
 
     /* api key编号  */
     ApiKey string `json:"apiKey"`
 
-    /* 请求id,api key下唯一  */
+    /* 请求id，api key下唯一  */
     RequestId string `json:"requestId"`
 
-    /* 查询内容  */
-    Query string `json:"query"`
-
-    /* page 默认1 (Optional) */
-    Page *int `json:"page"`
-
-    /* pageSize 默认10 (Optional) */
-    PageSize *int `json:"pageSize"`
+    /* 方形图片  */
+    ImageBase64 string `json:"imageBase64"`
 }
 
 /*
  * param apiKey: api key编号 (Required)
- * param requestId: 请求id,api key下唯一 (Required)
- * param query: 查询内容 (Required)
+ * param requestId: 请求id，api key下唯一 (Required)
+ * param imageBase64: 方形图片 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewExternalWebSearchRequest(
+func NewExternalSubmitSquareToLongTaskBase64Request(
     apiKey string,
     requestId string,
-    query string,
-) *ExternalWebSearchRequest {
+    imageBase64 string,
+) *ExternalSubmitSquareToLongTaskBase64Request {
 
-	return &ExternalWebSearchRequest{
+	return &ExternalSubmitSquareToLongTaskBase64Request{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/external:webSearch",
+			URL:     "/external:submitSquareToLongTaskBase64",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         ApiKey: apiKey,
         RequestId: requestId,
-        Query: query,
+        ImageBase64: imageBase64,
 	}
 }
 
 /*
  * param apiKey: api key编号 (Required)
- * param requestId: 请求id,api key下唯一 (Required)
- * param query: 查询内容 (Required)
- * param page: page 默认1 (Optional)
- * param pageSize: pageSize 默认10 (Optional)
+ * param requestId: 请求id，api key下唯一 (Required)
+ * param imageBase64: 方形图片 (Required)
  */
-func NewExternalWebSearchRequestWithAllParams(
+func NewExternalSubmitSquareToLongTaskBase64RequestWithAllParams(
     apiKey string,
     requestId string,
-    query string,
-    page *int,
-    pageSize *int,
-) *ExternalWebSearchRequest {
+    imageBase64 string,
+) *ExternalSubmitSquareToLongTaskBase64Request {
 
-    return &ExternalWebSearchRequest{
+    return &ExternalSubmitSquareToLongTaskBase64Request{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/external:webSearch",
+            URL:     "/external:submitSquareToLongTaskBase64",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         ApiKey: apiKey,
         RequestId: requestId,
-        Query: query,
-        Page: page,
-        PageSize: pageSize,
+        ImageBase64: imageBase64,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewExternalWebSearchRequestWithoutParam() *ExternalWebSearchRequest {
+func NewExternalSubmitSquareToLongTaskBase64RequestWithoutParam() *ExternalSubmitSquareToLongTaskBase64Request {
 
-    return &ExternalWebSearchRequest{
+    return &ExternalSubmitSquareToLongTaskBase64Request{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/external:webSearch",
+            URL:     "/external:submitSquareToLongTaskBase64",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -111,42 +99,34 @@ func NewExternalWebSearchRequestWithoutParam() *ExternalWebSearchRequest {
 }
 
 /* param apiKey: api key编号(Required) */
-func (r *ExternalWebSearchRequest) SetApiKey(apiKey string) {
+func (r *ExternalSubmitSquareToLongTaskBase64Request) SetApiKey(apiKey string) {
     r.ApiKey = apiKey
 }
-/* param requestId: 请求id,api key下唯一(Required) */
-func (r *ExternalWebSearchRequest) SetRequestId(requestId string) {
+/* param requestId: 请求id，api key下唯一(Required) */
+func (r *ExternalSubmitSquareToLongTaskBase64Request) SetRequestId(requestId string) {
     r.RequestId = requestId
 }
-/* param query: 查询内容(Required) */
-func (r *ExternalWebSearchRequest) SetQuery(query string) {
-    r.Query = query
-}
-/* param page: page 默认1(Optional) */
-func (r *ExternalWebSearchRequest) SetPage(page int) {
-    r.Page = &page
-}
-/* param pageSize: pageSize 默认10(Optional) */
-func (r *ExternalWebSearchRequest) SetPageSize(pageSize int) {
-    r.PageSize = &pageSize
+/* param imageBase64: 方形图片(Required) */
+func (r *ExternalSubmitSquareToLongTaskBase64Request) SetImageBase64(imageBase64 string) {
+    r.ImageBase64 = imageBase64
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r ExternalWebSearchRequest) GetRegionId() string {
+func (r ExternalSubmitSquareToLongTaskBase64Request) GetRegionId() string {
     return ""
 }
 
-type ExternalWebSearchResponse struct {
+type ExternalSubmitSquareToLongTaskBase64Response struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result ExternalWebSearchResult `json:"result"`
+    Result ExternalSubmitSquareToLongTaskBase64Result `json:"result"`
 }
 
-type ExternalWebSearchResult struct {
+type ExternalSubmitSquareToLongTaskBase64Result struct {
     RequestId string `json:"requestId"`
     Code string `json:"code"`
     Msg string `json:"msg"`
-    Data aisearch.CloudWebSearchResponseVo `json:"data"`
+    Data aisearch.CloudTaskSubmitResponseVo `json:"data"`
 }
