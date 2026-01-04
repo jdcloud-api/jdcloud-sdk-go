@@ -17,23 +17,20 @@
 package models
 
 
-type TemplateEnd struct {
+type MetricInfo struct {
 
-    /* UID (Optional) */
-    UID string `json:"uID"`
+    /*  (Optional) */
+    Aggregator string `json:"aggregator"`
 
-    /* 是否展示实列列表 (Optional) */
-    DisableTable int64 `json:"disableTable"`
+    /*  (Optional) */
+    CalculateUnit string `json:"calculateUnit"`
 
-    /* 模板名称 (Optional) */
-    Name string `json:"name"`
+    /*  (Optional) */
+    Metric string `json:"metric"`
 
-    /* serviceCode (Optional) */
-    ServiceCode string `json:"serviceCode"`
+    /*  (Optional) */
+    MetricName string `json:"metricName"`
 
-    /* 是否是特殊模式的系统日志 (Optional) */
-    SpecialMode int64 `json:"specialMode"`
-
-    /* 实例描述信息 (Optional) */
-    InstanceDescription string `json:"instanceDescription"`
+    /*  (Optional) */
+    Period string `json:"period"`
 }

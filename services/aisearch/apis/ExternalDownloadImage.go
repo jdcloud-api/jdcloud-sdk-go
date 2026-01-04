@@ -21,7 +21,7 @@ import (
     aisearch "github.com/jdcloud-api/jdcloud-sdk-go/services/aisearch/models"
 )
 
-type ExternalWebSearchRequest struct {
+type ExternalDownloadImageRequest struct {
 
     core.JDCloudRequest
 
@@ -31,78 +31,75 @@ type ExternalWebSearchRequest struct {
     /* 请求id,api key下唯一  */
     RequestId string `json:"requestId"`
 
-    /* 查询内容  */
-    Query string `json:"query"`
+    /* 图片ID  */
+    ImageId string `json:"imageId"`
 
-    /* page 默认1 (Optional) */
-    Page *int `json:"page"`
-
-    /* pageSize 默认10 (Optional) */
-    PageSize *int `json:"pageSize"`
+    /* 任务ID  */
+    TaskId string `json:"taskId"`
 }
 
 /*
  * param apiKey: api key编号 (Required)
  * param requestId: 请求id,api key下唯一 (Required)
- * param query: 查询内容 (Required)
+ * param imageId: 图片ID (Required)
+ * param taskId: 任务ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewExternalWebSearchRequest(
+func NewExternalDownloadImageRequest(
     apiKey string,
     requestId string,
-    query string,
-) *ExternalWebSearchRequest {
+    imageId string,
+    taskId string,
+) *ExternalDownloadImageRequest {
 
-	return &ExternalWebSearchRequest{
+	return &ExternalDownloadImageRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/external:webSearch",
+			URL:     "/external:downloadImage",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         ApiKey: apiKey,
         RequestId: requestId,
-        Query: query,
+        ImageId: imageId,
+        TaskId: taskId,
 	}
 }
 
 /*
  * param apiKey: api key编号 (Required)
  * param requestId: 请求id,api key下唯一 (Required)
- * param query: 查询内容 (Required)
- * param page: page 默认1 (Optional)
- * param pageSize: pageSize 默认10 (Optional)
+ * param imageId: 图片ID (Required)
+ * param taskId: 任务ID (Required)
  */
-func NewExternalWebSearchRequestWithAllParams(
+func NewExternalDownloadImageRequestWithAllParams(
     apiKey string,
     requestId string,
-    query string,
-    page *int,
-    pageSize *int,
-) *ExternalWebSearchRequest {
+    imageId string,
+    taskId string,
+) *ExternalDownloadImageRequest {
 
-    return &ExternalWebSearchRequest{
+    return &ExternalDownloadImageRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/external:webSearch",
+            URL:     "/external:downloadImage",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         ApiKey: apiKey,
         RequestId: requestId,
-        Query: query,
-        Page: page,
-        PageSize: pageSize,
+        ImageId: imageId,
+        TaskId: taskId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewExternalWebSearchRequestWithoutParam() *ExternalWebSearchRequest {
+func NewExternalDownloadImageRequestWithoutParam() *ExternalDownloadImageRequest {
 
-    return &ExternalWebSearchRequest{
+    return &ExternalDownloadImageRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/external:webSearch",
+            URL:     "/external:downloadImage",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -111,42 +108,38 @@ func NewExternalWebSearchRequestWithoutParam() *ExternalWebSearchRequest {
 }
 
 /* param apiKey: api key编号(Required) */
-func (r *ExternalWebSearchRequest) SetApiKey(apiKey string) {
+func (r *ExternalDownloadImageRequest) SetApiKey(apiKey string) {
     r.ApiKey = apiKey
 }
 /* param requestId: 请求id,api key下唯一(Required) */
-func (r *ExternalWebSearchRequest) SetRequestId(requestId string) {
+func (r *ExternalDownloadImageRequest) SetRequestId(requestId string) {
     r.RequestId = requestId
 }
-/* param query: 查询内容(Required) */
-func (r *ExternalWebSearchRequest) SetQuery(query string) {
-    r.Query = query
+/* param imageId: 图片ID(Required) */
+func (r *ExternalDownloadImageRequest) SetImageId(imageId string) {
+    r.ImageId = imageId
 }
-/* param page: page 默认1(Optional) */
-func (r *ExternalWebSearchRequest) SetPage(page int) {
-    r.Page = &page
-}
-/* param pageSize: pageSize 默认10(Optional) */
-func (r *ExternalWebSearchRequest) SetPageSize(pageSize int) {
-    r.PageSize = &pageSize
+/* param taskId: 任务ID(Required) */
+func (r *ExternalDownloadImageRequest) SetTaskId(taskId string) {
+    r.TaskId = taskId
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r ExternalWebSearchRequest) GetRegionId() string {
+func (r ExternalDownloadImageRequest) GetRegionId() string {
     return ""
 }
 
-type ExternalWebSearchResponse struct {
+type ExternalDownloadImageResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result ExternalWebSearchResult `json:"result"`
+    Result ExternalDownloadImageResult `json:"result"`
 }
 
-type ExternalWebSearchResult struct {
+type ExternalDownloadImageResult struct {
     RequestId string `json:"requestId"`
     Code string `json:"code"`
     Msg string `json:"msg"`
-    Data aisearch.CloudWebSearchResponseVo `json:"data"`
+    Data aisearch.CloudImageDownloadResponseVo `json:"data"`
 }

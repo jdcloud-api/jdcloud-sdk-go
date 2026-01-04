@@ -21,7 +21,7 @@ import (
     aisearch "github.com/jdcloud-api/jdcloud-sdk-go/services/aisearch/models"
 )
 
-type ExternalWebSearchRequest struct {
+type ExternalSubmitVirtualTryOnTaskBase64Request struct {
 
     core.JDCloudRequest
 
@@ -31,78 +31,75 @@ type ExternalWebSearchRequest struct {
     /* 请求id,api key下唯一  */
     RequestId string `json:"requestId"`
 
-    /* 查询内容  */
-    Query string `json:"query"`
+    /* 模特图片Base64  */
+    ModelImageBase64 string `json:"modelImageBase64"`
 
-    /* page 默认1 (Optional) */
-    Page *int `json:"page"`
-
-    /* pageSize 默认10 (Optional) */
-    PageSize *int `json:"pageSize"`
+    /* 服装图片Base64  */
+    ClothesImageBase64 string `json:"clothesImageBase64"`
 }
 
 /*
  * param apiKey: api key编号 (Required)
  * param requestId: 请求id,api key下唯一 (Required)
- * param query: 查询内容 (Required)
+ * param modelImageBase64: 模特图片Base64 (Required)
+ * param clothesImageBase64: 服装图片Base64 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewExternalWebSearchRequest(
+func NewExternalSubmitVirtualTryOnTaskBase64Request(
     apiKey string,
     requestId string,
-    query string,
-) *ExternalWebSearchRequest {
+    modelImageBase64 string,
+    clothesImageBase64 string,
+) *ExternalSubmitVirtualTryOnTaskBase64Request {
 
-	return &ExternalWebSearchRequest{
+	return &ExternalSubmitVirtualTryOnTaskBase64Request{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/external:webSearch",
+			URL:     "/external:submitVirtualTryOnTaskBase64",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         ApiKey: apiKey,
         RequestId: requestId,
-        Query: query,
+        ModelImageBase64: modelImageBase64,
+        ClothesImageBase64: clothesImageBase64,
 	}
 }
 
 /*
  * param apiKey: api key编号 (Required)
  * param requestId: 请求id,api key下唯一 (Required)
- * param query: 查询内容 (Required)
- * param page: page 默认1 (Optional)
- * param pageSize: pageSize 默认10 (Optional)
+ * param modelImageBase64: 模特图片Base64 (Required)
+ * param clothesImageBase64: 服装图片Base64 (Required)
  */
-func NewExternalWebSearchRequestWithAllParams(
+func NewExternalSubmitVirtualTryOnTaskBase64RequestWithAllParams(
     apiKey string,
     requestId string,
-    query string,
-    page *int,
-    pageSize *int,
-) *ExternalWebSearchRequest {
+    modelImageBase64 string,
+    clothesImageBase64 string,
+) *ExternalSubmitVirtualTryOnTaskBase64Request {
 
-    return &ExternalWebSearchRequest{
+    return &ExternalSubmitVirtualTryOnTaskBase64Request{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/external:webSearch",
+            URL:     "/external:submitVirtualTryOnTaskBase64",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         ApiKey: apiKey,
         RequestId: requestId,
-        Query: query,
-        Page: page,
-        PageSize: pageSize,
+        ModelImageBase64: modelImageBase64,
+        ClothesImageBase64: clothesImageBase64,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewExternalWebSearchRequestWithoutParam() *ExternalWebSearchRequest {
+func NewExternalSubmitVirtualTryOnTaskBase64RequestWithoutParam() *ExternalSubmitVirtualTryOnTaskBase64Request {
 
-    return &ExternalWebSearchRequest{
+    return &ExternalSubmitVirtualTryOnTaskBase64Request{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/external:webSearch",
+            URL:     "/external:submitVirtualTryOnTaskBase64",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -111,42 +108,38 @@ func NewExternalWebSearchRequestWithoutParam() *ExternalWebSearchRequest {
 }
 
 /* param apiKey: api key编号(Required) */
-func (r *ExternalWebSearchRequest) SetApiKey(apiKey string) {
+func (r *ExternalSubmitVirtualTryOnTaskBase64Request) SetApiKey(apiKey string) {
     r.ApiKey = apiKey
 }
 /* param requestId: 请求id,api key下唯一(Required) */
-func (r *ExternalWebSearchRequest) SetRequestId(requestId string) {
+func (r *ExternalSubmitVirtualTryOnTaskBase64Request) SetRequestId(requestId string) {
     r.RequestId = requestId
 }
-/* param query: 查询内容(Required) */
-func (r *ExternalWebSearchRequest) SetQuery(query string) {
-    r.Query = query
+/* param modelImageBase64: 模特图片Base64(Required) */
+func (r *ExternalSubmitVirtualTryOnTaskBase64Request) SetModelImageBase64(modelImageBase64 string) {
+    r.ModelImageBase64 = modelImageBase64
 }
-/* param page: page 默认1(Optional) */
-func (r *ExternalWebSearchRequest) SetPage(page int) {
-    r.Page = &page
-}
-/* param pageSize: pageSize 默认10(Optional) */
-func (r *ExternalWebSearchRequest) SetPageSize(pageSize int) {
-    r.PageSize = &pageSize
+/* param clothesImageBase64: 服装图片Base64(Required) */
+func (r *ExternalSubmitVirtualTryOnTaskBase64Request) SetClothesImageBase64(clothesImageBase64 string) {
+    r.ClothesImageBase64 = clothesImageBase64
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r ExternalWebSearchRequest) GetRegionId() string {
+func (r ExternalSubmitVirtualTryOnTaskBase64Request) GetRegionId() string {
     return ""
 }
 
-type ExternalWebSearchResponse struct {
+type ExternalSubmitVirtualTryOnTaskBase64Response struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result ExternalWebSearchResult `json:"result"`
+    Result ExternalSubmitVirtualTryOnTaskBase64Result `json:"result"`
 }
 
-type ExternalWebSearchResult struct {
+type ExternalSubmitVirtualTryOnTaskBase64Result struct {
     RequestId string `json:"requestId"`
     Code string `json:"code"`
     Msg string `json:"msg"`
-    Data aisearch.CloudWebSearchResponseVo `json:"data"`
+    Data aisearch.CloudTaskSubmitResponseVo `json:"data"`
 }

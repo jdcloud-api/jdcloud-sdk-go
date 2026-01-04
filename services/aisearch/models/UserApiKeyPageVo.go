@@ -17,23 +17,17 @@
 package models
 
 
-type TemplateEnd struct {
+type UserApiKeyPageVo struct {
 
-    /* UID (Optional) */
-    UID string `json:"uID"`
+    /* apikey编号 (Optional) */
+    Total int64 `json:"total"`
 
-    /* 是否展示实列列表 (Optional) */
-    DisableTable int64 `json:"disableTable"`
+    /* 当前页 (Optional) */
+    PageNum int `json:"pageNum"`
 
-    /* 模板名称 (Optional) */
-    Name string `json:"name"`
+    /* 每页大小 (Optional) */
+    PageSize int64 `json:"pageSize"`
 
-    /* serviceCode (Optional) */
-    ServiceCode string `json:"serviceCode"`
-
-    /* 是否是特殊模式的系统日志 (Optional) */
-    SpecialMode int64 `json:"specialMode"`
-
-    /* 实例描述信息 (Optional) */
-    InstanceDescription string `json:"instanceDescription"`
+    /* 数据 (Optional) */
+    List []UserApiKeyVo `json:"list"`
 }

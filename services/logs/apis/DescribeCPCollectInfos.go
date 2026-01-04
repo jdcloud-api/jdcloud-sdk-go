@@ -21,15 +21,15 @@ import (
     logs "github.com/jdcloud-api/jdcloud-sdk-go/services/logs/models"
 )
 
-type DescribeLogtopicsRequest struct {
+type DescribeCPCollectInfosRequest struct {
 
     core.JDCloudRequest
 
     /* 地域 Id  */
     RegionId string `json:"regionId"`
 
-    /* 日志集 UID  */
-    LogsetUID string `json:"logsetUID"`
+    /* 日志主题 UID  */
+    LogtopicUID string `json:"logtopicUID"`
 
     /* 当前所在页，默认为1 (Optional) */
     PageNumber *int `json:"pageNumber"`
@@ -37,87 +37,75 @@ type DescribeLogtopicsRequest struct {
     /* 页面大小，默认为20；取值范围[1, 200] (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* 日志主题名称 (Optional) */
+    /* 采集配置名称 (Optional) */
     Name *string `json:"name"`
 
-    /* 日志主题采集的日志类型 (Optional) */
-    AppName *string `json:"appName"`
-
-    /* 过滤条件，key，Values. 支持的key:  name, logtopics(logtopicId列表) (Optional) */
-    Filters []logs.Filter `json:"filters"`
-
-    /* 过滤条件，key，Values (Optional) */
-    Tags []logs.TagFilter `json:"tags"`
+    /* 采集配置UID (Optional) */
+    CollectInfoUID *string `json:"collectInfoUID"`
 }
 
 /*
  * param regionId: 地域 Id (Required)
- * param logsetUID: 日志集 UID (Required)
+ * param logtopicUID: 日志主题 UID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeLogtopicsRequest(
+func NewDescribeCPCollectInfosRequest(
     regionId string,
-    logsetUID string,
-) *DescribeLogtopicsRequest {
+    logtopicUID string,
+) *DescribeCPCollectInfosRequest {
 
-	return &DescribeLogtopicsRequest{
+	return &DescribeCPCollectInfosRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/logsets/{logsetUID}/logtopics",
+			URL:     "/regions/{regionId}/logtopics/{logtopicUID}/cpCollectinfos",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        LogsetUID: logsetUID,
+        LogtopicUID: logtopicUID,
 	}
 }
 
 /*
  * param regionId: 地域 Id (Required)
- * param logsetUID: 日志集 UID (Required)
+ * param logtopicUID: 日志主题 UID (Required)
  * param pageNumber: 当前所在页，默认为1 (Optional)
  * param pageSize: 页面大小，默认为20；取值范围[1, 200] (Optional)
- * param name: 日志主题名称 (Optional)
- * param appName: 日志主题采集的日志类型 (Optional)
- * param filters: 过滤条件，key，Values. 支持的key:  name, logtopics(logtopicId列表) (Optional)
- * param tags: 过滤条件，key，Values (Optional)
+ * param name: 采集配置名称 (Optional)
+ * param collectInfoUID: 采集配置UID (Optional)
  */
-func NewDescribeLogtopicsRequestWithAllParams(
+func NewDescribeCPCollectInfosRequestWithAllParams(
     regionId string,
-    logsetUID string,
+    logtopicUID string,
     pageNumber *int,
     pageSize *int,
     name *string,
-    appName *string,
-    filters []logs.Filter,
-    tags []logs.TagFilter,
-) *DescribeLogtopicsRequest {
+    collectInfoUID *string,
+) *DescribeCPCollectInfosRequest {
 
-    return &DescribeLogtopicsRequest{
+    return &DescribeCPCollectInfosRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/logsets/{logsetUID}/logtopics",
+            URL:     "/regions/{regionId}/logtopics/{logtopicUID}/cpCollectinfos",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        LogsetUID: logsetUID,
+        LogtopicUID: logtopicUID,
         PageNumber: pageNumber,
         PageSize: pageSize,
         Name: name,
-        AppName: appName,
-        Filters: filters,
-        Tags: tags,
+        CollectInfoUID: collectInfoUID,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeLogtopicsRequestWithoutParam() *DescribeLogtopicsRequest {
+func NewDescribeCPCollectInfosRequestWithoutParam() *DescribeCPCollectInfosRequest {
 
-    return &DescribeLogtopicsRequest{
+    return &DescribeCPCollectInfosRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/logsets/{logsetUID}/logtopics",
+            URL:     "/regions/{regionId}/logtopics/{logtopicUID}/cpCollectinfos",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -126,53 +114,45 @@ func NewDescribeLogtopicsRequestWithoutParam() *DescribeLogtopicsRequest {
 }
 
 /* param regionId: 地域 Id(Required) */
-func (r *DescribeLogtopicsRequest) SetRegionId(regionId string) {
+func (r *DescribeCPCollectInfosRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-/* param logsetUID: 日志集 UID(Required) */
-func (r *DescribeLogtopicsRequest) SetLogsetUID(logsetUID string) {
-    r.LogsetUID = logsetUID
+/* param logtopicUID: 日志主题 UID(Required) */
+func (r *DescribeCPCollectInfosRequest) SetLogtopicUID(logtopicUID string) {
+    r.LogtopicUID = logtopicUID
 }
 /* param pageNumber: 当前所在页，默认为1(Optional) */
-func (r *DescribeLogtopicsRequest) SetPageNumber(pageNumber int) {
+func (r *DescribeCPCollectInfosRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 /* param pageSize: 页面大小，默认为20；取值范围[1, 200](Optional) */
-func (r *DescribeLogtopicsRequest) SetPageSize(pageSize int) {
+func (r *DescribeCPCollectInfosRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-/* param name: 日志主题名称(Optional) */
-func (r *DescribeLogtopicsRequest) SetName(name string) {
+/* param name: 采集配置名称(Optional) */
+func (r *DescribeCPCollectInfosRequest) SetName(name string) {
     r.Name = &name
 }
-/* param appName: 日志主题采集的日志类型(Optional) */
-func (r *DescribeLogtopicsRequest) SetAppName(appName string) {
-    r.AppName = &appName
-}
-/* param filters: 过滤条件，key，Values. 支持的key:  name, logtopics(logtopicId列表)(Optional) */
-func (r *DescribeLogtopicsRequest) SetFilters(filters []logs.Filter) {
-    r.Filters = filters
-}
-/* param tags: 过滤条件，key，Values(Optional) */
-func (r *DescribeLogtopicsRequest) SetTags(tags []logs.TagFilter) {
-    r.Tags = tags
+/* param collectInfoUID: 采集配置UID(Optional) */
+func (r *DescribeCPCollectInfosRequest) SetCollectInfoUID(collectInfoUID string) {
+    r.CollectInfoUID = &collectInfoUID
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeLogtopicsRequest) GetRegionId() string {
+func (r DescribeCPCollectInfosRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeLogtopicsResponse struct {
+type DescribeCPCollectInfosResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeLogtopicsResult `json:"result"`
+    Result DescribeCPCollectInfosResult `json:"result"`
 }
 
-type DescribeLogtopicsResult struct {
-    Data []logs.LogtopicDetailEnd `json:"data"`
+type DescribeCPCollectInfosResult struct {
+    Data []logs.CollectInfoBasicEnd `json:"data"`
     NumberPages int64 `json:"numberPages"`
     NumberRecords int64 `json:"numberRecords"`
     PageNumber int64 `json:"pageNumber"`

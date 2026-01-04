@@ -25,6 +25,9 @@ type CollectInfoDetailEnd struct {
     /* 高可用组资源multi (Optional) */
     AgResource []AgResourceEnd `json:"agResource"`
 
+    /* agentMeta (Optional) */
+    AgentMeta interface{} `json:"agentMeta"`
+
     /* 日志来源 (Optional) */
     AppCode string `json:"appCode"`
 

@@ -17,23 +17,8 @@
 package models
 
 
-type TemplateEnd struct {
+type AccountIsActivatedRespVo struct {
 
-    /* UID (Optional) */
-    UID string `json:"uID"`
-
-    /* 是否展示实列列表 (Optional) */
-    DisableTable int64 `json:"disableTable"`
-
-    /* 模板名称 (Optional) */
-    Name string `json:"name"`
-
-    /* serviceCode (Optional) */
-    ServiceCode string `json:"serviceCode"`
-
-    /* 是否是特殊模式的系统日志 (Optional) */
-    SpecialMode int64 `json:"specialMode"`
-
-    /* 实例描述信息 (Optional) */
-    InstanceDescription string `json:"instanceDescription"`
+    /* 激活状态初始化:INIT 已创建商品:PRODUCT_CREATED 已提交订单:ORDER_SUBMIT 已支付:PAY_DONE 订单完成:DONE (Optional) */
+    Activated string `json:"activated"`
 }

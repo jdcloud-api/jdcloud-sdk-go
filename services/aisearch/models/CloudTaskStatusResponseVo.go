@@ -17,23 +17,11 @@
 package models
 
 
-type TemplateEnd struct {
+type CloudTaskStatusResponseVo struct {
 
-    /* UID (Optional) */
-    UID string `json:"uID"`
+    /* 任务状态 (1:成功,2:任务失败,3:运行中,4:队列中) (Optional) */
+    Status int `json:"status"`
 
-    /* 是否展示实列列表 (Optional) */
-    DisableTable int64 `json:"disableTable"`
-
-    /* 模板名称 (Optional) */
-    Name string `json:"name"`
-
-    /* serviceCode (Optional) */
-    ServiceCode string `json:"serviceCode"`
-
-    /* 是否是特殊模式的系统日志 (Optional) */
-    SpecialMode int64 `json:"specialMode"`
-
-    /* 实例描述信息 (Optional) */
-    InstanceDescription string `json:"instanceDescription"`
+    /* 图片ID列表 (Optional) */
+    Images []string `json:"images"`
 }

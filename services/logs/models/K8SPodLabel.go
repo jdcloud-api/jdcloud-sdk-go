@@ -17,23 +17,11 @@
 package models
 
 
-type TemplateEnd struct {
+type K8SPodLabel struct {
 
-    /* UID (Optional) */
-    UID string `json:"uID"`
+    /*  (Optional) */
+    All *bool `json:"all"`
 
-    /* 是否展示实列列表 (Optional) */
-    DisableTable int64 `json:"disableTable"`
-
-    /* 模板名称 (Optional) */
-    Name string `json:"name"`
-
-    /* serviceCode (Optional) */
-    ServiceCode string `json:"serviceCode"`
-
-    /* 是否是特殊模式的系统日志 (Optional) */
-    SpecialMode int64 `json:"specialMode"`
-
-    /* 实例描述信息 (Optional) */
-    InstanceDescription string `json:"instanceDescription"`
+    /*  (Optional) */
+    Filter []string `json:"filter"`
 }

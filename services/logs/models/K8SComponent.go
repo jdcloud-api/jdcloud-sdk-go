@@ -17,23 +17,26 @@
 package models
 
 
-type TemplateEnd struct {
+type K8SComponent struct {
 
-    /* UID (Optional) */
-    UID string `json:"uID"`
+    /*  (Optional) */
+    ContainerId *bool `json:"containerId"`
 
-    /* 是否展示实列列表 (Optional) */
-    DisableTable int64 `json:"disableTable"`
+    /*  (Optional) */
+    ContainerName *bool `json:"containerName"`
 
-    /* 模板名称 (Optional) */
-    Name string `json:"name"`
+    /*  (Optional) */
+    ImagesName *bool `json:"imagesName"`
 
-    /* serviceCode (Optional) */
-    ServiceCode string `json:"serviceCode"`
+    /*  (Optional) */
+    Namespace *bool `json:"namespace"`
 
-    /* 是否是特殊模式的系统日志 (Optional) */
-    SpecialMode int64 `json:"specialMode"`
+    /*  (Optional) */
+    PodIp *bool `json:"podIp"`
 
-    /* 实例描述信息 (Optional) */
-    InstanceDescription string `json:"instanceDescription"`
+    /*  (Optional) */
+    PodName *bool `json:"podName"`
+
+    /*  (Optional) */
+    PodUid *bool `json:"podUid"`
 }

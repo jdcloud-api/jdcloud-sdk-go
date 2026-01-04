@@ -37,7 +37,7 @@ type DescribeLogsetsRequest struct {
     /* 日志集名称. 已废弃，需要通过filter传递 (Optional) */
     Name *string `json:"name"`
 
-    /* 过滤条件，key，Values。 支持的key:  name (Optional) */
+    /* 过滤条件，key，Values。 支持的key:  name, logsets(logsetId列表)，logtopicName(主题名称)，logtopicUid(主题id列表) (Optional) */
     Filters []logs.Filter `json:"filters"`
 
     /* 标签过滤条件，key，Values (Optional) */
@@ -72,7 +72,7 @@ func NewDescribeLogsetsRequest(
  * param pageNumber: 当前所在页，默认为1 (Optional)
  * param pageSize: 页面大小，默认为20；取值范围[1, 200] (Optional)
  * param name: 日志集名称. 已废弃，需要通过filter传递 (Optional)
- * param filters: 过滤条件，key，Values。 支持的key:  name (Optional)
+ * param filters: 过滤条件，key，Values。 支持的key:  name, logsets(logsetId列表)，logtopicName(主题名称)，logtopicUid(主题id列表) (Optional)
  * param tags: 标签过滤条件，key，Values (Optional)
  * param resourceGroupIds: 资源组过滤条件 (Optional)
  */
@@ -132,7 +132,7 @@ func (r *DescribeLogsetsRequest) SetPageSize(pageSize int) {
 func (r *DescribeLogsetsRequest) SetName(name string) {
     r.Name = &name
 }
-/* param filters: 过滤条件，key，Values。 支持的key:  name(Optional) */
+/* param filters: 过滤条件，key，Values。 支持的key:  name, logsets(logsetId列表)，logtopicName(主题名称)，logtopicUid(主题id列表)(Optional) */
 func (r *DescribeLogsetsRequest) SetFilters(filters []logs.Filter) {
     r.Filters = filters
 }

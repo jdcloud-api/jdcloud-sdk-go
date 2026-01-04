@@ -31,6 +31,9 @@ type LogtopicDetailEnd struct {
     /* 日志主题采集的日志类型 (Optional) */
     AppName string `json:"appName"`
 
+    /* 计费状态。normal: 正常，stopped: 欠费停服 (Optional) */
+    ChargeStatus string `json:"chargeStatus"`
+
     /* 采集配置UID (Optional) */
     CollectInfoUID string `json:"collectInfoUID"`
 
@@ -66,6 +69,9 @@ type LogtopicDetailEnd struct {
 
     /* 产品线serviceCode (Optional) */
     ServiceCode string `json:"serviceCode"`
+
+    /* 服务状态。 normal: 正常，arrearage_stopped: 停服 (Optional) */
+    Status string `json:"status"`
 
     /* 标签列表 (Optional) */
     Tags []Tag `json:"tags"`

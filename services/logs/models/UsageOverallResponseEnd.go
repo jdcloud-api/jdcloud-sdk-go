@@ -17,23 +17,20 @@
 package models
 
 
-type TemplateEnd struct {
+type UsageOverallResponseEnd struct {
 
-    /* UID (Optional) */
-    UID string `json:"uID"`
+    /* 存储量(byte) (Optional) */
+    IndexStorageBytes int64 `json:"indexStorageBytes"`
 
-    /* 是否展示实列列表 (Optional) */
-    DisableTable int64 `json:"disableTable"`
+    /* 索引流量(byte) (Optional) */
+    IndexTrafficBytes int64 `json:"indexTrafficBytes"`
 
-    /* 模板名称 (Optional) */
-    Name string `json:"name"`
+    /* 内网读流量(byte) (Optional) */
+    ReadTrafficBytes int64 `json:"readTrafficBytes"`
 
-    /* serviceCode (Optional) */
-    ServiceCode string `json:"serviceCode"`
+    /* 计费主题个数 (Optional) */
+    Topics int64 `json:"topics"`
 
-    /* 是否是特殊模式的系统日志 (Optional) */
-    SpecialMode int64 `json:"specialMode"`
-
-    /* 实例描述信息 (Optional) */
-    InstanceDescription string `json:"instanceDescription"`
+    /* 写流量(byte) (Optional) */
+    WriteTrafficBytes int64 `json:"writeTrafficBytes"`
 }
