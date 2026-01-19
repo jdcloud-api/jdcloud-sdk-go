@@ -88,6 +88,9 @@ type PerStamp struct {
     /* 0：普通证书 1：事件证书（默认为0，普通证书。会覆盖contractSpec中的定义） (Optional) */
     CertExpire *int `json:"certExpire"`
 
+    /* 0：RSA 1：SM2(国密证书)（默认为0，RSA证书） (Optional) */
+    CertType *int `json:"certType"`
+
     /* 页范围，仅在坐标签章生效 1. all，表示所有页码;2. 数字以逗号分隔，形如："1,2,3""1,2,3";3. 以短横线：以短横线'-'分隔的两个数字，会被扩展为⼀段范围，形如："2-4";4：规则2和3可以混用，形如："2-4,7" (Optional) */
     PageRange *string `json:"pageRange"`
 
