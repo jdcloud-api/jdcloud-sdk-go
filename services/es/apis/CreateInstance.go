@@ -100,16 +100,15 @@ func NewCreateInstanceRequestWithoutParam() *CreateInstanceRequest {
 func (r *CreateInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param instance: es实例的相关配置(Required) */
 func (r *CreateInstanceRequest) SetInstance(instance *es.InstanceSpec) {
     r.Instance = instance
 }
-
 /* param charge: 计费信息的相关配置，es只有prepaid_by_duration和postpaid_by_duration 2种计费模式(Optional) */
 func (r *CreateInstanceRequest) SetCharge(charge *charge.ChargeSpec) {
     r.Charge = charge
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

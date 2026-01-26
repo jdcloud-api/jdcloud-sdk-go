@@ -23,5 +23,5 @@ type NodeConf struct {
     StorageType []string `json:"storageType"`
 
     /* 限制条件 (Optional) */
-    Constraints ConstraintsConf `json:"constraints"`
+    Constraints []ConstraintsConf `json:"constraints"`
 }

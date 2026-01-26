@@ -21,10 +21,4 @@ type InternalEndpoint struct {
 
     /* es http endpoint (Optional) */
     EsHttpEndpoint string `json:"esHttpEndpoint"`
-
-    /* es tcp endpoint (Optional) */
-    EsTcpEndpoint []string `json:"esTcpEndpoint"`
-
-    /* kibana endpoint (Optional) */
-    KibanaEndpoint string `json:"kibanaEndpoint"`
 }

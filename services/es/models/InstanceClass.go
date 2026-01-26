@@ -28,6 +28,9 @@ type InstanceClass struct {
     /* data节点内存单位GB (Optional) */
     NodeMemoryGB int `json:"nodeMemoryGB"`
 
+    /* data节点磁盘是否加密 (Optional) */
+    NodeDiskEncrypt bool `json:"nodeDiskEncrypt"`
+
     /* data节点存储大小单位GB (Optional) */
     NodeDiskGB int `json:"nodeDiskGB"`
 
@@ -37,6 +40,27 @@ type InstanceClass struct {
     /* data节点数量 (Optional) */
     NodeCount int `json:"nodeCount"`
 
+    /* warmdata节点规格代码，规格代码对照关系参见：https://docs.jdcloud.com/cn/jcs-for-elasticsearch/specifications (Optional) */
+    WarmNodeClass string `json:"warmNodeClass"`
+
+    /* warmdata节点cpu核数 (Optional) */
+    WarmNodeCpu int `json:"warmNodeCpu"`
+
+    /* warmdata节点内存单位GB (Optional) */
+    WarmNodeMemoryGB int `json:"warmNodeMemoryGB"`
+
+    /* warmdata节点磁盘是否加密 (Optional) */
+    WarmNodeDiskEncrypt bool `json:"warmNodeDiskEncrypt"`
+
+    /* warmdata节点存储大小单位GB (Optional) */
+    WarmNodeDiskGB int `json:"warmNodeDiskGB"`
+
+    /* warmdata节点存储类型 (Optional) */
+    WarmNodeDiskType string `json:"warmNodeDiskType"`
+
+    /* warmdata节点数量 (Optional) */
+    WarmNodeCount int `json:"warmNodeCount"`
+
     /* master节点规格代码，规格代码对照关系参见：https://docs.jdcloud.com/cn/jcs-for-elasticsearch/specifications (Optional) */
     MasterClass string `json:"masterClass"`
 
@@ -45,6 +69,9 @@ type InstanceClass struct {
 
     /* master节点内存单位GB (Optional) */
     MasterMemoryGB int `json:"masterMemoryGB"`
+
+    /* master节点磁盘是否加密 (Optional) */
+    MasterDiskEncrypt bool `json:"masterDiskEncrypt"`
 
     /* master节点存储大小单位GB (Optional) */
     MasterDiskGB int `json:"masterDiskGB"`
@@ -64,6 +91,9 @@ type InstanceClass struct {
     /* coordinating节点内存单位GB (Optional) */
     CoordinatingMemoryGB int `json:"coordinatingMemoryGB"`
 
+    /* coordinating节点磁盘是否加密 (Optional) */
+    CoordinatingDiskEncrypt bool `json:"coordinatingDiskEncrypt"`
+
     /* coordinating节点存储大小单位GB (Optional) */
     CoordinatingDiskGB int `json:"coordinatingDiskGB"`
 
@@ -72,4 +102,16 @@ type InstanceClass struct {
 
     /* coordinating节点数量 (Optional) */
     CoordinatingCount int `json:"coordinatingCount"`
+
+    /* kibana节点数量 (Optional) */
+    KibanaCount int `json:"kibanaCount"`
+
+    /* kibana节点规格代码，规格代码对照关系参见：https://docs.jdcloud.com/cn/jcs-for-elasticsearch/specifications (Optional) */
+    KibanaClass string `json:"kibanaClass"`
+
+    /* kibana节点规格代码节点cpu核数 (Optional) */
+    KibanaCpu int `json:"kibanaCpu"`
+
+    /* kibana节点规格代码节点内存单位GB (Optional) */
+    KibanaMemoryGB int `json:"kibanaMemoryGB"`
 }

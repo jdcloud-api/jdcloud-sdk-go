@@ -27,13 +27,16 @@ type DeleteInstanceRequest struct {
     /* regionId  */
     RegionId string `json:"regionId"`
 
-    /* 实例ID  */
+    /* 实例Id  */
     InstanceId string `json:"instanceId"`
+
+    /* 软删除保留时间 (Optional) */
+    ReservedOfHour *int `json:"reservedOfHour"`
 }
 
 /*
  * param regionId: regionId (Required)
- * param instanceId: 实例ID (Required)
+ * param instanceId: 实例Id (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -56,11 +59,13 @@ func NewDeleteInstanceRequest(
 
 /*
  * param regionId: regionId (Required)
- * param instanceId: 实例ID (Required)
+ * param instanceId: 实例Id (Required)
+ * param reservedOfHour: 软删除保留时间 (Optional)
  */
 func NewDeleteInstanceRequestWithAllParams(
     regionId string,
     instanceId string,
+    reservedOfHour *int,
 ) *DeleteInstanceRequest {
 
     return &DeleteInstanceRequest{
@@ -72,6 +77,7 @@ func NewDeleteInstanceRequestWithAllParams(
         },
         RegionId: regionId,
         InstanceId: instanceId,
+        ReservedOfHour: reservedOfHour,
     }
 }
 
@@ -92,11 +98,15 @@ func NewDeleteInstanceRequestWithoutParam() *DeleteInstanceRequest {
 func (r *DeleteInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
-/* param instanceId: 实例ID(Required) */
+/* param instanceId: 实例Id(Required) */
 func (r *DeleteInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
+/* param reservedOfHour: 软删除保留时间(Optional) */
+func (r *DeleteInstanceRequest) SetReservedOfHour(reservedOfHour int) {
+    r.ReservedOfHour = &reservedOfHour
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

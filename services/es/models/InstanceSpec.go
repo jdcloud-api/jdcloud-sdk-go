@@ -25,7 +25,10 @@ type InstanceSpec struct {
     /* 子网subnetId  */
     SubnetId string `json:"subnetId"`
 
-    /* es版本，当前支持5.6.9和6.5.4  */
+    /* 集群类型，根据es底层使用的存储类型区分。可选类型(通用存储型-general, 共享存储型-shared)。默认是general (Optional) */
+    ClusterType *string `json:"clusterType"`
+
+    /* es版本，当前支持5.6.9、6.5.4、6.7.0、7.5.2  */
     InstanceVersion string `json:"instanceVersion"`
 
     /* es集群名称，不可为空，只支持大小写字母、数字、英文下划线或者中划线，以字母开头且不能超过32位  */
@@ -37,18 +40,27 @@ type InstanceSpec struct {
     /* 规格配置，规格代码请参考：https://docs.jdcloud.com/cn/jcs-for-elasticsearch/specifications  */
     InstanceClass *InstanceClassSpec `json:"instanceClass"`
 
-    /* 是否支持ipv6，支持值为v4&v6,不支持为空 (Optional) */
-    IpVersion *string `json:"ipVersion"`
-
     /* 是否包含专用主节点，默认false (Optional) */
     DedicatedMaster *bool `json:"dedicatedMaster"`
 
     /* 是否包含协调节点，默认false (Optional) */
     Coordinating *bool `json:"coordinating"`
 
+    /* 是否包含warnnode，默认false (Optional) */
+    Warmnode *bool `json:"warmnode"`
+
     /* 自动快照设置。 (Optional) */
     AutoSnapshot *AutoSnapshot `json:"autoSnapshot"`
 
     /* es数据面身份验证设置信息 (Optional) */
     AuthConfig *AuthConfig `json:"authConfig"`
+
+    /* 用户普通标签 (Optional) */
+    UserTags []Tag `json:"userTags"`
+
+    /* tpaas环境的扩展参数 (Optional) */
+    TpaasExtension *ReqTpaasExtension `json:"tpaasExtension"`
+
+    /* es实例的扩展信息 (Optional) */
+    ExtendInfo *ExtendInfo `json:"extendInfo"`
 }

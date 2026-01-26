@@ -57,10 +57,8 @@ func (c *EsClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
 }
 
-/* 删除按配置计费或包年包月已到期的es实例，包年包月未到期不可删除。
-状态为创建中和变配中的不可删除。
- */
-func (c *EsClient) DeleteInstance(request *es.DeleteInstanceRequest) (*es.DeleteInstanceResponse, error) {
+/* 查询统一计费实例的详细信息列表。为避免数据变动导致的重复或遗漏，请按照实例创建时间以及实例ID排序 */
+func (c *EsClient) DescribeBillingInstances(request *es.DescribeBillingInstancesRequest) (*es.DescribeBillingInstancesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -69,7 +67,7 @@ func (c *EsClient) DeleteInstance(request *es.DeleteInstanceRequest) (*es.Delete
         return nil, err
     }
 
-    jdResp := &es.DeleteInstanceResponse{}
+    jdResp := &es.DescribeBillingInstancesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -79,8 +77,8 @@ func (c *EsClient) DeleteInstance(request *es.DeleteInstanceRequest) (*es.Delete
     return jdResp, err
 }
 
-/* 查询es实例列表 */
-func (c *EsClient) DescribeInstances(request *es.DescribeInstancesRequest) (*es.DescribeInstancesResponse, error) {
+/* modifyInstanceKibanaSpec */
+func (c *EsClient) ModifyInstanceKibanaSpec(request *es.ModifyInstanceKibanaSpecRequest) (*es.ModifyInstanceKibanaSpecResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -89,7 +87,27 @@ func (c *EsClient) DescribeInstances(request *es.DescribeInstancesRequest) (*es.
         return nil, err
     }
 
-    jdResp := &es.DescribeInstancesResponse{}
+    jdResp := &es.ModifyInstanceKibanaSpecResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* modifyInstanceExtendInfo */
+func (c *EsClient) ModifyInstanceExtendInfo(request *es.ModifyInstanceExtendInfoRequest) (*es.ModifyInstanceExtendInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &es.ModifyInstanceExtendInfoResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -141,8 +159,9 @@ func (c *EsClient) DisableDicts(request *es.DisableDictsRequest) (*es.DisableDic
     return jdResp, err
 }
 
-/* 创建一个指定配置的es实例 */
-func (c *EsClient) CreateInstance(request *es.CreateInstanceRequest) (*es.CreateInstanceResponse, error) {
+/* 获取变配类型，只有垂直变配需要请求；垂直变配即节点规格变配、存储变配；非节点个数变配，非开启/关闭master、协调节点和warm节点等
+ */
+func (c *EsClient) InstanceChangeType(request *es.InstanceChangeTypeRequest) (*es.InstanceChangeTypeResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -151,7 +170,89 @@ func (c *EsClient) CreateInstance(request *es.CreateInstanceRequest) (*es.Create
         return nil, err
     }
 
-    jdResp := &es.CreateInstanceResponse{}
+    jdResp := &es.InstanceChangeTypeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询鉴权user信息 */
+func (c *EsClient) DescribeUsers(request *es.DescribeUsersRequest) (*es.DescribeUsersResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &es.DescribeUsersResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除按配置计费或包年包月已到期的es实例，包年包月未到期不可删除。
+状态为创建中和变配中的不可删除。
+ [MFA enabled] */
+func (c *EsClient) DeleteInstance(request *es.DeleteInstanceRequest) (*es.DeleteInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &es.DeleteInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询es实例列表 */
+func (c *EsClient) DescribeInstances(request *es.DescribeInstancesRequest) (*es.DescribeInstancesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &es.DescribeInstancesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询鉴权role信息 */
+func (c *EsClient) DescribeRoles(request *es.DescribeRolesRequest) (*es.DescribeRolesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &es.DescribeRolesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -172,6 +273,66 @@ func (c *EsClient) DescribeInstance(request *es.DescribeInstanceRequest) (*es.De
     }
 
     jdResp := &es.DescribeInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 确认删除 */
+func (c *EsClient) InstanceConfirmDelete(request *es.InstanceConfirmDeleteRequest) (*es.InstanceConfirmDeleteResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &es.InstanceConfirmDeleteResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询鉴权功能开启/关闭状态 */
+func (c *EsClient) DescribeAuthStatus(request *es.DescribeAuthStatusRequest) (*es.DescribeAuthStatusResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &es.DescribeAuthStatusResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建一个指定配置的es实例 */
+func (c *EsClient) CreateInstance(request *es.CreateInstanceRequest) (*es.CreateInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &es.CreateInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

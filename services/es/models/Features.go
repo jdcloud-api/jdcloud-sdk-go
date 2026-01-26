@@ -21,4 +21,61 @@ type Features struct {
 
     /* 是否支持身份验证功能；true为支持，false为不支持 (Optional) */
     Auth bool `json:"auth"`
+
+    /* 数科上tpaas定制功能；true为校验，false为不校验(最低标准是账户名密码都非空) (Optional) */
+    IsCheckUsernameAndPassword bool `json:"isCheckUsernameAndPassword"`
+
+    /* 创建集群时，是否检查集群名格式；true为校验，false为不校验 (Optional) */
+    IsCheckClusterName bool `json:"isCheckClusterName"`
+
+    /* esdts功能对指定用户是否可见 (Optional) */
+    EsdtsEnable bool `json:"esdtsEnable"`
+
+    /* 指定集群类型(共享存储型-shared, 通用存储型-general) (Optional) */
+    ClusterType []string `json:"clusterType"`
+
+    /* 是否强制开启鉴权 (Optional) */
+    IsForceOpenAuth bool `json:"isForceOpenAuth"`
+
+    /* 前端是否展示任务管理子模块 (Optional) */
+    IsTurnTaskSubmodule bool `json:"isTurnTaskSubmodule"`
+
+    /* 是否展示集群类型 (Optional) */
+    IsShowClusterType bool `json:"isShowClusterType"`
+
+    /* 开启任务列表(true-开启任务列表功能, false-关闭任务列表功能) (Optional) */
+    Tasklist bool `json:"tasklist"`
+
+    /* 集群类型信息 (Optional) */
+    ClusterTypeInfos []ClusterTypeInfo `json:"clusterTypeInfos"`
+
+    /* 是否支持版本升级 (Optional) */
+    UpgradeVersion bool `json:"upgradeVersion"`
+
+    /* 快照默认保存时间 (Optional) */
+    SnapshotDefaultReserveTime int `json:"snapshotDefaultReserveTime"`
+
+    /* 是否允许自定义快照时间 (Optional) */
+    SnapshotEnableCustomReserveTime bool `json:"snapshotEnableCustomReserveTime"`
+
+    /* 是否开启白名单 (Optional) */
+    WhiteList bool `json:"whiteList"`
+
+    /* 白名单最大数量 (Optional) */
+    WhiteListMaxItem bool `json:"whiteListMaxItem"`
+
+    /* 是否支持跨实例恢复快照 (Optional) */
+    CrossRestoreSnapshot bool `json:"crossRestoreSnapshot"`
+
+    /* 是否开启容量评估特性 (Optional) */
+    CapacityEvaluate bool `json:"capacityEvaluate"`
+
+    /* 是否开启kibana单独计费开关，true为是 (Optional) */
+    KibanaCharge bool `json:"kibanaCharge"`
+
+    /* 是否展示kibana开启公网访问的开关，true-是 (Optional) */
+    KibanaPublicServiceExpose bool `json:"kibanaPublicServiceExpose"`
+
+    /* 是否开启可维护时间特性，true为是 (Optional) */
+    MaintenanceTime bool `json:"maintenanceTime"`
 }
