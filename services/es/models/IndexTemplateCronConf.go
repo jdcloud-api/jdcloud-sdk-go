@@ -25,13 +25,13 @@ type IndexTemplateCronConf struct {
     /* 任务起始执行时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ  */
     BeginTime string `json:"beginTime"`
 
-    /* 任务执行频率, day： 每天，week： 每周，month：每月  */
+    /* 任务执行频率, day： 每天，month：每月，quarter：季度，halfyear：半年，year：年，fix：固定，week：周  */
     Cycle string `json:"cycle"`
 
-    /* 索引前缀  */
+    /* 索引前缀, 最大长度255  */
     IndexPrefix string `json:"indexPrefix"`
 
-    /* 索引后缀格式, "yyyy-MM-dd", "yyyy.MM.dd", "yyyy_MM_dd", "yyyyMMdd", "yyyyww", "yyyy-MM", "yyyy.MM", "yyyy_MM", "yyyyMM"  */
+    /* 索引后缀格式, "yyyy-MM-dd", "yyyy.MM.dd", "yyyy_MM_dd", "yyyyMMdd", "yyyy-MM", "yyyy.MM", "yyyy_MM", "yyyyMM", "yyyy"  */
     IndexSuffixFormat string `json:"indexSuffixFormat"`
 
     /* 提前创建索引天数  */
@@ -42,4 +42,31 @@ type IndexTemplateCronConf struct {
 
     /* 索引保留天数, 开启自动删除索引后生效  */
     ReserveOfDay int `json:"reserveOfDay"`
+
+    /* 删除白名单，最多可以添加150个索引白名单 (Optional) */
+    DeleteWhitelist string `json:"deleteWhitelist"`
+
+    /* 是否开启自动迁移索引到冷节点  */
+    IsAutoSwitchToWarmdata bool `json:"isAutoSwitchToWarmdata"`
+
+    /* 冷数据转换(天) (Optional) */
+    WarmdataDelayOfDay int `json:"warmdataDelayOfDay"`
+
+    /* 冷节点索引白名单：不改为冷节点 (Optional) */
+    WarmdataWhitelist string `json:"warmdataWhitelist"`
+
+    /* 迁移到冷节点后，索引是否为0副本 (Optional) */
+    IsWarmdataZeroReplicas bool `json:"isWarmdataZeroReplicas"`
+
+    /* 迁移到冷节点后，索引是否只读 (Optional) */
+    IsWarmdataReadonly bool `json:"isWarmdataReadonly"`
+
+    /* 删除正则表达式 (Optional) */
+    DeleteRegexp string `json:"deleteRegexp"`
+
+    /* 是否0副本 (Optional) */
+    IsZeroReplicas bool `json:"isZeroReplicas"`
+
+    /* 0副本天数 (Optional) */
+    ZeroReplicasOfDay int `json:"zeroReplicasOfDay"`
 }

@@ -33,4 +33,19 @@ type Snapshot struct {
 
     /* 快照状态，Available：可用，Unavailable：不可用，Creating：创建中 (Optional) */
     Status string `json:"status"`
+
+    /* 快照种类，精确匹配，支持单个(System:系统、Custom:自定义）默认：System (Optional) */
+    Category string `json:"category"`
+
+    /* 自定义快照配置id (Optional) */
+    CustomSnapshotConfigId int `json:"customSnapshotConfigId"`
+
+    /* 快照进度（0～100），仅当快照状态为创建中、恢复中时返回 (Optional) */
+    Progress int `json:"progress"`
+
+    /* task运行时长，仅当快照状态为创建中、恢复中时返回 (Optional) */
+    TaskTimeConsuming string `json:"taskTimeConsuming"`
+
+    /* taskId，仅当快照状态为创建中、恢复中时返回 (Optional) */
+    TaskId int `json:"taskId"`
 }

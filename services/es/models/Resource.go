@@ -18,13 +18,4 @@ package models
 
 
 type Resource struct {
-
-    /* 资源名称，即节点名称 (Optional) */
-    ResName string `json:"resName"`
-
-    /* 节点宿主机IP (Optional) */
-    HostIp string `json:"hostIp"`
-
-    /* 节点IP及端口 (Optional) */
-    IpPort string `json:"ipPort"`
 }

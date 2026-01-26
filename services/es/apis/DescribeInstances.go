@@ -37,16 +37,20 @@ type DescribeInstancesRequest struct {
 
     /* 过滤条件：
 instanceId -实例Id，精确匹配，支持多个
-instanceVersion -实例版本，精确匹配，支持单个
+instanceVersion -实例版本，模糊匹配，支持单个
 azId -azId，精确匹配，支持单个
 instanceName - 实例名称，模糊匹配，支持单个
-instanceStatus - 实例状态，精确匹配，支持多个(running：运行，error：错误，creating：创建中，changing：变配中，stop：已停止，processing：处理中)
+instanceStatus - 实例状态，精确匹配，支持多个(running：运行，error：错误，creating：创建中，changing：变配中，stop：已停止，backing：处理中，configuring：配置中)
 chargeMode - 计费类型，按配置postpaid_by_duration或者包年包月prepaid_by_duration
+clusterType - 集群类型,
  (Optional) */
     Filters []common.Filter `json:"filters"`
 
     /* 标签过滤条件 (Optional) */
     TagFilters []common.TagFilter `json:"tagFilters"`
+
+    /* 资源组id列表 (Optional) */
+    ResourceGroupIds []string `json:"resourceGroupIds"`
 }
 
 /*
@@ -75,13 +79,15 @@ func NewDescribeInstancesRequest(
  * param pageSize: 分页大小，默认10 (Optional)
  * param filters: 过滤条件：
 instanceId -实例Id，精确匹配，支持多个
-instanceVersion -实例版本，精确匹配，支持单个
+instanceVersion -实例版本，模糊匹配，支持单个
 azId -azId，精确匹配，支持单个
 instanceName - 实例名称，模糊匹配，支持单个
-instanceStatus - 实例状态，精确匹配，支持多个(running：运行，error：错误，creating：创建中，changing：变配中，stop：已停止，processing：处理中)
+instanceStatus - 实例状态，精确匹配，支持多个(running：运行，error：错误，creating：创建中，changing：变配中，stop：已停止，backing：处理中，configuring：配置中)
 chargeMode - 计费类型，按配置postpaid_by_duration或者包年包月prepaid_by_duration
+clusterType - 集群类型,
  (Optional)
  * param tagFilters: 标签过滤条件 (Optional)
+ * param resourceGroupIds: 资源组id列表 (Optional)
  */
 func NewDescribeInstancesRequestWithAllParams(
     regionId string,
@@ -89,6 +95,7 @@ func NewDescribeInstancesRequestWithAllParams(
     pageSize *int,
     filters []common.Filter,
     tagFilters []common.TagFilter,
+    resourceGroupIds []string,
 ) *DescribeInstancesRequest {
 
     return &DescribeInstancesRequest{
@@ -103,6 +110,7 @@ func NewDescribeInstancesRequestWithAllParams(
         PageSize: pageSize,
         Filters: filters,
         TagFilters: tagFilters,
+        ResourceGroupIds: resourceGroupIds,
     }
 }
 
@@ -123,33 +131,35 @@ func NewDescribeInstancesRequestWithoutParam() *DescribeInstancesRequest {
 func (r *DescribeInstancesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param pageNumber: 页码，默认1(Optional) */
 func (r *DescribeInstancesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
-
 /* param pageSize: 分页大小，默认10(Optional) */
 func (r *DescribeInstancesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-
 /* param filters: 过滤条件：
 instanceId -实例Id，精确匹配，支持多个
-instanceVersion -实例版本，精确匹配，支持单个
+instanceVersion -实例版本，模糊匹配，支持单个
 azId -azId，精确匹配，支持单个
 instanceName - 实例名称，模糊匹配，支持单个
-instanceStatus - 实例状态，精确匹配，支持多个(running：运行，error：错误，creating：创建中，changing：变配中，stop：已停止，processing：处理中)
+instanceStatus - 实例状态，精确匹配，支持多个(running：运行，error：错误，creating：创建中，changing：变配中，stop：已停止，backing：处理中，configuring：配置中)
 chargeMode - 计费类型，按配置postpaid_by_duration或者包年包月prepaid_by_duration
+clusterType - 集群类型,
 (Optional) */
 func (r *DescribeInstancesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
-
 /* param tagFilters: 标签过滤条件(Optional) */
 func (r *DescribeInstancesRequest) SetTagFilters(tagFilters []common.TagFilter) {
     r.TagFilters = tagFilters
 }
+/* param resourceGroupIds: 资源组id列表(Optional) */
+func (r *DescribeInstancesRequest) SetResourceGroupIds(resourceGroupIds []string) {
+    r.ResourceGroupIds = resourceGroupIds
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

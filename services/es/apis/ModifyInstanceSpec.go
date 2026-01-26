@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    es "github.com/jdcloud-api/jdcloud-sdk-go/services/es/models"
 )
 
 type ModifyInstanceSpecRequest struct {
@@ -27,8 +28,11 @@ type ModifyInstanceSpecRequest struct {
     /* regionId  */
     RegionId string `json:"regionId"`
 
-    /* 实例ID  */
+    /* 实例Id  */
     InstanceId string `json:"instanceId"`
+
+    /* 可用区 (Optional) */
+    AzId *string `json:"azId"`
 
     /* data节点规格 (Optional) */
     NodeClass *string `json:"nodeClass"`
@@ -39,6 +43,18 @@ type ModifyInstanceSpecRequest struct {
     /* data节点数 (Optional) */
     NodeCount *int `json:"nodeCount"`
 
+    /* warmdata节点规格 (Optional) */
+    WarmNodeClass *string `json:"warmNodeClass"`
+
+    /* warmdata节点磁盘 (Optional) */
+    WarmNodeDiskGB *int `json:"warmNodeDiskGB"`
+
+    /* warmdata节点数 (Optional) */
+    WarmNodeCount *int `json:"warmNodeCount"`
+
+    /* warmdata存储类型 (Optional) */
+    WarmNodeDiskType *string `json:"warmNodeDiskType"`
+
     /* master节点规格 (Optional) */
     MasterClass *string `json:"masterClass"`
 
@@ -47,11 +63,23 @@ type ModifyInstanceSpecRequest struct {
 
     /* coordinating节点数 (Optional) */
     CoordinatingCount *int `json:"coordinatingCount"`
+
+    /* 变配类型 (Optional) */
+    ChangeType *string `json:"changeType"`
+
+    /* kibana节点规格 (Optional) */
+    KibanaClass *string `json:"kibanaClass"`
+
+    /* kibana节点数 (Optional) */
+    KibanaCount *int `json:"kibanaCount"`
+
+    /* 经过验证的允许项 (Optional) */
+    ValidatedAllowed *es.ModifyInstanceSpecValidatedAllowed `json:"validatedAllowed"`
 }
 
 /*
  * param regionId: regionId (Required)
- * param instanceId: 实例ID (Required)
+ * param instanceId: 实例Id (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -74,23 +102,41 @@ func NewModifyInstanceSpecRequest(
 
 /*
  * param regionId: regionId (Required)
- * param instanceId: 实例ID (Required)
+ * param instanceId: 实例Id (Required)
+ * param azId: 可用区 (Optional)
  * param nodeClass: data节点规格 (Optional)
  * param nodeDiskGB: data节点磁盘 (Optional)
  * param nodeCount: data节点数 (Optional)
+ * param warmNodeClass: warmdata节点规格 (Optional)
+ * param warmNodeDiskGB: warmdata节点磁盘 (Optional)
+ * param warmNodeCount: warmdata节点数 (Optional)
+ * param warmNodeDiskType: warmdata存储类型 (Optional)
  * param masterClass: master节点规格 (Optional)
  * param coordinatingClass: coordinating节点规格 (Optional)
  * param coordinatingCount: coordinating节点数 (Optional)
+ * param changeType: 变配类型 (Optional)
+ * param kibanaClass: kibana节点规格 (Optional)
+ * param kibanaCount: kibana节点数 (Optional)
+ * param validatedAllowed: 经过验证的允许项 (Optional)
  */
 func NewModifyInstanceSpecRequestWithAllParams(
     regionId string,
     instanceId string,
+    azId *string,
     nodeClass *string,
     nodeDiskGB *int,
     nodeCount *int,
+    warmNodeClass *string,
+    warmNodeDiskGB *int,
+    warmNodeCount *int,
+    warmNodeDiskType *string,
     masterClass *string,
     coordinatingClass *string,
     coordinatingCount *int,
+    changeType *string,
+    kibanaClass *string,
+    kibanaCount *int,
+    validatedAllowed *es.ModifyInstanceSpecValidatedAllowed,
 ) *ModifyInstanceSpecRequest {
 
     return &ModifyInstanceSpecRequest{
@@ -102,12 +148,21 @@ func NewModifyInstanceSpecRequestWithAllParams(
         },
         RegionId: regionId,
         InstanceId: instanceId,
+        AzId: azId,
         NodeClass: nodeClass,
         NodeDiskGB: nodeDiskGB,
         NodeCount: nodeCount,
+        WarmNodeClass: warmNodeClass,
+        WarmNodeDiskGB: warmNodeDiskGB,
+        WarmNodeCount: warmNodeCount,
+        WarmNodeDiskType: warmNodeDiskType,
         MasterClass: masterClass,
         CoordinatingClass: coordinatingClass,
         CoordinatingCount: coordinatingCount,
+        ChangeType: changeType,
+        KibanaClass: kibanaClass,
+        KibanaCount: kibanaCount,
+        ValidatedAllowed: validatedAllowed,
     }
 }
 
@@ -128,41 +183,71 @@ func NewModifyInstanceSpecRequestWithoutParam() *ModifyInstanceSpecRequest {
 func (r *ModifyInstanceSpecRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
-/* param instanceId: 实例ID(Required) */
+/* param instanceId: 实例Id(Required) */
 func (r *ModifyInstanceSpecRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-
+/* param azId: 可用区(Optional) */
+func (r *ModifyInstanceSpecRequest) SetAzId(azId string) {
+    r.AzId = &azId
+}
 /* param nodeClass: data节点规格(Optional) */
 func (r *ModifyInstanceSpecRequest) SetNodeClass(nodeClass string) {
     r.NodeClass = &nodeClass
 }
-
 /* param nodeDiskGB: data节点磁盘(Optional) */
 func (r *ModifyInstanceSpecRequest) SetNodeDiskGB(nodeDiskGB int) {
     r.NodeDiskGB = &nodeDiskGB
 }
-
 /* param nodeCount: data节点数(Optional) */
 func (r *ModifyInstanceSpecRequest) SetNodeCount(nodeCount int) {
     r.NodeCount = &nodeCount
 }
-
+/* param warmNodeClass: warmdata节点规格(Optional) */
+func (r *ModifyInstanceSpecRequest) SetWarmNodeClass(warmNodeClass string) {
+    r.WarmNodeClass = &warmNodeClass
+}
+/* param warmNodeDiskGB: warmdata节点磁盘(Optional) */
+func (r *ModifyInstanceSpecRequest) SetWarmNodeDiskGB(warmNodeDiskGB int) {
+    r.WarmNodeDiskGB = &warmNodeDiskGB
+}
+/* param warmNodeCount: warmdata节点数(Optional) */
+func (r *ModifyInstanceSpecRequest) SetWarmNodeCount(warmNodeCount int) {
+    r.WarmNodeCount = &warmNodeCount
+}
+/* param warmNodeDiskType: warmdata存储类型(Optional) */
+func (r *ModifyInstanceSpecRequest) SetWarmNodeDiskType(warmNodeDiskType string) {
+    r.WarmNodeDiskType = &warmNodeDiskType
+}
 /* param masterClass: master节点规格(Optional) */
 func (r *ModifyInstanceSpecRequest) SetMasterClass(masterClass string) {
     r.MasterClass = &masterClass
 }
-
 /* param coordinatingClass: coordinating节点规格(Optional) */
 func (r *ModifyInstanceSpecRequest) SetCoordinatingClass(coordinatingClass string) {
     r.CoordinatingClass = &coordinatingClass
 }
-
 /* param coordinatingCount: coordinating节点数(Optional) */
 func (r *ModifyInstanceSpecRequest) SetCoordinatingCount(coordinatingCount int) {
     r.CoordinatingCount = &coordinatingCount
 }
+/* param changeType: 变配类型(Optional) */
+func (r *ModifyInstanceSpecRequest) SetChangeType(changeType string) {
+    r.ChangeType = &changeType
+}
+/* param kibanaClass: kibana节点规格(Optional) */
+func (r *ModifyInstanceSpecRequest) SetKibanaClass(kibanaClass string) {
+    r.KibanaClass = &kibanaClass
+}
+/* param kibanaCount: kibana节点数(Optional) */
+func (r *ModifyInstanceSpecRequest) SetKibanaCount(kibanaCount int) {
+    r.KibanaCount = &kibanaCount
+}
+/* param validatedAllowed: 经过验证的允许项(Optional) */
+func (r *ModifyInstanceSpecRequest) SetValidatedAllowed(validatedAllowed *es.ModifyInstanceSpecValidatedAllowed) {
+    r.ValidatedAllowed = validatedAllowed
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

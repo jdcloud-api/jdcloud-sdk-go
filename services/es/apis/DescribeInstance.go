@@ -28,13 +28,13 @@ type DescribeInstanceRequest struct {
     /* regionId  */
     RegionId string `json:"regionId"`
 
-    /* 实例ID  */
+    /* 实例Id  */
     InstanceId string `json:"instanceId"`
 }
 
 /*
  * param regionId: regionId (Required)
- * param instanceId: 实例ID (Required)
+ * param instanceId: 实例Id (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -57,7 +57,7 @@ func NewDescribeInstanceRequest(
 
 /*
  * param regionId: regionId (Required)
- * param instanceId: 实例ID (Required)
+ * param instanceId: 实例Id (Required)
  */
 func NewDescribeInstanceRequestWithAllParams(
     regionId string,
@@ -93,11 +93,11 @@ func NewDescribeInstanceRequestWithoutParam() *DescribeInstanceRequest {
 func (r *DescribeInstanceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
-/* param instanceId: 实例ID(Required) */
+/* param instanceId: 实例Id(Required) */
 func (r *DescribeInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

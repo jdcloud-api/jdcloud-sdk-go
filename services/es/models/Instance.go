@@ -26,8 +26,11 @@ type Instance struct {
     /* 实例名称 (Optional) */
     InstanceName string `json:"instanceName"`
 
-    /* 实例版本，目前支持5.6.9和6.5.4两个版本 (Optional) */
+    /* 实例版本，目前主流支持6.8.23和7.10.2 (Optional) */
     InstanceVersion string `json:"instanceVersion"`
+
+    /* 集群类型，根据es底层使用的存储类型区分。可选类型(通用存储型-general, 共享存储型-shared)。默认是general (Optional) */
+    ClusterType string `json:"clusterType"`
 
     /* 实例状态，running：运行，error：错误，creating：创建中，changing：变配中，stop：已停止，processing：处理中 (Optional) */
     InstanceStatus string `json:"instanceStatus"`
@@ -53,18 +56,6 @@ type Instance struct {
     /* 内网地址 (Optional) */
     InternalEndpoint InternalEndpoint `json:"internalEndpoint"`
 
-    /* deprecated，见internalEndpoint (Optional) */
-    Endpoint string `json:"endpoint"`
-
-    /* kibana地址 (Optional) */
-    KibanaUrl string `json:"kibanaUrl"`
-
-    /* head地址 (Optional) */
-    HeadUrl string `json:"headUrl"`
-
-    /* 值为v4&v6时支持ipv6和ipv4, 值为空时仅支持ipv4 (Optional) */
-    IpVersion string `json:"ipVersion"`
-
     /* Tag信息 (Optional) */
     Tags []Tag `json:"tags"`
 
@@ -74,6 +65,39 @@ type Instance struct {
     /* 是否开启了协调节点，true为开启，false为不开启 (Optional) */
     Coordinating bool `json:"coordinating"`
 
-    /* kibana floatIp地址 (Optional) */
-    KibanaFiUrl string `json:"kibanaFiUrl"`
+    /* 是否开启了warmnode，true为开启，false为不开启 (Optional) */
+    Warmnode bool `json:"warmnode"`
+
+    /* tpaas环境扩展参数 (Optional) */
+    TpaasExtension RespTpaasExtension `json:"tpaasExtension"`
+
+    /* 任务的开始时间（包括变配、创建、重启等任务），时间格式 2022-07-04T09:55:20Z (Optional) */
+    TaskStartTime string `json:"taskStartTime"`
+
+    /* 0-100 正整数，任务进度条 (Optional) */
+    TaskProgress int `json:"taskProgress"`
+
+    /* 任务的执行状态,包括（init、executing、timeout、succ、fail、error） (Optional) */
+    TaskStatus string `json:"taskStatus"`
+
+    /* 任务的持续运行时间，单位为s（秒）；如果任务成功则返回0 (Optional) */
+    TaskTimeConsuming int `json:"taskTimeConsuming"`
+
+    /* 标志任务的持续运行时间(taskTimeConsuming)是否还会继续增加。 (Optional) */
+    IsTaskTimeConsumeContinueIncrease bool `json:"isTaskTimeConsumeContinueIncrease"`
+
+    /* taskStatus==error时, 展示错误信息 (Optional) */
+    TaskErrorInfo string `json:"taskErrorInfo"`
+
+    /* cpu的架构类型（armd64、amd64） (Optional) */
+    ArchType string `json:"archType"`
+
+    /* 实例的扩展信息 (Optional) */
+    ExtendInfo ExtendInfo `json:"extendInfo"`
+
+    /* scenarioTemplate (Optional) */
+    ScenarioTemplate InstanceScenarioTemplate `json:"scenarioTemplate"`
+
+    /* appRelation (Optional) */
+    AppRelation AppRelation `json:"appRelation"`
 }

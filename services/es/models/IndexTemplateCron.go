@@ -23,7 +23,7 @@ type IndexTemplateCron struct {
     TaskID string `json:"taskID"`
 
     /* 创建时间，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
-    CreateTime string `json:"createTime"`
+    CreatedTime string `json:"createdTime"`
 
     /* 任务配置信息 (Optional) */
     Settings IndexTemplateCronConf `json:"settings"`

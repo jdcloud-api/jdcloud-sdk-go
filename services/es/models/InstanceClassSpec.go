@@ -25,20 +25,26 @@ type InstanceClassSpec struct {
     /* data节点存储大小，单位GB。单点存储规格范围20-4000GB，只允许输入整数且步长为10GB， (Optional) */
     NodeDiskGB *int `json:"nodeDiskGB"`
 
-    /* data节点存储类型，包括zbs(性能型SSD云盘)、ssd.gp1(通用型SSD云盘)、hdd.std1(容量型HDD云盘)，默认zbs (Optional) */
-    NodeDiskType *string `json:"nodeDiskType"`
-
     /* data节点数量，各region和可用区的节点数量规格限制不完全相同，详情请参考：https://docs.jdcloud.com/cn/jcs-for-elasticsearch/restrictions (Optional) */
     NodeCount *int `json:"nodeCount"`
+
+    /* warmdata节点规格代码，详细规格请参考：https://docs.jdcloud.com/cn/jcs-for-elasticsearch/specifications (Optional) */
+    WarmNodeClass *string `json:"warmNodeClass"`
+
+    /* warmdata节点存储大小，单位GB。单点存储规格范围20-4000GB，只允许输入整数且步长为10GB， (Optional) */
+    WarmNodeDiskGB *int `json:"warmNodeDiskGB"`
+
+    /* warmdata节点存储类型，ssd.gp1(通用型SSD云盘)、hdd.std1(容量型HDD云盘) (Optional) */
+    WarmNodeDiskType *string `json:"warmNodeDiskType"`
+
+    /* warmdata节点数量，各region和可用区的warmnode节点数量规格限制不完全相同，详情请参考：https://docs.jdcloud.com/cn/jcs-for-elasticsearch/restrictions (Optional) */
+    WarmNodeCount *int `json:"warmNodeCount"`
 
     /* master节点规格代码，与data节点规格代码一致。 (Optional) */
     MasterClass *string `json:"masterClass"`
 
     /* master节点存储大小，固定为20GB，不可调整 (Optional) */
     MasterDiskGB *int `json:"masterDiskGB"`
-
-    /* master节点存储类型，默认zbs (Optional) */
-    MasterDiskType *string `json:"masterDiskType"`
 
     /* master节点数量，固定为3，不可调整 (Optional) */
     MasterCount *int `json:"masterCount"`
@@ -49,9 +55,12 @@ type InstanceClassSpec struct {
     /* coordinating节点存储大小，固定为20GB，不可调整 (Optional) */
     CoordinatingDiskGB *int `json:"coordinatingDiskGB"`
 
-    /* coordinating存储类型，默认zbs (Optional) */
-    CoordinatingDiskType *string `json:"coordinatingDiskType"`
-
     /* coordinating节点数量，各region和可用区的节点数量规格限制不完全相同，详情请参考：https://docs.jdcloud.com/cn/jcs-for-elasticsearch/restrictions (Optional) */
     CoordinatingCount *int `json:"coordinatingCount"`
+
+    /* kibana节点数量 (Optional) */
+    KibanaCount *int `json:"kibanaCount"`
+
+    /* kibana节点规格代码，规格代码对照关系参见：https://docs.jdcloud.com/cn/jcs-for-elasticsearch/specifications (Optional) */
+    KibanaClass *string `json:"kibanaClass"`
 }

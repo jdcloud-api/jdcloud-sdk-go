@@ -20,8 +20,8 @@ package models
 type Tag struct {
 
     /* 用于标识资源分类的Tag键 (Optional) */
-    Key string `json:"key"`
+    Key *string `json:"key"`
 
     /* 用于标识资源分类的Tag值 (Optional) */
-    Value string `json:"value"`
+    Value *string `json:"value"`
 }

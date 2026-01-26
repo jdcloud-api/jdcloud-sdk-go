@@ -40,7 +40,7 @@ func NewCmpClient(credential *core.Credential) *CmpClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "cmp",
-            Revision:    "0.2.1",
+            Revision:    "0.2.2",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -253,6 +253,28 @@ func (c *CmpClient) CreateMaintenancePolicy(request *cmp.CreateMaintenancePolicy
     }
 
     jdResp := &cmp.CreateMaintenancePolicyResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建自定义运维事件，仅支持实例资源。
+仅灰度用户可用（元数据 vm_submithost=1）。
+ */
+func (c *CmpClient) CreateCustomEventsOnResource(request *cmp.CreateCustomEventsOnResourceRequest) (*cmp.CreateCustomEventsOnResourceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cmp.CreateCustomEventsOnResourceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

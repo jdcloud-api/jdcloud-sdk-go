@@ -24,4 +24,13 @@ type AutoSnapshot struct {
 
     /* 自动备份时间，0时区的小时数，[0，24）范围内取整 (Optional) */
     Hour *int `json:"hour"`
+
+    /* 备份保存天数 (Optional) */
+    ReservedOfDay *int `json:"reservedOfDay"`
+
+    /* 备份索引 (Optional) */
+    Indices *string `json:"indices"`
+
+    /* 快照种类，精确匹配，支持单个(System:系统、Custom:自定义）默认：System (Optional) */
+    Category *string `json:"category"`
 }
