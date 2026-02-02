@@ -40,7 +40,7 @@ func NewAisearchClient(credential *core.Credential) *AisearchClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "aisearch",
-            Revision:    "0.2.0",
+            Revision:    "2.0.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }

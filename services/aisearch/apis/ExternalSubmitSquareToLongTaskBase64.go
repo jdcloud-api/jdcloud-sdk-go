@@ -33,6 +33,12 @@ type ExternalSubmitSquareToLongTaskBase64Request struct {
 
     /* 方形图片  */
     ImageBase64 string `json:"imageBase64"`
+
+    /* 任务类型 (Optional) */
+    TaskType *int `json:"taskType"`
+
+    /* 扩图类型:1-竖向扩图,2-横向扩图（仅对方转长无文字任务有效） (Optional) */
+    HwType *int `json:"hwType"`
 }
 
 /*
@@ -65,11 +71,15 @@ func NewExternalSubmitSquareToLongTaskBase64Request(
  * param apiKey: api key编号 (Required)
  * param requestId: 请求id，api key下唯一 (Required)
  * param imageBase64: 方形图片 (Required)
+ * param taskType: 任务类型 (Optional)
+ * param hwType: 扩图类型:1-竖向扩图,2-横向扩图（仅对方转长无文字任务有效） (Optional)
  */
 func NewExternalSubmitSquareToLongTaskBase64RequestWithAllParams(
     apiKey string,
     requestId string,
     imageBase64 string,
+    taskType *int,
+    hwType *int,
 ) *ExternalSubmitSquareToLongTaskBase64Request {
 
     return &ExternalSubmitSquareToLongTaskBase64Request{
@@ -82,6 +92,8 @@ func NewExternalSubmitSquareToLongTaskBase64RequestWithAllParams(
         ApiKey: apiKey,
         RequestId: requestId,
         ImageBase64: imageBase64,
+        TaskType: taskType,
+        HwType: hwType,
     }
 }
 
@@ -109,6 +121,14 @@ func (r *ExternalSubmitSquareToLongTaskBase64Request) SetRequestId(requestId str
 /* param imageBase64: 方形图片(Required) */
 func (r *ExternalSubmitSquareToLongTaskBase64Request) SetImageBase64(imageBase64 string) {
     r.ImageBase64 = imageBase64
+}
+/* param taskType: 任务类型(Optional) */
+func (r *ExternalSubmitSquareToLongTaskBase64Request) SetTaskType(taskType int) {
+    r.TaskType = &taskType
+}
+/* param hwType: 扩图类型:1-竖向扩图,2-横向扩图（仅对方转长无文字任务有效）(Optional) */
+func (r *ExternalSubmitSquareToLongTaskBase64Request) SetHwType(hwType int) {
+    r.HwType = &hwType
 }
 
 
