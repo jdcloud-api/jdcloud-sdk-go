@@ -17,29 +17,25 @@
 package models
 
 
-type PageListCfg struct {
+type TokenRuleDetail struct {
 
-    /* 序号id (Optional) */
-    Id int `json:"id"`
+    /* 匹配字段,多个逗号分隔
+req.arg 请求参数
+req.header 请求头
+req.cookie 请求Cookie
+req.body 请求body
+ (Optional) */
+    Field *string `json:"field"`
 
-    /* WAF实例id (Optional) */
-    WafInstanceId string `json:"wafInstanceId"`
+    /* 匹配参数 (Optional) */
+    Key *string `json:"key"`
 
-    /* 域名 (Optional) */
-    Domain string `json:"domain"`
+    /* 逻辑符
+exist 存在
+gt 存在且大于
+ (Optional) */
+    Logic *string `json:"logic"`
 
-    /* 自定义页面名称 (Optional) */
-    Name string `json:"name"`
-
-    /* 规则更新时间，秒级时间戳 (Optional) */
-    UpdateTime int `json:"updateTime"`
-
-    /* 内容 (Optional) */
-    Content string `json:"content"`
-
-    /* Content-Type (Optional) */
-    ContentType string `json:"contentType"`
-
-    /* 审核状态，0审核中，1通过，2未通过 (Optional) */
-    CheckStatus int `json:"checkStatus"`
+    /* 匹配内容 (Optional) */
+    Value *string `json:"value"`
 }

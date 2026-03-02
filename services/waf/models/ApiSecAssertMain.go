@@ -17,29 +17,20 @@
 package models
 
 
-type PageListCfg struct {
+type ApiSecAssertMain struct {
 
-    /* 序号id (Optional) */
-    Id int `json:"id"`
+    /* api资产总数 (Optional) */
+    Count int `json:"count"`
 
-    /* WAF实例id (Optional) */
-    WafInstanceId string `json:"wafInstanceId"`
+    /* 活跃api资产数 (Optional) */
+    Active_count int `json:"active_count"`
 
-    /* 域名 (Optional) */
-    Domain string `json:"domain"`
+    /* 失活api资产数 (Optional) */
+    Inactive_count int `json:"inactive_count"`
 
-    /* 自定义页面名称 (Optional) */
-    Name string `json:"name"`
+    /* 今日新增api资产数 (Optional) */
+    Today_register_count int `json:"today_register_count"`
 
-    /* 规则更新时间，秒级时间戳 (Optional) */
-    UpdateTime int `json:"updateTime"`
-
-    /* 内容 (Optional) */
-    Content string `json:"content"`
-
-    /* Content-Type (Optional) */
-    ContentType string `json:"contentType"`
-
-    /* 审核状态，0审核中，1通过，2未通过 (Optional) */
-    CheckStatus int `json:"checkStatus"`
+    /* 本周新增api资产数 (Optional) */
+    Week_register_count int `json:"week_register_count"`
 }

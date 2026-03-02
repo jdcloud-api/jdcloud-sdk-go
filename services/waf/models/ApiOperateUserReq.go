@@ -17,29 +17,34 @@
 package models
 
 
-type PageListCfg struct {
-
-    /* 序号id (Optional) */
-    Id int `json:"id"`
+type ApiOperateUserReq struct {
 
     /* WAF实例id (Optional) */
-    WafInstanceId string `json:"wafInstanceId"`
+    WafInstanceId *string `json:"wafInstanceId"`
 
     /* 域名 (Optional) */
-    Domain string `json:"domain"`
+    Domain *string `json:"domain"`
 
-    /* 自定义页面名称 (Optional) */
-    Name string `json:"name"`
+    /* 功能类型
+detectUser api识别自定义规则
+tokenUser 登录凭证识别自定义规则
+senUser 敏感数据识别自定义规则
+riskUser 风险识别自定义规则
+ (Optional) */
+    FuncType *string `json:"funcType"`
 
-    /* 规则更新时间，秒级时间戳 (Optional) */
-    UpdateTime int `json:"updateTime"`
+    /* 操作
+1开启关闭
+0删除
+ (Optional) */
+    Operate *int `json:"operate"`
 
-    /* 内容 (Optional) */
-    Content string `json:"content"`
+    /* 0关闭 1开启 (Optional) */
+    Enable *int `json:"enable"`
 
-    /* Content-Type (Optional) */
-    ContentType string `json:"contentType"`
+    /* 规则ID (Optional) */
+    RuleIds []string `json:"ruleIds"`
 
-    /* 审核状态，0审核中，1通过，2未通过 (Optional) */
-    CheckStatus int `json:"checkStatus"`
+    /* 内置规则名称,仅支持使能操作 (Optional) */
+    PreRuleNames []string `json:"preRuleNames"`
 }

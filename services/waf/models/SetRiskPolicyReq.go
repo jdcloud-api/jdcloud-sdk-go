@@ -46,9 +46,9 @@ type SetRiskPolicyReq struct {
     /* 策略规则  */
     Rules RiskPolicyRuleCfg `json:"rules"`
 
-    /* 匹配动作, 拦截:forbidden,redirect 人机识别:verify@jscookie,verify@captcha,verify@rdtcookie 观察:notice  */
+    /* 匹配动作, 拦截:forbidden,redirect,status@200,status@403 人机识别:verify@jscookie,verify@captcha,verify@rdtcookie 观察:notice  */
     Action string `json:"action"`
 
-    /* 跳转地址，Action为redirect时必须为当前实例下的域名的url，forbidden时为自定义页面名称 (Optional) */
+    /* 跳转地址，Action为redirect时必须为当前实例下的域名的url，forbidden/status时为自定义页面名称 (Optional) */
     Redirection string `json:"redirection"`
 }

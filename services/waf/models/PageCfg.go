@@ -33,4 +33,7 @@ type PageCfg struct {
 
     /* 内容  */
     Content string `json:"content"`
+
+    /* Content-Type (Optional) */
+    ContentType string `json:"contentType"`
 }

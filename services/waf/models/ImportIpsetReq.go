@@ -29,8 +29,8 @@ type ImportIpsetReq struct {
     Ips string `json:"ips"`
 
     /* 0表示新建，1表示修改更新 (Optional) */
-    IsUpdate int `json:"isUpdate"`
+    IsUpdate *int `json:"isUpdate"`
 
     /* 备注 (Optional) */
-    Tag string `json:"tag"`
+    Tag *string `json:"tag"`
 }

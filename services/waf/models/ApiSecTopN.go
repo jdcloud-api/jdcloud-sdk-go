@@ -17,29 +17,14 @@
 package models
 
 
-type PageListCfg struct {
+type ApiSecTopN struct {
 
-    /* 序号id (Optional) */
-    Id int `json:"id"`
+    /*  (Optional) */
+    Addr_top10 []TopValue `json:"addr_top10"`
 
-    /* WAF实例id (Optional) */
-    WafInstanceId string `json:"wafInstanceId"`
+    /*  (Optional) */
+    Area_top10 []TopValue `json:"area_top10"`
 
-    /* 域名 (Optional) */
-    Domain string `json:"domain"`
-
-    /* 自定义页面名称 (Optional) */
-    Name string `json:"name"`
-
-    /* 规则更新时间，秒级时间戳 (Optional) */
-    UpdateTime int `json:"updateTime"`
-
-    /* 内容 (Optional) */
-    Content string `json:"content"`
-
-    /* Content-Type (Optional) */
-    ContentType string `json:"contentType"`
-
-    /* 审核状态，0审核中，1通过，2未通过 (Optional) */
-    CheckStatus int `json:"checkStatus"`
+    /*  (Optional) */
+    Ua_top10 []TopValue `json:"ua_top10"`
 }

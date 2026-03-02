@@ -25,6 +25,9 @@ type ListReq struct {
     /* 全局告警globle 自定义告警userdefine ,默认是全局告警 (Optional) */
     RuleType string `json:"ruleType"`
 
+    /* 外部pin,目前仅供云鼎使用 (Optional) */
+    UserPinExternal string `json:"userPinExternal"`
+
     /* 页码，[1-100]，默认是1 (Optional) */
     PageIndex int `json:"pageIndex"`
 

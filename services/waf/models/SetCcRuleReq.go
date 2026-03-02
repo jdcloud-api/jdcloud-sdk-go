@@ -40,13 +40,23 @@ type SetCcRuleReq struct {
     /* ip访问次数，[1~9999999]  */
     SingleIpLimit int `json:"singleIpLimit"`
 
-    /* 阻断类型 1:302跳转到指定页面 2:验证码 3:拦截返回自定义页面 4:js跳转 5:观察 6:重定向  */
+    /* 阻断类型
+拦截-302跳转到指定页面 1:redirect@
+人机交互-验证码(高) 2:verify@captcha
+拦截-返回自定义页面 3:forbidden@
+人机交互-JS挑战(中) 4:verify@jscookie
+观察 5:notice
+人机交互-重定向挑战(低) 6:verify@rdtcookie
+动态防护(仅cc安全防护支持) 7:auto
+拦截-返回自定义内容-200 8:status@200
+拦截-返回自定义内容-403 9:status@403
+  */
     BlockType int `json:"blockType"`
 
     /* block 持续时间，单位为分钟 [1~24*60]  */
     BlockTime int `json:"blockTime"`
 
-    /* blockType 为3 时，为自定义页面名称，缺省为default (Optional) */
+    /* blockType 为3/8/9 时，为自定义页面名称，缺省为default (Optional) */
     Redirection string `json:"redirection"`
 
     /* cc 统计维度，ip或cookie (Optional) */

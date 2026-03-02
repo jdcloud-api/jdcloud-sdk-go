@@ -22,9 +22,6 @@ type WarningCfg struct {
     /* 规则id (Optional) */
     Id int `json:"id"`
 
-    /* 用户名 (Optional) */
-    UserPin string `json:"userPin"`
-
     /* WAF实例id (Optional) */
     WafInstanceId string `json:"wafInstanceId"`
 

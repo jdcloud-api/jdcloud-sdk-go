@@ -24,4 +24,7 @@ type SignatureRuleGroup struct {
 
     /* 攻击类型 (Optional) */
     RuleType string `json:"ruleType"`
+
+    /* 攻击描述信息 (Optional) */
+    Desc string `json:"desc"`
 }

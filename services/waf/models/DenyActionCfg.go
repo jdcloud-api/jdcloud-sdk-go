@@ -19,9 +19,19 @@ package models
 
 type DenyActionCfg struct {
 
-    /* 黑名单匹配动作类型 观察 5:notice 人机识别 3:verify@captcha, 4:verify@jscookie, 6:verify@rdtcookie 拦截 1:forbidden@, 2:redirect@ 动态防护 7:cc动态防护(仅cc安全防护支持)  */
+    /* 黑名单匹配动作类型
+拦截-返回自定义页面 1:forbidden@
+拦截-302跳转到指定页面 2:redirect@
+人机交互-验证码(高) 3:verify@captcha
+人机交互-JS挑战(中) 4:verify@jscookie
+观察 5:notice
+人机交互-重定向挑战(低) 6:verify@rdtcookie
+动态防护(仅cc安全防护支持) 7:auto
+拦截-返回自定义内容-200 8:status@200
+拦截-返回自定义内容-403 9:status@403
+  */
     AtOp int `json:"atOp"`
 
-    /* 黑名单匹配动作内容 当atOp为3-7时，atVal为空，atOp=1时，atVal为自定义页面,atOp=2时，atVal为跳转url。  */
+    /* 黑名单匹配动作内容 当atOp为3-7时，atVal为空，atOp=1/8/9时，atVal为自定义页面,atOp=2时，atVal为跳转url。  */
     AtVal string `json:"atVal"`
 }

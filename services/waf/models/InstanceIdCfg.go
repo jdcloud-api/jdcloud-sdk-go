@@ -40,15 +40,32 @@ type InstanceIdCfg struct {
     /* 额外的qps扩展包，单位为M (Optional) */
     ExtraBitsLimit int `json:"extraBitsLimit"`
 
+    /* 防护扩展包
+0x00000002防护扩展包
+ (Optional) */
+    ExtraPackage int `json:"extraPackage"`
+
     /* 创建时间 (Optional) */
     StartTime string `json:"startTime"`
 
+    /* 到期时间 (Optional) */
+    EndTime string `json:"endTime"`
+
     /* 资源预计释放时间，仅过期且未释放时有效 (Optional) */
     ReleaseingTime string `json:"releaseingTime"`
+
+    /* 距离到期时间的天数 (Optional) */
+    ExpiringDays int `json:"expiringDays"`
 
     /* 资源的计费状态，1-服务中，2-过期停服，3-过期释放 (Optional) */
     Status int `json:"status"`
 
     /* 资源的可用状态，1-可用，其他不可用 (Optional) */
     Valid int `json:"valid"`
+
+    /* 标签 (Optional) */
+    Tag InstanceTag `json:"tag"`
+
+    /* vip信息 (Optional) */
+    Vips interface{} `json:"vips"`
 }

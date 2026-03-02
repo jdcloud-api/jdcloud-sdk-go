@@ -75,4 +75,7 @@ type SetReq struct {
 
     /* scdn用户名 (Optional) */
     UserPinScdn string `json:"userPinScdn"`
+
+    /* 外部pin,目前仅供云鼎使用 (Optional) */
+    UserPinExternal string `json:"userPinExternal"`
 }

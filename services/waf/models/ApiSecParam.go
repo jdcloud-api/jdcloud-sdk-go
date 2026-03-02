@@ -17,26 +17,32 @@
 package models
 
 
-type SetWafRuleReq struct {
+type ApiSecParam struct {
 
-    /* 规则id,新增时传0  */
-    Id int `json:"id"`
+    /* api (Optional) */
+    Api string `json:"api"`
 
-    /* WAF实例id  */
+    /* 首次发现时间 (Optional) */
+    Detect int `json:"detect"`
+
+    /* 实例 (Optional) */
     WafInstanceId string `json:"wafInstanceId"`
 
-    /* 域名  */
+    /* 域名 (Optional) */
     Domain string `json:"domain"`
 
-    /* 规则名称  */
-    RuleName string `json:"ruleName"`
+    /* 参数位置 query,[name:type] (Optional) */
+    Req_arg []string `json:"req_arg"`
 
-    /* 匹配动作, 拦截:forbidden,redirect,status@200,status@403 人机识别:verify@jscookie,verify@captcha,verify@rdtcookie 观察:notice  */
-    MatchAction string `json:"matchAction"`
+    /* 参数位置 请求体,[name:type] (Optional) */
+    Req_body []string `json:"req_body"`
 
-    /* 跳转地址，matchAction为redirect时必须为当前实例下的域名的url，forbidden/status时为自定义页面名称  */
-    Redirection string `json:"redirection"`
+    /* 参数位置 请求头,[name:type] (Optional) */
+    Req_header []string `json:"req_header"`
 
-    /* 条件集  */
-    Conditions []ConditionIdSet `json:"conditions"`
+    /* 参数位置 响应头,[name:type] (Optional) */
+    Resp_header []string `json:"resp_header"`
+
+    /* 参数位置 响应体,[name:type] (Optional) */
+    Resp_body []string `json:"resp_body"`
 }

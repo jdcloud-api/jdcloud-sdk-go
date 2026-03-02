@@ -34,11 +34,14 @@ type GetEsLogReq struct {
     /* 状态码，检索字段 (Optional) */
     Status string `json:"status"`
 
-    /*  (Optional) */
+    /* 日志类型，检索字段，支持类型：""(为空时，默认查询全部日志类型)，"access"(访问日志)，"waf"(wafSDK)，"acl"(自定义规则)，"skip"(白名单)，"deny"(黑名单)，"cc"(CC攻击)，"webcache"(网页防篡改)，"css"(跨站脚本攻击)，"sqli"(SQL注入攻击)，""fileinc"(文件读取/包含攻击)，"cmding"(命令/代码执行攻击)，"sdd"(敏感文件探测)，"malscan"(恶意扫描攻击)，"bckack"(恶意/后门文件攻击)，"xmli"(XML注入攻击)，"dirt"(目录遍历攻击) (Optional) */
     LogType []string `json:"logType"`
 
     /* 日志Id，检索字段 (Optional) */
     LogId string `json:"logId"`
+
+    /* 状态标识，检索字段 (Optional) */
+    UpstreamErr string `json:"upstreamErr"`
 
     /* 开始时间戳，单位秒，时间间隔要求大于5分钟，小于30天。  */
     Start int `json:"start"`

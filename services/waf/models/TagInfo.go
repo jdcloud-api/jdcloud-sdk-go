@@ -17,29 +17,11 @@
 package models
 
 
-type PageListCfg struct {
+type TagInfo struct {
 
-    /* 序号id (Optional) */
-    Id int `json:"id"`
+    /*  (Optional) */
+    Key string `json:"key"`
 
-    /* WAF实例id (Optional) */
-    WafInstanceId string `json:"wafInstanceId"`
-
-    /* 域名 (Optional) */
-    Domain string `json:"domain"`
-
-    /* 自定义页面名称 (Optional) */
-    Name string `json:"name"`
-
-    /* 规则更新时间，秒级时间戳 (Optional) */
-    UpdateTime int `json:"updateTime"`
-
-    /* 内容 (Optional) */
-    Content string `json:"content"`
-
-    /* Content-Type (Optional) */
-    ContentType string `json:"contentType"`
-
-    /* 审核状态，0审核中，1通过，2未通过 (Optional) */
-    CheckStatus int `json:"checkStatus"`
+    /*  (Optional) */
+    Value string `json:"value"`
 }

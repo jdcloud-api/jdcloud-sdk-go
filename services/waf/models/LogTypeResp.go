@@ -17,29 +17,11 @@
 package models
 
 
-type PageListCfg struct {
+type LogTypeResp struct {
 
-    /* 序号id (Optional) */
-    Id int `json:"id"`
+    /* 查询全量日志参数中的logType值 (Optional) */
+    LogType string `json:"logType"`
 
-    /* WAF实例id (Optional) */
-    WafInstanceId string `json:"wafInstanceId"`
-
-    /* 域名 (Optional) */
-    Domain string `json:"domain"`
-
-    /* 自定义页面名称 (Optional) */
+    /* 日志类型名称 (Optional) */
     Name string `json:"name"`
-
-    /* 规则更新时间，秒级时间戳 (Optional) */
-    UpdateTime int `json:"updateTime"`
-
-    /* 内容 (Optional) */
-    Content string `json:"content"`
-
-    /* Content-Type (Optional) */
-    ContentType string `json:"contentType"`
-
-    /* 审核状态，0审核中，1通过，2未通过 (Optional) */
-    CheckStatus int `json:"checkStatus"`
 }
