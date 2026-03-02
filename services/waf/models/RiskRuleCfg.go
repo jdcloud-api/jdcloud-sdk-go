@@ -34,7 +34,7 @@ type RiskRuleCfg struct {
     /* uri 以/开头 (Optional) */
     Uri string `json:"uri"`
 
-    /* 匹配动作, 拦截:forbidden,redirect 人机识别:verify@jscookie,verify@captcha,verify@rdtcookie 观察:notice (Optional) */
+    /* 匹配动作, 拦截:forbidden,redirect,status@200,status@403 人机识别:verify@jscookie,verify@captcha,verify@rdtcookie 观察:notice (Optional) */
     Action string `json:"action"`
 
     /* 请求方法 支持 POST:1,GET:1,PUT:1 (Optional) */
@@ -52,6 +52,6 @@ type RiskRuleCfg struct {
     /* 更新时间，s (Optional) */
     UpdateTime int `json:"updateTime"`
 
-    /* 跳转地址，Action为redirect时必须为当前实例下的域名的url，forbidden时为自定义页面名称 (Optional) */
+    /* 跳转地址，Action为redirect时必须为当前实例下的域名的url，forbidden/status时为自定义页面名称 (Optional) */
     Redirection string `json:"redirection"`
 }

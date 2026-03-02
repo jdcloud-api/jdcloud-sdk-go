@@ -43,6 +43,11 @@ type GetPriceReq struct {
     /* 额外的qps扩展包,单位为M 该值为50M的倍数  */
     ExtraBitsLimit int `json:"extraBitsLimit"`
 
+    /* 防护扩展包
+0x00000002防护扩展包
+ (Optional) */
+    ExtraPackage int `json:"extraPackage"`
+
     /* 云鼎的appCode (Optional) */
     AppCode string `json:"appCode"`
 

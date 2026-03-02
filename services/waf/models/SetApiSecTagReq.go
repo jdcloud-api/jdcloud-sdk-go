@@ -17,26 +17,23 @@
 package models
 
 
-type SetWafRuleReq struct {
+type SetApiSecTagReq struct {
 
-    /* 规则id,新增时传0  */
-    Id int `json:"id"`
-
-    /* WAF实例id  */
+    /* 实例 (Optional) */
     WafInstanceId string `json:"wafInstanceId"`
 
-    /* 域名  */
+    /* 域名 (Optional) */
     Domain string `json:"domain"`
 
-    /* 规则名称  */
-    RuleName string `json:"ruleName"`
+    /* api (Optional) */
+    Api string `json:"api"`
 
-    /* 匹配动作, 拦截:forbidden,redirect,status@200,status@403 人机识别:verify@jscookie,verify@captcha,verify@rdtcookie 观察:notice  */
-    MatchAction string `json:"matchAction"`
+    /* 1备注,2关注 (Optional) */
+    Operate int `json:"operate"`
 
-    /* 跳转地址，matchAction为redirect时必须为当前实例下的域名的url，forbidden/status时为自定义页面名称  */
-    Redirection string `json:"redirection"`
+    /* operate为2时生效，1关注，0取关 (Optional) */
+    Follow int `json:"follow"`
 
-    /* 条件集  */
-    Conditions []ConditionIdSet `json:"conditions"`
+    /* operate为1时生效,备注 (Optional) */
+    Tag string `json:"tag"`
 }

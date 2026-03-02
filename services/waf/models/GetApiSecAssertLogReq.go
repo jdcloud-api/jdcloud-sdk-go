@@ -17,13 +17,13 @@
 package models
 
 
-type GetChartReq struct {
+type GetApiSecAssertLogReq struct {
 
     /* 实例id，代表要查询的WAF实例，为空时表示当前用户下的所有实例 (Optional) */
-    WafInstanceId *string `json:"wafInstanceId"`
+    WafInstanceId string `json:"wafInstanceId"`
 
     /* 域名，为空时表示当前实例下的所有域名 (Optional) */
-    Domain *string `json:"domain"`
+    Domain string `json:"domain"`
 
     /* 开始时间戳，单位秒，时间间隔要求大于5分钟，小于30天。  */
     Start int `json:"start"`
@@ -31,21 +31,27 @@ type GetChartReq struct {
     /* 结束时间戳，单位秒，时间间隔要求大于5分钟，小于30天。  */
     End int `json:"end"`
 
-    /* true表示和值图，false表示均值图，仅getBpsData， getQpsData时有效。 (Optional) */
-    IsSum *bool `json:"isSum"`
+    /* 检索类型 api api查询,tag 备注查询 (Optional) */
+    SearchType string `json:"searchType"`
 
-    /* true表示查找命中不同规则的waf攻击对应数目。 (Optional) */
-    IsWafRule *bool `json:"isWafRule"`
+    /* 检索内容 api查询不支持模糊匹配，备注查询支持模糊匹配 (Optional) */
+    Search string `json:"search"`
 
-    /* true表示源站返回给waf的异常响应，false表示waf返回给客户端的异常响应，仅getExceptionData时有效。 (Optional) */
-    IsRs *bool `json:"isRs"`
+    /* 是否有鉴权，0无，1有，不做此项筛选不传参 (Optional) */
+    Token int `json:"token"`
 
-    /* ua表示返回ua的饼图数据，仅getPieChart时有效。 (Optional) */
-    PieItem *string `json:"pieItem"`
+    /* 请求是否存在敏感数据，0无，1有，不做此项筛选不传参 (Optional) */
+    ReqSen int `json:"reqSen"`
 
-    /* true表示获取状态码统计图、占比图。 (Optional) */
-    IsStaCode *bool `json:"isStaCode"`
+    /* 响应是否存在敏感数据，0无，1有，不做此项筛选不传参 (Optional) */
+    RespSen int `json:"respSen"`
 
-    /* 指定查询类型,getTopN:area_top10/addr_top10/url_top10/ua_top10/domain_anti_top10/url_anti_top10 (Optional) */
-    ChartItems []string `json:"chartItems"`
+    /* 是否关注，0无，1有，不做此项筛选不传参 (Optional) */
+    Follow int `json:"follow"`
+
+    /* 每页显示的个数，默认是10。 (Optional) */
+    PageSize int `json:"pageSize"`
+
+    /* 页数，默认是1。 (Optional) */
+    PageIndex int `json:"pageIndex"`
 }

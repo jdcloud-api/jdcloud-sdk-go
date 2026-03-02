@@ -17,29 +17,26 @@
 package models
 
 
-type PageListCfg struct {
-
-    /* 序号id (Optional) */
-    Id int `json:"id"`
+type ListApiUserReq struct {
 
     /* WAF实例id (Optional) */
-    WafInstanceId string `json:"wafInstanceId"`
+    WafInstanceId *string `json:"wafInstanceId"`
 
     /* 域名 (Optional) */
-    Domain string `json:"domain"`
+    Domain *string `json:"domain"`
 
-    /* 自定义页面名称 (Optional) */
-    Name string `json:"name"`
+    /* 规则ID,修改必填 (Optional) */
+    RuleId *string `json:"ruleId"`
 
-    /* 规则更新时间，秒级时间戳 (Optional) */
-    UpdateTime int `json:"updateTime"`
+    /* 规则名称 (Optional) */
+    RuleName *string `json:"ruleName"`
 
-    /* 内容 (Optional) */
-    Content string `json:"content"`
+    /* 规则属性 user自定义规则 pre内置默认规则,为空返回全部 (Optional) */
+    Property *string `json:"property"`
 
-    /* Content-Type (Optional) */
-    ContentType string `json:"contentType"`
+    /* 页码，默认为1 (Optional) */
+    PageIndex *int `json:"pageIndex"`
 
-    /* 审核状态，0审核中，1通过，2未通过 (Optional) */
-    CheckStatus int `json:"checkStatus"`
+    /* 页大小，默认为30 (Optional) */
+    PageSize *int `json:"pageSize"`
 }

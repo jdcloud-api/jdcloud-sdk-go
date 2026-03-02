@@ -78,4 +78,7 @@ type LbConf struct {
 
     /* 连接超时时间，3-60s (Optional) */
     ProxyConnectTimeout int `json:"proxyConnectTimeout"`
+
+    /* 是否支持SSE (Optional) */
+    Sse int `json:"sse"`
 }

@@ -17,26 +17,24 @@
 package models
 
 
-type SetWafRuleReq struct {
+type GetApiSecChartReq struct {
 
-    /* 规则id,新增时传0  */
-    Id int `json:"id"`
-
-    /* WAF实例id  */
+    /* 实例id，代表要查询的WAF实例，为空时表示当前用户下的所有实例 (Optional) */
     WafInstanceId string `json:"wafInstanceId"`
 
-    /* 域名  */
+    /* 域名，为空时表示当前实例下的所有域名 (Optional) */
     Domain string `json:"domain"`
 
-    /* 规则名称  */
-    RuleName string `json:"ruleName"`
+    /* api,总览无效 (Optional) */
+    Api string `json:"api"`
 
-    /* 匹配动作, 拦截:forbidden,redirect,status@200,status@403 人机识别:verify@jscookie,verify@captcha,verify@rdtcookie 观察:notice  */
-    MatchAction string `json:"matchAction"`
+    /* 开始时间戳，单位秒，时间间隔要求大于5分钟，小于30天。  */
+    Start int `json:"start"`
 
-    /* 跳转地址，matchAction为redirect时必须为当前实例下的域名的url，forbidden/status时为自定义页面名称  */
-    Redirection string `json:"redirection"`
+    /* 结束时间戳，单位秒，时间间隔要求大于5分钟，小于30天。  */
+    End int `json:"end"`
 
-    /* 条件集  */
-    Conditions []ConditionIdSet `json:"conditions"`
+    /* getTopN使用，area_top10/addr_top10/ua_top10
+ (Optional) */
+    ChartItems []string `json:"chartItems"`
 }
