@@ -28,13 +28,13 @@ type Product struct {
     /* 0：设备。设备不能挂载子设备。可以直连物联网平台，也可以作为网关的子设备连接物联网平台
 1：网关。网关可以挂载子设备，具有子设备管理模块，维持子设备的拓扑关系，和将拓扑关系同步到物联网平台
  (Optional) */
-    ProductType int `json:"productType"`
+    ProductType float32 `json:"productType"`
 
     /* 产品Key (Optional) */
     ProductKey string `json:"productKey"`
 
     /* 创建时间，创建时间，时间为东八区（UTC/GMT+08:00） (Optional) */
-    CreatedTime int64 `json:"createdTime"`
+    CreatedTime float32 `json:"createdTime"`
 
     /* 产品类型，如自定义等 (Optional) */
     TemplateName string `json:"templateName"`
