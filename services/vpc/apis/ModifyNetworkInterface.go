@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    vpc "github.com/jdcloud-api/jdcloud-sdk-go/services/vpc/models"
 )
 
 type ModifyNetworkInterfaceRequest struct {
@@ -41,6 +42,9 @@ type ModifyNetworkInterfaceRequest struct {
 
     /* 弹性网卡mac地址，不超过32字符 (Optional) */
     MacAddress *string `json:"macAddress"`
+
+    /* 网卡连接超时时间设置 (Optional) */
+    ConnectionTrackingConfiguration *vpc.NetworkInterfaceConnectionTrackingConfiguration `json:"connectionTrackingConfiguration"`
 }
 
 /*
@@ -73,6 +77,7 @@ func NewModifyNetworkInterfaceRequest(
  * param description: 描述,允许输入UTF-8编码下的全部字符，不超过256字符 (Optional)
  * param securityGroups: 以覆盖原有安全组的方式更新的安全组。如果更新安全组ID列表，最多5个安全组 (Optional)
  * param macAddress: 弹性网卡mac地址，不超过32字符 (Optional)
+ * param connectionTrackingConfiguration: 网卡连接超时时间设置 (Optional)
  */
 func NewModifyNetworkInterfaceRequestWithAllParams(
     regionId string,
@@ -81,6 +86,7 @@ func NewModifyNetworkInterfaceRequestWithAllParams(
     description *string,
     securityGroups []string,
     macAddress *string,
+    connectionTrackingConfiguration *vpc.NetworkInterfaceConnectionTrackingConfiguration,
 ) *ModifyNetworkInterfaceRequest {
 
     return &ModifyNetworkInterfaceRequest{
@@ -96,6 +102,7 @@ func NewModifyNetworkInterfaceRequestWithAllParams(
         Description: description,
         SecurityGroups: securityGroups,
         MacAddress: macAddress,
+        ConnectionTrackingConfiguration: connectionTrackingConfiguration,
     }
 }
 
@@ -135,6 +142,10 @@ func (r *ModifyNetworkInterfaceRequest) SetSecurityGroups(securityGroups []strin
 /* param macAddress: 弹性网卡mac地址，不超过32字符(Optional) */
 func (r *ModifyNetworkInterfaceRequest) SetMacAddress(macAddress string) {
     r.MacAddress = &macAddress
+}
+/* param connectionTrackingConfiguration: 网卡连接超时时间设置(Optional) */
+func (r *ModifyNetworkInterfaceRequest) SetConnectionTrackingConfiguration(connectionTrackingConfiguration *vpc.NetworkInterfaceConnectionTrackingConfiguration) {
+    r.ConnectionTrackingConfiguration = connectionTrackingConfiguration
 }
 
 

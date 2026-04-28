@@ -46,6 +46,9 @@ type CreateNetworkInterfaceRequest struct {
     /* 自动分配的SecondaryIp数量 (Optional) */
     SecondaryIpCount *int `json:"secondaryIpCount"`
 
+    /* SecondaryIp所在子网ID，不传默认使用网卡所在子网里分配 (Optional) */
+    SecondaryIpSubnetId *string `json:"secondaryIpSubnetId"`
+
     /* 要绑定的安全组ID列表，最多指定5个安全组 (Optional) */
     SecurityGroups []string `json:"securityGroups"`
 
@@ -63,6 +66,9 @@ type CreateNetworkInterfaceRequest struct {
 
     /* 资源所属资源组ID (Optional) */
     ResourceGroupId *string `json:"resourceGroupId"`
+
+    /* 网卡连接超时时间设置 (Optional) */
+    ConnectionTrackingConfiguration *vpc.NetworkInterfaceConnectionTrackingConfiguration `json:"connectionTrackingConfiguration"`
 }
 
 /*
@@ -96,12 +102,14 @@ func NewCreateNetworkInterfaceRequest(
  * param primaryIpAddress: 网卡主IP，如果不指定，会自动从子网中分配 (Optional)
  * param secondaryIpAddresses: SecondaryIp列表 (Optional)
  * param secondaryIpCount: 自动分配的SecondaryIp数量 (Optional)
+ * param secondaryIpSubnetId: SecondaryIp所在子网ID，不传默认使用网卡所在子网里分配 (Optional)
  * param securityGroups: 要绑定的安全组ID列表，最多指定5个安全组 (Optional)
  * param sanityCheck: 源和目标IP地址校验，取值为0或者1,默认为1 (Optional)
  * param description: 描述,​ 允许输入UTF-8编码下的全部字符，不超过256字符 (Optional)
  * param ipv6Addresses: ipv6地址列表 (Optional)
  * param userTags: 用户标签 (Optional)
  * param resourceGroupId: 资源所属资源组ID (Optional)
+ * param connectionTrackingConfiguration: 网卡连接超时时间设置 (Optional)
  */
 func NewCreateNetworkInterfaceRequestWithAllParams(
     regionId string,
@@ -111,12 +119,14 @@ func NewCreateNetworkInterfaceRequestWithAllParams(
     primaryIpAddress *string,
     secondaryIpAddresses []string,
     secondaryIpCount *int,
+    secondaryIpSubnetId *string,
     securityGroups []string,
     sanityCheck *int,
     description *string,
     ipv6Addresses []string,
     userTags []vpc.Tag,
     resourceGroupId *string,
+    connectionTrackingConfiguration *vpc.NetworkInterfaceConnectionTrackingConfiguration,
 ) *CreateNetworkInterfaceRequest {
 
     return &CreateNetworkInterfaceRequest{
@@ -133,12 +143,14 @@ func NewCreateNetworkInterfaceRequestWithAllParams(
         PrimaryIpAddress: primaryIpAddress,
         SecondaryIpAddresses: secondaryIpAddresses,
         SecondaryIpCount: secondaryIpCount,
+        SecondaryIpSubnetId: secondaryIpSubnetId,
         SecurityGroups: securityGroups,
         SanityCheck: sanityCheck,
         Description: description,
         Ipv6Addresses: ipv6Addresses,
         UserTags: userTags,
         ResourceGroupId: resourceGroupId,
+        ConnectionTrackingConfiguration: connectionTrackingConfiguration,
     }
 }
 
@@ -183,6 +195,10 @@ func (r *CreateNetworkInterfaceRequest) SetSecondaryIpAddresses(secondaryIpAddre
 func (r *CreateNetworkInterfaceRequest) SetSecondaryIpCount(secondaryIpCount int) {
     r.SecondaryIpCount = &secondaryIpCount
 }
+/* param secondaryIpSubnetId: SecondaryIp所在子网ID，不传默认使用网卡所在子网里分配(Optional) */
+func (r *CreateNetworkInterfaceRequest) SetSecondaryIpSubnetId(secondaryIpSubnetId string) {
+    r.SecondaryIpSubnetId = &secondaryIpSubnetId
+}
 /* param securityGroups: 要绑定的安全组ID列表，最多指定5个安全组(Optional) */
 func (r *CreateNetworkInterfaceRequest) SetSecurityGroups(securityGroups []string) {
     r.SecurityGroups = securityGroups
@@ -206,6 +222,10 @@ func (r *CreateNetworkInterfaceRequest) SetUserTags(userTags []vpc.Tag) {
 /* param resourceGroupId: 资源所属资源组ID(Optional) */
 func (r *CreateNetworkInterfaceRequest) SetResourceGroupId(resourceGroupId string) {
     r.ResourceGroupId = &resourceGroupId
+}
+/* param connectionTrackingConfiguration: 网卡连接超时时间设置(Optional) */
+func (r *CreateNetworkInterfaceRequest) SetConnectionTrackingConfiguration(connectionTrackingConfiguration *vpc.NetworkInterfaceConnectionTrackingConfiguration) {
+    r.ConnectionTrackingConfiguration = connectionTrackingConfiguration
 }
 
 

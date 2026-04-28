@@ -21,4 +21,13 @@ type PhySubnetInfos struct {
 
     /* 子网Id (Optional) */
     SubnetId string `json:"subnetId"`
+
+    /* 子网名字 (Optional) */
+    Name string `json:"name"`
+
+    /* 集群id (Optional) */
+    ClusterId string `json:"clusterId"`
+
+    /* 集群名字 (Optional) */
+    ClusterName string `json:"clusterName"`
 }

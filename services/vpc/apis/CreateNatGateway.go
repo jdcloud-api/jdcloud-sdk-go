@@ -35,6 +35,12 @@ type CreateNatGatewayRequest struct {
     /* NAT网关规格，取值small（100万并发连接数），medium（300万并发连接数），large（1000万并发连接数），默认small (Optional) */
     NatGatewaySpec *string `json:"natGatewaySpec"`
 
+    /* 创建的 NAT 网关类型，可不填，取值：
+- internet：公网 NAT 网关（默认值/不填时默认值）。
+- intranet：VPC NAT 网关。
+ (Optional) */
+    NetworkType *string `json:"networkType"`
+
     /* 私有网络ID  */
     VpcId string `json:"vpcId"`
 
@@ -44,7 +50,7 @@ type CreateNatGatewayRequest struct {
     /* NAT网关的可用区属性，即将废弃 (Optional) */
     AzIpSpecs []vpc.AzIpSpec `json:"azIpSpecs"`
 
-    /* NAT网关可用区 (Optional) */
+    /* NAT网关可用区，目前仅支持单个可用区（例如 ["cn-north-1a"]） (Optional) */
     Azs []string `json:"azs"`
 
     /* 选择已有公网IP列表。选择已有和新购公网IP可以同时配置，也可以配置其一 (Optional) */
@@ -56,7 +62,7 @@ type CreateNatGatewayRequest struct {
     /* 新购公网IP配置。NAT网关仅支持打包创建标准公网IP，不支持边缘公网IP。且标准公网IP仅支持按配置、按用量两种计费模式。 (Optional) */
     ElasticIpSpec *vpc.ElasticIpSpec `json:"elasticIpSpec"`
 
-    /* 计费配置，仅支持按配置，默认按配置 (Optional) */
+    /* 计费配置，公网 NAT 仅支持按配置，VPC NAT 仅支持按用量，默认按配置 (Optional) */
     NatGatewayCharge *charge.ChargeSpec `json:"natGatewayCharge"`
 
     /* 描述, 允许输入UTF-8编码下的全部字符，不超过256字符 (Optional) */
@@ -67,6 +73,9 @@ type CreateNatGatewayRequest struct {
 
     /* 资源所属资源组ID (Optional) */
     ResourceGroupId *string `json:"resourceGroupId"`
+
+    /* 物理资源专区, 仅内部使用[JDStack] (Optional) */
+    ResourceTag *string `json:"resourceTag"`
 }
 
 /*
@@ -102,22 +111,28 @@ func NewCreateNatGatewayRequest(
  * param regionId: Region ID (Required)
  * param natGatewayName: NAT网关名称 (Required)
  * param natGatewaySpec: NAT网关规格，取值small（100万并发连接数），medium（300万并发连接数），large（1000万并发连接数），默认small (Optional)
+ * param networkType: 创建的 NAT 网关类型，可不填，取值：
+- internet：公网 NAT 网关（默认值/不填时默认值）。
+- intranet：VPC NAT 网关。
+ (Optional)
  * param vpcId: 私有网络ID (Required)
  * param subnetId: 子网ID (Required)
  * param azIpSpecs: NAT网关的可用区属性，即将废弃 (Optional)
- * param azs: NAT网关可用区 (Optional)
+ * param azs: NAT网关可用区，目前仅支持单个可用区（例如 ["cn-north-1a"]） (Optional)
  * param elasticIpIds: 选择已有公网IP列表。选择已有和新购公网IP可以同时配置，也可以配置其一 (Optional)
  * param elasticIpCount: 新购公网IP数量 (Optional)
  * param elasticIpSpec: 新购公网IP配置。NAT网关仅支持打包创建标准公网IP，不支持边缘公网IP。且标准公网IP仅支持按配置、按用量两种计费模式。 (Optional)
- * param natGatewayCharge: 计费配置，仅支持按配置，默认按配置 (Optional)
+ * param natGatewayCharge: 计费配置，公网 NAT 仅支持按配置，VPC NAT 仅支持按用量，默认按配置 (Optional)
  * param description: 描述, 允许输入UTF-8编码下的全部字符，不超过256字符 (Optional)
  * param userTags: 用户标签 (Optional)
  * param resourceGroupId: 资源所属资源组ID (Optional)
+ * param resourceTag: 物理资源专区, 仅内部使用[JDStack] (Optional)
  */
 func NewCreateNatGatewayRequestWithAllParams(
     regionId string,
     natGatewayName string,
     natGatewaySpec *string,
+    networkType *string,
     vpcId string,
     subnetId string,
     azIpSpecs []vpc.AzIpSpec,
@@ -129,6 +144,7 @@ func NewCreateNatGatewayRequestWithAllParams(
     description *string,
     userTags []vpc.Tag,
     resourceGroupId *string,
+    resourceTag *string,
 ) *CreateNatGatewayRequest {
 
     return &CreateNatGatewayRequest{
@@ -141,6 +157,7 @@ func NewCreateNatGatewayRequestWithAllParams(
         RegionId: regionId,
         NatGatewayName: natGatewayName,
         NatGatewaySpec: natGatewaySpec,
+        NetworkType: networkType,
         VpcId: vpcId,
         SubnetId: subnetId,
         AzIpSpecs: azIpSpecs,
@@ -152,6 +169,7 @@ func NewCreateNatGatewayRequestWithAllParams(
         Description: description,
         UserTags: userTags,
         ResourceGroupId: resourceGroupId,
+        ResourceTag: resourceTag,
     }
 }
 
@@ -180,6 +198,13 @@ func (r *CreateNatGatewayRequest) SetNatGatewayName(natGatewayName string) {
 func (r *CreateNatGatewayRequest) SetNatGatewaySpec(natGatewaySpec string) {
     r.NatGatewaySpec = &natGatewaySpec
 }
+/* param networkType: 创建的 NAT 网关类型，可不填，取值：
+- internet：公网 NAT 网关（默认值/不填时默认值）。
+- intranet：VPC NAT 网关。
+(Optional) */
+func (r *CreateNatGatewayRequest) SetNetworkType(networkType string) {
+    r.NetworkType = &networkType
+}
 /* param vpcId: 私有网络ID(Required) */
 func (r *CreateNatGatewayRequest) SetVpcId(vpcId string) {
     r.VpcId = vpcId
@@ -192,7 +217,7 @@ func (r *CreateNatGatewayRequest) SetSubnetId(subnetId string) {
 func (r *CreateNatGatewayRequest) SetAzIpSpecs(azIpSpecs []vpc.AzIpSpec) {
     r.AzIpSpecs = azIpSpecs
 }
-/* param azs: NAT网关可用区(Optional) */
+/* param azs: NAT网关可用区，目前仅支持单个可用区（例如 ["cn-north-1a"]）(Optional) */
 func (r *CreateNatGatewayRequest) SetAzs(azs []string) {
     r.Azs = azs
 }
@@ -208,7 +233,7 @@ func (r *CreateNatGatewayRequest) SetElasticIpCount(elasticIpCount int) {
 func (r *CreateNatGatewayRequest) SetElasticIpSpec(elasticIpSpec *vpc.ElasticIpSpec) {
     r.ElasticIpSpec = elasticIpSpec
 }
-/* param natGatewayCharge: 计费配置，仅支持按配置，默认按配置(Optional) */
+/* param natGatewayCharge: 计费配置，公网 NAT 仅支持按配置，VPC NAT 仅支持按用量，默认按配置(Optional) */
 func (r *CreateNatGatewayRequest) SetNatGatewayCharge(natGatewayCharge *charge.ChargeSpec) {
     r.NatGatewayCharge = natGatewayCharge
 }
@@ -223,6 +248,10 @@ func (r *CreateNatGatewayRequest) SetUserTags(userTags []vpc.Tag) {
 /* param resourceGroupId: 资源所属资源组ID(Optional) */
 func (r *CreateNatGatewayRequest) SetResourceGroupId(resourceGroupId string) {
     r.ResourceGroupId = &resourceGroupId
+}
+/* param resourceTag: 物理资源专区, 仅内部使用[JDStack](Optional) */
+func (r *CreateNatGatewayRequest) SetResourceTag(resourceTag string) {
+    r.ResourceTag = &resourceTag
 }
 
 

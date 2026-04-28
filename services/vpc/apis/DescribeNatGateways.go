@@ -40,8 +40,10 @@ natGatewayNames - NAT网关名称列表，支持多个
 natGatewayPublicIp - NAT网关公网IP，支持单个，即将废弃，请使用elasticIpAddress
 elasticIpAddress - 公网IP，支持单个
 natGatewayPrivateIp - NAT网关私网IP，支持单个
+networkType - NAT网关网络类型，支持单个，不填时默认同时查询公网NAT网关和VPC NAT网关，取值范围：internet（公网NAT网关），intranet（VPC NAT网关） 
 vpcId - NAT网关所属VPC ID，支持单个
 subnetId - NAT网关所属子网ID，支持单个
+resourceTag - 物理资源专区，支持单个[JDStack]
  (Optional) */
     Filters []common.Filter `json:"filters"`
 
@@ -81,8 +83,10 @@ natGatewayNames - NAT网关名称列表，支持多个
 natGatewayPublicIp - NAT网关公网IP，支持单个，即将废弃，请使用elasticIpAddress
 elasticIpAddress - 公网IP，支持单个
 natGatewayPrivateIp - NAT网关私网IP，支持单个
+networkType - NAT网关网络类型，支持单个，不填时默认同时查询公网NAT网关和VPC NAT网关，取值范围：internet（公网NAT网关），intranet（VPC NAT网关） 
 vpcId - NAT网关所属VPC ID，支持单个
 subnetId - NAT网关所属子网ID，支持单个
+resourceTag - 物理资源专区，支持单个[JDStack]
  (Optional)
  * param tags: Tag筛选条件 (Optional)
  * param resourceGroupIds: 资源组筛选条件 (Optional)
@@ -142,8 +146,10 @@ natGatewayNames - NAT网关名称列表，支持多个
 natGatewayPublicIp - NAT网关公网IP，支持单个，即将废弃，请使用elasticIpAddress
 elasticIpAddress - 公网IP，支持单个
 natGatewayPrivateIp - NAT网关私网IP，支持单个
+networkType - NAT网关网络类型，支持单个，不填时默认同时查询公网NAT网关和VPC NAT网关，取值范围：internet（公网NAT网关），intranet（VPC NAT网关） 
 vpcId - NAT网关所属VPC ID，支持单个
 subnetId - NAT网关所属子网ID，支持单个
+resourceTag - 物理资源专区，支持单个[JDStack]
 (Optional) */
 func (r *DescribeNatGatewaysRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters

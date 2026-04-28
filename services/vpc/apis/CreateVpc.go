@@ -42,6 +42,9 @@ type CreateVpcRequest struct {
 
     /* 资源所属资源组ID (Optional) */
     ResourceGroupId *string `json:"resourceGroupId"`
+
+    /* 物理资源专区, 仅内部使用[JDStack] (Optional) */
+    ResourceTag *string `json:"resourceTag"`
 }
 
 /*
@@ -74,6 +77,7 @@ func NewCreateVpcRequest(
  * param description: vpc描述，允许输入UTF-8编码下的全部字符，不超过256字符。 (Optional)
  * param userTags: 用户标签 (Optional)
  * param resourceGroupId: 资源所属资源组ID (Optional)
+ * param resourceTag: 物理资源专区, 仅内部使用[JDStack] (Optional)
  */
 func NewCreateVpcRequestWithAllParams(
     regionId string,
@@ -82,6 +86,7 @@ func NewCreateVpcRequestWithAllParams(
     description *string,
     userTags []vpc.Tag,
     resourceGroupId *string,
+    resourceTag *string,
 ) *CreateVpcRequest {
 
     return &CreateVpcRequest{
@@ -97,6 +102,7 @@ func NewCreateVpcRequestWithAllParams(
         Description: description,
         UserTags: userTags,
         ResourceGroupId: resourceGroupId,
+        ResourceTag: resourceTag,
     }
 }
 
@@ -136,6 +142,10 @@ func (r *CreateVpcRequest) SetUserTags(userTags []vpc.Tag) {
 /* param resourceGroupId: 资源所属资源组ID(Optional) */
 func (r *CreateVpcRequest) SetResourceGroupId(resourceGroupId string) {
     r.ResourceGroupId = &resourceGroupId
+}
+/* param resourceTag: 物理资源专区, 仅内部使用[JDStack](Optional) */
+func (r *CreateVpcRequest) SetResourceTag(resourceTag string) {
+    r.ResourceTag = &resourceTag
 }
 
 

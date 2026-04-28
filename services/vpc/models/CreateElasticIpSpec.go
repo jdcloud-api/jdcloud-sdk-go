@@ -43,6 +43,9 @@ type CreateElasticIpSpec struct {
     /* 资源所属资源组ID (Optional) */
     ResourceGroupId string `json:"resourceGroupId"`
 
+    /* 物理资源专区, 仅内部使用[JDStack] (Optional) */
+    ResourceTag string `json:"resourceTag"`
+
     /* 预检标识，默认false，dryRun为true时只作检查，不做变更 (Optional) */
     DryRun bool `json:"dryRun"`
 }

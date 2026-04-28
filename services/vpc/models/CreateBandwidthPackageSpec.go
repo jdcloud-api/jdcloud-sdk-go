@@ -39,6 +39,9 @@ chargeMode=postpaid_by_usage，范围支持200～5000
     /* 线路信息，默认bgp，可以通过describeUserProviders接口获取 (Optional) */
     Provider string `json:"provider"`
 
+    /* 共享带宽包类型，取值：standard(标准带宽包)，edge(边缘带宽包)，默认取值为standard，需与 provider 的 providerType 一致 (Optional) */
+    BandwidthPackageType string `json:"bandwidthPackageType"`
+
     /* 计费配置。支持包年包月、按配置、按用量计费模式 (Optional) */
     ChargeSpec charge.ChargeSpec `json:"chargeSpec"`
 

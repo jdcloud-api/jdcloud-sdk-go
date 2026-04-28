@@ -58,7 +58,10 @@ type NetworkInterface struct {
     /* 网卡附属IP网段 (Optional) */
     SecondaryCidrs []string `json:"secondaryCidrs"`
 
-    /* 关联实例类型，取值范围：vm (Optional) */
+    /* 网卡附属IP网段 (Optional) */
+    SecondaryCidrsEx []NetworkInterfaceCidr `json:"secondaryCidrsEx"`
+
+    /* 关联实例类型，取值范围：compute、lb、container、pod (Optional) */
     InstanceType string `json:"instanceType"`
 
     /* 关联实例ID (Optional) */
@@ -87,4 +90,7 @@ type NetworkInterface struct {
 
     /* 资源所属资源组ID (Optional) */
     ResourceGroupId string `json:"resourceGroupId"`
+
+    /* 弹性网卡的连接超时时间配置 (Optional) */
+    ConnectionTrackingConfiguration NetworkInterfaceConnectionTrackingConfiguration `json:"connectionTrackingConfiguration"`
 }

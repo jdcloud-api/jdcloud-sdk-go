@@ -37,6 +37,8 @@ type DescribeBandwidthPackagesRequest struct {
 
     /* bwpIds - 共享带宽包ID，支持多个进行精确搜索
 name - 共享带宽包名称，支持单个进行精确搜索
+bandwidthPackageType - 共享带宽包类型，standard(中心)，edge(边缘)，支持单个进行精确搜索，默认查询全部
+azs - 带宽包的边缘可用区，支持多个进行精确搜索
  (Optional) */
     Filters []common.Filter `json:"filters"`
 
@@ -73,6 +75,8 @@ func NewDescribeBandwidthPackagesRequest(
  * param pageSize: 分页大小，默认为20，取值范围为[10,100] (Optional)
  * param filters: bwpIds - 共享带宽包ID，支持多个进行精确搜索
 name - 共享带宽包名称，支持单个进行精确搜索
+bandwidthPackageType - 共享带宽包类型，standard(中心)，edge(边缘)，支持单个进行精确搜索，默认查询全部
+azs - 带宽包的边缘可用区，支持多个进行精确搜索
  (Optional)
  * param tags: Tag筛选条件 (Optional)
  * param resourceGroupIds: 资源组筛选条件 (Optional)
@@ -129,6 +133,8 @@ func (r *DescribeBandwidthPackagesRequest) SetPageSize(pageSize int) {
 }
 /* param filters: bwpIds - 共享带宽包ID，支持多个进行精确搜索
 name - 共享带宽包名称，支持单个进行精确搜索
+bandwidthPackageType - 共享带宽包类型，standard(中心)，edge(边缘)，支持单个进行精确搜索，默认查询全部
+azs - 带宽包的边缘可用区，支持多个进行精确搜索
 (Optional) */
 func (r *DescribeBandwidthPackagesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters

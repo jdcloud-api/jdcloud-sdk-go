@@ -63,6 +63,12 @@ type CreateSubnetRequest struct {
 
     /* 资源所属资源组ID (Optional) */
     ResourceGroupId *string `json:"resourceGroupId"`
+
+    /* 子网类型 hpc:智算,normal:普通(默认) (Optional) */
+    Type *string `json:"type"`
+
+    /* 子网所属hpc集群id（type=hpc必填） (Optional) */
+    HpcClusterId *string `json:"hpcClusterId"`
 }
 
 /*
@@ -108,6 +114,8 @@ func NewCreateSubnetRequest(
  * param dryRun: 是否只预检此次请求。true：不会创建子网，只会对参数进行校验；false：正常的创建请求。默认为false。 (Optional)
  * param userTags: 用户标签 (Optional)
  * param resourceGroupId: 资源所属资源组ID (Optional)
+ * param type_: 子网类型 hpc:智算,normal:普通(默认) (Optional)
+ * param hpcClusterId: 子网所属hpc集群id（type=hpc必填） (Optional)
  */
 func NewCreateSubnetRequestWithAllParams(
     regionId string,
@@ -123,6 +131,8 @@ func NewCreateSubnetRequestWithAllParams(
     dryRun *bool,
     userTags []vpc.Tag,
     resourceGroupId *string,
+    type_ *string,
+    hpcClusterId *string,
 ) *CreateSubnetRequest {
 
     return &CreateSubnetRequest{
@@ -145,6 +155,8 @@ func NewCreateSubnetRequestWithAllParams(
         DryRun: dryRun,
         UserTags: userTags,
         ResourceGroupId: resourceGroupId,
+        Type: type_,
+        HpcClusterId: hpcClusterId,
     }
 }
 
@@ -212,6 +224,14 @@ func (r *CreateSubnetRequest) SetUserTags(userTags []vpc.Tag) {
 /* param resourceGroupId: 资源所属资源组ID(Optional) */
 func (r *CreateSubnetRequest) SetResourceGroupId(resourceGroupId string) {
     r.ResourceGroupId = &resourceGroupId
+}
+/* param type_: 子网类型 hpc:智算,normal:普通(默认)(Optional) */
+func (r *CreateSubnetRequest) SetType(type_ string) {
+    r.Type = &type_
+}
+/* param hpcClusterId: 子网所属hpc集群id（type=hpc必填）(Optional) */
+func (r *CreateSubnetRequest) SetHpcClusterId(hpcClusterId string) {
+    r.HpcClusterId = &hpcClusterId
 }
 
 

@@ -44,6 +44,9 @@ type AssignSecondaryIpsRequest struct {
 
     /* 指定分配的网段中第一个secondaryIp地址，不能与secondaryIpCount或secondaryIps同时指定，secondaryIpAddress与secondaryIpMaskLen需要保持一致，否则无法创建 (Optional) */
     SecondaryIpAddress *string `json:"secondaryIpAddress"`
+
+    /* SecondaryIp所在子网ID，不传默认使用网卡所在子网里分配 (Optional) */
+    SecondaryIpSubnetId *string `json:"secondaryIpSubnetId"`
 }
 
 /*
@@ -77,6 +80,7 @@ func NewAssignSecondaryIpsRequest(
  * param secondaryIpCount: 指定自动分配的secondaryIp个数 (Optional)
  * param secondaryIpMaskLen: 指定分配的网段掩码长度, 支持24-28位掩码长度，不能与secondaryIpCount或secondaryIps同时指定，不支持抢占重分配 (Optional)
  * param secondaryIpAddress: 指定分配的网段中第一个secondaryIp地址，不能与secondaryIpCount或secondaryIps同时指定，secondaryIpAddress与secondaryIpMaskLen需要保持一致，否则无法创建 (Optional)
+ * param secondaryIpSubnetId: SecondaryIp所在子网ID，不传默认使用网卡所在子网里分配 (Optional)
  */
 func NewAssignSecondaryIpsRequestWithAllParams(
     regionId string,
@@ -86,6 +90,7 @@ func NewAssignSecondaryIpsRequestWithAllParams(
     secondaryIpCount *int,
     secondaryIpMaskLen *int,
     secondaryIpAddress *string,
+    secondaryIpSubnetId *string,
 ) *AssignSecondaryIpsRequest {
 
     return &AssignSecondaryIpsRequest{
@@ -102,6 +107,7 @@ func NewAssignSecondaryIpsRequestWithAllParams(
         SecondaryIpCount: secondaryIpCount,
         SecondaryIpMaskLen: secondaryIpMaskLen,
         SecondaryIpAddress: secondaryIpAddress,
+        SecondaryIpSubnetId: secondaryIpSubnetId,
     }
 }
 
@@ -145,6 +151,10 @@ func (r *AssignSecondaryIpsRequest) SetSecondaryIpMaskLen(secondaryIpMaskLen int
 /* param secondaryIpAddress: 指定分配的网段中第一个secondaryIp地址，不能与secondaryIpCount或secondaryIps同时指定，secondaryIpAddress与secondaryIpMaskLen需要保持一致，否则无法创建(Optional) */
 func (r *AssignSecondaryIpsRequest) SetSecondaryIpAddress(secondaryIpAddress string) {
     r.SecondaryIpAddress = &secondaryIpAddress
+}
+/* param secondaryIpSubnetId: SecondaryIp所在子网ID，不传默认使用网卡所在子网里分配(Optional) */
+func (r *AssignSecondaryIpsRequest) SetSecondaryIpSubnetId(secondaryIpSubnetId string) {
+    r.SecondaryIpSubnetId = &secondaryIpSubnetId
 }
 
 

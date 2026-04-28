@@ -37,6 +37,9 @@ type NetworkInterfaceSpec struct {
     /* 自动分配的SecondaryIp数量 (Optional) */
     SecondaryIpCount int `json:"secondaryIpCount"`
 
+    /* SecondaryIp所在子网ID，不传默认使用网卡所在子网里分配 (Optional) */
+    SecondaryIpSubnetId string `json:"secondaryIpSubnetId"`
+
     /* 要绑定的安全组ID列表，最多指定5个安全组 (Optional) */
     SecurityGroups []string `json:"securityGroups"`
 
@@ -51,4 +54,7 @@ type NetworkInterfaceSpec struct {
 
     /* 资源所属资源组ID (Optional) */
     ResourceGroupId string `json:"resourceGroupId"`
+
+    /* 网卡连接超时时间设置 (Optional) */
+    ConnectionTrackingConfiguration NetworkInterfaceConnectionTrackingConfiguration `json:"connectionTrackingConfiguration"`
 }

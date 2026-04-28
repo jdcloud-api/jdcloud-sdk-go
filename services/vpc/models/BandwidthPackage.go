@@ -59,6 +59,12 @@ type BandwidthPackage struct {
     /* 是否欠费停服，UP正常，DOWN停服，PROCESSING处理中 (Optional) */
     AdminStatus string `json:"adminStatus"`
 
+    /* 带宽包的可用区属性，如果为空，表示全部中心可用区 (Optional) */
+    Az string `json:"az"`
+
+    /* 共享带宽包类型，取值：standard(标准共享带宽包)，edge(边缘共享带宽包) (Optional) */
+    BandwidthPackageType string `json:"bandwidthPackageType"`
+
     /* Tag信息 (Optional) */
     Tags []Tag `json:"tags"`
 

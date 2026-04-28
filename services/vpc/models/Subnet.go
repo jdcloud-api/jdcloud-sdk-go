@@ -78,4 +78,10 @@ type Subnet struct {
 
     /* 资源所属资源组ID (Optional) */
     ResourceGroupId string `json:"resourceGroupId"`
+
+    /* 子网类型（hpc:智算,normal:普通） (Optional) */
+    Type string `json:"type"`
+
+    /* 子网所属hpc集群id (Optional) */
+    HpcClusterId string `json:"hpcClusterId"`
 }

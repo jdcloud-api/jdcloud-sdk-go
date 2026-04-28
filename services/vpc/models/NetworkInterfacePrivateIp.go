@@ -27,4 +27,7 @@ type NetworkInterfacePrivateIp struct {
 
     /* 弹性IP实例地址 (Optional) */
     ElasticIpAddress string `json:"elasticIpAddress"`
+
+    /* ip所在子网ID (Optional) */
+    SubnetId string `json:"subnetId"`
 }

@@ -34,6 +34,9 @@ type NetworkOperator struct {
     /* 包年包月/按配置计费项 (Optional) */
     BillItem string `json:"billItem"`
 
+    /* 带宽包计费相关信息 (Optional) */
+    BwpCharge BwpCharge `json:"bwpCharge"`
+
     /* 网络底层的provider (Optional) */
     CcProvider string `json:"ccProvider"`
 

@@ -52,6 +52,9 @@ type CreateElasticIpsRequest struct {
     /* 资源所属资源组ID (Optional) */
     ResourceGroupId *string `json:"resourceGroupId"`
 
+    /* 物理资源专区, 仅内部使用[JDStack] (Optional) */
+    ResourceTag *string `json:"resourceTag"`
+
     /* 预检标识，默认false，dryRun为true时只作检查，不做变更 (Optional) */
     DryRun *bool `json:"dryRun"`
 }
@@ -92,6 +95,7 @@ func NewCreateElasticIpsRequest(
  * param userTags: 用户标签 (Optional)
  * param ipType: 弹性ip类型，取值：standard(标准公网IP)，edge(边缘公网IP)，默认为standard (Optional)
  * param resourceGroupId: 资源所属资源组ID (Optional)
+ * param resourceTag: 物理资源专区, 仅内部使用[JDStack] (Optional)
  * param dryRun: 预检标识，默认false，dryRun为true时只作检查，不做变更 (Optional)
  */
 func NewCreateElasticIpsRequestWithAllParams(
@@ -104,6 +108,7 @@ func NewCreateElasticIpsRequestWithAllParams(
     userTags []vpc.Tag,
     ipType *string,
     resourceGroupId *string,
+    resourceTag *string,
     dryRun *bool,
 ) *CreateElasticIpsRequest {
 
@@ -123,6 +128,7 @@ func NewCreateElasticIpsRequestWithAllParams(
         UserTags: userTags,
         IpType: ipType,
         ResourceGroupId: resourceGroupId,
+        ResourceTag: resourceTag,
         DryRun: dryRun,
     }
 }
@@ -175,6 +181,10 @@ func (r *CreateElasticIpsRequest) SetIpType(ipType string) {
 /* param resourceGroupId: 资源所属资源组ID(Optional) */
 func (r *CreateElasticIpsRequest) SetResourceGroupId(resourceGroupId string) {
     r.ResourceGroupId = &resourceGroupId
+}
+/* param resourceTag: 物理资源专区, 仅内部使用[JDStack](Optional) */
+func (r *CreateElasticIpsRequest) SetResourceTag(resourceTag string) {
+    r.ResourceTag = &resourceTag
 }
 /* param dryRun: 预检标识，默认false，dryRun为true时只作检查，不做变更(Optional) */
 func (r *CreateElasticIpsRequest) SetDryRun(dryRun bool) {

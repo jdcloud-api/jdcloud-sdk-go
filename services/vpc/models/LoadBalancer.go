@@ -24,4 +24,10 @@ type LoadBalancer struct {
 
     /* loadBalancer的名称 (Optional) */
     LoadBalancerName string `json:"loadBalancerName"`
+
+    /* loadBalancer所在的az，中心为""，边缘为对应az (Optional) */
+    LoadBalancerAz string `json:"loadBalancerAz"`
+
+    /* loadBalancer所在的az类型，中心为standard，边缘为edge (Optional) */
+    LoadBalancerAzType string `json:"loadBalancerAzType"`
 }

@@ -29,6 +29,12 @@ type NatGateway struct {
     /* NAT网关规格，取值small（100万并发连接数），medium（300万并发连接数），large（1000万并发连接数） (Optional) */
     NatGatewaySpec string `json:"natGatewaySpec"`
 
+    /* NAT 网关类型，取值：
+- internet：公网 NAT 网关（默认值）。
+- intranet：VPC NAT 网关。
+ (Optional) */
+    NetworkType string `json:"networkType"`
+
     /* NAT网关的状态 (Optional) */
     State NatGatewayState `json:"state"`
 
@@ -52,6 +58,9 @@ type NatGateway struct {
 
     /* NAT网关公网IP (Optional) */
     ElasticIps []NatGatewayElasticIp `json:"elasticIps"`
+
+    /* NAT网关 NAT IP 列表 (Optional) */
+    NatIps []NatGatewayNatIp `json:"natIps"`
 
     /* NAT网关创建时间 (Optional) */
     CreatedTime string `json:"createdTime"`

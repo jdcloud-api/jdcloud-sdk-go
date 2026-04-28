@@ -33,4 +33,7 @@ type AssignSecondaryIpsSpec struct {
 
     /* 指定分配的网段中第一个secondaryIp地址，不能与secondaryIpCount或secondaryIps同时指定，secondaryIpAddress与secondaryIpMaskLen需要保持一致，否则无法创建 (Optional) */
     SecondaryIpAddress string `json:"secondaryIpAddress"`
+
+    /* SecondaryIp所在子网ID，不传默认使用网卡所在子网里分配 (Optional) */
+    SecondaryIpSubnetId string `json:"secondaryIpSubnetId"`
 }

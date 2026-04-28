@@ -36,4 +36,7 @@ type IpInfos struct {
 
     /* IP绑定模式，取值：STANDARD（标准模式，EIP绑定网卡后在OS中不可见）、EIP_VISIBLE（EIP网卡可见模式，EIP绑定网卡后在OS中可见） (Optional) */
     BindMode string `json:"bindMode"`
+
+    /* 内网IP地址所在子网ID (Optional) */
+    SubnetId string `json:"subnetId"`
 }
