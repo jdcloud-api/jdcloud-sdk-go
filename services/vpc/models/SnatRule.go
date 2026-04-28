@@ -25,8 +25,12 @@ type SnatRule struct {
     /* SNAT 规则描述 (Optional) */
     Description string `json:"description"`
 
-    /* SNAT规则的公网IP地址 (Optional) */
+    /* SNAT规则的公网IP地址[废弃，请使用snatIpAddresses] (Optional) */
     SnatElasticIpAddresses []string `json:"snatElasticIpAddresses"`
+
+    /* NAT 网关 SNAT 规则时的 NAT IP 地址（兼容 EIP 或 NAT IP）
+ (Optional) */
+    SnatIpAddresses []string `json:"snatIpAddresses"`
 
     /* SNAT 规则的源网段，如子网或云主机实例的网段  */
     SourceCidr string `json:"sourceCidr"`
@@ -34,8 +38,14 @@ type SnatRule struct {
     /* 如果匹配上子网，输出该sourceCidr对应的子网 (Optional) */
     SubnetId string `json:"subnetId"`
 
-    /* SNAT 规则状态（ ENALBE - 启用； DISABLE - 禁用） (Optional) */
+    /* SNAT 规则状态（ ENABLE - 启用； DISABLE - 禁用） (Optional) */
     SnatRuleStatus string `json:"snatRuleStatus"`
+
+    /* 按照运营商智能调度出口ip（ENABLE - 启用； DISABLE - 禁用） (Optional) */
+    IntelliDstISP string `json:"intelliDstISP"`
+
+    /* 出口ip保持（ENABLE - 启用； DISABLE - 禁用） (Optional) */
+    IpAffinity string `json:"ipAffinity"`
 
     /* SNAT 规则类型（ SYSTEM - 系统创建的； USER - 用户自定义的） (Optional) */
     SnatRuleType string `json:"snatRuleType"`

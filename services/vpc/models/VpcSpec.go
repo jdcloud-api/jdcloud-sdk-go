@@ -33,4 +33,7 @@ type VpcSpec struct {
 
     /* 资源所属资源组ID (Optional) */
     ResourceGroupId string `json:"resourceGroupId"`
+
+    /* 物理资源专区, 仅内部使用[JDStack] (Optional) */
+    ResourceTag string `json:"resourceTag"`
 }

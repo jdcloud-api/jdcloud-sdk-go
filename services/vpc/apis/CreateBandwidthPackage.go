@@ -48,6 +48,9 @@ chargeMode=postpaid_by_usage，范围支持200～5000
     /* 线路信息，默认bgp，可以通过describeUserProviders接口获取 (Optional) */
     Provider *string `json:"provider"`
 
+    /* 共享带宽包类型，取值：standard(标准带宽包)，edge(边缘带宽包)，默认取值为standard，需与 provider 的 providerType 一致 (Optional) */
+    BandwidthPackageType *string `json:"bandwidthPackageType"`
+
     /* 计费配置。支持包年包月、按配置、按用量计费模式 (Optional) */
     ChargeSpec *charge.ChargeSpec `json:"chargeSpec"`
 
@@ -99,6 +102,7 @@ chargeMode=postpaid_by_usage，范围支持200～5000
  (Required)
  * param chargeType: 按用量计费类型，当chargeSpec为按用量时有效，0代表按增强95，1代表按95消峰，2代表按主流量计费，缺省不填写时为增强95 (Optional)
  * param provider: 线路信息，默认bgp，可以通过describeUserProviders接口获取 (Optional)
+ * param bandwidthPackageType: 共享带宽包类型，取值：standard(标准带宽包)，edge(边缘带宽包)，默认取值为standard，需与 provider 的 providerType 一致 (Optional)
  * param chargeSpec: 计费配置。支持包年包月、按配置、按用量计费模式 (Optional)
  * param userTags: 用户标签 (Optional)
  * param resourceGroupId: 资源所属资源组ID (Optional)
@@ -110,6 +114,7 @@ func NewCreateBandwidthPackageRequestWithAllParams(
     bandwidthMbps int,
     chargeType *int,
     provider *string,
+    bandwidthPackageType *string,
     chargeSpec *charge.ChargeSpec,
     userTags []vpc.Tag,
     resourceGroupId *string,
@@ -128,6 +133,7 @@ func NewCreateBandwidthPackageRequestWithAllParams(
         BandwidthMbps: bandwidthMbps,
         ChargeType: chargeType,
         Provider: provider,
+        BandwidthPackageType: bandwidthPackageType,
         ChargeSpec: chargeSpec,
         UserTags: userTags,
         ResourceGroupId: resourceGroupId,
@@ -174,6 +180,10 @@ func (r *CreateBandwidthPackageRequest) SetChargeType(chargeType int) {
 /* param provider: 线路信息，默认bgp，可以通过describeUserProviders接口获取(Optional) */
 func (r *CreateBandwidthPackageRequest) SetProvider(provider string) {
     r.Provider = &provider
+}
+/* param bandwidthPackageType: 共享带宽包类型，取值：standard(标准带宽包)，edge(边缘带宽包)，默认取值为standard，需与 provider 的 providerType 一致(Optional) */
+func (r *CreateBandwidthPackageRequest) SetBandwidthPackageType(bandwidthPackageType string) {
+    r.BandwidthPackageType = &bandwidthPackageType
 }
 /* param chargeSpec: 计费配置。支持包年包月、按配置、按用量计费模式(Optional) */
 func (r *CreateBandwidthPackageRequest) SetChargeSpec(chargeSpec *charge.ChargeSpec) {

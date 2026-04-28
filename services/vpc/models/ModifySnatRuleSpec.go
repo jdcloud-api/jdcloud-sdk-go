@@ -19,12 +19,30 @@ package models
 
 type ModifySnatRuleSpec struct {
 
-    /* SNAT 规则ID，系统规则不允许编辑  */
+    /* SNAT 规则ID，系统规则仅支持修改intelliDstISP和ipAffinity  */
     SnatRuleId string `json:"snatRuleId"`
 
     /* SNAT 规则描述，允许输入UTF-8编码下的全部字符，不超过256字符 (Optional) */
     Description string `json:"description"`
 
-    /* SNAT规则的公网IP地址，支持多个且须为 NAT网关绑定的公网IP (Optional) */
+    /* 【已废弃，请使用 snatIpAddresses】SNAT规则的公网IP地址列表。
+为了向后兼容暂时保留，但不建议在新项目中使用。
+注意：IP地址必须为NAT网关已绑定的公网IP。
+与 snatIpAddresses 参数互斥，两者至少提供一个。
+如果同时提供，优先使用 snatIpAddresses。
+ (Optional) */
     SnatElasticIpAddresses []string `json:"snatElasticIpAddresses"`
+
+    /* SNAT规则的IP地址列表（推荐）。
+支持多个IP地址，必须为NAT网关已关联的公网IP或NAT IP地址。
+与 snatElasticIpAddresses 参数互斥，两者至少提供一个。
+如果同时提供，优先使用本参数。
+ (Optional) */
+    SnatIpAddresses []string `json:"snatIpAddresses"`
+
+    /* 按照运营商智能调度出口ip（ENABLE - 启用； DISABLE - 禁用） (Optional) */
+    IntelliDstISP string `json:"intelliDstISP"`
+
+    /* 出口ip保持（ENABLE - 启用； DISABLE - 禁用） (Optional) */
+    IpAffinity string `json:"ipAffinity"`
 }

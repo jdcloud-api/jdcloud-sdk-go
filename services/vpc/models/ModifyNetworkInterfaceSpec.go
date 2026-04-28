@@ -30,4 +30,7 @@ type ModifyNetworkInterfaceSpec struct {
 
     /* 弹性网卡mac地址，不超过32字符 (Optional) */
     MacAddress string `json:"macAddress"`
+
+    /* 网卡连接超时时间设置 (Optional) */
+    ConnectionTrackingConfiguration NetworkInterfaceConnectionTrackingConfiguration `json:"connectionTrackingConfiguration"`
 }

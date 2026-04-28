@@ -42,6 +42,12 @@ type DescribeNetworkSecurityGroupRulesRequest struct {
 directions - SecurityGroup direction 方向列表，支持多个("0"代表ingress,"1"代表egress)
 ruleActions - SecurityGroup rule行为列表，支持多个(ALLOW,DENY)
 ruleTypes - SecurityGroup rule 所属类型列表，支持多个(default,custom)
+prioritys - 规则匹配优先级，支持多个
+protocols  - 规则限定协议，300:All; 6:TCP; 17:UDP; 1:ICMP，支持多个
+fromPort  - 规则限定起始传输层端口，支持单个，匹配包含指定端口
+toPort    - 规则限定终止传输层端口，支持单个，匹配包含指定端口
+addressPrefix - 地址前缀，支持单个，默认支持模糊搜索
+description - 描述，支持单个，默认支持模糊搜索
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
@@ -78,6 +84,12 @@ func NewDescribeNetworkSecurityGroupRulesRequest(
 directions - SecurityGroup direction 方向列表，支持多个("0"代表ingress,"1"代表egress)
 ruleActions - SecurityGroup rule行为列表，支持多个(ALLOW,DENY)
 ruleTypes - SecurityGroup rule 所属类型列表，支持多个(default,custom)
+prioritys - 规则匹配优先级，支持多个
+protocols  - 规则限定协议，300:All; 6:TCP; 17:UDP; 1:ICMP，支持多个
+fromPort  - 规则限定起始传输层端口，支持单个，匹配包含指定端口
+toPort    - 规则限定终止传输层端口，支持单个，匹配包含指定端口
+addressPrefix - 地址前缀，支持单个，默认支持模糊搜索
+description - 描述，支持单个，默认支持模糊搜索
  (Optional)
  */
 func NewDescribeNetworkSecurityGroupRulesRequestWithAllParams(
@@ -136,6 +148,12 @@ func (r *DescribeNetworkSecurityGroupRulesRequest) SetPageSize(pageSize int) {
 directions - SecurityGroup direction 方向列表，支持多个("0"代表ingress,"1"代表egress)
 ruleActions - SecurityGroup rule行为列表，支持多个(ALLOW,DENY)
 ruleTypes - SecurityGroup rule 所属类型列表，支持多个(default,custom)
+prioritys - 规则匹配优先级，支持多个
+protocols  - 规则限定协议，300:All; 6:TCP; 17:UDP; 1:ICMP，支持多个
+fromPort  - 规则限定起始传输层端口，支持单个，匹配包含指定端口
+toPort    - 规则限定终止传输层端口，支持单个，匹配包含指定端口
+addressPrefix - 地址前缀，支持单个，默认支持模糊搜索
+description - 描述，支持单个，默认支持模糊搜索
 (Optional) */
 func (r *DescribeNetworkSecurityGroupRulesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters

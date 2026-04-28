@@ -33,4 +33,7 @@ type EdgeIpProvider struct {
 
     /* 边缘公网IP的可用区 (Optional) */
     Az string `json:"az"`
+
+    /* 产品编码。 支持:IP(弹性公网IP), BWP(共享带宽包), IPAP(公网IP地址池) (Optional) */
+    ProductCodes []string `json:"productCodes"`
 }
