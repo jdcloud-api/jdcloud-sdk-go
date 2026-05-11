@@ -19,9 +19,9 @@ package models
 
 type UpdatePublicDatasetVersionParam struct {
 
-    /* 版本描述，传nil不更新，传空会清空 (Optional) */
+    /* 版本描述，传null不更新，有值或传空都会更新 (Optional) */
     VersionDesc string `json:"versionDesc"`
 
-    /* 数据集介绍，传nil不更新，传空会清空 (Optional) */
+    /* 数据集介绍，传null不更新，有值或传空都会更新 (Optional) */
     DatasetIntroduction string `json:"datasetIntroduction"`
 }

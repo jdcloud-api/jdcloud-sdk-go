@@ -25,18 +25,18 @@ type Metadata struct {
     /* 推理服务名字，多个版本名字相同  */
     Name string `json:"name"`
 
-    /* 推理服务单个实例占用的节点数 (Optional) */
+    /* 推理服务单个实例占用的节点数, 大于1时为分布式部署 (Optional) */
     Nodes *int `json:"nodes"`
 
     /* 推理服务的副本数（实例数） (Optional) */
     Replicas *int `json:"replicas"`
 
-    /* 推理服务版本，从1开始依次递增 (Optional) */
+    /* 推理服务版本，从1开始依次递增，指定时需确定指定版本不存在。 (Optional) */
     Version *int `json:"version"`
 
-    /* 创建服务的用户 (Optional) */
-    CreateUser *string `json:"createUser"`
+    /* vpc id (Optional) */
+    VpcId *string `json:"vpcId"`
 
-    /* 创建服务的用户PIN (Optional) */
-    CreateUserPin *string `json:"createUserPin"`
+    /* vpc name (Optional) */
+    VpcName *string `json:"vpcName"`
 }

@@ -43,31 +43,39 @@ type ModelVersionInfo struct {
     /* 基础模型名称。 (Optional) */
     BaseModelName string `json:"baseModelName"`
 
-    /* 存储类型（模型来源），可选值： - oss - cfs。 - jpfs (Optional) */
+    /* 存储类型（数据来源），可选值：
+- oss
+- cfs
+- jpfs
+ (Optional) */
     StorageType string `json:"storageType"`
 
-    /* 存储oss对应ossEnpoint, cfs对应cfsIP。 (Optional) */
+    /* 存储oss对应ossEnpoint, cfs、jpfs对应IP (Optional) */
     StorageDomain string `json:"storageDomain"`
 
-    /* 若storageType为oss，storageBucket为oss-bucket；若storageType为cfs，storageBucket为cfs-pseudo。(例如/cfs) (Optional) */
+    /* oss-bucket/cfs-pseudo(例如:/cfs) (Optional) */
     StorageBucket string `json:"storageBucket"`
 
-    /* 存储path（模型来源path），模型的存储路径。 (Optional) */
+    /* 存储path（数据来源path）例如：oss时，bucket后面部分的路径；cfs时，虚根pseudo后面部分的路径 (Optional) */
     StoragePath string `json:"storagePath"`
 
-    /* 存储全路径地址。 (Optional) */
+    /* 存储全路径地址：
+- oss  oss://{storageDomain}/{storageBucket}/{storagePath}
+- cfs  cfs://{storageId}/{storageBucket}/{storagePath}
+- jpfs  jpfs://{storageId}/{storagePath}
+ (Optional) */
     StorageUri string `json:"storageUri"`
 
-    /* 存储ID，storageType为oss有值。 (Optional) */
+    /* 存储ID cfs或jpfs时使用，例如：fs-60z1s969ui (Optional) */
     StorageId string `json:"storageId"`
 
-    /* cfsVpcId，storageType为oss有值。 (Optional) */
+    /* cfsVpcId (Optional) */
     CfsVpcId string `json:"cfsVpcId"`
 
     /* 模型介绍。 (Optional) */
     ModelIntroduction string `json:"modelIntroduction"`
 
-    /* 标签。 (Optional) */
+    /* 标签，多个标签使用英文逗号拼接。例如：label1,label2,label3 (Optional) */
     Labels string `json:"labels"`
 
     /* 模型类型。 (Optional) */
@@ -96,4 +104,13 @@ type ModelVersionInfo struct {
 
     /* experimentId的运行记录id (Optional) */
     ExperimentRunId string `json:"experimentRunId"`
+
+    /* 归属用户名称。 (Optional) */
+    OwnerUser string `json:"ownerUser"`
+
+    /* 归属用户pin。 (Optional) */
+    OwnerUserPin string `json:"ownerUserPin"`
+
+    /* 工作空间中的资源归属权限。 (Optional) */
+    Permission string `json:"permission"`
 }

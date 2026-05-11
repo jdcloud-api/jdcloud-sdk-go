@@ -125,5 +125,5 @@ type DescribePublicModelVersionResponse struct {
 }
 
 type DescribePublicModelVersionResult struct {
-    VersionResult jdaip.ModelVersionInfo `json:"versionResult"`
+    VersionResult jdaip.PublicModelVersionInfo `json:"versionResult"`
 }

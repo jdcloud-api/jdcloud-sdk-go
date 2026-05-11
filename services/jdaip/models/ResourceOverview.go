@@ -26,13 +26,16 @@ type ResourceOverview struct {
     ResourceType string `json:"resourceType"`
 
     /* 资源总量 (Optional) */
-    Total int `json:"total"`
+    Total string `json:"total"`
 
     /* 资源分配/使用量 (Optional) */
-    Allocate int `json:"allocate"`
+    Allocate string `json:"allocate"`
 
     /* 分配/使用率 (Optional) */
     TotalAllocateRate string `json:"totalAllocateRate"`
+
+    /* k8s资源实际剩余 (Optional) */
+    Idle string `json:"idle"`
 
     /* 分配使用率 (Optional) */
     AllocateUsed []ResourceActualUsedOverview `json:"allocateUsed"`

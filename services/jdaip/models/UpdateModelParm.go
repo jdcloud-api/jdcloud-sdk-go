@@ -24,4 +24,10 @@ type UpdateModelParm struct {
 
     /* 模型描述。nil不更新，传空更新。 (Optional) */
     Description *string `json:"description"`
+
+    /* 工作空间中的资源归属权限，null或空不更新 (Optional) */
+    Permission *string `json:"permission"`
+
+    /* 归属用户pin。null或空不更新 (Optional) */
+    OwnerUserPin *string `json:"ownerUserPin"`
 }

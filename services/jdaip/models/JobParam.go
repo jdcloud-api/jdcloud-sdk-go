@@ -28,27 +28,64 @@ type JobParam struct {
     /* 镜像可见性，可选值：[public, private]。  */
     ImageVisibility string `json:"imageVisibility"`
 
-    /* 镜像ID。  */
+    /* 镜像ID。示例：img-9axxxxxxjh  */
     ImageId string `json:"imageId"`
 
-    /* 训练任务类型，大小写敏感。当前支持的任务类型：[pytorch]。  */
+    /* 训练任务类型，大小写敏感。当前支持的任务类型：[pytorch、ray]。  */
     JobType string `json:"jobType"`
 
-    /* 启动命令。  */
+    /* 启动命令。
+
+**示例1：**
+bash /mnt/ws/start.sh
+
+**示例2：**
+python /mnt/ws/start.py
+  */
     Command string `json:"command"`
 
     /* 节点数量。  */
     Replica int `json:"replica"`
 
+    /* 环境变量。 (Optional) */
+    Envs []EnvParamForJob `json:"envs"`
+
     /* 资源配置信息。 (Optional) */
-    Resource *ResourceParam `json:"resource"`
+    Resource *ResourceParamForJob `json:"resource"`
 
     /* 存储空间配置列表。 (Optional) */
-    StorageSpaces []StorageSpaceParam `json:"storageSpaces"`
+    StorageSpaces []StorageSpaceParamForJob `json:"storageSpaces"`
 
     /* 数据集。 (Optional) */
-    Datasets []DatasetParam `json:"datasets"`
+    Datasets []DatasetParamForJob `json:"datasets"`
 
     /* 模型。 (Optional) */
-    Models []ModelParam `json:"models"`
+    Models []ModelParamForJob `json:"models"`
+
+    /* 角色资源配置信息。 (Optional) */
+    RoleResource *RoleResourceParamForJob `json:"roleResource"`
+
+    /* 框架高级配置；json格式。 (Optional) */
+    AdvancedConfig *string `json:"advancedConfig"`
+
+    /* 重启策略。 (Optional) */
+    RestartPolicy *RestartPolicyParamForJob `json:"restartPolicy"`
+
+    /* 算力健康检测策略。 (Optional) */
+    HealthCheckPolicy *HealthCheckPolicyParamForJob `json:"healthCheckPolicy"`
+
+    /* 工作空间中的资源归属权限，支持(public,private)，默认为public。 (Optional) */
+    Permission *string `json:"permission"`
+
+    /* 创建资源时的节点亲和性配置，支持配置多个，每个元素之间是或者的关系。 (Optional) */
+    NodeAffinities []JobNodeAffinity `json:"nodeAffinities"`
+
+    /* 代码仓库配置列表。 (Optional) */
+    Codes []CodeParam `json:"codes"`
+
+    /* 用户自定义标签列表。 (Optional) */
+    UserTags []JobTag `json:"userTags"`
+
+    /* 资源组ID。 (Optional) */
+    ResourceGroupId *string `json:"resourceGroupId"`
 }

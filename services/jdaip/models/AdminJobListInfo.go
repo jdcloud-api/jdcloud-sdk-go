@@ -40,14 +40,87 @@ type AdminJobListInfo struct {
 `stopped`：`停止`
 `success`：`成功`
 `deleting`: `删除中`
+`rolling-back`：`回滚中`
+`rolled-back`：`已回滚`
  (Optional) */
     State string `json:"state"`
+
+    /* 训练任务失败类型。可选值如下：
+- `resource-failed`: 节点故障。
+- `task-failed`: 任务失败。
+- `environment-failed`: 算力健康检测不通过。
+- `task-hang`: 任务卡住。
+- `process-inspection-failed`: 进程巡检失败。
+ (Optional) */
+    FailureType string `json:"failureType"`
+
+    /* 训练任务失败原因。详细描述失败原因信息。
+ (Optional) */
+    FailureReason string `json:"failureReason"`
+
+    /* 重启次数。 (Optional) */
+    RestartCount int `json:"restartCount"`
 
     /* 任务类型。 (Optional) */
     JobType string `json:"jobType"`
 
     /* 持续时间，单位为秒。 (Optional) */
     RunningTimeInSec int `json:"runningTimeInSec"`
+
+    /* 节点数量。 (Optional) */
+    Replica int `json:"replica"`
+
+    /* 队列ID。示例：queue-2xxx**********2d*********8b8
+使用公共资源池时固定为：joybuilder-public-queue。
+ (Optional) */
+    QueueId string `json:"queueId"`
+
+    /* 公共资源池的规格ID。 (Optional) */
+    FlavorId string `json:"flavorId"`
+
+    /* 公共资源池的规格详细信息。 (Optional) */
+    FlavorInfo interface{} `json:"flavorInfo"`
+
+    /* GPU卡类型。示例：NVIDIA_G2 (Optional) */
+    GpuDeviceModel string `json:"gpuDeviceModel"`
+
+    /* 虚拟GPU卡数量，
+- 英伟达，可选值：[0.1, 0.125, 0.25, 0.5, 1, 2, 3, 4, 5, 6, 7, 8]
+ (Optional) */
+    VcudaCore float64 `json:"vcudaCore"`
+
+    /* CPU大小，单位：毫核，例如：0.1 CPU 核心 = 100m （毫核） (Optional) */
+    CpuMilli int `json:"cpuMilli"`
+
+    /* 内存大小，单位：MiB。 (Optional) */
+    MemoryMiB int `json:"memoryMiB"`
+
+    /* 角色配置信息。 (Optional) */
+    RoleResource RoleResourceInfoForJobList `json:"roleResource"`
+
+    /* 实例详情信息。 (Optional) */
+    InstanceInfo InstanceInfoForJobList `json:"instanceInfo"`
+
+    /* 资源在集群中的空闲状态，值为空表示是空闲的，in-use表示资源已被占用。 (Optional) */
+    ResourceState string `json:"resourceState"`
+
+    /* 工作空间中的资源归属权限。 (Optional) */
+    Permission string `json:"permission"`
+
+    /* 资源组ID。 (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
+
+    /* 资源组名称。 (Optional) */
+    ResourceGroupName string `json:"resourceGroupName"`
+
+    /* 用户自定义标签列表。 (Optional) */
+    UserTags []JobTag `json:"userTags"`
+
+    /* 归属用户pin。 (Optional) */
+    OwnerUserPin string `json:"ownerUserPin"`
+
+    /* 归属用户名称。 (Optional) */
+    OwnerUser string `json:"ownerUser"`
 
     /* 主账号。 (Optional) */
     Pin string `json:"pin"`

@@ -58,6 +58,9 @@ type ImageTask struct {
     /* 任务描述。 (Optional) */
     Message string `json:"message"`
 
+    /* 注册到资产中的镜像归属权限。 (Optional) */
+    Permission string `json:"permission"`
+
     /* 创建用户pin。 (Optional) */
     CreateUserPin string `json:"createUserPin"`
 

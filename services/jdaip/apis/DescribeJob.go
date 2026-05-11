@@ -125,5 +125,5 @@ type DescribeJobResponse struct {
 }
 
 type DescribeJobResult struct {
-    JobDetailInfo jdaip.JobDetailInfo `json:"jobDetailInfo"`
+    JobDetailInfo jdaip.JobDetailInfoForJob `json:"jobDetailInfo"`
 }

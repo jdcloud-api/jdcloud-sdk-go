@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    jdaip "github.com/jdcloud-api/jdcloud-sdk-go/services/jdaip/models"
 )
 
 type AddQueuesRequest struct {
@@ -30,8 +31,11 @@ type AddQueuesRequest struct {
     /* 工作空间ID  */
     WorkspaceId string `json:"workspaceId"`
 
-    /* 关联的队列。 (Optional) */
+    /* 关联的队列。【废弃】该字段即将下线，建议使用新的资源队列配置字段[queueConfigs]。 (Optional) */
     QueueIds []string `json:"queueIds"`
+
+    /* 关联队列配置 (Optional) */
+    QueueConfigs []jdaip.WorkspaceRelatedQueue `json:"queueConfigs"`
 }
 
 /*
@@ -60,12 +64,14 @@ func NewAddQueuesRequest(
 /*
  * param regionId: 地域ID (Required)
  * param workspaceId: 工作空间ID (Required)
- * param queueIds: 关联的队列。 (Optional)
+ * param queueIds: 关联的队列。【废弃】该字段即将下线，建议使用新的资源队列配置字段[queueConfigs]。 (Optional)
+ * param queueConfigs: 关联队列配置 (Optional)
  */
 func NewAddQueuesRequestWithAllParams(
     regionId string,
     workspaceId string,
     queueIds []string,
+    queueConfigs []jdaip.WorkspaceRelatedQueue,
 ) *AddQueuesRequest {
 
     return &AddQueuesRequest{
@@ -78,6 +84,7 @@ func NewAddQueuesRequestWithAllParams(
         RegionId: regionId,
         WorkspaceId: workspaceId,
         QueueIds: queueIds,
+        QueueConfigs: queueConfigs,
     }
 }
 
@@ -102,9 +109,13 @@ func (r *AddQueuesRequest) SetRegionId(regionId string) {
 func (r *AddQueuesRequest) SetWorkspaceId(workspaceId string) {
     r.WorkspaceId = workspaceId
 }
-/* param queueIds: 关联的队列。(Optional) */
+/* param queueIds: 关联的队列。【废弃】该字段即将下线，建议使用新的资源队列配置字段[queueConfigs]。(Optional) */
 func (r *AddQueuesRequest) SetQueueIds(queueIds []string) {
     r.QueueIds = queueIds
+}
+/* param queueConfigs: 关联队列配置(Optional) */
+func (r *AddQueuesRequest) SetQueueConfigs(queueConfigs []jdaip.WorkspaceRelatedQueue) {
+    r.QueueConfigs = queueConfigs
 }
 
 

@@ -19,6 +19,7 @@ package apis
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
     jdaip "github.com/jdcloud-api/jdcloud-sdk-go/services/jdaip/models"
+    common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
 
 type DescribeImagesRequest struct {
@@ -40,13 +41,16 @@ type DescribeImagesRequest struct {
     /* <b>filters 中支持使用以下关键字进行过滤</b>
 `imageName`: 镜像名称，模糊匹配，支持单个
 `createUser`: 创建人名称，模糊匹配，支持单个
-`imageTypes`: 镜像类型，支持多个，取值范围：[`GPU`, `CPU`]
+`imageTypes`: 镜像类型，支持多个，取值范围：[`gpu`, `cpu`]
 `imageIds`: 镜像ID数组，支持多个
-`imageUsages`: 镜像用途，支持多个
+`imageUsages`: 镜像用途，支持多个，取值范围：[notebook Notebook、training 开发训练、inference 在线服务]
 `labels`: 标签数组，支持多个
 `states`: 状态数组，支持多个，取值范围：[资源状态:queuing排队中、pending启动中、running构建中、success注册成功、failed构建失败、deleting删除中、deleted已删除]
+`permission`: 权限，精确匹配，支持单个，可选(public,private)。
+`ownerUser`: 所有者名称，模糊匹配，支持单个。
+`ownerUserPin`: 所有者pin，精确匹配，支持多个。
  (Optional) */
-    Filters []jdaip.Filter `json:"filters"`
+    Filters []common.Filter `json:"filters"`
 }
 
 /*
@@ -80,11 +84,14 @@ func NewDescribeImagesRequest(
  * param filters: <b>filters 中支持使用以下关键字进行过滤</b>
 `imageName`: 镜像名称，模糊匹配，支持单个
 `createUser`: 创建人名称，模糊匹配，支持单个
-`imageTypes`: 镜像类型，支持多个，取值范围：[`GPU`, `CPU`]
+`imageTypes`: 镜像类型，支持多个，取值范围：[`gpu`, `cpu`]
 `imageIds`: 镜像ID数组，支持多个
-`imageUsages`: 镜像用途，支持多个
+`imageUsages`: 镜像用途，支持多个，取值范围：[notebook Notebook、training 开发训练、inference 在线服务]
 `labels`: 标签数组，支持多个
 `states`: 状态数组，支持多个，取值范围：[资源状态:queuing排队中、pending启动中、running构建中、success注册成功、failed构建失败、deleting删除中、deleted已删除]
+`permission`: 权限，精确匹配，支持单个，可选(public,private)。
+`ownerUser`: 所有者名称，模糊匹配，支持单个。
+`ownerUserPin`: 所有者pin，精确匹配，支持多个。
  (Optional)
  */
 func NewDescribeImagesRequestWithAllParams(
@@ -92,7 +99,7 @@ func NewDescribeImagesRequestWithAllParams(
     workspaceId string,
     pageNumber *int,
     pageSize *int,
-    filters []jdaip.Filter,
+    filters []common.Filter,
 ) *DescribeImagesRequest {
 
     return &DescribeImagesRequest{
@@ -142,13 +149,16 @@ func (r *DescribeImagesRequest) SetPageSize(pageSize int) {
 /* param filters: <b>filters 中支持使用以下关键字进行过滤</b>
 `imageName`: 镜像名称，模糊匹配，支持单个
 `createUser`: 创建人名称，模糊匹配，支持单个
-`imageTypes`: 镜像类型，支持多个，取值范围：[`GPU`, `CPU`]
+`imageTypes`: 镜像类型，支持多个，取值范围：[`gpu`, `cpu`]
 `imageIds`: 镜像ID数组，支持多个
-`imageUsages`: 镜像用途，支持多个
+`imageUsages`: 镜像用途，支持多个，取值范围：[notebook Notebook、training 开发训练、inference 在线服务]
 `labels`: 标签数组，支持多个
 `states`: 状态数组，支持多个，取值范围：[资源状态:queuing排队中、pending启动中、running构建中、success注册成功、failed构建失败、deleting删除中、deleted已删除]
+`permission`: 权限，精确匹配，支持单个，可选(public,private)。
+`ownerUser`: 所有者名称，模糊匹配，支持单个。
+`ownerUserPin`: 所有者pin，精确匹配，支持多个。
 (Optional) */
-func (r *DescribeImagesRequest) SetFilters(filters []jdaip.Filter) {
+func (r *DescribeImagesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
 

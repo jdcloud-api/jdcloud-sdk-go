@@ -28,7 +28,7 @@ type NodePool struct {
     /* 业务类型-离线/在线/混部 (Optional) */
     BizType string `json:"bizType"`
 
-    /* 类型combined：异构节点池，general；通算节点池（云主机） (Optional) */
+    /* 节点池类型，combined：异构节点池；general：云主机节点池；mixture：混合节点池 (Optional) */
     PoolType string `json:"poolType"`
 
     /* 计费方式，pack：包年包月；advance：预付费 (Optional) */
@@ -36,6 +36,9 @@ type NodePool struct {
 
     /* 节点数量 (Optional) */
     NodeCount int `json:"nodeCount"`
+
+    /* 是否支持网络拓扑；0：不支持，1：支持 (Optional) */
+    Topology int `json:"topology"`
 
     /* 状态，creating:创建中；ready:运行中；fail:创建失败 (Optional) */
     Status string `json:"status"`
@@ -52,6 +55,15 @@ type NodePool struct {
     /* 创建时间，秒 (Optional) */
     CreateTime int64 `json:"createTime"`
 
+    /* hpc节点所属物理集群 (Optional) */
+    HpcCluster string `json:"hpcCluster"`
+
+    /* hpc节点所在物理集群名称 (Optional) */
+    HpcClusterName string `json:"hpcClusterName"`
+
+    /* hpc节点所属可用区 (Optional) */
+    HpcZone string `json:"hpcZone"`
+
     /* 节点池名称 (Optional) */
     Desc string `json:"desc"`
 
@@ -63,4 +75,16 @@ type NodePool struct {
 
     /*  (Optional) */
     Cluster Cluster `json:"cluster"`
+
+    /* Tag信息 (Optional) */
+    UserTags []Tag `json:"userTags"`
+
+    /* 资源组Id (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
+
+    /* 资源组名称 (Optional) */
+    ResourceGroupName string `json:"resourceGroupName"`
+
+    /* 节点池概览信息 (Optional) */
+    Overview []NodePoolOverview `json:"overview"`
 }

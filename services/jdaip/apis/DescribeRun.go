@@ -138,5 +138,5 @@ type DescribeRunResponse struct {
 }
 
 type DescribeRunResult struct {
-    RunDetailInfo jdaip.RunDetailInfo `json:"runDetailInfo"`
+    RunDetailInfo jdaip.RunDetailInfoForExperiment `json:"runDetailInfo"`
 }

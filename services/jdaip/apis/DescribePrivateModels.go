@@ -44,6 +44,9 @@ type DescribePrivateModelsRequest struct {
 `modelIds`: 模型Id，精确匹配，支持多个
 `labels`: 标签数组，精确匹配，支持多个
 `cfsVpcIds`: cfsVpcId数组，精确匹配，支持多个
+`permission`: 权限，精确匹配，支持单个，可选(public,private)。
+`ownerUser`: 所有者名称，模糊匹配，支持单个。
+`ownerUserPin`: 所有者pin，精确匹配，支持多个。
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
@@ -82,6 +85,9 @@ func NewDescribePrivateModelsRequest(
 `modelIds`: 模型Id，精确匹配，支持多个
 `labels`: 标签数组，精确匹配，支持多个
 `cfsVpcIds`: cfsVpcId数组，精确匹配，支持多个
+`permission`: 权限，精确匹配，支持单个，可选(public,private)。
+`ownerUser`: 所有者名称，模糊匹配，支持单个。
+`ownerUserPin`: 所有者pin，精确匹配，支持多个。
  (Optional)
  */
 func NewDescribePrivateModelsRequestWithAllParams(
@@ -142,6 +148,9 @@ func (r *DescribePrivateModelsRequest) SetPageSize(pageSize int) {
 `modelIds`: 模型Id，精确匹配，支持多个
 `labels`: 标签数组，精确匹配，支持多个
 `cfsVpcIds`: cfsVpcId数组，精确匹配，支持多个
+`permission`: 权限，精确匹配，支持单个，可选(public,private)。
+`ownerUser`: 所有者名称，模糊匹配，支持单个。
+`ownerUserPin`: 所有者pin，精确匹配，支持多个。
 (Optional) */
 func (r *DescribePrivateModelsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters

@@ -31,6 +31,9 @@ type InferenceData struct {
     /* 部署方式（自定义,或者大语言模型） (Optional) */
     DeployType string `json:"deployType"`
 
+    /* 推理服务资源所在队列ID (Optional) */
+    QueueId string `json:"queueId"`
+
     /* 推理服务相关信息（地址，token等） (Optional) */
     Service ServiceInfo `json:"service"`
 
@@ -40,9 +43,33 @@ type InferenceData struct {
     /* 推理服务加载的模型信息（如：模型名字，存放地址，挂载路径） (Optional) */
     Models []Model `json:"models"`
 
+    /* 推理服务挂载代码 (Optional) */
+    Codes []Code `json:"codes"`
+
     /* 推理服务所需资源（如：CPU， 内存等） (Optional) */
     Resource Resource `json:"resource"`
 
     /* 推理服务运行环境（如：镜像，命令行，环境变量等） (Optional) */
     Runtime Runtime `json:"runtime"`
+
+    /* 多角色部署配置 (Optional) */
+    RoleSet RoleSet `json:"roleSet"`
+
+    /* 该推理服务当前运行的pod数量 (Optional) */
+    RunningPods int `json:"runningPods"`
+
+    /* 该推理服务当前总的pod数量 (Optional) */
+    TotalPods int `json:"totalPods"`
+
+    /* 该推理服务当前异常pod数量 (Optional) */
+    FailedPods int `json:"failedPods"`
+
+    /* 资源在集群中的空闲状态，值为空表示是空闲的，in-use表示资源已被占用。 (Optional) */
+    ResourceState string `json:"resourceState"`
+
+    /* 用户标签 (Optional) */
+    UserTags []UserTag `json:"userTags"`
+
+    /* 资源组信息 (Optional) */
+    ResourceGroupInfo ResourceGroupInfo `json:"resourceGroupInfo"`
 }

@@ -39,4 +39,7 @@ type ImageSpec struct {
 
     /* 目标镜像Tag，用于推送镜像到镜像仓库。仅支持小写字母、数字、英文中划线 “-”、英文下划线“_”和点 “.”。  */
     ImageTag string `json:"imageTag"`
+
+    /* 注册到资产中的镜像归属权限，支持(public,private)，默认为`public`。 (Optional) */
+    Permission *string `json:"permission"`
 }

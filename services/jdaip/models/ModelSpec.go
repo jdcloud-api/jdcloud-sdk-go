@@ -22,9 +22,6 @@ type ModelSpec struct {
     /* 来源，支持(public,self)。  */
     Source string `json:"source"`
 
-    /* 存储名称。 (Optional) */
-    StorageName *string `json:"storageName"`
-
     /* 存储类型，支持三种类型`cfs`、`oss`、`jpfs`。  */
     StorageType string `json:"storageType"`
 
@@ -41,6 +38,11 @@ type ModelSpec struct {
   */
     ModelUrl string `json:"modelUrl"`
 
-    /* 挂载路径，第一块盘作为工作目录必须挂载到`/mnt/workspace`不能更改。其他存储建议挂载到`/mnt/`开头的路径下，不支持挂载到系统目录。  */
+    /* 建议挂载到`/mnt/`开头的路径下，不支持挂载到系统目录。
+系统目录参考：` /, /bin, /boot, /dev, /etc, /home, /lib, /lib32, /lib64, /libx32, /opt, /proc, /root, /run, /sbin, /sys, /tmp, /usr, /var `。
+  */
     MountPath string `json:"mountPath"`
+
+    /* 是否以只读模式挂载模型。只读模式下，用户无法在挂载的模型中进行写操作。当模型来源为public，或存储类型不是oss时，该参数无效。 (Optional) */
+    Readonly *bool `json:"readonly"`
 }

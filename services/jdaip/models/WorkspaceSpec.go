@@ -25,9 +25,15 @@ type WorkspaceSpec struct {
     /* 工作空间描述，256个字符内。 (Optional) */
     WorkspaceDesc *string `json:"workspaceDesc"`
 
-    /* 资源队列。  */
+    /* 资源队列。【废弃】该字段即将下线，建议使用新的资源队列配置字段[queueConfigs]。  */
     ResourceQueue []string `json:"resourceQueue"`
+
+    /* 资源队列配置。 (Optional) */
+    QueueConfigs []WorkspaceRelatedQueue `json:"queueConfigs"`
 
     /* 工作空间成员。 (Optional) */
     WorkspaceMember []WorkspaceMember `json:"workspaceMember"`
+
+    /* 空间关联的日志配置。 (Optional) */
+    LogConfigs []UpdateLogConfigs `json:"logConfigs"`
 }

@@ -23,9 +23,9 @@ type CreatePublicImageParam struct {
     ImageName string `json:"imageName"`
 
     /* 镜像用途，可选值：
-- notebook 开发
-- training 训练，
-- inference 推理
+- notebook Notebook
+- training 训练任务
+- inference 在线服务
  (Optional) */
     ImageUsage string `json:"imageUsage"`
 

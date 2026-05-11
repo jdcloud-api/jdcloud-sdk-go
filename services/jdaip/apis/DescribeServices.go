@@ -43,6 +43,9 @@ type DescribeServicesRequest struct {
 `name`: 名称，模糊匹配，支持单个。
 `deployType`: 部署方式，精确匹配，支持多个。
 `createUser`: 创建人，模糊匹配，支持单个。
+`permission`: 是否公开，public: 公开，private：私有
+`ownerUser`: 所有者，模糊匹配，支持单个。
+`ownerUserPin`: 所有者pin，精确匹配，支持单个
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
@@ -80,6 +83,9 @@ func NewDescribeServicesRequest(
 `name`: 名称，模糊匹配，支持单个。
 `deployType`: 部署方式，精确匹配，支持多个。
 `createUser`: 创建人，模糊匹配，支持单个。
+`permission`: 是否公开，public: 公开，private：私有
+`ownerUser`: 所有者，模糊匹配，支持单个。
+`ownerUserPin`: 所有者pin，精确匹配，支持单个
  (Optional)
  */
 func NewDescribeServicesRequestWithAllParams(
@@ -139,6 +145,9 @@ func (r *DescribeServicesRequest) SetPageSize(pageSize int) {
 `name`: 名称，模糊匹配，支持单个。
 `deployType`: 部署方式，精确匹配，支持多个。
 `createUser`: 创建人，模糊匹配，支持单个。
+`permission`: 是否公开，public: 公开，private：私有
+`ownerUser`: 所有者，模糊匹配，支持单个。
+`ownerUserPin`: 所有者pin，精确匹配，支持单个
 (Optional) */
 func (r *DescribeServicesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters

@@ -19,9 +19,15 @@ package models
 
 type UpdateDatasetParam struct {
 
-    /* 数据集名称，传nil或空都不修改 (Optional) */
+    /* 数据集名称，传null或空都不修改 (Optional) */
     DatasetName *string `json:"datasetName"`
 
-    /* 数据集描述，传nil不更新，传空会清空 (Optional) */
+    /* 数据集描述，传null不更新，有值或传空都会更新 (Optional) */
     Description *string `json:"description"`
+
+    /* 工作空间中的资源归属权限，null或空不更新 (Optional) */
+    Permission *string `json:"permission"`
+
+    /* 归属用户pin。null或空不更新 (Optional) */
+    OwnerUserPin *string `json:"ownerUserPin"`
 }

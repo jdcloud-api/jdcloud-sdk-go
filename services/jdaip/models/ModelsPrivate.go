@@ -48,4 +48,13 @@ type ModelsPrivate struct {
 
     /* 更新用户。 (Optional) */
     UpdateUser string `json:"updateUser"`
+
+    /* 归属用户名称。 (Optional) */
+    OwnerUser string `json:"ownerUser"`
+
+    /* 归属用户pin。 (Optional) */
+    OwnerUserPin string `json:"ownerUserPin"`
+
+    /* 工作空间中的资源归属权限。 (Optional) */
+    Permission string `json:"permission"`
 }

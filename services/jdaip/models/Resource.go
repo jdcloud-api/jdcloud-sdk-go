@@ -25,6 +25,9 @@ type Resource struct {
     /* 内存大小，单位M （如：1024M)  */
     Memory int `json:"memory"`
 
+    /* 是否启用rdma， 1：启用， 0：不启用 (Optional) */
+    Rdma *int `json:"rdma"`
+
     /* 资源队列ID (Optional) */
     QueueId *string `json:"queueId"`
 
@@ -34,12 +37,6 @@ type Resource struct {
     /* GPU设备显存 (Optional) */
     DeviceMemory *int `json:"deviceMemory"`
 
-    /* vGPU核数（如：1，2） (Optional) */
+    /* 虚拟GPU数量。如果选NV卡则支持选择1～8、0.5/0.25/0.125/0.1卡。如果是910B卡则只支持选1～8。必须与deviceModel同时使用。 (Optional) */
     VcudaCore *string `json:"vcudaCore"`
-
-    /* vGPU显存总量 （如：128Gi) (Optional) */
-    VcudaMemory *string `json:"vcudaMemory"`
-
-    /* 所有vGPU的算力百分比 (Optional) */
-    VcudaRatio *string `json:"vcudaRatio"`
 }

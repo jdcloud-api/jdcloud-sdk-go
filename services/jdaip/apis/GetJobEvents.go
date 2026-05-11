@@ -40,6 +40,9 @@ type GetJobEventsRequest struct {
     /* 分页大小；默认为20；取值范围[1, 500]。 (Optional) */
     PageSize *int `json:"pageSize"`
 
+    /* 实例名称。 (Optional) */
+    InstanceName *string `json:"instanceName"`
+
     /* 事件开始时间。 (Optional) */
     StartTime *string `json:"startTime"`
 
@@ -79,6 +82,7 @@ func NewGetJobEventsRequest(
  * param jobId: 训练任务ID (Required)
  * param pageNumber: 页码；默认为1。 (Optional)
  * param pageSize: 分页大小；默认为20；取值范围[1, 500]。 (Optional)
+ * param instanceName: 实例名称。 (Optional)
  * param startTime: 事件开始时间。 (Optional)
  * param endTime: 事件结束时间。 (Optional)
  */
@@ -88,6 +92,7 @@ func NewGetJobEventsRequestWithAllParams(
     jobId string,
     pageNumber *int,
     pageSize *int,
+    instanceName *string,
     startTime *string,
     endTime *string,
 ) *GetJobEventsRequest {
@@ -104,6 +109,7 @@ func NewGetJobEventsRequestWithAllParams(
         JobId: jobId,
         PageNumber: pageNumber,
         PageSize: pageSize,
+        InstanceName: instanceName,
         StartTime: startTime,
         EndTime: endTime,
     }
@@ -142,6 +148,10 @@ func (r *GetJobEventsRequest) SetPageNumber(pageNumber int) {
 func (r *GetJobEventsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
+/* param instanceName: 实例名称。(Optional) */
+func (r *GetJobEventsRequest) SetInstanceName(instanceName string) {
+    r.InstanceName = &instanceName
+}
 /* param startTime: 事件开始时间。(Optional) */
 func (r *GetJobEventsRequest) SetStartTime(startTime string) {
     r.StartTime = &startTime
@@ -165,6 +175,6 @@ type GetJobEventsResponse struct {
 }
 
 type GetJobEventsResult struct {
-    EventInfoList []jdaip.EventInfoList `json:"eventInfoList"`
+    EventInfoList []jdaip.EventInfoListForJob `json:"eventInfoList"`
     TotalCount int `json:"totalCount"`
 }

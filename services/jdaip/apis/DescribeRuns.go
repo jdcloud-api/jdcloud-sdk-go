@@ -40,6 +40,12 @@ type DescribeRunsRequest struct {
     /* 分页大小；默认为20；取值范围[1, 500]。 (Optional) */
     PageSize *int `json:"pageSize"`
 
+    /* 用户自定义标签列表。 (Optional) */
+    UserTags []jdaip.RunTagFilter `json:"userTags"`
+
+    /* 资源组ID列表 (Optional) */
+    ResourceGroupIds []string `json:"resourceGroupIds"`
+
     /* <b>filters 中支持使用以下关键字进行过滤</b>
 `runId`: 微调运行ID，精确匹配，支持多个。
 `name`: 微调运行名称，模糊匹配，支持单个。
@@ -81,6 +87,8 @@ func NewDescribeRunsRequest(
  * param experimentId: 微调实验ID (Required)
  * param pageNumber: 页码；默认为1。 (Optional)
  * param pageSize: 分页大小；默认为20；取值范围[1, 500]。 (Optional)
+ * param userTags: 用户自定义标签列表。 (Optional)
+ * param resourceGroupIds: 资源组ID列表 (Optional)
  * param filters: <b>filters 中支持使用以下关键字进行过滤</b>
 `runId`: 微调运行ID，精确匹配，支持多个。
 `name`: 微调运行名称，模糊匹配，支持单个。
@@ -94,6 +102,8 @@ func NewDescribeRunsRequestWithAllParams(
     experimentId string,
     pageNumber *int,
     pageSize *int,
+    userTags []jdaip.RunTagFilter,
+    resourceGroupIds []string,
     filters []jdaip.Filter,
 ) *DescribeRunsRequest {
 
@@ -109,6 +119,8 @@ func NewDescribeRunsRequestWithAllParams(
         ExperimentId: experimentId,
         PageNumber: pageNumber,
         PageSize: pageSize,
+        UserTags: userTags,
+        ResourceGroupIds: resourceGroupIds,
         Filters: filters,
     }
 }
@@ -146,6 +158,14 @@ func (r *DescribeRunsRequest) SetPageNumber(pageNumber int) {
 func (r *DescribeRunsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
+/* param userTags: 用户自定义标签列表。(Optional) */
+func (r *DescribeRunsRequest) SetUserTags(userTags []jdaip.RunTagFilter) {
+    r.UserTags = userTags
+}
+/* param resourceGroupIds: 资源组ID列表(Optional) */
+func (r *DescribeRunsRequest) SetResourceGroupIds(resourceGroupIds []string) {
+    r.ResourceGroupIds = resourceGroupIds
+}
 /* param filters: <b>filters 中支持使用以下关键字进行过滤</b>
 `runId`: 微调运行ID，精确匹配，支持多个。
 `name`: 微调运行名称，模糊匹配，支持单个。
@@ -170,6 +190,6 @@ type DescribeRunsResponse struct {
 }
 
 type DescribeRunsResult struct {
-    RunListInfo []jdaip.RunListInfo `json:"runListInfo"`
+    RunListInfo []jdaip.RunListInfoForExperiment `json:"runListInfo"`
     TotalCount int `json:"totalCount"`
 }

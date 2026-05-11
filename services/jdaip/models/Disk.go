@@ -19,24 +19,9 @@ package models
 
 type Disk struct {
 
-    /* 节点池，当添加节点时只设置ID即可  */
-    NodePool NodePool `json:"nodePool"`
+    /* 硬盘类型 (Optional) */
+    DiskType string `json:"diskType"`
 
-    /* 节点配置  */
-    NodeInfo Node `json:"nodeInfo"`
-
-    /* 节点数量  */
-    NodeCount int `json:"nodeCount"`
-
-    /* 购买时间单位，year：年；month：月；day：天 (Optional) */
-    TimeUnit string `json:"timeUnit"`
-
-    /* 购买时间 (Optional) */
-    TimeCount int `json:"timeCount"`
-
-    /* 是否开启自动续费 (Optional) */
-    AutoRenew bool `json:"autoRenew"`
-
-    /* 是否为边缘集群 (Optional) */
-    Edge bool `json:"edge"`
+    /* 硬盘容量 (Optional) */
+    Capacity int `json:"capacity"`
 }

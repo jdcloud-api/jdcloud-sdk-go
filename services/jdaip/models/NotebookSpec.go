@@ -40,10 +40,11 @@ type NotebookSpec struct {
     /* 镜像URL。  */
     ImageUrl string `json:"imageUrl"`
 
-    /* 公网访问配置，传入与资源队列相同vpc下的负载均衡。不需要公网访问时不要指定。 (Optional) */
+    /* 只支持私有资源池中的Notebook配置公网访问配置，传入与资源队列可通信的负载均衡。不需要公网访问时不要指定。
+ (Optional) */
     LbSpec *LbSpec `json:"lbSpec"`
 
-    /* 资源配置。  */
+    /* 工作负载资源配置。  */
     WorkloadSpec *WorkloadSpec `json:"workloadSpec"`
 
     /* 存储空间配置。  */
@@ -54,4 +55,23 @@ type NotebookSpec struct {
 
     /* 模型配置。 (Optional) */
     Models []ModelSpec `json:"models"`
+
+    /* 工作空间中的资源归属权限，支持(public,private)，默认为`public`。
+管理员可查看工作空间中全部资源，其他用户只能查看归属自己的private权限的资源或public权限的资源。 (Optional) */
+    Permission *string `json:"permission"`
+
+    /* 创建资源时的节点亲和性配置，支持配置多个，每个元素之间是或者的关系。 (Optional) */
+    NodeAffinities []NotebookNodeAffinity `json:"nodeAffinities"`
+
+    /* 代码库配置列表。 (Optional) */
+    Codes []NbCodeConfig `json:"codes"`
+
+    /* SSH配置。 (Optional) */
+    SshSpec *SshSpec `json:"sshSpec"`
+
+    /* 用户自定义标签列表。 (Optional) */
+    UserTags []NbTag `json:"userTags"`
+
+    /* 资源组ID。 (Optional) */
+    ResourceGroupId *string `json:"resourceGroupId"`
 }

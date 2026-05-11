@@ -28,7 +28,7 @@ type Model struct {
     /* 模型名字 （如: llama3)  */
     ModelName string `json:"modelName"`
 
-    /* 模型来源，公共的还是私有的 (Optional) */
+    /* 模型来源，公共的(public), 还是私有的(private) (Optional) */
     Source *string `json:"source"`
 
     /* 存储类型，oss or cfs (Optional) */
@@ -42,4 +42,7 @@ type Model struct {
 
     /* 模型挂载路径（如：/mnt/models/ (Optional) */
     MountPath *string `json:"mountPath"`
+
+    /* 模型是否只读 (Optional) */
+    ReadOnly *bool `json:"readOnly"`
 }

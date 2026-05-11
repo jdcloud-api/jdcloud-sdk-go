@@ -19,6 +19,7 @@ package apis
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
     jdaip "github.com/jdcloud-api/jdcloud-sdk-go/services/jdaip/models"
+    charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
 )
 
 type CreateNotebookRequest struct {
@@ -36,6 +37,15 @@ type CreateNotebookRequest struct {
 
     /* notebook配置。  */
     NotebookSpec *jdaip.NotebookSpec `json:"notebookSpec"`
+
+    /* 计费配置。
+在私有资源池中创建Notebook时不计费并且参数无效。
+在公共资源池中创建Notebook时默认为按配置计费，并且只支持按配置计费。
+ (Optional) */
+    ChargeSpec *charge.ChargeSpec `json:"chargeSpec"`
+
+    /* 日志采集配置 (Optional) */
+    LogCollectConfig *jdaip.LogCollectConfig `json:"logCollectConfig"`
 }
 
 /*
@@ -69,12 +79,19 @@ func NewCreateNotebookRequest(
  * param workspaceId: 工作空间ID (Required)
  * param clientToken: 用于保证请求的幂等性。由客户端生成，并确保不同请求中该参数唯一，长度不超过64个字符。 (Optional)
  * param notebookSpec: notebook配置。 (Required)
+ * param chargeSpec: 计费配置。
+在私有资源池中创建Notebook时不计费并且参数无效。
+在公共资源池中创建Notebook时默认为按配置计费，并且只支持按配置计费。
+ (Optional)
+ * param logCollectConfig: 日志采集配置 (Optional)
  */
 func NewCreateNotebookRequestWithAllParams(
     regionId string,
     workspaceId string,
     clientToken *string,
     notebookSpec *jdaip.NotebookSpec,
+    chargeSpec *charge.ChargeSpec,
+    logCollectConfig *jdaip.LogCollectConfig,
 ) *CreateNotebookRequest {
 
     return &CreateNotebookRequest{
@@ -88,6 +105,8 @@ func NewCreateNotebookRequestWithAllParams(
         WorkspaceId: workspaceId,
         ClientToken: clientToken,
         NotebookSpec: notebookSpec,
+        ChargeSpec: chargeSpec,
+        LogCollectConfig: logCollectConfig,
     }
 }
 
@@ -119,6 +138,17 @@ func (r *CreateNotebookRequest) SetClientToken(clientToken string) {
 /* param notebookSpec: notebook配置。(Required) */
 func (r *CreateNotebookRequest) SetNotebookSpec(notebookSpec *jdaip.NotebookSpec) {
     r.NotebookSpec = notebookSpec
+}
+/* param chargeSpec: 计费配置。
+在私有资源池中创建Notebook时不计费并且参数无效。
+在公共资源池中创建Notebook时默认为按配置计费，并且只支持按配置计费。
+(Optional) */
+func (r *CreateNotebookRequest) SetChargeSpec(chargeSpec *charge.ChargeSpec) {
+    r.ChargeSpec = chargeSpec
+}
+/* param logCollectConfig: 日志采集配置(Optional) */
+func (r *CreateNotebookRequest) SetLogCollectConfig(logCollectConfig *jdaip.LogCollectConfig) {
+    r.LogCollectConfig = logCollectConfig
 }
 
 

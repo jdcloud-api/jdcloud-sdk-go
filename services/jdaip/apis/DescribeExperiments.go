@@ -42,6 +42,9 @@ type DescribeExperimentsRequest struct {
 `name`: 微调实验名称，模糊匹配，支持单个。
 `modelSeries`: 模型系列，精确匹配，支持多个。
 `createUser`: 创建人，模糊匹配，支持单个。
+`permission`: 权限，精确匹配，支持单个，可选(public,private)。
+`ownerUserPin`: 所有者pin，精确匹配，支持多个。
+`ownerUser`: 所有者名称，模糊匹配，支持单个。
  (Optional) */
     Filters []jdaip.Filter `json:"filters"`
 }
@@ -79,6 +82,9 @@ func NewDescribeExperimentsRequest(
 `name`: 微调实验名称，模糊匹配，支持单个。
 `modelSeries`: 模型系列，精确匹配，支持多个。
 `createUser`: 创建人，模糊匹配，支持单个。
+`permission`: 权限，精确匹配，支持单个，可选(public,private)。
+`ownerUserPin`: 所有者pin，精确匹配，支持多个。
+`ownerUser`: 所有者名称，模糊匹配，支持单个。
  (Optional)
  */
 func NewDescribeExperimentsRequestWithAllParams(
@@ -138,6 +144,9 @@ func (r *DescribeExperimentsRequest) SetPageSize(pageSize int) {
 `name`: 微调实验名称，模糊匹配，支持单个。
 `modelSeries`: 模型系列，精确匹配，支持多个。
 `createUser`: 创建人，模糊匹配，支持单个。
+`permission`: 权限，精确匹配，支持单个，可选(public,private)。
+`ownerUserPin`: 所有者pin，精确匹配，支持多个。
+`ownerUser`: 所有者名称，模糊匹配，支持单个。
 (Optional) */
 func (r *DescribeExperimentsRequest) SetFilters(filters []jdaip.Filter) {
     r.Filters = filters

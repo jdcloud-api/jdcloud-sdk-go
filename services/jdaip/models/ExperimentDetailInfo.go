@@ -28,26 +28,38 @@ type ExperimentDetailInfo struct {
     /* 微调实验描述信息。 (Optional) */
     Description string `json:"description"`
 
-    /* 模型系列。 (Optional) */
+    /* 模型系列，严格区分大小写，可选值：[`llama`, `qwen`] (Optional) */
     ModelSeries string `json:"modelSeries"`
 
-    /* 模型模版。 (Optional) */
+    /* 模型模版，严格区分大小写。
+`modelTemplate`：`llama3`，`模型名`：[Llama 3-3.3](https://huggingface.co/meta-llama)，`参数量`：1B/3B/8B/70B
+`modelTemplate`：`qwen`，`模型名`：[Qwen (1-2.5)(Code/Math/MoE/QwQ)](https://huggingface.co/Qwen)，`参数量`：0.5B/1.5B/3B/7B/14B/32B/72B/110B
+ (Optional) */
     ModelTemplate string `json:"modelTemplate"`
 
     /* 微调实验包含的运行数量。 (Optional) */
     RunTotal int `json:"runTotal"`
 
-    /* 基础模型可见性，可选值：[public, private] (Optional) */
+    /* 基础模型可见性，可选值：[public] (Optional) */
     BaseModelVisibility string `json:"baseModelVisibility"`
 
-    /* 基础模型ID。 (Optional) */
+    /* 基础模型ID。示例：model-wsxxxxxx1f (Optional) */
     BaseModelId string `json:"baseModelId"`
 
     /* 基础模型名称。 (Optional) */
     BaseModelName string `json:"baseModelName"`
 
-    /* 基础模型版本。 (Optional) */
+    /* 基础模型版本。示例：v1 (Optional) */
     BaseModelVersion string `json:"baseModelVersion"`
+
+    /* 工作空间中的资源归属权限。 (Optional) */
+    Permission string `json:"permission"`
+
+    /* 归属用户pin。 (Optional) */
+    OwnerUserPin string `json:"ownerUserPin"`
+
+    /* 归属用户名称。 (Optional) */
+    OwnerUser string `json:"ownerUser"`
 
     /* 主账号Pin。 (Optional) */
     Pin string `json:"pin"`

@@ -42,9 +42,11 @@ type DescribeDatasetVersionsRequest struct {
 
     /* <b>filters 中支持使用以下关键字进行过滤</b>
 `versions`: 版本号 数组，支持多个 
-`taskTypes`: 任务类型 数组，支持多个
+`taskTypes`: 任务类型数组，支持多个，取值范围：[`sft`, `dpo`, `cpt`, `custom`,`distill`]
 `storageTypes`: 存储类型（数据来源）：oss\cfs\jpfs 数组，支持多个
-`labels`: 标签数组，支持多个
+`taskTypes`: 任务类型数组，支持多个，取值范围：[`sft`, `dpo`, `cpt`, `custom`,`distill`]
+`labelsIn`: 标签，多个标签查询，有一个标签匹配上就行
+`labelsEq`: 标签，多个标签查询，每一个标签都要匹配到
 `cfsVpcIds`: cfsVpcId数组，支持多个
 `states`: 资源状态数组，支持多个，取值范围：[`running`, `success`, `failed`]
  (Optional) */
@@ -85,9 +87,11 @@ func NewDescribeDatasetVersionsRequest(
  * param pageSize: 分页大小；<br>默认为10；取值范围[1, 100]。 (Optional)
  * param filters: <b>filters 中支持使用以下关键字进行过滤</b>
 `versions`: 版本号 数组，支持多个 
-`taskTypes`: 任务类型 数组，支持多个
+`taskTypes`: 任务类型数组，支持多个，取值范围：[`sft`, `dpo`, `cpt`, `custom`,`distill`]
 `storageTypes`: 存储类型（数据来源）：oss\cfs\jpfs 数组，支持多个
-`labels`: 标签数组，支持多个
+`taskTypes`: 任务类型数组，支持多个，取值范围：[`sft`, `dpo`, `cpt`, `custom`,`distill`]
+`labelsIn`: 标签，多个标签查询，有一个标签匹配上就行
+`labelsEq`: 标签，多个标签查询，每一个标签都要匹配到
 `cfsVpcIds`: cfsVpcId数组，支持多个
 `states`: 资源状态数组，支持多个，取值范围：[`running`, `success`, `failed`]
  (Optional)
@@ -152,9 +156,11 @@ func (r *DescribeDatasetVersionsRequest) SetPageSize(pageSize int) {
 }
 /* param filters: <b>filters 中支持使用以下关键字进行过滤</b>
 `versions`: 版本号 数组，支持多个 
-`taskTypes`: 任务类型 数组，支持多个
+`taskTypes`: 任务类型数组，支持多个，取值范围：[`sft`, `dpo`, `cpt`, `custom`,`distill`]
 `storageTypes`: 存储类型（数据来源）：oss\cfs\jpfs 数组，支持多个
-`labels`: 标签数组，支持多个
+`taskTypes`: 任务类型数组，支持多个，取值范围：[`sft`, `dpo`, `cpt`, `custom`,`distill`]
+`labelsIn`: 标签，多个标签查询，有一个标签匹配上就行
+`labelsEq`: 标签，多个标签查询，每一个标签都要匹配到
 `cfsVpcIds`: cfsVpcId数组，支持多个
 `states`: 资源状态数组，支持多个，取值范围：[`running`, `success`, `failed`]
 (Optional) */

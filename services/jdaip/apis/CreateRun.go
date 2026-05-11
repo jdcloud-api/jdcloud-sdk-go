@@ -35,7 +35,7 @@ type CreateRunRequest struct {
     ExperimentId string `json:"experimentId"`
 
     /* 基本参数。  */
-    RunParam *jdaip.RunParam `json:"runParam"`
+    RunParam *jdaip.RunParamForExperiment `json:"runParam"`
 }
 
 /*
@@ -50,7 +50,7 @@ func NewCreateRunRequest(
     regionId string,
     workspaceId string,
     experimentId string,
-    runParam *jdaip.RunParam,
+    runParam *jdaip.RunParamForExperiment,
 ) *CreateRunRequest {
 
 	return &CreateRunRequest{
@@ -77,7 +77,7 @@ func NewCreateRunRequestWithAllParams(
     regionId string,
     workspaceId string,
     experimentId string,
-    runParam *jdaip.RunParam,
+    runParam *jdaip.RunParamForExperiment,
 ) *CreateRunRequest {
 
     return &CreateRunRequest{
@@ -120,7 +120,7 @@ func (r *CreateRunRequest) SetExperimentId(experimentId string) {
     r.ExperimentId = experimentId
 }
 /* param runParam: 基本参数。(Required) */
-func (r *CreateRunRequest) SetRunParam(runParam *jdaip.RunParam) {
+func (r *CreateRunRequest) SetRunParam(runParam *jdaip.RunParamForExperiment) {
     r.RunParam = runParam
 }
 

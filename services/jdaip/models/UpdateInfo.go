@@ -22,6 +22,9 @@ type UpdateInfo struct {
     /* 服务描述信息 (Optional) */
     Description *string `json:"description"`
 
+    /* 是否开启引擎指标采集，当前仅vLLM和SGlang支持 (Optional) */
+    EnableEngineMetrics *bool `json:"enableEngineMetrics"`
+
     /* 访问服务的超时时间 (Optional) */
     Timeout *int `json:"timeout"`
 }

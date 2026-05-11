@@ -131,7 +131,10 @@ type DescribeServiceResult struct {
     ServiceId string `json:"serviceId"`
     Address string `json:"address"`
     AccessToken string `json:"accessToken"`
+    GatewayType string `json:"gatewayType"`
     Total int `json:"total"`
+    OwnerUser string `json:"ownerUser"`
+    OwnerUserPin string `json:"ownerUserPin"`
     CreateUser string `json:"createUser"`
     CreateUserPin string `json:"createUserPin"`
 }

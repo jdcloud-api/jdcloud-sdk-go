@@ -19,9 +19,9 @@ package models
 
 type TrafficInfo struct {
 
-    /* 推理服务ID (Optional) */
-    InferenceId string `json:"inferenceId"`
+    /* 推理服务版本号， 大于等于1  */
+    Version int `json:"version"`
 
-    /* 推理服务的流量占比 (Optional) */
+    /* 推理服务的流量占比， 取值范围：0-100  */
     TrafficPercent int `json:"trafficPercent"`
 }

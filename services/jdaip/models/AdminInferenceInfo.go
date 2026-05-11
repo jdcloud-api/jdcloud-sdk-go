@@ -25,10 +25,27 @@ type AdminInferenceInfo struct {
     /* 推理服务实例名称，带有版本号 (Optional) */
     Name string `json:"name"`
 
+    /* 推理服务服务Id (Optional) */
+    ServiceId string `json:"serviceId"`
+
+    /* 推理服务服务名称 (Optional) */
+    ServiceName string `json:"serviceName"`
+
     /* 应用类型 (Optional) */
     AppType string `json:"appType"`
 
-    /* 推理服务实例状态 (Optional) */
+    /* 推理服务版本状态：
+`queuing`: 排队中。
+`deploying`: 部署中。
+`failed`: 失败。
+`running`: 运行中。
+`scaling`: 扩缩中。
+`stopping`: 停止中。
+`stopped`: 已停止。
+`deleting`: 删除中。
+`rolling-back`: 回滚中(不能做任何操作)。
+`rolled-back`: 已回滚(只能操作删除)。
+ (Optional) */
     State string `json:"state"`
 
     /* 创建服务的用户 (Optional) */

@@ -49,9 +49,18 @@ type ModelsPublic struct {
     /* 标签，使用英文逗号拼接。 (Optional) */
     Labels string `json:"labels"`
 
+    /* 标签map格式 (Optional) */
+    LabelsMap interface{} `json:"labelsMap"`
+
+    /* 标签对象 (Optional) */
+    LabelsObject LabelsObject `json:"labelsObject"`
+
     /* 模型介绍。 (Optional) */
     ModelIntroduction string `json:"modelIntroduction"`
 
     /* 版本号。 (Optional) */
     Version string `json:"version"`
+
+    /* true上线，false下线。 (Optional) */
+    Online bool `json:"online"`
 }
