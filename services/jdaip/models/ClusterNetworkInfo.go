@@ -19,12 +19,6 @@ package models
 
 type ClusterNetworkInfo struct {
 
-    /*  (Optional) */
-    Cni CniAddon `json:"cni"`
-
-    /* 集群网络配置 (Optional) */
-    ClusterNetwork ClusterNetwork `json:"clusterNetwork"`
-
     /* 云网络配置 (Optional) */
-    CloudNetwork Network `json:"cloudNetwork"`
+    CloudNetwork NetworkInfo `json:"cloudNetwork"`
 }

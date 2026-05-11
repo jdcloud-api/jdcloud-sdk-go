@@ -19,8 +19,14 @@ package models
 
 type Node struct {
 
-    /* 节点池ID (Optional) */
-    NodePoolId string `json:"nodePoolId"`
+    /* 节点ID (Optional) */
+    Id string `json:"id"`
+
+    /* 节点类型 (Optional) */
+    NodeType string `json:"nodeType"`
+
+    /* 计费方式，pack：包年包月；advance：预付费 (Optional) */
+    ChargeType string `json:"chargeType"`
 
     /* 节点名称 (Optional) */
     Name string `json:"name"`
@@ -31,12 +37,69 @@ type Node struct {
     /* 集群ID (Optional) */
     ClusterId string `json:"clusterId"`
 
+    /* 规格标识 (Optional) */
+    Config string `json:"config"`
+
+    /* 可用区，逗号分割 (Optional) */
+    Zones string `json:"zones"`
+
+    /* hpc节点所在物理集群ID (Optional) */
+    HpcCluster string `json:"hpcCluster"`
+
+    /* hpc节点所在物理集群名称 (Optional) */
+    HpcClusterName string `json:"hpcClusterName"`
+
+    /* 节点子网 (Optional) */
+    Subnet string `json:"subnet"`
+
+    /* 节点子网名称 (Optional) */
+    SubnetName string `json:"subnetName"`
+
+    /* 私有网络名称 (Optional) */
+    VpcName string `json:"vpcName"`
+
+    /* 节点IP (Optional) */
+    Ipv4 string `json:"ipv4"`
+
+    /* 节点IP (Optional) */
+    Ipv6 string `json:"ipv6"`
+
+    /* 安全组 (Optional) */
+    SecurityGroup string `json:"securityGroup"`
+
+    /* 操作系统 (Optional) */
+    Os string `json:"os"`
+
+    /* 操作系统版本 (Optional) */
+    OsTag string `json:"osTag"`
+
+    /* 系统盘 (Optional) */
+    SystemDisk Disk `json:"systemDisk"`
+
+    /*  (Optional) */
+    DataDisk []Disk `json:"dataDisk"`
+
+    /* root登录密码 (Optional) */
+    RootPwd string `json:"rootPwd"`
+
+    /* 状态，creating:创建中；ready:运行中；fail:创建失败；stopping:停止中；stopped:已停止;starting:启动中；rebuilding:重置系统中；deleting:删除中 (Optional) */
+    Status string `json:"status"`
+
     /* 错误信息 (Optional) */
     Msg string `json:"msg"`
 
     /* 创建时间，秒 (Optional) */
     CreateTime int64 `json:"createTime"`
 
-    /* 节点IP列表 (Optional) */
-    Ips []string `json:"ips"`
+    /* GPU资源配额信息 (Optional) */
+    GpuQuota GpuQuota `json:"gpuQuota"`
+
+    /* 资源配额信息 (Optional) */
+    CpuQuota CpuQuota `json:"cpuQuota"`
+
+    /*  (Optional) */
+    NodeLabels []NodeLabel `json:"nodeLabels"`
+
+    /* 设备品牌 (Optional) */
+    DeviceBrand string `json:"deviceBrand"`
 }

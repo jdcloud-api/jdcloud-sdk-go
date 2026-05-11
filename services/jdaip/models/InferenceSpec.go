@@ -33,4 +33,7 @@ type InferenceSpec struct {
 
     /* 推理服务运行环境（如：镜像，命令行，环境变量等）  */
     Runtime *Runtime `json:"runtime"`
+
+    /* 多角色部署配置 (Optional) */
+    RoleSet *RoleSet `json:"roleSet"`
 }

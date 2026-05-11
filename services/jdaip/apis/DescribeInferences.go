@@ -45,6 +45,7 @@ type DescribeInferencesRequest struct {
 `inferenceId`: 版本ID，精确匹配，支持多个。
 `version`: 版本号，精确匹配，支持多个。
 `status`: 状态，精确匹配，支持多个。
+`queueId`: 队列Id，精确匹配，支持多个。
 `createUser`: 创建人，模糊匹配，支持单个。
  (Optional) */
     Filters []common.Filter `json:"filters"`
@@ -83,6 +84,7 @@ func NewDescribeInferencesRequest(
 `inferenceId`: 版本ID，精确匹配，支持多个。
 `version`: 版本号，精确匹配，支持多个。
 `status`: 状态，精确匹配，支持多个。
+`queueId`: 队列Id，精确匹配，支持多个。
 `createUser`: 创建人，模糊匹配，支持单个。
  (Optional)
  */
@@ -148,6 +150,7 @@ func (r *DescribeInferencesRequest) SetName(name string) {
 `inferenceId`: 版本ID，精确匹配，支持多个。
 `version`: 版本号，精确匹配，支持多个。
 `status`: 状态，精确匹配，支持多个。
+`queueId`: 队列Id，精确匹配，支持多个。
 `createUser`: 创建人，模糊匹配，支持单个。
 (Optional) */
 func (r *DescribeInferencesRequest) SetFilters(filters []common.Filter) {

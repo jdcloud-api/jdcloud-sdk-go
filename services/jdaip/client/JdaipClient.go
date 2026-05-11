@@ -40,7 +40,7 @@ func NewJdaipClient(credential *core.Credential) *JdaipClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "jdaip",
-            Revision:    "1.0.0",
+            Revision:    "1.0.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -57,7 +57,8 @@ func (c *JdaipClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
 }
 
-/* 修改notebook信息。 */
+/* 更新notebook的简单属性。
+支持修改：名称，描述，资源归属用户，资源权限。 */
 func (c *JdaipClient) UpdateNotebook(request *jdaip.UpdateNotebookRequest) (*jdaip.UpdateNotebookResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -77,9 +78,34 @@ func (c *JdaipClient) UpdateNotebook(request *jdaip.UpdateNotebookRequest) (*jda
     return jdResp, err
 }
 
-/* 查询微调运行列表。
+/* 获取实例信息 */
+func (c *JdaipClient) DescribeInferencePods(request *jdaip.DescribeInferencePodsRequest) (*jdaip.DescribeInferencePodsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DescribeInferencePodsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 在工作空间下创建一个TensorBoard实例。
+
+## 接口说明
+- `资源队列`: 必须选择一个队列，使用私有资源池时指定队列id
+- `数据来源`: 使用私有资源池时，数据来源为 `cfs`和`jpfs`类型存储只能选择与队列同vpc下的资源，使用私有资源池时跨vpc需要打通(vpcPeering)对等连接。
+同一个租户下最多可以在免费资源池同时有10个TensorBoard实例，创建TensorBoard时会校验当前租户下的TensorBoard实例数量，如果超出数量上限则不会创建，接口报错。
  */
-func (c *JdaipClient) DescribeRuns(request *jdaip.DescribeRunsRequest) (*jdaip.DescribeRunsResponse, error) {
+func (c *JdaipClient) CreateTensorBoard(request *jdaip.CreateTensorBoardRequest) (*jdaip.CreateTensorBoardResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -88,7 +114,7 @@ func (c *JdaipClient) DescribeRuns(request *jdaip.DescribeRunsRequest) (*jdaip.D
         return nil, err
     }
 
-    jdResp := &jdaip.DescribeRunsResponse{}
+    jdResp := &jdaip.CreateTensorBoardResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -98,8 +124,8 @@ func (c *JdaipClient) DescribeRuns(request *jdaip.DescribeRunsRequest) (*jdaip.D
     return jdResp, err
 }
 
-/* 更新推理服务描述 */
-func (c *JdaipClient) UpdateInference(request *jdaip.UpdateInferenceRequest) (*jdaip.UpdateInferenceResponse, error) {
+/* 管理段-查询主账号下所有绑定空间的子账号 */
+func (c *JdaipClient) AdminDescribeAccountMembers(request *jdaip.AdminDescribeAccountMembersRequest) (*jdaip.AdminDescribeAccountMembersResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -108,149 +134,7 @@ func (c *JdaipClient) UpdateInference(request *jdaip.UpdateInferenceRequest) (*j
         return nil, err
     }
 
-    jdResp := &jdaip.UpdateInferenceResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 更新工作空间内成员。 */
-func (c *JdaipClient) UpdateMembers(request *jdaip.UpdateMembersRequest) (*jdaip.UpdateMembersResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jdaip.UpdateMembersResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 关联队列。 */
-func (c *JdaipClient) AddQueues(request *jdaip.AddQueuesRequest) (*jdaip.AddQueuesResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jdaip.AddQueuesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询工作空间详情 */
-func (c *JdaipClient) DescribeWorkspace(request *jdaip.DescribeWorkspaceRequest) (*jdaip.DescribeWorkspaceResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jdaip.DescribeWorkspaceResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 停止微调运行。
- */
-func (c *JdaipClient) StopRun(request *jdaip.StopRunRequest) (*jdaip.StopRunResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jdaip.StopRunResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 获取模型版本的详情 */
-func (c *JdaipClient) DescribeModelVersion(request *jdaip.DescribeModelVersionRequest) (*jdaip.DescribeModelVersionResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jdaip.DescribeModelVersionResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询关联队列 */
-func (c *JdaipClient) DescribeQueueIds(request *jdaip.DescribeQueueIdsRequest) (*jdaip.DescribeQueueIdsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jdaip.DescribeQueueIdsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询微调实验列表。
- */
-func (c *JdaipClient) DescribeExperiments(request *jdaip.DescribeExperimentsRequest) (*jdaip.DescribeExperimentsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jdaip.DescribeExperimentsResponse{}
+    jdResp := &jdaip.AdminDescribeAccountMembersResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -303,11 +187,12 @@ func (c *JdaipClient) DescribeDatasetVersion(request *jdaip.DescribeDatasetVersi
 /* 在工作空间下创建一个Notebook实例。
 
 ## 接口说明
-- `资源队列`: 必须选择一个队列，CPU和内存必须指定，是否使用GPU可以按需选择。
-- `存储空间`: 使用用户个人存储，第一块存储默认作为工作目录，挂载到Notebook实例中`/mnt/workspace`目录下。`cfs`和`jpfs`类型存储只能选择与队列同vpc下的资源。
-- `数据集`: 可选择公共数据集或个人数据集。`cfs`和`jpfs`类型的数据集只能选择与队列同vpc下的数据集。
-- `模型`: 可选择公共模型或个人模型。`cfs`和`jpfs`类型的模型只能选择与队列同vpc下的模型。
-- `SSH连接`: 开启后需要选择一个与队列同vpc下的负载均衡(LB)，并设置一个未占用的监听端口，实例运行后可以通过LB的公网IP和端口进行SSH访问。
+- `资源队列`: 必须选择一个队列，使用公共资源池时必须指定规格，使用私有资源池时必须指定CPU和内存，是否使用GPU可以按需选择。
+- `存储空间`: 使用用户个人存储，第一块存储默认作为工作目录，挂载到Notebook实例中`/mnt/workspace`目录下。`cfs`和`jpfs`类型存储只能选择与队列同vpc下的资源，使用私有资源池时跨vpc需要打通(vpcPeering)对等连接。
+- `数据集`: 可选择公共数据集或个人数据集。`cfs`和`jpfs`类型的数据集只能选择与队列同vpc下的数据集，使用私有资源池时跨vpc需要打通(vpcPeering)对等连接。
+- `模型`: 可选择公共模型或个人模型。`cfs`和`jpfs`类型的模型只能选择与队列同vpc下的模型，使用私有资源池时跨vpc需要打通(vpcPeering)对等连接。
+- `SSH连接`: 开启后需要选择一个与队列同vpc下的负载均衡(LB)，并设置一个未占用的监听端口，实例运行后可以通过LB的公网IP和端口进行SSH访问，使用私有资源池时跨vpc需要打通(vpcPeering)对等连接。
+- `计费配置`: 在私有资源池中创建Notebook时不计费，在公共资源池中创建Notebook时默认为按规格配置计费。
 
 ## Notebook环境说明
 - Notebook通过(/home/.notebook_utils/notebook_start.sh)脚本启动，启动脚本不可更改。
@@ -326,6 +211,27 @@ func (c *JdaipClient) CreateNotebook(request *jdaip.CreateNotebookRequest) (*jda
     }
 
     jdResp := &jdaip.CreateNotebookResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新notebook的资源属性，目前支持：镜像，应用类型，私有资源队列，资源规格，存储空间，数据集，模型，SSH。
+ */
+func (c *JdaipClient) UpdateResourceProperties(request *jdaip.UpdateResourcePropertiesRequest) (*jdaip.UpdateResourcePropertiesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.UpdateResourcePropertiesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -375,8 +281,8 @@ func (c *JdaipClient) DescribeImageTasks(request *jdaip.DescribeImageTasksReques
     return jdResp, err
 }
 
-/* 创建镜像 */
-func (c *JdaipClient) CreateImage(request *jdaip.CreateImageRequest) (*jdaip.CreateImageResponse, error) {
+/* 为指定的推理服务创建自动扩缩容规则，包括基于资源使用率的自动扩缩容和基于时间的定时扩缩容 */
+func (c *JdaipClient) CreateInferenceScale(request *jdaip.CreateInferenceScaleRequest) (*jdaip.CreateInferenceScaleResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -385,7 +291,7 @@ func (c *JdaipClient) CreateImage(request *jdaip.CreateImageRequest) (*jdaip.Cre
         return nil, err
     }
 
-    jdResp := &jdaip.CreateImageResponse{}
+    jdResp := &jdaip.CreateInferenceScaleResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -396,6 +302,14 @@ func (c *JdaipClient) CreateImage(request *jdaip.CreateImageRequest) (*jdaip.Cre
 }
 
 /* 删除微调运行。
+
+当使用`私有队列`的时候，任何状态的微调运行都可以删除。
+当使用`公共队列`的时候，只有以下状态的微调运行才可以删除：
+  - `queuing`
+  - `pending`
+  - `success`
+  - `failed`
+  - `stopped`
  */
 func (c *JdaipClient) DeleteRun(request *jdaip.DeleteRunRequest) (*jdaip.DeleteRunResponse, error) {
     if request == nil {
@@ -407,26 +321,6 @@ func (c *JdaipClient) DeleteRun(request *jdaip.DeleteRunRequest) (*jdaip.DeleteR
     }
 
     jdResp := &jdaip.DeleteRunResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 按notebook状态统计数量。 */
-func (c *JdaipClient) DescribeNotebookCount(request *jdaip.DescribeNotebookCountRequest) (*jdaip.DescribeNotebookCountResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jdaip.DescribeNotebookCountResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -476,8 +370,8 @@ func (c *JdaipClient) RemoveQueues(request *jdaip.RemoveQueuesRequest) (*jdaip.R
     return jdResp, err
 }
 
-/* 获取镜像列表 */
-func (c *JdaipClient) DescribeImages(request *jdaip.DescribeImagesRequest) (*jdaip.DescribeImagesResponse, error) {
+/* 更新推理服务 */
+func (c *JdaipClient) UpdateService(request *jdaip.UpdateServiceRequest) (*jdaip.UpdateServiceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -486,7 +380,7 @@ func (c *JdaipClient) DescribeImages(request *jdaip.DescribeImagesRequest) (*jda
         return nil, err
     }
 
-    jdResp := &jdaip.DescribeImagesResponse{}
+    jdResp := &jdaip.UpdateServiceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -516,7 +410,115 @@ func (c *JdaipClient) UpdateDataset(request *jdaip.UpdateDatasetRequest) (*jdaip
     return jdResp, err
 }
 
+/* 修改代码仓配置 */
+func (c *JdaipClient) UpdateCodeRepoConfig(request *jdaip.UpdateCodeRepoConfigRequest) (*jdaip.UpdateCodeRepoConfigResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.UpdateCodeRepoConfigResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 创建微调运行。
+
+在指定的微调实验下创建一个新的微调运行任务。微调运行是实际执行模型微调训练的单位，可以配置不同的训练参数、数据集和计算资源来进行不同的微调实验。
+
+**必需参数说明：**
+- **运行名称**：1-32个字符，支持中文、大小写字母、数字、英文中划线和下划线
+- **微调配置**：包括训练阶段、微调方法和额外配置参数
+- **数据集配置**：指定训练和评估数据集
+- **资源配置**：GPU/CPU/内存等计算资源配置
+- **存储空间**：用于保存训练后的模型和报告等数据
+
+**训练阶段支持：**
+- `pt` (增量预训练): 使用泛文本无标注数据对模型进行进一步训练和优化
+- `sft` (SFT指令微调): 通过特定任务数据上的进一步训练，优化模型执行特定指令的能力
+- `dpo` (DPO训练): 通过比较模型输出结果与人类偏好，优化模型输出
+
+**微调方法支持：**
+- `lora` (LoRA更新): 在训练过程中只更新低秩部分的参数，适合计算资源有限的场景
+- `full` (全量更新): 在训练过程中对大模型的全部参数进行更新，需要更多计算资源
+
+**数据集配置：**
+- 支持多个数据集，可分别用于训练(training)和评估(evaluation)
+- 支持公开(public)和私有(private)数据集
+- 可配置验证数据集来源：拆分训练集或直接提供
+
+**资源配置：**
+- GPU设备类型和数量配置
+- CPU/内存资源精细配置
+- 队列资源管理
+
+**存储类型支持：**
+- `oss`: 对象存储服务
+- `cfs`: 云文件系统
+- `jpfs`: 京东并行文件系统
+
+**创建成功后：**
+- 返回唯一的微调运行ID，用于后续管理和监控
+- 运行将进入“排队中”状态，等待资源分配
+- 可通过查询运行详情接口监控训练进度
+- 支持实时查看训练日志和事件
+- 训练完成后可获取微调后的模型文件
+
+**请求参数示例：**
+```json
+{
+  "runParam": {
+    "name": "name-1",
+    "description": "description-1",
+    "evalDatasetSource": "split",
+    "evalDatasetSplitRatio": 0.2,
+    "datasets": [
+      {
+        "datasetVisibility": "private",
+        "datasetId": "ds-c2******m3",
+        "datasetVersion": "v1",
+        "datasetUsage": "training"
+      }
+    ],
+    "resource": {
+      "queueId": "queue-20e***********b8",
+      "gpuDeviceModel": "NVIDIA_G2",
+      "vcudaCore": 2,
+      "cpuMilli": 44000,
+      "memoryMiB": 480000
+    },
+    "storageSpace": {
+      "storageType": "cfs",
+      "cfs": {
+        "id":  "fs-rz*******r",
+        "sourcePath": "/data/temp"
+      }
+    },
+    "finetuningConfig": {
+      "stage": "sft",
+      "finetuningType": "lora",
+      "runConfigExtras": [
+        {
+          "name": "logging_steps",
+          "value": "1"
+        },
+        {
+          "name": "num_train_epochs",
+          "value": "5"
+        }
+      ]
+    }
+  }
+}
+```
  */
 func (c *JdaipClient) CreateRun(request *jdaip.CreateRunRequest) (*jdaip.CreateRunResponse, error) {
     if request == nil {
@@ -537,8 +539,8 @@ func (c *JdaipClient) CreateRun(request *jdaip.CreateRunRequest) (*jdaip.CreateR
     return jdResp, err
 }
 
-/* 添加工作空间内成员。 */
-func (c *JdaipClient) AddMembers(request *jdaip.AddMembersRequest) (*jdaip.AddMembersResponse, error) {
+/* 获取指定推理服务的当前自动扩缩容规则配置 */
+func (c *JdaipClient) DescribeInferenceScale(request *jdaip.DescribeInferenceScaleRequest) (*jdaip.DescribeInferenceScaleResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -547,27 +549,7 @@ func (c *JdaipClient) AddMembers(request *jdaip.AddMembersRequest) (*jdaip.AddMe
         return nil, err
     }
 
-    jdResp := &jdaip.AddMembersResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询公共模型列表 */
-func (c *JdaipClient) DescribePublicModels(request *jdaip.DescribePublicModelsRequest) (*jdaip.DescribePublicModelsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jdaip.DescribePublicModelsResponse{}
+    jdResp := &jdaip.DescribeInferenceScaleResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -589,67 +571,6 @@ func (c *JdaipClient) GetRunEvents(request *jdaip.GetRunEventsRequest) (*jdaip.G
     }
 
     jdResp := &jdaip.GetRunEventsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 获取notebook日志，采用(Server-Sent-Events)方式流式输出。 */
-func (c *JdaipClient) GetNotebookLogs(request *jdaip.GetNotebookLogsRequest) (*jdaip.GetNotebookLogsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jdaip.GetNotebookLogsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询工作空间内成员 */
-func (c *JdaipClient) DescribeMembers(request *jdaip.DescribeMembersRequest) (*jdaip.DescribeMembersResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jdaip.DescribeMembersResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询训练任务列表。
- */
-func (c *JdaipClient) DescribeJobs(request *jdaip.DescribeJobsRequest) (*jdaip.DescribeJobsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jdaip.DescribeJobsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -681,7 +602,39 @@ func (c *JdaipClient) GetJobEvents(request *jdaip.GetJobEventsRequest) (*jdaip.G
     return jdResp, err
 }
 
+/* 启动TensorBoard实例。
+只允许停止状态时操作。
+如果TensorBoard实例已经是运行状态，则不会做任何操作。
+如果是其它状态，操作接口会报错。
+ */
+func (c *JdaipClient) StartTensorBoard(request *jdaip.StartTensorBoardRequest) (*jdaip.StartTensorBoardResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.StartTensorBoardResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 删除训练任务。
+
+目前支持删除训练任务的状态如下：
+  - `queuing`
+  - `pending`
+  - `running`
+  - `success`
+  - `failed`
+  - `stopped`
  */
 func (c *JdaipClient) DeleteJob(request *jdaip.DeleteJobRequest) (*jdaip.DeleteJobResponse, error) {
     if request == nil {
@@ -713,6 +666,896 @@ func (c *JdaipClient) DescribeDatasetVersions(request *jdaip.DescribeDatasetVers
     }
 
     jdResp := &jdaip.DescribeDatasetVersionsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取notebook pod列表。 */
+func (c *JdaipClient) GetNotebookPods(request *jdaip.GetNotebookPodsRequest) (*jdaip.GetNotebookPodsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.GetNotebookPodsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除保存镜像任务。 */
+func (c *JdaipClient) DeleteImageTask(request *jdaip.DeleteImageTaskRequest) (*jdaip.DeleteImageTaskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DeleteImageTaskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取构建镜像的pod日志，采用SSE流式返回。
+ */
+func (c *JdaipClient) GetPodLogs(request *jdaip.GetPodLogsRequest) (*jdaip.GetPodLogsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.GetPodLogsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除模型版本 */
+func (c *JdaipClient) DeleteModelVersion(request *jdaip.DeleteModelVersionRequest) (*jdaip.DeleteModelVersionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DeleteModelVersionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 将运行中的Notebook保存为镜像。
+
+## 接口说明
+- 镜像以快照的方式进行保存，保存成功后自动注册到用户的镜像资产中。
+- 镜像保存过程中Notebook无法停止和删除。不影响正常连接使用，不建议在保存镜像过程中在notebook里操作大量磁盘IO(比如下载大文件)类操作。
+ */
+func (c *JdaipClient) SaveImage(request *jdaip.SaveImageRequest) (*jdaip.SaveImageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.SaveImageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取推理服务事件 */
+func (c *JdaipClient) DescribeInferenceEvents(request *jdaip.DescribeInferenceEventsRequest) (*jdaip.DescribeInferenceEventsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DescribeInferenceEventsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询notebook详情 */
+func (c *JdaipClient) DescribeNotebook(request *jdaip.DescribeNotebookRequest) (*jdaip.DescribeNotebookResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DescribeNotebookResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取代码仓配置列表 */
+func (c *JdaipClient) DescribeCodeRepoConfigs(request *jdaip.DescribeCodeRepoConfigsRequest) (*jdaip.DescribeCodeRepoConfigsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DescribeCodeRepoConfigsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询训练任务类型列表。
+可以查询到所有支持的训练任务类型。目前只支持`pytorch`。
+
+**返回示例如下：**
+```json
+{
+  "requestId": "efe780358aaa8fc205826780bba6c4c0",
+  "result": {
+    "jobTypes": [
+      "pytorch"
+    ]
+  }
+}
+```
+ */
+func (c *JdaipClient) DescribeJobTypes(request *jdaip.DescribeJobTypesRequest) (*jdaip.DescribeJobTypesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DescribeJobTypesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据数据集ID删除数据集 */
+func (c *JdaipClient) DeleteDataset(request *jdaip.DeleteDatasetRequest) (*jdaip.DeleteDatasetResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DeleteDatasetResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除TensorBoard实例。
+如果TensorBoard实例已经不存在了，则不会做任何操作。
+其它状态都允许操作。
+ */
+func (c *JdaipClient) DeleteTensorBoard(request *jdaip.DeleteTensorBoardRequest) (*jdaip.DeleteTensorBoardResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DeleteTensorBoardResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建新模型/新版本。 */
+func (c *JdaipClient) CreateModel(request *jdaip.CreateModelRequest) (*jdaip.CreateModelResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.CreateModelResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 启动notebook实例。
+只允许停止状态时操作。
+如果notebook已经是运行状态，则不会做任何操作。
+如果是其它状态，操作接口会报错。
+ */
+func (c *JdaipClient) StartNotebook(request *jdaip.StartNotebookRequest) (*jdaip.StartNotebookResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.StartNotebookResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建微调实验。
+
+通过指定基础模型、模型系列和模板等参数，创建一个新的微调实验。微调实验是进行模型微调的基础容器，可以在其中创建多个微调运行来训练和优化模型。
+
+**创建成功后：**
+- 返回唯一的微调实验ID，用于后续的运行管理
+- 可以在该实验下创建多个微调运行
+- 可以查看实验详情、更新实验信息或删除实验
+ */
+func (c *JdaipClient) CreateExperiment(request *jdaip.CreateExperimentRequest) (*jdaip.CreateExperimentResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.CreateExperimentResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 停止TensorBoard实例。
+如果TensorBoard实例已经是停止状态，则不会做任何操作。
+除了删除中状态，其它状态都允许操作。
+ */
+func (c *JdaipClient) StopTensorBoard(request *jdaip.StopTensorBoardRequest) (*jdaip.StopTensorBoardResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.StopTensorBoardResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改模型版本信息 */
+func (c *JdaipClient) UpdateModelVersion(request *jdaip.UpdateModelVersionRequest) (*jdaip.UpdateModelVersionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.UpdateModelVersionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询节点列表 */
+func (c *JdaipClient) DescribeNodeInstances(request *jdaip.DescribeNodeInstancesRequest) (*jdaip.DescribeNodeInstancesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DescribeNodeInstancesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询工作空间资源列表（AIStack v2.1.0版本接口） */
+func (c *JdaipClient) DescribeWorkspaceResources(request *jdaip.DescribeWorkspaceResourcesRequest) (*jdaip.DescribeWorkspaceResourcesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DescribeWorkspaceResourcesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 绑定资源到工作空间（AIStack v2.1.0版本接口） */
+func (c *JdaipClient) CreateBindWorkspace(request *jdaip.CreateBindWorkspaceRequest) (*jdaip.CreateBindWorkspaceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.CreateBindWorkspaceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除notebook。
+如果notebook已经不存在了，则不会做任何操作。
+其它状态都允许操作。
+ */
+func (c *JdaipClient) DeleteNotebook(request *jdaip.DeleteNotebookRequest) (*jdaip.DeleteNotebookResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DeleteNotebookResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询TensorBoard列表 */
+func (c *JdaipClient) DescribeTensorBoards(request *jdaip.DescribeTensorBoardsRequest) (*jdaip.DescribeTensorBoardsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DescribeTensorBoardsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取数据集详情 */
+func (c *JdaipClient) DescribeDataset(request *jdaip.DescribeDatasetRequest) (*jdaip.DescribeDatasetResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DescribeDatasetResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取模型的版本列表 */
+func (c *JdaipClient) DescribeModelVersions(request *jdaip.DescribeModelVersionsRequest) (*jdaip.DescribeModelVersionsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DescribeModelVersionsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 管理端查询公共模型列表 */
+func (c *JdaipClient) DescribeAdminPublicModels(request *jdaip.DescribeAdminPublicModelsRequest) (*jdaip.DescribeAdminPublicModelsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DescribeAdminPublicModelsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询私有模型列表 */
+func (c *JdaipClient) DescribePrivateModels(request *jdaip.DescribePrivateModelsRequest) (*jdaip.DescribePrivateModelsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DescribePrivateModelsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除日志采集配置 */
+func (c *JdaipClient) DeleteNotebookLogCollectConfig(request *jdaip.DeleteNotebookLogCollectConfigRequest) (*jdaip.DeleteNotebookLogCollectConfigResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DeleteNotebookLogCollectConfigResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询微调运行列表。
+ */
+func (c *JdaipClient) DescribeRuns(request *jdaip.DescribeRunsRequest) (*jdaip.DescribeRunsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DescribeRunsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新推理服务描述 */
+func (c *JdaipClient) UpdateInference(request *jdaip.UpdateInferenceRequest) (*jdaip.UpdateInferenceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.UpdateInferenceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 关联队列。 */
+func (c *JdaipClient) AddQueues(request *jdaip.AddQueuesRequest) (*jdaip.AddQueuesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.AddQueuesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 停止微调运行。
+
+当使用`私有队列`的时候，任何状态的微调运行都可以停止。
+当使用`公共队列`的时候，只有以下状态的微调运行才可以停止：
+  - `queuing`
+  - `pending`
+ */
+func (c *JdaipClient) StopRun(request *jdaip.StopRunRequest) (*jdaip.StopRunResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.StopRunResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新指定推理服务的自动扩缩容规则配置 */
+func (c *JdaipClient) UpdateInferenceScale(request *jdaip.UpdateInferenceScaleRequest) (*jdaip.UpdateInferenceScaleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.UpdateInferenceScaleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取模型版本的详情 */
+func (c *JdaipClient) DescribeModelVersion(request *jdaip.DescribeModelVersionRequest) (*jdaip.DescribeModelVersionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DescribeModelVersionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询微调实验列表。
+ */
+func (c *JdaipClient) DescribeExperiments(request *jdaip.DescribeExperimentsRequest) (*jdaip.DescribeExperimentsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DescribeExperimentsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 添加代码仓配置 */
+func (c *JdaipClient) CreateCodeRepoConfig(request *jdaip.CreateCodeRepoConfigRequest) (*jdaip.CreateCodeRepoConfigResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.CreateCodeRepoConfigResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 暂停推理服务滚动更新 */
+func (c *JdaipClient) PauseRollout(request *jdaip.PauseRolloutRequest) (*jdaip.PauseRolloutResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.PauseRolloutResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建镜像 */
+func (c *JdaipClient) CreateImage(request *jdaip.CreateImageRequest) (*jdaip.CreateImageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.CreateImageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 统计查询notebook每种状态的数量。 */
+func (c *JdaipClient) DescribeNotebookCount(request *jdaip.DescribeNotebookCountRequest) (*jdaip.DescribeNotebookCountResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DescribeNotebookCountResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取镜像列表 */
+func (c *JdaipClient) DescribeImages(request *jdaip.DescribeImagesRequest) (*jdaip.DescribeImagesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DescribeImagesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除代码仓配置 */
+func (c *JdaipClient) DeleteCodeRepoConfig(request *jdaip.DeleteCodeRepoConfigRequest) (*jdaip.DeleteCodeRepoConfigResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DeleteCodeRepoConfigResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询公共模型列表 */
+func (c *JdaipClient) DescribePublicModels(request *jdaip.DescribePublicModelsRequest) (*jdaip.DescribePublicModelsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DescribePublicModelsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询训练任务列表。
+ */
+func (c *JdaipClient) DescribeJobs(request *jdaip.DescribeJobsRequest) (*jdaip.DescribeJobsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DescribeJobsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改镜像信息 */
+func (c *JdaipClient) UpdateImage(request *jdaip.UpdateImageRequest) (*jdaip.UpdateImageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.UpdateImageResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -783,8 +1626,8 @@ func (c *JdaipClient) DescribeImage(request *jdaip.DescribeImageRequest) (*jdaip
     return jdResp, err
 }
 
-/* 获取notebook pod列表。 */
-func (c *JdaipClient) GetNotebookPods(request *jdaip.GetNotebookPodsRequest) (*jdaip.GetNotebookPodsResponse, error) {
+/* 发起推理服务滚动更新 */
+func (c *JdaipClient) RolloutInference(request *jdaip.RolloutInferenceRequest) (*jdaip.RolloutInferenceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -793,68 +1636,7 @@ func (c *JdaipClient) GetNotebookPods(request *jdaip.GetNotebookPodsRequest) (*j
         return nil, err
     }
 
-    jdResp := &jdaip.GetNotebookPodsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 删除保存镜像任务。 */
-func (c *JdaipClient) DeleteImageTask(request *jdaip.DeleteImageTaskRequest) (*jdaip.DeleteImageTaskResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jdaip.DeleteImageTaskResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 移除工作空间内成员 */
-func (c *JdaipClient) RemoveMembers(request *jdaip.RemoveMembersRequest) (*jdaip.RemoveMembersResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jdaip.RemoveMembersResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 获取构建镜像的pod日志，采用SSE流式返回。
- */
-func (c *JdaipClient) GetPodLogs(request *jdaip.GetPodLogsRequest) (*jdaip.GetPodLogsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jdaip.GetPodLogsResponse{}
+    jdResp := &jdaip.RolloutInferenceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -866,6 +1648,11 @@ func (c *JdaipClient) GetPodLogs(request *jdaip.GetPodLogsRequest) (*jdaip.GetPo
 
 /* 停止训练任务。
 当执行停止操作时，训练任务会被标记为停止状态，并且不会继续执行，且会释放相关底层资源，停止后也将无法再次启动该任务。
+
+目前支持停止状态的训练任务：
+  - `queuing`
+  - `pending`
+  - `running`
  */
 func (c *JdaipClient) StopJob(request *jdaip.StopJobRequest) (*jdaip.StopJobResponse, error) {
     if request == nil {
@@ -877,26 +1664,6 @@ func (c *JdaipClient) StopJob(request *jdaip.StopJobRequest) (*jdaip.StopJobResp
     }
 
     jdResp := &jdaip.StopJobResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 删除工作空间 */
-func (c *JdaipClient) DeleteWorkspace(request *jdaip.DeleteWorkspaceRequest) (*jdaip.DeleteWorkspaceResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jdaip.DeleteWorkspaceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -946,8 +1713,8 @@ func (c *JdaipClient) UpdateModel(request *jdaip.UpdateModelRequest) (*jdaip.Upd
     return jdResp, err
 }
 
-/* 删除模型版本 */
-func (c *JdaipClient) DeleteModelVersion(request *jdaip.DeleteModelVersionRequest) (*jdaip.DeleteModelVersionResponse, error) {
+/* 创建日志采集配置 */
+func (c *JdaipClient) CreateNotebookLogCollectConfig(request *jdaip.CreateNotebookLogCollectConfigRequest) (*jdaip.CreateNotebookLogCollectConfigResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -956,7 +1723,7 @@ func (c *JdaipClient) DeleteModelVersion(request *jdaip.DeleteModelVersionReques
         return nil, err
     }
 
-    jdResp := &jdaip.DeleteModelVersionResponse{}
+    jdResp := &jdaip.CreateNotebookLogCollectConfigResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -979,31 +1746,6 @@ func (c *JdaipClient) DescribeJob(request *jdaip.DescribeJobRequest) (*jdaip.Des
     }
 
     jdResp := &jdaip.DescribeJobResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 将运行中的Notebook保存为镜像。
-
-## 接口说明
-- 镜像以快照的方式进行保存，保存成功后自动注册到用户的镜像资产中。
-- 镜像保存过程中Notebook无法停止和删除。不影响正常连接使用，不建议在保存镜像过程中在notebook里操作大量磁盘IO(比如下载大文件)类操作。
- */
-func (c *JdaipClient) SaveImage(request *jdaip.SaveImageRequest) (*jdaip.SaveImageResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jdaip.SaveImageResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1054,6 +1796,11 @@ func (c *JdaipClient) DeleteImage(request *jdaip.DeleteImageRequest) (*jdaip.Del
 }
 
 /* 删除微调实验。
+
+**注意事项：**
+当删除微调实验时，会级联删除该实验下的所有运行。请谨慎操作。
+- 当使用的是`私有队列`时，会直接删除该实验下的所有运行。
+- 当使用的是`公共队列`时，会先判断微调运行的状态是否满足删除条件。不满足，会返回错误。满足，会删除该实验下的所有运行。
  */
 func (c *JdaipClient) DeleteExperiment(request *jdaip.DeleteExperimentRequest) (*jdaip.DeleteExperimentResponse, error) {
     if request == nil {
@@ -1065,6 +1812,26 @@ func (c *JdaipClient) DeleteExperiment(request *jdaip.DeleteExperimentRequest) (
     }
 
     jdResp := &jdaip.DeleteExperimentResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取代码仓配置详情 */
+func (c *JdaipClient) DescribeCodeRepoConfig(request *jdaip.DescribeCodeRepoConfigRequest) (*jdaip.DescribeCodeRepoConfigResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DescribeCodeRepoConfigResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1114,8 +1881,8 @@ func (c *JdaipClient) DescribeInference(request *jdaip.DescribeInferenceRequest)
     return jdResp, err
 }
 
-/* 获取推理服务事件 */
-func (c *JdaipClient) DescribeInferenceEvents(request *jdaip.DescribeInferenceEventsRequest) (*jdaip.DescribeInferenceEventsResponse, error) {
+/* 删除指定推理服务的自动扩缩容规则，停止自动扩缩容功能 */
+func (c *JdaipClient) DeleteInferenceScale(request *jdaip.DeleteInferenceScaleRequest) (*jdaip.DeleteInferenceScaleResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -1124,7 +1891,7 @@ func (c *JdaipClient) DescribeInferenceEvents(request *jdaip.DescribeInferenceEv
         return nil, err
     }
 
-    jdResp := &jdaip.DescribeInferenceEventsResponse{}
+    jdResp := &jdaip.DeleteInferenceScaleResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1154,68 +1921,6 @@ func (c *JdaipClient) DeleteService(request *jdaip.DeleteServiceRequest) (*jdaip
     return jdResp, err
 }
 
-/* 查询notebook详情 */
-func (c *JdaipClient) DescribeNotebook(request *jdaip.DescribeNotebookRequest) (*jdaip.DescribeNotebookResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jdaip.DescribeNotebookResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询训练任务类型列表。
-可以查询到所有支持的训练任务类型。
- */
-func (c *JdaipClient) DescribeJobTypes(request *jdaip.DescribeJobTypesRequest) (*jdaip.DescribeJobTypesResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jdaip.DescribeJobTypesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 根据数据集ID删除数据集 */
-func (c *JdaipClient) DeleteDataset(request *jdaip.DeleteDatasetRequest) (*jdaip.DeleteDatasetResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jdaip.DeleteDatasetResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 根据模型ID删除模型 */
 func (c *JdaipClient) DeleteModel(request *jdaip.DeleteModelRequest) (*jdaip.DeleteModelResponse, error) {
     if request == nil {
@@ -1236,27 +1941,9 @@ func (c *JdaipClient) DeleteModel(request *jdaip.DeleteModelRequest) (*jdaip.Del
     return jdResp, err
 }
 
-/* 创建新模型/新版本。 */
-func (c *JdaipClient) CreateModel(request *jdaip.CreateModelRequest) (*jdaip.CreateModelResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jdaip.CreateModelResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 更新微调实验。
+
+目前仅支持更新微调实验名称和描述信息。
  */
 func (c *JdaipClient) UpdateExperiment(request *jdaip.UpdateExperimentRequest) (*jdaip.UpdateExperimentResponse, error) {
     if request == nil {
@@ -1297,12 +1984,8 @@ func (c *JdaipClient) DescribeNotebooks(request *jdaip.DescribeNotebooksRequest)
     return jdResp, err
 }
 
-/* 启动notebook实例。
-只允许停止或失败状态时操作。
-如果notebook已经是运行状态，则不会做任何操作。
-如果是其它状态，操作接口会报错。
- */
-func (c *JdaipClient) StartNotebook(request *jdaip.StartNotebookRequest) (*jdaip.StartNotebookResponse, error) {
+/* 获取推理服务滚动更新记录 */
+func (c *JdaipClient) DescribeInferenceRollouts(request *jdaip.DescribeInferenceRolloutsRequest) (*jdaip.DescribeInferenceRolloutsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -1311,28 +1994,7 @@ func (c *JdaipClient) StartNotebook(request *jdaip.StartNotebookRequest) (*jdaip
         return nil, err
     }
 
-    jdResp := &jdaip.StartNotebookResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 创建微调实验。
- */
-func (c *JdaipClient) CreateExperiment(request *jdaip.CreateExperimentRequest) (*jdaip.CreateExperimentResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jdaip.CreateExperimentResponse{}
+    jdResp := &jdaip.DescribeInferenceRolloutsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1343,6 +2005,273 @@ func (c *JdaipClient) CreateExperiment(request *jdaip.CreateExperimentRequest) (
 }
 
 /* 查询微调运行配置参数列表。
+此接口用于查询微调运行支持的配置参数列表信息。
+可以指定模型模版，返回该模版支持的配置参数列表。
+
+**示例1：**
+当参数 `modelTemplate` 为 `llama3` 时，返回示例如下：
+```json
+{
+  "requestId": "921e02ded228acec06b5be23caeacdea",
+  "result": {
+    "runConfigInfo": {
+      "stage": [
+        {
+          "name": "pt",
+          "displayName": "增量预训练",
+          "description": "使用泛文本无标注数据对模型进行进一步的训练和优化，以提升模型的性能和泛化能力。"
+        },
+        {
+          "name": "sft",
+          "displayName": "SFT指令微调",
+          "description": "通过在特定任务数据上进一步训练，优化模型执行特定指令的能力。"
+        },
+        {
+          "name": "dpo",
+          "displayName": "DPO训练",
+          "description": "通过比较模型输出结果与人类偏好，选择更符合人类偏好的结果作为训练目标，从而优化模型输出。"
+        }
+      ],
+      "finetuningType": {
+        "pt": [
+          {
+            "name": "lora",
+            "displayName": "LoRA更新",
+            "description": "LoRA更新在训练过程中只更新低秩部分的参数。"
+          },
+          {
+            "name": "full",
+            "displayName": "全量更新",
+            "description": "全量更新在训练过程中对大模型的全部参数进行更新。"
+          }
+        ],
+        "sft": [
+          {
+            "name": "lora",
+            "displayName": "LoRA更新",
+            "description": "LoRA更新在训练过程中只更新低秩部分的参数。"
+          },
+          {
+            "name": "full",
+            "displayName": "全量更新",
+            "description": "全量更新在训练过程中对大模型的全部参数进行更新。"
+          }
+        ],
+        "dpo": [
+          {
+            "name": "lora",
+            "displayName": "LoRA更新",
+            "description": "LoRA更新在训练过程中只更新低秩部分的参数。"
+          },
+          {
+            "name": "full",
+            "displayName": "全量更新",
+            "description": "全量更新在训练过程中对大模型的全部参数进行更新。"
+          }
+        ]
+      },
+      "extras": {
+        "lora": [
+          {
+            "name": "learning_rate",
+            "paramType": "float",
+            "description": "学习率，控制优化步长。一般设置为1e-4到5e-5之间",
+            "defaultValue": "0.00005",
+            "required": false,
+            "constraints": "取值范围: 1e-6 ~ 1e-2"
+          },
+          {
+            "name": "num_train_epochs",
+            "paramType": "float",
+            "description": "训练轮数，数据大则epoch少(1-3)，数据少可多些epoch",
+            "defaultValue": "3.0",
+            "required": false,
+            "constraints": "取值范围: 0.1 ~ 100"
+          },
+          {
+            "name": "per_device_train_batch_size",
+            "paramType": "int",
+            "description": "单设备训练批大小，根据显存大小调整",
+            "defaultValue": "8",
+            "required": false,
+            "constraints": "取值范围: 1 ~ 128"
+          },
+          {
+            "name": "per_device_eval_batch_size",
+            "paramType": "int",
+            "description": "单设备评估批大小，根据显存大小调整",
+            "defaultValue": "8",
+            "required": false,
+            "constraints": "取值范围: 1 ~ 128"
+          },
+          {
+            "name": "gradient_accumulation_steps",
+            "paramType": "int",
+            "description": "梯度累积步数，用于模拟更大的批次训练",
+            "defaultValue": "1",
+            "required": false,
+            "constraints": "取值范围: 1 ~ 64"
+          },
+          {
+            "name": "warmup_ratio",
+            "paramType": "float",
+            "description": "预热阶段比例，避免训练初期不稳定",
+            "defaultValue": "0.1",
+            "required": false,
+            "constraints": "取值范围: 0.0 ~ 1.0"
+          },
+          {
+            "name": "lr_scheduler_type",
+            "paramType": "string",
+            "description": "学习率调度器类型",
+            "defaultValue": "cosine",
+            "required": false,
+            "constraints": "允许值: linear, cosine, constant, constant_with_warmup"
+          },
+          {
+            "name": "cutoff_len",
+            "paramType": "int",
+            "description": "输入序列最大长度，防止过长序列造成内存问题",
+            "defaultValue": "1024",
+            "required": false,
+            "constraints": "取值范围: 128 ~ 8192"
+          },
+          {
+            "name": "preprocessing_num_workers",
+            "paramType": "int",
+            "description": "数据预处理并行工作进程数",
+            "defaultValue": "4",
+            "required": false,
+            "constraints": "取值范围: 1 ~ 32"
+          },
+          {
+            "name": "bf16",
+            "paramType": "bool",
+            "description": "是否使用bfloat16精度，在支持的硬件上更稳定",
+            "defaultValue": "true",
+            "required": false,
+            "constraints": "允许值: true, false"
+          },
+          {
+            "name": "logging_steps",
+            "paramType": "int",
+            "description": "日志记录间隔步数",
+            "defaultValue": "10",
+            "required": false,
+            "constraints": "取值范围: 1 ~ 1000"
+          },
+          {
+            "name": "save_steps",
+            "paramType": "int",
+            "description": "模型保存间隔步数",
+            "defaultValue": "500",
+            "required": false,
+            "constraints": "取值范围: 1 ~ 10000"
+          }
+        ],
+        "full": [
+          {
+            "name": "learning_rate",
+            "paramType": "float",
+            "description": "学习率，控制优化步长。一般设置为1e-4到5e-5之间",
+            "defaultValue": "0.00005",
+            "required": false,
+            "constraints": "取值范围: 1e-6 ~ 1e-2"
+          },
+          {
+            "name": "num_train_epochs",
+            "paramType": "float",
+            "description": "训练轮数，数据大则epoch少(1-3)，数据少可多些epoch",
+            "defaultValue": "3.0",
+            "required": false,
+            "constraints": "取值范围: 0.1 ~ 100"
+          },
+          {
+            "name": "per_device_train_batch_size",
+            "paramType": "int",
+            "description": "单设备训练批大小，根据显存大小调整",
+            "defaultValue": "8",
+            "required": false,
+            "constraints": "取值范围: 1 ~ 128"
+          },
+          {
+            "name": "per_device_eval_batch_size",
+            "paramType": "int",
+            "description": "单设备评估批大小，根据显存大小调整",
+            "defaultValue": "8",
+            "required": false,
+            "constraints": "取值范围: 1 ~ 128"
+          },
+          {
+            "name": "gradient_accumulation_steps",
+            "paramType": "int",
+            "description": "梯度累积步数，用于模拟更大的批次训练",
+            "defaultValue": "1",
+            "required": false,
+            "constraints": "取值范围: 1 ~ 64"
+          },
+          {
+            "name": "warmup_ratio",
+            "paramType": "float",
+            "description": "预热阶段比例，避免训练初期不稳定",
+            "defaultValue": "0.1",
+            "required": false,
+            "constraints": "取值范围: 0.0 ~ 1.0"
+          },
+          {
+            "name": "lr_scheduler_type",
+            "paramType": "string",
+            "description": "学习率调度器类型",
+            "defaultValue": "cosine",
+            "required": false,
+            "constraints": "允许值: linear, cosine, constant, constant_with_warmup"
+          },
+          {
+            "name": "cutoff_len",
+            "paramType": "int",
+            "description": "输入序列最大长度，防止过长序列造成内存问题",
+            "defaultValue": "1024",
+            "required": false,
+            "constraints": "取值范围: 128 ~ 8192"
+          },
+          {
+            "name": "preprocessing_num_workers",
+            "paramType": "int",
+            "description": "数据预处理并行工作进程数",
+            "defaultValue": "4",
+            "required": false,
+            "constraints": "取值范围: 1 ~ 32"
+          },
+          {
+            "name": "bf16",
+            "paramType": "bool",
+            "description": "是否使用bfloat16精度，在支持的硬件上更稳定",
+            "defaultValue": "true",
+            "required": false,
+            "constraints": "允许值: true, false"
+          },
+          {
+            "name": "logging_steps",
+            "paramType": "int",
+            "description": "日志记录间隔步数",
+            "defaultValue": "10",
+            "required": false,
+            "constraints": "取值范围: 1 ~ 1000"
+          },
+          {
+            "name": "save_steps",
+            "paramType": "int",
+            "description": "模型保存间隔步数",
+            "defaultValue": "500",
+            "required": false,
+            "constraints": "取值范围: 1 ~ 10000"
+          }
+        ]
+      }
+    }
+  }
+}
+```
  */
 func (c *JdaipClient) DescribeRunConfigs(request *jdaip.DescribeRunConfigsRequest) (*jdaip.DescribeRunConfigsResponse, error) {
     if request == nil {
@@ -1374,26 +2303,6 @@ func (c *JdaipClient) CreateInference(request *jdaip.CreateInferenceRequest) (*j
     }
 
     jdResp := &jdaip.CreateInferenceResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 修改模型版本信息 */
-func (c *JdaipClient) UpdateModelVersion(request *jdaip.UpdateModelVersionRequest) (*jdaip.UpdateModelVersionResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jdaip.UpdateModelVersionResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1443,27 +2352,40 @@ func (c *JdaipClient) CreateWorkspace(request *jdaip.CreateWorkspaceRequest) (*j
     return jdResp, err
 }
 
-/* 查询工作空间列表 */
-func (c *JdaipClient) DescribeWorkspaces(request *jdaip.DescribeWorkspacesRequest) (*jdaip.DescribeWorkspacesResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jdaip.DescribeWorkspacesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 创建训练任务。
+
+创建一个新的训练任务，用于执行机器学习模型的训练工作。训练任务支持多种数据源、模型和计算资源配置，提供灵活的训练环境。
+
+**一些参数说明：**
+- **镜像配置**：指定训练环境的基础镜像，支持公开和私有镜像
+- **启动命令**：指定训练脚本的执行命令
+- **节点数量**：指定并行训练的节点数量
+
+**镜像可见性：**
+- `public`: 公开镜像，所有用户可使用
+- `private`: 私有镜像，仅当前用户可使用
+
+**资源配置：**
+- **GPU 资源**：支持多种 GPU 型号，虚拟 GPU 核数可精细调节（0.1-8核）
+- **CPU/内存**：CPU 以毫核为单位，内存以 MiB 为单位
+- **队列管理**：支持指定特定的计算队列
+
+**数据存储支持：**
+- **存储空间**：支持 oss，cfs，jpfs 等多种存储类型
+- **数据集**：支持挂载公开和私有数据集，可指定版本和挂载路径
+- **模型文件**：支持挂载预训练模型或检查点文件
+
+**存储类型说明：**
+- `oss`: 对象存储服务，适合大规模数据存储
+- `cfs`: 云文件系统，提供高性能文件存储
+- `jpfs`: 京东云并行文件系统，高并发场景优化
+
+**创建成功后：**
+- 返回唯一的训练任务ID，用于后续管理和监控
+- 任务将进入“排队中”状态，等待资源分配
+- 可通过查询任务详情接口监控训练进度
+- 支持实时查看训练日志和事件
+- 可随时停止或删除训练任务
  */
 func (c *JdaipClient) CreateJob(request *jdaip.CreateJobRequest) (*jdaip.CreateJobResponse, error) {
     if request == nil {
@@ -1504,11 +2426,8 @@ func (c *JdaipClient) DescribeInferences(request *jdaip.DescribeInferencesReques
     return jdResp, err
 }
 
-/* 删除notebook。
-如果notebook已经不存在了，则不会做任何操作。
-其它状态都允许操作。
- */
-func (c *JdaipClient) DeleteNotebook(request *jdaip.DeleteNotebookRequest) (*jdaip.DeleteNotebookResponse, error) {
+/* 解绑工作空间资源（AIStack v2.1.0版本接口） */
+func (c *JdaipClient) UnbindWorkspaceResources(request *jdaip.UnbindWorkspaceResourcesRequest) (*jdaip.UnbindWorkspaceResourcesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -1517,7 +2436,7 @@ func (c *JdaipClient) DeleteNotebook(request *jdaip.DeleteNotebookRequest) (*jda
         return nil, err
     }
 
-    jdResp := &jdaip.DeleteNotebookResponse{}
+    jdResp := &jdaip.UnbindWorkspaceResourcesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1547,27 +2466,9 @@ func (c *JdaipClient) DescribeService(request *jdaip.DescribeServiceRequest) (*j
     return jdResp, err
 }
 
-/* 获取数据集详情 */
-func (c *JdaipClient) DescribeDataset(request *jdaip.DescribeDatasetRequest) (*jdaip.DescribeDatasetResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jdaip.DescribeDatasetResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 更新微调运行。
+
+当前仅支持更新微调运行名称和描述信息。
  */
 func (c *JdaipClient) UpdateRun(request *jdaip.UpdateRunRequest) (*jdaip.UpdateRunResponse, error) {
     if request == nil {
@@ -1590,7 +2491,7 @@ func (c *JdaipClient) UpdateRun(request *jdaip.UpdateRunRequest) (*jdaip.UpdateR
 
 /* 停止notebook实例。
 如果notebook已经是停止状态，则不会做任何操作。
-除了删除中状态，其它状态都允许操作。
+除了删除中/保存镜像中状态，其它状态都允许操作。
  */
 func (c *JdaipClient) StopNotebook(request *jdaip.StopNotebookRequest) (*jdaip.StopNotebookResponse, error) {
     if request == nil {
@@ -1631,26 +2532,6 @@ func (c *JdaipClient) DescribeServices(request *jdaip.DescribeServicesRequest) (
     return jdResp, err
 }
 
-/* 获取模型的版本列表 */
-func (c *JdaipClient) DescribeModelVersions(request *jdaip.DescribeModelVersionsRequest) (*jdaip.DescribeModelVersionsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jdaip.DescribeModelVersionsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 获取notebook事件。 */
 func (c *JdaipClient) GetNotebookEvents(request *jdaip.GetNotebookEventsRequest) (*jdaip.GetNotebookEventsResponse, error) {
     if request == nil {
@@ -1662,26 +2543,6 @@ func (c *JdaipClient) GetNotebookEvents(request *jdaip.GetNotebookEventsRequest)
     }
 
     jdResp := &jdaip.GetNotebookEventsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询私有模型列表 */
-func (c *JdaipClient) DescribePrivateModels(request *jdaip.DescribePrivateModelsRequest) (*jdaip.DescribePrivateModelsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jdaip.DescribePrivateModelsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1743,26 +2604,6 @@ func (c *JdaipClient) DescribeExperiment(request *jdaip.DescribeExperimentReques
     }
 
     jdResp := &jdaip.DescribeExperimentResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询保存镜像任务日志。 */
-func (c *JdaipClient) DescribeImageTaskLog(request *jdaip.DescribeImageTaskLogRequest) (*jdaip.DescribeImageTaskLogResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &jdaip.DescribeImageTaskLogResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

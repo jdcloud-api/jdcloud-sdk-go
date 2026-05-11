@@ -178,6 +178,6 @@ type GetRunEventsResponse struct {
 }
 
 type GetRunEventsResult struct {
-    RunEventInfo []jdaip.EventInfoList `json:"runEventInfo"`
+    RunEventInfo []jdaip.EventInfoListForExperiment `json:"runEventInfo"`
     TotalCount int `json:"totalCount"`
 }

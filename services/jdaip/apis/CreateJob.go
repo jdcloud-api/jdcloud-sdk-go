@@ -33,6 +33,9 @@ type CreateJobRequest struct {
 
     /* 基本参数。  */
     JobParam *jdaip.JobParam `json:"jobParam"`
+
+    /* 日志采集配置 (Optional) */
+    LogCollectConfig *jdaip.LogCollectConfig `json:"logCollectConfig"`
 }
 
 /*
@@ -65,11 +68,13 @@ func NewCreateJobRequest(
  * param regionId: 地域ID (Required)
  * param workspaceId: 工作空间ID (Required)
  * param jobParam: 基本参数。 (Required)
+ * param logCollectConfig: 日志采集配置 (Optional)
  */
 func NewCreateJobRequestWithAllParams(
     regionId string,
     workspaceId string,
     jobParam *jdaip.JobParam,
+    logCollectConfig *jdaip.LogCollectConfig,
 ) *CreateJobRequest {
 
     return &CreateJobRequest{
@@ -82,6 +87,7 @@ func NewCreateJobRequestWithAllParams(
         RegionId: regionId,
         WorkspaceId: workspaceId,
         JobParam: jobParam,
+        LogCollectConfig: logCollectConfig,
     }
 }
 
@@ -109,6 +115,10 @@ func (r *CreateJobRequest) SetWorkspaceId(workspaceId string) {
 /* param jobParam: 基本参数。(Required) */
 func (r *CreateJobRequest) SetJobParam(jobParam *jdaip.JobParam) {
     r.JobParam = jobParam
+}
+/* param logCollectConfig: 日志采集配置(Optional) */
+func (r *CreateJobRequest) SetLogCollectConfig(logCollectConfig *jdaip.LogCollectConfig) {
+    r.LogCollectConfig = logCollectConfig
 }
 
 

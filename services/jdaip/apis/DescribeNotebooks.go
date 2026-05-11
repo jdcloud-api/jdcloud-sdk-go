@@ -38,6 +38,12 @@ type DescribeNotebooksRequest struct {
     /* 分页大小；<br>默认为10；取值范围[1, 100]。 (Optional) */
     PageSize *int `json:"pageSize"`
 
+    /* 用户自定义标签列表。 (Optional) */
+    UserTags []jdaip.NbTagFilter `json:"userTags"`
+
+    /* 资源组ID列表 (Optional) */
+    ResourceGroupIds []string `json:"resourceGroupIds"`
+
     /* <b>filters 中支持使用以下关键字进行过滤</b>
 `notebookId`: 资源ID，精确匹配，支持多个。
 `name`: 名称，模糊匹配，支持单个。
@@ -46,6 +52,9 @@ type DescribeNotebooksRequest struct {
 `createUserPin`: 创建人pin，精确匹配，支持多个。
 `appType`: 应用类型，精确匹配，支持单个。
 `queue`: 队列ID，精确匹配，支持单个。
+`permission`: 权限，精确匹配，支持单个，可选(public,private)。
+`ownerUser`: 所有者名称，模糊匹配，支持单个。
+`ownerUserPin`: 所有者pin，精确匹配，支持多个。
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
@@ -78,6 +87,8 @@ func NewDescribeNotebooksRequest(
  * param workspaceId: 工作空间ID (Required)
  * param pageNumber: 页码；默认为1。 (Optional)
  * param pageSize: 分页大小；<br>默认为10；取值范围[1, 100]。 (Optional)
+ * param userTags: 用户自定义标签列表。 (Optional)
+ * param resourceGroupIds: 资源组ID列表 (Optional)
  * param filters: <b>filters 中支持使用以下关键字进行过滤</b>
 `notebookId`: 资源ID，精确匹配，支持多个。
 `name`: 名称，模糊匹配，支持单个。
@@ -86,6 +97,9 @@ func NewDescribeNotebooksRequest(
 `createUserPin`: 创建人pin，精确匹配，支持多个。
 `appType`: 应用类型，精确匹配，支持单个。
 `queue`: 队列ID，精确匹配，支持单个。
+`permission`: 权限，精确匹配，支持单个，可选(public,private)。
+`ownerUser`: 所有者名称，模糊匹配，支持单个。
+`ownerUserPin`: 所有者pin，精确匹配，支持多个。
  (Optional)
  */
 func NewDescribeNotebooksRequestWithAllParams(
@@ -93,6 +107,8 @@ func NewDescribeNotebooksRequestWithAllParams(
     workspaceId string,
     pageNumber *int,
     pageSize *int,
+    userTags []jdaip.NbTagFilter,
+    resourceGroupIds []string,
     filters []common.Filter,
 ) *DescribeNotebooksRequest {
 
@@ -107,6 +123,8 @@ func NewDescribeNotebooksRequestWithAllParams(
         WorkspaceId: workspaceId,
         PageNumber: pageNumber,
         PageSize: pageSize,
+        UserTags: userTags,
+        ResourceGroupIds: resourceGroupIds,
         Filters: filters,
     }
 }
@@ -140,6 +158,14 @@ func (r *DescribeNotebooksRequest) SetPageNumber(pageNumber int) {
 func (r *DescribeNotebooksRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
+/* param userTags: 用户自定义标签列表。(Optional) */
+func (r *DescribeNotebooksRequest) SetUserTags(userTags []jdaip.NbTagFilter) {
+    r.UserTags = userTags
+}
+/* param resourceGroupIds: 资源组ID列表(Optional) */
+func (r *DescribeNotebooksRequest) SetResourceGroupIds(resourceGroupIds []string) {
+    r.ResourceGroupIds = resourceGroupIds
+}
 /* param filters: <b>filters 中支持使用以下关键字进行过滤</b>
 `notebookId`: 资源ID，精确匹配，支持多个。
 `name`: 名称，模糊匹配，支持单个。
@@ -148,6 +174,9 @@ func (r *DescribeNotebooksRequest) SetPageSize(pageSize int) {
 `createUserPin`: 创建人pin，精确匹配，支持多个。
 `appType`: 应用类型，精确匹配，支持单个。
 `queue`: 队列ID，精确匹配，支持单个。
+`permission`: 权限，精确匹配，支持单个，可选(public,private)。
+`ownerUser`: 所有者名称，模糊匹配，支持单个。
+`ownerUserPin`: 所有者pin，精确匹配，支持多个。
 (Optional) */
 func (r *DescribeNotebooksRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters

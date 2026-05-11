@@ -28,6 +28,12 @@ type DataInfo struct {
     /* 所有文件总token数 (Optional) */
     TotalToken int `json:"totalToken"`
 
+    /* 所有文件总样本数 (Optional) */
+    TotalSampleSize int `json:"totalSampleSize"`
+
+    /* 已标注数据总数 (Optional) */
+    TotalMarked int `json:"totalMarked"`
+
     /* files (Optional) */
     Files []File `json:"files"`
 }

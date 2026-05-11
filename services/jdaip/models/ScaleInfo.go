@@ -19,6 +19,9 @@ package models
 
 type ScaleInfo struct {
 
-    /* 推理服务实例  */
+    /* 推理服务实例数 (Optional) */
     Replicas int `json:"replicas"`
+
+    /* 多角色扩缩容配置 (Optional) */
+    RoleSet RoleSetScale `json:"roleSet"`
 }

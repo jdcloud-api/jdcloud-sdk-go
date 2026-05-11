@@ -46,10 +46,10 @@ type ImageInfo struct {
  (Optional) */
     SourceType string `json:"sourceType"`
 
-    /* 标签，使用英文逗号拼接。 (Optional) */
+    /* 标签，使用英文逗号拼接。例如：label1,label2,label3 (Optional) */
     Labels string `json:"labels"`
 
-    /* 标签，数组格式。 (Optional) */
+    /* 标签，labels转换的数组格式。 (Optional) */
     LabelList []string `json:"labelList"`
 
     /* 镜像启动命令。 (Optional) */
@@ -90,24 +90,21 @@ type ImageInfo struct {
     /* dockerfile文件内容 (Optional) */
     Dockerfile string `json:"dockerfile"`
 
-    /* 基础镜像构建时，依赖安装命令 (Optional) */
-    DependencyCmd string `json:"dependencyCmd"`
-
     /* 队列ID。 (Optional) */
     QueueId string `json:"queueId"`
-
-    /* CPU大小，单位：核 (Optional) */
-    Cpu int `json:"cpu"`
-
-    /* 内存大小，单位：GB。 (Optional) */
-    Memory int `json:"memory"`
-
-    /* job名 (Optional) */
-    JobName string `json:"jobName"`
 
     /* pod名 (Optional) */
     PodName string `json:"podName"`
 
     /* pod失败说明 (Optional) */
     Reason string `json:"reason"`
+
+    /* 归属用户名称。 (Optional) */
+    OwnerUser string `json:"ownerUser"`
+
+    /* 归属用户pin。 (Optional) */
+    OwnerUserPin string `json:"ownerUserPin"`
+
+    /* 工作空间中的资源归属权限。 (Optional) */
+    Permission string `json:"permission"`
 }

@@ -38,6 +38,14 @@ type UpdateExperimentRequest struct {
 
     /* 微调实验的描述信息，不超过256个字符。 (Optional) */
     Description *string `json:"description"`
+
+    /* 工作空间中的资源归属权限，支持（public,private）。 (Optional) */
+    Permission *string `json:"permission"`
+
+    /* 归属用户pin。
+可配置任务所属主账号pin，或者工作空间其他成员的子账号pin
+ (Optional) */
+    OwnerUserPin *string `json:"ownerUserPin"`
 }
 
 /*
@@ -72,6 +80,10 @@ func NewUpdateExperimentRequest(
  * param experimentId: 微调实验ID (Required)
  * param name: 微调实验名称。1~32字符，仅支持中文、大小写字母、数字、英文中划线 “-”和英文下划线“_”。 (Optional)
  * param description: 微调实验的描述信息，不超过256个字符。 (Optional)
+ * param permission: 工作空间中的资源归属权限，支持（public,private）。 (Optional)
+ * param ownerUserPin: 归属用户pin。
+可配置任务所属主账号pin，或者工作空间其他成员的子账号pin
+ (Optional)
  */
 func NewUpdateExperimentRequestWithAllParams(
     regionId string,
@@ -79,6 +91,8 @@ func NewUpdateExperimentRequestWithAllParams(
     experimentId string,
     name *string,
     description *string,
+    permission *string,
+    ownerUserPin *string,
 ) *UpdateExperimentRequest {
 
     return &UpdateExperimentRequest{
@@ -93,6 +107,8 @@ func NewUpdateExperimentRequestWithAllParams(
         ExperimentId: experimentId,
         Name: name,
         Description: description,
+        Permission: permission,
+        OwnerUserPin: ownerUserPin,
     }
 }
 
@@ -128,6 +144,16 @@ func (r *UpdateExperimentRequest) SetName(name string) {
 /* param description: 微调实验的描述信息，不超过256个字符。(Optional) */
 func (r *UpdateExperimentRequest) SetDescription(description string) {
     r.Description = &description
+}
+/* param permission: 工作空间中的资源归属权限，支持（public,private）。(Optional) */
+func (r *UpdateExperimentRequest) SetPermission(permission string) {
+    r.Permission = &permission
+}
+/* param ownerUserPin: 归属用户pin。
+可配置任务所属主账号pin，或者工作空间其他成员的子账号pin
+(Optional) */
+func (r *UpdateExperimentRequest) SetOwnerUserPin(ownerUserPin string) {
+    r.OwnerUserPin = &ownerUserPin
 }
 
 

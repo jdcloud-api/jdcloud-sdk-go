@@ -40,6 +40,9 @@ type NotebookInfo struct {
     /* 应用类型(JupyterLab)。 (Optional) */
     AppType string `json:"appType"`
 
+    /* 任务ID，不为空表示正在执行任务。 (Optional) */
+    TaskId string `json:"taskId"`
+
     /* 状态
 `queuing`: 队排中。
 `pending`: 启动中。
@@ -49,8 +52,13 @@ type NotebookInfo struct {
 `stopped`: 已停止。
 `deleting`: 删除中。
 `saving`: 镜像保存中。
+`rolling-back`: 回滚中(不能做任何操作)。
+`rolled-back`: 已回滚(只能操作删除)。
  (Optional) */
     State string `json:"state"`
+
+    /* 资源在集群中的空闲状态，值为空表示是空闲的，in-use表示资源已被占用。 (Optional) */
+    ResourceState string `json:"resourceState"`
 
     /* 工作空间ID。 (Optional) */
     WorkspaceId string `json:"workspaceId"`
@@ -60,6 +68,12 @@ type NotebookInfo struct {
 
     /* 控制台地址。 (Optional) */
     Uri string `json:"uri"`
+
+    /* vscode地址。 (Optional) */
+    VscodeUri string `json:"vscodeUri"`
+
+    /* 自定义服务地址列表。 (Optional) */
+    CustomServiceUrls []string `json:"customServiceUrls"`
 
     /* 异常原因。 (Optional) */
     Reason string `json:"reason"`
@@ -92,8 +106,32 @@ type NotebookInfo struct {
     UpdateTime string `json:"updateTime"`
 
     /* 资源配置。 (Optional) */
-    Workload WorkloadSpec `json:"workload"`
+    Workload NbWorkloadDetail `json:"workload"`
 
     /* 公网访问配置。 (Optional) */
     Lb LbSpec `json:"lb"`
+
+    /* 归属用户名称。 (Optional) */
+    OwnerUser string `json:"ownerUser"`
+
+    /* 归属用户pin。 (Optional) */
+    OwnerUserPin string `json:"ownerUserPin"`
+
+    /* 工作空间中的资源归属权限。 (Optional) */
+    Permission string `json:"permission"`
+
+    /* 关机策略。 (Optional) */
+    ShutdownPolicy NbShutdownPolicy `json:"shutdownPolicy"`
+
+    /* 资源组ID。 (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
+
+    /* 资源组名称。 (Optional) */
+    ResourceGroupName string `json:"resourceGroupName"`
+
+    /* 用户自定义标签列表。 (Optional) */
+    UserTags []NbTag `json:"userTags"`
+
+    /* 节点亲和性配置。 (Optional) */
+    NodeAffinities []NotebookNodeAffinity `json:"nodeAffinities"`
 }

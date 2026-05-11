@@ -19,9 +19,36 @@ package models
 
 type PodInfo struct {
 
-    /* pod名称。 (Optional) */
-    PodName string `json:"podName"`
+    /* 推理服务名字 (Optional) */
+    Name string `json:"name"`
 
-    /* 终端访问地址。 (Optional) */
-    TerminalUrl string `json:"terminalUrl"`
+    /* 推理服务ID (Optional) */
+    InferenceId string `json:"inferenceId"`
+
+    /* pod ip (Optional) */
+    PodIp string `json:"podIp"`
+
+    /* pod重启次数 (Optional) */
+    Restarts int `json:"restarts"`
+
+    /* pod状态 (Optional) */
+    Status string `json:"status"`
+
+    /* pod中已经running的容器数 (Optional) */
+    ReadyContainers int `json:"readyContainers"`
+
+    /* pod中的总容器数 (Optional) */
+    TotalContainers int `json:"totalContainers"`
+
+    /* pod所在节点的IP (Optional) */
+    NodeIp string `json:"nodeIp"`
+
+    /* pod创建时间 (Optional) */
+    CreatedAt string `json:"createdAt"`
+
+    /* pod更新时间 (Optional) */
+    UpdatedAt string `json:"updatedAt"`
+
+    /* 是否为旧的pod (Optional) */
+    IsOldPod bool `json:"isOldPod"`
 }

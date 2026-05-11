@@ -19,7 +19,7 @@ package models
 
 type NotebookStateCount struct {
 
-    /* 状态名称(queuing,pending,failed,running,stopping,stopped,deleting,saving)。 (Optional) */
+    /* 状态名称(queuing,pending,failed,running,stopping,stopped,deleting,saving,rolling-back,rolled-back)。 (Optional) */
     Name string `json:"name"`
 
     /* 数量 (Optional) */

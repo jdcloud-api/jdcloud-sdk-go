@@ -33,4 +33,13 @@ type Inference struct {
 
     /* 推理服务运行环境（如：镜像，命令行，环境变量等） (Optional) */
     Runtime Runtime `json:"runtime"`
+
+    /* 多角色部署配置 (Optional) */
+    RoleSet RoleSet `json:"roleSet"`
+
+    /* 用户标签 (Optional) */
+    UserTags []UserTag `json:"userTags"`
+
+    /* 资源组信息 (Optional) */
+    ResourceGroupInfo ResourceGroupInfo `json:"resourceGroupInfo"`
 }

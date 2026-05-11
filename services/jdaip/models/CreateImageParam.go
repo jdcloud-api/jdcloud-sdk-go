@@ -23,44 +23,40 @@ type CreateImageParam struct {
     ImageName *string `json:"imageName"`
 
     /* 镜像用途,多个用英文逗号拼接，可选值：
-- notebook 开发
-- training 训练，
-- inference 推理
+- notebook Notebook
+- training 训练任务
+- inference 在线服务
  (Optional) */
     ImageUsage *string `json:"imageUsage"`
 
     /* 镜像类型：cpu,gpu (Optional) */
     ImageType *string `json:"imageType"`
 
-    /* 镜像地址 (Optional) */
+    /* 注册/构建后的镜像地址 (Optional) */
     ImageUrl *string `json:"imageUrl"`
 
     /* 注册方式，可选值：
 - jcr 容器镜像仓库注册
 - dockerfile Dockerfile方式构建
 - notebook：notebook方式构建
-- base-image 基于基础镜像构建
  (Optional) */
     SourceType *string `json:"sourceType"`
 
-    /* 标签，使用英文逗号拼接。 (Optional) */
+    /* 标签，使用英文逗号拼接。例如：label1,label2,label3 (Optional) */
     Labels *string `json:"labels"`
-
-    /* 基础镜像，基于基础镜像注册时生效必传。 (Optional) */
-    BaseImage *string `json:"baseImage"`
 
     /* dockerfile文件内容。基于Dockerfile方式构建时生效必传 (Optional) */
     Dockerfile *string `json:"dockerfile"`
 
-    /* 依赖安装命令。基于基础镜像构建时生效必传 (Optional) */
-    DependencyCmd *string `json:"dependencyCmd"`
-
-    /* 队列ID。基于基础镜像构建和Dockerfile方式构建时生效必传。 (Optional) */
+    /* 队列ID。基于Dockerfile方式构建时生效必传。 (Optional) */
     QueueId *string `json:"queueId"`
 
-    /* CPU大小，单位：核。基于基础镜像构建和Dockerfile方式构建时生效必传 (Optional) */
+    /* CPU大小，单位：核。基于Dockerfile方式构建时生效必传 (Optional) */
     Cpu *int `json:"cpu"`
 
-    /* 内存大小，单位：GB。基于基础镜像构建和Dockerfile方式构建时生效必传 (Optional) */
+    /* 内存大小，单位：GB。基于Dockerfile方式构建时生效必传 (Optional) */
     Memory *int `json:"memory"`
+
+    /* 工作空间中的资源归属权限，支持(public,private)，默认为public。 (Optional) */
+    Permission *string `json:"permission"`
 }

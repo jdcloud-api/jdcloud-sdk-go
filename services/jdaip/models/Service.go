@@ -34,18 +34,18 @@ type Service struct {
     /* 服务ID (Optional) */
     ServiceId string `json:"serviceId"`
 
-    /* 推理服务总的调用地址 (Optional) */
+    /* 推理服务统一调用地址 (Optional) */
     Address string `json:"address"`
+
+    /* 推理服务内网统一调用地址 (Optional) */
+    InnerAddress string `json:"innerAddress"`
+
+    /* vpc内调用地址，当前是IP形式提供 (Optional) */
+    VpcAddress string `json:"vpcAddress"`
 
     /* 访问服务的Bearer Token (Optional) */
     AccessToken string `json:"accessToken"`
 
     /* 该服务中总版本数 (Optional) */
     Total int `json:"total"`
-
-    /* 创建服务的用户 (Optional) */
-    CreateUser string `json:"createUser"`
-
-    /* 创建服务的用户PIN (Optional) */
-    CreateUserPin string `json:"createUserPin"`
 }

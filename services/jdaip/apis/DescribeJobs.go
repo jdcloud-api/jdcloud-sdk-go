@@ -37,12 +37,22 @@ type DescribeJobsRequest struct {
     /* 分页大小；默认为20；取值范围[1, 500]。 (Optional) */
     PageSize *int `json:"pageSize"`
 
+    /* 用户自定义标签列表。 (Optional) */
+    UserTags []jdaip.JobTagFilter `json:"userTags"`
+
+    /* 资源组ID列表 (Optional) */
+    ResourceGroupIds []string `json:"resourceGroupIds"`
+
     /* <b>filters 中支持使用以下关键字进行过滤</b>
 `jobId`: 训练任务ID，精确匹配，支持多个。
 `name`: 训练任务名称，模糊匹配，支持单个。
 `jobType`: 训练任务类型，精确匹配，支持多个。
 `state`: 训练任务的状态，精确匹配，支持多个。
 `createUser`: 创建人名称，模糊匹配，支持单个。
+`queueId`: 训练任务所属的队列ID，精确匹配，支持多个。
+`permission`: 权限，精确匹配，支持单个，可选(public,private)。
+`ownerUserPin`: 所有者pin，精确匹配，支持多个。
+`ownerUser`: 所有者名称，模糊匹配，支持单个。
  (Optional) */
     Filters []jdaip.Filter `json:"filters"`
 }
@@ -75,12 +85,18 @@ func NewDescribeJobsRequest(
  * param workspaceId: 工作空间ID (Required)
  * param pageNumber: 页码；默认为1。 (Optional)
  * param pageSize: 分页大小；默认为20；取值范围[1, 500]。 (Optional)
+ * param userTags: 用户自定义标签列表。 (Optional)
+ * param resourceGroupIds: 资源组ID列表 (Optional)
  * param filters: <b>filters 中支持使用以下关键字进行过滤</b>
 `jobId`: 训练任务ID，精确匹配，支持多个。
 `name`: 训练任务名称，模糊匹配，支持单个。
 `jobType`: 训练任务类型，精确匹配，支持多个。
 `state`: 训练任务的状态，精确匹配，支持多个。
 `createUser`: 创建人名称，模糊匹配，支持单个。
+`queueId`: 训练任务所属的队列ID，精确匹配，支持多个。
+`permission`: 权限，精确匹配，支持单个，可选(public,private)。
+`ownerUserPin`: 所有者pin，精确匹配，支持多个。
+`ownerUser`: 所有者名称，模糊匹配，支持单个。
  (Optional)
  */
 func NewDescribeJobsRequestWithAllParams(
@@ -88,6 +104,8 @@ func NewDescribeJobsRequestWithAllParams(
     workspaceId string,
     pageNumber *int,
     pageSize *int,
+    userTags []jdaip.JobTagFilter,
+    resourceGroupIds []string,
     filters []jdaip.Filter,
 ) *DescribeJobsRequest {
 
@@ -102,6 +120,8 @@ func NewDescribeJobsRequestWithAllParams(
         WorkspaceId: workspaceId,
         PageNumber: pageNumber,
         PageSize: pageSize,
+        UserTags: userTags,
+        ResourceGroupIds: resourceGroupIds,
         Filters: filters,
     }
 }
@@ -135,12 +155,24 @@ func (r *DescribeJobsRequest) SetPageNumber(pageNumber int) {
 func (r *DescribeJobsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
+/* param userTags: 用户自定义标签列表。(Optional) */
+func (r *DescribeJobsRequest) SetUserTags(userTags []jdaip.JobTagFilter) {
+    r.UserTags = userTags
+}
+/* param resourceGroupIds: 资源组ID列表(Optional) */
+func (r *DescribeJobsRequest) SetResourceGroupIds(resourceGroupIds []string) {
+    r.ResourceGroupIds = resourceGroupIds
+}
 /* param filters: <b>filters 中支持使用以下关键字进行过滤</b>
 `jobId`: 训练任务ID，精确匹配，支持多个。
 `name`: 训练任务名称，模糊匹配，支持单个。
 `jobType`: 训练任务类型，精确匹配，支持多个。
 `state`: 训练任务的状态，精确匹配，支持多个。
 `createUser`: 创建人名称，模糊匹配，支持单个。
+`queueId`: 训练任务所属的队列ID，精确匹配，支持多个。
+`permission`: 权限，精确匹配，支持单个，可选(public,private)。
+`ownerUserPin`: 所有者pin，精确匹配，支持多个。
+`ownerUser`: 所有者名称，模糊匹配，支持单个。
 (Optional) */
 func (r *DescribeJobsRequest) SetFilters(filters []jdaip.Filter) {
     r.Filters = filters
@@ -160,6 +192,6 @@ type DescribeJobsResponse struct {
 }
 
 type DescribeJobsResult struct {
-    JobListInfo []jdaip.JobListInfo `json:"jobListInfo"`
+    JobListInfo []jdaip.JobListInfoForJob `json:"jobListInfo"`
     TotalCount int `json:"totalCount"`
 }

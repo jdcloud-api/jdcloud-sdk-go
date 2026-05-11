@@ -24,4 +24,7 @@ type LbSpec struct {
 
     /* 监听端口，1-65534，需要指定一个未被占用的空闲可用端口。  */
     LbPort int `json:"lbPort"`
+
+    /* 负载均衡类型。 (Optional) */
+    LbType *string `json:"lbType"`
 }

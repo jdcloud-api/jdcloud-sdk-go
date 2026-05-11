@@ -31,22 +31,27 @@ type CreateInferenceRequest struct {
     /* 工作空间ID  */
     WorkspaceId string `json:"workspaceId"`
 
-    /* 用于保证请求的幂等性。由客户端生成，并确保不同请求中该参数唯一，长度不超过64个字符。 (Optional) */
-    ClientToken *string `json:"clientToken"`
-
-    /*  (Optional) */
+    /* 创建推理服务的规格（与请求 JSON 字段 inferenceSpec 对应）  */
     InferenceSpec *jdaip.InferenceSpec `json:"inferenceSpec"`
+
+    /* 日志采集配置 (Optional) */
+    LogCollectConfig *jdaip.LogCollectConfig `json:"logCollectConfig"`
+
+    /* 推理服务扩展信息（如用户标签、资源组等） (Optional) */
+    Extend *jdaip.ExtendInferenceRequest `json:"extend"`
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param workspaceId: 工作空间ID (Required)
+ * param inferenceSpec: 创建推理服务的规格（与请求 JSON 字段 inferenceSpec 对应） (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateInferenceRequest(
     regionId string,
     workspaceId string,
+    inferenceSpec *jdaip.InferenceSpec,
 ) *CreateInferenceRequest {
 
 	return &CreateInferenceRequest{
@@ -58,20 +63,23 @@ func NewCreateInferenceRequest(
 		},
         RegionId: regionId,
         WorkspaceId: workspaceId,
+        InferenceSpec: inferenceSpec,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param workspaceId: 工作空间ID (Required)
- * param clientToken: 用于保证请求的幂等性。由客户端生成，并确保不同请求中该参数唯一，长度不超过64个字符。 (Optional)
- * param inferenceSpec:  (Optional)
+ * param inferenceSpec: 创建推理服务的规格（与请求 JSON 字段 inferenceSpec 对应） (Required)
+ * param logCollectConfig: 日志采集配置 (Optional)
+ * param extend: 推理服务扩展信息（如用户标签、资源组等） (Optional)
  */
 func NewCreateInferenceRequestWithAllParams(
     regionId string,
     workspaceId string,
-    clientToken *string,
     inferenceSpec *jdaip.InferenceSpec,
+    logCollectConfig *jdaip.LogCollectConfig,
+    extend *jdaip.ExtendInferenceRequest,
 ) *CreateInferenceRequest {
 
     return &CreateInferenceRequest{
@@ -83,8 +91,9 @@ func NewCreateInferenceRequestWithAllParams(
         },
         RegionId: regionId,
         WorkspaceId: workspaceId,
-        ClientToken: clientToken,
         InferenceSpec: inferenceSpec,
+        LogCollectConfig: logCollectConfig,
+        Extend: extend,
     }
 }
 
@@ -109,13 +118,17 @@ func (r *CreateInferenceRequest) SetRegionId(regionId string) {
 func (r *CreateInferenceRequest) SetWorkspaceId(workspaceId string) {
     r.WorkspaceId = workspaceId
 }
-/* param clientToken: 用于保证请求的幂等性。由客户端生成，并确保不同请求中该参数唯一，长度不超过64个字符。(Optional) */
-func (r *CreateInferenceRequest) SetClientToken(clientToken string) {
-    r.ClientToken = &clientToken
-}
-/* param inferenceSpec: (Optional) */
+/* param inferenceSpec: 创建推理服务的规格（与请求 JSON 字段 inferenceSpec 对应）(Required) */
 func (r *CreateInferenceRequest) SetInferenceSpec(inferenceSpec *jdaip.InferenceSpec) {
     r.InferenceSpec = inferenceSpec
+}
+/* param logCollectConfig: 日志采集配置(Optional) */
+func (r *CreateInferenceRequest) SetLogCollectConfig(logCollectConfig *jdaip.LogCollectConfig) {
+    r.LogCollectConfig = logCollectConfig
+}
+/* param extend: 推理服务扩展信息（如用户标签、资源组等）(Optional) */
+func (r *CreateInferenceRequest) SetExtend(extend *jdaip.ExtendInferenceRequest) {
+    r.Extend = extend
 }
 
 

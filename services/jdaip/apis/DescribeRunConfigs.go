@@ -30,7 +30,12 @@ type DescribeRunConfigsRequest struct {
     /* 工作空间ID  */
     WorkspaceId string `json:"workspaceId"`
 
-    /* 模型模版。 (Optional) */
+    /* 模型模版，严格区分大小写。
+| 模型名                                                             | 参数量                            | modelTemplate       |
+| ----------------------------------------------------------------- | -------------------------------- | ------------------- |
+| [Llama 3-3.3](https://huggingface.co/meta-llama)                  | 1B/3B/8B/70B                     | llama3              |
+| [Qwen (1-2.5) (Code/Math/MoE/QwQ)](https://huggingface.co/Qwen)   | 0.5B/1.5B/3B/7B/14B/32B/72B/110B | qwen                |
+ (Optional) */
     ModelTemplate *string `json:"modelTemplate"`
 }
 
@@ -60,7 +65,12 @@ func NewDescribeRunConfigsRequest(
 /*
  * param regionId: 地域ID (Required)
  * param workspaceId: 工作空间ID (Required)
- * param modelTemplate: 模型模版。 (Optional)
+ * param modelTemplate: 模型模版，严格区分大小写。
+| 模型名                                                             | 参数量                            | modelTemplate       |
+| ----------------------------------------------------------------- | -------------------------------- | ------------------- |
+| [Llama 3-3.3](https://huggingface.co/meta-llama)                  | 1B/3B/8B/70B                     | llama3              |
+| [Qwen (1-2.5) (Code/Math/MoE/QwQ)](https://huggingface.co/Qwen)   | 0.5B/1.5B/3B/7B/14B/32B/72B/110B | qwen                |
+ (Optional)
  */
 func NewDescribeRunConfigsRequestWithAllParams(
     regionId string,
@@ -102,7 +112,12 @@ func (r *DescribeRunConfigsRequest) SetRegionId(regionId string) {
 func (r *DescribeRunConfigsRequest) SetWorkspaceId(workspaceId string) {
     r.WorkspaceId = workspaceId
 }
-/* param modelTemplate: 模型模版。(Optional) */
+/* param modelTemplate: 模型模版，严格区分大小写。
+| 模型名                                                             | 参数量                            | modelTemplate       |
+| ----------------------------------------------------------------- | -------------------------------- | ------------------- |
+| [Llama 3-3.3](https://huggingface.co/meta-llama)                  | 1B/3B/8B/70B                     | llama3              |
+| [Qwen (1-2.5) (Code/Math/MoE/QwQ)](https://huggingface.co/Qwen)   | 0.5B/1.5B/3B/7B/14B/32B/72B/110B | qwen                |
+(Optional) */
 func (r *DescribeRunConfigsRequest) SetModelTemplate(modelTemplate string) {
     r.ModelTemplate = &modelTemplate
 }

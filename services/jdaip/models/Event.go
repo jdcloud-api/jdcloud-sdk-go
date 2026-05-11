@@ -20,7 +20,7 @@ package models
 type Event struct {
 
     /* 事件发生时间 (Optional) */
-    CreatTime string `json:"creatTime"`
+    CreateTime string `json:"createTime"`
 
     /* 事件详情 (Optional) */
     Detail string `json:"detail"`

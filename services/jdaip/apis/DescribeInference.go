@@ -19,6 +19,7 @@ package apis
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
     jdaip "github.com/jdcloud-api/jdcloud-sdk-go/services/jdaip/models"
+    charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
 )
 
 type DescribeInferenceRequest struct {
@@ -132,7 +133,14 @@ type DescribeInferenceResult struct {
     Service jdaip.ServiceInfo `json:"service"`
     Metadata jdaip.Metadata `json:"metadata"`
     Models []jdaip.Model `json:"models"`
+    Codes []jdaip.Code `json:"codes"`
     RegionId string `json:"regionId"`
+    RoleSet jdaip.RoleSet `json:"roleSet"`
     Resource jdaip.Resource `json:"resource"`
     Runtime jdaip.Runtime `json:"runtime"`
+    Charge charge.Charge `json:"charge"`
+    LogCollectConfig jdaip.LogCollectConfigDetail `json:"logCollectConfig"`
+    UserTags []jdaip.UserTag `json:"userTags"`
+    ResourceGroupInfo jdaip.ResourceGroupInfo `json:"resourceGroupInfo"`
+    RolloutInfo jdaip.RolloutInfo `json:"rolloutInfo"`
 }

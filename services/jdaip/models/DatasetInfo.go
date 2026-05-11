@@ -25,13 +25,18 @@ type DatasetInfo struct {
     /* 数据集名称 (Optional) */
     DatasetName string `json:"datasetName"`
 
-    /* ｜ 数据集类型，可选值： - text：文本 - custom：自定义 (Optional) */
+    /* 数据集类型，可选值：
+- text：文本
+- image：图像
+- custom：自定义
+ (Optional) */
     DatasetType string `json:"datasetType"`
 
     /* 任务类型，可选值：
 - sft：文本维度
 - dpo：文本维度
 - cpt：文本维度-增量预训练
+- image-classification：图像维度-图像分类
 - custom：自定义
  (Optional) */
     TaskType string `json:"taskType"`
@@ -59,4 +64,13 @@ type DatasetInfo struct {
 
     /* 更新用户 (Optional) */
     UpdateUser string `json:"updateUser"`
+
+    /* 归属用户名称。 (Optional) */
+    OwnerUser string `json:"ownerUser"`
+
+    /* 归属用户pin。 (Optional) */
+    OwnerUserPin string `json:"ownerUserPin"`
+
+    /* 工作空间中的资源归属权限。 (Optional) */
+    Permission string `json:"permission"`
 }

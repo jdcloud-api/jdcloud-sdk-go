@@ -40,18 +40,6 @@ type AdminRunListInfo struct {
     /* 微调实验名称。 (Optional) */
     ExperimentName string `json:"experimentName"`
 
-    /* 微调配置参数。 (Optional) */
-    FinetuningConfig FinetuningConfigParam `json:"finetuningConfig"`
-
-    /* 数据集配置。 (Optional) */
-    Datasets []DatasetParam `json:"datasets"`
-
-    /* 资源配置信息。 (Optional) */
-    Resource ResourceParam `json:"resource"`
-
-    /* 存储空间配置，用于保存训练后的模型和报告等数据。 (Optional) */
-    StorageSpace StorageSpaceParam `json:"storageSpace"`
-
     /* 微调运行的状态。取值范围如下：
 `queuing`：`排队中`
 `pending`：`启动中`
@@ -61,11 +49,25 @@ type AdminRunListInfo struct {
 `stopped`：`停止`
 `success`：`成功`
 `deleting`: `删除中`
+`rolling-back`：`回滚中`
+`rolled-back`：`已回滚`
  (Optional) */
     State string `json:"state"`
 
     /* 持续时间，单位为秒。 (Optional) */
     RunningTimeInSec int `json:"runningTimeInSec"`
+
+    /* 业务类型。精调任务具体的业务来源，`finetuning`：用户创建的精调任务，`distill`：来自蒸馏创建的精调任务。 (Optional) */
+    BizType string `json:"bizType"`
+
+    /* 资源组ID。 (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
+
+    /* 资源组名称。 (Optional) */
+    ResourceGroupName string `json:"resourceGroupName"`
+
+    /* 用户自定义标签列表。 (Optional) */
+    UserTags []RunTag `json:"userTags"`
 
     /* 主账号。 (Optional) */
     Pin string `json:"pin"`

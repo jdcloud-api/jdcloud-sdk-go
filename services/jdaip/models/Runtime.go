@@ -28,17 +28,35 @@ type Runtime struct {
     /* 完整镜像地址 （如：docker.io/nginx:latest) (Optional) */
     ImageUrl *string `json:"imageUrl"`
 
-    /* 镜像来源，public or self (Optional) */
-    ImageSource *string `json:"imageSource"`
+    /* 镜像仓用户名 （如：user123) (Optional) */
+    RegistryUser *string `json:"registryUser"`
+
+    /* 镜像仓密码 (Optional) */
+    RegistryPass *string `json:"registryPass"`
+
+    /* 用户挂载到容器内的文件内容 (Optional) */
+    FileContent *string `json:"fileContent"`
+
+    /* 用户挂载到容器内的文件路径，含文件名 (Optional) */
+    FilePath *string `json:"filePath"`
+
+    /* 健康检查, 最多三个 (Optional) */
+    HealthChecks []HealthCheck `json:"healthChecks"`
+
+    /* 是否开启特权模式 (Optional) */
+    Privilege *bool `json:"privilege"`
+
+    /* 是否开启用户空间文件系统 (Optional) */
+    Fuse *bool `json:"fuse"`
 
     /* 服务监听端口 (默认8080） (Optional) */
     Port *int `json:"port"`
 
+    /* 创建vpc ip的相关信息 (Optional) */
+    VpcInfo *VPCInfo `json:"vpcInfo"`
+
     /* 字符串，用户VPC内服务协议（HTTP, GRPC, TCP or UDP) (Optional) */
     VpcProto *string `json:"vpcProto"`
-
-    /* 整型，用户VPC内协议层(7，4) (Optional) */
-    ProtoLevel *int `json:"protoLevel"`
 
     /* 布尔型，是否支持vpc内访问 (Optional) */
     VpcAccess *bool `json:"vpcAccess"`
@@ -46,6 +64,18 @@ type Runtime struct {
     /* 推理服务超时时间，单位秒，（默认60s) (Optional) */
     Timeout *int `json:"timeout"`
 
-    /* 是否开启智能路由 (Optional) */
-    SmartRouter *bool `json:"smartRouter"`
+    /* 本地存储参数 (Optional) */
+    LocalStorage *InferenceLocalStorage `json:"localStorage"`
+
+    /* 创建资源时的节点亲和性配置 (Optional) */
+    Affinity *InferenceAffinity `json:"affinity"`
+
+    /* 是否开启会话保持 (Optional) */
+    SessionPersistentEnabled *bool `json:"sessionPersistentEnabled"`
+
+    /* 是否开启引擎指标采集，当前仅vLLM和SGlang支持 (Optional) */
+    EnableEngineMetrics *bool `json:"enableEngineMetrics"`
+
+    /* 自定义服务端口列表 (Optional) */
+    CustomServices []CustomService `json:"customServices"`
 }

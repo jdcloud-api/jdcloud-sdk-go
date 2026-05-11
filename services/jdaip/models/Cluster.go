@@ -33,4 +33,28 @@ type Cluster struct {
 
     /* 地域 (Optional) */
     Region string `json:"region"`
+
+    /* 私有网络 (Optional) */
+    Vpc string `json:"vpc"`
+
+    /* 私有网络名称 (Optional) */
+    VpcName string `json:"vpcName"`
+
+    /* 可用区列表，逗号分割 (Optional) */
+    Zones string `json:"zones"`
+
+    /* pod子网id,逗号分割 (Optional) */
+    PodNets string `json:"podNets"`
+
+    /* service cidr (Optional) */
+    ServiceCIDR string `json:"serviceCIDR"`
+
+    /* service lb 子网id (Optional) */
+    ServiceLB string `json:"serviceLB"`
+
+    /* 管理节点cidr (Optional) */
+    ManagerCIDR string `json:"managerCIDR"`
+
+    /* k8s集群提供平台，cos/jke (Optional) */
+    Provider string `json:"provider"`
 }

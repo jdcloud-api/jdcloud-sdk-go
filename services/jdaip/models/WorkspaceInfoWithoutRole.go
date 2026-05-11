@@ -48,4 +48,7 @@ type WorkspaceInfoWithoutRole struct {
 
     /* 更新用户账号 (Optional) */
     UpdateUser string `json:"updateUser"`
+
+    /* 当前查询用户对应空间角色：admin管理员，developer开发者，visitor访客。 (Optional) */
+    MemberRole string `json:"memberRole"`
 }

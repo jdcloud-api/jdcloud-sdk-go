@@ -25,13 +25,18 @@ type DatasetVersionInfo struct {
     /* 数据集名称 (Optional) */
     DatasetName string `json:"datasetName"`
 
-    /* ｜ 数据集类型，可选值： - text：文本 - custom：自定义 (Optional) */
+    /* 数据集类型，可选值：
+- text：文本
+- image：图像
+- custom：自定义
+ (Optional) */
     DatasetType string `json:"datasetType"`
 
     /* 任务类型，可选值：
 - sft：文本维度
 - dpo：文本维度
 - cpt：文本维度-增量预训练
+- image-classification：图像维度-图像分类
 - custom：自定义
  (Optional) */
     TaskType string `json:"taskType"`
@@ -45,22 +50,30 @@ type DatasetVersionInfo struct {
     /* 版本描述 (Optional) */
     VersionDesc string `json:"versionDesc"`
 
-    /* ｜ 存储类型（数据来源），可选值： - oss - cfs (Optional) */
+    /* 存储类型（数据来源），可选值：
+- oss
+- cfs
+- jpfs
+ (Optional) */
     StorageType string `json:"storageType"`
 
-    /* 存储oss对应ossEnpoint, cfs对应cfsIP (Optional) */
+    /* 存储oss对应ossEnpoint, cfs、jpfs对应IP (Optional) */
     StorageDomain string `json:"storageDomain"`
 
-    /* oss-bucket/cfs-pseudo(例如/cfs) (Optional) */
+    /* oss-bucket/cfs-pseudo(例如:/cfs) (Optional) */
     StorageBucket string `json:"storageBucket"`
 
-    /* 存储path（数据来源path）数据集的存储路径 (Optional) */
+    /* 存储path（数据来源path）例如：oss时，bucket后面部分的路径；cfs时，虚根pseudo后面部分的路径 (Optional) */
     StoragePath string `json:"storagePath"`
 
-    /* 存储全路径地址 (Optional) */
+    /* 存储全路径地址：
+- oss  oss://{storageDomain}/{storageBucket}/{storagePath}
+- cfs  cfs://{storageId}/{storageBucket}/{storagePath}
+- jpfs  jpfs://{storageId}/{storagePath}
+ (Optional) */
     StorageUri string `json:"storageUri"`
 
-    /* 存储ID (Optional) */
+    /* 存储ID cfs或jpfs时使用，例如：fs-60z1s969ui (Optional) */
     StorageId string `json:"storageId"`
 
     /* cfsVpcId (Optional) */
@@ -75,10 +88,10 @@ type DatasetVersionInfo struct {
     /* 注册来源对应的ID：数据处理ID或自动标注ID等 (Optional) */
     ExperimentId string `json:"experimentId"`
 
-    /* 标签，使用英文逗号拼接。 (Optional) */
+    /* 标签，多个标签使用英文逗号拼接。例如：label1,label2,label3 (Optional) */
     Labels string `json:"labels"`
 
-    /* 标签，数组格式。 (Optional) */
+    /* 标签，labels转换的数组格式。 (Optional) */
     LabelList []string `json:"labelList"`
 
     /* 工作空间ID (Optional) */
@@ -113,4 +126,25 @@ type DatasetVersionInfo struct {
 
     /* dataInfo 导入结果 (Optional) */
     DataInfo DataInfo `json:"dataInfo"`
+
+    /* 标注状态：未标注unmarked,已标注marked (Optional) */
+    MarkStatus string `json:"markStatus"`
+
+    /* 标注文件 (Optional) */
+    MarkFile string `json:"markFile"`
+
+    /* 标注文件中所有标签数据 (Optional) */
+    MarkTags []string `json:"markTags"`
+
+    /* 数据探索 (Optional) */
+    DataExploration string `json:"dataExploration"`
+
+    /* 归属用户名称。 (Optional) */
+    OwnerUser string `json:"ownerUser"`
+
+    /* 归属用户pin。 (Optional) */
+    OwnerUserPin string `json:"ownerUserPin"`
+
+    /* 工作空间中的资源归属权限。 (Optional) */
+    Permission string `json:"permission"`
 }

@@ -25,18 +25,24 @@ type ExperimentParam struct {
     /* 模型系列，严格区分大小写，可选值：[`llama`, `qwen`]  */
     ModelSeries string `json:"modelSeries"`
 
-    /* 模型模版，严格区分大小写。  */
+    /* 模型模版，严格区分大小写。
+`modelTemplate`：`llama3`，`模型名`：[Llama 3-3.3](https://huggingface.co/meta-llama)，`参数量`：1B/3B/8B/70B
+`modelTemplate`：`qwen`，`模型名`：[Qwen (1-2.5)(Code/Math/MoE/QwQ)](https://huggingface.co/Qwen)，`参数量`：0.5B/1.5B/3B/7B/14B/32B/72B/110B
+  */
     ModelTemplate string `json:"modelTemplate"`
 
-    /* 基础模型可见性，可选值：[public, private]  */
+    /* 基础模型可见性，可选值：[public]  */
     BaseModelVisibility string `json:"baseModelVisibility"`
 
-    /* 基础模型ID。  */
+    /* 基础模型ID。示例：model-wsxxxxxx1f  */
     BaseModelId string `json:"baseModelId"`
 
-    /* 基础模型版本。  */
+    /* 基础模型版本。示例：v1  */
     BaseModelVersion string `json:"baseModelVersion"`
 
     /* 微调实验的描述信息，不超过256个字符。 (Optional) */
     Description *string `json:"description"`
+
+    /* 工作空间中的资源归属权限，支持(public,private)，默认为public。 (Optional) */
+    Permission *string `json:"permission"`
 }

@@ -19,24 +19,24 @@ package models
 
 type WorkloadSpec struct {
 
-    /* 队列ID。  */
+    /* 队列ID。
+使用公共资源池时固定为：`joybuilder-public-queue`。
+使用私有资源池时请选择用户工作空间中的私有队列ID。
+  */
     QueueId string `json:"queueId"`
 
-    /* CPU(毫核)。  */
-    CpuM int `json:"cpuM"`
+    /* 公共资源池的规格ID。 (Optional) */
+    FlavorId *string `json:"flavorId"`
 
-    /* 内存大小(Mi)。  */
-    MemoryMiB int `json:"memoryMiB"`
+    /* 私有资源池CPU(毫核)。 (Optional) */
+    CpuM *int `json:"cpuM"`
 
-    /* GPU设备类型。示例(NVIDIA_H20-3e) (Optional) */
+    /* 私有资源池内存大小(Mi)。 (Optional) */
+    MemoryMiB *int `json:"memoryMiB"`
+
+    /* 私有资源池GPU设备类型。示例(NVIDIA_H20-3e) (Optional) */
     DeviceModel *string `json:"deviceModel"`
 
-    /* 虚拟GPU数量。如果选NV卡则支持选择1～8、0.5/0.25/0.125卡。如果是910B卡则只支持选1～8。必须与deviceModel同时使用。 (Optional) */
+    /* 私有资源池虚拟GPU数量。如果选NV卡则支持选择1～8、0.5/0.25/0.125卡。如果是910B卡则只支持选1～8。必须与deviceModel同时使用。 (Optional) */
     VcudaCore *string `json:"vcudaCore"`
-
-    /* 虚拟GPU总显存。创建时不需要指定，系统自动计算。 (Optional) */
-    VcudaMemory *int `json:"vcudaMemory"`
-
-    /* 虚机GPU总算力百分比(0-100)。创建时不需要指定，系统自动计算。 (Optional) */
-    VcudaRatio *int `json:"vcudaRatio"`
 }

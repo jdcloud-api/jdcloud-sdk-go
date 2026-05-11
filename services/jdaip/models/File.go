@@ -34,6 +34,9 @@ type File struct {
     /* 文件token数 (Optional) */
     Token int `json:"token"`
 
+    /* 样本数 (Optional) */
+    SampleSize int `json:"sampleSize"`
+
     /* 数据格式sharegpt/alpaca (Optional) */
     Formatting string `json:"formatting"`
 

@@ -47,6 +47,9 @@ type DescribeDatasetsRequest struct {
 `labels`: 标签数组，支持多个
 `cfsVpcIds`: cfsVpcId数组，支持多个
 `states`: 资源状态数组，支持多个，取值范围：[`running`, `success`, `failed`]
+`permission`: 权限，精确匹配，支持单个，可选(public,private)。
+`ownerUser`: 所有者名称，模糊匹配，支持单个。
+`ownerUserPin`: 所有者pin，精确匹配，支持多个。
  (Optional) */
     Filters []jdaip.Filter `json:"filters"`
 }
@@ -89,6 +92,9 @@ func NewDescribeDatasetsRequest(
 `labels`: 标签数组，支持多个
 `cfsVpcIds`: cfsVpcId数组，支持多个
 `states`: 资源状态数组，支持多个，取值范围：[`running`, `success`, `failed`]
+`permission`: 权限，精确匹配，支持单个，可选(public,private)。
+`ownerUser`: 所有者名称，模糊匹配，支持单个。
+`ownerUserPin`: 所有者pin，精确匹配，支持多个。
  (Optional)
  */
 func NewDescribeDatasetsRequestWithAllParams(
@@ -153,6 +159,9 @@ func (r *DescribeDatasetsRequest) SetPageSize(pageSize int) {
 `labels`: 标签数组，支持多个
 `cfsVpcIds`: cfsVpcId数组，支持多个
 `states`: 资源状态数组，支持多个，取值范围：[`running`, `success`, `failed`]
+`permission`: 权限，精确匹配，支持单个，可选(public,private)。
+`ownerUser`: 所有者名称，模糊匹配，支持单个。
+`ownerUserPin`: 所有者pin，精确匹配，支持多个。
 (Optional) */
 func (r *DescribeDatasetsRequest) SetFilters(filters []jdaip.Filter) {
     r.Filters = filters
