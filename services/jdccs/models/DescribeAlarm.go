@@ -40,6 +40,9 @@ type DescribeAlarm struct {
     /* 资源名称 (Optional) */
     ResourceName string `json:"resourceName"`
 
+    /* 报警对象 port:端口 pop:出口 (Optional) */
+    AlarmObj string `json:"alarmObj"`
+
     /* 监控项英文标识 (Optional) */
     Metric string `json:"metric"`
 
@@ -57,6 +60,9 @@ type DescribeAlarm struct {
 
     /* 阈值 (Optional) */
     Threshold float64 `json:"threshold"`
+
+    /* 单位 带宽:Mbps (Optional) */
+    Unit string `json:"unit"`
 
     /* 连续多少次后报警 (Optional) */
     Times int `json:"times"`

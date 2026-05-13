@@ -37,6 +37,9 @@ type UpdateAlarmSpec struct {
     /* 阈值 (Optional) */
     Threshold float64 `json:"threshold"`
 
+    /* 单位 带宽:Mbps (Optional) */
+    Unit string `json:"unit"`
+
     /* 连续多少次后报警 (Optional) */
     Times int `json:"times"`
 

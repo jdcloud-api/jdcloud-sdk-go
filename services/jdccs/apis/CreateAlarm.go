@@ -36,6 +36,9 @@ type CreateAlarmRequest struct {
     /* 规则名称 (Optional) */
     Name *string `json:"name"`
 
+    /* 报警对象，port:端口 pop:出口 (Optional) */
+    AlarmObj *string `json:"alarmObj"`
+
     /* 监控项，bandwidthTrafficIn:上行实时流量 bandwidthTrafficOut:下行实时流量 (Optional) */
     Metric *string `json:"metric"`
 
@@ -50,6 +53,9 @@ type CreateAlarmRequest struct {
 
     /* 阈值 (Optional) */
     Threshold *float64 `json:"threshold"`
+
+    /* 单位 带宽:Mbps (Optional) */
+    Unit *string `json:"unit"`
 
     /* 连续多少次后报警 (Optional) */
     Times *int `json:"times"`
@@ -95,11 +101,13 @@ func NewCreateAlarmRequest(
  * param resourceType: 资源类型，bandwidth:带宽 (Optional)
  * param resourceId: 带宽实例ID (Optional)
  * param name: 规则名称 (Optional)
+ * param alarmObj: 报警对象，port:端口 pop:出口 (Optional)
  * param metric: 监控项，bandwidthTrafficIn:上行实时流量 bandwidthTrafficOut:下行实时流量 (Optional)
  * param period: 统计周期（单位：分钟） (Optional)
  * param statisticMethod: 统计方法：平均值=avg、最大值=max、最小值=min (Optional)
  * param operator: 计算方式 >=、>、<、<=、=、！= (Optional)
  * param threshold: 阈值 (Optional)
+ * param unit: 单位 带宽:Mbps (Optional)
  * param times: 连续多少次后报警 (Optional)
  * param noticePeriod: 通知周期 单位：小时 (Optional)
  * param status: 规则状态 disabled:禁用 enabled:启用 (Optional)
@@ -113,11 +121,13 @@ func NewCreateAlarmRequestWithAllParams(
     resourceType *string,
     resourceId *string,
     name *string,
+    alarmObj *string,
     metric *string,
     period *int,
     statisticMethod *string,
     operator *string,
     threshold *float64,
+    unit *string,
     times *int,
     noticePeriod *int,
     status *string,
@@ -138,11 +148,13 @@ func NewCreateAlarmRequestWithAllParams(
         ResourceType: resourceType,
         ResourceId: resourceId,
         Name: name,
+        AlarmObj: alarmObj,
         Metric: metric,
         Period: period,
         StatisticMethod: statisticMethod,
         Operator: operator,
         Threshold: threshold,
+        Unit: unit,
         Times: times,
         NoticePeriod: noticePeriod,
         Status: status,
@@ -182,6 +194,10 @@ func (r *CreateAlarmRequest) SetResourceId(resourceId string) {
 func (r *CreateAlarmRequest) SetName(name string) {
     r.Name = &name
 }
+/* param alarmObj: 报警对象，port:端口 pop:出口(Optional) */
+func (r *CreateAlarmRequest) SetAlarmObj(alarmObj string) {
+    r.AlarmObj = &alarmObj
+}
 /* param metric: 监控项，bandwidthTrafficIn:上行实时流量 bandwidthTrafficOut:下行实时流量(Optional) */
 func (r *CreateAlarmRequest) SetMetric(metric string) {
     r.Metric = &metric
@@ -201,6 +217,10 @@ func (r *CreateAlarmRequest) SetOperator(operator string) {
 /* param threshold: 阈值(Optional) */
 func (r *CreateAlarmRequest) SetThreshold(threshold float64) {
     r.Threshold = &threshold
+}
+/* param unit: 单位 带宽:Mbps(Optional) */
+func (r *CreateAlarmRequest) SetUnit(unit string) {
+    r.Unit = &unit
 }
 /* param times: 连续多少次后报警(Optional) */
 func (r *CreateAlarmRequest) SetTimes(times int) {

@@ -40,6 +40,9 @@ type AlarmHistory struct {
     /* 资源名称 (Optional) */
     ResourceName string `json:"resourceName"`
 
+    /* 报警对象 port:端口 pop:出口 (Optional) */
+    AlarmObj string `json:"alarmObj"`
+
     /* 监控项英文标识 (Optional) */
     Metric string `json:"metric"`
 

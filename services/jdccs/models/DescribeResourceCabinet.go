@@ -17,13 +17,22 @@
 package models
 
 
-type Cabinet struct {
+type DescribeResourceCabinet struct {
+
+    /* idc机房名称 (Optional) */
+    IdcDatacenterName string `json:"idcDatacenterName"`
+
+    /* cdn机房名称 (Optional) */
+    CdnDatacenterName string `json:"cdnDatacenterName"`
 
     /* 机房英文标识 (Optional) */
-    Idc string `json:"idc"`
+    RegionEn string `json:"regionEn"`
 
-    /* 机房名称 (Optional) */
-    IdcName string `json:"idcName"`
+    /* 机房标识 (Optional) */
+    Region string `json:"region"`
+
+    /* 产品线名称 (Optional) */
+    IdcLineName string `json:"idcLineName"`
 
     /* 机柜Id (Optional) */
     CabinetId string `json:"cabinetId"`
@@ -58,17 +67,14 @@ type Cabinet struct {
     /* 预留结束时间，遵循ISO8601标准，使用UTC时间，格式为：yyyy-MM-ddTHH:mm:ssZ (Optional) */
     ReserveEndTime string `json:"reserveEndTime"`
 
-    /* 设备数量 (Optional) */
-    DeviceNum int `json:"deviceNum"`
-
     /* 占用U数(U) (Optional) */
     RackUOccupy int `json:"rackUOccupy"`
 
     /* 空闲U数(U) (Optional) */
     RackUFree int `json:"rackUFree"`
 
-    /* 计费类型 1:按配置 2:按用量 3:包年包月 4:一次性（目前仅支持包年包月） (Optional) */
-    BillingType int `json:"billingType"`
+    /* 设备数量 (Optional) */
+    DeviceNum int `json:"deviceNum"`
 
     /* 计费时间，遵循ISO8601标准，使用UTC时间，格式为：yyyy-MM-ddTHH:mm:ssZ (Optional) */
     StartTime string `json:"startTime"`
