@@ -17,18 +17,27 @@
 package models
 
 
-type Bandwidth struct {
+type DescribeResourceBandwidth struct {
+
+    /* idc机房名称 (Optional) */
+    IdcDatacenterName string `json:"idcDatacenterName"`
+
+    /* cdn机房名称 (Optional) */
+    CdnDatacenterName string `json:"cdnDatacenterName"`
 
     /* 机房英文标识 (Optional) */
-    Idc string `json:"idc"`
+    RegionEn string `json:"regionEn"`
 
-    /* 机房名称 (Optional) */
-    IdcName string `json:"idcName"`
+    /* 机房标识 (Optional) */
+    Region string `json:"region"`
+
+    /* 产品线名称 (Optional) */
+    IdcLineName string `json:"idcLineName"`
 
     /* 带宽实例ID (Optional) */
     BandwidthId string `json:"bandwidthId"`
 
-    /* 带宽名称 (Optional) */
+    /* 带宽（出口）名称 (Optional) */
     BandwidthName string `json:"bandwidthName"`
 
     /* 状态 normal:正常 abnormal:异常 (Optional) */
@@ -46,8 +55,14 @@ merge95thPercentileAvg:日95峰值月平均（多出口合并计费）
  (Optional) */
     ChargeType string `json:"chargeType"`
 
+    /* 计费方式描述 (Optional) */
+    ChargeTypeName string `json:"chargeTypeName"`
+
     /* 合同带宽（Mbps） (Optional) */
     Bandwidth int `json:"bandwidth"`
+
+    /* 物理带宽（Mbps） (Optional) */
+    PhysicalBandwidth int `json:"physicalBandwidth"`
 
     /* 关联的公网IP (Optional) */
     RelatedIp []RelatedIp `json:"relatedIp"`
@@ -55,6 +70,9 @@ merge95thPercentileAvg:日95峰值月平均（多出口合并计费）
     /* 交换机信息 (Optional) */
     Switchboard []Switchboard `json:"switchboard"`
 
-    /* 带宽（Mbps） (Optional) */
-    PhysicalBandwidth int `json:"physicalBandwidth"`
+    /* 计费时间，遵循ISO8601标准，使用UTC时间，格式为：yyyy-MM-ddTHH:mm:ssZ (Optional) */
+    StartTime string `json:"startTime"`
+
+    /* 到期时间，遵循ISO8601标准，使用UTC时间，格式为：yyyy-MM-ddTHH:mm:ssZ (Optional) */
+    EndTime string `json:"endTime"`
 }

@@ -45,6 +45,9 @@ type UpdateAlarmRequest struct {
     /* 阈值 (Optional) */
     Threshold *float64 `json:"threshold"`
 
+    /* 单位 带宽:Mbps (Optional) */
+    Unit *string `json:"unit"`
+
     /* 连续多少次后报警 (Optional) */
     Times *int `json:"times"`
 
@@ -92,6 +95,7 @@ func NewUpdateAlarmRequest(
  * param statisticMethod: 统计方法：平均值=avg、最大值=max、最小值=min (Optional)
  * param operator: 计算方式 >=、>、<、<=、=、！= (Optional)
  * param threshold: 阈值 (Optional)
+ * param unit: 单位 带宽:Mbps (Optional)
  * param times: 连续多少次后报警 (Optional)
  * param noticePeriod: 通知周期 单位：小时 (Optional)
  * param status: 规则状态 disabled:禁用 enabled:启用 (Optional)
@@ -107,6 +111,7 @@ func NewUpdateAlarmRequestWithAllParams(
     statisticMethod *string,
     operator *string,
     threshold *float64,
+    unit *string,
     times *int,
     noticePeriod *int,
     status *string,
@@ -129,6 +134,7 @@ func NewUpdateAlarmRequestWithAllParams(
         StatisticMethod: statisticMethod,
         Operator: operator,
         Threshold: threshold,
+        Unit: unit,
         Times: times,
         NoticePeriod: noticePeriod,
         Status: status,
@@ -178,6 +184,10 @@ func (r *UpdateAlarmRequest) SetOperator(operator string) {
 /* param threshold: 阈值(Optional) */
 func (r *UpdateAlarmRequest) SetThreshold(threshold float64) {
     r.Threshold = &threshold
+}
+/* param unit: 单位 带宽:Mbps(Optional) */
+func (r *UpdateAlarmRequest) SetUnit(unit string) {
+    r.Unit = &unit
 }
 /* param times: 连续多少次后报警(Optional) */
 func (r *UpdateAlarmRequest) SetTimes(times int) {

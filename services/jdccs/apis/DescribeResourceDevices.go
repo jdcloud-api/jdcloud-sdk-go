@@ -22,7 +22,7 @@ import (
     common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
 
-type DescribeAlarmsRequest struct {
+type DescribeResourceDevicesRequest struct {
 
     core.JDCloudRequest
 
@@ -32,39 +32,38 @@ type DescribeAlarmsRequest struct {
     /* 分页大小，默认为20 (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* 资源类型 bandwidth:带宽 (Optional) */
-    ResourceType *string `json:"resourceType"`
+    /* 设备SN号 (Optional) */
+    SnNo *string `json:"snNo"`
 
-    /* 资源ID，指定resourceId时须指定resourceType (Optional) */
-    ResourceId *string `json:"resourceId"`
+    /* 设备编码(ID) (Optional) */
+    DeviceNo *string `json:"deviceNo"`
 
-    /* 机房英文标识 (Optional) */
-    Idc *string `json:"idc"`
-
-    /* 报警对象 port:端口 pop:出口 (Optional) */
-    AlarmObj *string `json:"alarmObj"`
-
-    /* 规则状态 disabled:禁用 enabled:启用 (Optional) */
-    Status *string `json:"status"`
-
-    /* alarmId - 规则实施ID，精确匹配，支持多个
+    /* deviceNo - 设备编码，精确匹配，支持多个
+snNo - 设备SN号，精确匹配，支持多个
 idcDatacenterName - idc机房名称，精确匹配，支持多个
 cdnDatacenterName - cdn机房名称，精确匹配，支持多个
 regionEn - 托管区，精确匹配，支持多个
+cabinetNo - 机柜编码，精确匹配，支持多个
+deviceType - 设备类型，精确匹配，支持多个
+assetStatus - 设备状态，精确匹配，支持多个
+assetBelong - 资产所属，精确匹配，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
+
+    /* deviceNo - 设备编码 cabinetNo - 机柜编码 (Optional) */
+    Sorts []common.Sort `json:"sorts"`
 }
 
 /*
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeAlarmsRequest(
-) *DescribeAlarmsRequest {
+func NewDescribeResourceDevicesRequest(
+) *DescribeResourceDevicesRequest {
 
-	return &DescribeAlarmsRequest{
+	return &DescribeResourceDevicesRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/alarms",
+			URL:     "/devices",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -75,52 +74,51 @@ func NewDescribeAlarmsRequest(
 /*
  * param pageNumber: 页码, 默认为1 (Optional)
  * param pageSize: 分页大小，默认为20 (Optional)
- * param resourceType: 资源类型 bandwidth:带宽 (Optional)
- * param resourceId: 资源ID，指定resourceId时须指定resourceType (Optional)
- * param idc: 机房英文标识 (Optional)
- * param alarmObj: 报警对象 port:端口 pop:出口 (Optional)
- * param status: 规则状态 disabled:禁用 enabled:启用 (Optional)
- * param filters: alarmId - 规则实施ID，精确匹配，支持多个
+ * param snNo: 设备SN号 (Optional)
+ * param deviceNo: 设备编码(ID) (Optional)
+ * param filters: deviceNo - 设备编码，精确匹配，支持多个
+snNo - 设备SN号，精确匹配，支持多个
 idcDatacenterName - idc机房名称，精确匹配，支持多个
 cdnDatacenterName - cdn机房名称，精确匹配，支持多个
 regionEn - 托管区，精确匹配，支持多个
+cabinetNo - 机柜编码，精确匹配，支持多个
+deviceType - 设备类型，精确匹配，支持多个
+assetStatus - 设备状态，精确匹配，支持多个
+assetBelong - 资产所属，精确匹配，支持多个
  (Optional)
+ * param sorts: deviceNo - 设备编码 cabinetNo - 机柜编码 (Optional)
  */
-func NewDescribeAlarmsRequestWithAllParams(
+func NewDescribeResourceDevicesRequestWithAllParams(
     pageNumber *int,
     pageSize *int,
-    resourceType *string,
-    resourceId *string,
-    idc *string,
-    alarmObj *string,
-    status *string,
+    snNo *string,
+    deviceNo *string,
     filters []common.Filter,
-) *DescribeAlarmsRequest {
+    sorts []common.Sort,
+) *DescribeResourceDevicesRequest {
 
-    return &DescribeAlarmsRequest{
+    return &DescribeResourceDevicesRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/alarms",
+            URL:     "/devices",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         PageNumber: pageNumber,
         PageSize: pageSize,
-        ResourceType: resourceType,
-        ResourceId: resourceId,
-        Idc: idc,
-        AlarmObj: alarmObj,
-        Status: status,
+        SnNo: snNo,
+        DeviceNo: deviceNo,
         Filters: filters,
+        Sorts: sorts,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeAlarmsRequestWithoutParam() *DescribeAlarmsRequest {
+func NewDescribeResourceDevicesRequestWithoutParam() *DescribeResourceDevicesRequest {
 
-    return &DescribeAlarmsRequest{
+    return &DescribeResourceDevicesRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/alarms",
+            URL:     "/devices",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -129,57 +127,54 @@ func NewDescribeAlarmsRequestWithoutParam() *DescribeAlarmsRequest {
 }
 
 /* param pageNumber: 页码, 默认为1(Optional) */
-func (r *DescribeAlarmsRequest) SetPageNumber(pageNumber int) {
+func (r *DescribeResourceDevicesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 /* param pageSize: 分页大小，默认为20(Optional) */
-func (r *DescribeAlarmsRequest) SetPageSize(pageSize int) {
+func (r *DescribeResourceDevicesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-/* param resourceType: 资源类型 bandwidth:带宽(Optional) */
-func (r *DescribeAlarmsRequest) SetResourceType(resourceType string) {
-    r.ResourceType = &resourceType
+/* param snNo: 设备SN号(Optional) */
+func (r *DescribeResourceDevicesRequest) SetSnNo(snNo string) {
+    r.SnNo = &snNo
 }
-/* param resourceId: 资源ID，指定resourceId时须指定resourceType(Optional) */
-func (r *DescribeAlarmsRequest) SetResourceId(resourceId string) {
-    r.ResourceId = &resourceId
+/* param deviceNo: 设备编码(ID)(Optional) */
+func (r *DescribeResourceDevicesRequest) SetDeviceNo(deviceNo string) {
+    r.DeviceNo = &deviceNo
 }
-/* param idc: 机房英文标识(Optional) */
-func (r *DescribeAlarmsRequest) SetIdc(idc string) {
-    r.Idc = &idc
-}
-/* param alarmObj: 报警对象 port:端口 pop:出口(Optional) */
-func (r *DescribeAlarmsRequest) SetAlarmObj(alarmObj string) {
-    r.AlarmObj = &alarmObj
-}
-/* param status: 规则状态 disabled:禁用 enabled:启用(Optional) */
-func (r *DescribeAlarmsRequest) SetStatus(status string) {
-    r.Status = &status
-}
-/* param filters: alarmId - 规则实施ID，精确匹配，支持多个
+/* param filters: deviceNo - 设备编码，精确匹配，支持多个
+snNo - 设备SN号，精确匹配，支持多个
 idcDatacenterName - idc机房名称，精确匹配，支持多个
 cdnDatacenterName - cdn机房名称，精确匹配，支持多个
 regionEn - 托管区，精确匹配，支持多个
+cabinetNo - 机柜编码，精确匹配，支持多个
+deviceType - 设备类型，精确匹配，支持多个
+assetStatus - 设备状态，精确匹配，支持多个
+assetBelong - 资产所属，精确匹配，支持多个
 (Optional) */
-func (r *DescribeAlarmsRequest) SetFilters(filters []common.Filter) {
+func (r *DescribeResourceDevicesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
+}
+/* param sorts: deviceNo - 设备编码 cabinetNo - 机柜编码(Optional) */
+func (r *DescribeResourceDevicesRequest) SetSorts(sorts []common.Sort) {
+    r.Sorts = sorts
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeAlarmsRequest) GetRegionId() string {
+func (r DescribeResourceDevicesRequest) GetRegionId() string {
     return ""
 }
 
-type DescribeAlarmsResponse struct {
+type DescribeResourceDevicesResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeAlarmsResult `json:"result"`
+    Result DescribeResourceDevicesResult `json:"result"`
 }
 
-type DescribeAlarmsResult struct {
-    Alarms []jdccs.DescribeAlarm `json:"alarms"`
+type DescribeResourceDevicesResult struct {
+    Devices []jdccs.DescribeResourceDevice `json:"devices"`
     PageNumber int `json:"pageNumber"`
     PageSize int `json:"pageSize"`
     TotalCount int `json:"totalCount"`

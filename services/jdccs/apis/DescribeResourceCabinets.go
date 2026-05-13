@@ -22,7 +22,7 @@ import (
     common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
 
-type DescribeAlarmsRequest struct {
+type DescribeResourceCabinetsRequest struct {
 
     core.JDCloudRequest
 
@@ -32,39 +32,37 @@ type DescribeAlarmsRequest struct {
     /* 分页大小，默认为20 (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* 资源类型 bandwidth:带宽 (Optional) */
-    ResourceType *string `json:"resourceType"`
+    /* 机柜编码 (Optional) */
+    CabinetNo *string `json:"cabinetNo"`
 
-    /* 资源ID，指定resourceId时须指定resourceType (Optional) */
-    ResourceId *string `json:"resourceId"`
+    /* 机柜ID (Optional) */
+    CabinetId *string `json:"cabinetId"`
 
-    /* 机房英文标识 (Optional) */
-    Idc *string `json:"idc"`
-
-    /* 报警对象 port:端口 pop:出口 (Optional) */
-    AlarmObj *string `json:"alarmObj"`
-
-    /* 规则状态 disabled:禁用 enabled:启用 (Optional) */
-    Status *string `json:"status"`
-
-    /* alarmId - 规则实施ID，精确匹配，支持多个
+    /* cabinetNo - 机柜编码，精确匹配，支持多个
 idcDatacenterName - idc机房名称，精确匹配，支持多个
 cdnDatacenterName - cdn机房名称，精确匹配，支持多个
+cabinetId - 机柜ID，精确匹配，支持多个
 regionEn - 托管区，精确匹配，支持多个
+roomNo - 房间号，精确匹配，支持多个
+cabinetType - 机柜类型，精确匹配，支持多个
+cabinetOpenStatus - 机柜开通状态，精确匹配，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
+
+    /* cabinetNo - 机柜编码 roomNo - 房间号 (Optional) */
+    Sorts []common.Sort `json:"sorts"`
 }
 
 /*
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeAlarmsRequest(
-) *DescribeAlarmsRequest {
+func NewDescribeResourceCabinetsRequest(
+) *DescribeResourceCabinetsRequest {
 
-	return &DescribeAlarmsRequest{
+	return &DescribeResourceCabinetsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/alarms",
+			URL:     "/cabinets",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -75,52 +73,50 @@ func NewDescribeAlarmsRequest(
 /*
  * param pageNumber: 页码, 默认为1 (Optional)
  * param pageSize: 分页大小，默认为20 (Optional)
- * param resourceType: 资源类型 bandwidth:带宽 (Optional)
- * param resourceId: 资源ID，指定resourceId时须指定resourceType (Optional)
- * param idc: 机房英文标识 (Optional)
- * param alarmObj: 报警对象 port:端口 pop:出口 (Optional)
- * param status: 规则状态 disabled:禁用 enabled:启用 (Optional)
- * param filters: alarmId - 规则实施ID，精确匹配，支持多个
+ * param cabinetNo: 机柜编码 (Optional)
+ * param cabinetId: 机柜ID (Optional)
+ * param filters: cabinetNo - 机柜编码，精确匹配，支持多个
 idcDatacenterName - idc机房名称，精确匹配，支持多个
 cdnDatacenterName - cdn机房名称，精确匹配，支持多个
+cabinetId - 机柜ID，精确匹配，支持多个
 regionEn - 托管区，精确匹配，支持多个
+roomNo - 房间号，精确匹配，支持多个
+cabinetType - 机柜类型，精确匹配，支持多个
+cabinetOpenStatus - 机柜开通状态，精确匹配，支持多个
  (Optional)
+ * param sorts: cabinetNo - 机柜编码 roomNo - 房间号 (Optional)
  */
-func NewDescribeAlarmsRequestWithAllParams(
+func NewDescribeResourceCabinetsRequestWithAllParams(
     pageNumber *int,
     pageSize *int,
-    resourceType *string,
-    resourceId *string,
-    idc *string,
-    alarmObj *string,
-    status *string,
+    cabinetNo *string,
+    cabinetId *string,
     filters []common.Filter,
-) *DescribeAlarmsRequest {
+    sorts []common.Sort,
+) *DescribeResourceCabinetsRequest {
 
-    return &DescribeAlarmsRequest{
+    return &DescribeResourceCabinetsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/alarms",
+            URL:     "/cabinets",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         PageNumber: pageNumber,
         PageSize: pageSize,
-        ResourceType: resourceType,
-        ResourceId: resourceId,
-        Idc: idc,
-        AlarmObj: alarmObj,
-        Status: status,
+        CabinetNo: cabinetNo,
+        CabinetId: cabinetId,
         Filters: filters,
+        Sorts: sorts,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeAlarmsRequestWithoutParam() *DescribeAlarmsRequest {
+func NewDescribeResourceCabinetsRequestWithoutParam() *DescribeResourceCabinetsRequest {
 
-    return &DescribeAlarmsRequest{
+    return &DescribeResourceCabinetsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/alarms",
+            URL:     "/cabinets",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -129,57 +125,53 @@ func NewDescribeAlarmsRequestWithoutParam() *DescribeAlarmsRequest {
 }
 
 /* param pageNumber: 页码, 默认为1(Optional) */
-func (r *DescribeAlarmsRequest) SetPageNumber(pageNumber int) {
+func (r *DescribeResourceCabinetsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 /* param pageSize: 分页大小，默认为20(Optional) */
-func (r *DescribeAlarmsRequest) SetPageSize(pageSize int) {
+func (r *DescribeResourceCabinetsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-/* param resourceType: 资源类型 bandwidth:带宽(Optional) */
-func (r *DescribeAlarmsRequest) SetResourceType(resourceType string) {
-    r.ResourceType = &resourceType
+/* param cabinetNo: 机柜编码(Optional) */
+func (r *DescribeResourceCabinetsRequest) SetCabinetNo(cabinetNo string) {
+    r.CabinetNo = &cabinetNo
 }
-/* param resourceId: 资源ID，指定resourceId时须指定resourceType(Optional) */
-func (r *DescribeAlarmsRequest) SetResourceId(resourceId string) {
-    r.ResourceId = &resourceId
+/* param cabinetId: 机柜ID(Optional) */
+func (r *DescribeResourceCabinetsRequest) SetCabinetId(cabinetId string) {
+    r.CabinetId = &cabinetId
 }
-/* param idc: 机房英文标识(Optional) */
-func (r *DescribeAlarmsRequest) SetIdc(idc string) {
-    r.Idc = &idc
-}
-/* param alarmObj: 报警对象 port:端口 pop:出口(Optional) */
-func (r *DescribeAlarmsRequest) SetAlarmObj(alarmObj string) {
-    r.AlarmObj = &alarmObj
-}
-/* param status: 规则状态 disabled:禁用 enabled:启用(Optional) */
-func (r *DescribeAlarmsRequest) SetStatus(status string) {
-    r.Status = &status
-}
-/* param filters: alarmId - 规则实施ID，精确匹配，支持多个
+/* param filters: cabinetNo - 机柜编码，精确匹配，支持多个
 idcDatacenterName - idc机房名称，精确匹配，支持多个
 cdnDatacenterName - cdn机房名称，精确匹配，支持多个
+cabinetId - 机柜ID，精确匹配，支持多个
 regionEn - 托管区，精确匹配，支持多个
+roomNo - 房间号，精确匹配，支持多个
+cabinetType - 机柜类型，精确匹配，支持多个
+cabinetOpenStatus - 机柜开通状态，精确匹配，支持多个
 (Optional) */
-func (r *DescribeAlarmsRequest) SetFilters(filters []common.Filter) {
+func (r *DescribeResourceCabinetsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
+}
+/* param sorts: cabinetNo - 机柜编码 roomNo - 房间号(Optional) */
+func (r *DescribeResourceCabinetsRequest) SetSorts(sorts []common.Sort) {
+    r.Sorts = sorts
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeAlarmsRequest) GetRegionId() string {
+func (r DescribeResourceCabinetsRequest) GetRegionId() string {
     return ""
 }
 
-type DescribeAlarmsResponse struct {
+type DescribeResourceCabinetsResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeAlarmsResult `json:"result"`
+    Result DescribeResourceCabinetsResult `json:"result"`
 }
 
-type DescribeAlarmsResult struct {
-    Alarms []jdccs.DescribeAlarm `json:"alarms"`
+type DescribeResourceCabinetsResult struct {
+    Cabinets []jdccs.DescribeResourceCabinet `json:"cabinets"`
     PageNumber int `json:"pageNumber"`
     PageSize int `json:"pageSize"`
     TotalCount int `json:"totalCount"`

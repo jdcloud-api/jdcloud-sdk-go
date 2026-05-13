@@ -31,6 +31,9 @@ type CreateAlarmSpec struct {
     /* 规则名称 (Optional) */
     Name string `json:"name"`
 
+    /* 报警对象，port:端口 pop:出口 (Optional) */
+    AlarmObj string `json:"alarmObj"`
+
     /* 监控项，bandwidthTrafficIn:上行实时流量 bandwidthTrafficOut:下行实时流量 (Optional) */
     Metric string `json:"metric"`
 
@@ -45,6 +48,9 @@ type CreateAlarmSpec struct {
 
     /* 阈值 (Optional) */
     Threshold float64 `json:"threshold"`
+
+    /* 单位 带宽:Mbps (Optional) */
+    Unit string `json:"unit"`
 
     /* 连续多少次后报警 (Optional) */
     Times int `json:"times"`
