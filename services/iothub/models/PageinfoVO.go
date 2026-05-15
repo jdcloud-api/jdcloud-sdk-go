@@ -20,14 +20,14 @@ package models
 type PageinfoVO struct {
 
     /* 每页显示条数 (Optional) */
-    PageSize int `json:"pageSize"`
+    PageSize float32 `json:"pageSize"`
 
     /* 当前页数 (Optional) */
-    NowPage int `json:"nowPage"`
+    NowPage float32 `json:"nowPage"`
 
     /* 总记录数 (Optional) */
-    TotalSize int `json:"totalSize"`
+    TotalSize float32 `json:"totalSize"`
 
     /* 总页数 (Optional) */
-    TotalPage int `json:"totalPage"`
+    TotalPage float32 `json:"totalPage"`
 }
