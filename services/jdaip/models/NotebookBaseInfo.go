@@ -19,39 +19,71 @@ package models
 
 type NotebookBaseInfo struct {
 
-    /* 主帐号。 (Optional) */
+    /* 主账号，资源所属的主账号标识。
+ (Optional) */
     Pin string `json:"pin"`
 
-    /* 创建人用户名。 (Optional) */
+    /* 创建人用户名，创建Notebook的用户名称。
+ (Optional) */
     CreateUser string `json:"createUser"`
 
-    /* 创建人pin。 (Optional) */
+    /* 创建人pin，创建Notebook的用户标识。
+ (Optional) */
     CreateUserPin string `json:"createUserPin"`
 
-    /* NotebookID。 (Optional) */
+    /* Notebook实例ID，全局唯一标识。
+ (Optional) */
     NotebookId string `json:"notebookId"`
 
-    /* 名称。 (Optional) */
+    /* Notebook实例名称，用户自定义名称。
+ (Optional) */
     Name string `json:"name"`
 
-    /* 状态(queuing,pending,failed,running,stopping,stopped,deleting,saving,rolling-back,rolled-back)。 (Optional) */
+    /* Notebook实例状态。
+
+## 状态值
+- queuing: 排队中，等待资源调度
+- pending: 启动中，正在创建容器
+- failed: 失败，创建或运行失败
+- running: 运行中，正常提供服务
+- stopping: 停止中，正在停止实例
+- stopped: 已停止，实例已停止
+- deleting: 删除中，正在删除实例
+- saving: 镜像保存中，正在保存镜像
+- rolling-back: 回滚中，不能做任何操作
+- rolled-back: 已回滚，只能操作删除
+ (Optional) */
     State string `json:"state"`
 
-    /* 工作空间ID。 (Optional) */
+    /* 工作空间ID，实例所属的工作空间。
+ (Optional) */
     WorkspaceId string `json:"workspaceId"`
 
-    /* POD IP。 (Optional) */
+    /* Pod IP地址，实例在集群内的IP地址。
+
+## 使用说明
+- 仅running状态时有值
+- 用于集群内服务间通信
+ (Optional) */
     PodIp string `json:"podIp"`
 
-    /* 公网访问配置。 (Optional) */
+    /* 公网访问配置，负载均衡配置信息。
+ (Optional) */
     Lb LbSpec `json:"lb"`
 
-    /* 归属用户名称。 (Optional) */
+    /* 归属用户名称，资源归属的用户名称。
+ (Optional) */
     OwnerUser string `json:"ownerUser"`
 
-    /* 归属用户pin。 (Optional) */
+    /* 归属用户pin，资源归属的用户标识。
+ (Optional) */
     OwnerUserPin string `json:"ownerUserPin"`
 
-    /* 工作空间中的资源归属权限。 (Optional) */
+    /* 工作空间中的资源归属权限。
+
+## 权限值
+- public: 公开，工作空间所有用户可见
+- private: 私有，仅管理员和拥有者可见
+ (Optional) */
     Permission string `json:"permission"`
 }

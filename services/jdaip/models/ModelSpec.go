@@ -19,30 +19,66 @@ package models
 
 type ModelSpec struct {
 
-    /* 来源，支持(public,self)。  */
+    /* 模型来源，指定使用公共模型还是个人模型。
+
+## 来源类型
+- public: 公共模型，所有用户可访问
+- self: 个人模型，仅自己可访问
+  */
     Source string `json:"source"`
 
-    /* 存储类型，支持三种类型`cfs`、`oss`、`jpfs`。  */
+    /* 模型存储类型，决定模型访问方式。
+
+## 支持类型
+- cfs: 京东云文件存储
+- oss: 京东云对象存储
+- jpfs: 京东云并行文件系统
+  */
     StorageType string `json:"storageType"`
 
-    /* 模型ID。  */
+    /* 模型ID，唯一标识模型。
+
+## 获取方式
+- 公共模型: 从公共模型列表获取
+- 个人模型: 从我的模型列表获取
+  */
     ModelId string `json:"modelId"`
 
-    /* 模型版本。  */
+    /* 模型版本，指定使用模型的哪个版本。
+
+## 版本说明
+- 支持多版本模型
+- 版本格式: v1, v2, v3
+  */
     ModelVersion string `json:"modelVersion"`
 
-    /* 模型地址。
-`cfs` 类型参数示例(`10.0.23.45:/dir-path`或`/dir-path`)。
-`oss` 类型参数示例(`oss://bucket.s3.cn-north-1.jdcloud-oss.com/object-path`)。
-`jpfs` 类型参数示例(`fs-xxxxxxxxxx:/dir-path`或`/dir-path`)。
+    /* 模型地址，模型的实际存储路径。
+
+## 各类型地址格式
+- cfs: `10.0.23.45:/dir-path` 或 `/dir-path`
+- oss: `oss://bucket.s3.cn-north-1.jdcloud-oss.com/object-path`
+- jpfs: `fs-xxxxxxxxxx:/dir-path` 或 `/dir-path`
   */
     ModelUrl string `json:"modelUrl"`
 
-    /* 建议挂载到`/mnt/`开头的路径下，不支持挂载到系统目录。
-系统目录参考：` /, /bin, /boot, /dev, /etc, /home, /lib, /lib32, /lib64, /libx32, /opt, /proc, /root, /run, /sbin, /sys, /tmp, /usr, /var `。
+    /* 挂载路径，模型在Notebook容器中的挂载位置。
+
+## 挂载建议
+- 建议挂载到`/mnt/models/`开头的路径
+- 不支持挂载到系统目录
+
+## 系统目录列表
+`/, /bin, /boot, /dev, /etc, /home, /lib, /lib32, /lib64, /libx32, /opt, /proc, /root, /run, /sbin, /sys, /tmp, /usr, /var`
   */
     MountPath string `json:"mountPath"`
 
-    /* 是否以只读模式挂载模型。只读模式下，用户无法在挂载的模型中进行写操作。当模型来源为public，或存储类型不是oss时，该参数无效。 (Optional) */
+    /* 是否以只读模式挂载模型。
+
+## 使用说明
+- 仅oss类型且self来源的模型有效
+- public模型强制只读
+- true: 只读模式，无法写入
+- false: 读写模式，可读写
+ (Optional) */
     Readonly *bool `json:"readonly"`
 }

@@ -19,12 +19,38 @@ package models
 
 type OssParamForExperiment struct {
 
-    /* oss 端点。示例：s3-internal.cn-east-2.jdcloud-oss.com。 (Optional) */
+    /* OSS 端点地址。
+
+## 格式
+`s3-internal.{region}.jdcloud-oss.com`
+
+## 示例
+- 华东-上海：`s3-internal.cn-east-2.jdcloud-oss.com`
+- 华北-北京：`s3-internal.cn-north-1.jdcloud-oss.com`
+
+## 说明
+使用 internal 端点可提高访问速度并降低成本。
+ (Optional) */
     Endpoint *string `json:"endpoint"`
 
-    /* oss bucket。示例：bucket-demo。 (Optional) */
+    /* OSS Bucket 名称。
+
+## 示例
+`bucket-demo`
+
+## 说明
+Bucket 需要提前创建，且确保账号有访问权限。
+ (Optional) */
     Bucket *string `json:"bucket"`
 
-    /* oss 源路径。示例：/data/d1。 (Optional) */
+    /* OSS 源路径。
+
+## 格式
+以 `/` 开头的路径。
+
+## 示例
+- 训练数据：`/data/training`
+- 输出目录：`/output/models`
+ (Optional) */
     SourcePath *string `json:"sourcePath"`
 }

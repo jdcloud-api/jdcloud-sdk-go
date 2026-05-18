@@ -19,18 +19,48 @@ package models
 
 type OssParamForJob struct {
 
-    /* oss 端点。示例：s3-internal.cn-east-2.jdcloud-oss.com。 (Optional) */
+    /* OSS 端点地址，用于访问 OSS 服务。
+
+**格式：** `s3-internal.{region}.jdcloud-oss.com`
+
+**示例：**
+- 华东-上海：`s3-internal.cn-east-2.jdcloud-oss.com`
+- 华北-北京：`s3-internal.cn-north-1.jdcloud-oss.com`
+
+**建议：** 使用内网端点，访问速度更快
+ (Optional) */
     Endpoint *string `json:"endpoint"`
 
-    /* oss bucket。示例：bucket-demo。 (Optional) */
+    /* OSS Bucket 名称。
+
+**示例：** `my-training-bucket`
+
+**说明：** Bucket 需提前创建
+ (Optional) */
     Bucket *string `json:"bucket"`
 
-    /* oss 源路径。示例：/data/d1。 (Optional) */
+    /* OSS 源路径，指定要挂载的 Bucket 目录。
+
+**格式：** 以 `/` 开头的路径
+
+**示例：**
+- 根目录：`/`
+- 数据目录：`/data/d1`
+- 模型目录：`/models/llama`
+ (Optional) */
     SourcePath *string `json:"sourcePath"`
 
-    /* 挂载点配置。示例：/mnt/ws/oss-1。
-建议挂载到/mnt/开头的路径下，不支持挂载到系统目录。
-不支持的系统目录如下：`/`, `/bin`, `/boot`, `/dev`, `/etc`, `/home`, `/lib`, `/lib32`, `/lib64`, `/libx32`, `/opt`, `/proc`, `/root`, `/run`, `/sbin`, `/sys`, `/tmp`, `/usr`, `/var`。
+    /* 挂载点配置，指定 OSS 在容器内的挂载路径。
+
+**建议：** 挂载到 `/mnt/` 开头的路径下
+
+**示例：**
+- 数据目录：`/mnt/ws/data`
+- 模型目录：`/mnt/ws/models`
+- 输出目录：`/mnt/ws/output`
+
+**禁止挂载的系统目录：**
+`/`, `/bin`, `/boot`, `/dev`, `/etc`, `/home`, `/lib`, `/lib32`, `/lib64`, `/libx32`, `/opt`, `/proc`, `/root`, `/run`, `/sbin`, `/sys`, `/tmp`, `/usr`, `/var`
  (Optional) */
     MountPath *string `json:"mountPath"`
 }

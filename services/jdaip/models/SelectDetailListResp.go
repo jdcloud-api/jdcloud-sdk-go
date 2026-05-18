@@ -20,5 +20,5 @@ package models
 type SelectDetailListResp struct {
 
     /*  (Optional) */
-    Data []Resource `json:"data"`
+    Data []NodePoolTagDetail `json:"data"`
 }

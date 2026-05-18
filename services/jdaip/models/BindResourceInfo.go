@@ -26,5 +26,5 @@ type BindResourceInfo struct {
     ResourceIdVal string `json:"resourceIdVal"`
 
     /* 地域。 (Optional) */
-    RegionId *string `json:"regionId"`
+    RegionId string `json:"regionId"`
 }

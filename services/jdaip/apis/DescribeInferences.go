@@ -41,6 +41,12 @@ type DescribeInferencesRequest struct {
     /* 推理服务名称 (Optional) */
     Name *string `json:"name"`
 
+    /* 用户自定义标签列表。 (Optional) */
+    UserTags []jdaip.TagFilter `json:"userTags"`
+
+    /* 资源组ID列表 (Optional) */
+    ResourceGroupIds []string `json:"resourceGroupIds"`
+
     /* <b>filters 中支持使用以下关键字进行过滤</b>
 `inferenceId`: 版本ID，精确匹配，支持多个。
 `version`: 版本号，精确匹配，支持多个。
@@ -80,6 +86,8 @@ func NewDescribeInferencesRequest(
  * param pageNumber: 页码；默认为1。 (Optional)
  * param pageSize: 分页大小；<br>默认为20；取值范围[1, 100]。 (Optional)
  * param name: 推理服务名称 (Optional)
+ * param userTags: 用户自定义标签列表。 (Optional)
+ * param resourceGroupIds: 资源组ID列表 (Optional)
  * param filters: <b>filters 中支持使用以下关键字进行过滤</b>
 `inferenceId`: 版本ID，精确匹配，支持多个。
 `version`: 版本号，精确匹配，支持多个。
@@ -94,6 +102,8 @@ func NewDescribeInferencesRequestWithAllParams(
     pageNumber *int,
     pageSize *int,
     name *string,
+    userTags []jdaip.TagFilter,
+    resourceGroupIds []string,
     filters []common.Filter,
 ) *DescribeInferencesRequest {
 
@@ -109,6 +119,8 @@ func NewDescribeInferencesRequestWithAllParams(
         PageNumber: pageNumber,
         PageSize: pageSize,
         Name: name,
+        UserTags: userTags,
+        ResourceGroupIds: resourceGroupIds,
         Filters: filters,
     }
 }
@@ -145,6 +157,14 @@ func (r *DescribeInferencesRequest) SetPageSize(pageSize int) {
 /* param name: 推理服务名称(Optional) */
 func (r *DescribeInferencesRequest) SetName(name string) {
     r.Name = &name
+}
+/* param userTags: 用户自定义标签列表。(Optional) */
+func (r *DescribeInferencesRequest) SetUserTags(userTags []jdaip.TagFilter) {
+    r.UserTags = userTags
+}
+/* param resourceGroupIds: 资源组ID列表(Optional) */
+func (r *DescribeInferencesRequest) SetResourceGroupIds(resourceGroupIds []string) {
+    r.ResourceGroupIds = resourceGroupIds
 }
 /* param filters: <b>filters 中支持使用以下关键字进行过滤</b>
 `inferenceId`: 版本ID，精确匹配，支持多个。

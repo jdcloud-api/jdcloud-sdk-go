@@ -40,11 +40,17 @@ type Service struct {
     /* 推理服务内网统一调用地址 (Optional) */
     InnerAddress string `json:"innerAddress"`
 
+    /* 资源在集群中的空闲状态，值为空表示是空闲的，in-use表示资源已被占用。 (Optional) */
+    ResourceState string `json:"resourceState"`
+
     /* vpc内调用地址，当前是IP形式提供 (Optional) */
     VpcAddress string `json:"vpcAddress"`
 
     /* 访问服务的Bearer Token (Optional) */
     AccessToken string `json:"accessToken"`
+
+    /* 推理服务限流阈值（QPS） (Optional) */
+    Qps int `json:"qps"`
 
     /* 该服务中总版本数 (Optional) */
     Total int `json:"total"`

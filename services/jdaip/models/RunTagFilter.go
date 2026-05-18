@@ -19,9 +19,16 @@ package models
 
 type RunTagFilter struct {
 
-    /* 标签键。  */
+    /* 标签键。
+
+要筛选的标签键名。
+  */
     Key string `json:"key"`
 
-    /* 标签值列表。  */
+    /* 标签值列表。
+
+## 说明
+多个值之间是"或"的关系，资源标签值匹配任一值即满足条件。
+  */
     Values []string `json:"values"`
 }

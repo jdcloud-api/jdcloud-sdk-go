@@ -19,121 +19,268 @@ package models
 
 type AdminJobListInfo struct {
 
-    /* 训练任务ID。 (Optional) */
+    /* 训练任务ID，系统自动生成的唯一标识。
+
+## 格式
+以 `job-` 为前缀。
+
+## 用途
+用于查询详情、停止任务、删除任务等操作的标识。
+ (Optional) */
     JobId string `json:"jobId"`
 
-    /* 训练任务名称。 (Optional) */
+    /* 训练任务名称。
+
+创建时设置的名称，便于识别任务用途。
+ (Optional) */
     Name string `json:"name"`
 
-    /* 工作空间ID。 (Optional) */
+    /* 工作空间ID。
+
+任务所属的工作空间，用于区分不同团队或项目的资源。
+ (Optional) */
     WorkspaceId string `json:"workspaceId"`
 
-    /* 工作空间名称。 (Optional) */
+    /* 工作空间名称。
+
+工作空间的显示名称，便于识别。
+ (Optional) */
     WorkspaceName string `json:"workspaceName"`
 
-    /* 训练任务的状态。取值范围如下：
-`queuing`：`排队中`
-`pending`：`启动中`
-`failed`：`失败`
-`running`：`运行中`
-`stopping`：`停止中`
-`stopped`：`停止`
-`success`：`成功`
-`deleting`: `删除中`
-`rolling-back`：`回滚中`
-`rolled-back`：`已回滚`
+    /* 训练任务的状态。
+
+## 状态说明
+
+| 状态 | 说明 | 后续操作 |
+|------|------|----------|
+| `queuing` | 排队中，等待资源调度 | 可停止 |
+| `pending` | 启动中，正在创建资源 | 可停止 |
+| `failed` | 失败，任务执行失败 | 可查看日志、重新提交 |
+| `running` | 运行中，任务正在执行 | 可停止 |
+| `stopping` | 停止中，正在停止任务 | 等待 |
+| `stopped` | 停止，任务已被停止 | 可重新提交 |
+| `success` | 成功，任务执行完成 | 可查看结果 |
+| `deleting` | 删除中，正在删除任务 | 等待 |
+| `rolling-back` | 回滚中，正在回滚 | 等待 |
+| `rolled-back` | 已回滚，回滚完成 | - |
  (Optional) */
     State string `json:"state"`
 
-    /* 训练任务失败类型。可选值如下：
-- `resource-failed`: 节点故障。
-- `task-failed`: 任务失败。
-- `environment-failed`: 算力健康检测不通过。
-- `task-hang`: 任务卡住。
-- `process-inspection-failed`: 进程巡检失败。
+    /* 训练任务失败类型，仅在 state 为 `failed` 时返回。
+
+## 失败类型说明
+
+| 失败类型 | 说明 | 处理建议 |
+|----------|------|----------|
+| `resource-failed` | 节点故障 | 检查节点状态，必要时更换节点 |
+| `task-failed` | 任务失败 | 查看日志，检查代码或配置 |
+| `environment-failed` | 算力健康检测不通过 | 检查资源配置，确保环境正常 |
+| `task-hang` | 任务卡住 | 检查代码逻辑，可能存在死锁 |
+| `process-inspection-failed` | 进程巡检失败 | 检查进程状态和资源使用情况 |
  (Optional) */
     FailureType string `json:"failureType"`
 
-    /* 训练任务失败原因。详细描述失败原因信息。
+    /* 训练任务失败原因。
+
+提供详细的失败信息，帮助定位问题。
+
+## 使用场景
+- 问题诊断和排查
+- 错误报告和告警
  (Optional) */
     FailureReason string `json:"failureReason"`
 
-    /* 重启次数。 (Optional) */
+    /* 重启次数。
+
+## 说明
+任务因异常重启的次数。重启策略仅支持异构节点池（专属资源池）和 PyTorch 类型任务。
+ (Optional) */
     RestartCount int `json:"restartCount"`
 
-    /* 任务类型。 (Optional) */
+    /* 任务类型。
+
+## 可选值
+- `PyTorch`：PyTorch 训练任务
+- `Ray`：Ray 训练任务
+ (Optional) */
     JobType string `json:"jobType"`
 
-    /* 持续时间，单位为秒。 (Optional) */
+    /* 持续运行时间，单位为秒。
+
+## 用途
+用于计算资源消耗和成本统计。
+ (Optional) */
     RunningTimeInSec int `json:"runningTimeInSec"`
 
-    /* 节点数量。 (Optional) */
+    /* 节点数量（副本数）。
+
+## 说明
+分布式训练时的工作节点数量，单机训练时为 1。
+ (Optional) */
     Replica int `json:"replica"`
 
-    /* 队列ID。示例：queue-2xxx**********2d*********8b8
-使用公共资源池时固定为：joybuilder-public-queue。
+    /* 队列ID。
+
+## 格式
+示例：`queue-2xxx**********2d*********8b8`
+
+## 特殊值
+使用公共资源池时固定为：`joybuilder-public-queue`
  (Optional) */
     QueueId string `json:"queueId"`
 
-    /* 公共资源池的规格ID。 (Optional) */
+    /* 公共资源池的规格ID。
+
+## 说明
+使用公共资源池时的资源规格标识，用于确定 CPU、内存、GPU 配置。
+ (Optional) */
     FlavorId string `json:"flavorId"`
 
-    /* 公共资源池的规格详细信息。 (Optional) */
+    /* 公共资源池的规格详细信息。
+
+包含具体的资源配置信息，如 CPU 核数、内存大小、GPU 配置等。
+ (Optional) */
     FlavorInfo interface{} `json:"flavorInfo"`
 
-    /* GPU卡类型。示例：NVIDIA_G2 (Optional) */
+    /* GPU卡类型。
+
+## 示例
+- `NVIDIA_G2`
+- `NVIDIA_A100`
+- `NVIDIA_H800`
+
+## 说明
+不同 GPU 型号性能差异较大，根据任务需求选择合适的 GPU。
+ (Optional) */
     GpuDeviceModel string `json:"gpuDeviceModel"`
 
-    /* 虚拟GPU卡数量，
-- 英伟达，可选值：[0.1, 0.125, 0.25, 0.5, 1, 2, 3, 4, 5, 6, 7, 8]
+    /* 虚拟GPU卡数量。
+
+## 英伟达 GPU 可选值
+- 分数卡：`0.1`、`0.125`、`0.25`、`0.5`
+- 整数卡：`1`、`2`、`3`、`4`、`5`、`6`、`7`、`8`
+
+## 使用建议
+- 小规模测试可使用分数卡
+- 生产训练建议使用整数卡
  (Optional) */
     VcudaCore float64 `json:"vcudaCore"`
 
-    /* CPU大小，单位：毫核，例如：0.1 CPU 核心 = 100m （毫核） (Optional) */
+    /* CPU大小，单位：毫核（milliCore）。
+
+## 换算
+- 0.1 CPU 核心 = 100m
+- 1 CPU 核心 = 1000m
+- 4 CPU 核心 = 4000m
+
+## 使用建议
+根据任务负载合理配置，避免资源浪费。
+ (Optional) */
     CpuMilli int `json:"cpuMilli"`
 
-    /* 内存大小，单位：MiB。 (Optional) */
+    /* 内存大小，单位：MiB。
+
+## 换算
+- 1 GiB = 1024 MiB
+
+## 使用建议
+内存过小可能导致 OOM，建议预留一定余量。
+ (Optional) */
     MemoryMiB int `json:"memoryMiB"`
 
-    /* 角色配置信息。 (Optional) */
+    /* 角色配置信息。
+
+## 说明
+分布式训练中不同角色（Master、Worker）的资源配置。
+ (Optional) */
     RoleResource RoleResourceInfoForJobList `json:"roleResource"`
 
-    /* 实例详情信息。 (Optional) */
+    /* 实例详情信息。
+
+包含实例的运行状态、节点信息等详细数据。
+ (Optional) */
     InstanceInfo InstanceInfoForJobList `json:"instanceInfo"`
 
-    /* 资源在集群中的空闲状态，值为空表示是空闲的，in-use表示资源已被占用。 (Optional) */
+    /* 资源在集群中的空闲状态。
+
+## 可选值
+- 空值：资源空闲
+- `in-use`：资源已被占用
+
+## 用途
+用于判断资源是否可以被调度使用。
+ (Optional) */
     ResourceState string `json:"resourceState"`
 
-    /* 工作空间中的资源归属权限。 (Optional) */
+    /* 工作空间中的资源归属权限。
+
+## 可选值
+- `public`：公开，工作空间内所有成员可见
+- `private`：私有，仅创建者可见
+ (Optional) */
     Permission string `json:"permission"`
 
-    /* 资源组ID。 (Optional) */
+    /* 资源组ID。
+
+## 用途
+用于资源分组管理和成本分摊。
+ (Optional) */
     ResourceGroupId string `json:"resourceGroupId"`
 
-    /* 资源组名称。 (Optional) */
+    /* 资源组名称。
+
+资源组的显示名称。
+ (Optional) */
     ResourceGroupName string `json:"resourceGroupName"`
 
-    /* 用户自定义标签列表。 (Optional) */
+    /* 用户自定义标签列表。
+
+## 用途
+- 资源分类和管理
+- 成本分析和账单统计
+- 权限控制
+ (Optional) */
     UserTags []JobTag `json:"userTags"`
 
-    /* 归属用户pin。 (Optional) */
+    /* 归属用户pin。
+
+资源所有者的用户标识，用于确定资源归属。
+ (Optional) */
     OwnerUserPin string `json:"ownerUserPin"`
 
-    /* 归属用户名称。 (Optional) */
+    /* 归属用户名称。
+
+资源所有者的显示名称。
+ (Optional) */
     OwnerUser string `json:"ownerUser"`
 
-    /* 主账号。 (Optional) */
+    /* 主账号Pin。
+
+资源所属主账号的用户标识。
+ (Optional) */
     Pin string `json:"pin"`
 
-    /* 创建用户名称。 (Optional) */
+    /* 创建用户名称。
+
+创建该训练任务的用户。
+ (Optional) */
     CreateUser string `json:"createUser"`
 
-    /* 创建时间。 (Optional) */
+    /* 创建时间。
+
+格式：北京时间，如 `2025-12-31 12:34:56`
+ (Optional) */
     CreateTime string `json:"createTime"`
 
-    /* 更新用户名称。 (Optional) */
+    /* 更新用户名称。
+
+最后一次更新该任务的用户。
+ (Optional) */
     UpdateUser string `json:"updateUser"`
 
-    /* 更新时间。 (Optional) */
+    /* 更新时间。
+
+格式：北京时间，如 `2025-12-31 12:34:56`。
+ (Optional) */
     UpdateTime string `json:"updateTime"`
 }

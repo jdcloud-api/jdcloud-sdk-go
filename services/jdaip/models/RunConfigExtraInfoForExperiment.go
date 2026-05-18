@@ -19,15 +19,35 @@ package models
 
 type RunConfigExtraInfoForExperiment struct {
 
-    /* 参数名称。 (Optional) */
+    /* 参数名称。
+
+## 常见参数
+- `learning_rate`：学习率
+- `batch_size`：批次大小
+- `epochs`：训练轮数
+- `warmup_steps`：预热步数
+ (Optional) */
     Name string `json:"name"`
 
-    /* 参数类型。 (Optional) */
+    /* 参数类型。
+
+## 常见类型
+- `string`：字符串类型
+- `integer`：整数类型
+- `float`：浮点数类型
+- `boolean`：布尔类型
+ (Optional) */
     ParamType string `json:"paramType"`
 
-    /* 参数描述。 (Optional) */
+    /* 参数描述。
+
+详细说明参数的含义、取值范围和使用建议。
+ (Optional) */
     Description string `json:"description"`
 
-    /* 参数值。 (Optional) */
+    /* 参数值。
+
+参数的实际设置值，以字符串形式表示。
+ (Optional) */
     Value string `json:"value"`
 }

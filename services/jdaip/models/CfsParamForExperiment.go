@@ -19,9 +19,23 @@ package models
 
 type CfsParamForExperiment struct {
 
-    /* cfs ID。示例：fs-rz*******r。 (Optional) */
+    /* CFS 文件系统ID。
+
+## 格式
+以 `fs-` 为前缀。
+
+## 示例
+`fs-rz*******r`
+ (Optional) */
     Id *string `json:"id"`
 
-    /* cfs 源路径。示例：/data/d1。 (Optional) */
+    /* CFS 源路径。
+
+## 示例
+`/data/d1`
+
+## 说明
+路径需在 CFS 文件系统挂载点下。
+ (Optional) */
     SourcePath *string `json:"sourcePath"`
 }

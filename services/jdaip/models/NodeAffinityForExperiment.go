@@ -19,6 +19,13 @@ package models
 
 type NodeAffinityForExperiment struct {
 
-    /* 节点亲和性配置，支持配置多个，每个元素之间是并且的关系。  */
+    /* 节点亲和性配置列表。
+
+## 说明
+支持配置多个亲和性规则，每个元素之间是"且"的关系。
+
+## 示例
+配置 GPU 型号和可用区两个条件，任务将调度到同时满足这两个条件的节点。
+  */
     Affinities []AffinitityForExperiment `json:"affinities"`
 }

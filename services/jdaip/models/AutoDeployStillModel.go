@@ -33,4 +33,7 @@ type AutoDeployStillModel struct {
 
     /* 描述。 (Optional) */
     Desc string `json:"desc"`
+
+    /* 发布新模型的归属权限， (Optional) */
+    Permission string `json:"permission"`
 }

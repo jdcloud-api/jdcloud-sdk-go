@@ -19,9 +19,17 @@ package models
 
 type PodInfoForExperiment struct {
 
-    /* pod名称。 (Optional) */
+    /* Pod 名称。
+
+## 用途
+用于日志查询、终端访问等操作。
+ (Optional) */
     PodName string `json:"podName"`
 
-    /* 终端访问地址。 (Optional) */
+    /* 终端访问地址。
+
+## 用途
+通过终端进入容器进行调试。
+ (Optional) */
     TerminalUrl string `json:"terminalUrl"`
 }

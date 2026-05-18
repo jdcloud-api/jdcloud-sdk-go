@@ -19,9 +19,26 @@ package models
 
 type AdminRunStateCount struct {
 
-    /* 状态名称(`queuing`,`pending`,`failed`,`running`,`stopping`,`stopped`,`success`,`deleting`,`rolling-back`,`rolled-back`)。 (Optional) */
+    /* 状态名称。
+
+## 可选值
+- `queuing`：排队中，等待资源调度
+- `pending`：启动中，正在创建资源
+- `failed`：失败，任务执行失败
+- `running`：运行中，任务正在执行
+- `stopping`：停止中，正在停止任务
+- `stopped`：停止，任务已被停止
+- `success`：成功，任务执行完成
+- `deleting`：删除中，正在删除任务
+- `rolling-back`：回滚中，正在回滚
+- `rolled-back`：已回滚，回滚完成
+ (Optional) */
     Name string `json:"name"`
 
-    /* 数量 (Optional) */
+    /* 该状态对应的微调运行数量。
+
+## 使用场景
+用于统计概览、资源监控仪表盘、成本分析等。
+ (Optional) */
     Value int `json:"value"`
 }

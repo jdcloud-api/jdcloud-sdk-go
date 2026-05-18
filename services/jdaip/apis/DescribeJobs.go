@@ -38,9 +38,9 @@ type DescribeJobsRequest struct {
     PageSize *int `json:"pageSize"`
 
     /* 用户自定义标签列表。 (Optional) */
-    UserTags []jdaip.JobTagFilter `json:"userTags"`
+    UserTags []jdaip.TagFilter `json:"userTags"`
 
-    /* 资源组ID列表 (Optional) */
+    /* 资源组ID列表。 (Optional) */
     ResourceGroupIds []string `json:"resourceGroupIds"`
 
     /* <b>filters 中支持使用以下关键字进行过滤</b>
@@ -86,7 +86,7 @@ func NewDescribeJobsRequest(
  * param pageNumber: 页码；默认为1。 (Optional)
  * param pageSize: 分页大小；默认为20；取值范围[1, 500]。 (Optional)
  * param userTags: 用户自定义标签列表。 (Optional)
- * param resourceGroupIds: 资源组ID列表 (Optional)
+ * param resourceGroupIds: 资源组ID列表。 (Optional)
  * param filters: <b>filters 中支持使用以下关键字进行过滤</b>
 `jobId`: 训练任务ID，精确匹配，支持多个。
 `name`: 训练任务名称，模糊匹配，支持单个。
@@ -104,7 +104,7 @@ func NewDescribeJobsRequestWithAllParams(
     workspaceId string,
     pageNumber *int,
     pageSize *int,
-    userTags []jdaip.JobTagFilter,
+    userTags []jdaip.TagFilter,
     resourceGroupIds []string,
     filters []jdaip.Filter,
 ) *DescribeJobsRequest {
@@ -156,10 +156,10 @@ func (r *DescribeJobsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 /* param userTags: 用户自定义标签列表。(Optional) */
-func (r *DescribeJobsRequest) SetUserTags(userTags []jdaip.JobTagFilter) {
+func (r *DescribeJobsRequest) SetUserTags(userTags []jdaip.TagFilter) {
     r.UserTags = userTags
 }
-/* param resourceGroupIds: 资源组ID列表(Optional) */
+/* param resourceGroupIds: 资源组ID列表。(Optional) */
 func (r *DescribeJobsRequest) SetResourceGroupIds(resourceGroupIds []string) {
     r.ResourceGroupIds = resourceGroupIds
 }

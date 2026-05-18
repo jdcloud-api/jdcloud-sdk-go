@@ -19,6 +19,10 @@ package models
 
 type JobNodeAffinity struct {
 
-    /* 节点亲和性配置，支持配置多个，每个元素之间是并且的关系。  */
+    /* 亲和性配置列表，多个配置项之间是 **且（AND）** 的关系。
+
+**示例：** 同时满足 GPU 型号和机架要求
+  {"affinities": [{"key": "gpu-type", "values": ["nvidia-a100"]}, {"key": "rack", "values": ["rack-1", "rack-2"]}]}
+  */
     Affinities []JobAffinitity `json:"affinities"`
 }

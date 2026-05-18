@@ -19,9 +19,18 @@ package models
 
 type RunTag struct {
 
-    /* 标签键。  */
+    /* 标签键。
+
+## 限制
+- 不能以 `jrn:` 或 `jdc-` 开头
+- 支持字符：中文、大小写英文、数字及 `_.,:/=+-@`
+  */
     Key string `json:"key"`
 
-    /* 标签值。  */
+    /* 标签值。
+
+## 限制
+- 支持字符：中文、大小写英文、数字及 `_.,:/=+-@`
+  */
     Value string `json:"value"`
 }

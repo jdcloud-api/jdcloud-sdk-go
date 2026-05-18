@@ -19,9 +19,16 @@ package models
 
 type NbCodeConfig struct {
 
-    /* 代码库配置ID。  */
+    /* 代码库配置ID，在工作空间代码库配置中获取。
+  */
     RepoId string `json:"repoId"`
 
-    /* 挂载路径，不支持挂载到系统目录。  */
+    /* 挂载路径，代码将拉取到此目录。
+
+## 挂载规则
+- 不支持挂载到系统目录
+- 建议挂载到`/mnt/codes/`路径下
+- 系统目录参考: /, /bin, /boot, /dev, /etc, /home, /lib, /lib32, /lib64, /libx32, /opt, /proc, /root, /run, /sbin, /sys, /tmp, /usr, /var
+  */
     MountPath string `json:"mountPath"`
 }

@@ -19,18 +19,43 @@ package models
 
 type NotebookEvent struct {
 
-    /* 类型 (Optional) */
+    /* 事件类型，标识事件的种类。
+
+## 常见类型
+- Normal: 正常事件
+- Warning: 警告事件
+- Error: 错误事件
+ (Optional) */
     EventType string `json:"eventType"`
 
-    /* 原因 (Optional) */
+    /* 事件原因，简要描述事件的原因。
+
+## 示例
+- Started: 实例启动
+- FailedScheduling: 调度失败
+- ContainerCannotRun: 容器无法运行
+ (Optional) */
     Reason string `json:"reason"`
 
-    /* 描述 (Optional) */
+    /* 事件描述，详细描述事件的详细信息。
+
+## 示例
+- "Successfully assigned notebook to node xxx"
+- "0/3 nodes are available: 3 Insufficient nvidia.com/gpu"
+ (Optional) */
     Message string `json:"message"`
 
-    /* 事件产生时间 (Optional) */
+    /* 事件产生时间，事件实际发生的时间。
+
+## 格式示例
+- 2023-06-01 12:22:56
+ (Optional) */
     EventTime string `json:"eventTime"`
 
-    /* 记录时间 (Optional) */
+    /* 记录时间，事件被记录到系统的时间。
+
+## 格式示例
+- 2023-06-01 12:22:56
+ (Optional) */
     CreateTime string `json:"createTime"`
 }

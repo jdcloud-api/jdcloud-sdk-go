@@ -19,30 +19,96 @@ package models
 
 type ExperimentParam struct {
 
-    /* 微调实验名称。1~32字符，仅支持中文、大小写字母、数字、英文中划线 “-”和英文下划线“_”。  */
+    /* 微调实验名称。
+
+## 命名规则
+- 长度限制：1~32个字符
+- 支持字符：中文、大小写字母、数字、英文中划线"-"、英文下划线"_"
+
+## 示例
+- `llama3-sft-exp`
+- `qwen-代码微调实验`
+  */
     Name string `json:"name"`
 
-    /* 模型系列，严格区分大小写，可选值：[`llama`, `qwen`]  */
+    /* 模型系列，严格区分大小写。
+
+## 可选值
+- `llama`：Meta LLaMA 系列模型
+- `qwen`：阿里通义千问系列模型
+
+## 说明
+模型系列决定了支持的模型模板范围，需与 modelTemplate 配合使用。
+  */
     ModelSeries string `json:"modelSeries"`
 
-    /* 模型模版，严格区分大小写。
-`modelTemplate`：`llama3`，`模型名`：[Llama 3-3.3](https://huggingface.co/meta-llama)，`参数量`：1B/3B/8B/70B
-`modelTemplate`：`qwen`，`模型名`：[Qwen (1-2.5)(Code/Math/MoE/QwQ)](https://huggingface.co/Qwen)，`参数量`：0.5B/1.5B/3B/7B/14B/32B/72B/110B
+    /* 模型模版，严格区分大小写。不同模版对应不同的模型和参数量。
+
+## 模版与模型对应关系
+
+| modelTemplate | 模型名 | 支持参数量 |
+|---------------|--------|-----------|
+| `llama3` | [Llama 3-3.3](https://huggingface.co/meta-llama) | 1B/3B/8B/70B |
+| `qwen` | [Qwen (1-2.5)(Code/Math/MoE/QwQ)](https://huggingface.co/Qwen) | 0.5B/1.5B/3B/7B/14B/32B/72B/110B |
+
+## 使用建议
+- 根据任务复杂度和资源预算选择合适的参数量
+- 大参数量模型需要更多GPU资源
   */
     ModelTemplate string `json:"modelTemplate"`
 
-    /* 基础模型可见性，可选值：[public]  */
+    /* 基础模型可见性。
+
+## 可选值
+- `public`：公共模型，平台提供的预训练模型
+
+## 说明
+目前仅支持公共模型，后续可能开放私有模型支持。
+  */
     BaseModelVisibility string `json:"baseModelVisibility"`
 
-    /* 基础模型ID。示例：model-wsxxxxxx1f  */
+    /* 基础模型ID，用于唯一标识要微调的基础模型。
+
+## 格式
+以 `model-` 为前缀，例如：`model-wsxxxxxx1f`
+
+## 获取方式
+通过模型市场或模型列表接口查询可用的基础模型。
+  */
     BaseModelId string `json:"baseModelId"`
 
-    /* 基础模型版本。示例：v1  */
+    /* 基础模型版本。
+
+## 格式
+通常为 `v1`、`v2` 等版本号格式。
+
+## 说明
+不同版本的基础模型可能有性能差异，建议使用最新稳定版本。
+  */
     BaseModelVersion string `json:"baseModelVersion"`
 
-    /* 微调实验的描述信息，不超过256个字符。 (Optional) */
+    /* 微调实验的描述信息。
+
+## 限制
+不超过256个字符。
+
+## 建议
+建议填写实验目的、预期目标等信息，便于后续管理和追溯。
+ (Optional) */
     Description *string `json:"description"`
 
-    /* 工作空间中的资源归属权限，支持(public,private)，默认为public。 (Optional) */
+    /* 工作空间中的资源归属权限。
+
+## 可选值
+- `public`：公开，工作空间内所有成员可见可操作
+- `private`：私有，仅创建者可见可操作
+
+## 默认值
+默认为 `public`。
+
+## 使用建议
+- 团队协作场景使用 `public`
+- 个人实验或敏感项目使用 `private`
+ (Optional) */
     Permission *string `json:"permission"`
 }

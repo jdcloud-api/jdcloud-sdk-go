@@ -19,11 +19,21 @@ package models
 
 type RoleResourceParamForJob struct {
 
-    /* 队列ID。示例：queue-2xxx**********2d*********8b8
-使用公共资源池时固定为：joybuilder-public-queue。
+    /* 队列ID，指定任务运行的资源队列。
+
+**公共资源池：** 固定使用 `joybuilder-public-queue`
+
+**专属资源池：** 使用工作空间绑定的队列，需要用户及角色拥有该队列的使用权限
+
+**示例：** `queue-2xxx**********2d*********8b8`
  (Optional) */
     QueueId *string `json:"queueId"`
 
-    /* 角色资源配置详细信息 (Optional) */
+    /* 角色资源配置详细信息列表。
+
+**配置规则：**
+- PyTorch 任务：仅支持 Worker 角色
+- Ray 任务：必须包含 Head 角色，可根据需求增加 Worker 角色
+ (Optional) */
     Roles []RoleResourceInfoForJob `json:"roles"`
 }

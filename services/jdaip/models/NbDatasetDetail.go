@@ -19,31 +19,55 @@ package models
 
 type NbDatasetDetail struct {
 
-    /* 来源，支持(public,self)。 (Optional) */
+    /* 数据集来源，指定数据集是公共的还是个人的。
+
+## 来源类型
+- public: 公共数据集，所有用户可访问
+- self: 个人数据集，仅自己可访问
+ (Optional) */
     Source string `json:"source"`
 
-    /* 存储名称。 (Optional) */
+    /* 存储名称，数据集对应的存储名称。 (Optional) */
     StorageName string `json:"storageName"`
 
-    /* 存储类型，支持三种类型`cfs`、`oss`、`jpfs`。 (Optional) */
+    /* 存储类型，数据集的存储后端类型。
+
+## 支持类型
+- cfs: 京东云文件存储
+- oss: 京东云对象存储
+- jpfs: 京东云并行文件系统
+ (Optional) */
     StorageType string `json:"storageType"`
 
-    /* 数据集ID。 (Optional) */
+    /* 数据集ID，唯一标识数据集。 (Optional) */
     DatasetId string `json:"datasetId"`
 
-    /* 数据集版本。 (Optional) */
+    /* 数据集版本，指定的数据集版本号。 (Optional) */
     DatasetVersion string `json:"datasetVersion"`
 
-    /* 数据集地址。
-`cfs` 类型参数示例(`10.0.23.45:/dir-path`或`/dir-path`)。
-`oss` 类型参数示例(`oss://bucket.s3.cn-north-1.jdcloud-oss.com/object-path`)。
-`jpfs` 类型参数示例(`fs-xxxxxxxxxx:/dir-path`或`/dir-path`)。
+    /* 数据集地址，数据集的实际存储路径。
+
+## 各类型地址格式
+- cfs: `10.0.23.45:/dir-path` 或 `/dir-path`
+- oss: `oss://bucket.s3.cn-north-1.jdcloud-oss.com/object-path`
+- jpfs: `fs-xxxxxxxxxx:/dir-path` 或 `/dir-path`
  (Optional) */
     DatasetUrl string `json:"datasetUrl"`
 
-    /* 挂载路径。 (Optional) */
+    /* 挂载路径，数据集在Notebook容器中的挂载位置。
+
+## 挂载建议
+- 建议挂载到`/mnt/datasets/`开头的路径
+ (Optional) */
     MountPath string `json:"mountPath"`
 
-    /* 是否以只读模式挂载数据集。只读模式下，用户无法在挂载的数据集中进行写操作。当数据集来源为public，或存储类型不是oss时，该参数无效。 (Optional) */
+    /* 是否以只读模式挂载数据集。
+
+## 使用说明
+- 仅oss类型且self来源的数据集有效
+- public数据集强制只读
+- true: 只读模式，无法写入
+- false: 读写模式，可读写
+ (Optional) */
     Readonly bool `json:"readonly"`
 }

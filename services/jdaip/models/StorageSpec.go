@@ -19,28 +19,61 @@ package models
 
 type StorageSpec struct {
 
-    /* 存储类型，支持三种类型`cfs`、`oss`、`jpfs`。  */
+    /* 存储类型，决定存储后端的类型和访问方式。
+
+## 支持类型
+- cfs: 京东云文件存储，NFS协议
+- oss: 京东云对象存储，S3协议
+- jpfs: 京东云并行文件系统，高性能
+
+## 选择建议
+- 开发调试: cfs，成本低
+- 大数据存储: oss，容量大
+- 高性能训练: jpfs，速度快
+  */
     StorageType string `json:"storageType"`
 
-    /* 存储ID。
-`cfs`和`jpfs`类型存储需要传对应类型的资源ID。
-`oss`类型传bucket名称。
+    /* 存储资源ID，用于标识存储实例。
+
+## 各类型ID格式
+- cfs: 文件系统ID，如 fs-xxxxxxxx
+- oss: Bucket名称
+- jpfs: 文件系统ID，如 jfs-xxxxxxxx
   */
     StorageId string `json:"storageId"`
 
-    /* 存储路径。
-`cfs` 类型参数示例(`10.0.23.45:/dir-path`或`/dir-path`)。
-`oss` 类型参数示例(`oss://bucket.s3.cn-north-1.jdcloud-oss.com/object-path`)。
-`jpfs` 类型参数示例(`fs-xxxxxxxxxx:/dir-path`或`/dir-path`)。
+    /* 存储路径，指定要挂载的目录或对象路径。
+
+## 各类型路径格式
+- cfs: `10.0.23.45:/dir-path` 或 `/dir-path`
+- oss: `oss://bucket.s3.cn-north-1.jdcloud-oss.com/object-path`
+- jpfs: `fs-xxxxxxxxxx:/dir-path` 或 `/dir-path`
+
+## 使用说明
+- 路径必须存在，否则挂载失败
+- 支持挂载子目录
   */
     StoragePath string `json:"storagePath"`
 
-    /* 挂载路径，列表中的第一个存储作为工作目录必须挂载到`/mnt/workspace`不能更改。
-其他存储建议挂载到`/mnt/`开头的路径下，不支持挂载到系统目录。
-系统目录参考：` /, /bin, /boot, /dev, /etc, /home, /lib, /lib32, /lib64, /libx32, /opt, /proc, /root, /run, /sbin, /sys, /tmp, /usr, /var `。
+    /* 挂载路径，指定存储在Notebook容器中的挂载位置。
+
+## 挂载规则
+- 第一个存储必须挂载到`/mnt/workspace`，作为工作目录
+- 其他存储建议挂载到`/mnt/`开头的路径
+- 不支持挂载到系统目录
+
+## 系统目录列表
+`/, /bin, /boot, /dev, /etc, /home, /lib, /lib32, /lib64, /libx32, /opt, /proc, /root, /run, /sbin, /sys, /tmp, /usr, /var`
   */
     MountPath string `json:"mountPath"`
 
-    /* 是否以只读模式挂载存储。只读模式下，用户无法在挂载的存储中进行写操作。仅当存储类型为oss时有效。 (Optional) */
+    /* 是否以只读模式挂载存储。
+
+## 使用说明
+- 仅oss类型存储有效
+- true: 只读模式，无法写入
+- false: 读写模式，可读写
+- 默认为false(读写模式)
+ (Optional) */
     Readonly *bool `json:"readonly"`
 }

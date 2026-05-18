@@ -34,6 +34,9 @@ type InferenceData struct {
     /* 推理服务资源所在队列ID (Optional) */
     QueueId string `json:"queueId"`
 
+    /* 推理服务限流阈值（QPS） (Optional) */
+    Qps int `json:"qps"`
+
     /* 推理服务相关信息（地址，token等） (Optional) */
     Service ServiceInfo `json:"service"`
 
@@ -69,6 +72,9 @@ type InferenceData struct {
 
     /* 用户标签 (Optional) */
     UserTags []UserTag `json:"userTags"`
+
+    /* 调度优先级 (Optional) */
+    SchedulePriority SchedulePriority `json:"schedulePriority"`
 
     /* 资源组信息 (Optional) */
     ResourceGroupInfo ResourceGroupInfo `json:"resourceGroupInfo"`

@@ -19,16 +19,33 @@ package models
 
 type StorageSpaceParamForExperiment struct {
 
-    /* 存储类型（数据来源），大小写敏感，地域不同，支持的存储类型也不同，需要根据地域实际支持的存储类型选择：[oss, cfs, jpfs]。
+    /* 存储类型（数据来源），大小写敏感。
+
+## 可选值
+- `oss`：对象存储服务
+- `cfs`：云文件存储
+- `jpfs`：并行文件系统
+
+## 说明
+地域不同，支持的存储类型也不同，需要根据地域实际支持的存储类型选择。
  (Optional) */
     StorageType *string `json:"storageType"`
 
-    /*  (Optional) */
+    /* OSS 存储配置。
+
+当 storageType 为 `oss` 时需要配置此项。
+ (Optional) */
     Oss *OssParamForExperiment `json:"oss"`
 
-    /*  (Optional) */
+    /* CFS 存储配置。
+
+当 storageType 为 `cfs` 时需要配置此项。
+ (Optional) */
     Cfs *CfsParamForExperiment `json:"cfs"`
 
-    /*  (Optional) */
+    /* JPFS 存储配置。
+
+当 storageType 为 `jpfs` 时需要配置此项。
+ (Optional) */
     Jpfs *JpfsParamForExperiment `json:"jpfs"`
 }

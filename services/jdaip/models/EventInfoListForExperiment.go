@@ -19,15 +19,30 @@ package models
 
 type EventInfoListForExperiment struct {
 
-    /* 事件类型。 (Optional) */
+    /* 事件类型。
+
+## 常见类型
+- `Normal`：正常事件
+- `Warning`：警告事件
+- `Error`：错误事件
+ (Optional) */
     EventType string `json:"eventType"`
 
-    /* 事件内容。 (Optional) */
+    /* 事件内容。
+
+详细描述事件的具体信息。
+ (Optional) */
     Message string `json:"message"`
 
-    /* 事件原因。 (Optional) */
+    /* 事件原因。
+
+触发事件的原因说明。
+ (Optional) */
     Reason string `json:"reason"`
 
-    /* 事件时间。 (Optional) */
+    /* 事件时间。
+
+事件发生的时间，ISO 8601 格式。
+ (Optional) */
     EventTime string `json:"eventTime"`
 }

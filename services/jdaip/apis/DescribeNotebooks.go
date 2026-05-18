@@ -39,7 +39,7 @@ type DescribeNotebooksRequest struct {
     PageSize *int `json:"pageSize"`
 
     /* 用户自定义标签列表。 (Optional) */
-    UserTags []jdaip.NbTagFilter `json:"userTags"`
+    UserTags []jdaip.TagFilter `json:"userTags"`
 
     /* 资源组ID列表 (Optional) */
     ResourceGroupIds []string `json:"resourceGroupIds"`
@@ -107,7 +107,7 @@ func NewDescribeNotebooksRequestWithAllParams(
     workspaceId string,
     pageNumber *int,
     pageSize *int,
-    userTags []jdaip.NbTagFilter,
+    userTags []jdaip.TagFilter,
     resourceGroupIds []string,
     filters []common.Filter,
 ) *DescribeNotebooksRequest {
@@ -159,7 +159,7 @@ func (r *DescribeNotebooksRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 /* param userTags: 用户自定义标签列表。(Optional) */
-func (r *DescribeNotebooksRequest) SetUserTags(userTags []jdaip.NbTagFilter) {
+func (r *DescribeNotebooksRequest) SetUserTags(userTags []jdaip.TagFilter) {
     r.UserTags = userTags
 }
 /* param resourceGroupIds: 资源组ID列表(Optional) */

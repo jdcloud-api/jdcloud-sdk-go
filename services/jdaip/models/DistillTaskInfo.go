@@ -85,7 +85,7 @@ type DistillTaskInfo struct {
     ResourceGroupName string `json:"resourceGroupName"`
 
     /* 标签信息。 (Optional) */
-    UserTags []DistillTag `json:"userTags"`
+    UserTags []Tag `json:"userTags"`
 
     /* 学生模型训练输出存储位置信息。 (Optional) */
     OutputModel DistillStorageInfo `json:"outputModel"`

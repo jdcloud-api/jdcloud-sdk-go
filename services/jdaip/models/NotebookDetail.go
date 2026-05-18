@@ -20,126 +20,254 @@ import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
 
 type NotebookDetail struct {
 
-    /* 主帐号。 (Optional) */
+    /* 主账号，资源所属的主账号标识。 (Optional) */
     Pin string `json:"pin"`
 
-    /* 创建人用户名。 (Optional) */
+    /* 创建人用户名，创建Notebook的用户名称。 (Optional) */
     CreateUser string `json:"createUser"`
 
-    /* 创建人pin。 (Optional) */
+    /* 创建人pin，创建Notebook的用户标识。 (Optional) */
     CreateUserPin string `json:"createUserPin"`
 
-    /* NotebookID。 (Optional) */
+    /* Notebook实例ID，全局唯一标识。 (Optional) */
     NotebookId string `json:"notebookId"`
 
-    /* 名称。 (Optional) */
+    /* Notebook实例名称，用户自定义名称。 (Optional) */
     Name string `json:"name"`
 
-    /* 描述。 (Optional) */
+    /* Notebook实例描述信息。 (Optional) */
     Description string `json:"description"`
 
-    /* 应用类型(JupyterLab)。 (Optional) */
+    /* 应用类型，指定Notebook运行的开发环境类型。
+
+## 支持的应用类型
+- JupyterLab: JupyterLab交互式开发环境
+ (Optional) */
     AppType string `json:"appType"`
 
-    /* 任务ID，不为空表示正在执行任务。 (Optional) */
+    /* 任务ID，当前正在执行的任务标识。
+
+## 使用说明
+- 不为空表示正在执行任务(如保存镜像)
+- 为空表示没有正在执行的任务
+ (Optional) */
     TaskId string `json:"taskId"`
 
-    /* 状态(queuing,pending,failed,running,stopping,stopped,deleting,saving,rolling-back,rolled-back)。 (Optional) */
+    /* Notebook实例状态。
+
+## 状态值说明
+- `queuing`: 排队中，等待资源调度
+- `pending`: 启动中，正在创建容器
+- `failed`: 失败，创建或运行失败
+- `running`: 运行中，正常提供服务
+- `stopping`: 停止中，正在停止实例
+- `stopped`: 已停止，实例已停止
+- `deleting`: 删除中，正在删除实例
+- `saving`: 镜像保存中，正在保存镜像
+- `rolling-back`: 回滚中，不能做任何操作
+- `rolled-back`: 已回滚，只能操作删除
+ (Optional) */
     State string `json:"state"`
 
-    /* 资源在集群中的空闲状态，值为空表示是空闲的，in-use表示资源已被占用。 (Optional) */
+    /* 资源在集群中的空闲状态。
+
+## 状态值
+- 空: 空闲状态
+- in-use: 资源已被占用
+ (Optional) */
     ResourceState string `json:"resourceState"`
 
-    /* 工作空间ID。 (Optional) */
+    /* 工作空间ID，实例所属的工作空间。 (Optional) */
     WorkspaceId string `json:"workspaceId"`
 
-    /* 访问令牌。 (Optional) */
+    /* 访问令牌，用于访问Notebook服务的认证令牌。
+
+## 使用说明
+- 仅running状态时有值
+- 访问Notebook时需要携带此令牌
+ (Optional) */
     Token string `json:"token"`
 
-    /* 控制台地址。 (Optional) */
+    /* 控制台地址，JupyterLab的访问地址。
+
+## 使用说明
+- 仅running状态时有效
+- 通过此地址访问JupyterLab界面
+ (Optional) */
     Uri string `json:"uri"`
 
-    /* vscode地址。 (Optional) */
+    /* VSCode地址，VSCode Server的访问地址。
+
+## 使用说明
+- 仅running状态时有效
+- 通过此地址使用VSCode在线编辑
+ (Optional) */
     VscodeUri string `json:"vscodeUri"`
 
-    /* 自定义服务地址列表。 (Optional) */
+    /* 自定义服务地址列表，用户自定义服务的访问地址。
+
+## 使用说明
+- 仅running状态时有效
+- 用于访问用户启动的自定义服务
+ (Optional) */
     CustomServiceUrls []string `json:"customServiceUrls"`
 
-    /* 异常原因。 (Optional) */
+    /* 异常原因，实例状态异常时的错误原因描述。
+
+## 使用说明
+- failed状态时会返回详细的错误信息
+- 用于排查实例启动失败等问题
+ (Optional) */
     Reason string `json:"reason"`
 
-    /* 开始运行时间，如(2023-06-01 12:22:56)。 (Optional) */
+    /* 开始运行时间，实例进入running状态的时间。
+
+## 格式示例
+- 2023-06-01 12:22:56
+ (Optional) */
     RunningTime string `json:"runningTime"`
 
-    /* 镜像ID。 (Optional) */
+    /* 镜像ID，当前使用的镜像标识。 (Optional) */
     ImageId string `json:"imageId"`
 
-    /* 镜像来源，支持(public,self)。 (Optional) */
+    /* 镜像来源，镜像的来源类型。
+
+## 来源类型
+- public: 公共镜像
+- self: 自定义镜像
+ (Optional) */
     ImageSource string `json:"imageSource"`
 
-    /* 镜像名称。 (Optional) */
+    /* 镜像名称，当前使用的镜像名称。 (Optional) */
     ImageName string `json:"imageName"`
 
-    /* 镜像URL。 (Optional) */
+    /* 镜像URL，镜像的完整仓库地址。 (Optional) */
     ImageUrl string `json:"imageUrl"`
 
-    /* 最后更新的用户名。 (Optional) */
+    /* 最后更新的用户名，最近一次更新实例的用户名称。 (Optional) */
     UpdateUser string `json:"updateUser"`
 
-    /* 最后更新的用户pin。 (Optional) */
+    /* 最后更新的用户pin，最近一次更新实例的用户标识。 (Optional) */
     UpdateUserPin string `json:"updateUserPin"`
 
-    /* 创建时间。 (Optional) */
+    /* 创建时间，实例创建的时间。 (Optional) */
     CreateTime string `json:"createTime"`
 
-    /* 更新时间。 (Optional) */
+    /* 更新时间，实例最近一次更新的时间。 (Optional) */
     UpdateTime string `json:"updateTime"`
 
-    /* 资源配置。 (Optional) */
+    /* 资源配置，实例的计算资源配置信息。
+
+## 包含信息
+- 队列ID
+- CPU、内存配置
+- GPU配置(如有)
+ (Optional) */
     Workload NbWorkloadDetail `json:"workload"`
 
-    /* 公网访问配置。 (Optional) */
+    /* 公网访问配置，负载均衡配置信息。
+
+## 使用说明
+- 配置了公网访问时有值
+- 用于SSH或其他公网服务访问
+ (Optional) */
     Lb LbSpec `json:"lb"`
 
-    /* Notebook的计费信息，私有资源池的资源无计费信息。 (Optional) */
+    /* Notebook的计费信息，公共资源池的计费详情。
+
+## 使用说明
+- 仅公共资源池有计费信息
+- 私有资源池的资源无计费信息
+ (Optional) */
     Charge charge.Charge `json:"charge"`
 
-    /* 存储空间。 (Optional) */
+    /* 存储空间列表，实例挂载的存储配置详情。
+
+## 包含信息
+- 存储类型、ID、路径
+- 挂载路径
+- 读写模式
+ (Optional) */
     Storages []StorageSpec `json:"storages"`
 
-    /* 数据集。 (Optional) */
+    /* 数据集列表，实例挂载的数据集配置详情。
+
+## 包含信息
+- 数据集来源、ID、版本
+- 存储类型、URL
+- 挂载路径、读写模式
+ (Optional) */
     Datasets []NbDatasetDetail `json:"datasets"`
 
-    /* 模型。 (Optional) */
+    /* 模型列表，实例挂载的模型配置详情。
+
+## 包含信息
+- 模型来源、ID、版本
+- 存储类型、URL
+- 挂载路径、读写模式
+ (Optional) */
     Models []NbModelDetail `json:"models"`
 
-    /* 代码配置。 (Optional) */
+    /* 代码配置列表，实例挂载的代码库配置详情。
+
+## 包含信息
+- 代码库ID、名称
+- 挂载路径
+ (Optional) */
     Codes []NbCodeConfigInfo `json:"codes"`
 
-    /* 日志采集配置。 (Optional) */
+    /* 日志采集配置，容器日志采集到日志服务的配置。
+
+## 包含信息
+- 日志集ID和名称
+- 日志主题ID和名称
+- 标准日志配置
+- 自定义日志配置
+ (Optional) */
     LogCollectConfig LogCollectConfigDetail `json:"logCollectConfig"`
 
-    /* 归属用户名称。 (Optional) */
+    /* 归属用户名称，资源归属的用户名称。 (Optional) */
     OwnerUser string `json:"ownerUser"`
 
-    /* 归属用户pin。 (Optional) */
+    /* 归属用户pin，资源归属的用户标识。 (Optional) */
     OwnerUserPin string `json:"ownerUserPin"`
 
-    /* 工作空间中的资源归属权限。 (Optional) */
+    /* 工作空间中的资源归属权限。
+
+## 权限值
+- public: 公开，工作空间所有用户可见
+- private: 私有，仅管理员和拥有者可见
+ (Optional) */
     Permission string `json:"permission"`
 
-    /* 关机策略。 (Optional) */
+    /* 关机策略，自动关机配置信息。
+
+## 包含信息
+- 排除关机策略标记
+- 运行时长限制
+- 闲置检测策略
+ (Optional) */
     ShutdownPolicy NbShutdownPolicy `json:"shutdownPolicy"`
 
-    /* 资源组ID。 (Optional) */
+    /* 资源组ID，实例所属的资源组标识。 (Optional) */
     ResourceGroupId string `json:"resourceGroupId"`
 
-    /* 资源组名称。 (Optional) */
+    /* 资源组名称，实例所属的资源组名称。 (Optional) */
     ResourceGroupName string `json:"resourceGroupName"`
 
-    /* 用户自定义标签列表。 (Optional) */
-    UserTags []NbTag `json:"userTags"`
+    /* 用户自定义标签列表，用于资源分类和管理。
 
-    /* 节点亲和性配置。 (Optional) */
+## 标签格式
+- key-value键值对形式
+- 最多10个标签
+ (Optional) */
+    UserTags []Tag `json:"userTags"`
+
+    /* 调度优先级，Pod调度顺序控制。
+ (Optional) */
+    SchedulePriority SchedulePriority `json:"schedulePriority"`
+
+    /* 节点亲和性配置，控制Pod调度到特定节点。
+ (Optional) */
     NodeAffinities []NotebookNodeAffinity `json:"nodeAffinities"`
 }

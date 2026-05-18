@@ -19,7 +19,15 @@ package models
 
 type CustomLogConfig struct {
 
-    /* 自定义文件路径。以"/"开头的采集路径,支持通配符 如: /var/log/db/a.log
+    /* 自定义文件路径列表，指定要采集的日志文件路径。
+
+## 路径格式
+- 以"/"开头的采集路径
+- 支持通配符
+
+## 示例
+- /var/log/app.log: 单个文件
+- /var/log/db/&#42;/&#42;.log: 多级目录通配
   */
     Paths []string `json:"paths"`
 }

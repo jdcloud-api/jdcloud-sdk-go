@@ -19,15 +19,33 @@ package models
 
 type JpfsParamForJob struct {
 
-    /* jpfs ID。示例：fs-11******us。 (Optional) */
+    /* JPFS 文件系统 ID。
+
+**示例：** `fs-11******us`
+
+**获取方式：** 通过 JPFS 控制台或 API 创建并获取
+ (Optional) */
     Id *string `json:"id"`
 
-    /* jpfs 源路径。示例：/data/d1。 (Optional) */
+    /* JPFS 源路径，指定要挂载的目录。
+
+**示例：**
+- 根目录：`/`
+- 数据目录：`/data/d1`
+- 模型目录：`/models`
+ (Optional) */
     SourcePath *string `json:"sourcePath"`
 
-    /* 挂载点配置。示例：/mnt/ws/jpfs-1。
-建议挂载到/mnt/开头的路径下，不支持挂载到系统目录。
-不支持的系统目录如下：`/`, `/bin`, `/boot`, `/dev`, `/etc`, `/home`, `/lib`, `/lib32`, `/lib64`, `/libx32`, `/opt`, `/proc`, `/root`, `/run`, `/sbin`, `/sys`, `/tmp`, `/usr`, `/var`。
+    /* 挂载点配置，指定 JPFS 在容器内的挂载路径。
+
+**建议：** 挂载到 `/mnt/` 开头的路径下
+
+**示例：**
+- 高性能存储：`/mnt/jpfs`
+- 模型存储：`/mnt/models`
+
+**禁止挂载的系统目录：**
+`/`, `/bin`, `/boot`, `/dev`, `/etc`, `/home`, `/lib`, `/lib32`, `/lib64`, `/libx32`, `/opt`, `/proc`, `/root`, `/run`, `/sbin`, `/sys`, `/tmp`, `/usr`, `/var`
  (Optional) */
     MountPath *string `json:"mountPath"`
 }

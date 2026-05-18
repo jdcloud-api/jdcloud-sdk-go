@@ -19,21 +19,21 @@ package models
 
 type LogCollectConfigDetail struct {
 
-    /* 日志集id (Optional) */
+    /* 日志集ID，日志集的唯一标识。 (Optional) */
     LogSetId string `json:"logSetId"`
 
-    /* 日志集名称 (Optional) */
+    /* 日志集名称，日志集的显示名称。 (Optional) */
     LogSetName string `json:"logSetName"`
 
-    /* 日志集主题id (Optional) */
+    /* 日志主题ID，日志主题的唯一标识。 (Optional) */
     LogTopicId string `json:"logTopicId"`
 
-    /* 日志集主题名称 (Optional) */
+    /* 日志主题名称，日志主题的显示名称。 (Optional) */
     LogTopicName string `json:"logTopicName"`
 
-    /* 标准日志配置 (Optional) */
+    /* 标准日志配置，容器标准输出采集配置。 (Optional) */
     StandardLogConfig StandardLogConfig `json:"standardLogConfig"`
 
-    /* 自定义日志配置 (Optional) */
+    /* 自定义日志配置，自定义文件路径采集配置。 (Optional) */
     CustomLogConfig CustomLogConfig `json:"customLogConfig"`
 }

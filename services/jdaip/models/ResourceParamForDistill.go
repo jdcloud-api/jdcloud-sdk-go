@@ -19,8 +19,17 @@ package models
 
 type ResourceParamForDistill struct {
 
-    /* 队列ID。示例：queue-2xxx**********2d*********8b8
-使用公共资源池时固定为：joybuilder-public-queue。
+    /* 队列ID。
+
+## 格式
+示例：`queue-2xxx**********2d*********8b8`
+
+## 公共资源池
+使用公共资源池时固定为：`joybuilder-public-queue`
+
+## 选择建议
+- 测试验证：使用公共资源池
+- 生产训练：使用专属资源池
  (Optional) */
     QueueId string `json:"queueId"`
 }

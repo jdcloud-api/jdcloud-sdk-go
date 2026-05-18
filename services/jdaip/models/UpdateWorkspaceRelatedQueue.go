@@ -38,4 +38,7 @@ type UpdateWorkspaceRelatedQueue struct {
 
     /* 队列可用成员，子账号pin，allUserSupported=false生效 (Optional) */
     QueueMemberPins []string `json:"queueMemberPins"`
+
+    /* 调度测略 (Optional) */
+    SchedulePolicy SchedulePolicy `json:"schedulePolicy"`
 }

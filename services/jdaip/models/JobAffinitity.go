@@ -19,9 +19,19 @@ package models
 
 type JobAffinitity struct {
 
-    /* 亲和性Key。  */
+    /* 亲和性标签键，对应节点的标签名称。
+
+**常用标签键：**
+- `gpu-type`：GPU 型号
+- `rack`：机架
+- `zone`：可用区
+- `storage-type`：存储类型
+  */
     Key string `json:"key"`
 
-    /* 亲和性Values列表。  */
+    /* 亲和性标签值列表，多个值之间是 **或（OR）** 的关系。
+
+**说明：** 节点标签值匹配其中任意一个即满足条件
+  */
     Values []string `json:"values"`
 }

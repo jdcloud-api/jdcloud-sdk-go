@@ -19,21 +19,55 @@ package models
 
 type NbIdlePolicy struct {
 
-    /* 闲置等待时长配置(分钟)。 (Optional) */
+    /* 闲置等待时长配置(分钟)。
+
+## 使用说明
+- 持续闲置达到此时长后触发关机
+ (Optional) */
     MaxIdleTimeInMinutes int `json:"maxIdleTimeInMinutes"`
 
-    /* CPU利用率阈值，0表示未配置。 (Optional) */
+    /* CPU利用率阈值(%)。
+
+## 使用说明
+- 当CPU利用率低于此阈值时判定为闲置
+- 0表示不检测CPU利用率
+- 示例: "10" 表示利用率低于10%判定为闲置
+ (Optional) */
     CpuPercentThreshold string `json:"cpuPercentThreshold"`
 
-    /* 内存利用率阈值，0表示未配置。 (Optional) */
+    /* 内存利用率阈值(%)。
+
+## 使用说明
+- 当内存利用率低于此阈值时判定为闲置
+- 0表示不检测内存利用率
+- 示例: "20" 表示利用率低于20%判定为闲置
+ (Optional) */
     MemoryPercentThreshold string `json:"memoryPercentThreshold"`
 
-    /* GPU利用率阈值，0表示未配置。 (Optional) */
+    /* GPU利用率阈值(%)。
+
+## 使用说明
+- 当GPU利用率低于此阈值时判定为闲置
+- 0表示不检测GPU利用率
+- 仅对含有GPU的Notebook有效
+- 示例: "5" 表示利用率低于5%判定为闲置
+ (Optional) */
     GpuPercentThreshold string `json:"gpuPercentThreshold"`
 
-    /* 闲置开始时间，计算规则为某一分钟的指标利用率全部低于本组配置时。 (Optional) */
+    /* 闲置开始时间，开始检测到闲置的时刻。
+
+## 计算规则
+- 某一分钟的指标利用率全部低于本组配置时开始计时
+- 格式: 2023-06-01 12:22:56
+ (Optional) */
     IdleStartTime string `json:"idleStartTime"`
 
-    /* 当前闲置时长(分钟)，从闲置开始时间开始，到最后一次利用率计算为止。 (Optional) */
+    /* 当前闲置时长(分钟)。
+
+## 计算规则
+- 从闲置开始时间开始
+- 到最后一次利用率计算为止
+- 达到maxIdleTimeInMinutes时触发关机
+ (Optional) */
     IdleTimeInMinutes int `json:"idleTimeInMinutes"`
 }

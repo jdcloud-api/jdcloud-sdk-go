@@ -38,4 +38,7 @@ type WorkspaceQueue struct {
 
     /* 队列可用成员，allUserSupported=false生效 (Optional) */
     QueueMemberPins []string `json:"queueMemberPins"`
+
+    /* 调度测略 (Optional) */
+    SchedulePolicy SchedulePolicy `json:"schedulePolicy"`
 }

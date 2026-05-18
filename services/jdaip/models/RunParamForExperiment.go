@@ -19,41 +19,117 @@ package models
 
 type RunParamForExperiment struct {
 
-    /* 微调运行名称。1~32字符，仅支持中文、大小写字母、数字、英文中划线 “-”和英文下划线“_”。  */
+    /* 微调运行名称。
+
+## 命名规则
+- 长度限制：1~32个字符
+- 支持字符：中文、大小写字母、数字、英文中划线"-"、英文下划线"_"
+
+## 建议
+名称应体现训练特点，便于识别和管理。
+  */
     Name string `json:"name"`
 
-    /* 微调运行的描述信息，不超过256个字符。 (Optional) */
+    /* 微调运行的描述信息。
+
+## 限制
+不超过256个字符。
+
+## 建议
+建议填写训练目标、参数特点等信息。
+ (Optional) */
     Description *string `json:"description"`
 
-    /* 微调配置参数。  */
+    /* 微调配置参数。
+
+包含训练阶段、微调方法、训练参数等核心配置。
+  */
     FinetuningConfig *FinetuningConfigParamForExperiment `json:"finetuningConfig"`
 
-    /* 验证数据集来源，可选值如下：
-  - `split`：使用训练数据集拆分一定比例。必须设置 evalDatasetSplitRatio。
-  - `provided`：直接提供验证数据集，必须在 datasets 中配置 datasetUsage 为 `evaluation` 的数据集。
+    /* 验证数据集来源。
+
+## 可选值
+
+| 值 | 说明 | 要求 |
+|----|------|------|
+| `split` | 从训练数据集拆分 | 必须设置 evalDatasetSplitRatio |
+| `provided` | 单独提供验证数据集 | 必须在 datasets 中配置 evaluation 数据集 |
+
+## 选择建议
+- 数据量充足时，使用 `split` 自动拆分
+- 有专用验证数据时，使用 `provided`
  (Optional) */
     EvalDatasetSource *string `json:"evalDatasetSource"`
 
-    /* 验证集相对所使用的训练数据集的大小。取值在 [0,1) 之间。即 0 <= evalDatasetSplitRatio < 1。
-当 `evalDatasetSource` 为 `split` 时，必填，且必须满足 0 < evalDatasetSplitRatio < 1。
+    /* 验证集拆分比例。
+
+## 范围
+0 < evalDatasetSplitRatio < 1
+
+## 说明
+当 `evalDatasetSource` 为 `split` 时必填。
+
+## 建议值
+- 0.1：10% 作为验证集
+- 0.2：20% 作为验证集
  (Optional) */
     EvalDatasetSplitRatio *float64 `json:"evalDatasetSplitRatio"`
 
-    /* 数据集配置。  */
+    /* 数据集配置列表。
+
+## 配置要求
+- 至少包含一个 `training` 类型的数据集
+- 当 `evalDatasetSource` 为 `provided` 时，需要包含 `evaluation` 类型的数据集
+  */
     Datasets []DatasetParamForExperiment `json:"datasets"`
 
-    /* 资源配置信息。  */
+    /* 资源配置信息。
+
+配置训练所需的计算资源。
+  */
     Resource *ResourceParamForExperiment `json:"resource"`
 
-    /* 存储空间配置，用于保存训练后的模型和报告等数据。  */
+    /* 存储空间配置。
+
+用于保存训练后的模型、报告等数据。
+  */
     StorageSpace *StorageSpaceParamForExperiment `json:"storageSpace"`
 
-    /* 创建资源时的节点亲和性配置，支持配置多个，每个元素之间是或者的关系。 (Optional) */
+    /* 节点亲和性配置。
+
+## 用途
+- 将任务调度到特定节点
+- 使用特定硬件配置的节点
+
+## 说明
+支持配置多个亲和性规则，每个元素之间是"或"的关系。
+ (Optional) */
     NodeAffinities []NodeAffinityForExperiment `json:"nodeAffinities"`
 
-    /* 用户自定义标签列表。 (Optional) */
+    /* 调度优先级配置。 (Optional) */
+    SchedulePriority *SchedulePriority `json:"schedulePriority"`
+
+    /* 自定义实例标签。
+
+## 格式
+key-value 键值对形式。
+
+## 限制
+- 最多支持10个标签
+- key 不能以 `jrn:` 或 `jdc-` 开头
+- key 支持字符：中文、大小写英文、数字及 `_.,:/=+-@`
+
+## 用途
+- 资源分类
+- 成本分析
+- 权限控制
+ (Optional) */
     UserTags []RunTag `json:"userTags"`
 
-    /* 资源组ID。 (Optional) */
+    /* 资源组ID。
+
+## 用途
+用于资源分组管理和成本分摊。
+ (Optional) */
     ResourceGroupId *string `json:"resourceGroupId"`
 }

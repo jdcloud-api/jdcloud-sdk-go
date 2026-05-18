@@ -19,11 +19,28 @@ package models
 
 type StorageSpaceParamForJob struct {
 
-    /* 存储类型（数据来源），大小写敏感，地域不同，支持的存储类型也不同，需要根据地域实际支持的存储类型选择：[oss, cfs, jpfs]。
+    /* 存储类型，决定数据来源和存储方式。
+
+**可选值：**
+- `oss`：对象存储服务
+- `cfs`：云文件系统
+- `jpfs`：京东云并行文件系统
+
+**注意：**
+- 大小写敏感
  (Optional) */
     StorageType *string `json:"storageType"`
 
-    /* 是否以只读模式挂载存储。只读模式下，无法在挂载的存储中进行写操作。仅当存储类型为oss时有效。
+    /* 是否以只读模式挂载存储。
+
+**只读模式：** 无法在挂载的存储中进行写操作
+
+**注意：** 仅当存储类型为 `oss` 时有效
+
+**使用场景：**
+- 只读数据集目录
+- 公开模型目录
+- 防止误修改的配置目录
  (Optional) */
     Readonly *bool `json:"readonly"`
 

@@ -19,9 +19,15 @@ package models
 
 type JobTagFilter struct {
 
-    /* 标签键。  */
+    /* 标签键，要匹配的标签名称。
+
+**示例：** `project`, `team`, `env`
+  */
     Key string `json:"key"`
 
-    /* 标签值列表。  */
+    /* 标签值列表，多个值之间是 **或（OR）** 的关系。
+
+**示例：** `["llm-training", "cv-training"]`
+  */
     Values []string `json:"values"`
 }

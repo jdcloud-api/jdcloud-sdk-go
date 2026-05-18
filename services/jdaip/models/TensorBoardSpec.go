@@ -23,13 +23,13 @@ type TensorBoardSpec struct {
     Name string `json:"name"`
 
     /* 描述。不超过256字符。 (Optional) */
-    Description *string `json:"description"`
+    Description string `json:"description"`
 
     /* 队列ID。
 不传queueId，则默认使用免费资源池。
 使用私有资源池时请选择用户工作空间中的私有队列ID。
  (Optional) */
-    QueueId *string `json:"queueId"`
+    QueueId string `json:"queueId"`
 
     /* 数据源配置。最少1个，最多10个。  */
     DataSourceSpec []DataSourceSpec `json:"dataSourceSpec"`

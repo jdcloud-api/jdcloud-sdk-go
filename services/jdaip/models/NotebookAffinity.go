@@ -19,9 +19,20 @@ package models
 
 type NotebookAffinity struct {
 
-    /* 亲和性Key。  */
+    /* 节点标签键名，用于匹配节点。
+
+## 常用标签
+- gpu-type: GPU型号
+- zone: 可用区
+- node-type: 节点类型
+  */
     Key string `json:"key"`
 
-    /* 亲和性Values列表。  */
+    /* 节点标签值列表，多个值之间是"或"的关系。
+
+## 示例
+- ["NVIDIA-A100", "NVIDIA-A800"]: 匹配A100或A800节点
+- ["cn-north-1a", "cn-north-1b"]: 匹配两个可用区
+  */
     Values []string `json:"values"`
 }

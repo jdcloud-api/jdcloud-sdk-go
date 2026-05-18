@@ -19,28 +19,81 @@ package models
 
 type ResourceParamForJob struct {
 
-    /* 队列ID。示例：queue-2xxx**********2d*********8b8
-使用公共资源池时固定为：joybuilder-public-queue。
+    /* 队列ID，指定任务运行的资源队列。
+
+**公共资源池：** 固定使用 `joybuilder-public-queue`
+
+**专属资源池：** 使用创建队列时返回的队列ID
+
+**示例：**
+- 公共资源池：`joybuilder-public-queue`
+- 专属资源池：`queue-2xxx**********2d*********8b8`
  (Optional) */
     QueueId *string `json:"queueId"`
 
-    /* 公共资源池的规格ID。 (Optional) */
+    /* 规格ID，指定公共资源池的计算规格。
+
+**说明：**
+- 公共资源池必须填写此字段
+- 专属资源池无需填写，由自定义资源配置决定
+
+**获取方式：** 通过规格查询接口获取可用规格列表
+ (Optional) */
     FlavorId *string `json:"flavorId"`
 
-    /* 公共资源池的规格详细信息。 (Optional) */
+    /* 规格描述。
+ (Optional) */
     FlavorInfo *interface{} `json:"flavorInfo"`
 
-    /* GPU卡类型。示例：NVIDIA_G2 (Optional) */
+    /* GPU 卡类型，指定使用的 GPU 型号。
+
+**常见型号：**
+- `NVIDIA_G2`：通用 GPU 型号
+- `NVIDIA_V100`：Tesla V100
+- `NVIDIA_A100`：Ampere A100
+
+**注意：** 不同地域支持的 GPU 型号可能不同
+ (Optional) */
     GpuDeviceModel *string `json:"gpuDeviceModel"`
 
-    /* 虚拟GPU卡数量，
-- 英伟达，可选值：[0.1, 0.125, 0.25, 0.5, 1, 2, 3, 4, 5, 6, 7, 8]
+    /* 虚拟 GPU 核数，支持细粒度的 GPU 资源分配。
+
+**可选值（英伟达）：**
+- 小规格：`0.1`, `0.125`, `0.25`, `0.5`
+- 中规格：`1`, `2`, `3`, `4`
+- 大规格：`5`, `6`, `7`, `8`
+
+**使用建议：**
+- 小模型训练：0.5 ~ 2 核
+- 中等模型：2 ~ 4 核
+- 大模型训练：4 ~ 8 核
  (Optional) */
     VcudaCore *float64 `json:"vcudaCore"`
 
-    /* CPU大小，单位：毫核，例如：0.1 CPU 核心 = 100m （毫核） (Optional) */
+    /* CPU 大小，以毫核为单位。
+
+**换算关系：**
+- 1000m = 1 核 CPU
+- 100m = 0.1 核 CPU
+
+**示例：**
+- 4000m = 4 核 CPU
+- 32000m = 32 核 CPU
+
+**建议：** CPU 与 GPU 比例建议 4:1 ~ 8:1
+ (Optional) */
     CpuMilli *int `json:"cpuMilli"`
 
-    /* 内存大小，单位：MiB。 (Optional) */
+    /* 内存大小，以 MiB 为单位。
+
+**换算关系：**
+- 1024 MiB = 1 GiB
+
+**示例：**
+- 16384 = 16 GiB
+- 65536 = 64 GiB
+
+**建议：** 内存建议为 GPU 显存的 2~4 倍
+ (Optional) */
     MemoryMiB *int `json:"memoryMiB"`
 }

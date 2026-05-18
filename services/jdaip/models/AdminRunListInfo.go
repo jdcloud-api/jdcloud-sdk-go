@@ -19,68 +19,146 @@ package models
 
 type AdminRunListInfo struct {
 
-    /* 微调运行ID。 (Optional) */
+    /* 微调运行ID，系统自动生成的唯一标识。
+
+## 格式
+以 `run-` 为前缀。
+
+## 用途
+用于查询详情、停止运行、删除运行等操作的标识。
+ (Optional) */
     RunId string `json:"runId"`
 
-    /* 微调运行名称。 (Optional) */
+    /* 微调运行名称。
+
+创建时设置的名称，便于识别运行用途。
+ (Optional) */
     Name string `json:"name"`
 
-    /* 微调运行的描述信息。 (Optional) */
+    /* 微调运行的描述信息。
+
+包含运行的目标、特点等说明。
+ (Optional) */
     Description string `json:"description"`
 
-    /* 工作空间ID。 (Optional) */
+    /* 工作空间ID。
+
+运行所属的工作空间，用于区分不同团队或项目的资源。
+ (Optional) */
     WorkspaceId string `json:"workspaceId"`
 
-    /* 工作空间名称。 (Optional) */
+    /* 工作空间名称。
+
+工作空间的显示名称，便于识别。
+ (Optional) */
     WorkspaceName string `json:"workspaceName"`
 
-    /* 微调实验ID。 (Optional) */
+    /* 微调实验ID。
+
+运行所属的实验，一个实验下可以有多个运行。
+
+## 格式
+以 `exp-` 为前缀。
+ (Optional) */
     ExperimentId string `json:"experimentId"`
 
-    /* 微调实验名称。 (Optional) */
+    /* 微调实验名称。
+
+实验的显示名称。
+ (Optional) */
     ExperimentName string `json:"experimentName"`
 
-    /* 微调运行的状态。取值范围如下：
-`queuing`：`排队中`
-`pending`：`启动中`
-`failed`：`失败`
-`running`：`运行中`
-`stopping`：`停止中`
-`stopped`：`停止`
-`success`：`成功`
-`deleting`: `删除中`
-`rolling-back`：`回滚中`
-`rolled-back`：`已回滚`
+    /* 微调运行的状态。
+
+## 状态说明
+
+| 状态 | 说明 | 后续操作 |
+|------|------|----------|
+| `queuing` | 排队中，等待资源调度 | 可停止 |
+| `pending` | 启动中，正在创建资源 | 可停止 |
+| `failed` | 失败，任务执行失败 | 可查看日志、重新提交 |
+| `running` | 运行中，任务正在执行 | 可停止 |
+| `stopping` | 停止中，正在停止任务 | 等待 |
+| `stopped` | 停止，任务已被停止 | 可重新提交 |
+| `success` | 成功，任务执行完成 | 可部署模型 |
+| `deleting` | 删除中，正在删除任务 | 等待 |
+| `rolling-back` | 回滚中，正在回滚 | 等待 |
+| `rolled-back` | 已回滚，回滚完成 | - |
  (Optional) */
     State string `json:"state"`
 
-    /* 持续时间，单位为秒。 (Optional) */
+    /* 持续运行时间，单位为秒。
+
+## 用途
+用于计算资源消耗和成本统计。
+ (Optional) */
     RunningTimeInSec int `json:"runningTimeInSec"`
 
-    /* 业务类型。精调任务具体的业务来源，`finetuning`：用户创建的精调任务，`distill`：来自蒸馏创建的精调任务。 (Optional) */
+    /* 业务类型。
+
+标识微调任务的具体业务来源。
+
+## 可选值
+
+| 值 | 说明 | 特点 |
+|----|------|------|
+| `finetuning` | 用户创建的精调任务 | 计费在微调侧 |
+| `distill` | 来自蒸馏创建的精调任务 | 计费在蒸馏侧 |
+
+## 使用场景
+用于区分任务来源，便于成本归因和统计分析。
+ (Optional) */
     BizType string `json:"bizType"`
 
-    /* 资源组ID。 (Optional) */
+    /* 资源组ID。
+
+## 用途
+用于资源分组管理和成本分摊。
+ (Optional) */
     ResourceGroupId string `json:"resourceGroupId"`
 
-    /* 资源组名称。 (Optional) */
+    /* 资源组名称。
+
+资源组的显示名称。
+ (Optional) */
     ResourceGroupName string `json:"resourceGroupName"`
 
-    /* 用户自定义标签列表。 (Optional) */
+    /* 用户自定义标签列表。
+
+## 用途
+- 资源分类和管理
+- 成本分析和账单统计
+- 权限控制
+ (Optional) */
     UserTags []RunTag `json:"userTags"`
 
-    /* 主账号。 (Optional) */
+    /* 主账号Pin。
+
+资源所属主账号的用户标识。
+ (Optional) */
     Pin string `json:"pin"`
 
-    /* 创建用户名称。 (Optional) */
+    /* 创建用户名称。
+
+创建该微调运行的用户。
+ (Optional) */
     CreateUser string `json:"createUser"`
 
-    /* 创建时间。 (Optional) */
+    /* 创建时间。
+
+格式：北京时间，如 `2025-12-31 12:34:56`
+ (Optional) */
     CreateTime string `json:"createTime"`
 
-    /* 更新用户名称。 (Optional) */
+    /* 更新用户名称。
+
+最后一次更新该运行的用户。
+ (Optional) */
     UpdateUser string `json:"updateUser"`
 
-    /* 更新时间。 (Optional) */
+    /* 更新时间。
+
+格式：北京时间，如 `2025-12-31 12:34:56`。
+ (Optional) */
     UpdateTime string `json:"updateTime"`
 }
