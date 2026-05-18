@@ -19,6 +19,12 @@ package models
 
 type InferenceSpec struct {
 
+    /* 推理服务限流阈值（QPS） (Optional) */
+    Qps *int `json:"qps"`
+
+    /* 开启 true 关闭 false  */
+    EnableLimit bool `json:"enableLimit"`
+
     /* 部署方式（自定义,或者大语言模型） (Optional) */
     DeployType *string `json:"deployType"`
 
@@ -36,4 +42,7 @@ type InferenceSpec struct {
 
     /* 多角色部署配置 (Optional) */
     RoleSet *RoleSet `json:"roleSet"`
+
+    /* 调度优先级,非必填，默认使用系统优先级：normal-priority(10000) (Optional) */
+    SchedulePriority *SchedulePriority `json:"schedulePriority"`
 }

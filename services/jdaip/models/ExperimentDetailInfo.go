@@ -19,60 +19,120 @@ package models
 
 type ExperimentDetailInfo struct {
 
-    /* 微调实验ID。 (Optional) */
+    /* 微调实验ID，系统自动生成的唯一标识。
+
+## 格式
+以 `exp-` 为前缀。
+ (Optional) */
     ExperimentId string `json:"experimentId"`
 
-    /* 微调实验名称。 (Optional) */
+    /* 微调实验名称。
+
+显示创建时设置的实验名称。
+ (Optional) */
     Name string `json:"name"`
 
-    /* 微调实验描述信息。 (Optional) */
+    /* 微调实验描述信息。
+
+包含实验的目标、用途等说明。
+ (Optional) */
     Description string `json:"description"`
 
-    /* 模型系列，严格区分大小写，可选值：[`llama`, `qwen`] (Optional) */
+    /* 模型系列。
+
+- `llama`：Meta LLaMA 系列模型
+- `qwen`：阿里通义千问系列模型
+ (Optional) */
     ModelSeries string `json:"modelSeries"`
 
-    /* 模型模版，严格区分大小写。
-`modelTemplate`：`llama3`，`模型名`：[Llama 3-3.3](https://huggingface.co/meta-llama)，`参数量`：1B/3B/8B/70B
-`modelTemplate`：`qwen`，`模型名`：[Qwen (1-2.5)(Code/Math/MoE/QwQ)](https://huggingface.co/Qwen)，`参数量`：0.5B/1.5B/3B/7B/14B/32B/72B/110B
+    /* 模型模版。
+
+| modelTemplate | 模型名 | 支持参数量 |
+|---------------|--------|-----------|
+| `llama3` | Llama 3-3.3 | 1B/3B/8B/70B |
+| `qwen` | Qwen (1-2.5) | 0.5B/1.5B/3B/7B/14B/32B/72B/110B |
  (Optional) */
     ModelTemplate string `json:"modelTemplate"`
 
-    /* 微调实验包含的运行数量。 (Optional) */
+    /* 微调实验包含的运行数量。
+
+显示该实验下创建的微调运行总数。
+ (Optional) */
     RunTotal int `json:"runTotal"`
 
-    /* 基础模型可见性，可选值：[public] (Optional) */
+    /* 基础模型可见性。
+
+- `public`：公共模型
+ (Optional) */
     BaseModelVisibility string `json:"baseModelVisibility"`
 
-    /* 基础模型ID。示例：model-wsxxxxxx1f (Optional) */
+    /* 基础模型ID。
+
+示例：`model-wsxxxxxx1f`
+ (Optional) */
     BaseModelId string `json:"baseModelId"`
 
-    /* 基础模型名称。 (Optional) */
+    /* 基础模型名称。
+
+模型的显示名称。
+ (Optional) */
     BaseModelName string `json:"baseModelName"`
 
-    /* 基础模型版本。示例：v1 (Optional) */
+    /* 基础模型版本。
+
+示例：`v1`
+ (Optional) */
     BaseModelVersion string `json:"baseModelVersion"`
 
-    /* 工作空间中的资源归属权限。 (Optional) */
+    /* 工作空间中的资源归属权限。
+
+- `public`：公开
+- `private`：私有
+ (Optional) */
     Permission string `json:"permission"`
 
-    /* 归属用户pin。 (Optional) */
+    /* 调度优先级配置。 (Optional) */
+    SchedulePriority SchedulePriority `json:"schedulePriority"`
+
+    /* 归属用户pin。
+
+资源所有者的用户标识。
+ (Optional) */
     OwnerUserPin string `json:"ownerUserPin"`
 
-    /* 归属用户名称。 (Optional) */
+    /* 归属用户名称。
+
+资源所有者的显示名称。
+ (Optional) */
     OwnerUser string `json:"ownerUser"`
 
-    /* 主账号Pin。 (Optional) */
+    /* 主账号Pin。
+
+资源所属主账号的用户标识。
+ (Optional) */
     Pin string `json:"pin"`
 
-    /* 创建用户名称。 (Optional) */
+    /* 创建用户名称。
+
+创建该实验的用户。
+ (Optional) */
     CreateUser string `json:"createUser"`
 
-    /* 创建时间。 (Optional) */
+    /* 创建时间。
+
+格式：北京时间，如 `2025-12-31 12:34:56`。
+ (Optional) */
     CreateTime string `json:"createTime"`
 
-    /* 更新用户名称。 (Optional) */
+    /* 更新用户名称。
+
+最后一次更新该实验的用户。
+ (Optional) */
     UpdateUser string `json:"updateUser"`
 
-    /* 更新时间。 (Optional) */
+    /* 更新时间。
+
+格式：北京时间，如 `2025-12-31 12:34:56`。
+ (Optional) */
     UpdateTime string `json:"updateTime"`
 }

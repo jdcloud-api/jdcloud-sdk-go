@@ -19,45 +19,91 @@ package models
 
 type FinetuningDetailInfoForDistill struct {
 
-    /* 微调ID。 (Optional) */
+    /* 微调ID。
+
+## 格式
+以 `run-` 为前缀。
+
+## 用途
+用于查询状态、获取结果等操作的标识。
+ (Optional) */
     FinetuningId string `json:"finetuningId"`
 
-    /* 微调的状态。取值范围如下：
-`queuing`：`排队中`
-`pending`：`启动中`
-`failed`：`失败`
-`running`：`运行中`
-`stopping`：`停止中`
-`stopped`：`停止`
-`success`：`成功`
-`deleting`: `删除中`
+    /* 微调的状态。
+
+## 状态说明
+
+| 状态 | 说明 |
+|------|------|
+| `queuing` | 排队中，等待资源调度 |
+| `pending` | 启动中，正在创建资源 |
+| `failed` | 失败，任务执行失败 |
+| `running` | 运行中，任务正在执行 |
+| `stopping` | 停止中，正在停止任务 |
+| `stopped` | 停止，任务已被停止 |
+| `success` | 成功，任务执行完成 |
+| `deleting` | 删除中，正在删除任务 |
  (Optional) */
     State string `json:"state"`
 
-    /* 关联的pod资源列表 (Optional) */
+    /* 关联的 Pod 资源列表。
+
+包含运行中的 Pod 信息，可用于监控和调试。
+ (Optional) */
     Pods []PodInfoForDistill `json:"pods"`
 
-    /* 队列ID。 (Optional) */
+    /* 队列ID。
+
+## 格式
+示例：`queue-2xxx**********2d*********8b8`
+
+## 公共资源池
+使用公共资源池时为：`joybuilder-public-queue`
+ (Optional) */
     QueueId string `json:"queueId"`
 
-    /* 如果 `queueId` 是公共队列，那么此字段表示底层实际使用的队列ID。 (Optional) */
+    /* 实际使用的队列ID。
+
+## 说明
+当 `queueId` 是公共队列时，此字段表示底层实际使用的队列ID。
+
+## 用途
+用于资源追踪和问题排查。
+ (Optional) */
     RealPublicQueueId string `json:"realPublicQueueId"`
 
-    /* 微调的输入token总数。 (Optional) */
+    /* 微调的输入 token 总数。
+
+## 用途
+- 训练规模统计
+- 成本计算依据
+- 性能分析参考
+ (Optional) */
     Tokens int `json:"tokens"`
 
-    /* 主账号。 (Optional) */
+    /* 主账号Pin。
+
+资源所属主账号的用户标识。
+ (Optional) */
     Pin string `json:"pin"`
 
-    /* 创建用户名称。 (Optional) */
+    /* 创建用户名称。
+
+创建该微调的用户或系统。
+ (Optional) */
     CreateUser string `json:"createUser"`
 
-    /* 创建时间。 (Optional) */
+    /* 创建时间。
+
+格式：北京时间，如 `2025-12-31 12:34:56`。
+ (Optional) */
     CreateTime string `json:"createTime"`
 
-    /* 更新用户名称。 (Optional) */
+    /* 更新用户名称。
+ (Optional) */
     UpdateUser string `json:"updateUser"`
 
-    /* 更新时间。 (Optional) */
+    /* 更新时间。
+ (Optional) */
     UpdateTime string `json:"updateTime"`
 }

@@ -33,7 +33,7 @@ type UpdateExperimentRequest struct {
     /* 微调实验ID  */
     ExperimentId string `json:"experimentId"`
 
-    /* 微调实验名称。1~32字符，仅支持中文、大小写字母、数字、英文中划线 “-”和英文下划线“_”。 (Optional) */
+    /* 微调实验名称。1~32字符，仅支持中文、大小写字母、数字、英文中划线 "-"和英文下划线"_"。 (Optional) */
     Name *string `json:"name"`
 
     /* 微调实验的描述信息，不超过256个字符。 (Optional) */
@@ -78,7 +78,7 @@ func NewUpdateExperimentRequest(
  * param regionId: 地域ID (Required)
  * param workspaceId: 工作空间ID (Required)
  * param experimentId: 微调实验ID (Required)
- * param name: 微调实验名称。1~32字符，仅支持中文、大小写字母、数字、英文中划线 “-”和英文下划线“_”。 (Optional)
+ * param name: 微调实验名称。1~32字符，仅支持中文、大小写字母、数字、英文中划线 "-"和英文下划线"_"。 (Optional)
  * param description: 微调实验的描述信息，不超过256个字符。 (Optional)
  * param permission: 工作空间中的资源归属权限，支持（public,private）。 (Optional)
  * param ownerUserPin: 归属用户pin。
@@ -137,7 +137,7 @@ func (r *UpdateExperimentRequest) SetWorkspaceId(workspaceId string) {
 func (r *UpdateExperimentRequest) SetExperimentId(experimentId string) {
     r.ExperimentId = experimentId
 }
-/* param name: 微调实验名称。1~32字符，仅支持中文、大小写字母、数字、英文中划线 “-”和英文下划线“_”。(Optional) */
+/* param name: 微调实验名称。1~32字符，仅支持中文、大小写字母、数字、英文中划线 "-"和英文下划线"_"。(Optional) */
 func (r *UpdateExperimentRequest) SetName(name string) {
     r.Name = &name
 }

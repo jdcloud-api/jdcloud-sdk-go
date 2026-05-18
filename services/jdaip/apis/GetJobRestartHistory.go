@@ -21,7 +21,7 @@ import (
     jdaip "github.com/jdcloud-api/jdcloud-sdk-go/services/jdaip/models"
 )
 
-type DescribeRunRequest struct {
+type GetJobRestartHistoryRequest struct {
 
     core.JDCloudRequest
 
@@ -31,75 +31,78 @@ type DescribeRunRequest struct {
     /* 工作空间ID  */
     WorkspaceId string `json:"workspaceId"`
 
-    /* 微调实验ID  */
-    ExperimentId string `json:"experimentId"`
+    /* 训练任务ID  */
+    JobId string `json:"jobId"`
 
-    /* 微调运行ID  */
-    RunId string `json:"runId"`
+    /* 页码；默认为1。 (Optional) */
+    PageNumber *int `json:"pageNumber"`
+
+    /* 分页大小；默认为20；取值范围[1, 500]。 (Optional) */
+    PageSize *int `json:"pageSize"`
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param workspaceId: 工作空间ID (Required)
- * param experimentId: 微调实验ID (Required)
- * param runId: 微调运行ID (Required)
+ * param jobId: 训练任务ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeRunRequest(
+func NewGetJobRestartHistoryRequest(
     regionId string,
     workspaceId string,
-    experimentId string,
-    runId string,
-) *DescribeRunRequest {
+    jobId string,
+) *GetJobRestartHistoryRequest {
 
-	return &DescribeRunRequest{
+	return &GetJobRestartHistoryRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/train/{regionId}/workspaces/{workspaceId}/experiments/{experimentId}/runs/{runId}",
+			URL:     "/train/{regionId}/workspaces/{workspaceId}/jobs/{jobId}:restartHistory",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         WorkspaceId: workspaceId,
-        ExperimentId: experimentId,
-        RunId: runId,
+        JobId: jobId,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param workspaceId: 工作空间ID (Required)
- * param experimentId: 微调实验ID (Required)
- * param runId: 微调运行ID (Required)
+ * param jobId: 训练任务ID (Required)
+ * param pageNumber: 页码；默认为1。 (Optional)
+ * param pageSize: 分页大小；默认为20；取值范围[1, 500]。 (Optional)
  */
-func NewDescribeRunRequestWithAllParams(
+func NewGetJobRestartHistoryRequestWithAllParams(
     regionId string,
     workspaceId string,
-    experimentId string,
-    runId string,
-) *DescribeRunRequest {
+    jobId string,
+    pageNumber *int,
+    pageSize *int,
+) *GetJobRestartHistoryRequest {
 
-    return &DescribeRunRequest{
+    return &GetJobRestartHistoryRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/train/{regionId}/workspaces/{workspaceId}/experiments/{experimentId}/runs/{runId}",
+            URL:     "/train/{regionId}/workspaces/{workspaceId}/jobs/{jobId}:restartHistory",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         WorkspaceId: workspaceId,
-        ExperimentId: experimentId,
-        RunId: runId,
+        JobId: jobId,
+        PageNumber: pageNumber,
+        PageSize: pageSize,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeRunRequestWithoutParam() *DescribeRunRequest {
+func NewGetJobRestartHistoryRequestWithoutParam() *GetJobRestartHistoryRequest {
 
-    return &DescribeRunRequest{
+    return &GetJobRestartHistoryRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/train/{regionId}/workspaces/{workspaceId}/experiments/{experimentId}/runs/{runId}",
+            URL:     "/train/{regionId}/workspaces/{workspaceId}/jobs/{jobId}:restartHistory",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -108,35 +111,40 @@ func NewDescribeRunRequestWithoutParam() *DescribeRunRequest {
 }
 
 /* param regionId: 地域ID(Required) */
-func (r *DescribeRunRequest) SetRegionId(regionId string) {
+func (r *GetJobRestartHistoryRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 /* param workspaceId: 工作空间ID(Required) */
-func (r *DescribeRunRequest) SetWorkspaceId(workspaceId string) {
+func (r *GetJobRestartHistoryRequest) SetWorkspaceId(workspaceId string) {
     r.WorkspaceId = workspaceId
 }
-/* param experimentId: 微调实验ID(Required) */
-func (r *DescribeRunRequest) SetExperimentId(experimentId string) {
-    r.ExperimentId = experimentId
+/* param jobId: 训练任务ID(Required) */
+func (r *GetJobRestartHistoryRequest) SetJobId(jobId string) {
+    r.JobId = jobId
 }
-/* param runId: 微调运行ID(Required) */
-func (r *DescribeRunRequest) SetRunId(runId string) {
-    r.RunId = runId
+/* param pageNumber: 页码；默认为1。(Optional) */
+func (r *GetJobRestartHistoryRequest) SetPageNumber(pageNumber int) {
+    r.PageNumber = &pageNumber
+}
+/* param pageSize: 分页大小；默认为20；取值范围[1, 500]。(Optional) */
+func (r *GetJobRestartHistoryRequest) SetPageSize(pageSize int) {
+    r.PageSize = &pageSize
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeRunRequest) GetRegionId() string {
+func (r GetJobRestartHistoryRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeRunResponse struct {
+type GetJobRestartHistoryResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeRunResult `json:"result"`
+    Result GetJobRestartHistoryResult `json:"result"`
 }
 
-type DescribeRunResult struct {
-    RunDetailInfo jdaip.RunDetailInfoForExperiment `json:"runDetailInfo"`
+type GetJobRestartHistoryResult struct {
+    RestartHistoryList []jdaip.RestartHistoryListForJob `json:"restartHistoryList"`
+    TotalCount int `json:"totalCount"`
 }

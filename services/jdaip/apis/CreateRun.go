@@ -34,7 +34,7 @@ type CreateRunRequest struct {
     /* 微调实验ID  */
     ExperimentId string `json:"experimentId"`
 
-    /* 基本参数。  */
+    /* 微调运行参数。  */
     RunParam *jdaip.RunParamForExperiment `json:"runParam"`
 }
 
@@ -42,7 +42,7 @@ type CreateRunRequest struct {
  * param regionId: 地域ID (Required)
  * param workspaceId: 工作空间ID (Required)
  * param experimentId: 微调实验ID (Required)
- * param runParam: 基本参数。 (Required)
+ * param runParam: 微调运行参数。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -71,7 +71,7 @@ func NewCreateRunRequest(
  * param regionId: 地域ID (Required)
  * param workspaceId: 工作空间ID (Required)
  * param experimentId: 微调实验ID (Required)
- * param runParam: 基本参数。 (Required)
+ * param runParam: 微调运行参数。 (Required)
  */
 func NewCreateRunRequestWithAllParams(
     regionId string,
@@ -119,7 +119,7 @@ func (r *CreateRunRequest) SetWorkspaceId(workspaceId string) {
 func (r *CreateRunRequest) SetExperimentId(experimentId string) {
     r.ExperimentId = experimentId
 }
-/* param runParam: 基本参数。(Required) */
+/* param runParam: 微调运行参数。(Required) */
 func (r *CreateRunRequest) SetRunParam(runParam *jdaip.RunParamForExperiment) {
     r.RunParam = runParam
 }

@@ -19,63 +19,106 @@ package models
 
 type ImageTask struct {
 
-    /* 主帐号。 (Optional) */
+    /* 主账号，任务所属的主账号标识。 (Optional) */
     Pin string `json:"pin"`
 
-    /* NotebookID。 (Optional) */
+    /* Notebook实例ID，关联的Notebook标识。 (Optional) */
     NotebookId string `json:"notebookId"`
 
-    /* 任务ID。 (Optional) */
+    /* 任务ID，镜像保存任务的唯一标识。
+
+## 使用说明
+- 用于查询任务状态和日志
+- 用于删除任务记录
+ (Optional) */
     TaskId string `json:"taskId"`
 
-    /* 构建成功后注册到个人资产中的镜像ID。 (Optional) */
+    /* 镜像ID，构建成功后注册到个人资产中的镜像标识。
+
+## 使用说明
+- 仅success状态时有值
+- 用于后续创建Notebook时指定镜像
+ (Optional) */
     ImgId string `json:"imgId"`
 
-    /* 镜像名称。 (Optional) */
+    /* 镜像名称，注册到镜像仓库的名称。 (Optional) */
     ImgName string `json:"imgName"`
 
-    /* 镜像用途(training,notebook,inference)。 (Optional) */
+    /* 镜像用途，镜像适用的场景列表。
+
+## 支持的用途
+- training: 训练任务
+- notebook: Notebook开发环境
+- inference: 推理服务
+ (Optional) */
     ImgUsage []string `json:"imgUsage"`
 
-    /* 镜像架构类型(cpu,gpu)。 (Optional) */
+    /* 镜像架构类型，镜像支持的硬件架构。
+
+## 支持的架构
+- cpu: CPU镜像
+- gpu: GPU镜像
+ (Optional) */
     ImgArch string `json:"imgArch"`
 
-    /* 镜像标签,逗号分隔多个。 (Optional) */
+    /* 镜像标签，用于分类管理镜像。
+
+## 使用说明
+- 多个标签用逗号分隔
+- 示例：pytorch,python3.9
+ (Optional) */
     ImgLabels string `json:"imgLabels"`
 
-    /* 目标镜像仓库。 (Optional) */
+    /* 目标镜像仓库地址，镜像推送的目标。 (Optional) */
     ImageRegistry string `json:"imageRegistry"`
 
-    /* 目标镜像名称。 (Optional) */
+    /* 目标镜像名称，在镜像仓库中的完整名称。 (Optional) */
     ImageName string `json:"imageName"`
 
-    /* 目标镜像Tag。 (Optional) */
+    /* 目标镜像Tag，镜像版本标签。 (Optional) */
     ImageTag string `json:"imageTag"`
 
-    /* 任务状态(pending, running, failed, success)。 (Optional) */
+    /* 任务状态，镜像保存任务的当前状态。
+
+## 状态值
+- pending: 等待执行
+- running: 正在执行
+- success: 执行成功
+- failed: 执行失败
+ (Optional) */
     State string `json:"state"`
 
-    /* 任务描述。 (Optional) */
+    /* 任务描述，任务的详细信息或错误原因。
+
+## 使用说明
+- success状态时描述成功信息
+- failed状态时描述失败原因
+ (Optional) */
     Message string `json:"message"`
 
-    /* 注册到资产中的镜像归属权限。 (Optional) */
+    /* 注册到资产中的镜像归属权限。
+
+## 权限类型
+- public: 公开，所有用户可使用
+- private: 私有，仅自己可使用
+ (Optional) */
     Permission string `json:"permission"`
 
-    /* 创建用户pin。 (Optional) */
+    /* 创建用户pin，创建任务的用户标识。 (Optional) */
     CreateUserPin string `json:"createUserPin"`
 
-    /* 创建用户名称。 (Optional) */
+    /* 创建用户名称，创建任务的用户名称。 (Optional) */
     CreateUser string `json:"createUser"`
 
-    /* 更新用户pin。 (Optional) */
+    /* 更新用户pin，最后更新任务的用户标识。 (Optional) */
     UpdateUserPin string `json:"updateUserPin"`
 
-    /* 更新用户名称。 (Optional) */
+    /* 更新用户名称，最后更新任务的用户名称。 (Optional) */
     UpdateUser string `json:"updateUser"`
 
-    /* 记录时间。 (Optional) */
+    /* 创建时间，任务创建的时间。 (Optional) */
     CreateTime string `json:"createTime"`
 
-    /* 更新时间。 (Optional) */
+    /* 更新时间，任务最近一次更新的时间。 (Optional) */
     UpdateTime string `json:"updateTime"`
 }

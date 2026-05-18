@@ -22,6 +22,9 @@ type Inference struct {
     /* 部署方式（自定义,或者大语言模型） (Optional) */
     DeployType string `json:"deployType"`
 
+    /* 推理服务限流阈值（QPS） (Optional) */
+    Qps int `json:"qps"`
+
     /* 推理服务元数据（如：名字，ID等） (Optional) */
     Metadata Metadata `json:"metadata"`
 

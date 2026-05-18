@@ -17,11 +17,13 @@
 package models
 
 
-type NbTag struct {
+type UpdateServiceQpsSpec struct {
 
-    /* 标签键。  */
-    Key string `json:"key"`
+    /* 目标QPS。shared网关类型下必填且必须大于0；
+dedicated网关类型下该字段可为空，后端按固定值20处理。
+ (Optional) */
+    Qps *int `json:"qps"`
 
-    /* 标签值。  */
-    Value string `json:"value"`
+    /* 开启 true 关闭 false  */
+    EnableLimit bool `json:"enableLimit"`
 }

@@ -20,71 +20,124 @@ import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
 
 type RunListInfoForExperiment struct {
 
-    /* 微调运行ID。 (Optional) */
+    /* 微调运行ID。
+
+## 格式
+以 `run-` 为前缀。
+
+## 用途
+用于查询详情、停止运行、查看日志等操作的标识。
+ (Optional) */
     RunId string `json:"runId"`
 
-    /* 微调运行名称。 (Optional) */
+    /* 微调运行名称。
+
+创建时设置的名称。
+ (Optional) */
     Name string `json:"name"`
 
-    /* 微调运行的描述信息。 (Optional) */
+    /* 微调运行的描述信息。
+ (Optional) */
     Description string `json:"description"`
 
-    /* 微调配置参数。 (Optional) */
+    /* 微调配置参数。
+
+包含训练阶段、微调方法等信息。
+ (Optional) */
     FinetuningConfig FinetuningConfigInfoForExperiment `json:"finetuningConfig"`
 
-    /* 数据集配置。 (Optional) */
+    /* 数据集配置列表。
+
+训练和验证使用的数据集信息。
+ (Optional) */
     Datasets []DatasetParamForExperiment `json:"datasets"`
 
-    /* 资源配置信息。 (Optional) */
+    /* 资源配置信息。
+
+使用的计算资源配置。
+ (Optional) */
     Resource ResourceParamForExperiment `json:"resource"`
 
-    /* 存储空间配置，用于保存训练后的模型和报告等数据。 (Optional) */
+    /* 存储空间配置。
+
+模型和报告的存储位置。
+ (Optional) */
     StorageSpace StorageSpaceParamForExperiment `json:"storageSpace"`
 
-    /* 微调运行的状态。取值范围如下：
-`queuing`：`排队中`
-`pending`：`启动中`
-`failed`：`失败`
-`running`：`运行中`
-`stopping`：`停止中`
-`stopped`：`停止`
-`success`：`成功`
-`deleting`: `删除中`
-`rolling-back`：`回滚中`
-`rolled-back`：`已回滚`
+    /* 微调运行的状态。
+
+## 状态说明
+
+| 状态 | 说明 | 后续操作 |
+|------|------|----------|
+| `queuing` | 排队中 | 可停止 |
+| `pending` | 启动中 | 可停止 |
+| `failed` | 失败 | 查看日志 |
+| `running` | 运行中 | 可停止 |
+| `stopping` | 停止中 | 等待 |
+| `stopped` | 已停止 | 可重新提交 |
+| `success` | 成功 | 可部署模型 |
+| `deleting` | 删除中 | 等待 |
+| `rolling-back` | 回滚中 | 等待 |
+| `rolled-back` | 已回滚 | - |
  (Optional) */
     State string `json:"state"`
 
-    /* 持续时间，单位为秒。 (Optional) */
+    /* 持续运行时间，单位为秒。
+
+用于计算资源消耗。
+ (Optional) */
     RunningTimeInSec int `json:"runningTimeInSec"`
 
-    /* 计费信息，私有资源池的资源无计费信息。 (Optional) */
+    /* 计费信息。
+
+## 说明
+私有资源池的资源无计费信息。
+ (Optional) */
     Charge charge.Charge `json:"charge"`
 
-    /* 资源在集群中的空闲状态，值为空表示是空闲的，in-use表示资源已被占用。 (Optional) */
+    /* 资源在集群中的空闲状态。
+
+## 可选值
+- 空值：资源空闲
+- `in-use`：资源已被占用
+ (Optional) */
     ResourceState string `json:"resourceState"`
 
-    /* 资源组ID。 (Optional) */
+    /* 资源组ID。
+ (Optional) */
     ResourceGroupId string `json:"resourceGroupId"`
 
-    /* 资源组名称。 (Optional) */
+    /* 资源组名称。
+ (Optional) */
     ResourceGroupName string `json:"resourceGroupName"`
 
-    /* 用户自定义标签列表。 (Optional) */
+    /* 调度优先级配置。 (Optional) */
+    SchedulePriority SchedulePriority `json:"schedulePriority"`
+
+    /* 用户自定义标签列表。
+ (Optional) */
     UserTags []RunTag `json:"userTags"`
 
-    /* 主账号。 (Optional) */
+    /* 主账号Pin。
+ (Optional) */
     Pin string `json:"pin"`
 
-    /* 创建用户名称。 (Optional) */
+    /* 创建用户名称。
+ (Optional) */
     CreateUser string `json:"createUser"`
 
-    /* 创建时间。 (Optional) */
+    /* 创建时间。
+
+格式：北京时间，如 `2025-12-31 12:34:56`。
+ (Optional) */
     CreateTime string `json:"createTime"`
 
-    /* 更新用户名称。 (Optional) */
+    /* 更新用户名称。
+ (Optional) */
     UpdateUser string `json:"updateUser"`
 
-    /* 更新时间。 (Optional) */
+    /* 更新时间。
+ (Optional) */
     UpdateTime string `json:"updateTime"`
 }

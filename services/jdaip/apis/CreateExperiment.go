@@ -31,14 +31,14 @@ type CreateExperimentRequest struct {
     /* 工作空间ID  */
     WorkspaceId string `json:"workspaceId"`
 
-    /* 基本参数。  */
+    /* 微调实验参数。  */
     ExperimentParam *jdaip.ExperimentParam `json:"experimentParam"`
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param workspaceId: 工作空间ID (Required)
- * param experimentParam: 基本参数。 (Required)
+ * param experimentParam: 微调实验参数。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -64,7 +64,7 @@ func NewCreateExperimentRequest(
 /*
  * param regionId: 地域ID (Required)
  * param workspaceId: 工作空间ID (Required)
- * param experimentParam: 基本参数。 (Required)
+ * param experimentParam: 微调实验参数。 (Required)
  */
 func NewCreateExperimentRequestWithAllParams(
     regionId string,
@@ -106,7 +106,7 @@ func (r *CreateExperimentRequest) SetRegionId(regionId string) {
 func (r *CreateExperimentRequest) SetWorkspaceId(workspaceId string) {
     r.WorkspaceId = workspaceId
 }
-/* param experimentParam: 基本参数。(Required) */
+/* param experimentParam: 微调实验参数。(Required) */
 func (r *CreateExperimentRequest) SetExperimentParam(experimentParam *jdaip.ExperimentParam) {
     r.ExperimentParam = experimentParam
 }

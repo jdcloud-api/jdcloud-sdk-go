@@ -19,41 +19,62 @@ package models
 
 type InstanceListInfoForJob struct {
 
-    /* 实例名称。 (Optional) */
+    /* 实例名称，对应 Kubernetes Pod 名称。
+ (Optional) */
     Name string `json:"name"`
 
-    /* 实例类型。 (Optional) */
+    /* 实例类型/角色。
+
+**PyTorch 任务：** `Master`, `Worker`
+
+**Ray 任务：** `Head`, `Worker`, `Worker-{name}`
+ (Optional) */
     Type string `json:"type"`
 
-    /* 实例IP。 (Optional) */
+    /* 实例 IP 地址（Pod IP）。
+
+**说明：** 集群内部 IP，用于实例间通信
+ (Optional) */
     Ip string `json:"ip"`
 
-    /* 节点IP，仅专属队列返回，公共资源池队列返回空值。 (Optional) */
+    /* 物理节点 IP 地址。
+
+**说明：**
+- 仅专属队列返回
+- 公共资源池队列返回空值
+ (Optional) */
     NodeIp string `json:"nodeIp"`
 
-    /* 实例的状态。取值范围如下：
-`scheduling`：`调度中`
-`pending`：`启动中`
-`running`：`运行中`
-`succeeded`：`成功`
-`failed`：`失败`
-`terminating`：`终止中`
-`unknown`：`未知`
+    /* 实例的状态。
+
+**状态说明：**
+- `scheduling`：调度中，正在等待调度到计算节点
+- `pending`：启动中，已调度，正在创建容器
+- `running`：运行中，实例正常运行中
+- `succeeded`：成功，训练正常完成
+- `failed`：失败，实例执行失败
+- `terminating`：终止中，正在终止实例
+- `unknown`：未知，状态无法获取
  (Optional) */
     State string `json:"state"`
 
-    /* 创建时间。 (Optional) */
+    /* 实例创建时间。 (Optional) */
     CreateTime string `json:"createTime"`
 
-    /* 启动时间。 (Optional) */
+    /* 实例启动时间（容器开始运行时间）。 (Optional) */
     StartTime string `json:"startTime"`
 
-    /* 结束时间。 (Optional) */
+    /* 实例结束时间。 (Optional) */
     EndTime string `json:"endTime"`
 
-    /* 运行时长，单位：秒。 (Optional) */
+    /* 实例运行时长，单位：秒。 (Optional) */
     RunningTimeInSec int `json:"runningTimeInSec"`
 
-    /* 终端访问地址。 (Optional) */
+    /* 终端访问地址，用于远程连接到实例。
+
+**说明：**
+- 仅运行中的实例可用
+- 支持 Web 终端或 SSH 连接
+ (Optional) */
     TerminalUrl string `json:"terminalUrl"`
 }

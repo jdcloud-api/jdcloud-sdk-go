@@ -19,25 +19,62 @@ package models
 
 type RestartPolicyParamForJob struct {
 
-    /* 是否启用自动重启。默认：0，可选值：[0 表示禁用，1 表示启用]。 (Optional) */
+    /* 是否启用自动重启。
+
+**可选值：**
+- `0`：禁用自动重启
+- `1`：启用自动重启
+
+**默认值：** `0`（禁用）
+ (Optional) */
     Enable *int `json:"enable"`
 
-    /* 触发条件。默认值：[`resource-failed`]。可以选中多个。
-可选值如下：
-- `resource-failed`: 节点故障。
-- `task-failed`: 任务失败。
-- `environment-failed`: 算力健康检测不通过。
-- `task-hang`: 任务卡住。
-- `process-inspection-failed`: 进程巡检失败。
+    /* 触发重启的条件列表。
+
+**可选值：**
+- `resource-failed`：节点故障（如 GPU 硬件故障、节点宕机）
+- `task-failed`：任务失败（如代码错误、内存溢出）
+- `environment-failed`：算力健康检测不通过（如 GPU 驱动异常、CUDA 错误）
+- `task-hang`：任务卡住（如死锁、梯度爆炸导致长时间无响应）
+- `process-inspection-failed`：进程巡检失败（如进程僵死、资源泄露）
+
+**默认值：** `["resource-failed"]`
+
+**注意：** 可选择多个条件
  (Optional) */
     TriggerConditions []string `json:"triggerConditions"`
 
-    /* 任务卡住超时时间，即检测任务卡住超过这个时间将会重启任务，单位：秒。默认：1800。可选范围：60 ~ 86400。 (Optional) */
+    /* 任务卡住超时时间，超过此时间未响应将被判定为卡住并触发重启。
+
+**单位：** 秒
+
+**默认值：** 1800（30分钟）
+
+**取值范围：** 60 ~ 86400（1分钟 ~ 24小时）
+
+**建议：** 根据训练任务的 checkpoint 间隔设置，避免数据丢失过多
+ (Optional) */
     TaskHangTimeout *int `json:"taskHangTimeout"`
 
-    /* 进程巡检启动时机，即当任务运行超过这个时间将会启动进程巡检，单位：秒。默认：300。可选范围：180 ~ 86400。 (Optional) */
+    /* 进程巡检启动延迟时间，任务运行超过此时间后才开始进程巡检。
+
+**单位：** 秒
+
+**默认值：** 300（5分钟）
+
+**取值范围：** 180 ~ 86400（3分钟 ~ 24小时）
+
+**说明：** 给任务足够的启动时间，避免误判
+ (Optional) */
     ProcessInspectionStartDelay *int `json:"processInspectionStartDelay"`
 
-    /* 最大重启次数。默认：3。可选范围：1 ~ 10。 (Optional) */
+    /* 最大重启次数，超过此次数后将不再重启，任务保持失败状态。
+
+**默认值：** 3
+
+**取值范围：** 1 ~ 10
+
+**建议：** 根据任务重要性设置，重要任务可设置较大的重启次数
+ (Optional) */
     MaxRestartCount *int `json:"maxRestartCount"`
 }

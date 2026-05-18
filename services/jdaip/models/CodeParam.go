@@ -19,12 +19,22 @@ package models
 
 type CodeParam struct {
 
-    /* 代码仓库ID。  */
+    /* 代码仓库 ID。
+
+**获取方式：** 通过代码仓库管理接口创建或查询
+  */
     RepoId string `json:"repoId"`
 
-    /* 挂载点配置。示例：/mnt/ws/code-1。
-建议挂载到/mnt/开头的路径下，不支持挂载到系统目录。
-不支持的系统目录如下：`/`, `/bin`, `/boot`, `/dev`, `/etc`, `/home`, `/lib`, `/lib32`, `/lib64`, `/libx32`, `/opt`, `/proc`, `/root`, `/run`, `/sbin`, `/sys`, `/tmp`, `/usr`, `/var`。
+    /* 挂载点配置，指定代码在容器内的存放路径。
+
+**建议：** 挂载到 `/mnt/code/` 路径下
+
+**示例：**
+- `/mnt/code`：代码根目录
+- `/mnt/code/my-project`：项目目录
+
+**禁止挂载的系统目录：**
+`/`, `/bin`, `/boot`, `/dev`, `/etc`, `/home`, `/lib`, `/lib32`, `/lib64`, `/libx32`, `/opt`, `/proc`, `/root`, `/run`, `/sbin`, `/sys`, `/tmp`, `/usr`, `/var`
   */
     MountPath string `json:"mountPath"`
 }

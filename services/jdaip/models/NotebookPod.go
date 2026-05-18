@@ -19,33 +19,83 @@ package models
 
 type NotebookPod struct {
 
-    /* namespace (Optional) */
+    /* Kubernetes命名空间，Pod所在的命名空间。
+
+## 说明
+- 每个工作空间对应一个命名空间
+- 用于资源隔离
+ (Optional) */
     Namespace string `json:"namespace"`
 
-    /* pod名称 (Optional) */
+    /* Pod名称，Kubernetes中Pod的唯一标识。
+
+## 命名规则
+- 格式: notebook-{notebookId}
+ (Optional) */
     PodName string `json:"podName"`
 
-    /* pod ip (Optional) */
+    /* Pod IP地址，Pod在集群内的IP。
+
+## 使用说明
+- 仅运行状态时有值
+- 用于集群内服务间通信
+ (Optional) */
     PodIp string `json:"podIp"`
 
-    /* POD状态 (Optional) */
+    /* Pod状态，Kubernetes Pod的生命周期阶段。
+
+## 状态值
+- Pending: 等待调度
+- Running: 运行中
+- Succeeded: 成功完成
+- Failed: 失败
+- Unknown: 未知
+ (Optional) */
     Phase string `json:"phase"`
 
-    /* 容器数 (Optional) */
+    /* 容器数量，Pod中容器的总数。
+
+## 说明
+- 通常包含主容器和Sidecar容器
+ (Optional) */
     ContainerCount int `json:"containerCount"`
 
-    /* Ready的容器数 (Optional) */
+    /* 就绪容器数量，已经Ready的容器数量。
+
+## 使用说明
+- 等于containerCount表示所有容器都已就绪
+- 小于containerCount表示部分容器未就绪
+ (Optional) */
     ReadyContainerCount int `json:"readyContainerCount"`
 
-    /* 重启次数 (Optional) */
+    /* 重启次数，容器重启的总次数。
+
+## 使用说明
+- 过多的重启次数可能表示应用有问题
+- 正常情况下应为0
+ (Optional) */
     RestartCount int `json:"restartCount"`
 
-    /* 原因 (Optional) */
+    /* 异常原因，Pod状态异常时的原因。
+
+## 常见原因
+- CrashLoopBackOff: 容器反复崩溃
+- ImagePullBackOff: 镜像拉取失败
+- InsufficientResources: 资源不足
+ (Optional) */
     Reason string `json:"reason"`
 
-    /* 描述 (Optional) */
+    /* 异常描述，详细的异常信息。
+
+## 使用说明
+- 用于排查Pod状态异常的原因
+ (Optional) */
     Message string `json:"message"`
 
-    /* READY时间 (Optional) */
+    /* 就绪时间，Pod进入Ready状态的时间。
+
+## 格式示例
+- 2023-06-01 12:22:56
+ (Optional) */
     ReadyTime string `json:"readyTime"`
 }

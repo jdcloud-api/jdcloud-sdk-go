@@ -31,17 +31,17 @@ type CreateJobRequest struct {
     /* 工作空间ID  */
     WorkspaceId string `json:"workspaceId"`
 
-    /* 基本参数。  */
+    /* 训练任务参数。  */
     JobParam *jdaip.JobParam `json:"jobParam"`
 
-    /* 日志采集配置 (Optional) */
+    /* 日志采集配置。 (Optional) */
     LogCollectConfig *jdaip.LogCollectConfig `json:"logCollectConfig"`
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param workspaceId: 工作空间ID (Required)
- * param jobParam: 基本参数。 (Required)
+ * param jobParam: 训练任务参数。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -67,8 +67,8 @@ func NewCreateJobRequest(
 /*
  * param regionId: 地域ID (Required)
  * param workspaceId: 工作空间ID (Required)
- * param jobParam: 基本参数。 (Required)
- * param logCollectConfig: 日志采集配置 (Optional)
+ * param jobParam: 训练任务参数。 (Required)
+ * param logCollectConfig: 日志采集配置。 (Optional)
  */
 func NewCreateJobRequestWithAllParams(
     regionId string,
@@ -112,11 +112,11 @@ func (r *CreateJobRequest) SetRegionId(regionId string) {
 func (r *CreateJobRequest) SetWorkspaceId(workspaceId string) {
     r.WorkspaceId = workspaceId
 }
-/* param jobParam: 基本参数。(Required) */
+/* param jobParam: 训练任务参数。(Required) */
 func (r *CreateJobRequest) SetJobParam(jobParam *jdaip.JobParam) {
     r.JobParam = jobParam
 }
-/* param logCollectConfig: 日志采集配置(Optional) */
+/* param logCollectConfig: 日志采集配置。(Optional) */
 func (r *CreateJobRequest) SetLogCollectConfig(logCollectConfig *jdaip.LogCollectConfig) {
     r.LogCollectConfig = logCollectConfig
 }

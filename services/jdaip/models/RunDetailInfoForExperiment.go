@@ -20,88 +20,125 @@ import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
 
 type RunDetailInfoForExperiment struct {
 
-    /* 微调运行ID。 (Optional) */
+    /* 微调运行ID。
+
+## 格式
+以 `run-` 为前缀。
+ (Optional) */
     RunId string `json:"runId"`
 
-    /* 微调运行名称。 (Optional) */
+    /* 微调运行名称。
+ (Optional) */
     Name string `json:"name"`
 
-    /* 微调运行的描述信息。 (Optional) */
+    /* 微调运行的描述信息。
+ (Optional) */
     Description string `json:"description"`
 
-    /* 微调配置参数。 (Optional) */
+    /* 微调配置参数。
+ (Optional) */
     FinetuningConfig FinetuningConfigInfoForExperiment `json:"finetuningConfig"`
 
-    /* 验证数据集来源，可选值如下：
-  - `split`：使用训练数据集拆分一定比例。必须设置 evalDatasetSplitRatio。
-  - `provided`：直接提供验证数据集，必须在 datasets 中配置 datasetUsage 为 `evaluation` 的数据集。
+    /* 验证数据集来源。
+
+- `split`：从训练数据集拆分
+- `provided`：单独提供验证数据集
  (Optional) */
     EvalDatasetSource string `json:"evalDatasetSource"`
 
-    /* 验证集相对所使用的训练数据集的大小。取值在 [0,1) 之间。即 0 <= evalDatasetSplitRatio < 1。
-当 `evalDatasetSource` 为 `split` 时，必填，且必须满足 0 < evalDatasetSplitRatio < 1。
+    /* 验证集拆分比例。
+
+取值范围：0 < value < 1
  (Optional) */
     EvalDatasetSplitRatio float64 `json:"evalDatasetSplitRatio"`
 
-    /* 数据集配置。 (Optional) */
+    /* 数据集配置列表。
+ (Optional) */
     Datasets []DatasetParamForExperiment `json:"datasets"`
 
-    /* 资源配置信息。 (Optional) */
+    /* 资源配置信息。
+ (Optional) */
     Resource ResourceParamForExperiment `json:"resource"`
 
-    /* 存储空间配置，用于保存训练后的模型和报告等数据。 (Optional) */
+    /* 存储空间配置，用于保存训练后的模型和报告等数据。
+ (Optional) */
     StorageSpace string `json:"storageSpace"`
 
-    /* 微调运行的状态。取值范围如下：
-`queuing`：`排队中`
-`pending`：`启动中`
-`failed`：`失败`
-`running`：`运行中`
-`stopping`：`停止中`
-`stopped`：`停止`
-`success`：`成功`
-`deleting`: `删除中`
-`rolling-back`：`回滚中`
-`rolled-back`：`已回滚`
+    /* 微调运行的状态。
+
+| 状态 | 说明 |
+|------|------|
+| `queuing` | 排队中 |
+| `pending` | 启动中 |
+| `failed` | 失败 |
+| `running` | 运行中 |
+| `stopping` | 停止中 |
+| `stopped` | 已停止 |
+| `success` | 成功 |
+| `deleting` | 删除中 |
+| `rolling-back` | 回滚中 |
+| `rolled-back` | 已回滚 |
  (Optional) */
     State string `json:"state"`
 
-    /* 持续时间，单位为秒。 (Optional) */
+    /* 持续运行时间，单位为秒。
+ (Optional) */
     RunningTimeInSec int `json:"runningTimeInSec"`
 
-    /* 关联的pod资源列表 (Optional) */
+    /* 关联的 Pod 资源列表。
+
+包含运行中的 Pod 信息，可用于终端访问。
+ (Optional) */
     Pods []PodInfoForExperiment `json:"pods"`
 
-    /* 微调的输入token总数。 (Optional) */
+    /* 微调的输入 token 总数。
+
+用于衡量训练规模和成本计算。
+ (Optional) */
     Tokens int `json:"tokens"`
 
-    /* 计费信息，私有资源池的资源无计费信息。 (Optional) */
+    /* 计费信息。
+
+私有资源池的资源无计费信息。
+ (Optional) */
     Charge charge.Charge `json:"charge"`
 
-    /* 节点亲和性配置。 (Optional) */
+    /* 节点亲和性配置。
+ (Optional) */
     NodeAffinities NodeAffinityForExperiment `json:"nodeAffinities"`
 
-    /* 资源组ID。 (Optional) */
+    /* 资源组ID。
+ (Optional) */
     ResourceGroupId string `json:"resourceGroupId"`
 
-    /* 资源组名称。 (Optional) */
+    /* 资源组名称。
+ (Optional) */
     ResourceGroupName string `json:"resourceGroupName"`
 
-    /* 用户自定义标签列表。 (Optional) */
+    /* 调度优先级配置。 (Optional) */
+    SchedulePriority SchedulePriority `json:"schedulePriority"`
+
+    /* 用户自定义标签列表。
+ (Optional) */
     UserTags []RunTag `json:"userTags"`
 
-    /* 主账号。 (Optional) */
+    /* 主账号Pin。
+ (Optional) */
     Pin string `json:"pin"`
 
-    /* 创建用户名称。 (Optional) */
+    /* 创建用户名称。
+ (Optional) */
     CreateUser string `json:"createUser"`
 
-    /* 创建时间。 (Optional) */
+    /* 创建时间。
+ (Optional) */
     CreateTime string `json:"createTime"`
 
-    /* 更新用户名称。 (Optional) */
+    /* 更新用户名称。
+ (Optional) */
     UpdateUser string `json:"updateUser"`
 
-    /* 更新时间。 (Optional) */
+    /* 更新时间。
+ (Optional) */
     UpdateTime string `json:"updateTime"`
 }

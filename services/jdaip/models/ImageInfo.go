@@ -52,6 +52,9 @@ type ImageInfo struct {
     /* 标签，labels转换的数组格式。 (Optional) */
     LabelList []string `json:"labelList"`
 
+    /* 标签对象（公共镜像使用） (Optional) */
+    LabelsObject ImageLabelsObject `json:"labelsObject"`
+
     /* 镜像启动命令。 (Optional) */
     Command string `json:"command"`
 

@@ -19,9 +19,27 @@ package models
 
 type NotebookStateCount struct {
 
-    /* 状态名称(queuing,pending,failed,running,stopping,stopped,deleting,saving,rolling-back,rolled-back)。 (Optional) */
+    /* 状态名称，Notebook实例状态。
+
+## 状态值
+- queuing: 排队中
+- pending: 启动中
+- failed: 失败
+- running: 运行中
+- stopping: 停止中
+- stopped: 已停止
+- deleting: 删除中
+- saving: 镜像保存中
+- rolling-back: 回滚中
+- rolled-back: 已回滚
+ (Optional) */
     Name string `json:"name"`
 
-    /* 数量 (Optional) */
+    /* 该状态下的实例数量。
+
+## 使用说明
+- 用于统计各状态的实例分布
+- 帮助运维人员了解资源使用情况
+ (Optional) */
     Value int `json:"value"`
 }

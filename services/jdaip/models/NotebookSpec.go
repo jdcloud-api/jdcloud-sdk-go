@@ -19,59 +19,166 @@ package models
 
 type NotebookSpec struct {
 
-    /* 名称。1~32字符，可以包含中文、数字、大小写字母、英文下划线“_”、中划线“-”或点“.”。  */
+    /* Notebook实例名称。
+
+## 命名规则
+- 长度：1~32字符
+- 支持字符：中文、数字、大小写字母、英文下划线"_"、中划线"-"、点"."
+- 示例：my-notebook-01
+  */
     Name string `json:"name"`
 
-    /* 描述。不超过256字符。 (Optional) */
+    /* Notebook实例描述信息。
+
+## 描述规则
+- 长度：不超过256字符
+- 建议包含实例用途、责任人等关键信息
+ (Optional) */
     Description *string `json:"description"`
 
-    /* 应用类型，支持(JupyterLab)。  */
+    /* 应用类型，指定Notebook运行的开发环境类型。
+
+## 支持的应用类型
+- JupyterLab: JupyterLab交互式开发环境，支持Python、R等多种编程语言
+  */
     AppType string `json:"appType"`
 
-    /* 镜像来源，支持(public,self)。  */
+    /* 镜像来源，指定使用公共镜像还是自定义镜像。
+
+## 支持的镜像来源
+- public: 公共镜像，由平台提供的预置镜像
+- self: 自定义镜像，用户自己保存或上传的镜像
+  */
     ImageSource string `json:"imageSource"`
 
-    /* 镜像ID。 (Optional) */
+    /* 镜像ID，用于唯一标识镜像。
+
+## 使用说明
+- 公共镜像(public): 镜像ID由平台提供
+- 自定义镜像(self): 镜像ID为用户保存镜像时生成的ID
+ (Optional) */
     ImageId *string `json:"imageId"`
 
-    /* 镜像名称。  */
+    /* 镜像名称，用于显示和识别镜像。  */
     ImageName string `json:"imageName"`
 
-    /* 镜像URL。  */
+    /* 镜像URL地址，完整的镜像仓库地址。
+
+## 格式示例
+- registry.example.com:5000/namespace/image:tag
+  */
     ImageUrl string `json:"imageUrl"`
 
-    /* 只支持私有资源池中的Notebook配置公网访问配置，传入与资源队列可通信的负载均衡。不需要公网访问时不要指定。
+    /* 负载均衡配置，用于配置Notebook的公网SSH访问能力。
+
+## 使用说明
+- 仅支持私有资源池中的Notebook配置公网访问
+- 需要传入与资源队列可通信的负载均衡ID和端口
+- 不需要公网SSH访问时不要指定此参数
  (Optional) */
     LbSpec *LbSpec `json:"lbSpec"`
 
-    /* 工作负载资源配置。  */
+    /* 工作负载资源配置，定义Notebook的计算资源需求。
+
+## 配置说明
+- **公共资源池**: 必须指定规格ID(flavorId)
+- **私有资源池**: 必须指定CPU和内存，可选GPU配置
+  */
     WorkloadSpec *WorkloadSpec `json:"workloadSpec"`
 
-    /* 存储空间配置。  */
+    /* 存储空间配置列表，定义Notebook挂载的存储资源。
+
+## 配置说明
+- 第一块存储默认作为工作目录，必须挂载到`/mnt/workspace`
+- 支持cfs、oss、jpfs三种存储类型
+- 列表顺序决定挂载顺序
+  */
     Storages []StorageSpec `json:"storages"`
 
-    /* 数据集配置。 (Optional) */
+    /* 数据集配置列表，定义Notebook挂载的数据集资源。
+
+## 配置说明
+- 支持公共数据集和个人数据集
+- 可选择数据集版本
+- 建议挂载到`/mnt/datasets/`路径下
+ (Optional) */
     Datasets []DatasetSpec `json:"datasets"`
 
-    /* 模型配置。 (Optional) */
+    /* 模型配置列表，定义Notebook挂载的模型资源。
+
+## 配置说明
+- 支持公共模型和个人模型
+- 可选择模型版本
+- 建议挂载到`/mnt/models/`路径下
+ (Optional) */
     Models []ModelSpec `json:"models"`
 
-    /* 工作空间中的资源归属权限，支持(public,private)，默认为`public`。
-管理员可查看工作空间中全部资源，其他用户只能查看归属自己的private权限的资源或public权限的资源。 (Optional) */
+    /* 工作空间中的资源归属权限，控制资源的可见范围。
+
+## 权限类型
+- public: 公开，工作空间中所有用户可见
+- private: 私有，仅管理员和拥有者可见
+
+## 默认值
+- 默认为public
+
+## 权限说明
+- 管理员可查看工作空间中全部资源
+- 其他用户只能查看归属自己的private权限的资源或public权限的资源
+ (Optional) */
     Permission *string `json:"permission"`
 
-    /* 创建资源时的节点亲和性配置，支持配置多个，每个元素之间是或者的关系。 (Optional) */
+    /* 节点亲和性配置，控制Pod调度到特定节点。
+
+## 配置说明
+- 支持配置多个亲和性规则，每个元素之间是"或"的关系
+- 适用于需要调度到特定硬件或标签节点的场景
+- 例如：调度到特定GPU型号的节点
+ (Optional) */
     NodeAffinities []NotebookNodeAffinity `json:"nodeAffinities"`
 
-    /* 代码库配置列表。 (Optional) */
+    /* 代码库配置列表，定义Notebook挂载的代码仓库。
+
+## 配置说明
+- 支持Git代码仓库
+- 需要预先在工作空间中配置代码库
+- 指定挂载路径后代码会自动拉取到指定目录
+ (Optional) */
     Codes []NbCodeConfig `json:"codes"`
 
-    /* SSH配置。 (Optional) */
+    /* SSH配置，用于配置SSH远程连接能力。
+
+## 配置说明
+- 开启SSH后可通过SSH客户端连接Notebook
+- 可配置公钥进行免密登录
+ (Optional) */
     SshSpec *SshSpec `json:"sshSpec"`
 
-    /* 用户自定义标签列表。 (Optional) */
-    UserTags []NbTag `json:"userTags"`
+    /* 自定义实例标签，用于资源分类和管理。
 
-    /* 资源组ID。 (Optional) */
+## 标签规则
+- 以key-value键值对形式指定
+- 最多支持10个标签
+- key不能以 "jrn:" 或"jdc-"开头
+- 仅支持中文、大/小写英文、数字及如下符号：`\_.,:\/=+-@`
+- 示例：{"env": "dev", "team": "ai"}
+ (Optional) */
+    UserTags []Tag `json:"userTags"`
+
+    /* 资源组ID，用于资源分组管理。
+
+## 使用说明
+- 将资源归属到指定的资源组
+- 便于按资源组进行权限管理和成本核算
+ (Optional) */
     ResourceGroupId *string `json:"resourceGroupId"`
+
+    /* 调度优先级配置，控制Pod调度顺序。
+
+## 使用说明
+- 非必填，默认使用系统优先级：normal-priority(10000)
+- 优先级越高越优先调度
+- 适用于资源紧张时的调度控制
+ (Optional) */
+    SchedulePriority *SchedulePriority `json:"schedulePriority"`
 }

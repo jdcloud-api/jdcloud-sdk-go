@@ -19,9 +19,24 @@ package models
 
 type RunConfigExtraParamForExperiment struct {
 
-    /* 参数名称。 (Optional) */
+    /* 参数名称。
+
+## 常见参数
+- `learning_rate`：学习率，建议值：1e-5 ~ 1e-4
+- `batch_size`：批次大小
+- `num_train_epochs`：训练轮数
+- `warmup_ratio`：预热比例
+- `weight_decay`：权重衰减
+- `max_grad_norm`：梯度裁剪阈值
+ (Optional) */
     Name *string `json:"name"`
 
-    /* 参数值。 (Optional) */
+    /* 参数值。
+
+## 示例
+- 学习率：`0.0001` 或 `1e-4`
+- 批次大小：`32`
+- 训练轮数：`3`
+ (Optional) */
     Value *string `json:"value"`
 }

@@ -48,4 +48,10 @@ type InferenceDedicatedGatewaySpec struct {
 
     /* EIP 回收策略，`delete|retain`，默认 `delete`；当未指定 `elasticIpId` 且创建公网 EIP 时生效 (Optional) */
     ReclaimPolicy string `json:"reclaimPolicy"`
+
+    /* 是否开启专属网关限流 (Optional) */
+    EnableLimit bool `json:"enableLimit"`
+
+    /* 限流qps值 (Optional) */
+    Qps int `json:"qps"`
 }

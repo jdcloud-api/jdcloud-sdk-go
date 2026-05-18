@@ -19,12 +19,18 @@ package models
 
 type InstanceInfoForJobList struct {
 
-    /* 全部实例数。 (Optional) */
+    /* 全部实例数量。 (Optional) */
     Total int `json:"total"`
 
-    /* 运行实例数 (Optional) */
+    /* 运行中的实例数量。
+
+**正常情况：** 应等于 `total`
+ (Optional) */
     Running int `json:"running"`
 
-    /* 异常实例数 (Optional) */
+    /* 异常实例数量。
+
+**说明：** 大于 0 时需要关注，可能存在节点故障
+ (Optional) */
     Failed int `json:"failed"`
 }

@@ -78,22 +78,18 @@ type JobDetailInfoForJob struct {
     ImageUrlSnapshot string `json:"imageUrlSnapshot"`
 
     /* **启动命令。**
-
-**示例1：**
-bash /mnt/ws/start.sh
-
-**示例2：**
-python /mnt/ws/start.py
  (Optional) */
     Command string `json:"command"`
 
-    /* 节点数量。 (Optional) */
+    /* **已废弃：** 请参考 `roleResource` 字段
+ (Optional) */
     Replica int `json:"replica"`
 
     /* 环境变量。 (Optional) */
     Envs []EnvParamForJob `json:"envs"`
 
-    /* 资源配置信息。 (Optional) */
+    /* **已废弃：** 请参考 `roleResource` 字段
+ (Optional) */
     Resource ResourceParamForJob `json:"resource"`
 
     /* 存储空间配置列表。 (Optional) */
@@ -146,6 +142,9 @@ python /mnt/ws/start.py
 
     /* 用户自定义标签列表。 (Optional) */
     UserTags []JobTag `json:"userTags"`
+
+    /* 调度优先级 (Optional) */
+    SchedulePriority SchedulePriority `json:"schedulePriority"`
 
     /* 归属用户pin。 (Optional) */
     OwnerUserPin string `json:"ownerUserPin"`

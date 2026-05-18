@@ -19,9 +19,16 @@ package models
 
 type AffinitityForExperiment struct {
 
-    /* 亲和性Key。  */
+    /* 亲和性 Key。
+
+定义亲和性条件的维度。
+  */
     Key string `json:"key"`
 
-    /* 亲和性Values列表。  */
+    /* 亲和性 Values 列表。
+
+## 说明
+多个值之间是"或"的关系，满足任一值即可。
+  */
     Values []string `json:"values"`
 }

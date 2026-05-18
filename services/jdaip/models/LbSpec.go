@@ -19,12 +19,28 @@ package models
 
 type LbSpec struct {
 
-    /* 负载均衡ID。  */
+    /* 负载均衡实例ID，需要在京东云负载均衡产品中预先创建。
+
+## 要求
+- 负载均衡需要与资源队列在同一VPC下
+- 支持四层(TCP)负载均衡
+  */
     LbId string `json:"lbId"`
 
-    /* 监听端口，1-65534，需要指定一个未被占用的空闲可用端口。  */
+    /* 监听端口，负载均衡监听此端口并转发到Notebook。
+
+## 端口范围
+- 1-65534
+- 需要指定一个未被占用的空闲可用端口
+- 建议使用1024以上端口
+  */
     LbPort int `json:"lbPort"`
 
-    /* 负载均衡类型。 (Optional) */
+    /* 负载均衡类型。
+
+## 支持类型
+- 内网LB: 仅内网访问
+- 外网LB: 公网访问
+ (Optional) */
     LbType *string `json:"lbType"`
 }

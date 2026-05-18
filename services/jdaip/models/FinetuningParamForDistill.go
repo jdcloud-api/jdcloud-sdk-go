@@ -19,24 +19,60 @@ package models
 
 type FinetuningParamForDistill struct {
 
-    /* 基础模型可见性，可选值：[public]  */
+    /* 基础模型可见性。
+
+## 可选值
+- `public`：公共模型，平台提供的预训练模型
+
+## 说明
+蒸馏场景通常使用公共模型作为学生模型。
+  */
     BaseModelVisibility string `json:"baseModelVisibility"`
 
-    /* 基础模型ID。示例：model-wsxxxxxx1f  */
+    /* 基础模型ID。
+
+## 格式
+以 `model-` 为前缀。
+
+## 示例
+`model-wsxxxxxx1f`
+
+## 说明
+选择合适的基础模型对学生模型效果至关重要。
+  */
     BaseModelId string `json:"baseModelId"`
 
-    /* 基础模型版本。示例：v1  */
+    /* 基础模型版本。
+
+## 格式
+版本号格式，如 `v1`。
+
+## 建议
+使用最新稳定版本。
+  */
     BaseModelVersion string `json:"baseModelVersion"`
 
-    /* 微调配置参数。  */
+    /* 微调配置参数。
+
+包含训练阶段、微调方法、训练参数等配置。
+  */
     FinetuningConfig FinetuningConfigParamForDistill `json:"finetuningConfig"`
 
-    /* 数据集配置。  */
+    /* 数据集配置。
+
+蒸馏生成的训练数据存储位置。
+  */
     Dataset StorageSpaceParamForDistill `json:"dataset"`
 
-    /* 资源配置信息。  */
+    /* 资源配置信息。
+
+训练所需的计算资源配置。
+  */
     Resource ResourceParamForDistill `json:"resource"`
 
-    /* 存储空间配置，用于保存训练后的模型和报告等数据。  */
+    /* 存储空间配置。
+
+用于保存训练后的模型和报告等数据。
+  */
     StorageSpace StorageSpaceParamForDistill `json:"storageSpace"`
 }

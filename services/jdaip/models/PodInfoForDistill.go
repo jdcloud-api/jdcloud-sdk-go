@@ -19,6 +19,10 @@ package models
 
 type PodInfoForDistill struct {
 
-    /* pod名称。 (Optional) */
+    /* Pod 名称。
+
+## 用途
+用于日志查询、状态监控等操作。
+ (Optional) */
     PodName string `json:"podName"`
 }

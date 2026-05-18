@@ -19,9 +19,20 @@ package models
 
 type JpfsParamForExperiment struct {
 
-    /* jpfs ID。示例：fs-11******us。 (Optional) */
+    /* JPFS 文件系统ID。
+
+## 格式
+以 `fs-` 为前缀。
+
+## 示例
+`fs-11******us`
+ (Optional) */
     Id *string `json:"id"`
 
-    /* jpfs 源路径。示例：/data/d1。 (Optional) */
+    /* JPFS 源路径。
+
+## 示例
+`/data/d1`
+ (Optional) */
     SourcePath *string `json:"sourcePath"`
 }

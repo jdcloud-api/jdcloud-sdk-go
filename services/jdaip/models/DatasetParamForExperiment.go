@@ -19,15 +19,42 @@ package models
 
 type DatasetParamForExperiment struct {
 
-    /* 数据集可见性。可选值：[public, private]。 (Optional) */
+    /* 数据集可见性。
+
+## 可选值
+- `public`：公共数据集
+- `private`：私有数据集
+ (Optional) */
     DatasetVisibility *string `json:"datasetVisibility"`
 
-    /* 数据集用途。可选值：[training, evaluation]。 (Optional) */
+    /* 数据集用途。
+
+## 可选值
+- `training`：训练数据集
+- `evaluation`：验证数据集
+
+## 说明
+如果 `evalDatasetSource` 为 `provided`，需要在 datasets 中配置 `evaluation` 类型的数据集。
+ (Optional) */
     DatasetUsage *string `json:"datasetUsage"`
 
-    /* 数据集ID。示例：ds-xxxxxxxxxx。 (Optional) */
+    /* 数据集ID。
+
+## 格式
+以 `ds-` 为前缀。
+
+## 示例
+`ds-xxxxxxxxxx`
+ (Optional) */
     DatasetId *string `json:"datasetId"`
 
-    /* 数据集版本。示例：v1。 (Optional) */
+    /* 数据集版本。
+
+## 格式
+版本号格式，如 `v1`、`v2`。
+
+## 说明
+建议使用最新版本，确保数据质量。
+ (Optional) */
     DatasetVersion *string `json:"datasetVersion"`
 }

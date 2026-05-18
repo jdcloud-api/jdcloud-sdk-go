@@ -17,23 +17,26 @@
 package models
 
 
-type UpdateNotebookOffPolicy struct {
+type ResFlavor struct {
 
-    /* 最大运行时长 (Optional) */
-    MaxRunningDuration int `json:"maxRunningDuration"`
+    /* 分类。 范围：cpu：cpu规格，gpu：gpu规格 (Optional) */
+    Category string `json:"category"`
 
-    /* 最大限制时长 (Optional) */
-    MaxIdleDuration int `json:"maxIdleDuration"`
+    /* 规格id (Optional) */
+    FlavorId string `json:"flavorId"`
 
-    /* 最小cpu利用率 (Optional) */
-    MinCpuUsageRate float64 `json:"minCpuUsageRate"`
+    /* 规格名称 (Optional) */
+    FlavorName string `json:"flavorName"`
 
-    /* 最小gpu利用率 (Optional) */
-    MinGpuUsageRate float64 `json:"minGpuUsageRate"`
+    /* cpu数量 单位：毫核 (Optional) */
+    CpuM int `json:"cpuM"`
 
-    /* 最小内存利用率 (Optional) */
-    MinMemoryUsageRate float64 `json:"minMemoryUsageRate"`
+    /* 内存大小 单位：MiB (Optional) */
+    MemoryMiB int `json:"memoryMiB"`
 
-    /* 排除的notebookID (Optional) */
-    ExcludedNotebookIds []string `json:"excludedNotebookIds"`
+    /* gpu规格 (Optional) */
+    Gpu Gpu `json:"gpu"`
+
+    /* RDMA规格 (Optional) */
+    Rdma Rdma `json:"rdma"`
 }

@@ -17,11 +17,17 @@
 package models
 
 
-type DistillTag struct {
+type NodePoolTagDetail struct {
 
-    /* 标签键。  */
-    Key string `json:"key"`
+    /* 资源id (Optional) */
+    ResourceId string `json:"resourceId"`
 
-    /* 标签值。  */
-    Value string `json:"value"`
+    /* 资源名称 (Optional) */
+    ResourceName string `json:"resourceName"`
+
+    /* 备注 (Optional) */
+    Remark string `json:"remark"`
+
+    /* 资源有效性 (Optional) */
+    Validity bool `json:"validity"`
 }

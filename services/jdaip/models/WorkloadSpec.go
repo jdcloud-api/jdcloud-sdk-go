@@ -19,24 +19,80 @@ package models
 
 type WorkloadSpec struct {
 
-    /* 队列ID。
-使用公共资源池时固定为：`joybuilder-public-queue`。
-使用私有资源池时请选择用户工作空间中的私有队列ID。
+    /* 资源队列ID，决定Notebook运行在哪个资源池。
+
+## 公共资源池
+- 队列ID固定为：`joybuilder-public-queue`
+- 使用平台共享资源，按量计费
+- 需要指定规格ID(flavorId)
+
+## 私有资源池
+- 队列ID为用户工作空间中的私有队列ID
+- 使用用户专属资源，不计费
+- 需要指定CPU和内存，可选GPU
   */
     QueueId string `json:"queueId"`
 
-    /* 公共资源池的规格ID。 (Optional) */
+    /* 公共资源池的规格ID，定义固定的资源配置。
+
+## 使用说明
+- 仅公共资源池需要指定
+- 规格ID对应预定义的CPU、内存、GPU配置
+- 可通过查询规格列表接口获取可用规格
+
+## 示例
+- cpu.2g4: 2核CPU，4GB内存
+- gpu.t4.8g32: T4 GPU，8核CPU，32GB内存
+ (Optional) */
     FlavorId *string `json:"flavorId"`
 
-    /* 私有资源池CPU(毫核)。 (Optional) */
+    /* CPU配置(单位：毫核)，仅私有资源池有效。
+
+## 配置说明
+- 1000毫核 = 1核
+- 示例：2000表示2核CPU
+
+## 建议
+- 开发调试：2-4核
+- 模型训练：4-8核或更高
+ (Optional) */
     CpuM *int `json:"cpuM"`
 
-    /* 私有资源池内存大小(Mi)。 (Optional) */
+    /* 内存配置(单位：MiB)，仅私有资源池有效。
+
+## 配置说明
+- 1024 MiB = 1 GB
+- 示例：8192表示8GB内存
+
+## 建议
+- 开发调试：4-8GB
+- 模型训练：根据模型大小配置
+ (Optional) */
     MemoryMiB *int `json:"memoryMiB"`
 
-    /* 私有资源池GPU设备类型。示例(NVIDIA_H20-3e) (Optional) */
+    /* GPU设备类型，仅私有资源池有效。
+
+## 支持的GPU类型
+- NVIDIA_H20-3e: 华为昇腾910B
+- NVIDIA_A100: NVIDIA A100
+- NVIDIA_A800: NVIDIA A800
+- NVIDIA_T4: NVIDIA T4
+- 更多型号请咨询平台支持
+ (Optional) */
     DeviceModel *string `json:"deviceModel"`
 
-    /* 私有资源池虚拟GPU数量。如果选NV卡则支持选择1～8、0.5/0.25/0.125卡。如果是910B卡则只支持选1～8。必须与deviceModel同时使用。 (Optional) */
+    /* 虚拟GPU数量，仅私有资源池有效。
+
+## NVIDIA GPU配置
+- 支持整数：1、2、4、8(卡)
+- 支持小数：0.125、0.25、0.5(卡切分)
+
+## 昇腾GPU配置
+- 仅支持整数：1-8(卡)
+
+## 使用说明
+- 必须与deviceModel同时使用
+- 小数表示GPU切分，共享GPU资源
+ (Optional) */
     VcudaCore *string `json:"vcudaCore"`
 }

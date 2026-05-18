@@ -19,34 +19,85 @@ package models
 
 type UpdateResourcePropertiesParam struct {
 
-    /* 镜像来源，支持(public,self)。参数`imageSource`和`imageId`必须同时传或者都不传。 (Optional) */
+    /* 镜像来源，指定新镜像的来源类型。
+
+## 来源类型
+- public: 公共镜像
+- self: 自定义镜像
+
+## 使用说明
+- 参数`imageSource`和`imageId`必须同时传或者都不传
+ (Optional) */
     ImageSource *string `json:"imageSource"`
 
-    /* 镜像ID。参数`imageSource`和`imageId`必须同时传或者都不传。 (Optional) */
+    /* 镜像ID，新镜像的唯一标识。
+
+## 使用说明
+- 参数`imageSource`和`imageId`必须同时传或者都不传
+- 用于指定要更换的镜像
+ (Optional) */
     ImageId *string `json:"imageId"`
 
-    /* 只支持私有资源池中的Notebook配置公网访问配置，传入与资源队列可通信的负载均衡。不需要公网访问时不要指定。
+    /* 负载均衡配置，用于更新公网访问能力。
+
+## 使用说明
+- 仅支持私有资源池中的Notebook
+- 需要传入与资源队列可通信的负载均衡ID和端口
+- 不需要公网访问时不要指定此参数
  (Optional) */
     LbSpec *LbSpec `json:"lbSpec"`
 
-    /* 工作负载资源配置。 (Optional) */
+    /* 工作负载资源配置，用于更新计算资源。
+
+## 更新限制
+- 公共资源池不允许变更资源配置
+- 私有资源池允许更换队列和资源配置
+ (Optional) */
     WorkloadSpec *WorkloadSpec `json:"workloadSpec"`
 
-    /* 存储空间配置。 (Optional) */
+    /* 存储空间配置，用于更新存储挂载。
+
+## 使用说明
+- 更新存储配置需要确保新配置与队列的网络连通性
+- 第一个存储仍需挂载到`/mnt/workspace`
+ (Optional) */
     Storages []StorageSpec `json:"storages"`
 
-    /* 数据集配置。 (Optional) */
+    /* 数据集配置，用于更新数据集挂载。
+
+## 使用说明
+- 更新数据集配置需要确保新配置与队列的网络连通性
+ (Optional) */
     Datasets []DatasetSpec `json:"datasets"`
 
-    /* 模型配置。 (Optional) */
+    /* 模型配置，用于更新模型挂载。
+
+## 使用说明
+- 更新模型配置需要确保新配置与队列的网络连通性
+ (Optional) */
     Models []ModelSpec `json:"models"`
 
-    /* 代码配置。传null表示不修改此属性。 (Optional) */
+    /* 代码配置，用于更新代码库挂载。
+
+## 使用说明
+- 传null表示不修改此属性
+- 传空数组表示清空代码配置
+ (Optional) */
     Codes []NbCodeConfig `json:"codes"`
 
-    /* 创建资源时的节点亲和性配置，支持配置多个，每个元素之间是或者的关系。传null表示不修改此属性。 (Optional) */
+    /* 节点亲和性配置，用于更新Pod调度规则。
+
+## 使用说明
+- 支持配置多个亲和性规则，每个元素之间是"或"的关系
+- 传null表示不修改此属性
+- 传空数组表示清空亲和性配置
+ (Optional) */
     NodeAffinities []NotebookNodeAffinity `json:"nodeAffinities"`
 
-    /* SSH配置。传null表示不修改此属性。 (Optional) */
+    /* SSH配置，用于更新SSH连接能力。
+
+## 使用说明
+- 传null表示不修改此属性
+ (Optional) */
     SshSpec *SshSpec `json:"sshSpec"`
 }

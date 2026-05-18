@@ -19,12 +19,12 @@ package models
 
 type NbCodeConfigInfo struct {
 
-    /* 代码库配置ID。 (Optional) */
+    /* 代码库配置ID，唯一标识代码库配置。 (Optional) */
     RepoId string `json:"repoId"`
 
-    /* 挂载路径，不支持挂载到系统目录。 (Optional) */
+    /* 挂载路径，代码仓库的本地目录。 (Optional) */
     MountPath string `json:"mountPath"`
 
-    /* 代码库名称。 (Optional) */
+    /* 代码库名称，用于显示和识别。 (Optional) */
     RepoName string `json:"repoName"`
 }

@@ -36,6 +36,9 @@ type WorkspaceRelatedQueue struct {
     /* true所有成员可用,默认true (Optional) */
     AllMemberSupported *bool `json:"allMemberSupported"`
 
+    /* 调度测略 (Optional) */
+    SchedulePolicy *SchedulePolicy `json:"schedulePolicy"`
+
     /* 队列可用成员，子账号pin，allUserSupported=false生效 (Optional) */
     QueueMemberPins []string `json:"queueMemberPins"`
 }

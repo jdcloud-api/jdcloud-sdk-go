@@ -17,11 +17,11 @@
 package models
 
 
-type DistillTagFilter struct {
+type WorkspaceShutdownPolicyVersion struct {
 
-    /* 标签键。  */
-    Key string `json:"key"`
+    /* 工作空间ID (Optional) */
+    WorkspaceId string `json:"workspaceId"`
 
-    /* 标签值列表。  */
-    Values []string `json:"values"`
+    /* 版本 (Optional) */
+    Version string `json:"version"`
 }

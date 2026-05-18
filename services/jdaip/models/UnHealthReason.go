@@ -17,11 +17,14 @@
 package models
 
 
-type NbTagFilter struct {
+type UnHealthReason struct {
 
-    /* 标签键。  */
-    Key string `json:"key"`
+    /* 类型 (Optional) */
+    Type string `json:"type"`
 
-    /* 标签值列表。  */
-    Values []string `json:"values"`
+    /* reason (Optional) */
+    Reason string `json:"reason"`
+
+    /* condition信息 (Optional) */
+    Message string `json:"message"`
 }

@@ -19,32 +19,60 @@ package models
 
 type RoleResourceInfoForJob struct {
 
-    /* role名称 [Head、Worker]
-JobType为pytorch:仅支持Worker,
-JobType为ray:必须包含 Head, 可根据需求增加Worker-xxxx,
+    /* 角色名称，决定节点在分布式训练中的职责。
+
+**PyTorch 任务：**
+- 仅支持 `Worker` 角色
+- 所有节点配置相同或不同资源
+
+**Ray 任务：**
+- 必须包含 `Head` 角色（主节点）
+- 可配置 `Worker` 或 `Worker-{name}` 角色（工作节点）
+- 示例：`Head`, `Worker`, `Worker-gpu-1`, `Worker-gpu-2`
  (Optional) */
     Name *string `json:"name"`
 
-    /* 节点数量 (Optional) */
+    /* 该角色的节点数量。如果是pytorch任务，count 值等于 Master + Worker 的总数。
+
+**取值范围：** 1 ~ 正整数
+
+**建议：**
+- Head 角色：通常设置为 1
+- Worker 角色：根据计算需求设置
+ (Optional) */
     Count *int `json:"count"`
 
-    /* 公共资源池的规格ID。 (Optional) */
+    /* 规格ID，指定公共资源池的计算规格。
+
+**说明：** 专属资源池无需填写
+ (Optional) */
     FlavorId *string `json:"flavorId"`
 
-    /* 公共资源池的规格详细信息。 (Optional) */
+    /* 规格描述。
+ (Optional) */
     FlavorInfo *interface{} `json:"flavorInfo"`
 
-    /* GPU卡类型。示例：NVIDIA_G2 (Optional) */
+    /* GPU 卡类型。
+
+**常见型号：** `NVIDIA_G2`, `NVIDIA_V100`, `NVIDIA_A100`
+ (Optional) */
     GpuDeviceModel *string `json:"gpuDeviceModel"`
 
-    /* 虚拟GPU卡数量，
-- 英伟达，可选值：[0.1, 0.125, 0.25, 0.5, 1, 2, 3, 4, 5, 6, 7, 8]
+    /* 虚拟 GPU 核数。
+
+**可选值：** `0.1`, `0.125`, `0.25`, `0.5`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`
  (Optional) */
     VcudaCore *float64 `json:"vcudaCore"`
 
-    /* CPU大小，单位：毫核，例如：0.1 CPU 核心 = 100m （毫核） (Optional) */
+    /* CPU 大小，单位：毫核。
+
+**换算：** 1000m = 1 核 CPU
+ (Optional) */
     CpuMilli *int `json:"cpuMilli"`
 
-    /* 内存大小，单位：MiB。 (Optional) */
+    /* 内存大小，单位：MiB。
+
+**换算：** 1024 MiB = 1 GiB
+ (Optional) */
     MemoryMiB *int `json:"memoryMiB"`
 }

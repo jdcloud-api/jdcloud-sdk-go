@@ -34,7 +34,7 @@ type RoleResourceForJob struct {
     /* 公共资源池的规格ID。 (Optional) */
     FlavorId string `json:"flavorId"`
 
-    /* 公共资源池的规格详细信息。 (Optional) */
+    /* 规格描述。 (Optional) */
     FlavorInfo interface{} `json:"flavorInfo"`
 
     /* GPU卡类型。示例：NVIDIA_G2 (Optional) */

@@ -19,27 +19,70 @@ package models
 
 type ImageSpec struct {
 
-    /* 镜像名称，用于注册到我的镜像仓库。1~128字符，仅支持小写字母、数字、英文中划线 “-”、英文下划线“_”和点 “.”，只能以字母开头。  */
+    /* 镜像名称，用于注册到我的镜像仓库。
+
+## 命名规则
+- 长度：1~128字符
+- 支持字符：小写字母、数字、英文中划线"-"、英文下划线"_"、点"."
+- 必须以字母开头
+- 示例：my-notebook-image-v1
+  */
     ImgName string `json:"imgName"`
 
-    /* 镜像用途(training,notebook,inference)，用于注册到我的镜像仓库。  */
+    /* 镜像用途，指定镜像可用于哪些场景。
+
+## 支持的用途
+- training: 训练任务
+- notebook: Notebook开发环境
+- inference: 推理服务
+- simulation: 具身仿真
+- 可多选
+  */
     ImgUsage []string `json:"imgUsage"`
 
-    /* 镜像架构类型(cpu,gpu)，用于注册到我的镜像仓库。  */
+    /* 镜像架构类型，指定镜像支持的硬件架构。
+
+## 支持的架构
+- cpu: CPU镜像
+- gpu: GPU镜像
+  */
     ImgArch string `json:"imgArch"`
 
-    /* 镜像标签,逗号分隔多个,用于注册到我的镜像仓库。不超过128字符。 (Optional) */
+    /* 镜像标签，用于分类管理镜像。
+
+## 使用说明
+- 多个标签用逗号分隔
+- 不超过128字符
+- 示例：pytorch,python3.9,ai
+ (Optional) */
     ImgLabels *string `json:"imgLabels"`
 
-    /* 目标镜像仓库，用于推送镜像到镜像仓库。  */
+    /* 目标镜像仓库注册表。
+  */
     ImageRegistry string `json:"imageRegistry"`
 
-    /* 目标镜像名称，用于推送镜像到镜像仓库。  */
+    /* 目标镜像名称，在镜像仓库中的名称。
+
+## 命名规则
+- 通常包含命名空间
+- 示例：myproject/notebook-image
+  */
     ImageName string `json:"imageName"`
 
-    /* 目标镜像Tag，用于推送镜像到镜像仓库。仅支持小写字母、数字、英文中划线 “-”、英文下划线“_”和点 “.”。  */
+    /* 目标镜像Tag，用于区分同一镜像的不同版本。
+
+## 命名规则
+- 仅支持小写字母、数字、英文中划线"-"、英文下划线"_"、点"."
+- 示例：v1.0.0, latest, 20230601
+  */
     ImageTag string `json:"imageTag"`
 
-    /* 注册到资产中的镜像归属权限，支持(public,private)，默认为`public`。 (Optional) */
+    /* 注册到资产中的镜像归属权限。
+
+## 权限类型
+- public: 公开，所有用户可使用
+- private: 私有，仅自己可使用
+- 默认为public
+ (Optional) */
     Permission *string `json:"permission"`
 }

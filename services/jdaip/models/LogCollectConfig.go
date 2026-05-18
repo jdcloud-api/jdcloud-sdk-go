@@ -19,15 +19,27 @@ package models
 
 type LogCollectConfig struct {
 
-    /* 日志集id  */
+    /* 日志集ID，日志采集的目标日志集标识。
+
+## 使用说明
+- 需要在日志服务中预先创建
+- 用于组织和存储日志数据
+  */
     LogSetId string `json:"logSetId"`
 
-    /* 日志集主题id  */
+    /* 日志主题ID，日志采集的目标日志主题标识。
+
+## 使用说明
+- 需要在日志服务中预先创建
+- 同一日志集下可以有多个日志主题
+  */
     LogTopicId string `json:"logTopicId"`
 
-    /* 标准日志配置 (Optional) */
+    /* 标准日志配置，容器标准输出(stdout/stderr)采集配置。
+ (Optional) */
     StandardLogConfig *StandardLogConfig `json:"standardLogConfig"`
 
-    /* 自定义日志配置 (Optional) */
+    /* 自定义日志配置，自定义文件路径采集配置。
+ (Optional) */
     CustomLogConfig *CustomLogConfig `json:"customLogConfig"`
 }

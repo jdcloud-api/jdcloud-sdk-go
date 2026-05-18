@@ -19,12 +19,32 @@ package models
 
 type FinetuningConfigParamForExperiment struct {
 
-    /* 训练阶段。可选值：[pt, sft, dpo]。 (Optional) */
+    /* 训练阶段。
+
+## 可选值
+- `pt`：预训练
+- `sft`：有监督微调
+- `dpo`：直接偏好优化
+
+## 默认
+建议使用 `sft` 进行微调。
+ (Optional) */
     Stage *string `json:"stage"`
 
-    /* 微调方法。可选值：[lora, full]。 (Optional) */
+    /* 微调方法。
+
+## 可选值
+- `lora`：低秩适配，推荐使用
+- `full`：全量微调
+
+## 建议
+`lora` 方法在保持效果的同时大幅降低资源消耗。
+ (Optional) */
     FinetuningType *string `json:"finetuningType"`
 
-    /* 微调运行额外配置参数。 (Optional) */
+    /* 微调运行额外配置参数。
+
+用于自定义训练参数，如学习率、批次大小等。
+ (Optional) */
     RunConfigExtras []RunConfigExtraParamForExperiment `json:"runConfigExtras"`
 }

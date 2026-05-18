@@ -19,6 +19,11 @@ package models
 
 type StandardLogConfig struct {
 
-    /* 是否开启标准输出  */
+    /* 是否开启标准输出采集。
+
+## 使用说明
+- true: 采集标准输出和标准错误
+- false: 不采集
+  */
     Stdout bool `json:"stdout"`
 }

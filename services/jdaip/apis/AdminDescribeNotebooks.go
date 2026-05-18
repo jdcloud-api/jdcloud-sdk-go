@@ -22,15 +22,15 @@ import (
     common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
 
-type DescribeTensorBoardsRequest struct {
+type AdminDescribeNotebooksRequest struct {
 
     core.JDCloudRequest
 
     /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /* 工作空间ID  */
-    WorkspaceId string `json:"workspaceId"`
+    /* 接口类型(admin)  */
+    ApiType string `json:"apiType"`
 
     /* 页码；默认为1。 (Optional) */
     PageNumber *int `json:"pageNumber"`
@@ -38,83 +38,99 @@ type DescribeTensorBoardsRequest struct {
     /* 分页大小；<br>默认为10；取值范围[1, 100]。 (Optional) */
     PageSize *int `json:"pageSize"`
 
+    /* 用户自定义标签列表。 (Optional) */
+    UserTags []jdaip.TagFilter `json:"userTags"`
+
+    /* 资源组ID列表 (Optional) */
+    ResourceGroupIds []string `json:"resourceGroupIds"`
+
     /* <b>filters 中支持使用以下关键字进行过滤</b>
-`tensorBoardId`: 资源ID，精确匹配，支持多个。
+`notebookId`: 资源ID，精确匹配，支持多个。
 `name`: 名称，模糊匹配，支持单个。
 `state`: 状态，精确匹配，支持多个。
 `createUser`: 创建人名称，模糊匹配，支持单个。
 `createUserPin`: 创建人pin，精确匹配，支持多个。
+`appType`: 应用类型，精确匹配，支持单个。
 `queue`: 队列ID，精确匹配，支持单个。
+`workspaceId`: 工作空间ID，精确匹配，支持单个。
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param workspaceId: 工作空间ID (Required)
+ * param apiType: 接口类型(admin) (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeTensorBoardsRequest(
+func NewAdminDescribeNotebooksRequest(
     regionId string,
-    workspaceId string,
-) *DescribeTensorBoardsRequest {
+    apiType string,
+) *AdminDescribeNotebooksRequest {
 
-	return &DescribeTensorBoardsRequest{
+	return &AdminDescribeNotebooksRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/tb-regions/{regionId}/workspace/{workspaceId}/tensorBoard",
+			URL:     "/nb-regions/{regionId}/api/{apiType}/notebook",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
-        WorkspaceId: workspaceId,
+        ApiType: apiType,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param workspaceId: 工作空间ID (Required)
+ * param apiType: 接口类型(admin) (Required)
  * param pageNumber: 页码；默认为1。 (Optional)
  * param pageSize: 分页大小；<br>默认为10；取值范围[1, 100]。 (Optional)
+ * param userTags: 用户自定义标签列表。 (Optional)
+ * param resourceGroupIds: 资源组ID列表 (Optional)
  * param filters: <b>filters 中支持使用以下关键字进行过滤</b>
-`tensorBoardId`: 资源ID，精确匹配，支持多个。
+`notebookId`: 资源ID，精确匹配，支持多个。
 `name`: 名称，模糊匹配，支持单个。
 `state`: 状态，精确匹配，支持多个。
 `createUser`: 创建人名称，模糊匹配，支持单个。
 `createUserPin`: 创建人pin，精确匹配，支持多个。
+`appType`: 应用类型，精确匹配，支持单个。
 `queue`: 队列ID，精确匹配，支持单个。
+`workspaceId`: 工作空间ID，精确匹配，支持单个。
  (Optional)
  */
-func NewDescribeTensorBoardsRequestWithAllParams(
+func NewAdminDescribeNotebooksRequestWithAllParams(
     regionId string,
-    workspaceId string,
+    apiType string,
     pageNumber *int,
     pageSize *int,
+    userTags []jdaip.TagFilter,
+    resourceGroupIds []string,
     filters []common.Filter,
-) *DescribeTensorBoardsRequest {
+) *AdminDescribeNotebooksRequest {
 
-    return &DescribeTensorBoardsRequest{
+    return &AdminDescribeNotebooksRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/tb-regions/{regionId}/workspace/{workspaceId}/tensorBoard",
+            URL:     "/nb-regions/{regionId}/api/{apiType}/notebook",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        WorkspaceId: workspaceId,
+        ApiType: apiType,
         PageNumber: pageNumber,
         PageSize: pageSize,
+        UserTags: userTags,
+        ResourceGroupIds: resourceGroupIds,
         Filters: filters,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeTensorBoardsRequestWithoutParam() *DescribeTensorBoardsRequest {
+func NewAdminDescribeNotebooksRequestWithoutParam() *AdminDescribeNotebooksRequest {
 
-    return &DescribeTensorBoardsRequest{
+    return &AdminDescribeNotebooksRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/tb-regions/{regionId}/workspace/{workspaceId}/tensorBoard",
+            URL:     "/nb-regions/{regionId}/api/{apiType}/notebook",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -123,47 +139,57 @@ func NewDescribeTensorBoardsRequestWithoutParam() *DescribeTensorBoardsRequest {
 }
 
 /* param regionId: 地域ID(Required) */
-func (r *DescribeTensorBoardsRequest) SetRegionId(regionId string) {
+func (r *AdminDescribeNotebooksRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-/* param workspaceId: 工作空间ID(Required) */
-func (r *DescribeTensorBoardsRequest) SetWorkspaceId(workspaceId string) {
-    r.WorkspaceId = workspaceId
+/* param apiType: 接口类型(admin)(Required) */
+func (r *AdminDescribeNotebooksRequest) SetApiType(apiType string) {
+    r.ApiType = apiType
 }
 /* param pageNumber: 页码；默认为1。(Optional) */
-func (r *DescribeTensorBoardsRequest) SetPageNumber(pageNumber int) {
+func (r *AdminDescribeNotebooksRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 /* param pageSize: 分页大小；<br>默认为10；取值范围[1, 100]。(Optional) */
-func (r *DescribeTensorBoardsRequest) SetPageSize(pageSize int) {
+func (r *AdminDescribeNotebooksRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
+/* param userTags: 用户自定义标签列表。(Optional) */
+func (r *AdminDescribeNotebooksRequest) SetUserTags(userTags []jdaip.TagFilter) {
+    r.UserTags = userTags
+}
+/* param resourceGroupIds: 资源组ID列表(Optional) */
+func (r *AdminDescribeNotebooksRequest) SetResourceGroupIds(resourceGroupIds []string) {
+    r.ResourceGroupIds = resourceGroupIds
+}
 /* param filters: <b>filters 中支持使用以下关键字进行过滤</b>
-`tensorBoardId`: 资源ID，精确匹配，支持多个。
+`notebookId`: 资源ID，精确匹配，支持多个。
 `name`: 名称，模糊匹配，支持单个。
 `state`: 状态，精确匹配，支持多个。
 `createUser`: 创建人名称，模糊匹配，支持单个。
 `createUserPin`: 创建人pin，精确匹配，支持多个。
+`appType`: 应用类型，精确匹配，支持单个。
 `queue`: 队列ID，精确匹配，支持单个。
+`workspaceId`: 工作空间ID，精确匹配，支持单个。
 (Optional) */
-func (r *DescribeTensorBoardsRequest) SetFilters(filters []common.Filter) {
+func (r *AdminDescribeNotebooksRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeTensorBoardsRequest) GetRegionId() string {
+func (r AdminDescribeNotebooksRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeTensorBoardsResponse struct {
+type AdminDescribeNotebooksResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeTensorBoardsResult `json:"result"`
+    Result AdminDescribeNotebooksResult `json:"result"`
 }
 
-type DescribeTensorBoardsResult struct {
-    TensorBoards []jdaip.TensorBoardInfo `json:"tensorBoards"`
+type AdminDescribeNotebooksResult struct {
+    Notebooks []jdaip.NotebookInfo `json:"notebooks"`
     TotalCount int `json:"totalCount"`
 }

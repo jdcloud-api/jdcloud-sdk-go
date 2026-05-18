@@ -19,22 +19,50 @@ package models
 
 type DatasetParamForJob struct {
 
-    /* 数据集可见性。可选值：[public, private]。 (Optional) */
+    /* 数据集可见性，决定数据集的访问权限。
+
+**可选值：**
+- `public`：公开数据集，工作空间所有成员可使用
+- `private`：私有数据集，仅创建者和空间管理员可使用
+ (Optional) */
     DatasetVisibility *string `json:"datasetVisibility"`
 
-    /* 数据集ID。示例：ds-11******ik (Optional) */
+    /* 数据集ID，唯一标识一个数据集。
+
+**示例：** `ds-11******ik`
+
+**获取方式：** 通过数据集管理接口创建或查询
+ (Optional) */
     DatasetId *string `json:"datasetId"`
 
-    /* 数据集版本。示例：v1 (Optional) */
+    /* 数据集版本，指定要使用的数据集版本。
+
+**示例：**
+- 版本号：`v1`, `v2`
+ (Optional) */
     DatasetVersion *string `json:"datasetVersion"`
 
-    /* 挂载点配置。示例：/mnt/ws/dataset-1
-建议挂载到/mnt/开头的路径下，不支持挂载到系统目录。
-不支持的系统目录如下：`/`, `/bin`, `/boot`, `/dev`, `/etc`, `/home`, `/lib`, `/lib32`, `/lib64`, `/libx32`, `/opt`, `/proc`, `/root`, `/run`, `/sbin`, `/sys`, `/tmp`, `/usr`, `/var`。
+    /* 挂载点配置，指定数据集在容器内的挂载路径。
+
+**建议：** 挂载到 `/mnt/` 开头的路径下
+
+**示例：**
+- 训练数据：`/mnt/dataset/train`
+- 验证数据：`/mnt/dataset/val`
+- 测试数据：`/mnt/dataset/test`
+
+**禁止挂载的系统目录：**
+`/`, `/bin`, `/boot`, `/dev`, `/etc`, `/home`, `/lib`, `/lib32`, `/lib64`, `/libx32`, `/opt`, `/proc`, `/root`, `/run`, `/sbin`, `/sys`, `/tmp`, `/usr`, `/var`
  (Optional) */
     MountPath *string `json:"mountPath"`
 
-    /* 否以只读模式挂载数据集。只读模式下，无法在挂载的数据集中进行写操作。当数据集来源为public，或存储类型不是oss时，该参数无效。
+    /* 是否以只读模式挂载数据集。
+
+**只读模式：** 无法在挂载的数据集中进行写操作
+
+**注意：**
+- 当数据集来源为 `public` 时，此参数无效（始终只读）
+- 当存储类型不是 `oss` 时，此参数无效
  (Optional) */
     Readonly *bool `json:"readonly"`
 }

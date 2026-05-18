@@ -19,15 +19,39 @@ package models
 
 type HealthCheckPolicyParamForJob struct {
 
-    /* 是否启用算力健康检测。默认：0，可选值：[0 表示禁用，1 表示启用]。 (Optional) */
+    /* 是否启用算力健康检测。
+
+**可选值：**
+- `0`：禁用健康检测
+- `1`：启用健康检测
+
+**默认值：** `0`（禁用）
+
+**建议：** 长时间训练任务建议启用
+ (Optional) */
     Enable *int `json:"enable"`
 
-    /* 算力健康检测超时时间，单位：秒。默认：1800。可选范围：1200 ~ 7200。 (Optional) */
+    /* 算力健康检测超时时间，超过此时间未完成检测将触发超时策略。
+
+**单位：** 秒
+
+**默认值：** 1800（30分钟）
+
+**取值范围：** 1200 ~ 7200（20分钟 ~ 2小时）
+ (Optional) */
     TimeoutSeconds *int `json:"timeoutSeconds"`
 
-    /* 算力健康检测超时处理策略。默认值：`task_exit`。可选值如下：
-- `task_exit`: 算力健康检测不通过。
-- `task_running`: 跳过检测，任务继续运行。
+    /* 算力健康检测超时时的处理策略。
+
+**可选值：**
+- `task_exit`：终止任务，标记为健康检测不通过
+- `task_running`：跳过检测，任务继续运行
+
+**默认值：** `task_exit`
+
+**使用建议：**
+- 重要任务：使用 `task_running`，避免意外中断
+- 可恢复任务：使用 `task_exit`，快速发现问题
  (Optional) */
     TimeoutAction *string `json:"timeoutAction"`
 }

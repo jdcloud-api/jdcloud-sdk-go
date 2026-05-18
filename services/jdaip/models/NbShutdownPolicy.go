@@ -19,15 +19,37 @@ package models
 
 type NbShutdownPolicy struct {
 
-    /* 排除关机策略，为true时表示不关机，不受工作空间闲置策略影响。 (Optional) */
+    /* 排除关机策略标记。
+
+## 使用说明
+- true: 不关机，不受工作空间闲置策略影响
+- false: 受关机策略控制
+ (Optional) */
     Excluded bool `json:"excluded"`
 
-    /* 运行时长配置(分钟)，从running开始达到运行时长后会触发关机。 (Optional) */
+    /* 运行时长配置(分钟)，从running开始计算。
+
+## 使用说明
+- 达到运行时长后会触发关机
+- 不配置或为0表示不限制运行时长
+ (Optional) */
     RuntimeMinute int `json:"runtimeMinute"`
 
-    /* 预期关机时间，存在运行时长配置时生效，从notebook首次running时间算起。 (Optional) */
+    /* 预期关机时间，计算得出的预期关机时刻。
+
+## 计算规则
+- 处于running状态并且存在运行时长配置时生效
+- 从Notebook首次进入running时间算起
+- 格式: 2023-06-01 12:22:56
+ (Optional) */
     ExpectedShutdownTime string `json:"expectedShutdownTime"`
 
-    /* 闲置策略配置，任意一组策略条件满足时即触发关机。 (Optional) */
+    /* 闲置策略配置列表，任意一组策略条件满足时即触发关机。
+
+## 策略说明
+- 多组策略之间是"或"的关系
+- 不含GPU的Notebook只返回不含GPU利用率的策略
+- 含有GPU的Notebook只返回有GPU利用率的策略
+ (Optional) */
     IdlePolicys []NbIdlePolicy `json:"idlePolicys"`
 }

@@ -19,12 +19,15 @@ package models
 
 type CodeResultForJob struct {
 
-    /* 代码仓库ID。 (Optional) */
+    /* 代码仓库 ID。 (Optional) */
     RepoId string `json:"repoId"`
 
-    /* 代码仓库名称。 (Optional) */
+    /* 代码仓库名称。
+
+**示例：** `my-training-code`, `llm-finetune`
+ (Optional) */
     RepoName string `json:"repoName"`
 
-    /* 挂载点配置。 (Optional) */
+    /* 挂载点路径。 (Optional) */
     MountPath string `json:"mountPath"`
 }

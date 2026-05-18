@@ -19,6 +19,10 @@ package models
 
 type NotebookNodeAffinity struct {
 
-    /* 节点亲和性配置，支持配置多个，每个元素之间是并且的关系。  */
+    /* 节点亲和性规则列表，多个规则之间是"且"的关系。
+
+## 示例
+- 要求节点同时满足标签: gpu-type=NVIDIA-A100 和 zone=cn-north-1a
+  */
     Affinities []NotebookAffinity `json:"affinities"`
 }

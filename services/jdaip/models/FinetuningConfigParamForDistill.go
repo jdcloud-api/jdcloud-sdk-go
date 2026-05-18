@@ -19,12 +19,41 @@ package models
 
 type FinetuningConfigParamForDistill struct {
 
-    /* 训练阶段。可选值：[pt, sft, dpo]。 (Optional) */
+    /* 训练阶段。
+
+## 可选值
+
+| 阶段 | 说明 | 蒸馏场景使用 |
+|------|------|--------------|
+| `pt` | 预训练 | 不常用 |
+| `sft` | 有监督微调 | 常用 |
+| `dpo` | 直接偏好优化 | 特定场景 |
+
+## 建议
+蒸馏场景通常使用 `sft` 阶段。
+ (Optional) */
     Stage string `json:"stage"`
 
-    /* 微调方法。可选值：[lora, full]。 (Optional) */
+    /* 微调方法。
+
+## 可选值
+
+| 方法 | 说明 | 特点 |
+|------|------|------|
+| `lora` | 低秩适配 | 参数量少、训练快 |
+| `full` | 全量微调 | 效果最佳、资源消耗大 |
+
+## 建议
+蒸馏场景推荐使用 `lora` 方法。
+ (Optional) */
     FinetuningType string `json:"finetuningType"`
 
-    /* 微调运行额外配置参数。 (Optional) */
+    /* 微调运行额外配置参数。
+
+## 常见参数
+- `learning_rate`：学习率
+- `batch_size`：批次大小
+- `num_train_epochs`：训练轮数
+ (Optional) */
     RunConfigExtras []RunConfigExtraParamForDistill `json:"runConfigExtras"`
 }

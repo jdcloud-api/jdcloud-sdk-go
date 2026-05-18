@@ -20,7 +20,9 @@ import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
 
 type JobListInfoForJob struct {
 
-    /* 训练任务ID。 (Optional) */
+    /* 训练任务ID，唯一标识一个训练任务。
+**示例：** `job-abc123def456`
+ (Optional) */
     JobId string `json:"jobId"`
 
     /* 训练任务名称。 (Optional) */
@@ -32,83 +34,109 @@ type JobListInfoForJob struct {
     /* 工作空间名称。 (Optional) */
     WorkspaceName string `json:"workspaceName"`
 
-    /* 训练任务的状态。取值范围如下：
-`queuing`：`排队中`
-`pending`：`启动中`
-`failed`：`失败`
-`running`：`运行中`
-`stopping`：`停止中`
-`stopped`：`停止`
-`success`：`成功`
-`deleting`: `删除中`
-`rolling-back`：`回滚中`
-`rolled-back`：`已回滚`
+    /* 训练任务的状态。
+
+**状态说明：**
+- `queuing`：排队中，任务已提交，等待资源分配
+- `pending`：启动中，资源已分配，正在创建 Pod
+- `running`：运行中，训练任务正在执行
+- `success`：成功，训练任务正常完成
+- `failed`：失败，训练任务执行失败
+- `stopping`：停止中，正在执行停止操作
+- `stopped`：已停止，任务已被手动停止
+- `deleting`：删除中，正在执行删除操作
+- `rolling-back`：回滚中，正在执行回滚操作
+- `rolled-back`：已回滚，回滚操作完成
  (Optional) */
     State string `json:"state"`
 
-    /* 训练任务失败类型。可选值如下：
-- `resource-failed`: 节点故障。
-- `task-failed`: 任务失败。
-- `environment-failed`: 算力健康检测不通过。
-- `task-hang`: 任务卡住。
-- `process-inspection-failed`: 进程巡检失败。
+    /* 训练任务失败类型，仅在状态为 `failed` 时有值。
+
+**可选值：**
+- `resource-failed`：节点故障
+- `task-failed`：任务失败
+- `environment-failed`：算力健康检测不通过
+- `task-hang`：任务卡住
+- `process-inspection-failed`：进程巡检失败
  (Optional) */
     FailureType string `json:"failureType"`
 
-    /* 训练任务失败原因。详细描述失败原因信息。
+    /* 训练任务失败原因的详细描述。
  (Optional) */
     FailureReason string `json:"failureReason"`
 
-    /* 重启次数。 (Optional) */
+    /* 重启次数，记录任务因异常而自动重启的次数。
+
+**说明：** 仅当启用了重启策略时才会增加
+ (Optional) */
     RestartCount int `json:"restartCount"`
 
-    /* 任务类型。 (Optional) */
+    /* 训练框架类型。
+
+**可选值：** `pytorch`, `ray`
+ (Optional) */
     JobType string `json:"jobType"`
 
-    /* 持续时间，单位为秒。 (Optional) */
+    /* 任务运行时长，单位：秒。
+
+**说明：** 从任务开始运行到当前或结束的时间
+ (Optional) */
     RunningTimeInSec int `json:"runningTimeInSec"`
 
-    /* 计费信息，私有资源池的资源无计费信息。 (Optional) */
+    /* 计费信息。
+
+**说明：** 私有资源池的资源无计费信息
+ (Optional) */
     Charge charge.Charge `json:"charge"`
 
-    /* 节点数量。 (Optional) */
+    /* **已废弃：** 请参考 `roleResource` 字段
+ (Optional) */
     Replica int `json:"replica"`
 
-    /* 队列ID。示例：queue-2xxx**********2d*********8b8
-使用公共资源池时固定为：joybuilder-public-queue。
+    /* 队列ID。
  (Optional) */
     QueueId string `json:"queueId"`
 
     /* 公共资源池的规格ID。 (Optional) */
     FlavorId string `json:"flavorId"`
 
-    /* 公共资源池的规格详细信息。 (Optional) */
+    /* 规格描述。 (Optional) */
     FlavorInfo interface{} `json:"flavorInfo"`
 
-    /* GPU卡类型。示例：NVIDIA_G2 (Optional) */
+    /* GPU 卡类型。 (Optional) */
     GpuDeviceModel string `json:"gpuDeviceModel"`
 
-    /* 虚拟GPU卡数量，
-- 英伟达，可选值：[0.1, 0.125, 0.25, 0.5, 1, 2, 3, 4, 5, 6, 7, 8]
- (Optional) */
+    /* 虚拟 GPU 核数。 (Optional) */
     VcudaCore float64 `json:"vcudaCore"`
 
-    /* CPU大小，单位：毫核，例如：0.1 CPU 核心 = 100m （毫核） (Optional) */
+    /* CPU 大小（毫核）。 (Optional) */
     CpuMilli int `json:"cpuMilli"`
 
-    /* 内存大小，单位：MiB。 (Optional) */
+    /* 内存大小（MiB）。 (Optional) */
     MemoryMiB int `json:"memoryMiB"`
 
-    /* 角色配置信息。 (Optional) */
+    /* 训练实例角色配置信息。
+ (Optional) */
     RoleResource RoleResourceInfoForJobList `json:"roleResource"`
 
-    /* 实例详情信息。 (Optional) */
+    /* 实例状态统计信息。
+
+包含总实例数、运行中实例数、异常实例数等。
+ (Optional) */
     InstanceInfo InstanceInfoForJobList `json:"instanceInfo"`
 
-    /* 资源在集群中的空闲状态，值为空表示是空闲的，in-use表示资源已被占用。 (Optional) */
+    /* 资源在集群中的空闲状态。
+
+**可选值：**
+- 空值：资源空闲
+- `in-use`：资源已被占用
+ (Optional) */
     ResourceState string `json:"resourceState"`
 
-    /* 工作空间中的资源归属权限。 (Optional) */
+    /* 工作空间中的资源归属权限。
+
+**可选值：** `public`, `private`
+ (Optional) */
     Permission string `json:"permission"`
 
     /* 资源组ID。 (Optional) */
@@ -120,7 +148,10 @@ type JobListInfoForJob struct {
     /* 用户自定义标签列表。 (Optional) */
     UserTags []JobTag `json:"userTags"`
 
-    /* 归属用户pin。 (Optional) */
+    /* 调度优先级配置。 (Optional) */
+    SchedulePriority SchedulePriority `json:"schedulePriority"`
+
+    /* 归属用户 pin。 (Optional) */
     OwnerUserPin string `json:"ownerUserPin"`
 
     /* 归属用户名称。 (Optional) */

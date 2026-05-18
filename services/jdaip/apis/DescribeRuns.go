@@ -41,7 +41,7 @@ type DescribeRunsRequest struct {
     PageSize *int `json:"pageSize"`
 
     /* 用户自定义标签列表。 (Optional) */
-    UserTags []jdaip.RunTagFilter `json:"userTags"`
+    UserTags []jdaip.TagFilter `json:"userTags"`
 
     /* 资源组ID列表 (Optional) */
     ResourceGroupIds []string `json:"resourceGroupIds"`
@@ -102,7 +102,7 @@ func NewDescribeRunsRequestWithAllParams(
     experimentId string,
     pageNumber *int,
     pageSize *int,
-    userTags []jdaip.RunTagFilter,
+    userTags []jdaip.TagFilter,
     resourceGroupIds []string,
     filters []jdaip.Filter,
 ) *DescribeRunsRequest {
@@ -159,7 +159,7 @@ func (r *DescribeRunsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 /* param userTags: 用户自定义标签列表。(Optional) */
-func (r *DescribeRunsRequest) SetUserTags(userTags []jdaip.RunTagFilter) {
+func (r *DescribeRunsRequest) SetUserTags(userTags []jdaip.TagFilter) {
     r.UserTags = userTags
 }
 /* param resourceGroupIds: 资源组ID列表(Optional) */

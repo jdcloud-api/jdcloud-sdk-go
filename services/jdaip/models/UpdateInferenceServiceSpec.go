@@ -19,11 +19,8 @@ package models
 
 type UpdateInferenceServiceSpec struct {
 
-    /* 推理服务名称。 (Optional) */
+    /* 推理服务的可见性，public：工作空间内公开，private：所有者和管理员可见。 (Optional) */
     Permission *string `json:"permission"`
-
-    /* 推理服务所有者名称。 (Optional) */
-    OwnerUser *string `json:"ownerUser"`
 
     /* 推理服务所有者pin。 (Optional) */
     OwnerUserPin *string `json:"ownerUserPin"`

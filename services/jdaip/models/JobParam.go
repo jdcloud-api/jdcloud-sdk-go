@@ -19,73 +19,249 @@ package models
 
 type JobParam struct {
 
-    /* 训练任务名称。1~32字符，仅支持中文、大小写字母、数字、英文中划线 “-”和英文下划线“_”。  */
+    /* 训练任务名称。
+
+**命名规则：**
+- 长度：1~32个字符
+- 支持字符：中文、大小写字母、数字、英文中划线 "-" 和英文下划线 "_"
+- 同一工作空间内名称不能重复
+
+**示例：**
+- `mnist-training-001`
+- `LLaMA预训练任务`
+  */
     Name string `json:"name"`
 
-    /* 训练任务的描述信息，不超过256个字符。 (Optional) */
+    /* 训练任务的描述信息。
+
+**限制：** 不超过256个字符
+
+**建议：** 简要说明训练目的、数据集、模型等关键信息
+ (Optional) */
     Description *string `json:"description"`
 
-    /* 镜像可见性，可选值：[public, private]。  */
+    /* 镜像可见性，决定镜像的使用权限范围。
+
+**可选值：**
+- `public`：公开镜像，平台预置镜像或用户公开的镜像，所有用户可使用
+- `private`：私有镜像，仅当前用户可使用
+  */
     ImageVisibility string `json:"imageVisibility"`
 
-    /* 镜像ID。示例：img-9axxxxxxjh  */
+    /* 镜像ID，用于指定训练环境的基础镜像。
+
+**示例：** `img-9axxxxxxjh`
+  */
     ImageId string `json:"imageId"`
 
-    /* 训练任务类型，大小写敏感。当前支持的任务类型：[pytorch、ray]。  */
+    /* 镜像完整地址，包含镜像仓库地址和标签。
+
+**格式：** `registry地址/命名空间/镜像名:标签`
+
+**示例：**
+- `registry.jdcloud.com/jdaip/pytorch:2.0-cuda11.8`
+- `registry.jdcloud.com/custom/my-training:v1.0`
+  */
+    ImageUrl string `json:"imageUrl"`
+
+    /* 训练任务类型，决定底层调度框架和资源管理方式。
+
+**可选值：**
+- `pytorch`：PyTorch 框架，适用于深度学习训练
+- `ray`：Ray 框架，适用于分布式计算、强化学习
+
+**注意：** 大小写敏感，必须使用小写
+  */
     JobType string `json:"jobType"`
 
-    /* 启动命令。
+    /* 启动命令，指定训练脚本的执行方式。
 
-**示例1：**
-bash /mnt/ws/start.sh
+**常用格式：**
+- Python 脚本：`python /mnt/ws/train.py [参数]`
+- Shell 脚本：`bash /mnt/ws/start.sh`
+- 分布式训练：`torchrun --nproc_per_node=4 /mnt/ws/train.py`
 
-**示例2：**
-python /mnt/ws/start.py
+**注意事项：**
+- 路径需与存储挂载路径对应
+- 支持传入命令行参数
+- 建议使用绝对路径
+
+**示例：**
+- 单机训练：`python /mnt/ws/train.py --epochs 100 --lr 0.001`
+- 分布式训练：`torchrun --nproc_per_node=4 /mnt/ws/distributed_train.py`
+- 使用环境变量：`python /mnt/ws/train.py --data_dir $DATA_DIR`
   */
     Command string `json:"command"`
 
-    /* 节点数量。  */
-    Replica int `json:"replica"`
+    /* **已废弃：** 请参考 `roleResource` 字段
+ (Optional) */
+    Replica *int `json:"replica"`
 
-    /* 环境变量。 (Optional) */
+    /* 环境变量列表，用于向训练脚本传递配置参数。
+
+**使用场景：**
+- 传递训练参数（如学习率、批次大小）
+- 配置框架参数（如 CUDA 设置）
+- 传递敏感信息（如 API Key，建议使用密钥管理）
+
+**示例：**
+  [{"name": "CUDA_VISIBLE_DEVICES", "value": "0,1,2,3"},
+   {"name": "BATCH_SIZE", "value": "32"},
+   {"name": "LEARNING_RATE", "value": "0.001"}]
+ (Optional) */
     Envs []EnvParamForJob `json:"envs"`
 
-    /* 资源配置信息。 (Optional) */
+    /* **已废弃：** 请使用 `roleResource` 字段，支持更灵活的角色资源配置
+ (Optional) */
     Resource *ResourceParamForJob `json:"resource"`
 
-    /* 存储空间配置列表。 (Optional) */
+    /* 存储空间配置列表，用于挂载外部存储到训练容器中。
+
+**支持的存储类型：**
+- `oss`：对象存储服务，适合大规模数据存储
+- `cfs`：云文件系统，提供高性能文件存储
+- `jpfs`：京东云并行文件系统，高并发场景优化
+
+**使用场景：**
+- 挂载训练数据目录
+- 挂载输出目录保存模型和日志
+- 挂载共享存储用于分布式训练
+ (Optional) */
     StorageSpaces []StorageSpaceParamForJob `json:"storageSpaces"`
 
-    /* 数据集。 (Optional) */
+    /* 数据集配置列表，用于挂载已创建的数据集到训练容器。
+
+**优势：**
+- 支持数据集版本管理
+- 支持公开/私有数据集
+- 自动处理存储挂载
+
+**使用场景：**
+- 挂载训练数据集
+- 挂载验证数据集
+- 挂载测试数据集
+ (Optional) */
     Datasets []DatasetParamForJob `json:"datasets"`
 
-    /* 模型。 (Optional) */
+    /* 模型配置列表，用于挂载预训练模型或检查点文件。
+
+**使用场景：**
+- 加载预训练模型进行迁移学习
+- 加载检查点继续训练
+- 挂载基础模型进行微调
+ (Optional) */
     Models []ModelParamForJob `json:"models"`
 
-    /* 角色资源配置信息。 (Optional) */
+    /* 角色资源配置信息，用于配置不同角色的节点资源。
+
+**适用场景：**
+- Ray 分布式训练（必须配置 Head 和 Worker）
+- PyTorch 分布式训练（可配置不同规格的 Worker）
+ (Optional) */
     RoleResource *RoleResourceParamForJob `json:"roleResource"`
 
-    /* 框架高级配置；json格式。 (Optional) */
+    /* 框架高级配置，JSON 格式字符串。
+
+**适用框架：** 仅支持 Ray 框架
+
+**使用场景：**
+- 配置 Ray 集群环境变量
+- 自定义 NCCL、CUDA 等参数
+
+**示例：**
+  {"ray": {"env_vars": {"NCCL_DEBUG": "INFO", "NCCL_IB_DISABLE": "0", "NCCL_PROTO": "simple"}}}
+ (Optional) */
     AdvancedConfig *string `json:"advancedConfig"`
 
-    /* 重启策略。 (Optional) */
+    /* 重启策略配置，定义任务异常时的自动重启行为。
+
+**默认行为：** 禁用自动重启
+
+**推荐场景：**
+- 长时间训练任务：建议启用，应对节点故障
+- 快速实验任务：可不启用，快速发现问题
+ (Optional) */
     RestartPolicy *RestartPolicyParamForJob `json:"restartPolicy"`
 
-    /* 算力健康检测策略。 (Optional) */
+    /* 算力健康检测策略，用于检测GPU等算力资源是否正常。
+
+**检测内容：**
+- GPU 是否可用
+- GPU 驱动是否正常
+- CUDA 环境是否正常
+- 高速网络、网卡是否正常
+- 其他环境配置等
+
+**默认行为：** 禁用健康检测
+ (Optional) */
     HealthCheckPolicy *HealthCheckPolicyParamForJob `json:"healthCheckPolicy"`
 
-    /* 工作空间中的资源归属权限，支持(public,private)，默认为public。 (Optional) */
+    /* 工作空间中的资源归属权限。
+
+**可选值：**
+- `public`：公开资源，工作空间所有成员可见可操作
+- `private`：私有资源，仅创建者和空间管理员可见可操作
+
+**默认值：** `public`
+ (Optional) */
     Permission *string `json:"permission"`
 
-    /* 创建资源时的节点亲和性配置，支持配置多个，每个元素之间是或者的关系。 (Optional) */
+    /* 节点亲和性配置，用于将任务调度到特定的计算节点。支持配置多个亲和性规则，每个元素之间是"或"的关系。
+
+**使用场景：**
+- 指定特定 GPU 型号的节点
+- 指定特定机架或可用区的节点
+- 避免调度到特定节点
+
+**注意：** 配置不当可能导致任务无法调度
+ (Optional) */
     NodeAffinities []JobNodeAffinity `json:"nodeAffinities"`
 
-    /* 代码仓库配置列表。 (Optional) */
+    /* 代码仓库配置列表，用于从代码仓库拉取训练代码。
+
+**支持的代码仓库：**
+- Git 仓库
+- GitHub
+- GitLab
+
+**使用场景：**
+- 自动拉取最新代码
+- 指定代码分支或CommitID
+- 代码版本管理
+ (Optional) */
     Codes []CodeParam `json:"codes"`
 
-    /* 用户自定义标签列表。 (Optional) */
+    /* 用户自定义标签，用于资源分类和筛选。
+
+**限制：**
+- 最多支持 10 个标签
+- key 不能以 `jrn:` 或 `jdc-` 开头
+- key 支持中文、大小写英文、数字及符号：`\_.,:\/=+-@`
+
+**使用场景：**
+- 标记项目或团队
+- 成本分账
+- 资源分类管理
+ (Optional) */
     UserTags []JobTag `json:"userTags"`
 
-    /* 资源组ID。 (Optional) */
+    /* 资源组ID，用于将任务归属到特定的资源组进行管理。
+
+**使用场景：**
+- 按项目隔离资源
+- 按团队分配资源配额
+- 资源使用统计和计费
+ (Optional) */
     ResourceGroupId *string `json:"resourceGroupId"`
+
+    /* 调度优先级配置。
+
+**系统预置优先级：**
+- `high-priority`：优先级值 20000，高优先级
+- `normal-priority`：优先级值 10000，普通优先级（默认）
+- `low-priority`：优先级值 5000，低优先级
+
+**注意：** 提高优先级可能影响其他任务的调度
+ (Optional) */
+    SchedulePriority *SchedulePriority `json:"schedulePriority"`
 }

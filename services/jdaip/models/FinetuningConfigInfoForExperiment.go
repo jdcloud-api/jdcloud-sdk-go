@@ -19,12 +19,39 @@ package models
 
 type FinetuningConfigInfoForExperiment struct {
 
-    /* 训练阶段。可选值：[pt, sft, dpo]。 (Optional) */
+    /* 训练阶段。
+
+## 可选值
+
+| 阶段 | 说明 | 适用场景 |
+|------|------|----------|
+| `pt` | 预训练（Pre-training） | 从头训练模型 |
+| `sft` | 有监督微调（Supervised Fine-tuning） | 指令微调、领域适配 |
+| `dpo` | 直接偏好优化（Direct Preference Optimization） | 对齐优化、偏好学习 |
+
+## 使用建议
+大多数微调场景使用 `sft` 阶段。
+ (Optional) */
     Stage string `json:"stage"`
 
-    /* 微调方法。可选值：[lora, full]。 (Optional) */
+    /* 微调方法。
+
+## 可选值
+
+| 方法 | 说明 | 特点 |
+|------|------|------|
+| `lora` | 低秩适配 | 参数量少、训练快、效果好 |
+| `full` | 全量微调 | 效果最佳、资源消耗大 |
+
+## 选择建议
+- 大多数场景推荐使用 `lora`
+- 追求最佳效果且有充足资源时使用 `full`
+ (Optional) */
     FinetuningType string `json:"finetuningType"`
 
-    /* 微调运行额外配置参数。 (Optional) */
+    /* 微调运行额外配置参数。
+
+包含具体的训练参数配置信息。
+ (Optional) */
     RunConfigExtras []RunConfigExtraInfoForExperiment `json:"runConfigExtras"`
 }

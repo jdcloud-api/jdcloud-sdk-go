@@ -19,28 +19,83 @@ package models
 
 type ResourceParamForExperiment struct {
 
-    /* 队列ID。示例：queue-2xxx**********2d*********8b8
-使用公共资源池时固定为：joybuilder-public-queue。
+    /* 队列ID。
+
+## 格式
+示例：`queue-2xxx**********2d*********8b8`
+
+## 公共资源池
+使用公共资源池时固定为：`joybuilder-public-queue`
+
+## 专属资源池
+使用专属资源池时填写具体的队列ID。
+
+## 选择建议
+- 测试验证：使用公共资源池
+- 生产训练：使用专属资源池，更稳定可控
  (Optional) */
     QueueId *string `json:"queueId"`
 
-    /* 公共资源池的规格ID。 (Optional) */
+    /* 公共资源池的规格ID。
+
+## 说明
+使用公共资源池时，通过此字段选择资源规格。
+
+## 获取方式
+通过资源规格查询接口获取可用的规格列表。
+ (Optional) */
     FlavorId *string `json:"flavorId"`
 
-    /* 公共资源池的规格详细信息。 (Optional) */
+    /* 公共资源池的规格详细信息。
+
+包含 CPU、内存、GPU 等具体配置信息。
+ (Optional) */
     FlavorInfo *interface{} `json:"flavorInfo"`
 
-    /* GPU卡类型。 (Optional) */
+    /* GPU卡类型。
+
+## 示例
+- `NVIDIA_G2`
+- `NVIDIA_A100`
+- `NVIDIA_H800`
+
+## 说明
+不同 GPU 型号的显存和算力不同，根据模型大小和训练需求选择。
+ (Optional) */
     GpuDeviceModel *string `json:"gpuDeviceModel"`
 
-    /* 虚拟GPU卡数量，
-- 英伟达，可选值：[0.1, 0.125, 0.25, 0.5, 1, 2, 3, 4, 5, 6, 7, 8]
+    /* 虚拟GPU卡数量。
+
+## 英伟达 GPU 可选值
+- 分数卡（适合测试）：`0.1`、`0.125`、`0.25`、`0.5`
+- 整数卡（适合生产）：`1`、`2`、`3`、`4`、`5`、`6`、`7`、`8`
+
+## 使用建议
+- 小模型微调可用分数卡
+- 大模型微调建议使用整数卡
  (Optional) */
     VcudaCore *float64 `json:"vcudaCore"`
 
-    /* CPU大小，单位：毫核，例如：0.1 CPU 核心 = 100m （毫核） (Optional) */
+    /* CPU大小，单位：毫核（milliCore）。
+
+## 换算
+- 100m = 0.1 CPU 核心
+- 1000m = 1 CPU 核心
+- 4000m = 4 CPU 核心
+
+## 使用建议
+CPU 资源主要用于数据预处理，根据数据量合理配置。
+ (Optional) */
     CpuMilli *int `json:"cpuMilli"`
 
-    /* 内存大小，单位：MiB。 (Optional) */
+    /* 内存大小，单位：MiB。
+
+## 换算
+- 1024 MiB = 1 GiB
+- 16384 MiB = 16 GiB
+
+## 使用建议
+内存不足会导致 OOM，建议根据模型大小预留充足内存。
+ (Optional) */
     MemoryMiB *int `json:"memoryMiB"`
 }

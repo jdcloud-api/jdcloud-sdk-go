@@ -18,9 +18,10 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    jdaip "github.com/jdcloud-api/jdcloud-sdk-go/services/jdaip/models"
 )
 
-type DeleteTensorBoardRequest struct {
+type UpdateServiceQPSRequest struct {
 
     core.JDCloudRequest
 
@@ -30,67 +31,76 @@ type DeleteTensorBoardRequest struct {
     /* 工作空间ID  */
     WorkspaceId string `json:"workspaceId"`
 
-    /* TensorBoard ID  */
-    TensorBoardId string `json:"tensorBoardId"`
+    /* 推理服务名称。  */
+    ServiceName string `json:"serviceName"`
+
+    /* qps配置  */
+    Limit *jdaip.UpdateServiceQpsSpec `json:"limit"`
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param workspaceId: 工作空间ID (Required)
- * param tensorBoardId: TensorBoard ID (Required)
+ * param serviceName: 推理服务名称。 (Required)
+ * param limit: qps配置 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDeleteTensorBoardRequest(
+func NewUpdateServiceQPSRequest(
     regionId string,
     workspaceId string,
-    tensorBoardId string,
-) *DeleteTensorBoardRequest {
+    serviceName string,
+    limit *jdaip.UpdateServiceQpsSpec,
+) *UpdateServiceQPSRequest {
 
-	return &DeleteTensorBoardRequest{
+	return &UpdateServiceQPSRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/tb-regions/{regionId}/workspace/{workspaceId}/tensorBoard/{tensorBoardId}",
-			Method:  "DELETE",
+			URL:     "/infer-regions/{regionId}/workspace/{workspaceId}/services/{serviceName}/updateQPS",
+			Method:  "PUT",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         WorkspaceId: workspaceId,
-        TensorBoardId: tensorBoardId,
+        ServiceName: serviceName,
+        Limit: limit,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param workspaceId: 工作空间ID (Required)
- * param tensorBoardId: TensorBoard ID (Required)
+ * param serviceName: 推理服务名称。 (Required)
+ * param limit: qps配置 (Required)
  */
-func NewDeleteTensorBoardRequestWithAllParams(
+func NewUpdateServiceQPSRequestWithAllParams(
     regionId string,
     workspaceId string,
-    tensorBoardId string,
-) *DeleteTensorBoardRequest {
+    serviceName string,
+    limit *jdaip.UpdateServiceQpsSpec,
+) *UpdateServiceQPSRequest {
 
-    return &DeleteTensorBoardRequest{
+    return &UpdateServiceQPSRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/tb-regions/{regionId}/workspace/{workspaceId}/tensorBoard/{tensorBoardId}",
-            Method:  "DELETE",
+            URL:     "/infer-regions/{regionId}/workspace/{workspaceId}/services/{serviceName}/updateQPS",
+            Method:  "PUT",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         WorkspaceId: workspaceId,
-        TensorBoardId: tensorBoardId,
+        ServiceName: serviceName,
+        Limit: limit,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDeleteTensorBoardRequestWithoutParam() *DeleteTensorBoardRequest {
+func NewUpdateServiceQPSRequestWithoutParam() *UpdateServiceQPSRequest {
 
-    return &DeleteTensorBoardRequest{
+    return &UpdateServiceQPSRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/tb-regions/{regionId}/workspace/{workspaceId}/tensorBoard/{tensorBoardId}",
-            Method:  "DELETE",
+            URL:     "/infer-regions/{regionId}/workspace/{workspaceId}/services/{serviceName}/updateQPS",
+            Method:  "PUT",
             Header:  nil,
             Version: "v1",
         },
@@ -98,30 +108,34 @@ func NewDeleteTensorBoardRequestWithoutParam() *DeleteTensorBoardRequest {
 }
 
 /* param regionId: 地域ID(Required) */
-func (r *DeleteTensorBoardRequest) SetRegionId(regionId string) {
+func (r *UpdateServiceQPSRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 /* param workspaceId: 工作空间ID(Required) */
-func (r *DeleteTensorBoardRequest) SetWorkspaceId(workspaceId string) {
+func (r *UpdateServiceQPSRequest) SetWorkspaceId(workspaceId string) {
     r.WorkspaceId = workspaceId
 }
-/* param tensorBoardId: TensorBoard ID(Required) */
-func (r *DeleteTensorBoardRequest) SetTensorBoardId(tensorBoardId string) {
-    r.TensorBoardId = tensorBoardId
+/* param serviceName: 推理服务名称。(Required) */
+func (r *UpdateServiceQPSRequest) SetServiceName(serviceName string) {
+    r.ServiceName = serviceName
+}
+/* param limit: qps配置(Required) */
+func (r *UpdateServiceQPSRequest) SetLimit(limit *jdaip.UpdateServiceQpsSpec) {
+    r.Limit = limit
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DeleteTensorBoardRequest) GetRegionId() string {
+func (r UpdateServiceQPSRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DeleteTensorBoardResponse struct {
+type UpdateServiceQPSResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DeleteTensorBoardResult `json:"result"`
+    Result UpdateServiceQPSResult `json:"result"`
 }
 
-type DeleteTensorBoardResult struct {
+type UpdateServiceQPSResult struct {
 }

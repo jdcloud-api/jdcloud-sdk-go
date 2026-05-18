@@ -19,21 +19,46 @@ package models
 
 type CfsParamForJob struct {
 
-    /* cfs ID。示例：fs-rz*******r。 (Optional) */
+    /* CFS 文件系统 ID。
+
+**示例：** `fs-rz*******r`
+
+**获取方式：** 通过 CFS 控制台或 API 创建并获取
+ (Optional) */
     Id *string `json:"id"`
 
-    /* cfs 挂载目标IP地址。示例：192.168.0.1。
-非必传参数，默认获取cfs的第一个挂载目标IP地址。
-如果需要指定，请传此参数。
+    /* CFS 挂载目标 IP 地址。
+
+**格式：** IPv4 地址
+
+**示例：** `192.168.0.1`
+
+**说明：**
+- 非必传参数
+- 默认获取 CFS 的第一个挂载目标 IP 地址
+- 如需指定特定挂载点，请传此参数
  (Optional) */
     Host *string `json:"host"`
 
-    /* cfs 源路径。示例：/data/d1。 (Optional) */
+    /* CFS 源路径，指定要挂载的目录。
+
+**示例：**
+- 根目录：`/`
+- 数据目录：`/data/d1`
+- 共享目录：`/shared`
+ (Optional) */
     SourcePath *string `json:"sourcePath"`
 
-    /* 挂载点配置。示例：/mnt/ws/cfs-1。
-建议挂载到/mnt/开头的路径下，不支持挂载到系统目录。
-不支持的系统目录如下：`/`, `/bin`, `/boot`, `/dev`, `/etc`, `/home`, `/lib`, `/lib32`, `/lib64`, `/libx32`, `/opt`, `/proc`, `/root`, `/run`, `/sbin`, `/sys`, `/tmp`, `/usr`, `/var`。
+    /* 挂载点配置，指定 CFS 在容器内的挂载路径。
+
+**建议：** 挂载到 `/mnt/` 开头的路径下
+
+**示例：**
+- 共享存储：`/mnt/shared`
+- 数据目录：`/mnt/cfs-data`
+
+**禁止挂载的系统目录：**
+`/`, `/bin`, `/boot`, `/dev`, `/etc`, `/home`, `/lib`, `/lib32`, `/lib64`, `/libx32`, `/opt`, `/proc`, `/root`, `/run`, `/sbin`, `/sys`, `/tmp`, `/usr`, `/var`
  (Optional) */
     MountPath *string `json:"mountPath"`
 }

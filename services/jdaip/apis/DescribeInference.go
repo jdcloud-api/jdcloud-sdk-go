@@ -130,6 +130,7 @@ type DescribeInferenceResult struct {
     DeployType string `json:"deployType"`
     TrafficPercent int `json:"trafficPercent"`
     Status string `json:"status"`
+    Qps int `json:"qps"`
     Service jdaip.ServiceInfo `json:"service"`
     Metadata jdaip.Metadata `json:"metadata"`
     Models []jdaip.Model `json:"models"`
@@ -141,6 +142,7 @@ type DescribeInferenceResult struct {
     Charge charge.Charge `json:"charge"`
     LogCollectConfig jdaip.LogCollectConfigDetail `json:"logCollectConfig"`
     UserTags []jdaip.UserTag `json:"userTags"`
+    SchedulePriority jdaip.SchedulePriority `json:"schedulePriority"`
     ResourceGroupInfo jdaip.ResourceGroupInfo `json:"resourceGroupInfo"`
     RolloutInfo jdaip.RolloutInfo `json:"rolloutInfo"`
 }

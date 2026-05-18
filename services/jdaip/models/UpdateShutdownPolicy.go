@@ -17,25 +17,13 @@
 package models
 
 
-type WorkspaceNotebookOffPolicy struct {
+type UpdateShutdownPolicy struct {
 
-    /* 工作空间ID (Optional) */
-    WorkspaceId string `json:"workspaceId"`
+    /*  (Optional) */
+    RuntimePolicys []UpdateRuntimePolicy `json:"runtimePolicys"`
 
-    /* 最大运行时长 (Optional) */
-    MaxRunningDuration float64 `json:"maxRunningDuration"`
-
-    /* 最大限制时长 (Optional) */
-    MaxIdleDuration float64 `json:"maxIdleDuration"`
-
-    /* 最小cpu利用率 (Optional) */
-    MinCpuUsageRate float64 `json:"minCpuUsageRate"`
-
-    /* 最小gpu利用率 (Optional) */
-    MinGpuUsageRate float64 `json:"minGpuUsageRate"`
-
-    /* 最小内存利用率 (Optional) */
-    MinMemoryUsageRate float64 `json:"minMemoryUsageRate"`
+    /*  (Optional) */
+    IdlePolicys []UpdateIdlePolicy `json:"idlePolicys"`
 
     /* 排除的notebookID (Optional) */
     ExcludedNotebookIds []string `json:"excludedNotebookIds"`

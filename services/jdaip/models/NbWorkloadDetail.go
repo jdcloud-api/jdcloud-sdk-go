@@ -19,27 +19,71 @@ package models
 
 type NbWorkloadDetail struct {
 
-    /* 队列ID。公共资源池时固定为：`joybuilder-public-queue`。 (Optional) */
+    /* 资源队列ID，实例运行所在的资源队列。
+
+## 公共资源池
+- 固定为：`joybuilder-public-queue`
+
+## 私有资源池
+- 用户工作空间中的私有队列ID
+ (Optional) */
     QueueId string `json:"queueId"`
 
-    /* 规格ID，公共资源池时有效。 (Optional) */
+    /* 规格ID，公共资源池的规格标识。
+
+## 使用说明
+- 仅公共资源池有效
+- 规格ID对应预定义的资源配置
+ (Optional) */
     FlavorId string `json:"flavorId"`
 
-    /* CPU(毫核)。 (Optional) */
+    /* CPU配置(单位：毫核)。
+
+## 换算关系
+- 1000毫核 = 1核
+- 示例：2000表示2核CPU
+ (Optional) */
     CpuM int `json:"cpuM"`
 
-    /* 内存大小(Mi)。 (Optional) */
+    /* 内存配置(单位：MiB)。
+
+## 换算关系
+- 1024 MiB = 1 GB
+- 示例：8192表示8GB内存
+ (Optional) */
     MemoryMiB int `json:"memoryMiB"`
 
-    /* GPU设备类型。示例(NVIDIA_H20-3e) (Optional) */
+    /* GPU设备类型，GPU型号标识。
+
+## 示例
+- NVIDIA_H20-3e
+- NVIDIA_A100
+- NVIDIA_A800
+- NVIDIA_T4
+ (Optional) */
     DeviceModel string `json:"deviceModel"`
 
-    /* 虚拟GPU数量。 (Optional) */
+    /* 虚拟GPU数量，分配的GPU卡数。
+
+## 使用说明
+- 整数表示完整GPU卡
+- 小数表示GPU切分
+- 示例：1, 2, 4, 8, 0.5, 0.25
+ (Optional) */
     VcudaCore string `json:"vcudaCore"`
 
-    /* 虚拟GPU总显存。 (Optional) */
+    /* 虚拟GPU总显存(单位：Mi)。
+
+## 使用说明
+- 所有虚拟GPU卡的总显存
+ (Optional) */
     VcudaMemory int `json:"vcudaMemory"`
 
-    /* 虚机GPU总算力百分比(0-100)。 (Optional) */
+    /* 虚拟GPU总算力百分比(0-100)。
+
+## 使用说明
+- 所有虚拟GPU卡的总算力占比
+- 取值范围：0-100
+ (Optional) */
     VcudaRatio int `json:"vcudaRatio"`
 }
