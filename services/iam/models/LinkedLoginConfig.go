@@ -17,35 +17,29 @@
 package models
 
 
-type PolicyDetail struct {
+type LinkedLoginConfig struct {
 
-    /* 策略id (Optional) */
-    PolicyId string `json:"policyId"`
+    /* 自增id (Optional) */
+    Id int64 `json:"id"`
 
-    /* 策略名称 (Optional) */
-    Name string `json:"name"`
+    /* 是否禁用微信登录(false:否,true:是)  */
+    WxDisabled bool `json:"wxDisabled"`
 
-    /* 京东云资源标识(jrn) (Optional) */
-    Jrn string `json:"jrn"`
+    /* 是否禁用京东登录(false:否,true:是)  */
+    JdDisabled bool `json:"jdDisabled"`
 
-    /* 描述 (Optional) */
-    Description string `json:"description"`
+    /* 主账号pin (Optional) */
+    AccountPin string `json:"accountPin"`
 
-    /* 策略类型 (Optional) */
-    PolicyType int `json:"policyType"`
+    /* 创建用户 (Optional) */
+    CreateUser string `json:"createUser"`
 
-    /* 策略版本号 (Optional) */
-    Version string `json:"version"`
-
-    /* 当前默认策略文档版本 (Optional) */
-    CurrentDefaultEdition string `json:"currentDefaultEdition"`
-
-    /* 权限策略内容（已废弃） (Optional) */
-    Content string `json:"content"`
-
-    /* 策略创建时间 (Optional) */
+    /* 创建时间 (Optional) */
     CreateTime string `json:"createTime"`
 
-    /* 策略更新时间 (Optional) */
+    /* 更新用户 (Optional) */
+    UpdateUser string `json:"updateUser"`
+
+    /* 更新时间 (Optional) */
     UpdateTime string `json:"updateTime"`
 }

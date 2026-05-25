@@ -34,8 +34,11 @@ type DescribePoliciesRequest struct {
     /* 关键字 (Optional) */
     Keyword *string `json:"keyword"`
 
-    /* 策略类型：0-全部（默认），1-系统策略，2-自定义策略 (Optional) */
+    /* 废弃，请使用types 策略类型：0-全部（默认），1-系统策略，2-自定义策略 (Optional) */
     QueryType *int `json:"queryType"`
+
+    /* 类型列表 逗号分隔  1系统策略 2当前用户私有策略 3系统ak策略 (Optional) */
+    Types *string `json:"types"`
 
     /* 排序规则：0-创建时间顺序排序，1-创建时间倒序排序 (Optional) */
     Sort *int `json:"sort"`
@@ -62,7 +65,8 @@ func NewDescribePoliciesRequest(
  * param pageNumber: 页码，默认1 (Optional)
  * param pageSize: 分页大小，默认50，取值范围[10, 100] (Optional)
  * param keyword: 关键字 (Optional)
- * param queryType: 策略类型：0-全部（默认），1-系统策略，2-自定义策略 (Optional)
+ * param queryType: 废弃，请使用types 策略类型：0-全部（默认），1-系统策略，2-自定义策略 (Optional)
+ * param types: 类型列表 逗号分隔  1系统策略 2当前用户私有策略 3系统ak策略 (Optional)
  * param sort: 排序规则：0-创建时间顺序排序，1-创建时间倒序排序 (Optional)
  */
 func NewDescribePoliciesRequestWithAllParams(
@@ -70,6 +74,7 @@ func NewDescribePoliciesRequestWithAllParams(
     pageSize *int,
     keyword *string,
     queryType *int,
+    types *string,
     sort *int,
 ) *DescribePoliciesRequest {
 
@@ -84,6 +89,7 @@ func NewDescribePoliciesRequestWithAllParams(
         PageSize: pageSize,
         Keyword: keyword,
         QueryType: queryType,
+        Types: types,
         Sort: sort,
     }
 }
@@ -113,9 +119,13 @@ func (r *DescribePoliciesRequest) SetPageSize(pageSize int) {
 func (r *DescribePoliciesRequest) SetKeyword(keyword string) {
     r.Keyword = &keyword
 }
-/* param queryType: 策略类型：0-全部（默认），1-系统策略，2-自定义策略(Optional) */
+/* param queryType: 废弃，请使用types 策略类型：0-全部（默认），1-系统策略，2-自定义策略(Optional) */
 func (r *DescribePoliciesRequest) SetQueryType(queryType int) {
     r.QueryType = &queryType
+}
+/* param types: 类型列表 逗号分隔  1系统策略 2当前用户私有策略 3系统ak策略(Optional) */
+func (r *DescribePoliciesRequest) SetTypes(types string) {
+    r.Types = &types
 }
 /* param sort: 排序规则：0-创建时间顺序排序，1-创建时间倒序排序(Optional) */
 func (r *DescribePoliciesRequest) SetSort(sort int) {

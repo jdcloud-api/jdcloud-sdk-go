@@ -21,70 +21,76 @@ import (
     iam "github.com/jdcloud-api/jdcloud-sdk-go/services/iam/models"
 )
 
-type DescribeAttachedGroupPoliciesRequest struct {
+type QueryDeletedSubUsersRequest struct {
 
     core.JDCloudRequest
-
-    /* 用户组名称  */
-    GroupName string `json:"groupName"`
 
     /* 页码，默认1 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
     /* 分页大小，默认50，取值范围[10, 100] (Optional) */
     PageSize *int `json:"pageSize"`
+
+    /* 主用户pin  */
+    Account string `json:"account"`
+
+    /* 子用户名称 (Optional) */
+    Name *string `json:"name"`
 }
 
 /*
- * param groupName: 用户组名称 (Required)
+ * param account: 主用户pin (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeAttachedGroupPoliciesRequest(
-    groupName string,
-) *DescribeAttachedGroupPoliciesRequest {
+func NewQueryDeletedSubUsersRequest(
+    account string,
+) *QueryDeletedSubUsersRequest {
 
-	return &DescribeAttachedGroupPoliciesRequest{
+	return &QueryDeletedSubUsersRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/group/{groupName}/policies",
+			URL:     "/subUsers:deleted",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
-        GroupName: groupName,
+        Account: account,
 	}
 }
 
 /*
- * param groupName: 用户组名称 (Required)
  * param pageNumber: 页码，默认1 (Optional)
  * param pageSize: 分页大小，默认50，取值范围[10, 100] (Optional)
+ * param account: 主用户pin (Required)
+ * param name: 子用户名称 (Optional)
  */
-func NewDescribeAttachedGroupPoliciesRequestWithAllParams(
-    groupName string,
+func NewQueryDeletedSubUsersRequestWithAllParams(
     pageNumber *int,
     pageSize *int,
-) *DescribeAttachedGroupPoliciesRequest {
+    account string,
+    name *string,
+) *QueryDeletedSubUsersRequest {
 
-    return &DescribeAttachedGroupPoliciesRequest{
+    return &QueryDeletedSubUsersRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/group/{groupName}/policies",
+            URL:     "/subUsers:deleted",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
-        GroupName: groupName,
         PageNumber: pageNumber,
         PageSize: pageSize,
+        Account: account,
+        Name: name,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeAttachedGroupPoliciesRequestWithoutParam() *DescribeAttachedGroupPoliciesRequest {
+func NewQueryDeletedSubUsersRequestWithoutParam() *QueryDeletedSubUsersRequest {
 
-    return &DescribeAttachedGroupPoliciesRequest{
+    return &QueryDeletedSubUsersRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/group/{groupName}/policies",
+            URL:     "/subUsers:deleted",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -92,33 +98,37 @@ func NewDescribeAttachedGroupPoliciesRequestWithoutParam() *DescribeAttachedGrou
     }
 }
 
-/* param groupName: 用户组名称(Required) */
-func (r *DescribeAttachedGroupPoliciesRequest) SetGroupName(groupName string) {
-    r.GroupName = groupName
-}
 /* param pageNumber: 页码，默认1(Optional) */
-func (r *DescribeAttachedGroupPoliciesRequest) SetPageNumber(pageNumber int) {
+func (r *QueryDeletedSubUsersRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 /* param pageSize: 分页大小，默认50，取值范围[10, 100](Optional) */
-func (r *DescribeAttachedGroupPoliciesRequest) SetPageSize(pageSize int) {
+func (r *QueryDeletedSubUsersRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
+}
+/* param account: 主用户pin(Required) */
+func (r *QueryDeletedSubUsersRequest) SetAccount(account string) {
+    r.Account = account
+}
+/* param name: 子用户名称(Optional) */
+func (r *QueryDeletedSubUsersRequest) SetName(name string) {
+    r.Name = &name
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeAttachedGroupPoliciesRequest) GetRegionId() string {
+func (r QueryDeletedSubUsersRequest) GetRegionId() string {
     return ""
 }
 
-type DescribeAttachedGroupPoliciesResponse struct {
+type QueryDeletedSubUsersResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeAttachedGroupPoliciesResult `json:"result"`
+    Result QueryDeletedSubUsersResult `json:"result"`
 }
 
-type DescribeAttachedGroupPoliciesResult struct {
+type QueryDeletedSubUsersResult struct {
+    SubUsers []iam.SubUser `json:"subUsers"`
     Total int `json:"total"`
-    Policies []iam.Policy `json:"policies"`
 }

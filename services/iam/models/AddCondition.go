@@ -17,35 +17,20 @@
 package models
 
 
-type CreateSubUserRes struct {
+type AddCondition struct {
 
-    /* 用户名 (Optional) */
+    /*  (Optional) */
     Name string `json:"name"`
 
-    /* 密码 (Optional) */
-    Password string `json:"password"`
+    /*  (Optional) */
+    Operator string `json:"operator"`
 
-    /* 邮箱 (Optional) */
-    Email string `json:"email"`
+    /*  (Optional) */
+    Qualifier int `json:"qualifier"`
 
-    /* 手机号码 (Optional) */
-    Phone string `json:"phone"`
+    /*  (Optional) */
+    Exists int `json:"exists"`
 
-    /* accessKey (Optional) */
-    AccessKey string `json:"accessKey"`
-
-    /* AccessKey secret (Optional) */
-    SecretAccessKey string `json:"secretAccessKey"`
-
-    /* 创建时间 (Optional) */
-    CreateTime string `json:"createTime"`
-
-    /* 更新时间 (Optional) */
-    UpdateTime string `json:"updateTime"`
-
-    /* 姓名 (Optional) */
-    NickName string `json:"nickName"`
-
-    /* 子用户pin (Optional) */
-    Pin string `json:"pin"`
+    /*  (Optional) */
+    Type int `json:"type"`
 }

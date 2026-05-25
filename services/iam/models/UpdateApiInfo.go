@@ -20,8 +20,68 @@ package models
 type UpdateApiInfo struct {
 
     /*   */
-    Success bool `json:"success"`
+    Id int `json:"id"`
 
     /*   */
-    Message string `json:"message"`
+    ServiceName string `json:"serviceName"`
+
+    /*   */
+    ServiceNameCN string `json:"serviceNameCN"`
+
+    /*  (Optional) */
+    ServiceOldCode string `json:"serviceOldCode"`
+
+    /*   */
+    ResourceType string `json:"resourceType"`
+
+    /*   */
+    ActionName string `json:"actionName"`
+
+    /*   */
+    ActionType string `json:"actionType"`
+
+    /*   */
+    ActionDescription string `json:"actionDescription"`
+
+    /*   */
+    Region int `json:"region"`
+
+    /*   */
+    Method string `json:"method"`
+
+    /*   */
+    AccessLevel int `json:"accessLevel"`
+
+    /*   */
+    Version int `json:"version"`
+
+    /*   */
+    Status int `json:"status"`
+
+    /*   */
+    ShowRule []ApiInfoShowRule `json:"showRule"`
+
+    /*   */
+    Supply int `json:"supply"`
+
+    /*   */
+    IgnoreDeny int `json:"ignoreDeny"`
+
+    /*   */
+    TagResourceLevel int `json:"tagResourceLevel"`
+
+    /*   */
+    ShowType int `json:"showType"`
+
+    /*  (Optional) */
+    CreateTime string `json:"createTime"`
+
+    /*  (Optional) */
+    CreateUser string `json:"createUser"`
+
+    /*  (Optional) */
+    UpdateTime string `json:"updateTime"`
+
+    /*  (Optional) */
+    UpdateUser string `json:"updateUser"`
 }

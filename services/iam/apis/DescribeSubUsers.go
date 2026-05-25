@@ -51,6 +51,9 @@ type DescribeSubUsersRequest struct {
 
     /* 子用户姓名 (Optional) */
     Name *string `json:"name"`
+
+    /* 子用户pin (Optional) */
+    Pin *string `json:"pin"`
 }
 
 /*
@@ -80,6 +83,7 @@ func NewDescribeSubUsersRequest(
  * param description: 用户姓名，和keyword互斥，不要都传 (Optional)
  * param nickName: 子用户别名 (Optional)
  * param name: 子用户姓名 (Optional)
+ * param pin: 子用户pin (Optional)
  */
 func NewDescribeSubUsersRequestWithAllParams(
     pageNumber *int,
@@ -91,6 +95,7 @@ func NewDescribeSubUsersRequestWithAllParams(
     description *string,
     nickName *string,
     name *string,
+    pin *string,
 ) *DescribeSubUsersRequest {
 
     return &DescribeSubUsersRequest{
@@ -109,6 +114,7 @@ func NewDescribeSubUsersRequestWithAllParams(
         Description: description,
         NickName: nickName,
         Name: name,
+        Pin: pin,
     }
 }
 
@@ -160,6 +166,10 @@ func (r *DescribeSubUsersRequest) SetNickName(nickName string) {
 /* param name: 子用户姓名(Optional) */
 func (r *DescribeSubUsersRequest) SetName(name string) {
     r.Name = &name
+}
+/* param pin: 子用户pin(Optional) */
+func (r *DescribeSubUsersRequest) SetPin(pin string) {
+    r.Pin = &pin
 }
 
 

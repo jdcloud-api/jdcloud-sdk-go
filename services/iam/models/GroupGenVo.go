@@ -17,35 +17,38 @@
 package models
 
 
-type CreateSubUserRes struct {
+type GroupGenVo struct {
 
-    /* 用户名 (Optional) */
+    /* 唯一ID (Optional) */
+    Id int64 `json:"id"`
+
+    /* group id (Optional) */
+    GroupId string `json:"groupId"`
+
+    /* 组名称 (Optional) */
     Name string `json:"name"`
 
-    /* 密码 (Optional) */
-    Password string `json:"password"`
+    /* jrn资源描述 (Optional) */
+    Jrn string `json:"jrn"`
 
-    /* 邮箱 (Optional) */
-    Email string `json:"email"`
+    /* 组的所有者的User ID，必须是主账户的User ID (Optional) */
+    Account string `json:"account"`
 
-    /* 手机号码 (Optional) */
-    Phone string `json:"phone"`
-
-    /* accessKey (Optional) */
-    AccessKey string `json:"accessKey"`
-
-    /* AccessKey secret (Optional) */
-    SecretAccessKey string `json:"secretAccessKey"`
+    /* 备注 (Optional) */
+    Description string `json:"description"`
 
     /* 创建时间 (Optional) */
     CreateTime string `json:"createTime"`
 
-    /* 更新时间 (Optional) */
+    /* 创建者 (Optional) */
+    CreateBy int64 `json:"createBy"`
+
+    /* 修改时间 (Optional) */
     UpdateTime string `json:"updateTime"`
 
-    /* 姓名 (Optional) */
-    NickName string `json:"nickName"`
+    /* 修改人 (Optional) */
+    UpdateBy int64 `json:"updateBy"`
 
-    /* 子用户pin (Optional) */
-    Pin string `json:"pin"`
+    /* 状态(0停用，1启用) (Optional) */
+    Status int `json:"status"`
 }

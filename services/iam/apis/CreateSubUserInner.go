@@ -18,24 +18,54 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    iam "github.com/jdcloud-api/jdcloud-sdk-go/services/iam/models"
 )
 
 type CreateSubUserInnerRequest struct {
 
     core.JDCloudRequest
 
-    /* 子用户信息  */
-    CreateSubUserInfo *iam.CreateSubUserInfoInner `json:"createSubUserInfo"`
+    /* 描述，0~256个字符 (Optional) */
+    Description *string `json:"description"`
+
+    /* 按照密码策略设置，默认8~20位，至少包含一个小写字母、大写字母和数字 (Optional) */
+    Password *string `json:"password"`
+
+    /* 手机号码，区号-手机号 (Optional) */
+    Phone *string `json:"phone"`
+
+    /* 邮箱 (Optional) */
+    Email *string `json:"email"`
+
+    /* 姓名 (Optional) */
+    NickName *string `json:"nickName"`
+
+    /* 是否创建accessKey，默认false (Optional) */
+    CreateAk *bool `json:"createAk"`
+
+    /* 子用户首次登录是否需要重置密码，默认false (Optional) */
+    NeedResetPassword *bool `json:"needResetPassword"`
+
+    /* 子用户是否支持控制台登录，默认true (Optional) */
+    ConsoleLogin *bool `json:"consoleLogin"`
+
+    /* 是否自动生成密码，默认false (Optional) */
+    AutoGeneratePassword *bool `json:"autoGeneratePassword"`
+
+    /* 主用户pin (Optional) */
+    Account *string `json:"account"`
+
+    /* 子用户名(注意不是pin)，支持4~20位的字母，数字以及-和_，以字母开头 必填 (Optional) */
+    SubUser *string `json:"subUser"`
+
+    /* 创建类型 0自定义 1组织 2ldap 3jd 4wx 5joyCode (Optional) */
+    CreateType *int `json:"createType"`
 }
 
 /*
- * param createSubUserInfo: 子用户信息 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateSubUserInnerRequest(
-    createSubUserInfo *iam.CreateSubUserInfoInner,
 ) *CreateSubUserInnerRequest {
 
 	return &CreateSubUserInnerRequest{
@@ -45,15 +75,36 @@ func NewCreateSubUserInnerRequest(
 			Header:  nil,
 			Version: "v1",
 		},
-        CreateSubUserInfo: createSubUserInfo,
 	}
 }
 
 /*
- * param createSubUserInfo: 子用户信息 (Required)
+ * param description: 描述，0~256个字符 (Optional)
+ * param password: 按照密码策略设置，默认8~20位，至少包含一个小写字母、大写字母和数字 (Optional)
+ * param phone: 手机号码，区号-手机号 (Optional)
+ * param email: 邮箱 (Optional)
+ * param nickName: 姓名 (Optional)
+ * param createAk: 是否创建accessKey，默认false (Optional)
+ * param needResetPassword: 子用户首次登录是否需要重置密码，默认false (Optional)
+ * param consoleLogin: 子用户是否支持控制台登录，默认true (Optional)
+ * param autoGeneratePassword: 是否自动生成密码，默认false (Optional)
+ * param account: 主用户pin (Optional)
+ * param subUser: 子用户名(注意不是pin)，支持4~20位的字母，数字以及-和_，以字母开头 必填 (Optional)
+ * param createType: 创建类型 0自定义 1组织 2ldap 3jd 4wx 5joyCode (Optional)
  */
 func NewCreateSubUserInnerRequestWithAllParams(
-    createSubUserInfo *iam.CreateSubUserInfoInner,
+    description *string,
+    password *string,
+    phone *string,
+    email *string,
+    nickName *string,
+    createAk *bool,
+    needResetPassword *bool,
+    consoleLogin *bool,
+    autoGeneratePassword *bool,
+    account *string,
+    subUser *string,
+    createType *int,
 ) *CreateSubUserInnerRequest {
 
     return &CreateSubUserInnerRequest{
@@ -63,7 +114,18 @@ func NewCreateSubUserInnerRequestWithAllParams(
             Header:  nil,
             Version: "v1",
         },
-        CreateSubUserInfo: createSubUserInfo,
+        Description: description,
+        Password: password,
+        Phone: phone,
+        Email: email,
+        NickName: nickName,
+        CreateAk: createAk,
+        NeedResetPassword: needResetPassword,
+        ConsoleLogin: consoleLogin,
+        AutoGeneratePassword: autoGeneratePassword,
+        Account: account,
+        SubUser: subUser,
+        CreateType: createType,
     }
 }
 
@@ -80,9 +142,53 @@ func NewCreateSubUserInnerRequestWithoutParam() *CreateSubUserInnerRequest {
     }
 }
 
-/* param createSubUserInfo: 子用户信息(Required) */
-func (r *CreateSubUserInnerRequest) SetCreateSubUserInfo(createSubUserInfo *iam.CreateSubUserInfoInner) {
-    r.CreateSubUserInfo = createSubUserInfo
+/* param description: 描述，0~256个字符(Optional) */
+func (r *CreateSubUserInnerRequest) SetDescription(description string) {
+    r.Description = &description
+}
+/* param password: 按照密码策略设置，默认8~20位，至少包含一个小写字母、大写字母和数字(Optional) */
+func (r *CreateSubUserInnerRequest) SetPassword(password string) {
+    r.Password = &password
+}
+/* param phone: 手机号码，区号-手机号(Optional) */
+func (r *CreateSubUserInnerRequest) SetPhone(phone string) {
+    r.Phone = &phone
+}
+/* param email: 邮箱(Optional) */
+func (r *CreateSubUserInnerRequest) SetEmail(email string) {
+    r.Email = &email
+}
+/* param nickName: 姓名(Optional) */
+func (r *CreateSubUserInnerRequest) SetNickName(nickName string) {
+    r.NickName = &nickName
+}
+/* param createAk: 是否创建accessKey，默认false(Optional) */
+func (r *CreateSubUserInnerRequest) SetCreateAk(createAk bool) {
+    r.CreateAk = &createAk
+}
+/* param needResetPassword: 子用户首次登录是否需要重置密码，默认false(Optional) */
+func (r *CreateSubUserInnerRequest) SetNeedResetPassword(needResetPassword bool) {
+    r.NeedResetPassword = &needResetPassword
+}
+/* param consoleLogin: 子用户是否支持控制台登录，默认true(Optional) */
+func (r *CreateSubUserInnerRequest) SetConsoleLogin(consoleLogin bool) {
+    r.ConsoleLogin = &consoleLogin
+}
+/* param autoGeneratePassword: 是否自动生成密码，默认false(Optional) */
+func (r *CreateSubUserInnerRequest) SetAutoGeneratePassword(autoGeneratePassword bool) {
+    r.AutoGeneratePassword = &autoGeneratePassword
+}
+/* param account: 主用户pin(Optional) */
+func (r *CreateSubUserInnerRequest) SetAccount(account string) {
+    r.Account = &account
+}
+/* param subUser: 子用户名(注意不是pin)，支持4~20位的字母，数字以及-和_，以字母开头 必填(Optional) */
+func (r *CreateSubUserInnerRequest) SetSubUser(subUser string) {
+    r.SubUser = &subUser
+}
+/* param createType: 创建类型 0自定义 1组织 2ldap 3jd 4wx 5joyCode(Optional) */
+func (r *CreateSubUserInnerRequest) SetCreateType(createType int) {
+    r.CreateType = &createType
 }
 
 
@@ -99,5 +205,14 @@ type CreateSubUserInnerResponse struct {
 }
 
 type CreateSubUserInnerResult struct {
-    SubUser iam.CreateSubUserRes `json:"subUser"`
+    Name string `json:"name"`
+    Password string `json:"password"`
+    Email string `json:"email"`
+    Phone string `json:"phone"`
+    AccessKey string `json:"accessKey"`
+    SecretAccessKey string `json:"secretAccessKey"`
+    CreateTime string `json:"createTime"`
+    UpdateTime string `json:"updateTime"`
+    NickName string `json:"nickName"`
+    Pin string `json:"pin"`
 }

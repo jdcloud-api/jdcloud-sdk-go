@@ -17,35 +17,14 @@
 package models
 
 
-type PolicyDetail struct {
+type ConfigDetailsPermissionDetail struct {
 
-    /* 策略id (Optional) */
-    PolicyId string `json:"policyId"`
+    /* 权限ID  */
+    Id string `json:"id"`
 
-    /* 策略名称 (Optional) */
+    /* 权限名称 (Optional) */
     Name string `json:"name"`
 
-    /* 京东云资源标识(jrn) (Optional) */
-    Jrn string `json:"jrn"`
-
-    /* 描述 (Optional) */
+    /* 权限描述 (Optional) */
     Description string `json:"description"`
-
-    /* 策略类型 (Optional) */
-    PolicyType int `json:"policyType"`
-
-    /* 策略版本号 (Optional) */
-    Version string `json:"version"`
-
-    /* 当前默认策略文档版本 (Optional) */
-    CurrentDefaultEdition string `json:"currentDefaultEdition"`
-
-    /* 权限策略内容（已废弃） (Optional) */
-    Content string `json:"content"`
-
-    /* 策略创建时间 (Optional) */
-    CreateTime string `json:"createTime"`
-
-    /* 策略更新时间 (Optional) */
-    UpdateTime string `json:"updateTime"`
 }

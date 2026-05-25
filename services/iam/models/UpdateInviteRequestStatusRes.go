@@ -17,35 +17,32 @@
 package models
 
 
-type PolicyDetail struct {
+type UpdateInviteRequestStatusRes struct {
 
-    /* 策略id (Optional) */
-    PolicyId string `json:"policyId"`
-
-    /* 策略名称 (Optional) */
+    /* 子用户名 (Optional) */
     Name string `json:"name"`
 
-    /* 京东云资源标识(jrn) (Optional) */
-    Jrn string `json:"jrn"`
+    /* 子用户别名 (Optional) */
+    NickName string `json:"nickName"`
 
-    /* 描述 (Optional) */
-    Description string `json:"description"`
+    /* 密码 (Optional) */
+    Password string `json:"password"`
 
-    /* 策略类型 (Optional) */
-    PolicyType int `json:"policyType"`
+    /* ak (Optional) */
+    AccessKey string `json:"accessKey"`
 
-    /* 策略版本号 (Optional) */
-    Version string `json:"version"`
+    /* sk (Optional) */
+    SecretAccessKey string `json:"secretAccessKey"`
 
-    /* 当前默认策略文档版本 (Optional) */
-    CurrentDefaultEdition string `json:"currentDefaultEdition"`
+    /* 手机号 (Optional) */
+    Phone string `json:"phone"`
 
-    /* 权限策略内容（已废弃） (Optional) */
-    Content string `json:"content"`
+    /* 邮箱 (Optional) */
+    Email string `json:"email"`
 
-    /* 策略创建时间 (Optional) */
+    /* 创建时间 (Optional) */
     CreateTime string `json:"createTime"`
 
-    /* 策略更新时间 (Optional) */
+    /* 更新时间 (Optional) */
     UpdateTime string `json:"updateTime"`
 }

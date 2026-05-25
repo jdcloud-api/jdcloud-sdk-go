@@ -17,7 +17,7 @@
 package models
 
 
-type SubUser struct {
+type DescribeByPinsInfo struct {
 
     /* 用户pin (Optional) */
     Pin string `json:"pin"`

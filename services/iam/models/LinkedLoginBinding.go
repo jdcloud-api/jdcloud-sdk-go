@@ -17,35 +17,32 @@
 package models
 
 
-type PolicyDetail struct {
+type LinkedLoginBinding struct {
 
-    /* 策略id (Optional) */
-    PolicyId string `json:"policyId"`
+    /* 自增id (Optional) */
+    Id int64 `json:"id"`
 
-    /* 策略名称 (Optional) */
-    Name string `json:"name"`
+    /* 登录类型(jd/wx)  */
+    LoginType string `json:"loginType"`
 
-    /* 京东云资源标识(jrn) (Optional) */
-    Jrn string `json:"jrn"`
+    /* 登录id(微信unionId/京东pin)  */
+    LoginId string `json:"loginId"`
 
-    /* 描述 (Optional) */
-    Description string `json:"description"`
+    /* 主账号pin (Optional) */
+    AccountPin string `json:"accountPin"`
 
-    /* 策略类型 (Optional) */
-    PolicyType int `json:"policyType"`
+    /* 子用户pin (Optional) */
+    SubUserPin string `json:"subUserPin"`
 
-    /* 策略版本号 (Optional) */
-    Version string `json:"version"`
+    /* 子用户名 (Optional) */
+    SubUserName string `json:"subUserName"`
 
-    /* 当前默认策略文档版本 (Optional) */
-    CurrentDefaultEdition string `json:"currentDefaultEdition"`
+    /* 昵称 (Optional) */
+    Nickname string `json:"nickname"`
 
-    /* 权限策略内容（已废弃） (Optional) */
-    Content string `json:"content"`
-
-    /* 策略创建时间 (Optional) */
+    /* 创建日期 (Optional) */
     CreateTime string `json:"createTime"`
 
-    /* 策略更新时间 (Optional) */
+    /* 更新日期 (Optional) */
     UpdateTime string `json:"updateTime"`
 }
