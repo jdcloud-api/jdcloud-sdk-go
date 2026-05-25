@@ -151,6 +151,6 @@ type DescribeBrowserToolSessionsResponse struct {
 }
 
 type DescribeBrowserToolSessionsResult struct {
-    Sessions []agentgrid.BrowserToolSession `json:"sessions"`
-    TotalCount int `json:"totalCount"`
+    BrowserToolSessions []agentgrid.BrowserToolSession `json:"browserToolSessions"`
+    Total int `json:"total"`
 }

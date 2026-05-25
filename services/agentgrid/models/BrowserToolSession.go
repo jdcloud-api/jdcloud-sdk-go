@@ -22,6 +22,9 @@ type BrowserToolSession struct {
     /* Browser Tool ID (Optional) */
     BrowserToolId string `json:"browserToolId"`
 
+    /* browser tool 名字 (Optional) */
+    Name string `json:"name"`
+
     /* Session ID (Optional) */
     SessionId string `json:"sessionId"`
 

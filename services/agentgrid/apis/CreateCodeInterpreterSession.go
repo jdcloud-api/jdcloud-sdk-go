@@ -30,7 +30,7 @@ type CreateCodeInterpreterSessionRequest struct {
     /* Code Interpreter ID  */
     CodeInterpreterId string `json:"codeInterpreterId"`
 
-    /* Session 名称。 (Optional) */
+    /* Session 名称。长度为 1~32 个字符，可包含中文、数字、大小写字母、下划线、中划线或点。 (Optional) */
     Name *string `json:"name"`
 
     /* Session 存活时间（秒）。取值范围为60～28800，默认为900秒（15分钟）。 (Optional) */
@@ -66,7 +66,7 @@ func NewCreateCodeInterpreterSessionRequest(
 /*
  * param regionId: Region ID (Required)
  * param codeInterpreterId: Code Interpreter ID (Required)
- * param name: Session 名称。 (Optional)
+ * param name: Session 名称。长度为 1~32 个字符，可包含中文、数字、大小写字母、下划线、中划线或点。 (Optional)
  * param maxLifeTime: Session 存活时间（秒）。取值范围为60～28800，默认为900秒（15分钟）。 (Optional)
  * param clientToken: 用于保证请求幂等性。 (Optional)
  */
@@ -114,7 +114,7 @@ func (r *CreateCodeInterpreterSessionRequest) SetRegionId(regionId string) {
 func (r *CreateCodeInterpreterSessionRequest) SetCodeInterpreterId(codeInterpreterId string) {
     r.CodeInterpreterId = codeInterpreterId
 }
-/* param name: Session 名称。(Optional) */
+/* param name: Session 名称。长度为 1~32 个字符，可包含中文、数字、大小写字母、下划线、中划线或点。(Optional) */
 func (r *CreateCodeInterpreterSessionRequest) SetName(name string) {
     r.Name = &name
 }

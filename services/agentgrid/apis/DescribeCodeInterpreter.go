@@ -112,5 +112,5 @@ type DescribeCodeInterpreterResponse struct {
 }
 
 type DescribeCodeInterpreterResult struct {
-    CodeInterpreterView agentgrid.CodeInterpreterView `json:"codeInterpreterView"`
+    CodeInterpreter agentgrid.CodeInterpreter `json:"codeInterpreter"`
 }

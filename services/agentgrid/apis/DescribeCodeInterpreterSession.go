@@ -125,5 +125,5 @@ type DescribeCodeInterpreterSessionResponse struct {
 }
 
 type DescribeCodeInterpreterSessionResult struct {
-    CodeInterpreterSessionView agentgrid.CodeInterpreterSessionView `json:"codeInterpreterSessionView"`
+    CodeInterpreterSession agentgrid.CodeInterpreterSession `json:"codeInterpreterSession"`
 }
