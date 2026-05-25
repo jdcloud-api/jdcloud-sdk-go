@@ -152,5 +152,5 @@ type DescribeCodeInterpreterSessionsResponse struct {
 
 type DescribeCodeInterpreterSessionsResult struct {
     Total int `json:"total"`
-    CodeInterpreterSessions []agentgrid.CodeInterpreterSessionView `json:"codeInterpreterSessions"`
+    CodeInterpreterSessions []agentgrid.CodeInterpreterSession `json:"codeInterpreterSessions"`
 }

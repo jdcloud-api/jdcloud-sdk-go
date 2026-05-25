@@ -40,7 +40,7 @@ func NewAgentgridClient(credential *core.Credential) *AgentgridClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "agentgrid",
-            Revision:    "1.0.0",
+            Revision:    "1.0.1",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -113,7 +113,7 @@ func (c *AgentgridClient) CreateCodeInterpreter(request *agentgrid.CreateCodeInt
 
 ## 接口说明
 - 删除时会级联停止并删除该 Browser Tool 下的所有 Session。
-- 删除请求受理后，Browser Tool 状态会变为 `deleting`，删除完成后变为 `deleted`。`deleting` 期间不可继续创建新的 Session。
+- 删除请求受理后，Browser Tool 状态会变为 deleting，删除完成后变为 deleted；deleting 期间不可继续创建新的 Session
  */
 func (c *AgentgridClient) DeleteBrowserTool(request *agentgrid.DeleteBrowserToolRequest) (*agentgrid.DeleteBrowserToolResponse, error) {
     if request == nil {

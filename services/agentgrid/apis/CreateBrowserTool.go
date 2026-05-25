@@ -36,7 +36,7 @@ type CreateBrowserToolRequest struct {
     /* Browser Tool 鉴权方式，当前仅支持 `APIKey` (Optional) */
     AuthenticationType *string `json:"authenticationType"`
 
-    /* Browser Tool 网络配置类型。当前支持 `Public` 和 `SandBox`，建议显式传值。  */
+    /* Code Interpreter 网络配置。支持 public｜sandbox 两种。默认为sandbox。  */
     NetworkConfiguration string `json:"networkConfiguration"`
 
     /* 用于保证请求幂等性。 (Optional) */
@@ -46,7 +46,7 @@ type CreateBrowserToolRequest struct {
 /*
  * param regionId: Region ID (Required)
  * param name: Browser Tool 名称。长度为 1~32 个字符，可包含中文、数字、大小写字母、下划线、中划线或点。 (Required)
- * param networkConfiguration: Browser Tool 网络配置类型。当前支持 `Public` 和 `SandBox`，建议显式传值。 (Required)
+ * param networkConfiguration: Code Interpreter 网络配置。支持 public｜sandbox 两种。默认为sandbox。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -74,7 +74,7 @@ func NewCreateBrowserToolRequest(
  * param name: Browser Tool 名称。长度为 1~32 个字符，可包含中文、数字、大小写字母、下划线、中划线或点。 (Required)
  * param description: Browser Tool 描述信息，长度不超过 256 个字符。 (Optional)
  * param authenticationType: Browser Tool 鉴权方式，当前仅支持 `APIKey` (Optional)
- * param networkConfiguration: Browser Tool 网络配置类型。当前支持 `Public` 和 `SandBox`，建议显式传值。 (Required)
+ * param networkConfiguration: Code Interpreter 网络配置。支持 public｜sandbox 两种。默认为sandbox。 (Required)
  * param clientToken: 用于保证请求幂等性。 (Optional)
  */
 func NewCreateBrowserToolRequestWithAllParams(
@@ -131,7 +131,7 @@ func (r *CreateBrowserToolRequest) SetDescription(description string) {
 func (r *CreateBrowserToolRequest) SetAuthenticationType(authenticationType string) {
     r.AuthenticationType = &authenticationType
 }
-/* param networkConfiguration: Browser Tool 网络配置类型。当前支持 `Public` 和 `SandBox`，建议显式传值。(Required) */
+/* param networkConfiguration: Code Interpreter 网络配置。支持 public｜sandbox 两种。默认为sandbox。(Required) */
 func (r *CreateBrowserToolRequest) SetNetworkConfiguration(networkConfiguration string) {
     r.NetworkConfiguration = networkConfiguration
 }

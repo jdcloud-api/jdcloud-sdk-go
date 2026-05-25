@@ -17,29 +17,23 @@
 package models
 
 
-type CodeInterpreterView struct {
+type CodeInterpreterSession struct {
 
     /* Code Interpreter ID (Optional) */
     CodeInterpreterId string `json:"codeInterpreterId"`
 
-    /* Code Interpreter 名称 (Optional) */
+    /* Session ID (Optional) */
+    SessionId string `json:"sessionId"`
+
+    /* Session 名称 (Optional) */
     Name string `json:"name"`
 
-    /* Code Interpreter 描述信息 (Optional) */
-    Description string `json:"description"`
-
-    /* 用于鉴权的 API Key 的值 (Optional) */
-    ApiKey string `json:"apiKey"`
-
-    /* 失败原因；仅当 `state` 为 `failed` 时通常有值 (Optional) */
-    FailureReason string `json:"failureReason"`
-
-    /* Code Interpreter 状态。可选值：`pending`（已受理，等待资源准备）、`ready`（可创建 Session）、`failed`（处理失败）、`deleting`（删除中）、`deleted`（已删除） (Optional) */
+    /* Session 状态。可选值：`pending`（已受理，等待资源准备）、`creating`（初始化中）、`ready`（可执行工具调用）、`deleting`（删除中）、`deleted`（已删除）、`failed`（初始化失败） (Optional) */
     State string `json:"state"`
 
-    /* 网络配置类型 (Optional) */
-    Network string `json:"network"`
+    /* Session 最大存活时长（秒） (Optional) */
+    MaxLifeTime int `json:"maxLifeTime"`
 
-    /* Code Interpreter 创建时间 (Optional) */
+    /* Session 创建时间 (Optional) */
     CreateTime string `json:"createTime"`
 }

@@ -139,5 +139,5 @@ type DescribeBrowserToolsResponse struct {
 
 type DescribeBrowserToolsResult struct {
     BrowserTools []agentgrid.BrowserTool `json:"browserTools"`
-    TotalCount int `json:"totalCount"`
+    Total int `json:"total"`
 }

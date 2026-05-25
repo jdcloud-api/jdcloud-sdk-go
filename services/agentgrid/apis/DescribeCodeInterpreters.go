@@ -138,5 +138,6 @@ type DescribeCodeInterpretersResponse struct {
 }
 
 type DescribeCodeInterpretersResult struct {
-    CodeInterpreters []agentgrid.CodeInterpreterView `json:"codeInterpreters"`
+    Total int `json:"total"`
+    CodeInterpreters []agentgrid.CodeInterpreter `json:"codeInterpreters"`
 }

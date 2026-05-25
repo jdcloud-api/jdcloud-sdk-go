@@ -17,23 +17,32 @@
 package models
 
 
-type CodeInterpreterSessionView struct {
+type UpdateInviteRequestStatusRes struct {
 
-    /* Code Interpreter ID (Optional) */
-    CodeInterpreterId string `json:"codeInterpreterId"`
-
-    /* Session ID (Optional) */
-    SessionId string `json:"sessionId"`
-
-    /* Session 名称 (Optional) */
+    /* 子用户名 (Optional) */
     Name string `json:"name"`
 
-    /* Session 状态。可选值：`pending`（已受理，等待资源准备）、`creating`（初始化中）、`ready`（可执行工具调用）、`deleting`（删除中）、`deleted`（已删除）、`failed`（初始化失败） (Optional) */
-    State string `json:"state"`
+    /* 子用户别名 (Optional) */
+    NickName string `json:"nickName"`
 
-    /* Session 最大存活时长（秒） (Optional) */
-    MaxLifeTime int `json:"maxLifeTime"`
+    /* 密码 (Optional) */
+    Password string `json:"password"`
 
-    /* Session 创建时间 (Optional) */
+    /* ak (Optional) */
+    AccessKey string `json:"accessKey"`
+
+    /* sk (Optional) */
+    SecretAccessKey string `json:"secretAccessKey"`
+
+    /* 手机号 (Optional) */
+    Phone string `json:"phone"`
+
+    /* 邮箱 (Optional) */
+    Email string `json:"email"`
+
+    /* 创建时间 (Optional) */
     CreateTime string `json:"createTime"`
+
+    /* 更新时间 (Optional) */
+    UpdateTime string `json:"updateTime"`
 }

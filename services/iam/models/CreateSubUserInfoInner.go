@@ -19,33 +19,39 @@ package models
 
 type CreateSubUserInfoInner struct {
 
-    /* 子用户名，支持4~20位的字母，数字以及-和_，以字母开头  */
-    Name string `json:"name"`
-
     /* 描述，0~256个字符 (Optional) */
-    Description *string `json:"description"`
+    Description string `json:"description"`
 
     /* 按照密码策略设置，默认8~20位，至少包含一个小写字母、大写字母和数字 (Optional) */
-    Password *string `json:"password"`
+    Password string `json:"password"`
 
     /* 手机号码，区号-手机号 (Optional) */
-    Phone *string `json:"phone"`
+    Phone string `json:"phone"`
 
     /* 邮箱 (Optional) */
-    Email *string `json:"email"`
+    Email string `json:"email"`
 
     /* 姓名 (Optional) */
-    NickName *string `json:"nickName"`
+    NickName string `json:"nickName"`
 
     /* 是否创建accessKey，默认false (Optional) */
-    CreateAk *bool `json:"createAk"`
+    CreateAk bool `json:"createAk"`
 
     /* 子用户首次登录是否需要重置密码，默认false (Optional) */
-    NeedResetPassword *bool `json:"needResetPassword"`
+    NeedResetPassword bool `json:"needResetPassword"`
 
     /* 子用户是否支持控制台登录，默认true (Optional) */
-    ConsoleLogin *bool `json:"consoleLogin"`
+    ConsoleLogin bool `json:"consoleLogin"`
 
     /* 是否自动生成密码，默认false (Optional) */
-    AutoGeneratePassword *bool `json:"autoGeneratePassword"`
+    AutoGeneratePassword bool `json:"autoGeneratePassword"`
+
+    /* 主用户pin (Optional) */
+    Account string `json:"account"`
+
+    /* 子用户名(注意不是pin)，支持4~20位的字母，数字以及-和_，以字母开头 必填 (Optional) */
+    SubUser string `json:"subUser"`
+
+    /* 创建类型 0自定义 1组织 2ldap 3jd 4wx 5joyCode (Optional) */
+    CreateType int `json:"createType"`
 }

@@ -27,6 +27,12 @@ type DescribeAttachedGroupPoliciesRequest struct {
 
     /* 用户组名称  */
     GroupName string `json:"groupName"`
+
+    /* 页码，默认1 (Optional) */
+    PageNumber *int `json:"pageNumber"`
+
+    /* 分页大小，默认50，取值范围[10, 100] (Optional) */
+    PageSize *int `json:"pageSize"`
 }
 
 /*
@@ -51,9 +57,13 @@ func NewDescribeAttachedGroupPoliciesRequest(
 
 /*
  * param groupName: 用户组名称 (Required)
+ * param pageNumber: 页码，默认1 (Optional)
+ * param pageSize: 分页大小，默认50，取值范围[10, 100] (Optional)
  */
 func NewDescribeAttachedGroupPoliciesRequestWithAllParams(
     groupName string,
+    pageNumber *int,
+    pageSize *int,
 ) *DescribeAttachedGroupPoliciesRequest {
 
     return &DescribeAttachedGroupPoliciesRequest{
@@ -64,6 +74,8 @@ func NewDescribeAttachedGroupPoliciesRequestWithAllParams(
             Version: "v1",
         },
         GroupName: groupName,
+        PageNumber: pageNumber,
+        PageSize: pageSize,
     }
 }
 
@@ -83,6 +95,14 @@ func NewDescribeAttachedGroupPoliciesRequestWithoutParam() *DescribeAttachedGrou
 /* param groupName: 用户组名称(Required) */
 func (r *DescribeAttachedGroupPoliciesRequest) SetGroupName(groupName string) {
     r.GroupName = groupName
+}
+/* param pageNumber: 页码，默认1(Optional) */
+func (r *DescribeAttachedGroupPoliciesRequest) SetPageNumber(pageNumber int) {
+    r.PageNumber = &pageNumber
+}
+/* param pageSize: 分页大小，默认50，取值范围[10, 100](Optional) */
+func (r *DescribeAttachedGroupPoliciesRequest) SetPageSize(pageSize int) {
+    r.PageSize = &pageSize
 }
 
 

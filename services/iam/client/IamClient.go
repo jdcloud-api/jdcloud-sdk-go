@@ -40,7 +40,7 @@ func NewIamClient(credential *core.Credential) *IamClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "iam",
-            Revision:    "0.3.6",
+            Revision:    "0.3.21",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -769,6 +769,26 @@ func (c *IamClient) DescribePolicies(request *iam.DescribePoliciesRequest) (*iam
     return jdResp, err
 }
 
+/* 查询已删除子用户 */
+func (c *IamClient) QueryDeletedSubUsers(request *iam.QueryDeletedSubUsersRequest) (*iam.QueryDeletedSubUsersResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.QueryDeletedSubUsersResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 绑定虚拟MFA设备（一组动态密码） */
 func (c *IamClient) BindMFADeviceByOneCode(request *iam.BindMFADeviceByOneCodeRequest) (*iam.BindMFADeviceByOneCodeResponse, error) {
     if request == nil {
@@ -842,6 +862,26 @@ func (c *IamClient) BindMFADevice(request *iam.BindMFADeviceRequest) (*iam.BindM
     }
 
     jdResp := &iam.BindMFADeviceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 恢复已删除子用户 */
+func (c *IamClient) RestoreSubUser(request *iam.RestoreSubUserRequest) (*iam.RestoreSubUserResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.RestoreSubUserResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

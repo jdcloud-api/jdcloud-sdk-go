@@ -45,4 +45,16 @@ type SubUser struct {
 
     /* 姓名 (Optional) */
     NickName string `json:"nickName"`
+
+    /* 创建方式 (Optional) */
+    CreateType string `json:"createType"`
+
+    /* 用户所在组织id (Optional) */
+    OrgId string `json:"orgId"`
+
+    /* 用户所在组织名称 (Optional) */
+    OrgName string `json:"orgName"`
+
+    /* 用户所在组织路径 (Optional) */
+    OrgPath string `json:"orgPath"`
 }

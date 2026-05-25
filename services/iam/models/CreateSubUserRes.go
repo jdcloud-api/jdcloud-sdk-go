@@ -45,4 +45,7 @@ type CreateSubUserRes struct {
 
     /* 姓名 (Optional) */
     NickName string `json:"nickName"`
+
+    /* 子用户pin (Optional) */
+    Pin string `json:"pin"`
 }

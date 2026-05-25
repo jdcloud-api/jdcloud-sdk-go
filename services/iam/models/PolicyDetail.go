@@ -32,7 +32,7 @@ type PolicyDetail struct {
     Description string `json:"description"`
 
     /* 策略类型 (Optional) */
-    PolicyType string `json:"policyType"`
+    PolicyType int `json:"policyType"`
 
     /* 策略版本号 (Optional) */
     Version string `json:"version"`
