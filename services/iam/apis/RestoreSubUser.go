@@ -25,54 +25,54 @@ type RestoreSubUserRequest struct {
 
     core.JDCloudRequest
 
-    /* 主用户pin  */
-    Account string `json:"account"`
+    /* 主账号 (Optional) */
+    Account *string `json:"account"`
 
-    /* 子用户pin  */
-    SubUserPin string `json:"subUserPin"`
+    /* 子用户pin (Optional) */
+    SubUserPin *string `json:"subUserPin"`
+
+    /* accessKey列表 (Optional) */
+    AccessKeyList []string `json:"accessKeyList"`
 }
 
 /*
- * param account: 主用户pin (Required)
- * param subUserPin: 子用户pin (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewRestoreSubUserRequest(
-    account string,
-    subUserPin string,
 ) *RestoreSubUserRequest {
 
 	return &RestoreSubUserRequest{
         JDCloudRequest: core.JDCloudRequest{
 			URL:     "/subUser:restore",
-			Method:  "GET",
+			Method:  "PUT",
 			Header:  nil,
 			Version: "v1",
 		},
-        Account: account,
-        SubUserPin: subUserPin,
 	}
 }
 
 /*
- * param account: 主用户pin (Required)
- * param subUserPin: 子用户pin (Required)
+ * param account: 主账号 (Optional)
+ * param subUserPin: 子用户pin (Optional)
+ * param accessKeyList: accessKey列表 (Optional)
  */
 func NewRestoreSubUserRequestWithAllParams(
-    account string,
-    subUserPin string,
+    account *string,
+    subUserPin *string,
+    accessKeyList []string,
 ) *RestoreSubUserRequest {
 
     return &RestoreSubUserRequest{
         JDCloudRequest: core.JDCloudRequest{
             URL:     "/subUser:restore",
-            Method:  "GET",
+            Method:  "PUT",
             Header:  nil,
             Version: "v1",
         },
         Account: account,
         SubUserPin: subUserPin,
+        AccessKeyList: accessKeyList,
     }
 }
 
@@ -82,20 +82,24 @@ func NewRestoreSubUserRequestWithoutParam() *RestoreSubUserRequest {
     return &RestoreSubUserRequest{
             JDCloudRequest: core.JDCloudRequest{
             URL:     "/subUser:restore",
-            Method:  "GET",
+            Method:  "PUT",
             Header:  nil,
             Version: "v1",
         },
     }
 }
 
-/* param account: 主用户pin(Required) */
+/* param account: 主账号(Optional) */
 func (r *RestoreSubUserRequest) SetAccount(account string) {
-    r.Account = account
+    r.Account = &account
 }
-/* param subUserPin: 子用户pin(Required) */
+/* param subUserPin: 子用户pin(Optional) */
 func (r *RestoreSubUserRequest) SetSubUserPin(subUserPin string) {
-    r.SubUserPin = subUserPin
+    r.SubUserPin = &subUserPin
+}
+/* param accessKeyList: accessKey列表(Optional) */
+func (r *RestoreSubUserRequest) SetAccessKeyList(accessKeyList []string) {
+    r.AccessKeyList = accessKeyList
 }
 
 

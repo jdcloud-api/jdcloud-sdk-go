@@ -17,26 +17,14 @@
 package models
 
 
-type SubUserAccessKey struct {
+type RestoreSubUser struct {
 
-    /* accessKey (Optional) */
-    AccessKey string `json:"accessKey"`
+    /* 主账号 (Optional) */
+    Account string `json:"account"`
 
-    /* secretAccessKey (Optional) */
-    SecretAccessKey string `json:"secretAccessKey"`
+    /* 子用户pin (Optional) */
+    SubUserPin string `json:"subUserPin"`
 
-    /* 创建时间 (Optional) */
-    CreateTime string `json:"createTime"`
-
-    /* 最近一次使用AK访问时间 (Optional) */
-    LastVisitTime string `json:"lastVisitTime"`
-
-    /* 最近一次使用AK访问事件 (Optional) */
-    LastVisitEvent string `json:"lastVisitEvent"`
-
-    /* 禁用/启用状态[0-禁用,1-启用] (Optional) */
-    Status int `json:"status"`
-
-    /* AK备注信息 (Optional) */
-    Remark string `json:"remark"`
+    /* accessKey列表 (Optional) */
+    AccessKeyList []string `json:"accessKeyList"`
 }
