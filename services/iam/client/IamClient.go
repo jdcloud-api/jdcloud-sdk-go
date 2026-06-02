@@ -40,7 +40,7 @@ func NewIamClient(credential *core.Credential) *IamClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "iam",
-            Revision:    "0.3.21",
+            Revision:    "0.3.22",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -471,6 +471,26 @@ func (c *IamClient) AddSubUserToGroup(request *iam.AddSubUserToGroupRequest) (*i
     }
 
     jdResp := &iam.AddSubUserToGroupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建子用户AccessKey */
+func (c *IamClient) CreateSubUserAccessKey(request *iam.CreateSubUserAccessKeyRequest) (*iam.CreateSubUserAccessKeyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.CreateSubUserAccessKeyResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1167,6 +1187,26 @@ func (c *IamClient) DescribeRoles(request *iam.DescribeRolesRequest) (*iam.Descr
     }
 
     jdResp := &iam.DescribeRolesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询子用户的AccessKey列表 */
+func (c *IamClient) GetSubUserAccessKeys(request *iam.GetSubUserAccessKeysRequest) (*iam.GetSubUserAccessKeysResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.GetSubUserAccessKeysResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

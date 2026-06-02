@@ -36,6 +36,9 @@ type QueryDeletedSubUsersRequest struct {
 
     /* 子用户名称 (Optional) */
     Name *string `json:"name"`
+
+    /* 子用户ak (Optional) */
+    AccessKey *string `json:"accessKey"`
 }
 
 /*
@@ -63,12 +66,14 @@ func NewQueryDeletedSubUsersRequest(
  * param pageSize: 分页大小，默认50，取值范围[10, 100] (Optional)
  * param account: 主用户pin (Required)
  * param name: 子用户名称 (Optional)
+ * param accessKey: 子用户ak (Optional)
  */
 func NewQueryDeletedSubUsersRequestWithAllParams(
     pageNumber *int,
     pageSize *int,
     account string,
     name *string,
+    accessKey *string,
 ) *QueryDeletedSubUsersRequest {
 
     return &QueryDeletedSubUsersRequest{
@@ -82,6 +87,7 @@ func NewQueryDeletedSubUsersRequestWithAllParams(
         PageSize: pageSize,
         Account: account,
         Name: name,
+        AccessKey: accessKey,
     }
 }
 
@@ -113,6 +119,10 @@ func (r *QueryDeletedSubUsersRequest) SetAccount(account string) {
 /* param name: 子用户名称(Optional) */
 func (r *QueryDeletedSubUsersRequest) SetName(name string) {
     r.Name = &name
+}
+/* param accessKey: 子用户ak(Optional) */
+func (r *QueryDeletedSubUsersRequest) SetAccessKey(accessKey string) {
+    r.AccessKey = &accessKey
 }
 
 
