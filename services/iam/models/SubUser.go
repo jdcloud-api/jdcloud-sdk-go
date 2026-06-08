@@ -57,4 +57,7 @@ type SubUser struct {
 
     /* 用户所在组织路径 (Optional) */
     OrgPath string `json:"orgPath"`
+
+    /* 操作者 (Optional) */
+    Operator string `json:"operator"`
 }

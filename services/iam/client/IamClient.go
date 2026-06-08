@@ -40,7 +40,7 @@ func NewIamClient(credential *core.Credential) *IamClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "iam",
-            Revision:    "0.3.22",
+            Revision:    "0.3.23",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
