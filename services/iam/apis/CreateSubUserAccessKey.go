@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    iam "github.com/jdcloud-api/jdcloud-sdk-go/services/iam/models"
 )
 
 type CreateSubUserAccessKeyRequest struct {
@@ -98,5 +99,5 @@ type CreateSubUserAccessKeyResponse struct {
 }
 
 type CreateSubUserAccessKeyResult struct {
-    AccessKey string `json:"accessKey"`
+    UserAccessKey iam.SubUserAccessKey `json:"userAccessKey"`
 }
