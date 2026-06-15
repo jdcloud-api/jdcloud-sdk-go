@@ -40,7 +40,7 @@ func NewIamClient(credential *core.Credential) *IamClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "iam",
-            Revision:    "0.3.23",
+            Revision:    "0.3.24",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -535,6 +535,26 @@ func (c *IamClient) CreateSubUserInner(request *iam.CreateSubUserInnerRequest) (
     }
 
     jdResp := &iam.CreateSubUserInnerResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询子用户的AccessKey最新访问记录 */
+func (c *IamClient) DescribeSubUserAccessKeyAuditRecords(request *iam.DescribeSubUserAccessKeyAuditRecordsRequest) (*iam.DescribeSubUserAccessKeyAuditRecordsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.DescribeSubUserAccessKeyAuditRecordsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
