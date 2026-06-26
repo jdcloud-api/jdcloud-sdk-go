@@ -35,9 +35,9 @@ type DescribeRuntimesRequest struct {
     PageNumber *int `json:"pageNumber"`
 
     /* 过滤条件。支持的键如下：
-- runtimeId：按 Runtime ID 精确匹配，支持多个值。
-- runtimeName：按 Runtime 名称模糊匹配，仅支持单个值。
-- state：按 Runtime 状态过滤，支持多个值。可选值：`pending`、`creating`、`running`、`updating`、`failed`、`deleted`
+`runtimeId`：按 Runtime ID 精确匹配，支持多个值。
+`runtimeName`：按 Runtime 名称模糊匹配，仅支持单个值。
+`state`：按 Runtime 状态过滤，支持多个值。可选值：`pending`、`creating`、`running`、`updating`、`failed`、`deleted`
  (Optional) */
     Filters []agentgrid.Filter `json:"filters"`
 }
@@ -67,9 +67,9 @@ func NewDescribeRuntimesRequest(
  * param pageSize: 每页返回的数据条数。取值范围 10～100，默认值为 10。 (Optional)
  * param pageNumber: 页码。默认值为 1。 (Optional)
  * param filters: 过滤条件。支持的键如下：
-- runtimeId：按 Runtime ID 精确匹配，支持多个值。
-- runtimeName：按 Runtime 名称模糊匹配，仅支持单个值。
-- state：按 Runtime 状态过滤，支持多个值。可选值：`pending`、`creating`、`running`、`updating`、`failed`、`deleted`
+`runtimeId`：按 Runtime ID 精确匹配，支持多个值。
+`runtimeName`：按 Runtime 名称模糊匹配，仅支持单个值。
+`state`：按 Runtime 状态过滤，支持多个值。可选值：`pending`、`creating`、`running`、`updating`、`failed`、`deleted`
  (Optional)
  */
 func NewDescribeRuntimesRequestWithAllParams(
@@ -119,9 +119,9 @@ func (r *DescribeRuntimesRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
 }
 /* param filters: 过滤条件。支持的键如下：
-- runtimeId：按 Runtime ID 精确匹配，支持多个值。
-- runtimeName：按 Runtime 名称模糊匹配，仅支持单个值。
-- state：按 Runtime 状态过滤，支持多个值。可选值：`pending`、`creating`、`running`、`updating`、`failed`、`deleted`
+`runtimeId`：按 Runtime ID 精确匹配，支持多个值。
+`runtimeName`：按 Runtime 名称模糊匹配，仅支持单个值。
+`state`：按 Runtime 状态过滤，支持多个值。可选值：`pending`、`creating`、`running`、`updating`、`failed`、`deleted`
 (Optional) */
 func (r *DescribeRuntimesRequest) SetFilters(filters []agentgrid.Filter) {
     r.Filters = filters

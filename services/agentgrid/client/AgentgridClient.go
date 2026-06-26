@@ -40,7 +40,7 @@ func NewAgentgridClient(credential *core.Credential) *AgentgridClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "agentgrid",
-            Revision:    "1.0.1",
+            Revision:    "1.0.2",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -293,6 +293,30 @@ func (c *AgentgridClient) DeleteBrowserToolSession(request *agentgrid.DeleteBrow
     }
 
     jdResp := &agentgrid.DeleteBrowserToolSessionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 接收 OpenTelemetry Trace 数据。
+
+## 接口说明
+- 当前接口仅作为占位定义，请求体为任意 Object，不展开具体字段。
+ */
+func (c *AgentgridClient) IngestTraces(request *agentgrid.IngestTracesRequest) (*agentgrid.IngestTracesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &agentgrid.IngestTracesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -596,6 +620,30 @@ func (c *AgentgridClient) DescribeRuntimeEndpoints(request *agentgrid.DescribeRu
     return jdResp, err
 }
 
+/* 接收 OpenTelemetry Metrics 数据。
+
+## 接口说明
+- 当前接口仅作为占位定义，请求体为任意 Object，不展开具体字段。
+ */
+func (c *AgentgridClient) IngestMetrics(request *agentgrid.IngestMetricsRequest) (*agentgrid.IngestMetricsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &agentgrid.IngestMetricsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询指定 Code Interpreter Session 详情。
  */
 func (c *AgentgridClient) DescribeCodeInterpreterSession(request *agentgrid.DescribeCodeInterpreterSessionRequest) (*agentgrid.DescribeCodeInterpreterSessionResponse, error) {
@@ -678,6 +726,30 @@ func (c *AgentgridClient) UpdateRuntimeAttributes(request *agentgrid.UpdateRunti
     }
 
     jdResp := &agentgrid.UpdateRuntimeAttributesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 接收 OpenTelemetry Logs 数据。
+
+## 接口说明
+- 当前接口仅作为占位定义，请求体为任意 Object，不展开具体字段。
+ */
+func (c *AgentgridClient) IngestLogs(request *agentgrid.IngestLogsRequest) (*agentgrid.IngestLogsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &agentgrid.IngestLogsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
