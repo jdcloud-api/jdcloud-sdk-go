@@ -58,6 +58,9 @@ type RebuildInstanceRequest struct {
 
     /* 是否清空数据盘数据，false为不清空，true为清空，默认不清空。 (Optional) */
     ClearDataDisks *bool `json:"clearDataDisks"`
+
+    /* 指定分配的网段掩码长度, 支持24-28位掩码长度，不能与secondaryIpCount同时指定，不支持抢占重分配。该参数依赖子网的预分配网段。 (Optional) */
+    SecondaryIpMaskLen *int `json:"secondaryIpMaskLen"`
 }
 
 /*
@@ -106,6 +109,7 @@ func NewRebuildInstanceRequest(
 **linux系统**：支持 `bash` 和 `python`，编码前须分别以 `#!/bin/bash` 和 `#!/usr/bin/env python` 作为内容首行。
  (Optional)
  * param clearDataDisks: 是否清空数据盘数据，false为不清空，true为清空，默认不清空。 (Optional)
+ * param secondaryIpMaskLen: 指定分配的网段掩码长度, 支持24-28位掩码长度，不能与secondaryIpCount同时指定，不支持抢占重分配。该参数依赖子网的预分配网段。 (Optional)
  */
 func NewRebuildInstanceRequestWithAllParams(
     regionId string,
@@ -116,6 +120,7 @@ func NewRebuildInstanceRequestWithAllParams(
     metadata []hpc.Metadata,
     userdata []hpc.Userdata,
     clearDataDisks *bool,
+    secondaryIpMaskLen *int,
 ) *RebuildInstanceRequest {
 
     return &RebuildInstanceRequest{
@@ -133,6 +138,7 @@ func NewRebuildInstanceRequestWithAllParams(
         Metadata: metadata,
         Userdata: userdata,
         ClearDataDisks: clearDataDisks,
+        SecondaryIpMaskLen: secondaryIpMaskLen,
     }
 }
 
@@ -190,6 +196,10 @@ func (r *RebuildInstanceRequest) SetUserdata(userdata []hpc.Userdata) {
 /* param clearDataDisks: 是否清空数据盘数据，false为不清空，true为清空，默认不清空。(Optional) */
 func (r *RebuildInstanceRequest) SetClearDataDisks(clearDataDisks bool) {
     r.ClearDataDisks = &clearDataDisks
+}
+/* param secondaryIpMaskLen: 指定分配的网段掩码长度, 支持24-28位掩码长度，不能与secondaryIpCount同时指定，不支持抢占重分配。该参数依赖子网的预分配网段。(Optional) */
+func (r *RebuildInstanceRequest) SetSecondaryIpMaskLen(secondaryIpMaskLen int) {
+    r.SecondaryIpMaskLen = &secondaryIpMaskLen
 }
 
 

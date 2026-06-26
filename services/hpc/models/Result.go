@@ -17,23 +17,20 @@
 package models
 
 
-type InstanceNetworkInterface struct {
+type Result struct {
 
-    /* 弹性网卡ID。 (Optional) */
-    NetworkInterfaceId string `json:"networkInterfaceId"`
+    /* 源节点 (Optional) */
+    SrcId string `json:"srcId"`
 
-    /* 弹性网卡MAC地址。 (Optional) */
-    MacAddress string `json:"macAddress"`
+    /* 目的节点 (Optional) */
+    DstId string `json:"dstId"`
 
-    /* 弹性网卡所属VPC的ID。 (Optional) */
-    VpcId string `json:"vpcId"`
+    /* 测试值 (Optional) */
+    Value float32 `json:"value"`
 
-    /* 子网ID。 (Optional) */
-    SubnetId string `json:"subnetId"`
+    /* success:成功，failed:失败 (Optional) */
+    State string `json:"state"`
 
-    /* 指定分配的网段掩码长度, 支持24-28位掩码长度，不能与secondaryIpCount同时指定，不支持抢占重分配。 (Optional) */
-    SecondaryIpMaskLen int `json:"secondaryIpMaskLen"`
-
-    /* 网卡主IP配置。 (Optional) */
-    PrimaryIp NetworkInterfacePrivateIp `json:"primaryIp"`
+    /* 原因 (Optional) */
+    Reason string `json:"reason"`
 }

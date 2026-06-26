@@ -17,23 +17,28 @@
 package models
 
 
-type InstanceNetworkInterface struct {
+type HardwareStaticCheckNodeSummary struct {
 
-    /* 弹性网卡ID。 (Optional) */
-    NetworkInterfaceId string `json:"networkInterfaceId"`
+    /* 节点名称。 (Optional) */
+    NodeName string `json:"nodeName"`
 
-    /* 弹性网卡MAC地址。 (Optional) */
-    MacAddress string `json:"macAddress"`
+    /* 实例ID。 (Optional) */
+    InstanceId string `json:"instanceId"`
 
-    /* 弹性网卡所属VPC的ID。 (Optional) */
-    VpcId string `json:"vpcId"`
+    /* 内网IP地址。 (Optional) */
+    PrivateIpAddress string `json:"privateIpAddress"`
 
-    /* 子网ID。 (Optional) */
-    SubnetId string `json:"subnetId"`
+    /* 公网IP地址。 (Optional) */
+    PublicIpAddress string `json:"publicIpAddress"`
 
-    /* 指定分配的网段掩码长度, 支持24-28位掩码长度，不能与secondaryIpCount同时指定，不支持抢占重分配。 (Optional) */
-    SecondaryIpMaskLen int `json:"secondaryIpMaskLen"`
+    /* 实例规格。 (Optional) */
+    InstanceType string `json:"instanceType"`
 
-    /* 网卡主IP配置。 (Optional) */
-    PrimaryIp NetworkInterfacePrivateIp `json:"primaryIp"`
+    /* 操作系统。 (Optional) */
+    OperatingSystem string `json:"operatingSystem"`
+
+    /* 检查结论。
+取值：`通过`、`不通过`。
+ (Optional) */
+    CheckResult string `json:"checkResult"`
 }

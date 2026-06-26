@@ -69,4 +69,11 @@ type InstanceSpec struct {
 
     /* 实例网络集群名称 (Optional) */
     HpcClusterName *string `json:"hpcClusterName"`
+
+    /* 资源组ID (Optional) */
+    ResourceGroupId *string `json:"resourceGroupId"`
+
+    /* 自定义实例标签。以key-value键值对形式指定，最多支持10个标签。key不能以 "jrn:" 或“jdc-”开头，仅支持中文、大/小写英文、数字及如下符号：`\_.,:\/=+-@`。
+ (Optional) */
+    UserTags []Tag `json:"userTags"`
 }

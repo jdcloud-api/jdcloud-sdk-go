@@ -17,23 +17,28 @@
 package models
 
 
-type InstanceNetworkInterface struct {
+type NetworkNcclTestSpec struct {
 
-    /* 弹性网卡ID。 (Optional) */
-    NetworkInterfaceId string `json:"networkInterfaceId"`
+    /* 可用区。  */
+    Az string `json:"az"`
 
-    /* 弹性网卡MAC地址。 (Optional) */
-    MacAddress string `json:"macAddress"`
-
-    /* 弹性网卡所属VPC的ID。 (Optional) */
+    /* VPC ID。  */
     VpcId string `json:"vpcId"`
 
-    /* 子网ID。 (Optional) */
-    SubnetId string `json:"subnetId"`
+    /* 通信模型。
+取值：`AllReduce`、`AllGather`、`AllToAll`、`Broadcast`。
+  */
+    CommunicationModel string `json:"communicationModel"`
 
-    /* 指定分配的网段掩码长度, 支持24-28位掩码长度，不能与secondaryIpCount同时指定，不支持抢占重分配。 (Optional) */
-    SecondaryIpMaskLen int `json:"secondaryIpMaskLen"`
+    /* GPU 数量，取值范围 [1, 8]。 (Optional) */
+    GpuCount *int `json:"gpuCount"`
 
-    /* 网卡主IP配置。 (Optional) */
-    PrimaryIp NetworkInterfacePrivateIp `json:"primaryIp"`
+    /* 端口号，取值范围 [5000, 65535]。 (Optional) */
+    Port *int `json:"port"`
+
+    /* 诊断范围类型。
+取值：`cluster`（整集群）、`instances`（指定实例）。
+当取值为 `cluster` 时，`instanceIds` 可为空。
+  */
+    ScopeType string `json:"scopeType"`
 }

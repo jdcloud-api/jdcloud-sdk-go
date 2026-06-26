@@ -17,26 +17,11 @@
 package models
 
 
-type RdmaNetworkInterface struct {
+type Tag struct {
 
-    /* 名称 (Optional) */
-    Name string `json:"name"`
+    /* 标签key。长度不能超过127字符，不能以 `jrn:` 或 `jdc-` 开头，仅支持中文、大/小写英文、数字及如下符号：`\_.,:\/=+-@`。 (Optional) */
+    Key *string `json:"key"`
 
-    /* rdma网卡ID (Optional) */
-    PortId string `json:"portId"`
-
-    /* RDMA网卡GUID，当RDMA网卡为IB类型时有意义。 (Optional) */
-    Guid string `json:"guid"`
-
-    /* RDMA网卡物理MAC地址。 (Optional) */
-    MacAddress string `json:"macAddress"`
-
-    /* RDMA网卡逻辑MAC地址。 (Optional) */
-    LogicMacAddress string `json:"logicMacAddress"`
-
-    /* RDMA网卡IP地址。 (Optional) */
-    IpAddress []string `json:"ipAddress"`
-
-    /* 网卡应用场景，取值：compute、storage。 (Optional) */
-    Scene string `json:"scene"`
+    /* 标签value。长度不能超过255字符，仅支持中文、大/小写英文、数字及如下符号：`\_.,:\/=+-@`。 (Optional) */
+    Value *string `json:"value"`
 }

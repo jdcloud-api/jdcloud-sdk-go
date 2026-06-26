@@ -17,23 +17,14 @@
 package models
 
 
-type InstanceNetworkInterface struct {
+type DiagnosticCompareDistributionItem struct {
 
-    /* 弹性网卡ID。 (Optional) */
-    NetworkInterfaceId string `json:"networkInterfaceId"`
+    /* 检测值。 (Optional) */
+    CheckValue string `json:"checkValue"`
 
-    /* 弹性网卡MAC地址。 (Optional) */
-    MacAddress string `json:"macAddress"`
+    /* 节点数量。 (Optional) */
+    Count int `json:"count"`
 
-    /* 弹性网卡所属VPC的ID。 (Optional) */
-    VpcId string `json:"vpcId"`
-
-    /* 子网ID。 (Optional) */
-    SubnetId string `json:"subnetId"`
-
-    /* 指定分配的网段掩码长度, 支持24-28位掩码长度，不能与secondaryIpCount同时指定，不支持抢占重分配。 (Optional) */
-    SecondaryIpMaskLen int `json:"secondaryIpMaskLen"`
-
-    /* 网卡主IP配置。 (Optional) */
-    PrimaryIp NetworkInterfacePrivateIp `json:"primaryIp"`
+    /* 实例ID列表。 (Optional) */
+    InstanceIds []string `json:"instanceIds"`
 }
