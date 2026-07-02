@@ -31,6 +31,9 @@ type ResourceUsageReq struct {
     /* 地域  */
     Region string `json:"region"`
 
+    /* az (Optional) */
+    Az string `json:"az"`
+
     /* 资源ID  */
     ResourceId string `json:"resourceId"`
 
@@ -45,4 +48,7 @@ type ResourceUsageReq struct {
 
     /* 计费项  */
     Formula []Formula `json:"formula"`
+
+    /* 子类用量数据统计，用于云存储分账账单 (Optional) */
+    SubList []SubFormula `json:"subList"`
 }

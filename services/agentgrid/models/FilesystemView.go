@@ -17,26 +17,8 @@
 package models
 
 
-type RdmaNetworkInterface struct {
+type FilesystemView struct {
 
-    /* 名称 (Optional) */
-    Name string `json:"name"`
-
-    /* rdma网卡ID (Optional) */
-    PortId string `json:"portId"`
-
-    /* RDMA网卡GUID，当RDMA网卡为IB类型时有意义。 (Optional) */
-    Guid string `json:"guid"`
-
-    /* RDMA网卡物理MAC地址。 (Optional) */
-    MacAddress string `json:"macAddress"`
-
-    /* RDMA网卡逻辑MAC地址。 (Optional) */
-    LogicMacAddress string `json:"logicMacAddress"`
-
-    /* RDMA网卡IP地址。 (Optional) */
-    IpAddress []string `json:"ipAddress"`
-
-    /* 网卡应用场景，取值：compute、storage。 (Optional) */
-    Scene string `json:"scene"`
+    /* OSS 访问点配置列表 (Optional) */
+    OssAccessPoints []OssAccessPointView `json:"ossAccessPoints"`
 }

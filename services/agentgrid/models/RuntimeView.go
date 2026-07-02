@@ -43,6 +43,9 @@ type RuntimeView struct {
     /* 访问 agent 的 APIKey (Optional) */
     ApiKey string `json:"apiKey"`
 
+    /* 绑定 IAM 角色名 (Optional) */
+    RoleName string `json:"roleName"`
+
     /* Runtime 创建时间 (Optional) */
     CreateTime string `json:"createTime"`
 

@@ -40,7 +40,7 @@ func NewHpcClient(credential *core.Credential) *HpcClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "hpc",
-            Revision:    "4.2.9",
+            Revision:    "4.3.11",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -207,6 +207,13 @@ func (c *HpcClient) EventRemoteWrite(request *hpc.EventRemoteWriteRequest) (*hpc
 }
 
 /* 创建诊断任务。
+
+## 接口说明
+- `diagnosticType` 与对应的 spec 必须一一匹配，且仅能填写一个 spec：
+  - `HardwareStaticCheck` → `hardwareStaticCheckSpec`
+  - `NetworkNcclTest` → `networkNcclTestSpec`
+  - `OneClickDiagnosis` → `oneClickDiagnosisSpec`
+- 当 spec 中 `scopeType` 为 `instances` 时，`instanceIds` 必填；当 `scopeType` 为 `cluster` 时，`instanceIds` 可为空。
  */
 func (c *HpcClient) CreateDiagnosticTask(request *hpc.CreateDiagnosticTaskRequest) (*hpc.CreateDiagnosticTaskResponse, error) {
     if request == nil {
@@ -399,6 +406,30 @@ func (c *HpcClient) CreateCluster(request *hpc.CreateClusterRequest) (*hpc.Creat
     return jdResp, err
 }
 
+/* 删除诊断任务。
+
+## 接口说明
+- 删除成功后，该任务将不再返回。
+ */
+func (c *HpcClient) DeleteDiagnosticTask(request *hpc.DeleteDiagnosticTaskRequest) (*hpc.DeleteDiagnosticTaskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &hpc.DeleteDiagnosticTaskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询用户可调度集群
  */
 func (c *HpcClient) DescribeAvailableClusters(request *hpc.DescribeAvailableClustersRequest) (*hpc.DescribeAvailableClustersResponse, error) {
@@ -421,6 +452,11 @@ func (c *HpcClient) DescribeAvailableClusters(request *hpc.DescribeAvailableClus
 }
 
 /* 查询单个诊断任务详情。
+
+## 接口说明
+- 返回结果中，仅与 `diagnosticType` 匹配的 spec 和 result 字段有值，其余为空。
+- 当 `diagnosticType` 为 `HardwareStaticCheck` 时，`hardwareStaticCheckResult.nodeSummary` 返回节点名称、实例ID、内网IP、公网IP、实例规格、操作系统和检查结论。
+- 当 `diagnosticType` 为 `OneClickDiagnosis` 时，`oneClickDiagnosisResult.instanceResults` 返回节点名称、实例ID、内网IP、公网IP、实例规格、操作系统、检查结论、诊断结果和失败原因。
  */
 func (c *HpcClient) DescribeDiagnosticResult(request *hpc.DescribeDiagnosticResultRequest) (*hpc.DescribeDiagnosticResultResponse, error) {
     if request == nil {
@@ -453,6 +489,26 @@ func (c *HpcClient) ModifyInstancePassword(request *hpc.ModifyInstancePasswordRe
     }
 
     jdResp := &hpc.ModifyInstancePasswordResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建hpc网络诊断 */
+func (c *HpcClient) CreateHpcNetDiagnose(request *hpc.CreateHpcNetDiagnoseRequest) (*hpc.CreateHpcNetDiagnoseResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &hpc.CreateHpcNetDiagnoseResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -512,10 +568,15 @@ func (c *HpcClient) DescribeInstanceTypes(request *hpc.DescribeInstanceTypesRequ
 }
 
 /* 查询诊断任务列表。
-支持按诊断类型筛选与分页。
+支持按筛选条件过滤与分页。
 
 ## 接口说明
-- 不支持通过 `state`、`diagnosticState`、`status` 进行筛选。
+- 通过 `filters` 进行条件筛选，支持以下过滤键(每个key均只支持一个value)：
+  - `diagnosticId`：诊断任务ID
+  - `diagnosticType`：诊断类型
+  - `clusterId`：集群ID
+  - `instanceId`：节点ID
+  - `diagnosticState`：诊断任务状态
  */
 func (c *HpcClient) DescribeDiagnosticResults(request *hpc.DescribeDiagnosticResultsRequest) (*hpc.DescribeDiagnosticResultsResponse, error) {
     if request == nil {
@@ -548,6 +609,26 @@ func (c *HpcClient) DeleteCluster(request *hpc.DeleteClusterRequest) (*hpc.Delet
     }
 
     jdResp := &hpc.DeleteClusterResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询hpc网络诊断 */
+func (c *HpcClient) DescribeHpcNetDiagnoses(request *hpc.DescribeHpcNetDiagnosesRequest) (*hpc.DescribeHpcNetDiagnosesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &hpc.DescribeHpcNetDiagnosesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -610,6 +691,26 @@ func (c *HpcClient) DescribeQuota(request *hpc.DescribeQuotaRequest) (*hpc.Descr
     }
 
     jdResp := &hpc.DescribeQuotaResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除hpc网络诊断 */
+func (c *HpcClient) DeleteHpcNetDiagnose(request *hpc.DeleteHpcNetDiagnoseRequest) (*hpc.DeleteHpcNetDiagnoseResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &hpc.DeleteHpcNetDiagnoseResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

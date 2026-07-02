@@ -17,29 +17,28 @@
 package models
 
 
-type AccountingRuleUpdate struct {
+type NetworkNcclTestSpec struct {
 
-    /* 站点 (Optional) */
-    Site int `json:"site"`
+    /* 可用区。  */
+    Az string `json:"az"`
 
-    /* pin (Optional) */
-    Pin string `json:"pin"`
+    /* VPC ID。  */
+    VpcId string `json:"vpcId"`
 
-    /* 出账类型  1：实时出账    2：定期出账 (Optional) */
-    OutAccountType int `json:"outAccountType"`
+    /* 通信模型。
+取值：`AllReduce`、`AllGather`、`AllToAll`、`Broadcast`。
+  */
+    CommunicationModel string `json:"communicationModel"`
 
-    /* 出账周期：限制范围 1-28 (Optional) */
-    OutAccountDay int `json:"outAccountDay"`
+    /* GPU 数量，取值范围 [1, 8]。 (Optional) */
+    GpuCount *int `json:"gpuCount"`
 
-    /* 定期出账  时间表达式 (Optional) */
-    TimeCron string `json:"timeCron"`
+    /* 端口号，取值范围 [5000, 65535]。 (Optional) */
+    Port *int `json:"port"`
 
-    /* 产品线 (Optional) */
-    AppCode string `json:"appCode"`
-
-    /* 出账对象类型 1：通用 2：用户 (Optional) */
-    TargetType int `json:"targetType"`
-
-    /* 产品 (Optional) */
-    ServiceCode string `json:"serviceCode"`
+    /* 诊断范围类型。
+取值：`cluster`（整集群）、`instances`（指定实例）。
+当取值为 `cluster` 时，`instanceIds` 可为空。
+  */
+    ScopeType string `json:"scopeType"`
 }

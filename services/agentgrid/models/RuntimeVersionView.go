@@ -49,6 +49,9 @@ type RuntimeVersionView struct {
     /* 环境变量信息 (Optional) */
     Envs []Env `json:"envs"`
 
+    /* 当前版本文件系统配置 (Optional) */
+    FileSystem FilesystemView `json:"fileSystem"`
+
     /* 当前版本创建时间 (Optional) */
     CreateTime string `json:"createTime"`
 }

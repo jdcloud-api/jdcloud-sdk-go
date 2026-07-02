@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    hpc "github.com/jdcloud-api/jdcloud-sdk-go/services/hpc/models"
     common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
 
@@ -36,6 +37,9 @@ type ExportInstancesDataRequest struct {
 
     /* 每页大小，startPage、endPage、pageSize都没有指定的情况下代表导出全部。 (Optional) */
     PageSize *int `json:"pageSize"`
+
+    /* Tag筛选条件 (Optional) */
+    Tags []hpc.TagFilter `json:"tags"`
 
     /* <b>filters 中支持使用以下关键字进行过滤</b>
 `instanceId`: 实例Id，精确匹配，支持多个
@@ -61,6 +65,8 @@ type ExportInstancesDataRequest struct {
 "status": 运行状态
 "instanceType": 实例规格
 "charge": 计费信息
+"tag": "标签"
+"resourceGroup": "资源组ID","资源组名称"
  (Optional) */
     Columns []string `json:"columns"`
 
@@ -93,6 +99,7 @@ func NewExportInstancesDataRequest(
  * param startPage: 要导出的起始页码，startPage、endPage、pageSize都没有指定的情况下代表导出全部 (Optional)
  * param endPage: 要导出的结束页码，startPage、endPage、pageSize都没有指定的情况下代表导出全部。 (Optional)
  * param pageSize: 每页大小，startPage、endPage、pageSize都没有指定的情况下代表导出全部。 (Optional)
+ * param tags: Tag筛选条件 (Optional)
  * param filters: <b>filters 中支持使用以下关键字进行过滤</b>
 `instanceId`: 实例Id，精确匹配，支持多个
 `instanceName`: 实例名称。支持单个模糊查询
@@ -115,6 +122,8 @@ func NewExportInstancesDataRequest(
 "status": 运行状态
 "instanceType": 实例规格
 "charge": 计费信息
+"tag": "标签"
+"resourceGroup": "资源组ID","资源组名称"
  (Optional)
  * param networkTopologyOrder: 排序方式，默认为按创建时间降序排序 (Optional)
  */
@@ -123,6 +132,7 @@ func NewExportInstancesDataRequestWithAllParams(
     startPage *int,
     endPage *int,
     pageSize *int,
+    tags []hpc.TagFilter,
     filters []common.Filter,
     columns []string,
     networkTopologyOrder *bool,
@@ -139,6 +149,7 @@ func NewExportInstancesDataRequestWithAllParams(
         StartPage: startPage,
         EndPage: endPage,
         PageSize: pageSize,
+        Tags: tags,
         Filters: filters,
         Columns: columns,
         NetworkTopologyOrder: networkTopologyOrder,
@@ -174,6 +185,10 @@ func (r *ExportInstancesDataRequest) SetEndPage(endPage int) {
 func (r *ExportInstancesDataRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
+/* param tags: Tag筛选条件(Optional) */
+func (r *ExportInstancesDataRequest) SetTags(tags []hpc.TagFilter) {
+    r.Tags = tags
+}
 /* param filters: <b>filters 中支持使用以下关键字进行过滤</b>
 `instanceId`: 实例Id，精确匹配，支持多个
 `instanceName`: 实例名称。支持单个模糊查询
@@ -199,6 +214,8 @@ func (r *ExportInstancesDataRequest) SetFilters(filters []common.Filter) {
 "status": 运行状态
 "instanceType": 实例规格
 "charge": 计费信息
+"tag": "标签"
+"resourceGroup": "资源组ID","资源组名称"
 (Optional) */
 func (r *ExportInstancesDataRequest) SetColumns(columns []string) {
     r.Columns = columns

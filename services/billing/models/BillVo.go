@@ -97,13 +97,13 @@ type BillVo struct {
     /* 站点，0:国内，不可修改 (Optional) */
     Site int `json:"site"`
 
-    /* 组织机构代码 (Optional) */
+    /* 组织机构代码  */
     Org string `json:"org"`
 
     /* 组织机构名称 (Optional) */
     OrgName string `json:"orgName"`
 
-    /* 合同编码 (Optional) */
+    /* 合同编码  */
     ContractNumber string `json:"contractNumber"`
 
     /* 交易类型 1、使用 2、 新购 3、续费 4、配置变更 5、退款，不可修改 (Optional) */

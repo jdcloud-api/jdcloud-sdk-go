@@ -28,19 +28,48 @@ type CreateDiagnosticTaskRequest struct {
     /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 诊断任务配置。  */
-    DiagnosticTaskSpec *hpc.DiagnosticTaskSpec `json:"diagnosticTaskSpec"`
+    /* 集群名称。  */
+    ClusterName string `json:"clusterName"`
+
+    /* 诊断目标实例ID列表。
+当 spec 中 `scopeType` 为 `instances` 时必填；当 `scopeType` 为 `cluster` 时可为空。
+ (Optional) */
+    InstanceIds []string `json:"instanceIds"`
+
+    /* 诊断类型。
+取值：`HardwareStaticCheck`、`NetworkNcclTest`、`OneClickDiagnosis`。
+  */
+    DiagnosticType string `json:"diagnosticType"`
+
+    /* 硬件静态检查配置。
+当 `diagnosticType` 为 `HardwareStaticCheck` 时必填。
+ (Optional) */
+    HardwareStaticCheckSpec *hpc.HardwareStaticCheckSpec `json:"hardwareStaticCheckSpec"`
+
+    /* NCCL 网络测试配置。
+当 `diagnosticType` 为 `NetworkNcclTest` 时必填。
+ (Optional) */
+    NetworkNcclTestSpec *hpc.NetworkNcclTestSpec `json:"networkNcclTestSpec"`
+
+    /* 一键诊断配置。
+当 `diagnosticType` 为 `OneClickDiagnosis` 时必填。
+ (Optional) */
+    OneClickDiagnosisSpec *hpc.OneClickDiagnosisSpec `json:"oneClickDiagnosisSpec"`
 }
 
 /*
  * param regionId: 地域ID。 (Required)
- * param diagnosticTaskSpec: 诊断任务配置。 (Required)
+ * param clusterName: 集群名称。 (Required)
+ * param diagnosticType: 诊断类型。
+取值：`HardwareStaticCheck`、`NetworkNcclTest`、`OneClickDiagnosis`。
+ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateDiagnosticTaskRequest(
     regionId string,
-    diagnosticTaskSpec *hpc.DiagnosticTaskSpec,
+    clusterName string,
+    diagnosticType string,
 ) *CreateDiagnosticTaskRequest {
 
 	return &CreateDiagnosticTaskRequest{
@@ -51,17 +80,38 @@ func NewCreateDiagnosticTaskRequest(
 			Version: "v1",
 		},
         RegionId: regionId,
-        DiagnosticTaskSpec: diagnosticTaskSpec,
+        ClusterName: clusterName,
+        DiagnosticType: diagnosticType,
 	}
 }
 
 /*
  * param regionId: 地域ID。 (Required)
- * param diagnosticTaskSpec: 诊断任务配置。 (Required)
+ * param clusterName: 集群名称。 (Required)
+ * param instanceIds: 诊断目标实例ID列表。
+当 spec 中 `scopeType` 为 `instances` 时必填；当 `scopeType` 为 `cluster` 时可为空。
+ (Optional)
+ * param diagnosticType: 诊断类型。
+取值：`HardwareStaticCheck`、`NetworkNcclTest`、`OneClickDiagnosis`。
+ (Required)
+ * param hardwareStaticCheckSpec: 硬件静态检查配置。
+当 `diagnosticType` 为 `HardwareStaticCheck` 时必填。
+ (Optional)
+ * param networkNcclTestSpec: NCCL 网络测试配置。
+当 `diagnosticType` 为 `NetworkNcclTest` 时必填。
+ (Optional)
+ * param oneClickDiagnosisSpec: 一键诊断配置。
+当 `diagnosticType` 为 `OneClickDiagnosis` 时必填。
+ (Optional)
  */
 func NewCreateDiagnosticTaskRequestWithAllParams(
     regionId string,
-    diagnosticTaskSpec *hpc.DiagnosticTaskSpec,
+    clusterName string,
+    instanceIds []string,
+    diagnosticType string,
+    hardwareStaticCheckSpec *hpc.HardwareStaticCheckSpec,
+    networkNcclTestSpec *hpc.NetworkNcclTestSpec,
+    oneClickDiagnosisSpec *hpc.OneClickDiagnosisSpec,
 ) *CreateDiagnosticTaskRequest {
 
     return &CreateDiagnosticTaskRequest{
@@ -72,7 +122,12 @@ func NewCreateDiagnosticTaskRequestWithAllParams(
             Version: "v1",
         },
         RegionId: regionId,
-        DiagnosticTaskSpec: diagnosticTaskSpec,
+        ClusterName: clusterName,
+        InstanceIds: instanceIds,
+        DiagnosticType: diagnosticType,
+        HardwareStaticCheckSpec: hardwareStaticCheckSpec,
+        NetworkNcclTestSpec: networkNcclTestSpec,
+        OneClickDiagnosisSpec: oneClickDiagnosisSpec,
     }
 }
 
@@ -93,9 +148,39 @@ func NewCreateDiagnosticTaskRequestWithoutParam() *CreateDiagnosticTaskRequest {
 func (r *CreateDiagnosticTaskRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-/* param diagnosticTaskSpec: 诊断任务配置。(Required) */
-func (r *CreateDiagnosticTaskRequest) SetDiagnosticTaskSpec(diagnosticTaskSpec *hpc.DiagnosticTaskSpec) {
-    r.DiagnosticTaskSpec = diagnosticTaskSpec
+/* param clusterName: 集群名称。(Required) */
+func (r *CreateDiagnosticTaskRequest) SetClusterName(clusterName string) {
+    r.ClusterName = clusterName
+}
+/* param instanceIds: 诊断目标实例ID列表。
+当 spec 中 `scopeType` 为 `instances` 时必填；当 `scopeType` 为 `cluster` 时可为空。
+(Optional) */
+func (r *CreateDiagnosticTaskRequest) SetInstanceIds(instanceIds []string) {
+    r.InstanceIds = instanceIds
+}
+/* param diagnosticType: 诊断类型。
+取值：`HardwareStaticCheck`、`NetworkNcclTest`、`OneClickDiagnosis`。
+(Required) */
+func (r *CreateDiagnosticTaskRequest) SetDiagnosticType(diagnosticType string) {
+    r.DiagnosticType = diagnosticType
+}
+/* param hardwareStaticCheckSpec: 硬件静态检查配置。
+当 `diagnosticType` 为 `HardwareStaticCheck` 时必填。
+(Optional) */
+func (r *CreateDiagnosticTaskRequest) SetHardwareStaticCheckSpec(hardwareStaticCheckSpec *hpc.HardwareStaticCheckSpec) {
+    r.HardwareStaticCheckSpec = hardwareStaticCheckSpec
+}
+/* param networkNcclTestSpec: NCCL 网络测试配置。
+当 `diagnosticType` 为 `NetworkNcclTest` 时必填。
+(Optional) */
+func (r *CreateDiagnosticTaskRequest) SetNetworkNcclTestSpec(networkNcclTestSpec *hpc.NetworkNcclTestSpec) {
+    r.NetworkNcclTestSpec = networkNcclTestSpec
+}
+/* param oneClickDiagnosisSpec: 一键诊断配置。
+当 `diagnosticType` 为 `OneClickDiagnosis` 时必填。
+(Optional) */
+func (r *CreateDiagnosticTaskRequest) SetOneClickDiagnosisSpec(oneClickDiagnosisSpec *hpc.OneClickDiagnosisSpec) {
+    r.OneClickDiagnosisSpec = oneClickDiagnosisSpec
 }
 
 
@@ -112,5 +197,5 @@ type CreateDiagnosticTaskResponse struct {
 }
 
 type CreateDiagnosticTaskResult struct {
-    CreateDiagnosticTaskResult hpc.CreateDiagnosticTaskResult `json:"createDiagnosticTaskResult"`
+    DiagnosticId string `json:"diagnosticId"`
 }

@@ -17,26 +17,28 @@
 package models
 
 
-type DiagnosticResult struct {
+type HardwareStaticCheckNodeSummary struct {
 
-    /* 诊断任务ID。 (Optional) */
-    DiagnosticId string `json:"diagnosticId"`
+    /* 节点名称。 (Optional) */
+    NodeName string `json:"nodeName"`
 
-    /* 诊断目标节点ID列表。 (Optional) */
-    NodeIds []string `json:"nodeIds"`
+    /* 实例ID。 (Optional) */
+    InstanceId string `json:"instanceId"`
 
-    /* 集群ID。 (Optional) */
-    ClusterId string `json:"clusterId"`
+    /* 内网IP地址。 (Optional) */
+    PrivateIpAddress string `json:"privateIpAddress"`
 
-    /* 诊断类型。 (Optional) */
-    DiagnosticType string `json:"diagnosticType"`
+    /* 公网IP地址。 (Optional) */
+    PublicIpAddress string `json:"publicIpAddress"`
 
-    /* 诊断任务状态。 (Optional) */
-    DiagnosticState string `json:"diagnosticState"`
+    /* 实例规格。 (Optional) */
+    InstanceType string `json:"instanceType"`
 
-    /* 创建时间，RFC3339 格式（UTC+8）。 (Optional) */
-    CreatedTime string `json:"createdTime"`
+    /* 操作系统。 (Optional) */
+    OperatingSystem string `json:"operatingSystem"`
 
-    /* 结束时间，RFC3339 格式（UTC+8）。 (Optional) */
-    EndTime string `json:"endTime"`
+    /* 检查结论。
+取值：`通过`、`不通过`。
+ (Optional) */
+    CheckResult string `json:"checkResult"`
 }

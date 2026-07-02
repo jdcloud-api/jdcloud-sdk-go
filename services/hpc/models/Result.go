@@ -17,29 +17,20 @@
 package models
 
 
-type AccountingRuleUpdate struct {
+type Result struct {
 
-    /* 站点 (Optional) */
-    Site int `json:"site"`
+    /* 源节点 (Optional) */
+    SrcId string `json:"srcId"`
 
-    /* pin (Optional) */
-    Pin string `json:"pin"`
+    /* 目的节点 (Optional) */
+    DstId string `json:"dstId"`
 
-    /* 出账类型  1：实时出账    2：定期出账 (Optional) */
-    OutAccountType int `json:"outAccountType"`
+    /* 测试值 (Optional) */
+    Value float32 `json:"value"`
 
-    /* 出账周期：限制范围 1-28 (Optional) */
-    OutAccountDay int `json:"outAccountDay"`
+    /* success:成功，failed:失败 (Optional) */
+    State string `json:"state"`
 
-    /* 定期出账  时间表达式 (Optional) */
-    TimeCron string `json:"timeCron"`
-
-    /* 产品线 (Optional) */
-    AppCode string `json:"appCode"`
-
-    /* 出账对象类型 1：通用 2：用户 (Optional) */
-    TargetType int `json:"targetType"`
-
-    /* 产品 (Optional) */
-    ServiceCode string `json:"serviceCode"`
+    /* 原因 (Optional) */
+    Reason string `json:"reason"`
 }

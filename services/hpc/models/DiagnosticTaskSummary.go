@@ -17,7 +17,7 @@
 package models
 
 
-type DiagnosticResultDetail struct {
+type DiagnosticTaskSummary struct {
 
     /* 诊断任务ID。 (Optional) */
     DiagnosticId string `json:"diagnosticId"`
@@ -48,7 +48,7 @@ type DiagnosticResultDetail struct {
     DiagnosticType string `json:"diagnosticType"`
 
     /* 诊断任务状态。
-取值：`submitted`、`running`、`success`、`failed`、`submit_failed`。
+取值：`running`、`success`、`failed`。
  (Optional) */
     DiagnosticState string `json:"diagnosticState"`
 
@@ -57,27 +57,18 @@ type DiagnosticResultDetail struct {
  (Optional) */
     DiagnosticStateDisplay string `json:"diagnosticStateDisplay"`
 
-    /* 硬件静态检查配置（当 `diagnosticType` 为 `HardwareStaticCheck` 时返回）。 (Optional) */
-    HardwareStaticCheckSpec HardwareStaticCheckSpec `json:"hardwareStaticCheckSpec"`
-
-    /* 硬件静态检查结果（当 `diagnosticType` 为 `HardwareStaticCheck` 时返回）。 (Optional) */
-    HardwareStaticCheckResult HardwareStaticCheckResult `json:"hardwareStaticCheckResult"`
-
-    /* NCCL 网络测试配置（当 `diagnosticType` 为 `NetworkNcclTest` 时返回）。 (Optional) */
-    NetworkNcclTestSpec NetworkNcclTestSpec `json:"networkNcclTestSpec"`
-
-    /* NCCL 网络测试结果（当 `diagnosticType` 为 `NetworkNcclTest` 时返回）。 (Optional) */
-    NetworkNcclTestResult NetworkNcclTestResult `json:"networkNcclTestResult"`
-
-    /* 一键诊断配置（当 `diagnosticType` 为 `OneClickDiagnosis` 时返回）。 (Optional) */
-    OneClickDiagnosisSpec OneClickDiagnosisSpec `json:"oneClickDiagnosisSpec"`
-
-    /* 一键诊断结果（当 `diagnosticType` 为 `OneClickDiagnosis` 时返回）。 (Optional) */
-    OneClickDiagnosisResult OneClickDiagnosisResult `json:"oneClickDiagnosisResult"`
-
     /* 创建时间，RFC3339 格式（UTC+8）。 (Optional) */
     CreatedTime string `json:"createdTime"`
 
     /* 结束时间，RFC3339 格式（UTC+8）。 (Optional) */
     EndTime string `json:"endTime"`
+
+    /* 硬件静态检查配置（当 `diagnosticType` 为 `HardwareStaticCheck` 时返回）。 (Optional) */
+    HardwareStaticCheckSpec HardwareStaticCheckSpec `json:"hardwareStaticCheckSpec"`
+
+    /* NCCL 网络测试配置（当 `diagnosticType` 为 `NetworkNcclTest` 时返回）。 (Optional) */
+    NetworkNcclTestSpec NetworkNcclTestSpec `json:"networkNcclTestSpec"`
+
+    /* 一键诊断配置（当 `diagnosticType` 为 `OneClickDiagnosis` 时返回）。 (Optional) */
+    OneClickDiagnosisSpec OneClickDiagnosisSpec `json:"oneClickDiagnosisSpec"`
 }

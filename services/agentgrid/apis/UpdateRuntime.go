@@ -49,18 +49,24 @@ type UpdateRuntimeRequest struct {
     /* Runtime 可承载的最大 Session 数量，取值范围1～10，默认值为 10。 (Optional) */
     MaxSession *int `json:"maxSession"`
 
+    /* runtime 绑定的实例角色 (Optional) */
+    RoleName *string `json:"roleName"`
+
     /* Runtime 环境变量配置，以 `key-value` 键值对形式指定，单次请求最多支持 50 组。
 
-## 参数说明
-- 不传该参数时，保留当前生效版本中的环境变量配置。
-- 当 `key` 以连字符 `-` 结尾时，表示删除旧版本中对应 `key` 的环境变量。
-- 当 `key` 不以连字符 `-` 结尾时，表示新增或更新该环境变量。
-- 本次调用后，环境变量不能超过50组
-- `key` 长度上限为 256 个字符。
+参数说明
+不传该参数时，保留当前生效版本中的环境变量配置。
+当 `key` 以连字符 `-` 结尾时，表示删除旧版本中对应 `key` 的环境变量。
+当 `key` 不以连字符 `-` 结尾时，表示新增或更新该环境变量。
+本次调用后，环境变量不能超过50组
+`key` 长度上限为 256 个字符。
  (Optional) */
     Envs []agentgrid.EnvConfiguration `json:"envs"`
 
-    /* Runtime 支持的协议类型，当前仅支持 HTTP。 (Optional) */
+    /* Runtime 文件系统配置。不传该参数时，保留当前生效版本中的文件系统配置；传入该参数时，将用本次配置替换新版本中的文件系统配置。 (Optional) */
+    FilesystemConfiguration *agentgrid.FilesystemConfiguration `json:"filesystemConfiguration"`
+
+    /* Runtime 支持的协议类型，当前支持http、mcp、a2a。 (Optional) */
     Protocol *string `json:"protocol"`
 
     /* Runtime 生命周期配置。 (Optional) */
@@ -99,16 +105,18 @@ func NewUpdateRuntimeRequest(
  * param networkConfiguration: Runtime 网络配置。 (Optional)
  * param warmSession: Runtime 预热 Session 数量，进行预热后，将会提前生成对应数量的 Session 实例，可以大幅减少会话初次启动时间。取值范围1～10，默认值为 1，且应小于等于 `maxSession`。 (Optional)
  * param maxSession: Runtime 可承载的最大 Session 数量，取值范围1～10，默认值为 10。 (Optional)
+ * param roleName: runtime 绑定的实例角色 (Optional)
  * param envs: Runtime 环境变量配置，以 `key-value` 键值对形式指定，单次请求最多支持 50 组。
 
-## 参数说明
-- 不传该参数时，保留当前生效版本中的环境变量配置。
-- 当 `key` 以连字符 `-` 结尾时，表示删除旧版本中对应 `key` 的环境变量。
-- 当 `key` 不以连字符 `-` 结尾时，表示新增或更新该环境变量。
-- 本次调用后，环境变量不能超过50组
-- `key` 长度上限为 256 个字符。
+参数说明
+不传该参数时，保留当前生效版本中的环境变量配置。
+当 `key` 以连字符 `-` 结尾时，表示删除旧版本中对应 `key` 的环境变量。
+当 `key` 不以连字符 `-` 结尾时，表示新增或更新该环境变量。
+本次调用后，环境变量不能超过50组
+`key` 长度上限为 256 个字符。
  (Optional)
- * param protocol: Runtime 支持的协议类型，当前仅支持 HTTP。 (Optional)
+ * param filesystemConfiguration: Runtime 文件系统配置。不传该参数时，保留当前生效版本中的文件系统配置；传入该参数时，将用本次配置替换新版本中的文件系统配置。 (Optional)
+ * param protocol: Runtime 支持的协议类型，当前支持http、mcp、a2a。 (Optional)
  * param lifecycleConfiguration: Runtime 生命周期配置。 (Optional)
  */
 func NewUpdateRuntimeRequestWithAllParams(
@@ -120,7 +128,9 @@ func NewUpdateRuntimeRequestWithAllParams(
     networkConfiguration *agentgrid.NetworkConfiguration,
     warmSession *int,
     maxSession *int,
+    roleName *string,
     envs []agentgrid.EnvConfiguration,
+    filesystemConfiguration *agentgrid.FilesystemConfiguration,
     protocol *string,
     lifecycleConfiguration *agentgrid.LifecycleConfiguration,
 ) *UpdateRuntimeRequest {
@@ -140,7 +150,9 @@ func NewUpdateRuntimeRequestWithAllParams(
         NetworkConfiguration: networkConfiguration,
         WarmSession: warmSession,
         MaxSession: maxSession,
+        RoleName: roleName,
         Envs: envs,
+        FilesystemConfiguration: filesystemConfiguration,
         Protocol: protocol,
         LifecycleConfiguration: lifecycleConfiguration,
     }
@@ -191,19 +203,27 @@ func (r *UpdateRuntimeRequest) SetWarmSession(warmSession int) {
 func (r *UpdateRuntimeRequest) SetMaxSession(maxSession int) {
     r.MaxSession = &maxSession
 }
+/* param roleName: runtime 绑定的实例角色(Optional) */
+func (r *UpdateRuntimeRequest) SetRoleName(roleName string) {
+    r.RoleName = &roleName
+}
 /* param envs: Runtime 环境变量配置，以 `key-value` 键值对形式指定，单次请求最多支持 50 组。
 
-## 参数说明
-- 不传该参数时，保留当前生效版本中的环境变量配置。
-- 当 `key` 以连字符 `-` 结尾时，表示删除旧版本中对应 `key` 的环境变量。
-- 当 `key` 不以连字符 `-` 结尾时，表示新增或更新该环境变量。
-- 本次调用后，环境变量不能超过50组
-- `key` 长度上限为 256 个字符。
+参数说明
+不传该参数时，保留当前生效版本中的环境变量配置。
+当 `key` 以连字符 `-` 结尾时，表示删除旧版本中对应 `key` 的环境变量。
+当 `key` 不以连字符 `-` 结尾时，表示新增或更新该环境变量。
+本次调用后，环境变量不能超过50组
+`key` 长度上限为 256 个字符。
 (Optional) */
 func (r *UpdateRuntimeRequest) SetEnvs(envs []agentgrid.EnvConfiguration) {
     r.Envs = envs
 }
-/* param protocol: Runtime 支持的协议类型，当前仅支持 HTTP。(Optional) */
+/* param filesystemConfiguration: Runtime 文件系统配置。不传该参数时，保留当前生效版本中的文件系统配置；传入该参数时，将用本次配置替换新版本中的文件系统配置。(Optional) */
+func (r *UpdateRuntimeRequest) SetFilesystemConfiguration(filesystemConfiguration *agentgrid.FilesystemConfiguration) {
+    r.FilesystemConfiguration = filesystemConfiguration
+}
+/* param protocol: Runtime 支持的协议类型，当前支持http、mcp、a2a。(Optional) */
 func (r *UpdateRuntimeRequest) SetProtocol(protocol string) {
     r.Protocol = &protocol
 }
@@ -226,4 +246,6 @@ type UpdateRuntimeResponse struct {
 }
 
 type UpdateRuntimeResult struct {
+    RuntimeId string `json:"runtimeId"`
+    RuntimeVersion string `json:"runtimeVersion"`
 }

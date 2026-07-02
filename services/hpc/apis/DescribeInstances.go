@@ -29,6 +29,9 @@ type DescribeInstancesRequest struct {
     /* 地域ID。  */
     RegionId string `json:"regionId"`
 
+    /* Tag筛选条件。 (Optional) */
+    Tags []hpc.TagFilter `json:"tags"`
+
     /* <b>filters 中支持使用以下关键字进行过滤</b>
 `instanceId`: 实例ID。支持精确批量
 `instanceName`: 实例名称。支持单个模糊查询
@@ -73,6 +76,7 @@ func NewDescribeInstancesRequest(
 
 /*
  * param regionId: 地域ID。 (Required)
+ * param tags: Tag筛选条件。 (Optional)
  * param filters: <b>filters 中支持使用以下关键字进行过滤</b>
 `instanceId`: 实例ID。支持精确批量
 `instanceName`: 实例名称。支持单个模糊查询
@@ -91,6 +95,7 @@ func NewDescribeInstancesRequest(
  */
 func NewDescribeInstancesRequestWithAllParams(
     regionId string,
+    tags []hpc.TagFilter,
     filters []common.Filter,
     pageNumber *int,
     pageSize *int,
@@ -104,6 +109,7 @@ func NewDescribeInstancesRequestWithAllParams(
             Version: "v1",
         },
         RegionId: regionId,
+        Tags: tags,
         Filters: filters,
         PageNumber: pageNumber,
         PageSize: pageSize,
@@ -126,6 +132,10 @@ func NewDescribeInstancesRequestWithoutParam() *DescribeInstancesRequest {
 /* param regionId: 地域ID。(Required) */
 func (r *DescribeInstancesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
+}
+/* param tags: Tag筛选条件。(Optional) */
+func (r *DescribeInstancesRequest) SetTags(tags []hpc.TagFilter) {
+    r.Tags = tags
 }
 /* param filters: <b>filters 中支持使用以下关键字进行过滤</b>
 `instanceId`: 实例ID。支持精确批量

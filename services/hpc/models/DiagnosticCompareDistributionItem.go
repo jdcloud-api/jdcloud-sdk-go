@@ -17,11 +17,14 @@
 package models
 
 
-type CreateDiagnosticTaskResult struct {
+type DiagnosticCompareDistributionItem struct {
 
-    /* 诊断任务ID。 (Optional) */
-    DiagnosticId string `json:"diagnosticId"`
+    /* 检测值。 (Optional) */
+    CheckValue string `json:"checkValue"`
 
-    /* 任务状态。创建成功后返回 `submitted`。 (Optional) */
-    State string `json:"state"`
+    /* 节点数量。 (Optional) */
+    Count int `json:"count"`
+
+    /* 实例ID列表。 (Optional) */
+    InstanceIds []string `json:"instanceIds"`
 }

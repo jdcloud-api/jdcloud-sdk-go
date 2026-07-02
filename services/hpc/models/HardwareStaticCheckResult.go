@@ -17,26 +17,18 @@
 package models
 
 
-type RdmaNetworkInterface struct {
+type HardwareStaticCheckResult struct {
 
-    /* 名称 (Optional) */
-    Name string `json:"name"`
+    /* 对比项列表。 (Optional) */
+    CompareItems []DiagnosticCompareItem `json:"compareItems"`
 
-    /* rdma网卡ID (Optional) */
-    PortId string `json:"portId"`
+    /* 按节点分组的检查结果。
+key 为实例ID，value 为该实例的检查结果数组。
+ (Optional) */
+    NodeResults interface{} `json:"nodeResults"`
 
-    /* RDMA网卡GUID，当RDMA网卡为IB类型时有意义。 (Optional) */
-    Guid string `json:"guid"`
-
-    /* RDMA网卡物理MAC地址。 (Optional) */
-    MacAddress string `json:"macAddress"`
-
-    /* RDMA网卡逻辑MAC地址。 (Optional) */
-    LogicMacAddress string `json:"logicMacAddress"`
-
-    /* RDMA网卡IP地址。 (Optional) */
-    IpAddress []string `json:"ipAddress"`
-
-    /* 网卡应用场景，取值：compute、storage。 (Optional) */
-    Scene string `json:"scene"`
+    /* 按节点分组的摘要信息。
+key 为实例ID，value 为该实例的摘要信息。
+ (Optional) */
+    NodeSummary interface{} `json:"nodeSummary"`
 }

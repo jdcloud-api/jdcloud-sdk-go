@@ -17,23 +17,14 @@
 package models
 
 
-type InstanceNetworkInterface struct {
+type OssAccessPointView struct {
 
-    /* 弹性网卡ID。 (Optional) */
-    NetworkInterfaceId string `json:"networkInterfaceId"`
+    /* OSS Bucket 名称 (Optional) */
+    BucketName string `json:"bucketName"`
 
-    /* 弹性网卡MAC地址。 (Optional) */
-    MacAddress string `json:"macAddress"`
+    /* OSS Bucket 内的文件夹路径 (Optional) */
+    BucketPath string `json:"bucketPath"`
 
-    /* 弹性网卡所属VPC的ID。 (Optional) */
-    VpcId string `json:"vpcId"`
-
-    /* 子网ID。 (Optional) */
-    SubnetId string `json:"subnetId"`
-
-    /* 指定分配的网段掩码长度, 支持24-28位掩码长度，不能与secondaryIpCount同时指定，不支持抢占重分配。 (Optional) */
-    SecondaryIpMaskLen int `json:"secondaryIpMaskLen"`
-
-    /* 网卡主IP配置。 (Optional) */
-    PrimaryIp NetworkInterfacePrivateIp `json:"primaryIp"`
+    /* 挂载在 Runtime 内的路径 (Optional) */
+    MountPath string `json:"mountPath"`
 }

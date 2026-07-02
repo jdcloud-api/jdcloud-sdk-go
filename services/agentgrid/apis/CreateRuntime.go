@@ -52,10 +52,16 @@ type CreateRuntimeRequest struct {
     /* Runtime 网络配置。  */
     NetworkConfiguration *agentgrid.NetworkConfiguration `json:"networkConfiguration"`
 
+    /* 绑定 IAM 角色名。  */
+    RoleName string `json:"roleName"`
+
     /* Runtime 环境变量配置，最多 50 组。 (Optional) */
     Envs []agentgrid.EnvConfiguration `json:"envs"`
 
-    /* Runtime 支持的协议类型。当前支持 HTTP 。 (Optional) */
+    /* Runtime 文件系统配置。 (Optional) */
+    FilesystemConfiguration *agentgrid.FilesystemConfiguration `json:"filesystemConfiguration"`
+
+    /* Runtime 支持的协议类型。当前支持http、mcp、a2a 。 (Optional) */
     Protocol *string `json:"protocol"`
 
     /* 用于保证请求幂等性。 (Optional) */
@@ -68,6 +74,7 @@ type CreateRuntimeRequest struct {
  * param artifactConfiguration: Runtime 制品配置，当前支持通过镜像导入 (Required)
  * param authorizerConfiguration: Runtime 鉴权配置。 (Required)
  * param networkConfiguration: Runtime 网络配置。 (Required)
+ * param roleName: 绑定 IAM 角色名。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -77,6 +84,7 @@ func NewCreateRuntimeRequest(
     artifactConfiguration *agentgrid.ArtifactConfiguration,
     authorizerConfiguration *agentgrid.AuthorizerConfiguration,
     networkConfiguration *agentgrid.NetworkConfiguration,
+    roleName string,
 ) *CreateRuntimeRequest {
 
 	return &CreateRuntimeRequest{
@@ -91,6 +99,7 @@ func NewCreateRuntimeRequest(
         ArtifactConfiguration: artifactConfiguration,
         AuthorizerConfiguration: authorizerConfiguration,
         NetworkConfiguration: networkConfiguration,
+        RoleName: roleName,
 	}
 }
 
@@ -104,8 +113,10 @@ func NewCreateRuntimeRequest(
  * param authorizerConfiguration: Runtime 鉴权配置。 (Required)
  * param lifecycleConfiguration: Runtime 生命周期配置。 (Optional)
  * param networkConfiguration: Runtime 网络配置。 (Required)
+ * param roleName: 绑定 IAM 角色名。 (Required)
  * param envs: Runtime 环境变量配置，最多 50 组。 (Optional)
- * param protocol: Runtime 支持的协议类型。当前支持 HTTP 。 (Optional)
+ * param filesystemConfiguration: Runtime 文件系统配置。 (Optional)
+ * param protocol: Runtime 支持的协议类型。当前支持http、mcp、a2a 。 (Optional)
  * param clientToken: 用于保证请求幂等性。 (Optional)
  */
 func NewCreateRuntimeRequestWithAllParams(
@@ -118,7 +129,9 @@ func NewCreateRuntimeRequestWithAllParams(
     authorizerConfiguration *agentgrid.AuthorizerConfiguration,
     lifecycleConfiguration *agentgrid.LifecycleConfiguration,
     networkConfiguration *agentgrid.NetworkConfiguration,
+    roleName string,
     envs []agentgrid.EnvConfiguration,
+    filesystemConfiguration *agentgrid.FilesystemConfiguration,
     protocol *string,
     clientToken *string,
 ) *CreateRuntimeRequest {
@@ -139,7 +152,9 @@ func NewCreateRuntimeRequestWithAllParams(
         AuthorizerConfiguration: authorizerConfiguration,
         LifecycleConfiguration: lifecycleConfiguration,
         NetworkConfiguration: networkConfiguration,
+        RoleName: roleName,
         Envs: envs,
+        FilesystemConfiguration: filesystemConfiguration,
         Protocol: protocol,
         ClientToken: clientToken,
     }
@@ -194,11 +209,19 @@ func (r *CreateRuntimeRequest) SetLifecycleConfiguration(lifecycleConfiguration 
 func (r *CreateRuntimeRequest) SetNetworkConfiguration(networkConfiguration *agentgrid.NetworkConfiguration) {
     r.NetworkConfiguration = networkConfiguration
 }
+/* param roleName: 绑定 IAM 角色名。(Required) */
+func (r *CreateRuntimeRequest) SetRoleName(roleName string) {
+    r.RoleName = roleName
+}
 /* param envs: Runtime 环境变量配置，最多 50 组。(Optional) */
 func (r *CreateRuntimeRequest) SetEnvs(envs []agentgrid.EnvConfiguration) {
     r.Envs = envs
 }
-/* param protocol: Runtime 支持的协议类型。当前支持 HTTP 。(Optional) */
+/* param filesystemConfiguration: Runtime 文件系统配置。(Optional) */
+func (r *CreateRuntimeRequest) SetFilesystemConfiguration(filesystemConfiguration *agentgrid.FilesystemConfiguration) {
+    r.FilesystemConfiguration = filesystemConfiguration
+}
+/* param protocol: Runtime 支持的协议类型。当前支持http、mcp、a2a 。(Optional) */
 func (r *CreateRuntimeRequest) SetProtocol(protocol string) {
     r.Protocol = &protocol
 }

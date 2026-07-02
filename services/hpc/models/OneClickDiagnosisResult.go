@@ -17,23 +17,17 @@
 package models
 
 
-type InstanceNetworkInterface struct {
+type OneClickDiagnosisResult struct {
 
-    /* 弹性网卡ID。 (Optional) */
-    NetworkInterfaceId string `json:"networkInterfaceId"`
+    /* 对比项列表。 (Optional) */
+    CompareItems []DiagnosticCompareItem `json:"compareItems"`
 
-    /* 弹性网卡MAC地址。 (Optional) */
-    MacAddress string `json:"macAddress"`
+    /* 各实例诊断结果。 (Optional) */
+    InstanceResults []OneClickDiagnosisInstanceResult `json:"instanceResults"`
 
-    /* 弹性网卡所属VPC的ID。 (Optional) */
-    VpcId string `json:"vpcId"`
+    /* 整体失败原因。 (Optional) */
+    FailureReason string `json:"failureReason"`
 
-    /* 子网ID。 (Optional) */
-    SubnetId string `json:"subnetId"`
-
-    /* 指定分配的网段掩码长度, 支持24-28位掩码长度，不能与secondaryIpCount同时指定，不支持抢占重分配。 (Optional) */
-    SecondaryIpMaskLen int `json:"secondaryIpMaskLen"`
-
-    /* 网卡主IP配置。 (Optional) */
-    PrimaryIp NetworkInterfacePrivateIp `json:"primaryIp"`
+    /* 汇总信息，结构不固定。 (Optional) */
+    Summary interface{} `json:"summary"`
 }

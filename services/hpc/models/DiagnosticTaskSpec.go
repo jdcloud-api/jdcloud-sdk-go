@@ -19,17 +19,31 @@ package models
 
 type DiagnosticTaskSpec struct {
 
-    /* 集群ID。 (Optional) */
-    ClusterId *string `json:"clusterId"`
+    /* 集群名称。  */
+    ClusterName string `json:"clusterName"`
 
-    /* 诊断目标节点ID列表。  */
-    NodeIds []string `json:"nodeIds"`
+    /* 诊断目标实例ID列表。
+当 `scopeType` 为 `instances` 时必填；当 `scopeType` 为 `cluster` 时可为空。
+ (Optional) */
+    InstanceIds []string `json:"instanceIds"`
 
     /* 诊断类型。
-当前支持：`HPCHealthCheck`。
+取值：`HardwareStaticCheck`、`NetworkNcclTest`、`OneClickDiagnosis`。
   */
     DiagnosticType string `json:"diagnosticType"`
 
-    /* 诊断参数。参数结构由 `diagnosticType` 决定。 (Optional) */
-    Params *interface{} `json:"params"`
+    /* 硬件静态检查配置。
+当 `diagnosticType` 为 `HardwareStaticCheck` 时必填。
+ (Optional) */
+    HardwareStaticCheckSpec HardwareStaticCheckSpec `json:"hardwareStaticCheckSpec"`
+
+    /* NCCL 网络测试配置。
+当 `diagnosticType` 为 `NetworkNcclTest` 时必填。
+ (Optional) */
+    NetworkNcclTestSpec NetworkNcclTestSpec `json:"networkNcclTestSpec"`
+
+    /* 一键诊断配置。
+当 `diagnosticType` 为 `OneClickDiagnosis` 时必填。
+ (Optional) */
+    OneClickDiagnosisSpec OneClickDiagnosisSpec `json:"oneClickDiagnosisSpec"`
 }

@@ -56,6 +56,12 @@ type Instance struct {
     /* 实例规格 (Optional) */
     InstanceType string `json:"instanceType"`
 
+    /*  (Optional) */
+    Tags []Tag `json:"tags"`
+
+    /* 资源组ID (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
+
     /* 系统盘配置。 (Optional) */
     SystemDisk vm.InstanceDiskAttachment `json:"systemDisk"`
 
