@@ -24,4 +24,16 @@ type ResourceOrderSnapshotQueryCondition struct {
 
     /* 变配明细（1-升配，2-降配，3-调整配置,4-续费,5-续费升配,6-续费降配,7-配置转包年包月,10:包年包月转配置 11:包年包月转用量 12:配置转用量 13:用量转配置） (Optional) */
     ProcessTypes []int `json:"processTypes"`
+
+    /* 操作者类型：0-用户；1-管理员（运营）；-1 系统 (Optional) */
+    OperatorType int `json:"operatorType"`
+
+    /* 操作类型 1:创建 2:续费 3:升配 4:删除 5:启服 6:停服 7:无理由退款 (Optional) */
+    OpType int `json:"opType"`
+
+    /* 起始时间 (Optional) */
+    StartTime string `json:"startTime"`
+
+    /* 结束时间 (Optional) */
+    EndTime string `json:"endTime"`
 }

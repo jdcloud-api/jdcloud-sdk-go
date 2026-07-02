@@ -33,4 +33,13 @@ type AccountingRuleUpdate struct {
 
     /* 定期出账  时间表达式 (Optional) */
     TimeCron string `json:"timeCron"`
+
+    /* 产品线 (Optional) */
+    AppCode string `json:"appCode"`
+
+    /* 出账对象类型 1：通用 2：用户 (Optional) */
+    TargetType int `json:"targetType"`
+
+    /* 产品 (Optional) */
+    ServiceCode string `json:"serviceCode"`
 }

@@ -40,7 +40,7 @@ func NewBillingClient(credential *core.Credential) *BillingClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "billing",
-            Revision:    "1.1.16",
+            Revision:    "1.1.18",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -88,6 +88,26 @@ func (c *BillingClient) CalculateTotalPrice(request *billing.CalculateTotalPrice
     }
 
     jdResp := &billing.CalculateTotalPriceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 分账账单计费项明细分页查询 */
+func (c *BillingClient) DescribeSplitBillItems(request *billing.DescribeSplitBillItemsRequest) (*billing.DescribeSplitBillItemsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &billing.DescribeSplitBillItemsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
