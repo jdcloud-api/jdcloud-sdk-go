@@ -40,7 +40,7 @@ func NewCloudauthClient(credential *core.Credential) *CloudauthClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "cloudauth",
-            Revision:    "1.0.17",
+            Revision:    "1.0.19",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -117,6 +117,46 @@ func (c *CloudauthClient) MobileStatus(request *cloudauth.MobileStatusRequest) (
     return jdResp, err
 }
 
+/* 对公打款验证(新版idb0041) */
+func (c *CloudauthClient) CheckCompanyTransferNew(request *cloudauth.CheckCompanyTransferNewRequest) (*cloudauth.CheckCompanyTransferNewResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cloudauth.CheckCompanyTransferNewResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 对公银行账户打款(新版idb0041) */
+func (c *CloudauthClient) CompanyTransferNew(request *cloudauth.CompanyTransferNewRequest) (*cloudauth.CompanyTransferNewResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cloudauth.CompanyTransferNewResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 个人手机号三要素详版 */
 func (c *CloudauthClient) PersonalMobile(request *cloudauth.PersonalMobileRequest) (*cloudauth.PersonalMobileResponse, error) {
     if request == nil {
@@ -168,6 +208,26 @@ func (c *CloudauthClient) QueryBankBranchList(request *cloudauth.QueryBankBranch
     }
 
     jdResp := &cloudauth.QueryBankBranchListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 手机号码在网时长 */
+func (c *CloudauthClient) MobileZwsc(request *cloudauth.MobileZwscRequest) (*cloudauth.MobileZwscResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cloudauth.MobileZwscResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -288,6 +348,26 @@ func (c *CloudauthClient) GetAliveResultNew(request *cloudauth.GetAliveResultNew
     }
 
     jdResp := &cloudauth.GetAliveResultNewResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 对公打款状态查询(新版idb0041) */
+func (c *CloudauthClient) QueryCompanyTransferNew(request *cloudauth.QueryCompanyTransferNewRequest) (*cloudauth.QueryCompanyTransferNewResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cloudauth.QueryCompanyTransferNewResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
