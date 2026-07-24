@@ -63,7 +63,7 @@ type UpdateRuntimeRequest struct {
  (Optional) */
     Envs []agentgrid.EnvConfiguration `json:"envs"`
 
-    /* Runtime 文件系统配置。不传该参数时，保留当前生效版本中的文件系统配置；传入该参数时，将用本次配置替换新版本中的文件系统配置。 (Optional) */
+    /* Runtime 文件系统配置。不传该参数时，保留当前生效版本中的文件系统配置；传入该参数时，将用本次配置替换新版本中的文件系统配置，最多支持配置 5 个文件系统。 (Optional) */
     FilesystemConfiguration *agentgrid.FilesystemConfiguration `json:"filesystemConfiguration"`
 
     /* Runtime 支持的协议类型，当前支持http、mcp、a2a。 (Optional) */
@@ -115,7 +115,7 @@ func NewUpdateRuntimeRequest(
 本次调用后，环境变量不能超过50组
 `key` 长度上限为 256 个字符。
  (Optional)
- * param filesystemConfiguration: Runtime 文件系统配置。不传该参数时，保留当前生效版本中的文件系统配置；传入该参数时，将用本次配置替换新版本中的文件系统配置。 (Optional)
+ * param filesystemConfiguration: Runtime 文件系统配置。不传该参数时，保留当前生效版本中的文件系统配置；传入该参数时，将用本次配置替换新版本中的文件系统配置，最多支持配置 5 个文件系统。 (Optional)
  * param protocol: Runtime 支持的协议类型，当前支持http、mcp、a2a。 (Optional)
  * param lifecycleConfiguration: Runtime 生命周期配置。 (Optional)
  */
@@ -219,7 +219,7 @@ func (r *UpdateRuntimeRequest) SetRoleName(roleName string) {
 func (r *UpdateRuntimeRequest) SetEnvs(envs []agentgrid.EnvConfiguration) {
     r.Envs = envs
 }
-/* param filesystemConfiguration: Runtime 文件系统配置。不传该参数时，保留当前生效版本中的文件系统配置；传入该参数时，将用本次配置替换新版本中的文件系统配置。(Optional) */
+/* param filesystemConfiguration: Runtime 文件系统配置。不传该参数时，保留当前生效版本中的文件系统配置；传入该参数时，将用本次配置替换新版本中的文件系统配置，最多支持配置 5 个文件系统。(Optional) */
 func (r *UpdateRuntimeRequest) SetFilesystemConfiguration(filesystemConfiguration *agentgrid.FilesystemConfiguration) {
     r.FilesystemConfiguration = filesystemConfiguration
 }

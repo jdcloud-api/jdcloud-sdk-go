@@ -17,8 +17,17 @@
 package models
 
 
-type LifecycleConfiguration struct {
+type CfsAccessPointConfiguration struct {
 
-    /* Session 会话从创建到自动终止的最长时间（秒），取值范围 0～28800，默认 28800。当值为 0 时，生成的Session不会自动终止。 (Optional) */
-    MaxLifeTime *int `json:"maxLifeTime"`
+    /* 挂载目标ID。 (Optional) */
+    MountTargetId *string `json:"mountTargetId"`
+
+    /* CFS 路径，可以不填，默认值为 /cfs。 (Optional) */
+    Path *string `json:"path"`
+
+    /* 挂载在 Runtime 内的路径。MountPath 必须是绝对路径，即以 '/' 开头；不允许是 /、/bin、/usr、/var/run、/proc、/sys、/dev 系统路径；多个挂载点不能互为父子路径，例如 /mnt 和 /mnt/data。 (Optional) */
+    MountPath *string `json:"mountPath"`
+
+    /* 文件系统是否只读。 (Optional) */
+    ReadOnly *bool `json:"readOnly"`
 }

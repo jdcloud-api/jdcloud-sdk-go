@@ -21,4 +21,7 @@ type FilesystemView struct {
 
     /* OSS 访问点配置列表 (Optional) */
     OssAccessPoints []OssAccessPointView `json:"ossAccessPoints"`
+
+    /* CFS 访问点配置列表 (Optional) */
+    CfsAccessPoints []CfsAccessPointView `json:"cfsAccessPoints"`
 }

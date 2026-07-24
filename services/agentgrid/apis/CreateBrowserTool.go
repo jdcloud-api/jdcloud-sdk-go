@@ -33,10 +33,10 @@ type CreateBrowserToolRequest struct {
     /* Browser Tool 描述信息，长度不超过 256 个字符。 (Optional) */
     Description *string `json:"description"`
 
-    /* Browser Tool 鉴权方式，当前仅支持 `APIKey` (Optional) */
+    /* Browser Tool 鉴权方式，当前仅支持 `API_KEY` (Optional) */
     AuthenticationType *string `json:"authenticationType"`
 
-    /* Code Interpreter 网络配置。支持 public｜sandbox 两种。默认为sandbox。  */
+    /* Code Interpreter 网络配置。支持 public｜sandbox 两种。  */
     NetworkConfiguration string `json:"networkConfiguration"`
 
     /* 用于保证请求幂等性。 (Optional) */
@@ -46,7 +46,7 @@ type CreateBrowserToolRequest struct {
 /*
  * param regionId: Region ID (Required)
  * param name: Browser Tool 名称。长度为 1~32 个字符，可包含中文、数字、大小写字母、下划线、中划线或点。 (Required)
- * param networkConfiguration: Code Interpreter 网络配置。支持 public｜sandbox 两种。默认为sandbox。 (Required)
+ * param networkConfiguration: Code Interpreter 网络配置。支持 public｜sandbox 两种。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -73,8 +73,8 @@ func NewCreateBrowserToolRequest(
  * param regionId: Region ID (Required)
  * param name: Browser Tool 名称。长度为 1~32 个字符，可包含中文、数字、大小写字母、下划线、中划线或点。 (Required)
  * param description: Browser Tool 描述信息，长度不超过 256 个字符。 (Optional)
- * param authenticationType: Browser Tool 鉴权方式，当前仅支持 `APIKey` (Optional)
- * param networkConfiguration: Code Interpreter 网络配置。支持 public｜sandbox 两种。默认为sandbox。 (Required)
+ * param authenticationType: Browser Tool 鉴权方式，当前仅支持 `API_KEY` (Optional)
+ * param networkConfiguration: Code Interpreter 网络配置。支持 public｜sandbox 两种。 (Required)
  * param clientToken: 用于保证请求幂等性。 (Optional)
  */
 func NewCreateBrowserToolRequestWithAllParams(
@@ -127,11 +127,11 @@ func (r *CreateBrowserToolRequest) SetName(name string) {
 func (r *CreateBrowserToolRequest) SetDescription(description string) {
     r.Description = &description
 }
-/* param authenticationType: Browser Tool 鉴权方式，当前仅支持 `APIKey`(Optional) */
+/* param authenticationType: Browser Tool 鉴权方式，当前仅支持 `API_KEY`(Optional) */
 func (r *CreateBrowserToolRequest) SetAuthenticationType(authenticationType string) {
     r.AuthenticationType = &authenticationType
 }
-/* param networkConfiguration: Code Interpreter 网络配置。支持 public｜sandbox 两种。默认为sandbox。(Required) */
+/* param networkConfiguration: Code Interpreter 网络配置。支持 public｜sandbox 两种。(Required) */
 func (r *CreateBrowserToolRequest) SetNetworkConfiguration(networkConfiguration string) {
     r.NetworkConfiguration = networkConfiguration
 }
