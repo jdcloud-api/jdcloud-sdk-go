@@ -19,6 +19,9 @@ package models
 
 type FilesystemConfiguration struct {
 
-    /* OSS 访问点配置列表，支持配置 0~5 个 OSS 访问点。配置 ossAccessPointConfiguration 时，必须指定 RoleName。 (Optional) */
+    /* OSS 访问点配置列表。配置 ossAccessPointConfiguration 时，必须指定 RoleName。 (Optional) */
     OssAccessPoints []OssAccessPointConfiguration `json:"ossAccessPoints"`
+
+    /* CFS 访问点配置列表。 (Optional) */
+    CfsAccessPoints []CfsAccessPointConfiguration `json:"cfsAccessPoints"`
 }

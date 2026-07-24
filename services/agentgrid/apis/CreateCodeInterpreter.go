@@ -27,26 +27,26 @@ type CreateCodeInterpreterRequest struct {
     /* Region ID  */
     RegionId string `json:"regionId"`
 
-    /* Code Interpreter 名称，全局唯一。  */
+    /* Code Interpreter 名称。长度为 1~32 个字符，可包含中文、数字、大小写字母、下划线、中划线或点。  */
     Name string `json:"name"`
 
     /* Code Interpreter 描述信息。 (Optional) */
     Description *string `json:"description"`
 
-    /* Code Interpreter 鉴权方式，当前仅支持 `APIKey` (Optional) */
+    /* Code Interpreter 鉴权方式，当前仅支持 `API_KEY` (Optional) */
     AuthenticationType *string `json:"authenticationType"`
 
     /* 用于保证请求幂等性。 (Optional) */
     ClientToken *string `json:"clientToken"`
 
-    /* Code Interpreter 网络配置类型。当前支持 `Public` 和 `SandBox`，建议显式传值。  */
+    /* Code Interpreter 网络配置类型。当前支持 `public` 和 `sandbox`。  */
     NetworkConfiguration string `json:"networkConfiguration"`
 }
 
 /*
  * param regionId: Region ID (Required)
- * param name: Code Interpreter 名称，全局唯一。 (Required)
- * param networkConfiguration: Code Interpreter 网络配置类型。当前支持 `Public` 和 `SandBox`，建议显式传值。 (Required)
+ * param name: Code Interpreter 名称。长度为 1~32 个字符，可包含中文、数字、大小写字母、下划线、中划线或点。 (Required)
+ * param networkConfiguration: Code Interpreter 网络配置类型。当前支持 `public` 和 `sandbox`。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -71,11 +71,11 @@ func NewCreateCodeInterpreterRequest(
 
 /*
  * param regionId: Region ID (Required)
- * param name: Code Interpreter 名称，全局唯一。 (Required)
+ * param name: Code Interpreter 名称。长度为 1~32 个字符，可包含中文、数字、大小写字母、下划线、中划线或点。 (Required)
  * param description: Code Interpreter 描述信息。 (Optional)
- * param authenticationType: Code Interpreter 鉴权方式，当前仅支持 `APIKey` (Optional)
+ * param authenticationType: Code Interpreter 鉴权方式，当前仅支持 `API_KEY` (Optional)
  * param clientToken: 用于保证请求幂等性。 (Optional)
- * param networkConfiguration: Code Interpreter 网络配置类型。当前支持 `Public` 和 `SandBox`，建议显式传值。 (Required)
+ * param networkConfiguration: Code Interpreter 网络配置类型。当前支持 `public` 和 `sandbox`。 (Required)
  */
 func NewCreateCodeInterpreterRequestWithAllParams(
     regionId string,
@@ -119,7 +119,7 @@ func NewCreateCodeInterpreterRequestWithoutParam() *CreateCodeInterpreterRequest
 func (r *CreateCodeInterpreterRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-/* param name: Code Interpreter 名称，全局唯一。(Required) */
+/* param name: Code Interpreter 名称。长度为 1~32 个字符，可包含中文、数字、大小写字母、下划线、中划线或点。(Required) */
 func (r *CreateCodeInterpreterRequest) SetName(name string) {
     r.Name = name
 }
@@ -127,7 +127,7 @@ func (r *CreateCodeInterpreterRequest) SetName(name string) {
 func (r *CreateCodeInterpreterRequest) SetDescription(description string) {
     r.Description = &description
 }
-/* param authenticationType: Code Interpreter 鉴权方式，当前仅支持 `APIKey`(Optional) */
+/* param authenticationType: Code Interpreter 鉴权方式，当前仅支持 `API_KEY`(Optional) */
 func (r *CreateCodeInterpreterRequest) SetAuthenticationType(authenticationType string) {
     r.AuthenticationType = &authenticationType
 }
@@ -135,7 +135,7 @@ func (r *CreateCodeInterpreterRequest) SetAuthenticationType(authenticationType 
 func (r *CreateCodeInterpreterRequest) SetClientToken(clientToken string) {
     r.ClientToken = &clientToken
 }
-/* param networkConfiguration: Code Interpreter 网络配置类型。当前支持 `Public` 和 `SandBox`，建议显式传值。(Required) */
+/* param networkConfiguration: Code Interpreter 网络配置类型。当前支持 `public` 和 `sandbox`。(Required) */
 func (r *CreateCodeInterpreterRequest) SetNetworkConfiguration(networkConfiguration string) {
     r.NetworkConfiguration = networkConfiguration
 }

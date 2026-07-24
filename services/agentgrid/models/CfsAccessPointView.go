@@ -17,8 +17,17 @@
 package models
 
 
-type LifecycleConfiguration struct {
+type CfsAccessPointView struct {
 
-    /* Session 会话从创建到自动终止的最长时间（秒），取值范围 0～28800，默认 28800。当值为 0 时，生成的Session不会自动终止。 (Optional) */
-    MaxLifeTime *int `json:"maxLifeTime"`
+    /* 挂载目标ID (Optional) */
+    MountTargetId string `json:"mountTargetId"`
+
+    /* CFS 路径 (Optional) */
+    Path string `json:"path"`
+
+    /* 挂载在 Runtime 内的路径 (Optional) */
+    MountPath string `json:"mountPath"`
+
+    /* 文件系统是否只读 (Optional) */
+    ReadOnly bool `json:"readOnly"`
 }
