@@ -31,6 +31,9 @@ type DescribeBackupsRequest struct {
     /* 实例ID，唯一标识一个实例  */
     InstanceId string `json:"instanceId"`
 
+    /* 排序方式（asc:正序, desc:倒序）  */
+    SortType string `json:"sortType"`
+
     /* 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页。 (Optional) */
     PageNumber *int `json:"pageNumber"`
 
@@ -41,12 +44,14 @@ type DescribeBackupsRequest struct {
 /*
  * param regionId: 地域代码 (Required)
  * param instanceId: 实例ID，唯一标识一个实例 (Required)
+ * param sortType: 排序方式（asc:正序, desc:倒序） (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDescribeBackupsRequest(
     regionId string,
     instanceId string,
+    sortType string,
 ) *DescribeBackupsRequest {
 
 	return &DescribeBackupsRequest{
@@ -58,18 +63,21 @@ func NewDescribeBackupsRequest(
 		},
         RegionId: regionId,
         InstanceId: instanceId,
+        SortType: sortType,
 	}
 }
 
 /*
  * param regionId: 地域代码 (Required)
  * param instanceId: 实例ID，唯一标识一个实例 (Required)
+ * param sortType: 排序方式（asc:正序, desc:倒序） (Required)
  * param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页。 (Optional)
  * param pageSize: 每页显示的数据条数，默认为10，取值范围：[10,100]，且为10的整数倍。 (Optional)
  */
 func NewDescribeBackupsRequestWithAllParams(
     regionId string,
     instanceId string,
+    sortType string,
     pageNumber *int,
     pageSize *int,
 ) *DescribeBackupsRequest {
@@ -83,6 +91,7 @@ func NewDescribeBackupsRequestWithAllParams(
         },
         RegionId: regionId,
         InstanceId: instanceId,
+        SortType: sortType,
         PageNumber: pageNumber,
         PageSize: pageSize,
     }
@@ -109,6 +118,10 @@ func (r *DescribeBackupsRequest) SetRegionId(regionId string) {
 func (r *DescribeBackupsRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
+/* param sortType: 排序方式（asc:正序, desc:倒序）(Required) */
+func (r *DescribeBackupsRequest) SetSortType(sortType string) {
+    r.SortType = sortType
+}
 /* param pageNumber: 显示数据的页码，默认为1，取值范围：[-1,∞)。pageNumber为-1时，返回所有数据页码；超过总页数时，显示最后一页。(Optional) */
 func (r *DescribeBackupsRequest) SetPageNumber(pageNumber int) {
     r.PageNumber = &pageNumber
@@ -134,4 +147,6 @@ type DescribeBackupsResponse struct {
 type DescribeBackupsResult struct {
     Backups []tidb.Backup `json:"backups"`
     TotalCount int `json:"totalCount"`
+    CanCreateBackup bool `json:"canCreateBackup"`
+    BackupMaxCount int `json:"backupMaxCount"`
 }

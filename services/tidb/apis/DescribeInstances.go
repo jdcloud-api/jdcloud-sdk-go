@@ -40,6 +40,9 @@ type DescribeInstancesRequest struct {
 instanceId, 支持operator选项：eq,ne
 instanceName, 支持operator选项：eq,ne,like
 instanceStatus, 支持operator选项：eq,ne
+engineVersion, 支持operator选项：eq
+subnetId, 支持operator选项：eq, ne, in
+vpcId, 支持operator选项：eq, ne, in
  (Optional) */
     Filters []common.Filter `json:"filters"`
 
@@ -79,6 +82,9 @@ func NewDescribeInstancesRequest(
 instanceId, 支持operator选项：eq,ne
 instanceName, 支持operator选项：eq,ne,like
 instanceStatus, 支持operator选项：eq,ne
+engineVersion, 支持operator选项：eq
+subnetId, 支持operator选项：eq, ne, in
+vpcId, 支持operator选项：eq, ne, in
  (Optional)
  * param tagFilters: 资源标签 (Optional)
  * param resourceGroupIds: 资源组id (Optional)
@@ -138,6 +144,9 @@ func (r *DescribeInstancesRequest) SetPageSize(pageSize int) {
 instanceId, 支持operator选项：eq,ne
 instanceName, 支持operator选项：eq,ne,like
 instanceStatus, 支持operator选项：eq,ne
+engineVersion, 支持operator选项：eq
+subnetId, 支持operator选项：eq, ne, in
+vpcId, 支持operator选项：eq, ne, in
 (Optional) */
 func (r *DescribeInstancesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters

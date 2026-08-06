@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    tidb "github.com/jdcloud-api/jdcloud-sdk-go/services/tidb/models"
 )
 
 type ModifyReplicationRequest struct {
@@ -33,29 +34,15 @@ type ModifyReplicationRequest struct {
     /* 复制任务ID  */
     TaskId string `json:"taskId"`
 
-    /* 目标实例备注说明 (Optional) */
-    TargetComment *string `json:"targetComment"`
-
-    /* 目标类型为TiDB或MySQL时，连接目标实例的用户名 (Optional) */
-    TargetUser *string `json:"targetUser"`
-
-    /* 目标类型为TiDB或MySQL时，连接目标实例的密码 (Optional) */
-    TargetPassword *string `json:"targetPassword"`
-
-    /* Kafka的Topic (Optional) */
-    KafkaTopic *string `json:"kafkaTopic"`
-
-    /* Kafka的版本 (Optional) */
-    KafkaVersion *string `json:"kafkaVersion"`
-
-    /* 过滤规则列表 (Optional) */
-    ReplicationObjects []string `json:"replicationObjects"`
+    /* 数据复制任务的修改信息  */
+    ReplicationModify *tidb.ReplicationModifySpec `json:"replicationModify"`
 }
 
 /*
  * param regionId: 地域代码 (Required)
  * param instanceId: 实例ID (Required)
  * param taskId: 复制任务ID (Required)
+ * param replicationModify: 数据复制任务的修改信息 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -63,6 +50,7 @@ func NewModifyReplicationRequest(
     regionId string,
     instanceId string,
     taskId string,
+    replicationModify *tidb.ReplicationModifySpec,
 ) *ModifyReplicationRequest {
 
 	return &ModifyReplicationRequest{
@@ -75,6 +63,7 @@ func NewModifyReplicationRequest(
         RegionId: regionId,
         InstanceId: instanceId,
         TaskId: taskId,
+        ReplicationModify: replicationModify,
 	}
 }
 
@@ -82,23 +71,13 @@ func NewModifyReplicationRequest(
  * param regionId: 地域代码 (Required)
  * param instanceId: 实例ID (Required)
  * param taskId: 复制任务ID (Required)
- * param targetComment: 目标实例备注说明 (Optional)
- * param targetUser: 目标类型为TiDB或MySQL时，连接目标实例的用户名 (Optional)
- * param targetPassword: 目标类型为TiDB或MySQL时，连接目标实例的密码 (Optional)
- * param kafkaTopic: Kafka的Topic (Optional)
- * param kafkaVersion: Kafka的版本 (Optional)
- * param replicationObjects: 过滤规则列表 (Optional)
+ * param replicationModify: 数据复制任务的修改信息 (Required)
  */
 func NewModifyReplicationRequestWithAllParams(
     regionId string,
     instanceId string,
     taskId string,
-    targetComment *string,
-    targetUser *string,
-    targetPassword *string,
-    kafkaTopic *string,
-    kafkaVersion *string,
-    replicationObjects []string,
+    replicationModify *tidb.ReplicationModifySpec,
 ) *ModifyReplicationRequest {
 
     return &ModifyReplicationRequest{
@@ -111,12 +90,7 @@ func NewModifyReplicationRequestWithAllParams(
         RegionId: regionId,
         InstanceId: instanceId,
         TaskId: taskId,
-        TargetComment: targetComment,
-        TargetUser: targetUser,
-        TargetPassword: targetPassword,
-        KafkaTopic: kafkaTopic,
-        KafkaVersion: kafkaVersion,
-        ReplicationObjects: replicationObjects,
+        ReplicationModify: replicationModify,
     }
 }
 
@@ -145,29 +119,9 @@ func (r *ModifyReplicationRequest) SetInstanceId(instanceId string) {
 func (r *ModifyReplicationRequest) SetTaskId(taskId string) {
     r.TaskId = taskId
 }
-/* param targetComment: 目标实例备注说明(Optional) */
-func (r *ModifyReplicationRequest) SetTargetComment(targetComment string) {
-    r.TargetComment = &targetComment
-}
-/* param targetUser: 目标类型为TiDB或MySQL时，连接目标实例的用户名(Optional) */
-func (r *ModifyReplicationRequest) SetTargetUser(targetUser string) {
-    r.TargetUser = &targetUser
-}
-/* param targetPassword: 目标类型为TiDB或MySQL时，连接目标实例的密码(Optional) */
-func (r *ModifyReplicationRequest) SetTargetPassword(targetPassword string) {
-    r.TargetPassword = &targetPassword
-}
-/* param kafkaTopic: Kafka的Topic(Optional) */
-func (r *ModifyReplicationRequest) SetKafkaTopic(kafkaTopic string) {
-    r.KafkaTopic = &kafkaTopic
-}
-/* param kafkaVersion: Kafka的版本(Optional) */
-func (r *ModifyReplicationRequest) SetKafkaVersion(kafkaVersion string) {
-    r.KafkaVersion = &kafkaVersion
-}
-/* param replicationObjects: 过滤规则列表(Optional) */
-func (r *ModifyReplicationRequest) SetReplicationObjects(replicationObjects []string) {
-    r.ReplicationObjects = replicationObjects
+/* param replicationModify: 数据复制任务的修改信息(Required) */
+func (r *ModifyReplicationRequest) SetReplicationModify(replicationModify *tidb.ReplicationModifySpec) {
+    r.ReplicationModify = replicationModify
 }
 
 

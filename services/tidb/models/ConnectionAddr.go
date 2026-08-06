@@ -33,6 +33,9 @@ type ConnectionAddr struct {
     /* VPC内网地址，域名或IP (Optional) */
     IntranetAddr string `json:"intranetAddr"`
 
+    /* 管理地址，域名或IP (Optional) */
+    ManageAddr string `json:"manageAddr"`
+
     /* 端口 (Optional) */
     Port string `json:"port"`
 }

@@ -32,6 +32,12 @@ type RebootPodRequest struct {
 
     /* 重启指定类型的pod,支持Tikv,TiDB,PD,TiFlash  */
     NodeType []string `json:"nodeType"`
+
+    /* 版本升级的时间点,时间格式yyyy-mm-dd hh:mm:ss。不传或者传入空表示当前时间 (Optional) */
+    Timing *string `json:"timing"`
+
+    /* 是否取消重启任务, 为 true 则取消该实例的重启任务 (Optional) */
+    Cancel *bool `json:"cancel"`
 }
 
 /*
@@ -64,11 +70,15 @@ func NewRebootPodRequest(
  * param regionId: 地域代码 (Required)
  * param instanceId: 实例ID (Required)
  * param nodeType: 重启指定类型的pod,支持Tikv,TiDB,PD,TiFlash (Required)
+ * param timing: 版本升级的时间点,时间格式yyyy-mm-dd hh:mm:ss。不传或者传入空表示当前时间 (Optional)
+ * param cancel: 是否取消重启任务, 为 true 则取消该实例的重启任务 (Optional)
  */
 func NewRebootPodRequestWithAllParams(
     regionId string,
     instanceId string,
     nodeType []string,
+    timing *string,
+    cancel *bool,
 ) *RebootPodRequest {
 
     return &RebootPodRequest{
@@ -81,6 +91,8 @@ func NewRebootPodRequestWithAllParams(
         RegionId: regionId,
         InstanceId: instanceId,
         NodeType: nodeType,
+        Timing: timing,
+        Cancel: cancel,
     }
 }
 
@@ -108,6 +120,14 @@ func (r *RebootPodRequest) SetInstanceId(instanceId string) {
 /* param nodeType: 重启指定类型的pod,支持Tikv,TiDB,PD,TiFlash(Required) */
 func (r *RebootPodRequest) SetNodeType(nodeType []string) {
     r.NodeType = nodeType
+}
+/* param timing: 版本升级的时间点,时间格式yyyy-mm-dd hh:mm:ss。不传或者传入空表示当前时间(Optional) */
+func (r *RebootPodRequest) SetTiming(timing string) {
+    r.Timing = &timing
+}
+/* param cancel: 是否取消重启任务, 为 true 则取消该实例的重启任务(Optional) */
+func (r *RebootPodRequest) SetCancel(cancel bool) {
+    r.Cancel = &cancel
 }
 
 

@@ -22,6 +22,9 @@ type Flavor struct {
     /* 规格代码,如tidb.s1.xlarge (Optional) */
     InstanceClass string `json:"instanceClass"`
 
+    /* 规格类型，general(通用型)、exclusive(独享型) (Optional) */
+    ClassGroup string `json:"classGroup"`
+
     /* cpu核数 (Optional) */
     Cpu int `json:"cpu"`
 

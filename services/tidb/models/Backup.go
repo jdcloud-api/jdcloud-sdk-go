@@ -31,6 +31,9 @@ type Backup struct {
     /* 备份状态 (Optional) */
     BackupStatus string `json:"backupStatus"`
 
+    /* 备份创建时间 (Optional) */
+    BackupCreateTime string `json:"backupCreateTime"`
+
     /* 备份开始时间 (Optional) */
     BackupStartTime string `json:"backupStartTime"`
 
@@ -45,4 +48,13 @@ type Backup struct {
 
     /* 整个备份集大小，单位：Byte (Optional) */
     BackupSizeByte int64 `json:"backupSizeByte"`
+
+    /* 备份的数据库版本，格式:x.y(major.minor) (Optional) */
+    BackupDbVersion string `json:"backupDbVersion"`
+
+    /* 备份策略（instance或database） (Optional) */
+    BackupPolicy string `json:"backupPolicy"`
+
+    /* 库备份策略下备份的库信息 (Optional) */
+    BackupDbs []string `json:"backupDbs"`
 }

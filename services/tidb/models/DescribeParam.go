@@ -25,7 +25,7 @@ type DescribeParam struct {
     /* 参数的描述 (Optional) */
     Description string `json:"description"`
 
-    /* 参数的节点类型，包括TiKV,TiDB,PD,TiFlash (Optional) */
+    /* 参数的类型，包括 tidb,tikv,pd,ticdc,tiflash,sysvar (Optional) */
     NodeType string `json:"nodeType"`
 
     /* 参数的默认数值 (Optional) */
@@ -34,6 +34,15 @@ type DescribeParam struct {
     /* 参数的当前值 (Optional) */
     CurrentValue string `json:"currentValue"`
 
+    /* 参数值类型，目前有 bool/int/float/string (Optional) */
+    DataType string `json:"dataType"`
+
+    /* 参数最小值 (Optional) */
+    MinValue string `json:"minValue"`
+
+    /* 参数最大值 (Optional) */
+    MaxValue string `json:"maxValue"`
+
     /* 参数修改是否需要重启生效，大小写敏感 -true:参数需要重启才能生效 -false:参数无需重启生效 (Optional) */
-    NeedRestart bool `json:"needRestart"`
+    NeedRestart string `json:"needRestart"`
 }

@@ -23,6 +23,9 @@ type TidbInstanceSpec struct {
     /* 实例名  */
     InstanceName string `json:"instanceName"`
 
+    /* 命名空间(必须由小写字母数字字符或“-”组成，并且必须以字母数字字符开头和结尾,最大长度为30) (Optional) */
+    InstanceNamespace *string `json:"instanceNamespace"`
+
     /* TiDB引擎版本 (Optional) */
     EngineVersion *string `json:"engineVersion"`
 
@@ -56,9 +59,15 @@ type TidbInstanceSpec struct {
     /* 子网ID  */
     SubnetId string `json:"subnetId"`
 
+    /* 是否开启IPV6（true：是、false：否），默认：false (Optional) */
+    Ipv6Enable *bool `json:"ipv6Enable"`
+
     /* 计费规格，包括计费类型，计费周期等  */
     ChargeSpec *charge.ChargeSpec `json:"chargeSpec"`
 
     /* 标签信息 (Optional) */
     TagSpec []Tag `json:"tagSpec"`
+
+    /* 资源组id (Optional) */
+    ResourceGroupId *string `json:"resourceGroupId"`
 }

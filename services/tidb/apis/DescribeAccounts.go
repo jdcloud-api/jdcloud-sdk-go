@@ -112,6 +112,7 @@ type DescribeAccountsResponse struct {
 
 type DescribeAccountsResult struct {
     AccountName string `json:"accountName"`
+    AccountHost string `json:"accountHost"`
     AccountStatus string `json:"accountStatus"`
     CreateTime string `json:"createTime"`
 }

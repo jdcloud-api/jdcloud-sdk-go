@@ -19,8 +19,14 @@ package models
 
 type ReplicationSpec struct {
 
-    /* 复制的起始时间戳 (Optional) */
+    /* 复制任务的起始时间戳,格式为"2006-01-02 15:04:05",UTC时间, 优先级低于startTsInt (Optional) */
     StartTS *string `json:"startTS"`
+
+    /* 复制任务的起始时间戳,TSO格式,优先级较高,样例: 442501956723539969 (2023-06-29 11:56:44.347 +0800 CST) (Optional) */
+    StartTsInt *int `json:"startTsInt"`
+
+    /* 复制任务的id,正则表达式：`^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$`，长度为 [2,32], 留空自动生成 (Optional) */
+    Id *string `json:"id"`
 
     /* 要复制的对象列表 (Optional) */
     ReplicationObjects []string `json:"replicationObjects"`
@@ -51,4 +57,13 @@ type ReplicationSpec struct {
 
     /* 消息的格式 (Optional) */
     KafkaProtocol *string `json:"kafkaProtocol"`
+
+    /* kafka event分发器的类型 (Optional) */
+    Dispatchers *string `json:"dispatchers"`
+
+    /* kafka分片数 (Optional) */
+    PartitionNum *int `json:"partitionNum"`
+
+    /* 每次向 Kafka broker 发送消息的最大数据量 (Optional) */
+    MaxMessageBytes *int `json:"maxMessageBytes"`
 }
