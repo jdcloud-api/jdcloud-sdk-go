@@ -22,7 +22,7 @@ type TiDBNode struct {
     /* 节点ID (Optional) */
     NodeId string `json:"nodeId"`
 
-    /* 节点类型，支持,tidb,tikv,pd,tiflash,monitor (Optional) */
+    /* 节点类型，支持,tidb,tikv,pd,tiflash,monitor,ticdc (Optional) */
     NodeType string `json:"nodeType"`
 
     /* 节点状态 (Optional) */

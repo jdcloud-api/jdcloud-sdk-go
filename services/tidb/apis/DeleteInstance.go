@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    tidb "github.com/jdcloud-api/jdcloud-sdk-go/services/tidb/models"
 )
 
 type DeleteInstanceRequest struct {
@@ -29,6 +30,9 @@ type DeleteInstanceRequest struct {
 
     /* 实例ID  */
     InstanceId string `json:"instanceId"`
+
+    /*  (Optional) */
+    OpsTagSpecs []tidb.OpsTag `json:"opsTagSpecs"`
 }
 
 /*
@@ -57,10 +61,12 @@ func NewDeleteInstanceRequest(
 /*
  * param regionId: 地域代码 (Required)
  * param instanceId: 实例ID (Required)
+ * param opsTagSpecs:  (Optional)
  */
 func NewDeleteInstanceRequestWithAllParams(
     regionId string,
     instanceId string,
+    opsTagSpecs []tidb.OpsTag,
 ) *DeleteInstanceRequest {
 
     return &DeleteInstanceRequest{
@@ -72,6 +78,7 @@ func NewDeleteInstanceRequestWithAllParams(
         },
         RegionId: regionId,
         InstanceId: instanceId,
+        OpsTagSpecs: opsTagSpecs,
     }
 }
 
@@ -95,6 +102,10 @@ func (r *DeleteInstanceRequest) SetRegionId(regionId string) {
 /* param instanceId: 实例ID(Required) */
 func (r *DeleteInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
+}
+/* param opsTagSpecs: (Optional) */
+func (r *DeleteInstanceRequest) SetOpsTagSpecs(opsTagSpecs []tidb.OpsTag) {
+    r.OpsTagSpecs = opsTagSpecs
 }
 
 

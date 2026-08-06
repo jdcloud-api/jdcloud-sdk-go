@@ -21,4 +21,7 @@ type BackupSpec struct {
 
     /* 备份名称，最长支持64个英文字符或等长的中文字符  */
     BackupName string `json:"backupName"`
+
+    /* 需要备份的库列表 (Optional) */
+    DbName []string `json:"dbName"`
 }

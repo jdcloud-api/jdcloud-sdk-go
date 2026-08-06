@@ -30,6 +30,9 @@ type DescribeInstanceClassesRequest struct {
 
     /* 存储类型,目前只支持本地SSD;  */
     StorageType string `json:"storageType"`
+
+    /* 规格类型：general(通用型)、exclusive(独享型); (Optional) */
+    ClassGroup *string `json:"classGroup"`
 }
 
 /*
@@ -58,10 +61,12 @@ func NewDescribeInstanceClassesRequest(
 /*
  * param regionId: 地域代码 (Required)
  * param storageType: 存储类型,目前只支持本地SSD; (Required)
+ * param classGroup: 规格类型：general(通用型)、exclusive(独享型); (Optional)
  */
 func NewDescribeInstanceClassesRequestWithAllParams(
     regionId string,
     storageType string,
+    classGroup *string,
 ) *DescribeInstanceClassesRequest {
 
     return &DescribeInstanceClassesRequest{
@@ -73,6 +78,7 @@ func NewDescribeInstanceClassesRequestWithAllParams(
         },
         RegionId: regionId,
         StorageType: storageType,
+        ClassGroup: classGroup,
     }
 }
 
@@ -96,6 +102,10 @@ func (r *DescribeInstanceClassesRequest) SetRegionId(regionId string) {
 /* param storageType: 存储类型,目前只支持本地SSD;(Required) */
 func (r *DescribeInstanceClassesRequest) SetStorageType(storageType string) {
     r.StorageType = storageType
+}
+/* param classGroup: 规格类型：general(通用型)、exclusive(独享型);(Optional) */
+func (r *DescribeInstanceClassesRequest) SetClassGroup(classGroup string) {
+    r.ClassGroup = &classGroup
 }
 
 

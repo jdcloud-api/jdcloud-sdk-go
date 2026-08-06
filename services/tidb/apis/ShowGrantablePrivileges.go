@@ -21,64 +21,67 @@ import (
     tidb "github.com/jdcloud-api/jdcloud-sdk-go/services/tidb/models"
 )
 
-type DescribeAvailableDBInfoInternelRequest struct {
+type ShowGrantablePrivilegesRequest struct {
 
     core.JDCloudRequest
 
     /* 地域代码  */
     RegionId string `json:"regionId"`
 
-    /* 用户可用区[多个使用,分隔] (Optional) */
-    Azs *string `json:"azs"`
+    /* 实例ID  */
+    InstanceId string `json:"instanceId"`
 }
 
 /*
  * param regionId: 地域代码 (Required)
+ * param instanceId: 实例ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeAvailableDBInfoInternelRequest(
+func NewShowGrantablePrivilegesRequest(
     regionId string,
-) *DescribeAvailableDBInfoInternelRequest {
+    instanceId string,
+) *ShowGrantablePrivilegesRequest {
 
-	return &DescribeAvailableDBInfoInternelRequest{
+	return &ShowGrantablePrivilegesRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/instances:describeAvailableDBInfoInternel",
+			URL:     "/regions/{regionId}/instances/{instanceId}/privileges",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
+        InstanceId: instanceId,
 	}
 }
 
 /*
  * param regionId: 地域代码 (Required)
- * param azs: 用户可用区[多个使用,分隔] (Optional)
+ * param instanceId: 实例ID (Required)
  */
-func NewDescribeAvailableDBInfoInternelRequestWithAllParams(
+func NewShowGrantablePrivilegesRequestWithAllParams(
     regionId string,
-    azs *string,
-) *DescribeAvailableDBInfoInternelRequest {
+    instanceId string,
+) *ShowGrantablePrivilegesRequest {
 
-    return &DescribeAvailableDBInfoInternelRequest{
+    return &ShowGrantablePrivilegesRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances:describeAvailableDBInfoInternel",
+            URL:     "/regions/{regionId}/instances/{instanceId}/privileges",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
-        Azs: azs,
+        InstanceId: instanceId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeAvailableDBInfoInternelRequestWithoutParam() *DescribeAvailableDBInfoInternelRequest {
+func NewShowGrantablePrivilegesRequestWithoutParam() *ShowGrantablePrivilegesRequest {
 
-    return &DescribeAvailableDBInfoInternelRequest{
+    return &ShowGrantablePrivilegesRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/instances:describeAvailableDBInfoInternel",
+            URL:     "/regions/{regionId}/instances/{instanceId}/privileges",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -87,29 +90,29 @@ func NewDescribeAvailableDBInfoInternelRequestWithoutParam() *DescribeAvailableD
 }
 
 /* param regionId: 地域代码(Required) */
-func (r *DescribeAvailableDBInfoInternelRequest) SetRegionId(regionId string) {
+func (r *ShowGrantablePrivilegesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-/* param azs: 用户可用区[多个使用,分隔](Optional) */
-func (r *DescribeAvailableDBInfoInternelRequest) SetAzs(azs string) {
-    r.Azs = &azs
+/* param instanceId: 实例ID(Required) */
+func (r *ShowGrantablePrivilegesRequest) SetInstanceId(instanceId string) {
+    r.InstanceId = instanceId
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeAvailableDBInfoInternelRequest) GetRegionId() string {
+func (r ShowGrantablePrivilegesRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type DescribeAvailableDBInfoInternelResponse struct {
+type ShowGrantablePrivilegesResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeAvailableDBInfoInternelResult `json:"result"`
+    Result ShowGrantablePrivilegesResult `json:"result"`
 }
 
-type DescribeAvailableDBInfoInternelResult struct {
-    EngineVersion []string `json:"engineVersion"`
-    ArchitectureType []string `json:"architectureType"`
-    ArchitectureVersion []tidb.ArchitectureVersion `json:"architectureVersion"`
+type ShowGrantablePrivilegesResult struct {
+    GlobalPrivileges tidb.GrantablePrivilege `json:"globalPrivileges"`
+    DbPrivileges tidb.GrantablePrivilege `json:"dbPrivileges"`
+    TablePrivileges tidb.GrantablePrivilege `json:"tablePrivileges"`
 }

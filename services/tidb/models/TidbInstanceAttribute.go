@@ -26,6 +26,15 @@ type TidbInstanceAttribute struct {
     /* 实例名称 (Optional) */
     InstanceName string `json:"instanceName"`
 
+    /* 命名空间 (Optional) */
+    InstanceNamespace string `json:"instanceNamespace"`
+
+    /* 行云应用名称 (Optional) */
+    AppName string `json:"appName"`
+
+    /* 行云系统名称 (Optional) */
+    SystemName string `json:"systemName"`
+
     /* 实例引擎版本 (Optional) */
     EngineVersion string `json:"engineVersion"`
 
@@ -37,6 +46,9 @@ type TidbInstanceAttribute struct {
 
     /* 集群中节点的总数 (Optional) */
     TotalNodeNum int `json:"totalNodeNum"`
+
+    /* 规格类型：general(通用型)、exclusive(独享型) (Optional) */
+    ClassGroup string `json:"classGroup"`
 
     /* TiDB节点规格和数目 (Optional) */
     TidbNodeSpec NodeSpec `json:"tidbNodeSpec"`
@@ -77,6 +89,9 @@ type TidbInstanceAttribute struct {
     /* 子网的ID (Optional) */
     SubnetId string `json:"subnetId"`
 
+    /* 实例的连接地址，端口等连接信息 (Optional) */
+    ConnectionAddr []ConnectionAddr `json:"connectionAddr"`
+
     /* TiDB内网域名 (Optional) */
     InternalDomainName string `json:"internalDomainName"`
 
@@ -101,6 +116,9 @@ type TidbInstanceAttribute struct {
     /* DMS的公网域名 (Optional) */
     DmsPublicDomainName string `json:"dmsPublicDomainName"`
 
+    /* TiCDC的内网域名 (Optional) */
+    TicdcInternalDomainName string `json:"ticdcInternalDomainName"`
+
     /* 应用访问端口 (Optional) */
     InstancePort string `json:"instancePort"`
 
@@ -113,11 +131,23 @@ type TidbInstanceAttribute struct {
     /* DMS的端口 (Optional) */
     DmsPort string `json:"dmsPort"`
 
+    /* TiCDC的端口 (Optional) */
+    TicdcPort string `json:"ticdcPort"`
+
     /* 实例状态，参见[枚举参数定义](../Enum-Definitions/Enum-Definitions.md) (Optional) */
     InstanceStatus string `json:"instanceStatus"`
 
     /* 实例创建时间, UTC 时间格式 (Optional) */
     CreateTime string `json:"createTime"`
+
+    /* 资源组id (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
+
+    /* 资源组名称 (Optional) */
+    ResourceGroupName string `json:"resourceGroupName"`
+
+    /* 是否存在日志备份 (Optional) */
+    ExistBackup bool `json:"existBackup"`
 
     /* 计费配置 (Optional) */
     Charge charge.Charge `json:"charge"`

@@ -25,6 +25,9 @@ type NodeFlavor struct {
     /* 允许的最小节点数 (Optional) */
     MinNum int `json:"minNum"`
 
+    /* 该节点的默认组(前端显示时默认显示) (Optional) */
+    DefaultGroup DefaultGroup `json:"defaultGroup"`
+
     /*  (Optional) */
     Flavors []Flavor `json:"flavors"`
 }

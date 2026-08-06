@@ -33,8 +33,14 @@ type CreateAccountRequest struct {
     /* 账号名  */
     AccountName string `json:"accountName"`
 
+    /* 账号Host, 默认为% (Optional) */
+    AccountHost *string `json:"accountHost"`
+
     /* 密码  */
     AccountPassword string `json:"accountPassword"`
+
+    /* 为账号绑定资源组 (该字段仅支持v7及其以上实例) (Optional) */
+    BindResourceGroup *string `json:"bindResourceGroup"`
 }
 
 /*
@@ -70,13 +76,17 @@ func NewCreateAccountRequest(
  * param regionId: 地域代码 (Required)
  * param instanceId: 实例ID (Required)
  * param accountName: 账号名 (Required)
+ * param accountHost: 账号Host, 默认为% (Optional)
  * param accountPassword: 密码 (Required)
+ * param bindResourceGroup: 为账号绑定资源组 (该字段仅支持v7及其以上实例) (Optional)
  */
 func NewCreateAccountRequestWithAllParams(
     regionId string,
     instanceId string,
     accountName string,
+    accountHost *string,
     accountPassword string,
+    bindResourceGroup *string,
 ) *CreateAccountRequest {
 
     return &CreateAccountRequest{
@@ -89,7 +99,9 @@ func NewCreateAccountRequestWithAllParams(
         RegionId: regionId,
         InstanceId: instanceId,
         AccountName: accountName,
+        AccountHost: accountHost,
         AccountPassword: accountPassword,
+        BindResourceGroup: bindResourceGroup,
     }
 }
 
@@ -118,9 +130,17 @@ func (r *CreateAccountRequest) SetInstanceId(instanceId string) {
 func (r *CreateAccountRequest) SetAccountName(accountName string) {
     r.AccountName = accountName
 }
+/* param accountHost: 账号Host, 默认为%(Optional) */
+func (r *CreateAccountRequest) SetAccountHost(accountHost string) {
+    r.AccountHost = &accountHost
+}
 /* param accountPassword: 密码(Required) */
 func (r *CreateAccountRequest) SetAccountPassword(accountPassword string) {
     r.AccountPassword = accountPassword
+}
+/* param bindResourceGroup: 为账号绑定资源组 (该字段仅支持v7及其以上实例)(Optional) */
+func (r *CreateAccountRequest) SetBindResourceGroup(bindResourceGroup string) {
+    r.BindResourceGroup = &bindResourceGroup
 }
 
 

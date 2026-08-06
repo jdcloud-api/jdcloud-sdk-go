@@ -35,6 +35,9 @@ type ResetPasswordRequest struct {
 
     /* 新密码  */
     AccountPassword string `json:"accountPassword"`
+
+    /* 账号Host, 默认为% (Optional) */
+    AccountHost *string `json:"accountHost"`
 }
 
 /*
@@ -71,12 +74,14 @@ func NewResetPasswordRequest(
  * param instanceId: 实例ID (Required)
  * param accountName: 账号名 (Required)
  * param accountPassword: 新密码 (Required)
+ * param accountHost: 账号Host, 默认为% (Optional)
  */
 func NewResetPasswordRequestWithAllParams(
     regionId string,
     instanceId string,
     accountName string,
     accountPassword string,
+    accountHost *string,
 ) *ResetPasswordRequest {
 
     return &ResetPasswordRequest{
@@ -90,6 +95,7 @@ func NewResetPasswordRequestWithAllParams(
         InstanceId: instanceId,
         AccountName: accountName,
         AccountPassword: accountPassword,
+        AccountHost: accountHost,
     }
 }
 
@@ -121,6 +127,10 @@ func (r *ResetPasswordRequest) SetAccountName(accountName string) {
 /* param accountPassword: 新密码(Required) */
 func (r *ResetPasswordRequest) SetAccountPassword(accountPassword string) {
     r.AccountPassword = accountPassword
+}
+/* param accountHost: 账号Host, 默认为%(Optional) */
+func (r *ResetPasswordRequest) SetAccountHost(accountHost string) {
+    r.AccountHost = &accountHost
 }
 
 

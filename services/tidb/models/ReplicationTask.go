@@ -55,6 +55,18 @@ type ReplicationTask struct {
     /* Checkpoint时间 (Optional) */
     CheckpointTime string `json:"checkpointTime"`
 
+    /* Checkpoint延迟 (Optional) */
+    CheckpointLag string `json:"checkpointLag"`
+
     /* 任务创建时间 (Optional) */
     CreateTime string `json:"createTime"`
+
+    /* Kafka分片数 (Optional) */
+    PartitionNum int `json:"partitionNum"`
+
+    /* Kafka event分发器 (Optional) */
+    Dispatchers string `json:"dispatchers"`
+
+    /* 每次向 Kafka broker 发送消息的最大数据量 (Optional) */
+    MaxMessageBytes int `json:"maxMessageBytes"`
 }

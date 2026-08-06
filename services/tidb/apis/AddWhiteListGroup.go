@@ -32,6 +32,9 @@ type AddWhiteListGroupRequest struct {
 
     /* 白名单分组名  */
     Name string `json:"name"`
+
+    /* IP或IP段,不同的IP/IP段之间用英文逗号分隔,例如0.0.0.0/0,192.168.0.10 (Optional) */
+    Ips *string `json:"ips"`
 }
 
 /*
@@ -64,11 +67,13 @@ func NewAddWhiteListGroupRequest(
  * param regionId: 地域代码 (Required)
  * param instanceId: 实例ID (Required)
  * param name: 白名单分组名 (Required)
+ * param ips: IP或IP段,不同的IP/IP段之间用英文逗号分隔,例如0.0.0.0/0,192.168.0.10 (Optional)
  */
 func NewAddWhiteListGroupRequestWithAllParams(
     regionId string,
     instanceId string,
     name string,
+    ips *string,
 ) *AddWhiteListGroupRequest {
 
     return &AddWhiteListGroupRequest{
@@ -81,6 +86,7 @@ func NewAddWhiteListGroupRequestWithAllParams(
         RegionId: regionId,
         InstanceId: instanceId,
         Name: name,
+        Ips: ips,
     }
 }
 
@@ -108,6 +114,10 @@ func (r *AddWhiteListGroupRequest) SetInstanceId(instanceId string) {
 /* param name: 白名单分组名(Required) */
 func (r *AddWhiteListGroupRequest) SetName(name string) {
     r.Name = name
+}
+/* param ips: IP或IP段,不同的IP/IP段之间用英文逗号分隔,例如0.0.0.0/0,192.168.0.10(Optional) */
+func (r *AddWhiteListGroupRequest) SetIps(ips string) {
+    r.Ips = &ips
 }
 
 

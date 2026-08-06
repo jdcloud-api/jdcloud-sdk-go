@@ -26,6 +26,9 @@ type Instance struct {
     /* 实例名称 (Optional) */
     InstanceName string `json:"instanceName"`
 
+    /* 实例的命名空间 (Optional) */
+    InstanceNamespace string `json:"instanceNamespace"`
+
     /* 实例引擎版本 (Optional) */
     EngineVersion string `json:"engineVersion"`
 
@@ -46,6 +49,24 @@ type Instance struct {
 
     /* 整个集群总的存储空间大小，单位GB (Optional) */
     TotalStorageGB int `json:"totalStorageGB"`
+
+    /* TiDB节点规格和数目 (Optional) */
+    TidbNodeSpec NodeSpec `json:"tidbNodeSpec"`
+
+    /* TiKV节点规格和数目 (Optional) */
+    TikvNodeSpec NodeSpec `json:"tikvNodeSpec"`
+
+    /* PD节点规格和数目 (Optional) */
+    PdNodeSpec NodeSpec `json:"pdNodeSpec"`
+
+    /* Monitor节点规格，只能有1个Monitor节点 (Optional) */
+    MonitorNodeSpec NodeSpec `json:"monitorNodeSpec"`
+
+    /* TiFlash节点规格和数目 (Optional) */
+    TiflashNodeSpec NodeSpec `json:"tiflashNodeSpec"`
+
+    /* Ticdc节点规格和数目 (Optional) */
+    TicdcNodeSpec NodeSpec `json:"ticdcNodeSpec"`
 
     /* 地域ID (Optional) */
     RegionId string `json:"regionId"`
@@ -70,4 +91,7 @@ type Instance struct {
 
     /* 标签信息 (Optional) */
     Tags []Tag `json:"tags"`
+
+    /* TiDB内网域名 (Optional) */
+    InternalDomainName string `json:"internalDomainName"`
 }
