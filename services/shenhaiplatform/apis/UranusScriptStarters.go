@@ -66,6 +66,9 @@ type UranusScriptStartersRequest struct {
 
     /* 循环节点信息 (Optional) */
     LoopInfo []shenhaiplatform.TaskInfoLoopReq `json:"loopInfo"`
+
+    /* 任务的资源控制 (Optional) */
+    JcwSQLRunParams *shenhaiplatform.JcwSQLRunParams `json:"jcwSQLRunParams"`
 }
 
 /*
@@ -130,6 +133,7 @@ func NewUranusScriptStartersRequest(
  * param resourceName: 队列名称 (Optional)
  * param resourceCode: 队列code (Optional)
  * param loopInfo: 循环节点信息 (Optional)
+ * param jcwSQLRunParams: 任务的资源控制 (Optional)
  */
 func NewUranusScriptStartersRequestWithAllParams(
     regionId string,
@@ -146,6 +150,7 @@ func NewUranusScriptStartersRequestWithAllParams(
     resourceName *string,
     resourceCode *string,
     loopInfo []shenhaiplatform.TaskInfoLoopReq,
+    jcwSQLRunParams *shenhaiplatform.JcwSQLRunParams,
 ) *UranusScriptStartersRequest {
 
     return &UranusScriptStartersRequest{
@@ -169,6 +174,7 @@ func NewUranusScriptStartersRequestWithAllParams(
         ResourceName: resourceName,
         ResourceCode: resourceCode,
         LoopInfo: loopInfo,
+        JcwSQLRunParams: jcwSQLRunParams,
     }
 }
 
@@ -240,6 +246,10 @@ func (r *UranusScriptStartersRequest) SetResourceCode(resourceCode string) {
 /* param loopInfo: 循环节点信息(Optional) */
 func (r *UranusScriptStartersRequest) SetLoopInfo(loopInfo []shenhaiplatform.TaskInfoLoopReq) {
     r.LoopInfo = loopInfo
+}
+/* param jcwSQLRunParams: 任务的资源控制(Optional) */
+func (r *UranusScriptStartersRequest) SetJcwSQLRunParams(jcwSQLRunParams *shenhaiplatform.JcwSQLRunParams) {
+    r.JcwSQLRunParams = jcwSQLRunParams
 }
 
 

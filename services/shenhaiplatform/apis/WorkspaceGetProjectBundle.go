@@ -39,6 +39,9 @@ type WorkspaceGetProjectBundleRequest struct {
 
     /*  (Optional) */
     ProjectCode *string `json:"projectCode"`
+
+    /*  (Optional) */
+    ResourceCode *string `json:"resourceCode"`
 }
 
 /*
@@ -70,6 +73,7 @@ func NewWorkspaceGetProjectBundleRequest(
  * param id:  (Optional)
  * param workspaceCode:  (Optional)
  * param projectCode:  (Optional)
+ * param resourceCode:  (Optional)
  */
 func NewWorkspaceGetProjectBundleRequestWithAllParams(
     regionId string,
@@ -77,6 +81,7 @@ func NewWorkspaceGetProjectBundleRequestWithAllParams(
     id *int,
     workspaceCode *string,
     projectCode *string,
+    resourceCode *string,
 ) *WorkspaceGetProjectBundleRequest {
 
     return &WorkspaceGetProjectBundleRequest{
@@ -91,6 +96,7 @@ func NewWorkspaceGetProjectBundleRequestWithAllParams(
         Id: id,
         WorkspaceCode: workspaceCode,
         ProjectCode: projectCode,
+        ResourceCode: resourceCode,
     }
 }
 
@@ -126,6 +132,10 @@ func (r *WorkspaceGetProjectBundleRequest) SetWorkspaceCode(workspaceCode string
 /* param projectCode: (Optional) */
 func (r *WorkspaceGetProjectBundleRequest) SetProjectCode(projectCode string) {
     r.ProjectCode = &projectCode
+}
+/* param resourceCode: (Optional) */
+func (r *WorkspaceGetProjectBundleRequest) SetResourceCode(resourceCode string) {
+    r.ResourceCode = &resourceCode
 }
 
 

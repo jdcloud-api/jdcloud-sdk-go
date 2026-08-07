@@ -174,4 +174,7 @@ type UranusTaskInfoRes struct {
 
     /* 作业读写数据源使用环境类型,dev：开发环境，prod：生产环境 (Optional) */
     DatasourceUseEnvType *string `json:"datasourceUseEnvType"`
+
+    /* 任务使用资源配置 (Optional) */
+    RunParams *JcwSQLRunParams `json:"runParams"`
 }

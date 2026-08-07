@@ -60,6 +60,12 @@ type WorkspaceCreatProductRequest struct {
 
     /*  (Optional) */
     ReturnUrl *string `json:"returnUrl"`
+
+    /*  (Optional) */
+    BizResourceKey *string `json:"bizResourceKey"`
+
+    /*  (Optional) */
+    BizTagInfos []shenhaiplatform.BizTagInfo `json:"bizTagInfos"`
 }
 
 /*
@@ -98,6 +104,8 @@ func NewWorkspaceCreatProductRequest(
  * param purchaseDuration:  (Optional)
  * param projectResourceReq:  (Optional)
  * param returnUrl:  (Optional)
+ * param bizResourceKey:  (Optional)
+ * param bizTagInfos:  (Optional)
  */
 func NewWorkspaceCreatProductRequestWithAllParams(
     regionId string,
@@ -112,6 +120,8 @@ func NewWorkspaceCreatProductRequestWithAllParams(
     purchaseDuration *int,
     projectResourceReq *shenhaiplatform.CreateProjectResourceParam,
     returnUrl *string,
+    bizResourceKey *string,
+    bizTagInfos []shenhaiplatform.BizTagInfo,
 ) *WorkspaceCreatProductRequest {
 
     return &WorkspaceCreatProductRequest{
@@ -133,6 +143,8 @@ func NewWorkspaceCreatProductRequestWithAllParams(
         PurchaseDuration: purchaseDuration,
         ProjectResourceReq: projectResourceReq,
         ReturnUrl: returnUrl,
+        BizResourceKey: bizResourceKey,
+        BizTagInfos: bizTagInfos,
     }
 }
 
@@ -196,6 +208,14 @@ func (r *WorkspaceCreatProductRequest) SetProjectResourceReq(projectResourceReq 
 /* param returnUrl: (Optional) */
 func (r *WorkspaceCreatProductRequest) SetReturnUrl(returnUrl string) {
     r.ReturnUrl = &returnUrl
+}
+/* param bizResourceKey: (Optional) */
+func (r *WorkspaceCreatProductRequest) SetBizResourceKey(bizResourceKey string) {
+    r.BizResourceKey = &bizResourceKey
+}
+/* param bizTagInfos: (Optional) */
+func (r *WorkspaceCreatProductRequest) SetBizTagInfos(bizTagInfos []shenhaiplatform.BizTagInfo) {
+    r.BizTagInfos = bizTagInfos
 }
 
 

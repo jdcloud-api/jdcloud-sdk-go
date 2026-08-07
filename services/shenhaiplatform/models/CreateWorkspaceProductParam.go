@@ -48,4 +48,10 @@ type CreateWorkspaceProductParam struct {
 
     /*  (Optional) */
     ReturnUrl string `json:"returnUrl"`
+
+    /*  (Optional) */
+    BizResourceKey string `json:"bizResourceKey"`
+
+    /*  (Optional) */
+    BizTagInfos []BizTagInfo `json:"bizTagInfos"`
 }

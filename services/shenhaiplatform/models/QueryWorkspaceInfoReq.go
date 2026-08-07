@@ -27,4 +27,7 @@ type QueryWorkspaceInfoReq struct {
 
     /*  (Optional) */
     ProjectCode string `json:"projectCode"`
+
+    /*  (Optional) */
+    ResourceCode string `json:"resourceCode"`
 }
