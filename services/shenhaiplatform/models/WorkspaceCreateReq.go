@@ -38,6 +38,9 @@ type WorkspaceCreateReq struct {
     WorkspaceModel string `json:"workspaceModel"`
 
     /*  (Optional) */
+    WorkspaceLabel string `json:"workspaceLabel"`
+
+    /*  (Optional) */
     EngineType string `json:"engineType"`
 
     /*  (Optional) */

@@ -54,4 +54,7 @@ type UranusRunnerReq struct {
 
     /* 循环节点信息 (Optional) */
     LoopInfo []TaskInfoLoopReq `json:"loopInfo"`
+
+    /* 任务的资源控制 (Optional) */
+    JcwSQLRunParams JcwSQLRunParams `json:"jcwSQLRunParams"`
 }

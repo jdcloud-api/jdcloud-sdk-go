@@ -48,6 +48,9 @@ type UranusExtraRunnerStartRequest struct {
 
     /* 资源组code (Optional) */
     ResourceCode *string `json:"resourceCode"`
+
+    /* 任务资源配置 (Optional) */
+    JcwSQLRunParams *shenhaiplatform.JcwSQLRunParams `json:"jcwSQLRunParams"`
 }
 
 /*
@@ -82,6 +85,7 @@ func NewUranusExtraRunnerStartRequest(
  * param args: 脚本内容的变量参数配置 (Optional)
  * param resourceName: 资源组名称 (Optional)
  * param resourceCode: 资源组code (Optional)
+ * param jcwSQLRunParams: 任务资源配置 (Optional)
  */
 func NewUranusExtraRunnerStartRequestWithAllParams(
     regionId string,
@@ -92,6 +96,7 @@ func NewUranusExtraRunnerStartRequestWithAllParams(
     args *shenhaiplatform.UranusTaskParamReq,
     resourceName *string,
     resourceCode *string,
+    jcwSQLRunParams *shenhaiplatform.JcwSQLRunParams,
 ) *UranusExtraRunnerStartRequest {
 
     return &UranusExtraRunnerStartRequest{
@@ -109,6 +114,7 @@ func NewUranusExtraRunnerStartRequestWithAllParams(
         Args: args,
         ResourceName: resourceName,
         ResourceCode: resourceCode,
+        JcwSQLRunParams: jcwSQLRunParams,
     }
 }
 
@@ -156,6 +162,10 @@ func (r *UranusExtraRunnerStartRequest) SetResourceName(resourceName string) {
 /* param resourceCode: 资源组code(Optional) */
 func (r *UranusExtraRunnerStartRequest) SetResourceCode(resourceCode string) {
     r.ResourceCode = &resourceCode
+}
+/* param jcwSQLRunParams: 任务资源配置(Optional) */
+func (r *UranusExtraRunnerStartRequest) SetJcwSQLRunParams(jcwSQLRunParams *shenhaiplatform.JcwSQLRunParams) {
+    r.JcwSQLRunParams = jcwSQLRunParams
 }
 
 

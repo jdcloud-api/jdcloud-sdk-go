@@ -29,5 +29,11 @@ type WorkspaceUserRoleResp struct {
     WorkspaceName string `json:"workspaceName"`
 
     /*  (Optional) */
+    WorkspaceModel string `json:"workspaceModel"`
+
+    /*  (Optional) */
+    WorkspaceLabel string `json:"workspaceLabel"`
+
+    /*  (Optional) */
     Roles []string `json:"roles"`
 }

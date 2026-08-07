@@ -36,4 +36,10 @@ type WorkspaceInfoResp struct {
 
     /*  (Optional) */
     AccountId string `json:"accountId"`
+
+    /*  (Optional) */
+    WorkspaceLabel string `json:"workspaceLabel"`
+
+    /*  (Optional) */
+    RegionId string `json:"regionId"`
 }

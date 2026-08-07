@@ -50,6 +50,9 @@ type WorkspaceCreateRequest struct {
     WorkspaceModel *string `json:"workspaceModel"`
 
     /*  (Optional) */
+    WorkspaceLabel *string `json:"workspaceLabel"`
+
+    /*  (Optional) */
     EngineType *string `json:"engineType"`
 
     /*  (Optional) */
@@ -100,6 +103,7 @@ func NewWorkspaceCreateRequest(
  * param manager:  (Optional)
  * param workspaceDescription:  (Optional)
  * param workspaceModel:  (Optional)
+ * param workspaceLabel:  (Optional)
  * param engineType:  (Optional)
  * param calculateResourceCode:  (Optional)
  * param integrationResourceCode:  (Optional)
@@ -116,6 +120,7 @@ func NewWorkspaceCreateRequestWithAllParams(
     manager []string,
     workspaceDescription *string,
     workspaceModel *string,
+    workspaceLabel *string,
     engineType *string,
     calculateResourceCode []string,
     integrationResourceCode []string,
@@ -139,6 +144,7 @@ func NewWorkspaceCreateRequestWithAllParams(
         Manager: manager,
         WorkspaceDescription: workspaceDescription,
         WorkspaceModel: workspaceModel,
+        WorkspaceLabel: workspaceLabel,
         EngineType: engineType,
         CalculateResourceCode: calculateResourceCode,
         IntegrationResourceCode: integrationResourceCode,
@@ -192,6 +198,10 @@ func (r *WorkspaceCreateRequest) SetWorkspaceDescription(workspaceDescription st
 /* param workspaceModel: (Optional) */
 func (r *WorkspaceCreateRequest) SetWorkspaceModel(workspaceModel string) {
     r.WorkspaceModel = &workspaceModel
+}
+/* param workspaceLabel: (Optional) */
+func (r *WorkspaceCreateRequest) SetWorkspaceLabel(workspaceLabel string) {
+    r.WorkspaceLabel = &workspaceLabel
 }
 /* param engineType: (Optional) */
 func (r *WorkspaceCreateRequest) SetEngineType(engineType string) {

@@ -36,4 +36,7 @@ type ExtraRunnerReq struct {
 
     /* 资源组code (Optional) */
     ResourceCode string `json:"resourceCode"`
+
+    /* 任务资源配置 (Optional) */
+    JcwSQLRunParams JcwSQLRunParams `json:"jcwSQLRunParams"`
 }

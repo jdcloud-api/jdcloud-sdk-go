@@ -40,7 +40,7 @@ func NewShenhaiplatformClient(credential *core.Credential) *ShenhaiplatformClien
             Credential:  *credential,
             Config:      *config,
             ServiceName: "shenhaiplatform",
-            Revision:    "1.0.0",
+            Revision:    "1.0.2",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -55,6 +55,4286 @@ func (c *ShenhaiplatformClient) SetLogger(logger core.Logger) {
 
 func (c *ShenhaiplatformClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
+}
+
+/* 任务单节点-新建 */
+func (c *ShenhaiplatformClient) UranusTaskNodeSave(request *shenhaiplatform.UranusTaskNodeSaveRequest) (*shenhaiplatform.UranusTaskNodeSaveResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskNodeSaveResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 从运维中心下线任务 */
+func (c *ShenhaiplatformClient) UranusTaskHistoryList(request *shenhaiplatform.UranusTaskHistoryListRequest) (*shenhaiplatform.UranusTaskHistoryListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskHistoryListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据租户/项目空间/数据库名称模糊查询表列表，最多返回1000条 */
+func (c *ShenhaiplatformClient) JtlasWarehouseQueryTablesByDatabaseName(request *shenhaiplatform.JtlasWarehouseQueryTablesByDatabaseNameRequest) (*shenhaiplatform.JtlasWarehouseQueryTablesByDatabaseNameResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.JtlasWarehouseQueryTablesByDatabaseNameResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 发布任务到运维中心 */
+func (c *ShenhaiplatformClient) UranusTaskDeployAndEnable(request *shenhaiplatform.UranusTaskDeployAndEnableRequest) (*shenhaiplatform.UranusTaskDeployAndEnableResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskDeployAndEnableResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 重跑作业 */
+func (c *ShenhaiplatformClient) ManageHubGravityRerun(request *shenhaiplatform.ManageHubGravityRerunRequest) (*shenhaiplatform.ManageHubGravityRerunResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.ManageHubGravityRerunResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 分页查询发布包列表 */
+func (c *ShenhaiplatformClient) DescribePublishPkgs(request *shenhaiplatform.DescribePublishPkgsRequest) (*shenhaiplatform.DescribePublishPkgsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.DescribePublishPkgsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 列出所有根目录(只包含根目录) */
+func (c *ShenhaiplatformClient) UranusResourceListRoot(request *shenhaiplatform.UranusResourceListRootRequest) (*shenhaiplatform.UranusResourceListRootResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusResourceListRootResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 列出当前任务可以依赖的其他任务列表 */
+func (c *ShenhaiplatformClient) UranusTaskPublicListDependable(request *shenhaiplatform.UranusTaskPublicListDependableRequest) (*shenhaiplatform.UranusTaskPublicListDependableResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskPublicListDependableResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取任务的发布状态 */
+func (c *ShenhaiplatformClient) UranusTaskGetTaskStatus(request *shenhaiplatform.UranusTaskGetTaskStatusRequest) (*shenhaiplatform.UranusTaskGetTaskStatusResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskGetTaskStatusResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 校验作业规则 */
+func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerValidateJobRules(request *shenhaiplatform.GravityParticleDubboJobManagerValidateJobRulesRequest) (*shenhaiplatform.GravityParticleDubboJobManagerValidateJobRulesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleDubboJobManagerValidateJobRulesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取作业脚本扩展名信息 */
+func (c *ShenhaiplatformClient) GravityParticleJobGetScriptExtensions(request *shenhaiplatform.GravityParticleJobGetScriptExtensionsRequest) (*shenhaiplatform.GravityParticleJobGetScriptExtensionsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleJobGetScriptExtensionsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取spark版本 */
+func (c *ShenhaiplatformClient) UranusSparkTaskSparkVersion(request *shenhaiplatform.UranusSparkTaskSparkVersionRequest) (*shenhaiplatform.UranusSparkTaskSparkVersionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusSparkTaskSparkVersionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建补数方案 */
+func (c *ShenhaiplatformClient) RotorSupplementPlanCreate(request *shenhaiplatform.RotorSupplementPlanCreateRequest) (*shenhaiplatform.RotorSupplementPlanCreateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.RotorSupplementPlanCreateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取资源简要信息（根据资源codes） */
+func (c *ShenhaiplatformClient) UranusResourceGetBriefByCodes(request *shenhaiplatform.UranusResourceGetBriefByCodesRequest) (*shenhaiplatform.UranusResourceGetBriefByCodesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusResourceGetBriefByCodesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 强制运行作业实例 */
+func (c *ShenhaiplatformClient) GravityParticleJobscheForceRunJobInst(request *shenhaiplatform.GravityParticleJobscheForceRunJobInstRequest) (*shenhaiplatform.GravityParticleJobscheForceRunJobInstResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleJobscheForceRunJobInstResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 任务检索 */
+func (c *ShenhaiplatformClient) RotorTasks(request *shenhaiplatform.RotorTasksRequest) (*shenhaiplatform.RotorTasksResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.RotorTasksResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 执行脚本 */
+func (c *ShenhaiplatformClient) UranusScriptStarters(request *shenhaiplatform.UranusScriptStartersRequest) (*shenhaiplatform.UranusScriptStartersResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusScriptStartersResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据用户名查询用户权限表列表，最多返回1000条 */
+func (c *ShenhaiplatformClient) JtlasWarehouseQueryTablesUnderSpecifiedUserWithPrivileges(request *shenhaiplatform.JtlasWarehouseQueryTablesUnderSpecifiedUserWithPrivilegesRequest) (*shenhaiplatform.JtlasWarehouseQueryTablesUnderSpecifiedUserWithPrivilegesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.JtlasWarehouseQueryTablesUnderSpecifiedUserWithPrivilegesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 列出所有目录的简要信息 */
+func (c *ShenhaiplatformClient) UranusTaskCatalogListAllBiz(request *shenhaiplatform.UranusTaskCatalogListAllBizRequest) (*shenhaiplatform.UranusTaskCatalogListAllBizResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskCatalogListAllBizResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新任务的Image参数信息 */
+func (c *ShenhaiplatformClient) UranusTaskImageParamInfoUpdate(request *shenhaiplatform.UranusTaskImageParamInfoUpdateRequest) (*shenhaiplatform.UranusTaskImageParamInfoUpdateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskImageParamInfoUpdateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新任务的依赖信息 */
+func (c *ShenhaiplatformClient) UranusTaskDependInfoUpdate(request *shenhaiplatform.UranusTaskDependInfoUpdateRequest) (*shenhaiplatform.UranusTaskDependInfoUpdateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskDependInfoUpdateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 运行手动任务 */
+func (c *ShenhaiplatformClient) RotorRunManualTaskInstance(request *shenhaiplatform.RotorRunManualTaskInstanceRequest) (*shenhaiplatform.RotorRunManualTaskInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.RotorRunManualTaskInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取 offset 天前 每个小时实例运行成功次数 */
+func (c *ShenhaiplatformClient) SuccessInstancePerHour(request *shenhaiplatform.SuccessInstancePerHourRequest) (*shenhaiplatform.SuccessInstancePerHourResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.SuccessInstancePerHourResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除资源 */
+func (c *ShenhaiplatformClient) UranusResourceDelete(request *shenhaiplatform.UranusResourceDeleteRequest) (*shenhaiplatform.UranusResourceDeleteResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusResourceDeleteResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据对话中的一条发言，推荐可能的prompt */
+func (c *ShenhaiplatformClient) CopilotUtteranceRecommend(request *shenhaiplatform.CopilotUtteranceRecommendRequest) (*shenhaiplatform.CopilotUtteranceRecommendResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.CopilotUtteranceRecommendResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 订阅/收藏表 */
+func (c *ShenhaiplatformClient) JtlasSubscribeTable(request *shenhaiplatform.JtlasSubscribeTableRequest) (*shenhaiplatform.JtlasSubscribeTableResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.JtlasSubscribeTableResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/*  */
+func (c *ShenhaiplatformClient) GetTaskTypeStatistics(request *shenhaiplatform.GetTaskTypeStatisticsRequest) (*shenhaiplatform.GetTaskTypeStatisticsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GetTaskTypeStatisticsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 抢任务节点锁 */
+func (c *ShenhaiplatformClient) UranusTaskNodeSnatchLock(request *shenhaiplatform.UranusTaskNodeSnatchLockRequest) (*shenhaiplatform.UranusTaskNodeSnatchLockResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskNodeSnatchLockResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 移动外部任务、工作流、业务目录等所在的业务目录 */
+func (c *ShenhaiplatformClient) UranusTaskObjectMove(request *shenhaiplatform.UranusTaskObjectMoveRequest) (*shenhaiplatform.UranusTaskObjectMoveResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskObjectMoveResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 统计失败作业状态数量 */
+func (c *ShenhaiplatformClient) GravityParticleJobMonitorJobFailCount(request *shenhaiplatform.GravityParticleJobMonitorJobFailCountRequest) (*shenhaiplatform.GravityParticleJobMonitorJobFailCountResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleJobMonitorJobFailCountResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 重新发布历史版本任务到运维中心 */
+func (c *ShenhaiplatformClient) UranusTaskRedeployAndEnable(request *shenhaiplatform.UranusTaskRedeployAndEnableRequest) (*shenhaiplatform.UranusTaskRedeployAndEnableResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskRedeployAndEnableResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 全量更新任务的输出参数列表 */
+func (c *ShenhaiplatformClient) UranusTaskPublicUpdateOutputParam(request *shenhaiplatform.UranusTaskPublicUpdateOutputParamRequest) (*shenhaiplatform.UranusTaskPublicUpdateOutputParamResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskPublicUpdateOutputParamResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 批量配置/保存空间参数 */
+func (c *ShenhaiplatformClient) ParamBatchSave(request *shenhaiplatform.ParamBatchSaveRequest) (*shenhaiplatform.ParamBatchSaveResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.ParamBatchSaveResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 解析作业完成信息进行作业实例运行状态更新 */
+func (c *ShenhaiplatformClient) GravityParticleJobscheProcessJobExeRst(request *shenhaiplatform.GravityParticleJobscheProcessJobExeRstRequest) (*shenhaiplatform.GravityParticleJobscheProcessJobExeRstResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleJobscheProcessJobExeRstResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据脚本类型获取模板引擎下载地址 */
+func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerGetEngineTemplate(request *shenhaiplatform.GravityParticleDubboJobManagerGetEngineTemplateRequest) (*shenhaiplatform.GravityParticleDubboJobManagerGetEngineTemplateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleDubboJobManagerGetEngineTemplateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 实例检索 */
+func (c *ShenhaiplatformClient) RotorInstances(request *shenhaiplatform.RotorInstancesRequest) (*shenhaiplatform.RotorInstancesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.RotorInstancesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 未就绪实例排名 */
+func (c *ShenhaiplatformClient) JobPendingInstanceRanking(request *shenhaiplatform.JobPendingInstanceRankingRequest) (*shenhaiplatform.JobPendingInstanceRankingResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.JobPendingInstanceRankingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 调试任务, 返回debugId */
+func (c *ShenhaiplatformClient) UranusTaskDebug(request *shenhaiplatform.UranusTaskDebugRequest) (*shenhaiplatform.UranusTaskDebugResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskDebugResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 重跑任务实例 */
+func (c *ShenhaiplatformClient) RotorRerunInstance(request *shenhaiplatform.RotorRerunInstanceRequest) (*shenhaiplatform.RotorRerunInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.RotorRerunInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建一个新的外部任务，支持多种任务类型 */
+func (c *ShenhaiplatformClient) UranusTaskPublicCreate(request *shenhaiplatform.UranusTaskPublicCreateRequest) (*shenhaiplatform.UranusTaskPublicCreateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskPublicCreateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取当前登录用户的所有角色 */
+func (c *ShenhaiplatformClient) WorkspaceGetUserRoles(request *shenhaiplatform.WorkspaceGetUserRolesRequest) (*shenhaiplatform.WorkspaceGetUserRolesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.WorkspaceGetUserRolesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 表授权接口 */
+func (c *ShenhaiplatformClient) JtlasDestroy(request *shenhaiplatform.JtlasDestroyRequest) (*shenhaiplatform.JtlasDestroyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.JtlasDestroyResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 校验当前用户是否是该工作空间的管理员 */
+func (c *ShenhaiplatformClient) WorkspaceVerifyUserIsManager(request *shenhaiplatform.WorkspaceVerifyUserIsManagerRequest) (*shenhaiplatform.WorkspaceVerifyUserIsManagerResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.WorkspaceVerifyUserIsManagerResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 统计作业数量 */
+func (c *ShenhaiplatformClient) GravityParticleJobMonitorJobCountInfo(request *shenhaiplatform.GravityParticleJobMonitorJobCountInfoRequest) (*shenhaiplatform.GravityParticleJobMonitorJobCountInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleJobMonitorJobCountInfoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 数据上传 */
+func (c *ShenhaiplatformClient) UranusTableDataLoad(request *shenhaiplatform.UranusTableDataLoadRequest) (*shenhaiplatform.UranusTableDataLoadResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTableDataLoadResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 任务关系页面，作业详情 */
+func (c *ShenhaiplatformClient) GravityParticleJobDepDetail(request *shenhaiplatform.GravityParticleJobDepDetailRequest) (*shenhaiplatform.GravityParticleJobDepDetailResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleJobDepDetailResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 统计不成功作业的数量 */
+func (c *ShenhaiplatformClient) GravityParticleJobMonitorJobUnsuccessRanking(request *shenhaiplatform.GravityParticleJobMonitorJobUnsuccessRankingRequest) (*shenhaiplatform.GravityParticleJobMonitorJobUnsuccessRankingResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleJobMonitorJobUnsuccessRankingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询授权表 */
+func (c *ShenhaiplatformClient) UranusTableLike(request *shenhaiplatform.UranusTableLikeRequest) (*shenhaiplatform.UranusTableLikeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTableLikeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 停止发言，用于终止模型回复生成 */
+func (c *ShenhaiplatformClient) CopilotUtteranceStop(request *shenhaiplatform.CopilotUtteranceStopRequest) (*shenhaiplatform.CopilotUtteranceStopResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.CopilotUtteranceStopResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除函数 */
+func (c *ShenhaiplatformClient) UranusFunctionDelete(request *shenhaiplatform.UranusFunctionDeleteRequest) (*shenhaiplatform.UranusFunctionDeleteResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusFunctionDeleteResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据脚本内容解析父任务依赖 */
+func (c *ShenhaiplatformClient) UranusTaskInfoAnalysisDependJob(request *shenhaiplatform.UranusTaskInfoAnalysisDependJobRequest) (*shenhaiplatform.UranusTaskInfoAnalysisDependJobResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskInfoAnalysisDependJobResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 任务单节点-更新作业名称 */
+func (c *ShenhaiplatformClient) UranusTaskNodeUpdateJobName(request *shenhaiplatform.UranusTaskNodeUpdateJobNameRequest) (*shenhaiplatform.UranusTaskNodeUpdateJobNameResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskNodeUpdateJobNameResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 任务单节点-更新节点位置信息 */
+func (c *ShenhaiplatformClient) UranusTaskNodeUpdateNodeData(request *shenhaiplatform.UranusTaskNodeUpdateNodeDataRequest) (*shenhaiplatform.UranusTaskNodeUpdateNodeDataResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskNodeUpdateNodeDataResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 补数资源组策略字典 */
+func (c *ShenhaiplatformClient) RotorDictSupplementResourceGroupStrategy(request *shenhaiplatform.RotorDictSupplementResourceGroupStrategyRequest) (*shenhaiplatform.RotorDictSupplementResourceGroupStrategyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.RotorDictSupplementResourceGroupStrategyResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取资源状态 */
+func (c *ShenhaiplatformClient) UranusResourceStatus(request *shenhaiplatform.UranusResourceStatusRequest) (*shenhaiplatform.UranusResourceStatusResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusResourceStatusResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/*  */
+func (c *ShenhaiplatformClient) GetFailedInstancesReason(request *shenhaiplatform.GetFailedInstancesReasonRequest) (*shenhaiplatform.GetFailedInstancesReasonResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GetFailedInstancesReasonResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 脚本参数保存/更新 */
+func (c *ShenhaiplatformClient) UranusScriptParams(request *shenhaiplatform.UranusScriptParamsRequest) (*shenhaiplatform.UranusScriptParamsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusScriptParamsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 保存作业脚本信息 */
+func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerSaveJobScript(request *shenhaiplatform.GravityParticleDubboJobManagerSaveJobScriptRequest) (*shenhaiplatform.GravityParticleDubboJobManagerSaveJobScriptResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleDubboJobManagerSaveJobScriptResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询字段血缘 */
+func (c *ShenhaiplatformClient) JtlasSearchColumnLineage(request *shenhaiplatform.JtlasSearchColumnLineageRequest) (*shenhaiplatform.JtlasSearchColumnLineageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.JtlasSearchColumnLineageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除任务节点 */
+func (c *ShenhaiplatformClient) UranusTaskOrFlowNodeDelete(request *shenhaiplatform.UranusTaskOrFlowNodeDeleteRequest) (*shenhaiplatform.UranusTaskOrFlowNodeDeleteResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskOrFlowNodeDeleteResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 列出所有表 */
+func (c *ShenhaiplatformClient) JtlasForeignTableList(request *shenhaiplatform.JtlasForeignTableListRequest) (*shenhaiplatform.JtlasForeignTableListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.JtlasForeignTableListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询函数接口 */
+func (c *ShenhaiplatformClient) UranusUdfListFunction(request *shenhaiplatform.UranusUdfListFunctionRequest) (*shenhaiplatform.UranusUdfListFunctionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusUdfListFunctionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 重置作业实例的状态为制定状态 */
+func (c *ShenhaiplatformClient) GravityParticleJobscheResetJobInstStatus(request *shenhaiplatform.GravityParticleJobscheResetJobInstStatusRequest) (*shenhaiplatform.GravityParticleJobscheResetJobInstStatusResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleJobscheResetJobInstStatusResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 终止任务 */
+func (c *ShenhaiplatformClient) UranusTaskKill(request *shenhaiplatform.UranusTaskKillRequest) (*shenhaiplatform.UranusTaskKillResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskKillResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 分页查询作业列表 */
+func (c *ShenhaiplatformClient) ManageHubGravityListJob(request *shenhaiplatform.ManageHubGravityListJobRequest) (*shenhaiplatform.ManageHubGravityListJobResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.ManageHubGravityListJobResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 计算作业详情 */
+func (c *ShenhaiplatformClient) GravityParticleParticleModelCalcCalcJobDetail(request *shenhaiplatform.GravityParticleParticleModelCalcCalcJobDetailRequest) (*shenhaiplatform.GravityParticleParticleModelCalcCalcJobDetailResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleParticleModelCalcCalcJobDetailResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 通过工作空间Code查询绑定的计算引擎列表 */
+func (c *ShenhaiplatformClient) GetEngineByWorkspaceCode(request *shenhaiplatform.GetEngineByWorkspaceCodeRequest) (*shenhaiplatform.GetEngineByWorkspaceCodeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GetEngineByWorkspaceCodeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 发布对象信息细节查看 */
+func (c *ShenhaiplatformClient) DescribePublishObj(request *shenhaiplatform.DescribePublishObjRequest) (*shenhaiplatform.DescribePublishObjResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.DescribePublishObjResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 通过空间code查询绑定的计算引擎信息及对应类型和JCW/JMR实例信息 */
+func (c *ShenhaiplatformClient) GetEngineDetailsByWorkspaceCode(request *shenhaiplatform.GetEngineDetailsByWorkspaceCodeRequest) (*shenhaiplatform.GetEngineDetailsByWorkspaceCodeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GetEngineDetailsByWorkspaceCodeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取作业触发条件信息信息 */
+func (c *ShenhaiplatformClient) GravityParticleParticleJobGetConditionInfo(request *shenhaiplatform.GravityParticleParticleJobGetConditionInfoRequest) (*shenhaiplatform.GravityParticleParticleJobGetConditionInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleParticleJobGetConditionInfoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改目录属性 */
+func (c *ShenhaiplatformClient) UranusCatalogUpdate(request *shenhaiplatform.UranusCatalogUpdateRequest) (*shenhaiplatform.UranusCatalogUpdateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusCatalogUpdateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 重新上线接口 根据文件id和版本号 */
+func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerGetMgrJobByJobe(request *shenhaiplatform.GravityParticleDubboJobManagerGetMgrJobByJobeRequest) (*shenhaiplatform.GravityParticleDubboJobManagerGetMgrJobByJobeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleDubboJobManagerGetMgrJobByJobeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 检索表权限 */
+func (c *ShenhaiplatformClient) JtlasPageSearchTablePrivileges(request *shenhaiplatform.JtlasPageSearchTablePrivilegesRequest) (*shenhaiplatform.JtlasPageSearchTablePrivilegesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.JtlasPageSearchTablePrivilegesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 编辑工作空间 */
+func (c *ShenhaiplatformClient) WorkspaceSaveInfo(request *shenhaiplatform.WorkspaceSaveInfoRequest) (*shenhaiplatform.WorkspaceSaveInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.WorkspaceSaveInfoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取调试运行日志 */
+func (c *ShenhaiplatformClient) UranusTaskDebugLog(request *shenhaiplatform.UranusTaskDebugLogRequest) (*shenhaiplatform.UranusTaskDebugLogResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskDebugLogResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 使用线上配置 */
+func (c *ShenhaiplatformClient) UranusTaskInfoOnLineConfig(request *shenhaiplatform.UranusTaskInfoOnLineConfigRequest) (*shenhaiplatform.UranusTaskInfoOnLineConfigResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskInfoOnLineConfigResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 撤销发布对象 */
+func (c *ShenhaiplatformClient) DeletePublishObj(request *shenhaiplatform.DeletePublishObjRequest) (*shenhaiplatform.DeletePublishObjResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.DeletePublishObjResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 任务脚本内容全文检索 */
+func (c *ShenhaiplatformClient) UranusTaskFullTextQuery(request *shenhaiplatform.UranusTaskFullTextQueryRequest) (*shenhaiplatform.UranusTaskFullTextQueryResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskFullTextQueryResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据任务名字模糊查询 */
+func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerSearchByJobName(request *shenhaiplatform.GravityParticleDubboJobManagerSearchByJobNameRequest) (*shenhaiplatform.GravityParticleDubboJobManagerSearchByJobNameResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleDubboJobManagerSearchByJobNameResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 分页查询作业数据日期状态列表 */
+func (c *ShenhaiplatformClient) ManageHubGravityListTxDateStatus(request *shenhaiplatform.ManageHubGravityListTxDateStatusRequest) (*shenhaiplatform.ManageHubGravityListTxDateStatusResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.ManageHubGravityListTxDateStatusResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 工作流更新 */
+func (c *ShenhaiplatformClient) UranusTaskFlowUpdate(request *shenhaiplatform.UranusTaskFlowUpdateRequest) (*shenhaiplatform.UranusTaskFlowUpdateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskFlowUpdateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 工作台作业统计接口 */
+func (c *ShenhaiplatformClient) GravityParticleParticleJobMonitorJobStatusCount(request *shenhaiplatform.GravityParticleParticleJobMonitorJobStatusCountRequest) (*shenhaiplatform.GravityParticleParticleJobMonitorJobStatusCountResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleParticleJobMonitorJobStatusCountResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据作业id删除作业脚本 */
+func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerDeleteJobScript(request *shenhaiplatform.GravityParticleDubboJobManagerDeleteJobScriptRequest) (*shenhaiplatform.GravityParticleDubboJobManagerDeleteJobScriptResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleDubboJobManagerDeleteJobScriptResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 判断目录/函数是否存在 */
+func (c *ShenhaiplatformClient) UranusFunctionCheck(request *shenhaiplatform.UranusFunctionCheckRequest) (*shenhaiplatform.UranusFunctionCheckResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusFunctionCheckResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 工作流-发布一 */
+func (c *ShenhaiplatformClient) UranusTaskPublishOne(request *shenhaiplatform.UranusTaskPublishOneRequest) (*shenhaiplatform.UranusTaskPublishOneResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskPublishOneResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获得脚本详情 */
+func (c *ShenhaiplatformClient) UranusScriptQueries(request *shenhaiplatform.UranusScriptQueriesRequest) (*shenhaiplatform.UranusScriptQueriesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusScriptQueriesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 批量预发布节点请求正确的发布顺序 */
+func (c *ShenhaiplatformClient) UranusFlowPrepublishNodesSort(request *shenhaiplatform.UranusFlowPrepublishNodesSortRequest) (*shenhaiplatform.UranusFlowPrepublishNodesSortResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusFlowPrepublishNodesSortResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 任务调度周期字典 */
+func (c *ShenhaiplatformClient) RotorDictTaskScheduleCycles(request *shenhaiplatform.RotorDictTaskScheduleCyclesRequest) (*shenhaiplatform.RotorDictTaskScheduleCyclesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.RotorDictTaskScheduleCyclesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询可以创建的任务类型 */
+func (c *ShenhaiplatformClient) UranusTaskTypeList(request *shenhaiplatform.UranusTaskTypeListRequest) (*shenhaiplatform.UranusTaskTypeListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskTypeListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取集群信息 */
+func (c *ShenhaiplatformClient) ManageHubClusterGet(request *shenhaiplatform.ManageHubClusterGetRequest) (*shenhaiplatform.ManageHubClusterGetResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.ManageHubClusterGetResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据作业名模糊查询或JobQueryDTO查询 */
+func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerSearchSchedJob(request *shenhaiplatform.GravityParticleDubboJobManagerSearchSchedJobRequest) (*shenhaiplatform.GravityParticleDubboJobManagerSearchSchedJobResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleDubboJobManagerSearchSchedJobResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除工作空间成员 */
+func (c *ShenhaiplatformClient) WorkspaceDeleteMember(request *shenhaiplatform.WorkspaceDeleteMemberRequest) (*shenhaiplatform.WorkspaceDeleteMemberResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.WorkspaceDeleteMemberResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取资源下载链接 */
+func (c *ShenhaiplatformClient) UranusResourceDownloadUrl(request *shenhaiplatform.UranusResourceDownloadUrlRequest) (*shenhaiplatform.UranusResourceDownloadUrlResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusResourceDownloadUrlResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取资源简要信息(前缀匹配资源名称) */
+func (c *ShenhaiplatformClient) UranusResourceGetDetailByPrefix(request *shenhaiplatform.UranusResourceGetDetailByPrefixRequest) (*shenhaiplatform.UranusResourceGetDetailByPrefixResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusResourceGetDetailByPrefixResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取具体表的建表语句 */
+func (c *ShenhaiplatformClient) UranusTableDDL(request *shenhaiplatform.UranusTableDDLRequest) (*shenhaiplatform.UranusTableDDLResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTableDDLResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 任务节点版本查看 */
+func (c *ShenhaiplatformClient) UranusTaskInfoHistoryList(request *shenhaiplatform.UranusTaskInfoHistoryListRequest) (*shenhaiplatform.UranusTaskInfoHistoryListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskInfoHistoryListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 统计成功作业状态数量 */
+func (c *ShenhaiplatformClient) GravityParticleJobMonitorJobSuccessCount(request *shenhaiplatform.GravityParticleJobMonitorJobSuccessCountRequest) (*shenhaiplatform.GravityParticleJobMonitorJobSuccessCountResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleJobMonitorJobSuccessCountResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 清除对话上下文 */
+func (c *ShenhaiplatformClient) CopilotChatClear(request *shenhaiplatform.CopilotChatClearRequest) (*shenhaiplatform.CopilotChatClearResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.CopilotChatClearResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据租户/项目空间/表名称模糊查询表列表，最多返回1000条 */
+func (c *ShenhaiplatformClient) JtlasWarehouseFuzzyQueryTablesByTableName(request *shenhaiplatform.JtlasWarehouseFuzzyQueryTablesByTableNameRequest) (*shenhaiplatform.JtlasWarehouseFuzzyQueryTablesByTableNameResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.JtlasWarehouseFuzzyQueryTablesByTableNameResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更改用户角色 */
+func (c *ShenhaiplatformClient) WorkspaceUpdateUserRole(request *shenhaiplatform.WorkspaceUpdateUserRoleRequest) (*shenhaiplatform.WorkspaceUpdateUserRoleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.WorkspaceUpdateUserRoleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据当前作业和目标层级查询父作业链路层级树 */
+func (c *ShenhaiplatformClient) GravityParticleJobDepGetParentChainJobs(request *shenhaiplatform.GravityParticleJobDepGetParentChainJobsRequest) (*shenhaiplatform.GravityParticleJobDepGetParentChainJobsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleJobDepGetParentChainJobsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 新建函数 */
+func (c *ShenhaiplatformClient) UranusFunctionCreate(request *shenhaiplatform.UranusFunctionCreateRequest) (*shenhaiplatform.UranusFunctionCreateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusFunctionCreateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 数据预览 */
+func (c *ShenhaiplatformClient) UranusDataLoadPreview(request *shenhaiplatform.UranusDataLoadPreviewRequest) (*shenhaiplatform.UranusDataLoadPreviewResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusDataLoadPreviewResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 停止脚本 */
+func (c *ShenhaiplatformClient) UranusScriptStop(request *shenhaiplatform.UranusScriptStopRequest) (*shenhaiplatform.UranusScriptStopResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusScriptStopResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 批量任务单节点-上下线更新 */
+func (c *ShenhaiplatformClient) UranusTaskUpdateStatusList(request *shenhaiplatform.UranusTaskUpdateStatusListRequest) (*shenhaiplatform.UranusTaskUpdateStatusListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskUpdateStatusListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取集群下的元数据列表 */
+func (c *ShenhaiplatformClient) ManageHubClusterMetaList(request *shenhaiplatform.ManageHubClusterMetaListRequest) (*shenhaiplatform.ManageHubClusterMetaListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.ManageHubClusterMetaListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取作业类型关系 */
+func (c *ShenhaiplatformClient) GravityParticleSchedDictGetJobTypeR(request *shenhaiplatform.GravityParticleSchedDictGetJobTypeRRequest) (*shenhaiplatform.GravityParticleSchedDictGetJobTypeRResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleSchedDictGetJobTypeRResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 工作空间到期后删除该工作空间下的所有作业和日志 */
+func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerDeleteAllByWorkspace(request *shenhaiplatform.GravityParticleDubboJobManagerDeleteAllByWorkspaceRequest) (*shenhaiplatform.GravityParticleDubboJobManagerDeleteAllByWorkspaceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleDubboJobManagerDeleteAllByWorkspaceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 运行失败记录 */
+func (c *ShenhaiplatformClient) FailedHistories(request *shenhaiplatform.FailedHistoriesRequest) (*shenhaiplatform.FailedHistoriesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.FailedHistoriesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 发布表变更信息 */
+func (c *ShenhaiplatformClient) UranusTablePublishToPublishCenter(request *shenhaiplatform.UranusTablePublishToPublishCenterRequest) (*shenhaiplatform.UranusTablePublishToPublishCenterResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTablePublishToPublishCenterResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询表DDL */
+func (c *ShenhaiplatformClient) ManageHubStorageTableDDL(request *shenhaiplatform.ManageHubStorageTableDDLRequest) (*shenhaiplatform.ManageHubStorageTableDDLResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.ManageHubStorageTableDDLResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 任务保存 */
+func (c *ShenhaiplatformClient) UranusTaskInfoSave(request *shenhaiplatform.UranusTaskInfoSaveRequest) (*shenhaiplatform.UranusTaskInfoSaveResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskInfoSaveResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取taskCode */
+func (c *ShenhaiplatformClient) UranusTaskInfoGetTaskCode(request *shenhaiplatform.UranusTaskInfoGetTaskCodeRequest) (*shenhaiplatform.UranusTaskInfoGetTaskCodeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskInfoGetTaskCodeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 启动任务调试，返回调试ID */
+func (c *ShenhaiplatformClient) UranusTaskPublicDebug(request *shenhaiplatform.UranusTaskPublicDebugRequest) (*shenhaiplatform.UranusTaskPublicDebugResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskPublicDebugResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 目录根据companyCode查询目录 */
+func (c *ShenhaiplatformClient) UranusCatalogQueryList(request *shenhaiplatform.UranusCatalogQueryListRequest) (*shenhaiplatform.UranusCatalogQueryListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusCatalogQueryListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 列出当前工作区下的所有数据源信息 */
+func (c *ShenhaiplatformClient) UranusTaskPublicListDatasources(request *shenhaiplatform.UranusTaskPublicListDatasourcesRequest) (*shenhaiplatform.UranusTaskPublicListDatasourcesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskPublicListDatasourcesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询任务所有信息 */
+func (c *ShenhaiplatformClient) UranusTaskAllInfo(request *shenhaiplatform.UranusTaskAllInfoRequest) (*shenhaiplatform.UranusTaskAllInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskAllInfoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 模糊列出可以依赖的任务信息，工作流和工作流内部任务不能够自依赖 */
+func (c *ShenhaiplatformClient) UranusTaskDependableListFuzz(request *shenhaiplatform.UranusTaskDependableListFuzzRequest) (*shenhaiplatform.UranusTaskDependableListFuzzResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskDependableListFuzzResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 工作流目录树 */
+func (c *ShenhaiplatformClient) UranusTaskFlowListTree(request *shenhaiplatform.UranusTaskFlowListTreeRequest) (*shenhaiplatform.UranusTaskFlowListTreeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskFlowListTreeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 流程画布-节点管理列表 */
+func (c *ShenhaiplatformClient) UranusTaskNodeList(request *shenhaiplatform.UranusTaskNodeListRequest) (*shenhaiplatform.UranusTaskNodeListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskNodeListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取指定对话中的发言记录 */
+func (c *ShenhaiplatformClient) CopilotUtteranceList(request *shenhaiplatform.CopilotUtteranceListRequest) (*shenhaiplatform.CopilotUtteranceListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.CopilotUtteranceListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除文件夹 */
+func (c *ShenhaiplatformClient) UranusWorkFlowDirDelete(request *shenhaiplatform.UranusWorkFlowDirDeleteRequest) (*shenhaiplatform.UranusWorkFlowDirDeleteResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusWorkFlowDirDeleteResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 列出LOOP任务常用元素分隔符 */
+func (c *ShenhaiplatformClient) UranusLoopTaskElementDelimiters(request *shenhaiplatform.UranusLoopTaskElementDelimitersRequest) (*shenhaiplatform.UranusLoopTaskElementDelimitersResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusLoopTaskElementDelimitersResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 上传资源 */
+func (c *ShenhaiplatformClient) UranusResourceAppendFile(request *shenhaiplatform.UranusResourceAppendFileRequest) (*shenhaiplatform.UranusResourceAppendFileResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusResourceAppendFileResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 数据集成任务获取建表语句 */
+func (c *ShenhaiplatformClient) UranusTaskPipeShowCreateTable(request *shenhaiplatform.UranusTaskPipeShowCreateTableRequest) (*shenhaiplatform.UranusTaskPipeShowCreateTableResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskPipeShowCreateTableResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取历史对话列表 */
+func (c *ShenhaiplatformClient) CopilotChatHistory(request *shenhaiplatform.CopilotChatHistoryRequest) (*shenhaiplatform.CopilotChatHistoryResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.CopilotChatHistoryResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询工作流下的任务节点 */
+func (c *ShenhaiplatformClient) UranusFlowSearchNode(request *shenhaiplatform.UranusFlowSearchNodeRequest) (*shenhaiplatform.UranusFlowSearchNodeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusFlowSearchNodeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 抢锁时获取任务信息 */
+func (c *ShenhaiplatformClient) UranusTaskInfoLockDetail(request *shenhaiplatform.UranusTaskInfoLockDetailRequest) (*shenhaiplatform.UranusTaskInfoLockDetailResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskInfoLockDetailResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询计算任务日志 */
+func (c *ShenhaiplatformClient) ManageHubGravityJobLog(request *shenhaiplatform.ManageHubGravityJobLogRequest) (*shenhaiplatform.ManageHubGravityJobLogResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.ManageHubGravityJobLogResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询表分区 */
+func (c *ShenhaiplatformClient) JtlasPageSearchTablePartitions(request *shenhaiplatform.JtlasPageSearchTablePartitionsRequest) (*shenhaiplatform.JtlasPageSearchTablePartitionsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.JtlasPageSearchTablePartitionsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 任务批量补数 */
+func (c *ShenhaiplatformClient) GravityParticleJobHisRunAddBathTask(request *shenhaiplatform.GravityParticleJobHisRunAddBathTaskRequest) (*shenhaiplatform.GravityParticleJobHisRunAddBathTaskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleJobHisRunAddBathTaskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建集群 */
+func (c *ShenhaiplatformClient) ManageHubClusterCreate(request *shenhaiplatform.ManageHubClusterCreateRequest) (*shenhaiplatform.ManageHubClusterCreateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.ManageHubClusterCreateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 数据集成任务一键建表 */
+func (c *ShenhaiplatformClient) UranusTaskPipeCreateTable(request *shenhaiplatform.UranusTaskPipeCreateTableRequest) (*shenhaiplatform.UranusTaskPipeCreateTableResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskPipeCreateTableResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取脚本类型和模板下载地址 */
+func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerGetScriptInfoType(request *shenhaiplatform.GravityParticleDubboJobManagerGetScriptInfoTypeRequest) (*shenhaiplatform.GravityParticleDubboJobManagerGetScriptInfoTypeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleDubboJobManagerGetScriptInfoTypeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 工作流-预发布 */
+func (c *ShenhaiplatformClient) UranusTaskPrePublish(request *shenhaiplatform.UranusTaskPrePublishRequest) (*shenhaiplatform.UranusTaskPrePublishResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskPrePublishResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询脚本参数或任务参数 */
+func (c *ShenhaiplatformClient) UranusScriptQueryParams(request *shenhaiplatform.UranusScriptQueryParamsRequest) (*shenhaiplatform.UranusScriptQueryParamsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusScriptQueryParamsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 同步工作空间开通信息接口 */
+func (c *ShenhaiplatformClient) WorkspaceSyncWsProductOrder(request *shenhaiplatform.WorkspaceSyncWsProductOrderRequest) (*shenhaiplatform.WorkspaceSyncWsProductOrderResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.WorkspaceSyncWsProductOrderResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 任务属性 */
+func (c *ShenhaiplatformClient) ManageHubGravityJobProperty(request *shenhaiplatform.ManageHubGravityJobPropertyRequest) (*shenhaiplatform.ManageHubGravityJobPropertyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.ManageHubGravityJobPropertyResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 数据下载 */
+func (c *ShenhaiplatformClient) UranusTableDataDownload(request *shenhaiplatform.UranusTableDataDownloadRequest) (*shenhaiplatform.UranusTableDataDownloadResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTableDataDownloadResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 工作流新建 */
+func (c *ShenhaiplatformClient) UranusTaskFlowSave(request *shenhaiplatform.UranusTaskFlowSaveRequest) (*shenhaiplatform.UranusTaskFlowSaveResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskFlowSaveResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 同步工作空间续费消息 */
+func (c *ShenhaiplatformClient) WorkspaceSyncRecharge(request *shenhaiplatform.WorkspaceSyncRechargeRequest) (*shenhaiplatform.WorkspaceSyncRechargeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.WorkspaceSyncRechargeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 实例操作日志 */
+func (c *ShenhaiplatformClient) RotorInstanceOperationLogs(request *shenhaiplatform.RotorInstanceOperationLogsRequest) (*shenhaiplatform.RotorInstanceOperationLogsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.RotorInstanceOperationLogsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取调试结果列表，返回结果文件列表 */
+func (c *ShenhaiplatformClient) UranusTaskDebugResultList(request *shenhaiplatform.UranusTaskDebugResultListRequest) (*shenhaiplatform.UranusTaskDebugResultListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskDebugResultListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 任务重新发布 */
+func (c *ShenhaiplatformClient) UranusTaskInfoRePublish(request *shenhaiplatform.UranusTaskInfoRePublishRequest) (*shenhaiplatform.UranusTaskInfoRePublishResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskInfoRePublishResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 全量更新任务的输入参数列表 */
+func (c *ShenhaiplatformClient) UranusTaskPublicUpdateInputParam(request *shenhaiplatform.UranusTaskPublicUpdateInputParamRequest) (*shenhaiplatform.UranusTaskPublicUpdateInputParamResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskPublicUpdateInputParamResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询作业完成信息 */
+func (c *ShenhaiplatformClient) GravityParticleParticleJobJobCompletionInfo(request *shenhaiplatform.GravityParticleParticleJobJobCompletionInfoRequest) (*shenhaiplatform.GravityParticleParticleJobJobCompletionInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleParticleJobJobCompletionInfoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取所有分类目录 */
+func (c *ShenhaiplatformClient) UranusFunctionListCatalog(request *shenhaiplatform.UranusFunctionListCatalogRequest) (*shenhaiplatform.UranusFunctionListCatalogResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusFunctionListCatalogResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 检索表 */
+func (c *ShenhaiplatformClient) JtlasPageSearchTables(request *shenhaiplatform.JtlasPageSearchTablesRequest) (*shenhaiplatform.JtlasPageSearchTablesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.JtlasPageSearchTablesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 实例调度日志 */
+func (c *ShenhaiplatformClient) RotorInstanceScheduleLogs(request *shenhaiplatform.RotorInstanceScheduleLogsRequest) (*shenhaiplatform.RotorInstanceScheduleLogsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.RotorInstanceScheduleLogsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据查询条件返回作业关联的模型信息 */
+func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerSearchDmrModelJob(request *shenhaiplatform.GravityParticleDubboJobManagerSearchDmrModelJobRequest) (*shenhaiplatform.GravityParticleDubboJobManagerSearchDmrModelJobResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleDubboJobManagerSearchDmrModelJobResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 发布包详情查询 */
+func (c *ShenhaiplatformClient) DescribePublishPkg(request *shenhaiplatform.DescribePublishPkgRequest) (*shenhaiplatform.DescribePublishPkgResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.DescribePublishPkgResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新任务的脚本文件内容 */
+func (c *ShenhaiplatformClient) UranusTaskPublicUpdateScript(request *shenhaiplatform.UranusTaskPublicUpdateScriptRequest) (*shenhaiplatform.UranusTaskPublicUpdateScriptResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskPublicUpdateScriptResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 任务/工作流按照名称模糊查询 */
+func (c *ShenhaiplatformClient) UranusTaskCatalogQuery(request *shenhaiplatform.UranusTaskCatalogQueryRequest) (*shenhaiplatform.UranusTaskCatalogQueryResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskCatalogQueryResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取工作空间绑定的云仓项目 */
+func (c *ShenhaiplatformClient) WorkspaceGetProject(request *shenhaiplatform.WorkspaceGetProjectRequest) (*shenhaiplatform.WorkspaceGetProjectResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.WorkspaceGetProjectResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新任务的预警信息 */
+func (c *ShenhaiplatformClient) UranusTaskAlarmInfoUpdate(request *shenhaiplatform.UranusTaskAlarmInfoUpdateRequest) (*shenhaiplatform.UranusTaskAlarmInfoUpdateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskAlarmInfoUpdateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/*  */
+func (c *ShenhaiplatformClient) GetScheduledInstancesCountPerHour(request *shenhaiplatform.GetScheduledInstancesCountPerHourRequest) (*shenhaiplatform.GetScheduledInstancesCountPerHourResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GetScheduledInstancesCountPerHourResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 发布，保存发布，更新发布等等 */
+func (c *ShenhaiplatformClient) UranusTablePublish(request *shenhaiplatform.UranusTablePublishRequest) (*shenhaiplatform.UranusTablePublishResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTablePublishResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 实例状态字典 */
+func (c *ShenhaiplatformClient) RotorDictInstanceDisplayStates(request *shenhaiplatform.RotorDictInstanceDisplayStatesRequest) (*shenhaiplatform.RotorDictInstanceDisplayStatesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.RotorDictInstanceDisplayStatesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除空间参数 */
+func (c *ShenhaiplatformClient) ParamDelete(request *shenhaiplatform.ParamDeleteRequest) (*shenhaiplatform.ParamDeleteResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.ParamDeleteResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取支持的参数类型枚举列表 */
+func (c *ShenhaiplatformClient) ParamTypes(request *shenhaiplatform.ParamTypesRequest) (*shenhaiplatform.ParamTypesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.ParamTypesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询指定工作空间下的参数列表及参数值 */
+func (c *ShenhaiplatformClient) ParamList(request *shenhaiplatform.ParamListRequest) (*shenhaiplatform.ParamListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.ParamListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 表分隔符信息 */
+func (c *ShenhaiplatformClient) UranusTableDelimiters(request *shenhaiplatform.UranusTableDelimitersRequest) (*shenhaiplatform.UranusTableDelimitersResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTableDelimitersResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 分页列出当前工作空间下的所有任务（含工作流内外部任务）与工作流的简要信息 */
+func (c *ShenhaiplatformClient) UranusTaskPublicPageList(request *shenhaiplatform.UranusTaskPublicPageListRequest) (*shenhaiplatform.UranusTaskPublicPageListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskPublicPageListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据类型获取数据字典 */
+func (c *ShenhaiplatformClient) GravityParticleConfigUserMatchUser(request *shenhaiplatform.GravityParticleConfigUserMatchUserRequest) (*shenhaiplatform.GravityParticleConfigUserMatchUserResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleConfigUserMatchUserResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 存储概览 */
+func (c *ShenhaiplatformClient) ManageHubStorageSummary(request *shenhaiplatform.ManageHubStorageSummaryRequest) (*shenhaiplatform.ManageHubStorageSummaryResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.ManageHubStorageSummaryResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 任务单节点-删除 */
+func (c *ShenhaiplatformClient) UranusTaskNodeDelete(request *shenhaiplatform.UranusTaskNodeDeleteRequest) (*shenhaiplatform.UranusTaskNodeDeleteResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskNodeDeleteResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新任务的调试参数信息 */
+func (c *ShenhaiplatformClient) UranusTaskDebugParamInfoUpdate(request *shenhaiplatform.UranusTaskDebugParamInfoUpdateRequest) (*shenhaiplatform.UranusTaskDebugParamInfoUpdateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskDebugParamInfoUpdateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取作业树 */
+func (c *ShenhaiplatformClient) GravityParticleJobDepGetChildTreed(request *shenhaiplatform.GravityParticleJobDepGetChildTreedRequest) (*shenhaiplatform.GravityParticleJobDepGetChildTreedResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleJobDepGetChildTreedResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获得脚本运行日志 */
+func (c *ShenhaiplatformClient) UranusScriptRunLogLogContent(request *shenhaiplatform.UranusScriptRunLogLogContentRequest) (*shenhaiplatform.UranusScriptRunLogLogContentResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusScriptRunLogLogContentResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 建表的列类型查询 */
+func (c *ShenhaiplatformClient) UranusDictTableCode(request *shenhaiplatform.UranusDictTableCodeRequest) (*shenhaiplatform.UranusDictTableCodeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusDictTableCodeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取临时查询运行详情 */
+func (c *ShenhaiplatformClient) UranusTaskExtraRunnerDetail(request *shenhaiplatform.UranusTaskExtraRunnerDetailRequest) (*shenhaiplatform.UranusTaskExtraRunnerDetailResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskExtraRunnerDetailResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据查询条件返回作业Id */
+func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerSearchJobId(request *shenhaiplatform.GravityParticleDubboJobManagerSearchJobIdRequest) (*shenhaiplatform.GravityParticleDubboJobManagerSearchJobIdResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleDubboJobManagerSearchJobIdResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 补数方式字典 */
+func (c *ShenhaiplatformClient) RotorDictSupplementMethod(request *shenhaiplatform.RotorDictSupplementMethodRequest) (*shenhaiplatform.RotorDictSupplementMethodResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.RotorDictSupplementMethodResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 一键重跑预览 */
+func (c *ShenhaiplatformClient) ManageHubGravityOneClickRerunPreview(request *shenhaiplatform.ManageHubGravityOneClickRerunPreviewRequest) (*shenhaiplatform.ManageHubGravityOneClickRerunPreviewResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.ManageHubGravityOneClickRerunPreviewResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除补数方案 */
+func (c *ShenhaiplatformClient) RotorSupplementPlanDelete(request *shenhaiplatform.RotorSupplementPlanDeleteRequest) (*shenhaiplatform.RotorSupplementPlanDeleteResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.RotorSupplementPlanDeleteResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 通过计算引擎Code查询绑定的云仓和JMR实例列表 */
+func (c *ShenhaiplatformClient) GetInstances(request *shenhaiplatform.GetInstancesRequest) (*shenhaiplatform.GetInstancesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GetInstancesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 全量更新任务的依赖信息 */
+func (c *ShenhaiplatformClient) UranusTaskPublicConfigDepend(request *shenhaiplatform.UranusTaskPublicConfigDependRequest) (*shenhaiplatform.UranusTaskPublicConfigDependResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskPublicConfigDependResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 实例指标卡 */
+func (c *ShenhaiplatformClient) QueryStatisticsInSelectTime(request *shenhaiplatform.QueryStatisticsInSelectTimeRequest) (*shenhaiplatform.QueryStatisticsInSelectTimeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.QueryStatisticsInSelectTimeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取子作业 */
+func (c *ShenhaiplatformClient) GravityParticleJobDepChildJobs(request *shenhaiplatform.GravityParticleJobDepChildJobsRequest) (*shenhaiplatform.GravityParticleJobDepChildJobsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleJobDepChildJobsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建工作流节点 */
+func (c *ShenhaiplatformClient) UranusFlowNodeCreate(request *shenhaiplatform.UranusFlowNodeCreateRequest) (*shenhaiplatform.UranusFlowNodeCreateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusFlowNodeCreateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 从外部aifactory批量导入ALC_GENERAL任务，Uranus仅持久化alcTaskId / alcTaskType / originalName / alcWorkspaceCode，完整配置由aifactory持有 */
+func (c *ShenhaiplatformClient) UranusTaskNodeBatchImport(request *shenhaiplatform.UranusTaskNodeBatchImportRequest) (*shenhaiplatform.UranusTaskNodeBatchImportResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskNodeBatchImportResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 列出所有目录(只包含目录) */
+func (c *ShenhaiplatformClient) UranusResourceListDirectory(request *shenhaiplatform.UranusResourceListDirectoryRequest) (*shenhaiplatform.UranusResourceListDirectoryResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusResourceListDirectoryResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据查询条件返回作业关联的模型信息 */
+func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerJobQuery(request *shenhaiplatform.GravityParticleDubboJobManagerJobQueryRequest) (*shenhaiplatform.GravityParticleDubboJobManagerJobQueryResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleDubboJobManagerJobQueryResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建计算引擎实体 */
+func (c *ShenhaiplatformClient) EngineCreate(request *shenhaiplatform.EngineCreateRequest) (*shenhaiplatform.EngineCreateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.EngineCreateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 重置作业为done */
+func (c *ShenhaiplatformClient) GravityParticleParticleJobSchedResetStsDone(request *shenhaiplatform.GravityParticleParticleJobSchedResetStsDoneRequest) (*shenhaiplatform.GravityParticleParticleJobSchedResetStsDoneResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleParticleJobSchedResetStsDoneResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新所有节点的画布信息 */
+func (c *ShenhaiplatformClient) UranusFlowUpdateAllCanvas(request *shenhaiplatform.UranusFlowUpdateAllCanvasRequest) (*shenhaiplatform.UranusFlowUpdateAllCanvasResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusFlowUpdateAllCanvasResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 列出所有镜像信息 */
+func (c *ShenhaiplatformClient) UranusTaskPublicListImages(request *shenhaiplatform.UranusTaskPublicListImagesRequest) (*shenhaiplatform.UranusTaskPublicListImagesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskPublicListImagesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* sql语法检测 */
+func (c *ShenhaiplatformClient) UranusScriptSyntaxCheck(request *shenhaiplatform.UranusScriptSyntaxCheckRequest) (*shenhaiplatform.UranusScriptSyntaxCheckResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusScriptSyntaxCheckResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取可用模型列表 */
+func (c *ShenhaiplatformClient) CopilotModelList(request *shenhaiplatform.CopilotModelListRequest) (*shenhaiplatform.CopilotModelListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.CopilotModelListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取运行脚本结果 */
+func (c *ShenhaiplatformClient) UranusScriptGetScriptRunResult(request *shenhaiplatform.UranusScriptGetScriptRunResultRequest) (*shenhaiplatform.UranusScriptGetScriptRunResultResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusScriptGetScriptRunResultResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 工作流画布-作业预发布 */
+func (c *ShenhaiplatformClient) UranusTaskPagePublish(request *shenhaiplatform.UranusTaskPagePublishRequest) (*shenhaiplatform.UranusTaskPagePublishResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskPagePublishResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取子作业 */
+func (c *ShenhaiplatformClient) GravityParticleJobDepGetChildDependencies(request *shenhaiplatform.GravityParticleJobDepGetChildDependenciesRequest) (*shenhaiplatform.GravityParticleJobDepGetChildDependenciesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleJobDepGetChildDependenciesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 补数方案状态字典 */
+func (c *ShenhaiplatformClient) RotorDictSupplementPlanStates(request *shenhaiplatform.RotorDictSupplementPlanStatesRequest) (*shenhaiplatform.RotorDictSupplementPlanStatesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.RotorDictSupplementPlanStatesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询表来源列表并标识默认项 */
+func (c *ShenhaiplatformClient) UranusTableSources(request *shenhaiplatform.UranusTableSourcesRequest) (*shenhaiplatform.UranusTableSourcesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTableSourcesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 表授权接口 */
+func (c *ShenhaiplatformClient) JtlasGrantTablePrivileges(request *shenhaiplatform.JtlasGrantTablePrivilegesRequest) (*shenhaiplatform.JtlasGrantTablePrivilegesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.JtlasGrantTablePrivilegesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取云仓项目被绑定的工作空间 */
+func (c *ShenhaiplatformClient) WorkspaceGetProjectBundle(request *shenhaiplatform.WorkspaceGetProjectBundleRequest) (*shenhaiplatform.WorkspaceGetProjectBundleResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.WorkspaceGetProjectBundleResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 配置任务的预警策略，包括预警方式、预警时机、接收人等 */
+func (c *ShenhaiplatformClient) UranusTaskPublicConfigAlarm(request *shenhaiplatform.UranusTaskPublicConfigAlarmRequest) (*shenhaiplatform.UranusTaskPublicConfigAlarmResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskPublicConfigAlarmResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 工作空间绑定云仓项目 */
+func (c *ShenhaiplatformClient) WorkspaceBundleProject(request *shenhaiplatform.WorkspaceBundleProjectRequest) (*shenhaiplatform.WorkspaceBundleProjectResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.WorkspaceBundleProjectResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取任务发布历史版本的具体详情 */
+func (c *ShenhaiplatformClient) UranusTaskHistoryDetail(request *shenhaiplatform.UranusTaskHistoryDetailRequest) (*shenhaiplatform.UranusTaskHistoryDetailResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskHistoryDetailResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取工作空间的资源组列表 */
+func (c *ShenhaiplatformClient) WorkspaceGetResources(request *shenhaiplatform.WorkspaceGetResourcesRequest) (*shenhaiplatform.WorkspaceGetResourcesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.WorkspaceGetResourcesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建任务业务目录 */
+func (c *ShenhaiplatformClient) UranusTaskCatalogCreate(request *shenhaiplatform.UranusTaskCatalogCreateRequest) (*shenhaiplatform.UranusTaskCatalogCreateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskCatalogCreateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 增加值班人 */
+func (c *ShenhaiplatformClient) ManageHubDutyAddWatchman(request *shenhaiplatform.ManageHubDutyAddWatchmanRequest) (*shenhaiplatform.ManageHubDutyAddWatchmanResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.ManageHubDutyAddWatchmanResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除工作空间 */
+func (c *ShenhaiplatformClient) WorkspaceDelete(request *shenhaiplatform.WorkspaceDeleteRequest) (*shenhaiplatform.WorkspaceDeleteResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.WorkspaceDeleteResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 停止补数 */
+func (c *ShenhaiplatformClient) GravityParticleJobHisRunCloseTask(request *shenhaiplatform.GravityParticleJobHisRunCloseTaskRequest) (*shenhaiplatform.GravityParticleJobHisRunCloseTaskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleJobHisRunCloseTaskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 保存作业模型相关信息 */
+func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerSaveDmrModelJob(request *shenhaiplatform.GravityParticleDubboJobManagerSaveDmrModelJobRequest) (*shenhaiplatform.GravityParticleDubboJobManagerSaveDmrModelJobResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleDubboJobManagerSaveDmrModelJobResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取 offset 天前 每个小时实例运行失败次数 */
+func (c *ShenhaiplatformClient) FailedInstancePerHour(request *shenhaiplatform.FailedInstancePerHourRequest) (*shenhaiplatform.FailedInstancePerHourResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.FailedInstancePerHourResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取作业详细信息 */
+func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerCalcJobDetail(request *shenhaiplatform.GravityParticleDubboJobManagerCalcJobDetailRequest) (*shenhaiplatform.GravityParticleDubboJobManagerCalcJobDetailResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleDubboJobManagerCalcJobDetailResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询作业清单 */
+func (c *ShenhaiplatformClient) GravityParticleParticleModelCalcListJob(request *shenhaiplatform.GravityParticleParticleModelCalcListJobRequest) (*shenhaiplatform.GravityParticleParticleModelCalcListJobResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleParticleModelCalcListJobResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询补数实例 */
+func (c *ShenhaiplatformClient) RotorSupplementInstances(request *shenhaiplatform.RotorSupplementInstancesRequest) (*shenhaiplatform.RotorSupplementInstancesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.RotorSupplementInstancesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 实例失败次数排名 */
+func (c *ShenhaiplatformClient) JobFailedInstanceRanking(request *shenhaiplatform.JobFailedInstanceRankingRequest) (*shenhaiplatform.JobFailedInstanceRankingResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.JobFailedInstanceRankingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 工作空间解绑云仓项目 */
+func (c *ShenhaiplatformClient) WorkspaceUnbundleProject(request *shenhaiplatform.WorkspaceUnbundleProjectRequest) (*shenhaiplatform.WorkspaceUnbundleProjectResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.WorkspaceUnbundleProjectResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 一键重跑任务重新提交 */
+func (c *ShenhaiplatformClient) ManageHubGravityOneClickRerunResubmit(request *shenhaiplatform.ManageHubGravityOneClickRerunResubmitRequest) (*shenhaiplatform.ManageHubGravityOneClickRerunResubmitResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.ManageHubGravityOneClickRerunResubmitResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 条件查询-作业运行实例列表 */
+func (c *ShenhaiplatformClient) GravityParticleParticleJobListJobInstance(request *shenhaiplatform.GravityParticleParticleJobListJobInstanceRequest) (*shenhaiplatform.GravityParticleParticleJobListJobInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GravityParticleParticleJobListJobInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获得脚本运行的内容 */
+func (c *ShenhaiplatformClient) UranusScriptRunLogContent(request *shenhaiplatform.UranusScriptRunLogContentRequest) (*shenhaiplatform.UranusScriptRunLogContentResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusScriptRunLogContentResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
 }
 
 /* 将发布物打包 */
@@ -97,8 +4377,8 @@ func (c *ShenhaiplatformClient) UranusExtraRunnerStop(request *shenhaiplatform.U
     return jdResp, err
 }
 
-/* 任务单节点-新建 */
-func (c *ShenhaiplatformClient) UranusTaskNodeSave(request *shenhaiplatform.UranusTaskNodeSaveRequest) (*shenhaiplatform.UranusTaskNodeSaveResponse, error) {
+/* 更新任务的运行参数信息 */
+func (c *ShenhaiplatformClient) UranusTaskRunParamInfoUpdate(request *shenhaiplatform.UranusTaskRunParamInfoUpdateRequest) (*shenhaiplatform.UranusTaskRunParamInfoUpdateResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -107,67 +4387,7 @@ func (c *ShenhaiplatformClient) UranusTaskNodeSave(request *shenhaiplatform.Uran
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.UranusTaskNodeSaveResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 根据租户/项目空间/数据库名称模糊查询表列表，最多返回1000条 */
-func (c *ShenhaiplatformClient) JtlasWarehouseQueryTablesByDatabaseName(request *shenhaiplatform.JtlasWarehouseQueryTablesByDatabaseNameRequest) (*shenhaiplatform.JtlasWarehouseQueryTablesByDatabaseNameResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.JtlasWarehouseQueryTablesByDatabaseNameResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 重跑作业 */
-func (c *ShenhaiplatformClient) ManageHubGravityRerun(request *shenhaiplatform.ManageHubGravityRerunRequest) (*shenhaiplatform.ManageHubGravityRerunResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.ManageHubGravityRerunResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 分页查询发布包列表 */
-func (c *ShenhaiplatformClient) DescribePublishPkgs(request *shenhaiplatform.DescribePublishPkgsRequest) (*shenhaiplatform.DescribePublishPkgsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.DescribePublishPkgsResponse{}
+    jdResp := &shenhaiplatform.UranusTaskRunParamInfoUpdateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -237,26 +4457,6 @@ func (c *ShenhaiplatformClient) ManageHubGravityJobChild(request *shenhaiplatfor
     return jdResp, err
 }
 
-/* 列出所有根目录(只包含根目录) */
-func (c *ShenhaiplatformClient) UranusResourceListRoot(request *shenhaiplatform.UranusResourceListRootRequest) (*shenhaiplatform.UranusResourceListRootResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusResourceListRootResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 获取一个新的对话id */
 func (c *ShenhaiplatformClient) CopilotChatNew(request *shenhaiplatform.CopilotChatNewRequest) (*shenhaiplatform.CopilotChatNewResponse, error) {
     if request == nil {
@@ -297,6 +4497,26 @@ func (c *ShenhaiplatformClient) UranusFunctionDeleteCatalog(request *shenhaiplat
     return jdResp, err
 }
 
+/* 获取历史平均每小时实例运行成功次数 */
+func (c *ShenhaiplatformClient) HistorySuccessInstanceAvgPerHour(request *shenhaiplatform.HistorySuccessInstanceAvgPerHourRequest) (*shenhaiplatform.HistorySuccessInstanceAvgPerHourResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.HistorySuccessInstanceAvgPerHourResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 脚本内容更新 */
 func (c *ShenhaiplatformClient) UranusScriptSaveContent(request *shenhaiplatform.UranusScriptSaveContentRequest) (*shenhaiplatform.UranusScriptSaveContentResponse, error) {
     if request == nil {
@@ -317,8 +4537,8 @@ func (c *ShenhaiplatformClient) UranusScriptSaveContent(request *shenhaiplatform
     return jdResp, err
 }
 
-/* 校验作业规则 */
-func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerValidateJobRules(request *shenhaiplatform.GravityParticleDubboJobManagerValidateJobRulesRequest) (*shenhaiplatform.GravityParticleDubboJobManagerValidateJobRulesResponse, error) {
+/* 更新任务的基本信息 */
+func (c *ShenhaiplatformClient) UranusTaskBaseInfoUpdate(request *shenhaiplatform.UranusTaskBaseInfoUpdateRequest) (*shenhaiplatform.UranusTaskBaseInfoUpdateResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -327,87 +4547,7 @@ func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerValidateJobRules(r
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.GravityParticleDubboJobManagerValidateJobRulesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 获取作业脚本扩展名信息 */
-func (c *ShenhaiplatformClient) GravityParticleJobGetScriptExtensions(request *shenhaiplatform.GravityParticleJobGetScriptExtensionsRequest) (*shenhaiplatform.GravityParticleJobGetScriptExtensionsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.GravityParticleJobGetScriptExtensionsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 获取资源简要信息（根据资源codes） */
-func (c *ShenhaiplatformClient) UranusResourceGetBriefByCodes(request *shenhaiplatform.UranusResourceGetBriefByCodesRequest) (*shenhaiplatform.UranusResourceGetBriefByCodesResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusResourceGetBriefByCodesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 强制运行作业实例 */
-func (c *ShenhaiplatformClient) GravityParticleJobscheForceRunJobInst(request *shenhaiplatform.GravityParticleJobscheForceRunJobInstRequest) (*shenhaiplatform.GravityParticleJobscheForceRunJobInstResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.GravityParticleJobscheForceRunJobInstResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 执行脚本 */
-func (c *ShenhaiplatformClient) UranusScriptStarters(request *shenhaiplatform.UranusScriptStartersRequest) (*shenhaiplatform.UranusScriptStartersResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusScriptStartersResponse{}
+    jdResp := &shenhaiplatform.UranusTaskBaseInfoUpdateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -457,8 +4597,8 @@ func (c *ShenhaiplatformClient) GravityParticleJobMonitorJobSpendTimeRanking(req
     return jdResp, err
 }
 
-/* 根据用户名查询用户权限表列表，最多返回1000条 */
-func (c *ShenhaiplatformClient) JtlasWarehouseQueryTablesUnderSpecifiedUserWithPrivileges(request *shenhaiplatform.JtlasWarehouseQueryTablesUnderSpecifiedUserWithPrivilegesRequest) (*shenhaiplatform.JtlasWarehouseQueryTablesUnderSpecifiedUserWithPrivilegesResponse, error) {
+/* 获取工作流的历史版本内部任务拓扑顺序 */
+func (c *ShenhaiplatformClient) UranusFlowInternalTaskHistoryTopo(request *shenhaiplatform.UranusFlowInternalTaskHistoryTopoRequest) (*shenhaiplatform.UranusFlowInternalTaskHistoryTopoResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -467,7 +4607,27 @@ func (c *ShenhaiplatformClient) JtlasWarehouseQueryTablesUnderSpecifiedUserWithP
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.JtlasWarehouseQueryTablesUnderSpecifiedUserWithPrivilegesResponse{}
+    jdResp := &shenhaiplatform.UranusFlowInternalTaskHistoryTopoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 配置任务启动相关参数，现在只支持Python任务配置该参数 */
+func (c *ShenhaiplatformClient) UranusTaskPublicConfigStartParams(request *shenhaiplatform.UranusTaskPublicConfigStartParamsRequest) (*shenhaiplatform.UranusTaskPublicConfigStartParamsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskPublicConfigStartParamsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -497,6 +4657,26 @@ func (c *ShenhaiplatformClient) UranusScriptRunLogDetail(request *shenhaiplatfor
     return jdResp, err
 }
 
+/* 运行中实例 */
+func (c *ShenhaiplatformClient) RunningInstance(request *shenhaiplatform.RunningInstanceRequest) (*shenhaiplatform.RunningInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.RunningInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 获取查询结果文件列表 */
 func (c *ShenhaiplatformClient) UranusExtraRunnerResultList(request *shenhaiplatform.UranusExtraRunnerResultListRequest) (*shenhaiplatform.UranusExtraRunnerResultListResponse, error) {
     if request == nil {
@@ -508,26 +4688,6 @@ func (c *ShenhaiplatformClient) UranusExtraRunnerResultList(request *shenhaiplat
     }
 
     jdResp := &shenhaiplatform.UranusExtraRunnerResultListResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 删除资源 */
-func (c *ShenhaiplatformClient) UranusResourceDelete(request *shenhaiplatform.UranusResourceDeleteRequest) (*shenhaiplatform.UranusResourceDeleteResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusResourceDeleteResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -577,26 +4737,6 @@ func (c *ShenhaiplatformClient) ManageHubStoragePartitionList(request *shenhaipl
     return jdResp, err
 }
 
-/* 根据对话中的一条发言，推荐可能的prompt */
-func (c *ShenhaiplatformClient) CopilotUtteranceRecommend(request *shenhaiplatform.CopilotUtteranceRecommendRequest) (*shenhaiplatform.CopilotUtteranceRecommendResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.CopilotUtteranceRecommendResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 判断当前租户的产品是否已过期 */
 func (c *ShenhaiplatformClient) WorkspaceExpiredInfo(request *shenhaiplatform.WorkspaceExpiredInfoRequest) (*shenhaiplatform.WorkspaceExpiredInfoResponse, error) {
     if request == nil {
@@ -617,8 +4757,8 @@ func (c *ShenhaiplatformClient) WorkspaceExpiredInfo(request *shenhaiplatform.Wo
     return jdResp, err
 }
 
-/* 订阅/收藏表 */
-func (c *ShenhaiplatformClient) JtlasSubscribeTable(request *shenhaiplatform.JtlasSubscribeTableRequest) (*shenhaiplatform.JtlasSubscribeTableResponse, error) {
+/* 列出业务目录 */
+func (c *ShenhaiplatformClient) UranusTaskCatalogList(request *shenhaiplatform.UranusTaskCatalogListRequest) (*shenhaiplatform.UranusTaskCatalogListResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -627,7 +4767,7 @@ func (c *ShenhaiplatformClient) JtlasSubscribeTable(request *shenhaiplatform.Jtl
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.JtlasSubscribeTableResponse{}
+    jdResp := &shenhaiplatform.UranusTaskCatalogListResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -757,8 +4897,8 @@ func (c *ShenhaiplatformClient) PublishPkg(request *shenhaiplatform.PublishPkgRe
     return jdResp, err
 }
 
-/* 统计失败作业状态数量 */
-func (c *ShenhaiplatformClient) GravityParticleJobMonitorJobFailCount(request *shenhaiplatform.GravityParticleJobMonitorJobFailCountRequest) (*shenhaiplatform.GravityParticleJobMonitorJobFailCountResponse, error) {
+/* 更新任务的SparkJar参数信息 */
+func (c *ShenhaiplatformClient) UranusTaskSparkJarParamInfoUpdate(request *shenhaiplatform.UranusTaskSparkJarParamInfoUpdateRequest) (*shenhaiplatform.UranusTaskSparkJarParamInfoUpdateResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -767,7 +4907,47 @@ func (c *ShenhaiplatformClient) GravityParticleJobMonitorJobFailCount(request *s
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.GravityParticleJobMonitorJobFailCountResponse{}
+    jdResp := &shenhaiplatform.UranusTaskSparkJarParamInfoUpdateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 为集群增加元数据：如果元数据的key已经存在，则进行更新，否则插入 */
+func (c *ShenhaiplatformClient) ManageHubClusterMetaAdd(request *shenhaiplatform.ManageHubClusterMetaAddRequest) (*shenhaiplatform.ManageHubClusterMetaAddResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.ManageHubClusterMetaAddResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 任务类型字典 */
+func (c *ShenhaiplatformClient) RotorDictTaskTypes(request *shenhaiplatform.RotorDictTaskTypesRequest) (*shenhaiplatform.RotorDictTaskTypesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.RotorDictTaskTypesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -797,8 +4977,8 @@ func (c *ShenhaiplatformClient) UranusTaskInfoPrePublish(request *shenhaiplatfor
     return jdResp, err
 }
 
-/* 解析作业完成信息进行作业实例运行状态更新 */
-func (c *ShenhaiplatformClient) GravityParticleJobscheProcessJobExeRst(request *shenhaiplatform.GravityParticleJobscheProcessJobExeRstRequest) (*shenhaiplatform.GravityParticleJobscheProcessJobExeRstResponse, error) {
+/* 产品开通的地域信息 */
+func (c *ShenhaiplatformClient) WorkspaceGetProductRegionInfo(request *shenhaiplatform.WorkspaceGetProductRegionInfoRequest) (*shenhaiplatform.WorkspaceGetProductRegionInfoResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -807,7 +4987,7 @@ func (c *ShenhaiplatformClient) GravityParticleJobscheProcessJobExeRst(request *
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.GravityParticleJobscheProcessJobExeRstResponse{}
+    jdResp := &shenhaiplatform.WorkspaceGetProductRegionInfoResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -817,8 +4997,8 @@ func (c *ShenhaiplatformClient) GravityParticleJobscheProcessJobExeRst(request *
     return jdResp, err
 }
 
-/* 根据脚本类型获取模板引擎下载地址 */
-func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerGetEngineTemplate(request *shenhaiplatform.GravityParticleDubboJobManagerGetEngineTemplateRequest) (*shenhaiplatform.GravityParticleDubboJobManagerGetEngineTemplateResponse, error) {
+/* 更新任务的Loop参数信息 */
+func (c *ShenhaiplatformClient) UranusTaskLoopParamInfoUpdate(request *shenhaiplatform.UranusTaskLoopParamInfoUpdateRequest) (*shenhaiplatform.UranusTaskLoopParamInfoUpdateResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -827,7 +5007,27 @@ func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerGetEngineTemplate(
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.GravityParticleDubboJobManagerGetEngineTemplateResponse{}
+    jdResp := &shenhaiplatform.UranusTaskLoopParamInfoUpdateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 重跑下游 */
+func (c *ShenhaiplatformClient) RotorRerunDownstream(request *shenhaiplatform.RotorRerunDownstreamRequest) (*shenhaiplatform.RotorRerunDownstreamResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.RotorRerunDownstreamResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -877,46 +5077,6 @@ func (c *ShenhaiplatformClient) GravityParticleJobMonitorJobStatusCount(request 
     return jdResp, err
 }
 
-/* 获取当前登录用户的所有角色 */
-func (c *ShenhaiplatformClient) WorkspaceGetUserRoles(request *shenhaiplatform.WorkspaceGetUserRolesRequest) (*shenhaiplatform.WorkspaceGetUserRolesResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.WorkspaceGetUserRolesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 表授权接口 */
-func (c *ShenhaiplatformClient) JtlasDestroy(request *shenhaiplatform.JtlasDestroyRequest) (*shenhaiplatform.JtlasDestroyResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.JtlasDestroyResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 列出根目录下所有资源 */
 func (c *ShenhaiplatformClient) UranusResourceListRootResources(request *shenhaiplatform.UranusResourceListRootResourcesRequest) (*shenhaiplatform.UranusResourceListRootResourcesResponse, error) {
     if request == nil {
@@ -957,8 +5117,8 @@ func (c *ShenhaiplatformClient) UranusTableAlterSqlView(request *shenhaiplatform
     return jdResp, err
 }
 
-/* 校验当前用户是否是该工作空间的管理员 */
-func (c *ShenhaiplatformClient) WorkspaceVerifyUserIsManager(request *shenhaiplatform.WorkspaceVerifyUserIsManagerRequest) (*shenhaiplatform.WorkspaceVerifyUserIsManagerResponse, error) {
+/* 获取调试历史信息列表 */
+func (c *ShenhaiplatformClient) UranusTaskDebugHistoryList(request *shenhaiplatform.UranusTaskDebugHistoryListRequest) (*shenhaiplatform.UranusTaskDebugHistoryListResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -967,7 +5127,7 @@ func (c *ShenhaiplatformClient) WorkspaceVerifyUserIsManager(request *shenhaipla
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.WorkspaceVerifyUserIsManagerResponse{}
+    jdResp := &shenhaiplatform.UranusTaskDebugHistoryListResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -977,8 +5137,8 @@ func (c *ShenhaiplatformClient) WorkspaceVerifyUserIsManager(request *shenhaipla
     return jdResp, err
 }
 
-/* 统计作业数量 */
-func (c *ShenhaiplatformClient) GravityParticleJobMonitorJobCountInfo(request *shenhaiplatform.GravityParticleJobMonitorJobCountInfoRequest) (*shenhaiplatform.GravityParticleJobMonitorJobCountInfoResponse, error) {
+/* 实例详细信息 */
+func (c *ShenhaiplatformClient) RotorInstanceDetail(request *shenhaiplatform.RotorInstanceDetailRequest) (*shenhaiplatform.RotorInstanceDetailResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -987,7 +5147,7 @@ func (c *ShenhaiplatformClient) GravityParticleJobMonitorJobCountInfo(request *s
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.GravityParticleJobMonitorJobCountInfoResponse{}
+    jdResp := &shenhaiplatform.RotorInstanceDetailResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -997,8 +5157,8 @@ func (c *ShenhaiplatformClient) GravityParticleJobMonitorJobCountInfo(request *s
     return jdResp, err
 }
 
-/* 数据上传 */
-func (c *ShenhaiplatformClient) UranusTableDataLoad(request *shenhaiplatform.UranusTableDataLoadRequest) (*shenhaiplatform.UranusTableDataLoadResponse, error) {
+/* 查询表详情信息 */
+func (c *ShenhaiplatformClient) JtlasForeignTableDetail(request *shenhaiplatform.JtlasForeignTableDetailRequest) (*shenhaiplatform.JtlasForeignTableDetailResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -1007,7 +5167,7 @@ func (c *ShenhaiplatformClient) UranusTableDataLoad(request *shenhaiplatform.Ura
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.UranusTableDataLoadResponse{}
+    jdResp := &shenhaiplatform.JtlasForeignTableDetailResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1057,8 +5217,8 @@ func (c *ShenhaiplatformClient) QueryList(request *shenhaiplatform.QueryListRequ
     return jdResp, err
 }
 
-/* 任务关系页面，作业详情 */
-func (c *ShenhaiplatformClient) GravityParticleJobDepDetail(request *shenhaiplatform.GravityParticleJobDepDetailRequest) (*shenhaiplatform.GravityParticleJobDepDetailResponse, error) {
+/* 列出工作流下的所有任务节点 */
+func (c *ShenhaiplatformClient) UranusFlowListNode(request *shenhaiplatform.UranusFlowListNodeRequest) (*shenhaiplatform.UranusFlowListNodeResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -1067,67 +5227,7 @@ func (c *ShenhaiplatformClient) GravityParticleJobDepDetail(request *shenhaiplat
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.GravityParticleJobDepDetailResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 统计不成功作业的数量 */
-func (c *ShenhaiplatformClient) GravityParticleJobMonitorJobUnsuccessRanking(request *shenhaiplatform.GravityParticleJobMonitorJobUnsuccessRankingRequest) (*shenhaiplatform.GravityParticleJobMonitorJobUnsuccessRankingResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.GravityParticleJobMonitorJobUnsuccessRankingResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询授权表 */
-func (c *ShenhaiplatformClient) UranusTableLike(request *shenhaiplatform.UranusTableLikeRequest) (*shenhaiplatform.UranusTableLikeResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusTableLikeResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 停止发言，用于终止模型回复生成 */
-func (c *ShenhaiplatformClient) CopilotUtteranceStop(request *shenhaiplatform.CopilotUtteranceStopRequest) (*shenhaiplatform.CopilotUtteranceStopResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.CopilotUtteranceStopResponse{}
+    jdResp := &shenhaiplatform.UranusFlowListNodeResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1157,8 +5257,8 @@ func (c *ShenhaiplatformClient) UranusTableDdlAnalyze(request *shenhaiplatform.U
     return jdResp, err
 }
 
-/* 删除函数 */
-func (c *ShenhaiplatformClient) UranusFunctionDelete(request *shenhaiplatform.UranusFunctionDeleteRequest) (*shenhaiplatform.UranusFunctionDeleteResponse, error) {
+/* 获取资源组code被绑定的工作空间 */
+func (c *ShenhaiplatformClient) WorkspaceGetByResource(request *shenhaiplatform.WorkspaceGetByResourceRequest) (*shenhaiplatform.WorkspaceGetByResourceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -1167,7 +5267,7 @@ func (c *ShenhaiplatformClient) UranusFunctionDelete(request *shenhaiplatform.Ur
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.UranusFunctionDeleteResponse{}
+    jdResp := &shenhaiplatform.WorkspaceGetByResourceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1277,8 +5377,8 @@ func (c *ShenhaiplatformClient) UranusTaskInfoFuzzyListJobName(request *shenhaip
     return jdResp, err
 }
 
-/* 根据脚本内容解析父任务依赖 */
-func (c *ShenhaiplatformClient) UranusTaskInfoAnalysisDependJob(request *shenhaiplatform.UranusTaskInfoAnalysisDependJobRequest) (*shenhaiplatform.UranusTaskInfoAnalysisDependJobResponse, error) {
+/* 检索集群列表 */
+func (c *ShenhaiplatformClient) ManageHubClusterList(request *shenhaiplatform.ManageHubClusterListRequest) (*shenhaiplatform.ManageHubClusterListResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -1287,27 +5387,7 @@ func (c *ShenhaiplatformClient) UranusTaskInfoAnalysisDependJob(request *shenhai
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.UranusTaskInfoAnalysisDependJobResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 任务单节点-更新作业名称 */
-func (c *ShenhaiplatformClient) UranusTaskNodeUpdateJobName(request *shenhaiplatform.UranusTaskNodeUpdateJobNameRequest) (*shenhaiplatform.UranusTaskNodeUpdateJobNameResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusTaskNodeUpdateJobNameResponse{}
+    jdResp := &shenhaiplatform.ManageHubClusterListResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1337,8 +5417,8 @@ func (c *ShenhaiplatformClient) UranusTaskFlowQueryList(request *shenhaiplatform
     return jdResp, err
 }
 
-/* 任务单节点-更新节点位置信息 */
-func (c *ShenhaiplatformClient) UranusTaskNodeUpdateNodeData(request *shenhaiplatform.UranusTaskNodeUpdateNodeDataRequest) (*shenhaiplatform.UranusTaskNodeUpdateNodeDataResponse, error) {
+/* 更新任务的脚本内容 */
+func (c *ShenhaiplatformClient) UranusTaskScriptContentUpdate(request *shenhaiplatform.UranusTaskScriptContentUpdateRequest) (*shenhaiplatform.UranusTaskScriptContentUpdateResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -1347,7 +5427,7 @@ func (c *ShenhaiplatformClient) UranusTaskNodeUpdateNodeData(request *shenhaipla
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.UranusTaskNodeUpdateNodeDataResponse{}
+    jdResp := &shenhaiplatform.UranusTaskScriptContentUpdateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1397,6 +5477,26 @@ func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerDeployJobEdit(requ
     return jdResp, err
 }
 
+/* 运行手动任务-外部调用 */
+func (c *ShenhaiplatformClient) RotorRunManualTaskInstanceExternal(request *shenhaiplatform.RotorRunManualTaskInstanceExternalRequest) (*shenhaiplatform.RotorRunManualTaskInstanceExternalResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.RotorRunManualTaskInstanceExternalResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 获取工作空间基本信息 */
 func (c *ShenhaiplatformClient) WorkspaceGetInfo(request *shenhaiplatform.WorkspaceGetInfoRequest) (*shenhaiplatform.WorkspaceGetInfoResponse, error) {
     if request == nil {
@@ -1417,8 +5517,8 @@ func (c *ShenhaiplatformClient) WorkspaceGetInfo(request *shenhaiplatform.Worksp
     return jdResp, err
 }
 
-/* 获取资源状态 */
-func (c *ShenhaiplatformClient) UranusResourceStatus(request *shenhaiplatform.UranusResourceStatusRequest) (*shenhaiplatform.UranusResourceStatusResponse, error) {
+/* 等待中实例 */
+func (c *ShenhaiplatformClient) AwaitingInstance(request *shenhaiplatform.AwaitingInstanceRequest) (*shenhaiplatform.AwaitingInstanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -1427,7 +5527,7 @@ func (c *ShenhaiplatformClient) UranusResourceStatus(request *shenhaiplatform.Ur
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.UranusResourceStatusResponse{}
+    jdResp := &shenhaiplatform.AwaitingInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1457,26 +5557,6 @@ func (c *ShenhaiplatformClient) UranusWorkFlowDirFileExists(request *shenhaiplat
     return jdResp, err
 }
 
-/* 脚本参数保存/更新 */
-func (c *ShenhaiplatformClient) UranusScriptParams(request *shenhaiplatform.UranusScriptParamsRequest) (*shenhaiplatform.UranusScriptParamsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusScriptParamsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 执行查询 */
 func (c *ShenhaiplatformClient) UranusExtraRunnerStart(request *shenhaiplatform.UranusExtraRunnerStartRequest) (*shenhaiplatform.UranusExtraRunnerStartResponse, error) {
     if request == nil {
@@ -1488,26 +5568,6 @@ func (c *ShenhaiplatformClient) UranusExtraRunnerStart(request *shenhaiplatform.
     }
 
     jdResp := &shenhaiplatform.UranusExtraRunnerStartResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 保存作业脚本信息 */
-func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerSaveJobScript(request *shenhaiplatform.GravityParticleDubboJobManagerSaveJobScriptRequest) (*shenhaiplatform.GravityParticleDubboJobManagerSaveJobScriptResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.GravityParticleDubboJobManagerSaveJobScriptResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1637,8 +5697,8 @@ func (c *ShenhaiplatformClient) WorkspaceGetMembers(request *shenhaiplatform.Wor
     return jdResp, err
 }
 
-/* 查询字段血缘 */
-func (c *ShenhaiplatformClient) JtlasSearchColumnLineage(request *shenhaiplatform.JtlasSearchColumnLineageRequest) (*shenhaiplatform.JtlasSearchColumnLineageResponse, error) {
+/* 更新任务的数据源参数信息 */
+func (c *ShenhaiplatformClient) UranusTaskDatasourceParamInfoUpdate(request *shenhaiplatform.UranusTaskDatasourceParamInfoUpdateRequest) (*shenhaiplatform.UranusTaskDatasourceParamInfoUpdateResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -1647,7 +5707,47 @@ func (c *ShenhaiplatformClient) JtlasSearchColumnLineage(request *shenhaiplatfor
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.JtlasSearchColumnLineageResponse{}
+    jdResp := &shenhaiplatform.UranusTaskDatasourceParamInfoUpdateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 配置任务的基本信息，包括名称、描述、负责人等 */
+func (c *ShenhaiplatformClient) UranusTaskPublicConfigBaseInfo(request *shenhaiplatform.UranusTaskPublicConfigBaseInfoRequest) (*shenhaiplatform.UranusTaskPublicConfigBaseInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskPublicConfigBaseInfoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* spark参数keys */
+func (c *ShenhaiplatformClient) UranusSparkTaskParameterKeys(request *shenhaiplatform.UranusSparkTaskParameterKeysRequest) (*shenhaiplatform.UranusSparkTaskParameterKeysResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusSparkTaskParameterKeysResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1668,46 +5768,6 @@ func (c *ShenhaiplatformClient) UranusTaskAddRelation(request *shenhaiplatform.U
     }
 
     jdResp := &shenhaiplatform.UranusTaskAddRelationResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询函数接口 */
-func (c *ShenhaiplatformClient) UranusUdfListFunction(request *shenhaiplatform.UranusUdfListFunctionRequest) (*shenhaiplatform.UranusUdfListFunctionResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusUdfListFunctionResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 重置作业实例的状态为制定状态 */
-func (c *ShenhaiplatformClient) GravityParticleJobscheResetJobInstStatus(request *shenhaiplatform.GravityParticleJobscheResetJobInstStatusRequest) (*shenhaiplatform.GravityParticleJobscheResetJobInstStatusResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.GravityParticleJobscheResetJobInstStatusResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1757,6 +5817,26 @@ func (c *ShenhaiplatformClient) UranusScriptRunLogList(request *shenhaiplatform.
     return jdResp, err
 }
 
+/* 任务名称是否已经存在 */
+func (c *ShenhaiplatformClient) UranusTaskNameExisted(request *shenhaiplatform.UranusTaskNameExistedRequest) (*shenhaiplatform.UranusTaskNameExistedResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskNameExistedResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 批量接口上线 */
 func (c *ShenhaiplatformClient) GravityParticleParticleJobSchedReuseJob(request *shenhaiplatform.GravityParticleParticleJobSchedReuseJobRequest) (*shenhaiplatform.GravityParticleParticleJobSchedReuseJobResponse, error) {
     if request == nil {
@@ -1777,8 +5857,8 @@ func (c *ShenhaiplatformClient) GravityParticleParticleJobSchedReuseJob(request 
     return jdResp, err
 }
 
-/* 分页查询作业列表 */
-func (c *ShenhaiplatformClient) ManageHubGravityListJob(request *shenhaiplatform.ManageHubGravityListJobRequest) (*shenhaiplatform.ManageHubGravityListJobResponse, error) {
+/* 更新任务的输入参数信息 */
+func (c *ShenhaiplatformClient) UranusTaskInputParamInfoUpdate(request *shenhaiplatform.UranusTaskInputParamInfoUpdateRequest) (*shenhaiplatform.UranusTaskInputParamInfoUpdateResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -1787,47 +5867,7 @@ func (c *ShenhaiplatformClient) ManageHubGravityListJob(request *shenhaiplatform
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.ManageHubGravityListJobResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 计算作业详情 */
-func (c *ShenhaiplatformClient) GravityParticleParticleModelCalcCalcJobDetail(request *shenhaiplatform.GravityParticleParticleModelCalcCalcJobDetailRequest) (*shenhaiplatform.GravityParticleParticleModelCalcCalcJobDetailResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.GravityParticleParticleModelCalcCalcJobDetailResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 发布对象信息细节查看 */
-func (c *ShenhaiplatformClient) DescribePublishObj(request *shenhaiplatform.DescribePublishObjRequest) (*shenhaiplatform.DescribePublishObjResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.DescribePublishObjResponse{}
+    jdResp := &shenhaiplatform.UranusTaskInputParamInfoUpdateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1877,66 +5917,6 @@ func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerVerifyScriptFileLi
     return jdResp, err
 }
 
-/* 获取作业触发条件信息信息 */
-func (c *ShenhaiplatformClient) GravityParticleParticleJobGetConditionInfo(request *shenhaiplatform.GravityParticleParticleJobGetConditionInfoRequest) (*shenhaiplatform.GravityParticleParticleJobGetConditionInfoResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.GravityParticleParticleJobGetConditionInfoResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 修改目录属性 */
-func (c *ShenhaiplatformClient) UranusCatalogUpdate(request *shenhaiplatform.UranusCatalogUpdateRequest) (*shenhaiplatform.UranusCatalogUpdateResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusCatalogUpdateResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 重新上线接口 根据文件id和版本号 */
-func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerGetMgrJobByJobe(request *shenhaiplatform.GravityParticleDubboJobManagerGetMgrJobByJobeRequest) (*shenhaiplatform.GravityParticleDubboJobManagerGetMgrJobByJobeResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.GravityParticleDubboJobManagerGetMgrJobByJobeResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 查询作业类型信息 */
 func (c *ShenhaiplatformClient) GravityParticleParticleJobGetJobTypeInfo(request *shenhaiplatform.GravityParticleParticleJobGetJobTypeInfoRequest) (*shenhaiplatform.GravityParticleParticleJobGetJobTypeInfoResponse, error) {
     if request == nil {
@@ -1948,6 +5928,26 @@ func (c *ShenhaiplatformClient) GravityParticleParticleJobGetJobTypeInfo(request
     }
 
     jdResp := &shenhaiplatform.GravityParticleParticleJobGetJobTypeInfoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/*  */
+func (c *ShenhaiplatformClient) GetTaskStateStatistics(request *shenhaiplatform.GetTaskStateStatisticsRequest) (*shenhaiplatform.GetTaskStateStatisticsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GetTaskStateStatisticsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2017,8 +6017,8 @@ func (c *ShenhaiplatformClient) GravityParticleJobscheReRunJobInst(request *shen
     return jdResp, err
 }
 
-/* 检索表权限 */
-func (c *ShenhaiplatformClient) JtlasPageSearchTablePrivileges(request *shenhaiplatform.JtlasPageSearchTablePrivilegesRequest) (*shenhaiplatform.JtlasPageSearchTablePrivilegesResponse, error) {
+/* 获取历史平均每小时实例运行失败次数 */
+func (c *ShenhaiplatformClient) HistoryFailedInstanceAvgPerHour(request *shenhaiplatform.HistoryFailedInstanceAvgPerHourRequest) (*shenhaiplatform.HistoryFailedInstanceAvgPerHourResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -2027,7 +6027,7 @@ func (c *ShenhaiplatformClient) JtlasPageSearchTablePrivileges(request *shenhaip
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.JtlasPageSearchTablePrivilegesResponse{}
+    jdResp := &shenhaiplatform.HistoryFailedInstanceAvgPerHourResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2037,8 +6037,8 @@ func (c *ShenhaiplatformClient) JtlasPageSearchTablePrivileges(request *shenhaip
     return jdResp, err
 }
 
-/* 编辑工作空间 */
-func (c *ShenhaiplatformClient) WorkspaceSaveInfo(request *shenhaiplatform.WorkspaceSaveInfoRequest) (*shenhaiplatform.WorkspaceSaveInfoResponse, error) {
+/* 查询任务镜像 */
+func (c *ShenhaiplatformClient) UranusTaskImageList(request *shenhaiplatform.UranusTaskImageListRequest) (*shenhaiplatform.UranusTaskImageListResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -2047,7 +6047,7 @@ func (c *ShenhaiplatformClient) WorkspaceSaveInfo(request *shenhaiplatform.Works
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.WorkspaceSaveInfoResponse{}
+    jdResp := &shenhaiplatform.UranusTaskImageListResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2068,6 +6068,26 @@ func (c *ShenhaiplatformClient) UranusQueryJarManagementTree(request *shenhaipla
     }
 
     jdResp := &shenhaiplatform.UranusQueryJarManagementTreeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 停止补数方案 */
+func (c *ShenhaiplatformClient) RotorSupplementPlanCancel(request *shenhaiplatform.RotorSupplementPlanCancelRequest) (*shenhaiplatform.RotorSupplementPlanCancelResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.RotorSupplementPlanCancelResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2137,26 +6157,6 @@ func (c *ShenhaiplatformClient) GravityParticleParticleJobSchedGetRunLog(request
     return jdResp, err
 }
 
-/* 使用线上配置 */
-func (c *ShenhaiplatformClient) UranusTaskInfoOnLineConfig(request *shenhaiplatform.UranusTaskInfoOnLineConfigRequest) (*shenhaiplatform.UranusTaskInfoOnLineConfigResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusTaskInfoOnLineConfigResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 作业信息更新 */
 func (c *ShenhaiplatformClient) GravityParticleParticleJobSchedUpdateSchedJob(request *shenhaiplatform.GravityParticleParticleJobSchedUpdateSchedJobRequest) (*shenhaiplatform.GravityParticleParticleJobSchedUpdateSchedJobResponse, error) {
     if request == nil {
@@ -2197,26 +6197,6 @@ func (c *ShenhaiplatformClient) UranusTaskFlowCollection(request *shenhaiplatfor
     return jdResp, err
 }
 
-/* 撤销发布对象 */
-func (c *ShenhaiplatformClient) DeletePublishObj(request *shenhaiplatform.DeletePublishObjRequest) (*shenhaiplatform.DeletePublishObjResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.DeletePublishObjResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 根据作业id获取脚本信息 */
 func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerGetJobScript(request *shenhaiplatform.GravityParticleDubboJobManagerGetJobScriptRequest) (*shenhaiplatform.GravityParticleDubboJobManagerGetJobScriptResponse, error) {
     if request == nil {
@@ -2228,46 +6208,6 @@ func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerGetJobScript(reque
     }
 
     jdResp := &shenhaiplatform.GravityParticleDubboJobManagerGetJobScriptResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 根据任务名字模糊查询 */
-func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerSearchByJobName(request *shenhaiplatform.GravityParticleDubboJobManagerSearchByJobNameRequest) (*shenhaiplatform.GravityParticleDubboJobManagerSearchByJobNameResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.GravityParticleDubboJobManagerSearchByJobNameResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 分页查询作业数据日期状态列表 */
-func (c *ShenhaiplatformClient) ManageHubGravityListTxDateStatus(request *shenhaiplatform.ManageHubGravityListTxDateStatusRequest) (*shenhaiplatform.ManageHubGravityListTxDateStatusResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.ManageHubGravityListTxDateStatusResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2297,8 +6237,8 @@ func (c *ShenhaiplatformClient) GravityParticleJobMonitorJobDispatchTrend(reques
     return jdResp, err
 }
 
-/* 工作流更新 */
-func (c *ShenhaiplatformClient) UranusTaskFlowUpdate(request *shenhaiplatform.UranusTaskFlowUpdateRequest) (*shenhaiplatform.UranusTaskFlowUpdateResponse, error) {
+/* 获取调试运行详情 */
+func (c *ShenhaiplatformClient) UranusTaskDebugDetail(request *shenhaiplatform.UranusTaskDebugDetailRequest) (*shenhaiplatform.UranusTaskDebugDetailResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -2307,47 +6247,7 @@ func (c *ShenhaiplatformClient) UranusTaskFlowUpdate(request *shenhaiplatform.Ur
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.UranusTaskFlowUpdateResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 工作台作业统计接口 */
-func (c *ShenhaiplatformClient) GravityParticleParticleJobMonitorJobStatusCount(request *shenhaiplatform.GravityParticleParticleJobMonitorJobStatusCountRequest) (*shenhaiplatform.GravityParticleParticleJobMonitorJobStatusCountResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.GravityParticleParticleJobMonitorJobStatusCountResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 根据作业id删除作业脚本 */
-func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerDeleteJobScript(request *shenhaiplatform.GravityParticleDubboJobManagerDeleteJobScriptRequest) (*shenhaiplatform.GravityParticleDubboJobManagerDeleteJobScriptResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.GravityParticleDubboJobManagerDeleteJobScriptResponse{}
+    jdResp := &shenhaiplatform.UranusTaskDebugDetailResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2377,8 +6277,8 @@ func (c *ShenhaiplatformClient) UranusTaskFlowDetail(request *shenhaiplatform.Ur
     return jdResp, err
 }
 
-/* 判断目录/函数是否存在 */
-func (c *ShenhaiplatformClient) UranusFunctionCheck(request *shenhaiplatform.UranusFunctionCheckRequest) (*shenhaiplatform.UranusFunctionCheckResponse, error) {
+/* 更新任务的特有参数信息 */
+func (c *ShenhaiplatformClient) UranusTaskSpecialParamUpdate(request *shenhaiplatform.UranusTaskSpecialParamUpdateRequest) (*shenhaiplatform.UranusTaskSpecialParamUpdateResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -2387,7 +6287,7 @@ func (c *ShenhaiplatformClient) UranusFunctionCheck(request *shenhaiplatform.Ura
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.UranusFunctionCheckResponse{}
+    jdResp := &shenhaiplatform.UranusTaskSpecialParamUpdateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2417,46 +6317,6 @@ func (c *ShenhaiplatformClient) WorkspaceHadCreatWsProduct(request *shenhaiplatf
     return jdResp, err
 }
 
-/* 工作流-发布一 */
-func (c *ShenhaiplatformClient) UranusTaskPublishOne(request *shenhaiplatform.UranusTaskPublishOneRequest) (*shenhaiplatform.UranusTaskPublishOneResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusTaskPublishOneResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 获得脚本详情 */
-func (c *ShenhaiplatformClient) UranusScriptQueries(request *shenhaiplatform.UranusScriptQueriesRequest) (*shenhaiplatform.UranusScriptQueriesResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusScriptQueriesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 删除文件 */
 func (c *ShenhaiplatformClient) UranusWorkFlowDirFileDelete(request *shenhaiplatform.UranusWorkFlowDirFileDeleteRequest) (*shenhaiplatform.UranusWorkFlowDirFileDeleteResponse, error) {
     if request == nil {
@@ -2468,26 +6328,6 @@ func (c *ShenhaiplatformClient) UranusWorkFlowDirFileDelete(request *shenhaiplat
     }
 
     jdResp := &shenhaiplatform.UranusWorkFlowDirFileDeleteResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 根据作业名模糊查询或JobQueryDTO查询 */
-func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerSearchSchedJob(request *shenhaiplatform.GravityParticleDubboJobManagerSearchSchedJobRequest) (*shenhaiplatform.GravityParticleDubboJobManagerSearchSchedJobResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.GravityParticleDubboJobManagerSearchSchedJobResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2517,8 +6357,8 @@ func (c *ShenhaiplatformClient) JtlasWarehouseTableDetail(request *shenhaiplatfo
     return jdResp, err
 }
 
-/* 删除工作空间成员 */
-func (c *ShenhaiplatformClient) WorkspaceDeleteMember(request *shenhaiplatform.WorkspaceDeleteMemberRequest) (*shenhaiplatform.WorkspaceDeleteMemberResponse, error) {
+/* 更新任务的输入参数信息 */
+func (c *ShenhaiplatformClient) UranusTaskOutputParamInfoUpdate(request *shenhaiplatform.UranusTaskOutputParamInfoUpdateRequest) (*shenhaiplatform.UranusTaskOutputParamInfoUpdateResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -2527,7 +6367,7 @@ func (c *ShenhaiplatformClient) WorkspaceDeleteMember(request *shenhaiplatform.W
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.WorkspaceDeleteMemberResponse{}
+    jdResp := &shenhaiplatform.UranusTaskOutputParamInfoUpdateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2537,8 +6377,8 @@ func (c *ShenhaiplatformClient) WorkspaceDeleteMember(request *shenhaiplatform.W
     return jdResp, err
 }
 
-/* 获取资源下载链接 */
-func (c *ShenhaiplatformClient) UranusResourceDownloadUrl(request *shenhaiplatform.UranusResourceDownloadUrlRequest) (*shenhaiplatform.UranusResourceDownloadUrlResponse, error) {
+/* 解析脚本内容中的系统参数 */
+func (c *ShenhaiplatformClient) UranusTaskParseScriptContentSystemParam(request *shenhaiplatform.UranusTaskParseScriptContentSystemParamRequest) (*shenhaiplatform.UranusTaskParseScriptContentSystemParamResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -2547,7 +6387,27 @@ func (c *ShenhaiplatformClient) UranusResourceDownloadUrl(request *shenhaiplatfo
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.UranusResourceDownloadUrlResponse{}
+    jdResp := &shenhaiplatform.UranusTaskParseScriptContentSystemParamResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 重置任务实例 */
+func (c *ShenhaiplatformClient) RotorResetInstance(request *shenhaiplatform.RotorResetInstanceRequest) (*shenhaiplatform.RotorResetInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.RotorResetInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2577,8 +6437,8 @@ func (c *ShenhaiplatformClient) UranusDataLoadLog(request *shenhaiplatform.Uranu
     return jdResp, err
 }
 
-/* 获取资源简要信息(前缀匹配资源名称) */
-func (c *ShenhaiplatformClient) UranusResourceGetDetailByPrefix(request *shenhaiplatform.UranusResourceGetDetailByPrefixRequest) (*shenhaiplatform.UranusResourceGetDetailByPrefixResponse, error) {
+/* 实例历史信息 */
+func (c *ShenhaiplatformClient) RotorInstanceHistories(request *shenhaiplatform.RotorInstanceHistoriesRequest) (*shenhaiplatform.RotorInstanceHistoriesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -2587,7 +6447,7 @@ func (c *ShenhaiplatformClient) UranusResourceGetDetailByPrefix(request *shenhai
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.UranusResourceGetDetailByPrefixResponse{}
+    jdResp := &shenhaiplatform.RotorInstanceHistoriesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2597,8 +6457,8 @@ func (c *ShenhaiplatformClient) UranusResourceGetDetailByPrefix(request *shenhai
     return jdResp, err
 }
 
-/* 获取具体表的建表语句 */
-func (c *ShenhaiplatformClient) UranusTableDDL(request *shenhaiplatform.UranusTableDDLRequest) (*shenhaiplatform.UranusTableDDLResponse, error) {
+/* 查询今日实例每次运行各状态百分比 */
+func (c *ShenhaiplatformClient) StatusPercentageToday(request *shenhaiplatform.StatusPercentageTodayRequest) (*shenhaiplatform.StatusPercentageTodayResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -2607,7 +6467,7 @@ func (c *ShenhaiplatformClient) UranusTableDDL(request *shenhaiplatform.UranusTa
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.UranusTableDDLResponse{}
+    jdResp := &shenhaiplatform.StatusPercentageTodayResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2617,8 +6477,8 @@ func (c *ShenhaiplatformClient) UranusTableDDL(request *shenhaiplatform.UranusTa
     return jdResp, err
 }
 
-/* 任务节点版本查看 */
-func (c *ShenhaiplatformClient) UranusTaskInfoHistoryList(request *shenhaiplatform.UranusTaskInfoHistoryListRequest) (*shenhaiplatform.UranusTaskInfoHistoryListResponse, error) {
+/* 以KV的方式将目录与ID列出来 */
+func (c *ShenhaiplatformClient) UranusTaskPublicListFlatCatalog(request *shenhaiplatform.UranusTaskPublicListFlatCatalogRequest) (*shenhaiplatform.UranusTaskPublicListFlatCatalogResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -2627,47 +6487,7 @@ func (c *ShenhaiplatformClient) UranusTaskInfoHistoryList(request *shenhaiplatfo
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.UranusTaskInfoHistoryListResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 统计成功作业状态数量 */
-func (c *ShenhaiplatformClient) GravityParticleJobMonitorJobSuccessCount(request *shenhaiplatform.GravityParticleJobMonitorJobSuccessCountRequest) (*shenhaiplatform.GravityParticleJobMonitorJobSuccessCountResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.GravityParticleJobMonitorJobSuccessCountResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 清除对话上下文 */
-func (c *ShenhaiplatformClient) CopilotChatClear(request *shenhaiplatform.CopilotChatClearRequest) (*shenhaiplatform.CopilotChatClearResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.CopilotChatClearResponse{}
+    jdResp := &shenhaiplatform.UranusTaskPublicListFlatCatalogResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2697,6 +6517,26 @@ func (c *ShenhaiplatformClient) ManageHubGravityOneClickRerunBatches(request *sh
     return jdResp, err
 }
 
+/* 任务依赖节点的输出参数查询 */
+func (c *ShenhaiplatformClient) UranusTaskDependOutputParamList(request *shenhaiplatform.UranusTaskDependOutputParamListRequest) (*shenhaiplatform.UranusTaskDependOutputParamListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskDependOutputParamListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 任务发布 */
 func (c *ShenhaiplatformClient) UranusTaskInfoPublish(request *shenhaiplatform.UranusTaskInfoPublishRequest) (*shenhaiplatform.UranusTaskInfoPublishResponse, error) {
     if request == nil {
@@ -2717,8 +6557,8 @@ func (c *ShenhaiplatformClient) UranusTaskInfoPublish(request *shenhaiplatform.U
     return jdResp, err
 }
 
-/* 根据租户/项目空间/表名称模糊查询表列表，最多返回1000条 */
-func (c *ShenhaiplatformClient) JtlasWarehouseFuzzyQueryTablesByTableName(request *shenhaiplatform.JtlasWarehouseFuzzyQueryTablesByTableNameRequest) (*shenhaiplatform.JtlasWarehouseFuzzyQueryTablesByTableNameResponse, error) {
+/* 获取任务详情信息 */
+func (c *ShenhaiplatformClient) UranusTaskPublicDetail(request *shenhaiplatform.UranusTaskPublicDetailRequest) (*shenhaiplatform.UranusTaskPublicDetailResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -2727,7 +6567,7 @@ func (c *ShenhaiplatformClient) JtlasWarehouseFuzzyQueryTablesByTableName(reques
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.JtlasWarehouseFuzzyQueryTablesByTableNameResponse{}
+    jdResp := &shenhaiplatform.UranusTaskPublicDetailResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2737,8 +6577,8 @@ func (c *ShenhaiplatformClient) JtlasWarehouseFuzzyQueryTablesByTableName(reques
     return jdResp, err
 }
 
-/* 更改用户角色 */
-func (c *ShenhaiplatformClient) WorkspaceUpdateUserRole(request *shenhaiplatform.WorkspaceUpdateUserRoleRequest) (*shenhaiplatform.WorkspaceUpdateUserRoleResponse, error) {
+/* 前端绑定计算引擎弹窗一键完成绑定 */
+func (c *ShenhaiplatformClient) BindWorkspaceEngine(request *shenhaiplatform.BindWorkspaceEngineRequest) (*shenhaiplatform.BindWorkspaceEngineResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -2747,7 +6587,7 @@ func (c *ShenhaiplatformClient) WorkspaceUpdateUserRole(request *shenhaiplatform
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.WorkspaceUpdateUserRoleResponse{}
+    jdResp := &shenhaiplatform.BindWorkspaceEngineResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2768,26 +6608,6 @@ func (c *ShenhaiplatformClient) GravityParticleParticleJobSchedKillJob(request *
     }
 
     jdResp := &shenhaiplatform.GravityParticleParticleJobSchedKillJobResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 根据当前作业和目标层级查询父作业链路层级树 */
-func (c *ShenhaiplatformClient) GravityParticleJobDepGetParentChainJobs(request *shenhaiplatform.GravityParticleJobDepGetParentChainJobsRequest) (*shenhaiplatform.GravityParticleJobDepGetParentChainJobsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.GravityParticleJobDepGetParentChainJobsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2837,26 +6657,6 @@ func (c *ShenhaiplatformClient) UranusExtraRunnerResult(request *shenhaiplatform
     return jdResp, err
 }
 
-/* 新建函数 */
-func (c *ShenhaiplatformClient) UranusFunctionCreate(request *shenhaiplatform.UranusFunctionCreateRequest) (*shenhaiplatform.UranusFunctionCreateResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusFunctionCreateResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 重置作业 */
 func (c *ShenhaiplatformClient) ManageHubGravityReset(request *shenhaiplatform.ManageHubGravityResetRequest) (*shenhaiplatform.ManageHubGravityResetResponse, error) {
     if request == nil {
@@ -2877,46 +6677,6 @@ func (c *ShenhaiplatformClient) ManageHubGravityReset(request *shenhaiplatform.M
     return jdResp, err
 }
 
-/* 数据预览 */
-func (c *ShenhaiplatformClient) UranusDataLoadPreview(request *shenhaiplatform.UranusDataLoadPreviewRequest) (*shenhaiplatform.UranusDataLoadPreviewResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusDataLoadPreviewResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 停止脚本 */
-func (c *ShenhaiplatformClient) UranusScriptStop(request *shenhaiplatform.UranusScriptStopRequest) (*shenhaiplatform.UranusScriptStopResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusScriptStopResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 发布包信息预览 */
 func (c *ShenhaiplatformClient) PreviewPackage(request *shenhaiplatform.PreviewPackageRequest) (*shenhaiplatform.PreviewPackageResponse, error) {
     if request == nil {
@@ -2928,26 +6688,6 @@ func (c *ShenhaiplatformClient) PreviewPackage(request *shenhaiplatform.PreviewP
     }
 
     jdResp := &shenhaiplatform.PreviewPackageResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 批量任务单节点-上下线更新 */
-func (c *ShenhaiplatformClient) UranusTaskUpdateStatusList(request *shenhaiplatform.UranusTaskUpdateStatusListRequest) (*shenhaiplatform.UranusTaskUpdateStatusListResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusTaskUpdateStatusListResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2997,26 +6737,6 @@ func (c *ShenhaiplatformClient) GravityParticleParticleJobListOperationRecord(re
     return jdResp, err
 }
 
-/* 获取作业类型关系 */
-func (c *ShenhaiplatformClient) GravityParticleSchedDictGetJobTypeR(request *shenhaiplatform.GravityParticleSchedDictGetJobTypeRRequest) (*shenhaiplatform.GravityParticleSchedDictGetJobTypeRResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.GravityParticleSchedDictGetJobTypeRResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 获取运行脚本结果列表 */
 func (c *ShenhaiplatformClient) UranusScriptGetScriptRunResultList(request *shenhaiplatform.UranusScriptGetScriptRunResultListRequest) (*shenhaiplatform.UranusScriptGetScriptRunResultListResponse, error) {
     if request == nil {
@@ -3037,8 +6757,8 @@ func (c *ShenhaiplatformClient) UranusScriptGetScriptRunResultList(request *shen
     return jdResp, err
 }
 
-/* 工作空间到期后删除该工作空间下的所有作业和日志 */
-func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerDeleteAllByWorkspace(request *shenhaiplatform.GravityParticleDubboJobManagerDeleteAllByWorkspaceRequest) (*shenhaiplatform.GravityParticleDubboJobManagerDeleteAllByWorkspaceResponse, error) {
+/* 创建一个新的工作流节点 */
+func (c *ShenhaiplatformClient) UranusTaskPublicCreateFlow(request *shenhaiplatform.UranusTaskPublicCreateFlowRequest) (*shenhaiplatform.UranusTaskPublicCreateFlowResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -3047,7 +6767,7 @@ func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerDeleteAllByWorkspa
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.GravityParticleDubboJobManagerDeleteAllByWorkspaceResponse{}
+    jdResp := &shenhaiplatform.UranusTaskPublicCreateFlowResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -3057,8 +6777,8 @@ func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerDeleteAllByWorkspa
     return jdResp, err
 }
 
-/* 发布表变更信息 */
-func (c *ShenhaiplatformClient) UranusTablePublishToPublishCenter(request *shenhaiplatform.UranusTablePublishToPublishCenterRequest) (*shenhaiplatform.UranusTablePublishToPublishCenterResponse, error) {
+/* 更新集群 */
+func (c *ShenhaiplatformClient) ManageHubClusterUpdate(request *shenhaiplatform.ManageHubClusterUpdateRequest) (*shenhaiplatform.ManageHubClusterUpdateResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -3067,7 +6787,7 @@ func (c *ShenhaiplatformClient) UranusTablePublishToPublishCenter(request *shenh
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.UranusTablePublishToPublishCenterResponse{}
+    jdResp := &shenhaiplatform.ManageHubClusterUpdateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -3077,8 +6797,8 @@ func (c *ShenhaiplatformClient) UranusTablePublishToPublishCenter(request *shenh
     return jdResp, err
 }
 
-/* 查询表DDL */
-func (c *ShenhaiplatformClient) ManageHubStorageTableDDL(request *shenhaiplatform.ManageHubStorageTableDDLRequest) (*shenhaiplatform.ManageHubStorageTableDDLResponse, error) {
+/*  */
+func (c *ShenhaiplatformClient) GetLongTimeRunningInstances(request *shenhaiplatform.GetLongTimeRunningInstancesRequest) (*shenhaiplatform.GetLongTimeRunningInstancesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -3087,7 +6807,7 @@ func (c *ShenhaiplatformClient) ManageHubStorageTableDDL(request *shenhaiplatfor
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.ManageHubStorageTableDDLResponse{}
+    jdResp := &shenhaiplatform.GetLongTimeRunningInstancesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -3117,26 +6837,6 @@ func (c *ShenhaiplatformClient) UranusTaskInfoSparkVersion(request *shenhaiplatf
     return jdResp, err
 }
 
-/* 任务保存 */
-func (c *ShenhaiplatformClient) UranusTaskInfoSave(request *shenhaiplatform.UranusTaskInfoSaveRequest) (*shenhaiplatform.UranusTaskInfoSaveResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusTaskInfoSaveResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 获取资源简要信息(前缀匹配资源名称) */
 func (c *ShenhaiplatformClient) UranusResourceGetBriefByPrefix(request *shenhaiplatform.UranusResourceGetBriefByPrefixRequest) (*shenhaiplatform.UranusResourceGetBriefByPrefixResponse, error) {
     if request == nil {
@@ -3148,6 +6848,26 @@ func (c *ShenhaiplatformClient) UranusResourceGetBriefByPrefix(request *shenhaip
     }
 
     jdResp := &shenhaiplatform.UranusResourceGetBriefByPrefixResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新任务调度状态 */
+func (c *ShenhaiplatformClient) RotorUpdateTaskScheduleState(request *shenhaiplatform.RotorUpdateTaskScheduleStateRequest) (*shenhaiplatform.RotorUpdateTaskScheduleStateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.RotorUpdateTaskScheduleStateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -3197,26 +6917,6 @@ func (c *ShenhaiplatformClient) ManageHubGravityKill(request *shenhaiplatform.Ma
     return jdResp, err
 }
 
-/* 获取taskCode */
-func (c *ShenhaiplatformClient) UranusTaskInfoGetTaskCode(request *shenhaiplatform.UranusTaskInfoGetTaskCodeRequest) (*shenhaiplatform.UranusTaskInfoGetTaskCodeResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusTaskInfoGetTaskCodeResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 列出值班表 */
 func (c *ShenhaiplatformClient) ManageHubDutyListRoster(request *shenhaiplatform.ManageHubDutyListRosterRequest) (*shenhaiplatform.ManageHubDutyListRosterResponse, error) {
     if request == nil {
@@ -3237,6 +6937,26 @@ func (c *ShenhaiplatformClient) ManageHubDutyListRoster(request *shenhaiplatform
     return jdResp, err
 }
 
+/* 抢任务节点锁，同一用户重复抢锁为幂等成功 */
+func (c *ShenhaiplatformClient) UranusTaskPublicSnatchLock(request *shenhaiplatform.UranusTaskPublicSnatchLockRequest) (*shenhaiplatform.UranusTaskPublicSnatchLockResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskPublicSnatchLockResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询作业运行信息 */
 func (c *ShenhaiplatformClient) GravityParticleParticleJobGetRunInfos(request *shenhaiplatform.GravityParticleParticleJobGetRunInfosRequest) (*shenhaiplatform.GravityParticleParticleJobGetRunInfosResponse, error) {
     if request == nil {
@@ -3248,6 +6968,26 @@ func (c *ShenhaiplatformClient) GravityParticleParticleJobGetRunInfos(request *s
     }
 
     jdResp := &shenhaiplatform.GravityParticleParticleJobGetRunInfosResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新用户默认表来源 */
+func (c *ShenhaiplatformClient) UranusTableDefaultSource(request *shenhaiplatform.UranusTableDefaultSourceRequest) (*shenhaiplatform.UranusTableDefaultSourceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTableDefaultSourceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -3297,26 +7037,6 @@ func (c *ShenhaiplatformClient) UranusWorkSpaceDown(request *shenhaiplatform.Ura
     return jdResp, err
 }
 
-/* 目录根据companyCode查询目录 */
-func (c *ShenhaiplatformClient) UranusCatalogQueryList(request *shenhaiplatform.UranusCatalogQueryListRequest) (*shenhaiplatform.UranusCatalogQueryListResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusCatalogQueryListResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 脚本检测依赖 */
 func (c *ShenhaiplatformClient) UranusScriptVerifyScriptFileDepend(request *shenhaiplatform.UranusScriptVerifyScriptFileDependRequest) (*shenhaiplatform.UranusScriptVerifyScriptFileDependResponse, error) {
     if request == nil {
@@ -3328,6 +7048,26 @@ func (c *ShenhaiplatformClient) UranusScriptVerifyScriptFileDepend(request *shen
     }
 
     jdResp := &shenhaiplatform.UranusScriptVerifyScriptFileDependResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取任务节点锁的状态 */
+func (c *ShenhaiplatformClient) UranusTaskNodeLockStatus(request *shenhaiplatform.UranusTaskNodeLockStatusRequest) (*shenhaiplatform.UranusTaskNodeLockStatusResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskNodeLockStatusResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -3417,6 +7157,26 @@ func (c *ShenhaiplatformClient) UranusTaskExportParamList(request *shenhaiplatfo
     return jdResp, err
 }
 
+/* 任务业务目录是否存在 */
+func (c *ShenhaiplatformClient) UranusTaskCatalogExisted(request *shenhaiplatform.UranusTaskCatalogExistedRequest) (*shenhaiplatform.UranusTaskCatalogExistedResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskCatalogExistedResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 根据父目录CODE删除目录 */
 func (c *ShenhaiplatformClient) UranusCatalogDelete(request *shenhaiplatform.UranusCatalogDeleteRequest) (*shenhaiplatform.UranusCatalogDeleteResponse, error) {
     if request == nil {
@@ -3477,26 +7237,6 @@ func (c *ShenhaiplatformClient) WorkspaceStopExpireOrDelete(request *shenhaiplat
     return jdResp, err
 }
 
-/* 工作流目录树 */
-func (c *ShenhaiplatformClient) UranusTaskFlowListTree(request *shenhaiplatform.UranusTaskFlowListTreeRequest) (*shenhaiplatform.UranusTaskFlowListTreeResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusTaskFlowListTreeResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 分片上传初始化 */
 func (c *ShenhaiplatformClient) UranusWorkFlowInitUpload(request *shenhaiplatform.UranusWorkFlowInitUploadRequest) (*shenhaiplatform.UranusWorkFlowInitUploadResponse, error) {
     if request == nil {
@@ -3508,46 +7248,6 @@ func (c *ShenhaiplatformClient) UranusWorkFlowInitUpload(request *shenhaiplatfor
     }
 
     jdResp := &shenhaiplatform.UranusWorkFlowInitUploadResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 流程画布-节点管理列表 */
-func (c *ShenhaiplatformClient) UranusTaskNodeList(request *shenhaiplatform.UranusTaskNodeListRequest) (*shenhaiplatform.UranusTaskNodeListResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusTaskNodeListResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 获取指定对话中的发言记录 */
-func (c *ShenhaiplatformClient) CopilotUtteranceList(request *shenhaiplatform.CopilotUtteranceListRequest) (*shenhaiplatform.CopilotUtteranceListResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.CopilotUtteranceListResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -3597,26 +7297,6 @@ func (c *ShenhaiplatformClient) UranusWorkFlowDirIfChildrenPath(request *shenhai
     return jdResp, err
 }
 
-/* 删除文件夹 */
-func (c *ShenhaiplatformClient) UranusWorkFlowDirDelete(request *shenhaiplatform.UranusWorkFlowDirDeleteRequest) (*shenhaiplatform.UranusWorkFlowDirDeleteResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusWorkFlowDirDeleteResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 根据脚本内容解析输出表 */
 func (c *ShenhaiplatformClient) UranusTaskInfoAnalysisOutputTable(request *shenhaiplatform.UranusTaskInfoAnalysisOutputTableRequest) (*shenhaiplatform.UranusTaskInfoAnalysisOutputTableResponse, error) {
     if request == nil {
@@ -3628,26 +7308,6 @@ func (c *ShenhaiplatformClient) UranusTaskInfoAnalysisOutputTable(request *shenh
     }
 
     jdResp := &shenhaiplatform.UranusTaskInfoAnalysisOutputTableResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 上传资源 */
-func (c *ShenhaiplatformClient) UranusResourceAppendFile(request *shenhaiplatform.UranusResourceAppendFileRequest) (*shenhaiplatform.UranusResourceAppendFileResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusResourceAppendFileResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -3717,8 +7377,8 @@ func (c *ShenhaiplatformClient) UranusTaskInfoJobPublishType(request *shenhaipla
     return jdResp, err
 }
 
-/* 获取历史对话列表 */
-func (c *ShenhaiplatformClient) CopilotChatHistory(request *shenhaiplatform.CopilotChatHistoryRequest) (*shenhaiplatform.CopilotChatHistoryResponse, error) {
+/* 更新任务的集成任务参数信息 */
+func (c *ShenhaiplatformClient) UranusTaskPipeParamInfoUpdate(request *shenhaiplatform.UranusTaskPipeParamInfoUpdateRequest) (*shenhaiplatform.UranusTaskPipeParamInfoUpdateResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -3727,7 +7387,7 @@ func (c *ShenhaiplatformClient) CopilotChatHistory(request *shenhaiplatform.Copi
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.CopilotChatHistoryResponse{}
+    jdResp := &shenhaiplatform.UranusTaskPipeParamInfoUpdateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -3737,8 +7397,8 @@ func (c *ShenhaiplatformClient) CopilotChatHistory(request *shenhaiplatform.Copi
     return jdResp, err
 }
 
-/* 抢锁时获取任务信息 */
-func (c *ShenhaiplatformClient) UranusTaskInfoLockDetail(request *shenhaiplatform.UranusTaskInfoLockDetailRequest) (*shenhaiplatform.UranusTaskInfoLockDetailResponse, error) {
+/* 根据调试ID查询任务的执行日志 */
+func (c *ShenhaiplatformClient) UranusTaskPublicDebugLog(request *shenhaiplatform.UranusTaskPublicDebugLogRequest) (*shenhaiplatform.UranusTaskPublicDebugLogResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -3747,7 +7407,7 @@ func (c *ShenhaiplatformClient) UranusTaskInfoLockDetail(request *shenhaiplatfor
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.UranusTaskInfoLockDetailResponse{}
+    jdResp := &shenhaiplatform.UranusTaskPublicDebugLogResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -3757,8 +7417,8 @@ func (c *ShenhaiplatformClient) UranusTaskInfoLockDetail(request *shenhaiplatfor
     return jdResp, err
 }
 
-/* 查询计算任务日志 */
-func (c *ShenhaiplatformClient) ManageHubGravityJobLog(request *shenhaiplatform.ManageHubGravityJobLogRequest) (*shenhaiplatform.ManageHubGravityJobLogResponse, error) {
+/* 删除集群的元数据 */
+func (c *ShenhaiplatformClient) ManageHubClusterMetaDelete(request *shenhaiplatform.ManageHubClusterMetaDeleteRequest) (*shenhaiplatform.ManageHubClusterMetaDeleteResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -3767,7 +7427,67 @@ func (c *ShenhaiplatformClient) ManageHubGravityJobLog(request *shenhaiplatform.
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.ManageHubGravityJobLogResponse{}
+    jdResp := &shenhaiplatform.ManageHubClusterMetaDeleteResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除业务目录 */
+func (c *ShenhaiplatformClient) UranusTaskCatalogDelete(request *shenhaiplatform.UranusTaskCatalogDeleteRequest) (*shenhaiplatform.UranusTaskCatalogDeleteResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskCatalogDeleteResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取调试结果内容 */
+func (c *ShenhaiplatformClient) UranusTaskDebugResultContent(request *shenhaiplatform.UranusTaskDebugResultContentRequest) (*shenhaiplatform.UranusTaskDebugResultContentResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskDebugResultContentResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新任务的调度信息 */
+func (c *ShenhaiplatformClient) UranusTaskScheduleInfoUpdate(request *shenhaiplatform.UranusTaskScheduleInfoUpdateRequest) (*shenhaiplatform.UranusTaskScheduleInfoUpdateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskScheduleInfoUpdateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -3797,8 +7517,8 @@ func (c *ShenhaiplatformClient) GravityParticleJobDepGetParentDependencies(reque
     return jdResp, err
 }
 
-/* 查询表分区 */
-func (c *ShenhaiplatformClient) JtlasPageSearchTablePartitions(request *shenhaiplatform.JtlasPageSearchTablePartitionsRequest) (*shenhaiplatform.JtlasPageSearchTablePartitionsResponse, error) {
+/* 按照projectCode查询绑定的计算引擎信息以及计算引擎绑定的空间信息 */
+func (c *ShenhaiplatformClient) GetByProjectCode(request *shenhaiplatform.GetByProjectCodeRequest) (*shenhaiplatform.GetByProjectCodeResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -3807,47 +7527,7 @@ func (c *ShenhaiplatformClient) JtlasPageSearchTablePartitions(request *shenhaip
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.JtlasPageSearchTablePartitionsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 任务批量补数 */
-func (c *ShenhaiplatformClient) GravityParticleJobHisRunAddBathTask(request *shenhaiplatform.GravityParticleJobHisRunAddBathTaskRequest) (*shenhaiplatform.GravityParticleJobHisRunAddBathTaskResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.GravityParticleJobHisRunAddBathTaskResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 获取脚本类型和模板下载地址 */
-func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerGetScriptInfoType(request *shenhaiplatform.GravityParticleDubboJobManagerGetScriptInfoTypeRequest) (*shenhaiplatform.GravityParticleDubboJobManagerGetScriptInfoTypeResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.GravityParticleDubboJobManagerGetScriptInfoTypeResponse{}
+    jdResp := &shenhaiplatform.GetByProjectCodeResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -3897,8 +7577,8 @@ func (c *ShenhaiplatformClient) GravityParticleParticleJobSchedGetSchedJobInfo(r
     return jdResp, err
 }
 
-/* 工作流-预发布 */
-func (c *ShenhaiplatformClient) UranusTaskPrePublish(request *shenhaiplatform.UranusTaskPrePublishRequest) (*shenhaiplatform.UranusTaskPrePublishResponse, error) {
+/* 创建任务节点 */
+func (c *ShenhaiplatformClient) UranusTaskNodeCreate(request *shenhaiplatform.UranusTaskNodeCreateRequest) (*shenhaiplatform.UranusTaskNodeCreateResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -3907,7 +7587,27 @@ func (c *ShenhaiplatformClient) UranusTaskPrePublish(request *shenhaiplatform.Ur
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.UranusTaskPrePublishResponse{}
+    jdResp := &shenhaiplatform.UranusTaskNodeCreateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 列出当前工作区下的所有资源组信息 */
+func (c *ShenhaiplatformClient) UranusTaskPublicListResources(request *shenhaiplatform.UranusTaskPublicListResourcesRequest) (*shenhaiplatform.UranusTaskPublicListResourcesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskPublicListResourcesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -3977,26 +7677,6 @@ func (c *ShenhaiplatformClient) GravityParticleParticleJobGetMgrJobInfo(request 
     return jdResp, err
 }
 
-/* 查询脚本参数或任务参数 */
-func (c *ShenhaiplatformClient) UranusScriptQueryParams(request *shenhaiplatform.UranusScriptQueryParamsRequest) (*shenhaiplatform.UranusScriptQueryParamsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusScriptQueryParamsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 删除作业以及子作业和质量作业 */
 func (c *ShenhaiplatformClient) GravityParticleChannelJobInfoDeleteJob(request *shenhaiplatform.GravityParticleChannelJobInfoDeleteJobRequest) (*shenhaiplatform.GravityParticleChannelJobInfoDeleteJobResponse, error) {
     if request == nil {
@@ -4008,6 +7688,46 @@ func (c *ShenhaiplatformClient) GravityParticleChannelJobInfoDeleteJob(request *
     }
 
     jdResp := &shenhaiplatform.GravityParticleChannelJobInfoDeleteJobResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 按全路径判断业务目录是否存在，例如 /dir1/dir2/dir3 */
+func (c *ShenhaiplatformClient) UranusTaskPublicCatalogExistedByPath(request *shenhaiplatform.UranusTaskPublicCatalogExistedByPathRequest) (*shenhaiplatform.UranusTaskPublicCatalogExistedByPathResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskPublicCatalogExistedByPathResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 强制解绑资源组 */
+func (c *ShenhaiplatformClient) WorkspaceForceUnBundleResource(request *shenhaiplatform.WorkspaceForceUnBundleResourceRequest) (*shenhaiplatform.WorkspaceForceUnBundleResourceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.WorkspaceForceUnBundleResourceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -4057,8 +7777,8 @@ func (c *ShenhaiplatformClient) CopilotChatDelete(request *shenhaiplatform.Copil
     return jdResp, err
 }
 
-/* 同步工作空间开通信息接口 */
-func (c *ShenhaiplatformClient) WorkspaceSyncWsProductOrder(request *shenhaiplatform.WorkspaceSyncWsProductOrderRequest) (*shenhaiplatform.WorkspaceSyncWsProductOrderResponse, error) {
+/* 更新任务的数据源配置信息 */
+func (c *ShenhaiplatformClient) UranusTaskPublicUpdateDatasource(request *shenhaiplatform.UranusTaskPublicUpdateDatasourceRequest) (*shenhaiplatform.UranusTaskPublicUpdateDatasourceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -4067,87 +7787,7 @@ func (c *ShenhaiplatformClient) WorkspaceSyncWsProductOrder(request *shenhaiplat
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.WorkspaceSyncWsProductOrderResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 任务属性 */
-func (c *ShenhaiplatformClient) ManageHubGravityJobProperty(request *shenhaiplatform.ManageHubGravityJobPropertyRequest) (*shenhaiplatform.ManageHubGravityJobPropertyResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.ManageHubGravityJobPropertyResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 数据下载 */
-func (c *ShenhaiplatformClient) UranusTableDataDownload(request *shenhaiplatform.UranusTableDataDownloadRequest) (*shenhaiplatform.UranusTableDataDownloadResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusTableDataDownloadResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 工作流新建 */
-func (c *ShenhaiplatformClient) UranusTaskFlowSave(request *shenhaiplatform.UranusTaskFlowSaveRequest) (*shenhaiplatform.UranusTaskFlowSaveResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusTaskFlowSaveResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 同步工作空间续费消息 */
-func (c *ShenhaiplatformClient) WorkspaceSyncRecharge(request *shenhaiplatform.WorkspaceSyncRechargeRequest) (*shenhaiplatform.WorkspaceSyncRechargeResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.WorkspaceSyncRechargeResponse{}
+    jdResp := &shenhaiplatform.UranusTaskPublicUpdateDatasourceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -4197,6 +7837,26 @@ func (c *ShenhaiplatformClient) UranusTaskFlowCheck(request *shenhaiplatform.Ura
     return jdResp, err
 }
 
+/* 更新业务目录信息 */
+func (c *ShenhaiplatformClient) UranusTaskCatalogUpdate(request *shenhaiplatform.UranusTaskCatalogUpdateRequest) (*shenhaiplatform.UranusTaskCatalogUpdateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskCatalogUpdateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 任务单节点-详情 */
 func (c *ShenhaiplatformClient) UranusTaskDetail(request *shenhaiplatform.UranusTaskDetailRequest) (*shenhaiplatform.UranusTaskDetailResponse, error) {
     if request == nil {
@@ -4208,6 +7868,26 @@ func (c *ShenhaiplatformClient) UranusTaskDetail(request *shenhaiplatform.Uranus
     }
 
     jdResp := &shenhaiplatform.UranusTaskDetailResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据调试ID查询任务的执行结果 */
+func (c *ShenhaiplatformClient) UranusTaskPublicDebugResult(request *shenhaiplatform.UranusTaskPublicDebugResultRequest) (*shenhaiplatform.UranusTaskPublicDebugResultResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskPublicDebugResultResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -4237,26 +7917,6 @@ func (c *ShenhaiplatformClient) WorkspaceAddMember(request *shenhaiplatform.Work
     return jdResp, err
 }
 
-/* 任务重新发布 */
-func (c *ShenhaiplatformClient) UranusTaskInfoRePublish(request *shenhaiplatform.UranusTaskInfoRePublishRequest) (*shenhaiplatform.UranusTaskInfoRePublishResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusTaskInfoRePublishResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 判断作业和上游是否完全同频 */
 func (c *ShenhaiplatformClient) GravityParticleJobscheIsUpstreamSameFrequency(request *shenhaiplatform.GravityParticleJobscheIsUpstreamSameFrequencyRequest) (*shenhaiplatform.GravityParticleJobscheIsUpstreamSameFrequencyResponse, error) {
     if request == nil {
@@ -4277,8 +7937,8 @@ func (c *ShenhaiplatformClient) GravityParticleJobscheIsUpstreamSameFrequency(re
     return jdResp, err
 }
 
-/* 查询作业完成信息 */
-func (c *ShenhaiplatformClient) GravityParticleParticleJobJobCompletionInfo(request *shenhaiplatform.GravityParticleParticleJobJobCompletionInfoRequest) (*shenhaiplatform.GravityParticleParticleJobJobCompletionInfoResponse, error) {
+/* 从运维中心下线任务 */
+func (c *ShenhaiplatformClient) UranusTaskOffline(request *shenhaiplatform.UranusTaskOfflineRequest) (*shenhaiplatform.UranusTaskOfflineResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -4287,7 +7947,7 @@ func (c *ShenhaiplatformClient) GravityParticleParticleJobJobCompletionInfo(requ
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.GravityParticleParticleJobJobCompletionInfoResponse{}
+    jdResp := &shenhaiplatform.UranusTaskOfflineResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -4297,8 +7957,8 @@ func (c *ShenhaiplatformClient) GravityParticleParticleJobJobCompletionInfo(requ
     return jdResp, err
 }
 
-/* 获取所有分类目录 */
-func (c *ShenhaiplatformClient) UranusFunctionListCatalog(request *shenhaiplatform.UranusFunctionListCatalogRequest) (*shenhaiplatform.UranusFunctionListCatalogResponse, error) {
+/* 计算引擎解绑实例 */
+func (c *ShenhaiplatformClient) UnbindInstance(request *shenhaiplatform.UnbindInstanceRequest) (*shenhaiplatform.UnbindInstanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -4307,7 +7967,7 @@ func (c *ShenhaiplatformClient) UranusFunctionListCatalog(request *shenhaiplatfo
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.UranusFunctionListCatalogResponse{}
+    jdResp := &shenhaiplatform.UnbindInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -4317,8 +7977,8 @@ func (c *ShenhaiplatformClient) UranusFunctionListCatalog(request *shenhaiplatfo
     return jdResp, err
 }
 
-/* 检索表 */
-func (c *ShenhaiplatformClient) JtlasPageSearchTables(request *shenhaiplatform.JtlasPageSearchTablesRequest) (*shenhaiplatform.JtlasPageSearchTablesResponse, error) {
+/*  */
+func (c *ShenhaiplatformClient) GetMostFailedTimesInstances(request *shenhaiplatform.GetMostFailedTimesInstancesRequest) (*shenhaiplatform.GetMostFailedTimesInstancesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -4327,7 +7987,7 @@ func (c *ShenhaiplatformClient) JtlasPageSearchTables(request *shenhaiplatform.J
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.JtlasPageSearchTablesResponse{}
+    jdResp := &shenhaiplatform.GetMostFailedTimesInstancesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -4337,8 +7997,8 @@ func (c *ShenhaiplatformClient) JtlasPageSearchTables(request *shenhaiplatform.J
     return jdResp, err
 }
 
-/* 根据查询条件返回作业关联的模型信息 */
-func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerSearchDmrModelJob(request *shenhaiplatform.GravityParticleDubboJobManagerSearchDmrModelJobRequest) (*shenhaiplatform.GravityParticleDubboJobManagerSearchDmrModelJobResponse, error) {
+/* 配置任务的调度策略，包括调度周期、优先级、重试次数等 */
+func (c *ShenhaiplatformClient) UranusTaskPublicConfigSchedule(request *shenhaiplatform.UranusTaskPublicConfigScheduleRequest) (*shenhaiplatform.UranusTaskPublicConfigScheduleResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -4347,7 +8007,7 @@ func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerSearchDmrModelJob(
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.GravityParticleDubboJobManagerSearchDmrModelJobResponse{}
+    jdResp := &shenhaiplatform.UranusTaskPublicConfigScheduleResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -4357,8 +8017,8 @@ func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerSearchDmrModelJob(
     return jdResp, err
 }
 
-/* 发布包详情查询 */
-func (c *ShenhaiplatformClient) DescribePublishPkg(request *shenhaiplatform.DescribePublishPkgRequest) (*shenhaiplatform.DescribePublishPkgResponse, error) {
+/* 任务调度状态字典 */
+func (c *ShenhaiplatformClient) RotorDictTaskScheduleStates(request *shenhaiplatform.RotorDictTaskScheduleStatesRequest) (*shenhaiplatform.RotorDictTaskScheduleStatesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -4367,7 +8027,27 @@ func (c *ShenhaiplatformClient) DescribePublishPkg(request *shenhaiplatform.Desc
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.DescribePublishPkgResponse{}
+    jdResp := &shenhaiplatform.RotorDictTaskScheduleStatesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询补数方案列表 */
+func (c *ShenhaiplatformClient) RotorSupplementPlanList(request *shenhaiplatform.RotorSupplementPlanListRequest) (*shenhaiplatform.RotorSupplementPlanListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.RotorSupplementPlanListResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -4417,26 +8097,6 @@ func (c *ShenhaiplatformClient) ManageHubGravityJobRunHistory(request *shenhaipl
     return jdResp, err
 }
 
-/* 获取工作空间绑定的云仓项目 */
-func (c *ShenhaiplatformClient) WorkspaceGetProject(request *shenhaiplatform.WorkspaceGetProjectRequest) (*shenhaiplatform.WorkspaceGetProjectResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.WorkspaceGetProjectResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 更新值班人 */
 func (c *ShenhaiplatformClient) ManageHubDutyUpdateWatchman(request *shenhaiplatform.ManageHubDutyUpdateWatchmanRequest) (*shenhaiplatform.ManageHubDutyUpdateWatchmanResponse, error) {
     if request == nil {
@@ -4457,8 +8117,8 @@ func (c *ShenhaiplatformClient) ManageHubDutyUpdateWatchman(request *shenhaiplat
     return jdResp, err
 }
 
-/* 发布，保存发布，更新发布等等 */
-func (c *ShenhaiplatformClient) UranusTablePublish(request *shenhaiplatform.UranusTablePublishRequest) (*shenhaiplatform.UranusTablePublishResponse, error) {
+/* 获取补数方案配置 */
+func (c *ShenhaiplatformClient) RotorSupplementPlanInfo(request *shenhaiplatform.RotorSupplementPlanInfoRequest) (*shenhaiplatform.RotorSupplementPlanInfoResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -4467,7 +8127,7 @@ func (c *ShenhaiplatformClient) UranusTablePublish(request *shenhaiplatform.Uran
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.UranusTablePublishResponse{}
+    jdResp := &shenhaiplatform.RotorSupplementPlanInfoResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -4508,6 +8168,26 @@ func (c *ShenhaiplatformClient) ManageHubGravityJobType(request *shenhaiplatform
     }
 
     jdResp := &shenhaiplatform.ManageHubGravityJobTypeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 任务详细信息 */
+func (c *ShenhaiplatformClient) RotorTaskDetail(request *shenhaiplatform.RotorTaskDetailRequest) (*shenhaiplatform.RotorTaskDetailResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.RotorTaskDetailResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -4577,26 +8257,6 @@ func (c *ShenhaiplatformClient) UranusDictQuerySysParam(request *shenhaiplatform
     return jdResp, err
 }
 
-/* 表分隔符信息 */
-func (c *ShenhaiplatformClient) UranusTableDelimiters(request *shenhaiplatform.UranusTableDelimitersRequest) (*shenhaiplatform.UranusTableDelimitersResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusTableDelimitersResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 根据类型获取数据字典 */
 func (c *ShenhaiplatformClient) GravityParticleSchedDictGetByType(request *shenhaiplatform.GravityParticleSchedDictGetByTypeRequest) (*shenhaiplatform.GravityParticleSchedDictGetByTypeResponse, error) {
     if request == nil {
@@ -4617,8 +8277,8 @@ func (c *ShenhaiplatformClient) GravityParticleSchedDictGetByType(request *shenh
     return jdResp, err
 }
 
-/* 根据类型获取数据字典 */
-func (c *ShenhaiplatformClient) GravityParticleConfigUserMatchUser(request *shenhaiplatform.GravityParticleConfigUserMatchUserRequest) (*shenhaiplatform.GravityParticleConfigUserMatchUserResponse, error) {
+/* 实例依赖关系 */
+func (c *ShenhaiplatformClient) RotorInstanceDependency(request *shenhaiplatform.RotorInstanceDependencyRequest) (*shenhaiplatform.RotorInstanceDependencyResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -4627,47 +8287,7 @@ func (c *ShenhaiplatformClient) GravityParticleConfigUserMatchUser(request *shen
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.GravityParticleConfigUserMatchUserResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 存储概览 */
-func (c *ShenhaiplatformClient) ManageHubStorageSummary(request *shenhaiplatform.ManageHubStorageSummaryRequest) (*shenhaiplatform.ManageHubStorageSummaryResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.ManageHubStorageSummaryResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 任务单节点-删除 */
-func (c *ShenhaiplatformClient) UranusTaskNodeDelete(request *shenhaiplatform.UranusTaskNodeDeleteRequest) (*shenhaiplatform.UranusTaskNodeDeleteResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusTaskNodeDeleteResponse{}
+    jdResp := &shenhaiplatform.RotorInstanceDependencyResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -4697,8 +8317,8 @@ func (c *ShenhaiplatformClient) DeletePublishPkg(request *shenhaiplatform.Delete
     return jdResp, err
 }
 
-/* 获取作业树 */
-func (c *ShenhaiplatformClient) GravityParticleJobDepGetChildTreed(request *shenhaiplatform.GravityParticleJobDepGetChildTreedRequest) (*shenhaiplatform.GravityParticleJobDepGetChildTreedResponse, error) {
+/* 获取临时查询运行日志 */
+func (c *ShenhaiplatformClient) UranusTaskExtraRunnerLog(request *shenhaiplatform.UranusTaskExtraRunnerLogRequest) (*shenhaiplatform.UranusTaskExtraRunnerLogResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -4707,7 +8327,7 @@ func (c *ShenhaiplatformClient) GravityParticleJobDepGetChildTreed(request *shen
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.GravityParticleJobDepGetChildTreedResponse{}
+    jdResp := &shenhaiplatform.UranusTaskExtraRunnerLogResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -4717,8 +8337,8 @@ func (c *ShenhaiplatformClient) GravityParticleJobDepGetChildTreed(request *shen
     return jdResp, err
 }
 
-/* 获得脚本运行日志 */
-func (c *ShenhaiplatformClient) UranusScriptRunLogLogContent(request *shenhaiplatform.UranusScriptRunLogLogContentRequest) (*shenhaiplatform.UranusScriptRunLogLogContentResponse, error) {
+/* 任务依赖关系 */
+func (c *ShenhaiplatformClient) RotorTaskDependency(request *shenhaiplatform.RotorTaskDependencyRequest) (*shenhaiplatform.RotorTaskDependencyResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -4727,47 +8347,7 @@ func (c *ShenhaiplatformClient) UranusScriptRunLogLogContent(request *shenhaipla
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.UranusScriptRunLogLogContentResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 建表的列类型查询 */
-func (c *ShenhaiplatformClient) UranusDictTableCode(request *shenhaiplatform.UranusDictTableCodeRequest) (*shenhaiplatform.UranusDictTableCodeResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusDictTableCodeResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 根据查询条件返回作业Id */
-func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerSearchJobId(request *shenhaiplatform.GravityParticleDubboJobManagerSearchJobIdRequest) (*shenhaiplatform.GravityParticleDubboJobManagerSearchJobIdResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.GravityParticleDubboJobManagerSearchJobIdResponse{}
+    jdResp := &shenhaiplatform.RotorTaskDependencyResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -4817,6 +8397,26 @@ func (c *ShenhaiplatformClient) UranusFunctionCreateCatalog(request *shenhaiplat
     return jdResp, err
 }
 
+/* 计算引擎绑定云仓或JMR实例 */
+func (c *ShenhaiplatformClient) BindInstance(request *shenhaiplatform.BindInstanceRequest) (*shenhaiplatform.BindInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.BindInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 获取父作业 */
 func (c *ShenhaiplatformClient) GravityParticleJobDepParentJobs(request *shenhaiplatform.GravityParticleJobDepParentJobsRequest) (*shenhaiplatform.GravityParticleJobDepParentJobsResponse, error) {
     if request == nil {
@@ -4837,8 +8437,8 @@ func (c *ShenhaiplatformClient) GravityParticleJobDepParentJobs(request *shenhai
     return jdResp, err
 }
 
-/* 一键重跑预览 */
-func (c *ShenhaiplatformClient) ManageHubGravityOneClickRerunPreview(request *shenhaiplatform.ManageHubGravityOneClickRerunPreviewRequest) (*shenhaiplatform.ManageHubGravityOneClickRerunPreviewResponse, error) {
+/* 同步任务的调试参数到输入参数 */
+func (c *ShenhaiplatformClient) UranusTaskDebugParamSync(request *shenhaiplatform.UranusTaskDebugParamSyncRequest) (*shenhaiplatform.UranusTaskDebugParamSyncResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -4847,7 +8447,27 @@ func (c *ShenhaiplatformClient) ManageHubGravityOneClickRerunPreview(request *sh
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.ManageHubGravityOneClickRerunPreviewResponse{}
+    jdResp := &shenhaiplatform.UranusTaskDebugParamSyncResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除集群 */
+func (c *ShenhaiplatformClient) ManageHubClusterDelete(request *shenhaiplatform.ManageHubClusterDeleteRequest) (*shenhaiplatform.ManageHubClusterDeleteResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.ManageHubClusterDeleteResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -4897,8 +8517,8 @@ func (c *ShenhaiplatformClient) GravityParticleJobHisRunAddTask(request *shenhai
     return jdResp, err
 }
 
-/* 获取子作业 */
-func (c *ShenhaiplatformClient) GravityParticleJobDepChildJobs(request *shenhaiplatform.GravityParticleJobDepChildJobsRequest) (*shenhaiplatform.GravityParticleJobDepChildJobsResponse, error) {
+/* 替换集群元数据：清空集群现有元数据，完全以参数中的内容重建 */
+func (c *ShenhaiplatformClient) ManageHubClusterMetaReplace(request *shenhaiplatform.ManageHubClusterMetaReplaceRequest) (*shenhaiplatform.ManageHubClusterMetaReplaceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -4907,7 +8527,27 @@ func (c *ShenhaiplatformClient) GravityParticleJobDepChildJobs(request *shenhaip
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.GravityParticleJobDepChildJobsResponse{}
+    jdResp := &shenhaiplatform.ManageHubClusterMetaReplaceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 补数执行顺序字典 */
+func (c *ShenhaiplatformClient) RotorDictSupplementOrder(request *shenhaiplatform.RotorDictSupplementOrderRequest) (*shenhaiplatform.RotorDictSupplementOrderResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.RotorDictSupplementOrderResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -4928,26 +8568,6 @@ func (c *ShenhaiplatformClient) JtlasWarehouseFuzzyQueryTablesUnderSpecifiedUser
     }
 
     jdResp := &shenhaiplatform.JtlasWarehouseFuzzyQueryTablesUnderSpecifiedUserWithPrivilegesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 列出所有目录(只包含目录) */
-func (c *ShenhaiplatformClient) UranusResourceListDirectory(request *shenhaiplatform.UranusResourceListDirectoryRequest) (*shenhaiplatform.UranusResourceListDirectoryResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusResourceListDirectoryResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -5077,26 +8697,6 @@ func (c *ShenhaiplatformClient) JtlasGetTableDDLScript(request *shenhaiplatform.
     return jdResp, err
 }
 
-/* 根据查询条件返回作业关联的模型信息 */
-func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerJobQuery(request *shenhaiplatform.GravityParticleDubboJobManagerJobQueryRequest) (*shenhaiplatform.GravityParticleDubboJobManagerJobQueryResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.GravityParticleDubboJobManagerJobQueryResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 任务单节点-校验作业名称 */
 func (c *ShenhaiplatformClient) UranusTaskNodeCheckJobName(request *shenhaiplatform.UranusTaskNodeCheckJobNameRequest) (*shenhaiplatform.UranusTaskNodeCheckJobNameResponse, error) {
     if request == nil {
@@ -5137,26 +8737,6 @@ func (c *ShenhaiplatformClient) GravityParticleJobHisRunListTask(request *shenha
     return jdResp, err
 }
 
-/* 重置作业为done */
-func (c *ShenhaiplatformClient) GravityParticleParticleJobSchedResetStsDone(request *shenhaiplatform.GravityParticleParticleJobSchedResetStsDoneRequest) (*shenhaiplatform.GravityParticleParticleJobSchedResetStsDoneResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.GravityParticleParticleJobSchedResetStsDoneResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 批量接口上线 */
 func (c *ShenhaiplatformClient) GravityParticleParticleJobSchedReuseJobWithDepend(request *shenhaiplatform.GravityParticleParticleJobSchedReuseJobWithDependRequest) (*shenhaiplatform.GravityParticleParticleJobSchedReuseJobWithDependResponse, error) {
     if request == nil {
@@ -5168,26 +8748,6 @@ func (c *ShenhaiplatformClient) GravityParticleParticleJobSchedReuseJobWithDepen
     }
 
     jdResp := &shenhaiplatform.GravityParticleParticleJobSchedReuseJobWithDependResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* sql语法检测 */
-func (c *ShenhaiplatformClient) UranusScriptSyntaxCheck(request *shenhaiplatform.UranusScriptSyntaxCheckRequest) (*shenhaiplatform.UranusScriptSyntaxCheckResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusScriptSyntaxCheckResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -5217,46 +8777,6 @@ func (c *ShenhaiplatformClient) UranusTaskGetRelation(request *shenhaiplatform.U
     return jdResp, err
 }
 
-/* 获取可用模型列表 */
-func (c *ShenhaiplatformClient) CopilotModelList(request *shenhaiplatform.CopilotModelListRequest) (*shenhaiplatform.CopilotModelListResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.CopilotModelListResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 获取运行脚本结果 */
-func (c *ShenhaiplatformClient) UranusScriptGetScriptRunResult(request *shenhaiplatform.UranusScriptGetScriptRunResultRequest) (*shenhaiplatform.UranusScriptGetScriptRunResultResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusScriptGetScriptRunResultResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 根据当前作业和目标层级查询子作业链路层级树 */
 func (c *ShenhaiplatformClient) GravityParticleJobDepGetChildChainJobs(request *shenhaiplatform.GravityParticleJobDepGetChildChainJobsRequest) (*shenhaiplatform.GravityParticleJobDepGetChildChainJobsResponse, error) {
     if request == nil {
@@ -5268,26 +8788,6 @@ func (c *ShenhaiplatformClient) GravityParticleJobDepGetChildChainJobs(request *
     }
 
     jdResp := &shenhaiplatform.GravityParticleJobDepGetChildChainJobsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 工作流画布-作业预发布 */
-func (c *ShenhaiplatformClient) UranusTaskPagePublish(request *shenhaiplatform.UranusTaskPagePublishRequest) (*shenhaiplatform.UranusTaskPagePublishResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusTaskPagePublishResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -5317,46 +8817,6 @@ func (c *ShenhaiplatformClient) ManageHubDutyUpdateRoster(request *shenhaiplatfo
     return jdResp, err
 }
 
-/* 获取子作业 */
-func (c *ShenhaiplatformClient) GravityParticleJobDepGetChildDependencies(request *shenhaiplatform.GravityParticleJobDepGetChildDependenciesRequest) (*shenhaiplatform.GravityParticleJobDepGetChildDependenciesResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.GravityParticleJobDepGetChildDependenciesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 表授权接口 */
-func (c *ShenhaiplatformClient) JtlasGrantTablePrivileges(request *shenhaiplatform.JtlasGrantTablePrivilegesRequest) (*shenhaiplatform.JtlasGrantTablePrivilegesResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.JtlasGrantTablePrivilegesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 新建资源（包含资源目录和资源文件） */
 func (c *ShenhaiplatformClient) UranusResourceCreate(request *shenhaiplatform.UranusResourceCreateRequest) (*shenhaiplatform.UranusResourceCreateResponse, error) {
     if request == nil {
@@ -5377,8 +8837,8 @@ func (c *ShenhaiplatformClient) UranusResourceCreate(request *shenhaiplatform.Ur
     return jdResp, err
 }
 
-/* 获取云仓项目被绑定的工作空间 */
-func (c *ShenhaiplatformClient) WorkspaceGetProjectBundle(request *shenhaiplatform.WorkspaceGetProjectBundleRequest) (*shenhaiplatform.WorkspaceGetProjectBundleResponse, error) {
+/* 列出工作流下某版本的所有历史任务节点 */
+func (c *ShenhaiplatformClient) UranusFlowListHistoryNode(request *shenhaiplatform.UranusFlowListHistoryNodeRequest) (*shenhaiplatform.UranusFlowListHistoryNodeResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -5387,7 +8847,27 @@ func (c *ShenhaiplatformClient) WorkspaceGetProjectBundle(request *shenhaiplatfo
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.WorkspaceGetProjectBundleResponse{}
+    jdResp := &shenhaiplatform.UranusFlowListHistoryNodeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 终止任务实例 */
+func (c *ShenhaiplatformClient) RotorKillInstance(request *shenhaiplatform.RotorKillInstanceRequest) (*shenhaiplatform.RotorKillInstanceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.RotorKillInstanceResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -5437,6 +8917,46 @@ func (c *ShenhaiplatformClient) UranusTableDelete(request *shenhaiplatform.Uranu
     return jdResp, err
 }
 
+/* 根据调试ID停止正在运行的调试任务 */
+func (c *ShenhaiplatformClient) UranusTaskPublicStopDebug(request *shenhaiplatform.UranusTaskPublicStopDebugRequest) (*shenhaiplatform.UranusTaskPublicStopDebugResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskPublicStopDebugResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 将任务提交到运维中心进行发布 */
+func (c *ShenhaiplatformClient) UranusTaskPublicPublish(request *shenhaiplatform.UranusTaskPublicPublishRequest) (*shenhaiplatform.UranusTaskPublicPublishResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskPublicPublishResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 发布函数到发布中心 */
 func (c *ShenhaiplatformClient) UranusFunctionPublish(request *shenhaiplatform.UranusFunctionPublishRequest) (*shenhaiplatform.UranusFunctionPublishResponse, error) {
     if request == nil {
@@ -5477,106 +8997,6 @@ func (c *ShenhaiplatformClient) UranusTableCheckTableName(request *shenhaiplatfo
     return jdResp, err
 }
 
-/* 工作空间绑定云仓项目 */
-func (c *ShenhaiplatformClient) WorkspaceBundleProject(request *shenhaiplatform.WorkspaceBundleProjectRequest) (*shenhaiplatform.WorkspaceBundleProjectResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.WorkspaceBundleProjectResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 获取工作空间的资源组列表 */
-func (c *ShenhaiplatformClient) WorkspaceGetResources(request *shenhaiplatform.WorkspaceGetResourcesRequest) (*shenhaiplatform.WorkspaceGetResourcesResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.WorkspaceGetResourcesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 增加值班人 */
-func (c *ShenhaiplatformClient) ManageHubDutyAddWatchman(request *shenhaiplatform.ManageHubDutyAddWatchmanRequest) (*shenhaiplatform.ManageHubDutyAddWatchmanResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.ManageHubDutyAddWatchmanResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 删除工作空间 */
-func (c *ShenhaiplatformClient) WorkspaceDelete(request *shenhaiplatform.WorkspaceDeleteRequest) (*shenhaiplatform.WorkspaceDeleteResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.WorkspaceDeleteResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 停止补数 */
-func (c *ShenhaiplatformClient) GravityParticleJobHisRunCloseTask(request *shenhaiplatform.GravityParticleJobHisRunCloseTaskRequest) (*shenhaiplatform.GravityParticleJobHisRunCloseTaskResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.GravityParticleJobHisRunCloseTaskResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 工作流删除 */
 func (c *ShenhaiplatformClient) UranusTaskFlowDelete(request *shenhaiplatform.UranusTaskFlowDeleteRequest) (*shenhaiplatform.UranusTaskFlowDeleteResponse, error) {
     if request == nil {
@@ -5588,66 +9008,6 @@ func (c *ShenhaiplatformClient) UranusTaskFlowDelete(request *shenhaiplatform.Ur
     }
 
     jdResp := &shenhaiplatform.UranusTaskFlowDeleteResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 保存作业模型相关信息 */
-func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerSaveDmrModelJob(request *shenhaiplatform.GravityParticleDubboJobManagerSaveDmrModelJobRequest) (*shenhaiplatform.GravityParticleDubboJobManagerSaveDmrModelJobResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.GravityParticleDubboJobManagerSaveDmrModelJobResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 获取作业详细信息 */
-func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerCalcJobDetail(request *shenhaiplatform.GravityParticleDubboJobManagerCalcJobDetailRequest) (*shenhaiplatform.GravityParticleDubboJobManagerCalcJobDetailResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.GravityParticleDubboJobManagerCalcJobDetailResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询作业清单 */
-func (c *ShenhaiplatformClient) GravityParticleParticleModelCalcListJob(request *shenhaiplatform.GravityParticleParticleModelCalcListJobRequest) (*shenhaiplatform.GravityParticleParticleModelCalcListJobResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.GravityParticleParticleModelCalcListJobResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -5697,8 +9057,8 @@ func (c *ShenhaiplatformClient) JtlasGetTableQueryScript(request *shenhaiplatfor
     return jdResp, err
 }
 
-/* 工作空间解绑云仓项目 */
-func (c *ShenhaiplatformClient) WorkspaceUnbundleProject(request *shenhaiplatform.WorkspaceUnbundleProjectRequest) (*shenhaiplatform.WorkspaceUnbundleProjectResponse, error) {
+/* 实例运行日志 */
+func (c *ShenhaiplatformClient) RotorInstanceRunLogs(request *shenhaiplatform.RotorInstanceRunLogsRequest) (*shenhaiplatform.RotorInstanceRunLogsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -5707,7 +9067,7 @@ func (c *ShenhaiplatformClient) WorkspaceUnbundleProject(request *shenhaiplatfor
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.WorkspaceUnbundleProjectResponse{}
+    jdResp := &shenhaiplatform.RotorInstanceRunLogsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -5717,8 +9077,8 @@ func (c *ShenhaiplatformClient) WorkspaceUnbundleProject(request *shenhaiplatfor
     return jdResp, err
 }
 
-/* 一键重跑任务重新提交 */
-func (c *ShenhaiplatformClient) ManageHubGravityOneClickRerunResubmit(request *shenhaiplatform.ManageHubGravityOneClickRerunResubmitRequest) (*shenhaiplatform.ManageHubGravityOneClickRerunResubmitResponse, error) {
+/* JCW SQL语法检测 */
+func (c *ShenhaiplatformClient) UranusTaskDebugSyntaxCheck(request *shenhaiplatform.UranusTaskDebugSyntaxCheckRequest) (*shenhaiplatform.UranusTaskDebugSyntaxCheckResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -5727,7 +9087,7 @@ func (c *ShenhaiplatformClient) ManageHubGravityOneClickRerunResubmit(request *s
         return nil, err
     }
 
-    jdResp := &shenhaiplatform.ManageHubGravityOneClickRerunResubmitResponse{}
+    jdResp := &shenhaiplatform.UranusTaskDebugSyntaxCheckResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -5748,46 +9108,6 @@ func (c *ShenhaiplatformClient) JtlasSearchDetail(request *shenhaiplatform.Jtlas
     }
 
     jdResp := &shenhaiplatform.JtlasSearchDetailResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 条件查询-作业运行实例列表 */
-func (c *ShenhaiplatformClient) GravityParticleParticleJobListJobInstance(request *shenhaiplatform.GravityParticleParticleJobListJobInstanceRequest) (*shenhaiplatform.GravityParticleParticleJobListJobInstanceResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.GravityParticleParticleJobListJobInstanceResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 获得脚本运行的内容 */
-func (c *ShenhaiplatformClient) UranusScriptRunLogContent(request *shenhaiplatform.UranusScriptRunLogContentRequest) (*shenhaiplatform.UranusScriptRunLogContentResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &shenhaiplatform.UranusScriptRunLogContentResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
