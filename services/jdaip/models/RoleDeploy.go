@@ -28,7 +28,7 @@ type RoleDeploy struct {
     /* 仅查询返回：该角色 pod 状态统计 (Optional) */
     PodsState *PodsState `json:"podsState"`
 
-    /* 角色部署所需资源 (Optional) */
+    /* 角色部署所需资源。多角色分离模式时，该字段为必填项。 (Optional) */
     Resource *Resource `json:"resource"`
 
     /* 部署类型（distributed/single） (Optional) */

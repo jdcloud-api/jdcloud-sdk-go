@@ -145,6 +145,6 @@ type DescribeInferenceRolloutsResponse struct {
 }
 
 type DescribeInferenceRolloutsResult struct {
-    Rollouts []jdaip.RolloutInfo `json:"rollouts"`
+    Rollouts []jdaip.RolloutHistory `json:"rollouts"`
     Total int64 `json:"total"`
 }

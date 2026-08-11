@@ -50,6 +50,12 @@ type AdminDescribeInferencesRequest struct {
 `workspaceId`: 工作空间ID，精确匹配，支持单个。
  (Optional) */
     Filters []common.Filter `json:"filters"`
+
+    /* 用户自定义标签列表。 (Optional) */
+    UserTags []jdaip.TagFilter `json:"userTags"`
+
+    /* 资源组ID列表 (Optional) */
+    ResourceGroupIds []string `json:"resourceGroupIds"`
 }
 
 /*
@@ -91,6 +97,8 @@ func NewAdminDescribeInferencesRequest(
 `queue`: 队列ID，精确匹配，支持单个。
 `workspaceId`: 工作空间ID，精确匹配，支持单个。
  (Optional)
+ * param userTags: 用户自定义标签列表。 (Optional)
+ * param resourceGroupIds: 资源组ID列表 (Optional)
  */
 func NewAdminDescribeInferencesRequestWithAllParams(
     regionId string,
@@ -98,6 +106,8 @@ func NewAdminDescribeInferencesRequestWithAllParams(
     pageNumber *int,
     pageSize *int,
     filters []common.Filter,
+    userTags []jdaip.TagFilter,
+    resourceGroupIds []string,
 ) *AdminDescribeInferencesRequest {
 
     return &AdminDescribeInferencesRequest{
@@ -112,6 +122,8 @@ func NewAdminDescribeInferencesRequestWithAllParams(
         PageNumber: pageNumber,
         PageSize: pageSize,
         Filters: filters,
+        UserTags: userTags,
+        ResourceGroupIds: resourceGroupIds,
     }
 }
 
@@ -157,6 +169,14 @@ func (r *AdminDescribeInferencesRequest) SetPageSize(pageSize int) {
 (Optional) */
 func (r *AdminDescribeInferencesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
+}
+/* param userTags: 用户自定义标签列表。(Optional) */
+func (r *AdminDescribeInferencesRequest) SetUserTags(userTags []jdaip.TagFilter) {
+    r.UserTags = userTags
+}
+/* param resourceGroupIds: 资源组ID列表(Optional) */
+func (r *AdminDescribeInferencesRequest) SetResourceGroupIds(resourceGroupIds []string) {
+    r.ResourceGroupIds = resourceGroupIds
 }
 
 

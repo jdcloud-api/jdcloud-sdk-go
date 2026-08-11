@@ -72,16 +72,25 @@ type NotebookSpec struct {
     /* 负载均衡配置，用于配置Notebook的公网SSH访问能力。
 
 ## 使用说明
-- 仅支持私有资源池中的Notebook配置公网访问
-- 需要传入与资源队列可通信的负载均衡ID和端口
+- **公共资源池**: 可通过lbEnable=true开启公网访问，系统自动分配LB，无需指定lbId/lbPort
+- **私有资源池**: 需要传入与资源队列可通信的负载均衡ID和端口
 - 不需要公网SSH访问时不要指定此参数
  (Optional) */
     LbSpec *LbSpec `json:"lbSpec"`
 
+    /* 公网出口配置，用于配置Notebook的出公网访问方式。
+
+## 使用说明
+- switchStatus必须显式传值，为on时开启公网出口，为off时关闭公网出口且egressType无效
+- **公共资源池**: switchStatus=on时可设置 internetEgress.egressType=SHARE_GATEWAY，经平台共享NAT网关出公网
+- **私有资源池**: 暂不支持公网出口配置
+ (Optional) */
+    InternetEgress *InternetEgressInfo `json:"internetEgress"`
+
     /* 工作负载资源配置，定义Notebook的计算资源需求。
 
 ## 配置说明
-- **公共资源池**: 必须指定规格ID(flavorId)
+- **公共资源池**: 必须指定规格ID(flavorId)和逻辑可用区编码(logicAzCode)
 - **私有资源池**: 必须指定CPU和内存，可选GPU配置
   */
     WorkloadSpec *WorkloadSpec `json:"workloadSpec"`
@@ -134,6 +143,9 @@ type NotebookSpec struct {
 - 支持配置多个亲和性规则，每个元素之间是"或"的关系
 - 适用于需要调度到特定硬件或标签节点的场景
 - 例如：调度到特定GPU型号的节点
+
+## 限制
+- 公共资源池不支持设置节点亲和性，仅私有资源池有效
  (Optional) */
     NodeAffinities []NotebookNodeAffinity `json:"nodeAffinities"`
 
@@ -145,6 +157,18 @@ type NotebookSpec struct {
 - 指定挂载路径后代码会自动拉取到指定目录
  (Optional) */
     Codes []NbCodeConfig `json:"codes"`
+
+    /* 用户环境变量列表。该参数可选，未配置时不注入用户环境变量。
+
+## 配置规则
+- 最多支持100个环境变量
+- 变量名仅支持大小写字母、数字和下划线，必须以字母或下划线开头，最长255个字符
+- 单个变量值最大2048字节，全部用户环境变量总量最大32768字节
+- 用户变量名不能重复，变量名区分大小写
+- 与平台系统变量同名时允许配置，Notebook运行时以平台系统变量为准
+- 请勿使用环境变量保存密码、密钥或Token等敏感信息
+ (Optional) */
+    Envs []NotebookEnv `json:"envs"`
 
     /* SSH配置，用于配置SSH远程连接能力。
 
@@ -172,13 +196,4 @@ type NotebookSpec struct {
 - 便于按资源组进行权限管理和成本核算
  (Optional) */
     ResourceGroupId *string `json:"resourceGroupId"`
-
-    /* 调度优先级配置，控制Pod调度顺序。
-
-## 使用说明
-- 非必填，默认使用系统优先级：normal-priority(10000)
-- 优先级越高越优先调度
-- 适用于资源紧张时的调度控制
- (Optional) */
-    SchedulePriority *SchedulePriority `json:"schedulePriority"`
 }

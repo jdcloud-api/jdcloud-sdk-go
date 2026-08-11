@@ -34,7 +34,7 @@ type InferenceSpec struct {
     /* 推理服务加载的模型信息（如：模型名字，存放地址，挂载路径）  */
     Models []Model `json:"models"`
 
-    /* 推理服务所需资源（如：CPU， 内存等）  */
+    /* 推理服务所需资源（如：CPU， 内存等）。非多角色分离模式时，该字段为必填项 (Optional) */
     Resource *Resource `json:"resource"`
 
     /* 推理服务运行环境（如：镜像，命令行，环境变量等）  */
@@ -42,7 +42,4 @@ type InferenceSpec struct {
 
     /* 多角色部署配置 (Optional) */
     RoleSet *RoleSet `json:"roleSet"`
-
-    /* 调度优先级,非必填，默认使用系统优先级：normal-priority(10000) (Optional) */
-    SchedulePriority *SchedulePriority `json:"schedulePriority"`
 }

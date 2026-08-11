@@ -40,7 +40,7 @@ func NewJdaipClient(credential *core.Credential) *JdaipClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "jdaip",
-            Revision:    "1.0.2",
+            Revision:    "1.0.3",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -58,7 +58,13 @@ func (c *JdaipClient) DisableLogger() {
 }
 
 /* 更新Notebook实例的基础属性，不影响资源配置。
- */
+
+## 可更新字段
+- name: 名称
+- description: 描述
+- permission: 资源归属权限
+- ownerUserPin: 资源归属用户
+- internetEgress: 公网出口配置 */
 func (c *JdaipClient) UpdateNotebook(request *jdaip.UpdateNotebookRequest) (*jdaip.UpdateNotebookResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -148,7 +154,33 @@ func (c *JdaipClient) AdminDescribeAccountMembers(request *jdaip.AdminDescribeAc
     return jdResp, err
 }
 
-/* 获取数据集列表 */
+/* 获取数据集列表。
+
+## 接口查询说明
+
+- 数据类型-任务类型
+  | 数据类型 | 任务类型 |
+  |------|------|
+  | text：文本 | sft：文本生成-SFT指令微调 |
+  | text：文本 | dpo：文本生成-DPO偏好训练 |
+  | text：文本 | cpt：文本生成-增量预训练 |
+  | text：文本 | distill：文本生成-模型蒸馏 |
+  | text：文本 | custom：自定义 |
+  | image：图像 | image-classification：图像分类 |
+  | image：图像 | custom：自定义 |
+  | custom：自定义 | custom：自定义 |
+
+- 下游任务使用，查询条件一：
+  | 任务模块 | 查询条件 |
+  |------|------|
+  | Notebook | "filters":[{"name":"states","values":["success"]}] |
+  | 训练任务 | "filters":[{"name":"states","values":["success"]}] |
+  | 模型精调 | "filters":[{"name":"states","values":["success"]},{"name":"datasetTypes","values":["text"]},{"name":"taskTypes","values":["cpt","dpo","sft"]}] |
+  | 模型蒸馏 | "filters":[{"name":"states","values":["success"]},{"name":"datasetTypes","values":["text"]},{"name":"taskTypes","values":["distill"]}] |
+  | 数据标注 | "filters":[{"name":"states","values":["success"]},{"name":"datasetTypes","values":["image"]},{"name":"taskTypes","values":["image-classification"]}] |
+
+- 下游任务使用，查询条件二： filters 中加上{"name":"cfsVpcIds","values":["vpc-5n****qw"]}, 可过滤不可用的cfs数据集，cfsVpcIds传资源队列对用的vpcId
+ */
 func (c *JdaipClient) DescribeDatasets(request *jdaip.DescribeDatasetsRequest) (*jdaip.DescribeDatasetsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -191,14 +223,17 @@ func (c *JdaipClient) DescribeDatasetVersion(request *jdaip.DescribeDatasetVersi
 /* 在工作空间下创建一个Notebook实例，Notebook是基于Kubernetes的交互式开发环境，支持JupyterLab应用。
 
 ## 接口说明
-- **资源队列**: 必须选择一个队列，使用公共资源池时必须指定规格，使用私有资源池时必须指定CPU和内存，是否使用GPU可以按需选择。公共资源池队列ID固定为`joybuilder-public-queue`。
+- **资源队列**: 必须选择一个队列，使用公共资源池时必须指定规格和逻辑可用区，使用私有资源池时必须指定CPU和内存，是否使用GPU可以按需选择。公共资源池队列ID固定为`joybuilder-public-queue`。
 - **镜像配置**: 支持公共镜像和自定义镜像，需要指定镜像来源(public/self)、镜像名称、镜像URL等信息。
 - **存储空间**: 使用用户个人存储，第一块存储默认作为工作目录，挂载到Notebook实例中`/mnt/workspace`目录下。支持cfs、oss、jpfs三种存储类型。`cfs`和`jpfs`类型存储只能选择与队列同vpc下的资源，使用私有资源池时跨vpc需要打通(vpcPeering)对等连接。
 - **数据集**: 可选择公共数据集或个人数据集。`cfs`和`jpfs`类型的数据集只能选择与队列同vpc下的数据集，使用私有资源池时跨vpc需要打通(vpcPeering)对等连接。
 - **模型**: 可选择公共模型或个人模型。`cfs`和`jpfs`类型的模型只能选择与队列同vpc下的模型，使用私有资源池时跨vpc需要打通(vpcPeering)对等连接。
-- **SSH连接**: 开启后需要选择一个与队列同vpc下的负载均衡(LB)，并设置一个未占用的监听端口，实例运行后可以通过LB的公网IP和端口进行SSH访问，使用私有资源池时跨vpc需要打通(vpcPeering)对等连接。
+- **SSH连接**: 开启后需要选择一个与队列同vpc下的负载均衡(LB)，并设置一个未占用的监听端口，实例运行后可以通过LB的公网IP和端口进行SSH访问。公共资源池下LbSpec不为空仅表示需要公网访问；私有资源池下需要指定lbId和lbPort。公共资源池可通过LbSpec.lbEnable=true开启公网访问，系统自动分配LB。
+- **公网出口**: 公共资源池可通过internetEgress.switchStatus=on开启公网出口，并设置internetEgress.egressType=SHARE_GATEWAY配置出公网访问方式，经平台共享NAT网关出公网。switchStatus必须显式传值，switchStatus=off时关闭公网出口且egressType无效。设为SHARE_GATEWAY时，要求实例规格支持出公网(allowInternet=true)，否则创建被拒绝。私有资源池暂不支持。
 - **计费配置**: 在私有资源池中创建Notebook时不计费，在公共资源池中创建Notebook时默认为按规格配置计费。
 - **资源权限**: 支持设置工作空间中的资源归属权限(public/private)，管理员可查看工作空间中全部资源，其他用户只能查看归属自己的private权限的资源或public权限的资源。
+- **节点亲和性**: 公共资源池不支持设置节点亲和性(nodeAffinities)，仅私有资源池支持。
+- **环境变量**: 可通过envs配置最多100个用户环境变量；该参数可选，与平台系统变量同名时运行时以平台值为准。
 
 ## Notebook环境说明
 - Notebook通过(/home/.notebook_utils/notebook_start.sh)脚本启动，启动脚本不可更改。
@@ -234,14 +269,16 @@ func (c *JdaipClient) CreateNotebook(request *jdaip.CreateNotebookRequest) (*jda
 - **存储配置**: 更新存储空间挂载配置
 - **数据集配置**: 更新数据集挂载配置
 - **模型配置**: 更新模型挂载配置
-- **公网访问配置**: 更新或移除负载均衡配置(仅私有资源池)
+- **公网访问配置**: 更新或移除负载均衡配置(仅私有资源池)；公共资源池可通过lbEnable=true开启公网访问
 - **代码配置**: 更新代码库挂载配置
+- **环境变量配置**: 新增、修改、删除或清空用户环境变量
 - **节点亲和性配置**: 更新节点调度亲和性规则
 
 ## 接口说明
 - 更新操作需要在Notebook停止状态下进行。
 - 更新存储、数据集、模型配置时需要确保新配置与队列的网络连通性。
 - 传null的字段表示不修改该属性。
+- envs不传或传null表示不修改，传空数组表示清空，传非空数组表示全量替换。
  */
 func (c *JdaipClient) UpdateResourceProperties(request *jdaip.UpdateResourcePropertiesRequest) (*jdaip.UpdateResourcePropertiesResponse, error) {
     if request == nil {
@@ -471,7 +508,11 @@ func (c *JdaipClient) AdminDescribeNotebookCount(request *jdaip.AdminDescribeNot
     return jdResp, err
 }
 
-/* 解绑队列 */
+/* 解绑队列。
+
+## 接口说明
+- 当队列下有未停止的任务（notebook、训练任务、在线服务等）时， 不可解绑
+ */
 func (c *JdaipClient) RemoveQueues(request *jdaip.RemoveQueuesRequest) (*jdaip.RemoveQueuesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -595,6 +636,30 @@ func (c *JdaipClient) CreateRun(request *jdaip.CreateRunRequest) (*jdaip.CreateR
     return jdResp, err
 }
 
+/* 查询当前用户可见的规格以及售卖状态。
+## 接口说明
+- 按可访问可用区、资源池类型和规格类型过滤可见资源。
+- 返回结果按规格类型和可用区聚合，并标记每个规格是否有库存。
+ */
+func (c *JdaipClient) DescribeFlavors(request *jdaip.DescribeFlavorsRequest) (*jdaip.DescribeFlavorsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DescribeFlavorsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 获取指定推理服务的当前自动扩缩容规则配置 */
 func (c *JdaipClient) DescribeInferenceScale(request *jdaip.DescribeInferenceScaleRequest) (*jdaip.DescribeInferenceScaleResponse, error) {
     if request == nil {
@@ -688,7 +753,7 @@ func (c *JdaipClient) GetJobEvents(request *jdaip.GetJobEventsRequest) (*jdaip.G
 ## 注意事项
 
 - 删除操作不可恢复，请确保已备份重要数据
-- 删除任务不会删除关联的存储数据、数据集和模型
+- 删除任务不会删除关联的持久化存储（OSS/CFS/JPFS）数据、数据集和模型；本地存储（顶层字段 `localStorage`）会随实例删除自动清除，不支持恢复
  */
 func (c *JdaipClient) DeleteJob(request *jdaip.DeleteJobRequest) (*jdaip.DeleteJobResponse, error) {
     if request == nil {
@@ -709,7 +774,14 @@ func (c *JdaipClient) DeleteJob(request *jdaip.DeleteJobRequest) (*jdaip.DeleteJ
     return jdResp, err
 }
 
-/* 获取数据集的版本列表 */
+/* 获取数据集列表。
+
+## 接口查询说明
+
+- 下游任务使用，查询条件一： "filters":[{"name":"states","values":["success"]}]
+
+- 下游任务使用，查询条件二： filters 中加上{"name":"cfsVpcIds","values":["vpc-5n****qw"]}, 可过滤不可用的cfs数据集版本，cfsVpcIds传资源队列对用的vpcId
+ */
 func (c *JdaipClient) DescribeDatasetVersions(request *jdaip.DescribeDatasetVersionsRequest) (*jdaip.DescribeDatasetVersionsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -782,7 +854,15 @@ func (c *JdaipClient) DeleteImageTask(request *jdaip.DeleteImageTaskRequest) (*j
     return jdResp, err
 }
 
-/* 获取构建镜像的pod日志，采用SSE流式返回。
+/* 获取构建镜像任务关联的 Pod 日志（流式返回）。
+
+通过 SSE（Server-Sent Events）技术实时推送训练日志，适用于实时监控训练进度。
+
+## 特点
+
+- **实时性**：日志实时推送，无需轮询
+- **持续连接**：保持长连接，适合长时间训练任务
+- **自动重连**：客户端断开后可自动重连
  */
 func (c *JdaipClient) GetPodLogs(request *jdaip.GetPodLogsRequest) (*jdaip.GetPodLogsResponse, error) {
     if request == nil {
@@ -914,6 +994,7 @@ func (c *JdaipClient) DescribeInferenceEvents(request *jdaip.DescribeInferenceEv
 - 访问信息: 访问令牌、控制台地址、VSCode地址
 - 计费信息: 公共资源池的计费详情(私有资源池无计费信息)
 - 关机策略: 自动关机策略配置
+- 环境变量: 用户配置的环境变量列表
  */
 func (c *JdaipClient) DescribeNotebook(request *jdaip.DescribeNotebookRequest) (*jdaip.DescribeNotebookResponse, error) {
     if request == nil {
@@ -981,7 +1062,11 @@ func (c *JdaipClient) DescribeJobTypes(request *jdaip.DescribeJobTypesRequest) (
     return jdResp, err
 }
 
-/* 根据数据集ID删除数据集 */
+/* 根据数据集ID删除数据集。
+
+## 接口说明
+- 删除数据集，会自动删除该数据集下的所有版本
+ */
 func (c *JdaipClient) DeleteDataset(request *jdaip.DeleteDatasetRequest) (*jdaip.DeleteDatasetResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1021,7 +1106,10 @@ func (c *JdaipClient) UpdateServiceQPS(request *jdaip.UpdateServiceQPSRequest) (
     return jdResp, err
 }
 
-/* 创建新模型/新版本。 */
+/* 创建新模型/新版本。
+
+详细操作说明请参考帮助文档：[资产管理-模型](https://docs.jdcloud.com/cn/jdaip/model)
+ */
 func (c *JdaipClient) CreateModel(request *jdaip.CreateModelRequest) (*jdaip.CreateModelResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1052,7 +1140,7 @@ func (c *JdaipClient) CreateModel(request *jdaip.CreateModelRequest) (*jdaip.Cre
 启动时支持更换资源配置(仅私有资源池):
 - 在公共资源池中的Notebook不允许变更资源配置，workloadSpec参数只能传null。
 - 在私有资源池中的Notebook不允许变更为公共资源池，但允许更换私有资源池中的其它队列。
-- 支持在启动时更换公网访问配置(LB)，或移除公网访问配置。
+- 支持在启动时更换公网访问配置(LB)，或移除公网访问配置。公共资源池可通过lbEnable=true开启公网访问。
  */
 func (c *JdaipClient) StartNotebook(request *jdaip.StartNotebookRequest) (*jdaip.StartNotebookResponse, error) {
     if request == nil {
@@ -1225,7 +1313,11 @@ func (c *JdaipClient) DescribeDataset(request *jdaip.DescribeDatasetRequest) (*j
     return jdResp, err
 }
 
-/* 获取模型的版本列表 */
+/* 获取模型的版本列表。
+
+## 接口查询说明
+- 下游任务使用，查询条件： filters 中加上{"name":"cfsVpcIds","values":["vpc-5n****qw"]}, 可过滤不可用的cfs模型，cfsVpcIds传资源队列对用的vpcId
+ */
 func (c *JdaipClient) DescribeModelVersions(request *jdaip.DescribeModelVersionsRequest) (*jdaip.DescribeModelVersionsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1245,27 +1337,11 @@ func (c *JdaipClient) DescribeModelVersions(request *jdaip.DescribeModelVersions
     return jdResp, err
 }
 
-/* 管理端查询公共模型列表 */
-func (c *JdaipClient) DescribeAdminPublicModels(request *jdaip.DescribeAdminPublicModelsRequest) (*jdaip.DescribeAdminPublicModelsResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
+/* 查询私有模型列表。
 
-    jdResp := &jdaip.DescribeAdminPublicModelsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 查询私有模型列表 */
+## 接口查询说明
+- 下游任务使用，查询条件： filters 中加上{"name":"cfsVpcIds","values":["vpc-5n****qw"]}, 可过滤不可用的cfs模型，cfsVpcIds传资源队列对用的vpcId
+ */
 func (c *JdaipClient) DescribePrivateModels(request *jdaip.DescribePrivateModelsRequest) (*jdaip.DescribePrivateModelsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1414,7 +1490,17 @@ func (c *JdaipClient) GetJobRestartHistory(request *jdaip.GetJobRestartHistoryRe
     return jdResp, err
 }
 
-/* 关联队列。 */
+/* 关联队列。
+详细操作说明请参考帮助文档：[创建及管理工作空间-配置关联队列](https://docs.jdcloud.com/cn/jdaip/create-and-manage-workspace)
+
+## 资源队列相关文档
+- [资源队列文档](https://docs.jdcloud.com/cn/jdaip/queue-details)
+- 资源队列列表接口 [listQueue](../JOYSCALE-队列/listQueue.md)
+
+## 接口说明
+- 指定模块使用：支持所有模块时，字段allModuleSupported=true,字段queueModules不传
+- 指定成员使用：支持所有成员时，字段allMemberSupported=true,字段queueMemberPins不传
+ */
 func (c *JdaipClient) AddQueues(request *jdaip.AddQueuesRequest) (*jdaip.AddQueuesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1562,7 +1648,10 @@ func (c *JdaipClient) AdminDescribeInferenceCount(request *jdaip.AdminDescribeIn
     return jdResp, err
 }
 
-/* 添加代码仓配置 */
+/* 添加代码仓配置。
+
+详细操作说明请参考帮助文档：[资产管理-代码配置](https://docs.jdcloud.com/cn/jdaip/code)
+ */
 func (c *JdaipClient) CreateCodeRepoConfig(request *jdaip.CreateCodeRepoConfigRequest) (*jdaip.CreateCodeRepoConfigResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1602,7 +1691,9 @@ func (c *JdaipClient) PauseRollout(request *jdaip.PauseRolloutRequest) (*jdaip.P
     return jdResp, err
 }
 
-/* 创建镜像 */
+/* 创建镜像。
+详细操作说明请参考帮助文档：[资产管理-镜像](https://docs.jdcloud.com/cn/jdaip/image)
+ */
 func (c *JdaipClient) CreateImage(request *jdaip.CreateImageRequest) (*jdaip.CreateImageResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1643,7 +1734,12 @@ func (c *JdaipClient) DescribeNotebookCount(request *jdaip.DescribeNotebookCount
     return jdResp, err
 }
 
-/* 获取镜像列表 */
+/* 获取镜像列表
+
+## 下游任务使用时，接口入参说明
+- imageUsages 镜像用途，传对应的任务。[notebook、training训练任务、inference在线服务、finetune精调实验、simulation仿真任务、offlineTask离线任务]
+- states状态，只查询注册成功的数据。[success注册成功]
+ */
 func (c *JdaipClient) DescribeImages(request *jdaip.DescribeImagesRequest) (*jdaip.DescribeImagesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1720,7 +1816,19 @@ func (c *JdaipClient) AdminDescribeNotebooks(request *jdaip.AdminDescribeNoteboo
     return jdResp, err
 }
 
-/* 查询公共模型列表 */
+/* 查询公共模型列表。
+
+## 接口查询说明
+- 下游任务使用，查询条件：
+  | 任务模块 | 查询条件 |
+  |------|------|
+  | Notebook | "filters":[{"name":"labelsEq","values":["support.task:notebook"]}] |
+  | 训练任务 | "filters":[{"name":"labelsEq","values":["support.task:trainjob"]}] |
+  | 模型精调 | "filters":[{"name":"labelsEq","values":["support.task:finetune","finetune.model_series:llama","finetune.model_series:qwen"]}] |
+  | 模型蒸馏 | "filters":[{"name":"labelsEq","values":["support.task:finetune","finetune.model_series:llama","finetune.model_series:qwen"]}] |
+  | 在线服务-自定义部署 | "filters":[{"name":"labelsEq","values":["support.task:custom-deploy"]}] |
+  | 在线服务-LLM大语言模型部署 | "filters":[{"name":"labelsEq","values":["support.task:llm-deploy"]}] |
+ */
 func (c *JdaipClient) DescribePublicModels(request *jdaip.DescribePublicModelsRequest) (*jdaip.DescribePublicModelsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1803,6 +1911,49 @@ func (c *JdaipClient) DeleteDatasetVersion(request *jdaip.DeleteDatasetVersionRe
     return jdResp, err
 }
 
+/* 重建指定推理服务下Pod的容器 */
+func (c *JdaipClient) RestartInferenceContainer(request *jdaip.RestartInferenceContainerRequest) (*jdaip.RestartInferenceContainerResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.RestartInferenceContainerResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询微调运行详情。
+
+获取微调运行的完整信息，包括训练配置、资源使用、运行状态等。
+ */
+func (c *JdaipClient) DescribeRun(request *jdaip.DescribeRunRequest) (*jdaip.DescribeRunResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DescribeRunResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 获取镜像详情 */
 func (c *JdaipClient) DescribeImage(request *jdaip.DescribeImageRequest) (*jdaip.DescribeImageResponse, error) {
     if request == nil {
@@ -1855,7 +2006,7 @@ func (c *JdaipClient) RolloutInference(request *jdaip.RolloutInferenceRequest) (
 ## 注意事项
 
 - 停止操作**不可逆**，停止后无法恢复或重新启动任务
-- 所有计算资源将被释放，存储数据不会被删除
+- 所有计算资源将被释放，持久化存储（OSS/CFS/JPFS）数据不会被删除；本地存储（顶层字段 `localStorage`）会随实例释放自动清除
 - 如需保存训练进度，请确保代码支持检查点保存
  */
 func (c *JdaipClient) StopJob(request *jdaip.StopJobRequest) (*jdaip.StopJobResponse, error) {
@@ -1973,7 +2124,24 @@ func (c *JdaipClient) DescribeJob(request *jdaip.DescribeJobRequest) (*jdaip.Des
     return jdResp, err
 }
 
-/* 创建数据集/新版本 */
+/* 创建数据集/新版本。
+详细操作说明请参考帮助文档：[资产管理-数据集](https://docs.jdcloud.com/cn/jdaip/dataset)
+
+## 数据类型-任务类型说明
+
+- Notebook、训练任务、仿真服务可使用所有类型数据集
+
+| 数据类型 | 任务类型 | 数据来源支持 | 数据说明 |
+|------|------|------|------|
+| text：文本 | sft：文本生成-SFT指令微调 | 仅支持oss | 单轮或多轮的文本对话数据，提问与回答一一对应。适用于模型精调的SFT训练。支持Alpaca和Sharegpt格式，仅支持JSON格式文本文件，编码仅限UTF-8； |
+| text：文本 | dpo：文本生成-DPO偏好训练 | 仅支持oss | 单轮或多轮的文本对话数据，在 chosen 列中提供更优的回答，并在 rejected 列中提供更差的回答。适用于模型精调的DPO偏好训练。 支持Alpaca和Sharegpt格式，仅支持JSON格式文本文件，编码仅限UTF-8； |
+| text：文本 | cpt：文本生成-增量预训练 | 仅支持oss |特定领域的大规模无标注数据。适用于模型精调的增量预训练。支持Alpaca和Sharegpt格式，仅支持JSON格式文本文件，编码仅限UTF-8； |
+| text：文本 | distill：文本生成-模型蒸馏 | 仅支持oss | 包含用户提问的文本数据集。适用于模型蒸馏，将作为输入数据源，批量请求教师模型生成蒸馏数据。[模型蒸馏 Prompt 集格式说明](https://docs.jdcloud.com/cn/jdaip/prompt-dataset) |
+| text：文本 | custom：自定义 | 支持oss、cfs、jpfs | - |
+| image：图像 | image-classification：图像分类 | 仅支持oss | 数据标注使用，图像文件仅支持 png、jpg、jpeg、bmp 格式。 |
+| image：图像 | custom：自定义 | 仅支持oss | - |
+| custom：自定义 | custom：自定义 | 支持oss、cfs、jpfs | - |
+ */
 func (c *JdaipClient) CreateDataset(request *jdaip.CreateDatasetRequest) (*jdaip.CreateDatasetResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -2163,7 +2331,8 @@ func (c *JdaipClient) DeleteService(request *jdaip.DeleteServiceRequest) (*jdaip
     return jdResp, err
 }
 
-/* 根据模型ID删除模型 */
+/* 根据模型ID删除模型, 会删除模型下所有版本
+ */
 func (c *JdaipClient) DeleteModel(request *jdaip.DeleteModelRequest) (*jdaip.DeleteModelResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -2294,9 +2463,10 @@ func (c *JdaipClient) DescribeInferenceRollouts(request *jdaip.DescribeInference
     return jdResp, err
 }
 
-/* 查询训练任务实例列表。
+/* 获取训练任务实例列表。
 
-获取训练任务下所有运行实例（Pod）的详细信息，包括状态、IP、运行时长等。
+查询训练任务下所有运行实例（Pod）的详细信息，包括名称、类型、状态、IP、运行时长等。
+支持分页查询和多种过滤条件，异常状态数据可优先展示。
 
 ## 使用场景
 
@@ -2378,7 +2548,7 @@ func (c *JdaipClient) CreateInference(request *jdaip.CreateInferenceRequest) (*j
     return jdResp, err
 }
 
-/* 获取公共模型版本详情 */
+/* 获取公共模型版本详情（公共模型只有一个版本，该接口也是公共模型详情） */
 func (c *JdaipClient) DescribePublicModelVersion(request *jdaip.DescribePublicModelVersionRequest) (*jdaip.DescribePublicModelVersionResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -2398,7 +2568,11 @@ func (c *JdaipClient) DescribePublicModelVersion(request *jdaip.DescribePublicMo
     return jdResp, err
 }
 
-/* 创建工作空间。 */
+/* 
+创建工作空间。
+
+详细操作说明请参考帮助文档：[创建及管理工作空间](https://docs.jdcloud.com/cn/jdaip/create-and-manage-workspace)
+ */
 func (c *JdaipClient) CreateWorkspace(request *jdaip.CreateWorkspaceRequest) (*jdaip.CreateWorkspaceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -2448,10 +2622,10 @@ func (c *JdaipClient) AdminDescribeInferences(request *jdaip.AdminDescribeInfere
 - **基本信息**：任务名称、描述、框架类型
 - **镜像配置**：镜像可见性、镜像ID、镜像地址
 - **启动命令**：训练脚本执行命令和环境变量
-- **资源配置**：队列、GPU/CPU/内存、节点数量
-- **存储配置**：OSS/CFS/JPFS 存储挂载
+- **资源配置**：队列、GPU/CPU/内存、节点数量、可用区（公共池）
+- **存储配置**：OSS/CFS/JPFS 为外部共享存储（`storageSpaces`）；本地存储为顶层字段 `localStorage`（训练节点本地临时高速缓存，仅专属资源池，每个任务最多一个）
 - **数据与模型**：数据集、模型、代码仓库配置
-- **高级配置**：重启策略（仅异构节点池+PyTorch）、健康检测
+- **高级配置**：重启策略（仅异构节点池+PyTorch）、健康检测、公共池排队超时
 
 ## 创建流程
 
@@ -2465,6 +2639,10 @@ func (c *JdaipClient) AdminDescribeInferences(request *jdaip.AdminDescribeInfere
 - `resource` 参数已废弃
 - Ray 任务必须使用 `roleResource` 配置 Head 和 Worker 角色
 - **重启策略仅适用于异构节点池的 PyTorch 任务**，云主机资源池和 Ray 任务不支持
+- 公共资源池角色规格须通过 `logicAzCode` 指定可用区（异构规格还须填 `hpcClusterName`）
+- `queuingTimeoutMinutes` 仅公共资源池生效，排队超时后任务自动回滚为创建失败
+- 本地存储（顶层字段 `localStorage`）仅支持专属资源池（接口会校验拒绝公共资源池），每个任务最多一个，数据随实例删除/销毁自动清除、不支持持久化，不可存放 checkpoint、模型权重等关键数据
+- 本地存储依赖队列节点已配置本地高速盘（目前主要是异构专属节点池具备该能力），接口暂不校验节点本地盘能力，若节点不满足条件，任务会调度失败并停留在排队/启动中，而非创建时直接报错
  */
 func (c *JdaipClient) CreateJob(request *jdaip.CreateJobRequest) (*jdaip.CreateJobResponse, error) {
     if request == nil {
@@ -2513,7 +2691,12 @@ func (c *JdaipClient) AdminDescribeRuns(request *jdaip.AdminDescribeRunsRequest)
     return jdResp, err
 }
 
-/* 获取公共镜像列表 */
+/* 获取公共镜像列表
+
+## 接口说明-返回数据包含
+- 已上线镜像 
+- 未上线且镜像灰度列表中存在当前登录主账号pin的镜像
+ */
 func (c *JdaipClient) DescribePublicImages(request *jdaip.DescribePublicImagesRequest) (*jdaip.DescribePublicImagesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -2564,6 +2747,35 @@ func (c *JdaipClient) DescribeService(request *jdaip.DescribeServiceRequest) (*j
     }
 
     jdResp := &jdaip.DescribeServiceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新微调运行。
+
+更新微调运行的元数据属性，不影响正在进行的训练任务。
+
+## 使用场景
+
+- 修改运行名称以便更好地识别和管理
+- 更新运行描述信息
+- 调整任务优先级
+ */
+func (c *JdaipClient) UpdateRun(request *jdaip.UpdateRunRequest) (*jdaip.UpdateRunResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.UpdateRunResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

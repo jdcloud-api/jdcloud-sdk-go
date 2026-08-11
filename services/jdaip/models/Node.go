@@ -103,6 +103,9 @@ type Node struct {
     /* 设备品牌 (Optional) */
     DeviceBrand string `json:"deviceBrand"`
 
+    /* 所属租户 (Optional) */
+    Pin string `json:"pin"`
+
     /*  (Optional) */
     UnhealthReasons []UnHealthReason `json:"unhealthReasons"`
 }

@@ -42,6 +42,9 @@ type UpdateJobRequest struct {
     /* 工作空间中的资源归属权限，支持(public,private)，默认为public。 (Optional) */
     Permission *string `json:"permission"`
 
+    /* 任务优先级，取值范围[1, 9]; 当队列开启优先级调度时生效 (Optional) */
+    TaskPriority *int `json:"taskPriority"`
+
     /* 归属用户pin。
 可配置任务所属主账号pin，或者工作空间其他成员的子账号pin
  (Optional) */
@@ -81,6 +84,7 @@ func NewUpdateJobRequest(
  * param name: 训练任务名称。1~32字符，仅支持中文、大小写字母、数字、英文中划线 "-"和英文下划线"_"。 (Optional)
  * param description: 训练任务的描述信息，不超过256个字符。 (Optional)
  * param permission: 工作空间中的资源归属权限，支持(public,private)，默认为public。 (Optional)
+ * param taskPriority: 任务优先级，取值范围[1, 9]; 当队列开启优先级调度时生效 (Optional)
  * param ownerUserPin: 归属用户pin。
 可配置任务所属主账号pin，或者工作空间其他成员的子账号pin
  (Optional)
@@ -92,6 +96,7 @@ func NewUpdateJobRequestWithAllParams(
     name *string,
     description *string,
     permission *string,
+    taskPriority *int,
     ownerUserPin *string,
 ) *UpdateJobRequest {
 
@@ -108,6 +113,7 @@ func NewUpdateJobRequestWithAllParams(
         Name: name,
         Description: description,
         Permission: permission,
+        TaskPriority: taskPriority,
         OwnerUserPin: ownerUserPin,
     }
 }
@@ -148,6 +154,10 @@ func (r *UpdateJobRequest) SetDescription(description string) {
 /* param permission: 工作空间中的资源归属权限，支持(public,private)，默认为public。(Optional) */
 func (r *UpdateJobRequest) SetPermission(permission string) {
     r.Permission = &permission
+}
+/* param taskPriority: 任务优先级，取值范围[1, 9]; 当队列开启优先级调度时生效(Optional) */
+func (r *UpdateJobRequest) SetTaskPriority(taskPriority int) {
+    r.TaskPriority = &taskPriority
 }
 /* param ownerUserPin: 归属用户pin。
 可配置任务所属主账号pin，或者工作空间其他成员的子账号pin

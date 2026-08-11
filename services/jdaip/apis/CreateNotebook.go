@@ -40,7 +40,7 @@ type CreateNotebookRequest struct {
 
     /* 计费配置。
 在私有资源池中创建Notebook时不计费并且参数无效。
-在公共资源池中创建Notebook时默认为按配置计费，并且只支持按配置计费。
+在公共资源池中创建Notebook时默认为按配置计费(postpaid_by_duration)，只支持按配置计费。
  (Optional) */
     ChargeSpec *charge.ChargeSpec `json:"chargeSpec"`
 
@@ -81,7 +81,7 @@ func NewCreateNotebookRequest(
  * param notebookSpec: notebook配置。 (Required)
  * param chargeSpec: 计费配置。
 在私有资源池中创建Notebook时不计费并且参数无效。
-在公共资源池中创建Notebook时默认为按配置计费，并且只支持按配置计费。
+在公共资源池中创建Notebook时默认为按配置计费(postpaid_by_duration)，只支持按配置计费。
  (Optional)
  * param logCollectConfig: 日志采集配置 (Optional)
  */
@@ -141,7 +141,7 @@ func (r *CreateNotebookRequest) SetNotebookSpec(notebookSpec *jdaip.NotebookSpec
 }
 /* param chargeSpec: 计费配置。
 在私有资源池中创建Notebook时不计费并且参数无效。
-在公共资源池中创建Notebook时默认为按配置计费，并且只支持按配置计费。
+在公共资源池中创建Notebook时默认为按配置计费(postpaid_by_duration)，只支持按配置计费。
 (Optional) */
 func (r *CreateNotebookRequest) SetChargeSpec(chargeSpec *charge.ChargeSpec) {
     r.ChargeSpec = chargeSpec

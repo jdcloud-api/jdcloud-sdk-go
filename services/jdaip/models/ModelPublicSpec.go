@@ -19,10 +19,10 @@ package models
 
 type ModelPublicSpec struct {
 
-    /* 模型名称。（创建新模型必填） (Optional) */
+    /* 模型名称。（创建【新模型】生效且必填） (Optional) */
     ModelName string `json:"modelName"`
 
-    /* 模型ID。（创建新版本必填） (Optional) */
+    /* 模型ID。（创建【新版本】生效且必填） (Optional) */
     ModelId string `json:"modelId"`
 
     /* 模型描述/版本描述。若创建新模型，为模型描述与版本V1的描述；若创建新版本，为新版本描述。 (Optional) */
@@ -37,12 +37,26 @@ type ModelPublicSpec struct {
     /* 存储path（模型来源path）。例如：oss时，bucket后面部分的模型存储路径。 (Optional) */
     StoragePath string `json:"storagePath"`
 
-    /* 存储ID，storageType为cfs必传。例如：fs-60z1s969ui。 (Optional) */
+    /* 存储ID，storageType为cfs生效且必传。例如：fs-60****ui。 (Optional) */
     StorageId string `json:"storageId"`
 
-    /* 标签，多个标签使用英文逗号分隔。 (Optional) */
+    /* 标签。多个标签使用英文逗号拼接，每个标签格式 key:value。
+key值说明
+  - scenario 任务场景
+  - provider 品牌/系列
+  - license 模型许可类型
+  - parameterSize 模型大小
+  - keyword 其他关键词，可设置多个
+  - icon 模型icon地址。例如：https://yanxi-public-sq.s3.cn-east-1.jdcloud-oss.com/models/Qwen3-235B-A22B-Instruct-2507/qwen-color.svg
+  - support.task 支持的任务模块，可设置多个，可选值：notebook、trainjob训练任务、finetune模型精调、distill模型蒸馏、simulation仿真任务
+  - finetune.model_template 精调关注（模型版本，如llama2、llama3）
+  - finetune.model_series 精调关注（模型系列，如llama、qwen）
+  - finetune.model_billing_item 精调实验计费项中的模型命名
+
+例如：scenario:文本生成,provider:DeepSeek,license:MIT,parameterSize:158.07B,icon:https://yanxi-public-sq.s3.cn-east-1.jdcloud-oss.com/models/DeepSeek-V3.2/deepseek-color.svg,support.task:notebook,support.task:trainjob,support.task:custom-deploy
+ (Optional) */
     Labels string `json:"labels"`
 
-    /* 模型介绍。 (Optional) */
+    /* 模型介绍md文件。例如：https://yanxi-public-bj.s3.cn-north-1.jdcloud-oss.com/models/Qwen3-32B/README.md (Optional) */
     ModelIntroduction string `json:"modelIntroduction"`
 }

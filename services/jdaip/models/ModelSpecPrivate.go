@@ -19,10 +19,12 @@ package models
 
 type ModelSpecPrivate struct {
 
-    /* 模型名称。1~32字符，可以包含中文、数字、大小写字母、英文下划线“_”、中划线“-”。（创建新模型生效，必填） (Optional) */
+    /* 模型名称（创建【新模型】生效且必填）。
+命名规则：1~128字符，仅支持中文、大小写字母、数字、英文中划线“-”、英文下划线“_”和点 “.”。
+ (Optional) */
     ModelName *string `json:"modelName"`
 
-    /* 模型ID（创建新版本生效，必填）。 (Optional) */
+    /* 模型ID（创建【新版本】生效且必填）。示例：model-yp****qu (Optional) */
     ModelId *string `json:"modelId"`
 
     /* 模型描述/版本描述。若创建新模型，为模型描述与版本V1的描述；若创建新版本，为新版本描述。 (Optional) */
@@ -35,33 +37,37 @@ type ModelSpecPrivate struct {
  (Optional) */
     StorageType *string `json:"storageType"`
 
-    /* storageType=oss时必传，oss域名 (Optional) */
+    /* storageType=oss时必传，对象存储（OSS）域名 (Optional) */
     StorageDomain *string `json:"storageDomain"`
 
-    /* storageType=oss时必传，oss bucket (Optional) */
+    /* storageType=oss时必传，对象存储（OSS）bucket (Optional) */
     StorageBucket *string `json:"storageBucket"`
 
-    /* 存储path（数据来源path）例如：oss时，bucket后面部分的路径；cfs时，虚根pseudo后面部分的路径 (Optional) */
+    /* 存储path（数据来源path）
+例如：
+- 对象存储（OSS）时，传bucket后面部分的路径；
+- cfs时，虚根pseudo后面部分的路径
+ (Optional) */
     StoragePath *string `json:"storagePath"`
 
-    /* 存储ID，storageType=cfs或jpfs时必传，例如：fs-60z1s969ui (Optional) */
+    /* 存储ID，storageType=cfs或jpfs时必传，例如：fs-60****ui (Optional) */
     StorageId *string `json:"storageId"`
 
     /* 标签，多个标签使用英文逗号拼接。例如：label1,label2,label3 (Optional) */
     Labels *string `json:"labels"`
 
-    /* 基础模型ID(蒸馏创建模型使用)。 (Optional) */
+    /* 基础模型ID(下游任务模块[训练任务/精调实验等]创建模型使用)。 (Optional) */
     BasicModelId *string `json:"basicModelId"`
 
     /* 注册来源对应的ID：训练任务ID/精调实验ID等 (Optional) */
     ExperimentId *string `json:"experimentId"`
 
-    /* experimentId的运行记录id (Optional) */
+    /* 训练任务/精调实验等的运行记录id (Optional) */
     ExperimentRunId *string `json:"experimentRunId"`
 
     /* 注册来源：finetune精调实验。 默认值user为用户上传。 (Optional) */
     SourceType *string `json:"sourceType"`
 
-    /* 工作空间中的资源归属权限，支持(public,private)，默认为public。（创建新模型生效） (Optional) */
+    /* 模型资源归属权限（创建【新模型】生效），支持(public,private)，默认为public。 (Optional) */
     Permission *string `json:"permission"`
 }

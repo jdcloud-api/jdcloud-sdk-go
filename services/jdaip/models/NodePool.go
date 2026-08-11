@@ -86,5 +86,5 @@ type NodePool struct {
     ResourceGroupName string `json:"resourceGroupName"`
 
     /* 节点池概览信息 (Optional) */
-    Overview []NodePoolOverview `json:"overview"`
+    Overview NodePoolOverview `json:"overview"`
 }

@@ -106,9 +106,6 @@ type RunParamForExperiment struct {
  (Optional) */
     NodeAffinities []NodeAffinityForExperiment `json:"nodeAffinities"`
 
-    /* 调度优先级配置。 (Optional) */
-    SchedulePriority *SchedulePriority `json:"schedulePriority"`
-
     /* 自定义实例标签。
 
 ## 格式

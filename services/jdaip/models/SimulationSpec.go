@@ -31,6 +31,9 @@ type SimulationSpec struct {
  (Optional) */
     Permission string `json:"permission"`
 
+    /* 任务优先级,取值范围1~9,队列开启优先级情况下必传 (Optional) */
+    TaskPriority int `json:"taskPriority"`
+
     /* 镜像配置。  */
     ImageSpec EsImageSpec `json:"imageSpec"`
 

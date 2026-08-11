@@ -19,25 +19,32 @@ package models
 
 type CreateDatasetParam struct {
 
-    /* 数据集ID，（创建新版本生效，必填） (Optional) */
+    /* 数据集ID，（创建【新版本】时生效且必填） (Optional) */
     DatasetId *string `json:"datasetId"`
 
-    /* 数据集名称，（创建新数据集生效，必填）(1~32字符，仅支持中文、大小写字母、英文中划线 “-”和英文下划线“_”) (Optional) */
+    /* 数据集名称。（创建【新数据集】生效且必填）
+命名规则：1~32字符，仅支持中文、大小写字母、数字、英文中划线“-”和英文下划线“_”
+ (Optional) */
     DatasetName *string `json:"datasetName"`
 
-    /* 数据集类型（创建新数据集生效，必填）：| 数据集类型，可选值： - text：文本 - image：图像 - custom：自定义 (Optional) */
+    /* 数据集类型（创建【新数据集】生效且必填）。可选值：
+- text：文本
+- image：图像
+- custom：自定义
+ (Optional) */
     DatasetType *string `json:"datasetType"`
 
-    /* 任务类型（创建新数据集生效，必填），可选值：
-- sft：文本维度
-- dpo：文本维度
-- cpt：文本维度-增量预训练
+    /* 任务类型（创建【新数据集】生效且必填），可选值：
+- sft：文本生成-SFT指令微调
+- dpo：文本生成-DPO偏好训练
+- cpt：文本生成-增量预训练
+- distill：文本生成-模型蒸馏
 - image-classification：图像维度-图像分类
 - custom：自定义
  (Optional) */
     TaskType *string `json:"taskType"`
 
-    /* 数据集描述，创建新版本时为版本描述 (Optional) */
+    /* 数据集描述，创建【新版本】时为版本描述 (Optional) */
     Description *string `json:"description"`
 
     /* 存储类型（数据集来源），可选值：
@@ -53,21 +60,25 @@ type CreateDatasetParam struct {
     /* storageType=oss时必传，oss bucket (Optional) */
     StorageBucket *string `json:"storageBucket"`
 
-    /* 存储path（数据来源path）例如：oss时，bucket后面部分的路径；cfs时，虚根pseudo后面部分的路径 (Optional) */
+    /* 存储path（数据来源path）
+例如：
+- 对象存储（OSS）时，传bucket后面部分的路径；
+- cfs时，虚根pseudo后面部分的路径
+ (Optional) */
     StoragePath *string `json:"storagePath"`
 
-    /* 存储ID，storageType=cfs或jpfs时必传，例如：fs-60z1s969ui (Optional) */
+    /* 存储ID，storageType=cfs或jpfs时必传，例如：fs-60****ui (Optional) */
     StorageId *string `json:"storageId"`
 
     /* 标签，多个标签使用英文逗号拼接。例如：label1,label2,label3 (Optional) */
     Labels *string `json:"labels"`
 
-    /* 标注状态：未标注unmarked,已标注marked (Optional) */
+    /* 标注状态：未标注unmarked,已标注marked。 taskType="image-classification"时必填 (Optional) */
     MarkStatus *string `json:"markStatus"`
 
-    /* 标注文件：oss时，bucket后面部分的路径；cfs时，虚根pseudo后面部分的路径 (Optional) */
+    /* 标注文件：仅支持oss，bucket后面部分的路径。 taskType="image-classification"时必填 (Optional) */
     MarkFile *string `json:"markFile"`
 
-    /* 工作空间中的资源归属权限，支持(public,private)，默认为public。（创建新数据集生效，必填） (Optional) */
+    /* 数据集资源归属权限，支持(public,private)，默认为public。（创建【新数据集】生效） (Optional) */
     Permission *string `json:"permission"`
 }

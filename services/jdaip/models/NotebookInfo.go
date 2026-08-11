@@ -170,7 +170,15 @@ type NotebookInfo struct {
 - 配置了公网访问时有值
 - 用于SSH或其他公网服务访问
  (Optional) */
-    Lb LbSpec `json:"lb"`
+    Lb LbInfo `json:"lb"`
+
+    /* 公网出口配置，Notebook的出公网访问方式。
+
+## 使用说明
+- 配置了公网出口时有值
+- 用于访问外部网络资源
+ (Optional) */
+    InternetEgress InternetEgressInfo `json:"internetEgress"`
 
     /* 归属用户名称，资源归属的用户名称。 (Optional) */
     OwnerUser string `json:"ownerUser"`
@@ -208,10 +216,6 @@ type NotebookInfo struct {
 - 最多10个标签
  (Optional) */
     UserTags []Tag `json:"userTags"`
-
-    /* 调度优先级，Pod调度顺序控制。
- (Optional) */
-    SchedulePriority SchedulePriority `json:"schedulePriority"`
 
     /* 节点亲和性配置，控制Pod调度到特定节点。
  (Optional) */

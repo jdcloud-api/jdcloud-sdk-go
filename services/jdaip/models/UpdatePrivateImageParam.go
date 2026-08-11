@@ -19,15 +19,17 @@ package models
 
 type UpdatePrivateImageParam struct {
 
-    /* 镜像名称，，null或空不更新 (Optional) */
+    /* 镜像名称。
+命名规则：1~128字符，仅支持小写字母、数字、英文中划线“-”、英文下划线“_”和点 “.”，只能以字母开头
+ (Optional) */
     ImageName *string `json:"imageName"`
 
-    /* 标签，使用英文逗号拼接，传null不修改，有值或传空都会更新 (Optional) */
+    /* 标签，使用英文逗号拼接。传空字符串会更新为空 (Optional) */
     Labels *string `json:"labels"`
 
-    /* 工作空间中的资源归属权限，null或空不更新 (Optional) */
+    /* 镜像资源归属权限，仅支持修改为公共资源public (Optional) */
     Permission *string `json:"permission"`
 
-    /* 归属用户pin。null或空不更新 (Optional) */
+    /* 归属用户pin。 (Optional) */
     OwnerUserPin *string `json:"ownerUserPin"`
 }

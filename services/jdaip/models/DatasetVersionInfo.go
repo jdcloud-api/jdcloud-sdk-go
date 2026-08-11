@@ -32,10 +32,11 @@ type DatasetVersionInfo struct {
  (Optional) */
     DatasetType string `json:"datasetType"`
 
-    /* 任务类型，可选值：
-- sft：文本维度
-- dpo：文本维度
-- cpt：文本维度-增量预训练
+    /* 任务类型（创建【新数据集】生效，必填），可选值：
+- sft：文本生成-SFT指令微调
+- dpo：文本生成-DPO偏好训练
+- cpt：文本生成-增量预训练
+- distill：文本生成-模型蒸馏
 - image-classification：图像维度-图像分类
 - custom：自定义
  (Optional) */

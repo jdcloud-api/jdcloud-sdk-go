@@ -19,21 +19,23 @@ package models
 
 type WorkspaceSpec struct {
 
-    /* 工作空间名称。  */
+    /* 工作空间名称。
+命名规则：1~32字符，仅支持中文、大小写字母、数字、英文中划线“-”和英文下划线“_”
+  */
     WorkspaceName string `json:"workspaceName"`
 
     /* 工作空间描述，256个字符内。 (Optional) */
     WorkspaceDesc *string `json:"workspaceDesc"`
 
-    /* 资源队列。【废弃】该字段即将下线，建议使用新的资源队列配置字段[queueConfigs]。  */
+    /* 资源队列。【废弃】该字段即将下线，建议使用新的资源队列配置字段[queueConfigs]。 (Optional) */
     ResourceQueue []string `json:"resourceQueue"`
 
     /* 资源队列配置。 (Optional) */
     QueueConfigs []WorkspaceRelatedQueue `json:"queueConfigs"`
 
-    /* 工作空间成员。 (Optional) */
+    /* 工作空间成员配置。 (Optional) */
     WorkspaceMember []WorkspaceMember `json:"workspaceMember"`
 
-    /* 空间关联的日志配置。 (Optional) */
+    /* 空间关联的日志配置，最多支持配置20个日志投递目标，[日志投递相关文档](https://docs.jdcloud.com/cn/jdaip/create-logconfig-for-joybuilder) (Optional) */
     LogConfigs []UpdateLogConfigs `json:"logConfigs"`
 }

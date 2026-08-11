@@ -19,6 +19,6 @@ package models
 
 type UpdateDatasetVersionParam struct {
 
-    /* 版本描述，传null不更新，有值或传空都会更新 (Optional) */
+    /* 版本描述，传空字符串会更新成空 (Optional) */
     VersionDesc *string `json:"versionDesc"`
 }

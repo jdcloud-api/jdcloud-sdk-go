@@ -48,6 +48,18 @@ type DescribeServicesRequest struct {
 `ownerUserPin`: 所有者pin，精确匹配，支持单个
  (Optional) */
     Filters []common.Filter `json:"filters"`
+
+    /* <b>排序字段；默认为 createTime</b>
+`createTime`: 按该服务的创建时间排序。
+`running`: 按该服务中运行的版本数排序。
+ (Optional) */
+    Order *string `json:"order"`
+
+    /* <b>排序方式；默认为 desc</b>
+`desc`: 按 order 字段降序排序。
+`asc`: 按 order 字段升序排序。
+ (Optional) */
+    Sort *string `json:"sort"`
 }
 
 /*
@@ -87,6 +99,14 @@ func NewDescribeServicesRequest(
 `ownerUser`: 所有者，模糊匹配，支持单个。
 `ownerUserPin`: 所有者pin，精确匹配，支持单个
  (Optional)
+ * param order: <b>排序字段；默认为 createTime</b>
+`createTime`: 按该服务的创建时间排序。
+`running`: 按该服务中运行的版本数排序。
+ (Optional)
+ * param sort: <b>排序方式；默认为 desc</b>
+`desc`: 按 order 字段降序排序。
+`asc`: 按 order 字段升序排序。
+ (Optional)
  */
 func NewDescribeServicesRequestWithAllParams(
     regionId string,
@@ -94,6 +114,8 @@ func NewDescribeServicesRequestWithAllParams(
     pageNumber *int,
     pageSize *int,
     filters []common.Filter,
+    order *string,
+    sort *string,
 ) *DescribeServicesRequest {
 
     return &DescribeServicesRequest{
@@ -108,6 +130,8 @@ func NewDescribeServicesRequestWithAllParams(
         PageNumber: pageNumber,
         PageSize: pageSize,
         Filters: filters,
+        Order: order,
+        Sort: sort,
     }
 }
 
@@ -151,6 +175,20 @@ func (r *DescribeServicesRequest) SetPageSize(pageSize int) {
 (Optional) */
 func (r *DescribeServicesRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
+}
+/* param order: <b>排序字段；默认为 createTime</b>
+`createTime`: 按该服务的创建时间排序。
+`running`: 按该服务中运行的版本数排序。
+(Optional) */
+func (r *DescribeServicesRequest) SetOrder(order string) {
+    r.Order = &order
+}
+/* param sort: <b>排序方式；默认为 desc</b>
+`desc`: 按 order 字段降序排序。
+`asc`: 按 order 字段升序排序。
+(Optional) */
+func (r *DescribeServicesRequest) SetSort(sort string) {
+    r.Sort = &sort
 }
 
 

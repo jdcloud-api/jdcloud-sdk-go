@@ -59,4 +59,10 @@ type AdminInferenceInfo struct {
 
     /* 推理服务所属工作空间名称 (Optional) */
     WorkspaceName string `json:"workspaceName"`
+
+    /* 用户标签 (Optional) */
+    UserTags []UserTag `json:"userTags"`
+
+    /* 资源组信息 (Optional) */
+    ResourceGroupInfo ResourceGroupInfo `json:"resourceGroupInfo"`
 }

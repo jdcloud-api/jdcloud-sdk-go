@@ -19,33 +19,33 @@ package models
 
 type UpdateCodeRepoConfigParam struct {
 
-    /* 代码库配置名称。为null或空不更新 (Optional) */
+    /* 代码库配置名称。 (Optional) */
     RepoName *string `json:"repoName"`
 
-    /* 描述。为null不更新，传空会更新 (Optional) */
+    /* 描述。传空字符串会清空 (Optional) */
     Description *string `json:"description"`
 
-    /* Coding的projectId。为null或空不更新 (Optional) */
+    /* Coding的projectId (Optional) */
     ProjectId *string `json:"projectId"`
 
-    /* 代码库地址。为null或空不更新 (Optional) */
+    /* 代码库地址。 (Optional) */
     Url *string `json:"url"`
 
-    /* 代码库分支。为null不更新，传空会更新 (Optional) */
+    /* 代码库分支。传空字符串会清空（确保branch和commit最低一个有值） (Optional) */
     Branch *string `json:"branch"`
 
-    /* 代码库commint。为null不更新，传空会更新 (Optional) */
+    /* 代码库commint。传空字符串会清空（确保branch和commit最低一个有值） (Optional) */
     Commit *string `json:"commit"`
 
-    /* git用户名。为null不更新，传空会更新 (Optional) */
+    /* git用户名。传空字符串会清空 (Optional) */
     Username *string `json:"username"`
 
-    /* git访问凭证。为null不更新，传空会更新 (Optional) */
+    /* git访问凭证。传空字符串会清空 (Optional) */
     AccessToken *string `json:"accessToken"`
 
     /* 工作空间中的资源归属权限，支持(public,private)。 (Optional) */
     Permission *string `json:"permission"`
 
-    /* 归属用户pin。null或空不更新 (Optional) */
+    /* 归属用户pin。 (Optional) */
     OwnerUserPin *string `json:"ownerUserPin"`
 }

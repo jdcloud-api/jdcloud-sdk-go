@@ -20,16 +20,25 @@ package models
 type FragmentStatsDetail struct {
 
     /* 节点名称 (Optional) */
-    NodeName string `json:"nodeName"`
+    Name string `json:"name"`
+
+    /* 节点ip (Optional) */
+    Ip string `json:"ip"`
+
+    /* 节点id (Optional) */
+    InstanceId string `json:"instanceId"`
+
+    /* 节点类型，vm/hpc (Optional) */
+    NodeType string `json:"nodeType"`
 
     /* 所属集群名称 (Optional) */
     Cluster string `json:"cluster"`
 
-    /* 调度状态，enable/disable (Optional) */
-    SchedulingStatus string `json:"schedulingStatus"`
+    /* 调度状态 (Optional) */
+    Enable bool `json:"enable"`
 
-    /* 就绪状态，ready/other (Optional) */
-    ReadyStatus string `json:"readyStatus"`
+    /* 状态 (Optional) */
+    Status string `json:"status"`
 
     /* 显卡型号 (Optional) */
     DeviceModel string `json:"deviceModel"`
@@ -47,8 +56,8 @@ type FragmentStatsDetail struct {
     FaultDevice int `json:"faultDevice"`
 
     /* CPU空闲数量 (Optional) */
-    IdleCpu int `json:"idleCpu"`
+    IdleCpu string `json:"idleCpu"`
 
     /* 内存空闲数量 (Optional) */
-    IdleNMemory int `json:"idleNMemory"`
+    IdleNMemory string `json:"idleNMemory"`
 }

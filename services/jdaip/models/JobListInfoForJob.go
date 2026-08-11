@@ -103,6 +103,12 @@ type JobListInfoForJob struct {
     /* 规格描述。 (Optional) */
     FlavorInfo interface{} `json:"flavorInfo"`
 
+    /* 逻辑可用区编码（公共池）。 (Optional) */
+    LogicAzCode string `json:"logicAzCode"`
+
+    /* 物理集群名称（异构规格）。 (Optional) */
+    HpcClusterName string `json:"hpcClusterName"`
+
     /* GPU 卡类型。 (Optional) */
     GpuDeviceModel string `json:"gpuDeviceModel"`
 
@@ -118,6 +124,10 @@ type JobListInfoForJob struct {
     /* 训练实例角色配置信息。
  (Optional) */
     RoleResource RoleResourceInfoForJobList `json:"roleResource"`
+
+    /* 出公网配置（任务级，仅公共资源池训练任务生效）。未配置时为 null。
+ (Optional) */
+    InternetEgress InternetEgressForJob `json:"internetEgress"`
 
     /* 实例状态统计信息。
 
@@ -147,9 +157,6 @@ type JobListInfoForJob struct {
 
     /* 用户自定义标签列表。 (Optional) */
     UserTags []JobTag `json:"userTags"`
-
-    /* 调度优先级配置。 (Optional) */
-    SchedulePriority SchedulePriority `json:"schedulePriority"`
 
     /* 归属用户 pin。 (Optional) */
     OwnerUserPin string `json:"ownerUserPin"`

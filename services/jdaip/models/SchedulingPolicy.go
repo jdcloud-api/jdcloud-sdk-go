@@ -19,9 +19,9 @@ package models
 
 type SchedulingPolicy struct {
 
-    /* 节点调度策略，binpack：紧凑；spreadout：均衡； (Optional) */
+    /* 节点调度策略，binpack：紧凑；spreadout：均衡 (Optional) */
     NodeSchedulerStrategy string `json:"nodeSchedulerStrategy"`
 
-    /* 设备调度策略，binpack：紧凑；spreadout：均衡； (Optional) */
+    /* 设备调度策略，binpack：紧凑；spreadout：均衡 (Optional) */
     DeviceSchedulerStrategy string `json:"deviceSchedulerStrategy"`
 }

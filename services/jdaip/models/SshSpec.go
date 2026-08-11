@@ -19,42 +19,26 @@ package models
 
 type SshSpec struct {
 
-    /* 是否启用SSH，控制是否允许SSH连接Notebook。
+    /* SSH密码认证开关，控制是否允许密码登录。
+
+## 取值
+- yes: 允许密码认证（默认）
+- no: 禁用密码认证，仅允许公钥登录
 
 ## 使用说明
-- true: 启用SSH连接
-- false: 禁用SSH连接
+- 不传时默认为yes，密码认证可用
+- 设为no时确保已配置publicKeys，否则将无法登录
  (Optional) */
-    Enabled *bool `json:"enabled"`
-
-    /* SSH端口，SSH服务监听的端口。
-
-## 使用说明
-- 默认为22
-- 可自定义端口
- (Optional) */
-    Port *int `json:"port"`
+    SshPasswordAuth *string `json:"sshPasswordAuth"`
 
     /* SSH公钥列表，用于免密登录。
 
 ## 格式
 - 标准SSH公钥格式
 - 示例：ssh-rsa AAAAB3NzaC1yc2E...
+
+## 限制
+- 最多10条，超出部分将校验失败
  (Optional) */
     PublicKeys []string `json:"publicKeys"`
-
-    /* SSH连接地址，完整的SSH连接URI。
-
-## 格式
-- ssh://user@host:port
-- 示例：ssh://root@192.168.1.100:22
- (Optional) */
-    ConnectionUri *string `json:"connectionUri"`
-
-    /* SSH用户名，用于SSH登录的用户名。
-
-## 使用说明
-- 通常为root或特定用户
-- 用于SSH连接命令 (Optional) */
-    SshUser *string `json:"sshUser"`
 }

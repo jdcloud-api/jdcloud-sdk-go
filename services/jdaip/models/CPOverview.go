@@ -27,4 +27,7 @@ type CPOverview struct {
 
     /* 精度fp16/fp32，仅resourceType为pflops时有效 (Optional) */
     Accuracy string `json:"accuracy"`
+
+    /* 单位 (Optional) */
+    Unit string `json:"unit"`
 }

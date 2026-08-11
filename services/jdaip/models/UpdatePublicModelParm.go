@@ -19,9 +19,9 @@ package models
 
 type UpdatePublicModelParm struct {
 
-    /* 模型名称，nil或空都不更新。 (Optional) */
+    /* 模型名称。 (Optional) */
     ModelName string `json:"modelName"`
 
-    /* 模型描述，传nil不更新，传空会清空。 (Optional) */
+    /* 模型描述，传空字符串会清空。 (Optional) */
     Description string `json:"description"`
 }

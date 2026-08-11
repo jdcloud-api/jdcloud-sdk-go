@@ -75,4 +75,19 @@ type RoleResourceInfoForJob struct {
 **换算：** 1024 MiB = 1 GiB
  (Optional) */
     MemoryMiB *int `json:"memoryMiB"`
+
+    /* 逻辑可用区编码。
+
+**说明：**
+- 公共资源池必传
+- CPU/GPU 规格可填具体边缘可用区，或填中心随机(center_random)
+- 异构(HPC)规格须填具体可用区
+ (Optional) */
+    LogicAzCode *string `json:"logicAzCode"`
+
+    /* 物理集群名称。
+
+**说明：** 仅异构(HPC)规格需要且必填，如 `A1`、`C1`
+ (Optional) */
+    HpcClusterName *string `json:"hpcClusterName"`
 }

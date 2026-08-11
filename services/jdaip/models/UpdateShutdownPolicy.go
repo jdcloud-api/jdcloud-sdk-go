@@ -19,10 +19,10 @@ package models
 
 type UpdateShutdownPolicy struct {
 
-    /*  (Optional) */
+    /* 运行时长对应配置 (Optional) */
     RuntimePolicys []UpdateRuntimePolicy `json:"runtimePolicys"`
 
-    /*  (Optional) */
+    /* 闲置时长对应配置 (Optional) */
     IdlePolicys []UpdateIdlePolicy `json:"idlePolicys"`
 
     /* 排除的notebookID (Optional) */

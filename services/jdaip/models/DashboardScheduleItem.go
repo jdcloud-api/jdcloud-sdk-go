@@ -21,4 +21,7 @@ type DashboardScheduleItem struct {
 
     /* 调度分析结果 (Optional) */
     Item SightSchedulingMetrics `json:"item"`
+
+    /* 调度分析结果v2 (Optional) */
+    Metrics DashboardScheduleMetrics `json:"metrics"`
 }

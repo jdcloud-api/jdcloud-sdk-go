@@ -93,9 +93,6 @@ type ExperimentListInfo struct {
  (Optional) */
     Permission string `json:"permission"`
 
-    /* 调度优先级配置。 (Optional) */
-    SchedulePriority SchedulePriority `json:"schedulePriority"`
-
     /* 归属用户pin。
 
 资源所有者的用户标识。

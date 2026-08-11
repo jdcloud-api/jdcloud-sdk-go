@@ -19,12 +19,17 @@ package models
 
 type ImageLabelsObject struct {
 
-    /* 训练任务关注 (Optional) */
+    /* 镜像基础环境信息：vllm0.25.0、pytorch2.11.0、cuda13.0、gpu等 (Optional) */
+    Baseinfo []string `json:"baseinfo"`
+
+    /* 训练任务,当imageUsage包含training时， 使用该字段在创建训练任务时，任务类型使用，支持单个，可选值pytorch、ray
+训练任务文档参考: [创建训练任务](https://docs.jdcloud.com/cn/jdaip/create-trainjob)
+ (Optional) */
     Jobtype []string `json:"jobtype"`
 
-    /* 在线服务自定义部署-协议 (Optional) */
+    /* 在线服务自定义部署-支持协议，支持多个http、grpc、tcp、udp (Optional) */
     Protocol []string `json:"protocol"`
 
-    /* 在线服务-分布式， 有值代表支持分布式 (Optional) */
+    /* 在线服务-分布式， 有值代表支持分布式，支持单个，可选值sglang、vllm (Optional) */
     Distributed []string `json:"distributed"`
 }

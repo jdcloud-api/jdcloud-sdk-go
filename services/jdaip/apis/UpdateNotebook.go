@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    jdaip "github.com/jdcloud-api/jdcloud-sdk-go/services/jdaip/models"
 )
 
 type UpdateNotebookRequest struct {
@@ -33,7 +34,7 @@ type UpdateNotebookRequest struct {
     /* notebook ID  */
     NotebookId string `json:"notebookId"`
 
-    /* 名称。1~32字符，可以包含中文、数字、大小写字母、英文下划线“_”、中划线“-”或点“.”。传null表示不修改此字段。 (Optional) */
+    /* 名称。1~32字符，可以包含中文、数字、大小写字母、英文下划线"_"、中划线"-"或点"."。传null表示不修改此字段。 (Optional) */
     Name *string `json:"name"`
 
     /* 描述。不超过256字符。传null表示不修改此字段。 (Optional) */
@@ -45,6 +46,14 @@ type UpdateNotebookRequest struct {
 
     /* 资源归属用户。传null表示不修改此字段。 (Optional) */
     OwnerUserPin *string `json:"ownerUserPin"`
+
+    /* 公网出口配置，用于配置Notebook的出公网访问方式。传null表示不修改此字段。
+
+## 使用说明
+- switchStatus必须显式传值，为on时开启公网出口，为off时关闭公网出口且egressType无效
+- **公共资源池**: switchStatus=on时可设置 internetEgress.egressType=SHARE_GATEWAY，经平台共享NAT网关出公网
+- **私有资源池**: 暂不支持公网出口配置 (Optional) */
+    InternetEgress *jdaip.InternetEgressInfo `json:"internetEgress"`
 }
 
 /*
@@ -77,11 +86,17 @@ func NewUpdateNotebookRequest(
  * param regionId: 地域ID (Required)
  * param workspaceId: 工作空间ID (Required)
  * param notebookId: notebook ID (Required)
- * param name: 名称。1~32字符，可以包含中文、数字、大小写字母、英文下划线“_”、中划线“-”或点“.”。传null表示不修改此字段。 (Optional)
+ * param name: 名称。1~32字符，可以包含中文、数字、大小写字母、英文下划线"_"、中划线"-"或点"."。传null表示不修改此字段。 (Optional)
  * param description: 描述。不超过256字符。传null表示不修改此字段。 (Optional)
  * param permission: 工作空间中的资源归属权限，支持(public,private)，只有管理员和拥有者可以修改。传null表示不修改此字段。
 管理员可查看工作空间中全部资源，其他用户只能查看归属自己的private权限的资源或public权限的资源。 (Optional)
  * param ownerUserPin: 资源归属用户。传null表示不修改此字段。 (Optional)
+ * param internetEgress: 公网出口配置，用于配置Notebook的出公网访问方式。传null表示不修改此字段。
+
+## 使用说明
+- switchStatus必须显式传值，为on时开启公网出口，为off时关闭公网出口且egressType无效
+- **公共资源池**: switchStatus=on时可设置 internetEgress.egressType=SHARE_GATEWAY，经平台共享NAT网关出公网
+- **私有资源池**: 暂不支持公网出口配置 (Optional)
  */
 func NewUpdateNotebookRequestWithAllParams(
     regionId string,
@@ -91,6 +106,7 @@ func NewUpdateNotebookRequestWithAllParams(
     description *string,
     permission *string,
     ownerUserPin *string,
+    internetEgress *jdaip.InternetEgressInfo,
 ) *UpdateNotebookRequest {
 
     return &UpdateNotebookRequest{
@@ -107,6 +123,7 @@ func NewUpdateNotebookRequestWithAllParams(
         Description: description,
         Permission: permission,
         OwnerUserPin: ownerUserPin,
+        InternetEgress: internetEgress,
     }
 }
 
@@ -135,7 +152,7 @@ func (r *UpdateNotebookRequest) SetWorkspaceId(workspaceId string) {
 func (r *UpdateNotebookRequest) SetNotebookId(notebookId string) {
     r.NotebookId = notebookId
 }
-/* param name: 名称。1~32字符，可以包含中文、数字、大小写字母、英文下划线“_”、中划线“-”或点“.”。传null表示不修改此字段。(Optional) */
+/* param name: 名称。1~32字符，可以包含中文、数字、大小写字母、英文下划线"_"、中划线"-"或点"."。传null表示不修改此字段。(Optional) */
 func (r *UpdateNotebookRequest) SetName(name string) {
     r.Name = &name
 }
@@ -151,6 +168,15 @@ func (r *UpdateNotebookRequest) SetPermission(permission string) {
 /* param ownerUserPin: 资源归属用户。传null表示不修改此字段。(Optional) */
 func (r *UpdateNotebookRequest) SetOwnerUserPin(ownerUserPin string) {
     r.OwnerUserPin = &ownerUserPin
+}
+/* param internetEgress: 公网出口配置，用于配置Notebook的出公网访问方式。传null表示不修改此字段。
+
+## 使用说明
+- switchStatus必须显式传值，为on时开启公网出口，为off时关闭公网出口且egressType无效
+- **公共资源池**: switchStatus=on时可设置 internetEgress.egressType=SHARE_GATEWAY，经平台共享NAT网关出公网
+- **私有资源池**: 暂不支持公网出口配置(Optional) */
+func (r *UpdateNotebookRequest) SetInternetEgress(internetEgress *jdaip.InternetEgressInfo) {
+    r.InternetEgress = internetEgress
 }
 
 

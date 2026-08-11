@@ -22,12 +22,16 @@ type WorkspaceMemberQueue struct {
     /* 成员名称。 (Optional) */
     MemberUser string `json:"memberUser"`
 
-    /* 成员角色。 (Optional) */
+    /* 成员角色，可选值：
+- admin 管理员
+- developer 开发者
+- visitor 访客
+ (Optional) */
     MemberRole string `json:"memberRole"`
 
     /* 成员子账号。 (Optional) */
     MemberPin string `json:"memberPin"`
 
-    /* 队列ID (Optional) */
+    /* 队列ID，当成员角色memberRole=admin时，无需传值， 管理员默认支持空间已绑定的所有队列权限 (Optional) */
     QueueIds []string `json:"queueIds"`
 }

@@ -43,8 +43,8 @@ type JobParam struct {
     /* 镜像可见性，决定镜像的使用权限范围。
 
 **可选值：**
-- `public`：公开镜像，平台预置镜像或用户公开的镜像，所有用户可使用
-- `private`：私有镜像，仅当前用户可使用
+- `public`：表示产品页面[资产管理-镜像]对应的公共镜像，平台预置镜像，所有用户可使用
+- `private`：表示产品页面[资产管理-镜像]对应的我的镜像
   */
     ImageVisibility string `json:"imageVisibility"`
 
@@ -97,6 +97,9 @@ type JobParam struct {
  (Optional) */
     Replica *int `json:"replica"`
 
+    /* 任务优先级，范围[1, 9]; 当队列开启优先级调度时生效 (Optional) */
+    TaskPriority *int `json:"taskPriority"`
+
     /* 环境变量列表，用于向训练脚本传递配置参数。
 
 **使用场景：**
@@ -115,7 +118,7 @@ type JobParam struct {
  (Optional) */
     Resource *ResourceParamForJob `json:"resource"`
 
-    /* 存储空间配置列表，用于挂载外部存储到训练容器中。
+    /* 存储空间配置列表，用于挂载外部共享存储到训练容器中。
 
 **支持的存储类型：**
 - `oss`：对象存储服务，适合大规模数据存储
@@ -126,8 +129,17 @@ type JobParam struct {
 - 挂载训练数据目录
 - 挂载输出目录保存模型和日志
 - 挂载共享存储用于分布式训练
+
+**说明：** 训练节点本地临时盘请使用顶层字段 `localStorage`，不要放在本列表中。
  (Optional) */
     StorageSpaces []StorageSpaceParamForJob `json:"storageSpaces"`
+
+    /* 本地存储挂载配置，与 `storageSpaces` / `datasets` / `models` 平级。
+
+在训练节点本地高速盘上为训练容器分配一块临时空间，仅支持专属资源池，每个任务最多一个。
+字段定义见 `localStorageParamForJob`。未开启时不传本字段。
+ (Optional) */
+    LocalStorage *LocalStorageParamForJob `json:"localStorage"`
 
     /* 数据集配置列表，用于挂载已创建的数据集到训练容器。
 
@@ -159,6 +171,10 @@ type JobParam struct {
 - PyTorch 分布式训练（可配置不同规格的 Worker）
  (Optional) */
     RoleResource *RoleResourceParamForJob `json:"roleResource"`
+
+    /* 出公网配置（任务级，仅公共资源池训练任务生效）。不需要出公网时不传此参数。
+ (Optional) */
+    InternetEgress *InternetEgressForJob `json:"internetEgress"`
 
     /* 框架高级配置，JSON 格式字符串。
 
@@ -231,6 +247,18 @@ type JobParam struct {
  (Optional) */
     Codes []CodeParam `json:"codes"`
 
+    /* 公共池排队超时时间，单位：分钟。
+
+**取值范围：** 5 ~ 1440
+
+**默认值：** 5
+
+**说明：**
+- 仅公共资源池训练任务生效
+- 排队超过此时间后，任务将自动回滚为创建失败
+ (Optional) */
+    QueuingTimeoutMinutes *int `json:"queuingTimeoutMinutes"`
+
     /* 用户自定义标签，用于资源分类和筛选。
 
 **限制：**
@@ -253,15 +281,4 @@ type JobParam struct {
 - 资源使用统计和计费
  (Optional) */
     ResourceGroupId *string `json:"resourceGroupId"`
-
-    /* 调度优先级配置。
-
-**系统预置优先级：**
-- `high-priority`：优先级值 20000，高优先级
-- `normal-priority`：优先级值 10000，普通优先级（默认）
-- `low-priority`：优先级值 5000，低优先级
-
-**注意：** 提高优先级可能影响其他任务的调度
- (Optional) */
-    SchedulePriority *SchedulePriority `json:"schedulePriority"`
 }
