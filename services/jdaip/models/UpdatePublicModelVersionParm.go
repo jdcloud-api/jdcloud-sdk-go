@@ -19,9 +19,9 @@ package models
 
 type UpdatePublicModelVersionParm struct {
 
-    /* 版本描述，传null不更新，传空会清空。 (Optional) */
+    /* 版本描述，传空字符串会清空。 (Optional) */
     VersionDesc string `json:"versionDesc"`
 
-    /* 模型介绍，传null不更新，传空会清空。 (Optional) */
+    /* 模型介绍，传空字符串会清空。 (Optional) */
     ModelIntroduction string `json:"modelIntroduction"`
 }

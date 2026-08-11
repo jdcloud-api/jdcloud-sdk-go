@@ -43,6 +43,12 @@ type Model struct {
     /* 模型挂载路径（如：/mnt/models/ (Optional) */
     MountPath *string `json:"mountPath"`
 
-    /* 模型是否只读 (Optional) */
+    /* 用户指定的cfs或者jpfs挂载点 (Optional) */
+    MountTargetId *string `json:"mountTargetId"`
+
+    /* 是否只读挂载模型，仅当 `source=self` 且 `storageType=oss` 时生效，默认 `false`。
+开启后容器内对模型挂载路径的写操作将被拒绝（K8s 原生 volumeMount.readOnly），可防止业务进程误写覆盖 OSS 上的模型文件。
+公共模型、本地模型（hostpath）、私有 CFS/JPFS 模型本字段忽略。
+ (Optional) */
     ReadOnly *bool `json:"readOnly"`
 }

@@ -23,13 +23,31 @@ type LiveMigrateTask struct {
     MigrateId string `json:"migrateId"`
 
     /*  (Optional) */
+    Pin string `json:"pin"`
+
+    /*  (Optional) */
     TaskId string `json:"taskId"`
 
     /*  (Optional) */
     TaskName string `json:"taskName"`
 
     /*  (Optional) */
+    TaskType string `json:"taskType"`
+
+    /*  (Optional) */
     SubTaskId string `json:"subTaskId"`
+
+    /*  (Optional) */
+    TaskCreator string `json:"taskCreator"`
+
+    /*  (Optional) */
+    QueueId string `json:"queueId"`
+
+    /*  (Optional) */
+    QueueName string `json:"queueName"`
+
+    /*  (Optional) */
+    Cluster string `json:"cluster"`
 
     /*  (Optional) */
     InstanceName string `json:"instanceName"`
@@ -39,6 +57,15 @@ type LiveMigrateTask struct {
 
     /*  (Optional) */
     AfterNode NodeInfo `json:"afterNode"`
+
+    /*  (Optional) */
+    TargetDeviceModel string `json:"targetDeviceModel"`
+
+    /*  (Optional) */
+    RatioPerGpu float32 `json:"ratioPerGpu"`
+
+    /*  (Optional) */
+    MemoryPerGpu float32 `json:"memoryPerGpu"`
 
     /*  (Optional) */
     Status int `json:"status"`
@@ -53,10 +80,10 @@ type LiveMigrateTask struct {
     FinishedTimestamp int `json:"finishedTimestamp"`
 
     /*  (Optional) */
-    TaskCreator string `json:"taskCreator"`
+    NodeGroup string `json:"nodeGroup"`
 
     /*  (Optional) */
-    NodeGroup string `json:"nodeGroup"`
+    NodeGroupName string `json:"nodeGroupName"`
 
     /*  (Optional) */
     StartedTimestamp int `json:"startedTimestamp"`

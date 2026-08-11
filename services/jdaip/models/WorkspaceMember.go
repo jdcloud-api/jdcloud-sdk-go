@@ -19,12 +19,16 @@ package models
 
 type WorkspaceMember struct {
 
-    /* 成员名称。 (Optional) */
+    /* 成员名称(子账号名称)。 (Optional) */
     MemberUser *string `json:"memberUser"`
 
-    /* 成员角色。 (Optional) */
+    /* 成员角色，可选值：
+- admin 管理员
+- developer 开发者
+- visitor 访客
+ (Optional) */
     MemberRole *string `json:"memberRole"`
 
-    /* 成员子账号。 (Optional) */
+    /* 成员子账号pin。 (Optional) */
     MemberPin *string `json:"memberPin"`
 }

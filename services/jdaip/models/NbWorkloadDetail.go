@@ -86,4 +86,30 @@ type NbWorkloadDetail struct {
 - 取值范围：0-100
  (Optional) */
     VcudaRatio int `json:"vcudaRatio"`
+
+    /* 逻辑可用区编码，实例运行的逻辑可用区。
+
+## 使用说明
+- 仅公共资源池有效
+- 私有资源池时为空
+ (Optional) */
+    LogicAzCode string `json:"logicAzCode"`
+
+    /* 物理集群名称，实例运行的物理集群名称。
+
+## 使用说明
+- 仅公共资源池有效
+- 与规格(flavorId)对应的物理集群名称
+ (Optional) */
+    HpcClusterName string `json:"hpcClusterName"`
+
+    /* 排队超时时间（分钟），Notebook在排队状态的最大等待时间。
+
+## 使用说明
+- 仅公共资源池有效
+- 不传或传0时默认使用系统配置 5分钟
+- 取值范围：5~1440
+- 超过排队超时时间后，Notebook将自动停止排队
+ (Optional) */
+    QueuingTimeoutMinutes int `json:"queuingTimeoutMinutes"`
 }

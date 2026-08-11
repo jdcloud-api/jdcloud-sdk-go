@@ -43,7 +43,7 @@ type DescribeDatasetsRequest struct {
 `createUser`: 创建人名称，模糊匹配，支持单个
 `datasetTypes`: 数据集类型数组，支持多个，取值范围：[`text`, `custom`]
 `datasetIds`: 数据集ID数组，支持多个
-`taskTypes`: 任务类型数组，支持多个，取值范围：[`sft`, `dpo`, `cpt`, `custom`]
+`taskTypes`: 任务类型数组，支持多个，取值范围：[`sft`, `dpo`, `cpt`, `custom`,`distill`,`image-classification`]
 `labels`: 标签数组，支持多个
 `cfsVpcIds`: cfsVpcId数组，支持多个
 `states`: 资源状态数组，支持多个，取值范围：[`running`, `success`, `failed`]
@@ -88,7 +88,7 @@ func NewDescribeDatasetsRequest(
 `createUser`: 创建人名称，模糊匹配，支持单个
 `datasetTypes`: 数据集类型数组，支持多个，取值范围：[`text`, `custom`]
 `datasetIds`: 数据集ID数组，支持多个
-`taskTypes`: 任务类型数组，支持多个，取值范围：[`sft`, `dpo`, `cpt`, `custom`]
+`taskTypes`: 任务类型数组，支持多个，取值范围：[`sft`, `dpo`, `cpt`, `custom`,`distill`,`image-classification`]
 `labels`: 标签数组，支持多个
 `cfsVpcIds`: cfsVpcId数组，支持多个
 `states`: 资源状态数组，支持多个，取值范围：[`running`, `success`, `failed`]
@@ -155,7 +155,7 @@ func (r *DescribeDatasetsRequest) SetPageSize(pageSize int) {
 `createUser`: 创建人名称，模糊匹配，支持单个
 `datasetTypes`: 数据集类型数组，支持多个，取值范围：[`text`, `custom`]
 `datasetIds`: 数据集ID数组，支持多个
-`taskTypes`: 任务类型数组，支持多个，取值范围：[`sft`, `dpo`, `cpt`, `custom`]
+`taskTypes`: 任务类型数组，支持多个，取值范围：[`sft`, `dpo`, `cpt`, `custom`,`distill`,`image-classification`]
 `labels`: 标签数组，支持多个
 `cfsVpcIds`: cfsVpcId数组，支持多个
 `states`: 资源状态数组，支持多个，取值范围：[`running`, `success`, `failed`]

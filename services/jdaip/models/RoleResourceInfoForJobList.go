@@ -29,6 +29,10 @@ type RoleResourceInfoForJobList struct {
  (Optional) */
     QueueId string `json:"queueId"`
 
+    /* RDMA 开关，控制是否为该任务开启 RDMA 高速网络。
+ (Optional) */
+    RdmaSwitch string `json:"rdmaSwitch"`
+
     /* 角色资源配置详细信息列表。
 
 **PyTorch 任务：** 所有节点均为 Worker 角色

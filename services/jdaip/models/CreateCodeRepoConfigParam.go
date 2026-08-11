@@ -19,10 +19,15 @@ package models
 
 type CreateCodeRepoConfigParam struct {
 
-    /* 代码库配置名称（1~64字符，仅支持中文、大小写字母、数字、英文中划线“-”、英文下划线“_”和点 “.”） (Optional) */
+    /* 代码库配置名称。
+命名规则：1~64字符，仅支持中文、大小写字母、数字、英文中划线"-”、英文下划线"_"和点"."
+ (Optional) */
     RepoName *string `json:"repoName"`
 
-    /* 代码库类型，可选值：GitHub、Coding (Optional) */
+    /* 代码库类型，可选值：
+- GitHub  需配置 Git 地址，GitHub 为公网访问，请确保当前环境可正常访问公网；
+- Coding  需配置ProjectID。请注意：Coding 为京东内部代码库，配置时请确保当前网络环境已打通京东内网，避免拉取失败！
+ (Optional) */
     RepoType *string `json:"repoType"`
 
     /* 描述 (Optional) */

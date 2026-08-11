@@ -19,6 +19,12 @@ package models
 
 type Flavor struct {
 
+    /* CPU 核数 (Optional) */
+    Cpu float32 `json:"cpu"`
+
+    /* 内存大小（GiB） (Optional) */
+    Memory float32 `json:"memory"`
+
     /* 设备模型 (Optional) */
     DeviceModel string `json:"deviceModel"`
 

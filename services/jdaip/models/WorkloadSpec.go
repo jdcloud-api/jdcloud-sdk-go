@@ -25,6 +25,7 @@ type WorkloadSpec struct {
 - 队列ID固定为：`joybuilder-public-queue`
 - 使用平台共享资源，按量计费
 - 需要指定规格ID(flavorId)
+- 需要指定逻辑可用区编码(logicAzCode)
 
 ## 私有资源池
 - 队列ID为用户工作空间中的私有队列ID
@@ -95,4 +96,38 @@ type WorkloadSpec struct {
 - 小数表示GPU切分，共享GPU资源
  (Optional) */
     VcudaCore *string `json:"vcudaCore"`
+
+    /* 逻辑可用区编码，指定Notebook实例运行的逻辑可用区。
+
+## 使用说明
+- 公共资源池必填，私有资源池无需指定
+- 可通过查询可用区列表接口获取可用区编码
+- 支持包含"random"关键字实现随机可用区调度
+
+## 示例
+- cn-north-1a: 指定可用区
+- cn-north-1-random: 随机可用区
+ (Optional) */
+    LogicAzCode *string `json:"logicAzCode"`
+
+    /* 物理集群名称，指定规格对应的异构可用区物理集群名称。
+
+## 使用说明
+- 仅公共资源池有效，私有资源池无需指定
+ (Optional) */
+    HpcClusterName *string `json:"hpcClusterName"`
+
+    /* 排队超时时间（分钟），Notebook在排队状态的最大等待时间。
+
+## 使用说明
+- 仅公共资源池有效，私有资源池不支持此参数
+- 不传或传0时默认使用系统配置 5分钟
+- 取值范围：5~1440
+- 超过排队超时时间后，Notebook将自动停止排队
+
+## 示例
+- 30: 排队30分钟后超时
+- 60: 排队60分钟后超时
+ (Optional) */
+    QueuingTimeoutMinutes *int `json:"queuingTimeoutMinutes"`
 }

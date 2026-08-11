@@ -195,6 +195,10 @@ type AdminJobListInfo struct {
  (Optional) */
     RoleResource RoleResourceInfoForJobList `json:"roleResource"`
 
+    /* 出公网配置（任务级，仅公共资源池训练任务生效）。未配置时为 null。
+ (Optional) */
+    InternetEgress InternetEgressForJob `json:"internetEgress"`
+
     /* 实例详情信息。
 
 包含实例的运行状态、节点信息等详细数据。

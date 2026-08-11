@@ -23,7 +23,7 @@ type SchedulePolicy struct {
 - **StrictFIFO**：严格先入先出，
 - **BestEffortFIFO**：优先调度
  (Optional) */
-    SchedulePolicy *string `json:"schedulePolicy"`
+    SchedulePolicy string `json:"schedulePolicy"`
 
     /* **抢占策略**，可选：Never、LowPriority、LowOrNewerEqualPriority，默认值为：LowPriority
 **抢占范围**：当前同资源队列
@@ -31,19 +31,19 @@ type SchedulePolicy struct {
 - **LowPriority**：抢占优先级低的任务
 - **LowOrNewerEqualPriority**：抢占优先级低或者比自己晚创建的任务资源
  (Optional) */
-    PreemptionPolicy *string `json:"preemptionPolicy"`
+    PreemptionPolicy string `json:"preemptionPolicy"`
 
     /* **借用抢占策略**，可选：Never、LowPriority，默认值为：Never
 借用抢占范围：同一个资源组下的资源队列
 - **Never**: 借用资源时不发生抢占
 - **LowPriority**: 借用资源时抢占优先级低的任务资源
  (Optional) */
-    BorrowPolicy *string `json:"borrowPolicy"`
+    BorrowPolicy string `json:"borrowPolicy"`
 
     /* **归还抢占策略**，可选：Never、LowPriority、Any，默认值为：Any
 - **Never**: 归还资源时不发生抢占
 - **LowPriority**: 归还资源时抢占优先级低的任务资源
 - **Any**: 强制归还被借用资源
  (Optional) */
-    ReclaimPolicy *string `json:"reclaimPolicy"`
+    ReclaimPolicy string `json:"reclaimPolicy"`
 }

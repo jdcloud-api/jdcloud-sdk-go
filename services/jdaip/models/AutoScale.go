@@ -39,4 +39,10 @@ type AutoScale struct {
 
     /* 内存使用率阈值（%，基于Limits） (Optional) */
     MemoryThreshold *int `json:"memoryThreshold"`
+
+    /* 排队中的请求数阈值 (Optional) */
+    WaitingRequestCountThreshold *int `json:"waitingRequestCountThreshold"`
+
+    /* 首token时延阈值，单位毫秒 (Optional) */
+    TimeToFirstTokenP99Threshold *int `json:"timeToFirstTokenP99Threshold"`
 }

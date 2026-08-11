@@ -55,6 +55,6 @@ type ModelsPrivate struct {
     /* 归属用户pin。 (Optional) */
     OwnerUserPin string `json:"ownerUserPin"`
 
-    /* 工作空间中的资源归属权限。 (Optional) */
+    /* 模型资源归属权限，支持(public,private)。 (Optional) */
     Permission string `json:"permission"`
 }

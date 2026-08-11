@@ -69,7 +69,15 @@ type NotebookBaseInfo struct {
 
     /* 公网访问配置，负载均衡配置信息。
  (Optional) */
-    Lb LbSpec `json:"lb"`
+    Lb LbInfo `json:"lb"`
+
+    /* 公网出口配置，Notebook的出公网访问方式。
+
+## 使用说明
+- 配置了公网出口时有值
+- 用于访问外部网络资源
+ (Optional) */
+    InternetEgress InternetEgressInfo `json:"internetEgress"`
 
     /* 归属用户名称，资源归属的用户名称。
  (Optional) */
@@ -86,4 +94,10 @@ type NotebookBaseInfo struct {
 - private: 私有，仅管理员和拥有者可见
  (Optional) */
     Permission string `json:"permission"`
+
+    /* 队列ID，实例运行所在的资源队列（真实队列）。 (Optional) */
+    Queue string `json:"queue"`
+
+    /* 公共队列ID，公共资源池场景下的队列标识。 (Optional) */
+    PublicQueue string `json:"publicQueue"`
 }

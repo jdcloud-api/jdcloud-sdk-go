@@ -25,7 +25,7 @@ type ProductUpdateSpec struct {
     /* 动态内容或描述，最大长度128字符 (Optional) */
     Content string `json:"content"`
 
-    /* 动态类型 MODEL-模型上新, FEATURE-产品功能 (Optional) */
+    /* 动态类型 PUBLIC_ASSETS-公共资产, FEATURE-产品功能 (Optional) */
     UpdateType string `json:"updateType"`
 
     /* 发布日期，用于展示给客户, 格式 YYYY-MM-DD (Optional) */

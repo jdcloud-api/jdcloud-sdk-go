@@ -171,7 +171,15 @@ type NotebookDetail struct {
 - 配置了公网访问时有值
 - 用于SSH或其他公网服务访问
  (Optional) */
-    Lb LbSpec `json:"lb"`
+    Lb LbInfo `json:"lb"`
+
+    /* 公网出口配置，Notebook的出公网访问方式。
+
+## 使用说明
+- 配置了公网出口时有值
+- 用于访问外部网络资源
+ (Optional) */
+    InternetEgress InternetEgressInfo `json:"internetEgress"`
 
     /* Notebook的计费信息，公共资源池的计费详情。
 
@@ -215,6 +223,10 @@ type NotebookDetail struct {
 - 挂载路径
  (Optional) */
     Codes []NbCodeConfigInfo `json:"codes"`
+
+    /* 用户配置的环境变量列表。仅返回用户原始配置，不包含平台系统环境变量；与系统变量同名时，返回值可能与Notebook运行时实际值不同。
+ (Optional) */
+    Envs []NotebookEnv `json:"envs"`
 
     /* 日志采集配置，容器日志采集到日志服务的配置。
 
@@ -263,11 +275,24 @@ type NotebookDetail struct {
  (Optional) */
     UserTags []Tag `json:"userTags"`
 
-    /* 调度优先级，Pod调度顺序控制。
+    /* 调度优先级值，Pod调度顺序控制。
+
+## 使用说明
+- 数值越大，优先级越高
+- 仅在调度器支持优先级时生效
  (Optional) */
-    SchedulePriority SchedulePriority `json:"schedulePriority"`
+    TaskPriority int `json:"taskPriority"`
 
     /* 节点亲和性配置，控制Pod调度到特定节点。
  (Optional) */
     NodeAffinities []NotebookNodeAffinity `json:"nodeAffinities"`
+
+    /* SSH配置和连接信息。
+
+## 包含信息
+- 密码认证开关
+- SSH公钥列表
+- SSH连接地址
+ (Optional) */
+    SshSpec SshConnectionInfo `json:"sshSpec"`
 }

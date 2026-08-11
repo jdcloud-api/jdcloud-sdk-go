@@ -46,8 +46,8 @@ type DescribeInstancesRequest struct {
     /* <b>filters 中支持使用以下关键字进行过滤</b>
 `name`: 实例名称，模糊匹配，支持单个。
 `type`: 实例类型，模糊匹配，支持单个。
-`state`: 实例状态，精确匹配，支持多个，用","隔开。
-`ip`: 实例Ip，精确匹配，支持多个，用","隔开。
+`state`: 实例状态，精确匹配，支持多个。
+`ip`: 实例Ip，精确匹配，支持多个。
  (Optional) */
     Filters []jdaip.Filter `json:"filters"`
 }
@@ -88,8 +88,8 @@ func NewDescribeInstancesRequest(
  * param filters: <b>filters 中支持使用以下关键字进行过滤</b>
 `name`: 实例名称，模糊匹配，支持单个。
 `type`: 实例类型，模糊匹配，支持单个。
-`state`: 实例状态，精确匹配，支持多个，用","隔开。
-`ip`: 实例Ip，精确匹配，支持多个，用","隔开。
+`state`: 实例状态，精确匹配，支持多个。
+`ip`: 实例Ip，精确匹配，支持多个。
  (Optional)
  */
 func NewDescribeInstancesRequestWithAllParams(
@@ -159,8 +159,8 @@ func (r *DescribeInstancesRequest) SetAnomalyFirst(anomalyFirst bool) {
 /* param filters: <b>filters 中支持使用以下关键字进行过滤</b>
 `name`: 实例名称，模糊匹配，支持单个。
 `type`: 实例类型，模糊匹配，支持单个。
-`state`: 实例状态，精确匹配，支持多个，用","隔开。
-`ip`: 实例Ip，精确匹配，支持多个，用","隔开。
+`state`: 实例状态，精确匹配，支持多个。
+`ip`: 实例Ip，精确匹配，支持多个。
 (Optional) */
 func (r *DescribeInstancesRequest) SetFilters(filters []jdaip.Filter) {
     r.Filters = filters
@@ -180,6 +180,6 @@ type DescribeInstancesResponse struct {
 }
 
 type DescribeInstancesResult struct {
-    PodListInfo []jdaip.InstanceListInfoForJob `json:"podListInfo"`
+    InstanceInfoList []jdaip.InstanceListInfoForJob `json:"instanceInfoList"`
     TotalCount int `json:"totalCount"`
 }

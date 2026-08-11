@@ -35,7 +35,7 @@ type RolloutInferenceRequest struct {
     InferenceId string `json:"inferenceId"`
 
     /*   */
-    RolloutInferenceSpec *jdaip.RolloutInferenceSpec `json:"rolloutInferenceSpec"`
+    RolloutInferenceSpec *jdaip.RolloutInferenceRequest `json:"rolloutInferenceSpec"`
 }
 
 /*
@@ -50,7 +50,7 @@ func NewRolloutInferenceRequest(
     regionId string,
     workspaceId string,
     inferenceId string,
-    rolloutInferenceSpec *jdaip.RolloutInferenceSpec,
+    rolloutInferenceSpec *jdaip.RolloutInferenceRequest,
 ) *RolloutInferenceRequest {
 
 	return &RolloutInferenceRequest{
@@ -77,7 +77,7 @@ func NewRolloutInferenceRequestWithAllParams(
     regionId string,
     workspaceId string,
     inferenceId string,
-    rolloutInferenceSpec *jdaip.RolloutInferenceSpec,
+    rolloutInferenceSpec *jdaip.RolloutInferenceRequest,
 ) *RolloutInferenceRequest {
 
     return &RolloutInferenceRequest{
@@ -120,7 +120,7 @@ func (r *RolloutInferenceRequest) SetInferenceId(inferenceId string) {
     r.InferenceId = inferenceId
 }
 /* param rolloutInferenceSpec: (Required) */
-func (r *RolloutInferenceRequest) SetRolloutInferenceSpec(rolloutInferenceSpec *jdaip.RolloutInferenceSpec) {
+func (r *RolloutInferenceRequest) SetRolloutInferenceSpec(rolloutInferenceSpec *jdaip.RolloutInferenceRequest) {
     r.RolloutInferenceSpec = rolloutInferenceSpec
 }
 

@@ -19,10 +19,10 @@ package models
 
 type UpdateLogConfigs struct {
 
-    /* 日志集id (Optional) */
+    /* 日志集id。示例：logset-jk****ny (Optional) */
     LogsetUID *string `json:"logsetUID"`
 
-    /* 日志主题id (Optional) */
+    /* 日志主题id。示例：logtopic-vy****va (Optional) */
     LogtopicUID *string `json:"logtopicUID"`
 
     /* 使用任务模块：可选值：

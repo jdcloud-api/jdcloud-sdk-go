@@ -19,13 +19,18 @@ package models
 
 type UpdateImageParam struct {
 
-    /* 镜像名称(1~128字符，仅支持小写字母、数字、英文中划线 “-”、英文下划线“_”和点 “.”，只能以字母开头) (Optional) */
+    /* 镜像名称(1~128字符，仅支持小写字母、数字、英文中划线“-”、英文下划线“_”和点 “.”，只能以字母开头) (Optional) */
     ImageName string `json:"imageName"`
 
-    /* 镜像用途,多个用英文逗号拼接，可选值：
-- notebook Notebook
-- training 训练任务
-- inference 在线服务
+    /* 镜像用途，多个使用英文逗号,拼接，可选值：
+- notebook:Notebook
+- training:训练任务
+- inference:在线服务，
+- finetune:精调实验
+- simulation:仿真任务
+- offlineTask:离线任务
+
+示例：notebook,training,inference
  (Optional) */
     ImageUsage string `json:"imageUsage"`
 

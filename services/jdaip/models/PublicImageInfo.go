@@ -19,37 +19,43 @@ package models
 
 type PublicImageInfo struct {
 
-    /* 镜像 iD (Optional) */
+    /* 镜像ID。 示例：img-lh****3p (Optional) */
     ImageId string `json:"imageId"`
 
     /* 镜像名称 (Optional) */
     ImageName string `json:"imageName"`
 
     /* 镜像用途，可选值：
-- notebook 开发
-- training 训练，
-- inference 推理
+- notebook:Notebook
+- training:训练任务
+- inference:在线服务，
+- finetune:精调实验
+- simulation:仿真任务
+- offlineTask:离线任务
+
+示例：notebook,training,inference
  (Optional) */
     ImageUsage string `json:"imageUsage"`
 
     /* 镜像类型：cpu,gpu (Optional) */
     ImageType string `json:"imageType"`
 
-    /* 镜像地址 (Optional) */
+    /* 镜像地址。
+示例：aip-public-sq-cn-east-1.jcr.service.jdcloud.com/serving/vllm:minimaxm3-vllm0.1.dev17492-pytorch2.11.0-transformers5.11.0-cu13.0-gpu-py3.12.13-ubuntu22.04
+ (Optional) */
     ImageUrl string `json:"imageUrl"`
 
     /* 注册方式，可选值：
-- jcr 容器镜像仓库注册
-- dockerfile Dockerfile方式构建
-- notebook：notebook方式构建
-- base-image 基于基础镜像构建
+- jcr 容器镜像仓库注册，公共镜像仅支持已有镜像注册
  (Optional) */
     SourceType string `json:"sourceType"`
 
-    /* 标签，使用英文逗号拼接。例如：label1,label2,label3 (Optional) */
+    /* 标签，使用英文逗号拼接。
+示例：baseinfo:vllm0.25.0,baseinfo:pytorch2.11.0,baseinfo:transformers5.13.0,baseinfo:cuda13.0,baseinfo:gpu,baseinfo:python3.12.3,baseinfo:ubuntu24.04,baseinfo:jupyterlab,baseinfo:vscode,protocol:http,protocol:grpc
+ (Optional) */
     Labels string `json:"labels"`
 
-    /* 标签，labels转换的数组格式。 (Optional) */
+    /* 标签，labels转换的数组格式, 仅包含baseinfo对应的标签。 (Optional) */
     LabelList []string `json:"labelList"`
 
     /* 镜像启动命令。 (Optional) */

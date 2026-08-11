@@ -37,6 +37,9 @@ type NodePoolSimple struct {
     /* 状态，creating:创建中；ready:运行中；fail:创建失败 (Optional) */
     Status string `json:"status"`
 
+    /* 是否支持rdma网络 (Optional) */
+    Rdma bool `json:"rdma"`
+
     /* 错误信息 (Optional) */
     Msg string `json:"msg"`
 
@@ -60,4 +63,73 @@ type NodePoolSimple struct {
 
     /* 节点IP列表 (Optional) */
     NodeIps []string `json:"nodeIps"`
+
+    /* Controller节点组别名 (Optional) */
+    Alias string `json:"alias"`
+
+    /* Controller节点组备注 (Optional) */
+    Note string `json:"note"`
+
+    /* Controller节点组节点数量；不覆盖原 nodeCount 字段 (Optional) */
+    ControllerNodeCount int64 `json:"controllerNodeCount"`
+
+    /* 各显卡型号的显卡总数 (Optional) */
+    DeviceCount interface{} `json:"deviceCount"`
+
+    /* 节点组资源总量 (Optional) */
+    Capacity GPUResourceFloat `json:"capacity"`
+
+    /* 节点组已分配资源 (Optional) */
+    Used GPUResourceFloat `json:"used"`
+
+    /* 节点组实时使用资源 (Optional) */
+    LiveUsage GPUResourceFloat `json:"liveUsage"`
+
+    /* 节点调度策略 (Optional) */
+    NodeSchedulerStrategy string `json:"nodeSchedulerStrategy"`
+
+    /* 显卡调度策略 (Optional) */
+    DeviceSchedulerStrategy string `json:"deviceSchedulerStrategy"`
+
+    /* Controller返回的集群ID；不覆盖原 cluster 对象 (Optional) */
+    ControllerCluster string `json:"controllerCluster"`
+
+    /* 是否默认节点池 (Optional) */
+    IsDefault bool `json:"isDefault"`
+
+    /* Controller节点组运行模式 (Optional) */
+    OperationMode string `json:"operationMode"`
+
+    /* 资源组已使用资源 (Optional) */
+    ResourceGroupUsed GPUResourceFloat `json:"resourceGroupUsed"`
+
+    /* 各显卡型号开启算力切分的显卡数量 (Optional) */
+    DeviceVgpuCount interface{} `json:"deviceVgpuCount"`
+
+    /* 各显卡型号未开启算力切分的显卡数量 (Optional) */
+    DeviceGpuCount interface{} `json:"deviceGpuCount"`
+
+    /* 绑定资源组数量 (Optional) */
+    ResourceGroupCount int64 `json:"resourceGroupCount"`
+
+    /* 关联队列数量 (Optional) */
+    ResourceQueueCount int64 `json:"resourceQueueCount"`
+
+    /* 运行中任务数量 (Optional) */
+    RunningTaskCount int64 `json:"runningTaskCount"`
+
+    /* Pod数量 (Optional) */
+    PodCount int64 `json:"podCount"`
+
+    /* 已分配节点数量 (Optional) */
+    NodeAllocatedCount int64 `json:"nodeAllocatedCount"`
+
+    /* 已使用显卡数量 (Optional) */
+    DeviceUsedCount int64 `json:"deviceUsedCount"`
+
+    /* 已分配显卡数量 (Optional) */
+    DeviceAllocatedCount int64 `json:"deviceAllocatedCount"`
+
+    /* Controller节点组ID (Optional) */
+    NodeGroupId string `json:"nodeGroupId"`
 }

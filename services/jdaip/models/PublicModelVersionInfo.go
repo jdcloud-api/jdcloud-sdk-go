@@ -66,22 +66,38 @@ type PublicModelVersionInfo struct {
  (Optional) */
     StorageUri string `json:"storageUri"`
 
-    /* 存储ID cfs或jpfs时使用，例如：fs-60z1s969ui (Optional) */
+    /* 存储ID cfs或jpfs时使用，例如：fs-60****ui (Optional) */
     StorageId string `json:"storageId"`
 
     /* cfsVpcId (Optional) */
     CfsVpcId string `json:"cfsVpcId"`
 
-    /* 模型介绍。 (Optional) */
+    /* 模型介绍md文件。 (Optional) */
     ModelIntroduction string `json:"modelIntroduction"`
 
-    /* 标签，多个标签使用英文逗号拼接。例如：label1,label2,label3 (Optional) */
+    /* 标签。多个标签使用英文逗号拼接，每个标签格式 key:value。
+key值说明
+  - scenario 任务场景
+  - provider 品牌/系列
+  - license 模型许可类型
+  - parameterSize 模型大小
+  - keyword 其他关键词，可设置多个
+  - icon 模型icon地址。例如：https://yanxi-public-sq.s3.cn-east-1.jdcloud-oss.com/models/Qwen3-235B-A22B-Instruct-2507/qwen-color.svg
+  - support.task 支持的任务模块，可设置多个，可选值：notebook:Notebook，trainjob:训练任务，finetune:精调实验，llm-deploy:在线服务-LLM部署，custom-deploy:在线服务-自定义部署
+  - finetune.model_template 精调关注（模型版本，如llama2、llama3）
+  - finetune.model_series 精调关注（模型系列，如llama、qwen）
+  - finetune.model_billing_item 精调实验计费项中的模型命名
+
+例如：scenario:文本生成,provider:DeepSeek,license:MIT,parameterSize:158.07B,icon:https://yanxi-public-sq.s3.cn-east-1.jdcloud-oss.com/models/DeepSeek-V3.2/deepseek-color.svg,support.task:notebook,support.task:trainjob,support.task:custom-deploy
+ (Optional) */
     Labels string `json:"labels"`
 
     /* 标签map格式 (Optional) */
     LabelsMap interface{} `json:"labelsMap"`
 
-    /* 标签对象 (Optional) */
+    /* 标签对象。
+labels转化对象， key:value中key值如果有._会删除转发成驼峰式。 如aaa.bbb_ccc换成aaaBbbCcc
+ (Optional) */
     LabelsObject LabelsObject `json:"labelsObject"`
 
     /* 模型类型。 (Optional) */

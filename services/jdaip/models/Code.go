@@ -26,5 +26,5 @@ type Code struct {
     MountPath string `json:"mountPath"`
 
     /* 代码配置名称 (Optional) */
-    RepoName string `json:"repoName"`
+    RepoName *string `json:"repoName"`
 }

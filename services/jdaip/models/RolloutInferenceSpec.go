@@ -22,14 +22,17 @@ type RolloutInferenceSpec struct {
     /* 推理服务ID  */
     InferenceId string `json:"inferenceId"`
 
-    /* 回滚指定ID (Optional) */
+    /* 复用历史滚动记录ID；指定时可基于该历史记录重新发起滚动更新 (Optional) */
     RolloutId *string `json:"rolloutId"`
 
-    /*   */
+    /* 运行时配置；当 rolloutId 为空时必填 (Optional) */
     Runtime *Runtime `json:"runtime"`
 
-    /*   */
+    /* 模型配置；不传时按空数组处理，指定 rolloutId 时可选 (Optional) */
     Models []Model `json:"models"`
+
+    /* 代码挂载配置；不传时按空数组处理，指定 rolloutId 时可选 (Optional) */
+    Codes []Code `json:"codes"`
 
     /* 最大超预期实例数  */
     MaxSurge int `json:"maxSurge"`

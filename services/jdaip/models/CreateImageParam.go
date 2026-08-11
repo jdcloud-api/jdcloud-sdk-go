@@ -19,42 +19,55 @@ package models
 
 type CreateImageParam struct {
 
-    /* 镜像名称(1~128字符，仅支持小写字母、数字、英文中划线 “-”、英文下划线“_”和点 “.”，只能以字母开头) (Optional) */
+    /* 镜像名称。
+命名规则：1~128字符，仅支持小写字母、数字、英文中划线“-”、英文下划线“_”和点 “.”，只能以字母开头
+ (Optional) */
     ImageName *string `json:"imageName"`
 
     /* 镜像用途,多个用英文逗号拼接，可选值：
-- notebook Notebook
-- training 训练任务
-- inference 在线服务
+- notebook:Notebook
+- training:训练任务
+- inference:在线服务，
+- finetune:精调实验
+- simulation:仿真任务
+- offlineTask:离线任务
+
+示例：notebook,training,inference
  (Optional) */
     ImageUsage *string `json:"imageUsage"`
 
     /* 镜像类型：cpu,gpu (Optional) */
     ImageType *string `json:"imageType"`
 
-    /* 注册/构建后的镜像地址 (Optional) */
+    /* 注册/构建后的镜像地址
+示例：k8stest-sq-cn-east-1.jcr.service.jdcloud.com/train/test:tag-test
+ (Optional) */
     ImageUrl *string `json:"imageUrl"`
 
     /* 注册方式，可选值：
-- jcr 容器镜像仓库注册
-- dockerfile Dockerfile方式构建
-- notebook：notebook方式构建
+- jcr: 容器镜像仓库注册
+- dockerfile: Dockerfile方式构建
+- notebook: notebook保存镜像
  (Optional) */
     SourceType *string `json:"sourceType"`
 
-    /* 标签，使用英文逗号拼接。例如：label1,label2,label3 (Optional) */
+    /* 标签，使用英文逗号拼接。示例：label1,label2,label3 (Optional) */
     Labels *string `json:"labels"`
 
-    /* dockerfile文件内容。基于Dockerfile方式构建时生效必传 (Optional) */
+    /* dockerfile文件内容。基于Dockerfile方式构建时生效必传。
+示例：
+  FROM aip-public-cn-north-1.jcr.service.jdcloud.com/train/jupyter-cuda13.0.1-cudnn-devel-ubuntu24.04
+  RUN pip install numpy pandas scikit-learn
+ (Optional) */
     Dockerfile *string `json:"dockerfile"`
 
-    /* 队列ID。基于Dockerfile方式构建时生效必传。 (Optional) */
+    /* 【废弃-暂不可用】队列ID。基于Dockerfile方式构建时生效必传。 (Optional) */
     QueueId *string `json:"queueId"`
 
-    /* CPU大小，单位：核。基于Dockerfile方式构建时生效必传 (Optional) */
+    /* 【废弃-暂不可用】CPU大小，单位：核。基于Dockerfile方式构建时生效必传 (Optional) */
     Cpu *int `json:"cpu"`
 
-    /* 内存大小，单位：GB。基于Dockerfile方式构建时生效必传 (Optional) */
+    /* 【废弃-暂不可用】内存大小，单位：GB。基于Dockerfile方式构建时生效必传 (Optional) */
     Memory *int `json:"memory"`
 
     /* 工作空间中的资源归属权限，支持(public,private)，默认为public。 (Optional) */

@@ -66,7 +66,7 @@ type ModelVersionInfo struct {
  (Optional) */
     StorageUri string `json:"storageUri"`
 
-    /* 存储ID cfs或jpfs时使用，例如：fs-60z1s969ui (Optional) */
+    /* 存储ID cfs或jpfs时使用，例如：fs-60****ui (Optional) */
     StorageId string `json:"storageId"`
 
     /* cfsVpcId (Optional) */
@@ -102,7 +102,7 @@ type ModelVersionInfo struct {
     /* 注册来源对应的ID：训练任务ID/精调实验ID等 (Optional) */
     ExperimentId string `json:"experimentId"`
 
-    /* experimentId的运行记录id (Optional) */
+    /* 训练任务/精调实验等的运行记录id (Optional) */
     ExperimentRunId string `json:"experimentRunId"`
 
     /* 归属用户名称。 (Optional) */
@@ -111,6 +111,6 @@ type ModelVersionInfo struct {
     /* 归属用户pin。 (Optional) */
     OwnerUserPin string `json:"ownerUserPin"`
 
-    /* 工作空间中的资源归属权限。 (Optional) */
+    /* 模型资源归属权限，支持(public,private)。 (Optional) */
     Permission string `json:"permission"`
 }

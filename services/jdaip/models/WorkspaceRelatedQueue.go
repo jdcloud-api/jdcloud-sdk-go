@@ -19,7 +19,7 @@ package models
 
 type WorkspaceRelatedQueue struct {
 
-    /* 队列id。 (Optional) */
+    /* 队列id。示例：queue-2xxx**********2d*********8b8 (Optional) */
     QueueId *string `json:"queueId"`
 
     /* true支持所有任务模块,默认true (Optional) */
@@ -30,14 +30,13 @@ type WorkspaceRelatedQueue struct {
 - training:训练任务
 - inference:在线服务，
 - finetune:精调实验
+- simulation:仿真任务
+- offlineTask:离线任务
  (Optional) */
     QueueModules []string `json:"queueModules"`
 
     /* true所有成员可用,默认true (Optional) */
     AllMemberSupported *bool `json:"allMemberSupported"`
-
-    /* 调度测略 (Optional) */
-    SchedulePolicy *SchedulePolicy `json:"schedulePolicy"`
 
     /* 队列可用成员，子账号pin，allUserSupported=false生效 (Optional) */
     QueueMemberPins []string `json:"queueMemberPins"`

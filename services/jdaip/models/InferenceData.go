@@ -73,9 +73,6 @@ type InferenceData struct {
     /* 用户标签 (Optional) */
     UserTags []UserTag `json:"userTags"`
 
-    /* 调度优先级 (Optional) */
-    SchedulePriority SchedulePriority `json:"schedulePriority"`
-
     /* 资源组信息 (Optional) */
     ResourceGroupInfo ResourceGroupInfo `json:"resourceGroupInfo"`
 }

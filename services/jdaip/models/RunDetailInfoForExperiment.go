@@ -115,9 +115,6 @@ type RunDetailInfoForExperiment struct {
  (Optional) */
     ResourceGroupName string `json:"resourceGroupName"`
 
-    /* 调度优先级配置。 (Optional) */
-    SchedulePriority SchedulePriority `json:"schedulePriority"`
-
     /* 用户自定义标签列表。
  (Optional) */
     UserTags []RunTag `json:"userTags"`

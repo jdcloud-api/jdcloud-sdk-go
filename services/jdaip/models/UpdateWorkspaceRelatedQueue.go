@@ -30,6 +30,8 @@ type UpdateWorkspaceRelatedQueue struct {
 - training:训练任务
 - inference:在线服务，
 - finetune:精调实验
+- simulation:仿真任务
+- offlineTask:离线任务
  (Optional) */
     QueueModules []string `json:"queueModules"`
 
@@ -38,7 +40,4 @@ type UpdateWorkspaceRelatedQueue struct {
 
     /* 队列可用成员，子账号pin，allUserSupported=false生效 (Optional) */
     QueueMemberPins []string `json:"queueMemberPins"`
-
-    /* 调度测略 (Optional) */
-    SchedulePolicy SchedulePolicy `json:"schedulePolicy"`
 }

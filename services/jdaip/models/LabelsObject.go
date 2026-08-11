@@ -19,31 +19,37 @@ package models
 
 type LabelsObject struct {
 
-    /* 精调实验计费项中的模型命名 (Optional) */
+    /* 精调实验计费项中的模型命名。仅一个value值 (Optional) */
     FinetuneModelBillingItem []string `json:"finetuneModelBillingItem"`
 
-    /* 精调实验关注（模型系列，如Llama系列-前端使用） (Optional) */
+    /* 精调实验关注（模型系列，如Llama系列-前端使用）。仅一个value值 (Optional) */
     FinetuneModelSeries []string `json:"finetuneModelSeries"`
 
-    /* 精调实验关注（模型版本系列，如Llama2、Llama3-后端使用） (Optional) */
+    /* 精调实验关注（模型版本系列，如Llama2、Llama3-后端使用）。仅一个value值 (Optional) */
     FinetuneModelTemplate []string `json:"finetuneModelTemplate"`
 
-    /* 支持平台任务类型 (Optional) */
+    /* 支持平台任务类型，可设置多个。可选值：
+- notebook:Notebook
+- trainjob:训练任务
+- finetune:精调实验
+- llm-deploy:在线服务-LLM部署
+- custom-deploy:在线服务-自定义部署
+ (Optional) */
     SupportTask []string `json:"supportTask"`
 
-    /* 模型icon地址 (Optional) */
+    /* 模型icon地址。仅一个value值 (Optional) */
     Icon []string `json:"icon"`
 
     /* 其他关键词，可设置多个 (Optional) */
     Keyword []string `json:"keyword"`
 
-    /* 模型参数 (Optional) */
+    /* 模型参数。仅一个value值 (Optional) */
     ParameterSize []string `json:"parameterSize"`
 
-    /* 模型许可类型 (Optional) */
+    /* 模型许可类型。仅一个value值 (Optional) */
     License []string `json:"license"`
 
-    /* 品牌/系列 (Optional) */
+    /* 品牌/系列。仅一个value值 (Optional) */
     Provider []string `json:"provider"`
 
     /* 场景，可设置多个 (Optional) */

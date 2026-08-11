@@ -23,7 +23,7 @@ type SchedulePriority struct {
 - **SystemSchedulePriority**：系统预置优先级
 - **CustomSchedulePriority**：自定义优先级
  (Optional) */
-    PriorityType *string `json:"priorityType"`
+    PriorityType string `json:"priorityType"`
 
     /* 调度优先级名称，全局唯一。
 系统预置优先级：
@@ -31,10 +31,10 @@ type SchedulePriority struct {
 - middle-priority：中
 - normal-priority：低
  (Optional) */
-    PriorityName *string `json:"priorityName"`
+    PriorityName string `json:"priorityName"`
 
     /* 调度优先级中文名 (Optional) */
-    PriorityCNName *string `json:"priorityCNName"`
+    PriorityCNName string `json:"priorityCNName"`
 
     /* 优先级数值，数值越大，优先级越高。
 系统预置优先级数值
@@ -42,5 +42,5 @@ type SchedulePriority struct {
 - middle-priority: 50000
 - normal-priority: 10000
  (Optional) */
-    PriorityValue *int `json:"priorityValue"`
+    PriorityValue int `json:"priorityValue"`
 }

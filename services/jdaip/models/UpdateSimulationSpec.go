@@ -19,6 +19,10 @@ package models
 
 type UpdateSimulationSpec struct {
 
+    /* 任务优先级，取值范围1~9,传null表示不修改此字段。
+ (Optional) */
+    TaskPriority int `json:"taskPriority"`
+
     /* 镜像配置。传null表示不修改此字段。
  (Optional) */
     ImageSpec EsImageSpec `json:"imageSpec"`

@@ -22,6 +22,10 @@ type WorkspaceRuntimePolicy struct {
     /* 运行时长配置(小时) (Optional) */
     RuntimeHour int `json:"runtimeHour"`
 
-    /* 运行时长配置-生效的资源队列id (Optional) */
+    /* 运行时长配置-生效的资源队列id, 可选值：
+- 空间已绑定的专属队列，示例：queue-2xxx**********2d*********8b8
+- joybuilder-public-queue 公共队列
+- joybuilder-exclusive-queue 专享队列
+ (Optional) */
     QueueIds []string `json:"queueIds"`
 }

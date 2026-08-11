@@ -29,6 +29,21 @@ type RoleResourceParamForJob struct {
  (Optional) */
     QueueId *string `json:"queueId"`
 
+    /* RDMA 开关，控制是否为该任务开启 RDMA 高速网络。
+
+**生效范围：** 仅对专属资源池中的GPU分布式任务生效，含CPU或非整卡的任务不生效，单实例任务不生效；公共资源池不生效。
+
+**可选值：**
+- `on`：开启 RDMA
+- `off`：关闭 RDMA
+
+**默认值（不设置时）：**
+- GPU 分布式任务：默认为 `on`；若所选计算资源不支持 RDMA，必须显式传 `off` 关闭。
+- 单实例任务：默认为 `off`。
+- 带CPU的任务：默认为 `off`。
+ (Optional) */
+    RdmaSwitch *string `json:"rdmaSwitch"`
+
     /* 角色资源配置详细信息列表。
 
 **配置规则：**

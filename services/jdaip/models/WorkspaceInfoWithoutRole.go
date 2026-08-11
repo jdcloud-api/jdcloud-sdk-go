@@ -34,7 +34,7 @@ type WorkspaceInfoWithoutRole struct {
     /* 创建时间 (Optional) */
     CreateTime string `json:"createTime"`
 
-    /* 资源队列ID (Optional) */
+    /* 空间资源队列ID (Optional) */
     ResourceQueueId []string `json:"resourceQueueId"`
 
     /* 创建用户账号 (Optional) */
@@ -49,6 +49,6 @@ type WorkspaceInfoWithoutRole struct {
     /* 更新用户账号 (Optional) */
     UpdateUser string `json:"updateUser"`
 
-    /* 当前查询用户对应空间角色：admin管理员，developer开发者，visitor访客。 (Optional) */
+    /* 当前查询用户对应的空间角色：admin管理员，developer开发者，visitor访客。 (Optional) */
     MemberRole string `json:"memberRole"`
 }

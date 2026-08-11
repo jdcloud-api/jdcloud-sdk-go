@@ -31,6 +31,10 @@ type WorkspaceIdlePolicy struct {
     /* 内存利用率阈值，0表示未配置 (Optional) */
     MemoryPercentThreshold float64 `json:"memoryPercentThreshold"`
 
-    /* 闲置策略配置-生效的资源队列id (Optional) */
+    /* 列闲置配置-生效的资源队列id, 可选值：
+- 空间已绑定的专属队列，示例：queue-2xxx**********2d*********8b8
+- joybuilder-public-queue 公共队列
+- joybuilder-exclusive-queue 专享队
+ (Optional) */
     QueueIds []string `json:"queueIds"`
 }

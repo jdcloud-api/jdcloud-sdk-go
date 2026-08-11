@@ -35,5 +35,8 @@ type RealTimeResourceStatisticsItem struct {
     AllocatedRate string `json:"allocatedRate"`
 
     /* 已分配资源使用率 (Optional) */
-    UsedUtilization string `json:"usedUtilization"`
+    UsedUtilization interface{} `json:"usedUtilization"`
+
+    /* 已分配资源使用率 (Optional) */
+    AllocatedUtilization interface{} `json:"allocatedUtilization"`
 }

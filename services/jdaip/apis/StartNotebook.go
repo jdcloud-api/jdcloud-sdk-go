@@ -41,7 +41,7 @@ type StartNotebookRequest struct {
  (Optional) */
     WorkloadSpec *jdaip.WorkloadSpec `json:"workloadSpec"`
 
-    /* 只支持私有资源池中的Notebook可以更换公网访问配置。不需要更换时需要传null。 (Optional) */
+    /* 只支持私有资源池中的Notebook可以更换公网访问配置，公共资源池可通过lbEnable=true开启公网访问。不需要更换时需要传null。 (Optional) */
     LbSpec *jdaip.LbSpec `json:"lbSpec"`
 
     /* 是否移除公网访问配置。 (Optional) */
@@ -83,7 +83,7 @@ func NewStartNotebookRequest(
 在公共资源池中的Notebook不允许变更资源配置，只能传null。
 在私有资源池中的Notebook不允许变更为公共资源池，但允许更换私有资源池中的其它队列。
  (Optional)
- * param lbSpec: 只支持私有资源池中的Notebook可以更换公网访问配置。不需要更换时需要传null。 (Optional)
+ * param lbSpec: 只支持私有资源池中的Notebook可以更换公网访问配置，公共资源池可通过lbEnable=true开启公网访问。不需要更换时需要传null。 (Optional)
  * param removeLb: 是否移除公网访问配置。 (Optional)
  */
 func NewStartNotebookRequestWithAllParams(
@@ -144,7 +144,7 @@ func (r *StartNotebookRequest) SetNotebookId(notebookId string) {
 func (r *StartNotebookRequest) SetWorkloadSpec(workloadSpec *jdaip.WorkloadSpec) {
     r.WorkloadSpec = workloadSpec
 }
-/* param lbSpec: 只支持私有资源池中的Notebook可以更换公网访问配置。不需要更换时需要传null。(Optional) */
+/* param lbSpec: 只支持私有资源池中的Notebook可以更换公网访问配置，公共资源池可通过lbEnable=true开启公网访问。不需要更换时需要传null。(Optional) */
 func (r *StartNotebookRequest) SetLbSpec(lbSpec *jdaip.LbSpec) {
     r.LbSpec = lbSpec
 }

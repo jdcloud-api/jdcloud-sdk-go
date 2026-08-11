@@ -19,19 +19,20 @@ package models
 
 type CreatePublicDatasetParam struct {
 
-    /* 数据集ID，（创建新版本生效，必填） (Optional) */
+    /* 数据集ID，（创建【新版本】生效且必填） (Optional) */
     DatasetId string `json:"datasetId"`
 
-    /* 数据集名称，（创建新数据集生效，必填） (Optional) */
+    /* 数据集名称，（创建【新数据集生效，必填） (Optional) */
     DatasetName string `json:"datasetName"`
 
-    /* 数据集类型（创建新数据集生效，必填）：| 数据集类型，可选值： - text：文本 - image：图像 - custom：自定义 (Optional) */
+    /* 数据集类型（创建【新数据集生效，必填）：| 数据集类型，可选值： - text：文本 - image：图像 - custom：自定义 (Optional) */
     DatasetType string `json:"datasetType"`
 
-    /* 任务类型（创建新数据集生效，必填），可选值：
-- sft：文本维度
-- dpo：文本维度
-- cpt：文本维度-增量预训练
+    /* 任务类型（创建【新数据集】生效，必填），可选值：
+- sft：文本生成-SFT指令微调
+- dpo：文本生成-DPO偏好训练
+- cpt：文本生成-增量预训练
+- distill：文本生成-模型蒸馏
 - image-classification：图像维度-图像分类
 - custom：自定义
  (Optional) */
@@ -40,10 +41,7 @@ type CreatePublicDatasetParam struct {
     /* 数据集描述，创建新版本时为版本描述 (Optional) */
     Description string `json:"description"`
 
-    /* 存储类型（数据集来源），可选值：
-- oss
-- cfs
-- jpfs
+    /* 存储类型（数据集来源），公共数据集仅支持oss
  (Optional) */
     StorageType string `json:"storageType"`
 
@@ -56,7 +54,17 @@ type CreatePublicDatasetParam struct {
     /* 存储ID，storageType=cfs或jpfs时必传，例如：fs-60z1s969ui (Optional) */
     StorageId string `json:"storageId"`
 
-    /* 标签，多个标签使用英文逗号拼接。例如：label1,label2,label3 (Optional) */
+    /* 标签。多个标签使用英文逗号拼接，每个标签格式 key:value。
+key值说明
+  - scenario任务场景
+  - language语言
+  - license开源协议
+  - datasize数据大小
+  - keyword其他关键词，可设置多个
+  - support.task支持的任务模块，可设置多个，可选值：notebook、trainjob训练任务、finetune模型精调、distill模型蒸馏、simulation仿真任务
+
+例如：scenario:文本生成,language:中文,license:Apache License 2.0,datasize:810.65MB,support.task:notebook,support.task:trainjob,support.task:finetune
+ (Optional) */
     Labels string `json:"labels"`
 
     /* 数据集介绍 (Optional) */

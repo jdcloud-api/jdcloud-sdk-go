@@ -92,11 +92,15 @@ type JobDetailInfoForJob struct {
  (Optional) */
     Resource ResourceParamForJob `json:"resource"`
 
-    /* 存储空间配置列表。 (Optional) */
+    /* 存储空间配置列表（外部共享存储，JSON 字符串）。 (Optional) */
     StorageSpaces string `json:"storageSpaces"`
 
-    /* 存储空间配置列表。 (Optional) */
+    /* 存储空间配置列表（外部共享存储：oss/cfs/jpfs）。 (Optional) */
     StorageSpacesObject []StorageSpaceDetailForJob `json:"storageSpacesObject"`
+
+    /* 本地存储挂载配置。未开启时为 null。
+ (Optional) */
+    LocalStorage LocalStorageDetailForJob `json:"localStorage"`
 
     /* 数据集。 (Optional) */
     Datasets []DatasetResultForJob `json:"datasets"`
@@ -118,6 +122,10 @@ type JobDetailInfoForJob struct {
 
     /* 角色配置信息。 (Optional) */
     RoleResource RoleResourceParamForJob `json:"roleResource"`
+
+    /* 出公网配置（任务级，仅公共资源池训练任务生效）。未配置时为 null。
+ (Optional) */
+    InternetEgress InternetEgressForJob `json:"internetEgress"`
 
     /* 框架高级配置；json格式。 (Optional) */
     AdvancedConfig string `json:"advancedConfig"`
@@ -142,9 +150,6 @@ type JobDetailInfoForJob struct {
 
     /* 用户自定义标签列表。 (Optional) */
     UserTags []JobTag `json:"userTags"`
-
-    /* 调度优先级 (Optional) */
-    SchedulePriority SchedulePriority `json:"schedulePriority"`
 
     /* 归属用户pin。 (Optional) */
     OwnerUserPin string `json:"ownerUserPin"`

@@ -25,10 +25,10 @@ type DataInfo struct {
     /* 所有文件总大小 (Optional) */
     TotalSize int `json:"totalSize"`
 
-    /* 所有文件总token数 (Optional) */
+    /* 所有文件总token数（-1 表示无统计数据，老数据兼容） (Optional) */
     TotalToken int `json:"totalToken"`
 
-    /* 所有文件总样本数 (Optional) */
+    /* 所有文件总样本数（-1 表示无统计数据，老数据兼容） (Optional) */
     TotalSampleSize int `json:"totalSampleSize"`
 
     /* 已标注数据总数 (Optional) */
