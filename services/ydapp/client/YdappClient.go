@@ -40,7 +40,7 @@ func NewYdappClient(credential *core.Credential) *YdappClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "ydapp",
-            Revision:    "1.0.0",
+            Revision:    "1.0.2",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -55,6 +55,26 @@ func (c *YdappClient) SetLogger(logger core.Logger) {
 
 func (c *YdappClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
+}
+
+/* 创建镜像编译流水线任务，返回流水线任务ID */
+func (c *YdappClient) CreatePipelineTask(request *ydapp.CreatePipelineTaskRequest) (*ydapp.CreatePipelineTaskResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.CreatePipelineTaskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
 }
 
 /* 分页获取应用信息列表 */
@@ -77,6 +97,26 @@ func (c *YdappClient) DescribeApps(request *ydapp.DescribeAppsRequest) (*ydapp.D
     return jdResp, err
 }
 
+/* 查询指定应用的镜像仓库自动删除策略配置 */
+func (c *YdappClient) DescribeAutoDeletePolicy(request *ydapp.DescribeAutoDeletePolicyRequest) (*ydapp.DescribeAutoDeletePolicyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.DescribeAutoDeletePolicyResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 创建新的部署任务，支持自定义镜像和标准镜像的部署 */
 func (c *YdappClient) Deploy(request *ydapp.DeployRequest) (*ydapp.DeployResponse, error) {
     if request == nil {
@@ -88,6 +128,26 @@ func (c *YdappClient) Deploy(request *ydapp.DeployRequest) (*ydapp.DeployRespons
     }
 
     jdResp := &ydapp.DeployResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 分页查询用户镜像仓库的编译镜像记录，支持多条件过滤 */
+func (c *YdappClient) DescribeImageRecords(request *ydapp.DescribeImageRecordsRequest) (*ydapp.DescribeImageRecordsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.DescribeImageRecordsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -157,6 +217,46 @@ func (c *YdappClient) DescribeGroupConfigFiles(request *ydapp.DescribeGroupConfi
     return jdResp, err
 }
 
+/* 根据UID删除指定的编译镜像记录 */
+func (c *YdappClient) DeleteImageRecord(request *ydapp.DeleteImageRecordRequest) (*ydapp.DeleteImageRecordResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.DeleteImageRecordResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 对指定制品包触发安全扫描 */
+func (c *YdappClient) ScanPackage(request *ydapp.ScanPackageRequest) (*ydapp.ScanPackageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.ScanPackageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 将分组回滚到指定的历史部署版本 */
 func (c *YdappClient) Rollback(request *ydapp.RollbackRequest) (*ydapp.RollbackResponse, error) {
     if request == nil {
@@ -217,6 +317,26 @@ func (c *YdappClient) DescribeGroups(request *ydapp.DescribeGroupsRequest) (*yda
     return jdResp, err
 }
 
+/* 将制品包与指定应用建立关联，返回流水线ID */
+func (c *YdappClient) LinkPackage(request *ydapp.LinkPackageRequest) (*ydapp.LinkPackageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.LinkPackageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 设置分组的容器反亲和性配置，控制Pod调度策略 */
 func (c *YdappClient) ContainerAntiAffinity(request *ydapp.ContainerAntiAffinityRequest) (*ydapp.ContainerAntiAffinityResponse, error) {
     if request == nil {
@@ -257,6 +377,46 @@ func (c *YdappClient) DeleteCustomImage(request *ydapp.DeleteCustomImageRequest)
     return jdResp, err
 }
 
+/* 获取指定应用下制品包的下载信息，包含名称、版本及预签名下载地址（preSignedUrl）。 调用方使用返回的 preSignedUrl 自行下载文件（该地址有鉴权、有效期有限）。 */
+func (c *YdappClient) GetPackageDownloadInfo(request *ydapp.GetPackageDownloadInfoRequest) (*ydapp.GetPackageDownloadInfoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.GetPackageDownloadInfoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询已发布的基础镜像列表，可按镜像类型过滤（JAVA、PHP、Nginx） */
+func (c *YdappClient) DescribeBaseImages(request *ydapp.DescribeBaseImagesRequest) (*ydapp.DescribeBaseImagesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.DescribeBaseImagesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 重建分组中的指定Pod实例 */
 func (c *YdappClient) Rebuild(request *ydapp.RebuildRequest) (*ydapp.RebuildResponse, error) {
     if request == nil {
@@ -268,6 +428,26 @@ func (c *YdappClient) Rebuild(request *ydapp.RebuildRequest) (*ydapp.RebuildResp
     }
 
     jdResp := &ydapp.RebuildResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除指定应用下的制品包 */
+func (c *YdappClient) DeletePackage(request *ydapp.DeletePackageRequest) (*ydapp.DeletePackageResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.DeletePackageResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -420,6 +600,66 @@ func (c *YdappClient) DescribeCustomImages(request *ydapp.DescribeCustomImagesRe
     return jdResp, err
 }
 
+/* 获取制品包预签名 PUT 上传地址。客户端使用返回的 presignedPutUrl 直接 PUT 上传文件， 上传成功后再用 finalUrl 调用关联接口（linkPackage）来关联包。 */
+func (c *YdappClient) GenerateUploadUrl(request *ydapp.GenerateUploadUrlRequest) (*ydapp.GenerateUploadUrlResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.GenerateUploadUrlResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 关闭指定应用的镜像仓库自动删除策略 */
+func (c *YdappClient) CloseAutoDeleteRepo(request *ydapp.CloseAutoDeleteRepoRequest) (*ydapp.CloseAutoDeleteRepoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.CloseAutoDeleteRepoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 为指定应用的镜像仓库开启自动删除策略，可配置保留数量上限 */
+func (c *YdappClient) OpenAutoDeleteRepo(request *ydapp.OpenAutoDeleteRepoRequest) (*ydapp.OpenAutoDeleteRepoResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.OpenAutoDeleteRepoResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 根据应用ID、分组ID和部署ID查询指定的部署任务详情 */
 func (c *YdappClient) DescribeDeployTask(request *ydapp.DescribeDeployTaskRequest) (*ydapp.DescribeDeployTaskResponse, error) {
     if request == nil {
@@ -431,6 +671,26 @@ func (c *YdappClient) DescribeDeployTask(request *ydapp.DescribeDeployTaskReques
     }
 
     jdResp := &ydapp.DescribeDeployTaskResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 分页查询指定应用下的制品包列表，支持按名称模糊搜索 */
+func (c *YdappClient) DescribePackages(request *ydapp.DescribePackagesRequest) (*ydapp.DescribePackagesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.DescribePackagesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
