@@ -30,4 +30,7 @@ type QueryWorkspaceInfoReq struct {
 
     /*  (Optional) */
     ResourceCode string `json:"resourceCode"`
+
+    /* 存算引擎实例编码 (Optional) */
+    EngineCode string `json:"engineCode"`
 }

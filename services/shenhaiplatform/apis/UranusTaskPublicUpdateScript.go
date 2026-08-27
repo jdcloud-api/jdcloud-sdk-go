@@ -35,6 +35,9 @@ type UranusTaskPublicUpdateScriptRequest struct {
 
     /* 任务脚本的内容 (Optional) */
     Content *string `json:"content"`
+
+    /* 内容编码方式。当值为 "base64" 时，content 字段为 base64 编码，需解码后使用；其他情况不处理 (Optional) */
+    ContentEncoding *string `json:"contentEncoding"`
 }
 
 /*
@@ -65,12 +68,14 @@ func NewUranusTaskPublicUpdateScriptRequest(
  * param appName: 应用名称 (Required)
  * param draftId: 草稿ID，用于标识该任务脚本信息所属的草稿 (Optional)
  * param content: 任务脚本的内容 (Optional)
+ * param contentEncoding: 内容编码方式。当值为 "base64" 时，content 字段为 base64 编码，需解码后使用；其他情况不处理 (Optional)
  */
 func NewUranusTaskPublicUpdateScriptRequestWithAllParams(
     regionId string,
     appName string,
     draftId *string,
     content *string,
+    contentEncoding *string,
 ) *UranusTaskPublicUpdateScriptRequest {
 
     return &UranusTaskPublicUpdateScriptRequest{
@@ -84,6 +89,7 @@ func NewUranusTaskPublicUpdateScriptRequestWithAllParams(
         AppName: appName,
         DraftId: draftId,
         Content: content,
+        ContentEncoding: contentEncoding,
     }
 }
 
@@ -115,6 +121,10 @@ func (r *UranusTaskPublicUpdateScriptRequest) SetDraftId(draftId string) {
 /* param content: 任务脚本的内容(Optional) */
 func (r *UranusTaskPublicUpdateScriptRequest) SetContent(content string) {
     r.Content = &content
+}
+/* param contentEncoding: 内容编码方式。当值为 "base64" 时，content 字段为 base64 编码，需解码后使用；其他情况不处理(Optional) */
+func (r *UranusTaskPublicUpdateScriptRequest) SetContentEncoding(contentEncoding string) {
+    r.ContentEncoding = &contentEncoding
 }
 
 

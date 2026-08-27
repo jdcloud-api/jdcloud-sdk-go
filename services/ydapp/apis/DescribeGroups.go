@@ -31,7 +31,7 @@ type DescribeGroupsRequest struct {
     /* 页码 (Optional) */
     PageNum *int `json:"pageNum"`
 
-    /* 每页数量(10-100) (Optional) */
+    /* 每页数量，默认10，最大100 (Optional) */
     PageSize *int `json:"pageSize"`
 }
 
@@ -58,7 +58,7 @@ func NewDescribeGroupsRequest(
 /*
  * param appId: 应用ID (Required)
  * param pageNum: 页码 (Optional)
- * param pageSize: 每页数量(10-100) (Optional)
+ * param pageSize: 每页数量，默认10，最大100 (Optional)
  */
 func NewDescribeGroupsRequestWithAllParams(
     appId string,
@@ -100,7 +100,7 @@ func (r *DescribeGroupsRequest) SetAppId(appId string) {
 func (r *DescribeGroupsRequest) SetPageNum(pageNum int) {
     r.PageNum = &pageNum
 }
-/* param pageSize: 每页数量(10-100)(Optional) */
+/* param pageSize: 每页数量，默认10，最大100(Optional) */
 func (r *DescribeGroupsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }

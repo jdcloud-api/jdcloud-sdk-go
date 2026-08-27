@@ -34,8 +34,14 @@ type WorkspaceParamResp struct {
     /* 参数类型描述 (Optional) */
     ParamTypeDesc string `json:"paramTypeDesc"`
 
-    /* 参数值 (Optional) */
+    /* 参数值(简单模式/通用) (Optional) */
     ParamValue string `json:"paramValue"`
+
+    /* 开发环境参数值(标准模式) (Optional) */
+    DevValue string `json:"devValue"`
+
+    /* 生产环境参数值(标准模式) (Optional) */
+    ProdValue string `json:"prodValue"`
 
     /* 责任人 (Optional) */
     Owner string `json:"owner"`

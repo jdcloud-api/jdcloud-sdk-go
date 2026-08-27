@@ -34,7 +34,7 @@ type DescribeDeploysRequest struct {
     /* 页码 (Optional) */
     PageNum *int `json:"pageNum"`
 
-    /* 每页数量(10-100) (Optional) */
+    /* 每页数量，默认10，最大100 (Optional) */
     PageSize *int `json:"pageSize"`
 }
 
@@ -65,7 +65,7 @@ func NewDescribeDeploysRequest(
  * param appId: 应用ID，E.g.，app-123456 (Required)
  * param groupId: 分组ID，E.g.，group-123456 (Required)
  * param pageNum: 页码 (Optional)
- * param pageSize: 每页数量(10-100) (Optional)
+ * param pageSize: 每页数量，默认10，最大100 (Optional)
  */
 func NewDescribeDeploysRequestWithAllParams(
     appId string,
@@ -113,7 +113,7 @@ func (r *DescribeDeploysRequest) SetGroupId(groupId string) {
 func (r *DescribeDeploysRequest) SetPageNum(pageNum int) {
     r.PageNum = &pageNum
 }
-/* param pageSize: 每页数量(10-100)(Optional) */
+/* param pageSize: 每页数量，默认10，最大100(Optional) */
 func (r *DescribeDeploysRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }

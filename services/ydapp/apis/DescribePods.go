@@ -34,7 +34,7 @@ type DescribePodsRequest struct {
     /* 页码 (Optional) */
     PageNum *int `json:"pageNum"`
 
-    /* 每页数量(10-100) (Optional) */
+    /* 每页数量，默认10，最大100 (Optional) */
     PageSize *int `json:"pageSize"`
 }
 
@@ -65,7 +65,7 @@ func NewDescribePodsRequest(
  * param appId: 应用ID (Required)
  * param groupId: 分组ID (Required)
  * param pageNum: 页码 (Optional)
- * param pageSize: 每页数量(10-100) (Optional)
+ * param pageSize: 每页数量，默认10，最大100 (Optional)
  */
 func NewDescribePodsRequestWithAllParams(
     appId string,
@@ -113,7 +113,7 @@ func (r *DescribePodsRequest) SetGroupId(groupId string) {
 func (r *DescribePodsRequest) SetPageNum(pageNum int) {
     r.PageNum = &pageNum
 }
-/* param pageSize: 每页数量(10-100)(Optional) */
+/* param pageSize: 每页数量，默认10，最大100(Optional) */
 func (r *DescribePodsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }

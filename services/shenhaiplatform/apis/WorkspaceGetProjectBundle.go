@@ -42,6 +42,9 @@ type WorkspaceGetProjectBundleRequest struct {
 
     /*  (Optional) */
     ResourceCode *string `json:"resourceCode"`
+
+    /* 存算引擎实例编码 (Optional) */
+    EngineCode *string `json:"engineCode"`
 }
 
 /*
@@ -74,6 +77,7 @@ func NewWorkspaceGetProjectBundleRequest(
  * param workspaceCode:  (Optional)
  * param projectCode:  (Optional)
  * param resourceCode:  (Optional)
+ * param engineCode: 存算引擎实例编码 (Optional)
  */
 func NewWorkspaceGetProjectBundleRequestWithAllParams(
     regionId string,
@@ -82,6 +86,7 @@ func NewWorkspaceGetProjectBundleRequestWithAllParams(
     workspaceCode *string,
     projectCode *string,
     resourceCode *string,
+    engineCode *string,
 ) *WorkspaceGetProjectBundleRequest {
 
     return &WorkspaceGetProjectBundleRequest{
@@ -97,6 +102,7 @@ func NewWorkspaceGetProjectBundleRequestWithAllParams(
         WorkspaceCode: workspaceCode,
         ProjectCode: projectCode,
         ResourceCode: resourceCode,
+        EngineCode: engineCode,
     }
 }
 
@@ -136,6 +142,10 @@ func (r *WorkspaceGetProjectBundleRequest) SetProjectCode(projectCode string) {
 /* param resourceCode: (Optional) */
 func (r *WorkspaceGetProjectBundleRequest) SetResourceCode(resourceCode string) {
     r.ResourceCode = &resourceCode
+}
+/* param engineCode: 存算引擎实例编码(Optional) */
+func (r *WorkspaceGetProjectBundleRequest) SetEngineCode(engineCode string) {
+    r.EngineCode = &engineCode
 }
 
 

@@ -42,6 +42,9 @@ type GetEngineDetailsByWorkspaceCodeRequest struct {
 
     /*  (Optional) */
     ResourceCode *string `json:"resourceCode"`
+
+    /* 存算引擎实例编码 (Optional) */
+    EngineCode *string `json:"engineCode"`
 }
 
 /*
@@ -74,6 +77,7 @@ func NewGetEngineDetailsByWorkspaceCodeRequest(
  * param workspaceCode:  (Optional)
  * param projectCode:  (Optional)
  * param resourceCode:  (Optional)
+ * param engineCode: 存算引擎实例编码 (Optional)
  */
 func NewGetEngineDetailsByWorkspaceCodeRequestWithAllParams(
     regionId string,
@@ -82,6 +86,7 @@ func NewGetEngineDetailsByWorkspaceCodeRequestWithAllParams(
     workspaceCode *string,
     projectCode *string,
     resourceCode *string,
+    engineCode *string,
 ) *GetEngineDetailsByWorkspaceCodeRequest {
 
     return &GetEngineDetailsByWorkspaceCodeRequest{
@@ -97,6 +102,7 @@ func NewGetEngineDetailsByWorkspaceCodeRequestWithAllParams(
         WorkspaceCode: workspaceCode,
         ProjectCode: projectCode,
         ResourceCode: resourceCode,
+        EngineCode: engineCode,
     }
 }
 
@@ -136,6 +142,10 @@ func (r *GetEngineDetailsByWorkspaceCodeRequest) SetProjectCode(projectCode stri
 /* param resourceCode: (Optional) */
 func (r *GetEngineDetailsByWorkspaceCodeRequest) SetResourceCode(resourceCode string) {
     r.ResourceCode = &resourceCode
+}
+/* param engineCode: 存算引擎实例编码(Optional) */
+func (r *GetEngineDetailsByWorkspaceCodeRequest) SetEngineCode(engineCode string) {
+    r.EngineCode = &engineCode
 }
 
 

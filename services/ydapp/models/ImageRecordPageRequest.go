@@ -37,6 +37,9 @@ type ImageRecordPageRequest struct {
     /* 记录状态，active-可用; deleted-已删除; building-编译中; failed-失败; timeout-获取结果超时，E.g.，active (Optional) */
     Status string `json:"status"`
 
-    /* 分页参数 (Optional) */
-    Page interface{} `json:"page"`
+    /* 页码，默认1 (Optional) */
+    PageNum int `json:"pageNum"`
+
+    /* 每页数量，默认10，最大100 (Optional) */
+    PageSize int `json:"pageSize"`
 }
