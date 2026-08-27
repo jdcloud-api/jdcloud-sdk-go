@@ -24,4 +24,7 @@ type TaskScriptInfoPublicRes struct {
 
     /* 任务脚本的内容 (Optional) */
     Content string `json:"content"`
+
+    /* 内容编码方式。当值为 "base64" 时，content 字段为 base64 编码，需解码后使用；其他情况不处理 (Optional) */
+    ContentEncoding string `json:"contentEncoding"`
 }

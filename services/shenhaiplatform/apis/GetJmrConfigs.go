@@ -21,7 +21,7 @@ import (
     shenhaiplatform "github.com/jdcloud-api/jdcloud-sdk-go/services/shenhaiplatform/models"
 )
 
-type WorkspaceGetInfoRequest struct {
+type GetJmrConfigsRequest struct {
 
     core.JDCloudRequest
 
@@ -31,20 +31,14 @@ type WorkspaceGetInfoRequest struct {
     /* 应用名称  */
     AppName string `json:"appName"`
 
-    /*  (Optional) */
-    Id *int `json:"id"`
-
-    /*  (Optional) */
-    WorkspaceCode *string `json:"workspaceCode"`
-
-    /*  (Optional) */
-    ProjectCode *string `json:"projectCode"`
-
-    /*  (Optional) */
-    ResourceCode *string `json:"resourceCode"`
-
-    /* 存算引擎实例编码 (Optional) */
+    /* 计算引擎Code (Optional) */
     EngineCode *string `json:"engineCode"`
+
+    /* 配置类型(如 core-site, hdfs-site 等，为空返回全部) (Optional) */
+    ConfigType *string `json:"configType"`
+
+    /* 环境类型(dev/prod) (Optional) */
+    Env *string `json:"env"`
 }
 
 /*
@@ -53,14 +47,14 @@ type WorkspaceGetInfoRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewWorkspaceGetInfoRequest(
+func NewGetJmrConfigsRequest(
     regionId string,
     appName string,
-) *WorkspaceGetInfoRequest {
+) *GetJmrConfigsRequest {
 
-	return &WorkspaceGetInfoRequest{
+	return &GetJmrConfigsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/apps/{appName}/workspaceGetInfo",
+			URL:     "/regions/{regionId}/apps/{appName}/getJmrConfigs",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v2",
@@ -73,45 +67,39 @@ func NewWorkspaceGetInfoRequest(
 /*
  * param regionId: 地域ID (Required)
  * param appName: 应用名称 (Required)
- * param id:  (Optional)
- * param workspaceCode:  (Optional)
- * param projectCode:  (Optional)
- * param resourceCode:  (Optional)
- * param engineCode: 存算引擎实例编码 (Optional)
+ * param engineCode: 计算引擎Code (Optional)
+ * param configType: 配置类型(如 core-site, hdfs-site 等，为空返回全部) (Optional)
+ * param env: 环境类型(dev/prod) (Optional)
  */
-func NewWorkspaceGetInfoRequestWithAllParams(
+func NewGetJmrConfigsRequestWithAllParams(
     regionId string,
     appName string,
-    id *int,
-    workspaceCode *string,
-    projectCode *string,
-    resourceCode *string,
     engineCode *string,
-) *WorkspaceGetInfoRequest {
+    configType *string,
+    env *string,
+) *GetJmrConfigsRequest {
 
-    return &WorkspaceGetInfoRequest{
+    return &GetJmrConfigsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/apps/{appName}/workspaceGetInfo",
+            URL:     "/regions/{regionId}/apps/{appName}/getJmrConfigs",
             Method:  "POST",
             Header:  nil,
             Version: "v2",
         },
         RegionId: regionId,
         AppName: appName,
-        Id: id,
-        WorkspaceCode: workspaceCode,
-        ProjectCode: projectCode,
-        ResourceCode: resourceCode,
         EngineCode: engineCode,
+        ConfigType: configType,
+        Env: env,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewWorkspaceGetInfoRequestWithoutParam() *WorkspaceGetInfoRequest {
+func NewGetJmrConfigsRequestWithoutParam() *GetJmrConfigsRequest {
 
-    return &WorkspaceGetInfoRequest{
+    return &GetJmrConfigsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/apps/{appName}/workspaceGetInfo",
+            URL:     "/regions/{regionId}/apps/{appName}/getJmrConfigs",
             Method:  "POST",
             Header:  nil,
             Version: "v2",
@@ -120,49 +108,41 @@ func NewWorkspaceGetInfoRequestWithoutParam() *WorkspaceGetInfoRequest {
 }
 
 /* param regionId: 地域ID(Required) */
-func (r *WorkspaceGetInfoRequest) SetRegionId(regionId string) {
+func (r *GetJmrConfigsRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 /* param appName: 应用名称(Required) */
-func (r *WorkspaceGetInfoRequest) SetAppName(appName string) {
+func (r *GetJmrConfigsRequest) SetAppName(appName string) {
     r.AppName = appName
 }
-/* param id: (Optional) */
-func (r *WorkspaceGetInfoRequest) SetId(id int) {
-    r.Id = &id
-}
-/* param workspaceCode: (Optional) */
-func (r *WorkspaceGetInfoRequest) SetWorkspaceCode(workspaceCode string) {
-    r.WorkspaceCode = &workspaceCode
-}
-/* param projectCode: (Optional) */
-func (r *WorkspaceGetInfoRequest) SetProjectCode(projectCode string) {
-    r.ProjectCode = &projectCode
-}
-/* param resourceCode: (Optional) */
-func (r *WorkspaceGetInfoRequest) SetResourceCode(resourceCode string) {
-    r.ResourceCode = &resourceCode
-}
-/* param engineCode: 存算引擎实例编码(Optional) */
-func (r *WorkspaceGetInfoRequest) SetEngineCode(engineCode string) {
+/* param engineCode: 计算引擎Code(Optional) */
+func (r *GetJmrConfigsRequest) SetEngineCode(engineCode string) {
     r.EngineCode = &engineCode
+}
+/* param configType: 配置类型(如 core-site, hdfs-site 等，为空返回全部)(Optional) */
+func (r *GetJmrConfigsRequest) SetConfigType(configType string) {
+    r.ConfigType = &configType
+}
+/* param env: 环境类型(dev/prod)(Optional) */
+func (r *GetJmrConfigsRequest) SetEnv(env string) {
+    r.Env = &env
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r WorkspaceGetInfoRequest) GetRegionId() string {
+func (r GetJmrConfigsRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type WorkspaceGetInfoResponse struct {
+type GetJmrConfigsResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result WorkspaceGetInfoResult `json:"result"`
+    Result GetJmrConfigsResult `json:"result"`
 }
 
-type WorkspaceGetInfoResult struct {
+type GetJmrConfigsResult struct {
     Code string `json:"code"`
     Message string `json:"message"`
-    Result shenhaiplatform.WorkspaceInfoResp `json:"result"`
+    Result []shenhaiplatform.EngineJmrConfigResp `json:"result"`
 }

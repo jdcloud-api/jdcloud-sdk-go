@@ -40,7 +40,7 @@ func NewShenhaiplatformClient(credential *core.Credential) *ShenhaiplatformClien
             Credential:  *credential,
             Config:      *config,
             ServiceName: "shenhaiplatform",
-            Revision:    "1.0.2",
+            Revision:    "1.0.3",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -2917,6 +2917,26 @@ func (c *ShenhaiplatformClient) UranusTaskDebugResultList(request *shenhaiplatfo
     return jdResp, err
 }
 
+/* 通过计算引擎Code查询绑定的JMR引擎配置信息(支持按类型过滤) */
+func (c *ShenhaiplatformClient) GetJmrConfigs(request *shenhaiplatform.GetJmrConfigsRequest) (*shenhaiplatform.GetJmrConfigsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GetJmrConfigsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 任务重新发布 */
 func (c *ShenhaiplatformClient) UranusTaskInfoRePublish(request *shenhaiplatform.UranusTaskInfoRePublishRequest) (*shenhaiplatform.UranusTaskInfoRePublishResponse, error) {
     if request == nil {
@@ -5128,6 +5148,26 @@ func (c *ShenhaiplatformClient) UranusTaskDebugHistoryList(request *shenhaiplatf
     }
 
     jdResp := &shenhaiplatform.UranusTaskDebugHistoryListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 根据存算引擎实例编码查询对应的regionId */
+func (c *ShenhaiplatformClient) GetRegionByEngineCode(request *shenhaiplatform.GetRegionByEngineCodeRequest) (*shenhaiplatform.GetRegionByEngineCodeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GetRegionByEngineCodeResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

@@ -31,9 +31,6 @@ type GetInstancesRequest struct {
     /* 应用名称  */
     AppName string `json:"appName"`
 
-    /* 计算引擎Code (Optional) */
-    EngineCode *string `json:"engineCode"`
-
     /*  (Optional) */
     Id *int `json:"id"`
 
@@ -45,6 +42,9 @@ type GetInstancesRequest struct {
 
     /*  (Optional) */
     ResourceCode *string `json:"resourceCode"`
+
+    /* 存算引擎实例编码 (Optional) */
+    EngineCode *string `json:"engineCode"`
 }
 
 /*
@@ -73,20 +73,20 @@ func NewGetInstancesRequest(
 /*
  * param regionId: 地域ID (Required)
  * param appName: 应用名称 (Required)
- * param engineCode: 计算引擎Code (Optional)
  * param id:  (Optional)
  * param workspaceCode:  (Optional)
  * param projectCode:  (Optional)
  * param resourceCode:  (Optional)
+ * param engineCode: 存算引擎实例编码 (Optional)
  */
 func NewGetInstancesRequestWithAllParams(
     regionId string,
     appName string,
-    engineCode *string,
     id *int,
     workspaceCode *string,
     projectCode *string,
     resourceCode *string,
+    engineCode *string,
 ) *GetInstancesRequest {
 
     return &GetInstancesRequest{
@@ -98,11 +98,11 @@ func NewGetInstancesRequestWithAllParams(
         },
         RegionId: regionId,
         AppName: appName,
-        EngineCode: engineCode,
         Id: id,
         WorkspaceCode: workspaceCode,
         ProjectCode: projectCode,
         ResourceCode: resourceCode,
+        EngineCode: engineCode,
     }
 }
 
@@ -127,10 +127,6 @@ func (r *GetInstancesRequest) SetRegionId(regionId string) {
 func (r *GetInstancesRequest) SetAppName(appName string) {
     r.AppName = appName
 }
-/* param engineCode: 计算引擎Code(Optional) */
-func (r *GetInstancesRequest) SetEngineCode(engineCode string) {
-    r.EngineCode = &engineCode
-}
 /* param id: (Optional) */
 func (r *GetInstancesRequest) SetId(id int) {
     r.Id = &id
@@ -146,6 +142,10 @@ func (r *GetInstancesRequest) SetProjectCode(projectCode string) {
 /* param resourceCode: (Optional) */
 func (r *GetInstancesRequest) SetResourceCode(resourceCode string) {
     r.ResourceCode = &resourceCode
+}
+/* param engineCode: 存算引擎实例编码(Optional) */
+func (r *GetInstancesRequest) SetEngineCode(engineCode string) {
+    r.EngineCode = &engineCode
 }
 
 

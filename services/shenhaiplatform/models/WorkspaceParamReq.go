@@ -28,8 +28,14 @@ type WorkspaceParamReq struct {
     /* 参数类型 (Optional) */
     ParamType *string `json:"paramType"`
 
-    /* 参数值 (Optional) */
+    /* 参数值(简单模式) (Optional) */
     ParamValue *string `json:"paramValue"`
+
+    /* 开发环境参数值(标准模式) (Optional) */
+    DevValue *string `json:"devValue"`
+
+    /* 生产环境参数值(标准模式) (Optional) */
+    ProdValue *string `json:"prodValue"`
 
     /* 责任人 (Optional) */
     Owner *string `json:"owner"`

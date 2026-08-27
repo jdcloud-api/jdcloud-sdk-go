@@ -17,20 +17,14 @@
 package models
 
 
-type QueryWorkspaceInfoReq struct {
+type QueryJmrConfigReq struct {
 
-    /*  (Optional) */
-    Id int `json:"id"`
-
-    /*  (Optional) */
-    WorkspaceCode string `json:"workspaceCode"`
-
-    /*  (Optional) */
-    ProjectCode string `json:"projectCode"`
-
-    /*  (Optional) */
-    ResourceCode string `json:"resourceCode"`
-
-    /* 存算引擎实例编码 (Optional) */
+    /* 计算引擎Code (Optional) */
     EngineCode string `json:"engineCode"`
+
+    /* 配置类型(如 core-site, hdfs-site 等，为空返回全部) (Optional) */
+    ConfigType string `json:"configType"`
+
+    /* 环境类型(dev/prod) (Optional) */
+    Env string `json:"env"`
 }

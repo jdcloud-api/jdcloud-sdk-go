@@ -18,10 +18,9 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    shenhaiplatform "github.com/jdcloud-api/jdcloud-sdk-go/services/shenhaiplatform/models"
 )
 
-type WorkspaceGetProjectRequest struct {
+type GetRegionByEngineCodeRequest struct {
 
     core.JDCloudRequest
 
@@ -53,14 +52,14 @@ type WorkspaceGetProjectRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewWorkspaceGetProjectRequest(
+func NewGetRegionByEngineCodeRequest(
     regionId string,
     appName string,
-) *WorkspaceGetProjectRequest {
+) *GetRegionByEngineCodeRequest {
 
-	return &WorkspaceGetProjectRequest{
+	return &GetRegionByEngineCodeRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/apps/{appName}/workspaceGetProject",
+			URL:     "/regions/{regionId}/apps/{appName}/getRegionByEngineCode",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v2",
@@ -79,7 +78,7 @@ func NewWorkspaceGetProjectRequest(
  * param resourceCode:  (Optional)
  * param engineCode: 存算引擎实例编码 (Optional)
  */
-func NewWorkspaceGetProjectRequestWithAllParams(
+func NewGetRegionByEngineCodeRequestWithAllParams(
     regionId string,
     appName string,
     id *int,
@@ -87,11 +86,11 @@ func NewWorkspaceGetProjectRequestWithAllParams(
     projectCode *string,
     resourceCode *string,
     engineCode *string,
-) *WorkspaceGetProjectRequest {
+) *GetRegionByEngineCodeRequest {
 
-    return &WorkspaceGetProjectRequest{
+    return &GetRegionByEngineCodeRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/apps/{appName}/workspaceGetProject",
+            URL:     "/regions/{regionId}/apps/{appName}/getRegionByEngineCode",
             Method:  "POST",
             Header:  nil,
             Version: "v2",
@@ -107,11 +106,11 @@ func NewWorkspaceGetProjectRequestWithAllParams(
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewWorkspaceGetProjectRequestWithoutParam() *WorkspaceGetProjectRequest {
+func NewGetRegionByEngineCodeRequestWithoutParam() *GetRegionByEngineCodeRequest {
 
-    return &WorkspaceGetProjectRequest{
+    return &GetRegionByEngineCodeRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/apps/{appName}/workspaceGetProject",
+            URL:     "/regions/{regionId}/apps/{appName}/getRegionByEngineCode",
             Method:  "POST",
             Header:  nil,
             Version: "v2",
@@ -120,49 +119,49 @@ func NewWorkspaceGetProjectRequestWithoutParam() *WorkspaceGetProjectRequest {
 }
 
 /* param regionId: 地域ID(Required) */
-func (r *WorkspaceGetProjectRequest) SetRegionId(regionId string) {
+func (r *GetRegionByEngineCodeRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
 /* param appName: 应用名称(Required) */
-func (r *WorkspaceGetProjectRequest) SetAppName(appName string) {
+func (r *GetRegionByEngineCodeRequest) SetAppName(appName string) {
     r.AppName = appName
 }
 /* param id: (Optional) */
-func (r *WorkspaceGetProjectRequest) SetId(id int) {
+func (r *GetRegionByEngineCodeRequest) SetId(id int) {
     r.Id = &id
 }
 /* param workspaceCode: (Optional) */
-func (r *WorkspaceGetProjectRequest) SetWorkspaceCode(workspaceCode string) {
+func (r *GetRegionByEngineCodeRequest) SetWorkspaceCode(workspaceCode string) {
     r.WorkspaceCode = &workspaceCode
 }
 /* param projectCode: (Optional) */
-func (r *WorkspaceGetProjectRequest) SetProjectCode(projectCode string) {
+func (r *GetRegionByEngineCodeRequest) SetProjectCode(projectCode string) {
     r.ProjectCode = &projectCode
 }
 /* param resourceCode: (Optional) */
-func (r *WorkspaceGetProjectRequest) SetResourceCode(resourceCode string) {
+func (r *GetRegionByEngineCodeRequest) SetResourceCode(resourceCode string) {
     r.ResourceCode = &resourceCode
 }
 /* param engineCode: 存算引擎实例编码(Optional) */
-func (r *WorkspaceGetProjectRequest) SetEngineCode(engineCode string) {
+func (r *GetRegionByEngineCodeRequest) SetEngineCode(engineCode string) {
     r.EngineCode = &engineCode
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r WorkspaceGetProjectRequest) GetRegionId() string {
+func (r GetRegionByEngineCodeRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type WorkspaceGetProjectResponse struct {
+type GetRegionByEngineCodeResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result WorkspaceGetProjectResult `json:"result"`
+    Result GetRegionByEngineCodeResult `json:"result"`
 }
 
-type WorkspaceGetProjectResult struct {
+type GetRegionByEngineCodeResult struct {
     Code string `json:"code"`
     Message string `json:"message"`
-    Result []shenhaiplatform.ProjectResp `json:"result"`
+    Result string `json:"result"`
 }
