@@ -21,18 +21,12 @@ import (
     ydapp "github.com/jdcloud-api/jdcloud-sdk-go/services/ydapp/models"
 )
 
-type DescribeGroupsRequest struct {
+type DescribeAppRequest struct {
 
     core.JDCloudRequest
 
     /* 应用ID  */
     AppId string `json:"appId"`
-
-    /* 页码 (Optional) */
-    PageNum *int `json:"pageNum"`
-
-    /* 每页数量，默认10，最大100 (Optional) */
-    PageSize *int `json:"pageSize"`
 }
 
 /*
@@ -40,13 +34,13 @@ type DescribeGroupsRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeGroupsRequest(
+func NewDescribeAppRequest(
     appId string,
-) *DescribeGroupsRequest {
+) *DescribeAppRequest {
 
-	return &DescribeGroupsRequest{
+	return &DescribeAppRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/app/{appId}/groups",
+			URL:     "/app/{appId}",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -57,34 +51,28 @@ func NewDescribeGroupsRequest(
 
 /*
  * param appId: 应用ID (Required)
- * param pageNum: 页码 (Optional)
- * param pageSize: 每页数量，默认10，最大100 (Optional)
  */
-func NewDescribeGroupsRequestWithAllParams(
+func NewDescribeAppRequestWithAllParams(
     appId string,
-    pageNum *int,
-    pageSize *int,
-) *DescribeGroupsRequest {
+) *DescribeAppRequest {
 
-    return &DescribeGroupsRequest{
+    return &DescribeAppRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/app/{appId}/groups",
+            URL:     "/app/{appId}",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
         AppId: appId,
-        PageNum: pageNum,
-        PageSize: pageSize,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeGroupsRequestWithoutParam() *DescribeGroupsRequest {
+func NewDescribeAppRequestWithoutParam() *DescribeAppRequest {
 
-    return &DescribeGroupsRequest{
+    return &DescribeAppRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/app/{appId}/groups",
+            URL:     "/app/{appId}",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -93,32 +81,33 @@ func NewDescribeGroupsRequestWithoutParam() *DescribeGroupsRequest {
 }
 
 /* param appId: 应用ID(Required) */
-func (r *DescribeGroupsRequest) SetAppId(appId string) {
+func (r *DescribeAppRequest) SetAppId(appId string) {
     r.AppId = appId
-}
-/* param pageNum: 页码(Optional) */
-func (r *DescribeGroupsRequest) SetPageNum(pageNum int) {
-    r.PageNum = &pageNum
-}
-/* param pageSize: 每页数量，默认10，最大100(Optional) */
-func (r *DescribeGroupsRequest) SetPageSize(pageSize int) {
-    r.PageSize = &pageSize
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeGroupsRequest) GetRegionId() string {
+func (r DescribeAppRequest) GetRegionId() string {
     return ""
 }
 
-type DescribeGroupsResponse struct {
+type DescribeAppResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeGroupsResult `json:"result"`
+    Result DescribeAppResult `json:"result"`
 }
 
-type DescribeGroupsResult struct {
-    Data []ydapp.Group `json:"data"`
-    TotalCount int64 `json:"totalCount"`
+type DescribeAppResult struct {
+    AppId string `json:"appId"`
+    AppKey string `json:"appKey"`
+    AppName string `json:"appName"`
+    Description string `json:"description"`
+    AppLevel string `json:"appLevel"`
+    Stateful bool `json:"stateful"`
+    Language string `json:"language"`
+    AppMembers ydapp.AppMembers `json:"appMembers"`
+    SystemId string `json:"systemId"`
+    SystemKey string `json:"systemKey"`
+    SystemName string `json:"systemName"`
 }

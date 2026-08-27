@@ -43,8 +43,11 @@ type DescribeImageRecordsRequest struct {
     /* 记录状态，active-可用; deleted-已删除; building-编译中; failed-失败; timeout-获取结果超时，E.g.，active (Optional) */
     Status *string `json:"status"`
 
-    /* 分页参数 (Optional) */
-    Page *interface{} `json:"page"`
+    /* 页码，默认1 (Optional) */
+    PageNum *int `json:"pageNum"`
+
+    /* 每页数量，默认10，最大100 (Optional) */
+    PageSize *int `json:"pageSize"`
 }
 
 /*
@@ -71,7 +74,8 @@ func NewDescribeImageRecordsRequest(
  * param packageId: 制品包ID，E.g.，10086 (Optional)
  * param version: 版本，E.g.，v1.0.0 (Optional)
  * param status: 记录状态，active-可用; deleted-已删除; building-编译中; failed-失败; timeout-获取结果超时，E.g.，active (Optional)
- * param page: 分页参数 (Optional)
+ * param pageNum: 页码，默认1 (Optional)
+ * param pageSize: 每页数量，默认10，最大100 (Optional)
  */
 func NewDescribeImageRecordsRequestWithAllParams(
     uid *string,
@@ -80,7 +84,8 @@ func NewDescribeImageRecordsRequestWithAllParams(
     packageId *int64,
     version *string,
     status *string,
-    page *interface{},
+    pageNum *int,
+    pageSize *int,
 ) *DescribeImageRecordsRequest {
 
     return &DescribeImageRecordsRequest{
@@ -96,7 +101,8 @@ func NewDescribeImageRecordsRequestWithAllParams(
         PackageId: packageId,
         Version: version,
         Status: status,
-        Page: page,
+        PageNum: pageNum,
+        PageSize: pageSize,
     }
 }
 
@@ -137,9 +143,13 @@ func (r *DescribeImageRecordsRequest) SetVersion(version string) {
 func (r *DescribeImageRecordsRequest) SetStatus(status string) {
     r.Status = &status
 }
-/* param page: 分页参数(Optional) */
-func (r *DescribeImageRecordsRequest) SetPage(page interface{}) {
-    r.Page = &page
+/* param pageNum: 页码，默认1(Optional) */
+func (r *DescribeImageRecordsRequest) SetPageNum(pageNum int) {
+    r.PageNum = &pageNum
+}
+/* param pageSize: 每页数量，默认10，最大100(Optional) */
+func (r *DescribeImageRecordsRequest) SetPageSize(pageSize int) {
+    r.PageSize = &pageSize
 }
 
 

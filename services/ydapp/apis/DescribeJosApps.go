@@ -21,27 +21,21 @@ import (
     ydapp "github.com/jdcloud-api/jdcloud-sdk-go/services/ydapp/models"
 )
 
-type DescribeAppsRequest struct {
+type DescribeJosAppsRequest struct {
 
     core.JDCloudRequest
-
-    /* 页码，默认为1 (Optional) */
-    PageNum *int `json:"pageNum"`
-
-    /* 每页数量，默认10，最大100 (Optional) */
-    PageSize *int `json:"pageSize"`
 }
 
 /*
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeAppsRequest(
-) *DescribeAppsRequest {
+func NewDescribeJosAppsRequest(
+) *DescribeJosAppsRequest {
 
-	return &DescribeAppsRequest{
+	return &DescribeJosAppsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/apps",
+			URL:     "/josapps",
 			Method:  "GET",
 			Header:  nil,
 			Version: "v1",
@@ -50,32 +44,26 @@ func NewDescribeAppsRequest(
 }
 
 /*
- * param pageNum: 页码，默认为1 (Optional)
- * param pageSize: 每页数量，默认10，最大100 (Optional)
  */
-func NewDescribeAppsRequestWithAllParams(
-    pageNum *int,
-    pageSize *int,
-) *DescribeAppsRequest {
+func NewDescribeJosAppsRequestWithAllParams(
+) *DescribeJosAppsRequest {
 
-    return &DescribeAppsRequest{
+    return &DescribeJosAppsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/apps",
+            URL:     "/josapps",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
         },
-        PageNum: pageNum,
-        PageSize: pageSize,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeAppsRequestWithoutParam() *DescribeAppsRequest {
+func NewDescribeJosAppsRequestWithoutParam() *DescribeJosAppsRequest {
 
-    return &DescribeAppsRequest{
+    return &DescribeJosAppsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/apps",
+            URL:     "/josapps",
             Method:  "GET",
             Header:  nil,
             Version: "v1",
@@ -83,29 +71,20 @@ func NewDescribeAppsRequestWithoutParam() *DescribeAppsRequest {
     }
 }
 
-/* param pageNum: 页码，默认为1(Optional) */
-func (r *DescribeAppsRequest) SetPageNum(pageNum int) {
-    r.PageNum = &pageNum
-}
-/* param pageSize: 每页数量，默认10，最大100(Optional) */
-func (r *DescribeAppsRequest) SetPageSize(pageSize int) {
-    r.PageSize = &pageSize
-}
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeAppsRequest) GetRegionId() string {
+func (r DescribeJosAppsRequest) GetRegionId() string {
     return ""
 }
 
-type DescribeAppsResponse struct {
+type DescribeJosAppsResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeAppsResult `json:"result"`
+    Result DescribeJosAppsResult `json:"result"`
 }
 
-type DescribeAppsResult struct {
-    Data []ydapp.App `json:"data"`
-    TotalCount int64 `json:"totalCount"`
+type DescribeJosAppsResult struct {
+    Apps []ydapp.JosApp `json:"apps"`
 }

@@ -21,17 +21,11 @@ import (
     ydapp "github.com/jdcloud-api/jdcloud-sdk-go/services/ydapp/models"
 )
 
-type DescribeDeploysRequest struct {
+type DescribeSystemsRequest struct {
 
     core.JDCloudRequest
 
-    /* 应用ID，E.g.，app-123456  */
-    AppId string `json:"appId"`
-
-    /* 分组ID，E.g.，group-123456  */
-    GroupId string `json:"groupId"`
-
-    /* 页码 (Optional) */
+    /* 页码，默认1 (Optional) */
     PageNum *int `json:"pageNum"`
 
     /* 每页数量，默认10，最大100 (Optional) */
@@ -39,99 +33,79 @@ type DescribeDeploysRequest struct {
 }
 
 /*
- * param appId: 应用ID，E.g.，app-123456 (Required)
- * param groupId: 分组ID，E.g.，group-123456 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeDeploysRequest(
-    appId string,
-    groupId string,
-) *DescribeDeploysRequest {
+func NewDescribeSystemsRequest(
+) *DescribeSystemsRequest {
 
-	return &DescribeDeploysRequest{
+	return &DescribeSystemsRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/app/{appId}/group/{groupId}/deploys",
-			Method:  "GET",
+			URL:     "/systems:page",
+			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
-        AppId: appId,
-        GroupId: groupId,
 	}
 }
 
 /*
- * param appId: 应用ID，E.g.，app-123456 (Required)
- * param groupId: 分组ID，E.g.，group-123456 (Required)
- * param pageNum: 页码 (Optional)
+ * param pageNum: 页码，默认1 (Optional)
  * param pageSize: 每页数量，默认10，最大100 (Optional)
  */
-func NewDescribeDeploysRequestWithAllParams(
-    appId string,
-    groupId string,
+func NewDescribeSystemsRequestWithAllParams(
     pageNum *int,
     pageSize *int,
-) *DescribeDeploysRequest {
+) *DescribeSystemsRequest {
 
-    return &DescribeDeploysRequest{
+    return &DescribeSystemsRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/app/{appId}/group/{groupId}/deploys",
-            Method:  "GET",
+            URL:     "/systems:page",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
-        AppId: appId,
-        GroupId: groupId,
         PageNum: pageNum,
         PageSize: pageSize,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeDeploysRequestWithoutParam() *DescribeDeploysRequest {
+func NewDescribeSystemsRequestWithoutParam() *DescribeSystemsRequest {
 
-    return &DescribeDeploysRequest{
+    return &DescribeSystemsRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/app/{appId}/group/{groupId}/deploys",
-            Method:  "GET",
+            URL:     "/systems:page",
+            Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
     }
 }
 
-/* param appId: 应用ID，E.g.，app-123456(Required) */
-func (r *DescribeDeploysRequest) SetAppId(appId string) {
-    r.AppId = appId
-}
-/* param groupId: 分组ID，E.g.，group-123456(Required) */
-func (r *DescribeDeploysRequest) SetGroupId(groupId string) {
-    r.GroupId = groupId
-}
-/* param pageNum: 页码(Optional) */
-func (r *DescribeDeploysRequest) SetPageNum(pageNum int) {
+/* param pageNum: 页码，默认1(Optional) */
+func (r *DescribeSystemsRequest) SetPageNum(pageNum int) {
     r.PageNum = &pageNum
 }
 /* param pageSize: 每页数量，默认10，最大100(Optional) */
-func (r *DescribeDeploysRequest) SetPageSize(pageSize int) {
+func (r *DescribeSystemsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeDeploysRequest) GetRegionId() string {
+func (r DescribeSystemsRequest) GetRegionId() string {
     return ""
 }
 
-type DescribeDeploysResponse struct {
+type DescribeSystemsResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeDeploysResult `json:"result"`
+    Result DescribeSystemsResult `json:"result"`
 }
 
-type DescribeDeploysResult struct {
-    Data []ydapp.DeployTask `json:"data"`
+type DescribeSystemsResult struct {
+    Data []ydapp.WukongSystem `json:"data"`
     TotalCount int64 `json:"totalCount"`
 }

@@ -18,21 +18,14 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    ydapp "github.com/jdcloud-api/jdcloud-sdk-go/services/ydapp/models"
 )
 
-type DescribeGroupsRequest struct {
+type DeleteAppRequest struct {
 
     core.JDCloudRequest
 
     /* 应用ID  */
     AppId string `json:"appId"`
-
-    /* 页码 (Optional) */
-    PageNum *int `json:"pageNum"`
-
-    /* 每页数量，默认10，最大100 (Optional) */
-    PageSize *int `json:"pageSize"`
 }
 
 /*
@@ -40,14 +33,14 @@ type DescribeGroupsRequest struct {
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeGroupsRequest(
+func NewDeleteAppRequest(
     appId string,
-) *DescribeGroupsRequest {
+) *DeleteAppRequest {
 
-	return &DescribeGroupsRequest{
+	return &DeleteAppRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/app/{appId}/groups",
-			Method:  "GET",
+			URL:     "/app/{appId}",
+			Method:  "DELETE",
 			Header:  nil,
 			Version: "v1",
 		},
@@ -57,35 +50,29 @@ func NewDescribeGroupsRequest(
 
 /*
  * param appId: 应用ID (Required)
- * param pageNum: 页码 (Optional)
- * param pageSize: 每页数量，默认10，最大100 (Optional)
  */
-func NewDescribeGroupsRequestWithAllParams(
+func NewDeleteAppRequestWithAllParams(
     appId string,
-    pageNum *int,
-    pageSize *int,
-) *DescribeGroupsRequest {
+) *DeleteAppRequest {
 
-    return &DescribeGroupsRequest{
+    return &DeleteAppRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/app/{appId}/groups",
-            Method:  "GET",
+            URL:     "/app/{appId}",
+            Method:  "DELETE",
             Header:  nil,
             Version: "v1",
         },
         AppId: appId,
-        PageNum: pageNum,
-        PageSize: pageSize,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeGroupsRequestWithoutParam() *DescribeGroupsRequest {
+func NewDeleteAppRequestWithoutParam() *DeleteAppRequest {
 
-    return &DescribeGroupsRequest{
+    return &DeleteAppRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/app/{appId}/groups",
-            Method:  "GET",
+            URL:     "/app/{appId}",
+            Method:  "DELETE",
             Header:  nil,
             Version: "v1",
         },
@@ -93,32 +80,23 @@ func NewDescribeGroupsRequestWithoutParam() *DescribeGroupsRequest {
 }
 
 /* param appId: 应用ID(Required) */
-func (r *DescribeGroupsRequest) SetAppId(appId string) {
+func (r *DeleteAppRequest) SetAppId(appId string) {
     r.AppId = appId
-}
-/* param pageNum: 页码(Optional) */
-func (r *DescribeGroupsRequest) SetPageNum(pageNum int) {
-    r.PageNum = &pageNum
-}
-/* param pageSize: 每页数量，默认10，最大100(Optional) */
-func (r *DescribeGroupsRequest) SetPageSize(pageSize int) {
-    r.PageSize = &pageSize
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeGroupsRequest) GetRegionId() string {
+func (r DeleteAppRequest) GetRegionId() string {
     return ""
 }
 
-type DescribeGroupsResponse struct {
+type DeleteAppResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeGroupsResult `json:"result"`
+    Result DeleteAppResult `json:"result"`
 }
 
-type DescribeGroupsResult struct {
-    Data []ydapp.Group `json:"data"`
-    TotalCount int64 `json:"totalCount"`
+type DeleteAppResult struct {
+    Success bool `json:"success"`
 }

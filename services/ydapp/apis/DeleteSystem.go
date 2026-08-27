@@ -18,94 +18,85 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    ydapp "github.com/jdcloud-api/jdcloud-sdk-go/services/ydapp/models"
 )
 
-type DescribeAppsRequest struct {
+type DeleteSystemRequest struct {
 
     core.JDCloudRequest
 
-    /* 页码，默认为1 (Optional) */
-    PageNum *int `json:"pageNum"`
-
-    /* 每页数量，默认10，最大100 (Optional) */
-    PageSize *int `json:"pageSize"`
+    /* 系统ID  */
+    SystemId string `json:"systemId"`
 }
 
 /*
+ * param systemId: 系统ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewDescribeAppsRequest(
-) *DescribeAppsRequest {
+func NewDeleteSystemRequest(
+    systemId string,
+) *DeleteSystemRequest {
 
-	return &DescribeAppsRequest{
+	return &DeleteSystemRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/apps",
-			Method:  "GET",
+			URL:     "/system/{systemId}",
+			Method:  "DELETE",
 			Header:  nil,
 			Version: "v1",
 		},
+        SystemId: systemId,
 	}
 }
 
 /*
- * param pageNum: 页码，默认为1 (Optional)
- * param pageSize: 每页数量，默认10，最大100 (Optional)
+ * param systemId: 系统ID (Required)
  */
-func NewDescribeAppsRequestWithAllParams(
-    pageNum *int,
-    pageSize *int,
-) *DescribeAppsRequest {
+func NewDeleteSystemRequestWithAllParams(
+    systemId string,
+) *DeleteSystemRequest {
 
-    return &DescribeAppsRequest{
+    return &DeleteSystemRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/apps",
-            Method:  "GET",
+            URL:     "/system/{systemId}",
+            Method:  "DELETE",
             Header:  nil,
             Version: "v1",
         },
-        PageNum: pageNum,
-        PageSize: pageSize,
+        SystemId: systemId,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewDescribeAppsRequestWithoutParam() *DescribeAppsRequest {
+func NewDeleteSystemRequestWithoutParam() *DeleteSystemRequest {
 
-    return &DescribeAppsRequest{
+    return &DeleteSystemRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/apps",
-            Method:  "GET",
+            URL:     "/system/{systemId}",
+            Method:  "DELETE",
             Header:  nil,
             Version: "v1",
         },
     }
 }
 
-/* param pageNum: 页码，默认为1(Optional) */
-func (r *DescribeAppsRequest) SetPageNum(pageNum int) {
-    r.PageNum = &pageNum
-}
-/* param pageSize: 每页数量，默认10，最大100(Optional) */
-func (r *DescribeAppsRequest) SetPageSize(pageSize int) {
-    r.PageSize = &pageSize
+/* param systemId: 系统ID(Required) */
+func (r *DeleteSystemRequest) SetSystemId(systemId string) {
+    r.SystemId = systemId
 }
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r DescribeAppsRequest) GetRegionId() string {
+func (r DeleteSystemRequest) GetRegionId() string {
     return ""
 }
 
-type DescribeAppsResponse struct {
+type DeleteSystemResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result DescribeAppsResult `json:"result"`
+    Result DeleteSystemResult `json:"result"`
 }
 
-type DescribeAppsResult struct {
-    Data []ydapp.App `json:"data"`
-    TotalCount int64 `json:"totalCount"`
+type DeleteSystemResult struct {
+    Value string `json:"value"`
 }

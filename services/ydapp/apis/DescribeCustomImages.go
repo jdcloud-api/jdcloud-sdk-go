@@ -31,7 +31,7 @@ type DescribeCustomImagesRequest struct {
     /* 页码，E.g.，6 (Optional) */
     PageNum *int `json:"pageNum"`
 
-    /* 每页数量(10-100)，E.g.，20 (Optional) */
+    /* 每页数量，默认10，最大100 (Optional) */
     PageSize *int `json:"pageSize"`
 
     /* 镜像版本，E.g.，busybox-v1.0.0 (Optional) */
@@ -61,7 +61,7 @@ func NewDescribeCustomImagesRequest(
 /*
  * param appId: 应用ID，E.g.，app-123456789 (Required)
  * param pageNum: 页码，E.g.，6 (Optional)
- * param pageSize: 每页数量(10-100)，E.g.，20 (Optional)
+ * param pageSize: 每页数量，默认10，最大100 (Optional)
  * param version: 镜像版本，E.g.，busybox-v1.0.0 (Optional)
  */
 func NewDescribeCustomImagesRequestWithAllParams(
@@ -106,7 +106,7 @@ func (r *DescribeCustomImagesRequest) SetAppId(appId string) {
 func (r *DescribeCustomImagesRequest) SetPageNum(pageNum int) {
     r.PageNum = &pageNum
 }
-/* param pageSize: 每页数量(10-100)，E.g.，20(Optional) */
+/* param pageSize: 每页数量，默认10，最大100(Optional) */
 func (r *DescribeCustomImagesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }

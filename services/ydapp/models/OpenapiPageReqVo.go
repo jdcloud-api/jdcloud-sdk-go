@@ -17,25 +17,7 @@
 package models
 
 
-type ImageRecordPageRequest struct {
-
-    /* 镜像记录UID，E.g.，rec-123456789 (Optional) */
-    Uid string `json:"uid"`
-
-    /* 应用ID，E.g.，app-123456789 (Optional) */
-    AppId string `json:"appId"`
-
-    /* 流水线任务ID，E.g.，task-123456789 (Optional) */
-    PipelineTaskId string `json:"pipelineTaskId"`
-
-    /* 制品包ID，E.g.，10086 (Optional) */
-    PackageId int64 `json:"packageId"`
-
-    /* 版本，E.g.，v1.0.0 (Optional) */
-    Version string `json:"version"`
-
-    /* 记录状态，active-可用; deleted-已删除; building-编译中; failed-失败; timeout-获取结果超时，E.g.，active (Optional) */
-    Status string `json:"status"`
+type OpenapiPageReqVo struct {
 
     /* 页码，默认1 (Optional) */
     PageNum int `json:"pageNum"`

@@ -31,7 +31,7 @@ type DescribePackagesRequest struct {
     /* 页码，默认为1，E.g.，1 (Optional) */
     PageNum *int `json:"pageNum"`
 
-    /* 每页数量，默认20，E.g.，20 (Optional) */
+    /* 每页数量，默认10，最大100 (Optional) */
     PageSize *int `json:"pageSize"`
 
     /* 制品包名称，模糊匹配，E.g.，my-app (Optional) */
@@ -61,7 +61,7 @@ func NewDescribePackagesRequest(
 /*
  * param appId: 应用ID，E.g.，app-123456789 (Required)
  * param pageNum: 页码，默认为1，E.g.，1 (Optional)
- * param pageSize: 每页数量，默认20，E.g.，20 (Optional)
+ * param pageSize: 每页数量，默认10，最大100 (Optional)
  * param nameLike: 制品包名称，模糊匹配，E.g.，my-app (Optional)
  */
 func NewDescribePackagesRequestWithAllParams(
@@ -106,7 +106,7 @@ func (r *DescribePackagesRequest) SetAppId(appId string) {
 func (r *DescribePackagesRequest) SetPageNum(pageNum int) {
     r.PageNum = &pageNum
 }
-/* param pageSize: 每页数量，默认20，E.g.，20(Optional) */
+/* param pageSize: 每页数量，默认10，最大100(Optional) */
 func (r *DescribePackagesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
