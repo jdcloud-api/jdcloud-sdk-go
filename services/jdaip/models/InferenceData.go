@@ -31,6 +31,12 @@ type InferenceData struct {
     /* 部署方式（自定义,或者大语言模型） (Optional) */
     DeployType string `json:"deployType"`
 
+    /* 在线服务类型 (Optional) */
+    ServiceType string `json:"serviceType"`
+
+    /* 智能路由配置，仅智能路由服务返回 (Optional) */
+    SmartRouterConfig SmartRouterConfig `json:"smartRouterConfig"`
+
     /* 推理服务资源所在队列ID (Optional) */
     QueueId string `json:"queueId"`
 

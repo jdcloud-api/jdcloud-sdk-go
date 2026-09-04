@@ -25,9 +25,11 @@ type StorageSpaceParamForJob struct {
 - `oss`：对象存储服务
 - `cfs`：云文件系统
 - `jpfs`：京东云并行文件系统
+- `secure`：安全存储（JPFS），**仅安全队列可用**
 
 **注意：**
 - 大小写敏感
+- `secure` 仅在安全队列下可用，非安全队列使用将返回错误
  (Optional) */
     StorageType *string `json:"storageType"`
 
@@ -53,4 +55,7 @@ type StorageSpaceParamForJob struct {
 
     /*  (Optional) */
     Jpfs *JpfsParamForJob `json:"jpfs"`
+
+    /*  (Optional) */
+    Secure *SecureParamForJob `json:"secure"`
 }

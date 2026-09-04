@@ -132,8 +132,14 @@ type DescribeServiceResult struct {
     Address string `json:"address"`
     AccessToken string `json:"accessToken"`
     GatewayType string `json:"gatewayType"`
+    ServiceType string `json:"serviceType"`
+    DgAddress string `json:"dgAddress"`
+    DgInnerAddress string `json:"dgInnerAddress"`
     Qps int `json:"qps"`
     EnableLimit bool `json:"enableLimit"`
+    ProductId string `json:"productId"`
+    ProductName string `json:"productName"`
+    Bgbu string `json:"bgbu"`
     Total int `json:"total"`
     OwnerUser string `json:"ownerUser"`
     OwnerUserPin string `json:"ownerUserPin"`

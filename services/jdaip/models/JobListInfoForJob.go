@@ -77,6 +77,9 @@ type JobListInfoForJob struct {
  (Optional) */
     JobType string `json:"jobType"`
 
+    /* 是否为用户训练主容器开启容器特权模式。 (Optional) */
+    Privileged bool `json:"privileged"`
+
     /* 任务运行时长，单位：秒。
 
 **说明：** 从任务开始运行到当前或结束的时间
@@ -97,17 +100,17 @@ type JobListInfoForJob struct {
  (Optional) */
     QueueId string `json:"queueId"`
 
-    /* 公共资源池的规格ID。 (Optional) */
+    /* 队列类型。公共资源池为 `public`，共享资源池为 `exclusive`，安全资源池为 `secure`。 (Optional) */
+    QueueType string `json:"queueType"`
+
+    /* 公共资源池或共享资源池的规格ID。 (Optional) */
     FlavorId string `json:"flavorId"`
 
     /* 规格描述。 (Optional) */
     FlavorInfo interface{} `json:"flavorInfo"`
 
-    /* 逻辑可用区编码（公共池）。 (Optional) */
-    LogicAzCode string `json:"logicAzCode"`
-
-    /* 物理集群名称（异构规格）。 (Optional) */
-    HpcClusterName string `json:"hpcClusterName"`
+    /* 任务优先级。共享资源池取值范围为 `1..9`；未配置优先级时返回 `0`。 (Optional) */
+    TaskPriority int `json:"taskPriority"`
 
     /* GPU 卡类型。 (Optional) */
     GpuDeviceModel string `json:"gpuDeviceModel"`
@@ -125,7 +128,7 @@ type JobListInfoForJob struct {
  (Optional) */
     RoleResource RoleResourceInfoForJobList `json:"roleResource"`
 
-    /* 出公网配置（任务级，仅公共资源池训练任务生效）。未配置时为 null。
+    /* 出公网配置（任务级，公共资源池和共享资源池训练任务生效）。未配置时为 null。
  (Optional) */
     InternetEgress InternetEgressForJob `json:"internetEgress"`
 
@@ -157,6 +160,9 @@ type JobListInfoForJob struct {
 
     /* 用户自定义标签列表。 (Optional) */
     UserTags []JobTag `json:"userTags"`
+
+    /* 是否开启性能分析。 (Optional) */
+    ProfilingEnable bool `json:"profilingEnable"`
 
     /* 归属用户 pin。 (Optional) */
     OwnerUserPin string `json:"ownerUserPin"`

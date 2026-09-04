@@ -28,6 +28,12 @@ type InferenceSpec struct {
     /* 部署方式（自定义,或者大语言模型） (Optional) */
     DeployType *string `json:"deployType"`
 
+    /* 在线服务类型；standard：普通服务，smartRouter：智能路由服务 (Optional) */
+    ServiceType *string `json:"serviceType"`
+
+    /* 智能路由配置；serviceType=smartRouter 时必填，serviceType=standard 时不得传递 (Optional) */
+    SmartRouterConfig *SmartRouterConfig `json:"smartRouterConfig"`
+
     /* 推理服务元数据（如：名字，ID等）  */
     Metadata *Metadata `json:"metadata"`
 

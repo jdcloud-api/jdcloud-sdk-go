@@ -22,10 +22,11 @@ type WorkspaceRelatedQueue struct {
     /* 队列id。示例：queue-2xxx**********2d*********8b8 (Optional) */
     QueueId *string `json:"queueId"`
 
-    /* true支持所有任务模块,默认true (Optional) */
+    /* true支持所有任务模块,默认true。 注意：安全队列仅支持训练任务，不能设置为true (Optional) */
     AllModuleSupported *bool `json:"allModuleSupported"`
 
-    /* 支持使用任务模块，allModuleSupported=false生效：可选值：
+    /* 支持使用任务模块，allModuleSupported=false生效。 注意：安全队列仅支持训练任务
+可选值：
 - notebook:Notebook
 - training:训练任务
 - inference:在线服务，

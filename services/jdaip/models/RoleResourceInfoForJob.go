@@ -42,9 +42,9 @@ type RoleResourceInfoForJob struct {
  (Optional) */
     Count *int `json:"count"`
 
-    /* 规格ID，指定公共资源池的计算规格。
+    /* 规格ID，指定公共资源池或共享资源池的计算规格。
 
-**说明：** 专属资源池无需填写
+**说明：** 公共资源池和共享资源池必填；其他资源队列无需填写
  (Optional) */
     FlavorId *string `json:"flavorId"`
 
@@ -60,7 +60,7 @@ type RoleResourceInfoForJob struct {
 
     /* 虚拟 GPU 核数。
 
-**可选值：** `0.1`, `0.125`, `0.25`, `0.5`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`
+**可选值：** `0.1`, `0.125`, `0.25`, `0.5`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `16`
  (Optional) */
     VcudaCore *float64 `json:"vcudaCore"`
 
@@ -79,7 +79,7 @@ type RoleResourceInfoForJob struct {
     /* 逻辑可用区编码。
 
 **说明：**
-- 公共资源池必传
+- 公共资源池和共享资源池必传
 - CPU/GPU 规格可填具体边缘可用区，或填中心随机(center_random)
 - 异构(HPC)规格须填具体可用区
  (Optional) */

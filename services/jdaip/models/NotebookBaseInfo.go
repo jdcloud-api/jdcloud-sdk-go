@@ -98,6 +98,6 @@ type NotebookBaseInfo struct {
     /* 队列ID，实例运行所在的资源队列（真实队列）。 (Optional) */
     Queue string `json:"queue"`
 
-    /* 公共队列ID，公共资源池场景下的队列标识。 (Optional) */
+    /* 公共/专享队列ID，公共/专享资源池场景下的队列标识。 (Optional) */
     PublicQueue string `json:"publicQueue"`
 }

@@ -23,7 +23,7 @@ type Device struct {
     Id string `json:"id"`
 
     /* 显卡品牌 (Optional) */
-    Brand string `json:"brand"`
+    DeviceBrand string `json:"deviceBrand"`
 
     /* 显卡型号 (Optional) */
     GpuModel string `json:"gpuModel"`
@@ -66,6 +66,12 @@ type Device struct {
 
     /* 节点规格，对应节点表InstanceConfig (Optional) */
     NodeSpec string `json:"nodeSpec"`
+
+    /* 节点创建时间，Unix秒 (Optional) */
+    CreateTime int64 `json:"createTime"`
+
+    /* 节点类型 (Optional) */
+    NodeType string `json:"nodeType"`
 
     /* 集群ID (Optional) */
     ClusterId string `json:"clusterId"`

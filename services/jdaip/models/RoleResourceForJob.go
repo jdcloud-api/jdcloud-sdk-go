@@ -28,10 +28,11 @@ type RoleResourceForJob struct {
 
     /* 队列ID。示例：queue-2xxx**********2d*********8b8
 使用公共资源池时固定为：joybuilder-public-queue。
+使用共享资源池时固定为：joybuilder-exclusive-queue。
  (Optional) */
     QueueId string `json:"queueId"`
 
-    /* 公共资源池的规格ID。 (Optional) */
+    /* 公共资源池或共享资源池的规格ID。 (Optional) */
     FlavorId string `json:"flavorId"`
 
     /* 规格描述。 (Optional) */

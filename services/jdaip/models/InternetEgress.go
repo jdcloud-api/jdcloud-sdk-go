@@ -19,14 +19,9 @@ package models
 
 type InternetEgress struct {
 
-    /* 公网出口类型，指定在线服务出公网的访问方式。
+    /* 公网出口开关。on 表示开启，off 表示关闭；off 时 egressType 无效。  */
+    SwitchStatus string `json:"switchStatus"`
 
-支持的类型：
-- SHARE_GATEWAY：经平台共享 NAT 网关出公网。
-
-使用说明：
-- 仅公共资源池生效。
-- 设为 SHARE_GATEWAY 时，要求实例规格支持出公网。
-- 指定 NONE 表示不出公网；不传 internetEgress 参数时默认为 NONE。  */
-    Type string `json:"type"`
+    /* 公网出口类型。switchStatus=on 时必传，当前仅支持 SHARE_GATEWAY（平台共享 NAT 网关）。 (Optional) */
+    EgressType *string `json:"egressType"`
 }

@@ -164,6 +164,15 @@ type NotebookInfo struct {
  (Optional) */
     Workload NbWorkloadDetail `json:"workload"`
 
+    /* RDMA高速网络的最终生效状态。
+
+## 返回值说明
+- `true`：启动Notebook时会申请RDMA资源
+- `false`：当前配置不会申请RDMA资源，历史Notebook未配置时也返回`false`
+- 公共/专享资源池返回所选规格的RDMA属性
+ (Optional) */
+    Rdma bool `json:"rdma"`
+
     /* 公网访问配置，负载均衡配置信息。
 
 ## 使用说明
@@ -220,4 +229,8 @@ type NotebookInfo struct {
     /* 节点亲和性配置，控制Pod调度到特定节点。
  (Optional) */
     NodeAffinities []NotebookNodeAffinity `json:"nodeAffinities"`
+
+    /* 任务调度优先级，数值越大，优先级越高。
+ (Optional) */
+    TaskPriority int `json:"taskPriority"`
 }

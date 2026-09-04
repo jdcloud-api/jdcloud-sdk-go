@@ -28,6 +28,15 @@ type ResourceForCreateJobDefinition struct {
  (Optional) */
     QueueId string `json:"queueId"`
 
+    /* 规格ID，池化队列按规格申请资源时使用。 (Optional) */
+    FlavorId string `json:"flavorId"`
+
+    /* 逻辑可用区编码。 (Optional) */
+    LogicAzCode string `json:"logicAzCode"`
+
+    /* HPC集群名称。 (Optional) */
+    HpcClusterName string `json:"hpcClusterName"`
+
     /* GPU 卡类型，指定使用的 GPU 型号。
 
 **常见型号示例：**

@@ -22,7 +22,7 @@ type RealTimeResourceStatisticsItem struct {
     /* 资源类型 (Optional) */
     ResourceType string `json:"resourceType"`
 
-    /* 空闲资源 (Optional) */
+    /* 可用资源 (Optional) */
     Idle string `json:"idle"`
 
     /* 已分配资源 (Optional) */
@@ -31,12 +31,12 @@ type RealTimeResourceStatisticsItem struct {
     /* 资源总量 (Optional) */
     Capacity string `json:"capacity"`
 
-    /* 已分配资源比例 (Optional) */
+    /* 资源分配率 (Optional) */
     AllocatedRate string `json:"allocatedRate"`
 
-    /* 已分配资源使用率 (Optional) */
+    /* 资源使用率 (Optional) */
     UsedUtilization interface{} `json:"usedUtilization"`
 
-    /* 已分配资源使用率 (Optional) */
+    /* 已分配资源的使用率 (Optional) */
     AllocatedUtilization interface{} `json:"allocatedUtilization"`
 }

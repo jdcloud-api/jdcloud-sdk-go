@@ -50,7 +50,7 @@ type UpdateResourcePropertiesParam struct {
     /* 工作负载资源配置，用于更新计算资源。
 
 ## 更新限制
-- 公共资源池不允许变更资源配置
+- 公共/专享资源池不允许变更资源配置
 - 私有资源池允许更换队列和资源配置
  (Optional) */
     WorkloadSpec *WorkloadSpec `json:"workloadSpec"`
@@ -105,6 +105,20 @@ type UpdateResourcePropertiesParam struct {
  (Optional) */
     NodeAffinities []NotebookNodeAffinity `json:"nodeAffinities"`
 
+    /* 是否启用RDMA高速网络。
+
+## 更新语义
+- 不传或传`null`表示不修改原配置
+- 传`true`表示开启，传`false`表示关闭；配置在Notebook下次启动时生效
+
+## 生效规则
+- 仅私有资源池中的Notebook支持修改该参数
+- 计算资源必须包含GPU，且GPU卡数必须为正整数
+- 未配置GPU或配置非整卡GPU时，即使传`true`也会静默按`false`处理
+- 公共/专享资源池忽略该参数，是否启用由所选规格的RDMA属性决定
+ (Optional) */
+    Rdma *bool `json:"rdma"`
+
     /* SSH配置，用于更新SSH连接能力。
 
 ## 使用说明
@@ -116,8 +130,11 @@ type UpdateResourcePropertiesParam struct {
 
 ## 使用说明
 - 可选参数，传null表示不修改（保持原值）
-- 仅私有资源池且工作空间队列设置了调度优先级时可设置
-- **取值范围：** 1 ~ 9，实际以工作空间配置为准
+- **取值范围：** 1 ~ 9
+- **按资源池类型区分：**
+  - 专享队列：必须设置(1~9)。
+  - 空间私有队列：开启调度优先级时必填。
+  - 公共队列：不支持设置。
  (Optional) */
     TaskPriority *int `json:"taskPriority"`
 }

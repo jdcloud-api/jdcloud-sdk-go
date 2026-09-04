@@ -25,7 +25,7 @@ type ElasticIp struct {
     /* 绑定的弹性公网 IP (Optional) */
     Ip string `json:"ip"`
 
-    /* 绑定的公网ip类型，none:不绑定,new:新建,exist:已存在的，默认none (Optional) */
+    /* 绑定的公网 IP 类型；none：仅内网、不绑定公网 IP，new：新建，exist：使用已有公网 IP (Optional) */
     BindType string `json:"bindType"`
 
     /* 入口带宽（Mbps）, 默认1Mbps (Optional) */

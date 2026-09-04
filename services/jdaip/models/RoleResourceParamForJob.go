@@ -23,9 +23,11 @@ type RoleResourceParamForJob struct {
 
 **公共资源池：** 固定使用 `joybuilder-public-queue`
 
+**共享资源池：** 固定使用 `joybuilder-exclusive-queue`
+
 **专属资源池：** 使用工作空间绑定的队列，需要用户及角色拥有该队列的使用权限
 
-**示例：** `queue-2xxx**********2d*********8b8`
+**示例：** `joybuilder-public-queue`、`joybuilder-exclusive-queue`、`queue-2xxx**********2d*********8b8`
  (Optional) */
     QueueId *string `json:"queueId"`
 

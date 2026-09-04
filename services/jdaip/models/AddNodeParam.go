@@ -28,7 +28,7 @@ type AddNodeParam struct {
     /* 节点数量  */
     NodeCount int `json:"nodeCount"`
 
-    /* 购买时间单位，year：年；month：月；day：天 (Optional) */
+    /* 购买时间单位，year：年；month：月；week：周；day：天 (Optional) */
     TimeUnit string `json:"timeUnit"`
 
     /* 购买时间 (Optional) */

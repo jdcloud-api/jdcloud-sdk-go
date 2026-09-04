@@ -22,25 +22,25 @@ type InferenceDedicatedGatewaySpec struct {
     /* 专属网关实例数, 大于等于1，默认为2， 为安全起见，建议最少为2 (Optional) */
     Replicas int `json:"replicas"`
 
-    /* 专属网关单个实例所需cpu资源，单位豪核 如： 1000是一核 (Optional) */
+    /* 专属网关单个实例所需 CPU，单位 mCPU；须与 memory 按 1000/2048、2000/4096、4000/8192 配对 (Optional) */
     Cpu int `json:"cpu"`
 
-    /* 专属网关单个实例所需内存资源，单位M， 如： 1024是1G (Optional) */
+    /* 专属网关单个实例所需内存，单位 MiB；须与 cpu 按 1000/2048、2000/4096、4000/8192 配对 (Optional) */
     Memory int `json:"memory"`
 
-    /* 是否仅内网可用；`true` 表示只提供内网地址 (Optional) */
+    /* 是否仅内网可用；当前实际内外网类型以 elasticIp.bindType 为准 (Optional) */
     Internal bool `json:"internal"`
 
     /* 专属网关所属vpc (Optional) */
     Vpc Vpc `json:"vpc"`
 
-    /* 子网信息  */
+    /* 子网信息 (Optional) */
     Subnet Subnet `json:"subnet"`
 
     /* 公网信息 (Optional) */
     ElasticIp ElasticIp `json:"elasticIp"`
 
-    /* 可用区集合（逗号分隔）  */
+    /* 可用区集合（逗号分隔） (Optional) */
     Azs []Az `json:"azs"`
 
     /* 自建LB保留策略，默认 `false`；为 `true` 时在删除网关时仅删除LB下配置，保留LB及公网IP（仅对自建LB生效） (Optional) */

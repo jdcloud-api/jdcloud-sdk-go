@@ -26,7 +26,7 @@ type DescribeNodeInstancesRequest struct {
 
     core.JDCloudRequest
 
-    /* Region ID，例如：cn-north-1；无region传固定值：all  */
+    /* Region ID，例如：cn-north-1  */
     RegionId string `json:"regionId"`
 
     /* 页码；默认为1。 (Optional) */
@@ -43,7 +43,7 @@ type DescribeNodeInstancesRequest struct {
 }
 
 /*
- * param regionId: Region ID，例如：cn-north-1；无region传固定值：all (Required)
+ * param regionId: Region ID，例如：cn-north-1 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -63,7 +63,7 @@ func NewDescribeNodeInstancesRequest(
 }
 
 /*
- * param regionId: Region ID，例如：cn-north-1；无region传固定值：all (Required)
+ * param regionId: Region ID，例如：cn-north-1 (Required)
  * param page: 页码；默认为1。 (Optional)
  * param pageSize: 分页大小；<br>默认为20；取值范围[10, 100]。 (Optional)
  * param filters: <b>filters 中支持使用以下关键字进行过滤</b>
@@ -105,7 +105,7 @@ func NewDescribeNodeInstancesRequestWithoutParam() *DescribeNodeInstancesRequest
     }
 }
 
-/* param regionId: Region ID，例如：cn-north-1；无region传固定值：all(Required) */
+/* param regionId: Region ID，例如：cn-north-1(Required) */
 func (r *DescribeNodeInstancesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }

@@ -22,10 +22,10 @@ type CreatePoolSpec struct {
     /* 所属集群ID。  */
     ClusterId string `json:"clusterId"`
 
-    /* 资源池ID。 (Optional) */
+    /* 资源池ID。  */
     PoolId string `json:"poolId"`
 
-    /* 资源池名称。  */
+    /* 资源池名称。默认由 Scale GetNodePool 接口获取；force=true 且 Scale 不可用时可作为兜底值。 (Optional) */
     PoolName string `json:"poolName"`
 
     /* 描述信息。 (Optional) */
@@ -37,9 +37,12 @@ type CreatePoolSpec struct {
     /* 资源池规格类型。  */
     Category string `json:"category"`
 
-    /* 资源池物理可用区列表。  */
+    /* 资源池物理可用区列表。默认通过 Scale ListNode 查询已启用节点的逻辑 AZ，并结合 UC 映射转换为管理员已登记的物理 AZ；force=true 时可作为兜底值。 (Optional) */
     PoolAzs []string `json:"poolAzs"`
 
-    /* HPC物理集群名称。HPC资源池必填，非HPC资源池会清空。 (Optional) */
+    /* HPC物理集群名称。默认由 Scale GetNodePool 接口获取；force=true 时可作为兜底值，非HPC资源池会清空。 (Optional) */
     HpcClusterName string `json:"hpcClusterName"`
+
+    /* 是否跳过 Scale 资源池校验。默认 false；为 true 时节点池不存在或节点查询失败不阻止注册。 (Optional) */
+    Force bool `json:"force"`
 }

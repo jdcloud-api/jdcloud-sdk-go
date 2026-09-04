@@ -24,15 +24,18 @@ type NbWorkloadDetail struct {
 ## 公共资源池
 - 固定为：`joybuilder-public-queue`
 
+## 专享资源池
+- 固定为：`joybuilder-exclusive-queue`
+
 ## 私有资源池
 - 用户工作空间中的私有队列ID
  (Optional) */
     QueueId string `json:"queueId"`
 
-    /* 规格ID，公共资源池的规格标识。
+    /* 规格ID，公共/专享资源池的规格标识。
 
 ## 使用说明
-- 仅公共资源池有效
+- 仅公共/专享资源池有效
 - 规格ID对应预定义的资源配置
  (Optional) */
     FlavorId string `json:"flavorId"`
@@ -90,7 +93,7 @@ type NbWorkloadDetail struct {
     /* 逻辑可用区编码，实例运行的逻辑可用区。
 
 ## 使用说明
-- 仅公共资源池有效
+- 仅公共/专享资源池有效
 - 私有资源池时为空
  (Optional) */
     LogicAzCode string `json:"logicAzCode"`
@@ -98,7 +101,7 @@ type NbWorkloadDetail struct {
     /* 物理集群名称，实例运行的物理集群名称。
 
 ## 使用说明
-- 仅公共资源池有效
+- 仅公共/专享资源池有效
 - 与规格(flavorId)对应的物理集群名称
  (Optional) */
     HpcClusterName string `json:"hpcClusterName"`
@@ -106,7 +109,7 @@ type NbWorkloadDetail struct {
     /* 排队超时时间（分钟），Notebook在排队状态的最大等待时间。
 
 ## 使用说明
-- 仅公共资源池有效
+- 仅公共/专享资源池有效
 - 不传或传0时默认使用系统配置 5分钟
 - 取值范围：5~1440
 - 超过排队超时时间后，Notebook将自动停止排队

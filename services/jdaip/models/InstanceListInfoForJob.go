@@ -45,6 +45,14 @@ type InstanceListInfoForJob struct {
  (Optional) */
     NodeIp string `json:"nodeIp"`
 
+    /* 物理节点名称。
+
+**说明：**
+- 仅专属队列返回
+- 公共资源池队列返回空值
+ (Optional) */
+    NodeName string `json:"nodeName"`
+
     /* 实例的状态。
 
 **状态说明：**
