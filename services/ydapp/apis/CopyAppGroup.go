@@ -50,16 +50,16 @@ type CopyAppGroupRequest struct {
     PodCount int `json:"podCount"`
 
     /* CPU 限制  */
-    Cpu string `json:"cpu"`
+    Cpu float32 `json:"cpu"`
 
     /* 内存限制  */
-    Memory string `json:"memory"`
+    Memory float32 `json:"memory"`
 
     /* CPU 请求量  */
-    RequestCpu string `json:"requestCpu"`
+    RequestCpu float32 `json:"requestCpu"`
 
     /* 内存请求量  */
-    RequestMemory string `json:"requestMemory"`
+    RequestMemory float32 `json:"requestMemory"`
 
     /* 镜像地址，固定值：imageUrlHolder (Optional) */
     ImageUrl *string `json:"imageUrl"`
@@ -125,10 +125,10 @@ func NewCopyAppGroupRequest(
     env string,
     clusterId int,
     podCount int,
-    cpu string,
-    memory string,
-    requestCpu string,
-    requestMemory string,
+    cpu float32,
+    memory float32,
+    requestCpu float32,
+    requestMemory float32,
 ) *CopyAppGroupRequest {
 
 	return &CopyAppGroupRequest{
@@ -188,10 +188,10 @@ func NewCopyAppGroupRequestWithAllParams(
     serviceName *string,
     clusterId int,
     podCount int,
-    cpu string,
-    memory string,
-    requestCpu string,
-    requestMemory string,
+    cpu float32,
+    memory float32,
+    requestCpu float32,
+    requestMemory float32,
     imageUrl *string,
     terminationGraceSeconds *int,
     deployStrategyStruct *ydapp.DeployStrategyStruct,
@@ -290,19 +290,19 @@ func (r *CopyAppGroupRequest) SetPodCount(podCount int) {
     r.PodCount = podCount
 }
 /* param cpu: CPU 限制(Required) */
-func (r *CopyAppGroupRequest) SetCpu(cpu string) {
+func (r *CopyAppGroupRequest) SetCpu(cpu float32) {
     r.Cpu = cpu
 }
 /* param memory: 内存限制(Required) */
-func (r *CopyAppGroupRequest) SetMemory(memory string) {
+func (r *CopyAppGroupRequest) SetMemory(memory float32) {
     r.Memory = memory
 }
 /* param requestCpu: CPU 请求量(Required) */
-func (r *CopyAppGroupRequest) SetRequestCpu(requestCpu string) {
+func (r *CopyAppGroupRequest) SetRequestCpu(requestCpu float32) {
     r.RequestCpu = requestCpu
 }
 /* param requestMemory: 内存请求量(Required) */
-func (r *CopyAppGroupRequest) SetRequestMemory(requestMemory string) {
+func (r *CopyAppGroupRequest) SetRequestMemory(requestMemory float32) {
     r.RequestMemory = requestMemory
 }
 /* param imageUrl: 镜像地址，固定值：imageUrlHolder(Optional) */

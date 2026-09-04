@@ -41,16 +41,16 @@ type CopyGroupRequest struct {
     PodCount int `json:"podCount"`
 
     /* CPU 限制  */
-    Cpu string `json:"cpu"`
+    Cpu float32 `json:"cpu"`
 
     /* 内存限制  */
-    Memory string `json:"memory"`
+    Memory float32 `json:"memory"`
 
     /* CPU 请求量  */
-    RequestCpu string `json:"requestCpu"`
+    RequestCpu float32 `json:"requestCpu"`
 
     /* 内存请求量  */
-    RequestMemory string `json:"requestMemory"`
+    RequestMemory float32 `json:"requestMemory"`
 
     /* 镜像地址，固定值：imageUrlHolder (Optional) */
     ImageUrl string `json:"imageUrl"`
