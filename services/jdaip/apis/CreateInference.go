@@ -31,20 +31,20 @@ type CreateInferenceRequest struct {
     /* 工作空间ID  */
     WorkspaceId string `json:"workspaceId"`
 
-    /* 创建推理服务的规格（与请求 JSON 字段 inferenceSpec 对应）  */
+    /* 创建推理服务的规格  */
     InferenceSpec *jdaip.InferenceSpec `json:"inferenceSpec"`
 
     /* 日志采集配置 (Optional) */
     LogCollectConfig *jdaip.LogCollectConfig `json:"logCollectConfig"`
 
-    /* 推理服务扩展信息（如用户标签、资源组等） (Optional) */
+    /* 推理服务扩展信息（如用户标签、资源组、关联产品等） (Optional) */
     Extend *jdaip.ExtendInferenceRequest `json:"extend"`
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param workspaceId: 工作空间ID (Required)
- * param inferenceSpec: 创建推理服务的规格（与请求 JSON 字段 inferenceSpec 对应） (Required)
+ * param inferenceSpec: 创建推理服务的规格 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -70,9 +70,9 @@ func NewCreateInferenceRequest(
 /*
  * param regionId: 地域ID (Required)
  * param workspaceId: 工作空间ID (Required)
- * param inferenceSpec: 创建推理服务的规格（与请求 JSON 字段 inferenceSpec 对应） (Required)
+ * param inferenceSpec: 创建推理服务的规格 (Required)
  * param logCollectConfig: 日志采集配置 (Optional)
- * param extend: 推理服务扩展信息（如用户标签、资源组等） (Optional)
+ * param extend: 推理服务扩展信息（如用户标签、资源组、关联产品等） (Optional)
  */
 func NewCreateInferenceRequestWithAllParams(
     regionId string,
@@ -118,7 +118,7 @@ func (r *CreateInferenceRequest) SetRegionId(regionId string) {
 func (r *CreateInferenceRequest) SetWorkspaceId(workspaceId string) {
     r.WorkspaceId = workspaceId
 }
-/* param inferenceSpec: 创建推理服务的规格（与请求 JSON 字段 inferenceSpec 对应）(Required) */
+/* param inferenceSpec: 创建推理服务的规格(Required) */
 func (r *CreateInferenceRequest) SetInferenceSpec(inferenceSpec *jdaip.InferenceSpec) {
     r.InferenceSpec = inferenceSpec
 }
@@ -126,7 +126,7 @@ func (r *CreateInferenceRequest) SetInferenceSpec(inferenceSpec *jdaip.Inference
 func (r *CreateInferenceRequest) SetLogCollectConfig(logCollectConfig *jdaip.LogCollectConfig) {
     r.LogCollectConfig = logCollectConfig
 }
-/* param extend: 推理服务扩展信息（如用户标签、资源组等）(Optional) */
+/* param extend: 推理服务扩展信息（如用户标签、资源组、关联产品等）(Optional) */
 func (r *CreateInferenceRequest) SetExtend(extend *jdaip.ExtendInferenceRequest) {
     r.Extend = extend
 }

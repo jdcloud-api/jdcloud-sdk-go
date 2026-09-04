@@ -59,6 +59,9 @@ type JobDetailInfoForJob struct {
     /* 任务类型。 (Optional) */
     JobType string `json:"jobType"`
 
+    /* 是否为用户训练主容器开启容器特权模式。 (Optional) */
+    Privileged bool `json:"privileged"`
+
     /* 持续时间，单位为秒。 (Optional) */
     RunningTimeInSec int `json:"runningTimeInSec"`
 
@@ -123,7 +126,7 @@ type JobDetailInfoForJob struct {
     /* 角色配置信息。 (Optional) */
     RoleResource RoleResourceParamForJob `json:"roleResource"`
 
-    /* 出公网配置（任务级，仅公共资源池训练任务生效）。未配置时为 null。
+    /* 出公网配置（任务级，公共资源池和共享资源池训练任务生效）。未配置时为 null。
  (Optional) */
     InternetEgress InternetEgressForJob `json:"internetEgress"`
 
@@ -150,6 +153,9 @@ type JobDetailInfoForJob struct {
 
     /* 用户自定义标签列表。 (Optional) */
     UserTags []JobTag `json:"userTags"`
+
+    /* 任务优先级。共享资源池创建时必填，范围 `1..9`。 (Optional) */
+    TaskPriority int `json:"taskPriority"`
 
     /* 归属用户pin。 (Optional) */
     OwnerUserPin string `json:"ownerUserPin"`

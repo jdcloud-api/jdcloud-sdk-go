@@ -76,8 +76,11 @@ type Runtime struct {
     /* 是否开启引擎指标采集，当前仅vLLM和SGlang支持 (Optional) */
     EnableEngineMetrics *bool `json:"enableEngineMetrics"`
 
-    /* 公网出口配置。不需要出公网时不指定该参数，服务端会按 NONE 落库。 (Optional) */
+    /* 公网出口配置；不传表示关闭公网出口。 (Optional) */
     InternetEgress *InternetEgress `json:"internetEgress"`
+
+    /* 优雅退出配置，仅支持普通单机推理 (Optional) */
+    GracefulShutdown *GracefulShutdown `json:"gracefulShutdown"`
 
     /* 自定义服务端口列表 (Optional) */
     CustomServices []CustomService `json:"customServices"`

@@ -97,7 +97,12 @@ type JobParam struct {
  (Optional) */
     Replica *int `json:"replica"`
 
-    /* 任务优先级，范围[1, 9]; 当队列开启优先级调度时生效 (Optional) */
+    /* 任务优先级，取值范围 `1..9`。
+
+- 共享资源池：创建时必填，仅校验取值范围
+- 公共资源池：不支持配置，传入任意值均拒绝
+- 其他资源队列：可选，按队列优先级策略校验
+ (Optional) */
     TaskPriority *int `json:"taskPriority"`
 
     /* 环境变量列表，用于向训练脚本传递配置参数。
@@ -172,7 +177,18 @@ type JobParam struct {
  (Optional) */
     RoleResource *RoleResourceParamForJob `json:"roleResource"`
 
-    /* 出公网配置（任务级，仅公共资源池训练任务生效）。不需要出公网时不传此参数。
+    /* 是否为用户训练主容器开启容器特权模式，默认值为 `false`。
+
+**开启条件：**
+- 仅支持工作空间绑定的资源队列，公共资源池和共享资源池不支持
+- 仅支持整机 GPU 任务：`Ascend` 前缀型号要求单实例申请 16 卡，其他非空 GPU 型号要求单实例申请 8 卡
+- Ray 任务的 Head 和全部 Worker 角色都必须满足整机条件
+
+不满足开启条件时，创建接口返回参数错误，不会静默降级为 `false`。
+ (Optional) */
+    Privileged *bool `json:"privileged"`
+
+    /* 出公网配置（任务级，公共资源池和共享资源池训练任务生效）。不需要出公网时不传此参数。
  (Optional) */
     InternetEgress *InternetEgressForJob `json:"internetEgress"`
 
@@ -247,14 +263,14 @@ type JobParam struct {
  (Optional) */
     Codes []CodeParam `json:"codes"`
 
-    /* 公共池排队超时时间，单位：分钟。
+    /* 公共资源池或共享资源池排队超时时间，单位：分钟。
 
 **取值范围：** 5 ~ 1440
 
 **默认值：** 5
 
 **说明：**
-- 仅公共资源池训练任务生效
+- 仅公共资源池和共享资源池训练任务生效
 - 排队超过此时间后，任务将自动回滚为创建失败
  (Optional) */
     QueuingTimeoutMinutes *int `json:"queuingTimeoutMinutes"`
@@ -281,4 +297,14 @@ type JobParam struct {
 - 资源使用统计和计费
  (Optional) */
     ResourceGroupId *string `json:"resourceGroupId"`
+
+    /* 是否启用性能分析。(仅支持pytorch训练任务)
+
+**默认值：** `false`（禁用）
+**使用场景：**
+- 性能调优
+- 资源瓶颈分析
+- 模型训练优化
+ (Optional) */
+    ProfilingEnable *bool `json:"profilingEnable"`
 }

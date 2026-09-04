@@ -181,10 +181,10 @@ type NotebookDetail struct {
  (Optional) */
     InternetEgress InternetEgressInfo `json:"internetEgress"`
 
-    /* Notebook的计费信息，公共资源池的计费详情。
+    /* Notebook的计费信息，公共/专享资源池的计费详情。
 
 ## 使用说明
-- 仅公共资源池有计费信息
+- 仅公共/专享资源池有计费信息
 - 私有资源池的资源无计费信息
  (Optional) */
     Charge charge.Charge `json:"charge"`
@@ -275,11 +275,7 @@ type NotebookDetail struct {
  (Optional) */
     UserTags []Tag `json:"userTags"`
 
-    /* 调度优先级值，Pod调度顺序控制。
-
-## 使用说明
-- 数值越大，优先级越高
-- 仅在调度器支持优先级时生效
+    /* 任务调度优先级，数值越大，优先级越高。
  (Optional) */
     TaskPriority int `json:"taskPriority"`
 

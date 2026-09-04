@@ -22,8 +22,8 @@ type JobDefinitionForUpdateJobDefinition struct {
     /* 任务定义的名称。
 
 **命名规则：**
-- 长度：1~32个字符
-- 支持字符：中文、大小写字母、数字、英文中划线 "-" 和英文下划线 "_"
+- 长度：4~64字符
+- 支持字符：仅支持大小写字母、数字、英文中划线"-"、英文下划线"_"
  (Optional) */
     Name string `json:"name"`
 
@@ -70,6 +70,10 @@ type JobDefinitionForUpdateJobDefinition struct {
  (Optional) */
     Resource ResourceForUpdateJobDefinition `json:"resource"`
 
+    /* 共享内存配置；不传表示不更新，传入后整体替换。
+ (Optional) */
+    SharedMemory SharedMemorySpec `json:"sharedMemory"`
+
     /* 存储空间配置列表，用于挂载外部存储到容器中。
 
 **支持的存储类型：**
@@ -83,6 +87,10 @@ type JobDefinitionForUpdateJobDefinition struct {
  (Optional) */
     Models []ModelForUpdateJobDefinition `json:"models"`
 
+    /* 代码仓配置列表，用于挂载代码仓到容器中。
+ (Optional) */
+    Codes []CodeForUpdateJobDefinition `json:"codes"`
+
     /* 新所有者 pin。传入时更新任务定义的归属用户，nil 则不更新所有者。
  (Optional) */
     OwnerUserPin string `json:"ownerUserPin"`
@@ -91,7 +99,10 @@ type JobDefinitionForUpdateJobDefinition struct {
  (Optional) */
     NotifyConfig []NotifyRuleSpec `json:"notifyConfig"`
 
-    /* 任务优先级，范围[1, 9]；当队列开启优先级调度时生效。
+    /* 排队超时时间（分钟）；不传表示不更新，`0` 表示恢复全局默认值，非 `0` 时取值范围为 5～1440。 (Optional) */
+    QueuingTimeoutMinutes int `json:"queuingTimeoutMinutes"`
+
+    /* 任务优先级；当队列开启优先级调度时生效。
  (Optional) */
     TaskPriority int `json:"taskPriority"`
 }

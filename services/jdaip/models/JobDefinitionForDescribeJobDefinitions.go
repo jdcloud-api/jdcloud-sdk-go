@@ -16,6 +16,7 @@
 
 package models
 
+import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
 
 type JobDefinitionForDescribeJobDefinitions struct {
 
@@ -33,6 +34,9 @@ type JobDefinitionForDescribeJobDefinitions struct {
     /* 最新一条任务执行的状态。
  (Optional) */
     LatestState string `json:"latestState"`
+
+    /* 最新一条任务执行的失败原因。 (Optional) */
+    LatestFailureReason string `json:"latestFailureReason"`
 
     /* 最新一条任务执行的开始时间。
  (Optional) */
@@ -82,7 +86,10 @@ type JobDefinitionForDescribeJobDefinitions struct {
  (Optional) */
     StorageSpaces []StorageSpaceForDescribeJobDefinitions `json:"storageSpaces"`
 
-    /* 任务优先级，范围[1, 9]；当队列开启优先级调度时生效。
+    /* 计费信息；私有队列时为空。 (Optional) */
+    Charge charge.Charge `json:"charge"`
+
+    /* 任务优先级；当队列开启优先级调度时生效。
  (Optional) */
     TaskPriority int `json:"taskPriority"`
 

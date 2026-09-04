@@ -28,7 +28,7 @@ type VisibleQueue struct {
     /* 队列描述。 (Optional) */
     Description string `json:"description"`
 
-    /* 是否支持抢占。 (Optional) */
+    /* 是否支持抢占。默认由 Scale GetQueue 接口的 taskPreempt 获取；force=true 时可作为兜底值。 (Optional) */
     Preemptible bool `json:"preemptible"`
 
     /* 队列所属资源池。 (Optional) */

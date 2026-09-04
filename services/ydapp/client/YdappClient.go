@@ -40,7 +40,7 @@ func NewYdappClient(credential *core.Credential) *YdappClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "ydapp",
-            Revision:    "1.0.3",
+            Revision:    "1.0.4",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }

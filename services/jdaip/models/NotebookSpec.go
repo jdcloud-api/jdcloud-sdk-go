@@ -90,7 +90,7 @@ type NotebookSpec struct {
     /* 工作负载资源配置，定义Notebook的计算资源需求。
 
 ## 配置说明
-- **公共资源池**: 必须指定规格ID(flavorId)和逻辑可用区编码(logicAzCode)
+- **公共/专享资源池**: 必须指定规格ID(flavorId)和逻辑可用区编码(logicAzCode)
 - **私有资源池**: 必须指定CPU和内存，可选GPU配置
   */
     WorkloadSpec *WorkloadSpec `json:"workloadSpec"`
@@ -145,9 +145,19 @@ type NotebookSpec struct {
 - 例如：调度到特定GPU型号的节点
 
 ## 限制
-- 公共资源池不支持设置节点亲和性，仅私有资源池有效
+- 公共/专享资源池不支持设置节点亲和性，仅私有资源池有效
  (Optional) */
     NodeAffinities []NotebookNodeAffinity `json:"nodeAffinities"`
+
+    /* 是否启用RDMA高速网络，默认值为`false`。
+
+## 生效规则
+- 仅私有资源池中的Notebook支持设置该参数
+- 计算资源必须包含GPU，且GPU卡数必须为正整数
+- 未配置GPU或配置非整卡GPU时，即使传`true`也会静默按`false`处理
+- 公共/专享资源池忽略该参数，是否启用由所选规格的RDMA属性决定
+ (Optional) */
+    Rdma *bool `json:"rdma"`
 
     /* 代码库配置列表，定义Notebook挂载的代码仓库。
 

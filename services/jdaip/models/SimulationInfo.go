@@ -58,6 +58,9 @@ type SimulationInfo struct {
     /* 工作空间中的资源归属权限。 (Optional) */
     Permission string `json:"permission"`
 
+    /* 任务优先级。非必填，取值范围1~9，默认值为0。 (Optional) */
+    TaskPriority int `json:"taskPriority"`
+
     /* 任务ID，不为空表示正在执行任务。 (Optional) */
     TaskId string `json:"taskId"`
 

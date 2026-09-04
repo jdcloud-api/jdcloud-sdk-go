@@ -72,6 +72,10 @@ type JobDefinitionForCreateJobDefinition struct {
   */
     Resource ResourceForCreateJobDefinition `json:"resource"`
 
+    /* 共享内存配置。
+ (Optional) */
+    SharedMemory SharedMemorySpec `json:"sharedMemory"`
+
     /* 存储空间配置列表，用于挂载外部存储到容器中。
 
 **支持的存储类型：**
@@ -85,6 +89,10 @@ type JobDefinitionForCreateJobDefinition struct {
  (Optional) */
     Models []ModelForCreateJobDefinition `json:"models"`
 
+    /* 代码仓配置列表，用于挂载代码仓到容器中。
+ (Optional) */
+    Codes []CodeForCreateJobDefinition `json:"codes"`
+
     /* 调度任务配置。 (Optional) */
     Buffalo BuffaloForCreateJobDefinition `json:"buffalo"`
 
@@ -92,7 +100,10 @@ type JobDefinitionForCreateJobDefinition struct {
  (Optional) */
     NotifyConfig []NotifyRuleSpec `json:"notifyConfig"`
 
-    /* 任务优先级，范围[1, 9]；当队列开启优先级调度时生效。
+    /* 排队超时时间（分钟）；不传或者传`0` 表示使用全局默认值，非 `0` 时取值范围为 5～1440。 (Optional) */
+    QueuingTimeoutMinutes int `json:"queuingTimeoutMinutes"`
+
+    /* 任务优先级；当队列开启优先级调度时生效。
  (Optional) */
     TaskPriority int `json:"taskPriority"`
 }

@@ -16,6 +16,7 @@
 
 package models
 
+import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
 
 type JobDefinitionForDescribeJobDefinition struct {
 
@@ -33,6 +34,9 @@ type JobDefinitionForDescribeJobDefinition struct {
     /* 最新一条任务执行的状态。
  (Optional) */
     LatestState string `json:"latestState"`
+
+    /* 最新一条任务执行的失败原因。 (Optional) */
+    LatestFailureReason string `json:"latestFailureReason"`
 
     /* 最新一条任务执行的开始时间。
  (Optional) */
@@ -82,6 +86,9 @@ type JobDefinitionForDescribeJobDefinition struct {
     /* 资源配置信息。 (Optional) */
     Resource ResourceForDescribeJobDefinition `json:"resource"`
 
+    /* 共享内存配置。 (Optional) */
+    SharedMemory SharedMemorySpec `json:"sharedMemory"`
+
     /* 存储空间配置列表。
  (Optional) */
     StorageSpaces []StorageSpaceForDescribeJobDefinition `json:"storageSpaces"`
@@ -89,6 +96,10 @@ type JobDefinitionForDescribeJobDefinition struct {
     /* 模型配置列表。
  (Optional) */
     Models []ModelForDescribeJobDefinition `json:"models"`
+
+    /* 代码仓配置列表。
+ (Optional) */
+    Codes []CodeForDescribeJobDefinition `json:"codes"`
 
     /* 调度任务详情信息，包含调度任务的属性、环节、依赖关系等完整配置。
  (Optional) */
@@ -98,7 +109,13 @@ type JobDefinitionForDescribeJobDefinition struct {
  (Optional) */
     NotifyConfig []NotifyRuleSpec `json:"notifyConfig"`
 
-    /* 任务优先级，范围[1, 9]；当队列开启优先级调度时生效。
+    /* 排队超时时间（分钟）；`0` 表示使用全局默认值，非 `0` 时取值范围为 5～1440。 (Optional) */
+    QueuingTimeoutMinutes int `json:"queuingTimeoutMinutes"`
+
+    /* 计费信息；私有队列时为空。 (Optional) */
+    Charge charge.Charge `json:"charge"`
+
+    /* 任务优先级；当队列开启优先级调度时生效。
  (Optional) */
     TaskPriority int `json:"taskPriority"`
 

@@ -23,7 +23,7 @@ type NotebookEnv struct {
   */
     Name string `json:"name"`
 
-    /* 环境变量值，按UTF-8编码计算最大2048字节。OpenAPI的maxLength用于限制字符数，最终字节上限以后端校验结果为准。
+    /* 环境变量值，按UTF-8编码计算，最大2048字节，最终字节上限以后端校验结果为准。
   */
     Value string `json:"value"`
 }

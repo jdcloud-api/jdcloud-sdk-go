@@ -28,7 +28,7 @@ type NodePool struct {
     /* 业务类型-离线/在线/混部 (Optional) */
     BizType string `json:"bizType"`
 
-    /* 节点池类型，combined：异构节点池；general：云主机节点池；mixture：混合节点池 (Optional) */
+    /* 节点池类型，combined：异构节点池；general：云主机节点池；mixture：混合节点池；security：安全节点池 (Optional) */
     PoolType string `json:"poolType"`
 
     /* 计费方式，pack：包年包月；advance：预付费 (Optional) */

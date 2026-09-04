@@ -128,6 +128,8 @@ type DescribeInferenceResponse struct {
 type DescribeInferenceResult struct {
     InferenceId string `json:"inferenceId"`
     DeployType string `json:"deployType"`
+    ServiceType string `json:"serviceType"`
+    SmartRouterConfig jdaip.SmartRouterConfig `json:"smartRouterConfig"`
     TrafficPercent int `json:"trafficPercent"`
     Status string `json:"status"`
     Qps int `json:"qps"`

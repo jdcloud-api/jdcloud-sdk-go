@@ -105,6 +105,9 @@ type AdminJobListInfo struct {
  (Optional) */
     JobType string `json:"jobType"`
 
+    /* 是否为用户训练主容器开启容器特权模式。 (Optional) */
+    Privileged bool `json:"privileged"`
+
     /* 持续运行时间，单位为秒。
 
 ## 用途
@@ -126,21 +129,28 @@ type AdminJobListInfo struct {
 
 ## 特殊值
 使用公共资源池时固定为：`joybuilder-public-queue`
+使用共享资源池时固定为：`joybuilder-exclusive-queue`
  (Optional) */
     QueueId string `json:"queueId"`
 
-    /* 公共资源池的规格ID。
+    /* 队列类型。公共资源池为 `public`，共享资源池为 `exclusive`，安全资源池为 `secure`。 (Optional) */
+    QueueType string `json:"queueType"`
+
+    /* 公共资源池或共享资源池的规格ID。
 
 ## 说明
-使用公共资源池时的资源规格标识，用于确定 CPU、内存、GPU 配置。
+使用公共资源池或共享资源池时的资源规格标识，用于确定 CPU、内存、GPU 配置。
  (Optional) */
     FlavorId string `json:"flavorId"`
 
-    /* 公共资源池的规格详细信息。
+    /* 公共资源池或共享资源池的规格详细信息。
 
 包含具体的资源配置信息，如 CPU 核数、内存大小、GPU 配置等。
  (Optional) */
     FlavorInfo interface{} `json:"flavorInfo"`
+
+    /* 任务优先级。共享资源池取值范围为 `1..9`；未配置优先级时返回 `0`。 (Optional) */
+    TaskPriority int `json:"taskPriority"`
 
     /* GPU卡类型。
 
@@ -195,7 +205,7 @@ type AdminJobListInfo struct {
  (Optional) */
     RoleResource RoleResourceInfoForJobList `json:"roleResource"`
 
-    /* 出公网配置（任务级，仅公共资源池训练任务生效）。未配置时为 null。
+    /* 出公网配置（任务级，公共资源池和共享资源池训练任务生效）。未配置时为 null。
  (Optional) */
     InternetEgress InternetEgressForJob `json:"internetEgress"`
 

@@ -25,6 +25,9 @@ type Service struct {
     /* 部署类型（custom, llm) (Optional) */
     DeployType string `json:"deployType"`
 
+    /* 在线服务类型 (Optional) */
+    ServiceType string `json:"serviceType"`
+
     /* 服务名称 (Optional) */
     Name string `json:"name"`
 
@@ -49,8 +52,26 @@ type Service struct {
     /* 访问服务的Bearer Token (Optional) */
     AccessToken string `json:"accessToken"`
 
+    /* 网关类型 (Optional) */
+    GatewayType string `json:"gatewayType"`
+
+    /* 专属网关公网调用地址 (Optional) */
+    DgAddress string `json:"dgAddress"`
+
+    /* 专属网关内网调用地址 (Optional) */
+    DgInnerAddress string `json:"dgInnerAddress"`
+
     /* 推理服务限流阈值（QPS） (Optional) */
     Qps int `json:"qps"`
+
+    /* 服务关联的产品ID (Optional) */
+    ProductId string `json:"productId"`
+
+    /* 服务关联的产品名称，层级之间使用连字符分隔 (Optional) */
+    ProductName string `json:"productName"`
+
+    /* 服务关联产品所属BG/BU (Optional) */
+    Bgbu string `json:"bgbu"`
 
     /* 该服务中总版本数 (Optional) */
     Total int `json:"total"`

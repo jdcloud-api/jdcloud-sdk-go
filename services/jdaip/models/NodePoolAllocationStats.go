@@ -19,6 +19,9 @@ package models
 
 type NodePoolAllocationStats struct {
 
+    /*  (Optional) */
+    Pool NodePoolAllocationStatsItem `json:"pool"`
+
     /* 节点池资源分配情况 (Optional) */
-    Data []NodePoolAllocationStatsItem `json:"data"`
+    Queue []QueueAllocationStatsItem `json:"queue"`
 }

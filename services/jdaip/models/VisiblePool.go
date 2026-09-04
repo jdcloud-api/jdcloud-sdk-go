@@ -25,7 +25,7 @@ type VisiblePool struct {
     /* 资源池ID。 (Optional) */
     PoolId string `json:"poolId"`
 
-    /* 资源池名称。 (Optional) */
+    /* 资源池名称。默认由 Scale GetNodePool 接口获取；force=true 且 Scale 不可用时可作为兜底值。 (Optional) */
     PoolName string `json:"poolName"`
 
     /* 资源池描述。 (Optional) */

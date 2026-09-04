@@ -25,7 +25,10 @@ type RolloutInferenceSpec struct {
     /* 复用历史滚动记录ID；指定时可基于该历史记录重新发起滚动更新 (Optional) */
     RolloutId *string `json:"rolloutId"`
 
-    /* 运行时配置；当 rolloutId 为空时必填 (Optional) */
+    /* 运行时配置；当 rolloutId 为空时必填。
+支持通过 runtime.gracefulShutdown 配置优雅退出，仅适用于普通单机推理。
+滚动更新不支持修改公网出口配置，不得传入 internetEgress。
+ (Optional) */
     Runtime *Runtime `json:"runtime"`
 
     /* 模型配置；不传时按空数组处理，指定 rolloutId 时可选 (Optional) */

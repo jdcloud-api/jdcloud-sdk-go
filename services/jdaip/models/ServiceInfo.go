@@ -25,6 +25,12 @@ type ServiceInfo struct {
     /* 内部服务地址 (Optional) */
     InnerAddress string `json:"innerAddress"`
 
+    /* 专属网关公网调用地址 (Optional) */
+    DgAddress string `json:"dgAddress"`
+
+    /* 专属网关内网调用地址 (Optional) */
+    DgInnerAddress string `json:"dgInnerAddress"`
+
     /* 访问服务时携带的Bearer Token (Optional) */
     AccessToken string `json:"accessToken"`
 

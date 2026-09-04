@@ -19,11 +19,16 @@ package models
 
 type RoleResourceInfoForJobList struct {
 
+    /* 队列类型。公共资源池为 `public`，共享资源池为 `exclusive`，安全资源池为 `secure`。 (Optional) */
+    QueueType string `json:"queueType"`
+
     /* 队列ID，所有角色共享同一个队列。
 
 **公共资源池：** 固定使用 `joybuilder-public-queue`
 
-**专属资源池：** 使用创建队列时返回的队列ID
+**共享资源池：** 固定使用 `joybuilder-exclusive-queue`
+
+**专属资源池/安全资源池：** 使用创建队列时返回的队列ID
 
 **示例：** `queue-2xxx**********2d*********8b8`
  (Optional) */
