@@ -19,15 +19,15 @@ package models
 
 type CreateSystemSpec struct {
 
-    /* 系统名称  */
+    /* 系统英文名，对应 k8s 集群的 namespace；支持小写字母、数字和中划线，且必须以字母或数字开头、结尾，长度2~50字符  */
     SystemKey string `json:"systemKey"`
 
-    /* 系统中文名 (Optional) */
+    /* 系统中文名，为空时和系统英文名保持一致 (Optional) */
     SystemName string `json:"systemName"`
 
-    /* 应用描述 (Optional) */
+    /* 系统描述 (Optional) */
     Description string `json:"description"`
 
-    /* 绑定JOS应用名称appKey  */
+    /* 绑定 JOS 应用 appKey  */
     JosAppKey string `json:"josAppKey"`
 }

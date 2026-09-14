@@ -18,55 +18,49 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    ydapp "github.com/jdcloud-api/jdcloud-sdk-go/services/ydapp/models"
 )
 
 type CreateAppRequest struct {
 
     core.JDCloudRequest
 
-    /* 应用名称  */
+    /* 应用英文名称，由小写字母、数字和中划线组成，以小写字母或数字开头结尾，长度为2-27个字符  */
     AppKey string `json:"appKey"`
 
-    /* 应用中文名称 (Optional) */
+    /* 应用中文名称，为空默认和应用英文名称保持一致 (Optional) */
     AppName *string `json:"appName"`
 
-    /* 绑定系统id  */
+    /* 绑定系统ID  */
     SystemId string `json:"systemId"`
 
-    /* 应用描述 (Optional) */
+    /* 应用描述，长度不超过100 (Optional) */
     Description *string `json:"description"`
 
     /* 应用级别：0-核心应用，3-其他应用  */
-    AppLevel string `json:"appLevel"`
+    AppLevel int `json:"appLevel"`
 
     /* 应用类型：true-有状态应用，false-无状态应用  */
     Stateful bool `json:"stateful"`
 
-    /* 编程语言：Java、Php、其他  */
+    /* 编程语言：Java、Php、Other  */
     Language string `json:"language"`
-
-    /*   */
-    AppMembers *ydapp.AppMember `json:"appMembers"`
 }
 
 /*
- * param appKey: 应用名称 (Required)
- * param systemId: 绑定系统id (Required)
+ * param appKey: 应用英文名称，由小写字母、数字和中划线组成，以小写字母或数字开头结尾，长度为2-27个字符 (Required)
+ * param systemId: 绑定系统ID (Required)
  * param appLevel: 应用级别：0-核心应用，3-其他应用 (Required)
  * param stateful: 应用类型：true-有状态应用，false-无状态应用 (Required)
- * param language: 编程语言：Java、Php、其他 (Required)
- * param appMembers:  (Required)
+ * param language: 编程语言：Java、Php、Other (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateAppRequest(
     appKey string,
     systemId string,
-    appLevel string,
+    appLevel int,
     stateful bool,
     language string,
-    appMembers *ydapp.AppMember,
 ) *CreateAppRequest {
 
 	return &CreateAppRequest{
@@ -81,29 +75,26 @@ func NewCreateAppRequest(
         AppLevel: appLevel,
         Stateful: stateful,
         Language: language,
-        AppMembers: appMembers,
 	}
 }
 
 /*
- * param appKey: 应用名称 (Required)
- * param appName: 应用中文名称 (Optional)
- * param systemId: 绑定系统id (Required)
- * param description: 应用描述 (Optional)
+ * param appKey: 应用英文名称，由小写字母、数字和中划线组成，以小写字母或数字开头结尾，长度为2-27个字符 (Required)
+ * param appName: 应用中文名称，为空默认和应用英文名称保持一致 (Optional)
+ * param systemId: 绑定系统ID (Required)
+ * param description: 应用描述，长度不超过100 (Optional)
  * param appLevel: 应用级别：0-核心应用，3-其他应用 (Required)
  * param stateful: 应用类型：true-有状态应用，false-无状态应用 (Required)
- * param language: 编程语言：Java、Php、其他 (Required)
- * param appMembers:  (Required)
+ * param language: 编程语言：Java、Php、Other (Required)
  */
 func NewCreateAppRequestWithAllParams(
     appKey string,
     appName *string,
     systemId string,
     description *string,
-    appLevel string,
+    appLevel int,
     stateful bool,
     language string,
-    appMembers *ydapp.AppMember,
 ) *CreateAppRequest {
 
     return &CreateAppRequest{
@@ -120,7 +111,6 @@ func NewCreateAppRequestWithAllParams(
         AppLevel: appLevel,
         Stateful: stateful,
         Language: language,
-        AppMembers: appMembers,
     }
 }
 
@@ -137,37 +127,33 @@ func NewCreateAppRequestWithoutParam() *CreateAppRequest {
     }
 }
 
-/* param appKey: 应用名称(Required) */
+/* param appKey: 应用英文名称，由小写字母、数字和中划线组成，以小写字母或数字开头结尾，长度为2-27个字符(Required) */
 func (r *CreateAppRequest) SetAppKey(appKey string) {
     r.AppKey = appKey
 }
-/* param appName: 应用中文名称(Optional) */
+/* param appName: 应用中文名称，为空默认和应用英文名称保持一致(Optional) */
 func (r *CreateAppRequest) SetAppName(appName string) {
     r.AppName = &appName
 }
-/* param systemId: 绑定系统id(Required) */
+/* param systemId: 绑定系统ID(Required) */
 func (r *CreateAppRequest) SetSystemId(systemId string) {
     r.SystemId = systemId
 }
-/* param description: 应用描述(Optional) */
+/* param description: 应用描述，长度不超过100(Optional) */
 func (r *CreateAppRequest) SetDescription(description string) {
     r.Description = &description
 }
 /* param appLevel: 应用级别：0-核心应用，3-其他应用(Required) */
-func (r *CreateAppRequest) SetAppLevel(appLevel string) {
+func (r *CreateAppRequest) SetAppLevel(appLevel int) {
     r.AppLevel = appLevel
 }
 /* param stateful: 应用类型：true-有状态应用，false-无状态应用(Required) */
 func (r *CreateAppRequest) SetStateful(stateful bool) {
     r.Stateful = stateful
 }
-/* param language: 编程语言：Java、Php、其他(Required) */
+/* param language: 编程语言：Java、Php、Other(Required) */
 func (r *CreateAppRequest) SetLanguage(language string) {
     r.Language = language
-}
-/* param appMembers: (Required) */
-func (r *CreateAppRequest) SetAppMembers(appMembers *ydapp.AppMember) {
-    r.AppMembers = appMembers
 }
 
 
@@ -184,5 +170,5 @@ type CreateAppResponse struct {
 }
 
 type CreateAppResult struct {
-    Value string `json:"value"`
+    AppId string `json:"appId"`
 }

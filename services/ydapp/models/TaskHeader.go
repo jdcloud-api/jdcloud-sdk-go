@@ -20,8 +20,8 @@ package models
 type TaskHeader struct {
 
     /* 头部名称 (Optional) */
-    Name *string `json:"name"`
+    Name string `json:"name"`
 
     /* 头部值 (Optional) */
-    Value *string `json:"value"`
+    Value string `json:"value"`
 }

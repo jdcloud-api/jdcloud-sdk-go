@@ -19,18 +19,15 @@ package models
 
 type LinkPackageRequest struct {
 
-    /* 制品包名称，E.g.，my-app-package (Optional) */
+    /* 程序包名称，支持5-64位大小写字母、中划线和下划线  */
     Name string `json:"name"`
 
-    /* 制品包版本号，E.g.，v1.0.0 (Optional) */
+    /* 程序包版本，支持2-32位大小写字母、数字、点和中划线  */
     Version string `json:"version"`
 
-    /* 制品包描述，E.g.，一次构建产物 (Optional) */
+    /* 备注，最长128字符 (Optional) */
     Desc string `json:"desc"`
 
-    /* 环境标识，E.g.，prod (Optional) */
-    Env string `json:"env"`
-
-    /* 制品包下载地址，E.g.，https://repo.jdcloud.com/artifact/my-app-package-v1.0.0.tar.gz (Optional) */
+    /* 程序包地址  */
     Url string `json:"url"`
 }

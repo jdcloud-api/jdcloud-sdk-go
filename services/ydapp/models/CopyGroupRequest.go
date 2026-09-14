@@ -19,20 +19,14 @@ package models
 
 type CopyGroupRequest struct {
 
-    /* 应用ID，服务端会从 path 参数写入  */
-    AppId string `json:"appId"`
-
-    /* 分组 key  */
+    /* 分组标识  */
     GroupKey string `json:"groupKey"`
 
-    /* 分组名称 (Optional) */
+    /* 分组中文名称 (Optional) */
     GroupName string `json:"groupName"`
 
-    /* 环境  */
+    /* 环境。test-测试环境; product-生产环境  */
     Env string `json:"env"`
-
-    /* 服务名称 (Optional) */
-    ServiceName string `json:"serviceName"`
 
     /* 集群ID  */
     ClusterId int `json:"clusterId"`
@@ -40,57 +34,15 @@ type CopyGroupRequest struct {
     /* Pod 数量  */
     PodCount int `json:"podCount"`
 
-    /* CPU 限制  */
-    Cpu float32 `json:"cpu"`
+    /* CPU限制，单位为核  */
+    Cpu int `json:"cpu"`
 
-    /* 内存限制  */
-    Memory float32 `json:"memory"`
+    /* 内存限制，单位为GB  */
+    Memory int `json:"memory"`
 
-    /* CPU 请求量  */
-    RequestCpu float32 `json:"requestCpu"`
+    /* CPU请求，单位为核  */
+    RequestCpu int `json:"requestCpu"`
 
-    /* 内存请求量  */
-    RequestMemory float32 `json:"requestMemory"`
-
-    /* 镜像地址，固定值：imageUrlHolder (Optional) */
-    ImageUrl string `json:"imageUrl"`
-
-    /* 优雅终止时间 (Optional) */
-    TerminationGraceSeconds int `json:"terminationGraceSeconds"`
-
-    /*  (Optional) */
-    DeployStrategyStruct DeployStrategyStruct `json:"deployStrategyStruct"`
-
-    /*  (Optional) */
-    HealthCheckStruct HealthCheckStruct `json:"healthCheckStruct"`
-
-    /*  (Optional) */
-    ReadyCheckStruct ReadyCheckStruct `json:"readyCheckStruct"`
-
-    /*  (Optional) */
-    LifecycleStruct LifecycleStruct `json:"lifecycleStruct"`
-
-    /*  (Optional) */
-    ContainerInfo ContainerInfoStruct `json:"containerInfo"`
-
-    /*  (Optional) */
-    BaseInfo BaseInfoStruct `json:"baseInfo"`
-
-    /* 配置文件列表 (Optional) */
-    ConfigFiles []GroupConfigInfo `json:"configFiles"`
-
-    /* 端口列表 (Optional) */
-    Ports []TaskPort `json:"ports"`
-
-    /* 标签列表 (Optional) */
-    Tags []TagInfo `json:"tags"`
-
-    /* 注解列表 (Optional) */
-    Annotations []TagInfo `json:"annotations"`
-
-    /*  (Optional) */
-    StartCmdStruct StartCmdStruct `json:"startCmdStruct"`
-
-    /* 卷基础配置列表 (Optional) */
-    VolumeBases []GroupVolume `json:"volumeBases"`
+    /* 内存请求，单位为GB  */
+    RequestMemory int `json:"requestMemory"`
 }

@@ -20,11 +20,11 @@ package models
 type TagInfo struct {
 
     /* 前端临时变量 (Optional) */
-    _uid *int `json:"_uid"`
+    _uid int `json:"_uid"`
 
     /* 标签键 (Optional) */
-    TagKey *string `json:"tagKey"`
+    TagKey string `json:"tagKey"`
 
     /* 标签值 (Optional) */
-    TagValue *string `json:"tagValue"`
+    TagValue string `json:"tagValue"`
 }

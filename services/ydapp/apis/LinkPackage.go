@@ -27,29 +27,32 @@ type LinkPackageRequest struct {
     /* 应用ID，E.g.，app-123456789  */
     AppId string `json:"appId"`
 
-    /* 制品包名称，E.g.，my-app-package (Optional) */
-    Name *string `json:"name"`
+    /* 程序包名称，支持5-64位大小写字母、中划线和下划线  */
+    Name string `json:"name"`
 
-    /* 制品包版本号，E.g.，v1.0.0 (Optional) */
-    Version *string `json:"version"`
+    /* 程序包版本，支持2-32位大小写字母、数字、点和中划线  */
+    Version string `json:"version"`
 
-    /* 制品包描述，E.g.，一次构建产物 (Optional) */
+    /* 备注，最长128字符 (Optional) */
     Desc *string `json:"desc"`
 
-    /* 环境标识，E.g.，prod (Optional) */
-    Env *string `json:"env"`
-
-    /* 制品包下载地址，E.g.，https://repo.jdcloud.com/artifact/my-app-package-v1.0.0.tar.gz (Optional) */
-    Url *string `json:"url"`
+    /* 程序包地址  */
+    Url string `json:"url"`
 }
 
 /*
  * param appId: 应用ID，E.g.，app-123456789 (Required)
+ * param name: 程序包名称，支持5-64位大小写字母、中划线和下划线 (Required)
+ * param version: 程序包版本，支持2-32位大小写字母、数字、点和中划线 (Required)
+ * param url: 程序包地址 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewLinkPackageRequest(
     appId string,
+    name string,
+    version string,
+    url string,
 ) *LinkPackageRequest {
 
 	return &LinkPackageRequest{
@@ -60,24 +63,25 @@ func NewLinkPackageRequest(
 			Version: "v1",
 		},
         AppId: appId,
+        Name: name,
+        Version: version,
+        Url: url,
 	}
 }
 
 /*
  * param appId: 应用ID，E.g.，app-123456789 (Required)
- * param name: 制品包名称，E.g.，my-app-package (Optional)
- * param version: 制品包版本号，E.g.，v1.0.0 (Optional)
- * param desc: 制品包描述，E.g.，一次构建产物 (Optional)
- * param env: 环境标识，E.g.，prod (Optional)
- * param url: 制品包下载地址，E.g.，https://repo.jdcloud.com/artifact/my-app-package-v1.0.0.tar.gz (Optional)
+ * param name: 程序包名称，支持5-64位大小写字母、中划线和下划线 (Required)
+ * param version: 程序包版本，支持2-32位大小写字母、数字、点和中划线 (Required)
+ * param desc: 备注，最长128字符 (Optional)
+ * param url: 程序包地址 (Required)
  */
 func NewLinkPackageRequestWithAllParams(
     appId string,
-    name *string,
-    version *string,
+    name string,
+    version string,
     desc *string,
-    env *string,
-    url *string,
+    url string,
 ) *LinkPackageRequest {
 
     return &LinkPackageRequest{
@@ -91,7 +95,6 @@ func NewLinkPackageRequestWithAllParams(
         Name: name,
         Version: version,
         Desc: desc,
-        Env: env,
         Url: url,
     }
 }
@@ -113,25 +116,21 @@ func NewLinkPackageRequestWithoutParam() *LinkPackageRequest {
 func (r *LinkPackageRequest) SetAppId(appId string) {
     r.AppId = appId
 }
-/* param name: 制品包名称，E.g.，my-app-package(Optional) */
+/* param name: 程序包名称，支持5-64位大小写字母、中划线和下划线(Required) */
 func (r *LinkPackageRequest) SetName(name string) {
-    r.Name = &name
+    r.Name = name
 }
-/* param version: 制品包版本号，E.g.，v1.0.0(Optional) */
+/* param version: 程序包版本，支持2-32位大小写字母、数字、点和中划线(Required) */
 func (r *LinkPackageRequest) SetVersion(version string) {
-    r.Version = &version
+    r.Version = version
 }
-/* param desc: 制品包描述，E.g.，一次构建产物(Optional) */
+/* param desc: 备注，最长128字符(Optional) */
 func (r *LinkPackageRequest) SetDesc(desc string) {
     r.Desc = &desc
 }
-/* param env: 环境标识，E.g.，prod(Optional) */
-func (r *LinkPackageRequest) SetEnv(env string) {
-    r.Env = &env
-}
-/* param url: 制品包下载地址，E.g.，https://repo.jdcloud.com/artifact/my-app-package-v1.0.0.tar.gz(Optional) */
+/* param url: 程序包地址(Required) */
 func (r *LinkPackageRequest) SetUrl(url string) {
-    r.Url = &url
+    r.Url = url
 }
 
 
@@ -148,5 +147,5 @@ type LinkPackageResponse struct {
 }
 
 type LinkPackageResult struct {
-    Value int64 `json:"value"`
+    PackageId int64 `json:"packageId"`
 }

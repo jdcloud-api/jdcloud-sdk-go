@@ -24,53 +24,44 @@ type DeleteAppGroupRequest struct {
 
     core.JDCloudRequest
 
-    /* 应用ID  */
-    AppId string `json:"appId"`
-
     /* 分组ID  */
     GroupId string `json:"groupId"`
 }
 
 /*
- * param appId: 应用ID (Required)
  * param groupId: 分组ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewDeleteAppGroupRequest(
-    appId string,
     groupId string,
 ) *DeleteAppGroupRequest {
 
 	return &DeleteAppGroupRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/app/{appId}/group/{groupId}",
+			URL:     "/group/{groupId}",
 			Method:  "DELETE",
 			Header:  nil,
 			Version: "v1",
 		},
-        AppId: appId,
         GroupId: groupId,
 	}
 }
 
 /*
- * param appId: 应用ID (Required)
  * param groupId: 分组ID (Required)
  */
 func NewDeleteAppGroupRequestWithAllParams(
-    appId string,
     groupId string,
 ) *DeleteAppGroupRequest {
 
     return &DeleteAppGroupRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/app/{appId}/group/{groupId}",
+            URL:     "/group/{groupId}",
             Method:  "DELETE",
             Header:  nil,
             Version: "v1",
         },
-        AppId: appId,
         GroupId: groupId,
     }
 }
@@ -80,7 +71,7 @@ func NewDeleteAppGroupRequestWithoutParam() *DeleteAppGroupRequest {
 
     return &DeleteAppGroupRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/app/{appId}/group/{groupId}",
+            URL:     "/group/{groupId}",
             Method:  "DELETE",
             Header:  nil,
             Version: "v1",
@@ -88,10 +79,6 @@ func NewDeleteAppGroupRequestWithoutParam() *DeleteAppGroupRequest {
     }
 }
 
-/* param appId: 应用ID(Required) */
-func (r *DeleteAppGroupRequest) SetAppId(appId string) {
-    r.AppId = appId
-}
 /* param groupId: 分组ID(Required) */
 func (r *DeleteAppGroupRequest) SetGroupId(groupId string) {
     r.GroupId = groupId

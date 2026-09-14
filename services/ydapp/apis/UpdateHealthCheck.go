@@ -34,16 +34,16 @@ type UpdateHealthCheckRequest struct {
     GroupName *string `json:"groupName"`
 
     /* CPU核数 (Optional) */
-    Cpu *float32 `json:"cpu"`
+    Cpu *int `json:"cpu"`
 
     /* 内存大小(GB) (Optional) */
-    Memory *float32 `json:"memory"`
+    Memory *int `json:"memory"`
 
     /* 请求CPU核数 (Optional) */
-    RequestCpu *float32 `json:"requestCpu"`
+    RequestCpu *int `json:"requestCpu"`
 
     /* 请求内存大小(GB) (Optional) */
-    RequestMemory *float32 `json:"requestMemory"`
+    RequestMemory *int `json:"requestMemory"`
 
     /* 启动命令 (Optional) */
     StartCommand *string `json:"startCommand"`
@@ -202,10 +202,10 @@ func NewUpdateHealthCheckRequestWithAllParams(
     appId string,
     groupId string,
     groupName *string,
-    cpu *float32,
-    memory *float32,
-    requestCpu *float32,
-    requestMemory *float32,
+    cpu *int,
+    memory *int,
+    requestCpu *int,
+    requestMemory *int,
     startCommand *string,
     healthCheckType *string,
     healthCheckInitialDelaySeconds *int,
@@ -311,19 +311,19 @@ func (r *UpdateHealthCheckRequest) SetGroupName(groupName string) {
     r.GroupName = &groupName
 }
 /* param cpu: CPU核数(Optional) */
-func (r *UpdateHealthCheckRequest) SetCpu(cpu float32) {
+func (r *UpdateHealthCheckRequest) SetCpu(cpu int) {
     r.Cpu = &cpu
 }
 /* param memory: 内存大小(GB)(Optional) */
-func (r *UpdateHealthCheckRequest) SetMemory(memory float32) {
+func (r *UpdateHealthCheckRequest) SetMemory(memory int) {
     r.Memory = &memory
 }
 /* param requestCpu: 请求CPU核数(Optional) */
-func (r *UpdateHealthCheckRequest) SetRequestCpu(requestCpu float32) {
+func (r *UpdateHealthCheckRequest) SetRequestCpu(requestCpu int) {
     r.RequestCpu = &requestCpu
 }
 /* param requestMemory: 请求内存大小(GB)(Optional) */
-func (r *UpdateHealthCheckRequest) SetRequestMemory(requestMemory float32) {
+func (r *UpdateHealthCheckRequest) SetRequestMemory(requestMemory int) {
     r.RequestMemory = &requestMemory
 }
 /* param startCommand: 启动命令(Optional) */

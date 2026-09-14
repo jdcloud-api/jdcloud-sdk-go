@@ -27,13 +27,13 @@ type GetPackageDownloadInfoRequest struct {
     /* 应用ID，E.g.，app-123456789  */
     AppId string `json:"appId"`
 
-    /* 制品包ID，E.g.，10086  */
+    /* 程序包ID，E.g.，10086  */
     PackageId int `json:"packageId"`
 }
 
 /*
  * param appId: 应用ID，E.g.，app-123456789 (Required)
- * param packageId: 制品包ID，E.g.，10086 (Required)
+ * param packageId: 程序包ID，E.g.，10086 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -56,7 +56,7 @@ func NewGetPackageDownloadInfoRequest(
 
 /*
  * param appId: 应用ID，E.g.，app-123456789 (Required)
- * param packageId: 制品包ID，E.g.，10086 (Required)
+ * param packageId: 程序包ID，E.g.，10086 (Required)
  */
 func NewGetPackageDownloadInfoRequestWithAllParams(
     appId string,
@@ -92,7 +92,7 @@ func NewGetPackageDownloadInfoRequestWithoutParam() *GetPackageDownloadInfoReque
 func (r *GetPackageDownloadInfoRequest) SetAppId(appId string) {
     r.AppId = appId
 }
-/* param packageId: 制品包ID，E.g.，10086(Required) */
+/* param packageId: 程序包ID，E.g.，10086(Required) */
 func (r *GetPackageDownloadInfoRequest) SetPackageId(packageId int) {
     r.PackageId = packageId
 }

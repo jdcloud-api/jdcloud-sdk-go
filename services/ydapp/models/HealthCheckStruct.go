@@ -20,23 +20,23 @@ package models
 type HealthCheckStruct struct {
 
     /* 检查类型 (Optional) */
-    Type *string `json:"type"`
+    Type string `json:"type"`
 
     /* 初始延迟时间(秒) (Optional) */
-    InitialDelaySeconds *int `json:"initialDelaySeconds"`
+    InitialDelaySeconds int `json:"initialDelaySeconds"`
 
     /* 超时时间(秒) (Optional) */
-    TimeoutSeconds *int `json:"timeoutSeconds"`
+    TimeoutSeconds int `json:"timeoutSeconds"`
 
     /* 执行命令列表 (Optional) */
     Command []string `json:"command"`
 
     /* 检查路径 (Optional) */
-    Path *string `json:"path"`
+    Path string `json:"path"`
 
     /* 端口号 (Optional) */
-    Port *int `json:"port"`
+    Port int `json:"port"`
 
     /* 协议 (Optional) */
-    Scheme *string `json:"scheme"`
+    Scheme string `json:"scheme"`
 }
