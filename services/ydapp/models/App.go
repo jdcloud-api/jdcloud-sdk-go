@@ -19,18 +19,18 @@ package models
 
 type App struct {
 
-    /* 应用ID，E.g.，app-123456789 (Optional) */
+    /* 应用ID (Optional) */
     AppId string `json:"appId"`
 
-    /* 应用名称，E.g.，测试应用 (Optional) */
+    /* 应用名称 (Optional) */
     AppName string `json:"appName"`
 
-    /* 应用归属的系统ID，E.g.，sys-987654321 (Optional) */
+    /* 应用归属的系统ID (Optional) */
     SystemId string `json:"systemId"`
 
-    /* 创建时间，E.g.，'2024-08-22T05:48:37.000+00:00' (Optional) */
+    /* 创建时间 (Optional) */
     CreateTime string `json:"createTime"`
 
-    /* 更新时间，E.g.，'2024-08-22T05:48:37.000+00:00' (Optional) */
+    /* 更新时间 (Optional) */
     UpdateTime string `json:"updateTime"`
 }

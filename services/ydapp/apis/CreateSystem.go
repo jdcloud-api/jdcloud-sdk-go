@@ -24,22 +24,22 @@ type CreateSystemRequest struct {
 
     core.JDCloudRequest
 
-    /* 系统名称  */
+    /* 系统英文名，对应 k8s 集群的 namespace；支持小写字母、数字和中划线，且必须以字母或数字开头、结尾，长度2~50字符  */
     SystemKey string `json:"systemKey"`
 
-    /* 系统中文名 (Optional) */
+    /* 系统中文名，为空时和系统英文名保持一致 (Optional) */
     SystemName *string `json:"systemName"`
 
-    /* 应用描述 (Optional) */
+    /* 系统描述 (Optional) */
     Description *string `json:"description"`
 
-    /* 绑定JOS应用名称appKey  */
+    /* 绑定 JOS 应用 appKey  */
     JosAppKey string `json:"josAppKey"`
 }
 
 /*
- * param systemKey: 系统名称 (Required)
- * param josAppKey: 绑定JOS应用名称appKey (Required)
+ * param systemKey: 系统英文名，对应 k8s 集群的 namespace；支持小写字母、数字和中划线，且必须以字母或数字开头、结尾，长度2~50字符 (Required)
+ * param josAppKey: 绑定 JOS 应用 appKey (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -61,10 +61,10 @@ func NewCreateSystemRequest(
 }
 
 /*
- * param systemKey: 系统名称 (Required)
- * param systemName: 系统中文名 (Optional)
- * param description: 应用描述 (Optional)
- * param josAppKey: 绑定JOS应用名称appKey (Required)
+ * param systemKey: 系统英文名，对应 k8s 集群的 namespace；支持小写字母、数字和中划线，且必须以字母或数字开头、结尾，长度2~50字符 (Required)
+ * param systemName: 系统中文名，为空时和系统英文名保持一致 (Optional)
+ * param description: 系统描述 (Optional)
+ * param josAppKey: 绑定 JOS 应用 appKey (Required)
  */
 func NewCreateSystemRequestWithAllParams(
     systemKey string,
@@ -100,19 +100,19 @@ func NewCreateSystemRequestWithoutParam() *CreateSystemRequest {
     }
 }
 
-/* param systemKey: 系统名称(Required) */
+/* param systemKey: 系统英文名，对应 k8s 集群的 namespace；支持小写字母、数字和中划线，且必须以字母或数字开头、结尾，长度2~50字符(Required) */
 func (r *CreateSystemRequest) SetSystemKey(systemKey string) {
     r.SystemKey = systemKey
 }
-/* param systemName: 系统中文名(Optional) */
+/* param systemName: 系统中文名，为空时和系统英文名保持一致(Optional) */
 func (r *CreateSystemRequest) SetSystemName(systemName string) {
     r.SystemName = &systemName
 }
-/* param description: 应用描述(Optional) */
+/* param description: 系统描述(Optional) */
 func (r *CreateSystemRequest) SetDescription(description string) {
     r.Description = &description
 }
-/* param josAppKey: 绑定JOS应用名称appKey(Required) */
+/* param josAppKey: 绑定 JOS 应用 appKey(Required) */
 func (r *CreateSystemRequest) SetJosAppKey(josAppKey string) {
     r.JosAppKey = josAppKey
 }
@@ -133,4 +133,5 @@ type CreateSystemResponse struct {
 type CreateSystemResult struct {
     SystemId string `json:"systemId"`
     VpcId string `json:"vpcId"`
+    SystemKey string `json:"systemKey"`
 }

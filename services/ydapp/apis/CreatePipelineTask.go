@@ -24,23 +24,20 @@ type CreatePipelineTaskRequest struct {
 
     core.JDCloudRequest
 
-    /* 应用ID，E.g.，app-123456789  */
+    /* 应用ID  */
     AppId string `json:"appId"`
 
-    /* 基础镜像UID，从 baseImages 接口返回参数 uid 获取，E.g.，baseimg-123456789  */
+    /* 基础镜像UID  */
     BaseImageUid string `json:"baseImageUid"`
 
-    /* 制品包ID，E.g.，10086  */
+    /* 程序包ID  */
     PackageId int64 `json:"packageId"`
-
-    /* 附加扩展参数，一般无需传递，E.g.，'' (Optional) */
-    Args *string `json:"args"`
 }
 
 /*
- * param appId: 应用ID，E.g.，app-123456789 (Required)
- * param baseImageUid: 基础镜像UID，从 baseImages 接口返回参数 uid 获取，E.g.，baseimg-123456789 (Required)
- * param packageId: 制品包ID，E.g.，10086 (Required)
+ * param appId: 应用ID (Required)
+ * param baseImageUid: 基础镜像UID (Required)
+ * param packageId: 程序包ID (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -52,7 +49,7 @@ func NewCreatePipelineTaskRequest(
 
 	return &CreatePipelineTaskRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/pipelinetask",
+			URL:     "/app/{appId}/pipelinetask",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -64,21 +61,19 @@ func NewCreatePipelineTaskRequest(
 }
 
 /*
- * param appId: 应用ID，E.g.，app-123456789 (Required)
- * param baseImageUid: 基础镜像UID，从 baseImages 接口返回参数 uid 获取，E.g.，baseimg-123456789 (Required)
- * param packageId: 制品包ID，E.g.，10086 (Required)
- * param args: 附加扩展参数，一般无需传递，E.g.，'' (Optional)
+ * param appId: 应用ID (Required)
+ * param baseImageUid: 基础镜像UID (Required)
+ * param packageId: 程序包ID (Required)
  */
 func NewCreatePipelineTaskRequestWithAllParams(
     appId string,
     baseImageUid string,
     packageId int64,
-    args *string,
 ) *CreatePipelineTaskRequest {
 
     return &CreatePipelineTaskRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/pipelinetask",
+            URL:     "/app/{appId}/pipelinetask",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -86,7 +81,6 @@ func NewCreatePipelineTaskRequestWithAllParams(
         AppId: appId,
         BaseImageUid: baseImageUid,
         PackageId: packageId,
-        Args: args,
     }
 }
 
@@ -95,7 +89,7 @@ func NewCreatePipelineTaskRequestWithoutParam() *CreatePipelineTaskRequest {
 
     return &CreatePipelineTaskRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/pipelinetask",
+            URL:     "/app/{appId}/pipelinetask",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -103,21 +97,17 @@ func NewCreatePipelineTaskRequestWithoutParam() *CreatePipelineTaskRequest {
     }
 }
 
-/* param appId: 应用ID，E.g.，app-123456789(Required) */
+/* param appId: 应用ID(Required) */
 func (r *CreatePipelineTaskRequest) SetAppId(appId string) {
     r.AppId = appId
 }
-/* param baseImageUid: 基础镜像UID，从 baseImages 接口返回参数 uid 获取，E.g.，baseimg-123456789(Required) */
+/* param baseImageUid: 基础镜像UID(Required) */
 func (r *CreatePipelineTaskRequest) SetBaseImageUid(baseImageUid string) {
     r.BaseImageUid = baseImageUid
 }
-/* param packageId: 制品包ID，E.g.，10086(Required) */
+/* param packageId: 程序包ID(Required) */
 func (r *CreatePipelineTaskRequest) SetPackageId(packageId int64) {
     r.PackageId = packageId
-}
-/* param args: 附加扩展参数，一般无需传递，E.g.，''(Optional) */
-func (r *CreatePipelineTaskRequest) SetArgs(args string) {
-    r.Args = &args
 }
 
 
@@ -134,5 +124,5 @@ type CreatePipelineTaskResponse struct {
 }
 
 type CreatePipelineTaskResult struct {
-    Value string `json:"value"`
+    PipelineTaskId string `json:"pipelineTaskId"`
 }

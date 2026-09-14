@@ -20,22 +20,22 @@ package models
 type LifecycleHook struct {
 
     /* 钩子类型 (Optional) */
-    Type *string `json:"type"`
+    Type string `json:"type"`
 
     /* 执行命令列表 (Optional) */
     Command []string `json:"command"`
 
     /* 路径 (Optional) */
-    Path *string `json:"path"`
+    Path string `json:"path"`
 
     /* 端口号 (Optional) */
-    Port *int `json:"port"`
+    Port int `json:"port"`
 
     /* 协议 (Optional) */
-    Scheme *string `json:"scheme"`
+    Scheme string `json:"scheme"`
 
     /* 主机名 (Optional) */
-    Host *string `json:"host"`
+    Host string `json:"host"`
 
     /* 请求头列表 (Optional) */
     Header []TaskHeader `json:"header"`

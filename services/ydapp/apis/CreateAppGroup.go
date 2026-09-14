@@ -18,7 +18,6 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    ydapp "github.com/jdcloud-api/jdcloud-sdk-go/services/ydapp/models"
 )
 
 type CreateAppGroupRequest struct {
@@ -28,91 +27,44 @@ type CreateAppGroupRequest struct {
     /* 应用ID  */
     AppId string `json:"appId"`
 
-    /* 分组 key  */
+    /* 分组英文名，由小写字母、数字和中划线组成，以小写字母或数字开头结尾，长度为2-27个字符  */
     GroupKey string `json:"groupKey"`
 
-    /* 分组名称 (Optional) */
+    /* 分组中文名称，为空默认和分组英文名保持一致 (Optional) */
     GroupName *string `json:"groupName"`
 
-    /* 环境  */
+    /* 分组环境，必须与所选集群环境一致。test-测试环境; product-生产环境  */
     Env string `json:"env"`
 
-    /* 服务名称 (Optional) */
-    ServiceName *string `json:"serviceName"`
-
     /* 集群ID  */
-    ClusterId int `json:"clusterId"`
+    ClusterId int64 `json:"clusterId"`
 
-    /* Pod 数量  */
+    /* Pod数量，最小值 1  */
     PodCount int `json:"podCount"`
 
-    /* CPU 限制  */
-    Cpu float32 `json:"cpu"`
+    /* CPU规格，单位为核，最小为0.1。CPU资源，单位为核  */
+    Cpu int `json:"cpu"`
 
-    /* 内存限制  */
-    Memory float32 `json:"memory"`
+    /* 内存规格，单位为GB，最小为0.1。内存资源，单位为GB  */
+    Memory int `json:"memory"`
 
-    /* CPU 请求量  */
-    RequestCpu float32 `json:"requestCpu"`
+    /* CPU限制，单位为核，最小为0.1。CPU资源限制，单位为核  */
+    RequestCpu int `json:"requestCpu"`
 
-    /* 内存请求量  */
-    RequestMemory float32 `json:"requestMemory"`
-
-    /* 镜像地址，固定值：imageUrlHolder  */
-    ImageUrl string `json:"imageUrl"`
-
-    /* 优雅终止时间 (Optional) */
-    TerminationGraceSeconds *int `json:"terminationGraceSeconds"`
-
-    /*   */
-    DeployStrategyStruct *ydapp.DeployStrategyStruct `json:"deployStrategyStruct"`
-
-    /*  (Optional) */
-    HealthCheckStruct *ydapp.HealthCheckStruct `json:"healthCheckStruct"`
-
-    /*  (Optional) */
-    ReadyCheckStruct *ydapp.ReadyCheckStruct `json:"readyCheckStruct"`
-
-    /*  (Optional) */
-    LifecycleStruct *ydapp.LifecycleStruct `json:"lifecycleStruct"`
-
-    /*  (Optional) */
-    ContainerInfo *ydapp.ContainerInfoStruct `json:"containerInfo"`
-
-    /*  (Optional) */
-    BaseInfo *ydapp.BaseInfoStruct `json:"baseInfo"`
-
-    /* 配置文件列表 (Optional) */
-    ConfigFiles []ydapp.GroupConfigInfo `json:"configFiles"`
-
-    /* 端口列表 (Optional) */
-    Ports []ydapp.TaskPort `json:"ports"`
-
-    /* 标签列表 (Optional) */
-    Tags []ydapp.TagInfo `json:"tags"`
-
-    /* 注解列表 (Optional) */
-    Annotations []ydapp.TagInfo `json:"annotations"`
-
-    /*  (Optional) */
-    StartCmdStruct *ydapp.StartCmdStruct `json:"startCmdStruct"`
-
-    /* 卷基础配置列表 (Optional) */
-    VolumeBases []ydapp.GroupVolume `json:"volumeBases"`
+    /* 内存限制，单位为GB，最小为0.1。内存资源限制，单位为GB  */
+    RequestMemory int `json:"requestMemory"`
 }
 
 /*
  * param appId: 应用ID (Required)
- * param groupKey: 分组 key (Required)
- * param env: 环境 (Required)
+ * param groupKey: 分组英文名，由小写字母、数字和中划线组成，以小写字母或数字开头结尾，长度为2-27个字符 (Required)
+ * param env: 分组环境，必须与所选集群环境一致。test-测试环境; product-生产环境 (Required)
  * param clusterId: 集群ID (Required)
- * param podCount: Pod 数量 (Required)
- * param cpu: CPU 限制 (Required)
- * param memory: 内存限制 (Required)
- * param requestCpu: CPU 请求量 (Required)
- * param requestMemory: 内存请求量 (Required)
- * param imageUrl: 镜像地址，固定值：imageUrlHolder (Required)
- * param deployStrategyStruct:  (Required)
+ * param podCount: Pod数量，最小值 1 (Required)
+ * param cpu: CPU规格，单位为核，最小为0.1。CPU资源，单位为核 (Required)
+ * param memory: 内存规格，单位为GB，最小为0.1。内存资源，单位为GB (Required)
+ * param requestCpu: CPU限制，单位为核，最小为0.1。CPU资源限制，单位为核 (Required)
+ * param requestMemory: 内存限制，单位为GB，最小为0.1。内存资源限制，单位为GB (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -120,14 +72,12 @@ func NewCreateAppGroupRequest(
     appId string,
     groupKey string,
     env string,
-    clusterId int,
+    clusterId int64,
     podCount int,
-    cpu float32,
-    memory float32,
-    requestCpu float32,
-    requestMemory float32,
-    imageUrl string,
-    deployStrategyStruct *ydapp.DeployStrategyStruct,
+    cpu int,
+    memory int,
+    requestCpu int,
+    requestMemory int,
 ) *CreateAppGroupRequest {
 
 	return &CreateAppGroupRequest{
@@ -146,64 +96,32 @@ func NewCreateAppGroupRequest(
         Memory: memory,
         RequestCpu: requestCpu,
         RequestMemory: requestMemory,
-        ImageUrl: imageUrl,
-        DeployStrategyStruct: deployStrategyStruct,
 	}
 }
 
 /*
  * param appId: 应用ID (Required)
- * param groupKey: 分组 key (Required)
- * param groupName: 分组名称 (Optional)
- * param env: 环境 (Required)
- * param serviceName: 服务名称 (Optional)
+ * param groupKey: 分组英文名，由小写字母、数字和中划线组成，以小写字母或数字开头结尾，长度为2-27个字符 (Required)
+ * param groupName: 分组中文名称，为空默认和分组英文名保持一致 (Optional)
+ * param env: 分组环境，必须与所选集群环境一致。test-测试环境; product-生产环境 (Required)
  * param clusterId: 集群ID (Required)
- * param podCount: Pod 数量 (Required)
- * param cpu: CPU 限制 (Required)
- * param memory: 内存限制 (Required)
- * param requestCpu: CPU 请求量 (Required)
- * param requestMemory: 内存请求量 (Required)
- * param imageUrl: 镜像地址，固定值：imageUrlHolder (Required)
- * param terminationGraceSeconds: 优雅终止时间 (Optional)
- * param deployStrategyStruct:  (Required)
- * param healthCheckStruct:  (Optional)
- * param readyCheckStruct:  (Optional)
- * param lifecycleStruct:  (Optional)
- * param containerInfo:  (Optional)
- * param baseInfo:  (Optional)
- * param configFiles: 配置文件列表 (Optional)
- * param ports: 端口列表 (Optional)
- * param tags: 标签列表 (Optional)
- * param annotations: 注解列表 (Optional)
- * param startCmdStruct:  (Optional)
- * param volumeBases: 卷基础配置列表 (Optional)
+ * param podCount: Pod数量，最小值 1 (Required)
+ * param cpu: CPU规格，单位为核，最小为0.1。CPU资源，单位为核 (Required)
+ * param memory: 内存规格，单位为GB，最小为0.1。内存资源，单位为GB (Required)
+ * param requestCpu: CPU限制，单位为核，最小为0.1。CPU资源限制，单位为核 (Required)
+ * param requestMemory: 内存限制，单位为GB，最小为0.1。内存资源限制，单位为GB (Required)
  */
 func NewCreateAppGroupRequestWithAllParams(
     appId string,
     groupKey string,
     groupName *string,
     env string,
-    serviceName *string,
-    clusterId int,
+    clusterId int64,
     podCount int,
-    cpu float32,
-    memory float32,
-    requestCpu float32,
-    requestMemory float32,
-    imageUrl string,
-    terminationGraceSeconds *int,
-    deployStrategyStruct *ydapp.DeployStrategyStruct,
-    healthCheckStruct *ydapp.HealthCheckStruct,
-    readyCheckStruct *ydapp.ReadyCheckStruct,
-    lifecycleStruct *ydapp.LifecycleStruct,
-    containerInfo *ydapp.ContainerInfoStruct,
-    baseInfo *ydapp.BaseInfoStruct,
-    configFiles []ydapp.GroupConfigInfo,
-    ports []ydapp.TaskPort,
-    tags []ydapp.TagInfo,
-    annotations []ydapp.TagInfo,
-    startCmdStruct *ydapp.StartCmdStruct,
-    volumeBases []ydapp.GroupVolume,
+    cpu int,
+    memory int,
+    requestCpu int,
+    requestMemory int,
 ) *CreateAppGroupRequest {
 
     return &CreateAppGroupRequest{
@@ -217,27 +135,12 @@ func NewCreateAppGroupRequestWithAllParams(
         GroupKey: groupKey,
         GroupName: groupName,
         Env: env,
-        ServiceName: serviceName,
         ClusterId: clusterId,
         PodCount: podCount,
         Cpu: cpu,
         Memory: memory,
         RequestCpu: requestCpu,
         RequestMemory: requestMemory,
-        ImageUrl: imageUrl,
-        TerminationGraceSeconds: terminationGraceSeconds,
-        DeployStrategyStruct: deployStrategyStruct,
-        HealthCheckStruct: healthCheckStruct,
-        ReadyCheckStruct: readyCheckStruct,
-        LifecycleStruct: lifecycleStruct,
-        ContainerInfo: containerInfo,
-        BaseInfo: baseInfo,
-        ConfigFiles: configFiles,
-        Ports: ports,
-        Tags: tags,
-        Annotations: annotations,
-        StartCmdStruct: startCmdStruct,
-        VolumeBases: volumeBases,
     }
 }
 
@@ -258,101 +161,41 @@ func NewCreateAppGroupRequestWithoutParam() *CreateAppGroupRequest {
 func (r *CreateAppGroupRequest) SetAppId(appId string) {
     r.AppId = appId
 }
-/* param groupKey: 分组 key(Required) */
+/* param groupKey: 分组英文名，由小写字母、数字和中划线组成，以小写字母或数字开头结尾，长度为2-27个字符(Required) */
 func (r *CreateAppGroupRequest) SetGroupKey(groupKey string) {
     r.GroupKey = groupKey
 }
-/* param groupName: 分组名称(Optional) */
+/* param groupName: 分组中文名称，为空默认和分组英文名保持一致(Optional) */
 func (r *CreateAppGroupRequest) SetGroupName(groupName string) {
     r.GroupName = &groupName
 }
-/* param env: 环境(Required) */
+/* param env: 分组环境，必须与所选集群环境一致。test-测试环境; product-生产环境(Required) */
 func (r *CreateAppGroupRequest) SetEnv(env string) {
     r.Env = env
 }
-/* param serviceName: 服务名称(Optional) */
-func (r *CreateAppGroupRequest) SetServiceName(serviceName string) {
-    r.ServiceName = &serviceName
-}
 /* param clusterId: 集群ID(Required) */
-func (r *CreateAppGroupRequest) SetClusterId(clusterId int) {
+func (r *CreateAppGroupRequest) SetClusterId(clusterId int64) {
     r.ClusterId = clusterId
 }
-/* param podCount: Pod 数量(Required) */
+/* param podCount: Pod数量，最小值 1(Required) */
 func (r *CreateAppGroupRequest) SetPodCount(podCount int) {
     r.PodCount = podCount
 }
-/* param cpu: CPU 限制(Required) */
-func (r *CreateAppGroupRequest) SetCpu(cpu float32) {
+/* param cpu: CPU规格，单位为核，最小为0.1。CPU资源，单位为核(Required) */
+func (r *CreateAppGroupRequest) SetCpu(cpu int) {
     r.Cpu = cpu
 }
-/* param memory: 内存限制(Required) */
-func (r *CreateAppGroupRequest) SetMemory(memory float32) {
+/* param memory: 内存规格，单位为GB，最小为0.1。内存资源，单位为GB(Required) */
+func (r *CreateAppGroupRequest) SetMemory(memory int) {
     r.Memory = memory
 }
-/* param requestCpu: CPU 请求量(Required) */
-func (r *CreateAppGroupRequest) SetRequestCpu(requestCpu float32) {
+/* param requestCpu: CPU限制，单位为核，最小为0.1。CPU资源限制，单位为核(Required) */
+func (r *CreateAppGroupRequest) SetRequestCpu(requestCpu int) {
     r.RequestCpu = requestCpu
 }
-/* param requestMemory: 内存请求量(Required) */
-func (r *CreateAppGroupRequest) SetRequestMemory(requestMemory float32) {
+/* param requestMemory: 内存限制，单位为GB，最小为0.1。内存资源限制，单位为GB(Required) */
+func (r *CreateAppGroupRequest) SetRequestMemory(requestMemory int) {
     r.RequestMemory = requestMemory
-}
-/* param imageUrl: 镜像地址，固定值：imageUrlHolder(Required) */
-func (r *CreateAppGroupRequest) SetImageUrl(imageUrl string) {
-    r.ImageUrl = imageUrl
-}
-/* param terminationGraceSeconds: 优雅终止时间(Optional) */
-func (r *CreateAppGroupRequest) SetTerminationGraceSeconds(terminationGraceSeconds int) {
-    r.TerminationGraceSeconds = &terminationGraceSeconds
-}
-/* param deployStrategyStruct: (Required) */
-func (r *CreateAppGroupRequest) SetDeployStrategyStruct(deployStrategyStruct *ydapp.DeployStrategyStruct) {
-    r.DeployStrategyStruct = deployStrategyStruct
-}
-/* param healthCheckStruct: (Optional) */
-func (r *CreateAppGroupRequest) SetHealthCheckStruct(healthCheckStruct *ydapp.HealthCheckStruct) {
-    r.HealthCheckStruct = healthCheckStruct
-}
-/* param readyCheckStruct: (Optional) */
-func (r *CreateAppGroupRequest) SetReadyCheckStruct(readyCheckStruct *ydapp.ReadyCheckStruct) {
-    r.ReadyCheckStruct = readyCheckStruct
-}
-/* param lifecycleStruct: (Optional) */
-func (r *CreateAppGroupRequest) SetLifecycleStruct(lifecycleStruct *ydapp.LifecycleStruct) {
-    r.LifecycleStruct = lifecycleStruct
-}
-/* param containerInfo: (Optional) */
-func (r *CreateAppGroupRequest) SetContainerInfo(containerInfo *ydapp.ContainerInfoStruct) {
-    r.ContainerInfo = containerInfo
-}
-/* param baseInfo: (Optional) */
-func (r *CreateAppGroupRequest) SetBaseInfo(baseInfo *ydapp.BaseInfoStruct) {
-    r.BaseInfo = baseInfo
-}
-/* param configFiles: 配置文件列表(Optional) */
-func (r *CreateAppGroupRequest) SetConfigFiles(configFiles []ydapp.GroupConfigInfo) {
-    r.ConfigFiles = configFiles
-}
-/* param ports: 端口列表(Optional) */
-func (r *CreateAppGroupRequest) SetPorts(ports []ydapp.TaskPort) {
-    r.Ports = ports
-}
-/* param tags: 标签列表(Optional) */
-func (r *CreateAppGroupRequest) SetTags(tags []ydapp.TagInfo) {
-    r.Tags = tags
-}
-/* param annotations: 注解列表(Optional) */
-func (r *CreateAppGroupRequest) SetAnnotations(annotations []ydapp.TagInfo) {
-    r.Annotations = annotations
-}
-/* param startCmdStruct: (Optional) */
-func (r *CreateAppGroupRequest) SetStartCmdStruct(startCmdStruct *ydapp.StartCmdStruct) {
-    r.StartCmdStruct = startCmdStruct
-}
-/* param volumeBases: 卷基础配置列表(Optional) */
-func (r *CreateAppGroupRequest) SetVolumeBases(volumeBases []ydapp.GroupVolume) {
-    r.VolumeBases = volumeBases
 }
 
 
@@ -369,48 +212,5 @@ type CreateAppGroupResponse struct {
 }
 
 type CreateAppGroupResult struct {
-    Id int `json:"id"`
-    AppId string `json:"appId"`
     GroupId string `json:"groupId"`
-    AppKey string `json:"appKey"`
-    GroupKey string `json:"groupKey"`
-    GroupName string `json:"groupName"`
-    ServiceName string `json:"serviceName"`
-    Env string `json:"env"`
-    Type string `json:"type"`
-    Stateful bool `json:"stateful"`
-    ClusterId int64 `json:"clusterId"`
-    Namespace string `json:"namespace"`
-    Description string `json:"description"`
-    ImageUrl string `json:"imageUrl"`
-    ImagePullPolicy string `json:"imagePullPolicy"`
-    DeployStrategy string `json:"deployStrategy"`
-    HealthCheck string `json:"healthCheck"`
-    ReadyCheck string `json:"readyCheck"`
-    Lifecycle string `json:"lifecycle"`
-    PodCount int `json:"podCount"`
-    Cpu string `json:"cpu"`
-    RequestCpu string `json:"requestCpu"`
-    Disk string `json:"disk"`
-    Gpu string `json:"gpu"`
-    StartCmd string `json:"startCmd"`
-    Memory string `json:"memory"`
-    RequestMemory string `json:"requestMemory"`
-    Tenant string `json:"tenant"`
-    ConfigChange bool `json:"configChange"`
-    OpconfigChange bool `json:"opconfigChange"`
-    TerminationGraceSeconds int `json:"terminationGraceSeconds"`
-    Ports string `json:"ports"`
-    HpaEnabled bool `json:"hpaEnabled"`
-    CreateTime int `json:"createTime"`
-    UpdateTime int `json:"updateTime"`
-    CreatedBy string `json:"createdBy"`
-    UpdatedBy string `json:"updatedBy"`
-    TenantId string `json:"tenantId"`
-    DeployStrategyStruct ydapp.DeployStrategyStruct `json:"deployStrategyStruct"`
-    HealthCheckStruct ydapp.HealthCheckStruct `json:"healthCheckStruct"`
-    ReadyCheckStruct ydapp.ReadyCheckStruct `json:"readyCheckStruct"`
-    LifecycleStruct ydapp.LifecycleStruct `json:"lifecycleStruct"`
-    FailedConfigs []string `json:"failedConfigs"`
-    WarningMessage string `json:"warningMessage"`
 }

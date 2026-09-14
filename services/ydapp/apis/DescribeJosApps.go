@@ -86,5 +86,5 @@ type DescribeJosAppsResponse struct {
 }
 
 type DescribeJosAppsResult struct {
-    Apps []ydapp.JosApp `json:"apps"`
+    Apps []ydapp.JosAppSpec `json:"apps"`
 }

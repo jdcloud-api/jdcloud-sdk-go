@@ -20,17 +20,17 @@ package models
 type DeployStrategyDetail struct {
 
     /* 并发数 (Optional) */
-    Concurrency *int `json:"concurrency"`
+    Concurrency int `json:"concurrency"`
 
     /* 最大超额 (Optional) */
-    MaxSurge *int `json:"maxSurge"`
+    MaxSurge int `json:"maxSurge"`
 
     /* 暂停策略 (Optional) */
-    PauseStrategy *string `json:"pauseStrategy"`
+    PauseStrategy string `json:"pauseStrategy"`
 
     /* 间隔时间 (Optional) */
-    Interval *int `json:"interval"`
+    Interval int `json:"interval"`
 
     /* 批次数 (Optional) */
-    BatchCount *int `json:"batchCount"`
+    BatchCount int `json:"batchCount"`
 }

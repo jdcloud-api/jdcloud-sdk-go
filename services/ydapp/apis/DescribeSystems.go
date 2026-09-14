@@ -106,6 +106,6 @@ type DescribeSystemsResponse struct {
 }
 
 type DescribeSystemsResult struct {
-    Data []ydapp.WukongSystem `json:"data"`
+    Data []ydapp.SystemResult `json:"data"`
     TotalCount int64 `json:"totalCount"`
 }

@@ -20,8 +20,8 @@ package models
 type DeployStrategyStruct struct {
 
     /* 策略类型 (Optional) */
-    Type *string `json:"type"`
+    Type string `json:"type"`
 
     /*  (Optional) */
-    Detail *DeployStrategyDetail `json:"detail"`
+    Detail DeployStrategyDetail `json:"detail"`
 }

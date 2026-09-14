@@ -34,7 +34,7 @@ type DescribePackagesRequest struct {
     /* 每页数量，默认10，最大100 (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* 制品包名称，模糊匹配，E.g.，my-app (Optional) */
+    /* 程序包名称，模糊匹配，E.g.，my-app (Optional) */
     NameLike *string `json:"nameLike"`
 }
 
@@ -62,7 +62,7 @@ func NewDescribePackagesRequest(
  * param appId: 应用ID，E.g.，app-123456789 (Required)
  * param pageNum: 页码，默认为1，E.g.，1 (Optional)
  * param pageSize: 每页数量，默认10，最大100 (Optional)
- * param nameLike: 制品包名称，模糊匹配，E.g.，my-app (Optional)
+ * param nameLike: 程序包名称，模糊匹配，E.g.，my-app (Optional)
  */
 func NewDescribePackagesRequestWithAllParams(
     appId string,
@@ -110,7 +110,7 @@ func (r *DescribePackagesRequest) SetPageNum(pageNum int) {
 func (r *DescribePackagesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-/* param nameLike: 制品包名称，模糊匹配，E.g.，my-app(Optional) */
+/* param nameLike: 程序包名称，模糊匹配，E.g.，my-app(Optional) */
 func (r *DescribePackagesRequest) SetNameLike(nameLike string) {
     r.NameLike = &nameLike
 }
@@ -129,6 +129,6 @@ type DescribePackagesResponse struct {
 }
 
 type DescribePackagesResult struct {
-    Data []ydapp.PackageDetailInfo `json:"data"`
+    Data []ydapp.PackageResult `json:"data"`
     TotalCount int64 `json:"totalCount"`
 }

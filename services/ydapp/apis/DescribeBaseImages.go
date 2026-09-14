@@ -24,9 +24,6 @@ import (
 type DescribeBaseImagesRequest struct {
 
     core.JDCloudRequest
-
-    /* 镜像类型，可选值：JAVA、PHP、Nginx，E.g.，JAVA (Optional) */
-    ImageType *string `json:"imageType"`
 }
 
 /*
@@ -47,10 +44,8 @@ func NewDescribeBaseImagesRequest(
 }
 
 /*
- * param imageType: 镜像类型，可选值：JAVA、PHP、Nginx，E.g.，JAVA (Optional)
  */
 func NewDescribeBaseImagesRequestWithAllParams(
-    imageType *string,
 ) *DescribeBaseImagesRequest {
 
     return &DescribeBaseImagesRequest{
@@ -60,7 +55,6 @@ func NewDescribeBaseImagesRequestWithAllParams(
             Header:  nil,
             Version: "v1",
         },
-        ImageType: imageType,
     }
 }
 
@@ -77,10 +71,6 @@ func NewDescribeBaseImagesRequestWithoutParam() *DescribeBaseImagesRequest {
     }
 }
 
-/* param imageType: 镜像类型，可选值：JAVA、PHP、Nginx，E.g.，JAVA(Optional) */
-func (r *DescribeBaseImagesRequest) SetImageType(imageType string) {
-    r.ImageType = &imageType
-}
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
@@ -96,6 +86,6 @@ type DescribeBaseImagesResponse struct {
 }
 
 type DescribeBaseImagesResult struct {
-    Data []ydapp.BaseImage `json:"data"`
+    Data []ydapp.BaseImageResult `json:"data"`
     TotalCount int64 `json:"totalCount"`
 }

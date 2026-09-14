@@ -20,8 +20,8 @@ package models
 type LifecycleStruct struct {
 
     /*  (Optional) */
-    PostStart *LifecycleHook `json:"postStart"`
+    PostStart LifecycleHook `json:"postStart"`
 
     /*  (Optional) */
-    PreStop *LifecycleHook `json:"preStop"`
+    PreStop LifecycleHook `json:"preStop"`
 }

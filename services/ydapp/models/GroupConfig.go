@@ -23,16 +23,16 @@ type GroupConfig struct {
     GroupName string `json:"groupName"`
 
     /* CPU核数 (Optional) */
-    Cpu float32 `json:"cpu"`
+    Cpu int `json:"cpu"`
 
     /* 内存大小(GB) (Optional) */
-    Memory float32 `json:"memory"`
+    Memory int `json:"memory"`
 
     /* 请求CPU核数 (Optional) */
-    RequestCpu float32 `json:"requestCpu"`
+    RequestCpu int `json:"requestCpu"`
 
     /* 请求内存大小(GB) (Optional) */
-    RequestMemory float32 `json:"requestMemory"`
+    RequestMemory int `json:"requestMemory"`
 
     /* 启动命令 (Optional) */
     StartCommand string `json:"startCommand"`

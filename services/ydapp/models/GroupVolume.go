@@ -20,50 +20,50 @@ package models
 type GroupVolume struct {
 
     /* ID (Optional) */
-    Id *int `json:"id"`
+    Id int `json:"id"`
 
     /* 组ID (Optional) */
-    GroupId *string `json:"groupId"`
+    GroupId string `json:"groupId"`
 
     /* 创建时间 (Optional) */
-    CreateTime *int `json:"createTime"`
+    CreateTime int `json:"createTime"`
 
     /* 更新时间 (Optional) */
-    UpdateTime *int `json:"updateTime"`
+    UpdateTime int `json:"updateTime"`
 
     /* 创建人 (Optional) */
-    CreatedBy *string `json:"createdBy"`
+    CreatedBy string `json:"createdBy"`
 
     /* 最后修改人 (Optional) */
-    UpdatedBy *string `json:"updatedBy"`
+    UpdatedBy string `json:"updatedBy"`
 
     /* 租户ID (Optional) */
-    TenantId *string `json:"tenantId"`
+    TenantId string `json:"tenantId"`
 
     /* 卷类型 emptydir || persistentVolume || hostPath (Optional) */
-    VolumeType *string `json:"volumeType"`
+    VolumeType string `json:"volumeType"`
 
     /* 挂载路径 (Optional) */
-    MountPath *string `json:"mountPath"`
+    MountPath string `json:"mountPath"`
 
     /* 子路径 (Optional) */
-    Subpath *string `json:"subpath"`
+    Subpath string `json:"subpath"`
 
     /* 访问模式 RW/RO (Optional) */
-    AccessMode *string `json:"accessMode"`
+    AccessMode string `json:"accessMode"`
 
     /* 硬盘大小 (Optional) */
-    Disk *string `json:"disk"`
+    Disk string `json:"disk"`
 
     /* PVC名称 (Optional) */
-    PvcName *string `json:"pvcName"`
+    PvcName string `json:"pvcName"`
 
     /* 主机路径 (Optional) */
-    HpPath *string `json:"hpPath"`
+    HpPath string `json:"hpPath"`
 
     /* 主机路径类型 (Optional) */
-    HpType *string `json:"hpType"`
+    HpType string `json:"hpType"`
 
     /* 描述 (Optional) */
-    Description *string `json:"description"`
+    Description string `json:"description"`
 }

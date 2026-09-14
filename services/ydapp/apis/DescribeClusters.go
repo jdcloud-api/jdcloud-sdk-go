@@ -41,7 +41,7 @@ func NewDescribeClustersRequest(
 
 	return &DescribeClustersRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/clusters:page",
+			URL:     "/clusters",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
@@ -60,7 +60,7 @@ func NewDescribeClustersRequestWithAllParams(
 
     return &DescribeClustersRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/clusters:page",
+            URL:     "/clusters",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -75,7 +75,7 @@ func NewDescribeClustersRequestWithoutParam() *DescribeClustersRequest {
 
     return &DescribeClustersRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/clusters:page",
+            URL:     "/clusters",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -106,6 +106,6 @@ type DescribeClustersResponse struct {
 }
 
 type DescribeClustersResult struct {
-    Data []ydapp.OpenapiDeployClusterRespVo `json:"data"`
+    Data []ydapp.ClusterResult `json:"data"`
     TotalCount int64 `json:"totalCount"`
 }

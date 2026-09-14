@@ -18,7 +18,6 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    ydapp "github.com/jdcloud-api/jdcloud-sdk-go/services/ydapp/models"
 )
 
 type DescribeAppRequest struct {
@@ -103,10 +102,9 @@ type DescribeAppResult struct {
     AppKey string `json:"appKey"`
     AppName string `json:"appName"`
     Description string `json:"description"`
-    AppLevel string `json:"appLevel"`
+    AppLevel int `json:"appLevel"`
     Stateful bool `json:"stateful"`
     Language string `json:"language"`
-    AppMembers ydapp.AppMembers `json:"appMembers"`
     SystemId string `json:"systemId"`
     SystemKey string `json:"systemKey"`
     SystemName string `json:"systemName"`

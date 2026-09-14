@@ -20,29 +20,29 @@ package models
 type ContainerInfoStruct struct {
 
     /* CPU 限制 (Optional) */
-    Cpu *string `json:"cpu"`
+    Cpu string `json:"cpu"`
 
     /* 内存限制 (Optional) */
-    Memory *string `json:"memory"`
+    Memory string `json:"memory"`
 
     /* CPU 请求量 (Optional) */
-    RequestCpu *string `json:"requestCpu"`
+    RequestCpu string `json:"requestCpu"`
 
     /* 内存请求量 (Optional) */
-    RequestMemory *string `json:"requestMemory"`
+    RequestMemory string `json:"requestMemory"`
 
     /*  (Optional) */
-    DeployStrategy *DeployStrategyStruct `json:"deployStrategy"`
+    DeployStrategy DeployStrategyStruct `json:"deployStrategy"`
 
     /* Pod 数量 (Optional) */
-    PodCount *int `json:"podCount"`
+    PodCount int `json:"podCount"`
 
     /*  (Optional) */
-    StartCmdStruct *StartCmdStruct `json:"startCmdStruct"`
+    StartCmdStruct StartCmdStruct `json:"startCmdStruct"`
 
     /* 端口配置列表 (Optional) */
     Ports []TaskPort `json:"ports"`
 
     /* 镜像地址 (Optional) */
-    ImageUrl *string `json:"imageUrl"`
+    ImageUrl string `json:"imageUrl"`
 }

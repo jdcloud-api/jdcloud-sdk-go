@@ -20,5 +20,5 @@ package models
 type BaseInfoStruct struct {
 
     /* 分组名称 (Optional) */
-    GroupName *string `json:"groupName"`
+    GroupName string `json:"groupName"`
 }

@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    ydapp "github.com/jdcloud-api/jdcloud-sdk-go/services/ydapp/models"
 )
 
 type DescribeGroupConfigRequest struct {
@@ -146,4 +147,5 @@ type DescribeGroupConfigResult struct {
     ReadyCheckPort int `json:"readyCheckPort"`
     ReadyCheckScheme string `json:"readyCheckScheme"`
     TerminationGraceSeconds int `json:"terminationGraceSeconds"`
+    PodAntiAffinity ydapp.PodAntiAffinity `json:"podAntiAffinity"`
 }

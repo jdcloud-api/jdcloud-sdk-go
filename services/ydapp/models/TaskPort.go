@@ -20,11 +20,11 @@ package models
 type TaskPort struct {
 
     /* 端口名称 (Optional) */
-    Name *string `json:"name"`
+    Name string `json:"name"`
 
     /* 容器端口 (Optional) */
-    ContainerPort *int `json:"containerPort"`
+    ContainerPort int `json:"containerPort"`
 
     /* 协议 (Optional) */
-    Protocol *string `json:"protocol"`
+    Protocol string `json:"protocol"`
 }
