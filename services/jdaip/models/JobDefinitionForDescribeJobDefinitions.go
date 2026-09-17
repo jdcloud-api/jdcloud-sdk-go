@@ -97,6 +97,9 @@ type JobDefinitionForDescribeJobDefinitions struct {
  (Optional) */
     Buffalo BuffaloForDescribeJobDefinitions `json:"buffalo"`
 
+    /* 已绑定的 Ku+ Buffalo 任务ID；未绑定时返回 null。 (Optional) */
+    KuplusBuffaloId int64 `json:"kuplusBuffaloId"`
+
     /* 主账号ID。 (Optional) */
     Pin string `json:"pin"`
 

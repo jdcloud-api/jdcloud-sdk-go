@@ -108,4 +108,13 @@ type Node struct {
 
     /*  (Optional) */
     UnhealthReasons []UnHealthReason `json:"unhealthReasons"`
+
+    /* Tag信息 (Optional) */
+    UserTags []Tag `json:"userTags"`
+
+    /* 资源组Id (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
+
+    /* 资源组名称 (Optional) */
+    ResourceGroupName string `json:"resourceGroupName"`
 }

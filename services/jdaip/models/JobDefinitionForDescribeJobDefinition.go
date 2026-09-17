@@ -105,6 +105,9 @@ type JobDefinitionForDescribeJobDefinition struct {
  (Optional) */
     Buffalo BuffaloForDescribeJobDefinition `json:"buffalo"`
 
+    /* 已绑定的 Ku+ Buffalo 任务ID；未绑定时返回 null。 (Optional) */
+    KuplusBuffaloId int64 `json:"kuplusBuffaloId"`
+
     /* 通知投递配置列表（event -> channels 映射）。
  (Optional) */
     NotifyConfig []NotifyRuleSpec `json:"notifyConfig"`

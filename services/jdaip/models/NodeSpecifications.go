@@ -18,4 +18,10 @@ package models
 
 
 type NodeSpecifications struct {
+
+    /* 节点规格详情 (Optional) */
+    InstanceTypes []NodeSpecification `json:"instanceTypes"`
+
+    /* 过滤后的节点规格数量 (Optional) */
+    TotalCount int `json:"totalCount"`
 }

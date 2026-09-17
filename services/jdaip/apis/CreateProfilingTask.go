@@ -34,15 +34,69 @@ type CreateProfilingTaskRequest struct {
     /* 训练任务ID  */
     JobId string `json:"jobId"`
 
-    /* 性能分析任务参数。  */
-    ProfilingParam *jdaip.ProfilingParam `json:"profilingParam"`
+    /* 监控任务名称。必填。
+
+**限制：** 不超过128个字符
+  */
+    Name string `json:"name"`
+
+    /* 监控任务描述。非必填。
+
+**限制：** 不超过512个字符
+ (Optional) */
+    Description *string `json:"description"`
+
+    /* 监控时长（秒）。必填。
+
+**取值范围：** 1 ~ 10（超出范围返回参数错误）
+  */
+    Duration int `json:"duration"`
+
+    /* 监控目标类型，决定采集范围。必填。
+
+**可选值：**
+- `instance`：按实例采集，采集所选实例的所有进程
+- `pid`：按PID采集，仅采集指定实例内的指定PID
+  */
+    TargetType string `json:"targetType"`
+
+    /* 监控目标列表，每个目标对应一个实例。**必填且不允许为空数组**（任何 `targetType` 下都必填）。
+
+- **instance 模式**：`pids` 可不传或传空数组，表示采集该实例的全部进程
+- **pid 模式**：每个目标的 `pids` 必须至少包含一个PID，且PID只允许纯数字，否则返回参数错误
+  */
+    Targets []jdaip.ProfilingTarget `json:"targets"`
+
+    /* 采集指标列表，指定需要监控的性能指标。非必填，不传时由采集端按各类别默认值处理。
+
+**说明：** 取值由采集端定义，本接口不做取值校验。
+ (Optional) */
+    Metrics []string `json:"metrics"`
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param workspaceId: 工作空间ID (Required)
  * param jobId: 训练任务ID (Required)
- * param profilingParam: 性能分析任务参数。 (Required)
+ * param name: 监控任务名称。必填。
+
+**限制：** 不超过128个字符
+ (Required)
+ * param duration: 监控时长（秒）。必填。
+
+**取值范围：** 1 ~ 10（超出范围返回参数错误）
+ (Required)
+ * param targetType: 监控目标类型，决定采集范围。必填。
+
+**可选值：**
+- `instance`：按实例采集，采集所选实例的所有进程
+- `pid`：按PID采集，仅采集指定实例内的指定PID
+ (Required)
+ * param targets: 监控目标列表，每个目标对应一个实例。**必填且不允许为空数组**（任何 `targetType` 下都必填）。
+
+- **instance 模式**：`pids` 可不传或传空数组，表示采集该实例的全部进程
+- **pid 模式**：每个目标的 `pids` 必须至少包含一个PID，且PID只允许纯数字，否则返回参数错误
+ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -50,7 +104,10 @@ func NewCreateProfilingTaskRequest(
     regionId string,
     workspaceId string,
     jobId string,
-    profilingParam *jdaip.ProfilingParam,
+    name string,
+    duration int,
+    targetType string,
+    targets []jdaip.ProfilingTarget,
 ) *CreateProfilingTaskRequest {
 
 	return &CreateProfilingTaskRequest{
@@ -63,7 +120,10 @@ func NewCreateProfilingTaskRequest(
         RegionId: regionId,
         WorkspaceId: workspaceId,
         JobId: jobId,
-        ProfilingParam: profilingParam,
+        Name: name,
+        Duration: duration,
+        TargetType: targetType,
+        Targets: targets,
 	}
 }
 
@@ -71,13 +131,44 @@ func NewCreateProfilingTaskRequest(
  * param regionId: 地域ID (Required)
  * param workspaceId: 工作空间ID (Required)
  * param jobId: 训练任务ID (Required)
- * param profilingParam: 性能分析任务参数。 (Required)
+ * param name: 监控任务名称。必填。
+
+**限制：** 不超过128个字符
+ (Required)
+ * param description: 监控任务描述。非必填。
+
+**限制：** 不超过512个字符
+ (Optional)
+ * param duration: 监控时长（秒）。必填。
+
+**取值范围：** 1 ~ 10（超出范围返回参数错误）
+ (Required)
+ * param targetType: 监控目标类型，决定采集范围。必填。
+
+**可选值：**
+- `instance`：按实例采集，采集所选实例的所有进程
+- `pid`：按PID采集，仅采集指定实例内的指定PID
+ (Required)
+ * param targets: 监控目标列表，每个目标对应一个实例。**必填且不允许为空数组**（任何 `targetType` 下都必填）。
+
+- **instance 模式**：`pids` 可不传或传空数组，表示采集该实例的全部进程
+- **pid 模式**：每个目标的 `pids` 必须至少包含一个PID，且PID只允许纯数字，否则返回参数错误
+ (Required)
+ * param metrics: 采集指标列表，指定需要监控的性能指标。非必填，不传时由采集端按各类别默认值处理。
+
+**说明：** 取值由采集端定义，本接口不做取值校验。
+ (Optional)
  */
 func NewCreateProfilingTaskRequestWithAllParams(
     regionId string,
     workspaceId string,
     jobId string,
-    profilingParam *jdaip.ProfilingParam,
+    name string,
+    description *string,
+    duration int,
+    targetType string,
+    targets []jdaip.ProfilingTarget,
+    metrics []string,
 ) *CreateProfilingTaskRequest {
 
     return &CreateProfilingTaskRequest{
@@ -90,7 +181,12 @@ func NewCreateProfilingTaskRequestWithAllParams(
         RegionId: regionId,
         WorkspaceId: workspaceId,
         JobId: jobId,
-        ProfilingParam: profilingParam,
+        Name: name,
+        Description: description,
+        Duration: duration,
+        TargetType: targetType,
+        Targets: targets,
+        Metrics: metrics,
     }
 }
 
@@ -119,9 +215,50 @@ func (r *CreateProfilingTaskRequest) SetWorkspaceId(workspaceId string) {
 func (r *CreateProfilingTaskRequest) SetJobId(jobId string) {
     r.JobId = jobId
 }
-/* param profilingParam: 性能分析任务参数。(Required) */
-func (r *CreateProfilingTaskRequest) SetProfilingParam(profilingParam *jdaip.ProfilingParam) {
-    r.ProfilingParam = profilingParam
+/* param name: 监控任务名称。必填。
+
+**限制：** 不超过128个字符
+(Required) */
+func (r *CreateProfilingTaskRequest) SetName(name string) {
+    r.Name = name
+}
+/* param description: 监控任务描述。非必填。
+
+**限制：** 不超过512个字符
+(Optional) */
+func (r *CreateProfilingTaskRequest) SetDescription(description string) {
+    r.Description = &description
+}
+/* param duration: 监控时长（秒）。必填。
+
+**取值范围：** 1 ~ 10（超出范围返回参数错误）
+(Required) */
+func (r *CreateProfilingTaskRequest) SetDuration(duration int) {
+    r.Duration = duration
+}
+/* param targetType: 监控目标类型，决定采集范围。必填。
+
+**可选值：**
+- `instance`：按实例采集，采集所选实例的所有进程
+- `pid`：按PID采集，仅采集指定实例内的指定PID
+(Required) */
+func (r *CreateProfilingTaskRequest) SetTargetType(targetType string) {
+    r.TargetType = targetType
+}
+/* param targets: 监控目标列表，每个目标对应一个实例。**必填且不允许为空数组**（任何 `targetType` 下都必填）。
+
+- **instance 模式**：`pids` 可不传或传空数组，表示采集该实例的全部进程
+- **pid 模式**：每个目标的 `pids` 必须至少包含一个PID，且PID只允许纯数字，否则返回参数错误
+(Required) */
+func (r *CreateProfilingTaskRequest) SetTargets(targets []jdaip.ProfilingTarget) {
+    r.Targets = targets
+}
+/* param metrics: 采集指标列表，指定需要监控的性能指标。非必填，不传时由采集端按各类别默认值处理。
+
+**说明：** 取值由采集端定义，本接口不做取值校验。
+(Optional) */
+func (r *CreateProfilingTaskRequest) SetMetrics(metrics []string) {
+    r.Metrics = metrics
 }
 
 

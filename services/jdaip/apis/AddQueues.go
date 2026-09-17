@@ -34,7 +34,7 @@ type AddQueuesRequest struct {
     /* 关联的队列。【废弃】该字段即将下线，建议使用新的资源队列配置字段[queueConfigs]。 (Optional) */
     QueueIds []string `json:"queueIds"`
 
-    /* 关联队列配置 (Optional) */
+    /* 关联队列配置。注意：队列默认优先级会设置为5 (Optional) */
     QueueConfigs []jdaip.WorkspaceRelatedQueue `json:"queueConfigs"`
 }
 
@@ -65,7 +65,7 @@ func NewAddQueuesRequest(
  * param regionId: 地域ID (Required)
  * param workspaceId: 工作空间ID (Required)
  * param queueIds: 关联的队列。【废弃】该字段即将下线，建议使用新的资源队列配置字段[queueConfigs]。 (Optional)
- * param queueConfigs: 关联队列配置 (Optional)
+ * param queueConfigs: 关联队列配置。注意：队列默认优先级会设置为5 (Optional)
  */
 func NewAddQueuesRequestWithAllParams(
     regionId string,
@@ -113,7 +113,7 @@ func (r *AddQueuesRequest) SetWorkspaceId(workspaceId string) {
 func (r *AddQueuesRequest) SetQueueIds(queueIds []string) {
     r.QueueIds = queueIds
 }
-/* param queueConfigs: 关联队列配置(Optional) */
+/* param queueConfigs: 关联队列配置。注意：队列默认优先级会设置为5(Optional) */
 func (r *AddQueuesRequest) SetQueueConfigs(queueConfigs []jdaip.WorkspaceRelatedQueue) {
     r.QueueConfigs = queueConfigs
 }

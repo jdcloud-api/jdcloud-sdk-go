@@ -31,9 +31,11 @@ type ModelExportStorageInfo struct {
   */
     Bucket string `json:"bucket"`
 
-    /* 存储路径（不含Bucket名称）。
+    /* 存储路径（不含Bucket名称），为相对路径。
+
+**默认值：** 不传时默认导出到 Bucket 根目录。
 
 **示例：** `models/export-abc123/model.tar.gz`
-  */
-    Path string `json:"path"`
+ (Optional) */
+    Path *string `json:"path"`
 }

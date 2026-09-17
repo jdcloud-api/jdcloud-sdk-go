@@ -56,4 +56,7 @@ key值说明
 
     /* 镜像启动命令。 (Optional) */
     Command string `json:"command"`
+
+    /* 描述。最大长度256 (Optional) */
+    Description string `json:"description"`
 }

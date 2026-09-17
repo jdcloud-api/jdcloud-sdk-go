@@ -100,4 +100,19 @@ type NotebookBaseInfo struct {
 
     /* 公共/专享队列ID，公共/专享资源池场景下的队列标识。 (Optional) */
     PublicQueue string `json:"publicQueue"`
+
+    /* 队列类型，实例运行所在资源队列的类型。
+
+## 取值
+- private: 私有资源池队列
+- public: 公共资源池队列
+- exclusive: 专享资源池队列
+- security: 安全队列，出站网络受管控，禁止修改资源属性
+
+## 使用说明
+- 该字段为查询返回值，创建/更新时无需传入
+- 存量实例以及创建时未查询到队列信息的实例返回空串，调用方需同时容忍空串与`private`两种表示私有资源池的情形
+- 安全队列的完整使用限制见`nbWorkloadDetail.queueType`
+ (Optional) */
+    QueueType string `json:"queueType"`
 }

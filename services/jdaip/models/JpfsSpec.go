@@ -31,7 +31,7 @@ type JpfsSpec struct {
     /* 用户标签 (Optional) */
     UserTags []JpfsTag `json:"userTags"`
 
-    /* HPC集群名称，多个值按JPFS服务约定分隔  */
+    /* HPC集群名称，多个值按JPFS服务约定分隔 (Optional) */
     HpcClusterNames string `json:"hpcClusterNames"`
 
     /* JPFS规格编码，同时作为商业平台商品名称  */

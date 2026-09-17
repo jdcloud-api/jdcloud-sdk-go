@@ -24,8 +24,8 @@ type ProfilingTarget struct {
 
     /* 筛选的PID列表。
 
-- **pid 模式**：填写需要采集的PID列表
-- **instance 模式**：留空数组，表示采集全部进程
+- **pid 模式**：必填，至少一个PID，且每个PID只允许纯数字
+- **instance 模式**：可不传或传空数组，表示采集该实例全部进程
  (Optional) */
     Pids []string `json:"pids"`
 }

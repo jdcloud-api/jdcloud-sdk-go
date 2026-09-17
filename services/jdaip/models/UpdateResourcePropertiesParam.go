@@ -43,6 +43,7 @@ type UpdateResourcePropertiesParam struct {
 ## 使用说明
 - 私有资源池中的Notebook: 需要传入与资源队列可通信的负载均衡ID和端口
 - 公共资源池中的Notebook: 可通过lbEnable=true开启公网访问，系统自动分配LB
+- 安全队列(`queueType=security`)中的Notebook: 可通过lbEnable=true开启SSH访问，系统自动分配LB与端口，无需指定lbId/lbPort
 - 不需要公网访问时不要指定此参数
  (Optional) */
     LbSpec *LbSpec `json:"lbSpec"`

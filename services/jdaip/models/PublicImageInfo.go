@@ -78,4 +78,7 @@ type PublicImageInfo struct {
 
     /* true上线，false下线。 (Optional) */
     Online bool `json:"online"`
+
+    /* 描述。 (Optional) */
+    Description string `json:"description"`
 }

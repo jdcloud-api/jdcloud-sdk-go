@@ -41,8 +41,8 @@ type DescribeProfilingTasksRequest struct {
     PageSize *int `json:"pageSize"`
 
     /* <b>filters 中支持使用以下关键字进行过滤</b>
-`name`: 性能分析任务名称，模糊匹配，支持单个。
-`status`: 任务状态，精确匹配，支持多个，可选(pending/running/completed/failed/canceled)。
+`name`: 性能分析任务名称，精确匹配，支持单个。
+`status`: 任务状态，精确匹配，支持多个，可选(pending/running/completed/failed/expired)。
 `targetType`: 监控目标类型，精确匹配，支持多个，可选(instance/pid)。
  (Optional) */
     Filters []jdaip.Filter `json:"filters"`
@@ -81,8 +81,8 @@ func NewDescribeProfilingTasksRequest(
  * param pageNumber: 页码；默认为1。 (Optional)
  * param pageSize: 分页大小；默认为20；取值范围[1, 100]。 (Optional)
  * param filters: <b>filters 中支持使用以下关键字进行过滤</b>
-`name`: 性能分析任务名称，模糊匹配，支持单个。
-`status`: 任务状态，精确匹配，支持多个，可选(pending/running/completed/failed/canceled)。
+`name`: 性能分析任务名称，精确匹配，支持单个。
+`status`: 任务状态，精确匹配，支持多个，可选(pending/running/completed/failed/expired)。
 `targetType`: 监控目标类型，精确匹配，支持多个，可选(instance/pid)。
  (Optional)
  */
@@ -145,8 +145,8 @@ func (r *DescribeProfilingTasksRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 /* param filters: <b>filters 中支持使用以下关键字进行过滤</b>
-`name`: 性能分析任务名称，模糊匹配，支持单个。
-`status`: 任务状态，精确匹配，支持多个，可选(pending/running/completed/failed/canceled)。
+`name`: 性能分析任务名称，精确匹配，支持单个。
+`status`: 任务状态，精确匹配，支持多个，可选(pending/running/completed/failed/expired)。
 `targetType`: 监控目标类型，精确匹配，支持多个，可选(instance/pid)。
 (Optional) */
 func (r *DescribeProfilingTasksRequest) SetFilters(filters []jdaip.Filter) {

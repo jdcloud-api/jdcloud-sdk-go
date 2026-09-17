@@ -22,7 +22,8 @@ type LbSpec struct {
     /* 负载均衡实例ID，需要在京东云负载均衡产品中预先创建。
 
 ## 要求
-- 私有资源池必填，公共资源池无需指定(系统自动分配)
+- 私有资源池必填
+- 公共资源池、安全队列(`queueType=security`)均无需指定(系统自动分配)，传入会被忽略
 - 负载均衡需要与资源队列在同一VPC下
 - 支持四层(TCP)负载均衡
  (Optional) */
@@ -31,18 +32,20 @@ type LbSpec struct {
     /* 监听端口，负载均衡监听此端口并转发到Notebook。
 
 ## 端口范围
-- 私有资源池必填，公共资源池无需指定(系统自动分配)
+- 私有资源池必填
+- 公共资源池、安全队列(`queueType=security`)均无需指定(系统自动分配)，传入会被忽略
 - 1-65534
 - 需要指定一个未被占用的空闲可用端口
 - 建议使用1024以上端口
  (Optional) */
     LbPort *int `json:"lbPort"`
 
-    /* 是否开启公网访问，仅公共资源池有效。
+    /* 是否开启公网访问，对公共资源池与安全队列(`queueType=security`)有效。
 
 ## 使用说明
 - 公共资源池: 为true时表示需要公网访问，系统会自动分配LB，无需指定lbId和lbPort
-- 私有资源池: 无效，需要通过lbId和lbPort指定负载均衡
+- 安全队列(`queueType=security`): 为true时即开启SSH访问，系统会自动分配LB与端口(LB取自该安全队列所属集群绑定的负载均衡)，无需也不应指定lbId和lbPort
+- 普通私有资源池: 无效，需要通过lbId和lbPort指定负载均衡
 - 默认为false
  (Optional) */
     LbEnable *bool `json:"lbEnable"`

@@ -30,7 +30,7 @@ type WorkspaceSpec struct {
     /* 资源队列。【废弃】该字段即将下线，建议使用新的资源队列配置字段[queueConfigs]。 (Optional) */
     ResourceQueue []string `json:"resourceQueue"`
 
-    /* 资源队列配置。 (Optional) */
+    /* 资源队列配置。注意：队列默认优先级会设置为5 (Optional) */
     QueueConfigs []WorkspaceRelatedQueue `json:"queueConfigs"`
 
     /* 工作空间成员配置。 (Optional) */

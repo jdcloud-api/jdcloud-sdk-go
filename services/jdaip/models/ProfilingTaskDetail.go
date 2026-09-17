@@ -30,7 +30,12 @@ type ProfilingTaskDetail struct {
 
     /* 任务状态。
 
-**可选值：** `pending`、`running`、`completed`、`failed`、`canceled`
+**可选值：**
+- `pending`：等待中，任务已创建但尚未开始采集
+- `running`：运行中，正在采集数据
+- `completed`：已完成，所有实例采集结束
+- `failed`：失败，部分或全部实例采集失败
+- `expired`：结果已过期。采集结果在平台存储上仅保留有限时长，超期后被回收；此状态表示采集本身成功但结果已不可下载、也不可转存至OSS。由查询接口惰性判定并写回，仅从 `completed` 流转而来
  (Optional) */
     Status string `json:"status"`
 
@@ -42,12 +47,6 @@ type ProfilingTaskDetail struct {
 **可选值：** `instance`、`pid`
  (Optional) */
     TargetType string `json:"targetType"`
-
-    /* 监控实例总数。 (Optional) */
-    InstanceCount int `json:"instanceCount"`
-
-    /* 实例采集完成数。 (Optional) */
-    FinishedCount int `json:"finishedCount"`
 
     /* 采集指标列表。 (Optional) */
     Metrics []string `json:"metrics"`

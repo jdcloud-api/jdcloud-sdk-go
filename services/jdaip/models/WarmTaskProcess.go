@@ -30,6 +30,7 @@ type WarmTaskProcess struct {
 - failed：预热失败
 - deleting：删除中
 - deleted：已删除
+- deleteFailed：删除失败
  (Optional) */
     Status string `json:"status"`
 

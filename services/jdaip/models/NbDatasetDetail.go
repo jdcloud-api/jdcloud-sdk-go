@@ -50,7 +50,7 @@ type NbDatasetDetail struct {
 ## 各类型地址格式
 - cfs: `10.0.23.45:/dir-path` 或 `/dir-path`
 - oss: `oss://bucket.s3.cn-north-1.jdcloud-oss.com/object-path`
-- jpfs: `fs-xxxxxxxxxx:/dir-path` 或 `/dir-path`
+- jpfs: `fs-xxxxx:fsmt-yyyyy:/dir-path` 或 `fs-xxxxx:/dir-path` 或 `/dir-path`
  (Optional) */
     DatasetUrl string `json:"datasetUrl"`
 
