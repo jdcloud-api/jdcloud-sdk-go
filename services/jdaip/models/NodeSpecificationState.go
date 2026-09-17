@@ -17,26 +17,17 @@
 package models
 
 
-type ResFlavor struct {
+type NodeSpecificationState struct {
 
-    /* 分类。 范围：cpu：cpu规格，gpu：gpu规格 (Optional) */
-    Category string `json:"category"`
+    /* 可用区 (Optional) */
+    Az string `json:"az"`
 
-    /* 规格id (Optional) */
-    FlavorId string `json:"flavorId"`
+    /* 物理集群ID (Optional) */
+    ClusterId string `json:"clusterId"`
 
-    /* 规格名称 (Optional) */
-    FlavorName string `json:"flavorName"`
+    /* 是否可售卖 (Optional) */
+    InStock bool `json:"inStock"`
 
-    /* cpu数量 单位：毫核 (Optional) */
-    CpuM int `json:"cpuM"`
-
-    /* 内存大小 单位：MiB (Optional) */
-    MemoryMiB int `json:"memoryMiB"`
-
-    /* gpu规格 (Optional) */
-    Gpu Gpu `json:"gpu"`
-
-    /* RDMA规格 (Optional) */
-    Rdma Rdma `json:"rdma"`
+    /* 可用库存数量 (Optional) */
+    AvailableCount int `json:"availableCount"`
 }

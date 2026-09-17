@@ -17,26 +17,11 @@
 package models
 
 
-type StorageTypeItem struct {
+type JpfsSpecificationHpcDetail struct {
 
-    /* 存储类型名称 (Optional) */
-    Name string `json:"name"`
+    /* 文件系统规格，支持intelligent和general (Optional) */
+    Specification string `json:"specification"`
 
-    /* 存储类型，可选值：
-- third-oss：对象存储
-- third-jpfs：并行文件系统
- (Optional) */
-    Type string `json:"type"`
-
-    /* 存储类型状态，可选值：
-- ENABLED：启用
-- DISABLED：禁用
- (Optional) */
-    State string `json:"state"`
-
-    /* 存储类型描述 (Optional) */
-    Description string `json:"description"`
-
-    /* 配置项列表 (Optional) */
-    Configs []ConfigItem `json:"configs"`
+    /* 可用文件系统类型列表 (Optional) */
+    FileSystemTypes []JpfsFileSystemTypeDetail `json:"fileSystemTypes"`
 }

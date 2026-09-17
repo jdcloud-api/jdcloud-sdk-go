@@ -17,26 +17,11 @@
 package models
 
 
-type ConfigItem struct {
+type BuffaloForDescribeBuffaloDependency struct {
 
-    /* 配置项显示名称 (Optional) */
-    DisplayName string `json:"displayName"`
+    /* Buffalo 任务ID。 (Optional) */
+    BuffaloId int64 `json:"buffaloId"`
 
-    /* 配置项名称 (Optional) */
-    KeyName string `json:"keyName"`
-
-    /* 组件类型，可选值：
-- TEXT：文本输入
-- SELECT：下拉选择
- (Optional) */
-    ComponentType string `json:"componentType"`
-
-    /* 默认值 (Optional) */
-    DefaultValue string `json:"defaultValue"`
-
-    /* 是否必填 (Optional) */
-    Required bool `json:"required"`
-
-    /* 选项列表（componentType=SELECT时使用） (Optional) */
-    Options []string `json:"options"`
+    /* Buffalo 任务名称。 (Optional) */
+    BuffaloName string `json:"buffaloName"`
 }

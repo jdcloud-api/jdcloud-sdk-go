@@ -28,7 +28,7 @@ type Queue struct {
     /* 节点池ID (Optional) */
     NodePoolId string `json:"nodePoolId"`
 
-    /* 节点池相关信息，key值参照NodePool属性，查询时有用 (Optional) */
+    /* 节点池相关信息，key值参照NodePool属性，查询时有用（name、poolType、vpcId、vpcName、topology） (Optional) */
     NodePoolInfo interface{} `json:"nodePoolInfo"`
 
     /* 队列下任务的命名空间 (Optional) */
@@ -40,7 +40,15 @@ type Queue struct {
     /* CPU资源配额信息 (Optional) */
     CpuQuota CpuQuota `json:"cpuQuota"`
 
-    /* 状态，1创建中2创建失败3运行中4更新中5错误6删除中7已删除 (Optional) */
+    /* 队列状态，
+- 1 创建中
+- 2 创建失败
+- 3 运行中
+- 4 更新中
+- 5 错误
+- 6 删除中
+- 7 已删除
+ (Optional) */
     Status int `json:"status"`
 
     /* 错误信息 (Optional) */
@@ -52,9 +60,33 @@ type Queue struct {
     /* 是否高优 (Optional) */
     Priority bool `json:"priority"`
 
+    /* 是否开启任务优先级 (Optional) */
+    TaskPriority bool `json:"taskPriority"`
+
+    /* 是否开启任务抢占 (Optional) */
+    TaskPreempt bool `json:"taskPreempt"`
+
     /* 创建时间，秒 (Optional) */
     CreateTime int64 `json:"createTime"`
 
     /* 资源队列名称 (Optional) */
     Desc string `json:"desc"`
+
+    /* 队列类型，common：普通队列；security：安全队列 (Optional) */
+    QueueType string `json:"queueType"`
+
+    /* 计费模式，创建时确定不可修改
+- 1 按量计费（不承诺配额，min 默认 0）
+- 2 按配置计费（强制 min=max）
+ (Optional) */
+    BillingMode int `json:"billingMode"`
+
+    /* Tag信息 (Optional) */
+    UserTags []Tag `json:"userTags"`
+
+    /* 资源组Id (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
+
+    /* 资源组名称 (Optional) */
+    ResourceGroupName string `json:"resourceGroupName"`
 }

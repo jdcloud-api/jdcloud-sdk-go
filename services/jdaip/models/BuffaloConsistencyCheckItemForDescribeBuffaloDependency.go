@@ -17,20 +17,23 @@
 package models
 
 
-type TensorBoardSpec struct {
+type BuffaloConsistencyCheckItemForDescribeBuffaloDependency struct {
 
-    /* 名称。1~32字符，可以包含中文、数字、大小写字母、英文下划线“_”、中划线“-”或点“.”。  */
+    /* 检查项编码。可选值：`MANAGER`、`TASK_STATE`、`PARENT_DEPENDENCY`、`SCHEDULE_MODE`、`RUN_CYCLE`、`RUN_TIME`。 (Optional) */
+    Code string `json:"code"`
+
+    /* 检查项页面名称。 (Optional) */
     Name string `json:"name"`
 
-    /* 描述。不超过256字符。 (Optional) */
-    Description string `json:"description"`
+    /* Ku+ 旧任务的页面展示值。 (Optional) */
+    KuplusValue string `json:"kuplusValue"`
 
-    /* 队列ID。
-不传queueId，则默认使用免费资源池。
-使用私有资源池时请选择用户工作空间中的私有队列ID。
- (Optional) */
-    QueueId string `json:"queueId"`
+    /* JoyBuilder 新任务的页面展示值。 (Optional) */
+    JoybuilderValue string `json:"joybuilderValue"`
 
-    /* 数据源配置。最少1个，最多10个。  */
-    DataSourceSpec []DataSourceSpec `json:"dataSourceSpec"`
+    /* 当前检查项是否通过。 (Optional) */
+    Passed bool `json:"passed"`
+
+    /* 检查结果说明。 (Optional) */
+    Message string `json:"message"`
 }

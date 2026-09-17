@@ -80,6 +80,12 @@ type JobListInfoForJob struct {
     /* 是否为用户训练主容器开启容器特权模式。 (Optional) */
     Privileged bool `json:"privileged"`
 
+    /* 是否为安全训练任务。 (Optional) */
+    SecJob bool `json:"secJob"`
+
+    /* 是否支持导出模型。 (Optional) */
+    SupportExportModel bool `json:"supportExportModel"`
+
     /* 任务运行时长，单位：秒。
 
 **说明：** 从任务开始运行到当前或结束的时间
@@ -160,9 +166,6 @@ type JobListInfoForJob struct {
 
     /* 用户自定义标签列表。 (Optional) */
     UserTags []JobTag `json:"userTags"`
-
-    /* 是否开启性能分析。 (Optional) */
-    ProfilingEnable bool `json:"profilingEnable"`
 
     /* 归属用户 pin。 (Optional) */
     OwnerUserPin string `json:"ownerUserPin"`

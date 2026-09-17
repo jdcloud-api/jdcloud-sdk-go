@@ -27,6 +27,18 @@ type JpfsParamForJob struct {
  (Optional) */
     Id *string `json:"id"`
 
+    /* JPFS 挂载点 ID，指定要使用的挂载点。
+
+**使用场景：** 当 JPFS 文件系统有多个挂载点时，可通过此字段指定具体的挂载点。
+
+**选点规则：** 如果不指定，系统将根据节点池类型和 JPFS 规格自动选择匹配的挂载点：
+- 异构节点池(combined)：选择 RDMA 协议的挂载点
+- 云主机节点池(vm)：智能型规格选择 NFS 协议，通用型规格选择 TCP 协议
+
+**示例：** `mt-xxxxxxxx`
+ (Optional) */
+    MountTargetId *string `json:"mountTargetId"`
+
     /* JPFS 源路径，指定要挂载的目录。
 
 **示例：**

@@ -40,7 +40,7 @@ func NewJdaipClient(credential *core.Credential) *JdaipClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "jdaip",
-            Revision:    "1.0.7",
+            Revision:    "1.0.8",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -479,12 +479,15 @@ func (c *JdaipClient) CreateInferenceScale(request *jdaip.CreateInferenceScaleRe
 
 /* 下载性能分析任务指定实例的采集结果。
 
-下载指定 profiling 任务下指定实例的采集结果文件，以实例为单位进行下载。每次下载会将该实例的 `downloadTimes` 计数器加1。
+下载指定 profiling 任务下指定实例的采集结果文件，以实例为单位进行下载。每次下载成功会将该实例的 `downloadTimes` 计数器加1。
 
 ## 注意事项
 
-- 仅状态为 `completed` 的任务才允许下载
-- 结果文件为该实例采集数据的打包压缩文件
+- 下载校验的是**实例级**采集状态：仅该实例的 `collectStatus` 为 `success` 时才允许下载，否则返回400
+- 采集任务整体状态为 `completed` 并不代表每个实例都可下载。部分实例采集失败时，任务整体仍可能为 `completed`，但失败实例的 `collectStatus` 为 `failed`，该实例不可下载
+- 采集任务已过期（`status` 为 `expired`）时不允许下载，返回400。采集结果在平台存储上仅保留有限时长，超期后被回收
+- 每个实例的下载次数上限为 **3 次**（`downloadTimes` 达到3后，第4次请求返回400）
+- 结果文件为该实例采集数据的打包压缩文件，接口返回预签名下载URL
  */
 func (c *JdaipClient) DownloadProfilingTask(request *jdaip.DownloadProfilingTaskRequest) (*jdaip.DownloadProfilingTaskResponse, error) {
     if request == nil {
@@ -970,6 +973,26 @@ func (c *JdaipClient) DeleteImageTask(request *jdaip.DeleteImageTaskRequest) (*j
     return jdResp, err
 }
 
+/* 启动节点 */
+func (c *JdaipClient) StartNode(request *jdaip.StartNodeRequest) (*jdaip.StartNodeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.StartNodeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 获取构建镜像任务关联的 Pod 日志（流式返回）。
 
 通过 SSE（Server-Sent Events）技术实时推送训练日志，适用于实时监控训练进度。
@@ -1213,6 +1236,39 @@ func (c *JdaipClient) DeleteDataset(request *jdaip.DeleteDatasetRequest) (*jdaip
     }
 
     jdResp := &jdaip.DeleteDatasetResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 停止模型导出任务。
+
+停止正在执行或等待中的模型导出任务。停止后将清理已导出的临时资源。
+
+## 可停止的导出状态
+
+- ✅ pending（等待中）、exporting（导出中）
+- ❌ completed（已完成）、failed（已失败）的导出任务无需停止
+
+## 注意事项
+
+- 停止操作不可逆，停止后导出任务将进入 stopping 状态并最终变为 stopped
+- 已导出到目标存储的部分数据不会被自动清理
+ */
+func (c *JdaipClient) StopModelExport(request *jdaip.StopModelExportRequest) (*jdaip.StopModelExportResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.StopModelExportResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1663,6 +1719,26 @@ func (c *JdaipClient) GetJobRestartHistory(request *jdaip.GetJobRestartHistoryRe
     }
 
     jdResp := &jdaip.GetJobRestartHistoryResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 停止节点 */
+func (c *JdaipClient) StopNode(request *jdaip.StopNodeRequest) (*jdaip.StopNodeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.StopNodeResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2754,9 +2830,12 @@ func (c *JdaipClient) DescribeInstances(request *jdaip.DescribeInstancesRequest)
 
 ## 注意事项
 
-- 仅状态为 `completed` 的任务才允许转存
+- 仅状态为 `completed` 且结果未过保留期的采集任务才允许转存，否则返回400
+- 接口会先做一次过期判定：`completed` 但已超保留期的任务会被就地流转为 `expired`，随后被上面的 `completed` 校验拦下。因此结果已过期的任务同样不允许转存
+- `pending`/`running`/`failed` 状态的任务不允许转存：前两者结果尚未生成或不完整，后者没有可用结果
+- 校验不通过时不会创建任何转存记录，也不会下发转存作业
 - 需确保目标OSS Bucket已存在且有写入权限
-- 转存为异步操作，提交后返回转存任务状态
+- 转存为异步操作，提交后返回转存任务状态，接口不等待转存完成
  */
 func (c *JdaipClient) TransferProfilingTaskToOss(request *jdaip.TransferProfilingTaskToOssRequest) (*jdaip.TransferProfilingTaskToOssResponse, error) {
     if request == nil {

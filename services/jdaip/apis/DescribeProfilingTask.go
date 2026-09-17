@@ -44,8 +44,8 @@ type DescribeProfilingTaskRequest struct {
     PageSize *int `json:"pageSize"`
 
     /* <b>filters 中支持使用以下关键字进行过滤</b>
-`instanceName`: 实例名称，模糊匹配，支持单个。
-`nodeName`: 所属节点名称，模糊匹配，支持单个。
+`instanceName`: 实例名称，精确匹配，支持单个。
+`nodeName`: 所属节点名称，精确匹配，支持单个。
 `collectStatus`: 采集状态，精确匹配，支持多个，可选(pending/collecting/success/failed)。
  (Optional) */
     Filters []jdaip.Filter `json:"filters"`
@@ -88,8 +88,8 @@ func NewDescribeProfilingTaskRequest(
  * param pageNumber: 页码；默认为1。 (Optional)
  * param pageSize: 分页大小；默认为20；取值范围[1, 100]。 (Optional)
  * param filters: <b>filters 中支持使用以下关键字进行过滤</b>
-`instanceName`: 实例名称，模糊匹配，支持单个。
-`nodeName`: 所属节点名称，模糊匹配，支持单个。
+`instanceName`: 实例名称，精确匹配，支持单个。
+`nodeName`: 所属节点名称，精确匹配，支持单个。
 `collectStatus`: 采集状态，精确匹配，支持多个，可选(pending/collecting/success/failed)。
  (Optional)
  */
@@ -158,8 +158,8 @@ func (r *DescribeProfilingTaskRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 /* param filters: <b>filters 中支持使用以下关键字进行过滤</b>
-`instanceName`: 实例名称，模糊匹配，支持单个。
-`nodeName`: 所属节点名称，模糊匹配，支持单个。
+`instanceName`: 实例名称，精确匹配，支持单个。
+`nodeName`: 所属节点名称，精确匹配，支持单个。
 `collectStatus`: 采集状态，精确匹配，支持多个，可选(pending/collecting/success/failed)。
 (Optional) */
 func (r *DescribeProfilingTaskRequest) SetFilters(filters []jdaip.Filter) {

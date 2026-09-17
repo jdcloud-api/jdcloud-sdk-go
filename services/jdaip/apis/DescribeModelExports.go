@@ -39,11 +39,6 @@ type DescribeModelExportsRequest struct {
 
     /* 分页大小；默认为20；取值范围[1, 500]。 (Optional) */
     PageSize *int `json:"pageSize"`
-
-    /* <b>filters 中支持使用以下关键字进行过滤</b>
-`status`: 导出状态，精确匹配，支持多个，可选(pending/exporting/completed/failed)。
- (Optional) */
-    Filters []jdaip.Filter `json:"filters"`
 }
 
 /*
@@ -78,9 +73,6 @@ func NewDescribeModelExportsRequest(
  * param jobId: 训练任务ID (Required)
  * param pageNumber: 页码；默认为1。 (Optional)
  * param pageSize: 分页大小；默认为20；取值范围[1, 500]。 (Optional)
- * param filters: <b>filters 中支持使用以下关键字进行过滤</b>
-`status`: 导出状态，精确匹配，支持多个，可选(pending/exporting/completed/failed)。
- (Optional)
  */
 func NewDescribeModelExportsRequestWithAllParams(
     regionId string,
@@ -88,7 +80,6 @@ func NewDescribeModelExportsRequestWithAllParams(
     jobId string,
     pageNumber *int,
     pageSize *int,
-    filters []jdaip.Filter,
 ) *DescribeModelExportsRequest {
 
     return &DescribeModelExportsRequest{
@@ -103,7 +94,6 @@ func NewDescribeModelExportsRequestWithAllParams(
         JobId: jobId,
         PageNumber: pageNumber,
         PageSize: pageSize,
-        Filters: filters,
     }
 }
 
@@ -139,12 +129,6 @@ func (r *DescribeModelExportsRequest) SetPageNumber(pageNumber int) {
 /* param pageSize: 分页大小；默认为20；取值范围[1, 500]。(Optional) */
 func (r *DescribeModelExportsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
-}
-/* param filters: <b>filters 中支持使用以下关键字进行过滤</b>
-`status`: 导出状态，精确匹配，支持多个，可选(pending/exporting/completed/failed)。
-(Optional) */
-func (r *DescribeModelExportsRequest) SetFilters(filters []jdaip.Filter) {
-    r.Filters = filters
 }
 
 

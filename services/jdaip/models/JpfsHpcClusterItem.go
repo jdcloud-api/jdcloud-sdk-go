@@ -17,11 +17,11 @@
 package models
 
 
-type Rdma struct {
+type JpfsHpcClusterItem struct {
 
-    /* RDMA网卡个数 (Optional) */
-    Count int `json:"count"`
+    /* HPC物理集群ID (Optional) */
+    HpcClusterId string `json:"hpcClusterId"`
 
-    /* RDMA网卡带宽 (Optional) */
-    BandwidthGbps int `json:"bandwidthGbps"`
+    /* HPC物理集群名称 (Optional) */
+    HpcClusterName string `json:"hpcClusterName"`
 }

@@ -17,14 +17,14 @@
 package models
 
 
-type Gpu struct {
+type VmDescribeInstanceTypesResult struct {
 
-    /* gpu数量 单位：核 (Optional) */
-    GpuNumber float32 `json:"gpuNumber"`
+    /* 实例规格详情列表 (Optional) */
+    InstanceTypes []VmInstanceType `json:"instanceTypes"`
 
-    /* gpu显存大小 单位：GiB (Optional) */
-    GmemoryGiB float32 `json:"gmemoryGiB"`
+    /* 特定实例规格列表 (Optional) */
+    SpecificInstanceTypes []string `json:"specificInstanceTypes"`
 
-    /* GPU型号 (Optional) */
-    DeviceModel string `json:"deviceModel"`
+    /* 实例规格总数 (Optional) */
+    TotalCount int `json:"totalCount"`
 }

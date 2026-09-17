@@ -37,6 +37,12 @@ type ModelExportListItem struct {
     /* 导出目标存储信息，模型导出的目标存储配置。 (Optional) */
     TargetStorage ModelExportStorageInfo `json:"targetStorage"`
 
+    /* 导出目录，安全存储output下的子目录。
+
+**示例：** `/output/my-model/`
+ (Optional) */
+    ExportDir string `json:"exportDir"`
+
     /* 模型格式。
 
 **可选值：**
@@ -69,6 +75,8 @@ type ModelExportListItem struct {
 
     /* 模型参数量，单位为B（十亿）。支持输入实际模型参数量，如 7 表示 7B、14 表示 14B、123.4 表示 123.4B 等。
 
+**约束：** 最大值为 1000。
+
 **示例：** `7`、`14`、`123.4`
  (Optional) */
     ModelParams int `json:"modelParams"`
@@ -78,12 +86,14 @@ type ModelExportListItem struct {
 **可选值：**
 - `pending`：等待中，导出任务已创建但尚未开始
 - `exporting`：导出中，正在导出模型
+- `stopping`：停止中，导出任务正在停止
+- `stopped`：已停止，导出任务已被手动停止
 - `completed`：已完成，模型导出成功
 - `failed`：失败，模型导出失败
  (Optional) */
     State string `json:"state"`
 
-    /* 失败原因，仅当状态为 failed 时有值。 (Optional) */
+    /* 失败或停止原因，仅当状态为 failed 或 stopped 时有值。 (Optional) */
     Reason string `json:"reason"`
 
     /* 导出任务创建时间。 (Optional) */

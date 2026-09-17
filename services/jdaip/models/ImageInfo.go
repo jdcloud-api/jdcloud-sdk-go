@@ -119,4 +119,7 @@ labels转化对象， key:value中key值如果有._会删除转发成驼峰式�
 
     /* 工作空间中的资源归属权限。 (Optional) */
     Permission string `json:"permission"`
+
+    /* 描述 (Optional) */
+    Description string `json:"description"`
 }

@@ -17,11 +17,11 @@
 package models
 
 
-type ListStorageTypesResult struct {
+type JpfsPhysicRegionCode struct {
 
-    /* 存储类型列表 (Optional) */
-    Items []StorageTypeItem `json:"items"`
+    /* 物理地域编码 (Optional) */
+    PhysicRegionCode string `json:"physicRegionCode"`
 
-    /* 总记录数 (Optional) */
-    Total int `json:"total"`
+    /* 地域所属云厂商 (Optional) */
+    CloudManufacturer string `json:"cloudManufacturer"`
 }

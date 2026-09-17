@@ -17,23 +17,11 @@
 package models
 
 
-type StorageInstanceItem struct {
+type VmInstanceTypeGpu struct {
 
-    /* 存储实例ID (Optional) */
-    InstanceId string `json:"instanceId"`
+    /* GPU卡型号 (Optional) */
+    Model string `json:"model"`
 
-    /* 存储类型 (Optional) */
-    StorageType string `json:"storageType"`
-
-    /* 实例名称 (Optional) */
-    InstanceName string `json:"instanceName"`
-
-    /* 创建时间 (Optional) */
-    CreatedTime string `json:"createdTime"`
-
-    /* 配置项值列表（敏感信息已脱敏） (Optional) */
-    Configs []ConfigItemValue `json:"configs"`
-
-    /* 描述 (Optional) */
-    Description string `json:"description"`
+    /* GPU卡数量 (Optional) */
+    Number int `json:"number"`
 }

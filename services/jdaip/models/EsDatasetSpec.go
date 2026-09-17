@@ -37,7 +37,7 @@ type EsDatasetSpec struct {
     /* 数据集地址。
 `cfs` 类型参数示例(10.0.23.45:/dir-path或/dir-path)。
 `oss` 类型参数示例(oss://bucket.s3.cn-north-1.jdcloud-oss.com/object-path)。
-`jpfs` 类型参数示例(fs-xxxxxxxxxx:/dir-path或/dir-path)。
+`jpfs` 类型参数示例(fs-xxxxxxxxxx:/dir-path或fs-xxxxx:fsmt-yyyyy:/dir-path或/dir-path)。
   */
     DatasetUrl string `json:"datasetUrl"`
 

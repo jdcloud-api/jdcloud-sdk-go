@@ -17,14 +17,11 @@
 package models
 
 
-type UpdateUserAndAppSpec struct {
+type JpfsFileSystemTypesResult struct {
 
-    /* 资源ID  */
-    ResourceId string `json:"resourceId"`
+    /* 规格信息列表 (Optional) */
+    SpecificationInfos []JpfsSpecificationInfo `json:"specificationInfos"`
 
-    /* 原应用联系人信息  */
-    OldOwner string `json:"oldOwner"`
-
-    /* 新应用联系人信息  */
-    NewOwner string `json:"newOwner"`
+    /* 结果数量 (Optional) */
+    TotalCount int `json:"totalCount"`
 }

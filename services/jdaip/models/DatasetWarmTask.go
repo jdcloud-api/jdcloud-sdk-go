@@ -35,6 +35,7 @@ type DatasetWarmTask struct {
 - completed：预热完成
 - failed：预热失败
 - deleting：删除中
+- deleteFailed：删除失败
  (Optional) */
     Status string `json:"status"`
 
@@ -49,6 +50,9 @@ type DatasetWarmTask struct {
 
     /* 安全存储ID (Optional) */
     SafeStorageId string `json:"safeStorageId"`
+
+    /* 安全存储展示ID，在安全存储ID前拼接sec-前缀；当安全存储ID已包含sec-前缀时保持不变 (Optional) */
+    SafeStorageDisplayId string `json:"safeStorageDisplayId"`
 
     /* 安全存储名称快照 (Optional) */
     SafeStorageName string `json:"safeStorageName"`

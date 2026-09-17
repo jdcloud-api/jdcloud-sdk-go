@@ -62,6 +62,12 @@ type JobDetailInfoForJob struct {
     /* 是否为用户训练主容器开启容器特权模式。 (Optional) */
     Privileged bool `json:"privileged"`
 
+    /* 是否为安全训练任务。 (Optional) */
+    SecJob bool `json:"secJob"`
+
+    /* 是否支持导出模型。 (Optional) */
+    SupportExportModel bool `json:"supportExportModel"`
+
     /* 持续时间，单位为秒。 (Optional) */
     RunningTimeInSec int `json:"runningTimeInSec"`
 
@@ -156,6 +162,17 @@ type JobDetailInfoForJob struct {
 
     /* 任务优先级。共享资源池创建时必填，范围 `1..9`。 (Optional) */
     TaskPriority int `json:"taskPriority"`
+
+    /* 是否开启性能分析。
+
+**取值说明：**
+- `true`：已开启性能分析
+- `false`：未开启性能分析
+- `null`：该任务类型不支持性能分析
+
+**注意：** 仅 `jobType` 为 `pytorch` 的任务返回该字段的布尔值，其他任务类型返回 `null`。
+ (Optional) */
+    ProfilingEnable bool `json:"profilingEnable"`
 
     /* 归属用户pin。 (Optional) */
     OwnerUserPin string `json:"ownerUserPin"`

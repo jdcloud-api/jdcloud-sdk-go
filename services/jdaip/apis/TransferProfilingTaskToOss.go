@@ -18,7 +18,6 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
-    jdaip "github.com/jdcloud-api/jdcloud-sdk-go/services/jdaip/models"
 )
 
 type TransferProfilingTaskToOssRequest struct {
@@ -37,8 +36,26 @@ type TransferProfilingTaskToOssRequest struct {
     /* 性能分析任务ID  */
     ProfilingId string `json:"profilingId"`
 
-    /* 转存参数。  */
-    TransferParam *jdaip.TransferToOssParam `json:"transferParam"`
+    /* OSS存储空间名称。
+
+**注意：** 需确保目标Bucket已存在且有写入权限。
+  */
+    OssBucket string `json:"ossBucket"`
+
+    /* OSS服务的endpoint地址（如 `oss.cn-north-1.jdcloud-oss.com`）。
+
+**注意：** 需与目标Bucket所在地域一致。
+  */
+    Endpoint string `json:"endpoint"`
+
+    /* 对象存储中的目标**目录前缀**（不含Bucket名称）。
+
+采集结果会以递归拷贝的方式写入该前缀之下，因此这里应填目录而非单个文件名；
+开头的 `/` 会被忽略。
+
+**示例：** `my-profiling-results/job-abc123/`
+  */
+    ObjectPath string `json:"objectPath"`
 }
 
 /*
@@ -46,7 +63,21 @@ type TransferProfilingTaskToOssRequest struct {
  * param workspaceId: 工作空间ID (Required)
  * param jobId: 训练任务ID (Required)
  * param profilingId: 性能分析任务ID (Required)
- * param transferParam: 转存参数。 (Required)
+ * param ossBucket: OSS存储空间名称。
+
+**注意：** 需确保目标Bucket已存在且有写入权限。
+ (Required)
+ * param endpoint: OSS服务的endpoint地址（如 `oss.cn-north-1.jdcloud-oss.com`）。
+
+**注意：** 需与目标Bucket所在地域一致。
+ (Required)
+ * param objectPath: 对象存储中的目标**目录前缀**（不含Bucket名称）。
+
+采集结果会以递归拷贝的方式写入该前缀之下，因此这里应填目录而非单个文件名；
+开头的 `/` 会被忽略。
+
+**示例：** `my-profiling-results/job-abc123/`
+ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -55,7 +86,9 @@ func NewTransferProfilingTaskToOssRequest(
     workspaceId string,
     jobId string,
     profilingId string,
-    transferParam *jdaip.TransferToOssParam,
+    ossBucket string,
+    endpoint string,
+    objectPath string,
 ) *TransferProfilingTaskToOssRequest {
 
 	return &TransferProfilingTaskToOssRequest{
@@ -69,7 +102,9 @@ func NewTransferProfilingTaskToOssRequest(
         WorkspaceId: workspaceId,
         JobId: jobId,
         ProfilingId: profilingId,
-        TransferParam: transferParam,
+        OssBucket: ossBucket,
+        Endpoint: endpoint,
+        ObjectPath: objectPath,
 	}
 }
 
@@ -78,14 +113,30 @@ func NewTransferProfilingTaskToOssRequest(
  * param workspaceId: 工作空间ID (Required)
  * param jobId: 训练任务ID (Required)
  * param profilingId: 性能分析任务ID (Required)
- * param transferParam: 转存参数。 (Required)
+ * param ossBucket: OSS存储空间名称。
+
+**注意：** 需确保目标Bucket已存在且有写入权限。
+ (Required)
+ * param endpoint: OSS服务的endpoint地址（如 `oss.cn-north-1.jdcloud-oss.com`）。
+
+**注意：** 需与目标Bucket所在地域一致。
+ (Required)
+ * param objectPath: 对象存储中的目标**目录前缀**（不含Bucket名称）。
+
+采集结果会以递归拷贝的方式写入该前缀之下，因此这里应填目录而非单个文件名；
+开头的 `/` 会被忽略。
+
+**示例：** `my-profiling-results/job-abc123/`
+ (Required)
  */
 func NewTransferProfilingTaskToOssRequestWithAllParams(
     regionId string,
     workspaceId string,
     jobId string,
     profilingId string,
-    transferParam *jdaip.TransferToOssParam,
+    ossBucket string,
+    endpoint string,
+    objectPath string,
 ) *TransferProfilingTaskToOssRequest {
 
     return &TransferProfilingTaskToOssRequest{
@@ -99,7 +150,9 @@ func NewTransferProfilingTaskToOssRequestWithAllParams(
         WorkspaceId: workspaceId,
         JobId: jobId,
         ProfilingId: profilingId,
-        TransferParam: transferParam,
+        OssBucket: ossBucket,
+        Endpoint: endpoint,
+        ObjectPath: objectPath,
     }
 }
 
@@ -132,9 +185,29 @@ func (r *TransferProfilingTaskToOssRequest) SetJobId(jobId string) {
 func (r *TransferProfilingTaskToOssRequest) SetProfilingId(profilingId string) {
     r.ProfilingId = profilingId
 }
-/* param transferParam: 转存参数。(Required) */
-func (r *TransferProfilingTaskToOssRequest) SetTransferParam(transferParam *jdaip.TransferToOssParam) {
-    r.TransferParam = transferParam
+/* param ossBucket: OSS存储空间名称。
+
+**注意：** 需确保目标Bucket已存在且有写入权限。
+(Required) */
+func (r *TransferProfilingTaskToOssRequest) SetOssBucket(ossBucket string) {
+    r.OssBucket = ossBucket
+}
+/* param endpoint: OSS服务的endpoint地址（如 `oss.cn-north-1.jdcloud-oss.com`）。
+
+**注意：** 需与目标Bucket所在地域一致。
+(Required) */
+func (r *TransferProfilingTaskToOssRequest) SetEndpoint(endpoint string) {
+    r.Endpoint = endpoint
+}
+/* param objectPath: 对象存储中的目标**目录前缀**（不含Bucket名称）。
+
+采集结果会以递归拷贝的方式写入该前缀之下，因此这里应填目录而非单个文件名；
+开头的 `/` 会被忽略。
+
+**示例：** `my-profiling-results/job-abc123/`
+(Required) */
+func (r *TransferProfilingTaskToOssRequest) SetObjectPath(objectPath string) {
+    r.ObjectPath = objectPath
 }
 
 

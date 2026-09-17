@@ -17,23 +17,29 @@
 package models
 
 
-type StoragePathItem struct {
+type JpfsAzMap struct {
 
-    /* 文件或目录名称 (Optional) */
-    Name string `json:"name"`
+    /* 可用区名称 (Optional) */
+    AzName string `json:"azName"`
 
-    /* 文件或目录路径 (Optional) */
-    Path string `json:"path"`
+    /* 逻辑可用区 (Optional) */
+    Laz string `json:"laz"`
 
-    /* 是否为目录 (Optional) */
-    IsDir bool `json:"isDir"`
+    /* 物理可用区 (Optional) */
+    Paz string `json:"paz"`
 
-    /*  (Optional) */
-    IsBucket bool `json:"isBucket"`
+    /* 可用区所属云厂商 (Optional) */
+    CloudManufacturer string `json:"cloudManufacturer"`
 
-    /* 文件大小（字节） (Optional) */
-    Size int64 `json:"size"`
+    /* 是否可见，0=不可见，1=可见 (Optional) */
+    Visible int `json:"visible"`
 
-    /* 最后修改时间 (Optional) */
-    LastModified string `json:"lastModified"`
+    /* 是否可售，0=可售，1=已售罄 (Optional) */
+    CanSale int `json:"canSale"`
+
+    /* 可用区类别，AZ-center或EZ-edge (Optional) */
+    ZoneType string `json:"zoneType"`
+
+    /* 可用区排序 (Optional) */
+    SerialNumber int `json:"serialNumber"`
 }

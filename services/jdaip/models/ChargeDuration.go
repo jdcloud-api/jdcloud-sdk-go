@@ -17,11 +17,23 @@
 package models
 
 
-type ConfigItemValue struct {
+type ChargeDuration struct {
 
-    /* 配置项键 (Optional) */
-    Key string `json:"key"`
+    /* 地域 (Optional) */
+    Region string `json:"region"`
 
-    /* 配置项值 (Optional) */
-    Value string `json:"value"`
+    /* 购买周期 (Optional) */
+    ChargeDuration string `json:"chargeDuration"`
+
+    /* 开始时间 (Optional) */
+    StartTime string `json:"startTime"`
+
+    /* 过期时间 (Optional) */
+    ExpireTime string `json:"expireTime"`
+
+    /* 创建时间 (Optional) */
+    CreateTime string `json:"createTime"`
+
+    /* 更新时间 (Optional) */
+    UpdateTime string `json:"updateTime"`
 }
