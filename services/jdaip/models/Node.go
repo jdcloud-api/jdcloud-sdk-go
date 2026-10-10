@@ -22,7 +22,7 @@ type Node struct {
     /* 节点ID (Optional) */
     Id string `json:"id"`
 
-    /* 节点类型 (Optional) */
+    /* 节点类型，vm为云主机节点，hpc为物理集群节点 (Optional) */
     NodeType string `json:"nodeType"`
 
     /* 计费方式，pack：包年包月；advance：预付费 (Optional) */
@@ -102,6 +102,12 @@ type Node struct {
 
     /* 设备品牌 (Optional) */
     DeviceBrand string `json:"deviceBrand"`
+
+    /* GPU类型 (Optional) */
+    DeviceModel string `json:"deviceModel"`
+
+    /* 驱动版本 (Optional) */
+    DriverVersion string `json:"driverVersion"`
 
     /* 所属租户 (Optional) */
     Pin string `json:"pin"`

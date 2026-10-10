@@ -22,7 +22,7 @@ type NodeInstance struct {
     /* 节点ID (Optional) */
     Id string `json:"id"`
 
-    /* 节点类型 (Optional) */
+    /* 节点类型，vm为云主机节点，hpc为物理集群节点 (Optional) */
     NodeType string `json:"nodeType"`
 
     /* 节点名称 (Optional) */

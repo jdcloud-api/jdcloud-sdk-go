@@ -48,17 +48,23 @@ type DatasetWarmTask struct {
     /* 完成时间，Unix秒；未完成时返回0或不返回 (Optional) */
     CompleteTime int64 `json:"completeTime"`
 
-    /* 安全存储ID (Optional) */
+    /* 安全存储ID，JPFS 任务返回；OSS 任务可为空 (Optional) */
     SafeStorageId string `json:"safeStorageId"`
 
-    /* 安全存储展示ID，在安全存储ID前拼接sec-前缀；当安全存储ID已包含sec-前缀时保持不变 (Optional) */
+    /* 安全存储展示ID，在安全存储ID前拼接sec-前缀；当安全存储ID已包含sec-前缀时保持不变；OSS 任务可为空 (Optional) */
     SafeStorageDisplayId string `json:"safeStorageDisplayId"`
 
-    /* 安全存储名称快照 (Optional) */
+    /* 安全存储名称快照，JPFS 任务返回；OSS 任务可为空 (Optional) */
     SafeStorageName string `json:"safeStorageName"`
 
-    /* JPFS文件夹名称，生成规则与预热任务ID一致 (Optional) */
-    JpfsFolderName string `json:"jpfsFolderName"`
+    /* 预热目标路径，JPFS/OSS 共用，生成规则保持一致 (Optional) */
+    FolderName string `json:"folderName"`
+
+    /* 预热任务类型，可选值：jpfs、oss；存量任务可为空字符串 (Optional) */
+    TaskType string `json:"taskType"`
+
+    /* OSS bucket 名称；taskType=oss 时返回，JPFS 任务可为空或不返回 (Optional) */
+    BucketName string `json:"bucketName"`
 
     /* 数据集预估大小，单位GB (Optional) */
     EstimatedSize int64 `json:"estimatedSize"`

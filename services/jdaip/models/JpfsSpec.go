@@ -34,6 +34,6 @@ type JpfsSpec struct {
     /* HPC集群名称，多个值按JPFS服务约定分隔 (Optional) */
     HpcClusterNames string `json:"hpcClusterNames"`
 
-    /* JPFS规格编码，同时作为商业平台商品名称  */
+    /* JPFS规格编码；intelligent仅支持RDMA挂载，general同时支持RDMA和TCP挂载  */
     Specification string `json:"specification"`
 }

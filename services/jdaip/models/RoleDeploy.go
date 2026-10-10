@@ -78,4 +78,7 @@ type RoleDeploy struct {
 
     /* decode路由策略 (Optional) */
     RouterDecodePolicy *string `json:"routerDecodePolicy"`
+
+    /* 多角色部署KVCache传输协议类型 (Optional) */
+    KvTransferProtocol *string `json:"kvTransferProtocol"`
 }

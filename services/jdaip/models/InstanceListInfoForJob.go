@@ -62,9 +62,25 @@ type InstanceListInfoForJob struct {
 - `succeeded`：成功，训练正常完成
 - `failed`：失败，实例执行失败
 - `terminating`：终止中，正在终止实例
+- `terminated`：已终止；Batch 的历史 attempt 或任务停止后可能返回
 - `unknown`：未知，状态无法获取
  (Optional) */
     State string `json:"state"`
+
+    /* Batch 副本的零基序号；非 Batch 任务不返回。 (Optional) */
+    TaskIndex int `json:"taskIndex"`
+
+    /* 主容器退出码；尚未退出或非 Batch 任务不返回。 (Optional) */
+    ExitCode int `json:"exitCode"`
+
+    /* Pod 或主容器终止原因；非 Batch 任务不返回。 (Optional) */
+    TerminationReason string `json:"terminationReason"`
+
+    /* 同一 taskIndex 的尝试序号，从 1 开始；非 Batch 任务不返回。 (Optional) */
+    AttemptNo int `json:"attemptNo"`
+
+    /* 是否为该 taskIndex 当前的 Pod 尝试；非 Batch 任务不返回。 (Optional) */
+    IsCurrent bool `json:"isCurrent"`
 
     /* 实例创建时间。 (Optional) */
     CreateTime string `json:"createTime"`

@@ -38,7 +38,8 @@ type NbWorkloadDetail struct {
 - private: 私有资源池队列
 - public: 公共资源池队列
 - exclusive: 专享资源池队列
-- security: 安全队列，出站网络受管控，禁止修改资源属性
+- security: 安全异构队列，出站网络受管控，禁止修改资源属性
+- sec-vm: 安全云主机队列，管控约束与`security`一致
 
 ## 使用说明
 - 该字段为查询返回值，创建/更新时无需传入，队列类型由`queueId`推导
@@ -48,11 +49,12 @@ type NbWorkloadDetail struct {
 - 调用方需同时容忍空串与`private`两种表示私有资源池的情形
 
 ## 安全队列使用限制
+以下限制对`security`与`sec-vm`两类安全队列同样生效：
 - 仅支持`jpfs`/`oss`两种存储类型，其他存储类型(如`cfs`)会被拒绝
 - 不支持开启大数据(BDP)功能，因其依赖CFS挂载
 - 不支持修改资源属性、不支持在启动时变更资源规格/队列、不支持保存镜像
 - 不允许把已有实例的资源属性变更到安全队列
-- 除安全jpfs(`storageSource=security`)本身外，其余挂载点强制只读，详见`storageSpec.readonly`
+- 除安全存储(`storageSource=security`的jpfs/oss)本身外，其余挂载点强制只读，详见`storageSpec.readonly`
  (Optional) */
     QueueType string `json:"queueType"`
 
@@ -90,12 +92,12 @@ type NbWorkloadDetail struct {
  (Optional) */
     DeviceModel string `json:"deviceModel"`
 
-    /* 虚拟GPU数量，分配的GPU卡数。
+    /* 虚拟GPU数量，实例实际分配的GPU卡数总量。
 
 ## 使用说明
-- 整数表示完整GPU卡
-- 小数表示GPU切分
-- 示例：1, 2, 4, 8, 0.5, 0.25
+- 整数表示整卡，小数表示卡切分
+- 各芯片厂商支持的取值不同，详见创建参数workloadSpec.vcudaCore
+- 取值为0或空表示CPU实例
  (Optional) */
     VcudaCore string `json:"vcudaCore"`
 

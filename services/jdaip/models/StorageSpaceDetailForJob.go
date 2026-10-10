@@ -19,7 +19,7 @@ package models
 
 type StorageSpaceDetailForJob struct {
 
-    /* 存储类型（数据来源），大小写敏感，地域不同，支持的存储类型也不同，需要根据地域实际支持的存储类型选择：[oss, cfs, jpfs, secure]。其中 `secure` 仅限安全队列使用。
+    /* 存储类型（数据来源），大小写敏感，地域不同，支持的存储类型也不同，需要根据地域实际支持的存储类型选择：[oss, cfs, jpfs, secure, secureOss]。其中 `secure` 和 `secureOss` 仅限安全队列使用。
  (Optional) */
     StorageType string `json:"storageType"`
 
@@ -38,4 +38,7 @@ type StorageSpaceDetailForJob struct {
 
     /*  (Optional) */
     Secure SecureDetailForJob `json:"secure"`
+
+    /*  (Optional) */
+    SecureOss SecureOssDetailForJob `json:"secureOss"`
 }

@@ -65,4 +65,24 @@ type DatasetParamForJob struct {
 - 当存储类型不是 `oss` 时，此参数无效
  (Optional) */
     Readonly *bool `json:"readonly"`
+
+    /* JPFS 挂载点 ID，指定数据集使用的 JPFS 挂载点。
+
+**使用场景：** 当数据集底层存储为 JPFS 且文件系统有多个挂载点时，可通过此字段指定具体的挂载点。
+
+**示例：** `mt-xxxxxxxx`
+ (Optional) */
+    MountTargetId *string `json:"mountTargetId"`
+
+    /* CFS 挂载点 IP 地址，指定数据集使用的 CFS 挂载目标。
+
+**格式：** IPv4 地址
+
+**示例：** `192.168.0.1`
+
+**说明：**
+- 非必传参数
+- 如需指定特定挂载点，请传此参数
+ (Optional) */
+    Host *string `json:"host"`
 }

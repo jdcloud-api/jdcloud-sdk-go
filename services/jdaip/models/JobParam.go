@@ -69,6 +69,7 @@ type JobParam struct {
 **可选值：**
 - `pytorch`：PyTorch 框架，适用于深度学习训练
 - `ray`：Ray 框架，适用于分布式计算、强化学习
+- `batch`：批量任务，多个同规格 Worker 独立执行
 
 **注意：** 大小写敏感，必须使用小写
   */
@@ -96,6 +97,9 @@ type JobParam struct {
     /* **已废弃：** 请参考 `roleResource` 字段
  (Optional) */
     Replica *int `json:"replica"`
+
+    /* Batch 任务的最小可调度副本数，范围为 `[1, roleResource.roles[0].count]`；非 Batch 任务不传。 (Optional) */
+    MinAvailable *int `json:"minAvailable"`
 
     /* 任务优先级，取值范围 `1..9`。
 
@@ -174,6 +178,7 @@ type JobParam struct {
 **适用场景：**
 - Ray 分布式训练（必须配置 Head 和 Worker）
 - PyTorch 分布式训练（可配置不同规格的 Worker）
+- Batch 批量任务（必须且只能配置一个 Worker，`count` 为副本总数）
  (Optional) */
     RoleResource *RoleResourceParamForJob `json:"roleResource"`
 

@@ -109,7 +109,7 @@ type AppInfoModel struct {
     /* 支持远程调用后RPC字段规则
 1. 本地应用绑定本地卡，只使用allocate字段
 2. 本地应用绑定远程卡，只使用remoteAllocates字段
-3. 远程应用使用本地卡，使用 remoteNodeIp\u0026remoteNodeName + remoteAllocates字段 (Optional) */
+3. 远程应用使用本地卡，使用 remoteNodeIp + remoteNodeName + remoteAllocates字段 (Optional) */
     RemoteNodeIp string `json:"remoteNodeIp"`
 
     /*  (Optional) */

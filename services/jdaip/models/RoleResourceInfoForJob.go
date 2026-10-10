@@ -29,11 +29,11 @@ type RoleResourceInfoForJob struct {
 - 必须包含 `Head` 角色（主节点）
 - 可配置 `Worker` 或 `Worker-{name}` 角色（工作节点）
 - 示例：`Head`, `Worker`, `Worker-gpu-1`, `Worker-gpu-2`
+**Batch 任务：** 只能使用 `Worker`。
  (Optional) */
     Name *string `json:"name"`
 
     /* 该角色的节点数量。如果是pytorch任务，count 值等于 Master + Worker 的总数。
-
 **取值范围：** 1 ~ 正整数
 
 **建议：**

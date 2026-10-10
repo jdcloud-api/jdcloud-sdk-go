@@ -19,7 +19,15 @@ package models
 
 type RoleResourceInfoForJobList struct {
 
-    /* 队列类型。公共资源池为 `public`，共享资源池为 `exclusive`，安全资源池为 `secure`。 (Optional) */
+    /* 队列类型。
+
+**可选值：**
+- `public`：公共资源池
+- `exclusive`：共享资源池
+- `private`：专属资源池
+- `security`：安全异构节点池
+- `sec-vm`：安全云主机节点池
+ (Optional) */
     QueueType string `json:"queueType"`
 
     /* 队列ID，所有角色共享同一个队列。

@@ -22,7 +22,7 @@ type ExternalNode struct {
     /* 节点ID (Optional) */
     Id string `json:"id"`
 
-    /* 节点类型 (Optional) */
+    /* 节点类型，vm为云主机节点，hpc为物理集群节点 (Optional) */
     NodeType string `json:"nodeType"`
 
     /* 计费方式，pack：包年包月；advance：预付费 (Optional) */
