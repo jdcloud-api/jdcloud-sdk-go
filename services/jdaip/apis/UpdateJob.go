@@ -33,7 +33,7 @@ type UpdateJobRequest struct {
     /* 训练任务ID  */
     JobId string `json:"jobId"`
 
-    /* 训练任务名称。1~32字符，仅支持中文、大小写字母、数字、英文中划线 "-"和英文下划线"_"。 (Optional) */
+    /* 训练任务名称。1~256字符，仅支持中文、大小写字母、数字、英文中划线 "-"和英文下划线"_"。 (Optional) */
     Name *string `json:"name"`
 
     /* 训练任务的描述信息，不超过256个字符。 (Optional) */
@@ -83,7 +83,7 @@ func NewUpdateJobRequest(
  * param regionId: 地域ID (Required)
  * param workspaceId: 工作空间ID (Required)
  * param jobId: 训练任务ID (Required)
- * param name: 训练任务名称。1~32字符，仅支持中文、大小写字母、数字、英文中划线 "-"和英文下划线"_"。 (Optional)
+ * param name: 训练任务名称。1~256字符，仅支持中文、大小写字母、数字、英文中划线 "-"和英文下划线"_"。 (Optional)
  * param description: 训练任务的描述信息，不超过256个字符。 (Optional)
  * param permission: 工作空间中的资源归属权限，支持(public,private)，默认为public。 (Optional)
  * param taskPriority: 任务优先级，取值范围 `1..9`。仅排队中（`queuing`）任务允许更新。
@@ -147,7 +147,7 @@ func (r *UpdateJobRequest) SetWorkspaceId(workspaceId string) {
 func (r *UpdateJobRequest) SetJobId(jobId string) {
     r.JobId = jobId
 }
-/* param name: 训练任务名称。1~32字符，仅支持中文、大小写字母、数字、英文中划线 "-"和英文下划线"_"。(Optional) */
+/* param name: 训练任务名称。1~256字符，仅支持中文、大小写字母、数字、英文中划线 "-"和英文下划线"_"。(Optional) */
 func (r *UpdateJobRequest) SetName(name string) {
     r.Name = &name
 }

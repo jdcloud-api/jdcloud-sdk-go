@@ -34,7 +34,7 @@ type UpdateNotebookRequest struct {
     /* notebook ID  */
     NotebookId string `json:"notebookId"`
 
-    /* 名称。1~32字符，可以包含中文、数字、大小写字母、英文下划线"_"、中划线"-"或点"."。传null表示不修改此字段。 (Optional) */
+    /* 名称。1~256字符，可以包含中文、数字、大小写字母、英文下划线"_"、中划线"-"或点"."。传null表示不修改此字段。 (Optional) */
     Name *string `json:"name"`
 
     /* 描述。不超过256字符。传null表示不修改此字段。 (Optional) */
@@ -86,7 +86,7 @@ func NewUpdateNotebookRequest(
  * param regionId: 地域ID (Required)
  * param workspaceId: 工作空间ID (Required)
  * param notebookId: notebook ID (Required)
- * param name: 名称。1~32字符，可以包含中文、数字、大小写字母、英文下划线"_"、中划线"-"或点"."。传null表示不修改此字段。 (Optional)
+ * param name: 名称。1~256字符，可以包含中文、数字、大小写字母、英文下划线"_"、中划线"-"或点"."。传null表示不修改此字段。 (Optional)
  * param description: 描述。不超过256字符。传null表示不修改此字段。 (Optional)
  * param permission: 工作空间中的资源归属权限，支持(public,private)，只有管理员和拥有者可以修改。传null表示不修改此字段。
 管理员可查看工作空间中全部资源，其他用户只能查看归属自己的private权限的资源或public权限的资源。 (Optional)
@@ -152,7 +152,7 @@ func (r *UpdateNotebookRequest) SetWorkspaceId(workspaceId string) {
 func (r *UpdateNotebookRequest) SetNotebookId(notebookId string) {
     r.NotebookId = notebookId
 }
-/* param name: 名称。1~32字符，可以包含中文、数字、大小写字母、英文下划线"_"、中划线"-"或点"."。传null表示不修改此字段。(Optional) */
+/* param name: 名称。1~256字符，可以包含中文、数字、大小写字母、英文下划线"_"、中划线"-"或点"."。传null表示不修改此字段。(Optional) */
 func (r *UpdateNotebookRequest) SetName(name string) {
     r.Name = &name
 }

@@ -55,7 +55,7 @@ type Jpfs struct {
     /* JPFS资源计费配置 (Optional) */
     BillingInfo JpfsBillingInfo `json:"billingInfo"`
 
-    /* 计费到期时间，原样返回JPFS ChargeSpecRes中的chargeExpiredTime (Optional) */
+    /* 商业平台返回的JPFS到期时间原始值；无有效到期时间时返回空字符串 (Optional) */
     ChargeExpiredTime string `json:"chargeExpiredTime"`
 
     /* RDMA协议挂载目标ID (Optional) */

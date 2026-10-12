@@ -22,7 +22,7 @@ type NotebookSpec struct {
     /* Notebook实例名称。
 
 ## 命名规则
-- 长度：1~32字符
+- 长度：1~256字符
 - 支持字符：中文、数字、大小写字母、英文下划线"_"、中划线"-"、点"."
 - 示例：my-notebook-01
   */
@@ -120,6 +120,7 @@ type NotebookSpec struct {
 - 支持公共数据集和个人数据集
 - 可选择数据集版本
 - 建议挂载到`/mnt/techdataset-x/`路径下
+- 默认强制只读挂载
  (Optional) */
     TechDatasets []TechDatasetSpec `json:"techDatasets"`
 

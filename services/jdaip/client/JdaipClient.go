@@ -40,7 +40,7 @@ func NewJdaipClient(credential *core.Credential) *JdaipClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "jdaip",
-            Revision:    "1.0.10",
+            Revision:    "1.0.11",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -1102,6 +1102,33 @@ func (c *JdaipClient) SaveImage(request *jdaip.SaveImageRequest) (*jdaip.SaveIma
     return jdResp, err
 }
 
+/* 更新Notebook的调度优先级。
+
+## 接口说明
+- 仅支持处于 排队中(waiting) 或 停止(stopped) 状态的Notebook。
+- 仅私有资源池且队列开启了调度优先级时可设置。
+- 优先级取值范围为[1, 队列优先级上限]，数值越大优先级越高。
+- 对处于 排队中(waiting) 状态的Notebook，新优先级会即时生效。
+ */
+func (c *JdaipClient) UpdateNotebookTaskPriority(request *jdaip.UpdateNotebookTaskPriorityRequest) (*jdaip.UpdateNotebookTaskPriorityResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.UpdateNotebookTaskPriorityResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 获取推理服务事件 */
 func (c *JdaipClient) DescribeInferenceEvents(request *jdaip.DescribeInferenceEventsRequest) (*jdaip.DescribeInferenceEventsResponse, error) {
     if request == nil {
@@ -2152,6 +2179,26 @@ func (c *JdaipClient) DescribePublicModels(request *jdaip.DescribePublicModelsRe
     return jdResp, err
 }
 
+/* 获取notebook SSH公钥列表 */
+func (c *JdaipClient) GetNotebookSshPublicKeys(request *jdaip.GetNotebookSshPublicKeysRequest) (*jdaip.GetNotebookSshPublicKeysResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.GetNotebookSshPublicKeysResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询训练任务列表。
 
 分页查询工作空间下的训练任务列表，支持多种过滤条件。
@@ -2676,6 +2723,41 @@ func (c *JdaipClient) DeleteService(request *jdaip.DeleteServiceRequest) (*jdaip
     }
 
     jdResp := &jdaip.DeleteServiceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 调整训练任务的调度优先级。
+
+通过调整优先级可以影响任务的调度顺序，优先级高的任务会更快获得计算资源。
+
+## 系统预置优先级
+
+- `high-priority`：高优先级（20000），优先调度
+- `normal-priority`：普通优先级（10000），默认
+- `low-priority`：低优先级（5000），最后调度
+
+## 注意事项
+
+- 提高优先级可以让任务更快被调度执行
+- 如果队列调度策略支持资源抢占，可能导致运行中的低优先级任务被停止
+- 优先级调整仅影响排队中的任务，对已运行的任务无效
+ */
+func (c *JdaipClient) ChangePriority(request *jdaip.ChangePriorityRequest) (*jdaip.ChangePriorityResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.ChangePriorityResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -3436,6 +3518,35 @@ func (c *JdaipClient) DescribeExperiment(request *jdaip.DescribeExperimentReques
     }
 
     jdResp := &jdaip.DescribeExperimentResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取训练任务关联的 Pod 日志（非流式返回）。
+
+一次性获取指定数量的日志内容，适用于日志分析、问题排查等场景。
+
+## 使用场景
+
+- 获取历史日志进行分析
+- 问题排查和诊断
+- 日志导出和归档
+ */
+func (c *JdaipClient) GetPodLimitLogs(request *jdaip.GetPodLimitLogsRequest) (*jdaip.GetPodLimitLogsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.GetPodLimitLogsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

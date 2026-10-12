@@ -54,6 +54,9 @@ type AdminInferenceInfo struct {
     /* 创建服务的用户PIN (Optional) */
     CreateUserPin string `json:"createUserPin"`
 
+    /* 推理服务创建时间 (Optional) */
+    CreateTime string `json:"createTime"`
+
     /* 推理服务所属工作空间ID (Optional) */
     WorkspaceId string `json:"workspaceId"`
 
