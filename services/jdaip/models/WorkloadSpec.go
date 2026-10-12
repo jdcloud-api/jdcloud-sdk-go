@@ -89,18 +89,22 @@ type WorkloadSpec struct {
  (Optional) */
     DeviceModel *string `json:"deviceModel"`
 
-    /* 虚拟GPU数量，仅私有资源池有效。
+    /* 虚拟GPU数量，即本实例申请的GPU卡数总量，仅私有资源池生效。
 
-## NVIDIA GPU配置
-- 支持整数：1、2、4、8(卡)
-- 支持小数：0.125、0.25、0.5(卡切分)
+## 英伟达GPU配置
+- 取值范围：0.1、0.125、0.25、0.5、1、2、3、4、5、6、7、8
 
 ## 昇腾GPU配置
-- 仅支持整数：1-8(卡)
+- 取值范围：1、2、3、4、5、6、7、8、16
+
+## 摩尔线程GPU配置
+- 取值范围：0.1、0.2、0.4、0.6、0.8、1、2、3、4、5、6、7、8
 
 ## 使用说明
-- 必须与deviceModel同时使用
-- 小数表示GPU切分，共享GPU资源
+- 传0或不传表示CPU实例，此时deviceModel可为空
+- 取值非0时必须同时传deviceModel
+- 公共/专享资源池传值无效，由实例规格决定
+- 显存与算力不可指定，由平台按卡数同比例换算
  (Optional) */
     VcudaCore *string `json:"vcudaCore"`
 

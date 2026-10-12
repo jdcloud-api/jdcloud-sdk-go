@@ -28,8 +28,8 @@ type Queue struct {
     /* 节点池ID (Optional) */
     NodePoolId string `json:"nodePoolId"`
 
-    /* 节点池相关信息，key值参照NodePool属性，查询时有用（name、poolType、vpcId、vpcName、topology） (Optional) */
-    NodePoolInfo interface{} `json:"nodePoolInfo"`
+    /* 节点池相关信息 (Optional) */
+    NodePoolInfo NodePoolInfo `json:"nodePoolInfo"`
 
     /* 队列下任务的命名空间 (Optional) */
     Namespace string `json:"namespace"`
@@ -72,7 +72,7 @@ type Queue struct {
     /* 资源队列名称 (Optional) */
     Desc string `json:"desc"`
 
-    /* 队列类型，common：普通队列；security：安全队列 (Optional) */
+    /* 废弃，参考nodePoolInfo.poolType，队列类型，common：普通队列；security：安全队列 (Optional) */
     QueueType string `json:"queueType"`
 
     /* 计费模式，创建时确定不可修改

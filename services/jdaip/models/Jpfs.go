@@ -43,6 +43,9 @@ type Jpfs struct {
     /* 可用区 (Optional) */
     Az string `json:"az"`
 
+    /* 是否为边缘网络作用域 (Optional) */
+    Edge bool `json:"edge"`
+
     /* 文件系统规格 (Optional) */
     Spec JpfsSpec `json:"spec"`
 
@@ -54,6 +57,15 @@ type Jpfs struct {
 
     /* 计费到期时间，原样返回JPFS ChargeSpecRes中的chargeExpiredTime (Optional) */
     ChargeExpiredTime string `json:"chargeExpiredTime"`
+
+    /* RDMA协议挂载目标ID (Optional) */
+    RdmaMountTargetId string `json:"rdmaMountTargetId"`
+
+    /* TCP协议挂载目标ID，仅general规格返回 (Optional) */
+    TcpMountTargetId string `json:"tcpMountTargetId"`
+
+    /* NFS协议挂载目标ID，仅intelligent规格返回 (Optional) */
+    NfsMountTargetId string `json:"nfsMountTargetId"`
 
     /* 商业平台购买单ID (Optional) */
     BuyId string `json:"buyId"`

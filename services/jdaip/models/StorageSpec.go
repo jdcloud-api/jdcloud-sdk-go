@@ -47,11 +47,12 @@ type StorageSpec struct {
 ## 各类型路径格式
 - cfs: `10.0.23.45:/dir-path` 或 `/dir-path`
 - oss: `oss://bucket.s3.cn-north-1.jdcloud-oss.com/object-path`
-- jpfs: `fs-xxxxx:fsmt-yyyyy:/dir-path` 或 `fs-xxxxx:/dir-path` 或 `/dir-path`
+- jpfs: `JPFS-ID:/dir-path`
 
 ## 使用说明
 - 路径必须存在，否则挂载失败
 - 支持挂载子目录
+- jpfs带挂载点ID(`fsmt-`)的三段格式与不带挂载点ID的两段格式均可传入；服务端会按传入的段数规范化后落库，查询详情返回规范化后的值
   */
     StoragePath string `json:"storagePath"`
 
@@ -75,34 +76,52 @@ type StorageSpec struct {
 - 默认为false(读写模式)
 
 ## 生效范围
-- `oss`类型存储与安全jpfs(`storageSource=security`)：按用户传入值挂载
+- `oss`类型存储与安全存储(`storageSource=security`的jpfs/oss)：按用户传入值挂载
 - 其他存储类型：该字段被忽略，恒挂载为可写
 
 ## 限制
-- 安全队列(`queueType=security`)上的实例：除安全jpfs本身外，其余所有挂载点(oss、普通jpfs、数据集、模型)会被强制置为只读，用户传入的`readonly=false`不生效
-- 上述强制只读只取决于队列类型：安全队列上的实例即使未挂载任何安全jpfs，其余挂载点同样强制只读
+- 安全队列(`queueType=security`或`sec-vm`)上的实例：除安全存储本身外，其余所有挂载点(普通oss、普通jpfs、数据集、模型)会被强制置为只读，用户传入的`readonly=false`不生效
+- 上述强制只读只取决于队列类型：安全队列上的实例即使未挂载任何安全存储，其余挂载点同样强制只读
 - 查询详情时返回的是服务端裁定后的值，可能与创建时传入的值不同
 - 公共(`source=public`)数据集/模型恒为只读
  (Optional) */
     Readonly *bool `json:"readonly"`
 
-    /* jpfs存储来源，区分这块jpfs是用户自有的还是平台统一管理的安全jpfs。
+    /* 存储来源，区分这块存储是用户自有的还是平台统一管理的安全存储。
 
 ## 取值
-- user: 用户自有的jpfs文件系统(默认)
-- security: 平台统一管理的安全jpfs，仅安全队列可用
+- user: 用户自有的存储(默认)
+- security: 平台统一管理的安全存储，仅安全队列可用
 
 ## 使用说明
-- 仅`storageType=jpfs`时有意义，其他存储类型忽略该字段
+- 仅`storageType=jpfs`或`oss`时有意义，`cfs`/`hostpath`忽略该字段
 - 不传或传空串时按`user`处理
 - 安全队列的完整使用限制见`nbWorkloadDetail.queueType`
 
 ## 限制
-- 取值为`security`时，`storageType`必须是`jpfs`，否则返回参数错误
-- 取值为`security`时，该实例必须创建在安全队列(`queueType=security`)上，非安全队列使用会被拒绝
-- 安全jpfs的`storagePath`不能为空，且只能是`/data`或其子目录(`/data/...`)
+- 取值为`security`时，`storageType`必须是`jpfs`或`oss`，否则返回参数错误
+- 取值为`security`时，该实例必须创建在安全队列(`queueType=security`或`sec-vm`)上，非安全队列使用会被拒绝
+- 安全jpfs的`storagePath`不能为空，且只能是`/data`或其子目录(`/data/...`)；安全oss不受该路径限制
 - 安全jpfs的`storagePath`会被服务端规范化后落库(如`/data/foo/../bar`规范化为`/data/bar`)，查询详情返回的是规范化后的值
 - 更新资源属性场景不支持切换为`security`：安全队列实例禁止修改资源属性，非安全队列不允许传`security`
  (Optional) */
     StorageSource *string `json:"storageSource"`
+
+    /* 挂载点ID，仅对`storageType=jpfs`生效。
+
+## 使用场景
+- 当JPFS文件系统有多个挂载点时，可通过此字段指定具体的挂载点
+- 用于支持同一JPFS文件系统的多挂载点
+ (Optional) */
+    MountTargetId *string `json:"mountTargetId"`
+
+    /* 挂载点IP，仅对`storageType=cfs`生效。
+
+## 使用场景
+- 当CFS文件系统有多个挂载点时，可通过此字段匹配同一CFS文件系统的多挂载点
+
+## 兼容逻辑
+- 不传时从`storagePath`的格式（`ip:/path`）解析，兼容旧逻辑
+ (Optional) */
+    Host *string `json:"host"`
 }

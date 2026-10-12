@@ -207,6 +207,9 @@ type NotebookDetail struct {
  (Optional) */
     Datasets []NbDatasetDetail `json:"datasets"`
 
+    /* 科技数据集列表，返回Notebook本地只读挂载信息。 (Optional) */
+    TechDatasets []NbTechDatasetDetail `json:"techDatasets"`
+
     /* 模型列表，实例挂载的模型配置详情。
 
 ## 包含信息

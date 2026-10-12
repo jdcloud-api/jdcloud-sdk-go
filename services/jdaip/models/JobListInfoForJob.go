@@ -41,6 +41,7 @@ type JobListInfoForJob struct {
 - `pending`：启动中，资源已分配，正在创建 Pod
 - `running`：运行中，训练任务正在执行
 - `success`：成功，训练任务正常完成
+- `partial-success`：部分成功，仅 Batch 任务返回；有副本成功且有副本失败
 - `failed`：失败，训练任务执行失败
 - `stopping`：停止中，正在执行停止操作
 - `stopped`：已停止，任务已被手动停止
@@ -50,7 +51,7 @@ type JobListInfoForJob struct {
  (Optional) */
     State string `json:"state"`
 
-    /* 训练任务失败类型，仅在状态为 `failed` 时有值。
+    /* 训练任务失败类型。
 
 **可选值：**
 - `resource-failed`：节点故障
@@ -58,6 +59,7 @@ type JobListInfoForJob struct {
 - `environment-failed`：算力健康检测不通过
 - `task-hang`：任务卡住
 - `process-inspection-failed`：进程巡检失败
+- `task-evict`：任务副本被调度器抢占或跨队列归还
  (Optional) */
     FailureType string `json:"failureType"`
 
@@ -73,7 +75,7 @@ type JobListInfoForJob struct {
 
     /* 训练框架类型。
 
-**可选值：** `pytorch`, `ray`
+**可选值：** `pytorch`, `ray`, `batch`
  (Optional) */
     JobType string `json:"jobType"`
 
@@ -106,7 +108,15 @@ type JobListInfoForJob struct {
  (Optional) */
     QueueId string `json:"queueId"`
 
-    /* 队列类型。公共资源池为 `public`，共享资源池为 `exclusive`，安全资源池为 `secure`。 (Optional) */
+    /* 队列类型。
+
+**可选值：**
+- `public`：公共资源池
+- `exclusive`：共享资源池
+- `private`：专属资源池
+- `security`：安全异构节点池
+- `sec-vm`：安全云主机节点池
+ (Optional) */
     QueueType string `json:"queueType"`
 
     /* 公共资源池或共享资源池的规格ID。 (Optional) */

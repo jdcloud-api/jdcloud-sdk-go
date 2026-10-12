@@ -51,6 +51,7 @@ type RoleResourceParamForJob struct {
 **配置规则：**
 - PyTorch 任务：仅支持 Worker 角色
 - Ray 任务：必须包含 Head 角色，可根据需求增加 Worker 角色
+- Batch 任务：必须且只能包含一个 Worker 角色，`count` 不小于 1
  (Optional) */
     Roles []RoleResourceInfoForJob `json:"roles"`
 }

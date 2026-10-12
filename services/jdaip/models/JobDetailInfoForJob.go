@@ -34,6 +34,7 @@ type JobDetailInfoForJob struct {
 `stopping`：`停止中`
 `stopped`：`停止`
 `success`：`成功`
+`partial-success`：`部分成功`（仅 Batch 任务）
 `deleting`: `删除中`
 `rolling-back`：`回滚中`
 `rolled-back`：`已回滚`
@@ -46,6 +47,7 @@ type JobDetailInfoForJob struct {
 - `environment-failed`: 算力健康检测不通过。
 - `task-hang`: 任务卡住。
 - `process-inspection-failed`: 进程巡检失败。
+- `task-evict`: 任务副本被抢占或归还。
  (Optional) */
     FailureType string `json:"failureType"`
 
@@ -58,6 +60,12 @@ type JobDetailInfoForJob struct {
 
     /* 任务类型。 (Optional) */
     JobType string `json:"jobType"`
+
+    /* Batch 任务开始调度的最小副本数；非 Batch 任务不返回。 (Optional) */
+    MinAvailable int `json:"minAvailable"`
+
+    /* Batch 任务的逻辑副本状态统计；非 Batch 任务不返回。 (Optional) */
+    BatchSummary BatchSummaryForJob `json:"batchSummary"`
 
     /* 是否为用户训练主容器开启容器特权模式。 (Optional) */
     Privileged bool `json:"privileged"`

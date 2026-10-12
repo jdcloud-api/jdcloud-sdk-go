@@ -41,6 +41,14 @@ type EsDatasetSpec struct {
   */
     DatasetUrl string `json:"datasetUrl"`
 
+    /* 挂载点ID。仅当存储类型为`jpfs`时生效，用于指定JPFS的挂载点ID。
+ (Optional) */
+    MountTargetId string `json:"mountTargetId"`
+
+    /* 挂载点IP。仅当存储类型为`cfs`时生效，用于指定CFS的挂载点IP地址。
+ (Optional) */
+    Host string `json:"host"`
+
     /* 建议挂载到/mnt/开头的路径下，不支持挂载到系统目录。
 系统目录参考：/, /bin, /boot, /dev, /etc, /home, /lib, /lib32, /lib64, /libx32, /opt, /proc, /root, /run, /sbin, /sys, /tmp, /usr, /var。
   */

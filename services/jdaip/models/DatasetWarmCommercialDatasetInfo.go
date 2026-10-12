@@ -55,6 +55,6 @@ type DatasetWarmCommercialDatasetInfo struct {
     /* 更新时间 (Optional) */
     UpdateTime string `json:"updateTime"`
 
-    /* 该数据集在当前安全存储空间下是否存在非删除状态的预热任务 (Optional) */
+    /* 该数据集在当前安全存储下是否存在非删除状态的预热任务。JPFS 场景按 safeStorageId 判断，OSS 场景按 taskType=oss + bucketName 判断；OSS 场景未传 bucketName 时，safeStorageId 按 bucketName 兼容处理 (Optional) */
     HasDatasetWarmTask bool `json:"hasDatasetWarmTask"`
 }

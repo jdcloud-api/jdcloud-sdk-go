@@ -50,7 +50,7 @@ type NbDatasetDetail struct {
 ## 各类型地址格式
 - cfs: `10.0.23.45:/dir-path` 或 `/dir-path`
 - oss: `oss://bucket.s3.cn-north-1.jdcloud-oss.com/object-path`
-- jpfs: `fs-xxxxx:fsmt-yyyyy:/dir-path` 或 `fs-xxxxx:/dir-path` 或 `/dir-path`
+- jpfs: `JPFS-ID:/dir-path` 或 `/dir-path`
  (Optional) */
     DatasetUrl string `json:"datasetUrl"`
 
@@ -66,8 +66,27 @@ type NbDatasetDetail struct {
 ## 使用说明
 - 仅oss类型且self来源的数据集有效
 - public数据集强制只读
+- 安全队列(`queueType=security`或`sec-vm`)上的实例：数据集强制只读，详见`storageSpec.readonly`
 - true: 只读模式，无法写入
 - false: 读写模式，可读写
  (Optional) */
     Readonly bool `json:"readonly"`
+
+    /* 挂载点ID，仅对`storageType=jpfs`生效。
+
+## 使用场景
+- 当JPFS文件系统有多个挂载点时，可通过此字段指定具体的挂载点
+- 用于支持同一JPFS文件系统的多挂载点
+ (Optional) */
+    MountTargetId string `json:"mountTargetId"`
+
+    /* 挂载点IP，仅对`storageType=cfs`生效。
+
+## 使用场景
+- 当CFS文件系统有多个挂载点时，可通过此字段匹配同一CFS文件系统的多挂载点
+
+## 兼容逻辑
+- 为空时从`datasetUrl`的格式（`ip:/path`）解析，兼容旧逻辑
+ (Optional) */
+    Host string `json:"host"`
 }

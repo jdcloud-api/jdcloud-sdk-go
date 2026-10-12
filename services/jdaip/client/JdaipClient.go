@@ -40,7 +40,7 @@ func NewJdaipClient(credential *core.Credential) *JdaipClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "jdaip",
-            Revision:    "1.0.8",
+            Revision:    "1.0.10",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -1201,6 +1201,7 @@ func (c *JdaipClient) DescribeCodeRepoConfigs(request *jdaip.DescribeCodeRepoCon
 **支持的训练任务类型：**
 - `pytorch`：PyTorch 框架，适用于深度学习训练、分布式训练
 - `ray`：Ray 框架，适用于分布式计算、强化学习、超参调优
+- `batch`：批量任务，多个同规格 Worker 副本独立执行
  */
 func (c *JdaipClient) DescribeJobTypes(request *jdaip.DescribeJobTypesRequest) (*jdaip.DescribeJobTypesResponse, error) {
     if request == nil {
@@ -2016,6 +2017,27 @@ func (c *JdaipClient) DescribeNotebookCount(request *jdaip.DescribeNotebookCount
     return jdResp, err
 }
 
+/* 查询pin下有权限的工作空间下的专属网关列表。
+ */
+func (c *JdaipClient) AdminDescribeDedicatedGateways(request *jdaip.AdminDescribeDedicatedGatewaysRequest) (*jdaip.AdminDescribeDedicatedGatewaysResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.AdminDescribeDedicatedGatewaysResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 获取镜像列表
 
 ## 下游任务使用时，接口入参说明
@@ -2429,6 +2451,7 @@ func (c *JdaipClient) DeleteProfilingTask(request *jdaip.DeleteProfilingTaskRequ
 /* 查询训练任务详情。
 
 获取训练任务的完整配置信息和运行状态，包括基本信息、镜像配置、资源配置、存储配置、运行配置、Pod信息等。
+Batch 任务额外返回 `minAvailable` 和 `batchSummary`；混合成功/失败时状态为 `partial-success`。
 
 ## 使用场景
 
@@ -2798,6 +2821,7 @@ func (c *JdaipClient) DescribeInferenceRollouts(request *jdaip.DescribeInference
 
 查询训练任务下所有运行实例（Pod）的详细信息，包括名称、类型、状态、IP、运行时长等。
 支持分页查询和多种过滤条件，异常状态数据可优先展示。
+Batch 实例额外返回 `taskIndex`、`exitCode`、`terminationReason`、`attemptNo` 和 `isCurrent`。
 
 ## 使用场景
 
@@ -3078,6 +3102,7 @@ func (c *JdaipClient) DescribeProfilingInstancePids(request *jdaip.DescribeProfi
 
 - `resource` 参数已废弃
 - Ray 任务必须使用 `roleResource` 配置 Head 和 Worker 角色
+- Batch 任务使用单 Worker `roleResource`，副本数取 Worker 的 `count`，`minAvailable` 默认 1，不支持重启策略、健康检测、高级配置和 RDMA
 - **重启策略仅适用于异构节点池的 PyTorch 任务**，云主机资源池和 Ray 任务不支持
 - 公共资源池和共享资源池角色规格须通过 `logicAzCode` 指定可用区（异构规格还须填 `hpcClusterName`）
 - 共享资源池固定使用 `queueId=joybuilder-exclusive-queue`；用户必须已加入共享池且存在启用的 user queue

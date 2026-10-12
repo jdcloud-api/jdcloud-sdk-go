@@ -39,6 +39,14 @@ type EsStorageSpec struct {
   */
     MountPath string `json:"mountPath"`
 
+    /* 挂载点ID。仅当存储类型为`jpfs`时生效，用于指定JPFS的挂载点ID。
+ (Optional) */
+    MountTargetId string `json:"mountTargetId"`
+
+    /* 挂载点IP。仅当存储类型为`cfs`时生效，用于指定CFS的挂载点IP地址。
+ (Optional) */
+    Host string `json:"host"`
+
     /* 是否以只读模式挂载存储。只读模式下，用户无法在挂载的存储中进行写操作。仅当存储类型为oss时有效。
  (Optional) */
     Readonly bool `json:"readonly"`

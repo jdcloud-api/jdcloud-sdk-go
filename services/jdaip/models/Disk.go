@@ -24,4 +24,10 @@ type Disk struct {
 
     /* 硬盘容量 (Optional) */
     Capacity int `json:"capacity"`
+
+    /* 磁盘分类，取值为 cloud(云盘) 或 local(本地盘) (Optional) */
+    DiskCategory string `json:"diskCategory"`
+
+    /* 磁盘Id, 仅云盘有效 (Optional) */
+    DiskId string `json:"diskId"`
 }

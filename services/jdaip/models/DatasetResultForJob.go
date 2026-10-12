@@ -32,6 +32,12 @@ type DatasetResultForJob struct {
  (Optional) */
     Readonly bool `json:"readonly"`
 
+    /* JPFS 挂载点 ID。 (Optional) */
+    MountTargetId string `json:"mountTargetId"`
+
+    /* CFS 挂载点 IP 地址。 (Optional) */
+    Host string `json:"host"`
+
     /* 存储参数。 (Optional) */
     Storage StorageSpaceParamForJob `json:"storage"`
 }
