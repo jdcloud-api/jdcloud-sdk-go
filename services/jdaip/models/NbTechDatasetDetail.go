@@ -25,6 +25,13 @@ type NbTechDatasetDetail struct {
     /* 科技数据集名称；资产查询失败时可能为空。 (Optional) */
     StorageName string `json:"storageName"`
 
+    /* 存储类型，数据集的存储后端类型。
+
+## 支持类型
+- oss: 京东云对象存储
+ (Optional) */
+    StorageType string `json:"storageType"`
+
     /* 科技数据集ID。 (Optional) */
     DatasetId string `json:"datasetId"`
 

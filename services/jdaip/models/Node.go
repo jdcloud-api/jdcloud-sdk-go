@@ -91,6 +91,9 @@ type Node struct {
     /* 创建时间，秒 (Optional) */
     CreateTime int64 `json:"createTime"`
 
+    /* 商业平台返回的节点到期时间原始值；无有效到期时间时返回空字符串 (Optional) */
+    ExpireTime string `json:"expireTime"`
+
     /* GPU资源配额信息 (Optional) */
     GpuQuota GpuQuota `json:"gpuQuota"`
 

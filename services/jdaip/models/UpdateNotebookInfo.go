@@ -19,7 +19,7 @@ package models
 
 type UpdateNotebookInfo struct {
 
-    /* 名称。1~32字符，可以包含中文、数字、大小写字母、英文下划线"_"、中划线"-"或点"."。传null表示不修改此字段。 (Optional) */
+    /* 名称。1~256字符，可以包含中文、数字、大小写字母、英文下划线"_"、中划线"-"或点"."。传null表示不修改此字段。 (Optional) */
     Name string `json:"name"`
 
     /* 描述。不超过256字符。传null表示不修改此字段。 (Optional) */
