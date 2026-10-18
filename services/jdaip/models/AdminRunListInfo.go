@@ -94,6 +94,15 @@ type AdminRunListInfo struct {
  (Optional) */
     RunningTimeInSec int `json:"runningTimeInSec"`
 
+    /* 任务优先级。
+
+共享资源池取值范围为 `1..9`，数值越大优先级越高；未配置优先级时返回 `0`。
+
+## 使用场景
+当队列开启优先级调度时生效，用于任务排队时的调度排序。
+ (Optional) */
+    TaskPriority int `json:"taskPriority"`
+
     /* 业务类型。
 
 标识微调任务的具体业务来源。

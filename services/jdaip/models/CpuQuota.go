@@ -20,8 +20,8 @@ package models
 type CpuQuota struct {
 
     /* cpu (Optional) */
-    Cpu Quota `json:"cpu"`
+    Cpu *Quota `json:"cpu"`
 
     /* 内存（G) (Optional) */
-    Memory Quota `json:"memory"`
+    Memory *Quota `json:"memory"`
 }

@@ -58,6 +58,9 @@ type Jpfs struct {
     /* 商业平台返回的JPFS到期时间原始值；无有效到期时间时返回空字符串 (Optional) */
     ChargeExpiredTime string `json:"chargeExpiredTime"`
 
+    /* 商业平台返回的JPFS释放时间原始值；无有效释放时间时返回空字符串 (Optional) */
+    ChargeReleaseTime string `json:"chargeReleaseTime"`
+
     /* RDMA协议挂载目标ID (Optional) */
     RdmaMountTargetId string `json:"rdmaMountTargetId"`
 

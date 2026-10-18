@@ -37,6 +37,9 @@ type ResourceInfo struct {
     /* 创建人。 (Optional) */
     CreateUser string `json:"createUser"`
 
+    /* 创建时间，格式为 `2026-01-01T00:00:00Z`。 (Optional) */
+    CreateTime string `json:"createTime"`
+
     /* 任务优先级。取值范围为 `1..9`；未配置优先级时返回 `0`。 (Optional) */
     TaskPriority int `json:"taskPriority"`
 

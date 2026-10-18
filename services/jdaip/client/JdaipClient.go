@@ -84,6 +84,26 @@ func (c *JdaipClient) UpdateNotebook(request *jdaip.UpdateNotebookRequest) (*jda
     return jdResp, err
 }
 
+/* 删除资源队列 */
+func (c *JdaipClient) DeleteQueue(request *jdaip.DeleteQueueRequest) (*jdaip.DeleteQueueResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DeleteQueueResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 更新训练任务属性信息。
 
 支持更新任务的元数据属性（名称、描述、权限、归属）和排队中任务的优先级。
@@ -828,6 +848,26 @@ func (c *JdaipClient) GetRunEvents(request *jdaip.GetRunEventsRequest) (*jdaip.G
     return jdResp, err
 }
 
+/* 创建资源队列；节点池必须存在且处于运行中状态，创建成功后返回资源队列ID */
+func (c *JdaipClient) CreateQueue(request *jdaip.CreateQueueRequest) (*jdaip.CreateQueueResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.CreateQueueResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 获取训练任务事件。
 
 查询训练任务执行过程中的各类事件记录，用于监控任务状态变化和问题排查。
@@ -1349,6 +1389,26 @@ func (c *JdaipClient) CreateModel(request *jdaip.CreateModelRequest) (*jdaip.Cre
     return jdResp, err
 }
 
+/* 修改资源队列启用状态；enable=true 启用队列，enable=false 禁用队列 */
+func (c *JdaipClient) ModifyQueueEnable(request *jdaip.ModifyQueueEnableRequest) (*jdaip.ModifyQueueEnableResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.ModifyQueueEnableResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 启动Notebook实例。
 
 ## 接口说明
@@ -1457,6 +1517,26 @@ func (c *JdaipClient) UpdateModelVersion(request *jdaip.UpdateModelVersionReques
     }
 
     jdResp := &jdaip.UpdateModelVersionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询工作空间列表 */
+func (c *JdaipClient) DescribeWorkspaces(request *jdaip.DescribeWorkspacesRequest) (*jdaip.DescribeWorkspacesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DescribeWorkspacesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1830,6 +1910,33 @@ func (c *JdaipClient) AddQueues(request *jdaip.AddQueuesRequest) (*jdaip.AddQueu
     return jdResp, err
 }
 
+/* 查询工作空间详情l，仅返回工作空间的基础信息。
+
+### 其他相关信息接口参考
+1. 获取工作空间下队列列表：[describeWorkspaceQueues](./describeWorkspaceQueues.md)
+2. 获取工作空间下成员列表：[describeMembers](./describeMembers.md)
+3. 获取工作空间下日志投递配置：[describeLogConfigs](./describeLogConfigs.md)
+4. 获取工作空间关机策略详情：[describeShutdownPolicy](./describeShutdownPolicy.md)
+ */
+func (c *JdaipClient) DescribeWorkspace(request *jdaip.DescribeWorkspaceRequest) (*jdaip.DescribeWorkspaceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DescribeWorkspaceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 停止微调运行。
 
 手动停止正在运行或等待中的微调运行。停止后运行将释放计算资源，且无法再次启动。
@@ -1894,6 +2001,26 @@ func (c *JdaipClient) DescribeModelVersion(request *jdaip.DescribeModelVersionRe
     }
 
     jdResp := &jdaip.DescribeModelVersionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改资源队列；type=base 修改名称和描述，type=gpu 或 type=cpu 进入配额更新逻辑，按请求体传入的 GPU配额、CPU/内存配额和任务优先级策略同步更新 */
+func (c *JdaipClient) ModifyQueue(request *jdaip.ModifyQueueRequest) (*jdaip.ModifyQueueResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.ModifyQueueResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1992,6 +2119,26 @@ func (c *JdaipClient) PauseRollout(request *jdaip.PauseRolloutRequest) (*jdaip.P
     }
 
     jdResp := &jdaip.PauseRolloutResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询安全队列所属集群的负载均衡信息；负载均衡未就绪时返回错误 */
+func (c *JdaipClient) DescribeQueueLoadBalancer(request *jdaip.DescribeQueueLoadBalancerRequest) (*jdaip.DescribeQueueLoadBalancerResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DescribeQueueLoadBalancerResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2903,7 +3050,6 @@ func (c *JdaipClient) DescribeInferenceRollouts(request *jdaip.DescribeInference
 
 查询训练任务下所有运行实例（Pod）的详细信息，包括名称、类型、状态、IP、运行时长等。
 支持分页查询和多种过滤条件，异常状态数据可优先展示。
-Batch 实例额外返回 `taskIndex`、`exitCode`、`terminationReason`、`attemptNo` 和 `isCurrent`。
 
 ## 使用场景
 

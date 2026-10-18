@@ -94,6 +94,9 @@ type Node struct {
     /* 商业平台返回的节点到期时间原始值；无有效到期时间时返回空字符串 (Optional) */
     ExpireTime string `json:"expireTime"`
 
+    /* 商业平台返回的节点释放时间原始值；无有效释放时间时返回空字符串 (Optional) */
+    ReleaseTime string `json:"releaseTime"`
+
     /* GPU资源配额信息 (Optional) */
     GpuQuota GpuQuota `json:"gpuQuota"`
 

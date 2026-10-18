@@ -19,7 +19,7 @@ package models
 
 type DatasetResultForJob struct {
 
-    /* 数据集可见性。可选值：[public, private]。 (Optional) */
+    /* 数据集来源。可选值：[public, private]。 (Optional) */
     DatasetVisibility string `json:"datasetVisibility"`
 
     /* 数据集ID。示例：ds-11******ik (Optional) */

@@ -19,6 +19,6 @@ package models
 
 type RenewalTempOrderRequest struct {
 
-    /* A租户可见的sec-开头资源ID  */
-    ResourceId string `json:"resourceId"`
+    /* 按业务线、产品线和续费类型组织的资源列表，逐个校验通过后整体提交  */
+    ParamList []RenewalTempOrderParam `json:"paramList"`
 }

@@ -57,6 +57,13 @@ type AdminInferenceInfo struct {
     /* 推理服务创建时间 (Optional) */
     CreateTime string `json:"createTime"`
 
+    /* 任务调度优先级，数值越大，优先级越高。
+**取值范围：** 1 ~ 9
+**使用前提：**
+- 空间私有队列且开启了调度优先级功能
+ (Optional) */
+    TaskPriority int `json:"taskPriority"`
+
     /* 推理服务所属工作空间ID (Optional) */
     WorkspaceId string `json:"workspaceId"`
 
