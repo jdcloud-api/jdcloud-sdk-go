@@ -20,20 +20,20 @@ package models
 type Quota struct {
 
     /* 已使用 (Optional) */
-    Used float64 `json:"used"`
+    Used *float64 `json:"used"`
 
     /* 预留 (Optional) */
-    Reserve float64 `json:"reserve"`
+    Reserve *float64 `json:"reserve"`
 
     /* 最小（承诺），容量值 (Optional) */
-    Min float64 `json:"min"`
+    Min *float64 `json:"min"`
 
     /* 最大 (Optional) */
-    Max float64 `json:"max"`
+    Max *float64 `json:"max"`
 
     /* 实际剩余资源，有可能小于配额剩余资源 (Optional) */
-    Idle float64 `json:"idle"`
+    Idle *float64 `json:"idle"`
 
     /* 容量分配值 (Optional) */
-    Allocate float64 `json:"allocate"`
+    Allocate *float64 `json:"allocate"`
 }

@@ -20,13 +20,13 @@ package models
 type PublicTechDatasetLabel struct {
 
     /* 场景 (Optional) */
-    Scenario string `json:"scenario"`
+    Scenario []string `json:"scenario"`
 
     /* 语言 (Optional) */
-    Language string `json:"language"`
+    Language []string `json:"language"`
 
     /* 其他关键词 (Optional) */
-    Keyword string `json:"keyword"`
+    Keyword []string `json:"keyword"`
 
     /* 数据大小或行数 (Optional) */
     DataSize string `json:"dataSize"`

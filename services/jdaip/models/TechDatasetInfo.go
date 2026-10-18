@@ -57,4 +57,7 @@ type TechDatasetInfo struct {
 
     /* 数据集资源归属权限。支持(public,private) (Optional) */
     Permission string `json:"permission"`
+
+    /* 是否可用：false表示不可用，dss数据集查不到 (Optional) */
+    IsAvailable bool `json:"isAvailable"`
 }

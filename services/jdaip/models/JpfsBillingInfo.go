@@ -27,7 +27,4 @@ type JpfsBillingInfo struct {
 
     /* 计费时长 (Optional) */
     ChargeDuration int `json:"chargeDuration"`
-
-    /* 是否自动续费 (Optional) */
-    AutoRenew bool `json:"autoRenew"`
 }

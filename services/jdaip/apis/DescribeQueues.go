@@ -28,7 +28,7 @@ type DescribeQueuesRequest struct {
     /* Region ID，例如：cn-north-1  */
     RegionId string `json:"regionId"`
 
-    /* 模糊匹配过来条件名称或描述 (Optional) */
+    /* 模糊匹配队列名称或描述 (Optional) */
     Filter *string `json:"filter"`
 
     /* 节点池ID (Optional) */
@@ -37,8 +37,8 @@ type DescribeQueuesRequest struct {
     /* 状态，1创建中2创建失败3运行中4更新中5错误6删除中7已删除 (Optional) */
     Status *int `json:"status"`
 
-    /* 队列类型，0：普通队列；1：安全队列，默认0 (Optional) */
-    QueueType *int `json:"queueType"`
+    /* 队列类型，common：普通队列；security：安全队列；不传则不过滤队列类型 (Optional) */
+    QueueType *string `json:"queueType"`
 
     /* 队列ID列表，逗号分割 (Optional) */
     Ids *string `json:"ids"`
@@ -46,10 +46,10 @@ type DescribeQueuesRequest struct {
     /* 分页页码；未传时默认1 (Optional) */
     Page *int `json:"page"`
 
-    /* 分页页大小；未传时默认10 (Optional) */
+    /* 分页页大小；未传时默认10，最大值为99 (Optional) */
     PageSize *int `json:"pageSize"`
 
-    /* 排序字段 (Optional) */
+    /* 排序字段；当前服务端固定按创建时间排序，仅支持createTime (Optional) */
     OrderBy *string `json:"orderBy"`
 
     /* 升降序 (Optional) */
@@ -78,14 +78,14 @@ func NewDescribeQueuesRequest(
 
 /*
  * param regionId: Region ID，例如：cn-north-1 (Required)
- * param filter: 模糊匹配过来条件名称或描述 (Optional)
+ * param filter: 模糊匹配队列名称或描述 (Optional)
  * param nodePoolId: 节点池ID (Optional)
  * param status: 状态，1创建中2创建失败3运行中4更新中5错误6删除中7已删除 (Optional)
- * param queueType: 队列类型，0：普通队列；1：安全队列，默认0 (Optional)
+ * param queueType: 队列类型，common：普通队列；security：安全队列；不传则不过滤队列类型 (Optional)
  * param ids: 队列ID列表，逗号分割 (Optional)
  * param page: 分页页码；未传时默认1 (Optional)
- * param pageSize: 分页页大小；未传时默认10 (Optional)
- * param orderBy: 排序字段 (Optional)
+ * param pageSize: 分页页大小；未传时默认10，最大值为99 (Optional)
+ * param orderBy: 排序字段；当前服务端固定按创建时间排序，仅支持createTime (Optional)
  * param orderType: 升降序 (Optional)
  */
 func NewDescribeQueuesRequestWithAllParams(
@@ -93,7 +93,7 @@ func NewDescribeQueuesRequestWithAllParams(
     filter *string,
     nodePoolId *string,
     status *int,
-    queueType *int,
+    queueType *string,
     ids *string,
     page *int,
     pageSize *int,
@@ -138,7 +138,7 @@ func NewDescribeQueuesRequestWithoutParam() *DescribeQueuesRequest {
 func (r *DescribeQueuesRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-/* param filter: 模糊匹配过来条件名称或描述(Optional) */
+/* param filter: 模糊匹配队列名称或描述(Optional) */
 func (r *DescribeQueuesRequest) SetFilter(filter string) {
     r.Filter = &filter
 }
@@ -150,8 +150,8 @@ func (r *DescribeQueuesRequest) SetNodePoolId(nodePoolId string) {
 func (r *DescribeQueuesRequest) SetStatus(status int) {
     r.Status = &status
 }
-/* param queueType: 队列类型，0：普通队列；1：安全队列，默认0(Optional) */
-func (r *DescribeQueuesRequest) SetQueueType(queueType int) {
+/* param queueType: 队列类型，common：普通队列；security：安全队列；不传则不过滤队列类型(Optional) */
+func (r *DescribeQueuesRequest) SetQueueType(queueType string) {
     r.QueueType = &queueType
 }
 /* param ids: 队列ID列表，逗号分割(Optional) */
@@ -162,11 +162,11 @@ func (r *DescribeQueuesRequest) SetIds(ids string) {
 func (r *DescribeQueuesRequest) SetPage(page int) {
     r.Page = &page
 }
-/* param pageSize: 分页页大小；未传时默认10(Optional) */
+/* param pageSize: 分页页大小；未传时默认10，最大值为99(Optional) */
 func (r *DescribeQueuesRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
-/* param orderBy: 排序字段(Optional) */
+/* param orderBy: 排序字段；当前服务端固定按创建时间排序，仅支持createTime(Optional) */
 func (r *DescribeQueuesRequest) SetOrderBy(orderBy string) {
     r.OrderBy = &orderBy
 }
@@ -191,4 +191,5 @@ type DescribeQueuesResponse struct {
 type DescribeQueuesResult struct {
     Data []jdaip.ExternalQueue `json:"data"`
     Total int `json:"total"`
+    TotalCount int `json:"totalCount"`
 }

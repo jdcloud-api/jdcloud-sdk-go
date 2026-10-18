@@ -42,4 +42,7 @@ type PublicTechDatasetInfo struct {
 
     /* 创建时间 (Optional) */
     CreateTime string `json:"createTime"`
+
+    /* 是否可用：false表示不可用，dss数据集查不到 (Optional) */
+    IsAvailable bool `json:"isAvailable"`
 }

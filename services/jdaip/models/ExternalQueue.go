@@ -34,6 +34,12 @@ type ExternalQueue struct {
     /* 队列下任务的命名空间 (Optional) */
     Namespace string `json:"namespace"`
 
+    /* GPU资源配额信息；数值来自队列当前配额和使用情况 (Optional) */
+    GpuQuotas []GpuQuota `json:"gpuQuotas"`
+
+    /* CPU和内存资源配额信息；CPU单位为核，内存单位为GiB (Optional) */
+    CpuQuota CpuQuota `json:"cpuQuota"`
+
     /* 队列状态，
 - 1 创建中
 - 2 创建失败
@@ -66,14 +72,8 @@ type ExternalQueue struct {
     /* 资源队列名称 (Optional) */
     Desc string `json:"desc"`
 
-    /* 队列类型，0：普通队列；1：安全队列，默认0 (Optional) */
-    QueueType int `json:"queueType"`
-
-    /* 计费模式，创建时确定不可修改
-- 1 按量计费（不承诺配额，min 默认 0）
-- 2 按配置计费（强制 min=max）
- (Optional) */
-    BillingMode int `json:"billingMode"`
+    /* 队列类型，common：普通队列；security：安全队列 (Optional) */
+    QueueType string `json:"queueType"`
 
     /*  (Optional) */
     RealTimeResourceStatistics []RealTimeResourceStatisticsItem `json:"realTimeResourceStatistics"`

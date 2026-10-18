@@ -122,6 +122,9 @@ type JobDetailInfoForJob struct {
     /* 数据集。 (Optional) */
     Datasets []DatasetResultForJob `json:"datasets"`
 
+    /* 科技数据集列表，返回训练容器的只读挂载及存储配置信息。 (Optional) */
+    TechDatasets []TechDatasetResultForJob `json:"techDatasets"`
+
     /* 模型。 (Optional) */
     Models []ModelResultForJob `json:"models"`
 

@@ -164,6 +164,12 @@ type JobParam struct {
  (Optional) */
     Datasets []DatasetParamForJob `json:"datasets"`
 
+    /* 科技数据集配置列表，用于将科技数据集只读挂载到训练容器，仅限京东内部用户使用。
+
+科技数据集固定使用 OSS 并以只读模式挂载，存储信息由服务端根据数据集版本查询，调用方无需传入。
+ (Optional) */
+    TechDatasets []TechDatasetParamForJob `json:"techDatasets"`
+
     /* 模型配置列表，用于挂载预训练模型或检查点文件。
 
 **使用场景：**

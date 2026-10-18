@@ -117,6 +117,8 @@ type DescribeQueueResult struct {
     NodePoolId string `json:"nodePoolId"`
     NodePoolInfo interface{} `json:"nodePoolInfo"`
     Namespace string `json:"namespace"`
+    GpuQuotas []jdaip.GpuQuota `json:"gpuQuotas"`
+    CpuQuota jdaip.CpuQuota `json:"cpuQuota"`
     Status int `json:"status"`
     Msg string `json:"msg"`
     Enable bool `json:"enable"`
@@ -125,7 +127,6 @@ type DescribeQueueResult struct {
     TaskPreempt bool `json:"taskPreempt"`
     CreateTime int64 `json:"createTime"`
     Desc string `json:"desc"`
-    QueueType int `json:"queueType"`
-    BillingMode int `json:"billingMode"`
+    QueueType string `json:"queueType"`
     RealTimeResourceStatistics []jdaip.RealTimeResourceStatisticsItem `json:"realTimeResourceStatistics"`
 }
