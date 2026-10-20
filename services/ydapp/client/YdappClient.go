@@ -40,7 +40,7 @@ func NewYdappClient(credential *core.Credential) *YdappClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "ydapp",
-            Revision:    "1.0.5",
+            Revision:    "1.0.6",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -388,6 +388,26 @@ func (c *YdappClient) DeleteApp(request *ydapp.DeleteAppRequest) (*ydapp.DeleteA
     }
 
     jdResp := &ydapp.DeleteAppResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 按日志集、日志主题对日志做分析统计 */
+func (c *YdappClient) Analysis(request *ydapp.AnalysisRequest) (*ydapp.AnalysisResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.AnalysisResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -968,6 +988,26 @@ func (c *YdappClient) LinkPackage(request *ydapp.LinkPackageRequest) (*ydapp.Lin
     }
 
     jdResp := &ydapp.LinkPackageResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 检索指定日志集、日志主题下的日志，支持预览、全文检索和按检索语句检索 */
+func (c *YdappClient) SearchLogs(request *ydapp.SearchLogsRequest) (*ydapp.SearchLogsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &ydapp.SearchLogsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
