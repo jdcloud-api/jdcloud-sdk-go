@@ -63,4 +63,7 @@ type SystemAkGenVo struct {
 
     /* 信任关系 (Optional) */
     TrustRelationship string `json:"trustRelationship"`
+
+    /* 是否超级AK (Optional) */
+    IsSuperAK bool `json:"isSuperAK"`
 }

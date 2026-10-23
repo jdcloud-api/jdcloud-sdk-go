@@ -27,6 +27,9 @@ type GetSubUserAccessKeysRequest struct {
 
     /* 子用户名称  */
     SubUser string `json:"subUser"`
+
+    /* 主用户pin (Optional) */
+    Account *string `json:"account"`
 }
 
 /*
@@ -51,9 +54,11 @@ func NewGetSubUserAccessKeysRequest(
 
 /*
  * param subUser: 子用户名称 (Required)
+ * param account: 主用户pin (Optional)
  */
 func NewGetSubUserAccessKeysRequestWithAllParams(
     subUser string,
+    account *string,
 ) *GetSubUserAccessKeysRequest {
 
     return &GetSubUserAccessKeysRequest{
@@ -64,6 +69,7 @@ func NewGetSubUserAccessKeysRequestWithAllParams(
             Version: "v1",
         },
         SubUser: subUser,
+        Account: account,
     }
 }
 
@@ -83,6 +89,10 @@ func NewGetSubUserAccessKeysRequestWithoutParam() *GetSubUserAccessKeysRequest {
 /* param subUser: 子用户名称(Required) */
 func (r *GetSubUserAccessKeysRequest) SetSubUser(subUser string) {
     r.SubUser = subUser
+}
+/* param account: 主用户pin(Optional) */
+func (r *GetSubUserAccessKeysRequest) SetAccount(account string) {
+    r.Account = &account
 }
 
 

@@ -40,7 +40,7 @@ func NewIamClient(credential *core.Credential) *IamClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "iam",
-            Revision:    "0.3.24",
+            Revision:    "0.3.25",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -1045,6 +1045,26 @@ func (c *IamClient) AttachGroupPolicy(request *iam.AttachGroupPolicyRequest) (*i
     }
 
     jdResp := &iam.AttachGroupPolicyResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改子用户密码 */
+func (c *IamClient) ModifySubUserPassword(request *iam.ModifySubUserPasswordRequest) (*iam.ModifySubUserPasswordResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &iam.ModifySubUserPasswordResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

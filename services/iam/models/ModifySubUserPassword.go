@@ -17,8 +17,14 @@
 package models
 
 
-type DeleteActionConditionRequest struct {
+type ModifySubUserPassword struct {
 
-    /*  (Optional) */
-    Ids []int `json:"ids"`
+    /* 子用户名  */
+    SubUserName string `json:"subUserName"`
+
+    /* 新密码  */
+    Password string `json:"password"`
+
+    /* 首次登录是否需要重置密码 (Optional) */
+    PasswordResetRequired bool `json:"passwordResetRequired"`
 }
