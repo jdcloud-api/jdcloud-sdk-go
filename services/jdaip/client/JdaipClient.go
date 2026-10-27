@@ -40,7 +40,7 @@ func NewJdaipClient(credential *core.Credential) *JdaipClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "jdaip",
-            Revision:    "1.0.11",
+            Revision:    "1.0.14",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -244,7 +244,7 @@ func (c *JdaipClient) DescribeDatasets(request *jdaip.DescribeDatasetsRequest) (
     return jdResp, err
 }
 
-/* 查询队列详情 */
+/* 查询队列详情。 */
 func (c *JdaipClient) DescribeQueue(request *jdaip.DescribeQueueRequest) (*jdaip.DescribeQueueResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -477,7 +477,11 @@ func (c *JdaipClient) DescribeImageTasks(request *jdaip.DescribeImageTasksReques
     return jdResp, err
 }
 
-/* 为指定的推理服务创建自动扩缩容规则，包括基于资源使用率的自动扩缩容和基于时间的定时扩缩容 */
+/* 为指定的推理服务创建自动扩缩容规则，包括基于指标的自动扩缩容（basic 扁平阈值 / advanced 双阈值）
+和基于时间的定时扩缩容。scaleType=auto 时，mode 缺省为 basic；advanced 需配置 metrics、
+scaleUpFactor / scaleDownFactor（百分比整数，如 150/40），并可指定 scaleUpOperator /
+scaleDownOperator（缺省分别为 OR / AND）
+ */
 func (c *JdaipClient) CreateInferenceScale(request *jdaip.CreateInferenceScaleRequest) (*jdaip.CreateInferenceScaleResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -561,7 +565,7 @@ func (c *JdaipClient) DeleteRun(request *jdaip.DeleteRunRequest) (*jdaip.DeleteR
     return jdResp, err
 }
 
-/* 查询节点池详情 */
+/* 查询节点池详情。 */
 func (c *JdaipClient) DescribeNodePool(request *jdaip.DescribeNodePoolRequest) (*jdaip.DescribeNodePoolResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -799,7 +803,10 @@ func (c *JdaipClient) DescribeFlavors(request *jdaip.DescribeFlavorsRequest) (*j
     return jdResp, err
 }
 
-/* 获取指定推理服务的当前自动扩缩容规则配置 */
+/* 获取指定推理服务的当前自动扩缩容规则配置。
+查询时 mode 缺省按 basic 补全返回；advanced 规则的 scaleUpOperator / scaleDownOperator
+缺省分别按 OR / AND 补全返回（不改写库中原值）
+ */
 func (c *JdaipClient) DescribeInferenceScale(request *jdaip.DescribeInferenceScaleRequest) (*jdaip.DescribeInferenceScaleResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -859,6 +866,26 @@ func (c *JdaipClient) CreateQueue(request *jdaip.CreateQueueRequest) (*jdaip.Cre
     }
 
     jdResp := &jdaip.CreateQueueResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 桶列表 */
+func (c *JdaipClient) DescribeSafeBuckets(request *jdaip.DescribeSafeBucketsRequest) (*jdaip.DescribeSafeBucketsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DescribeSafeBucketsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1189,7 +1216,7 @@ func (c *JdaipClient) DescribeInferenceEvents(request *jdaip.DescribeInferenceEv
     return jdResp, err
 }
 
-/* 查询节点列表 */
+/* 查询节点列表。 */
 func (c *JdaipClient) DescribeNodes(request *jdaip.DescribeNodesRequest) (*jdaip.DescribeNodesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1742,7 +1769,7 @@ func (c *JdaipClient) AdminDescribeJobList(request *jdaip.AdminDescribeJobListRe
     return jdResp, err
 }
 
-/* 查询节点池列表 */
+/* 查询节点池列表。 */
 func (c *JdaipClient) DescribeNodePools(request *jdaip.DescribeNodePoolsRequest) (*jdaip.DescribeNodePoolsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -1970,7 +1997,9 @@ func (c *JdaipClient) StopRun(request *jdaip.StopRunRequest) (*jdaip.StopRunResp
     return jdResp, err
 }
 
-/* 更新指定推理服务的自动扩缩容规则配置 */
+/* 更新指定推理服务的自动扩缩容规则配置。请求体与创建接口相同，支持 basic / advanced 模式切换；
+advanced 使用 metrics 双阈值，basic 使用 *Threshold 扁平阈值
+ */
 func (c *JdaipClient) UpdateInferenceScale(request *jdaip.UpdateInferenceScaleRequest) (*jdaip.UpdateInferenceScaleResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -2257,6 +2286,26 @@ func (c *JdaipClient) DeleteCodeRepoConfig(request *jdaip.DeleteCodeRepoConfigRe
     return jdResp, err
 }
 
+/* 获取桶信息 */
+func (c *JdaipClient) DescribeSafeBucket(request *jdaip.DescribeSafeBucketRequest) (*jdaip.DescribeSafeBucketResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jdaip.DescribeSafeBucketResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 管理员查询子账号下有权限的所有Notebook实例，支持跨工作空间查询。
 
 ## 接口说明
@@ -2409,7 +2458,7 @@ func (c *JdaipClient) DeleteDatasetVersion(request *jdaip.DeleteDatasetVersionRe
     return jdResp, err
 }
 
-/* 查询队列列表 */
+/* 查询队列列表。 */
 func (c *JdaipClient) DescribeQueues(request *jdaip.DescribeQueuesRequest) (*jdaip.DescribeQueuesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -3142,7 +3191,7 @@ func (c *JdaipClient) CreateProfilingTask(request *jdaip.CreateProfilingTaskRequ
     return jdResp, err
 }
 
-/* 节点详情 */
+/* 节点详情。 */
 func (c *JdaipClient) DescribeNode(request *jdaip.DescribeNodeRequest) (*jdaip.DescribeNodeResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")

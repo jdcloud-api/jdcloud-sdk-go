@@ -28,21 +28,69 @@ type AutoScale struct {
     /* 扩容延迟时间（秒） (Optional) */
     ScaleUpDelay *int `json:"scaleUpDelay"`
 
-    /* 缩容延迟时间（秒） (Optional) */
+    /* 缩容延迟时间（秒）。创建/更新时（scaleType=auto）必须在 30-3600，否则返回 400；
+存量低于 30 的规则查询时原值返回，不会被自动修正
+ (Optional) */
     ScaleDownDelay *int `json:"scaleDownDelay"`
 
-    /* CPU使用率阈值（%，基于Limits） (Optional) */
+    /* 自动扩缩容模式，仅 scaleType=auto 有效。缺省按 basic；
+basic 使用扁平阈值（*Threshold），advanced 使用 metrics 双阈值。
+查询时缺省值会补全返回
+ (Optional) */
+    Mode *string `json:"mode"`
+
+    /* advanced 扩容组合条件，仅接受大写 AND / OR，缺省 OR；
+非法值返回 400。查询 advanced 规则时缺省值会补全返回
+ (Optional) */
+    ScaleUpOperator *string `json:"scaleUpOperator"`
+
+    /* advanced 缩容组合条件，仅接受大写 AND / OR，缺省 AND；
+非法值返回 400。查询 advanced 规则时缺省值会补全返回
+ (Optional) */
+    ScaleDownOperator *string `json:"scaleDownOperator"`
+
+    /* advanced 扩容信号系数（百分比整数，必填）。如 150 表示 PromQL 输出 1.5（threshold=1）；
+必须大于 100，且大于 scaleDownFactor。basic / cron 禁止携带。推荐值 150
+ (Optional) */
+    ScaleUpFactor *int `json:"scaleUpFactor"`
+
+    /* advanced 缩容信号系数（百分比整数，必填）。如 40 表示 PromQL 输出 0.4；
+必须在 1-99，且小于 scaleUpFactor。basic / cron 禁止携带。推荐值 40
+ (Optional) */
+    ScaleDownFactor *int `json:"scaleDownFactor"`
+
+    /* advanced 双阈值指标，至少配置一项。key 白名单：
+cpu、gpu、memory、waitingRequestCount、timeToFirstTokenP99、tokenUsage、decodeTransferQueue。
+每项至少配置 scaleUp/scaleDown 之一，两者都配时 scaleUp 必须大于 scaleDown；
+未传与显式 0 含义不同（未传表示该方向不参与判断）
+ (Optional) */
+    Metrics *interface{} `json:"metrics"`
+
+    /* 分角色自动扩缩容预留字段。缺省、null、空对象 {} 按整组策略处理；
+含任何角色条目（即使值为 null 或 {}）一律返回 400（分角色自动扩缩容尚未开放）
+ (Optional) */
+    Roles *interface{} `json:"roles"`
+
+    /* basic 模式下 CPU 使用率阈值（%，基于 Limits），0 表示关闭 (Optional) */
     CpuThreshold *int `json:"cpuThreshold"`
 
-    /* GPU利用率阈值（%） (Optional) */
+    /* basic 模式下 GPU 利用率阈值（%），0 表示关闭 (Optional) */
     GpuThreshold *int `json:"gpuThreshold"`
 
-    /* 内存使用率阈值（%，基于Limits） (Optional) */
+    /* basic 模式下内存使用率阈值（%，基于 Limits），0 表示关闭 (Optional) */
     MemoryThreshold *int `json:"memoryThreshold"`
 
-    /* 排队中的请求数阈值 (Optional) */
+    /* basic 模式下排队中的请求数阈值，0 表示关闭 (Optional) */
     WaitingRequestCountThreshold *int `json:"waitingRequestCountThreshold"`
 
-    /* 首token时延阈值，单位毫秒 (Optional) */
+    /* basic 模式下首 token 时延 P99 阈值（毫秒），0 表示关闭 (Optional) */
     TimeToFirstTokenP99Threshold *int `json:"timeToFirstTokenP99Threshold"`
+
+    /* basic 模式下 KV Cache 占用阈值（整数百分比），0 表示关闭 (Optional) */
+    TokenUsageThreshold *int `json:"tokenUsageThreshold"`
+
+    /* basic 模式下 Decode 传输排队阈值（个），0 表示关闭；
+仅 SGLang 的 PD 分离实例可启用，否则返回 400
+ (Optional) */
+    DecodeTransferQueueThreshold *int `json:"decodeTransferQueueThreshold"`
 }

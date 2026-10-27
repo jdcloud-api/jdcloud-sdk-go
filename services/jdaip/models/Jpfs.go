@@ -61,6 +61,9 @@ type Jpfs struct {
     /* 商业平台返回的JPFS释放时间原始值；无有效释放时间时返回空字符串 (Optional) */
     ChargeReleaseTime string `json:"chargeReleaseTime"`
 
+    /* 商业平台资源单欠费、到期状态；仅资源在商业平台存在有效资源单时返回。1=包年包月正常，2=包年包月到期，3=按配置或按用量正常，4=按配置或按用量欠费 (Optional) */
+    AeStatus int `json:"aeStatus"`
+
     /* RDMA协议挂载目标ID (Optional) */
     RdmaMountTargetId string `json:"rdmaMountTargetId"`
 

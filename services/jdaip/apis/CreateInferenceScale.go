@@ -34,7 +34,7 @@ type CreateInferenceScaleRequest struct {
     /* 推理服务 ID  */
     InferenceId string `json:"inferenceId"`
 
-    /* 日志采集配置  */
+    /* 自动扩缩容配置  */
     InferenceScaleSpec *jdaip.InferenceScaleSpec `json:"inferenceScaleSpec"`
 }
 
@@ -42,7 +42,7 @@ type CreateInferenceScaleRequest struct {
  * param regionId: 地域ID (Required)
  * param workspaceId: 工作空间ID (Required)
  * param inferenceId: 推理服务 ID (Required)
- * param inferenceScaleSpec: 日志采集配置 (Required)
+ * param inferenceScaleSpec: 自动扩缩容配置 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -71,7 +71,7 @@ func NewCreateInferenceScaleRequest(
  * param regionId: 地域ID (Required)
  * param workspaceId: 工作空间ID (Required)
  * param inferenceId: 推理服务 ID (Required)
- * param inferenceScaleSpec: 日志采集配置 (Required)
+ * param inferenceScaleSpec: 自动扩缩容配置 (Required)
  */
 func NewCreateInferenceScaleRequestWithAllParams(
     regionId string,
@@ -119,7 +119,7 @@ func (r *CreateInferenceScaleRequest) SetWorkspaceId(workspaceId string) {
 func (r *CreateInferenceScaleRequest) SetInferenceId(inferenceId string) {
     r.InferenceId = inferenceId
 }
-/* param inferenceScaleSpec: 日志采集配置(Required) */
+/* param inferenceScaleSpec: 自动扩缩容配置(Required) */
 func (r *CreateInferenceScaleRequest) SetInferenceScaleSpec(inferenceScaleSpec *jdaip.InferenceScaleSpec) {
     r.InferenceScaleSpec = inferenceScaleSpec
 }

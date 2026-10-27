@@ -19,6 +19,9 @@ package models
 
 type Node struct {
 
+    /* 仅用于响应，创建和更新请求不应传入。owned表示拥有，managed表示管理，shared表示被授权共享；不代表写操作权限。共享响应仅返回基础信息，私有字段不返回。 (Optional) */
+    AccessRelation string `json:"accessRelation"`
+
     /* 节点ID (Optional) */
     Id string `json:"id"`
 
@@ -96,6 +99,9 @@ type Node struct {
 
     /* 商业平台返回的节点释放时间原始值；无有效释放时间时返回空字符串 (Optional) */
     ReleaseTime string `json:"releaseTime"`
+
+    /* 商业平台资源单欠费、到期状态；仅资源在商业平台存在有效资源单时返回。1=包年包月正常，2=包年包月到期，3=按配置或按用量正常，4=按配置或按用量欠费 (Optional) */
+    AeStatus int `json:"aeStatus"`
 
     /* GPU资源配额信息 (Optional) */
     GpuQuota GpuQuota `json:"gpuQuota"`
