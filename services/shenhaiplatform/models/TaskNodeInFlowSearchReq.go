@@ -46,7 +46,7 @@ type TaskNodeInFlowSearchReq struct {
     /* 任务名称 (Optional) */
     TaskName string `json:"taskName"`
 
-    /* 任务类型, JCW_SQL jcw引擎的SQL任务、PYTHON python任务、SHELL Linux脚本任务、SPARK_JAR sparkJar任务、STAR_ROCKS starrocks任务、MYSQL mysql任务、LOOP 循环节点任务、PIPE 数据集成任务 (Optional) */
+    /* 任务类型, JCW_SQL jcw引擎的SQL任务、PYTHON python任务、SHELL Linux脚本任务、SPARK_JAR sparkJar任务、STAR_ROCKS starrocks任务、MYSQL mysql任务、LOOP 循环节点任务、PIPE 数据集成任务、JMR_HIVE_SQL JMR Hive SQL任务、JMR_SPARK_SQL JMR Spark SQL任务、JMR_SPARK JMR Spark任务、JMR_SHELL JMR Shell任务、JMR_PYTHON JMR Python任务 (Optional) */
     TaskType []string `json:"taskType"`
 
     /* 任务的种类, INTEGRATION 数据集成、JCW jcw引擎、DATA_SOURCE 数据源类型、COMMON 通用类型 (Optional) */

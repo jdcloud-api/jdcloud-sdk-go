@@ -57,4 +57,10 @@ type UranusTableSaveOrUpdate struct {
 
     /* 分桶字段 (Optional) */
     BucketNum int `json:"bucketNum"`
+
+    /* 库名（JMR 引擎由用户选择后回传；JCW 引擎可不传） (Optional) */
+    DbName string `json:"dbName"`
+
+    /* 环境：dev 开发环境，prod 生产环境（JMR 标准模式由前端选定） (Optional) */
+    Env string `json:"env"`
 }

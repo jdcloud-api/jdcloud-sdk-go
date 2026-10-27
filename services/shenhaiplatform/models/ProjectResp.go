@@ -36,4 +36,7 @@ type ProjectResp struct {
 
     /* 环境类型 (Optional) */
     Env string `json:"env"`
+
+    /* 项目绑定的资源组列表(实时查云仓，计算在前/集成在后，查询失败降级空列表) (Optional) */
+    ResourceInfos []ResourceInfoItem `json:"resourceInfos"`
 }

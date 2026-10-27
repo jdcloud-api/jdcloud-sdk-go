@@ -25,6 +25,9 @@ type EngineWorkspaceDetailResp struct {
     /* 实例类型 (Optional) */
     InstanceType string `json:"instanceType"`
 
+    /* JMR默认访问身份(CLUSTER_ACCOUNT_HADOOP-集群账号hadoop，TASK_OWNER_MAPPED_ACCOUNT-任务责任人映射集群账号；仅JMR实例有值，历史数据兜底返回CLUSTER_ACCOUNT_HADOOP，JCW实例为null) (Optional) */
+    DefaultAccessIdentity string `json:"defaultAccessIdentity"`
+
     /* 计算引擎Code (Optional) */
     EngineCode string `json:"engineCode"`
 

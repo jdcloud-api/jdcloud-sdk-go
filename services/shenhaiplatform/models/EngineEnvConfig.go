@@ -19,12 +19,18 @@ package models
 
 type EngineEnvConfig struct {
 
-    /* 项目/实例Code (Optional) */
+    /* 项目/实例Code(JCW留空且projectName非空时，绑定过程中自动创建新的云仓项目；JMR允许devConfig与prodConfig填同一集群，分别配置访问身份) (Optional) */
     ProjectCode *string `json:"projectCode"`
 
     /* 项目/实例名称 (Optional) */
     ProjectName *string `json:"projectName"`
 
-    /* 资源组Code (Optional) */
-    ResourceCode *string `json:"resourceCode"`
+    /* 计算资源组Code列表(新建云仓项目时随项目一并绑定，对应云仓calculateResourceList) (Optional) */
+    CalculateResourceCodes []string `json:"calculateResourceCodes"`
+
+    /* 集成资源组Code列表(新建云仓项目时随项目一并绑定，对应云仓integrationResourceCode) (Optional) */
+    IntegrationResourceCodes []string `json:"integrationResourceCodes"`
+
+    /* JMR默认访问身份(CLUSTER_ACCOUNT_HADOOP-集群账号hadoop，TASK_OWNER_MAPPED_ACCOUNT-任务责任人映射集群账号；绑定JMR引擎时对配置了实例的环境必填，JCW不使用) (Optional) */
+    DefaultAccessIdentity *string `json:"defaultAccessIdentity"`
 }

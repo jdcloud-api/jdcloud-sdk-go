@@ -31,17 +31,20 @@ type UranusTableColumnRequest struct {
     /* 应用名称  */
     AppName string `json:"appName"`
 
-    /* 墨迹搜索字段  */
+    /* 模糊搜索字段  */
     Table string `json:"table"`
 
     /* 环境信息，dev 开发、prod 生产  */
     Env string `json:"env"`
+
+    /* 库名（JMR 引擎必传） (Optional) */
+    DbName *string `json:"dbName"`
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param appName: 应用名称 (Required)
- * param table: 墨迹搜索字段 (Required)
+ * param table: 模糊搜索字段 (Required)
  * param env: 环境信息，dev 开发、prod 生产 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -70,14 +73,16 @@ func NewUranusTableColumnRequest(
 /*
  * param regionId: 地域ID (Required)
  * param appName: 应用名称 (Required)
- * param table: 墨迹搜索字段 (Required)
+ * param table: 模糊搜索字段 (Required)
  * param env: 环境信息，dev 开发、prod 生产 (Required)
+ * param dbName: 库名（JMR 引擎必传） (Optional)
  */
 func NewUranusTableColumnRequestWithAllParams(
     regionId string,
     appName string,
     table string,
     env string,
+    dbName *string,
 ) *UranusTableColumnRequest {
 
     return &UranusTableColumnRequest{
@@ -91,6 +96,7 @@ func NewUranusTableColumnRequestWithAllParams(
         AppName: appName,
         Table: table,
         Env: env,
+        DbName: dbName,
     }
 }
 
@@ -115,13 +121,17 @@ func (r *UranusTableColumnRequest) SetRegionId(regionId string) {
 func (r *UranusTableColumnRequest) SetAppName(appName string) {
     r.AppName = appName
 }
-/* param table: 墨迹搜索字段(Required) */
+/* param table: 模糊搜索字段(Required) */
 func (r *UranusTableColumnRequest) SetTable(table string) {
     r.Table = table
 }
 /* param env: 环境信息，dev 开发、prod 生产(Required) */
 func (r *UranusTableColumnRequest) SetEnv(env string) {
     r.Env = env
+}
+/* param dbName: 库名（JMR 引擎必传）(Optional) */
+func (r *UranusTableColumnRequest) SetDbName(dbName string) {
+    r.DbName = &dbName
 }
 
 

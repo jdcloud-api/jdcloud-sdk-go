@@ -63,6 +63,9 @@ type UranusTaskScheduleInfoUpdateRequest struct {
     /* 资源组 (Optional) */
     ResourceGroup *string `json:"resourceGroup"`
 
+    /* 执行引擎编码（任务绑定的计算引擎实例Code） (Optional) */
+    EngineCode *string `json:"engineCode"`
+
     /* 跨周期依赖类型，目前只支持SELF (Optional) */
     CrossCycleDependType *string `json:"crossCycleDependType"`
 
@@ -107,6 +110,7 @@ func NewUranusTaskScheduleInfoUpdateRequest(
  * param retryTimes: 重试次数 (Optional)
  * param retryInterval: 重试间隔 (Optional)
  * param resourceGroup: 资源组 (Optional)
+ * param engineCode: 执行引擎编码（任务绑定的计算引擎实例Code） (Optional)
  * param crossCycleDependType: 跨周期依赖类型，目前只支持SELF (Optional)
  * param scheduleCycle: 任务调度周期类型，当为手动调度任务是该字段必填，且为 manual (Optional)
  */
@@ -124,6 +128,7 @@ func NewUranusTaskScheduleInfoUpdateRequestWithAllParams(
     retryTimes *int,
     retryInterval *int,
     resourceGroup *string,
+    engineCode *string,
     crossCycleDependType *string,
     scheduleCycle *string,
 ) *UranusTaskScheduleInfoUpdateRequest {
@@ -148,6 +153,7 @@ func NewUranusTaskScheduleInfoUpdateRequestWithAllParams(
         RetryTimes: retryTimes,
         RetryInterval: retryInterval,
         ResourceGroup: resourceGroup,
+        EngineCode: engineCode,
         CrossCycleDependType: crossCycleDependType,
         ScheduleCycle: scheduleCycle,
     }
@@ -217,6 +223,10 @@ func (r *UranusTaskScheduleInfoUpdateRequest) SetRetryInterval(retryInterval int
 /* param resourceGroup: 资源组(Optional) */
 func (r *UranusTaskScheduleInfoUpdateRequest) SetResourceGroup(resourceGroup string) {
     r.ResourceGroup = &resourceGroup
+}
+/* param engineCode: 执行引擎编码（任务绑定的计算引擎实例Code）(Optional) */
+func (r *UranusTaskScheduleInfoUpdateRequest) SetEngineCode(engineCode string) {
+    r.EngineCode = &engineCode
 }
 /* param crossCycleDependType: 跨周期依赖类型，目前只支持SELF(Optional) */
 func (r *UranusTaskScheduleInfoUpdateRequest) SetCrossCycleDependType(crossCycleDependType string) {

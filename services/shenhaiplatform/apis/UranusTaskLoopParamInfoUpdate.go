@@ -66,6 +66,18 @@ type UranusTaskLoopParamInfoUpdateRequest struct {
 
     /* ALC_GENERAL 任务参数（含 alcTaskId / alcTaskType / originalName / alcWorkspaceCode） (Optional) */
     AlcGeneralParams *shenhaiplatform.TaskAlcGeneralParam `json:"alcGeneralParams"`
+
+    /* 本节点环境变量列表（LOCAL + UPSTREAM 混合，供配置页展示/编辑） (Optional) */
+    EnvParams []shenhaiplatform.TaskEnvVar `json:"envParams"`
+
+    /* 合并后的最终环境变量（已解析到常量，供预览/注入） (Optional) */
+    FinalEnvParams *interface{} `json:"finalEnvParams"`
+
+    /* 所属工作流参数（只读回显，不参与本节点参数落库） (Optional) */
+    FlowParams []shenhaiplatform.TaskInheritedParamRes `json:"flowParams"`
+
+    /* 所属空间参数（只读回显，不参与本节点参数落库） (Optional) */
+    SpaceParams []shenhaiplatform.TaskInheritedParamRes `json:"spaceParams"`
 }
 
 /*
@@ -106,6 +118,10 @@ func NewUranusTaskLoopParamInfoUpdateRequest(
  * param imageParams: Image镜像参数 (Optional)
  * param specialParams: 特有参数列表 (Optional)
  * param alcGeneralParams: ALC_GENERAL 任务参数（含 alcTaskId / alcTaskType / originalName / alcWorkspaceCode） (Optional)
+ * param envParams: 本节点环境变量列表（LOCAL + UPSTREAM 混合，供配置页展示/编辑） (Optional)
+ * param finalEnvParams: 合并后的最终环境变量（已解析到常量，供预览/注入） (Optional)
+ * param flowParams: 所属工作流参数（只读回显，不参与本节点参数落库） (Optional)
+ * param spaceParams: 所属空间参数（只读回显，不参与本节点参数落库） (Optional)
  */
 func NewUranusTaskLoopParamInfoUpdateRequestWithAllParams(
     regionId string,
@@ -122,6 +138,10 @@ func NewUranusTaskLoopParamInfoUpdateRequestWithAllParams(
     imageParams *shenhaiplatform.TaskImageParam,
     specialParams []shenhaiplatform.TaskBaseParam,
     alcGeneralParams *shenhaiplatform.TaskAlcGeneralParam,
+    envParams []shenhaiplatform.TaskEnvVar,
+    finalEnvParams *interface{},
+    flowParams []shenhaiplatform.TaskInheritedParamRes,
+    spaceParams []shenhaiplatform.TaskInheritedParamRes,
 ) *UranusTaskLoopParamInfoUpdateRequest {
 
     return &UranusTaskLoopParamInfoUpdateRequest{
@@ -145,6 +165,10 @@ func NewUranusTaskLoopParamInfoUpdateRequestWithAllParams(
         ImageParams: imageParams,
         SpecialParams: specialParams,
         AlcGeneralParams: alcGeneralParams,
+        EnvParams: envParams,
+        FinalEnvParams: finalEnvParams,
+        FlowParams: flowParams,
+        SpaceParams: spaceParams,
     }
 }
 
@@ -216,6 +240,22 @@ func (r *UranusTaskLoopParamInfoUpdateRequest) SetSpecialParams(specialParams []
 /* param alcGeneralParams: ALC_GENERAL 任务参数（含 alcTaskId / alcTaskType / originalName / alcWorkspaceCode）(Optional) */
 func (r *UranusTaskLoopParamInfoUpdateRequest) SetAlcGeneralParams(alcGeneralParams *shenhaiplatform.TaskAlcGeneralParam) {
     r.AlcGeneralParams = alcGeneralParams
+}
+/* param envParams: 本节点环境变量列表（LOCAL + UPSTREAM 混合，供配置页展示/编辑）(Optional) */
+func (r *UranusTaskLoopParamInfoUpdateRequest) SetEnvParams(envParams []shenhaiplatform.TaskEnvVar) {
+    r.EnvParams = envParams
+}
+/* param finalEnvParams: 合并后的最终环境变量（已解析到常量，供预览/注入）(Optional) */
+func (r *UranusTaskLoopParamInfoUpdateRequest) SetFinalEnvParams(finalEnvParams interface{}) {
+    r.FinalEnvParams = &finalEnvParams
+}
+/* param flowParams: 所属工作流参数（只读回显，不参与本节点参数落库）(Optional) */
+func (r *UranusTaskLoopParamInfoUpdateRequest) SetFlowParams(flowParams []shenhaiplatform.TaskInheritedParamRes) {
+    r.FlowParams = flowParams
+}
+/* param spaceParams: 所属空间参数（只读回显，不参与本节点参数落库）(Optional) */
+func (r *UranusTaskLoopParamInfoUpdateRequest) SetSpaceParams(spaceParams []shenhaiplatform.TaskInheritedParamRes) {
+    r.SpaceParams = spaceParams
 }
 
 

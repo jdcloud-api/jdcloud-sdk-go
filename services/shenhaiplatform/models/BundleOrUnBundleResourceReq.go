@@ -31,6 +31,9 @@ type BundleOrUnBundleResourceReq struct {
     /*  (Optional) */
     IntegrationResourceCode []string `json:"integrationResourceCode"`
 
+    /* 通用型资源组Code（双用途：计算+集成） (Optional) */
+    GeneralResourceCode []string `json:"generalResourceCode"`
+
     /*  (Optional) */
     BundleResource bool `json:"bundleResource"`
 }

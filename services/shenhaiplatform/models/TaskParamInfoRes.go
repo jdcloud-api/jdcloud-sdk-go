@@ -54,4 +54,16 @@ type TaskParamInfoRes struct {
 
     /* ALC_GENERAL 任务参数（含 alcTaskId / alcTaskType / originalName / alcWorkspaceCode） (Optional) */
     AlcGeneralParams TaskAlcGeneralParam `json:"alcGeneralParams"`
+
+    /* 本节点环境变量列表（LOCAL + UPSTREAM 混合，供配置页展示/编辑） (Optional) */
+    EnvParams []TaskEnvVar `json:"envParams"`
+
+    /* 合并后的最终环境变量（已解析到常量，供预览/注入） (Optional) */
+    FinalEnvParams interface{} `json:"finalEnvParams"`
+
+    /* 所属工作流参数（只读回显，不参与本节点参数落库） (Optional) */
+    FlowParams []TaskInheritedParamRes `json:"flowParams"`
+
+    /* 所属空间参数（只读回显，不参与本节点参数落库） (Optional) */
+    SpaceParams []TaskInheritedParamRes `json:"spaceParams"`
 }

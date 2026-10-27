@@ -35,6 +35,9 @@ type UranusTableDeleteRequest struct {
 
     /* 环境信息，dev 开发、prod 生产  */
     Env string `json:"env"`
+
+    /* 库名（JMR 引擎必传） (Optional) */
+    DbName *string `json:"dbName"`
 }
 
 /*
@@ -71,12 +74,14 @@ func NewUranusTableDeleteRequest(
  * param appName: 应用名称 (Required)
  * param table: 根据表名删除表 (Required)
  * param env: 环境信息，dev 开发、prod 生产 (Required)
+ * param dbName: 库名（JMR 引擎必传） (Optional)
  */
 func NewUranusTableDeleteRequestWithAllParams(
     regionId string,
     appName string,
     table string,
     env string,
+    dbName *string,
 ) *UranusTableDeleteRequest {
 
     return &UranusTableDeleteRequest{
@@ -90,6 +95,7 @@ func NewUranusTableDeleteRequestWithAllParams(
         AppName: appName,
         Table: table,
         Env: env,
+        DbName: dbName,
     }
 }
 
@@ -121,6 +127,10 @@ func (r *UranusTableDeleteRequest) SetTable(table string) {
 /* param env: 环境信息，dev 开发、prod 生产(Required) */
 func (r *UranusTableDeleteRequest) SetEnv(env string) {
     r.Env = env
+}
+/* param dbName: 库名（JMR 引擎必传）(Optional) */
+func (r *UranusTableDeleteRequest) SetDbName(dbName string) {
+    r.DbName = &dbName
 }
 
 

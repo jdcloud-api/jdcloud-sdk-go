@@ -25,6 +25,6 @@ type EngineBoundInstancesResp struct {
     /* 绑定的云仓项目列表 (Optional) */
     CloudProjects []ProjectResp `json:"cloudProjects"`
 
-    /* 绑定的JMR实例列表 (Optional) */
+    /* 绑定的JMR实例列表(同一集群绑定dev和prod时返回两条，env与defaultAccessIdentity分别对应环境) (Optional) */
     JmrInstances []JmrInstanceResp `json:"jmrInstances"`
 }

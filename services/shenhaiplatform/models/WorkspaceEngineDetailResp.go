@@ -28,15 +28,18 @@ type WorkspaceEngineDetailResp struct {
     /* 计算引擎名称 (Optional) */
     EngineName string `json:"engineName"`
 
-    /* 计算引擎类型 (Optional) */
+    /* 计算引擎类型(JCW/JMR) (Optional) */
     EngineType string `json:"engineType"`
 
     /* 状态 (Optional) */
     Status string `json:"status"`
 
+    /* 是否默认引擎：1、是，0、否 (Optional) */
+    PrimaryFlag int `json:"primaryFlag"`
+
     /* 绑定的云仓项目列表 (Optional) */
     CloudProjects []ProjectResp `json:"cloudProjects"`
 
-    /* 绑定的JMR实例列表 (Optional) */
+    /* 绑定的JMR实例列表(同一集群绑定dev和prod时返回两条，env与defaultAccessIdentity分别对应环境) (Optional) */
     JmrInstances []JmrInstanceResp `json:"jmrInstances"`
 }

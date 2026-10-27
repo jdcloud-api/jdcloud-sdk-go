@@ -28,6 +28,9 @@ type ExtraRunnerReq struct {
     /* 执行引擎MapReduce,Spark,Tez,presto,Python2,Python3,auto,默认spark (Optional) */
     ExecEngine string `json:"execEngine"`
 
+    /* 执行引擎编码，只支持JCW类型的引擎 (Optional) */
+    EngineCode string `json:"engineCode"`
+
     /* 脚本内容的变量参数配置 (Optional) */
     Args UranusTaskParamReq `json:"args"`
 

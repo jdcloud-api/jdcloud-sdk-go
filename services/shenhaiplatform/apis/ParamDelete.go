@@ -30,21 +30,22 @@ type ParamDeleteRequest struct {
     /* 应用名称  */
     AppName string `json:"appName"`
 
-    /* 参数 Code  */
-    ParamCode string `json:"paramCode"`
+    /* 参数Code (Optional) */
+    ParamCode *string `json:"paramCode"`
+
+    /* 工作空间Code(可选，与paramList/paramBatchSave请求体字段对齐) (Optional) */
+    WorkspaceCode *string `json:"workspaceCode"`
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param appName: 应用名称 (Required)
- * param paramCode: 参数 Code (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewParamDeleteRequest(
     regionId string,
     appName string,
-    paramCode string,
 ) *ParamDeleteRequest {
 
 	return &ParamDeleteRequest{
@@ -56,19 +57,20 @@ func NewParamDeleteRequest(
 		},
         RegionId: regionId,
         AppName: appName,
-        ParamCode: paramCode,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param appName: 应用名称 (Required)
- * param paramCode: 参数 Code (Required)
+ * param paramCode: 参数Code (Optional)
+ * param workspaceCode: 工作空间Code(可选，与paramList/paramBatchSave请求体字段对齐) (Optional)
  */
 func NewParamDeleteRequestWithAllParams(
     regionId string,
     appName string,
-    paramCode string,
+    paramCode *string,
+    workspaceCode *string,
 ) *ParamDeleteRequest {
 
     return &ParamDeleteRequest{
@@ -81,6 +83,7 @@ func NewParamDeleteRequestWithAllParams(
         RegionId: regionId,
         AppName: appName,
         ParamCode: paramCode,
+        WorkspaceCode: workspaceCode,
     }
 }
 
@@ -105,9 +108,13 @@ func (r *ParamDeleteRequest) SetRegionId(regionId string) {
 func (r *ParamDeleteRequest) SetAppName(appName string) {
     r.AppName = appName
 }
-/* param paramCode: 参数 Code(Required) */
+/* param paramCode: 参数Code(Optional) */
 func (r *ParamDeleteRequest) SetParamCode(paramCode string) {
-    r.ParamCode = paramCode
+    r.ParamCode = &paramCode
+}
+/* param workspaceCode: 工作空间Code(可选，与paramList/paramBatchSave请求体字段对齐)(Optional) */
+func (r *ParamDeleteRequest) SetWorkspaceCode(workspaceCode string) {
+    r.WorkspaceCode = &workspaceCode
 }
 
 

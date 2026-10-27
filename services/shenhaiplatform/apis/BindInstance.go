@@ -42,11 +42,14 @@ type BindInstanceRequest struct {
     /* 实例类型(JCW/JMR) (Optional) */
     InstanceType *string `json:"instanceType"`
 
-    /* 资源组Code (Optional) */
-    ResourceCode *string `json:"resourceCode"`
+    /* JMR默认访问身份(CLUSTER_ACCOUNT_HADOOP-集群账号hadoop，TASK_OWNER_MAPPED_ACCOUNT-任务责任人映射集群账号；可选，不传落库为null，查询时兜底返回CLUSTER_ACCOUNT_HADOOP) (Optional) */
+    DefaultAccessIdentity *string `json:"defaultAccessIdentity"`
 
-    /* 环境类型(dev/prod) (Optional) */
+    /* 环境类型(dev/prod)。同一引擎下同一实例按环境区分，允许同一JMR集群分别绑定开发/生产并配置不同访问身份 (Optional) */
     Env *string `json:"env"`
+
+    /* 工作空间Code(管理员校验用，网关未注入workspaceCode头时兜底) (Optional) */
+    WorkspaceCode *string `json:"workspaceCode"`
 }
 
 /*
@@ -79,8 +82,9 @@ func NewBindInstanceRequest(
  * param instanceCode: 实例Code (Optional)
  * param instanceName: 实例名称 (Optional)
  * param instanceType: 实例类型(JCW/JMR) (Optional)
- * param resourceCode: 资源组Code (Optional)
- * param env: 环境类型(dev/prod) (Optional)
+ * param defaultAccessIdentity: JMR默认访问身份(CLUSTER_ACCOUNT_HADOOP-集群账号hadoop，TASK_OWNER_MAPPED_ACCOUNT-任务责任人映射集群账号；可选，不传落库为null，查询时兜底返回CLUSTER_ACCOUNT_HADOOP) (Optional)
+ * param env: 环境类型(dev/prod)。同一引擎下同一实例按环境区分，允许同一JMR集群分别绑定开发/生产并配置不同访问身份 (Optional)
+ * param workspaceCode: 工作空间Code(管理员校验用，网关未注入workspaceCode头时兜底) (Optional)
  */
 func NewBindInstanceRequestWithAllParams(
     regionId string,
@@ -89,8 +93,9 @@ func NewBindInstanceRequestWithAllParams(
     instanceCode *string,
     instanceName *string,
     instanceType *string,
-    resourceCode *string,
+    defaultAccessIdentity *string,
     env *string,
+    workspaceCode *string,
 ) *BindInstanceRequest {
 
     return &BindInstanceRequest{
@@ -106,8 +111,9 @@ func NewBindInstanceRequestWithAllParams(
         InstanceCode: instanceCode,
         InstanceName: instanceName,
         InstanceType: instanceType,
-        ResourceCode: resourceCode,
+        DefaultAccessIdentity: defaultAccessIdentity,
         Env: env,
+        WorkspaceCode: workspaceCode,
     }
 }
 
@@ -148,13 +154,17 @@ func (r *BindInstanceRequest) SetInstanceName(instanceName string) {
 func (r *BindInstanceRequest) SetInstanceType(instanceType string) {
     r.InstanceType = &instanceType
 }
-/* param resourceCode: 资源组Code(Optional) */
-func (r *BindInstanceRequest) SetResourceCode(resourceCode string) {
-    r.ResourceCode = &resourceCode
+/* param defaultAccessIdentity: JMR默认访问身份(CLUSTER_ACCOUNT_HADOOP-集群账号hadoop，TASK_OWNER_MAPPED_ACCOUNT-任务责任人映射集群账号；可选，不传落库为null，查询时兜底返回CLUSTER_ACCOUNT_HADOOP)(Optional) */
+func (r *BindInstanceRequest) SetDefaultAccessIdentity(defaultAccessIdentity string) {
+    r.DefaultAccessIdentity = &defaultAccessIdentity
 }
-/* param env: 环境类型(dev/prod)(Optional) */
+/* param env: 环境类型(dev/prod)。同一引擎下同一实例按环境区分，允许同一JMR集群分别绑定开发/生产并配置不同访问身份(Optional) */
 func (r *BindInstanceRequest) SetEnv(env string) {
     r.Env = &env
+}
+/* param workspaceCode: 工作空间Code(管理员校验用，网关未注入workspaceCode头时兜底)(Optional) */
+func (r *BindInstanceRequest) SetWorkspaceCode(workspaceCode string) {
+    r.WorkspaceCode = &workspaceCode
 }
 
 

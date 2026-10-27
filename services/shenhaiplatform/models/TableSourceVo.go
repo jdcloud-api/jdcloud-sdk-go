@@ -33,4 +33,7 @@ type TableSourceVo struct {
 
     /* 是否默认 (Optional) */
     IsDefault bool `json:"isDefault"`
+
+    /* 当前用户在此空间选定的引擎编码，与 isDefault 无关，每条来源均返回 (Optional) */
+    EngineCode string `json:"engineCode"`
 }

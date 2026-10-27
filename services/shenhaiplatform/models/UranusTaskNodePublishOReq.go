@@ -22,6 +22,6 @@ type UranusTaskNodePublishOReq struct {
     /* 节点列表  */
     Ids []UranusNodePublishChildReq `json:"ids"`
 
-    /* 发布原因  */
+    /* 发布任务的原因  */
     Reason string `json:"reason"`
 }

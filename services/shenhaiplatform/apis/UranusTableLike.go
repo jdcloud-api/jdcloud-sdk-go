@@ -42,6 +42,15 @@ type UranusTableLikeRequest struct {
 
     /* 0 不强对比，1 开发、生产表强对比 (Optional) */
     Diff *int `json:"diff"`
+
+    /* 引擎类型：JCW/JMR  */
+    EngineType string `json:"engineType"`
+
+    /* 引擎编码 (Optional) */
+    EngineCode *string `json:"engineCode"`
+
+    /* 库名（JMR 引擎必传, 默认JCW不传） (Optional) */
+    DbName *string `json:"dbName"`
 }
 
 /*
@@ -49,6 +58,7 @@ type UranusTableLikeRequest struct {
  * param appName: 应用名称 (Required)
  * param auth: 是否负责，1 负责、0不负责 (Required)
  * param env: 环境信息，dev 开发、prod 生产 (Required)
+ * param engineType: 引擎类型：JCW/JMR (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -57,6 +67,7 @@ func NewUranusTableLikeRequest(
     appName string,
     auth int,
     env string,
+    engineType string,
 ) *UranusTableLikeRequest {
 
 	return &UranusTableLikeRequest{
@@ -70,6 +81,7 @@ func NewUranusTableLikeRequest(
         AppName: appName,
         Auth: auth,
         Env: env,
+        EngineType: engineType,
 	}
 }
 
@@ -80,6 +92,9 @@ func NewUranusTableLikeRequest(
  * param auth: 是否负责，1 负责、0不负责 (Required)
  * param env: 环境信息，dev 开发、prod 生产 (Required)
  * param diff: 0 不强对比，1 开发、生产表强对比 (Optional)
+ * param engineType: 引擎类型：JCW/JMR (Required)
+ * param engineCode: 引擎编码 (Optional)
+ * param dbName: 库名（JMR 引擎必传, 默认JCW不传） (Optional)
  */
 func NewUranusTableLikeRequestWithAllParams(
     regionId string,
@@ -88,6 +103,9 @@ func NewUranusTableLikeRequestWithAllParams(
     auth int,
     env string,
     diff *int,
+    engineType string,
+    engineCode *string,
+    dbName *string,
 ) *UranusTableLikeRequest {
 
     return &UranusTableLikeRequest{
@@ -103,6 +121,9 @@ func NewUranusTableLikeRequestWithAllParams(
         Auth: auth,
         Env: env,
         Diff: diff,
+        EngineType: engineType,
+        EngineCode: engineCode,
+        DbName: dbName,
     }
 }
 
@@ -142,6 +163,18 @@ func (r *UranusTableLikeRequest) SetEnv(env string) {
 /* param diff: 0 不强对比，1 开发、生产表强对比(Optional) */
 func (r *UranusTableLikeRequest) SetDiff(diff int) {
     r.Diff = &diff
+}
+/* param engineType: 引擎类型：JCW/JMR(Required) */
+func (r *UranusTableLikeRequest) SetEngineType(engineType string) {
+    r.EngineType = engineType
+}
+/* param engineCode: 引擎编码(Optional) */
+func (r *UranusTableLikeRequest) SetEngineCode(engineCode string) {
+    r.EngineCode = &engineCode
+}
+/* param dbName: 库名（JMR 引擎必传, 默认JCW不传）(Optional) */
+func (r *UranusTableLikeRequest) SetDbName(dbName string) {
+    r.DbName = &dbName
 }
 
 

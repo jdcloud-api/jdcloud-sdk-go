@@ -37,7 +37,7 @@ type EngineJmrConfigResp struct {
     /* 配置版本号 (Optional) */
     ConfigVersion int `json:"configVersion"`
 
-    /* 配置属性表 (Optional) */
+    /* 配置属性表。openldap-proxy 类型为 {"userName":"jmr_{companyCode}","password":"明文密码"} (Optional) */
     Properties interface{} `json:"properties"`
 
     /* 创建时间 (Optional) */

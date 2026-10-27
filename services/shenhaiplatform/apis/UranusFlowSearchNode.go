@@ -58,7 +58,7 @@ type UranusFlowSearchNodeRequest struct {
     /* 任务名称 (Optional) */
     TaskName *string `json:"taskName"`
 
-    /* 任务类型, JCW_SQL jcw引擎的SQL任务、PYTHON python任务、SHELL Linux脚本任务、SPARK_JAR sparkJar任务、STAR_ROCKS starrocks任务、MYSQL mysql任务、LOOP 循环节点任务、PIPE 数据集成任务 (Optional) */
+    /* 任务类型, JCW_SQL jcw引擎的SQL任务、PYTHON python任务、SHELL Linux脚本任务、SPARK_JAR sparkJar任务、STAR_ROCKS starrocks任务、MYSQL mysql任务、LOOP 循环节点任务、PIPE 数据集成任务、JMR_HIVE_SQL JMR Hive SQL任务、JMR_SPARK_SQL JMR Spark SQL任务、JMR_SPARK JMR Spark任务、JMR_SHELL JMR Shell任务、JMR_PYTHON JMR Python任务 (Optional) */
     TaskType []string `json:"taskType"`
 
     /* 任务的种类, INTEGRATION 数据集成、JCW jcw引擎、DATA_SOURCE 数据源类型、COMMON 通用类型 (Optional) */
@@ -103,7 +103,7 @@ func NewUranusFlowSearchNodeRequest(
  * param updateTimeEnd: 任务更新时间终点 (Optional)
  * param manager: 任务负责人 (Optional)
  * param taskName: 任务名称 (Optional)
- * param taskType: 任务类型, JCW_SQL jcw引擎的SQL任务、PYTHON python任务、SHELL Linux脚本任务、SPARK_JAR sparkJar任务、STAR_ROCKS starrocks任务、MYSQL mysql任务、LOOP 循环节点任务、PIPE 数据集成任务 (Optional)
+ * param taskType: 任务类型, JCW_SQL jcw引擎的SQL任务、PYTHON python任务、SHELL Linux脚本任务、SPARK_JAR sparkJar任务、STAR_ROCKS starrocks任务、MYSQL mysql任务、LOOP 循环节点任务、PIPE 数据集成任务、JMR_HIVE_SQL JMR Hive SQL任务、JMR_SPARK_SQL JMR Spark SQL任务、JMR_SPARK JMR Spark任务、JMR_SHELL JMR Shell任务、JMR_PYTHON JMR Python任务 (Optional)
  * param taskClassify: 任务的种类, INTEGRATION 数据集成、JCW jcw引擎、DATA_SOURCE 数据源类型、COMMON 通用类型 (Optional)
  * param taskStatus: 任务的提交到运维中心的状态, UNPUBLISH 未提交、PUBLISHED 已提交、UPDATE_UNPUBLISH 更新未提交 (Optional)
  */
@@ -205,7 +205,7 @@ func (r *UranusFlowSearchNodeRequest) SetManager(manager string) {
 func (r *UranusFlowSearchNodeRequest) SetTaskName(taskName string) {
     r.TaskName = &taskName
 }
-/* param taskType: 任务类型, JCW_SQL jcw引擎的SQL任务、PYTHON python任务、SHELL Linux脚本任务、SPARK_JAR sparkJar任务、STAR_ROCKS starrocks任务、MYSQL mysql任务、LOOP 循环节点任务、PIPE 数据集成任务(Optional) */
+/* param taskType: 任务类型, JCW_SQL jcw引擎的SQL任务、PYTHON python任务、SHELL Linux脚本任务、SPARK_JAR sparkJar任务、STAR_ROCKS starrocks任务、MYSQL mysql任务、LOOP 循环节点任务、PIPE 数据集成任务、JMR_HIVE_SQL JMR Hive SQL任务、JMR_SPARK_SQL JMR Spark SQL任务、JMR_SPARK JMR Spark任务、JMR_SHELL JMR Shell任务、JMR_PYTHON JMR Python任务(Optional) */
 func (r *UranusFlowSearchNodeRequest) SetTaskType(taskType []string) {
     r.TaskType = taskType
 }

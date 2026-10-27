@@ -60,6 +60,9 @@ type UranusTaskPublicConfigScheduleRequest struct {
     /* 资源组code，用于标识任务调度所在的资源组 (Optional) */
     ResourceCode *string `json:"resourceCode"`
 
+    /* 执行引擎编码（任务绑定的计算引擎实例Code） (Optional) */
+    EngineCode *string `json:"engineCode"`
+
     /* 用于标识任务调度所需的镜像, 适用于Python任务, 当配置为0时 更新为系统默认镜像 (Optional) */
     ImageId *int64 `json:"imageId"`
 }
@@ -100,6 +103,7 @@ func NewUranusTaskPublicConfigScheduleRequest(
  * param cu: CU数量，表示任务调度时可用的计算单元数量 (Optional)
  * param parallelism: 并行度，表示任务调度时的并行执行数量 (Optional)
  * param resourceCode: 资源组code，用于标识任务调度所在的资源组 (Optional)
+ * param engineCode: 执行引擎编码（任务绑定的计算引擎实例Code） (Optional)
  * param imageId: 用于标识任务调度所需的镜像, 适用于Python任务, 当配置为0时 更新为系统默认镜像 (Optional)
  */
 func NewUranusTaskPublicConfigScheduleRequestWithAllParams(
@@ -115,6 +119,7 @@ func NewUranusTaskPublicConfigScheduleRequestWithAllParams(
     cu *int,
     parallelism *int,
     resourceCode *string,
+    engineCode *string,
     imageId *int64,
 ) *UranusTaskPublicConfigScheduleRequest {
 
@@ -137,6 +142,7 @@ func NewUranusTaskPublicConfigScheduleRequestWithAllParams(
         Cu: cu,
         Parallelism: parallelism,
         ResourceCode: resourceCode,
+        EngineCode: engineCode,
         ImageId: imageId,
     }
 }
@@ -201,6 +207,10 @@ func (r *UranusTaskPublicConfigScheduleRequest) SetParallelism(parallelism int) 
 /* param resourceCode: 资源组code，用于标识任务调度所在的资源组(Optional) */
 func (r *UranusTaskPublicConfigScheduleRequest) SetResourceCode(resourceCode string) {
     r.ResourceCode = &resourceCode
+}
+/* param engineCode: 执行引擎编码（任务绑定的计算引擎实例Code）(Optional) */
+func (r *UranusTaskPublicConfigScheduleRequest) SetEngineCode(engineCode string) {
+    r.EngineCode = &engineCode
 }
 /* param imageId: 用于标识任务调度所需的镜像, 适用于Python任务, 当配置为0时 更新为系统默认镜像(Optional) */
 func (r *UranusTaskPublicConfigScheduleRequest) SetImageId(imageId int64) {

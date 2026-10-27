@@ -49,6 +49,9 @@ type TaskScheduleInfoPublicRes struct {
     /* 资源组code，用于标识任务调度所在的资源组 (Optional) */
     ResourceCode string `json:"resourceCode"`
 
+    /* 执行引擎编码（任务绑定的计算引擎实例Code） (Optional) */
+    EngineCode string `json:"engineCode"`
+
     /* 用于标识任务调度所需的镜像, 适用于Python任务, 当配置为0时 更新为系统默认镜像 (Optional) */
     ImageId int64 `json:"imageId"`
 }

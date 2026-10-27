@@ -34,10 +34,13 @@ type GetJmrConfigsRequest struct {
     /* 计算引擎Code (Optional) */
     EngineCode *string `json:"engineCode"`
 
-    /* 配置类型(如 core-site, hdfs-site 等，为空返回全部) (Optional) */
+    /* 工作空间Code(可选，管理员权限校验兜底使用，header有值时优先取header) (Optional) */
+    WorkspaceCode *string `json:"workspaceCode"`
+
+    /* 配置类型(如 core-site, hdfs-site, openldap-proxy 等，为空返回全部) (Optional) */
     ConfigType *string `json:"configType"`
 
-    /* 环境类型(dev/prod) (Optional) */
+    /* 环境类型(dev/prod)；refreshJmrConfigs/getJmrConfigs 均可选：空则覆盖全部环境、非空则只作用该环境 (Optional) */
     Env *string `json:"env"`
 }
 
@@ -68,13 +71,15 @@ func NewGetJmrConfigsRequest(
  * param regionId: 地域ID (Required)
  * param appName: 应用名称 (Required)
  * param engineCode: 计算引擎Code (Optional)
- * param configType: 配置类型(如 core-site, hdfs-site 等，为空返回全部) (Optional)
- * param env: 环境类型(dev/prod) (Optional)
+ * param workspaceCode: 工作空间Code(可选，管理员权限校验兜底使用，header有值时优先取header) (Optional)
+ * param configType: 配置类型(如 core-site, hdfs-site, openldap-proxy 等，为空返回全部) (Optional)
+ * param env: 环境类型(dev/prod)；refreshJmrConfigs/getJmrConfigs 均可选：空则覆盖全部环境、非空则只作用该环境 (Optional)
  */
 func NewGetJmrConfigsRequestWithAllParams(
     regionId string,
     appName string,
     engineCode *string,
+    workspaceCode *string,
     configType *string,
     env *string,
 ) *GetJmrConfigsRequest {
@@ -89,6 +94,7 @@ func NewGetJmrConfigsRequestWithAllParams(
         RegionId: regionId,
         AppName: appName,
         EngineCode: engineCode,
+        WorkspaceCode: workspaceCode,
         ConfigType: configType,
         Env: env,
     }
@@ -119,11 +125,15 @@ func (r *GetJmrConfigsRequest) SetAppName(appName string) {
 func (r *GetJmrConfigsRequest) SetEngineCode(engineCode string) {
     r.EngineCode = &engineCode
 }
-/* param configType: 配置类型(如 core-site, hdfs-site 等，为空返回全部)(Optional) */
+/* param workspaceCode: 工作空间Code(可选，管理员权限校验兜底使用，header有值时优先取header)(Optional) */
+func (r *GetJmrConfigsRequest) SetWorkspaceCode(workspaceCode string) {
+    r.WorkspaceCode = &workspaceCode
+}
+/* param configType: 配置类型(如 core-site, hdfs-site, openldap-proxy 等，为空返回全部)(Optional) */
 func (r *GetJmrConfigsRequest) SetConfigType(configType string) {
     r.ConfigType = &configType
 }
-/* param env: 环境类型(dev/prod)(Optional) */
+/* param env: 环境类型(dev/prod)；refreshJmrConfigs/getJmrConfigs 均可选：空则覆盖全部环境、非空则只作用该环境(Optional) */
 func (r *GetJmrConfigsRequest) SetEnv(env string) {
     r.Env = &env
 }

@@ -42,6 +42,9 @@ type WorkspaceBundleOrUnBundleResourceRequest struct {
     /*  (Optional) */
     IntegrationResourceCode []string `json:"integrationResourceCode"`
 
+    /* 通用型资源组Code（双用途：计算+集成） (Optional) */
+    GeneralResourceCode []string `json:"generalResourceCode"`
+
     /*  (Optional) */
     BundleResource *bool `json:"bundleResource"`
 }
@@ -76,6 +79,7 @@ func NewWorkspaceBundleOrUnBundleResourceRequest(
  * param userPin:  (Optional)
  * param calculateResourceCode:  (Optional)
  * param integrationResourceCode:  (Optional)
+ * param generalResourceCode: 通用型资源组Code（双用途：计算+集成） (Optional)
  * param bundleResource:  (Optional)
  */
 func NewWorkspaceBundleOrUnBundleResourceRequestWithAllParams(
@@ -85,6 +89,7 @@ func NewWorkspaceBundleOrUnBundleResourceRequestWithAllParams(
     userPin *string,
     calculateResourceCode []string,
     integrationResourceCode []string,
+    generalResourceCode []string,
     bundleResource *bool,
 ) *WorkspaceBundleOrUnBundleResourceRequest {
 
@@ -101,6 +106,7 @@ func NewWorkspaceBundleOrUnBundleResourceRequestWithAllParams(
         UserPin: userPin,
         CalculateResourceCode: calculateResourceCode,
         IntegrationResourceCode: integrationResourceCode,
+        GeneralResourceCode: generalResourceCode,
         BundleResource: bundleResource,
     }
 }
@@ -141,6 +147,10 @@ func (r *WorkspaceBundleOrUnBundleResourceRequest) SetCalculateResourceCode(calc
 /* param integrationResourceCode: (Optional) */
 func (r *WorkspaceBundleOrUnBundleResourceRequest) SetIntegrationResourceCode(integrationResourceCode []string) {
     r.IntegrationResourceCode = integrationResourceCode
+}
+/* param generalResourceCode: 通用型资源组Code（双用途：计算+集成）(Optional) */
+func (r *WorkspaceBundleOrUnBundleResourceRequest) SetGeneralResourceCode(generalResourceCode []string) {
+    r.GeneralResourceCode = generalResourceCode
 }
 /* param bundleResource: (Optional) */
 func (r *WorkspaceBundleOrUnBundleResourceRequest) SetBundleResource(bundleResource bool) {
