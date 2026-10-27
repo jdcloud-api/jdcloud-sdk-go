@@ -52,6 +52,9 @@ type TaskScheduleInfoRes struct {
     /* 资源组 (Optional) */
     ResourceGroup string `json:"resourceGroup"`
 
+    /* 执行引擎编码（任务绑定的计算引擎实例Code） (Optional) */
+    EngineCode string `json:"engineCode"`
+
     /* 跨周期依赖类型，目前只支持SELF (Optional) */
     CrossCycleDependType string `json:"crossCycleDependType"`
 

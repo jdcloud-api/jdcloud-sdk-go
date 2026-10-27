@@ -35,6 +35,9 @@ type UranusTableCheckTableNameRequest struct {
 
     /* 环境信息，dev 开发、prod 生产  */
     Env string `json:"env"`
+
+    /* 校验库名称 (Optional) */
+    DbName *string `json:"dbName"`
 }
 
 /*
@@ -68,12 +71,14 @@ func NewUranusTableCheckTableNameRequest(
  * param appName: 应用名称 (Required)
  * param tableName: 校验表名称 (Optional)
  * param env: 环境信息，dev 开发、prod 生产 (Required)
+ * param dbName: 校验库名称 (Optional)
  */
 func NewUranusTableCheckTableNameRequestWithAllParams(
     regionId string,
     appName string,
     tableName *string,
     env string,
+    dbName *string,
 ) *UranusTableCheckTableNameRequest {
 
     return &UranusTableCheckTableNameRequest{
@@ -87,6 +92,7 @@ func NewUranusTableCheckTableNameRequestWithAllParams(
         AppName: appName,
         TableName: tableName,
         Env: env,
+        DbName: dbName,
     }
 }
 
@@ -118,6 +124,10 @@ func (r *UranusTableCheckTableNameRequest) SetTableName(tableName string) {
 /* param env: 环境信息，dev 开发、prod 生产(Required) */
 func (r *UranusTableCheckTableNameRequest) SetEnv(env string) {
     r.Env = env
+}
+/* param dbName: 校验库名称(Optional) */
+func (r *UranusTableCheckTableNameRequest) SetDbName(dbName string) {
+    r.DbName = &dbName
 }
 
 

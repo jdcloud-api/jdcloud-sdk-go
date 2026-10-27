@@ -35,6 +35,9 @@ type UranusTableDDLRequest struct {
 
     /* 环境信息，dev 开发、prod 生产  */
     Env string `json:"env"`
+
+    /* 库名（JMR 引擎必传） (Optional) */
+    DbName *string `json:"dbName"`
 }
 
 /*
@@ -68,12 +71,14 @@ func NewUranusTableDDLRequest(
  * param appName: 应用名称 (Required)
  * param tableName: 表名称 (Optional)
  * param env: 环境信息，dev 开发、prod 生产 (Required)
+ * param dbName: 库名（JMR 引擎必传） (Optional)
  */
 func NewUranusTableDDLRequestWithAllParams(
     regionId string,
     appName string,
     tableName *string,
     env string,
+    dbName *string,
 ) *UranusTableDDLRequest {
 
     return &UranusTableDDLRequest{
@@ -87,6 +92,7 @@ func NewUranusTableDDLRequestWithAllParams(
         AppName: appName,
         TableName: tableName,
         Env: env,
+        DbName: dbName,
     }
 }
 
@@ -118,6 +124,10 @@ func (r *UranusTableDDLRequest) SetTableName(tableName string) {
 /* param env: 环境信息，dev 开发、prod 生产(Required) */
 func (r *UranusTableDDLRequest) SetEnv(env string) {
     r.Env = env
+}
+/* param dbName: 库名（JMR 引擎必传）(Optional) */
+func (r *UranusTableDDLRequest) SetDbName(dbName string) {
+    r.DbName = &dbName
 }
 
 

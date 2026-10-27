@@ -30,14 +30,23 @@ type UranusTableDefaultSourceRequest struct {
     /* 应用名称  */
     AppName string `json:"appName"`
 
-    /* 表来源类型：JCW、AI_LAKE  */
+    /* 表来源类型，即引擎类型：JCW、AI_LAKE、JMR（必传，为空返回参数错误）  */
     SourceType string `json:"sourceType"`
+
+    /* 引擎编码 (Optional) */
+    EngineCode *string `json:"engineCode"`
+
+    /* 集群 ID（JMR 引擎） (Optional) */
+    ClusterId *string `json:"clusterId"`
+
+    /* 库名（JMR 引擎） (Optional) */
+    DbName *string `json:"dbName"`
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param appName: 应用名称 (Required)
- * param sourceType: 表来源类型：JCW、AI_LAKE (Required)
+ * param sourceType: 表来源类型，即引擎类型：JCW、AI_LAKE、JMR（必传，为空返回参数错误） (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -63,12 +72,18 @@ func NewUranusTableDefaultSourceRequest(
 /*
  * param regionId: 地域ID (Required)
  * param appName: 应用名称 (Required)
- * param sourceType: 表来源类型：JCW、AI_LAKE (Required)
+ * param sourceType: 表来源类型，即引擎类型：JCW、AI_LAKE、JMR（必传，为空返回参数错误） (Required)
+ * param engineCode: 引擎编码 (Optional)
+ * param clusterId: 集群 ID（JMR 引擎） (Optional)
+ * param dbName: 库名（JMR 引擎） (Optional)
  */
 func NewUranusTableDefaultSourceRequestWithAllParams(
     regionId string,
     appName string,
     sourceType string,
+    engineCode *string,
+    clusterId *string,
+    dbName *string,
 ) *UranusTableDefaultSourceRequest {
 
     return &UranusTableDefaultSourceRequest{
@@ -81,6 +96,9 @@ func NewUranusTableDefaultSourceRequestWithAllParams(
         RegionId: regionId,
         AppName: appName,
         SourceType: sourceType,
+        EngineCode: engineCode,
+        ClusterId: clusterId,
+        DbName: dbName,
     }
 }
 
@@ -105,9 +123,21 @@ func (r *UranusTableDefaultSourceRequest) SetRegionId(regionId string) {
 func (r *UranusTableDefaultSourceRequest) SetAppName(appName string) {
     r.AppName = appName
 }
-/* param sourceType: 表来源类型：JCW、AI_LAKE(Required) */
+/* param sourceType: 表来源类型，即引擎类型：JCW、AI_LAKE、JMR（必传，为空返回参数错误）(Required) */
 func (r *UranusTableDefaultSourceRequest) SetSourceType(sourceType string) {
     r.SourceType = sourceType
+}
+/* param engineCode: 引擎编码(Optional) */
+func (r *UranusTableDefaultSourceRequest) SetEngineCode(engineCode string) {
+    r.EngineCode = &engineCode
+}
+/* param clusterId: 集群 ID（JMR 引擎）(Optional) */
+func (r *UranusTableDefaultSourceRequest) SetClusterId(clusterId string) {
+    r.ClusterId = &clusterId
+}
+/* param dbName: 库名（JMR 引擎）(Optional) */
+func (r *UranusTableDefaultSourceRequest) SetDbName(dbName string) {
+    r.DbName = &dbName
 }
 
 

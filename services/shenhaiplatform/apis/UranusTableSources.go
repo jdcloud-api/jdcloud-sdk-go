@@ -30,6 +30,18 @@ type UranusTableSourcesRequest struct {
 
     /* 应用名称  */
     AppName string `json:"appName"`
+
+    /* 引擎编码 (Optional) */
+    EngineCode *string `json:"engineCode"`
+
+    /* 集群 ID（JMR 引擎） (Optional) */
+    ClusterId *string `json:"clusterId"`
+
+    /* 引擎类型：JCW、JMR、AI_LAKE (Optional) */
+    EngineType *string `json:"engineType"`
+
+    /* 库名（JMR 引擎） (Optional) */
+    DbName *string `json:"dbName"`
 }
 
 /*
@@ -58,10 +70,18 @@ func NewUranusTableSourcesRequest(
 /*
  * param regionId: 地域ID (Required)
  * param appName: 应用名称 (Required)
+ * param engineCode: 引擎编码 (Optional)
+ * param clusterId: 集群 ID（JMR 引擎） (Optional)
+ * param engineType: 引擎类型：JCW、JMR、AI_LAKE (Optional)
+ * param dbName: 库名（JMR 引擎） (Optional)
  */
 func NewUranusTableSourcesRequestWithAllParams(
     regionId string,
     appName string,
+    engineCode *string,
+    clusterId *string,
+    engineType *string,
+    dbName *string,
 ) *UranusTableSourcesRequest {
 
     return &UranusTableSourcesRequest{
@@ -73,6 +93,10 @@ func NewUranusTableSourcesRequestWithAllParams(
         },
         RegionId: regionId,
         AppName: appName,
+        EngineCode: engineCode,
+        ClusterId: clusterId,
+        EngineType: engineType,
+        DbName: dbName,
     }
 }
 
@@ -96,6 +120,22 @@ func (r *UranusTableSourcesRequest) SetRegionId(regionId string) {
 /* param appName: 应用名称(Required) */
 func (r *UranusTableSourcesRequest) SetAppName(appName string) {
     r.AppName = appName
+}
+/* param engineCode: 引擎编码(Optional) */
+func (r *UranusTableSourcesRequest) SetEngineCode(engineCode string) {
+    r.EngineCode = &engineCode
+}
+/* param clusterId: 集群 ID（JMR 引擎）(Optional) */
+func (r *UranusTableSourcesRequest) SetClusterId(clusterId string) {
+    r.ClusterId = &clusterId
+}
+/* param engineType: 引擎类型：JCW、JMR、AI_LAKE(Optional) */
+func (r *UranusTableSourcesRequest) SetEngineType(engineType string) {
+    r.EngineType = &engineType
+}
+/* param dbName: 库名（JMR 引擎）(Optional) */
+func (r *UranusTableSourcesRequest) SetDbName(dbName string) {
+    r.DbName = &dbName
 }
 
 

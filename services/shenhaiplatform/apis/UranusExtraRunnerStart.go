@@ -40,6 +40,9 @@ type UranusExtraRunnerStartRequest struct {
     /* 执行引擎MapReduce,Spark,Tez,presto,Python2,Python3,auto,默认spark (Optional) */
     ExecEngine *string `json:"execEngine"`
 
+    /* 执行引擎编码，只支持JCW类型的引擎 (Optional) */
+    EngineCode *string `json:"engineCode"`
+
     /* 脚本内容的变量参数配置 (Optional) */
     Args *shenhaiplatform.UranusTaskParamReq `json:"args"`
 
@@ -82,6 +85,7 @@ func NewUranusExtraRunnerStartRequest(
  * param flowCode: 流程code (Optional)
  * param content: 脚本内容 (Optional)
  * param execEngine: 执行引擎MapReduce,Spark,Tez,presto,Python2,Python3,auto,默认spark (Optional)
+ * param engineCode: 执行引擎编码，只支持JCW类型的引擎 (Optional)
  * param args: 脚本内容的变量参数配置 (Optional)
  * param resourceName: 资源组名称 (Optional)
  * param resourceCode: 资源组code (Optional)
@@ -93,6 +97,7 @@ func NewUranusExtraRunnerStartRequestWithAllParams(
     flowCode *string,
     content *string,
     execEngine *string,
+    engineCode *string,
     args *shenhaiplatform.UranusTaskParamReq,
     resourceName *string,
     resourceCode *string,
@@ -111,6 +116,7 @@ func NewUranusExtraRunnerStartRequestWithAllParams(
         FlowCode: flowCode,
         Content: content,
         ExecEngine: execEngine,
+        EngineCode: engineCode,
         Args: args,
         ResourceName: resourceName,
         ResourceCode: resourceCode,
@@ -150,6 +156,10 @@ func (r *UranusExtraRunnerStartRequest) SetContent(content string) {
 /* param execEngine: 执行引擎MapReduce,Spark,Tez,presto,Python2,Python3,auto,默认spark(Optional) */
 func (r *UranusExtraRunnerStartRequest) SetExecEngine(execEngine string) {
     r.ExecEngine = &execEngine
+}
+/* param engineCode: 执行引擎编码，只支持JCW类型的引擎(Optional) */
+func (r *UranusExtraRunnerStartRequest) SetEngineCode(engineCode string) {
+    r.EngineCode = &engineCode
 }
 /* param args: 脚本内容的变量参数配置(Optional) */
 func (r *UranusExtraRunnerStartRequest) SetArgs(args *shenhaiplatform.UranusTaskParamReq) {

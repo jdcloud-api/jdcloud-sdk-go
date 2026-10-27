@@ -24,4 +24,7 @@ type TaskRunParam struct {
 
     /* 并行度 (Optional) */
     Parallelism *int `json:"parallelism"`
+
+    /* JMR运行参数（仅 JMR 任务类型生效） (Optional) */
+    JmrRunParams []TaskBaseParam `json:"jmrRunParams"`
 }

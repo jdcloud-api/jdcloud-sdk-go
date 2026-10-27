@@ -25,12 +25,15 @@ type JmrInstanceResp struct {
     /* JMR实例名称 (Optional) */
     InstanceName string `json:"instanceName"`
 
-    /* 资源组Code (Optional) */
-    ResourceCode string `json:"resourceCode"`
-
     /* 环境类型(dev/prod) (Optional) */
     Env string `json:"env"`
 
     /* 计算引擎Code (Optional) */
     EngineCode string `json:"engineCode"`
+
+    /* JMR默认访问身份(CLUSTER_ACCOUNT_HADOOP-集群账号hadoop，TASK_OWNER_MAPPED_ACCOUNT-任务责任人映射集群账号；历史数据兜底返回CLUSTER_ACCOUNT_HADOOP) (Optional) */
+    DefaultAccessIdentity string `json:"defaultAccessIdentity"`
+
+    /* 该实例下的 JMR 账号映射数量（仅 defaultAccessIdentity=TASK_OWNER_MAPPED_ACCOUNT 时前端需要显示/编辑） (Optional) */
+    AccountMappingCount int `json:"accountMappingCount"`
 }

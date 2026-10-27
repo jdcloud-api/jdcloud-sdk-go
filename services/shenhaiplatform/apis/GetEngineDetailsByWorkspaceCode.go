@@ -37,13 +37,16 @@ type GetEngineDetailsByWorkspaceCodeRequest struct {
     /*  (Optional) */
     WorkspaceCode *string `json:"workspaceCode"`
 
-    /*  (Optional) */
+    /* 云仓项目code / JMR实例code (Optional) */
     ProjectCode *string `json:"projectCode"`
+
+    /* 实例编码(解绑引擎实例时使用，JCW项目projectCode或JMR集群实例ID) (Optional) */
+    InstanceCode *string `json:"instanceCode"`
 
     /*  (Optional) */
     ResourceCode *string `json:"resourceCode"`
 
-    /* 存算引擎实例编码 (Optional) */
+    /* 存算引擎实例编码（getEngineDetailsByEngineCode、getInstances 等按引擎查询接口必填） (Optional) */
     EngineCode *string `json:"engineCode"`
 }
 
@@ -75,9 +78,10 @@ func NewGetEngineDetailsByWorkspaceCodeRequest(
  * param appName: 应用名称 (Required)
  * param id:  (Optional)
  * param workspaceCode:  (Optional)
- * param projectCode:  (Optional)
+ * param projectCode: 云仓项目code / JMR实例code (Optional)
+ * param instanceCode: 实例编码(解绑引擎实例时使用，JCW项目projectCode或JMR集群实例ID) (Optional)
  * param resourceCode:  (Optional)
- * param engineCode: 存算引擎实例编码 (Optional)
+ * param engineCode: 存算引擎实例编码（getEngineDetailsByEngineCode、getInstances 等按引擎查询接口必填） (Optional)
  */
 func NewGetEngineDetailsByWorkspaceCodeRequestWithAllParams(
     regionId string,
@@ -85,6 +89,7 @@ func NewGetEngineDetailsByWorkspaceCodeRequestWithAllParams(
     id *int,
     workspaceCode *string,
     projectCode *string,
+    instanceCode *string,
     resourceCode *string,
     engineCode *string,
 ) *GetEngineDetailsByWorkspaceCodeRequest {
@@ -101,6 +106,7 @@ func NewGetEngineDetailsByWorkspaceCodeRequestWithAllParams(
         Id: id,
         WorkspaceCode: workspaceCode,
         ProjectCode: projectCode,
+        InstanceCode: instanceCode,
         ResourceCode: resourceCode,
         EngineCode: engineCode,
     }
@@ -135,15 +141,19 @@ func (r *GetEngineDetailsByWorkspaceCodeRequest) SetId(id int) {
 func (r *GetEngineDetailsByWorkspaceCodeRequest) SetWorkspaceCode(workspaceCode string) {
     r.WorkspaceCode = &workspaceCode
 }
-/* param projectCode: (Optional) */
+/* param projectCode: 云仓项目code / JMR实例code(Optional) */
 func (r *GetEngineDetailsByWorkspaceCodeRequest) SetProjectCode(projectCode string) {
     r.ProjectCode = &projectCode
+}
+/* param instanceCode: 实例编码(解绑引擎实例时使用，JCW项目projectCode或JMR集群实例ID)(Optional) */
+func (r *GetEngineDetailsByWorkspaceCodeRequest) SetInstanceCode(instanceCode string) {
+    r.InstanceCode = &instanceCode
 }
 /* param resourceCode: (Optional) */
 func (r *GetEngineDetailsByWorkspaceCodeRequest) SetResourceCode(resourceCode string) {
     r.ResourceCode = &resourceCode
 }
-/* param engineCode: 存算引擎实例编码(Optional) */
+/* param engineCode: 存算引擎实例编码（getEngineDetailsByEngineCode、getInstances 等按引擎查询接口必填）(Optional) */
 func (r *GetEngineDetailsByWorkspaceCodeRequest) SetEngineCode(engineCode string) {
     r.EngineCode = &engineCode
 }

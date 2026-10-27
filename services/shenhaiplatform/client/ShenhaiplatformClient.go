@@ -40,7 +40,7 @@ func NewShenhaiplatformClient(credential *core.Credential) *ShenhaiplatformClien
             Credential:  *credential,
             Config:      *config,
             ServiceName: "shenhaiplatform",
-            Revision:    "1.0.3",
+            Revision:    "1.0.4",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -1237,6 +1237,46 @@ func (c *ShenhaiplatformClient) JtlasSearchColumnLineage(request *shenhaiplatfor
     return jdResp, err
 }
 
+/* 新建空间参数 */
+func (c *ShenhaiplatformClient) UranusSpaceParamCreate(request *shenhaiplatform.UranusSpaceParamCreateRequest) (*shenhaiplatform.UranusSpaceParamCreateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusSpaceParamCreateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询 JMR 引擎下全部账号映射，可选按 clusterId/env 过滤。云账号与 JMR 系统账号一一对应，同一云账号在 (engineCode, clusterId, env) 粒度内只允许一条有效映射。 */
+func (c *ShenhaiplatformClient) GetJmrAccountMappings(request *shenhaiplatform.GetJmrAccountMappingsRequest) (*shenhaiplatform.GetJmrAccountMappingsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GetJmrAccountMappingsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 删除任务节点 */
 func (c *ShenhaiplatformClient) UranusTaskOrFlowNodeDelete(request *shenhaiplatform.UranusTaskOrFlowNodeDeleteRequest) (*shenhaiplatform.UranusTaskOrFlowNodeDeleteResponse, error) {
     if request == nil {
@@ -1308,6 +1348,26 @@ func (c *ShenhaiplatformClient) GravityParticleJobscheResetJobInstStatus(request
     }
 
     jdResp := &shenhaiplatform.GravityParticleJobscheResetJobInstStatusResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 列出可用数据库（JCW 返回单一库名，JMR 返回集群下全部库名）。当前仅 JMR 引擎需要该接口，服务端固定按 JMR 引擎解析集群 */
+func (c *ShenhaiplatformClient) UranusTableDatabases(request *shenhaiplatform.UranusTableDatabasesRequest) (*shenhaiplatform.UranusTableDatabasesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTableDatabasesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -1657,6 +1717,26 @@ func (c *ShenhaiplatformClient) ManageHubGravityListTxDateStatus(request *shenha
     return jdResp, err
 }
 
+/* 查询空间参数列表 */
+func (c *ShenhaiplatformClient) UranusSpaceParamList(request *shenhaiplatform.UranusSpaceParamListRequest) (*shenhaiplatform.UranusSpaceParamListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusSpaceParamListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 工作流更新 */
 func (c *ShenhaiplatformClient) UranusTaskFlowUpdate(request *shenhaiplatform.UranusTaskFlowUpdateRequest) (*shenhaiplatform.UranusTaskFlowUpdateResponse, error) {
     if request == nil {
@@ -1977,6 +2057,26 @@ func (c *ShenhaiplatformClient) UranusTaskInfoHistoryList(request *shenhaiplatfo
     return jdResp, err
 }
 
+/* 删除空间参数 */
+func (c *ShenhaiplatformClient) UranusSpaceParamDelete(request *shenhaiplatform.UranusSpaceParamDeleteRequest) (*shenhaiplatform.UranusSpaceParamDeleteResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusSpaceParamDeleteResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 统计成功作业状态数量 */
 func (c *ShenhaiplatformClient) GravityParticleJobMonitorJobSuccessCount(request *shenhaiplatform.GravityParticleJobMonitorJobSuccessCountRequest) (*shenhaiplatform.GravityParticleJobMonitorJobSuccessCountResponse, error) {
     if request == nil {
@@ -2277,6 +2377,26 @@ func (c *ShenhaiplatformClient) ManageHubStorageTableDDL(request *shenhaiplatfor
     return jdResp, err
 }
 
+/* 查询当前空间引擎下可查询的库列表（读管理员配置的可管理库列表）。引擎上下文（engineCode / clusterId / engineType / dbName）非空时按传入值解析，为空则回退用户选定引擎 */
+func (c *ShenhaiplatformClient) UranusTableManagedDatabases(request *shenhaiplatform.UranusTableManagedDatabasesRequest) (*shenhaiplatform.UranusTableManagedDatabasesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTableManagedDatabasesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 任务保存 */
 func (c *ShenhaiplatformClient) UranusTaskInfoSave(request *shenhaiplatform.UranusTaskInfoSaveRequest) (*shenhaiplatform.UranusTaskInfoSaveResponse, error) {
     if request == nil {
@@ -2288,6 +2408,26 @@ func (c *ShenhaiplatformClient) UranusTaskInfoSave(request *shenhaiplatform.Uran
     }
 
     jdResp := &shenhaiplatform.UranusTaskInfoSaveResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建任务业务目录，返回 biz_ 前缀的目录ID */
+func (c *ShenhaiplatformClient) UranusTaskPublicCatalogCreate(request *shenhaiplatform.UranusTaskPublicCatalogCreateRequest) (*shenhaiplatform.UranusTaskPublicCatalogCreateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskPublicCatalogCreateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2637,6 +2777,26 @@ func (c *ShenhaiplatformClient) ManageHubGravityJobLog(request *shenhaiplatform.
     return jdResp, err
 }
 
+/* 设置工作空间下的默认计算引擎(同一工作空间默认引擎唯一) */
+func (c *ShenhaiplatformClient) SetEnginePrimary(request *shenhaiplatform.SetEnginePrimaryRequest) (*shenhaiplatform.SetEnginePrimaryResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.SetEnginePrimaryResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询表分区 */
 func (c *ShenhaiplatformClient) JtlasPageSearchTablePartitions(request *shenhaiplatform.JtlasPageSearchTablePartitionsRequest) (*shenhaiplatform.JtlasPageSearchTablePartitionsResponse, error) {
     if request == nil {
@@ -2728,6 +2888,26 @@ func (c *ShenhaiplatformClient) GravityParticleDubboJobManagerGetScriptInfoType(
     }
 
     jdResp := &shenhaiplatform.GravityParticleDubboJobManagerGetScriptInfoTypeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新任务的 SparkJar 参数，包括主 Jar、主类、依赖资源等 */
+func (c *ShenhaiplatformClient) UranusTaskPublicSparkJarParamInfoUpdate(request *shenhaiplatform.UranusTaskPublicSparkJarParamInfoUpdateRequest) (*shenhaiplatform.UranusTaskPublicSparkJarParamInfoUpdateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskPublicSparkJarParamInfoUpdateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -2917,7 +3097,7 @@ func (c *ShenhaiplatformClient) UranusTaskDebugResultList(request *shenhaiplatfo
     return jdResp, err
 }
 
-/* 通过计算引擎Code查询绑定的JMR引擎配置信息(支持按类型过滤) */
+/* 通过计算引擎Code查询绑定的JMR引擎配置信息(支持按类型过滤)。绑定JMR时会额外落一条configType=openldap-proxy，properties含userName与解密后的password；按configType过滤时只返回对应类型。 */
 func (c *ShenhaiplatformClient) GetJmrConfigs(request *shenhaiplatform.GetJmrConfigsRequest) (*shenhaiplatform.GetJmrConfigsResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -3277,6 +3457,26 @@ func (c *ShenhaiplatformClient) ParamTypes(request *shenhaiplatform.ParamTypesRe
     return jdResp, err
 }
 
+/* 全量覆盖保存 JMR 账号映射：前端传入该引擎/集群/环境粒度下全量映射对，库中存在则更新、请求新增则插入、库中多余则逻辑删除；传空列表清空。cloudAccount 原样保存（支持中文/特殊字符），systemAccount 仅允许字母数字下划线连字符且不超过64位。 */
+func (c *ShenhaiplatformClient) SaveJmrAccountMapping(request *shenhaiplatform.SaveJmrAccountMappingRequest) (*shenhaiplatform.SaveJmrAccountMappingResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.SaveJmrAccountMappingResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询指定工作空间下的参数列表及参数值 */
 func (c *ShenhaiplatformClient) ParamList(request *shenhaiplatform.ParamListRequest) (*shenhaiplatform.ParamListResponse, error) {
     if request == nil {
@@ -3597,7 +3797,7 @@ func (c *ShenhaiplatformClient) GetInstances(request *shenhaiplatform.GetInstanc
     return jdResp, err
 }
 
-/* 全量更新任务的依赖信息 */
+/* 全量更新任务的依赖信息。写依赖校验允许 manual 周期任务作为依赖，其余跨工作空间、状态、自依赖等校验保持不变 */
 func (c *ShenhaiplatformClient) UranusTaskPublicConfigDepend(request *shenhaiplatform.UranusTaskPublicConfigDependRequest) (*shenhaiplatform.UranusTaskPublicConfigDependResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -3797,6 +3997,26 @@ func (c *ShenhaiplatformClient) UranusFlowUpdateAllCanvas(request *shenhaiplatfo
     return jdResp, err
 }
 
+/* 编辑已绑定计算引擎的开发/生产环境配置。引擎名绑定后不可修改；类型不可在JCW/JMR间切换。JCW可改项目与追加资源组，同一工作空间内同一云仓项目不能同时作为dev/prod。JMR可改集群与默认访问身份；同一集群仍可同时作为dev/prod，且同一集群允许被多个工作空间绑定。清空某一环境则解绑该环境，不可两个环境同时为空。 */
+func (c *ShenhaiplatformClient) UpdateWorkspaceEngine(request *shenhaiplatform.UpdateWorkspaceEngineRequest) (*shenhaiplatform.UpdateWorkspaceEngineResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UpdateWorkspaceEngineResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 列出所有镜像信息 */
 func (c *ShenhaiplatformClient) UranusTaskPublicListImages(request *shenhaiplatform.UranusTaskPublicListImagesRequest) (*shenhaiplatform.UranusTaskPublicListImagesResponse, error) {
     if request == nil {
@@ -3937,7 +4157,7 @@ func (c *ShenhaiplatformClient) RotorDictSupplementPlanStates(request *shenhaipl
     return jdResp, err
 }
 
-/* 查询表来源列表并标识默认项 */
+/* 查询表来源列表并标识默认项，每条带当前用户选定的引擎编码 */
 func (c *ShenhaiplatformClient) UranusTableSources(request *shenhaiplatform.UranusTableSourcesRequest) (*shenhaiplatform.UranusTableSourcesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -4977,6 +5197,26 @@ func (c *ShenhaiplatformClient) RotorDictTaskTypes(request *shenhaiplatform.Roto
     return jdResp, err
 }
 
+/* 通过计算引擎Code查询引擎详情及绑定的JCW/JMR实例信息（含云仓资源组实时查询、JMR默认访问身份）。请求体必填engineCode，返回单个引擎及其cloudProjects/jmrInstances。 */
+func (c *ShenhaiplatformClient) GetEngineDetailsByEngineCode(request *shenhaiplatform.GetEngineDetailsByEngineCodeRequest) (*shenhaiplatform.GetEngineDetailsByEngineCodeResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.GetEngineDetailsByEngineCodeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 任务预发布 */
 func (c *ShenhaiplatformClient) UranusTaskInfoPrePublish(request *shenhaiplatform.UranusTaskInfoPrePublishRequest) (*shenhaiplatform.UranusTaskInfoPrePublishResponse, error) {
     if request == nil {
@@ -5728,6 +5968,26 @@ func (c *ShenhaiplatformClient) WorkspaceGetMembers(request *shenhaiplatform.Wor
     }
 
     jdResp := &shenhaiplatform.WorkspaceGetMembersResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 覆盖式设置 JMR 引擎可管理库列表（仅空间管理员可改） */
+func (c *ShenhaiplatformClient) UranusTableSelectDatabases(request *shenhaiplatform.UranusTableSelectDatabasesRequest) (*shenhaiplatform.UranusTableSelectDatabasesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTableSelectDatabasesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -6517,6 +6777,26 @@ func (c *ShenhaiplatformClient) StatusPercentageToday(request *shenhaiplatform.S
     return jdResp, err
 }
 
+/* 判断任务名称在当前工作空间是否已存在 */
+func (c *ShenhaiplatformClient) UranusTaskPublicNameExisted(request *shenhaiplatform.UranusTaskPublicNameExistedRequest) (*shenhaiplatform.UranusTaskPublicNameExistedResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskPublicNameExistedResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 以KV的方式将目录与ID列出来 */
 func (c *ShenhaiplatformClient) UranusTaskPublicListFlatCatalog(request *shenhaiplatform.UranusTaskPublicListFlatCatalogRequest) (*shenhaiplatform.UranusTaskPublicListFlatCatalogResponse, error) {
     if request == nil {
@@ -6617,7 +6897,7 @@ func (c *ShenhaiplatformClient) UranusTaskPublicDetail(request *shenhaiplatform.
     return jdResp, err
 }
 
-/* 前端绑定计算引擎弹窗一键完成绑定 */
+/* 前端绑定计算引擎弹窗一键完成绑定。JCW不允许devConfig与prodConfig使用同一云仓项目（同一工作空间内项目唯一），但同一项目可以绑定到多个工作空间。JMR允许devConfig与prodConfig使用同一集群，分别指定默认访问身份，详情查询按环境返回两条实例；同一集群可绑定到多个工作空间，同一工作空间内也可绑定多个引擎。 */
 func (c *ShenhaiplatformClient) BindWorkspaceEngine(request *shenhaiplatform.BindWorkspaceEngineRequest) (*shenhaiplatform.BindWorkspaceEngineResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -7017,7 +7297,7 @@ func (c *ShenhaiplatformClient) GravityParticleParticleJobGetRunInfos(request *s
     return jdResp, err
 }
 
-/* 更新用户默认表来源 */
+/* 更新用户默认表来源（即引擎类型）与默认引擎编码，各字段非空才覆盖 */
 func (c *ShenhaiplatformClient) UranusTableDefaultSource(request *shenhaiplatform.UranusTableDefaultSourceRequest) (*shenhaiplatform.UranusTableDefaultSourceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -7197,6 +7477,26 @@ func (c *ShenhaiplatformClient) UranusTaskExportParamList(request *shenhaiplatfo
     return jdResp, err
 }
 
+/* 任务依赖节点的环境变量查询 */
+func (c *ShenhaiplatformClient) UranusTaskDependEnvParamList(request *shenhaiplatform.UranusTaskDependEnvParamListRequest) (*shenhaiplatform.UranusTaskDependEnvParamListResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskDependEnvParamListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 任务业务目录是否存在 */
 func (c *ShenhaiplatformClient) UranusTaskCatalogExisted(request *shenhaiplatform.UranusTaskCatalogExistedRequest) (*shenhaiplatform.UranusTaskCatalogExistedResponse, error) {
     if request == nil {
@@ -7248,6 +7548,26 @@ func (c *ShenhaiplatformClient) UranusTaskPageList(request *shenhaiplatform.Uran
     }
 
     jdResp := &shenhaiplatform.UranusTaskPageListResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 更新任务的环境变量信息 */
+func (c *ShenhaiplatformClient) UranusTaskEnvParamInfoUpdate(request *shenhaiplatform.UranusTaskEnvParamInfoUpdateRequest) (*shenhaiplatform.UranusTaskEnvParamInfoUpdateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskEnvParamInfoUpdateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -7557,7 +7877,7 @@ func (c *ShenhaiplatformClient) GravityParticleJobDepGetParentDependencies(reque
     return jdResp, err
 }
 
-/* 按照projectCode查询绑定的计算引擎信息以及计算引擎绑定的空间信息 */
+/* 按照projectCode查询绑定的计算引擎信息以及计算引擎绑定的空间信息。同一云仓项目可挂多个工作空间时仍返回单条（按绑定id最小）。 */
 func (c *ShenhaiplatformClient) GetByProjectCode(request *shenhaiplatform.GetByProjectCodeRequest) (*shenhaiplatform.GetByProjectCodeResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -7568,6 +7888,26 @@ func (c *ShenhaiplatformClient) GetByProjectCode(request *shenhaiplatform.GetByP
     }
 
     jdResp := &shenhaiplatform.GetByProjectCodeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 刷新JMR集群的Hadoop配置快照：删除本地存储的该JMR集群全部Hadoop配置，重新从JMR服务拉取最新配置并插入。拉取失败不删除本地数据；删除与插入在同一事务内原子化。不触碰openldap-proxy代理用户配置。env可选，传了只刷该环境、不传则刷该引擎下所有JMR集群的全部环境。 */
+func (c *ShenhaiplatformClient) RefreshJmrConfigs(request *shenhaiplatform.RefreshJmrConfigsRequest) (*shenhaiplatform.RefreshJmrConfigsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.RefreshJmrConfigsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -7628,6 +7968,26 @@ func (c *ShenhaiplatformClient) UranusTaskNodeCreate(request *shenhaiplatform.Ur
     }
 
     jdResp := &shenhaiplatform.UranusTaskNodeCreateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 编辑空间参数 */
+func (c *ShenhaiplatformClient) UranusSpaceParamUpdate(request *shenhaiplatform.UranusSpaceParamUpdateRequest) (*shenhaiplatform.UranusSpaceParamUpdateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusSpaceParamUpdateResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -8037,6 +8397,26 @@ func (c *ShenhaiplatformClient) GetMostFailedTimesInstances(request *shenhaiplat
     return jdResp, err
 }
 
+/* 创建任务草稿，支持全部任务类型，owner/collaborators 由请求指定 */
+func (c *ShenhaiplatformClient) UranusTaskPublicNodeCreate(request *shenhaiplatform.UranusTaskPublicNodeCreateRequest) (*shenhaiplatform.UranusTaskPublicNodeCreateResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &shenhaiplatform.UranusTaskPublicNodeCreateResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 配置任务的调度策略，包括调度周期、优先级、重试次数等 */
 func (c *ShenhaiplatformClient) UranusTaskPublicConfigSchedule(request *shenhaiplatform.UranusTaskPublicConfigScheduleRequest) (*shenhaiplatform.UranusTaskPublicConfigScheduleResponse, error) {
     if request == nil {
@@ -8437,7 +8817,7 @@ func (c *ShenhaiplatformClient) UranusFunctionCreateCatalog(request *shenhaiplat
     return jdResp, err
 }
 
-/* 计算引擎绑定云仓或JMR实例 */
+/* 计算引擎绑定云仓或JMR实例。JCW：同一工作空间内同一云仓项目只能绑定一次（不可同时挂到开发与生产），允许同一项目绑定到多个工作空间。JMR：同一集群可绑定到多个工作空间，同一工作空间内可绑定多个引擎；同一引擎下同一集群可按env分别绑定dev/prod，并配置不同默认访问身份。 */
 func (c *ShenhaiplatformClient) BindInstance(request *shenhaiplatform.BindInstanceRequest) (*shenhaiplatform.BindInstanceResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")

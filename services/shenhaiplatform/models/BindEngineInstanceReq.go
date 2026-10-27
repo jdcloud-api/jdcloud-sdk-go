@@ -31,9 +31,12 @@ type BindEngineInstanceReq struct {
     /* 实例类型(JCW/JMR) (Optional) */
     InstanceType string `json:"instanceType"`
 
-    /* 资源组Code (Optional) */
-    ResourceCode string `json:"resourceCode"`
+    /* JMR默认访问身份(CLUSTER_ACCOUNT_HADOOP-集群账号hadoop，TASK_OWNER_MAPPED_ACCOUNT-任务责任人映射集群账号；可选，不传落库为null，查询时兜底返回CLUSTER_ACCOUNT_HADOOP) (Optional) */
+    DefaultAccessIdentity string `json:"defaultAccessIdentity"`
 
-    /* 环境类型(dev/prod) (Optional) */
+    /* 环境类型(dev/prod)。同一引擎下同一实例按环境区分，允许同一JMR集群分别绑定开发/生产并配置不同访问身份 (Optional) */
     Env string `json:"env"`
+
+    /* 工作空间Code(管理员校验用，网关未注入workspaceCode头时兜底) (Optional) */
+    WorkspaceCode string `json:"workspaceCode"`
 }

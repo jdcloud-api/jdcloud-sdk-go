@@ -30,26 +30,34 @@ type UnbindInstanceRequest struct {
     /* 应用名称  */
     AppName string `json:"appName"`
 
-    /* 引擎 Code  */
-    EngineCode string `json:"engineCode"`
+    /*  (Optional) */
+    Id *int `json:"id"`
 
-    /* 实例 Code  */
-    InstanceCode string `json:"instanceCode"`
+    /*  (Optional) */
+    WorkspaceCode *string `json:"workspaceCode"`
+
+    /* 云仓项目code / JMR实例code (Optional) */
+    ProjectCode *string `json:"projectCode"`
+
+    /* 实例编码(解绑引擎实例时使用，JCW项目projectCode或JMR集群实例ID) (Optional) */
+    InstanceCode *string `json:"instanceCode"`
+
+    /*  (Optional) */
+    ResourceCode *string `json:"resourceCode"`
+
+    /* 存算引擎实例编码（getEngineDetailsByEngineCode、getInstances 等按引擎查询接口必填） (Optional) */
+    EngineCode *string `json:"engineCode"`
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param appName: 应用名称 (Required)
- * param engineCode: 引擎 Code (Required)
- * param instanceCode: 实例 Code (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewUnbindInstanceRequest(
     regionId string,
     appName string,
-    engineCode string,
-    instanceCode string,
 ) *UnbindInstanceRequest {
 
 	return &UnbindInstanceRequest{
@@ -61,22 +69,28 @@ func NewUnbindInstanceRequest(
 		},
         RegionId: regionId,
         AppName: appName,
-        EngineCode: engineCode,
-        InstanceCode: instanceCode,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param appName: 应用名称 (Required)
- * param engineCode: 引擎 Code (Required)
- * param instanceCode: 实例 Code (Required)
+ * param id:  (Optional)
+ * param workspaceCode:  (Optional)
+ * param projectCode: 云仓项目code / JMR实例code (Optional)
+ * param instanceCode: 实例编码(解绑引擎实例时使用，JCW项目projectCode或JMR集群实例ID) (Optional)
+ * param resourceCode:  (Optional)
+ * param engineCode: 存算引擎实例编码（getEngineDetailsByEngineCode、getInstances 等按引擎查询接口必填） (Optional)
  */
 func NewUnbindInstanceRequestWithAllParams(
     regionId string,
     appName string,
-    engineCode string,
-    instanceCode string,
+    id *int,
+    workspaceCode *string,
+    projectCode *string,
+    instanceCode *string,
+    resourceCode *string,
+    engineCode *string,
 ) *UnbindInstanceRequest {
 
     return &UnbindInstanceRequest{
@@ -88,8 +102,12 @@ func NewUnbindInstanceRequestWithAllParams(
         },
         RegionId: regionId,
         AppName: appName,
-        EngineCode: engineCode,
+        Id: id,
+        WorkspaceCode: workspaceCode,
+        ProjectCode: projectCode,
         InstanceCode: instanceCode,
+        ResourceCode: resourceCode,
+        EngineCode: engineCode,
     }
 }
 
@@ -114,13 +132,29 @@ func (r *UnbindInstanceRequest) SetRegionId(regionId string) {
 func (r *UnbindInstanceRequest) SetAppName(appName string) {
     r.AppName = appName
 }
-/* param engineCode: 引擎 Code(Required) */
-func (r *UnbindInstanceRequest) SetEngineCode(engineCode string) {
-    r.EngineCode = engineCode
+/* param id: (Optional) */
+func (r *UnbindInstanceRequest) SetId(id int) {
+    r.Id = &id
 }
-/* param instanceCode: 实例 Code(Required) */
+/* param workspaceCode: (Optional) */
+func (r *UnbindInstanceRequest) SetWorkspaceCode(workspaceCode string) {
+    r.WorkspaceCode = &workspaceCode
+}
+/* param projectCode: 云仓项目code / JMR实例code(Optional) */
+func (r *UnbindInstanceRequest) SetProjectCode(projectCode string) {
+    r.ProjectCode = &projectCode
+}
+/* param instanceCode: 实例编码(解绑引擎实例时使用，JCW项目projectCode或JMR集群实例ID)(Optional) */
 func (r *UnbindInstanceRequest) SetInstanceCode(instanceCode string) {
-    r.InstanceCode = instanceCode
+    r.InstanceCode = &instanceCode
+}
+/* param resourceCode: (Optional) */
+func (r *UnbindInstanceRequest) SetResourceCode(resourceCode string) {
+    r.ResourceCode = &resourceCode
+}
+/* param engineCode: 存算引擎实例编码（getEngineDetailsByEngineCode、getInstances 等按引擎查询接口必填）(Optional) */
+func (r *UnbindInstanceRequest) SetEngineCode(engineCode string) {
+    r.EngineCode = &engineCode
 }
 
 

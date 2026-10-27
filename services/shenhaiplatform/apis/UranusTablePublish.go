@@ -69,6 +69,12 @@ type UranusTablePublishRequest struct {
 
     /* 分桶字段 (Optional) */
     BucketNum *int `json:"bucketNum"`
+
+    /* 库名（JMR 引擎由用户选择后回传；JCW 引擎可不传） (Optional) */
+    DbName *string `json:"dbName"`
+
+    /* 环境：dev 开发环境，prod 生产环境（JMR 标准模式由前端选定） (Optional) */
+    Env *string `json:"env"`
 }
 
 /*
@@ -116,6 +122,8 @@ func NewUranusTablePublishRequest(
  * param lineDelim: 表行分隔符（只有TEXTFILE类型表需要该字段） (Optional)
  * param bucketCols: 分桶字段 (Optional)
  * param bucketNum: 分桶字段 (Optional)
+ * param dbName: 库名（JMR 引擎由用户选择后回传；JCW 引擎可不传） (Optional)
+ * param env: 环境：dev 开发环境，prod 生产环境（JMR 标准模式由前端选定） (Optional)
  */
 func NewUranusTablePublishRequestWithAllParams(
     regionId string,
@@ -133,6 +141,8 @@ func NewUranusTablePublishRequestWithAllParams(
     lineDelim *string,
     bucketCols []string,
     bucketNum *int,
+    dbName *string,
+    env *string,
 ) *UranusTablePublishRequest {
 
     return &UranusTablePublishRequest{
@@ -157,6 +167,8 @@ func NewUranusTablePublishRequestWithAllParams(
         LineDelim: lineDelim,
         BucketCols: bucketCols,
         BucketNum: bucketNum,
+        DbName: dbName,
+        Env: env,
     }
 }
 
@@ -232,6 +244,14 @@ func (r *UranusTablePublishRequest) SetBucketCols(bucketCols []string) {
 /* param bucketNum: 分桶字段(Optional) */
 func (r *UranusTablePublishRequest) SetBucketNum(bucketNum int) {
     r.BucketNum = &bucketNum
+}
+/* param dbName: 库名（JMR 引擎由用户选择后回传；JCW 引擎可不传）(Optional) */
+func (r *UranusTablePublishRequest) SetDbName(dbName string) {
+    r.DbName = &dbName
+}
+/* param env: 环境：dev 开发环境，prod 生产环境（JMR 标准模式由前端选定）(Optional) */
+func (r *UranusTablePublishRequest) SetEnv(env string) {
+    r.Env = &env
 }
 
 

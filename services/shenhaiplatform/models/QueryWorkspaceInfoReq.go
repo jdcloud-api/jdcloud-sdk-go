@@ -25,12 +25,15 @@ type QueryWorkspaceInfoReq struct {
     /*  (Optional) */
     WorkspaceCode string `json:"workspaceCode"`
 
-    /*  (Optional) */
+    /* 云仓项目code / JMR实例code (Optional) */
     ProjectCode string `json:"projectCode"`
+
+    /* 实例编码(解绑引擎实例时使用，JCW项目projectCode或JMR集群实例ID) (Optional) */
+    InstanceCode string `json:"instanceCode"`
 
     /*  (Optional) */
     ResourceCode string `json:"resourceCode"`
 
-    /* 存算引擎实例编码 (Optional) */
+    /* 存算引擎实例编码（getEngineDetailsByEngineCode、getInstances 等按引擎查询接口必填） (Optional) */
     EngineCode string `json:"engineCode"`
 }

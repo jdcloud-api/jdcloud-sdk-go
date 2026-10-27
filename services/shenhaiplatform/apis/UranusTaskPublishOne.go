@@ -34,7 +34,7 @@ type UranusTaskPublishOneRequest struct {
     /* 节点列表  */
     Ids []shenhaiplatform.UranusNodePublishChildReq `json:"ids"`
 
-    /* 发布原因  */
+    /* 发布任务的原因  */
     Reason string `json:"reason"`
 }
 
@@ -42,7 +42,7 @@ type UranusTaskPublishOneRequest struct {
  * param regionId: 地域ID (Required)
  * param appName: 应用名称 (Required)
  * param ids: 节点列表 (Required)
- * param reason: 发布原因 (Required)
+ * param reason: 发布任务的原因 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -71,7 +71,7 @@ func NewUranusTaskPublishOneRequest(
  * param regionId: 地域ID (Required)
  * param appName: 应用名称 (Required)
  * param ids: 节点列表 (Required)
- * param reason: 发布原因 (Required)
+ * param reason: 发布任务的原因 (Required)
  */
 func NewUranusTaskPublishOneRequestWithAllParams(
     regionId string,
@@ -119,7 +119,7 @@ func (r *UranusTaskPublishOneRequest) SetAppName(appName string) {
 func (r *UranusTaskPublishOneRequest) SetIds(ids []shenhaiplatform.UranusNodePublishChildReq) {
     r.Ids = ids
 }
-/* param reason: 发布原因(Required) */
+/* param reason: 发布任务的原因(Required) */
 func (r *UranusTaskPublishOneRequest) SetReason(reason string) {
     r.Reason = reason
 }

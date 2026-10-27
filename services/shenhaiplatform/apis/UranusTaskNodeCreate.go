@@ -39,7 +39,7 @@ type UranusTaskNodeCreateRequest struct {
     /* 任务/工作流名称 (Optional) */
     TaskName *string `json:"taskName"`
 
-    /* 任务类型, JCW_SQL jcw引擎的SQL任务、PYTHON python任务、SHELL Linux脚本任务、SPARK_JAR sparkJar任务、STAR_ROCKS starrocks任务、MYSQL mysql任务、LOOP 循环节点任务、PIPE 数据集成任务 (Optional) */
+    /* 任务类型, JCW_SQL jcw引擎的SQL任务、PYTHON python任务、SHELL Linux脚本任务、SPARK_JAR sparkJar任务、STAR_ROCKS starrocks任务、MYSQL mysql任务、LOOP 循环节点任务、PIPE 数据集成任务、JMR_HIVE_SQL JMR Hive SQL任务、JMR_SPARK_SQL JMR Spark SQL任务、JMR_SPARK JMR Spark任务、JMR_SHELL JMR Shell任务、JMR_PYTHON JMR Python任务 (Optional) */
     TaskType *string `json:"taskType"`
 
     /* 任务负责人 (Optional) */
@@ -90,7 +90,7 @@ func NewUranusTaskNodeCreateRequest(
  * param catalogId: 创建任务/工作流的业务目录id (Optional)
  * param flowId: 为空时为TaskKind=TASK的任务，或工作流任务 (Optional)
  * param taskName: 任务/工作流名称 (Optional)
- * param taskType: 任务类型, JCW_SQL jcw引擎的SQL任务、PYTHON python任务、SHELL Linux脚本任务、SPARK_JAR sparkJar任务、STAR_ROCKS starrocks任务、MYSQL mysql任务、LOOP 循环节点任务、PIPE 数据集成任务 (Optional)
+ * param taskType: 任务类型, JCW_SQL jcw引擎的SQL任务、PYTHON python任务、SHELL Linux脚本任务、SPARK_JAR sparkJar任务、STAR_ROCKS starrocks任务、MYSQL mysql任务、LOOP 循环节点任务、PIPE 数据集成任务、JMR_HIVE_SQL JMR Hive SQL任务、JMR_SPARK_SQL JMR Spark SQL任务、JMR_SPARK JMR Spark任务、JMR_SHELL JMR Shell任务、JMR_PYTHON JMR Python任务 (Optional)
  * param owner: 任务负责人 (Optional)
  * param collaborators: 任务协作人 (Optional)
  * param desc: 任务描述 (Optional)
@@ -168,7 +168,7 @@ func (r *UranusTaskNodeCreateRequest) SetFlowId(flowId string) {
 func (r *UranusTaskNodeCreateRequest) SetTaskName(taskName string) {
     r.TaskName = &taskName
 }
-/* param taskType: 任务类型, JCW_SQL jcw引擎的SQL任务、PYTHON python任务、SHELL Linux脚本任务、SPARK_JAR sparkJar任务、STAR_ROCKS starrocks任务、MYSQL mysql任务、LOOP 循环节点任务、PIPE 数据集成任务(Optional) */
+/* param taskType: 任务类型, JCW_SQL jcw引擎的SQL任务、PYTHON python任务、SHELL Linux脚本任务、SPARK_JAR sparkJar任务、STAR_ROCKS starrocks任务、MYSQL mysql任务、LOOP 循环节点任务、PIPE 数据集成任务、JMR_HIVE_SQL JMR Hive SQL任务、JMR_SPARK_SQL JMR Spark SQL任务、JMR_SPARK JMR Spark任务、JMR_SHELL JMR Shell任务、JMR_PYTHON JMR Python任务(Optional) */
 func (r *UranusTaskNodeCreateRequest) SetTaskType(taskType string) {
     r.TaskType = &taskType
 }

@@ -22,6 +22,9 @@ type UranusTableQuery struct {
     /* 图谱ID (Optional) */
     Id string `json:"id"`
 
+    /* 库名（JMR 引擎表返回所属库名） (Optional) */
+    DbName string `json:"dbName"`
+
     /* 表英文名称 (Optional) */
     TableEnName string `json:"tableEnName"`
 
