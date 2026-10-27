@@ -25,6 +25,9 @@ type TechDatasetResultForJob struct {
     /* 科技数据集 ID。 (Optional) */
     DatasetId string `json:"datasetId"`
 
+    /* 科技数据集名字。 (Optional) */
+    DatasetName string `json:"datasetName"`
+
     /* 科技数据集版本。 (Optional) */
     DatasetVersion string `json:"datasetVersion"`
 

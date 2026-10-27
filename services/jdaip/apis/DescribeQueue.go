@@ -112,6 +112,7 @@ type DescribeQueueResponse struct {
 }
 
 type DescribeQueueResult struct {
+    AccessRelation string `json:"accessRelation"`
     Id string `json:"id"`
     Name string `json:"name"`
     NodePoolId string `json:"nodePoolId"`

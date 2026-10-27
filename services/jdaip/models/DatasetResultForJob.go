@@ -25,6 +25,9 @@ type DatasetResultForJob struct {
     /* 数据集ID。示例：ds-11******ik (Optional) */
     DatasetId string `json:"datasetId"`
 
+    /* 数据集名字。 (Optional) */
+    DatasetName string `json:"datasetName"`
+
     /* 数据集版本。示例：v1 (Optional) */
     DatasetVersion string `json:"datasetVersion"`
 

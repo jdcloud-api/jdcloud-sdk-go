@@ -25,6 +25,9 @@ type PublicTechDatasetVersionDetail struct {
     /* 关联的数据工厂-数据集ID。 (Optional) */
     DssDatasetId string `json:"dssDatasetId"`
 
+    /* 数据集名称。 (Optional) */
+    DatasetName string `json:"datasetName"`
+
     /* 版本号 (Optional) */
     Version string `json:"version"`
 

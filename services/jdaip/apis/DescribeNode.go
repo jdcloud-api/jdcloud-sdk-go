@@ -125,6 +125,7 @@ type DescribeNodeResponse struct {
 }
 
 type DescribeNodeResult struct {
+    AccessRelation string `json:"accessRelation"`
     Id string `json:"id"`
     NodeType string `json:"nodeType"`
     ChargeType string `json:"chargeType"`

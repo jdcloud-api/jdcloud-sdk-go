@@ -32,6 +32,9 @@ type StopNodeRequest struct {
 
     /* 节点池ID  */
     NodePoolId string `json:"nodePoolId"`
+
+    /* 可选值：true/false，是否停止计费，默认值：false (Optional) */
+    StopCharge *string `json:"stopCharge"`
 }
 
 /*
@@ -64,11 +67,13 @@ func NewStopNodeRequest(
  * param regionId: Region ID，例如：cn-north-1 (Required)
  * param name: 节点名称 (Required)
  * param nodePoolId: 节点池ID (Required)
+ * param stopCharge: 可选值：true/false，是否停止计费，默认值：false (Optional)
  */
 func NewStopNodeRequestWithAllParams(
     regionId string,
     name string,
     nodePoolId string,
+    stopCharge *string,
 ) *StopNodeRequest {
 
     return &StopNodeRequest{
@@ -81,6 +86,7 @@ func NewStopNodeRequestWithAllParams(
         RegionId: regionId,
         Name: name,
         NodePoolId: nodePoolId,
+        StopCharge: stopCharge,
     }
 }
 
@@ -108,6 +114,10 @@ func (r *StopNodeRequest) SetName(name string) {
 /* param nodePoolId: 节点池ID(Required) */
 func (r *StopNodeRequest) SetNodePoolId(nodePoolId string) {
     r.NodePoolId = nodePoolId
+}
+/* param stopCharge: 可选值：true/false，是否停止计费，默认值：false(Optional) */
+func (r *StopNodeRequest) SetStopCharge(stopCharge string) {
+    r.StopCharge = &stopCharge
 }
 
 

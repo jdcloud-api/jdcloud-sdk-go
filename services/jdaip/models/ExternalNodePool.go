@@ -19,6 +19,9 @@ package models
 
 type ExternalNodePool struct {
 
+    /* 仅用于响应，创建和更新请求不应传入。owned表示拥有，managed表示管理，shared表示被授权共享；不代表写操作权限。共享响应仅返回基础信息，私有字段不返回。 (Optional) */
+    AccessRelation string `json:"accessRelation"`
+
     /* 节点池ID (Optional) */
     Id string `json:"id"`
 

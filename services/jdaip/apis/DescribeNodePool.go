@@ -122,6 +122,7 @@ type DescribeNodePoolResponse struct {
 }
 
 type DescribeNodePoolResult struct {
+    AccessRelation string `json:"accessRelation"`
     Id string `json:"id"`
     Name string `json:"name"`
     BizType string `json:"bizType"`
