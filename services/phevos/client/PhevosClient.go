@@ -40,7 +40,7 @@ func NewPhevosClient(credential *core.Credential) *PhevosClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "phevos",
-            Revision:    "1.0.1",
+            Revision:    "1.0.2",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
