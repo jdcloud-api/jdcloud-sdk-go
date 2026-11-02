@@ -22,8 +22,8 @@ type ClusterSpec struct {
     /* 集群名称(不能少于6字符不能超过20字符，除下划线外不能包含特殊符号)  */
     Name string `json:"name"`
 
-    /* 集群root用户密码(须包含大小写字母、数字及特殊字符其中三类，且不能少于8字符不能超过30字符)  */
-    Password string `json:"password"`
+    /* 集群root用户密码(须包含大小写字母、数字及特殊字符其中三类，且不能少于8字符不能超过30字符) (Optional) */
+    Password *string `json:"password"`
 
     /* 集群版本，默认版本为JMR2.0.0  */
     Version string `json:"version"`
@@ -37,19 +37,19 @@ type ClusterSpec struct {
     /* Master系统硬盘类型：ssd.gp1,ssd.io1和hdd.std1  */
     MasterSystemDiskType string `json:"masterSystemDiskType"`
 
-    /* Master系统硬盘大小，单位GB  */
+    /* Master系统硬盘大小，取值范围[40, 500]，单位GB。  */
     MasterSystemDiskVolume int `json:"masterSystemDiskVolume"`
 
-    /* Master系统硬盘iops，只有在硬盘类型是ssd.gp1,ssd.io1时，才需要有iops，200起步，步长为10 (Optional) */
+    /* Master系统硬盘iops，只有在硬盘类型是ssd.gp1,ssd.io1时，才需要有iops，详细取值说明见云硬盘相关文档 (Optional) */
     MasterSystemDiskIops *int `json:"masterSystemDiskIops"`
 
     /* Master数据盘类型：ssd.gp1,ssd.io1和hdd.std1  */
     MasterDiskType string `json:"masterDiskType"`
 
-    /* Master数据盘大小，单位GB  */
+    /* Master数据盘大小，取值范围[50, 32000]，单位GB  */
     MasterDiskVolume int `json:"masterDiskVolume"`
 
-    /* Master数据盘ipos，只有在硬盘类型是ssd.gp1,ssd.io1时，才需要有iops，200起步，步长为10 (Optional) */
+    /* Master数据盘ipos，只有在硬盘类型是ssd.gp1,ssd.io1时，才需要有iops，详细取值说明见云硬盘相关文档 (Optional) */
     MasterDiskIops *int `json:"masterDiskIops"`
 
     /* master节点规格  */
@@ -61,26 +61,83 @@ type ClusterSpec struct {
     /* Slave系统硬盘类型：ssd.gp1,ssd.io1和hdd.std1  */
     SlaveSystemDiskType string `json:"slaveSystemDiskType"`
 
-    /* Slave系统硬盘大小，单位GB  */
+    /* Slave系统硬盘大小，取值范围[40, 500]，单位GB  */
     SlaveSystemDiskVolume int `json:"slaveSystemDiskVolume"`
 
-    /* Slave系统硬盘iops，只有在硬盘类型是ssd.gp1,ssd.io1时，才需要有iops，200起步，步长为10 (Optional) */
+    /* Slave系统硬盘iops，只有在硬盘类型是ssd.gp1,ssd.io1时，才需要有iops，详细取值说明见云硬盘相关文档 (Optional) */
     SlaveSystemDiskIops *int `json:"slaveSystemDiskIops"`
 
     /* Slave数据盘类型：ssd.gp1,ssd.io1和hdd.std1  */
     SlaveDiskType string `json:"slaveDiskType"`
 
-    /* Slave数据盘大小，单位GB  */
+    /* Slave数据盘大小，取值范围[50, 32000]，单位GB  */
     SlaveDiskVolume int `json:"slaveDiskVolume"`
 
-    /* Slave数据盘ipos，只有在硬盘类型是ssd.gp1,ssd.io1时，才需要有iops，200起步，步长为10 (Optional) */
+    /* Slave数据盘数量，取值范围[1, 7]，单位个，默认1个 (Optional) */
+    SlaveDiskNumber *int `json:"slaveDiskNumber"`
+
+    /* Slave数据盘ipos，只有在硬盘类型是ssd.gp1,ssd.io1时，才需要有iops，详细取值说明见云硬盘相关文档 (Optional) */
     SlaveDiskIops *int `json:"slaveDiskIops"`
 
     /* slave节点规格  */
     CoreInstanceType string `json:"coreInstanceType"`
 
-    /* 关联JSS  */
-    JssFlag bool `json:"jssFlag"`
+    /* task节点数量 (Optional) */
+    TaskNodeCount *int `json:"taskNodeCount"`
+
+    /* task系统硬盘类型：ssd.gp1,ssd.io1和hdd.std1 (Optional) */
+    TaskSystemDiskType *string `json:"taskSystemDiskType"`
+
+    /* task系统硬盘大小，取值范围[40, 500]，单位GB (Optional) */
+    TaskSystemDiskVolume *int `json:"taskSystemDiskVolume"`
+
+    /* task系统硬盘iops，只有在硬盘类型是ssd.gp1,ssd.io1时，才需要有iops，详细取值说明见云硬盘相关文档 (Optional) */
+    TaskSystemDiskIops *int `json:"taskSystemDiskIops"`
+
+    /* task数据盘类型：ssd.gp1,ssd.io1和hdd.std1 (Optional) */
+    TaskDiskType *string `json:"taskDiskType"`
+
+    /* task数据盘大小，取值范围[50, 32000]，单位GB (Optional) */
+    TaskDiskVolume *int `json:"taskDiskVolume"`
+
+    /* task数据盘数量，取值范围[1, 7]，单位个，默认1个 (Optional) */
+    TaskDiskNumber *int `json:"taskDiskNumber"`
+
+    /* task数据盘ipos，只有在硬盘类型是ssd.gp1,ssd.io1时，才需要有iops，详细取值说明见云硬盘相关文档 (Optional) */
+    TaskDiskIops *int `json:"taskDiskIops"`
+
+    /* task节点规格 (Optional) */
+    TaskInstanceType *string `json:"taskInstanceType"`
+
+    /* coord节点数量 (Optional) */
+    CoordNodeCount *int `json:"coordNodeCount"`
+
+    /* coord系统硬盘类型：ssd.gp1,ssd.io1和hdd.std1 (Optional) */
+    CoordSystemDiskType *string `json:"coordSystemDiskType"`
+
+    /* coord系统硬盘大小，取值范围[40, 500]，单位GB (Optional) */
+    CoordSystemDiskVolume *int `json:"coordSystemDiskVolume"`
+
+    /* coord系统硬盘iops，只有在硬盘类型是ssd.gp1,ssd.io1时，才需要有iops，详细取值说明见云硬盘相关文档 (Optional) */
+    CoordSystemDiskIops *int `json:"coordSystemDiskIops"`
+
+    /* coord数据盘类型：ssd.gp1,ssd.io1和hdd.std1 (Optional) */
+    CoordDiskType *string `json:"coordDiskType"`
+
+    /* coord数据盘大小，取值范围[50, 32000]，单位GB (Optional) */
+    CoordDiskVolume *int `json:"coordDiskVolume"`
+
+    /* coord数据盘数量，取值范围[1, 7]，单位个，默认1个 (Optional) */
+    CoordDiskNumber *int `json:"coordDiskNumber"`
+
+    /* coord数据盘ipos，只有在硬盘类型是ssd.gp1,ssd.io1时，才需要有iops，详细取值说明见云硬盘相关文档 (Optional) */
+    CoordDiskIops *int `json:"coordDiskIops"`
+
+    /* coord节点规格 (Optional) */
+    CoordInstanceType *string `json:"coordInstanceType"`
+
+    /* 关联JSS，默认为false (Optional) */
+    JssFlag *bool `json:"jssFlag"`
 
     /* 数据中心，即regionId  */
     DataCenter string `json:"dataCenter"`
@@ -88,8 +145,14 @@ type ClusterSpec struct {
     /* 软件列表  */
     SoftwareList string `json:"softwareList"`
 
-    /* 集群是否为高可用，默认为高可用集群  */
+    /* 集群是否为高可用，默认为true，高可用集群  */
     HaFlag bool `json:"haFlag"`
+
+    /* 是否创建RDS作为Hive元数据库字段，默认为false (Optional) */
+    RdsMetaFlag *bool `json:"rdsMetaFlag"`
+
+    /* 集群是否支持Kerberos，默认为false (Optional) */
+    IsKerberos *bool `json:"isKerberos"`
 
     /* Vpc网络ID  */
     VpcId string `json:"vpcId"`
@@ -100,12 +163,21 @@ type ClusterSpec struct {
     /* 数据中心的可用区  */
     Az string `json:"az"`
 
-    /* 是否创建公网IP (Optional) */
+    /* 是否创建公网IP，默认为false (Optional) */
     CreateOuterIpFlag *bool `json:"createOuterIpFlag"`
 
-    /* 是否创建安全组 (Optional) */
+    /* 是否创建安全组，默认为false (Optional) */
     CreateSecurityGroupFlag *bool `json:"createSecurityGroupFlag"`
 
     /* 安全组ID (Optional) */
     SecurityGroupId *string `json:"securityGroupId"`
+
+    /* 自定义软件配置，JSON格式字符串 (Optional) */
+    UserDefinedConf *string `json:"userDefinedConf"`
+
+    /* 集群使用密钥创建的密钥名称 (Optional) */
+    SshKeyName *string `json:"sshKeyName"`
+
+    /* 集群创建的Task所属的节点组的规格和扩容节点数量信息 (Optional) */
+    TaskNodesByGroup []ClusterNode `json:"taskNodesByGroup"`
 }

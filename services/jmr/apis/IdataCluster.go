@@ -89,11 +89,11 @@ func NewIdataClusterRequestWithoutParam() *IdataClusterRequest {
 func (r *IdataClusterRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param dataCenter: 地域信息(Optional) */
 func (r *IdataClusterRequest) SetDataCenter(dataCenter string) {
     r.DataCenter = &dataCenter
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

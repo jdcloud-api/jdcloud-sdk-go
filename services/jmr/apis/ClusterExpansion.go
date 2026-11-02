@@ -101,17 +101,16 @@ func NewClusterExpansionRequestWithoutParam() *ClusterExpansionRequest {
 func (r *ClusterExpansionRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param clusterExpansion: 描述集群扩容信息(Required) */
 func (r *ClusterExpansionRequest) SetClusterExpansion(clusterExpansion *jmr.ClusterExpansion) {
     r.ClusterExpansion = clusterExpansion
 }
-
 /* param clientToken: 用于保证请求的幂等性。由客户端生成，长度不能超过64个字符。
 (Optional) */
 func (r *ClusterExpansionRequest) SetClientToken(clientToken string) {
     r.ClientToken = &clientToken
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
@@ -127,4 +126,6 @@ type ClusterExpansionResponse struct {
 
 type ClusterExpansionResult struct {
     Status bool `json:"status"`
+    ClusterId string `json:"clusterId"`
+    Message string `json:"message"`
 }

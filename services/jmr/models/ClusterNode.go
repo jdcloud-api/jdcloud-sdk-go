@@ -20,56 +20,74 @@ package models
 type ClusterNode struct {
 
     /* 节点ID (Optional) */
-    ServerId string `json:"serverId"`
+    ServerId *string `json:"serverId"`
 
     /* 节点实例信息 (Optional) */
-    InstanceInfo string `json:"instanceInfo"`
+    InstanceInfo *string `json:"instanceInfo"`
 
     /* 节点主机名称 (Optional) */
-    NodeName string `json:"nodeName"`
+    NodeName *string `json:"nodeName"`
 
     /* 节点系统盘类型 (Optional) */
-    NodeSystemDiskType string `json:"nodeSystemDiskType"`
+    NodeSystemDiskType *string `json:"nodeSystemDiskType"`
 
     /* 节点实例类型 (Optional) */
-    InstanceType string `json:"instanceType"`
+    InstanceType *string `json:"instanceType"`
 
     /* 节点运行状态 (Optional) */
-    NodeStatus string `json:"nodeStatus"`
+    NodeStatus *string `json:"nodeStatus"`
 
     /* 节点数据盘类型 (Optional) */
-    NodeDiskType string `json:"nodeDiskType"`
+    NodeDiskType *string `json:"nodeDiskType"`
 
-    /* 节点类型，MASTER或者SLAVE (Optional) */
-    NodeType string `json:"nodeType"`
+    /* 节点类型，MASTER，Core，Task，Edge (Optional) */
+    NodeType *string `json:"nodeType"`
 
     /* 节点外网IP (Optional) */
-    OuterIp string `json:"outerIp"`
+    OuterIp *string `json:"outerIp"`
 
     /* 节点内网IP (Optional) */
-    InnerIp string `json:"innerIp"`
+    InnerIp *string `json:"innerIp"`
 
     /* 节点系统盘大小(GB) (Optional) */
-    NodeSystemDiskVolume int `json:"nodeSystemDiskVolume"`
+    NodeSystemDiskVolume *int `json:"nodeSystemDiskVolume"`
 
     /* 节点数据盘大小(GB) (Optional) */
-    NodeDiskVolume int `json:"nodeDiskVolume"`
+    NodeDiskVolume *int `json:"nodeDiskVolume"`
+
+    /* 节点数据盘数量(个) (Optional) */
+    NodeDiskNumber *int `json:"nodeDiskNumber"`
 
     /* 信息 (Optional) */
-    Msg string `json:"msg"`
+    Msg *string `json:"msg"`
 
     /* 节点系统信息 (Optional) */
-    NodeSystemInfo string `json:"nodeSystemInfo"`
+    NodeSystemInfo *string `json:"nodeSystemInfo"`
 
     /* 节点硬盘类型 (Optional) */
-    NodeDiskCategory string `json:"nodeDiskCategory"`
+    NodeDiskCategory *string `json:"nodeDiskCategory"`
 
     /* 节点系统盘类型 (Optional) */
-    NodeSystemDiskCategory string `json:"nodeSystemDiskCategory"`
+    NodeSystemDiskCategory *string `json:"nodeSystemDiskCategory"`
 
     /* 节点数量 (Optional) */
-    NodeCoreNum int `json:"nodeCoreNum"`
+    NodeCoreNum *int `json:"nodeCoreNum"`
 
     /* 节点内存数量 (Optional) */
-    NodeMemoryNum int `json:"nodeMemoryNum"`
+    NodeMemoryNum *int `json:"nodeMemoryNum"`
+
+    /* Task节点的节点组ID (Optional) */
+    ConfigGroupId *string `json:"configGroupId"`
+
+    /* Task节点的节点组名称 (Optional) */
+    ConfigGroupName *string `json:"configGroupName"`
+
+    /* 节点数量(个) (Optional) */
+    NodeNumber *int `json:"nodeNumber"`
+
+    /* 节点系统盘IOPS (Optional) */
+    NodeSystemDiskIops *int `json:"nodeSystemDiskIops"`
+
+    /* 节点数据盘IOPS (Optional) */
+    NodeDiskIops *int `json:"nodeDiskIops"`
 }

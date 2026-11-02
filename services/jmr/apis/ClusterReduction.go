@@ -101,17 +101,16 @@ func NewClusterReductionRequestWithoutParam() *ClusterReductionRequest {
 func (r *ClusterReductionRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param clusterReduction: 描述集群缩容信息(Required) */
 func (r *ClusterReductionRequest) SetClusterReduction(clusterReduction *jmr.ClusterReduction) {
     r.ClusterReduction = clusterReduction
 }
-
 /* param clientToken: 用于保证请求的幂等性。由客户端生成，长度不能超过64个字符。
 (Optional) */
 func (r *ClusterReductionRequest) SetClientToken(clientToken string) {
     r.ClientToken = &clientToken
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
@@ -127,4 +126,6 @@ type ClusterReductionResponse struct {
 
 type ClusterReductionResult struct {
     Status bool `json:"status"`
+    ClusterId string `json:"clusterId"`
+    Message string `json:"message"`
 }

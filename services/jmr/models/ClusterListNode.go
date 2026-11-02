@@ -41,7 +41,7 @@ type ClusterListNode struct {
     ErrorMessage string `json:"errorMessage"`
 
     /* 集群创建时间 (Optional) */
-    CreateTime string `json:"createTime"`
+    CreateTime int `json:"createTime"`
 
     /* 集群收费类型 (Optional) */
     PayType string `json:"payType"`
@@ -51,4 +51,10 @@ type ClusterListNode struct {
 
     /* 公网Ip (Optional) */
     OuterIp string `json:"outerIp"`
+
+    /* 控制方式，取值v1或者v2 (Optional) */
+    ControlMethod string `json:"controlMethod"`
+
+    /* 节点类型汇总信息 (Optional) */
+    NodeTypeSummary string `json:"nodeTypeSummary"`
 }

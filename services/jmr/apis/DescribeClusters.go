@@ -19,6 +19,7 @@ package apis
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
     jmr "github.com/jdcloud-api/jdcloud-sdk-go/services/jmr/models"
+    common "github.com/jdcloud-api/jdcloud-sdk-go/services/common/models"
 )
 
 type DescribeClustersRequest struct {
@@ -45,6 +46,17 @@ type DescribeClustersRequest struct {
 
     /* 每页数目，默认为10 (Optional) */
     PageSize *int `json:"pageSize"`
+
+    /* 过滤参数，多个过滤参数之间的关系为“与”(and)
+支持以下属性的过滤：
+clusterId, 支持operator选项：eq
+clusterName, 支持operator选项：eq, like
+status, 支持operator选项：eq
+ (Optional) */
+    Filters []common.Filter `json:"filters"`
+
+    /* 资源标签 (Optional) */
+    TagFilters []common.TagFilter `json:"tagFilters"`
 }
 
 /*
@@ -75,6 +87,13 @@ func NewDescribeClustersRequest(
  * param orderBy: 排序，比如 id desc (Optional)
  * param pageNum: 页数，默认为1 (Optional)
  * param pageSize: 每页数目，默认为10 (Optional)
+ * param filters: 过滤参数，多个过滤参数之间的关系为“与”(and)
+支持以下属性的过滤：
+clusterId, 支持operator选项：eq
+clusterName, 支持operator选项：eq, like
+status, 支持operator选项：eq
+ (Optional)
+ * param tagFilters: 资源标签 (Optional)
  */
 func NewDescribeClustersRequestWithAllParams(
     regionId string,
@@ -84,6 +103,8 @@ func NewDescribeClustersRequestWithAllParams(
     orderBy *string,
     pageNum *int,
     pageSize *int,
+    filters []common.Filter,
+    tagFilters []common.TagFilter,
 ) *DescribeClustersRequest {
 
     return &DescribeClustersRequest{
@@ -100,6 +121,8 @@ func NewDescribeClustersRequestWithAllParams(
         OrderBy: orderBy,
         PageNum: pageNum,
         PageSize: pageSize,
+        Filters: filters,
+        TagFilters: tagFilters,
     }
 }
 
@@ -120,36 +143,44 @@ func NewDescribeClustersRequestWithoutParam() *DescribeClustersRequest {
 func (r *DescribeClustersRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param dataCenter: 地域(Optional) */
 func (r *DescribeClustersRequest) SetDataCenter(dataCenter string) {
     r.DataCenter = &dataCenter
 }
-
 /* param status: 集群状态，CREATING，RUNNING，RELEASED，FAILED等(Optional) */
 func (r *DescribeClustersRequest) SetStatus(status string) {
     r.Status = &status
 }
-
 /* param clusterName: 集群名称(Optional) */
 func (r *DescribeClustersRequest) SetClusterName(clusterName string) {
     r.ClusterName = &clusterName
 }
-
 /* param orderBy: 排序，比如 id desc(Optional) */
 func (r *DescribeClustersRequest) SetOrderBy(orderBy string) {
     r.OrderBy = &orderBy
 }
-
 /* param pageNum: 页数，默认为1(Optional) */
 func (r *DescribeClustersRequest) SetPageNum(pageNum int) {
     r.PageNum = &pageNum
 }
-
 /* param pageSize: 每页数目，默认为10(Optional) */
 func (r *DescribeClustersRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
+/* param filters: 过滤参数，多个过滤参数之间的关系为“与”(and)
+支持以下属性的过滤：
+clusterId, 支持operator选项：eq
+clusterName, 支持operator选项：eq, like
+status, 支持operator选项：eq
+(Optional) */
+func (r *DescribeClustersRequest) SetFilters(filters []common.Filter) {
+    r.Filters = filters
+}
+/* param tagFilters: 资源标签(Optional) */
+func (r *DescribeClustersRequest) SetTagFilters(tagFilters []common.TagFilter) {
+    r.TagFilters = tagFilters
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string

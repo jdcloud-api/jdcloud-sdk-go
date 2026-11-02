@@ -22,9 +22,12 @@ type ClusterReduction struct {
     /* 集群ID  */
     ClusterId string `json:"clusterId"`
 
-    /* 保留的节点个数 (Optional) */
-    ReserveNum *string `json:"reserveNum"`
+    /* 保留的节点个数  */
+    ReserveNum string `json:"reserveNum"`
 
-    /* 缩容节点类型。 仅支持 Task ，即计算节点 (Optional) */
+    /* 缩容Task或Edge节点。默认为Task节点 (Optional) */
     NodeType *string `json:"nodeType"`
+
+    /* 缩容Task所属的节点组ID (Optional) */
+    ConfigGroupId *string `json:"configGroupId"`
 }
