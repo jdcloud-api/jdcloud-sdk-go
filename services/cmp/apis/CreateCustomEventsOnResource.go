@@ -30,9 +30,25 @@ type CreateCustomEventsOnResourceRequest struct {
     /* 资源ID（实例ID）  */
     ResourceId string `json:"resourceId"`
 
-    /* 描述信息，最长256个字符
+    /* 故障描述，最长256个字符；必填且不能仅包含空白字符。
  (Optional) */
     Description *string `json:"description"`
+
+    /* 故障复现命令，最多2048个UTF-8字节；必填且不能仅包含空白字符。
+仅保存和展示提报原文，不执行命令。
+ (Optional) */
+    ReproductionCommand *string `json:"reproductionCommand"`
+
+    /* 故障复现命令输出，最多16384个UTF-8字节；必填且不能仅包含空白字符。
+按原文保存，超出长度限制时拒绝，不截断。
+ (Optional) */
+    CommandOutput *string `json:"commandOutput"`
+
+    /* 是否允许本次迁移丢弃本地数据盘，缺省或false保持原迁移行为，仅显式true时允许弃盘。
+true仅支持云系统盘VM实例，保留系统盘和云数据盘，不支持本地系统盘。
+不要求实例实际存在本地数据盘，纯云盘或无数据盘实例满足上述条件时也可传true。
+ (Optional) */
+    DiscardLocalDataDisk *bool `json:"discardLocalDataDisk"`
 }
 
 /*
@@ -61,13 +77,26 @@ func NewCreateCustomEventsOnResourceRequest(
 /*
  * param regionId: 地域ID。 (Required)
  * param resourceId: 资源ID（实例ID） (Required)
- * param description: 描述信息，最长256个字符
+ * param description: 故障描述，最长256个字符；必填且不能仅包含空白字符。
+ (Optional)
+ * param reproductionCommand: 故障复现命令，最多2048个UTF-8字节；必填且不能仅包含空白字符。
+仅保存和展示提报原文，不执行命令。
+ (Optional)
+ * param commandOutput: 故障复现命令输出，最多16384个UTF-8字节；必填且不能仅包含空白字符。
+按原文保存，超出长度限制时拒绝，不截断。
+ (Optional)
+ * param discardLocalDataDisk: 是否允许本次迁移丢弃本地数据盘，缺省或false保持原迁移行为，仅显式true时允许弃盘。
+true仅支持云系统盘VM实例，保留系统盘和云数据盘，不支持本地系统盘。
+不要求实例实际存在本地数据盘，纯云盘或无数据盘实例满足上述条件时也可传true。
  (Optional)
  */
 func NewCreateCustomEventsOnResourceRequestWithAllParams(
     regionId string,
     resourceId string,
     description *string,
+    reproductionCommand *string,
+    commandOutput *string,
+    discardLocalDataDisk *bool,
 ) *CreateCustomEventsOnResourceRequest {
 
     return &CreateCustomEventsOnResourceRequest{
@@ -80,6 +109,9 @@ func NewCreateCustomEventsOnResourceRequestWithAllParams(
         RegionId: regionId,
         ResourceId: resourceId,
         Description: description,
+        ReproductionCommand: reproductionCommand,
+        CommandOutput: commandOutput,
+        DiscardLocalDataDisk: discardLocalDataDisk,
     }
 }
 
@@ -104,10 +136,29 @@ func (r *CreateCustomEventsOnResourceRequest) SetRegionId(regionId string) {
 func (r *CreateCustomEventsOnResourceRequest) SetResourceId(resourceId string) {
     r.ResourceId = resourceId
 }
-/* param description: 描述信息，最长256个字符
+/* param description: 故障描述，最长256个字符；必填且不能仅包含空白字符。
 (Optional) */
 func (r *CreateCustomEventsOnResourceRequest) SetDescription(description string) {
     r.Description = &description
+}
+/* param reproductionCommand: 故障复现命令，最多2048个UTF-8字节；必填且不能仅包含空白字符。
+仅保存和展示提报原文，不执行命令。
+(Optional) */
+func (r *CreateCustomEventsOnResourceRequest) SetReproductionCommand(reproductionCommand string) {
+    r.ReproductionCommand = &reproductionCommand
+}
+/* param commandOutput: 故障复现命令输出，最多16384个UTF-8字节；必填且不能仅包含空白字符。
+按原文保存，超出长度限制时拒绝，不截断。
+(Optional) */
+func (r *CreateCustomEventsOnResourceRequest) SetCommandOutput(commandOutput string) {
+    r.CommandOutput = &commandOutput
+}
+/* param discardLocalDataDisk: 是否允许本次迁移丢弃本地数据盘，缺省或false保持原迁移行为，仅显式true时允许弃盘。
+true仅支持云系统盘VM实例，保留系统盘和云数据盘，不支持本地系统盘。
+不要求实例实际存在本地数据盘，纯云盘或无数据盘实例满足上述条件时也可传true。
+(Optional) */
+func (r *CreateCustomEventsOnResourceRequest) SetDiscardLocalDataDisk(discardLocalDataDisk bool) {
+    r.DiscardLocalDataDisk = &discardLocalDataDisk
 }
 
 
