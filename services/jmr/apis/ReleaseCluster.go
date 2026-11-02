@@ -92,11 +92,11 @@ func NewReleaseClusterRequestWithoutParam() *ReleaseClusterRequest {
 func (r *ReleaseClusterRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param clusterId: 集群ID(Required) */
 func (r *ReleaseClusterRequest) SetClusterId(clusterId string) {
     r.ClusterId = clusterId
 }
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
@@ -112,4 +112,6 @@ type ReleaseClusterResponse struct {
 
 type ReleaseClusterResult struct {
     Status bool `json:"status"`
+    ClusterId string `json:"clusterId"`
+    Message string `json:"message"`
 }

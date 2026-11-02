@@ -40,7 +40,7 @@ func NewJmrClient(credential *core.Credential) *JmrClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "jmr",
-            Revision:    "1.1.6",
+            Revision:    "1.1.16",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -77,8 +77,10 @@ func (c *JmrClient) GetJmrVersionList(request *jmr.GetJmrVersionListRequest) (*j
     return jdResp, err
 }
 
-/* 查询JMR的监控模板信息 */
-func (c *JmrClient) MonitorLabelList(request *jmr.MonitorLabelListRequest) (*jmr.MonitorLabelListResponse, error) {
+/* 获取指定数据库的详情，包括 location、owner、parameters 等。
+仅支持 v2 集群（controlMethod=ambari）。
+ */
+func (c *JmrClient) GetDatabase(request *jmr.GetDatabaseRequest) (*jmr.GetDatabaseResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -87,7 +89,7 @@ func (c *JmrClient) MonitorLabelList(request *jmr.MonitorLabelListRequest) (*jmr
         return nil, err
     }
 
-    jdResp := &jmr.MonitorLabelListResponse{}
+    jdResp := &jmr.GetDatabaseResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -97,8 +99,10 @@ func (c *JmrClient) MonitorLabelList(request *jmr.MonitorLabelListRequest) (*jmr
     return jdResp, err
 }
 
-/* 缩容集群 */
-func (c *JmrClient) ClusterReduction(request *jmr.ClusterReductionRequest) (*jmr.ClusterReductionResponse, error) {
+/* 查询伸缩记录，只保留最近 60 天。记录包含自动触发、手工触发、被拒绝与影子模式（DRY_RUN）
+的全部活动，status 为 REJECTED 的记录 rejectReason 说明未执行的原因。
+ */
+func (c *JmrClient) DescribeScalingActivities(request *jmr.DescribeScalingActivitiesRequest) (*jmr.DescribeScalingActivitiesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -107,7 +111,7 @@ func (c *JmrClient) ClusterReduction(request *jmr.ClusterReductionRequest) (*jmr
         return nil, err
     }
 
-    jdResp := &jmr.ClusterReductionResponse{}
+    jdResp := &jmr.DescribeScalingActivitiesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -138,9 +142,10 @@ func (c *JmrClient) DescribeClusters(request *jmr.DescribeClustersRequest) (*jmr
     return jdResp, err
 }
 
-/* 释放集群
+/* 按查询条件导出伸缩记录 CSV，最多导出 10000 行，超出部分截断。
+CSV 文本通过 data.content 返回，由调用方自行落盘（接口不返回二进制流）。
  */
-func (c *JmrClient) ReleaseCluster(request *jmr.ReleaseClusterRequest) (*jmr.ReleaseClusterResponse, error) {
+func (c *JmrClient) ExportScalingActivities(request *jmr.ExportScalingActivitiesRequest) (*jmr.ExportScalingActivitiesResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -149,7 +154,7 @@ func (c *JmrClient) ReleaseCluster(request *jmr.ReleaseClusterRequest) (*jmr.Rel
         return nil, err
     }
 
-    jdResp := &jmr.ReleaseClusterResponse{}
+    jdResp := &jmr.ExportScalingActivitiesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -179,6 +184,251 @@ func (c *JmrClient) IdataCluster(request *jmr.IdataClusterRequest) (*jmr.IdataCl
     return jdResp, err
 }
 
+/* 扩容集群 */
+func (c *JmrClient) ClusterExpansion(request *jmr.ClusterExpansionRequest) (*jmr.ClusterExpansionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.ClusterExpansionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询单个伸缩组详情，用于编辑回显。version 是乐观锁版本号，修改时必须原样回传。
+ */
+func (c *JmrClient) DescribeScalingGroup(request *jmr.DescribeScalingGroupRequest) (*jmr.DescribeScalingGroupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.DescribeScalingGroupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询集群下可作为伸缩对象的节点组（Task 节点组）及其是否支持伸缩。
+scalable=false 的节点组不可配置伸缩，reason 给出原因，调用方据此置灰。
+ */
+func (c *JmrClient) DescribeScalableNodeGroups(request *jmr.DescribeScalableNodeGroupsRequest) (*jmr.DescribeScalableNodeGroupsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.DescribeScalableNodeGroupsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取指定表的详情，包括列定义、存储描述符、表参数等。
+仅支持 v2 集群（controlMethod=ambari）。
+ */
+func (c *JmrClient) GetTable(request *jmr.GetTableRequest) (*jmr.GetTableResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.GetTableResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改伸缩组配置。注意这是**全量替换**语义：请求体里没有的字段按默认值/空处理，
+扩容与缩容子规则按提交内容整组重建（不是增量修改）。
+因此编辑前必须先调 describeScalingGroup 取到完整配置，只改需要改的字段后再整体提交；
+启用/停用（enable）也走本接口整体提交，没有单独的启停接口。
+version 必须与 describeScalingGroup 返回的一致，不一致表示配置已被他人修改，会报错。
+ */
+func (c *JmrClient) ModifyScalingGroup(request *jmr.ModifyScalingGroupRequest) (*jmr.ModifyScalingGroupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.ModifyScalingGroupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 列出指定表的分区名列表，按 maxParts 限量返回。
+仅支持 v2 集群（controlMethod=ambari）。
+ */
+func (c *JmrClient) ListPartitions(request *jmr.ListPartitionsRequest) (*jmr.ListPartitionsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.ListPartitionsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 获取指定集群某个服务当前生效的配置文件内容，以 properties Map 形式返回。
+仅支持 v2 集群（controlMethod=ambari）。
+ */
+func (c *JmrClient) DescribeClusterConfigs(request *jmr.DescribeClusterConfigsRequest) (*jmr.DescribeClusterConfigsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.DescribeClusterConfigsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 列出指定数据库下的所有表名，支持按通配符 pattern 过滤。
+仅支持 v2 集群（controlMethod=ambari）。
+ */
+func (c *JmrClient) ListTables(request *jmr.ListTablesRequest) (*jmr.ListTablesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.ListTablesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建数据库，执行传入的 CREATE DATABASE 语句。
+仅支持 v2 集群（controlMethod=ambari）。
+ */
+func (c *JmrClient) CreateDatabase(request *jmr.CreateDatabaseRequest) (*jmr.CreateDatabaseResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.CreateDatabaseResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 在指定集群的 OpenLDAP 上创建用户，并加入 hadoop 组。
+仅支持 v2 集群（controlMethod=ambari），且集群需安装 OpenLDAP。
+uidNumber 取 ou=people 现有最大 +1，gidNumber=1000，homeDirectory=/home/users/{userName}。
+ */
+func (c *JmrClient) CreateOpenLdapUser(request *jmr.CreateOpenLdapUserRequest) (*jmr.CreateOpenLdapUserResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.CreateOpenLdapUserResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 为指定 Task 节点组创建伸缩组，扩容/缩容子规则一次性提交。
+节点组必须支持弹性伸缩（可先调 describeScalableNodeGroups 查询）。
+enableScaleOut / enableScaleIn 为 PRD 的两个开关：开关关闭时对应方向的子规则不生效。
+dryRun 为影子模式（只记录活动不真正伸缩），上线灰度期使用。
+ */
+func (c *JmrClient) CreateScalingGroup(request *jmr.CreateScalingGroupRequest) (*jmr.CreateScalingGroupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.CreateScalingGroupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 获取对应版本的软件清单信息 */
 func (c *JmrClient) GetSoftwareInfo(request *jmr.GetSoftwareInfoRequest) (*jmr.GetSoftwareInfoResponse, error) {
     if request == nil {
@@ -199,8 +449,9 @@ func (c *JmrClient) GetSoftwareInfo(request *jmr.GetSoftwareInfoRequest) (*jmr.G
     return jdResp, err
 }
 
-/* 扩容集群 */
-func (c *JmrClient) ClusterExpansion(request *jmr.ClusterExpansionRequest) (*jmr.ClusterExpansionResponse, error) {
+/* 查询一条伸缩活动的执行日志，包含触发时的指标快照与执行过程输出，用于「查看日志」。
+ */
+func (c *JmrClient) DescribeScalingActivityLog(request *jmr.DescribeScalingActivityLogRequest) (*jmr.DescribeScalingActivityLogResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
     }
@@ -209,7 +460,7 @@ func (c *JmrClient) ClusterExpansion(request *jmr.ClusterExpansionRequest) (*jmr
         return nil, err
     }
 
-    jdResp := &jmr.ClusterExpansionResponse{}
+    jdResp := &jmr.DescribeScalingActivityLogResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -239,6 +490,159 @@ func (c *JmrClient) CreateCluster(request *jmr.CreateClusterRequest) (*jmr.Creat
     return jdResp, err
 }
 
+/* 删除数据库，执行传入的 DROP DATABASE 语句。
+仅支持 v2 集群（controlMethod=ambari）。
+ */
+func (c *JmrClient) DropDatabase(request *jmr.DropDatabaseRequest) (*jmr.DropDatabaseResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.DropDatabaseResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除伸缩组配置（含扩容/缩容子规则），删除后该节点组不再自动伸缩。
+已经在执行中的伸缩活动不受影响，会继续跑完。
+ */
+func (c *JmrClient) DeleteScalingGroup(request *jmr.DeleteScalingGroupRequest) (*jmr.DeleteScalingGroupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.DeleteScalingGroupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询集群操作(比如:扩容缩容)的进度信息
+ */
+func (c *JmrClient) DescribeProgressStatus(request *jmr.DescribeProgressStatusRequest) (*jmr.DescribeProgressStatusResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.DescribeProgressStatusResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 对指定主体（用户/用户组）在指定库表上授权。
+主体需已同步到 Ranger（否则报错）。table 为空时表示数据库级授权。
+仅支持 v2 集群（controlMethod=ambari），且集群需安装 Ranger。
+ */
+func (c *JmrClient) GrantHivePermission(request *jmr.GrantHivePermissionRequest) (*jmr.GrantHivePermissionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.GrantHivePermissionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询集群下已配置的伸缩组列表（每个 Task 节点组最多一个伸缩组，子规则随组返回）。
+支持按节点组过滤与分页。
+ */
+func (c *JmrClient) DescribeScalingGroups(request *jmr.DescribeScalingGroupsRequest) (*jmr.DescribeScalingGroupsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.DescribeScalingGroupsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 释放集群
+ */
+func (c *JmrClient) ReleaseCluster(request *jmr.ReleaseClusterRequest) (*jmr.ReleaseClusterResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.ReleaseClusterResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 列出集群下所有数据库名。
+仅支持 v2 集群（controlMethod=ambari）。
+ */
+func (c *JmrClient) ListDatabases(request *jmr.ListDatabasesRequest) (*jmr.ListDatabasesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.ListDatabasesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 查询指定集群的详细信息
  */
 func (c *JmrClient) DescribeCluster(request *jmr.DescribeClusterRequest) (*jmr.DescribeClusterResponse, error) {
@@ -251,6 +655,207 @@ func (c *JmrClient) DescribeCluster(request *jmr.DescribeClusterRequest) (*jmr.D
     }
 
     jdResp := &jmr.DescribeClusterResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建表，执行传入的 CREATE TABLE 语句。
+仅支持 v2 集群（controlMethod=ambari）。
+ */
+func (c *JmrClient) CreateTable(request *jmr.CreateTableRequest) (*jmr.CreateTableResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.CreateTableResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改表，执行传入的 ALTER TABLE 语句（如重命名、增改列、设置表属性等）。
+仅支持 v2 集群（controlMethod=ambari）。
+ */
+func (c *JmrClient) AlterTable(request *jmr.AlterTableRequest) (*jmr.AlterTableResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.AlterTableResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除表，执行传入的 DROP TABLE 语句。
+仅支持 v2 集群（controlMethod=ambari）。
+ */
+func (c *JmrClient) DropTable(request *jmr.DropTableRequest) (*jmr.DropTableResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.DropTableResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 回收指定主体（用户/用户组）在指定库表上的权限。
+privileges 为空时表示回收该主体在该资源上的全部权限。
+仅支持 v2 集群（controlMethod=ambari），且集群需安装 Ranger。
+ */
+func (c *JmrClient) RevokeHivePermission(request *jmr.RevokeHivePermissionRequest) (*jmr.RevokeHivePermissionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.RevokeHivePermissionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 缩容集群 */
+func (c *JmrClient) ClusterReduction(request *jmr.ClusterReductionRequest) (*jmr.ClusterReductionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.ClusterReductionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询可用于伸缩规则的指标字典，是规则里 conditions[].metricKey 的取值来源。
+不依赖具体集群，clusterId 只用于路径统一。
+ */
+func (c *JmrClient) DescribeScalingMetrics(request *jmr.DescribeScalingMetricsRequest) (*jmr.DescribeScalingMetricsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.DescribeScalingMetricsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询集群下 Hive 库表权限，支持按数据库、表、主体类型、主体名称过滤。
+仅支持 v2 集群（controlMethod=ambari），且集群需安装 Ranger。
+ */
+func (c *JmrClient) ListHivePermissions(request *jmr.ListHivePermissionsRequest) (*jmr.ListHivePermissionsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.ListHivePermissionsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 把源节点组的伸缩配置复制到目标节点组，便于同类节点组之间复用。
+isCover=true 时覆盖目标节点组已有配置，否则目标节点组已有配置时报错。
+ */
+func (c *JmrClient) CopyScalingGroup(request *jmr.CopyScalingGroupRequest) (*jmr.CopyScalingGroupResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.CopyScalingGroupResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 手工触发一次伸缩，不依赖伸缩规则是否命中（规则中的冷却时间、日限、节点上下限仍然生效）。
+该节点组必须已配置伸缩组；targetNum 为期望的节点总数（不是增量）。
+被风控拦下时 status=false，message 为原因、data.rejectReason 为机器可读的原因码，
+可能的取值：GROUP_DISABLED / GROUP_SUSPENDED / CLUSTER_NOT_RUNNING / ACTIVITY_RUNNING /
+METRIC_UNAVAILABLE / METRIC_NOT_ENOUGH / IN_COOLDOWN / RULE_NOT_MATCH / OUT_OF_BOUND /
+DAILY_LIMIT / HARD_LIMIT / NO_STOCK / IDLE_NODE_NOT_ENOUGH / NODE_GROUP_EMPTY。
+ */
+func (c *JmrClient) ExecuteScalingManually(request *jmr.ExecuteScalingManuallyRequest) (*jmr.ExecuteScalingManuallyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &jmr.ExecuteScalingManuallyResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

@@ -22,9 +22,21 @@ type ClusterExpansion struct {
     /* 集群ID  */
     ClusterId string `json:"clusterId"`
 
-    /* 扩容节点个数  */
+    /* 扩容节点数量  */
     ExpansionNum string `json:"expansionNum"`
 
-    /* 扩容节点类型。 Task：计算节点，Core：存储和计算节点 (Optional) */
+    /* 扩容节点类型，默认为Core类型。 Task：计算节点，Core：存储和计算节点，Edge：边缘节点 (Optional) */
     NodeType *string `json:"nodeType"`
+
+    /* （已废弃）扩容节点规格，默认值为0。集群已有的Core，Task，Edge节点规格分别取值0，-1，-2。否则需为预置规格的id，取值>0 (Optional) */
+    ExpandTypeId *string `json:"expandTypeId"`
+
+    /* 扩容时选择的组件，默认为集群已有组件。逗号分割，举例 HDFS,YARN,HBASE (Optional) */
+    ExpandServices *string `json:"expandServices"`
+
+    /* 扩容节点所属的已有节点组ID (Optional) */
+    ConfigGroupId *string `json:"configGroupId"`
+
+    /* 扩容新建的节点组及节点信息 (Optional) */
+    TaskNodesByGroup []ClusterNode `json:"taskNodesByGroup"`
 }

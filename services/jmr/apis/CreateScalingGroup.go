@@ -21,7 +21,7 @@ import (
     jmr "github.com/jdcloud-api/jdcloud-sdk-go/services/jmr/models"
 )
 
-type MonitorLabelListRequest struct {
+type CreateScalingGroupRequest struct {
 
     core.JDCloudRequest
 
@@ -30,58 +30,67 @@ type MonitorLabelListRequest struct {
 
     /* 集群ID  */
     ClusterId string `json:"clusterId"`
+
+    /* 伸缩组配置（扩容/缩容子规则一次性提交）  */
+    ScalingGroup *jmr.ScalingGroupRequest `json:"scalingGroup"`
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param clusterId: 集群ID (Required)
+ * param scalingGroup: 伸缩组配置（扩容/缩容子规则一次性提交） (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
-func NewMonitorLabelListRequest(
+func NewCreateScalingGroupRequest(
     regionId string,
     clusterId string,
-) *MonitorLabelListRequest {
+    scalingGroup *jmr.ScalingGroupRequest,
+) *CreateScalingGroupRequest {
 
-	return &MonitorLabelListRequest{
+	return &CreateScalingGroupRequest{
         JDCloudRequest: core.JDCloudRequest{
-			URL:     "/regions/{regionId}/monitorLabelList/{clusterId}",
+			URL:     "/regions/{regionId}/clusters/{clusterId}/scalingGroups",
 			Method:  "POST",
 			Header:  nil,
 			Version: "v1",
 		},
         RegionId: regionId,
         ClusterId: clusterId,
+        ScalingGroup: scalingGroup,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
  * param clusterId: 集群ID (Required)
+ * param scalingGroup: 伸缩组配置（扩容/缩容子规则一次性提交） (Required)
  */
-func NewMonitorLabelListRequestWithAllParams(
+func NewCreateScalingGroupRequestWithAllParams(
     regionId string,
     clusterId string,
-) *MonitorLabelListRequest {
+    scalingGroup *jmr.ScalingGroupRequest,
+) *CreateScalingGroupRequest {
 
-    return &MonitorLabelListRequest{
+    return &CreateScalingGroupRequest{
         JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/monitorLabelList/{clusterId}",
+            URL:     "/regions/{regionId}/clusters/{clusterId}/scalingGroups",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
         },
         RegionId: regionId,
         ClusterId: clusterId,
+        ScalingGroup: scalingGroup,
     }
 }
 
 /* This constructor has better compatible ability when API parameters changed */
-func NewMonitorLabelListRequestWithoutParam() *MonitorLabelListRequest {
+func NewCreateScalingGroupRequestWithoutParam() *CreateScalingGroupRequest {
 
-    return &MonitorLabelListRequest{
+    return &CreateScalingGroupRequest{
             JDCloudRequest: core.JDCloudRequest{
-            URL:     "/regions/{regionId}/monitorLabelList/{clusterId}",
+            URL:     "/regions/{regionId}/clusters/{clusterId}/scalingGroups",
             Method:  "POST",
             Header:  nil,
             Version: "v1",
@@ -90,28 +99,33 @@ func NewMonitorLabelListRequestWithoutParam() *MonitorLabelListRequest {
 }
 
 /* param regionId: 地域ID(Required) */
-func (r *MonitorLabelListRequest) SetRegionId(regionId string) {
+func (r *CreateScalingGroupRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
 /* param clusterId: 集群ID(Required) */
-func (r *MonitorLabelListRequest) SetClusterId(clusterId string) {
+func (r *CreateScalingGroupRequest) SetClusterId(clusterId string) {
     r.ClusterId = clusterId
 }
+/* param scalingGroup: 伸缩组配置（扩容/缩容子规则一次性提交）(Required) */
+func (r *CreateScalingGroupRequest) SetScalingGroup(scalingGroup *jmr.ScalingGroupRequest) {
+    r.ScalingGroup = scalingGroup
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
-func (r MonitorLabelListRequest) GetRegionId() string {
+func (r CreateScalingGroupRequest) GetRegionId() string {
     return r.RegionId
 }
 
-type MonitorLabelListResponse struct {
+type CreateScalingGroupResponse struct {
     RequestID string `json:"requestId"`
     Error core.ErrorResponse `json:"error"`
-    Result MonitorLabelListResult `json:"result"`
+    Result CreateScalingGroupResult `json:"result"`
 }
 
-type MonitorLabelListResult struct {
-    Data []jmr.MonitorLabelDetail `json:"data"`
+type CreateScalingGroupResult struct {
     Status bool `json:"status"`
+    Message string `json:"message"`
+    Data interface{} `json:"data"`
 }

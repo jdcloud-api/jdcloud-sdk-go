@@ -58,7 +58,10 @@ type Cluster struct {
     /* 集群运行时间 (Optional) */
     Duration string `json:"duration"`
 
-    /* 集群节点个数 (Optional) */
+    /* 集群使用的RDS实例ID (Optional) */
+    RdsInstanceId string `json:"rdsInstanceId"`
+
+    /* 集群节点数量 (Optional) */
     NodeCount int `json:"nodeCount"`
 
     /* 集群节点信息 (Optional) */

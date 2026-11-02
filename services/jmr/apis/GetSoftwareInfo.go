@@ -28,18 +28,23 @@ type GetSoftwareInfoRequest struct {
     RegionId string `json:"regionId"`
 
     /* JMR软件版本号  */
-    Version string `json:"version"`
+    SoftVer string `json:"softVer"`
+
+    /* JMR的模板名称  */
+    Template string `json:"template"`
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param version: JMR软件版本号 (Required)
+ * param softVer: JMR软件版本号 (Required)
+ * param template: JMR的模板名称 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewGetSoftwareInfoRequest(
     regionId string,
-    version string,
+    softVer string,
+    template string,
 ) *GetSoftwareInfoRequest {
 
 	return &GetSoftwareInfoRequest{
@@ -50,17 +55,20 @@ func NewGetSoftwareInfoRequest(
 			Version: "v1",
 		},
         RegionId: regionId,
-        Version: version,
+        SoftVer: softVer,
+        Template: template,
 	}
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param version: JMR软件版本号 (Required)
+ * param softVer: JMR软件版本号 (Required)
+ * param template: JMR的模板名称 (Required)
  */
 func NewGetSoftwareInfoRequestWithAllParams(
     regionId string,
-    version string,
+    softVer string,
+    template string,
 ) *GetSoftwareInfoRequest {
 
     return &GetSoftwareInfoRequest{
@@ -71,7 +79,8 @@ func NewGetSoftwareInfoRequestWithAllParams(
             Version: "v1",
         },
         RegionId: regionId,
-        Version: version,
+        SoftVer: softVer,
+        Template: template,
     }
 }
 
@@ -92,11 +101,15 @@ func NewGetSoftwareInfoRequestWithoutParam() *GetSoftwareInfoRequest {
 func (r *GetSoftwareInfoRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-
-/* param version: JMR软件版本号(Required) */
-func (r *GetSoftwareInfoRequest) SetVersion(version string) {
-    r.Version = version
+/* param softVer: JMR软件版本号(Required) */
+func (r *GetSoftwareInfoRequest) SetSoftVer(softVer string) {
+    r.SoftVer = softVer
 }
+/* param template: JMR的模板名称(Required) */
+func (r *GetSoftwareInfoRequest) SetTemplate(template string) {
+    r.Template = template
+}
+
 
 // GetRegionId returns path parameter 'regionId' if exist,
 // otherwise return empty string
