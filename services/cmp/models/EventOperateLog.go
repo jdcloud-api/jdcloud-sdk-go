@@ -25,4 +25,16 @@ type EventOperateLog struct {
 
     /* 运维策略快照 (Optional) */
     MaintenancePolicySnapshot MaintenancePolicy `json:"maintenancePolicySnapshot"`
+
+    /* 创建事件时提报的故障描述，对应请求中的description，最长256个字符；
+ (Optional) */
+    FaultDescription string `json:"faultDescription"`
+
+    /* 创建事件时提报的故障复现命令原文，最多2048个UTF-8字节，仅保存和展示，不执行；
+ (Optional) */
+    ReproductionCommand string `json:"reproductionCommand"`
+
+    /* 创建事件时提报的故障复现命令输出原文，最多16384个UTF-8字节；
+ (Optional) */
+    CommandOutput string `json:"commandOutput"`
 }

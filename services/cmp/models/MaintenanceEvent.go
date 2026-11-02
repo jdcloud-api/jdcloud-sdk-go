@@ -58,6 +58,10 @@ type MaintenanceEvent struct {
  (Optional) */
     ResourceId string `json:"resourceId"`
 
+    /* 本次迁移是否允许丢弃本地数据盘，不包含系统盘和云数据盘；缺省或false表示未开启。
+ (Optional) */
+    DiscardLocalDataDisk bool `json:"discardLocalDataDisk"`
+
     /* 运维事件创建时间
  (Optional) */
     CreateTime string `json:"createTime"`

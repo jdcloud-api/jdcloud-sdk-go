@@ -40,7 +40,7 @@ func NewCmpClient(credential *core.Credential) *CmpClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "cmp",
-            Revision:    "0.2.2",
+            Revision:    "0.2.3",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
