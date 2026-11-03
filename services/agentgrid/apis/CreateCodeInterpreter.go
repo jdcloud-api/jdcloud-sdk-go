@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    agentgrid "github.com/jdcloud-api/jdcloud-sdk-go/services/agentgrid/models"
 )
 
 type CreateCodeInterpreterRequest struct {
@@ -33,6 +34,15 @@ type CreateCodeInterpreterRequest struct {
     /* Code Interpreter 描述信息。 (Optional) */
     Description *string `json:"description"`
 
+    /* Code Interpreter 绑定的实例角色 (Optional) */
+    RoleName *string `json:"roleName"`
+
+    /* Code Interpreter 资源配置；不指定时使用 1 vCPU、2 GiB 内存。 (Optional) */
+    ResourceConfiguration *agentgrid.ResourceConfiguration `json:"resourceConfiguration"`
+
+    /* Code Interpreter 云日志投递配置。不传或 enabled=false 时不开启日志投递。 (Optional) */
+    LogConfiguration *agentgrid.LogConfiguration `json:"logConfiguration"`
+
     /* Code Interpreter 鉴权方式，当前仅支持 `API_KEY` (Optional) */
     AuthenticationType *string `json:"authenticationType"`
 
@@ -41,6 +51,12 @@ type CreateCodeInterpreterRequest struct {
 
     /* Code Interpreter 网络配置类型。当前支持 `public` 和 `sandbox`。  */
     NetworkConfiguration string `json:"networkConfiguration"`
+
+    /* Code Interpreter 用户标签配置。 (Optional) */
+    Tags []agentgrid.Tag `json:"tags"`
+
+    /* Code Interpreter 所属资源组 ID；不指定时使用默认资源组。 (Optional) */
+    ResourceGroupId *string `json:"resourceGroupId"`
 }
 
 /*
@@ -73,17 +89,27 @@ func NewCreateCodeInterpreterRequest(
  * param regionId: Region ID (Required)
  * param name: Code Interpreter 名称。长度为 1~32 个字符，可包含中文、数字、大小写字母、下划线、中划线或点。 (Required)
  * param description: Code Interpreter 描述信息。 (Optional)
+ * param roleName: Code Interpreter 绑定的实例角色 (Optional)
+ * param resourceConfiguration: Code Interpreter 资源配置；不指定时使用 1 vCPU、2 GiB 内存。 (Optional)
+ * param logConfiguration: Code Interpreter 云日志投递配置。不传或 enabled=false 时不开启日志投递。 (Optional)
  * param authenticationType: Code Interpreter 鉴权方式，当前仅支持 `API_KEY` (Optional)
  * param clientToken: 用于保证请求幂等性。 (Optional)
  * param networkConfiguration: Code Interpreter 网络配置类型。当前支持 `public` 和 `sandbox`。 (Required)
+ * param tags: Code Interpreter 用户标签配置。 (Optional)
+ * param resourceGroupId: Code Interpreter 所属资源组 ID；不指定时使用默认资源组。 (Optional)
  */
 func NewCreateCodeInterpreterRequestWithAllParams(
     regionId string,
     name string,
     description *string,
+    roleName *string,
+    resourceConfiguration *agentgrid.ResourceConfiguration,
+    logConfiguration *agentgrid.LogConfiguration,
     authenticationType *string,
     clientToken *string,
     networkConfiguration string,
+    tags []agentgrid.Tag,
+    resourceGroupId *string,
 ) *CreateCodeInterpreterRequest {
 
     return &CreateCodeInterpreterRequest{
@@ -96,9 +122,14 @@ func NewCreateCodeInterpreterRequestWithAllParams(
         RegionId: regionId,
         Name: name,
         Description: description,
+        RoleName: roleName,
+        ResourceConfiguration: resourceConfiguration,
+        LogConfiguration: logConfiguration,
         AuthenticationType: authenticationType,
         ClientToken: clientToken,
         NetworkConfiguration: networkConfiguration,
+        Tags: tags,
+        ResourceGroupId: resourceGroupId,
     }
 }
 
@@ -127,6 +158,18 @@ func (r *CreateCodeInterpreterRequest) SetName(name string) {
 func (r *CreateCodeInterpreterRequest) SetDescription(description string) {
     r.Description = &description
 }
+/* param roleName: Code Interpreter 绑定的实例角色(Optional) */
+func (r *CreateCodeInterpreterRequest) SetRoleName(roleName string) {
+    r.RoleName = &roleName
+}
+/* param resourceConfiguration: Code Interpreter 资源配置；不指定时使用 1 vCPU、2 GiB 内存。(Optional) */
+func (r *CreateCodeInterpreterRequest) SetResourceConfiguration(resourceConfiguration *agentgrid.ResourceConfiguration) {
+    r.ResourceConfiguration = resourceConfiguration
+}
+/* param logConfiguration: Code Interpreter 云日志投递配置。不传或 enabled=false 时不开启日志投递。(Optional) */
+func (r *CreateCodeInterpreterRequest) SetLogConfiguration(logConfiguration *agentgrid.LogConfiguration) {
+    r.LogConfiguration = logConfiguration
+}
 /* param authenticationType: Code Interpreter 鉴权方式，当前仅支持 `API_KEY`(Optional) */
 func (r *CreateCodeInterpreterRequest) SetAuthenticationType(authenticationType string) {
     r.AuthenticationType = &authenticationType
@@ -138,6 +181,14 @@ func (r *CreateCodeInterpreterRequest) SetClientToken(clientToken string) {
 /* param networkConfiguration: Code Interpreter 网络配置类型。当前支持 `public` 和 `sandbox`。(Required) */
 func (r *CreateCodeInterpreterRequest) SetNetworkConfiguration(networkConfiguration string) {
     r.NetworkConfiguration = networkConfiguration
+}
+/* param tags: Code Interpreter 用户标签配置。(Optional) */
+func (r *CreateCodeInterpreterRequest) SetTags(tags []agentgrid.Tag) {
+    r.Tags = tags
+}
+/* param resourceGroupId: Code Interpreter 所属资源组 ID；不指定时使用默认资源组。(Optional) */
+func (r *CreateCodeInterpreterRequest) SetResourceGroupId(resourceGroupId string) {
+    r.ResourceGroupId = &resourceGroupId
 }
 
 

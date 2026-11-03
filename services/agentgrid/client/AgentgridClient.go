@@ -40,7 +40,7 @@ func NewAgentgridClient(credential *core.Credential) *AgentgridClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "agentgrid",
-            Revision:    "1.0.2",
+            Revision:    "1.0.6",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -61,6 +61,7 @@ func (c *AgentgridClient) DisableLogger() {
 
 ## 接口说明
 - 每个版本的 `state` 可选值为：`pending`、`creating`、`running`、`failed`、`deleted`。
+- 每个版本分别返回其资源配置；未记录规格时不返回 `resource`。
 - 建议在创建 Runtime 或更新 Runtime 后，通过本接口确认版本是否已进入 `running`。
  */
 func (c *AgentgridClient) DescribeRuntimeVersions(request *agentgrid.DescribeRuntimeVersionsRequest) (*agentgrid.DescribeRuntimeVersionsResponse, error) {
@@ -86,6 +87,7 @@ func (c *AgentgridClient) DescribeRuntimeVersions(request *agentgrid.DescribeRun
 
 ## 接口说明
 - 支持通过 `clientToken` 保证请求幂等性。
+- 支持在创建时指定用户标签和资源组，创建成功后自动上报资源中心。
 - 创建成功后由服务端自动生成 `apiKey`。
 - Code Interpreter 状态包括：`pending`（已受理，等待资源准备）、`ready`（可创建 Session）、`failed`（处理失败）、`deleting`（删除中）、`deleted`（已删除）。
 - 本接口为异步接口。请求受理成功后，资源通常先进入 `pending`，待底层资源准备完成后进入 `ready`；如创建失败则进入 `failed`。建议通过“查询 Code Interpreter 详情”或“查询 Code Interpreter 列表”轮询确认最终状态。
@@ -162,7 +164,8 @@ func (c *AgentgridClient) ModifyRuntimeVersion(request *agentgrid.ModifyRuntimeV
 /* 查询 Runtime 列表，默认返回当前生效版本的信息。
 
 ## 接口说明
-- 支持分页、排序、条件过滤与标签过滤。
+- 支持分页、条件过滤、标签过滤与资源组过滤。
+- 返回结果包含 Runtime 的用户标签、资源组 ID 和当前版本资源配置。
 - Runtime 状态包括：`pending`、`creating`、`running`、`updating`、`failed`、`deleted`。
 - 返回结果中的 `state` 表示 Runtime 当前整体状态；`versionView.state` 表示本次返回版本的状态。
  */
@@ -277,6 +280,31 @@ func (c *AgentgridClient) DeleteRuntimeEndpoint(request *agentgrid.DeleteRuntime
     return jdResp, err
 }
 
+/* 删除指定 Runtime 版本下的 Session，并释放其 Sandbox。
+
+## 接口说明
+- 通过 Runtime ID、版本号和 Session ID 定位目标 Session。
+- 删除完成后，该 Session 不再出现在该版本的 Session 列表中；如需继续使用，应创建新的 Session。
+ */
+func (c *AgentgridClient) DeleteRuntimeSession(request *agentgrid.DeleteRuntimeSessionRequest) (*agentgrid.DeleteRuntimeSessionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &agentgrid.DeleteRuntimeSessionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 停止指定 Browser Tool Session。
 
 ## 接口说明
@@ -331,6 +359,9 @@ func (c *AgentgridClient) IngestTraces(request *agentgrid.IngestTracesRequest) (
 ## 接口说明
 - 支持通过 `clientToken` 保证请求幂等性。
 - 创建时需提供制品、鉴权方式、网络等核心配置信息。
+- 镜像制品的 `imageUrl` 必填；可选的 `command`、`args` 分别覆盖镜像的 ENTRYPOINT、CMD，`port` 声明镜像内服务实际监听的端口（1～65535）。不填写这些可选项时沿用镜像默认启动方式和协议默认端口。
+- 可通过 `imageVolumes` 配置最多 1 个只读镜像卷，挂载路径必须位于 `/mnt` 的子目录下，且不能与 OSS 或 CFS 挂载点重叠。
+- 支持在创建时指定用户标签和资源组；标签或资源组参数会在创建前进行合法性校验，并在 Runtime 创建成功后绑定到资源。
 - Runtime 状态包括：`pending`（已受理，等待资源准备）、`creating`（创建中）、`running`（可正常调用）、`updating`（版本或配置更新中）、`failed`（处理失败）、`deleted`（已删除，不可继续使用）。
 - Runtime Version 状态包括：`pending`（已受理，等待资源准备）、`creating`（创建中）、`running`（可正常使用）、`failed`（处理失败）、`deleted`（已删除）。
 - 本接口为异步接口，请求受理成功后会返回 `requestId`、`runtimeId` 和初始 `runtimeVersion`。创建初期，Runtime 与首个 Runtime Version 通常先处于 `pending`，随后进入 `creating`，最终进入 `running` 或 `failed`。
@@ -406,8 +437,12 @@ func (c *AgentgridClient) DescribeBrowserToolSession(request *agentgrid.Describe
 
 ## 接口说明
 - 该操作用于更新 Runtime 的配置信息。
+- 更新镜像配置时，可仅传 `image.command`、`image.args` 或 `image.port`，无需重复传 `image.imageUrl`；未传的字段沿用当前生效版本。`command` 或 `args` 传空数组可恢复镜像默认配置。
+- `imageVolumes` 不传或传 null 时继承当前生效版本，传空数组 `[]` 时清空新版本的镜像卷，传非空数组时整体替换，最多 1 个。镜像卷挂载路径会与更新后或继承的文件系统配置一起校验，不能与 OSS 或 CFS 挂载点重叠。
+- `image.port` 的配置形态在更新时不可改变：当前生效版本已有自定义端口时，可将其修改为另一个 1～65535 的端口，不能传 0 删除；当前生效版本没有自定义端口时，不能在更新中新增自定义端口。不传 `port` 则沿用原配置。
+- Runtime 协议在创建后不可修改；更新时沿用创建 Runtime 时指定的协议。
 - Runtime 在处理更新请求期间，其状态通常会变为 `updating`；本次新生成的 Runtime Version 状态通常会依次经历 `pending`、`creating`，最终进入 `running` 或 `failed`。
-- 本接口响应仅返回 `requestId`，不会直接返回新版本号。请求受理后，建议调用“查询 Runtime 版本列表”确认最新版本号及其状态。
+- 本接口返回 `requestId`、`runtimeId` 和新生成的 `runtimeVersion`；请求受理后，建议调用“查询 Runtime 版本列表”确认新版本的状态。
 - 新版本创建成功后不会自动成为生效版本；如需切换，请继续调用“选择 Runtime 模版版本”接口。
  */
 func (c *AgentgridClient) UpdateRuntime(request *agentgrid.UpdateRuntimeRequest) (*agentgrid.UpdateRuntimeResponse, error) {
@@ -508,6 +543,7 @@ func (c *AgentgridClient) DeleteCodeInterpreter(request *agentgrid.DeleteCodeInt
 
 ## 接口说明
 - 仅当 Runtime 当前状态为 `running` 或 `failed` 时允许删除。
+- 本接口为异步接口，返回 200 表示删除请求已受理，不表示底层资源已经删除完成。
 - 删除后数据不可恢复，请谨慎操作。
 - 删除完成后，Runtime 最终状态为 `deleted`；`deleted` 状态的 Runtime 不可恢复。
  */
@@ -555,6 +591,7 @@ func (c *AgentgridClient) DescribeRuntimeEndpoint(request *agentgrid.DescribeRun
 
 ## 接口说明
 - 支持按 Browser Tool ID 批量查询。
+- 支持按用户标签和资源组 ID 过滤，返回结果包含标签、资源组 ID 和资源配置。
  */
 func (c *AgentgridClient) DescribeBrowserTools(request *agentgrid.DescribeBrowserToolsRequest) (*agentgrid.DescribeBrowserToolsResponse, error) {
     if request == nil {
@@ -635,6 +672,32 @@ func (c *AgentgridClient) IngestMetrics(request *agentgrid.IngestMetricsRequest)
     }
 
     jdResp := &agentgrid.IngestMetricsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 分页查询指定 Runtime 版本当前绑定的 Session。
+
+## 接口说明
+- `total` 表示该 Runtime 版本下符合条件的全部 Session 数量，统计发生在分页之前，不是本页条数。
+- `pageNumber`、`pageSize` 表示本次查询使用的分页参数；不传时分别为 1 和 10。
+- 同一个 Session ID 可以出现在不同版本中，应结合 Runtime ID 和版本号定位 Session。
+ */
+func (c *AgentgridClient) DescribeRuntimeSessionsByVersion(request *agentgrid.DescribeRuntimeSessionsByVersionRequest) (*agentgrid.DescribeRuntimeSessionsByVersionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &agentgrid.DescribeRuntimeSessionsByVersionResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -789,6 +852,7 @@ func (c *AgentgridClient) DescribeCodeInterpreterSessions(request *agentgrid.Des
 
 ## 接口说明
 - 支持通过 `clientToken` 保证请求幂等性。
+- 支持在创建时指定用户标签和资源组，创建成功后自动上报资源中心。
 - 创建成功后由服务端自动生成 `apiKey`。
 - Browser Tool 状态包括：`pending`（已受理，等待资源准备）、`ready`（可创建 Session）、`failed`（处理失败）、`deleting`（删除中）、`deleted`（已删除）。
 - 本接口为异步接口。请求受理成功后，资源通常先进入 `pending`，待底层资源准备完成后进入 `ready`；如创建失败则进入 `failed`。建议通过“查询 Browser Tool 详情”或“查询 Browser Tool 列表”轮询确认最终状态。
@@ -816,6 +880,7 @@ func (c *AgentgridClient) CreateBrowserTool(request *agentgrid.CreateBrowserTool
 
 ## 接口说明
 - 支持按 Code Interpreter ID 批量查询。
+- 支持按用户标签和资源组 ID 过滤，返回结果包含标签、资源组 ID 和资源配置。
  */
 func (c *AgentgridClient) DescribeCodeInterpreters(request *agentgrid.DescribeCodeInterpretersRequest) (*agentgrid.DescribeCodeInterpretersResponse, error) {
     if request == nil {
@@ -841,6 +906,7 @@ func (c *AgentgridClient) DescribeCodeInterpreters(request *agentgrid.DescribeCo
 ## 接口说明
 - 不传 `version` 时，返回 Runtime 当前生效版本的信息。
 - 返回结果中的顶层 `state` 表示 Runtime 当前整体状态；`versionView.state` 表示指定版本或当前生效版本的状态。
+- 返回结果包含 Runtime 的用户标签、资源组 ID 和本次查询版本的资源配置。
  */
 func (c *AgentgridClient) DescribeRuntime(request *agentgrid.DescribeRuntimeRequest) (*agentgrid.DescribeRuntimeResponse, error) {
     if request == nil {

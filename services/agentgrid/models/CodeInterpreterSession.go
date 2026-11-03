@@ -31,7 +31,10 @@ type CodeInterpreterSession struct {
     /* Session 状态。可选值：`pending`（已受理，等待资源准备）、`creating`（初始化中）、`ready`（可执行工具调用）、`deleting`（删除中）、`deleted`（已删除）、`failed`（初始化失败） (Optional) */
     State string `json:"state"`
 
-    /* Session 最大存活时长（秒） (Optional) */
+    /* 是否开启长程运行 (Optional) */
+    Persistent bool `json:"persistent"`
+
+    /* Session 最大生命周期，单位为秒；长程运行时不生效 (Optional) */
     MaxLifeTime int `json:"maxLifeTime"`
 
     /* Session 创建时间 (Optional) */

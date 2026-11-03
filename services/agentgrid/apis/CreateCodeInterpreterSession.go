@@ -33,7 +33,10 @@ type CreateCodeInterpreterSessionRequest struct {
     /* Session 名称。长度为 1~32 个字符，可包含中文、数字、大小写字母、下划线、中划线或点。 (Optional) */
     Name *string `json:"name"`
 
-    /* Session 存活时间（秒）。取值范围为60～28800，默认为900秒（15分钟）。 (Optional) */
+    /* 是否开启长程运行。开启后 Session 不受最大生命周期限制，需要主动删除。 (Optional) */
+    Persistent *bool `json:"persistent"`
+
+    /* Session 最大生命周期，单位为秒。仅在 persistent 为 false 时生效，取值范围为 60～28800，默认值为 900。 (Optional) */
     MaxLifeTime *int `json:"maxLifeTime"`
 
     /* 用于保证请求幂等性。 (Optional) */
@@ -67,13 +70,15 @@ func NewCreateCodeInterpreterSessionRequest(
  * param regionId: Region ID (Required)
  * param codeInterpreterId: Code Interpreter ID (Required)
  * param name: Session 名称。长度为 1~32 个字符，可包含中文、数字、大小写字母、下划线、中划线或点。 (Optional)
- * param maxLifeTime: Session 存活时间（秒）。取值范围为60～28800，默认为900秒（15分钟）。 (Optional)
+ * param persistent: 是否开启长程运行。开启后 Session 不受最大生命周期限制，需要主动删除。 (Optional)
+ * param maxLifeTime: Session 最大生命周期，单位为秒。仅在 persistent 为 false 时生效，取值范围为 60～28800，默认值为 900。 (Optional)
  * param clientToken: 用于保证请求幂等性。 (Optional)
  */
 func NewCreateCodeInterpreterSessionRequestWithAllParams(
     regionId string,
     codeInterpreterId string,
     name *string,
+    persistent *bool,
     maxLifeTime *int,
     clientToken *string,
 ) *CreateCodeInterpreterSessionRequest {
@@ -88,6 +93,7 @@ func NewCreateCodeInterpreterSessionRequestWithAllParams(
         RegionId: regionId,
         CodeInterpreterId: codeInterpreterId,
         Name: name,
+        Persistent: persistent,
         MaxLifeTime: maxLifeTime,
         ClientToken: clientToken,
     }
@@ -118,7 +124,11 @@ func (r *CreateCodeInterpreterSessionRequest) SetCodeInterpreterId(codeInterpret
 func (r *CreateCodeInterpreterSessionRequest) SetName(name string) {
     r.Name = &name
 }
-/* param maxLifeTime: Session 存活时间（秒）。取值范围为60～28800，默认为900秒（15分钟）。(Optional) */
+/* param persistent: 是否开启长程运行。开启后 Session 不受最大生命周期限制，需要主动删除。(Optional) */
+func (r *CreateCodeInterpreterSessionRequest) SetPersistent(persistent bool) {
+    r.Persistent = &persistent
+}
+/* param maxLifeTime: Session 最大生命周期，单位为秒。仅在 persistent 为 false 时生效，取值范围为 60～28800，默认值为 900。(Optional) */
 func (r *CreateCodeInterpreterSessionRequest) SetMaxLifeTime(maxLifeTime int) {
     r.MaxLifeTime = &maxLifeTime
 }

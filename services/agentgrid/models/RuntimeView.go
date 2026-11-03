@@ -46,6 +46,12 @@ type RuntimeView struct {
     /* 绑定 IAM 角色名 (Optional) */
     RoleName string `json:"roleName"`
 
+    /* Runtime 绑定的用户标签 (Optional) */
+    Tags []Tag `json:"tags"`
+
+    /* Runtime 所属资源组 ID (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
+
     /* Runtime 创建时间 (Optional) */
     CreateTime string `json:"createTime"`
 

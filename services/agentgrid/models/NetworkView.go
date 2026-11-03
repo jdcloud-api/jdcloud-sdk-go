@@ -22,6 +22,6 @@ type NetworkView struct {
     /* 是否具备访问公网的能力 (Optional) */
     EnablePublicNetwork bool `json:"enablePublicNetwork"`
 
-    /* 是否具备沙盒能力 (Optional) */
+    /* 是否具备在沙盒环境执行能力 (Optional) */
     EnableSandbox bool `json:"enableSandbox"`
 }

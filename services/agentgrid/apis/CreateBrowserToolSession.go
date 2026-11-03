@@ -33,7 +33,10 @@ type CreateBrowserToolSessionRequest struct {
     /* Session 名称。 (Optional) */
     Name *string `json:"name"`
 
-    /* Session 最大存活时长（秒）。取值范围 60～28800，默认值为 28800。 (Optional) */
+    /* 是否开启长程运行。开启后 Session 不受最大生命周期限制，需要主动删除。 (Optional) */
+    Persistent *bool `json:"persistent"`
+
+    /* Session 最大生命周期，单位为秒。仅在 persistent 为 false 时生效，取值范围为 60～28800，默认值为 28800。 (Optional) */
     MaxLifeTime *int `json:"maxLifeTime"`
 
     /* 用于保证请求幂等性。 (Optional) */
@@ -67,13 +70,15 @@ func NewCreateBrowserToolSessionRequest(
  * param regionId: Region ID (Required)
  * param browserToolId: Browser Tool ID (Required)
  * param name: Session 名称。 (Optional)
- * param maxLifeTime: Session 最大存活时长（秒）。取值范围 60～28800，默认值为 28800。 (Optional)
+ * param persistent: 是否开启长程运行。开启后 Session 不受最大生命周期限制，需要主动删除。 (Optional)
+ * param maxLifeTime: Session 最大生命周期，单位为秒。仅在 persistent 为 false 时生效，取值范围为 60～28800，默认值为 28800。 (Optional)
  * param clientToken: 用于保证请求幂等性。 (Optional)
  */
 func NewCreateBrowserToolSessionRequestWithAllParams(
     regionId string,
     browserToolId string,
     name *string,
+    persistent *bool,
     maxLifeTime *int,
     clientToken *string,
 ) *CreateBrowserToolSessionRequest {
@@ -88,6 +93,7 @@ func NewCreateBrowserToolSessionRequestWithAllParams(
         RegionId: regionId,
         BrowserToolId: browserToolId,
         Name: name,
+        Persistent: persistent,
         MaxLifeTime: maxLifeTime,
         ClientToken: clientToken,
     }
@@ -118,7 +124,11 @@ func (r *CreateBrowserToolSessionRequest) SetBrowserToolId(browserToolId string)
 func (r *CreateBrowserToolSessionRequest) SetName(name string) {
     r.Name = &name
 }
-/* param maxLifeTime: Session 最大存活时长（秒）。取值范围 60～28800，默认值为 28800。(Optional) */
+/* param persistent: 是否开启长程运行。开启后 Session 不受最大生命周期限制，需要主动删除。(Optional) */
+func (r *CreateBrowserToolSessionRequest) SetPersistent(persistent bool) {
+    r.Persistent = &persistent
+}
+/* param maxLifeTime: Session 最大生命周期，单位为秒。仅在 persistent 为 false 时生效，取值范围为 60～28800，默认值为 28800。(Optional) */
 func (r *CreateBrowserToolSessionRequest) SetMaxLifeTime(maxLifeTime int) {
     r.MaxLifeTime = &maxLifeTime
 }

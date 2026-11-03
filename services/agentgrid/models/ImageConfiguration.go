@@ -19,6 +19,15 @@ package models
 
 type ImageConfiguration struct {
 
-    /* 镜像地址  */
-    ImageUrl string `json:"imageUrl"`
+    /* 镜像地址。创建 Runtime 时必填；更新时不传则沿用当前版本的镜像。 (Optional) */
+    ImageUrl *string `json:"imageUrl"`
+
+    /* 覆盖镜像的启动入口（ENTRYPOINT），按数组顺序执行；不传沿用当前配置，更新时传空数组恢复镜像默认启动入口。 (Optional) */
+    Command []string `json:"command"`
+
+    /* 覆盖镜像的启动参数（CMD）；不传沿用当前配置，更新时传空数组恢复镜像默认启动参数。 (Optional) */
+    Args []string `json:"args"`
+
+    /* 镜像内服务监听端口，取值范围 1～65535。创建时可选；更新时仅当 Runtime 当前生效版本已有自定义端口才可传入新端口，不传则沿用当前端口。不能在更新时新增或删除自定义端口。端口声明不会改变镜像内进程实际监听的端口。 (Optional) */
+    Port *int `json:"port"`
 }

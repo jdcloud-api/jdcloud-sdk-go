@@ -19,14 +19,11 @@ package models
 
 type CfsAccessPointConfiguration struct {
 
-    /* 挂载目标ID。 (Optional) */
-    MountTargetId *string `json:"mountTargetId"`
+    /* CFS 文件系统 ID。长度不能超过 64 个字符，必须以字母或数字开头，仅支持字母、数字、点号（.）、下划线（_）、冒号（:）和连字符（-）。同一个 Runtime 中不能重复配置相同的文件系统 ID。  */
+    FileSystemId string `json:"fileSystemId"`
 
-    /* CFS 路径，可以不填，默认值为 /cfs。 (Optional) */
-    Path *string `json:"path"`
-
-    /* 挂载在 Runtime 内的路径。MountPath 必须是绝对路径，即以 '/' 开头；不允许是 /、/bin、/usr、/var/run、/proc、/sys、/dev 系统路径；多个挂载点不能互为父子路径，例如 /mnt 和 /mnt/data。 (Optional) */
-    MountPath *string `json:"mountPath"`
+    /* 挂载在 Runtime 内的路径。必须位于 /mnt 的子目录下，不能直接使用 /mnt；所有 OSS、CFS 和镜像卷挂载点不能相同，也不能互为父子路径。  */
+    MountPath string `json:"mountPath"`
 
     /* 文件系统是否只读。 (Optional) */
     ReadOnly *bool `json:"readOnly"`

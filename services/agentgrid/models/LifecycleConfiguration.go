@@ -19,6 +19,9 @@ package models
 
 type LifecycleConfiguration struct {
 
-    /* Session 会话从创建到自动终止的最长时间（秒），取值范围 0～28800，默认 28800。当值为 0 时，生成的Session不会自动终止。 (Optional) */
+    /* 是否开启长程运行。开启后 Session 不受最大生命周期限制，需要主动删除。 (Optional) */
+    Persistent *bool `json:"persistent"`
+
+    /* Session 最大生命周期，单位为秒。仅在 persistent 为 false 时生效，取值范围为 60～28800，默认值为 28800。 (Optional) */
     MaxLifeTime *int `json:"maxLifeTime"`
 }

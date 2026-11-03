@@ -17,11 +17,11 @@
 package models
 
 
-type FilesystemView struct {
+type ResourceSpecification struct {
 
-    /* OSS 访问点配置列表 (Optional) */
-    OssAccessPoints []OssAccessPointView `json:"ossAccessPoints"`
+    /* CPU 核数，单位为 vCPU。当前支持 1、2、4、8、16。  */
+    Cpu float32 `json:"cpu"`
 
-    /* CFS 访问点配置列表 (Optional) */
-    CfsAccessPoints []CfsAccessPointView `json:"cfsAccessPoints"`
+    /* 内存大小，单位为 GiB。须与 CPU 组成 1:2、1:4 或 1:8 的配比。  */
+    Memory float32 `json:"memory"`
 }

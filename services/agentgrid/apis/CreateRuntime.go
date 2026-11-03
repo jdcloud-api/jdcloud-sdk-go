@@ -31,7 +31,7 @@ type CreateRuntimeRequest struct {
     /* Runtime 名称。长度为 1~32 个字符，只允许中文、数字、大小写字母、英文下划线（\_）、连字符（-）及点（.）。  */
     Name string `json:"name"`
 
-    /* Runtime 制品配置，当前支持通过镜像导入  */
+    /* Runtime 制品配置，当前支持通过镜像导入；创建时必须提供 `image.imageUrl`，`image.command`、`image.args`、`image.port` 可选。  */
     ArtifactConfiguration *agentgrid.ArtifactConfiguration `json:"artifactConfiguration"`
 
     /* Runtime 预热 Session 数量，进行预热后，将会提前生成对应数量的 Session 实例，可以大幅减少会话初次启动时间。取值范围1～10，默认值为 1，且应小于等于 `maxSession`。 (Optional) */
@@ -39,6 +39,9 @@ type CreateRuntimeRequest struct {
 
     /* Runtime 可承载的最大 Session 数量，取值范围1～10，默认值为 10。 (Optional) */
     MaxSession *int `json:"maxSession"`
+
+    /* Runtime 资源配置；不指定时使用 1 vCPU、2 GiB 内存。 (Optional) */
+    ResourceConfiguration *agentgrid.ResourceConfiguration `json:"resourceConfiguration"`
 
     /* Runtime 描述信息。 (Optional) */
     Description *string `json:"description"`
@@ -48,6 +51,9 @@ type CreateRuntimeRequest struct {
 
     /* Runtime 生命周期配置。 (Optional) */
     LifecycleConfiguration *agentgrid.LifecycleConfiguration `json:"lifecycleConfiguration"`
+
+    /* Runtime 云日志投递配置。不传或 enabled=false 时不开启日志投递。 (Optional) */
+    LogConfiguration *agentgrid.LogConfiguration `json:"logConfiguration"`
 
     /* Runtime 网络配置。  */
     NetworkConfiguration *agentgrid.NetworkConfiguration `json:"networkConfiguration"`
@@ -59,9 +65,18 @@ type CreateRuntimeRequest struct {
     Envs []agentgrid.EnvConfiguration `json:"envs"`
 
     /* Runtime 文件系统配置，最多支持配置 5 个文件系统。 (Optional) */
-    FilesystemConfiguration *agentgrid.FilesystemConfiguration `json:"filesystemConfiguration"`
+    FileSystemConfiguration *agentgrid.FileSystemConfiguration `json:"fileSystemConfiguration"`
 
-    /* Runtime 支持的协议类型。当前支持http、mcp、a2a。 (Optional) */
+    /* Runtime 只读镜像卷配置，最多 1 个，数组元素不能为 null。不传、传 null 或空数组表示不配置镜像卷。 (Optional) */
+    ImageVolumes []agentgrid.ImageVolume `json:"imageVolumes"`
+
+    /* Runtime 用户标签配置。 (Optional) */
+    Tags []agentgrid.Tag `json:"tags"`
+
+    /* Runtime 所属资源组 ID；不指定时使用默认资源组。 (Optional) */
+    ResourceGroupId *string `json:"resourceGroupId"`
+
+    /* Runtime 支持的协议类型。当前支持 http、mcp、a2a；创建后不可修改。 (Optional) */
     Protocol *string `json:"protocol"`
 
     /* 用于保证请求幂等性。 (Optional) */
@@ -71,7 +86,7 @@ type CreateRuntimeRequest struct {
 /*
  * param regionId: Region ID (Required)
  * param name: Runtime 名称。长度为 1~32 个字符，只允许中文、数字、大小写字母、英文下划线（\_）、连字符（-）及点（.）。 (Required)
- * param artifactConfiguration: Runtime 制品配置，当前支持通过镜像导入 (Required)
+ * param artifactConfiguration: Runtime 制品配置，当前支持通过镜像导入；创建时必须提供 `image.imageUrl`，`image.command`、`image.args`、`image.port` 可选。 (Required)
  * param authorizerConfiguration: Runtime 鉴权配置。 (Required)
  * param networkConfiguration: Runtime 网络配置。 (Required)
  *
@@ -103,17 +118,22 @@ func NewCreateRuntimeRequest(
 /*
  * param regionId: Region ID (Required)
  * param name: Runtime 名称。长度为 1~32 个字符，只允许中文、数字、大小写字母、英文下划线（\_）、连字符（-）及点（.）。 (Required)
- * param artifactConfiguration: Runtime 制品配置，当前支持通过镜像导入 (Required)
+ * param artifactConfiguration: Runtime 制品配置，当前支持通过镜像导入；创建时必须提供 `image.imageUrl`，`image.command`、`image.args`、`image.port` 可选。 (Required)
  * param warmSession: Runtime 预热 Session 数量，进行预热后，将会提前生成对应数量的 Session 实例，可以大幅减少会话初次启动时间。取值范围1～10，默认值为 1，且应小于等于 `maxSession`。 (Optional)
  * param maxSession: Runtime 可承载的最大 Session 数量，取值范围1～10，默认值为 10。 (Optional)
+ * param resourceConfiguration: Runtime 资源配置；不指定时使用 1 vCPU、2 GiB 内存。 (Optional)
  * param description: Runtime 描述信息。 (Optional)
  * param authorizerConfiguration: Runtime 鉴权配置。 (Required)
  * param lifecycleConfiguration: Runtime 生命周期配置。 (Optional)
+ * param logConfiguration: Runtime 云日志投递配置。不传或 enabled=false 时不开启日志投递。 (Optional)
  * param networkConfiguration: Runtime 网络配置。 (Required)
  * param roleName: 绑定 IAM 服务角色名。 (Optional)
  * param envs: Runtime 环境变量配置，最多 50 组。 (Optional)
- * param filesystemConfiguration: Runtime 文件系统配置，最多支持配置 5 个文件系统。 (Optional)
- * param protocol: Runtime 支持的协议类型。当前支持http、mcp、a2a。 (Optional)
+ * param fileSystemConfiguration: Runtime 文件系统配置，最多支持配置 5 个文件系统。 (Optional)
+ * param imageVolumes: Runtime 只读镜像卷配置，最多 1 个，数组元素不能为 null。不传、传 null 或空数组表示不配置镜像卷。 (Optional)
+ * param tags: Runtime 用户标签配置。 (Optional)
+ * param resourceGroupId: Runtime 所属资源组 ID；不指定时使用默认资源组。 (Optional)
+ * param protocol: Runtime 支持的协议类型。当前支持 http、mcp、a2a；创建后不可修改。 (Optional)
  * param clientToken: 用于保证请求幂等性。 (Optional)
  */
 func NewCreateRuntimeRequestWithAllParams(
@@ -122,13 +142,18 @@ func NewCreateRuntimeRequestWithAllParams(
     artifactConfiguration *agentgrid.ArtifactConfiguration,
     warmSession *int,
     maxSession *int,
+    resourceConfiguration *agentgrid.ResourceConfiguration,
     description *string,
     authorizerConfiguration *agentgrid.AuthorizerConfiguration,
     lifecycleConfiguration *agentgrid.LifecycleConfiguration,
+    logConfiguration *agentgrid.LogConfiguration,
     networkConfiguration *agentgrid.NetworkConfiguration,
     roleName *string,
     envs []agentgrid.EnvConfiguration,
-    filesystemConfiguration *agentgrid.FilesystemConfiguration,
+    fileSystemConfiguration *agentgrid.FileSystemConfiguration,
+    imageVolumes []agentgrid.ImageVolume,
+    tags []agentgrid.Tag,
+    resourceGroupId *string,
     protocol *string,
     clientToken *string,
 ) *CreateRuntimeRequest {
@@ -145,13 +170,18 @@ func NewCreateRuntimeRequestWithAllParams(
         ArtifactConfiguration: artifactConfiguration,
         WarmSession: warmSession,
         MaxSession: maxSession,
+        ResourceConfiguration: resourceConfiguration,
         Description: description,
         AuthorizerConfiguration: authorizerConfiguration,
         LifecycleConfiguration: lifecycleConfiguration,
+        LogConfiguration: logConfiguration,
         NetworkConfiguration: networkConfiguration,
         RoleName: roleName,
         Envs: envs,
-        FilesystemConfiguration: filesystemConfiguration,
+        FileSystemConfiguration: fileSystemConfiguration,
+        ImageVolumes: imageVolumes,
+        Tags: tags,
+        ResourceGroupId: resourceGroupId,
         Protocol: protocol,
         ClientToken: clientToken,
     }
@@ -178,7 +208,7 @@ func (r *CreateRuntimeRequest) SetRegionId(regionId string) {
 func (r *CreateRuntimeRequest) SetName(name string) {
     r.Name = name
 }
-/* param artifactConfiguration: Runtime 制品配置，当前支持通过镜像导入(Required) */
+/* param artifactConfiguration: Runtime 制品配置，当前支持通过镜像导入；创建时必须提供 `image.imageUrl`，`image.command`、`image.args`、`image.port` 可选。(Required) */
 func (r *CreateRuntimeRequest) SetArtifactConfiguration(artifactConfiguration *agentgrid.ArtifactConfiguration) {
     r.ArtifactConfiguration = artifactConfiguration
 }
@@ -189,6 +219,10 @@ func (r *CreateRuntimeRequest) SetWarmSession(warmSession int) {
 /* param maxSession: Runtime 可承载的最大 Session 数量，取值范围1～10，默认值为 10。(Optional) */
 func (r *CreateRuntimeRequest) SetMaxSession(maxSession int) {
     r.MaxSession = &maxSession
+}
+/* param resourceConfiguration: Runtime 资源配置；不指定时使用 1 vCPU、2 GiB 内存。(Optional) */
+func (r *CreateRuntimeRequest) SetResourceConfiguration(resourceConfiguration *agentgrid.ResourceConfiguration) {
+    r.ResourceConfiguration = resourceConfiguration
 }
 /* param description: Runtime 描述信息。(Optional) */
 func (r *CreateRuntimeRequest) SetDescription(description string) {
@@ -202,6 +236,10 @@ func (r *CreateRuntimeRequest) SetAuthorizerConfiguration(authorizerConfiguratio
 func (r *CreateRuntimeRequest) SetLifecycleConfiguration(lifecycleConfiguration *agentgrid.LifecycleConfiguration) {
     r.LifecycleConfiguration = lifecycleConfiguration
 }
+/* param logConfiguration: Runtime 云日志投递配置。不传或 enabled=false 时不开启日志投递。(Optional) */
+func (r *CreateRuntimeRequest) SetLogConfiguration(logConfiguration *agentgrid.LogConfiguration) {
+    r.LogConfiguration = logConfiguration
+}
 /* param networkConfiguration: Runtime 网络配置。(Required) */
 func (r *CreateRuntimeRequest) SetNetworkConfiguration(networkConfiguration *agentgrid.NetworkConfiguration) {
     r.NetworkConfiguration = networkConfiguration
@@ -214,11 +252,23 @@ func (r *CreateRuntimeRequest) SetRoleName(roleName string) {
 func (r *CreateRuntimeRequest) SetEnvs(envs []agentgrid.EnvConfiguration) {
     r.Envs = envs
 }
-/* param filesystemConfiguration: Runtime 文件系统配置，最多支持配置 5 个文件系统。(Optional) */
-func (r *CreateRuntimeRequest) SetFilesystemConfiguration(filesystemConfiguration *agentgrid.FilesystemConfiguration) {
-    r.FilesystemConfiguration = filesystemConfiguration
+/* param fileSystemConfiguration: Runtime 文件系统配置，最多支持配置 5 个文件系统。(Optional) */
+func (r *CreateRuntimeRequest) SetFileSystemConfiguration(fileSystemConfiguration *agentgrid.FileSystemConfiguration) {
+    r.FileSystemConfiguration = fileSystemConfiguration
 }
-/* param protocol: Runtime 支持的协议类型。当前支持http、mcp、a2a。(Optional) */
+/* param imageVolumes: Runtime 只读镜像卷配置，最多 1 个，数组元素不能为 null。不传、传 null 或空数组表示不配置镜像卷。(Optional) */
+func (r *CreateRuntimeRequest) SetImageVolumes(imageVolumes []agentgrid.ImageVolume) {
+    r.ImageVolumes = imageVolumes
+}
+/* param tags: Runtime 用户标签配置。(Optional) */
+func (r *CreateRuntimeRequest) SetTags(tags []agentgrid.Tag) {
+    r.Tags = tags
+}
+/* param resourceGroupId: Runtime 所属资源组 ID；不指定时使用默认资源组。(Optional) */
+func (r *CreateRuntimeRequest) SetResourceGroupId(resourceGroupId string) {
+    r.ResourceGroupId = &resourceGroupId
+}
+/* param protocol: Runtime 支持的协议类型。当前支持 http、mcp、a2a；创建后不可修改。(Optional) */
 func (r *CreateRuntimeRequest) SetProtocol(protocol string) {
     r.Protocol = &protocol
 }
