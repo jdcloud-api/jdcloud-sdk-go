@@ -19,11 +19,8 @@ package models
 
 type CfsAccessPointView struct {
 
-    /* 挂载目标ID (Optional) */
-    MountTargetId string `json:"mountTargetId"`
-
-    /* CFS 路径 (Optional) */
-    Path string `json:"path"`
+    /* CFS 文件系统 ID (Optional) */
+    FileSystemId string `json:"fileSystemId"`
 
     /* 挂载在 Runtime 内的路径 (Optional) */
     MountPath string `json:"mountPath"`

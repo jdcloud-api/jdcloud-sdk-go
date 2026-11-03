@@ -21,4 +21,13 @@ type ImageView struct {
 
     /* 镜像地址 (Optional) */
     ImageUrl string `json:"imageUrl"`
+
+    /* 当前版本覆盖镜像 ENTRYPOINT 的启动入口；未设置时不返回。 (Optional) */
+    Command []string `json:"command"`
+
+    /* 当前版本覆盖镜像 CMD 的启动参数；未设置时不返回。 (Optional) */
+    Args []string `json:"args"`
+
+    /* 当前版本声明的服务端口；未设置时不返回，并使用协议默认端口。 (Optional) */
+    Port int `json:"port"`
 }

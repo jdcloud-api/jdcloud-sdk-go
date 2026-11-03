@@ -37,7 +37,7 @@ type UpdateRuntimeRequest struct {
     /* Runtime 鉴权配置。 (Optional) */
     AuthorizerConfiguration *agentgrid.AuthorizerConfiguration `json:"authorizerConfiguration"`
 
-    /* Runtime 制品配置，支持更换镜像 (Optional) */
+    /* Runtime 制品配置；可以只更新镜像地址、启动入口、启动参数或服务端口，其余镜像字段沿用当前版本。 (Optional) */
     ArtifactConfiguration *agentgrid.ArtifactConfiguration `json:"artifactConfiguration"`
 
     /* Runtime 网络配置。 (Optional) */
@@ -48,6 +48,9 @@ type UpdateRuntimeRequest struct {
 
     /* Runtime 可承载的最大 Session 数量，取值范围1～10，默认值为 10。 (Optional) */
     MaxSession *int `json:"maxSession"`
+
+    /* Runtime 新版本的资源配置；不指定时沿用当前版本规格，已有 Session 不受影响。 (Optional) */
+    ResourceConfiguration *agentgrid.ResourceConfiguration `json:"resourceConfiguration"`
 
     /* runtime 绑定的实例角色 (Optional) */
     RoleName *string `json:"roleName"`
@@ -64,13 +67,16 @@ type UpdateRuntimeRequest struct {
     Envs []agentgrid.EnvConfiguration `json:"envs"`
 
     /* Runtime 文件系统配置。不传该参数时，保留当前生效版本中的文件系统配置；传入该参数时，将用本次配置替换新版本中的文件系统配置，最多支持配置 5 个文件系统。 (Optional) */
-    FilesystemConfiguration *agentgrid.FilesystemConfiguration `json:"filesystemConfiguration"`
+    FileSystemConfiguration *agentgrid.FileSystemConfiguration `json:"fileSystemConfiguration"`
 
-    /* Runtime 支持的协议类型，当前支持http、mcp、a2a。 (Optional) */
-    Protocol *string `json:"protocol"`
+    /* Runtime 只读镜像卷配置，最多 1 个，数组元素不能为 null。不传或传 null 时继承当前生效版本；传空数组 [] 时清空新版本的镜像卷；传非空数组时整体替换。 (Optional) */
+    ImageVolumes []agentgrid.ImageVolume `json:"imageVolumes"`
 
-    /* Runtime 生命周期配置。 (Optional) */
+    /* Runtime 生命周期配置。不传时继承当前生效版本的配置。 (Optional) */
     LifecycleConfiguration *agentgrid.LifecycleConfiguration `json:"lifecycleConfiguration"`
+
+    /* Runtime 云日志投递配置。不传时继承当前生效版本的配置；传入 enabled=false 时关闭；传入 enabled=true 时完整覆盖。 (Optional) */
+    LogConfiguration *agentgrid.LogConfiguration `json:"logConfiguration"`
 }
 
 /*
@@ -101,10 +107,11 @@ func NewUpdateRuntimeRequest(
  * param runtimeId: Runtime ID (Required)
  * param description: Runtime 新版本的描述信息。 (Optional)
  * param authorizerConfiguration: Runtime 鉴权配置。 (Optional)
- * param artifactConfiguration: Runtime 制品配置，支持更换镜像 (Optional)
+ * param artifactConfiguration: Runtime 制品配置；可以只更新镜像地址、启动入口、启动参数或服务端口，其余镜像字段沿用当前版本。 (Optional)
  * param networkConfiguration: Runtime 网络配置。 (Optional)
  * param warmSession: Runtime 预热 Session 数量，进行预热后，将会提前生成对应数量的 Session 实例，可以大幅减少会话初次启动时间。取值范围1～10，默认值为 1，且应小于等于 `maxSession`。 (Optional)
  * param maxSession: Runtime 可承载的最大 Session 数量，取值范围1～10，默认值为 10。 (Optional)
+ * param resourceConfiguration: Runtime 新版本的资源配置；不指定时沿用当前版本规格，已有 Session 不受影响。 (Optional)
  * param roleName: runtime 绑定的实例角色 (Optional)
  * param envs: Runtime 环境变量配置，以 `key-value` 键值对形式指定，单次请求最多支持 50 组。
 
@@ -115,9 +122,10 @@ func NewUpdateRuntimeRequest(
 本次调用后，环境变量不能超过50组
 `key` 长度上限为 256 个字符。
  (Optional)
- * param filesystemConfiguration: Runtime 文件系统配置。不传该参数时，保留当前生效版本中的文件系统配置；传入该参数时，将用本次配置替换新版本中的文件系统配置，最多支持配置 5 个文件系统。 (Optional)
- * param protocol: Runtime 支持的协议类型，当前支持http、mcp、a2a。 (Optional)
- * param lifecycleConfiguration: Runtime 生命周期配置。 (Optional)
+ * param fileSystemConfiguration: Runtime 文件系统配置。不传该参数时，保留当前生效版本中的文件系统配置；传入该参数时，将用本次配置替换新版本中的文件系统配置，最多支持配置 5 个文件系统。 (Optional)
+ * param imageVolumes: Runtime 只读镜像卷配置，最多 1 个，数组元素不能为 null。不传或传 null 时继承当前生效版本；传空数组 [] 时清空新版本的镜像卷；传非空数组时整体替换。 (Optional)
+ * param lifecycleConfiguration: Runtime 生命周期配置。不传时继承当前生效版本的配置。 (Optional)
+ * param logConfiguration: Runtime 云日志投递配置。不传时继承当前生效版本的配置；传入 enabled=false 时关闭；传入 enabled=true 时完整覆盖。 (Optional)
  */
 func NewUpdateRuntimeRequestWithAllParams(
     regionId string,
@@ -128,11 +136,13 @@ func NewUpdateRuntimeRequestWithAllParams(
     networkConfiguration *agentgrid.NetworkConfiguration,
     warmSession *int,
     maxSession *int,
+    resourceConfiguration *agentgrid.ResourceConfiguration,
     roleName *string,
     envs []agentgrid.EnvConfiguration,
-    filesystemConfiguration *agentgrid.FilesystemConfiguration,
-    protocol *string,
+    fileSystemConfiguration *agentgrid.FileSystemConfiguration,
+    imageVolumes []agentgrid.ImageVolume,
     lifecycleConfiguration *agentgrid.LifecycleConfiguration,
+    logConfiguration *agentgrid.LogConfiguration,
 ) *UpdateRuntimeRequest {
 
     return &UpdateRuntimeRequest{
@@ -150,11 +160,13 @@ func NewUpdateRuntimeRequestWithAllParams(
         NetworkConfiguration: networkConfiguration,
         WarmSession: warmSession,
         MaxSession: maxSession,
+        ResourceConfiguration: resourceConfiguration,
         RoleName: roleName,
         Envs: envs,
-        FilesystemConfiguration: filesystemConfiguration,
-        Protocol: protocol,
+        FileSystemConfiguration: fileSystemConfiguration,
+        ImageVolumes: imageVolumes,
         LifecycleConfiguration: lifecycleConfiguration,
+        LogConfiguration: logConfiguration,
     }
 }
 
@@ -187,7 +199,7 @@ func (r *UpdateRuntimeRequest) SetDescription(description string) {
 func (r *UpdateRuntimeRequest) SetAuthorizerConfiguration(authorizerConfiguration *agentgrid.AuthorizerConfiguration) {
     r.AuthorizerConfiguration = authorizerConfiguration
 }
-/* param artifactConfiguration: Runtime 制品配置，支持更换镜像(Optional) */
+/* param artifactConfiguration: Runtime 制品配置；可以只更新镜像地址、启动入口、启动参数或服务端口，其余镜像字段沿用当前版本。(Optional) */
 func (r *UpdateRuntimeRequest) SetArtifactConfiguration(artifactConfiguration *agentgrid.ArtifactConfiguration) {
     r.ArtifactConfiguration = artifactConfiguration
 }
@@ -202,6 +214,10 @@ func (r *UpdateRuntimeRequest) SetWarmSession(warmSession int) {
 /* param maxSession: Runtime 可承载的最大 Session 数量，取值范围1～10，默认值为 10。(Optional) */
 func (r *UpdateRuntimeRequest) SetMaxSession(maxSession int) {
     r.MaxSession = &maxSession
+}
+/* param resourceConfiguration: Runtime 新版本的资源配置；不指定时沿用当前版本规格，已有 Session 不受影响。(Optional) */
+func (r *UpdateRuntimeRequest) SetResourceConfiguration(resourceConfiguration *agentgrid.ResourceConfiguration) {
+    r.ResourceConfiguration = resourceConfiguration
 }
 /* param roleName: runtime 绑定的实例角色(Optional) */
 func (r *UpdateRuntimeRequest) SetRoleName(roleName string) {
@@ -219,17 +235,21 @@ func (r *UpdateRuntimeRequest) SetRoleName(roleName string) {
 func (r *UpdateRuntimeRequest) SetEnvs(envs []agentgrid.EnvConfiguration) {
     r.Envs = envs
 }
-/* param filesystemConfiguration: Runtime 文件系统配置。不传该参数时，保留当前生效版本中的文件系统配置；传入该参数时，将用本次配置替换新版本中的文件系统配置，最多支持配置 5 个文件系统。(Optional) */
-func (r *UpdateRuntimeRequest) SetFilesystemConfiguration(filesystemConfiguration *agentgrid.FilesystemConfiguration) {
-    r.FilesystemConfiguration = filesystemConfiguration
+/* param fileSystemConfiguration: Runtime 文件系统配置。不传该参数时，保留当前生效版本中的文件系统配置；传入该参数时，将用本次配置替换新版本中的文件系统配置，最多支持配置 5 个文件系统。(Optional) */
+func (r *UpdateRuntimeRequest) SetFileSystemConfiguration(fileSystemConfiguration *agentgrid.FileSystemConfiguration) {
+    r.FileSystemConfiguration = fileSystemConfiguration
 }
-/* param protocol: Runtime 支持的协议类型，当前支持http、mcp、a2a。(Optional) */
-func (r *UpdateRuntimeRequest) SetProtocol(protocol string) {
-    r.Protocol = &protocol
+/* param imageVolumes: Runtime 只读镜像卷配置，最多 1 个，数组元素不能为 null。不传或传 null 时继承当前生效版本；传空数组 [] 时清空新版本的镜像卷；传非空数组时整体替换。(Optional) */
+func (r *UpdateRuntimeRequest) SetImageVolumes(imageVolumes []agentgrid.ImageVolume) {
+    r.ImageVolumes = imageVolumes
 }
-/* param lifecycleConfiguration: Runtime 生命周期配置。(Optional) */
+/* param lifecycleConfiguration: Runtime 生命周期配置。不传时继承当前生效版本的配置。(Optional) */
 func (r *UpdateRuntimeRequest) SetLifecycleConfiguration(lifecycleConfiguration *agentgrid.LifecycleConfiguration) {
     r.LifecycleConfiguration = lifecycleConfiguration
+}
+/* param logConfiguration: Runtime 云日志投递配置。不传时继承当前生效版本的配置；传入 enabled=false 时关闭；传入 enabled=true 时完整覆盖。(Optional) */
+func (r *UpdateRuntimeRequest) SetLogConfiguration(logConfiguration *agentgrid.LogConfiguration) {
+    r.LogConfiguration = logConfiguration
 }
 
 

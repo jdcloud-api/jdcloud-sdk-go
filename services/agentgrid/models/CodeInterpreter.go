@@ -40,6 +40,18 @@ type CodeInterpreter struct {
     /* 网络配置类型 (Optional) */
     Network string `json:"network"`
 
+    /* Code Interpreter 资源配置；未记录规格时不返回 (Optional) */
+    Resource ResourceView `json:"resource"`
+
+    /* Code Interpreter 的云日志投递配置 (Optional) */
+    LogConfigurationView LogConfigurationView `json:"logConfigurationView"`
+
+    /* Code Interpreter 绑定的用户标签 (Optional) */
+    Tags []Tag `json:"tags"`
+
+    /* Code Interpreter 所属资源组 ID (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
+
     /* Code Interpreter 创建时间 (Optional) */
     CreateTime string `json:"createTime"`
 }

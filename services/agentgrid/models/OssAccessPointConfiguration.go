@@ -19,12 +19,15 @@ package models
 
 type OssAccessPointConfiguration struct {
 
-    /* OSS Bucket 名称。长度必须在 3~63 个字符之间，仅能由小写字母、数字、连字符（-）组成，且必须以小写字母或数字开头和结尾。 (Optional) */
-    BucketName *string `json:"bucketName"`
+    /* OSS Bucket 名称。长度必须在 3~63 个字符之间，仅能由小写字母、数字、连字符（-）组成，且必须以小写字母或数字开头和结尾。  */
+    BucketName string `json:"bucketName"`
 
     /* OSS Bucket 内的文件夹路径。文件夹名称全路径长度不能超过 1022 个字节，不能包含反斜杠（\）或双斜杠（//），且文件夹不能以斜杠（/）开头。 (Optional) */
     BucketPath *string `json:"bucketPath"`
 
-    /* 挂载在 Runtime 内的路径。MountPath 必须是绝对路径，即以 '/' 开头；不允许是 /、/etc、/bin、/usr、/var/run、/proc、/sys、/dev 等系统路径；多个挂载点不能互为父子路径，例如 /mnt 和 /mnt/data。 (Optional) */
-    MountPath *string `json:"mountPath"`
+    /* 挂载在 Runtime 内的路径。必须位于 /mnt 的子目录下，不能直接使用 /mnt；所有 OSS、CFS 和镜像卷挂载点不能相同，也不能互为父子路径。  */
+    MountPath string `json:"mountPath"`
+
+    /* 是否以只读方式挂载 OSS，默认 false，表示可读写。 (Optional) */
+    ReadOnly *bool `json:"readOnly"`
 }

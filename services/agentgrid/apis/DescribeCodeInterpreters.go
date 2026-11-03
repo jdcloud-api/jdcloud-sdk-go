@@ -39,6 +39,12 @@ type DescribeCodeInterpretersRequest struct {
 - name：按 Code Interpreter 名称模糊匹配，仅支持单个值。
  (Optional) */
     Filters []agentgrid.Filter `json:"filters"`
+
+    /* 按 Code Interpreter 用户标签过滤。 (Optional) */
+    Tags []agentgrid.TagFilter `json:"tags"`
+
+    /* 按 Code Interpreter 所属资源组 ID 过滤。 (Optional) */
+    ResourceGroupIds []string `json:"resourceGroupIds"`
 }
 
 /*
@@ -69,12 +75,16 @@ func NewDescribeCodeInterpretersRequest(
 - codeInterpreterId：按 Code Interpreter ID 精确匹配，支持多个值。
 - name：按 Code Interpreter 名称模糊匹配，仅支持单个值。
  (Optional)
+ * param tags: 按 Code Interpreter 用户标签过滤。 (Optional)
+ * param resourceGroupIds: 按 Code Interpreter 所属资源组 ID 过滤。 (Optional)
  */
 func NewDescribeCodeInterpretersRequestWithAllParams(
     regionId string,
     pageSize *int,
     pageNumber *int,
     filters []agentgrid.Filter,
+    tags []agentgrid.TagFilter,
+    resourceGroupIds []string,
 ) *DescribeCodeInterpretersRequest {
 
     return &DescribeCodeInterpretersRequest{
@@ -88,6 +98,8 @@ func NewDescribeCodeInterpretersRequestWithAllParams(
         PageSize: pageSize,
         PageNumber: pageNumber,
         Filters: filters,
+        Tags: tags,
+        ResourceGroupIds: resourceGroupIds,
     }
 }
 
@@ -122,6 +134,14 @@ func (r *DescribeCodeInterpretersRequest) SetPageNumber(pageNumber int) {
 (Optional) */
 func (r *DescribeCodeInterpretersRequest) SetFilters(filters []agentgrid.Filter) {
     r.Filters = filters
+}
+/* param tags: 按 Code Interpreter 用户标签过滤。(Optional) */
+func (r *DescribeCodeInterpretersRequest) SetTags(tags []agentgrid.TagFilter) {
+    r.Tags = tags
+}
+/* param resourceGroupIds: 按 Code Interpreter 所属资源组 ID 过滤。(Optional) */
+func (r *DescribeCodeInterpretersRequest) SetResourceGroupIds(resourceGroupIds []string) {
+    r.ResourceGroupIds = resourceGroupIds
 }
 
 

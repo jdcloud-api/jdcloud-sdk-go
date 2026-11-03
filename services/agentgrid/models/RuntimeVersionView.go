@@ -40,17 +40,26 @@ type RuntimeVersionView struct {
     /* 最大 Session 数 (Optional) */
     MaxSession int `json:"maxSession"`
 
+    /* 当前版本的资源配置；未记录规格时不返回 (Optional) */
+    Resource ResourceView `json:"resource"`
+
     /* Runtime 协议 (Optional) */
     Protocol string `json:"protocol"`
 
     /* Runtime 存活周期配置 (Optional) */
     Lifecycle LifecycleView `json:"lifecycle"`
 
+    /* 当前 Runtime 版本的云日志投递配置 (Optional) */
+    LogConfigurationView LogConfigurationView `json:"logConfigurationView"`
+
     /* 环境变量信息 (Optional) */
     Envs []Env `json:"envs"`
 
     /* 当前版本文件系统配置 (Optional) */
-    FileSystem FilesystemView `json:"fileSystem"`
+    FileSystem FileSystemView `json:"fileSystem"`
+
+    /* 当前版本的只读镜像卷配置，未配置时不返回。仅包含源镜像地址和挂载路径。 (Optional) */
+    ImageVolumes []ImageVolume `json:"imageVolumes"`
 
     /* 当前版本创建时间 (Optional) */
     CreateTime string `json:"createTime"`

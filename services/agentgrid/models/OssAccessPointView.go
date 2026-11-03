@@ -27,4 +27,7 @@ type OssAccessPointView struct {
 
     /* 挂载在 Runtime 内的路径 (Optional) */
     MountPath string `json:"mountPath"`
+
+    /* 是否以只读方式挂载 OSS，false 表示可读写。 (Optional) */
+    ReadOnly bool `json:"readOnly"`
 }

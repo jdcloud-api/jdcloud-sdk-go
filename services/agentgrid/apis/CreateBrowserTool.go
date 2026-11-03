@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    agentgrid "github.com/jdcloud-api/jdcloud-sdk-go/services/agentgrid/models"
 )
 
 type CreateBrowserToolRequest struct {
@@ -33,6 +34,12 @@ type CreateBrowserToolRequest struct {
     /* Browser Tool 描述信息，长度不超过 256 个字符。 (Optional) */
     Description *string `json:"description"`
 
+    /* Browser Tool 资源配置；不指定时使用 1 vCPU、2 GiB 内存。 (Optional) */
+    ResourceConfiguration *agentgrid.ResourceConfiguration `json:"resourceConfiguration"`
+
+    /* Browser Tool 云日志投递配置。不传或 enabled=false 时不开启日志投递。 (Optional) */
+    LogConfiguration *agentgrid.LogConfiguration `json:"logConfiguration"`
+
     /* Browser Tool 鉴权方式，当前仅支持 `API_KEY` (Optional) */
     AuthenticationType *string `json:"authenticationType"`
 
@@ -41,6 +48,12 @@ type CreateBrowserToolRequest struct {
 
     /* 用于保证请求幂等性。 (Optional) */
     ClientToken *string `json:"clientToken"`
+
+    /* Browser Tool 用户标签配置。 (Optional) */
+    Tags []agentgrid.Tag `json:"tags"`
+
+    /* Browser Tool 所属资源组 ID；不指定时使用默认资源组。 (Optional) */
+    ResourceGroupId *string `json:"resourceGroupId"`
 }
 
 /*
@@ -73,17 +86,25 @@ func NewCreateBrowserToolRequest(
  * param regionId: Region ID (Required)
  * param name: Browser Tool 名称。长度为 1~32 个字符，可包含中文、数字、大小写字母、下划线、中划线或点。 (Required)
  * param description: Browser Tool 描述信息，长度不超过 256 个字符。 (Optional)
+ * param resourceConfiguration: Browser Tool 资源配置；不指定时使用 1 vCPU、2 GiB 内存。 (Optional)
+ * param logConfiguration: Browser Tool 云日志投递配置。不传或 enabled=false 时不开启日志投递。 (Optional)
  * param authenticationType: Browser Tool 鉴权方式，当前仅支持 `API_KEY` (Optional)
  * param networkConfiguration: Code Interpreter 网络配置。支持 public｜sandbox 两种。 (Required)
  * param clientToken: 用于保证请求幂等性。 (Optional)
+ * param tags: Browser Tool 用户标签配置。 (Optional)
+ * param resourceGroupId: Browser Tool 所属资源组 ID；不指定时使用默认资源组。 (Optional)
  */
 func NewCreateBrowserToolRequestWithAllParams(
     regionId string,
     name string,
     description *string,
+    resourceConfiguration *agentgrid.ResourceConfiguration,
+    logConfiguration *agentgrid.LogConfiguration,
     authenticationType *string,
     networkConfiguration string,
     clientToken *string,
+    tags []agentgrid.Tag,
+    resourceGroupId *string,
 ) *CreateBrowserToolRequest {
 
     return &CreateBrowserToolRequest{
@@ -96,9 +117,13 @@ func NewCreateBrowserToolRequestWithAllParams(
         RegionId: regionId,
         Name: name,
         Description: description,
+        ResourceConfiguration: resourceConfiguration,
+        LogConfiguration: logConfiguration,
         AuthenticationType: authenticationType,
         NetworkConfiguration: networkConfiguration,
         ClientToken: clientToken,
+        Tags: tags,
+        ResourceGroupId: resourceGroupId,
     }
 }
 
@@ -127,6 +152,14 @@ func (r *CreateBrowserToolRequest) SetName(name string) {
 func (r *CreateBrowserToolRequest) SetDescription(description string) {
     r.Description = &description
 }
+/* param resourceConfiguration: Browser Tool 资源配置；不指定时使用 1 vCPU、2 GiB 内存。(Optional) */
+func (r *CreateBrowserToolRequest) SetResourceConfiguration(resourceConfiguration *agentgrid.ResourceConfiguration) {
+    r.ResourceConfiguration = resourceConfiguration
+}
+/* param logConfiguration: Browser Tool 云日志投递配置。不传或 enabled=false 时不开启日志投递。(Optional) */
+func (r *CreateBrowserToolRequest) SetLogConfiguration(logConfiguration *agentgrid.LogConfiguration) {
+    r.LogConfiguration = logConfiguration
+}
 /* param authenticationType: Browser Tool 鉴权方式，当前仅支持 `API_KEY`(Optional) */
 func (r *CreateBrowserToolRequest) SetAuthenticationType(authenticationType string) {
     r.AuthenticationType = &authenticationType
@@ -138,6 +171,14 @@ func (r *CreateBrowserToolRequest) SetNetworkConfiguration(networkConfiguration 
 /* param clientToken: 用于保证请求幂等性。(Optional) */
 func (r *CreateBrowserToolRequest) SetClientToken(clientToken string) {
     r.ClientToken = &clientToken
+}
+/* param tags: Browser Tool 用户标签配置。(Optional) */
+func (r *CreateBrowserToolRequest) SetTags(tags []agentgrid.Tag) {
+    r.Tags = tags
+}
+/* param resourceGroupId: Browser Tool 所属资源组 ID；不指定时使用默认资源组。(Optional) */
+func (r *CreateBrowserToolRequest) SetResourceGroupId(resourceGroupId string) {
+    r.ResourceGroupId = &resourceGroupId
 }
 
 

@@ -40,6 +40,12 @@ type DescribeRuntimesRequest struct {
 `state`：按 Runtime 状态过滤，支持多个值。可选值：`pending`、`creating`、`running`、`updating`、`failed`、`deleted`
  (Optional) */
     Filters []agentgrid.Filter `json:"filters"`
+
+    /* 按 Runtime 用户标签过滤；不同标签条件之间取交集。 (Optional) */
+    Tags []agentgrid.TagFilter `json:"tags"`
+
+    /* 按 Runtime 所属资源组 ID 过滤。 (Optional) */
+    ResourceGroupIds []string `json:"resourceGroupIds"`
 }
 
 /*
@@ -71,12 +77,16 @@ func NewDescribeRuntimesRequest(
 `runtimeName`：按 Runtime 名称模糊匹配，仅支持单个值。
 `state`：按 Runtime 状态过滤，支持多个值。可选值：`pending`、`creating`、`running`、`updating`、`failed`、`deleted`
  (Optional)
+ * param tags: 按 Runtime 用户标签过滤；不同标签条件之间取交集。 (Optional)
+ * param resourceGroupIds: 按 Runtime 所属资源组 ID 过滤。 (Optional)
  */
 func NewDescribeRuntimesRequestWithAllParams(
     regionId string,
     pageSize *int,
     pageNumber *int,
     filters []agentgrid.Filter,
+    tags []agentgrid.TagFilter,
+    resourceGroupIds []string,
 ) *DescribeRuntimesRequest {
 
     return &DescribeRuntimesRequest{
@@ -90,6 +100,8 @@ func NewDescribeRuntimesRequestWithAllParams(
         PageSize: pageSize,
         PageNumber: pageNumber,
         Filters: filters,
+        Tags: tags,
+        ResourceGroupIds: resourceGroupIds,
     }
 }
 
@@ -125,6 +137,14 @@ func (r *DescribeRuntimesRequest) SetPageNumber(pageNumber int) {
 (Optional) */
 func (r *DescribeRuntimesRequest) SetFilters(filters []agentgrid.Filter) {
     r.Filters = filters
+}
+/* param tags: 按 Runtime 用户标签过滤；不同标签条件之间取交集。(Optional) */
+func (r *DescribeRuntimesRequest) SetTags(tags []agentgrid.TagFilter) {
+    r.Tags = tags
+}
+/* param resourceGroupIds: 按 Runtime 所属资源组 ID 过滤。(Optional) */
+func (r *DescribeRuntimesRequest) SetResourceGroupIds(resourceGroupIds []string) {
+    r.ResourceGroupIds = resourceGroupIds
 }
 
 
