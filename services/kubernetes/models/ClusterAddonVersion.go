@@ -31,9 +31,9 @@ type ClusterAddonVersion struct {
     /* 组件版本发布说明 (Optional) */
     ReleaseNote string `json:"releaseNote"`
 
-    /* 适配的k8s最低版本，如 1.12 (Optional) */
+    /* 适配的k8s最低版本，如 1.18 (Optional) */
     MinAdaptedK8sVersion string `json:"minAdaptedK8sVersion"`
 
-    /* 适配的k8s最高版本，如 1.18 (Optional) */
+    /* 适配的k8s最高版本，如 1.30 (Optional) */
     MaxAdaptedK8sVersion string `json:"maxAdaptedK8sVersion"`
 }

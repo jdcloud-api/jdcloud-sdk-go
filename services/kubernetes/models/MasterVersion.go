@@ -22,7 +22,7 @@ type MasterVersion struct {
     /* 集群版本号 (Optional) */
     Version string `json:"version"`
 
-    /* 是否默认版本 (Optional) */
+    /* 是否为默认版本 (Optional) */
     IsDefault bool `json:"isDefault"`
 
     /* 默认工作节点版本号 (Optional) */
@@ -31,8 +31,11 @@ type MasterVersion struct {
     /* 版本状态 (Optional) */
     VersionStatus string `json:"versionStatus"`
 
-    /* node节点操作系统类型列表，以 "," 分割，目前支持 CentOS|Windows (Optional) */
+    /* node节点操作系统类型列表，以 "," 分割，目前支持 CentOS、Windows、OpenEuler等 (Optional) */
     NodeOsTypes string `json:"nodeOsTypes"`
+
+    /* 异构节点操作系统版本，如OpenEuler 24.03等 (Optional) */
+    HpcNodeOsVersions []HpcNodeOsVersion `json:"hpcNodeOsVersions"`
 
     /* 该版本可安装的addons (Optional) */
     ClusterAddons []ClusterAddon `json:"clusterAddons"`

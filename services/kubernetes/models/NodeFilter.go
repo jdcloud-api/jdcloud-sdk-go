@@ -17,14 +17,14 @@
 package models
 
 
-type ServerConfig struct {
+type NodeFilter struct {
 
-    /* kubernetes master 的支持版本 (Optional) */
-    ValidMasterVersions []string `json:"validMasterVersions"`
+    /* 过滤条件的名称  */
+    Name string `json:"name"`
 
-    /* kubernetes master 的默认版本 (Optional) */
-    DefaultMasterVersion string `json:"defaultMasterVersion"`
+    /* 过滤条件的操作符，默认 eq (Optional) */
+    Operator string `json:"operator"`
 
-    /* node 节点的配置 (Optional) */
-    ValidNodeConfig []ValidNodeConfig `json:"validNodeConfig"`
+    /* 过滤条件的值  */
+    Values []string `json:"values"`
 }

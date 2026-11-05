@@ -35,6 +35,9 @@ type ModifyClusterRequest struct {
 
     /* 集群描述 (Optional) */
     Description *string `json:"description"`
+
+    /* 集群删除保护 (Optional) */
+    DeleteProtected *bool `json:"deleteProtected"`
 }
 
 /*
@@ -65,12 +68,14 @@ func NewModifyClusterRequest(
  * param clusterId: 集群 ID (Required)
  * param name: 集群名称 (Optional)
  * param description: 集群描述 (Optional)
+ * param deleteProtected: 集群删除保护 (Optional)
  */
 func NewModifyClusterRequestWithAllParams(
     regionId string,
     clusterId string,
     name *string,
     description *string,
+    deleteProtected *bool,
 ) *ModifyClusterRequest {
 
     return &ModifyClusterRequest{
@@ -84,6 +89,7 @@ func NewModifyClusterRequestWithAllParams(
         ClusterId: clusterId,
         Name: name,
         Description: description,
+        DeleteProtected: deleteProtected,
     }
 }
 
@@ -115,6 +121,10 @@ func (r *ModifyClusterRequest) SetName(name string) {
 /* param description: 集群描述(Optional) */
 func (r *ModifyClusterRequest) SetDescription(description string) {
     r.Description = &description
+}
+/* param deleteProtected: 集群删除保护(Optional) */
+func (r *ModifyClusterRequest) SetDeleteProtected(deleteProtected bool) {
+    r.DeleteProtected = &deleteProtected
 }
 
 

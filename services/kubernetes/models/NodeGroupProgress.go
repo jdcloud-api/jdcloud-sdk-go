@@ -22,7 +22,7 @@ type NodeGroupProgress struct {
     /* 工作节点组 id (Optional) */
     NodeGroupId string `json:"nodeGroupId"`
 
-    /* 操作类型, upgrade, downgrade, rollback (Optional) */
+    /* 操作类型, upgrade (Optional) */
     Action string `json:"action"`
 
     /* 总工作节点个数 (Optional) */

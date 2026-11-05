@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    kubernetes "github.com/jdcloud-api/jdcloud-sdk-go/services/kubernetes/models"
 )
 
 type SetNodeGroupSizeRequest struct {
@@ -32,6 +33,9 @@ type SetNodeGroupSizeRequest struct {
 
     /* 预期目标节点数量  */
     ExpectCount int `json:"expectCount"`
+
+    /* 扩容新建节点使用的磁盘初始化策略；不传时继承节点组默认策略diskPriority=local_first、splitStrategy=weighted、containerWeight=100、containerCapGB=1000、rootfsQuotaGB=0；显式传入仅覆盖本次扩容，不修改节点组默认策略或存量节点；缩容或节点数不变时不允许传入 (Optional) */
+    DiskInitialize *kubernetes.DiskInitializeSpec `json:"diskInitialize"`
 }
 
 /*
@@ -64,11 +68,13 @@ func NewSetNodeGroupSizeRequest(
  * param regionId: 地域 ID (Required)
  * param nodeGroupId: 工作节点组 ID (Required)
  * param expectCount: 预期目标节点数量 (Required)
+ * param diskInitialize: 扩容新建节点使用的磁盘初始化策略；不传时继承节点组默认策略diskPriority=local_first、splitStrategy=weighted、containerWeight=100、containerCapGB=1000、rootfsQuotaGB=0；显式传入仅覆盖本次扩容，不修改节点组默认策略或存量节点；缩容或节点数不变时不允许传入 (Optional)
  */
 func NewSetNodeGroupSizeRequestWithAllParams(
     regionId string,
     nodeGroupId string,
     expectCount int,
+    diskInitialize *kubernetes.DiskInitializeSpec,
 ) *SetNodeGroupSizeRequest {
 
     return &SetNodeGroupSizeRequest{
@@ -81,6 +87,7 @@ func NewSetNodeGroupSizeRequestWithAllParams(
         RegionId: regionId,
         NodeGroupId: nodeGroupId,
         ExpectCount: expectCount,
+        DiskInitialize: diskInitialize,
     }
 }
 
@@ -109,6 +116,10 @@ func (r *SetNodeGroupSizeRequest) SetNodeGroupId(nodeGroupId string) {
 func (r *SetNodeGroupSizeRequest) SetExpectCount(expectCount int) {
     r.ExpectCount = expectCount
 }
+/* param diskInitialize: 扩容新建节点使用的磁盘初始化策略；不传时继承节点组默认策略diskPriority=local_first、splitStrategy=weighted、containerWeight=100、containerCapGB=1000、rootfsQuotaGB=0；显式传入仅覆盖本次扩容，不修改节点组默认策略或存量节点；缩容或节点数不变时不允许传入(Optional) */
+func (r *SetNodeGroupSizeRequest) SetDiskInitialize(diskInitialize *kubernetes.DiskInitializeSpec) {
+    r.DiskInitialize = diskInitialize
+}
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
@@ -124,4 +135,6 @@ type SetNodeGroupSizeResponse struct {
 }
 
 type SetNodeGroupSizeResult struct {
+    TaskId int `json:"taskId"`
+    OperationId string `json:"operationId"`
 }

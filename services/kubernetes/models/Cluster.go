@@ -31,6 +31,9 @@ type Cluster struct {
     /* kubernetes的版本 (Optional) */
     Version string `json:"version"`
 
+    /* k8s可升级的版本 (Optional) */
+    UpgradeVersion []string `json:"upgradeVersion"`
+
     /* 集群所在的az (Optional) */
     Azs []string `json:"azs"`
 
@@ -43,7 +46,7 @@ type Cluster struct {
     /* 认证信息 (Optional) */
     MasterAuth MasterAuth `json:"masterAuth"`
 
-    /* 状态  [pending,running,reconciling（升级时的状态）, deleting, deleted, error] (Optional) */
+    /* 状态  [pending,running,upgrading(升级中), deleting, deleted, error] (Optional) */
     ClusterState string `json:"clusterState"`
 
     /* 状态变更原因 (Optional) */
@@ -108,4 +111,22 @@ type Cluster struct {
 
     /* 是否是边缘计算集群 (Optional) */
     IsEdge bool `json:"isEdge"`
+
+    /* 是否开启集群删除保护 (Optional) */
+    DeleteProtected bool `json:"deleteProtected"`
+
+    /* 资源标签 (Optional) */
+    Tags []Tag `json:"tags"`
+
+    /* 资源组id (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
+
+    /* 是否开启集群授权网卡, true表示开启， false表示未开启 (Optional) */
+    IsCreditNic bool `json:"isCreditNic"`
+
+    /* 集群DNS的定制化配置，可以配置自定义的hosts和域名解析 (Optional) */
+    ClusterDnsSpec ClusterDnsSpec `json:"clusterDnsSpec"`
+
+    /* kube-apiserver的自定义域名，会自动签名到证书里 (Optional) */
+    KubeApiserverDomains []string `json:"kubeApiserverDomains"`
 }

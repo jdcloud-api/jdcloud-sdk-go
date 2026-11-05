@@ -18,6 +18,7 @@ package apis
 
 import (
     "github.com/jdcloud-api/jdcloud-sdk-go/core"
+    kubernetes "github.com/jdcloud-api/jdcloud-sdk-go/services/kubernetes/models"
 )
 
 type ModifyNodeGroupRequest struct {
@@ -35,6 +36,24 @@ type ModifyNodeGroupRequest struct {
 
     /* 工作节点组描述 (Optional) */
     Description *string `json:"description"`
+
+    /* k8s标签 (Optional) */
+    Labels []kubernetes.LabelSpec `json:"labels"`
+
+    /* k8s污点 (Optional) */
+    Taints []kubernetes.TaintSpec `json:"taints"`
+
+    /* 变更是否对存量节点生效，默认false (Optional) */
+    UpdateExistNode *bool `json:"updateExistNode"`
+
+    /* 更新节点组默认磁盘初始化策略；不传时保留原策略；仅影响后续新建节点，不调整已有布局；all_disks_lvm 的 CSI 初始预留默认 800 GiB (Optional) */
+    DiskInitialize *kubernetes.DiskInitializeSpec `json:"diskInitialize"`
+
+    /* 更新节点组系统盘信息，仅支持修改系统盘类型 (Optional) */
+    SystemDisk *kubernetes.NodeGroupSystemDiskSpec `json:"systemDisk"`
+
+    /* 更新节点组数据盘信息，兼容多块盘模式 (Optional) */
+    DataDisks []kubernetes.NodeGroupDataDiskSpec `json:"dataDisks"`
 }
 
 /*
@@ -65,12 +84,24 @@ func NewModifyNodeGroupRequest(
  * param nodeGroupId: 工作节点组 ID (Required)
  * param name: 工作节点组名称 (Optional)
  * param description: 工作节点组描述 (Optional)
+ * param labels: k8s标签 (Optional)
+ * param taints: k8s污点 (Optional)
+ * param updateExistNode: 变更是否对存量节点生效，默认false (Optional)
+ * param diskInitialize: 更新节点组默认磁盘初始化策略；不传时保留原策略；仅影响后续新建节点，不调整已有布局；all_disks_lvm 的 CSI 初始预留默认 800 GiB (Optional)
+ * param systemDisk: 更新节点组系统盘信息，仅支持修改系统盘类型 (Optional)
+ * param dataDisks: 更新节点组数据盘信息，兼容多块盘模式 (Optional)
  */
 func NewModifyNodeGroupRequestWithAllParams(
     regionId string,
     nodeGroupId string,
     name *string,
     description *string,
+    labels []kubernetes.LabelSpec,
+    taints []kubernetes.TaintSpec,
+    updateExistNode *bool,
+    diskInitialize *kubernetes.DiskInitializeSpec,
+    systemDisk *kubernetes.NodeGroupSystemDiskSpec,
+    dataDisks []kubernetes.NodeGroupDataDiskSpec,
 ) *ModifyNodeGroupRequest {
 
     return &ModifyNodeGroupRequest{
@@ -84,6 +115,12 @@ func NewModifyNodeGroupRequestWithAllParams(
         NodeGroupId: nodeGroupId,
         Name: name,
         Description: description,
+        Labels: labels,
+        Taints: taints,
+        UpdateExistNode: updateExistNode,
+        DiskInitialize: diskInitialize,
+        SystemDisk: systemDisk,
+        DataDisks: dataDisks,
     }
 }
 
@@ -115,6 +152,30 @@ func (r *ModifyNodeGroupRequest) SetName(name string) {
 /* param description: 工作节点组描述(Optional) */
 func (r *ModifyNodeGroupRequest) SetDescription(description string) {
     r.Description = &description
+}
+/* param labels: k8s标签(Optional) */
+func (r *ModifyNodeGroupRequest) SetLabels(labels []kubernetes.LabelSpec) {
+    r.Labels = labels
+}
+/* param taints: k8s污点(Optional) */
+func (r *ModifyNodeGroupRequest) SetTaints(taints []kubernetes.TaintSpec) {
+    r.Taints = taints
+}
+/* param updateExistNode: 变更是否对存量节点生效，默认false(Optional) */
+func (r *ModifyNodeGroupRequest) SetUpdateExistNode(updateExistNode bool) {
+    r.UpdateExistNode = &updateExistNode
+}
+/* param diskInitialize: 更新节点组默认磁盘初始化策略；不传时保留原策略；仅影响后续新建节点，不调整已有布局；all_disks_lvm 的 CSI 初始预留默认 800 GiB(Optional) */
+func (r *ModifyNodeGroupRequest) SetDiskInitialize(diskInitialize *kubernetes.DiskInitializeSpec) {
+    r.DiskInitialize = diskInitialize
+}
+/* param systemDisk: 更新节点组系统盘信息，仅支持修改系统盘类型(Optional) */
+func (r *ModifyNodeGroupRequest) SetSystemDisk(systemDisk *kubernetes.NodeGroupSystemDiskSpec) {
+    r.SystemDisk = systemDisk
+}
+/* param dataDisks: 更新节点组数据盘信息，兼容多块盘模式(Optional) */
+func (r *ModifyNodeGroupRequest) SetDataDisks(dataDisks []kubernetes.NodeGroupDataDiskSpec) {
+    r.DataDisks = dataDisks
 }
 
 

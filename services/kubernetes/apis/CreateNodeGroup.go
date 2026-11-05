@@ -34,31 +34,43 @@ type CreateNodeGroupRequest struct {
     /* 描述 (Optional) */
     Description *string `json:"description"`
 
-    /* 工作节点所属的集群  */
+    /* 节点组所属的集群  */
     ClusterId string `json:"clusterId"`
 
-    /* 工作节点配置信息  */
+    /* 节点组关联的资源组id，不传为默认资源组 (Optional) */
+    ResourceGroupId *string `json:"resourceGroupId"`
+
+    /* 云主机节点配置信息  */
     NodeConfig *kubernetes.NodeConfigSpec `json:"nodeConfig"`
 
-    /* 工作节点组的 az，必须为集群az的子集，默认为集群az (Optional) */
+    /* 云主机节点组的 az (Optional) */
     Azs []string `json:"azs"`
 
-    /* 工作节点组初始化大小  */
+    /* 云主机节点组初始化大小  */
     InitialNodeCount int `json:"initialNodeCount"`
 
     /* 自动伸缩配置 (Optional) */
     CaConfig *kubernetes.CAConfigSpec `json:"caConfig"`
 
-    /* 节点组的网络配置，如果集群的类型customized类型，则必须指定该参数，如果是auto，则不是必须 (Optional) */
+    /* 节点组的网络配置，如果集群的网络类型为customized类型，则必须指定该参数，如果是auto，则不是必须 (Optional) */
     NodeGroupNetwork *kubernetes.NodeGroupNetworkSpec `json:"nodeGroupNetwork"`
+
+    /* 工作节点数据盘初始化策略；创建后保存为节点组默认策略；不传时沿用 legacy 默认值diskPriority=local_first、splitStrategy=weighted、containerWeight=100、containerCapGB=1000、rootfsQuotaGB=0；all_disks_lvm 的 CSI 初始预留默认 800 GiB (Optional) */
+    DiskInitialize *kubernetes.DiskInitializeSpec `json:"diskInitialize"`
+
+    /* 云主机节点组关联的资源标签 (Optional) */
+    Tags []kubernetes.Tag `json:"tags"`
+
+    /* 容器运行时，默认为空字符。仅支持空字符和kata-container (Optional) */
+    ContainerRuntime *string `json:"containerRuntime"`
 }
 
 /*
  * param regionId: 地域 ID (Required)
  * param name: 名称（同一用户的 cluster 内部唯一） (Required)
- * param clusterId: 工作节点所属的集群 (Required)
- * param nodeConfig: 工作节点配置信息 (Required)
- * param initialNodeCount: 工作节点组初始化大小 (Required)
+ * param clusterId: 节点组所属的集群 (Required)
+ * param nodeConfig: 云主机节点配置信息 (Required)
+ * param initialNodeCount: 云主机节点组初始化大小 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -89,23 +101,31 @@ func NewCreateNodeGroupRequest(
  * param regionId: 地域 ID (Required)
  * param name: 名称（同一用户的 cluster 内部唯一） (Required)
  * param description: 描述 (Optional)
- * param clusterId: 工作节点所属的集群 (Required)
- * param nodeConfig: 工作节点配置信息 (Required)
- * param azs: 工作节点组的 az，必须为集群az的子集，默认为集群az (Optional)
- * param initialNodeCount: 工作节点组初始化大小 (Required)
+ * param clusterId: 节点组所属的集群 (Required)
+ * param resourceGroupId: 节点组关联的资源组id，不传为默认资源组 (Optional)
+ * param nodeConfig: 云主机节点配置信息 (Required)
+ * param azs: 云主机节点组的 az (Optional)
+ * param initialNodeCount: 云主机节点组初始化大小 (Required)
  * param caConfig: 自动伸缩配置 (Optional)
- * param nodeGroupNetwork: 节点组的网络配置，如果集群的类型customized类型，则必须指定该参数，如果是auto，则不是必须 (Optional)
+ * param nodeGroupNetwork: 节点组的网络配置，如果集群的网络类型为customized类型，则必须指定该参数，如果是auto，则不是必须 (Optional)
+ * param diskInitialize: 工作节点数据盘初始化策略；创建后保存为节点组默认策略；不传时沿用 legacy 默认值diskPriority=local_first、splitStrategy=weighted、containerWeight=100、containerCapGB=1000、rootfsQuotaGB=0；all_disks_lvm 的 CSI 初始预留默认 800 GiB (Optional)
+ * param tags: 云主机节点组关联的资源标签 (Optional)
+ * param containerRuntime: 容器运行时，默认为空字符。仅支持空字符和kata-container (Optional)
  */
 func NewCreateNodeGroupRequestWithAllParams(
     regionId string,
     name string,
     description *string,
     clusterId string,
+    resourceGroupId *string,
     nodeConfig *kubernetes.NodeConfigSpec,
     azs []string,
     initialNodeCount int,
     caConfig *kubernetes.CAConfigSpec,
     nodeGroupNetwork *kubernetes.NodeGroupNetworkSpec,
+    diskInitialize *kubernetes.DiskInitializeSpec,
+    tags []kubernetes.Tag,
+    containerRuntime *string,
 ) *CreateNodeGroupRequest {
 
     return &CreateNodeGroupRequest{
@@ -119,11 +139,15 @@ func NewCreateNodeGroupRequestWithAllParams(
         Name: name,
         Description: description,
         ClusterId: clusterId,
+        ResourceGroupId: resourceGroupId,
         NodeConfig: nodeConfig,
         Azs: azs,
         InitialNodeCount: initialNodeCount,
         CaConfig: caConfig,
         NodeGroupNetwork: nodeGroupNetwork,
+        DiskInitialize: diskInitialize,
+        Tags: tags,
+        ContainerRuntime: containerRuntime,
     }
 }
 
@@ -152,19 +176,23 @@ func (r *CreateNodeGroupRequest) SetName(name string) {
 func (r *CreateNodeGroupRequest) SetDescription(description string) {
     r.Description = &description
 }
-/* param clusterId: 工作节点所属的集群(Required) */
+/* param clusterId: 节点组所属的集群(Required) */
 func (r *CreateNodeGroupRequest) SetClusterId(clusterId string) {
     r.ClusterId = clusterId
 }
-/* param nodeConfig: 工作节点配置信息(Required) */
+/* param resourceGroupId: 节点组关联的资源组id，不传为默认资源组(Optional) */
+func (r *CreateNodeGroupRequest) SetResourceGroupId(resourceGroupId string) {
+    r.ResourceGroupId = &resourceGroupId
+}
+/* param nodeConfig: 云主机节点配置信息(Required) */
 func (r *CreateNodeGroupRequest) SetNodeConfig(nodeConfig *kubernetes.NodeConfigSpec) {
     r.NodeConfig = nodeConfig
 }
-/* param azs: 工作节点组的 az，必须为集群az的子集，默认为集群az(Optional) */
+/* param azs: 云主机节点组的 az(Optional) */
 func (r *CreateNodeGroupRequest) SetAzs(azs []string) {
     r.Azs = azs
 }
-/* param initialNodeCount: 工作节点组初始化大小(Required) */
+/* param initialNodeCount: 云主机节点组初始化大小(Required) */
 func (r *CreateNodeGroupRequest) SetInitialNodeCount(initialNodeCount int) {
     r.InitialNodeCount = initialNodeCount
 }
@@ -172,9 +200,21 @@ func (r *CreateNodeGroupRequest) SetInitialNodeCount(initialNodeCount int) {
 func (r *CreateNodeGroupRequest) SetCaConfig(caConfig *kubernetes.CAConfigSpec) {
     r.CaConfig = caConfig
 }
-/* param nodeGroupNetwork: 节点组的网络配置，如果集群的类型customized类型，则必须指定该参数，如果是auto，则不是必须(Optional) */
+/* param nodeGroupNetwork: 节点组的网络配置，如果集群的网络类型为customized类型，则必须指定该参数，如果是auto，则不是必须(Optional) */
 func (r *CreateNodeGroupRequest) SetNodeGroupNetwork(nodeGroupNetwork *kubernetes.NodeGroupNetworkSpec) {
     r.NodeGroupNetwork = nodeGroupNetwork
+}
+/* param diskInitialize: 工作节点数据盘初始化策略；创建后保存为节点组默认策略；不传时沿用 legacy 默认值diskPriority=local_first、splitStrategy=weighted、containerWeight=100、containerCapGB=1000、rootfsQuotaGB=0；all_disks_lvm 的 CSI 初始预留默认 800 GiB(Optional) */
+func (r *CreateNodeGroupRequest) SetDiskInitialize(diskInitialize *kubernetes.DiskInitializeSpec) {
+    r.DiskInitialize = diskInitialize
+}
+/* param tags: 云主机节点组关联的资源标签(Optional) */
+func (r *CreateNodeGroupRequest) SetTags(tags []kubernetes.Tag) {
+    r.Tags = tags
+}
+/* param containerRuntime: 容器运行时，默认为空字符。仅支持空字符和kata-container(Optional) */
+func (r *CreateNodeGroupRequest) SetContainerRuntime(containerRuntime string) {
+    r.ContainerRuntime = &containerRuntime
 }
 
 
@@ -192,4 +232,5 @@ type CreateNodeGroupResponse struct {
 
 type CreateNodeGroupResult struct {
     NodeGroupId string `json:"nodeGroupId"`
+    OperationId string `json:"operationId"`
 }

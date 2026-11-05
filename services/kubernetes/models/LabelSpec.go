@@ -20,7 +20,7 @@ package models
 type LabelSpec struct {
 
     /* key包含两个部分：prefix与name，name是必须的，prefix是可选的。prefix与name分隔用"/"。 
-name 可以是字母，数字，[-_.]。长度小于63。prefix：遵循DNS标准（例如：kubernetes.io/），长度不超过253 
+name 可以是字母，数字，[-_.]。长度小于63。prefix：遵循DNS标准（例如：kubernetes.io/），长度不超过253。 
 [参照](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#syntax-and-character-set)    
   */
     Key string `json:"key"`

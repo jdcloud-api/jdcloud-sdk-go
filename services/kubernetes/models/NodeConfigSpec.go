@@ -19,7 +19,7 @@ package models
 
 type NodeConfigSpec struct {
 
-    /* 实例类型  */
+    /* 云主机实例类型  */
     InstanceType string `json:"instanceType"`
 
     /* 云主机密码，默认为集群密码，密码规范参考：[公共参数规范](https://docs.jdcloud.com/cn/virtual-machines/api/general_parameters) (Optional) */
@@ -28,18 +28,30 @@ type NodeConfigSpec struct {
     /* 云主机SSH密钥对名称，当前仅支持一个。使用中的SSH密钥请勿删除。 (Optional) */
     KeyNames []string `json:"keyNames"`
 
+    /* 是否允许SSH密码登录。yes：允许SSH密码登录。no：禁止SSH密码登录。仅在指定密钥时此参数有效，指定此参数后密码即使输入也将被忽略，同时会在系统内禁用SSH密码登录。 (Optional) */
+    PassWordAuth *string `json:"passWordAuth"`
+
     /* 云主机系统盘配置信息 (Optional) */
     SystemDisk *DiskSpec `json:"systemDisk"`
 
-    /* 工作节点组标签，最多支持 10 个 (Optional) */
+    /* k8s节点标签，最多支持5个 (Optional) */
     Labels []LabelSpec `json:"labels"`
+
+    /* k8s节点污点，最多支持20个 (Optional) */
+    Taints []TaintSpec `json:"taints"`
 
     /* 云主机脚本，暂定最多支持5个脚本，目前支持脚本类型为启动脚本，key为launch-script。 (Optional) */
     UserScripts []UserScriptSpec `json:"userScripts"`
 
+    /* 自定义云主机镜像，为空则使用k8s release关联镜像 (Optional) */
+    CustomizedImageId *string `json:"customizedImageId"`
+
     /* 云主机数据盘配置信息 (Optional) */
     DataDiskSpec []DataDiskSpec `json:"dataDiskSpec"`
 
-    /* 工作节点组的安全组配置，为空则使用默认安全组 (Optional) */
+    /* 云主机节点的安全组配置，为空则使用默认安全组 (Optional) */
     SecurityGroup *string `json:"securityGroup"`
+
+    /* 云主机节点的计费配置 (Optional) */
+    ChargeConfig *ChargeConfigSpec `json:"chargeConfig"`
 }
