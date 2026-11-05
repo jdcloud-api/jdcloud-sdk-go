@@ -54,4 +54,7 @@ type ClusterPodSubnet struct {
 
     /* 子网名称 (Optional) */
     SubnetName string `json:"subnetName"`
+
+    /* pod子网关联的命名空间 (Optional) */
+    Namespace string `json:"namespace"`
 }

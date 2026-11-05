@@ -19,6 +19,9 @@ package models
 
 type NodeGroup struct {
 
+    /* 新增节点数据盘初始化策略 (Optional) */
+    DiskInitialize DiskInitializeSpec `json:"diskInitialize"`
+
     /* 集群 id (Optional) */
     ClusterId string `json:"clusterId"`
 
@@ -36,6 +39,9 @@ type NodeGroup struct {
 
     /* 工作节点版本 (Optional) */
     Version string `json:"version"`
+
+    /* 工作节点组可升级版本 (Optional) */
+    UpgradeVersion []string `json:"upgradeVersion"`
 
     /* 工作节点所属的网络信息 (Optional) */
     NodeNetwork NodeNetwork `json:"nodeNetwork"`
@@ -55,11 +61,14 @@ type NodeGroup struct {
     /* 工作节点组的 ag 对应的实例模板 (Optional) */
     InstanceTemplateId string `json:"instanceTemplateId"`
 
-    /* 状态  [pending,running,resizing,reconciling,deleting,deleted,error,running_with_error(部分节点有问题)] (Optional) */
+    /* 状态  [pending,running,resizing,upgrading(升级中),deleting,deleted,error,running_with_error(部分节点有问题)] (Optional) */
     State string `json:"state"`
 
     /*  (Optional) */
     Tags []Tag `json:"tags"`
+
+    /* 资源组id (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
 
     /* 更新时间 (Optional) */
     UpdateTime string `json:"updateTime"`
@@ -75,4 +84,13 @@ type NodeGroup struct {
 
     /* 创建时间 (Optional) */
     CreatedTime string `json:"createdTime"`
+
+    /*  (Optional) */
+    InstanceIds []string `json:"instanceIds"`
+
+    /* 工作节点组的类型 (Optional) */
+    NodeGroupType string `json:"nodeGroupType"`
+
+    /* 异构节点组关联的实例物理集群Id (Optional) */
+    HpcClusterId string `json:"hpcClusterId"`
 }

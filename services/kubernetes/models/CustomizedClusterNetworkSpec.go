@@ -22,8 +22,8 @@ type CustomizedClusterNetworkSpec struct {
     /* kube-apiserver是否可公网访问，false则kube-apiserver不绑定公网地址，true绑定公网地址  */
     PublicApiServer bool `json:"publicApiServer"`
 
-    /* master网络的cidr  */
-    MasterCidr string `json:"masterCidr"`
+    /* master网络的cidr；isCreditNic为true时，自动生成；isCreditNic为false，此参数值必填 (Optional) */
+    MasterCidr *string `json:"masterCidr"`
 
     /* service网络的cidr  */
     ServiceCidr string `json:"serviceCidr"`
@@ -37,8 +37,8 @@ type CustomizedClusterNetworkSpec struct {
     /* 初始loadbalancer类型的service所创建的lb所在的subnet  */
     LbSubnetId string `json:"lbSubnetId"`
 
-    /* 初始的node子网ID  */
-    NodeSubnetId string `json:"nodeSubnetId"`
+    /* 初始的vm node子网ID (Optional) */
+    NodeSubnetId *string `json:"nodeSubnetId"`
 
     /* 是否双栈支持，开启后，kube-apiserver将拥有ipv6地址，默认不开启 (Optional) */
     DualStack *bool `json:"dualStack"`
@@ -51,4 +51,10 @@ type CustomizedClusterNetworkSpec struct {
 
     /* 节点公网IP的配置，与nat网关配置互斥，不可同时设置 (Optional) */
     NodeElasticIpSpec *NodeElasticIpSpec `json:"nodeElasticIpSpec"`
+
+    /* 负载均衡配置，仅对集群isCreditNic:true生效, 如果isCreditNic设置true,lbConfig对象必须设置 (Optional) */
+    LbConfig *LbConfig `json:"lbConfig"`
+
+    /* 异构节点子网id,如果创建集群时选择了异构节点组，此字段需必传 (Optional) */
+    HpcNodeSubnetId *string `json:"hpcNodeSubnetId"`
 }

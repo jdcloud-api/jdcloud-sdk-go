@@ -22,18 +22,30 @@ type NodeGroupSpec struct {
     /* 名称  */
     Name string `json:"name"`
 
-    /*  (Optional) */
+    /* 描述 (Optional) */
     Description *string `json:"description"`
 
-    /* 工作节点组的信息  */
+    /* 云主机节点组的信息  */
     NodeConfig *NodeConfigSpec `json:"nodeConfig"`
 
-    /* 工作节点组的 az，必须为集群az的子集，默认为集群az (Optional) */
+    /* 云主机节点组的 az (Optional) */
     Azs []string `json:"azs"`
 
-    /* 工作节点组初始化大小，至少为1个  */
+    /* 云主机节点组初始化大小  */
     InitialNodeCount int `json:"initialNodeCount"`
 
     /* 自动伸缩配置 (Optional) */
     CaConfig *CAConfigSpec `json:"caConfig"`
+
+    /* 资源组id (Optional) */
+    ResourceGroupId *string `json:"resourceGroupId"`
+
+    /* 工作节点数据盘初始化策略；创建后保存为节点组默认策略；不传时沿用 legacy 默认值；all_disks_lvm 的 CSI 初始预留默认 800 GiB (Optional) */
+    DiskInitialize *DiskInitializeSpec `json:"diskInitialize"`
+
+    /* 资源标签 (Optional) */
+    Tags []Tag `json:"tags"`
+
+    /* 容器运行时，默认为空字符。仅支持空字符或者kata-container (Optional) */
+    ContainerRuntime *string `json:"containerRuntime"`
 }

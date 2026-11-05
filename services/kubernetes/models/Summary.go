@@ -17,29 +17,23 @@
 package models
 
 
-type MasterImage struct {
+type Summary struct {
 
-    /* 镜像编码 (Optional) */
+    /* 检查结果 (Optional) */
     Code string `json:"code"`
 
-    /* 虚机镜像id (Optional) */
-    ImageId string `json:"imageId"`
+    /*  (Optional) */
+    NormalCount int `json:"normalCount"`
 
-    /* 主版本号 (Optional) */
-    MainVersion string `json:"mainVersion"`
+    /*  (Optional) */
+    InfoCount int `json:"infoCount"`
 
-    /* 内部版本号 (Optional) */
-    InnerVersion string `json:"innerVersion"`
+    /*  (Optional) */
+    WarningCount int `json:"warningCount"`
 
-    /* 是否默认镜像 (Optional) */
-    IsDefault bool `json:"isDefault"`
+    /*  (Optional) */
+    FatalCount int `json:"fatalCount"`
 
-    /* 可见度:0：所有人可见；1：授权用户可见；2：只有白名单用户可见 (Optional) */
-    Visibility int `json:"visibility"`
-
-    /* 默认节点镜像编码 (Optional) */
-    DefaultNodeImageCode string `json:"defaultNodeImageCode"`
-
-    /* 工作节点镜像 (Optional) */
-    NodeImages []NodeImage `json:"nodeImages"`
+    /*  (Optional) */
+    UnknownCount int `json:"unknownCount"`
 }

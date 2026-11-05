@@ -31,16 +31,17 @@ type DeleteNodeInstancesRequest struct {
     NodeGroupId string `json:"nodeGroupId"`
 
     /* 需要从工作节点组中删除的实例
-- 不可将一个集群中的实例全部删除
   */
     InstanceIds []string `json:"instanceIds"`
+
+    /* 是否需要释放实例 (Optional) */
+    RealDeleteInstance *bool `json:"realDeleteInstance"`
 }
 
 /*
  * param regionId: 地域 ID (Required)
  * param nodeGroupId: 工作节点组 ID (Required)
  * param instanceIds: 需要从工作节点组中删除的实例
-- 不可将一个集群中的实例全部删除
  (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
@@ -68,13 +69,14 @@ func NewDeleteNodeInstancesRequest(
  * param regionId: 地域 ID (Required)
  * param nodeGroupId: 工作节点组 ID (Required)
  * param instanceIds: 需要从工作节点组中删除的实例
-- 不可将一个集群中的实例全部删除
  (Required)
+ * param realDeleteInstance: 是否需要释放实例 (Optional)
  */
 func NewDeleteNodeInstancesRequestWithAllParams(
     regionId string,
     nodeGroupId string,
     instanceIds []string,
+    realDeleteInstance *bool,
 ) *DeleteNodeInstancesRequest {
 
     return &DeleteNodeInstancesRequest{
@@ -87,6 +89,7 @@ func NewDeleteNodeInstancesRequestWithAllParams(
         RegionId: regionId,
         NodeGroupId: nodeGroupId,
         InstanceIds: instanceIds,
+        RealDeleteInstance: realDeleteInstance,
     }
 }
 
@@ -112,10 +115,13 @@ func (r *DeleteNodeInstancesRequest) SetNodeGroupId(nodeGroupId string) {
     r.NodeGroupId = nodeGroupId
 }
 /* param instanceIds: 需要从工作节点组中删除的实例
-- 不可将一个集群中的实例全部删除
 (Required) */
 func (r *DeleteNodeInstancesRequest) SetInstanceIds(instanceIds []string) {
     r.InstanceIds = instanceIds
+}
+/* param realDeleteInstance: 是否需要释放实例(Optional) */
+func (r *DeleteNodeInstancesRequest) SetRealDeleteInstance(realDeleteInstance bool) {
+    r.RealDeleteInstance = &realDeleteInstance
 }
 
 

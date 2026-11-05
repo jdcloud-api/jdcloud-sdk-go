@@ -39,4 +39,7 @@ type UpgradePlan struct {
 
     /* 持续时长 (Optional) */
     Duration int `json:"duration"`
+
+    /* 集群升级定制选项 (Optional) */
+    Options interface{} `json:"options"`
 }

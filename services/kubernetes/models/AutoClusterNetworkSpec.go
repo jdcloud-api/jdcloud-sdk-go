@@ -22,14 +22,14 @@ type AutoClusterNetworkSpec struct {
     /* kube-apiserver是否可公网访问，false则kube-apiserver不绑定公网地址，true绑定公网地址  */
     PublicApiServer bool `json:"publicApiServer"`
 
-    /* master网络的cidr  */
-    MasterCidr string `json:"masterCidr"`
+    /* master网络的cidr；isCreditNic为true时，自动生成；isCreditNic为false，此参数值如果为空则自动生成 (Optional) */
+    MasterCidr *string `json:"masterCidr"`
 
-    /* node网络的cidr，自动切分  */
-    NodeNetworkCidr string `json:"nodeNetworkCidr"`
+    /* node网络的cidr，自动切分；vpcId不为空时，此参数必传 (Optional) */
+    NodeNetworkCidr *string `json:"nodeNetworkCidr"`
 
-    /* 用户侧承载node和pod的vpc id  */
-    VpcId string `json:"vpcId"`
+    /* 用户侧承载node和pod的vpc id，此参数为空则自动创建 (Optional) */
+    VpcId *string `json:"vpcId"`
 
     /* 是否双栈支持，开启后，kube-apiserver将拥有ipv6地址，默认不开启 (Optional) */
     DualStack *bool `json:"dualStack"`

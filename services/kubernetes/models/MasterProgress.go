@@ -19,9 +19,9 @@ package models
 
 type MasterProgress struct {
 
-    /* 操作类型 upgrade,rollback,downgrade 等 (Optional) */
+    /* 操作类型 upgrade (Optional) */
     Action string `json:"action"`
 
-    /* 升级范围, 目前只有三个值：0, 50, 100 (Optional) */
+    /* 升级进度 (Optional) */
     Progress string `json:"progress"`
 }

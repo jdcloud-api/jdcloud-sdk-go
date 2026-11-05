@@ -43,6 +43,12 @@ type NodeConfig struct {
     /* 工作节点组标签 (Optional) */
     Labels []LabelSpec `json:"labels"`
 
+    /* 工作节点组污点 (Optional) */
+    Taints []TaintSpec `json:"taints"`
+
+    /* 变更是否对存量节点生效 (Optional) */
+    UpdateExistNode bool `json:"updateExistNode"`
+
     /* 云主机脚本，目前支持启动脚本，key为launch-script。 (Optional) */
     UserScripts []UserScriptSpec `json:"userScripts"`
 
@@ -54,4 +60,7 @@ type NodeConfig struct {
 
     /* 工作节点组的安全组配置，为空则使用默认安全组 (Optional) */
     SecurityGroup string `json:"securityGroup"`
+
+    /* 工作节点组的计费配置 (Optional) */
+    ChargeConfig ChargeConfigSpec `json:"chargeConfig"`
 }

@@ -35,8 +35,11 @@ type DescribeClustersRequest struct {
     /* 分页大小；默认为20；取值范围[10, 100] (Optional) */
     PageSize *int `json:"pageSize"`
 
+    /*  (Optional) */
+    Tags []kubernetes.TagFilter `json:"tags"`
+
     /* name - 集群名称，模糊匹配，仅支持单个   
-id - id，支持多个   
+id - id，支持多个
  (Optional) */
     Filters []common.Filter `json:"filters"`
 }
@@ -65,14 +68,16 @@ func NewDescribeClustersRequest(
  * param regionId: 地域 ID (Required)
  * param pageNumber: 页码；默认为1 (Optional)
  * param pageSize: 分页大小；默认为20；取值范围[10, 100] (Optional)
+ * param tags:  (Optional)
  * param filters: name - 集群名称，模糊匹配，仅支持单个   
-id - id，支持多个   
+id - id，支持多个
  (Optional)
  */
 func NewDescribeClustersRequestWithAllParams(
     regionId string,
     pageNumber *int,
     pageSize *int,
+    tags []kubernetes.TagFilter,
     filters []common.Filter,
 ) *DescribeClustersRequest {
 
@@ -86,6 +91,7 @@ func NewDescribeClustersRequestWithAllParams(
         RegionId: regionId,
         PageNumber: pageNumber,
         PageSize: pageSize,
+        Tags: tags,
         Filters: filters,
     }
 }
@@ -115,8 +121,12 @@ func (r *DescribeClustersRequest) SetPageNumber(pageNumber int) {
 func (r *DescribeClustersRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
+/* param tags: (Optional) */
+func (r *DescribeClustersRequest) SetTags(tags []kubernetes.TagFilter) {
+    r.Tags = tags
+}
 /* param filters: name - 集群名称，模糊匹配，仅支持单个   
-id - id，支持多个   
+id - id，支持多个
 (Optional) */
 func (r *DescribeClustersRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters

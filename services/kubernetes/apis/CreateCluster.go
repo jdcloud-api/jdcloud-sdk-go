@@ -37,20 +37,35 @@ type CreateClusterRequest struct {
     /* kubernetes的版本 (Optional) */
     Version *string `json:"version"`
 
+    /* 集群关联的资源组id，不传使用默认资源组 (Optional) */
+    ResourceGroupId *string `json:"resourceGroupId"`
+
+    /* 集群关联的资源标签 (Optional) */
+    Tags []kubernetes.Tag `json:"tags"`
+
     /* 是否是边缘计算集群 (Optional) */
     IsEdge *bool `json:"isEdge"`
 
-    /* 集群所在的az  */
+    /* 是否开启集群删除保护 (Optional) */
+    DeleteProtected *bool `json:"deleteProtected"`
+
+    /* 是否开启授信网卡网络模式 (Optional) */
+    IsCreditNic *bool `json:"isCreditNic"`
+
+    /* 集群所在的az,边缘集群必填，中心可用区不填默认随机 (Optional) */
     Azs []string `json:"azs"`
 
-    /* 集群节点组  */
+    /* 云主机节点组 (Optional) */
     NodeGroup *kubernetes.NodeGroupSpec `json:"nodeGroup"`
 
-    /* 用户的AccessKey，插件调用open-api时的认证凭证  */
-    AccessKey string `json:"accessKey"`
+    /* 异构节点组，仅授信网卡模式支持创建(isCreditNic=true) (Optional) */
+    HpcNodeGroup *kubernetes.HpcNodeGroupSpec `json:"hpcNodeGroup"`
 
-    /* 用户的SecretKey，插件调用open-api时的认证凭证  */
-    SecretKey string `json:"secretKey"`
+    /* 用户的AccessKey，插件调用open-api时的认证凭证(已废弃) (Optional) */
+    AccessKey *string `json:"accessKey"`
+
+    /* 用户的SecretKey，插件调用open-api时的认证凭证(已废弃) (Optional) */
+    SecretKey *string `json:"secretKey"`
 
     /* 集群组件配置 (Optional) */
     AddonsConfig []kubernetes.AddonConfigSpec `json:"addonsConfig"`
@@ -66,25 +81,23 @@ type CreateClusterRequest struct {
 
     /* 用户自定义的集群的环境信息，会影响到创建集群时的组件模版的渲染 (Optional) */
     ClusterEnvironments []kubernetes.StringKeyValuePair `json:"clusterEnvironments"`
+
+    /* 集群DNS配置 (Optional) */
+    ClusterDnsSpec *kubernetes.ClusterDnsSpec `json:"clusterDnsSpec"`
+
+    /* KubeApiserver自定义域名配置 (Optional) */
+    KubeApiserverDomains []string `json:"kubeApiserverDomains"`
 }
 
 /*
  * param regionId: 地域 ID (Required)
  * param name: 名称（同一用户的 cluster 允许重名） (Required)
- * param azs: 集群所在的az (Required)
- * param nodeGroup: 集群节点组 (Required)
- * param accessKey: 用户的AccessKey，插件调用open-api时的认证凭证 (Required)
- * param secretKey: 用户的SecretKey，插件调用open-api时的认证凭证 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewCreateClusterRequest(
     regionId string,
     name string,
-    azs []string,
-    nodeGroup *kubernetes.NodeGroupSpec,
-    accessKey string,
-    secretKey string,
 ) *CreateClusterRequest {
 
 	return &CreateClusterRequest{
@@ -96,10 +109,6 @@ func NewCreateClusterRequest(
 		},
         RegionId: regionId,
         Name: name,
-        Azs: azs,
-        NodeGroup: nodeGroup,
-        AccessKey: accessKey,
-        SecretKey: secretKey,
 	}
 }
 
@@ -108,32 +117,46 @@ func NewCreateClusterRequest(
  * param name: 名称（同一用户的 cluster 允许重名） (Required)
  * param description: 描述 (Optional)
  * param version: kubernetes的版本 (Optional)
+ * param resourceGroupId: 集群关联的资源组id，不传使用默认资源组 (Optional)
+ * param tags: 集群关联的资源标签 (Optional)
  * param isEdge: 是否是边缘计算集群 (Optional)
- * param azs: 集群所在的az (Required)
- * param nodeGroup: 集群节点组 (Required)
- * param accessKey: 用户的AccessKey，插件调用open-api时的认证凭证 (Required)
- * param secretKey: 用户的SecretKey，插件调用open-api时的认证凭证 (Required)
+ * param deleteProtected: 是否开启集群删除保护 (Optional)
+ * param isCreditNic: 是否开启授信网卡网络模式 (Optional)
+ * param azs: 集群所在的az,边缘集群必填，中心可用区不填默认随机 (Optional)
+ * param nodeGroup: 云主机节点组 (Optional)
+ * param hpcNodeGroup: 异构节点组，仅授信网卡模式支持创建(isCreditNic=true) (Optional)
+ * param accessKey: 用户的AccessKey，插件调用open-api时的认证凭证(已废弃) (Optional)
+ * param secretKey: 用户的SecretKey，插件调用open-api时的认证凭证(已废弃) (Optional)
  * param addonsConfig: 集群组件配置 (Optional)
  * param clusterNetworkType: 集群网络配置类型，取值：auto，customized，创建集群接口合并，原CreateCusomizedCluster接口废弃 (Optional)
  * param autoClusterNetworkSpec: clusterNetworkType为【auto】时，此配置必须要配置 (Optional)
  * param customizedClusterNetworkSpec: clusterNetworkType为【customized】时，此配置必须要配置 (Optional)
  * param clusterEnvironments: 用户自定义的集群的环境信息，会影响到创建集群时的组件模版的渲染 (Optional)
+ * param clusterDnsSpec: 集群DNS配置 (Optional)
+ * param kubeApiserverDomains: KubeApiserver自定义域名配置 (Optional)
  */
 func NewCreateClusterRequestWithAllParams(
     regionId string,
     name string,
     description *string,
     version *string,
+    resourceGroupId *string,
+    tags []kubernetes.Tag,
     isEdge *bool,
+    deleteProtected *bool,
+    isCreditNic *bool,
     azs []string,
     nodeGroup *kubernetes.NodeGroupSpec,
-    accessKey string,
-    secretKey string,
+    hpcNodeGroup *kubernetes.HpcNodeGroupSpec,
+    accessKey *string,
+    secretKey *string,
     addonsConfig []kubernetes.AddonConfigSpec,
     clusterNetworkType *string,
     autoClusterNetworkSpec *kubernetes.AutoClusterNetworkSpec,
     customizedClusterNetworkSpec *kubernetes.CustomizedClusterNetworkSpec,
     clusterEnvironments []kubernetes.StringKeyValuePair,
+    clusterDnsSpec *kubernetes.ClusterDnsSpec,
+    kubeApiserverDomains []string,
 ) *CreateClusterRequest {
 
     return &CreateClusterRequest{
@@ -147,9 +170,14 @@ func NewCreateClusterRequestWithAllParams(
         Name: name,
         Description: description,
         Version: version,
+        ResourceGroupId: resourceGroupId,
+        Tags: tags,
         IsEdge: isEdge,
+        DeleteProtected: deleteProtected,
+        IsCreditNic: isCreditNic,
         Azs: azs,
         NodeGroup: nodeGroup,
+        HpcNodeGroup: hpcNodeGroup,
         AccessKey: accessKey,
         SecretKey: secretKey,
         AddonsConfig: addonsConfig,
@@ -157,6 +185,8 @@ func NewCreateClusterRequestWithAllParams(
         AutoClusterNetworkSpec: autoClusterNetworkSpec,
         CustomizedClusterNetworkSpec: customizedClusterNetworkSpec,
         ClusterEnvironments: clusterEnvironments,
+        ClusterDnsSpec: clusterDnsSpec,
+        KubeApiserverDomains: kubeApiserverDomains,
     }
 }
 
@@ -189,25 +219,45 @@ func (r *CreateClusterRequest) SetDescription(description string) {
 func (r *CreateClusterRequest) SetVersion(version string) {
     r.Version = &version
 }
+/* param resourceGroupId: 集群关联的资源组id，不传使用默认资源组(Optional) */
+func (r *CreateClusterRequest) SetResourceGroupId(resourceGroupId string) {
+    r.ResourceGroupId = &resourceGroupId
+}
+/* param tags: 集群关联的资源标签(Optional) */
+func (r *CreateClusterRequest) SetTags(tags []kubernetes.Tag) {
+    r.Tags = tags
+}
 /* param isEdge: 是否是边缘计算集群(Optional) */
 func (r *CreateClusterRequest) SetIsEdge(isEdge bool) {
     r.IsEdge = &isEdge
 }
-/* param azs: 集群所在的az(Required) */
+/* param deleteProtected: 是否开启集群删除保护(Optional) */
+func (r *CreateClusterRequest) SetDeleteProtected(deleteProtected bool) {
+    r.DeleteProtected = &deleteProtected
+}
+/* param isCreditNic: 是否开启授信网卡网络模式(Optional) */
+func (r *CreateClusterRequest) SetIsCreditNic(isCreditNic bool) {
+    r.IsCreditNic = &isCreditNic
+}
+/* param azs: 集群所在的az,边缘集群必填，中心可用区不填默认随机(Optional) */
 func (r *CreateClusterRequest) SetAzs(azs []string) {
     r.Azs = azs
 }
-/* param nodeGroup: 集群节点组(Required) */
+/* param nodeGroup: 云主机节点组(Optional) */
 func (r *CreateClusterRequest) SetNodeGroup(nodeGroup *kubernetes.NodeGroupSpec) {
     r.NodeGroup = nodeGroup
 }
-/* param accessKey: 用户的AccessKey，插件调用open-api时的认证凭证(Required) */
-func (r *CreateClusterRequest) SetAccessKey(accessKey string) {
-    r.AccessKey = accessKey
+/* param hpcNodeGroup: 异构节点组，仅授信网卡模式支持创建(isCreditNic=true)(Optional) */
+func (r *CreateClusterRequest) SetHpcNodeGroup(hpcNodeGroup *kubernetes.HpcNodeGroupSpec) {
+    r.HpcNodeGroup = hpcNodeGroup
 }
-/* param secretKey: 用户的SecretKey，插件调用open-api时的认证凭证(Required) */
+/* param accessKey: 用户的AccessKey，插件调用open-api时的认证凭证(已废弃)(Optional) */
+func (r *CreateClusterRequest) SetAccessKey(accessKey string) {
+    r.AccessKey = &accessKey
+}
+/* param secretKey: 用户的SecretKey，插件调用open-api时的认证凭证(已废弃)(Optional) */
 func (r *CreateClusterRequest) SetSecretKey(secretKey string) {
-    r.SecretKey = secretKey
+    r.SecretKey = &secretKey
 }
 /* param addonsConfig: 集群组件配置(Optional) */
 func (r *CreateClusterRequest) SetAddonsConfig(addonsConfig []kubernetes.AddonConfigSpec) {
@@ -229,6 +279,14 @@ func (r *CreateClusterRequest) SetCustomizedClusterNetworkSpec(customizedCluster
 func (r *CreateClusterRequest) SetClusterEnvironments(clusterEnvironments []kubernetes.StringKeyValuePair) {
     r.ClusterEnvironments = clusterEnvironments
 }
+/* param clusterDnsSpec: 集群DNS配置(Optional) */
+func (r *CreateClusterRequest) SetClusterDnsSpec(clusterDnsSpec *kubernetes.ClusterDnsSpec) {
+    r.ClusterDnsSpec = clusterDnsSpec
+}
+/* param kubeApiserverDomains: KubeApiserver自定义域名配置(Optional) */
+func (r *CreateClusterRequest) SetKubeApiserverDomains(kubeApiserverDomains []string) {
+    r.KubeApiserverDomains = kubeApiserverDomains
+}
 
 
 // GetRegionId returns path parameter 'regionId' if exist,
@@ -245,4 +303,5 @@ type CreateClusterResponse struct {
 
 type CreateClusterResult struct {
     ClusterId string `json:"clusterId"`
+    Operations []kubernetes.ClusterOperationMeta `json:"operations"`
 }

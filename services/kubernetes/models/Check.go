@@ -17,26 +17,26 @@
 package models
 
 
-type CustomizedNodeGroupSpec struct {
+type Check struct {
 
-    /* 名称  */
-    Name string `json:"name"`
+    /* 检查id (Optional) */
+    CheckId string `json:"checkId"`
+
+    /* 检查状态,running,failed,finished (Optional) */
+    State string `json:"state"`
+
+    /* 检查类型 (Optional) */
+    Type string `json:"type"`
+
+    /* 开始时间 (Optional) */
+    StartTime string `json:"startTime"`
+
+    /* 完成时间 (Optional) */
+    FinishTime string `json:"finishTime"`
+
+    /* 检查结果总结 (Optional) */
+    Summary Summary `json:"summary"`
 
     /*  (Optional) */
-    Description string `json:"description"`
-
-    /* 工作节点组的信息  */
-    NodeConfig NodeConfigSpec `json:"nodeConfig"`
-
-    /* 工作节点组的 az，必须为集群az的子集，默认为集群az (Optional) */
-    Azs []string `json:"azs"`
-
-    /* 工作节点组初始化大小，至少为1个  */
-    InitialNodeCount int `json:"initialNodeCount"`
-
-    /* 是否开启自动修复，默认不开启。 (Optional) */
-    AutoRepair bool `json:"autoRepair"`
-
-    /* 自动伸缩配置 (Optional) */
-    CaConfig CAConfigSpec `json:"caConfig"`
+    CheckItemResults []CheckItem `json:"checkItemResults"`
 }

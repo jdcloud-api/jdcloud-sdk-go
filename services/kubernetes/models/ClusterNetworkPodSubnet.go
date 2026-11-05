@@ -22,7 +22,7 @@ type ClusterNetworkPodSubnet struct {
     /* 子网 ID (Optional) */
     SubnetId string `json:"subnetId"`
 
-    /* 子网类型，可取值为：pod_subnet/lb_subnet/node_subnet (Optional) */
+    /* 子网类型，可取值为：pod_subnet/lb_subnet/node_subnet/pod_subnet_with_namespace (Optional) */
     SubnetType string `json:"subnetType"`
 
     /* 子网是否启用，仅pod子网可用 (Optional) */
@@ -45,4 +45,7 @@ type ClusterNetworkPodSubnet struct {
 
     /* tell if runtime subnet has error (Optional) */
     RuntimeError string `json:"runtimeError"`
+
+    /* pod子网关联的命名空间 (Optional) */
+    Namespace string `json:"namespace"`
 }

@@ -17,23 +17,20 @@
 package models
 
 
-type NodeImage struct {
+type OperationStage struct {
 
-    /* 镜像编码 (Optional) */
-    Code string `json:"code"`
+    /* 业务阶段 ID (Optional) */
+    StageId string `json:"stageId"`
 
-    /* 虚机镜像id (Optional) */
-    ImageId string `json:"imageId"`
+    /* 业务阶段名称 (Optional) */
+    Title string `json:"title"`
 
-    /* 镜像操作系统 (Optional) */
-    ImageOs string `json:"imageOs"`
+    /* 阶段状态，例如 pending、running、completed、failed、skipped (Optional) */
+    Status string `json:"status"`
 
-    /* 主版本号 (Optional) */
-    MainVersion string `json:"mainVersion"`
+    /*  (Optional) */
+    Progress OperationMetric `json:"progress"`
 
-    /* 内部版本号 (Optional) */
-    InnerVersion string `json:"innerVersion"`
-
-    /* 可见度 (Optional) */
-    Visibility int `json:"visibility"`
+    /* 阶段中的业务步骤 (Optional) */
+    Steps []OperationStep `json:"steps"`
 }

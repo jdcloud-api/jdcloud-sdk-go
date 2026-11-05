@@ -17,11 +17,23 @@
 package models
 
 
-type ValidNodeConfig struct {
+type OperationStep struct {
 
-    /* kubernetes node 的版本 (Optional) */
-    NodeVersion string `json:"nodeVersion"`
+    /* 业务步骤 ID (Optional) */
+    StepId string `json:"stepId"`
 
-    /* 镜像id (Optional) */
-    ImageId []string `json:"imageId"`
+    /* 业务步骤名称 (Optional) */
+    Title string `json:"title"`
+
+    /* 步骤状态，例如 pending、running、completed、failed、skipped (Optional) */
+    Status string `json:"status"`
+
+    /*  (Optional) */
+    Progress OperationMetric `json:"progress"`
+
+    /* 该步骤关联的资源 (Optional) */
+    Resources []OperationResource `json:"resources"`
+
+    /*  (Optional) */
+    Error OperationError `json:"error"`
 }
