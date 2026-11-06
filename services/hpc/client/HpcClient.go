@@ -40,7 +40,7 @@ func NewHpcClient(credential *core.Credential) *HpcClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "hpc",
-            Revision:    "4.3.11",
+            Revision:    "4.3.16",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -55,6 +55,27 @@ func (c *HpcClient) SetLogger(logger core.Logger) {
 
 func (c *HpcClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
+}
+
+/* 查询密钥对列表。
+ */
+func (c *HpcClient) DescribeKeypairs(request *hpc.DescribeKeypairsRequest) (*hpc.DescribeKeypairsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &hpc.DescribeKeypairsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
 }
 
 /* 为实例解绑公网IP。
@@ -177,6 +198,27 @@ func (c *HpcClient) ModifyInstanceAttribute(request *hpc.ModifyInstanceAttribute
     }
 
     jdResp := &hpc.ModifyInstanceAttributeResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 将密钥对从指定实例上解绑。支持批量解绑。
+ */
+func (c *HpcClient) DetachKeypair(request *hpc.DetachKeypairRequest) (*hpc.DetachKeypairResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &hpc.DetachKeypairResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -309,6 +351,47 @@ func (c *HpcClient) RebootInstance(request *hpc.RebootInstanceRequest) (*hpc.Reb
     }
 
     jdResp := &hpc.RebootInstanceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* CreateWebTerminalSession 创建 WebTerminal 会话并返回会话参数。 */
+func (c *HpcClient) CreateWebTerminalSession(request *hpc.CreateWebTerminalSessionRequest) (*hpc.CreateWebTerminalSessionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &hpc.CreateWebTerminalSessionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 将密钥对绑定到指定实例。支持批量绑定，已绑定其他密钥对的实例会被跳过。
+ */
+func (c *HpcClient) AttachKeypair(request *hpc.AttachKeypairRequest) (*hpc.AttachKeypairResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &hpc.AttachKeypairResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -509,6 +592,27 @@ func (c *HpcClient) CreateHpcNetDiagnose(request *hpc.CreateHpcNetDiagnoseReques
     }
 
     jdResp := &hpc.CreateHpcNetDiagnoseResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建SSH密钥对。创建成功后系统会返回密钥对的私钥，请妥善保管，私钥仅在此一次返回，后续无法再次获取。
+ */
+func (c *HpcClient) CreateKeypair(request *hpc.CreateKeypairRequest) (*hpc.CreateKeypairResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &hpc.CreateKeypairResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -761,6 +865,27 @@ func (c *HpcClient) DescribeInstance(request *hpc.DescribeInstanceRequest) (*hpc
     return jdResp, err
 }
 
+/* 导入SSH密钥对。用户需提供公钥内容，系统将导入该密钥对用于实例认证。
+ */
+func (c *HpcClient) ImportKeypair(request *hpc.ImportKeypairRequest) (*hpc.ImportKeypairResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &hpc.ImportKeypairResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* DescribePackage 查询指定地域下一个安装包信息详情。
  */
 func (c *HpcClient) DescribePackage(request *hpc.DescribePackageRequest) (*hpc.DescribePackageResponse, error) {
@@ -802,6 +927,26 @@ func (c *HpcClient) DescribeTasks(request *hpc.DescribeTasksRequest) (*hpc.Descr
     return jdResp, err
 }
 
+/* 根据资源 ID 批量查询最近五分钟内的云助手心跳状态。 */
+func (c *HpcClient) DescribeHPCAssistantAgents(request *hpc.DescribeHPCAssistantAgentsRequest) (*hpc.DescribeHPCAssistantAgentsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &hpc.DescribeHPCAssistantAgentsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 更新用户可调度的网络集群
  */
 func (c *HpcClient) ModifyCluster(request *hpc.ModifyClusterRequest) (*hpc.ModifyClusterResponse, error) {
@@ -814,6 +959,27 @@ func (c *HpcClient) ModifyCluster(request *hpc.ModifyClusterRequest) (*hpc.Modif
     }
 
     jdResp := &hpc.ModifyClusterResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 删除SSH密钥对。删除前请确保该密钥对未绑定任何实例。
+ */
+func (c *HpcClient) DeleteKeypair(request *hpc.DeleteKeypairRequest) (*hpc.DeleteKeypairResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &hpc.DeleteKeypairResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

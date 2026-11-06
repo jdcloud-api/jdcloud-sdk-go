@@ -28,13 +28,19 @@ type DescribeQuotaRequest struct {
     /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 资源类型：hpc  */
+    /* 资源类型。取值范围：
+- hpc：HPC实例配额
+- keypair：密钥对配额
+  */
     ResourceType string `json:"resourceType"`
 }
 
 /*
  * param regionId: 地域ID。 (Required)
- * param resourceType: 资源类型：hpc (Required)
+ * param resourceType: 资源类型。取值范围：
+- hpc：HPC实例配额
+- keypair：密钥对配额
+ (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -57,7 +63,10 @@ func NewDescribeQuotaRequest(
 
 /*
  * param regionId: 地域ID。 (Required)
- * param resourceType: 资源类型：hpc (Required)
+ * param resourceType: 资源类型。取值范围：
+- hpc：HPC实例配额
+- keypair：密钥对配额
+ (Required)
  */
 func NewDescribeQuotaRequestWithAllParams(
     regionId string,
@@ -93,7 +102,10 @@ func NewDescribeQuotaRequestWithoutParam() *DescribeQuotaRequest {
 func (r *DescribeQuotaRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-/* param resourceType: 资源类型：hpc(Required) */
+/* param resourceType: 资源类型。取值范围：
+- hpc：HPC实例配额
+- keypair：密钥对配额
+(Required) */
 func (r *DescribeQuotaRequest) SetResourceType(resourceType string) {
     r.ResourceType = resourceType
 }

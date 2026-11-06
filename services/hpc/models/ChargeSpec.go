@@ -33,4 +33,7 @@ type ChargeSpec struct {
 
     /* 预期释放时间，资源的预期释放时间，预付费/后付费资源均有此值，遵循ISO8601标准，使用UTC时间，格式为：YYYY-MM-DDTHH:mm:ssZ (Optional) */
     ChargeRetireTime string `json:"chargeRetireTime"`
+
+    /* chargeMode=prepaid_by_duration 时有效。true 表示包销，false 表示普通包年包月（非包销），默认值为false。 (Optional) */
+    IsCommitment bool `json:"isCommitment"`
 }

@@ -31,9 +31,17 @@ type RebuildInstanceRequest struct {
     /* 实例ID。  */
     InstanceId string `json:"instanceId"`
 
-    /* 实例密码。可用于SSH登录和VNC登录，长度为8-30个字符，必须同时包含大、小写英文字母、数字和特殊符号中的三类字符。特殊符号包括：\(\)\`~!@#$%^&\*\_-+=\|{}\[ ]:";'<>,.?/
-  */
-    Password string `json:"password"`
+    /* 实例密码。当passwordAuth为yes时必填。可用于SSH登录和VNC登录，长度为8-30个字符，必须同时包含大、小写英文字母、数字和特殊符号中的三类字符。特殊符号包括：\(\)\`~!@#$%^&\*_-+=\|{}\[ ]:";'<>,.?/
+ (Optional) */
+    Password *string `json:"password"`
+
+    /* 认证模式。yes表示密码认证（需同时指定password），no表示密钥认证（需同时指定keyNames）。不指定时默认为yes。
+ (Optional) */
+    PasswordAuth *string `json:"passwordAuth"`
+
+    /* 密钥对名称列表。当passwordAuth为no时，通过此参数指定绑定的密钥对名称。目前只支持一个密钥对。
+ (Optional) */
+    KeyNames []string `json:"keyNames"`
 
     /* 镜像ID。
 若不指定镜像ID，默认使用当前主机的原镜像重置系统。
@@ -66,15 +74,12 @@ type RebuildInstanceRequest struct {
 /*
  * param regionId: 地域ID。 (Required)
  * param instanceId: 实例ID。 (Required)
- * param password: 实例密码。可用于SSH登录和VNC登录，长度为8-30个字符，必须同时包含大、小写英文字母、数字和特殊符号中的三类字符。特殊符号包括：\(\)\`~!@#$%^&\*\_-+=\|{}\[ ]:";'<>,.?/
- (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewRebuildInstanceRequest(
     regionId string,
     instanceId string,
-    password string,
 ) *RebuildInstanceRequest {
 
 	return &RebuildInstanceRequest{
@@ -86,15 +91,18 @@ func NewRebuildInstanceRequest(
 		},
         RegionId: regionId,
         InstanceId: instanceId,
-        Password: password,
 	}
 }
 
 /*
  * param regionId: 地域ID。 (Required)
  * param instanceId: 实例ID。 (Required)
- * param password: 实例密码。可用于SSH登录和VNC登录，长度为8-30个字符，必须同时包含大、小写英文字母、数字和特殊符号中的三类字符。特殊符号包括：\(\)\`~!@#$%^&\*\_-+=\|{}\[ ]:";'<>,.?/
- (Required)
+ * param password: 实例密码。当passwordAuth为yes时必填。可用于SSH登录和VNC登录，长度为8-30个字符，必须同时包含大、小写英文字母、数字和特殊符号中的三类字符。特殊符号包括：\(\)\`~!@#$%^&\*_-+=\|{}\[ ]:";'<>,.?/
+ (Optional)
+ * param passwordAuth: 认证模式。yes表示密码认证（需同时指定password），no表示密钥认证（需同时指定keyNames）。不指定时默认为yes。
+ (Optional)
+ * param keyNames: 密钥对名称列表。当passwordAuth为no时，通过此参数指定绑定的密钥对名称。目前只支持一个密钥对。
+ (Optional)
  * param packageId: 镜像ID。
 若不指定镜像ID，默认使用当前主机的原镜像重置系统。
  (Optional)
@@ -114,7 +122,9 @@ func NewRebuildInstanceRequest(
 func NewRebuildInstanceRequestWithAllParams(
     regionId string,
     instanceId string,
-    password string,
+    password *string,
+    passwordAuth *string,
+    keyNames []string,
     packageId *string,
     hostname *string,
     metadata []hpc.Metadata,
@@ -133,6 +143,8 @@ func NewRebuildInstanceRequestWithAllParams(
         RegionId: regionId,
         InstanceId: instanceId,
         Password: password,
+        PasswordAuth: passwordAuth,
+        KeyNames: keyNames,
         PackageId: packageId,
         Hostname: hostname,
         Metadata: metadata,
@@ -163,10 +175,20 @@ func (r *RebuildInstanceRequest) SetRegionId(regionId string) {
 func (r *RebuildInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-/* param password: 实例密码。可用于SSH登录和VNC登录，长度为8-30个字符，必须同时包含大、小写英文字母、数字和特殊符号中的三类字符。特殊符号包括：\(\)\`~!@#$%^&\*\_-+=\|{}\[ ]:";'<>,.?/
-(Required) */
+/* param password: 实例密码。当passwordAuth为yes时必填。可用于SSH登录和VNC登录，长度为8-30个字符，必须同时包含大、小写英文字母、数字和特殊符号中的三类字符。特殊符号包括：\(\)\`~!@#$%^&\*_-+=\|{}\[ ]:";'<>,.?/
+(Optional) */
 func (r *RebuildInstanceRequest) SetPassword(password string) {
-    r.Password = password
+    r.Password = &password
+}
+/* param passwordAuth: 认证模式。yes表示密码认证（需同时指定password），no表示密钥认证（需同时指定keyNames）。不指定时默认为yes。
+(Optional) */
+func (r *RebuildInstanceRequest) SetPasswordAuth(passwordAuth string) {
+    r.PasswordAuth = &passwordAuth
+}
+/* param keyNames: 密钥对名称列表。当passwordAuth为no时，通过此参数指定绑定的密钥对名称。目前只支持一个密钥对。
+(Optional) */
+func (r *RebuildInstanceRequest) SetKeyNames(keyNames []string) {
+    r.KeyNames = keyNames
 }
 /* param packageId: 镜像ID。
 若不指定镜像ID，默认使用当前主机的原镜像重置系统。

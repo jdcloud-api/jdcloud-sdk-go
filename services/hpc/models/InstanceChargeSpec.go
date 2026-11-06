@@ -30,4 +30,7 @@ type InstanceChargeSpec struct {
 
     /* 自动续费。true为开通自动续费，false为不开通自动续费，默认为false，仅对包年包月资源有效。开通后，将以本次创建时的购买时长作为自动续费周期，自动续费周期可在续费管理功能中进行修改。 (Optional) */
     AutoRenew *bool `json:"autoRenew"`
+
+    /* chargeMode=prepaid_by_duration 时有效。true 表示包销，false 表示普通包年包月（非包销），默认值为false。 (Optional) */
+    IsCommitment *bool `json:"isCommitment"`
 }

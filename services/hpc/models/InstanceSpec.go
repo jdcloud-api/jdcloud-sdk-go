@@ -34,9 +34,17 @@ type InstanceSpec struct {
     /* 实例hostname。若不指定hostname，则默认以实例名称 name 作为hostname，但是会以RFC 952和RFC 1123命名规范做一定转义 (Optional) */
     HostName *string `json:"hostName"`
 
-    /* 实例密码。可用于SSH登录和VNC登录，长度为8-30个字符，必须同时包含大、小写英文字母、数字和特殊符号中的三类字符。特殊符号包括：\(\)\`~!@#$%^&\*\_-+=\|{}\[ ]:";'<>,.?/
+    /* 实例密码。当passwordAuth为yes时必填。可用于SSH登录和VNC登录，长度为8-30个字符，必须同时包含大、小写英文字母、数字和特殊符号中的三类字符。特殊符号包括：\(\)\`~!@#$%^&\*_\-+=\|{}\[ ]:";'<>,.?/
  (Optional) */
     Password *string `json:"password"`
+
+    /* 认证模式。yes表示密码认证（需同时指定password），no表示密钥认证（需同时指定keyNames）。不指定时默认为yes。
+ (Optional) */
+    PasswordAuth *string `json:"passwordAuth"`
+
+    /* 密钥对名称列表。当passwordAuth为no时，通过此参数指定绑定的密钥对名称。目前只支持一个密钥对。
+ (Optional) */
+    KeyNames []string `json:"keyNames"`
 
     /* 主网卡配置。
  (Optional) */
@@ -73,7 +81,10 @@ type InstanceSpec struct {
     /* 资源组ID (Optional) */
     ResourceGroupId *string `json:"resourceGroupId"`
 
-    /* 自定义实例标签。以key-value键值对形式指定，最多支持10个标签。key不能以 "jrn:" 或“jdc-”开头，仅支持中文、大/小写英文、数字及如下符号：`\_.,:\/=+-@`。
+    /* 自定义实例标签。以key-value键值对形式指定，最多支持10个标签。key不能以 "jrn:" 或"jdc-"开头，仅支持中文、大/小写英文、数字及如下符号：`\_.,:\/=+-@`。
  (Optional) */
     UserTags []Tag `json:"userTags"`
+
+    /* 专属区ID (Optional) */
+    DedicatedZoneId *string `json:"dedicatedZoneId"`
 }
