@@ -22,7 +22,10 @@ type Quota struct {
     /* 地域 (Optional) */
     Region string `json:"region"`
 
-    /* 资源类型 (Optional) */
+    /* 资源类型。取值范围：
+- hpc：HPC实例配额
+- keypair：密钥对配额
+ (Optional) */
     ResourceType string `json:"resourceType"`
 
     /* 已使用配额 (Optional) */

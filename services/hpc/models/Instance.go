@@ -108,4 +108,13 @@ type Instance struct {
 
     /* 装机进度，取值范围：[0,100]。 (Optional) */
     Progress int `json:"progress"`
+
+    /* 专属区名称 (Optional) */
+    DedicatedZoneName string `json:"dedicatedZoneName"`
+
+    /* 专属区ID (Optional) */
+    DedicatedZoneId string `json:"dedicatedZoneId"`
+
+    /* 已绑定的密钥对名称列表 (Optional) */
+    KeyNames []string `json:"keyNames"`
 }

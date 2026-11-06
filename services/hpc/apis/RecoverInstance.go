@@ -30,23 +30,28 @@ type RecoverInstanceRequest struct {
     /* 实例ID。  */
     InstanceId string `json:"instanceId"`
 
-    /* 实例密码。可用于SSH登录和VNC登录，长度为8-30个字符，必须同时包含大、小写英文字母、数字和特殊符号中的三类字符。特殊符号包括：\(\)\`~!@#$%^&\*\_-+=\|{}\[ ]:";'<>,.?/
-  */
-    Password string `json:"password"`
+    /* 实例密码。当passwordAuth为yes时必填。可用于SSH登录和VNC登录，长度为8-30个字符，必须同时包含大、小写英文字母、数字和特殊符号中的三类字符。特殊符号包括：\(\)\`~!@#$%^&\*_-+=\|{}\[ ]:";'<>,.?/
+ (Optional) */
+    Password *string `json:"password"`
+
+    /* 认证模式。yes表示密码认证（需同时指定password），no表示密钥认证（需同时指定keyNames）。不指定时默认为yes。
+ (Optional) */
+    PasswordAuth *string `json:"passwordAuth"`
+
+    /* 密钥对名称列表。当passwordAuth为no时，通过此参数指定绑定的密钥对名称。目前只支持一个密钥对。
+ (Optional) */
+    KeyNames []string `json:"keyNames"`
 }
 
 /*
  * param regionId: 地域ID。 (Required)
  * param instanceId: 实例ID。 (Required)
- * param password: 实例密码。可用于SSH登录和VNC登录，长度为8-30个字符，必须同时包含大、小写英文字母、数字和特殊符号中的三类字符。特殊符号包括：\(\)\`~!@#$%^&\*\_-+=\|{}\[ ]:";'<>,.?/
- (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
 func NewRecoverInstanceRequest(
     regionId string,
     instanceId string,
-    password string,
 ) *RecoverInstanceRequest {
 
 	return &RecoverInstanceRequest{
@@ -58,20 +63,25 @@ func NewRecoverInstanceRequest(
 		},
         RegionId: regionId,
         InstanceId: instanceId,
-        Password: password,
 	}
 }
 
 /*
  * param regionId: 地域ID。 (Required)
  * param instanceId: 实例ID。 (Required)
- * param password: 实例密码。可用于SSH登录和VNC登录，长度为8-30个字符，必须同时包含大、小写英文字母、数字和特殊符号中的三类字符。特殊符号包括：\(\)\`~!@#$%^&\*\_-+=\|{}\[ ]:";'<>,.?/
- (Required)
+ * param password: 实例密码。当passwordAuth为yes时必填。可用于SSH登录和VNC登录，长度为8-30个字符，必须同时包含大、小写英文字母、数字和特殊符号中的三类字符。特殊符号包括：\(\)\`~!@#$%^&\*_-+=\|{}\[ ]:";'<>,.?/
+ (Optional)
+ * param passwordAuth: 认证模式。yes表示密码认证（需同时指定password），no表示密钥认证（需同时指定keyNames）。不指定时默认为yes。
+ (Optional)
+ * param keyNames: 密钥对名称列表。当passwordAuth为no时，通过此参数指定绑定的密钥对名称。目前只支持一个密钥对。
+ (Optional)
  */
 func NewRecoverInstanceRequestWithAllParams(
     regionId string,
     instanceId string,
-    password string,
+    password *string,
+    passwordAuth *string,
+    keyNames []string,
 ) *RecoverInstanceRequest {
 
     return &RecoverInstanceRequest{
@@ -84,6 +94,8 @@ func NewRecoverInstanceRequestWithAllParams(
         RegionId: regionId,
         InstanceId: instanceId,
         Password: password,
+        PasswordAuth: passwordAuth,
+        KeyNames: keyNames,
     }
 }
 
@@ -108,10 +120,20 @@ func (r *RecoverInstanceRequest) SetRegionId(regionId string) {
 func (r *RecoverInstanceRequest) SetInstanceId(instanceId string) {
     r.InstanceId = instanceId
 }
-/* param password: 实例密码。可用于SSH登录和VNC登录，长度为8-30个字符，必须同时包含大、小写英文字母、数字和特殊符号中的三类字符。特殊符号包括：\(\)\`~!@#$%^&\*\_-+=\|{}\[ ]:";'<>,.?/
-(Required) */
+/* param password: 实例密码。当passwordAuth为yes时必填。可用于SSH登录和VNC登录，长度为8-30个字符，必须同时包含大、小写英文字母、数字和特殊符号中的三类字符。特殊符号包括：\(\)\`~!@#$%^&\*_-+=\|{}\[ ]:";'<>,.?/
+(Optional) */
 func (r *RecoverInstanceRequest) SetPassword(password string) {
-    r.Password = password
+    r.Password = &password
+}
+/* param passwordAuth: 认证模式。yes表示密码认证（需同时指定password），no表示密钥认证（需同时指定keyNames）。不指定时默认为yes。
+(Optional) */
+func (r *RecoverInstanceRequest) SetPasswordAuth(passwordAuth string) {
+    r.PasswordAuth = &passwordAuth
+}
+/* param keyNames: 密钥对名称列表。当passwordAuth为no时，通过此参数指定绑定的密钥对名称。目前只支持一个密钥对。
+(Optional) */
+func (r *RecoverInstanceRequest) SetKeyNames(keyNames []string) {
+    r.KeyNames = keyNames
 }
 
 
