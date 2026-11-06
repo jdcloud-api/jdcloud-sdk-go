@@ -40,7 +40,7 @@ func NewJmrClient(credential *core.Credential) *JmrClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "jmr",
-            Revision:    "1.1.16",
+            Revision:    "1.1.17",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -184,7 +184,11 @@ func (c *JmrClient) IdataCluster(request *jmr.IdataClusterRequest) (*jmr.IdataCl
     return jdResp, err
 }
 
-/* 扩容集群 */
+/* 扩容集群：在已有节点组内追加节点，或新建 Task/Edge 节点组。
+接口为异步：返回成功仅表示扩容已开始，集群状态会变为 EXPANDING，请轮询 describeClusters 直到恢复 RUNNING。
+失败语义：业务校验失败时 HTTP 仍返回 200，result.status 为 false，具体原因见 result.message。
+clientToken 幂等：相同 clientToken 的重复请求在 24 小时内只执行一次并返回首次结果。
+ */
 func (c *JmrClient) ClusterExpansion(request *jmr.ClusterExpansionRequest) (*jmr.ClusterExpansionResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
@@ -753,7 +757,11 @@ func (c *JmrClient) RevokeHivePermission(request *jmr.RevokeHivePermissionReques
     return jdResp, err
 }
 
-/* 缩容集群 */
+/* 缩容集群：释放 Task/Edge 节点，保留 reserveNum 个。
+接口为异步：返回成功仅表示缩容已开始，集群状态会变为 REDUCING，请轮询 describeClusters 直到恢复 RUNNING。
+失败语义：业务校验失败时 HTTP 仍返回 200，result.status 为 false，具体原因见 result.message。
+clientToken 幂等：相同 clientToken 的重复请求在 24 小时内只执行一次并返回首次结果。
+ */
 func (c *JmrClient) ClusterReduction(request *jmr.ClusterReductionRequest) (*jmr.ClusterReductionResponse, error) {
     if request == nil {
         return nil, errors.New("Request object is nil. ")
