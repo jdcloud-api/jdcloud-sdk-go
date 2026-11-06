@@ -28,17 +28,19 @@ type ClusterReductionRequest struct {
     /* 地域ID  */
     RegionId string `json:"regionId"`
 
-    /* 描述集群缩容信息  */
+    /* 描述集群缩容信息。  */
     ClusterReduction *jmr.ClusterReduction `json:"clusterReduction"`
 
-    /* 用于保证请求的幂等性。由客户端生成，长度不能超过64个字符。
+    /* 幂等 token，由客户端生成，长度 1-64 个字符。
+相同 token 的重复请求在 24 小时内只执行一次并返回首次结果；token 已用于不同参数时返回失败。
+若上一次请求处于「状态未知」（服务异常/超时），接口会拒绝并要求确认集群状态后再用新 token 重试。
  (Optional) */
     ClientToken *string `json:"clientToken"`
 }
 
 /*
  * param regionId: 地域ID (Required)
- * param clusterReduction: 描述集群缩容信息 (Required)
+ * param clusterReduction: 描述集群缩容信息。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -61,8 +63,10 @@ func NewClusterReductionRequest(
 
 /*
  * param regionId: 地域ID (Required)
- * param clusterReduction: 描述集群缩容信息 (Required)
- * param clientToken: 用于保证请求的幂等性。由客户端生成，长度不能超过64个字符。
+ * param clusterReduction: 描述集群缩容信息。 (Required)
+ * param clientToken: 幂等 token，由客户端生成，长度 1-64 个字符。
+相同 token 的重复请求在 24 小时内只执行一次并返回首次结果；token 已用于不同参数时返回失败。
+若上一次请求处于「状态未知」（服务异常/超时），接口会拒绝并要求确认集群状态后再用新 token 重试。
  (Optional)
  */
 func NewClusterReductionRequestWithAllParams(
@@ -101,11 +105,13 @@ func NewClusterReductionRequestWithoutParam() *ClusterReductionRequest {
 func (r *ClusterReductionRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-/* param clusterReduction: 描述集群缩容信息(Required) */
+/* param clusterReduction: 描述集群缩容信息。(Required) */
 func (r *ClusterReductionRequest) SetClusterReduction(clusterReduction *jmr.ClusterReduction) {
     r.ClusterReduction = clusterReduction
 }
-/* param clientToken: 用于保证请求的幂等性。由客户端生成，长度不能超过64个字符。
+/* param clientToken: 幂等 token，由客户端生成，长度 1-64 个字符。
+相同 token 的重复请求在 24 小时内只执行一次并返回首次结果；token 已用于不同参数时返回失败。
+若上一次请求处于「状态未知」（服务异常/超时），接口会拒绝并要求确认集群状态后再用新 token 重试。
 (Optional) */
 func (r *ClusterReductionRequest) SetClientToken(clientToken string) {
     r.ClientToken = &clientToken

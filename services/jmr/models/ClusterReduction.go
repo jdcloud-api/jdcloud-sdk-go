@@ -19,15 +19,19 @@ package models
 
 type ClusterReduction struct {
 
-    /* 集群ID  */
+    /* 集群ID。  */
     ClusterId string `json:"clusterId"`
 
-    /* 保留的节点个数  */
+    /* 保留的节点个数（不是缩容数量）；取值范围：[0, 当前节点数-1]。
+传 0 表示释放该节点组的全部节点。
+  */
     ReserveNum string `json:"reserveNum"`
 
-    /* 缩容Task或Edge节点。默认为Task节点 (Optional) */
+    /* 缩容 Task 或 Edge 节点；默认 Task。 (Optional) */
     NodeType *string `json:"nodeType"`
 
-    /* 缩容Task所属的节点组ID (Optional) */
+    /* 缩容目标节点组ID：nodeType=Task 时必填（不传会返回参数错误，避免误缩其他节点组的节点）；
+nodeType=Edge 时可选，用于指定 Edge 节点的规格来源。
+ (Optional) */
     ConfigGroupId *string `json:"configGroupId"`
 }
