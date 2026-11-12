@@ -24,8 +24,8 @@ type InstanceNetworkInterfaceAttachment struct {
     DeviceIndex int `json:"deviceIndex"`
 
     /* 是否随实例一起删除。
-`true`：随实例删除。
-`false`（默认值）：不随实例删除。
+`true`（默认值）：随实例删除。
+`false`：不随实例删除。
  (Optional) */
     AutoDelete bool `json:"autoDelete"`
 

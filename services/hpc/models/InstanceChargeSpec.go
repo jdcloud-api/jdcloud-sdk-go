@@ -22,10 +22,10 @@ type InstanceChargeSpec struct {
     /* 计费模式，取值为：prepaid_by_duration 表示预付费  */
     ChargeMode string `json:"chargeMode"`
 
-    /* 预付费计费单位，当chargeMode为prepaid_by_duration时有效，取值为：week,month,year。 (Optional) */
+    /* 预付费计费单位，当chargeMode为prepaid_by_duration时有效，取值为：day,week,month,year。 (Optional) */
     ChargeUnit *string `json:"chargeUnit"`
 
-    /* 预付费计费时长，当chargeMode取值为prepaid_by_duration时有效。默认取值1年，灰度用户支持week和month的购买周期。 (Optional) */
+    /* 预付费计费时长，当chargeMode取值为prepaid_by_duration时有效。默认取值1年，灰度用户支持day,week和month的购买周期。 (Optional) */
     ChargeDuration *int `json:"chargeDuration"`
 
     /* 自动续费。true为开通自动续费，false为不开通自动续费，默认为false，仅对包年包月资源有效。开通后，将以本次创建时的购买时长作为自动续费周期，自动续费周期可在续费管理功能中进行修改。 (Optional) */
