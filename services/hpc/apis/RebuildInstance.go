@@ -52,7 +52,7 @@ type RebuildInstanceRequest struct {
 **Windows系统**：长度为2\~15个字符，允许大小写字母、数字或连字符（-），不能以连字符（-）开头或结尾，不能连续使用连字符（-），也不能全部使用数字。不支持点号（.）。
 **Linux系统**：长度为2-64个字符，允许使用大小写字母、数字或连字符（-），但不能连续使用连字符（-），不能以连字符（-）开头或结尾。
  (Optional) */
-    Hostname *string `json:"hostname"`
+    HostName *string `json:"hostName"`
 
     /* 用户自定义元数据。以key-value键值对形式指定，可在实例系统内通过元数据服务查询获取。最多支持40对键值对，且key不超过256字符，value不超过16KB，不区分大小写。
 注意：key不要以连字符(-)结尾，否则此key不生效。
@@ -106,7 +106,7 @@ func NewRebuildInstanceRequest(
  * param packageId: 镜像ID。
 若不指定镜像ID，默认使用当前主机的原镜像重置系统。
  (Optional)
- * param hostname: 实例hostname。
+ * param hostName: 实例hostname。
 **Windows系统**：长度为2\~15个字符，允许大小写字母、数字或连字符（-），不能以连字符（-）开头或结尾，不能连续使用连字符（-），也不能全部使用数字。不支持点号（.）。
 **Linux系统**：长度为2-64个字符，允许使用大小写字母、数字或连字符（-），但不能连续使用连字符（-），不能以连字符（-）开头或结尾。
  (Optional)
@@ -126,7 +126,7 @@ func NewRebuildInstanceRequestWithAllParams(
     passwordAuth *string,
     keyNames []string,
     packageId *string,
-    hostname *string,
+    hostName *string,
     metadata []hpc.Metadata,
     userdata []hpc.Userdata,
     clearDataDisks *bool,
@@ -146,7 +146,7 @@ func NewRebuildInstanceRequestWithAllParams(
         PasswordAuth: passwordAuth,
         KeyNames: keyNames,
         PackageId: packageId,
-        Hostname: hostname,
+        HostName: hostName,
         Metadata: metadata,
         Userdata: userdata,
         ClearDataDisks: clearDataDisks,
@@ -196,12 +196,12 @@ func (r *RebuildInstanceRequest) SetKeyNames(keyNames []string) {
 func (r *RebuildInstanceRequest) SetPackageId(packageId string) {
     r.PackageId = &packageId
 }
-/* param hostname: 实例hostname。
+/* param hostName: 实例hostname。
 **Windows系统**：长度为2\~15个字符，允许大小写字母、数字或连字符（-），不能以连字符（-）开头或结尾，不能连续使用连字符（-），也不能全部使用数字。不支持点号（.）。
 **Linux系统**：长度为2-64个字符，允许使用大小写字母、数字或连字符（-），但不能连续使用连字符（-），不能以连字符（-）开头或结尾。
 (Optional) */
-func (r *RebuildInstanceRequest) SetHostname(hostname string) {
-    r.Hostname = &hostname
+func (r *RebuildInstanceRequest) SetHostName(hostName string) {
+    r.HostName = &hostName
 }
 /* param metadata: 用户自定义元数据。以key-value键值对形式指定，可在实例系统内通过元数据服务查询获取。最多支持40对键值对，且key不超过256字符，value不超过16KB，不区分大小写。
 注意：key不要以连字符(-)结尾，否则此key不生效。

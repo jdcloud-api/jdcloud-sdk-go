@@ -23,12 +23,6 @@ type InstanceNetworkInterfaceAttachmentSpec struct {
  (Optional) */
     DeviceIndex *int `json:"deviceIndex"`
 
-    /* 是否随实例一起删除。
-`true`：随实例删除。
-`false`（默认值）：不随实例删除。
- (Optional) */
-    AutoDelete *bool `json:"autoDelete"`
-
     /* 网卡设备详细配置。 (Optional) */
     NetworkInterface *NetworkInterfaceSpec `json:"networkInterface"`
 }

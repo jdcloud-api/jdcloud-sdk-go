@@ -97,9 +97,6 @@ type Instance struct {
  (Optional) */
     Charge ChargeSpec `json:"charge"`
 
-    /* 实例操作系统平台，取值：ubuntu、openEuler、centos、rocky。 (Optional) */
-    Platform string `json:"platform"`
-
     /* 启动方式，取值：bios、uefi。 (Optional) */
     BootMode string `json:"bootMode"`
 
@@ -108,12 +105,6 @@ type Instance struct {
 
     /* 装机进度，取值范围：[0,100]。 (Optional) */
     Progress int `json:"progress"`
-
-    /* 专属区名称 (Optional) */
-    DedicatedZoneName string `json:"dedicatedZoneName"`
-
-    /* 专属区ID (Optional) */
-    DedicatedZoneId string `json:"dedicatedZoneId"`
 
     /* 已绑定的密钥对名称列表 (Optional) */
     KeyNames []string `json:"keyNames"`

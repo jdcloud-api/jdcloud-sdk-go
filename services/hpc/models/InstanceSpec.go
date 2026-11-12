@@ -64,11 +64,6 @@ type InstanceSpec struct {
  (Optional) */
     Metadata []Metadata `json:"metadata"`
 
-    /* 指定是否在创建计算实例时跳过GPU驱动的自动安装流程。当该参数设置为：`true`（默认值）：系统将自动为实例安装适配的GPU驱动程序；`false`：系统将不执行GPU驱动安装操作，用户需自行完成驱动的安装配置。
-注意事项：该参数仅对配备GPU的计算实例规格生效，若实例未配置GPU硬件则此参数不产生实际效果。建议在需要定制化驱动版本或使用特殊驱动场景时开启此参数
- (Optional) */
-    InstallGpuDriver *bool `json:"installGpuDriver"`
-
     /* 传入指定调度的su列表：如果参数中的su不在用户配置的数据库su列表中，则禁止调度；传入的参数没有指定su列表时：1.用户数据库中配置了su，则走配置的su调度；2.用户未配置su则进行默认调度策略 (Optional) */
     Su []string `json:"su"`
 
@@ -84,7 +79,4 @@ type InstanceSpec struct {
     /* 自定义实例标签。以key-value键值对形式指定，最多支持10个标签。key不能以 "jrn:" 或"jdc-"开头，仅支持中文、大/小写英文、数字及如下符号：`\_.,:\/=+-@`。
  (Optional) */
     UserTags []Tag `json:"userTags"`
-
-    /* 专属区ID (Optional) */
-    DedicatedZoneId *string `json:"dedicatedZoneId"`
 }

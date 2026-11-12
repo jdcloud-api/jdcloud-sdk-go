@@ -40,7 +40,7 @@ func NewHpcClient(credential *core.Credential) *HpcClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "hpc",
-            Revision:    "4.3.16",
+            Revision:    "4.4.18",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -90,6 +90,27 @@ func (c *HpcClient) DisassociateElasticIp(request *hpc.DisassociateElasticIpRequ
     }
 
     jdResp := &hpc.DisassociateElasticIpResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询统一计费实例的详细信息列表。
+ */
+func (c *HpcClient) DescribeBillingInstances(request *hpc.DescribeBillingInstancesRequest) (*hpc.DescribeBillingInstancesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &hpc.DescribeBillingInstancesResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -468,27 +489,6 @@ func (c *HpcClient) RecoverInstance(request *hpc.RecoverInstanceRequest) (*hpc.R
     return jdResp, err
 }
 
-/* 创建用户可调度的网络集群
- */
-func (c *HpcClient) CreateCluster(request *hpc.CreateClusterRequest) (*hpc.CreateClusterResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &hpc.CreateClusterResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
 /* 删除诊断任务。
 
 ## 接口说明
@@ -692,27 +692,6 @@ func (c *HpcClient) DescribeDiagnosticResults(request *hpc.DescribeDiagnosticRes
     }
 
     jdResp := &hpc.DescribeDiagnosticResultsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 删除用户可调度的网络集群Id
- */
-func (c *HpcClient) DeleteCluster(request *hpc.DeleteClusterRequest) (*hpc.DeleteClusterResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &hpc.DeleteClusterResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -938,27 +917,6 @@ func (c *HpcClient) DescribeHPCAssistantAgents(request *hpc.DescribeHPCAssistant
     }
 
     jdResp := &hpc.DescribeHPCAssistantAgentsResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 更新用户可调度的网络集群
- */
-func (c *HpcClient) ModifyCluster(request *hpc.ModifyClusterRequest) (*hpc.ModifyClusterResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &hpc.ModifyClusterResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
