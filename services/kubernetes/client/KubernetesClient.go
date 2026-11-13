@@ -40,7 +40,7 @@ func NewKubernetesClient(credential *core.Credential) *KubernetesClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "kubernetes",
-            Revision:    "1.4.14",
+            Revision:    "1.4.15",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -490,6 +490,26 @@ func (c *KubernetesClient) DescribeOperations(request *kubernetes.DescribeOperat
     }
 
     jdResp := &kubernetes.DescribeOperationsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 添加集群的网络配置 */
+func (c *KubernetesClient) AddClusterNetworkDetail(request *kubernetes.AddClusterNetworkDetailRequest) (*kubernetes.AddClusterNetworkDetailResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &kubernetes.AddClusterNetworkDetailResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
