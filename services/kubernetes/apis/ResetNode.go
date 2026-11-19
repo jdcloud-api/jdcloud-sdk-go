@@ -36,11 +36,23 @@ type ResetNodeRequest struct {
     /* 重置时使用的镜像 ID（可选） (Optional) */
     ImageId *string `json:"imageId"`
 
-    /* 是否自动停机（可选），默认 false (Optional) */
+    /* 是否自动停机（可选），默认 false；recover 为 true 时忽略此参数 (Optional) */
     AutoStop *bool `json:"autoStop"`
 
-    /* 重置密码（可选），若不传则使用节点组或集群默认密码 (Optional) */
+    /* 是否先迁移恢复再重建系统并启动（可选），默认 false；为 true 时授权停机并忽略 autoStop，实例 ID 保持不变，不支持 HPC 节点 (Optional) */
+    Recover *bool `json:"recover"`
+
+    /* 重置密码（可选），若不传则沿用节点组或集群已有密码 (Optional) */
     Password *string `json:"password"`
+
+    /* 故障描述，最长 256 个字符；recover 为 true 时必填且不能仅含空白，recover 为 false 时忽略 (Optional) */
+    Description *string `json:"description"`
+
+    /* 故障复现命令，最长 2048 个 UTF-8 字节，仅保存展示不执行；recover 为 true 时必填，recover 为 false 时忽略 (Optional) */
+    ReproductionCommand *string `json:"reproductionCommand"`
+
+    /* 复现命令输出，最长 16384 个 UTF-8 字节，原样保存，超限拒绝；recover 为 true 时必填，recover 为 false 时忽略 (Optional) */
+    CommandOutput *string `json:"commandOutput"`
 }
 
 /*
@@ -74,8 +86,12 @@ func NewResetNodeRequest(
  * param clusterId: 集群 ID (Required)
  * param instanceId: 节点实例 ID；兼容传节点主机名（当实例 ID 不存在时按节点名匹配） (Required)
  * param imageId: 重置时使用的镜像 ID（可选） (Optional)
- * param autoStop: 是否自动停机（可选），默认 false (Optional)
- * param password: 重置密码（可选），若不传则使用节点组或集群默认密码 (Optional)
+ * param autoStop: 是否自动停机（可选），默认 false；recover 为 true 时忽略此参数 (Optional)
+ * param recover: 是否先迁移恢复再重建系统并启动（可选），默认 false；为 true 时授权停机并忽略 autoStop，实例 ID 保持不变，不支持 HPC 节点 (Optional)
+ * param password: 重置密码（可选），若不传则沿用节点组或集群已有密码 (Optional)
+ * param description: 故障描述，最长 256 个字符；recover 为 true 时必填且不能仅含空白，recover 为 false 时忽略 (Optional)
+ * param reproductionCommand: 故障复现命令，最长 2048 个 UTF-8 字节，仅保存展示不执行；recover 为 true 时必填，recover 为 false 时忽略 (Optional)
+ * param commandOutput: 复现命令输出，最长 16384 个 UTF-8 字节，原样保存，超限拒绝；recover 为 true 时必填，recover 为 false 时忽略 (Optional)
  */
 func NewResetNodeRequestWithAllParams(
     regionId string,
@@ -83,7 +99,11 @@ func NewResetNodeRequestWithAllParams(
     instanceId string,
     imageId *string,
     autoStop *bool,
+    recover *bool,
     password *string,
+    description *string,
+    reproductionCommand *string,
+    commandOutput *string,
 ) *ResetNodeRequest {
 
     return &ResetNodeRequest{
@@ -98,7 +118,11 @@ func NewResetNodeRequestWithAllParams(
         InstanceId: instanceId,
         ImageId: imageId,
         AutoStop: autoStop,
+        Recover: recover,
         Password: password,
+        Description: description,
+        ReproductionCommand: reproductionCommand,
+        CommandOutput: commandOutput,
     }
 }
 
@@ -131,13 +155,29 @@ func (r *ResetNodeRequest) SetInstanceId(instanceId string) {
 func (r *ResetNodeRequest) SetImageId(imageId string) {
     r.ImageId = &imageId
 }
-/* param autoStop: 是否自动停机（可选），默认 false(Optional) */
+/* param autoStop: 是否自动停机（可选），默认 false；recover 为 true 时忽略此参数(Optional) */
 func (r *ResetNodeRequest) SetAutoStop(autoStop bool) {
     r.AutoStop = &autoStop
 }
-/* param password: 重置密码（可选），若不传则使用节点组或集群默认密码(Optional) */
+/* param recover: 是否先迁移恢复再重建系统并启动（可选），默认 false；为 true 时授权停机并忽略 autoStop，实例 ID 保持不变，不支持 HPC 节点(Optional) */
+func (r *ResetNodeRequest) SetRecover(recover bool) {
+    r.Recover = &recover
+}
+/* param password: 重置密码（可选），若不传则沿用节点组或集群已有密码(Optional) */
 func (r *ResetNodeRequest) SetPassword(password string) {
     r.Password = &password
+}
+/* param description: 故障描述，最长 256 个字符；recover 为 true 时必填且不能仅含空白，recover 为 false 时忽略(Optional) */
+func (r *ResetNodeRequest) SetDescription(description string) {
+    r.Description = &description
+}
+/* param reproductionCommand: 故障复现命令，最长 2048 个 UTF-8 字节，仅保存展示不执行；recover 为 true 时必填，recover 为 false 时忽略(Optional) */
+func (r *ResetNodeRequest) SetReproductionCommand(reproductionCommand string) {
+    r.ReproductionCommand = &reproductionCommand
+}
+/* param commandOutput: 复现命令输出，最长 16384 个 UTF-8 字节，原样保存，超限拒绝；recover 为 true 时必填，recover 为 false 时忽略(Optional) */
+func (r *ResetNodeRequest) SetCommandOutput(commandOutput string) {
+    r.CommandOutput = &commandOutput
 }
 
 
