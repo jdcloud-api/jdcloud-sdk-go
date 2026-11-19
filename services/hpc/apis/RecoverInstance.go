@@ -34,11 +34,15 @@ type RecoverInstanceRequest struct {
  (Optional) */
     Password *string `json:"password"`
 
-    /* 认证模式。yes表示密码认证（需同时指定password），no表示密钥认证（需同时指定keyNames）。不指定时默认为yes。
+    /* 允许SSH密码登录。
+可选值：
+`yes`（默认值）：允许SSH密码登录。
+`no`：禁止SSH密码登录。
+仅在指定密钥时此参数有效，指定此参数后密码即使输入也将被忽略，同时会在系统内禁用SSH密码登录。
  (Optional) */
     PasswordAuth *string `json:"passwordAuth"`
 
-    /* 密钥对名称列表。当passwordAuth为no时，通过此参数指定绑定的密钥对名称。目前只支持一个密钥对。
+    /* 密钥对名称列表。通过此参数指定绑定的密钥对名称。目前只支持一个密钥对。
  (Optional) */
     KeyNames []string `json:"keyNames"`
 }
@@ -71,9 +75,13 @@ func NewRecoverInstanceRequest(
  * param instanceId: 实例ID。 (Required)
  * param password: 实例密码。当passwordAuth为yes时必填。可用于SSH登录和VNC登录，长度为8-30个字符，必须同时包含大、小写英文字母、数字和特殊符号中的三类字符。特殊符号包括：\(\)\`~!@#$%^&\*_-+=\|{}\[ ]:";'<>,.?/
  (Optional)
- * param passwordAuth: 认证模式。yes表示密码认证（需同时指定password），no表示密钥认证（需同时指定keyNames）。不指定时默认为yes。
+ * param passwordAuth: 允许SSH密码登录。
+可选值：
+`yes`（默认值）：允许SSH密码登录。
+`no`：禁止SSH密码登录。
+仅在指定密钥时此参数有效，指定此参数后密码即使输入也将被忽略，同时会在系统内禁用SSH密码登录。
  (Optional)
- * param keyNames: 密钥对名称列表。当passwordAuth为no时，通过此参数指定绑定的密钥对名称。目前只支持一个密钥对。
+ * param keyNames: 密钥对名称列表。通过此参数指定绑定的密钥对名称。目前只支持一个密钥对。
  (Optional)
  */
 func NewRecoverInstanceRequestWithAllParams(
@@ -125,12 +133,16 @@ func (r *RecoverInstanceRequest) SetInstanceId(instanceId string) {
 func (r *RecoverInstanceRequest) SetPassword(password string) {
     r.Password = &password
 }
-/* param passwordAuth: 认证模式。yes表示密码认证（需同时指定password），no表示密钥认证（需同时指定keyNames）。不指定时默认为yes。
+/* param passwordAuth: 允许SSH密码登录。
+可选值：
+`yes`（默认值）：允许SSH密码登录。
+`no`：禁止SSH密码登录。
+仅在指定密钥时此参数有效，指定此参数后密码即使输入也将被忽略，同时会在系统内禁用SSH密码登录。
 (Optional) */
 func (r *RecoverInstanceRequest) SetPasswordAuth(passwordAuth string) {
     r.PasswordAuth = &passwordAuth
 }
-/* param keyNames: 密钥对名称列表。当passwordAuth为no时，通过此参数指定绑定的密钥对名称。目前只支持一个密钥对。
+/* param keyNames: 密钥对名称列表。通过此参数指定绑定的密钥对名称。目前只支持一个密钥对。
 (Optional) */
 func (r *RecoverInstanceRequest) SetKeyNames(keyNames []string) {
     r.KeyNames = keyNames

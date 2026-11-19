@@ -38,11 +38,15 @@ type InstanceSpec struct {
  (Optional) */
     Password *string `json:"password"`
 
-    /* 认证模式。yes表示密码认证（需同时指定password），no表示密钥认证（需同时指定keyNames）。不指定时默认为yes。
+    /* 允许SSH密码登录。
+可选值：
+`yes`（默认值）：允许SSH密码登录。
+`no`：禁止SSH密码登录。
+仅在指定密钥时此参数有效，指定此参数后密码即使输入也将被忽略，同时会在系统内禁用SSH密码登录。
  (Optional) */
     PasswordAuth *string `json:"passwordAuth"`
 
-    /* 密钥对名称列表。当passwordAuth为no时，通过此参数指定绑定的密钥对名称。目前只支持一个密钥对。
+    /* 密钥对名称列表。通过此参数指定绑定的密钥对名称。目前只支持一个密钥对。
  (Optional) */
     KeyNames []string `json:"keyNames"`
 

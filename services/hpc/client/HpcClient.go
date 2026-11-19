@@ -40,7 +40,7 @@ func NewHpcClient(credential *core.Credential) *HpcClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "hpc",
-            Revision:    "4.4.18",
+            Revision:    "4.4.20",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
