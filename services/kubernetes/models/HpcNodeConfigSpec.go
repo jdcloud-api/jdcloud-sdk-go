@@ -22,8 +22,11 @@ type HpcNodeConfigSpec struct {
     /* 异构实例类型  */
     InstanceType string `json:"instanceType"`
 
-    /* 异构节点密码，密码规范参考：[公共参数规范](https://docs.jdcloud.com/cn/virtual-machines/api/general_parameters)  */
-    Password string `json:"password"`
+    /* 异构节点密码，密码规范参考：[公共参数规范](https://docs.jdcloud.com/cn/virtual-machines/api/general_parameters) (Optional) */
+    Password *string `json:"password"`
+
+    /* SSH密钥对名称，当前仅支持一个。使用中的SSH密钥请勿删除。 (Optional) */
+    KeyNames []string `json:"keyNames"`
 
     /* k8s节点标签，最多支持10个 (Optional) */
     Labels []LabelSpec `json:"labels"`

@@ -129,4 +129,7 @@ type Cluster struct {
 
     /* kube-apiserver的自定义域名，会自动签名到证书里 (Optional) */
     KubeApiserverDomains []string `json:"kubeApiserverDomains"`
+
+    /* 集群级自动伸缩策略，独立于各节点池的 caConfig (Optional) */
+    CaClusterConfig CAClusterConfig `json:"caClusterConfig"`
 }

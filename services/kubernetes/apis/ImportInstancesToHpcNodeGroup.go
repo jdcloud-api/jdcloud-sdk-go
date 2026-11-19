@@ -33,15 +33,17 @@ type ImportInstancesToHpcNodeGroupRequest struct {
     /* 异构实例id列表  */
     Instances []string `json:"instances"`
 
-    /* 导入异构实例密码，密码规范参考：[公共参数规范](https://docs.jdcloud.com/cn/virtual-machines/api/general_parameters)  */
-    Password string `json:"password"`
+    /* 导入异构实例密码，密码规范参考：[公共参数规范](https://docs.jdcloud.com/cn/virtual-machines/api/general_parameters) (Optional) */
+    Password *string `json:"password"`
+
+    /* SSH密钥对名称，当前仅支持一个。使用中的SSH密钥请勿删除。 (Optional) */
+    KeyNames []string `json:"keyNames"`
 }
 
 /*
  * param regionId: 地域 ID (Required)
  * param nodeGroupId: 工作节点组 ID (Required)
  * param instances: 异构实例id列表 (Required)
- * param password: 导入异构实例密码，密码规范参考：[公共参数规范](https://docs.jdcloud.com/cn/virtual-machines/api/general_parameters) (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -49,7 +51,6 @@ func NewImportInstancesToHpcNodeGroupRequest(
     regionId string,
     nodeGroupId string,
     instances []string,
-    password string,
 ) *ImportInstancesToHpcNodeGroupRequest {
 
 	return &ImportInstancesToHpcNodeGroupRequest{
@@ -62,7 +63,6 @@ func NewImportInstancesToHpcNodeGroupRequest(
         RegionId: regionId,
         NodeGroupId: nodeGroupId,
         Instances: instances,
-        Password: password,
 	}
 }
 
@@ -70,13 +70,15 @@ func NewImportInstancesToHpcNodeGroupRequest(
  * param regionId: 地域 ID (Required)
  * param nodeGroupId: 工作节点组 ID (Required)
  * param instances: 异构实例id列表 (Required)
- * param password: 导入异构实例密码，密码规范参考：[公共参数规范](https://docs.jdcloud.com/cn/virtual-machines/api/general_parameters) (Required)
+ * param password: 导入异构实例密码，密码规范参考：[公共参数规范](https://docs.jdcloud.com/cn/virtual-machines/api/general_parameters) (Optional)
+ * param keyNames: SSH密钥对名称，当前仅支持一个。使用中的SSH密钥请勿删除。 (Optional)
  */
 func NewImportInstancesToHpcNodeGroupRequestWithAllParams(
     regionId string,
     nodeGroupId string,
     instances []string,
-    password string,
+    password *string,
+    keyNames []string,
 ) *ImportInstancesToHpcNodeGroupRequest {
 
     return &ImportInstancesToHpcNodeGroupRequest{
@@ -90,6 +92,7 @@ func NewImportInstancesToHpcNodeGroupRequestWithAllParams(
         NodeGroupId: nodeGroupId,
         Instances: instances,
         Password: password,
+        KeyNames: keyNames,
     }
 }
 
@@ -118,9 +121,13 @@ func (r *ImportInstancesToHpcNodeGroupRequest) SetNodeGroupId(nodeGroupId string
 func (r *ImportInstancesToHpcNodeGroupRequest) SetInstances(instances []string) {
     r.Instances = instances
 }
-/* param password: 导入异构实例密码，密码规范参考：[公共参数规范](https://docs.jdcloud.com/cn/virtual-machines/api/general_parameters)(Required) */
+/* param password: 导入异构实例密码，密码规范参考：[公共参数规范](https://docs.jdcloud.com/cn/virtual-machines/api/general_parameters)(Optional) */
 func (r *ImportInstancesToHpcNodeGroupRequest) SetPassword(password string) {
-    r.Password = password
+    r.Password = &password
+}
+/* param keyNames: SSH密钥对名称，当前仅支持一个。使用中的SSH密钥请勿删除。(Optional) */
+func (r *ImportInstancesToHpcNodeGroupRequest) SetKeyNames(keyNames []string) {
+    r.KeyNames = keyNames
 }
 
 

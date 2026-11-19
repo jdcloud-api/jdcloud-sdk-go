@@ -35,6 +35,9 @@ type ImportInstancesToNodeGroupRequest struct {
 
     /* 导入云主机密码，密码规范参考：[公共参数规范](https://docs.jdcloud.com/cn/virtual-machines/api/general_parameters)  */
     Password string `json:"password"`
+
+    /* SSH密钥对名称，当前仅支持一个。使用中的SSH密钥请勿删除。 (Optional) */
+    KeyNames []string `json:"keyNames"`
 }
 
 /*
@@ -71,12 +74,14 @@ func NewImportInstancesToNodeGroupRequest(
  * param nodeGroupId: 工作节点组 ID (Required)
  * param instances: 云主机实例id列表 (Required)
  * param password: 导入云主机密码，密码规范参考：[公共参数规范](https://docs.jdcloud.com/cn/virtual-machines/api/general_parameters) (Required)
+ * param keyNames: SSH密钥对名称，当前仅支持一个。使用中的SSH密钥请勿删除。 (Optional)
  */
 func NewImportInstancesToNodeGroupRequestWithAllParams(
     regionId string,
     nodeGroupId string,
     instances []string,
     password string,
+    keyNames []string,
 ) *ImportInstancesToNodeGroupRequest {
 
     return &ImportInstancesToNodeGroupRequest{
@@ -90,6 +95,7 @@ func NewImportInstancesToNodeGroupRequestWithAllParams(
         NodeGroupId: nodeGroupId,
         Instances: instances,
         Password: password,
+        KeyNames: keyNames,
     }
 }
 
@@ -121,6 +127,10 @@ func (r *ImportInstancesToNodeGroupRequest) SetInstances(instances []string) {
 /* param password: 导入云主机密码，密码规范参考：[公共参数规范](https://docs.jdcloud.com/cn/virtual-machines/api/general_parameters)(Required) */
 func (r *ImportInstancesToNodeGroupRequest) SetPassword(password string) {
     r.Password = password
+}
+/* param keyNames: SSH密钥对名称，当前仅支持一个。使用中的SSH密钥请勿删除。(Optional) */
+func (r *ImportInstancesToNodeGroupRequest) SetKeyNames(keyNames []string) {
+    r.KeyNames = keyNames
 }
 
 
