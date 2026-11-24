@@ -40,7 +40,7 @@ func NewBgwClient(credential *core.Credential) *BgwClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "bgw",
-            Revision:    "1.3.1",
+            Revision:    "1.4.0",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -77,6 +77,86 @@ func (c *BgwClient) DescribeConnections(request *bgw.DescribeConnectionsRequest)
     return jdResp, err
 }
 
+/* 查询边界网关路由列表 */
+func (c *BgwClient) DescribeBgwRoutes(request *bgw.DescribeBgwRoutesRequest) (*bgw.DescribeBgwRoutesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &bgw.DescribeBgwRoutesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询vpc接口详情 */
+func (c *BgwClient) DescribeVpcAttachment(request *bgw.DescribeVpcAttachmentRequest) (*bgw.DescribeVpcAttachmentResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &bgw.DescribeVpcAttachmentResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询privateVif列表 */
+func (c *BgwClient) DescribePrivateVirtualInterfaces(request *bgw.DescribePrivateVirtualInterfacesRequest) (*bgw.DescribePrivateVirtualInterfacesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &bgw.DescribePrivateVirtualInterfacesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询privateVif信息详情 */
+func (c *BgwClient) DescribePrivateVirtualInterface(request *bgw.DescribePrivateVirtualInterfaceRequest) (*bgw.DescribePrivateVirtualInterfaceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &bgw.DescribePrivateVirtualInterfaceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
 /* 修改VPN隧道管理状态 */
 func (c *BgwClient) ModifyAdminStatus(request *bgw.ModifyAdminStatusRequest) (*bgw.ModifyAdminStatusResponse, error) {
     if request == nil {
@@ -88,6 +168,106 @@ func (c *BgwClient) ModifyAdminStatus(request *bgw.ModifyAdminStatusRequest) (*b
     }
 
     jdResp := &bgw.ModifyAdminStatusResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询边界网关列表 */
+func (c *BgwClient) DescribeBgws(request *bgw.DescribeBgwsRequest) (*bgw.DescribeBgwsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &bgw.DescribeBgwsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询边界网关信息详情 */
+func (c *BgwClient) DescribeBgw(request *bgw.DescribeBgwRequest) (*bgw.DescribeBgwResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &bgw.DescribeBgwResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询Connection信息详情 */
+func (c *BgwClient) DescribeConnection(request *bgw.DescribeConnectionRequest) (*bgw.DescribeConnectionResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &bgw.DescribeConnectionResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询vpc接口列表 */
+func (c *BgwClient) DescribeVpcAttachments(request *bgw.DescribeVpcAttachmentsRequest) (*bgw.DescribeVpcAttachmentsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &bgw.DescribeVpcAttachmentsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询专线配置列表 */
+func (c *BgwClient) DescribeopJdBgwVifConfs(request *bgw.DescribeopJdBgwVifConfsRequest) (*bgw.DescribeopJdBgwVifConfsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &bgw.DescribeopJdBgwVifConfsResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))

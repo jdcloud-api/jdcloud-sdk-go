@@ -39,4 +39,10 @@ type CustomerGateway struct {
 
     /* 客户网关的更新时间 (Optional) */
     UpdatedTime string `json:"updatedTime"`
+
+    /* Tag信息 (Optional) */
+    Tags []Tag `json:"tags"`
+
+    /* 资源所属资源组ID (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
 }

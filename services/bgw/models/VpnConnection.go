@@ -67,4 +67,10 @@ type VpnConnection struct {
 
     /* VPN可用区 (Optional) */
     Az string `json:"az"`
+
+    /* Tag信息 (Optional) */
+    Tags []Tag `json:"tags"`
+
+    /* 资源所属资源组ID (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
 }

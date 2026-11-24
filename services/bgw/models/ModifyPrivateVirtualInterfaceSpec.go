@@ -27,4 +27,7 @@ type ModifyPrivateVirtualInterfaceSpec struct {
 
     /* 更新privateVif的健康检查相关属性 (Optional) */
     HealthCheck HealthCheckSpec `json:"healthCheck"`
+
+    /* 更新privateVif的监控相关属性 (Optional) */
+    Monitor MonitorSpec `json:"monitor"`
 }

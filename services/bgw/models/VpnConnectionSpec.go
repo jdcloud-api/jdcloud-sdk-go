@@ -43,4 +43,10 @@ type VpnConnectionSpec struct {
 
     /* 计费配置，仅支持按用量，默认按用量 (Optional) */
     ChargeSpec charge.ChargeSpec `json:"chargeSpec"`
+
+    /* 用户标签 (Optional) */
+    UserTags []Tag `json:"userTags"`
+
+    /* 资源所属资源组ID (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
 }

@@ -42,4 +42,10 @@ type VpcAttachment struct {
 
     /* vpc接口创建的时间 (Optional) */
     CreatedTime string `json:"createdTime"`
+
+    /* Tag信息 (Optional) */
+    Tags []Tag `json:"tags"`
+
+    /* 资源所属资源组ID (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
 }

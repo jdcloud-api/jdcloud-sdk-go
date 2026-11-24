@@ -25,9 +25,15 @@ type CustomerGatewaySpec struct {
     /* 客户网关上公网可路由的IPv4地址列表，可以为单IP、双IP、四IP，IP不能相同  */
     CustomerIps []string `json:"customerIps"`
 
-    /* 客户自治系统的ASN号，取值范围[65001,65499]，设置后不支持修改；  */
+    /* 客户自治系统的ASN号，取值范围[64512,65534]，设置后不支持修改；  */
     BgpAsn int `json:"bgpAsn"`
 
     /* 客户网关的描述，允许输入UTF-8编码下的全部字符，不超过256字符。 (Optional) */
     Description string `json:"description"`
+
+    /* 用户标签 (Optional) */
+    UserTags []Tag `json:"userTags"`
+
+    /* 资源所属资源组ID (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
 }

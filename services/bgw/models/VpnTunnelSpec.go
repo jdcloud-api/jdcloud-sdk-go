@@ -23,6 +23,9 @@ type VpnTunnelSpec struct {
     /* VPN CONNECTION ID  */
     VpnConnectionId string `json:"vpnConnectionId"`
 
+    /* VPN隧道名称, 名称只支持中文、数字、大小写字母、英文下划线“_”及中划线“-”，且不能超过32字符；无默认值，可为空 (Optional) */
+    VpnTunnelName string `json:"vpnTunnelName"`
+
     /* VPN隧道本地公网IP  */
     CloudPublicIp string `json:"cloudPublicIp"`
 

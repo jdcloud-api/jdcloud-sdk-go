@@ -27,4 +27,7 @@ type VpnTrafficSelectorSpec struct {
 
     /* 感兴趣流的描述 (Optional) */
     Description string `json:"description"`
+
+    /* 感兴趣流的生成类型，SYSTEM (系统生成）， CUSTOM（用户自定义） (Optional) */
+    PolicyType string `json:"policyType"`
 }
