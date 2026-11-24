@@ -30,4 +30,13 @@ type BgwSpec struct {
 
     /* 边界网关可用区，azType为edge时，边缘BGW必须指定可用区，edge为standard时忽略 (Optional) */
     Az string `json:"az"`
+
+    /* 用户标签 (Optional) */
+    UserTags []Tag `json:"userTags"`
+
+    /* 资源所属资源组ID (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
+
+    /* 物理资源专区, 仅内部使用[JDStack] (Optional) */
+    ResourceTag string `json:"resourceTag"`
 }

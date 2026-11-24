@@ -37,6 +37,9 @@ type Partner struct {
     /* 合作伙伴联系邮箱，最长支持50个字符 (Optional) */
     Mailbox string `json:"mailbox"`
 
+    /* 合作伙伴描述，最长支持50个字符 (Optional) */
+    Description string `json:"description"`
+
     /* 合作伙伴对应的pin (Optional) */
     Pin string `json:"pin"`
 }

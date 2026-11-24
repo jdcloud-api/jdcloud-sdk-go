@@ -73,4 +73,13 @@ type Connection struct {
 
     /* 计费信息 (Optional) */
     Charge charge.Charge `json:"charge"`
+
+    /* 秒级监控信息 (Optional) */
+    Monitor Monitor `json:"monitor"`
+
+    /* Tag信息 (Optional) */
+    Tags []Tag `json:"tags"`
+
+    /* 资源所属资源组ID (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
 }

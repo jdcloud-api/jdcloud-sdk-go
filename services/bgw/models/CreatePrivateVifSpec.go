@@ -51,4 +51,10 @@ type CreatePrivateVifSpec struct {
 
     /* 通道健康检查相关信息详情 (Optional) */
     HealthCheck HealthCheckSpec `json:"healthCheck"`
+
+    /* 用户标签 (Optional) */
+    UserTags []Tag `json:"userTags"`
+
+    /* 资源所属资源组ID (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
 }

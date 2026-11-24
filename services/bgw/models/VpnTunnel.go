@@ -16,11 +16,15 @@
 
 package models
 
+import charge "github.com/jdcloud-api/jdcloud-sdk-go/services/charge/models"
 
 type VpnTunnel struct {
 
     /* VPN隧道ID (Optional) */
     VpnTunnelId string `json:"vpnTunnelId"`
+
+    /* VPN隧道Name (Optional) */
+    VpnTunnelName string `json:"vpnTunnelName"`
 
     /* VPN连接ID (Optional) */
     VpnConnectionId string `json:"vpnConnectionId"`
@@ -105,6 +109,9 @@ type VpnTunnel struct {
 
     /* 隧道最后更新时间 (Optional) */
     UpdatedTime string `json:"updatedTime"`
+
+    /* 计费信息 (Optional) */
+    Charge charge.Charge `json:"charge"`
 
     /* VPN隧道公网限速带宽，单位Mbps (Optional) */
     BandwidthMbps int `json:"bandwidthMbps"`

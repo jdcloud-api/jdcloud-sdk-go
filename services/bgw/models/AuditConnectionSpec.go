@@ -24,4 +24,7 @@ type AuditConnectionSpec struct {
 
     /* 审核不通过的原因，审核通过忽略此字段,允许输入UTF-8编码下的全部字符，不超过256字符。 (Optional) */
     RejectedReason string `json:"rejectedReason"`
+
+    /* 京东内部客户的预制参数配置信息和bgw所在vip集群组信息 (Optional) */
+    JdConfItem AllocateJdBgwVifConfSpec `json:"jdConfItem"`
 }

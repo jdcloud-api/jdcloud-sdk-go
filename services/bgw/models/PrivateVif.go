@@ -46,6 +46,9 @@ type PrivateVif struct {
     /* 通道的状态，取值为：Confirming(待确认),Rejected（已拒绝）,Pending（配置中）,Active（可用）,Down（不可用）,Deleting（删除中）,Deleted（已删除）,Unknown（未知状态）,InActive(不可用) (Optional) */
     PrivateVifStatus string `json:"privateVifStatus"`
 
+    /* 通道不可用原因，取值为：Arrear_NoService(流量费欠费停服或端口到期) (Optional) */
+    InActiveReason string `json:"inActiveReason"`
+
     /* 通道的描述 (Optional) */
     Description string `json:"description"`
 
@@ -63,4 +66,13 @@ type PrivateVif struct {
 
     /* 通道健康检查相关信息详情 (Optional) */
     HealthCheck HealthCheck `json:"healthCheck"`
+
+    /* 秒级监控信息 (Optional) */
+    Monitor Monitor `json:"monitor"`
+
+    /* Tag信息 (Optional) */
+    Tags []Tag `json:"tags"`
+
+    /* 资源所属资源组ID (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
 }

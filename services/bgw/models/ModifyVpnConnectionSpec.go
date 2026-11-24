@@ -29,5 +29,5 @@ type ModifyVpnConnectionSpec struct {
     BgpEnabled bool `json:"bgpEnabled"`
 
     /* vpn connection policy，IPSec VPN的感兴趣流，用于第二阶段协商 (Optional) */
-    TrafficSelectors []VpnTrafficSelectorSpec `json:"trafficSelectors"`
+    TrafficSelectors []ModifyVpnTrafficSelectorSpec `json:"trafficSelectors"`
 }

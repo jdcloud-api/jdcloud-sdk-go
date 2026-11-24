@@ -36,11 +36,17 @@ type DescribeConnectionsRequest struct {
     PageSize *int `json:"pageSize"`
 
     /* connectionIds - 连接ID列表，支持多个
-connectionNames - 连接名称列表,支持多个
+connectionNames - 连接名称列表，支持多个
 types - 类型，取值：jcloud_hosted:托管连接、jcloud_partner:合作伙伴连接、jcloud:自助连接, 支持多个
-status - Connection状态,支持单个。取值为：待审核(Ordering)、待支付(Installation_Paying)、施工中(Pending)、等待确认(Confirming)、可用(Active)、不可用(InActive)、删除中(Deleting)、已删除(Deleted)、审核未通过(Rejected)
+status - Connection状态，支持单个。取值为：待审核(Ordering)、待支付(Installation_Paying)、施工中(Pending)、等待确认(Confirming)、可用(Active)、不可用(InActive)、删除中(Deleting)、审核未通过(Rejected)
  (Optional) */
     Filters []common.Filter `json:"filters"`
+
+    /* Tag筛选条件 (Optional) */
+    Tags []bgw.TagFilter `json:"tags"`
+
+    /* 资源组筛选条件 (Optional) */
+    ResourceGroupIds []string `json:"resourceGroupIds"`
 }
 
 /*
@@ -68,16 +74,20 @@ func NewDescribeConnectionsRequest(
  * param pageNumber: 页码, 默认为1, 取值范围：[1,∞), 页码超过总页数时, 显示最后一页 (Optional)
  * param pageSize: 分页大小，默认为20，取值范围：[10,100] (Optional)
  * param filters: connectionIds - 连接ID列表，支持多个
-connectionNames - 连接名称列表,支持多个
+connectionNames - 连接名称列表，支持多个
 types - 类型，取值：jcloud_hosted:托管连接、jcloud_partner:合作伙伴连接、jcloud:自助连接, 支持多个
-status - Connection状态,支持单个。取值为：待审核(Ordering)、待支付(Installation_Paying)、施工中(Pending)、等待确认(Confirming)、可用(Active)、不可用(InActive)、删除中(Deleting)、已删除(Deleted)、审核未通过(Rejected)
+status - Connection状态，支持单个。取值为：待审核(Ordering)、待支付(Installation_Paying)、施工中(Pending)、等待确认(Confirming)、可用(Active)、不可用(InActive)、删除中(Deleting)、审核未通过(Rejected)
  (Optional)
+ * param tags: Tag筛选条件 (Optional)
+ * param resourceGroupIds: 资源组筛选条件 (Optional)
  */
 func NewDescribeConnectionsRequestWithAllParams(
     regionId string,
     pageNumber *int,
     pageSize *int,
     filters []common.Filter,
+    tags []bgw.TagFilter,
+    resourceGroupIds []string,
 ) *DescribeConnectionsRequest {
 
     return &DescribeConnectionsRequest{
@@ -91,6 +101,8 @@ func NewDescribeConnectionsRequestWithAllParams(
         PageNumber: pageNumber,
         PageSize: pageSize,
         Filters: filters,
+        Tags: tags,
+        ResourceGroupIds: resourceGroupIds,
     }
 }
 
@@ -120,12 +132,20 @@ func (r *DescribeConnectionsRequest) SetPageSize(pageSize int) {
     r.PageSize = &pageSize
 }
 /* param filters: connectionIds - 连接ID列表，支持多个
-connectionNames - 连接名称列表,支持多个
+connectionNames - 连接名称列表，支持多个
 types - 类型，取值：jcloud_hosted:托管连接、jcloud_partner:合作伙伴连接、jcloud:自助连接, 支持多个
-status - Connection状态,支持单个。取值为：待审核(Ordering)、待支付(Installation_Paying)、施工中(Pending)、等待确认(Confirming)、可用(Active)、不可用(InActive)、删除中(Deleting)、已删除(Deleted)、审核未通过(Rejected)
+status - Connection状态，支持单个。取值为：待审核(Ordering)、待支付(Installation_Paying)、施工中(Pending)、等待确认(Confirming)、可用(Active)、不可用(InActive)、删除中(Deleting)、审核未通过(Rejected)
 (Optional) */
 func (r *DescribeConnectionsRequest) SetFilters(filters []common.Filter) {
     r.Filters = filters
+}
+/* param tags: Tag筛选条件(Optional) */
+func (r *DescribeConnectionsRequest) SetTags(tags []bgw.TagFilter) {
+    r.Tags = tags
+}
+/* param resourceGroupIds: 资源组筛选条件(Optional) */
+func (r *DescribeConnectionsRequest) SetResourceGroupIds(resourceGroupIds []string) {
+    r.ResourceGroupIds = resourceGroupIds
 }
 
 

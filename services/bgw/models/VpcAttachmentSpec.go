@@ -33,4 +33,10 @@ type VpcAttachmentSpec struct {
 
     /* 选择传播的网段列表,仅在传播方式为partial的时候生效 (Optional) */
     SubnetIds []string `json:"subnetIds"`
+
+    /* 用户标签 (Optional) */
+    UserTags []Tag `json:"userTags"`
+
+    /* 资源所属资源组ID (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
 }

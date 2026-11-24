@@ -45,4 +45,10 @@ type Bgw struct {
 
     /* Bgw的创建时间 (Optional) */
     CreatedTime string `json:"createdTime"`
+
+    /* Tag信息 (Optional) */
+    Tags []Tag `json:"tags"`
+
+    /* 资源所属资源组ID (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
 }

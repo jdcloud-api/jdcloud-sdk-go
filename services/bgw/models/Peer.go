@@ -22,8 +22,11 @@ type Peer struct {
     /* Peer的Id (Optional) */
     PeerId string `json:"peerId"`
 
-    /* Peer的BGP状态，取值为：Up, Down (Optional) */
-    PeerBgpStatus string `json:"peerBgpStatus"`
+    /* 用户bgpPeer的连接状态（探测），取值为：Established、UnEstablished (Optional) */
+    BgpPeerState string `json:"bgpPeerState"`
+
+    /* peer的NQA/BFD健康检查状态，取值为：Active、Inactive、Unknown (Optional) */
+    PeerHealthState string `json:"peerHealthState"`
 
     /* Peer的ip信息详情 (Optional) */
     PeerIps PeerIps `json:"peerIps"`

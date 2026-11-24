@@ -43,9 +43,6 @@ type BgpPeer struct {
     /* 通道的Id (Optional) */
     PrivateVifId string `json:"privateVifId"`
 
-    /* BgpPeer的状态，取值为：Up, Down (Optional) */
-    BgpPeerStatus string `json:"bgpPeerStatus"`
-
     /* 通道创建的时间 (Optional) */
     CreatedTime string `json:"createdTime"`
 }

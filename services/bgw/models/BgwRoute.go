@@ -37,7 +37,7 @@ type BgwRoute struct {
     /* Bgw上路由的优先级 (Optional) */
     BgwRoutePriority int `json:"bgwRoutePriority"`
 
-    /* Bgw上路由的下一跳类型：目前支持privateVif（专线网关）、hostedPrivateVif（托管网关）、vpcAttachment（vpc接口）、vpnConnection(vpn连接) (Optional) */
+    /* Bgw上路由的下一跳类型：private_vif（专线网关）、hosted_private_vif（托管网关）、vpc_attachment（vpc接口）、vpn_connection（vpn连接）、vpc（VPC）、tr（中转路由器） (Optional) */
     BgwRouteNextHopType string `json:"bgwRouteNextHopType"`
 
     /* Bgw路由的描述 (Optional) */

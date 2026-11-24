@@ -48,4 +48,10 @@ type ConnectionSpec struct {
 
     /* 专线接入点信息,type为jcloud或jcloud_hosted时必传 (Optional) */
     Location LocationSpec `json:"location"`
+
+    /* 用户标签 (Optional) */
+    UserTags []Tag `json:"userTags"`
+
+    /* 资源所属资源组ID (Optional) */
+    ResourceGroupId string `json:"resourceGroupId"`
 }

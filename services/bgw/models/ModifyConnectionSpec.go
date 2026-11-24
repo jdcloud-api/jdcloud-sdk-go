@@ -24,4 +24,7 @@ type ModifyConnectionSpec struct {
 
     /* Connection的描述，允许输入UTF-8编码下的全部字符，不超过256字符。 (Optional) */
     Description string `json:"description"`
+
+    /* 更新连接的监控相关属性 (Optional) */
+    Monitor MonitorSpec `json:"monitor"`
 }

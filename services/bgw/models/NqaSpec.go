@@ -19,12 +19,12 @@ package models
 
 type NqaSpec struct {
 
-    /* 连续两次发送探测报文的时间间隔。取值为1-20s。默认为4s (Optional) */
+    /* 连续两次发送探测报文的时间间隔，需大于等于responseTimeout。取值为1-20s。默认为4s (Optional) */
     TxInterval int `json:"txInterval"`
 
     /* 指定发送连续探测报文的个数。取值为3-8个，默认为5 (Optional) */
     ThresholdCount int `json:"thresholdCount"`
 
-    /* 一次NQA探测的超时时间。取值1-10s，默认为3s (Optional) */
+    /* 一次NQA探测的超时时间，不能大于txInterval。取值1-10s，默认为3s (Optional) */
     ResponseTimeout int `json:"responseTimeout"`
 }

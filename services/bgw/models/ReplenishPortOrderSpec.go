@@ -22,6 +22,9 @@ type ReplenishPortOrderSpec struct {
     /* 补单connection ID列表  */
     ConnectionIds []string `json:"connectionIds"`
 
+    /* 补单的PIN，base64 (Optional) */
+    CustomerPin string `json:"customerPin"`
+
     /* 是否自动支付 (Optional) */
     AutoPay bool `json:"autoPay"`
 }
