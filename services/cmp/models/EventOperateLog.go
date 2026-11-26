@@ -37,4 +37,16 @@ type EventOperateLog struct {
     /* 创建事件时提报的故障复现命令输出原文，最多16384个UTF-8字节；
  (Optional) */
     CommandOutput string `json:"commandOutput"`
+
+    /* 管理员审核结果，pass表示通过，reject表示拒绝。
+ (Optional) */
+    AuditResult string `json:"auditResult"`
+
+    /* 管理员审核意见。
+ (Optional) */
+    AuditOpinion string `json:"auditOpinion"`
+
+    /* 审核人ERP。
+ (Optional) */
+    AuditorErp string `json:"auditorErp"`
 }
