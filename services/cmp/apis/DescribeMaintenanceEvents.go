@@ -37,7 +37,7 @@ type DescribeMaintenanceEventsRequest struct {
 
     /* 事件类型
 - Evacuate：非预期
-- Maintenance：预期
+- Maintenance：预期，包含系统运维以及实例异常的迁移、维修、重启、观察事件
 - OfflineMachine：实例所在宿主机下线
 - HpcEvacuate：异构计算实例非预期
   */
@@ -68,7 +68,7 @@ type DescribeMaintenanceEventsRequest struct {
  * param regionId: 地域ID。 (Required)
  * param eventType: 事件类型
 - Evacuate：非预期
-- Maintenance：预期
+- Maintenance：预期，包含系统运维以及实例异常的迁移、维修、重启、观察事件
 - OfflineMachine：实例所在宿主机下线
 - HpcEvacuate：异构计算实例非预期
  (Required)
@@ -98,7 +98,7 @@ func NewDescribeMaintenanceEventsRequest(
  * param pageSize: 分页大小；<br>默认为20；取值范围[10, 100]。 (Optional)
  * param eventType: 事件类型
 - Evacuate：非预期
-- Maintenance：预期
+- Maintenance：预期，包含系统运维以及实例异常的迁移、维修、重启、观察事件
 - OfflineMachine：实例所在宿主机下线
 - HpcEvacuate：异构计算实例非预期
  (Required)
@@ -171,7 +171,7 @@ func (r *DescribeMaintenanceEventsRequest) SetPageSize(pageSize int) {
 }
 /* param eventType: 事件类型
 - Evacuate：非预期
-- Maintenance：预期
+- Maintenance：预期，包含系统运维以及实例异常的迁移、维修、重启、观察事件
 - OfflineMachine：实例所在宿主机下线
 - HpcEvacuate：异构计算实例非预期
 (Required) */

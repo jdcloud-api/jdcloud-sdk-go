@@ -27,7 +27,20 @@ type CreateCustomEventsOnResourceRequest struct {
     /* 地域ID。  */
     RegionId string `json:"regionId"`
 
-    /* 资源ID（实例ID）  */
+    /* 创建事件的幂等标识，最多64个字符。同一账号（PIN）使用相同clientToken时，在通过原有参数、灰度和资源校验后返回首次创建的eventId。
+后续请求修改其他参数（包括targetState）或原事件执行失败，均不会覆盖首次事件或创建新事件；创建新事件应使用新的clientToken。
+不传或空字符串时沿用原创建行为，不保证幂等。
+ (Optional) */
+    ClientToken *string `json:"clientToken"`
+
+    /* 可选的恢复后开机状态，仅支持VM云主机；异构计算实例传入该参数时会忽略且不向下游透传。不传时沿用原有开关机处理逻辑。
+running：按开机意图执行，开机条件、调用、轮询及失败处理沿用原流程。
+stopped：不自动开机，包括失败后的兜底开机，并跳过原有running检查；不会主动关闭已运行的实例。
+本参数只控制恢复后的自动开机行为，不改变恢复成功判定。
+ (Optional) */
+    TargetState *string `json:"targetState"`
+
+    /* 资源ID，支持i-前缀的VM云主机实例和hpc-前缀的异构计算实例。  */
     ResourceId string `json:"resourceId"`
 
     /* 故障描述，最长256个字符；必填且不能仅包含空白字符。
@@ -47,13 +60,14 @@ type CreateCustomEventsOnResourceRequest struct {
     /* 是否允许本次迁移丢弃本地数据盘，缺省或false保持原迁移行为，仅显式true时允许弃盘。
 true仅支持云系统盘VM实例，保留系统盘和云数据盘，不支持本地系统盘。
 不要求实例实际存在本地数据盘，纯云盘或无数据盘实例满足上述条件时也可传true。
+异构计算实例传入该参数时会忽略且不向下游透传。
  (Optional) */
     DiscardLocalDataDisk *bool `json:"discardLocalDataDisk"`
 }
 
 /*
  * param regionId: 地域ID。 (Required)
- * param resourceId: 资源ID（实例ID） (Required)
+ * param resourceId: 资源ID，支持i-前缀的VM云主机实例和hpc-前缀的异构计算实例。 (Required)
  *
  * @Deprecated, not compatible when mandatory parameters changed
  */
@@ -76,7 +90,16 @@ func NewCreateCustomEventsOnResourceRequest(
 
 /*
  * param regionId: 地域ID。 (Required)
- * param resourceId: 资源ID（实例ID） (Required)
+ * param clientToken: 创建事件的幂等标识，最多64个字符。同一账号（PIN）使用相同clientToken时，在通过原有参数、灰度和资源校验后返回首次创建的eventId。
+后续请求修改其他参数（包括targetState）或原事件执行失败，均不会覆盖首次事件或创建新事件；创建新事件应使用新的clientToken。
+不传或空字符串时沿用原创建行为，不保证幂等。
+ (Optional)
+ * param targetState: 可选的恢复后开机状态，仅支持VM云主机；异构计算实例传入该参数时会忽略且不向下游透传。不传时沿用原有开关机处理逻辑。
+running：按开机意图执行，开机条件、调用、轮询及失败处理沿用原流程。
+stopped：不自动开机，包括失败后的兜底开机，并跳过原有running检查；不会主动关闭已运行的实例。
+本参数只控制恢复后的自动开机行为，不改变恢复成功判定。
+ (Optional)
+ * param resourceId: 资源ID，支持i-前缀的VM云主机实例和hpc-前缀的异构计算实例。 (Required)
  * param description: 故障描述，最长256个字符；必填且不能仅包含空白字符。
  (Optional)
  * param reproductionCommand: 故障复现命令，最多2048个UTF-8字节；必填且不能仅包含空白字符。
@@ -88,10 +111,13 @@ func NewCreateCustomEventsOnResourceRequest(
  * param discardLocalDataDisk: 是否允许本次迁移丢弃本地数据盘，缺省或false保持原迁移行为，仅显式true时允许弃盘。
 true仅支持云系统盘VM实例，保留系统盘和云数据盘，不支持本地系统盘。
 不要求实例实际存在本地数据盘，纯云盘或无数据盘实例满足上述条件时也可传true。
+异构计算实例传入该参数时会忽略且不向下游透传。
  (Optional)
  */
 func NewCreateCustomEventsOnResourceRequestWithAllParams(
     regionId string,
+    clientToken *string,
+    targetState *string,
     resourceId string,
     description *string,
     reproductionCommand *string,
@@ -107,6 +133,8 @@ func NewCreateCustomEventsOnResourceRequestWithAllParams(
             Version: "v1",
         },
         RegionId: regionId,
+        ClientToken: clientToken,
+        TargetState: targetState,
         ResourceId: resourceId,
         Description: description,
         ReproductionCommand: reproductionCommand,
@@ -132,7 +160,22 @@ func NewCreateCustomEventsOnResourceRequestWithoutParam() *CreateCustomEventsOnR
 func (r *CreateCustomEventsOnResourceRequest) SetRegionId(regionId string) {
     r.RegionId = regionId
 }
-/* param resourceId: 资源ID（实例ID）(Required) */
+/* param clientToken: 创建事件的幂等标识，最多64个字符。同一账号（PIN）使用相同clientToken时，在通过原有参数、灰度和资源校验后返回首次创建的eventId。
+后续请求修改其他参数（包括targetState）或原事件执行失败，均不会覆盖首次事件或创建新事件；创建新事件应使用新的clientToken。
+不传或空字符串时沿用原创建行为，不保证幂等。
+(Optional) */
+func (r *CreateCustomEventsOnResourceRequest) SetClientToken(clientToken string) {
+    r.ClientToken = &clientToken
+}
+/* param targetState: 可选的恢复后开机状态，仅支持VM云主机；异构计算实例传入该参数时会忽略且不向下游透传。不传时沿用原有开关机处理逻辑。
+running：按开机意图执行，开机条件、调用、轮询及失败处理沿用原流程。
+stopped：不自动开机，包括失败后的兜底开机，并跳过原有running检查；不会主动关闭已运行的实例。
+本参数只控制恢复后的自动开机行为，不改变恢复成功判定。
+(Optional) */
+func (r *CreateCustomEventsOnResourceRequest) SetTargetState(targetState string) {
+    r.TargetState = &targetState
+}
+/* param resourceId: 资源ID，支持i-前缀的VM云主机实例和hpc-前缀的异构计算实例。(Required) */
 func (r *CreateCustomEventsOnResourceRequest) SetResourceId(resourceId string) {
     r.ResourceId = resourceId
 }
@@ -156,6 +199,7 @@ func (r *CreateCustomEventsOnResourceRequest) SetCommandOutput(commandOutput str
 /* param discardLocalDataDisk: 是否允许本次迁移丢弃本地数据盘，缺省或false保持原迁移行为，仅显式true时允许弃盘。
 true仅支持云系统盘VM实例，保留系统盘和云数据盘，不支持本地系统盘。
 不要求实例实际存在本地数据盘，纯云盘或无数据盘实例满足上述条件时也可传true。
+异构计算实例传入该参数时会忽略且不向下游透传。
 (Optional) */
 func (r *CreateCustomEventsOnResourceRequest) SetDiscardLocalDataDisk(discardLocalDataDisk bool) {
     r.DiscardLocalDataDisk = &discardLocalDataDisk

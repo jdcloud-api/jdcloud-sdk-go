@@ -23,6 +23,7 @@ type MaintenanceEvent struct {
     EventId string `json:"eventId"`
 
     /* 运维事件状态
+- SreConfirm：等待管理员审核
 - Inquiring：等待授权
 - Scheduled：等待执行
 - Avoided：已避免
@@ -34,16 +35,28 @@ type MaintenanceEvent struct {
  (Optional) */
     EventState string `json:"eventState"`
 
+    /* Custom云主机恢复事件的底层资源执行结果：true表示成功，false表示失败，null表示尚无最终结果或历史事件未采集。
+eventState表示事件处理阶段，Executed不应单独用于判断底层资源是否恢复成功。
+ (Optional) */
+    ExecutionSucceeded bool `json:"executionSucceeded"`
+
+    /* 终态宿主机IP是否相对事件记录的源宿主机IP发生变化：true表示变化，false表示未变化，null表示尚无终态或缺少地址证据。
+与executionSucceeded独立，执行失败时也可能为true。比较基准为事件已保存的源宿主机，不证明地址变化一定由本次恢复引起。
+ (Optional) */
+    HostChanged bool `json:"hostChanged"`
+
     /* 事件类型
 - Evacuate：非预期
-- Maintenance：预期
+- Maintenance：预期，包含系统运维以及实例异常的迁移、维修、重启、观察事件
 - OfflineMachine：实例所在宿主机下线
+- HpcEvacuate：异构计算实例非预期
  (Optional) */
     EventType string `json:"eventType"`
 
     /* 策略类型
 - SystemMaintenance：系统运维
 - LocalDataDiskFailure：本地盘异常
+- InstanceException：实例异常
  (Optional) */
     MaintenancePolicyType string `json:"maintenancePolicyType"`
 
@@ -51,12 +64,39 @@ type MaintenanceEvent struct {
 - Migrate：迁移
 - AbandonDiskAndMigrate：弃盘迁移
 - OfflineMachine：实例所在宿主机下线
+- Repair：维修
+- Reboot：重启
+- Observe：观察，暂不执行处置动作
  (Optional) */
     MaintenancePolicyOperate string `json:"maintenancePolicyOperate"`
 
     /* 资源ID
  (Optional) */
     ResourceId string `json:"resourceId"`
+
+    /* 故障类型，例如 GPU_XID_79。
+ (Optional) */
+    FaultType string `json:"faultType"`
+
+    /* 故障等级，例如 critical、urgent。
+ (Optional) */
+    FaultLevel string `json:"faultLevel"`
+
+    /* 故障建议操作，例如 repair。
+ (Optional) */
+    SuggestAction string `json:"suggestAction"`
+
+    /* 故障检测次数。
+ (Optional) */
+    DetectCount int `json:"detectCount"`
+
+    /* 故障设备类型，例如 gpu。
+ (Optional) */
+    DeviceType string `json:"deviceType"`
+
+    /* 故障设备唯一标识，支持 GPU UUID、PCI Bus ID、网卡设备ID等。
+ (Optional) */
+    DeviceId string `json:"deviceId"`
 
     /* 本次迁移是否允许丢弃本地数据盘，不包含系统盘和云数据盘；缺省或false表示未开启。
  (Optional) */

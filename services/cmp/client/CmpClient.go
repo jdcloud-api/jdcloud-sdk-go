@@ -40,7 +40,7 @@ func NewCmpClient(credential *core.Credential) *CmpClient {
             Credential:  *credential,
             Config:      *config,
             ServiceName: "cmp",
-            Revision:    "0.2.3",
+            Revision:    "0.2.12",
             Logger:      core.NewDefaultLogger(core.LogInfo),
         }}
 }
@@ -55,67 +55,6 @@ func (c *CmpClient) SetLogger(logger core.Logger) {
 
 func (c *CmpClient) DisableLogger() {
     c.Logger = core.NewDummyLogger()
-}
-
-/* 查询自定义运维策略 */
-func (c *CmpClient) DescribeMaintenancePolicies(request *cmp.DescribeMaintenancePoliciesRequest) (*cmp.DescribeMaintenancePoliciesResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &cmp.DescribeMaintenancePoliciesResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 修改自定义运维策略 */
-func (c *CmpClient) ModifyMaintenancePolicy(request *cmp.ModifyMaintenancePolicyRequest) (*cmp.ModifyMaintenancePolicyResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &cmp.ModifyMaintenancePolicyResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 修改（预约）云主机的事件
- */
-func (c *CmpClient) ModifyMaintenanceEvent(request *cmp.ModifyMaintenanceEventRequest) (*cmp.ModifyMaintenanceEventResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &cmp.ModifyMaintenanceEventResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
 }
 
 /* 查询云主机的运维事件
@@ -161,27 +100,7 @@ func (c *CmpClient) RecommendedInstanceTypes(request *cmp.RecommendedInstanceTyp
     return jdResp, err
 }
 
-/* 云主机解关联运维策略 */
-func (c *CmpClient) DisassociateMaintenancePolicy(request *cmp.DisassociateMaintenancePolicyRequest) (*cmp.DisassociateMaintenancePolicyResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &cmp.DisassociateMaintenancePolicyResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 授权计划迁移系统中的运维事件，授权前会校验事件是否存在且归属当前账号，仅支持计划迁移系统内的事件。
+/* 授权计划迁移系统中的运维事件。授权前会校验事件与当前账号的归属关系，资源ID由后端根据事件获取，仅支持计划迁移系统内的事件。
  */
 func (c *CmpClient) AuthorizeEvent(request *cmp.AuthorizeEventRequest) (*cmp.AuthorizeEventResponse, error) {
     if request == nil {
@@ -193,6 +112,173 @@ func (c *CmpClient) AuthorizeEvent(request *cmp.AuthorizeEventRequest) (*cmp.Aut
     }
 
     jdResp := &cmp.AuthorizeEventResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询异构计算实例运维事件。接口始终按资源维度聚合并分页，即使filters中传入resourceId，也仅返回资源摘要，不返回事件明细。
+nodeState和authorizationState会在资源聚合后进行过滤；同一字段传入多个值时为OR，不同字段同时传入时为AND。
+totalCount始终表示聚合及状态过滤后满足条件的唯一资源总数；仅传入一个resourceId时，totalCount只能为0或1。
+默认按create_time降序排列。
+ */
+func (c *CmpClient) DescribeInstanceMaintenanceEvents(request *cmp.DescribeInstanceMaintenanceEventsRequest) (*cmp.DescribeInstanceMaintenanceEventsResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cmp.DescribeInstanceMaintenanceEventsResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 按异构计算资源授权实例级运维事件。提交的处置建议必须与当前资源的最终处置建议一致；若建议已变化，请重新查询后再授权。
+ */
+func (c *CmpClient) AuthorizeInstanceEvent(request *cmp.AuthorizeInstanceEventRequest) (*cmp.AuthorizeInstanceEventResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cmp.AuthorizeInstanceEventResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 创建自定义运维策略 */
+func (c *CmpClient) CreateMaintenancePolicy(request *cmp.CreateMaintenancePolicyRequest) (*cmp.CreateMaintenancePolicyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cmp.CreateMaintenancePolicyResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 查询自定义运维策略 */
+func (c *CmpClient) DescribeMaintenancePolicies(request *cmp.DescribeMaintenancePoliciesRequest) (*cmp.DescribeMaintenancePoliciesResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cmp.DescribeMaintenancePoliciesResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改自定义运维策略 */
+func (c *CmpClient) ModifyMaintenancePolicy(request *cmp.ModifyMaintenancePolicyRequest) (*cmp.ModifyMaintenancePolicyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cmp.ModifyMaintenancePolicyResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 上报异构计算资源故障事件。事件上报后需先由管理员审核，再由用户授权。
+ */
+func (c *CmpClient) ReportCustomEventsOnResource(request *cmp.ReportCustomEventsOnResourceRequest) (*cmp.ReportCustomEventsOnResourceResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cmp.ReportCustomEventsOnResourceResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 修改（预约）云主机的事件
+ */
+func (c *CmpClient) ModifyMaintenanceEvent(request *cmp.ModifyMaintenanceEventRequest) (*cmp.ModifyMaintenanceEventResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cmp.ModifyMaintenanceEventResponse{}
+    err = json.Unmarshal(resp, jdResp)
+    if err != nil {
+        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
+        return nil, err
+    }
+
+    return jdResp, err
+}
+
+/* 云主机解关联运维策略 */
+func (c *CmpClient) DisassociateMaintenancePolicy(request *cmp.DisassociateMaintenancePolicyRequest) (*cmp.DisassociateMaintenancePolicyResponse, error) {
+    if request == nil {
+        return nil, errors.New("Request object is nil. ")
+    }
+    resp, err := c.Send(request, c.ServiceName)
+    if err != nil {
+        return nil, err
+    }
+
+    jdResp := &cmp.DisassociateMaintenancePolicyResponse{}
     err = json.Unmarshal(resp, jdResp)
     if err != nil {
         c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
@@ -242,27 +328,7 @@ func (c *CmpClient) AssociateMaintenancePolicy(request *cmp.AssociateMaintenance
     return jdResp, err
 }
 
-/* 创建自定义运维策略 */
-func (c *CmpClient) CreateMaintenancePolicy(request *cmp.CreateMaintenancePolicyRequest) (*cmp.CreateMaintenancePolicyResponse, error) {
-    if request == nil {
-        return nil, errors.New("Request object is nil. ")
-    }
-    resp, err := c.Send(request, c.ServiceName)
-    if err != nil {
-        return nil, err
-    }
-
-    jdResp := &cmp.CreateMaintenancePolicyResponse{}
-    err = json.Unmarshal(resp, jdResp)
-    if err != nil {
-        c.Logger.Log(core.LogError, "Unmarshal json failed, resp: %s", string(resp))
-        return nil, err
-    }
-
-    return jdResp, err
-}
-
-/* 创建自定义运维事件，仅支持实例资源。
+/* 创建自定义运维事件，支持VM云主机（i-前缀）和异构计算实例（hpc-前缀）。
 仅灰度用户可用（元数据 vm_submithost=1）。
  */
 func (c *CmpClient) CreateCustomEventsOnResource(request *cmp.CreateCustomEventsOnResourceRequest) (*cmp.CreateCustomEventsOnResourceResponse, error) {
